@@ -368,5 +368,5 @@ main(int argc,
     mxerror(Y("File not found\n"));
   }
 
-  return 0;
+  mxexit(0);
 }

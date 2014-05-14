@@ -122,5 +122,5 @@ main(int argc,
 
   mxinfo(Y("Done.\n"));
 
-  return 0;
+  mxexit(0);
 }

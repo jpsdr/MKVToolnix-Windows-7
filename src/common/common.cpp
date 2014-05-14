@@ -77,9 +77,29 @@ static std::string s_program_name;
 
 // Functions
 
+static void
+mtx_common_cleanup() {
+  // Make sure g_mm_stdio is closed before the global destruction
+  // kicks in. If it's redirected to a file then this is an instance
+  // of a buffered file. If it's only collected via global destruction
+  // after its reference count reaches zero then flushing the buffers
+  // will call some debugging option stuff which is invalid at that
+  // point.
+  if (stdio_redirected()) {
+    g_mm_stdio->close();
+    g_mm_stdio = std::shared_ptr<mm_io_c>(new mm_stdio_c);
+  }
+
+  random_c::cleanup();
+  mm_file_io_c::cleanup();
+
+  matroska_done();
+}
+
 void
 mxexit(int code) {
-  matroska_done();
+  mtx_common_cleanup();
+
   if (code != -1)
     exit(code);
 
@@ -143,12 +163,6 @@ set_process_priority(int priority) {
 #endif
 }
 
-static void
-mtx_common_cleanup() {
-  random_c::cleanup();
-  mm_file_io_c::cleanup();
-}
-
 void
 mtx_common_init(std::string const &program_name,
                 char const *argv0) {
@@ -161,8 +175,6 @@ mtx_common_init(std::string const &program_name,
 #endif
 
   matroska_init();
-
-  atexit(mtx_common_cleanup);
 
   srand(time(nullptr));
 

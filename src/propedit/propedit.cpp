@@ -152,5 +152,5 @@ main(int argc,
 
   run(options);
 
-  mxexit();
+  mxexit(0);
 }

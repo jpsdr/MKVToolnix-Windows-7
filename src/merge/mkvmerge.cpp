@@ -2511,5 +2511,5 @@ main(int argc,
 
   cleanup();
 
-  mxexit();
+  mxexit(0);
 }

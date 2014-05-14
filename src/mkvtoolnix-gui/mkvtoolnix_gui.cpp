@@ -22,5 +22,7 @@ main(int argc,
   MainWindow mainWindow;
   mainWindow.show();
 
-  return app.exec();
+  app.exec();
+
+  mxexit(0);
 }

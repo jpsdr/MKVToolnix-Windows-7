@@ -1759,7 +1759,9 @@ main(int argc,
   init_common_boost_formats();
 
   if (g_options.m_use_gui)
-    return ui_run(argc, argv);
+    ui_run(argc, argv);
   else
-    return console_main();
+    console_main();
+
+  mxexit(0);
 }
