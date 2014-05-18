@@ -594,7 +594,7 @@ tab_chapters::load(wxString name) {
     if (kax_analyzer_c::probe(wxMB(name))) {
       analyzer  = wx_kax_analyzer_cptr(new wx_kax_analyzer_c(this, wxMB(name)));
       file_name = name;
-      if (!analyzer->process(kax_analyzer_c::parse_mode_full, MODE_READ)) {
+      if (!analyzer->process(kax_analyzer_c::parse_mode_fast, MODE_READ)) {
         wxMessageBox(Z("This file could not be opened or parsed."), Z("File parsing failed"), wxOK | wxCENTER | wxICON_ERROR);
         analyzer.reset();
 
