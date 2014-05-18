@@ -1,5 +1,11 @@
 2014-05-18  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: Changed the file type detection order
+        again. The text subtitle formats are now probed after those binary
+        formats that can be detected quickly and unambiguously. This
+        avoids some mis-detection if e.g. Matroska files as ASS text
+        subtitles if they do contain such a track.
+
         * mmg: enhancement: The chapter editor will only use fast-mode
         parsing when loading chapters from Matroska files.
 
