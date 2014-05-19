@@ -26,91 +26,43 @@
 
 #define RND_TIMECODE_SCALE(a) (irnd((double)(a) / (double)((int64_t)g_timecode_scale)) * (int64_t)g_timecode_scale)
 
-class render_groups_c {
-public:
-  std::vector<kax_block_blob_cptr> m_groups;
-  std::vector<int64_t> m_durations;
-  generic_packetizer_c *m_source;
-  bool m_more_data, m_duration_mandatory;
-
-  render_groups_c(generic_packetizer_c *source)
-    : m_source(source)
-    , m_more_data(false)
-    , m_duration_mandatory(false)
-  {
-  }
-};
-typedef std::shared_ptr<render_groups_c> render_groups_cptr;
+class render_groups_c;
 
 class cluster_helper_c {
 private:
-  kax_cluster_c *m_cluster;
-  std::vector<packet_cptr> m_packets;
-  int m_cluster_content_size;
-  int64_t m_max_timecode_and_duration, m_max_video_timecode_rendered;
-  int64_t m_previous_cluster_tc, m_num_cue_elements, m_header_overhead;
-  int64_t m_timecode_offset;
-  int64_t m_bytes_in_file, m_first_timecode_in_file, m_first_timecode_in_part, m_first_discarded_timecode, m_last_discarded_timecode_and_duration, m_discarded_duration, m_previous_discarded_duration;
-  timecode_c m_min_timecode_in_file;
-  int64_t m_max_timecode_in_file, m_min_timecode_in_cluster, m_max_timecode_in_cluster, m_frame_field_number;
-  bool m_first_video_keyframe_seen;
-  mm_io_c *m_out;
-
-  std::vector<split_point_c> m_split_points;
-  std::vector<split_point_c>::iterator m_current_split_point;
-
-  bool m_discarding, m_splitting_and_processed_fully;
-
-  debugging_option_c m_debug_splitting, m_debug_packets, m_debug_duration, m_debug_rendering;
+  struct impl_t;
+  std::unique_ptr<impl_t> m;
 
 public:
   cluster_helper_c();
-  virtual ~cluster_helper_c();
+  ~cluster_helper_c();
 
   void set_output(mm_io_c *out);
-  mm_io_c *get_output() {
-    return m_out;
-  }
+  mm_io_c *get_output();
   void prepare_new_cluster();
-  KaxCluster *get_cluster() {
-    return m_cluster;
-  }
+  KaxCluster *get_cluster();
   void add_packet(packet_cptr packet);
   int64_t get_timecode();
   int render();
   int get_cluster_content_size();
   int64_t get_duration() const;
-  int64_t get_first_timecode_in_file() const {
-    return m_first_timecode_in_file;
-  }
-  int64_t get_first_timecode_in_part() const {
-    return m_first_timecode_in_part;
-  }
-  int64_t get_max_timecode_in_file() const {
-    return m_max_timecode_in_file;
-  }
+  int64_t get_first_timecode_in_file() const;
+  int64_t get_first_timecode_in_part() const;
+  int64_t get_max_timecode_in_file() const;
   int64_t get_discarded_duration() const;
   void handle_discarded_duration(bool create_new_file, bool previously_discarding);
 
   void add_split_point(split_point_c const &split_point);
   void dump_split_points() const;
-  bool splitting() const {
-    return !m_split_points.empty();
-  }
+  bool splitting() const;
   bool split_mode_produces_many_files() const;
 
-  bool discarding() const {
-    return splitting() && m_discarding;
-  }
+  bool discarding() const;
 
-  int get_packet_count() const {
-    return m_packets.size();
-  }
+  int get_packet_count() const;
 
   void discard_queued_packets();
-  bool is_splitting_and_processed_fully() const {
-    return m_splitting_and_processed_fully;
-  }
+  bool is_splitting_and_processed_fully() const;
 
 private:
   void set_duration(render_groups_c *rg);

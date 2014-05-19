@@ -22,6 +22,7 @@
 #include "merge/cues.h"
 #include "merge/libmatroska_extensions.h"
 #include "merge/output_control.h"
+#include "merge/private/cluster_helper.h"
 #include "output/p_video.h"
 
 #include <matroska/KaxBlock.h>
@@ -29,53 +30,113 @@
 #include <matroska/KaxCuesData.h>
 #include <matroska/KaxSeekHead.h>
 
+cluster_helper_c::impl_t::impl_t()
+  : cluster{}
+  , cluster_content_size{}
+  , max_timecode_and_duration{}
+  , max_video_timecode_rendered{}
+  , previous_cluster_tc{-1}
+  , num_cue_elements{}
+  , header_overhead{-1}
+  , timecode_offset{}
+  , bytes_in_file{}
+  , first_timecode_in_file{-1}
+  , first_timecode_in_part{-1}
+  , first_discarded_timecode{-1}
+  , last_discarded_timecode_and_duration{}
+  , discarded_duration{}
+  , previous_discarded_duration{}
+  , min_timecode_in_file{}
+  , max_timecode_in_file{-1}
+  , min_timecode_in_cluster{-1}
+  , max_timecode_in_cluster{-1}
+  , frame_field_number{1}
+  , first_video_keyframe_seen{}
+  , out{}
+  , current_split_point(split_points.begin())
+  , discarding{}
+  , splitting_and_processed_fully{}
+  , debug_splitting{"cluster_helper|splitting"}
+  , debug_packets{  "cluster_helper|cluster_helper_packets"}
+  , debug_duration{ "cluster_helper|cluster_helper_duration"}
+  , debug_rendering{"cluster_helper|cluster_helper_rendering"}
+{
+}
+
+cluster_helper_c::impl_t::~impl_t() {
+  delete cluster;
+}
+
 cluster_helper_c::cluster_helper_c()
-  : m_cluster(nullptr)
-  , m_cluster_content_size(0)
-  , m_max_timecode_and_duration(0)
-  , m_max_video_timecode_rendered(0)
-  , m_previous_cluster_tc{-1}
-  , m_num_cue_elements(0)
-  , m_header_overhead(-1)
-  , m_timecode_offset(0)
-  , m_bytes_in_file(0)
-  , m_first_timecode_in_file(-1)
-  , m_first_timecode_in_part{-1}
-  , m_first_discarded_timecode{-1}
-  , m_last_discarded_timecode_and_duration{0}
-  , m_discarded_duration{0}
-  , m_previous_discarded_duration{}
-  , m_min_timecode_in_file{}
-  , m_max_timecode_in_file{-1}
-  , m_min_timecode_in_cluster(-1)
-  , m_max_timecode_in_cluster(-1)
-  , m_frame_field_number{1}
-  , m_first_video_keyframe_seen{}
-  , m_out(nullptr)
-  , m_current_split_point(m_split_points.begin())
-  , m_discarding{false}
-  , m_splitting_and_processed_fully{false}
-  , m_debug_splitting{"cluster_helper|splitting"}
-  , m_debug_packets{  "cluster_helper|cluster_helper_packets"}
-  , m_debug_duration{ "cluster_helper|cluster_helper_duration"}
-  , m_debug_rendering{"cluster_helper|cluster_helper_rendering"}
+  : m{new cluster_helper_c::impl_t{}}
 {
 }
 
 cluster_helper_c::~cluster_helper_c() {
-  delete m_cluster;
+}
+
+mm_io_c *
+cluster_helper_c::get_output() {
+  return m->out;
+}
+
+KaxCluster *
+cluster_helper_c::get_cluster() {
+  return m->cluster;
+}
+
+int64_t
+cluster_helper_c::get_first_timecode_in_file()
+  const {
+  return m->first_timecode_in_file;
+}
+
+int64_t
+cluster_helper_c::get_first_timecode_in_part()
+  const {
+  return m->first_timecode_in_part;
+}
+
+int64_t
+cluster_helper_c::get_max_timecode_in_file()
+  const {
+  return m->max_timecode_in_file;
+}
+
+int
+cluster_helper_c::get_packet_count()
+  const {
+  return m->packets.size();
+}
+
+bool
+cluster_helper_c::splitting()
+  const {
+  return !m->split_points.empty();
+}
+
+bool
+cluster_helper_c::discarding()
+  const {
+  return splitting() && m->discarding;
+}
+
+bool
+cluster_helper_c::is_splitting_and_processed_fully()
+  const {
+  return m->splitting_and_processed_fully;
 }
 
 void
 cluster_helper_c::render_before_adding_if_necessary(packet_cptr &packet) {
   int64_t timecode        = get_timecode();
-  int64_t timecode_delay  = (   (packet->assigned_timecode > m_max_timecode_in_cluster)
-                             || (-1 == m_max_timecode_in_cluster))                       ? packet->assigned_timecode : m_max_timecode_in_cluster;
-  timecode_delay         -= (   (-1 == m_min_timecode_in_cluster)
-                             || (packet->assigned_timecode < m_min_timecode_in_cluster)) ? packet->assigned_timecode : m_min_timecode_in_cluster;
+  int64_t timecode_delay  = (   (packet->assigned_timecode > m->max_timecode_in_cluster)
+                             || (-1 == m->max_timecode_in_cluster))                       ? packet->assigned_timecode : m->max_timecode_in_cluster;
+  timecode_delay         -= (   (-1 == m->min_timecode_in_cluster)
+                             || (packet->assigned_timecode < m->min_timecode_in_cluster)) ? packet->assigned_timecode : m->min_timecode_in_cluster;
   timecode_delay          = (int64_t)(timecode_delay / g_timecode_scale);
 
-  mxdebug_if(m_debug_packets,
+  mxdebug_if(m->debug_packets,
              boost::format("cluster_helper_c::add_packet(): new packet { source %1%/%2% "
                            "timecode: %3% duration: %4% bref: %5% fref: %6% assigned_timecode: %7% timecode_delay: %8% }\n")
              % packet->source->m_ti.m_id % packet->source->m_ti.m_fname % packet->timecode          % packet->duration
@@ -84,20 +145,20 @@ cluster_helper_c::render_before_adding_if_necessary(packet_cptr &packet) {
   bool is_video_keyframe = (packet->source == g_video_packetizer) && packet->is_key_frame();
   bool do_render         = (std::numeric_limits<int16_t>::max() < timecode_delay)
                         || (std::numeric_limits<int16_t>::min() > timecode_delay)
-                        || (   (std::max<int64_t>(0, m_min_timecode_in_cluster) > m_previous_cluster_tc)
-                            && (packet->assigned_timecode                       > m_min_timecode_in_cluster)
-                            && (!g_video_packetizer || !is_video_keyframe || m_first_video_keyframe_seen)
-                            && (   (packet->gap_following && !m_packets.empty())
+                        || (   (std::max<int64_t>(0, m->min_timecode_in_cluster) > m->previous_cluster_tc)
+                            && (packet->assigned_timecode                        > m->min_timecode_in_cluster)
+                            && (!g_video_packetizer || !is_video_keyframe || m->first_video_keyframe_seen)
+                            && (   (packet->gap_following && !m->packets.empty())
                                 || ((packet->assigned_timecode - timecode) > g_max_ns_per_cluster)
                                 || is_video_keyframe));
 
   if (is_video_keyframe)
-    m_first_video_keyframe_seen = true;
+    m->first_video_keyframe_seen = true;
 
-  mxdebug_if(m_debug_rendering,
+  mxdebug_if(m->debug_rendering,
              boost::format("render check cur_tc %9% min_tc_ic %1% prev_cl_tc %2% test %3% is_vid_and_key %4% tc_delay %5% gap_following_and_not_empty %6% cur_tc>min_tc_ic %8% first_video_key_seen %10% do_render %7%\n")
-             % m_min_timecode_in_cluster % m_previous_cluster_tc % (std::max<int64_t>(0, m_min_timecode_in_cluster) > m_previous_cluster_tc) % is_video_keyframe
-             % timecode_delay % (packet->gap_following && !m_packets.empty()) % do_render % (packet->assigned_timecode > m_min_timecode_in_cluster) % packet->assigned_timecode % m_first_video_keyframe_seen);
+             % m->min_timecode_in_cluster % m->previous_cluster_tc % (std::max<int64_t>(0, m->min_timecode_in_cluster) > m->previous_cluster_tc) % is_video_keyframe
+             % timecode_delay % (packet->gap_following && !m->packets.empty()) % do_render % (packet->assigned_timecode > m->min_timecode_in_cluster) % packet->assigned_timecode % m->first_video_keyframe_seen);
 
   if (!do_render)
     return;
@@ -111,7 +172,7 @@ cluster_helper_c::render_after_adding_if_necessary(packet_cptr &packet) {
   // Render the cluster if it is full (according to my many criteria).
   auto timecode = get_timecode();
   if (   ((packet->assigned_timecode - timecode) > g_max_ns_per_cluster)
-      || (m_packets.size()                       > static_cast<size_t>(g_max_blocks_per_cluster))
+      || (m->packets.size()                      > static_cast<size_t>(g_max_blocks_per_cluster))
       || (get_cluster_content_size()             > 1500000)) {
     render();
     prepare_new_cluster();
@@ -121,7 +182,7 @@ cluster_helper_c::render_after_adding_if_necessary(packet_cptr &packet) {
 void
 cluster_helper_c::split_if_necessary(packet_cptr &packet) {
   if (   !splitting()
-      || (m_split_points.end() == m_current_split_point)
+      || (m->split_points.end() == m->current_split_point)
       || (g_file_num > g_split_max_num_files)
       || !packet->is_key_frame()
       || (   (packet->source->get_track_type() != track_video)
@@ -131,34 +192,34 @@ cluster_helper_c::split_if_necessary(packet_cptr &packet) {
   bool split_now = false;
 
   // Maybe we want to start a new file now.
-  if (split_point_c::size == m_current_split_point->m_type) {
+  if (split_point_c::size == m->current_split_point->m_type) {
     int64_t additional_size = 0;
 
-    if (!m_packets.empty())
+    if (!m->packets.empty())
       // Cluster + Cluster timecode: roughly 21 bytes. Add all frame sizes & their overheaders, too.
-      additional_size = 21 + boost::accumulate(m_packets, 0, [](size_t size, const packet_cptr &p) { return size + p->data->get_size() + (p->is_key_frame() ? 10 : p->is_p_frame() ? 13 : 16); });
+      additional_size = 21 + boost::accumulate(m->packets, 0, [](size_t size, const packet_cptr &p) { return size + p->data->get_size() + (p->is_key_frame() ? 10 : p->is_p_frame() ? 13 : 16); });
 
-    additional_size += 18 * m_num_cue_elements;
+    additional_size += 18 * m->num_cue_elements;
 
-    mxdebug_if(m_debug_splitting,
+    mxdebug_if(m->debug_splitting,
                boost::format("cluster_helper split decision: header_overhead: %1%, additional_size: %2%, bytes_in_file: %3%, sum: %4%\n")
-               % m_header_overhead % additional_size % m_bytes_in_file % (m_header_overhead + additional_size + m_bytes_in_file));
-    if ((m_header_overhead + additional_size + m_bytes_in_file) >= m_current_split_point->m_point)
+               % m->header_overhead % additional_size % m->bytes_in_file % (m->header_overhead + additional_size + m->bytes_in_file));
+    if ((m->header_overhead + additional_size + m->bytes_in_file) >= m->current_split_point->m_point)
       split_now = true;
 
-  } else if (   (split_point_c::duration == m_current_split_point->m_type)
-             && (0 <= m_first_timecode_in_file)
-             && (packet->assigned_timecode - m_first_timecode_in_file) >= m_current_split_point->m_point)
+  } else if (   (split_point_c::duration == m->current_split_point->m_type)
+             && (0 <= m->first_timecode_in_file)
+             && (packet->assigned_timecode - m->first_timecode_in_file) >= m->current_split_point->m_point)
     split_now = true;
 
-  else if (   (   (split_point_c::timecode == m_current_split_point->m_type)
-               || (split_point_c::parts    == m_current_split_point->m_type))
-           && (packet->assigned_timecode >= m_current_split_point->m_point))
+  else if (   (   (split_point_c::timecode == m->current_split_point->m_type)
+               || (split_point_c::parts    == m->current_split_point->m_type))
+           && (packet->assigned_timecode >= m->current_split_point->m_point))
     split_now = true;
 
-  else if (   (   (split_point_c::frame_field       == m_current_split_point->m_type)
-               || (split_point_c::parts_frame_field == m_current_split_point->m_type))
-           && (m_frame_field_number >= m_current_split_point->m_point))
+  else if (   (   (split_point_c::frame_field       == m->current_split_point->m_type)
+               || (split_point_c::parts_frame_field == m->current_split_point->m_type))
+           && (m->frame_field_number >= m->current_split_point->m_point))
     split_now = true;
 
   if (!split_now)
@@ -171,42 +232,42 @@ void
 cluster_helper_c::split(packet_cptr &packet) {
   render();
 
-  m_num_cue_elements = 0;
+  m->num_cue_elements = 0;
 
-  bool create_new_file       = m_current_split_point->m_create_new_file;
-  bool previously_discarding = m_discarding;
+  bool create_new_file       = m->current_split_point->m_create_new_file;
+  bool previously_discarding = m->discarding;
 
-  mxdebug_if(m_debug_splitting, boost::format("Splitting: splitpoint %1% reached before timecode %2%, create new? %3%.\n") % m_current_split_point->str() % format_timecode(packet->assigned_timecode) % create_new_file);
+  mxdebug_if(m->debug_splitting, boost::format("Splitting: splitpoint %1% reached before timecode %2%, create new? %3%.\n") % m->current_split_point->str() % format_timecode(packet->assigned_timecode) % create_new_file);
 
   finish_file(false, create_new_file, previously_discarding);
 
-  if (m_current_split_point->m_use_once) {
-    if (   m_current_split_point->m_discard
-        && (   (split_point_c::parts             == m_current_split_point->m_type)
-            || (split_point_c::parts_frame_field == m_current_split_point->m_type))
-        && (m_split_points.end() == (m_current_split_point + 1))) {
-      mxdebug_if(m_debug_splitting, boost::format("Splitting: Last part in 'parts:' splitting mode finished\n"));
-      m_splitting_and_processed_fully = true;
+  if (m->current_split_point->m_use_once) {
+    if (   m->current_split_point->m_discard
+        && (   (split_point_c::parts             == m->current_split_point->m_type)
+            || (split_point_c::parts_frame_field == m->current_split_point->m_type))
+        && (m->split_points.end() == (m->current_split_point + 1))) {
+      mxdebug_if(m->debug_splitting, boost::format("Splitting: Last part in 'parts:' splitting mode finished\n"));
+      m->splitting_and_processed_fully = true;
     }
 
-    m_discarding = m_current_split_point->m_discard;
-    ++m_current_split_point;
+    m->discarding = m->current_split_point->m_discard;
+    ++m->current_split_point;
   }
 
   if (create_new_file) {
     create_next_output_file();
     if (g_no_linking) {
-      m_previous_cluster_tc = -1;
-      m_timecode_offset = g_video_packetizer ? m_max_video_timecode_rendered : packet->assigned_timecode;
+      m->previous_cluster_tc = -1;
+      m->timecode_offset = g_video_packetizer ? m->max_video_timecode_rendered : packet->assigned_timecode;
     }
 
-    m_bytes_in_file          =  0;
-    m_first_timecode_in_file = -1;
-    m_max_timecode_in_file   = -1;
-    m_min_timecode_in_file.reset();
+    m->bytes_in_file          =  0;
+    m->first_timecode_in_file = -1;
+    m->max_timecode_in_file   = -1;
+    m->min_timecode_in_file.reset();
   }
 
-  m_first_timecode_in_part = -1;
+  m->first_timecode_in_part = -1;
 
   handle_discarded_duration(create_new_file, previously_discarding);
 
@@ -215,53 +276,53 @@ cluster_helper_c::split(packet_cptr &packet) {
 
 void
 cluster_helper_c::add_packet(packet_cptr packet) {
-  if (!m_cluster)
+  if (!m->cluster)
     prepare_new_cluster();
 
   packet->normalize_timecodes();
   render_before_adding_if_necessary(packet);
   split_if_necessary(packet);
 
-  m_packets.push_back(packet);
-  m_cluster_content_size += packet->data->get_size();
+  m->packets.push_back(packet);
+  m->cluster_content_size += packet->data->get_size();
 
-  if (packet->assigned_timecode > m_max_timecode_in_cluster)
-    m_max_timecode_in_cluster = packet->assigned_timecode;
+  if (packet->assigned_timecode > m->max_timecode_in_cluster)
+    m->max_timecode_in_cluster = packet->assigned_timecode;
 
-  if ((-1 == m_min_timecode_in_cluster) || (packet->assigned_timecode < m_min_timecode_in_cluster))
-    m_min_timecode_in_cluster = packet->assigned_timecode;
+  if ((-1 == m->min_timecode_in_cluster) || (packet->assigned_timecode < m->min_timecode_in_cluster))
+    m->min_timecode_in_cluster = packet->assigned_timecode;
 
   render_after_adding_if_necessary(packet);
 
   if (g_video_packetizer == packet->source)
-    ++m_frame_field_number;
+    ++m->frame_field_number;
 }
 
 int64_t
 cluster_helper_c::get_timecode() {
-  return m_packets.empty() ? 0 : m_packets.front()->assigned_timecode;
+  return m->packets.empty() ? 0 : m->packets.front()->assigned_timecode;
 }
 
 void
 cluster_helper_c::prepare_new_cluster() {
-  delete m_cluster;
+  delete m->cluster;
 
-  m_cluster              = new kax_cluster_c;
-  m_cluster_content_size = 0;
-  m_packets.clear();
+  m->cluster              = new kax_cluster_c;
+  m->cluster_content_size = 0;
+  m->packets.clear();
 
-  m_cluster->SetParent(*g_kax_segment);
-  m_cluster->SetPreviousTimecode(std::max<int64_t>(0, m_previous_cluster_tc), (int64_t)g_timecode_scale);
+  m->cluster->SetParent(*g_kax_segment);
+  m->cluster->SetPreviousTimecode(std::max<int64_t>(0, m->previous_cluster_tc), (int64_t)g_timecode_scale);
 }
 
 int
 cluster_helper_c::get_cluster_content_size() {
-  return m_cluster_content_size;
+  return m->cluster_content_size;
 }
 
 void
 cluster_helper_c::set_output(mm_io_c *out) {
-  m_out = out;
+  m->out = out;
 }
 
 void
@@ -276,7 +337,7 @@ cluster_helper_c::set_duration(render_groups_c *rg) {
   size_t i;
   for (i = 0; rg->m_durations.size() > i; ++i)
     block_duration += rg->m_durations[i];
-  mxdebug_if(m_debug_duration,
+  mxdebug_if(m->debug_duration,
              boost::format("cluster_helper::set_duration: block_duration %1% rounded duration %2% def_duration %3% use_durations %4% rg->m_duration_mandatory %5%\n")
              % block_duration % RND_TIMECODE_SCALE(block_duration) % def_duration % (g_use_durations ? 1 : 0) % (rg->m_duration_mandatory ? 1 : 0));
 
@@ -343,30 +404,30 @@ cluster_helper_c::render() {
   bool added_to_cues      = false;
 
   // Splitpoint stuff
-  if ((-1 == m_header_overhead) && splitting())
-    m_header_overhead = m_out->getFilePointer() + g_tags_size;
+  if ((-1 == m->header_overhead) && splitting())
+    m->header_overhead = m->out->getFilePointer() + g_tags_size;
 
   // Make sure that we don't have negative/wrapped around timecodes in the output file.
   // Can happend when we're splitting; so adjust timecode_offset accordingly.
-  m_timecode_offset       = boost::accumulate(m_packets, m_timecode_offset, [](int64_t a, const packet_cptr &p) { return std::min(a, p->assigned_timecode); });
-  int64_t timecode_offset = m_timecode_offset + get_discarded_duration();
+  m->timecode_offset       = boost::accumulate(m->packets, m->timecode_offset, [](int64_t a, const packet_cptr &p) { return std::min(a, p->assigned_timecode); });
+  int64_t timecode_offset = m->timecode_offset + get_discarded_duration();
 
-  for (auto &pack : m_packets) {
+  for (auto &pack : m->packets) {
     generic_packetizer_c *source = pack->source;
     bool has_codec_state         = !!pack->codec_state;
 
     if (g_video_packetizer == source)
-      m_max_video_timecode_rendered = std::max(pack->assigned_timecode + pack->get_duration(), m_max_video_timecode_rendered);
+      m->max_video_timecode_rendered = std::max(pack->assigned_timecode + pack->get_duration(), m->max_video_timecode_rendered);
 
     if (discarding()) {
-      if (-1 == m_first_discarded_timecode)
-        m_first_discarded_timecode = pack->assigned_timecode;
-      m_last_discarded_timecode_and_duration = std::max(m_last_discarded_timecode_and_duration, pack->assigned_timecode + pack->get_duration());
+      if (-1 == m->first_discarded_timecode)
+        m->first_discarded_timecode = pack->assigned_timecode;
+      m->last_discarded_timecode_and_duration = std::max(m->last_discarded_timecode_and_duration, pack->assigned_timecode + pack->get_duration());
       continue;
     }
 
     if (source->contains_gap())
-      m_cluster->SetSilentTrackUsed();
+      m->cluster->SetSilentTrackUsed();
 
     render_groups_c *render_group = nullptr;
     for (auto &rg : render_groups)
@@ -408,8 +469,8 @@ cluster_helper_c::render() {
 
       render_group->m_groups.push_back(kax_block_blob_cptr(new kax_block_blob_c(this_block_blob_type)));
       new_block_group = render_group->m_groups.back().get();
-      m_cluster->AddBlockBlob(new_block_group);
-      new_block_group->SetParent(*m_cluster);
+      m->cluster->AddBlockBlob(new_block_group);
+      new_block_group->SetParent(*m->cluster);
 
       added_to_cues = false;
     }
@@ -426,14 +487,14 @@ cluster_helper_c::render() {
       cstate->CopyBuffer(pack->codec_state->get_buffer(), pack->codec_state->get_size());
     }
 
-    if (-1 == m_first_timecode_in_file)
-      m_first_timecode_in_file = pack->assigned_timecode;
-    if (-1 == m_first_timecode_in_part)
-      m_first_timecode_in_part = pack->assigned_timecode;
+    if (-1 == m->first_timecode_in_file)
+      m->first_timecode_in_file = pack->assigned_timecode;
+    if (-1 == m->first_timecode_in_part)
+      m->first_timecode_in_part = pack->assigned_timecode;
 
-    m_min_timecode_in_file      = std::min(timecode_c::ns(pack->assigned_timecode),        m_min_timecode_in_file.value_or_max());
-    m_max_timecode_in_file      = std::max(pack->assigned_timecode,                        m_max_timecode_in_file);
-    m_max_timecode_and_duration = std::max(pack->assigned_timecode + pack->get_duration(), m_max_timecode_and_duration);
+    m->min_timecode_in_file      = std::min(timecode_c::ns(pack->assigned_timecode),        m->min_timecode_in_file.value_or_max());
+    m->max_timecode_in_file      = std::max(pack->assigned_timecode,                        m->max_timecode_in_file);
+    m->max_timecode_and_duration = std::max(pack->assigned_timecode + pack->get_duration(), m->max_timecode_and_duration);
 
     if (!pack->is_key_frame() || !track_entry.LacingEnabled())
       render_group->m_more_data = false;
@@ -483,28 +544,28 @@ cluster_helper_c::render() {
       for (auto &rg : render_groups)
         set_duration(rg.get());
 
-      m_cluster->SetPreviousTimecode(min_cl_timecode - timecode_offset - 1, (int64_t)g_timecode_scale);
-      m_cluster->set_min_timecode(min_cl_timecode - timecode_offset);
-      m_cluster->set_max_timecode(max_cl_timecode - timecode_offset);
+      m->cluster->SetPreviousTimecode(min_cl_timecode - timecode_offset - 1, (int64_t)g_timecode_scale);
+      m->cluster->set_min_timecode(min_cl_timecode - timecode_offset);
+      m->cluster->set_max_timecode(max_cl_timecode - timecode_offset);
 
-      m_cluster->Render(*m_out, cues);
-      m_bytes_in_file += m_cluster->ElementSize();
+      m->cluster->Render(*m->out, cues);
+      m->bytes_in_file += m->cluster->ElementSize();
 
       if (g_kax_sh_cues)
-        g_kax_sh_cues->IndexThis(*m_cluster, *g_kax_segment);
+        g_kax_sh_cues->IndexThis(*m->cluster, *g_kax_segment);
 
-      m_previous_cluster_tc = m_cluster->GlobalTimecode();
+      m->previous_cluster_tc = m->cluster->GlobalTimecode();
 
-      cues_c::get().postprocess_cues(cues, *m_cluster);
+      cues_c::get().postprocess_cues(cues, *m->cluster);
 
     } else
-      m_previous_cluster_tc = -1;
+      m->previous_cluster_tc = -1;
   }
 
-  m_min_timecode_in_cluster = -1;
-  m_max_timecode_in_cluster = -1;
+  m->min_timecode_in_cluster = -1;
+  m->max_timecode_in_cluster = -1;
 
-  m_cluster->delete_non_blocks();
+  m->cluster->delete_non_blocks();
 
   return 1;
 }
@@ -536,7 +597,7 @@ cluster_helper_c::add_to_cues_maybe(packet_cptr &pack) {
 
   source.set_last_cue_timecode(pack->assigned_timecode);
 
-  ++m_num_cue_elements;
+  ++m->num_cue_elements;
   g_cue_writing_requested = 1;
 
   return true;
@@ -545,55 +606,55 @@ cluster_helper_c::add_to_cues_maybe(packet_cptr &pack) {
 int64_t
 cluster_helper_c::get_duration()
   const {
-  auto result = m_max_timecode_and_duration - m_min_timecode_in_file.to_ns(0) - m_discarded_duration;
-  mxdebug_if(m_debug_duration,
+  auto result = m->max_timecode_and_duration - m->min_timecode_in_file.to_ns(0) - m->discarded_duration;
+  mxdebug_if(m->debug_duration,
              boost::format("cluster_helper_c::get_duration(): max_tc_and_dur %1% - min_tc_in_file %2% - discarded_duration %3% = %4% ; first_tc_in_file = %5%\n")
-             % m_max_timecode_and_duration % m_min_timecode_in_file.to_ns(0) % m_discarded_duration % result % m_first_timecode_in_file);
+             % m->max_timecode_and_duration % m->min_timecode_in_file.to_ns(0) % m->discarded_duration % result % m->first_timecode_in_file);
   return result;
 }
 
 int64_t
 cluster_helper_c::get_discarded_duration()
   const {
-  return m_discarded_duration;
+  return m->discarded_duration;
 }
 
 void
 cluster_helper_c::handle_discarded_duration(bool create_new_file,
                                             bool previously_discarding) {
-  m_previous_discarded_duration = m_discarded_duration;
+  m->previous_discarded_duration = m->discarded_duration;
 
-  if (create_new_file) { // || (!previously_discarding && m_discarding)) {
-    mxdebug_if(m_debug_splitting,
-               boost::format("RESETTING discarded duration of %1%, create_new_file %2% previously_discarding %3% m_discarding %4%\n")
-               % format_timecode(m_discarded_duration) % create_new_file % previously_discarding % m_discarding);
-    m_discarded_duration = 0;
+  if (create_new_file) { // || (!previously_discarding && m->discarding)) {
+    mxdebug_if(m->debug_splitting,
+               boost::format("RESETTING discarded duration of %1%, create_new_file %2% previously_discarding %3% m->discarding %4%\n")
+               % format_timecode(m->discarded_duration) % create_new_file % previously_discarding % m->discarding);
+    m->discarded_duration = 0;
 
-  } else if (previously_discarding && !m_discarding) {
-    auto diff             = m_last_discarded_timecode_and_duration - std::max<int64_t>(m_first_discarded_timecode, 0);
-    m_discarded_duration += diff;
+  } else if (previously_discarding && !m->discarding) {
+    auto diff              = m->last_discarded_timecode_and_duration - std::max<int64_t>(m->first_discarded_timecode, 0);
+    m->discarded_duration += diff;
 
-    mxdebug_if(m_debug_splitting,
-               boost::format("ADDING to discarded duration TC at %1% / %2% diff %3% new total %4% create_new_file %5% previously_discarding %6% m_discarding %7%\n")
-               % format_timecode(m_first_discarded_timecode) % format_timecode(m_last_discarded_timecode_and_duration) % format_timecode(diff) % format_timecode(m_discarded_duration)
-               % create_new_file % previously_discarding % m_discarding);
+    mxdebug_if(m->debug_splitting,
+               boost::format("ADDING to discarded duration TC at %1% / %2% diff %3% new total %4% create_new_file %5% previously_discarding %6% m->discarding %7%\n")
+               % format_timecode(m->first_discarded_timecode) % format_timecode(m->last_discarded_timecode_and_duration) % format_timecode(diff) % format_timecode(m->discarded_duration)
+               % create_new_file % previously_discarding % m->discarding);
   } else
-    mxdebug_if(m_debug_splitting,
-               boost::format("KEEPING discarded duration at %1%, create_new_file %2% previously_discarding %3% m_discarding %4%\n")
-               % format_timecode(m_discarded_duration) % create_new_file % previously_discarding % m_discarding);
+    mxdebug_if(m->debug_splitting,
+               boost::format("KEEPING discarded duration at %1%, create_new_file %2% previously_discarding %3% m->discarding %4%\n")
+               % format_timecode(m->discarded_duration) % create_new_file % previously_discarding % m->discarding);
 
-  m_first_discarded_timecode             = -1;
-  m_last_discarded_timecode_and_duration =  0;
+  m->first_discarded_timecode             = -1;
+  m->last_discarded_timecode_and_duration =  0;
 }
 
 void
 cluster_helper_c::add_split_point(const split_point_c &split_point) {
-  m_split_points.push_back(split_point);
-  m_current_split_point = m_split_points.begin();
-  m_discarding          = m_current_split_point->m_discard;
+  m->split_points.push_back(split_point);
+  m->current_split_point = m->split_points.begin();
+  m->discarding          = m->current_split_point->m_discard;
 
-  if (0 == m_current_split_point->m_point)
-    ++m_current_split_point;
+  if (0 == m->current_split_point->m_point)
+    ++m->current_split_point;
 }
 
 bool
@@ -602,12 +663,12 @@ cluster_helper_c::split_mode_produces_many_files()
   if (!splitting())
     return false;
 
-  if (   (split_point_c::parts             != m_split_points.front().m_type)
-      && (split_point_c::parts_frame_field != m_split_points.front().m_type))
+  if (   (split_point_c::parts             != m->split_points.front().m_type)
+      && (split_point_c::parts_frame_field != m->split_points.front().m_type))
     return true;
 
   bool first = true;
-  for (auto &split_point : m_split_points)
+  for (auto &split_point : m->split_points)
     if (!split_point.m_discard && split_point.m_create_new_file) {
       if (!first)
         return true;
@@ -619,15 +680,15 @@ cluster_helper_c::split_mode_produces_many_files()
 
 void
 cluster_helper_c::discard_queued_packets() {
-  m_packets.clear();
+  m->packets.clear();
 }
 
 void
 cluster_helper_c::dump_split_points()
   const {
-  mxdebug_if(m_debug_splitting,
+  mxdebug_if(m->debug_splitting,
              boost::format("Split points:%1%\n")
-             % boost::accumulate(m_split_points, std::string(""), [](std::string const &accu, split_point_c const &point) { return accu + " " + point.str(); }));
+             % boost::accumulate(m->split_points, std::string(""), [](std::string const &accu, split_point_c const &point) { return accu + " " + point.str(); }));
 }
 
 cluster_helper_c *g_cluster_helper = nullptr;
