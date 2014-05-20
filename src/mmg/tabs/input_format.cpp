@@ -229,7 +229,7 @@ void
 tab_input_format::translate_ui() {
   rb_aspect_ratio->SetLabel(Z("Aspect ratio:"));
   cob_aspect_ratio->SetToolTip(TIP("Sets the display aspect ratio of the track. The format can be either 'a/b' in which case both numbers must be integer "
-                                   "(e.g. 16/9) or just a single floting point number 'f' (e.g. 2.35)."));
+                                   "(e.g. 16/9) or just a single floating point number 'f' (e.g. 2.35)."));
   rb_display_dimensions->SetLabel(Z("Display width/height:"));
   tc_display_width->SetToolTip(TIP("Sets the display width of the track. The height must be set as well, or this field will be ignored."));
   tc_display_height->SetToolTip(TIP("Sets the display height of the track. The width must be set as well, or this field will be ignored."));
