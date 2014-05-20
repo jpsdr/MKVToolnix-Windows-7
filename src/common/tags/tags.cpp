@@ -20,6 +20,7 @@
 #include "common/common_pch.h"
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
+#include "common/strings/utf8.h"
 #include "common/tags/tags.h"
 #include "common/tags/target_type.h"
 
@@ -277,6 +278,44 @@ remove_track_uid_targets(EbmlMaster *tag) {
         ++idx_target;
     }
   }
+}
+
+void
+set_simple(KaxTag &tag,
+           std::string const &name,
+           std::string const &value,
+           std::string const &language) {
+  KaxTagSimple *k_simple_tag = nullptr;
+
+  for (auto const &element : tag) {
+    auto s_tag = static_cast<KaxTagSimple *>(element);
+    if (!s_tag || (to_utf8(FindChildValue<KaxTagName>(s_tag)) != name))
+      continue;
+
+    k_simple_tag = s_tag;
+    break;
+  }
+
+  if (!k_simple_tag) {
+    k_simple_tag = new KaxTagSimple;
+    tag.PushElement(*k_simple_tag);
+  }
+
+  GetChild<KaxTagName>(k_simple_tag).SetValueUTF8(name);
+  GetChild<KaxTagString>(k_simple_tag).SetValueUTF8(value);
+
+  if (!language.empty())
+    GetChild<KaxTagLangue>(k_simple_tag).SetValue(language);
+}
+
+void
+set_target_type(KaxTag &tag,
+                target_type_e target_type_value,
+                std::string const &target_type) {
+  auto &targets = GetChild<KaxTagTargets>(tag);
+
+  GetChild<KaxTagTargetTypeValue>(targets).SetValue(target_type_value);
+  GetChild<KaxTagTargetType>(targets).SetValue(target_type);
 }
 
 }}

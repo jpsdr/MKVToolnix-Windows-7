@@ -64,6 +64,8 @@ public:
   void discard_queued_packets();
   bool is_splitting_and_processed_fully() const;
 
+  void create_tags_for_track_statistics(KaxTags &tags);
+
 private:
   void set_duration(render_groups_c *rg);
   bool must_duration_be_set(render_groups_c *rg, packet_cptr &new_packet);

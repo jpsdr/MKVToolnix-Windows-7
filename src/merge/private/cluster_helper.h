@@ -15,6 +15,8 @@
 #ifndef MTX_MERGE_PRIVATE_CLUSTER_HELPER_H
 #define MTX_MERGE_PRIVATE_CLUSTER_HELPER_H
 
+#include "merge/track_statistics.h"
+
 class render_groups_c {
 public:
   std::vector<kax_block_blob_cptr> m_groups;
@@ -51,6 +53,8 @@ public:
   bool discarding, splitting_and_processed_fully;
 
   debugging_option_c debug_splitting, debug_packets, debug_duration, debug_rendering;
+
+  std::unordered_map<uint64_t, track_statistics_c> track_statistics;
 
 public:
   impl_t();

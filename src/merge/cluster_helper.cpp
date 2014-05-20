@@ -537,6 +537,8 @@ cluster_helper_c::render() {
     }
 
     pack->group = new_block_group;
+
+    m->track_statistics[ source->get_uid() ].process(*pack);
   }
 
   if (!discarding()) {
@@ -689,6 +691,27 @@ cluster_helper_c::dump_split_points()
   mxdebug_if(m->debug_splitting,
              boost::format("Split points:%1%\n")
              % boost::accumulate(m->split_points, std::string(""), [](std::string const &accu, split_point_c const &point) { return accu + " " + point.str(); }));
+}
+
+void
+cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags) {
+  for (auto const &ptzr : g_packetizers) {
+    auto track_uid    = ptzr.packetizer->get_uid();
+    auto const &stats = m->track_statistics[track_uid];
+    auto bps          = stats.get_bits_per_second();
+    auto duration     = stats.get_duration();
+
+    auto tag          = mtx::tags::find_tag_for<KaxTagTrackUID>(tags, track_uid, true);
+
+    mtx::tags::set_target_type(*tag, mtx::tags::Track, "track");
+
+    mtx::tags::set_simple(*tag, "BPS",              to_string(bps ? *bps : 0));
+    mtx::tags::set_simple(*tag, "DURATION",         format_timecode(duration ? *duration : 0));
+    mtx::tags::set_simple(*tag, "NUMBER_OF_FRAMES", to_string(stats.get_num_frames()));
+    mtx::tags::set_simple(*tag, "NUMBER_OF_BYTES",  to_string(stats.get_num_bytes()));
+  }
+
+  m->track_statistics.clear();
 }
 
 cluster_helper_c *g_cluster_helper = nullptr;

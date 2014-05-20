@@ -16,6 +16,9 @@
 
 #include "common/common_pch.h"
 
+#include "common/ebml.h"
+#include "common/tags/target_type.h"
+
 namespace libmatroska {
   class KaxTags;
   class KaxTag;
@@ -50,10 +53,43 @@ std::string get_simple_value(const KaxTagSimple &tag);
 void set_simple_name(KaxTagSimple &tag, const std::string &name);
 void set_simple_value(KaxTagSimple &tag, const std::string &value);
 void set_simple(KaxTagSimple &tag, const std::string &name, const std::string &value);
+void set_simple(KaxTag &tag, std::string const &name, std::string const &value, std::string const &language = "eng");
+void set_target_type(KaxTag &tag, target_type_e target_type_value, std::string const &target_type);
 
 int count_simple(EbmlMaster &master);
 
 void convert_old(KaxTags &tags);
+
+template<typename T>
+KaxTag *
+find_tag_for(KaxTags &tags,
+             uint64_t id,
+             bool create_if_not_found) {
+  for (auto &element : tags) {
+    auto tag = dynamic_cast<KaxTag *>(element);
+    if (!tag)
+      continue;
+
+    auto targets = FindChild<KaxTagTargets>(*tag);
+    if (!targets)
+      continue;
+
+    auto actual_id = FindChildValue<T>(*targets, 0);
+    if (actual_id == id)
+      return tag;
+  }
+
+  if (!create_if_not_found)
+    return nullptr;
+
+  auto tag = new KaxTag;
+  tags.PushElement(*tag);
+
+  auto &targets = GetChild<KaxTagTargets>(tag);
+  GetChild<T>(targets).SetValue(id);
+
+  return tag;
+}
 
 }}
 

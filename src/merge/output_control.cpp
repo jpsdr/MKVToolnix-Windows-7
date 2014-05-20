@@ -1721,6 +1721,14 @@ render_chapters() {
   s_kax_chapters_void = nullptr;
 }
 
+static void
+set_track_statistics_tags() {
+  if (!s_kax_tags)
+    s_kax_tags = new KaxTags;
+
+  g_cluster_helper->create_tags_for_track_statistics(*s_kax_tags);
+}
+
 /** \brief Finishes and closes the current file
 
    Renders the data that is generated during the muxing run. The cues
@@ -1823,21 +1831,21 @@ finish_file(bool last_file,
     g_kax_sh_main->IndexThis(*g_kax_sh_cues, *g_kax_segment);
   }
 
-  // Render the tags if we have any.
+  // Set the tags for track statistics and render all tags for this
+  // file.
+  set_track_statistics_tags();
+
   KaxTags *tags_here = nullptr;
-  if (s_kax_tags) {
-    if (!s_chapters_in_this_file) {
-      KaxChapters temp_chapters;
-      tags_here = mtx::tags::select_for_chapters(*s_kax_tags, temp_chapters);
-    } else
-      tags_here = mtx::tags::select_for_chapters(*s_kax_tags, *s_chapters_in_this_file);
+  if (!s_chapters_in_this_file) {
+    KaxChapters temp_chapters;
+    tags_here = mtx::tags::select_for_chapters(*s_kax_tags, temp_chapters);
+  } else
+    tags_here = mtx::tags::select_for_chapters(*s_kax_tags, *s_chapters_in_this_file);
 
-    if (tags_here) {
-      mtx::tags::fix_mandatory_elements(tags_here);
-      tags_here->UpdateSize();
-      tags_here->Render(*s_out, true);
-    }
-
+  if (tags_here) {
+    mtx::tags::fix_mandatory_elements(tags_here);
+    tags_here->UpdateSize();
+    tags_here->Render(*s_out, true);
   }
 
   if (tags_here) {
