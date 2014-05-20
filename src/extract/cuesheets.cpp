@@ -52,15 +52,15 @@ find_tag_for_track(int idx,
     if (!Is<KaxTag>(m[i]))
       continue;
 
-    int64_t tag_cuid = get_tag_cuid(*static_cast<KaxTag *>(m[i]));
+    int64_t tag_cuid = mtx::tags::get_cuid(*static_cast<KaxTag *>(m[i]));
     if ((0 == cuid) && (-1 != tag_cuid) && (0 != tag_cuid))
       continue;
 
     if ((0 < cuid) && (tag_cuid != cuid))
       continue;
 
-    int64_t tag_tuid = get_tag_tuid(*static_cast<KaxTag *>(m[i]));
-    if (((-1 == tuid) || (-1 == tag_tuid) || (tuid == tag_tuid)) && ((get_simple_tag_value("PART_NUMBER", *static_cast<EbmlMaster *>(m[i])) == sidx) || (-1 == idx)))
+    int64_t tag_tuid = mtx::tags::get_tuid(*static_cast<KaxTag *>(m[i]));
+    if (((-1 == tuid) || (-1 == tag_tuid) || (tuid == tag_tuid)) && ((mtx::tags::get_simple_value("PART_NUMBER", *static_cast<EbmlMaster *>(m[i])) == sidx) || (-1 == idx)))
       return static_cast<KaxTag *>(m[i]);
   }
 
@@ -75,7 +75,7 @@ get_global_tag(const char *name,
   if (!tag)
     return "";
 
-  return get_simple_tag_value(name, *tag);
+  return mtx::tags::get_simple_value(name, *tag);
 }
 
 static int64_t
@@ -112,7 +112,7 @@ _print_if_available(mm_io_c &out,
                     int64_t tuid,
                     KaxTags &tags,
                     KaxTag &tag) {
-  std::string value = get_simple_tag_value(name, tag);
+  std::string value = mtx::tags::get_simple_value(name, tag);
   if (!value.empty() && (value != get_global_tag(name, tuid, tags)))
     out.puts(boost::format(format) % value);
 }
@@ -125,9 +125,9 @@ print_comments(const char *prefix,
 
   for (i = 0; i < tag.ListSize(); i++)
     if (Is<KaxTagSimple>(tag[i])
-        && (   (get_simple_tag_name(*static_cast<KaxTagSimple *>(tag[i])) == "COMMENT")
-            || (get_simple_tag_name(*static_cast<KaxTagSimple *>(tag[i])) == "COMMENTS")))
-      out.puts(boost::format("%1%REM \"%2%\"\n") % prefix % get_simple_tag_value(*static_cast<KaxTagSimple *>(tag[i])));
+        && (   (mtx::tags::get_simple_name(*static_cast<KaxTagSimple *>(tag[i])) == "COMMENT")
+            || (mtx::tags::get_simple_name(*static_cast<KaxTagSimple *>(tag[i])) == "COMMENTS")))
+      out.puts(boost::format("%1%REM \"%2%\"\n") % prefix % mtx::tags::get_simple_value(*static_cast<KaxTagSimple *>(tag[i])));
 }
 
 void

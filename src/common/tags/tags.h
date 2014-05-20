@@ -31,28 +31,30 @@ namespace libebml {
 using namespace libebml;
 using namespace libmatroska;
 
-typedef std::shared_ptr<KaxTags> kax_tags_cptr;
+namespace mtx { namespace tags {
 
-void fix_mandatory_tag_elements(EbmlElement *e);
-void remove_track_uid_tag_targets(EbmlMaster *tag);
+void fix_mandatory_elements(EbmlElement *e);
+void remove_track_uid_targets(EbmlMaster *tag);
 
-KaxTags *select_tags_for_chapters(KaxTags &tags, KaxChapters &chapters);
+KaxTags *select_for_chapters(KaxTags &tags, KaxChapters &chapters);
 
-KaxTagSimple &find_simple_tag(const std::string &name, EbmlMaster &m);
-KaxTagSimple &find_simple_tag(const UTFstring &name, EbmlMaster &m);
-std::string get_simple_tag_value(const std::string &name, EbmlMaster &m);
-int64_t get_tag_tuid(const KaxTag &tag);
-int64_t get_tag_cuid(const KaxTag &tag);
+KaxTagSimple &find_simple(const std::string &name, EbmlMaster &m);
+KaxTagSimple &find_simple(const UTFstring &name, EbmlMaster &m);
+std::string get_simple_value(const std::string &name, EbmlMaster &m);
+int64_t get_tuid(const KaxTag &tag);
+int64_t get_cuid(const KaxTag &tag);
 
-std::string get_simple_tag_name(const KaxTagSimple &tag);
-std::string get_simple_tag_value(const KaxTagSimple &tag);
+std::string get_simple_name(const KaxTagSimple &tag);
+std::string get_simple_value(const KaxTagSimple &tag);
 
-void set_simple_tag_name(KaxTagSimple &tag, const std::string &name);
-void set_simple_tag_value(KaxTagSimple &tag, const std::string &value);
-void set_simple_tag(KaxTagSimple &tag, const std::string &name, const std::string &valuevalue);
+void set_simple_name(KaxTagSimple &tag, const std::string &name);
+void set_simple_value(KaxTagSimple &tag, const std::string &value);
+void set_simple(KaxTagSimple &tag, const std::string &name, const std::string &value);
 
-int count_simple_tags(EbmlMaster &master);
+int count_simple(EbmlMaster &master);
 
-void convert_old_tags(KaxTags &tags);
+void convert_old(KaxTags &tags);
+
+}}
 
 #endif // MTX_COMMON_TAG_COMMON_H

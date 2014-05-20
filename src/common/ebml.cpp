@@ -528,7 +528,7 @@ fix_mandatory_elements(EbmlElement *master) {
     fix_mandatory_segment_tracks_elements(master);
 
   else if (dynamic_cast<KaxTags *>(master))
-    fix_mandatory_tag_elements(master);
+    mtx::tags::fix_mandatory_elements(master);
 
   else if (dynamic_cast<KaxChapters *>(master))
     fix_mandatory_chapter_elements(master);

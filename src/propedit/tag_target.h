@@ -29,7 +29,7 @@ public:
   };
 
   tag_operation_mode_e m_operation_mode;
-  kax_tags_cptr m_new_tags;
+  std::shared_ptr<KaxTags> m_new_tags;
 
 public:
   tag_target_c();

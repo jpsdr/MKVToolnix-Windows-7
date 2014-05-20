@@ -2259,11 +2259,11 @@ kax_reader_c::identify() {
     id_result_chapters(count_chapter_atoms(*m_chapters));
 
   if (m_tags)
-    id_result_tags(ID_RESULT_GLOBAL_TAGS_ID, count_simple_tags(*m_tags));
+    id_result_tags(ID_RESULT_GLOBAL_TAGS_ID, mtx::tags::count_simple(*m_tags));
 
   for (auto &track : m_tracks)
     if (track->ok && track->tags)
-      id_result_tags(track->tnum, count_simple_tags(*track->tags));
+      id_result_tags(track->tnum, mtx::tags::count_simple(*track->tags));
 }
 
 void

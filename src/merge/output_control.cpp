@@ -1619,7 +1619,7 @@ prepare_tags_for_rendering() {
     return;
   }
 
-  fix_mandatory_tag_elements(s_kax_tags);
+  mtx::tags::fix_mandatory_elements(s_kax_tags);
   sort_ebml_master(s_kax_tags);
   if (!s_kax_tags->CheckMandatory())
     mxerror(boost::format(Y("Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n")) % BUGMSG);
@@ -1828,12 +1828,12 @@ finish_file(bool last_file,
   if (s_kax_tags) {
     if (!s_chapters_in_this_file) {
       KaxChapters temp_chapters;
-      tags_here = select_tags_for_chapters(*s_kax_tags, temp_chapters);
+      tags_here = mtx::tags::select_for_chapters(*s_kax_tags, temp_chapters);
     } else
-      tags_here = select_tags_for_chapters(*s_kax_tags, *s_chapters_in_this_file);
+      tags_here = mtx::tags::select_for_chapters(*s_kax_tags, *s_chapters_in_this_file);
 
     if (tags_here) {
-      fix_mandatory_tag_elements(tags_here);
+      mtx::tags::fix_mandatory_elements(tags_here);
       tags_here->UpdateSize();
       tags_here->Render(*s_out, true);
     }

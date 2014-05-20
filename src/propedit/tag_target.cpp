@@ -134,7 +134,7 @@ tag_target_c::execute() {
     assert(false);
 
   if (m_level1_element->ListSize()) {
-    fix_mandatory_tag_elements(m_level1_element);
+    mtx::tags::fix_mandatory_elements(m_level1_element);
     if (!m_level1_element->CheckMandatory())
       mxerror(boost::format(Y("Error parsing the tags in '%1%': some mandatory elements are missing.\n")) % m_file_name);
   }
@@ -145,7 +145,7 @@ tag_target_c::add_or_replace_global_tags(KaxTags *tags) {
   size_t idx = 0;
   while (m_level1_element->ListSize() > idx) {
     KaxTag *tag = dynamic_cast<KaxTag *>((*m_level1_element)[idx]);
-    if (!tag || (-1 != get_tag_tuid(*tag)))
+    if (!tag || (-1 != mtx::tags::get_tuid(*tag)))
       ++idx;
     else {
       delete tag;
@@ -157,7 +157,7 @@ tag_target_c::add_or_replace_global_tags(KaxTags *tags) {
     idx = 0;
     while (tags->ListSize() > idx) {
       KaxTag *tag = dynamic_cast<KaxTag *>((*tags)[0]);
-      if (!tag || (-1 != get_tag_tuid(*tag)))
+      if (!tag || (-1 != mtx::tags::get_tuid(*tag)))
         ++idx;
       else {
         m_level1_element->PushElement(*tag);
@@ -174,7 +174,7 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
   size_t idx = 0;
   while (m_level1_element->ListSize() > idx) {
     KaxTag *tag = dynamic_cast<KaxTag *>((*m_level1_element)[idx]);
-    if (!tag || (track_uid != get_tag_tuid(*tag)))
+    if (!tag || (track_uid != mtx::tags::get_tuid(*tag)))
       ++idx;
     else {
       delete tag;
@@ -183,7 +183,7 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
   }
 
   if (tags) {
-    remove_track_uid_tag_targets(tags);
+    mtx::tags::remove_track_uid_targets(tags);
 
     idx = 0;
     while (tags->ListSize() > idx) {

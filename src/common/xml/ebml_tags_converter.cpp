@@ -98,12 +98,12 @@ ebml_tags_converter_c::fix_tag(KaxTag &tag)
     throw conversion_x{ Y("<Simple> must contain either a <String> or a <Binary> child.") };
 }
 
-kax_tags_cptr
+std::shared_ptr<KaxTags>
 ebml_tags_converter_c::parse_file(std::string const &file_name,
                                   bool throw_on_error) {
   auto parse = [&]() -> std::shared_ptr<KaxTags> {
     auto master = ebml_tags_converter_c{}.to_ebml(file_name, "Tags");
-    fix_mandatory_tag_elements(static_cast<KaxTags *>(master.get()));
+    mtx::tags::fix_mandatory_elements(static_cast<KaxTags *>(master.get()));
     return std::dynamic_pointer_cast<KaxTags>(master);
   };
 
@@ -123,7 +123,7 @@ ebml_tags_converter_c::parse_file(std::string const &file_name,
     mxerror(boost::format(Y("The XML tag file '%1%' contains an error: %2%\n")) % file_name % ex.what());
   }
 
-  return kax_tags_cptr{};
+  return {};
 }
 
 }}

@@ -261,16 +261,16 @@ generic_packetizer_c::set_tag_track_uid() {
   if (!m_ti.m_tags)
     return;
 
-  convert_old_tags(*m_ti.m_tags);
+  mtx::tags::convert_old(*m_ti.m_tags);
   size_t idx_tags;
   for (idx_tags = 0; m_ti.m_tags->ListSize() > idx_tags; ++idx_tags) {
     KaxTag *tag = (KaxTag *)(*m_ti.m_tags)[idx_tags];
 
-    remove_track_uid_tag_targets(tag);
+    mtx::tags::remove_track_uid_targets(tag);
 
     GetChild<KaxTagTrackUID>(GetChild<KaxTagTargets>(tag)).SetValue(m_huid);
 
-    fix_mandatory_tag_elements(tag);
+    mtx::tags::fix_mandatory_elements(tag);
 
     if (!tag->CheckMandatory())
       mxerror(boost::format(Y("The tags in '%1%' could not be parsed: some mandatory elements are missing.\n"))
@@ -1679,7 +1679,7 @@ track_info_c::operator =(const track_info_c &src) {
 
   m_all_tags                   = src.m_all_tags;
   m_tags_file_name             = src.m_tags_file_name;
-  m_tags                       = src.m_tags ? clone(src.m_tags) : kax_tags_cptr{};
+  m_tags                       = src.m_tags ? clone(src.m_tags) : std::shared_ptr<KaxTags>{};
 
   m_all_aac_is_sbr             = src.m_all_aac_is_sbr;
 

@@ -38,7 +38,7 @@ protected:
 
 public:
   static void write_xml(KaxTags &tags, mm_io_c &out);
-  static kax_tags_cptr parse_file(std::string const &file_name, bool throw_on_error);
+  static std::shared_ptr<KaxTags> parse_file(std::string const &file_name, bool throw_on_error);
 };
 
 }}
