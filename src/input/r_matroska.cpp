@@ -173,6 +173,30 @@ kax_track_t::fix_display_dimension_parameters() {
   }
 }
 
+void
+kax_track_t::add_track_tags_to_identification(std::vector<std::string> &verbose_info) {
+  if (!tags)
+    return;
+
+  for (auto const &tag_elt : *tags) {
+    auto tag = dynamic_cast<KaxTag *>(tag_elt);
+    if (!tag)
+      continue;
+
+    for (auto const &simple_tag_elt : *tag) {
+      auto simple_tag = dynamic_cast<KaxTagSimple *>(simple_tag_elt);
+      if (!simple_tag)
+        continue;
+
+      auto name  = mtx::tags::get_simple_name(*simple_tag);
+      auto value = mtx::tags::get_simple_value(*simple_tag);
+
+      if (!name.empty())
+        verbose_info.emplace_back((boost::format("tag_%1%:%2%") % balg::to_lower_copy(name) % escape(value)).str());
+    }
+  }
+}
+
 /*
    Probes a file by simply comparing the first four bytes to the EBML
    head signature.
@@ -2242,6 +2266,8 @@ kax_reader_c::identify() {
 
     else
       info = track->codec_id;
+
+    track->add_track_tags_to_identification(verbose_info);
 
     id_result_track(track->tnum,
                       track->type == 'v' ? ID_RESULT_TRACK_VIDEO

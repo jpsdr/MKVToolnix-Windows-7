@@ -1,5 +1,11 @@
 2014-05-20  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: new feature: When identifying a Matroska file in
+        verbose identification mode track-specific tags will be output as
+        well. The format is »tag_<tag name in lower case>:<tag value>»,
+        e.g. for a tag named »BPS« with the value »224000« the output
+        would be »tag_bps:224000«. Enhancement for #1021.
+
         * mkvmerge: new feature: mkvmerge will write track-specific tags
         with statistics (»BPS« for the average number of bits per second,
         »DURATION« for the duration, »NUMBER_OF_BYTES« and
