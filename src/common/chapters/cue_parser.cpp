@@ -196,7 +196,7 @@ add_tag_for_cue_entry(cue_parser_args_t &a,
   KaxTag *tag            = new KaxTag;
   KaxTagTargets *targets = &GetChild<KaxTagTargets>(*tag);
   GetChild<KaxTagChapterUID>(*targets).SetValue(cuid);
-  GetChild<KaxTagTargetTypeValue>(*targets).SetValue(TAG_TARGETTYPE_TRACK);
+  GetChild<KaxTagTargetTypeValue>(*targets).SetValue(mtx::tags::Track);
   GetChild<KaxTagTargetType>(*targets).SetValue("track");
 
   create_tag1(a.title, "TITLE");
@@ -232,7 +232,7 @@ add_tag_for_global_cue_settings(cue_parser_args_t &a,
   KaxTag *tag            = new KaxTag;
   KaxTagTargets *targets = &GetChild<KaxTagTargets>(*tag);
 
-  GetChild<KaxTagTargetTypeValue>(*targets).SetValue(TAG_TARGETTYPE_ALBUM);
+  GetChild<KaxTagTargetTypeValue>(*targets).SetValue(mtx::tags::Album);
   GetChild<KaxTagTargetType>(*targets).SetValue("album");
 
   create_tag1(a.global_performer, "ARTIST");

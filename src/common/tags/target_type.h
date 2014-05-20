@@ -14,34 +14,38 @@
 #ifndef MTX_COMMON_TAG_TARGET_TYPE_H
 #define MTX_COMMON_TAG_TARGET_TYPE_H
 
+namespace mtx { namespace tags {
+
+enum target_type_e {
 // see http://www.matroska.org/technical/specs/tagging/index.html#targettypes
-#define TAG_TARGETTYPE_COLLECTION     70
+  Collection = 70,
 
-#define TAG_TARGETTYPE_EDITION        60
-#define TAG_TARGETTYPE_ISSUE          60
-#define TAG_TARGETTYPE_VOLUME         60
-#define TAG_TARGETTYPE_OPUS           60
-#define TAG_TARGETTYPE_SEASON         60
-#define TAG_TARGETTYPE_SEQUEL         60
-#define TAG_TARGETTYPE_VOLUME         60
+  Edition    = 60,
+  Issue      = 60,
+  Volume     = 60,
+  Opus       = 60,
+  Season     = 60,
+  Sequel     = 60,
 
-#define TAG_TARGETTYPE_ALBUM          50
-#define TAG_TARGETTYPE_OPERA          50
-#define TAG_TARGETTYPE_CONCERT        50
-#define TAG_TARGETTYPE_MOVIE          50
-#define TAG_TARGETTYPE_EPISODE        50
+  Album      = 50,
+  Opera      = 50,
+  Concert    = 50,
+  Movie      = 50,
+  Episode    = 50,
 
-#define TAG_TARGETTYPE_PART           40
-#define TAG_TARGETTYPE_SESSION        40
+  Part       = 40,
+  Session    = 40,
 
-#define TAG_TARGETTYPE_TRACK          30
-#define TAG_TARGETTYPE_SONG           30
-#define TAG_TARGETTYPE_CHAPTER        30
+  Track      = 30,
+  Song       = 30,
+  Chapter    = 30,
 
-#define TAG_TARGETTYPE_SUBTRACK       20
-#define TAG_TARGETTYPE_MOVEMENT       20
-#define TAG_TARGETTYPE_SCENE          20
+  Subtrack   = 20,
+  Movement   = 20,
+  Scene      = 20,
 
-#define TAG_TARGETTYPE_SHOT           10
+  Shot       = 10,
+};
 
+}}
 #endif // MTX_COMMON_TAGS_TARGET_TYPE_H

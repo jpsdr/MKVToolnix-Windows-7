@@ -206,8 +206,8 @@ convert_old_tags(KaxTags &tags) {
 
     KaxTag &tag = *static_cast<KaxTag *>(tags[tags_idx]);
 
-    int target_type_value = TAG_TARGETTYPE_TRACK;
-    size_t tag_idx        = 0;
+    auto target_type_value = mtx::tags::Track;
+    size_t tag_idx         = 0;
     while (tag_idx < tag.ListSize()) {
       tag_idx++;
       if (!Is<KaxTagSimple>(tag[tag_idx - 1]))
@@ -226,7 +226,7 @@ convert_old_tags(KaxTags &tags) {
 
       else if (name == "LEVEL_TYPE") {
         if (value == "MEDIA")
-          target_type_value = TAG_TARGETTYPE_ALBUM;
+          target_type_value = mtx::tags::Album;
         tag_idx--;
         delete tag[tag_idx];
         tag.Remove(tag_idx);
