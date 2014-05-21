@@ -288,7 +288,7 @@ set_simple(KaxTag &tag,
   KaxTagSimple *k_simple_tag = nullptr;
 
   for (auto const &element : tag) {
-    auto s_tag = static_cast<KaxTagSimple *>(element);
+    auto s_tag = dynamic_cast<KaxTagSimple *>(element);
     if (!s_tag || (to_utf8(FindChildValue<KaxTagName>(s_tag)) != name))
       continue;
 
