@@ -1836,11 +1836,13 @@ finish_file(bool last_file,
   // Set the tags for track statistics and render all tags for this
   // file.
   KaxTags *tags_here = nullptr;
-  if (!s_chapters_in_this_file) {
-    KaxChapters temp_chapters;
-    tags_here = mtx::tags::select_for_chapters(*s_kax_tags, temp_chapters);
-  } else
-    tags_here = mtx::tags::select_for_chapters(*s_kax_tags, *s_chapters_in_this_file);
+  if (s_kax_tags) {
+    if (!s_chapters_in_this_file) {
+      KaxChapters temp_chapters;
+      tags_here = mtx::tags::select_for_chapters(*s_kax_tags, temp_chapters);
+    } else
+      tags_here = mtx::tags::select_for_chapters(*s_kax_tags, *s_chapters_in_this_file);
+  }
 
   tags_here = set_track_statistics_tags(tags_here);
 
