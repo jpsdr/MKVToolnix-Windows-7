@@ -17,6 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/ebml.h"
+#include "common/strings/utf8.h"
 #include "common/tags/target_type.h"
 
 namespace libmatroska {
@@ -89,6 +90,48 @@ find_tag_for(KaxTags &tags,
   GetChild<T>(targets).SetValue(id);
 
   return tag;
+}
+
+template<typename T>
+void
+remove_simple_tags_for(KaxTags &tags,
+                       uint64_t id,
+                       std::string const &name_to_remove) {
+  auto tag_idx = 0u;
+  while (tag_idx < tags.ListSize()) {
+    auto tag = dynamic_cast<KaxTag *>(tags[tag_idx]);
+    if (!tag) {
+      ++tag_idx;
+      continue;
+    }
+
+    auto targets = FindChild<KaxTagTargets>(*tag);
+    auto actual_id = targets ? FindChildValue<T>(*targets, 0llu) : 0;
+    if (!targets || (actual_id != id)) { // FindChildValue<T>(*targets, 0) != id)) {
+      ++tag_idx;
+      continue;
+    }
+
+    auto simple_idx = 0u;
+    while (simple_idx < tag->ListSize()) {
+      auto simple = dynamic_cast<KaxTagSimple *>((*tag)[simple_idx]);
+      if (!simple || (to_utf8(get_simple_name(*simple)) != name_to_remove))
+        ++simple_idx;
+
+      else {
+        tag->Remove(simple_idx);
+        delete simple;
+      }
+    }
+
+    if (0 < count_simple(*tag))
+      ++tag_idx;
+
+    else {
+      tags.Remove(tag_idx);
+      delete tag;
+    }
+  }
 }
 
 }}

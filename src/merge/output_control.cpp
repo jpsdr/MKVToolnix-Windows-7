@@ -1721,12 +1721,14 @@ render_chapters() {
   s_kax_chapters_void = nullptr;
 }
 
-static void
-set_track_statistics_tags() {
-  if (!s_kax_tags)
-    s_kax_tags = new KaxTags;
+static KaxTags *
+set_track_statistics_tags(KaxTags *tags) {
+  if (!tags)
+    tags = new KaxTags;
 
-  g_cluster_helper->create_tags_for_track_statistics(*s_kax_tags);
+  g_cluster_helper->create_tags_for_track_statistics(*tags);
+
+  return tags;
 }
 
 /** \brief Finishes and closes the current file
@@ -1833,14 +1835,19 @@ finish_file(bool last_file,
 
   // Set the tags for track statistics and render all tags for this
   // file.
-  set_track_statistics_tags();
-
   KaxTags *tags_here = nullptr;
   if (!s_chapters_in_this_file) {
     KaxChapters temp_chapters;
     tags_here = mtx::tags::select_for_chapters(*s_kax_tags, temp_chapters);
   } else
     tags_here = mtx::tags::select_for_chapters(*s_kax_tags, *s_chapters_in_this_file);
+
+  tags_here = set_track_statistics_tags(tags_here);
+
+  if (tags_here && (0 == mtx::tags::count_simple(*tags_here))) {
+    delete tags_here;
+    tags_here = nullptr;
+  }
 
   if (tags_here) {
     mtx::tags::fix_mandatory_elements(tags_here);

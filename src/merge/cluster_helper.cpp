@@ -701,7 +701,12 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags) {
     auto bps          = stats.get_bits_per_second();
     auto duration     = stats.get_duration();
 
-    auto tag          = mtx::tags::find_tag_for<KaxTagTrackUID>(tags, track_uid, true);
+    mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, track_uid, "BPS");
+    mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, track_uid, "DURATION");
+    mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, track_uid, "NUMBER_OF_FRAMES");
+    mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, track_uid, "NUMBER_OF_BYTES");
+
+    auto tag = mtx::tags::find_tag_for<KaxTagTrackUID>(tags, track_uid, true);
 
     mtx::tags::set_target_type(*tag, mtx::tags::Track, "track");
 
