@@ -706,7 +706,7 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags) {
     mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, track_uid, "NUMBER_OF_FRAMES");
     mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, track_uid, "NUMBER_OF_BYTES");
 
-    auto tag = mtx::tags::find_tag_for<KaxTagTrackUID>(tags, track_uid, true);
+    auto tag = mtx::tags::find_tag_for<KaxTagTrackUID>(tags, track_uid, mtx::tags::Track, true);
 
     mtx::tags::set_target_type(*tag, mtx::tags::Track, "track");
 

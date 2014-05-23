@@ -65,6 +65,7 @@ template<typename T>
 KaxTag *
 find_tag_for(KaxTags &tags,
              uint64_t id,
+             target_type_e target_type,
              bool create_if_not_found) {
   for (auto &element : tags) {
     auto tag = dynamic_cast<KaxTag *>(element);
@@ -74,6 +75,12 @@ find_tag_for(KaxTags &tags,
     auto targets = FindChild<KaxTagTargets>(*tag);
     if (!targets)
       continue;
+
+    if (Unknown != target_type) {
+      auto actual_target_type = static_cast<target_type_e>(FindChildValue<T>(*targets, 0ull));
+      if (actual_target_type != target_type)
+        continue;
+    }
 
     auto actual_id = FindChildValue<T>(*targets, 0ull);
     if (actual_id == id)

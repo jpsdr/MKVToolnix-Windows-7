@@ -45,6 +45,8 @@ enum target_type_e {
   Scene      = 20,
 
   Shot       = 10,
+
+  Unknown    =  0,
 };
 
 }}
