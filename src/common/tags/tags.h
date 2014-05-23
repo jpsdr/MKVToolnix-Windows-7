@@ -75,7 +75,7 @@ find_tag_for(KaxTags &tags,
     if (!targets)
       continue;
 
-    auto actual_id = FindChildValue<T>(*targets, 0);
+    auto actual_id = FindChildValue<T>(*targets, 0ull);
     if (actual_id == id)
       return tag;
   }
