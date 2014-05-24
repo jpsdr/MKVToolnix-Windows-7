@@ -289,6 +289,8 @@ mi_frame::on_file_savetext(wxCommandEvent &WXUNUSED(event)) {
       return;
     }
 
+    elements_saved = 0;
+
     menu_file->Enable(mi_file_open,          false);
     menu_file->Enable(mi_file_savetext,      false);
     menu_options->Enable(mi_options_showall, false);
