@@ -297,6 +297,22 @@ Zet het aaneenkoppelen uit voor alle sporen\&. Dit zal de bestandsgrootte verhog
 Duur schrijven voor alle blokken\&. Dit zal de bestandsgrootte verhogen en geeft geen extra waarde aan af spelers van dit moment\&.
 .RE
 .PP
+\fB\-\-disable\-track\-statistics\-tags\fR
+.RS 4
+Normally
+\fBmkvmerge\fR(1)
+will write certain tags with statistics for each track\&. If such tags are already present then they will be overwritten\&. The tags are
+\fBBPS\fR,
+\fBDURATION\fR,
+\fBNUMBER_OF_BYTES\fR
+and
+\fBNUMBER_OF_FRAMES\fR\&.
+.sp
+Enablign this option prevents
+\fBmkvmerge\fR(1)
+from writing those tags and from touching any existing tags with same names\&.
+.RE
+.PP
 \fB\-\-timecode\-scale\fR \fIfactor\fR
 .RS 4
 Forceert de tijd code schaal factor naar

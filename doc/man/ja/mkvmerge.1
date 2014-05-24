@@ -215,6 +215,22 @@ XMLファイルからセグメント情報を読み取ります。このファ�
 全てのブロックの長さを記録します。これはファイルサイズを増大させますが、現在のところプレーヤには何のメリットももたらしません。
 .RE
 .PP
+\fB\-\-disable\-track\-statistics\-tags\fR
+.RS 4
+Normally
+\fBmkvmerge\fR(1)
+will write certain tags with statistics for each track\&. If such tags are already present then they will be overwritten\&. The tags are
+\fBBPS\fR,
+\fBDURATION\fR,
+\fBNUMBER_OF_BYTES\fR
+and
+\fBNUMBER_OF_FRAMES\fR\&.
+.sp
+Enabling this option prevents
+\fBmkvmerge\fR(1)
+from writing those tags and from touching any existing tags with same names\&.
+.RE
+.PP
 \fB\-\-timecode\-scale\fR \fIfactor\fR
 .RS 4
 タイムコードスケールの係数を\fIfactor\fRに強制設定します。この値は1000～10000000、もしくは\-1に設定しなければなりません。

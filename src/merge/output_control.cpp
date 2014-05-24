@@ -152,6 +152,7 @@ bool g_write_meta_seek_for_clusters         = false;
 bool g_no_lacing                            = false;
 bool g_no_linking                           = true;
 bool g_use_durations                        = false;
+bool g_no_track_statistics_tags             = false;
 
 double g_timecode_scale                     = TIMECODE_SCALE;
 timecode_scale_mode_e g_timecode_scale_mode = TIMECODE_SCALE_MODE_NORMAL;
@@ -1723,6 +1724,9 @@ render_chapters() {
 
 static KaxTags *
 set_track_statistics_tags(KaxTags *tags) {
+  if (g_no_track_statistics_tags)
+    return tags;
+
   if (!tags)
     tags = new KaxTags;
 

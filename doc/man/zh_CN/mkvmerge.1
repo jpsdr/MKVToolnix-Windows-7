@@ -291,6 +291,22 @@ Matroska(TM) 文件规划
 为所有块写入时长。这将增大文件尺寸，而且目前对播放器来说不提供任何额外的益处。
 .RE
 .PP
+\fB\-\-disable\-track\-statistics\-tags\fR
+.RS 4
+Normally
+\fBmkvmerge\fR(1)
+will write certain tags with statistics for each track\&. If such tags are already present then they will be overwritten\&. The tags are
+\fBBPS\fR,
+\fBDURATION\fR,
+\fBNUMBER_OF_BYTES\fR
+and
+\fBNUMBER_OF_FRAMES\fR\&.
+.sp
+Enablign this option prevents
+\fBmkvmerge\fR(1)
+from writing those tags and from touching any existing tags with same names\&.
+.RE
+.PP
 \fB\-\-timecode\-scale\fR \fI系数\fR
 .RS 4
 强制时间码缩放系数为

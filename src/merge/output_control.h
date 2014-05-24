@@ -228,7 +228,7 @@ extern float g_video_fps;
 extern generic_packetizer_c *g_video_packetizer;
 
 extern bool g_write_cues, g_cue_writing_requested;
-extern bool g_no_lacing, g_no_linking, g_use_durations;
+extern bool g_no_lacing, g_no_linking, g_use_durations, g_no_track_statistics_tags;
 
 extern bool g_identifying, g_identify_verbose, g_identify_for_mmg;
 

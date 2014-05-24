@@ -107,6 +107,8 @@ cli_options_dlg::init_cli_option_list() {
                                            Z("Disables lacing for all tracks. This will increase the file's size, especially if there are many audio tracks. Use only for testing.")));
   all_cli_options.push_back(cli_option_t(wxU("--enable-durations"),
                                            Z("Write durations for all blocks. This will increase file size and does not offer any additional value for players at the moment.")));
+  all_cli_options.push_back(cli_option_t(wxU("--disable-track-statistics-tags"),
+                                         Z("Tells mkvmerge not to write tags with statistics for each track.")));
   all_cli_options.push_back(cli_option_t(  Z("--timecode-scale REPLACEME"),
                                            Z("Forces the timecode scale factor to REPLACEME. You have to replace REPLACEME with a value between 1000 and 10000000 or with -1. "
                                              "Normally mkvmerge will use a value of 1000000 which means that timecodes and durations will have a precision of 1ms. "

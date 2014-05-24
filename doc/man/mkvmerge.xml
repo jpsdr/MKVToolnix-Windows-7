@@ -347,6 +347,21 @@
      </listitem>
     </varlistentry>
 
+    <varlistentry>
+     <term><option>--disable-track-statistics-tags</option></term>
+     <listitem>
+      <para>
+       Normally &mkvmerge; will write certain tags with statistics for each track. If such tags are already present then they will be
+       overwritten. The tags are <constant>BPS</constant>, <constant>DURATION</constant>, <constant>NUMBER_OF_BYTES</constant> and
+       <constant>NUMBER_OF_FRAMES</constant>.
+      </para>
+
+      <para>
+       Enabling this option prevents &mkvmerge; from writing those tags and from touching any existing tags with same names.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.timecode_scale">
      <term><option>--timecode-scale</option> <parameter>factor</parameter></term>
      <listitem>
