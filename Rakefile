@@ -394,7 +394,7 @@ EOT
       %w{nl uk zh_CN}.each do |language|
         name = "doc/man/po4a/po/#{language}.po"
         FileUtils.cp name, "#{name}.tmp"
-        adjust_to_poedit_style "#{name}.tmp", name
+        adjust_to_poedit_style "#{name}.tmp", name, language
       end
     end
   end
