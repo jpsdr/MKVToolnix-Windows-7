@@ -126,11 +126,15 @@ abgefragt werden\&. Diese Funktionalit\(:aten sind nicht f\(:ur die Verwendung i
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Turns on GUI mode\&. In this mode specially\-formatted lines may be output that can tell a controlling GUI what\*(Aqs happening\&. These messages follow the format \*(Aq#GUI#message\*(Aq\&. The message may be followed by key/value pairs as in \*(Aq#GUI#message#key1=value1#key2=value2\&...\*(Aq\&. Neither the messages nor the keys are ever translated and always output in English\&.
+Schaltet den Modus f\(:ur graphische Benutzeroberfl\(:achen an\&. In diesem Modus k\(:onnen auf bestimmte Art formatierte Zeilen ausgegeben werden, die einem aufrufenden Programm mitteilen, was
+\fBmkvmerge\fR(1)
+gerade tut\&. Diese Nachrichten haben das folgende Format: \*(Aq#GUI#Nachricht\*(Aq\&. Der Nachricht folgen potenziell Schl\(:ussel/Wert\-Paare wie z\&.B\&. \*(Aq#GUI#Nachricht#schluessel1=wert1#schluessel2=wert2\&...\*(Aq\&. Weder die Nachricht selber noch die Schl\(:ussel werden jemals \(:ubersetzt sondern immer in Englisch ausgegeben\&.
 .sp
-This switch has nothing to do with the
+Diese Option hat nichts mit der Option
 \fB\-\-gui\fR
-parameter which causes mkvinfo to display its own GUI\&.
+zu tun, welche daf\(:ur sorgt, dass
+\fBmkvinfo\fR(1)
+seine graphische Benutzeroberfl\(:ache anzeigt\&.
 .RE
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
@@ -226,9 +230,9 @@ einige Informationen ausgeben, die nicht direkt mit einem
 Matroska(TM)\-Element verbunden sind\&. Alle anderen Elemente geben nur Zeug \(:uber Elemente aus, die soeben gefunden wurden\&. Stufe 3 f\(:ugt Metainformationen zur Erleichterung der Fehlersuche hinzu (sprich: Sie ist nur f\(:ur Entwickler gedacht)\&. Alle Zeilen, die durch Stufe 3 geschrieben werden, sind in eckige Klammern eingeschlossen, um ihre Filterung zu erleichtern\&.
 .SH "UMWANDLUNGEN VON TEXTDATEIEN UND ZEICHENS\(:ATZEN"
 .PP
-For an in\-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically\-named section in the
+F\(:ur eine tiefer gehende Diskussion dar\(:uber, wie die Programme in der MKVToolNix\-Sammlung die Umwandlung von Zeichens\(:atzen, Eingabe\-/Ausgabecodierung, Kommandozeilenzeichens\(:atze und Konsolenzeichens\(:atze handhaben, sei auf den Abschnitt \(FcUmwandlungen von Textdateien und Zeichens\(:atzen\(Fo in der Handbuchseite von
 \fBmkvmerge\fR(1)
-man page\&.
+verwiesen\&.
 .SH "R\(:UCKGABEWERTE"
 .PP
 \fBmkvinfo\fR(1)

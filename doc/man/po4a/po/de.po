@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix 6.2.0\n"
 "Report-Msgid-Bugs-To: mkvtoolnix@packages.debian.org\n"
 "POT-Creation-Date: 2014-05-24 20:13+0200\n"
-"PO-Revision-Date: 2013-10-03 22:45+0200\n"
+"PO-Revision-Date: 2014-05-24 20:28+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -274,16 +274,14 @@ msgstr "schaltet experimentelle Funktionalitäten ein. Eine Liste verfügbarer F
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:154 doc/man/mkvinfo.xml:192
 #: doc/man/mkvmerge.xml:1627 doc/man/mkvpropedit.xml:366
-#, fuzzy
-#| msgid "<option>--link</option>"
 msgid "<option>--gui-mode</option>"
-msgstr "<option>--link</option>"
+msgstr "<option>--gui-mode</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:157 doc/man/mkvinfo.xml:195
 #: doc/man/mkvmerge.xml:1630 doc/man/mkvpropedit.xml:369
 msgid "Turns on GUI mode. In this mode specially-formatted lines may be output that can tell a controlling GUI what's happening. These messages follow the format '<literal>#GUI#message</literal>'. The message may be followed by key/value pairs as in '<literal>#GUI#message#key1=value1#key2=value2…</literal>'. Neither the messages nor the keys are ever translated and always output in English."
-msgstr ""
+msgstr "Schaltet den Modus für graphische Benutzeroberflächen an. In diesem Modus können auf bestimmte Art formatierte Zeilen ausgegeben werden, die einem aufrufenden Programm mitteilen, was &mkvmerge; gerade tut. Diese Nachrichten haben das folgende Format: '<literal>#GUI#Nachricht</literal>'. Der Nachricht folgen potenziell Schlüssel/Wert-Paare wie z.B. '<literal>#GUI#Nachricht#schluessel1=wert1#schluessel2=wert2…</literal>'. Weder die Nachricht selber noch die Schlüssel werden jemals übersetzt sondern immer in Englisch ausgegeben."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:166 doc/man/mkvinfo.xml:206 doc/man/mkvmerge.xml:83
@@ -625,7 +623,7 @@ msgstr "Umwandlungen von Textdateien und Zeichensätzen"
 #: doc/man/mkvextract.xml:475 doc/man/mkvinfo.xml:322
 #: doc/man/mkvpropedit.xml:702
 msgid "For an in-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically-named section in the &mkvmerge; man page."
-msgstr ""
+msgstr "Für eine tiefer gehende Diskussion darüber, wie die Programme in der MKVToolNix-Sammlung die Umwandlung von Zeichensätzen, Eingabe-/Ausgabecodierung, Kommandozeilenzeichensätze und Konsolenzeichensätze handhaben, sei auf den Abschnitt »Umwandlungen von Textdateien und Zeichensätzen« in der Handbuchseite von &mkvmerge; verwiesen."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:481
@@ -680,14 +678,12 @@ msgstr "<productname>Theora</productname>-Datenströme werden innerhalb eines <p
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:527
 msgid "V_VP8, V_VP9"
-msgstr ""
+msgstr "V_VP8, V_VP9"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:530
-#, fuzzy
-#| msgid "<abbrev>VP8</abbrev> tracks are written to <abbrev>IVF</abbrev> files."
 msgid "<abbrev>VP8</abbrev> / <abbrev>VP9</abbrev> tracks are written to <abbrev>IVF</abbrev> files."
-msgstr "<abbrev>VP8</abbrev>-Spuren werden in <abbrev>IVF</abbrev>-Dateien geschrieben."
+msgstr "<abbrev>VP8</abbrev>-/<abbrev>VP9</abbrev>-Spuren werden in <abbrev>IVF</abbrev>-Dateien geschrieben."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:536
@@ -1123,7 +1119,7 @@ msgstr "schaltet experimentelle Funktionalitäten ein. Eine Liste verfügbarer F
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:201
 msgid "This switch has nothing to do with the <option>--gui</option> parameter which causes mkvinfo to display its own GUI."
-msgstr ""
+msgstr "Diese Option hat nichts mit der Option <option>--gui</option> zu tun, welche dafür sorgt, dass &mkvinfo; seine graphische Benutzeroberfläche anzeigt."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:209
@@ -1542,20 +1538,18 @@ msgstr "schreibt die Laufzeiten für alle Blöcke. Dies erhöht die Größe der 
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:351
-#, fuzzy
-#| msgid "<option>--disable-lacing</option>"
 msgid "<option>--disable-track-statistics-tags</option>"
-msgstr "<option>--disable-lacing</option>"
+msgstr "<option>--disable-track-statistics-tags</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:354
 msgid "Normally &mkvmerge; will write certain tags with statistics for each track. If such tags are already present then they will be overwritten. The tags are <constant>BPS</constant>, <constant>DURATION</constant>, <constant>NUMBER_OF_BYTES</constant> and <constant>NUMBER_OF_FRAMES</constant>."
-msgstr ""
+msgstr "Normalerweise schreibt &mkvmerge; bestimmte Tags mit Statistiken für jede Spur. Falls solche Tags bereits existieren, werden sie überschrieben. Die Tags lauten <constant>BPS</constant>, <constant>DURATION</constant>, <constant>NUMBER_OF_BYTES</constant> und <constant>NUMBER_OF_FRAMES</constant>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:360
 msgid "Enabling this option prevents &mkvmerge; from writing those tags and from touching any existing tags with same names."
-msgstr ""
+msgstr "Mit dieser Option wird &mkvmerge; angewiesen, keine solchen Tags zu schreiben und bereits existierende Tags mit denselben Namen nicht zu verändern."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:366
@@ -2986,12 +2980,7 @@ msgstr "Einige der Optionen für &mkvmerge; benötigen eine Spur-ID als Angabe, 
 # im Original noch zu ändern
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:1941
-#, fuzzy, no-wrap
-#| msgid ""
-#| "$ mkvmerge -i v.mkv\n"
-#| "File 'v.mkv': container: &matroska;\n"
-#| "Track ID 1: video (V_MS/VFW/FOURCC, DIV3)\n"
-#| "Track ID 2: audio (A_MPEG/L3)"
+#, no-wrap
 msgid ""
 "$ mkvmerge -i v.mkv\n"
 "File 'v.mkv': container: &matroska;\n"
@@ -3000,8 +2989,8 @@ msgid ""
 msgstr ""
 "$ mkvmerge -i v.mkv\n"
 "Datei »v.mkv«: Container: &matroska;\n"
-"Spur-ID 1: Video (V_MS/VFW/FOURCC, DIV3)\n"
-"Spur-ID 2: Ton (A_MPEG/L3)"
+"Spur-ID 0: Video (V_MS/VFW/FOURCC, DIV3)\n"
+"Spur-ID 1: Ton (A_MPEG/L3)"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:1947
@@ -3066,7 +3055,7 @@ msgstr "&mkvmerge; erledigt dies automatisch, basierend auf dem Vorhandensein ei
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2019
 msgid "Byte order markers (BOM)"
-msgstr ""
+msgstr "Byte-Reihenfolge-Markierungen (engl. BOM)"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2022
@@ -3076,7 +3065,7 @@ msgstr "Textdateien, die mit einem BOM beginnen, sind bereits in einer Erscheinu
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2030
 msgid "Linux and Unix-like systems including Mac OS"
-msgstr ""
+msgstr "Linux und Unixoide Betriebssysteme inklusive Mac OS"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2033
@@ -3086,46 +3075,42 @@ msgstr "Auf UNIX-ähnlichen Systemen benutzt &mkvmerge; den Systemaufruf <citere
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2041
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2044
 msgid "On Windows the default character set used for converting text files is determined by a call to the <function>GetACP()</function> system call."
-msgstr ""
+msgstr "Unter Windows wird der für die Konvertierung von Textdateien benutzte Zeichensatz durch einen Aufruf der Systemfunktion <function>GetACP()</function> ermittelt."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2049
 msgid "Reading the command line is done with the <function>GetCommandLineW()</function> function which already returns a Unicode string. Therefore the option <option>--command-line-charset</option> is ignored on Windows."
-msgstr ""
+msgstr "Das Auslesen der Kommandozeile geschieht mit der Funktion <function>GetCommandLineW()</function>, die bereits eine Unicode-Zeichenkette zurückliefert. Deshalb wird die Option <option>--command-line-charset</option> unter Windows ignoriert."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2054
 msgid "Output to the console consists of three scenarios:"
-msgstr ""
+msgstr "Die Konsolenausgabe umfasst drei Szenarien:"
 
 #. type: Content of: <refentry><refsect1><refsect2><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2060
-#, fuzzy
-#| msgid "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> for all strings written to the console or to a file if the output has been redirected with the <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> option."
 msgid "If the output is redirected with the option <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> then the default charset is UTF-8. This can be changed with <link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link>."
-msgstr "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> für alle auf die Konsole oder in eine Datei geschriebenen Zeichenketten, falls die Ausgabe mit der Option <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> umgeleitet wurde."
+msgstr "Falls die Ausgabe mittels der Option <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> umgeleitet wurde, so ist der Zeichensatz UTF-8. Dies kann mit der Option <link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> geändert werden."
 
 #. type: Content of: <refentry><refsect1><refsect2><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2066
 msgid "If the output is redirected with <command>cmd.exe</command> itself, e.g. with <literal>mkvinfo file.mkv &gt; info.txt</literal>, then the charset is always UTF-8 and cannot be changed."
-msgstr ""
+msgstr "Falls die Ausgabe durch <command>cmd.exe</command> selber umgeleitet wurde, wie z.B. mit <literal>mkvinfo file.mkv &gt; info.txt</literal>, dann wird immer der Zeichensatz UTF-8 benutzt, was nicht geändert werden kann."
 
 #. type: Content of: <refentry><refsect1><refsect2><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2071
 msgid "Otherwise (when writing directly to the console) the Windows function <function>WriteConsoleW()</function> is used and the option <link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> is ignored. The console should be able to output all Unicode characters for which the corresponding language support is installed (e.g. Chinese characters might not be displayed on English Windows versions)."
-msgstr ""
+msgstr "Wenn hingegen direkt auf die Konsole geschrieben wird, so wird die Windows-Funktion <function>WriteConsoleW()</function> dafür benutzt, und die Option <link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> wird ignoriert. Die Konsole sollte in der Lage sein, alle Unicode-Zeichen auszugeben, für deren entsprechende Sprache Sprachuntersützung installiert ist (z.B. könnten chinesische Zeichen in englischen Windows-Versionen nicht ausgegeben werden)."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2081
-#, fuzzy
-#| msgid "Common options"
 msgid "Command line options"
-msgstr "Gemeinsame Optionen"
+msgstr "Kommandozeilenoptionen"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2084
@@ -3149,10 +3134,8 @@ msgstr "<link linkend=\"mkvmerge.description.command_line_charset\"><option>--co
 
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2112
-#, fuzzy
-#| msgid "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> for all strings written to the console or to a file if the output has been redirected with the <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> option."
 msgid "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> for all strings written to the console or to a file if the output has been redirected with the <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> option. On non-Windows systems the default for the output charset is the system's current charset. On Windows it defaults to UTF-8 both for redirecting with <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> and with <command>cmd.exe</command> itself, e.g. <literal>mkvinfo file.mkv &gt; info.txt</literal>."
-msgstr "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> für alle auf die Konsole oder in eine Datei geschriebenen Zeichenketten, falls die Ausgabe mit der Option <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> umgeleitet wurde."
+msgstr "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> für alle auf die Konsole oder in eine Datei geschriebenen Zeichenketten, falls die Ausgabe mit der Option <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> umgeleitet wurde. Auf anderen Systemen als Windows ist der Standardzeichensatz derjenige, den das System aktuell verwendet. Unter Windows ist der Standard sowohl für die Umleitung mittels <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> als auch durch <command>cmd.exe</command> selber, e.g. <literal>mkvinfo file.mkv &gt; info.txt</literal>, der Zeichensatz UTF-8."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvmerge.xml:2125

@@ -283,18 +283,18 @@ schreibt die Laufzeiten f\(:ur alle Bl\(:ocke\&. Dies erh\(:oht die Gr\(:o\(sse 
 .PP
 \fB\-\-disable\-track\-statistics\-tags\fR
 .RS 4
-Normally
+Normalerweise schreibt
 \fBmkvmerge\fR(1)
-will write certain tags with statistics for each track\&. If such tags are already present then they will be overwritten\&. The tags are
+bestimmte Tags mit Statistiken f\(:ur jede Spur\&. Falls solche Tags bereits existieren, werden sie \(:uberschrieben\&. Die Tags lauten
 \fBBPS\fR,
 \fBDURATION\fR,
 \fBNUMBER_OF_BYTES\fR
-and
+und
 \fBNUMBER_OF_FRAMES\fR\&.
 .sp
-Enabling this option prevents
+Mit dieser Option wird
 \fBmkvmerge\fR(1)
-from writing those tags and from touching any existing tags with same names\&.
+angewiesen, keine solchen Tags zu schreiben und bereits existierende Tags mit denselben Namen nicht zu ver\(:andern\&.
 .RE
 .PP
 \fB\-\-timecode\-scale\fR \fIFaktor\fR
@@ -1521,7 +1521,9 @@ abgefragt werden\&. Diese Funktionalit\(:aten sind nicht f\(:ur die Verwendung i
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Turns on GUI mode\&. In this mode specially\-formatted lines may be output that can tell a controlling GUI what\*(Aqs happening\&. These messages follow the format \*(Aq#GUI#message\*(Aq\&. The message may be followed by key/value pairs as in \*(Aq#GUI#message#key1=value1#key2=value2\&...\*(Aq\&. Neither the messages nor the keys are ever translated and always output in English\&.
+Schaltet den Modus f\(:ur graphische Benutzeroberfl\(:achen an\&. In diesem Modus k\(:onnen auf bestimmte Art formatierte Zeilen ausgegeben werden, die einem aufrufenden Programm mitteilen, was
+\fBmkvmerge\fR(1)
+gerade tut\&. Diese Nachrichten haben das folgende Format: \*(Aq#GUI#Nachricht\*(Aq\&. Der Nachricht folgen potenziell Schl\(:ussel/Wert\-Paare wie z\&.B\&. \*(Aq#GUI#Nachricht#schluessel1=wert1#schluessel2=wert2\&...\*(Aq\&. Weder die Nachricht selber noch die Schl\(:ussel werden jemals \(:ubersetzt sondern immer in Englisch ausgegeben\&.
 .RE
 .PP
 \fB@\fR\fIOptionsdatei\fR
@@ -2000,9 +2002,9 @@ aufgerufen wird, ausgegeben\&. Ein Beispiel f\(:ur einer derartige Ausgabe:
 .\}
 .nf
 $ mkvmerge \-i v\&.mkv
-File \*(Aqv\&.mkv\*(Aq: container: Matroska(TM)
-Track ID 0: video (V_MS/VFW/FOURCC, DIV3)
-Track ID 1: audio (A_MPEG/L3)
+Datei \(Fcv\&.mkv\(Fo: Container: Matroska(TM)
+Spur\-ID 0: Video (V_MS/VFW/FOURCC, DIV3)
+Spur\-ID 1: Ton (A_MPEG/L3)
 .fi
 .if n \{\
 .RE
@@ -2098,13 +2100,13 @@ BOM
 (Byte Order Marker) oder der aktuellen Locale des Systems\&. Wie der Zeichensatz von der Locale geschlussfolgert wird, h\(:angt vom Betriebssystem ab, auf dem
 \fBmkvmerge\fR(1)
 l\(:auft\&.
-.SS "Byte order markers (BOM)"
+.SS "Byte\-Reihenfolge\-Markierungen (engl\&. BOM)"
 .PP
 Textdateien, die mit einem BOM beginnen, sind bereits in einer Erscheinungsform von UTF codiert\&.
 \fBmkvmerge\fR(1)
 unters\(:utzt die folgenden f\(:unf Modi: UTF\-8, UTF\-16 Little und Big Endian sowie UTF\-32 Little\- und Big Endian\&. Textdateien mit einem BOM werden automatisch in UTF\-8 umgewandelt\&. Alle Parameter, die andernfalls den Zeichensatz einer solchen Datei \(:andern w\(:urden (z\&.B\&.
 \fB\-\-sub\-charset\fR), werden stillschweigend irgnoriert\&.
-.SS "Linux and Unix\-like systems including Mac OS"
+.SS "Linux und Unixoide Betriebssysteme inklusive Mac OS"
 .PP
 Auf UNIX\-\(:ahnlichen Systemen benutzt
 \fBmkvmerge\fR(1)
@@ -2117,17 +2119,16 @@ und
 verwendet\&. Der resultierende Zeichensatz stammt oft aus der UTF\-8\- oder der ISO\-8859\-*\-Familie und wird f\(:ur alle Textdateitransaktionen und f\(:ur das Codieren aller Zeichenketten auf der Befehlszeile, sowie die Ausgabe an die Konsole benutzt\&.
 .SS "Windows"
 .PP
-On Windows the default character set used for converting text files is determined by a call to the
+Unter Windows wird der f\(:ur die Konvertierung von Textdateien benutzte Zeichensatz durch einen Aufruf der Systemfunktion
 \fBGetACP()\fR
-system call\&.
+ermittelt\&.
 .PP
-Reading the command line is done with the
-\fBGetCommandLineW()\fR
-function which already returns a Unicode string\&. Therefore the option
+Das Auslesen der Kommandozeile geschieht mit der Funktion
+\fBGetCommandLineW()\fR, die bereits eine Unicode\-Zeichenkette zur\(:uckliefert\&. Deshalb wird die Option
 \fB\-\-command\-line\-charset\fR
-is ignored on Windows\&.
+unter Windows ignoriert\&.
 .PP
-Output to the console consists of three scenarios:
+Die Konsolenausgabe umfasst drei Szenarien:
 .sp
 .RS 4
 .ie n \{\
@@ -2137,23 +2138,24 @@ Output to the console consists of three scenarios:
 .sp -1
 .IP "  1." 4.2
 .\}
-If the output is redirected with the option
+Falls die Ausgabe mittels der Option
 \fB\-\-redirect\-output\fR
-then the default charset is UTF\-8\&. This can be changed with
-\fB\-\-output\-charset\fR\&.
-.sp
-If the output is redirected with
-\fBcmd\&.exe\fR
-itself, e\&.g\&. with
-mkvinfo file\&.mkv > info\&.txt, then the charset is always UTF\-8 and cannot be changed\&.
-.sp
-Otherwise (when writing directly to the console) the Windows function
-\fBWriteConsoleW()\fR
-is used and the option
+umgeleitet wurde, so ist der Zeichensatz UTF\-8\&. Dies kann mit der Option
 \fB\-\-output\-charset\fR
-is ignored\&. The console should be able to output all Unicode characters for which the corresponding language support is installed (e\&.g\&. Chinese characters might not be displayed on English Windows versions)\&.
+ge\(:andert werden\&.
+.sp
+Falls die Ausgabe durch
+\fBcmd\&.exe\fR
+selber umgeleitet wurde, wie z\&.B\&. mit
+mkvinfo file\&.mkv > info\&.txt, dann wird immer der Zeichensatz UTF\-8 benutzt, was nicht ge\(:andert werden kann\&.
+.sp
+Wenn hingegen direkt auf die Konsole geschrieben wird, so wird die Windows\-Funktion
+\fBWriteConsoleW()\fR
+daf\(:ur benutzt, und die Option
+\fB\-\-output\-charset\fR
+wird ignoriert\&. Die Konsole sollte in der Lage sein, alle Unicode\-Zeichen auszugeben, f\(:ur deren entsprechende Sprache Sprachunters\(:utzung installiert ist (z\&.B\&. k\(:onnten chinesische Zeichen in englischen Windows\-Versionen nicht ausgegeben werden)\&.
 .RE
-.SS "Command line options"
+.SS "Kommandozeilenoptionen"
 .PP
 Die folgenden Optionen, die die Angabe des Zeichensatzes erm\(:oglichen, existieren:
 .sp
@@ -2202,14 +2204,14 @@ f\(:ur alle Zeichenketten auf der Befehlszeile,
 .IP \(bu 2.3
 .\}
 \fB\-\-output\-charset\fR
-for all strings written to the console or to a file if the output has been redirected with the
+f\(:ur alle auf die Konsole oder in eine Datei geschriebenen Zeichenketten, falls die Ausgabe mit der Option
 \fB\-\-redirect\-output\fR
-option\&. On non\-Windows systems the default for the output charset is the system\*(Aqs current charset\&. On Windows it defaults to UTF\-8 both for redirecting with
+umgeleitet wurde\&. Auf anderen Systemen als Windows ist der Standardzeichensatz derjenige, den das System aktuell verwendet\&. Unter Windows ist der Standard sowohl f\(:ur die Umleitung mittels
 \fB\-\-redirect\-output\fR
-and with
+als auch durch
 \fBcmd\&.exe\fR
-itself, e\&.g\&.
-mkvinfo file\&.mkv > info\&.txt\&.
+selber, e\&.g\&.
+mkvinfo file\&.mkv > info\&.txt, der Zeichensatz UTF\-8\&.
 .RE
 .SH "OPTIONSDATEIEN"
 .PP

@@ -105,7 +105,9 @@ abgefragt werden\&. Diese Funktionalit\(:aten sind nicht f\(:ur die Verwendung i
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Turns on GUI mode\&. In this mode specially\-formatted lines may be output that can tell a controlling GUI what\*(Aqs happening\&. These messages follow the format \*(Aq#GUI#message\*(Aq\&. The message may be followed by key/value pairs as in \*(Aq#GUI#message#key1=value1#key2=value2\&...\*(Aq\&. Neither the messages nor the keys are ever translated and always output in English\&.
+Schaltet den Modus f\(:ur graphische Benutzeroberfl\(:achen an\&. In diesem Modus k\(:onnen auf bestimmte Art formatierte Zeilen ausgegeben werden, die einem aufrufenden Programm mitteilen, was
+\fBmkvmerge\fR(1)
+gerade tut\&. Diese Nachrichten haben das folgende Format: \*(Aq#GUI#Nachricht\*(Aq\&. Der Nachricht folgen potenziell Schl\(:ussel/Wert\-Paare wie z\&.B\&. \*(Aq#GUI#Nachricht#schluessel1=wert1#schluessel2=wert2\&...\*(Aq\&. Weder die Nachricht selber noch die Schl\(:ussel werden jemals \(:ubersetzt sondern immer in Englisch ausgegeben\&.
 .RE
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
@@ -368,9 +370,9 @@ manchmal Sonderzeichen vor dem Schreiben in die Ausgabedatei interpretiert, was 
 .RE
 .SH "UMWANDLUNGEN VON TEXTDATEIEN UND ZEICHENS\(:ATZEN"
 .PP
-For an in\-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically\-named section in the
+F\(:ur eine tiefer gehende Diskussion dar\(:uber, wie die Programme in der MKVToolNix\-Sammlung die Umwandlung von Zeichens\(:atzen, Eingabe\-/Ausgabecodierung, Kommandozeilenzeichens\(:atze und Konsolenzeichens\(:atze handhaben, sei auf den Abschnitt \(FcUmwandlungen von Textdateien und Zeichens\(:atzen\(Fo in der Handbuchseite von
 \fBmkvmerge\fR(1)
-man page\&.
+verwiesen\&.
 .SH "AUSGABEDATEIFORMATE"
 .PP
 Die Entscheidung \(:uber das Ausgabeformat basiert auf dem Spurtyp, nicht auf der f\(:ur den Ausgabedateinamen benutzen Dateiendung\&. Die folgenden Spurtypen werden derzeit unterst\(:utzt:
@@ -408,12 +410,8 @@ Ogg(TM)\-Containers geschrieben\&.
 .PP
 V_VP8, V_VP9
 .RS 4
-VP8
-/
-VP9
-tracks are written to
-IVF
-files\&.
+VP8\-/VP9\-Spuren werden in
+IVF\-Dateien geschrieben\&.
 .RE
 .PP
 A_MPEG/L2
