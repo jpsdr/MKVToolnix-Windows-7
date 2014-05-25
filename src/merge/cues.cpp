@@ -39,7 +39,7 @@ cues_c::set_duration_for_id_timecode(uint64_t id,
                                      uint64_t timecode,
                                      uint64_t duration) {
   if (!m_no_cue_duration)
-    m_id_timecode_duration_map[ std::make_pair(id, timecode) ] = duration;
+    m_id_timecode_duration_multimap.insert({ id_timecode_t{id, timecode}, duration });
 }
 
 void
@@ -144,17 +144,17 @@ cues_c::sort() {
     });
 }
 
-std::map<id_timecode_t, uint64_t>
+std::multimap<id_timecode_t, uint64_t>
 cues_c::calculate_block_positions(KaxCluster &cluster)
   const {
 
-  std::map<id_timecode_t, uint64_t> positions;
+  std::multimap<id_timecode_t, uint64_t> positions;
 
   for (auto child : cluster) {
     auto simple_block = dynamic_cast<KaxSimpleBlock *>(child);
     if (simple_block) {
       simple_block->SetParent(cluster);
-      positions[ id_timecode_t{ simple_block->TrackNum(), simple_block->GlobalTimecode() } ] = simple_block->GetElementPosition();
+      positions.insert({ id_timecode_t{ simple_block->TrackNum(), simple_block->GlobalTimecode()}, simple_block->GetElementPosition() });
       continue;
     }
 
@@ -167,7 +167,7 @@ cues_c::calculate_block_positions(KaxCluster &cluster)
       continue;
 
     block->SetParent(cluster);
-    positions[ id_timecode_t{ block->TrackNum(), block->GlobalTimecode() } ] = block_group->GetElementPosition();
+    positions.insert({ id_timecode_t{ block->TrackNum(), block->GlobalTimecode()}, block_group->GetElementPosition() });
   }
 
   return positions;
@@ -183,11 +183,21 @@ cues_c::postprocess_cues(KaxCues &cues,
 
   auto cluster_data_start_pos = cluster.GetElementPosition() + cluster.HeadSize();
   auto block_positions        = calculate_block_positions(cluster);
+  std::map<id_timecode_t, size_t> nblocks_processed; //# blocks processed so far with given track #/timecode
 
   for (auto point = m_points.begin() + m_num_cue_points_postprocessed, end = m_points.end(); point != end; ++point) {
+    nblocks_processed[id_timecode_t{ point->track_num, point->timecode }]++;
+
     // Set CueRelativePosition for all cues.
     if (!m_no_cue_relative_position) {
-      auto position_itr      = block_positions.find({ point->track_num, point->timecode });
+      auto pair          = block_positions.equal_range({ point->track_num, point->timecode });
+      auto position_itr  = pair.first;
+      auto pos_end       = pair.second;
+      auto num_processed = nblocks_processed[id_timecode_t{ point->track_num, point->timecode }];
+
+      for (auto i = 0u; ((i + 1) < num_processed) && (position_itr != pos_end); ++i)
+        position_itr++;
+
       auto relative_position = block_positions.end() != position_itr ? std::max(position_itr->second, cluster_data_start_pos) - cluster_data_start_pos : 0ull;
 
       assert(relative_position <= static_cast<uint64_t>(std::numeric_limits<uint32_t>::max()));
@@ -203,23 +213,30 @@ cues_c::postprocess_cues(KaxCues &cues,
     if (m_no_cue_duration)
       continue;
 
-    auto duration_itr = m_id_timecode_duration_map.find({ point->track_num, point->timecode });
+    auto pair          = m_id_timecode_duration_multimap.equal_range({ point->track_num, point->timecode });
+    auto duration_itr  = pair.first;
+    auto dur_end       = pair.second;
+    auto num_processed = nblocks_processed[id_timecode_t{ point->track_num, point->timecode }];
+
+    for (auto i = 0u; ((i + 1) < num_processed) && (duration_itr != dur_end); ++i)
+      duration_itr++;
+
     auto ptzr         = g_packetizers_by_track_num[point->track_num];
 
     if (!ptzr || !ptzr->wants_cue_duration())
       continue;
 
-    if (m_id_timecode_duration_map.end() != duration_itr)
+    if (m_id_timecode_duration_multimap.end() != duration_itr)
       point->duration = duration_itr->second;
 
     mxdebug_if(m_debug_cue_duration,
                boost::format("cue_duration: looking for <%1%:%2%>: %3%\n")
-               % point->track_num % point->timecode % (duration_itr == m_id_timecode_duration_map.end() ? static_cast<int64_t>(-1) : duration_itr->second));
+               % point->track_num % point->timecode % (duration_itr == m_id_timecode_duration_multimap.end() ? static_cast<int64_t>(-1) : duration_itr->second));
   }
 
   m_num_cue_points_postprocessed = m_points.size();
 
-  m_id_timecode_duration_map.clear();
+  m_id_timecode_duration_multimap.clear();
 }
 
 uint64_t

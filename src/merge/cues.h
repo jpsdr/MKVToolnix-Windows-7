@@ -35,7 +35,8 @@ typedef std::shared_ptr<cues_c> cues_cptr;
 class cues_c {
 protected:
   std::vector<cue_point_t> m_points;
-  std::map<id_timecode_t, uint64_t> m_id_timecode_duration_map, m_codec_state_position_map;
+  std::multimap<id_timecode_t, uint64_t> m_id_timecode_duration_multimap;
+  std::map<id_timecode_t, uint64_t> m_codec_state_position_map;
 
   size_t m_num_cue_points_postprocessed;
   bool m_no_cue_duration, m_no_cue_relative_position;
@@ -58,7 +59,7 @@ public:
 
 protected:
   void sort();
-  std::map<id_timecode_t, uint64_t> calculate_block_positions(KaxCluster &cluster) const;
+  std::multimap<id_timecode_t, uint64_t> calculate_block_positions(KaxCluster &cluster) const;
   uint64_t calculate_total_size() const;
   uint64_t calculate_point_size(cue_point_t const &point) const;
   uint64_t calculate_bytes_for_uint(uint64_t value) const;
