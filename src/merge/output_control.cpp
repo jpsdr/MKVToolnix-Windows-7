@@ -30,6 +30,7 @@
 #include <windows.h>
 #endif
 
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include <iostream>
 #include <typeinfo>
 
@@ -60,6 +61,7 @@
 #include <matroska/KaxVersion.h>
 
 #include "common/chapters/chapters.h"
+#include "common/date_time.h"
 #include "common/debugging.h"
 #include "common/ebml.h"
 #include "common/fs_sys_helpers.h"
@@ -227,6 +229,9 @@ static int s_display_path_length          = 1;
 static generic_reader_c *s_display_reader = nullptr;
 
 static EbmlHead *s_head                   = nullptr;
+
+static std::string s_muxing_app, s_writing_app;
+static boost::posix_time::ptime s_writing_date;
 
 /** \brief Add a segment family UID to the list if it doesn't exist already.
 
@@ -737,16 +742,21 @@ render_headers(mm_io_c *out) {
     s_kax_duration->SetValue(0.0);
     s_kax_infos->PushElement(*s_kax_duration);
 
-    if (!hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
-      GetChild<KaxMuxingApp >(s_kax_infos).SetValue(cstrutf8_to_UTFstring(std::string("libebml v") + EbmlCodeVersion + std::string(" + libmatroska v") + KaxCodeVersion));
-      GetChild<KaxWritingApp>(s_kax_infos).SetValue(cstrutf8_to_UTFstring(get_version_info("mkvmerge", static_cast<version_info_flags_e>(vif_full | vif_untranslated))));
-      GetChild<KaxDateUTC   >(s_kax_infos).SetEpochDate(time(nullptr));
+    if (s_muxing_app.empty()) {
+      if (!hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
+        s_muxing_app   = std::string("libebml v") + EbmlCodeVersion + std::string(" + libmatroska v") + KaxCodeVersion;
+        s_writing_app  = get_version_info("mkvmerge", static_cast<version_info_flags_e>(vif_full | vif_untranslated));
+        s_writing_date = boost::posix_time::second_clock::universal_time();
 
-    } else {
-      GetChild<KaxMuxingApp >(s_kax_infos).SetValue(cstrutf8_to_UTFstring("no_variable_data"));
-      GetChild<KaxWritingApp>(s_kax_infos).SetValue(cstrutf8_to_UTFstring("no_variable_data"));
-      GetChild<KaxDateUTC   >(s_kax_infos).SetEpochDate(0);
+      } else {
+        s_muxing_app   = "no_variable_data";
+        s_writing_app  = "no_variable_data";
+      }
     }
+
+    GetChild<KaxMuxingApp >(s_kax_infos).SetValue(cstrutf8_to_UTFstring(s_muxing_app));
+    GetChild<KaxWritingApp>(s_kax_infos).SetValue(cstrutf8_to_UTFstring(s_writing_app));
+    GetChild<KaxDateUTC   >(s_kax_infos).SetEpochDate(s_writing_date.is_not_a_date_time() ? 0 : mtx::date_time::to_time_t(s_writing_date));
 
     if (!g_segment_title.empty())
       GetChild<KaxTitle>(s_kax_infos).SetValue(cstrutf8_to_UTFstring(g_segment_title.c_str()));
