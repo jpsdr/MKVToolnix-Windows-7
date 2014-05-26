@@ -22,6 +22,13 @@ if test x"$ax_cv_boost_system" != "xyes"; then
   AC_MSG_ERROR(The Boost System Library was not found.)
 fi
 
+# boost::date_time must be present.
+AX_BOOST_DATE_TIME()
+
+if test x"$ax_cv_boost_date_time" != "xyes"; then
+  AC_MSG_ERROR(The Boost Date/Time Library was not found.)
+fi
+
 AX_BOOST_CHECK_HEADERS([boost/rational.hpp],,[
   AC_MSG_ERROR([Boost's rational library is required but wasn't found])
 ])
