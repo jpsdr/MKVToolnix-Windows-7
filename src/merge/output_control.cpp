@@ -1869,9 +1869,7 @@ finish_file(bool last_file,
     mtx::tags::fix_mandatory_elements(tags_here);
     tags_here->UpdateSize();
     tags_here->Render(*s_out, true);
-  }
 
-  if (tags_here) {
     g_kax_sh_main->IndexThis(*tags_here, *g_kax_segment);
     delete tags_here;
   }
