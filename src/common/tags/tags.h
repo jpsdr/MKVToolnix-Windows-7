@@ -77,7 +77,7 @@ find_tag_for(KaxTags &tags,
       continue;
 
     if (Unknown != target_type) {
-      auto actual_target_type = static_cast<target_type_e>(FindChildValue<T>(*targets, 0ull));
+      auto actual_target_type = static_cast<target_type_e>(FindChildValue<KaxTagTargetTypeValue>(*targets, 0ull));
       if (actual_target_type != target_type)
         continue;
     }
