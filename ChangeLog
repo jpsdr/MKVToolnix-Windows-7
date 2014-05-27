@@ -1,5 +1,17 @@
 2014-05-26  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: enhancement: In addition to the track statistics tags
+        »BPS«, »DURATION«, »NUMBER_OF_BYTES« and »NUMBER_OF_FRAMES«
+        mkvmerge will write two more tags identifying which application
+        wrote the statistics (»_STATISTICS_WRITING_APP«) and when the file
+        in question was written: »_STATISTICS_WRITING_DATE_UTC«.
+        »_STATISTICS_WRITING_APP« will always contain the same string
+        contained in the segment info header element »WritingApp«.
+        »_STATISTICS_WRITING_DATE_UTC« will contain the same timestamp as
+        in the segment info header element »Date«, though
+        »_STATISTICS_WRITING_DATE_UTC« is actually a string representation
+        instead of an integer value.
+
         * build system: Boost's "date/time" library is now required.
 
 2014-05-25  John Peebles  <johnpeeb@gmail.com>

@@ -15,6 +15,7 @@
 
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <sstream>
 
 #include "common/date_time.h"
 
@@ -24,6 +25,19 @@ int64_t
 to_time_t(boost::posix_time::ptime const &pt) {
   auto diff = pt - boost::posix_time::ptime{ boost::gregorian::date(1970, 1, 1) };
   return diff.ticks() / diff.ticks_per_second();
+}
+
+std::string
+to_string(boost::posix_time::ptime const &writing_date,
+          char const *format) {
+  std::stringstream ss;
+  auto output_facet = new boost::posix_time::time_facet(format);
+
+  ss.imbue(std::locale{ std::locale::classic(), output_facet });
+
+  ss << writing_date;
+
+  return ss.str();
 }
 
 }}

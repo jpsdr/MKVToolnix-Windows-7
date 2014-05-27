@@ -14,6 +14,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/date_time.h"
 #include "common/ebml.h"
 #include "common/hacks.h"
 #include "common/math.h"
@@ -694,7 +695,11 @@ cluster_helper_c::dump_split_points()
 }
 
 void
-cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags) {
+cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
+                                                   std::string const &writing_app,
+                                                   boost::posix_time::ptime const &writing_date) {
+  auto writing_date_str = !writing_date.is_not_a_date_time() ? mtx::date_time::to_string(writing_date, "%Y-%m-%d %H:%M:%S") : "1970-01-01 00:00:00";
+
   for (auto const &ptzr : g_packetizers) {
     auto track_uid    = ptzr.packetizer->get_uid();
     auto const &stats = m->track_statistics[track_uid];
@@ -714,6 +719,9 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags) {
     mtx::tags::set_simple(*tag, "DURATION",         format_timecode(duration ? *duration : 0));
     mtx::tags::set_simple(*tag, "NUMBER_OF_FRAMES", to_string(stats.get_num_frames()));
     mtx::tags::set_simple(*tag, "NUMBER_OF_BYTES",  to_string(stats.get_num_bytes()));
+
+    mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_APP",      writing_app);
+    mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_DATE_UTC", writing_date_str);
   }
 
   m->track_statistics.clear();

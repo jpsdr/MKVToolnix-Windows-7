@@ -1740,7 +1740,7 @@ set_track_statistics_tags(KaxTags *tags) {
   if (!tags)
     tags = new KaxTags;
 
-  g_cluster_helper->create_tags_for_track_statistics(*tags);
+  g_cluster_helper->create_tags_for_track_statistics(*tags, s_writing_app, s_writing_date);
 
   return tags;
 }

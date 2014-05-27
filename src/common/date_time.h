@@ -21,6 +21,13 @@
 namespace mtx { namespace date_time {
 
 int64_t to_time_t(boost::posix_time::ptime const &pt);
+std::string to_string(boost::posix_time::ptime const &pt, char const *format);
+
+inline std::string
+to_string(boost::posix_time::ptime const &pt,
+          std::string const &format) {
+  return to_string(pt, format.c_str());
+}
 
 }}
 
