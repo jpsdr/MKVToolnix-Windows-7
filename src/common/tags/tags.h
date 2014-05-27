@@ -112,9 +112,9 @@ remove_simple_tags_for(KaxTags &tags,
       continue;
     }
 
-    auto targets = FindChild<KaxTagTargets>(*tag);
+    auto targets   = FindChild<KaxTagTargets>(*tag);
     auto actual_id = targets ? FindChildValue<T>(*targets, 0llu) : 0;
-    if (!targets || (actual_id != id)) { // FindChildValue<T>(*targets, 0) != id)) {
+    if (!targets || (actual_id != id)) {
       ++tag_idx;
       continue;
     }
