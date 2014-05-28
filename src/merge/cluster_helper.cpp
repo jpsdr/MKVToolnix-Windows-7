@@ -722,6 +722,7 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
 
     mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_APP",      writing_app);
     mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_DATE_UTC", writing_date_str);
+    mtx::tags::set_simple(*tag, "_STATISTICS_TAGS",             "BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES");
   }
 
   m->track_statistics.clear();
