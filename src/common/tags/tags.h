@@ -94,6 +94,7 @@ find_tag_for(KaxTags &tags,
   tags.PushElement(*tag);
 
   auto &targets = GetChild<KaxTagTargets>(tag);
+  GetChild<KaxTagTargetTypeValue>(targets).SetValue(target_type);
   GetChild<T>(targets).SetValue(id);
 
   return tag;
