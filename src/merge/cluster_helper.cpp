@@ -711,9 +711,9 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
     mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, track_uid, "NUMBER_OF_FRAMES");
     mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, track_uid, "NUMBER_OF_BYTES");
 
-    auto tag = mtx::tags::find_tag_for<KaxTagTrackUID>(tags, track_uid, mtx::tags::Track, true);
+    auto tag = mtx::tags::find_tag_for<KaxTagTrackUID>(tags, track_uid, mtx::tags::Movie, true);
 
-    mtx::tags::set_target_type(*tag, mtx::tags::Track, "track");
+    mtx::tags::set_target_type(*tag, mtx::tags::Movie, "MOVIE");
 
     mtx::tags::set_simple(*tag, "BPS",              to_string(bps ? *bps : 0));
     mtx::tags::set_simple(*tag, "DURATION",         format_timecode(duration ? *duration : 0));
