@@ -19,6 +19,7 @@
 #include "common/chapters/chapters.h"
 #include "common/command_line.h"
 #include "common/mm_io.h"
+#include "common/mm_io_x.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
 #include "common/version.h"
@@ -37,6 +38,32 @@ enum operation_mode_e {
   MODE_CUESHEET,
   MODE_TIMECODES_V2,
 };
+
+kax_analyzer_cptr
+open_and_analyze(std::string const &file_name,
+                 kax_analyzer_c::parse_mode_e parse_mode,
+                 bool exit_on_error) {
+  // open input file
+  try {
+    auto analyzer = std::make_shared<kax_analyzer_c>(file_name);
+    auto ok       = analyzer->process(parse_mode, MODE_READ, exit_on_error);
+
+    return ok ? analyzer : kax_analyzer_cptr{};
+
+  } catch (mtx::mm_io::exception &ex) {
+    show_error(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file_name % ex);
+    return {};
+
+  } catch (mtx::kax_analyzer_x &ex) {
+    show_error(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file_name % ex);
+    return {};
+
+  } catch (...) {
+    show_error(Y("This file could not be opened or parsed.\n"));
+    return {};
+
+  }
+}
 
 void
 show_element(EbmlElement *l,

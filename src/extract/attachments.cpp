@@ -131,17 +131,7 @@ extract_attachments(const std::string &file_name,
   if (tracks.empty())
     mxerror(Y("Nothing to do.\n"));
 
-  kax_analyzer_cptr analyzer;
-
-  // open input file
-  try {
-    analyzer = kax_analyzer_cptr(new kax_analyzer_c(file_name));
-    if (!analyzer->process(parse_mode, MODE_READ, true))
-      throw false;
-  } catch (mtx::mm_io::exception &ex) {
-    show_error(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file_name % ex);
-    return;
-  }
+  auto analyzer = open_and_analyze(file_name, parse_mode);
 
   ebml_master_cptr attachments_m(analyzer->read_all(EBML_INFO(KaxAttachments)));
   KaxAttachments *attachments = dynamic_cast<KaxAttachments *>(attachments_m.get());

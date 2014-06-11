@@ -37,18 +37,7 @@ using namespace libmatroska;
 void
 extract_tags(const std::string &file_name,
              kax_analyzer_c::parse_mode_e parse_mode) {
-  kax_analyzer_cptr analyzer;
-
-  // open input file
-  try {
-    analyzer = kax_analyzer_cptr(new kax_analyzer_c(file_name));
-    if (!analyzer->process(parse_mode, MODE_READ, true))
-      throw false;
-  } catch (mtx::mm_io::exception &ex) {
-    show_error(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file_name % ex);
-    return;
-  }
-
+  auto analyzer      = open_and_analyze(file_name, parse_mode);
   ebml_master_cptr m = analyzer->read_all(EBML_INFO(KaxTags));
   if (!m)
     return;

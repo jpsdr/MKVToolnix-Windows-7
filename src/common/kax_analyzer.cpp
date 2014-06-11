@@ -205,15 +205,22 @@ bool
 kax_analyzer_c::process(kax_analyzer_c::parse_mode_e parse_mode,
                         const open_mode mode,
                         bool throw_on_error) {
-  bool parse_fully = parse_mode_full == parse_mode;
-
   try {
-    reopen_file(mode);
+    return process_internal(parse_mode, mode);
+
   } catch (...) {
     if (throw_on_error)
       throw;
     return false;
   }
+}
+
+bool
+kax_analyzer_c::process_internal(kax_analyzer_c::parse_mode_e parse_mode,
+                                 const open_mode mode) {
+  bool parse_fully = parse_mode_full == parse_mode;
+
+  reopen_file(mode);
 
   int64_t file_size = m_file->get_size();
   show_progress_start(file_size);

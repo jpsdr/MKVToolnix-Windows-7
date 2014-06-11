@@ -61,4 +61,6 @@ void extract_cuesheet(const std::string &file_name, kax_analyzer_c::parse_mode_e
 void write_cuesheet(std::string file_name, KaxChapters &chapters, KaxTags &tags, int64_t tuid, mm_io_c &out);
 void extract_timecodes(const std::string &file_name, std::vector<track_spec_t> &tspecs, int version);
 
+kax_analyzer_cptr open_and_analyze(std::string const &file_name, kax_analyzer_c::parse_mode_e parse_mode, bool exit_on_error = true);
+
 #endif // MTX_MKVEXTRACT_H

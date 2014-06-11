@@ -364,8 +364,8 @@ extract_tracks(const std::string &file_name,
   bool segment_info_found = false, tracks_found = false;
 
   // open input file
-  auto analyzer = std::make_shared<kax_analyzer_c>(static_cast<mm_file_io_c *>(in.get()));
-  if (analyzer->process(parse_mode, MODE_READ)) {
+  auto analyzer = open_and_analyze(file_name, parse_mode, false);
+  if (analyzer) {
     auto af_master    = ebml_master_cptr{ analyzer->read_all(EBML_INFO(KaxInfo)) };
     auto segment_info = dynamic_cast<KaxInfo *>(af_master.get());
     if (segment_info) {

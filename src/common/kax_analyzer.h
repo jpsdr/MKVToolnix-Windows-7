@@ -181,6 +181,9 @@ protected:
   virtual void read_all_meta_seeks();
   virtual void read_meta_seek(uint64_t pos, std::map<int64_t, bool> &positions_found);
   virtual void fix_element_sizes(uint64_t file_size);
+
+protected:
+  virtual bool process_internal(parse_mode_e parse_mode, const open_mode mode);
 };
 typedef std::shared_ptr<kax_analyzer_c> kax_analyzer_cptr;
 
