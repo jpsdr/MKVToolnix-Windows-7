@@ -247,7 +247,7 @@ bool
 ssa_parser_c::probe(mm_text_io_c *io) {
   boost::regex script_info_re("^\\s*\\[script\\s+info\\]",   boost::regex::perl | boost::regex::icase);
   boost::regex styles_re(     "^\\s*\\[V4\\+?\\s+Styles\\]", boost::regex::perl | boost::regex::icase);
-  boost::regex comment_re(    "^\\s*$|^\\s*;",               boost::regex::perl | boost::regex::icase);
+  boost::regex comment_re(    "^\\s*$|^\\s*[!;]",            boost::regex::perl | boost::regex::icase);
 
   try {
     int line_number = 0;
