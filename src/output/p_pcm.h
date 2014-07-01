@@ -29,11 +29,12 @@ public:
   };
 
 private:
-  int m_samples_per_sec, m_channels, m_bits_per_sample, m_samples_per_packet;
-  size_t m_packet_size, m_min_packet_size, m_samples_output;
+  int m_samples_per_sec, m_channels, m_bits_per_sample, m_samples_per_packet, m_previous_timecode;
+  size_t m_packet_size, m_min_packet_size, m_samples_output, m_num_durations_provided;
   pcm_format_e m_format;
   byte_buffer_c m_buffer;
   samples_to_timecode_converter_c m_s2tc;
+  std::unordered_map<int64_t, int64_t> m_duration_frequency;
 
 public:
   pcm_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int p_samples_per_sec, int channels, int bits_per_sample, pcm_format_e format = little_endian_integer);

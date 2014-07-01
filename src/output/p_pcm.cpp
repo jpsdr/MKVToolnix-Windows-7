@@ -16,6 +16,7 @@
 
 #include "common/codec.h"
 #include "merge/connection_checks.h"
+#include "merge/output_control.h"
 #include "output/p_pcm.h"
 
 using namespace libmatroska;
@@ -30,9 +31,11 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
   , m_bits_per_sample(bits_per_sample)
+  , m_previous_timecode{-1}
   , m_packet_size(0)
   , m_min_packet_size{static_cast<size_t>(samples_per_sec * channels * bits_per_sample * 4 / 1000 / 8)} // Minimum: 4ms of samples if we should pass it through unmodified
   , m_samples_output(0)
+  , m_num_durations_provided{}
   , m_format{format}
   , m_s2tc(1000000000ll, m_samples_per_sec)
 {
@@ -88,6 +91,28 @@ pcm_packetizer_c::process(packet_cptr packet) {
 
 int
 pcm_packetizer_c::process_packaged(packet_cptr packet) {
+  ++m_num_durations_provided;
+
+  if (16 > m_num_durations_provided) {
+    auto num_bytes_per_sample = (m_channels * m_bits_per_sample) / 8;
+    ++m_duration_frequency[ (packet->data->get_size() / num_bytes_per_sample) * m_s2tc ];
+
+  } else if (16 == m_num_durations_provided) {
+    auto most_common = boost::accumulate(m_duration_frequency, m_duration_frequency.begin()->first,
+                                         [&](int64_t accu, std::pair<int64_t,int64_t> const &elt) {
+                                           return m_duration_frequency[accu] > elt.second ? accu : elt.first;
+                                         });
+
+    m_samples_per_packet = most_common / m_s2tc;
+    m_packet_size        = m_samples_per_packet * m_channels * m_bits_per_sample;
+    m_packet_size       /= 8;
+
+    set_track_default_duration(most_common);
+    rerender_track_headers();
+  }
+
+  m_previous_timecode = packet->timecode;
+
   int64_t samples_here = m_buffer.get_size() * 8 / m_channels / m_bits_per_sample;
   m_samples_output     = packet->timecode / m_s2tc + samples_here;
 
