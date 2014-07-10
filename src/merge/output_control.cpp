@@ -1734,7 +1734,7 @@ render_chapters() {
 
 static KaxTags *
 set_track_statistics_tags(KaxTags *tags) {
-  if (g_no_track_statistics_tags)
+  if (g_no_track_statistics_tags || outputting_webm())
     return tags;
 
   if (!tags)
