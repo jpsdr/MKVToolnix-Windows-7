@@ -26,18 +26,24 @@ pgssup_reader_c::probe_file(mm_io_c *in,
   if (5 > size)
     return 0;
 
-  in->setFilePointer(0);
-  if (PGSSUP_FILE_MAGIC != in->read_uint16_be())
-    return 0;
+  try {
+    in->setFilePointer(0);
+    if (PGSSUP_FILE_MAGIC != in->read_uint16_be())
+      return 0;
 
-  in->skip(4 + 4 + 1);
-  uint16_t segment_size = in->read_uint16_be();
-  if ((in->getFilePointer() + segment_size + 2) >= size)
-    return 0;
+    in->skip(4 + 4 + 1);
+    uint16_t segment_size = in->read_uint16_be();
+    if ((in->getFilePointer() + segment_size + 2) >= size)
+      return 0;
 
-  in->setFilePointer(segment_size, seek_current);
+    in->setFilePointer(segment_size, seek_current);
 
-  return PGSSUP_FILE_MAGIC != in->read_uint16_be() ? 0 : 1;
+    return PGSSUP_FILE_MAGIC != in->read_uint16_be() ? 0 : 1;
+
+  } catch (mtx::mm_io::exception &) {
+  }
+
+  return 0;
 }
 
 pgssup_reader_c::pgssup_reader_c(const track_info_c &ti,
