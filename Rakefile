@@ -779,71 +779,69 @@ end
 #
 # Applications in src/tools
 #
-if $build_tools
-  namespace :apps do
-    task :tools => $tools.collect { |name| "apps:tools:#{name}" }
-  end
-
-  #
-  # tools: ac3parser
-  #
-  Application.new("src/tools/ac3parser").
-    description("Build the ac3parser executable").
-    aliases("tools:ac3parser").
-    sources("src/tools/ac3parser.cpp").
-    libraries($common_libs).
-    create
-
-  #
-  # tools: base64tool
-  #
-  Application.new("src/tools/base64tool").
-    description("Build the base64tool executable").
-    aliases("tools:base64tool").
-    sources("src/tools/base64tool.cpp").
-    libraries($common_libs).
-    create
-
-  #
-  # tools: diracparser
-  #
-  Application.new("src/tools/diracparser").
-    description("Build the diracparser executable").
-    aliases("tools:diracparser").
-    sources("src/tools/diracparser.cpp").
-    libraries($common_libs).
-    create
-
-  #
-  # tools: ebml_validator
-  #
-  Application.new("src/tools/ebml_validator").
-    description("Build the ebml_validator executable").
-    aliases("tools:ebml_validator").
-    sources("src/tools/ebml_validator.cpp", "src/tools/element_info.cpp").
-    libraries($common_libs).
-    create
-
-  #
-  # tools: mpls_dump
-  #
-  Application.new("src/tools/mpls_dump").
-    description("Build the mpls_dump executable").
-    aliases("tools:mpls_dump").
-    sources("src/tools/mpls_dump.cpp").
-    libraries($common_libs).
-    create
-
-  #
-  # tools: vc1parser
-  #
-  Application.new("src/tools/vc1parser").
-    description("Build the vc1parser executable").
-    aliases("tools:vc1parser").
-    sources("src/tools/vc1parser.cpp").
-    libraries($common_libs).
-    create
+namespace :apps do
+  task :tools => $tools.collect { |name| "apps:tools:#{name}" }
 end
+
+#
+# tools: ac3parser
+#
+Application.new("src/tools/ac3parser").
+  description("Build the ac3parser executable").
+  aliases("tools:ac3parser").
+  sources("src/tools/ac3parser.cpp").
+  libraries($common_libs).
+  create
+
+#
+# tools: base64tool
+#
+Application.new("src/tools/base64tool").
+  description("Build the base64tool executable").
+  aliases("tools:base64tool").
+  sources("src/tools/base64tool.cpp").
+  libraries($common_libs).
+  create
+
+#
+# tools: diracparser
+#
+Application.new("src/tools/diracparser").
+  description("Build the diracparser executable").
+  aliases("tools:diracparser").
+  sources("src/tools/diracparser.cpp").
+  libraries($common_libs).
+  create
+
+#
+# tools: ebml_validator
+#
+Application.new("src/tools/ebml_validator").
+  description("Build the ebml_validator executable").
+  aliases("tools:ebml_validator").
+  sources("src/tools/ebml_validator.cpp", "src/tools/element_info.cpp").
+  libraries($common_libs).
+  create
+
+#
+# tools: mpls_dump
+#
+Application.new("src/tools/mpls_dump").
+  description("Build the mpls_dump executable").
+  aliases("tools:mpls_dump").
+  sources("src/tools/mpls_dump.cpp").
+  libraries($common_libs).
+  create
+
+#
+# tools: vc1parser
+#
+Application.new("src/tools/vc1parser").
+  description("Build the vc1parser executable").
+  aliases("tools:vc1parser").
+  sources("src/tools/vc1parser.cpp").
+  libraries($common_libs).
+  create
 
 $build_system_modules.values.each { |bsm| bsm[:define_tasks].call if bsm[:define_tasks] }
 
