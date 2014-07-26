@@ -166,6 +166,8 @@ set_process_priority(int priority) {
 void
 mtx_common_init(std::string const &program_name,
                 char const *argv0) {
+  g_cc_local_utf8 = charset_converter_c::init("");
+
   init_common_output(true);
 
   s_program_name = program_name;
@@ -184,7 +186,6 @@ mtx_common_init(std::string const &program_name,
   init_locales();
 
   mm_file_io_c::setup();
-  g_cc_local_utf8 = charset_converter_c::init("");
   init_common_output(false);
 
   stereo_mode_c::init();
