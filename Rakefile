@@ -157,6 +157,11 @@ task :apps => $applications
 desc "Build all command line applications"
 namespace :apps do
   task :cli => %w{apps:mkvmerge apps:mkvinfo apps:mkvextract apps:mkvpropedit}
+
+  desc "Strip all apps"
+  task :strip => $applications do
+    runq "   STRIP", "#{c(:STRIP)} #{$applications.join(' ')}"
+  end
 end
 
 # Store compiler block for re-use
