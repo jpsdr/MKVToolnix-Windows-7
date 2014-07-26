@@ -262,16 +262,15 @@ init_locales(std::string locale) {
     set_environment_variable("LC_MESSAGES", locale);
 
     translation_c::set_active_translation(locale);
-
-    // Boost's path class uses wide chars on Windows for path
-    // names. Tell that all narrow strings are encoded in UTF-8.
-    std::locale utf8_locale(std::locale(), new mtx::utf8_codecvt_facet);
-    std::locale::global(utf8_locale);
-    boost::filesystem::path::imbue(utf8_locale);
   }
 
-  locale_dir = (mtx::get_installation_path() / "locale").string();
+  // Boost's path class uses wide chars on Windows for path
+  // names. Tell that all narrow strings are encoded in UTF-8.
+  std::locale utf8_locale(std::locale(), new mtx::utf8_codecvt_facet);
+  std::locale::global(utf8_locale);
+  boost::filesystem::path::imbue(utf8_locale);
 
+  locale_dir = (mtx::get_installation_path() / "locale").string();
 # else  // SYS_WINDOWS
   std::string chosen_locale;
 
