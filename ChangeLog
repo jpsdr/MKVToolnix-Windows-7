@@ -1,3 +1,10 @@
+2014-07-26  Moritz Bunkus  <moritz@bunkus.org>
+
+        * all: bug fix: if MKVToolNix on Windows is residing in a
+        directory containing non-ASCII characters then translations
+        weren't found. This has only been fixed for cases where those
+        non-ASCII characters are part of the system's active code page.
+
 2014-07-10  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: track statistics tags are not written for
