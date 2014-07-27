@@ -61,7 +61,7 @@ mm_multi_file_io_c::setFilePointer(int64 offset,
                                    seek_mode mode) {
   int64_t new_pos
     = seek_beginning == mode ? offset
-    : seek_end       == mode ? m_total_size  - offset
+    : seek_end       == mode ? m_total_size  + offset // offsets from the end are negative already
     :                          m_current_pos + offset;
 
   if ((0 > new_pos) || (static_cast<int64_t>(m_total_size) < new_pos))

@@ -87,12 +87,7 @@ mm_file_io_c::setFilePointer(int64 offset,
   if (fseeko((FILE *)m_file, offset, whence) != 0)
     throw mtx::mm_io::seek_x{mtx::mm_io::make_error_code()};
 
-  if (mode == seek_beginning)
-    m_current_position = offset;
-  else if (mode == seek_end)
-    m_current_position = ftello((FILE *)m_file);
-  else
-    m_current_position += offset;
+  m_current_position = ftello((FILE *)m_file);
 }
 
 size_t
@@ -765,7 +760,7 @@ mm_mem_io_c::setFilePointer(int64 offset,
 
   int64_t new_pos
     = seek_beginning == mode ? offset
-    : seek_end       == mode ? m_mem_size - offset
+    : seek_end       == mode ? m_mem_size + offset // offsets from the end are negative already
     :                          m_pos      + offset;
 
   if ((0 <= new_pos) && (static_cast<int64_t>(m_mem_size) >= new_pos))

@@ -70,7 +70,7 @@ mm_read_buffer_io_c::setFilePointer(int64 offset,
       break;
 
     case seek_end:
-      new_pos = -1;
+      new_pos = static_cast<int64_t>(get_size()) + offset; // offsets from the end are negative already
       break;
 
     default:
@@ -87,10 +87,7 @@ mm_read_buffer_io_c::setFilePointer(int64 offset,
   int64_t previous_pos = m_proxy_io->getFilePointer();
 
   // Actual seeking
-  if (new_pos < 0)
-    m_proxy_io->setFilePointer(offset, seek_end);
-  else
-    m_proxy_io->setFilePointer(std::min(new_pos, get_size()), seek_beginning);
+  m_proxy_io->setFilePointer(std::min(new_pos, get_size()), seek_beginning);
 
   // Get the actual offset from the underlying stream
   // Better be safe than sorry and use this instead of just taking
