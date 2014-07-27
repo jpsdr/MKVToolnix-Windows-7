@@ -397,7 +397,7 @@ tab_chapters::set_flag_enabled_default_texts(wxTreeItemId id) {
 
 void
 tab_chapters::enable_inputs(bool enable,
-                            bool is_edition) {
+                            node_type_e node_type) {
   tc_chapter_name->Enable(enable);
   tc_start_time->Enable(enable);
   tc_end_time->Enable(enable);
@@ -406,13 +406,13 @@ tab_chapters::enable_inputs(bool enable,
   lb_chapter_names->Enable(enable);
   b_add_chapter_name->Enable(enable);
   b_remove_chapter_name->Enable(enable);
-  cb_flag_hidden->Enable(enable || is_edition);
-  cb_flag_enabled_default->Enable(enable || is_edition);
-  cb_flag_ordered->Enable(is_edition);
+  cb_flag_hidden->Enable(enable || (nt_edition == node_type));
+  cb_flag_enabled_default->Enable(enable || (nt_edition == node_type));
+  cb_flag_ordered->Enable((nt_edition == node_type));
   st_start->Enable(enable);
   st_end->Enable(enable);
-  st_uid->Enable(enable || is_edition);
-  tc_uid->Enable(enable || is_edition);
+  st_uid->Enable(enable || (nt_edition == node_type));
+  tc_uid->Enable(enable || (nt_edition == node_type));
   st_segment_uid->Enable(enable);
   tc_segment_uid->Enable(enable);
   st_segment_edition_uid->Enable(enable);
@@ -421,7 +421,7 @@ tab_chapters::enable_inputs(bool enable,
   st_language->Enable(enable);
   st_country->Enable(enable);
   sb_names->Enable(enable);
-  st_flags->Enable(enable || is_edition);
+  st_flags->Enable(enable || (nt_edition == node_type));
   inputs_enabled = enable;
 }
 
@@ -986,12 +986,14 @@ tab_chapters::on_remove_chapter(wxCommandEvent &) {
 void
 tab_chapters::root_or_edition_selected(wxTreeEvent &evt) {
   auto t = static_cast<chapter_node_data_c *>(tc_chapters->GetItemData(evt.GetItem()));
-  if (!t)
+  if (!t) {
+    enable_inputs(false, nt_root);
     return;
+  }
 
   bool is_edition = (evt.GetItem() != tid_root) && !t->is_atom;
 
-  enable_inputs(false, is_edition);
+  enable_inputs(false, is_edition ? nt_edition : nt_root);
   no_update = true;
 
   tc_chapter_name->SetValue(wxEmptyString);

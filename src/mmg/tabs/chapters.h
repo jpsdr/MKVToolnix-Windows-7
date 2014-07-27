@@ -116,6 +116,12 @@ public:
   ebml_dumper_c m_dumper;
   debugging_option_c m_debug_dnd;
 
+  enum node_type_e {
+    nt_root,
+    nt_edition,
+    nt_atom,
+  };
+
 public:
   tab_chapters(wxWindow *parent, wxMenu *chapters_menu);
   ~tab_chapters();
@@ -157,7 +163,7 @@ public:
   wxTreeItemId add_element_recursively(wxTreeItemId &parent, EbmlElement &element, size_t insert_before);
   wxString create_chapter_label(KaxChapterAtom &chapter);
   void fix_missing_languages(EbmlMaster &master);
-  void enable_inputs(bool enable, bool is_edition = false);
+  void enable_inputs(bool enable, node_type_e node_type = nt_atom);
   void enable_buttons(bool enable);
   bool select_file_name();
   bool load(wxString name);
