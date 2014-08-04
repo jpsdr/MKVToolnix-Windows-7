@@ -3,7 +3,7 @@ Section: video
 Priority: optional
 Maintainer: Moritz Bunkus <moritz@bunkus.org>
 Homepage: http://www.bunkus.org/videotools/mkvtoolnix/
-Standards-Version: 3.9.2
+Standards-Version: 3.9.5
 Build-Depends: debhelper (>= 7.0.50~), libwxgtk2.8-dev,
  ruby (>= 1.9) | ruby1.9 | ruby1.9.1 | ruby1.9.3,
  libbz2-dev, liblzo2-dev, zlib1g-dev, libmagic-dev,
@@ -13,7 +13,8 @@ Build-Depends: debhelper (>= 7.0.50~), libwxgtk2.8-dev,
  libboost-filesystem-dev (>= 1.46) | libboost-filesystem1.48-dev,
  libboost-regex-dev (>= 1.46) | libboost-regex1.48-dev,
  libboost-date-time-dev (>= 1.46) | libboost-date-time1.48-dev,
- libboost-system-dev (>= 1.46) | libboost-system1.48-dev
+ libboost-system-dev (>= 1.46) | libboost-system1.48-dev,
+ pkg-config
 
 Package: mkvtoolnix
 Architecture: any
@@ -33,7 +34,8 @@ Description: Set of command-line tools to work with Matroska files
 
 Package: mkvtoolnix-gui
 Architecture: any
-Depends: mkvtoolnix, ${shlibs:Depends}, ${misc:Depends}
+Depends: mkvtoolnix (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Replaces: mkvtoolnix (<= 4.6.0-1)
 Description: Set of tools to work with Matroska files - GUI frontend
  Matroska is a new multimedia container format, based on EBML (Extensible
  Binary Meta Language), which is a kind of binary XML.

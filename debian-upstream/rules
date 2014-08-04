@@ -2,50 +2,38 @@
 
 LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 
-NCPUS := $(shell getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)
-
-ifeq ($(NCPUS),-1)
-	NCPUS:=1
-endif
-
-ifeq ($(NCPUS),0)
-	NCPUS:=1
-endif
-
 %:
 	dh $@
 
 override_dh_auto_configure:
-ifneq "$(wildcard /usr/share/misc/config.sub)" ""
-	cp -f /usr/share/misc/config.sub config.sub
-endif
-ifneq "$(wildcard /usr/share/misc/config.guess)" ""
-	cp -f /usr/share/misc/config.guess config.guess
-endif
-	dh_auto_configure -- --enable-gui --docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+	dh_auto_configure -- \
+	--enable-gui
 
-	./drake -j $(NCPUS) apps:mkvinfo apps:mmg
+#	exit 1
+
+	./drake
 
 	mv src/mkvinfo src/mkvinfo-gui
 	mv src/mmg/mmg src/mmg/mmg-gui
 
-	./drake clean
+	./drake clean:dist
 
-	dh_auto_configure -- --disable-gui
+	dh_auto_configure -- \
+	--disable-gui
 
-	./drake -j $(NCPUS) default 'translations:guides'
+	./drake default 'translations:guides'
 
 override_dh_clean:
-	dh_clean src/mkvinfo-gui src/mmg/mmg-gui config.status config.log
-	[ ! -f build-config ] || ./drake clean
+	[ ! -f build-config ] || ./drake clean:dist
 
-override_dh_auto_build:
-
+	dh_clean src/mkvinfo-gui src/mmg/mmg-gui config.status config.log \
+	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
 
 override_dh_install:
-	./drake install DESTDIR=$(CURDIR)/debian/tmp
-	./drake 'install:translations:guides' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
-	dh_install --fail-missing
+	./drake install 'install:translations:guides' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+	./drake install 'install:shared' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+
+	dh_install --fail-missing -Xmkvtoolnix.xml
 
 	mv debian/mkvtoolnix/usr/bin/mkvinfo debian/mkvtoolnix/usr/bin/mkvinfo-text
 	mv debian/mkvtoolnix-gui/usr/bin/mmg-gui debian/mkvtoolnix-gui/usr/bin/mmg
@@ -53,8 +41,7 @@ override_dh_install:
 	dh_link -pmkvtoolnix usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-text.1.gz
 	dh_link -pmkvtoolnix-gui usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-gui.1.gz
 
-override_dh_installchangelogs:
-	dh_installchangelogs ChangeLog
-
 override_dh_builddeb:
 	dh_builddeb -- -Zbzip2
+
+override_dh_auto_build:
