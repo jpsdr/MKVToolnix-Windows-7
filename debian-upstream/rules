@@ -42,6 +42,6 @@ override_dh_install:
 	dh_link -pmkvtoolnix-gui usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-gui.1.gz
 
 override_dh_builddeb:
-	dh_builddeb -- -Zbzip2
+	dh_builddeb -- -Zxz -z9
 
 override_dh_auto_build:
