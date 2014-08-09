@@ -973,8 +973,11 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
 
     auto ktuid = FindChild<KaxTrackUID>(ktentry);
     if (!ktuid)
-      mxerror(Y("matroska_reader: A track is missing its track UID.\n"));
-    track->track_uid = ktuid->GetValue();
+      mxwarn_fn(m_ti.m_fname,
+                boost::format(Y("Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"))
+                % track->tnum);
+    else
+      track->track_uid = ktuid->GetValue();
 
     auto kttype = FindChild<KaxTrackType>(ktentry);
     if (!kttype)
@@ -2210,7 +2213,8 @@ kax_reader_c::identify() {
     verbose_info.clear();
 
     verbose_info.push_back((boost::format("number:%1%") % track->track_number).str());
-    verbose_info.push_back((boost::format("uid:%1%") % track->track_uid).str());
+    if (track->track_uid)
+      verbose_info.push_back((boost::format("uid:%1%") % track->track_uid).str());
     verbose_info.push_back((boost::format("codec_id:%1%") % escape(track->codec_id)).str());
     verbose_info.push_back((boost::format("codec_private_length:%1%") % track->private_size).str());
 
