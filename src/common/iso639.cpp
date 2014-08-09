@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include <boost/version.hpp>
 #include <unordered_map>
 
 #include "common/iso639.h"
@@ -592,20 +593,36 @@ map_to_iso639_2_code(std::string const &s,
   auto range = iso639_languages | badap::indexed(0);
   auto end   = boost::end(range);
   for (auto lang = boost::begin(range); lang != end; lang++) {
-    auto names = split(lang->english_name, ";");
+#if BOOST_VERSION < 105600
+    auto const &english_name = lang->english_name;
+    auto index               = lang.index();
+#else
+    auto const &english_name = lang->value().english_name;
+    auto index               = lang->index();
+#endif
+
+    auto names = split(english_name, ";");
     strip(names);
     if (brng::find(names, source) != names.end())
-      return lang.index();
+      return index;
   }
 
   if (!allow_short_english_name)
     return -1;
 
   for (auto lang = boost::begin(range); lang != end; lang++) {
-    auto names = split(lang->english_name, ";");
+#if BOOST_VERSION < 105600
+    auto const &english_name = lang->english_name;
+    auto index               = lang.index();
+#else
+    auto const &english_name = lang->value().english_name;
+    auto index               = lang->index();
+#endif
+
+    auto names = split(english_name, ";");
     strip(names);
     if (names.end() != brng::find_if(names, [&](std::string const &name) { return balg::istarts_with(name, source); }))
-      return lang.index();
+      return index;
   }
 
   return -1;
