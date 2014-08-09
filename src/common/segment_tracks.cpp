@@ -22,6 +22,7 @@
 
 #include "common/ebml.h"
 #include "common/segment_tracks.h"
+#include "common/unique_numbers.h"
 
 using namespace libmatroska;
 
@@ -74,8 +75,13 @@ fix_mandatory_track_entry_elements(KaxTrackEntry *track_entry) {
   // Deprecated element that must not be rendered anymore
   DeleteChildren<KaxTrackTimecodeScale>(track_entry);
 
+  // There are rare files which don't contain a TrackUID element (see
+  // ticket #1050). This is a serious spec violation. In such a case
+  // we cannot make it any worse by providing a new, random track UID.
+  if (!FindChild<KaxTrackUID>(track_entry))
+    GetChild<KaxTrackUID>(track_entry).SetValue(create_unique_number(UNIQUE_TRACK_IDS));
+
   GetChild<KaxTrackNumber>(track_entry);
-  GetChild<KaxTrackUID>(track_entry);
   GetChild<KaxTrackType>(track_entry);
   GetChild<KaxTrackFlagEnabled>(track_entry);
   GetChild<KaxTrackFlagDefault>(track_entry);
