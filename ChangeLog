@@ -1,3 +1,18 @@
+2014-08-09  Moritz Bunkus  <moritz@bunkus.org>
+
+        * source: Fixed compilation with Boost 1.56.0 which changed the
+        »indexed« range adaptor in an incompatible way.
+
+        * mkvpropedit, mmg's header editor: bug fix: when editing files
+        with missing track UID elements such an element will be generated
+        automatically instead of crashing and leaving the file in an
+        unplayable state. Part of a fix for #1050.
+
+        * mkvmerge: bug fix: Reading Matroska files with missing track UID
+        elements will no longer cause mkvmerge to abort with an error. A
+        warning is printed and a new unique track ID generated
+        instead. Part of a fix for #1050.
+
 2014-07-27  Moritz Bunkus  <moritz@bunkus.org>
 
         * Released v7.1.0.
