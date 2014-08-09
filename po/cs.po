@@ -25,7 +25,7 @@ msgstr ""
 "\n"
 "Dočasný soubor TTA pro stopu ID %1% je kopírován do konečného souboru TTA. To může chvíli trvat.\n"
 
-#: src/merge/output_control.cpp:272
+#: src/merge/output_control.cpp:277
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
@@ -782,16 +782,16 @@ msgstr " Další volby:\n"
 msgid " Segment info handling:\n"
 msgstr " Obsluha informace o úseku:\n"
 
-#: src/extract/mkvextract.cpp:58
+#: src/extract/mkvextract.cpp:85
 #: src/info/mkvinfo.cpp:221
 #, boost-format
 msgid " at %1%"
 msgstr " v %1%"
 
-#: src/merge/output_control.cpp:280
-#: src/merge/output_control.cpp:289
-#: src/merge/output_control.cpp:297
-#: src/merge/output_control.cpp:304
+#: src/merge/output_control.cpp:285
+#: src/merge/output_control.cpp:294
+#: src/merge/output_control.cpp:302
+#: src/merge/output_control.cpp:309
 msgid " done\n"
 msgstr " hotovo\n"
 
@@ -935,7 +935,7 @@ msgstr "%s (MIME typ %s, velikost %ld) z %s (%s)"
 msgid "%s%s (ID %lld, type: %s) from %s"
 msgstr "%s%s (ID %lld, typ: %s) z %s"
 
-#: src/info/wxwidgets_ui.cpp:337
+#: src/info/wxwidgets_ui.cpp:339
 #, c-format, boost-format
 msgid ""
 "%s.\n"
@@ -1389,7 +1389,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Zpracovat také následující soubory: %2%\n"
 
-#: src/input/r_matroska.cpp:1539
+#: src/input/r_matroska.cpp:1542
 #, boost-format
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr ""
@@ -1640,10 +1640,10 @@ msgstr "(nepojmenovaná kapitola)"
 
 #: src/mmg/tabs/chapters.cpp:886
 #: src/mmg/tabs/chapters.cpp:935
-#: src/mmg/tabs/chapters.cpp:1050
-#: src/mmg/tabs/chapters.cpp:1433
-#: src/mmg/tabs/chapters.cpp:1440
-#: src/mmg/tabs/chapters.cpp:1765
+#: src/mmg/tabs/chapters.cpp:1052
+#: src/mmg/tabs/chapters.cpp:1435
+#: src/mmg/tabs/chapters.cpp:1442
+#: src/mmg/tabs/chapters.cpp:1767
 msgid "(unnamed)"
 msgstr "(bez názvu)"
 
@@ -1781,13 +1781,13 @@ msgstr ""
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> postrádá podřízený prvek <Simple>."
 
-#: src/input/r_matroska.cpp:2030
+#: src/input/r_matroska.cpp:2033
 #, boost-format
 msgid "A block group was found at position %1%, but no block element was found inside it. This might make mkvmerge crash.\n"
 msgstr "Na pozici %1% byla nalezena skupina bloků, ale uvnitř ní nebyl nalezen žádný prvek bloku. To může způsobit pád mkvmerge.\n"
 
-#: src/input/r_matroska.cpp:1936
-#: src/input/r_matroska.cpp:2040
+#: src/input/r_matroska.cpp:1939
+#: src/input/r_matroska.cpp:2043
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "Na časové značce %2% byl nalezen blok pro stopu číslo %1%. Nebyly však nalezeny žádné hlavičky pro toto číslo stopy. Blok bude přeskočen.\n"
@@ -1972,7 +1972,7 @@ msgid "Aborted processing on %s"
 msgstr "Zpracovávání přerušeno v %s"
 
 #: src/info/qt_ui.cpp:125
-#: src/info/wxwidgets_ui.cpp:343
+#: src/info/wxwidgets_ui.cpp:345
 msgid "About mkvinfo"
 msgstr "O aplikaci mkvinfo"
 
@@ -2057,7 +2057,7 @@ msgstr "Přidá vlastnost s hodnotou, dokonce i když taková vlastnost již exi
 msgid "Adds the current settings as a new job entry to the job queue"
 msgstr "Přidá současná nastavení jako novou položku do fronty úloh"
 
-#: src/mmg/tabs/chapters.cpp:1238
+#: src/mmg/tabs/chapters.cpp:1240
 msgid "Adjust chapter timecodes"
 msgstr "Upravit časové kódy kapitoly"
 
@@ -2165,7 +2165,7 @@ msgstr ""
 "znakem odpovídající předchozímu úseku."
 
 #: src/mmg/header_editor/frame.cpp:679
-#: src/mmg/tabs/chapters.cpp:1858
+#: src/mmg/tabs/chapters.cpp:1860
 #: src/propedit/propedit.cpp:44
 msgid "An unknown error occured. The file has been modified."
 msgstr "Došlo k neznámé chybě. Soubor byl změněn."
@@ -2196,7 +2196,7 @@ msgstr "Stále probíhá jiná úloha zpracování. Čekejte, dokud nebude dokon
 msgid "Appending a track from a file to another track from the same file is not allowed. This is the case for tracks number %u and %u."
 msgstr "Připojení stopy ze souboru k jiné stopě z toho samého souboru není povoleno. Toto je případ stop číslo %u a %u."
 
-#: src/merge/output_control.cpp:2021
+#: src/merge/output_control.cpp:2029
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "Připojení stopy %1% ze souboru č. %2% ('%3%') ke stopě %4% ze souboru č. %5% ('%6%').\n"
@@ -2506,11 +2506,11 @@ msgstr "UID edice překladu kapitoly: %1%"
 msgid "Chapter Translate ID: %1%"
 msgstr "ID překladu kapitoly: %1%"
 
-#: src/mmg/tabs/chapters.cpp:1658
+#: src/mmg/tabs/chapters.cpp:1660
 msgid "Chapter atoms may only be dropped onto other atoms and chapter editions."
 msgstr ""
 
-#: src/mmg/tabs/chapters.cpp:1651
+#: src/mmg/tabs/chapters.cpp:1653
 msgid "Chapter editions may only be dropped onto the root node or other editions."
 msgstr ""
 
@@ -2583,7 +2583,7 @@ msgstr "Kapitoly"
 msgid "Chapters (%d entries) from %s"
 msgstr "Kapitoly (%d položek) z %s"
 
-#: src/merge/output_control.cpp:1586
+#: src/merge/output_control.cpp:1596
 msgid "Chapters are not allowed in WebM compliant files. No chapters will be written into any output file.\n"
 msgstr "Kapitoly nejsou povoleny v kompatibilních souborech WebM. Žádné kapitoly nebudou zapsány do jakéhokoliv výstupního souboru.\n"
 
@@ -2592,7 +2592,7 @@ msgid "Chapters loaded."
 msgstr "Kapitoly načteny."
 
 #: src/mmg/tabs/chapters.cpp:758
-#: src/mmg/tabs/chapters.cpp:1835
+#: src/mmg/tabs/chapters.cpp:1837
 msgid "Chapters written."
 msgstr "Kapitoly zapsány."
 
@@ -2908,7 +2908,7 @@ msgstr "Nelze extrahovat hlavičku pořadí z této stopy MPEG-1/2.\n"
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "Nelze nalézt index pro stopu audia %1% (chybová zpráva avilib: %2%). Přeskočení stopy.\n"
 
-#: src/merge/output_control.cpp:1943
+#: src/merge/output_control.cpp:1951
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "Nelze nalézt gptzr při připojování. %1%\n"
@@ -2922,7 +2922,7 @@ msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. 
 msgstr "Nelze nalézt další stránku Ogg. To naznačuje poškozený soubor Ogg nebo Ogm. Pokus o pokračování.\n"
 
 #: src/input/r_avi.cpp:602
-#: src/input/r_matroska.cpp:1483
+#: src/input/r_matroska.cpp:1486
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "Nelze nalézt platné hlavičky DTS hlavičky v prvním snímcích této stopy.\n"
 
@@ -3401,7 +3401,7 @@ msgstr "Verze EBML pro čtení: %1%"
 msgid "EBML version: %1%"
 msgstr "Verze EBML: %1%"
 
-#: src/merge/output_control.cpp:1423
+#: src/merge/output_control.cpp:1433
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "HROZNÁ vnitřní chyba! (neznámý typ souboru). %1%\n"
@@ -3550,9 +3550,9 @@ msgstr "Chyba ukládání informace"
 
 #: src/mmg/header_editor/frame.cpp:663
 #: src/mmg/header_editor/frame.cpp:669
-#: src/mmg/tabs/chapters.cpp:1829
-#: src/mmg/tabs/chapters.cpp:1841
-#: src/mmg/tabs/chapters.cpp:1847
+#: src/mmg/tabs/chapters.cpp:1831
+#: src/mmg/tabs/chapters.cpp:1843
+#: src/mmg/tabs/chapters.cpp:1849
 msgid "Error writing Matroska file"
 msgstr "Chyba zapisování souboru Matroska"
 
@@ -3800,7 +3800,7 @@ msgid "File removal not possible"
 msgstr "Odebrání souboru není možné"
 
 #: src/mmg/header_editor/frame.cpp:675
-#: src/mmg/tabs/chapters.cpp:1854
+#: src/mmg/tabs/chapters.cpp:1856
 msgid "File structure warning"
 msgstr "Upozornění na strukturu souboru"
 
@@ -3812,7 +3812,7 @@ msgstr "Propojování souborů nebo úseků"
 msgid "File/segment title:"
 msgstr "Název souboru nebo úseku:"
 
-#: src/merge/output_control.cpp:1096
+#: src/merge/output_control.cpp:1106
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Soubory nemůžou být připojeny k sobě samým. Parametr pro '--append-to' byl neplatný.\n"
 
@@ -4192,12 +4192,12 @@ msgstr "Zvýšit úroveň podrobnosti."
 msgid "Input"
 msgstr "Vstup"
 
-#: src/mmg/tabs/chapters.cpp:1262
-#: src/mmg/tabs/chapters.cpp:1316
-#: src/mmg/tabs/chapters.cpp:1322
-#: src/mmg/tabs/chapters.cpp:1334
-#: src/mmg/tabs/chapters.cpp:1353
-#: src/mmg/tabs/chapters.cpp:1361
+#: src/mmg/tabs/chapters.cpp:1264
+#: src/mmg/tabs/chapters.cpp:1318
+#: src/mmg/tabs/chapters.cpp:1324
+#: src/mmg/tabs/chapters.cpp:1336
+#: src/mmg/tabs/chapters.cpp:1355
+#: src/mmg/tabs/chapters.cpp:1363
 msgid "Input data error"
 msgstr "Chyba vstupních dat"
 
@@ -4225,7 +4225,7 @@ msgid "Internal bug: tracks.cpp SSA #1. %1%"
 msgstr "Vnitřní chyba: tracks.cpp SSA #1. %1%"
 
 #: src/mmg/header_editor/frame.cpp:679
-#: src/mmg/tabs/chapters.cpp:1858
+#: src/mmg/tabs/chapters.cpp:1860
 msgid "Internal program error"
 msgstr "Vnitřní chyba programu"
 
@@ -4248,15 +4248,15 @@ msgstr "Vyskytl se naplatný znak Base64"
 msgid "Invalid BlockAddition level in argument '%1%'.\n"
 msgstr "Neplatná úroveň BlockAddition v parametru '%1%'.\n"
 
-#: src/mmg/tabs/chapters.cpp:1316
+#: src/mmg/tabs/chapters.cpp:1318
 msgid "Invalid UID. A UID is simply a number."
 msgstr "Neplatné UID. UID je prostě číslo."
 
-#: src/mmg/tabs/chapters.cpp:1322
+#: src/mmg/tabs/chapters.cpp:1324
 msgid "Invalid UID. This chapter UID is already in use. The original UID has not been changed."
 msgstr "Neplatné UID. Toto UID kapitoly se již používá. Původní UID nebylo změněno."
 
-#: src/mmg/tabs/chapters.cpp:1334
+#: src/mmg/tabs/chapters.cpp:1336
 msgid "Invalid UID. This edition UID is already in use. The original UID has not been changed."
 msgstr "Neplatné UID. Toto UID střihu se již používá. Původní UID nebylo změněno."
 
@@ -4378,24 +4378,24 @@ msgstr "Neplatný formát pro řádek SSA ('%1%') v časovém kódu %2%: První 
 msgid "Invalid format for a SSA line ('%1%') at timecode %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"
 msgstr "Neplatný formát pro řádek SSA ('%1%') v časovém kódu %2%: Nalezeno příliš mnoho polí (%3% místo of 9). Tato položka bude přeskočena.\n"
 
-#: src/mmg/tabs/chapters.cpp:1262
+#: src/mmg/tabs/chapters.cpp:1264
 msgid "Invalid format used for the adjustment."
 msgstr "Byl použit neplatný formát pro úpravu."
 
-#: src/mmg/tabs/chapters.cpp:1361
+#: src/mmg/tabs/chapters.cpp:1363
 #, c-format, boost-format
 msgid "Invalid format used for the end time for '%s'. Setting value to 0."
 msgstr "Byl použit neplatný formát pro koncový čas pro '%s'. Hodnota nastavena na 0."
 
-#: src/mmg/tabs/chapters.cpp:1394
+#: src/mmg/tabs/chapters.cpp:1396
 msgid "Invalid format used for the segment UID. Not using the value."
 msgstr "Použit neznámý formát pro UID úseku. Nepoužívá hodnotu."
 
-#: src/mmg/tabs/chapters.cpp:1412
+#: src/mmg/tabs/chapters.cpp:1414
 msgid "Invalid format used for the segment edition UID. Not using the value."
 msgstr "Byl použit neplatný formát pro UID střihu úseku. Hodnota nebyla použita."
 
-#: src/mmg/tabs/chapters.cpp:1353
+#: src/mmg/tabs/chapters.cpp:1355
 #, c-format, boost-format
 msgid "Invalid format used for the start time for '%s'. Setting value to 0."
 msgstr "Byl použit neplatný formát pro počáteční čas pro '%s'. Hodnota nastavena na 0."
@@ -4448,7 +4448,7 @@ msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr ""
 
 #: src/mmg/options/chapters.cpp:114
-#: src/mmg/tabs/chapters.cpp:1209
+#: src/mmg/tabs/chapters.cpp:1211
 msgid "Invalid language selected"
 msgstr "Vybrán neplatný jazyk"
 
@@ -4475,8 +4475,8 @@ msgstr "Neplatný počet minut: %1% > 59"
 msgid "Invalid number of seconds: %1% > 59"
 msgstr "Neplatný počet sekund: %1% > 59"
 
-#: src/mmg/tabs/chapters.cpp:1651
-#: src/mmg/tabs/chapters.cpp:1658
+#: src/mmg/tabs/chapters.cpp:1653
+#: src/mmg/tabs/chapters.cpp:1660
 msgid "Invalid operation"
 msgstr "Neplatná operace"
 
@@ -4849,12 +4849,12 @@ msgstr "Vytvářet unikátní názvy výstupních souborů"
 msgid "Make this track the default track for its type (audio, video, subtitles). Players should prefer tracks with the default track flag set."
 msgstr "Nastaví tuto stopu jako výchozí pro její typ (audio, video, titulky). Přehrávače by měly upřednostňovat stopy s nastaveným označením výchozí stopy."
 
-#: src/input/r_matroska.cpp:1411
-#: src/input/r_matroska.cpp:1426
+#: src/input/r_matroska.cpp:1414
+#: src/input/r_matroska.cpp:1429
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Nalezena poškozená inicializační data kodeku AAC.\n"
 
-#: src/input/r_matroska.cpp:1419
+#: src/input/r_matroska.cpp:1422
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Poškozené ID kodeku '%1%'.\n"
@@ -5039,7 +5039,7 @@ msgstr ""
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1169
+#: src/merge/output_control.cpp:1179
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
 msgstr ""
@@ -5158,7 +5158,7 @@ msgstr ""
 msgid "No MIME type has been set for the attachment '%1%', and it could not be guessed.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1128
+#: src/merge/output_control.cpp:1138
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr ""
@@ -5290,11 +5290,11 @@ msgstr ""
 msgid "Not a hex digit at position %1%"
 msgstr "Není šestnáctková číslice na pozici %1%"
 
-#: src/common/kax_analyzer.cpp:230
+#: src/common/kax_analyzer.cpp:237
 msgid "Not a valid Matroska file (no EBML head found)"
 msgstr "Není platný soubor Matroska (nenalezena žádná hlavička EBML)"
 
-#: src/common/kax_analyzer.cpp:240
+#: src/common/kax_analyzer.cpp:247
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr ""
 
@@ -5392,7 +5392,7 @@ msgstr "Je povolen pouze jeden výstupní soubor.\n"
 msgid "Only one segment info file allowed in '%1% %2%'.\n"
 msgstr "Je povolen pouze jeden soubor informací o úseku v '%1% %2%'.\n"
 
-#: src/merge/output_control.cpp:1109
+#: src/merge/output_control.cpp:1119
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr ""
@@ -5504,7 +5504,7 @@ msgstr "Přepsat existující soubor?"
 msgid "Overwrite existing files?"
 msgstr "Přepsat existující soubory?"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "PCM"
 
@@ -5661,22 +5661,22 @@ msgstr "Průběh"
 #: src/extract/timecodes_v2.cpp:289
 #: src/extract/tracks.cpp:440
 #: src/merge/mkvmerge.cpp:2330
-#: src/merge/output_control.cpp:582
+#: src/merge/output_control.cpp:587
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "Průběh: %1%%%%2%"
 
-#: src/extract/mkvextract.cpp:88
+#: src/extract/mkvextract.cpp:115
 #: src/extract/timecodes_v2.cpp:379
 msgid "Progress: 100%\n"
 msgstr "Průběh: 100%\n"
 
-#: src/merge/output_control.cpp:560
+#: src/merge/output_control.cpp:565
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "Průběh: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1112
+#: src/common/kax_analyzer.cpp:1119
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Průběh: [%1%%2%] %3%%%"
@@ -5834,7 +5834,7 @@ msgstr "RSA"
 msgid "Re-enable the selected jobs"
 msgstr "Znovu povolit vybrané úlohy"
 
-#: src/merge/output_control.cpp:993
+#: src/merge/output_control.cpp:1003
 #, boost-format
 msgid "Re-rendering track headers: data_size != 0 not implemented yet. %1%\n"
 msgstr ""
@@ -6494,7 +6494,7 @@ msgstr ""
 msgid "Some header values have been modified. Do you really want to reload without saving the file?"
 msgstr ""
 
-#: src/merge/output_control.cpp:1626
+#: src/merge/output_control.cpp:1636
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr ""
@@ -6679,7 +6679,7 @@ msgstr "Přepínače štítků"
 msgid "Tags"
 msgstr "Štítky"
 
-#: src/merge/output_control.cpp:1614
+#: src/merge/output_control.cpp:1624
 msgid "Tags are not allowed in WebM compliant files. No tags will be written into any output file.\n"
 msgstr "Štítky nejsou povoleny v souborech WebM. Žádné štítky nebudou zapsány do žádného výstupního souboru.\n"
 
@@ -6793,7 +6793,7 @@ msgstr ""
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 msgstr ""
 
-#: src/mmg/tabs/chapters.cpp:1851
+#: src/mmg/tabs/chapters.cpp:1853
 msgid ""
 "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file.\n"
 "\n"
@@ -6959,7 +6959,7 @@ msgstr ""
 msgid "The country '%s' is not a valid ccTLD and cannot be selected."
 msgstr ""
 
-#: src/merge/output_control.cpp:1770
+#: src/merge/output_control.cpp:1780
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Položky indexu jsou zapisovány...\n"
 
@@ -6983,11 +6983,11 @@ msgstr ""
 msgid "The delay setting for track nr. %s in file '%s' is invalid."
 msgstr ""
 
-#: src/merge/output_control.cpp:1438
-#: src/merge/output_control.cpp:1441
-#: src/merge/output_control.cpp:1444
-#: src/merge/output_control.cpp:1447
-#: src/merge/output_control.cpp:1450
+#: src/merge/output_control.cpp:1448
+#: src/merge/output_control.cpp:1451
+#: src/merge/output_control.cpp:1454
+#: src/merge/output_control.cpp:1457
+#: src/merge/output_control.cpp:1460
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -7015,7 +7015,7 @@ msgstr ""
 msgid "The display width of the two tracks is different: %1% and %2%"
 msgstr ""
 
-#: src/info/wxwidgets_ui.cpp:369
+#: src/info/wxwidgets_ui.cpp:371
 #, c-format, boost-format
 msgid ""
 "The dragged file '%s'\n"
@@ -7036,7 +7036,7 @@ msgid "The edition UID to play from the segment linked in the chapter's segment 
 msgstr ""
 
 #: src/mmg/header_editor/frame.cpp:661
-#: src/mmg/tabs/chapters.cpp:1839
+#: src/mmg/tabs/chapters.cpp:1841
 #: src/propedit/propedit.cpp:32
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr ""
@@ -7061,14 +7061,12 @@ msgid "The file '%1%' could not be opened for reading and writing, or a read/wri
 msgstr "Soubor '%1%' nemohl být otevřen pro čtení a zápis, nebo čtení/zápis do něj selhali: %2%.\n"
 
 #: src/common/command_line.cpp:49
-#: src/extract/attachments.cpp:142
-#: src/extract/chapters.cpp:49
-#: src/extract/cuesheets.cpp:207
-#: src/extract/tags.cpp:48
+#: src/extract/mkvextract.cpp:54
+#: src/extract/mkvextract.cpp:58
 #: src/extract/timecodes_v2.cpp:193
 #: src/extract/tracks.cpp:358
-#: src/merge/output_control.cpp:331
-#: src/merge/output_control.cpp:374
+#: src/merge/output_control.cpp:336
+#: src/merge/output_control.cpp:379
 #: src/propedit/attachment_target.cpp:63
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -7081,12 +7079,12 @@ msgstr "Soubor '%1%' nemohl být otevřen pro čtení: %2%.\n"
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:115
-#: src/merge/output_control.cpp:1650
+#: src/merge/output_control.cpp:1660
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "Soubor '%1%' nemohl být otevřen pro zápis: %2%.\n"
 
-#: src/merge/output_control.cpp:1654
+#: src/merge/output_control.cpp:1664
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "Soubor '%1%' byl otevřen pro zápis.\n"
@@ -7112,12 +7110,12 @@ msgstr "Soubor '%s' neexistuje."
 msgid "The file '%s' is already processed in combination with the file '%s'. It cannot be added a second time."
 msgstr "Soubor '%s' je již zpracováván společně se souborem '%s'. Nemůže být přidán podruhé."
 
-#: src/merge/output_control.cpp:1444
+#: src/merge/output_control.cpp:1454
 msgid "The file content does not match its format type and was not recognized."
 msgstr "Obsah souboru neodpovídá svému typu formátu a nebyl rozpoznán."
 
-#: src/merge/output_control.cpp:1438
-#: src/merge/output_control.cpp:1441
+#: src/merge/output_control.cpp:1448
+#: src/merge/output_control.cpp:1451
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "Soubor nemohl být otevřen pro čtení nebo nebylo dostatek údajů pro analýzu jeho hlaviček."
 
@@ -7149,7 +7147,7 @@ msgstr "Hlavička souboru je příliš krátká.\n"
 msgid "The file header was not read correctly.\n"
 msgstr "Hlavička souboru nebyla správně přečtena.\n"
 
-#: src/merge/output_control.cpp:1447
+#: src/merge/output_control.cpp:1457
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Hlavičky souboru nemohly být analyzovány, např. protože jsou nekompletní, neplatné nebo poškozené."
 
@@ -7163,19 +7161,19 @@ msgstr "Soubor má nepodporovaný formát kontejneru (%s)."
 msgid "The file is being analyzed."
 msgstr "Soubor je analyzován."
 
-#: src/merge/output_control.cpp:276
+#: src/merge/output_control.cpp:281
 msgid "The file is being fixed, part 1/4..."
 msgstr "Soubor se opravuje, část 1/4..."
 
-#: src/merge/output_control.cpp:282
+#: src/merge/output_control.cpp:287
 msgid "The file is being fixed, part 2/4..."
 msgstr "Soubor se opravuje, část 2/4..."
 
-#: src/merge/output_control.cpp:291
+#: src/merge/output_control.cpp:296
 msgid "The file is being fixed, part 3/4..."
 msgstr "Soubor se opravuje, část 3/4..."
 
-#: src/merge/output_control.cpp:299
+#: src/merge/output_control.cpp:304
 msgid "The file is being fixed, part 4/4..."
 msgstr "Soubor se opravuje, část 4/4..."
 
@@ -7184,17 +7182,17 @@ msgstr "Soubor se opravuje, část 4/4..."
 msgid "The file name for this segment."
 msgstr "Název souboru pro tento úsek."
 
-#: src/merge/output_control.cpp:1142
+#: src/merge/output_control.cpp:1152
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "Soubor č. %1% ('%2%') neobsahuje stopu s ID %3% nebo ta stopa nebude zkopírována. Parametr pro '--append-to' byl neplatný.\n"
 
-#: src/merge/output_control.cpp:1148
+#: src/merge/output_control.cpp:1158
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "Soubor č. %1% ('%2%') neobsahuje stopu s ID %3% nebo ta stopa nebude zkopírována. Proto k němu nemůže být připojena žádná stopa. Parametr pro '--append-to' byl neplatný.\n"
 
-#: src/merge/output_control.cpp:1088
+#: src/merge/output_control.cpp:1098
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "Soubor č. %1% ('%2%') nebyl připojen.  Parametr pro '--append-to' byl neplatný.\n"
@@ -7262,7 +7260,7 @@ msgstr ""
 msgid "The format of the split timecode/duration is invalid."
 msgstr ""
 
-#: src/merge/output_control.cpp:1212
+#: src/merge/output_control.cpp:1222
 msgid "The formats do not match."
 msgstr ""
 
@@ -7314,7 +7312,7 @@ msgid ""
 msgstr ""
 
 #: src/mmg/options/chapters.cpp:113
-#: src/mmg/tabs/chapters.cpp:1209
+#: src/mmg/tabs/chapters.cpp:1211
 #, c-format, boost-format
 msgid "The language '%s' is not a valid language and cannot be selected."
 msgstr ""
@@ -7352,7 +7350,7 @@ msgid ""
 msgstr ""
 
 #: src/mmg/header_editor/frame.cpp:667
-#: src/mmg/tabs/chapters.cpp:1845
+#: src/mmg/tabs/chapters.cpp:1847
 #: src/propedit/propedit.cpp:36
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr ""
@@ -7497,7 +7495,7 @@ msgstr ""
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1214
+#: src/merge/output_control.cpp:1224
 msgid "The reason is unknown."
 msgstr ""
 
@@ -7536,8 +7534,8 @@ msgstr "Velikost, po které je založen nový výstupní soubor. Písmena 'G', '
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:335
-#: src/merge/output_control.cpp:377
+#: src/merge/output_control.cpp:340
+#: src/merge/output_control.cpp:382
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr ""
@@ -7656,7 +7654,7 @@ msgstr ""
 msgid "The title for the whole movie."
 msgstr "Název pro celý film."
 
-#: src/merge/output_control.cpp:1158
+#: src/merge/output_control.cpp:1168
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr ""
@@ -7666,17 +7664,17 @@ msgstr ""
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:888
+#: src/merge/output_control.cpp:898
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1204
+#: src/merge/output_control.cpp:1214
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1215
+#: src/merge/output_control.cpp:1225
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
 msgstr ""
@@ -7686,7 +7684,7 @@ msgstr ""
 msgid "The track number as used in the Block Header."
 msgstr ""
 
-#: src/merge/output_control.cpp:1213
+#: src/merge/output_control.cpp:1223
 msgid "The track parameters do not match."
 msgstr ""
 
@@ -7707,8 +7705,8 @@ msgstr "Theora"
 msgid "There is a new version available online."
 msgstr ""
 
-#: src/merge/output_control.cpp:1082
 #: src/merge/output_control.cpp:1092
+#: src/merge/output_control.cpp:1102
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
 msgstr ""
@@ -7835,6 +7833,7 @@ msgstr ""
 msgid "This file could not be opened or parsed."
 msgstr ""
 
+#: src/extract/mkvextract.cpp:62
 #: src/propedit/propedit.cpp:107
 msgid "This file could not be opened or parsed.\n"
 msgstr ""
@@ -7887,12 +7886,12 @@ msgstr ""
 msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:295
+#: src/merge/output_control.cpp:300
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1884
+#: src/merge/output_control.cpp:1892
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr ""
@@ -7957,6 +7956,11 @@ msgstr ""
 #: src/common/content_decoder.cpp:112
 #, boost-format
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
+msgstr ""
+
+#: src/input/r_matroska.cpp:977
+#, boost-format
+msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr ""
 
 #: src/common/content_decoder.cpp:98
@@ -8257,7 +8261,7 @@ msgstr ""
 msgid "Unsupported format"
 msgstr "Nepodporovaný formát"
 
-#: src/input/r_matroska.cpp:1724
+#: src/input/r_matroska.cpp:1727
 msgid "Unsupported track type for this track.\n"
 msgstr "Nepodporovaný typ stopy pro tuto stopu.\n"
 
@@ -8303,7 +8307,7 @@ msgstr ""
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Použit demultiplexer pro formát '%1%'.\n"
 
-#: src/input/r_matroska.cpp:1270
+#: src/input/r_matroska.cpp:1273
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Použit všeobecný výstupní modul pro stopu typu '%1%'.\n"
@@ -8534,7 +8538,7 @@ msgstr ""
 msgid "Writing the VobSub index file '%1%'.\n"
 msgstr ""
 
-#: src/mmg/tabs/chapters.cpp:1828
+#: src/mmg/tabs/chapters.cpp:1830
 msgid "Writing to the file failed. Typical reasons include the file being write-protected, locked by another process or you not having write permissions for the target directory."
 msgstr ""
 
@@ -8582,7 +8586,7 @@ msgstr ""
 msgid "You are already running the latest version."
 msgstr "Používáte nejnovější verzi."
 
-#: src/mmg/tabs/chapters.cpp:1230
+#: src/mmg/tabs/chapters.cpp:1232
 msgid ""
 "You can use this function for adjusting the timecodes\n"
 "of the selected chapter and all its children by a fixed amount.\n"
@@ -8790,7 +8794,7 @@ msgstr "i kdyby došlo k upozorněním"
 msgid "failed"
 msgstr "nezdařilo se"
 
-#: src/merge/output_control.cpp:653
+#: src/merge/output_control.cpp:658
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "filelist_t nenalezen pro generic_packetizer_c. %1%\n"
@@ -8937,21 +8941,17 @@ msgstr ""
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:976
-msgid "matroska_reader: A track is missing its track UID.\n"
-msgstr ""
-
 #: src/input/r_matroska.cpp:966
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1340
+#: src/input/r_matroska.cpp:1343
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1148
-#: src/input/r_matroska.cpp:1153
+#: src/input/r_matroska.cpp:1151
+#: src/input/r_matroska.cpp:1156
 msgid "matroska_reader: No segment found.\n"
 msgstr ""
 
@@ -8996,7 +8996,7 @@ msgstr ""
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1025
+#: src/input/r_matroska.cpp:1028
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr ""
 
@@ -9015,12 +9015,12 @@ msgstr ""
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:981
+#: src/input/r_matroska.cpp:984
 msgid "matroska_reader: Track type was not found.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1239
-#: src/input/r_matroska.cpp:1916
+#: src/input/r_matroska.cpp:1242
+#: src/input/r_matroska.cpp:1919
 msgid "matroska_reader: caught exception\n"
 msgstr ""
 
@@ -9029,7 +9029,7 @@ msgstr ""
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1135
+#: src/input/r_matroska.cpp:1138
 msgid "matroska_reader: no EBML head found.\n"
 msgstr ""
 
@@ -9117,7 +9117,7 @@ msgstr ""
 msgid "mkvextract tracks <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr ""
 
-#: src/extract/mkvextract.cpp:46
+#: src/extract/mkvextract.cpp:73
 #, boost-format
 msgid "mkvextract.cpp/show_element(): level > 9: %1%"
 msgstr ""
@@ -9242,8 +9242,8 @@ msgstr "mkvmerge podporuje dva formáty kapitol: Textový formát podobný OGM a
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format. This option specifies the language to be associated with chapters if the OGM chapter format is used. It is ignored for XML chapter files."
 msgstr "mkvmerge podporuje dva formáty kapitol: Textový formát podobný OGM a plnohodnotný XML formát. Tato volba určuje jazyk přidružený ke kapitolám, pokud je použit formát kapitol OGM. Tato volba je ignorována pro XML soubory kapitol."
 
-#: src/merge/output_control.cpp:270
-#: src/merge/output_control.cpp:306
+#: src/merge/output_control.cpp:275
+#: src/merge/output_control.cpp:311
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr ""
 
@@ -9256,7 +9256,7 @@ msgstr ""
 msgid "mkvpropedit [options] <file> <actions>"
 msgstr ""
 
-#: src/common/mm_io.cpp:1023
+#: src/common/mm_io.cpp:1018
 msgid "mm_text_io_c: UTF32_* is not supported at the moment.\n"
 msgstr ""
 
@@ -9564,7 +9564,7 @@ msgstr "und (Neurčeno)"
 #: src/info/mkvinfo.cpp:768
 #: src/info/mkvinfo.cpp:954
 #: src/input/r_matroska.cpp:98
-#: src/input/r_matroska.cpp:2277
+#: src/input/r_matroska.cpp:2281
 #: src/mmg/header_editor/value_page.cpp:150
 #: src/mmg/mmg.cpp:68
 #: src/mmg/tabs/input.cpp:566
@@ -9572,7 +9572,7 @@ msgstr "und (Neurčeno)"
 msgid "unknown"
 msgstr "neznámý"
 
-#: src/input/r_matroska.cpp:2265
+#: src/input/r_matroska.cpp:2269
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr ""
