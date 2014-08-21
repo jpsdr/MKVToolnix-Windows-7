@@ -6,12 +6,12 @@ Table of contents
 
 1. Introduction
 2. Installation
-2.1. Requirements
-2.2. Optional components
-2.3. Building libmatroska and libebml
-2.4. Building MKVtoolNix
-2.5. Notes for compilation on (Open)Solaris
-2.6. Unit tests
+  1. Requirements
+  2. Optional components
+  3. Building libmatroska and libebml
+  4. Building MKVtoolNix
+  5. Notes for compilation on (Open)Solaris
+  6. Unit tests
 3. Examples
 4. Reporting bugs
 
@@ -30,7 +30,7 @@ technology, the Extensible Binary Meta Language (EBML), at
 http://www.matroska.org/
 
 The full documentation for each command is now maintained in its
-man page only. Type 'mkvmerge -h' to get you started.
+man page only. Type `mkvmerge -h` to get you started.
 
 This code comes under the GPL (see www.gnu.org or the file COPYING).
 Modify as needed.
@@ -57,7 +57,7 @@ development there might be features available in the Subversion
 repository that are not available in the releases. On the other hand
 the Subversion repository version might not even compile.
 
-2.1. Requirements
+### 2.1. Requirements
 
 In order to compile MKVToolNix you need a couple of libraries. Most of
 them should be available pre-compiled for your distribution. The
@@ -82,7 +82,7 @@ programs and libraries you absolutely need are:
   used: "format", "RegEx", "filesystem", "system", "foreach",
   "Range", "rational", "variant". At least v1.46.0 is required.
 
-You also need the "rake" or "drake" build program or at least the
+You also need the `rake` or `drake` build program or at least the
 programming language Ruby and the "rubygems" package. MKVToolNix comes
 bundled with its own copy of "drake" in case you cannot install it
 yourself. If you want to install it yourself I suggest you use the
@@ -91,15 +91,15 @@ for parallel builds.
 
 Installing "drake" is simple. As root run the following command:
 
-gem install drake
+    gem install drake
 
-2.2. Optional components
+### 2.2. Optional components
 
 Other libraries are optional and only limit the features that are
 built. These include:
 
 - wxWidgets ( http://www.wxwidgets.org/ ) -- a cross-platform GUI
-  toolkit. You need this if you want to use mmg (the mkvmerge GUI) or
+  toolkit. You need this if you want to use `mmg` (the mkvmerge GUI) or
   mkvinfo's GUI.
 
 - libFLAC ( http://downloads.xiph.org/releases/flac/ ) for FLAC
@@ -116,7 +116,7 @@ built. These include:
 
 - libcurl ( http://curl.haxx.se/ ) for online update checks
 
-2.3. Building libmatroska and libebml
+### 2.3. Building libmatroska and libebml
 
 This is optional as MKVToolNix comes with its own set of the
 libraries. It will use them if no version is found on the system.
@@ -126,104 +126,106 @@ http://dl.matroska.org/downloads/libebml/ and libmatroska 1.4.0 from
 http://dl.matroska.org/downloads/libmatroska/ or a fresh copy from the
 Subversion repository:
 
-svn co https://svn.matroska.org/svn/matroska/trunk/libebml
-svn co https://svn.matroska.org/svn/matroska/trunk/libmatroska
+    svn co https://svn.matroska.org/svn/matroska/trunk/libebml
+    svn co https://svn.matroska.org/svn/matroska/trunk/libmatroska
 
-Change to "libebml/make/linux" and run "make staticlib". If you have
-root-access then run "make install_headers install_staticlib" as
+Change to "libebml/make/linux" and run `make staticlib`. If you have
+root-access then run `make install_headers install_staticlib` as
 "root" in order to install the files. Change to
-"libmatroska/make/linux". Once more run "make staticlib". If you have
-root-access then run "make install_headers install_staticlib" as
+"libmatroska/make/linux". Once more run `make staticlib`. If you have
+root-access then run `make install_headers install_staticlib` as
 "root" in order to install the files.
 
 Note that if you don't want the libraries to be installed in
 /usr/local/lib and the headers in /usr/local/include then you can
 alter the prefix (which defaults to /usr/local) by adding an argument
-"prefix=/usr" to the install "make" command. Example:
+`prefix=/usr` to the install `make` command. Example:
 
-make prefix=/usr install_headers install_staticlib
+    make prefix=/usr install_headers install_staticlib
 
-2.4. Building MKVtoolNix
+### 2.4. Building MKVtoolNix
 
 Either download the current release from
 http://www.bunkus.org/videotools/mkvtoolnix/ and unpack it or get a
 development snapshot from my Git repository.
 
- - Getting and building a development snapshot (ignore this subsection
-   if you want to build from a release tarball)
+- Getting and building a development snapshot (ignore this subsection
+  if you want to build from a release tarball)
 
-   All you need for Git repository access is to download a Git client
-   from the Git homepage at http://git-scm.com/ . There are clients
-   for both Unix/Linux and Windows.
+  All you need for Git repository access is to download a Git client
+  from the Git homepage at http://git-scm.com/ . There are clients
+  for both Unix/Linux and Windows.
 
-   First clone my Git repository with this command:
+  First clone my Git repository with this command:
 
-   git clone git://github.com/mbunkus/mkvtoolnix.git
+      git clone git://github.com/mbunkus/mkvtoolnix.git
 
-   Now change to the MKVtoolNix directory with "cd mkvtoolnix" and run
-   "./autogen.sh" which will generate the "configure" script. You need
-   the GNU "autoconf" utility for this step.
+  Now change to the MKVtoolNix directory with `cd mkvtoolnix` and run
+  `./autogen.sh` which will generate the "configure" script. You need
+  the GNU "autoconf" utility for this step.
 
-If you have run "make install" for both libraries then "configure"
+If you have run `make install` for both libraries then `configure`
 should automatically find the libraries' position. Otherwise you need
-to tell "configure" where the "libebml" and "libmatroska" include and
+to tell `configure` where the "libebml" and "libmatroska" include and
 library files are:
 
-./configure \
-  --with-extra-includes=/where/i/put/libebml\;/where/i/put/libmatroska \
-  --with-extra-libs=/where/i/put/libebml/make/linux\;/where/i/put/libmatroska/make/linux
+    ./configure \
+      --with-extra-includes=/where/i/put/libebml\;/where/i/put/libmatroska \
+      --with-extra-libs=/where/i/put/libebml/make/linux\;/where/i/put/libmatroska/make/linux
 
-Now run "rake" and, as "root", "rake install". If you don't have
+Now run `rake` and, as "root", `rake install`. If you don't have
 "rake" installed yourself then use the version bundled with
-MKVToolNix: "./rake.d/bin/drake" and "./rake.d/bin/drake install".
+MKVToolNix: `./rake.d/bin/drake` and `./rake.d/bin/drake install`.
 
 If you want to use all available CPU cores for building then you have
-to use "drake" instead of "rake". "drake" knows the parameter "-j"
-much like "make" does. You can also set the environment varibale
+to use `drake` instead of `rake`. `drake` knows the parameter `-j`
+much like `make` does. You can also set the environment variable
 DRAKETHREADS to a number and the build process will automatically use
 that number of threads for a parallel build:
 
-./drake -j4
+    ./drake -j4
 
 or
 
-export DRAKETHREADS=4
-./drake
+    export DRAKETHREADS=4
+    ./drake
 
-2.5. Notes for compilation on (Open)Solaris
+### 2.5. Notes for compilation on (Open)Solaris
 
 You can compile mkvtoolnix with Sun's sunstudio compiler, but you need
-additional options for "configure":
+additional options for `configure`:
 
-./configure --prefix=/usr \
-   CXX="/opt/sunstudio12.1/bin/CC -library=stlport4" \
-   CXXFLAGS="-D_POSIX_PTHREAD_SEMANTICS" \
-  --with-extra-includes=/where/i/put/libebml\;/where/i/put/libmatroska \
-  --with-extra-libs=/where/i/put/libebml/make/linux\;/where/i/put/libmatroska/make/linux
+    ./configure --prefix=/usr \
+      CXX="/opt/sunstudio12.1/bin/CC -library=stlport4" \
+      CXXFLAGS="-D_POSIX_PTHREAD_SEMANTICS" \
+      --with-extra-includes=/where/i/put/libebml\;/where/i/put/libmatroska \
+      --with-extra-libs=/where/i/put/libebml/make/linux\;/where/i/put/libmatroska/make/linux
 
-2.6. Unit tests
+### 2.6. Unit tests
 
 Building and running unit tests is completely optional. If you want to
 do this then you have to follow these steps:
 
-a) Download the "googletest" framework from
+1. Download the "googletest" framework from
    http://code.google.com/p/googletest/ (at the time of writing the
    file to download was "gtest-1.6.0.zip")
 
-b.1) Either extract the framework inside the "lib" sub-folder and
+2. Make `gtest` usable:
+
+  1. Either extract the framework inside the "lib" sub-folder and
      rename the resulting folder "gtest-1.6.0" to "gtest"
 
-  OR...
+     OR...
 
-b.2) extract the archive somewhere and create a symbolic link to it
+  2. Extract the archive somewhere and create a symbolic link to it
      inside the "lib" folder called or create a symbolic link called
      "gtest".
 
-c) Configure MKVToolNix normally.
+3. Configure MKVToolNix normally.
 
-d) Build the unit test executable and run it with
+4. Build the unit test executable and run it with
 
-./drake tests:unit
+        ./drake tests:unit
 
 
 
@@ -233,46 +235,47 @@ d) Build the unit test executable and run it with
 Here's a *very* brief example of how you could use mkvmerge
 with mencoder in order to rip a DVD:
 
-a) Extract the audio to PCM audio:
+1. Extract the audio to PCM audio:
 
-mplayer -ao pcm:file=audio.wav -vo null -vc dummy dvd://1
+        mplayer -ao pcm:file=audio.wav -vo null -vc dummy dvd://1
 
-b) Normalize the sound (optional)
+2. Normalize the sound (optional)
 
-normalize audio.wav
+        normalize audio.wav
 
-c) Encode the audio to Vorbis:
+3. Encode the audio to Vorbis:
 
-oggenc -q3 -oaudio-q3.ogg audio.wav
+        oggenc -q3 -oaudio-q3.ogg audio.wav
 
-d) Somehow calculate the bitrate for your video. Use something like...
+4. Somehow calculate the bitrate for your video. Use something like:
 
-video_size = (target_size - audio-size) / 1.005
-video_bitrate = video_size / length / 1024 * 8
+  ```
+  video_size = (target_size - audio-size) / 1.005
+  video_bitrate = video_size / length / 1024 * 8
+  ```
+  - `target_size`, `audio_size` in bytes
+  - `length` in seconds
+  - 1.005 is the overhead caused by putting the streams into an Matroska file
+    (about 0.5%, that's correct ;)).
+  - `video_bitrate` will be in kbit/s
 
-target_size, audio_size in bytes
-length in seconds
-1.005 is the overhead caused by putting the streams into an Matroska file
-  (about 0.5%, that's correct ;)).
-video_bitrate will be in kbit/s
+5. Use the two-pass encoding for the video:
 
-e) Use the two-pass encoding for the video:
+        mencoder -oac copy -ovc lavc \
+          -lavcopts vcodec=mpeg4:vbitrate=1000:vhq:vqmin=2:vpass=1 \
+          -vf scale=....,crop=..... \
+          -o /dev/null dvd://1
 
-mencoder -oac copy -ovc lavc \
-  -lavcopts vcodec=mpeg4:vbitrate=1000:vhq:vqmin=2:vpass=1 \
-  -vf scale=....,crop=..... \
-  -o /dev/null dvd://1
+        mencoder -oac copy -ovc lavc \
+          -lavcopts vcodec=mpeg4:vbitrate=1000:vhq:vqmin=2:vpass=2 \
+          -vf scale=....,crop=..... \
+          -o movie.avi dvd://1
 
-mencoder -oac copy -ovc lavc \
-  -lavcopts vcodec=mpeg4:vbitrate=1000:vhq:vqmin=2:vpass=2 \
-  -vf scale=....,crop=..... \
-  -o movie.avi dvd://1
+6. Merge:
 
-f) Merge:
+        mkvmerge -o movie.mkv -A movie.avi audio-q3.ogg
 
-mkvmerge -o movie.mkv -A movie.avi audio-q3.ogg
-
--A is necessary in order to avoid copying the raw PCM (or MP3) audio as well.
+  `-A` is necessary in order to avoid copying the raw PCM (or MP3) audio as well.
 
 
 
@@ -289,6 +292,6 @@ e.g. include the command line, if you use Windows or Linux etc.pp.
 
 If at all possible please include sample files as well so that I can
 reproduce the issue. If they are larger than 1M then please upload
-them somewhere (e.g. to my FTP server: host name "ftp.bunkus.org",
-user name "upload", password "only" -- each without the quotes) and
-post a link or note in the bug report.
+them somewhere (e.g. to my FTP server: host name `ftp.bunkus.org`,
+user name `upload`, password `only`) and post a link or note in the bug
+report.
