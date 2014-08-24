@@ -82,6 +82,8 @@ def setup_globals
     :guides                => FileList[ "#{$top_srcdir }/doc/guide/*/mkvmerge-gui.html" ].collect { |name| File.basename File.dirname(name) },
   }
 
+  $unwrapped_po            = %{es eu it nl uk pl tr}
+
   $build_tools           ||=  c?(:TOOLS)
 
   cflags_common            = "-Wall -Wno-comment -Wfatal-errors #{c(:WLOGICAL_OP)} #{c(:WNO_MISMATCHED_TAGS)} #{c(:WNO_SELF_ASSIGN)} #{c(:QUNUSED_ARGUMENTS)}"
@@ -379,7 +381,7 @@ EOT
         task language => "po/mkvtoolnix.pot" do |t|
           po       = "po/#{language}.po"
           tmp_file = "#{po}.new"
-          no_wrap  = %{es eu it nl uk pl}.include?(language) ? "" : "--no-wrap"
+          no_wrap  = $unwrapped_po.include?(language) ? "" : "--no-wrap"
           runq "MSGMERGE #{po}", "msgmerge -q -s #{no_wrap} #{po} po/mkvtoolnix.pot > #{tmp_file}", :allow_failure => true
 
           exit_code = last_exit_code
