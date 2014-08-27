@@ -42,6 +42,7 @@ public:                         // static
 protected:
   virtual void setupToolSelector();
   virtual QWidget *createNotImplementedWidget();
+  virtual void retranslateUI();
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_MAIN_WINDOW_H

@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include "common/qt.h"
+#include "common/version.h"
 #include "mkvtoolnix-gui/forms/main_window.h"
 #include "mkvtoolnix-gui/job_widget/job_widget.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -34,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent)
 
   // Setup window properties.
   setWindowIcon(Util::loadIcon(Q("mkvmergeGUI.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
+
+  retranslateUI();
 }
 
 MainWindow::~MainWindow() {
@@ -106,4 +109,9 @@ MainWindow::getMergeWidget() {
 JobWidget *
 MainWindow::getJobWidget() {
   return get()->m_toolJobs;
+}
+
+void
+MainWindow::retranslateUI() {
+  setWindowTitle(Q(get_version_info("MKVToolNix GUI")));
 }
