@@ -5,6 +5,7 @@
 #include "mkvtoolnix-gui/merge_widget/mux_config.h"
 #include "mkvtoolnix-gui/merge_widget/source_file.h"
 #include "mkvtoolnix-gui/merge_widget/track.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 #include <QFile>
 #include <QStringList>
@@ -326,9 +327,14 @@ MuxConfig::buildMkvmergeOptions()
   const {
   auto options = QStringList{};
 
+  auto &settings = Settings::get();
+
   // TODO: buildMkvmergeOptions get ui locale from prefs
   // if (!preferences.m_uiLocale.isEmpty())
-  //   options << Q("--ui-language") << preferences.m_uiLocale;
+  //   options << Q("--ui-language") << settings.m_uiLocale;
+
+  if (Settings::NormalPriority != settings.m_priority)
+    options << Q("--prioriy") << settings.getPriorityAsString();
 
   options << Q("--output") << m_destination;
 

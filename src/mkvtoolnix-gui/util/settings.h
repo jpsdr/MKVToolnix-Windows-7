@@ -36,6 +36,8 @@ public:
   void load();
   void save() const;
 
+  QString getPriorityAsString() const;
+
 public:
   static Settings s_settings;
   static Settings &get();

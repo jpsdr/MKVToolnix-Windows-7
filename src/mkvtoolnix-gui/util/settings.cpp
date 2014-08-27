@@ -65,3 +65,13 @@ Settings::save()
   reg.setValue("defaultTrackLanguage", m_defaultTrackLanguage);
   reg.endGroup();
 }
+
+QString
+Settings::getPriorityAsString()
+  const {
+  return LowestPriority == m_priority ? Q("lowest")
+       : LowPriority    == m_priority ? Q("lower")
+       : NormalPriority == m_priority ? Q("normal")
+       : HighPriority   == m_priority ? Q("higher")
+       :                                Q("highest");
+}
