@@ -164,6 +164,8 @@ protected:
   virtual QList<Track *> selectedTracks() const;
 
   virtual void addToJobQueue(bool startNow);
+
+  virtual bool isReadyForMerging();
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_MERGE_WIDGET_MERGE_WIDGET_H

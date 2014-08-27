@@ -207,8 +207,26 @@ MergeWidget::retranslateUI() {
   retranslateAttachmentsUI();
 }
 
+bool
+MergeWidget::isReadyForMerging() {
+  if (m_config.m_files.isEmpty()) {
+    QMessageBox::critical(this, QY("Cannot start merging"), QY("You have to add at least one source file before you can start merging or add a job to the job queue."));
+    return false;
+  }
+
+  if (m_config.m_destination.isEmpty()) {
+    QMessageBox::critical(this, QY("Cannot start merging"), QY("You have to set the output file name before you can start merging or add a job to the job queue."));
+    return false;
+  }
+
+  return true;
+}
+
 void
 MergeWidget::addToJobQueue(bool startNow) {
+  if (!isReadyForMerging())
+    return;
+
   auto newConfig     = std::make_shared<MuxConfig>(m_config);
   auto job           = std::make_shared<MuxJob>(startNow ? Job::PendingAuto : Job::PendingManual, newConfig);
   job->m_dateAdded   = QDateTime::currentDateTime();

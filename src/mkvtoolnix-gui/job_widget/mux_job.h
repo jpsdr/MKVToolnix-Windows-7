@@ -3,38 +3,24 @@
 
 #include "common/common_pch.h"
 
-#include <QThread>
+#include <QByteArray>
+#include <QProcess>
 
 #include "mkvtoolnix-gui/job_widget/job.h"
 
-class MuxJob;
+class QTemporaryFile;
+
 class MuxConfig;
 typedef std::shared_ptr<MuxConfig> MuxConfigPtr;
-
-class MuxJobThread: public QThread {
-  Q_OBJECT;
-protected:
-  volatile bool m_aborted;
-  MuxConfig const &m_config;
-
-public:
-  MuxJobThread(MuxJob *job, MuxConfig const &config);
-
-  void abort();
-
-protected:
-  virtual void run();
-
-signals:
-  void progressChanged(unsigned int progress);
-  void statusChanged(Job::Status status);
-};
 
 class MuxJob: public Job {
   Q_OBJECT;
 protected:
   MuxConfigPtr m_config;
-  MuxJobThread *m_thread;
+  QProcess m_process;
+  bool m_aborted;
+  QByteArray m_bytesRead;
+  std::unique_ptr<QTemporaryFile> m_settingsFile;
 
 public:
   MuxJob(Status status, MuxConfigPtr const &config);
@@ -44,7 +30,21 @@ public:
   virtual void start();
 
 public slots:
-  void threadFinished();
+  void readAvailable();
+  void processFinished(int exitCode, QProcess::ExitStatus exitStatus);
+  void processError(QProcess::ProcessError error);
+
+protected:
+  void processBytesRead();
+  void processLine(QString const &rawLine);
+
+signals:
+  void infoRead(QString const &line);
+  void warningRead(QString const &line);
+  void errorRead(QString const &line);
+
+  void startedScanningPlaylists();
+  void finishedScanningPlaylists();
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_MUX_JOB_H

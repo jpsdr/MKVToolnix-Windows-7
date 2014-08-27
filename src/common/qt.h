@@ -21,6 +21,11 @@
 #define QNY(singular, plural, count) to_qs(NY(singular, plural, count))
 
 inline QString
+to_qs(char const *source) {
+  return QString{source};
+}
+
+inline QString
 to_qs(std::string const &source) {
   return QString::fromUtf8(source.c_str());
 }

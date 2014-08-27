@@ -8,6 +8,7 @@
 
 #include <QFile>
 #include <QStringList>
+#include <QTemporaryFile>
 
 static void
 addToMaps(SourceFile *oldFile,

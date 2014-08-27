@@ -22,7 +22,7 @@ protected:
 
   JobModel *m_model;
 
-  QAction *m_startAction, *m_addAction, *m_removeAction, *m_removeDoneAction, *m_removeDoneOkAction, *m_removeAllAction;
+  QAction *m_startAction, *m_removeAction, *m_removeDoneAction, *m_removeDoneOkAction, *m_removeAllAction;
 
 public:
   explicit JobWidget(QWidget *parent = nullptr);
@@ -33,7 +33,6 @@ public:
 
 public slots:
   void onStart();
-  void onAdd();
   void onRemove();
   void onRemoveDone();
   void onRemoveDoneOk();

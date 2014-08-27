@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QApplication>
+#include <QProcess>
 
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/job_widget/job.h"
@@ -10,6 +11,7 @@
 static void
 registerMetaTypes() {
   qRegisterMetaType<Job::Status>("Job::Status");
+  qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
 }
 
 int

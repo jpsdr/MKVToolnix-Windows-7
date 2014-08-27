@@ -74,11 +74,15 @@ withSelectedIndexes(QAbstractItemView *view,
 
 static QString
 escape_mkvtoolnix(QString const &source) {
+  if (source.isEmpty())
+    return QString{"#EMPTY#"};
   return to_qs(::escape(to_utf8(source)));
 }
 
 static QString
 unescape_mkvtoolnix(QString const &source) {
+  if (source == Q("#EMPTY#"))
+    return Q("");
   return to_qs(::unescape(to_utf8(source)));
 }
 

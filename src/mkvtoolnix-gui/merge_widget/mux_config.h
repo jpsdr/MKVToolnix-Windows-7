@@ -11,6 +11,8 @@
 
 #define MTXCFG_VERSION 1
 
+class QTemporaryFile;
+
 namespace mtx {
 
 class InvalidSettingsX: public exception {
