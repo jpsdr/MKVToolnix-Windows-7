@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/job_widget/mux_job.h"
 #include "mkvtoolnix-gui/merge_widget/mux_config.h"
 #include "mkvtoolnix-gui/util/option_file.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 MuxJob::MuxJob(Status status,
                MuxConfigPtr const &config)
@@ -37,13 +38,10 @@ MuxJob::start() {
   m_aborted      = false;
   m_settingsFile = OptionFile::createTemporary("MKVToolNix-GUI-MuxJob-XXXXXX", m_config->buildMkvmergeOptions());
 
-  std::cout << "fina " << m_settingsFile->fileName() << std::endl;
-  system(QString{"cat %1"}.arg(m_settingsFile->fileName()).toUtf8().constData());
-
   setStatus(Job::Running);
   setProgress(0);
 
-  m_process.start("mkvmerge", QStringList{} << "--gui-mode" << QString{"@%1"}.arg(m_settingsFile->fileName()), QIODevice::ReadOnly);
+  m_process.start(Settings::get().m_mkvmergeExe, QStringList{} << "--gui-mode" << QString{"@%1"}.arg(m_settingsFile->fileName()), QIODevice::ReadOnly);
 }
 
 void
