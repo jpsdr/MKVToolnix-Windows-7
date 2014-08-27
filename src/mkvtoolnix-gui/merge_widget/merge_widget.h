@@ -61,6 +61,7 @@ public slots:
   virtual void onNew();
   virtual void onAddToJobQueue();
   virtual void onStartMuxing();
+  virtual void onShowCommandLine();
 
   virtual void onFileSelectionChanged();
   virtual void onTrackSelectionChanged();

@@ -19,7 +19,8 @@ FORMS += \
     ../forms/ask_scan_for_playlists_dialog.ui \
     ../forms/job_widget.ui \
     ../forms/select_playlist_dialog.ui \
-    ../forms/status_bar_progress_widget.ui
+    ../forms/status_bar_progress_widget.ui \
+    ../forms/command_line_dialog.ui
 
 RESOURCES += \
     ../qt_resources.qrc

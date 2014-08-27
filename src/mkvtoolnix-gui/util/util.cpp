@@ -138,9 +138,10 @@ escape_shell_windows(QString const &source) {
 QString
 escape(QString const &source,
        EscapeMode mode) {
-  return EscapeMkvtoolnix == mode ? escape_mkvtoolnix(source)
-       : EscapeShellUnix  == mode ? escape_shell_unix(source)
-       :                            escape_shell_windows(source);
+  return EscapeMkvtoolnix   == mode ? escape_mkvtoolnix(source)
+       : EscapeShellUnix    == mode ? escape_shell_unix(source)
+       : EscapeShellWindows == mode ? escape_shell_windows(source)
+       :                              source;
 }
 
 QString

@@ -3,6 +3,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/job_widget/job_widget.h"
 #include "mkvtoolnix-gui/job_widget/mux_job.h"
+#include "mkvtoolnix-gui/main_window/command_line_dialog.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge_widget/merge_widget.h"
 #include "mkvtoolnix-gui/forms/main_window.h"
@@ -61,6 +62,12 @@ MergeWidget::onShowMkvmergeOptions() {
   ui->debugOutput->setPlainText(Q("num: %1\n").arg(options.size()) + options.join(Q("\n")));
   ui->cmdUnix->setPlainText(Util::escape(options, Util::EscapeShellUnix).join(Q(" ")));
   ui->cmdWindows->setPlainText(Util::escape(options, Util::EscapeShellWindows).join(Q(" ")));
+}
+
+void
+MergeWidget::onShowCommandLine() {
+  auto options = (QStringList{} << Settings::get().m_mkvmergeExe) + m_config.buildMkvmergeOptions();
+  CommandLineDialog{this, options, QY("mkvmerge command line")}.exec();
 }
 
 void
@@ -181,8 +188,7 @@ MergeWidget::setupMenu() {
 
   connect(mwUi->actionStartMuxing,                SIGNAL(triggered()), this,              SLOT(onStartMuxing()));
   connect(mwUi->actionAddToJobQueue,              SIGNAL(triggered()), this,              SLOT(onAddToJobQueue()));
-  // connect(mwUi->actionShowMkvmergeCommandLine,    SIGNAL(triggered()), this,              SLOT(onShowCommandLine()));
-  // connect(mwUi->actionCopyCommandLineToClipboard, SIGNAL(triggered()), this,              SLOT(onCopyCommandLineToClipboard()));
+  connect(mwUi->actionShowMkvmergeCommandLine,    SIGNAL(triggered()), this,              SLOT(onShowCommandLine()));
 }
 
 void
