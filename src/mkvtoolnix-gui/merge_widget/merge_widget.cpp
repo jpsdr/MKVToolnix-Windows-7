@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/merge_widget/merge_widget.h"
 #include "mkvtoolnix-gui/forms/main_window.h"
 #include "mkvtoolnix-gui/forms/merge_widget.h"
+#include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -78,6 +79,19 @@ MergeWidget::onSaveConfig() {
     m_config.save();
     MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
   }
+}
+
+void
+MergeWidget::onSaveOptionFile() {
+  auto fileName = QFileDialog::getSaveFileName(this, Q(""), Settings::get().m_lastConfigDir.path(), QY("All files") + Q(" (*)"));
+  if (fileName.isEmpty())
+    return;
+
+  OptionFile::create(fileName, m_config.buildMkvmergeOptions());
+  Settings::get().m_lastConfigDir = QFileInfo{fileName}.path();
+  Settings::get().save();
+
+  MainWindow::get()->setStatusBarMessage(QY("The option file has been created."));
 }
 
 void
@@ -183,7 +197,7 @@ MergeWidget::setupMenu() {
   connect(mwUi->actionOpen,                       SIGNAL(triggered()), this,              SLOT(onOpenConfig()));
   connect(mwUi->actionSave,                       SIGNAL(triggered()), this,              SLOT(onSaveConfig()));
   connect(mwUi->actionSaveAs,                     SIGNAL(triggered()), this,              SLOT(onSaveConfigAs()));
-  // connect(mwUi->actionSaveOptionFile,             SIGNAL(triggered()), this,              SLOT(onSaveOpenFile()));
+  connect(mwUi->actionSaveOptionFile,             SIGNAL(triggered()), this,              SLOT(onSaveOptionFile()));
   connect(mwUi->actionExit,                       SIGNAL(triggered()), MainWindow::get(), SLOT(close()));
 
   connect(mwUi->actionStartMuxing,                SIGNAL(triggered()), this,              SLOT(onStartMuxing()));

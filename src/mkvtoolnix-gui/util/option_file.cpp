@@ -14,7 +14,7 @@ void
 OptionFile::create(QString const &fileName,
                    QStringList const &options) {
   QFile file{fileName};
-  file.open(QIODevice::WriteOnly);
+  file.open(QIODevice::WriteOnly | QIODevice::Truncate);
   write(file, options);
   file.close();
 }

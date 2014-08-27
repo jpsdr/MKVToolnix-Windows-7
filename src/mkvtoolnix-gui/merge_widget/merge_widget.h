@@ -52,6 +52,7 @@ public slots:
   // Input tab:
   virtual void onSaveConfig();
   virtual void onSaveConfigAs();
+  virtual void onSaveOptionFile();
   virtual void onOpenConfig();
   virtual void onAddFiles();
   virtual void onAddAdditionalParts();
