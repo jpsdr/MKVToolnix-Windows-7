@@ -54,7 +54,6 @@ MergeWidget::MergeWidget(QWidget *parent)
 }
 
 MergeWidget::~MergeWidget() {
-  delete ui;
 }
 
 void

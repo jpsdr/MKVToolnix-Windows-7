@@ -14,7 +14,7 @@ class AskScanForPlaylistsDialog;
 class AskScanForPlaylistsDialog : public QDialog {
   Q_OBJECT;
 protected:
-  Ui::AskScanForPlaylistsDialog *ui;
+  std::unique_ptr<Ui::AskScanForPlaylistsDialog> ui;
 
 public:
   explicit AskScanForPlaylistsDialog(QWidget *parent = nullptr);

@@ -15,7 +15,7 @@ class CommandLineDialog : public QDialog {
 
 protected:
   // UI stuff:
-  Ui::CommandLineDialog *ui;
+  std::unique_ptr<Ui::CommandLineDialog> ui;
   QStringList const m_options;
 
 public:

@@ -31,7 +31,6 @@ CommandLineDialog::CommandLineDialog(QWidget *parent,
 }
 
 CommandLineDialog::~CommandLineDialog() {
-  delete ui;
 }
 
 void

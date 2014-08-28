@@ -15,7 +15,7 @@ class StatusBarProgressWidget : public QWidget {
   Q_OBJECT;
 
 protected:
-  Ui::StatusBarProgressWidget *ui;
+  std::unique_ptr<Ui::StatusBarProgressWidget> ui;
 
 public:
   explicit StatusBarProgressWidget(QWidget *parent = nullptr);

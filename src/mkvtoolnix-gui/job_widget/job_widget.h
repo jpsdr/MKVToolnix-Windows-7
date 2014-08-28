@@ -18,7 +18,7 @@ class JobWidget : public QWidget {
 
 protected:
   // UI stuff:
-  Ui::JobWidget *ui;
+  std::unique_ptr<Ui::JobWidget> ui;
 
   JobModel *m_model;
 

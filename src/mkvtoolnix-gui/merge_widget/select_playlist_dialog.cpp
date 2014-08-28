@@ -117,7 +117,6 @@ SelectPlaylistDialog::SelectPlaylistDialog(QWidget *parent,
 }
 
 SelectPlaylistDialog::~SelectPlaylistDialog() {
-  delete ui;
 }
 
 void

@@ -28,7 +28,7 @@ protected:
   MuxConfig m_config;
 
   // UI stuff:
-  Ui::MergeWidget *ui;
+  std::unique_ptr<Ui::MergeWidget> ui;
 
   // "Input" tab:
   SourceFileModel *m_filesModel;

@@ -65,11 +65,12 @@ void FancyTab::setFader(float value)
 
 FancyTabBar::FancyTabBar(QWidget *parent)
     : QWidget(parent)
+    , m_hoverIndex{-1}
+    , m_currentIndex{-1}
+    , m_style{QStyleFactory::create("windows")}
 {
-    m_hoverIndex = -1;
-    m_currentIndex = -1;
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-    setStyle(QStyleFactory::create("windows"));
+    setStyle(m_style.get());
     setMinimumWidth(qMax(2 * m_rounding, 40));
     setAttribute(Qt::WA_Hover, true);
     setFocusPolicy(Qt::NoFocus);
@@ -82,7 +83,6 @@ FancyTabBar::FancyTabBar(QWidget *parent)
 
 FancyTabBar::~FancyTabBar()
 {
-    delete style();
 }
 
 QSize FancyTabBar::tabSizeHint(bool minimum) const

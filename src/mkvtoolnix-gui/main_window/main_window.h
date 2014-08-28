@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow {
 
 protected:
   // UI stuff:
-  Ui::MainWindow *ui;
+  std::unique_ptr<Ui::MainWindow> ui;
   StatusBarProgressWidget *m_statusBarProgress;
   MergeWidget *m_toolMerge;
   JobWidget *m_toolJobs;

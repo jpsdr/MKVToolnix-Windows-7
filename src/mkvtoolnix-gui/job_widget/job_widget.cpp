@@ -31,7 +31,6 @@ JobWidget::JobWidget(QWidget *parent)
 }
 
 JobWidget::~JobWidget() {
-  delete ui;
 }
 
 JobModel *

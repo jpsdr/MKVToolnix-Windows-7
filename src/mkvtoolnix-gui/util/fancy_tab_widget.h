@@ -21,8 +21,11 @@
 #ifndef MTX_MKVTOOLNIX_GUI_UTIL_FANCY_TAB_WIDGET_H
 #define MTX_MKVTOOLNIX_GUI_UTIL_FANCY_TAB_WIDGET_H
 
+#include <memory>
+
 #include <QtGui/QIcon>
 #include <QtWidgets/QWidget>
+#include <QtWidgets/QStyle>
 
 #include <QtCore/QTimer>
 #include <QtCore/QPropertyAnimation>
@@ -121,6 +124,7 @@ private:
     QList<FancyTab*> m_tabs;
     QTimer m_triggerTimer;
     QSize tabSizeHint(bool minimum = false) const;
+    std::unique_ptr<QStyle> m_style;
 
 };
 

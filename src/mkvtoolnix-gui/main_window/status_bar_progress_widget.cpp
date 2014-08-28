@@ -12,7 +12,6 @@ StatusBarProgressWidget::StatusBarProgressWidget(QWidget *parent)
 }
 
 StatusBarProgressWidget::~StatusBarProgressWidget() {
-  delete ui;
 }
 
 void

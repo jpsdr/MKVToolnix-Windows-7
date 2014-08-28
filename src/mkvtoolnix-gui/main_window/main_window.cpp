@@ -40,7 +40,6 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow() {
-  delete ui;
 }
 
 void
@@ -50,7 +49,7 @@ MainWindow::setStatusBarMessage(QString const &message) {
 
 Ui::MainWindow *
 MainWindow::getUi() {
-  return ui;
+  return ui.get();
 }
 
 QWidget *

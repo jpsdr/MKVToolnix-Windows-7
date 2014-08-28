@@ -32,7 +32,6 @@ AskScanForPlaylistsDialog::AskScanForPlaylistsDialog(QWidget *parent)
 }
 
 AskScanForPlaylistsDialog::~AskScanForPlaylistsDialog() {
-  delete ui;
 }
 
 bool
