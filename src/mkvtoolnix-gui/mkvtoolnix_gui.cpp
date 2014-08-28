@@ -19,12 +19,14 @@ main(int argc,
      char **argv) {
   registerMetaTypes();
 
-  App app(argc, argv);
+  auto app        = std::unique_ptr<App>(new App{argc, argv});
+  auto mainWindow = std::unique_ptr<MainWindow>(new MainWindow{});
 
-  MainWindow mainWindow;
-  mainWindow.show();
+  mainWindow->show();
+  app->exec();
 
-  app.exec();
+  mainWindow.reset();
+  app.reset();
 
   mxexit(0);
 }
