@@ -132,8 +132,6 @@ public slots:
 
   virtual void resizeAttachmentsColumnsToContents() const;
 
-  virtual void onShowMkvmergeOptions();
-
 protected:
   virtual void setupAttachmentsControls();
   virtual void setupControlLists();
