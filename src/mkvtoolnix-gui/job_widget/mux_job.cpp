@@ -73,13 +73,13 @@ MuxJob::processLine(QString const &rawLine) {
   // TODO: MuxJob::processLine
   if (line.startsWith("Warning:")) {
     line.replace(QRegularExpression{"^Warning: *"}, "");
-    emit warningRead(line);
+    emit lineRead(line, WarningLine);
     return;
   }
 
   if (line.startsWith("Error:")) {
     line.replace(QRegularExpression{"^Error: *"}, "");
-    emit errorRead(line);
+    emit lineRead(line, ErrorLine);
     return;
   }
 
@@ -99,7 +99,7 @@ MuxJob::processLine(QString const &rawLine) {
     return;
   }
 
-  emit infoRead(line);
+  emit lineRead(line, InfoLine);
 }
 
 void
@@ -127,4 +127,17 @@ MuxJob::processFinished(int exitCode,
 void
 MuxJob::processError(QProcess::ProcessError /*error*/) {
   setStatus(Job::Failed);
+}
+
+QString
+MuxJob::displayableType()
+  const {
+  return QY("merge");
+}
+
+QString
+MuxJob::displayableDescription()
+  const {
+  QFileInfo info{m_config->m_destination};
+  return QY("merging to file »%1« in directory »%2«").arg(info.fileName()).arg(info.filePath());
 }

@@ -10,6 +10,7 @@
 
 static void
 registerMetaTypes() {
+  qRegisterMetaType<Job::LineType>("Job::LineType");
   qRegisterMetaType<Job::Status>("Job::Status");
   qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
 }

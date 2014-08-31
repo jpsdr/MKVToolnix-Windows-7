@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/merge_widget/merge_widget.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/watch_job_container_widget/watch_job_container_widget.h"
 
 #include <QIcon>
 #include <QLabel>
@@ -78,17 +79,20 @@ MainWindow::setupToolSelector() {
 
   m_toolMerge = new MergeWidget{ui->tool};
   m_toolJobs  = new JobWidget{ui->tool};
+  m_watchJobContainer = new WatchJobContainerWidget{ui->tool};
 
-  ui->tool->insertTab(0, m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
-  ui->tool->insertTab(1, createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
-  ui->tool->insertTab(2, createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
-  ui->tool->insertTab(3, createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit.png"},              QY("edit headers"));
-  ui->tool->insertTab(4, createNotImplementedWidget(), QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
-  ui->tool->insertTab(5, createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
-  ui->tool->insertTab(6, m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
+  auto numTabs = 0u;
+  ui->tool->insertTab(numTabs++, m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
+  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
+  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
+  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit.png"},              QY("edit headers"));
+  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
+  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
+  ui->tool->insertTab(numTabs++, m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
+  ui->tool->insertTab(numTabs++, m_watchJobContainer,          QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
 
-  for (int i = 0; 6 >= i; i++)
-    ui->tool->setTabEnabled(i, true);
+  for (auto idx = 0u; idx < numTabs; ++idx)
+    ui->tool->setTabEnabled(idx, true);
 
   ui->tool->setCurrentIndex(0);
 
@@ -108,6 +112,16 @@ MainWindow::getMergeWidget() {
 JobWidget *
 MainWindow::getJobWidget() {
   return get()->m_toolJobs;
+}
+
+WatchJobWidget *
+MainWindow::getWatchCurrentJobWidget() {
+  return getWatchJobContainerWidget()->currentJobWidget();
+}
+
+WatchJobContainerWidget *
+MainWindow::getWatchJobContainerWidget() {
+  return get()->m_watchJobContainer;
 }
 
 void

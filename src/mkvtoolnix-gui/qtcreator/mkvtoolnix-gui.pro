@@ -20,7 +20,9 @@ FORMS += \
     ../forms/job_widget.ui \
     ../forms/select_playlist_dialog.ui \
     ../forms/status_bar_progress_widget.ui \
-    ../forms/command_line_dialog.ui
+    ../forms/command_line_dialog.ui \
+    ../forms/watch_job_widget.ui \
+    ../forms/watch_job_container_widget.ui
 
 RESOURCES += \
     ../qt_resources.qrc

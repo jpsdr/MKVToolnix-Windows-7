@@ -237,7 +237,7 @@ MergeWidget::addToJobQueue(bool startNow) {
   auto newConfig     = std::make_shared<MuxConfig>(m_config);
   auto job           = std::make_shared<MuxJob>(startNow ? Job::PendingAuto : Job::PendingManual, newConfig);
   job->m_dateAdded   = QDateTime::currentDateTime();
-  job->m_description = QY("Merge to %1").arg(newConfig->m_destination);
+  job->m_description = job->displayableDescription();
 
   if (!startNow) {
     auto newDescription = QString{};

@@ -1,11 +1,13 @@
 #include "common/common_pch.h"
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/forms/job_widget.h"
 #include "mkvtoolnix-gui/job_widget/job_widget.h"
 #include "mkvtoolnix-gui/job_widget/mux_job.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge_widget/mux_config.h"
-#include "mkvtoolnix-gui/forms/job_widget.h"
 #include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/watch_job_container_widget/watch_job_widget.h"
 
 #include <QList>
 #include <QMessageBox>
@@ -122,6 +124,8 @@ JobWidget::resizeColumnsToContents()
 
 void
 JobWidget::addJob(JobPtr const &job) {
+  MainWindow::getWatchCurrentJobWidget()->connectToJob(*job);
+
   m_model->add(job);
   resizeColumnsToContents();
 }

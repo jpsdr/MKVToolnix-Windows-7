@@ -29,6 +29,9 @@ public:
   virtual void abort();
   virtual void start();
 
+  virtual QString displayableType() const;
+  virtual QString displayableDescription() const;
+
 public slots:
   void readAvailable();
   void processFinished(int exitCode, QProcess::ExitStatus exitStatus);
@@ -39,10 +42,6 @@ protected:
   void processLine(QString const &rawLine);
 
 signals:
-  void infoRead(QString const &line);
-  void warningRead(QString const &line);
-  void errorRead(QString const &line);
-
   void startedScanningPlaylists();
   void finishedScanningPlaylists();
 };

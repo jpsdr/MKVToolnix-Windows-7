@@ -13,6 +13,8 @@ class MainWindow;
 class JobWidget;
 class MergeWidget;
 class StatusBarProgressWidget;
+class WatchJobContainerWidget;
+class WatchJobWidget;
 
 class MainWindow : public QMainWindow {
   Q_OBJECT;
@@ -23,6 +25,7 @@ protected:
   StatusBarProgressWidget *m_statusBarProgress;
   MergeWidget *m_toolMerge;
   JobWidget *m_toolJobs;
+  WatchJobContainerWidget *m_watchJobContainer;
 
 protected:                      // static
   static MainWindow *ms_mainWindow;
@@ -38,6 +41,8 @@ public:                         // static
   static MainWindow *get();
   static MergeWidget *getMergeWidget();
   static JobWidget *getJobWidget();
+  static WatchJobWidget *getWatchCurrentJobWidget();
+  static WatchJobContainerWidget *getWatchJobContainerWidget();
 
 protected:
   virtual void setupToolSelector();

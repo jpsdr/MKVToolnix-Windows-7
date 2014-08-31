@@ -62,11 +62,6 @@ protected:
   QList<QStandardItem *> createRow(Job const &job) const;
 
   void updateProgress();
-
-public:                         // static
-  static QString displayableJobType(Job const &job);
-  static QString displayableJobStatus(Job const &job);
-  static QString displayableDate(QDateTime const &date);
 };
 
 #endif  // MTX_MKVTOOLNIX_GUI_JOB_MODEL_H

@@ -73,38 +73,14 @@ JobModel::hasJobs()
   return !m_jobs.isEmpty();
 }
 
-QString
-JobModel::displayableJobType(Job const &job) {
-  return dynamic_cast<MuxJob const *>(&job) ? QY("merge")
-       :                                      QY("unknown");
-}
-
-QString
-JobModel::displayableJobStatus(Job const &job) {
-  return job.m_status == Job::PendingManual ? QY("pending manual start")
-       : job.m_status == Job::PendingAuto   ? QY("pending automatic start")
-       : job.m_status == Job::Running       ? QY("running")
-       : job.m_status == Job::DoneOk        ? QY("completed OK")
-       : job.m_status == Job::DoneWarnings  ? QY("completed with warnings")
-       : job.m_status == Job::Failed        ? QY("failed")
-       : job.m_status == Job::Aborted       ? QY("aborted by user")
-       : job.m_status == Job::Disabled      ? QY("disabled")
-       :                                      QY("unknown");
-}
-
-QString
-JobModel::displayableDate(QDateTime const &date) {
-  return date.isValid() ? date.toString(QString{"yyyy-MM-dd hh:mm:ss"}) : QString{""};
-}
-
 QList<QStandardItem *>
 JobModel::createRow(Job const &job)
   const {
   auto items    = QList<QStandardItem *>{};
   auto progress = to_qs(boost::format("%1%%%") % job.m_progress);
 
-  items << (new QStandardItem{job.m_description})                << (new QStandardItem{displayableJobType(job)})            << (new QStandardItem{displayableJobStatus(job)}) << (new QStandardItem{progress})
-        << (new QStandardItem{displayableDate(job.m_dateAdded)}) << (new QStandardItem{displayableDate(job.m_dateStarted)}) << (new QStandardItem{displayableDate(job.m_dateFinished)});
+  items << (new QStandardItem{job.m_description})                      << (new QStandardItem{job.displayableType()})                    << (new QStandardItem{Job::displayableStatus(job.m_status)}) << (new QStandardItem{progress})
+        << (new QStandardItem{Util::displayableDate(job.m_dateAdded)}) << (new QStandardItem{Util::displayableDate(job.m_dateStarted)}) << (new QStandardItem{Util::displayableDate(job.m_dateFinished)});
 
   items[DescriptionColumn ]->setData(QVariant::fromValue(job.m_id), Util::JobIdRole);
   items[DescriptionColumn ]->setTextAlignment(Qt::AlignLeft);
@@ -176,13 +152,13 @@ JobModel::onStatusChanged(uint64_t id,
   if (m_toBeProcessed.count() != numBefore)
     updateProgress();
 
-  item(row, StatusColumn)->setText(displayableJobStatus(job));
+  item(row, StatusColumn)->setText(Job::displayableStatus(job.m_status));
 
   if (Job::Running == status)
-    item(row, DateStartedColumn)->setText(displayableDate(job.m_dateStarted));
+    item(row, DateStartedColumn)->setText(Util::displayableDate(job.m_dateStarted));
 
   else if ((Job::DoneOk == status) || (Job::DoneWarnings == status) || (Job::Failed == status) || (Job::Aborted == status))
-    item(row, DateFinishedColumn)->setText(displayableDate(job.m_dateFinished));
+    item(row, DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
 
   startNextAutoJob();
 }

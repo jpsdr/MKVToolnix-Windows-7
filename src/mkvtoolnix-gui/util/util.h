@@ -8,6 +8,7 @@
 
 class QAbstractItemView;
 class QComboBox;
+class QDateTime;
 class QIcon;
 class QModelIndex;
 class QTreeView;
@@ -60,6 +61,8 @@ QString unescape(QString const &source, EscapeMode mode);
 QStringList unescape(QStringList const &source, EscapeMode mode);
 
 QString joinSentences(QStringList const &sentences);
+
+QString displayableDate(QDateTime const &date);
 
 };
 
