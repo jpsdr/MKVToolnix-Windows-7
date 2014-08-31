@@ -53,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr (-,root,root)
-%doc AUTHORS COPYING README ChangeLog NEWS TODO
+%doc AUTHORS COPYING README.md ChangeLog NEWS TODO
 %{_bindir}/*
 %{_datadir}/man/man1/*
 %{_datadir}/man/de/man1/*
