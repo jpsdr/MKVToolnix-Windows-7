@@ -35,6 +35,7 @@ require_relative "rake.d/target"
 require_relative "rake.d/application"
 require_relative "rake.d/library"
 require_relative "rake.d/format_string_verifier"
+require_relative "rake.d/tarball"
 require_relative 'rake.d/gtest' if $have_gtest
 
 def setup_globals
@@ -479,6 +480,17 @@ namespace :dev do
       formatter.width   = 9999999
       formatter.write doc, File.open(qrc, "w")
     end
+  end
+
+  desc "Create source code tarball from current version in .."
+  task :tarball do
+    create_source_tarball
+  end
+
+  desc "Create source code tarball from current version in .. with git revision in name"
+  task "tarball-rev" do
+    revision = `git rev-parse --short HEAD`.chomp
+    create_source_tarball "-#{revision}"
   end
 end
 
