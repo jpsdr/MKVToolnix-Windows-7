@@ -53,9 +53,9 @@ Moritz Bunkus <moritz@bunkus.org>
 If you want to compile the tools yourself then you must first decide
 if you want to use a 'proper' release version or the current
 development version. As both Matroska and MKVToolNix are under heavy
-development there might be features available in the Subversion
-repository that are not available in the releases. On the other hand
-the Subversion repository version might not even compile.
+development there might be features available in the git repository
+that are not available in the releases. On the other hand the git
+repository version might not even compile.
 
 ### 2.1. Requirements
 
@@ -124,10 +124,10 @@ libraries. It will use them if no version is found on the system.
 Start with the two libraries. Either get libebml 1.3.0 from
 http://dl.matroska.org/downloads/libebml/ and libmatroska 1.4.0 from
 http://dl.matroska.org/downloads/libmatroska/ or a fresh copy from the
-Subversion repository:
+git repository:
 
-    svn co https://svn.matroska.org/svn/matroska/trunk/libebml
-    svn co https://svn.matroska.org/svn/matroska/trunk/libmatroska
+    git clone https://github.com/Matroska-Org/libebml.git
+    git clone https://github.com/Matroska-Org/libmatroska.git
 
 Change to "libebml/make/linux" and run `make staticlib`. If you have
 root-access then run `make install_headers install_staticlib` as
@@ -158,7 +158,7 @@ development snapshot from my Git repository.
 
   First clone my Git repository with this command:
 
-      git clone git://github.com/mbunkus/mkvtoolnix.git
+      git clone https://github.com/mbunkus/mkvtoolnix.git
 
   Now change to the MKVtoolNix directory with `cd mkvtoolnix` and run
   `./autogen.sh` which will generate the "configure" script. You need
