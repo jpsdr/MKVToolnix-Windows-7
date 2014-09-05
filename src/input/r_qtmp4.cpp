@@ -1888,8 +1888,9 @@ qtmp4_demuxer_c::update_editlist_table(int64_t global_time_scale) {
   if (editlist_table.empty())
     return;
 
-  int simple_editlist_type = 0;
-  int64_t offset_to_apply  = 0;
+  auto simple_editlist_type        = 0u;
+  int64_t raw_offset               = 0;
+  auto offset_in_global_time_scale = false;
 
   if ((editlist_table.size() == 1) && (0 == editlist_table[0].pos)) {
     mxdebug_if(m_debug_editlists, boost::format("Track ID %1%: Edit list analysis: type 1: one entry, zero time\n") % id);
@@ -1899,13 +1900,16 @@ qtmp4_demuxer_c::update_editlist_table(int64_t global_time_scale) {
     mxdebug_if(m_debug_editlists,
                boost::format("Track ID %1%: Edit list analysis: type 2: one entry, positive time, %2%\n")
                % id % (frame_offset_table.empty() ? "no frame offset table" : frame_offset_table[0] == editlist_table[0].pos ? "same as first frame offset" : "different from first frame offset"));
-    simple_editlist_type = 2;
-    offset_to_apply      = -editlist_table[0].pos + (frame_offset_table.empty() ? 0 : frame_offset_table[0]);
+    simple_editlist_type        = 2;
+    raw_offset                  = editlist_table[0].pos;
+    constant_editlist_offset_ns = (-editlist_table[0].pos + (frame_offset_table.empty() ? 0 : frame_offset_table[0])) * 1000000000ll / time_scale;
 
   } else if ((editlist_table.size() == 2) && (-1 == editlist_table[0].pos) && (0 == editlist_table[1].pos)) {
     mxdebug_if(m_debug_editlists, boost::format("Track ID %1%: Edit list analysis: type 3: two entries; first with time == -1, second zero time\n") % id);
-    simple_editlist_type = 3;
-    offset_to_apply      = editlist_table[0].duration - (frame_offset_table.empty() ? 0 : frame_offset_table[0]);
+    simple_editlist_type        = 3;
+    raw_offset                  = editlist_table[0].duration;
+    constant_editlist_offset_ns = (editlist_table[0].duration * 1000000000ll / global_time_scale)  - ((frame_offset_table.empty() ? 0 : frame_offset_table[0]) * 1000000000ll / time_scale);
+    offset_in_global_time_scale = true;
 
   } else if (m_debug_editlists) {
     std::stringstream output;
@@ -1915,12 +1919,11 @@ qtmp4_demuxer_c::update_editlist_table(int64_t global_time_scale) {
   }
 
   if (simple_editlist_type) {
-    constant_editlist_offset_ns = offset_to_apply * 1000000000ll / time_scale;
     editlist_table.clear();
 
     mxdebug_if(m_debug_editlists,
-               boost::format("Track ID %1%: Simple edit list type detected. Offset in track's time scale: %2%; as a timecode: %3%; track scale %4%\n")
-               % id % offset_to_apply % format_timecode(constant_editlist_offset_ns) % time_scale);
+               boost::format("Track ID %1%: Simple edit list type detected. Offset in %5%'s time scale: %2%; as a timecode: %3%; time scale %4%\n")
+               % id % raw_offset % format_timecode(constant_editlist_offset_ns) % (offset_in_global_time_scale ? global_time_scale : time_scale) % (offset_in_global_time_scale ? "file" : "track"));
 
     return;
   }
