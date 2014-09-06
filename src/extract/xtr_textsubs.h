@@ -54,7 +54,7 @@ public:
 
   std::vector<std::string> m_ssa_format;
   std::vector<ssa_line_c> m_lines;
-  std::string m_sub_charset;
+  std::string m_sub_charset, m_priv_post_events;
   charset_converter_cptr m_conv;
   bool m_warning_printed;
 

@@ -150,6 +150,12 @@ xtr_ssa_c::create_file(xtr_base_c *master,
   m_ssa_format = split(format_line, ",");
   strip(m_ssa_format, true);
 
+  auto section_after_events_pos = sconv.find("\n[", sconv.find("[Events]"));
+  if (std::string::npos != section_after_events_pos) {
+    m_priv_post_events = sconv.substr(section_after_events_pos);
+    sconv.erase(section_after_events_pos + 1);
+  }
+
   sconv = m_conv->native(sconv);
   m_out->puts(sconv);
 }
@@ -250,6 +256,9 @@ xtr_ssa_c::finish_file() {
   std::sort(m_lines.begin(), m_lines.end());
   for (i = 0; i < m_lines.size(); i++)
     m_out->puts(m_lines[i].m_line.c_str());
+
+  if (!m_priv_post_events.empty())
+    m_out->puts(m_conv->native(m_priv_post_events));
 }
 
 // ------------------------------------------------------------------------
