@@ -118,13 +118,13 @@ if test x"$enable_qt" = "xyes" -a \
   fi
 
   if test $ok = 1; then
-    PKG_CHECK_EXISTS([Qt5Core,Qt5Gui,Qt5Widgets],,[ok=0])
+    PKG_CHECK_EXISTS([Qt5Core,Qt5Gui,Qt5Widgets,Qt5PlatformSupport],,[ok=0])
   fi
 
   if test $ok = 1; then
     dnl Try compiling and linking an application.
-    QT_CFLAGS="`$PKG_CONFIG --cflags Qt5Core Qt5Gui Qt5Widgets`"
-    QT_LIBS="`$PKG_CONFIG --libs Qt5Core Qt5Gui Qt5Widgets`"
+    QT_CFLAGS="`$PKG_CONFIG --cflags Qt5Core Qt5Gui Qt5Widgets Qt5PlatformSupport`"
+    QT_LIBS="`$PKG_CONFIG --libs Qt5Core Qt5Gui Qt5Widgets Qt5PlatformSupport`"
 
     AC_LANG_PUSH(C++)
     AC_CACHE_VAL(am_cv_qt_compilation, [
@@ -174,7 +174,7 @@ return 0;
           run_qt_test=2
 
         elif test x"$run_qt_test" = "x2"; then
-          QT_CFLAGS="$QT_CFLAGS -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include/QtWidgets -I/usr/local/include/QtCore -I/usr/local/include/QtGui -I/usr/local/include/QtWidgets"
+          QT_CFLAGS="$QT_CFLAGS -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include/QtWidgets -I/usr/local/include/QtCore -I/usr/local/include/QtGui -I/usr/local/include/QtWidgets -I/usr/local/include/QtPlatformSupport"
           run_qt_test=3
 
         else
@@ -184,6 +184,23 @@ return 0;
       done
       ])
     AC_LANG_POP()
+
+    if test "x$ac_cv_mingw32" = "xyes"; then
+      plugins_dir=
+      for dir in `echo $QT_LIBS | sed -e 's/-l[^ ]*\( \|$\)//g' -e 's/-L//'` ; do
+        if test -d "$dir/../plugins" -a -d "$dir/../plugins/platforms"; then
+          plugins_dir="$dir/../plugins"
+          break
+        fi
+      done
+
+      if test x"$plugins_dir" = x; then
+        AC_MSG_RESULT(no: the plugins directory could not be found)
+        have_qt=no
+      else
+        QT_PLUGINS_DIR="$plugins_dir"
+      fi
+    fi
 
     if test x"$am_cv_qt_compilation" = x1; then
      AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
@@ -212,5 +229,6 @@ AC_SUBST(MOC)
 AC_SUBST(UIC)
 AC_SUBST(QT_CFLAGS)
 AC_SUBST(QT_LIBS)
+AC_SUBST(QT_PLUGINS_DIR)
 AC_SUBST(USE_QT)
 AC_SUBST(BUILD_MKVTOOLNIX_GUI)

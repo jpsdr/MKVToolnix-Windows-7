@@ -92,6 +92,7 @@ def setup_globals
   cflags_common           += " -DPACKAGE=\\\"#{c(:PACKAGE)}\\\" -DVERSION=\\\"#{c(:VERSION)}\\\" -DMTX_LOCALE_DIR=\\\"#{c(:localedir)}\\\" -DMTX_PKG_DATA_DIR=\\\"#{c(:pkgdatadir)}\\\" -DMTX_DOC_DIR=\\\"#{c(:docdir)}\\\""
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0500 -D_WIN32_WINNT=0x0500 " if c?(:MINGW)
   cflags_common           += " -fPIC " if c?(:USE_QT) && !c?(:MINGW)
+  cflags_common           += " -DQT_STATICPLUGIN" if c?(:USE_QT) && c?(:MINGW)
   ldflags_extra            = c?(:MINGW) ? '' : "-Wl,--enable-auto-import"
   $flags                   = {
     :cflags                => "#{cflags_common} #{c(:USER_CFLAGS)}",
@@ -706,6 +707,7 @@ Application.new("src/mkvinfo").
   sources("src/info/resources.o", :if => c?(:MINGW)).
   libraries(:mtxinfo, $common_libs).
   only_if(c?(:USE_QT)).
+  sources("src/info/sys_windows.o", :if => c?(:MINGW)).
   sources("src/info/qt_ui.cpp", "src/info/qt_ui.moc", "src/info/rightclick_tree_widget.moc", $mkvinfo_ui_files).
   libraries(:qt).
   end_if.
@@ -791,6 +793,7 @@ if $build_mkvtoolnix_gui
     sources(cpp_files, ui_files, 'src/mkvtoolnix-gui/qt_resources.cpp').
     sources("src/mkvtoolnix-gui/resources.o", :if => c?(:MINGW)).
     libraries($common_libs, :qt).
+    libraries("-mwindows", :if => c?(:MINGW)).
     png_icon("share/icons/64x64/mkvmergeGUI.png").
     create
 end
