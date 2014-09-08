@@ -120,7 +120,7 @@ ac3_packetizer_c::flush_impl() {
 void
 ac3_packetizer_c::flush_packets() {
   while (m_parser.frame_available()) {
-    ac3::frame_c frame = m_parser.get_frame();
+    auto frame = get_frame();
 
     adjust_header_values(frame);
 
