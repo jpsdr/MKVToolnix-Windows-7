@@ -28,7 +28,7 @@ FileIdentifier::identify() {
   QStringList args;
   args << "--output-charset" << "utf-8" << "--identify-for-mmg" << m_fileName;
 
-  auto process  = Process::execute(Settings::get().m_mkvmergeExe, args);
+  auto process  = Process::execute(Settings::get().actualMkvmergeExe(), args);
   auto exitCode = process->process().exitCode();
   m_output      = process->output();
 

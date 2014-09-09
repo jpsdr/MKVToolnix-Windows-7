@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/fs_sys_helpers.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
@@ -41,6 +42,12 @@ Settings::load() {
   reg.endGroup();
 }
 
+QString
+Settings::actualMkvmergeExe()
+  const {
+  return exeWithPath(m_mkvmergeExe);
+}
+
 void
 Settings::save()
   const {
@@ -74,4 +81,17 @@ Settings::getPriorityAsString()
        : NormalPriority == m_priority ? Q("normal")
        : HighPriority   == m_priority ? Q("higher")
        :                                Q("highest");
+}
+
+QString
+Settings::exeWithPath(QString const &exe) {
+#if defined(SYS_WINDOWS)
+  auto path = bfs::path{ to_utf8(exe) };
+  if (path.is_absolute())
+    return exe;
+
+  return to_qs((mtx::get_installation_path() / path).native());
+#else  // defined(SYS_WINDOWS)
+  return exe;
+#endif // defined(SYS_WINDOWS)
 }

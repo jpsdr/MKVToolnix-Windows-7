@@ -41,7 +41,7 @@ MuxJob::start() {
   setStatus(Job::Running);
   setProgress(0);
 
-  m_process.start(Settings::get().m_mkvmergeExe, QStringList{} << "--gui-mode" << QString{"@%1"}.arg(m_settingsFile->fileName()), QIODevice::ReadOnly);
+  m_process.start(Settings::get().actualMkvmergeExe(), QStringList{} << "--gui-mode" << QString{"@%1"}.arg(m_settingsFile->fileName()), QIODevice::ReadOnly);
 }
 
 void

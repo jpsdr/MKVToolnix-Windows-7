@@ -274,9 +274,9 @@ get_current_exe_path(std::string const &argv0) {
 
 #endif
 
-bfs::path const &
+bfs::path
 get_installation_path() {
-  return s_current_executable_path;;
+  return s_current_executable_path;
 }
 
 void

@@ -37,10 +37,13 @@ public:
   void save() const;
 
   QString getPriorityAsString() const;
+  QString actualMkvmergeExe() const;
 
 public:
   static Settings s_settings;
   static Settings &get();
+
+  static QString exeWithPath(QString const &exe);
 };
 
 // extern Settings g_settings;

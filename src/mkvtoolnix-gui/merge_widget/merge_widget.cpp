@@ -54,7 +54,7 @@ MergeWidget::~MergeWidget() {
 
 void
 MergeWidget::onShowCommandLine() {
-  auto options = (QStringList{} << Settings::get().m_mkvmergeExe) + m_config.buildMkvmergeOptions();
+  auto options = (QStringList{} << Settings::get().actualMkvmergeExe()) + m_config.buildMkvmergeOptions();
   CommandLineDialog{this, options, QY("mkvmerge command line")}.exec();
 }
 
