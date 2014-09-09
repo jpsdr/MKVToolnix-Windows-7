@@ -2,7 +2,7 @@ class Target
   private
   def qt_libraries args = {}
     libs  = ''
-    libs += "-L#{c(:QT_PLUGINS_DIR)}/platforms -lqwindows " if c?(:MINGW)
+    libs += "-L#{c(:QT_PLUGINS_DIR)}/platforms -lqwindows -L#{c(:QT_PLUGINS_DIR)}/accessible -lqtaccessiblewidgets " if c?(:MINGW)
     libs += c(:QT_LIBS)
     return libs
   end
