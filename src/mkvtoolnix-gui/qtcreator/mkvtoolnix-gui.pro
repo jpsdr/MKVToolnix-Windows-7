@@ -22,7 +22,8 @@ FORMS += \
     ../forms/status_bar_progress_widget.ui \
     ../forms/command_line_dialog.ui \
     ../forms/watch_job_widget.ui \
-    ../forms/watch_job_container_widget.ui
+    ../forms/watch_job_container_widget.ui \
+    ../forms/preview_warning_dialog.ui
 
 RESOURCES += \
     ../qt_resources.qrc
