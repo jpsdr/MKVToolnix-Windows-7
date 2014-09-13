@@ -139,6 +139,7 @@ Section "Program files" SEC01
   File "mkvmerge.exe"
   File "mkvpropedit.exe"
   File "mmg.exe"
+  File "mkvtoolnix-gui.exe"
   SetOutPath "$INSTDIR\data"
   File "data\magic.mgc"
   SetOutPath "$INSTDIR\doc"
@@ -526,6 +527,7 @@ Section "Program files" SEC01
   SetOutPath "$INSTDIR"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\mkvmerge GUI.lnk" "$INSTDIR\mmg.exe" "" "$INSTDIR\mmg.exe"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\mkvinfo GUI.lnk" "$INSTDIR\mkvinfo.exe" "-g" "$INSTDIR\mkvinfo.exe"
+  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI preview.lnk" "$INSTDIR\mkvtoolnix-gui.exe" "" "$INSTDIR\mkvtoolnix-gui.exe"
   SetOutPath "$INSTDIR\Doc"
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP\Documentation"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Documentation\Command line references and guide.lnk" "$INSTDIR\doc\command_line_references_and_guide.html"
@@ -537,6 +539,7 @@ Section "Program files" SEC01
   IfSilent +3 0
   MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(STRING_SHORTCUT_ON_DESKTOP)" IDNO +2
   CreateShortCut "$DESKTOP\mkvmerge GUI.lnk" "$INSTDIR\mmg.exe" "" "$INSTDIR\mmg.exe"
+  CreateShortCut "$DESKTOP\MKVToolNix GUI preview.lnk" "$INSTDIR\mkvtoolnix-gui.exe" "" "$INSTDIR\mkvtoolnix-gui.exe"
 SectionEnd
 
 Section -AdditionalIcons
@@ -592,6 +595,7 @@ Section Uninstall
 
   Delete "$SMPROGRAMS\$ICONS_GROUP\mkvmerge GUI.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\mkvinfo GUI.lnk"
+  Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI preview.lnk"
 
   Delete "$SMPROGRAMS\$ICONS_GROUP\Documentation\Command line references and guide.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\Documentation\ChangeLog - What is new.lnk"
@@ -609,6 +613,7 @@ Section Uninstall
   Delete "$INSTDIR\mkvmerge.exe"
   Delete "$INSTDIR\mkvpropedit.exe"
   Delete "$INSTDIR\mmg.exe"
+  Delete "$INSTDIR\mkvtoolnix-gui.exe"
 
   Delete "$INSTDIR\data\magic.mgc"
 
