@@ -605,6 +605,7 @@ Section Uninstall
   RMDir "$SMPROGRAMS\$ICONS_GROUP"
 
   Delete "$DESKTOP\mkvmerge GUI.lnk"
+  Delete "$DESKTOP\MKVToolNix GUI preview.lnk"
 
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
