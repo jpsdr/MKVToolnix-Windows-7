@@ -11,6 +11,7 @@
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_job_container_widget/watch_job_container_widget.h"
 
+#include <QCloseEvent>
 #include <QIcon>
 #include <QLabel>
 #include <QStaticText>
@@ -127,4 +128,15 @@ MainWindow::getWatchJobContainerWidget() {
 void
 MainWindow::retranslateUI() {
   setWindowTitle(Q(get_version_info("MKVToolNix GUI")));
+}
+
+void
+MainWindow::closeEvent(QCloseEvent *event) {
+  QSettings reg;
+
+  auto jobWidget = getJobWidget();
+  if (jobWidget)
+    jobWidget->getModel()->saveJobs(reg);
+
+  event->accept();
 }

@@ -48,6 +48,8 @@ protected:
   virtual void setupToolSelector();
   virtual QWidget *createNotImplementedWidget();
   virtual void retranslateUI();
+
+  virtual void closeEvent(QCloseEvent *event);
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_MAIN_WINDOW_H

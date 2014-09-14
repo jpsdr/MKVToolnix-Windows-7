@@ -40,6 +40,7 @@ public slots:
 protected:
   void processBytesRead();
   void processLine(QString const &rawLine);
+  virtual void saveJobInternal(QSettings &settings) const;
 
 signals:
   void startedScanningPlaylists();

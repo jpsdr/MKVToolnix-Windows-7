@@ -2,6 +2,7 @@
 
 #include <QAbstractItemView>
 #include <QMutexLocker>
+#include <QSettings>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/job_widget/job_model.h"
@@ -233,4 +234,20 @@ JobModel::updateProgress() {
   auto totalProgress = (numDone * 100 + runningProgress) / m_toBeProcessed.count();
 
   emit progressChanged(progress, totalProgress);
+}
+
+void
+JobModel::saveJobs(QSettings &settings)
+  const {
+  settings.beginGroup("jobQueue");
+  settings.setValue("numberOfJobs", m_jobs.size());
+
+  auto idx = 0u;
+  for (auto const &job : m_jobs) {
+    settings.beginGroup(Q("job %1").arg(idx++));
+    job->saveJob(settings);
+    settings.endGroup();
+  }
+
+  settings.endGroup();
 }

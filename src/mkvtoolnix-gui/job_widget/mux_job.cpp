@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QRegularExpression>
+#include <QSettings>
 #include <QStringList>
 #include <QTemporaryFile>
 
@@ -140,4 +141,14 @@ MuxJob::displayableDescription()
   const {
   QFileInfo info{m_config->m_destination};
   return QY("merging to file »%1« in directory »%2«").arg(info.fileName()).arg(info.filePath());
+}
+
+void
+MuxJob::saveJobInternal(QSettings &settings)
+  const {
+  settings.setValue("jobTyp", "MuxJob");
+
+  settings.beginGroup("muxConfig");
+  m_config->save(settings);
+  settings.endGroup();
 }

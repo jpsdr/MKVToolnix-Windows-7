@@ -51,6 +51,8 @@ public:
 
   void startNextAutoJob();
 
+  void saveJobs(QSettings &settings) const;
+
 signals:
   void progressChanged(unsigned int progress, unsigned int totalProgress);
 

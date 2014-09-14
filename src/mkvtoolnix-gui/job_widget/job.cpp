@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <QSettings>
+
 #include "common/qt.h"
 #include "mkvtoolnix-gui/job_widget/job.h"
 
@@ -91,4 +93,24 @@ Job::displayableStatus(Status status) {
        : Aborted       == status ? QY("aborted by user")
        : Disabled      == status ? QY("disabled")
        :                           QY("unknown");
+}
+
+void
+Job::saveJob(QSettings &settings)
+  const {
+
+  settings.setValue("id",           static_cast<quint64>(m_id));
+  settings.setValue("status",       static_cast<unsigned int>(m_status));
+  settings.setValue("description",  m_description);
+  settings.setValue("output",       m_output);
+  settings.setValue("warnings",     m_warnings);
+  settings.setValue("errors",       m_errors);
+  settings.setValue("fullOutput",   m_fullOutput);
+  settings.setValue("progress",     m_progress);
+  settings.setValue("exitCode",     m_exitCode);
+  settings.setValue("dateAdded",    m_dateAdded);
+  settings.setValue("dateStarted",  m_dateStarted);
+  settings.setValue("dateFinished", m_dateFinished);
+
+  saveJobInternal(settings);
 }

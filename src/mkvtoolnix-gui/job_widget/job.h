@@ -9,6 +9,8 @@
 #include <QString>
 #include <QStringList>
 
+class QSettings;
+
 class Job: public QObject {
   Q_OBJECT;
   Q_ENUMS(Status);
@@ -58,6 +60,11 @@ public:
   virtual QString displayableDescription() const = 0;
 
   void setPendingAuto();
+
+  void saveJob(QSettings &settings) const;
+
+protected:
+  virtual void saveJobInternal(QSettings &settings) const = 0;
 
 public slots:
   void setStatus(Job::Status status);
