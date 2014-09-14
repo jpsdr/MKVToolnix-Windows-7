@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QProcess>
 
+#include "common/fs_sys_helpers.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/job_widget/job.h"
 #include "mkvtoolnix-gui/mkvtoolnix_gui.h"
@@ -18,6 +19,9 @@ registerMetaTypes() {
 
 static void
 showPreviewWarning(QWidget *parent) {
+  if (get_environment_variable("NO_WARNING") == "1")
+    return;
+
   auto dlg = std::unique_ptr<PreviewWarningDialog>(new PreviewWarningDialog{parent});
   dlg->exec();
 }
