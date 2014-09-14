@@ -489,7 +489,7 @@ MergeWidget::onAppendFiles() {
 void
 MergeWidget::addOrAppendFiles(bool append) {
   auto fileNames = selectFilesToAdd(append ? QY("Append media files") : QY("Add media files"));
-  if (fileNames.empty())
+  if (fileNames.isEmpty())
     return;
 
   QList<SourceFilePtr> identifiedFiles;

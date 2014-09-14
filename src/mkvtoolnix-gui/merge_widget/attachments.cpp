@@ -83,7 +83,7 @@ MergeWidget::onAttachmentStyleChanged(int newValue) {
 void
 MergeWidget::onAddAttachments() {
   auto fileNames = selectAttachmentsToAdd();
-  if (fileNames.empty())
+  if (fileNames.isEmpty())
     return;
 
   QList<AttachmentPtr> attachmentsToAdd;
