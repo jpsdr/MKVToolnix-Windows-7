@@ -19,7 +19,7 @@ protected:
   QSet<Job const *> m_toBeProcessed;
   QMutex m_mutex;
 
-  bool m_started;
+  bool m_started, m_dontStartJobsNow;
 
 public:
   // labels << QY("Description") << QY("Type") << QY("Status") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
@@ -52,6 +52,7 @@ public:
   void startNextAutoJob();
 
   void saveJobs(QSettings &settings) const;
+  void loadJobs(QSettings &settings);
 
 signals:
   void progressChanged(unsigned int progress, unsigned int totalProgress);

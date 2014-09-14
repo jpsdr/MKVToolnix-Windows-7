@@ -4,6 +4,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/job_widget/job.h"
+#include "mkvtoolnix-gui/job_widget/mux_job.h"
 
 uint64_t Job::ms_next_id = 0;
 
@@ -113,4 +114,32 @@ Job::saveJob(QSettings &settings)
   settings.setValue("dateFinished", m_dateFinished);
 
   saveJobInternal(settings);
+}
+
+void
+Job::loadJobBasis(QSettings &settings) {
+  m_id           = settings.value("id").toULongLong();
+  m_status       = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
+  m_description  = settings.value("description").toString();
+  m_output       = settings.value("output").toStringList();
+  m_warnings     = settings.value("warnings").toStringList();
+  m_errors       = settings.value("errors").toStringList();
+  m_fullOutput   = settings.value("fullOutput").toStringList();
+  m_progress     = settings.value("progress").toUInt();
+  m_exitCode     = settings.value("exitCode").toUInt();
+  m_dateAdded    = settings.value("dateAdded").toDateTime();
+  m_dateStarted  = settings.value("dateStarted").toDateTime();
+  m_dateFinished = settings.value("dateFinished").toDateTime();
+}
+
+JobPtr
+Job::loadJob(QSettings &settings) {
+  auto jobType = settings.value("jobType");
+
+  if (jobType == "MuxJob")
+    return MuxJob::loadMuxJob(settings);
+
+  Q_ASSERT_X(false, "Job::loadJob", "Unknown job type encountered");
+
+  return JobPtr{};
 }

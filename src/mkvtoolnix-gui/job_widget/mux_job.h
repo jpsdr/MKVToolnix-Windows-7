@@ -45,6 +45,9 @@ protected:
 signals:
   void startedScanningPlaylists();
   void finishedScanningPlaylists();
+
+public:
+  static JobPtr loadMuxJob(QSettings &settings);
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_MUX_JOB_H

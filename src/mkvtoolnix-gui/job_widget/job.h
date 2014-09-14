@@ -10,6 +10,8 @@
 #include <QStringList>
 
 class QSettings;
+class Job;
+typedef std::shared_ptr<Job> JobPtr;
 
 class Job: public QObject {
   Q_OBJECT;
@@ -65,6 +67,7 @@ public:
 
 protected:
   virtual void saveJobInternal(QSettings &settings) const = 0;
+  virtual void loadJobBasis(QSettings &settings);
 
 public slots:
   void setStatus(Job::Status status);
@@ -79,8 +82,7 @@ signals:
 
 public:                         // static
   static QString displayableStatus(Status status);
+  static JobPtr loadJob(QSettings &settings);
 };
-typedef std::shared_ptr<Job> JobPtr;
-
 
 #endif  // MTX_MKVTOOLNIX_GUI_JOB_H

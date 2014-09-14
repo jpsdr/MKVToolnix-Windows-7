@@ -13,6 +13,7 @@ JobModel::JobModel(QObject *parent)
   : QStandardItemModel{parent}
   , m_mutex{QMutex::Recursive}
   , m_started{}
+  , m_dontStartJobsNow{}
 {
   auto labels = QStringList{};
   labels << QY("Description") << QY("Type") << QY("Status") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
@@ -178,6 +179,9 @@ JobModel::onProgressChanged(uint64_t id,
 
 void
 JobModel::startNextAutoJob() {
+  if (m_dontStartJobsNow)
+    return;
+
   QMutexLocker locked{&m_mutex};
 
   if (!m_started)
@@ -250,4 +254,28 @@ JobModel::saveJobs(QSettings &settings)
   }
 
   settings.endGroup();
+}
+
+void
+JobModel::loadJobs(QSettings &settings) {
+  QMutexLocker locked{&m_mutex};
+
+  m_dontStartJobsNow = true;
+
+  removeRows(0, rowCount());
+  m_jobs.clear();
+
+  settings.beginGroup("jobQueue");
+  auto numberOfJobs = settings.value("numberOfJobs").toUInt();
+  for (auto idx = 0u; idx < numberOfJobs; ++idx) {
+    settings.beginGroup(Q("job %1").arg(idx++));
+    add(Job::loadJob(settings));
+    settings.endGroup();
+  }
+
+  settings.endGroup();
+
+  updateProgress();
+
+  m_dontStartJobsNow = false;
 }

@@ -146,9 +146,25 @@ MuxJob::displayableDescription()
 void
 MuxJob::saveJobInternal(QSettings &settings)
   const {
-  settings.setValue("jobTyp", "MuxJob");
+  settings.setValue("jobType", "MuxJob");
+  settings.setValue("aborted", m_aborted);
 
   settings.beginGroup("muxConfig");
   m_config->save(settings);
   settings.endGroup();
+}
+
+JobPtr
+MuxJob::loadMuxJob(QSettings &settings) {
+  auto config = std::make_shared<MuxConfig>();
+
+  settings.beginGroup("muxConfig");
+  config->load(settings);
+  settings.endGroup();
+
+  auto job       = new MuxJob{PendingManual, config};
+  job->m_aborted = settings.value("aborted", false).toBool();
+  job->loadJobBasis(settings);
+
+  return JobPtr{ job };
 }

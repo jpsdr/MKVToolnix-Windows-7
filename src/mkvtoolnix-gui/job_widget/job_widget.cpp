@@ -29,6 +29,8 @@ JobWidget::JobWidget(QWidget *parent)
   setupUiControls();
   retranslateUI();
 
+  QSettings reg;
+  m_model->loadJobs(reg);
   m_model->start();
 }
 
