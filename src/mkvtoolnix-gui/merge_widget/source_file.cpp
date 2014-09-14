@@ -72,10 +72,10 @@ SourceFile::operator =(SourceFile const &other) {
   m_playlistFiles    = other.m_playlistFiles;
   m_appendedTo       = nullptr;
 
-  m_tracks.empty();
-  m_additionalParts.empty();
-  m_appendedFiles.empty();
-  m_playlistFiles.empty();
+  m_tracks.clear();
+  m_additionalParts.clear();
+  m_appendedFiles.clear();
+  m_playlistFiles.clear();
 
   for (auto const &track : other.m_tracks)
     m_tracks << std::make_shared<Track>(*track);

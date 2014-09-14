@@ -49,7 +49,7 @@ fixMappings(SourceFile *oldFile,
 
     assert((!!newTrack->m_file == !!oldTrack->m_file) && (!!newTrack->m_appendedTo == !!newTrack->m_appendedTo));
 
-    newTrack->m_appendedTracks.empty();
+    newTrack->m_appendedTracks.clear();
     for (auto const &oldAppendedTrack : oldTrack->m_appendedTracks) {
       auto newAppendedTrack = trackMap[oldAppendedTrack];
       assert(!!newAppendedTrack);
@@ -103,9 +103,9 @@ MuxConfig::operator =(MuxConfig const &other) {
   m_linkFiles            = other.m_linkFiles;
   m_webmMode             = other.m_webmMode;
 
-  m_files.empty();
-  m_tracks.empty();
-  m_attachments.empty();
+  m_files.clear();
+  m_tracks.clear();
+  m_attachments.clear();
 
   for (auto const &attachment : other.m_attachments)
     m_attachments << std::make_shared<Attachment>(*attachment);

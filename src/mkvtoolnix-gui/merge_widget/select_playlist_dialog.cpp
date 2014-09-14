@@ -161,7 +161,7 @@ SelectPlaylistDialog::onScannedFileSelected(QTreeWidgetItem *current,
 
   ui->tracks->insertTopLevelItems(0, newItems);
 
-  newItems.empty();
+  newItems.clear();
   for (auto const &playlistFile : file.m_playlistFiles)
     newItems << createPlaylistItemItem(playlistFile);
 
