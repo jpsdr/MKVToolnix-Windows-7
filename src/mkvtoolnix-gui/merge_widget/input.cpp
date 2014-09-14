@@ -12,7 +12,9 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
+#include <QDir>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QList>
 #include <QMessageBox>
 #include <QString>
@@ -507,6 +509,7 @@ MergeWidget::addOrAppendFiles(bool append) {
   reinitFilesTracksControls();
 
   setTitleMaybe(identifiedFiles);
+  setOutputFileNameMaybe(identifiedFiles[0]->m_fileName);
 }
 
 QStringList
@@ -640,4 +643,77 @@ MergeWidget::setTitleMaybe(QString const &title) {
 
   ui->title->setText(title);
   m_config.m_title = title;
+}
+
+QString
+MergeWidget::suggestOutputFileNameExtension()
+  const {
+  auto hasTracks = false, hasVideo = false, hasAudio = false, hasStereoscopy = false;
+
+  for (auto const &t : m_config.m_tracks) {
+    if (!t->m_muxThis)
+      continue;
+
+    hasTracks = true;
+
+    if (t->isVideo()) {
+      hasVideo = true;
+      if (t->m_stereoscopy >= 2)
+        hasStereoscopy = true;
+
+    } else if (t->isAudio())
+      hasAudio = true;
+  }
+
+  return m_config.m_webmMode ? "webm"
+       : hasStereoscopy      ? "mk3d"
+       : hasVideo            ? "mkv"
+       : hasAudio            ? "mka"
+       : hasTracks           ? "mks"
+       :                       "mkv";
+}
+
+void
+MergeWidget::setOutputFileNameMaybe(QString const &fileName) {
+  auto &settings = Settings::get();
+  auto policy    = settings.m_outputFileNamePolicy;
+
+  if (fileName.isEmpty() || (Settings::DontSetOutputFileName == policy))
+    return;
+
+  auto currentOutput = ui->output->text();
+  auto srcFileName   = QFileInfo{ currentOutput.isEmpty() ? fileName : currentOutput };
+  QDir outputDir;
+
+  if (Settings::ToPreviousDirectory == policy)
+    outputDir = settings.m_lastOutputDir;
+
+  else if (Settings::ToFixedDirectory == policy)
+    outputDir = settings.m_fixedOutputDir;
+
+  else if (Settings::ToParentOfFirstInputFile == policy)
+    outputDir = srcFileName.absoluteDir();
+
+  else
+    Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested output file name policy");
+
+  if (!outputDir.exists())
+    outputDir = srcFileName.absoluteDir();
+
+  auto baseName = srcFileName.baseName();
+  auto idx      = 0;
+
+  while (true) {
+    auto suffix          = suggestOutputFileNameExtension();
+    auto currentBaseName = QString{"%1%2.%3"}.arg(baseName).arg(idx ? QString{" (%1)"}.arg(idx) : "").arg(suffix);
+    auto outputFileName  = QFileInfo{outputDir, currentBaseName};
+
+    if (!settings.m_uniqueOutputFileNames || !outputFileName.exists()) {
+      ui->output->setText(outputFileName.absoluteFilePath());
+      m_config.m_destination = outputFileName.absoluteFilePath();
+      break;
+    }
+
+    ++idx;
+  }
 }

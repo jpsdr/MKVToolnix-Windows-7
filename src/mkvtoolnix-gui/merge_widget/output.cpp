@@ -33,8 +33,11 @@ void
 MergeWidget::onBrowseOutput() {
   auto filter   = m_config.m_webmMode ? QY("WebM files") + Q(" (*.webm)") : QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d)");
   auto fileName = getSaveFileName(QY("Select output file name"), filter, ui->output);
-  if (!fileName.isEmpty())
-    m_config.m_destination = fileName;
+  if (!fileName.isEmpty()) {
+    m_config.m_destination          = fileName;
+    Settings::get().m_lastOutputDir = QFileInfo{ fileName }.absoluteDir();
+    Settings::get().save();
+  }
 }
 
 void

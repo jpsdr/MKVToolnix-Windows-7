@@ -169,6 +169,9 @@ protected:
 
   virtual void setTitleMaybe(QList<SourceFilePtr> const &files);
   virtual void setTitleMaybe(QString const &title);
+
+  virtual void setOutputFileNameMaybe(QString const &fileName);
+  virtual QString suggestOutputFileNameExtension() const;
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_MERGE_WIDGET_MERGE_WIDGET_H

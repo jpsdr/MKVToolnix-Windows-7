@@ -23,10 +23,21 @@ public:
     NeverScan,
   };
 
+  enum OutputFileNamePolicy {
+    DontSetOutputFileName = 0,
+    ToPreviousDirectory,
+    ToFixedDirectory,
+    ToParentOfFirstInputFile,
+  };
+
   QString m_mkvmergeExe, m_defaultTrackLanguage;
   ProcessPriority m_priority;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
-  bool m_setAudioDelayFromFileName, m_disableAVCompression, m_autoSetFileTitle, m_autoSetOutputFileName;
+  bool m_setAudioDelayFromFileName, m_disableAVCompression, m_autoSetFileTitle;
+
+  OutputFileNamePolicy m_outputFileNamePolicy;
+  QDir m_fixedOutputDir;
+  bool m_uniqueOutputFileNames;
 
   ScanForPlaylistsPolicy m_scanForPlaylistsPolicy;
   unsigned int m_minimumPlaylistDuration;
