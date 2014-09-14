@@ -179,6 +179,12 @@ mtx::get_application_data_folder() {
   return bfs::path{home} / ".config" / "mkvtoolnix";
 }
 
+std::string
+get_environment_variable(std::string const &key) {
+  auto var = getenv(key.c_str());
+  return var ? var : "";
+}
+
 #endif // SYS_WINDOWS
 
 namespace mtx {
