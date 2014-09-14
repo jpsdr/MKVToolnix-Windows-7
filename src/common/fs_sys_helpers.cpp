@@ -108,13 +108,20 @@ set_environment_variable(const std::string &key,
 
 std::string
 get_environment_variable(const std::string &key) {
-  char buffer[100];
-  memset(buffer, 0, 100);
+  auto size   = 100u;
+  auto buffer = memory_c::alloc(size);
 
-  if (0 == GetEnvironmentVariableA(key.c_str(), buffer, 99))
-    return "";
+  while (true) {
+    auto required_size = GetEnvironmentVariableA(key.c_str(), reinterpret_cast<char *>(buffer->get_buffer()), size);
+    if (required_size < size) {
+      buffer->get_buffer()[required_size] = 0;
+      break;
+    }
 
-  return buffer;
+    size = required_size;
+  }
+
+  return reinterpret_cast<char *>(buffer->get_buffer());
 }
 
 unsigned int
