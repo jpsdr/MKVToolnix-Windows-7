@@ -166,6 +166,9 @@ protected:
   virtual void addToJobQueue(bool startNow);
 
   virtual bool isReadyForMerging();
+
+  virtual void setTitleMaybe(QList<SourceFilePtr> const &files);
+  virtual void setTitleMaybe(QString const &title);
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_MERGE_WIDGET_MERGE_WIDGET_H

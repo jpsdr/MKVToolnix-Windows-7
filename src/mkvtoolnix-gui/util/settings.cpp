@@ -35,6 +35,8 @@ Settings::load() {
   reg.beginGroup("features");
   m_setAudioDelayFromFileName = reg.value("setAudioDelayFromFileName", true).toBool();
   m_disableAVCompression      = reg.value("disableAVCompression",      false).toBool();
+  m_autoSetFileTitle          = reg.value("autoSetFileTitle",          true).toBool();
+  m_autoSetOutputFileName     = reg.value("autoSetOutputFileName",     true).toBool();
   reg.endGroup();
 
   reg.beginGroup("defaults");
@@ -65,6 +67,8 @@ Settings::save()
 
   reg.beginGroup("features");
   reg.setValue("setAudioDelayFromFileName", m_setAudioDelayFromFileName);
+  reg.setValue("autoSetFileTitle",          m_autoSetFileTitle);
+  reg.setValue("autoSetOutputFileName",     m_autoSetOutputFileName);
   reg.setValue("disableAVCompression",      m_disableAVCompression);
   reg.endGroup();
 

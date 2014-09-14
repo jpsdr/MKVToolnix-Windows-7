@@ -26,7 +26,7 @@ public:
   QString m_mkvmergeExe, m_defaultTrackLanguage;
   ProcessPriority m_priority;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
-  bool m_setAudioDelayFromFileName, m_disableAVCompression;
+  bool m_setAudioDelayFromFileName, m_disableAVCompression, m_autoSetFileTitle, m_autoSetOutputFileName;
 
   ScanForPlaylistsPolicy m_scanForPlaylistsPolicy;
   unsigned int m_minimumPlaylistDuration;

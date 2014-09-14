@@ -505,6 +505,8 @@ MergeWidget::addOrAppendFiles(bool append) {
 
   m_filesModel->addOrAppendFilesAndTracks(selectedSourceFile(), identifiedFiles, append);
   reinitFilesTracksControls();
+
+  setTitleMaybe(identifiedFiles);
 }
 
 QStringList
@@ -613,4 +615,29 @@ MergeWidget::selectedSourceFile()
   const {
   auto idx = ui->files->selectionModel()->currentIndex();
   return m_filesModel->index(idx.row(), 0, idx.parent());
+}
+
+void
+MergeWidget::setTitleMaybe(QList<SourceFilePtr> const &files) {
+  for (auto const &file : files) {
+    setTitleMaybe(file->m_properties["title"]);
+
+    if (FILE_TYPE_OGM != file->m_type)
+      continue;
+
+    for (auto const &track : file->m_tracks)
+      if (track->isVideo() && !track->m_name.isEmpty()) {
+        setTitleMaybe(track->m_name);
+        break;
+      }
+  }
+}
+
+void
+MergeWidget::setTitleMaybe(QString const &title) {
+  if (!Settings::get().m_autoSetFileTitle || title.isEmpty() || !m_config.m_title.isEmpty())
+    return;
+
+  ui->title->setText(title);
+  m_config.m_title = title;
 }
