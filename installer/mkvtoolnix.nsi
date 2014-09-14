@@ -536,8 +536,8 @@ Section "Program files" SEC01
   !insertmacro MUI_STARTMENU_WRITE_END
 
   SetOutPath "$INSTDIR"
-  IfSilent +3 0
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(STRING_SHORTCUT_ON_DESKTOP)" IDNO +2
+  IfSilent +4 0
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(STRING_SHORTCUT_ON_DESKTOP)" IDNO +3
   CreateShortCut "$DESKTOP\mkvmerge GUI.lnk" "$INSTDIR\mmg.exe" "" "$INSTDIR\mmg.exe"
   CreateShortCut "$DESKTOP\MKVToolNix GUI preview.lnk" "$INSTDIR\mkvtoolnix-gui.exe" "" "$INSTDIR\mkvtoolnix-gui.exe"
 SectionEnd
