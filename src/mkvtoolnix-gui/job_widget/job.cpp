@@ -100,7 +100,6 @@ void
 Job::saveJob(QSettings &settings)
   const {
 
-  settings.setValue("id",           static_cast<quint64>(m_id));
   settings.setValue("status",       static_cast<unsigned int>(m_status));
   settings.setValue("description",  m_description);
   settings.setValue("output",       m_output);
@@ -118,7 +117,6 @@ Job::saveJob(QSettings &settings)
 
 void
 Job::loadJobBasis(QSettings &settings) {
-  m_id           = settings.value("id").toULongLong();
   m_status       = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
   m_description  = settings.value("description").toString();
   m_output       = settings.value("output").toStringList();
