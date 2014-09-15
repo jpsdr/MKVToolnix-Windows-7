@@ -268,7 +268,7 @@ JobModel::loadJobs(QSettings &settings) {
   settings.beginGroup("jobQueue");
   auto numberOfJobs = settings.value("numberOfJobs").toUInt();
   for (auto idx = 0u; idx < numberOfJobs; ++idx) {
-    settings.beginGroup(Q("job %1").arg(idx++));
+    settings.beginGroup(Q("job %1").arg(idx));
     add(Job::loadJob(settings));
     settings.endGroup();
   }
