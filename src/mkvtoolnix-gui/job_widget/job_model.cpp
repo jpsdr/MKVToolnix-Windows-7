@@ -32,47 +32,40 @@ JobModel::~JobModel() {
 QList<Job *>
 JobModel::selectedJobs(QAbstractItemView *view)
   const {
-  auto selectedIds = QMap<uint64_t, bool>{};
-  Util::withSelectedIndexes(view, [&](QModelIndex const &idx) {
-      selectedIds[ data(idx, Util::JobIdRole).value<uint64_t>() ] = true;
-    });
-
   QList<Job *> jobs;
-  for (auto const &job : m_jobs)
-    if (selectedIds[job->m_id])
-      jobs << job.get();
+  Util::withSelectedIndexes(view, [&](QModelIndex const &idx) {
+    jobs << m_jobsById[ data(idx, Util::JobIdRole).value<uint64_t>() ].get();
+  });
 
   return jobs;
+}
+
+uint64_t
+JobModel::idFromRow(int row)
+  const {
+  return item(row)->data(Util::JobIdRole).value<uint64_t>();
 }
 
 int
 JobModel::rowFromId(uint64_t id)
   const {
-  auto jobItr = brng::find_if(m_jobs, [id](JobPtr const &job) { return job->m_id == id; });
-  return jobItr != m_jobs.end() ? std::distance(m_jobs.begin(), jobItr) : RowNotFound;
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
+    if (idFromRow(row) == id)
+      return row;
+  return RowNotFound;
 }
 
 Job *
 JobModel::fromId(uint64_t id)
   const {
-  auto jobItr = brng::find_if(m_jobs, [id](JobPtr const &job) { return job->m_id == id; });
-  return jobItr != m_jobs.end() ? jobItr->get() : nullptr;
+  return m_jobsById.contains(id) ? m_jobsById[id].get() : nullptr;
 }
 
-Job *
-JobModel::fromIndex(QModelIndex const &index)
-  const {
-  if (!index.isValid() || (index.row() >= m_jobs.size()))
-    return nullptr;
-
-  auto const &job = m_jobs[index.row()];
-  return job->m_id == item(index.row())->data(Util::JobIdRole).value<uint64_t>() ? job.get() : nullptr;
-}
 
 bool
 JobModel::hasJobs()
   const {
-  return !m_jobs.isEmpty();
+  return !!rowCount();
 }
 
 QList<QStandardItem *>
@@ -100,16 +93,16 @@ JobModel::removeJobsIf(std::function<bool(Job const &)> predicate) {
 
   auto toBeRemoved = QHash<Job const *, bool>{};
 
-  for (int idx = m_jobs.size(); 0 < idx; --idx) {
-    auto job = m_jobs[idx - 1].get();
+  for (auto row = rowCount(); 0 < row; --row) {
+    auto job = m_jobsById[idFromRow(row - 1)].get();
 
     if (predicate(*job)) {
+      m_jobsById.remove(job->m_id);
       toBeRemoved[job] = true;
-      removeRow(idx - 1);
+      removeRow(row - 1);
     }
   }
 
-  brng::remove_erase_if(m_jobs, [&toBeRemoved](JobPtr const &job) { return toBeRemoved[job.get()]; });
   auto const keys = toBeRemoved.keys();
   for (auto const &job : keys)
     m_toBeProcessed.remove(job);
@@ -121,7 +114,7 @@ void
 JobModel::add(JobPtr const &job) {
   QMutexLocker locked{&m_mutex};
 
-  m_jobs << job;
+  m_jobsById[job->m_id] = job;
 
   if (job->isToBeProcessed()) {
     m_toBeProcessed.insert(job.get());
@@ -145,7 +138,7 @@ JobModel::onStatusChanged(uint64_t id,
   if (row == RowNotFound)
     return;
 
-  auto const &job = *m_jobs[row];
+  auto const &job = *m_jobsById[id];
   auto numBefore  = m_toBeProcessed.count();
 
   if (job.isToBeProcessed())
@@ -171,7 +164,7 @@ JobModel::onProgressChanged(uint64_t id,
   QMutexLocker locked{&m_mutex};
 
   auto row = rowFromId(id);
-  if (row < m_jobs.size()) {
+  if (row < rowCount()) {
     item(row, ProgressColumn)->setText(to_qs(boost::format("%1%%%") % progress));
     updateProgress();
   }
@@ -187,15 +180,20 @@ JobModel::startNextAutoJob() {
   if (!m_started)
     return;
 
-  for (auto const &job : m_jobs)
-    if (job->m_status == Job::Running)
-      return;
+  Job *toStart = nullptr;
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
+    auto job = m_jobsById[idFromRow(row)].get();
 
-  for (auto const &job : m_jobs)
-    if (job->m_status == Job::PendingAuto) {
-      job->start();
+    if (Job::Running == job->m_status)
       return;
-    }
+    if (!toStart && (Job::PendingAuto == job->m_status))
+      toStart = job;
+  }
+
+  if (toStart) {
+    toStart->start();
+    return;
+  }
 
   // All jobs are done. Clear total progress.
   m_toBeProcessed.clear();
@@ -244,12 +242,11 @@ void
 JobModel::saveJobs(QSettings &settings)
   const {
   settings.beginGroup("jobQueue");
-  settings.setValue("numberOfJobs", m_jobs.size());
+  settings.setValue("numberOfJobs", rowCount());
 
-  auto idx = 0u;
-  for (auto const &job : m_jobs) {
-    settings.beginGroup(Q("job %1").arg(idx++));
-    job->saveJob(settings);
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
+    settings.beginGroup(Q("job %1").arg(row));
+    m_jobsById[idFromRow(row)]->saveJob(settings);
     settings.endGroup();
   }
 
@@ -262,8 +259,8 @@ JobModel::loadJobs(QSettings &settings) {
 
   m_dontStartJobsNow = true;
 
+  m_jobsById.clear();
   removeRows(0, rowCount());
-  m_jobs.clear();
 
   settings.beginGroup("jobQueue");
   auto numberOfJobs = settings.value("numberOfJobs").toUInt();
@@ -278,4 +275,17 @@ JobModel::loadJobs(QSettings &settings) {
   updateProgress();
 
   m_dontStartJobsNow = false;
+}
+
+Qt::DropActions
+JobModel::supportedDropActions()
+  const {
+  return Qt::MoveAction;
+}
+
+Qt::ItemFlags
+JobModel::flags(QModelIndex const &index)
+  const {
+  auto defaultFlags = QStandardItemModel::flags(index) & ~Qt::ItemIsDropEnabled;
+  return index.isValid() ? defaultFlags | Qt::ItemIsDragEnabled : defaultFlags | Qt::ItemIsDropEnabled;
 }

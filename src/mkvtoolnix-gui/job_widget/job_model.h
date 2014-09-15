@@ -15,7 +15,7 @@ class QAbstractItemView;
 class JobModel: public QStandardItemModel {
   Q_OBJECT;
 protected:
-  QList<JobPtr> m_jobs;
+  QHash<uint64_t, JobPtr> m_jobsById;
   QSet<Job const *> m_toBeProcessed;
   QMutex m_mutex;
 
@@ -38,8 +38,8 @@ public:
   virtual ~JobModel();
 
   QList<Job *> selectedJobs(QAbstractItemView *view) const;
+  uint64_t idFromRow(int row) const;
   Job *fromId(uint64_t id) const;
-  Job *fromIndex(QModelIndex const &index) const;
   int rowFromId(uint64_t id) const;
   bool hasJobs() const;
 
@@ -53,6 +53,9 @@ public:
 
   void saveJobs(QSettings &settings) const;
   void loadJobs(QSettings &settings);
+
+  virtual Qt::DropActions supportedDropActions() const;
+  virtual Qt::ItemFlags flags(QModelIndex const &index) const;
 
 signals:
   void progressChanged(unsigned int progress, unsigned int totalProgress);
