@@ -335,7 +335,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
         arg += Q("/1");
     }
 
-    opt.options << arg;
+    opt.options << Q("--sync") << arg;
   }
 
   if (!m_defaultDuration.isEmpty()) {
