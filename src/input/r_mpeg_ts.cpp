@@ -542,6 +542,12 @@ mpeg_ts_reader_c::identify() {
 
     verbose_info.push_back((boost::format("ts_pid:%1%") % track->pid).str());
 
+    if (ES_AUDIO_TYPE == track->type) {
+      verbose_info.push_back((boost::format("channels:%1%")        % track->a_channels).str());
+      verbose_info.push_back((boost::format("sample_rate:%1%")     % track->a_sample_rate).str());
+      verbose_info.push_back((boost::format("bits_per_sample:%1%") % track->a_bits_per_sample).str());
+    }
+
     std::string type = ES_AUDIO_TYPE == track->type ? ID_RESULT_TRACK_AUDIO
                      : ES_VIDEO_TYPE == track->type ? ID_RESULT_TRACK_VIDEO
                      :                                ID_RESULT_TRACK_SUBTITLES;

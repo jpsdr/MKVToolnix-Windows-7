@@ -667,12 +667,17 @@ wav_reader_c::find_chunk(const char *id,
 
 void
 wav_reader_c::identify() {
-  if (m_demuxer) {
-    id_result_container();
-    id_result_track(0, ID_RESULT_TRACK_AUDIO, m_demuxer->m_codec.get_name());
-
-  } else {
+  if (!m_demuxer) {
     uint16_t format_tag = get_uint16_le(&m_wheader.common.wFormatTag);
     id_result_container_unsupported(m_in->get_file_name(), (boost::format("RIFF WAVE (wFormatTag = 0x%|1$04x|)") % format_tag).str());
+    return;
   }
+
+  std::vector<std::string> verbose_info;
+  verbose_info.push_back((boost::format("channels:%1%")        % get_uint16_le(&m_wheader.common.wChannels)).str());
+  verbose_info.push_back((boost::format("sample_rate:%1%")     % get_uint32_le(&m_wheader.common.dwSamplesPerSec)).str());
+  verbose_info.push_back((boost::format("bits_per_sample:%1%") % get_uint16_le(&m_wheader.common.wBitsPerSample)).str());
+
+  id_result_container();
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_demuxer->m_codec.get_name(), verbose_info);
 }
