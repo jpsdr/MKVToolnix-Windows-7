@@ -129,6 +129,8 @@ struct mpeg_ps_track_t {
 
   multiple_timecodes_packet_extension_c *multiple_timecodes_packet_extension;
 
+  unsigned int skip_packet_data_bytes;
+
   mpeg_ps_track_t():
     ptzr(-1),
     type(0),
@@ -154,6 +156,7 @@ struct mpeg_ps_track_t {
     buffer_usage(0),
     buffer_size(0),
     multiple_timecodes_packet_extension(new multiple_timecodes_packet_extension_c)
+    , skip_packet_data_bytes{}
   {
   };
 
@@ -238,6 +241,7 @@ private:
   virtual void new_stream_a_mpeg(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
   virtual void new_stream_a_ac3(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
   virtual void new_stream_a_dts(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_a_pcm(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
   virtual void new_stream_a_truehd(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
   virtual bool resync_stream(uint32_t &header);
   virtual file_status_e finish();

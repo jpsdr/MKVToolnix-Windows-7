@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/ac3.h"
+#include "common/bit_cursor.h"
 #include "common/debugging.h"
 #include "common/endian.h"
 #include "common/error.h"
@@ -31,6 +32,7 @@
 #include "output/p_dts.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
+#include "output/p_pcm.h"
 #include "output/p_truehd.h"
 #include "output/p_vc1.h"
 
@@ -844,6 +846,32 @@ mpeg_ps_reader_c::new_stream_a_truehd(mpeg_ps_id_t id,
   }
 }
 
+void
+mpeg_ps_reader_c::new_stream_a_pcm(mpeg_ps_id_t,
+                                   unsigned char *buffer,
+                                   unsigned int length,
+                                   mpeg_ps_track_ptr &track) {
+  static int const s_lpcm_frequency_table[4] = { 48000, 96000, 44100, 32000 };
+
+  try {
+    auto bc = bit_reader_c{buffer, length};
+    bc.skip_bits(8);            // emphasis (1), muse(1), reserved(1), frame number(5)
+    track->a_bits_per_sample = 16 + bc.get_bits(2) * 4;
+    track->a_sample_rate     = s_lpcm_frequency_table[ bc.get_bits(2) ];
+    bc.skip_bit();              // reserved
+    track->a_channels        = bc.get_bits(3) + 1;
+    bc.skip_bits(8);            // dynamic range control(8)
+
+  } catch (...) {
+    throw false;
+  }
+
+  if (28 == track->a_bits_per_sample)
+    throw false;
+
+  track->skip_packet_data_bytes = 3;
+}
+
 /*
   MPEG PS ids and their meaning:
 
@@ -931,6 +959,10 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
           track->type  = 'v';
           track->codec = codec_c::look_up(CT_V_MPEG4_P10);
           break;
+        case 0x80:
+          track->type  = 'a';
+          track->codec = codec_c::look_up(CT_A_PCM);
+          break;
         case 0x81:
           track->type  = 'a';
           track->codec = codec_c::look_up(CT_A_AC3);
@@ -955,6 +987,9 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
 
       else if ((0xb0 <= id.sub_id) && (0xbf >= id.sub_id))
         track->codec = codec_c::look_up(CT_A_TRUEHD);
+
+      else if ((0x80 <= id.sub_id) && (0x8f >= id.sub_id))
+        track->codec = codec_c::look_up(CT_A_PCM);
 
       else
         track->type = '?';
@@ -992,6 +1027,9 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
 
     else if (track->codec.is(CT_A_TRUEHD))
       new_stream_a_truehd(id, packet.m_buffer->get_buffer(), packet.m_length, track);
+
+    else if (track->codec.is(CT_A_PCM))
+      new_stream_a_pcm(id, packet.m_buffer->get_buffer(), packet.m_length, track);
 
     else
       // Unsupported track type
@@ -1149,6 +1187,10 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, truehd_frame_t::truehd, track->a_sample_rate, track->a_channels));
       show_packetizer_info(id, PTZR(track->ptzr));
 
+    } else if (track->codec.is(CT_A_PCM)) {
+      track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
+      show_packetizer_info(id, PTZR(track->ptzr));
+
     } else
       mxerror(boost::format(Y("mpeg_ps_reader: Should not have happened #1. %1%")) % BUGMSG);
 
@@ -1238,6 +1280,12 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
 
       else
         timecode = -1;
+
+      if (track->skip_packet_data_bytes) {
+        auto bytes_to_skip = std::min(packet.m_length, track->skip_packet_data_bytes);
+        packet.m_length   -= bytes_to_skip;
+        m_in->skip(bytes_to_skip);
+      }
 
       if (0 < track->buffer_size) {
         if (((track->buffer_usage + packet.m_length) > track->buffer_size)) {

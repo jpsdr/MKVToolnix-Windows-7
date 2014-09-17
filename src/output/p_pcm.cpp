@@ -64,7 +64,10 @@ pcm_packetizer_c::~pcm_packetizer_c() {
 
 void
 pcm_packetizer_c::set_headers() {
-  set_codec_id(ieee_float == m_format ? MKV_A_PCM_FLOAT : MKV_A_PCM);
+  auto codec_id = ieee_float         == m_format ? MKV_A_PCM_FLOAT
+                : big_endian_integer == m_format ? MKV_A_PCM_BE
+                :                                  MKV_A_PCM;
+  set_codec_id(codec_id);
   set_audio_sampling_freq(static_cast<double>(m_samples_per_sec));
   set_audio_channels(m_channels);
   set_audio_bit_depth(m_bits_per_sample);
