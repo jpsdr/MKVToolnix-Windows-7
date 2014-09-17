@@ -60,6 +60,7 @@ enum mpeg_ts_stream_type_e {
   ISO_14496_PART2_VIDEO     = 0x10, // ISO/IEC 14496-2 Visual (MPEG-4)
   ISO_14496_PART3_AUDIO     = 0x11, // ISO/IEC 14496-3 Audio with LATM transport syntax
   ISO_14496_PART10_VIDEO    = 0x1b, // ISO/IEC 14496-10 Video (MPEG-4 part 10/AVC, aka H.264)
+  STREAM_AUDIO_PCM          = 0x80, // PCM
   STREAM_AUDIO_AC3          = 0x81, // Audio AC3 (A52)
   STREAM_AUDIO_DTS          = 0x82, // Audio DTS
   STREAM_AUDIO_AC3_LOSSLESS = 0x83, // Audio AC3 - Dolby lossless
@@ -302,6 +303,8 @@ public:
   truehd_parser_cptr m_truehd_parser;
   std::shared_ptr<M2VParser> m_m2v_parser;
 
+  unsigned int skip_packet_data_bytes;
+
   bool m_debug_delivery, m_debug_timecode_wrapping;
 
   mpeg_ts_track_c(mpeg_ts_reader_c &p_reader)
@@ -331,6 +334,7 @@ public:
     , m_apply_dts_timecode_fix(false)
     , m_use_dts(false)
     , m_timecodes_wrapped{false}
+    , skip_packet_data_bytes{}
     , m_debug_delivery(false)
     , m_debug_timecode_wrapping{}
   {
@@ -347,6 +351,7 @@ public:
   int new_stream_a_aac();
   int new_stream_a_ac3();
   int new_stream_a_dts();
+  int new_stream_a_pcm();
   int new_stream_a_truehd();
 
   void set_pid(uint16_t new_pid);

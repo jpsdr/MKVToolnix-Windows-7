@@ -35,6 +35,7 @@
 #include "output/p_dts.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
+#include "output/p_pcm.h"
 #include "output/p_pgs.h"
 #include "output/p_truehd.h"
 #include "output/p_vc1.h"
@@ -73,8 +74,10 @@ mpeg_ts_track_c::send_to_packetizer() {
   mxdebug_if(m_debug_delivery, boost::format("send_to_packetizer() PID %1% expected %2% actual %3% timecode_to_use %4% m_previous_timecode %5%\n")
              % pid % pes_payload_size % pes_payload->get_size() % timecode_to_use % m_previous_timecode);
 
-  if (use_packet)
-    reader.m_reader_packetizers[ptzr]->process(new packet_t(memory_c::clone(pes_payload->get_buffer(), pes_payload->get_size()), timecode_to_use.to_ns(-1)));
+  if (use_packet) {
+    auto bytes_to_skip = std::min<size_t>(pes_payload->get_size(), skip_packet_data_bytes);
+    reader.m_reader_packetizers[ptzr]->process(new packet_t(memory_c::clone(pes_payload->get_buffer() + bytes_to_skip, pes_payload->get_size() - bytes_to_skip), timecode_to_use.to_ns(-1)));
+  }
 
   pes_payload->remove(pes_payload->get_size());
   processed                          = false;
@@ -258,6 +261,31 @@ mpeg_ts_track_c::new_stream_a_dts() {
   m_apply_dts_timecode_fix = true;
 
   return 0;
+}
+
+int
+mpeg_ts_track_c::new_stream_a_pcm() {
+  static uint8_t const s_bits_per_samples[4] = { 0, 16, 20, 24 };
+  static uint8_t const s_channels[16]        = { 0, 1, 0, 2, 3, 3, 4, 4, 5, 6, 7, 8, 0, 0, 0, 0 };
+
+  add_pes_payload_to_probe_data();
+
+  if (4 > m_probe_data->get_size())
+    return FILE_STATUS_MOREDATA;
+
+  skip_packet_data_bytes = 4;
+  auto buffer            = m_probe_data->get_buffer();
+  a_channels             = s_channels[         buffer[2] >> 4 ];
+  a_bits_per_sample      = s_bits_per_samples[ buffer[3] >> 6 ];
+  auto sample_rate_idx   = buffer[2] & 0x0f;
+  a_sample_rate          = sample_rate_idx == 1 ?  48000
+                         : sample_rate_idx == 4 ?  96000
+                         : sample_rate_idx == 5 ? 192000
+                         :                             0;
+
+  mxverb(3, boost::format("new_stream_a_pcm: header: 0x%|1$08x| channels: %2%, sample rate: %3%, bits per channel: %4%\n") % get_uint32_be(buffer) % a_channels % a_sample_rate % a_bits_per_sample);
+
+  return a_sample_rate ? 0 : FILE_STATUS_DONE;
 }
 
 int
@@ -738,6 +766,10 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
         track->type      = ES_AUDIO_TYPE;
         track->codec     = codec_c::look_up(CT_A_AAC);
         break;
+      case STREAM_AUDIO_PCM:
+        track->type      = ES_AUDIO_TYPE;
+        track->codec     = codec_c::look_up(CT_A_PCM);
+        break;
       case STREAM_AUDIO_AC3:
       case STREAM_AUDIO_AC3_PLUS: // EAC3
         track->type      = ES_AUDIO_TYPE;
@@ -966,6 +998,8 @@ mpeg_ts_reader_c::probe_packet_complete(mpeg_ts_track_ptr &track) {
       result = track->new_stream_a_ac3();
     else if (track->codec.is(CT_A_DTS))
       result = track->new_stream_a_dts();
+    else if (track->codec.is(CT_A_PCM))
+      result = track->new_stream_a_pcm();
     else if (track->codec.is(CT_A_TRUEHD))
       result = track->new_stream_a_truehd();
 
@@ -1135,6 +1169,10 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
       track->ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, track->a_dts_header));
       show_packetizer_info(id, PTZR(track->ptzr));
 
+    } else if (track->codec.is(CT_A_PCM)) {
+      track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
+      show_packetizer_info(id, PTZR(track->ptzr));
+
     } else if (track->codec.is(CT_A_TRUEHD)) {
       track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, truehd_frame_t::truehd, track->a_sample_rate, track->a_channels));
       show_packetizer_info(id, PTZR(track->ptzr));
@@ -1217,8 +1255,10 @@ mpeg_ts_reader_c::finish() {
     return flush_packetizers();
 
   for (auto &track : tracks)
-    if ((-1 != track->ptzr) && (0 < track->pes_payload->get_size()))
-      PTZR(track->ptzr)->process(new packet_t(memory_c::clone(track->pes_payload->get_buffer(), track->pes_payload->get_size())));
+    if ((-1 != track->ptzr) && (0 < track->pes_payload->get_size())) {
+      auto bytes_to_skip = std::min<size_t>(track->pes_payload->get_size(), track->skip_packet_data_bytes);
+      PTZR(track->ptzr)->process(new packet_t(memory_c::clone(track->pes_payload->get_buffer() + bytes_to_skip, track->pes_payload->get_size() - bytes_to_skip)));
+    }
 
   file_done = true;
 
