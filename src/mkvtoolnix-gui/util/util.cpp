@@ -62,14 +62,20 @@ resizeViewColumnsToContents(QTreeView *view) {
 void
 withSelectedIndexes(QAbstractItemView *view,
                     std::function<void(QModelIndex const &)> worker) {
-  auto rowsSeen = QSet<int>{};
-  for (auto const &range : view->selectionModel()->selection())
+  withSelectedIndexes(view->selectionModel(), worker);
+}
+
+void
+withSelectedIndexes(QItemSelectionModel *selectionModel,
+                    std::function<void(QModelIndex const &)> worker) {
+  auto rowsSeen = QMap< std::pair<QModelIndex, int>, bool >{};
+  for (auto const &range : selectionModel->selection())
     for (auto const &index : range.indexes()) {
-      auto row = index.row();
-      if (rowsSeen.contains(row))
+      auto seenIdx = std::make_pair(index.parent(), index.row());
+      if (rowsSeen[seenIdx])
         continue;
-      rowsSeen << row;
-      worker(index.sibling(row, 0));
+      rowsSeen[seenIdx] = true;
+      worker(index.sibling(index.row(), 0));
     }
 }
 

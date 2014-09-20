@@ -10,6 +10,7 @@ class QAbstractItemView;
 class QComboBox;
 class QDateTime;
 class QIcon;
+class QItemSelectionModel;
 class QModelIndex;
 class QTreeView;
 class QString;
@@ -40,6 +41,7 @@ enum MtxGuiRoles {
 };
 
 void resizeViewColumnsToContents(QTreeView *view);
+void withSelectedIndexes(QItemSelectionModel *selectionModel, std::function<void(QModelIndex const &)> worker);
 void withSelectedIndexes(QAbstractItemView *view, std::function<void(QModelIndex const &)> worker);
 
 // String stuff
