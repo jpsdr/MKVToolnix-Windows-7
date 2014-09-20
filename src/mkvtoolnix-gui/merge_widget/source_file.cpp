@@ -251,7 +251,7 @@ SourceFile::findFirstTrackOfType(Track::Type type)
 void
 SourceFile::buildMkvmergeOptions(QStringList &options)
   const {
-  assert(!isAdditionalPart());
+  Q_ASSERT(!isAdditionalPart());
 
   auto opt = MkvmergeOptionBuilder{};
 

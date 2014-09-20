@@ -111,7 +111,7 @@ TrackModel::rowForTrack(QList<Track *> const &tracks,
 
 void
 TrackModel::trackUpdated(Track *track) {
-  assert(m_tracks);
+  Q_ASSERT(m_tracks);
 
   int row = rowForTrack(*m_tracks, track);
   if (-1 == row)
@@ -139,7 +139,7 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
     return;
 
   auto lastTrack = boost::accumulate(*m_tracks, static_cast<Track *>(nullptr), [](Track *accu, Track *t) { return t->isRegular() ? t : accu; });
-  assert(!!lastTrack);
+  Q_ASSERT(!!lastTrack);
 
   for (auto &newTrack : tracks) {
     // Things like tags, chapters and attachments aren't appended to a
@@ -165,7 +165,7 @@ TrackModel::removeTrack(Track *trackToBeRemoved) {
     auto row            = trackToBeRemoved->m_appendedTo->m_appendedTracks.indexOf(trackToBeRemoved);
     auto parentTrackRow = m_tracks->indexOf(trackToBeRemoved->m_appendedTo);
 
-    assert((-1 != row) && (-1 != parentTrackRow));
+    Q_ASSERT((-1 != row) && (-1 != parentTrackRow));
 
     item(parentTrackRow)->removeRow(row);
     trackToBeRemoved->m_appendedTo->m_appendedTracks.removeAt(row);
@@ -174,7 +174,7 @@ TrackModel::removeTrack(Track *trackToBeRemoved) {
   }
 
   auto row = m_tracks->indexOf(trackToBeRemoved);
-  assert(-1 != row);
+  Q_ASSERT(-1 != row);
 
   invisibleRootItem()->removeRow(row);
   m_tracks->removeAt(row);

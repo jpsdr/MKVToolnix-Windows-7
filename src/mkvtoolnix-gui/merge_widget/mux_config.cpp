@@ -16,7 +16,7 @@ addToMaps(SourceFile *oldFile,
           SourceFile *newFile,
           QHash<SourceFile *, SourceFile *> &fileMap,
           QHash<Track *, Track *> &trackMap) {
-  assert(!!oldFile && !!newFile);
+  Q_ASSERT(!!oldFile && !!newFile);
 
   fileMap[oldFile] = newFile;
 
@@ -36,23 +36,23 @@ fixMappings(SourceFile *oldFile,
             QHash<Track *, Track *> &trackMap) {
   auto newFile = fileMap[oldFile];
 
-  assert(!!oldFile && !!newFile);
+  Q_ASSERT(!!oldFile && !!newFile);
 
   for (auto idx = 0, end = oldFile->m_tracks.size(); idx < end; ++idx) {
     auto oldTrack = oldFile->m_tracks[idx].get();
     auto newTrack = trackMap[oldTrack];
 
-    assert(!!oldTrack && !!newTrack);
+    Q_ASSERT(!!oldTrack && !!newTrack);
 
     newTrack->m_file       = fileMap[oldTrack->m_file];
     newTrack->m_appendedTo = trackMap[oldTrack->m_appendedTo];
 
-    assert((!!newTrack->m_file == !!oldTrack->m_file) && (!!newTrack->m_appendedTo == !!newTrack->m_appendedTo));
+    Q_ASSERT((!!newTrack->m_file == !!oldTrack->m_file) && (!!newTrack->m_appendedTo == !!newTrack->m_appendedTo));
 
     newTrack->m_appendedTracks.clear();
     for (auto const &oldAppendedTrack : oldTrack->m_appendedTracks) {
       auto newAppendedTrack = trackMap[oldAppendedTrack];
-      assert(!!newAppendedTrack);
+      Q_ASSERT(!!newAppendedTrack);
       newTrack->m_appendedTracks << newAppendedTrack;
     }
   }
@@ -125,7 +125,7 @@ MuxConfig::operator =(MuxConfig const &other) {
 
   for (auto const &oldTrack : other.m_tracks) {
     auto newTrack = trackMap[oldTrack];
-    assert(!!newTrack);
+    Q_ASSERT(!!newTrack);
     m_tracks << newTrack;
   }
 

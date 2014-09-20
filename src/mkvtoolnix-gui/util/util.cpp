@@ -148,7 +148,7 @@ escape(QString const &source,
 QString
 unescape(QString const &source,
          EscapeMode mode) {
-  assert(EscapeMkvtoolnix == mode);
+  Q_ASSERT(EscapeMkvtoolnix == mode);
 
   return unescape_mkvtoolnix(source);
 }

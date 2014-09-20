@@ -90,7 +90,7 @@ SourceFileModel::addAdditionalParts(QModelIndex const &fileToAddToIdx,
 
   auto fileToAddTo = fromIndex(actualIdx);
   auto itemToAddTo = itemFromIndex(actualIdx);
-  assert(fileToAddTo && itemToAddTo);
+  Q_ASSERT(fileToAddTo && itemToAddTo);
 
   auto actualFileNames = QStringList{};
   std::copy_if(fileNames.begin(), fileNames.end(), std::back_inserter(actualFileNames), [&fileToAddTo](QString const &fileName) -> bool {
@@ -121,7 +121,7 @@ void
 SourceFileModel::addOrAppendFilesAndTracks(QModelIndex const &fileToAddToIdx,
                                            QList<SourceFilePtr> const &files,
                                            bool append) {
-  assert(m_tracksModel);
+  Q_ASSERT(m_tracksModel);
 
   if (files.isEmpty())
     return;
@@ -147,7 +147,7 @@ SourceFileModel::removeFile(SourceFile *fileToBeRemoved) {
     auto row           = Util::findPtr(fileToBeRemoved,               fileToBeRemoved->m_appendedTo->m_additionalParts);
     auto parentFileRow = Util::findPtr(fileToBeRemoved->m_appendedTo, *m_sourceFiles);
 
-    assert((-1 != row) && (-1 != parentFileRow));
+    Q_ASSERT((-1 != row) && (-1 != parentFileRow));
 
     item(parentFileRow)->removeRow(row);
     fileToBeRemoved->m_appendedTo->m_additionalParts.removeAt(row);
@@ -159,7 +159,7 @@ SourceFileModel::removeFile(SourceFile *fileToBeRemoved) {
     auto row           = Util::findPtr(fileToBeRemoved,               fileToBeRemoved->m_appendedTo->m_appendedFiles);
     auto parentFileRow = Util::findPtr(fileToBeRemoved->m_appendedTo, *m_sourceFiles);
 
-    assert((-1 != row) && (-1 != parentFileRow));
+    Q_ASSERT((-1 != row) && (-1 != parentFileRow));
 
     item(parentFileRow)->removeRow(row);
     fileToBeRemoved->m_appendedTo->m_appendedFiles.removeAt(row);
@@ -168,7 +168,7 @@ SourceFileModel::removeFile(SourceFile *fileToBeRemoved) {
   }
 
   auto row = Util::findPtr(fileToBeRemoved, *m_sourceFiles);
-  assert(-1 != row);
+  Q_ASSERT(-1 != row);
 
   invisibleRootItem()->removeRow(row);
   m_sourceFiles->removeAt(row);
@@ -227,7 +227,7 @@ SourceFileModel::appendFilesAndTracks(QModelIndex const &fileToAppendToIdx,
 
   auto fileToAppendTo = fromIndex(actualIdx);
   auto itemToAppendTo = itemFromIndex(actualIdx);
-  assert(fileToAppendTo && itemToAppendTo);
+  Q_ASSERT(fileToAppendTo && itemToAppendTo);
 
   for (auto const &file : files) {
     file->m_appended   = true;
