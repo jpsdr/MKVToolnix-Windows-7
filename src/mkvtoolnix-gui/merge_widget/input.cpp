@@ -105,6 +105,7 @@ MergeWidget::setupInputControls() {
   // Connect signals & slots.
   connect(ui->files->selectionModel(),  SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onFileSelectionChanged()));
   connect(ui->tracks->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onTrackSelectionChanged()));
+  connect(ui->tracks->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), m_tracksModel, SLOT(updateSelectionStatus()));
 
   // "files" context menu
   ui->files->addAction(m_addFilesAction);

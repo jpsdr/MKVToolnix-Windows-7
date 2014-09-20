@@ -20,6 +20,8 @@ protected:
   QList<Track *> *m_tracks;
   QMap<Track *, QStandardItem *> m_tracksToItems;
   QIcon m_audioIcon, m_videoIcon, m_subtitleIcon, m_attachmentIcon, m_chaptersIcon, m_tagsIcon, m_genericIcon, m_yesIcon, m_noIcon;
+  bool m_ignoreTrackRemovals, m_nonAppendedSelected, m_appendedSelected, m_nonRegularSelected, m_appendedMultiParentsSelected, m_appendedMultiTypeSelected;
+  Track::Type m_selectedTrackType;
 
   debugging_option_c m_debug;
 
@@ -35,11 +37,21 @@ public:
 
   virtual void trackUpdated(Track *track);
 
-  virtual Track *fromIndex(QModelIndex const &idx);
+  virtual Track *fromIndex(QModelIndex const &idx) const;
+
+  virtual Qt::DropActions supportedDropActions() const;
+  virtual Qt::ItemFlags flags(QModelIndex const &index) const;
+
+public slots:
+  void updateTrackLists();
+  void updateSelectionStatus();
 
 protected:
   QList<QStandardItem *>createRow(Track *track);
   void setItemsFromTrack(QList<QStandardItem *> items, Track *track);
+
+  void dumpTracks(QString const &label) const;
+  bool hasUnsetTrackRole(QModelIndex const &idx = QModelIndex{});
 
 public:                         // static
   static int rowForTrack(QList<Track *> const &tracks, Track *trackToLookFor);
