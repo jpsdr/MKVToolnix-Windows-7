@@ -153,13 +153,13 @@ Track::saveSettings(QSettings &settings)
 
   QStringList appendedTracks;
   for (auto &track : m_appendedTracks)
-    appendedTracks << QString::number(reinterpret_cast<qlonglong>(track));
+    appendedTracks << QString::number(reinterpret_cast<qulonglong>(track));
 
-  settings.setValue("objectID",               reinterpret_cast<qlonglong>(this));
-  settings.setValue("appendedTo",             reinterpret_cast<qlonglong>(m_appendedTo));
+  settings.setValue("objectID",               reinterpret_cast<qulonglong>(this));
+  settings.setValue("appendedTo",             reinterpret_cast<qulonglong>(m_appendedTo));
   settings.setValue("appendedTracks",         appendedTracks);
   settings.setValue("type",                   m_type);
-  settings.setValue("id",                     static_cast<qlonglong>(m_id));
+  settings.setValue("id",                     static_cast<qulonglong>(m_id));
   settings.setValue("muxThis",                m_muxThis);
   settings.setValue("setAspectRatio",         m_setAspectRatio);
   settings.setValue("defaultTrackFlagWasSet", m_defaultTrackFlagWasSet);
@@ -187,7 +187,7 @@ Track::saveSettings(QSettings &settings)
   settings.setValue("cues",                   m_cues);
   settings.setValue("aacIsSBR",               m_aacIsSBR);
   settings.setValue("compression",            m_compression);
-  settings.setValue("size",                   static_cast<qlonglong>(m_size));
+  settings.setValue("size",                   static_cast<qulonglong>(m_size));
   settings.setValue("attachmentDescription",  m_attachmentDescription);
 }
 
@@ -195,13 +195,13 @@ void
 Track::loadSettings(MuxConfig::Loader &l) {
   MuxConfig::loadProperties(l.settings, m_properties);
 
-  auto objectID = l.settings.value("objectID").toLongLong();
+  auto objectID = l.settings.value("objectID").toULongLong();
   if ((0 >= objectID) || l.objectIDToTrack.contains(objectID))
     throw mtx::InvalidSettingsX{};
 
   l.objectIDToTrack[objectID] = this;
   m_type                      = static_cast<Type>(l.settings.value("type").toInt());
-  m_id                        = l.settings.value("id").toLongLong();
+  m_id                        = l.settings.value("id").toULongLong();
   m_muxThis                   = l.settings.value("muxThis").toBool();
   m_setAspectRatio            = l.settings.value("setAspectRatio").toBool();
   m_defaultTrackFlagWasSet    = l.settings.value("defaultTrackFlagWasSet").toBool();
@@ -229,7 +229,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_cues                      = l.settings.value("cues").toInt();
   m_aacIsSBR                  = l.settings.value("aacIsSBR").toInt();
   m_compression               = static_cast<Compression>(l.settings.value("compression").toInt());
-  m_size                      = l.settings.value("size").toLongLong();
+  m_size                      = l.settings.value("size").toULongLong();
   m_attachmentDescription     = l.settings.value("attachmentDescription").toString();
 
   if (   (TypeMin > m_type)        || (TypeMax < m_type)
@@ -240,7 +240,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
 void
 Track::fixAssociations(MuxConfig::Loader &l) {
   if (isAppended()) {
-    auto appendedToID = l.settings.value("appendedTo").toLongLong();
+    auto appendedToID = l.settings.value("appendedTo").toULongLong();
     if ((0 >= appendedToID) || !l.objectIDToTrack.contains(appendedToID))
       throw mtx::InvalidSettingsX{};
     m_appendedTo = l.objectIDToTrack.value(appendedToID);
@@ -248,9 +248,9 @@ Track::fixAssociations(MuxConfig::Loader &l) {
 
   m_appendedTracks.clear();
   for (auto &appendedTrackID : l.settings.value("appendedTracks").toStringList()) {
-    if (!l.objectIDToTrack.contains(appendedTrackID.toLongLong()))
+    if (!l.objectIDToTrack.contains(appendedTrackID.toULongLong()))
       throw mtx::InvalidSettingsX{};
-    m_appendedTracks << l.objectIDToTrack.value(appendedTrackID.toLongLong());
+    m_appendedTracks << l.objectIDToTrack.value(appendedTrackID.toULongLong());
   }
 }
 

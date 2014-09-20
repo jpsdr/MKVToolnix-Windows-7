@@ -168,13 +168,13 @@ SourceFile::saveSettings(QSettings &settings)
   saveSettingsGroup("additionalParts", m_additionalParts, settings);
   saveSettingsGroup("appendedFiles",   m_appendedFiles,   settings);
 
-  settings.setValue("objectID",        reinterpret_cast<qlonglong>(this));
+  settings.setValue("objectID",        reinterpret_cast<qulonglong>(this));
   settings.setValue("fileName",        m_fileName);
   settings.setValue("container",       m_container);
   settings.setValue("type",            m_type);
   settings.setValue("appended",        m_appended);
   settings.setValue("additionalPart",  m_additionalPart);
-  settings.setValue("appendedTo",      reinterpret_cast<qlonglong>(m_appendedTo));
+  settings.setValue("appendedTo",      reinterpret_cast<qulonglong>(m_appendedTo));
 
   auto playlistFiles = QStringList{};
   for (auto const &playlistFile : m_playlistFiles)
@@ -189,7 +189,7 @@ SourceFile::saveSettings(QSettings &settings)
 
 void
 SourceFile::loadSettings(MuxConfig::Loader &l) {
-  auto objectID = l.settings.value("objectID").toLongLong();
+  auto objectID = l.settings.value("objectID").toULongLong();
   if ((0 >= objectID) || l.objectIDToSourceFile.contains(objectID))
     throw mtx::InvalidSettingsX{};
 
@@ -199,7 +199,7 @@ SourceFile::loadSettings(MuxConfig::Loader &l) {
   m_type                           = static_cast<file_type_e>(l.settings.value("type").toInt());
   m_appended                       = l.settings.value("appended").toBool();
   m_additionalPart                 = l.settings.value("additionalPart").toBool();
-  m_appendedTo                     = reinterpret_cast<SourceFile *>(l.settings.value("appendedTo").toLongLong());
+  m_appendedTo                     = reinterpret_cast<SourceFile *>(l.settings.value("appendedTo").toULongLong());
 
   m_isPlaylist                     = l.settings.value("isPlaylist").toBool();
   auto playlistFiles               = l.settings.value("playlistFiles").toStringList();
@@ -227,7 +227,7 @@ SourceFile::fixAssociations(MuxConfig::Loader &l) {
     m_appendedTo = nullptr;
 
   else {
-    auto appendedToID = reinterpret_cast<qlonglong>(m_appendedTo);
+    auto appendedToID = reinterpret_cast<qulonglong>(m_appendedTo);
     if ((0 >= appendedToID) || !l.objectIDToSourceFile.contains(appendedToID))
       throw mtx::InvalidSettingsX{};
     m_appendedTo = l.objectIDToSourceFile.value(appendedToID);
