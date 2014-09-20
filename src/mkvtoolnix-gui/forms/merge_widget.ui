@@ -65,6 +65,9 @@
               <property name="contextMenuPolicy">
                <enum>Qt::ActionsContextMenu</enum>
               </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
               <property name="alternatingRowColors">
                <bool>false</bool>
               </property>
@@ -91,6 +94,9 @@
              <widget class="QTreeView" name="tracks">
               <property name="contextMenuPolicy">
                <enum>Qt::CustomContextMenu</enum>
+              </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
               </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -1194,6 +1200,9 @@
         <widget class="QTreeView" name="attachments">
          <property name="contextMenuPolicy">
           <enum>Qt::ActionsContextMenu</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
          </property>
          <property name="selectionMode">
           <enum>QAbstractItemView::ExtendedSelection</enum>
