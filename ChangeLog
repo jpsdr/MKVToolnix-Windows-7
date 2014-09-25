@@ -1,3 +1,11 @@
+2014-09-25  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: Reading tracks from MPEG transport streams
+        resulted in the track being cut off at points with a five minute
+        gap in between frames. It is due to timecode wrap detection
+        introduced in v6.9.0. As it affects subtitles the most the wrap
+        detection has been relaxed for them.
+
 2014-09-20  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: implemented drag & drop in the track pane.

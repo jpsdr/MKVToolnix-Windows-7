@@ -351,7 +351,11 @@ mpeg_ts_track_c::adjust_timecode_for_wrap(timecode_c &timecode) {
   if (timecode < s_wrap_limit)
     timecode += m_timecode_wrap_add;
 
-  if ((timecode - m_previous_valid_timecode).abs() >= s_bad_limit)
+  // For subtitle tracks only detect jumps backwards in time, not
+  // forward. Subtitles often have holes larger than five minutes
+  // between the entries.
+  if (   ((timecode < m_previous_valid_timecode) || (ES_SUBT_TYPE != type))
+      && ((timecode - m_previous_valid_timecode).abs() >= s_bad_limit))
     timecode = timecode_c{};
 }
 
