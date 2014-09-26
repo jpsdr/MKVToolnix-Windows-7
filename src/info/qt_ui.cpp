@@ -15,6 +15,10 @@
 #include <ebml/EbmlVersion.h>
 #include <matroska/KaxVersion.h>
 
+#if defined(SYS_WINDOWS)
+# include <windows.h>
+#endif
+
 #include "common/common_pch.h"
 #include "common/locale.h"
 #include "common/qt.h"
@@ -278,6 +282,8 @@ ui_show_progress(int percentage,
 int
 ui_run(int argc,
        char **argv) {
+  FreeConsole();
+
   QApplication app(argc, argv);
   main_window_c main_window;
   gui = &main_window;
