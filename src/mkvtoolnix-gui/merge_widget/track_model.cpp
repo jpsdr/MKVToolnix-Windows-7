@@ -149,6 +149,16 @@ TrackModel::addTracks(QList<TrackPtr> const &tracks) {
 void
 TrackModel::appendTracks(SourceFile *fileToAppendTo,
                          QList<TrackPtr> const &tracks) {
+  auto rawPtrTracks = QList<Track *>{};
+  for (auto const &track : tracks)
+    rawPtrTracks << track.get();
+
+  appendTracks(fileToAppendTo, rawPtrTracks);
+}
+
+void
+TrackModel::appendTracks(SourceFile *fileToAppendTo,
+                         QList<Track *> const &tracks) {
   if (tracks.isEmpty())
     return;
 
@@ -159,7 +169,7 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
     // Things like tags, chapters and attachments aren't appended to a
     // specific track. Instead they're appended to the top list.
     if (!newTrack->isRegular()) {
-      invisibleRootItem()->appendRow(createRow(newTrack.get()));
+      invisibleRootItem()->appendRow(createRow(newTrack));
       continue;
     }
 
@@ -167,7 +177,7 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
     if (!newTrack->m_appendedTo)
       newTrack->m_appendedTo = lastTrack;
 
-    m_tracksToItems[ newTrack->m_appendedTo ]->appendRow(createRow(newTrack.get()));
+    m_tracksToItems[ newTrack->m_appendedTo ]->appendRow(createRow(newTrack));
   }
 }
 
@@ -354,4 +364,28 @@ TrackModel::hasUnsetTrackRole(QModelIndex const &idx) {
       return true;
 
   return false;
+}
+
+void
+TrackModel::reDistributeAppendedTracksForFileRemoval(QSet<SourceFile *> const &filesToRemove) {
+  auto tracksToRedistribute = QList<Track *>{};
+
+  for (auto const &track : *m_tracks) {
+    for (auto const &appendedTrack : track->m_appendedTracks) {
+      if (filesToRemove.contains(appendedTrack->m_file))
+        continue;
+
+      if (filesToRemove.contains(appendedTrack->m_appendedTo->m_file))
+        tracksToRedistribute << appendedTrack;
+    }
+  }
+
+  if (tracksToRedistribute.isEmpty())
+    return;
+
+  removeTracks(tracksToRedistribute.toSet());
+
+  Q_ASSERT(!m_tracks->isEmpty());
+
+  appendTracks(m_tracks->at(0)->m_file, tracksToRedistribute);
 }

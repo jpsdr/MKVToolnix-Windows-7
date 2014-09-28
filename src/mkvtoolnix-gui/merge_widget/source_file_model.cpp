@@ -260,8 +260,7 @@ SourceFileModel::removeFiles(QList<SourceFile *> const &files) {
     }
   }
 
-  // TODO: SourceFileModel::removeFiles re-distribute orphaned tracks
-
+  m_tracksModel->reDistributeAppendedTracksForFileRemoval(filesToRemove);
   m_tracksModel->removeTracks(tracksToRemove);
 
   auto filesToRemoveLast = QList<SourceFile *>{};
