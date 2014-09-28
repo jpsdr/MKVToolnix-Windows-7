@@ -104,6 +104,7 @@ MergeWidget::setupInputControls() {
 
   // Connect signals & slots.
   connect(ui->files->selectionModel(),  SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onFileSelectionChanged()));
+  connect(ui->files->selectionModel(),  SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), m_filesModel,  SLOT(updateSelectionStatus()));
   connect(ui->tracks->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onTrackSelectionChanged()));
   connect(ui->tracks->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), m_tracksModel, SLOT(updateSelectionStatus()));
 
@@ -239,8 +240,8 @@ MergeWidget::selectedSourceFiles()
   Util::withSelectedIndexes(ui->files, [&sourceFiles, this](QModelIndex const &idx) {
       auto sourceFile = m_filesModel->fromIndex(idx);
       if (sourceFile)
-        sourceFiles << sourceFile;
-    });
+        sourceFiles << sourceFile.get();
+  });
 
   return sourceFiles;
 }

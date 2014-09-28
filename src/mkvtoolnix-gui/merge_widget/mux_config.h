@@ -40,12 +40,12 @@ class MuxConfig {
 public:
   struct Loader {
     QSettings &settings;
-    QHash<qlonglong, SourceFile *> &objectIDToSourceFile;
-    QHash<qlonglong, Track *> &objectIDToTrack;
+    QHash<qulonglong, SourceFile *> &objectIDToSourceFile;
+    QHash<qulonglong, Track *> &objectIDToTrack;
 
     Loader(QSettings &p_settings,
-           QHash<qlonglong, SourceFile *> &p_objectIDToSourceFile,
-           QHash<qlonglong, Track *> &p_objectIDToTrack)
+           QHash<qulonglong, SourceFile *> &p_objectIDToSourceFile,
+           QHash<qulonglong, Track *> &p_objectIDToTrack)
       : settings(p_settings)
       , objectIDToSourceFile(p_objectIDToSourceFile)
       , objectIDToTrack(p_objectIDToTrack)

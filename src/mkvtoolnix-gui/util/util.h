@@ -43,6 +43,7 @@ enum MtxGuiRoles {
 void resizeViewColumnsToContents(QTreeView *view);
 void withSelectedIndexes(QItemSelectionModel *selectionModel, std::function<void(QModelIndex const &)> worker);
 void withSelectedIndexes(QAbstractItemView *view, std::function<void(QModelIndex const &)> worker);
+QModelIndex toTopLevelIdx(QModelIndex const &idx);
 
 // String stuff
 enum EscapeMode {

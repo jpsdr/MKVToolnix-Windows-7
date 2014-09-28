@@ -79,6 +79,15 @@ withSelectedIndexes(QItemSelectionModel *selectionModel,
     }
 }
 
+QModelIndex
+toTopLevelIdx(QModelIndex const &idx) {
+  if (!idx.isValid())
+    return QModelIndex{};
+
+  auto parent = idx.parent();
+  return parent == QModelIndex{} ? idx : parent;
+}
+
 static QString
 escape_mkvtoolnix(QString const &source) {
   if (source.isEmpty())

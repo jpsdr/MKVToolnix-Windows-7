@@ -167,8 +167,8 @@ MuxConfig::load(QSettings &settings) {
 
   settings.beginGroup("input");
 
-  QHash<qlonglong, SourceFile *> objectIDToSourceFile;
-  QHash<qlonglong, Track *> objectIDToTrack;
+  QHash<qulonglong, SourceFile *> objectIDToSourceFile;
+  QHash<qulonglong, Track *> objectIDToTrack;
   Loader l{settings, objectIDToSourceFile, objectIDToTrack};
 
   loadSettingsGroup<SourceFile>("files",       m_files,       l, [](){ return std::make_shared<SourceFile>(); });
@@ -233,7 +233,7 @@ MuxConfig::save(QSettings &settings)
   saveSettingsGroup("files",       m_files,       settings);
   saveSettingsGroup("attachments", m_attachments, settings);
 
-  settings.setValue("trackOrder", std::accumulate(m_tracks.begin(), m_tracks.end(), QList<QVariant>{}, [](QList<QVariant> &accu, Track *track) { accu << QVariant{reinterpret_cast<qlonglong>(track)}; return accu; }));
+  settings.setValue("trackOrder", std::accumulate(m_tracks.begin(), m_tracks.end(), QList<QVariant>{}, [](QList<QVariant> &accu, Track *track) { accu << QVariant{reinterpret_cast<qulonglong>(track)}; return accu; }));
   settings.endGroup();
 
   settings.beginGroup("global");
