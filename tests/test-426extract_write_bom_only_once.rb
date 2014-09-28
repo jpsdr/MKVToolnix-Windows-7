@@ -13,6 +13,6 @@ test "extraction via shell redirection" do
 end
 
 test "extraction via --redirect-output" do
-  sys "../src/mkvextract --engage no_variable_data chapters #{file} --redirect-output #{tmp} &> /dev/null"
+  sys "../src/mkvextract --engage no_variable_data chapters #{file} --redirect-output #{tmp} > /dev/null 2> /dev/null"
   hash_tmp
 end
