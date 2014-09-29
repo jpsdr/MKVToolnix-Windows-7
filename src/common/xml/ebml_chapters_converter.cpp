@@ -137,7 +137,7 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
 
   auto clanguage = FindChild<KaxChapterLanguage>(display);
   if (!clanguage)
-    display.PushElement((new KaxChapterLanguage)->SetValue("und"));
+    display.PushElement((new KaxChapterLanguage)->SetValue("eng"));
 
   else {
     int index = map_to_iso639_2_code(std::string(*clanguage));
