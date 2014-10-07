@@ -414,6 +414,7 @@ private:
   int parse_pmt(unsigned char *pmt);
   bool parse_start_unit_packet(mpeg_ts_track_ptr &track, mpeg_ts_packet_header_t *ts_packet_header, unsigned char *&ts_payload, unsigned char &ts_payload_size);
   void probe_packet_complete(mpeg_ts_track_ptr &track);
+  int determine_track_parameters(mpeg_ts_track_ptr const &track);
 
   file_status_e finish();
   int send_to_packetizer(mpeg_ts_track_ptr &track);

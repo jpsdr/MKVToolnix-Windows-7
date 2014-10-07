@@ -116,6 +116,7 @@ mpeg_ts_track_c::new_stream_v_mpeg_1_2() {
   if (!m_m2v_parser) {
     m_m2v_parser = std::shared_ptr<M2VParser>(new M2VParser);
     m_m2v_parser->SetProbeMode();
+    m_m2v_parser->SetThrowOnError(true);
   }
 
   m_m2v_parser->WriteData(pes_payload->get_buffer(), pes_payload->get_size());
@@ -973,40 +974,50 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
   return true;
 }
 
+int
+mpeg_ts_reader_c::determine_track_parameters(mpeg_ts_track_ptr const &track) {
+  if (track->type == PAT_TYPE)
+    return parse_pat(track->pes_payload->get_buffer());
+
+  else if (track->type == PMT_TYPE)
+    return parse_pmt(track->pes_payload->get_buffer());
+
+  else if (track->type == ES_VIDEO_TYPE) {
+    if (track->codec.is(CT_V_MPEG12))
+      return track->new_stream_v_mpeg_1_2();
+    else if (track->codec.is(CT_V_MPEG4_P10))
+      return track->new_stream_v_avc();
+    else if (track->codec.is(CT_V_VC1))
+      return track->new_stream_v_vc1();
+
+    track->pes_payload->set_chunk_size(512 * 1024);
+
+  } else if (track->type != ES_AUDIO_TYPE)
+    return -1;
+
+  if (track->codec.is(CT_A_MP3))
+    return track->new_stream_a_mpeg();
+  else if (track->codec.is(CT_A_AAC))
+    return track->new_stream_a_aac();
+  else if (track->codec.is(CT_A_AC3))
+    return track->new_stream_a_ac3();
+  else if (track->codec.is(CT_A_DTS))
+    return track->new_stream_a_dts();
+  else if (track->codec.is(CT_A_PCM))
+    return track->new_stream_a_pcm();
+  else if (track->codec.is(CT_A_TRUEHD))
+    return track->new_stream_a_truehd();
+
+  return -1;
+}
+
 void
 mpeg_ts_reader_c::probe_packet_complete(mpeg_ts_track_ptr &track) {
   int result = -1;
 
-  if (track->type == PAT_TYPE)
-    result = parse_pat(track->pes_payload->get_buffer());
-
-  else if (track->type == PMT_TYPE)
-    result = parse_pmt(track->pes_payload->get_buffer());
-
-  else if (track->type == ES_VIDEO_TYPE) {
-    if (track->codec.is(CT_V_MPEG12))
-      result = track->new_stream_v_mpeg_1_2();
-    else if (track->codec.is(CT_V_MPEG4_P10))
-      result = track->new_stream_v_avc();
-    else if (track->codec.is(CT_V_VC1))
-      result = track->new_stream_v_vc1();
-
-    track->pes_payload->set_chunk_size(512 * 1024);
-
-  } else if (track->type == ES_AUDIO_TYPE) {
-    if (track->codec.is(CT_A_MP3))
-      result = track->new_stream_a_mpeg();
-    else if (track->codec.is(CT_A_AAC))
-      result = track->new_stream_a_aac();
-    else if (track->codec.is(CT_A_AC3))
-      result = track->new_stream_a_ac3();
-    else if (track->codec.is(CT_A_DTS))
-      result = track->new_stream_a_dts();
-    else if (track->codec.is(CT_A_PCM))
-      result = track->new_stream_a_pcm();
-    else if (track->codec.is(CT_A_TRUEHD))
-      result = track->new_stream_a_truehd();
-
+  try {
+    result = determine_track_parameters(track);
+  } catch (...) {
   }
 
   track->pes_payload->remove(track->pes_payload->get_size());

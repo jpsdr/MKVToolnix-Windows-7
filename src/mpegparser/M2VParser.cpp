@@ -102,8 +102,9 @@ void M2VParser::DumpQueues(){
   }
 }
 
-M2VParser::M2VParser(){
-
+M2VParser::M2VParser()
+  : throwOnError{}
+{
   mpgBuf = new MPEGVideoBuffer(BUFF_SIZE);
 
   notReachedFirstGOP = true;
@@ -237,7 +238,10 @@ int32_t M2VParser::OrderFrame(MPEGFrame* frame){
   bool flushQueue = false;
 
   if (waitSecondField && (p->pictureStructure == MPEG2_PICTURE_TYPE_FRAME)){
-    mxerror(Y("Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"));
+    auto error = Y("Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n");
+    if (throwOnError)
+      throw error;
+    mxerror(error);
   }
 
   if((p->timecode == queueTime) && waitQueue.empty()){
@@ -389,7 +393,10 @@ int32_t M2VParser::FillQueues(){
         gopNum++;
         /* Perform some sanity checks */
         if(waitSecondField){
-          mxerror(Y("Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"));
+          auto error = Y("Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n");
+          if (throwOnError)
+            throw error;
+          mxerror(error);
         }
         // There are too many broken videos to do the following so ReferenceBlock will be wrong for broken videos.
         /*
@@ -433,8 +440,12 @@ int32_t M2VParser::FillQueues(){
         break;
       default: //B-frames
         if(firstRef == -1 || secondRef == -1){
-          if(!m_gopHdr.closedGOP && !m_gopHdr.brokenLink && (0 < gopNum))
-            mxerror(Y("Found B frame without second reference in a non closed GOP. Fix the MPEG2 video stream before attempting to multiplex it.\n"));
+          if(!m_gopHdr.closedGOP && !m_gopHdr.brokenLink && (0 < gopNum)) {
+            auto error = Y("Found B frame without second reference in a non closed GOP. Fix the MPEG2 video stream before attempting to multiplex it.\n");
+            if (throwOnError)
+              throw error;
+            mxerror(error);
+          }
           invisible = true;
         }
         PrepareFrame(chunk, myTime, picHdr);
@@ -467,4 +478,9 @@ M2VParser::AddTimecode(int64_t timecode) {
   while ((idx != m_timecodes.end()) && (timecode > *idx))
     idx++;
   m_timecodes.insert(idx, timecode);
+}
+
+void
+M2VParser::SetThrowOnError(bool doThrow) {
+  throwOnError = doThrow;
 }

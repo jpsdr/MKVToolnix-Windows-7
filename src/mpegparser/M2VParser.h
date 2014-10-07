@@ -90,6 +90,7 @@ private:
   MPEG2ParserState_e parserState;
   MPEGVideoBuffer * mpgBuf;
   std::list<int64_t> m_timecodes;
+  bool throwOnError;
 
   int32_t InitParser();
   void DumpQueues();
@@ -146,6 +147,8 @@ public:
   }
 
   void AddTimecode(int64_t timecode);
+
+  void SetThrowOnError(bool doThrow);
 };
 
 
