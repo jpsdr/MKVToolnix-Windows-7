@@ -175,17 +175,14 @@ usf_reader_c::read(generic_packetizer_c *ptzr,
   if (track_itr == m_tracks.end())
     return FILE_STATUS_DONE;
 
-  auto track = *track_itr;
+  auto &track = *track_itr;
 
   if (track->m_entries.end() == track->m_current_entry)
     return flush_packetizer(track->m_ptzr);
 
-  const usf_entry_t &entry = *(track->m_current_entry);
-  // A length of 0 here is OK because the text subtitle packetizer assumes
-  // that the data is a zero-terminated string.
-  memory_cptr mem(new memory_c((unsigned char *)entry.m_text.c_str(), 0, false));
-  PTZR(track->m_ptzr)->process(new packet_t(mem, entry.m_start, entry.m_end - entry.m_start));
-  ++(track->m_current_entry);
+  auto &entry = *track->m_current_entry;
+  PTZR(track->m_ptzr)->process(new packet_t(memory_c::clone(entry.m_text), entry.m_start, entry.m_end - entry.m_start));
+  ++track->m_current_entry;
 
   if (track->m_entries.end() == track->m_current_entry)
     return flush_packetizer(track->m_ptzr);

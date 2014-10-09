@@ -29,7 +29,7 @@ subtitles_c::process(generic_packetizer_c *p) {
   if (empty() || (entries.end() == current))
     return;
 
-  packet_cptr packet(new packet_t(new memory_c((unsigned char *)current->subs.c_str(), 0, false), current->start, current->end - current->start));
+  packet_cptr packet(new packet_t(memory_c::point_to(current->subs), current->start, current->end - current->start));
   packet->extensions.push_back(packet_extension_cptr(new subtitle_number_packet_extension_c(current->number)));
   p->process(packet);
   ++current;
