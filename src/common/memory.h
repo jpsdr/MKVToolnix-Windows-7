@@ -214,6 +214,11 @@ public:
     return clone(buffer.c_str(), buffer.length());
   }
 
+  static inline memory_cptr
+  point_to(std::string &buffer) {
+    return std::make_shared<memory_c>(reinterpret_cast<unsigned char *>(&buffer[0]), buffer.length(), false);
+  }
+
 private:
   struct counter {
     X *ptr;
