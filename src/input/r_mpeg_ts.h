@@ -354,11 +354,17 @@ public:
   int new_stream_a_pcm();
   int new_stream_a_truehd();
 
+  bool parse_ac3_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
+  bool parse_dts_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
+  bool parse_vobsub_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
+
   void set_pid(uint16_t new_pid);
 
   void handle_timecode_wrap(timecode_c &pts, timecode_c &dts);
   bool detect_timecode_wrap(timecode_c &timecode);
   void adjust_timecode_for_wrap(timecode_c &timecode);
+
+  void parse_iso639_language_from(void const *buffer);
 };
 
 typedef std::shared_ptr<mpeg_ts_track_c> mpeg_ts_track_ptr;

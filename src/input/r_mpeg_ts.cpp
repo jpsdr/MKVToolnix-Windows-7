@@ -377,6 +377,58 @@ mpeg_ts_track_c::handle_timecode_wrap(timecode_c &pts,
   // mxinfo(boost::format("pid %5% PTS before %1% now %2% wrapped %3% reset prevvalid %4% diff %6%\n") % before % pts % m_timecodes_wrapped % m_previous_valid_timecode % pid % (pts - m_previous_valid_timecode));
 }
 
+bool
+mpeg_ts_track_c::parse_ac3_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &,
+                                          mpeg_ts_pmt_pid_info_t const &pmt_pid_info) {
+  if (pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE)
+    return false;
+
+  type  = ES_AUDIO_TYPE;
+  codec = codec_c::look_up(CT_A_AC3);
+
+  return true;
+}
+
+bool
+mpeg_ts_track_c::parse_dts_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &,
+                                          mpeg_ts_pmt_pid_info_t const &pmt_pid_info) {
+  if (pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE)
+    return false;
+
+  type  = ES_AUDIO_TYPE;
+  codec = codec_c::look_up(CT_A_DTS);
+
+  return true;
+}
+
+bool
+mpeg_ts_track_c::parse_vobsub_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor,
+                                             mpeg_ts_pmt_pid_info_t const &pmt_pid_info) {
+  if (pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE)
+    return false;
+
+  type  = ES_SUBT_TYPE;
+  codec = codec_c::look_up(CT_S_VOBSUB);
+
+  if (pmt_descriptor.length >= 8)
+    // Bits:
+    //  0–23: ISO 639 language code
+    // 24–31: subtitling type
+    // 32–47: composition page ID
+    // 48–63: ancillary page ID
+    parse_iso639_language_from(&pmt_descriptor + 1);
+
+  return true;
+}
+
+void
+mpeg_ts_track_c::parse_iso639_language_from(void const *buffer) {
+  auto value        = std::string{ reinterpret_cast<char const *>(buffer), 3 };
+  auto language_idx = map_to_iso639_2_code(balg::to_lower_copy(value));
+  if (-1 != language_idx)
+    language = iso639_languages[language_idx].iso639_2_code;
+}
+
 // ------------------------------------------------------------
 
 bool
@@ -796,7 +848,10 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
     while (pmt_descriptor < (mpeg_ts_pmt_descriptor_t *)((unsigned char *)pmt_pid_info + sizeof(mpeg_ts_pmt_pid_info_t) + es_info_length)) {
       mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: PMT descriptor tag 0x%|1$02x| length %2%\n") % static_cast<unsigned int>(pmt_descriptor->tag) % static_cast<unsigned int>(pmt_descriptor->length));
 
-      switch(pmt_descriptor->tag) {
+      switch (pmt_descriptor->tag) {
+        case 0x0a: // ISO 639 language descriptor
+          track->parse_iso639_language_from(pmt_descriptor + 1);
+          break;
         case 0x56: // Teletext descriptor
           if (pmt_pid_info->stream_type == ISO_13818_PES_PRIVATE) { // PES containig private data
             track->type = ES_UNKNOWN;
@@ -805,33 +860,14 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
           }
           break;
         case 0x59: // Subtitles descriptor
-          if (pmt_pid_info->stream_type == ISO_13818_PES_PRIVATE) { // PES containig private data
-            track->type  = ES_SUBT_TYPE;
-            track->codec = codec_c::look_up(CT_S_VOBSUB);
-            type_known   = true;
-          }
+          type_known = track->parse_vobsub_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
         case 0x6A: // AC3 descriptor
         case 0x7A: // EAC3 descriptor
-          if (pmt_pid_info->stream_type == ISO_13818_PES_PRIVATE) { // PES containig private data
-            track->type  = ES_AUDIO_TYPE;
-            track->codec = codec_c::look_up(CT_A_AC3);
-            type_known   = true;
-          }
+          type_known = track->parse_ac3_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
         case 0x7b: // DTS descriptor
-          if (pmt_pid_info->stream_type == ISO_13818_PES_PRIVATE) { // PES containig private data
-            track->type  = ES_AUDIO_TYPE;
-            track->codec = codec_c::look_up(CT_A_DTS);
-            type_known   = true;
-          }
-          break;
-        case 0x0a: // ISO 639 language descriptor
-          if (3 <= pmt_descriptor->length) {
-            int language_idx = map_to_iso639_2_code(std::string(reinterpret_cast<char *>(pmt_descriptor + 1), 3).c_str());
-            if (-1 != language_idx)
-              track->language = iso639_languages[language_idx].iso639_2_code;
-          }
+          type_known = track->parse_dts_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
       }
 
