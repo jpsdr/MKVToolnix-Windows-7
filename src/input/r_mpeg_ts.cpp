@@ -92,16 +92,6 @@ void
 mpeg_ts_track_c::add_pes_payload(unsigned char *ts_payload,
                                  size_t ts_payload_size) {
   pes_payload->add(ts_payload, ts_payload_size);
-
-  // if (pid == 0x90f) {
-  //   static int the_unicorn = 0;
-  //   uint32_t cccsum = 0;
-  //   unsigned char *cccidx;
-  //   for (cccidx = ts_payload; (cccidx - ts_payload) < ts_payload_size; ++cccidx)
-  //     cccsum += *cccidx;
-  //   mxinfo(boost::format("  adding payload pnum %1% size %2% sum %|3$08x|\n") % the_unicorn % ts_payload_size % cccsum);
-  //   the_unicorn++;
-  // }
 }
 
 void
@@ -293,9 +283,6 @@ int
 mpeg_ts_track_c::new_stream_a_truehd() {
   if (!m_truehd_parser)
     m_truehd_parser = truehd_parser_cptr(new truehd_parser_c);
-
-  static int added = 0;
-  added += pes_payload->get_size();
 
   m_truehd_parser->add_data(pes_payload->get_buffer(), pes_payload->get_size());
   pes_payload->remove(pes_payload->get_size());
@@ -861,7 +848,6 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
     pmt_pid_info = (mpeg_ts_pmt_pid_info_t *)((unsigned char *)pmt_pid_info + sizeof(mpeg_ts_pmt_pid_info_t) + es_info_length);
     if (track->type != ES_UNKNOWN) {
       PMT_found         = true;
-      track->pid        = track->pid;
       track->processed  = false;
       track->data_ready = false;
       tracks.push_back(track);
