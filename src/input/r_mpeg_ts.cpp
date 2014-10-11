@@ -29,6 +29,7 @@
 #include "common/mpeg4_p2.h"
 #include "common/strings/formatting.h"
 #include "input/r_mpeg_ts.h"
+#include "input/teletext_to_srt_packet_converter.h"
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
 #include "output/p_avc.h"
@@ -37,6 +38,7 @@
 #include "output/p_mpeg1_2.h"
 #include "output/p_pcm.h"
 #include "output/p_pgs.h"
+#include "output/p_textsubs.h"
 #include "output/p_truehd.h"
 #include "output/p_vc1.h"
 
@@ -49,6 +51,12 @@
 int mpeg_ts_reader_c::potential_packet_sizes[] = { 188, 192, 204, 0 };
 
 // ------------------------------------------------------------
+
+void
+mpeg_ts_track_c::process(packet_cptr const &packet) {
+  if (!converter || !converter->convert(packet))
+    reader.m_reader_packetizers[ptzr]->process(packet);
+}
 
 void
 mpeg_ts_track_c::send_to_packetizer() {
@@ -76,7 +84,7 @@ mpeg_ts_track_c::send_to_packetizer() {
 
   if (use_packet) {
     auto bytes_to_skip = std::min<size_t>(pes_payload->get_size(), skip_packet_data_bytes);
-    reader.m_reader_packetizers[ptzr]->process(new packet_t(memory_c::clone(pes_payload->get_buffer() + bytes_to_skip, pes_payload->get_size() - bytes_to_skip), timecode_to_use.to_ns(-1)));
+    process(std::make_shared<packet_t>(memory_c::clone(pes_payload->get_buffer() + bytes_to_skip, pes_payload->get_size() - bytes_to_skip), timecode_to_use.to_ns(-1)));
   }
 
   pes_payload->remove(pes_payload->get_size());
@@ -397,6 +405,52 @@ mpeg_ts_track_c::parse_dts_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &,
 
   type  = ES_AUDIO_TYPE;
   codec = codec_c::look_up(CT_A_DTS);
+
+  return true;
+}
+
+bool
+mpeg_ts_track_c::parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor,
+                                          mpeg_ts_pmt_pid_info_t const &pmt_pid_info) {
+  if (pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE)
+    return false;
+
+  auto buffer      = reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1);
+  auto num_entries = static_cast<unsigned int>(pmt_descriptor.length) / 5;
+  mxdebug_if(reader.m_debug_pat_pmt, boost::format("Teletext PMT descriptor, %1% entries\n") % num_entries);
+  for (auto idx = 0u; idx < num_entries; ++idx) {
+    // Bits:
+    //  0–23: ISO 639 language code
+    // 24–28: teletext type
+    // 29-31: teletext magazine number
+    // 32-39: teletext page number
+
+    // Teletext type is:
+    //   0: ?
+    //   1: teletext
+    //   2: teletext subtitles
+    //   3: teletext additional information
+    //   4: teletext program schedule
+    //   5: teletext subtitles: hearing impaired
+
+    auto ttx_type = static_cast<unsigned int>(buffer[3]) >> 3;
+
+    if (reader.m_debug_pat_pmt) {
+      mxdebug(boost::format("  %1%: language %2% type %3% magazine %4% page %5%\n")
+              % idx % std::string(reinterpret_cast<char const *>(buffer), 3)
+              % ttx_type % (static_cast<unsigned int>(buffer[3]) & 0x07) % static_cast<unsigned int>(buffer[4]));
+    }
+
+    if (2 == ttx_type) {
+      parse_iso639_language_from(buffer);
+
+      type      = ES_SUBT_TYPE;
+      codec     = codec_c::look_up(CT_S_SRT);
+      probed_ok = true;
+    }
+
+    buffer += 5;
+  }
 
   return true;
 }
@@ -853,11 +907,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
           track->parse_iso639_language_from(pmt_descriptor + 1);
           break;
         case 0x56: // Teletext descriptor
-          if (pmt_pid_info->stream_type == ISO_13818_PES_PRIVATE) { // PES containig private data
-            track->type = ES_UNKNOWN;
-            type_known  = true;
-            mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pmt: Teletext found but not handled !!\n");
-          }
+          type_known = track->parse_srt_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
         case 0x59: // Subtitles descriptor
           type_known = track->parse_vobsub_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
@@ -1228,6 +1278,9 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
   } else if (track->codec.is(CT_S_PGS))
     create_hdmv_pgs_subtitles_packetizer(track);
 
+  else if (track->codec.is(CT_S_SRT))
+    create_srt_subtitles_packetizer(track);
+
   if (-1 != track->ptzr)
     m_ptzr_to_track_map[PTZR(track->ptzr)] = track;
 }
@@ -1268,6 +1321,14 @@ mpeg_ts_reader_c::create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track)
 }
 
 void
+mpeg_ts_reader_c::create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track) {
+  track->ptzr = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, false, true));
+  track->converter.reset(new teletext_to_srt_packet_converter_c{PTZR(track->ptzr)});
+
+  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
+}
+
+void
 mpeg_ts_reader_c::create_packetizers() {
   size_t i;
 
@@ -1294,7 +1355,7 @@ mpeg_ts_reader_c::finish() {
   for (auto &track : tracks)
     if ((-1 != track->ptzr) && (0 < track->pes_payload->get_size())) {
       auto bytes_to_skip = std::min<size_t>(track->pes_payload->get_size(), track->skip_packet_data_bytes);
-      PTZR(track->ptzr)->process(new packet_t(memory_c::clone(track->pes_payload->get_buffer() + bytes_to_skip, track->pes_payload->get_size() - bytes_to_skip)));
+      track->process(std::make_shared<packet_t>(memory_c::clone(track->pes_payload->get_buffer() + bytes_to_skip, track->pes_payload->get_size() - bytes_to_skip)));
     }
 
   file_done = true;

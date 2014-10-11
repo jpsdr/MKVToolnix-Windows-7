@@ -25,6 +25,7 @@
 #include "common/mm_io.h"
 #include "common/mpeg4_p10.h"
 #include "common/truehd.h"
+#include "input/packet_converter.h"
 #include "merge/pr_generic.h"
 #include "mpegparser/M2VParser.h"
 
@@ -305,6 +306,8 @@ public:
 
   unsigned int skip_packet_data_bytes;
 
+  packet_converter_cptr converter;
+
   bool m_debug_delivery, m_debug_timecode_wrapping;
 
   mpeg_ts_track_c(mpeg_ts_reader_c &p_reader)
@@ -356,6 +359,7 @@ public:
 
   bool parse_ac3_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
   bool parse_dts_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
+  bool parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
   bool parse_vobsub_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
 
   void set_pid(uint16_t new_pid);
@@ -363,6 +367,8 @@ public:
   void handle_timecode_wrap(timecode_c &pts, timecode_c &dts);
   bool detect_timecode_wrap(timecode_c &timecode);
   void adjust_timecode_for_wrap(timecode_c &timecode);
+
+  void process(packet_cptr const &packet);
 
   void parse_iso639_language_from(void const *buffer);
 };
@@ -428,6 +434,7 @@ private:
   void create_mpeg4_p10_es_video_packetizer(mpeg_ts_track_ptr &track);
   void create_vc1_video_packetizer(mpeg_ts_track_ptr &track);
   void create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track);
+  void create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track);
 
   bfs::path find_clip_info_file();
   void parse_clip_info_file();
