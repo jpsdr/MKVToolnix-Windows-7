@@ -25,7 +25,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "On Every Street"
+#define VERSIONNAME "Nouages"
 
 version_number_t::version_number_t()
   : valid(false)
