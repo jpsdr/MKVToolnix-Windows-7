@@ -33,6 +33,7 @@
 #include "common/common_pch.h"
 #include "common/ebml.h"
 #include "common/extern_data.h"
+#include "common/fs_sys_helpers.h"
 #include "common/locale.h"
 #include "common/locale_string.h"
 #include "common/strings/editing.h"
@@ -664,12 +665,11 @@ mmg_dialog::display_help(int id) {
     wxDirDialog dlg(this, Z("Choose the location of the mkvmerge GUI help files"));
     std::vector<wxString> potential_help_paths;
 
-#if defined(SYS_WINDOWS)
     wxString installation_path = wxU(mtx::get_installation_path().string());
     if (!installation_path.IsEmpty())
       potential_help_paths.push_back(installation_path + wxT("/doc"));
 
-#else
+#if !defined(SYS_WINDOWS)
     potential_help_paths.push_back(wxT(MTX_DOC_DIR));
 #endif
 
