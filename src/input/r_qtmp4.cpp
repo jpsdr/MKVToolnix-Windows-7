@@ -1351,7 +1351,7 @@ qtmp4_reader_c::create_audio_packetizer_mp3(qtmp4_demuxer_cptr &dmx) {
 
 void
 qtmp4_reader_c::create_audio_packetizer_pcm(qtmp4_demuxer_cptr &dmx) {
-  dmx->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, (int32_t)dmx->a_samplerate, dmx->a_channels, dmx->a_bitdepth));
+  dmx->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, static_cast<int32_t>(dmx->a_samplerate), dmx->a_channels, dmx->a_bitdepth, dmx->m_pcm_format));
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }
 
@@ -2583,6 +2583,11 @@ qtmp4_demuxer_c::verify_vobsub_subtitles_parameters() {
 void
 qtmp4_demuxer_c::determine_codec() {
   codec = codec_c::look_up_object_type_id(esds.object_type_id);
-  if (!codec)
+
+  if (!codec) {
     codec = codec_c::look_up(fourcc);
+
+    if (codec.is(CT_A_PCM))
+      m_pcm_format = fourcc == "twos" ? pcm_packetizer_c::big_endian_integer : pcm_packetizer_c::little_endian_integer;
+  }
 }

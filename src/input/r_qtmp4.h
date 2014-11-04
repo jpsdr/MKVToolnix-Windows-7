@@ -21,6 +21,7 @@
 #include "common/dts.h"
 #include "common/fourcc.h"
 #include "common/mm_io.h"
+#include "output/p_pcm.h"
 #include "output/p_video.h"
 #include "input/qtmp4_atoms.h"
 
@@ -141,6 +142,7 @@ struct qtmp4_demuxer_c {
   uint32_t pos;
 
   codec_c codec;
+  pcm_packetizer_c::pcm_format_e m_pcm_format;
 
   int64_t time_scale, duration, global_duration, constant_editlist_offset_ns;
   uint32_t sample_size;
@@ -191,6 +193,7 @@ struct qtmp4_demuxer_c {
     , id{0}
     , container_id{0}
     , pos{0}
+    , m_pcm_format{pcm_packetizer_c::little_endian_integer}
     , time_scale{1}
     , duration{0}
     , global_duration{0}
