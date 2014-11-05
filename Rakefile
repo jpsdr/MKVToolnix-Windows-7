@@ -83,7 +83,7 @@ def setup_globals
     :guides                => FileList[ "#{$top_srcdir }/doc/guide/*/mkvmerge-gui.html" ].collect { |name| File.basename File.dirname(name) },
   }
 
-  $unwrapped_po            = %{es eu it nl uk pl tr}
+  $unwrapped_po            = %{ca es eu it nl uk pl tr}
 
   $build_tools           ||=  c?(:TOOLS)
 

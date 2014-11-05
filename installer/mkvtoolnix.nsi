@@ -70,6 +70,7 @@ Page custom showExternalLinks
 !macroend
 
 !insertmacro LANG_LOAD "Basque"
+!insertmacro LANG_LOAD "Catalan"
 !insertmacro LANG_LOAD "Czech"
 !insertmacro LANG_LOAD "Dutch"
 !insertmacro LANG_LOAD "English"
@@ -325,6 +326,8 @@ Section "Program files" SEC01
   File "examples\matroskasegmentinfo.dtd"
   File "examples\matroskatags.dtd"
   SetOutPath "$INSTDIR\locale\cs\LC_MESSAGES"
+  File "/oname=mkvtoolnix.mo" "po\ca.mo"
+  File "/oname=wxstd.mo" "wxWidgets-po\ca\LC_MESSAGES\wxstd.mo"
   File "/oname=mkvtoolnix.mo" "po\cs.mo"
   File "/oname=wxstd.mo" "wxWidgets-po\cs\LC_MESSAGES\wxstd.mo"
   SetOutPath "$INSTDIR\locale\de\LC_MESSAGES"
@@ -662,6 +665,10 @@ Section Uninstall
 
   Delete "$INSTDIR\examples\*.*"
   RMDir "$INSTDIR\examples"
+
+  Delete "$INSTDIR\locale\ca\LC_MESSAGES\*.*"
+  RMDir "$INSTDIR\locale\ca\LC_MESSAGES"
+  RMDir "$INSTDIR\locale\ca"
 
   Delete "$INSTDIR\locale\cs\LC_MESSAGES\*.*"
   RMDir "$INSTDIR\locale\cs\LC_MESSAGES"
