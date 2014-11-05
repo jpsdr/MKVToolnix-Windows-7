@@ -67,14 +67,16 @@ using namespace libmatroska;
 
 /** \brief Outputs usage information
 */
+#define S(x) std::string{x}
 static void
 set_usage() {
+  auto nl     = S("\n");
   usage_text  =   "";
   usage_text += Y("mkvmerge -o out [global options] [options1] <file1> [@optionsfile ...]\n");
   usage_text +=   "\n";
   usage_text += Y(" Global options:\n");
-  usage_text += Y("  -v, --verbose            verbose status\n");
-  usage_text += Y("  -q, --quiet              suppress status output\n");
+  usage_text += S("  -v, --verbose            ") + Y("Increase verbosity.") + nl;
+  usage_text += S("  -q, --quiet              ") + Y("Suppress status output.") + nl;
   usage_text += Y("  -o, --output out         Write to the file 'out'.\n");
   usage_text += Y("  -w, --webm               Create WebM compliant file.\n");
   usage_text += Y("  --title <title>          Title for this output file.\n");
@@ -286,6 +288,7 @@ set_usage() {
 
   version_info = get_version_info("mkvmerge", vif_full);
 }
+#undef S
 
 /** \brief Prints information about what has been compiled into mkvmerge
 */
