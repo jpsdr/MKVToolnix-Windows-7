@@ -1818,7 +1818,7 @@ mmg_dialog::on_update_check_state_changed(wxCommandEvent &evt) {
         m_update_check_dlg->Show();
       }
 
-      m_update_check_dlg->update_status(  UPDATE_CHECK_DONE_NO_NEW_RELEASE == state ? Z("You are already running the latest version.")
+      m_update_check_dlg->update_status(  UPDATE_CHECK_DONE_NO_NEW_RELEASE == state ? Z("Currently no newer version is available online.")
                                         : UPDATE_CHECK_DONE_NEW_RELEASE    == state ? Z("There is a new version available online.")
                                         :                                             Z("There was an error querying the update status."));
       m_update_check_dlg->update_info(m_release_version, m_releases_info);
