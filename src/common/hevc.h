@@ -206,6 +206,9 @@ struct codec_private_t {
   }
 };
 
+// UUID -> payload
+typedef std::map< std::vector<unsigned char>, std::vector<unsigned char> > user_data_t;
+
 struct vps_info_t {
   unsigned int id;
 
@@ -302,23 +305,6 @@ struct pps_info_t {
   void dump();
 };
 
-struct sei_info_t {
-  unsigned char divx_uuid[16];
-  unsigned char divx_code[9];
-  unsigned char divx_message_type;
-  unsigned int divx_payload_size;
-  unsigned char *divx_payload;
-
-  sei_info_t() {
-    memset(this, 0, sizeof(*this));
-  }
-
-  ~sei_info_t() {
-    if(divx_payload)
-      free(divx_payload);
-  }
-};
-
 struct slice_info_t {
   unsigned char nalu_type;
   unsigned char type;
@@ -353,8 +339,8 @@ void rbsp_to_nalu(memory_cptr &buffer);
 bool parse_vps(memory_cptr &buffer, vps_info_t &vps);
 bool parse_sps(memory_cptr &buffer, sps_info_t &sps, std::vector<vps_info_t> &m_vps_info_list, bool keep_ar_info = false);
 bool parse_pps(memory_cptr &buffer, pps_info_t &pps);
-bool parse_sei(memory_cptr &buffer);
-bool handle_sei_payload(mm_mem_io_c &byte_reader, unsigned int sei_payload_type, unsigned int sei_payload_size);
+bool parse_sei(memory_cptr &buffer, user_data_t &user_data);
+bool handle_sei_payload(mm_mem_io_c &byte_reader, unsigned int sei_payload_type, unsigned int sei_payload_size, user_data_t &user_data);
 
 par_extraction_t extract_par(memory_cptr const &buffer);
 bool is_hevc_fourcc(const char *fourcc);
@@ -442,7 +428,7 @@ public:
   std::vector<vps_info_t> m_vps_info_list;
   std::vector<sps_info_t> m_sps_info_list;
   std::vector<pps_info_t> m_pps_info_list;
-  //std::vector<sei_info_t> m_sei_info_list;
+  user_data_t m_user_data;
   codec_private_t m_codec_private;
 
 public:
@@ -451,7 +437,7 @@ public:
           std::vector<memory_cptr> const &vps_list,
           std::vector<memory_cptr> const &sps_list,
           std::vector<memory_cptr> const &pps_list,
-          std::vector<memory_cptr> const &sei_list,
+          user_data_t const &user_data,
           codec_private_t const &codec_private);
 
   explicit operator bool() const;
@@ -459,7 +445,7 @@ public:
   bool parse_vps_list(bool ignore_errors = false);
   bool parse_sps_list(bool ignore_errors = false);
   bool parse_pps_list(bool ignore_errors = false);
-  //bool parse_sei_list(bool ignore_errors = false);
+  bool parse_sei_list();
 
   memory_cptr pack();
   static hevcc_c unpack(memory_cptr const &mem);
@@ -488,12 +474,11 @@ protected:
   std::vector<memory_cptr> m_vps_list,
                            m_sps_list,
                            m_pps_list,
-                           m_sei_list,
                            m_extra_data;
   std::vector<vps_info_t> m_vps_info_list;
   std::vector<sps_info_t> m_sps_info_list;
   std::vector<pps_info_t> m_pps_info_list;
-  //std::vector<sei_info_t> m_sei_info_list;
+  user_data_t m_user_data;
   codec_private_t m_codec_private;
 
   memory_cptr m_unparsed_buffer;
