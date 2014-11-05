@@ -1328,7 +1328,7 @@ ogm_v_theora_demuxer_c::initialize() {
     display_width  = theora.display_width;
     display_height = theora.display_height;
   } catch (mtx::theora::header_parsing_x &e) {
-    mxerror_tid(reader->m_ti.m_fname, track_id, boost::format(Y("The Theora identifaction header could not be parsed (%1%).\n")) % e.error());
+    mxerror_tid(reader->m_ti.m_fname, track_id, boost::format(Y("The Theora identification header could not be parsed (%1%).\n")) % e.error());
   }
 }
 

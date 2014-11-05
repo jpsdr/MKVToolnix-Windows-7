@@ -35,7 +35,7 @@ theora_parse_identification_header(unsigned char *buffer,
   for (i = 0; 6 > i; ++i)
     header.theora_string[i] = bc.get_bits(8);
   if (strncmp(header.theora_string, "theora", 6))
-    throw mtx::theora::header_parsing_x(boost::format(Y("Wrong identifaction string: '%|1$6s|' != 'theora'")) % header.theora_string);
+    throw mtx::theora::header_parsing_x(boost::format(Y("Wrong identification string: '%|1$6s|' != 'theora'")) % header.theora_string);
 
   header.vmaj = bc.get_bits(8);
   header.vmin = bc.get_bits(8);
