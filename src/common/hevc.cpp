@@ -319,7 +319,7 @@ hevcc_c::pack() {
   };
 
   // configuration version
-  *buffer++ = m_codec_private.configuration_version;
+  *buffer++ = 1;
   // general parameters block
   // general_profile_space               2     Specifies the context for the interpretation of general_profile_idc and
   //                                           general_profile_compatibility_flag
