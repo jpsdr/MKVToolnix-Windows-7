@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix 7.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2014-10-23 15:59+0200\n"
-"PO-Revision-Date: 2014-11-01 18:54+0100\n"
+"PO-Revision-Date: 2014-11-05 20:19+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -35,7 +35,7 @@ msgid ""
 "have to kill it manually.\n"
 msgstr ""
 "\n"
-"«mkvmerge» ha rebut un SIGINT (probablement perquè l'usuari ha premut Ctrl"
+"El «mkvmerge» ha rebut un SIGINT (probablement perquè l'usuari ha premut Ctrl"
 "+C). S'està intentant sanejar el fitxer. Si «mkvmerge» no respon durant el "
 "procés, l'haureu de matar manualment.\n"
 
@@ -55,7 +55,7 @@ msgid ""
 "                           or not. The value ':1' can be omitted.\n"
 msgstr ""
 "  --aac-is-sbr <TID[:0|1]>\n"
-"                           La pista amb l'D és HE-AAC/AAC+/SBR-AAC o no.\n"
+"                           La pista amb l'ID és HE-AAC/AAC+/SBR-AAC o no.\n"
 "                           El valor «:1» es pot ometre.\n"
 
 #: src/merge/mkvmerge.cpp:146
@@ -320,8 +320,9 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:276
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr ""
-"  --engage <característica>                            Habilita la "
-"característica experimental «feature».\n"
+"  --engage <característica>\n"
+"                           Habilita la característica experimental\n"
+"                           «característica».\n"
 
 #: src/merge/mkvmerge.cpp:225
 msgid ""
@@ -1821,7 +1822,7 @@ msgstr ", nom de fitxer «%1%»"
 #: src/mmg/jobs.cpp:774
 #, c-format, boost-format
 msgid ", finished on %s"
-msgstr ", finalitzat en %s"
+msgstr ", finalitzada el %s"
 
 #: src/info/mkvinfo.cpp:209
 #, boost-format
@@ -1831,12 +1832,12 @@ msgstr ", posició %1%"
 #: src/mmg/jobs.cpp:764
 #, c-format, boost-format
 msgid ", started on %s"
-msgstr ", iniciat fa %s"
+msgstr ", iniciada el %s"
 
 #: src/mmg/jobs.cpp:762
 #, c-format, boost-format
 msgid "--- BEGIN job %d (%s, added on %s)"
-msgstr "--- COMENÇA la tasca %d (%s, afegida en %s)"
+msgstr "--- COMENÇA la tasca %d (%s, afegida el %s)"
 
 #: src/mmg/jobs.cpp:772
 #, c-format, boost-format
@@ -2180,7 +2181,7 @@ msgstr "Interromp ara el procés de multiplexat"
 #: src/mmg/jobs.cpp:137
 #, c-format, boost-format
 msgid "Aborted processing on %s"
-msgstr "S'ha interromput el procés a %s"
+msgstr "S'ha interromput el procés el %s"
 
 #: src/info/wxwidgets_ui.cpp:345
 msgid "About mkvinfo"
@@ -2253,7 +2254,7 @@ msgstr "Afegeix el fitxer «nom_de_fitxer» com un adjunt nou"
 
 #: src/mmg/jobs.cpp:470
 msgid "Added on"
-msgstr "Afegit a"
+msgstr "Afegida el"
 
 #: src/mmg/tabs/additional_parts_dlg.cpp:42
 msgid "Additional source file parts"
@@ -2757,7 +2758,7 @@ msgstr "Canvia les preferències i opcions del «mmg»"
 #: src/mmg/options/languages.cpp:83
 msgid "Changes to this list do not take effect until mmg is restarted."
 msgstr ""
-"Els canvis per aquesta llista no tindran efecte fins que «mmg» sigui "
+"Els canvis per aquesta llista no tindran efecte fins que el «mmg» sigui "
 "reiniciat."
 
 #: src/info/mkvinfo.cpp:571
@@ -3122,7 +3123,7 @@ msgstr "Línia d'ordres emprada:"
 
 #: src/mmg/options/languages.cpp:74
 msgid "Common languages"
-msgstr "Idiomes comuns"
+msgstr "Idiomes habituals"
 
 #: src/merge/pr_generic.cpp:808
 #, boost-format
@@ -3386,7 +3387,7 @@ msgstr "Durada de l'índex: %1%"
 
 #: src/mmg/tabs/global.cpp:355
 msgid "Cue name format:"
-msgstr "Format dels noms de l'índex:"
+msgstr "Format pels noms de l'índex:"
 
 #: src/info/mkvinfo.cpp:1030
 msgid "Cue point"
@@ -3491,11 +3492,6 @@ msgstr "Valor actual:"
 #: src/mmg/update_checker.cpp:64
 msgid "Current version:"
 msgstr "Versió actual:"
-
-#: src/mmg/mmg_dialog.cpp:1821
-#, fuzzy
-msgid "Currently no newer version is available online."
-msgstr "Hi ha disponible una nova versió."
 
 #: src/mmg/jobs.cpp:513
 msgid "D&elete"
@@ -3636,7 +3632,7 @@ msgstr "Directori:"
 
 #: src/mmg/jobs.cpp:509
 msgid "Disable the selected jobs and set their status to 'done'"
-msgstr "Deshabilita les tasques seleccionades i estableix el seu estat a «fet»"
+msgstr "Deshabilita les tasques seleccionades i estableix el seu estat a «feta»"
 
 #: src/mmg/cli_options_dlg.cpp:143
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
@@ -4262,16 +4258,16 @@ msgstr ""
 #: src/mmg/jobs.cpp:376
 #, c-format, boost-format
 msgid "Finished job ID %d on %s: status '%s'"
-msgstr "Ha finalitzat la tasca amb l'ID %d en %s: estat «%s»"
+msgstr "Ha finalitzat la tasca amb l'ID %d el %s: estat «%s»"
 
 #: src/mmg/jobs.cpp:474
 msgid "Finished on"
-msgstr "Finalitzat en"
+msgstr "Finalitzada el"
 
 #: src/mmg/jobs.cpp:139
 #, c-format, boost-format
 msgid "Finished processing on %s"
-msgstr "S'ha finalitzat el processat en %s"
+msgstr "S'ha finalitzat el processat el %s"
 
 #: src/mmg/tabs/input_format.cpp:271
 msgid "Fix bitstream timing information"
@@ -4747,7 +4743,7 @@ msgid ""
 "the newly created MKVToolNix troubleshooting advice page:"
 msgstr ""
 "Si trobeu problemes durant la reproducció dels fitxers, considereu visitar "
-"la nova pàgina per a la solució de problemes de MKVToolNix:"
+"la nova pàgina per a la solució de problemes del MKVToolNix:"
 
 #: src/output/p_textsubs.cpp:64
 #, boost-format
@@ -5613,7 +5609,7 @@ msgstr "Matroska"
 #: src/mmg/mmg_dialog.cpp:357
 #, c-format, boost-format
 msgid "Matroska A/V files (*.mka;*.mkv;*.mk3d)|*.mkv;*.mka;*.mk3d|%s"
-msgstr "Fitxers A/V Matroska (*.mka;*.mkv;*.mk3d)|*.mkv;*.mka;*.mk3d|%s"
+msgstr "Fitxers A/V del Matroska (*.mka;*.mkv;*.mk3d)|*.mkv;*.mka;*.mk3d|%s"
 
 #: src/common/file_types.cpp:45
 msgid "Matroska audio/video files"
@@ -5622,13 +5618,13 @@ msgstr "Fitxers d'àudio/vídeo Matroska"
 #: src/mmg/tabs/chapters.cpp:679
 #, c-format, boost-format
 msgid "Matroska files (*.mkv;*.mka;*.mk3d)|*.mkv;*.mka;*.mk3d|%s"
-msgstr "Fitxers Matroska (*.mkv;*.mka;*.mk3d)|*.mkv;*.mka;*.mk3d|%s"
+msgstr "Fitxers del Matroska (*.mkv;*.mka;*.mk3d)|*.mkv;*.mka;*.mk3d|%s"
 
 #: src/mmg/header_editor/frame.cpp:238
 #, c-format, boost-format
 msgid "Matroska files (*.mkv;*.mka;*.mks;*.mk3d)|*.mkv;*.mka;*.mks;*.mk3d|%s"
 msgstr ""
-"Fitxers Matroska (*.mkv;*.mka;*.mks;*.mk3d)|*.mkv;*.mka;*.mks;*.mk3d|%s"
+"Fitxers del Matroska (*.mkv;*.mka;*.mks;*.mk3d)|*.mkv;*.mka;*.mks;*.mk3d|%s"
 
 #: src/info/mkvinfo.cpp:931
 #, boost-format
@@ -6361,7 +6357,7 @@ msgstr ""
 
 #: src/mmg/options/output.cpp:40
 msgid "Parent directory of the first input file"
-msgstr "Directori pare del primer fitxer d'entrada"
+msgstr "Usa el directori pare del primer fitxer d'entrada"
 
 #: src/info/wxwidgets_ui.cpp:118
 msgid "Parse the file completely and show all elements"
@@ -6437,7 +6433,7 @@ msgid ""
 "explains several details in great length which are not obvious from\n"
 "this listing.\n"
 msgstr ""
-"Si us plau, llegiu la pàgina principal o la documentació HTML pel\n"
+"Si us plau, llegiu la pàgina man o la documentació HTML pel\n"
 "«mkvmerge». Allà s'expliquen certs aspectes d'una manera més\n"
 "detallada que no són tan obvis des d'aquest llistat.\n"
 
@@ -6900,7 +6896,7 @@ msgstr "D&esa la línia d'ordres"
 
 #: src/mmg/options/output.cpp:39
 msgid "Same directory as the first input file's"
-msgstr "El mateix directori que el del primer fitxer d'entrada"
+msgstr "Usa el mateix directori que el del primer fitxer d'entrada"
 
 #: src/common/property_element.cpp:150 src/mmg/header_editor/frame.cpp:480
 msgid "Sampling frequency in Hz."
@@ -7101,7 +7097,7 @@ msgid ""
 "Select the languages you want to be shown at the top\n"
 "of language drop down boxes."
 msgstr ""
-"Seleccioneu els idiomes que voleu que es mostrin a la\n"
+"Trieu els idiomes que voleu que es mostrin a la\n"
 "part superior de les llistes desplegables d'idioma."
 
 #: src/mmg/tabs/chapters.cpp:85
@@ -7178,7 +7174,7 @@ msgstr ""
 
 #: src/mmg/options/mmg.cpp:53
 msgid "Set the delay input field from the file name"
-msgstr "Estableix el camp d'entrada del retard des del nom del fitxer"
+msgstr "Estableix el retard al camp d'entrada a partir del nom del fitxer"
 
 #: src/propedit/propedit_cli_parser.cpp:215
 msgid ""
@@ -7364,7 +7360,7 @@ msgstr "Mostra les estadístiques per a cada pista en el mode loquaç."
 
 #: src/mmg/mmg_dialog.cpp:296
 msgid "Show the command line mmg creates for mkvmerge"
-msgstr "Mostra la línia d'ordres que «mmg» crea per a «mkvmerge»"
+msgstr "Mostra la línia d'ordres que el «mmg» crea per a «mkvmerge»"
 
 #: src/info/info_cli_parser.cpp:44
 msgid "Show the first 16 bytes of each frame as a hex dump."
@@ -7611,12 +7607,12 @@ msgstr "Inici:"
 
 #: src/mmg/jobs.cpp:472
 msgid "Started on"
-msgstr "Inicia fa"
+msgstr "Iniciada el"
 
 #: src/mmg/jobs.cpp:226
 #, c-format, boost-format
 msgid "Starting job ID %d (%s) on %s"
-msgstr "S'inicia la tasca amb l'ID %d (%s) en %s"
+msgstr "S'inicia la tasca amb l'ID %d (%s) el %s"
 
 #: src/info/mkvinfo.cpp:1597
 #, boost-format
@@ -7941,7 +7937,7 @@ msgstr ""
 "inclusivament a «--nalu-size-length %1%».\n"
 
 #: src/input/r_ogm.cpp:1331
-#, fuzzy, boost-format
+#, boost-format
 msgid "The Theora identification header could not be parsed (%1%).\n"
 msgstr "La capçalera d'identificació Theora no s'ha pogut analitzar (%1%).\n"
 
@@ -8887,7 +8883,7 @@ msgid ""
 "Unicode string in '%1%'. %2%\n"
 msgstr ""
 "El valor de la propietat conté caràcters no ASCII, però la propietat no és "
-"una cadena de caràcters Unicode en «%1%». %2%\n"
+"una cadena de caràcters Unicode a «%1%». %2%\n"
 
 #: src/propedit/change.cpp:155
 #, boost-format
@@ -8896,7 +8892,7 @@ msgid ""
 "long in '%1%'. %2%\n"
 msgstr ""
 "El valor de la propietat no és una especificació binària o no és exactament "
-"d'una longitud de 128 bits en «%1%». %2%\n"
+"d'una longitud de 128 bits a «%1%». %2%\n"
 
 #: src/propedit/change.cpp:140
 #, boost-format
@@ -9053,7 +9049,7 @@ msgid ""
 "The tag or attribute '%1%' at position %2% contains data that is outside its "
 "allowed range."
 msgstr ""
-"L'etiqueta o atribut «%1%» en la posició %2% conté dades que estan fora de "
+"L'etiqueta o atribut «%1%» a la posició %2% conté dades que estan fora de "
 "l'interval permès."
 
 #: src/common/xml/xml.h:110
@@ -9541,10 +9537,10 @@ msgstr ""
 "Aquesta opció requereix un argument addicional «n». Li indica al «mkvmerge» "
 "que posi la majoria dels blocs de dades «n» en cada clúster. Si el número es "
 "fixat amb posterioritat en «ms», després posa la majoria dels «n» "
-"mil·lisegons de dades en cada clúster. La longitud màxima per a una clúster "
-"que «mkvmerge» admet és de 60000 blocs i 32000 ms; la longitud mínima és de "
-"100 ms. Els programes només seran capaços de cercar als clústers, pel que el "
-"crear clústers molt grans podria portar a una cerca lenta o imprecisa."
+"mil·lisegons de dades en cada clúster. La longitud màxima per a un clúster "
+"que el «mkvmerge» admet és de 60000 blocs i 32000 ms; la longitud mínima és "
+"de 100 ms. Els programes només seran capaços de cercar als clústers, pel que "
+"el crear clústers molt grans podria portar a una cerca lenta o imprecisa."
 
 #: src/propedit/change.cpp:252
 #, boost-format
@@ -10374,7 +10370,7 @@ msgid "Wrong header type: 0x%|1$02x| != 0x%|2$02x|"
 msgstr "Tipus de capçalera erroni: 0x%|1$02x| != 0x%|2$02x|"
 
 #: src/common/theora.cpp:38
-#, fuzzy, boost-format
+#, boost-format
 msgid "Wrong identification string: '%|1$6s|' != 'theora'"
 msgstr "Cadena d'identificació errònia: «%|1$6s|» != «theora»"
 
@@ -10382,6 +10378,10 @@ msgstr "Cadena d'identificació errònia: «%|1$6s|» != «theora»"
 #, boost-format
 msgid "Wrong identification string: '%|1$7s|' != 'kate\\0\\0\\0'"
 msgstr "Cadena d'identificació erroni: «%|1$7s|» != «kate\\0\\0\\0»"
+
+#: src/mmg/mmg_dialog.cpp:1821
+msgid "You are already running the latest version."
+msgstr "Ja s'està executant l'última versió."
 
 #: src/mmg/tabs/chapters.cpp:1232
 msgid ""
@@ -10486,7 +10486,7 @@ msgstr "ambdós ulls lligats en un bloc (primer el dret)"
 #: src/common/version.cpp:148
 #, boost-format
 msgid "built on %1% %2%"
-msgstr "compilat en %1% %2%"
+msgstr "compilat el %1% %2%"
 
 #: src/info/mkvinfo.cpp:953 src/input/r_matroska.cpp:100
 msgid "buttons"
@@ -10569,11 +10569,11 @@ msgstr "amplada de visualització: %1%"
 
 #: src/mmg/jobs.cpp:560 src/mmg/jobs.cpp:748
 msgid "done"
-msgstr "fet"
+msgstr "feta"
 
 #: src/mmg/jobs.cpp:561
 msgid "done/warnings"
-msgstr "fet/avisos"
+msgstr "feta/avisos"
 
 #: src/mmg/tabs/input.cpp:199
 msgid "down"
@@ -11015,7 +11015,7 @@ msgstr ""
 #: src/mmg/mux_dialog.cpp:319
 #, c-format, boost-format
 msgid "mkvmerge FAILED with a return code of %d. %s"
-msgstr "«mkvmerge» ha FALLAT amb un codi de retorn de %d. %s"
+msgstr "El «mkvmerge» ha FALLAT amb un codi de retorn de %d. %s"
 
 #: src/mmg/tabs/global.cpp:570 src/mmg/tabs/global.cpp:584
 #: src/mmg/tabs/global.cpp:588 src/mmg/tabs/global.cpp:592
@@ -11032,7 +11032,7 @@ msgstr "IGU del «mkvmerge» preparada."
 #: src/mmg/mmg_dialog.cpp:407 src/mmg/mmg_dialog.cpp:455
 #, c-format, boost-format
 msgid "mkvmerge GUI settings (*.mmg)|*.mmg|%s"
-msgstr "Ajustaments per a la IGU del mkvmerge (*.mmg)|*.mmg|%s"
+msgstr "Ajustaments per a la IGU del «mkvmerge» (*.mmg)|*.mmg|%s"
 
 #: src/mmg/tabs/input.cpp:1371 src/mmg/tabs/input.cpp:1397
 #: src/mmg/tabs/input.cpp:1408 src/mmg/tabs/input.cpp:1418
@@ -11082,7 +11082,7 @@ msgid ""
 "this is a bug in mkvmerge itself. The error message was:\n"
 "%1%\n"
 msgstr ""
-"«mkvmerge» ha trobat dades trencades o no analitzables en aquesta pista de "
+"El «mkvmerge» ha trobat dades malmeses o no analitzables en aquesta pista de "
 "vídeo AVC/h.264. Es podria tractar que el vostre fitxer està malmès (al qual "
 "«mkvmerge» encara no pot fer front) o es tracta d'un error del propi "
 "«mkvmerge». El missatge d'error era:\n"
@@ -11096,7 +11096,7 @@ msgid ""
 "a bug in mkvmerge itself. The error message was:\n"
 "%1%\n"
 msgstr ""
-"«mkvmerge» ha trobat dades trencades o no analitzables en aquesta pista de "
+"El «mkvmerge» ha trobat dades malmeses o no analitzables en aquesta pista de "
 "vídeo HEVC. Es podria tractar que el vostre fitxer està malmès (al qual "
 "«mkvmerge» encara no pot fer front) o es tracta d'un error del propi "
 "«mkvmerge». El missatge d'error era:\n"
@@ -11109,23 +11109,23 @@ msgstr "Executable de «mkvmerge»"
 #: src/mmg/mux_dialog.cpp:321
 #, c-format, boost-format
 msgid "mkvmerge finished with a return code of %d. %s"
-msgstr "«mkvmerge» ha finalitzat amb un codi de retorn de %d. %s"
+msgstr "El «mkvmerge» ha finalitzat amb un codi de retorn de %d. %s"
 
 #: src/mmg/jobs.cpp:145 src/mmg/mux_dialog.cpp:336
 msgid "mkvmerge has finished"
-msgstr "«mkvmerge» ha finalitzat"
+msgstr "El «mkvmerge» ha finalitzat"
 
 #: src/input/r_ogm.cpp:484
 msgid ""
 "mkvmerge has not been compiled with FLAC support but handling of this stream "
 "has been requested.\n"
 msgstr ""
-"«mkvmerge» no ha estat compilat amb suport per a fitxers FLAC, però s'ha "
+"El «mkvmerge» no ha estat compilat amb suport per a fitxers FLAC, però s'ha "
 "requerit la manipulació d'aquest flux.\n"
 
 #: src/mmg/jobs.cpp:43 src/mmg/mux_dialog.cpp:35
 msgid "mkvmerge is running"
-msgstr "S'està executant «mkvmerge»"
+msgstr "S'està executant el «mkvmerge»"
 
 #: src/mmg/options/mkvmerge.cpp:74
 msgid "mkvmerge options"
@@ -11169,7 +11169,7 @@ msgstr ""
 
 #: src/merge/output_control.cpp:275 src/merge/output_control.cpp:311
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
-msgstr "«mkvmerge» ha estat interromput per un SIGINT (Ctrl+C?)\n"
+msgstr "El «mkvmerge» ha estat interromput per un SIGINT (Ctrl+C?)\n"
 
 #: src/info/mkvinfo.cpp:831
 #, boost-format
@@ -11227,7 +11227,7 @@ msgstr "mpeg_ps_reader: no hauria d'haver succeït #2. %1%"
 
 #: src/mmg/options/mmg.cpp:129 src/mmg/tabs/ask_scan_for_playlists_dlg.cpp:43
 msgid "never scan for other playlists"
-msgstr "no cercar mai altres llista de reproducció"
+msgstr "no cercar mai altres llistes de reproducció "
 
 #: src/mmg/header_editor/bool_value_page.cpp:43
 #: src/mmg/tabs/input_general.cpp:104 src/mmg/tabs/input_general.cpp:124
@@ -11282,7 +11282,7 @@ msgstr "només pels fotogrames I"
 
 #: src/mmg/options/mmg.cpp:64
 msgid "only if the run was successfull"
-msgstr "Només si l'execució ha estat correcta"
+msgstr "només si l'execució ha estat correcta"
 
 #: src/mmg/tabs/chapters.cpp:365
 msgid "ordered"
@@ -11290,7 +11290,7 @@ msgstr "ordenat"
 
 #: src/mmg/options/output.cpp:80
 msgid "output options"
-msgstr "opcions de la sortida"
+msgstr "Opcions de la sortida"
 
 #: src/info/mkvinfo.cpp:561
 #, boost-format
@@ -11434,7 +11434,7 @@ msgstr "divideix després dels capítols"
 
 #: src/mmg/tabs/global.cpp:317
 msgid "split by parts based on frame/field numbers"
-msgstr "divideix en partes segons els números dels fotogrames/camps"
+msgstr "divideix en parts segons els números dels fotogrames/camps"
 
 #: src/mmg/tabs/global.cpp:316
 msgid "split by parts based on timecodes"
@@ -11564,7 +11564,4 @@ msgstr "sí"
 
 #~ msgid "  -v, --verbose            verbose status\n"
 #~ msgstr "  -v, --verbose            Estat detallat per a la sortida.\n"
-
-#~ msgid "You are already running the latest version."
-#~ msgstr "Ja s'està executant l'última versió."
 
