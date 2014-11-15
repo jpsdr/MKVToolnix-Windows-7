@@ -34,6 +34,9 @@
    http://sourceforge.net/projects/base64decoder/ and is licensed under
    the GPL v2 or later. See the file COPYING for details.
 
+   The rest is licensed the same way the rest of MKVToolNix is
+   licensed: under the GPL v2.
+
    base64 encoding and decoding functions
 
    See the above URLs for the original authors.

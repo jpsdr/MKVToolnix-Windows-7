@@ -32,7 +32,7 @@ http://www.matroska.org/
 The full documentation for each command is now maintained in its
 man page only. Type `mkvmerge -h` to get you started.
 
-This code comes under the GPL (see www.gnu.org or the file COPYING).
+This code comes under the GPL v2 (see www.gnu.org or the file COPYING).
 Modify as needed.
 
 The icons are based on the work of Alexandr Grigorcea and modified by

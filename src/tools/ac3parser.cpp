@@ -1,7 +1,7 @@
 /*
    ac3parser - A simple tool for parsing (E)AC3 files
 
-   Distributed under the GPL
+   Distributed under the GPL v2
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 

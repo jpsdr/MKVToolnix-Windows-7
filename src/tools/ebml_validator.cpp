@@ -1,7 +1,7 @@
 /*
    ebml_validator - A tool for validating the EBML structure
 
-   Distributed under the GPL
+   Distributed under the GPL v2
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 

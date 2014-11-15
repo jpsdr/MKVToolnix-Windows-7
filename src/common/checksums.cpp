@@ -2,7 +2,7 @@
    mkvmerge -- utility for splicing together matroska files
    from component media subtypes
 
-   Distributed under the GPL
+   Distributed under the GPL v2
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
@@ -56,7 +56,7 @@ calc_adler32(const unsigned char *buffer,
    The following code was taken from the ffmpeg project, files
    "libavutil/crc.h" and "libavutil/crc.c".
 
-   Its license here is the GPL.
+   Its license here is the GPL v2.
  */
 
 static struct {

@@ -1,7 +1,7 @@
 /*
    mkvinfo -- utility for gathering information about Matroska files
 
-   Distributed under the GPL
+   Distributed under the GPL v2
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 

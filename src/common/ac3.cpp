@@ -2,7 +2,7 @@
    mkvmerge -- utility for splicing together matroska files
    from component media subtypes
 
-   Distributed under the GPL
+   Distributed under the GPL v2
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
@@ -408,7 +408,7 @@ ac3::parser_c::find_consecutive_frames(unsigned char const *buffer,
    The functions mul_poly, pow_poly and verify_ac3_crc were taken
    or adopted from the ffmpeg project, file "libavcodec/ac3enc.c".
 
-   The license here is the GPL.
+   The license here is the GPL v2.
  */
 
 #define CRC16_POLY ((1 << 0) | (1 << 2) | (1 << 15) | (1 << 16))

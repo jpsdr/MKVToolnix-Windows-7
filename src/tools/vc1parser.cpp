@@ -1,7 +1,7 @@
 /*
    vc1parser - A tool for testing the VC1 bitstream parser
 
-   Distributed under the GPL
+   Distributed under the GPL v2
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
