@@ -4382,10 +4382,10 @@ msgstr ""
 msgid "Format specific options"
 msgstr "Opcions específiques del format"
 
-#: src/mpegparser/M2VParser.cpp:444
+#: src/mpegparser/M2VParser.cpp:495
+#, fuzzy
 msgid ""
-"Found B frame without second reference in a non closed GOP. Fix the MPEG2 "
-"video stream before attempting to multiplex it.\n"
+"Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr ""
 "S'ha trobat un fotograma B sense una segona referència en un GOP sense "
 "tancar. Corregeix el fitxer de vídeo MPEG2 abans d'intentar el multiplexat.\n"
@@ -7451,7 +7451,7 @@ msgstr ""
 "Bloc simple (%1% número de pista %2%, %3% fotograma/es, codi de temps "
 "%|4$.3f|s = %5%)"
 
-#: src/mpegparser/M2VParser.cpp:396
+#: src/mpegparser/M2VParser.cpp:446
 msgid ""
 "Single field frame before GOP header detected. Fix the MPEG2 video stream "
 "before attempting to multiplex it.\n"
@@ -9930,7 +9930,7 @@ msgstr ""
 "UTFstring_to_cstrutf8: Caràcter extens no vàlid. Si us plau, contacteu amb "
 "moritz@bunkus.org si penseu que això no és cert."
 
-#: src/mpegparser/M2VParser.cpp:241
+#: src/mpegparser/M2VParser.cpp:254
 msgid ""
 "Unexpected picture frame after single field frame. Fix the MPEG2 video "
 "stream before attempting to multiplex it.\n"
