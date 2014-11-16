@@ -225,7 +225,7 @@ mpeg1_2_video_packetizer_c::process_unframed(packet_cptr packet) {
       if (!m_hcodec_private)
         create_private_data();
 
-      packet_cptr new_packet  = packet_cptr(new packet_t(new memory_c(frame->data, frame->size, true), frame->timecode, frame->duration, frame->firstRef, frame->secondRef));
+      packet_cptr new_packet  = packet_cptr(new packet_t(new memory_c(frame->data, frame->size, true), frame->timecode, frame->duration, frame->refs[0], frame->refs[1]));
       new_packet->time_factor = MPEG2_PICTURE_TYPE_FRAME == frame->pictureStructure ? 1 : 2;
 
       remove_stuffing_bytes_and_handle_sequence_headers(new_packet);

@@ -36,6 +36,23 @@ enum MPEG2ParserState_e {
   MPV_PARSER_STATE_ERROR
 };
 
+// stores a ref to another frame (first of all a frame pointer, sometime later also its timecode)
+class MPEGFrame;
+class MPEGFrameRef {
+public:
+  MPEGFrame *frame;
+  MediaTime timecode;
+
+  MPEGFrameRef() {
+    Clear();
+  }
+  void Clear() {
+    frame    = nullptr;
+    timecode = -1;
+  }
+  void TryUpdate();
+};
+
 class MPEGFrame {
 public:
   binary *data;
@@ -44,9 +61,9 @@ public:
   uint32_t seqHdrDataSize;
   MediaTime duration;
   char frameType;
-  MediaTime timecode;
-  MediaTime firstRef;
-  MediaTime secondRef;
+  MediaTime timecode; // before stamping: sequence number; after stamping: real timecode
+  MediaTime refs[2];
+  MPEGFrameRef tmpRefs[2];
   bool stamped;
   bool invisible;
   bool rff;
@@ -63,6 +80,7 @@ class M2VParser {
 private:
   std::vector<MPEGChunk*> chunks; //Hold the chunks until we can order them
   std::queue<MPEGFrame*> waitQueue; //Holds unstamped buffers until we can stamp them.
+  std::queue<MPEGFrame*> tmpForwardQueue; //Temporarily holds stamped buffers until we can forward them.
   std::queue<MPEGFrame*> buffers; //Holds stamped buffers until they are requested.
   MediaTime previousTimecode;
   MediaTime previousDuration;
@@ -74,12 +92,12 @@ private:
   MediaTime waitExpectedTime;
   bool      waitSecondField;
   bool      probing;
-  MediaTime firstRef;
+  bool      b_frame_warning_printed;
+  MPEGFrameRef refs[2];
   bool needInit;
   bool m_eos;
   bool notReachedFirstGOP;
   bool keepSeqHdrsInBitstream;
-  MediaTime secondRef;
   bool invisible;
   int32_t   gopNum;
   MediaTime frameNum;
@@ -95,12 +113,14 @@ private:
   int32_t InitParser();
   void DumpQueues();
   int32_t FillQueues();
-  void ShoveRef(MediaTime ref);
+  void SetFrameRef(MPEGFrame *ref);
+  void ShoveRef(MPEGFrame *ref);
   void ClearRef();
   MediaTime GetFrameDuration(MPEG2PictureHeader picHdr);
   void FlushWaitQueue();
   int32_t OrderFrame(MPEGFrame* frame);
   void StampFrame(MPEGFrame* frame);
+  void UpdateFrame(MPEGFrame* frame);
   int32_t PrepareFrame(MPEGChunk* chunk, MediaTime timecode, MPEG2PictureHeader picHdr);
 public:
   M2VParser();
