@@ -992,6 +992,7 @@ mpeg4::p10::avc_es_parser_c::avc_es_parser_c()
   , m_have_incomplete_frame(false)
   , m_ignore_nalu_size_length_errors(false)
   , m_discard_actual_frames(false)
+  , m_simple_picture_order{}
   , m_debug_keyframe_detection{"avc_parser|avc_keyframe_detection"}
   , m_debug_nalu_types{        "avc_parser|avc_nalu_types"}
   , m_debug_timecodes{         "avc_parser|avc_timecodes"}
@@ -1586,55 +1587,24 @@ mpeg4::p10::avc_es_parser_c::get_most_often_used_duration()
 }
 
 void
-mpeg4::p10::avc_es_parser_c::cleanup() {
-  auto s_debug_force_simple_picture_order = debugging_option_c{"avc_parser_force_simple_picture_order"};
+mpeg4::p10::avc_es_parser_c::calculate_frame_order() {
+  auto frames_begin           = m_frames.begin();
+  auto frames_end             = m_frames.end();
+  auto frame_itr              = frames_begin;
 
-  if (m_frames.empty())
-    return;
+  auto const &idr             = frame_itr->m_si;
+  auto const &sps             = m_sps_info_list[idr.sps];
 
-  if (m_discard_actual_frames) {
-    m_stats.num_frames_discarded    += m_frames.size();
-    m_stats.num_timecodes_discarded += m_provided_timecodes.size();
-
-    m_frames.clear();
-    m_provided_timecodes.clear();
-    m_provided_stream_positions.clear();
-
-    return;
-  }
-
-  auto frames_begin = m_frames.begin();
-  auto frames_end   = m_frames.end();
-  auto frame_itr    = frames_begin;
-
-  // This may be wrong but is needed for mkvmerge to work correctly
-  // (cluster_helper etc).
-  frame_itr->m_keyframe = true;
-
-  slice_info_t &idr         = frame_itr->m_si;
-  sps_info_t &sps           = m_sps_info_list[idr.sps];
-  bool simple_picture_order = false;
-
-  if (   (   (AVC_SLICE_TYPE_I   != idr.type)
-          && (AVC_SLICE_TYPE_SI  != idr.type)
-          && (AVC_SLICE_TYPE2_I  != idr.type)
-          && (AVC_SLICE_TYPE2_SI != idr.type))
-      || (0 == idr.nal_ref_idc)
-      || (0 != sps.pic_order_cnt_type)) {
-    simple_picture_order = true;
-    // return;
-  }
-
-  unsigned int idx                    = 0;
-  unsigned int prev_pic_order_cnt_msb = 0;
-  unsigned int prev_pic_order_cnt_lsb = 0;
-  unsigned int pic_order_cnt_msb      = 0;
+  auto idx                    = 0u;
+  auto prev_pic_order_cnt_msb = 0u;
+  auto prev_pic_order_cnt_lsb = 0u;
+  auto pic_order_cnt_msb      = 0u;
 
   while (frames_end != frame_itr) {
-    slice_info_t &si = frame_itr->m_si;
+    auto const &si = frame_itr->m_si;
 
     if (si.sps != idr.sps) {
-      simple_picture_order = true;
+      m_simple_picture_order = true;
       break;
     }
 
@@ -1661,17 +1631,54 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
       prev_pic_order_cnt_msb = pic_order_cnt_msb;
     }
   }
+}
 
-  if (!simple_picture_order && !s_debug_force_simple_picture_order)
+void
+mpeg4::p10::avc_es_parser_c::cleanup() {
+  auto s_debug_force_simple_picture_order = debugging_option_c{"avc_parser_force_simple_picture_order"};
+
+  if (m_frames.empty())
+    return;
+
+  if (m_discard_actual_frames) {
+    m_stats.num_frames_discarded    += m_frames.size();
+    m_stats.num_timecodes_discarded += m_provided_timecodes.size();
+
+    m_frames.clear();
+    m_provided_timecodes.clear();
+    m_provided_stream_positions.clear();
+
+    return;
+  }
+
+  auto const &idr        = m_frames.begin()->m_si;
+  auto const &sps        = m_sps_info_list[idr.sps];
+  m_simple_picture_order = false;
+
+  if (   (   (AVC_SLICE_TYPE_I   != idr.type)
+          && (AVC_SLICE_TYPE_SI  != idr.type)
+          && (AVC_SLICE_TYPE2_I  != idr.type)
+          && (AVC_SLICE_TYPE2_SI != idr.type))
+      || (0 == idr.nal_ref_idc)
+      || (0 != sps.pic_order_cnt_type)) {
+    m_simple_picture_order = true;
+    // return;
+  }
+
+  calculate_frame_order();
+
+  if (!m_simple_picture_order && !s_debug_force_simple_picture_order)
     brng::sort(m_frames, [](const avc_frame_t &f1, const avc_frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
 
   brng::sort(m_provided_timecodes);
 
-  frames_begin               = m_frames.begin();
-  frames_end                 = m_frames.end();
+  auto frames_begin          = m_frames.begin();
+  auto frames_end            = m_frames.end();
+  auto frame_itr             = frames_begin;
   auto previous_frame_itr    = frames_begin;
   auto provided_timecode_itr = m_provided_timecodes.begin();
-  for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
+
+  while (frames_end != frame_itr) {
     if (frame_itr->m_has_provided_timecode) {
       frame_itr->m_start = *provided_timecode_itr;
       ++provided_timecode_itr;
@@ -1687,6 +1694,7 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
     frame_itr->m_end = frame_itr->m_start + duration_for(frame_itr->m_si);
 
     previous_frame_itr = frame_itr;
+    ++frame_itr;
   }
 
   m_max_timecode = m_frames.back().m_end;
@@ -1698,12 +1706,17 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
                }));
 
 
-  if (!simple_picture_order)
+  if (!m_simple_picture_order)
     brng::sort(m_frames, [](const avc_frame_t &f1, const avc_frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
 
   frames_begin       = m_frames.begin();
   frames_end         = m_frames.end();
   previous_frame_itr = frames_begin;
+
+  // This may be wrong but is needed for mkvmerge to work correctly
+  // (cluster_helper etc).
+  frames_begin->m_keyframe = true;
+
   for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
     if (frames_begin != frame_itr)
       frame_itr->m_ref1 = previous_frame_itr->m_start - frame_itr->m_start;
