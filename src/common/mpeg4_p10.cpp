@@ -987,6 +987,7 @@ mpeg4::p10::avc_es_parser_c::avc_es_parser_c()
   , m_b_frames_since_keyframe(false)
   , m_par_found(false)
   , m_max_timecode(0)
+  , m_previous_frame_start_in_display_order{}
   , m_stream_position(0)
   , m_parsed_position(0)
   , m_have_incomplete_frame(false)
@@ -1259,6 +1260,7 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr &nalu) {
                                 || (   is_i_slice
                                     && (   (m_debug_keyframe_detection && !m_b_frames_since_keyframe)
                                         || (NALU_TYPE_IDR_SLICE == si.nalu_type)));
+  m_incomplete_frame.m_type     =  m_incomplete_frame.m_keyframe ? 'I' : is_b_slice ? 'B' : 'P';
   m_recovery_point_valid        =  false;
 
   if (m_incomplete_frame.m_keyframe) {
@@ -1267,8 +1269,11 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr &nalu) {
     if (!si.field_pic_flag || !si.bottom_field_flag)
       cleanup();
 
-  } else
-    m_b_frames_since_keyframe |= is_b_slice;
+  } else if (is_b_slice)
+    m_b_frames_since_keyframe = true;
+
+  // else if (!si.field_pic_flag || !si.bottom_field_flag)
+  //     cleanup();
 
   m_incomplete_frame.m_data = create_nalu_with_size(nalu, true);
   m_have_incomplete_frame   = true;
@@ -1712,7 +1717,6 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
 
   frames_begin       = m_frames.begin();
   frames_end         = m_frames.end();
-  previous_frame_itr = frames_begin;
 
   // This may be wrong but is needed for mkvmerge to work correctly
   // (cluster_helper etc).
@@ -1721,11 +1725,15 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
     m_first_cleanup          = false;
   }
 
-  for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
-    if (frames_begin != frame_itr)
-      frame_itr->m_ref1 = previous_frame_itr->m_start - frame_itr->m_start;
+  // mxinfo(boost::format("frame order calculation\n"));
 
-    previous_frame_itr = frame_itr;
+  for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
+    // mxinfo(boost::format("  type %4% decode order %1% presentation order %2% timestamp %3%\n") % frame_itr->m_decode_order % frame_itr->m_presentation_order % format_timecode(frame_itr->m_start) % frame_itr->m_type);
+
+    if (!frame_itr->is_i_frame() && (frames_begin != frame_itr))
+      frame_itr->m_ref1 = m_previous_frame_start_in_display_order - frame_itr->m_start;
+
+    m_previous_frame_start_in_display_order = frame_itr->m_start;
     m_duration_frequency[frame_itr->m_end - frame_itr->m_start]++;
 
     if (frame_itr->m_si.field_pic_flag)
