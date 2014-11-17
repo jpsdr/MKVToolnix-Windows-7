@@ -993,6 +993,7 @@ mpeg4::p10::avc_es_parser_c::avc_es_parser_c()
   , m_ignore_nalu_size_length_errors(false)
   , m_discard_actual_frames(false)
   , m_simple_picture_order{}
+  , m_first_cleanup{true}
   , m_debug_keyframe_detection{"avc_parser|avc_keyframe_detection"}
   , m_debug_nalu_types{        "avc_parser|avc_nalu_types"}
   , m_debug_timecodes{         "avc_parser|avc_timecodes"}
@@ -1715,7 +1716,10 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
 
   // This may be wrong but is needed for mkvmerge to work correctly
   // (cluster_helper etc).
-  frames_begin->m_keyframe = true;
+  if (m_first_cleanup) {
+    frames_begin->m_keyframe = true;
+    m_first_cleanup          = false;
+  }
 
   for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
     if (frames_begin != frame_itr)
