@@ -1320,10 +1320,10 @@ handle_block_group(EbmlStream *&es,
 
   track_info_t &tinfo = s_track_info[lf_tnum];
 
-  tinfo.m_blocks                                                                                 += frame_sizes.size();
+  tinfo.m_blocks                                          += frame_sizes.size();
   tinfo.m_blocks_by_ref_num[std::min(num_references, 2u)] += frame_sizes.size();
-  tinfo.m_min_timecode                                                                             = std::min(tinfo.m_min_timecode, lf_timecode);
-  tinfo.m_size                                                                                    += boost::accumulate(frame_sizes, 0);
+  tinfo.m_min_timecode                                     = std::min(tinfo.m_min_timecode, lf_timecode);
+  tinfo.m_size                                            += boost::accumulate(frame_sizes, 0);
 
   if (!tinfo.max_timecode_unset() && (tinfo.m_max_timecode >= lf_timecode))
     return;
