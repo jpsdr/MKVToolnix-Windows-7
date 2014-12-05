@@ -123,11 +123,11 @@ class Target
       when :mtxunittest then "tests/unit/libmtxunittest.a"
       when :avi         then "lib/avilib-0.6.10/libavi.a"
       when :rmff        then "lib/librmff/librmff.a"
-      when :pugixml     then "lib/pugixml/src/libpugixml.a"
       when :mpegparser  then "src/mpegparser/libmpegparser.a"
       when :ebml        then c?("EBML_MATROSKA_INTERNAL") ? "lib/libebml/src/libebml.a"         : nil
       when :matroska    then c?("EBML_MATROSKA_INTERNAL") ? "lib/libmatroska/src/libmatroska.a" : nil
       when :gtest       then $gtest_internal              ? "lib/gtest/src/libgtest.a"          : nil
+      when :pugixml     then c?(:PUGIXML_INTERNAL)        ? "lib/pugixml/src/libpugixml.a"      : nil
       else                   nil
       end
     end.compact

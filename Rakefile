@@ -52,8 +52,14 @@ def setup_globals
   $applications            =  $programs.collect { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
   $manpages                =  $programs.collect { |name| "doc/man/#{name}.1" }
 
-  $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Ilib/utf8-cpp/source -Ilib/pugixml/src -Isrc"
-  $system_libdirs          = "-Llib/avilib-0.6.10 -Llib/librmff -Llib/pugixml/src -Lsrc/common"
+  $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Ilib/utf8-cpp/source -Isrc"
+  $system_libdirs          = "-Llib/avilib-0.6.10 -Llib/librmff -Lsrc/common"
+
+  if c?(:PUGIXML_INTERNAL)
+    $system_includes      += " -Ilib/pugixml/src"
+    $system_libdirs       += " -Llib/pugixml/src"
+  end
+
 
   $source_directories      =  %w{lib/avilib-0.6.10 lib/librmff src src/input src/output src/common src/common/chapters src/common/compression src/common/strings src/common/tags src/common/xml
                                  src/mmg src/mmg/header_editor src/mmg/options src/mmg/tabs src/extract src/propedit src/merge src/info src/mpegparser}

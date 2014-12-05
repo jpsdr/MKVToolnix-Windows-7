@@ -33,6 +33,10 @@ BuildRequires: gettext-devel, wxGTK-devel
 BuildRequires: rubypick
 %endif
 
+%if 0%{?fedora}
+BuildRequires: pugixml-devel
+%endif
+
 %description
 Tools to create and manipulate Matroska files (extensions .mkv and
 .mka), a new container format for audio and video files. Includes
