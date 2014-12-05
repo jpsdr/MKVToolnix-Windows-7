@@ -49,8 +49,10 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
-  virtual int process_packaged(packet_cptr packet);
+  virtual int process_packaged(packet_cptr const &packet);
   virtual void flush_impl();
+  virtual int64_t size_to_samples(int64_t size) const;
+  virtual int64_t samples_to_size(int64_t size) const;
 };
 
 #endif // MTX_P_PCM_H

@@ -33,7 +33,7 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   , m_bits_per_sample(bits_per_sample)
   , m_previous_timecode{-1}
   , m_packet_size(0)
-  , m_min_packet_size{static_cast<size_t>(samples_per_sec * channels * bits_per_sample * 4 / 1000 / 8)} // Minimum: 4ms of samples if we should pass it through unmodified
+  , m_min_packet_size{static_cast<size_t>(samples_to_size(samples_per_sec * 4) / 1000)} // Minimum: 4ms of samples if we should pass it through unmodified
   , m_samples_output(0)
   , m_num_durations_provided{}
   , m_format{format}
@@ -49,14 +49,10 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
     i = 5;
 
   m_samples_per_packet = samples_per_sec / i;
+  m_packet_size        = samples_to_size(m_samples_per_packet);
 
   set_track_type(track_audio);
   set_track_default_duration((int64_t)(1000000000.0 * m_samples_per_packet / m_samples_per_sec));
-
-  /* It could happen that (channels * bits_per_sample < 8).  Because of this,
-     we mustn't divide by 8 in the same line, or the result would be hosed. */
-  m_packet_size  = m_samples_per_packet * m_channels * m_bits_per_sample;
-  m_packet_size /= 8;
 }
 
 pcm_packetizer_c::~pcm_packetizer_c() {
@@ -73,6 +69,18 @@ pcm_packetizer_c::set_headers() {
   set_audio_bit_depth(m_bits_per_sample);
 
   generic_packetizer_c::set_headers();
+}
+
+int64_t
+pcm_packetizer_c::samples_to_size(int64_t samples)
+  const {
+  return (samples * m_channels * m_bits_per_sample) / 8;
+}
+
+int64_t
+pcm_packetizer_c::size_to_samples(int64_t size)
+  const {
+  return (size * 8) / (m_channels * m_bits_per_sample);
 }
 
 int
@@ -93,12 +101,11 @@ pcm_packetizer_c::process(packet_cptr packet) {
 }
 
 int
-pcm_packetizer_c::process_packaged(packet_cptr packet) {
+pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
   ++m_num_durations_provided;
 
   if (16 > m_num_durations_provided) {
-    auto num_bytes_per_sample = (m_channels * m_bits_per_sample) / 8;
-    ++m_duration_frequency[ (packet->data->get_size() / num_bytes_per_sample) * m_s2tc ];
+    ++m_duration_frequency[ size_to_samples(packet->data->get_size()) * m_s2tc ];
 
   } else if (16 == m_num_durations_provided) {
     auto most_common = boost::accumulate(m_duration_frequency, m_duration_frequency.begin()->first,
@@ -107,8 +114,7 @@ pcm_packetizer_c::process_packaged(packet_cptr packet) {
                                          });
 
     m_samples_per_packet = most_common / m_s2tc;
-    m_packet_size        = m_samples_per_packet * m_channels * m_bits_per_sample;
-    m_packet_size       /= 8;
+    m_packet_size        = samples_to_size(m_samples_per_packet);
 
     set_track_default_duration(most_common);
     rerender_track_headers();
@@ -116,7 +122,7 @@ pcm_packetizer_c::process_packaged(packet_cptr packet) {
 
   m_previous_timecode = packet->timecode;
 
-  int64_t samples_here = m_buffer.get_size() * 8 / m_channels / m_bits_per_sample;
+  int64_t samples_here = size_to_samples(m_buffer.get_size());
   m_samples_output     = packet->timecode / m_s2tc + samples_here;
 
   add_packet(new packet_t(packet->data, packet->timecode, samples_here * m_s2tc));
@@ -130,7 +136,7 @@ pcm_packetizer_c::flush_impl() {
   if (0 >= size)
     return;
 
-  int64_t samples_here = size * 8 / m_channels / m_bits_per_sample;
+  int64_t samples_here = size_to_samples(size);
   add_packet(new packet_t(memory_c::clone(m_buffer.get_buffer(), size), m_samples_output * m_s2tc, samples_here * m_s2tc));
 
   m_samples_output += samples_here;
