@@ -391,30 +391,10 @@ xtr_usf_c::finish_file() {
   if (m_master)
     return;
 
-  auto is_utf   = true;
-  auto encoding = pugi::encoding_utf8;
-
-  if (m_simplified_sub_charset == "utf8")
-    ;
-  else if (m_simplified_sub_charset == "utf16le")
-    encoding = pugi::encoding_utf16_le;
-  else if (m_simplified_sub_charset == "utf16be")
-    encoding = pugi::encoding_utf16_be;
-  else if (m_simplified_sub_charset == "utf16")
-    encoding = pugi::encoding_utf16;
-
-  else if (m_simplified_sub_charset == "utf32le")
-    encoding = pugi::encoding_utf32_le;
-  else if (m_simplified_sub_charset == "utf32be")
-    encoding = pugi::encoding_utf32_be;
-  else if (m_simplified_sub_charset == "utf32")
-    encoding = pugi::encoding_utf32;
-
-  else
-    is_utf = false;
-
   std::stringstream out;
-  m_doc->save(out, "  ", pugi::format_default | (is_utf ? pugi::format_write_bom : 0), encoding);
+  m_doc->save(out, "  ");
 
-  m_out->puts(is_utf ? out.str() : charset_converter_c::init(m_sub_charset)->native(out.str()));
+  m_out->set_string_output_converter(charset_converter_c::init(m_sub_charset));
+  m_out->write_bom(m_sub_charset);
+  m_out->puts(out.str());
 }

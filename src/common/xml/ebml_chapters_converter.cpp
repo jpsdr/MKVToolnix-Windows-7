@@ -162,12 +162,10 @@ ebml_chapters_converter_c::write_xml(KaxChapters &chapters,
   ebml_chapters_converter_c converter;
   converter.to_xml(chapters, doc);
 
-  auto flags = pugi::format_default;
-  if (!out.bom_written())
-    flags |= pugi::format_write_bom;
+  out.write_bom("UTF-8");
 
   std::stringstream out_stream;
-  doc->save(out_stream, "  ", flags);
+  doc->save(out_stream, "  ");
   out.puts(out_stream.str());
 }
 

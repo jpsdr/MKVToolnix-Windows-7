@@ -63,8 +63,10 @@ ebml_tags_converter_c::write_xml(KaxTags &tags,
   ebml_tags_converter_c converter;
   converter.to_xml(tags, doc);
 
+  out.write_bom("UTF-8");
+
   std::stringstream out_stream;
-  doc->save(out_stream, "  ", pugi::format_default | pugi::format_write_bom);
+  doc->save(out_stream, "  ");
   out.puts(out_stream.str());
 }
 
