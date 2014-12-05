@@ -102,10 +102,13 @@ pcm_packetizer_c::process(packet_cptr packet) {
 
 int
 pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
+  auto samples_here = size_to_samples(packet->data->get_size());
+  packet->duration  = samples_here * m_s2tc;
+
   ++m_num_durations_provided;
 
   if (16 > m_num_durations_provided) {
-    ++m_duration_frequency[ size_to_samples(packet->data->get_size()) * m_s2tc ];
+    ++m_duration_frequency[ packet->duration ];
 
   } else if (16 == m_num_durations_provided) {
     auto most_common = boost::accumulate(m_duration_frequency, m_duration_frequency.begin()->first,
@@ -121,11 +124,9 @@ pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
   }
 
   m_previous_timecode = packet->timecode;
-
-  int64_t samples_here = size_to_samples(m_buffer.get_size());
   m_samples_output     = packet->timecode / m_s2tc + samples_here;
 
-  add_packet(new packet_t(packet->data, packet->timecode, samples_here * m_s2tc));
+  add_packet(packet);
 
   return FILE_STATUS_MOREDATA;
 }

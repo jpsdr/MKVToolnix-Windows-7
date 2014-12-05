@@ -1,5 +1,9 @@
 2014-12-05  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: The PCM packetizer was producing wrong track
+        statistics by disregarding the last packet's duration when reading
+        PCM data from packaged sources (Matroska, MP4 files). Fixes #1075.
+
         * build system: enhancement: configure will look for a system
         version of the pugixml library and use that instead of the bundled
         version if it is found. Fixes #1090.
