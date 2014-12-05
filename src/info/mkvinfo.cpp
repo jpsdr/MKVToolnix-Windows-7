@@ -1148,9 +1148,7 @@ handle_block_group(EbmlStream *&es,
   std::vector<uint32_t> frame_adlers;
   std::vector<std::string> frame_hexdumps;
 
-  bool bref_found     = false;
-  bool fref_found     = false;
-
+  auto num_references = 0u;
   int64_t lf_timecode = 0;
   int64_t lf_tnum     = 0;
   int64_t frame_pos   = 0;
@@ -1199,17 +1197,15 @@ handle_block_group(EbmlStream *&es,
       show_element(l3, 3, BF_BLOCK_GROUP_DURATION % (duration * s_tc_scale / 1000000) % (duration * s_tc_scale % 1000000));
 
     } else if (Is<KaxReferenceBlock>(l3)) {
+      ++num_references;
+
       int64_t reference = static_cast<KaxReferenceBlock *>(l3)->GetValue() * s_tc_scale;
 
-      if (0 >= reference) {
-        bref_found  = true;
-        reference  *= -1;
-        show_element(l3, 3, BF_BLOCK_GROUP_REFERENCE_1 % (reference / 1000000) % (reference % 1000000));
+      if (0 >= reference)
+        show_element(l3, 3, BF_BLOCK_GROUP_REFERENCE_1 % (std::abs(reference) / 1000000) % (std::abs(reference) % 1000000));
 
-      } else if (0 < reference) {
-        fref_found = true;
+      else if (0 < reference)
         show_element(l3, 3, BF_BLOCK_GROUP_REFERENCE_2 % (reference / 1000000) % (reference % 1000000));
-      }
 
     } else if (Is<KaxReferencePriority>(l3))
       show_element(l3, 3, BF_BLOCK_GROUP_REFERENCE_PRIORITY % static_cast<KaxReferencePriority *>(l3)->GetValue());
@@ -1294,7 +1290,7 @@ handle_block_group(EbmlStream *&es,
 
       if (bduration != -1.0)
         mxinfo(BF_BLOCK_GROUP_SUMMARY_WITH_DURATION
-               % (bref_found && fref_found ? 'B' : bref_found ? 'P' : !fref_found ? 'I' : 'P')
+               % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
                % (lf_timecode / 1000000)
                % format_timecode(lf_timecode, 3)
@@ -1305,7 +1301,7 @@ handle_block_group(EbmlStream *&es,
                % position);
       else
         mxinfo(BF_BLOCK_GROUP_SUMMARY_NO_DURATION
-               % (bref_found && fref_found ? 'B' : bref_found ? 'P' : !fref_found ? 'I' : 'P')
+               % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
                % (lf_timecode / 1000000)
                % format_timecode(lf_timecode, 3)
@@ -1318,16 +1314,16 @@ handle_block_group(EbmlStream *&es,
   } else if (g_options.m_verbose > 2)
     show_element(nullptr, 2,
                  BF_BLOCK_GROUP_SUMMARY_V2
-                 % (bref_found && fref_found ? 'B' : bref_found ? 'P' : !fref_found ? 'I' : 'P')
+                 % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                  % lf_tnum
                  % (lf_timecode / 1000000));
 
   track_info_t &tinfo = s_track_info[lf_tnum];
 
-  tinfo.m_blocks                                                                                 += frame_sizes.size();
-  tinfo.m_blocks_by_ref_num[bref_found && fref_found ? 2 : bref_found ? 1 : !fref_found ? 0 : 1] += frame_sizes.size();
-  tinfo.m_min_timecode                                                                             = std::min(tinfo.m_min_timecode, lf_timecode);
-  tinfo.m_size                                                                                    += boost::accumulate(frame_sizes, 0);
+  tinfo.m_blocks                                          += frame_sizes.size();
+  tinfo.m_blocks_by_ref_num[std::min(num_references, 2u)] += frame_sizes.size();
+  tinfo.m_min_timecode                                     = std::min(tinfo.m_min_timecode, lf_timecode);
+  tinfo.m_size                                            += boost::accumulate(frame_sizes, 0);
 
   if (!tinfo.max_timecode_unset() && (tinfo.m_max_timecode >= lf_timecode))
     return;

@@ -161,6 +161,8 @@ struct avc_frame_t {
   bool m_keyframe, m_has_provided_timecode;
   slice_info_t m_si;
   int m_presentation_order, m_decode_order;
+  char m_type;
+  bool m_order_calculated;
 
   avc_frame_t() {
     clear();
@@ -179,9 +181,23 @@ struct avc_frame_t {
     m_has_provided_timecode = false;
     m_presentation_order    = 0;
     m_decode_order          = 0;
+    m_type                  = '?';
+    m_order_calculated      = false;
     m_data.reset();
 
     m_si.clear();
+  }
+
+  bool is_i_frame() const {
+    return 'I' == m_type;
+  }
+
+  bool is_p_frame() const {
+    return 'P' == m_type;
+  }
+
+  bool is_b_frame() const {
+    return 'B' == m_type;
   }
 };
 
@@ -247,7 +263,7 @@ protected:
   std::deque<avc_frame_t> m_frames, m_frames_out;
   std::deque<int64_t> m_provided_timecodes;
   std::deque<uint64_t> m_provided_stream_positions;
-  int64_t m_max_timecode;
+  int64_t m_max_timecode, m_previous_frame_start_in_display_order;
   std::map<int64_t, int64_t> m_duration_frequency;
 
   std::vector<memory_cptr> m_sps_list, m_pps_list, m_extra_data;
@@ -261,7 +277,7 @@ protected:
   bool m_have_incomplete_frame;
   std::deque<memory_cptr> m_unhandled_nalus;
 
-  bool m_ignore_nalu_size_length_errors, m_discard_actual_frames;
+  bool m_ignore_nalu_size_length_errors, m_discard_actual_frames, m_simple_picture_order, m_first_cleanup;
 
   debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timecodes, m_debug_sps_info, m_debug_trailing_zero_byte_removal;
   std::map<int, std::string> m_nalu_names_by_type;
@@ -417,6 +433,7 @@ protected:
   memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);
   void remove_trailing_zero_bytes(memory_c &memory);
   void init_nalu_names();
+  void calculate_frame_order();
 };
 typedef std::shared_ptr<avc_es_parser_c> avc_es_parser_cptr;
 
