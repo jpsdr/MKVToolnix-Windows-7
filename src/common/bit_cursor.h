@@ -96,6 +96,22 @@ public:
     return get_bits(1) + 1;
   }
 
+  inline int get_unsigned_golomb() {
+    int n = 0, bit;
+
+    while ((bit = get_bit()) == 0)
+      ++n;
+
+    bit = get_bits(n);
+
+    return (1 << n) - 1 + bit;
+  }
+
+  inline int get_signed_golomb() {
+    int v = get_unsigned_golomb();
+    return v & 1 ? (v + 1) / 2 : -(v / 2);
+  }
+
   uint64_t peek_bits(unsigned int n) {
     uint64_t r                             = 0;
     const unsigned char *tmp_byte_position = m_byte_position;
@@ -193,6 +209,26 @@ public:
     put_bits(n, value);
 
     return value;
+  }
+
+  inline int copy_unsigned_golomb(bit_reader_c &r) {
+    int n = 0, bit;
+
+    while ((bit = r.get_bit()) == 0) {
+      put_bit(0);
+      ++n;
+    }
+
+    put_bit(1);
+
+    bit = copy_bits(n, r);
+
+    return (1 << n) - 1 + bit;
+  }
+
+  inline int copy_signed_golomb(bit_reader_c &r) {
+    int v = copy_unsigned_golomb(r);
+    return v & 1 ? (v + 1) / 2 : -(v / 2);
   }
 
   void put_bits(unsigned int n, uint64_t value) {

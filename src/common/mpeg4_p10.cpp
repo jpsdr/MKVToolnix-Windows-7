@@ -235,63 +235,21 @@ par_extraction_t::is_valid()
 };
 };
 
-static int
-gecopy(bit_reader_c &r,
-       bit_writer_c &w) {
-  int	n = 0, bit;
-
-  while ((bit = r.get_bit()) == 0) {
-    w.put_bit(0);
-    ++n;
-  }
-
-  w.put_bit(1);
-
-  bit = w.copy_bits(n, r);
-
-  return (1 << n) - 1 + bit;
-}
-
-static int
-geread(bit_reader_c &r) {
-  int	n = 0, bit;
-
-  while ((bit = r.get_bit()) == 0)
-    ++n;
-
-  bit = r.get_bits(n);
-
-  return (1 << n) - 1 + bit;
-}
-
-static int
-sgeread(bit_reader_c &r) {
-  int v = geread(r);
-  return v & 1 ? (v + 1) / 2 : -(v / 2);
-}
-
-static int
-sgecopy(bit_reader_c &r,
-        bit_writer_c &w) {
-  int v = gecopy(r, w);
-  return v & 1 ? (v + 1) / 2 : -(v / 2);
-}
-
 static void
 hrdcopy(bit_reader_c &r,
         bit_writer_c &w) {
-  int ncpb = gecopy(r,w);       // cpb_cnt_minus1
-  w.copy_bits(4, r);            // bit_rate_scale
-  w.copy_bits(4, r);            // cpb_size_scale
+  int ncpb = w.copy_unsigned_golomb(r); // cpb_cnt_minus1
+  w.copy_bits(4, r);                    // bit_rate_scale
+  w.copy_bits(4, r);                    // cpb_size_scale
   for (int i = 0; i <= ncpb; ++i) {
-    gecopy(r,w);                // bit_rate_value_minus1
-    gecopy(r,w);                // cpb_size_value_minus1
-    w.copy_bits(1, r);          // cbr_flag
+    w.copy_unsigned_golomb(r);          // bit_rate_value_minus1
+    w.copy_unsigned_golomb(r);          // cpb_size_value_minus1
+    w.copy_bits(1, r);                  // cbr_flag
   }
-  w.copy_bits(5, r);            // initial_cpb_removal_delay_length_minus1
-  w.copy_bits(5, r);            // cpb_removal_delay_length_minus1
-  w.copy_bits(5, r);            // dpb_output_delay_length_minus1
-  w.copy_bits(5, r);            // time_offset_length
+  w.copy_bits(5, r);                    // initial_cpb_removal_delay_length_minus1
+  w.copy_bits(5, r);                    // cpb_removal_delay_length_minus1
+  w.copy_bits(5, r);                    // dpb_output_delay_length_minus1
+  w.copy_bits(5, r);                    // time_offset_length
 }
 
 static void
@@ -301,7 +259,7 @@ slcopy(bit_reader_c &r,
   int delta, next = 8, j;
 
   for (j = 0; (j < size) && (0 != next); ++j) {
-    delta = sgecopy(r, w);
+    delta = w.copy_signed_golomb(r);
     next  = (next + delta + 256) % 256;
   }
 }
@@ -559,12 +517,12 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
   sps.profile_idc    = w.copy_bits(8, r); // profile_idc
   sps.profile_compat = w.copy_bits(8, r); // constraints
   sps.level_idc      = w.copy_bits(8, r); // level_idc
-  sps.id             = gecopy(r, w);      // sps id
+  sps.id             = w.copy_unsigned_golomb(r);      // sps id
   if (s_high_level_profile_ids[sps.profile_idc]) {   // high profile
-    if ((sps.chroma_format_idc = gecopy(r, w)) == 3) // chroma_format_idc
+    if ((sps.chroma_format_idc = w.copy_unsigned_golomb(r)) == 3) // chroma_format_idc
       w.copy_bits(1, r);                  // separate_colour_plane_flag
-    gecopy(r, w);                         // bit_depth_luma_minus8
-    gecopy(r, w);                         // bit_depth_chroma_minus8
+    w.copy_unsigned_golomb(r);                         // bit_depth_luma_minus8
+    w.copy_unsigned_golomb(r);                         // bit_depth_chroma_minus8
     w.copy_bits(1, r);                    // qpprime_y_zero_transform_bypass_flag
     if (w.copy_bits(1, r) == 1)           // seq_scaling_matrix_present_flag
       for (i = 0; i < 8; ++i)
@@ -573,21 +531,21 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
   } else
     sps.chroma_format_idc = 1;            // 4:2:0 assumed
 
-  sps.log2_max_frame_num = gecopy(r, w) + 4; // log2_max_frame_num_minus4
-  sps.pic_order_cnt_type = gecopy(r, w);     // pic_order_cnt_type
+  sps.log2_max_frame_num = w.copy_unsigned_golomb(r) + 4; // log2_max_frame_num_minus4
+  sps.pic_order_cnt_type = w.copy_unsigned_golomb(r);     // pic_order_cnt_type
   switch (sps.pic_order_cnt_type) {
     case 0:
-      sps.log2_max_pic_order_cnt_lsb = gecopy(r, w) + 4; // log2_max_pic_order_cnt_lsb_minus4
+      sps.log2_max_pic_order_cnt_lsb = w.copy_unsigned_golomb(r) + 4; // log2_max_pic_order_cnt_lsb_minus4
       break;
 
     case 1:
       sps.delta_pic_order_always_zero_flag      = w.copy_bits(1, r); // delta_pic_order_always_zero_flag
-      sps.offset_for_non_ref_pic                = sgecopy(r, w);     // offset_for_non_ref_pic
-      sps.offset_for_top_to_bottom_field        = sgecopy(r, w);     // offset_for_top_to_bottom_field
-      nref                                      = gecopy(r, w);      // num_ref_frames_in_pic_order_cnt_cycle
+      sps.offset_for_non_ref_pic                = w.copy_signed_golomb(r);     // offset_for_non_ref_pic
+      sps.offset_for_top_to_bottom_field        = w.copy_signed_golomb(r);     // offset_for_top_to_bottom_field
+      nref                                      = w.copy_unsigned_golomb(r);      // num_ref_frames_in_pic_order_cnt_cycle
       sps.num_ref_frames_in_pic_order_cnt_cycle = nref;
       for (i = 0; i < nref; ++i)
-        gecopy(r, w);           // offset_for_ref_frame
+        w.copy_unsigned_golomb(r);           // offset_for_ref_frame
       break;
 
     case 2:
@@ -597,10 +555,10 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
       return false;
   }
 
-  gecopy(r, w);                 // num_ref_frames
+  w.copy_unsigned_golomb(r);                 // num_ref_frames
   w.copy_bits(1, r);            // gaps_in_frame_num_value_allowed_flag
-  mb_width  = gecopy(r, w) + 1; // pic_width_in_mbs_minus1
-  mb_height = gecopy(r, w) + 1; // pic_height_in_map_units_minus1
+  mb_width  = w.copy_unsigned_golomb(r) + 1; // pic_width_in_mbs_minus1
+  mb_height = w.copy_unsigned_golomb(r) + 1; // pic_height_in_map_units_minus1
   if (w.copy_bits(1, r) == 0) { // frame_mbs_only_flag
     sps.frame_mbs_only = false;
     w.copy_bits(1, r);          // mb_adaptive_frame_field_flag
@@ -627,10 +585,10 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
       crop_unit_x = 1;
       crop_unit_y = 2 - sps.frame_mbs_only;
     }
-    sps.crop_left   = gecopy(r, w); // frame_crop_left_offset
-    sps.crop_right  = gecopy(r, w); // frame_crop_right_offset
-    sps.crop_top    = gecopy(r, w); // frame_crop_top_offset
-    sps.crop_bottom = gecopy(r, w); // frame_crop_bottom_offset
+    sps.crop_left   = w.copy_unsigned_golomb(r); // frame_crop_left_offset
+    sps.crop_right  = w.copy_unsigned_golomb(r); // frame_crop_right_offset
+    sps.crop_top    = w.copy_unsigned_golomb(r); // frame_crop_top_offset
+    sps.crop_bottom = w.copy_unsigned_golomb(r); // frame_crop_bottom_offset
 
     sps.width      -= crop_unit_x * (sps.crop_left + sps.crop_right);
     sps.height     -= crop_unit_y * (sps.crop_top  + sps.crop_bottom);
@@ -685,8 +643,8 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
         w.copy_bits(24, r);
     }
     if (w.copy_bits(1, r) == 1) { // chroma_loc_info_present
-      gecopy(r, w);               // chroma_sample_loc_type_top_field
-      gecopy(r, w);               // chroma_sample_loc_type_bottom_field
+      w.copy_unsigned_golomb(r);               // chroma_sample_loc_type_top_field
+      w.copy_unsigned_golomb(r);               // chroma_sample_loc_type_bottom_field
     }
 
     sps.timing_info.is_present = r.get_bit();
@@ -736,12 +694,12 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
 
     if (w.copy_bits(1, r) == 1) { // bitstream_restriction
       w.copy_bits(1, r);          // motion_vectors_over_pic_boundaries_flag
-      gecopy(r, w);               // max_bytes_per_pic_denom
-      gecopy(r, w);               // max_bits_per_pic_denom
-      gecopy(r, w);               // log2_max_mv_length_h
-      gecopy(r, w);               // log2_max_mv_length_v
-      gecopy(r, w);               // num_reorder_frames
-      gecopy(r, w);               // max_dec_frame_buffering
+      w.copy_unsigned_golomb(r);  // max_bytes_per_pic_denom
+      w.copy_unsigned_golomb(r);  // max_bits_per_pic_denom
+      w.copy_unsigned_golomb(r);  // log2_max_mv_length_h
+      w.copy_unsigned_golomb(r);  // log2_max_mv_length_v
+      w.copy_unsigned_golomb(r);  // num_reorder_frames
+      w.copy_unsigned_golomb(r);  // max_dec_frame_buffering
     }
 
   } else if (fix_bitstream_frame_rate) { // vui_present == 0: build new video usability information
@@ -792,8 +750,8 @@ mpeg4::p10::parse_pps(memory_cptr &buffer,
     r.skip_bits(3);             // forbidden_zero_bit, nal_ref_idc
     if (r.get_bits(5) != 8)     // nal_unit_type
       return false;
-    pps.id     = geread(r);
-    pps.sps_id = geread(r);
+    pps.id     = r.get_unsigned_golomb();
+    pps.sps_id = r.get_unsigned_golomb();
 
     r.skip_bits(1);             // entropy_coding_mode_flag
     pps.pic_order_present = r.get_bit();
@@ -1475,8 +1433,8 @@ mpeg4::p10::avc_es_parser_c::parse_slice(memory_cptr &buffer,
         && (NALU_TYPE_IDR_SLICE     != si.nalu_type))
       return false;
 
-    si.first_mb_in_slice = geread(r); // first_mb_in_slice
-    si.type              = geread(r); // slice_type
+    si.first_mb_in_slice = r.get_unsigned_golomb(); // first_mb_in_slice
+    si.type              = r.get_unsigned_golomb(); // slice_type
 
     ++m_stats.num_slices_by_type[9 < si.type ? 10 : si.type];
 
@@ -1485,7 +1443,7 @@ mpeg4::p10::avc_es_parser_c::parse_slice(memory_cptr &buffer,
       return false;
     }
 
-    si.pps_id = geread(r);      // pps_id
+    si.pps_id = r.get_unsigned_golomb();      // pps_id
 
     size_t pps_idx;
     for (pps_idx = 0; m_pps_info_list.size() > pps_idx; ++pps_idx)
@@ -1518,18 +1476,18 @@ mpeg4::p10::avc_es_parser_c::parse_slice(memory_cptr &buffer,
     }
 
     if (NALU_TYPE_IDR_SLICE == si.nalu_type)
-      si.idr_pic_id = geread(r);
+      si.idr_pic_id = r.get_unsigned_golomb();
 
     if (0 == sps.pic_order_cnt_type) {
       si.pic_order_cnt_lsb = r.get_bits(sps.log2_max_pic_order_cnt_lsb);
       if (pps.pic_order_present && !si.field_pic_flag)
-        si.delta_pic_order_cnt_bottom = sgeread(r);
+        si.delta_pic_order_cnt_bottom = r.get_signed_golomb();
     }
 
     if ((1 == sps.pic_order_cnt_type) && !sps.delta_pic_order_always_zero_flag) {
-      si.delta_pic_order_cnt[0] = sgeread(r);
+      si.delta_pic_order_cnt[0] = r.get_signed_golomb();
       if (pps.pic_order_present && !si.field_pic_flag)
-        si.delta_pic_order_cnt[1] = sgeread(r);
+        si.delta_pic_order_cnt[1] = r.get_signed_golomb();
     }
 
     return true;
