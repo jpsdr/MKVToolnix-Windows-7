@@ -323,7 +323,7 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
   while ((m_pos + 6) < m_in_size) {
     m_data_length = m_buf[m_pos + 1];
 
-    if ((m_pos + 2 + m_data_length) >= m_in_size)
+    if ((m_pos + 2 + m_data_length) > m_in_size)
       break;
 
     if (m_data_length != 0x2c) {
