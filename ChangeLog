@@ -11,7 +11,9 @@
         * mkvextract: bug fix for chapter & tag extraction: If locale is
         set to a non-UTF locale (including C or POSIX) then no XML data
         was output at all even if the XML data contained ASCII characters
-        only. Fixes #1086.
+        only. Fixes #1086. This also fixes mkvextract writing two BOMs
+        when extracting tags with the »--redirect-output« option on
+        Windows.
 
 2014-11-19  Moritz Bunkus  <moritz@bunkus.org>
 
