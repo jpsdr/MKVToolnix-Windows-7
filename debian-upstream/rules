@@ -2,8 +2,11 @@
 
 LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 
+export V=1
+
+
 %:
-	dh $@
+	dh $@ --parallel
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
