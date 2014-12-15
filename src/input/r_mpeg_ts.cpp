@@ -28,6 +28,7 @@
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
 #include "common/strings/formatting.h"
+#include "input/aac_framing_packet_converter.h"
 #include "input/r_mpeg_ts.h"
 #include "input/teletext_to_srt_packet_converter.h"
 #include "output/p_aac.h"
@@ -217,13 +218,17 @@ int
 mpeg_ts_track_c::new_stream_a_aac() {
   add_pes_payload_to_probe_data();
 
-  if (0 > find_aac_header(m_probe_data->get_buffer(), m_probe_data->get_size(), &m_aac_header, false))
+  auto parser = aac::parser_c{};
+  parser.add_bytes(m_probe_data->get_buffer(), m_probe_data->get_size());
+  if (!parser.frames_available())
     return FILE_STATUS_MOREDATA;
 
-  mxdebug_if(reader.m_debug_aac, boost::format("first AAC header: %1%\n") % m_aac_header.to_string());
+  m_aac_frame = parser.get_frame();
 
-  a_channels    = m_aac_header.channels;
-  a_sample_rate = m_aac_header.sample_rate;
+  mxdebug_if(reader.m_debug_aac, boost::format("first AAC header: %1%\n") % m_aac_frame.to_string());
+
+  a_channels    = m_aac_frame.m_channels;
+  a_sample_rate = m_aac_frame.m_sample_rate;
 
   return 0;
 }
@@ -1241,12 +1246,7 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
       show_packetizer_info(id, PTZR(track->ptzr));
 
     } else if (track->codec.is(CT_A_AAC)) {
-      aac_packetizer_c *aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_header.id, track->m_aac_header.profile, track->m_aac_header.sample_rate, track->m_aac_header.channels, false);
-      track->ptzr                      = add_packetizer(aac_packetizer);
-
-      if (AAC_PROFILE_SBR == track->m_aac_header.profile)
-        aac_packetizer->set_audio_output_sampling_freq(track->m_aac_header.sample_rate * 2);
-      show_packetizer_info(id, aac_packetizer);
+      create_aac_audio_packetizer(track);
 
     } else if (track->codec.is(CT_A_AC3)) {
       track->ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bsid));
@@ -1283,6 +1283,17 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
 
   if (-1 != track->ptzr)
     m_ptzr_to_track_map[PTZR(track->ptzr)] = track;
+}
+
+void
+mpeg_ts_reader_c::create_aac_audio_packetizer(mpeg_ts_track_ptr const &track) {
+  auto aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_frame.m_id, track->m_aac_frame.m_profile, track->m_aac_frame.m_sample_rate, track->m_aac_frame.m_channels, false, true);
+  track->ptzr         = add_packetizer(aac_packetizer);
+  track->converter.reset(new aac_framing_packet_converter_c{PTZR(track->ptzr)});
+
+  if (AAC_PROFILE_SBR == track->m_aac_frame.m_profile)
+    aac_packetizer->set_audio_output_sampling_freq(track->m_aac_frame.m_sample_rate * 2);
+  show_packetizer_info(m_ti.m_id, aac_packetizer);
 }
 
 void

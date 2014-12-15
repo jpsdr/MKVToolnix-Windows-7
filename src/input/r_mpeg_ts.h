@@ -291,7 +291,7 @@ public:
   // audio related parameters
   int a_channels, a_sample_rate, a_bits_per_sample, a_bsid;
   dts_header_t a_dts_header;
-  aac_header_c m_aac_header;
+  aac::frame_c m_aac_frame;
 
   bool m_apply_dts_timecode_fix, m_use_dts, m_timecodes_wrapped;
 
@@ -433,6 +433,7 @@ private:
   void create_mpeg1_2_video_packetizer(mpeg_ts_track_ptr &track);
   void create_mpeg4_p10_es_video_packetizer(mpeg_ts_track_ptr &track);
   void create_vc1_video_packetizer(mpeg_ts_track_ptr &track);
+  void create_aac_audio_packetizer(mpeg_ts_track_ptr const &track);
   void create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track);
   void create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track);
 
