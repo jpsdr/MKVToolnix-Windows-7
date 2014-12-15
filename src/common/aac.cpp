@@ -13,17 +13,293 @@
 
 #include "common/common_pch.h"
 
-#include <stdio.h>
-#include <string.h>
-
 #include "common/aac.h"
-#include "common/bit_cursor.h"
 #include "common/codec.h"
 #include "common/strings/formatting.h"
 
 const int g_aac_sampling_freq[16] = {96000, 88200, 64000, 48000, 44100, 32000,
                                      24000, 22050, 16000, 12000, 11025,  8000,
                                       7350,     0,     0,     0}; // filling
+
+namespace aac {
+
+frame_c::frame_c() {
+  init();
+}
+
+void
+frame_c::init() {
+  m_id               = 0;
+  m_profile          = 0;
+  m_sample_rate      = 0;
+  m_bit_rate         = 0;
+  m_channels         = 0;
+  m_frame_size       = 0;
+  m_header_bit_size  = 0;
+  m_header_byte_size = 0;
+  m_data_byte_size   = 0;
+  m_stream_position  = 0;
+  m_garbage_size     = 0;
+  m_valid            = false;
+  m_timecode.reset();
+  m_data.reset();
+}
+
+bool
+frame_c::decode_adts_header(unsigned char const *buffer,
+                            size_t buffer_size) {
+  try {
+    init();
+
+    auto bc = bit_reader_c{buffer, static_cast<unsigned int>(buffer_size)};
+
+    if (bc.get_bits(12) != 0xfff)            // ADTS header
+      return false;
+
+    m_id = bc.get_bit();        // ID: 0 = MPEG-4, 1 = MPEG-2
+    if (bc.get_bits(2) != 0)      // layer == 0 !
+      return false;
+    bool protection_absent = bc.get_bit();
+    m_profile              = bc.get_bits(2);
+    int sfreq_index        = bc.get_bits(4);
+    bc.skip_bits(1);              // private
+    m_channels = bc.get_bits(3);
+    bc.skip_bits(1 + 1);          // original/copy & home
+    bc.skip_bits(1 + 1);          // copyright_id_bit & copyright_id_start
+
+    m_frame_size      = bc.get_bits(13);
+    m_header_bit_size = 56 + (!protection_absent ? 16 : 0);
+
+    if (m_header_bit_size >= m_frame_size * 8)
+      return false;
+
+    bc.skip_bits(11);             // adts_buffer_fullness
+    bc.skip_bits(2);              // no_raw_blocks_in_frame
+    if (!protection_absent)
+      bc.skip_bits(16);
+
+    m_sample_rate      = g_aac_sampling_freq[sfreq_index];
+    m_bit_rate         = 1024;
+    m_header_byte_size = (m_header_bit_size + 7) / 8;
+    m_data_byte_size   = m_frame_size - m_header_byte_size;
+    m_valid            = m_header_bit_size != 0;
+
+  } catch (mtx::mm_io::end_of_file_x &) {
+  }
+
+  return m_valid;
+}
+
+int
+frame_c::find_in(memory_cptr const &buffer) {
+  return find_in(buffer->get_buffer(), buffer->get_size());
+}
+
+int
+frame_c::find_in(unsigned char const *buffer,
+                 size_t buffer_size) {
+  for (size_t offset = 0; offset < buffer_size; ++offset)
+    if (decode_adts_header(&buffer[offset], buffer_size - offset))
+      return offset;
+  return -1;
+}
+
+std::string
+frame_c::to_string(bool verbose)
+  const {
+  if (!verbose)
+    return (boost::format("position %1% size %2% ID %3% profile %4%") % m_stream_position % m_frame_size % m_id % m_profile).str();
+
+  return (boost::format("position %1% size %2% garbage %3% ID %4% profile %5% sample rate %6% bit rate %7% channels %8%")
+          % m_stream_position
+          % m_frame_size
+          % m_garbage_size
+          % m_id
+          % m_profile
+          % m_sample_rate
+          % m_bit_rate
+          % m_channels
+          ).str();
+}
+
+// ------------------------------------------------------------
+
+parser_c::parser_c()
+  : m_parsed_stream_position{}
+  , m_total_stream_position{}
+  , m_garbage_size{}
+  , m_multiplex_type{unknown_multiplex}
+{
+}
+
+void
+parser_c::add_timecode(timecode_c const &timecode) {
+  m_provided_timecodes.push_back(timecode);
+}
+
+void
+parser_c::add_bytes(memory_cptr const &mem) {
+  add_bytes(mem->get_buffer(), mem->get_size());
+}
+
+void
+parser_c::add_bytes(unsigned char *const buffer,
+                    size_t size) {
+  m_buffer.add(buffer, size);
+  m_total_stream_position += size;
+  parse();
+}
+
+void
+parser_c::flush() {
+  // no-op
+}
+
+size_t
+parser_c::frames_available()
+  const {
+  return m_frames.size();
+}
+
+frame_c
+parser_c::get_frame() {
+  auto frame = m_frames.front();
+  m_frames.pop_front();
+  return frame;
+}
+
+uint64_t
+parser_c::get_total_stream_position()
+  const {
+  return m_total_stream_position;
+}
+
+uint64_t
+parser_c::get_parsed_stream_position()
+  const {
+  return m_parsed_stream_position;
+}
+
+bool
+parser_c::decode_header(unsigned char const *buffer,
+                        size_t buffer_size,
+                        frame_c &frame) {
+  if (m_multiplex_type == adts_multiplex)
+    return frame.decode_adts_header(buffer, buffer_size);
+
+  if (frame.decode_adts_header(buffer, buffer_size)) {
+    m_multiplex_type = adts_multiplex;
+    return true;
+  }
+
+  return false;
+}
+
+void
+parser_c::parse() {
+  auto buffer      = m_buffer.get_buffer();
+  auto buffer_size = m_buffer.get_size();
+  auto position    = 0u;
+
+  while ((position + 8) < buffer_size) {
+    frame_c frame;
+
+    if (!decode_header(&buffer[position], buffer_size - position, frame)) {
+      ++position;
+      ++m_garbage_size;
+      continue;
+    }
+
+    if ((position + frame.m_frame_size) > buffer_size)
+      break;
+
+    if (!m_provided_timecodes.empty()) {
+      frame.m_timecode = m_provided_timecodes.front();
+      m_provided_timecodes.pop_front();
+    }
+
+    frame.m_data             = memory_c::clone(&buffer[position + frame.m_header_byte_size], frame.m_data_byte_size);
+    frame.m_stream_position  = m_parsed_stream_position + position;
+    frame.m_garbage_size     = m_garbage_size;
+
+    m_garbage_size           = 0;
+    position                += frame.m_frame_size;
+
+    m_frames.push_back(frame);
+  }
+
+  m_buffer.remove(position);
+  m_parsed_stream_position += position;
+}
+
+int
+parser_c::find_consecutive_frames(unsigned char const *buffer,
+                                  size_t buffer_size,
+                                  size_t num_required_headers) {
+  static auto s_debug = debugging_option_c{"aac_consecutive_frames"};
+  size_t base = 0;
+
+  do {
+    mxdebug_if(s_debug, boost::format("Starting search for %2% headers with base %1%, buffer size %3%\n") % base % num_required_headers % buffer_size);
+
+    size_t position = base;
+
+    frame_c first_frame;
+    while (((position + 8) < buffer_size) && !first_frame.decode_adts_header(&buffer[position], buffer_size - position))
+      ++position;
+
+    mxdebug_if(s_debug, boost::format("First frame at %1% valid %2%\n") % position % first_frame.m_valid);
+
+    if (!first_frame.m_valid)
+      return -1;
+
+    size_t offset            = position + first_frame.m_frame_size;
+    size_t num_headers_found = 1;
+
+    while (   (num_headers_found < num_required_headers)
+           && (offset            < buffer_size)) {
+
+      frame_c current_frame;
+      if (!current_frame.decode_adts_header(&buffer[offset], buffer_size - offset))
+        break;
+
+      if (8 > current_frame.m_frame_size) {
+        mxdebug_if(s_debug, boost::format("Current frame at %1% has invalid size %2%\n") % offset % current_frame.m_frame_size);
+        break;
+      }
+
+      if (   (current_frame.m_id          != first_frame.m_id)
+          && (current_frame.m_profile     != first_frame.m_profile)
+          && (current_frame.m_channels    != first_frame.m_channels)
+          && (current_frame.m_sample_rate != first_frame.m_sample_rate)) {
+        mxdebug_if(s_debug,
+                   boost::format("Current frame at %9% differs from first frame. (first/current) ID: %1%/%2% profile: %3%/%4% channels: %5%/%6% sample rate: %7%/%8%\n")
+                   % first_frame.m_id          % current_frame.m_id
+                   % first_frame.m_profile     % current_frame.m_profile
+                   % first_frame.m_channels    % current_frame.m_channels
+                   % first_frame.m_sample_rate % current_frame.m_sample_rate
+                   % offset);
+        break;
+      }
+
+      mxdebug_if(s_debug, boost::format("Current frame at %1% equals first frame, found %2%\n") % offset % (num_headers_found + 1));
+
+      ++num_headers_found;
+      offset += current_frame.m_frame_size;
+    }
+
+    if (num_headers_found == num_required_headers) {
+      mxdebug_if(s_debug, boost::format("Found required number of headers at %1%\n") % position);
+      return position;
+    }
+
+    base = position + 2;
+  } while (base < buffer_size);
+
+  return -1;
+}
+
+}
 
 aac_header_c::aac_header_c()
   : object_type{}
