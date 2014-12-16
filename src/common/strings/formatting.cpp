@@ -29,6 +29,13 @@ format_timecode(int64_t timecode,
   if (negative)
     timecode *= -1;
 
+  if (precision && (9 > precision)) {
+    auto shift = 5ll;
+    for (int shift_idx = 9 - precision; shift_idx > 1; --shift_idx)
+      shift *= 10;
+    timecode += shift;
+  }
+
   std::string result = (s_bf_format
                         % static_cast<int>( timecode / 60 / 60 / 1000000000)
                         % static_cast<int>((timecode      / 60 / 1000000000) % 60)

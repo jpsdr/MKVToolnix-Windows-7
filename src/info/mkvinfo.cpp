@@ -1159,17 +1159,18 @@ handle_block_group(EbmlStream *&es,
     if (Is<KaxBlock>(l3)) {
       KaxBlock &block = *static_cast<KaxBlock *>(l3);
       block.SetParent(*cluster);
-      show_element(l3, 3,
-                   BF_BLOCK_GROUP_BLOCK_BASICS
-                   % block.TrackNum()
-                   % block.NumberFrames()
-                   % (static_cast<double>(block.GlobalTimecode()) / 1000000000.0)
-                   % format_timecode(block.GlobalTimecode(), 3));
 
       lf_timecode = block.GlobalTimecode();
       lf_tnum     = block.TrackNum();
       bduration   = -1.0;
       frame_pos   = block.GetElementPosition() + block.ElementSize();
+
+      show_element(l3, 3,
+                   BF_BLOCK_GROUP_BLOCK_BASICS
+                   % block.TrackNum()
+                   % block.NumberFrames()
+                   % (static_cast<double>(lf_timecode) / 1000000000.0)
+                   % format_timecode(lf_timecode, 3));
 
       for (size_t i = 0; i < block.NumberFrames(); ++i) {
         auto &data = block.GetBuffer(i);
@@ -1292,7 +1293,7 @@ handle_block_group(EbmlStream *&es,
         mxinfo(BF_BLOCK_GROUP_SUMMARY_WITH_DURATION
                % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
-               % (lf_timecode / 1000000)
+               % irnd(lf_timecode / 1000000.0)
                % format_timecode(lf_timecode, 3)
                % bduration
                % frame_sizes[fidx]
@@ -1303,7 +1304,7 @@ handle_block_group(EbmlStream *&es,
         mxinfo(BF_BLOCK_GROUP_SUMMARY_NO_DURATION
                % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
-               % (lf_timecode / 1000000)
+               % irnd(lf_timecode / 1000000.0)
                % format_timecode(lf_timecode, 3)
                % frame_sizes[fidx]
                % frame_adlers[fidx]
@@ -1316,7 +1317,7 @@ handle_block_group(EbmlStream *&es,
                  BF_BLOCK_GROUP_SUMMARY_V2
                  % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                  % lf_tnum
-                 % (lf_timecode / 1000000));
+                 % irnd(lf_timecode / 1000000.0));
 
   track_info_t &tinfo = s_track_info[lf_tnum];
 
@@ -1349,7 +1350,8 @@ handle_simple_block(EbmlStream *&es,
   block.SetParent(*cluster);
 
   int64_t frame_pos   = block.GetElementPosition() + block.ElementSize();
-  uint64_t timecode   = block.GlobalTimecode() / 1000000;
+  auto timecode_ns    = block.GlobalTimecode();
+  auto timecode_ms    = irnd(static_cast<double>(timecode_ns) / 1000000.0);
   track_info_t &tinfo = s_track_info[block.TrackNum()];
 
   std::string info;
@@ -1363,8 +1365,8 @@ handle_simple_block(EbmlStream *&es,
                % info
                % block.TrackNum()
                % block.NumberFrames()
-               % ((float)timecode / 1000.0)
-               % format_timecode(block.GlobalTimecode(), 3));
+               % (timecode_ns / 1000000000.0)
+               % format_timecode(timecode_ns, 3));
 
   int i;
   for (i = 0; i < (int)block.NumberFrames(); i++) {
@@ -1399,8 +1401,8 @@ handle_simple_block(EbmlStream *&es,
       mxinfo(BF_SIMPLE_BLOCK_SUMMARY
              % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
              % block.TrackNum()
-             % timecode
-             % format_timecode(block.GlobalTimecode(), 3)
+             % timecode_ms
+             % format_timecode(timecode_ns, 3)
              % frame_sizes[fidx]
              % frame_adlers[fidx]
              % position);
@@ -1411,12 +1413,12 @@ handle_simple_block(EbmlStream *&es,
                  BF_SIMPLE_BLOCK_SUMMARY_V2
                  % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
                  % block.TrackNum()
-                 % timecode);
+                 % timecode_ms);
 
   tinfo.m_blocks                                                                    += block.NumberFrames();
   tinfo.m_blocks_by_ref_num[block.IsKeyframe() ? 0 : block.IsDiscardable() ? 2 : 1] += block.NumberFrames();
-  tinfo.m_min_timecode                                                                = std::min(tinfo.m_min_timecode, static_cast<int64_t>(block.GlobalTimecode()));
-  tinfo.m_max_timecode                                                                = std::max(tinfo.m_min_timecode, static_cast<int64_t>(block.GlobalTimecode()));
+  tinfo.m_min_timecode                                                                = std::min(tinfo.m_min_timecode, static_cast<int64_t>(timecode_ns));
+  tinfo.m_max_timecode                                                                = std::max(tinfo.m_min_timecode, static_cast<int64_t>(timecode_ns));
   tinfo.m_add_duration_for_n_packets                                                  = block.NumberFrames();
   tinfo.m_size                                                                       += boost::accumulate(frame_sizes, 0);
 }
