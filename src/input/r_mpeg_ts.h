@@ -22,6 +22,7 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/dts.h"
+#include "common/hevc.h"
 #include "common/mm_io.h"
 #include "common/mpeg4_p10.h"
 #include "common/truehd.h"
@@ -61,6 +62,7 @@ enum mpeg_ts_stream_type_e {
   ISO_14496_PART2_VIDEO     = 0x10, // ISO/IEC 14496-2 Visual (MPEG-4)
   ISO_14496_PART3_AUDIO     = 0x11, // ISO/IEC 14496-3 Audio with LATM transport syntax
   ISO_14496_PART10_VIDEO    = 0x1b, // ISO/IEC 14496-10 Video (MPEG-4 part 10/AVC, aka H.264)
+  ISO_23008_PART2_VIDEO     = 0x24, // ISO/IEC 14496-10 Video (MPEG-H part 2/HEVC, aka H.265)
   STREAM_AUDIO_PCM          = 0x80, // PCM
   STREAM_AUDIO_AC3          = 0x81, // Audio AC3 (A52)
   STREAM_AUDIO_DTS          = 0x82, // Audio DTS
@@ -301,6 +303,7 @@ public:
   // used for probing for stream types
   byte_buffer_cptr m_probe_data;
   mpeg4::p10::avc_es_parser_cptr m_avc_parser;
+  hevc::hevc_es_parser_cptr m_hevc_parser;
   truehd_parser_cptr m_truehd_parser;
   std::shared_ptr<M2VParser> m_m2v_parser;
 
@@ -349,6 +352,7 @@ public:
 
   int new_stream_v_mpeg_1_2();
   int new_stream_v_avc();
+  int new_stream_v_hevc();
   int new_stream_v_vc1();
   int new_stream_a_mpeg();
   int new_stream_a_aac();
@@ -433,6 +437,7 @@ private:
   int send_to_packetizer(mpeg_ts_track_ptr &track);
   void create_mpeg1_2_video_packetizer(mpeg_ts_track_ptr &track);
   void create_mpeg4_p10_es_video_packetizer(mpeg_ts_track_ptr &track);
+  void create_mpegh_p2_es_video_packetizer(mpeg_ts_track_ptr &track);
   void create_vc1_video_packetizer(mpeg_ts_track_ptr &track);
   void create_aac_audio_packetizer(mpeg_ts_track_ptr const &track);
   void create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track);

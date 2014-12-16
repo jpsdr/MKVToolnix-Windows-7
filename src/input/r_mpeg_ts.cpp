@@ -35,6 +35,7 @@
 #include "output/p_ac3.h"
 #include "output/p_avc.h"
 #include "output/p_dts.h"
+#include "output/p_hevc_es.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
 #include "output/p_pcm.h"
@@ -183,6 +184,29 @@ mpeg_ts_track_c::new_stream_v_avc() {
 
   if (m_avc_parser->has_par_been_found()) {
     auto dimensions = m_avc_parser->get_display_dimensions();
+    v_dwidth        = dimensions.first;
+    v_dheight       = dimensions.second;
+  }
+
+  return 0;
+}
+
+int
+mpeg_ts_track_c::new_stream_v_hevc() {
+  if (!m_hevc_parser)
+    m_hevc_parser = std::make_shared<hevc::hevc_es_parser_c>();
+
+  m_hevc_parser->add_bytes(pes_payload->get_buffer(), pes_payload->get_size());
+
+  if (!m_hevc_parser->headers_parsed())
+    return FILE_STATUS_MOREDATA;
+
+  codec    = codec_c::look_up(CT_V_MPEGH_P2);
+  v_width  = m_hevc_parser->get_width();
+  v_height = m_hevc_parser->get_height();
+
+  if (m_hevc_parser->has_par_been_found()) {
+    auto dimensions = m_hevc_parser->get_display_dimensions();
     v_dwidth        = dimensions.first;
     v_dheight       = dimensions.second;
   }
@@ -885,6 +909,10 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
         track->type      = ES_VIDEO_TYPE;
         track->codec     = codec_c::look_up(CT_V_MPEG4_P10);
         break;
+      case ISO_23008_PART2_VIDEO:
+        track->type      = ES_VIDEO_TYPE;
+        track->codec     = codec_c::look_up(CT_V_MPEGH_P2);
+        break;
       case STREAM_VIDEO_VC1:
         track->type      = ES_VIDEO_TYPE;
         track->codec     = codec_c::look_up(CT_V_VC1);
@@ -1107,6 +1135,8 @@ mpeg_ts_reader_c::determine_track_parameters(mpeg_ts_track_ptr const &track) {
       return track->new_stream_v_mpeg_1_2();
     else if (track->codec.is(CT_V_MPEG4_P10))
       return track->new_stream_v_avc();
+    else if (track->codec.is(CT_V_MPEGH_P2))
+      return track->new_stream_v_hevc();
     else if (track->codec.is(CT_V_VC1))
       return track->new_stream_v_vc1();
 
@@ -1315,6 +1345,9 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
     else if (track->codec.is(CT_V_MPEG4_P10))
       create_mpeg4_p10_es_video_packetizer(track);
 
+    else if (track->codec.is(CT_V_MPEGH_P2))
+      create_mpegh_p2_es_video_packetizer(track);
+
     else if (track->codec.is(CT_V_VC1))
       create_vc1_video_packetizer(track);
 
@@ -1353,6 +1386,15 @@ void
 mpeg_ts_reader_c::create_mpeg4_p10_es_video_packetizer(mpeg_ts_track_ptr &track) {
   generic_packetizer_c *ptzr = new mpeg4_p10_es_video_packetizer_c(this, m_ti);
   track->ptzr                = add_packetizer(ptzr);
+  ptzr->set_video_pixel_dimensions(track->v_width, track->v_height);
+
+  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
+}
+
+void
+mpeg_ts_reader_c::create_mpegh_p2_es_video_packetizer(mpeg_ts_track_ptr &track) {
+  auto ptzr   = new hevc_es_video_packetizer_c(this, m_ti);
+  track->ptzr = add_packetizer(ptzr);
   ptzr->set_video_pixel_dimensions(track->v_width, track->v_height);
 
   show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
