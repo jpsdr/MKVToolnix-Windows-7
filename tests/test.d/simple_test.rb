@@ -133,6 +133,20 @@ class SimpleTest
     }
   end
 
+  def test_info file, *args
+    options             = args.extract_options!
+    full_command_line   = [ options[:args], file ].flatten.join(' ')
+    options[:name]    ||= full_command_line
+    @blocks[:tests] << {
+      :name  => full_command_line,
+      :block => lambda {
+        output = options[:output] || tmp
+        info full_command_line, :exit_code => options[:exit_code], :output => output
+        options[:keep_tmp] ? hash_file(output) : hash_tmp
+      },
+    }
+  end
+
   def test_merge_unsupported file, *args
     options             = args.extract_options!
     full_command_line   = [ options[:args], file ].flatten.join(' ')
