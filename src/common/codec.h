@@ -19,6 +19,7 @@
 #include <ostream>
 
 #include "common/fourcc.h"
+#include "matroska/c/libmatroska_t.h"
 
 // see http://www.matroska.org/technical/specs/codecid/index.html
 
@@ -138,27 +139,31 @@ protected:
   boost::regex m_match_re;
   std::string m_name;
   codec_type_e m_type;
+  track_type m_track_type;
   std::vector<uint16_t> m_audio_formats;
 
 public:
   codec_c()
     : m_type{CT_UNKNOWN}
+    , m_track_type{static_cast<track_type>(0)}
   {
   }
 
-  codec_c(std::string const &name, codec_type_e type, std::string const &match_re, uint16_t audio_format = 0u)
+  codec_c(std::string const &name, codec_type_e type, track_type p_track_type, std::string const &match_re, uint16_t audio_format = 0u)
     : m_match_re{(boost::format("(?:%1%)") % match_re).str(), boost::regex::perl | boost::regex::icase}
     , m_name{name}
     , m_type{type}
+    , m_track_type{p_track_type}
   {
     if (audio_format)
       m_audio_formats.push_back(audio_format);
   }
 
-  codec_c(std::string const &name, codec_type_e type, std::string const &match_re, std::vector<uint16_t> audio_formats)
+  codec_c(std::string const &name, codec_type_e type, track_type p_track_type, std::string const &match_re, std::vector<uint16_t> audio_formats)
     : m_match_re{(boost::format("(?:%1%)") % match_re).str(), boost::regex::perl | boost::regex::icase}
     , m_name{name}
     , m_type{type}
+    , m_track_type{p_track_type}
     , m_audio_formats{audio_formats}
   {
   }
@@ -187,6 +192,10 @@ public:
 
   codec_type_e get_type() const {
     return m_type;
+  }
+
+  track_type get_track_type() const {
+    return m_track_type;
   }
 
 private:

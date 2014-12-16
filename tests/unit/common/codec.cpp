@@ -253,4 +253,11 @@ TEST(Codec, GetNameFallbacks) {
   EXPECT_EQ(codec_c::look_up("DOES-NOT-EXIST").get_name(),             "");
 }
 
+TEST(Codec, TrackTypes) {
+  EXPECT_EQ(codec_c::look_up(MKV_A_AAC).get_track_type(),    track_audio);
+  EXPECT_EQ(codec_c::look_up(MKV_V_VP9).get_track_type(),    track_video);
+  EXPECT_EQ(codec_c::look_up(MKV_S_VOBSUB).get_track_type(), track_subtitle);
+  EXPECT_EQ(codec_c::look_up(MKV_B_VOBBTN).get_track_type(), track_buttons);
+}
+
 }
