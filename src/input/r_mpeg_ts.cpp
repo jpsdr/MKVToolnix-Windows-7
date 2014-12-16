@@ -461,6 +461,36 @@ mpeg_ts_track_c::parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_de
 }
 
 bool
+mpeg_ts_track_c::parse_registration_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor,
+                                                   mpeg_ts_pmt_pid_info_t const &pmt_pid_info) {
+  if (pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE)
+    return false;
+
+  if (pmt_descriptor.length < 4)
+    return false;
+
+ auto fourcc = fourcc_c{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1)};
+ auto reg_codec  = codec_c::look_up(fourcc.str());
+
+  mxdebug_if(reader.m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: Registration descriptor with FourCC: %1% codec: %2%\n") % fourcc % reg_codec);
+
+  if (!reg_codec.valid())
+    return false;
+
+  switch (reg_codec.get_track_type()) {
+    case track_audio:    type = ES_AUDIO_TYPE; break;
+    case track_video:    type = ES_VIDEO_TYPE; break;
+    case track_subtitle: type = ES_SUBT_TYPE;  break;
+    default:
+      return false;
+  }
+
+  codec = reg_codec;
+
+  return true;
+}
+
+bool
 mpeg_ts_track_c::parse_vobsub_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor,
                                              mpeg_ts_pmt_pid_info_t const &pmt_pid_info) {
   if (pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE)
@@ -911,6 +941,9 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
         missing_tag = false;
 
       switch (pmt_descriptor->tag) {
+        case 0x05: // registration descriptor
+          track->parse_registration_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+          break;
         case 0x0a: // ISO 639 language descriptor
           track->parse_iso639_language_from(pmt_descriptor + 1);
           break;

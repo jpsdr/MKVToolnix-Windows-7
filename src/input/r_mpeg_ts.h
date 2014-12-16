@@ -359,6 +359,7 @@ public:
 
   bool parse_ac3_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
   bool parse_dts_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
+  bool parse_registration_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
   bool parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
   bool parse_vobsub_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
 
