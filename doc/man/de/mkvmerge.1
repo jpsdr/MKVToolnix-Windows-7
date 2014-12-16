@@ -469,9 +469,9 @@ Der Modus
 parts
 teilt
 \fBmkvmerge\fR(1)
-mit, dass bestimmte Zeitstempelbereiche aufbewahrt werden, w\(:ahrend andere verworfen werden\&. Die Bereiche, die aufbewahrt werden sollen, m\(:ussen nach dem Sch\(:usselwort
+mit, dass bestimmte Zeitstempelbereiche aufbewahrt werden, w\(:ahrend andere verworfen werden\&. Die Bereiche, die aufbewahrt werden sollen, m\(:ussen nach dem Schl\(:usselwort
 parts:
-aufgef\(:uhrt und durch Kommas getrennt werden\&. Ein Bereich selbst besteht aus einem Start\- und Endezeitstempel im selben Format, wie dem, das andere Variationen von
+aufgef\(:uhrt und durch Kommas getrennt werden\&. Ein Bereich selbst besteht aus einem Start\- und Endzeitstempel im selben Format, wie dem, das andere Variationen von
 \fI\-\-split\fR
 akzeptieren (z\&.B\&. beziehen sich sowohl
 00:01:20
@@ -481,7 +481,7 @@ auf den selben Zeitstempel)\&.
 .sp
 Falls ein Startzeitstempel weggelassen wurde, wird er standardm\(:a\(ssig auf das Ende des vorherigen Zeitstempelbereichs gesetzt\&. Falls es keinen vorherigen Bereich gab, dann wird er standardm\(:a\(ssig auf den Dateianfang gesetzt (siehe Beispiel 3)\&.
 .sp
-Falls ein Endezeitstempel weggelassen wird, dann wird dies standardm\(:a\(ssig das Ende der Quelldateien, wodurch
+Falls ein Endzeitstempel weggelassen wird, dann wird dies standardm\(:a\(ssig das Ende der Quelldateien, wodurch
 \fBmkvmerge\fR(1)
 im Prinzip mitgeteilt wird, dass es den Rest behalten soll (siehe Beispiel 3)\&.
 .sp
@@ -595,7 +595,7 @@ Der Modus
 parts\-frames
 teilt
 \fBmkvmerge\fR(1)
-mit, dass bestimmte Bereiche von Bild\-/Feldnummern aufbewahrt werden, w\(:ahrend andere verworfen werden\&. Die Bereiche, die aufbewahrt werden sollen, m\(:ussen nach dem Sch\(:usselwort
+mit, dass bestimmte Bereiche von Bild\-/Feldnummern aufbewahrt werden, w\(:ahrend andere verworfen werden\&. Die Bereiche, die aufbewahrt werden sollen, m\(:ussen nach dem Schl\(:usselwort
 parts\-frames:
 aufgef\(:uhrt und durch Kommas getrennt werden\&. Ein Bereich selbst besteht aus einer Start\- und Endbildnummer\&. Die Nummerierung beginnt bei 1\&.
 .sp
@@ -676,7 +676,9 @@ Dieser Modus betrachtet nur die erste Videospur, die ausgegeben wird\&. Falls ke
 .br
 Die mit diesem Argument angegebenen Zahlen werden basierend auf der Zahl der ausgegebenen
 Matroska(TM)\-Bl\(:ocke interpretiert\&. Ein einzelner
-Matroska(TM)\-Block enth\(:alt entweder ein komplettes Bild (f\(:ur fortlaufenden Inhalt) oder ein einzelnes Feld (f\(:ur Inhalt im Halbbildverfahren)\&. Mkvmerge unterscheidet nicht zwischen diesen beiden und z\(:ahlt einfach nur die Anzahl der Bl\(:ocke\&. Zum Beispiel: Falls jemand nach dem 25\&. kompletten Bild bei Inhalt im Halbbildverfahren aufteilen m\(:ochte, m\(:usste er
+Matroska(TM)\-Block enth\(:alt entweder ein komplettes Bild (f\(:ur fortlaufenden Inhalt) oder ein einzelnes Feld (f\(:ur Inhalt im Halbbildverfahren)\&.
+\fBmkvmerge\fR(1)
+unterscheidet nicht zwischen diesen beiden und z\(:ahlt einfach nur die Anzahl der Bl\(:ocke\&. Zum Beispiel: Falls jemand nach dem 25\&. kompletten Bild bei Inhalt im Halbbildverfahren aufteilen m\(:ochte, m\(:usste er
 50
 als Aufteilungspunkt benutzen (zwei Felder pro komplettem Bild)\&.
 .sp .5v
@@ -722,7 +724,9 @@ Dieser Modus betrachtet nur die erste Videospur, die ausgegeben wird\&. Falls ke
 .br
 Die mit diesem Argument angegebenen Zahlen werden basierend auf der Zahl der ausgegebenen
 Matroska(TM)\-Bl\(:ocke interpretiert\&. Ein einzelner
-Matroska(TM)\-Block enth\(:alt entweder ein komplettes Bild (f\(:ur fortlaufenden Inhalt) oder ein einzelnes Feld (f\(:ur Inhalt im Halbbildverfahren)\&. Mkvmerge unterscheidet nicht zwischen diesen beiden und z\(:ahlt einfach nur die Anzahl der Bl\(:ocke\&. Zum Beispiel: Falls jemand nach dem 25\&. kompletten Bild bei Inhalt im Halbbildverfahren aufteilen m\(:ochte, m\(:usste er
+Matroska(TM)\-Block enth\(:alt entweder ein komplettes Bild (f\(:ur fortlaufenden Inhalt) oder ein einzelnes Feld (f\(:ur Inhalt im Halbbildverfahren)\&.
+\fBmkvmerge\fR(1)
+unterscheidet nicht zwischen diesen beiden und z\(:ahlt einfach nur die Anzahl der Bl\(:ocke\&. Zum Beispiel: Falls jemand nach dem 25\&. kompletten Bild bei Inhalt im Halbbildverfahren aufteilen m\(:ochte, m\(:usste er
 50
 als Aufteilungspunkt benutzen (zwei Felder pro komplettem Bild)\&.
 .sp .5v
@@ -807,9 +811,13 @@ legt fest, wie Zeitstempel beim Anh\(:angen von Dateien berechnet werden\&. Der 
 \fIModus\fR
 kann zwei Werte annehmen: \(Fcfile\(Fo, der auch die Voreinstellung ist, und \(Fctrack\(Fo\&.
 .sp
-Wenn Mkvmerge eine Spur (von nun an \(Fctrack2_1\(Fo genannt) von einer zweiten Datei (\(Fcfile2\(Fo genannt) an eine Spur (\(Fctrack1_1\(Fo genannt) von der ersten Datei (\(Fcfile1\(Fo genannt) anh\(:angt, dann m\(:ussen alle Zeitstempel f\(:ur \(Fctrack2_1\(Fo um einen Betrag versetzt werden\&. Im Modus \(Fcfile\(Fo ist dies der h\(:ochste in \(Fcfile1\(Fo aufgetretene Betrag, auch wenn dieser Zeitstempel von einer anderen Spur als \(Fctrack1_1\(Fo stammt\&. Im Modus \(Fctrack\(Fo ist der Versatz der h\(:ochste Zeitstempel aus \(Fctrack1_1\(Fo\&.
+Wenn
+\fBmkvmerge\fR(1)
+eine Spur (von nun an \(Fctrack2_1\(Fo genannt) von einer zweiten Datei (\(Fcfile2\(Fo genannt) an eine Spur (\(Fctrack1_1\(Fo genannt) von der ersten Datei (\(Fcfile1\(Fo genannt) anh\(:angt, dann m\(:ussen alle Zeitstempel f\(:ur \(Fctrack2_1\(Fo um einen Betrag versetzt werden\&. Im Modus \(Fcfile\(Fo ist dies der h\(:ochste in \(Fcfile1\(Fo aufgetretene Betrag, auch wenn dieser Zeitstempel von einer anderen Spur als \(Fctrack1_1\(Fo stammt\&. Im Modus \(Fctrack\(Fo ist der Versatz der h\(:ochste Zeitstempel aus \(Fctrack1_1\(Fo\&.
 .sp
-Ungl\(:ucklicherweise kann Mkvmerge nicht bestimmen, welcher Modus zuverl\(:assig benutzt werden kann\&. Daher ist der Modus \(Fcfile\(Fo die Voreinstellung\&. Der Modus \(Fcfile\(Fo funktioniert normalerweise bei Dateien besser, die unabh\(:angig von anderen erstellt wurden, z\&.B\&. wenn
+Ungl\(:ucklicherweise kann
+\fBmkvmerge\fR(1)
+nicht bestimmen, welcher Modus zuverl\(:assig benutzt werden kann\&. Daher ist der Modus \(Fcfile\(Fo die Voreinstellung\&. Der Modus \(Fcfile\(Fo funktioniert normalerweise bei Dateien besser, die unabh\(:angig von anderen erstellt wurden, z\&.B\&. wenn
 AVI\- oder
 MP4\-Dateien angeh\(:angt werden\&. Der Modus \(Fctrack\(Fo funktioniert m\(:oglicherweise besser bei Quellen, die eigentlich nur Teile einer gro\(ssen Datei sind, z\&.B\&. bei
 VOB\- und
@@ -846,7 +854,8 @@ $ mkvmerge \-o vollst\(:andig\&.mkv Datei1\&.mkv +Datei2\&.mkv
 .RS 4
 Normalerweise sucht
 \fBmkvmerge\fR(1)
-im selben Verzeichnis nach Dateien wie eine Eingabedatei, die den gleichen Basisnamen hat und sich nur in ihrer fortlaufenden Nummer unterscheidet (z\&.B\&. \(FcVTS_01_1\&.VOB\(Fo, \(FcVTS_01_2\&.VOB\(Fo, \(FcVTS_01_3\&.VOB\(Fo, etc\&.) und behandelt alle diese Dateien, als ob sie zu einer einzigen gro\(ssen Datei verbunden w\(:aren\&. Diese Option, ein einzelnes \(Fc=\(Fo, veranlasst Mkvmerge, nicht nach diesen zus\(:atzlichen Dateien zu suchen\&.
+im selben Verzeichnis nach Dateien wie eine Eingabedatei, die den gleichen Basisnamen hat und sich nur in ihrer fortlaufenden Nummer unterscheidet (z\&.B\&. \(FcVTS_01_1\&.VOB\(Fo, \(FcVTS_01_2\&.VOB\(Fo, \(FcVTS_01_3\&.VOB\(Fo, etc\&.) und behandelt alle diese Dateien, als ob sie zu einer einzigen gro\(ssen Datei verbunden w\(:aren\&. Diese Option, ein einzelnes \(Fc=\(Fo, veranlasst
+\fBmkvmerge\fR(1), nicht nach diesen zus\(:atzlichen Dateien zu suchen\&.
 .sp
 Das \(Fc=\(Fo kann kann au\(sserdem vor den n\(:achsten Dateinamen gesetzt werden\&. Daher entsprechen die beiden folgenden Befehle einander:
 .sp
@@ -1262,7 +1271,9 @@ zu bestimmen\&. Falls die
 CodecID
 jedoch falsch ist, kann der Schalter benutzt werden, um dies zu korrigieren\&.
 .sp
-Falls Mkvmerge f\(:alschlicherweise feststellt, dass eine
+Falls
+\fBmkvmerge\fR(1)
+f\(:alschlicherweise feststellt, dass eine
 AACSBR
 ist, k\(:onnen Sie \(Fc:0\(Fo zur Spur\-ID hinzuf\(:ugen\&.
 .RE
@@ -1285,7 +1296,9 @@ muss \(Fcs\(Fo, \(Fcms\(Fo, \(Fcus\(Fo, \(Fcns\(Fo, \(Fcfps\(Fo, \(Fcp\(Fo oder 
 \fIx\fR
 selbst kann eine Flie\(sskommazahl oder ein Bruch sein\&.
 .sp
-Falls die Standarddauer nicht erzwungen wird, dann wird Mkvmerge versuchen, die Standarddauer der Spur, des Containers und/oder des codierten Bitstroms bei bestimmten Spurtypen, z\&.B\&. AVC/h\&.264 oder MPEG\-2, abzuleiten\&.
+Falls die Standarddauer nicht erzwungen wird, dann wird
+\fBmkvmerge\fR(1)
+versuchen, die Standarddauer der Spur, des Containers und/oder des codierten Bitstroms bei bestimmten Spurtypen, z\&.B\&. AVC/h\&.264 oder MPEG\-2, abzuleiten\&.
 .sp
 Diese Option kann auch benutzt werden, um die
 BpS
@@ -1363,7 +1376,7 @@ oder
 .RS 4
 Matroska(TM)\-Dateien enthalten zwei Werte, die die Anzeigeeigenschaften setzen, auf die ein Abspielprogramm das Bild bei der Wiedergabe skalieren sollte: Anzeigebreite und Anzeigeh\(:ohe\&. Mit dieser Option wird
 \fBmkvmerge\fR(1)
-automatisch die Anzeigebreite und Anzeigeh\(:ohe basierend auf der Originalbreite und \-h\(:ohe berechnen und das mit dieser Option angegebene Seitenerh\(:altnis ber\(:ucksichtigen\&. Das Verh\(:altnis kann entweder als Flie\(sskommazahl
+automatisch die Anzeigebreite und Anzeigeh\(:ohe basierend auf der Originalbreite und \-h\(:ohe berechnen und das mit dieser Option angegebene Seitenverh\(:altnis ber\(:ucksichtigen\&. Das Verh\(:altnis kann entweder als Flie\(sskommazahl
 \fIVerh\(:altnis\fR
 oder als Bruch \(Fc\fIBreite\fR/\fIH\(:ohe\fR\(Fo, z\&.B\&. \(Fc16/9\(Fo, angegeben werden\&.
 .sp
@@ -1376,7 +1389,7 @@ oder
 .PP
 \fB\-\-aspect\-ratio\-factor\fR \fITID:Faktor|n/d\fR
 .RS 4
-Eine weitere M\(:oglichkeit, das Seitenerh\(:altnis zu setzen, ist die Angabe eines
+Eine weitere M\(:oglichkeit, das Seitenverh\(:altnis zu setzen, ist die Angabe eines
 \fIFaktor\fRs\&. Das Originalseitenverh\(:altnis wird zuerst mit diesem
 \fIFaktor\fR
 multipliziert und hinterher als Zielseitenverh\(:altnis benutzt\&.
@@ -1509,7 +1522,7 @@ veranlassen, eine Liste der verf\(:ugbaren \(:Ubersetzungen auszugeben\&.
 .PP
 \fB\-\-debug\fR \fIThema\fR
 .RS 4
-schaltet die Fehlersuche f\(:ur eine bestimmte Funktionalit\(:at ein\&. Diese Option ist nur f\(:ur Entwicker n\(:utzlich\&.
+schaltet die Fehlersuche f\(:ur eine bestimmte Funktionalit\(:at ein\&. Diese Option ist nur f\(:ur Entwickler n\(:utzlich\&.
 .RE
 .PP
 \fB\-\-engage\fR \fIFunktionalit\(:at\fR
@@ -1645,7 +1658,7 @@ Die Reihenfolge, in der die Optionen eingegeben werden, ist f\(:ur einige Option
 .sp -1
 .IP "  1." 4.2
 .\}
-Optionen, die das ganze Programm beeinflussen und nicht an irgeneine Eingabedatei gebunden sind\&. Dies sind unter anderem
+Optionen, die das ganze Programm beeinflussen und nicht an irgendeine Eingabedatei gebunden sind\&. Dies sind unter anderem
 \fB\-\-command\-line\-charset\fR,
 \fB\-\-output\fR
 oder
@@ -1723,7 +1736,7 @@ $ mkvmerge \-o MeinFilm\-mit\-Ton\&.mkv MeinFilm\&.avi MeinFilm\&.ogg
 .PP
 Falls Ihr
 AVI
-breits eine Tonspur enth\(:alt, dann wird sie ebenfalls kopiert (wenn
+bereits eine Tonspur enth\(:alt, dann wird sie ebenfalls kopiert (wenn
 \fBmkvmerge\fR(1)
 das Audioformat unterst\(:utzt)\&. Um dies zu verhindern, tun Sie einfach Folgendes:
 .sp
@@ -2012,7 +2025,7 @@ Spur\-ID 1: Ton (A_MPEG/L3)
 .PP
 Verwechseln Sie nicht die Spur\-IDs, die den Spuren zugewiesen sind, die in der Ausgabe\-MKV\-Datei abgelegt wurden mit den Spur\-IDs der Eingabedateien\&. Nur die Spur\-IDs der Eingabedateien werden f\(:ur Optionen benutzt, die diese Werte ben\(:otigen\&.
 .PP
-Beachten Sie auch, dass jede Eingabedatei ihre eigene Gruppe von Spur\-IDs hat\&. Daher \(:andert sich die Spur\-ID f\(:ur die Datei \(FcDatei1\&.ext\(Fo, die von \(Fcmkvmerge \-\-identify\(Fo gemeldet wurde, nicht, unabh\(:angig davon, wieviele andere Eingabedateien es gibt oder an welcher Stelle \(FcDatei1\&.ext\(Fo benutzt wird\&.
+Beachten Sie auch, dass jede Eingabedatei ihre eigene Gruppe von Spur\-IDs hat\&. Daher \(:andert sich die Spur\-ID f\(:ur die Datei \(FcDatei1\&.ext\(Fo, die von \(Fcmkvmerge \-\-identify\(Fo gemeldet wurde, nicht, unabh\(:angig davon, wie viele andere Eingabedateien es gibt oder an welcher Stelle \(FcDatei1\&.ext\(Fo benutzt wird\&.
 .PP
 Spur\-IDs werden wie folgt zugeteilt:
 .sp
@@ -2108,7 +2121,7 @@ unters\(:utzt die folgenden f\(:unf Modi: UTF\-8, UTF\-16 Little und Big Endian 
 \fB\-\-sub\-charset\fR), werden stillschweigend irgnoriert\&.
 .SS "Linux und Unixoide Betriebssysteme inklusive Mac OS"
 .PP
-Auf UNIX\-\(:ahnlichen Systemen benutzt
+Auf UNIX\-artigen Systemen benutzt
 \fBmkvmerge\fR(1)
 den Systemaufruf
 \fBsetlocale\fR(3), der wiederum die Umgebungsvariablen
@@ -2153,7 +2166,7 @@ Wenn hingegen direkt auf die Konsole geschrieben wird, so wird die Windows\-Funk
 \fBWriteConsoleW()\fR
 daf\(:ur benutzt, und die Option
 \fB\-\-output\-charset\fR
-wird ignoriert\&. Die Konsole sollte in der Lage sein, alle Unicode\-Zeichen auszugeben, f\(:ur deren entsprechende Sprache Sprachunters\(:utzung installiert ist (z\&.B\&. k\(:onnten chinesische Zeichen in englischen Windows\-Versionen nicht ausgegeben werden)\&.
+wird ignoriert\&. Die Konsole sollte in der Lage sein, alle Unicode\-Zeichen auszugeben, f\(:ur deren entsprechende Sprache Sprachunterst\(:utzung installiert ist (z\&.B\&. k\(:onnten chinesische Zeichen in englischen Windows\-Versionen nicht ausgegeben werden)\&.
 .RE
 .SS "Kommandozeilenoptionen"
 .PP
@@ -2979,7 +2992,7 @@ beendet sich mit einem von drei R\(:uckgabewerten:
 \fB1\fR
 \(en in diesem Fall hat
 \fBmkvmerge\fR(1)
-mindestens eine Warnung ausgegeben, das Muxing wurde aber fortgesetzt\&. Einer Warnung wird der Text \(FcWarning:\(Fo vorangestellt\&. Abh\(:angig von den autgetretenen Problemen k\(:onnen die resultierenden Dateien in Ordnung sein oder nicht\&. Dem Anwender wird nachdr\(:ucklich geraten, sowohl die Warnung als auch die resultierende Datei zu \(:uberpr\(:ufen\&.
+mindestens eine Warnung ausgegeben, das Muxing wurde aber fortgesetzt\&. Einer Warnung wird der Text \(FcWarning:\(Fo vorangestellt\&. Abh\(:angig von den aufgetretenen Problemen k\(:onnen die resultierenden Dateien in Ordnung sein oder nicht\&. Dem Anwender wird nachdr\(:ucklich geraten, sowohl die Warnung als auch die resultierende Datei zu \(:uberpr\(:ufen\&.
 .RE
 .sp
 .RS 4
