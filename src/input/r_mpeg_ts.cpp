@@ -972,18 +972,23 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
       track->codec = codec_c::look_up(CT_A_AC3);
     }
 
-    pmt_pid_info = (mpeg_ts_pmt_pid_info_t *)((unsigned char *)pmt_pid_info + sizeof(mpeg_ts_pmt_pid_info_t) + es_info_length);
     if (track->type != ES_UNKNOWN) {
       PMT_found         = true;
       track->processed  = false;
       track->data_ready = false;
       tracks.push_back(track);
       es_to_process++;
-      mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: PID %1% has type: %2%\n") % track->pid % track->codec.get_name());
 
-    } else
-      mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: PID %1% has an unknown type\n") % track->pid);
-}
+    }
+
+    mxdebug_if(m_debug_pat_pmt,
+               boost::format("mpeg_ts:parse_pmt: PID %1% stream type %|2$02x| has type: %3%\n")
+               % track->pid
+               % static_cast<unsigned int>(pmt_pid_info->stream_type)
+               % (track->type != ES_UNKNOWN ? track->codec.get_name() : "<unknown>"));
+
+    pmt_pid_info = (mpeg_ts_pmt_pid_info_t *)((unsigned char *)pmt_pid_info + sizeof(mpeg_ts_pmt_pid_info_t) + es_info_length);
+  }
 
   return 0;
 }
