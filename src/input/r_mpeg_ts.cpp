@@ -901,28 +901,31 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
         break;
     }
 
-    pmt_descriptor  = (mpeg_ts_pmt_descriptor_t *)((unsigned char *)pmt_pid_info + sizeof(mpeg_ts_pmt_pid_info_t));
-    bool type_known = false;
+    pmt_descriptor   = (mpeg_ts_pmt_descriptor_t *)((unsigned char *)pmt_pid_info + sizeof(mpeg_ts_pmt_pid_info_t));
+    bool missing_tag = true;
 
     while (pmt_descriptor < (mpeg_ts_pmt_descriptor_t *)((unsigned char *)pmt_pid_info + sizeof(mpeg_ts_pmt_pid_info_t) + es_info_length)) {
       mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: PMT descriptor tag 0x%|1$02x| length %2%\n") % static_cast<unsigned int>(pmt_descriptor->tag) % static_cast<unsigned int>(pmt_descriptor->length));
+
+      if (0x0a != pmt_descriptor->tag)
+        missing_tag = false;
 
       switch (pmt_descriptor->tag) {
         case 0x0a: // ISO 639 language descriptor
           track->parse_iso639_language_from(pmt_descriptor + 1);
           break;
         case 0x56: // Teletext descriptor
-          type_known = track->parse_srt_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+          track->parse_srt_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
         case 0x59: // Subtitles descriptor
-          type_known = track->parse_vobsub_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+          track->parse_vobsub_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
         case 0x6A: // AC3 descriptor
         case 0x7A: // EAC3 descriptor
-          type_known = track->parse_ac3_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+          track->parse_ac3_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
         case 0x7b: // DTS descriptor
-          type_known = track->parse_dts_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+          track->parse_dts_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
       }
 
@@ -931,7 +934,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
 
     // Default to AC3 if it's a PES private stream type that's missing
     // a known/more concrete descriptor tag.
-    if ((pmt_pid_info->stream_type == ISO_13818_PES_PRIVATE) && !type_known) {
+    if ((pmt_pid_info->stream_type == ISO_13818_PES_PRIVATE) && missing_tag) {
       track->type  = ES_AUDIO_TYPE;
       track->codec = codec_c::look_up(CT_A_AC3);
     }
@@ -944,8 +947,10 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
       tracks.push_back(track);
       es_to_process++;
       mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: PID %1% has type: %2%\n") % track->pid % track->codec.get_name());
-    }
-  }
+
+    } else
+      mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: PID %1% has an unknown type\n") % track->pid);
+}
 
   return 0;
 }
