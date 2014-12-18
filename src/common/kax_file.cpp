@@ -50,12 +50,14 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
 
     return element;
 
-  } catch (mtx::exception &e) {
-    mxinfo(boost::format("\nmtx ex: %1% (type: %2%)\n") % e.error() % typeid(e).name());
   } catch (std::exception &e) {
-    mxinfo(boost::format("\n\nstd ex: %1% (type: %2%)\n") % e.what() % typeid(e).name());
+    mxwarn(boost::format("%1% %2% %3%\n")
+           % (boost::format(Y("%1%: an exception occurred (message: %2%; type; %3%).")) % "kax_file_c::read_next_level1_element()" % e.what() % typeid(e).name())
+           % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
   } catch (...) {
-    mxinfo("READ X\n");
+    mxwarn(boost::format("%1% %2% %3%\n")
+           % (boost::format(Y("%1%: an unknown exception occurred.")) % "kax_file_c::read_next_level1_element()")
+           % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
   }
   return nullptr;
 }

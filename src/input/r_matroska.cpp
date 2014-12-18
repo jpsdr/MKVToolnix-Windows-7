@@ -1239,7 +1239,9 @@ kax_reader_c::read_headers_internal() {
       process_global_tags();
 
   } catch (...) {
-    mxerror(Y("matroska_reader: caught exception\n"));
+    mxwarn(boost::format("%1% %2% %3%\n")
+           % (boost::format(Y("%1%: an unknown exception occurred.")) % "kax_reader_c::read_headers_internal()")
+           % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
   }
 
   verify_tracks();
@@ -1916,7 +1918,9 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
     delete cluster;
 
   } catch (...) {
-    mxwarn(Y("matroska_reader: caught exception\n"));
+    mxwarn(boost::format("%1% %2% %3%\n")
+           % (boost::format(Y("%1%: an unknown exception occurred.")) % "kax_reader_c::read()")
+           % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
     flush_packetizers();
     return FILE_STATUS_DONE;
   }
