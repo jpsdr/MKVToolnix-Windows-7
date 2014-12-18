@@ -121,7 +121,7 @@ built. These include:
 This is optional as MKVToolNix comes with its own set of the
 libraries. It will use them if no version is found on the system.
 
-Start with the two libraries. Either get libebml 1.3.0 from
+Start with the two libraries. Either get libebml 1.3.1 from
 http://dl.matroska.org/downloads/libebml/ and libmatroska 1.4.0 from
 http://dl.matroska.org/downloads/libmatroska/ or a fresh copy from the
 git repository:
