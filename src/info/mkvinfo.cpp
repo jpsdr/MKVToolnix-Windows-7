@@ -1630,7 +1630,7 @@ process_file(const std::string &file_name) {
 
     // Find the EbmlHead element. Must be the first one.
     l0 = es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL);
-    if (!l0) {
+    if (!l0 || !Is<EbmlHead>(l0)) {
       show_error(Y("No EBML head found."));
       delete es;
 
