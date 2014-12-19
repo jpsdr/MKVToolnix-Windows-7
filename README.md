@@ -68,9 +68,9 @@ programs and libraries you absolutely need are:
   the 'auto' keyword and lambda functions. For GCC this means at least
   v4.6.0.
 
-- libebml and libmatroska for low-level access to Matroska files.
-  Instructions on how to compile them are a bit further down in this
-  file.
+- libEBML v1.3.1 or later and libMatroska v1.4.2 or later for
+  low-level access to Matroska files.  Instructions on how to compile
+  them are a bit further down in this file.
 
 - libOgg ( http://downloads.xiph.org/releases/ogg/ ) and libVorbis
   ( http://downloads.xiph.org/releases/vorbis/ ) for access to Ogg/OGM
@@ -122,7 +122,7 @@ This is optional as MKVToolNix comes with its own set of the
 libraries. It will use them if no version is found on the system.
 
 Start with the two libraries. Either get libebml 1.3.1 from
-http://dl.matroska.org/downloads/libebml/ and libmatroska 1.4.0 from
+http://dl.matroska.org/downloads/libebml/ and libmatroska 1.4.2 from
 http://dl.matroska.org/downloads/libmatroska/ or a fresh copy from the
 git repository:
 
