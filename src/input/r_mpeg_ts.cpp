@@ -621,7 +621,6 @@ void
 mpeg_ts_reader_c::read_headers() {
   try {
     size_t size_to_probe   = std::min(m_size, static_cast<uint64_t>(TS_PIDS_DETECT_SIZE));
-    auto probe_buffer      = memory_c::alloc(size_to_probe);
 
     m_detected_packet_size = detect_packet_size(m_in.get(), size_to_probe);
     m_in->setFilePointer(0);
