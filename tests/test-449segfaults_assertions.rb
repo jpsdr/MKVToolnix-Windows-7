@@ -10,10 +10,20 @@ test_merge "#{dir}/1089-2.mkv", :exit_code => :error
 test_merge "#{dir}/1089-3.mkv"
 
 test_info "#{dir}/1089-1.mkv", :args => "-v -v"
-
-# commented out because currently memory is allocated by not read to
-# fully, therefore its content is still random. Has to be fixed in
-# libmatroska/libebml.
-#test_info "#{dir}/1089-2.mkv", :args => "-v -v"
-
+test "1089-2.mkv" do
+  out = info "#{dir}/1089-2.mkv", :args => "-v -v", :output => :return
+  out.join("\n").gsub(/\(0x.*?\)/, 'xxx').md5
+end
 test_info "#{dir}/1089-3.mkv", :args => "-v -v"
+
+test_merge "#{dir}/1096-id:000000,sig:06,src:000000,op:flip1,pos:0.mkv", :exit_code => :error
+test_merge "#{dir}/1096-id:000001,sig:06,src:000000,op:flip1,pos:0.mkv", :exit_code => :error
+test_merge "#{dir}/1096-id:000002,sig:06,src:000000,op:flip2,pos:582.mkv"
+test_merge "#{dir}/1096-id:000003,sig:06,src:000000,op:flip2,pos:606.mkv"
+test_merge "#{dir}/1096-id:000004,sig:06,src:000000,op:flip4,pos:582.mkv"
+
+test_info "#{dir}/1096-id:000000,sig:06,src:000000,op:flip1,pos:0.mkv", :args => "-v -v"
+test_info "#{dir}/1096-id:000001,sig:06,src:000000,op:flip1,pos:0.mkv", :args => "-v -v"
+test_info "#{dir}/1096-id:000002,sig:06,src:000000,op:flip2,pos:582.mkv", :args => "-v -v"
+test_info "#{dir}/1096-id:000003,sig:06,src:000000,op:flip2,pos:606.mkv", :args => "-v -v"
+test_info "#{dir}/1096-id:000004,sig:06,src:000000,op:flip4,pos:582.mkv", :args => "-v -v"
