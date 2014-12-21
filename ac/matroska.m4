@@ -7,6 +7,28 @@ PKG_CHECK_MODULES([EBML],[libebml >= 1.3.1],[],[EBML_MATROSKA_INTERNAL=yes])
 PKG_CHECK_MODULES([MATROSKA],[libmatroska >= 1.4.2],[],[EBML_MATROSKA_INTERNAL=yes])
 
 if test x"$EBML_MATROSKA_INTERNAL" = xyes; then
+  if ! test -f lib/libebml/ebml/EbmlTypes.h ; then
+    echo '*** The internal version of the libEBML library is supposed to be used,'
+    echo '*** but it was not found in "lib/libebml. If this is a clone from the'
+    echo '*** git repository then submodules have to be initialized with the'
+    echo '*** following two commands:'
+    echo '***'
+    echo '*** git submodule init'
+    echo '*** git submodule update'
+    exit 1
+  fi
+
+  if ! test -f lib/libmatroska/matroska/KaxVersion.h ; then
+    echo '*** The internal version of the libMatroska library is supposed to be used,'
+    echo '*** but it was not found in "lib/libmatroska". If this is a clone from the'
+    echo '*** git repository then submodules have to be initialized with the'
+    echo '*** following two commands:'
+    echo '***'
+    echo '*** git submodule init'
+    echo '*** git submodule update'
+    exit 1
+  fi
+
   EBML_CFLAGS="-Ilib/libebml"
   EBML_LIBS="-Llib/libebml/src -lebml"
   MATROSKA_CFLAGS="-Ilib/libmatroska"
