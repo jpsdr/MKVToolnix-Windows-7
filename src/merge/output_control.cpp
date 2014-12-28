@@ -1920,6 +1920,26 @@ finish_file(bool last_file,
 
 static void establish_deferred_connections(filelist_t &file);
 
+static void
+append_chapters_for_track(filelist_t &src_file,
+                          int64_t timecode_adjustment) {
+  // Append some more chapters and adjust their timecodes by the highest
+  // timecode seen in the previous file/the track that we've been searching
+  // for above.
+  auto chapters = src_file.reader->m_chapters.get();
+  if (!chapters)
+    return;
+
+  if (!g_kax_chapters)
+    g_kax_chapters = kax_chapters_cptr{new KaxChapters};
+  else
+    align_chapter_edition_uids(*g_kax_chapters, *chapters);
+
+  adjust_chapter_timecodes(*chapters, timecode_adjustment);
+  move_chapters_by_edition(*g_kax_chapters, *chapters);
+  src_file.reader->m_chapters.reset();
+}
+
 /** \brief Append a packetizer to another one
 
    Appends a packetizer to another one. Finds the packetizer that is
@@ -2103,19 +2123,7 @@ append_track(packetizer_t &ptzr,
     ptzr.packetizer->connect(old_packetizer);
   }
 
-  // Append some more chapters and adjust their timecodes by the highest
-  // timecode seen in the previous file/the track that we've been searching
-  // for above.
-  KaxChapters *chapters = src_file.reader->m_chapters.get();
-  if (chapters) {
-    if (!g_kax_chapters)
-      g_kax_chapters = kax_chapters_cptr{new KaxChapters};
-    else
-      align_chapter_edition_uids(*g_kax_chapters, *chapters);
-    adjust_chapter_timecodes(*chapters, timecode_adjustment);
-    move_chapters_by_edition(*g_kax_chapters, *chapters);
-    src_file.reader->m_chapters.reset();
-  }
+  append_chapters_for_track(src_file, timecode_adjustment);
 
   ptzr.deferred = false;
 }
