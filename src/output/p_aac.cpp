@@ -63,7 +63,7 @@ aac_packetizer_c::get_aac_packet(aac_header_c *aacheader) {
     }
     return nullptr;
   }
-  if ((pos + aacheader->bytes) > size)
+  if ((pos + static_cast<int>(aacheader->bytes)) > size)
     return nullptr;
 
   m_bytes_skipped += pos;
@@ -83,9 +83,8 @@ aac_packetizer_c::get_aac_packet(aac_header_c *aacheader) {
     int down_shift     = 8 - up_shift;
     unsigned char *src = packet_buffer + pos + aacheader->header_bit_size / 8;
 
-    int i;
     buf[0] = src[0] << up_shift;
-    for (i = 1; i < aacheader->data_byte_size; i++) {
+    for (auto i = 1u; i < aacheader->data_byte_size; i++) {
       buf[i - 1] |= (src[i] >> down_shift);
       buf[i]      = (src[i] << up_shift);
     }

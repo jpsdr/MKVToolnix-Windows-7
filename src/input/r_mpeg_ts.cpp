@@ -244,15 +244,15 @@ mpeg_ts_track_c::new_stream_a_aac() {
 
   auto parser = aac::parser_c{};
   parser.add_bytes(m_probe_data->get_buffer(), m_probe_data->get_size());
-  if (!parser.frames_available())
+  if (!parser.frames_available() || !parser.headers_parsed())
     return FILE_STATUS_MOREDATA;
 
   m_aac_frame = parser.get_frame();
 
   mxdebug_if(reader.m_debug_aac, boost::format("first AAC header: %1%\n") % m_aac_frame.to_string());
 
-  a_channels    = m_aac_frame.m_channels;
-  a_sample_rate = m_aac_frame.m_sample_rate;
+  a_channels    = m_aac_frame.m_header.channels;
+  a_sample_rate = m_aac_frame.m_header.sample_rate;
 
   return 0;
 }
@@ -1109,7 +1109,7 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
   if (!track->data_ready)
     return true;
 
-  mxverb(3, boost::format("mpeg_ts: Table/PES completed (%1%) for PID %2%\n") % track->pes_payload->get_size() % table_pid);
+  mxverb(3, boost::format("mpeg_ts: Table/PES completed (%1%) for PID %2% at file position %3%\n") % track->pes_payload->get_size() % table_pid % m_in->getFilePointer());
 
   if (input_status == INPUT_PROBE)
     probe_packet_complete(track);
@@ -1362,12 +1362,12 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
 
 void
 mpeg_ts_reader_c::create_aac_audio_packetizer(mpeg_ts_track_ptr const &track) {
-  auto aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_frame.m_id, track->m_aac_frame.m_profile, track->m_aac_frame.m_sample_rate, track->m_aac_frame.m_channels, false, true);
+  auto aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_frame.m_header.id, track->m_aac_frame.m_header.profile, track->m_aac_frame.m_header.sample_rate, track->m_aac_frame.m_header.channels, false, true);
   track->ptzr         = add_packetizer(aac_packetizer);
   track->converter.reset(new aac_framing_packet_converter_c{PTZR(track->ptzr)});
 
-  if (AAC_PROFILE_SBR == track->m_aac_frame.m_profile)
-    aac_packetizer->set_audio_output_sampling_freq(track->m_aac_frame.m_sample_rate * 2);
+  if (AAC_PROFILE_SBR == track->m_aac_frame.m_header.profile)
+    aac_packetizer->set_audio_output_sampling_freq(track->m_aac_frame.m_header.sample_rate * 2);
   show_packetizer_info(m_ti.m_id, aac_packetizer);
 }
 
