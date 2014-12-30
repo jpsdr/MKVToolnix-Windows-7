@@ -145,8 +145,12 @@ public:
   }
 
   void get_bytes(unsigned char *buf, size_t n) {
-    size_t idx;
-    for (idx = 0; idx < n; ++idx)
+    if (8 == m_bits_valid) {
+      get_bytes_byte_aligned(buf, n);
+      return;
+    }
+
+    for (auto idx = 0u; idx < n; ++idx)
       buf[idx] = get_bits(8);
   }
 
@@ -181,6 +185,18 @@ public:
 
   void skip_bit() {
     set_bit_position(get_bit_position() + 1);
+  }
+protected:
+  void get_bytes_byte_aligned(unsigned char *buf, size_t n) {
+    auto bytes_to_copy = std::min<size_t>(n, m_end_of_data - m_byte_position);
+    std::memcpy(buf, m_byte_position, bytes_to_copy);
+
+    m_byte_position += bytes_to_copy;
+
+    if (bytes_to_copy < n) {
+      m_out_of_data = true;
+      throw mtx::mm_io::end_of_file_x();
+    }
   }
 };
 typedef std::shared_ptr<bit_reader_c> bit_reader_cptr;
