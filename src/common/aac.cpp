@@ -429,18 +429,17 @@ parser_c::decode_adts_header(unsigned char const *buffer,
     if (!protection_absent)
       bc.skip_bits(16);
 
-    frame.m_header.header_bit_size = bc.get_bit_position();
-
-    bc.byte_align();
-
+    frame.m_header.header_bit_size  = bc.get_bit_position();
     frame.m_header.sample_rate      = g_aac_sampling_freq[sfreq_index];
     frame.m_header.bit_rate         = 1024;
-    frame.m_header.header_byte_size = bc.get_bit_position() / 8;
+    frame.m_header.header_byte_size = (bc.get_bit_position() + 7) / 8;
     frame.m_header.data_byte_size   = frame.m_header.bytes - frame.m_header.header_byte_size;
     frame.m_header.is_valid         = true;
 
-    if (m_copy_data)
-      frame.m_data                  = memory_c::clone(&buffer[frame.m_header.header_byte_size], frame.m_header.data_byte_size);
+    if (m_copy_data) {
+      frame.m_data = memory_c::alloc(frame.m_header.data_byte_size);
+      bc.get_bytes(frame.m_data->get_buffer(), frame.m_header.data_byte_size);
+    }
 
     push_frame(frame);
 
