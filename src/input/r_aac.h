@@ -27,7 +27,7 @@ class aac_reader_c: public generic_reader_c {
 private:
   memory_cptr m_chunk;
   bool m_sbr_status_set;
-  aac_header_c m_aacheader;
+  aac::header_c m_aacheader;
   aac::parser_c m_parser;
 
 public:

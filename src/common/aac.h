@@ -42,9 +42,14 @@
 #define AAC_LOAS_SYNC_WORD_MASK  0xffe000 // first 11 of 24 bits
 #define AAC_LOAS_FRAME_SIZE_MASK 0x001fff // last 13 of 24 bits
 
-extern const int g_aac_sampling_freq[16];
+namespace aac {
 
-class aac_header_c {
+unsigned int get_sampling_freq_idx(unsigned int sampling_freq);
+bool parse_codec_id(const std::string &codec_id, int &id, int &profile);
+bool parse_audio_specific_config(const unsigned char *data, size_t size, int &profile, int &channels, int &sample_rate, int &output_sample_rate, bool &sbr);
+int create_audio_specific_config(unsigned char *data, int profile, int channels, int sample_rate, int output_sample_rate, bool sbr);
+
+class header_c {
 public:
   unsigned int object_type, extension_object_type, profile, sample_rate, output_sample_rate, bit_rate, channels, bytes;
   unsigned int id;                       // 0 = MPEG-4, 1 = MPEG-2
@@ -56,12 +61,12 @@ protected:
   bit_reader_c *m_bc;
 
 public:
-  aac_header_c();
+  header_c();
 
   std::string to_string() const;
 
 public:
-  static aac_header_c from_audio_specific_config(const unsigned char *data, size_t size);
+  static header_c from_audio_specific_config(const unsigned char *data, size_t size);
 
   void parse_audio_specific_config(const unsigned char *data, size_t size, bool look_for_sync_extension = true);
   void parse_audio_specific_config(bit_reader_c &bc, bool look_for_sync_extension = true);
@@ -75,27 +80,20 @@ protected:
   void read_error_protection_specific_config();
 };
 
-bool operator ==(const aac_header_c &h1, const aac_header_c &h2);
+bool operator ==(const header_c &h1, const header_c &h2);
 
 inline std::ostream &
 operator <<(std::ostream &out,
-            aac_header_c const &header) {
+            header_c const &header) {
   out << header.to_string();
   return out;
 }
-
-namespace aac {
-
-unsigned int get_sampling_freq_idx(unsigned int sampling_freq);
-bool parse_codec_id(const std::string &codec_id, int &id, int &profile);
-bool parse_audio_specific_config(const unsigned char *data, size_t size, int &profile, int &channels, int &sample_rate, int &output_sample_rate, bool &sbr);
-int create_audio_specific_config(unsigned char *data, int profile, int channels, int sample_rate, int output_sample_rate, bool sbr);
 
 class latm_parser_c {
 protected:
   int m_audio_mux_version, m_audio_mux_version_a;
   size_t m_fixed_frame_length, m_frame_length_type, m_frame_bit_offset, m_frame_length;
-  aac_header_c m_header;
+  header_c m_header;
   bit_reader_c *m_bc;
   bool m_config_parsed;
   debugging_option_c m_debug;
@@ -104,7 +102,7 @@ public:
   latm_parser_c();
 
   bool config_parsed() const;
-  aac_header_c const &get_header() const;
+  header_c const &get_header() const;
   size_t get_frame_bit_offset() const;
   size_t get_frame_length() const;
 
@@ -121,7 +119,7 @@ protected:
 
 class frame_c {
 public:
-  aac_header_c m_header;
+  header_c m_header;
   uint64_t m_stream_position;
   size_t m_garbage_size;
   timecode_c m_timecode;
@@ -160,7 +158,7 @@ protected:
   size_t m_garbage_size, m_num_frames_found, m_abort_after_num_frames;
   bool m_require_frame_at_first_byte, m_copy_data;
   multiplex_type_e m_multiplex_type;
-  aac_header_c m_header;
+  header_c m_header;
   latm_parser_c m_latm_parser;
   debugging_option_c m_debug;
 
@@ -199,6 +197,6 @@ protected:
 };
 typedef std::shared_ptr<parser_c> parser_cptr;
 
-}
+} // namespace aac
 
 #endif // MTX_COMMON_AACCOMMON_H

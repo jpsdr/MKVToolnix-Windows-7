@@ -20,18 +20,20 @@
 #include "common/mp4.h"
 #include "common/strings/formatting.h"
 
-const int g_aac_sampling_freq[16] = {96000, 88200, 64000, 48000, 44100, 32000,
-                                     24000, 22050, 16000, 12000, 11025,  8000,
-                                      7350,     0,     0,     0}; // filling
+namespace aac {
+
+static unsigned int const s_sampling_freq[16] = {
+  96000, 88200, 64000, 48000, 44100, 32000,
+  24000, 22050, 16000, 12000, 11025,  8000,
+   7350,     0,     0,     0 // filling
+};
 
 static debugging_option_c s_debug_parse_data{"aac_parse_audio_specific_config|aac_full"};
-
-namespace aac {
 
 unsigned int
 get_sampling_freq_idx(unsigned int sampling_freq) {
   for (auto i = 0; i < 16; i++)
-    if (sampling_freq >= (g_aac_sampling_freq[i] - 1000))
+    if (sampling_freq >= (s_sampling_freq[i] - 1000))
       return i;
 
   return 0;                     // should never happen
@@ -78,7 +80,7 @@ parse_audio_specific_config(const unsigned char *data,
                             int &sample_rate,
                             int &output_sample_rate,
                             bool &sbr) {
-  auto h = aac_header_c::from_audio_specific_config(data, size);
+  auto h = header_c::from_audio_specific_config(data, size);
   if (!h.is_valid)
     return false;
 
@@ -136,7 +138,7 @@ latm_parser_c::config_parsed()
   return m_config_parsed;
 }
 
-aac_header_c const &
+header_c const &
 latm_parser_c::get_header()
   const {
   return m_header;
@@ -176,7 +178,7 @@ latm_parser_c::parse_audio_specific_config(size_t asc_length) {
   if (!asc_length)
     throw false;
 
-  auto new_header = aac_header_c{};
+  auto new_header = header_c{};
   new_header.parse_audio_specific_config(*m_bc, look_for_sync_extension);
   if (!new_header.is_valid)
     throw false;
@@ -353,7 +355,7 @@ frame_c::frame_c() {
 
 void
 frame_c::init() {
-  m_header           = aac_header_c{};
+  m_header           = header_c{};
   m_stream_position  = 0;
   m_garbage_size     = 0;
   m_timecode.reset();
@@ -520,7 +522,7 @@ parser_c::decode_adts_header(unsigned char const *buffer,
       bc.skip_bits(16);
 
     frame.m_header.header_bit_size  = bc.get_bit_position();
-    frame.m_header.sample_rate      = g_aac_sampling_freq[sfreq_index];
+    frame.m_header.sample_rate      = s_sampling_freq[sfreq_index];
     frame.m_header.bit_rate         = 1024;
     frame.m_header.header_byte_size = (bc.get_bit_position() + 7) / 8;
     frame.m_header.data_byte_size   = frame.m_header.bytes - frame.m_header.header_byte_size;
@@ -807,9 +809,7 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
 
 // ------------------------------------------------------------
 
-} // namespace aac
-
-aac_header_c::aac_header_c()
+header_c::header_c()
   : object_type{}
   , extension_object_type{}
   , profile{}
@@ -828,34 +828,34 @@ aac_header_c::aac_header_c()
 }
 
 std::string
-aac_header_c::to_string()
+header_c::to_string()
   const {
   return (boost::format("sample_rate: %1%; bit_rate: %2%; channels: %3%; bytes: %4%; id: %5%; profile: %6%; header_bit_size: %7%; header_byte_size: %8%; data_byte_size: %9%; is_sbr: %10%; is_valid: %11%")
           % sample_rate % bit_rate % channels % bytes % id % profile % header_bit_size % header_byte_size % data_byte_size % is_sbr % is_valid).str();
 }
 
 int
-aac_header_c::read_object_type() {
+header_c::read_object_type() {
   int object_type = m_bc->get_bits(5);
   return 31 == object_type ? 32 + m_bc->get_bits(6) : object_type;
 }
 
 int
-aac_header_c::read_sample_rate() {
+header_c::read_sample_rate() {
   int idx = m_bc->get_bits(4);
-  return 0x0f == idx ? m_bc->get_bits(24) : g_aac_sampling_freq[idx];
+  return 0x0f == idx ? m_bc->get_bits(24) : s_sampling_freq[idx];
 }
 
-aac_header_c
-aac_header_c::from_audio_specific_config(const unsigned char *data,
-                                         size_t size) {
-  aac_header_c header;
+header_c
+header_c::from_audio_specific_config(unsigned char const *data,
+                                     size_t size) {
+  header_c header;
   header.parse_audio_specific_config(data, size);
   return header;
 }
 
 void
-aac_header_c::read_eld_specific_config() {
+header_c::read_eld_specific_config() {
   if (m_bc->get_bit())          // frame_length_flag
     throw false;
 
@@ -882,7 +882,7 @@ aac_header_c::read_eld_specific_config() {
 }
 
 void
-aac_header_c::read_ga_specific_config() {
+header_c::read_ga_specific_config() {
   m_bc->skip_bit();             // frame_length_flag
   if (m_bc->get_bit())          // depends_on_core_coder
     m_bc->skip_bits(14);        // core_coder_delay
@@ -907,15 +907,15 @@ aac_header_c::read_ga_specific_config() {
 }
 
 void
-aac_header_c::read_error_protection_specific_config() {
+header_c::read_error_protection_specific_config() {
   mxerror(boost::format("aac_error_proection_specific_config. %1%\n") % BUGMSG);
 }
 
 void
-aac_header_c::read_program_config_element() {
+header_c::read_program_config_element() {
   m_bc->skip_bits(4);           // element_instance_tag
   object_type        = m_bc->get_bits(2);
-  sample_rate        = g_aac_sampling_freq[m_bc->get_bits(4)];
+  sample_rate        = s_sampling_freq[m_bc->get_bits(4)];
   int num_front_chan = m_bc->get_bits(4);
   int num_side_chan  = m_bc->get_bits(4);
   int num_back_chan  = m_bc->get_bits(4);
@@ -946,8 +946,8 @@ aac_header_c::read_program_config_element() {
 }
 
 void
-aac_header_c::parse_audio_specific_config(bit_reader_c &bc,
-                                          bool look_for_sync_extension) {
+header_c::parse_audio_specific_config(bit_reader_c &bc,
+                                      bool look_for_sync_extension) {
   m_bc = &bc;
 
   try {
@@ -1021,9 +1021,9 @@ aac_header_c::parse_audio_specific_config(bit_reader_c &bc,
 }
 
 void
-aac_header_c::parse_audio_specific_config(const unsigned char *data,
-                                          size_t size,
-                                          bool look_for_sync_extension) {
+header_c::parse_audio_specific_config(const unsigned char *data,
+                                      size_t size,
+                                      bool look_for_sync_extension) {
   if (size < 2)
     return;
 
@@ -1034,11 +1034,13 @@ aac_header_c::parse_audio_specific_config(const unsigned char *data,
 }
 
 bool
-operator ==(const aac_header_c &h1,
-            const aac_header_c &h2) {
+operator ==(const header_c &h1,
+            const header_c &h2) {
   return (h1.sample_rate == h2.sample_rate)
       && (h1.bit_rate    == h2.bit_rate)
       && (h1.channels    == h2.channels)
       && (h1.id          == h2.id)
       && (h1.profile     == h2.profile);
 }
+
+} // namespace aac
