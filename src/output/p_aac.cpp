@@ -30,7 +30,7 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    bool headerless)
   : generic_packetizer_c(p_reader, p_ti)
   , m_packetno(0)
-  , m_last_timecode(-1)
+  , m_last_timecode{headerless ? -1 : 0}
   , m_num_packets_same_tc(0)
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
@@ -139,14 +139,21 @@ aac_packetizer_c::process(packet_cptr packet) {
     return FILE_STATUS_MOREDATA;
 
   while (m_parser.frames_available()) {
-    auto frame  = m_parser.get_frame();
-    auto packet = std::make_shared<packet_t>(frame.m_data, frame.m_timecode.to_ns(m_packetno * m_s2tc), m_single_packet_duration);
+    auto frame    = m_parser.get_frame();
+    auto timecode = frame.m_timecode.to_ns(m_last_timecode + m_packetno * m_s2tc);
+    auto packet   = std::make_shared<packet_t>(frame.m_data, timecode, m_single_packet_duration);
 
     if (verbose && frame.m_garbage_size)
       mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n")) % frame.m_garbage_size);
 
     add_packet(packet);
-    m_packetno++;
+
+    if (frame.m_timecode.valid()) {
+      m_last_timecode = timecode;
+      m_packetno      = 1;
+
+    } else
+      ++m_packetno;
   }
 
   return FILE_STATUS_MOREDATA;
