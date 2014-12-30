@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-10-22 13:55+0200\n"
-"PO-Revision-Date: 2014-11-05 08:47+0100\n"
+"PO-Revision-Date: 2014-12-28 15:02+0100\n"
 "Last-Translator: Daniel Kluz <sir.daniel.k@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.7.1\n"
 
 #: src/extract/xtr_tta.cpp:107
 #, boost-format
@@ -292,6 +292,8 @@ msgid ""
 "  --disable-track-statistics-tags\n"
 "                           Do not write tags with track statistics.\n"
 msgstr ""
+"  --disable-track-statistics-tags\n"
+"                           Nie zapisuj tagów ze statystykami ścieżki.\n"
 
 #: src/merge/mkvmerge.cpp:243
 msgid ""
@@ -1833,7 +1835,7 @@ msgstr "---wszystkie---"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "---common---"
-msgstr "---podstawowe---"
+msgstr "---najczęstsze---"
 
 #: src/mmg/cli_options_dlg.cpp:94
 msgid "--cluster-length REPLACEME"
@@ -1849,6 +1851,9 @@ msgid ""
 "'mkvmerge --identify-verbose'. These are usually simply numbered starting "
 "from 0 (e.g. '2')."
 msgstr ""
+"1. Liczba, która będzie interpretowana jako ID załącznika, wyświetlana przez "
+"\"mkvmerge --identify-verbose\". Z reguły są to numery mogące rozpoczynać "
+"się od 0 (np.: \"2\")."
 
 #: src/mmg/tabs/input_format.cpp:260
 #, boost-format
@@ -1861,7 +1866,7 @@ msgstr ""
 
 #: src/info/mkvinfo.cpp:693
 msgid "1: all frames"
-msgstr ""
+msgstr "1: wszystkie klatki"
 
 #: src/mmg/tabs/input_format.cpp:207
 msgid "2 bytes"
@@ -1873,6 +1878,9 @@ msgid ""
 "attachment's unique ID (UID) as listed by 'mkvmerge --identify-verbose'. "
 "These are usually random-looking numbers (e.g. '128975986723')."
 msgstr ""
+"2. Liczba z przedrostkiem \"=\", która będzie interpretowana jako unikalne "
+"ID załącznika (UID), wyświetlane przez \"mkvmerge --identify-verbose\". Są "
+"to numery z cyframi przypadkowej kolejności (np.: \"128975986723\")"
 
 #: src/mmg/tabs/input_format.cpp:262
 msgid ""
@@ -1884,7 +1892,7 @@ msgstr ""
 
 #: src/info/mkvinfo.cpp:695
 msgid "2: codec private data"
-msgstr ""
+msgstr "2: dane własne kodeka"
 
 #: src/propedit/propedit_cli_parser.cpp:244
 msgid ""
@@ -1892,6 +1900,9 @@ msgid ""
 "applies to all attachments whose name or MIME type respectively equals "
 "<value>."
 msgstr ""
+"3. Zarówno \"name:<wartość>\" lub \"mime-type:<wartość>\", którymi selektor "
+"oznacza wszystkie załączniki mające taką samą <wartość> opcji name lub mime-"
+"type."
 
 #: src/mmg/tabs/input_format.cpp:208
 msgid "4 bytes"
@@ -2099,7 +2110,7 @@ msgstr "ALAC (Apple Lossless Audio Codec)"
 
 #: src/extract/xtr_alac.cpp:51
 msgid "ALAC private data size mismatch\n"
-msgstr ""
+msgstr "Dane własne kodeka ALAC nie są spójne\n"
 
 #: src/mmg/header_editor/value_page.cpp:143
 msgid ""
@@ -2156,15 +2167,15 @@ msgstr "Informacje o mkvinfo"
 
 #: src/propedit/propedit_cli_parser.cpp:210
 msgid "Actions for handling attachments"
-msgstr ""
+msgstr "Działania związane z załącznikami"
 
 #: src/propedit/propedit_cli_parser.cpp:195
 msgid "Actions for handling properties"
-msgstr ""
+msgstr "Działania związane z właściwościami"
 
 #: src/propedit/propedit_cli_parser.cpp:203
 msgid "Actions for handling tags and chapters"
-msgstr ""
+msgstr "Działania związane z tagami i rozdziałami"
 
 #: src/mmg/cli_options_dlg.cpp:48
 msgid "Add"
@@ -2286,6 +2297,8 @@ msgstr "Wszystkie znane nazwy właściwości i ich znaczenia.\n"
 msgid ""
 "All other strings work just like the track header selectors (see above)."
 msgstr ""
+"Wszystkie pozostałe wyrażenia działają jako selektory nagłówków ścieżek "
+"(patrz wyżej)."
 
 #: src/info/wxwidgets_ui.cpp:269
 msgid ""
@@ -2329,7 +2342,7 @@ msgstr ""
 #: src/input/r_wavpack.cpp:87
 #, boost-format
 msgid "Also using the correction file '%1%c'.\n"
-msgstr ""
+msgstr "Również użycie pliku korekcyjnego \"%1%c\".\n"
 
 #: src/mmg/options/mmg.cpp:71
 msgid "Always on top"
@@ -2465,7 +2478,7 @@ msgstr "Wyodrębnianie załączników"
 
 #: src/propedit/propedit_cli_parser.cpp:240
 msgid "Attachment selectors"
-msgstr ""
+msgstr "Selektory załączników"
 
 #: src/mmg/tabs/attachments.cpp:164
 msgid "Attachment style:"
@@ -3273,7 +3286,6 @@ msgid "Create WebM compliant file"
 msgstr "Stwórz plik WebM"
 
 #: src/mmg/tabs/global.cpp:370
-#, fuzzy
 msgid ""
 "Create a WebM compliant file. mkvmerge also turns this on if the output file "
 "name's extension is \"webm\". This mode enforces several restrictions. The "
@@ -3283,9 +3295,9 @@ msgid ""
 msgstr ""
 "Stwórz plik zgodny z formatem WebM. Mkvmerge samodzielnie włączy tę opcję, "
 "jeśli plik wyjściowy będzie miał rozszerzenie \".webm\". Format ten narzuca "
-"pewne restrykcje. Jedynymi dozwolonymi kodekami są VP8 dla ścieżki wideo i "
-"Vorbis dla ścieżki audio. Ani rozdziały ani tagi nie są dozwolone. Nagłówek "
-"DocType jest również zmieniany na \"webm\"."
+"pewne restrykcje. Jedynymi dozwolonymi kodekami są VP8/VP9 dla ścieżki wideo "
+"i Vorbis/Opus dla ścieżki audio. Ani rozdziały ani tagi nie są dozwolone. "
+"Nagłówek DocType jest również zmieniany na \"webm\"."
 
 #: src/mmg/mmg_dialog.cpp:303
 msgid "Create a new chapter file"
@@ -3435,9 +3447,8 @@ msgid "Current version:"
 msgstr "Obecna wersja:"
 
 #: src/mmg/mmg_dialog.cpp:1821
-#, fuzzy
 msgid "Currently no newer version is available online."
-msgstr "Dostępna jest nowa wersja programu."
+msgstr "Obecnie nie jest dostępna nowa wersja programu."
 
 #: src/mmg/jobs.cpp:513
 msgid "D&elete"
@@ -3713,7 +3724,7 @@ msgstr "Wersja EBML: %1%"
 #: src/merge/output_control.cpp:1433
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
-msgstr "NIEGODNY błąd wewnętrzny! (nieznany typ pliku). %1%\n"
+msgstr "DIABELSKI błąd wewnętrzny! (nieznany typ pliku). %1%\n"
 
 #: src/mmg/tabs/chapters.cpp:354
 msgid ""
@@ -3756,7 +3767,7 @@ msgstr "Edytuj kolejne części pliku źródłowego"
 
 #: src/propedit/propedit_cli_parser.cpp:224
 msgid "Edit selectors for properties"
-msgstr ""
+msgstr "Selektory dla edytowania właściwości"
 
 #: src/mmg/tabs/chapters.cpp:530
 msgid "Edition"
@@ -4068,7 +4079,7 @@ msgstr "Błąd tworzenia pliku tymczasowego '%1%': %2%\n"
 #, boost-format
 msgid "Failed to parse the USF codec private data for track %1%: %2%\n"
 msgstr ""
-"Nie udało się wczytać prywatnych danych kodeka USF dla ścieżki %1%: %2%\n"
+"Nie udało się wczytać danych własnych kodeka USF dla ścieżki %1%: %2%\n"
 
 #: src/info/mkvinfo.cpp:522
 #, boost-format
@@ -4295,18 +4306,26 @@ msgid ""
 "magical value -1 is used then mkvmerge will use sample precision even if a "
 "video track is present."
 msgstr ""
+"Wymusza zmianę skali kodów czasowych na WARTOŚĆ. Musisz zamienić słowo "
+"WARTOŚĆ na wartość pomiędzy 1000 a 10000000 albo na -1. Normalnie mkvmerge "
+"używa wartości 1000000 która oznacza, że kody czasowe i długość klatek będą "
+"miały precyzję 1ms. Dla plików, które nie zawierają ścieżek obrazu a mają "
+"przynajmniej jedną ścieżkę dźwiękową, mkvmerge automatycznie wybiera skalę "
+"kodów czasowych i długość klatki o precyzji jednego sampla. To powoduje "
+"większy narzut wielkości pliku ale pozwala precyzyjnie wyszukiwać w ścieżce "
+"i ekstrachować. Jeśli zostanie użyta magiczna wartość -1, wtedy mkvmerge "
+"użyje precyzji jednego sampla, nawet gdy jest obecna ścieżka obrazu."
 
 #: src/mmg/tabs/input.cpp:202
 msgid "Format specific options"
 msgstr "Opcje formatu ścieżki"
 
 #: src/mpegparser/M2VParser.cpp:495
-#, fuzzy
 msgid ""
 "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr ""
-"Znaleziono w otwartym GOP klatkę typu B bez drugiej klatki do której się "
-"odnosi.  Napraw ścieżkę wideo MPEG2 zanim spróbujesz ponownie ją muksować.\n"
+"Znaleziono przynajmniej jedną klatkę typu B, która nie posiada odniesienia w "
+"otwartej grupie klatek GOP.\n"
 
 #: src/mmg/tabs/input_format.cpp:236
 msgid "FourCC:"
@@ -5061,7 +5080,7 @@ msgstr "Nieprawidłowa sekunda: %1%"
 #: src/propedit/propedit_cli_parser.cpp:116
 #, boost-format
 msgid "Invalid selector in '%1% %2%'.\n"
-msgstr "Nieprawidłowy rozdzielnik w \"%1% %2%\".\n"
+msgstr "Nieprawidłowy selektor w \"%1% %2%\".\n"
 
 #: src/merge/mkvmerge.cpp:886
 #, boost-format
@@ -5666,6 +5685,8 @@ msgid ""
 "Modification of properties in the section '%1%' was requested, but no "
 "corresponding level 1 element was found in the file. %2%\n"
 msgstr ""
+"Zostało wydane żądanie modyfikacji właściwości w sekcji \"%1%\", ale nie "
+"został znaleziony w pliku żaden odpowiedni element poziomu1. %2%\n"
 
 #: src/info/mkvinfo.cpp:1238
 msgid "More"
@@ -5831,12 +5852,16 @@ msgid ""
 "of %3% will be used instead. Please keep that in mind if mkvmerge aborts "
 "with an error message regarding invalid '--append-to' options.\n"
 msgstr ""
+"Nie został podany sposób mapowania ścieżek aby scalić plik o numerze %1% "
+"(\"%2%\"). W zamian zostanie użyte domyślne mapowanie %3%. Prosze mieć to na "
+"uwadze, gdy mkvmerge zatrzyma proces z błędęm odnośnie nieprawidłowej opcji "
+"\"--append-to\".\n"
 
 #: src/propedit/attachment_target.cpp:191
 #: src/propedit/attachment_target.cpp:199
 #, boost-format
 msgid "No attachment matched the spec '%1%'.\n"
-msgstr ""
+msgstr "Żaden załącznik nie spełnia wymogów specyfikacji \"%1%\".\n"
 
 #: src/mmg/tabs/chapters.cpp:818
 msgid "No chapter entries have been create yet."
@@ -5923,6 +5948,8 @@ msgstr "Nie podano ID ścieżki w  '--%1% %2%'.\n"
 #, boost-format
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr ""
+"Nie znaleziono żadnej ścieżki odnoszącej się do specyfikacji edytowania \"%1%"
+"\". %2%\n"
 
 #: src/extract/tracks.cpp:329
 #, boost-format
@@ -6076,6 +6103,8 @@ msgstr "Dozwolony tylko jeden plik wejściowy.\n"
 #: src/common/xml/xml.h:92
 msgid "Only one instance of <%1%> is allowed beneath <%2%> at position %3%."
 msgstr ""
+"Tylko jedno wystąpienie <%1%> jest dozwolone podlegające pod <%2%> w pozycji "
+"%3%."
 
 #: src/common/xml/ebml_tags_converter.cpp:96
 msgid ""
@@ -6102,6 +6131,10 @@ msgid ""
 "don't specify any mapping (in which case the default mapping will be used) "
 "or specify a mapping for all tracks that are to be copied.\n"
 msgstr ""
+"Sposób mapowania ścieżek aby scalić plik o numerze %1% (\"%2%\") został "
+"podany tylko częściowo. Albo nie podawaj żadnego mapowania (w którym to "
+"przypadku domyślne mapowanie ścieżek zostanie użyte), albo podaj mapowanie "
+"dla wszystkich ścieżek, które mają być skopiowane.\n"
 
 #: src/mmg/options/mmg.cpp:135
 msgid ""
@@ -6999,7 +7032,7 @@ msgstr ""
 
 #: src/mmg/tabs/chapters.cpp:85
 msgid "Select values to be applied"
-msgstr "Wybierz wartości do zastosowania"
+msgstr "Wybierz wartości które będą zastosowane"
 
 #: src/mmg/tabs/input_extra.cpp:127
 msgid ""
@@ -7104,6 +7137,9 @@ msgid ""
 "Sets the Matroska file section that all following add/set/delete actions "
 "operate on (see below and man page for syntax)"
 msgstr ""
+"Ustala zakres pliku Matroski, na którym to zakresie będą prowadzone "
+"działania add/set/delete czyli dodanie/ustawienie/usunięcie (patrz poniżej i "
+"na stronie głównej za opcjami)"
 
 #: src/propedit/propedit_cli_parser.cpp:193
 msgid "Sets the Matroska parser mode to 'fast' (default) or 'full'"
@@ -7589,7 +7625,7 @@ msgstr "Obsługiwane typy plików:\n"
 
 #: src/common/cli_parser.cpp:174 src/merge/mkvmerge.cpp:79
 msgid "Suppress status output."
-msgstr ""
+msgstr "Wycisz komunikaty wyjścia."
 
 #: src/input/r_tta.h:38 src/output/p_tta.h:34
 msgid "TTA"
@@ -7619,7 +7655,7 @@ msgstr "Pliki tagów (*.xml;*.txt)|*.xml;*.txt|%s"
 
 #: src/propedit/propedit_cli_parser.cpp:235
 msgid "Tag selectors"
-msgstr ""
+msgstr "Selektory tagów"
 
 #: src/info/mkvinfo.cpp:1525 src/propedit/options.cpp:177
 msgid "Tags"
@@ -7662,6 +7698,8 @@ msgstr ""
 #: src/mmg/cli_options_dlg.cpp:111
 msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr ""
+"Ta opcja mówi mkvmerge aby nie zapisywać tagów ze statystykami dla każdej ze "
+"ścieżek."
 
 #: src/mmg/cli_options_dlg.cpp:105
 msgid ""
@@ -7840,6 +7878,8 @@ msgid ""
 "The Vorbis codebooks are different; such tracks cannot be concatenated "
 "without reencoding"
 msgstr ""
+"Pliki Vorbis różnią się specyfikacją codebook; takie ścieżki nie mogą być "
+"złączone bez ich ponownej kompresji"
 
 #: src/common/chapters/chapters.cpp:375
 #: src/common/xml/ebml_chapters_converter.cpp:215
@@ -7861,7 +7901,7 @@ msgstr "Plik rozdziałów XML \"%1%\" nie może zostać wczytany.\n"
 
 #: src/common/xml/ebml_converter.cpp:349
 msgid "The XML root element is not a master element."
-msgstr ""
+msgstr "Element główny XML nie jest elementem nadrzędnym."
 
 #: src/common/xml/ebml_segmentinfo_converter.cpp:91
 #, boost-format
@@ -8000,7 +8040,7 @@ msgstr "Kodek \"%1%\" nie może zostać użyty w pliku WebM.\n"
 #: src/output/p_flac.cpp:101 src/merge/connection_checks.h:61
 #, boost-format
 msgid "The codec's private data does not match (lengths: %1% and %2%)."
-msgstr ""
+msgstr "Dane własne kodeka nie pasują do siebie (długości: %1% i %2%)."
 
 #: src/output/p_hevc.cpp:102 src/output/p_mpeg4_p10.cpp:128
 #, boost-format
@@ -8008,10 +8048,12 @@ msgid ""
 "The codec's private data does not match. Both have the same length (%1%) but "
 "different content."
 msgstr ""
+"Dane własne kodeka nie pasują do siebie. Oba maja taką samą długość (%1%) "
+"ale różną zawartość."
 
 #: src/input/r_wavpack.cpp:72
 msgid "The correction file header was not read correctly.\n"
-msgstr ""
+msgstr "Nagłówek pliku korekcyjnego nie został prawidłowo wczytany.\n"
 
 #: src/mmg/options/chapters.cpp:120
 #, c-format, boost-format
@@ -8147,6 +8189,8 @@ msgid ""
 "The edit specifications '%1%' and '%2%' resolve to the same track with the "
 "UID %3%.\n"
 msgstr ""
+"Specyfikacje edytowania \"%1%\" i \"%2%\" kierują do tej samej ścieżki z UID "
+"%3%.\n"
 
 #: src/mmg/tabs/chapters.cpp:360
 msgid ""
@@ -8638,7 +8682,7 @@ msgid ""
 "specification in '%2%'.\n"
 msgstr ""
 "Nazwa \"%1%\" nie jest prawidłową nazwą właściwości dla obecnej specyfikacji "
-"w \"%2%\".\n"
+"edytowania w \"%2%\".\n"
 
 #: src/merge/mkvmerge.cpp:1681
 #, boost-format
@@ -8796,7 +8840,7 @@ msgstr "Przyczyna jest nieznana."
 #: src/common/xml/ebml_converter.cpp:341
 #, boost-format
 msgid "The root element must be <%1%>."
-msgstr ""
+msgstr "Elementem głównym musi być <%1%>."
 
 #: src/merge/connection_checks.h:19
 msgid "The sample rate of the two audio tracks is different: %1% and %2%"
@@ -8865,11 +8909,11 @@ msgstr ""
 
 #: src/propedit/propedit_cli_parser.cpp:236
 msgid "The string 'all' works on all tags."
-msgstr "Wartość \"all\" działa z wszystkimi tagami."
+msgstr "Wyrażenie \"all\" działa ze wszystkimi tagami."
 
 #: src/propedit/propedit_cli_parser.cpp:237
 msgid "The string 'global' works on the global tags."
-msgstr "Wartość \"global\" działa z globalnymi tagami."
+msgstr "Wyrażenie \"global\" działa z globalnymi tagami."
 
 #: src/propedit/propedit_cli_parser.cpp:230
 msgid ""
@@ -8877,24 +8921,34 @@ msgid ""
 "followed by a number 'n' selects the nth audio, button, subtitle or video "
 "track (e.g. '--edit track:a2'). Numbering starts at 1."
 msgstr ""
+"Wyrażenie \"track:\" po którym następują litery \"a\", \"b\", \"s\", lub \"v"
+"\" a następnie litera \"n\", wybiera n-tą ścieżkę audio, przycisk, napisy "
+"lub ścieżkę dźwiękową (np.: \"--edit track:a2\"). Numerowanie rozpoczyna się "
+"od 1."
 
 #: src/propedit/propedit_cli_parser.cpp:232
 msgid ""
 "The string 'track:=uid' with 'uid' being a number selects the track whose "
 "'track UID' element equals 'uid'."
 msgstr ""
+"Wyrażenie \"track:=uid\" z \"uid\" będącym liczbą, wybiera ścieżkę, ktrórej "
+"\"UID ścieżki\" jest równy wartości \"uid\"."
 
 #: src/propedit/propedit_cli_parser.cpp:233
 msgid ""
 "The string 'track:@number' with 'number' being a number selects the track "
 "whose 'track number' element equals 'number'."
 msgstr ""
+"Wyrażenie \"track:@number\" z \"number\" będącym numerem, wybiera ścieżkę, "
+"której numer ścieżki (element \"track number\") jest równy \"number\"."
 
 #: src/propedit/propedit_cli_parser.cpp:229
 msgid ""
 "The string 'track:n' with 'n' being a number selects the nth track. "
 "Numbering starts at 1."
 msgstr ""
+"Wyrażenie \"track:n\" z \"n\" będącym numerem, wybiera n-tą ścieżkę. "
+"Numerowanie zaczyna się od 1."
 
 #: src/propedit/propedit_cli_parser.cpp:226
 msgid ""
@@ -8902,6 +8956,9 @@ msgid ""
 "information element. This is also the default until the first '--edit' "
 "option is found."
 msgstr ""
+"Wyrażenia \"info\", \"segment_info\", albo \"segmentinfo\" wybierają element "
+"informacji o segmencie. To jest również domyślne dopóki nie napotka się "
+"pierwszej opcji \"--edit\"."
 
 #: src/common/xml/xml.h:130
 msgid ""
@@ -9510,6 +9567,9 @@ msgid ""
 "by the Matroska specification. If the file contains tags then those tags "
 "might be broken.\n"
 msgstr ""
+"Ścieżka %1% nie posiada UID ścieżki, który powinien być obowiązkowo obecny "
+"aby być zgodnym ze specyfikacją Matroski. Jeśli plik zawiera tagi, wtedy te "
+"tagi mogą być uszkodzone.\n"
 
 #: src/common/content_decoder.cpp:98
 #, boost-format
@@ -9535,8 +9595,8 @@ msgid ""
 "Track %1% with the CodecID '%2%' contains invalid \"codec private\" data for "
 "AAC.\n"
 msgstr ""
-"Ścieżka %1% z CodecID \"%2%\" posiada nieprawidłowe dane \"prywatne dane "
-"kodeka\" dla AAC.\n"
+"Ścieżka %1% z CodecID \"%2%\" posiada nieprawidłowe \"dane własne kodeka\" "
+"dla AAC.\n"
 
 #: src/extract/xtr_ogg.cpp:97
 #, boost-format
@@ -9563,8 +9623,8 @@ msgid ""
 "Track %1% with the CodecID '%2%' is missing the \"codec private\" element "
 "and cannot be extracted.\n"
 msgstr ""
-"Ścieżka %1% z CodecID \"%2%\" nie posiada elementu \"prywatne dane kodeka\" "
-"i nie może być wyodrębniona.\n"
+"Ścieżka %1% z CodecID \"%2%\" nie posiada elementu \"dane własne kodeka\" i "
+"nie może być wyodrębniona.\n"
 
 #: src/extract/xtr_avi.cpp:43
 #, boost-format
@@ -10059,7 +10119,7 @@ msgstr "VobBtn"
 
 #: src/common/file_types.cpp:56
 msgid "VobButtons"
-msgstr "VobButtons"
+msgstr "VobButtons - przyciski"
 
 #: src/input/r_vobsub.h:75 src/output/p_vobsub.h:31
 msgid "VobSub"
@@ -10642,7 +10702,7 @@ msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but the private codec "
 "data does not contain valid headers.\n"
 msgstr ""
-"matroska_reader: CodecID dla ścieżki %1% to \"%2%\", jednakże prywatne dane "
+"matroska_reader: CodecID dla ścieżki %1% to \"%2%\", jednakże dane własne "
 "kodeka nie zawierają prawidłowych nagłówków.\n"
 
 #: src/input/r_matroska.cpp:446
@@ -10674,7 +10734,7 @@ msgid ""
 "private headers.\n"
 msgstr ""
 "matroska_reader: CodecID dla ścieżki %1% to \"%2%\", jednakże brak jest "
-"prywatnych nagłówków kodeka.\n"
+"nagłówków własnych kodeka.\n"
 
 #: src/input/r_matroska.cpp:532 src/input/r_matroska.cpp:543
 #, boost-format
@@ -10683,7 +10743,7 @@ msgid ""
 "private data found.\n"
 msgstr ""
 "matroska_reader: CodecID dla ścieżki %1% to \"%2%\", jednakże brak jest "
-"prywatnych danych.\n"
+"danych własnych.\n"
 
 #: src/input/r_matroska.cpp:1028
 msgid "matroska_reader: The CodecID is missing.\n"
@@ -11554,4 +11614,3 @@ msgstr "tak"
 
 #~ msgid "split by parts"
 #~ msgstr "dziel na wybrane fragmenty"
-
