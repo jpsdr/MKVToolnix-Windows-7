@@ -26,8 +26,9 @@
 class aac_reader_c: public generic_reader_c {
 private:
   memory_cptr m_chunk;
-  bool m_emphasis_present, m_sbr_status_set;
+  bool m_sbr_status_set;
   aac_header_c m_aacheader;
+  aac::parser_c m_parser;
 
 public:
   aac_reader_c(const track_info_c &ti, const mm_io_cptr &in);
@@ -48,7 +49,6 @@ public:
   static int probe_file(mm_io_c *in, uint64_t size, int64_t probe_range, int num_headers, bool require_zero_offset = false);
 
 protected:
-  virtual void guess_adts_version();
   static int find_valid_headers(mm_io_c &in, int64_t probe_range, int num_headers);
 };
 

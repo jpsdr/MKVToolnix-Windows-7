@@ -291,9 +291,15 @@ frame_c::to_string(bool verbose)
 // ------------------------------------------------------------
 
 parser_c::parser_c()
-  : m_parsed_stream_position{}
+  : m_fixed_buffer{}
+  , m_fixed_buffer_size{}
+  , m_parsed_stream_position{}
   , m_total_stream_position{}
   , m_garbage_size{}
+  , m_num_frames_found{}
+  , m_abort_after_num_frames{}
+  , m_require_frame_at_first_byte{}
+  , m_copy_data{true}
   , m_multiplex_type{unknown_multiplex}
   , m_debug{"aac_parser"}
 {
@@ -310,7 +316,7 @@ parser_c::add_bytes(memory_cptr const &mem) {
 }
 
 void
-parser_c::add_bytes(unsigned char *const buffer,
+parser_c::add_bytes(unsigned char const *buffer,
                     size_t size) {
   m_buffer.add(buffer, size);
   m_total_stream_position += size;
@@ -318,8 +324,41 @@ parser_c::add_bytes(unsigned char *const buffer,
 }
 
 void
+parser_c::parse_fixed_buffer(unsigned char const *fixed_buffer,
+                             size_t fixed_buffer_size) {
+  auto cleanup = at_scope_exit_c{[this]() {
+      m_fixed_buffer      = nullptr;
+      m_fixed_buffer_size = 0;
+    }};
+
+  m_fixed_buffer      = fixed_buffer;
+  m_fixed_buffer_size = fixed_buffer_size;
+  parse();
+}
+
+void
+parser_c::parse_fixed_buffer(memory_cptr const &fixed_buffer) {
+  parse_fixed_buffer(fixed_buffer->get_buffer(), fixed_buffer->get_size());
+}
+
+void
 parser_c::flush() {
   // no-op
+}
+
+void
+parser_c::abort_after_num_frames(size_t num_frames) {
+  m_abort_after_num_frames = num_frames;
+}
+
+void
+parser_c::require_frame_at_first_byte(bool require) {
+  m_require_frame_at_first_byte = require;
+}
+
+void
+parser_c::copy_data(bool copy) {
+  m_copy_data = copy;
 }
 
 size_t
@@ -400,7 +439,8 @@ parser_c::decode_adts_header(unsigned char const *buffer,
     frame.m_header.data_byte_size   = frame.m_header.bytes - frame.m_header.header_byte_size;
     frame.m_header.is_valid         = true;
 
-    frame.m_data                    = memory_c::clone(&buffer[frame.m_header.header_byte_size], frame.m_header.data_byte_size);
+    if (m_copy_data)
+      frame.m_data                  = memory_c::clone(&buffer[frame.m_header.header_byte_size], frame.m_header.data_byte_size);
 
     push_frame(frame);
 
@@ -455,13 +495,15 @@ parser_c::decode_loas_latm_header(unsigned char const *buffer,
     frame.m_header.header_byte_size = (frame.m_header.header_bit_size + 7) / 8;
     frame.m_header.data_byte_size   = decoded_frame_length;
     frame.m_header.bytes            = loas_frame_size + 3;
-    frame.m_data                    = memory_c::alloc(decoded_frame_length);
-    auto dst_buffer                 = frame.m_data->get_buffer();
 
-    if ((end_of_header_bit_pos % 8) == 0)
-      std::memcpy(dst_buffer, &buffer[end_of_header_bit_pos / 8], decoded_frame_length);
-    else
+    unsigned char *dst_buffer       = nullptr;
+
+    if (m_copy_data) {
+      frame.m_data = memory_c::alloc(decoded_frame_length);
+      dst_buffer   = frame.m_data->get_buffer();
+
       bc.get_bytes(dst_buffer, decoded_frame_length);
+    }
 
     push_frame(frame);
 
@@ -469,7 +511,7 @@ parser_c::decode_loas_latm_header(unsigned char const *buffer,
                boost::format("decode_loas_latm_header: headerok %6% buffer_size %1% loas_frame_size %2% header_byte_size %3% data_byte_size %4% bytes %5% decoded_frame_offset %7% decoded_frame_length %8% "
                              "first_four_bytes %|9$08x| end_of_header_bit_pos %10%\n")
                % buffer_size % loas_frame_size % frame.m_header.header_byte_size % frame.m_header.data_byte_size % frame.m_header.bytes % new_header.is_valid % m_latm_parser.get_frame_bit_offset() % decoded_frame_length
-               % (decoded_frame_length >= 4 ? get_uint32_be(dst_buffer) : 0) % end_of_header_bit_pos);
+               % (dst_buffer && (decoded_frame_length >= 4) ? get_uint32_be(dst_buffer) : 0) % end_of_header_bit_pos);
 
     return { success, loas_frame_end };
 
@@ -525,12 +567,17 @@ parser_c::push_frame(frame_c &frame) {
 
   if (frame.m_header.is_valid)
     m_header = frame.m_header;
+
+  ++m_num_frames_found;
 }
 
 void
 parser_c::parse() {
-  auto buffer      = m_buffer.get_buffer();
-  auto buffer_size = m_buffer.get_size();
+  if (m_abort_after_num_frames && (m_num_frames_found >= m_abort_after_num_frames))
+    return;
+
+  auto buffer      = m_fixed_buffer ? m_fixed_buffer      : m_buffer.get_buffer();
+  auto buffer_size = m_fixed_buffer ? m_fixed_buffer_size : m_buffer.get_size();
   auto position    = 0u;
 
   while (position < buffer_size) {
@@ -549,77 +596,122 @@ parser_c::parse() {
                % (result.first == success ? "success" : result.first == failure ? "failure" : "need-more-data")
                % remaining_bytes % result.second % num_bytes % (position - num_bytes) % position);
 
-    if (result.first == failure)
+    if (result.first == failure) {
       m_garbage_size += num_bytes;
+      if (!m_num_frames_found && m_require_frame_at_first_byte)
+        break;
+    }
+
+    if (m_abort_after_num_frames && (m_num_frames_found >= m_abort_after_num_frames))
+      break;
   }
 
-  m_buffer.remove(position);
+  if (!m_fixed_buffer)
+    m_buffer.remove(position);
 }
 
 int
-parser_c::find_consecutive_frames(unsigned char const */*buffer*/,
-                                  size_t /*buffer_size*/,
-                                  size_t /*num_required_headers*/) {
-  mxerror(boost::format("aac::parser_c::find_consecutive_frames: not implemented yet\n"));
-  // static auto s_debug = debugging_option_c{"aac_consecutive_frames"};
-  // size_t base = 0;
+parser_c::find_consecutive_frames(unsigned char const *buffer,
+                                  size_t buffer_size,
+                                  size_t num_required_frames) {
+  static auto s_debug = debugging_option_c{"aac_consecutive_frames"};
 
-  // do {
-  //   mxdebug_if(s_debug, boost::format("Starting search for %2% headers with base %1%, buffer size %3%\n") % base % num_required_headers % buffer_size);
+  for (size_t base = 0; (base + 8) < buffer_size; ++base) {
+    mxdebug_if(s_debug, boost::format("Starting search for %2% headers with base %1%, buffer size %3%\n") % base % num_required_frames % buffer_size);
 
-  //   size_t position = base;
+    auto value = get_uint24_be(&buffer[base]);
+    // Speeding up checks by using shortcuts here instead of going
+    // through the parser for each byte position: check for supported
+    // header types (ADTS and LOAS/LATM).
+    if (   ((value & AAC_ADTS_SYNC_WORD_MASK) != AAC_ADTS_SYNC_WORD)
+        && ((value & AAC_LOAS_SYNC_WORD_MASK) != AAC_LOAS_SYNC_WORD))
+      continue;
 
-  //   frame_c first_frame;
-  //   while (((position + 8) < buffer_size) && !first_frame.decode_adts_header(&buffer[position], buffer_size - position))
-  //     ++position;
+    if ((value & AAC_LOAS_SYNC_WORD_MASK) == AAC_LOAS_SYNC_WORD) {
+      // Check for second LOAS header right after the current one.
+      auto loas_frame_size = value & AAC_LOAS_FRAME_SIZE_MASK;
+      if (!loas_frame_size || ((base + loas_frame_size + 3 + 3) > buffer_size))
+        continue;
 
-  //   mxdebug_if(s_debug, boost::format("First frame at %1% valid %2%\n") % position % first_frame.m_header.is_valid);
+      value = get_uint24_be(&buffer[base + 3 + loas_frame_size]);
+      if ((value & AAC_LOAS_SYNC_WORD_MASK) != AAC_LOAS_SYNC_WORD)
+        continue;
 
-  //   if (!first_frame.m_header.is_valid)
-  //     return -1;
+    } else {
+      // Check for second ADTS header right after the current one.
+      // adts_frame_size (including the header) = 13 bits starting at
+      // bit position 30; 2@b3 + 8@b4 + 3@b5
+      auto adts_frame_size = (static_cast<unsigned int>(buffer[base + 3] & 0x03) << 11)
+                           | (static_cast<unsigned int>(buffer[base + 4])        <<  3)
+                           | (static_cast<unsigned int>(buffer[base + 5])        >>  5);
 
-  //   size_t offset            = position + first_frame.m_header.bytes;
-  //   size_t num_headers_found = 1;
+      if ((adts_frame_size < 7) || ((base + adts_frame_size + 8) > buffer_size))
+        continue;
 
-  //   while (   (num_headers_found < num_required_headers)
-  //          && (offset            < buffer_size)) {
+      value = get_uint24_be(&buffer[base + adts_frame_size]);
+      if ((value & AAC_ADTS_SYNC_WORD_MASK) != AAC_ADTS_SYNC_WORD)
+        continue;
+    }
 
-  //     frame_c current_frame;
-  //     if (!current_frame.decode_adts_header(&buffer[offset], buffer_size - offset))
-  //       break;
+    auto parser = parser_c{};
+    parser.require_frame_at_first_byte(true);
+    parser.abort_after_num_frames(num_required_frames);
+    parser.copy_data(false);
+    parser.parse_fixed_buffer(&buffer[base], buffer_size - base);
 
-  //     if (8 > current_frame.m_header.bytes) {
-  //       mxdebug_if(s_debug, boost::format("Current frame at %1% has invalid size %2%\n") % offset % current_frame.m_header.bytes);
-  //       break;
-  //     }
+    auto num_frames_found = parser.frames_available();
+    if ((num_frames_found < num_required_frames) || !parser.headers_parsed())
+      continue;
 
-  //     if (   (current_frame.m_header.id          != first_frame.m_header.id)
-  //         && (current_frame.m_header.profile     != first_frame.m_header.profile)
-  //         && (current_frame.m_header.channels    != first_frame.m_header.channels)
-  //         && (current_frame.m_header.sample_rate != first_frame.m_header.sample_rate)) {
-  //       mxdebug_if(s_debug,
-  //                  boost::format("Current frame at %9% differs from first frame. (first/current) ID: %1%/%2% profile: %3%/%4% channels: %5%/%6% sample rate: %7%/%8%\n")
-  //                  % first_frame.m_header.id          % current_frame.m_header.id
-  //                  % first_frame.m_header.profile     % current_frame.m_header.profile
-  //                  % first_frame.m_header.channels    % current_frame.m_header.channels
-  //                  % first_frame.m_header.sample_rate % current_frame.m_header.sample_rate
-  //                  % offset);
-  //       break;
-  //     }
+    if (num_frames_found == 1)
+      return base;
 
-  //     mxdebug_if(s_debug, boost::format("Current frame at %1% equals first frame, found %2%\n") % offset % (num_headers_found + 1));
+    std::string garbage_sizes;
+    bool garbage_found = false;
 
-  //     ++num_headers_found;
-  //     offset += current_frame.m_header.bytes;
-  //   }
+    std::vector<frame_c> frames;
+    frames.reserve(num_frames_found);
 
-  //   if (num_headers_found == num_required_headers) {
-  //     mxdebug_if(s_debug, boost::format("Found required number of headers at %1%\n") % position);
-  //     return position;
-  //   }
+    while (parser.frames_available()) {
+      auto frame = parser.get_frame();
+      frames.push_back(frame);
 
-  //   base = position + 2;
-  // } while (base < buffer_size);
+      garbage_sizes += (boost::format(" %1%") % frame.m_garbage_size).str();
+      if (frame.m_garbage_size)
+        garbage_found = true;
+    }
+
+    mxdebug_if(s_debug, boost::format("  Found enough headers at %1%; garbage sizes:%2% found garbage: %3%\n") % base % garbage_sizes % garbage_found);
+
+    if (garbage_found)
+      continue;
+
+    bool mismatch_found = false;
+    auto &first_frame   = frames[0];
+
+    for (auto frame_idx = 1u; frame_idx < num_frames_found; ++frame_idx) {
+      auto &current_frame = frames[frame_idx];
+      if (   (current_frame.m_header.id          != first_frame.m_header.id)
+          && (current_frame.m_header.profile     != first_frame.m_header.profile)
+          && (current_frame.m_header.channels    != first_frame.m_header.channels)
+          && (current_frame.m_header.sample_rate != first_frame.m_header.sample_rate)) {
+        mxdebug_if(s_debug,
+                   boost::format("Current frame number %9% at %10% differs from first frame. (first/current) ID: %1%/%2% profile: %3%/%4% channels: %5%/%6% sample rate: %7%/%8%\n")
+                   % first_frame.m_header.id          % current_frame.m_header.id
+                   % first_frame.m_header.profile     % current_frame.m_header.profile
+                   % first_frame.m_header.channels    % current_frame.m_header.channels
+                   % first_frame.m_header.sample_rate % current_frame.m_header.sample_rate
+                   % frame_idx % (base + current_frame.m_stream_position));
+
+        mismatch_found = true;
+
+        break;
+      }
+    }
+
+    if (!mismatch_found)
+      return base;
+  }
 
   return -1;
 }
@@ -794,7 +886,7 @@ aac_header_c::parse_audio_specific_config(bit_reader_c &bc,
       read_eld_specific_config();
 
     else
-      mxerror(boost::format("aac_object_type_not_ga_specific. %1%\n") % BUGMSG);
+      throw "aac_object_type_not_ga_specific. %1%\n";
 
     if ((MP4AOT_ER_AAC_LC == object_type) || ((MP4AOT_ER_AAC_LTP <= object_type) && (MP4AOT_ER_PARAM >= object_type))) {
       int ep_config = m_bc->get_bits(2);

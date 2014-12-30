@@ -35,9 +35,12 @@
 
 #define AAC_MAX_PRIVATE_DATA_SIZE 5
 
+#define AAC_ADTS_SYNC_WORD       0xfff000
+#define AAC_ADTS_SYNC_WORD_MASK  0xfff000 // first 12 of 24 bits
+
 #define AAC_LOAS_SYNC_WORD       0x56e000 // 0x2b7
-#define AAC_LOAS_SYNC_WORD_MASK  0xFFE000 // first 11 bits
-#define AAC_LOAS_FRAME_SIZE_MASK 0x001fff // last 13 bits
+#define AAC_LOAS_SYNC_WORD_MASK  0xffe000 // first 11 of 24 bits
+#define AAC_LOAS_FRAME_SIZE_MASK 0x001fff // last 13 of 24 bits
 
 extern const int g_aac_sampling_freq[16];
 
@@ -146,8 +149,11 @@ protected:
   std::deque<frame_c> m_frames;
   std::deque<timecode_c> m_provided_timecodes;
   byte_buffer_c m_buffer;
+  unsigned char const *m_fixed_buffer;
+  size_t m_fixed_buffer_size;
   uint64_t m_parsed_stream_position, m_total_stream_position;
-  size_t m_garbage_size;
+  size_t m_garbage_size, m_num_frames_found, m_abort_after_num_frames;
+  bool m_require_frame_at_first_byte, m_copy_data;
   multiplex_type_e m_multiplex_type;
   aac_header_c m_header;
   latm_parser_c m_latm_parser;
@@ -156,16 +162,28 @@ protected:
 public:
   parser_c();
   void add_timecode(timecode_c const &timecode);
+
   void add_bytes(memory_cptr const &mem);
-  void add_bytes(unsigned char *const buffer, size_t size);
+  void add_bytes(unsigned char const *buffer, size_t size);
+
+  void parse_fixed_buffer(unsigned char const *fixed_buffer, size_t fixed_buffer_size);
+  void parse_fixed_buffer(memory_cptr const &fixed_buffer);
+
   void flush();
+
   size_t frames_available() const;
+  bool headers_parsed() const;
+
   frame_c get_frame();
   uint64_t get_parsed_stream_position() const;
   uint64_t get_total_stream_position() const;
-  bool headers_parsed() const;
 
-  int find_consecutive_frames(unsigned char const *buffer, size_t buffer_size, size_t num_required_headers);
+  void abort_after_num_frames(size_t num_frames);
+  void require_frame_at_first_byte(bool require);
+  void copy_data(bool copy);
+
+public:                         // static functions
+  static int find_consecutive_frames(unsigned char const *buffer, size_t buffer_size, size_t num_required_frames);
 
 protected:
   void parse();

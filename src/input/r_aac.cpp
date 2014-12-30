@@ -36,10 +36,9 @@ aac_reader_c::probe_file(mm_io_c *in,
 
 aac_reader_c::aac_reader_c(const track_info_c &ti,
                            const mm_io_cptr &in)
-  : generic_reader_c(ti, in)
-  , m_chunk(memory_c::alloc(INITCHUNKSIZE))
-  , m_emphasis_present(false)
-  , m_sbr_status_set(false)
+  : generic_reader_c{ti, in}
+  , m_chunk{memory_c::alloc(INITCHUNKSIZE)}
+  , m_sbr_status_set{}
 {
 }
 
@@ -61,10 +60,14 @@ aac_reader_c::read_headers() {
 
     m_in->setFilePointer(tag_size_start, seek_beginning);
 
-    if (find_aac_header(*m_chunk, init_read_len, &m_aacheader, m_emphasis_present) < 0)
+    m_parser.copy_data(false);
+    m_parser.add_bytes(m_chunk->get_buffer(), init_read_len);
+
+    if (!m_parser.frames_available() || !m_parser.headers_parsed())
       throw mtx::input::header_parsing_x();
 
-    guess_adts_version();
+    m_aacheader          = m_parser.get_frame().m_header;
+    m_parser             = aac::parser_c{};
 
     m_ti.m_id            = 0;       // ID for this track.
     int detected_profile = m_aacheader.profile;
@@ -106,37 +109,13 @@ aac_reader_c::create_packetizer(int64_t) {
              "file actually contains SBR AAC. The file will be muxed in the "
              "WRONG way otherwise. Also read mkvmerge's documentation.\n"));
 
-  generic_packetizer_c *aacpacketizer = new aac_packetizer_c(this, m_ti, m_aacheader.id, m_aacheader.profile, m_aacheader.sample_rate, m_aacheader.channels, m_emphasis_present);
+  auto aacpacketizer = new aac_packetizer_c(this, m_ti, m_aacheader.id, m_aacheader.profile, m_aacheader.sample_rate, m_aacheader.channels, false, true);
   add_packetizer(aacpacketizer);
 
   if (AAC_PROFILE_SBR == m_aacheader.profile)
     aacpacketizer->set_audio_output_sampling_freq(m_aacheader.sample_rate * 2);
 
   show_packetizer_info(0, aacpacketizer);
-}
-
-// Try to guess if the MPEG4 header contains the emphasis field (2 bits)
-void
-aac_reader_c::guess_adts_version() {
-  aac_header_c tmp_aacheader;
-
-  m_emphasis_present = false;
-
-  // Due to the checks we do have an ADTS header at 0.
-  find_aac_header(*m_chunk, INITCHUNKSIZE, &tmp_aacheader, m_emphasis_present);
-  if (tmp_aacheader.id != 0)        // MPEG2
-    return;
-
-  // Now make some sanity checks on the size field.
-  if (tmp_aacheader.bytes > 8192) {
-    m_emphasis_present = true;    // Looks like it's borked.
-    return;
-  }
-
-  // Looks ok so far. See if the next ADTS is right behind this packet.
-  int pos = find_aac_header(m_chunk->get_buffer() + tmp_aacheader.bytes, INITCHUNKSIZE - tmp_aacheader.bytes, &tmp_aacheader, m_emphasis_present);
-  if (0 != pos)                 // Not ok - what do we do now?
-    m_emphasis_present = true;
 }
 
 file_status_e
@@ -146,8 +125,14 @@ aac_reader_c::read(generic_packetizer_c *,
   int read_len        = std::min(INITCHUNKSIZE, remaining_bytes);
   int num_read        = m_in->read(m_chunk, read_len);
 
-  if (0 < num_read)
-    PTZR0->process(new packet_t(new memory_c(*m_chunk, num_read, false)));
+  if (0 < num_read) {
+    m_parser.add_bytes(m_chunk->get_buffer(), num_read);
+
+    while (m_parser.frames_available()) {
+      auto frame = m_parser.get_frame();
+      PTZR0->process(std::make_shared<packet_t>(frame.m_data));
+    }
+  }
 
   return (0 != num_read) && (0 < (remaining_bytes - num_read)) ? FILE_STATUS_MOREDATA : flush_packetizers();
 }
@@ -166,11 +151,11 @@ aac_reader_c::find_valid_headers(mm_io_c &in,
                                  int num_headers) {
   try {
     in.setFilePointer(0, seek_beginning);
-    memory_cptr buf = memory_c::alloc(probe_range);
-    int num_read    = in.read(buf->get_buffer(), probe_range);
+    auto buf      = memory_c::alloc(probe_range);
+    auto num_read = in.read(buf->get_buffer(), probe_range);
     in.setFilePointer(0, seek_beginning);
 
-    return find_consecutive_aac_headers(buf->get_buffer(), num_read, num_headers);
+    return aac::parser_c::find_consecutive_frames(buf->get_buffer(), num_read, num_headers);
   } catch (...) {
     return -1;
   }
