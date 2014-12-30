@@ -27,19 +27,16 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    int profile,
                                    int samples_per_sec,
                                    int channels,
-                                   bool emphasis_present,
                                    bool headerless)
   : generic_packetizer_c(p_reader, p_ti)
   , m_packetno(0)
   , m_last_timecode(-1)
   , m_num_packets_same_tc(0)
-  , m_bytes_skipped(0)
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
   , m_id(id)
   , m_profile(profile)
   , m_headerless(headerless)
-  , m_emphasis_present(emphasis_present)
   , m_s2tc(1024 * 1000000000ll, m_samples_per_sec)
   , m_single_packet_duration(1 * m_s2tc)
 {
@@ -48,51 +45,6 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
 }
 
 aac_packetizer_c::~aac_packetizer_c() {
-}
-
-unsigned char *
-aac_packetizer_c::get_aac_packet(aac_header_c *aacheader) {
-  unsigned char *packet_buffer = m_byte_buffer.get_buffer();
-  int size                     = m_byte_buffer.get_size();
-  int pos                      = find_aac_header(packet_buffer, size, aacheader, m_emphasis_present);
-
-  if (0 > pos) {
-    if (10 < size) {
-      m_bytes_skipped += size - 10;
-      m_byte_buffer.remove(size - 10);
-    }
-    return nullptr;
-  }
-  if ((pos + static_cast<int>(aacheader->bytes)) > size)
-    return nullptr;
-
-  m_bytes_skipped += pos;
-  if (verbose && (0 < m_bytes_skipped))
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n")) % m_bytes_skipped);
-  m_bytes_skipped = 0;
-
-  unsigned char *buf;
-  if ((aacheader->header_bit_size % 8) == 0)
-    buf = (unsigned char *)safememdup(packet_buffer + pos + aacheader->header_byte_size, aacheader->data_byte_size);
-  else {
-    // Header is not byte aligned, i.e. MPEG-4 ADTS
-    // This code is from mpeg4ip/server/mp4creator/aac.cpp
-    buf = (unsigned char *)safemalloc(aacheader->data_byte_size);
-
-    int up_shift       = aacheader->header_bit_size % 8;
-    int down_shift     = 8 - up_shift;
-    unsigned char *src = packet_buffer + pos + aacheader->header_bit_size / 8;
-
-    buf[0] = src[0] << up_shift;
-    for (auto i = 1u; i < aacheader->data_byte_size; i++) {
-      buf[i - 1] |= (src[i] >> down_shift);
-      buf[i]      = (src[i] << up_shift);
-    }
-  }
-
-  m_byte_buffer.remove(pos + aacheader->bytes);
-
-  return buf;
 }
 
 void
@@ -178,12 +130,22 @@ aac_packetizer_c::process(packet_cptr packet) {
   if (m_headerless)
     return process_headerless(packet);
 
-  unsigned char *aac_packet;
-  aac_header_c aacheader;
+  if (packet->has_timecode())
+    m_parser.add_timecode(timecode_c::ns(packet->timecode));
 
-  m_byte_buffer.add(packet->data->get_buffer(), packet->data->get_size());
-  while ((aac_packet = get_aac_packet(&aacheader))) {
-    add_packet(new packet_t(new memory_c(aac_packet, aacheader.data_byte_size, true), -1 == packet->timecode ? m_packetno * m_s2tc : packet->timecode, m_single_packet_duration));
+  m_parser.add_bytes(packet->data);
+
+  if (!m_parser.headers_parsed())
+    return FILE_STATUS_MOREDATA;
+
+  while (m_parser.frames_available()) {
+    auto frame  = m_parser.get_frame();
+    auto packet = std::make_shared<packet_t>(frame.m_data, frame.m_timecode.to_ns(m_packetno * m_s2tc), m_single_packet_duration);
+
+    if (verbose && frame.m_garbage_size)
+      mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n")) % frame.m_garbage_size);
+
+    add_packet(packet);
     m_packetno++;
   }
 

@@ -1335,7 +1335,7 @@ qtmp4_reader_c::create_video_packetizer_standard(qtmp4_demuxer_cptr &dmx) {
 void
 qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = dmx->esds.decoder_config;
-  dmx->ptzr           = add_packetizer(new aac_packetizer_c(this, m_ti, AAC_ID_MPEG4, dmx->a_aac_profile, (int)dmx->a_samplerate, dmx->a_channels, false, true));
+  dmx->ptzr           = add_packetizer(new aac_packetizer_c(this, m_ti, AAC_ID_MPEG4, dmx->a_aac_profile, (int)dmx->a_samplerate, dmx->a_channels, true));
 
   if (dmx->a_aac_is_sbr)
     PTZR(dmx->ptzr)->set_audio_output_sampling_freq(dmx->a_aac_output_sample_rate);
