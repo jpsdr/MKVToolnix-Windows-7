@@ -20,13 +20,13 @@
 
 class byte_buffer_c {
 private:
-  unsigned char *m_data;
+  memory_cptr m_data;
   size_t m_filled, m_offset, m_size, m_chunk_size;
   size_t m_num_reallocs, m_max_alloced_size;
 
 public:
   byte_buffer_c(size_t chunk_size = 128 * 1024)
-    : m_data(safemalloc(chunk_size))
+    : m_data{memory_c::alloc(chunk_size)}
     , m_filled(0)
     , m_offset(0)
     , m_size(chunk_size)
@@ -36,21 +36,18 @@ public:
   {
   };
 
-  virtual ~byte_buffer_c() {
-    safefree(m_data);
-  }
-
   void trim() {
     if (m_offset == 0)
       return;
 
-    memmove(m_data, &m_data[m_offset], m_filled);
+    auto buffer = m_data->get_buffer();
+    memmove(buffer, &buffer[m_offset], m_filled);
 
     m_offset        = 0;
     size_t new_size = (m_filled / m_chunk_size + 1) * m_chunk_size;
 
     if (new_size != m_size) {
-      m_data = saferealloc(m_data, new_size);
+      m_data->resize(new_size);
       m_size = new_size;
 
       count_alloc(new_size);
@@ -63,11 +60,11 @@ public:
 
     if ((m_offset + m_filled + new_size) > m_size) {
       m_size = ((m_offset + m_filled + new_size) / m_chunk_size + 1) * m_chunk_size;
-      m_data = saferealloc(m_data, m_size);
+      m_data->resize(m_size);
       count_alloc(m_size);
     }
 
-    memcpy(&m_data[m_offset + m_filled], new_data, new_size);
+    memcpy(m_data->get_buffer() + m_offset + m_filled, new_data, new_size);
     m_filled += new_size;
   }
 
@@ -91,7 +88,7 @@ public:
   }
 
   unsigned char *get_buffer() {
-    return &m_data[m_offset];
+    return m_data->get_buffer() + m_offset;
   }
 
   size_t get_size() {
