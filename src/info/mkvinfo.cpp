@@ -1418,7 +1418,7 @@ handle_simple_block(EbmlStream *&es,
   tinfo.m_blocks                                                                    += block.NumberFrames();
   tinfo.m_blocks_by_ref_num[block.IsKeyframe() ? 0 : block.IsDiscardable() ? 2 : 1] += block.NumberFrames();
   tinfo.m_min_timecode                                                                = std::min(tinfo.m_min_timecode, static_cast<int64_t>(timecode_ns));
-  tinfo.m_max_timecode                                                                = std::max(tinfo.m_min_timecode, static_cast<int64_t>(timecode_ns));
+  tinfo.m_max_timecode                                                                = std::max(tinfo.max_timecode_unset() ? 0 : tinfo.m_max_timecode, static_cast<int64_t>(timecode_ns));
   tinfo.m_add_duration_for_n_packets                                                  = block.NumberFrames();
   tinfo.m_size                                                                       += boost::accumulate(frame_sizes, 0);
 }

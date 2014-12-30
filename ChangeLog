@@ -1,5 +1,10 @@
 2014-12-30  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvinfo: bug fix: track statistics: the duration (and therefore
+        the estimated bitrate) was wrong for files in which the frame with
+        the maximum timecode wasn't the last frame in the file. Fixes
+        #1092.
+
         * mkvmerge: new feature: implemented support for AAC in LOAS/LATM
         multiplex if read from MPEG transport streams or raw LOAS/LATM AAC
         files. Implements #877 and fixes the underlying issue in #832.
