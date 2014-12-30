@@ -24,7 +24,7 @@ const int g_aac_sampling_freq[16] = {96000, 88200, 64000, 48000, 44100, 32000,
                                      24000, 22050, 16000, 12000, 11025,  8000,
                                       7350,     0,     0,     0}; // filling
 
-static debugging_option_c s_debug{"parse_aac_data|aac_full"};
+static debugging_option_c s_debug_parse_data{"parse_aac_data|aac_full"};
 
 namespace aac {
 
@@ -931,7 +931,7 @@ aac_header_c::parse_audio_specific_config(bit_reader_c &bc,
     }
 
   } catch (mtx::exception &ex) {
-    mxdebug_if(s_debug, boost::format("parse_aac_data: exception: %1%\n") % ex);
+    mxdebug_if(s_debug_parse_data, boost::format("parse_aac_data: exception: %1%\n") % ex);
   }
 
   m_bc = nullptr;
@@ -944,7 +944,7 @@ aac_header_c::parse_audio_specific_config(const unsigned char *data,
   if (size < 2)
     return;
 
-  mxdebug_if(s_debug, boost::format("parse_aac_data: size %1%, data: %2%\n") % size % to_hex(data, size));
+  mxdebug_if(s_debug_parse_data, boost::format("parse_aac_data: size %1%, data: %2%\n") % size % to_hex(data, size));
 
   bit_reader_c bc{data, static_cast<unsigned int>(size)};
   parse_audio_specific_config(bc, look_for_sync_extension);
