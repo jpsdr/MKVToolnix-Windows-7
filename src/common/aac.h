@@ -86,6 +86,8 @@ operator <<(std::ostream &out,
 
 namespace aac {
 
+unsigned int get_sampling_freq_idx(unsigned int sampling_freq);
+
 class latm_parser_c {
 protected:
   int m_audio_mux_version, m_audio_mux_version_a;
@@ -195,12 +197,6 @@ protected:
 typedef std::shared_ptr<parser_c> parser_cptr;
 
 }
-
-bool parse_aac_adif_header(const unsigned char *buf, size_t size, aac_header_c *aac_header);
-int find_aac_header(const unsigned char *buf, size_t size, aac_header_c *aac_header, bool emphasis_present);
-int find_consecutive_aac_headers(const unsigned char *buf, size_t size, int num);
-
-int get_aac_sampling_freq_idx(int sampling_freq);
 
 bool parse_aac_data(const unsigned char *data, size_t size, int &profile, int &channels, int &sample_rate, int &output_sample_rate, bool &sbr);
 int create_aac_data(unsigned char *data, int profile, int channels, int sample_rate, int output_sample_rate, bool sbr);
