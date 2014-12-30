@@ -778,7 +778,7 @@ aac_header_c::parse_audio_specific_config(bit_reader_c &bc,
     sample_rate = read_sample_rate();
     channels    = m_bc->get_bits(4);
 
-    if (5 == object_type) {
+    if (MP4AOT_SBR == object_type) {
       is_sbr                = true;
       output_sample_rate    = read_sample_rate();
       extension_object_type = object_type;
@@ -1075,7 +1075,7 @@ create_aac_data(unsigned char *data,
   if (sbr) {
     srate_idx = get_aac_sampling_freq_idx(output_sample_rate);
     data[2]   = AAC_SYNC_EXTENSION_TYPE >> 3;
-    data[3]   = ((AAC_SYNC_EXTENSION_TYPE & 0x07) << 5) | 5;
+    data[3]   = ((AAC_SYNC_EXTENSION_TYPE & 0x07) << 5) | MP4AOT_SBR;
     data[4]   = (1 << 7) | (srate_idx << 3);
 
     return 5;
