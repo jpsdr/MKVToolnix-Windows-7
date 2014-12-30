@@ -47,7 +47,7 @@ xtr_aac_c::create_file(xtr_base_c *master,
     memory_cptr mem(new memory_c(priv->GetBuffer(), priv->GetSize(), false));
     m_content_decoder.reverse(mem, CONTENT_ENCODING_SCOPE_CODECPRIVATE);
 
-    if (!parse_aac_data(mem->get_buffer(), mem->get_size(), m_profile, m_channels, sfreq, output_sfreq, is_sbr))
+    if (!aac::parse_audio_specific_config(mem->get_buffer(), mem->get_size(), m_profile, m_channels, sfreq, output_sfreq, is_sbr))
       mxerror(boost::format(Y("Track %1% with the CodecID '%2%' contains invalid \"codec private\" data for AAC.\n")) % m_tid % m_codec_id);
     m_id = 0;
 

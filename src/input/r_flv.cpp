@@ -503,7 +503,7 @@ flv_reader_c::process_audio_tag_sound_format(flv_track_cptr &track,
 
     int profile, channels, sample_rate, output_sample_rate;
     bool sbr;
-    if (!parse_aac_data(specific_codec_buf, size, profile, channels, sample_rate, output_sample_rate, sbr))
+    if (!aac::parse_audio_specific_config(specific_codec_buf, size, profile, channels, sample_rate, output_sample_rate, sbr))
       return false;
 
     mxdebug_if(m_debug, boost::format("  AAC sub type: sequence header (profile: %1%, channels: %2%, s_rate: %3%, out_s_rate: %4%, sbr %5%)\n") % profile % channels % sample_rate % output_sample_rate % sbr);

@@ -2272,7 +2272,7 @@ qtmp4_demuxer_c::parse_audio_header_priv_atoms(uint64_t atom_size,
           if (!esds.decoder_config || (2 > esds.decoder_config->get_size()))
             mxwarn(boost::format(Y("Track %1%: AAC found, but decoder config data has length %2%.\n")) % id % (esds.decoder_config ? esds.decoder_config->get_size() : 0));
 
-          else if (!parse_aac_data(esds.decoder_config->get_buffer(), esds.decoder_config->get_size(), profile, channels, sample_rate, output_sample_rate, aac_is_sbr))
+          else if (!aac::parse_audio_specific_config(esds.decoder_config->get_buffer(), esds.decoder_config->get_size(), profile, channels, sample_rate, output_sample_rate, aac_is_sbr))
             mxwarn(boost::format(Y("Track %1%: The AAC information could not be parsed.\n")) % id);
 
           else {

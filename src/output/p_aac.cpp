@@ -87,11 +87,11 @@ aac_packetizer_c::set_headers() {
 
   else if (!hack_engaged(ENGAGE_OLD_AAC_CODECID)) {
     unsigned char buffer[5];
-    int length = create_aac_data(buffer,
-                                 AAC_PROFILE_SBR == m_profile ? AAC_PROFILE_LC : m_profile,
-                                 m_channels, m_samples_per_sec,
-                                 AAC_PROFILE_SBR == m_profile ? m_samples_per_sec * 2 : m_samples_per_sec,
-                                 AAC_PROFILE_SBR == m_profile);
+    int length = aac::create_audio_specific_config(buffer,
+                                                   AAC_PROFILE_SBR == m_profile ? AAC_PROFILE_LC : m_profile,
+                                                   m_channels, m_samples_per_sec,
+                                                   AAC_PROFILE_SBR == m_profile ? m_samples_per_sec * 2 : m_samples_per_sec,
+                                                   AAC_PROFILE_SBR == m_profile);
     set_codec_private(memory_c::clone(buffer, length));
   }
 

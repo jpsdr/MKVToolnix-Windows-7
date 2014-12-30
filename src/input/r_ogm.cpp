@@ -974,7 +974,7 @@ ogm_a_aac_demuxer_c::create_packetizer() {
   bool sbr = false;
 
   if ((packet_data[0]->get_size() >= (sizeof(stream_header) + 5)) &&
-      (parse_aac_data(packet_data[0]->get_buffer() + sizeof(stream_header) + 5,
+      (aac::parse_audio_specific_config(packet_data[0]->get_buffer() + sizeof(stream_header) + 5,
                       packet_data[0]->get_size()   - sizeof(stream_header) - 5,
                       profile, channels, sample_rate, output_sample_rate, sbr))) {
     if (sbr)

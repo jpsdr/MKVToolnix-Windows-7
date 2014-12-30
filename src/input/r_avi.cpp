@@ -542,11 +542,11 @@ avi_reader_c::create_aac_packetizer(int aid,
     }
 
     unsigned char created_aac_data[AAC_MAX_PRIVATE_DATA_SIZE];
-    auto size           = create_aac_data(created_aac_data, profile, channels, sample_rate, output_sample_rate, is_sbr);
+    auto size           = aac::create_audio_specific_config(created_aac_data, profile, channels, sample_rate, output_sample_rate, is_sbr);
     m_ti.m_private_data = memory_c::clone(created_aac_data, size);
 
   } else {
-    if (!parse_aac_data(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size(), profile, channels, sample_rate, output_sample_rate, is_sbr))
+    if (!aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size(), profile, channels, sample_rate, output_sample_rate, is_sbr))
       mxerror_tid(m_ti.m_fname, aid + 1, Y("This AAC track does not contain valid headers. Could not parse the AAC information.\n"));
 
     if (is_sbr)

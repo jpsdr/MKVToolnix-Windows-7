@@ -87,6 +87,9 @@ operator <<(std::ostream &out,
 namespace aac {
 
 unsigned int get_sampling_freq_idx(unsigned int sampling_freq);
+bool parse_codec_id(const std::string &codec_id, int &id, int &profile);
+bool parse_audio_specific_config(const unsigned char *data, size_t size, int &profile, int &channels, int &sample_rate, int &output_sample_rate, bool &sbr);
+int create_audio_specific_config(unsigned char *data, int profile, int channels, int sample_rate, int output_sample_rate, bool sbr);
 
 class latm_parser_c {
 protected:
@@ -197,9 +200,5 @@ protected:
 typedef std::shared_ptr<parser_c> parser_cptr;
 
 }
-
-bool parse_aac_data(const unsigned char *data, size_t size, int &profile, int &channels, int &sample_rate, int &output_sample_rate, bool &sbr);
-int create_aac_data(unsigned char *data, int profile, int channels, int sample_rate, int output_sample_rate, bool sbr);
-bool parse_aac_codec_id(const std::string &codec_id, int &id, int &profile);
 
 #endif // MTX_COMMON_AACCOMMON_H

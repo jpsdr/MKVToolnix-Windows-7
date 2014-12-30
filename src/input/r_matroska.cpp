@@ -1412,7 +1412,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
       int channels, sfreq, osfreq;
       bool sbr;
 
-      if (!parse_aac_data(static_cast<const unsigned char *>(t->private_data), t->private_size, profile, channels, sfreq, osfreq, sbr))
+      if (!aac::parse_audio_specific_config(static_cast<const unsigned char *>(t->private_data), t->private_size, profile, channels, sfreq, osfreq, sbr))
         mxerror_tid(m_ti.m_fname, t->tnum, Y("Malformed AAC codec initialization data found.\n"));
 
       detected_profile = profile;
@@ -1420,14 +1420,14 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
       if (sbr)
         profile        = AAC_PROFILE_SBR;
 
-    } else if (!parse_aac_codec_id(t->codec_id, id, profile))
+    } else if (!aac::parse_codec_id(t->codec_id, id, profile))
       mxerror_tid(m_ti.m_fname, t->tnum, boost::format(Y("Malformed codec id '%1%'.\n")) % t->codec_id);
 
   } else {
     int channels, sfreq, osfreq;
     bool sbr;
 
-    if (!parse_aac_data(static_cast<const unsigned char *>(t->private_data) + sizeof(alWAVEFORMATEX), t->private_size - sizeof(alWAVEFORMATEX), profile, channels, sfreq, osfreq, sbr))
+    if (!aac::parse_audio_specific_config(static_cast<const unsigned char *>(t->private_data) + sizeof(alWAVEFORMATEX), t->private_size - sizeof(alWAVEFORMATEX), profile, channels, sfreq, osfreq, sbr))
       mxerror_tid(m_ti.m_fname, t->tnum, Y("Malformed AAC codec initialization data found.\n"));
 
     detected_profile = profile;

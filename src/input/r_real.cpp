@@ -286,7 +286,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
 
     if ((4 + extra_len) <= dmx->extra_data->get_size()) {
       extra_data_parsed = true;
-      if (!parse_aac_data(&extra_data[4 + 1], extra_len - 1, profile, channels, sample_rate, output_sample_rate, sbr))
+      if (!aac::parse_audio_specific_config(&extra_data[4 + 1], extra_len - 1, profile, channels, sample_rate, output_sample_rate, sbr))
         mxerror_tid(m_ti.m_fname, tid, Y("This AAC track does not contain valid headers. Could not parse the AAC information.\n"));
       mxverb(2,
              boost::format("real_reader: 1. profile: %1%, channels: %2%, sample_rate: %3%, output_sample_rate: %4%, sbr: %5%\n")
