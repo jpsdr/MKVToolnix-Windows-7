@@ -257,6 +257,7 @@ struct qtmp4_demuxer_c {
 
   bool verify_video_parameters();
   bool verify_avc_video_parameters();
+  bool verify_hevc_video_parameters();
   bool verify_mp4v_video_parameters();
 
   bool verify_subtitles_parameters();
@@ -411,6 +412,7 @@ protected:
   virtual void create_video_packetizer_mpeg1_2(qtmp4_demuxer_cptr &dmx);
   virtual void create_video_packetizer_mpeg4_p10(qtmp4_demuxer_cptr &dmx);
   virtual void create_video_packetizer_mpeg4_p2(qtmp4_demuxer_cptr &dmx);
+  virtual void create_video_packetizer_mpegh_p2(qtmp4_demuxer_cptr &dmx);
   virtual void create_video_packetizer_standard(qtmp4_demuxer_cptr &dmx);
   virtual void create_video_packetizer_svq1(qtmp4_demuxer_cptr &dmx);
 

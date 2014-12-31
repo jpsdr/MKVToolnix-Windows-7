@@ -25,7 +25,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("MPEG-1/2",                CT_V_MPEG12,    track_video,    "mpeg|mpg[12]|m[12]v.|mpgv|mp[12]v|h262|V_MPEG[12]");
   ms_codecs.emplace_back("MPEG-4p2",                CT_V_MPEG4_P2,  track_video,    "3iv2|xvi[dx]|divx|dx50|fmp4|mp4v|V_MPEG4/ISO/(?:SP|AP|ASP)");
   ms_codecs.emplace_back("MPEG-4p10/AVC/h.264",     CT_V_MPEG4_P10, track_video,    "avc.|[hx]264|V_MPEG4/ISO/AVC");
-  ms_codecs.emplace_back("MPEG-H/HEVC/h.265",       CT_V_MPEGH_P2,  track_video,    "hevc|[hx]265|V_MPEGH/ISO/HEVC");
+  ms_codecs.emplace_back("MPEG-H/HEVC/h.265",       CT_V_MPEGH_P2,  track_video,    "hevc|hvc1|[hx]265|V_MPEGH/ISO/HEVC");
   ms_codecs.emplace_back("RealVideo",               CT_V_REAL,      track_video,    "rv[1234]\\d|V_REAL/RV\\d+");
   ms_codecs.emplace_back("Theora",                  CT_V_THEORA,    track_video,    "theo|thra|V_THEORA");
   ms_codecs.emplace_back("Dirac",                   CT_V_DIRAC,     track_video,    "drac|V_DIRAC");

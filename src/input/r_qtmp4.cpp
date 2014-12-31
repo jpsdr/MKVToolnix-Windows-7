@@ -38,6 +38,7 @@
 #include "output/p_ac3.h"
 #include "output/p_alac.h"
 #include "output/p_dts.h"
+#include "output/p_hevc.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
 #include "output/p_mpeg4_p2.h"
@@ -1325,6 +1326,14 @@ qtmp4_reader_c::create_video_packetizer_mpeg4_p10(qtmp4_demuxer_cptr &dmx) {
 }
 
 void
+qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_cptr &dmx) {
+  m_ti.m_private_data = dmx->priv;
+  dmx->ptzr           = add_packetizer(new hevc_video_packetizer_c(this, m_ti, dmx->fps, dmx->v_width, dmx->v_height));
+
+  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+}
+
+void
 qtmp4_reader_c::create_video_packetizer_standard(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = dmx->stsd;
   dmx->ptzr           = add_packetizer(new video_packetizer_c(this, m_ti, MKV_V_QUICKTIME, 0.0, dmx->v_width, dmx->v_height));
@@ -1481,6 +1490,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
     else if (dmx->codec.is(CT_V_MPEG4_P10))
       create_video_packetizer_mpeg4_p10(dmx);
 
+    else if (dmx->codec.is(CT_V_MPEGH_P2))
+      create_video_packetizer_mpegh_p2(dmx);
+
     else if (dmx->codec.is(CT_V_SVQ1))
       create_video_packetizer_svq1(dmx);
 
@@ -1556,6 +1568,9 @@ qtmp4_reader_c::identify() {
 
     if (dmx->codec.is(CT_V_MPEG4_P10))
       verbose_info.push_back("packetizer:mpeg4_p10_video");
+
+    else if (dmx->codec.is(CT_V_MPEGH_P2))
+      verbose_info.push_back("packetizer:mpegh_p2_video");
 
     if (!dmx->language.empty())
       verbose_info.push_back((boost::format("language:%1%") % dmx->language).str());
@@ -1708,7 +1723,8 @@ qtmp4_demuxer_c::calculate_timecodes_variable_sample_size() {
   auto const num_edits         = editlist_table.size();
   auto const num_frame_offsets = frame_offset_table.size();
   bool is_avc                  = codec.is(CT_V_MPEG4_P10);
-  int64_t v_dts_offset         = is_avc && num_frame_offsets ? to_nsecs(frame_offset_table[0]) : 0;
+  bool is_hevc                 = codec.is(CT_V_MPEGH_P2);
+  int64_t v_dts_offset         = (is_avc || is_hevc) && num_frame_offsets ? to_nsecs(frame_offset_table[0]) : 0;
 
   std::vector<int64_t> timecodes_before_offsets;
 
@@ -1736,7 +1752,7 @@ qtmp4_demuxer_c::calculate_timecodes_variable_sample_size() {
 
     timecodes_before_offsets.push_back(timecode);
 
-    if (is_avc && (num_frame_offsets > real_frame))
+    if ((is_avc || is_hevc) && (num_frame_offsets > real_frame))
        timecode += to_nsecs(frame_offset_table[real_frame]) - v_dts_offset;
 
     timecodes.push_back(timecode + constant_editlist_offset_ns);
@@ -2302,7 +2318,7 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
   auto mem  = stsd->get_buffer() + stsd_non_priv_struct_size;
   auto size = atom_size - stsd_non_priv_struct_size;
 
-  if (!codec.is(CT_V_MPEG4_P10) && size && !fourcc.equiv("mp4v") && !fourcc.equiv("xvid")) {
+  if (!codec.is(CT_V_MPEG4_P10) && !codec.is(CT_V_MPEGH_P2) && size && !fourcc.equiv("mp4v") && !fourcc.equiv("xvid")) {
     priv = memory_c::clone(mem, size);
     return;
   }
@@ -2321,7 +2337,7 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
 
       mxdebug_if(m_debug_headers, boost::format("%1%Video private data size: %2%, type: '%3%'\n") % space((level + 1) * 2 + 1) % atom.size % atom.fourcc);
 
-      if ((atom.fourcc == "esds") || (atom.fourcc == "avcC")) {
+      if ((atom.fourcc == "esds") || (atom.fourcc == "avcC") || (atom.fourcc == "hvcC")) {
         if (!priv) {
           priv = memory_c::alloc(atom.size - atom.hsize);
 
@@ -2533,6 +2549,9 @@ qtmp4_demuxer_c::verify_video_parameters() {
   if (codec.is(CT_V_MPEG4_P10))
     return verify_avc_video_parameters();
 
+  else if (codec.is(CT_V_MPEGH_P2))
+    return verify_hevc_video_parameters();
+
   return true;
 }
 
@@ -2540,6 +2559,16 @@ bool
 qtmp4_demuxer_c::verify_avc_video_parameters() {
   if (!priv || (4 > priv->get_size())) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n")) % id);
+    return false;
+  }
+
+  return true;
+}
+
+bool
+qtmp4_demuxer_c::verify_hevc_video_parameters() {
+  if (!priv || (23 > priv->get_size())) {
+    mxwarn(boost::format(Y("Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n")) % id);
     return false;
   }
 
