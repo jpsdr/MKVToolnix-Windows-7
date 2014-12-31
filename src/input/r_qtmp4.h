@@ -169,7 +169,6 @@ struct qtmp4_demuxer_c {
   unsigned int stsd_non_priv_struct_size;
   uint32_t v_width, v_height, v_bitdepth;
   std::deque<int64_t> references;
-  bool avc_use_bframes;
   uint32_t a_channels, a_bitdepth;
   float a_samplerate;
   int a_aac_profile, a_aac_output_sample_rate;
@@ -205,7 +204,6 @@ struct qtmp4_demuxer_c {
     , v_width{0}
     , v_height{0}
     , v_bitdepth{0}
-    , avc_use_bframes{false}
     , a_channels{0}
     , a_bitdepth{0}
     , a_samplerate{0.0}
