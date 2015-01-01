@@ -1,5 +1,5 @@
 /*
-   mpls_dump - A tool dumping MPLS structures
+   mpls_dump - A tool for dumping MPLS structures
 
    Distributed under the GPL v2
    see the file COPYING for details
