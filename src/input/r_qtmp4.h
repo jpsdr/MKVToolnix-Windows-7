@@ -25,6 +25,24 @@
 #include "output/p_video.h"
 #include "input/qtmp4_atoms.h"
 
+#define QTMP4_TFHD_BASE_DATA_OFFSET        0x000001
+#define QTMP4_TFHD_SAMPLE_DESCRIPTION_ID   0x000002
+#define QTMP4_TFHD_DEFAULT_DURATION        0x000008
+#define QTMP4_TFHD_DEFAULT_SIZE            0x000010
+#define QTMP4_TFHD_DEFAULT_FLAGS           0x000020
+#define QTMP4_TFHD_DURATION_IS_EMPTY       0x010000
+#define QTMP4_TFHD_DEFAULT_BASE_IS_MOOF    0x020000
+
+#define QTMP4_TRUN_DATA_OFFSET             0x000001
+#define QTMP4_TRUN_FIRST_SAMPLE_FLAGS      0x000004
+#define QTMP4_TRUN_SAMPLE_DURATION         0x000100
+#define QTMP4_TRUN_SAMPLE_SIZE             0x000200
+#define QTMP4_TRUN_SAMPLE_FLAGS            0x000400
+#define QTMP4_TRUN_SAMPLE_CTS_OFFSET       0x000800
+
+#define QTMP4_FRAG_SAMPLE_FLAG_IS_NON_SYNC 0x00010000
+#define QTMP4_FRAG_SAMPLE_FLAG_DEPENDS_YES 0x01000000
+
 struct qt_durmap_t {
   uint32_t number;
   uint32_t duration;
@@ -32,6 +50,12 @@ struct qt_durmap_t {
   qt_durmap_t()
     : number{}
     , duration{}
+  {
+  }
+
+  qt_durmap_t(uint32_t p_number, uint32_t p_duration)
+    : number{p_number}
+    , duration{p_duration}
   {
   }
 };
@@ -47,6 +71,14 @@ struct qt_chunk_t {
     , size{}
     , desc{}
     , pos{}
+  {
+  }
+
+  qt_chunk_t(uint32_t p_size, uint64_t p_pos)
+    : samples{}
+    , size{p_size}
+    , desc{}
+    , pos{p_pos}
   {
   }
 };
@@ -96,6 +128,13 @@ struct qt_sample_t {
     , pos{}
   {
   }
+
+  qt_sample_t(uint32_t p_size)
+    : pts{}
+    , size{p_size}
+    , pos{}
+  {
+  }
 };
 
 struct qt_frame_offset_t {
@@ -105,6 +144,12 @@ struct qt_frame_offset_t {
   qt_frame_offset_t()
     : count{}
     , offset{}
+  {
+  }
+
+  qt_frame_offset_t(uint32_t p_count, uint32_t p_offset)
+    : count{p_count}
+    , offset{p_offset}
   {
   }
 };
@@ -133,6 +178,34 @@ struct qt_index_t {
   }
 };
 
+struct qt_track_defaults_t {
+  unsigned int sample_description_id, sample_duration, sample_size, sample_flags;
+
+  qt_track_defaults_t()
+    : sample_description_id{}
+    , sample_duration{}
+    , sample_size{}
+    , sample_flags{}
+  {
+  }
+};
+
+struct qt_fragment_t {
+  unsigned int track_id, sample_description_id, sample_duration, sample_size, sample_flags;
+  uint64_t base_data_offset, moof_offset, implicit_offset;
+
+  qt_fragment_t()
+    : track_id{}
+    , sample_description_id{}
+    , sample_duration{}
+    , sample_size{}
+    , sample_flags{}
+    , base_data_offset{}
+    , moof_offset{}
+    , implicit_offset{}
+  {}
+};
+
 struct qtmp4_demuxer_c {
   bool ok;
 
@@ -144,7 +217,7 @@ struct qtmp4_demuxer_c {
   codec_c codec;
   pcm_packetizer_c::pcm_format_e m_pcm_format;
 
-  int64_t time_scale, duration, global_duration, constant_editlist_offset_ns;
+  int64_t time_scale, duration, global_duration, constant_editlist_offset_ns, num_frames_from_trun;
   uint32_t sample_size;
 
   std::vector<qt_sample_t> sample_table;
@@ -159,6 +232,7 @@ struct qtmp4_demuxer_c {
   std::vector<int64_t> timecodes, durations, frame_indices;
 
   std::vector<qt_index_t> m_index;
+  std::vector<qt_fragment_t> m_fragments;
 
   double fps;
 
@@ -197,6 +271,7 @@ struct qtmp4_demuxer_c {
     , duration{0}
     , global_duration{0}
     , constant_editlist_offset_ns{0}
+    , num_frames_from_trun{}
     , sample_size{0}
     , fps{0.0}
     , esds_parsed{false}
@@ -335,12 +410,17 @@ class qtmp4_reader_c: public generic_reader_c {
 private:
   std::vector<qtmp4_demuxer_cptr> m_demuxers;
   std::unordered_map<unsigned int, bool> m_chapter_track_ids;
-  int64_t m_mdat_pos, m_mdat_size;
+  std::unordered_map<unsigned int, qt_track_defaults_t> m_track_defaults;
+
   uint32_t m_time_scale;
   fourcc_c m_compression_algorithm;
   int m_main_dmx;
 
   unsigned int m_audio_encoder_delay_samples;
+
+  uint64_t m_moof_offset, m_fragment_implicit_offset;
+  qt_fragment_t *m_fragment;
+  qtmp4_demuxer_c *m_track_for_fragment;
 
   debugging_option_c m_debug_chapters, m_debug_headers, m_debug_tables, m_debug_interleaving, m_debug_resync;
 
@@ -364,6 +444,7 @@ public:
 
 protected:
   virtual void parse_headers();
+  virtual void verify_track_parameters_and_update_indexes();
   virtual void calculate_timecodes();
   virtual qt_atom_t read_atom(mm_io_c *read_from = nullptr, bool exit_on_error = true);
   virtual bool resync_to_top_level_atom(uint64_t start_pos);
@@ -384,6 +465,12 @@ protected:
   virtual void handle_meta_atom(qt_atom_t parent, int level);
   virtual void handle_ilst_atom(qt_atom_t parent, int level);
   virtual void handle_4dashes_atom(qt_atom_t parent, int level);
+  virtual void handle_mvex_atom(qt_atom_t parent, int level);
+  virtual void handle_trex_atom(qt_atom_t parent, int level);
+  virtual void handle_moof_atom(qt_atom_t parent, int level, qt_atom_t const &moof_atom);
+  virtual void handle_traf_atom(qt_atom_t parent, int level);
+  virtual void handle_tfhd_atom(qt_atom_t parent, int level);
+  virtual void handle_trun_atom(qt_atom_t parent, int level);
   virtual void handle_stbl_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
   virtual void handle_stco_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
   virtual void handle_co64_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
