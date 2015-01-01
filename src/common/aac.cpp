@@ -961,7 +961,10 @@ header_c::parse_audio_specific_config(bit_reader_c &bc,
     sample_rate = read_sample_rate();
     channels    = m_bc->get_bits(4);
 
-    if (MP4AOT_SBR == object_type) {
+    if (   (MP4AOT_SBR == object_type)
+        || (    (MP4AOT_PS == object_type)
+            && !(    (m_bc->peek_bits(3) & 0x03)
+                 && !(m_bc->peek_bits(9) & 0x3f)))) {
       is_sbr                = true;
       output_sample_rate    = read_sample_rate();
       extension_object_type = object_type;
