@@ -84,107 +84,75 @@ get_uint_be(const void *buf,
 }
 
 void
+put_uint_le(void *buf,
+            uint64_t value,
+            size_t num_bytes) {
+  auto tmp  = static_cast<unsigned char *>(buf);
+  num_bytes = std::min<size_t>(std::max<size_t>(1, num_bytes), 8);
+
+  for (auto idx = 0u; idx < num_bytes; ++idx) {
+    tmp[idx] = value & 0xff;
+    value  >>= 8;
+  }
+}
+
+void
+put_uint_be(void *buf,
+            uint64_t value,
+            size_t num_bytes) {
+  auto tmp  = static_cast<unsigned char *>(buf);
+  num_bytes = std::min<size_t>(std::max<size_t>(1, num_bytes), 8);
+
+  for (auto idx = 0u; idx < num_bytes; ++idx) {
+    tmp[num_bytes - idx - 1] = value & 0xff;
+    value                  >>= 8;
+  }
+}
+
+void
 put_uint16_le(void *buf,
               uint16_t value) {
-  unsigned char *tmp;
-
-  tmp = (unsigned char *) buf;
-
-  tmp[0] = value & 0xff;
-  tmp[1] = (value >>= 8) & 0xff;
+  put_uint_le(buf, value, 2);
 }
 
 void
 put_uint24_le(void *buf,
               uint32_t value) {
-  unsigned char *tmp;
-
-  tmp = (unsigned char *) buf;
-
-  tmp[0] = value & 0xff;
-  tmp[1] = (value >>= 8) & 0xff;
-  tmp[2] = (value >>= 8) & 0xff;
+  put_uint_le(buf, value, 3);
 }
 
 void
 put_uint32_le(void *buf,
               uint32_t value) {
-  unsigned char *tmp;
-
-  tmp = (unsigned char *) buf;
-
-  tmp[0] = value & 0xff;
-  tmp[1] = (value >>= 8) & 0xff;
-  tmp[2] = (value >>= 8) & 0xff;
-  tmp[3] = (value >>= 8) & 0xff;
+  put_uint_le(buf, value, 4);
 }
 
 void
 put_uint64_le(void *buf,
               uint64_t value) {
-  unsigned char *tmp;
-
-  tmp = (unsigned char *) buf;
-
-  tmp[0] = value & 0xff;
-  tmp[1] = (value >>= 8) & 0xff;
-  tmp[2] = (value >>= 8) & 0xff;
-  tmp[3] = (value >>= 8) & 0xff;
-  tmp[4] = (value >>= 8) & 0xff;
-  tmp[5] = (value >>= 8) & 0xff;
-  tmp[6] = (value >>= 8) & 0xff;
-  tmp[7] = (value >>= 8) & 0xff;
+  put_uint_le(buf, value, 8);
 }
 
 void
 put_uint16_be(void *buf,
               uint16_t value) {
-  unsigned char *tmp;
-
-  tmp = (unsigned char *) buf;
-
-  tmp[1] = value & 0xff;
-  tmp[0] = (value >>= 8) & 0xff;
+  put_uint_be(buf, value, 2);
 }
 
 void
 put_uint24_be(void *buf,
               uint32_t value) {
-  unsigned char *tmp;
-
-  tmp = (unsigned char *) buf;
-
-  tmp[2] = value & 0xff;
-  tmp[1] = (value >>= 8) & 0xff;
-  tmp[0] = (value >>= 8) & 0xff;
+  put_uint_be(buf, value, 3);
 }
 
 void
 put_uint32_be(void *buf,
               uint32_t value) {
-  unsigned char *tmp;
-
-  tmp = (unsigned char *) buf;
-
-  tmp[3] = value & 0xff;
-  tmp[2] = (value >>= 8) & 0xff;
-  tmp[1] = (value >>= 8) & 0xff;
-  tmp[0] = (value >>= 8) & 0xff;
+  put_uint_be(buf, value, 4);
 }
 
 void
 put_uint64_be(void *buf,
               uint64_t value) {
-  unsigned char *tmp;
-
-  tmp = (unsigned char *) buf;
-
-  tmp[7] = value & 0xff;
-  tmp[6] = (value >>= 8) & 0xff;
-  tmp[5] = (value >>= 8) & 0xff;
-  tmp[4] = (value >>= 8) & 0xff;
-  tmp[3] = (value >>= 8) & 0xff;
-  tmp[2] = (value >>= 8) & 0xff;
-  tmp[1] = (value >>= 8) & 0xff;
-  tmp[0] = (value >>= 8) & 0xff;
+  put_uint_be(buf, value, 8);
 }
