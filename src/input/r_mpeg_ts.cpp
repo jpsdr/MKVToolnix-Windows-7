@@ -16,6 +16,7 @@
 
 #include <iostream>
 
+#include "common/bswap.h"
 #include "common/checksums.h"
 #include "common/clpi.h"
 #include "common/endian.h"
@@ -704,6 +705,13 @@ mpeg_ts_reader_c::process_chapter_entries() {
 mpeg_ts_reader_c::~mpeg_ts_reader_c() {
 }
 
+uint32_t
+mpeg_ts_reader_c::calculate_crc(void const *buffer,
+                                size_t size)
+  const {
+  return bswap_32(crc_calc(crc_get_table(CRC_32_IEEE), 0xffffffff, static_cast<unsigned char const *>(buffer), size));
+}
+
 void
 mpeg_ts_reader_c::identify() {
   std::vector<std::string> verbose_info;
@@ -768,7 +776,7 @@ mpeg_ts_reader_c::parse_pat(unsigned char *pat) {
   }
 
   unsigned short pat_section_length = pat_header->get_section_length();
-  uint32_t elapsed_CRC              = crc_calc_mpeg2(pat, 3 + pat_section_length - 4/*CRC32*/);
+  uint32_t elapsed_CRC              = calculate_crc(pat, 3 + pat_section_length - 4/*CRC32*/);
   uint32_t read_CRC                 = get_uint32_be(pat + 3 + pat_section_length - 4);
 
   if (elapsed_CRC != read_CRC) {
@@ -848,7 +856,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
   }
 
   unsigned short pmt_section_length = pmt_header->get_section_length();
-  uint32_t elapsed_CRC              = crc_calc_mpeg2(pmt, 3 + pmt_section_length - 4/*CRC32*/);
+  uint32_t elapsed_CRC              = calculate_crc(pmt, 3 + pmt_section_length - 4/*CRC32*/);
   uint32_t read_CRC                 = get_uint32_be(pmt + 3 + pmt_section_length - 4);
 
   if (elapsed_CRC != read_CRC) {

@@ -30,6 +30,5 @@ enum crc_type_e {
 int crc_init(uint32_t *ctx, int le, int bits, uint32_t poly, unsigned int ctx_size);
 const uint32_t * crc_get_table(crc_type_e crc_id);
 uint32_t crc_calc(const uint32_t *ctx, uint32_t start_crc, const unsigned char *buffer, size_t length);
-uint32_t crc_calc_mpeg2(unsigned char *data, int len);
 
 #endif // MTX_COMMON_CHECKSUMS_H

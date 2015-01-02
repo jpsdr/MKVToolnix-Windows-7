@@ -450,6 +450,8 @@ private:
 
   bool resync(int64_t start_at);
 
+  uint32_t calculate_crc(void const *buffer, size_t size) const;
+
   friend class mpeg_ts_track_c;
 };
 
