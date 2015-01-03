@@ -44,7 +44,7 @@ def setup_globals
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
   $programs                << "mmg" if c?(:USE_WXWIDGETS)
   $programs                << "mkvtoolnix-gui" if $build_mkvtoolnix_gui
-  $tools                   =  %w{ac3parser base64tool diracparser ebml_validator mpls_dump vc1parser}
+  $tools                   =  %w{ac3parser base64tool checksum diracparser ebml_validator mpls_dump vc1parser}
   $mmg_bin                 =  c(:MMG_BIN)
   $mmg_bin                 =  "mmg" if $mmg_bin.empty?
 
@@ -828,6 +828,16 @@ Application.new("src/tools/base64tool").
   description("Build the base64tool executable").
   aliases("tools:base64tool").
   sources("src/tools/base64tool.cpp").
+  libraries($common_libs).
+  create
+
+#
+# tools: checksum
+#
+Application.new("src/tools/checksum").
+  description("Build the checksum executable").
+  aliases("tools:checksum").
+  sources("src/tools/checksum.cpp").
   libraries($common_libs).
   create
 
