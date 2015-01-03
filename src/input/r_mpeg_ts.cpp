@@ -17,7 +17,7 @@
 #include <iostream>
 
 #include "common/bswap.h"
-#include "common/checksums.h"
+#include "common/checksums/crc.h"
 #include "common/clpi.h"
 #include "common/endian.h"
 #include "common/math.h"
@@ -709,7 +709,7 @@ uint32_t
 mpeg_ts_reader_c::calculate_crc(void const *buffer,
                                 size_t size)
   const {
-  return bswap_32(crc_calc(crc_get_table(CRC_32_IEEE), 0xffffffff, static_cast<unsigned char const *>(buffer), size));
+  return bswap_32(mtx::checksum::calculate_as_uint(mtx::checksum::crc32_ieee, buffer, size, 0xffffffff));
 }
 
 void

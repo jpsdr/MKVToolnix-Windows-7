@@ -18,7 +18,7 @@
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
 
-#include "common/checksums.h"
+#include "common/checksums/base.h"
 #include "common/codec.h"
 #include "common/flac.h"
 #include "merge/connection_checks.h"

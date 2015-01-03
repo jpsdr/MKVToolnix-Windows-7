@@ -23,7 +23,7 @@
 
 #include "common/bit_cursor.h"
 #include "common/byte_buffer.h"
-#include "common/checksums.h"
+#include "common/checksums/base.h"
 #include "common/endian.h"
 #include "common/hacks.h"
 #include "common/math.h"
@@ -734,7 +734,7 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
   buffer = mcptr_newsps;
   buffer->set_size(w.get_bit_position() / 8);
 
-  sps.checksum = calc_adler32(buffer->get_buffer(), buffer->get_size());
+  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *buffer);
 
   return true;
 }
@@ -755,7 +755,7 @@ mpeg4::p10::parse_pps(memory_cptr &buffer,
 
     r.skip_bits(1);             // entropy_coding_mode_flag
     pps.pic_order_present = r.get_bit();
-    pps.checksum          = calc_adler32(buffer->get_buffer(), buffer->get_size());
+    pps.checksum          = mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *buffer);
 
     return true;
   } catch (...) {
@@ -1790,7 +1790,7 @@ mpeg4::p10::avc_es_parser_c::dump_info()
            % format_timecode(frame.m_start)
            % format_timecode(frame.m_end)
            % format_timecode(frame.m_ref1)
-           % calc_adler32(frame.m_data->get_buffer(), frame.m_data->get_size()));
+           % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *frame.m_data));
   }
 }
 

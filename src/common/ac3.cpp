@@ -19,7 +19,7 @@
 #include "common/bit_cursor.h"
 #include "common/bswap.h"
 #include "common/byte_buffer.h"
-#include "common/checksums.h"
+#include "common/checksums/base.h"
 #include "common/endian.h"
 
 ac3::frame_c::frame_c() {
@@ -459,7 +459,7 @@ verify_ac3_checksum(const unsigned char *buf,
   int frame_size_words  = frame.m_bytes >> 1;
   int frame_size_58     = (frame_size_words >> 1) + (frame_size_words >> 3);
 
-  uint16_t actual_crc   = bswap_16(crc_calc(crc_get_table(CRC_16_ANSI), 0, buf + 4, 2 * frame_size_58 - 4));
+  uint16_t actual_crc   = bswap_16(mtx::checksum::calculate_as_uint(mtx::checksum::crc16_ansi, buf + 4, 2 * frame_size_58 - 4));
   unsigned int crc_inv  = pow_poly((CRC16_POLY >> 1), (16 * frame_size_58) - 16, CRC16_POLY);
   actual_crc            = mul_poly(crc_inv, actual_crc, CRC16_POLY);
 

@@ -649,19 +649,19 @@ end
 # src/output
 #
 
-[ { :name => 'avi',         :dir => 'lib/avilib-0.6.10'                                                                             },
-  { :name => 'rmff',        :dir => 'lib/librmff'                                                                                   },
-  { :name => 'pugixml',     :dir => 'lib/pugixml/src'                                                                               },
-  { :name => 'mpegparser',  :dir => 'src/mpegparser'                                                                                },
-  { :name => 'mtxcommon',   :dir => [ 'src/common' ] + %w{chapters compression strings tags xml }.collect { |e| "src/common/#{e}" } },
-  { :name => 'mtxinput',    :dir => 'src/input'                                                                                     },
-  { :name => 'mtxoutput',   :dir => 'src/output'                                                                                    },
-  { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                                  },
-  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp wxwidgets_ui.cpp mkvinfo.cpp},                          },
-  { :name => 'mtxextract',  :dir => 'src/extract',  :except => [ 'mkvextract.cpp' ],                                                },
-  { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'mkvpropedit.cpp' ],                                               },
-  { :name => 'ebml',        :dir => 'lib/libebml/src'                                                                               },
-  { :name => 'matroska',    :dir => 'lib/libmatroska/src'                                                                           },
+[ { :name => 'avi',         :dir => 'lib/avilib-0.6.10'                                                                                      },
+  { :name => 'rmff',        :dir => 'lib/librmff'                                                                                            },
+  { :name => 'pugixml',     :dir => 'lib/pugixml/src'                                                                                        },
+  { :name => 'mpegparser',  :dir => 'src/mpegparser'                                                                                         },
+  { :name => 'mtxcommon',   :dir => [ 'src/common' ] + %w{chapters checksums compression strings tags xml}.collect { |e| "src/common/#{e}" } },
+  { :name => 'mtxinput',    :dir => 'src/input'                                                                                              },
+  { :name => 'mtxoutput',   :dir => 'src/output'                                                                                             },
+  { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                                           },
+  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp wxwidgets_ui.cpp mkvinfo.cpp                                     },                          },
+  { :name => 'mtxextract',  :dir => 'src/extract',  :except => [ 'mkvextract.cpp' ],                                                         },
+  { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'mkvpropedit.cpp' ],                                                        },
+  { :name => 'ebml',        :dir => 'lib/libebml/src'                                                                                        },
+  { :name => 'matroska',    :dir => 'lib/libmatroska/src'                                                                                    },
 ].each do |lib|
   Library.
     new("#{[ lib[:dir] ].flatten.first}/lib#{lib[:name]}").

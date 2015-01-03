@@ -12,7 +12,7 @@
 
 #include "common/bit_cursor.h"
 #include "common/byte_buffer.h"
-#include "common/checksums.h"
+#include "common/checksums/base.h"
 #include "common/common_pch.h"
 #include "common/mm_io.h"
 #include "common/translation.h"
@@ -129,7 +129,7 @@ vc1_info_c::create_checksum_info(memory_cptr packet) {
   if (!g_opt_checksum)
     return "";
 
-  return (boost::format(Y(" checksum 0x%|1$08x|")) % calc_adler32(packet->get_buffer(), packet->get_size())).str();
+  return (boost::format(Y(" checksum 0x%|1$08x|")) % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *packet)).str();
 }
 
 void

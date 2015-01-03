@@ -14,7 +14,7 @@
 
 #include <time.h>
 
-#include "common/checksums.h"
+#include "common/checksums/base.h"
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"
@@ -89,7 +89,7 @@ xtr_tta_c::finish_file() {
   if (0 >= m_previous_duration)
     m_previous_duration = (int64_t)(TTA_FRAME_TIME * m_sfreq) * 1000000000ll;
   put_uint32_le(&tta_header.data_length, (uint32_t)(m_sfreq * (TTA_FRAME_TIME * (m_frame_sizes.size() - 1) + (double)m_previous_duration / 1000000000.0l)));
-  put_uint32_le(&tta_header.crc, 0xffffffff ^ crc_calc(crc_get_table(CRC_32_IEEE_LE), 0xffffffff, (unsigned char *)&tta_header, sizeof(tta_file_header_t) - 4));
+  put_uint32_le(&tta_header.crc, 0xffffffff ^ mtx::checksum::calculate_as_uint(mtx::checksum::crc32_ieee_le, &tta_header, sizeof(tta_file_header_t) - 4, 0xffffffff));
 
   m_out->write(&tta_header, sizeof(tta_file_header_t));
 
@@ -100,7 +100,7 @@ xtr_tta_c::finish_file() {
 
   m_out->write(buffer, m_frame_sizes.size() * 4);
 
-  m_out->write_uint32_le(0xffffffff ^ crc_calc(crc_get_table(CRC_32_IEEE_LE), 0xffffffff, buffer, m_frame_sizes.size() * 4));
+  m_out->write_uint32_le(0xffffffff ^ mtx::checksum::calculate_as_uint(mtx::checksum::crc32_ieee_le, buffer, m_frame_sizes.size() * 4, 0xffffffff));
 
   safefree(buffer);
 

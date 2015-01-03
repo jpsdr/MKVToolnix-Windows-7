@@ -13,7 +13,7 @@
 #include "common/ac3.h"
 #include "common/bit_cursor.h"
 #include "common/byte_buffer.h"
-#include "common/checksums.h"
+#include "common/checksums/base.h"
 #include "common/common_pch.h"
 #include "common/endian.h"
 #include "common/translation.h"
@@ -101,7 +101,7 @@ parse_file(const std::string &file_name) {
       std::string output = frame.to_string(g_opt_frame_headers);
 
       if (g_opt_checksum) {
-        uint32_t adler32  = calc_adler32(frame.m_data->get_buffer(), frame.m_data->get_size());
+        uint32_t adler32  = mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *frame.m_data);
         output           += (boost::format(" checksum 0x%|1$08x|") % adler32).str();
       }
 

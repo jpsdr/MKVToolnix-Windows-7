@@ -1,3 +1,12 @@
+2015-01-03  Moritz Bunkus  <moritz@bunkus.org>
+
+        * all: bug fix: Re-wrote the whole checksum calculation code. This
+        lead to a fix for the Adler32 checksum algorithm that was
+        triggered under certain circumstances. Adler32 is used in
+        mkvinfo's output (e.g. in summary mode or if checksums are
+        activated), in the h.265/HEVC bitstream and TrueAudio
+        (TTA) file headers.
+
 2015-01-01  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: fixed handling of HE-AACv2 with object type
