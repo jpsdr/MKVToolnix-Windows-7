@@ -34,14 +34,8 @@ namespace mtx { namespace checksum {
 
 // SET reads 4 input bytes in little-endian byte order and stores them
 // in a properly aligned word in host byte order.
-#define SET(n) \
-  (m_block[(n)] = \
-     static_cast<uint32_t>(data[(n) * 4])            | \
-    (static_cast<uint32_t>(data[(n) * 4 + 1]) << 8)  | \
-    (static_cast<uint32_t>(data[(n) * 4 + 2]) << 16) | \
-    (static_cast<uint32_t>(data[(n) * 4 + 3]) << 24))
-#define GET(n) \
-  (m_block[(n)])
+#define SET(n) (m_block[(n)]) = get_uint32_le(&data[(n) * 4])
+#define GET(n) (m_block[(n)])
 
 md5_c::md5_c()
   : m_a{0x67452301}
