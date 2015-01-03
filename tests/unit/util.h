@@ -57,4 +57,22 @@ operator ==(memory_c const &a,
   return (a.get_size() == b.length()) && !memcmp(a.get_buffer(), b.c_str(), b.length());
 }
 
+inline bool
+operator ==(std::string const &a,
+            memory_c const &b) {
+  return b == a;
+}
+
+inline bool
+operator ==(memory_cptr const &a,
+            std::string const &b) {
+  return *a == b;
+}
+
+inline bool
+operator ==(std::string const &a,
+            memory_cptr const &b) {
+  return *b == a;
+}
+
 #endif // MTX_TESTS_UNIT_UTIL_H

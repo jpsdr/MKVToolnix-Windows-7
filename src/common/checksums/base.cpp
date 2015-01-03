@@ -16,6 +16,7 @@
 #include "common/checksums/base.h"
 #include "common/checksums/adler32.h"
 #include "common/checksums/crc.h"
+#include "common/checksums/md5.h"
 
 namespace mtx { namespace checksum {
 
@@ -39,6 +40,9 @@ for_algorithm(algorithm_e algorithm,
 
   else if (crc32_ieee_le == algorithm)
     return std::make_shared<crc32_ieee_le_c>(initial_value);
+
+  else if (md5 == algorithm)
+    return std::make_shared<md5_c>();
 
   else
     mxerror(boost::format("Programming error: unknown checksum algorithm %1%\n") % algorithm);
