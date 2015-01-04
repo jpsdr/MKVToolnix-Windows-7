@@ -23,6 +23,7 @@
 #include "common/ebml.h"
 #include "common/fs_sys_helpers.h"
 #include "common/kax_file.h"
+#include "common/mm_io_x.h"
 #include "common/strings/formatting.h"
 
 kax_file_c::kax_file_c(mm_io_cptr &in)
@@ -50,10 +51,16 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
 
     return element;
 
+  } catch (mtx::mm_io::exception &e) {
+    mxwarn(boost::format("%1% %2% %3%\n")
+           % (boost::format(Y("%1%: an exception occurred (message: %2%; type: %3%).")) % "kax_file_c::read_next_level1_element()" % (boost::format("%1% / %2%") % e.what() % e.error()) % typeid(e).name())
+           % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
+
   } catch (std::exception &e) {
     mxwarn(boost::format("%1% %2% %3%\n")
-           % (boost::format(Y("%1%: an exception occurred (message: %2%; type; %3%).")) % "kax_file_c::read_next_level1_element()" % e.what() % typeid(e).name())
+           % (boost::format(Y("%1%: an exception occurred (message: %2%; type: %3%).")) % "kax_file_c::read_next_level1_element()" % e.what() % typeid(e).name())
            % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
+
   } catch (...) {
     mxwarn(boost::format("%1% %2% %3%\n")
            % (boost::format(Y("%1%: an unknown exception occurred.")) % "kax_file_c::read_next_level1_element()")
