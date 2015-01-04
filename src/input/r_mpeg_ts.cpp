@@ -82,7 +82,7 @@ mpeg_ts_track_c::send_to_packetizer() {
     timecode_to_use          -= std::max(reader.m_global_timecode_offset, min.valid() ? min : timecode_c::ns(0));
   }
 
-  mxdebug_if(m_debug_delivery, boost::format("send_to_packetizer() PID %1% expected %2% actual %3% timecode_to_use %4% m_previous_timecode %5%\n")
+  mxdebug_if(m_debug_delivery, boost::format("mpeg_ts_track_c::send_to_packetizer: PID %1% expected %2% actual %3% timecode_to_use %4% m_previous_timecode %5%\n")
              % pid % pes_payload_size % pes_payload->get_size() % timecode_to_use % m_previous_timecode);
 
   if (use_packet) {
@@ -124,7 +124,7 @@ mpeg_ts_track_c::new_stream_v_mpeg_1_2() {
 
   int state = m_m2v_parser->GetState();
   if (state != MPV_PARSER_STATE_FRAME) {
-    mxverb(3, boost::format("new_stream_v_mpeg_1_2: no valid frame in %1% bytes\n") % pes_payload->get_size());
+    mxdebug_if(m_debug_headers, boost::format("mpeg_ts_track_c::new_stream_v_mpeg_1_2: no valid frame in %1% bytes\n") % pes_payload->get_size());
     return FILE_STATUS_MOREDATA;
   }
 
@@ -149,11 +149,11 @@ mpeg_ts_track_c::new_stream_v_mpeg_1_2() {
 
   MPEGChunk *raw_seq_hdr_chunk = m_m2v_parser->GetRealSequenceHeader();
   if (raw_seq_hdr_chunk) {
-    mxverb(3, boost::format("new_stream_v_mpeg_1_2: sequence header size: %1%\n") % raw_seq_hdr_chunk->GetSize());
+    mxdebug_if(m_debug_headers, boost::format("mpeg_ts_track_c::new_stream_v_mpeg_1_2: sequence header size: %1%\n") % raw_seq_hdr_chunk->GetSize());
     raw_seq_hdr = memory_c::clone(raw_seq_hdr_chunk->GetPointer(), raw_seq_hdr_chunk->GetSize());
   }
 
-  mxverb(3, boost::format("new_stream_v_mpeg_1_2: width: %1%, height: %2%\n") % v_width % v_height);
+  mxdebug_if(m_debug_headers, boost::format("mpeg_ts_track_c::new_stream_v_mpeg_1_2: width: %1%, height: %2%\n") % v_width % v_height);
   if (v_width == 0 || v_height == 0)
     return FILE_STATUS_MOREDATA;
 
@@ -172,7 +172,7 @@ mpeg_ts_track_c::new_stream_v_avc() {
       m_avc_parser->set_nalu_size_length(reader.m_ti.m_nalu_size_lengths[-1]);
   }
 
-  mxverb(3, boost::format("new_stream_v_avc: packet size: %1%\n") % pes_payload->get_size());
+  mxdebug_if(m_debug_headers, boost::format("mpeg_ts_track_c::new_stream_v_avc: packet size: %1%\n") % pes_payload->get_size());
 
   m_avc_parser->add_bytes(pes_payload->get_buffer(), pes_payload->get_size());
 
@@ -235,7 +235,7 @@ mpeg_ts_track_c::new_stream_a_mpeg() {
   a_sample_rate = header.sampling_frequency;
   codec         = codec_c::look_up(CT_A_MP3);
 
-  mxverb(3, boost::format("new_stream_a_mpeg: Channels: %1%, sample rate: %2%\n") %a_channels % a_sample_rate);
+  mxdebug_if(m_debug_headers, boost::format("mpeg_ts_track_c::new_stream_a_mpeg: Channels: %1%, sample rate: %2%\n") %a_channels % a_sample_rate);
   return 0;
 }
 
@@ -250,7 +250,7 @@ mpeg_ts_track_c::new_stream_a_aac() {
 
   m_aac_frame = parser.get_frame();
 
-  mxdebug_if(reader.m_debug_aac, boost::format("first AAC header: %1%\n") % m_aac_frame.to_string());
+  mxdebug_if(reader.m_debug_aac, boost::format("mpeg_ts_track_c::new_stream_a_aac: first AAC header: %1%\n") % m_aac_frame.to_string());
 
   a_channels    = m_aac_frame.m_header.channels;
   a_sample_rate = m_aac_frame.m_header.sample_rate;
@@ -269,9 +269,9 @@ mpeg_ts_track_c::new_stream_a_ac3() {
 
   ac3::frame_c header = parser.get_frame();
 
-  mxverb(2,
-         boost::format("first ac3 header bsid %1% channels %2% sample_rate %3% bytes %4% samples %5%\n")
-         % header.m_bs_id % header.m_channels % header.m_sample_rate % header.m_bytes % header.m_samples);
+  mxdebug_if(m_debug_headers,
+             boost::format("mpeg_ts_track_c::new_stream_a_ac3: first ac3 header bsid %1% channels %2% sample_rate %3% bytes %4% samples %5%\n")
+             % header.m_bs_id % header.m_channels % header.m_sample_rate % header.m_bytes % header.m_samples);
 
   a_channels    = header.m_channels;
   a_sample_rate = header.m_sample_rate;
@@ -312,7 +312,9 @@ mpeg_ts_track_c::new_stream_a_pcm() {
                          : sample_rate_idx == 5 ? 192000
                          :                             0;
 
-  mxverb(3, boost::format("new_stream_a_pcm: header: 0x%|1$08x| channels: %2%, sample rate: %3%, bits per channel: %4%\n") % get_uint32_be(buffer) % a_channels % a_sample_rate % a_bits_per_sample);
+  mxdebug_if(m_debug_headers,
+             boost::format("mpeg_ts_track_c::new_stream_a_pcm: header: 0x%|1$08x| channels: %2%, sample rate: %3%, bits per channel: %4%\n")
+             % get_uint32_be(buffer) % a_channels % a_sample_rate % a_bits_per_sample);
 
   return a_sample_rate ? 0 : FILE_STATUS_DONE;
 }
@@ -330,9 +332,9 @@ mpeg_ts_track_c::new_stream_a_truehd() {
     if (truehd_frame_t::sync != frame->m_type)
       continue;
 
-    mxverb(2,
-           boost::format("first TrueHD header channels %1% sampling_rate %2% samples_per_frame %3%\n")
-           % frame->m_channels % frame->m_sampling_rate % frame->m_samples_per_frame);
+    mxdebug_if(m_debug_headers,
+               boost::format("mpeg_ts_track_c::new_stream_a_truehdfirst TrueHD header channels %1% sampling_rate %2% samples_per_frame %3%\n")
+               % frame->m_channels % frame->m_sampling_rate % frame->m_samples_per_frame);
 
     a_channels    = frame->m_channels;
     a_sample_rate = frame->m_sampling_rate;
@@ -397,7 +399,7 @@ mpeg_ts_track_c::handle_timecode_wrap(timecode_c &pts,
     if (m_timecodes_wrapped) {
       m_timecode_wrap_add += s_wrap_add;
       mxdebug_if(m_debug_timecode_wrapping,
-                 boost::format("Timecode wrapping detected for PID %1% pts %2% dts %3% previous_valid %4% global_offset %5% new wrap_add %6%\n")
+                 boost::format("mpeg_ts_track_c::handle_timecode_wrap: Timecode wrapping detected for PID %1% pts %2% dts %3% previous_valid %4% global_offset %5% new wrap_add %6%\n")
                  % pid % pts % dts % m_previous_valid_timecode % reader.m_global_timecode_offset % m_timecode_wrap_add);
 
     }
@@ -405,7 +407,7 @@ mpeg_ts_track_c::handle_timecode_wrap(timecode_c &pts,
   } else if (pts.valid() && (pts < s_wrap_limit) && (pts > s_reset_limit)) {
     m_timecodes_wrapped = false;
     mxdebug_if(m_debug_timecode_wrapping,
-               boost::format("Timecode wrapping reset for PID %1% pts %2% dts %3% previous_valid %4% global_offset %5% current wrap_add %6%\n")
+               boost::format("mpeg_ts_track_c::handle_timecode_wrap: Timecode wrapping reset for PID %1% pts %2% dts %3% previous_valid %4% global_offset %5% current wrap_add %6%\n")
                % pid % pts % dts % m_previous_valid_timecode % reader.m_global_timecode_offset % m_timecode_wrap_add);
   }
 
@@ -447,7 +449,7 @@ mpeg_ts_track_c::parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_de
 
   auto buffer      = reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1);
   auto num_entries = static_cast<unsigned int>(pmt_descriptor.length) / 5;
-  mxdebug_if(reader.m_debug_pat_pmt, boost::format("Teletext PMT descriptor, %1% entries\n") % num_entries);
+  mxdebug_if(reader.m_debug_pat_pmt, boost::format("mpeg_ts_track_c::parse_srt_pmt_descriptor: Teletext PMT descriptor, %1% entries\n") % num_entries);
   for (auto idx = 0u; idx < num_entries; ++idx) {
     // Bits:
     //  0–23: ISO 639 language code
@@ -466,7 +468,7 @@ mpeg_ts_track_c::parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_de
     auto ttx_type = static_cast<unsigned int>(buffer[3]) >> 3;
 
     if (reader.m_debug_pat_pmt) {
-      mxdebug(boost::format("  %1%: language %2% type %3% magazine %4% page %5%\n")
+      mxdebug(boost::format("mpeg_ts_track_c::parse_srt_pmt_descriptor:  %1%: language %2% type %3% magazine %4% page %5%\n")
               % idx % std::string(reinterpret_cast<char const *>(buffer), 3)
               % ttx_type % (static_cast<unsigned int>(buffer[3]) & 0x07) % static_cast<unsigned int>(buffer[4]));
     }
@@ -497,7 +499,7 @@ mpeg_ts_track_c::parse_registration_pmt_descriptor(mpeg_ts_pmt_descriptor_t cons
  auto fourcc = fourcc_c{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1)};
  auto reg_codec  = codec_c::look_up(fourcc.str());
 
-  mxdebug_if(reader.m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: Registration descriptor with FourCC: %1% codec: %2%\n") % fourcc % reg_codec);
+  mxdebug_if(reader.m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: Registration descriptor with FourCC: %1% codec: %2%\n") % fourcc % reg_codec);
 
   if (!reg_codec.valid())
     return false;
@@ -607,7 +609,9 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
   , m_packet_sent_to_packetizer{}
   , m_dont_use_audio_pts{     "mpeg_ts|mpeg_ts_dont_use_audio_pts"}
   , m_debug_resync{           "mpeg_ts|mpeg_ts_resync"}
-  , m_debug_pat_pmt{          "mpeg_ts|mpeg_ts_pat|mpeg_ts_pmt"}
+  , m_debug_pat_pmt{          "mpeg_ts|mpeg_ts_pat|mpeg_ts_pmt|mpeg_ts_headers"}
+  , m_debug_headers{          "mpeg_ts|mpeg_ts_headers"}
+  , m_debug_packet{           "mpeg_ts|mpeg_ts_packet"}
   , m_debug_aac{              "mpeg_ts|mpeg_aac"}
   , m_debug_timecode_wrapping{"mpeg_ts|mpeg_ts_timecode_wrapping"}
   , m_debug_clpi{             "clpi"}
@@ -626,7 +630,7 @@ mpeg_ts_reader_c::read_headers() {
     m_detected_packet_size = detect_packet_size(m_in.get(), size_to_probe);
     m_in->setFilePointer(0);
 
-    mxverb(3, boost::format("mpeg_ts: Starting to build PID list. (packet size: %1%)\n") % m_detected_packet_size);
+    mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::read_headers: Starting to build PID list. (packet size: %1%)\n") % m_detected_packet_size);
 
     mpeg_ts_track_ptr PAT(new mpeg_ts_track_c(*this));
     PAT->type = PAT_TYPE;
@@ -650,8 +654,10 @@ mpeg_ts_reader_c::read_headers() {
       done |= m_in->eof() || (m_in->getFilePointer() >= TS_PIDS_DETECT_SIZE);
     }
   } catch (...) {
+    mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::read_headers: caught exception\n"));
   }
-  mxverb(3, boost::format("mpeg_ts: Detection done on %1% bytes\n") % m_in->getFilePointer());
+
+  mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::read_headers: Detection done on %1% bytes\n") % m_in->getFilePointer());
 
   m_in->setFilePointer(0, seek_beginning); // rewind file for later remux
 
@@ -754,24 +760,24 @@ mpeg_ts_reader_c::identify() {
 int
 mpeg_ts_reader_c::parse_pat(unsigned char *pat) {
   if (!pat) {
-    mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pat: Invalid parameters!\n");
+    mxdebug_if(m_debug_pat_pmt, "mpeg_ts_reader_c::parse_pat: Invalid parameters!\n");
     return -1;
   }
 
   mpeg_ts_pat_t *pat_header = (mpeg_ts_pat_t *)pat;
 
   if (pat_header->table_id != 0x00) {
-    mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pat: Invalid PAT table_id!\n");
+    mxdebug_if(m_debug_pat_pmt, "mpeg_ts_reader_c::parse_pat: Invalid PAT table_id!\n");
     return -1;
   }
 
   if (pat_header->get_section_syntax_indicator() != 1 || pat_header->get_current_next_indicator() == 0) {
-    mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pat: Invalid PAT section_syntax_indicator/current_next_indicator!\n");
+    mxdebug_if(m_debug_pat_pmt, "mpeg_ts_reader_c::parse_pat: Invalid PAT section_syntax_indicator/current_next_indicator!\n");
     return -1;
   }
 
   if (pat_header->section_number != 0 || pat_header->last_section_number != 0) {
-    mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pat: Unsupported multiple section PAT!\n");
+    mxdebug_if(m_debug_pat_pmt, "mpeg_ts_reader_c::parse_pat: Unsupported multiple section PAT!\n");
     return -1;
   }
 
@@ -780,12 +786,12 @@ mpeg_ts_reader_c::parse_pat(unsigned char *pat) {
   uint32_t read_CRC                 = get_uint32_be(pat + 3 + pat_section_length - 4);
 
   if (elapsed_CRC != read_CRC) {
-    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pat: Wrong PAT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|\n") % elapsed_CRC % read_CRC);
+    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pat: Wrong PAT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|\n") % elapsed_CRC % read_CRC);
     return -1;
   }
 
   if (pat_section_length < 13 || pat_section_length > 1021) {
-    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pat: Wrong PAT section_length (= %1%)\n") % pat_section_length);
+    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pat: Wrong PAT section_length (= %1%)\n") % pat_section_length);
     return -1;
   }
 
@@ -797,7 +803,7 @@ mpeg_ts_reader_c::parse_pat(unsigned char *pat) {
     unsigned short local_program_number = pat_section->get_program_number();
     uint16_t tmp_pid                    = pat_section->get_pid();
 
-    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pat: program_number: %1%; %2%_pid: %3%\n")
+    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pat: program_number: %1%; %2%_pid: %3%\n")
                % local_program_number
                % (0 == local_program_number ? "nit" : "pmt")
                % tmp_pid);
@@ -834,24 +840,24 @@ mpeg_ts_reader_c::parse_pat(unsigned char *pat) {
 int
 mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
   if (!pmt) {
-    mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pmt: Invalid parameters!\n");
+    mxdebug_if(m_debug_pat_pmt, "mpeg_ts_reader_c::parse_pmt: Invalid parameters!\n");
     return -1;
   }
 
   mpeg_ts_pmt_t *pmt_header = (mpeg_ts_pmt_t *)pmt;
 
   if (pmt_header->table_id != 0x02) {
-    mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pmt: Invalid PMT table_id!\n");
+    mxdebug_if(m_debug_pat_pmt, "mpeg_ts_reader_c::parse_pmt: Invalid PMT table_id!\n");
     return -1;
   }
 
   if (pmt_header->get_section_syntax_indicator() != 1 || pmt_header->get_current_next_indicator() == 0) {
-    mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pmt: Invalid PMT section_syntax_indicator/current_next_indicator!\n");
+    mxdebug_if(m_debug_pat_pmt, "mpeg_ts_reader_c::parse_pmt: Invalid PMT section_syntax_indicator/current_next_indicator!\n");
     return -1;
   }
 
   if (pmt_header->section_number != 0 || pmt_header->last_section_number != 0) {
-    mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pmt: Unsupported multiple section PMT!\n");
+    mxdebug_if(m_debug_pat_pmt, "mpeg_ts_reader_c::parse_pmt: Unsupported multiple section PMT!\n");
     return -1;
   }
 
@@ -860,12 +866,12 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
   uint32_t read_CRC                 = get_uint32_be(pmt + 3 + pmt_section_length - 4);
 
   if (elapsed_CRC != read_CRC) {
-    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: Wrong PMT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|\n") % elapsed_CRC % read_CRC);
+    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: Wrong PMT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|\n") % elapsed_CRC % read_CRC);
     return -1;
   }
 
   if (pmt_section_length < 13 || pmt_section_length > 1021) {
-    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: Wrong PMT section_length (=%1%)\n") % pmt_section_length);
+    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: Wrong PMT section_length (=%1%)\n") % pmt_section_length);
     return -1;
   }
 
@@ -884,11 +890,11 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
     pmt_pid_info = (mpeg_ts_pmt_pid_info_t *)((unsigned char *)pmt_pid_info + sizeof(mpeg_ts_pmt_pid_info_t) + pmt_pid_info->get_es_info_length());
   }
 
-  mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: program number     (%1%)\n") % pmt_header->get_program_number());
-  mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: pcr pid            (%1%)\n") % pmt_header->get_pcr_pid());
+  mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: program number     (%1%)\n") % pmt_header->get_program_number());
+  mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: pcr pid            (%1%)\n") % pmt_header->get_pcr_pid());
 
   if (pids_found == 0) {
-    mxdebug_if(m_debug_pat_pmt, "mpeg_ts:parse_pmt: There's no information about elementary PIDs\n");
+    mxdebug_if(m_debug_pat_pmt, "mpeg_ts_reader_c::parse_pmt: There's no information about elementary PIDs\n");
     return 0;
   }
 
@@ -961,7 +967,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
       case ISO_13818_PES_PRIVATE:
         break;
       default:
-        mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: Unknown stream type: %1%\n") % (int)pmt_pid_info->stream_type);
+        mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: Unknown stream type: %1%\n") % (int)pmt_pid_info->stream_type);
         track->type      = ES_UNKNOWN;
         break;
     }
@@ -970,7 +976,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
     bool missing_tag = true;
 
     while (pmt_descriptor < (mpeg_ts_pmt_descriptor_t *)((unsigned char *)pmt_pid_info + sizeof(mpeg_ts_pmt_pid_info_t) + es_info_length)) {
-      mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts:parse_pmt: PMT descriptor tag 0x%|1$02x| length %2%\n") % static_cast<unsigned int>(pmt_descriptor->tag) % static_cast<unsigned int>(pmt_descriptor->length));
+      mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: PMT descriptor tag 0x%|1$02x| length %2%\n") % static_cast<unsigned int>(pmt_descriptor->tag) % static_cast<unsigned int>(pmt_descriptor->length));
 
       if (0x0a != pmt_descriptor->tag)
         missing_tag = false;
@@ -1017,7 +1023,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
     }
 
     mxdebug_if(m_debug_pat_pmt,
-               boost::format("mpeg_ts:parse_pmt: PID %1% stream type %|2$02x| has type: %3%\n")
+               boost::format("mpeg_ts_reader_c::parse_pmt: PID %1% stream type %|2$02x| has type: %3%\n")
                % track->pid
                % static_cast<unsigned int>(pmt_pid_info->stream_type)
                % (track->type != ES_UNKNOWN ? track->codec.get_name() : "<unknown>"));
@@ -1089,7 +1095,7 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
       track->continuity_counter++;
       track->continuity_counter %= 16;
       if (hdr->get_continuity_counter() != track->continuity_counter) {
-        mxverb(3, boost::format("mpeg_ts: Continuity error on PID: %1%. Continue anyway...\n") % table_pid);
+        mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_packet: Continuity error on PID: %1%. Continue anyway...\n") % table_pid);
         track->continuity_counter = hdr->get_continuity_counter();
       }
 
@@ -1111,13 +1117,13 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
   if (static_cast<int>(track->pes_payload->get_size()) == track->pes_payload_size)
     track->data_ready = true;
 
-  mxdebug_if(track->m_debug_delivery, boost::format("PID %1%: Adding PES payload (normal case) num %2% bytes; expected %3% actual %4%\n")
+  mxdebug_if(track->m_debug_delivery, boost::format("mpeg_ts_reader_c::parse_packet: PID %1%: Adding PES payload (normal case) num %2% bytes; expected %3% actual %4%\n")
              % track->pid % static_cast<unsigned int>(ts_payload_size) % track->pes_payload_size % track->pes_payload->get_size());
 
   if (!track->data_ready)
     return true;
 
-  mxverb(3, boost::format("mpeg_ts: Table/PES completed (%1%) for PID %2% at file position %3%\n") % track->pes_payload->get_size() % table_pid % m_in->getFilePointer());
+  mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::parse_packet: Table/PES completed (%1%) for PID %2% at file position %3%\n") % track->pes_payload->get_size() % table_pid % m_in->getFilePointer());
 
   if (input_status == INPUT_PROBE)
     probe_packet_complete(track);
@@ -1189,16 +1195,16 @@ mpeg_ts_reader_c::probe_packet_complete(mpeg_ts_track_ptr &track) {
       track->processed = true;
       track->probed_ok = true;
       es_to_process--;
-      mxverb(3, boost::format("mpeg_ts: ES to process: %1%\n") % es_to_process);
+      mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::probe_packet_complete: ES to process: %1%\n") % es_to_process);
     }
 
   } else if (result == FILE_STATUS_MOREDATA) {
-    mxverb(3, boost::format("mpeg_ts: Need more data to probe ES\n"));
+    mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::probe_packet_complete: Need more data to probe ES\n"));
     track->processed  = false;
     track->data_ready = false;
 
   } else {
-    mxverb(3, boost::format("mpeg_ts: Failed to parse packet. Reset and retry\n"));
+    mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::probe_packet_complete: Failed to parse packet. Reset and retry\n"));
     track->pes_payload_size = 0;
     track->processed        = false;
     track->data_ready       = false;
@@ -1240,12 +1246,16 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
       track->data_ready = false;
     }
 
-    mxverb(4, boost::format("   PES info: stream_id = %1%\n") % (int)pes_data->stream_id);
-    mxverb(4, boost::format("   PES info: PES_packet_length = %1%\n") % track->pes_payload_size);
-    mxverb(4, boost::format("   PES info: PTS_DTS = %1% ESCR = %2% ES_rate = %3%\n") % (int)pes_data->pts_dts % (int)pes_data->get_escr() % (int)pes_data->get_es_rate());
-    mxverb(4, boost::format("   PES info: DSM_trick_mode = %1%, add_copy = %2%, CRC = %3%, ext = %4%\n")
-           % (int)pes_data->get_dsm_trick_mode() % (int)pes_data->get_additional_copy_info() % (int)pes_data->get_pes_crc() % (int)pes_data->get_pes_extension());
-    mxverb(4, boost::format("   PES info: PES_header_data_length = %1%\n") % (int)pes_data->pes_header_data_length);
+    if (m_debug_packet) {
+      mxdebug(boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PES info:"));
+      mxdebug(boost::format("   stream_id = %1%\n") % static_cast<unsigned int>(pes_data->stream_id));
+      mxdebug(boost::format("   PES_packet_length = %1%\n") % track->pes_payload_size);
+      mxdebug(boost::format("   PTS_DTS = %1% ESCR = %2% ES_rate = %3%\n") % static_cast<unsigned int>(pes_data->pts_dts) % static_cast<unsigned int>(pes_data->get_escr()) % static_cast<unsigned int>(pes_data->get_es_rate()));
+      mxdebug(boost::format("   DSM_trick_mode = %1%, add_copy = %2%, CRC = %3%, ext = %4%\n")
+              % static_cast<unsigned int>(pes_data->get_dsm_trick_mode()) % static_cast<unsigned int>(pes_data->get_additional_copy_info()) % static_cast<unsigned int>(pes_data->get_pes_crc())
+              % static_cast<unsigned int>(pes_data->get_pes_extension()));
+      mxdebug(boost::format("   PES_header_data_length = %1%\n") % static_cast<unsigned int>(pes_data->pes_header_data_length));
+    }
 
     ts_payload = &pes_data->pes_header_data_length + pes_data->pes_header_data_length + 1;
     if (ts_payload >= ((unsigned char *)ts_packet_header + TS_PACKET_SIZE))
@@ -1274,10 +1284,11 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
         m_global_timecode_offset = dts;
 
       if (pts == track->m_timecode) {
-        mxverb(3, boost::format("     Adding PES with same PTS as previous !!\n"));
+        mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_start_unit_packet: Adding PES with same PTS as previous !!\n"));
         track->add_pes_payload(ts_payload, ts_payload_size);
 
-        mxdebug_if(track->m_debug_delivery, boost::format("PID %1%: Adding PES payload (same PTS case) num %2% bytes; expected %3% actual %4%\n")
+        mxdebug_if(track->m_debug_delivery,
+                   boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PID %1%: Adding PES payload (same PTS case) num %2% bytes; expected %3% actual %4%\n")
                    % track->pid % static_cast<unsigned int>(ts_payload_size) % track->pes_payload_size % track->pes_payload->get_size());
 
         return false;
@@ -1287,7 +1298,7 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
 
       track->m_timecode = dts;
 
-      mxverb(3, boost::format("     PTS/DTS found: %1%\n") % track->m_timecode);
+      mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PTS/DTS found: %1%\n") % track->m_timecode);
     }
 
     // this condition is for ES probing when there is still not enough data for detection
@@ -1436,7 +1447,7 @@ mpeg_ts_reader_c::create_packetizers() {
   size_t i;
 
   input_status = INPUT_READ;
-  mxverb(3, boost::format("mpeg_ts: create packetizers...\n"));
+  mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::create_packetizers: create packetizers...\n"));
   for (i = 0; i < tracks.size(); i++)
     create_packetizer(i);
 }
@@ -1512,7 +1523,7 @@ mpeg_ts_reader_c::find_clip_info_file() {
 
   clpi_file.replace_extension(".clpi");
 
-  mxdebug_if(m_debug_clpi, boost::format("Checking %1%\n") % clpi_file.string());
+  mxdebug_if(m_debug_clpi, boost::format("mpeg_ts_reader_c::find_clip_info_file: Checking %1%\n") % clpi_file.string());
 
   if (bfs::exists(clpi_file))
     return clpi_file;
@@ -1525,16 +1536,16 @@ mpeg_ts_reader_c::find_clip_info_file() {
   //   return clpi_file;
 
   clpi_file = path / ".." / "clipinf" / file_name;
-  mxdebug_if(m_debug_clpi, boost::format("Checking %1%\n") % clpi_file.string());
+  mxdebug_if(m_debug_clpi, boost::format("mpeg_ts_reader_c::find_clip_info_file: Checking %1%\n") % clpi_file.string());
   if (bfs::exists(clpi_file))
     return clpi_file;
 
   clpi_file = path / ".." / "CLIPINF" / file_name;
-  mxdebug_if(m_debug_clpi, boost::format("Checking %1%\n") % clpi_file.string());
+  mxdebug_if(m_debug_clpi, boost::format("mpeg_ts_reader_c::find_clip_info_file: Checking %1%\n") % clpi_file.string());
   if (bfs::exists(clpi_file))
     return clpi_file;
 
-  mxdebug_if(m_debug_clpi, "CLPI not found\n");
+  mxdebug_if(m_debug_clpi, "mpeg_ts_reader_c::find_clip_info_file: CLPI not found\n");
 
   return bfs::path();
 }
@@ -1575,7 +1586,7 @@ mpeg_ts_reader_c::parse_clip_info_file() {
 bool
 mpeg_ts_reader_c::resync(int64_t start_at) {
   try {
-    mxdebug_if(m_debug_resync, boost::format("Start resync for data from %1%\n") % start_at);
+    mxdebug_if(m_debug_resync, boost::format("mpeg_ts_reader_c::resync: Start resync for data from %1%\n") % start_at);
     m_in->setFilePointer(start_at);
 
     unsigned char buf[TS_MAX_PACKET_SIZE + 1];
@@ -1595,7 +1606,7 @@ mpeg_ts_reader_c::resync(int64_t start_at) {
         continue;
       }
 
-      mxdebug_if(m_debug_resync, boost::format("Re-established at %1%\n") % curr_pos);
+      mxdebug_if(m_debug_resync, boost::format("mpeg_ts_reader_c::resync: Re-established at %1%\n") % curr_pos);
 
       m_in->setFilePointer(curr_pos);
       return true;

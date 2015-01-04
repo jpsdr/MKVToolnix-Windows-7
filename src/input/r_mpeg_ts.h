@@ -312,6 +312,7 @@ public:
   packet_converter_cptr converter;
 
   bool m_debug_delivery, m_debug_timecode_wrapping;
+  debugging_option_c m_debug_headers;
 
   mpeg_ts_track_c(mpeg_ts_reader_c &p_reader)
     : reader(p_reader)
@@ -341,8 +342,9 @@ public:
     , m_use_dts(false)
     , m_timecodes_wrapped{false}
     , skip_packet_data_bytes{}
-    , m_debug_delivery(false)
+    , m_debug_delivery{}
     , m_debug_timecode_wrapping{}
+    , m_debug_headers{"mpeg_ts|mpeg_ts_headers"}
   {
   }
 
@@ -397,7 +399,7 @@ protected:
 
   std::vector<timecode_c> m_chapter_timecodes;
 
-  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_aac, m_debug_timecode_wrapping, m_debug_clpi;
+  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timecode_wrapping, m_debug_clpi;
 
   int m_detected_packet_size;
 
