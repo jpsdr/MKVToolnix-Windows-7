@@ -77,6 +77,7 @@ public:
   virtual size_t write(std::string const &buffer);
   virtual size_t write(const memory_cptr &buffer, size_t size = UINT_MAX, size_t offset = 0);
   virtual bool eof() = 0;
+  virtual void clear_eof() { }
   virtual void flush() {
   }
   virtual int truncate(int64_t) {
@@ -141,6 +142,7 @@ public:
   virtual void setFilePointer(int64 offset, seek_mode mode = seek_beginning);
   virtual void close();
   virtual bool eof();
+  virtual void clear_eof();
 
   virtual std::string get_file_name() const {
     return m_file_name;
@@ -179,6 +181,9 @@ public:
   }
   virtual uint64 getFilePointer() {
     return m_proxy_io->getFilePointer();
+  }
+  virtual void clear_eof() {
+    m_proxy_io->clear_eof();
   }
   virtual bool eof() {
     return m_proxy_io->eof();

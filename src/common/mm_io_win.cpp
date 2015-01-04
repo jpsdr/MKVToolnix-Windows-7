@@ -186,6 +186,11 @@ mm_file_io_c::eof() {
   return m_eof;
 }
 
+void
+mm_file_io_c::clear_eof() {
+  m_eof = false;
+}
+
 int
 mm_file_io_c::truncate(int64_t pos) {
   m_cached_size = -1;

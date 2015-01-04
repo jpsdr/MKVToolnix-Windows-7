@@ -126,6 +126,11 @@ mm_file_io_c::eof() {
   return feof((FILE *)m_file) != 0;
 }
 
+void
+mm_file_io_c::clear_eof() {
+  clearerr(static_cast<FILE *>(m_file));
+}
+
 int
 mm_file_io_c::truncate(int64_t pos) {
   m_cached_size = -1;
