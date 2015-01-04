@@ -48,8 +48,8 @@ void
 adler32_c::add_impl(unsigned char const *buffer,
                     size_t size) {
   for (auto idx = 0u; idx < size; ++idx) {
-    m_a = (m_a + buffer[idx]) % mc_mod_adler;
-    m_b = (m_b + m_a)         % mc_mod_adler;
+    m_a = (m_a + buffer[idx]) % msc_mod_adler;
+    m_b = (m_b + m_a)         % msc_mod_adler;
   }
 }
 

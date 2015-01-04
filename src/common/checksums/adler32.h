@@ -22,7 +22,7 @@ namespace mtx { namespace checksum {
 
 class adler32_c: public base_c, public uint_result_c {
 protected:
-  uint32_t const mc_mod_adler = 65521;
+  static uint32_t const msc_mod_adler = 65521;
   uint32_t m_a, m_b;
 
 public:
