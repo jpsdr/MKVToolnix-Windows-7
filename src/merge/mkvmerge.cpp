@@ -51,6 +51,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/mm_io.h"
+#include "common/mm_io_x.h"
 #include "common/segmentinfo.h"
 #include "common/split_arg_parsing.h"
 #include "common/strings/formatting.h"
@@ -2511,9 +2512,16 @@ main(int argc,
 
   g_cluster_helper->dump_split_points();
 
-  create_next_output_file();
-  main_loop();
-  finish_file(true);
+  try {
+    create_next_output_file();
+    main_loop();
+    finish_file(true);
+  } catch (mtx::mm_io::exception &ex) {
+    force_close_output_file();
+    mxerror(boost::format("%1% %2% %3% %4%; %5%\n")
+            % Y("An exception occurred when writing the output file.") % Y("The drive may be full.") % Y("Exception details:")
+            % ex.what() % ex.error());
+  }
 
   mxinfo(boost::format(Y("Muxing took %1%.\n")) % create_minutes_seconds_time_string((get_current_time_millis() - start + 500) / 1000, true));
 

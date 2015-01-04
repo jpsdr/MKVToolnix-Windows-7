@@ -263,6 +263,7 @@ void add_tags(KaxTag *tags);
 
 void create_next_output_file();
 void finish_file(bool last_file, bool create_new_file = false, bool previously_discarding = false);
+void force_close_output_file();
 void rerender_track_headers();
 void rerender_ebml_head();
 std::string create_output_name();

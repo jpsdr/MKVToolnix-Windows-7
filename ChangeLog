@@ -1,5 +1,9 @@
 2015-01-04  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: If the target drive is full then a nicer
+        error message is output instead of simply crashing due to an
+        uncaught exception.
+
         * mkvmerge: bug fix: Fixed reading MPEG transport streams in which
         all PATs and/or PMTs have CRC errors. Fixes #1100.
 

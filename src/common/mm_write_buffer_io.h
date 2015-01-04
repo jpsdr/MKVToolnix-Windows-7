@@ -35,6 +35,7 @@ public:
   virtual void setFilePointer(int64 offset, seek_mode mode = seek_beginning);
   virtual void flush();
   virtual void close();
+  virtual void discard_buffer();
 
   static mm_io_cptr open(const std::string &file_name, size_t buffer_size);
 

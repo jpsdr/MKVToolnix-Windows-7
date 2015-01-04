@@ -136,3 +136,8 @@ mm_write_buffer_io_c::flush_buffer() {
   if (written != fill)
     throw mtx::mm_io::insufficient_space_x();
 }
+
+void
+mm_write_buffer_io_c::discard_buffer() {
+  m_fill = 0;
+}

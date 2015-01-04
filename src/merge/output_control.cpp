@@ -1918,6 +1918,18 @@ finish_file(bool last_file,
   s_head = nullptr;
 }
 
+void
+force_close_output_file() {
+  if (!s_out)
+    return;
+
+  auto wb_out = dynamic_cast<mm_write_buffer_io_c *>(s_out.get());
+  if (wb_out)
+    wb_out->discard_buffer();
+
+  s_out.reset();
+}
+
 static void establish_deferred_connections(filelist_t &file);
 
 static void
