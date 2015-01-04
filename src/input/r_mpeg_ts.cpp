@@ -616,6 +616,10 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
   , m_debug_timecode_wrapping{"mpeg_ts|mpeg_ts_timecode_wrapping"}
   , m_debug_clpi{             "clpi"}
   , m_detected_packet_size{}
+  , m_num_pat_crc_errors{}
+  , m_num_pmt_crc_errors{}
+  , m_validate_pat_crc{true}
+  , m_validate_pmt_crc{true}
 {
   auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
   if (mpls_in)
@@ -632,14 +636,13 @@ mpeg_ts_reader_c::read_headers() {
 
     mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::read_headers: Starting to build PID list. (packet size: %1%)\n") % m_detected_packet_size);
 
-    mpeg_ts_track_ptr PAT(new mpeg_ts_track_c(*this));
+    auto PAT = std::make_shared<mpeg_ts_track_c>(*this);
     PAT->type = PAT_TYPE;
     tracks.push_back(PAT);
 
     unsigned char buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
 
-    bool done = m_in->eof();
-    while (!done) {
+    while (true) {
       if (m_in->read(buf, m_detected_packet_size) != static_cast<unsigned int>(m_detected_packet_size))
         break;
 
@@ -650,8 +653,41 @@ mpeg_ts_reader_c::read_headers() {
       }
 
       parse_packet(buf);
-      done  = PAT_found && PMT_found && (0 == es_to_process);
-      done |= m_in->eof() || (m_in->getFilePointer() >= TS_PIDS_DETECT_SIZE);
+
+      if (PAT_found && PMT_found && (0 == es_to_process))
+        break;
+
+      auto eof = m_in->eof() || (m_in->getFilePointer() >= TS_PIDS_DETECT_SIZE);
+      if (!eof)
+        continue;
+
+      // Determine if we haven't found a PAT or a PMT but have plenty
+      // of CRC errors (e.g. for badly mastered discs). In such a case
+      // we should read from the start again, this time ignoring the
+      // errors for the specific type.
+      mxdebug_if(m_debug_headers,
+                 boost::format("mpeg_ts_reader_c::read_headers: EOF during detection. #tracks %1% #PAT CRC errors %2% #PMT CRC errors %3% PAT found %4% PMT found %5%\n")
+                 % tracks.size() % m_num_pat_crc_errors % m_num_pmt_crc_errors % PAT_found % PMT_found);
+
+      // If this is the second time around then abort.
+      if (!m_validate_pat_crc || ! m_validate_pmt_crc)
+        break;
+
+      m_validate_pat_crc = PAT_found || (m_num_pat_crc_errors == 0);
+      m_validate_pmt_crc = PMT_found || (m_num_pmt_crc_errors == 0);
+
+      // If there haven't been any errors for neither PAT nor PMT then
+      // abort.
+      if (m_validate_pat_crc && m_validate_pmt_crc)
+        break;
+
+      m_in->setFilePointer(0);
+      m_in->clear_eof();
+
+      tracks.clear();
+      auto PAT = std::make_shared<mpeg_ts_track_c>(*this);
+      PAT->type = PAT_TYPE;
+      tracks.push_back(PAT);
     }
   } catch (...) {
     mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::read_headers: caught exception\n"));
@@ -787,7 +823,9 @@ mpeg_ts_reader_c::parse_pat(unsigned char *pat) {
 
   if (elapsed_CRC != read_CRC) {
     mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pat: Wrong PAT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|\n") % elapsed_CRC % read_CRC);
-    return -1;
+    ++m_num_pat_crc_errors;
+    if (m_validate_pat_crc)
+      return -1;
   }
 
   if (pat_section_length < 13 || pat_section_length > 1021) {
@@ -867,7 +905,9 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
 
   if (elapsed_CRC != read_CRC) {
     mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: Wrong PMT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|\n") % elapsed_CRC % read_CRC);
-    return -1;
+    ++m_num_pmt_crc_errors;
+    if (m_validate_pmt_crc)
+      return -1;
   }
 
   if (pmt_section_length < 13 || pmt_section_length > 1021) {

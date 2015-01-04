@@ -401,7 +401,8 @@ protected:
 
   debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timecode_wrapping, m_debug_clpi;
 
-  int m_detected_packet_size;
+  unsigned int m_detected_packet_size, m_num_pat_crc_errors, m_num_pmt_crc_errors;
+  bool m_validate_pat_crc, m_validate_pmt_crc;
 
 protected:
   static int potential_packet_sizes[];
