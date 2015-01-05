@@ -217,10 +217,12 @@ scanning_for_playlists_dlg::parse_properties(wxString const &line,
 
   for (auto &arg : split(info, wxU(" "))) {
     auto pair = split(arg, wxU(":"), 2);
+    pair[1]   = unescape(pair[1]);
+
     if (pair[0] == wxT("playlist_file"))
       files.push_back(pair[1]);
     else
-      properties[pair[0]] = unescape(pair[1]);
+      properties[pair[0]] = pair[1];
   }
 
   return std::make_pair(properties, files);
