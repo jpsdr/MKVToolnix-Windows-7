@@ -1,3 +1,19 @@
+2015-01-05  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: On Windows the end-of-file-reached status
+        wasn't tracked correctly for certain file operations. This
+        could manifest in e.g. mkvmerge not finding tracks in MPEG
+        transport streams when probing MPLS playlist files. Fixes #1100.
+
+        * mmg: bug fix: When scanning for play lists the window presenting
+        the results listed some properties in an unescaped way (e.g. »\s«
+        instead of spaces).
+
+        * mmg: bug fix: When adding MPLS files mmg was only offering to
+        scan for more playlists if there were at least two additional MPLS
+        files present. This has been fixed to one MPLS file (in addition
+        to the one just added).
+
 2015-01-04  Moritz Bunkus  <moritz@bunkus.org>
 
         * Released v7.5.0.
