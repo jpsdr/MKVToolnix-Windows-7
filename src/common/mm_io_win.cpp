@@ -119,6 +119,7 @@ mm_file_io_c::setFilePointer(int64 offset,
   if ((INVALID_SET_FILE_POINTER == low) && (GetLastError() != NO_ERROR))
     throw mtx::mm_io::seek_x{mtx::mm_io::make_error_code()};
 
+  m_eof              = false;
   m_current_position = (int64_t)low + ((int64_t)high << 32);
 }
 
@@ -134,9 +135,7 @@ mm_file_io_c::_read(void *buffer,
     return 0;
   }
 
-  if (size != bytes_read)
-    m_eof = true;
-
+  m_eof               = size != bytes_read;
   m_current_position += bytes_read;
 
   return bytes_read;
@@ -177,6 +176,7 @@ mm_file_io_c::_write(const void *buffer,
 
   m_current_position += bytes_written;
   m_cached_size       = -1;
+  m_eof               = false;
 
   return bytes_written;
 }
