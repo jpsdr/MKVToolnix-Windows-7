@@ -1522,7 +1522,7 @@ tab_input::check_for_and_handle_playlist_file(wxString const &file_name,
     cont = dir.GetNext(&other_file_name);
   }
 
-  if (2 > other_files.size())
+  if (other_files.empty())
     return file_name;
 
   if (SDP_ALWAYS_ASK == mdlg->options.scan_directory_for_playlists) {
