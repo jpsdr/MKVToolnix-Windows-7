@@ -19,11 +19,13 @@
 #include "common/iso639.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
+#include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/xml/ebml_converter.h"
 #include "input/r_usf.h"
+#include "merge/file_status.h"
+#include "merge/input_x.h"
 #include "merge/output_control.h"
-#include "merge/pr_generic.h"
 #include "output/p_textsubs.h"
 
 int

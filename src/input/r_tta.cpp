@@ -19,6 +19,8 @@
 #include "common/id3.h"
 #include "common/math.h"
 #include "input/r_tta.h"
+#include "merge/file_status.h"
+#include "merge/input_x.h"
 #include "merge/output_control.h"
 #include "output/p_tta.h"
 

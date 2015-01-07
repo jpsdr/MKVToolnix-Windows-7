@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/mm_io.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 #include "input/subtitles.h"
 
 class srt_reader_c: public generic_reader_c {

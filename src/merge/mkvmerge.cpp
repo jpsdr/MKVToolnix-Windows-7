@@ -62,7 +62,9 @@
 #include "common/xml/ebml_segmentinfo_converter.h"
 #include "common/xml/ebml_tags_converter.h"
 #include "merge/cluster_helper.h"
+#include "merge/generic_reader.h"
 #include "merge/output_control.h"
+#include "merge/track_info.h"
 
 using namespace libmatroska;
 

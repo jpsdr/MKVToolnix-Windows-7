@@ -21,7 +21,7 @@
 #include "common/aac.h"
 #include "common/error.h"
 #include "common/mm_io.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 
 class aac_reader_c: public generic_reader_c {
 private:

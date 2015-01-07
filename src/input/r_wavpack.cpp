@@ -18,7 +18,8 @@
 #include "common/endian.h"
 #include "common/error.h"
 #include "input/r_wavpack.h"
-#include "merge/output_control.h"
+#include "merge/input_x.h"
+#include "merge/file_status.h"
 #include "output/p_wavpack.h"
 
 int

@@ -13,8 +13,11 @@
 
 #include "common/common_pch.h"
 
+#include <matroska/KaxTracks.h>
+
 #include "common/codec.h"
 #include "common/math.h"
+#include "merge/generic_reader.h"
 #include "merge/output_control.h"
 #include "output/p_dirac.h"
 

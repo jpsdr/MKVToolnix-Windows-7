@@ -20,7 +20,7 @@
 
 #include <FLAC/format.h>
 
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 
 class flac_packetizer_c: public generic_packetizer_c {
 private:

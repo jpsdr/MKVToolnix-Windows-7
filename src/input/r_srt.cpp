@@ -16,6 +16,7 @@
 #include "common/codec.h"
 #include "input/r_srt.h"
 #include "input/subtitles.h"
+#include "merge/input_x.h"
 
 int
 srt_reader_c::probe_file(mm_text_io_c *in,

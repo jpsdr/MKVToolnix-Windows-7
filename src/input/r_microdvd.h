@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 
 class microdvd_reader_c {
 public:

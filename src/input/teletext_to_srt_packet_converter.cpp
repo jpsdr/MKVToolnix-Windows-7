@@ -14,8 +14,8 @@
 #include "common/common_pch.h"
 
 #include "common/strings/formatting.h"
-#include "merge/pr_generic.h"
 #include "input/teletext_to_srt_packet_converter.h"
+#include "merge/generic_packetizer.h"
 
 std::vector<teletext_to_srt_packet_converter_c::char_map_t> teletext_to_srt_packet_converter_c::ms_char_maps;
 

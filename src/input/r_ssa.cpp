@@ -18,8 +18,8 @@
 #include "common/extern_data.h"
 #include "common/locale.h"
 #include "input/r_ssa.h"
-#include "merge/output_control.h"
-#include "merge/pr_generic.h"
+#include "merge/input_x.h"
+#include "merge/file_status.h"
 
 
 int

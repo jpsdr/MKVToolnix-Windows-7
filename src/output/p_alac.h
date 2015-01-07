@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/alac.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 
 class alac_packetizer_c: public generic_packetizer_c {
 private:

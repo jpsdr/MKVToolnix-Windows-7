@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 #include "common/dirac.h"
 
 class dirac_video_packetizer_c: public generic_packetizer_c {

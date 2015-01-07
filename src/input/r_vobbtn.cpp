@@ -20,7 +20,7 @@
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "input/r_vobbtn.h"
-#include "merge/output_control.h"
+#include "merge/file_status.h"
 #include "output/p_vobbtn.h"
 
 

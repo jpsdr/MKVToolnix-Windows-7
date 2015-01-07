@@ -19,8 +19,9 @@
 #include "common/codec.h"
 #include "common/flac.h"
 #include "input/r_flac.h"
+#include "merge/input_x.h"
+#include "merge/file_status.h"
 #include "merge/output_control.h"
-#include "merge/pr_generic.h"
 
 #define BUFFER_SIZE 4096
 

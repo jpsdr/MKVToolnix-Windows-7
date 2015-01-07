@@ -14,7 +14,9 @@
 #include "common/common_pch.h"
 
 #include "common/mm_io_x.h"
+#include "common/strings/formatting.h"
 #include "input/r_microdvd.h"
+#include "merge/id_result.h"
 
 int
 microdvd_reader_c::probe_file(mm_text_io_c *in,

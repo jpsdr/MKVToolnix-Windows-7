@@ -18,6 +18,7 @@
 #include "common/id3.h"
 #include "common/mm_io_x.h"
 #include "input/r_truehd.h"
+#include "merge/input_x.h"
 #include "output/p_truehd.h"
 
 #define TRUEHD_READ_SIZE (1024 * 1024)

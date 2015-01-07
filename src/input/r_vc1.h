@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 #include "common/vc1.h"
 
 class vc1_es_reader_c: public generic_reader_c {

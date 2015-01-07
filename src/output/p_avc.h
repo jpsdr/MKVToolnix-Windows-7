@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/mpeg4_p10.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 
 using namespace mpeg4::p10;
 

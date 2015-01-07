@@ -27,7 +27,7 @@
 #include "common/mpeg4_p10.h"
 #include "common/truehd.h"
 #include "input/packet_converter.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 #include "mpegparser/M2VParser.h"
 
 enum mpeg_ts_input_type_e {

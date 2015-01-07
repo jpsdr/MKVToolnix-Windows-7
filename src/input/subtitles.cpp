@@ -19,7 +19,9 @@
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "input/subtitles.h"
-#include "merge/output_control.h"
+#include "merge/file_status.h"
+#include "merge/input_x.h"
+#include "merge/generic_reader.h"
 #include "merge/packet_extensions.h"
 
 // ------------------------------------------------------------

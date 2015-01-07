@@ -114,6 +114,7 @@
 #include "input/r_wavpack.h"
 #include "merge/cluster_helper.h"
 #include "merge/cues.h"
+#include "merge/input_x.h"
 #include "merge/output_control.h"
 #include "merge/webm.h"
 

@@ -19,7 +19,7 @@
 
 #include "common/byte_buffer.h"
 #include "common/dts.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 
 class dts_packetizer_c: public generic_packetizer_c {
 private:

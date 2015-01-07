@@ -14,8 +14,8 @@
 #include "common/common_pch.h"
 
 #include "common/endian.h"
+#include "merge/id_result.h"
 #include "input/r_cdxa.h"
-#include "merge/pr_generic.h"
 
 bool
 cdxa_reader_c::probe_file(mm_io_c *in,

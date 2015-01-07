@@ -17,7 +17,7 @@
 
 #include "common/common_pch.h"
 
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 #include "common/kate.h"
 
 class kate_packetizer_c: public generic_packetizer_c {

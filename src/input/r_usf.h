@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 
 struct usf_entry_t {
   int64_t m_start, m_end;

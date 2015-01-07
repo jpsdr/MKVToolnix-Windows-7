@@ -20,6 +20,7 @@
 #include "common/mm_io_x.h"
 #include "common/strings/formatting.h"
 #include "input/r_coreaudio.h"
+#include "merge/input_x.h"
 #include "output/p_alac.h"
 
 int

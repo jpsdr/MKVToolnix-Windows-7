@@ -17,7 +17,8 @@
 #include "common/error.h"
 #include "common/memory.h"
 #include "input/r_hevc.h"
-#include "merge/output_control.h"
+#include "merge/input_x.h"
+#include "merge/file_status.h"
 #include "output/p_hevc_es.h"
 
 

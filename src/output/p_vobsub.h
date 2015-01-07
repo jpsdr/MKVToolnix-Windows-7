@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/compression.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 
 class vobsub_packetizer_c: public generic_packetizer_c {
 public:

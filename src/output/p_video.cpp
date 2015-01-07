@@ -13,6 +13,8 @@
 
 #include "common/common_pch.h"
 
+#include <matroska/KaxTracks.h>
+
 #include "common/codec.h"
 #include "common/debugging.h"
 #include "common/endian.h"

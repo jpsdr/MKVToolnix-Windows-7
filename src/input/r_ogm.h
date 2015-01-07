@@ -20,7 +20,7 @@
 
 #include "common/codec.h"
 #include "common/mm_io.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 #include "common/theora.h"
 #include "common/kate.h"
 

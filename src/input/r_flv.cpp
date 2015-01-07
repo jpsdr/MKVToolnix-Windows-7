@@ -22,6 +22,7 @@
 #include "common/mm_io_x.h"
 #include "common/mpeg4_p10.h"
 #include "input/r_flv.h"
+#include "merge/input_x.h"
 #include "output/p_aac.h"
 #include "output/p_mpeg4_p10.h"
 #include "output/p_mp3.h"

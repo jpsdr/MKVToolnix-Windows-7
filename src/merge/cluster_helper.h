@@ -23,12 +23,12 @@
 
 #include "common/split_point.h"
 #include "merge/libmatroska_extensions.h"
-#include "merge/pr_generic.h"
-
 
 #define RND_TIMECODE_SCALE(a) (irnd((double)(a) / (double)((int64_t)g_timecode_scale)) * (int64_t)g_timecode_scale)
 
 class render_groups_c;
+class packet_t;
+typedef std::shared_ptr<packet_t> packet_cptr;
 
 class cluster_helper_c {
 private:

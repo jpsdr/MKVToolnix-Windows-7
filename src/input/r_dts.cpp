@@ -18,6 +18,7 @@
 #include "common/dts.h"
 #include "common/error.h"
 #include "input/r_dts.h"
+#include "merge/input_x.h"
 #include "output/p_dts.h"
 
 #define READ_SIZE 16384

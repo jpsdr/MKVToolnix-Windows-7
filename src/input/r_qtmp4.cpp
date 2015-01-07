@@ -33,6 +33,8 @@
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "input/r_qtmp4.h"
+#include "merge/file_status.h"
+#include "merge/input_x.h"
 #include "merge/output_control.h"
 #include "output/p_aac.h"
 #include "output/p_ac3.h"

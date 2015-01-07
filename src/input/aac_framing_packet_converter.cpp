@@ -14,7 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/strings/formatting.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 #include "input/aac_framing_packet_converter.h"
 
 aac_framing_packet_converter_c::aac_framing_packet_converter_c(generic_packetizer_c *ptzr)

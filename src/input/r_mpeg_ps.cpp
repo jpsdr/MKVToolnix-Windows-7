@@ -25,7 +25,7 @@
 #include "common/strings/formatting.h"
 #include "common/truehd.h"
 #include "input/r_mpeg_ps.h"
-#include "merge/output_control.h"
+#include "merge/file_status.h"
 #include "mpegparser/M2VParser.h"
 #include "output/p_ac3.h"
 #include "output/p_avc.h"

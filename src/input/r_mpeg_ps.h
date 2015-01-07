@@ -23,7 +23,7 @@
 #include "common/mm_multi_file_io.h"
 #include "common/mpeg1_2.h"
 #include "merge/packet_extensions.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 
 struct mpeg_ps_id_t {
   int id;

@@ -18,7 +18,7 @@
 
 #include "common/endian.h"
 #include "input/r_dv.h"
-#include "merge/pr_generic.h"
+#include "merge/id_result.h"
 
 int
 dv_reader_c::probe_file(mm_io_c *in,

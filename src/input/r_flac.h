@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/mm_io.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 
 #if defined(HAVE_FLAC_FORMAT_H)
 

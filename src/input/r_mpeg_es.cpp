@@ -21,7 +21,8 @@
 #include "common/mm_io_x.h"
 #include "common/mpeg4_p2.h"
 #include "input/r_mpeg_es.h"
-#include "merge/output_control.h"
+#include "merge/input_x.h"
+#include "merge/file_status.h"
 #include "mpegparser/M2VParser.h"
 #include "output/p_mpeg1_2.h"
 

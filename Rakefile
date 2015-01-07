@@ -696,7 +696,7 @@ Application.new("src/mkvmerge").
   aliases(:mkvmerge).
   sources("src/merge/mkvmerge.cpp").
   sources("src/merge/resources.o", :if => c?(:MINGW)).
-  libraries(:mtxmerge, :mtxinput, :mtxoutput, $common_libs, :avi, :rmff, :mpegparser, :flac, :vorbis, :ogg).
+  libraries(:mtxmerge, :mtxinput, :mtxoutput, :mtxmerge, $common_libs, :avi, :rmff, :mpegparser, :flac, :vorbis, :ogg).
   create
 
 #

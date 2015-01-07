@@ -14,8 +14,8 @@
 #include "common/common_pch.h"
 
 #include "common/endian.h"
+#include "merge/id_result.h"
 #include "input/r_aac_adif.h"
-#include "merge/pr_generic.h"
 
 int
 aac_adif_reader_c::probe_file(mm_io_c *in,

@@ -19,8 +19,9 @@
 #include "common/error.h"
 #include "common/id3.h"
 #include "input/r_aac.h"
+#include "merge/input_x.h"
+#include "merge/file_status.h"
 #include "output/p_aac.h"
-#include "merge/output_control.h"
 
 int
 aac_reader_c::probe_file(mm_io_c *in,

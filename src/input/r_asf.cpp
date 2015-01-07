@@ -15,7 +15,7 @@
 
 #include "common/endian.h"
 #include "input/r_asf.h"
-#include "merge/pr_generic.h"
+#include "merge/id_result.h"
 
 #define MAGIC_ASF_WMV 0x3026b275
 

@@ -21,7 +21,7 @@
 #include "common/error.h"
 #include "common/samples_timecode_conv.h"
 
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 
 struct coreaudio_chunk_t {
   std::string m_type;

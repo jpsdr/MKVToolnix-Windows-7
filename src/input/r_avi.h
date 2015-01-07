@@ -19,7 +19,7 @@
 #include <avilib.h>
 
 #include "common/codec.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 #include "common/error.h"
 #include "input/subtitles.h"
 #include "output/p_avc.h"

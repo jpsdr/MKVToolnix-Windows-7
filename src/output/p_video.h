@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 
 #define VFT_IFRAME          -1
 #define VFT_PFRAMEAUTOMATIC -2

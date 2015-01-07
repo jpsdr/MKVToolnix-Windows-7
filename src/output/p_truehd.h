@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 #include "common/samples_timecode_conv.h"
 #include "common/truehd.h"
 

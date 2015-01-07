@@ -16,7 +16,7 @@
 #include "common/endian.h"
 #include "common/hdsub.h"
 #include "input/r_hdsub.h"
-#include "merge/pr_generic.h"
+#include "merge/id_result.h"
 
 int
 hdsub_reader_c::probe_file(mm_io_c *in,

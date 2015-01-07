@@ -13,6 +13,8 @@
 
 #include "common/common_pch.h"
 
+#include <matroska/KaxTracks.h>
+
 #include "common/codec.h"
 #include "merge/connection_checks.h"
 #include "merge/packet_extensions.h"

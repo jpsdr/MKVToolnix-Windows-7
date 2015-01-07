@@ -20,7 +20,7 @@
 
 #include "common/mm_io.h"
 #include "common/error.h"
-
+#include "merge/generic_reader.h"
 #include "output/p_mp3.h"
 
 class mp3_reader_c: public generic_reader_c {

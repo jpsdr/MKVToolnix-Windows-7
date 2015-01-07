@@ -16,7 +16,7 @@
 #include "common/common_pch.h"
 
 #include "common/hevc.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 
 using namespace hevc;
 

@@ -19,7 +19,8 @@
 #include "common/ivf.h"
 #include "input/r_ivf.h"
 #include "output/p_vpx.h"
-#include "merge/output_control.h"
+#include "merge/input_x.h"
+#include "merge/file_status.h"
 
 int
 ivf_reader_c::probe_file(mm_io_c *io,

@@ -19,6 +19,7 @@
 #include "common/hacks.h"
 #include "common/math.h"
 #include "common/strings/formatting.h"
+#include "common/tags/tags.h"
 #include "merge/cluster_helper.h"
 #include "merge/cues.h"
 #include "merge/libmatroska_extensions.h"

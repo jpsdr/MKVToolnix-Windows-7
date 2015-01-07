@@ -21,10 +21,12 @@
 #include <unordered_map>
 
 #include "common/bitvalue.h"
+#include "common/chapters/chapters.h"
 #include "common/file_types.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/segmentinfo.h"
-#include "merge/pr_generic.h"
+#include "merge/file_status.h"
+#include "merge/packet.h"
 
 namespace libmatroska {
   class KaxChapters;
@@ -44,6 +46,7 @@ using namespace libmatroska;
 class mm_io_c;
 class generic_packetizer_c;
 class generic_reader_c;
+class track_info_c;
 
 struct append_spec_t {
   size_t src_file_id, src_track_id, dst_file_id, dst_track_id;

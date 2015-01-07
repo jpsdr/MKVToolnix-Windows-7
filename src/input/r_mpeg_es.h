@@ -18,7 +18,7 @@
 
 #include "common/dts.h"
 #include "common/mpeg1_2.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 #include "mpegparser/M2VParser.h"
 
 class mpeg_es_reader_c: public generic_reader_c {

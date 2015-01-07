@@ -21,6 +21,7 @@
 #include "common/error.h"
 #include "common/id3.h"
 #include "input/r_ac3.h"
+#include "merge/input_x.h"
 #include "output/p_ac3.h"
 
 #define AC3_READ_SIZE 16384

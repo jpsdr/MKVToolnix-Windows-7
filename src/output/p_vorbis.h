@@ -19,8 +19,8 @@
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
 
-#include "merge/pr_generic.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
+#include "merge/generic_packetizer.h"
 
 namespace mtx {
   namespace output {

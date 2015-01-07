@@ -21,7 +21,7 @@
 #include "common/error.h"
 #include "librmff/librmff.h"
 #include "output/p_video.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 
 typedef struct {
   memory_cptr data;

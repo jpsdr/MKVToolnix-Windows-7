@@ -20,7 +20,7 @@
 
 #include "common/error.h"
 #include "common/mm_io.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_reader.h"
 #include "common/truehd.h"
 
 class truehd_reader_c: public generic_reader_c {

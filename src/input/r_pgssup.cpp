@@ -15,10 +15,12 @@
 
 #include "common/codec.h"
 #include "common/endian.h"
+#include "common/mm_io_x.h"
 #include "common/pgssup.h"
 #include "input/r_pgssup.h"
 #include "output/p_pgs.h"
-#include "merge/output_control.h"
+#include "merge/file_status.h"
+#include "merge/input_x.h"
 
 int
 pgssup_reader_c::probe_file(mm_io_c *in,

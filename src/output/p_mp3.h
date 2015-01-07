@@ -19,7 +19,7 @@
 #include "common/byte_buffer.h"
 #include "common/mp3.h"
 #include "common/samples_timecode_conv.h"
-#include "merge/pr_generic.h"
+#include "merge/generic_packetizer.h"
 
 class mp3_packetizer_c: public generic_packetizer_c {
 private:

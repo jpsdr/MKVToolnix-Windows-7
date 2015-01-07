@@ -22,6 +22,8 @@
 #include "common/strings/parsing.h"
 #include "input/r_vobsub.h"
 #include "input/subtitles.h"
+#include "merge/file_status.h"
+#include "merge/input_x.h"
 #include "merge/output_control.h"
 #include "output/p_vobsub.h"
 

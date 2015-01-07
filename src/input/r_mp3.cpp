@@ -18,6 +18,7 @@
 #include "common/hacks.h"
 #include "common/mm_io_x.h"
 #include "input/r_mp3.h"
+#include "merge/input_x.h"
 #include "output/p_mp3.h"
 
 #define CHUNK_SIZE 16384

@@ -12,6 +12,8 @@
 
 #include "common/common_pch.h"
 
+#include <matroska/KaxTracks.h>
+
 #include "common/codec.h"
 #include "common/hacks.h"
 #include "common/math.h"

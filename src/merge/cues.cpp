@@ -20,6 +20,7 @@
 #include "common/math.h"
 #include "merge/cluster_helper.h"
 #include "merge/cues.h"
+#include "merge/generic_packetizer.h"
 #include "merge/libmatroska_extensions.h"
 #include "merge/output_control.h"
 
