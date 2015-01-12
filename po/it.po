@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-18 23:52+0100\n"
-"PO-Revision-Date: 2014-11-19 10:28+0100\n"
+"PO-Revision-Date: 2015-01-12 10:51+0100\n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
 "Language-Team: Italian <moritz@bunkus.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.7beta2\n"
+"X-Generator: Poedit 1.7.3\n"
 
 #: src/extract/xtr_tta.cpp:107
 #, boost-format
@@ -976,13 +976,13 @@ msgstr ""
 #: src/common/kax_file.cpp:56 src/common/kax_file.cpp:61
 #, boost-format
 msgid "%1%: an exception occurred (message: %2%; type: %3%)."
-msgstr ""
+msgstr "%1%: si è verificata una eccezione (messaggio: %2%, tipo: %3%)"
 
 #: src/common/kax_file.cpp:66 src/input/r_matroska.cpp:1243
 #: src/input/r_matroska.cpp:1922
 #, boost-format
 msgid "%1%: an unknown exception occurred."
-msgstr ""
+msgstr "%1%: si è verificata una eccezione sconosciuta."
 
 #: src/merge/mkvmerge.cpp:633
 #, boost-format
@@ -2385,6 +2385,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:2522
 msgid "An exception occurred when writing the output file."
 msgstr ""
+"Si è verificata una eccezione durante la scrittura del file destinazione."
 
 #: src/mmg/header_editor/frame.cpp:679 src/mmg/tabs/chapters.cpp:1860
 #: src/propedit/propedit.cpp:44
@@ -3976,7 +3977,7 @@ msgstr "Esempio"
 
 #: src/merge/mkvmerge.cpp:2522
 msgid "Exception details:"
-msgstr ""
+msgstr "Dettagli eccezione:"
 
 #: src/mmg/options/mkvmerge.cpp:99
 #, c-format, boost-format
@@ -6571,13 +6572,13 @@ msgstr ""
 "configurazione del decoder. Salto questa traccia.\n"
 
 #: src/input/r_qtmp4.cpp:2761
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder "
 "config. Skipping this track.\n"
 msgstr ""
-"Quicktime/MP4 reader: La traccia MPEG4 part 10/AVC %1% manca della sua "
-"configurazione decoder. Salto questa traccia.\n"
+"Lettore Quicktime/MP4: la trccia MPEG4 part 2/AVC %1% manca della sua "
+"configurazione di decodifica. Traccia ignorata.\n"
 
 #: src/input/r_qtmp4.cpp:514
 #, boost-format
@@ -8194,7 +8195,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:2522
 msgid "The drive may be full."
-msgstr ""
+msgstr "L'unità potrebbe essere difettosa."
 
 #: src/mmg/tabs/global.cpp:213
 msgid ""
@@ -8447,9 +8448,8 @@ msgstr "Il file o la cartella non sono stati trovati"
 #: src/common/kax_file.cpp:57 src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1244
 #: src/input/r_matroska.cpp:1923
-#, fuzzy
 msgid "The file will not be processed further."
-msgstr "Il file non può essere aperto per la scrittura."
+msgstr "Il file non verrà ulteriormente elaborato."
 
 #: src/mmg/header_editor/frame.cpp:248
 msgid "The file you tried to open is not a Matroska file."
@@ -9554,7 +9554,7 @@ msgstr ""
 #: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1244
 #: src/input/r_matroska.cpp:1923
 msgid "This usually indicates a damaged file structure."
-msgstr ""
+msgstr "Questo normalmente indica una struttura file danneggiata."
 
 #: src/info/mkvinfo.cpp:1255
 msgid "Time slice"
