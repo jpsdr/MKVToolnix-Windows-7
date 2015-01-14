@@ -22,6 +22,7 @@
 #include <wx/statline.h>
 
 #include "common/extern_data.h"
+#include "common/file_types.h"
 #include "common/iso639.h"
 #include "mmg/mmg.h"
 #include "mmg/mmg_dialog.h"
@@ -205,9 +206,13 @@ tab_input_general::set_track_mode(mmg_track_t *t) {
   bool normal_track    = t && (('a' == t->type) || ('s' == t->type) || ('v' == t->type));
   bool enable          = t && !t->appending && normal_track;
   bool enable_chapters = t && ('c' == t->type);
+  auto file            = t ? files[t->source].get() : nullptr;
+  auto is_matroska     = file && (file->container == FILE_TYPE_MATROSKA);
 
-  st_language->Enable(enable || enable_chapters);
-  cob_language->Enable(enable || enable_chapters);
+  wxLogMessage(wxT("wiwi cont %d"), file ? file->container : -1);
+
+  st_language-> Enable(enable || (enable_chapters && !is_matroska));
+  cob_language->Enable(enable || (enable_chapters && !is_matroska));
   st_track_name->Enable(enable);
   tc_track_name->Enable(enable);
   st_tags->Enable(enable);
