@@ -25,7 +25,8 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    int samples_per_sec,
                                    int channels,
-                                   int bsid)
+                                   int bsid,
+                                   bool framed)
   : generic_packetizer_c(p_reader, p_ti)
   , m_bytes_output(0)
   , m_packetno(0)
@@ -33,6 +34,8 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
   , m_num_packets_same_tc(0)
   , m_s2tc(1536 * 1000000000ll, samples_per_sec)
   , m_single_packet_duration(1 * m_s2tc)
+  , m_previous_timecode{}
+  , m_framed{framed}
 {
   m_first_ac3_header.m_sample_rate = samples_per_sec;
   m_first_ac3_header.m_bs_id       = bsid;
@@ -40,7 +43,7 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
 
   set_track_type(track_audio);
   set_track_default_duration(m_single_packet_duration);
-  enable_avi_audio_sync(true);
+  enable_avi_audio_sync(!framed);
 }
 
 ac3_packetizer_c::~ac3_packetizer_c() {
@@ -96,11 +99,38 @@ ac3_packetizer_c::set_headers() {
 
 int
 ac3_packetizer_c::process(packet_cptr packet) {
+  if (m_framed)
+    return process_framed(packet);
+
   if (-1 != packet->timecode)
     m_available_timecodes.push_back(std::make_pair(packet->timecode, m_parser.get_total_stream_position()));
 
   add_to_buffer(packet->data->get_buffer(), packet->data->get_size());
   flush_packets();
+
+  return FILE_STATUS_MOREDATA;
+}
+
+int
+ac3_packetizer_c::process_framed(packet_cptr packet) {
+  if (!m_packetno) {
+    m_parser.add_bytes(packet->data);
+    if (m_parser.frame_available()) {
+      auto frame = get_frame();
+      adjust_header_values(frame);
+      ++m_packetno;
+    }
+  }
+
+  if (packet->has_timecode())
+    m_previous_timecode = packet->timecode;
+
+  else {
+    m_previous_timecode += m_single_packet_duration;
+    packet->timecode     = m_previous_timecode;
+  }
+
+  add_packet(packet);
 
   return FILE_STATUS_MOREDATA;
 }
@@ -113,6 +143,9 @@ ac3_packetizer_c::add_to_buffer(unsigned char *const buf,
 
 void
 ac3_packetizer_c::flush_impl() {
+  if (m_framed)
+    return;
+
   m_parser.flush();
   flush_packets();
 }

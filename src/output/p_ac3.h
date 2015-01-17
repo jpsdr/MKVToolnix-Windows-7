@@ -26,11 +26,12 @@ protected:
   ac3::frame_c m_first_ac3_header;
   ac3::parser_c m_parser;
   samples_to_timecode_converter_c m_s2tc;
-  int64_t m_single_packet_duration;
+  int64_t m_single_packet_duration, m_previous_timecode;
   std::deque<std::pair<int64_t, uint64_t> > m_available_timecodes;
+  bool m_framed;
 
 public:
-  ac3_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int samples_per_sec, int channels, int bsid);
+  ac3_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int samples_per_sec, int channels, int bsid, bool framed = false);
   virtual ~ac3_packetizer_c();
 
   virtual int process(packet_cptr packet);
@@ -49,6 +50,7 @@ protected:
   virtual ac3::frame_c get_frame();
   virtual int64_t calculate_timecode(uint64_t stream_position);
   virtual void flush_impl();
+  virtual int process_framed(packet_cptr packet);
 };
 
 class ac3_bs_packetizer_c: public ac3_packetizer_c {
