@@ -2127,7 +2127,7 @@ std::vector<mime_type_t> const mime_types = {
   { "application/x-troff-man",                                { "man" }                                                },
   { "application/x-troff-me",                                 { "me" }                                                 },
   { "application/x-troff-ms",                                 { "ms" }                                                 },
-  { "application/x-truetype-font",                            { "ttf", "otf" }                                         },
+  { "application/x-truetype-font",                            { "ttf", "otf", "ttc" }                                  },
   { "application/x-ustar",                                    { "ustar" }                                              },
   { "application/x-wais-source",                              { "src" }                                                },
   { "application/x-wingz",                                    { "wz" }                                                 },
