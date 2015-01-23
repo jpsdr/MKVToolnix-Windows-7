@@ -290,3 +290,19 @@ it -- you don't have to finish everything at once.
 Once you have shown that you are comfortable with translating you can
 also get write access to the project's Git repository and push updates
 there yourself.
+
+# Adding new translations #
+
+This is a TODO list for adding a new translation (a .po file) to MKVToolNix:
+
+* Add new entry to translation_c::initialize_available_translations()
+  in src/common/translation.cpp
+* Copy .po file to po/ sub-directory
+* Add entry in mkvtoolnix.spec
+* Add installation and removal entries in installer/mkvtoolnix.nsi
+* Add new language file to installer/translations/
+* Include translation's author in AUTHORS
+* Include message in ChangeLog
+* Either re-run configure or add the new translation in build-config
+  to TRANSLATIONS; afterwards verify the format strings with »drake
+  translations:verify-format-strings«
