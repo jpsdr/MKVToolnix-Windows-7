@@ -1129,8 +1129,8 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
     if (m_calculated_end_timecode > ogg_timecode) {
       packet->discard_padding = m_calculated_end_timecode - ogg_timecode;
       mxdebug_if(ms_debug,
-                 boost::format("Opus discard padding calculated %1% Ogg timestamp %2% diff %3% samples %4%\n")
-                 % m_calculated_end_timecode % ogg_timecode % packet->discard_padding % (packet->discard_padding.to_ns() * 48000 / 1000000000));
+                 boost::format("Opus discard padding calculated %1% Ogg timestamp %2% diff %3% samples %4% (Ogg page's granulepos %5%)\n")
+                 % m_calculated_end_timecode % ogg_timecode % packet->discard_padding % (packet->discard_padding.to_ns() * 48000 / 1000000000) % granulepos);
     }
 
     reader->m_reader_packetizers[ptzr]->process(packet);
