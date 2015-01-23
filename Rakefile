@@ -289,7 +289,7 @@ file "BROWSE" => ($all_sources + $all_headers) do |t|
 end
 
 file "doc/development.html" => [ "doc/development.md", "doc/pandoc-template.html" ] do |t|
-  runq "  PANDOC #{t.prerequisites.first}", "#{c(:PANDOC)} -o #{t.name} --standalone --from markdown --to html --strict --number-sections --table-of-contents " +
+  runq "  PANDOC #{t.prerequisites.first}", "#{c(:PANDOC)} -o #{t.name} --standalone --from markdown_strict --to html --number-sections --table-of-contents " +
     "--css=pandoc.css --template=doc/pandoc-template.html doc/development.md"
 end
 
