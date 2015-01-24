@@ -236,8 +236,9 @@ If you're sure you've found a bug - e.g. if one of my programs crashes
 with an obscur error message, or if the resulting file is missing part
 of the original data, then by all means submit a bug report.
 
-I use Trac (https://trac.bunkus.org/) as my bug database. You can
-submit your bug reports there. Please be as verbose as possible -
+I use GitHub's issue system (
+https://github.com/mbunkus/mkvtoolnix/issues ) as my bug database. You
+can submit your bug reports there. Please be as verbose as possible -
 e.g. include the command line, if you use Windows or Linux etc.pp.
 
 If at all possible please include sample files as well so that I can
