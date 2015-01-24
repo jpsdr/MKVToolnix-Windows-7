@@ -1,9 +1,8 @@
 !define LANG "SerbianLatin"
-!insertmacro LANG_STRING STRING_SHORTCUT_ON_DESKTOP "Should a shortcut be placed on the desktop?"
-!insertmacro LANG_STRING STRING_UNINSTALLED_OK "$(^Name) was successfully uninstalled."
-!insertmacro LANG_STRING STRING_REMOVE_PROGRAM_QUESTION "Do you really want to remove $(^Name) and all of its components?"
-!insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Should job files created by the GUI be deleted as well?"
-
+!insertmacro LANG_STRING STRING_SHORTCUT_ON_DESKTOP "Da li da postavim prečicu programa na desktop?"
+!insertmacro LANG_STRING STRING_UNINSTALLED_OK "$(^Name) je uspešno deinstaliran."
+!insertmacro LANG_STRING STRING_REMOVE_PROGRAM_QUESTION "Da li zaista želite da uklonite $(^Name) i sve njegove komponente?"
+!insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Da li i fajlovi sa zadacima koje je kreirao GUI treba da se uklone?"
 # Local Variables:
 # mode: nsi
 # End:
