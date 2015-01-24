@@ -229,57 +229,7 @@ do this then you have to follow these steps:
 
 
 
-3. Examples
------------
-
-Here's a *very* brief example of how you could use mkvmerge
-with mencoder in order to rip a DVD:
-
-1. Extract the audio to PCM audio:
-
-        mplayer -ao pcm:file=audio.wav -vo null -vc dummy dvd://1
-
-2. Normalize the sound (optional)
-
-        normalize audio.wav
-
-3. Encode the audio to Vorbis:
-
-        oggenc -q3 -oaudio-q3.ogg audio.wav
-
-4. Somehow calculate the bitrate for your video. Use something like:
-
-  ```
-  video_size = (target_size - audio-size) / 1.005
-  video_bitrate = video_size / length / 1024 * 8
-  ```
-  - `target_size`, `audio_size` in bytes
-  - `length` in seconds
-  - 1.005 is the overhead caused by putting the streams into an Matroska file
-    (about 0.5%, that's correct ;)).
-  - `video_bitrate` will be in kbit/s
-
-5. Use the two-pass encoding for the video:
-
-        mencoder -oac copy -ovc lavc \
-          -lavcopts vcodec=mpeg4:vbitrate=1000:vhq:vqmin=2:vpass=1 \
-          -vf scale=....,crop=..... \
-          -o /dev/null dvd://1
-
-        mencoder -oac copy -ovc lavc \
-          -lavcopts vcodec=mpeg4:vbitrate=1000:vhq:vqmin=2:vpass=2 \
-          -vf scale=....,crop=..... \
-          -o movie.avi dvd://1
-
-6. Merge:
-
-        mkvmerge -o movie.mkv -A movie.avi audio-q3.ogg
-
-  `-A` is necessary in order to avoid copying the raw PCM (or MP3) audio as well.
-
-
-
-4. Reporting bugs
+3. Reporting bugs
 -----------------
 
 If you're sure you've found a bug - e.g. if one of my programs crashes
