@@ -651,7 +651,7 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
     throw false;
   }
 
-  track->codec          = codec_c::look_up(CT_V_MPEG12);
+  track->codec          = codec_c::look_up(codec_c::V_MPEG12);
   track->v_interlaced   = !seq_hdr.progressiveSequence;
   track->v_version      = m2v_parser->GetMPEGVersion();
   track->v_width        = seq_hdr.width;
@@ -708,7 +708,7 @@ mpeg_ps_reader_c::new_stream_v_avc(mpeg_ps_id_t id,
   if (!parser.headers_parsed())
     throw false;
 
-  track->codec    = codec_c::look_up(CT_V_MPEG4_P10);
+  track->codec    = codec_c::look_up(codec_c::V_MPEG4_P10);
   track->v_width  = parser.get_width();
   track->v_height = parser.get_height();
 
@@ -745,7 +745,7 @@ mpeg_ps_reader_c::new_stream_v_vc1(mpeg_ps_id_t id,
   vc1::sequence_header_t seqhdr;
   parser.get_sequence_header(seqhdr);
 
-  track->codec             = codec_c::look_up(CT_V_VC1);
+  track->codec             = codec_c::look_up(codec_c::V_VC1);
   track->v_width           = seqhdr.pixel_width;
   track->v_height          = seqhdr.pixel_height;
   track->provide_timecodes = true;
@@ -765,7 +765,7 @@ mpeg_ps_reader_c::new_stream_a_mpeg(mpeg_ps_id_t,
 
   track->a_channels    = header.channels;
   track->a_sample_rate = header.sampling_frequency;
-  track->codec         = codec_c::look_up(CT_A_MP3);
+  track->codec         = codec_c::look_up(codec_c::A_MP3);
 }
 
 void
@@ -938,34 +938,34 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
         case 0x01:
         case 0x02:
           track->type  = 'v';
-          track->codec = codec_c::look_up(CT_V_MPEG12);
+          track->codec = codec_c::look_up(codec_c::V_MPEG12);
           break;
           break;
         case 0x03:
         case 0x04:
           track->type  = 'a';
-          track->codec = codec_c::look_up(CT_A_MP3);
+          track->codec = codec_c::look_up(codec_c::A_MP3);
           break;
         case 0x0f:
         case 0x11:
           track->type  = 'a';
-          track->codec = codec_c::look_up(CT_A_AAC);
+          track->codec = codec_c::look_up(codec_c::A_AAC);
           break;
         case 0x10:
           track->type  = 'v';
-          track->codec = codec_c::look_up(CT_V_MPEG4_P2);
+          track->codec = codec_c::look_up(codec_c::V_MPEG4_P2);
           break;
         case 0x1b:
           track->type  = 'v';
-          track->codec = codec_c::look_up(CT_V_MPEG4_P10);
+          track->codec = codec_c::look_up(codec_c::V_MPEG4_P10);
           break;
         case 0x80:
           track->type  = 'a';
-          track->codec = codec_c::look_up(CT_A_PCM);
+          track->codec = codec_c::look_up(codec_c::A_PCM);
           break;
         case 0x81:
           track->type  = 'a';
-          track->codec = codec_c::look_up(CT_A_AC3);
+          track->codec = codec_c::look_up(codec_c::A_AC3);
           break;
       }
 
@@ -974,61 +974,61 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
 
       if ((0x20 <= id.sub_id) && (0x3f >= id.sub_id)) {
         track->type  = 's';
-        track->codec = codec_c::look_up(CT_S_VOBSUB);
+        track->codec = codec_c::look_up(codec_c::S_VOBSUB);
 
       } else if (((0x80 <= id.sub_id) && (0x87 >= id.sub_id)) || ((0xc0 <= id.sub_id) && (0xc7 >= id.sub_id)))
-        track->codec = codec_c::look_up(CT_A_AC3);
+        track->codec = codec_c::look_up(codec_c::A_AC3);
 
       else if ((0x88 <= id.sub_id) && (0x9f >= id.sub_id))
-        track->codec = codec_c::look_up(CT_A_DTS);
+        track->codec = codec_c::look_up(codec_c::A_DTS);
 
       else if ((0xa0 <= id.sub_id) && (0xa7 >= id.sub_id))
-        track->codec = codec_c::look_up(CT_A_PCM);
+        track->codec = codec_c::look_up(codec_c::A_PCM);
 
       else if ((0xb0 <= id.sub_id) && (0xbf >= id.sub_id))
-        track->codec = codec_c::look_up(CT_A_TRUEHD);
+        track->codec = codec_c::look_up(codec_c::A_TRUEHD);
 
       else if ((0x80 <= id.sub_id) && (0x8f >= id.sub_id))
-        track->codec = codec_c::look_up(CT_A_PCM);
+        track->codec = codec_c::look_up(codec_c::A_PCM);
 
       else
         track->type = '?';
 
     } else if ((0xc0 <= id.id) && (0xdf >= id.id)) {
       track->type  = 'a';
-      track->codec = codec_c::look_up(CT_A_MP3);
+      track->codec = codec_c::look_up(codec_c::A_MP3);
 
     } else if ((0xe0 <= id.id) && (0xef >= id.id)) {
       track->type  = 'v';
-      track->codec = codec_c::look_up(CT_V_MPEG12);
+      track->codec = codec_c::look_up(codec_c::V_MPEG12);
 
     } else if (0xfd == id.id) {
       track->type  = 'v';
-      track->codec = codec_c::look_up(CT_V_VC1);
+      track->codec = codec_c::look_up(codec_c::V_VC1);
     }
 
     if ('?' == track->type)
       return;
 
-    if (track->codec.is(CT_V_MPEG12))
+    if (track->codec.is(codec_c::V_MPEG12))
       new_stream_v_avc_or_mpeg_1_2(id, packet.m_buffer->get_buffer(), packet.m_length, track);
 
-    else if (track->codec.is(CT_A_MP3))
+    else if (track->codec.is(codec_c::A_MP3))
       new_stream_a_mpeg(id, packet.m_buffer->get_buffer(), packet.m_length, track);
 
-    else if (track->codec.is(CT_A_AC3))
+    else if (track->codec.is(codec_c::A_AC3))
       new_stream_a_ac3(id, packet.m_buffer->get_buffer(), packet.m_length, track);
 
-    else if (track->codec.is(CT_A_DTS))
+    else if (track->codec.is(codec_c::A_DTS))
       new_stream_a_dts(id, packet.m_buffer->get_buffer(), packet.m_length, track);
 
-    else if (track->codec.is(CT_V_VC1))
+    else if (track->codec.is(codec_c::V_VC1))
       new_stream_v_vc1(id, packet.m_buffer->get_buffer(), packet.m_length, track);
 
-    else if (track->codec.is(CT_A_TRUEHD))
+    else if (track->codec.is(codec_c::A_TRUEHD))
       new_stream_a_truehd(id, packet.m_buffer->get_buffer(), packet.m_length, track);
 
-    else if (track->codec.is(CT_A_PCM))
+    else if (track->codec.is(codec_c::A_PCM))
       new_stream_a_pcm(id, packet.m_buffer->get_buffer(), packet.m_length, track);
 
     else
@@ -1171,23 +1171,23 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
   auto &track = tracks[id];
 
   if ('a' == track->type) {
-    if (track->codec.is(CT_A_MP3)) {
+    if (track->codec.is(codec_c::A_MP3)) {
       track->ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, true));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(CT_A_AC3)) {
+    } else if (track->codec.is(codec_c::A_AC3)) {
       track->ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bsid));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(CT_A_DTS)) {
+    } else if (track->codec.is(codec_c::A_DTS)) {
       track->ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, track->dts_header));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(CT_A_TRUEHD)) {
+    } else if (track->codec.is(codec_c::A_TRUEHD)) {
       track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, truehd_frame_t::truehd, track->a_sample_rate, track->a_channels));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(CT_A_PCM)) {
+    } else if (track->codec.is(codec_c::A_PCM)) {
       track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
       show_packetizer_info(id, PTZR(track->ptzr));
 
@@ -1195,7 +1195,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       mxerror(boost::format(Y("mpeg_ps_reader: Should not have happened #1. %1%")) % BUGMSG);
 
   } else {                      // if (track->type == 'a')
-    if (track->codec.is(CT_V_MPEG12)) {
+    if (track->codec.is(codec_c::V_MPEG12)) {
       generic_packetizer_c *m2vpacketizer;
 
       m_ti.m_private_data = memory_c::clone(track->raw_seq_hdr, track->raw_seq_hdr_size);
@@ -1205,12 +1205,12 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       show_packetizer_info(id, PTZR(track->ptzr));
       m2vpacketizer->set_video_interlaced_flag(track->v_interlaced);
 
-    } else if (track->codec.is(CT_V_MPEG4_P10)) {
+    } else if (track->codec.is(codec_c::V_MPEG4_P10)) {
       track->ptzr = add_packetizer(new mpeg4_p10_es_video_packetizer_c(this, m_ti));
       PTZR(track->ptzr)->set_video_pixel_dimensions(track->v_width, track->v_height);
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(CT_V_VC1)) {
+    } else if (track->codec.is(codec_c::V_VC1)) {
       track->ptzr = add_packetizer(new vc1_video_packetizer_c(this, m_ti));
       show_packetizer_info(id, PTZR(track->ptzr));
 
@@ -1364,7 +1364,7 @@ mpeg_ps_reader_c::identify() {
 
     verbose_info.clear();
 
-    if (track->codec.is(CT_V_MPEG4_P10))
+    if (track->codec.is(codec_c::V_MPEG4_P10))
       verbose_info.push_back("packetizer:mpeg4_p10_es_video");
 
     verbose_info.push_back((boost::format("stream_id:%|1$02x| sub_stream_id:%|2$02x|") % track->id.id % track->id.sub_id).str());

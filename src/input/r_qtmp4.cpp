@@ -1382,7 +1382,7 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
 
   if (   dmx->is_video()
       && !dmx->pos
-      && dmx->codec.is(CT_V_MPEG4_P2)
+      && dmx->codec.is(codec_c::V_MPEG4_P2)
       && dmx->esds_parsed
       && (dmx->esds.decoder_config)) {
     buffer        = memory_c::alloc(index.size + dmx->esds.decoder_config->get_size());
@@ -1673,19 +1673,19 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
   bool packetizer_ok = true;
 
   if (dmx->is_video()) {
-    if (dmx->codec.is(CT_V_MPEG12))
+    if (dmx->codec.is(codec_c::V_MPEG12))
       create_video_packetizer_mpeg1_2(dmx);
 
-    else if (dmx->codec.is(CT_V_MPEG4_P2))
+    else if (dmx->codec.is(codec_c::V_MPEG4_P2))
       create_video_packetizer_mpeg4_p2(dmx);
 
-    else if (dmx->codec.is(CT_V_MPEG4_P10))
+    else if (dmx->codec.is(codec_c::V_MPEG4_P10))
       create_video_packetizer_mpeg4_p10(dmx);
 
-    else if (dmx->codec.is(CT_V_MPEGH_P2))
+    else if (dmx->codec.is(codec_c::V_MPEGH_P2))
       create_video_packetizer_mpegh_p2(dmx);
 
-    else if (dmx->codec.is(CT_V_SVQ1))
+    else if (dmx->codec.is(codec_c::V_SVQ1))
       create_video_packetizer_svq1(dmx);
 
     else
@@ -1693,22 +1693,22 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
 
   } else if (dmx->is_audio()) {
-    if (dmx->codec.is(CT_A_AAC))
+    if (dmx->codec.is(codec_c::A_AAC))
       create_audio_packetizer_aac(dmx);
 
-    else if (dmx->codec.is(CT_A_MP2) || dmx->codec.is(CT_A_MP3))
+    else if (dmx->codec.is(codec_c::A_MP2) || dmx->codec.is(codec_c::A_MP3))
       create_audio_packetizer_mp3(dmx);
 
-    else if (dmx->codec.is(CT_A_PCM))
+    else if (dmx->codec.is(codec_c::A_PCM))
       create_audio_packetizer_pcm(dmx);
 
-    else if (dmx->codec.is(CT_A_AC3))
+    else if (dmx->codec.is(codec_c::A_AC3))
       packetizer_ok = create_audio_packetizer_ac3(dmx);
 
-    else if (dmx->codec.is(CT_A_ALAC))
+    else if (dmx->codec.is(codec_c::A_ALAC))
       packetizer_ok = create_audio_packetizer_alac(dmx);
 
-    else if (dmx->codec.is(CT_A_DTS))
+    else if (dmx->codec.is(codec_c::A_DTS))
       packetizer_ok = create_audio_packetizer_dts(dmx);
 
     else
@@ -1717,7 +1717,7 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
     handle_audio_encoder_delay(dmx);
 
   } else {
-    if (dmx->codec.is(CT_S_VOBSUB))
+    if (dmx->codec.is(codec_c::S_VOBSUB))
       create_subtitles_packetizer_vobsub(dmx);
   }
 
@@ -1758,10 +1758,10 @@ qtmp4_reader_c::identify() {
 
     verbose_info.clear();
 
-    if (dmx->codec.is(CT_V_MPEG4_P10))
+    if (dmx->codec.is(codec_c::V_MPEG4_P10))
       verbose_info.push_back("packetizer:mpeg4_p10_video");
 
-    else if (dmx->codec.is(CT_V_MPEGH_P2))
+    else if (dmx->codec.is(codec_c::V_MPEGH_P2))
       verbose_info.push_back("packetizer:mpegh_p2_video");
 
     if (!dmx->language.empty())
@@ -1914,8 +1914,8 @@ void
 qtmp4_demuxer_c::calculate_timecodes_variable_sample_size() {
   auto const num_edits         = editlist_table.size();
   auto const num_frame_offsets = frame_offset_table.size();
-  bool is_avc                  = codec.is(CT_V_MPEG4_P10);
-  bool is_hevc                 = codec.is(CT_V_MPEGH_P2);
+  bool is_avc                  = codec.is(codec_c::V_MPEG4_P10);
+  bool is_hevc                 = codec.is(codec_c::V_MPEGH_P2);
   int64_t v_dts_offset         = (is_avc || is_hevc) && num_frame_offsets ? to_nsecs(frame_offset_table[0]) : 0;
 
   std::vector<int64_t> timecodes_before_offsets;
@@ -2141,7 +2141,7 @@ qtmp4_demuxer_c::update_editlist_table(int64_t global_time_scale) {
   int64_t e_pts            = 0;
   auto num_frame_offsets   = frame_offset_table.size();
   // int64_t pts_offset       = frame_offset_table.empty() ? 0 : frame_offset_table[0];
-  // if (('v' == type) && codec.is(CT_V_MPEG4_P10) && !frame_offset_table.empty())
+  // if (('v' == type) && codec.is(codec_c::V_MPEG4_P10) && !frame_offset_table.empty())
   //   pts_offset = frame_offset_table[0];
 
   mxdebug_if(m_debug_tables, boost::format("Updating edit list table for track %1%\n") % id);
@@ -2473,7 +2473,7 @@ qtmp4_demuxer_c::parse_audio_header_priv_atoms(uint64_t atom_size,
         mm_mem_io_c memio(mem + atom.pos + atom.hsize, atom.size - atom.hsize);
         esds_parsed = parse_esds_atom(memio, level + 1);
 
-        if (esds_parsed && codec_c::look_up_object_type_id(esds.object_type_id).is(CT_A_AAC)) {
+        if (esds_parsed && codec_c::look_up_object_type_id(esds.object_type_id).is(codec_c::A_AAC)) {
           int profile, sample_rate, channels, output_sample_rate;
           bool aac_is_sbr;
 
@@ -2510,7 +2510,7 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
   auto mem  = stsd->get_buffer() + stsd_non_priv_struct_size;
   auto size = atom_size - stsd_non_priv_struct_size;
 
-  if (!codec.is(CT_V_MPEG4_P10) && !codec.is(CT_V_MPEGH_P2) && size && !fourcc.equiv("mp4v") && !fourcc.equiv("xvid")) {
+  if (!codec.is(codec_c::V_MPEG4_P10) && !codec.is(codec_c::V_MPEGH_P2) && size && !fourcc.equiv("mp4v") && !fourcc.equiv("xvid")) {
     priv = memory_c::clone(mem, size);
     return;
   }
@@ -2715,12 +2715,12 @@ qtmp4_demuxer_c::verify_alac_audio_parameters() {
 bool
 qtmp4_demuxer_c::verify_mp4a_audio_parameters() {
   auto cdc = codec_c::look_up_object_type_id(esds.object_type_id);
-  if (!cdc.is(CT_A_AAC) && !cdc.is(CT_A_DTS) && !cdc.is(CT_A_MP2) && !cdc.is(CT_A_MP3)) {
+  if (!cdc.is(codec_c::A_AAC) && !cdc.is(codec_c::A_DTS) && !cdc.is(codec_c::A_MP2) && !cdc.is(codec_c::A_MP3)) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n")) % id % (int)esds.object_type_id);
     return false;
   }
 
-  if (cdc.is(CT_A_AAC) && (!esds.decoder_config || !a_aac_config_parsed)) {
+  if (cdc.is(codec_c::A_AAC) && (!esds.decoder_config || !a_aac_config_parsed)) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n")) % id);
     return false;
   }
@@ -2738,10 +2738,10 @@ qtmp4_demuxer_c::verify_video_parameters() {
   if (fourcc.equiv("mp4v"))
     return verify_mp4v_video_parameters();
 
-  if (codec.is(CT_V_MPEG4_P10))
+  if (codec.is(codec_c::V_MPEG4_P10))
     return verify_avc_video_parameters();
 
-  else if (codec.is(CT_V_MPEGH_P2))
+  else if (codec.is(codec_c::V_MPEGH_P2))
     return verify_hevc_video_parameters();
 
   return true;
@@ -2774,7 +2774,7 @@ qtmp4_demuxer_c::verify_mp4v_video_parameters() {
     return false;
   }
 
-  if (codec.is(CT_V_MPEG4_P2) && !esds.decoder_config) {
+  if (codec.is(codec_c::V_MPEG4_P2) && !esds.decoder_config) {
     // This is MPEG4 video, and we need header data for it.
     mxwarn(boost::format(Y("Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n")) % id);
     return false;
@@ -2785,7 +2785,7 @@ qtmp4_demuxer_c::verify_mp4v_video_parameters() {
 
 bool
 qtmp4_demuxer_c::verify_subtitles_parameters() {
-  if (codec.is(CT_S_VOBSUB))
+  if (codec.is(codec_c::S_VOBSUB))
     return verify_vobsub_subtitles_parameters();
 
   return false;
@@ -2808,7 +2808,7 @@ qtmp4_demuxer_c::determine_codec() {
   if (!codec) {
     codec = codec_c::look_up(fourcc);
 
-    if (codec.is(CT_A_PCM))
+    if (codec.is(codec_c::A_PCM))
       m_pcm_format = fourcc == "twos" ? pcm_packetizer_c::big_endian_integer : pcm_packetizer_c::little_endian_integer;
   }
 }

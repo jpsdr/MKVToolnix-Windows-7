@@ -357,7 +357,7 @@ avi_reader_c::create_mpeg4_p10_packetizer() {
 void
 avi_reader_c::create_vp8_packetizer() {
   m_ti.m_private_data.reset();
-  m_vptzr = add_packetizer(new vpx_video_packetizer_c(this, m_ti, CT_V_VP8));
+  m_vptzr = add_packetizer(new vpx_video_packetizer_c(this, m_ti, codec_c::V_VP8));
 
   PTZR(m_vptzr)->set_track_default_duration(1000000000ll / m_fps);
   PTZR(m_vptzr)->set_video_pixel_width(AVI_video_width(m_avi));
@@ -484,22 +484,22 @@ avi_reader_c::add_audio_demuxer(int aid) {
 
   demuxer.m_codec = codec_c::look_up_audio_format(audio_format);
 
-  if (demuxer.m_codec.is(CT_A_PCM))
+  if (demuxer.m_codec.is(codec_c::A_PCM))
     packetizer = new pcm_packetizer_c(this, m_ti, demuxer.m_samples_per_second, demuxer.m_channels, demuxer.m_bits_per_sample, 0x0003 == audio_format ? pcm_packetizer_c::ieee_float : pcm_packetizer_c::little_endian_integer);
 
-  else if (demuxer.m_codec.is(CT_A_MP2) || demuxer.m_codec.is(CT_A_MP3))
+  else if (demuxer.m_codec.is(codec_c::A_MP2) || demuxer.m_codec.is(codec_c::A_MP3))
     packetizer = new mp3_packetizer_c(this, m_ti, demuxer.m_samples_per_second, demuxer.m_channels, false);
 
-  else if (demuxer.m_codec.is(CT_A_AC3))
+  else if (demuxer.m_codec.is(codec_c::A_AC3))
     packetizer = new ac3_packetizer_c(this, m_ti, demuxer.m_samples_per_second, demuxer.m_channels, 0);
 
-  else if (demuxer.m_codec.is(CT_A_DTS))
+  else if (demuxer.m_codec.is(codec_c::A_DTS))
     packetizer = create_dts_packetizer(aid);
 
-  else if (demuxer.m_codec.is(CT_A_AAC))
+  else if (demuxer.m_codec.is(codec_c::A_AAC))
     packetizer = create_aac_packetizer(aid, demuxer);
 
-  else if (demuxer.m_codec.is(CT_A_VORBIS))
+  else if (demuxer.m_codec.is(codec_c::A_VORBIS))
     packetizer = create_vorbis_packetizer(aid);
 
   else
@@ -876,10 +876,10 @@ avi_reader_c::identify_video() {
   const char *fourcc_str = AVI_video_compressor(m_avi);
   auto codec             = codec_c::look_up(fourcc_str);
 
-  if (codec.is(CT_V_MPEG4_P2))
+  if (codec.is(codec_c::V_MPEG4_P2))
     extended_identify_mpeg4_l2(extended_info);
 
-  else if (codec.is(CT_V_MPEG4_P10))
+  else if (codec.is(codec_c::V_MPEG4_P10))
     extended_info.push_back("packetizer:mpeg4_p10_es_video");
 
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), join(" ", extended_info));
@@ -907,8 +907,8 @@ avi_reader_c::identify_subtitles() {
   size_t i;
   for (i = 0; m_subtitle_demuxers.size() > i; ++i)
     id_result_track(1 + AVI_audio_tracks(m_avi) + i, ID_RESULT_TRACK_SUBTITLES,
-                      avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type ? codec_c::get_name(CT_S_SRT, "SRT")
-                    : avi_subs_demuxer_t::TYPE_SSA == m_subtitle_demuxers[i].m_type ? codec_c::get_name(CT_S_SSA_ASS, "SSA/ASS")
+                      avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type ? codec_c::get_name(codec_c::S_SRT, "SRT")
+                    : avi_subs_demuxer_t::TYPE_SSA == m_subtitle_demuxers[i].m_type ? codec_c::get_name(codec_c::S_SSA_ASS, "SSA/ASS")
                     :                                                                 "unknown");
 }
 

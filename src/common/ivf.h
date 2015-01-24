@@ -48,7 +48,7 @@ struct PACKED_STRUCTURE frame_header_t {
   frame_header_t();
 };
 
-bool is_keyframe(const memory_cptr &buffer, codec_type_e codec);
+bool is_keyframe(const memory_cptr &buffer, codec_c::type_e codec);
 
 #if defined(COMP_MSC)
 #pragma pack(pop)

@@ -486,7 +486,7 @@ ogm_reader_c::handle_new_stream(ogg_page *og) {
 
     else {
       dmx         = new ogm_demuxer_c(this);
-      dmx->codec  = codec_c::look_up(CT_A_FLAC);
+      dmx->codec  = codec_c::look_up(codec_c::A_FLAC);
       dmx->in_use = true;
     }
 
@@ -733,7 +733,7 @@ ogm_reader_c::handle_stream_comments() {
 
   for (i = 0; i < sdemuxers.size(); i++) {
     ogm_demuxer_cptr &dmx = sdemuxers[i];
-    if (dmx->codec.is(CT_A_FLAC) || (2 > dmx->packet_data.size()))
+    if (dmx->codec.is(codec_c::A_FLAC) || (2 > dmx->packet_data.size()))
       continue;
 
     comments = extract_vorbis_comments(dmx->packet_data[1]);
@@ -965,7 +965,7 @@ ogm_demuxer_c::process_header_page() {
 ogm_a_aac_demuxer_c::ogm_a_aac_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec = codec_c::look_up(CT_A_AAC);
+  codec = codec_c::look_up(codec_c::A_AAC);
 }
 
 generic_packetizer_c *
@@ -1006,7 +1006,7 @@ ogm_a_aac_demuxer_c::create_packetizer() {
 ogm_a_ac3_demuxer_c::ogm_a_ac3_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec = codec_c::look_up(CT_A_AC3);
+  codec = codec_c::look_up(codec_c::A_AC3);
 }
 
 generic_packetizer_c *
@@ -1024,7 +1024,7 @@ ogm_a_ac3_demuxer_c::create_packetizer() {
 ogm_a_mp3_demuxer_c::ogm_a_mp3_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec = codec_c::look_up(CT_A_MP3);
+  codec = codec_c::look_up(codec_c::A_MP3);
 }
 
 generic_packetizer_c *
@@ -1042,7 +1042,7 @@ ogm_a_mp3_demuxer_c::create_packetizer() {
 ogm_a_pcm_demuxer_c::ogm_a_pcm_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec = codec_c::look_up(CT_A_PCM);
+  codec = codec_c::look_up(codec_c::A_PCM);
 }
 
 generic_packetizer_c *
@@ -1060,7 +1060,7 @@ ogm_a_pcm_demuxer_c::create_packetizer() {
 ogm_a_vorbis_demuxer_c::ogm_a_vorbis_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec              = codec_c::look_up(CT_A_VORBIS);
+  codec              = codec_c::look_up(codec_c::A_VORBIS);
   num_header_packets = 3;
 }
 
@@ -1096,7 +1096,7 @@ ogm_a_opus_demuxer_c::ogm_a_opus_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
   , m_calculated_end_timecode{timecode_c::ns(0)}
 {
-  codec              = codec_c::look_up(CT_A_OPUS);
+  codec              = codec_c::look_up(codec_c::A_OPUS);
   num_header_packets = 2;
 }
 
@@ -1142,7 +1142,7 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
 ogm_s_text_demuxer_c::ogm_s_text_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec = codec_c::look_up(CT_S_SRT);
+  codec = codec_c::look_up(codec_c::S_SRT);
 }
 
 generic_packetizer_c *
@@ -1182,7 +1182,7 @@ ogm_s_text_demuxer_c::process_page(int64_t granulepos) {
 ogm_v_avc_demuxer_c::ogm_v_avc_demuxer_c(ogm_reader_c *p_reader)
   : ogm_v_mscomp_demuxer_c(p_reader)
 {
-  codec                  = codec_c::look_up(CT_V_MPEG4_P10);
+  codec                  = codec_c::look_up(codec_c::V_MPEG4_P10);
   num_non_header_packets = 3;
 }
 
@@ -1314,7 +1314,7 @@ ogm_v_mscomp_demuxer_c::process_page(int64_t granulepos) {
 ogm_v_theora_demuxer_c::ogm_v_theora_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec              = codec_c::look_up(CT_V_THEORA);
+  codec              = codec_c::look_up(codec_c::V_THEORA);
   num_header_packets = 3;
 
   memset(&theora, 0, sizeof(theora_identification_header_t));
@@ -1390,7 +1390,7 @@ ogm_v_vp8_demuxer_c::ogm_v_vp8_demuxer_c(ogm_reader_c *p_reader,
   , num_header_packets_skipped(1)
   , frames_since_granulepos_change(0)
 {
-  codec              = codec_c::look_up(CT_V_VP8);
+  codec              = codec_c::look_up(codec_c::V_VP8);
   num_header_packets = 2;
 
   memcpy(&vp8_header, op.packet, sizeof(vp8_ogg_header_t));
@@ -1424,7 +1424,7 @@ ogm_v_vp8_demuxer_c::initialize() {
 
 generic_packetizer_c *
 ogm_v_vp8_demuxer_c::create_packetizer() {
-  auto ptzr_obj = new vpx_video_packetizer_c(reader, m_ti, CT_V_VP8);
+  auto ptzr_obj = new vpx_video_packetizer_c(reader, m_ti, codec_c::V_VP8);
 
   ptzr_obj->set_video_pixel_width(pixel_width);
   ptzr_obj->set_video_pixel_height(pixel_height);
@@ -1482,7 +1482,7 @@ ogm_v_vp8_demuxer_c::process_page(int64_t granulepos) {
 ogm_s_kate_demuxer_c::ogm_s_kate_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec              = codec_c::look_up(CT_S_KATE);
+  codec              = codec_c::look_up(codec_c::S_KATE);
   num_header_packets = 1; /* at least 1, will be updated upon reading the ID header */
 
   memset(&kate, 0, sizeof(kate_identification_header_t));

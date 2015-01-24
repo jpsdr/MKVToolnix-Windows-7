@@ -229,5 +229,5 @@ wavpack_reader_c::read(generic_packetizer_c *,
 void
 wavpack_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(CT_A_WAVPACK4, "WAVPACK"));
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::A_WAVPACK4, "WAVPACK"));
 }

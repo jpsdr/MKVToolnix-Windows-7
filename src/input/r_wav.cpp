@@ -184,7 +184,7 @@ wav_ac3acm_demuxer_c::wav_ac3acm_demuxer_c(wav_reader_c *reader,
   m_buf[0] = memory_c::alloc(AC3ACM_READ_SIZE);
   m_buf[1] = memory_c::alloc(AC3ACM_READ_SIZE);
 
-  m_codec  = codec_c::look_up(CT_A_AC3);
+  m_codec  = codec_c::look_up(codec_c::A_AC3);
 }
 
 wav_ac3acm_demuxer_c::~wav_ac3acm_demuxer_c() {
@@ -311,7 +311,7 @@ wav_dts_demuxer_c::wav_dts_demuxer_c(wav_reader_c *reader,
   m_buf[0] = memory_c::alloc(DTS_READ_SIZE);
   m_buf[1] = memory_c::alloc(DTS_READ_SIZE);
 
-  m_codec  = codec_c::look_up(CT_A_DTS);
+  m_codec  = codec_c::look_up(codec_c::A_DTS);
 }
 
 wav_dts_demuxer_c::~wav_dts_demuxer_c() {
@@ -390,7 +390,7 @@ wav_pcm_demuxer_c::wav_pcm_demuxer_c(wav_reader_c *reader,
   m_bps    = get_uint16_le(&m_wheader->common.wChannels) * get_uint16_le(&m_wheader->common.wBitsPerSample) * get_uint32_le(&m_wheader->common.dwSamplesPerSec) / 8;
   m_buffer = memory_c::alloc(m_bps);
 
-  m_codec  = codec_c::look_up(CT_A_PCM);
+  m_codec  = codec_c::look_up(codec_c::A_PCM);
 }
 
 wav_pcm_demuxer_c::~wav_pcm_demuxer_c() {

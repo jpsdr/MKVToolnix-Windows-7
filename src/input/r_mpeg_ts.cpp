@@ -133,7 +133,7 @@ mpeg_ts_track_c::new_stream_v_mpeg_1_2() {
   if (!frame)
     return FILE_STATUS_MOREDATA;
 
-  codec          = codec_c::look_up(CT_V_MPEG12);
+  codec          = codec_c::look_up(codec_c::V_MPEG12);
   v_interlaced   = !seq_hdr.progressiveSequence;
   v_version      = m_m2v_parser->GetMPEGVersion();
   v_width        = seq_hdr.width;
@@ -179,7 +179,7 @@ mpeg_ts_track_c::new_stream_v_avc() {
   if (!m_avc_parser->headers_parsed())
     return FILE_STATUS_MOREDATA;
 
-  codec    = codec_c::look_up(CT_V_MPEG4_P10);
+  codec    = codec_c::look_up(codec_c::V_MPEG4_P10);
   v_width  = m_avc_parser->get_width();
   v_height = m_avc_parser->get_height();
 
@@ -202,7 +202,7 @@ mpeg_ts_track_c::new_stream_v_hevc() {
   if (!m_hevc_parser->headers_parsed())
     return FILE_STATUS_MOREDATA;
 
-  codec    = codec_c::look_up(CT_V_MPEGH_P2);
+  codec    = codec_c::look_up(codec_c::V_MPEGH_P2);
   v_width  = m_hevc_parser->get_width();
   v_height = m_hevc_parser->get_height();
 
@@ -233,7 +233,7 @@ mpeg_ts_track_c::new_stream_a_mpeg() {
   decode_mp3_header(m_probe_data->get_buffer() + offset, &header);
   a_channels    = header.channels;
   a_sample_rate = header.sampling_frequency;
-  codec         = codec_c::look_up(CT_A_MP3);
+  codec         = codec_c::look_up(codec_c::A_MP3);
 
   mxdebug_if(m_debug_headers, boost::format("mpeg_ts_track_c::new_stream_a_mpeg: Channels: %1%, sample rate: %2%\n") %a_channels % a_sample_rate);
   return 0;
@@ -424,7 +424,7 @@ mpeg_ts_track_c::parse_ac3_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &,
     return false;
 
   type  = ES_AUDIO_TYPE;
-  codec = codec_c::look_up(CT_A_AC3);
+  codec = codec_c::look_up(codec_c::A_AC3);
 
   return true;
 }
@@ -436,7 +436,7 @@ mpeg_ts_track_c::parse_dts_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &,
     return false;
 
   type  = ES_AUDIO_TYPE;
-  codec = codec_c::look_up(CT_A_DTS);
+  codec = codec_c::look_up(codec_c::A_DTS);
 
   return true;
 }
@@ -477,7 +477,7 @@ mpeg_ts_track_c::parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_de
       parse_iso639_language_from(buffer);
 
       type      = ES_SUBT_TYPE;
-      codec     = codec_c::look_up(CT_S_SRT);
+      codec     = codec_c::look_up(codec_c::S_SRT);
       probed_ok = true;
     }
 
@@ -524,7 +524,7 @@ mpeg_ts_track_c::parse_vobsub_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt
     return false;
 
   type  = ES_SUBT_TYPE;
-  codec = codec_c::look_up(CT_S_VOBSUB);
+  codec = codec_c::look_up(codec_c::S_VOBSUB);
 
   if (pmt_descriptor.length >= 8)
     // Bits:
@@ -952,56 +952,56 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
       case ISO_11172_VIDEO:
       case ISO_13818_VIDEO:
         track->type      = ES_VIDEO_TYPE;
-        track->codec     = codec_c::look_up(CT_V_MPEG12);
+        track->codec     = codec_c::look_up(codec_c::V_MPEG12);
         break;
       case ISO_14496_PART2_VIDEO:
         track->type      = ES_VIDEO_TYPE;
-        track->codec     = codec_c::look_up(CT_V_MPEG4_P2);
+        track->codec     = codec_c::look_up(codec_c::V_MPEG4_P2);
         break;
       case ISO_14496_PART10_VIDEO:
         track->type      = ES_VIDEO_TYPE;
-        track->codec     = codec_c::look_up(CT_V_MPEG4_P10);
+        track->codec     = codec_c::look_up(codec_c::V_MPEG4_P10);
         break;
       case ISO_23008_PART2_VIDEO:
         track->type      = ES_VIDEO_TYPE;
-        track->codec     = codec_c::look_up(CT_V_MPEGH_P2);
+        track->codec     = codec_c::look_up(codec_c::V_MPEGH_P2);
         break;
       case STREAM_VIDEO_VC1:
         track->type      = ES_VIDEO_TYPE;
-        track->codec     = codec_c::look_up(CT_V_VC1);
+        track->codec     = codec_c::look_up(codec_c::V_VC1);
         break;
       case ISO_11172_AUDIO:
       case ISO_13818_AUDIO:
         track->type      = ES_AUDIO_TYPE;
-        track->codec     = codec_c::look_up(CT_A_MP3);
+        track->codec     = codec_c::look_up(codec_c::A_MP3);
         break;
       case ISO_13818_PART7_AUDIO:
       case ISO_14496_PART3_AUDIO:
         track->type      = ES_AUDIO_TYPE;
-        track->codec     = codec_c::look_up(CT_A_AAC);
+        track->codec     = codec_c::look_up(codec_c::A_AAC);
         break;
       case STREAM_AUDIO_PCM:
         track->type      = ES_AUDIO_TYPE;
-        track->codec     = codec_c::look_up(CT_A_PCM);
+        track->codec     = codec_c::look_up(codec_c::A_PCM);
         break;
       case STREAM_AUDIO_AC3:
       case STREAM_AUDIO_AC3_PLUS: // EAC3
         track->type      = ES_AUDIO_TYPE;
-        track->codec     = codec_c::look_up(CT_A_AC3);
+        track->codec     = codec_c::look_up(codec_c::A_AC3);
         break;
       case STREAM_AUDIO_AC3_LOSSLESS:
         track->type      = ES_AUDIO_TYPE;
-        track->codec     = codec_c::look_up(CT_A_TRUEHD);
+        track->codec     = codec_c::look_up(codec_c::A_TRUEHD);
         break;
       case STREAM_AUDIO_DTS:
       case STREAM_AUDIO_DTS_HD:
       case STREAM_AUDIO_DTS_HD_MA:
         track->type      = ES_AUDIO_TYPE;
-        track->codec     = codec_c::look_up(CT_A_DTS);
+        track->codec     = codec_c::look_up(codec_c::A_DTS);
         break;
       case STREAM_SUBTITLES_HDMV_PGS:
         track->type      = ES_SUBT_TYPE;
-        track->codec     = codec_c::look_up(CT_S_PGS);
+        track->codec     = codec_c::look_up(codec_c::S_PGS);
         track->probed_ok = true;
         break;
       case ISO_13818_PES_PRIVATE:
@@ -1050,7 +1050,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
     // a known/more concrete descriptor tag.
     if ((pmt_pid_info->stream_type == ISO_13818_PES_PRIVATE) && missing_tag) {
       track->type  = ES_AUDIO_TYPE;
-      track->codec = codec_c::look_up(CT_A_AC3);
+      track->codec = codec_c::look_up(codec_c::A_AC3);
     }
 
     if (track->type != ES_UNKNOWN) {
@@ -1184,13 +1184,13 @@ mpeg_ts_reader_c::determine_track_parameters(mpeg_ts_track_ptr const &track) {
     return parse_pmt(track->pes_payload->get_buffer());
 
   else if (track->type == ES_VIDEO_TYPE) {
-    if (track->codec.is(CT_V_MPEG12))
+    if (track->codec.is(codec_c::V_MPEG12))
       return track->new_stream_v_mpeg_1_2();
-    else if (track->codec.is(CT_V_MPEG4_P10))
+    else if (track->codec.is(codec_c::V_MPEG4_P10))
       return track->new_stream_v_avc();
-    else if (track->codec.is(CT_V_MPEGH_P2))
+    else if (track->codec.is(codec_c::V_MPEGH_P2))
       return track->new_stream_v_hevc();
-    else if (track->codec.is(CT_V_VC1))
+    else if (track->codec.is(codec_c::V_VC1))
       return track->new_stream_v_vc1();
 
     track->pes_payload->set_chunk_size(512 * 1024);
@@ -1198,17 +1198,17 @@ mpeg_ts_reader_c::determine_track_parameters(mpeg_ts_track_ptr const &track) {
   } else if (track->type != ES_AUDIO_TYPE)
     return -1;
 
-  if (track->codec.is(CT_A_MP3))
+  if (track->codec.is(codec_c::A_MP3))
     return track->new_stream_a_mpeg();
-  else if (track->codec.is(CT_A_AAC))
+  else if (track->codec.is(codec_c::A_AAC))
     return track->new_stream_a_aac();
-  else if (track->codec.is(CT_A_AC3))
+  else if (track->codec.is(codec_c::A_AC3))
     return track->new_stream_a_ac3();
-  else if (track->codec.is(CT_A_DTS))
+  else if (track->codec.is(codec_c::A_DTS))
     return track->new_stream_a_dts();
-  else if (track->codec.is(CT_A_PCM))
+  else if (track->codec.is(codec_c::A_PCM))
     return track->new_stream_a_pcm();
-  else if (track->codec.is(CT_A_TRUEHD))
+  else if (track->codec.is(codec_c::A_TRUEHD))
     return track->new_stream_a_truehd();
 
   return -1;
@@ -1372,47 +1372,47 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
   m_ti.m_language = track->language;
 
   if (ES_AUDIO_TYPE == track->type) {
-    if (track->codec.is(CT_A_MP3)) {
+    if (track->codec.is(codec_c::A_MP3)) {
       track->ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, (0 != track->a_sample_rate) && (0 != track->a_channels)));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(CT_A_AAC)) {
+    } else if (track->codec.is(codec_c::A_AAC)) {
       create_aac_audio_packetizer(track);
 
-    } else if (track->codec.is(CT_A_AC3)) {
+    } else if (track->codec.is(codec_c::A_AC3)) {
       track->ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bsid));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(CT_A_DTS)) {
+    } else if (track->codec.is(codec_c::A_DTS)) {
       track->ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, track->a_dts_header));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(CT_A_PCM)) {
+    } else if (track->codec.is(codec_c::A_PCM)) {
       track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(CT_A_TRUEHD)) {
+    } else if (track->codec.is(codec_c::A_TRUEHD)) {
       track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, truehd_frame_t::truehd, track->a_sample_rate, track->a_channels));
       show_packetizer_info(id, PTZR(track->ptzr));
     }
 
   } else if (ES_VIDEO_TYPE == track->type) {
-    if (track->codec.is(CT_V_MPEG12))
+    if (track->codec.is(codec_c::V_MPEG12))
       create_mpeg1_2_video_packetizer(track);
 
-    else if (track->codec.is(CT_V_MPEG4_P10))
+    else if (track->codec.is(codec_c::V_MPEG4_P10))
       create_mpeg4_p10_es_video_packetizer(track);
 
-    else if (track->codec.is(CT_V_MPEGH_P2))
+    else if (track->codec.is(codec_c::V_MPEGH_P2))
       create_mpegh_p2_es_video_packetizer(track);
 
-    else if (track->codec.is(CT_V_VC1))
+    else if (track->codec.is(codec_c::V_VC1))
       create_vc1_video_packetizer(track);
 
-  } else if (track->codec.is(CT_S_PGS))
+  } else if (track->codec.is(codec_c::S_PGS))
     create_hdmv_pgs_subtitles_packetizer(track);
 
-  else if (track->codec.is(CT_S_SRT))
+  else if (track->codec.is(codec_c::S_SRT))
     create_srt_subtitles_packetizer(track);
 
   if (-1 != track->ptzr)

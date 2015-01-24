@@ -143,5 +143,5 @@ dts_reader_c::read(generic_packetizer_c *,
 void
 dts_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(CT_A_DTS, "DTS"));
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::A_DTS, "DTS"));
 }

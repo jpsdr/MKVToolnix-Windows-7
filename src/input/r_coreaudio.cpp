@@ -109,7 +109,7 @@ coreaudio_reader_c::dump_headers()
           % (m_magic_cookie ? (boost::format("present, size %1%") % m_magic_cookie->get_size()).str() : std::string{"not present"})
           );
 
-  if (m_codec.is(CT_A_ALAC) && m_magic_cookie && (m_magic_cookie->get_size() >= sizeof(alac::codec_config_t))) {
+  if (m_codec.is(codec_c::A_ALAC) && m_magic_cookie && (m_magic_cookie->get_size() >= sizeof(alac::codec_config_t))) {
     auto cfg = reinterpret_cast<alac::codec_config_t *>(m_magic_cookie->get_buffer());
 
     mxdebug(boost::format("ALAC magic cookie dump:\n"
@@ -145,7 +145,7 @@ coreaudio_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('a', 0) || (NPTZR() != 0) || ! m_supported)
     return;
 
-  if (m_codec.is(CT_A_ALAC))
+  if (m_codec.is(codec_c::A_ALAC))
     add_packetizer(create_alac_packetizer());
   else
     assert(false);
@@ -280,7 +280,7 @@ coreaudio_reader_c::parse_desc_chunk() {
     m_channels          = chunk.read_uint32_be();
     m_bites_per_sample  = chunk.read_uint32_be();
 
-    if (m_codec.is(CT_A_ALAC))
+    if (m_codec.is(codec_c::A_ALAC))
       m_supported = true;
 
   } catch (mtx::mm_io::exception &ex) {
@@ -344,7 +344,7 @@ coreaudio_reader_c::parse_kuki_chunk() {
   if (!chunk)
     return;
 
-  if (m_codec.is(CT_A_ALAC))
+  if (m_codec.is(codec_c::A_ALAC))
     handle_alac_magic_cookie(chunk);
 }
 

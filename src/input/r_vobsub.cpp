@@ -661,7 +661,7 @@ vobsub_reader_c::identify() {
     if (!tracks[i]->language.empty())
       verbose_info.push_back(std::string("language:") + tracks[i]->language);
 
-    id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(CT_S_VOBSUB, "VobSub"), verbose_info);
+    id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::S_VOBSUB, "VobSub"), verbose_info);
   }
 }
 
