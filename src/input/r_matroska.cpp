@@ -1554,7 +1554,10 @@ kax_reader_c::create_opus_audio_packetizer(kax_track_t *t,
 void
 kax_reader_c::create_pcm_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
-  set_track_packetizer(t, new pcm_packetizer_c(this, nti, t->a_sfreq, t->a_channels, t->a_bps, t->codec_id == MKV_A_PCM_FLOAT ? pcm_packetizer_c::ieee_float : pcm_packetizer_c::little_endian_integer));
+  auto type = t->codec_id == MKV_A_PCM_FLOAT ? pcm_packetizer_c::ieee_float
+            : t->codec_id == MKV_A_PCM_BE    ? pcm_packetizer_c::big_endian_integer
+            :                                  pcm_packetizer_c::little_endian_integer;
+  set_track_packetizer(t, new pcm_packetizer_c(this, nti, t->a_sfreq, t->a_channels, t->a_bps, type));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 
