@@ -743,6 +743,21 @@ merge_chapter_entries(EbmlMaster &master) {
       if ((-1 == end_tc) || (merge_end_tc > end_tc))
         end_tc = merge_end_tc;
 
+      // Move all chapter atoms from the merged entry into the target
+      // entry so that they will be merged recursively as well.
+      auto merge_child_idx = 0u;
+      auto num_children    = merge_this->ListSize();
+
+      while (merge_child_idx < num_children) {
+        if (Is<KaxChapterAtom>((*merge_this)[merge_child_idx])) {
+          atom->PushElement(*(*merge_this)[merge_child_idx]);
+          merge_this->Remove(merge_child_idx);
+          --num_children;
+
+        } else
+          ++merge_child_idx;
+      }
+
       mxverb(3, boost::format("chapters: merge_entries:   found one at %1% with %2%, %3%; merged to %4%, %5%\n") % merge_idx % merge_start_tc % merge_end_tc % start_tc % end_tc);
 
       // Finally remove the entry itself.
