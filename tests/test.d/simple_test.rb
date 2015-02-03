@@ -9,7 +9,7 @@ class SimpleTest
     file_name = class_name_to_file_name class_name
     content   = IO.readlines(file_name).join("")
 
-    if ! /class\s+.*?\s+<\s+Test/.match(content)
+    if ! %r{class\s+.*?\s+<\s+Test}.match(content)
       content = %Q!
         class ::#{class_name} < SimpleTest
           def initialize
@@ -90,7 +90,7 @@ class SimpleTest
 
   def unlink_tmp_files
     return if ENV["KEEP_TMPFILES"] == "1"
-    re = /^#{self.tmp_name_prefix}/
+    re = %r{^#{self.tmp_name_prefix}}
     Dir.entries("/tmp").each do |entry|
       file = "/tmp/#{entry}"
       File.unlink(file) if re.match(file) and File.exists?(file)
@@ -155,7 +155,7 @@ class SimpleTest
       :name  => full_command_line,
       :block => lambda {
         sys "../src/mkvmerge --identify-verbose #{full_command_line} > #{tmp}", :exit_code => 3
-        /unsupported container/.match(IO.readlines(tmp).first || '') ? :ok : :bad
+        %r{unsupported container}.match(IO.readlines(tmp).first || '') ? :ok : :bad
       },
     }
   end
@@ -232,7 +232,7 @@ class SimpleTest
     fail ArgumentError if args.empty?
 
     output  = options[:output] || self.tmp
-    output  = "> #{output}" unless /^[>\|]/.match(output)
+    output  = "> #{output}" unless %r{^[>\|]}.match(output)
     output  = '' if options[:output] == :return
     command = "../src/mkvinfo --engage no_variable_data --ui-language en_US #{args.first} #{output}"
     self.sys command, :exit_code => options[:exit_code]
@@ -264,7 +264,7 @@ class SimpleTest
     command    = args.shift
     @commands << command
 
-    if !/>/.match command
+    if !%r{>}.match command
       temp_file = Tempfile.new('mkvtoolnix-test-output')
       temp_file.close
       command  << " >#{temp_file.path} 2>&1 "
