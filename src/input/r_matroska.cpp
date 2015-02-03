@@ -2032,12 +2032,8 @@ void
 kax_reader_c::process_block_group(KaxCluster *cluster,
                                   KaxBlockGroup *block_group) {
   auto block = FindChild<KaxBlock>(block_group);
-  if (!block) {
-    mxwarn_fn(m_ti.m_fname,
-              boost::format(Y("A block group was found at position %1%, but no block element was found inside it. This might make mkvmerge crash.\n"))
-              % block_group->GetElementPosition());
+  if (!block)
     return;
-  }
 
   block->SetParent(*cluster);
   auto block_track = find_track_by_num(block->TrackNum());
