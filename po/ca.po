@@ -1010,7 +1010,7 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: s'ha produït una excepció (missatge: %2%; tipus: %3%)."
 
 #: src/common/kax_file.cpp:66 src/input/r_matroska.cpp:1244
-#: src/input/r_matroska.cpp:1923
+#: src/input/r_matroska.cpp:1926
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: s'ha produït una excepció desconeguda"
@@ -1965,16 +1965,7 @@ msgstr "<Simple> ha de contenir una <String> o un <Binary> fill."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> falta al <Simple> fill."
 
-#: src/input/r_matroska.cpp:2034
-#, boost-format
-msgid ""
-"A block group was found at position %1%, but no block element was found "
-"inside it. This might make mkvmerge crash.\n"
-msgstr ""
-"S'ha trobat un grup de blocs a la posició %1%, però no s'ha trobat cap "
-"element del bloc al seu interior. Això hauria fer fallar el «mkvmerge».\n"
-
-#: src/input/r_matroska.cpp:1944 src/input/r_matroska.cpp:2044
+#: src/input/r_matroska.cpp:1947 src/input/r_matroska.cpp:2043
 #, boost-format
 msgid ""
 "A block was found at timestamp %1% for track number %2%. However, no headers "
@@ -8533,7 +8524,7 @@ msgstr "No s'ha trobat el fitxer o directori"
 
 #: src/common/kax_file.cpp:57 src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1245
-#: src/input/r_matroska.cpp:1924
+#: src/input/r_matroska.cpp:1927
 msgid "The file will not be processed further."
 msgstr "Aquest fitxer no es processarà més."
 
@@ -9648,7 +9639,7 @@ msgstr "Aquesta pista no és compatible amb el mode WebM i no es pot habilitar."
 
 #: src/common/kax_file.cpp:57 src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1245
-#: src/input/r_matroska.cpp:1924
+#: src/input/r_matroska.cpp:1927
 msgid "This usually indicates a damaged file structure."
 msgstr "Això normalment significa una estructura de fitxers malmesa."
 
@@ -10085,7 +10076,7 @@ msgstr ""
 msgid "Unsupported format"
 msgstr "Format no admès"
 
-#: src/input/r_matroska.cpp:1730
+#: src/input/r_matroska.cpp:1733
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipus de pista no admès per aquesta pista.\n"
 
@@ -11537,13 +11528,13 @@ msgstr "und (sense determinar)"
 #: src/info/mkvinfo.cpp:699 src/info/mkvinfo.cpp:709 src/info/mkvinfo.cpp:724
 #: src/info/mkvinfo.cpp:746 src/info/mkvinfo.cpp:758 src/info/mkvinfo.cpp:768
 #: src/info/mkvinfo.cpp:954 src/input/r_matroska.cpp:99
-#: src/input/r_matroska.cpp:2278 src/mmg/header_editor/value_page.cpp:150
+#: src/input/r_matroska.cpp:2277 src/mmg/header_editor/value_page.cpp:150
 #: src/mmg/mmg.cpp:68 src/mmg/tabs/input.cpp:566
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "unknown"
 msgstr "desconegut"
 
-#: src/input/r_matroska.cpp:2266
+#: src/input/r_matroska.cpp:2265
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "desconegut, format de l'etiqueta 0x%|1$04x|"
@@ -11592,6 +11583,13 @@ msgstr "sí"
 
 #~ msgid "  -v, --verbose            verbose status\n"
 #~ msgstr "  -v, --verbose            Estat detallat per a la sortida.\n"
+
+#~ msgid ""
+#~ "A block group was found at position %1%, but no block element was found "
+#~ "inside it. This might make mkvmerge crash.\n"
+#~ msgstr ""
+#~ "S'ha trobat un grup de blocs a la posició %1%, però no s'ha trobat cap "
+#~ "element del bloc al seu interior. Això hauria fer fallar el «mkvmerge».\n"
 
 #~ msgid "matroska_reader: caught exception\n"
 #~ msgstr "matroska_reader: s'ha detectat una excepció\n"

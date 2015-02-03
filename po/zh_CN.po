@@ -880,7 +880,7 @@ msgstr ""
 
 #: src/common/kax_file.cpp:66
 #: src/input/r_matroska.cpp:1244
-#: src/input/r_matroska.cpp:1923
+#: src/input/r_matroska.cpp:1926
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr ""
@@ -1767,13 +1767,8 @@ msgstr "<Simple> 必须包含 <String> 或 <Binary> 子元素。"
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> 缺 <Simple> 子元素。"
 
-#: src/input/r_matroska.cpp:2034
-#, boost-format
-msgid "A block group was found at position %1%, but no block element was found inside it. This might make mkvmerge crash.\n"
-msgstr "在 %1% 找到了一个块组，但里面没有块元。这可能会导致 mkvmerge 崩溃。\n"
-
-#: src/input/r_matroska.cpp:1944
-#: src/input/r_matroska.cpp:2044
+#: src/input/r_matroska.cpp:1947
+#: src/input/r_matroska.cpp:2043
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "在时间戳 %1% 处找到了轨道号为 %2% 的块。然而，没有找到符合该轨道号的头部信息。此块将被跳过。\n"
@@ -7215,7 +7210,7 @@ msgstr "文件或目录未找到"
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/input/r_matroska.cpp:1245
-#: src/input/r_matroska.cpp:1924
+#: src/input/r_matroska.cpp:1927
 #, fuzzy
 msgid "The file will not be processed further."
 msgstr "文件无法以写入模式打开。"
@@ -7957,7 +7952,7 @@ msgstr "此轨道与 WebM 模式不兼容，不能启用。"
 #: src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67
 #: src/input/r_matroska.cpp:1245
-#: src/input/r_matroska.cpp:1924
+#: src/input/r_matroska.cpp:1927
 msgid "This usually indicates a damaged file structure."
 msgstr ""
 
@@ -8316,7 +8311,7 @@ msgstr "不支持 MPEG mpeg_version: 0x%|1$02x| 于数据包 %2% 时间码 %3% �
 msgid "Unsupported format"
 msgstr "不支持的格式"
 
-#: src/input/r_matroska.cpp:1730
+#: src/input/r_matroska.cpp:1733
 msgid "Unsupported track type for this track.\n"
 msgstr "不支持此轨道的轨道类型。\n"
 
@@ -9607,7 +9602,7 @@ msgstr "und (未定)"
 #: src/info/mkvinfo.cpp:768
 #: src/info/mkvinfo.cpp:954
 #: src/input/r_matroska.cpp:99
-#: src/input/r_matroska.cpp:2278
+#: src/input/r_matroska.cpp:2277
 #: src/mmg/header_editor/value_page.cpp:150
 #: src/mmg/mmg.cpp:68
 #: src/mmg/tabs/input.cpp:566
@@ -9615,7 +9610,7 @@ msgstr "und (未定)"
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2266
+#: src/input/r_matroska.cpp:2265
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "未知，格式标识 0x%|1$04x|"
@@ -9785,6 +9780,9 @@ msgstr "是"
 
 #~ msgid "<!-- Unknown element '%1%' -->\n"
 #~ msgstr "<!-- 未知元素 '%1%' -->\n"
+
+#~ msgid "A block group was found at position %1%, but no block element was found inside it. This might make mkvmerge crash.\n"
+#~ msgstr "在 %1% 找到了一个块组，但里面没有块元。这可能会导致 mkvmerge 崩溃。\n"
 
 #~ msgid "A single '+' is not a valid command line option. If you want to append a file use '+' directly followed by the file name, e.g. '+movie_part_2.avi'."
 #~ msgstr "单独的 '+' 不是有效的命令行选项。如果您希望用 '+' 直接追加文件，请确保文件名紧跟着它，例如 '+movie_part_2.avi'。"
