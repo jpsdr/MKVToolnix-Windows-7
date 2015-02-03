@@ -271,13 +271,13 @@ show_help() {
            "\n"
            "  -h, --help             This help text\n"
            "  -V, --version          Print version information\n"));
-  mxexit(0);
+  mxexit();
 }
 
 static void
 show_version() {
   mxinfo("vc1parser v" VERSION "\n");
-  mxexit(0);
+  mxexit();
 }
 
 static std::string
@@ -359,5 +359,5 @@ main(int argc,
     mxerror(Y("File not found\n"));
   }
 
-  mxexit(0);
+  mxexit();
 }

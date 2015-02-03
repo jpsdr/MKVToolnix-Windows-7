@@ -64,13 +64,13 @@ show_help() {
          "\n"
          "  -h, --help             This help text\n"
          "  -V, --version          Print version information\n");
-  mxexit(0);
+  mxexit();
 }
 
 static void
 show_version() {
   mxinfo("checksum v" VERSION "\n");
-  mxexit(0);
+  mxexit();
 }
 
 static cli_options_c
@@ -206,5 +206,5 @@ main(int argc,
     mxerror("File not found\n");
   }
 
-  mxexit(0);
+  mxexit();
 }

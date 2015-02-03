@@ -1761,5 +1761,5 @@ main(int argc,
   else
     console_main();
 
-  mxexit(0);
+  mxexit();
 }

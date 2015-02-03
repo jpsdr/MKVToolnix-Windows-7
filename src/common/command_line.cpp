@@ -257,7 +257,7 @@ handle_common_cli_args(std::vector<std::string> &args,
           mxinfo(boost::format("  %1% (%2%)\n") % translation->get_locale() % translation->m_english_name);
           ++translation;
         }
-        mxexit(0);
+        mxexit();
       }
 
       if (-1 == translation_c::look_up_translation(args[i + 1]))
@@ -277,7 +277,7 @@ handle_common_cli_args(std::vector<std::string> &args,
   while (args.size() > i) {
     if ((args[i] == "-V") || (args[i] == "--version")) {
       mxinfo(boost::format("%1%\n") % version_info);
-      mxexit(0);
+      mxexit();
 
     } else if ((args[i] == "-v") || (args[i] == "--verbose")) {
       ++verbose;

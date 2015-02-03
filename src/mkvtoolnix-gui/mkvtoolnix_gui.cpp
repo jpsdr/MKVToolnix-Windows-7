@@ -42,5 +42,5 @@ main(int argc,
   mainWindow.reset();
   app.reset();
 
-  mxexit(0);
+  mxexit();
 }

@@ -11,7 +11,7 @@ test_merge "#{dir}/1089-3.mkv"
 
 test_info "#{dir}/1089-1.mkv", :args => "-v -v"
 test "1089-2.mkv" do
-  out = info "#{dir}/1089-2.mkv", :args => "-v -v", :output => :return
+  out = info "#{dir}/1089-2.mkv", :args => "-v -v", :output => :return, :exit_code => :warning
   out.join("\n").gsub(/\(0x.*?\)/, 'xxx').md5
 end
 test_info "#{dir}/1089-3.mkv", :args => "-v -v"

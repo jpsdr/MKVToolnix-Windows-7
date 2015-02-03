@@ -150,7 +150,7 @@ propedit_cli_parser_c::list_property_names() {
   mxinfo(Y("  X:  binary in hex\n"));
   mxinfo(Y("  FP: floating point number\n"));
 
-  mxexit(0);
+  mxexit();
 }
 
 void

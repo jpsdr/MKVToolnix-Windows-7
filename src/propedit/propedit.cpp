@@ -122,7 +122,7 @@ run(options_cptr &options) {
 
   mxinfo(Y("Done.\n"));
 
-  mxexit(0);
+  mxexit();
 }
 
 static
@@ -152,5 +152,5 @@ main(int argc,
 
   run(options);
 
-  mxexit(0);
+  mxexit();
 }

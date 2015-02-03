@@ -68,7 +68,7 @@ engage_hacks(const std::string &hacks) {
       mxinfo(Y("Valid hacks are:\n"));
       for (hidx = 0; s_available_hacks[hidx].name; ++hidx)
         mxinfo(boost::format("%1%\n") % s_available_hacks[hidx].name);
-      mxexit(0);
+      mxexit();
 
     } else if (engage_args[aidx] == "cow") {
       const std::string initial = "ICAgICAgICAgIChfXykKICAgICAgICAgICgqKikg"
@@ -79,7 +79,7 @@ engage_hacks(const std::string &hacks) {
       memset(correction, 0, 200);
       base64_decode(initial, (unsigned char *)correction);
       mxinfo(correction);
-      mxexit(0);
+      mxexit();
     }
 
   for (aidx = 0; engage_args.size() > aidx; aidx++) {

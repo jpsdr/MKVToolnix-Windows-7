@@ -1802,18 +1802,18 @@ parse_args(std::vector<std::string> args) {
 
     if ((this_arg == "-l") || (this_arg == "--list-types")) {
       list_file_types();
-      mxexit(0);
+      mxexit();
 
     } else if (this_arg == "--list-languages") {
       list_iso639_languages();
-      mxexit(0);
+      mxexit();
 
     } else if ((this_arg == "-i") || (this_arg == "--identify") || (this_arg == "-I") || (this_arg == "--identify-verbose") || (this_arg == "--identify-for-mmg"))
       mxerror(boost::format(Y("'%1%' can only be used with a file name. No further options are allowed if this option is used.\n")) % this_arg);
 
     else if (this_arg == "--capabilities") {
       print_capabilities();
-      mxexit(0);
+      mxexit();
 
     }
 
@@ -2529,5 +2529,5 @@ main(int argc,
 
   cleanup();
 
-  mxexit(0);
+  mxexit();
 }

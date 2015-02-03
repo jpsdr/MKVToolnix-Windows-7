@@ -132,5 +132,5 @@ main(int argc,
   else
     usage(2);
 
-  mxexit(0);
+  mxexit();
 }
