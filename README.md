@@ -1,4 +1,4 @@
-MKVToolNix 7.5.0
+MKVToolNix 7.6.0
 ================
 
 Table of contents
