@@ -18,6 +18,7 @@
 
 #include <deque>
 
+#include "common/ac3.h"
 #include "common/byte_buffer.h"
 
 #define TRUEHD_SYNC_WORD 0xf8726fba
@@ -40,6 +41,8 @@ struct truehd_frame_t {
   int m_sampling_rate;
   int m_channels;
   int m_samples_per_frame;
+
+  ac3::frame_c m_ac3_header;
 
   memory_cptr m_data;
 

@@ -13,7 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include "common/ac3.h"
 #include "common/endian.h"
 #include "common/memory.h"
 #include "common/truehd.h"
@@ -96,15 +95,14 @@ truehd_parser_c::parse(bool end_of_stream) {
         frame->m_channels          = mlp_channels[data[offset + 11] & 0x1f];
       }
 
-    } else if (get_uint16_be(&data[offset]) == 0x0b77) {
-      ac3::frame_c ac3_frame;
-      if (ac3_frame.decode_header(&data[offset], size - offset)) {
-        if (((size - offset) < ac3_frame.m_bytes) && !end_of_stream)
+    } else if (get_uint16_be(&data[offset]) == AC3_SYNC_WORD) {
+      if (frame->m_ac3_header.decode_header(&data[offset], size - offset)) {
+        if (((size - offset) < frame->m_ac3_header.m_bytes) && !end_of_stream)
           break;
 
-        if (((size - offset) >= ac3_frame.m_bytes) && verify_ac3_checksum(&data[offset], size - offset)) {
+        if (((size - offset) >= frame->m_ac3_header.m_bytes) && verify_ac3_checksum(&data[offset], size - offset)) {
           frame->m_type = truehd_frame_t::ac3;
-          frame->m_size = ac3_frame.m_bytes;
+          frame->m_size = frame->m_ac3_header.m_bytes;
         }
       }
     }
@@ -170,7 +168,7 @@ truehd_parser_c::resync(unsigned int offset) {
 
   for (offset = offset + 4; (offset + 4) < size; ++offset) {
     uint32_t sync_word = get_uint32_be(&data[offset]);
-    if ((TRUEHD_SYNC_WORD == sync_word) || (MLP_SYNC_WORD == sync_word)) {
+    if ((TRUEHD_SYNC_WORD == sync_word) || (MLP_SYNC_WORD == sync_word) || (AC3_SYNC_WORD == get_uint16_be(&data[offset - 4]))) {
       m_sync_state  = state_synced;
       return offset - 4;
     }

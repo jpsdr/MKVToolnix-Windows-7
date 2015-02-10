@@ -35,6 +35,7 @@ public:
   virtual ~truehd_packetizer_c();
 
   virtual int process(packet_cptr packet);
+  virtual void process_framed(truehd_frame_cptr const &frame);
   virtual void handle_frames();
   virtual void set_headers();
 
@@ -45,7 +46,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
-  virtual void adjust_header_values(truehd_frame_cptr &frame);
+  virtual void adjust_header_values(truehd_frame_cptr const &frame);
 
   virtual void flush_impl();
   virtual void flush_frames();

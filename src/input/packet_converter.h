@@ -32,6 +32,11 @@ public:
   virtual ~packet_converter_c() {}
 
   virtual bool convert(packet_cptr const &packet) = 0;
+  virtual void flush() {}
+
+  virtual void set_packetizer(generic_packetizer_c *ptzr) {
+    m_ptzr = ptzr;
+  }
 };
 typedef std::shared_ptr<packet_converter_c> packet_converter_cptr;
 

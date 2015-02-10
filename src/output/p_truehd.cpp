@@ -58,6 +58,17 @@ truehd_packetizer_c::set_headers() {
     m_track_entry->EnableLacing(false);
 }
 
+void
+truehd_packetizer_c::process_framed(truehd_frame_cptr const &frame) {
+  if (frame->is_sync()) {
+    adjust_header_values(frame);
+    flush();
+  }
+
+  if (!frame->is_ac3())
+    m_frames.push_back(frame);
+}
+
 int
 truehd_packetizer_c::process(packet_cptr packet) {
   m_parser.add_data(packet->data->get_buffer(), packet->data->get_size());
@@ -84,7 +95,7 @@ truehd_packetizer_c::handle_frames() {
 }
 
 void
-truehd_packetizer_c::adjust_header_values(truehd_frame_cptr &frame) {
+truehd_packetizer_c::adjust_header_values(truehd_frame_cptr const &frame) {
   if (!m_first_frame)
     return;
 
