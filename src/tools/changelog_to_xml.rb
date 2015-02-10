@@ -17,7 +17,7 @@ def parse_changelog
 
     if line.empty?
       if !current_line.empty?
-        version = $1.gsub(/\.+$/, '') if / released? \s+ v? ( [\d\.]+ )/ix.match(current_line[0])
+        version = $1.gsub(/\.+$/, '') if / ^ released? \s+ v? ( [\d\.]+ )/ix.match(current_line[0])
 
         changelog << info.dup.merge({ :content => current_line.join(' '), :version => version })
         current_line = []
