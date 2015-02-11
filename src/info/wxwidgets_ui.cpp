@@ -340,7 +340,7 @@ mi_frame::on_help_about(wxCommandEvent &WXUNUSED(event)) {
                "This program is licensed under the GPL v2 (see COPYING).\n"
                "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
                "Sources and the latest binaries are always available at\n"
-               "http://www.bunkus.org/videotools/mkvtoolnix/"),
+               "https://www.bunkus.org/videotools/mkvtoolnix/"),
              wxUCS(get_version_info("mkvinfo GUI")), wxUCS(EbmlCodeVersion), wxUCS(KaxCodeVersion));
   wxMessageBox(msg, Z("About mkvinfo"), wxOK | wxICON_INFORMATION, this);
 }

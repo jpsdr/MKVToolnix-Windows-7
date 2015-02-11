@@ -740,7 +740,7 @@ mmg_dialog::on_about(wxCommandEvent &) {
   info.SetVersion(wxU(get_version_info("")));
   info.SetCopyright(wxU("(C) Moritz Bunkus <moritz@bunkus.org>"));
   info.SetLicense(wxU(Z("MKVToolNix is licensed under the GNU GPL v2")) + wxU("\nhttp://www.gnu.org/licenses/old-licenses/gpl-2.0.html"));
-  info.SetWebSite(wxU("http://www.bunkus.org/videotools/mkvtoolnix/"));
+  info.SetWebSite(wxU("https://www.bunkus.org/videotools/mkvtoolnix/"));
   info.SetDescription(Z("Help is available in form of tool tips, from the\n"
                         "'Help' menu or by pressing the 'F1' key."));
 

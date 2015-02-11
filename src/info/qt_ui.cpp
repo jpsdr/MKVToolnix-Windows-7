@@ -122,7 +122,7 @@ main_window_c::about() {
        "This program is licensed under the GPL v2 (see COPYING).\n"
        "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
        "Sources and the latest binaries are always available at\n"
-       "http://www.bunkus.org/videotools/mkvtoolnix/")
+       "https://www.bunkus.org/videotools/mkvtoolnix/")
     .arg(Q(get_version_info("mkvinfo GUI")))
     .arg(Q(EbmlCodeVersion))
     .arg(Q(KaxCodeVersion));

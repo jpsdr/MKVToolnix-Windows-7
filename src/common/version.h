@@ -20,7 +20,7 @@
 
 #define MTX_VERSION_CHECK_URL "http://mkvtoolnix-releases.bunkus.org/latest-release.xml"
 #define MTX_RELEASES_INFO_URL "http://mkvtoolnix-releases.bunkus.org/releases.xml"
-#define MTX_DOWNLOAD_URL      "http://www.bunkus.org/videotools/mkvtoolnix/downloads.html"
+#define MTX_DOWNLOAD_URL      "https://www.bunkus.org/videotools/mkvtoolnix/downloads.html"
 #define MTX_CHANGELOG_URL     "http://mkvtoolnix-releases.bunkus.org/doc/ChangeLog"
 
 struct version_number_t {

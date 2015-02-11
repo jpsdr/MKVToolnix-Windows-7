@@ -41,7 +41,7 @@ Attribution 3.0 Unported license (see
 http://creativecommons.org/licenses/by/3.0/).
 
 The newest version can always be found at
-http://www.bunkus.org/videotools/mkvtoolnix/
+https://www.bunkus.org/videotools/mkvtoolnix/
 
 Moritz Bunkus <moritz@bunkus.org>
 
@@ -146,7 +146,7 @@ alter the prefix (which defaults to /usr/local) by adding an argument
 ### 2.4. Building MKVtoolNix
 
 Either download the current release from
-http://www.bunkus.org/videotools/mkvtoolnix/ and unpack it or get a
+https://www.bunkus.org/videotools/mkvtoolnix/ and unpack it or get a
 development snapshot from my Git repository.
 
 - Getting and building a development snapshot (ignore this subsection
