@@ -30,11 +30,6 @@
 #include "merge/generic_reader.h"
 #include "mpegparser/M2VParser.h"
 
-enum mpeg_ts_input_type_e {
-  INPUT_PROBE = 0,
-  INPUT_READ  = 1,
-};
-
 enum mpeg_ts_pid_type_e {
   PAT_TYPE      = 0,
   PMT_TYPE      = 1,
@@ -389,7 +384,7 @@ protected:
   int es_to_process;
   timecode_c m_global_timecode_offset, m_stream_timecode;
 
-  mpeg_ts_input_type_e input_status; // can be INPUT_PROBE, INPUT_READ
+  bool m_probing;
   int track_buffer_ready;
 
   bool file_done, m_packet_sent_to_packetizer;

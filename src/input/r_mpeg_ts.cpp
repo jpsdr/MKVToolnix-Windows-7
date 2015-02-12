@@ -603,7 +603,7 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
   , es_to_process{}
   , m_global_timecode_offset{}
   , m_stream_timecode{timecode_c::ns(0)}
-  , input_status(INPUT_PROBE)
+  , m_probing{true}
   , track_buffer_ready(-1)
   , file_done{}
   , m_packet_sent_to_packetizer{}
@@ -657,7 +657,7 @@ mpeg_ts_reader_c::read_headers() {
       if (PAT_found && PMT_found && (0 == es_to_process))
         break;
 
-      auto eof = m_in->eof() || (m_in->getFilePointer() >= TS_PIDS_DETECT_SIZE);
+      auto eof = m_in->eof() || (m_in->getFilePointer() >= size_to_probe);
       if (!eof)
         continue;
 
@@ -1165,7 +1165,7 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
 
   mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::parse_packet: Table/PES completed (%1%) for PID %2% at file position %3%\n") % track->pes_payload->get_size() % table_pid % m_in->getFilePointer());
 
-  if (input_status == INPUT_PROBE)
+  if (m_probing)
     probe_packet_complete(track);
 
   else
@@ -1275,7 +1275,7 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
 
     if (track->pes_payload->get_size() && (previous_pes_payload_size != track->pes_payload_size)) {
       if (!previous_pes_payload_size) {
-        if (INPUT_READ == input_status) {
+        if (!m_probing) {
           track->pes_payload_size = track->pes_payload->get_size();
           track->send_to_packetizer();
         } else
@@ -1333,7 +1333,7 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
 
         return false;
 
-      } else if ((0 != track->pes_payload->get_size()) && (INPUT_READ == input_status))
+      } else if ((0 != track->pes_payload->get_size()) && !m_probing)
         track->send_to_packetizer();
 
       track->m_timecode = dts;
@@ -1486,7 +1486,7 @@ void
 mpeg_ts_reader_c::create_packetizers() {
   size_t i;
 
-  input_status = INPUT_READ;
+  m_probing = false;
   mxdebug_if(m_debug_headers, boost::format("mpeg_ts_reader_c::create_packetizers: create packetizers...\n"));
   for (i = 0; i < tracks.size(); i++)
     create_packetizer(i);
