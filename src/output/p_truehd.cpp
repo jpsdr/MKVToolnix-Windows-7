@@ -80,18 +80,8 @@ truehd_packetizer_c::process(packet_cptr packet) {
 
 void
 truehd_packetizer_c::handle_frames() {
-  while (m_parser.frame_available()) {
-    truehd_frame_cptr frame = m_parser.get_next_frame();
-
-    if (frame->is_sync()) {
-      adjust_header_values(frame);
-      flush();
-
-    }
-
-    if (!frame->is_ac3())
-      m_frames.push_back(frame);
-  }
+  while (m_parser.frame_available())
+    process_framed(m_parser.get_next_frame());
 }
 
 void
