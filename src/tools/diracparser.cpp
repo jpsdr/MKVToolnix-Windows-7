@@ -155,7 +155,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("diracparser v" VERSION "\n");
+  mxinfo("diracparser v" PACKAGE_VERSION "\n");
   mxexit();
 }
 

@@ -131,7 +131,7 @@ get_version_info(const std::string &program,
 
   if (!program.empty())
     info.push_back(program);
-  info.push_back((boost::format("v%1% ('%2%')") % VERSION % VERSIONNAME).str());
+  info.push_back((boost::format("v%1% ('%2%')") % PACKAGE_VERSION % VERSIONNAME).str());
 
   if (flags & vif_architecture)
 #if defined(ARCH_64BIT)
@@ -154,12 +154,12 @@ get_version_info(const std::string &program,
 
 int
 compare_current_version_to(const std::string &other_version_str) {
-  return version_number_t(VERSION).compare(version_number_t(other_version_str));
+  return version_number_t(PACKAGE_VERSION).compare(version_number_t(other_version_str));
 }
 
 version_number_t
 get_current_version() {
-  return version_number_t(VERSION);
+  return version_number_t(PACKAGE_VERSION);
 }
 
 #if defined(HAVE_CURL_EASY_H)

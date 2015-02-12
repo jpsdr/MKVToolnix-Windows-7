@@ -1621,7 +1621,7 @@ static int avi_close_output_file(avi_t *AVI)
    if (AVI->writing_app != NULL)
      strncpy(id_str, AVI->writing_app, MAX_INFO_STRLEN - 1);
    else
-     snprintf(id_str, MAX_INFO_STRLEN - 1, "%s-%s", PACKAGE, VERSION);
+     snprintf(id_str, MAX_INFO_STRLEN - 1, "%s-%s", PACKAGE_NAME, PACKAGE_VERSION);
    real_id_len = id_len = strlen(id_str)+1;
    if (id_len&1) id_len++;
 

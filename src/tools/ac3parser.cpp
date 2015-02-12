@@ -39,7 +39,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("ac3parser v" VERSION "\n");
+  mxinfo("ac3parser v" PACKAGE_VERSION "\n");
   mxexit();
 }
 

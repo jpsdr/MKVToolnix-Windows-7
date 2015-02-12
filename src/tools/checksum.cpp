@@ -69,7 +69,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("checksum v" VERSION "\n");
+  mxinfo("checksum v" PACKAGE_VERSION "\n");
   mxexit();
 }
 

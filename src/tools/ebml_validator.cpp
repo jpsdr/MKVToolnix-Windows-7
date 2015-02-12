@@ -81,7 +81,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("ebml_validator v" VERSION "\n");
+  mxinfo("ebml_validator v" PACKAGE_VERSION "\n");
   mxexit();
 }
 

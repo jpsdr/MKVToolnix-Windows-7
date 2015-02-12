@@ -276,7 +276,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("vc1parser v" VERSION "\n");
+  mxinfo("vc1parser v" PACKAGE_VERSION "\n");
   mxexit();
 }
 

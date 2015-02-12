@@ -61,7 +61,7 @@ xtr_avi_c::create_file(xtr_base_c *master,
 
   std::string writing_app = "mkvextract";
   if (!hack_engaged(ENGAGE_NO_VARIABLE_DATA))
-    writing_app += (boost::format(" %1%") % VERSION).str();
+    writing_app += (boost::format(" %1%") % PACKAGE_VERSION).str();
   m_avi->writing_app = safestrdup(writing_app.c_str());
 
   char ccodec[5];

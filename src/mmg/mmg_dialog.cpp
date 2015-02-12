@@ -470,7 +470,7 @@ mmg_dialog::save(wxString file_name,
 
   cfg.SetPath(wxT("/mkvmergeGUI"));
   cfg.Write(wxT("file_version"), MMG_CONFIG_FILE_VERSION_MAX);
-  cfg.Write(wxT("gui_version"), wxT(VERSION));
+  cfg.Write(wxT("gui_version"), wxT(PACKAGE_VERSION));
   cfg.Write(wxT("output_file_name"), tc_output->GetValue());
   cfg.Write(wxT("cli_options"), cli_options);
 

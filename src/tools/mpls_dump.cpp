@@ -26,7 +26,7 @@ show_help() {
 
 static void
 show_version() {
-  mxinfo("mpls_dump v" VERSION "\n");
+  mxinfo("mpls_dump v" PACKAGE_VERSION "\n");
   mxexit();
 }
 
