@@ -36,11 +36,12 @@ fi
 if test x"$enable_optimization" = xyes; then
   if test x"$ac_cv_compiler_is_clang" = xyes; then
     opt_features_no="$opt_features_no\n   * full optimization: due to bug 11962 in LLVM/clang only -O1 will be used for optimization"
+    opt_features_yes="$opt_features_yes\n   * compiler optimizations (-O1)"
     OPTIMIZATION_CFLAGS="-O1"
   else
     OPTIMIZATION_CFLAGS="-O3"
+    opt_features_yes="$opt_features_yes\n   * compiler optimizations (-O3)"
   fi
-  opt_features_yes="$opt_features_yes\n   * compiler optimizations"
 else
   opt_features_no="$opt_features_no\n   * compiler optimizations"
 fi
