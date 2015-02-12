@@ -1446,7 +1446,17 @@ msgstr "'%1%' bideak ateratzerakoan bakarrik dago ahalbidetuta.\n"
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%' ez du agiri izenik.\n"
 
-#: src/merge/mkvmerge.cpp:2058 src/merge/mkvmerge.cpp:2222
+#: src/merge/mkvmerge.cpp:1880 src/merge/mkvmerge.cpp:2058
+#: src/merge/mkvmerge.cpp:2072 src/merge/mkvmerge.cpp:2166
+#: src/merge/mkvmerge.cpp:2180 src/merge/mkvmerge.cpp:2187
+#: src/merge/mkvmerge.cpp:2194 src/merge/mkvmerge.cpp:2201
+#: src/merge/mkvmerge.cpp:2208 src/merge/mkvmerge.cpp:2215
+#: src/merge/mkvmerge.cpp:2222 src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2243 src/merge/mkvmerge.cpp:2250
+#: src/merge/mkvmerge.cpp:2257 src/merge/mkvmerge.cpp:2264
+#: src/merge/mkvmerge.cpp:2274 src/merge/mkvmerge.cpp:2281
+#: src/merge/mkvmerge.cpp:2288 src/merge/mkvmerge.cpp:2295
+#: src/merge/mkvmerge.cpp:2302
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%' ez du argumentorik.\n"
@@ -1511,14 +1521,6 @@ msgstr ""
 "nahi baino lagin gutxi batzuk gehiago izan ditzakeela irteeran. Ahal bada "
 "jtorrizko Opus agiritik ber-multiplexatu behar duzu.\n"
 
-#: src/merge/mkvmerge.cpp:2281
-msgid "'--append-mode' lacks its argument.\n"
-msgstr "'--append-mode' ez du argumentorik.\n"
-
-#: src/merge/mkvmerge.cpp:2274
-msgid "'--append-to' lacks its argument.\n"
-msgstr "'--append-to' ez du argumentorik.\n"
-
 #: src/merge/mkvmerge.cpp:2138
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' ez du ikuspegi mailarik.\n"
@@ -1538,10 +1540,6 @@ msgstr "'--attachment-mime-type' ez dut MIME motarik.\n"
 #: src/merge/mkvmerge.cpp:1982
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' ez du izenik.\n"
-
-#: src/merge/mkvmerge.cpp:2243
-msgid "'--blockadd' lacks its argument.\n"
-msgstr "'--blockadd' ez du argumentorik.\n"
 
 #: src/merge/mkvmerge.cpp:2017
 msgid "'--chapter-charset' lacks the charset.\n"
@@ -1597,10 +1595,6 @@ msgstr "'--cluster-length' ez du luzerarik.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' ez du bere argumentoa.\n"
 
-#: src/merge/mkvmerge.cpp:2236
-msgid "'--compression' lacks its argument.\n"
-msgstr "'--compression' ez du bere argumentoa.\n"
-
 #: src/merge/mkvmerge.cpp:2159
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' ez du mozketa parametrorik.\n"
@@ -1613,22 +1607,6 @@ msgstr "'--cue-chapter-name-format' ez du heuskarririk.\n"
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' '--chapters'-ren aurretik eman behar da.\n"
 
-#: src/merge/mkvmerge.cpp:2180
-msgid "'--cues' lacks its argument.\n"
-msgstr "'--cues' ez du bere argumentoa.\n"
-
-#: src/merge/mkvmerge.cpp:2288
-msgid "'--default-duration' lacks its argument.\n"
-msgstr "'--default-duration' ez du bere argumentoa.\n"
-
-#: src/merge/mkvmerge.cpp:2208
-msgid "'--default-language' lacks its argument.\n"
-msgstr "'--default-language' ez du bere argumentoa.\n"
-
-#: src/merge/mkvmerge.cpp:2187
-msgid "'--default-track' lacks its argument.\n"
-msgstr "'--default-track' ez du bere argumentoa.\n"
-
 #: src/merge/mkvmerge.cpp:2152
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' ez du neurririk.\n"
@@ -1637,21 +1615,9 @@ msgstr "'--display-dimensions' ez du neurririk.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' ez du bere argumentoa.\n"
 
-#: src/merge/mkvmerge.cpp:2302
-msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
-msgstr "'--fix-bitstream-timing-information' ez du bere argumentoa.\n"
-
-#: src/merge/mkvmerge.cpp:2194
-msgid "'--forced-track' lacks its argument.\n"
-msgstr "'--forced-track' ez du bere argumentoa.\n"
-
 #: src/merge/mkvmerge.cpp:2001
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' ez du agiri izenik.\n"
-
-#: src/merge/mkvmerge.cpp:2201
-msgid "'--language' lacks its argument.\n"
-msgstr "'--language' ez du bere argumentoa.\n"
 
 #: src/merge/mkvmerge.cpp:2319
 msgid "'--link' is only useful in combination with '--split'.\n"
@@ -1664,14 +1630,6 @@ msgstr "'--link-to-next' ez du hurrengo UID-a.\n"
 #: src/merge/mkvmerge.cpp:1920
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' ez du aurreko UID-a.\n"
-
-#: src/merge/mkvmerge.cpp:2295
-msgid "'--nalu-size-length' lacks its argument.\n"
-msgstr "'--nalu-size-length' ez du bere argumentoa.\n"
-
-#: src/merge/mkvmerge.cpp:1880
-msgid "'--priority' lacks its argument.\n"
-msgstr "'--priority' ez du bere argumentoa.\n"
 
 #: src/merge/mkvmerge.cpp:1934
 msgid "'--segment-uid' lacks the segment UID.\n"
@@ -1689,37 +1647,13 @@ msgstr "'--split' ez du neurririk.\n"
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' ez du agiri zenbatekorik.\n"
 
-#: src/merge/mkvmerge.cpp:2166
-msgid "'--stereo-mode' lacks its argument.\n"
-msgstr "'--stereo-mode' ez du bere argumentoa.\n"
-
-#: src/merge/mkvmerge.cpp:2215
-msgid "'--sub-charset' lacks its argument.\n"
-msgstr "'--sub-charset' ez du bere argumentoa.\n"
-
-#: src/merge/mkvmerge.cpp:2072
-msgid "'--timecode-scale' lacks its argument.\n"
-msgstr "'--timecode-scale' ez du bere argumentoa.\n"
-
 #: src/merge/mkvmerge.cpp:1589
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale' behin baino gehiagotan erabili da.\n"
 
-#: src/merge/mkvmerge.cpp:2257
-msgid "'--timecodes' lacks its argument.\n"
-msgstr "'--timecodes' ez du bere argumentoa.\n"
-
 #: src/merge/mkvmerge.cpp:1893
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' ez du izenbururik.\n"
-
-#: src/merge/mkvmerge.cpp:2250
-msgid "'--track-name' lacks its argument.\n"
-msgstr "'--track-name' ez du bere argumentoa.\n"
-
-#: src/merge/mkvmerge.cpp:2264
-msgid "'--track-order' lacks its argument.\n"
-msgstr "'--track-order' ez du bere argumentoa.\n"
 
 #: src/merge/mkvmerge.cpp:2267
 msgid "'--track-order' may only be given once.\n"
@@ -5471,7 +5405,7 @@ msgstr "MPEG programa jarioa"
 msgid "MPEG program streams"
 msgstr "MPEG programa jarioak"
 
-#: src/input/r_mpeg_ts.h:417
+#: src/input/r_mpeg_ts.h:416
 msgid "MPEG transport stream"
 msgstr "MPEG garraio jarioa"
 
@@ -9738,7 +9672,7 @@ msgstr "Bideak:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Arazo konponketa aholkuak irakurketa akatsentzat"
 
-#: src/input/r_truehd.h:36 src/output/p_truehd.h:42
+#: src/input/r_truehd.h:41 src/output/p_truehd.h:43
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -11431,6 +11365,63 @@ msgstr "Bai"
 #~ "Programatzailea: Moritz Bunkus <moritz@bunkus.org>.\n"
 #~ "Iturburuak eta azken binarioak betik daude eskuragarri hemen:\n"
 #~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+
+#~ msgid "'--append-mode' lacks its argument.\n"
+#~ msgstr "'--append-mode' ez du argumentorik.\n"
+
+#~ msgid "'--append-to' lacks its argument.\n"
+#~ msgstr "'--append-to' ez du argumentorik.\n"
+
+#~ msgid "'--blockadd' lacks its argument.\n"
+#~ msgstr "'--blockadd' ez du argumentorik.\n"
+
+#~ msgid "'--compression' lacks its argument.\n"
+#~ msgstr "'--compression' ez du bere argumentoa.\n"
+
+#~ msgid "'--cues' lacks its argument.\n"
+#~ msgstr "'--cues' ez du bere argumentoa.\n"
+
+#~ msgid "'--default-duration' lacks its argument.\n"
+#~ msgstr "'--default-duration' ez du bere argumentoa.\n"
+
+#~ msgid "'--default-language' lacks its argument.\n"
+#~ msgstr "'--default-language' ez du bere argumentoa.\n"
+
+#~ msgid "'--default-track' lacks its argument.\n"
+#~ msgstr "'--default-track' ez du bere argumentoa.\n"
+
+#~ msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
+#~ msgstr "'--fix-bitstream-timing-information' ez du bere argumentoa.\n"
+
+#~ msgid "'--forced-track' lacks its argument.\n"
+#~ msgstr "'--forced-track' ez du bere argumentoa.\n"
+
+#~ msgid "'--language' lacks its argument.\n"
+#~ msgstr "'--language' ez du bere argumentoa.\n"
+
+#~ msgid "'--nalu-size-length' lacks its argument.\n"
+#~ msgstr "'--nalu-size-length' ez du bere argumentoa.\n"
+
+#~ msgid "'--priority' lacks its argument.\n"
+#~ msgstr "'--priority' ez du bere argumentoa.\n"
+
+#~ msgid "'--stereo-mode' lacks its argument.\n"
+#~ msgstr "'--stereo-mode' ez du bere argumentoa.\n"
+
+#~ msgid "'--sub-charset' lacks its argument.\n"
+#~ msgstr "'--sub-charset' ez du bere argumentoa.\n"
+
+#~ msgid "'--timecode-scale' lacks its argument.\n"
+#~ msgstr "'--timecode-scale' ez du bere argumentoa.\n"
+
+#~ msgid "'--timecodes' lacks its argument.\n"
+#~ msgstr "'--timecodes' ez du bere argumentoa.\n"
+
+#~ msgid "'--track-name' lacks its argument.\n"
+#~ msgstr "'--track-name' ez du bere argumentoa.\n"
+
+#~ msgid "'--track-order' lacks its argument.\n"
+#~ msgstr "'--track-order' ez du bere argumentoa.\n"
 
 #~ msgid "...after this size:"
 #~ msgstr "...neurri honen ondoren:"

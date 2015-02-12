@@ -1347,8 +1347,27 @@ msgstr "'%1%' допускается только при извлечении д
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%' не содержит имени файла.\n"
 
+#: src/merge/mkvmerge.cpp:1880
 #: src/merge/mkvmerge.cpp:2058
+#: src/merge/mkvmerge.cpp:2072
+#: src/merge/mkvmerge.cpp:2166
+#: src/merge/mkvmerge.cpp:2180
+#: src/merge/mkvmerge.cpp:2187
+#: src/merge/mkvmerge.cpp:2194
+#: src/merge/mkvmerge.cpp:2201
+#: src/merge/mkvmerge.cpp:2208
+#: src/merge/mkvmerge.cpp:2215
 #: src/merge/mkvmerge.cpp:2222
+#: src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2243
+#: src/merge/mkvmerge.cpp:2250
+#: src/merge/mkvmerge.cpp:2257
+#: src/merge/mkvmerge.cpp:2264
+#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2281
+#: src/merge/mkvmerge.cpp:2288
+#: src/merge/mkvmerge.cpp:2295
+#: src/merge/mkvmerge.cpp:2302
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%' не указан аргумент.\n"
@@ -1408,14 +1427,6 @@ msgstr "'%1%': Также будут обработаны файлы: %2%\n"
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2281
-msgid "'--append-mode' lacks its argument.\n"
-msgstr "'--append-mode' не указан аргумент.\n"
-
-#: src/merge/mkvmerge.cpp:2274
-msgid "'--append-to' lacks its argument.\n"
-msgstr "'--append-to' не указан аргумент.\n"
-
 #: src/merge/mkvmerge.cpp:2138
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' не указано соотношение сторон.\n"
@@ -1435,10 +1446,6 @@ msgstr "'--attachment-mime-type' отсутствует тип MIME.\n"
 #: src/merge/mkvmerge.cpp:1982
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' отсутствует имя.\n"
-
-#: src/merge/mkvmerge.cpp:2243
-msgid "'--blockadd' lacks its argument.\n"
-msgstr "'--blockadd' не указан аргумент.\n"
 
 #: src/merge/mkvmerge.cpp:2017
 msgid "'--chapter-charset' lacks the charset.\n"
@@ -1480,10 +1487,6 @@ msgstr "'--cluster-length' не указана длина.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' отсутствует аргумент.\n"
 
-#: src/merge/mkvmerge.cpp:2236
-msgid "'--compression' lacks its argument.\n"
-msgstr "'--compression' не указан аргумент.\n"
-
 #: src/merge/mkvmerge.cpp:2159
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' не указаны параметры кадрирования.\n"
@@ -1496,22 +1499,6 @@ msgstr "'--cue-chapter-name-format' не указан формат.\n"
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' должен быть указан перед '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2180
-msgid "'--cues' lacks its argument.\n"
-msgstr "'--cues' не указан аргумент.\n"
-
-#: src/merge/mkvmerge.cpp:2288
-msgid "'--default-duration' lacks its argument.\n"
-msgstr "'--default-duration' не указан аргумент.\n"
-
-#: src/merge/mkvmerge.cpp:2208
-msgid "'--default-language' lacks its argument.\n"
-msgstr "'--default-language' не указан аргумент.\n"
-
-#: src/merge/mkvmerge.cpp:2187
-msgid "'--default-track' lacks its argument.\n"
-msgstr "'--default-track' не указан аргумент.\n"
-
 #: src/merge/mkvmerge.cpp:2152
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' не указаны размеры.\n"
@@ -1520,22 +1507,9 @@ msgstr "'--display-dimensions' не указаны размеры.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' не указан аргумент.\n"
 
-#: src/merge/mkvmerge.cpp:2302
-#, fuzzy
-msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
-msgstr "'--default-duration' не указан аргумент.\n"
-
-#: src/merge/mkvmerge.cpp:2194
-msgid "'--forced-track' lacks its argument.\n"
-msgstr "'--forced-track' не указан аргумент.\n"
-
 #: src/merge/mkvmerge.cpp:2001
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' отсутствует имя файла.\n"
-
-#: src/merge/mkvmerge.cpp:2201
-msgid "'--language' lacks its argument.\n"
-msgstr "'--language' не указан аргумент.\n"
 
 #: src/merge/mkvmerge.cpp:2319
 msgid "'--link' is only useful in combination with '--split'.\n"
@@ -1548,14 +1522,6 @@ msgstr "'--link-to-next' не указан следующий UID.\n"
 #: src/merge/mkvmerge.cpp:1920
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' не указан предыдущий UID.\n"
-
-#: src/merge/mkvmerge.cpp:2295
-msgid "'--nalu-size-length' lacks its argument.\n"
-msgstr "'--nalu-size-length' не указан аргумент.\n"
-
-#: src/merge/mkvmerge.cpp:1880
-msgid "'--priority' lacks its argument.\n"
-msgstr "'--priority' не указан аргумент.\n"
 
 #: src/merge/mkvmerge.cpp:1934
 msgid "'--segment-uid' lacks the segment UID.\n"
@@ -1573,37 +1539,13 @@ msgstr "'--split' не указан размер.\n"
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' не указано количество файлов.\n"
 
-#: src/merge/mkvmerge.cpp:2166
-msgid "'--stereo-mode' lacks its argument.\n"
-msgstr "'--stereo-mode' не указан аргумент.\n"
-
-#: src/merge/mkvmerge.cpp:2215
-msgid "'--sub-charset' lacks its argument.\n"
-msgstr "'--sub-charset' не указан аргумент.\n"
-
-#: src/merge/mkvmerge.cpp:2072
-msgid "'--timecode-scale' lacks its argument.\n"
-msgstr "'--timecode-scale' не указан аргумент.\n"
-
 #: src/merge/mkvmerge.cpp:1589
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale' использована более одного раза.\n"
 
-#: src/merge/mkvmerge.cpp:2257
-msgid "'--timecodes' lacks its argument.\n"
-msgstr "'--timecodes' не указан аргумент.\n"
-
 #: src/merge/mkvmerge.cpp:1893
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' не указано название.\n"
-
-#: src/merge/mkvmerge.cpp:2250
-msgid "'--track-name' lacks its argument.\n"
-msgstr "'--track-name' не указан аргумент.\n"
-
-#: src/merge/mkvmerge.cpp:2264
-msgid "'--track-order' lacks its argument.\n"
-msgstr "'--track-order' не указан аргумент.\n"
 
 #: src/merge/mkvmerge.cpp:2267
 msgid "'--track-order' may only be given once.\n"
@@ -4849,7 +4791,7 @@ msgstr "Программный поток MPEG"
 msgid "MPEG program streams"
 msgstr "Программные потоки MPEG"
 
-#: src/input/r_mpeg_ts.h:417
+#: src/input/r_mpeg_ts.h:416
 msgid "MPEG transport stream"
 msgstr "Транспортный поток MPEG"
 
@@ -8236,8 +8178,8 @@ msgstr "Имя дорожки:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Советы по устранению неполадок при воспроизведении"
 
-#: src/input/r_truehd.h:36
-#: src/output/p_truehd.h:42
+#: src/input/r_truehd.h:41
+#: src/output/p_truehd.h:43
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -9814,6 +9756,64 @@ msgstr "да"
 #~ "\n"
 #~ "Помощь доступна в виде подсказки, в меню\n"
 #~ "'Справка' или при нажатии на кнопку 'F1'."
+
+#~ msgid "'--append-mode' lacks its argument.\n"
+#~ msgstr "'--append-mode' не указан аргумент.\n"
+
+#~ msgid "'--append-to' lacks its argument.\n"
+#~ msgstr "'--append-to' не указан аргумент.\n"
+
+#~ msgid "'--blockadd' lacks its argument.\n"
+#~ msgstr "'--blockadd' не указан аргумент.\n"
+
+#~ msgid "'--compression' lacks its argument.\n"
+#~ msgstr "'--compression' не указан аргумент.\n"
+
+#~ msgid "'--cues' lacks its argument.\n"
+#~ msgstr "'--cues' не указан аргумент.\n"
+
+#~ msgid "'--default-duration' lacks its argument.\n"
+#~ msgstr "'--default-duration' не указан аргумент.\n"
+
+#~ msgid "'--default-language' lacks its argument.\n"
+#~ msgstr "'--default-language' не указан аргумент.\n"
+
+#~ msgid "'--default-track' lacks its argument.\n"
+#~ msgstr "'--default-track' не указан аргумент.\n"
+
+#, fuzzy
+#~ msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
+#~ msgstr "'--default-duration' не указан аргумент.\n"
+
+#~ msgid "'--forced-track' lacks its argument.\n"
+#~ msgstr "'--forced-track' не указан аргумент.\n"
+
+#~ msgid "'--language' lacks its argument.\n"
+#~ msgstr "'--language' не указан аргумент.\n"
+
+#~ msgid "'--nalu-size-length' lacks its argument.\n"
+#~ msgstr "'--nalu-size-length' не указан аргумент.\n"
+
+#~ msgid "'--priority' lacks its argument.\n"
+#~ msgstr "'--priority' не указан аргумент.\n"
+
+#~ msgid "'--stereo-mode' lacks its argument.\n"
+#~ msgstr "'--stereo-mode' не указан аргумент.\n"
+
+#~ msgid "'--sub-charset' lacks its argument.\n"
+#~ msgstr "'--sub-charset' не указан аргумент.\n"
+
+#~ msgid "'--timecode-scale' lacks its argument.\n"
+#~ msgstr "'--timecode-scale' не указан аргумент.\n"
+
+#~ msgid "'--timecodes' lacks its argument.\n"
+#~ msgstr "'--timecodes' не указан аргумент.\n"
+
+#~ msgid "'--track-name' lacks its argument.\n"
+#~ msgstr "'--track-name' не указан аргумент.\n"
+
+#~ msgid "'--track-order' lacks its argument.\n"
+#~ msgstr "'--track-order' не указан аргумент.\n"
 
 #~ msgid "(Unknown element: %1%)"
 #~ msgstr "(Неизвестный элемент: %1%)"

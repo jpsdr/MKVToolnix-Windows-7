@@ -1318,8 +1318,27 @@ msgstr "'%1%' 仅允许在提取轨道时使用。\n"
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%' 缺文件名。\n"
 
+#: src/merge/mkvmerge.cpp:1880
 #: src/merge/mkvmerge.cpp:2058
+#: src/merge/mkvmerge.cpp:2072
+#: src/merge/mkvmerge.cpp:2166
+#: src/merge/mkvmerge.cpp:2180
+#: src/merge/mkvmerge.cpp:2187
+#: src/merge/mkvmerge.cpp:2194
+#: src/merge/mkvmerge.cpp:2201
+#: src/merge/mkvmerge.cpp:2208
+#: src/merge/mkvmerge.cpp:2215
 #: src/merge/mkvmerge.cpp:2222
+#: src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2243
+#: src/merge/mkvmerge.cpp:2250
+#: src/merge/mkvmerge.cpp:2257
+#: src/merge/mkvmerge.cpp:2264
+#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2281
+#: src/merge/mkvmerge.cpp:2288
+#: src/merge/mkvmerge.cpp:2295
+#: src/merge/mkvmerge.cpp:2302
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%' 缺参数。\n"
@@ -1379,14 +1398,6 @@ msgstr "'%1%': 将同时处理以下文件: %2%\n"
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr "'%1%': 您正在重新混流的一个在试验模式下混流生成的Opus轨道，输出时将使用最终模式。但在试验模式下生成的the end trimming这一细节无法保留到最终输出轨道。这就是说，解码器可能比预期多输出了一些采样点。若可能的话，您可以用重新混流原Opus文件解决此问题。\n"
 
-#: src/merge/mkvmerge.cpp:2281
-msgid "'--append-mode' lacks its argument.\n"
-msgstr "'--append-mode' 缺参数。\n"
-
-#: src/merge/mkvmerge.cpp:2274
-msgid "'--append-to' lacks its argument.\n"
-msgstr "'--append-to' 缺参数。\n"
-
 #: src/merge/mkvmerge.cpp:2138
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' 缺宽高比。\n"
@@ -1406,10 +1417,6 @@ msgstr "'--attachment-mime-type' 缺 MIME 类型。\n"
 #: src/merge/mkvmerge.cpp:1982
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' 缺名称。\n"
-
-#: src/merge/mkvmerge.cpp:2243
-msgid "'--blockadd' lacks its argument.\n"
-msgstr "'--blockadd' 缺参数。\n"
 
 #: src/merge/mkvmerge.cpp:2017
 msgid "'--chapter-charset' lacks the charset.\n"
@@ -1451,10 +1458,6 @@ msgstr "'--cluster-length' 缺簇长。\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' 缺参数。\n"
 
-#: src/merge/mkvmerge.cpp:2236
-msgid "'--compression' lacks its argument.\n"
-msgstr "'--compression' 缺参数。\n"
-
 #: src/merge/mkvmerge.cpp:2159
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' 缺裁减参数。\n"
@@ -1467,22 +1470,6 @@ msgstr "'--cue-chapter-name-format' 缺格式。\n"
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' 必须在 '--chapters' 之前给出。\n"
 
-#: src/merge/mkvmerge.cpp:2180
-msgid "'--cues' lacks its argument.\n"
-msgstr "'--cues' 缺参数。\n"
-
-#: src/merge/mkvmerge.cpp:2288
-msgid "'--default-duration' lacks its argument.\n"
-msgstr "'--default-duration' 缺参数。\n"
-
-#: src/merge/mkvmerge.cpp:2208
-msgid "'--default-language' lacks its argument.\n"
-msgstr "'--default-language' 缺参数。\n"
-
-#: src/merge/mkvmerge.cpp:2187
-msgid "'--default-track' lacks its argument.\n"
-msgstr "'--default-track' 缺参数。\n"
-
 #: src/merge/mkvmerge.cpp:2152
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' 缺尺寸。\n"
@@ -1491,21 +1478,9 @@ msgstr "'--display-dimensions' 缺尺寸。\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' lacks 缺参数。\n"
 
-#: src/merge/mkvmerge.cpp:2302
-msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
-msgstr "'--fix-bitstream-timing-information' 缺参数。\n"
-
-#: src/merge/mkvmerge.cpp:2194
-msgid "'--forced-track' lacks its argument.\n"
-msgstr "'--forced-track' 缺参数。\n"
-
 #: src/merge/mkvmerge.cpp:2001
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' 缺文件名。\n"
-
-#: src/merge/mkvmerge.cpp:2201
-msgid "'--language' lacks its argument.\n"
-msgstr "'--language' 缺参数。\n"
 
 #: src/merge/mkvmerge.cpp:2319
 msgid "'--link' is only useful in combination with '--split'.\n"
@@ -1518,14 +1493,6 @@ msgstr "'--link-to-next' 缺后续 UID。\n"
 #: src/merge/mkvmerge.cpp:1920
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' 缺先前 UID。\n"
-
-#: src/merge/mkvmerge.cpp:2295
-msgid "'--nalu-size-length' lacks its argument.\n"
-msgstr "'--nalu-size-length' 缺参数。\n"
-
-#: src/merge/mkvmerge.cpp:1880
-msgid "'--priority' lacks its argument.\n"
-msgstr "'--priority' 缺参数。\n"
 
 #: src/merge/mkvmerge.cpp:1934
 msgid "'--segment-uid' lacks the segment UID.\n"
@@ -1543,37 +1510,13 @@ msgstr "'--split' 缺尺寸。\n"
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' 缺文件数。\n"
 
-#: src/merge/mkvmerge.cpp:2166
-msgid "'--stereo-mode' lacks its argument.\n"
-msgstr "'--stereo-mode' 缺参数。\n"
-
-#: src/merge/mkvmerge.cpp:2215
-msgid "'--sub-charset' lacks its argument.\n"
-msgstr "'--sub-charset' 缺参数。\n"
-
-#: src/merge/mkvmerge.cpp:2072
-msgid "'--timecode-scale' lacks its argument.\n"
-msgstr "'--timecode-scale' 缺参数。\n"
-
 #: src/merge/mkvmerge.cpp:1589
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale' 调用多于一次。\n"
 
-#: src/merge/mkvmerge.cpp:2257
-msgid "'--timecodes' lacks its argument.\n"
-msgstr "'--timecodes' 缺参数。\n"
-
 #: src/merge/mkvmerge.cpp:1893
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' 缺标题。\n"
-
-#: src/merge/mkvmerge.cpp:2250
-msgid "'--track-name' lacks its argument.\n"
-msgstr "'--track-name' 缺参数。\n"
-
-#: src/merge/mkvmerge.cpp:2264
-msgid "'--track-order' lacks its argument.\n"
-msgstr "'--track-order' 缺参数。\n"
 
 #: src/merge/mkvmerge.cpp:2267
 msgid "'--track-order' may only be given once.\n"
@@ -4808,7 +4751,7 @@ msgstr "MPEG PS 程序流"
 msgid "MPEG program streams"
 msgstr "MPEG PS 程序流"
 
-#: src/input/r_mpeg_ts.h:417
+#: src/input/r_mpeg_ts.h:416
 msgid "MPEG transport stream"
 msgstr "MPEG 传输流"
 
@@ -8163,8 +8106,8 @@ msgstr "轨道列表:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "回放问题的解决方案"
 
-#: src/input/r_truehd.h:36
-#: src/output/p_truehd.h:42
+#: src/input/r_truehd.h:41
+#: src/output/p_truehd.h:43
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -9745,23 +9688,80 @@ msgstr "是"
 #~ msgid "'%1%' is only allowed for chapter extraction.\n"
 #~ msgstr "'%1%' 仅限提取章节时使用。\n"
 
+#~ msgid "'--append-mode' lacks its argument.\n"
+#~ msgstr "'--append-mode' 缺参数。\n"
+
+#~ msgid "'--append-to' lacks its argument.\n"
+#~ msgstr "'--append-to' 缺参数。\n"
+
 #~ msgid "'--blockadd' is only allowed when extracting tracks.\n"
 #~ msgstr "'--blockadd' 仅允许在提取轨道时使用。\n"
 
 #~ msgid "'--blockadd' lacks a level.\n"
 #~ msgstr "'--blockadd' 缺层级。\n"
 
+#~ msgid "'--blockadd' lacks its argument.\n"
+#~ msgstr "'--blockadd' 缺参数。\n"
+
+#~ msgid "'--compression' lacks its argument.\n"
+#~ msgstr "'--compression' 缺参数。\n"
+
+#~ msgid "'--cues' lacks its argument.\n"
+#~ msgstr "'--cues' 缺参数。\n"
+
 #~ msgid "'--cuesheet' is only allowed when extracting tracks.\n"
 #~ msgstr "'--cuesheet' 只能在提取轨道时使用。\n"
+
+#~ msgid "'--default-duration' lacks its argument.\n"
+#~ msgstr "'--default-duration' 缺参数。\n"
+
+#~ msgid "'--default-language' lacks its argument.\n"
+#~ msgstr "'--default-language' 缺参数。\n"
+
+#~ msgid "'--default-track' lacks its argument.\n"
+#~ msgstr "'--default-track' 缺参数。\n"
+
+#~ msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
+#~ msgstr "'--fix-bitstream-timing-information' 缺参数。\n"
+
+#~ msgid "'--forced-track' lacks its argument.\n"
+#~ msgstr "'--forced-track' 缺参数。\n"
 
 #~ msgid "'--fullraw' is only allowed when extracting tracks.\n"
 #~ msgstr "'--fullraw' 只能在提取轨道时使用。\n"
 
+#~ msgid "'--language' lacks its argument.\n"
+#~ msgstr "'--language' 缺参数。\n"
+
+#~ msgid "'--nalu-size-length' lacks its argument.\n"
+#~ msgstr "'--nalu-size-length' 缺参数。\n"
+
 #~ msgid "'--no-ogg' is only allowed when extracting tracks.\n"
 #~ msgstr "'--no-ogg' 只能在提取轨道时使用。\n"
 
+#~ msgid "'--priority' lacks its argument.\n"
+#~ msgstr "'--priority' 缺参数。\n"
+
 #~ msgid "'--raw' is only allowed when extracting tracks.\n"
 #~ msgstr "'--raw' 只能在提取轨道时使用。\n"
+
+#~ msgid "'--stereo-mode' lacks its argument.\n"
+#~ msgstr "'--stereo-mode' 缺参数。\n"
+
+#~ msgid "'--sub-charset' lacks its argument.\n"
+#~ msgstr "'--sub-charset' 缺参数。\n"
+
+#~ msgid "'--timecode-scale' lacks its argument.\n"
+#~ msgstr "'--timecode-scale' 缺参数。\n"
+
+#~ msgid "'--timecodes' lacks its argument.\n"
+#~ msgstr "'--timecodes' 缺参数。\n"
+
+#~ msgid "'--track-name' lacks its argument.\n"
+#~ msgstr "'--track-name' 缺参数。\n"
+
+#~ msgid "'--track-order' lacks its argument.\n"
+#~ msgstr "'--track-order' 缺参数。\n"
 
 #~ msgid "'-c' lacks a charset.\n"
 #~ msgstr "'-c' 缺字符集。\n"

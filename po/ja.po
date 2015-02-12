@@ -1333,8 +1333,27 @@ msgstr "'%1%'はトラック抽出時にのみ使用することができます�
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%'にファイル名が指定されていません。\n"
 
+#: src/merge/mkvmerge.cpp:1880
 #: src/merge/mkvmerge.cpp:2058
+#: src/merge/mkvmerge.cpp:2072
+#: src/merge/mkvmerge.cpp:2166
+#: src/merge/mkvmerge.cpp:2180
+#: src/merge/mkvmerge.cpp:2187
+#: src/merge/mkvmerge.cpp:2194
+#: src/merge/mkvmerge.cpp:2201
+#: src/merge/mkvmerge.cpp:2208
+#: src/merge/mkvmerge.cpp:2215
 #: src/merge/mkvmerge.cpp:2222
+#: src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2243
+#: src/merge/mkvmerge.cpp:2250
+#: src/merge/mkvmerge.cpp:2257
+#: src/merge/mkvmerge.cpp:2264
+#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2281
+#: src/merge/mkvmerge.cpp:2288
+#: src/merge/mkvmerge.cpp:2295
+#: src/merge/mkvmerge.cpp:2302
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%'にパラメータがありません。\n"
@@ -1394,14 +1413,6 @@ msgstr "'%1%'：後続のファイルを同様に処理しています：%2%\n"
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr "'%1%'：実験的モードでMUXされたOpusのトラックを再MUXしようとしています。出力されるトラックは最終的なモードで上書きされますが、実験的モードでMUXされたトラックからは詳細情報が1つ回復不能になります。エンドトリミングがそれです。これは、デコーダーの出力が元々意図されていたよりも数サンプル多くなる可能性があるということを意味します。もし可能であれば、オリジナルのOpusファイルから再MUXしてください。\n"
 
-#: src/merge/mkvmerge.cpp:2281
-msgid "'--append-mode' lacks its argument.\n"
-msgstr "'--append-mode'にパラメータがありません。\n"
-
-#: src/merge/mkvmerge.cpp:2274
-msgid "'--append-to' lacks its argument.\n"
-msgstr "'--append-to'にパラメータがありません。\n"
-
 #: src/merge/mkvmerge.cpp:2138
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio'にアスペクト比が指定されていません。\n"
@@ -1421,10 +1432,6 @@ msgstr "'--attachment-mime-type'にMIMEタイプが指定されていません�
 #: src/merge/mkvmerge.cpp:1982
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name'に名前が指定されていません。\n"
-
-#: src/merge/mkvmerge.cpp:2243
-msgid "'--blockadd' lacks its argument.\n"
-msgstr "'--blockadd'にパラメータがありません。\n"
 
 #: src/merge/mkvmerge.cpp:2017
 msgid "'--chapter-charset' lacks the charset.\n"
@@ -1466,10 +1473,6 @@ msgstr "'--cluster-length'に長さが指定されていません。\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset'にパラメータがありません。\n"
 
-#: src/merge/mkvmerge.cpp:2236
-msgid "'--compression' lacks its argument.\n"
-msgstr "'--compression'にパラメータがありません。\n"
-
 #: src/merge/mkvmerge.cpp:2159
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping'にクロッピングパラメータが指定されていません。\n"
@@ -1482,22 +1485,6 @@ msgstr "'--cue-chapter-name-format'にフォーマットが指定されていま
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format'は'--chapters'の前で一度のみ指定することができます。\n"
 
-#: src/merge/mkvmerge.cpp:2180
-msgid "'--cues' lacks its argument.\n"
-msgstr "'--cues' にパラメータがありません。\n"
-
-#: src/merge/mkvmerge.cpp:2288
-msgid "'--default-duration' lacks its argument.\n"
-msgstr "'--default-duration'にパラメータがありません。\n"
-
-#: src/merge/mkvmerge.cpp:2208
-msgid "'--default-language' lacks its argument.\n"
-msgstr "'--default-language'にパラメータがありません。\n"
-
-#: src/merge/mkvmerge.cpp:2187
-msgid "'--default-track' lacks its argument.\n"
-msgstr "'--default-track'にパラメータがありません。\n"
-
 #: src/merge/mkvmerge.cpp:2152
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions'に解像度が指定されていません。\n"
@@ -1506,21 +1493,9 @@ msgstr "'--display-dimensions'に解像度が指定されていません。\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage'にパラメータがありません。\n"
 
-#: src/merge/mkvmerge.cpp:2302
-msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
-msgstr "'--fix-bitstream-timing-information'に引数がありません。\n"
-
-#: src/merge/mkvmerge.cpp:2194
-msgid "'--forced-track' lacks its argument.\n"
-msgstr "'--forced-track'にパラメータがありません。\n"
-
 #: src/merge/mkvmerge.cpp:2001
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags'にファイル名が指定されていません。\n"
-
-#: src/merge/mkvmerge.cpp:2201
-msgid "'--language' lacks its argument.\n"
-msgstr "'--language'にパラメータがありません。\n"
 
 #: src/merge/mkvmerge.cpp:2319
 msgid "'--link' is only useful in combination with '--split'.\n"
@@ -1533,14 +1508,6 @@ msgstr "'--link-to-next'に次のUIDが指定されていません。\n"
 #: src/merge/mkvmerge.cpp:1920
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous'に前のUIDが指定されていません。\n"
-
-#: src/merge/mkvmerge.cpp:2295
-msgid "'--nalu-size-length' lacks its argument.\n"
-msgstr "'--nalu-size-length'にパラメータがありません。\n"
-
-#: src/merge/mkvmerge.cpp:1880
-msgid "'--priority' lacks its argument.\n"
-msgstr "'--priority'にパラメータがありません。\n"
 
 #: src/merge/mkvmerge.cpp:1934
 msgid "'--segment-uid' lacks the segment UID.\n"
@@ -1558,37 +1525,13 @@ msgstr "'--split'にサイズが指定されていません。\n"
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files'にファイル数が指定されていません。\n"
 
-#: src/merge/mkvmerge.cpp:2166
-msgid "'--stereo-mode' lacks its argument.\n"
-msgstr "'--stereo-mode'にパラメータがありません。\n"
-
-#: src/merge/mkvmerge.cpp:2215
-msgid "'--sub-charset' lacks its argument.\n"
-msgstr "'--sub-charset'にパラメータがありません。\n"
-
-#: src/merge/mkvmerge.cpp:2072
-msgid "'--timecode-scale' lacks its argument.\n"
-msgstr "'--timecode-scale'にパラメータがありません。\n"
-
 #: src/merge/mkvmerge.cpp:1589
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale'が2回以上使用されています。\n"
 
-#: src/merge/mkvmerge.cpp:2257
-msgid "'--timecodes' lacks its argument.\n"
-msgstr "'--timecodes'にパラメータがありません。\n"
-
 #: src/merge/mkvmerge.cpp:1893
 msgid "'--title' lacks the title.\n"
 msgstr "'--title'にタイトルが指定されていません。\n"
-
-#: src/merge/mkvmerge.cpp:2250
-msgid "'--track-name' lacks its argument.\n"
-msgstr "'--track-name'にパラメータがありません。\n"
-
-#: src/merge/mkvmerge.cpp:2264
-msgid "'--track-order' lacks its argument.\n"
-msgstr "'--track-order'にパラメータがありません。\n"
 
 #: src/merge/mkvmerge.cpp:2267
 msgid "'--track-order' may only be given once.\n"
@@ -4821,7 +4764,7 @@ msgstr "MPEGプログラムストリーム"
 msgid "MPEG program streams"
 msgstr "MPEGプログラムストリーム"
 
-#: src/input/r_mpeg_ts.h:417
+#: src/input/r_mpeg_ts.h:416
 msgid "MPEG transport stream"
 msgstr "MPEGトランスポートストリーム"
 
@@ -8174,8 +8117,8 @@ msgstr "トラック："
 msgid "Troubleshooting advice for playback issues"
 msgstr "再生の問題へのトラブルシューティングアドバイス"
 
-#: src/input/r_truehd.h:36
-#: src/output/p_truehd.h:42
+#: src/input/r_truehd.h:41
+#: src/output/p_truehd.h:43
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -9742,6 +9685,63 @@ msgstr "はい"
 #~ "\n"
 #~ "ヘルプはツールチップの形で、または'ヘルプ'メニューから、\n"
 #~ "またはF1キーを押すことで利用できます。"
+
+#~ msgid "'--append-mode' lacks its argument.\n"
+#~ msgstr "'--append-mode'にパラメータがありません。\n"
+
+#~ msgid "'--append-to' lacks its argument.\n"
+#~ msgstr "'--append-to'にパラメータがありません。\n"
+
+#~ msgid "'--blockadd' lacks its argument.\n"
+#~ msgstr "'--blockadd'にパラメータがありません。\n"
+
+#~ msgid "'--compression' lacks its argument.\n"
+#~ msgstr "'--compression'にパラメータがありません。\n"
+
+#~ msgid "'--cues' lacks its argument.\n"
+#~ msgstr "'--cues' にパラメータがありません。\n"
+
+#~ msgid "'--default-duration' lacks its argument.\n"
+#~ msgstr "'--default-duration'にパラメータがありません。\n"
+
+#~ msgid "'--default-language' lacks its argument.\n"
+#~ msgstr "'--default-language'にパラメータがありません。\n"
+
+#~ msgid "'--default-track' lacks its argument.\n"
+#~ msgstr "'--default-track'にパラメータがありません。\n"
+
+#~ msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
+#~ msgstr "'--fix-bitstream-timing-information'に引数がありません。\n"
+
+#~ msgid "'--forced-track' lacks its argument.\n"
+#~ msgstr "'--forced-track'にパラメータがありません。\n"
+
+#~ msgid "'--language' lacks its argument.\n"
+#~ msgstr "'--language'にパラメータがありません。\n"
+
+#~ msgid "'--nalu-size-length' lacks its argument.\n"
+#~ msgstr "'--nalu-size-length'にパラメータがありません。\n"
+
+#~ msgid "'--priority' lacks its argument.\n"
+#~ msgstr "'--priority'にパラメータがありません。\n"
+
+#~ msgid "'--stereo-mode' lacks its argument.\n"
+#~ msgstr "'--stereo-mode'にパラメータがありません。\n"
+
+#~ msgid "'--sub-charset' lacks its argument.\n"
+#~ msgstr "'--sub-charset'にパラメータがありません。\n"
+
+#~ msgid "'--timecode-scale' lacks its argument.\n"
+#~ msgstr "'--timecode-scale'にパラメータがありません。\n"
+
+#~ msgid "'--timecodes' lacks its argument.\n"
+#~ msgstr "'--timecodes'にパラメータがありません。\n"
+
+#~ msgid "'--track-name' lacks its argument.\n"
+#~ msgstr "'--track-name'にパラメータがありません。\n"
+
+#~ msgid "'--track-order' lacks its argument.\n"
+#~ msgstr "'--track-order'にパラメータがありません。\n"
 
 #~ msgid "(none)"
 #~ msgstr "（無し）"

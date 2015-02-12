@@ -1450,7 +1450,17 @@ msgstr "'%1%' è permesso solo durante l'estrazione delle tracce.\n"
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%' - nome file non specificato.\n"
 
-#: src/merge/mkvmerge.cpp:2058 src/merge/mkvmerge.cpp:2222
+#: src/merge/mkvmerge.cpp:1880 src/merge/mkvmerge.cpp:2058
+#: src/merge/mkvmerge.cpp:2072 src/merge/mkvmerge.cpp:2166
+#: src/merge/mkvmerge.cpp:2180 src/merge/mkvmerge.cpp:2187
+#: src/merge/mkvmerge.cpp:2194 src/merge/mkvmerge.cpp:2201
+#: src/merge/mkvmerge.cpp:2208 src/merge/mkvmerge.cpp:2215
+#: src/merge/mkvmerge.cpp:2222 src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2243 src/merge/mkvmerge.cpp:2250
+#: src/merge/mkvmerge.cpp:2257 src/merge/mkvmerge.cpp:2264
+#: src/merge/mkvmerge.cpp:2274 src/merge/mkvmerge.cpp:2281
+#: src/merge/mkvmerge.cpp:2288 src/merge/mkvmerge.cpp:2295
+#: src/merge/mkvmerge.cpp:2302
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%' - argomenti mancanti.\n"
@@ -1515,14 +1525,6 @@ msgstr ""
 "campioni più di quelli attesi. Dovresti se possibile re-muxare dal file Opus "
 "originale.\n"
 
-#: src/merge/mkvmerge.cpp:2281
-msgid "'--append-mode' lacks its argument.\n"
-msgstr "'--append-mode' - argomenti mancanti.\n"
-
-#: src/merge/mkvmerge.cpp:2274
-msgid "'--append-to' lacks its argument.\n"
-msgstr "'--append-to' - argomenti mancanti.\n"
-
 #: src/merge/mkvmerge.cpp:2138
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' - rapporto aspetto mancante.\n"
@@ -1542,10 +1544,6 @@ msgstr "'--attachment-mime-type' - tipo MIME mancante.\n"
 #: src/merge/mkvmerge.cpp:1982
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' - nome mancante.\n"
-
-#: src/merge/mkvmerge.cpp:2243
-msgid "'--blockadd' lacks its argument.\n"
-msgstr "'--blockadd' - argomenti mancanti.\n"
 
 #: src/merge/mkvmerge.cpp:2017
 msgid "'--chapter-charset' lacks the charset.\n"
@@ -1601,10 +1599,6 @@ msgstr "'--cluster-length' - lunghezza non specificata.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' senza argomenti.\n"
 
-#: src/merge/mkvmerge.cpp:2236
-msgid "'--compression' lacks its argument.\n"
-msgstr "'--compression' senza argomenti.\n"
-
 #: src/merge/mkvmerge.cpp:2159
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' - parametri ritaglio non specificati.\n"
@@ -1618,22 +1612,6 @@ msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr ""
 "'--cue-chapter-name-format' deve essere inserito prima di '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2180
-msgid "'--cues' lacks its argument.\n"
-msgstr "'--cues' senza argomenti.\n"
-
-#: src/merge/mkvmerge.cpp:2288
-msgid "'--default-duration' lacks its argument.\n"
-msgstr "'--default-duration' senza argomenti.\n"
-
-#: src/merge/mkvmerge.cpp:2208
-msgid "'--default-language' lacks its argument.\n"
-msgstr "'--default-language' senza argomenti.\n"
-
-#: src/merge/mkvmerge.cpp:2187
-msgid "'--default-track' lacks its argument.\n"
-msgstr "'--default-track' senza argomenti.\n"
-
 #: src/merge/mkvmerge.cpp:2152
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' senza argomenti.\n"
@@ -1642,21 +1620,9 @@ msgstr "'--display-dimensions' senza argomenti.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' senza argomenti.\n"
 
-#: src/merge/mkvmerge.cpp:2302
-msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
-msgstr "'--fix-bitstream-timing-information' mancante degli argomenti.\n"
-
-#: src/merge/mkvmerge.cpp:2194
-msgid "'--forced-track' lacks its argument.\n"
-msgstr "'--forced-track' senza argomenti.\n"
-
 #: src/merge/mkvmerge.cpp:2001
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' senza argomenti.\n"
-
-#: src/merge/mkvmerge.cpp:2201
-msgid "'--language' lacks its argument.\n"
-msgstr "'--language' senza argomenti.\n"
 
 #: src/merge/mkvmerge.cpp:2319
 msgid "'--link' is only useful in combination with '--split'.\n"
@@ -1669,14 +1635,6 @@ msgstr "'--link-to-next' senza il successivo UID.\n"
 #: src/merge/mkvmerge.cpp:1920
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' senza il precedente UID.\n"
-
-#: src/merge/mkvmerge.cpp:2295
-msgid "'--nalu-size-length' lacks its argument.\n"
-msgstr "'--nalu-size-length' senza argomenti.\n"
-
-#: src/merge/mkvmerge.cpp:1880
-msgid "'--priority' lacks its argument.\n"
-msgstr "'--priority' senza argomenti.\n"
 
 #: src/merge/mkvmerge.cpp:1934
 msgid "'--segment-uid' lacks the segment UID.\n"
@@ -1694,37 +1652,13 @@ msgstr "'--split' - dimensione non specificata.\n"
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' - numero file non specificato.\n"
 
-#: src/merge/mkvmerge.cpp:2166
-msgid "'--stereo-mode' lacks its argument.\n"
-msgstr "'--stereo-mode' senza argomenti.\n"
-
-#: src/merge/mkvmerge.cpp:2215
-msgid "'--sub-charset' lacks its argument.\n"
-msgstr "'--sub-charset' senza argomenti.\n"
-
-#: src/merge/mkvmerge.cpp:2072
-msgid "'--timecode-scale' lacks its argument.\n"
-msgstr "'--timecode-scale' senza argomenti.\n"
-
 #: src/merge/mkvmerge.cpp:1589
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale' è stato usato più di una volta.\n"
 
-#: src/merge/mkvmerge.cpp:2257
-msgid "'--timecodes' lacks its argument.\n"
-msgstr "'--timecodes' senza argomenti.\n"
-
 #: src/merge/mkvmerge.cpp:1893
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' - titolo non specificato.\n"
-
-#: src/merge/mkvmerge.cpp:2250
-msgid "'--track-name' lacks its argument.\n"
-msgstr "'--track-name' senza argomenti.\n"
-
-#: src/merge/mkvmerge.cpp:2264
-msgid "'--track-order' lacks its argument.\n"
-msgstr "'--track-order' senza argomenti.\n"
 
 #: src/merge/mkvmerge.cpp:2267
 msgid "'--track-order' may only be given once.\n"
@@ -5505,7 +5439,7 @@ msgstr "Flusso programma MPEG"
 msgid "MPEG program streams"
 msgstr "Flussi programma MPEG"
 
-#: src/input/r_mpeg_ts.h:417
+#: src/input/r_mpeg_ts.h:416
 msgid "MPEG transport stream"
 msgstr "Flusso trasporto MPEG"
 
@@ -9802,7 +9736,7 @@ msgstr "Tracce:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Avviso segnalazione risoluzione problemi relativi alla riproduzione"
 
-#: src/input/r_truehd.h:36 src/output/p_truehd.h:42
+#: src/input/r_truehd.h:41 src/output/p_truehd.h:43
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -11522,6 +11456,63 @@ msgstr "sì"
 
 #~ msgid "%d minute(s) %d second(s)"
 #~ msgstr "%d minuto(i) %d secondo(i)"
+
+#~ msgid "'--append-mode' lacks its argument.\n"
+#~ msgstr "'--append-mode' - argomenti mancanti.\n"
+
+#~ msgid "'--append-to' lacks its argument.\n"
+#~ msgstr "'--append-to' - argomenti mancanti.\n"
+
+#~ msgid "'--blockadd' lacks its argument.\n"
+#~ msgstr "'--blockadd' - argomenti mancanti.\n"
+
+#~ msgid "'--compression' lacks its argument.\n"
+#~ msgstr "'--compression' senza argomenti.\n"
+
+#~ msgid "'--cues' lacks its argument.\n"
+#~ msgstr "'--cues' senza argomenti.\n"
+
+#~ msgid "'--default-duration' lacks its argument.\n"
+#~ msgstr "'--default-duration' senza argomenti.\n"
+
+#~ msgid "'--default-language' lacks its argument.\n"
+#~ msgstr "'--default-language' senza argomenti.\n"
+
+#~ msgid "'--default-track' lacks its argument.\n"
+#~ msgstr "'--default-track' senza argomenti.\n"
+
+#~ msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
+#~ msgstr "'--fix-bitstream-timing-information' mancante degli argomenti.\n"
+
+#~ msgid "'--forced-track' lacks its argument.\n"
+#~ msgstr "'--forced-track' senza argomenti.\n"
+
+#~ msgid "'--language' lacks its argument.\n"
+#~ msgstr "'--language' senza argomenti.\n"
+
+#~ msgid "'--nalu-size-length' lacks its argument.\n"
+#~ msgstr "'--nalu-size-length' senza argomenti.\n"
+
+#~ msgid "'--priority' lacks its argument.\n"
+#~ msgstr "'--priority' senza argomenti.\n"
+
+#~ msgid "'--stereo-mode' lacks its argument.\n"
+#~ msgstr "'--stereo-mode' senza argomenti.\n"
+
+#~ msgid "'--sub-charset' lacks its argument.\n"
+#~ msgstr "'--sub-charset' senza argomenti.\n"
+
+#~ msgid "'--timecode-scale' lacks its argument.\n"
+#~ msgstr "'--timecode-scale' senza argomenti.\n"
+
+#~ msgid "'--timecodes' lacks its argument.\n"
+#~ msgstr "'--timecodes' senza argomenti.\n"
+
+#~ msgid "'--track-name' lacks its argument.\n"
+#~ msgstr "'--track-name' senza argomenti.\n"
+
+#~ msgid "'--track-order' lacks its argument.\n"
+#~ msgstr "'--track-order' senza argomenti.\n"
 
 #~ msgid "(none)"
 #~ msgstr "(nessuno)"

@@ -1338,8 +1338,27 @@ msgstr "'%1%' só é permitido quando há extração de faixas.\n"
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%' precisa de um nome de arquivo.\n"
 
+#: src/merge/mkvmerge.cpp:1880
 #: src/merge/mkvmerge.cpp:2058
+#: src/merge/mkvmerge.cpp:2072
+#: src/merge/mkvmerge.cpp:2166
+#: src/merge/mkvmerge.cpp:2180
+#: src/merge/mkvmerge.cpp:2187
+#: src/merge/mkvmerge.cpp:2194
+#: src/merge/mkvmerge.cpp:2201
+#: src/merge/mkvmerge.cpp:2208
+#: src/merge/mkvmerge.cpp:2215
 #: src/merge/mkvmerge.cpp:2222
+#: src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2243
+#: src/merge/mkvmerge.cpp:2250
+#: src/merge/mkvmerge.cpp:2257
+#: src/merge/mkvmerge.cpp:2264
+#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2281
+#: src/merge/mkvmerge.cpp:2288
+#: src/merge/mkvmerge.cpp:2295
+#: src/merge/mkvmerge.cpp:2302
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%' precisa de argumento.\n"
@@ -1399,14 +1418,6 @@ msgstr "'%1%': Processando os seguintes arquivos também: %2%\n"
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr "'%1%': Você está re-multiplexando uma faixa Opus que foi multiplexada em modo experimental. A faixa resultante será escrita no modo final, mas um detalhe não pode ser recuperado do modo experimental: o corte final (end trimming). Isso significa que um decodificador pode criar mais amostras de saída do que o pretendido. Você deve re-multiplexar o arquivo Opus original se possível.\n"
 
-#: src/merge/mkvmerge.cpp:2281
-msgid "'--append-mode' lacks its argument.\n"
-msgstr "'--append-mode' precisa de um argumento.\n"
-
-#: src/merge/mkvmerge.cpp:2274
-msgid "'--append-to' lacks its argument.\n"
-msgstr "'--append-to' precisa de um argumento.\n"
-
 #: src/merge/mkvmerge.cpp:2138
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' precisa de uma relação de aspecto.\n"
@@ -1426,10 +1437,6 @@ msgstr "'--attachment-mime-type' precisa do tipo de MIME.\n"
 #: src/merge/mkvmerge.cpp:1982
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' precisa de um nome.\n"
-
-#: src/merge/mkvmerge.cpp:2243
-msgid "'--blockadd' lacks its argument.\n"
-msgstr "'--blockadd' precisa de um argumento.\n"
 
 #: src/merge/mkvmerge.cpp:2017
 msgid "'--chapter-charset' lacks the charset.\n"
@@ -1471,10 +1478,6 @@ msgstr "'--cluster-length' precisa de uma extensão.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' está com o argumento faltando.\n"
 
-#: src/merge/mkvmerge.cpp:2236
-msgid "'--compression' lacks its argument.\n"
-msgstr "'--compression' está com o argumento faltando..\n"
-
 #: src/merge/mkvmerge.cpp:2159
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' precisa de parâmetros de corte.\n"
@@ -1487,22 +1490,6 @@ msgstr "'--cue-chapter-name-format' precisa de um formato.\n"
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' deve ser dado antes de '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2180
-msgid "'--cues' lacks its argument.\n"
-msgstr "'--cues' precisa de um argumento.\n"
-
-#: src/merge/mkvmerge.cpp:2288
-msgid "'--default-duration' lacks its argument.\n"
-msgstr "'--default-duration' precisa de um argumento.\n"
-
-#: src/merge/mkvmerge.cpp:2208
-msgid "'--default-language' lacks its argument.\n"
-msgstr "'--default-language' precisa de um argumento.\n"
-
-#: src/merge/mkvmerge.cpp:2187
-msgid "'--default-track' lacks its argument.\n"
-msgstr "'--default-track' precisa de um argumento.\n"
-
 #: src/merge/mkvmerge.cpp:2152
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' precisa de dimensões.\n"
@@ -1511,21 +1498,9 @@ msgstr "'--display-dimensions' precisa de dimensões.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' precisa de um argumento.\n"
 
-#: src/merge/mkvmerge.cpp:2302
-msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
-msgstr "'--fix-bitstream-timing-information' precisa de um argumento.\n"
-
-#: src/merge/mkvmerge.cpp:2194
-msgid "'--forced-track' lacks its argument.\n"
-msgstr "'--forced-track' precisa de um argumento.\n"
-
 #: src/merge/mkvmerge.cpp:2001
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' precisa de um nome de arquivo.\n"
-
-#: src/merge/mkvmerge.cpp:2201
-msgid "'--language' lacks its argument.\n"
-msgstr "'--language' precisa de um argumento.\n"
 
 #: src/merge/mkvmerge.cpp:2319
 msgid "'--link' is only useful in combination with '--split'.\n"
@@ -1538,14 +1513,6 @@ msgstr "'--link-to-next' precisa do próximo UID.\n"
 #: src/merge/mkvmerge.cpp:1920
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' precisa do UID anterior.\n"
-
-#: src/merge/mkvmerge.cpp:2295
-msgid "'--nalu-size-length' lacks its argument.\n"
-msgstr "'--nalu-size-length' precisa de um argumento.\n"
-
-#: src/merge/mkvmerge.cpp:1880
-msgid "'--priority' lacks its argument.\n"
-msgstr "'--priority' precisa de um argumento.\n"
 
 #: src/merge/mkvmerge.cpp:1934
 msgid "'--segment-uid' lacks the segment UID.\n"
@@ -1563,37 +1530,13 @@ msgstr "'--split' precisa de um tamanho.\n"
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' precisa do número de arquivos.\n"
 
-#: src/merge/mkvmerge.cpp:2166
-msgid "'--stereo-mode' lacks its argument.\n"
-msgstr "'--stereo-mode' precisa de um argumento.\n"
-
-#: src/merge/mkvmerge.cpp:2215
-msgid "'--sub-charset' lacks its argument.\n"
-msgstr "'--sub-charset' precisa de um argumento.\n"
-
-#: src/merge/mkvmerge.cpp:2072
-msgid "'--timecode-scale' lacks its argument.\n"
-msgstr "'--timecode-scale' precisa de um argumento.\n"
-
 #: src/merge/mkvmerge.cpp:1589
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale' foi usado mais de uma vez.\n"
 
-#: src/merge/mkvmerge.cpp:2257
-msgid "'--timecodes' lacks its argument.\n"
-msgstr "'--timecodes' precisa de um argumento.\n"
-
 #: src/merge/mkvmerge.cpp:1893
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' precisa de um título.\n"
-
-#: src/merge/mkvmerge.cpp:2250
-msgid "'--track-name' lacks its argument.\n"
-msgstr "'--track-name' precisa de um argumento.\n"
-
-#: src/merge/mkvmerge.cpp:2264
-msgid "'--track-order' lacks its argument.\n"
-msgstr "'--track-order' precisa de um argumento.\n"
 
 #: src/merge/mkvmerge.cpp:2267
 msgid "'--track-order' may only be given once.\n"
@@ -4832,7 +4775,7 @@ msgstr ""
 msgid "MPEG program streams"
 msgstr ""
 
-#: src/input/r_mpeg_ts.h:417
+#: src/input/r_mpeg_ts.h:416
 msgid "MPEG transport stream"
 msgstr ""
 
@@ -8210,8 +8153,8 @@ msgstr "Faixas:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Solução de problemas para problemas de reprodução"
 
-#: src/input/r_truehd.h:36
-#: src/output/p_truehd.h:42
+#: src/input/r_truehd.h:41
+#: src/output/p_truehd.h:43
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -9719,6 +9662,63 @@ msgstr "sim"
 #~ "Foi criado por Moritz Bunkus <moritz@bunkus.org>.\n"
 #~ "As fontes e os últimos binários estão disponíveis em\n"
 #~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+
+#~ msgid "'--append-mode' lacks its argument.\n"
+#~ msgstr "'--append-mode' precisa de um argumento.\n"
+
+#~ msgid "'--append-to' lacks its argument.\n"
+#~ msgstr "'--append-to' precisa de um argumento.\n"
+
+#~ msgid "'--blockadd' lacks its argument.\n"
+#~ msgstr "'--blockadd' precisa de um argumento.\n"
+
+#~ msgid "'--compression' lacks its argument.\n"
+#~ msgstr "'--compression' está com o argumento faltando..\n"
+
+#~ msgid "'--cues' lacks its argument.\n"
+#~ msgstr "'--cues' precisa de um argumento.\n"
+
+#~ msgid "'--default-duration' lacks its argument.\n"
+#~ msgstr "'--default-duration' precisa de um argumento.\n"
+
+#~ msgid "'--default-language' lacks its argument.\n"
+#~ msgstr "'--default-language' precisa de um argumento.\n"
+
+#~ msgid "'--default-track' lacks its argument.\n"
+#~ msgstr "'--default-track' precisa de um argumento.\n"
+
+#~ msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
+#~ msgstr "'--fix-bitstream-timing-information' precisa de um argumento.\n"
+
+#~ msgid "'--forced-track' lacks its argument.\n"
+#~ msgstr "'--forced-track' precisa de um argumento.\n"
+
+#~ msgid "'--language' lacks its argument.\n"
+#~ msgstr "'--language' precisa de um argumento.\n"
+
+#~ msgid "'--nalu-size-length' lacks its argument.\n"
+#~ msgstr "'--nalu-size-length' precisa de um argumento.\n"
+
+#~ msgid "'--priority' lacks its argument.\n"
+#~ msgstr "'--priority' precisa de um argumento.\n"
+
+#~ msgid "'--stereo-mode' lacks its argument.\n"
+#~ msgstr "'--stereo-mode' precisa de um argumento.\n"
+
+#~ msgid "'--sub-charset' lacks its argument.\n"
+#~ msgstr "'--sub-charset' precisa de um argumento.\n"
+
+#~ msgid "'--timecode-scale' lacks its argument.\n"
+#~ msgstr "'--timecode-scale' precisa de um argumento.\n"
+
+#~ msgid "'--timecodes' lacks its argument.\n"
+#~ msgstr "'--timecodes' precisa de um argumento.\n"
+
+#~ msgid "'--track-name' lacks its argument.\n"
+#~ msgstr "'--track-name' precisa de um argumento.\n"
+
+#~ msgid "'--track-order' lacks its argument.\n"
+#~ msgstr "'--track-order' precisa de um argumento.\n"
 
 #~ msgid "...after this size:"
 #~ msgstr "...depois de x tamanho"

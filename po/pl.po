@@ -1462,7 +1462,17 @@ msgstr "\"%1%\" jest tylko dozwolone w przypadku wyodrębniania ścieżek.\n"
 msgid "'%1%' lacks a file name.\n"
 msgstr "\"%1%\" nie posiada nazwy pliku.\n"
 
-#: src/merge/mkvmerge.cpp:2058 src/merge/mkvmerge.cpp:2222
+#: src/merge/mkvmerge.cpp:1880 src/merge/mkvmerge.cpp:2058
+#: src/merge/mkvmerge.cpp:2072 src/merge/mkvmerge.cpp:2166
+#: src/merge/mkvmerge.cpp:2180 src/merge/mkvmerge.cpp:2187
+#: src/merge/mkvmerge.cpp:2194 src/merge/mkvmerge.cpp:2201
+#: src/merge/mkvmerge.cpp:2208 src/merge/mkvmerge.cpp:2215
+#: src/merge/mkvmerge.cpp:2222 src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2243 src/merge/mkvmerge.cpp:2250
+#: src/merge/mkvmerge.cpp:2257 src/merge/mkvmerge.cpp:2264
+#: src/merge/mkvmerge.cpp:2274 src/merge/mkvmerge.cpp:2281
+#: src/merge/mkvmerge.cpp:2288 src/merge/mkvmerge.cpp:2295
+#: src/merge/mkvmerge.cpp:2302
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "\"%1%\" nie posiada wartości.\n"
@@ -1527,14 +1537,6 @@ msgstr ""
 "wyjście kilka więcej sampli niż to było zamierzone oryginalnie. Powinienieś "
 "remuksować ścieżkę Opus z pliku oryginalnego jeśli to tylko możliwe.\n"
 
-#: src/merge/mkvmerge.cpp:2281
-msgid "'--append-mode' lacks its argument.\n"
-msgstr "\"--append-mode\" brakuje parametru.\n"
-
-#: src/merge/mkvmerge.cpp:2274
-msgid "'--append-to' lacks its argument.\n"
-msgstr "\"--append-to\" brakuje parametru\n"
-
 #: src/merge/mkvmerge.cpp:2138
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "\"--aspect-ratio\" brakuje proporcji.\n"
@@ -1554,10 +1556,6 @@ msgstr "\"--attachment-mime-type\" brakuje typu MIME.\n"
 #: src/merge/mkvmerge.cpp:1982
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "\"--attachment-name\" brakuje nazwy.\n"
-
-#: src/merge/mkvmerge.cpp:2243
-msgid "'--blockadd' lacks its argument.\n"
-msgstr "\"--blockadd\" brakuje parametru.\n"
 
 #: src/merge/mkvmerge.cpp:2017
 msgid "'--chapter-charset' lacks the charset.\n"
@@ -1613,10 +1611,6 @@ msgstr "\"--cluster-length\" brakuje podanej długości.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "\"--command-line-charset\" brakuje parametru.\n"
 
-#: src/merge/mkvmerge.cpp:2236
-msgid "'--compression' lacks its argument.\n"
-msgstr "\"--compression\" brakuje parametru.\n"
-
 #: src/merge/mkvmerge.cpp:2159
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "\"--cropping\" brakuje parametrów obcinania.\n"
@@ -1629,22 +1623,6 @@ msgstr "\"--cue-chapter-name-format\" brakuje parametru formatowania.\n"
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "\"--cue-chapter-name-format\" musi być podany przed \"--chapters\".\n"
 
-#: src/merge/mkvmerge.cpp:2180
-msgid "'--cues' lacks its argument.\n"
-msgstr "\"--cues\" brakuje parametru.\n"
-
-#: src/merge/mkvmerge.cpp:2288
-msgid "'--default-duration' lacks its argument.\n"
-msgstr "\"--default-duration\" brakuje parametru.\n"
-
-#: src/merge/mkvmerge.cpp:2208
-msgid "'--default-language' lacks its argument.\n"
-msgstr "\"--default-language\" brakuje parametru.\n"
-
-#: src/merge/mkvmerge.cpp:2187
-msgid "'--default-track' lacks its argument.\n"
-msgstr "\"--default-track\" brakuje parametru.\n"
-
 #: src/merge/mkvmerge.cpp:2152
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "\"--display-dimensions\" brakuje podanych wymiarów.\n"
@@ -1653,21 +1631,9 @@ msgstr "\"--display-dimensions\" brakuje podanych wymiarów.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "\"--engage\" brakuje parametru.\n"
 
-#: src/merge/mkvmerge.cpp:2302
-msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
-msgstr "\"--fix-bitstream-timing-information\" brakuje parametru.\n"
-
-#: src/merge/mkvmerge.cpp:2194
-msgid "'--forced-track' lacks its argument.\n"
-msgstr "\"--forced-track\" brakuje parametru.\n"
-
 #: src/merge/mkvmerge.cpp:2001
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "\"--global-tags\" brakuje nazwy.\n"
-
-#: src/merge/mkvmerge.cpp:2201
-msgid "'--language' lacks its argument.\n"
-msgstr "\"--language\" brakuje parametru.\n"
 
 #: src/merge/mkvmerge.cpp:2319
 msgid "'--link' is only useful in combination with '--split'.\n"
@@ -1680,14 +1646,6 @@ msgstr "\"--link-to-next\" brakuje następującego UID.\n"
 #: src/merge/mkvmerge.cpp:1920
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "\"--link-to-previous\" brakuje poprzedzającego UID.\n"
-
-#: src/merge/mkvmerge.cpp:2295
-msgid "'--nalu-size-length' lacks its argument.\n"
-msgstr "\"--nalu-size-length\" brakuje parametru.\n"
-
-#: src/merge/mkvmerge.cpp:1880
-msgid "'--priority' lacks its argument.\n"
-msgstr "\"--priority\" brakuje parametru.\n"
 
 #: src/merge/mkvmerge.cpp:1934
 msgid "'--segment-uid' lacks the segment UID.\n"
@@ -1705,37 +1663,13 @@ msgstr "\"--split\" brakuje podanego rozmiaru.\n"
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "\"--split-max-files\" brakuje podanej ilości plików.\n"
 
-#: src/merge/mkvmerge.cpp:2166
-msgid "'--stereo-mode' lacks its argument.\n"
-msgstr "\"--stereo-mode\" brakuje parametru.\n"
-
-#: src/merge/mkvmerge.cpp:2215
-msgid "'--sub-charset' lacks its argument.\n"
-msgstr "\"--sub-charset\" brakuje parametru.\n"
-
-#: src/merge/mkvmerge.cpp:2072
-msgid "'--timecode-scale' lacks its argument.\n"
-msgstr "\"--timecode-scale\" brakuje parametru.\n"
-
 #: src/merge/mkvmerge.cpp:1589
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "\"--timecode-scale\" użyto więcej niż raz.\n"
 
-#: src/merge/mkvmerge.cpp:2257
-msgid "'--timecodes' lacks its argument.\n"
-msgstr "\"--timecodes\" brakuje parametru.\n"
-
 #: src/merge/mkvmerge.cpp:1893
 msgid "'--title' lacks the title.\n"
 msgstr "\"--title\" brakuje tytułu.\n"
-
-#: src/merge/mkvmerge.cpp:2250
-msgid "'--track-name' lacks its argument.\n"
-msgstr "\"--track-name\" brakuje parametru.\n"
-
-#: src/merge/mkvmerge.cpp:2264
-msgid "'--track-order' lacks its argument.\n"
-msgstr "\"--track-order\" brakuje parametru.\n"
 
 #: src/merge/mkvmerge.cpp:2267
 msgid "'--track-order' may only be given once.\n"
@@ -5494,7 +5428,7 @@ msgstr "MPEG dane z kontenera"
 msgid "MPEG program streams"
 msgstr "MPEG dane z kontenera"
 
-#: src/input/r_mpeg_ts.h:417
+#: src/input/r_mpeg_ts.h:416
 msgid "MPEG transport stream"
 msgstr "MPEG dane transportowe"
 
@@ -9801,7 +9735,7 @@ msgstr "Ścieżki:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Porady w przypadku problemów z odtwarzaniem plików matroski"
 
-#: src/input/r_truehd.h:36 src/output/p_truehd.h:42
+#: src/input/r_truehd.h:41 src/output/p_truehd.h:43
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -11486,6 +11420,63 @@ msgstr "tak"
 #~ "Autorem programu jest Moritz Bunkus <moritz@bunkus.org>.\n"
 #~ "Źródła i najnowsze binarki zawsze dostępne na\n"
 #~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+
+#~ msgid "'--append-mode' lacks its argument.\n"
+#~ msgstr "\"--append-mode\" brakuje parametru.\n"
+
+#~ msgid "'--append-to' lacks its argument.\n"
+#~ msgstr "\"--append-to\" brakuje parametru\n"
+
+#~ msgid "'--blockadd' lacks its argument.\n"
+#~ msgstr "\"--blockadd\" brakuje parametru.\n"
+
+#~ msgid "'--compression' lacks its argument.\n"
+#~ msgstr "\"--compression\" brakuje parametru.\n"
+
+#~ msgid "'--cues' lacks its argument.\n"
+#~ msgstr "\"--cues\" brakuje parametru.\n"
+
+#~ msgid "'--default-duration' lacks its argument.\n"
+#~ msgstr "\"--default-duration\" brakuje parametru.\n"
+
+#~ msgid "'--default-language' lacks its argument.\n"
+#~ msgstr "\"--default-language\" brakuje parametru.\n"
+
+#~ msgid "'--default-track' lacks its argument.\n"
+#~ msgstr "\"--default-track\" brakuje parametru.\n"
+
+#~ msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
+#~ msgstr "\"--fix-bitstream-timing-information\" brakuje parametru.\n"
+
+#~ msgid "'--forced-track' lacks its argument.\n"
+#~ msgstr "\"--forced-track\" brakuje parametru.\n"
+
+#~ msgid "'--language' lacks its argument.\n"
+#~ msgstr "\"--language\" brakuje parametru.\n"
+
+#~ msgid "'--nalu-size-length' lacks its argument.\n"
+#~ msgstr "\"--nalu-size-length\" brakuje parametru.\n"
+
+#~ msgid "'--priority' lacks its argument.\n"
+#~ msgstr "\"--priority\" brakuje parametru.\n"
+
+#~ msgid "'--stereo-mode' lacks its argument.\n"
+#~ msgstr "\"--stereo-mode\" brakuje parametru.\n"
+
+#~ msgid "'--sub-charset' lacks its argument.\n"
+#~ msgstr "\"--sub-charset\" brakuje parametru.\n"
+
+#~ msgid "'--timecode-scale' lacks its argument.\n"
+#~ msgstr "\"--timecode-scale\" brakuje parametru.\n"
+
+#~ msgid "'--timecodes' lacks its argument.\n"
+#~ msgstr "\"--timecodes\" brakuje parametru.\n"
+
+#~ msgid "'--track-name' lacks its argument.\n"
+#~ msgstr "\"--track-name\" brakuje parametru.\n"
+
+#~ msgid "'--track-order' lacks its argument.\n"
+#~ msgstr "\"--track-order\" brakuje parametru.\n"
 
 #~ msgid "...after this size:"
 #~ msgstr "...w rozmiarze co:"

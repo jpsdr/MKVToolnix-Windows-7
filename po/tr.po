@@ -1430,7 +1430,17 @@ msgstr "'%1%' sadece izler çıkartıldığında izin verilir.\n"
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%', bir dosya adına ihtiyacı var.\n"
 
-#: src/merge/mkvmerge.cpp:2058 src/merge/mkvmerge.cpp:2222
+#: src/merge/mkvmerge.cpp:1880 src/merge/mkvmerge.cpp:2058
+#: src/merge/mkvmerge.cpp:2072 src/merge/mkvmerge.cpp:2166
+#: src/merge/mkvmerge.cpp:2180 src/merge/mkvmerge.cpp:2187
+#: src/merge/mkvmerge.cpp:2194 src/merge/mkvmerge.cpp:2201
+#: src/merge/mkvmerge.cpp:2208 src/merge/mkvmerge.cpp:2215
+#: src/merge/mkvmerge.cpp:2222 src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2243 src/merge/mkvmerge.cpp:2250
+#: src/merge/mkvmerge.cpp:2257 src/merge/mkvmerge.cpp:2264
+#: src/merge/mkvmerge.cpp:2274 src/merge/mkvmerge.cpp:2281
+#: src/merge/mkvmerge.cpp:2288 src/merge/mkvmerge.cpp:2295
+#: src/merge/mkvmerge.cpp:2302
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%', bağımsız değişkene ihtiyacı var.\n"
@@ -1489,14 +1499,6 @@ msgid ""
 "intended. You should re-mux from the original Opus file if possible.\n"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2281
-msgid "'--append-mode' lacks its argument.\n"
-msgstr "'--append-mode' bağımsız değişkenine ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2274
-msgid "'--append-to' lacks its argument.\n"
-msgstr "'--append-to' bağımsız değişkenine ihtiyacı olur.\n"
-
 #: src/merge/mkvmerge.cpp:2138
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' en-boy oranına ihtiyacı olur.\n"
@@ -1516,10 +1518,6 @@ msgstr "'--attachment-mime-type' MIME türüne ihtiyacı olur.\n"
 #: src/merge/mkvmerge.cpp:1982
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' isime ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2243
-msgid "'--blockadd' lacks its argument.\n"
-msgstr "'--blockadd' bağımsız değişkenine ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2017
 msgid "'--chapter-charset' lacks the charset.\n"
@@ -1575,10 +1573,6 @@ msgstr "'--cluster-length' uzunluğa ihtiyacı olur.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' bağımsız değişkeni eksik.\n"
 
-#: src/merge/mkvmerge.cpp:2236
-msgid "'--compression' lacks its argument.\n"
-msgstr "'--compression' bağımsız değişkenine ihtiyacı olur.\n"
-
 #: src/merge/mkvmerge.cpp:2159
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' kırpma parametrelerine ihtiyacı olur.\n"
@@ -1592,22 +1586,6 @@ msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr ""
 "'--cue-chapter-name-format', '--chapters' dan önce verilmek zorundadır.\n"
 
-#: src/merge/mkvmerge.cpp:2180
-msgid "'--cues' lacks its argument.\n"
-msgstr "'--cues' bağımsız değişkenine ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2288
-msgid "'--default-duration' lacks its argument.\n"
-msgstr "'--default-duration' bağımsız değişkenine ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2208
-msgid "'--default-language' lacks its argument.\n"
-msgstr "'--default-language' bağımsız değişkenine ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2187
-msgid "'--default-track' lacks its argument.\n"
-msgstr "'--default-track' bağımsız değişkenine ihtiyacı olur.\n"
-
 #: src/merge/mkvmerge.cpp:2152
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' boyutlara ihtiyacı olur.\n"
@@ -1616,22 +1594,9 @@ msgstr "'--display-dimensions' boyutlara ihtiyacı olur.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' bağımsız değişkenine ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2302
-msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
-msgstr ""
-"'--fix-bitstream-timing-information' bağımsız değişkenine ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2194
-msgid "'--forced-track' lacks its argument.\n"
-msgstr "'--forced-track' bağımsız değişkenine ihtiyacı olur.\n"
-
 #: src/merge/mkvmerge.cpp:2001
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' dosya adına ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2201
-msgid "'--language' lacks its argument.\n"
-msgstr "'--language' bağımsız değişkenine ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2319
 msgid "'--link' is only useful in combination with '--split'.\n"
@@ -1644,14 +1609,6 @@ msgstr "'--link-to-next' sonraki UID'ye ihtiyacı olur.\n"
 #: src/merge/mkvmerge.cpp:1920
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' önceki UID'ye ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2295
-msgid "'--nalu-size-length' lacks its argument.\n"
-msgstr "'--nalu-size-length' bağımsız değişkenine ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:1880
-msgid "'--priority' lacks its argument.\n"
-msgstr "'--priority' bağımsız değişkenine ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:1934
 msgid "'--segment-uid' lacks the segment UID.\n"
@@ -1669,37 +1626,13 @@ msgstr "'--split' boyuta ihtiyacı olur.\n"
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' dosya sayısına ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2166
-msgid "'--stereo-mode' lacks its argument.\n"
-msgstr "'--stereo-mode' bağımsız değişkenine ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2215
-msgid "'--sub-charset' lacks its argument.\n"
-msgstr "'--sub-charset' bağımsız değişkenine ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2072
-msgid "'--timecode-scale' lacks its argument.\n"
-msgstr "'--timecode-scale' bağımsız değişkenine ihtiyacı olur.\n"
-
 #: src/merge/mkvmerge.cpp:1589
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale' birden fazla kullanıldı.\n"
 
-#: src/merge/mkvmerge.cpp:2257
-msgid "'--timecodes' lacks its argument.\n"
-msgstr "'--timecodes' bağımsız değişkenine ihtiyacı olur.\n"
-
 #: src/merge/mkvmerge.cpp:1893
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' başlığa ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2250
-msgid "'--track-name' lacks its argument.\n"
-msgstr "'--track-name' bağımsız değişkenine ihtiyacı olur.\n"
-
-#: src/merge/mkvmerge.cpp:2264
-msgid "'--track-order' lacks its argument.\n"
-msgstr "'--track-order' bağımsız değişkenine ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2267
 msgid "'--track-order' may only be given once.\n"
@@ -5374,7 +5307,7 @@ msgstr "MPEG program akışı"
 msgid "MPEG program streams"
 msgstr "MPEG program akışları"
 
-#: src/input/r_mpeg_ts.h:417
+#: src/input/r_mpeg_ts.h:416
 msgid "MPEG transport stream"
 msgstr "MPEG taşıma akışı"
 
@@ -9371,7 +9304,7 @@ msgstr "İzler:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Oynatma sorunları için sorun giderme tavsiye et"
 
-#: src/input/r_truehd.h:36 src/output/p_truehd.h:42
+#: src/input/r_truehd.h:41 src/output/p_truehd.h:43
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -11073,6 +11006,64 @@ msgstr "evet"
 
 #~ msgid "%d minute(s) %d second(s)"
 #~ msgstr "%d dakika %d saniye"
+
+#~ msgid "'--append-mode' lacks its argument.\n"
+#~ msgstr "'--append-mode' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--append-to' lacks its argument.\n"
+#~ msgstr "'--append-to' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--blockadd' lacks its argument.\n"
+#~ msgstr "'--blockadd' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--compression' lacks its argument.\n"
+#~ msgstr "'--compression' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--cues' lacks its argument.\n"
+#~ msgstr "'--cues' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--default-duration' lacks its argument.\n"
+#~ msgstr "'--default-duration' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--default-language' lacks its argument.\n"
+#~ msgstr "'--default-language' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--default-track' lacks its argument.\n"
+#~ msgstr "'--default-track' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
+#~ msgstr ""
+#~ "'--fix-bitstream-timing-information' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--forced-track' lacks its argument.\n"
+#~ msgstr "'--forced-track' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--language' lacks its argument.\n"
+#~ msgstr "'--language' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--nalu-size-length' lacks its argument.\n"
+#~ msgstr "'--nalu-size-length' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--priority' lacks its argument.\n"
+#~ msgstr "'--priority' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--stereo-mode' lacks its argument.\n"
+#~ msgstr "'--stereo-mode' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--sub-charset' lacks its argument.\n"
+#~ msgstr "'--sub-charset' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--timecode-scale' lacks its argument.\n"
+#~ msgstr "'--timecode-scale' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--timecodes' lacks its argument.\n"
+#~ msgstr "'--timecodes' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--track-name' lacks its argument.\n"
+#~ msgstr "'--track-name' bağımsız değişkenine ihtiyacı olur.\n"
+
+#~ msgid "'--track-order' lacks its argument.\n"
+#~ msgstr "'--track-order' bağımsız değişkenine ihtiyacı olur.\n"
 
 #~ msgid "(none)"
 #~ msgstr "(yok)"

@@ -1465,7 +1465,17 @@ msgstr "'%1%' допускається тільки при витяганні д
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%' не містить назви файлу.\n"
 
-#: src/merge/mkvmerge.cpp:2058 src/merge/mkvmerge.cpp:2222
+#: src/merge/mkvmerge.cpp:1880 src/merge/mkvmerge.cpp:2058
+#: src/merge/mkvmerge.cpp:2072 src/merge/mkvmerge.cpp:2166
+#: src/merge/mkvmerge.cpp:2180 src/merge/mkvmerge.cpp:2187
+#: src/merge/mkvmerge.cpp:2194 src/merge/mkvmerge.cpp:2201
+#: src/merge/mkvmerge.cpp:2208 src/merge/mkvmerge.cpp:2215
+#: src/merge/mkvmerge.cpp:2222 src/merge/mkvmerge.cpp:2236
+#: src/merge/mkvmerge.cpp:2243 src/merge/mkvmerge.cpp:2250
+#: src/merge/mkvmerge.cpp:2257 src/merge/mkvmerge.cpp:2264
+#: src/merge/mkvmerge.cpp:2274 src/merge/mkvmerge.cpp:2281
+#: src/merge/mkvmerge.cpp:2288 src/merge/mkvmerge.cpp:2295
+#: src/merge/mkvmerge.cpp:2302
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%' не містить власного аргументу.\n"
@@ -1531,14 +1541,6 @@ msgstr ""
 "необхідно робити повторне мультиплексування на основі оригінального файла "
 "Opus, якщо можливо.\n"
 
-#: src/merge/mkvmerge.cpp:2281
-msgid "'--append-mode' lacks its argument.\n"
-msgstr "'--append-mode' не містить власного аргументу.\n"
-
-#: src/merge/mkvmerge.cpp:2274
-msgid "'--append-to' lacks its argument.\n"
-msgstr "'--append-to' не містить власного аргументу.\n"
-
 #: src/merge/mkvmerge.cpp:2138
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' не містить значення співвідношення сторін екрану.\n"
@@ -1560,10 +1562,6 @@ msgstr "'--attachment-mime-type' не містить MIME-тип.\n"
 #: src/merge/mkvmerge.cpp:1982
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' не містить назви.\n"
-
-#: src/merge/mkvmerge.cpp:2243
-msgid "'--blockadd' lacks its argument.\n"
-msgstr "'--blockadd' не містить власного аргументу.\n"
 
 #: src/merge/mkvmerge.cpp:2017
 msgid "'--chapter-charset' lacks the charset.\n"
@@ -1619,10 +1617,6 @@ msgstr "'--cluster-length' не містить значення довжини.\
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' не містить власного аргументу.\n"
 
-#: src/merge/mkvmerge.cpp:2236
-msgid "'--compression' lacks its argument.\n"
-msgstr "'--compression' не містить власного аргументу.\n"
-
 #: src/merge/mkvmerge.cpp:2159
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' не містить параметрів обрізки.\n"
@@ -1636,22 +1630,6 @@ msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr ""
 "'--cue-chapter-name-format' повинно бути занадано перед '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2180
-msgid "'--cues' lacks its argument.\n"
-msgstr "'--cues' не містить власного аргументу.\n"
-
-#: src/merge/mkvmerge.cpp:2288
-msgid "'--default-duration' lacks its argument.\n"
-msgstr "'--default-duration' не містить власного аргументу.\n"
-
-#: src/merge/mkvmerge.cpp:2208
-msgid "'--default-language' lacks its argument.\n"
-msgstr "'--default-language' не містить власного аргументу.\n"
-
-#: src/merge/mkvmerge.cpp:2187
-msgid "'--default-track' lacks its argument.\n"
-msgstr "'--default-track' не містить власного аргументу.\n"
-
 #: src/merge/mkvmerge.cpp:2152
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' не містить розмірів.\n"
@@ -1660,21 +1638,9 @@ msgstr "'--display-dimensions' не містить розмірів.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' не містить власного аргументу.\n"
 
-#: src/merge/mkvmerge.cpp:2302
-msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
-msgstr "'--fix-bitstream-timing-information' не містить власного аргументу.\n"
-
-#: src/merge/mkvmerge.cpp:2194
-msgid "'--forced-track' lacks its argument.\n"
-msgstr "'--forced-track' не містить власного аргументу.\n"
-
 #: src/merge/mkvmerge.cpp:2001
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' не містить назви файлу.\n"
-
-#: src/merge/mkvmerge.cpp:2201
-msgid "'--language' lacks its argument.\n"
-msgstr "'--language' не містить власного аргументу.\n"
 
 #: src/merge/mkvmerge.cpp:2319
 msgid "'--link' is only useful in combination with '--split'.\n"
@@ -1687,14 +1653,6 @@ msgstr "'--link-to-next' не містить наступного UID.\n"
 #: src/merge/mkvmerge.cpp:1920
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' не містить попереднього UID.\n"
-
-#: src/merge/mkvmerge.cpp:2295
-msgid "'--nalu-size-length' lacks its argument.\n"
-msgstr "'--nalu-size-length' не містить власного аргументу.\n"
-
-#: src/merge/mkvmerge.cpp:1880
-msgid "'--priority' lacks its argument.\n"
-msgstr "'--priority' не містить власного аргументу.\n"
 
 #: src/merge/mkvmerge.cpp:1934
 msgid "'--segment-uid' lacks the segment UID.\n"
@@ -1712,37 +1670,13 @@ msgstr "'--split' не містить розміру.\n"
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' не містить кількості файлів.\n"
 
-#: src/merge/mkvmerge.cpp:2166
-msgid "'--stereo-mode' lacks its argument.\n"
-msgstr "'--stereo-mode' не містить власного аргументу.\n"
-
-#: src/merge/mkvmerge.cpp:2215
-msgid "'--sub-charset' lacks its argument.\n"
-msgstr "'--sub-charset' не містить власного аргументу.\n"
-
-#: src/merge/mkvmerge.cpp:2072
-msgid "'--timecode-scale' lacks its argument.\n"
-msgstr "'--timecode-scale' не містить власного аргументу.\n"
-
 #: src/merge/mkvmerge.cpp:1589
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale' було використано більше одного разу.\n"
 
-#: src/merge/mkvmerge.cpp:2257
-msgid "'--timecodes' lacks its argument.\n"
-msgstr "'--timecodes' не містить власного аргументу.\n"
-
 #: src/merge/mkvmerge.cpp:1893
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' не містить власного найменування.\n"
-
-#: src/merge/mkvmerge.cpp:2250
-msgid "'--track-name' lacks its argument.\n"
-msgstr "'--track-name' не містить власного аргументу.\n"
-
-#: src/merge/mkvmerge.cpp:2264
-msgid "'--track-order' lacks its argument.\n"
-msgstr "'--track-order' не містить власного аргументу.\n"
 
 #: src/merge/mkvmerge.cpp:2267
 msgid "'--track-order' may only be given once.\n"
@@ -5507,7 +5441,7 @@ msgstr "MPEG програмний потік"
 msgid "MPEG program streams"
 msgstr "MPEG програмні потоки"
 
-#: src/input/r_mpeg_ts.h:417
+#: src/input/r_mpeg_ts.h:416
 msgid "MPEG transport stream"
 msgstr "транспортний потік MPEG"
 
@@ -9806,7 +9740,7 @@ msgstr "Доріжки:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Поради щодо вирішення проблем з відтворенням"
 
-#: src/input/r_truehd.h:36 src/output/p_truehd.h:42
+#: src/input/r_truehd.h:41 src/output/p_truehd.h:43
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -11569,6 +11503,64 @@ msgstr "Так"
 #~ "\n"
 #~ "Допомога надається у вигляді підказок, в меню\n"
 #~ "'Довідка' або після натиснення 'F1'."
+
+#~ msgid "'--append-mode' lacks its argument.\n"
+#~ msgstr "'--append-mode' не містить власного аргументу.\n"
+
+#~ msgid "'--append-to' lacks its argument.\n"
+#~ msgstr "'--append-to' не містить власного аргументу.\n"
+
+#~ msgid "'--blockadd' lacks its argument.\n"
+#~ msgstr "'--blockadd' не містить власного аргументу.\n"
+
+#~ msgid "'--compression' lacks its argument.\n"
+#~ msgstr "'--compression' не містить власного аргументу.\n"
+
+#~ msgid "'--cues' lacks its argument.\n"
+#~ msgstr "'--cues' не містить власного аргументу.\n"
+
+#~ msgid "'--default-duration' lacks its argument.\n"
+#~ msgstr "'--default-duration' не містить власного аргументу.\n"
+
+#~ msgid "'--default-language' lacks its argument.\n"
+#~ msgstr "'--default-language' не містить власного аргументу.\n"
+
+#~ msgid "'--default-track' lacks its argument.\n"
+#~ msgstr "'--default-track' не містить власного аргументу.\n"
+
+#~ msgid "'--fix-bitstream-timing-information' lacks its argument.\n"
+#~ msgstr ""
+#~ "'--fix-bitstream-timing-information' не містить власного аргументу.\n"
+
+#~ msgid "'--forced-track' lacks its argument.\n"
+#~ msgstr "'--forced-track' не містить власного аргументу.\n"
+
+#~ msgid "'--language' lacks its argument.\n"
+#~ msgstr "'--language' не містить власного аргументу.\n"
+
+#~ msgid "'--nalu-size-length' lacks its argument.\n"
+#~ msgstr "'--nalu-size-length' не містить власного аргументу.\n"
+
+#~ msgid "'--priority' lacks its argument.\n"
+#~ msgstr "'--priority' не містить власного аргументу.\n"
+
+#~ msgid "'--stereo-mode' lacks its argument.\n"
+#~ msgstr "'--stereo-mode' не містить власного аргументу.\n"
+
+#~ msgid "'--sub-charset' lacks its argument.\n"
+#~ msgstr "'--sub-charset' не містить власного аргументу.\n"
+
+#~ msgid "'--timecode-scale' lacks its argument.\n"
+#~ msgstr "'--timecode-scale' не містить власного аргументу.\n"
+
+#~ msgid "'--timecodes' lacks its argument.\n"
+#~ msgstr "'--timecodes' не містить власного аргументу.\n"
+
+#~ msgid "'--track-name' lacks its argument.\n"
+#~ msgstr "'--track-name' не містить власного аргументу.\n"
+
+#~ msgid "'--track-order' lacks its argument.\n"
+#~ msgstr "'--track-order' не містить власного аргументу.\n"
 
 #~ msgid "(Unknown element: %1%)"
 #~ msgstr "(Невідомий елемент: %1%)"
