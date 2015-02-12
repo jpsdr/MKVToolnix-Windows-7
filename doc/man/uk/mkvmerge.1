@@ -3,11 +3,11 @@
 .\"    Author: Moritz Bunkus <moritz@bunkus.org>
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
 .\"      Date: 2015-02-08
-.\"    Manual: Користувацькі команди
+.\"    Manual: User Commands
 .\"    Source: MKVToolNix 7.6.0
-.\"  Language: Ukrainian
+.\"  Language: English
 .\"
-.TH "mkvmerge" "1" "2015\-02\-08" "MKVToolNix 7\&.6\&.0" "Користувацькі команди"
+.TH "MKVMERGE" "1" "2015\-02\-08" "MKVToolNix 7\&.6\&.0" "User Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -27,12 +27,12 @@
 .\" -----------------------------------------------------------------
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
-.SH "НАЗВА"
+.SH "NAME"
 mkvmerge \- Merge multimedia streams into a Matroska(TM) file
-.SH "КОРОТКИЙ ОПИС"
+.SH "SYNOPSIS"
 .HP \w'\fBmkvmerge\fR\ 'u
 \fBmkvmerge\fR [global\ options] {\-o\ out} [options1] {file1} [[options2]\ {file2}] [@optionsfile]
-.SH "ОПИС"
+.SH "DESCRIPTION"
 .PP
 This program takes the input from several media files and joins their streams (all of them or just a selection) into a
 Matroska(TM)
@@ -47,7 +47,7 @@ file; see
 .nr an-break-flag 1
 .br
 .ps +1
-\fBВажливо\fR
+\fBImportant\fR
 .ps -1
 .br
 .PP
@@ -56,7 +56,7 @@ The order of command line options is important\&. Please read the section
 if you\*(Aqre new to the program\&.
 .sp .5v
 .RE
-.SS "Загальні опції"
+.SS "Global options"
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
 .RS 4
@@ -356,7 +356,7 @@ supports four different modes\&.
 .\}
 Splitting by size\&.
 .sp
-Синтаксис:
+Syntax:
 \fB\-\-split\fR[size:]\fId\fR[k|m|g]
 .sp
 Examples:
@@ -416,7 +416,7 @@ The \*(Aqduration:\*(Aq prefix may be omitted for compatibility reasons\&.
 .\}
 Splitting after specific timecodes\&.
 .sp
-Синтаксис:
+Syntax:
 \fB\-\-split\fRtimecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Example:
@@ -441,7 +441,7 @@ The \*(Aqtimecodes:\*(Aq prefix must not be omitted\&.
 .\}
 Keeping specific parts by specifying timecode ranges while discarding others\&.
 .sp
-Синтаксис:
+Syntax:
 \fB\-\-split\fRparts:\fIstart1\fR\-\fIend1\fR[,[+]\fIstart2\fR\-\fIend2\fR[,[+]\fIstart3\fR\-\fIend3\fR\&.\&.\&.]]
 .sp
 Examples:
@@ -540,7 +540,7 @@ until the end of the source files\&.
 .nr an-break-flag 1
 .br
 .ps +1
-\fBПримітка\fR
+\fBNote\fR
 .ps -1
 .br
 Note that
@@ -562,7 +562,7 @@ will continue outputting the frames up to but excluding the following key frame\
 .\}
 Keeping specific parts by specifying frame/field number ranges while discarding others\&.
 .sp
-Синтаксис:
+Syntax:
 \fB\-\-split\fRparts\-frames:\fIstart1\fR\-\fIend1\fR[,[+]\fIstart2\fR\-\fIend2\fR[,[+]\fIstart3\fR\-\fIend3\fR\&.\&.\&.]]
 .sp
 Examples:
@@ -627,7 +627,7 @@ not to create a new file and instead append the range to the same file the previ
 .nr an-break-flag 1
 .br
 .ps +1
-\fBПримітка\fR
+\fBNote\fR
 .ps -1
 .br
 Note that
@@ -675,7 +675,7 @@ This mode considers only the first video track that is output\&. If no video tra
 .nr an-break-flag 1
 .br
 .ps +1
-\fBПримітка\fR
+\fBNote\fR
 .ps -1
 .br
 The numbers given with this argument are interpreted based on the number of
@@ -699,7 +699,7 @@ block contains either a full frame (for progressive content) or a single field (
 .\}
 Splitting after specific frames/fields\&.
 .sp
-Синтаксис:
+Syntax:
 \fB\-\-split\fRframes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Example:
@@ -723,7 +723,7 @@ This mode considers only the first video track that is output\&. If no video tra
 .nr an-break-flag 1
 .br
 .ps +1
-\fBПримітка\fR
+\fBNote\fR
 .ps -1
 .br
 The numbers given with this argument are interpreted based on the number of
@@ -747,7 +747,7 @@ block contains either a full frame (for progressive content) or a single field (
 .\}
 Splitting before specific chapters\&.
 .sp
-Синтаксис:
+Syntax:
 \fB\-\-split\fRchapters:all
 or
 \fB\-\-split\fRchapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
@@ -775,7 +775,7 @@ The \*(Aqchapters:\*(Aq prefix must not be omitted\&.
 .nr an-break-flag 1
 .br
 .ps +1
-\fBПримітка\fR
+\fBNote\fR
 .ps -1
 .br
 The
@@ -1310,7 +1310,9 @@ copies both the core and the extensions\&.
 .sp
 Currently only
 DTS
-tracks are affected by this option\&. TrueHD tracks that contain an embedded AC3 core are instead presented as two separate tracks for which the user can select which track to copy\&. For
+tracks are affected by this option\&. TrueHD tracks that contain an embedded
+AC3
+core are instead presented as two separate tracks for which the user can select which track to copy\&. For
 DTS
 such a scheme would not work as the HD extensions cannot be decoded by themselves \(en unlike the TrueHD data\&.
 .sp
@@ -1360,7 +1362,7 @@ does not change the timing information (frame/field rate) stored in the video bi
 .nr an-break-flag 1
 .br
 .ps +1
-\fBПримітка\fR
+\fBNote\fR
 .ps -1
 .br
 This has only been implemented for AVC/h\&.264 video tracks so far\&.
@@ -1539,7 +1541,7 @@ and
 .PP
 \fB\-\-output\-charset\fR \fIcharacter\-set\fR
 .RS 4
-Встановлює вихідний набір символів заданого в командному рядку для конвертації\&. Типово використовується набір символів згідно поточної локалі системи\&.
+Sets the character set to which strings are converted that are to be output\&. It defaults to the character set given by system\*(Aqs current locale\&.
 .RE
 .PP
 \fB\-r\fR, \fB\-\-redirect\-output\fR \fIfile\-name\fR
@@ -1646,30 +1648,30 @@ Matroska(TM)\&.
 .PP
 \fB\-h\fR, \fB\-\-help\fR
 .RS 4
-Відображається інформація про використання додатку і відбувається завершення роботи додатку\&.
+Show usage information and exit\&.
 .RE
 .PP
 \fB\-V\fR, \fB\-\-version\fR
 .RS 4
-Відображається інформація про версію додатку і відбувається завершення роботи додатку\&.
+Show version information and exit\&.
 .RE
 .PP
 \fB\-\-check\-for\-updates\fR
 .RS 4
-Відбувається перевірка на наявність нової версії шляхом завантаження з URL
-\m[blue]\fBhttp://mkvtoolnix\-releases\&.bunkus\&.org/latest\-release\&.xml\fR\m[]\&. Буде відображено чотири рядка у
+Checks online for new releases by downloading the URL
+\m[blue]\fBhttp://mkvtoolnix\-releases\&.bunkus\&.org/latest\-release\&.xml\fR\m[]\&. Four lines will be output in
 key=value
-стилі: URL, звідки отримана інформація (key
-version_check_url), поточна запущена версія (key
-running_version), остання випущена версія (key
-available_version) і URL для завантаження (key
+style: the URL from where the information was retrieved (key
+version_check_url), the currently running version (key
+running_version), the latest release\*(Aqs version (key
+available_version) and the download URL (key
 download_url)\&.
 .sp
-Після чого додаток завершує роботу з кодом повернення 0, якщо немає нової версії, і з кодом 2, якщо виникла помилка (наприклад, коли не було отримано інформації про оновлення взагалі)\&.
+Afterwards the program exists with an exit code of 0 if no newer release is available, with 1 if a newer release is available and with 2 if an error occured (e\&.g\&. if the update information could not be retrieved)\&.
 .sp
-Дана опція наявна лише тоді, коли додаток компілювався з підтримкою libcurl\&.
+This option is only available if the program was built with support for libcurl\&.
 .RE
-.SH "Usage"
+.SH "USAGE"
 .PP
 For each file the user can select which tracks
 \fBmkvmerge\fR(1)
@@ -1686,7 +1688,7 @@ option\&.
 .nr an-break-flag 1
 .br
 .ps +1
-\fBВажливо\fR
+\fBImportant\fR
 .ps -1
 .br
 .PP
@@ -1695,7 +1697,7 @@ The order of command line options is important\&. Please read the section
 if you\*(Aqre new to the program\&.
 .sp .5v
 .RE
-.SH "Option order"
+.SH "OPTION ORDER"
 .PP
 The order in which options are entered is important for some options\&. Options fall into two categories:
 .sp
@@ -1751,12 +1753,12 @@ option twice is OK because they\*(Aqre used in different scopes\&. Even though t
 .RS 4
 .\}
 .nf
-$ mkvmerge \-o output\&.mkv \-\-language 0:fre fran\(,cais\&.ogg \-\-language 0:deu deutsch\&.ogg
+$ mkvmerge \-o output\&.mkv \-\-language 0:fre français\&.ogg \-\-language 0:deu deutsch\&.ogg
 .fi
 .if n \{\
 .RE
 .\}
-.SH "Examples"
+.SH "EXAMPLES"
 .PP
 Let\*(Aqs assume you have a file called MyMovie\&.avi and the audio track in a separate file, e\&.g\&. \*(AqMyMovie\&.wav\*(Aq\&. First you want to encode the audio to
 OggVorbis(TM):
@@ -2044,7 +2046,7 @@ $ mkvmerge \-o no\-compression\&.mkv \-\-compression \-1:none MyMovie\&.avi \-\-
 .if n \{\
 .RE
 .\}
-.SH "Track IDs"
+.SH "TRACK IDS"
 .PP
 Some of the options for
 \fBmkvmerge\fR(1)
@@ -2122,7 +2124,7 @@ The options that use the track IDs are the ones whose description contains \*(Aq
 \fB\-\-button\-tracks\fR
 and
 \fB\-\-track\-tags\fR\&.
-.SH "Text files and character set conversions"
+.SH "TEXT FILES AND CHARACTER SET CONVERSIONS"
 .if n \{\
 .sp
 .\}
@@ -2132,7 +2134,7 @@ and
 .nr an-break-flag 1
 .br
 .ps +1
-\fBПримітка\fR
+\fBNote\fR
 .ps -1
 .br
 .PP
@@ -2215,7 +2217,7 @@ is used and the option
 \fB\-\-output\-charset\fR
 is ignored\&. The console should be able to output all Unicode characters for which the corresponding language support is installed (e\&.g\&. Chinese characters might not be displayed on English Windows versions)\&.
 .RE
-.SS "Опції командного рядка"
+.SS "Command line options"
 .PP
 The following options exist that allow specifying the character sets:
 .sp
@@ -2273,7 +2275,7 @@ and with
 itself, e\&.g\&.
 mkvinfo file\&.mkv > info\&.txt\&.
 .RE
-.SH "Option files"
+.SH "OPTION FILES"
 .PP
 An option file is a file
 \fBmkvmerge\fR(1)
@@ -2308,12 +2310,12 @@ sound\&.ogg
 .if n \{\
 .RE
 .\}
-.SH "ВИОКРЕМЛЕННЯ СПЕЦІАЛЬНИХ СИМВОЛІВ У ТЕКСТІ"
+.SH "ESCAPING SPECIAL CHARS IN TEXT"
 .PP
-Є декілька місць, де спеціальні символи у тексті мають або повинні бути виокремлені\&. Правила для виокремлювання прості: кожен символ, що потребує виокремлення, замінюється на зворотній слеш з деяким символом, що йде після нього\&.
+There are a few places in which special characters in text must or should be escaped\&. The rules for escaping are simple: each character that needs escaping is replaced with a backslash followed by another character\&.
 .PP
 The rules are: \*(Aq \*(Aq (a space) becomes \*(Aq\es\*(Aq, \*(Aq"\*(Aq (double quotes) becomes \*(Aq\e2\*(Aq, \*(Aq:\*(Aq becomes \*(Aq\ec\*(Aq, \*(Aq#\*(Aq becomes \*(Aq\eh\*(Aq and \*(Aq\e\*(Aq (a single backslash) itself becomes \*(Aq\e\e\*(Aq\&.
-.SH "Subtitles"
+.SH "SUBTITLES"
 .PP
 There are several text and bitmap subtitle formats that can be embedded into
 Matroska(TM)\&. Text subtitles must be recoded to UTF\-8 so that they can be displayed correctly by a player (see the section about
@@ -2389,7 +2391,7 @@ VobSub bitmap subtitle files
 .\}
 PGS bitmap subtitle files as found on BluRay discs
 .RE
-.SH "File linking"
+.SH "FILE LINKING"
 .PP
 Matroska(TM)
 supports file linking which simply says that a specific file is the predecessor or successor of the current file\&. To be precise, it\*(Aqs not really the files that are linked but the
@@ -2441,7 +2443,7 @@ SID
 given with
 \fB\-\-link\-to\-next\fR\&. If splitting is not used then the one output file will be linked to both of the two
 SIDs\&.
-.SH "Default values"
+.SH "DEFAULT VALUES"
 .PP
 The
 Matroska(TM)
@@ -2459,7 +2461,7 @@ is
 \fB\-\-language 0:eng\fR
 for a track then it will not show up in
 \fBmkvinfo\fR(1)\*(Aqs output\&.
-.SH "ВКЛАДЕННЯ"
+.SH "ATTACHMENTS"
 .PP
 Maybe you also want to keep some photos along with your
 Matroska(TM)
@@ -2500,7 +2502,7 @@ will copy the attachments into the new file\&. The selection which attachments a
 \fB\-\-attachments\fR
 and
 \fB\-\-no\-attachments\fR\&.
-.SH "РОЗДІЛИ"
+.SH "CHAPTERS"
 .PP
 The
 Matroska(TM)
@@ -2685,7 +2687,7 @@ ChapterEdition\&. If such a merge is desired in other situations as well then th
 first, merge the
 XML
 files manually and mux them afterwards\&.
-.SH "ТЕГИ"
+.SH "TAGS"
 .SS "Introduction"
 .PP
 Matroska(TM)
@@ -2867,7 +2869,7 @@ Tags (master)
 .if n \{\
 .RE
 .\}
-.SH "The segment info XML files"
+.SH "THE SEGMENT INFO XML FILES"
 .PP
 With a segment info XML file it is possible to set certain values in the "segment information" header field of a
 Matroska(TM)
@@ -2911,7 +2913,7 @@ Info (master)
 .if n \{\
 .RE
 .\}
-.SH "Matroska(TM) file layout"
+.SH "MATROSKA(TM) FILE LAYOUT"
 .PP
 The
 Matroska(TM)
@@ -2954,7 +2956,7 @@ file would look like this:
 [EBML head] [segment [segment information] [track information] [cluster 1]]
 .PP
 This might be the case for audio\-only files\&.
-.SH "External timecode files"
+.SH "EXTERNAL TIMECODE FILES"
 .PP
 \fBmkvmerge\fR(1)
 allows the user to chose the timecodes for a specific track himself\&. This can be used in order to create files with variable frame rate video or include gaps in audio\&. A frame in this case is the unit that
@@ -3043,7 +3045,7 @@ gap, 10\&.050
 .SS "Timecode file format v4"
 .PP
 This format is identical to the v2 format\&. The only difference is that the timecodes do not have to be sorted\&. This format should almost never be used\&.
-.SH "КОДИ ЗАВЕРШЕННЯ"
+.SH "EXIT CODES"
 .PP
 \fBmkvmerge\fR(1)
 exits with one of three exit codes:
@@ -3087,7 +3089,7 @@ has output at least one warning, but muxing did continue\&. A warning is prefixe
 \fBmkvmerge\fR(1)
 aborts right after outputting the error message\&. Error messages range from wrong command line arguments over read/write errors to broken files\&.
 .RE
-.SH "Environment variables"
+.SH "ENVIRONMENT VARIABLES"
 .PP
 \fBmkvmerge\fR(1)
 uses the default variables that determine the system\*(Aqs locale (e\&.g\&.
@@ -3115,7 +3117,7 @@ option\&.
 The content is split on white space\&. The resulting partial strings are treated as if it had been passed as command line options\&. If you need to pass special characters (e\&.g\&. spaces) then you have to escape them (see
 the section about escaping special characters in text)\&.
 .RE
-.SH "ДИВІТЬСЯ ТАКОЖ"
+.SH "SEE ALSO"
 .PP
 \fBmkvinfo\fR(1),
 \fBmkvextract\fR(1),
@@ -3123,15 +3125,15 @@ the section about escaping special characters in text)\&.
 \fBmmg\fR(1)
 .SH "WWW"
 .PP
-Остання версія завжди може бути знайдена на веб\-сторінці
+The latest version can always be found at
 \m[blue]\fBthe MKVToolNix homepage\fR\m[]\&\s-2\u[4]\d\s+2\&.
-.SH "АВТОР"
+.SH "AUTHOR"
 .PP
 \fBMoritz Bunkus\fR <\&moritz@bunkus\&.org\&>
 .RS 4
-Розробник
+Developer
 .RE
-.SH "ПРИМІТКИ"
+.SH "NOTES"
 .IP " 1." 4
 the Matroska(TM) website
 .RS 4

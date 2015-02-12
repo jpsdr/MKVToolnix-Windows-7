@@ -75,7 +75,7 @@ schreibt in die Datei
 .PP
 \fB\-w\fR, \fB\-\-webm\fR
 .RS 4
-Create a WebM compliant file\&. This is also turned on if the output file name\*(Aqs extension is "webm"\&. This mode enforces several restrictions\&. The only allowed codecs are VP8, VP9 video and Opus, Vorbis audio tracks\&. Neither chapters nor tags are allowed\&. The DocType header item is changed to "webm"\&.
+erstellt eine WebM\-konforme Datei\&. Dies wird auch eingeschaltet, falls die Namensendung der Ausgabedatei \(Fcwebm\(Fo ist\&. Dieser Modus erzwingt mehrere Einschr\(:ankungen\&. Die einzigen erlauben Codecs sind VP8\-, VP9\-Video und Opus\-, Vorbis\-Tonspuren\&. Weder Kapitel noch Tags sind erlaubt\&. Das Kopfelement DocType wird in \(Fcwebm\(Fo ge\(:andert\&.
 .RE
 .PP
 \fB\-\-title\fR \fITitel\fR
@@ -1280,17 +1280,17 @@ ist, k\(:onnen Sie \(Fc:0\(Fo zur Spur\-ID hinzuf\(:ugen\&.
 .PP
 \fB\-\-reduce\-to\-core\fR \fITID\fR
 .RS 4
-Some audio codecs have a lossy core and optional extensions that implement lossless decoding\&. This option tells
+Einige Audio\-Codecs enthalten einen verlustbehafteten Kern und implementieren verlustfreies Decodieren durch Erweiterungen\&. Diese Option weist
 \fBmkvmerge\fR(1)
-to only copy the core but not the extensions\&. By default
+an, nur den Kern zu kopieren, nicht aber die Erweiterungen\&. Standardm\(:a\(ssig kopiert
 \fBmkvmerge\fR(1)
-copies both the core and the extensions\&.
+sowohl den Kern als auch die Erweiterungen\&.
 .sp
-Currently only
+Momentan werden nur
+DTS\-Spuren von dieser Option beeinflusst\&. TrueHD\-Spuren, die einen eingebetteten
+AC3\-Kern enthalten, werden statt dessen als zwei einzelne Spuren pr\(:asentiert, f\(:ur die der Anwender separat entscheiden kann, welche kopiert werden sollen\&. Bei
 DTS
-tracks are affected by this option\&. TrueHD tracks that contain an embedded AC3 core are instead presented as two separate tracks for which the user can select which track to copy\&. For
-DTS
-such a scheme would not work as the HD extensions cannot be decoded by themselves \(en unlike the TrueHD data\&.
+w\(:urde das nicht funktionen, da HD\-Erweiterungen nicht alleinstehend decodiert werden k\(:onnen \(en anders als bei TrueHD\-Daten\&.
 .sp
 Falls
 \fBmkvmerge\fR(1)
