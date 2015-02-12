@@ -1877,7 +1877,7 @@ parse_args(std::vector<std::string> args) {
     // Global options
     if ((this_arg == "--priority")) {
       if (no_next_arg)
-        mxerror(Y("'--priority' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_priority(next_arg);
       sit++;
@@ -2069,7 +2069,7 @@ parse_args(std::vector<std::string> args) {
 
     } else if (this_arg == "--timecode-scale") {
       if (no_next_arg)
-        mxerror(Y("'--timecode-scale' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_timecode_scale(next_arg);
       sit++;
@@ -2163,7 +2163,7 @@ parse_args(std::vector<std::string> args) {
 
     } else if (this_arg == "--stereo-mode") {
       if (no_next_arg)
-        mxerror(Y("'--stereo-mode' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_stereo_mode(next_arg, *ti);
       sit++;
@@ -2177,42 +2177,42 @@ parse_args(std::vector<std::string> args) {
 
     } else if (this_arg == "--cues") {
       if (no_next_arg)
-        mxerror(Y("'--cues' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_cues(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--default-track") {
       if (no_next_arg)
-        mxerror(Y("'--default-track' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_default_track(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--forced-track") {
       if (no_next_arg)
-        mxerror(Y("'--forced-track' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_forced_track(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--language") {
       if (no_next_arg)
-        mxerror(Y("'--language' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_language(next_arg, ti->m_languages, "language", "language", true);
       sit++;
 
     } else if (this_arg == "--default-language") {
       if (no_next_arg)
-        mxerror(Y("'--default-language' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_default_language(next_arg);
       sit++;
 
     } else if ((this_arg == "--sub-charset") || (this_arg == "--subtitle-charset")) {
       if (no_next_arg)
-        mxerror(Y("'--sub-charset' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_sub_charset(next_arg, *ti);
       sit++;
@@ -2233,35 +2233,35 @@ parse_args(std::vector<std::string> args) {
 
     } else if (this_arg == "--compression") {
       if (no_next_arg)
-        mxerror(Y("'--compression' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_compression(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--blockadd") {
       if (no_next_arg)
-        mxerror(Y("'--blockadd' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_max_blockadd_id(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--track-name") {
       if (no_next_arg)
-        mxerror(Y("'--track-name' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_language(next_arg, ti->m_track_names, "track-name", Y("track name"), false, true);
       sit++;
 
     } else if (this_arg == "--timecodes") {
       if (no_next_arg)
-        mxerror(Y("'--timecodes' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_language(next_arg, ti->m_all_ext_timecodes, "timecodes", Y("timecodes"), false);
       sit++;
 
     } else if (this_arg == "--track-order") {
       if (no_next_arg)
-        mxerror(Y("'--track-order' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       if (!g_track_order.empty())
         mxerror(Y("'--track-order' may only be given once.\n"));
@@ -2271,35 +2271,35 @@ parse_args(std::vector<std::string> args) {
 
     } else if (this_arg == "--append-to") {
       if (no_next_arg)
-        mxerror(Y("'--append-to' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_append_to(next_arg);
       sit++;
 
     } else if (this_arg == "--append-mode") {
       if (no_next_arg)
-        mxerror(Y("'--append-mode' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_append_mode(next_arg);
       sit++;
 
     } else if (this_arg == "--default-duration") {
       if (no_next_arg)
-        mxerror(Y("'--default-duration' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_default_duration(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--nalu-size-length") {
       if (no_next_arg)
-        mxerror(Y("'--nalu-size-length' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_nalu_size_length(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--fix-bitstream-timing-information") {
       if (no_next_arg)
-        mxerror(Y("'--fix-bitstream-timing-information' lacks its argument.\n"));
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_fix_bitstream_frame_rate(next_arg, *ti);
       sit++;
