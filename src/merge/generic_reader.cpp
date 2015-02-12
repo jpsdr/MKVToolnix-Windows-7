@@ -59,6 +59,7 @@ generic_reader_c::generic_reader_c(const track_info_c &ti,
   add_all_requested_track_ids(std::string,          m_track_names);
   add_all_requested_track_ids(std::string,          m_all_ext_timecodes);
   add_all_requested_track_ids(pixel_crop_t,         m_pixel_crop_list);
+  add_all_requested_track_ids(bool,                 m_reduce_to_core);
 }
 
 generic_reader_c::~generic_reader_c() {

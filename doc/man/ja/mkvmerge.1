@@ -985,6 +985,23 @@ AACファイルがSBR AACデータを含む場合に必要です。このスイ�
 もし、mkvmergeがAACファイルを間違ってSBRと認識してしまった場合、トラックIDに\*(Aq:0\*(Aqを指定できます。
 .RE
 .PP
+\fB\-\-reduce\-to\-core\fR \fITID\fR
+.RS 4
+Some audio codecs have a lossy core and optional extensions that implement lossless decoding\&. This option tells
+\fBmkvmerge\fR(1)
+to only copy the core but not the extensions\&. By default
+\fBmkvmerge\fR(1)
+copies both the core and the extensions\&.
+.sp
+Currently only
+DTS
+tracks are affected by this option\&. TrueHD tracks that contain an embedded AC3 core are instead presented as two separate tracks for which the user can select which track to copy\&. For
+DTS
+such a scheme would not work as the HD extensions cannot be decoded by themselves \(en unlike the TrueHD data\&.
+.sp
+もし、mkvmergeがAACファイルを間違ってSBRと認識してしまった場合、トラックIDに\*(Aq:0\*(Aqを指定できます。
+.RE
+.PP
 \fB\-\-timecodes\fR \fITID:file\-name\fR
 .RS 4
 指定したトラックIDのタイムコードを、\fIfile\-name\fRから読み込みます。これらのタイムコードは\fBmkvmerge\fR(1)が通常計算するタイムコードを強制的に上書きします。外部タイムコードファイルのセクションを参照してください。

@@ -1283,6 +1283,27 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
     </varlistentry>
 
     <varlistentry>
+     <term><option>--reduce-to-core</option> <parameter>TID</parameter></term>
+     <listitem>
+      <para>
+       Some audio codecs have a lossy core and optional extensions that implement lossless decoding. This option tells &mkvmerge; to only
+       copy the core but not the extensions. By default &mkvmerge; copies both the core and the extensions.
+      </para>
+
+      <para>
+       Currently only <abbrev>DTS</abbrev> tracks are affected by this option. TrueHD tracks that contain an embedded <abbrev>AC3</abbrev>
+       core are instead presented as two separate tracks for which the user can select which track to copy. For <abbrev>DTS</abbrev> such a
+       scheme would not work as the HD extensions cannot be decoded by themselves – unlike the TrueHD data.
+      </para>
+
+      <para>
+       If mkvmerge wrongfully detects that an <abbrev>AAC</abbrev> file is <abbrev>SBR</abbrev> then you can add
+       '<literal>:0</literal>' to the track ID.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
      <term><option>--timecodes</option> <parameter>TID:file-name</parameter></term>
      <listitem>
       <para>

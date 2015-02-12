@@ -31,6 +31,7 @@ dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
   , m_first_header(dtsheader)
   , m_previous_header(dtsheader)
   , m_skipping_is_normal(false)
+  , m_reduce_to_core{get_option_for_track(m_ti.m_reduce_to_core, m_ti.m_id)}
 {
   set_track_type(track_audio);
 }
@@ -83,6 +84,11 @@ dts_packetizer_c::get_dts_packet(dts_header_t &dtsheader,
 
     if (!all_zeroes)
       mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n")) % pos);
+  }
+
+  if (m_reduce_to_core && dtsheader.dts_hd && (dtsheader.hd_part_size > 0) && (dtsheader.hd_part_size < static_cast<int>(dtsheader.frame_byte_size))) {
+    dtsheader.frame_byte_size -= dtsheader.hd_part_size;
+    dtsheader.dts_hd           = false;
   }
 
   unsigned char *packet_buf = (unsigned char *)safememdup(buf + pos, dtsheader.frame_byte_size);

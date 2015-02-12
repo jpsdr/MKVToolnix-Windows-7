@@ -221,6 +221,9 @@ set_usage() {
                   "                           code, see --list-languages).\n");
   usage_text += Y("  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
                   "                           or not. The value ':1' can be omitted.\n");
+  usage_text += Y("  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
+                  "                           HD extensions instead of copying both the core\n"
+                  "                           and the extensions.\n");
   usage_text += Y("  --timecodes <TID:file>   Read the timecodes to be used from a file.\n");
   usage_text += Y("  --default-duration <TID:Xs|ms|us|ns|fps>\n"
                   "                           Force the default duration of a track to X.\n"
@@ -1379,6 +1382,16 @@ parse_arg_fix_bitstream_frame_rate(const std::string &s,
   ti.m_fix_bitstream_frame_rate_flags[id] = fix;
 }
 
+static void
+parse_arg_reduce_to_core(const std::string &s,
+                         track_info_c &ti) {
+  int64_t id = 0;
+
+  if (!parse_number(s, id))
+    mxerror(boost::format(Y("Invalid track ID specified in '%1% %2%'.\n")) % "--reduce-to-core" % s);
+
+  ti.m_reduce_to_core[id] = true;
+}
 
 /** \brief Parse the argument for \c --blockadd
 
@@ -2302,6 +2315,13 @@ parse_args(std::vector<std::string> args) {
         mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
 
       parse_arg_fix_bitstream_frame_rate(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--reduce-to-core") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % this_arg);
+
+      parse_arg_reduce_to_core(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "+")

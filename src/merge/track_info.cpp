@@ -88,6 +88,8 @@ track_info_c::operator =(const track_info_c &src) {
   m_forced_track_flags         = src.m_forced_track_flags;
   m_forced_track               = src.m_forced_track;
 
+  m_reduce_to_core             = src.m_reduce_to_core;
+
   m_enabled_track_flags        = src.m_enabled_track_flags;
   m_enabled_track              = src.m_enabled_track;
 

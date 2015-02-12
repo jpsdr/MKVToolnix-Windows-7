@@ -28,7 +28,7 @@ private:
   byte_buffer_c m_packet_buffer;
 
   dts_header_t m_first_header, m_previous_header;
-  bool m_skipping_is_normal;
+  bool m_skipping_is_normal, m_reduce_to_core;
 
   std::deque<int64_t> m_available_timecodes;
 

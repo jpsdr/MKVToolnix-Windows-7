@@ -184,6 +184,8 @@ public:
 
   item_selector_c<attach_mode_e> m_attach_mode_list; // As given on the command line
 
+  std::map<int64_t, bool> m_reduce_to_core;
+
   bool m_no_chapters, m_no_global_tags;
 
   // Some file formats can contain chapters, but for some the charset
@@ -208,5 +210,23 @@ public:
   track_info_c &operator =(const track_info_c &src);
   virtual bool display_dimensions_or_aspect_ratio_set();
 };
+
+template<typename T>
+typename T::mapped_type
+get_option_for_track(T const &options,
+                     int64_t track_id,
+                     typename T::mapped_type const &default_value = typename T::mapped_type{}) {
+  auto end = options.end();
+  auto itr = options.find(track_id);
+
+  if (itr != end)
+    return itr->second;
+
+  itr = options.find(-1ll);
+  if (itr != end)
+    return itr->second;
+
+  return default_value;
+}
 
 #endif  // MTX_MERGE_TRACK_INFO_H
