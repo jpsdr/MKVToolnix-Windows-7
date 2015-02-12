@@ -32,6 +32,7 @@
 #include "input/aac_framing_packet_converter.h"
 #include "input/r_mpeg_ts.h"
 #include "input/teletext_to_srt_packet_converter.h"
+#include "input/truehd_ac3_splitting_packet_converter.h"
 #include "output/p_aac.h"
 #include "output/p_ac3.h"
 #include "output/p_avc.h"
@@ -327,22 +328,41 @@ mpeg_ts_track_c::new_stream_a_truehd() {
   m_truehd_parser->add_data(pes_payload->get_buffer(), pes_payload->get_size());
   pes_payload->remove(pes_payload->get_size());
 
-  while (m_truehd_parser->frame_available()) {
-    truehd_frame_cptr frame = m_truehd_parser->get_next_frame();
-    if (truehd_frame_t::sync != frame->m_type)
+  while (m_truehd_parser->frame_available() && (!m_truehd_found_truehd || !m_truehd_found_ac3)) {
+    auto frame = m_truehd_parser->get_next_frame();
+
+    if (frame->is_ac3()) {
+      if (!m_truehd_found_ac3) {
+        m_truehd_found_ac3 = true;
+        auto &header       = frame->m_ac3_header;
+
+        mxdebug_if(m_debug_headers,
+                   boost::format("mpeg_ts_track_c::new_stream_a_truehd: first AC3 header bsid %1% channels %2% sample_rate %3% bytes %4% samples %5%\n")
+                   % header.m_bs_id % header.m_channels % header.m_sample_rate % header.m_bytes % header.m_samples);
+
+        m_coupled_track->a_channels    = header.m_channels;
+        m_coupled_track->a_sample_rate = header.m_sample_rate;
+        m_coupled_track->a_bsid        = header.m_bs_id;
+        m_coupled_track->probed_ok     = true;
+      }
+
+      continue;
+
+    }
+
+    if (!frame->is_sync())
       continue;
 
     mxdebug_if(m_debug_headers,
-               boost::format("mpeg_ts_track_c::new_stream_a_truehdfirst TrueHD header channels %1% sampling_rate %2% samples_per_frame %3%\n")
+               boost::format("mpeg_ts_track_c::new_stream_a_truehd: first TrueHD header channels %1% sampling_rate %2% samples_per_frame %3%\n")
                % frame->m_channels % frame->m_sampling_rate % frame->m_samples_per_frame);
 
-    a_channels    = frame->m_channels;
-    a_sample_rate = frame->m_sampling_rate;
-
-    return 0;
+    a_channels            = frame->m_channels;
+    a_sample_rate         = frame->m_sampling_rate;
+    m_truehd_found_truehd = true;
   }
 
-  return FILE_STATUS_MOREDATA;
+  return m_truehd_found_truehd && m_truehd_found_ac3 ? 0 : FILE_STATUS_MOREDATA;
 }
 
 void
@@ -697,16 +717,28 @@ mpeg_ts_reader_c::read_headers() {
 
   m_in->setFilePointer(0, seek_beginning); // rewind file for later remux
 
+  parse_clip_info_file();
+  process_chapter_entries();
+
   for (auto &track : tracks) {
     track->pes_payload->remove(track->pes_payload->get_size());
     track->processed        = false;
     track->data_ready       = false;
     track->pes_payload_size = 0;
     // track->timecode_offset = -1;
-  }
 
-  parse_clip_info_file();
-  process_chapter_entries();
+    if (track->m_coupled_track)
+      track->m_coupled_track->language = track->language;
+
+    // For TrueHD tracks detection for embedded AC3 frames is
+    // done. However, »probed_ok« is only set on the TrueHD track if
+    // both types have been found. If only TrueHD is found then
+    // »probed_ok« must be set to true after detection has exhausted
+    // the search space; otherwise a TrueHD-only track would never be
+    // considered OK.
+    if (track->codec.is(codec_c::A_TRUEHD) && track->m_truehd_found_truehd)
+      track->probed_ok = true;
+  }
 
   show_demuxer_info();
 }
@@ -984,14 +1016,26 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
         track->type      = ES_AUDIO_TYPE;
         track->codec     = codec_c::look_up(codec_c::A_PCM);
         break;
+
+      case STREAM_AUDIO_AC3_LOSSLESS: {
+        auto ac3_track         = std::make_shared<mpeg_ts_track_c>(*this);
+        ac3_track->type        = ES_AUDIO_TYPE;
+        ac3_track->codec       = codec_c::look_up(codec_c::A_AC3);
+        ac3_track->converter   = std::make_shared<truehd_ac3_splitting_packet_converter_c>();
+        ac3_track->set_pid(pmt_pid_info->get_pid());
+
+        track->type            = ES_AUDIO_TYPE;
+        track->codec           = codec_c::look_up(codec_c::A_TRUEHD);
+        track->m_coupled_track = ac3_track;
+        track->converter       = ac3_track->converter;
+
+        break;
+      }
+
       case STREAM_AUDIO_AC3:
       case STREAM_AUDIO_AC3_PLUS: // EAC3
         track->type      = ES_AUDIO_TYPE;
         track->codec     = codec_c::look_up(codec_c::A_AC3);
-        break;
-      case STREAM_AUDIO_AC3_LOSSLESS:
-        track->type      = ES_AUDIO_TYPE;
-        track->codec     = codec_c::look_up(codec_c::A_TRUEHD);
         break;
       case STREAM_AUDIO_DTS:
       case STREAM_AUDIO_DTS_HD:
@@ -1058,8 +1102,12 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
       track->processed  = false;
       track->data_ready = false;
       tracks.push_back(track);
-      es_to_process++;
+      ++es_to_process;
 
+      if (track->m_coupled_track) {
+        tracks.push_back(track->m_coupled_track);
+        ++es_to_process;
+      }
     }
 
     mxdebug_if(m_debug_pat_pmt,
@@ -1096,10 +1144,10 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
 
   size_t tidx;
   for (tidx = 0; tracks.size() > tidx; ++tidx)
-    if ((tracks[tidx]->pid == table_pid) && !tracks[tidx]->processed)
+    if ((tracks[tidx]->pid == table_pid) && (m_probing || (-1 != tracks[tidx]->ptzr)))
       break;
 
-  if (tidx >= tracks.size())
+  if ((tidx >= tracks.size()) || tracks[tidx]->processed)
     return false;
 
   unsigned char *ts_payload                 = (unsigned char *)hdr + sizeof(mpeg_ts_packet_header_t);
@@ -1376,14 +1424,13 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
       track->ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, (0 != track->a_sample_rate) && (0 != track->a_channels)));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(codec_c::A_AAC)) {
+    } else if (track->codec.is(codec_c::A_AAC))
       create_aac_audio_packetizer(track);
 
-    } else if (track->codec.is(codec_c::A_AC3)) {
-      track->ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bsid));
-      show_packetizer_info(id, PTZR(track->ptzr));
+    else if (track->codec.is(codec_c::A_AC3))
+      create_ac3_audio_packetizer(track);
 
-    } else if (track->codec.is(codec_c::A_DTS)) {
+    else if (track->codec.is(codec_c::A_DTS)) {
       track->ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, track->a_dts_header));
       show_packetizer_info(id, PTZR(track->ptzr));
 
@@ -1391,10 +1438,8 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
       track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(codec_c::A_TRUEHD)) {
-      track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, truehd_frame_t::truehd, track->a_sample_rate, track->a_channels));
-      show_packetizer_info(id, PTZR(track->ptzr));
-    }
+    } else if (track->codec.is(codec_c::A_TRUEHD))
+      create_truehd_audio_packetizer(track);
 
   } else if (ES_VIDEO_TYPE == track->type) {
     if (track->codec.is(codec_c::V_MPEG12))
@@ -1428,6 +1473,24 @@ mpeg_ts_reader_c::create_aac_audio_packetizer(mpeg_ts_track_ptr const &track) {
   if (AAC_PROFILE_SBR == track->m_aac_frame.m_header.profile)
     aac_packetizer->set_audio_output_sampling_freq(track->m_aac_frame.m_header.sample_rate * 2);
   show_packetizer_info(m_ti.m_id, aac_packetizer);
+}
+
+void
+mpeg_ts_reader_c::create_ac3_audio_packetizer(mpeg_ts_track_ptr const &track) {
+  track->ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bsid));
+  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
+
+  if (track->converter)
+    dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_ac3_packetizer(PTZR(track->ptzr));
+}
+
+void
+mpeg_ts_reader_c::create_truehd_audio_packetizer(mpeg_ts_track_ptr const &track) {
+  track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, truehd_frame_t::truehd, track->a_sample_rate, track->a_channels));
+  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
+
+  if (track->converter)
+    dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_packetizer(PTZR(track->ptzr));
 }
 
 void

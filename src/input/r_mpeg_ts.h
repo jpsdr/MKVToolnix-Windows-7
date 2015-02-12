@@ -261,6 +261,9 @@ struct PACKED_STRUCTURE mpeg_ts_pes_header_t {
 
 class mpeg_ts_reader_c;
 
+class mpeg_ts_track_c;
+typedef std::shared_ptr<mpeg_ts_track_c> mpeg_ts_track_ptr;
+
 class mpeg_ts_track_c {
 public:
   mpeg_ts_reader_c &reader;
@@ -290,7 +293,8 @@ public:
   dts_header_t a_dts_header;
   aac::frame_c m_aac_frame;
 
-  bool m_apply_dts_timecode_fix, m_use_dts, m_timecodes_wrapped;
+  bool m_apply_dts_timecode_fix, m_use_dts, m_timecodes_wrapped, m_truehd_found_truehd, m_truehd_found_ac3;
+  mpeg_ts_track_ptr m_coupled_track;
 
   // general track parameters
   std::string language;
@@ -336,6 +340,8 @@ public:
     , m_apply_dts_timecode_fix(false)
     , m_use_dts(false)
     , m_timecodes_wrapped{false}
+    , m_truehd_found_truehd{}
+    , m_truehd_found_ac3{}
     , skip_packet_data_bytes{}
     , m_debug_delivery{}
     , m_debug_timecode_wrapping{}
@@ -374,8 +380,6 @@ public:
 
   void parse_iso639_language_from(void const *buffer);
 };
-
-typedef std::shared_ptr<mpeg_ts_track_c> mpeg_ts_track_ptr;
 
 class mpeg_ts_reader_c: public generic_reader_c {
 protected:
@@ -438,6 +442,8 @@ private:
   void create_mpegh_p2_es_video_packetizer(mpeg_ts_track_ptr &track);
   void create_vc1_video_packetizer(mpeg_ts_track_ptr &track);
   void create_aac_audio_packetizer(mpeg_ts_track_ptr const &track);
+  void create_ac3_audio_packetizer(mpeg_ts_track_ptr const &track);
+  void create_truehd_audio_packetizer(mpeg_ts_track_ptr const &track);
   void create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track);
   void create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track);
 

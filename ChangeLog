@@ -1,3 +1,11 @@
+2015-02-12  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: new feature: mkvmerge will now recognize TrueHD tracks
+        inside MPEG transport streams that contain an AC3 core as
+        consisting of two tracks. Instead of always dropping the AC3 part
+        the user can simply select which tracks to keep. Part of the
+        implementation of #1107.
+
 2015-02-10  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: new feature: mkvmerge will now recognize TrueHD+AC3
