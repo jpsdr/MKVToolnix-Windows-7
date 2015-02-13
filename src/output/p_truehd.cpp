@@ -15,7 +15,6 @@
 
 #include <matroska/KaxTracks.h>
 
-#include "common/hacks.h"
 #include "common/codec.h"
 #include "common/truehd.h"
 #include "merge/connection_checks.h"
@@ -53,9 +52,6 @@ truehd_packetizer_c::set_headers() {
   set_audio_channels(m_first_truehd_header.m_channels);
 
   generic_packetizer_c::set_headers();
-
-  if (hack_engaged(ENGAGE_MERGE_TRUEHD_FRAMES))
-    m_track_entry->EnableLacing(false);
 }
 
 void
@@ -126,17 +122,6 @@ truehd_packetizer_c::flush_impl() {
 
 void
 truehd_packetizer_c::flush_frames() {
-  if (m_frames.empty())
-    return;
-
-  if (hack_engaged(ENGAGE_MERGE_TRUEHD_FRAMES))
-    flush_frames_merged();
-  else
-    flush_frames_separate();
-}
-
-void
-truehd_packetizer_c::flush_frames_separate() {
   size_t i;
   for (i = 0; m_frames.size() > i; ++i) {
     if (m_frames[i]->is_sync())
@@ -151,36 +136,6 @@ truehd_packetizer_c::flush_frames_separate() {
 
     m_ref_timecode = timecode;
   }
-
-  m_frames.clear();
-}
-
-void
-truehd_packetizer_c::flush_frames_merged() {
-  size_t full_size     = 0;
-  unsigned int samples = 0;
-  size_t i;
-  for (i = 0; m_frames.size() > i; ++i) {
-    if (m_frames[i]->is_sync())
-      m_current_samples_per_frame = m_frames[i]->m_samples_per_frame;
-
-    full_size += m_frames[i]->m_data->get_size();
-    samples   += 0 == m_frames[i]->m_samples_per_frame ? m_current_samples_per_frame : m_frames[i]->m_samples_per_frame;
-  }
-
-  memory_cptr data = memory_c::alloc(full_size);
-
-  unsigned int offset = 0;
-  for (i = 0; m_frames.size() > i; ++i) {
-    memcpy(data->get_buffer() + offset, m_frames[i]->m_data->get_buffer(), m_frames[i]->m_data->get_size());
-    offset += m_frames[i]->m_data->get_size();
-  }
-
-  int64_t timecode  = m_samples_output * m_s2tc;
-  int64_t duration  = samples          * m_s2tc;
-  m_samples_output += samples;
-
-  add_packet(new packet_t(data, timecode, duration));
 
   m_frames.clear();
 }

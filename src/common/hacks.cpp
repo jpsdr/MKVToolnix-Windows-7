@@ -38,7 +38,6 @@ static const struct {
   { ENGAGE_OLD_AAC_CODECID,              "old_aac_codecid"              },
   { ENGAGE_USE_CODEC_STATE_ONLY,         "use_codec_state_only"         },
   { ENGAGE_ENABLE_TIMECODE_WARNING,      "enable_timecode_warning"      },
-  { ENGAGE_MERGE_TRUEHD_FRAMES,          "merge_truehd_frames"          },
   { ENGAGE_REMOVE_BITSTREAM_AR_INFO,     "remove_bitstream_ar_info"     },
   { ENGAGE_VOBSUB_SUBPIC_STOP_CMDS,      "vobsub_subpic_stop_cmds"      },
   { ENGAGE_NO_CUE_DURATION,              "no_cue_duration"              },

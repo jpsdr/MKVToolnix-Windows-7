@@ -33,12 +33,11 @@
 #define ENGAGE_OLD_AAC_CODECID              12
 #define ENGAGE_USE_CODEC_STATE_ONLY         13
 #define ENGAGE_ENABLE_TIMECODE_WARNING      14
-#define ENGAGE_MERGE_TRUEHD_FRAMES          15
-#define ENGAGE_REMOVE_BITSTREAM_AR_INFO     16
-#define ENGAGE_VOBSUB_SUBPIC_STOP_CMDS      17
-#define ENGAGE_NO_CUE_DURATION              18
-#define ENGAGE_NO_CUE_RELATIVE_POSITION     19
-#define ENGAGE_MAX_IDX                      19
+#define ENGAGE_REMOVE_BITSTREAM_AR_INFO     15
+#define ENGAGE_VOBSUB_SUBPIC_STOP_CMDS      16
+#define ENGAGE_NO_CUE_DURATION              17
+#define ENGAGE_NO_CUE_RELATIVE_POSITION     18
+#define ENGAGE_MAX_IDX                      18
 
 void engage_hacks(const std::string &hacks);
 void engage_hack(unsigned int id);

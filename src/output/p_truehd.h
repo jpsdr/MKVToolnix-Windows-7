@@ -50,8 +50,6 @@ protected:
 
   virtual void flush_impl();
   virtual void flush_frames();
-  virtual void flush_frames_merged();
-  virtual void flush_frames_separate();
 };
 
 #endif // MTX_P_TRUEHD_H
