@@ -26,7 +26,6 @@ dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
                                    const dts_header_t &dtsheader)
   : generic_packetizer_c(p_reader, p_ti)
   , m_samples_written(0)
-  , m_bytes_written(0)
   , m_packet_buffer(128 * 1024)
   , m_first_header(dtsheader)
   , m_previous_header(dtsheader)
@@ -39,7 +38,7 @@ dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
 dts_packetizer_c::~dts_packetizer_c() {
 }
 
-unsigned char *
+memory_cptr
 dts_packetizer_c::get_dts_packet(dts_header_t &dtsheader,
                                  bool flushing) {
   if (0 == m_packet_buffer.get_size())
@@ -93,7 +92,7 @@ dts_packetizer_c::get_dts_packet(dts_header_t &dtsheader,
     dtsheader.dts_hd           = false;
   }
 
-  unsigned char *packet_buf = (unsigned char *)safememdup(buf + pos, dtsheader.frame_byte_size);
+  auto packet_buf = memory_c::clone(buf + pos, dtsheader.frame_byte_size);
 
   m_packet_buffer.remove(bytes_to_remove);
 
@@ -130,7 +129,7 @@ dts_packetizer_c::process(packet_cptr packet) {
 void
 dts_packetizer_c::process_available_packets(bool flushing) {
   dts_header_t dtsheader;
-  unsigned char *dts_packet;
+  memory_cptr dts_packet;
 
   while ((dts_packet = get_dts_packet(dtsheader, flushing))) {
     int64_t new_timecode;
@@ -142,9 +141,8 @@ dts_packetizer_c::process_available_packets(bool flushing) {
     } else
       new_timecode = static_cast<int64_t>(m_samples_written * 1000000000.0 / static_cast<double>(dtsheader.core_sampling_frequency));
 
-    add_packet(new packet_t(new memory_c(dts_packet, dtsheader.frame_byte_size, true), new_timecode, (int64_t)get_dts_packet_length_in_nanoseconds(&dtsheader)));
+    add_packet(new packet_t(dts_packet, new_timecode, get_dts_packet_length_in_nanoseconds(&dtsheader)));
 
-    m_bytes_written   += dtsheader.frame_byte_size;
     m_samples_written += get_dts_packet_length_in_core_samples(&dtsheader);
   }
 }

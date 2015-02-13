@@ -23,7 +23,7 @@
 
 class dts_packetizer_c: public generic_packetizer_c {
 private:
-  int64_t m_samples_written, m_bytes_written;
+  int64_t m_samples_written;
 
   byte_buffer_c m_packet_buffer;
 
@@ -51,7 +51,7 @@ protected:
   virtual void flush_impl();
 
 private:
-  virtual unsigned char *get_dts_packet(dts_header_t &dts_header, bool flushing);
+  virtual memory_cptr get_dts_packet(dts_header_t &dts_header, bool flushing);
   virtual void process_available_packets(bool flushing);
 };
 
