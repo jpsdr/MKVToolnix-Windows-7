@@ -1,3 +1,20 @@
+2015-02-14  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: enhancement: The code for determining the time codes
+        of AAC, AC3, DTS, MP3 and TrueHD packets has been completely
+        rewritten. This improves how timecodes are kept if the source
+        container provides them in many cases.
+
+        * mkvmerge: removal: AAC: The hack for using the old codec IDs
+        (e.g. A_AAC/MPEG4/LC/SBR) for AAC tracks has been removed. Those
+        codec IDs have been deprecated for nearly ten years. Reading files
+        that use those IDs will stay supported.
+
+        * mkvmerge: removal: TrueHD: The hack for merging a sync frame and
+        all following normal frames into a single Matroska packet has been
+        removed as there are no players that can play such merged frames
+        anyway.
+
 2015-02-12  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: new feature: Added an option »--reduce-to-core« that
