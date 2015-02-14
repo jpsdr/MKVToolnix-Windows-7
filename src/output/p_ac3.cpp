@@ -15,6 +15,8 @@
 
 #include "common/ac3.h"
 #include "common/codec.h"
+#include "common/checksums/base.h"
+#include "common/strings/formatting.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
 #include "output/p_ac3.h"
@@ -28,25 +30,28 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
                                    int bsid,
                                    bool framed)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_bytes_output(0)
-  , m_packetno(0)
-  , m_last_timecode(-1)
-  , m_num_packets_same_tc(0)
-  , m_s2tc(1536 * 1000000000ll, samples_per_sec)
-  , m_single_packet_duration(1 * m_s2tc)
-  , m_previous_timecode{}
+  , m_timecode_calculator{samples_per_sec}
+  , m_samples_per_packet{1536}
+  , m_packet_duration{m_timecode_calculator.get_duration(m_samples_per_packet).to_ns()}
   , m_framed{framed}
+  , m_first_packet{true}
+  , m_flush_after_each_packet{true}
 {
   m_first_ac3_header.m_sample_rate = samples_per_sec;
   m_first_ac3_header.m_bs_id       = bsid;
   m_first_ac3_header.m_channels    = channels;
 
   set_track_type(track_audio);
-  set_track_default_duration(m_single_packet_duration);
+  set_track_default_duration(m_packet_duration);
   enable_avi_audio_sync(!framed);
 }
 
 ac3_packetizer_c::~ac3_packetizer_c() {
+}
+
+void
+ac3_packetizer_c::enable_flushing_after_each_packet(bool flush_after_each_packet) {
+  m_flush_after_each_packet = flush_after_each_packet;
 }
 
 ac3::frame_c
@@ -57,8 +62,9 @@ ac3_packetizer_c::get_frame() {
     return frame;
 
   bool warning_printed = false;
-  if (0 == m_packetno) {
+  if (m_first_packet) {
     int64_t offset = handle_avi_audio_sync(frame.m_garbage_size, false);
+
     if (-1 != offset) {
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format(Y("This AC3 track contains %1% bytes of non-AC3 data at the beginning. "
@@ -99,40 +105,49 @@ ac3_packetizer_c::set_headers() {
 
 int
 ac3_packetizer_c::process(packet_cptr packet) {
+  // if (packet->has_timecode())
+  //   mxinfo(boost::format("tc %1% %2% %3% %4%\n") % format_timecode(packet->timecode) % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
+  //          % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 512)) % packet->data->get_size());
+
+  m_timecode_calculator.add_timecode(packet);
+
   if (m_framed)
     return process_framed(packet);
 
-  if (-1 != packet->timecode)
-    m_available_timecodes.push_back(std::make_pair(packet->timecode, m_parser.get_total_stream_position()));
-
   add_to_buffer(packet->data->get_buffer(), packet->data->get_size());
+  if (m_flush_after_each_packet)
+    m_parser.parse(true);
+
   flush_packets();
 
   return FILE_STATUS_MOREDATA;
 }
 
 int
-ac3_packetizer_c::process_framed(packet_cptr packet) {
-  if (!m_packetno) {
+ac3_packetizer_c::process_framed(packet_cptr const &packet) {
+  if (m_first_packet) {
     m_parser.add_bytes(packet->data);
-    if (m_parser.frame_available()) {
-      auto frame = get_frame();
-      adjust_header_values(frame);
-      ++m_packetno;
-    }
+    m_parser.flush();
+    if (m_parser.frame_available())
+      adjust_header_values(get_frame());
   }
 
-  if (packet->has_timecode())
-    m_previous_timecode = packet->timecode;
+  set_timecode_and_add_packet(packet);
 
-  else {
-    m_previous_timecode += m_single_packet_duration;
-    packet->timecode     = m_previous_timecode;
-  }
+  return FILE_STATUS_MOREDATA;
+}
+
+void
+ac3_packetizer_c::set_timecode_and_add_packet(packet_cptr const &packet) {
+  // mxinfo(boost::format(" →                    %1% %2% %3%\n") % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
+  //        % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 512)) % packet->data->get_size());
+
+  packet->timecode = m_timecode_calculator.get_next_timecode(m_samples_per_packet).to_ns();
+  packet->duration = m_packet_duration;
 
   add_packet(packet);
 
-  return FILE_STATUS_MOREDATA;
+  m_first_packet = false;
 }
 
 void
@@ -154,46 +169,14 @@ void
 ac3_packetizer_c::flush_packets() {
   while (m_parser.frame_available()) {
     auto frame = get_frame();
-
     adjust_header_values(frame);
-
-    int64_t new_timecode = calculate_timecode(frame.m_stream_position);
-    add_packet(new packet_t(frame.m_data, new_timecode, m_single_packet_duration));
-    ++m_packetno;
+    set_timecode_and_add_packet(std::make_shared<packet_t>(frame.m_data));
   }
-}
-
-int64_t
-ac3_packetizer_c::calculate_timecode(uint64_t stream_position) {
-  auto itr = m_available_timecodes.begin();
-  while (   (itr             != m_available_timecodes.end())
-         && (stream_position >= itr->second))
-    itr++;
-
-  if (m_available_timecodes.begin() == itr) {
-    m_last_timecode       = -1 == m_last_timecode ? 0 : m_last_timecode + 1 * m_s2tc;
-    m_num_packets_same_tc = 0;
-
-    return m_last_timecode;
-  }
-
-  int64_t new_timecode = (itr - 1)->first;
-  m_available_timecodes.erase(m_available_timecodes.begin(), itr);
-
-  if (m_last_timecode == new_timecode) {
-    m_num_packets_same_tc++;
-    return new_timecode + m_num_packets_same_tc * m_s2tc;
-  }
-
-  m_last_timecode       = new_timecode;
-  m_num_packets_same_tc = 0;
-
-  return new_timecode;
 }
 
 void
-ac3_packetizer_c::adjust_header_values(ac3::frame_c &ac3_header) {
-  if (0 != m_packetno)
+ac3_packetizer_c::adjust_header_values(ac3::frame_c const &ac3_header) {
+  if (!m_first_packet)
     return;
 
   if (m_first_ac3_header.m_sample_rate != ac3_header.m_sample_rate)
@@ -205,10 +188,15 @@ ac3_packetizer_c::adjust_header_values(ac3::frame_c &ac3_header) {
   if (ac3_header.is_eac3())
     set_codec_id(MKV_A_EAC3);
 
-  if ((1536 != ac3_header.m_samples) || (m_first_ac3_header.m_sample_rate != ac3_header.m_sample_rate)) {
-    m_s2tc.set(1000000000ll * ac3_header.m_samples, ac3_header.m_sample_rate);
-    m_single_packet_duration = 1 * m_s2tc;
-    set_track_default_duration(m_single_packet_duration);
+  if ((m_samples_per_packet != ac3_header.m_samples) || (m_first_ac3_header.m_sample_rate != ac3_header.m_sample_rate)) {
+    if (ac3_header.m_sample_rate)
+      m_timecode_calculator.set_samples_per_second(ac3_header.m_sample_rate);
+
+    if (ac3_header.m_samples)
+      m_samples_per_packet = ac3_header.m_samples;
+
+    m_packet_duration = m_timecode_calculator.get_duration(m_samples_per_packet).to_ns();
+    set_track_default_duration(m_packet_duration);
   }
 
   m_first_ac3_header = ac3_header;

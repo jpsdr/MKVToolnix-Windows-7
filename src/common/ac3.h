@@ -85,7 +85,6 @@ namespace ac3 {
 
     int find_consecutive_frames(unsigned char const *buffer, size_t buffer_size, size_t num_required_headers);
 
-  protected:
     void parse(bool end_of_stream);
   };
 };

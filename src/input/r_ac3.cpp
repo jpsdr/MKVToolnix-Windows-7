@@ -92,7 +92,10 @@ ac3_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('a', 0) || (NPTZR() != 0))
     return;
 
-  add_packetizer(new ac3_packetizer_c(this, m_ti, m_ac3header.m_sample_rate, m_ac3header.m_channels, m_ac3header.m_bs_id));
+  auto ptzr = new ac3_packetizer_c(this, m_ti, m_ac3header.m_sample_rate, m_ac3header.m_channels, m_ac3header.m_bs_id);
+  ptzr->enable_flushing_after_each_packet(false);
+
+  add_packetizer(ptzr);
   show_packetizer_info(0, PTZR0);
 }
 

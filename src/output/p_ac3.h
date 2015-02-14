@@ -19,16 +19,15 @@
 #include "common/ac3.h"
 #include "common/samples_timecode_conv.h"
 #include "merge/generic_packetizer.h"
+#include "merge/timecode_calculator.h"
 
 class ac3_packetizer_c: public generic_packetizer_c {
 protected:
-  int64_t m_bytes_output, m_packetno, m_last_timecode, m_num_packets_same_tc;
   ac3::frame_c m_first_ac3_header;
   ac3::parser_c m_parser;
-  samples_to_timecode_converter_c m_s2tc;
-  int64_t m_single_packet_duration, m_previous_timecode;
-  std::deque<std::pair<int64_t, uint64_t> > m_available_timecodes;
-  bool m_framed;
+  timecode_calculator_c m_timecode_calculator;
+  int64_t m_samples_per_packet, m_packet_duration;
+  bool m_framed, m_first_packet, m_flush_after_each_packet;
 
 public:
   ac3_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int samples_per_sec, int channels, int bsid, bool framed = false);
@@ -37,6 +36,7 @@ public:
   virtual int process(packet_cptr packet);
   virtual void flush_packets();
   virtual void set_headers();
+  virtual void enable_flushing_after_each_packet(bool flush_after_each_packet);
 
   virtual translatable_string_c get_format_name() const {
     return YT("AC3");
@@ -46,11 +46,11 @@ public:
 
 protected:
   virtual void add_to_buffer(unsigned char *const buf, int size);
-  virtual void adjust_header_values(ac3::frame_c &ac3_header);
+  virtual void adjust_header_values(ac3::frame_c const &ac3_header);
   virtual ac3::frame_c get_frame();
-  virtual int64_t calculate_timecode(uint64_t stream_position);
   virtual void flush_impl();
-  virtual int process_framed(packet_cptr packet);
+  virtual int process_framed(packet_cptr const &packet);
+  virtual void set_timecode_and_add_packet(packet_cptr const &packet);
 };
 
 class ac3_bs_packetizer_c: public ac3_packetizer_c {
