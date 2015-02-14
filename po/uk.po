@@ -83,7 +83,7 @@ msgstr ""
 "                           приєднується до іншої доріжки попереднього\n"
 "                           файлу.\n"
 
-#: src/merge/mkvmerge.cpp:238
+#: src/merge/mkvmerge.cpp:241
 msgid ""
 "  --aspect-ratio <TID:f|a/b>\n"
 "                           Sets the display dimensions by calculating\n"
@@ -95,7 +95,7 @@ msgstr ""
 "                           ширини і висоти для даного співвідношення "
 "сторін.\n"
 
-#: src/merge/mkvmerge.cpp:241
+#: src/merge/mkvmerge.cpp:244
 msgid ""
 "  --aspect-ratio-factor <TID:f|a/b>\n"
 "                           First calculates the aspect ratio by multi-\n"
@@ -161,7 +161,7 @@ msgstr ""
 "  --blockadd <TID:x>       Встановлює максимальну кількість рівнів\n"
 "                           для BlockAdditions вказаної доріжки.\n"
 
-#: src/merge/mkvmerge.cpp:270
+#: src/merge/mkvmerge.cpp:273
 msgid ""
 "  --capabilities           Lists optional features mkvmerge was compiled "
 "with.\n"
@@ -202,7 +202,7 @@ msgstr ""
 msgid "  --clusters-in-meta-seek  Write meta seek data for clusters.\n"
 msgstr "  --clusters-in-meta-seek  Записує дані метапошуку для кластерів.\n"
 
-#: src/merge/mkvmerge.cpp:273
+#: src/merge/mkvmerge.cpp:276
 msgid ""
 "  --command-line-charset <charset>\n"
 "                           Charset for strings on the command line\n"
@@ -210,7 +210,7 @@ msgstr ""
 "  --command-line-charset <charset>\n"
 "                           Набір символів для рядків командного рядка\n"
 
-#: src/merge/mkvmerge.cpp:261
+#: src/merge/mkvmerge.cpp:264
 msgid ""
 "  --compression <TID:method>\n"
 "                           Sets the compression method used for the\n"
@@ -221,7 +221,7 @@ msgstr ""
 "для\n"
 "                           вказаної доріжки ('none' або 'zlib').\n"
 
-#: src/merge/mkvmerge.cpp:248
+#: src/merge/mkvmerge.cpp:251
 msgid ""
 "  --cropping <TID:left,top,right,bottom>\n"
 "                           Sets the cropping parameters.\n"
@@ -249,13 +249,13 @@ msgstr ""
 "                           Створює записи cue (індекси) для цього треку:\n"
 "                           Ніяких не створює, лише для I кадрів, для всіх.\n"
 
-#: src/merge/mkvmerge.cpp:278
+#: src/merge/mkvmerge.cpp:281
 msgid "  --debug <topic>          Turns on debugging output for 'topic'.\n"
 msgstr ""
 "  --debug <topic>          Дозволяється використання відлагодження на виході "
 "для 'topic'.\n"
 
-#: src/merge/mkvmerge.cpp:225
+#: src/merge/mkvmerge.cpp:228
 msgid ""
 "  --default-duration <TID:Xs|ms|us|ns|fps>\n"
 "                           Force the default duration of a track to X.\n"
@@ -299,7 +299,7 @@ msgstr ""
 "  --disable-track-statistics-tags\n"
 "                           Не записувати теги зі статистикою доріжки.\n"
 
-#: src/merge/mkvmerge.cpp:246
+#: src/merge/mkvmerge.cpp:249
 msgid ""
 "  --display-dimensions <TID:width>x<height>\n"
 "                           Explicitly set the display dimensions.\n"
@@ -312,13 +312,13 @@ msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr ""
 "  --enable-durations       Ввімкнути тривалість блоку для всіх блоків.\n"
 
-#: src/merge/mkvmerge.cpp:279
+#: src/merge/mkvmerge.cpp:282
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr ""
 "  --engage <feature>       Дозволяється використання експериментальної "
 "особливості 'feature'.\n"
 
-#: src/merge/mkvmerge.cpp:228
+#: src/merge/mkvmerge.cpp:231
 msgid ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
 "                           Adjust the frame/field rate stored in the video\n"
@@ -366,7 +366,7 @@ msgstr "  --link-to-next <SID>     Приєднати останній файл 
 msgid "  --link-to-previous <SID> Link the first file to the given SID.\n"
 msgstr "  --link-to-previous <SID> Приєднати перший файл до даного SID.\n"
 
-#: src/merge/mkvmerge.cpp:268
+#: src/merge/mkvmerge.cpp:271
 msgid ""
 "  --list-languages         Lists all ISO639 languages and their\n"
 "                           ISO639-2 codes.\n"
@@ -374,7 +374,7 @@ msgstr ""
 "  --list-languages         Вказується список усіх мов згідно ISO639 і їх\n"
 "                           ISO639-2 коди.\n"
 
-#: src/merge/mkvmerge.cpp:231
+#: src/merge/mkvmerge.cpp:234
 msgid ""
 "  --nalu-size-length <TID:n>\n"
 "                           Force the NALU size length to n bytes with\n"
@@ -398,15 +398,27 @@ msgid ""
 "  --no-global-tags         Don't keep global tags from the source file.\n"
 msgstr "  --no-global-tags         Не брати глобальні теги з вхідного файлу.\n"
 
-#: src/merge/mkvmerge.cpp:275
+#: src/merge/mkvmerge.cpp:278
 msgid "  --output-charset <cset>  Output messages in this charset\n"
 msgstr ""
 "  --output-charset <cset> Вихідні повідомлення будуть мати даний набір "
 "символів\n"
 
-#: src/merge/mkvmerge.cpp:271
+#: src/merge/mkvmerge.cpp:274
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priority>   Встановлює пріоритет запуску mkvmerge.\n"
+
+#: src/merge/mkvmerge.cpp:224
+#, fuzzy
+msgid ""
+"  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
+"                           HD extensions instead of copying both the core\n"
+"                           and the extensions.\n"
+msgstr ""
+"  --sub-charset <TID:charset>\n"
+"                           Визначає набір символів зчитування текстових "
+"субтитрів\n"
+"                           щодо перетворення в UTF-8.\n"
 
 #: src/merge/mkvmerge.cpp:100
 msgid ""
@@ -494,7 +506,7 @@ msgstr ""
 msgid "  --split-max-files <n>    Create at most n files.\n"
 msgstr "  --split-max-files <n>    Створити щонайбільше n файлів.\n"
 
-#: src/merge/mkvmerge.cpp:250
+#: src/merge/mkvmerge.cpp:253
 msgid ""
 "  --stereo-mode <TID:n|keyword>\n"
 "                           Sets the stereo mode parameter. It can\n"
@@ -506,7 +518,7 @@ msgstr ""
 "                           задавати як числом від 0 до 14, так і одним з\n"
 "                           ключових слів (повний список див. в документ.).\n"
 
-#: src/merge/mkvmerge.cpp:256
+#: src/merge/mkvmerge.cpp:259
 msgid ""
 "  --sub-charset <TID:charset>\n"
 "                           Determines the charset the text subtitles are\n"
@@ -523,7 +535,7 @@ msgstr ""
 "  --timecode-scale <n>     Примусово задається масштабний коефіцієнт n для "
 "тайм-коду.\n"
 
-#: src/merge/mkvmerge.cpp:224
+#: src/merge/mkvmerge.cpp:227
 msgid "  --timecodes <TID:file>   Read the timecodes to be used from a file.\n"
 msgstr ""
 "  --timecodes <TID:file>  Читати тайм-коди, які будуть використовуватися, з "
@@ -560,7 +572,7 @@ msgstr ""
 "копіювати\n"
 "                           теги для всіх доріжок.\n"
 
-#: src/merge/mkvmerge.cpp:272
+#: src/merge/mkvmerge.cpp:275
 msgid ""
 "  --ui-language <code>     Force the translations for 'code' to be used.\n"
 msgstr ""
@@ -603,7 +615,7 @@ msgstr ""
 "  -T, --no-track-tags      Не копіювати жодного тегу для доріжки з вхідного "
 "файлу.\n"
 
-#: src/merge/mkvmerge.cpp:283
+#: src/merge/mkvmerge.cpp:286
 msgid "  -V, --version            Show version information.\n"
 msgstr "  -V, --version            Показувати інформацію про версію.\n"
 
@@ -640,7 +652,7 @@ msgstr ""
 "копіювати все\n"
 "                           відеодоріжки.\n"
 
-#: src/merge/mkvmerge.cpp:236
+#: src/merge/mkvmerge.cpp:239
 msgid ""
 "  -f, --fourcc <FOURCC>    Forces the FourCC to the specified value.\n"
 "                           Works only for video tracks.\n"
@@ -648,15 +660,15 @@ msgstr ""
 "  -f, --fourcc <FOURCC>    Примусово задавати FourCC вказаного значення.\n"
 "                           Працює тільки для відеодоріжок.\n"
 
-#: src/merge/mkvmerge.cpp:282
+#: src/merge/mkvmerge.cpp:285
 msgid "  -h, --help               Show this help.\n"
 msgstr "  -h, --help               Показати цю довідку.\n"
 
-#: src/merge/mkvmerge.cpp:266
+#: src/merge/mkvmerge.cpp:269
 msgid "  -i, --identify <file>    Print information about the source file.\n"
 msgstr "  -i, --identify <file>   Відображати інформацію про вхідний файл.\n"
 
-#: src/merge/mkvmerge.cpp:267
+#: src/merge/mkvmerge.cpp:270
 msgid "  -l, --list-types         Lists supported input file types.\n"
 msgstr ""
 "  -l, --list-types         Списки підтримуваних форматів вхідних файлів.\n"
@@ -678,7 +690,7 @@ msgstr ""
 msgid "  -o, --output out         Write to the file 'out'.\n"
 msgstr "  -o, --output out         Записати у 'out' файлу.\n"
 
-#: src/merge/mkvmerge.cpp:276
+#: src/merge/mkvmerge.cpp:279
 msgid ""
 "  -r, --redirect-output <file>\n"
 "                           Redirects all messages into this file.\n"
@@ -746,7 +758,7 @@ msgstr ""
 msgid "  =<file>                  Same as \"= <file>\".\n"
 msgstr "  =<file>                  Те ж саме, що і \"= <file>\".\n"
 
-#: src/merge/mkvmerge.cpp:280
+#: src/merge/mkvmerge.cpp:283
 msgid ""
 "  @optionsfile             Reads additional command line options from\n"
 "                           the specified file (see man page).\n"
@@ -863,19 +875,19 @@ msgstr " Глобальні опції:\n"
 msgid " Options for each input file:\n"
 msgstr " Параметри для кожного вхідного файлу:\n"
 
-#: src/merge/mkvmerge.cpp:260
+#: src/merge/mkvmerge.cpp:263
 msgid " Options that only apply to VobSub subtitle tracks:\n"
 msgstr " Функції, які застосовуються тільки для субтитрів VobSub:\n"
 
-#: src/merge/mkvmerge.cpp:255
+#: src/merge/mkvmerge.cpp:258
 msgid " Options that only apply to text subtitle tracks:\n"
 msgstr " Функції, які застосовуються тільки до текстових субтитрів:\n"
 
-#: src/merge/mkvmerge.cpp:235
+#: src/merge/mkvmerge.cpp:238
 msgid " Options that only apply to video tracks:\n"
 msgstr " Функції, які застосовуються тільки до відеодоріжок:\n"
 
-#: src/merge/mkvmerge.cpp:265
+#: src/merge/mkvmerge.cpp:268
 msgid " Other options:\n"
 msgstr " Інші опції:\n"
 
@@ -1003,27 +1015,27 @@ msgstr "%1%: сталася виняткова ситуація (повідом�
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: сталася невідома виняткова ситуація."
 
-#: src/merge/mkvmerge.cpp:635
+#: src/merge/mkvmerge.cpp:638
 #, boost-format
 msgid "%1%: divisor is 0 in '%2% %3%'.\n"
 msgstr "%1%: дільник є 0 в '%2% %3%'.\n"
 
-#: src/merge/mkvmerge.cpp:610
+#: src/merge/mkvmerge.cpp:613
 #, boost-format
 msgid "%1%: invalid track ID in '%2% %3%'.\n"
 msgstr "%1%: невірний ID доріжки в '%2% %3%'.\n"
 
-#: src/merge/mkvmerge.cpp:627
+#: src/merge/mkvmerge.cpp:630
 #, boost-format
 msgid "%1%: missing dividend in '%2% %3%'.\n"
 msgstr "%1%: відсутнє ділене в '%2% %3%'.\n"
 
-#: src/merge/mkvmerge.cpp:630
+#: src/merge/mkvmerge.cpp:633
 #, boost-format
 msgid "%1%: missing divisor in '%2% %3%'.\n"
 msgstr "%1%: відсутній дільник в '%2% %3%'.\n"
 
-#: src/merge/mkvmerge.cpp:606
+#: src/merge/mkvmerge.cpp:609
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: відсутній ID доріжки в '%2% %3%'.\n"
@@ -1276,7 +1288,7 @@ msgstr "&Переглянути журнал"
 msgid "&Window"
 msgstr "&Вікно"
 
-#: src/merge/mkvmerge.cpp:1812
+#: src/merge/mkvmerge.cpp:1825
 #, boost-format
 msgid ""
 "'%1%' can only be used with a file name. No further options are allowed if "
@@ -1285,7 +1297,7 @@ msgstr ""
 "'%1%' може бути використано лише з ім'ям файлу. Жодні інші варіанти не "
 "допустимі, якщо цей параметр використовується.\n"
 
-#: src/merge/mkvmerge.cpp:470
+#: src/merge/mkvmerge.cpp:473
 #, boost-format
 msgid ""
 "'%1%' does not contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or "
@@ -1294,7 +1306,7 @@ msgstr ""
 "У '%1%' не вказано корректну одиницю виміру ('s', 'ms', 'us', 'ns', 'fps', "
 "'p' або 'i') в '%2% %3%'.\n"
 
-#: src/merge/mkvmerge.cpp:1111
+#: src/merge/mkvmerge.cpp:1114
 #, boost-format
 msgid ""
 "'%1%' is an unsupported argument for --compression. Available compression "
@@ -1303,7 +1315,7 @@ msgstr ""
 "'%1%' є непідтримуваним аргументом для --compression. Доступні методи "
 "стиснення: %2%\n"
 
-#: src/merge/mkvmerge.cpp:1066
+#: src/merge/mkvmerge.cpp:1069
 #, boost-format
 msgid "'%1%' is an unsupported argument for --cues.\n"
 msgstr "'%1%' є непідтримуваним аргументом для --cues.\n"
@@ -1313,7 +1325,7 @@ msgstr "'%1%' є непідтримуваним аргументом для --cu
 msgid "'%1%' is missing the file name.\n"
 msgstr "'%1%' не містить назви файлу.\n"
 
-#: src/merge/mkvmerge.cpp:1544
+#: src/merge/mkvmerge.cpp:1557
 #, boost-format
 msgid ""
 "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--chapter-"
@@ -1324,7 +1336,7 @@ msgstr ""
 "%1%'. Продивіться 'mkvmerge --list-languages' для отримання списку всіх мов "
 "і їх ISO639-2 кодів.\n"
 
-#: src/merge/mkvmerge.cpp:1610
+#: src/merge/mkvmerge.cpp:1623
 #, boost-format
 msgid ""
 "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--default-"
@@ -1335,7 +1347,7 @@ msgstr ""
 "%1%'. Продивіться 'mkvmerge --list-languages' для отримання списку всіх мов "
 "і їх ISO639-2 кодів.\n"
 
-#: src/merge/mkvmerge.cpp:1147
+#: src/merge/mkvmerge.cpp:1150
 #, boost-format
 msgid ""
 "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --"
@@ -1355,7 +1367,7 @@ msgstr "'%1%' не є CHAPTERxx =... лінією."
 msgid "'%1%' is not a CHAPTERxxNAME=... line."
 msgstr "'%1%' не є CHAPTERxxNAME =... лінією."
 
-#: src/merge/mkvmerge.cpp:444
+#: src/merge/mkvmerge.cpp:447
 #, boost-format
 msgid "'%1%' is not a valid %2% in '%3% %4%'.\n"
 msgstr "'%1%' не є допустимим %2% в '%3% %4%'.\n"
@@ -1365,12 +1377,12 @@ msgstr "'%1%' не є допустимим %2% в '%3% %4%'.\n"
 msgid "'%1%' is not a valid ISO639-2 language code."
 msgstr "'%1%' не є допустимим ISO639-2 кодом мови."
 
-#: src/merge/mkvmerge.cpp:1303
+#: src/merge/mkvmerge.cpp:1306
 #, boost-format
 msgid "'%1%' is not a valid append mode in '--append-mode %1%'.\n"
 msgstr "'%1%' не є правильним режимом приєднання в '--append-mode %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1401
+#: src/merge/mkvmerge.cpp:1414
 #, boost-format
 msgid "'%1%' is not a valid block additional max in '--blockadd %2%'.\n"
 msgstr "'%1%' не є допустимим блоком додаткових 'max' в '--blockadd %2%'.\n"
@@ -1380,30 +1392,30 @@ msgstr "'%1%' не є допустимим блоком додаткових 'ma
 msgid "'%1%' is not a valid ccTLD country code."
 msgstr "'%1%' не є допустимим ccTLD кодом країни."
 
-#: src/merge/mkvmerge.cpp:1246 src/merge/mkvmerge.cpp:1249
+#: src/merge/mkvmerge.cpp:1249 src/merge/mkvmerge.cpp:1252
 #, boost-format
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'%1%' не є допустимим ID файлу в '--track-order %2%'.\n"
 
-#: src/common/hacks.cpp:95
+#: src/common/hacks.cpp:93
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' не є вірним застосуванням.\n"
 
-#: src/merge/mkvmerge.cpp:1288
+#: src/merge/mkvmerge.cpp:1291
 #, boost-format
 msgid ""
 "'%1%' is not a valid mapping of file and track IDs in '--append-to %2%'.\n"
 msgstr ""
 "'%1%' не є коректним відображенням ID файлів і доріжок в '--append-to %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1243
+#: src/merge/mkvmerge.cpp:1246
 #, boost-format
 msgid ""
 "'%1%' is not a valid pair of file ID and track ID in '--track-order %2%'.\n"
 msgstr "'%1%' не є вірною парою ID файлу і доріжки в '--track-order %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1393
+#: src/merge/mkvmerge.cpp:1406
 #, boost-format
 msgid ""
 "'%1%' is not a valid pair of track ID and block additional in '--blockadd "
@@ -1412,27 +1424,27 @@ msgstr ""
 "'%1%' не є допустимою парою ID доріжоки і блоку додаткового в '--blockadd "
 "%1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1438
+#: src/merge/mkvmerge.cpp:1451
 #, boost-format
 msgid "'%1%' is not a valid priority class.\n"
 msgstr "'%1%' не є допустимим класом пріоритету.\n"
 
-#: src/merge/mkvmerge.cpp:1397
+#: src/merge/mkvmerge.cpp:1410
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--blockadd %2%'.\n"
 msgstr "'%1%' не є допустимим ID доріжки в '--blockadd %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1321
+#: src/merge/mkvmerge.cpp:1324
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--default-duration %2%'.\n"
 msgstr "'%1%' не є допустимим ID доріжки в '--default-duration %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1342
+#: src/merge/mkvmerge.cpp:1345
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'%1%' не є допустимим ID доріжки в '--nalu-size-length %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1338
+#: src/merge/mkvmerge.cpp:1341
 #, boost-format
 msgid ""
 "'%1%' is not a valid tuple of track ID and NALU size length in '--nalu-size-"
@@ -1441,7 +1453,7 @@ msgstr ""
 "'%1%' не є допустимим набором ID доріжок і довжин поля розміру NALU в '--"
 "nalu-size-length %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1317
+#: src/merge/mkvmerge.cpp:1320
 #, boost-format
 msgid ""
 "'%1%' is not a valid tuple of track ID and default duration in '--default-"
@@ -1460,49 +1472,49 @@ msgstr "'%1%' допускається тільки при витяганні р
 msgid "'%1%' is only allowed when extracting tracks.\n"
 msgstr "'%1%' допускається тільки при витяганні доріжок.\n"
 
-#: src/merge/mkvmerge.cpp:1832
+#: src/merge/mkvmerge.cpp:1845
 #, boost-format
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%' не містить назви файлу.\n"
 
-#: src/merge/mkvmerge.cpp:1880 src/merge/mkvmerge.cpp:2058
-#: src/merge/mkvmerge.cpp:2072 src/merge/mkvmerge.cpp:2166
-#: src/merge/mkvmerge.cpp:2180 src/merge/mkvmerge.cpp:2187
-#: src/merge/mkvmerge.cpp:2194 src/merge/mkvmerge.cpp:2201
-#: src/merge/mkvmerge.cpp:2208 src/merge/mkvmerge.cpp:2215
-#: src/merge/mkvmerge.cpp:2222 src/merge/mkvmerge.cpp:2236
-#: src/merge/mkvmerge.cpp:2243 src/merge/mkvmerge.cpp:2250
-#: src/merge/mkvmerge.cpp:2257 src/merge/mkvmerge.cpp:2264
-#: src/merge/mkvmerge.cpp:2274 src/merge/mkvmerge.cpp:2281
-#: src/merge/mkvmerge.cpp:2288 src/merge/mkvmerge.cpp:2295
-#: src/merge/mkvmerge.cpp:2302
+#: src/merge/mkvmerge.cpp:1893 src/merge/mkvmerge.cpp:2071
+#: src/merge/mkvmerge.cpp:2085 src/merge/mkvmerge.cpp:2179
+#: src/merge/mkvmerge.cpp:2193 src/merge/mkvmerge.cpp:2200
+#: src/merge/mkvmerge.cpp:2207 src/merge/mkvmerge.cpp:2214
+#: src/merge/mkvmerge.cpp:2221 src/merge/mkvmerge.cpp:2228
+#: src/merge/mkvmerge.cpp:2235 src/merge/mkvmerge.cpp:2249
+#: src/merge/mkvmerge.cpp:2256 src/merge/mkvmerge.cpp:2263
+#: src/merge/mkvmerge.cpp:2270 src/merge/mkvmerge.cpp:2277
+#: src/merge/mkvmerge.cpp:2287 src/merge/mkvmerge.cpp:2294
+#: src/merge/mkvmerge.cpp:2301 src/merge/mkvmerge.cpp:2308
+#: src/merge/mkvmerge.cpp:2315 src/merge/mkvmerge.cpp:2322
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%' не містить власного аргументу.\n"
 
-#: src/merge/mkvmerge.cpp:2131
+#: src/merge/mkvmerge.cpp:2144
 #, boost-format
 msgid "'%1%' lacks the FourCC.\n"
 msgstr "'%1%' не містить FourCC.\n"
 
-#: src/merge/mkvmerge.cpp:2173
+#: src/merge/mkvmerge.cpp:2186
 #, boost-format
 msgid "'%1%' lacks the delay.\n"
 msgstr "'%1%' не містить затримки.\n"
 
-#: src/merge/mkvmerge.cpp:1992
+#: src/merge/mkvmerge.cpp:2005
 #, boost-format
 msgid "'%1%' lacks the file name.\n"
 msgstr "'%1%' не містить назви файлу.\n"
 
-#: src/merge/mkvmerge.cpp:2229
+#: src/merge/mkvmerge.cpp:2242
 #, boost-format
 msgid "'%1%' lacks the track ID.\n"
 msgstr "'%1%' не містить ID доріжки.\n"
 
-#: src/merge/mkvmerge.cpp:2096 src/merge/mkvmerge.cpp:2103
-#: src/merge/mkvmerge.cpp:2110 src/merge/mkvmerge.cpp:2117
-#: src/merge/mkvmerge.cpp:2124
+#: src/merge/mkvmerge.cpp:2109 src/merge/mkvmerge.cpp:2116
+#: src/merge/mkvmerge.cpp:2123 src/merge/mkvmerge.cpp:2130
+#: src/merge/mkvmerge.cpp:2137
 #, boost-format
 msgid "'%1%' lacks the track numbers.\n"
 msgstr "'%1%' не містить номер(а) доріжок(и).\n"
@@ -1541,33 +1553,33 @@ msgstr ""
 "необхідно робити повторне мультиплексування на основі оригінального файла "
 "Opus, якщо можливо.\n"
 
-#: src/merge/mkvmerge.cpp:2138
+#: src/merge/mkvmerge.cpp:2151
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' не містить значення співвідношення сторін екрану.\n"
 
-#: src/merge/mkvmerge.cpp:2145
+#: src/merge/mkvmerge.cpp:2158
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr ""
 "'--aspect-ratio-factor' не містить коефіцієнту співвідношення сторін "
 "екрану.\n"
 
-#: src/merge/mkvmerge.cpp:1963
+#: src/merge/mkvmerge.cpp:1976
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description' не містить опису.\n"
 
-#: src/merge/mkvmerge.cpp:1972
+#: src/merge/mkvmerge.cpp:1985
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type' не містить MIME-тип.\n"
 
-#: src/merge/mkvmerge.cpp:1982
+#: src/merge/mkvmerge.cpp:1995
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' не містить назви.\n"
 
-#: src/merge/mkvmerge.cpp:2017
+#: src/merge/mkvmerge.cpp:2030
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset' не містить набору символів.\n"
 
-#: src/merge/mkvmerge.cpp:1555
+#: src/merge/mkvmerge.cpp:1568
 #, boost-format
 msgid ""
 "'--chapter-charset' may only be given once in '--chapter-charset %1%'.\n"
@@ -1575,7 +1587,7 @@ msgstr ""
 "'--chapter-charset' може бути задано тільки одного разу в '--chapter-charset "
 "%1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1558
+#: src/merge/mkvmerge.cpp:1571
 #, boost-format
 msgid ""
 "'--chapter-charset' must be given before '--chapters' in '--chapter-charset "
@@ -1584,11 +1596,11 @@ msgstr ""
 "'--chapter-charset' повинно бути задано перед '--chapters' в '--chapter-"
 "charset %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:2010
+#: src/merge/mkvmerge.cpp:2023
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language' не містить мови.\n"
 
-#: src/merge/mkvmerge.cpp:1537
+#: src/merge/mkvmerge.cpp:1550
 #, boost-format
 msgid ""
 "'--chapter-language' may only be given once in '--chapter-language %1%'.\n"
@@ -1596,7 +1608,7 @@ msgstr ""
 "'--chapter-language' може бути задано тільки одного разу в '--chapter-"
 "language %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1540
+#: src/merge/mkvmerge.cpp:1553
 #, boost-format
 msgid ""
 "'--chapter-language' must be given before '--chapters' in '--chapter-"
@@ -1605,11 +1617,11 @@ msgstr ""
 "'--chapter-language' повинно бути задано перед '--chapters' в '--chapter-"
 "language %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:2034
+#: src/merge/mkvmerge.cpp:2047
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters' не містить назви файлу.\n"
 
-#: src/merge/mkvmerge.cpp:1941
+#: src/merge/mkvmerge.cpp:1954
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' не містить значення довжини.\n"
 
@@ -1617,20 +1629,20 @@ msgstr "'--cluster-length' не містить значення довжини.\
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' не містить власного аргументу.\n"
 
-#: src/merge/mkvmerge.cpp:2159
+#: src/merge/mkvmerge.cpp:2172
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' не містить параметрів обрізки.\n"
 
-#: src/merge/mkvmerge.cpp:2024
+#: src/merge/mkvmerge.cpp:2037
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format' не містить формату.\n"
 
-#: src/merge/mkvmerge.cpp:2027
+#: src/merge/mkvmerge.cpp:2040
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr ""
 "'--cue-chapter-name-format' повинно бути занадано перед '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2152
+#: src/merge/mkvmerge.cpp:2165
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' не містить розмірів.\n"
 
@@ -1638,63 +1650,63 @@ msgstr "'--display-dimensions' не містить розмірів.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' не містить власного аргументу.\n"
 
-#: src/merge/mkvmerge.cpp:2001
+#: src/merge/mkvmerge.cpp:2014
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' не містить назви файлу.\n"
 
-#: src/merge/mkvmerge.cpp:2319
+#: src/merge/mkvmerge.cpp:2339
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link' має сенс використовувати тільки в поєднанні з '--split'.\n"
 
-#: src/merge/mkvmerge.cpp:1927
+#: src/merge/mkvmerge.cpp:1940
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next' не містить наступного UID.\n"
 
-#: src/merge/mkvmerge.cpp:1920
+#: src/merge/mkvmerge.cpp:1933
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' не містить попереднього UID.\n"
 
-#: src/merge/mkvmerge.cpp:1934
+#: src/merge/mkvmerge.cpp:1947
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid' не містить UID сегменту.\n"
 
-#: src/merge/mkvmerge.cpp:2043
+#: src/merge/mkvmerge.cpp:2056
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo' не містить назви файлу.\n"
 
-#: src/merge/mkvmerge.cpp:1901
+#: src/merge/mkvmerge.cpp:1914
 msgid "'--split' lacks the size.\n"
 msgstr "'--split' не містить розміру.\n"
 
-#: src/merge/mkvmerge.cpp:1908
+#: src/merge/mkvmerge.cpp:1921
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' не містить кількості файлів.\n"
 
-#: src/merge/mkvmerge.cpp:1589
+#: src/merge/mkvmerge.cpp:1602
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale' було використано більше одного разу.\n"
 
-#: src/merge/mkvmerge.cpp:1893
+#: src/merge/mkvmerge.cpp:1906
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' не містить власного найменування.\n"
 
-#: src/merge/mkvmerge.cpp:2267
+#: src/merge/mkvmerge.cpp:2280
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order' може бути задано тільки одного разу.\n"
 
-#: src/merge/mkvmerge.cpp:1689
+#: src/merge/mkvmerge.cpp:1702
 msgid "'-A' and '-a' used on the same source file.\n"
 msgstr "'-A' і '-a' використовували той же вхідний файл.\n"
 
-#: src/merge/mkvmerge.cpp:1698
+#: src/merge/mkvmerge.cpp:1711
 msgid "'-B' and '-b' used on the same source file.\n"
 msgstr "'-B' і '-b' використовували той же вхідний файл.\n"
 
-#: src/merge/mkvmerge.cpp:1692
+#: src/merge/mkvmerge.cpp:1705
 msgid "'-D' and '-d' used on the same source file.\n"
 msgstr "'-D' і '-d' використовували той же вхідний файл.\n"
 
-#: src/merge/mkvmerge.cpp:1695
+#: src/merge/mkvmerge.cpp:1708
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S' і '-s' використовували той же вхідний файл.\n"
 
@@ -1742,12 +1754,12 @@ msgstr "+-> Попередній аналіз файлу FLAC: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Попередній аналіз файлу FLAC: 100%\n"
 
-#: src/merge/generic_reader.cpp:322
+#: src/merge/generic_reader.cpp:323
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", опис '%1%'"
 
-#: src/merge/generic_reader.cpp:323
+#: src/merge/generic_reader.cpp:324
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", назва файлу '%1%'"
@@ -1972,7 +1984,7 @@ msgstr ""
 msgid "A track"
 msgstr "Доріжка"
 
-#: src/merge/generic_reader.cpp:189
+#: src/merge/generic_reader.cpp:190
 #, boost-format
 msgid ""
 "A track with the ID %1% was requested but not found in the file. The "
@@ -2011,7 +2023,7 @@ msgstr ""
 msgid "A/52 (aka AC3)"
 msgstr "A/52 (aka AC3)"
 
-#: src/input/r_aac.h:38 src/output/p_aac.h:40
+#: src/input/r_aac.h:38 src/output/p_aac.h:42
 msgid "AAC"
 msgstr "AAC"
 
@@ -2267,7 +2279,7 @@ msgstr ""
 "Дозволяє зберігати AVC/h.264 відео в режимі сумісності Video-for-Windows, "
 "наприклад, коли зчитується з AVI"
 
-#: src/mmg/cli_options_dlg.cpp:147
+#: src/mmg/cli_options_dlg.cpp:145
 msgid ""
 "Allows the use of the CodecState element. This is used for e.g. MPEG-1/-2 "
 "video tracks for storing the sequence headers."
@@ -2305,7 +2317,7 @@ msgstr "ID відповідно кодека."
 msgid "An attachment with the ID %1% was not found.\n"
 msgstr "Вкладення з ID %1% не було знайдено.\n"
 
-#: src/merge/mkvmerge.cpp:1681
+#: src/merge/mkvmerge.cpp:1694
 msgid "An empty file name is not valid.\n"
 msgstr "Не заповнена назва файлу некоректно.\n"
 
@@ -2325,7 +2337,7 @@ msgstr ""
 "Втрачена назва файлу відповідно\n"
 "до попереднього сегменту."
 
-#: src/merge/mkvmerge.cpp:2524
+#: src/merge/mkvmerge.cpp:2544
 msgid "An exception occurred when writing the output file."
 msgstr "Сталася виняткова ситуація під час запису вихідного файлу."
 
@@ -2390,11 +2402,11 @@ msgstr ""
 msgid "Ask before overwriting things (files, jobs)"
 msgstr "Питати перед перезаписом (файлів, завдань)"
 
-#: src/merge/mkvmerge.cpp:601
+#: src/merge/mkvmerge.cpp:604
 msgid "Aspect ratio"
 msgstr "Співвідношення сторін екрану"
 
-#: src/merge/mkvmerge.cpp:601
+#: src/merge/mkvmerge.cpp:604
 msgid "Aspect ratio factor"
 msgstr "Коефіцієнт співвідношення сторін екрану"
 
@@ -2419,7 +2431,7 @@ msgstr "Приєднано"
 msgid "Attached files"
 msgstr "Вкладені файли"
 
-#: src/merge/generic_reader.cpp:321
+#: src/merge/generic_reader.cpp:322
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID вкладення %1%: тип '%2%', розмір %3% байт"
@@ -2466,12 +2478,12 @@ msgstr "Звукова доріжка %u"
 msgid "Auto-set output filename"
 msgstr "Автоматичне встановлення назви вихідного файлу"
 
-#: src/merge/mkvmerge.cpp:310
+#: src/merge/mkvmerge.cpp:313
 #, boost-format
 msgid "Automatic MIME type recognition for '%1%': %2%\n"
 msgstr "Автоматичне розпізнавання MIME-типу для '%1%': %2%\n"
 
-#: src/merge/mkvmerge.cpp:1851
+#: src/merge/mkvmerge.cpp:1864
 msgid ""
 "Automatically enabling WebM compliance mode due to output file name "
 "extension.\n"
@@ -2632,18 +2644,18 @@ msgstr "Категорія не завершена NUL-символом"
 msgid "Caught exception"
 msgstr "Зафіксоване виключення"
 
-#: src/mmg/cli_options_dlg.cpp:157
+#: src/mmg/cli_options_dlg.cpp:152
 msgid "Causes mkvmerge not to write 'CueDuration' elemenets in the cues."
 msgstr "Змушує mkvmerge не записувати елементи 'CueDuration' до структури cue."
 
-#: src/mmg/cli_options_dlg.cpp:159
+#: src/mmg/cli_options_dlg.cpp:154
 msgid ""
 "Causes mkvmerge not to write 'CueRelativePosition' elemenets in the cues."
 msgstr ""
 "Змушує mkvmerge не записувати елементи 'CueRelativePosition' до структури "
 "cue."
 
-#: src/mmg/cli_options_dlg.cpp:155
+#: src/mmg/cli_options_dlg.cpp:150
 msgid ""
 "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets "
 "that do not contain a duration field."
@@ -2821,7 +2833,7 @@ msgstr "Розділи записані."
 msgid "Chapters:"
 msgstr "Розділи:"
 
-#: src/merge/generic_reader.cpp:324
+#: src/merge/generic_reader.cpp:325
 #, boost-format
 msgid "Chapters: %1% entries"
 msgstr "Розділи: %1% запис(и)(ів)"
@@ -2838,7 +2850,7 @@ msgstr "Набір символів:"
 msgid "Check online for the latest release"
 msgstr "Перевіряти наявність останньої версії онлайн"
 
-#: src/common/cli_parser.cpp:183 src/merge/mkvmerge.cpp:285
+#: src/common/cli_parser.cpp:183 src/merge/mkvmerge.cpp:288
 msgid "Check online for the latest release."
 msgstr "Перевірити наявність останньої версії онлайн."
 
@@ -2934,12 +2946,12 @@ msgstr "Закрити поточний файл без збереження"
 msgid "Cluster"
 msgstr "Кластер"
 
-#: src/merge/mkvmerge.cpp:1494
+#: src/merge/mkvmerge.cpp:1507
 #, boost-format
 msgid "Cluster length '%1%' out of range (0..65535).\n"
 msgstr "Довжина кластеру '%1%' поза досяжністю (0..65535).\n"
 
-#: src/merge/mkvmerge.cpp:1487
+#: src/merge/mkvmerge.cpp:1500
 #, boost-format
 msgid "Cluster length '%1%' out of range (100..32000).\n"
 msgstr "Довжина кластеру '%1%' поза досяжністю (100..32000).\n"
@@ -3268,7 +3280,7 @@ msgstr "Створити новий файл розділу"
 msgid "Creating directory '%1%' failed: %2%"
 msgstr "Помилка при створенні теки '%1%': %2%"
 
-#: src/merge/mkvmerge.cpp:678
+#: src/merge/mkvmerge.cpp:681
 #, boost-format
 msgid ""
 "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,"
@@ -3415,7 +3427,7 @@ msgstr "Наразі жодної нової версії не доступно 
 msgid "D&elete"
 msgstr "&Видалити"
 
-#: src/input/r_dts.h:41 src/output/p_dts.h:45
+#: src/input/r_dts.h:41 src/output/p_dts.h:43
 msgid "DTS"
 msgstr "DTS"
 
@@ -3566,7 +3578,7 @@ msgstr ""
 msgid "Discard padding: %|1$.3f|ms (%2%ns)"
 msgstr "Скасоване доповнення: %|1$.3f|мс (%2%нс)"
 
-#: src/merge/mkvmerge.cpp:653 src/merge/mkvmerge.cpp:659
+#: src/merge/mkvmerge.cpp:656 src/merge/mkvmerge.cpp:662
 #, boost-format
 msgid ""
 "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. "
@@ -3625,7 +3637,7 @@ msgstr "Тип документа: %1%"
 msgid "Dolby TrueHD"
 msgstr "Dolby TrueHD"
 
-#: src/merge/mkvmerge.cpp:2432
+#: src/merge/mkvmerge.cpp:2452
 msgid "Done scanning playlists.\n"
 msgstr "Сканування списків відтворення закінчено.\n"
 
@@ -3847,7 +3859,7 @@ msgstr ""
 msgid "Error parsing the file"
 msgstr "Помилка при обробці файлу"
 
-#: src/merge/mkvmerge.cpp:492 src/propedit/tag_target.cpp:139
+#: src/merge/mkvmerge.cpp:495 src/propedit/tag_target.cpp:139
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr ""
@@ -3876,7 +3888,7 @@ msgstr "Помилка: не вдалося відкрити вхідний фа
 msgid "Error: No EBML head found."
 msgstr "Помилка: не знайдено заголовка EBML."
 
-#: src/merge/mkvmerge.cpp:1845
+#: src/merge/mkvmerge.cpp:1858
 msgid ""
 "Error: no output file name was given.\n"
 "\n"
@@ -3907,7 +3919,7 @@ msgstr "Все пройшло нормально."
 msgid "Example"
 msgstr "Приклад"
 
-#: src/merge/mkvmerge.cpp:2524
+#: src/merge/mkvmerge.cpp:2544
 msgid "Exception details:"
 msgstr "Деталі обробки винятку:"
 
@@ -4051,7 +4063,7 @@ msgstr "Не вдалося обробити специфічні дані ко�
 msgid "Family UID: %1%"
 msgstr "UID сімейства: %1%"
 
-#: src/merge/mkvmerge.cpp:389
+#: src/merge/mkvmerge.cpp:392
 #, boost-format
 msgid ""
 "File %1% has unknown type. Please have a look at the supported file types "
@@ -4064,7 +4076,7 @@ msgstr ""
 "<moritz@bunkus.org>, якщо ваш тип файлу підтримується, але не розпізнається "
 "належним чином.\n"
 
-#: src/merge/generic_reader.cpp:319
+#: src/merge/generic_reader.cpp:320
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Файл '%1%': контейнер: %2%"
@@ -4300,12 +4312,12 @@ msgstr ""
 msgid "FourCC:"
 msgstr "FourCC:"
 
-#: src/merge/mkvmerge.cpp:1219
+#: src/merge/mkvmerge.cpp:1222
 #, boost-format
 msgid "FourCC: Invalid track ID in '%1% %2%'.\n"
 msgstr "FourCC: Невірний ID доріжки в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1215
+#: src/merge/mkvmerge.cpp:1218
 #, boost-format
 msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: Відсутній ID доріжки в '%1% %2%'.\n"
@@ -4363,7 +4375,7 @@ msgstr "Глобальні опції"
 msgid "Global tags (%d entries) from %s"
 msgstr "Глобальні теги (%d записів) з %s"
 
-#: src/merge/generic_reader.cpp:325
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "Global tags: %1% entries"
 msgstr "Глобальні теги: %1% записів"
@@ -4724,7 +4736,7 @@ msgstr "Внутрішня помилка: tracks.cpp SSA #1. %1%"
 msgid "Internal program error"
 msgstr "Внутрішня помилка програми"
 
-#: src/merge/mkvmerge.cpp:1143
+#: src/merge/mkvmerge.cpp:1146
 #, boost-format
 msgid "Invalid %1% specified in '--%2% %3%'.\n"
 msgstr "Невірно %1%, зазначено в '--%2% %3%'.\n"
@@ -4781,12 +4793,12 @@ msgstr ""
 msgid "Invalid attribute '%1%' in node '%2%' at position %3%"
 msgstr "Некорректний атрибут '%1%' у вузлі '%2%' на позиції %3%"
 
-#: src/merge/mkvmerge.cpp:1006
+#: src/merge/mkvmerge.cpp:1009
 #, boost-format
 msgid "Invalid boolean option specified in '--default-track %1%'.\n"
 msgstr "Задана невірна булева опція в '--default-track %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1376
+#: src/merge/mkvmerge.cpp:1379
 #, boost-format
 msgid ""
 "Invalid boolean option specified in '--fix-bitstream-timing-information "
@@ -4794,12 +4806,12 @@ msgid ""
 msgstr ""
 "Задана невірна булева опція в '--fix-bitstream-timing-information %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1032
+#: src/merge/mkvmerge.cpp:1035
 #, boost-format
 msgid "Invalid boolean option specified in '--forced-track %1%'.\n"
 msgstr "Задана невірна булева опція в '--forced-track %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1422
+#: src/merge/mkvmerge.cpp:1435
 #, boost-format
 msgid "Invalid boolean specified in '--aac-is-sbr %1%'.\n"
 msgstr "Задана невірна булева змінна в '--aac-is-sbr %1%'.\n"
@@ -4809,17 +4821,17 @@ msgstr "Задана невірна булева змінна в '--aac-is-sbr %
 msgid "Invalid change spec (%3%) in '%1% %2%'.\n"
 msgstr "Невірна зміна специфікації (%3%) в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:819 src/merge/mkvmerge.cpp:858
+#: src/merge/mkvmerge.cpp:822 src/merge/mkvmerge.cpp:861
 #, boost-format
 msgid "Invalid chapter number '%1%' for '--split' in '--split %2%': %3%\n"
 msgstr "Невірний номер розділу '%1%' для '--split' у '--split %2%': %3%\n"
 
-#: src/merge/mkvmerge.cpp:1087
+#: src/merge/mkvmerge.cpp:1090
 #, boost-format
 msgid "Invalid compression option specified in '--compression %1%'.\n"
 msgstr "Невірно вибрано опції стиснення, зазначені в '--compression %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1080
+#: src/merge/mkvmerge.cpp:1083
 #, boost-format
 msgid ""
 "Invalid compression option. No track ID specified in '--compression %1%'.\n"
@@ -4831,12 +4843,12 @@ msgstr ""
 msgid "Invalid country selected"
 msgstr "Некоректно вибрана країна"
 
-#: src/merge/mkvmerge.cpp:1057
+#: src/merge/mkvmerge.cpp:1060
 #, boost-format
 msgid "Invalid cues option specified in '--cues %1%'.\n"
 msgstr "Невірно вибрано опції cue в '--cues %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1050
+#: src/merge/mkvmerge.cpp:1053
 #, boost-format
 msgid "Invalid cues option. No track ID specified in '--cues %1%'.\n"
 msgstr "Невірні опції cue. Жодного ID доріжки не зазначено в '--cues %1%'.\n"
@@ -4886,7 +4898,7 @@ msgstr ""
 msgid "Invalid file name"
 msgstr "Неправильна назва файлу"
 
-#: src/merge/mkvmerge.cpp:935
+#: src/merge/mkvmerge.cpp:938
 #, boost-format
 msgid "Invalid format for '--split' in '--split %1%'.\n"
 msgstr "Невірний формат для '--split' в '--split %1%'.\n"
@@ -4984,7 +4996,7 @@ msgstr ""
 msgid "Invalid format: unknown character '%1%' found"
 msgstr "Невірний формат: Знайдено невідомий символ '%1%'"
 
-#: src/merge/mkvmerge.cpp:799
+#: src/merge/mkvmerge.cpp:802
 #, boost-format
 msgid "Invalid frame for '--split' in '--split %1%'.\n"
 msgstr "Невірний кадр для '--split' в '--split %1%'.\n"
@@ -5043,7 +5055,7 @@ msgstr "Помилка  в момент - секунд(а): %1%"
 msgid "Invalid selector in '%1% %2%'.\n"
 msgstr "Невірний селектор в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:889
+#: src/merge/mkvmerge.cpp:892
 #, boost-format
 msgid "Invalid split size in '--split %1%'.\n"
 msgstr "Невірний розмір розбиття в '--split %1%'.\n"
@@ -5100,7 +5112,7 @@ msgstr ""
 "Невірне задання початку/закінчення для '--split' в '--split %1%' (поточна "
 "частина: %2%).\n"
 
-#: src/merge/mkvmerge.cpp:1167
+#: src/merge/mkvmerge.cpp:1170
 #, boost-format
 msgid ""
 "Invalid sub charset option. No track ID specified in '--sub-charset %1%'.\n"
@@ -5108,22 +5120,22 @@ msgstr ""
 "Невірна опція дочірнього набору символів. Жодного ID доріжки не задано в '--"
 "sub-charset %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1174
+#: src/merge/mkvmerge.cpp:1177
 #, boost-format
 msgid "Invalid sub charset specified in '--sub-charset %1%'.\n"
 msgstr "Невірий дочірній набір символів задано в '--sub-charset %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:553
+#: src/merge/mkvmerge.cpp:556
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'.\n"
 msgstr "Невірна опція синхронізації задана в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:576
+#: src/merge/mkvmerge.cpp:579
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'. The divisor is zero.\n"
 msgstr "Невірна опція синхронізації задана в '%1% %2%'. Дільник - нуль.\n"
 
-#: src/merge/mkvmerge.cpp:582
+#: src/merge/mkvmerge.cpp:585
 #, boost-format
 msgid ""
 "Invalid sync option specified in '%1% %2%'. The linear sync value may not be "
@@ -5132,23 +5144,23 @@ msgstr ""
 "Невірна опція синхронізації задана в '%1% %2%'. Значення лінійної "
 "синхронізації не повинно бути меншим або рівним нулю.\n"
 
-#: src/merge/mkvmerge.cpp:545
+#: src/merge/mkvmerge.cpp:548
 #, boost-format
 msgid "Invalid sync option. No track ID specified in '%1% %2%'.\n"
 msgstr ""
 "Невірна опція синхронізації. Жодного ID доріжки не задано в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1198
+#: src/merge/mkvmerge.cpp:1201
 #, boost-format
 msgid "Invalid tags file name specified in '%1% %2%'.\n"
 msgstr "Невірна назва файлу тегів задана в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1191
+#: src/merge/mkvmerge.cpp:1194
 #, boost-format
 msgid "Invalid tags option. No track ID specified in '%1% %2%'.\n"
 msgstr "Невірна опція для тегів. Жодного ID доріжки не задано в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:757
+#: src/merge/mkvmerge.cpp:760
 #, boost-format
 msgid ""
 "Invalid time for '--split' in '--split %1%'. Additional error message: %2%\n"
@@ -5156,7 +5168,7 @@ msgstr ""
 "Невірний час для '--split' в '--split %1%'. Додаткове повідомлення про "
 "помилку: %2%\n"
 
-#: src/merge/mkvmerge.cpp:778
+#: src/merge/mkvmerge.cpp:781
 #, boost-format
 msgid ""
 "Invalid time for '--split' in '--split %1%'. Additional error message: %2%.\n"
@@ -5164,54 +5176,55 @@ msgstr ""
 "Невірний час для '--split' в '--split %1%'. Додаткове повідомлення про "
 "помилку: %2%.\n"
 
-#: src/merge/mkvmerge.cpp:522
+#: src/merge/mkvmerge.cpp:525
 #, boost-format
 msgid "Invalid track ID in '%1% %2%'.\n"
 msgstr "Невірний ID доріжки в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:549 src/merge/mkvmerge.cpp:1195
+#: src/merge/mkvmerge.cpp:552 src/merge/mkvmerge.cpp:1198
+#: src/merge/mkvmerge.cpp:1391
 #, boost-format
 msgid "Invalid track ID specified in '%1% %2%'.\n"
 msgstr "Невірний ID доріжки заданий в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1139
+#: src/merge/mkvmerge.cpp:1142
 #, boost-format
 msgid "Invalid track ID specified in '--%1% %2%'.\n"
 msgstr "Невірний ID доріжки заданий в '--%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1419
+#: src/merge/mkvmerge.cpp:1432
 #, boost-format
 msgid "Invalid track ID specified in '--aac-is-sbr %1%'.\n"
 msgstr "Невірний ID доріжки заданий в '--aac-is-sbr %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1084
+#: src/merge/mkvmerge.cpp:1087
 #, boost-format
 msgid "Invalid track ID specified in '--compression %1%'.\n"
 msgstr "Невірний ID доріжки заданий в '--compression %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1054
+#: src/merge/mkvmerge.cpp:1057
 #, boost-format
 msgid "Invalid track ID specified in '--cues %1%'.\n"
 msgstr "Невірний ID доріжки заданий в '--cues %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1000
+#: src/merge/mkvmerge.cpp:1003
 #, boost-format
 msgid "Invalid track ID specified in '--default-track %1%'.\n"
 msgstr "Невірний ID доріжки заданий в '--default-track %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1370
+#: src/merge/mkvmerge.cpp:1373
 #, boost-format
 msgid ""
 "Invalid track ID specified in '--fix-bitstream-timing-information %1%'.\n"
 msgstr ""
 "Невірний ID доріжки заданий в '--fix-bitstream-timing-information %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1026
+#: src/merge/mkvmerge.cpp:1029
 #, boost-format
 msgid "Invalid track ID specified in '--forced-track %1%'.\n"
 msgstr "Невірний ID доріжки заданий в '--forced-track %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1171
+#: src/merge/mkvmerge.cpp:1174
 #, boost-format
 msgid "Invalid track ID specified in '--sub-charset %1%'.\n"
 msgstr "Невірний ID доріжки заданий в '--sub-charset %1%'.\n"
@@ -5221,7 +5234,7 @@ msgstr "Невірний ID доріжки заданий в '--sub-charset %1%'
 msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "Невірна специфікація ID/назви файлу доріжки для аргументу '%1%'.\n"
 
-#: src/merge/generic_reader.cpp:108
+#: src/merge/generic_reader.cpp:109
 #, boost-format
 msgid "Invalid track type %1%."
 msgstr "Невірний тип доріжки %1%."
@@ -5421,7 +5434,7 @@ msgstr "MKVToolNix розповсюджується під ліцензією GN
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
-#: src/output/p_mp3.h:42
+#: src/output/p_mp3.h:43
 msgid "MP3"
 msgstr "MP3"
 
@@ -5655,7 +5668,7 @@ msgstr ""
 msgid "More"
 msgstr "Більше"
 
-#: src/merge/mkvmerge.cpp:1975
+#: src/merge/mkvmerge.cpp:1988
 #, boost-format
 msgid ""
 "More than one MIME type was given for a single attachment. '%1%' will be "
@@ -5664,7 +5677,7 @@ msgstr ""
 "Більше ніж один MIME-тип був заданий для єдиного вкладення. '%1%' не буде "
 "використано, натомість використовуватиметься '%2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1966
+#: src/merge/mkvmerge.cpp:1979
 msgid "More than one description was given for a single attachment.\n"
 msgstr "Більше ніж один опис було задано для єдиного вкладення.\n"
 
@@ -5673,7 +5686,7 @@ msgstr "Більше ніж один опис було задано для єд�
 msgid "More than one file name has been given ('%1%' and '%2%').\n"
 msgstr "Більше ніж одна назва файлу була задана ('%1%' і '%2%').\n"
 
-#: src/merge/mkvmerge.cpp:1985
+#: src/merge/mkvmerge.cpp:1998
 #, boost-format
 msgid ""
 "More than one name was given for a single attachment. '%1%' will be "
@@ -5713,7 +5726,7 @@ msgstr "Додаток, що виконував мультиплексуванн
 msgid "Muxing in progress."
 msgstr "Мультиплексування в процесі."
 
-#: src/merge/mkvmerge.cpp:2528
+#: src/merge/mkvmerge.cpp:2548
 #, boost-format
 msgid "Muxing took %1%.\n"
 msgstr "Мультиплексування тривало %1%.\n"
@@ -5774,7 +5787,7 @@ msgstr "UID наступного сегмента: %1%"
 msgid "Next segment's unique ID"
 msgstr "Унікальний ID наступного сегмента"
 
-#: src/merge/mkvmerge.cpp:1133
+#: src/merge/mkvmerge.cpp:1136
 #, boost-format
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "Немає %1%, визначеного у '--%2% %3%'.\n"
@@ -5798,7 +5811,7 @@ msgstr "Жодного EBML заголовка не знайдено."
 msgid "No MIME type has been selected for the attachment '%s'."
 msgstr "Не було обрано MIME-тип для вкладення '%s'."
 
-#: src/merge/mkvmerge.cpp:314
+#: src/merge/mkvmerge.cpp:317
 #, boost-format
 msgid ""
 "No MIME type has been set for the attachment '%1%', and it could not be "
@@ -5828,7 +5841,7 @@ msgstr "Жодних вкладень, що відповідають специ�
 msgid "No chapter entries have been create yet."
 msgstr "Ще не було створено жодного запису розділів."
 
-#: src/merge/mkvmerge.cpp:824
+#: src/merge/mkvmerge.cpp:827
 #, boost-format
 msgid "No chapter numbers listed after '--split %1%'.\n"
 msgstr "Жодного номера розділу не вказано після '--split %1%'.\n"
@@ -5837,7 +5850,7 @@ msgstr "Жодного номера розділу не вказано післ�
 msgid "No chapters found"
 msgstr "Не знайдено жодного розділу"
 
-#: src/merge/mkvmerge.cpp:828 src/merge/mkvmerge.cpp:854
+#: src/merge/mkvmerge.cpp:831 src/merge/mkvmerge.cpp:857
 msgid "No chapters in source files or chapter files found to split by.\n"
 msgstr ""
 "Жодних розділів у вхідних файлах або файлів розділів не знайдено щоб мати "
@@ -5867,11 +5880,11 @@ msgstr "Не задано назву файлу.\n"
 msgid "No filename found after the '@'."
 msgstr "Не знайдено назву файлу після '@'."
 
-#: src/mmg/cli_options_dlg.cpp:161
+#: src/mmg/cli_options_dlg.cpp:156
 msgid "No help available."
 msgstr "Допомога недоступна."
 
-#: src/merge/mkvmerge.cpp:2324
+#: src/merge/mkvmerge.cpp:2344
 msgid "No input files were given. No output will be created.\n"
 msgstr "Немає вхідних файлів. Тому, на виході нічого створено не буде.\n"
 
@@ -5898,11 +5911,11 @@ msgstr "Не знайдено сегменту/елементу рівня 0."
 msgid "No space left to write to"
 msgstr "Не залишилось місця для запису"
 
-#: src/merge/mkvmerge.cpp:2502
+#: src/merge/mkvmerge.cpp:2522
 msgid "No streams to output were found. Aborting.\n"
 msgstr "Не знайдено потоків на вихід. Переривання.\n"
 
-#: src/merge/mkvmerge.cpp:1130
+#: src/merge/mkvmerge.cpp:1133
 #, boost-format
 msgid "No track ID specified in '--%1% %2%'.\n"
 msgstr "Не задано ID доріжки в '--%1% %2%'.\n"
@@ -5949,7 +5962,7 @@ msgstr ""
 "через ключ командного рядка --default-duration, вхідний контейнер або з "
 "потоку."
 
-#: src/mmg/cli_options_dlg.cpp:149
+#: src/mmg/cli_options_dlg.cpp:147
 msgid ""
 "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams "
 "and puts the information into the container. This option causes mkvmerge to "
@@ -5973,7 +5986,7 @@ msgstr "Некорректний файл Matroska (не знайдений за
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "Некорректний файл Matroska (не знайдено сегмента/елемента рівня 0)"
 
-#: src/merge/mkvmerge.cpp:819
+#: src/merge/mkvmerge.cpp:822
 msgid "Not a valid number or not positive."
 msgstr "Некоректно вказане число або є від'ємним."
 
@@ -6043,7 +6056,7 @@ msgstr ""
 msgid "Online check for updates"
 msgstr "Перевірка наявності оновлень онлайн"
 
-#: src/merge/mkvmerge.cpp:860
+#: src/merge/mkvmerge.cpp:863
 #, boost-format
 msgid "Only %1% chapters found in source files & chapter files."
 msgstr "Знайдено лише %1% розділів у вхідних файлах і файлах розділів."
@@ -6052,7 +6065,7 @@ msgstr "Знайдено лише %1% розділів у вхідних фай�
 msgid "Only needed in certain situations:"
 msgstr "Лише потрібно в деяких ситуаціях:"
 
-#: src/merge/mkvmerge.cpp:1568
+#: src/merge/mkvmerge.cpp:1581
 #, boost-format
 msgid "Only one chapter file allowed in '%1% %2%'.\n"
 msgstr "Дозволено лише один файл розділу в '%1% %2%'.\n"
@@ -6073,11 +6086,11 @@ msgstr ""
 "Може використовуватися лише один з <String> або <Binary> під <Simple>, але "
 "не обидва одразу."
 
-#: src/merge/mkvmerge.cpp:1835
+#: src/merge/mkvmerge.cpp:1848
 msgid "Only one output file allowed.\n"
 msgstr "Дозволено лише один вихідний файл.\n"
 
-#: src/merge/mkvmerge.cpp:1578
+#: src/merge/mkvmerge.cpp:1591
 #, boost-format
 msgid "Only one segment info file allowed in '%1% %2%'.\n"
 msgstr "Лише один файл інформації сегмента дозволено в '%1% %2%'.\n"
@@ -6319,7 +6332,7 @@ msgstr ""
 "країни, які ви хочете застосувати до всіх розділів, що\n"
 "знаходяться після поточного, включаючи його."
 
-#: src/merge/mkvmerge.cpp:288
+#: src/merge/mkvmerge.cpp:291
 msgid ""
 "Please read the man page/the HTML documentation to mkvmerge. It\n"
 "explains several details in great length which are not obvious from\n"
@@ -6373,7 +6386,7 @@ msgid "Progress"
 msgstr "Прогрес виконання"
 
 #: src/extract/timecodes_v2.cpp:289 src/extract/tracks.cpp:440
-#: src/merge/mkvmerge.cpp:2336 src/merge/output_control.cpp:588
+#: src/merge/mkvmerge.cpp:2356 src/merge/output_control.cpp:588
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "Прогрес виконання: %1%%%%2%"
@@ -6868,7 +6881,7 @@ msgstr "Сканування інших списків відтворення т
 msgid "Scanned files"
 msgstr "Проскановані файли"
 
-#: src/merge/mkvmerge.cpp:2392
+#: src/merge/mkvmerge.cpp:2412
 #, boost-format
 msgid "Scanning %1% files in %2% playlist.\n"
 msgid_plural "Scanning %1% files in %2% playlists.\n"
@@ -7360,7 +7373,7 @@ msgstr "Розмір"
 msgid "Size:"
 msgstr "Розмір:"
 
-#: src/output/p_aac.cpp:147
+#: src/output/p_aac.cpp:94
 #, boost-format
 msgid ""
 "Skipping %1% bytes (no valid AAC header found). This might cause audio/video "
@@ -7532,7 +7545,7 @@ msgstr "Статус і прогрес виконання"
 msgid "Status:"
 msgstr "Статус:"
 
-#: src/merge/mkvmerge.cpp:719
+#: src/merge/mkvmerge.cpp:722
 #, boost-format
 msgid ""
 "Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a "
@@ -7588,7 +7601,7 @@ msgstr ""
 msgid "Subtitle track %u"
 msgstr "Доріжка субтитрів %u"
 
-#: src/merge/mkvmerge.cpp:356
+#: src/merge/mkvmerge.cpp:359
 msgid "Supported file types:\n"
 msgstr "Підтримувані типи файлів:\n"
 
@@ -7638,7 +7651,7 @@ msgstr ""
 "Теги не допускаються у сумісних WebM файлах. Жодних тегів не буде записано "
 "до будь-яких вихідних файлів.\n"
 
-#: src/merge/generic_reader.cpp:326
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Tags for track ID %1%: %2% entries"
 msgstr "Теги для доріжки з ID %1%: %2% записи(ів)"
@@ -7691,7 +7704,7 @@ msgid ""
 "The .idx file does not contain an 'id: ...' line to indicate the language.\n"
 msgstr "Файл .idx не містить рядка 'id: ...' для зазначення мови.\n"
 
-#: src/output/p_aac.cpp:172
+#: src/output/p_aac.cpp:110
 #, boost-format
 msgid "The AAC profiles are different: %1% and %2%"
 msgstr "Профілі AAC різні: %1% i %2%"
@@ -7746,7 +7759,7 @@ msgid "The FPS setting for track nr. %s in file '%s' is invalid."
 msgstr ""
 "Значення кадрів за секунду для доріжки номер %s у файлі '%s' є невірним."
 
-#: src/merge/mkvmerge.cpp:1222
+#: src/merge/mkvmerge.cpp:1225
 #, boost-format
 msgid "The FourCC must be exactly four characters long in '%1% %2%'.\n"
 msgstr "FourCC повинен складатися рівно з чотирьох символів в '%1% %2%'.\n"
@@ -7819,7 +7832,7 @@ msgstr ""
 "Один з варіантів рішення проблеми - зберегти ці розділи до файлу XML, а "
 "потім повторно мультиплексувати файл з приєднанням розділів."
 
-#: src/merge/mkvmerge.cpp:1346
+#: src/merge/mkvmerge.cpp:1349
 #, boost-format
 msgid ""
 "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-"
@@ -7894,14 +7907,14 @@ msgstr "XML файл тегу '%1%' містить помилку: %2%\n"
 msgid "The XML tag file '%1%' could not be read.\n"
 msgstr "XML файл тегу '%1%' не може бути прочитаний.\n"
 
-#: src/merge/mkvmerge.cpp:1639
+#: src/merge/mkvmerge.cpp:1652
 #, boost-format
 msgid ""
 "The argument '%1%' to '%2%' is invalid: '%3%' is not a valid track ID.\n"
 msgstr ""
 "Аргумент '%1%' у '%2%' некорректний: '%3%' не є допустимим ID доріжки.\n"
 
-#: src/merge/mkvmerge.cpp:1648
+#: src/merge/mkvmerge.cpp:1661
 #, boost-format
 msgid ""
 "The argument '%1%' to '%2%' is invalid: '%3%' must be either 'all' or "
@@ -7909,7 +7922,7 @@ msgid ""
 msgstr ""
 "Аргумент '%1%' у '%2%' некорректний: '%3%' має бути або 'all', або 'first'.\n"
 
-#: src/merge/mkvmerge.cpp:1635
+#: src/merge/mkvmerge.cpp:1648
 #, boost-format
 msgid ""
 "The argument '%1%' to '%2%' is invalid: too many colons in element '%3%'.\n"
@@ -7917,7 +7930,7 @@ msgstr ""
 "Аргумент '%1%' у '%2%' некорректний: надто багато двокрапок для елементу "
 "'%3%'.\n"
 
-#: src/merge/mkvmerge.cpp:1593
+#: src/merge/mkvmerge.cpp:1606
 msgid "The argument to '--timecode-scale' must be a number.\n"
 msgstr "Аргумент '--timecode-scale' повинен бути числом.\n"
 
@@ -7936,7 +7949,7 @@ msgstr ""
 "Вкладення #%1% з ID %2%, MIME тип якого %3%, розмір якого %4%, записується "
 "до '%5%'.\n"
 
-#: src/merge/mkvmerge.cpp:1526
+#: src/merge/mkvmerge.cpp:1539
 #, boost-format
 msgid "The attachment '%1%' could not be read.\n"
 msgstr "Вкладення '%1%' не може бути прочитане.\n"
@@ -7988,11 +8001,11 @@ msgstr ""
 "Вибрана довжина поля розміру NALU %1% дуже мала. Спробуйте використовувати "
 "значення '4'.\n"
 
-#: src/merge/mkvmerge.cpp:1672
+#: src/merge/mkvmerge.cpp:1685
 msgid "The closing parenthesis ')' are missing.\n"
 msgstr "Пропущено закриваючу дужку ')'.\n"
 
-#: src/merge/generic_reader.cpp:133
+#: src/merge/generic_reader.cpp:134
 #, boost-format
 msgid "The codec type '%1%' cannot be used in a WebM compliant file.\n"
 msgstr "Кодек типу '%1%' не може використовуватися в сумісному WebM файлі.\n"
@@ -8131,7 +8144,7 @@ msgstr ""
 "Перенесений файл '%s'\n"
 "не є файлом Matroska."
 
-#: src/merge/mkvmerge.cpp:2524
+#: src/merge/mkvmerge.cpp:2544
 msgid "The drive may be full."
 msgstr "Диск можливо заповнений."
 
@@ -8199,7 +8212,7 @@ msgstr ""
 "зберегти їх у формі CUE-списку. Це операція, зворотня використанню CUE-"
 "списку з ключем mkvmerge '--chapters'."
 
-#: src/merge/mkvmerge.cpp:1507
+#: src/merge/mkvmerge.cpp:1520
 #, boost-format
 msgid ""
 "The file '%1%' cannot be attached because it does not exist or cannot be "
@@ -8238,7 +8251,7 @@ msgstr "Файл '%1%' не може бути відкритий для запи
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "Файл '%1%' був відкритий для запису.\n"
 
-#: src/merge/mkvmerge.cpp:1729 src/merge/mkvmerge.cpp:2358
+#: src/merge/mkvmerge.cpp:1742 src/merge/mkvmerge.cpp:2378
 #, boost-format
 msgid ""
 "The file '%1%' has unknown type. Please have a look at the supported file "
@@ -8413,7 +8426,7 @@ msgstr "Файл, що ви додали, є списком відтворенн
 msgid "The first cluster timecode after the resync is %1%.\n"
 msgstr "Перший тайм-код кластера після повторної синхронізації - %1%.\n"
 
-#: src/merge/mkvmerge.cpp:1717
+#: src/merge/mkvmerge.cpp:1730
 msgid ""
 "The first file cannot be appended because there are no files to append to.\n"
 msgstr ""
@@ -8476,7 +8489,7 @@ msgstr ""
 "інформація записується до стандартного потоку виводу. Дані на виході можуть "
 "слугувати як вхідний потік для mkvmerge."
 
-#: src/merge/mkvmerge.cpp:1599
+#: src/merge/mkvmerge.cpp:1612
 msgid ""
 "The given timecode scale factor is outside the valid range (1...10000000 or "
 "-1 for 'sample precision even if a video track is present').\n"
@@ -8653,7 +8666,7 @@ msgstr ""
 "Назва '%1%' не є допустимою назвою параметру для поточної специфікації "
 "редагування в '%2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1684
+#: src/merge/mkvmerge.cpp:1697
 #, boost-format
 msgid ""
 "The name of the output file '%1%' and of one of the input files is the same. "
@@ -8664,7 +8677,7 @@ msgstr ""
 "призвести до перезапису mkvmerge одного з ваших вхідних файлів. Швидше за "
 "все, це не те, що ви хочете.\n"
 
-#: src/merge/mkvmerge.cpp:1458
+#: src/merge/mkvmerge.cpp:1471
 #, boost-format
 msgid "The next UID was already given in '%1% %2%'.\n"
 msgstr "Наступний UID вже заданий в '%1% %2%'.\n"
@@ -8736,7 +8749,7 @@ msgstr ""
 "Числа, вказані через даний аргумент, інтерпретуються, базуючись на кількості "
 "блоків Matroska, що записуються у вихідний потік."
 
-#: src/merge/mkvmerge.cpp:2067
+#: src/merge/mkvmerge.cpp:2080
 msgid ""
 "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's "
 "documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
@@ -8761,7 +8774,7 @@ msgstr ""
 "Назва вихідного файлу є некорректною, наприклад, вона може містити "
 "неприпустимі символи, як то ':'."
 
-#: src/merge/mkvmerge.cpp:1445
+#: src/merge/mkvmerge.cpp:1458
 #, boost-format
 msgid "The previous UID was already given in '%1% %2%'.\n"
 msgstr "Попередній UID вже заданий в '%1% %2%'.\n"
@@ -8866,7 +8879,7 @@ msgstr ""
 "відповідно. Всі одиниці базуються на 1024 (G = 1024^3, M = 1024^2 и K = "
 "1024)."
 
-#: src/merge/mkvmerge.cpp:1520
+#: src/merge/mkvmerge.cpp:1533
 #, boost-format
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "Розмір вкладення '%1%' є 0.\n"
@@ -9200,7 +9213,7 @@ msgstr ""
 "Дана доріжка AAC не містить корректних заголовків. Не можливо проаналізувати "
 "інформацію AAC.\n"
 
-#: src/output/p_ac3.cpp:64
+#: src/output/p_ac3.cpp:70
 #, boost-format
 msgid ""
 "This AC3 track contains %1% bytes of non-AC3 data at the beginning. This "
@@ -9210,7 +9223,7 @@ msgstr ""
 "Дана доріжка AAC містить %1% байт не-AC3 даних на початку. Це відповідає "
 "затримці %2% мс. Ця затримка буде використовуватися замість не-AC3 даних.\n"
 
-#: src/output/p_ac3.cpp:76
+#: src/output/p_ac3.cpp:82
 #, boost-format
 msgid ""
 "This AC3 track contains %1% bytes of non-AC3 data which were skipped. The "
@@ -9274,7 +9287,7 @@ msgstr ""
 "Ця доріжка HEVC не починається з ключового кадру. Перших %1% кадрів було "
 "пропущено.\n"
 
-#: src/output/p_mp3.cpp:59
+#: src/output/p_mp3.cpp:57
 #, boost-format
 msgid ""
 "This MPEG audio track contains %1% bytes of non-MP3 data at the beginning. "
@@ -9285,7 +9298,7 @@ msgstr ""
 "відповідає затримці %2% мс. Ця затримка буде використовуватися замість "
 "невірних даних.\n"
 
-#: src/output/p_mp3.cpp:68
+#: src/output/p_mp3.cpp:66
 #, boost-format
 msgid ""
 "This MPEG audio track contains %1% bytes of non-MP3 data which were skipped. "
@@ -9666,7 +9679,7 @@ msgstr "Доріжка %1%: Інформація AAC не може бути зч
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Доріжка з ID %1% має невідомий AAC тип.\n"
 
-#: src/merge/generic_reader.cpp:320
+#: src/merge/generic_reader.cpp:321
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Доріжка з ID %1%: %2% (%3%)"
@@ -9740,22 +9753,9 @@ msgstr "Доріжки:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Поради щодо вирішення проблем з відтворенням"
 
-#: src/input/r_truehd.h:41 src/output/p_truehd.h:43
+#: src/input/r_truehd.h:41 src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
-
-#: src/mmg/cli_options_dlg.cpp:152
-msgid ""
-"TrueHD audio streams know two frame types: sync frames and non-sync frames. "
-"With this switch mkvmerge will put one sync frame and all following non-sync "
-"frames into a single Matroska block. Without it each non-sync frame is put "
-"into its own Matroska block."
-msgstr ""
-"Потоки аудіо TrueHD можуть містити два типи кадрів: синхронізуючі кадри і "
-"несинхронізуючі кадри. При використанні цього ключа mkvmerge буде поміщати "
-"синхронізуючий кадр і всі наступні несинхронізуючі кадри  в єдиний блок "
-"Matroska. Якщо ж цей ключ не використовувати, то кожен несинхронізуючий кадр "
-"буде поміщений у окремий блок Matroska."
 
 #: src/extract/xtr_vobsub.cpp:91
 #, boost-format
@@ -9828,16 +9828,6 @@ msgstr ""
 msgid "Unknown"
 msgstr "Невідомий"
 
-#: src/output/p_aac.cpp:79
-#, boost-format
-msgid "Unknown AAC MPEG-2 profile %1%."
-msgstr "Невідомий профіль AAC MPEG-2 для %1%."
-
-#: src/output/p_aac.cpp:67
-#, boost-format
-msgid "Unknown AAC MPEG-4 object type %1%."
-msgstr "Невідомий тип об'єкта AAC MPEG-4 для %1%."
-
 #: src/input/r_ogm.cpp:533
 #, boost-format
 msgid "Unknown audio stream type 0x%|1$04x|. Stream ID %2% will be ignored.\n"
@@ -9858,17 +9848,17 @@ msgstr ""
 msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr "Невідомий тип кодування вмісту %1% для доріжки %2%.\n"
 
-#: src/merge/mkvmerge.cpp:1463
+#: src/merge/mkvmerge.cpp:1476
 #, boost-format
 msgid "Unknown format for the next UID in '%1% %2%'.\n"
 msgstr "Невідомий формат для наступного UID в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1450
+#: src/merge/mkvmerge.cpp:1463
 #, boost-format
 msgid "Unknown format for the previous UID in '%1% %2%'.\n"
 msgstr "Невідомий формат для попереднього UID в '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1475
+#: src/merge/mkvmerge.cpp:1488
 #, boost-format
 msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "Невідомий формат UID сегмента '%3%' в '%1% %2%'.\n"
@@ -9955,14 +9945,6 @@ msgstr ""
 "файла, змультиплексовані з однаковими параметрами і використанням данного "
 "ключа, будуть ідентичні."
 
-#: src/mmg/cli_options_dlg.cpp:145
-msgid ""
-"Use the old AAC codec IDs (e.g. 'A_AAC/MPEG4/SBR') instead of the new one "
-"('A_AAC')."
-msgstr ""
-"Використовувати старі ID кодека AAC (наприклад, 'A_AAC/MPEG4/SBR') замість "
-"нового ('A_AAC')."
-
 #: src/mmg/options/output.cpp:41
 msgid "Use the previous output directory"
 msgstr "Використовувати попередню теку вихідних файлів"
@@ -9975,7 +9957,7 @@ msgstr "Використовувати обрану теку:"
 msgid "User defined options:"
 msgstr "Задані користувачем опції:"
 
-#: src/merge/mkvmerge.cpp:1350
+#: src/merge/mkvmerge.cpp:1353
 msgid ""
 "Using a NALU size length of 3 bytes might result in tracks that won't be "
 "decodable with certain AVC/h.264 codecs.\n"
@@ -10009,7 +9991,7 @@ msgstr "VC1 елементарні потоки"
 msgid "VP8/VP9"
 msgstr "VP8/VP9"
 
-#: src/common/hacks.cpp:68
+#: src/common/hacks.cpp:66
 msgid "Valid hacks are:\n"
 msgstr "Коректні зміни коду:\n"
 
@@ -10242,7 +10224,7 @@ msgstr "Неправильна версія Kate: %1%.%2% > %3%.x"
 msgid "Wrong Theora version: %1%.%2%.%3% != 3.2.x"
 msgstr "Неправильна версія Theora: %1%.%2%.%3% != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:1911
+#: src/merge/mkvmerge.cpp:1924
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "Неправильний аргумент '--split-max-files'.\n"
 
@@ -10307,7 +10289,7 @@ msgstr "[%1% кадр для доріжки %2%, тайм-код %3%]"
 msgid "aborted"
 msgstr "перервано"
 
-#: src/output/p_ac3.cpp:249
+#: src/output/p_ac3.cpp:237
 msgid ""
 "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If "
 "mkvmerge crashes or if the resulting file does not contain the complete and "
@@ -11339,7 +11321,7 @@ msgstr "субтитри"
 msgid "text subtitles"
 msgstr "текстові субтитри"
 
-#: src/merge/mkvmerge.cpp:2259
+#: src/merge/mkvmerge.cpp:2272
 msgid "timecodes"
 msgstr "тайм-коди"
 
@@ -11351,7 +11333,7 @@ msgstr "один над іншим (лівий зверху)"
 msgid "top bottom (right first)"
 msgstr "один над іншим (правий зверху)"
 
-#: src/merge/mkvmerge.cpp:2252
+#: src/merge/mkvmerge.cpp:2265
 msgid "track name"
 msgstr "назва доріжки"
 
@@ -12045,6 +12027,24 @@ msgstr "Так"
 #~ msgid "Track number: %1%"
 #~ msgstr "Номер доріжки: %1%"
 
+#~ msgid ""
+#~ "TrueHD audio streams know two frame types: sync frames and non-sync "
+#~ "frames. With this switch mkvmerge will put one sync frame and all "
+#~ "following non-sync frames into a single Matroska block. Without it each "
+#~ "non-sync frame is put into its own Matroska block."
+#~ msgstr ""
+#~ "Потоки аудіо TrueHD можуть містити два типи кадрів: синхронізуючі кадри і "
+#~ "несинхронізуючі кадри. При використанні цього ключа mkvmerge буде "
+#~ "поміщати синхронізуючий кадр і всі наступні несинхронізуючі кадри  в "
+#~ "єдиний блок Matroska. Якщо ж цей ключ не використовувати, то кожен "
+#~ "несинхронізуючий кадр буде поміщений у окремий блок Matroska."
+
+#~ msgid "Unknown AAC MPEG-2 profile %1%."
+#~ msgstr "Невідомий профіль AAC MPEG-2 для %1%."
+
+#~ msgid "Unknown AAC MPEG-4 object type %1%."
+#~ msgstr "Невідомий тип об'єкта AAC MPEG-4 для %1%."
+
 #~ msgid "Unknown open mode"
 #~ msgstr "Невідомий режим відкриття"
 
@@ -12098,6 +12098,13 @@ msgstr "Так"
 #~ "                 Переадресація всіх повідомлень до цього файлу.\n"
 #~ "  -h, --help     Відображення цієї довідки.\n"
 #~ "  -V, --version  Відображення інформації про версію.\n"
+
+#~ msgid ""
+#~ "Use the old AAC codec IDs (e.g. 'A_AAC/MPEG4/SBR') instead of the new one "
+#~ "('A_AAC')."
+#~ msgstr ""
+#~ "Використовувати старі ID кодека AAC (наприклад, 'A_AAC/MPEG4/SBR') "
+#~ "замість нового ('A_AAC')."
 
 #~ msgid "Using the %1%AC3 output module.\n"
 #~ msgstr "Використання вихідного модуля %1%AC3.\n"
