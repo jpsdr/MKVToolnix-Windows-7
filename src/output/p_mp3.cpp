@@ -27,7 +27,7 @@ mp3_packetizer_c::mp3_packetizer_c(generic_reader_c *p_reader,
                                    int channels,
                                    bool source_is_good)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_packetno(0)
+  , m_first_packet{true}
   , m_bytes_skipped(0)
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
@@ -35,13 +35,11 @@ mp3_packetizer_c::mp3_packetizer_c(generic_reader_c *p_reader,
   , m_byte_buffer(128 * 1024)
   , m_codec_id_set(false)
   , m_valid_headers_found(source_is_good)
-  , m_previous_timecode(0)
-  , m_num_packets_since_previous_timecode(0)
-  , m_s2tc(1152 * 1000000000ll, m_samples_per_sec)
-  , m_single_packet_duration(1 * m_s2tc)
+  , m_timecode_calculator{static_cast<int64_t>(samples_per_sec)}
+  , m_packet_duration{m_timecode_calculator.get_duration(m_samples_per_frame).to_ns()}
 {
   set_track_type(track_audio);
-  set_track_default_duration(m_single_packet_duration);
+  set_track_default_duration(m_packet_duration);
   enable_avi_audio_sync(true);
 }
 
@@ -52,7 +50,7 @@ void
 mp3_packetizer_c::handle_garbage(int64_t bytes) {
   bool warning_printed = false;
 
-  if (0 == m_packetno) {
+  if (m_first_packet) {
     int64_t offset = handle_avi_audio_sync(bytes, !(m_ti.m_avi_block_align % 384) || !(m_ti.m_avi_block_align % 576));
     if (-1 != offset) {
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
@@ -134,15 +132,15 @@ mp3_packetizer_c::get_mp3_packet(mp3_header_t *mp3header) {
   pos             = 0;
   m_bytes_skipped = 0;
 
-  if (0 == m_packetno) {
+  if (m_first_packet) {
     m_samples_per_frame  = mp3header->samples_per_channel;
+    m_packet_duration    = m_timecode_calculator.get_duration(m_samples_per_frame).to_ns();
     std::string codec_id = MKV_A_MP3;
     codec_id[codec_id.length() - 1] = (char)(mp3header->layer + '0');
     set_codec_id(codec_id.c_str());
 
-    m_s2tc.set(1000000000ll * m_samples_per_frame, m_samples_per_sec);
-    m_single_packet_duration = 1 * m_s2tc;
-    set_track_default_duration(m_single_packet_duration);
+    m_timecode_calculator.set_samples_per_second(m_samples_per_sec);
+    set_track_default_duration(m_packet_duration);
 
     track_headers_changed = true;
   }
@@ -174,28 +172,18 @@ mp3_packetizer_c::set_headers() {
 
 int
 mp3_packetizer_c::process(packet_cptr packet) {
+  m_timecode_calculator.add_timecode(packet);
+
   unsigned char *mp3_packet;
   mp3_header_t mp3header;
 
   m_byte_buffer.add(packet->data->get_buffer(), packet->data->get_size());
+
   while ((mp3_packet = get_mp3_packet(&mp3header))) {
-    bool timecode_valid =  (-1 != packet->timecode)
-                        && (   (0 == m_packetno)
-                            || (packet->timecode != m_previous_timecode));
+    auto new_timecode = m_timecode_calculator.get_next_timecode(m_samples_per_frame);
+    add_packet(std::make_shared<packet_t>(memory_c::clone(mp3_packet, mp3header.framesize), new_timecode.to_ns(), m_packet_duration));
 
-    int64_t new_timecode;
-    if (timecode_valid) {
-      m_previous_timecode                   = packet->timecode;
-      new_timecode                          = packet->timecode;
-      m_num_packets_since_previous_timecode = 1;
-
-    } else {
-      new_timecode = m_previous_timecode + m_num_packets_since_previous_timecode * m_s2tc;
-      ++m_num_packets_since_previous_timecode;
-    }
-
-    add_packet(new packet_t(new memory_c(mp3_packet, mp3header.framesize, true), new_timecode, m_single_packet_duration));
-    m_packetno++;
+    m_first_packet = false;
   }
 
   return FILE_STATUS_MOREDATA;
