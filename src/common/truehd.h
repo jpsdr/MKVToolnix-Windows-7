@@ -28,13 +28,13 @@ struct truehd_frame_t {
   enum codec_e {
     truehd,
     mlp,
+    ac3,
   } m_codec;
 
   enum frame_type_e {
     invalid,
     normal,
     sync,
-    ac3,
   } m_type;
 
   int m_size;
@@ -68,7 +68,7 @@ struct truehd_frame_t {
   }
 
   bool is_ac3() {
-    return ac3 == m_type;
+    return ac3 == m_codec;
   }
 };
 typedef std::shared_ptr<truehd_frame_t> truehd_frame_cptr;

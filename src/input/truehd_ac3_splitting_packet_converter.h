@@ -23,6 +23,7 @@ class truehd_ac3_splitting_packet_converter_c: public packet_converter_c {
 protected:
   truehd_parser_c m_parser;
   generic_packetizer_c *m_ac3_ptzr;
+  int64_t m_truehd_timecode, m_ac3_timecode;
 
 public:
   truehd_ac3_splitting_packet_converter_c(generic_packetizer_c *truehd_ptzr = nullptr, generic_packetizer_c *ac3_ptzr = nullptr);
@@ -33,7 +34,7 @@ public:
   virtual void flush();
 
 protected:
-  virtual void process_frames(int64_t timecode = -1);
+  virtual void process_frames();
 };
 
 typedef std::shared_ptr<truehd_ac3_splitting_packet_converter_c> truehd_ac3_splitting_packet_converter_cptr;

@@ -101,8 +101,9 @@ truehd_parser_c::parse(bool end_of_stream) {
           break;
 
         if (((size - offset) >= frame->m_ac3_header.m_bytes) && verify_ac3_checksum(&data[offset], size - offset)) {
-          frame->m_type = truehd_frame_t::ac3;
-          frame->m_size = frame->m_ac3_header.m_bytes;
+          frame->m_codec = truehd_frame_t::ac3;
+          frame->m_type  = truehd_frame_t::sync;
+          frame->m_size  = frame->m_ac3_header.m_bytes;
         }
       }
     }
