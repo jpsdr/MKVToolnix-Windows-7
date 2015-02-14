@@ -63,6 +63,6 @@ truehd_ac3_splitting_packet_converter_c::process_frames(int64_t timecode) {
       }
 
     } else if (m_ptzr)
-      static_cast<truehd_packetizer_c *>(m_ptzr)->process_framed(frame);
+      static_cast<truehd_packetizer_c *>(m_ptzr)->process_framed(frame, timecode);
   }
 }

@@ -16,27 +16,25 @@
 
 #include "common/common_pch.h"
 
-#include "merge/generic_packetizer.h"
-#include "common/samples_timecode_conv.h"
 #include "common/truehd.h"
+#include "merge/generic_packetizer.h"
+#include "merge/timecode_calculator.h"
 
 class truehd_packetizer_c: public generic_packetizer_c {
 protected:
   bool m_first_frame;
   truehd_frame_t m_first_truehd_header;
 
-  int64_t m_current_samples_per_frame, m_samples_output, m_ref_timecode;
-  samples_to_timecode_converter_c m_s2tc;
+  int64_t m_current_samples_per_frame, m_ref_timecode;
+  timecode_calculator_c m_timecode_calculator;
   truehd_parser_c m_parser;
-  std::vector<truehd_frame_cptr> m_frames;
 
 public:
   truehd_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, truehd_frame_t::codec_e codec, int sampling_rate, int channels);
   virtual ~truehd_packetizer_c();
 
   virtual int process(packet_cptr packet);
-  virtual void process_framed(truehd_frame_cptr const &frame);
-  virtual void handle_frames();
+  virtual void process_framed(truehd_frame_cptr const &frame, int64_t provided_timecode);
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {

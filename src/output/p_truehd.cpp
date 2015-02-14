@@ -28,12 +28,11 @@ truehd_packetizer_c::truehd_packetizer_c(generic_reader_c *p_reader,
                                          truehd_frame_t::codec_e codec,
                                          int sampling_rate,
                                          int channels)
-  : generic_packetizer_c(p_reader, p_ti)
-  , m_first_frame(true)
-  , m_current_samples_per_frame(0)
-  , m_samples_output(0)
-  , m_ref_timecode(0)
-  , m_s2tc(1000000000ll, sampling_rate)
+  : generic_packetizer_c{p_reader, p_ti}
+  , m_first_frame{true}
+  , m_current_samples_per_frame{}
+  , m_ref_timecode{}
+  , m_timecode_calculator{sampling_rate}
 {
   m_first_truehd_header.m_codec         = codec;
   m_first_truehd_header.m_sampling_rate = sampling_rate;
@@ -55,29 +54,42 @@ truehd_packetizer_c::set_headers() {
 }
 
 void
-truehd_packetizer_c::process_framed(truehd_frame_cptr const &frame) {
+truehd_packetizer_c::process_framed(truehd_frame_cptr const &frame,
+                                    int64_t provided_timecode) {
+  m_timecode_calculator.add_timecode(provided_timecode);
+
+  if (frame->is_ac3())
+    return;
+
   if (frame->is_sync()) {
     adjust_header_values(frame);
-    flush();
+    m_current_samples_per_frame = frame->m_samples_per_frame;
   }
 
-  if (!frame->is_ac3())
-    m_frames.push_back(frame);
+  auto samples   = 0 == frame->m_samples_per_frame ? m_current_samples_per_frame : frame->m_samples_per_frame;
+  auto timecode  = m_timecode_calculator.get_next_timecode(samples).to_ns();
+  auto duration  = m_timecode_calculator.get_duration(samples).to_ns();
+
+  add_packet(std::make_shared<packet_t>(frame->m_data, timecode, duration, frame->is_sync() ? -1 : m_ref_timecode));
+
+  m_ref_timecode = timecode;
 }
 
 int
 truehd_packetizer_c::process(packet_cptr packet) {
+  m_timecode_calculator.add_timecode(packet);
+
   m_parser.add_data(packet->data->get_buffer(), packet->data->get_size());
 
-  handle_frames();
+  flush_frames();
 
   return FILE_STATUS_MOREDATA;
 }
 
 void
-truehd_packetizer_c::handle_frames() {
+truehd_packetizer_c::flush_frames() {
   while (m_parser.frame_available())
-    process_framed(m_parser.get_next_frame());
+    process_framed(m_parser.get_next_frame(), -1);
 }
 
 void
@@ -111,33 +123,13 @@ truehd_packetizer_c::adjust_header_values(truehd_frame_cptr const &frame) {
 
   m_first_frame = false;
 
-  m_s2tc.set(1000000000ll, m_first_truehd_header.m_sampling_rate);
+  m_timecode_calculator.set_samples_per_second(m_first_truehd_header.m_sampling_rate);
 }
 
 void
 truehd_packetizer_c::flush_impl() {
   m_parser.parse(true);
   flush_frames();
-}
-
-void
-truehd_packetizer_c::flush_frames() {
-  size_t i;
-  for (i = 0; m_frames.size() > i; ++i) {
-    if (m_frames[i]->is_sync())
-      m_current_samples_per_frame = m_frames[i]->m_samples_per_frame;
-
-    int samples       = 0 == m_frames[i]->m_samples_per_frame ? m_current_samples_per_frame : m_frames[i]->m_samples_per_frame;
-    int64_t timecode  = m_samples_output * m_s2tc;
-    int64_t duration  = samples          * m_s2tc;
-    m_samples_output += samples;
-
-    add_packet(new packet_t(m_frames[i]->m_data, timecode, duration, m_frames[i]->is_sync() ? -1 : m_ref_timecode));
-
-    m_ref_timecode = timecode;
-  }
-
-  m_frames.clear();
 }
 
 connection_result_e
