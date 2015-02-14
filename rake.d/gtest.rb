@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$gtest_apps     = %w{common propedit}
+$gtest_apps     = %w{common merge propedit}
 $gtest_internal = c(:GTEST_TYPE) == "internal"
 
 namespace :tests do
@@ -25,6 +25,7 @@ $build_system_modules[:gtest] = {
     gtest_libs = {
       'common'   => [],
       'propedit' => [ :mtxpropedit ],
+      'merge'    => [ :mtxmerge ],
     }
 
     #
