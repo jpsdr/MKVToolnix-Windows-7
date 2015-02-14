@@ -29,19 +29,16 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    int channels,
                                    bool headerless)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_packetno(0)
-  , m_last_timecode{headerless ? -1 : 0}
-  , m_num_packets_same_tc(0)
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
   , m_id(id)
   , m_profile(profile)
   , m_headerless(headerless)
-  , m_s2tc(1024 * 1000000000ll, m_samples_per_sec)
-  , m_single_packet_duration(1 * m_s2tc)
+  , m_timecode_calculator{static_cast<int64_t>(m_samples_per_sec)}
+  , m_packet_duration{m_timecode_calculator.get_duration(ms_samples_per_packet).to_ns()}
 {
   set_track_type(track_audio);
-  set_track_default_duration(m_single_packet_duration);
+  set_track_default_duration(m_packet_duration);
 }
 
 aac_packetizer_c::~aac_packetizer_c() {
@@ -100,25 +97,8 @@ aac_packetizer_c::set_headers() {
 
 int
 aac_packetizer_c::process_headerless(packet_cptr packet) {
-  int64_t new_timecode;
-
-  if (-1 != packet->timecode) {
-    new_timecode = packet->timecode;
-    if (m_last_timecode == packet->timecode) {
-      m_num_packets_same_tc++;
-      new_timecode += m_num_packets_same_tc * m_s2tc;
-
-    } else {
-      m_last_timecode       = packet->timecode;
-      m_num_packets_same_tc = 0;
-    }
-
-  } else
-    new_timecode = m_packetno * m_s2tc;
-
-  m_packetno++;
-  packet->duration = m_single_packet_duration;
-  packet->timecode = new_timecode;
+  packet->timecode = m_timecode_calculator.get_next_timecode(ms_samples_per_packet).to_ns();
+  packet->duration = m_packet_duration;
 
   add_packet(packet);
 
@@ -127,11 +107,10 @@ aac_packetizer_c::process_headerless(packet_cptr packet) {
 
 int
 aac_packetizer_c::process(packet_cptr packet) {
+  m_timecode_calculator.add_timecode(packet);
+
   if (m_headerless)
     return process_headerless(packet);
-
-  if (packet->has_timecode())
-    m_parser.add_timecode(timecode_c::ns(packet->timecode));
 
   m_parser.add_bytes(packet->data);
 
@@ -139,21 +118,12 @@ aac_packetizer_c::process(packet_cptr packet) {
     return FILE_STATUS_MOREDATA;
 
   while (m_parser.frames_available()) {
-    auto frame    = m_parser.get_frame();
-    auto timecode = frame.m_timecode.to_ns(m_last_timecode + m_packetno * m_s2tc);
-    auto packet   = std::make_shared<packet_t>(frame.m_data, timecode, m_single_packet_duration);
+    auto frame = m_parser.get_frame();
+
+    process_headerless(std::make_shared<packet_t>(frame.m_data));
 
     if (verbose && frame.m_garbage_size)
       mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n")) % frame.m_garbage_size);
-
-    add_packet(packet);
-
-    if (frame.m_timecode.valid()) {
-      m_last_timecode = timecode;
-      m_packetno      = 1;
-
-    } else
-      ++m_packetno;
   }
 
   return FILE_STATUS_MOREDATA;

@@ -19,15 +19,17 @@
 #include "common/aac.h"
 #include "common/samples_timecode_conv.h"
 #include "merge/generic_packetizer.h"
+#include "merge/timecode_calculator.h"
 
 class aac_packetizer_c: public generic_packetizer_c {
 private:
-  int64_t m_packetno, m_last_timecode, m_num_packets_same_tc;
   int m_samples_per_sec, m_channels, m_id, m_profile;
   bool m_headerless;
-  samples_to_timecode_converter_c m_s2tc;
-  int64_t m_single_packet_duration;
   aac::parser_c m_parser;
+  timecode_calculator_c m_timecode_calculator;
+  int64_t m_packet_duration;
+
+  static const int ms_samples_per_packet = 1024;
 
 public:
   aac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int id, int profile, int samples_per_sec, int channels, bool headerless);
