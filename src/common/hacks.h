@@ -30,14 +30,13 @@
 #define ENGAGE_ALLOW_AVC_IN_VFW_MODE         9
 #define ENGAGE_KEEP_BITSTREAM_AR_INFO       10
 #define ENGAGE_NO_SIMPLE_BLOCKS             11
-#define ENGAGE_OLD_AAC_CODECID              12
-#define ENGAGE_USE_CODEC_STATE_ONLY         13
-#define ENGAGE_ENABLE_TIMECODE_WARNING      14
-#define ENGAGE_REMOVE_BITSTREAM_AR_INFO     15
-#define ENGAGE_VOBSUB_SUBPIC_STOP_CMDS      16
-#define ENGAGE_NO_CUE_DURATION              17
-#define ENGAGE_NO_CUE_RELATIVE_POSITION     18
-#define ENGAGE_MAX_IDX                      18
+#define ENGAGE_USE_CODEC_STATE_ONLY         12
+#define ENGAGE_ENABLE_TIMECODE_WARNING      13
+#define ENGAGE_REMOVE_BITSTREAM_AR_INFO     14
+#define ENGAGE_VOBSUB_SUBPIC_STOP_CMDS      15
+#define ENGAGE_NO_CUE_DURATION              16
+#define ENGAGE_NO_CUE_RELATIVE_POSITION     17
+#define ENGAGE_MAX_IDX                      17
 
 void engage_hacks(const std::string &hacks);
 void engage_hack(unsigned int id);

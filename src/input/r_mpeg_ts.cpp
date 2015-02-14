@@ -1466,7 +1466,7 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
 
 void
 mpeg_ts_reader_c::create_aac_audio_packetizer(mpeg_ts_track_ptr const &track) {
-  auto aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_frame.m_header.id, track->m_aac_frame.m_header.profile, track->m_aac_frame.m_header.sample_rate, track->m_aac_frame.m_header.channels, true);
+  auto aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_frame.m_header.profile, track->m_aac_frame.m_header.sample_rate, track->m_aac_frame.m_header.channels, true);
   track->ptzr         = add_packetizer(aac_packetizer);
   track->converter.reset(new aac_framing_packet_converter_c{PTZR(track->ptzr)});
 

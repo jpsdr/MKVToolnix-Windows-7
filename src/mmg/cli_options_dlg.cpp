@@ -141,8 +141,6 @@ cli_options_dlg::init_cli_option_list() {
                                            Z("Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI")));
   all_cli_options.push_back(cli_option_t(wxU("--engage no_simpleblocks"),
                                            Z("Disable the use of SimpleBlocks instead of BlockGroups.")));
-  all_cli_options.push_back(cli_option_t(wxU("--engage old_aac_codecid"),
-                                           Z("Use the old AAC codec IDs (e.g. 'A_AAC/MPEG4/SBR') instead of the new one ('A_AAC').")));
   all_cli_options.push_back(cli_option_t(wxU("--engage use_codec_state"),
                                            Z("Allows the use of the CodecState element. This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers.")));
   all_cli_options.push_back(cli_option_t(wxU("--engage remove_bitstream_ar_info"),

@@ -23,7 +23,7 @@
 
 class aac_packetizer_c: public generic_packetizer_c {
 private:
-  int m_samples_per_sec, m_channels, m_id, m_profile;
+  int m_samples_per_sec, m_channels, m_profile;
   bool m_headerless;
   aac::parser_c m_parser;
   timecode_calculator_c m_timecode_calculator;
@@ -32,7 +32,7 @@ private:
   static const int ms_samples_per_packet = 1024;
 
 public:
-  aac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int id, int profile, int samples_per_sec, int channels, bool headerless);
+  aac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int profile, int samples_per_sec, int channels, bool headerless);
   virtual ~aac_packetizer_c();
 
   virtual int process(packet_cptr packet);

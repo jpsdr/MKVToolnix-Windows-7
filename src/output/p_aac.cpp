@@ -15,7 +15,6 @@
 
 #include "common/aac.h"
 #include "common/codec.h"
-#include "common/hacks.h"
 #include "merge/connection_checks.h"
 #include "output/p_aac.h"
 
@@ -23,7 +22,6 @@ using namespace libmatroska;
 
 aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
-                                   int id,
                                    int profile,
                                    int samples_per_sec,
                                    int channels,
@@ -31,7 +29,6 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
   : generic_packetizer_c(p_reader, p_ti)
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
-  , m_id(id)
   , m_profile(profile)
   , m_headerless(headerless)
   , m_timecode_calculator{static_cast<int64_t>(m_samples_per_sec)}
@@ -46,43 +43,14 @@ aac_packetizer_c::~aac_packetizer_c() {
 
 void
 aac_packetizer_c::set_headers() {
-  if (!hack_engaged(ENGAGE_OLD_AAC_CODECID))
-    set_codec_id(MKV_A_AAC);
-
-  else if (AAC_ID_MPEG4 == m_id) {
-    if (AAC_PROFILE_MAIN == m_profile)
-      set_codec_id(MKV_A_AAC_4MAIN);
-    else if (AAC_PROFILE_LC == m_profile)
-      set_codec_id(MKV_A_AAC_4LC);
-    else if (AAC_PROFILE_SSR == m_profile)
-      set_codec_id(MKV_A_AAC_4SSR);
-    else if (AAC_PROFILE_LTP == m_profile)
-      set_codec_id(MKV_A_AAC_4LTP);
-    else if (AAC_PROFILE_SBR == m_profile)
-      set_codec_id(MKV_A_AAC_4SBR);
-    else
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Unknown AAC MPEG-4 object type %1%.")) % m_profile);
-
-  } else {
-    if (AAC_PROFILE_MAIN == m_profile)
-      set_codec_id(MKV_A_AAC_2MAIN);
-    else if (AAC_PROFILE_LC == m_profile)
-      set_codec_id(MKV_A_AAC_2LC);
-    else if (AAC_PROFILE_SSR == m_profile)
-      set_codec_id(MKV_A_AAC_2SSR);
-    else if (AAC_PROFILE_SBR == m_profile)
-      set_codec_id(MKV_A_AAC_2SBR);
-    else
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Unknown AAC MPEG-2 profile %1%.")) % m_profile);
-  }
-
+  set_codec_id(MKV_A_AAC);
   set_audio_sampling_freq((float)m_samples_per_sec);
   set_audio_channels(m_channels);
 
   if (m_ti.m_private_data && (0 < m_ti.m_private_data->get_size()))
     set_codec_private(m_ti.m_private_data);
 
-  else if (!hack_engaged(ENGAGE_OLD_AAC_CODECID)) {
+  else {
     unsigned char buffer[5];
     int length = aac::create_audio_specific_config(buffer,
                                                    AAC_PROFILE_SBR == m_profile ? AAC_PROFILE_LC : m_profile,

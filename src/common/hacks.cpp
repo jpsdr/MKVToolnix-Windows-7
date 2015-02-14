@@ -35,7 +35,6 @@ static const struct {
   { ENGAGE_ALLOW_AVC_IN_VFW_MODE,        "allow_avc_in_vfw_mode"        },
   { ENGAGE_KEEP_BITSTREAM_AR_INFO,       "keep_bitstream_ar_info"       },
   { ENGAGE_NO_SIMPLE_BLOCKS,             "no_simpleblocks"              },
-  { ENGAGE_OLD_AAC_CODECID,              "old_aac_codecid"              },
   { ENGAGE_USE_CODEC_STATE_ONLY,         "use_codec_state_only"         },
   { ENGAGE_ENABLE_TIMECODE_WARNING,      "enable_timecode_warning"      },
   { ENGAGE_REMOVE_BITSTREAM_AR_INFO,     "remove_bitstream_ar_info"     },

@@ -992,7 +992,7 @@ ogm_a_aac_demuxer_c::create_packetizer() {
          boost::format("ogm_reader: %1%/%2%: profile %3%, channels %4%, sample_rate %5%, sbr %6%, output_sample_rate %7%\n")
          % m_ti.m_id % m_ti.m_fname % profile % channels % sample_rate % sbr % output_sample_rate);
 
-  generic_packetizer_c *ptzr_obj = new aac_packetizer_c(reader, m_ti, AAC_ID_MPEG4, profile, sample_rate, channels, true);
+  generic_packetizer_c *ptzr_obj = new aac_packetizer_c(reader, m_ti, profile, sample_rate, channels, true);
   if (sbr)
     ptzr_obj->set_audio_output_sampling_freq(output_sample_rate);
 
