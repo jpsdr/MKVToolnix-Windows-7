@@ -5,22 +5,22 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   Extraction of Blu-Ray subtitles.
+   Extraction of Blu-Ray graphics subtitles.
 
    Written by Moritz Bunkus and Mike Chen.
 */
 
-#ifndef MTX_XTR_PGS_H
-#define MTX_XTR_PGS_H
+#ifndef MTX_XTR_HDMV_PGS_H
+#define MTX_XTR_HDMV_PGS_H
 
 #include "common/common_pch.h"
 
 #include "extract/xtr_base.h"
 
-class xtr_pgs_c: public xtr_base_c {
+class xtr_hdmv_pgs_c: public xtr_base_c {
 
 public:
-  xtr_pgs_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
+  xtr_hdmv_pgs_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
   virtual void handle_frame(xtr_frame_t &f);
 
