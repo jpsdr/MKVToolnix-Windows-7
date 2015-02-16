@@ -68,6 +68,7 @@
 #if defined(HAVE_FLAC_FORMAT_H)
 # include "output/p_flac.h"
 #endif
+#include "output/p_hdmv_pgs.h"
 #include "output/p_hevc.h"
 #include "output/p_hevc_es.h"
 #include "output/p_kate.h"
@@ -78,7 +79,6 @@
 #include "output/p_opus.h"
 #include "output/p_passthrough.h"
 #include "output/p_pcm.h"
-#include "output/p_pgs.h"
 #include "output/p_textsubs.h"
 #include "output/p_theora.h"
 #include "output/p_tta.h"
@@ -1662,8 +1662,8 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
     show_packetizer_info(t->tnum, t->ptzr_ptr);
     t->sub_type = 'k';
 
-  } else if (t->codec.is(codec_c::S_PGS)) {
-    set_track_packetizer(t, new pgs_packetizer_c(this, nti));
+  } else if (t->codec.is(codec_c::S_HDMV_PGS)) {
+    set_track_packetizer(t, new hdmv_pgs_packetizer_c(this, nti));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
     t->sub_type = 'p';
 

@@ -18,7 +18,7 @@
 #include "common/mm_io_x.h"
 #include "common/pgssup.h"
 #include "input/r_pgssup.h"
-#include "output/p_pgs.h"
+#include "output/p_hdmv_pgs.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
 
@@ -70,7 +70,7 @@ pgssup_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('s', 0) || (NPTZR() != 0))
     return;
 
-  pgs_packetizer_c *ptzr = new pgs_packetizer_c(this, m_ti);
+  hdmv_pgs_packetizer_c *ptzr = new hdmv_pgs_packetizer_c(this, m_ti);
   ptzr->set_aggregate_packets(true);
   add_packetizer(ptzr);
 
@@ -118,5 +118,5 @@ pgssup_reader_c::read(generic_packetizer_c *,
 void
 pgssup_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::S_PGS, "PGS"));
+  id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::S_HDMV_PGS, "HDMV PGS"));
 }

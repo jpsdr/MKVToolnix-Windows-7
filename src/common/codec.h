@@ -128,7 +128,7 @@ public:
     , S_USF
     , S_VOBSUB
     , S_KATE
-    , S_PGS
+    , S_HDMV_PGS
 
     , B_VOBBTN = 0x4000
   };

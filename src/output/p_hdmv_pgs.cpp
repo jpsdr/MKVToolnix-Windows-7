@@ -19,11 +19,11 @@
 #include "common/codec.h"
 #include "common/compression.h"
 #include "common/pgssup.h"
-#include "output/p_pgs.h"
+#include "output/p_hdmv_pgs.h"
 
 using namespace libmatroska;
 
-pgs_packetizer_c::pgs_packetizer_c(generic_reader_c *p_reader,
+hdmv_pgs_packetizer_c::hdmv_pgs_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti)
   : generic_packetizer_c(p_reader, p_ti)
   , m_aggregate_packets(false)
@@ -32,11 +32,11 @@ pgs_packetizer_c::pgs_packetizer_c(generic_reader_c *p_reader,
   set_default_compression_method(COMPRESSION_ZLIB);
 }
 
-pgs_packetizer_c::~pgs_packetizer_c() {
+hdmv_pgs_packetizer_c::~hdmv_pgs_packetizer_c() {
 }
 
 void
-pgs_packetizer_c::set_headers() {
+hdmv_pgs_packetizer_c::set_headers() {
   set_codec_id(MKV_S_HDMV_PGS);
 
   generic_packetizer_c::set_headers();
@@ -45,7 +45,7 @@ pgs_packetizer_c::set_headers() {
 }
 
 int
-pgs_packetizer_c::process(packet_cptr packet) {
+hdmv_pgs_packetizer_c::process(packet_cptr packet) {
   if (!m_aggregate_packets) {
     add_packet(packet);
     return FILE_STATUS_MOREDATA;
@@ -68,7 +68,7 @@ pgs_packetizer_c::process(packet_cptr packet) {
 }
 
 connection_result_e
-pgs_packetizer_c::can_connect_to(generic_packetizer_c *src,
+hdmv_pgs_packetizer_c::can_connect_to(generic_packetizer_c *src,
                                  std::string &) {
-  return !dynamic_cast<pgs_packetizer_c *>(src) ? CAN_CONNECT_NO_FORMAT : CAN_CONNECT_YES;
+  return !dynamic_cast<hdmv_pgs_packetizer_c *>(src) ? CAN_CONNECT_NO_FORMAT : CAN_CONNECT_YES;
 }

@@ -62,7 +62,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("UniversalSubtitleFormat", S_USF,       track_subtitle, "usf\\s|S_TEXT/USF");
   ms_codecs.emplace_back("Kate",                    S_KATE,      track_subtitle, "kate|S_KATE");
   ms_codecs.emplace_back("VobSub",                  S_VOBSUB,    track_subtitle, "S_VOBSUB(?:/ZLIB)?");
-  ms_codecs.emplace_back("PGS",                     S_PGS,       track_subtitle, "S_HDMV/PGS");
+  ms_codecs.emplace_back("HDMV PGS",                S_HDMV_PGS,  track_subtitle, MKV_S_HDMV_PGS);
 
   ms_codecs.emplace_back("VobButton",               B_VOBBTN,    track_buttons,  "B_VOBBTN");
 }
