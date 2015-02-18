@@ -1269,15 +1269,11 @@ kax_reader_c::process_global_tags() {
 }
 
 void
-kax_reader_c::init_passthrough_packetizer(kax_track_t *t) {
+kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
+                                          track_info_c &nti) {
   passthrough_packetizer_c *ptzr;
-  track_info_c nti(m_ti);
 
   mxinfo_tid(m_ti.m_fname, t->tnum, boost::format(Y("Using the generic output module for track type '%1%'.\n")) % MAP_TRACK_TYPE_STRING(t->type));
-
-  nti.m_id                  = t->tnum;
-  nti.m_language            = t->language;
-  nti.m_track_name          = t->track_name;
 
   ptzr                      = new passthrough_packetizer_c(this, nti);
   t->ptzr                   = add_packetizer(ptzr);
@@ -1634,7 +1630,7 @@ kax_reader_c::create_audio_packetizer(kax_track_t *t,
     create_wavpack_audio_packetizer(t, nti);
 
   else
-    init_passthrough_packetizer(t);
+    init_passthrough_packetizer(t, nti);
 
   if (0.0 != t->a_osfreq)
     PTZR(t->ptzr)->set_audio_output_sampling_freq(t->a_osfreq);
@@ -1668,7 +1664,7 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
     t->sub_type = 'p';
 
   } else
-    init_passthrough_packetizer(t);
+    init_passthrough_packetizer(t, nti);
 
 }
 
@@ -1676,7 +1672,7 @@ void
 kax_reader_c::create_button_packetizer(kax_track_t *t,
                                        track_info_c &nti) {
   if (!t->codec.is(codec_c::B_VOBBTN)) {
-    init_passthrough_packetizer(t);
+    init_passthrough_packetizer(t, nti);
     return;
   }
 
@@ -1706,7 +1702,7 @@ kax_reader_c::create_packetizer(int64_t tid) {
     nti.m_tags       = clone(t->tags);
 
   if (hack_engaged(ENGAGE_FORCE_PASSTHROUGH_PACKETIZER)) {
-    init_passthrough_packetizer(t);
+    init_passthrough_packetizer(t, nti);
     set_packetizer_headers(t);
 
     return;
@@ -1780,7 +1776,7 @@ kax_reader_c::create_vc1_video_packetizer(kax_track_t *t,
   if (   !t->first_frames_data.empty()
       && (4 <= t->first_frames_data[0]->get_size())
       && !vc1::is_marker(get_uint32_be(t->first_frames_data[0]->get_buffer()))) {
-    init_passthrough_packetizer(t);
+    init_passthrough_packetizer(t, nti);
     return;
   }
 

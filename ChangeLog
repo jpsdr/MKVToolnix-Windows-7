@@ -1,3 +1,10 @@
+2015-02-18  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: Matroska reader: track-specific tags weren't
+        copied for tracks for which the pass-through packetizer was used
+        (e.g. those with the codec ID A_MS/ACM) instead of a specialized
+        one.
+
 2015-02-14  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: enhancement: The code for determining the time codes

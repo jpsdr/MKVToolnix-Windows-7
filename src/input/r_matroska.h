@@ -220,7 +220,7 @@ public:
 
 protected:
   virtual void set_track_packetizer(kax_track_t *t, generic_packetizer_c *ptzr);
-  virtual void init_passthrough_packetizer(kax_track_t *t);
+  virtual void init_passthrough_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void set_packetizer_headers(kax_track_t *t);
   virtual void read_first_frames(kax_track_t *t, unsigned num_wanted = 1);
   virtual kax_track_t *find_track_by_num(uint64_t num, kax_track_t *c = nullptr);
