@@ -51,6 +51,7 @@ def setup_globals
   $application_subdirs     =  { "mmg" => "mmg/", "mkvtoolnix-gui" => "mkvtoolnix-gui/" }
   $applications            =  $programs.collect { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
   $manpages                =  $programs.collect { |name| "doc/man/#{name}.1" }
+  $manpages                << "doc/man/mkvtoolnix-gui.1" if !$build_mkvtoolnix_gui
 
   $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Ilib/utf8-cpp/source -Isrc"
   $system_libdirs          = "-Llib/avilib-0.6.10 -Llib/librmff -Lsrc/common"
