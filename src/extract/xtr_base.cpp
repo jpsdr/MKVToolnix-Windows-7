@@ -27,11 +27,11 @@
 #include "extract/xtr_avc.h"
 #include "extract/xtr_avi.h"
 #include "extract/xtr_base.h"
+#include "extract/xtr_hdmv_pgs.h"
 #include "extract/xtr_hevc.h"
 #include "extract/xtr_ivf.h"
 #include "extract/xtr_mpeg1_2.h"
 #include "extract/xtr_ogg.h"
-#include "extract/xtr_pgs.h"
 #include "extract/xtr_rmff.h"
 #include "extract/xtr_textsubs.h"
 #include "extract/xtr_tta.h"
@@ -191,7 +191,7 @@ xtr_base_c::create_extractor(const std::string &new_codec_id,
   else if (new_codec_id == MKV_S_KATE)
     return new xtr_oggkate_c(new_codec_id, new_tid, tspec);
   else if (new_codec_id == MKV_S_HDMV_PGS)
-    return new xtr_pgs_c(new_codec_id, new_tid, tspec);
+    return new xtr_hdmv_pgs_c(new_codec_id, new_tid, tspec);
 
   return nullptr;
 }

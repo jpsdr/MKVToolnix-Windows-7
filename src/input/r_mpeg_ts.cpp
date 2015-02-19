@@ -37,11 +37,11 @@
 #include "output/p_ac3.h"
 #include "output/p_avc.h"
 #include "output/p_dts.h"
+#include "output/p_hdmv_pgs.h"
 #include "output/p_hevc_es.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
 #include "output/p_pcm.h"
-#include "output/p_pgs.h"
 #include "output/p_textsubs.h"
 #include "output/p_truehd.h"
 #include "output/p_vc1.h"
@@ -1045,7 +1045,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
         break;
       case STREAM_SUBTITLES_HDMV_PGS:
         track->type      = ES_SUBT_TYPE;
-        track->codec     = codec_c::look_up(codec_c::S_PGS);
+        track->codec     = codec_c::look_up(codec_c::S_HDMV_PGS);
         track->probed_ok = true;
         break;
       case ISO_13818_PES_PRIVATE:
@@ -1454,7 +1454,7 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
     else if (track->codec.is(codec_c::V_VC1))
       create_vc1_video_packetizer(track);
 
-  } else if (track->codec.is(codec_c::S_PGS))
+  } else if (track->codec.is(codec_c::S_HDMV_PGS))
     create_hdmv_pgs_subtitles_packetizer(track);
 
   else if (track->codec.is(codec_c::S_SRT))
@@ -1530,7 +1530,7 @@ mpeg_ts_reader_c::create_vc1_video_packetizer(mpeg_ts_track_ptr &track) {
 
 void
 mpeg_ts_reader_c::create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track) {
-  pgs_packetizer_c *ptzr = new pgs_packetizer_c(this, m_ti);
+  auto ptzr = new hdmv_pgs_packetizer_c(this, m_ti);
   ptzr->set_aggregate_packets(true);
   track->ptzr = add_packetizer(ptzr);
 

@@ -70,9 +70,9 @@ void
 stn_t::dump()
   const {
   mxinfo(boost::format("      stn dump\n"
-                       "        num_video / num_audio / num_pg:             %1% / %2% / %3%\n"
-                       "        num_sec_video / num_sec_audio / num_pip_pg: %4% / %5% / %6%\n")
-         % num_video % num_audio % num_pip_pg
+                       "        num_video / num_audio / num_pg / num_ig:    %1% / %2% / %3% / %4%\n"
+                       "        num_sec_video / num_sec_audio / num_pip_pg: %5% / %6% / %7%\n")
+         % num_video % num_audio % num_pg % num_ig
          % num_secondary_video % num_secondary_audio % num_pip_pg);
 
   for (auto &stream : video_streams)
