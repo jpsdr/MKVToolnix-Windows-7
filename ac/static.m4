@@ -8,9 +8,9 @@ STATIC_LIBS=""
 
 if test x"$enable_static" = xyes ; then
   STATIC_LIBS="  -lpthread -static  "
-  opt_features_yes="$opt_features_yes\n   * build static libraries"
+  opt_features_yes="$opt_features_yes\n   * make a static build of the applications"
 else
-  opt_features_no="$opt_features_no\n   * build static libraries"
+  opt_features_no="$opt_features_no\n   * make a static build of the applications"
 fi
 
 AC_SUBST(STATIC_LIBS)
