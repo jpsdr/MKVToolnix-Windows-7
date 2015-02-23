@@ -1034,12 +1034,14 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
 
       case STREAM_AUDIO_AC3:
       case STREAM_AUDIO_AC3_PLUS: // EAC3
+      case STREAM_AUDIO_AC3_PLUS2: // EAC3 secondary stream
         track->type      = ES_AUDIO_TYPE;
         track->codec     = codec_c::look_up(codec_c::A_AC3);
         break;
       case STREAM_AUDIO_DTS:
       case STREAM_AUDIO_DTS_HD:
       case STREAM_AUDIO_DTS_HD_MA:
+      case STREAM_AUDIO_DTS_HD2:
         track->type      = ES_AUDIO_TYPE;
         track->codec     = codec_c::look_up(codec_c::A_DTS);
         break;

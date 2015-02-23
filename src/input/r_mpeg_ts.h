@@ -65,6 +65,8 @@ enum mpeg_ts_stream_type_e {
   STREAM_AUDIO_AC3_PLUS     = 0x84, // Audio AC3 - Dolby Digital Plus (EAC3)
   STREAM_AUDIO_DTS_HD       = 0x85, // Audio DTS HD
   STREAM_AUDIO_DTS_HD_MA    = 0x86, // Audio DTS HD Master Audio
+  STREAM_AUDIO_AC3_PLUS2    = 0xa1, // Audio AC3 - Dolby Digital Plus (EAC3); secondary stream
+  STREAM_AUDIO_DTS_HD2      = 0xa2, // Audio DTS HD Express; secondary stream
   STREAM_VIDEO_VC1          = 0xEA, // Video VC-1
   STREAM_SUBTITLES_HDMV_PGS = 0x90, // HDMV PGS subtitles
 };
