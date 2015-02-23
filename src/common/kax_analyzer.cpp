@@ -560,10 +560,53 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
   m_file->setFilePointer(void_pos);
 
   // Yes. Write a new EbmlVoid element and update the internal records.
+
+  // Calculating the void element's content size. This is not straight
+  // forward because there are special values for the total size for
+  // which the header size must be forced to be one byte more than would
+  // be strictly necessary in order to occupy the space. Here's an
+  // example:
+
+  // A two-byte header field (one for the ID, one for the content
+  // size) can have a content size of at most 127 bytes, meaning a
+  // total size of 129 is easy to achieve: set the content size to 127
+  // bytes, libEBML will calculate the required length of the content
+  // size field to be 1 and the resulting element's total size will be
+  // the desired 129 bytes.
+
+  // A content size of 128 would mean that the content size field must be
+  // at least two bytes long. Taking the element's ID into account this
+  // would mean a total element size of 128 + 2 + 1 = 131 bytes. So
+  // getting libEBML to produce an element of a total size of 131 is
+  // easy, too: set the content size to 128 bytes, and libEBML will do
+  // the rest.
+
+  // The problematic total size is a 130 bytes. There simply is no
+  // content size for which adding the minimal length of the content
+  // size field and 1 for the ID would result in a total size of 130
+  // bytes.
+
+  // The solution is writing the length field with more bytes than
+  // necessary. In the case of a total size of 130 bytes we could use
+  // the maximum one-byte content size = 127 bytes, add one byte for the
+  // ID and force the content size field's length to be two instead of
+  // one byte (0x407f instead of 0xff).
+
+  // Similar corner cases exist for the transition between content
+  // size field being two/three bytes, three/four bytes long etc. In
+  // order to keep the code simple we always use an eight-bytes long
+  // content size field if the total size is at least nine bytes and a
+  // one-byte long content size field otherwise.
+
   EbmlVoid evoid;
-  evoid.SetSize(void_size);
-  evoid.UpdateSize();
-  evoid.SetSize(void_size - evoid.HeadSize());
+  if (void_size < 9)
+    evoid.SetSize(void_size - 2);
+
+  else {
+    evoid.SetSize(void_size - 9);
+    evoid.SetSizeLength(8);
+  }
+
   evoid.Render(*m_file);
 
   m_data.insert(m_data.begin() + data_idx + 1, kax_analyzer_data_c::create(EBML_ID(EbmlVoid), void_pos, void_size));

@@ -1,5 +1,10 @@
 2015-02-23  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvpropedit, mmg's header editor: bug fix: if updating the file
+        required creating an EBML void for a 130 bytes long gap then the
+        void element created was one byte too short resulting in an
+        invalid file structure. Fixes #1121.
+
         * mkvmerge: bug fix: If the MP4 track headers for MP3 tracks
         contain invalid values (number of channels is 0 or the sampling
         rate is 0) then mkvmerge will re-derive these parameters from the
