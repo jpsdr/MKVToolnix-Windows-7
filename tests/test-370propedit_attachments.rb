@@ -47,7 +47,7 @@ test "several" do
   commands.each do |command|
     sys "cp #{src} #{work}"
     hashes << hash_file(work)
-    propedit "#{work} #{command}"
+    propedit work, command
     hashes << hash_file(work)
   end
 

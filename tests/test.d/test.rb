@@ -116,8 +116,14 @@ class Test
     retcode = args.detect { |a| !a.is_a? String } || 0
     args.reject!          { |a| !a.is_a? String }
 
-    command = "../src/mkvpropedit --engage no_variable_data " + (args.size == 1 ? tmp : args.shift) + " " + args.shift
-    sys command, retcode
+    file_name = args.size == 1 ? tmp : args.shift
+
+    command = "../src/mkvpropedit --engage no_variable_data #{file_name} #{args.shift}"
+    *result = sys command, retcode
+
+    sys "../src/tools/ebml_validator -M #{file_name}" if FileTest.exists?("../src/tools/ebml_validator")
+
+    return *result
   end
 
   def xtr_tracks_s(*args)

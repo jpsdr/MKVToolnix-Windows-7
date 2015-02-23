@@ -248,12 +248,16 @@ class SimpleTest
     self.sys command, :exit_code => options[:exit_code]
   end
 
-  def propedit *args
+  def propedit file_name, *args
     options = args.extract_options!
     fail ArgumentError if args.empty?
 
-    command  = "../src/mkvpropedit --engage no_variable_data #{args.first}"
-    self.sys command, :exit_code => options[:exit_code]
+    command = "../src/mkvpropedit --engage no_variable_data #{file_name} #{args.first}"
+    *result = self.sys command, :exit_code => options[:exit_code]
+
+    self.sys "../src/tools/ebml_validator -M #{file_name}" if FileTest.exists?("../src/tools/ebml_validator")
+
+    return *result
   end
 
   def sys *args
