@@ -266,7 +266,7 @@ struct qtmp4_demuxer_c {
   debugging_option_c m_debug_tables, m_debug_fps, m_debug_headers, m_debug_editlists;
 
   qtmp4_demuxer_c(qtmp4_reader_c &reader)
-    : m_reader{reader}
+    : m_reader(reader)
     , ok{}
     , m_tables_updated{}
     , type{'?'}
