@@ -5,6 +5,10 @@
 
 2015-02-23  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvextract: bug fix: Fixed VobSubs being written to the wrong
+        directory if the output file name given by the user didn't have an
+        extension but one of the directories contained a dot. Fixes #1124.
+
         * mkvpropedit, mmg's header editor: bug fix: if updating the file
         required creating an EBML void for a 130 bytes long gap then the
         void element created was one byte too short resulting in an

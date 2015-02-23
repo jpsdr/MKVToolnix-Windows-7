@@ -51,9 +51,6 @@ xtr_vobsub_c::xtr_vobsub_c(const std::string &codec_id,
   , m_base_name(tspec.out_name)
   , m_stream_id(0x20)
 {
-  int pos = m_base_name.rfind('.');
-  if (0 <= pos)
-    m_base_name.erase(pos);
 }
 
 void
@@ -72,7 +69,7 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
   m_language = kt_get_language(track);
 
   if (!master) {
-    std::string sub_file_name = m_base_name + ".sub";
+    auto sub_file_name = m_base_name.replace_extension("sub").native();
 
     try {
       m_out = mm_write_buffer_io_c::open(sub_file_name, 128 * 1024);
@@ -201,15 +198,15 @@ xtr_vobsub_c::finish_file() {
   if (m_master)
     return;
 
+  auto idx_file_name = m_base_name.replace_extension("idx").native();
+
   try {
     static const char *header_line = "# VobSub index file, v7 (do not modify this line!)\n";
 
-    m_base_name += ".idx";
-
     m_out.reset();
 
-    mm_write_buffer_io_c idx(new mm_file_io_c(m_base_name, MODE_CREATE), 128 * 1024);
-    mxinfo(boost::format(Y("Writing the VobSub index file '%1%'.\n")) % m_base_name);
+    mm_write_buffer_io_c idx(new mm_file_io_c(idx_file_name, MODE_CREATE), 128 * 1024);
+    mxinfo(boost::format(Y("Writing the VobSub index file '%1%'.\n")) % idx_file_name);
 
     if ((25 > m_private_data->get_size()) || strncasecmp((char *)m_private_data->get_buffer(), header_line, 25))
       idx.puts(header_line);
@@ -221,7 +218,7 @@ xtr_vobsub_c::finish_file() {
       m_slaves[slave]->write_idx(idx, slave + 1);
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(boost::format(Y("Failed to create the file '%1%': %2%\n")) % m_base_name % ex);
+    mxerror(boost::format(Y("Failed to create the file '%1%': %2%\n")) % idx_file_name % ex);
   }
 }
 

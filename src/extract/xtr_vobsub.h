@@ -22,7 +22,8 @@ public:
   std::vector<int64_t> m_positions, m_timecodes;
   std::vector<xtr_vobsub_c *> m_slaves;
   memory_cptr m_private_data;
-  std::string m_base_name, m_language;
+  bfs::path m_base_name;
+  std::string m_language;
   int m_stream_id;
 
 public:
