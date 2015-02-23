@@ -236,6 +236,7 @@ typedef struct
   
   long   width;             /* Width  of a video frame */
   long   height;            /* Height of a video frame */
+  short  bpp;               /* Bits per pixel */
   double fps;               /* Frames per second */
   char   compressor[8];     /* Type of compressor, 4 bytes + padding for 0 byte */
   char   compressor2[8];     /* Type of compressor, 4 bytes + padding for 0 byte */
@@ -357,7 +358,7 @@ typedef struct
 #endif
 
 avi_t* AVI_open_output_file(void * filename);
-void AVI_set_video(avi_t *AVI, int width, int height, double fps, char *compressor);
+void AVI_set_video(avi_t *AVI, int width, int height, short bpp, double fps, char *compressor);
 void AVI_set_audio(avi_t *AVI, int channels, long rate, int bits, int format, long mp3rate);
 int  AVI_write_frame(avi_t *AVI, char *data, long bytes, int keyframe);
 int  AVI_dup_frame(avi_t *AVI);

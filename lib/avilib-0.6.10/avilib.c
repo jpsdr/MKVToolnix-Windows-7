@@ -708,7 +708,7 @@ avi_t* AVI_open_output_file(void * filename)
    return AVI;
 }
 
-void AVI_set_video(avi_t *AVI, int width, int height, double fps, char *compressor)
+void AVI_set_video(avi_t *AVI, int width, int height, short bpp, double fps, char *compressor)
 {
    /* may only be called if file is open for writing */
 
@@ -716,6 +716,7 @@ void AVI_set_video(avi_t *AVI, int width, int height, double fps, char *compress
 
    AVI->width  = width;
    AVI->height = height;
+   AVI->bpp    = bpp;
    AVI->fps    = fps;
    
    if(strncmp(compressor, "RGB", 3)==0) {
@@ -897,10 +898,10 @@ int avi_update_header(avi_t *AVI)
    OUTLONG(40 + xd_size);	/* Size */
    OUTLONG(AVI->width);         /* Width */
    OUTLONG(AVI->height);        /* Height */
-   OUTSHRT(1); OUTSHRT(24);     /* Planes, Count */
+   OUTSHRT(1); OUTSHRT(AVI->bpp); /* Planes, Count */
    OUT4CC (AVI->compressor);    /* Compression */
    // ThOe (*3)
-   OUTLONG(AVI->width*AVI->height*3);  /* SizeImage (in bytes?) */
+   OUTLONG(AVI->width*AVI->height*(AVI->bpp >> 3)); /* SizeImage (in bytes?) */
    OUTLONG(0);                  /* XPelsPerMeter */
    OUTLONG(0);                  /* YPelsPerMeter */
    OUTLONG(0);                  /* ClrUsed: Number of colors used */
@@ -1357,10 +1358,10 @@ static int avi_close_output_file(avi_t *AVI)
    OUTLONG(40 + xd_size);	/* Size */
    OUTLONG(AVI->width);         /* Width */
    OUTLONG(AVI->height);        /* Height */
-   OUTSHRT(1); OUTSHRT(24);     /* Planes, Count */
+   OUTSHRT(1); OUTSHRT(AVI->bpp); /* Planes, Count */
    OUT4CC (AVI->compressor);    /* Compression */
    // ThOe (*3)
-   OUTLONG(AVI->width*AVI->height*3);  /* SizeImage (in bytes?) */
+   OUTLONG(AVI->width*AVI->height*(AVI->bpp >> 3)); /* SizeImage (in bytes?) */
    OUTLONG(0);                  /* XPelsPerMeter */
    OUTLONG(0);                  /* YPelsPerMeter */
    OUTLONG(0);                  /* ClrUsed: Number of colors used */

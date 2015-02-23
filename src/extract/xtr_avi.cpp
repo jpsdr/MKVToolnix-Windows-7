@@ -75,7 +75,7 @@ xtr_avi_c::create_file(xtr_base_c *master,
     m_avi->extradata_size = get_uint32_le(&m_bih->bi_size) - sizeof(alBITMAPINFOHEADER);
   }
 
-  AVI_set_video(m_avi, kt_get_v_pixel_width(track), kt_get_v_pixel_height(track), m_fps, ccodec);
+  AVI_set_video(m_avi, kt_get_v_pixel_width(track), kt_get_v_pixel_height(track), get_uint16_le(&m_bih->bi_bit_count), m_fps, ccodec);
 }
 
 void
