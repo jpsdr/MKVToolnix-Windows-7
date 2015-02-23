@@ -31,6 +31,9 @@
 static int64_t g_start = 0;
 static int64_t g_end   = std::numeric_limits<long long>::max();
 
+static auto g_errors_found   = false;
+static auto g_warnings_found = false;
+
 static int64_t g_file_size;
 static mm_file_io_c *g_in;
 
@@ -285,13 +288,16 @@ parse_content(int level,
       mxinfo(boost::format(Y("%1%pos %2% id 0x%|3$x| size %4% header size %5% (%6%)\n"))
              % level_string(level) % element_start_pos % id.value % size.value % (id.coded_size + size.coded_size) % element_name);
 
-      if (size.is_unknown())
+      if (size.is_unknown()) {
         mxinfo(boost::format(Y("%1%  Warning: size is coded as 'unknown' (all bits are set)\n")) % level_string(level));
+        g_warnings_found = true;
+      }
 
       int64_t content_end_pos = g_in->getFilePointer() + size.value;
 
       if (content_end_pos > end_pos) {
         mxinfo(boost::format(Y("%1%  Error: Element ends after scope\n")) % level_string(level));
+        g_errors_found = true;
         if (!g_in->setFilePointer2(end_pos))
           mxerror(boost::format(Y("Error: Seek to %1%\n")) % end_pos);
         return;
@@ -312,6 +318,7 @@ parse_content(int level,
         :                                                    Y("reason is unknown");
 
       mxinfo(boost::format(Y("%1%Error at %2%: error reading the element ID (%3%)\n")) % level_string(level) % element_start_pos % message);
+      g_errors_found = true;
 
       if (!g_in->setFilePointer2(end_pos))
         mxerror(boost::format(Y("Error: Seek to %1%\n")) % end_pos);
@@ -324,6 +331,7 @@ parse_content(int level,
         :                                            Y("reason is unknown");
 
       mxinfo(boost::format(Y("%1%Error at %2%: error reading the element size (%3%)\n")) % level_string(level) % element_start_pos % message);
+      g_errors_found = true;
 
       if (!g_in->setFilePointer2(end_pos))
         mxerror(boost::format(Y("Error: Seek to %1%\n")) % end_pos);
@@ -349,6 +357,11 @@ parse_file(const std::string &file_name) {
     mxerror(boost::format(Y("Error: Seek to %1%\n")) % g_start);
 
   parse_content(0, g_end);
+
+  if (g_errors_found)
+    mxexit(2);
+  if (g_warnings_found)
+    mxexit(1);
 }
 
 int
