@@ -92,8 +92,6 @@ def setup_globals
 
   $unwrapped_po            = %{ca es eu it nl uk pl sr tr}
 
-  $build_tools           ||=  c?(:TOOLS)
-
   cflags_common            = "-Wall -Wno-comment -Wfatal-errors #{c(:WLOGICAL_OP)} #{c(:WNO_MISMATCHED_TAGS)} #{c(:WNO_SELF_ASSIGN)} #{c(:QUNUSED_ARGUMENTS)}"
   cflags_common           += " #{c(:OPTIMIZATION_CFLAGS)} -D_FILE_OFFSET_BITS=64 #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:DEBUG_CFLAGS)} #{c(:PROFILING_CFLAGS)} #{c(:USER_CPPFLAGS)}"
   cflags_common           += " -DMTX_LOCALE_DIR=\\\"#{c(:localedir)}\\\" -DMTX_PKG_DATA_DIR=\\\"#{c(:pkgdatadir)}\\\" -DMTX_DOC_DIR=\\\"#{c(:docdir)}\\\""
@@ -125,8 +123,7 @@ def define_default_task
   # The applications themselves
   targets = $applications.clone
 
-  # Build the stuff in the 'src/tools' directory only if requested
-  targets << "apps:tools" if $build_tools
+  targets << "apps:tools"
 
   # Build the unit tests only if requested
   targets << ($run_unit_tests ? 'tests:run_unit' : 'tests:unit') if $have_gtest

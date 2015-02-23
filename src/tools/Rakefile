@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 
-$build_tools = true
-
-import File.dirname(__FILE__) + "/../../Rakefile"
+import ['..', '../..', '../../..'].collect { |subdir| FileList[File.dirname(__FILE__) + "/#{subdir}/build-config.in"].to_a }.flatten.compact.first.gsub(/build-config.in/, 'Rakefile')
 
 # Local Variables:
 # mode: ruby
