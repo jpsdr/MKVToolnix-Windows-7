@@ -207,8 +207,12 @@ struct qt_fragment_t {
   {}
 };
 
+class qtmp4_reader_c;
+
 struct qtmp4_demuxer_c {
-  bool ok;
+  qtmp4_reader_c &m_reader;
+
+  bool ok, m_tables_updated;
 
   char type;
   uint32_t id, container_id;
@@ -261,8 +265,10 @@ struct qtmp4_demuxer_c {
 
   debugging_option_c m_debug_tables, m_debug_fps, m_debug_headers, m_debug_editlists;
 
-  qtmp4_demuxer_c()
-    : ok{false}
+  qtmp4_demuxer_c(qtmp4_reader_c &reader)
+    : m_reader{reader}
+    , ok{}
+    , m_tables_updated{}
     , type{'?'}
     , id{0}
     , container_id{0}
@@ -305,12 +311,12 @@ struct qtmp4_demuxer_c {
   void calculate_timecodes();
   void adjust_timecodes(int64_t delta);
 
-  bool update_tables(int64_t global_time_scale);
-  void update_editlist_table(int64_t global_time_scale);
+  bool update_tables();
+  void update_editlist_table();
 
   void build_index();
 
-  bool read_first_bytes(memory_cptr &buf, int num_bytes, mm_io_cptr in);
+  memory_cptr read_first_bytes(int num_bytes);
 
   bool is_audio() const;
   bool is_video() const;
@@ -338,6 +344,8 @@ struct qtmp4_demuxer_c {
 
   bool verify_subtitles_parameters();
   bool verify_vobsub_subtitles_parameters();
+
+  void derive_track_params_from_mp3_audio_bitstream();
 
   int64_t min_timecode() const;
 
@@ -413,7 +421,7 @@ private:
   std::unordered_map<unsigned int, bool> m_chapter_track_ids;
   std::unordered_map<unsigned int, qt_track_defaults_t> m_track_defaults;
 
-  uint32_t m_time_scale;
+  int64_t m_time_scale;
   fourcc_c m_compression_algorithm;
   int m_main_dmx;
 
@@ -423,7 +431,11 @@ private:
   qt_fragment_t *m_fragment;
   qtmp4_demuxer_c *m_track_for_fragment;
 
+  bool m_timecodes_calculated;
+
   debugging_option_c m_debug_chapters, m_debug_headers, m_debug_tables, m_debug_interleaving, m_debug_resync;
+
+  friend class qtmp4_demuxer_c;
 
 public:
   qtmp4_reader_c(const track_info_c &ti, const mm_io_cptr &in);

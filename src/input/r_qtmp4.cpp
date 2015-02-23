@@ -30,6 +30,7 @@
 #include "common/endian.h"
 #include "common/hacks.h"
 #include "common/iso639.h"
+#include "common/mp3.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "input/r_qtmp4.h"
@@ -131,6 +132,7 @@ qtmp4_reader_c::qtmp4_reader_c(const track_info_c &ti,
   , m_fragment_implicit_offset{}
   , m_fragment{}
   , m_track_for_fragment{}
+  , m_timecodes_calculated{}
   , m_debug_chapters{    "qtmp4|qtmp4_full|qtmp4_chapters"}
   , m_debug_headers{     "qtmp4|qtmp4_full|qtmp4_headers"}
   , m_debug_tables{            "qtmp4_full|qtmp4_tables"}
@@ -305,12 +307,15 @@ qtmp4_reader_c::verify_track_parameters_and_update_indexes() {
     else if (dmx->is_unknown())
       continue;
 
-    dmx->ok = dmx->update_tables(m_time_scale);
+    dmx->ok = dmx->update_tables();
   }
 }
 
 void
 qtmp4_reader_c::calculate_timecodes() {
+  if (m_timecodes_calculated)
+    return;
+
   int64_t min_timecode = 0;
 
   for (auto &dmx : m_demuxers) {
@@ -325,6 +330,8 @@ qtmp4_reader_c::calculate_timecodes() {
 
   for (auto &dmx : m_demuxers)
     dmx->build_index();
+
+  m_timecodes_calculated = true;
 }
 
 void
@@ -582,7 +589,7 @@ qtmp4_reader_c::handle_moov_atom(qt_atom_t parent,
       handle_mvex_atom(atom.to_parent(), level + 1);
 
     else if (atom.fourcc == "trak") {
-      qtmp4_demuxer_cptr new_dmx(new qtmp4_demuxer_c);
+      auto new_dmx = std::make_shared<qtmp4_demuxer_c>(*this);
       new_dmx->id = m_demuxers.size();
 
       handle_trak_atom(new_dmx, atom.to_parent(), level + 1);
@@ -1435,9 +1442,9 @@ qtmp4_reader_c::create_bitmap_info_header(qtmp4_demuxer_cptr &dmx,
 
 bool
 qtmp4_reader_c::create_audio_packetizer_ac3(qtmp4_demuxer_cptr &dmx) {
-  memory_cptr buf = memory_c::alloc(64);
+  auto buf = dmx->read_first_bytes(64);
 
-  if (!dmx->read_first_bytes(buf, 64, m_in) || (-1 == dmx->m_ac3_header.find_in(buf))) {
+  if (!buf || (-1 == dmx->m_ac3_header.find_in(buf))) {
     mxwarn_tid(m_ti.m_fname, dmx->id, Y("No AC3 header found in first frame; track will be skipped.\n"));
     dmx->ok = false;
 
@@ -1462,9 +1469,9 @@ qtmp4_reader_c::create_audio_packetizer_alac(qtmp4_demuxer_cptr &dmx) {
 bool
 qtmp4_reader_c::create_audio_packetizer_dts(qtmp4_demuxer_cptr &dmx) {
   auto const bytes_to_read = 8192u;
-  auto buf                 = memory_c::alloc(bytes_to_read);
+  auto buf                 = dmx->read_first_bytes(bytes_to_read);
 
-  if (!dmx->read_first_bytes(buf, bytes_to_read, m_in) || (-1 == find_dts_header(buf->get_buffer(), bytes_to_read, &dmx->m_dts_header, false))) {
+  if (!buf || (-1 == find_dts_header(buf->get_buffer(), bytes_to_read, &dmx->m_dts_header, false))) {
     mxwarn_tid(m_ti.m_fname, dmx->id, Y("No DTS header found in first frames; track will be skipped.\n"));
     dmx->ok = false;
 
@@ -1995,7 +2002,10 @@ qtmp4_demuxer_c::min_timecode()
 }
 
 bool
-qtmp4_demuxer_c::update_tables(int64_t global_m_time_scale) {
+qtmp4_demuxer_c::update_tables() {
+  if (m_tables_updated)
+    return true;
+
   uint64_t last = chunk_table.size();
 
   if (!last)
@@ -2043,6 +2053,8 @@ qtmp4_demuxer_c::update_tables(int64_t global_m_time_scale) {
     else
       mxerror(Y("Quicktime/MP4 reader: Constant samplesize & variable duration not yet supported. Contact the author if you have such a sample file.\n"));
 
+    m_tables_updated = true;
+
     return true;
   }
 
@@ -2086,16 +2098,19 @@ qtmp4_demuxer_c::update_tables(int64_t global_m_time_scale) {
       mxdebug(boost::format("   %1%: pts %2% size %3% pos %4%\n") % i++ % sample.pts % sample.size % sample.pos);
   }
 
-  update_editlist_table(global_m_time_scale);
+  update_editlist_table();
+
+  m_tables_updated = true;
 
   return true;
 }
 
 void
-qtmp4_demuxer_c::update_editlist_table(int64_t global_time_scale) {
+qtmp4_demuxer_c::update_editlist_table() {
   if (editlist_table.empty())
     return;
 
+  auto global_time_scale           = m_reader.m_time_scale;
   auto simple_editlist_type        = 0u;
   int64_t raw_offset               = 0;
   auto offset_in_global_time_scale = false;
@@ -2240,10 +2255,14 @@ qtmp4_demuxer_c::build_index_chunk_mode() {
   }
 }
 
-bool
-qtmp4_demuxer_c::read_first_bytes(memory_cptr &buf,
-                                  int num_bytes,
-                                  mm_io_cptr in) {
+memory_cptr
+qtmp4_demuxer_c::read_first_bytes(int num_bytes) {
+  if (!update_tables())
+    return memory_cptr{};
+
+  m_reader.calculate_timecodes();
+
+  auto buf       = memory_c::alloc(num_bytes);
   size_t buf_pos = 0;
   size_t idx_pos = 0;
 
@@ -2251,16 +2270,16 @@ qtmp4_demuxer_c::read_first_bytes(memory_cptr &buf,
     qt_index_t &index          = m_index[idx_pos];
     uint64_t num_bytes_to_read = std::min((int64_t)num_bytes, index.size);
 
-    in->setFilePointer(index.file_pos);
-    if (in->read(buf->get_buffer() + buf_pos, num_bytes_to_read) < num_bytes_to_read)
-      return false;
+    m_reader.m_in->setFilePointer(index.file_pos);
+    if (m_reader.m_in->read(buf->get_buffer() + buf_pos, num_bytes_to_read) < num_bytes_to_read)
+      return memory_cptr{};
 
     num_bytes -= num_bytes_to_read;
     buf_pos   += num_bytes_to_read;
     ++idx_pos;
   }
 
-  return 0 == num_bytes;
+  return 0 == num_bytes ? buf : memory_cptr{};
 }
 
 bool
@@ -2687,8 +2706,28 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
   return true;
 }
 
+void
+qtmp4_demuxer_c::derive_track_params_from_mp3_audio_bitstream() {
+  auto buf = read_first_bytes(64);
+  if (!buf)
+    return;
+
+  mp3_header_t header;
+  auto offset = find_mp3_header(buf->get_buffer(), buf->get_size());
+  if ((-1 == offset) || !decode_mp3_header(&buf->get_buffer()[offset], &header))
+    return;
+
+  a_channels   = header.channels;
+  a_samplerate = header.sampling_frequency;
+}
+
 bool
 qtmp4_demuxer_c::verify_audio_parameters() {
+  if ((0 == a_channels) || (0.0 == a_samplerate)) {
+    if (codec.is(codec_c::A_MP3))
+      derive_track_params_from_mp3_audio_bitstream();
+  }
+
   if ((0 == a_channels) || (0.0 == a_samplerate)) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n")) % id);
     return false;
