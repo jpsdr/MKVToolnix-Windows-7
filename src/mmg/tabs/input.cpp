@@ -121,10 +121,10 @@ tab_input::tab_input(wxWindow *parent)
   siz_add_remove_buttons->AddGrowableCol(0);
   siz_add_remove_buttons->AddGrowableCol(1);
 
-  siz_add_remove_buttons->Add(b_add_file);
-  siz_add_remove_buttons->Add(b_append_file);
-  siz_add_remove_buttons->Add(b_remove_file);
-  siz_add_remove_buttons->Add(b_remove_all_files);
+  siz_add_remove_buttons->Add(b_add_file,         0, wxGROW);
+  siz_add_remove_buttons->Add(b_append_file,      0, wxGROW);
+  siz_add_remove_buttons->Add(b_remove_file,      0, wxGROW);
+  siz_add_remove_buttons->Add(b_remove_all_files, 0, wxGROW);
 
   auto siz_additional_parts = new wxBoxSizer(wxHORIZONTAL);
   siz_additional_parts->Add(b_additional_parts, 1, wxGROW);
@@ -142,10 +142,10 @@ tab_input::tab_input(wxWindow *parent)
   siz_tracks_label->Add(st_tracks);
 
   auto siz_track_buttons = new wxBoxSizer(wxVERTICAL);
-  siz_track_buttons->Add(b_track_up);
-  siz_track_buttons->Add(b_track_down, 0, wxTOP, TOPBOTTOMSPACING);
+  siz_track_buttons->Add(b_track_up, 0, wxGROW);
+  siz_track_buttons->Add(b_track_down, 0, wxTOP | wxGROW, TOPBOTTOMSPACING);
   siz_track_buttons->AddStretchSpacer();
-  siz_track_buttons->Add(b_track_toggle_all);
+  siz_track_buttons->Add(b_track_toggle_all, 0, wxGROW);
 
   auto siz_tracks = new wxBoxSizer(wxHORIZONTAL);
   siz_tracks->Add(clb_tracks,        1, wxGROW | wxALIGN_TOP);
