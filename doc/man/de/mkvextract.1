@@ -44,9 +44,10 @@ Spuren,
 Tags,
 Anh\(:angen,
 Kapiteln,
-Cuesheets
-und
+Cuesheets,
 Zeitstempel
+und
+Indexelemente
 unterst\(:utzt\&. Das zweite Argument ist der Name der Quelldatei\&. Es muss eine Matroska\-Datei sein\&. Alle folgenden Argumente sind Optionen und Extrahierungsangaben, die jeweils vom Modus abh\(:angen\&.
 .SS "Gemeinsame Optionen"
 .PP
@@ -314,6 +315,120 @@ $ mkvextract timecodes_v2 Eingabe\&.mkv 1:Tc\-Spur1\&.txt 2:Tc\-Spur2\&.txt
 .RE
 .\}
 .RE
+.SS "Extrahierungsmodus f\(:ur Indexelemente"
+.PP
+Syntax:
+\fBmkvextract \fR\fB\fBcues\fR\fR\fB \fR\fB\fIQuelldateiname\fR\fR\fB \fR\fB[\fIOptionen\fR]\fR\fB \fR\fB\fITID1:Zieldateiname1\fR\fR\fB \fR\fB[\fITID2:Zieldateiname2\fR \&...]\fR
+.PP
+\fITID:Zielname\fR
+.RS 4
+veranlasst das Extrahieren der Indexelemente f\(:ur die Spur mit der ID
+\fITID\fR
+in die Datei
+\fIAusgabename\fR, falls eine derartige Spur in der Quelldatei existiert\&. Diese Option kann mehrfach angegeben werden\&. Die IDs der Spuren sind dieselben wie die, die durch
+\fBmkvmerge\fR(1)s Option
+\fB\-\-identify\fR
+ausgegeben werden und nicht die Nummern, die in den
+CueTrack\-Elementen enthalten sind\&.
+.RE
+.PP
+Das Ausgabeformat ist ein einfaches Textformat: eine Zeile pro
+CuePoint\-Element, die
+schluessel=wert\-Paare enth\(:alt\&. Falls ein optionales Element in einem
+CuePoint
+nicht enthalten ist (z\&.B\&.
+CueDuration), so wird ein Bindestrich als Wert ausgegeben\&.
+.PP
+Beispiel:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+timecode=00:00:13\&.305000000 duration=\- cluster_position=757741 relative_position=11
+.fi
+.if n \{\
+.RE
+.\}
+.PP
+Die m\(:oglichen Schl\(:usselw\(:orter sind:
+.PP
+timecode
+.RS 4
+der Zeitstempel des Indexelementes mit Nanosekunden\-Pr\(:azision\&. Das Format lautet
+HH:MM:SS\&.nnnnnnnnn\&. Dieses Element ist immer gesetzt\&.
+.RE
+.PP
+duration
+.RS 4
+The cue point\*(Aqs duration with nanosecond precision\&. The format is
+HH:MM:SS\&.nnnnnnnnn\&.
+.RE
+.PP
+cluster_position
+.RS 4
+die absolute Position in Bytes innerhalb der
+Matroska(TM)\-Datei, an der der Cluster beginnt, der das referenzierte Element enth\(:alt\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBAnmerkung\fR
+.ps -1
+.br
+Innerhalb der
+Matroska(TM)\-Datei ist das
+CueClusterPosition\-Element relativ zum Anfang des Datenbereiches des Segments\&. Der von
+\fBmkvextract\fR(1)s Indexelement\-Modus ausgegebene Wert enth\(:alt diesen Offset allerdings bereits ind ist daher ein absoluter Offset, der sich auf den Anfang der ganzen Datei bezieht\&.
+.sp .5v
+.RE
+.RE
+.PP
+relative_position
+.RS 4
+Die relative Position in Bytes innerhalb des Clusters, an der das
+BlockGroup\- oder
+SimpleBlock\-Element beginnt, auf das sich der Indexeintrag bezieht\&.
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fBAnmerkung\fR
+.ps -1
+.br
+Innerhalb der
+Matroska(TM)\-Datei ist das
+CueRelativePosition\-Element relativ zum Anfang des Datenbereiches des Clusters\&. Der von
+\fBmkvextract\fR(1)s Indexelement\-Modus ausgegebene Wert ist allerdings relativ zum Start der Cluster\-Element\-ID\&. Die absolute Position innerhalb der Datei kann daher durch Addition von
+cluster_position
+und
+relative_position
+ermittelt werden\&.
+.sp .5v
+.RE
+.RE
+.PP
+Beispiel:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+$ mkvextract cues input\&.mkv 1:cues\-track1\&.txt 2:cues\-track2\&.txt
+.fi
+.if n \{\
+.RE
+.\}
 .SH "AUSGABEUMLEITUNG"
 .PP
 Mehrere Extrahierungsmodi veranlassen
