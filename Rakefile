@@ -687,6 +687,11 @@ $common_libs = [
   :boost_system,
 ]
 
+# custom libraries
+$custom_libs = [
+  :static,
+]
+
 #
 # mkvmerge
 #
@@ -696,7 +701,7 @@ Application.new("src/mkvmerge").
   aliases(:mkvmerge).
   sources("src/merge/mkvmerge.cpp").
   sources("src/merge/resources.o", :if => c?(:MINGW)).
-  libraries(:mtxmerge, :mtxinput, :mtxoutput, :mtxmerge, $common_libs, :avi, :rmff, :mpegparser, :flac, :vorbis, :ogg).
+  libraries(:mtxmerge, :mtxinput, :mtxoutput, :mtxmerge, $common_libs, :avi, :rmff, :mpegparser, :flac, :vorbis, :ogg, $custom_libs).
   create
 
 #
@@ -722,6 +727,7 @@ Application.new("src/mkvinfo").
   png_icon("share/icons/64x64/mkvinfo.png", "src/info/wxwidgets_ui.cpp").
   libraries(:wxwidgets).
   end_if.
+  libraries($custom_libs).
   create
 
 #
@@ -733,7 +739,7 @@ Application.new("src/mkvextract").
   aliases(:mkvextract).
   sources("src/extract/mkvextract.cpp").
   sources("src/extract/resources.o", :if => c?(:MINGW)).
-  libraries(:mtxextract, $common_libs, :avi, :rmff, :vorbis, :ogg).
+  libraries(:mtxextract, $common_libs, :avi, :rmff, :vorbis, :ogg, $custom_libs).
   create
 
 #
@@ -745,7 +751,7 @@ Application.new("src/mkvpropedit").
   aliases(:mkvpropedit).
   sources("src/propedit/propedit.cpp").
   sources("src/propedit/resources.o", :if => c?(:MINGW)).
-  libraries(:mtxpropedit, $common_libs).
+  libraries(:mtxpropedit, $common_libs, $custom_libs).
   create
 
 #
@@ -801,6 +807,7 @@ if $build_mkvtoolnix_gui
     libraries($common_libs, :qt).
     libraries("-mwindows", :if => c?(:MINGW)).
     png_icon("share/icons/64x64/mkvmergeGUI.png").
+    libraries($custom_libs).
     create
 end
 
