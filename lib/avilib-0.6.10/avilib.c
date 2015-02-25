@@ -2445,15 +2445,15 @@ int avi_parse_input_file(avi_t *AVI, int getIndex)
          i += 8;
          if(lasttag == 1)
          {
-            alBITMAPINFOHEADER bih;
-            
-            memcpy(&bih, hdrl_data + i, sizeof(alBITMAPINFOHEADER));
-            AVI->bitmap_info_header = (alBITMAPINFOHEADER *)
-              malloc(str2ulong((unsigned char *)&bih.bi_size));
-            if (AVI->bitmap_info_header != NULL)
-              memcpy(AVI->bitmap_info_header, hdrl_data + i,
-                     str2ulong((unsigned char *)&bih.bi_size));
-            
+            uint32_t ck_size = str2ulong(hdrl_data + i - 4);
+            uint32_t bih_size = str2ulong(hdrl_data + i);
+            uint32_t bi_size = bih_size > 40 ? bih_size : ck_size;
+            AVI->bitmap_info_header = (alBITMAPINFOHEADER *)malloc(bi_size);
+            if (AVI->bitmap_info_header != NULL) {
+                memcpy(AVI->bitmap_info_header, hdrl_data + i, bi_size);
+                long2str(&AVI->bitmap_info_header->bi_size, bi_size);
+            }
+
             AVI->width  = str2ulong(hdrl_data+i+4);
             AVI->height = str2ulong(hdrl_data+i+8);
                     vids_strf_seen = 1;

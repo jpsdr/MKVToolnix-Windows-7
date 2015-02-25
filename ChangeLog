@@ -1,5 +1,9 @@
 2015-02-25  Mats Peterson  <matsp888@yahoo.com>
 
+        * mkvmerge: bug fix: Fixed reading all of the private codec data
+        in AVIs from the 'strf' chunk for codecs that don't set biSize to
+        include that data. Fixes #1129.
+
         * mkvextract: bug fix: Fixed writing AVIs with ckSize fields that
         were too large. Fixes #1128.
 
