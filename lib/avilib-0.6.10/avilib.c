@@ -894,8 +894,8 @@ int avi_update_header(avi_t *AVI)
    xd_size_align2 = (AVI->extradata_size+1) & ~1;
 
    OUT4CC ("strf");
-   OUTLONG(40 + xd_size_align2);/* # of bytes to follow */
-   OUTLONG(40 + xd_size);	/* Size */
+   OUTLONG(40 + xd_size);       /* # of bytes to follow */
+   OUTLONG(40 + xd_size);       /* Size */
    OUTLONG(AVI->width);         /* Width */
    OUTLONG(AVI->height);        /* Height */
    OUTSHRT(1); OUTSHRT(AVI->bpp); /* Planes, Count */
@@ -1354,8 +1354,8 @@ static int avi_close_output_file(avi_t *AVI)
    xd_size_align2 = (AVI->extradata_size+1) & ~1;
 
    OUT4CC ("strf");
-   OUTLONG(40 + xd_size_align2);/* # of bytes to follow */
-   OUTLONG(40 + xd_size);	/* Size */
+   OUTLONG(40 + xd_size);       /* # of bytes to follow */
+   OUTLONG(40 + xd_size);       /* Size */
    OUTLONG(AVI->width);         /* Width */
    OUTLONG(AVI->height);        /* Height */
    OUTSHRT(1); OUTSHRT(AVI->bpp); /* Planes, Count */
