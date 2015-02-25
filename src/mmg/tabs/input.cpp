@@ -102,6 +102,7 @@ tab_input::tab_input(wxWindow *parent)
 
   b_track_up         = new wxButton(      this, ID_B_TRACKUP,          wxEmptyString);
   b_track_down       = new wxButton(      this, ID_B_TRACKDOWN,        wxEmptyString);
+  b_track_toggle_all = new wxButton(      this, ID_B_TRACK_TOGGLE_ALL, wxEmptyString);
 
   nb_options         = new wxNotebook(    this, ID_NB_OPTIONS,         wxDefaultPosition, wxDefaultSize, wxNB_TOP);
   ti_general         = new tab_input_general(nb_options, this);
@@ -144,6 +145,7 @@ tab_input::tab_input(wxWindow *parent)
   siz_track_buttons->Add(b_track_up);
   siz_track_buttons->Add(b_track_down, 0, wxTOP, TOPBOTTOMSPACING);
   siz_track_buttons->AddStretchSpacer();
+  siz_track_buttons->Add(b_track_toggle_all);
 
   auto siz_tracks = new wxBoxSizer(wxHORIZONTAL);
   siz_tracks->Add(clb_tracks,        1, wxGROW | wxALIGN_TOP);
@@ -174,6 +176,7 @@ tab_input::tab_input(wxWindow *parent)
   clb_tracks  ->Enable(false);
   b_track_up  ->Enable(false);
   b_track_down->Enable(false);
+  b_track_toggle_all->Enable(false);
 
   set_track_mode(nullptr);
   enable_file_controls();
@@ -197,6 +200,7 @@ tab_input::translate_ui() {
   st_tracks->SetLabel(Z("Tracks, chapters and tags:"));
   b_track_up->SetLabel(Z("up"));
   b_track_down->SetLabel(Z("down"));
+  b_track_toggle_all->SetLabel(Z("toggle all"));
   b_additional_parts->SetLabel(Z("additional parts"));
   nb_options->SetPageText(0, Z("General track options"));
   nb_options->SetPageText(1, Z("Format specific options"));
@@ -774,6 +778,7 @@ tab_input::add_file(wxString const &file_name,
 
   st_tracks->Enable(true);
   clb_tracks->Enable(true);
+  b_track_toggle_all->Enable(true);
   enable_file_controls();
 }
 
@@ -846,6 +851,7 @@ tab_input::on_remove_file(wxCommandEvent &) {
   enable_file_controls();
   b_track_up->Enable(-1 != selected_file);
   b_track_down->Enable(-1 != selected_file);
+  b_track_toggle_all->Enable(!tracks.empty());
 
   selected_track = clb_tracks->GetSelection();
   set_track_mode(-1 == selected_track ? nullptr : tracks[selected_track]);
@@ -876,6 +882,7 @@ tab_input::on_remove_all_files(wxCommandEvent &) {
   clb_tracks->Enable(false);
   b_track_up->Enable(false);
   b_track_down->Enable(false);
+  b_track_toggle_all->Enable(false);
 
   set_track_mode(nullptr);
   enable_file_controls();
@@ -895,6 +902,24 @@ tab_input::on_additional_parts(wxCommandEvent &) {
   additional_parts_dialog dlg{this, *file};
   if (!file->is_playlist)
     file->other_files = dlg.get_file_names();
+}
+
+void
+tab_input::on_toggle_all_tracks(wxCommandEvent &) {
+  auto new_enabled = false;
+
+  for (auto const &track : tracks)
+    if (!track->enabled) {
+      new_enabled = true;
+      break;
+    }
+
+  auto idx = 0u;
+  for (auto const &track : tracks) {
+    track->enabled = new_enabled;
+    clb_tracks->Check(idx, new_enabled);
+    ++idx;
+  }
 }
 
 void
@@ -1161,6 +1186,7 @@ tab_input::load(wxConfigBase *cfg,
 
   clb_tracks->Clear();
   lb_input_files->Clear();
+  b_track_toggle_all->Enable(false);
   set_track_mode(nullptr);
   selected_file  = -1;
   selected_track = -1;
@@ -1347,6 +1373,7 @@ tab_input::load(wxConfigBase *cfg,
   }
   st_tracks->Enable(!tracks.empty());
   clb_tracks->Enable(!tracks.empty());
+  b_track_toggle_all->Enable(!tracks.empty());
 
   dont_copy_values_now = false;
 
@@ -1595,6 +1622,7 @@ BEGIN_EVENT_TABLE(tab_input, wxPanel)
   EVT_BUTTON(ID_B_ADDITIONAL_PARTS, tab_input::on_additional_parts)
   EVT_BUTTON(ID_B_TRACKUP,          tab_input::on_move_track_up)
   EVT_BUTTON(ID_B_TRACKDOWN,        tab_input::on_move_track_down)
+  EVT_BUTTON(ID_B_TRACK_TOGGLE_ALL, tab_input::on_toggle_all_tracks)
 
   EVT_LISTBOX(ID_LB_INPUTFILES,     tab_input::on_file_selected)
   EVT_LISTBOX(ID_CLB_TRACKS,        tab_input::on_track_selected)

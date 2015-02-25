@@ -58,6 +58,7 @@
 #define ID_B_ADDITIONAL_PARTS             11039
 #define ID_CB_FIX_BITSTREAM_TIMING_INFO   11040
 #define ID_CB_REDUCE_TO_CORE              11041
+#define ID_B_TRACK_TOGGLE_ALL             11042
 #define ID_NB_OPTIONS                     11999
 
 extern const wxChar *predefined_aspect_ratios[];
@@ -188,7 +189,7 @@ public:
 
   wxListBox *lb_input_files;
   wxButton *b_add_file, *b_remove_file, *b_remove_all_files;
-  wxButton *b_track_up, *b_track_down, *b_append_file, *b_additional_parts;
+  wxButton *b_track_up, *b_track_down, *b_track_toggle_all, *b_append_file, *b_additional_parts;
   wxCheckListBox *clb_tracks;
   wxStaticText *st_tracks, *st_input_files;
   wxNotebook *nb_options;
@@ -214,6 +215,7 @@ public:
   void on_file_selected(wxCommandEvent &evt);
   void on_move_track_up(wxCommandEvent &evt);
   void on_move_track_down(wxCommandEvent &evt);
+  void on_toggle_all_tracks(wxCommandEvent &evt);
   void on_additional_parts(wxCommandEvent &evt);
   void on_track_selected(wxCommandEvent &evt);
   void on_track_enabled(wxCommandEvent &evt);
