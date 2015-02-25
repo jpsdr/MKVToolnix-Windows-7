@@ -985,7 +985,7 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: desilo se nepoznato odstupanje (poruka: %2%; tip: %3%)."
 
 #: src/common/kax_file.cpp:66 src/input/r_matroska.cpp:1244
-#: src/input/r_matroska.cpp:1926
+#: src/input/r_matroska.cpp:1922
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: desilo se nepoznato odstupanje."
@@ -1442,12 +1442,12 @@ msgstr ""
 "'%1%' is not a valid tuple of track ID and default duration in '--default-"
 "duration %1%'.\n"
 
-#: src/extract/extract_cli_parser.cpp:130
+#: src/extract/extract_cli_parser.cpp:140
 #, boost-format
 msgid "'%1%' is only allowed when extracting chapters.\n"
 msgstr "'%1%' je dopušteno samo kad se izvlače poglavlja.\n"
 
-#: src/extract/extract_cli_parser.cpp:127
+#: src/extract/extract_cli_parser.cpp:137
 #, boost-format
 msgid "'%1%' is only allowed when extracting tracks.\n"
 msgstr "'%1%' je dopušteno samo kad se izvlače staze.\n"
@@ -1516,7 +1516,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Takodje obrađujem prateće fajlove: %2%\n"
 
-#: src/input/r_matroska.cpp:1545
+#: src/input/r_matroska.cpp:1541
 #, boost-format
 msgid ""
 "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. "
@@ -1797,7 +1797,7 @@ msgstr ""
 "'mkvmerge --identify-verbose'. Oni su obično jednostavno numerisani polazeći "
 "od 0 (npr. '2')."
 
-#: src/mmg/tabs/input_format.cpp:260
+#: src/mmg/tabs/input_format.cpp:264
 #, boost-format
 msgid ""
 "1. for subtitle files that do not use a byte order marker (BOM) and that are "
@@ -1810,7 +1810,7 @@ msgstr ""
 msgid "1: all frames"
 msgstr "1: sve slike"
 
-#: src/mmg/tabs/input_format.cpp:207
+#: src/mmg/tabs/input_format.cpp:211
 msgid "2 bytes"
 msgstr "2 bajta"
 
@@ -1824,7 +1824,7 @@ msgstr ""
 "(UID) kao što je navedeno sa 'mkvmerge --identify-verbose'. Oni obično "
 "izgledaju kao nasumice izabrani brojevi (npr. '128975986723')."
 
-#: src/mmg/tabs/input_format.cpp:262
+#: src/mmg/tabs/input_format.cpp:266
 msgid ""
 "2. for files with chapter information (e.g. OGM, MP4) for which mkvmerge "
 "does not detect the encoding correctly."
@@ -1846,7 +1846,7 @@ msgstr ""
 "primenjuje na sve priloge čije je ime ili MIME tip respektivno jednako "
 "<value>."
 
-#: src/mmg/tabs/input_format.cpp:208
+#: src/mmg/tabs/input_format.cpp:212
 msgid "4 bytes"
 msgstr "4 bajta"
 
@@ -1878,7 +1878,7 @@ msgstr "<Simple> mora da sadrži ili <String> ili <Binary> element."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> nedostaje dečji element <Simple>."
 
-#: src/input/r_matroska.cpp:1947 src/input/r_matroska.cpp:2043
+#: src/input/r_matroska.cpp:1943 src/input/r_matroska.cpp:2039
 #, boost-format
 msgid ""
 "A block was found at timestamp %1% for track number %2%. However, no headers "
@@ -1916,7 +1916,7 @@ msgstr "Ljudski čitljiv niz koji označava kodek."
 msgid "A human-readable track name."
 msgstr "Ljudski čitljivo ime staze."
 
-#: src/mmg/mmg_dialog.cpp:1447
+#: src/mmg/mmg_dialog.cpp:1452
 #, c-format, boost-format
 msgid ""
 "A job with the description '%s' already exists. Do you really want to add "
@@ -2018,7 +2018,7 @@ msgstr ""
 "ovaj ulazni fajl ako on zaista sadrži SBR AAC. U protivnom fajl će biti "
 "muksovan na POGREŠAN način. Takođe pročitajte mkvmerge dokumentaciju.\n"
 
-#: src/mmg/tabs/input_format.cpp:267
+#: src/mmg/tabs/input_format.cpp:271
 msgid "AAC is SBR/HE-AAC/AAC+"
 msgstr "AAC je SBR/HE-AAC/AAC+"
 
@@ -2257,7 +2257,7 @@ msgstr ""
 "Dozvoljava upotrebu CodecState elementa. Ovo se koristi za npr. MPEG-1/2 "
 "video staze za skladištenje sekvenci zaglavlja."
 
-#: src/extract/extract_cli_parser.cpp:67
+#: src/extract/extract_cli_parser.cpp:68
 msgid ""
 "Also try to extract the CUE sheet from the chapter information and tags for "
 "this track."
@@ -2350,7 +2350,7 @@ msgstr ""
 "Još jedan zadatak je još uvek u toku. Molim vas sačekajte dok se ne završi "
 "ili ga ručno prekinite pre nego što startujete novi."
 
-#: src/mmg/tabs/input.cpp:1368
+#: src/mmg/tabs/input.cpp:1371
 #, c-format, boost-format
 msgid ""
 "Appending a track from a file to another track from the same file is not "
@@ -2385,7 +2385,7 @@ msgstr "Množitelj formata slike"
 msgid "Aspect ratio type: %1%%2%"
 msgstr "Tip formata slike: %1%%2%"
 
-#: src/mmg/tabs/input_format.cpp:230
+#: src/mmg/tabs/input_format.cpp:234
 msgid "Aspect ratio:"
 msgstr "Format slike:"
 
@@ -2406,7 +2406,7 @@ msgstr "Priloženi fajlovi"
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Attachment ID %1%: tip '%2%', veličina %3% bajt"
 
-#: src/extract/extract_cli_parser.cpp:85
+#: src/extract/extract_cli_parser.cpp:86
 msgid "Attachment extraction"
 msgstr "Izvlačenje priloga"
 
@@ -2544,7 +2544,7 @@ msgstr "Otvara upravljanje zadacima"
 msgid "Browse"
 msgstr "Pretraži"
 
-#: src/extract/extract_cli_parser.cpp:102
+#: src/extract/extract_cli_parser.cpp:103
 msgid "CUE sheet extraction"
 msgstr "Izvlačenje CUE lista"
 
@@ -2564,7 +2564,7 @@ msgstr ""
 "Ne mogu da konvertujem ne-nativne MPEG4 video slike u nativne ako izvorni "
 "kontejner ne obezbeđuje ni vremenske kodove ni broj slika po sekundi.\n"
 
-#: src/extract/xtr_vobsub.cpp:87
+#: src/extract/xtr_vobsub.cpp:84
 #, boost-format
 msgid ""
 "Cannot extract tracks of different kinds to the same file. This was "
@@ -2706,7 +2706,7 @@ msgstr ""
 msgid "Chapter editor is not empty"
 msgstr "Urednik poglavlja nije prazan"
 
-#: src/extract/extract_cli_parser.cpp:94
+#: src/extract/extract_cli_parser.cpp:95
 msgid "Chapter extraction"
 msgstr "Izvlačenje poglavlja"
 
@@ -2803,7 +2803,7 @@ msgstr "Poglavlja: %1% upisi"
 msgid "Charset for strings on the command line"
 msgstr "Skup znakova za niz u komandnoj liniji"
 
-#: src/mmg/tabs/global.cpp:351 src/mmg/tabs/input_format.cpp:256
+#: src/mmg/tabs/global.cpp:351 src/mmg/tabs/input_format.cpp:260
 msgid "Charset:"
 msgstr "Skup znakova:"
 
@@ -2825,7 +2825,7 @@ msgstr ""
 "samo kad mmg startuje i najviše jednom dnevno. Nikakva informacija neće biti "
 "poslata serveru."
 
-#: src/mmg/mmg_dialog.cpp:1789
+#: src/mmg/mmg_dialog.cpp:1794
 msgid "Checking for updates online; please wait"
 msgstr "Proveravam na mreži da li ima ispravki; molim vas sačekajte"
 
@@ -3055,7 +3055,7 @@ msgstr "Kodovanje sadržaja"
 msgid "Content encryption"
 msgstr "Šifrovanje sadržaja"
 
-#: src/extract/extract_cli_parser.cpp:66
+#: src/extract/extract_cli_parser.cpp:67
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr "Konvertuj tekstualne prevode u ovaj skup znakova (default: UTF-8)."
 
@@ -3127,7 +3127,7 @@ msgstr ""
 "Ne mogu da nađem sledeću Ogg stranu. Ovo ukazuje oštećen Ogg/Ogm fajl. "
 "Pokušaću da nastavim.\n"
 
-#: src/input/r_avi.cpp:603 src/input/r_matroska.cpp:1489
+#: src/input/r_avi.cpp:603 src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "Ne mogu da nađem važeća DTS zaglavlja u prvim slikama ove staze.\n"
 
@@ -3248,7 +3248,7 @@ msgstr ""
 "Parametri podrezivanja: nisu dati u formi <TID>:<left>,<top>,<right>,"
 "<bottom> npr. 0:10,5,10,5 (argument je bio '%1%').\n"
 
-#: src/mmg/tabs/input_format.cpp:265
+#: src/mmg/tabs/input_format.cpp:269
 msgid "Cropping:"
 msgstr "Podrezivanje:"
 
@@ -3271,6 +3271,11 @@ msgstr "Cue stanje kodeka: %1%"
 #, boost-format
 msgid "Cue duration: %1%"
 msgstr "Cue trajanje: %1%"
+
+#: src/extract/extract_cli_parser.cpp:120
+#, fuzzy
+msgid "Cue extraction"
+msgstr "Izvlačenje poglavlja"
 
 #: src/mmg/tabs/global.cpp:355
 msgid "Cue name format:"
@@ -3378,7 +3383,7 @@ msgstr "Trenutna vrednost:"
 msgid "Current version:"
 msgstr "Trenutna verzija:"
 
-#: src/mmg/mmg_dialog.cpp:1821
+#: src/mmg/mmg_dialog.cpp:1826
 msgid "Currently no newer version is available online."
 msgstr "Trenutno nema novije verzije dostupne na mreži."
 
@@ -3424,8 +3429,8 @@ msgstr "Datum: %1% UTC"
 msgid "Debug> "
 msgstr "Debug> "
 
-#: src/mmg/options/mmg.cpp:155 src/mmg/tabs/input_format.cpp:206
-#: src/mmg/tabs/input_format.cpp:221
+#: src/mmg/options/mmg.cpp:155 src/mmg/tabs/input_format.cpp:210
+#: src/mmg/tabs/input_format.cpp:225
 msgid "Default"
 msgstr "Default"
 
@@ -3455,11 +3460,11 @@ msgstr "Osnovni skup znakova prevoda"
 msgid "Default track flag:"
 msgstr "Označi sa 'default':"
 
-#: src/mmg/tabs/input_format.cpp:249
+#: src/mmg/tabs/input_format.cpp:253
 msgid "Delay (in ms):"
 msgstr "Kašnjenje (u ms):"
 
-#: src/mmg/tabs/input_format.cpp:250
+#: src/mmg/tabs/input_format.cpp:254
 msgid ""
 "Delay this track's timecodes by a couple of ms. Can be negative. Works with "
 "all track types, but negative delays should not be used with video tracks."
@@ -3489,7 +3494,7 @@ msgstr "Obriši odabrane zadatke iz reda zadataka"
 msgid "Description"
 msgstr "Opis"
 
-#: src/mmg/mmg_dialog.cpp:1448
+#: src/mmg/mmg_dialog.cpp:1453
 msgid "Description already exists"
 msgstr "Opis već postoji"
 
@@ -3559,7 +3564,7 @@ msgstr "Jedinica mere slike: %1%%2%"
 msgid "Display usage information"
 msgstr "Informacija o upotrebi slike"
 
-#: src/mmg/tabs/input_format.cpp:233
+#: src/mmg/tabs/input_format.cpp:237
 msgid "Display width/height:"
 msgstr "Širina/Visina slike:"
 
@@ -3606,6 +3611,12 @@ msgstr "Gotovo.\n"
 #: src/mmg/update_checker.cpp:70
 msgid "Download URL:"
 msgstr "URL za skidanje:"
+
+#: src/mmg/tabs/input_format.cpp:276
+msgid ""
+"Drops the lossless extensions from an audio track and keeps only its lossy "
+"core. This only works with DTS tracks."
+msgstr ""
 
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:96
 msgid "Duration"
@@ -3870,10 +3881,11 @@ msgstr "Greške:"
 msgid "Everything went fine."
 msgstr "Sve je prošlo odlično."
 
-#: src/extract/extract_cli_parser.cpp:73 src/extract/extract_cli_parser.cpp:81
-#: src/extract/extract_cli_parser.cpp:90 src/extract/extract_cli_parser.cpp:98
-#: src/extract/extract_cli_parser.cpp:107
-#: src/extract/extract_cli_parser.cpp:115
+#: src/extract/extract_cli_parser.cpp:74 src/extract/extract_cli_parser.cpp:82
+#: src/extract/extract_cli_parser.cpp:91 src/extract/extract_cli_parser.cpp:99
+#: src/extract/extract_cli_parser.cpp:108
+#: src/extract/extract_cli_parser.cpp:116
+#: src/extract/extract_cli_parser.cpp:123
 msgid "Example"
 msgstr "Primer"
 
@@ -3903,7 +3915,7 @@ msgstr ""
 "za 'n' što bi značilo preciznost u nanosekund). Možete takođe da ne navedete "
 "čas. Našao '%1%' umesto. Dodatna poruka o grešci: %2%"
 
-#: src/extract/extract_cli_parser.cpp:96
+#: src/extract/extract_cli_parser.cpp:97
 msgid ""
 "Exports the chapter information in the simple format used in OGM tools "
 "(CHAPTER01=... CHAPTER01NAME=...)."
@@ -3915,12 +3927,12 @@ msgstr ""
 msgid "Extra options"
 msgstr "Dodatne opcije"
 
-#: src/extract/extract_cli_parser.cpp:70
+#: src/extract/extract_cli_parser.cpp:71
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
 msgstr ""
 "Izvuci podatke u sirovi (raw) fajl uključujući CodecPrivate kao zaglavlje."
 
-#: src/extract/extract_cli_parser.cpp:69
+#: src/extract/extract_cli_parser.cpp:70
 msgid "Extract the data to a raw file."
 msgstr "Izvuci podatke u sirovi fajl (raw)."
 
@@ -3986,16 +3998,16 @@ msgstr "FLAC (Free Lossless Audio Codec)"
 msgid "FLV (Flash Video)"
 msgstr "FLV (Flash video)"
 
-#: src/mmg/tabs/input_format.cpp:242
+#: src/mmg/tabs/input_format.cpp:246
 msgid "FPS:"
 msgstr "FPS:"
 
-#: src/extract/xtr_vobsub.cpp:80
+#: src/extract/xtr_vobsub.cpp:77
 #, boost-format
 msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "Nisam uspeo da napravim VobSub fajl sa podacima '%1%': %2%\n"
 
-#: src/extract/xtr_textsubs.cpp:349 src/extract/xtr_vobsub.cpp:224
+#: src/extract/xtr_textsubs.cpp:349 src/extract/xtr_vobsub.cpp:221
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Nisam uspeo da napravim fajl '%1%': %2%\n"
@@ -4149,7 +4161,7 @@ msgstr "Završeno u "
 msgid "Finished processing on %s"
 msgstr "Završio obradu u %s"
 
-#: src/mmg/tabs/input_format.cpp:271
+#: src/mmg/tabs/input_format.cpp:278
 msgid "Fix bitstream timing information"
 msgstr "Popravi tajming informaciju bit-potoka"
 
@@ -4194,7 +4206,7 @@ msgstr "Zastavica 'forced': %1%"
 msgid "Forced track flag:"
 msgstr "Označi sa 'forced':"
 
-#: src/mmg/tabs/input_format.cpp:237
+#: src/mmg/tabs/input_format.cpp:241
 msgid ""
 "Forces the FourCC of the video track to this value. Note that this only "
 "works for video tracks that use the AVI compatibility mode or for QuickTime "
@@ -4213,7 +4225,7 @@ msgstr ""
 "Forsira Matrsoka čitač da koristi opšti prenosni paker čak i za poznate i "
 "podržane tipove staza."
 
-#: src/mmg/tabs/input_format.cpp:245
+#: src/mmg/tabs/input_format.cpp:249
 msgid ""
 "Forces the NALU size length to a certain number of bytes. This parameter is "
 "only available for AVC/h.264 elementary streams read from AVC/h.264 ES "
@@ -4260,7 +4272,7 @@ msgid ""
 "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Nađena bar jedna B slika bez druge reference u otvorenoj GOP.\n"
 
-#: src/mmg/tabs/input_format.cpp:236
+#: src/mmg/tabs/input_format.cpp:240
 msgid "FourCC:"
 msgstr "FourCC:"
 
@@ -4318,7 +4330,7 @@ msgstr "Opšte opcije staza"
 msgid "Global"
 msgstr "Global"
 
-#: src/extract/extract_cli_parser.cpp:59 src/mmg/tabs/global.cpp:301
+#: src/extract/extract_cli_parser.cpp:60 src/mmg/tabs/global.cpp:301
 msgid "Global options"
 msgstr "Globalna podešavanja"
 
@@ -4335,6 +4347,10 @@ msgstr "Globalni tagovi: %1% zapisi"
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
 msgstr "&Zaglavlja"
+
+#: src/output/p_hdmv_pgs.h:38
+msgid "HDMV PGS"
+msgstr ""
 
 #: src/input/r_hevc.h:31 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
@@ -4609,7 +4625,7 @@ msgstr ""
 "Ako se deljenje koristi prilog može biti zakačen svim napravljenim fajlovima "
 "ili samo prvom fajlu. Nema efekta ako se deljenje ne koristi."
 
-#: src/mmg/mmg_dialog.cpp:1978
+#: src/mmg/mmg_dialog.cpp:1983
 msgid ""
 "If you encounter problems during playback of files please consider visiting "
 "the newly created MKVToolNix troubleshooting advice page:"
@@ -4632,11 +4648,11 @@ msgstr "Uvezen font iz %1%"
 msgid "Imported picture from %1%"
 msgstr "Uvezena slika iz %1%"
 
-#: src/mmg/mmg_dialog.cpp:1934
+#: src/mmg/mmg_dialog.cpp:1939
 msgid "Incompatible mkvmerge version"
 msgstr "Neodgovarajuća mkvmerge verzija"
 
-#: src/mmg/tabs/input.cpp:1030
+#: src/mmg/tabs/input.cpp:1031
 msgid "Incompatible track"
 msgstr "Neodgovarajuća staza"
 
@@ -4700,7 +4716,7 @@ msgstr "Nevažeći atribut 'format'  '%1%'."
 msgid "Invalid Base64 character encountered"
 msgstr "Naišao na nevažeći Base64 karakter"
 
-#: src/extract/extract_cli_parser.cpp:154
+#: src/extract/extract_cli_parser.cpp:164
 #, boost-format
 msgid "Invalid BlockAddition level in argument '%1%'.\n"
 msgstr "Nevažeći BlockAddition nivo u argumentu '%1%'.\n"
@@ -4733,7 +4749,7 @@ msgstr "Nevažeći UTF-8 karakter. Prvi bajt: 0x%|1$02x|"
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Nevažeća Vorbis zaglavlja u AVI audio stazi."
 
-#: src/extract/extract_cli_parser.cpp:226
+#: src/extract/extract_cli_parser.cpp:238
 #, boost-format
 msgid "Invalid attachment ID/file name specification in argument '%1%'.\n"
 msgstr "Nevažeća specifikacija za attachment ID/ime fajla u argumentu '%1%'.\n"
@@ -5175,7 +5191,7 @@ msgstr "Naveden nevažeći track ID u '--forced-track %1%'.\n"
 msgid "Invalid track ID specified in '--sub-charset %1%'.\n"
 msgstr "Naveden nevažeći track ID u '--sub-charset %1%'.\n"
 
-#: src/extract/extract_cli_parser.cpp:228
+#: src/extract/extract_cli_parser.cpp:240
 #, boost-format
 msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "Nevažeća specifikacija za track ID/ime fajla u argumentu '%1%'.\n"
@@ -5185,15 +5201,15 @@ msgstr "Nevažeća specifikacija za track ID/ime fajla u argumentu '%1%'.\n"
 msgid "Invalid track type %1%."
 msgstr "Nevažeći track ID u '%1% %2%'.\n"
 
-#: src/mmg/mmg_dialog.cpp:1982
+#: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
 msgstr "Takođe može biti otvoreno iz menija 'Pomoć'."
 
-#: src/mmg/mmg_dialog.cpp:1484
+#: src/mmg/mmg_dialog.cpp:1489
 msgid "Job added to job queue"
 msgstr "Zadatak dodat u niz zadataka"
 
-#: src/mmg/mmg_dialog.cpp:1436
+#: src/mmg/mmg_dialog.cpp:1441
 msgid "Job description"
 msgstr "Opis zadatka"
 
@@ -5213,7 +5229,7 @@ msgstr "Kate"
 msgid "Kate packet is too small and is being skipped.\n"
 msgstr "kate paket je previše mali i preskače se.\n"
 
-#: src/extract/extract_cli_parser.cpp:68
+#: src/extract/extract_cli_parser.cpp:69
 msgid ""
 "Keep only the BlockAdditions up to this level (default: keep all levels)"
 msgstr ""
@@ -5400,7 +5416,7 @@ msgstr "MPEG programski potok"
 msgid "MPEG program streams"
 msgstr "MPEG programski potoci"
 
-#: src/input/r_mpeg_ts.h:416
+#: src/input/r_mpeg_ts.h:418
 msgid "MPEG transport stream"
 msgstr "MPEG transportni potok"
 
@@ -5440,11 +5456,11 @@ msgstr ""
 "Načini ovu stazu podrazumevanom za svoj tip (audio, video, prevodi). Plejeri "
 "bi trebalo da daju prednost stazama koje su obeležene sa 'default'."
 
-#: src/input/r_matroska.cpp:1417 src/input/r_matroska.cpp:1432
+#: src/input/r_matroska.cpp:1413 src/input/r_matroska.cpp:1428
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Pronađen loše formiran podatak za inicijalizaciju AAC kodeka.\n"
 
-#: src/input/r_matroska.cpp:1425
+#: src/input/r_matroska.cpp:1421
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Nepravilan codec ID '%1%'.\n"
@@ -5592,7 +5608,7 @@ msgstr "Nedostaje ulaz"
 msgid "Missing one hex digit"
 msgstr "Nedostaje jedna heksdecimalna cifra"
 
-#: src/extract/extract_cli_parser.cpp:247
+#: src/extract/extract_cli_parser.cpp:259
 #, boost-format
 msgid "Missing output file name in argument '%1%'.\n"
 msgstr "Nedostaje ime izlaznog fajla u argumentu '%1%'.\n"
@@ -5678,7 +5694,7 @@ msgstr "Muksovanje u toku."
 msgid "Muxing took %1%.\n"
 msgstr "Muksovanje je trajalo %1%.\n"
 
-#: src/mmg/tabs/input_format.cpp:244
+#: src/mmg/tabs/input_format.cpp:248
 msgid "NALU size length:"
 msgstr "NALU veličina:"
 
@@ -5739,12 +5755,12 @@ msgstr "Jedinstveni ID sledećeg segmenta"
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "No %1% specified in '--%2% %3%'.\n"
 
-#: src/input/r_qtmp4.cpp:1441
+#: src/input/r_qtmp4.cpp:1448
 msgid "No AC3 header found in first frame; track will be skipped.\n"
 msgstr ""
 "Nije pronađeno AC3 zaglavlje u prvom okviru; staza će biti preskočena.\n"
 
-#: src/input/r_qtmp4.cpp:1468
+#: src/input/r_qtmp4.cpp:1475
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr ""
 "Nije pronađeno DTS zaglavlje u prvom okviru; staza će biti preskočena.\n"
@@ -5801,6 +5817,11 @@ msgid "No chapters in source files or chapter files found to split by.\n"
 msgstr ""
 "U izvornim fajlovima nije pronađeno poglavlje po kojem se vrši podela.\n"
 
+#: src/extract/cues.cpp:116
+#, fuzzy
+msgid "No cues were found.\n"
+msgstr "Nije nađen broj verzije.\n"
+
 #: src/mmg/header_editor/frame.cpp:517
 msgid "No fields modified"
 msgstr "Polja neizmenjena"
@@ -5837,7 +5858,7 @@ msgstr "Nema ulaznih fajlova. Izlaznog rezultata neće biti.\n"
 msgid "No metadata block found. This file is broken.\n"
 msgstr "Nije pronađen blok sa meta podacima. Ovaj fajl je oštećen.\n"
 
-#: src/extract/extract_cli_parser.cpp:245
+#: src/extract/extract_cli_parser.cpp:257
 msgid "No output file name specified, will use attachment name.\n"
 msgstr "Nije navedeno ime fajla, koristiću ime priloga.\n"
 
@@ -5890,7 +5911,7 @@ msgstr "Naišao na brojeve koji nisu heksadecimalni."
 msgid "None of the header fields has been modified. Nothing has been saved."
 msgstr "Nijedno od polja zaglavlja nije promenjeno. Ništa nije sačuvano."
 
-#: src/mmg/tabs/input_format.cpp:272
+#: src/mmg/tabs/input_format.cpp:279
 msgid ""
 "Normally mkvmerge does not change the timing information (frame/field rate) "
 "stored in the video bitstream. With this option that information is adjusted "
@@ -5946,12 +5967,13 @@ msgstr ""
 "uklonjeno kada specifikacije budu finalizovane i mkvmerge ažuriran u skladu "
 "sa tim.\n"
 
-#: src/extract/attachments.cpp:132 src/extract/timecodes_v2.cpp:186
-#: src/extract/tracks.cpp:349 src/propedit/options.cpp:36
+#: src/extract/attachments.cpp:132 src/extract/cues.cpp:183
+#: src/extract/timecodes_v2.cpp:186 src/extract/tracks.cpp:349
+#: src/propedit/options.cpp:36
 msgid "Nothing to do.\n"
 msgstr "Nothing to do.\n"
 
-#: src/mmg/mmg_dialog.cpp:1970
+#: src/mmg/mmg_dialog.cpp:1975
 msgid "Notice"
 msgstr "Obratiti pažnju"
 
@@ -6003,7 +6025,7 @@ msgid "Only %1% chapters found in source files & chapter files."
 msgstr ""
 "Nađeno je samo %1% poglavlja u izvornim fajlovima i fajlovima sa poglavljima."
 
-#: src/mmg/tabs/input_format.cpp:259
+#: src/mmg/tabs/input_format.cpp:263
 msgid "Only needed in certain situations:"
 msgstr "Potrebno samo u određenim situacijama:"
 
@@ -6153,7 +6175,7 @@ msgstr "Izlazna frekvencija uzorkovanja: %1%"
 msgid "Output:"
 msgstr "Izlaz:"
 
-#: src/mmg/mmg_dialog.cpp:554 src/mmg/mmg_dialog.cpp:1430
+#: src/mmg/mmg_dialog.cpp:554 src/mmg/mmg_dialog.cpp:1435
 msgid "Overwrite existing file?"
 msgstr "Prepisati preko postojećeg fajla?"
 
@@ -6164,10 +6186,6 @@ msgstr "Prepisati preko postojećih fajlova?"
 #: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "PCM"
-
-#: src/output/p_pgs.h:38
-msgid "PGS"
-msgstr "PGS"
 
 #: src/common/file_types.cpp:46
 msgid "PGS/SUP subtitles"
@@ -6205,7 +6223,7 @@ msgstr "Glavni direktorijum od prvog ulaznog fajla."
 msgid "Parse the file completely and show all elements"
 msgstr "Raščlani ceo fajl i prikaži sve elemente"
 
-#: src/extract/extract_cli_parser.cpp:60
+#: src/extract/extract_cli_parser.cpp:61
 msgid "Parse the whole file instead of relying on the index."
 msgstr "Raščlani ceo fajl umesto oslanjanja na indeks."
 
@@ -6255,7 +6273,7 @@ msgstr "Stavke u plejlisti:"
 msgid "Please do not select 'mmg' itself as the 'mkvmerge' executable."
 msgstr "Molim vas da ne birate 'mmg' kao 'mkvmerge' izvršni fajl."
 
-#: src/mmg/mmg_dialog.cpp:1436
+#: src/mmg/mmg_dialog.cpp:1441
 msgid "Please enter a description for the new job:"
 msgstr "Molim vas, unesite opis za novi zadatak:"
 
@@ -6337,12 +6355,12 @@ msgstr "Progres: 100%\n"
 msgid "Progress: 100%%%1%"
 msgstr "Progres: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1119
+#: src/common/kax_analyzer.cpp:1180
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Progres: [%1%%2%] %3%%%"
 
-#: src/mmg/mmg_dialog.cpp:1877
+#: src/mmg/mmg_dialog.cpp:1882
 msgid "Querying mkvmerge's capabilities"
 msgstr "Ispitujem mogućnosti mkvmerge-a"
 
@@ -6350,11 +6368,11 @@ msgstr "Ispitujem mogućnosti mkvmerge-a"
 msgid "QuickTime audio/video files"
 msgstr "QuickTime audio/video fajlovi"
 
-#: src/input/r_qtmp4.h:433
+#: src/input/r_qtmp4.h:445
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
-#: src/input/r_qtmp4.cpp:343
+#: src/input/r_qtmp4.cpp:350
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual "
@@ -6363,7 +6381,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Atom '%1%' je previše mali. Očekivana veličina: >= %2%. "
 "Stvarna veličina: %3%.\n"
 
-#: src/input/r_qtmp4.cpp:2044
+#: src/input/r_qtmp4.cpp:2054
 msgid ""
 "Quicktime/MP4 reader: Constant samplesize & variable duration not yet "
 "supported. Contact the author if you have such a sample file.\n"
@@ -6371,7 +6389,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Konstantna veličina uzorka i varijabilno trajanje nije "
 "još uvek podržano. Kontaktirajte autora ako imate fajl sa takvim primerom.\n"
 
-#: src/input/r_qtmp4.cpp:1398
+#: src/input/r_qtmp4.cpp:1405
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from "
@@ -6380,7 +6398,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Ne mogu da pročitam broj parčeta %1%/%2% veličine %3% "
 "sa pozicije %4%. Prekidam.\n"
 
-#: src/input/r_qtmp4.cpp:2353 src/input/r_qtmp4.cpp:2367
+#: src/input/r_qtmp4.cpp:2372 src/input/r_qtmp4.cpp:2386
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: Could not read the extended sound description atom for "
@@ -6389,7 +6407,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Ne mogu da pročitam prošireni atom za opis zvuka za "
 "stazu sa ID %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2324
+#: src/input/r_qtmp4.cpp:2343
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: Could not read the sound description atom for track ID "
@@ -6398,7 +6416,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Ne mogu da pročitam atom za opis zvuka za stazu sa ID "
 "%1%.\n"
 
-#: src/input/r_qtmp4.cpp:1119
+#: src/input/r_qtmp4.cpp:1126
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: Could not read the stream description atom for track "
@@ -6407,7 +6425,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Ne mogu da pročitam atom za opis potoka za stazu sa ID "
 "%1%.\n"
 
-#: src/input/r_qtmp4.cpp:2399
+#: src/input/r_qtmp4.cpp:2418
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: Could not read the video description atom for track ID "
@@ -6416,22 +6434,22 @@ msgstr ""
 "Quicktime/MP4 čitač: Ne mogu da pročitam atom za opis videa za stazu sa ID "
 "%1%.\n"
 
-#: src/input/r_qtmp4.cpp:268
+#: src/input/r_qtmp4.cpp:270
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
 msgstr "Quicktime/MP4 čitač: Nije nađen nijedan atom u zaglavlju.\n"
 
-#: src/input/r_qtmp4.cpp:271
+#: src/input/r_qtmp4.cpp:273
 msgid ""
 "Quicktime/MP4 reader: Have not found the 'mdat' atom. No movie data found.\n"
 msgstr ""
 "Quicktime/MP4 čitač: Nije pronađen 'mdat' atom. Video podaci nisu nađeni.\n"
 
-#: src/input/r_qtmp4.cpp:81
+#: src/input/r_qtmp4.cpp:82
 #, boost-format
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 čitač: Nevažeća veličina parčeta %1% u %2%.\n"
 
-#: src/input/r_qtmp4.cpp:2753
+#: src/input/r_qtmp4.cpp:2792
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder "
@@ -6440,7 +6458,7 @@ msgstr ""
 "Quicktime/MP4 čitač: MPEG4 part 10/AVC stazi %1% nedostaje njena "
 "konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:2779
+#: src/input/r_qtmp4.cpp:2818
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder "
@@ -6449,7 +6467,7 @@ msgstr ""
 "Quicktime/MP4 čitač: MPEG4 stazi %1% nedostaje esds atom/konfiguracija "
 "dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:2763
+#: src/input/r_qtmp4.cpp:2802
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder "
@@ -6458,7 +6476,7 @@ msgstr ""
 "Quicktime/MP4 čitač: MPEGH part 2/HEVC stazi %1% nedostaje njena "
 "konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:516
+#: src/input/r_qtmp4.cpp:523
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported "
@@ -6467,7 +6485,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Atom 'media header' ('mdhd') koristi nepodržanu verziju "
 "%1%.\n"
 
-#: src/input/r_qtmp4.cpp:1112
+#: src/input/r_qtmp4.cpp:1119
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: The 'size' field is too small in the stream "
@@ -6476,14 +6494,14 @@ msgstr ""
 "Quicktime/MP4 čitač: Polje 'size' u atomu za opis potoka je previše malo za "
 "stazu sa ID %1%.\n"
 
-#: src/input/r_qtmp4.cpp:521
+#: src/input/r_qtmp4.cpp:528
 msgid ""
 "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not "
 "supported.\n"
 msgstr ""
 "Quicktime/MP4 čitač: Parametar 'time scale' je bila 0. Ovo nije podržano.\n"
 
-#: src/input/r_qtmp4.cpp:2724
+#: src/input/r_qtmp4.cpp:2763
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder "
@@ -6492,7 +6510,7 @@ msgstr ""
 "Quicktime/MP4 čitač: AAC stazi %1% nedostaje esds atom/konfiguracija "
 "dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:2719
+#: src/input/r_qtmp4.cpp:2758
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object "
@@ -6501,7 +6519,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Audio staza %1% koristi nepodržan 'object type id' od "
 "%2% u 'esds' atomu. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:2773
+#: src/input/r_qtmp4.cpp:2812
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping "
@@ -6510,7 +6528,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Video stazi %1% nedostaje ESDS atom. Izostavljam ovu "
 "stazu.\n"
 
-#: src/input/r_qtmp4.cpp:375
+#: src/input/r_qtmp4.cpp:382
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: This file uses compressed headers with an unknown or "
@@ -6519,7 +6537,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Ovaj fajl koristi kompresovana zaglavlja sa nepoznatim "
 "ili nepodržanim algoritmom za kompresiju '%1%'. Prekidam.\n"
 
-#: src/input/r_qtmp4.cpp:408
+#: src/input/r_qtmp4.cpp:415
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: This file uses compressed headers, but the expected "
@@ -6530,7 +6548,7 @@ msgstr ""
 "veličina koja je očekivana (%1%) nije ona koja je dostupna posle otpakivanja "
 "(%2%).\n"
 
-#: src/input/r_qtmp4.cpp:399
+#: src/input/r_qtmp4.cpp:406
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: This file uses compressed headers, but the zlib "
@@ -6539,7 +6557,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Ovaj fajl koristi kompresovana zaglavlja, ali zlib "
 "biblioteka ne može da bude pokrenuta. Kod greške iz zlib-a: %1%. Prekidam.\n"
 
-#: src/input/r_qtmp4.cpp:404
+#: src/input/r_qtmp4.cpp:411
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: This file uses compressed headers, but they could not "
@@ -6548,8 +6566,8 @@ msgstr ""
 "Quicktime/MP4 čitač: Ovaj fajl koristi kompresovana zaglavlja, ali ona ne "
 "mogu biti nekompresovana. Kod greške iz zlib-a: %1%. Prekidam.\n"
 
-#: src/input/r_qtmp4.cpp:2693 src/input/r_qtmp4.cpp:2708
-#: src/input/r_qtmp4.cpp:2734 src/input/r_qtmp4.cpp:2797
+#: src/input/r_qtmp4.cpp:2732 src/input/r_qtmp4.cpp:2747
+#: src/input/r_qtmp4.cpp:2773 src/input/r_qtmp4.cpp:2836
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
@@ -6557,7 +6575,7 @@ msgstr ""
 "Quicktime/MP4 čitač: Stazi %1% nedostaju neki podaci. Atomi iz zaglavlja "
 "oštećeni?\n"
 
-#: src/input/r_qtmp4.cpp:2332 src/input/r_qtmp4.cpp:2406
+#: src/input/r_qtmp4.cpp:2351 src/input/r_qtmp4.cpp:2425
 #, boost-format
 msgid ""
 "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the "
@@ -6636,6 +6654,10 @@ msgstr ""
 #: src/common/cli_parser.cpp:178
 msgid "Redirects all messages into this file."
 msgstr "Preusmerava sve poruke u ovaj fajl."
+
+#: src/mmg/tabs/input_format.cpp:275
+msgid "Reduce to audio core"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:198
 #, boost-format
@@ -6956,7 +6978,7 @@ msgstr ""
 "Selektuje za koje će blokove mkvmerge proizvesti indeks zapise ( = cue "
 "entries). \"default\" je dobar izbor za skoro sve situacije."
 
-#: src/mmg/tabs/input_format.cpp:258
+#: src/mmg/tabs/input_format.cpp:262
 msgid ""
 "Selects the character set a subtitle file or chapter information was written "
 "with."
@@ -7067,7 +7089,7 @@ msgstr ""
 "koristi zasnovan na tipu staze. Većina tipova staza nije uopšte "
 "kompresovana. "
 
-#: src/mmg/tabs/input_format.cpp:266
+#: src/mmg/tabs/input_format.cpp:270
 msgid ""
 "Sets the cropping parameters. Must be comma-separated list of four numbers "
 "for the cropping to be used at the left, top, right and bottom."
@@ -7076,7 +7098,7 @@ msgstr ""
 "od četiri broja koji se upotrebljavaju za rezanje redosledom levo, gore, "
 "desno i dole."
 
-#: src/mmg/tabs/input_format.cpp:243
+#: src/mmg/tabs/input_format.cpp:247
 msgid ""
 "Sets the default duration or number of frames per second for a track. This "
 "can either be a floating point number or a fraction."
@@ -7084,7 +7106,7 @@ msgstr ""
 "Postavlja osnovno trajanje ili broj slika po sekundi za stazu. Ovo može biti "
 "broj sa pokretnim zarezom ili razlomak."
 
-#: src/mmg/tabs/input_format.cpp:231
+#: src/mmg/tabs/input_format.cpp:235
 msgid ""
 "Sets the display aspect ratio of the track. The format can be either 'a/b' "
 "in which case both numbers must be integer (e.g. 16/9) or just a single "
@@ -7094,7 +7116,7 @@ msgstr ""
 "oba broja moraju biti celi (npr. 16/9) ili samo jedan broj sa pokretnom "
 "zarezom 'f' (npr. 2.35)."
 
-#: src/mmg/tabs/input_format.cpp:235
+#: src/mmg/tabs/input_format.cpp:239
 msgid ""
 "Sets the display height of the track. The width must be set as well, or this "
 "field will be ignored."
@@ -7102,7 +7124,7 @@ msgstr ""
 "Postavlja visinu koja će biti prikazana. Širina takođe mora biti "
 "postavljena, ili će ovo polje biti ignorisano."
 
-#: src/mmg/tabs/input_format.cpp:234
+#: src/mmg/tabs/input_format.cpp:238
 msgid ""
 "Sets the display width of the track. The height must be set as well, or this "
 "field will be ignored."
@@ -7139,7 +7161,7 @@ msgstr ""
 "nego što je napravljeno segmenata onda će nasumični UID-ovi biti kreirani za "
 "njih."
 
-#: src/mmg/tabs/input_format.cpp:240
+#: src/mmg/tabs/input_format.cpp:244
 msgid ""
 "Sets the stereo mode of the video track to this value. If left empty then "
 "the track's original stereo mode will be kept or, if it didn't have one, "
@@ -7489,15 +7511,15 @@ msgstr "Stereo režim: %1% (%2%)"
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "Režim Stereo-3D video (0–11, pogl. dokumentaciju)."
 
-#: src/mmg/tabs/input_format.cpp:239
+#: src/mmg/tabs/input_format.cpp:243
 msgid "Stereoscopy:"
 msgstr "Stereoskopija:"
 
-#: src/mmg/tabs/input_format.cpp:252
+#: src/mmg/tabs/input_format.cpp:256
 msgid "Stretch by:"
 msgstr "Rastegni za:"
 
-#: src/mmg/tabs/input_format.cpp:253
+#: src/mmg/tabs/input_format.cpp:257
 msgid ""
 "Stretch this track's timecodes. This entry can have two formats. It is "
 "either a positive floating point number, or a fraction like e.g. 1200/1253. "
@@ -7541,7 +7563,7 @@ msgstr "TTA"
 msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA (The lossless True Audio codec)"
 
-#: src/extract/extract_cli_parser.cpp:78
+#: src/extract/extract_cli_parser.cpp:79
 msgid "Tag extraction"
 msgstr "Izvlačenje taga"
 
@@ -7632,7 +7654,7 @@ msgstr ".idx fajl ne sadrži 'id: ...' liniju za označavanje jezika.\n"
 msgid "The AAC profiles are different: %1% and %2%"
 msgstr "AAC profili su različiti: %1% and %2%"
 
-#: src/input/r_qtmp4.cpp:1508
+#: src/input/r_qtmp4.cpp:1515
 msgid ""
 "The AVC video track is missing the 'CTTS' atom for frame timecode offsets. "
 "However, AVC/h.264 allows frames to have more than the traditional one (for "
@@ -7673,7 +7695,7 @@ msgid ""
 "The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n"
 msgstr "FPS je 0.0 ali čitač nije naveo vremenski kod za paket. %1%\n"
 
-#: src/mmg/tabs/input.cpp:1429
+#: src/mmg/tabs/input.cpp:1432
 #, c-format, boost-format
 msgid "The FPS setting for track nr. %s in file '%s' is invalid."
 msgstr "FPS parametar za traku %s u fajlu '%s' je nevažeći."
@@ -7683,7 +7705,7 @@ msgstr "FPS parametar za traku %s u fajlu '%s' je nevažeći."
 msgid "The FourCC must be exactly four characters long in '%1% %2%'.\n"
 msgstr "FourCC mora biti dugačak tačno četiri karaktera u '%1% %2%'.\n"
 
-#: src/mmg/tabs/input.cpp:1417
+#: src/mmg/tabs/input.cpp:1420
 #, c-format, boost-format
 msgid ""
 "The FourCC setting for track nr. %s in file '%s' is not exactly four "
@@ -7692,7 +7714,7 @@ msgstr ""
 "Dužina FourCC parametra za stazu br. %s iz fajla '%s' nije dugačka tačno "
 "četiri karaktera."
 
-#: src/mmg/mmg_dialog.cpp:1930
+#: src/mmg/mmg_dialog.cpp:1935
 #, boost-format
 msgid ""
 "The GUI is configured to use the mkvmerge executable from a different "
@@ -7704,7 +7726,7 @@ msgstr ""
 "(%1%) nego što je sam GUI (%2%). Ovo nije podržano ali takođe neće biti ni "
 "sprečeno. Trebalo bi da promenite mkvmerge izvršni fajl u opcijama."
 
-#: src/extract/extract_cli_parser.cpp:236
+#: src/extract/extract_cli_parser.cpp:248
 #, boost-format
 msgid "The ID '%1%' has already been used for another output file.\n"
 msgstr "ID '%1%' je već bio korišćen za drugi izlazni fajl.\n"
@@ -7714,7 +7736,7 @@ msgstr "ID '%1%' je već bio korišćen za drugi izlazni fajl.\n"
 msgid "The Kate identification header could not be parsed (%1%).\n"
 msgstr "Kate identifikaciono zaglavlje ne može biti raščlanjeno (%1%).\n"
 
-#: src/input/r_qtmp4.cpp:1000
+#: src/input/r_qtmp4.cpp:1007
 #, boost-format
 msgid ""
 "The MP4 file '%1%' contains chapters whose format was not recognized. This "
@@ -7850,7 +7872,7 @@ msgstr ""
 msgid "The argument to '--timecode-scale' must be a number.\n"
 msgstr "Argument od '--timecode-scale' mora biti broj.\n"
 
-#: src/mmg/tabs/input.cpp:1471
+#: src/mmg/tabs/input.cpp:1474
 #, c-format, boost-format
 msgid "The aspect ratio setting for track nr. %s in file '%s' is invalid."
 msgstr "Parametri formata slike za stazu br. %s u fajlu '%s' su nevažeći."
@@ -7948,6 +7970,11 @@ msgstr "Država '%s' nije važeći ccTLD i ne može biti odabran."
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Zapisuju se cue unosi (indeks)...\n"
 
+#: src/extract/cues.cpp:58
+#, fuzzy, boost-format
+msgid "The cues for track %1% are written to '%2%'.\n"
+msgstr "CUE list za stazu %1% će biti upisan u '%2%'.\n"
+
 #: src/mmg/tabs/input.cpp:813
 #, c-format, boost-format
 msgid ""
@@ -7993,7 +8020,7 @@ msgstr ""
 "Definisani kod jezika '%1%' nije važeći ISO639-2 kod jezika i biće "
 "ignorisan.\n"
 
-#: src/mmg/tabs/input.cpp:1396
+#: src/mmg/tabs/input.cpp:1399
 #, c-format, boost-format
 msgid "The delay setting for track nr. %s in file '%s' is invalid."
 msgstr ""
@@ -8115,7 +8142,7 @@ msgstr ""
 "potoka se razlikuje od vrednosti koje se nalaze u izvornom kontejneru. Biće "
 "korišćene one iz video bit-potoka (%1%x%2%).\n"
 
-#: src/extract/extract_cli_parser.cpp:104
+#: src/extract/extract_cli_parser.cpp:105
 msgid ""
 "The fifth mode tries to extract chapter information and tags and outputs "
 "them as a CUE sheet. This is the reverse of using a CUE sheet with "
@@ -8151,10 +8178,11 @@ msgstr ""
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
 msgstr "Fajl '%1%' ne može biti otvoren za čitanje: %2%.\n"
 
-#: src/extract/attachments.cpp:122 src/extract/tracks.cpp:299
-#: src/extract/xtr_avi.cpp:56 src/extract/xtr_avi.cpp:60
-#: src/extract/xtr_rmff.cpp:40 src/extract/xtr_tta.cpp:76
-#: src/extract/xtr_wav.cpp:115 src/merge/output_control.cpp:1661
+#: src/extract/attachments.cpp:122 src/extract/cues.cpp:73
+#: src/extract/tracks.cpp:299 src/extract/xtr_avi.cpp:56
+#: src/extract/xtr_avi.cpp:60 src/extract/xtr_rmff.cpp:40
+#: src/extract/xtr_tta.cpp:76 src/extract/xtr_wav.cpp:117
+#: src/merge/output_control.cpp:1661
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "Fajl '%1%' ne može biti otvoren za zapisivanje: %2%.\n"
@@ -8207,6 +8235,11 @@ msgid ""
 msgstr ""
 "Fajl ne može biti otvoren za čitanje, ili nije bilo dovoljno podataka da se "
 "rastave njegova zaglavlja."
+
+#: src/extract/cues.cpp:49
+#, fuzzy, boost-format
+msgid "The file does not contain track ID %1%.\n"
+msgstr "Ulazni fajl '%s' na sadrži nikakve staze."
 
 #: src/mmg/mmg_dialog.cpp:412
 msgid "The file does not exist."
@@ -8310,7 +8343,7 @@ msgstr "Fajl ili direktorijum nije pronađen"
 
 #: src/common/kax_file.cpp:57 src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1245
-#: src/input/r_matroska.cpp:1927
+#: src/input/r_matroska.cpp:1923
 msgid "The file will not be processed further."
 msgstr "Fajl neće biti dalje obrađen."
 
@@ -8345,11 +8378,11 @@ msgid ""
 msgstr ""
 "Fajl ne može biti spojen zato što nema fajlova sa kojim može da se spoji.\n"
 
-#: src/extract/extract_cli_parser.cpp:65
+#: src/extract/extract_cli_parser.cpp:66
 msgid "The first mode extracts some tracks to external files."
 msgstr "Prvi režim izvlači neke staze u spoljne fajlove."
 
-#: src/extract/extract_cli_parser.cpp:55
+#: src/extract/extract_cli_parser.cpp:56
 msgid ""
 "The first word tells mkvextract what to extract. The second must be the "
 "source file. There are few global options that can be used with all modes. "
@@ -8391,7 +8424,7 @@ msgstr "Format vremenskog koda/trajanja gde se vrši podela je nevažeći."
 msgid "The formats do not match."
 msgstr "Formati se ne slažu."
 
-#: src/extract/extract_cli_parser.cpp:95
+#: src/extract/extract_cli_parser.cpp:96
 msgid ""
 "The fourth mode extracts the chapters and converts them to XML. The output "
 "is written to the standard output. The output can be used as a source for "
@@ -8417,7 +8450,7 @@ msgstr "Visina dve staze se razlikuje: %1% and %2%"
 msgid "The input file '%s' does not contain any tracks."
 msgstr "Ulazni fajl '%s' na sadrži nikakve staze."
 
-#: src/mmg/tabs/input.cpp:1313
+#: src/mmg/tabs/input.cpp:1316
 msgid ""
 "The job file could not have been parsed correctly.\n"
 "Either it is invalid / damaged, or you've just found\n"
@@ -8432,7 +8465,7 @@ msgstr ""
 "\n"
 "(Problem se desio u tab_input::load(), #1)"
 
-#: src/mmg/tabs/input.cpp:1320
+#: src/mmg/tabs/input.cpp:1323
 msgid ""
 "The job file could not have been parsed correctly.\n"
 "Either it is invalid / damaged, or you've just found\n"
@@ -8447,7 +8480,7 @@ msgstr ""
 "\n"
 "(Problem se desio u tab_input::load(), #2)"
 
-#: src/mmg/tabs/input.cpp:1333
+#: src/mmg/tabs/input.cpp:1336
 msgid ""
 "The job file could not have been parsed correctly.\n"
 "Either it is invalid / damaged, or you've just found\n"
@@ -8669,7 +8702,7 @@ msgstr ""
 msgid "The order of the various options is not important."
 msgstr "Poredak različitih parametara nije važan."
 
-#: src/mmg/mmg_dialog.cpp:554 src/mmg/mmg_dialog.cpp:1427
+#: src/mmg/mmg_dialog.cpp:554 src/mmg/mmg_dialog.cpp:1432
 #, c-format, boost-format
 msgid "The output file '%s' already exists. Do you want to overwrite it?"
 msgstr "Izlazni fajl '%s' već postoji. Da li želite da prepišete preko njega?"
@@ -8738,7 +8771,7 @@ msgstr "The root element must be <%1%>."
 msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr "Učestalost uzorkovanja dve audio staze se razlikuje: %1% and %2%"
 
-#: src/extract/extract_cli_parser.cpp:79
+#: src/extract/extract_cli_parser.cpp:80
 msgid ""
 "The second mode extracts the tags and converts them to XML. The output is "
 "written to the standard output. The output can be used as a source for "
@@ -8760,7 +8793,7 @@ msgstr ""
 "Izabrani jezik '%s' za poglavlje '%s' nije važeći kod jezika. Molim vas, "
 "izaberite jedan sa spiska."
 
-#: src/extract/extract_cli_parser.cpp:113
+#: src/extract/extract_cli_parser.cpp:114
 msgid ""
 "The sixth mode finds the timecodes of all blocks for a track and outputs a "
 "timecode v2 file with these timecodes."
@@ -8792,7 +8825,7 @@ msgstr ""
 "Izvorni fajl '%1%' ne može biti uspešno otvoren, ili nije uspelo dobijanje "
 "njegove veličine dolazeći na sam kraj fajla.\n"
 
-#: src/mmg/tabs/input.cpp:1407
+#: src/mmg/tabs/input.cpp:1410
 #, c-format, boost-format
 msgid "The stretch setting for track nr. %s in file '%s' is invalid."
 msgstr "Vrednost za rastezanje staze br. %s iz fajla '%s' je nevažeća."
@@ -8877,7 +8910,7 @@ msgstr ""
 msgid "The temporary file '%1%' could not be opened for reading: %2%.\n"
 msgstr "Privremeni fajl '%1%' ne može biti otvoren radi čitanja: %2%.\n"
 
-#: src/extract/extract_cli_parser.cpp:87
+#: src/extract/extract_cli_parser.cpp:88
 msgid "The third mode extracts attachments from the source file."
 msgstr "Treći režim izvlači priloge iz izvornog fajla."
 
@@ -9060,7 +9093,12 @@ msgstr "Širina dve staze se razlikuje: %1% and %2%"
 msgid "Theora"
 msgstr "Theora"
 
-#: src/mmg/mmg_dialog.cpp:1822
+#: src/extract/cues.cpp:53
+#, boost-format
+msgid "There are no cues for track ID %1%.\n"
+msgstr ""
+
+#: src/mmg/mmg_dialog.cpp:1827
 msgid "There is a new version available online."
 msgstr "Dostupna je nova verzija."
 
@@ -9076,7 +9114,7 @@ msgstr "Nema fajla sa ID '%1%'. Argument za '--append-to' nije važeći.\n"
 msgid "There is no translation available for '%1%'.\n"
 msgstr "Ne postoji prevod dostupan za '%1%'.\n"
 
-#: src/mmg/mmg_dialog.cpp:1823
+#: src/mmg/mmg_dialog.cpp:1828
 msgid "There was an error querying the update status."
 msgstr "Došlo je do greške prilikom traženja statusa ažuriranja."
 
@@ -9303,13 +9341,19 @@ msgid "This list is for informational purposes only and cannot be changed."
 msgstr ""
 "Ova lista je za isključivo informativne svrhe i ne može biti promenjena."
 
-#: src/mmg/mmg_dialog.cpp:1969
+#: src/mmg/mmg_dialog.cpp:1974
 msgid "This message will only shown to you once."
 msgstr "Ova poruka će vam biti prikazana samo jednom."
 
 #: src/mmg/tabs/global.cpp:252 src/mmg/tabs/global.cpp:267
 msgid "This mode considers only the first video track that is output."
 msgstr "Ovaj režim razmatra samo prvu video stazu koja se zapisuje."
+
+#: src/extract/extract_cli_parser.cpp:121
+#, fuzzy
+msgid ""
+"This mode extracts cue information for some tracks to external text files."
+msgstr "Prvi režim izvlači neke staze u spoljne fajlove."
 
 #: src/mmg/tabs/global.cpp:282
 msgid ""
@@ -9376,7 +9420,7 @@ msgstr ""
 "pokušali da uradite, korišćenom komandnom linijom i informacijom o "
 "operativnom sistemu koji koristite. Hvala."
 
-#: src/mmg/tabs/input_format.cpp:268
+#: src/mmg/tabs/input_format.cpp:272
 msgid ""
 "This track contains SBR AAC/HE-AAC/AAC+ data. Only needed for AAC input "
 "files, because SBR AAC cannot be detected automatically for these files. Not "
@@ -9386,13 +9430,13 @@ msgstr ""
 "AAC fajlove, zato što SBR AAC ne može automatski biti otkriven za ove "
 "fajlove. Nije potreban za AAC staze iščitane iz MP4 ili Matroska fajlova."
 
-#: src/mmg/tabs/input.cpp:1030
+#: src/mmg/tabs/input.cpp:1031
 msgid "This track is not compatible with the WebM mode and cannot be enabled."
 msgstr "Ova staza nije kompatibilna sa WebM režimom i ne može biti uključena."
 
 #: src/common/kax_file.cpp:57 src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1245
-#: src/input/r_matroska.cpp:1927
+#: src/input/r_matroska.cpp:1923
 msgid "This usually indicates a damaged file structure."
 msgstr "Ovo obično ukazuje na oštećenu strukturu fajla."
 
@@ -9400,7 +9444,7 @@ msgstr "Ovo obično ukazuje na oštećenu strukturu fajla."
 msgid "Time slice"
 msgstr "Time slice"
 
-#: src/extract/extract_cli_parser.cpp:111
+#: src/extract/extract_cli_parser.cpp:112
 msgid "Timecode extraction"
 msgstr "Izvlačenje vremenskih kodova"
 
@@ -9489,7 +9533,7 @@ msgstr ""
 msgid "Track %1% with the CodecID '%2%' does not contain valid headers.\n"
 msgstr "Staza %1% sa CodecID '%2%' ne sadrži važeća zaglavlja.\n"
 
-#: src/extract/xtr_wav.cpp:44
+#: src/extract/xtr_wav.cpp:46
 #, boost-format
 msgid ""
 "Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" "
@@ -9503,7 +9547,7 @@ msgstr ""
 #: src/extract/xtr_hevc.cpp:24 src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76 src/extract/xtr_rmff.cpp:31
 #: src/extract/xtr_textsubs.cpp:95 src/extract/xtr_textsubs.cpp:283
-#: src/extract/xtr_vobsub.cpp:64 src/extract/xtr_wav.cpp:97
+#: src/extract/xtr_vobsub.cpp:61 src/extract/xtr_wav.cpp:99
 #, boost-format
 msgid ""
 "Track %1% with the CodecID '%2%' is missing the \"codec private\" element "
@@ -9526,7 +9570,7 @@ msgstr ""
 msgid "Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"
 msgstr "Staza %1%: %2%, codec ID: %3%%4%%5%%6%\n"
 
-#: src/input/r_qtmp4.cpp:2481
+#: src/input/r_qtmp4.cpp:2500
 #, boost-format
 msgid "Track %1%: AAC found, but decoder config data has length %2%.\n"
 msgstr "Staza  %1%: AAC pronađen, ali konfiguracija dekodera ima dužinu %2%.\n"
@@ -9558,7 +9602,7 @@ msgstr ""
 "Staza %1%: Prevodu sa brojem %2% nedostaje trajanje. Pretpostavljam trajanje "
 "od 1s.\n"
 
-#: src/input/r_qtmp4.cpp:2484
+#: src/input/r_qtmp4.cpp:2503
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "Staza %1%: AAC informacija ne može biti parsirana.\n"
@@ -9582,7 +9626,7 @@ msgstr "UID staze"
 msgid "Track UID: %1%"
 msgstr "UID staze: %1%"
 
-#: src/extract/extract_cli_parser.cpp:64
+#: src/extract/extract_cli_parser.cpp:65
 msgid "Track extraction"
 msgstr "Izvlačenje staze"
 
@@ -9646,7 +9690,7 @@ msgstr "Savet za rešavanje problema sa reprodukcijom"
 msgid "TrueHD"
 msgstr "TrueHD"
 
-#: src/extract/xtr_vobsub.cpp:91
+#: src/extract/xtr_vobsub.cpp:88
 #, boost-format
 msgid ""
 "Two VobSub tracks can only be extracted into the same file if their "
@@ -9756,7 +9800,7 @@ msgstr "Nepoznat format za segment sa UID '%3%' in '%1% %2%'.\n"
 msgid "Unknown header 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgstr "Nepoznato zaglavlje 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 
-#: src/extract/extract_cli_parser.cpp:211
+#: src/extract/extract_cli_parser.cpp:222
 #, boost-format
 msgid "Unknown mode '%1%'.\n"
 msgstr "Nepoznat režim '%1%'.\n"
@@ -9776,7 +9820,7 @@ msgstr "Nepoznat režim za parsiranje u '%1% %2%'.\n"
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "Nepoznat/nepodržan audio format 0x%|1$04x| za ovu audio stazu.\n"
 
-#: src/extract/extract_cli_parser.cpp:219
+#: src/extract/extract_cli_parser.cpp:231
 #, boost-format
 msgid "Unrecognized command line option '%1%'.\n"
 msgstr "Neprepoznat parametar komandne linije '%1%'.\n"
@@ -9798,7 +9842,7 @@ msgstr ""
 msgid "Unsupported format"
 msgstr "Nepodržan format"
 
-#: src/input/r_matroska.cpp:1733
+#: src/input/r_matroska.cpp:1729
 msgid "Unsupported track type for this track.\n"
 msgstr "Nepodržan tip za ovu stazu.\n"
 
@@ -10066,11 +10110,11 @@ msgstr ""
 "Zapiši trajanje za sve blokove. Ovo će uvećati veličinu fajla i ne nudi "
 "trenutno nikakvu dodatnu vrednost za plejere."
 
-#: src/extract/extract_cli_parser.cpp:88
+#: src/extract/extract_cli_parser.cpp:89
 msgid "Write the attachment with the ID 'AID' to 'outname'."
 msgstr "Zapiši prilog sa ID-em 'AID' u 'outname'."
 
-#: src/extract/extract_cli_parser.cpp:71
+#: src/extract/extract_cli_parser.cpp:72
 msgid "Write track with the ID TID to the file 'out'."
 msgstr "Zapiši stazu sa ID-em TID u fajl 'out'."
 
@@ -10083,7 +10127,7 @@ msgstr "Napravljeno sa aplikacijom: %1%"
 msgid "Writing info"
 msgstr "Informacija o zapisu"
 
-#: src/extract/xtr_vobsub.cpp:212
+#: src/extract/xtr_vobsub.cpp:209
 #, boost-format
 msgid "Writing the VobSub index file '%1%'.\n"
 msgstr "Zapisivanje VobSub indeks fajla '%1%'.\n"
@@ -10523,7 +10567,7 @@ msgstr ""
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: Stazi nedostaje njen broj.\n"
 
-#: src/input/r_matroska.cpp:1346
+#: src/input/r_matroska.cpp:1342
 #, boost-format
 msgid ""
 "matroska_reader: Could not keep the track UID %1% because it is already "
@@ -10675,7 +10719,7 @@ msgstr "nedostaje ime svojstva"
 msgid "missing value"
 msgstr "nedostaje vrednost"
 
-#: src/extract/extract_cli_parser.cpp:51
+#: src/extract/extract_cli_parser.cpp:52
 msgid "mkvextract <-h|-V>"
 msgstr "mkvextract <-h|-V>"
 
@@ -10683,7 +10727,7 @@ msgstr "mkvextract <-h|-V>"
 msgid "mkvextract <mode> <source-filename> [options] <extraction-spec>"
 msgstr "mkvextract <mode> <source-filename> [opcije] <extraction-spec>"
 
-#: src/extract/extract_cli_parser.cpp:92
+#: src/extract/extract_cli_parser.cpp:93
 msgid "mkvextract attachments \"a movie.mkv\" 4:cover.jpg"
 msgstr "mkvextract attachments \"film.mkv\" 4:naslovna.jpg"
 
@@ -10691,7 +10735,7 @@ msgstr "mkvextract attachments \"film.mkv\" 4:naslovna.jpg"
 msgid "mkvextract attachments <inname> [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "mkvextract attachments <inname> [opcije] [AID1:out1 [AID2:out2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:100
+#: src/extract/extract_cli_parser.cpp:101
 msgid "mkvextract chapters \"a movie.mkv\" > movie_chapters.xml"
 msgstr "mkvextract chapters \"film.mkv\" > poglavlja_filma.xml"
 
@@ -10699,7 +10743,17 @@ msgstr "mkvextract chapters \"film.mkv\" > poglavlja_filma.xml"
 msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <inname> [opcije]"
 
-#: src/extract/extract_cli_parser.cpp:109
+#: src/extract/extract_cli_parser.cpp:125
+#, fuzzy
+msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
+msgstr "mkvextract timecodes_v2 \"film.mkv\" 1:vremenski_kodovi_staza1.txt"
+
+#: src/extract/extract_cli_parser.cpp:51
+#, fuzzy
+msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
+msgstr "mkvextract tracks <inname> [opcije] [TID1:out1 [TID2:out2 ...]]"
+
+#: src/extract/extract_cli_parser.cpp:110
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
 msgstr "mkvextract cuesheet \"audiofajl.mka\" > audiofajl.cue"
 
@@ -10707,7 +10761,7 @@ msgstr "mkvextract cuesheet \"audiofajl.mka\" > audiofajl.cue"
 msgid "mkvextract cuesheet <inname> [options]"
 msgstr "mkvextract cuesheet <inname> [opcije]"
 
-#: src/extract/extract_cli_parser.cpp:83
+#: src/extract/extract_cli_parser.cpp:84
 msgid "mkvextract tags \"a movie.mkv\" > movie_tags.xml"
 msgstr "mkvextract tags \"film.mkv\" > tag_filma.xml"
 
@@ -10715,7 +10769,7 @@ msgstr "mkvextract tags \"film.mkv\" > tag_filma.xml"
 msgid "mkvextract tags <inname> [options]"
 msgstr "mkvextract tags <inname> [opcije]"
 
-#: src/extract/extract_cli_parser.cpp:117
+#: src/extract/extract_cli_parser.cpp:118
 msgid "mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_track1.txt"
 msgstr "mkvextract timecodes_v2 \"film.mkv\" 1:vremenski_kodovi_staza1.txt"
 
@@ -10723,7 +10777,7 @@ msgstr "mkvextract timecodes_v2 \"film.mkv\" 1:vremenski_kodovi_staza1.txt"
 msgid "mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:75
+#: src/extract/extract_cli_parser.cpp:76
 msgid "mkvextract tracks \"a movie.mkv\" 2:audio.ogg -c ISO8859-1 3:subs.srt"
 msgstr "mkvextract tracks \"film.mkv\" 2:audio.ogg -c ISO8859-1 3:prevod.srt"
 
@@ -10772,9 +10826,9 @@ msgstr "mkvmerge GUI spreman"
 msgid "mkvmerge GUI settings (*.mmg)|*.mmg|%s"
 msgstr "mkvmerge GUI podešavanja (*.mmg)|*.mmg|%s"
 
-#: src/mmg/tabs/input.cpp:1371 src/mmg/tabs/input.cpp:1397
-#: src/mmg/tabs/input.cpp:1408 src/mmg/tabs/input.cpp:1418
-#: src/mmg/tabs/input.cpp:1430 src/mmg/tabs/input.cpp:1472
+#: src/mmg/tabs/input.cpp:1374 src/mmg/tabs/input.cpp:1400
+#: src/mmg/tabs/input.cpp:1411 src/mmg/tabs/input.cpp:1421
+#: src/mmg/tabs/input.cpp:1433 src/mmg/tabs/input.cpp:1475
 msgid "mkvmerge GUI: error"
 msgstr "mkvmerge GUI: greška"
 
@@ -10985,7 +11039,7 @@ msgstr "bez potpisa hash algoritam"
 msgid "no splitting"
 msgstr "bez podele"
 
-#: src/mmg/mmg_dialog.cpp:1030 src/mmg/tabs/input_extra.cpp:84
+#: src/mmg/mmg_dialog.cpp:1035 src/mmg/tabs/input_extra.cpp:84
 #: src/mmg/tabs/input_extra.cpp:116 src/mmg/tabs/input_extra.cpp:119
 msgid "none"
 msgstr "ništa"
@@ -11222,13 +11276,13 @@ msgstr "und (Neodređen)"
 #: src/info/mkvinfo.cpp:699 src/info/mkvinfo.cpp:709 src/info/mkvinfo.cpp:724
 #: src/info/mkvinfo.cpp:746 src/info/mkvinfo.cpp:758 src/info/mkvinfo.cpp:768
 #: src/info/mkvinfo.cpp:954 src/input/r_matroska.cpp:99
-#: src/input/r_matroska.cpp:2277 src/mmg/header_editor/value_page.cpp:150
+#: src/input/r_matroska.cpp:2273 src/mmg/header_editor/value_page.cpp:150
 #: src/mmg/mmg.cpp:68 src/mmg/tabs/input.cpp:566
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "unknown"
 msgstr "nepoznato"
 
-#: src/input/r_matroska.cpp:2265
+#: src/input/r_matroska.cpp:2261
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "nepoznato, tag formata 0x%|1$04x|"
@@ -11335,6 +11389,9 @@ msgstr "da"
 #~ msgstr ""
 #~ "Grupa blokova nađena na poziciji %1%, ali nijedan element bloka nije "
 #~ "nađen unutar nje. Ovo može srušiti mkvmerge.\n"
+
+#~ msgid "PGS"
+#~ msgstr "PGS"
 
 #~ msgid ""
 #~ "TrueHD audio streams know two frame types: sync frames and non-sync "
