@@ -894,6 +894,11 @@ mmg_dialog::update_command_line() {
           clargs.Add(wxString::Format(wxT("%s:%d"), sid.c_str(), t->aac_is_sbr ? 1 : 0));
         }
 
+        if (t->reduce_to_core) {
+          clargs.Add(wxT("--reduce-to-core"));
+          clargs.Add(sid);
+        }
+
       } else if (t->type == wxT('v')) {
         no_video = false;
         if (dids.length() > 0)

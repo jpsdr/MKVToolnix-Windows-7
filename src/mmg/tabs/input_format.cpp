@@ -142,11 +142,15 @@ tab_input_format::tab_input_format(wxWindow *parent,
   cb_aac_is_sbr = new wxCheckBox(this, ID_CB_AACISSBR, wxEmptyString);
   cb_aac_is_sbr->SetValue(false);
 
+  cb_reduce_to_core = new wxCheckBox(this, ID_CB_REDUCE_TO_CORE, wxEmptyString);
+  cb_reduce_to_core->SetValue(false);
+
   cb_fix_bitstream_timing_info = new wxCheckBox(this, ID_CB_FIX_BITSTREAM_TIMING_INFO, wxEmptyString);
   cb_fix_bitstream_timing_info->SetValue(false);
 
   siz_line = new wxBoxSizer(wxHORIZONTAL);
   siz_line->Add(cb_aac_is_sbr, 0, wxALL, STDSPACING);
+  siz_line->Add(cb_reduce_to_core, 0, wxALL, STDSPACING);
   siz_line->Add(cb_fix_bitstream_timing_info, 0, wxALL, STDSPACING);
   siz_all->Add(siz_line, 0, wxLEFT | wxRIGHT, LEFTRIGHTSPACING);
 
@@ -268,6 +272,9 @@ tab_input_format::translate_ui() {
   cb_aac_is_sbr->SetToolTip(TIP("This track contains SBR AAC/HE-AAC/AAC+ data. Only needed for AAC input files, because SBR AAC cannot be detected automatically for "
                                 "these files. Not needed for AAC tracks read from MP4 or Matroska files."));
 
+  cb_reduce_to_core->SetLabel(Z("Reduce to audio core"));
+  cb_reduce_to_core->SetToolTip(TIP("Drops the lossless extensions from an audio track and keeps only its lossy core. This only works with DTS tracks."));
+
   cb_fix_bitstream_timing_info->SetLabel(Z("Fix bitstream timing information"));
   cb_fix_bitstream_timing_info->SetToolTip(TIP("Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream. "
                                                "With this option that information is adjusted to match the container timing information. "
@@ -322,6 +329,7 @@ tab_input_format::set_track_mode(mmg_track_t *t) {
   rb_display_dimensions->SetValue(video && !ar_enabled);
 
   cb_aac_is_sbr->Enable(audio_app && ((ctype.Find(wxT("aac")) >= 0) || (ctype.Find(wxT("mp4a")) >= 0)));
+  cb_reduce_to_core->Enable(audio_app && (ctype.Find(wxT("dts")) >= 0));
   cb_fix_bitstream_timing_info->Enable(video && (avc || avc_es));
 
   if (t)
@@ -340,6 +348,7 @@ tab_input_format::set_track_mode(mmg_track_t *t) {
   tc_delay->SetValue(wxEmptyString);
   tc_stretch->SetValue(wxEmptyString);
   cb_aac_is_sbr->SetValue(false);
+  cb_reduce_to_core->SetValue(false);
   cb_fix_bitstream_timing_info->SetValue(false);
 
   input->dont_copy_values_now = saved_dcvn;
@@ -351,6 +360,14 @@ tab_input_format::on_aac_is_sbr_clicked(wxCommandEvent &) {
     return;
 
   tracks[input->selected_track]->aac_is_sbr = cb_aac_is_sbr->GetValue();
+}
+
+void
+tab_input_format::on_reduce_to_core_clicked(wxCommandEvent &) {
+  if (input->dont_copy_values_now || (input->selected_track == -1))
+    return;
+
+  tracks[input->selected_track]->reduce_to_core = cb_reduce_to_core->GetValue();
 }
 
 void
@@ -478,6 +495,7 @@ tab_input_format::on_display_dimensions_selected(wxCommandEvent &) {
 IMPLEMENT_CLASS(tab_input_format, wxPanel);
 BEGIN_EVENT_TABLE(tab_input_format, wxPanel)
   EVT_CHECKBOX(ID_CB_AACISSBR,                  tab_input_format::on_aac_is_sbr_clicked)
+  EVT_CHECKBOX(ID_CB_REDUCE_TO_CORE,            tab_input_format::on_reduce_to_core_clicked)
   EVT_CHECKBOX(ID_CB_FIX_BITSTREAM_TIMING_INFO, tab_input_format::on_fix_bitstream_timing_info_clicked)
   EVT_COMBOBOX(ID_CB_SUBTITLECHARSET,           tab_input_format::on_subcharset_selected)
   EVT_COMBOBOX(ID_CB_ASPECTRATIO,               tab_input_format::on_aspect_ratio_changed)
