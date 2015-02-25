@@ -132,6 +132,9 @@ public:
     return -1;
   }
 
+  virtual uint64_t get_segment_pos() const;
+  virtual uint64_t get_segment_data_start_pos() const;
+
   virtual bool process(parse_mode_e parse_mode = parse_mode_full, const open_mode mode = MODE_WRITE, bool throw_on_error = false);
 
   virtual void show_progress_start(int64_t /* size */) {
@@ -154,6 +157,9 @@ public:
 
   virtual void close_file();
   virtual void reopen_file(const open_mode = MODE_WRITE);
+  virtual mm_file_io_c &get_file() {
+    return *m_file;
+  }
 
   static placement_strategy_e get_placement_strategy_for(EbmlElement *e);
   static placement_strategy_e get_placement_strategy_for(ebml_element_cptr e) {

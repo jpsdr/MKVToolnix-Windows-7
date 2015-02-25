@@ -1121,6 +1121,24 @@ kax_analyzer_c::get_placement_strategy_for(EbmlElement *e) {
   return Is<KaxTags>(e) ? ps_end : ps_anywhere;
 }
 
+uint64_t
+kax_analyzer_c::get_segment_pos()
+  const {
+  if (!m_segment)
+    return 0;
+
+  return m_segment->GetElementPosition();
+}
+
+uint64_t
+kax_analyzer_c::get_segment_data_start_pos()
+  const {
+  if (!m_segment)
+    return 0;
+
+  return m_segment->GetElementPosition() + m_segment->HeadSize();
+}
+
 // ------------------------------------------------------------
 
 bool m_show_progress;
