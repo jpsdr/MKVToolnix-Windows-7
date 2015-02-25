@@ -9,6 +9,10 @@
 
 2015-02-25  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: fixed determining the key frame status in
+        certain AVIs (those whose dwFlags index field has more bits set
+        than just 0x10).
+
         * build system: new feature: added configure options for building
         statically-linked binaries (--enable-static). Patches by Florent
         Thiéry. Implements #1119.

@@ -3160,7 +3160,7 @@ multiple_riff:
 
      //video
      if(strncasecmp((char *)AVI->idx[i],AVI->video_tag,3) == 0) {
-       AVI->video_index[nvi].key = str2ulong(AVI->idx[i]+ 4);
+       AVI->video_index[nvi].key = str2ulong(AVI->idx[i]+ 4) & 0x10;
        AVI->video_index[nvi].pos = str2ulong(AVI->idx[i]+ 8)+ioff;
        AVI->video_index[nvi].len = str2ulong(AVI->idx[i]+12);
        nvi++;
