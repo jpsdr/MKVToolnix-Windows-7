@@ -15,10 +15,6 @@
 
 #include "common/common_pch.h"
 
-#include <avilib.h>
-
-#include <ogg/ogg.h>
-
 #include <matroska/KaxChapters.h>
 #include <matroska/KaxTags.h>
 #include <matroska/KaxTracks.h>
@@ -60,6 +56,7 @@ void extract_attachments(const std::string &file_name, std::vector<track_spec_t>
 void extract_cuesheet(const std::string &file_name, kax_analyzer_c::parse_mode_e parse_mode);
 void write_cuesheet(std::string file_name, KaxChapters &chapters, KaxTags &tags, int64_t tuid, mm_io_c &out);
 void extract_timecodes(const std::string &file_name, std::vector<track_spec_t> &tspecs, int version);
+void extract_cues(std::string const &file_name, std::vector<track_spec_t> const &tracks, kax_analyzer_c::parse_mode_e parse_mode);
 
 kax_analyzer_cptr open_and_analyze(std::string const &file_name, kax_analyzer_c::parse_mode_e parse_mode, bool exit_on_error = true);
 

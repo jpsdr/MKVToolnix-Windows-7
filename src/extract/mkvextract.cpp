@@ -123,6 +123,9 @@ main(int argc,
   else if (options_c::em_chapters == options.m_extraction_mode)
     extract_chapters(options.m_file_name, options.m_simple_chapter_format, options.m_parse_mode);
 
+  else if (options_c::em_cues == options.m_extraction_mode)
+    extract_cues(options.m_file_name, options.m_tracks, options.m_parse_mode);
+
   else if (options_c::em_cuesheet == options.m_extraction_mode)
     extract_cuesheet(options.m_file_name, options.m_parse_mode);
 

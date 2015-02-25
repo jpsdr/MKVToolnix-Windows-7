@@ -48,6 +48,7 @@ extract_cli_parser_c::init_parser() {
   add_information(YT("mkvextract chapters <inname> [options]"));
   add_information(YT("mkvextract cuesheet <inname> [options]"));
   add_information(YT("mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"));
+  add_information(YT("mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"));
   add_information(YT("mkvextract <-h|-V>"));
 
   add_separator();
@@ -115,6 +116,15 @@ extract_cli_parser_c::init_parser() {
   add_section_header(YT("Example"));
 
   add_information(YT("mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_track1.txt"));
+
+  add_section_header(YT("Cue extraction"));
+  add_information(YT("This mode extracts cue information for some tracks to external text files."));
+
+  add_section_header(YT("Example"));
+
+  add_information(YT("mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"));
+
+  add_separator();
 
   add_hook(cli_parser_c::ht_unknown_option, std::bind(&extract_cli_parser_c::set_mode_or_extraction_spec, this));
 }
@@ -198,6 +208,7 @@ extract_cli_parser_c::set_extraction_mode() {
     { "chapters",     options_c::em_chapters     },
     { "cuesheet",     options_c::em_cuesheet     },
     { "timecodes_v2", options_c::em_timecodes_v2 },
+    { "cues",         options_c::em_cues         },
     { nullptr,        options_c::em_unknown      },
   };
 
@@ -214,6 +225,7 @@ extract_cli_parser_c::set_extraction_mode() {
 void
 extract_cli_parser_c::add_extraction_spec() {
   if (   (options_c::em_tracks       != m_options.m_extraction_mode)
+      && (options_c::em_cues         != m_options.m_extraction_mode)
       && (options_c::em_timecodes_v2 != m_options.m_extraction_mode)
       && (options_c::em_attachments  != m_options.m_extraction_mode))
     mxerror(boost::format(Y("Unrecognized command line option '%1%'.\n")) % m_current_arg);

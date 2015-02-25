@@ -13,6 +13,8 @@
 
 #include "common/common_pch.h"
 
+#include <avilib.h>
+
 #include <matroska/KaxBlock.h>
 
 #include "common/ebml.h"

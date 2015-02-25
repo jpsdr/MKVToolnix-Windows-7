@@ -22,7 +22,8 @@ public:
     em_cuesheet,
     em_tags,
     em_timecodes_v2,
-    em_tracks
+    em_tracks,
+    em_cues,
   };
 
   std::string m_file_name;
