@@ -77,14 +77,14 @@ write_cues(std::vector<track_spec_t> const &tracks,
 
 static std::map<int64_t, int64_t>
 generate_track_number_map(kax_analyzer_c &analyzer) {
-  auto tracks_m = analyzer.read_all(EBML_INFO(KaxTracks));
-  auto tracks   = dynamic_cast<KaxTracks *>(tracks_m.get());
+  auto track_number_map = std::map<int64_t, int64_t>{};
+  auto tracks_m         = analyzer.read_all(EBML_INFO(KaxTracks));
+  auto tracks           = dynamic_cast<KaxTracks *>(tracks_m.get());
 
   if (!tracks)
-    return {};
+    return track_number_map;
 
-  auto track_number_map = std::map<int64_t, int64_t>{};
-  auto tid              = 0;
+  auto tid = 0;
 
   for (auto const &elt : *tracks) {
     auto ktrack_entry = dynamic_cast<KaxTrackEntry *>(elt);
