@@ -112,7 +112,7 @@ debugging_c::hexdump(const void *buffer_to_dump,
   while (buffer_idx < length) {
     if ((buffer_idx % 16) == 0) {
       if (0 < buffer_idx) {
-        dump << ' ' << ascii.str() << '\n';
+        dump << " [" << ascii.str() << "]\n";
         ascii.str("");
       }
       dump << (s_fmt_line % buffer_idx);
@@ -130,7 +130,7 @@ debugging_c::hexdump(const void *buffer_to_dump,
 
   if ((buffer_idx % 16) != 0)
     dump << std::string(3u * (16 - (buffer_idx % 16)) + ((buffer_idx % 8) ? 1 : 0), ' ');
-  dump << ' ' << ascii.str() << '\n';
+  dump << " [" << ascii.str() << "]\n";
 
   debugging_c::output(dump.str());
 }
