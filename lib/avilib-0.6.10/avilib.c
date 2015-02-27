@@ -2718,7 +2718,7 @@ int avi_parse_input_file(avi_t *AVI, int getIndex)
          it is in the file */
 
       for(i=0;i<AVI->n_idx;i++)
-         if( strncasecmp((char *)AVI->idx[i],(char *)AVI->video_tag,3)==0 ) break;
+         if( strncasecmp((char *)AVI->idx[i],(char *)AVI->video_tag,2)==0 ) break;
       if(i>=AVI->n_idx) ERR_EXIT(AVI_ERR_NO_VIDS)
 
       pos = str2ulong(AVI->idx[i]+ 8);
@@ -3130,7 +3130,7 @@ multiple_riff:
 
    for(i=0;i<AVI->n_idx;i++) {
      
-     if(strncasecmp((char *)AVI->idx[i],AVI->video_tag,3) == 0) nvi++;
+     if(strncasecmp((char *)AVI->idx[i],AVI->video_tag,2) == 0) nvi++;
      
      for(j=0; j<AVI->anum; ++j) if(strncasecmp((char *)AVI->idx[i], AVI->track[j].audio_tag,4) == 0) nai[j]++;
    }
@@ -3159,7 +3159,7 @@ multiple_riff:
    for(i=0;i<AVI->n_idx;i++) {
 
      //video
-     if(strncasecmp((char *)AVI->idx[i],AVI->video_tag,3) == 0) {
+     if(strncasecmp((char *)AVI->idx[i],AVI->video_tag,2) == 0) {
        AVI->video_index[nvi].key = str2ulong(AVI->idx[i]+ 4) & 0x10;
        AVI->video_index[nvi].pos = str2ulong(AVI->idx[i]+ 8)+ioff;
        AVI->video_index[nvi].len = str2ulong(AVI->idx[i]+12);
@@ -3595,7 +3595,7 @@ int AVI_read_data(avi_t *AVI, char *vidbuf, long max_vidbuf,
 
       n = PAD_EVEN(str2ulong((unsigned char *)data+4));
 
-      if(strncasecmp(data,AVI->video_tag,3) == 0)
+      if(strncasecmp(data,AVI->video_tag,2) == 0)
       {
          *len = n;
          AVI->video_pos++;
