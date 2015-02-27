@@ -3,11 +3,11 @@
 .\"    Author: Moritz Bunkus <moritz@bunkus.org>
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
 .\"      Date: 2015-02-08
-.\"    Manual: User Commands
+.\"    Manual: Gebruiker commando\*(Aqs
 .\"    Source: MKVToolNix 7.6.0
-.\"  Language: English
+.\"  Language: Dutch
 .\"
-.TH "MKVPROPEDIT" "1" "2015\-02\-08" "MKVToolNix 7\&.6\&.0" "User Commands"
+.TH "MKVPROPEDIT" "1" "2015\-02\-08" "MKVToolNix 7\&.6\&.0" "Gebruiker commando\*(Aqs"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -28,259 +28,263 @@
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
 .SH "NAME"
-mkvpropedit \- Modify properties of existing Matroska(TM) files without a complete remux
-.SH "SYNOPSIS"
+mkvpropedit \- Modificeren van eigenschappen van een bestaande Matroska(TM) bestanden zonder een volledige samenvoeging
+.SH "BEKNOPTE INHOUDSBESCHRIJVING"
 .HP \w'\fBmkvpropedit\fR\ 'u
 \fBmkvpropedit\fR [options] {source\-filename} {actions}
-.SH "DESCRIPTION"
+.SH "BESCHRIJVING"
 .PP
-This program analyses an existing
+Dit programma analyseert een bestaand
 Matroska(TM)
-file and modifies some of its properties\&. Then it writes those modifications to the existing file\&. Among the properties that can be changed are the segment information elements (e\&.g\&. the title) and the track headers (e\&.g\&. the language code, \*(Aqdefault track\*(Aq flag or the name)\&.
+bestand en kan sommige eigenschappen veranderen\&. Dan schrijft het deze veranderingen naar het bestaande bestand\&. Onder de eigenschappen die kunnen worden veranderd, zijn de segment informatie elementen (b\&.v\&. de titel) en de spoor koppen (b\&.v\&.de taal code, \*(Aqstandaard spoor\*(Aq markering of de naam)\&.
 .PP
-Options:
+Opties:
 .PP
 \fB\-l\fR, \fB\-\-list\-property\-names\fR
 .RS 4
-Lists all known and editable property names, their type (string, integer, boolean etc) and a short description\&. The program exits afterwards\&. Therefore the
+Lijst alle bekende bewerkbare eigenschap namen, hun type (string, integer, boolean etc) en een korte beschrijving\&. Nadien stopt het programma\&. Daarom hoeft de parameter
 \fIsource\-filename\fR
-parameter does not have to be supplied\&.
+niet te worden ingegeven\&.
 .RE
 .PP
 \fB\-p\fR, \fB\-\-parse\-mode\fR \fImode\fR
 .RS 4
-Sets the parse mode\&. The parameter \*(Aq\fImode\fR\*(Aq can either be \*(Aqfast\*(Aq (which is also the default) or \*(Aqfull\*(Aq\&. The \*(Aqfast\*(Aq mode does not parse the whole file but uses the meta seek elements for locating the required elements of a source file\&. In 99% of all cases this is enough\&. But for files that do not contain meta seek elements or which are damaged the user might have to set the \*(Aqfull\*(Aq parse mode\&. A full scan of a file can take a couple of minutes while a fast scan only takes seconds\&.
+Stelt de ontleedt mode in\&. De parameter \*(Aq\fImode\fR\*(Aq kan zijn of \*(Aqfast\*(Aq (wat ook standaard is) of \*(Aqfull\*(Aq\&. De \*(Aqfast\*(Aq mode ontleedt niet het gehele bestand, maar gebruikt de meta zoek elementen voor lokaliseren van de benodigde elementen van een bron bestand\&. In 99% van alle gevallen is dat voldoende\&. Maar voor bestanden die geen meta zoek element bevatten of zij die beschadigd zijn, zou de gebruiker moeten opgeven de \*(Aqfull\*(Aq ontleedt mode\&. Een volledige scan kan enige minuten duren terwijl een snelle scan slechts enkele seconden duurt\&.
 .RE
 .PP
-Actions that deal with track and segment info properties:
+Acties die van doen zijn met sporen en segment informatie eigenschappen:
 .PP
 \fB\-e\fR, \fB\-\-edit\fR \fIselector\fR
 .RS 4
-Sets the
+Zet de
 Matroska(TM)
-file section (segment information or a certain track\*(Aqs headers) that all following
-add,
-set
-and
-delete
-actions operate on\&. This option can be used multiple times in order to make modifications to more than one element\&.
+bestand sectie (segment informatie of bepaalde sporen koppen) die alle volgen
+voeg toe,
+zet
+en
+verwijder
+acties die er op werken\&. Deze optie kan meerdere keren worden gebruikt om wijzigingen aan meer dan \('e\('en element te maken\&.
 .sp
-By default
+Standaard bewerkt
 \fBmkvpropedit\fR(1)
-will edit the segment information section\&.
+de segment informatie sectie
 .sp
-See the section about
-edit selectors
-for a full description of the syntax\&.
+Zie de sectie over:
+Bewerk selecteurs/kiezers
+voor een volledige beschrijving van de ingaven\&.
 .RE
 .PP
 \fB\-a\fR, \fB\-\-add\fR \fIname\fR=\fIvalue\fR
 .RS 4
-Adds a property
+Voegt eigenschap
 \fIname\fR
-with the value
-\fIvalue\fR\&. The property will be added even if such a property exists already\&. Note that most properties are unique and cannot occur more than once\&.
+toe met de waarde
+\fIvalue\fR\&. De eigenschap wordt toegevoegd zelfs wanneer deze reeds bestaat\&. Opmerking: dat de meeste eigenschappen uniek zijn en niet nog een keer mogen voorkomen\&.
 .RE
 .PP
 \fB\-s\fR, \fB\-\-set\fR \fIname\fR=\fIvalue\fR
 .RS 4
-Sets all occurrences of the property
+Zet alle voorgekomen van de eigenschap
 \fIname\fR
-to the value
-\fIvalue\fR\&. If no such property exists then it will be added\&.
+naar de waarde
+\fIvalue\fR\&. Als een dergelijke eigenschap niet bestaat dan wordt deze toegevoegd\&.
 .RE
 .PP
 \fB\-d\fR, \fB\-\-delete\fR \fIname\fR
 .RS 4
-Deletes all occurrences of the property
-\fIname\fR\&. Note that some properties are required and cannot be deleted\&.
+Verwijdert alle voorgekomen eigenschappen
+\fIname\fR\&. Opmerking: sommige eigenschappen zijn vereist en kunnen niet worden verwijderd\&.
 .RE
 .PP
-Actions that deal with tags and chapters:
+Acties die van doen zijn met markeringen en hoofdstukken:
 .PP
 \fB\-t\fR, \fB\-\-tags\fR \fIselector\fR:\fIfilename\fR
 .RS 4
-Add or replace tags in the file with the ones from
+Markeringen toevoegen of vervangen in het bestand met degene van
 filename
-or remove them if
+of verwijder ze als
 filename
-is empty\&.
+leeg is\&.
 \fBmkvpropedit\fR(1)
-reads the same XML tag format that
+leest dezelfde XML markeer format die
 \fBmkvmerge\fR(1)
-reads as well\&.
+ook inleest\&.
 .sp
-The
+De
 \fIselector\fR
-must be one of the words
+moet \('e\('en van de woorden
 \fBall\fR,
 \fBglobal\fR
-or
-\fBtrack\fR\&. For
-\fBall\fR\fBmkvpropedit\fR(1)
-will replace or remove all tags in a file\&. With
+of
+\fBtrack\fR
+zijn\&. Voor
+\fBall\fR
+zal
+\fBmkvpropedit\fR(1)
+alle markeringen vervangen of verwijderen in een bestand\&. Met
 \fBglobal\fR
-only global tags will be replaced or removed\&.
+worden all\('e\('en globale markeringen vervangen of verwijderd\&.
 .sp
-With
-\fBtrack\fR\fBmkvpropedit\fR(1)
-will replace tags for a specific track\&. Additionally the tags read from
+Met
+\fBtrack\fR
+vervangt
+\fBmkvpropedit\fR(1)
+markeringen van een specifiek spoor\&. Als extra leest het de markeringen van
 filename
-will be assigned to the same track\&. The track is specified in the same way
-edit selectors
-are specified (see below), e\&.g\&.
+en worden toegewezen aan hetzelfde spoor\&. Het spoor is gespecificeerd op dezelfde manier
+bewerk selecteurs
+zijn gespecificeerd (zie hieronder), b\&.v\&.
 \-\-tags track:a1:new\-audio\-tags\&.xml\&.
 .RE
 .PP
 \fB\-c\fR, \fB\-\-chapters\fR \fIfilename\fR
 .RS 4
-Add or replace chapters in the file with the ones from
+Toevoegen of vervangen van hoofdstukken in het bestand met degene van
 filename
-or remove them if
+of verwijder ze als
 filename
-is empty\&.
+leeg is\&.
 \fBmkvpropedit\fR(1)
-reads the same XML and simple chapter formats that
+leest dezelfde XML en simpele hoofdstukformaten die
 \fBmkvmerge\fR(1)
-reads as well\&.
+ook inleest\&.
 .RE
 .PP
-Actions for handling attachments:
+Acties voor afhandelen van bijlagen:
 .PP
 \fB\-\-add\-attachment\fR \fIfilename\fR
 .RS 4
-Adds a new attachment from
+Voegt een nieuwe bijlage van
 \fIfilename\fR\&.
 .sp
-If the option
+Als de optie
 \fB\-\-attachment\-name\fR
-has been used prior to this option then its value is used as the new attachment\*(Aqs name\&. Otherwise it is derived from
+is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van de bijlage naam\&. Anders wordt het verkregen uit
 \fIfilename\fR\&.
 .sp
-If the option
-\fB\-\-attachment\-mime\-type\fR
-has been used prior to this option then its value is used as the new attachment\*(Aqs MIME type\&. Otherwise it is auto\-detected from the content of
+Als de optie
+\fB\-\-attachment\-dmime\-type\fR
+is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van het MIME type\&. Anders wordt het automatisch gedetecteerd van de inhoud van
 \fIfilename\fR\&.
 .sp
-If the option
+Als de optie
 \fB\-\-attachment\-description\fR
-has been used prior to this option then its value is used as the new attachment\*(Aqs description\&. Otherwise no description will be set\&.
+is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van de bijlage beschrijving\&. Anders wordt er g\('e\('en beschrijving gezet\&.
 .RE
 .PP
 \fB\-\-replace\-attachment\fR \fIselector\fR:\fIfilename\fR
 .RS 4
-Replaces one or more attachments that match
+Vervangt \('e\('en of meer bijlage(n) die overeenkomen met
 \fIselector\fR
-with the file
-\fIfilename\fR\&. If more than one existing attachment matches
+met het bestand
+\fIfilename\fR\&. Indien meer dan \('e\('en bestand overeenkomt met
 \fIselector\fR
-then all of their contents will be replaced by the content of
+dan wordt al hun inhoud vervangen met de inhoud van
 \fIfilename\fR\&.
 .sp
-The
-\fIselector\fR
-can have one of four forms\&. They\*(Aqre exlained below in the section
-attachment selectors\&.
+De
+\fIkeuze\fR
+kan vier vormen hebben\&. Ze worden in de sectie hieronder uitgelegd
+bijlage keuze\&.
 .sp
-If the option
+Als de optie
 \fB\-\-attachment\-name\fR
-has been used prior to this option then its value is used as the replaced attachment\*(Aqs name\&. Otherwise the name is not changed\&.
+is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van de bijlage naam\&. Anders wordt de naam niet gewijzigd\&.
 .sp
-If the option
+Als de optie
 \fB\-\-attachment\-mime\-type\fR
-has been used prior to this option then its value is used as the replaced attachment\*(Aqs MIME type\&. Otherwise the MIME type is not changed\&.
+is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van de bijlage MIME type\&. Anders wordt het MIME type niet gewijzigd\&.
 .sp
-If the option
+Als de optie
 \fB\-\-attachment\-description\fR
-has been used prior to this option then its value is used as the replaced attachment\*(Aqs description\&. Otherwise no description is not changed\&.
+is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van de bijlage beschrijving\&. Anders wordt de beschrijving niet gewijzigd\&.
 .RE
 .PP
 \fB\-\-delete\-attachment\fR \fIselector\fR
 .RS 4
-Deletes one or more attachments that match
+Verwijdert \('e\('en of meer bijlagen die overeenkomen met
 \fIselector\fR\&.
 .sp
-The
-\fIselector\fR
-can have one of four forms\&. They\*(Aqre exlained below in the section
-attachment selectors\&.
+De
+\fIkeuze\fR
+kan vier vormen hebben\&. Ze worden in de sectie hieronder uitgelegd
+bijlage keuze\&.
 .RE
 .PP
-Options for attachment actions:
+Opties voor bijlage acties:
 .PP
 \fB\-\-attachment\-name\fR \fIname\fR
 .RS 4
-Sets the name to use for the following
+Stelt de te gebruiken naam in voor het volgende
 \fB\-\-add\-attachment\fR
-or
+of
 \fB\-\-replace\-attachment\fR
-operation\&.
+uitvoering\&.
 .RE
 .PP
 \fB\-\-attachment\-mime\-type\fR \fImime\-type\fR
 .RS 4
-Sets the MIME type to use for the following
+Zet de te gebruiken MIME type voor het volgende
 \fB\-\-add\-attachment\fR
-or
+of
 \fB\-\-replace\-attachment\fR
-operation\&.
+uitvoering\&.
 .RE
 .PP
 \fB\-\-attachment\-description\fR \fIdescription\fR
 .RS 4
-Sets the description to use for the following
+Zet de te gebruiken beschrijving voor het volgende
 \fB\-\-add\-attachment\fR
-or
+of
 \fB\-\-replace\-attachment\fR
-operation\&.
+uitvoering\&.
 .RE
 .PP
-Other options:
+Andere opties:
 .PP
-\fB\-\-command\-line\-charset\fR \fIcharacter\-set\fR
+\fB\-\-command\-line\-charset\fR \fI(karakterset)\fR
 .RS 4
-Sets the character set to convert strings given on the command line from\&. It defaults to the character set given by system\*(Aqs current locale\&.
+Plaatst het karakter set om de reeksen om te zetten die vanaf de commandoregel worden opgegeven\&. Standaard wordt gebruikt het karakter set die afhankelijk is van wat er in uw besturingssysteem staat aangegeven (locatie)\&.
 .RE
 .PP
-\fB\-\-output\-charset\fR \fIcharacter\-set\fR
+\fB\-\-output\-charset\fR \fI(karakterset)\fR
 .RS 4
-Sets the character set to which strings are converted that are to be output\&. It defaults to the character set given by system\*(Aqs current locale\&.
+Stelt het karakter set in, waarnaar de reeksen naar de uitvoer dienen te worden geconverteerd\&. Standaard wordt gebruikt het karakter set die afhankelijk is van wat er in uw besturingssysteem staat aangegeven (locatie)\&.
 .RE
 .PP
-\fB\-r\fR, \fB\-\-redirect\-output\fR \fIfile\-name\fR
+\fB\-r\fR, \fB\-\-redirect\-output\fR \fI(bestandsnaam)\fR
 .RS 4
-Writes all messages to the file
+Schrijft alle berichten naar een bestand
 \fIfile\-name\fR
-instead of to the console\&. While this can be done easily with output redirection there are cases in which this option is needed: when the terminal reinterprets the output before writing it to a file\&. The character set set with
+i\&.p\&.v\&. naar de \*(Aqapparaat/houder\*(Aq\&. Terwijl dit gemakkelijk met uitvoer omleiden kan worden gedaan er zijn gevallen waarin deze optie nodig is: wanneer de verwerker e\&.e\&.a\&. herinterpreteert voordat het geschreven wordt naar de uitvoer bestand\&. Het karakter set met
 \fB\-\-output\-charset\fR
-is honored\&.
+is toegewezen\&.
 .RE
 .PP
 \fB\-\-ui\-language\fR \fIcode\fR
 .RS 4
-Forces the translations for the language
+Forceert de vertaling voor de te gebruiken taal
 \fIcode\fR
-to be used (e\&.g\&. \*(Aqde_DE\*(Aq for the German translations)\&. It is preferable to use the environment variables
+(b\&.v\&. \*(Aqde_DE\*(Aq voor de Duitse taal)\&. Hoewel het de voorkeur heeft de \*(Aqomgevingsvariabelen\*(Aq te gebruiken
 \fILANG\fR,
 \fILC_MESSAGES\fR
-and
-\fILC_ALL\fR
-though\&. Entering \*(Aqlist\*(Aq as the
+en
+\fILC_ALL\fR\&. Opvragen van een \*(Aqlist\*(Aq als een
 \fIcode\fR
-will cause
+zal voor zorgen dat
 \fBmkvextract\fR(1)
-to output a list of available translations\&.
+een lijst zal uitvoeren van alle beschikbare vertalingen\&.
 .RE
 .PP
-\fB\-\-debug\fR \fItopic\fR
+\fB\-\-title\fR \fIonderwerp\fR
 .RS 4
-Turn on debugging for a specific feature\&. This option is only useful for developers\&.
+Zet debuggen aan voor een specifieke mogelijkheid\&. Dit is alleen zinvol voor ontwikkelaars\&.
 .RE
 .PP
-\fB\-\-engage\fR \fIfeature\fR
+\fB\-\-tags\fR \fIfeature\fR
 .RS 4
-Turn on experimental features\&. A list of available features can be requested with
-\fBmkvpropedit \-\-engage list\fR\&. These features are not meant to be used in normal situations\&.
+Zet experimentele mogelijkheden aan\&. Een lijst van beschikbare mogelijkheden kan worden opgevraagd met
+\fBmkvpropedit \-\-engage list\fR\&. Deze mogelijkheden zijn niet bedoeld in normale situaties\&.
 .RE
 .PP
 \fB\-\-gui\-mode\fR
@@ -290,46 +294,47 @@ Turns on GUI mode\&. In this mode specially\-formatted lines may be output that 
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
 .RS 4
-Be verbose and show all the important
+Wees uitgebreid en toon alle belangrijke
 Matroska(TM)
-elements as they\*(Aqre read\&.
+elementen zoals ze zijn gelezen\&.
 .RE
 .PP
 \fB\-h\fR, \fB\-\-help\fR
 .RS 4
-Show usage information and exit\&.
+Toon gebruik informatie en sluit af\&.
 .RE
 .PP
 \fB\-V\fR, \fB\-\-version\fR
 .RS 4
-Show version information and exit\&.
+Toon versie informatie en sluit af\&.
 .RE
 .PP
 \fB\-\-check\-for\-updates\fR
 .RS 4
-Checks online for new releases by downloading the URL
-\m[blue]\fBhttp://mkvtoolnix\-releases\&.bunkus\&.org/latest\-release\&.xml\fR\m[]\&. Four lines will be output in
+Controleert online op nieuwere versies via ophalen op adres
+\m[blue]\fBhttp://mkvtoolnix\-releases\&.bunkus\&.org/latest\-release\&.xml\fR\m[]\&. Vier regels worden uitgevoerd in
 key=value
-style: the URL from where the information was retrieved (key
-version_check_url), the currently running version (key
-running_version), the latest release\*(Aqs version (key
-available_version) and the download URL (key
+stijl: het adres van waar de informatie wordt verkregen (key
+version_check_url), de huidig uitgevoerde versie (key
+running_version), laatst uitgebrachte versie (key
+available_version
+en het ophaal adres (key
 download_url)\&.
 .sp
-Afterwards the program exists with an exit code of 0 if no newer release is available, with 1 if a newer release is available and with 2 if an error occured (e\&.g\&. if the update information could not be retrieved)\&.
+Nadien sluit het programma af met een afsluitwaarde van 0 als er geen nieuwere versie beschikbaar is, met een 1 als er een nieuwere beschikbaar is en 2 indien er een fout ontstond (b\&.v\&. als de opwaardeer informatie niet verkregen kon worden)\&.
 .sp
-This option is only available if the program was built with support for libcurl\&.
+Deze optie is alleen beschikbaar indien het gebouwd is met ondersteuning voor libcurl\&.
 .RE
 .PP
 \fB@\fR\fIoptions\-file\fR
 .RS 4
-Reads additional command line arguments from the file
-\fIoptions\-file\fR\&. Lines whose first non\-whitespace character is a hash mark (\*(Aq#\*(Aq) are treated as comments and ignored\&. White spaces at the start and end of a line will be stripped\&. Each line must contain exactly one option\&.
+Leest extra commandoregel argumenten in van een bestand
+\fIoptions\-file\fR\&. Regels met een spatie (lege ruimte) als eerste karakter, zijn gemarkeerd als een hash (waarde) (\*(Aq#\*(Aq) worden behandeld als commentaar en genegeerd\&. Een spatie aan het begin en einde van een regel worden verwijderd\&. Elke regel mag exact \('e\('en waarde bevatten
 .sp
-Several chars can be escaped, e\&.g\&. if you need to start a non\-comment line with \*(Aq#\*(Aq\&. The rules are described in
-the section about escaping text\&.
+Verschillende karakters kunnen worden overgeslagen, b\&.v\&. als het nodig is een niet commandoregel te starten met een \*(Aq#\*(Aq de regels worden beschreven in de sectie over:
+Overslaan van speciale karakter(s) in tekst\&.
 .sp
-The command line \*(Aq\fBmkvpropedit source\&.mkv \-\-edit track:a2 \-\-set name=Comments\fR\*(Aq could be converted into the following option file:
+De commandoregel \*(Aq\fBmkvpropedit source\&.mkv \-\-edit track:a2 \-\-set name=Comments\fR\*(Aq kon niet worden geconverteerd naar het volgende optie bestand:
 .sp
 .if n \{\
 .RS 4
@@ -348,92 +353,92 @@ name=Comments
 .RE
 .\}
 .RE
-.SH "EDIT SELECTORS"
+.SH "BEWERK SELECTEURS/KIEZERS"
 .PP
-The
+De optie
 \fB\-\-edit\fR
-option sets the
+zet het
 Matroska(TM)
-file section (segment information or a certain track\*(Aqs headers) that all following
-add,
-set
-and
-delete
-actions operate on\&. This stays valid until the next
+bestand sectie (segment informatie of de bepaalde sporen knoppen) die alle volgen
+voeg toe,
+zet
+en
+verwijder
+acties die er op werken\&. Dit blijft geldig totdat de volgende optie
 \fB\-\-edit\fR
-option is found\&. The argument to this option is called the edit selector\&.
+is gevonden\&. Het argument naar deze optie wordt genoemd de bewerk selecteur/kiezer\&.
 .PP
-By default
+Standaard bewerkt
 \fBmkvpropedit\fR(1)
-will edit the segment information section\&.
-.SS "Segment information"
+de segment informatie sectie
+.SS "Segment informatie"
 .PP
-The segment information can be selected with one of these three words: \*(Aqinfo\*(Aq, \*(Aqsegment_info\*(Aq or \*(Aqsegmentinfo\*(Aq\&. It contains properties like the segment title or the segment
+Het segment informatie kan worden geselecteerd met \('e\('en van deze drie woorden: \*(Aqinfo\*(Aq, \*(Aqsegment_info\*(Aq of \*(Aqsegmentinfo\*(Aq\&. het bevat eigenschappen zoals, segment titel of het segment
 UID\&.
-.SS "Track headers"
+.SS "Spoor koppen"
 .PP
-Track headers can be selected with a slightly more complex selector\&. All variations start with \*(Aqtrack:\*(Aq\&. The track header properties include elements like the language code, \*(Aqdefault track\*(Aq flag or the track\*(Aqs name\&.
+Spoor koppen kunnen worden geselecteerd met een ietwat complexere selectie\&. Alle variaties starten met \*(Aqtrack:\*(Aq\&. De spoor kop eigenschappen bevatten elementen zoals de taal code, \*(Aqdefault track\*(Aq markering of het spoor naam\&.
 .PP
 \fBtrack:\fR\fIn\fR
 .RS 4
-If the parameter
+Als de parameter
 \fIn\fR
-is a number then the
-\fIn\fRth track will be selected\&. The track order is the same that
+een nummer is dan zal het
+\fIn\fR\*(Aqde spoor worden geselecteerd\&. De spoor volgorde is hetzelfde als
 \fBmkvmerge\fR(1)\*(Aqs
 \fB\-\-identify\fR
-option outputs\&.
+optie uitvoert\&.
 .sp
-Numbering starts at 1\&.
+Nummering start op 1\&.
 .RE
 .PP
 \fBtrack:\fR\fIt\fR\fIn\fR
 .RS 4
-If the parameter starts with a single character
+Als de parameter start met \('e\('en karakter
 \fIt\fR
-followed by a
+gevolgd door een
 \fIn\fR
-then the
-\fIn\fRth track of a specific track type will be selected\&. The track type parameter
+dan zal het de
+\fIn\fR\*(Aqde spoor van een specifiek spoor type geselecteerd worden\&. Het spoor type parameter
 \fIt\fR
-must be one of these four characters: \*(Aqa\*(Aq for an audio track, \*(Aqb\*(Aq for a button track, \*(Aqs\*(Aq for a subtitle track and \*(Aqv\*(Aq for a video track\&. The track order is the same that
+moet \('e\('en van deze vier karakters zijn: \*(Aqa\*(Aq voor een audio spoor, \*(Aqb\*(Aq voor een knop spoor, \*(Aqs\*(Aq voor een ondertitel spoor en \*(Aqv\*(Aq voor een video spoor\&. De spoor volgorde is hetzelfde wanneer
 \fBmkvmerge\fR(1)\*(Aqs
 \fB\-\-identify\fR
-option outputs\&.
+de optie uitvoert\&.
 .sp
-Numbering starts at 1\&.
+Nummering start op 1\&.
 .RE
 .PP
 \fBtrack:\fR=\fIuid\fR
 .RS 4
-If the parameter starts with a \*(Aq=\*(Aq followed by a number
+Als de parameter start met een \*(Aq=\*(Aq gevolgd door een nummer
 \fIuid\fR
-then the track whose track
+dan het spoor van wie het spoor
 UID
-element equals this
-\fIuid\fR\&. Track
-UIDs
-can be obtained with
+element gelijk is met
+\fIuid\fR\&. Spoor
+UID\*(Aqs
+kan verkregen worden met
 \fBmkvinfo\fR(1)\&.
 .RE
 .PP
 \fBtrack:\fR@\fInumber\fR
 .RS 4
-If the parameter starts with a \*(Aq@\*(Aq followed by a number
+Als de parameter start met een \*(Aq@\*(Aq gevolgd door een nummer
 \fInumber\fR
-then the track whose track number element equals this
-\fInumber\fR\&. Track number can be obtained with
+dan het spoor het van wie het spoornummer element gelijk is met
+\fInumber\fR\&. Spoornummer kan verkregen worden met
 \fBmkvinfo\fR(1)\&.
 .RE
-.SS "Notes"
+.SS "Opmerkingen"
 .PP
-Due to the nature of the track edit selectors it is possible that several selectors actually match the same track headers\&. In such cases all actions for those edit selectors will be combined and executed in the order in which they\*(Aqre given on the command line\&.
-.SH "ATTACHMENT SELECTORS"
+Door de aard van de spoor bewerk selecteur/kiezer, is het mogelijk dat verschillende selecteurs/kiezers eigenlijk overeenkomen met dezelfde spoor koppen\&. In zulke gevallen, zullen alle acties voor die bewerk selecteurs/kiezers in die volgorde worden gecombineerd en uitgevoerd worden in de volgorde waarin ze zijn opgegeven op de commandoregel\&.
+.SH "BIJLAGE(N) KEUZE"
 .PP
-An attachment selector is used with the two actions
+Een bijlage keuze word op twee verschillende manieren gebruikt
 \fB\-\-replace\-attachment\fR
-and
-\fB\-\-delete\-attachment\fR\&. It can have one of the following four forms:
+en
+\fB\-\-delete\-attachment\fR\&. het kan \('e\('en van de volgende vier vormen hebben:
 .sp
 .RS 4
 .ie n \{\
@@ -443,8 +448,9 @@ and
 .sp -1
 .IP "  1." 4.2
 .\}
-Selection by attachment ID\&. In this form the selector is simply a number, the attachment\*(Aqs ID as output by
-\fBmkvmerge\fR(1)\*(Aqs identification command\&.
+Selectie op bijlage\-id\&. In deze vorm is de keuze een gewoon getal, de bijlage ID als uitgevoerd door
+\fBmkvmerge\fR(1)
+\*(Aqs identificatie commando\&.
 .RE
 .sp
 .RS 4
@@ -455,10 +461,10 @@ Selection by attachment ID\&. In this form the selector is simply a number, the 
 .sp -1
 .IP "  2." 4.2
 .\}
-Selection by attachment UID (unique ID)\&. In this form the selector is the equal sign
+Keuze op bijlage UID (uniek ID)\&. In deze vorm van keuze is het "is (=)" teken
 =
-followed by a number, the attachment\*(Aqs unique ID as output by
-\fBmkvmerge\fR(1)\*(Aqs verbose identification command\&.
+gevolg door een nummer, de bijlage\*(Aqs unieke ID als uitvoer door
+\fBmkvmerge\fR(1)\*(Aqs beknopte identificatie commando\&.
 .RE
 .sp
 .RS 4
@@ -469,11 +475,11 @@ followed by a number, the attachment\*(Aqs unique ID as output by
 .sp -1
 .IP "  3." 4.2
 .\}
-Selection by attachment name\&. In this form the selector is the literal word
-name:
-followed by the existing attachment\*(Aqs name\&. If this selector is used with
+Keuze via bestandsnaam\&. In deze vorm is de keuze het letterlijke woord
+naam:
+gevolg door een bestaande bijlage naam\&. Als deze keuze is geselecteerd met
 \fB\-\-replace\-attachment\fR
-then colons within the name to match must be escaped as
+dan moeten dubbele punten binnen de naam overeen te laten komen worden ingesloten als
 \ec\&.
 .RE
 .sp
@@ -485,20 +491,19 @@ then colons within the name to match must be escaped as
 .sp -1
 .IP "  4." 4.2
 .\}
-Selection by MIME type\&. In this form the selector is the literal word
-mime\-type:
-followed by the existing attachment\*(Aqs MIME type\&. If this selector is used with
+Selecteren op MIME type\&. In deze vorm is de keuze het letterlijke woordmime\-type:
+gevolg door een bestaande MIME type bijlage\&. Indien deze keuze is geselecteerd met
 \fB\-\-replace\-attachment\fR
-then colons within the MIME type to match must be escaped as
+dan om dubbele punten overeen te laten komen binnenin het MIME\-type moeten worden overgeslagen als
 \ec\&.
 .RE
-.SH "EXAMPLES"
+.SH "VOORBEELDEN"
 .PP
-The following example edits a file called \*(Aqmovie\&.mkv\*(Aq\&. It sets the segment title and modifies the language code of an audio and a subtitle track\&. Note that this example can be shortened by leaving out the first
+Het volgende voorbeeld bewerkt een bestand genaamd \*(Aqfilm\&.mkv\*(Aq\&. Het zet het segment titel en modificeert de taal code van een audio en ondertitel spoor\&. Opmerking: Dat dit voorbeeld kan worden verkort door het weglaten van de eerste
 \fB\-\-edit\fR
-option because editing the segment information element is the default for all options found before the first
+optie, omdat bewerken van het segment informatie element in elk geval standaard is voor alle opties welke worden gevonden voor de eerste
 \fB\-\-edit\fR
-option anyway\&.
+optie\&.
 .sp
 .if n \{\
 .RS 4
@@ -510,9 +515,9 @@ $ mkvpropedit movie\&.mkv \-\-edit info \-\-set "title=The movie" \-\-edit track
 .RE
 .\}
 .PP
-The second example removes the \*(Aqdefault track flag\*(Aq from the first subtitle track and sets it for the second one\&. Note that
-\fBmkvpropedit\fR(1), unlike
-\fBmkvmerge\fR(1), does not set the \*(Aqdefault track flag\*(Aq of other tracks to \*(Aq0\*(Aq if it is set to \*(Aq1\*(Aq for a different track automatically\&.
+Het tweede voorbeeld, verwijdert de \*(Aqstandaard spoor markering\*(Aq van het eerste ondertitel spoor en plaatst het voor de tweede\&. Opmerking: Dat
+\fBmkvpropedit\fR(1), integenstelling tot
+\fBmkvmerge\fR(1), niet instelt de \*(Aqstandaard spoor markering\*(Aq van andere sporen naar \*(Aq0\*(Aq als het automatisch is ingesteld op \*(Aq1\*(Aq voor een verschillend spoor\&.
 .sp
 .if n \{\
 .RS 4
@@ -524,7 +529,7 @@ $ mkvpropedit movie\&.mkv \-\-edit track:s1 \-\-set flag\-default=0 \-\-edit tra
 .RE
 .\}
 .PP
-Replacing the tags for the second subtitle track in a file looks like this:
+Vervangen van markeringen voor het tweede ondertitelspoor in een bestand zou lijken op dit:
 .sp
 .if n \{\
 .RS 4
@@ -536,7 +541,7 @@ $ mkvpropedit movie\&.mkv \-\-tags track:s2:new\-subtitle\-tags\&.xml
 .RE
 .\}
 .PP
-Removing all tags requires leaving out the file name:
+Verwijderen van alle markeringen vereist het weglaten van de bestandsnaam:
 .sp
 .if n \{\
 .RS 4
@@ -548,7 +553,7 @@ $ mkvpropedit movie\&.mkv \-\-tags all:
 .RE
 .\}
 .PP
-Replacing the chapters in a file looks like this:
+Hoofdstukken vervangen in een bestand zou lijken op dit:
 .sp
 .if n \{\
 .RS 4
@@ -560,7 +565,7 @@ $ mkvpropedit movie\&.mkv \-\-chapters new\-chapters\&.xml
 .RE
 .\}
 .PP
-Removing all chapters requires leaving out the file name:
+Verwijderen van alle hoofdstukken vereist het weglaten van de bestandsnaam:
 .sp
 .if n \{\
 .RS 4
@@ -572,7 +577,7 @@ $ mkvpropedit movie\&.mkv \-\-chapters \*(Aq\*(Aq
 .RE
 .\}
 .PP
-Adding a font file (Arial\&.ttf) as an attachment:
+Toevoegen van een lettertype bestand (Arial\&.ttf) als een bijlage:
 .sp
 .if n \{\
 .RS 4
@@ -584,31 +589,31 @@ $ mkvpropedit movie\&.mkv \-\-add\-attachment Arial\&.ttf
 .RE
 .\}
 .PP
-Adding a font file (89719823\&.ttf) as an attachment and providing some information as it really is just Arial:
+Toevoegen lettertype bestand (89719823\&.ttf) als een bijlage en geeft enige informatie of het werkelijk een Arial letterype is:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-attachment\-name Arial\&.ttf \-\-attachment\-description \*(AqThe Arial font as a TrueType font\*(Aq \-\-attachment\-mime\-type application/x\-truetype\-font \-\-add\-attachment 89719823\&.ttf
+$ mkvpropedit movie\&.mkv \-\-attachment\-name Arial\&.ttf \-\-attachment\-description \*(AqHet Arial lettertype als een TrueType letter\*(Aq \-\-attachment\-mime\-type application/x\-truetype\-font \-\-add\-attachment 89719823\&.ttf
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Replacing one attached font (Comit\&.ttf) file with another one (Arial\&.ttf):
+Vervangt een gekoppeld lettertype (Comit\&.ttf) bestand met een andere (Arial\&.ttf):
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-attachment\-name Arial\&.ttf \-\-attachment\-description \*(AqThe Arial font as a TrueType font\*(Aq \-\-replace\-attachment name:Comic\&.ttf:Arial\&.ttf
+$ mkvpropedit movie\&.mkv \-\-attachment\-name Arial\&.ttf \-\-attachment\-description \*(AqHet Arial lettertyupe als een TrueType letter\*(Aq \-\-replace\-attachment name:Comic\&.ttf:Arial\&.ttf
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Deleting the second attached file, whatever it may be:
+Verwijderen tweede bijlage bestand wat het ook mag zijn:
 .sp
 .if n \{\
 .RS 4
@@ -620,7 +625,7 @@ $ mkvpropedit movie\&.mkv \-\-delete\-attachment 2
 .RE
 .\}
 .PP
-Deleting all attached fonts by MIME type:
+Verwijderen alle bijlage lettertypen op MIME type:
 .sp
 .if n \{\
 .RS 4
@@ -631,10 +636,10 @@ $ mkvpropedit movie\&.mkv \-\-delete\-attachment mime\-type:application/x\-truet
 .if n \{\
 .RE
 .\}
-.SH "EXIT CODES"
+.SH "VERLAAT CODES"
 .PP
 \fBmkvpropedit\fR(1)
-exits with one of three exit codes:
+verlaat met \('e\('en van drie verlaat codes:
 .sp
 .RS 4
 .ie n \{\
@@ -645,7 +650,7 @@ exits with one of three exit codes:
 .IP \(bu 2.3
 .\}
 \fB0\fR
-\-\- This exit codes means that the modification has completed successfully\&.
+\-\- Deze verlaat code betekend dat het modificeren succesvol voltooid is\&.
 .RE
 .sp
 .RS 4
@@ -657,9 +662,9 @@ exits with one of three exit codes:
 .IP \(bu 2.3
 .\}
 \fB1\fR
-\-\- In this case
+\-\- In dit geval heeft
 \fBmkvpropedit\fR(1)
-has output at least one warning, but the modification did continue\&. A warning is prefixed with the text \*(AqWarning:\*(Aq\&. Depending on the issues involved the resulting files might be ok or not\&. The user is urged to check both the warning and the resulting files\&.
+minstends \('e\('en waarschuwing uitgegeven, maar extractie is doorgegaan\&. Een waarschuwing wordt vooraf bepaald met de tekst \*(AqWaarschuwing:\*(Aq\&. Afhankelijk van de \*(Aqtegengekomen\*(Aq kwesties kan het resultaat goed of slecht zijn\&. De gebruiker wordt geadviseerd, om zowel de waarschuwing als de resulterende bestanden te controleren\&.
 .RE
 .sp
 .RS 4
@@ -671,49 +676,49 @@ has output at least one warning, but the modification did continue\&. A warning 
 .IP \(bu 2.3
 .\}
 \fB2\fR
-\-\- This exit code is used after an error occurred\&.
+\-\- Deze afsluit code wordt gebruikt nadat er een fout ontstond\&.
 \fBmkvpropedit\fR(1)
-aborts right after outputting the error message\&. Error messages range from wrong command line arguments over read/write errors to broken files\&.
+breekt direct af na het geven van dit waarschuw bericht\&. Fout berichten, bereik van een verkeerd commandoregel argument over lees/schrijf fouten naar een \*(Aqgebroken\*(Aq bestanden\&.
 .RE
-.SH "TEXT FILES AND CHARACTER SET CONVERSIONS"
+.SH "TEKST BESTANDEN EN KARAKTER SET CONVERSIES"
 .PP
 For an in\-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically\-named section in the
 \fBmkvmerge\fR(1)
 man page\&.
-.SH "ESCAPING SPECIAL CHARS IN TEXT"
+.SH "OVERSLAAN VAN SPECIALE KARAKTER(S) IN TEKST"
 .PP
-There are a few places in which special characters in text must or should be escaped\&. The rules for escaping are simple: each character that needs escaping is replaced with a backslash followed by another character\&.
+Er zijn een paar plaatsen waar speciale karakters zouden of moeten worden overgeslagen\&. De regels voor het overslaan zijn simpel: elk karakter dat overgeslagen dient te worden wordt vervangen door een backslash "\e" gevolgd door een ander karakter\&.
 .PP
-The rules are: \*(Aq \*(Aq (a space) becomes \*(Aq\es\*(Aq, \*(Aq"\*(Aq (double quotes) becomes \*(Aq\e2\*(Aq, \*(Aq:\*(Aq becomes \*(Aq\ec\*(Aq, \*(Aq#\*(Aq becomes \*(Aq\eh\*(Aq and \*(Aq\e\*(Aq (a single backslash) itself becomes \*(Aq\e\e\*(Aq\&.
-.SH "ENVIRONMENT VARIABLES"
+De regels zijn: \*(Aq \*(Aq (een spatie) wordt \*(Aq\es\*(Aq, \*(Aq"\*(Aq (dubbele aanhalingstekens) wordt \*(Aq\e2\*(Aq, \*(Aq:\*(Aq wordt \*(Aq\ec\*(Aq, \*(Aq#\*(Aq wordt \*(Aq\eh\*(Aq en \*(Aq\e\*(Aq (een enkele (backslash) zelf wordt \*(Aq\e\e\*(Aq\&.
+.SH "OMGEVINGSVARIABELEN"
 .PP
 \fBmkvpropedit\fR(1)
-uses the default variables that determine the system\*(Aqs locale (e\&.g\&.
+gebruikt de standaard variabelen vanuit het systeem locatie (b\&.v\&.
 \fILANG\fR
-and the
+en de
 \fILC_*\fR
-family)\&. Additional variables:
+family)\&. Extra variabelen:
 .PP
-\fIMKVTOOLNIX_DEBUG\fR and its short form \fIMTX_DEBUG\fR
+\fIMKVTOOLNIX_DEBUG\fR en de korte versie \fIMTX_DEBUG\fR
 .RS 4
-The content is treated as if it had been passed via the
+De inhoud wordt behandeld alsof het via de
 \fB\-\-debug\fR
-option\&.
+optie gepasseerd is\&.
 .RE
 .PP
-\fIMKVTOOLNIX_ENGAGE\fR and its short form \fIMTX_ENGAGE\fR
+\fIMKVTOOLNIX_ENGAGE\fR en de korte versie \fIMTX_ENGAGE\fR
 .RS 4
-The content is treated as if it had been passed via the
+De inhoud wordt behandeld alsof het via de
 \fB\-\-engage\fR
-option\&.
+optie gepasseerd is\&.
 .RE
 .PP
-\fIMKVTOOLNIX_OPTIONS\fR and its short form \fIMTX_OPTIONS\fR
+\fIMKVTOOLNIX_OPTIONS\fR en de korte versie \fIMTX_OPTIONS\fR
 .RS 4
-The content is split on white space\&. The resulting partial strings are treated as if it had been passed as command line options\&. If you need to pass special characters (e\&.g\&. spaces) then you have to escape them (see
-the section about escaping special characters in text)\&.
+De inhoud wordt gesplitst op een spatie\&. De gedeeltelijk resulterende reeks wordt behandeld alsof het gedaan is via de commandoregel\&. Indien het nodig is speciale karakters te gebruiken (b\&.v\&. spaties) dan moet je die "insluiten" (zie de sectie over:
+Overslaan van speciale karakter(s) in tekst)\&.
 .RE
-.SH "SEE ALSO"
+.SH "ZIE OOK"
 .PP
 \fBmkvmerge\fR(1),
 \fBmkvinfo\fR(1),
@@ -721,17 +726,18 @@ the section about escaping special characters in text)\&.
 \fBmmg\fR(1)
 .SH "WWW"
 .PP
-The latest version can always be found at
-\m[blue]\fBthe MKVToolNix homepage\fR\m[]\&\s-2\u[1]\d\s+2\&.
-.SH "AUTHOR"
+De laatste versie kan altijd gevonden worden op de
+\m[blue]\fBMKVToolNix\fR\m[]\&\s-2\u[1]\d\s+2
+thuis basis\&.
+.SH "AUTEUR"
 .PP
 \fBMoritz Bunkus\fR <\&moritz@bunkus\&.org\&>
 .RS 4
-Developer
+Ontwikkelaar
 .RE
-.SH "NOTES"
+.SH "OPMERKINGEN"
 .IP " 1." 4
-the MKVToolNix homepage
+MKVToolNix
 .RS 4
 \%https://www.bunkus.org/videotools/mkvtoolnix/
 .RE

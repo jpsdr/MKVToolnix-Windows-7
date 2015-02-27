@@ -178,6 +178,7 @@ def adjust_to_poedit_style(in_name, out_name, language)
     lines          = IO.readlines(in_name).collect { |line| line.chomp.gsub(/\r/, '') }.reject { |line| /^\s*$/.match(line) }
     state          = :initial
     previous_state = :initial
+    previous_line  = nil
     sources        = []
     one_source     = !$unwrapped_po.include?(language)
 
@@ -212,7 +213,7 @@ def adjust_to_poedit_style(in_name, out_name, language)
         sources = []
       end
 
-      out.puts if /^#(?:,|:|\s|~\s+msgid)/.match(line) && [:removed, :string, :msgstr].include?(previous_state)
+      out.puts if /^#(?:,|:|\.|\s|~\s+msgid)/.match(line) && [:removed, :string, :msgstr].include?(previous_state)
 
       if /^#:/.match(line)
         sources += line.gsub(/^#:\s*/, '').split(/\s+/)
