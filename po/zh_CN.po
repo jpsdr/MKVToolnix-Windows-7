@@ -2826,16 +2826,16 @@ msgstr "无法创建文件 '%s'。"
 msgid "Could not create the specified file."
 msgstr "无法创建指定文件。"
 
-#: src/input/r_avi.cpp:353
+#: src/input/r_avi.cpp:344
 msgid "Could not extract the decoder specific config data (AVCC) from this AVC/h.264 track.\n"
 msgstr "无法从该 AVC/h.264 轨道提取解码器特有配置数据 (AVCC)。\n"
 
-#: src/input/r_avi.cpp:302
-#: src/input/r_avi.cpp:307
+#: src/input/r_avi.cpp:293
+#: src/input/r_avi.cpp:298
 msgid "Could not extract the sequence header from this MPEG-1/2 track.\n"
 msgstr "无法从该 MPEG-1/2 轨道提取序列头。\n"
 
-#: src/input/r_avi.cpp:453
+#: src/input/r_avi.cpp:444
 #, boost-format
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "找不到音频轨 %1% 的索引 (avilib 错误消息: %2%)。正在跳过此轨。\n"
@@ -2853,7 +2853,7 @@ msgstr "在首个 MPEG-4 part 2 视频帧中找不到编解码器配置数据。
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
 msgstr "找不到 Ogg 的下一页。这表明 Ogg/Ogm 文件可能已损坏。将尝试继续。\n"
 
-#: src/input/r_avi.cpp:603
+#: src/input/r_avi.cpp:594
 #: src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "此轨的第一帧中未发现有效的 DTS 头。\n"
@@ -4222,9 +4222,9 @@ msgstr "无效 UID。该版本 UID 已被使用。原 UID 没有被改变。"
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "无效的 UTF-8 字符。首个字节: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:612
-#: src/input/r_avi.cpp:617
-#: src/input/r_avi.cpp:634
+#: src/input/r_avi.cpp:603
+#: src/input/r_avi.cpp:608
+#: src/input/r_avi.cpp:625
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "有无效的 Vorbis 头，在 AVI 音频轨中。"
 
@@ -7772,7 +7772,7 @@ msgstr "有警告信息"
 msgid "There were warnings, or the process was terminated."
 msgstr "有警告信息，或者处理进程被中止。"
 
-#: src/input/r_avi.cpp:551
+#: src/input/r_avi.cpp:542
 #: src/input/r_real.cpp:292
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr "此 AAC 轨道不含有效的头。无法解析 AAC 信息。\n"
@@ -8271,7 +8271,7 @@ msgstr "未知选项 '%1%'。\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "未知解析模式，于 '%1% %2%'。\n"
 
-#: src/input/r_avi.cpp:506
+#: src/input/r_avi.cpp:497
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "此音频轨的格式 0x%|1$04x| 未知或不支持。\n"
@@ -9581,6 +9581,11 @@ msgstr "轨道名称"
 #, boost-format
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: c'tor 中 tag_size < 0。 %1%\n"
+
+#: src/input/r_avi.cpp:876
+#, fuzzy
+msgid "uncompressed"
+msgstr "压缩"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"

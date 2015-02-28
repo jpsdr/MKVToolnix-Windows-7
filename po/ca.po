@@ -3145,7 +3145,7 @@ msgstr "No s'ha pogut crear el fitxer «%s»."
 msgid "Could not create the specified file."
 msgstr "No s'ha pogut crear el fitxer indicat."
 
-#: src/input/r_avi.cpp:353
+#: src/input/r_avi.cpp:344
 msgid ""
 "Could not extract the decoder specific config data (AVCC) from this AVC/"
 "h.264 track.\n"
@@ -3153,13 +3153,13 @@ msgstr ""
 "No s'han pogut extreure les dades de configuració específiques del "
 "descodificador (AVCC) des d'aquesta pista AVC/h.264.\n"
 
-#: src/input/r_avi.cpp:302 src/input/r_avi.cpp:307
+#: src/input/r_avi.cpp:293 src/input/r_avi.cpp:298
 msgid "Could not extract the sequence header from this MPEG-1/2 track.\n"
 msgstr ""
 "No s'ha pogut extreure la capçalera de la seqüència des d'aquesta pista "
 "MPEG-1/2.\n"
 
-#: src/input/r_avi.cpp:453
+#: src/input/r_avi.cpp:444
 #, boost-format
 msgid ""
 "Could not find an index for audio track %1% (avilib error message: %2%). "
@@ -3190,7 +3190,7 @@ msgstr ""
 "No s'ha pogut trobar la següent pàgina Ogg. Això indica que el fitxer Ogg/"
 "Ogm està malmès. S'intentarà continuar.\n"
 
-#: src/input/r_avi.cpp:603 src/input/r_matroska.cpp:1485
+#: src/input/r_avi.cpp:594 src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr ""
 "No s'han trobat capçaleres DTS vàlides en els fotogrames inicials d'aquesta "
@@ -4834,7 +4834,7 @@ msgstr ""
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "Caràcters UTF-8 no vàlids. Primer byte: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:612 src/input/r_avi.cpp:617 src/input/r_avi.cpp:634
+#: src/input/r_avi.cpp:603 src/input/r_avi.cpp:608 src/input/r_avi.cpp:625
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Les capçaleres Vorbis a una pista d'àudio AVI no són vàlides."
 
@@ -9326,7 +9326,7 @@ msgstr "S'han produït avisos."
 msgid "There were warnings, or the process was terminated."
 msgstr "S'han produït avisos o el procés ha finalitzat."
 
-#: src/input/r_avi.cpp:551 src/input/r_real.cpp:292
+#: src/input/r_avi.cpp:542 src/input/r_real.cpp:292
 msgid ""
 "This AAC track does not contain valid headers. Could not parse the AAC "
 "information.\n"
@@ -10016,7 +10016,7 @@ msgstr "Opció desconeguda «%1%».\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "Mode d'anàlisi desconegut a «%1% %2%».\n"
 
-#: src/input/r_avi.cpp:506
+#: src/input/r_avi.cpp:497
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr ""
@@ -11496,6 +11496,11 @@ msgstr "nom de la pista"
 #, boost-format
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: tag_size < 0 dins el constructor. %1%\n"
+
+#: src/input/r_avi.cpp:876
+#, fuzzy
+msgid "uncompressed"
+msgstr "compressió"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"

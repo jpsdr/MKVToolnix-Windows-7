@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix 6.8.0\n"
 "Report-Msgid-Bugs-To: moritz@bunkus.org\n"
 "POT-Creation-Date: 2009-02-18 23:52+0100\n"
-"PO-Revision-Date: 2015-02-25 23:54+0100\n"
+"PO-Revision-Date: 2015-02-28 11:54+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -2873,16 +2873,16 @@ msgstr "Die Datei »%s« konnte nicht erstellt werden."
 msgid "Could not create the specified file."
 msgstr "Die angegebene Datei konnte nicht erstellt werden."
 
-#: src/input/r_avi.cpp:353
+#: src/input/r_avi.cpp:344
 msgid "Could not extract the decoder specific config data (AVCC) from this AVC/h.264 track.\n"
 msgstr "Die Decoder-Konfigurationsdaten (AVCC) konnten nicht aus dieser AVC/h.264-Spur extrahiert werden.\n"
 
-#: src/input/r_avi.cpp:302
-#: src/input/r_avi.cpp:307
+#: src/input/r_avi.cpp:293
+#: src/input/r_avi.cpp:298
 msgid "Could not extract the sequence header from this MPEG-1/2 track.\n"
 msgstr "Der Sequenzkopf konnte nicht aus dieser MPEG-1/2-Spur extrahiert werden.\n"
 
-#: src/input/r_avi.cpp:453
+#: src/input/r_avi.cpp:444
 #, boost-format
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "Für Audiospur %1% konnte kein Index gefunden werden (Fehlermeldung der Avilib: %2%). Die Spur wird ausgelassen.\n"
@@ -2900,7 +2900,7 @@ msgstr "Die Codec-Konfigurationsdaten konnten im ersten MPEG-4 Teil 2-Videobild 
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
 msgstr "Die nächste Ogg-Seite konnte nicht gefunden werden. Das deutet auf eine beschädigte Ogg/OGM-Datei hin. Es wird versucht fortzusetzen.\n"
 
-#: src/input/r_avi.cpp:603
+#: src/input/r_avi.cpp:594
 #: src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "In den ersten Bildern der Spur konnten keine gültigen DTS-Kopfdaten gefunden werden.\n"
@@ -4256,9 +4256,9 @@ msgstr "ungültige UID. Die Editions-UID wird bereits verwendet. Die bisherige U
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "ungültiges UTF-8-Zeichen. Erstes Byte: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:612
-#: src/input/r_avi.cpp:617
-#: src/input/r_avi.cpp:634
+#: src/input/r_avi.cpp:603
+#: src/input/r_avi.cpp:608
+#: src/input/r_avi.cpp:625
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "ungültige Vorbis-Kopfdaten in AVI-Audiospur"
 
@@ -7824,7 +7824,7 @@ msgstr "Es gab Warnungen."
 msgid "There were warnings, or the process was terminated."
 msgstr "Es gab Warnungen oder Mkvmerge wurde unerwartet beendet."
 
-#: src/input/r_avi.cpp:551
+#: src/input/r_avi.cpp:542
 #: src/input/r_real.cpp:292
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr "Diese AAC-Spur enthält keine gültigen Kopfdaten. Die AAC-Parameter konnten nicht ausgewertet werden.\n"
@@ -8326,7 +8326,7 @@ msgstr "unbekannte Option »%1%«\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "unbekannter Analysemodus bei »%1% %2%«\n"
 
-#: src/input/r_avi.cpp:506
+#: src/input/r_avi.cpp:497
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "unbekanntes/nicht unterstütztes Audioformat 0x%|1$04x| in dieser Audiospur\n"
@@ -9653,6 +9653,10 @@ msgstr "Spurname"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: tag_size < 0 im Konstruktor. %1%\n"
 
+#: src/input/r_avi.cpp:876
+msgid "uncompressed"
+msgstr "unkomprimiert"
+
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"
 msgstr "und (nicht festgelegt)"
@@ -9861,3 +9865,4 @@ msgstr "ja"
 
 #~ msgid "pr_generic.cpp/generic_reader_c::demuxing_requested(): Invalid track type %1%."
 #~ msgstr "pr_generic.cpp/generic_reader_c::demuxing_requested(): ungültiger Spurtyp %1%."
+

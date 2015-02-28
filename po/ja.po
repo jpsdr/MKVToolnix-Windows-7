@@ -2837,16 +2837,16 @@ msgstr "ファイル%sを作成できませんでした。"
 msgid "Could not create the specified file."
 msgstr "指定されたファイルを作成できませんでした。"
 
-#: src/input/r_avi.cpp:353
+#: src/input/r_avi.cpp:344
 msgid "Could not extract the decoder specific config data (AVCC) from this AVC/h.264 track.\n"
 msgstr "このAVC/h.264トラックからデコーダ詳細設定データ（AVCC）を抽出することができませんでした。\n"
 
-#: src/input/r_avi.cpp:302
-#: src/input/r_avi.cpp:307
+#: src/input/r_avi.cpp:293
+#: src/input/r_avi.cpp:298
 msgid "Could not extract the sequence header from this MPEG-1/2 track.\n"
 msgstr "このMPEG-1/2トラックからシーケンスヘッダを抽出することができませんでした。\n"
 
-#: src/input/r_avi.cpp:453
+#: src/input/r_avi.cpp:444
 #, boost-format
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "オーディオトラック%1%のインデックスを見つけられませんでした（avilibエラーメッセージ：%2%）。トラックをスキップします。\n"
@@ -2864,7 +2864,7 @@ msgstr "最初のMPEG-4 part 2ビデオフレームのコーデック設定デ�
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
 msgstr "次のOGGページを見つけられませんでした。これはOGG/OGMファイルが壊れていることを意味します。処理続行を試みます。\n"
 
-#: src/input/r_avi.cpp:603
+#: src/input/r_avi.cpp:594
 #: src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "トラックの最初のフレームに有効なDTSヘッダが見つかりませんでした。\n"
@@ -4235,9 +4235,9 @@ msgstr "無効なUIDです。このエディションUIDは既に使用されて
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "無効なUTF-8の文字です。最初のバイト：0x%|1$02x|"
 
-#: src/input/r_avi.cpp:612
-#: src/input/r_avi.cpp:617
-#: src/input/r_avi.cpp:634
+#: src/input/r_avi.cpp:603
+#: src/input/r_avi.cpp:608
+#: src/input/r_avi.cpp:625
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "AVIのオーディオトラックのVorbisヘッダが無効です。"
 
@@ -7783,7 +7783,7 @@ msgstr "警告が発せられました"
 msgid "There were warnings, or the process was terminated."
 msgstr "警告が発せられるか、プロセスが終了されました。"
 
-#: src/input/r_avi.cpp:551
+#: src/input/r_avi.cpp:542
 #: src/input/r_real.cpp:292
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr "このAACトラックは有効なヘッダを含んでいません。AACの情報を解析することができませんでした。\n"
@@ -8282,7 +8282,7 @@ msgstr "'%1%'は未知のオプションです。\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "'%1% %2%'で未知のパースモードが指定されました。\n"
 
-#: src/input/r_avi.cpp:506
+#: src/input/r_avi.cpp:497
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "このトラックのオーディオフォーマット 0x%|1$04x|は未知もしくはサポートされていません。\n"
@@ -9594,6 +9594,11 @@ msgstr "トラック名"
 #, boost-format
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader：c'tor内でtag_sizeが負になりました。 %1%\n"
+
+#: src/input/r_avi.cpp:876
+#, fuzzy
+msgid "uncompressed"
+msgstr "圧縮"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"

@@ -3148,7 +3148,7 @@ msgstr "Kon bestand '%s' niet creëren."
 msgid "Could not create the specified file."
 msgstr "Kon opgegeven bestand niet maken."
 
-#: src/input/r_avi.cpp:353
+#: src/input/r_avi.cpp:344
 msgid ""
 "Could not extract the decoder specific config data (AVCC) from this AVC/"
 "h.264 track.\n"
@@ -3156,13 +3156,13 @@ msgstr ""
 "Kon decoder specifieke configuratie data niet uitpakken (AVCC) van dit AVC/"
 "h.264 spoor.\n"
 
-#: src/input/r_avi.cpp:302 src/input/r_avi.cpp:307
+#: src/input/r_avi.cpp:293 src/input/r_avi.cpp:298
 msgid "Could not extract the sequence header from this MPEG-1/2 track.\n"
 msgstr ""
 "Kon geen uittreksel maken van de opeenvolgende koppen van dit MPEG-1/2 "
 "spoor.\n"
 
-#: src/input/r_avi.cpp:453
+#: src/input/r_avi.cpp:444
 #, boost-format
 msgid ""
 "Could not find an index for audio track %1% (avilib error message: %2%). "
@@ -3192,7 +3192,7 @@ msgstr ""
 "Kan de volgende Ogg pagina niet vinden. Dit geeft een beschadigde Ogg/Ogm "
 "bestand aan. Zal proberen door te gaan.\n"
 
-#: src/input/r_avi.cpp:603 src/input/r_matroska.cpp:1485
+#: src/input/r_avi.cpp:594 src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "Kon geen geldig DTS kopstuk vinden in dit spoor, eerste beeld.\n"
 
@@ -4828,7 +4828,7 @@ msgstr ""
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "Ongeldig UTF-8 karakter. Eerste byte: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:612 src/input/r_avi.cpp:617 src/input/r_avi.cpp:634
+#: src/input/r_avi.cpp:603 src/input/r_avi.cpp:608 src/input/r_avi.cpp:625
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Ongeldige Vorbis koppen in AVI audio spoor."
 
@@ -9277,7 +9277,7 @@ msgstr "Er waren waarschuwingen"
 msgid "There were warnings, or the process was terminated."
 msgstr "Er waren waarschuwingen, of het proces is geëindigd."
 
-#: src/input/r_avi.cpp:551 src/input/r_real.cpp:292
+#: src/input/r_avi.cpp:542 src/input/r_real.cpp:292
 msgid ""
 "This AAC track does not contain valid headers. Could not parse the AAC "
 "information.\n"
@@ -9962,7 +9962,7 @@ msgstr "Onbekende optie '%1%'.\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "Onbekende ontleed mode in '%1% %2%'.\n"
 
-#: src/input/r_avi.cpp:506
+#: src/input/r_avi.cpp:497
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr ""
@@ -11428,6 +11428,11 @@ msgstr "spoor naam"
 #, boost-format
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_lezer: markeer_grootte < 0 in de c'tor. %1%\n"
+
+#: src/input/r_avi.cpp:876
+#, fuzzy
+msgid "uncompressed"
+msgstr "compressie"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"

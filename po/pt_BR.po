@@ -2848,16 +2848,16 @@ msgstr "Não foi possível criar o arquivo '%s'."
 msgid "Could not create the specified file."
 msgstr "Não foi possível criar o arquivo específico."
 
-#: src/input/r_avi.cpp:353
+#: src/input/r_avi.cpp:344
 msgid "Could not extract the decoder specific config data (AVCC) from this AVC/h.264 track.\n"
 msgstr "Não foi possível extrair os dados de configuração específicos do decodificador (AVCC) desta faixa AVC/h.264.\n"
 
-#: src/input/r_avi.cpp:302
-#: src/input/r_avi.cpp:307
+#: src/input/r_avi.cpp:293
+#: src/input/r_avi.cpp:298
 msgid "Could not extract the sequence header from this MPEG-1/2 track.\n"
 msgstr "Não foi possível extrair o cabeçalho de sequência desta faixa MPEG-1/2.\n"
 
-#: src/input/r_avi.cpp:453
+#: src/input/r_avi.cpp:444
 #, boost-format
 msgid "Could not find an index for audio track %1% (avilib error message: %2%). Skipping track.\n"
 msgstr "Não foi possível encontrar um índice para a faixa de áudio %1% (mensagem de erro avilib: %2%). Pulando faixa.\n"
@@ -2875,7 +2875,7 @@ msgstr "Não foi possível encontrar os dados de configuração do codec MPEG-4 
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
 msgstr "Não foi possível encontrar a próxima página Ogg. Isto indica um arquivo Ogg/Ogm danificado. Tentando continuar.\n"
 
-#: src/input/r_avi.cpp:603
+#: src/input/r_avi.cpp:594
 #: src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "Não foi possível encontrar cabeçalhos válidos DTS nos primeiros frames desta faixa.\n"
@@ -4246,9 +4246,9 @@ msgstr "UID inválido. Está edição do UID já está em uso. O UID original n�
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "Codificação de caracteres UTF-8 inválida. Primeiro byte: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:612
-#: src/input/r_avi.cpp:617
-#: src/input/r_avi.cpp:634
+#: src/input/r_avi.cpp:603
+#: src/input/r_avi.cpp:608
+#: src/input/r_avi.cpp:625
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Cabeçalhos Vorbis inválidos em uma faixa de áudio AVI."
 
@@ -7818,7 +7818,7 @@ msgstr "Existem avisos"
 msgid "There were warnings, or the process was terminated."
 msgstr "Existem avisos, ou o processamento terminou."
 
-#: src/input/r_avi.cpp:551
+#: src/input/r_avi.cpp:542
 #: src/input/r_real.cpp:292
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr "Esta faixa AAC não contém cabeçalhos válidos. Não foi possível analisar a informação AAC.\n"
@@ -8318,7 +8318,7 @@ msgstr "Opção desconhecida '%1%'.\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "Modo de analisador desconhecido em '%1% %2%'.\n"
 
-#: src/input/r_avi.cpp:506
+#: src/input/r_avi.cpp:497
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "Formato de áudio desconhecido/não suportado 0x%|1$04x| para esta faixa de áudio.\n"
@@ -9625,6 +9625,11 @@ msgstr "nome da faixa"
 #, boost-format
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: tamanho_tag < 0 no c'tor. %1%\n"
+
+#: src/input/r_avi.cpp:876
+#, fuzzy
+msgid "uncompressed"
+msgstr "compressão"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"
