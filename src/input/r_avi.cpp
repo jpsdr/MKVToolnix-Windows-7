@@ -133,17 +133,8 @@ avi_reader_c::~avi_reader_c() {
 
 void
 avi_reader_c::verify_video_track() {
-  alBITMAPINFOHEADER *bih = m_avi->bitmap_info_header;
-  size_t size             = get_uint32_le(&bih->bi_size);
-
-  if (sizeof(alBITMAPINFOHEADER) > size)
-    return;
-
-  const char *codec = AVI_video_compressor(m_avi);
-  if ((0 == codec[0]) || (0 == AVI_video_width(m_avi)) || (0 == AVI_video_height(m_avi)))
-    return;
-
-  m_video_track_ok = true;
+  auto size        = get_uint32_le(&m_avi->bitmap_info_header->bi_size);
+  m_video_track_ok = (sizeof(alBITMAPINFOHEADER) <= size) && (0 != AVI_video_width(m_avi)) && (0 != AVI_video_height(m_avi));
 }
 
 void
@@ -882,7 +873,7 @@ avi_reader_c::identify_video() {
   else if (codec.is(codec_c::V_MPEG4_P10))
     extended_info.push_back("packetizer:mpeg4_p10_es_video");
 
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), join(" ", extended_info));
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str[0] != 0 ? fourcc_str : Y("uncompressed")), join(" ", extended_info));
 }
 
 void
