@@ -1,12 +1,13 @@
 # translation of mkvtoolnix.pot to Catalan
 # Copyright (C) 2014-2015 Antoni Bella Pérez <antonibella5@yahoo.com>
 # This file is distributed under the same license as the mkvtoolnix package.
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2015.
 msgid ""
 msgstr ""
-"Project-Id-Version: mkvtoolnix 7.5.0\n"
+"Project-Id-Version: mkvtoolnix 7.6.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2014-10-23 15:59+0200\n"
-"PO-Revision-Date: 2015-01-08 15:41+0100\n"
+"PO-Revision-Date: 2015-02-28 19:42+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -415,20 +416,18 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:274
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr ""
-"  --priority <prioritat>    Estableix la prioritat en el processament de\n"
+"  --priority <prioritat>   Estableix la prioritat en el processament de\n"
 "                           «mkvmerge».\n"
 
 #: src/merge/mkvmerge.cpp:224
-#, fuzzy
 msgid ""
 "  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
 msgstr ""
-"  --sub-charset <TID:joc_de_caràcters>\n"
-"                           Determina el joc de caràcters pel text dels\n"
-"                           subtítols que són llegits per a la conversió a\n"
-"                           UTF-8.\n"
+"  --reduce-to-core <TID>   Manté només el nucli de les pistes\n"
+"                           d'àudio que admeten extensions HD en lloc de\n"
+"                           copiar tant el nucli com les extensions.\n"
 
 #: src/merge/mkvmerge.cpp:100
 msgid ""
@@ -3339,9 +3338,8 @@ msgid "Cue duration: %1%"
 msgstr "Durada de l'índex: %1%"
 
 #: src/extract/extract_cli_parser.cpp:120
-#, fuzzy
 msgid "Cue extraction"
-msgstr "Extracció de capítols"
+msgstr "Extracció de l'índex"
 
 #: src/mmg/tabs/global.cpp:355
 msgid "Cue name format:"
@@ -3691,6 +3689,8 @@ msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core. This only works with DTS tracks."
 msgstr ""
+"Descarta les extensions sense pèrdua d'una pista d'àudio i només manté el seu "
+"nucli amb pèrdua. Això només funciona amb pistes DTS."
 
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:96
 msgid "Duration"
@@ -4436,7 +4436,7 @@ msgstr "Ca&pçaleres"
 
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
-msgstr ""
+msgstr "HDMV PGS"
 
 #: src/input/r_hevc.h:31 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
@@ -5304,9 +5304,9 @@ msgstr ""
 "«%1%».\n"
 
 #: src/merge/generic_reader.cpp:109
-#, fuzzy, boost-format
+#, boost-format
 msgid "Invalid track type %1%."
-msgstr "ID de la pista no vàlid a «%1% %2%».\n"
+msgstr "Tipus de pista no vàlid %1%."
 
 #: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
@@ -5932,9 +5932,8 @@ msgstr ""
 "trobats per a dividir.\n"
 
 #: src/extract/cues.cpp:116
-#, fuzzy
 msgid "No cues were found.\n"
-msgstr "No s'ha trobat cap número de la versió.\n"
+msgstr "No s'ha trobat cap índex.\n"
 
 #: src/mmg/header_editor/frame.cpp:517
 msgid "No fields modified"
@@ -6790,7 +6789,7 @@ msgstr "Redirigeix tots els missatges a aquest fitxer."
 
 #: src/mmg/tabs/input_format.cpp:275
 msgid "Reduce to audio core"
-msgstr ""
+msgstr "Acobla al nucli de l'àudio"
 
 #: src/info/mkvinfo.cpp:198
 #, boost-format
@@ -8133,9 +8132,9 @@ msgid "The cue entries (the index) are being written...\n"
 msgstr "S'estan escrivint les entrades de l'índex...\n"
 
 #: src/extract/cues.cpp:58
-#, fuzzy, boost-format
+#, boost-format
 msgid "The cues for track %1% are written to '%2%'.\n"
-msgstr "El full de muntatge per a la pista %1% serà escrit a «%2%».\n"
+msgstr "L'índex per a la pista %1% serà escrit a «%2%».\n"
 
 #: src/mmg/tabs/input.cpp:818
 #, c-format, boost-format
@@ -8398,9 +8397,9 @@ msgstr ""
 "analitzar les seves capçaleres."
 
 #: src/extract/cues.cpp:49
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file does not contain track ID %1%.\n"
-msgstr "El fitxer d'entrada «%s» no conté capa pista."
+msgstr "El fitxer no conté l'ID de la pista %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:412
 msgid "The file does not exist."
@@ -9283,7 +9282,7 @@ msgstr "Theora"
 #: src/extract/cues.cpp:53
 #, boost-format
 msgid "There are no cues for track ID %1%.\n"
-msgstr ""
+msgstr "No hi ha índexs per a l'ID de pista %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:1827
 msgid "There is a new version available online."
@@ -9542,10 +9541,11 @@ msgid "This mode considers only the first video track that is output."
 msgstr "Aquest mode només considera la primera pista de vídeo que es genera."
 
 #: src/extract/extract_cli_parser.cpp:121
-#, fuzzy
 msgid ""
 "This mode extracts cue information for some tracks to external text files."
-msgstr "El primer mode extreu algunes pistes a fitxers externs."
+msgstr ""
+"Aquest mode extreu informació del full de muntatge per a algunes pistes a "
+"fitxers de text externs."
 
 #: src/mmg/tabs/global.cpp:282
 msgid ""
@@ -10954,15 +10954,13 @@ msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <nom_entrada> [opcions]"
 
 #: src/extract/extract_cli_parser.cpp:125
-#, fuzzy
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
-msgstr "mkvextract timecodes_v2 \"pel·lícula.mkv\" 1:codis_de_temps_1.txt"
+msgstr "mkvextract cues \"pel·lícula.mkv\" 0:índex_pista0.txt"
 
 #: src/extract/extract_cli_parser.cpp:51
-#, fuzzy
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr ""
-"mkvextract tracks <nom_entrada> [opcions] [TID1:sortida_1 [TID2:"
+"mkvextract cues <nom_entrada> [opcions] [TID1:sortida_1 [TID2:"
 "sortida_2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:110
@@ -11476,9 +11474,8 @@ msgid "timecodes"
 msgstr "codis de temps"
 
 #: src/mmg/tabs/input.cpp:203
-#, fuzzy
 msgid "toggle all"
-msgstr "Habilita-ho tot"
+msgstr "alterna-ho tot"
 
 #: src/common/stereo_mode.cpp:51
 msgid "top bottom (left first)"
@@ -11498,9 +11495,8 @@ msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: tag_size < 0 dins el constructor. %1%\n"
 
 #: src/input/r_avi.cpp:876
-#, fuzzy
 msgid "uncompressed"
-msgstr "compressió"
+msgstr "sense compressió"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"
