@@ -69,7 +69,7 @@ crc_base_c::init_table() {
       uint32_t c = i << 24;
       for (auto j = 0u; j < 8u; j++)
         c = (c << 1) ^ ((parameters.poly << (32 - parameters.bits)) & (static_cast<int32_t>(c) >> 31));
-      m_table[i] = bswap_32(c);
+      m_table[i] = mtx::bswap_32(c);
     }
   }
 

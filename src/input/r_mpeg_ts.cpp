@@ -783,7 +783,7 @@ uint32_t
 mpeg_ts_reader_c::calculate_crc(void const *buffer,
                                 size_t size)
   const {
-  return bswap_32(mtx::checksum::calculate_as_uint(mtx::checksum::crc32_ieee, buffer, size, 0xffffffff));
+  return mtx::bswap_32(mtx::checksum::calculate_as_uint(mtx::checksum::crc32_ieee, buffer, size, 0xffffffff));
 }
 
 void
