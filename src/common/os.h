@@ -37,7 +37,7 @@
 #endif
 
 #else // HAVE_COREC_H
-#if defined(_WIN32) || defined(WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
+#if (defined(_WIN32) || defined(WIN32) || defined(__MINGW32__)) && !defined(__CYGWIN__)
 # define SYS_WINDOWS
 #elif defined(__APPLE__)
 # define SYS_APPLE
@@ -52,6 +52,9 @@
 #  define SYS_SOLARIS
 # elif defined(__sun) && defined(__SVR4)
 #  define SYS_SOLARIS
+# elif defined(__CYGWIN__)
+#  define COMP_CYGWIN
+#  define SYS_CYGWIN
 # else
 #  define SYS_LINUX
 # endif
@@ -62,8 +65,6 @@
 #if defined(SYS_WINDOWS)
 # if defined __MINGW32__
 #  define COMP_MINGW
-# elif defined __CYGWIN__
-#  define COMP_CYGWIN
 # else
 #  define COMP_MSC
 #  define NOMINMAX

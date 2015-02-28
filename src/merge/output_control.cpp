@@ -17,7 +17,7 @@
 
 #include <errno.h>
 #include <ctype.h>
-#if defined(SYS_UNIX) || defined(COMP_CYGWIN) || defined(SYS_APPLE)
+#if defined(SYS_UNIX) || defined(SYS_APPLE)
 #include <signal.h>
 #endif
 #include <stdlib.h>
@@ -269,7 +269,7 @@ calculate_file_duration() {
    by writing the cues, the meta seek information and by updating the
    segment duration and the segment length.
 */
-#if defined(SYS_UNIX) || defined(COMP_CYGWIN) || defined(SYS_APPLE)
+#if defined(SYS_UNIX) || defined(SYS_APPLE)
 void
 sighandler(int /* signum */) {
   if (!s_out)

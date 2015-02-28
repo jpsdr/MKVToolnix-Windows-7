@@ -17,7 +17,7 @@
 
 #include <errno.h>
 #include <ctype.h>
-#if defined(SYS_UNIX) || defined(COMP_CYGWIN) || defined(SYS_APPLE)
+#if defined(SYS_UNIX) || defined(SYS_APPLE)
 #include <signal.h>
 #endif
 #include <stdlib.h>
@@ -2486,7 +2486,7 @@ setup(int argc,
   mtx_common_init("mkvmerge", argv[0]);
   g_kax_tracks = new KaxTracks();
 
-#if defined(SYS_UNIX) || defined(COMP_CYGWIN) || defined(SYS_APPLE)
+#if defined(SYS_UNIX) || defined(SYS_APPLE)
   signal(SIGUSR1, sighandler);
   signal(SIGINT, sighandler);
 #endif
