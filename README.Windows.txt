@@ -1,4 +1,4 @@
-Building MKVToolNix 7.6.0 on Windows
+Building MKVToolNix 7.7.0 on Windows
 ====================================
 
 There is currently only one supported way to build MKVToolNix for

@@ -25,7 +25,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Garden of Dreams"
+#define VERSIONNAME "Six Voices"
 
 version_number_t::version_number_t()
   : valid(false)
