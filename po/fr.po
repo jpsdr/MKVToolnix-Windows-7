@@ -1295,7 +1295,7 @@ msgstr "'%1%' n'est pas un code de pays ccTLD valable."
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'%1%' n'est pas un identifiant de fichier correct dans '--track-order %2%'.\n"
 
-#: src/common/hacks.cpp:93
+#: src/common/hacks.cpp:94
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' n'est pas un hack valable.\n"
@@ -2883,7 +2883,7 @@ msgstr "Impossible de trouver les données de configuration du codec dans la pre
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
 msgstr "Impossible de trouver la page Ogg suivante, ce qui indique un fichier Ogg/Ogm endommagé. Tentative de poursuite.\n"
 
-#: src/input/r_avi.cpp:594
+#: src/input/r_avi.cpp:591
 #: src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "Impossible de trouver des en-têtes DTS valables dans les premières images de cette piste.\n"
@@ -3919,6 +3919,10 @@ msgstr "Champ d'édition de forme libre permettant de définir des options utili
 msgid "Gamma: %1%"
 msgstr "Gamma : %1%"
 
+#: src/mmg/cli_options_dlg.cpp:156
+msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track. mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it. This option prevents that behavior."
+msgstr ""
+
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
 msgstr "Options générales"
@@ -4249,9 +4253,9 @@ msgstr "UID incorrect. Cet UID d'édition est déjà utilisé. L'UID d'origine n
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "Caractère UTF-8 incorrect. Premier octet : 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:603
-#: src/input/r_avi.cpp:608
-#: src/input/r_avi.cpp:625
+#: src/input/r_avi.cpp:600
+#: src/input/r_avi.cpp:605
+#: src/input/r_avi.cpp:622
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "En-têtes Vorbis incorrects dans la piste audio AVI."
 
@@ -5208,7 +5212,7 @@ msgstr "Aucun nom donné au fichier.\n"
 msgid "No filename found after the '@'."
 msgstr "Aucun nom de fichier trouvé après le '@'."
 
-#: src/mmg/cli_options_dlg.cpp:156
+#: src/mmg/cli_options_dlg.cpp:160
 msgid "No help available."
 msgstr "Aucune aide disponible."
 
@@ -5298,7 +5302,7 @@ msgstr "Ce n'est pas un fichier Matroska correct (aucun segment/élément de niv
 msgid "Not a valid number or not positive."
 msgstr "Nombre incorrect ou non positif."
 
-#: src/merge/generic_packetizer.cpp:1159
+#: src/merge/generic_packetizer.cpp:1140
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Notez que les spécifications Matroska concernant le stockage de '%1%' n'ont pas encore été finalisées. Leur prise en charge par mkvmerge est donc sujet à modification et l'identifiant de codec '%2%/EXPERIMENTAL' est utilisé au lieu de '%2%'. Cet avertissement sera supprimé dès que les spécifications seront finalisées et que mkvmerge aura été mis à jour en conséquence.\n"
@@ -7812,17 +7816,17 @@ msgstr "Des avertissements ont eu lieu."
 msgid "There were warnings, or the process was terminated."
 msgstr "Des avertissements ont eu lieu ou le processus a été interrompu."
 
-#: src/input/r_avi.cpp:542
+#: src/input/r_avi.cpp:539
 #: src/input/r_real.cpp:292
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr "Cette piste AAC ne contient pas d'en-têtes corrects. Impossible d'analyser les informations AAC.\n"
 
-#: src/output/p_ac3.cpp:70
+#: src/output/p_ac3.cpp:69
 #, boost-format
 msgid "This AC3 track contains %1% bytes of non-AC3 data at the beginning. This corresponds to a delay of %2%ms. This delay will be used instead of the non-AC3 data.\n"
 msgstr "Cette piste AC3 contient %1% octets de données non AC3 au début. Cela correspond à un délai de %2%ms qui viendra en remplacement des données non AC3.\n"
 
-#: src/output/p_ac3.cpp:82
+#: src/output/p_ac3.cpp:81
 #, boost-format
 msgid "This AC3 track contains %1% bytes of non-AC3 data which were skipped. The audio/video synchronization may have been lost.\n"
 msgstr "Cette piste AC3 contient %1% octets de données non AC3 qui ont été sautées. Il se peut que la synchronisation audio/vidéo soit perdue.\n"
@@ -8311,7 +8315,7 @@ msgstr "Option inconnue '%1%'.\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "Mode d'analyse inconnu dans '%1% %2%'.\n"
 
-#: src/input/r_avi.cpp:497
+#: src/input/r_avi.cpp:492
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "Format audio 0x%|1$04x| inconnu/non supporté dans cette piste audio.\n"
@@ -8398,7 +8402,7 @@ msgstr "Flux élémentaires VC1"
 msgid "VP8/VP9"
 msgstr ""
 
-#: src/common/hacks.cpp:66
+#: src/common/hacks.cpp:67
 msgid "Valid hacks are:\n"
 msgstr "Les bricolages valables sont :\n"
 
@@ -8691,7 +8695,7 @@ msgstr "[image %1% piste %2%, code temporel %3%]"
 msgid "aborted"
 msgstr "interrompue"
 
-#: src/output/p_ac3.cpp:237
+#: src/output/p_ac3.cpp:236
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer() : code non testé ('size' est impair). Si mkvmerge plante ou si le fichier obtenu ne contient pas la piste audio entière et correcte, contactez l'auteur Moritz Bunkus à l'adresse <moritz@bunkus.org>.\n"
 
@@ -8795,7 +8799,7 @@ msgstr "terminée avec des avertissements"
 msgid "compression"
 msgstr "compression"
 
-#: src/merge/generic_packetizer.cpp:1178
+#: src/merge/generic_packetizer.cpp:1159
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number : file_num introuvable. %1%\n"
@@ -9624,7 +9628,7 @@ msgstr "nom de piste"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader : tag_size < 0 dans le constructeur. %1%\n"
 
-#: src/input/r_avi.cpp:876
+#: src/input/r_avi.cpp:872
 #, fuzzy
 msgid "uncompressed"
 msgstr "compression"

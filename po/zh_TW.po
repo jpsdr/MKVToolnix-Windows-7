@@ -1266,7 +1266,7 @@ msgstr "「%1%」不是有效的 ccTLD 國家代碼。"
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "「%1%」不是有效的檔案 ID，在「--track-order %2%」。\n"
 
-#: src/common/hacks.cpp:93
+#: src/common/hacks.cpp:94
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "「%1%」不是有效的小補綴。\n"
@@ -2853,7 +2853,7 @@ msgstr "在第一個 MPEG-4 part 2 視訊畫格中找不到編解碼器設定資
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
 msgstr "找不到 Ogg 的下一頁。這表示 Ogg/Ogm 檔案可能已損壞。將試著繼續。\n"
 
-#: src/input/r_avi.cpp:594
+#: src/input/r_avi.cpp:591
 #: src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "在這軌道的第一個畫格裡找不到正確的 DTS 表頭。\n"
@@ -3889,6 +3889,10 @@ msgstr "無格式限制的文字方塊，供使用者定義此軌的命令列選
 msgid "Gamma: %1%"
 msgstr "伽瑪修正: %1%"
 
+#: src/mmg/cli_options_dlg.cpp:156
+msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track. mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it. This option prevents that behavior."
+msgstr ""
+
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
 msgstr "軌道一般選項"
@@ -4222,9 +4226,9 @@ msgstr "無效 UID。該版本 UID 已被使用。原 UID 沒有被改變。"
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "無效 UTF-8 字元。第一位元組: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:603
-#: src/input/r_avi.cpp:608
-#: src/input/r_avi.cpp:625
+#: src/input/r_avi.cpp:600
+#: src/input/r_avi.cpp:605
+#: src/input/r_avi.cpp:622
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "有無效的 Vorbis 表頭，在 AVI 音軌中。"
 
@@ -5181,7 +5185,7 @@ msgstr "未給定檔名。\n"
 msgid "No filename found after the '@'."
 msgstr "在「@」後面沒有找到檔名。"
 
-#: src/mmg/cli_options_dlg.cpp:156
+#: src/mmg/cli_options_dlg.cpp:160
 msgid "No help available."
 msgstr "無可用的說明。"
 
@@ -5271,7 +5275,7 @@ msgstr "不是有效的 Matroska 檔 (未發現有效的 剪輯/0 層級元件)"
 msgid "Not a valid number or not positive."
 msgstr "無效的數字或不是正的。"
 
-#: src/merge/generic_packetizer.cpp:1159
+#: src/merge/generic_packetizer.cpp:1140
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "注意 Matroska 規範有關「%1%」的儲存方面尚未完成。mkvmerge 支援是因為改變主題且使用 CodecID '%2%/EXPERIMENTAL' 替代「%2%」。一旦規範完成會移除這個警告而 mkvmerge 也會相應地更新。\n"
@@ -7773,17 +7777,17 @@ msgstr "有警告資訊"
 msgid "There were warnings, or the process was terminated."
 msgstr "有警告資訊，或者處理處理程序被中止。"
 
-#: src/input/r_avi.cpp:542
+#: src/input/r_avi.cpp:539
 #: src/input/r_real.cpp:292
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr "此 AAC 軌道不含有效的表頭。無法解析 AAC 資訊。\n"
 
-#: src/output/p_ac3.cpp:70
+#: src/output/p_ac3.cpp:69
 #, boost-format
 msgid "This AC3 track contains %1% bytes of non-AC3 data at the beginning. This corresponds to a delay of %2%ms. This delay will be used instead of the non-AC3 data.\n"
 msgstr "此 AC3 軌道的開頭包含 %1% 位元組的 非-AC3 資料。這相當於 %2%ms 的延遲。將使用此延遲替代 非-AC3 資料。\n"
 
-#: src/output/p_ac3.cpp:82
+#: src/output/p_ac3.cpp:81
 #, boost-format
 msgid "This AC3 track contains %1% bytes of non-AC3 data which were skipped. The audio/video synchronization may have been lost.\n"
 msgstr "此 AC3 軌道包含 %1% 位元組的 非-AC3 資料，已跳過。音/視訊同步可能已喪失。\n"
@@ -8272,7 +8276,7 @@ msgstr "未知的選項「%1%」。\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "未知的解析模式「%1% %2%」。\n"
 
-#: src/input/r_avi.cpp:497
+#: src/input/r_avi.cpp:492
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "此音軌的格式 0x%|1$04x| 未知或不支援。\n"
@@ -8359,7 +8363,7 @@ msgstr "VC1 基本流"
 msgid "VP8/VP9"
 msgstr ""
 
-#: src/common/hacks.cpp:66
+#: src/common/hacks.cpp:67
 msgid "Valid hacks are:\n"
 msgstr "有效的小補綴有:\n"
 
@@ -8650,7 +8654,7 @@ msgstr "[%1% 畫格，軌道 %2%, 時間碼 %3%]"
 msgid "aborted"
 msgstr "異常中止"
 
-#: src/output/p_ac3.cpp:237
+#: src/output/p_ac3.cpp:236
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): 未經測試的碼 (「size」很古怪)。如果 mkvmerge 不正常關閉或者生成的檔案不含完整且正常的音軌，請與作者 Moritz Bunkus 聯繫，電郵為 moritz@bunkus.org。\n"
 
@@ -8754,7 +8758,7 @@ msgstr "完成，有警告"
 msgid "compression"
 msgstr "壓縮"
 
-#: src/merge/generic_packetizer.cpp:1178
+#: src/merge/generic_packetizer.cpp:1159
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num 未找到。 %1%\n"
@@ -9583,7 +9587,7 @@ msgstr "軌道名稱"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: c'tor 中 tag_size < 0。 %1%\n"
 
-#: src/input/r_avi.cpp:876
+#: src/input/r_avi.cpp:872
 #, fuzzy
 msgid "uncompressed"
 msgstr "壓縮"

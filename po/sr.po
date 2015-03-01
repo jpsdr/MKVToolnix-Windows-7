@@ -1372,7 +1372,7 @@ msgstr "'%1%' nije važeći ccTLD državni kod."
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'%1%' nije važeći fajl ID u '--track-order %2%'.\n"
 
-#: src/common/hacks.cpp:93
+#: src/common/hacks.cpp:94
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' nije važeći hak.\n"
@@ -3125,7 +3125,7 @@ msgstr ""
 "Ne mogu da nađem sledeću Ogg stranu. Ovo ukazuje oštećen Ogg/Ogm fajl. "
 "Pokušaću da nastavim.\n"
 
-#: src/input/r_avi.cpp:594 src/input/r_matroska.cpp:1485
+#: src/input/r_avi.cpp:591 src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "Ne mogu da nađem važeća DTS zaglavlja u prvim slikama ove staze.\n"
 
@@ -4321,6 +4321,14 @@ msgstr ""
 msgid "Gamma: %1%"
 msgstr "Gamma: %1%"
 
+#: src/mmg/cli_options_dlg.cpp:156
+msgid ""
+"Garbage at the start of audio tracks in AVI files is normally used for "
+"delaying that track. mkvmerge normally calculates the delay implied by its "
+"presence and offsets all of the track's timecodes by it. This option "
+"prevents that behavior."
+msgstr ""
+
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
 msgstr "Opšte opcije staza"
@@ -4744,7 +4752,7 @@ msgstr ""
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "Nevažeći UTF-8 karakter. Prvi bajt: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:603 src/input/r_avi.cpp:608 src/input/r_avi.cpp:625
+#: src/input/r_avi.cpp:600 src/input/r_avi.cpp:605 src/input/r_avi.cpp:622
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Nevažeća Vorbis zaglavlja u AVI audio stazi."
 
@@ -5844,7 +5852,7 @@ msgstr "Nije navedeno ime fajla.\n"
 msgid "No filename found after the '@'."
 msgstr "Nije nađeno ime fajla posle '@'."
 
-#: src/mmg/cli_options_dlg.cpp:156
+#: src/mmg/cli_options_dlg.cpp:160
 msgid "No help available."
 msgstr "Pomoć nedostupna."
 
@@ -5950,7 +5958,7 @@ msgstr "Nije važeći Matroska fajl (nije nađen segment/level 0 element)"
 msgid "Not a valid number or not positive."
 msgstr "Broj je pogrešan ili nije pozitivan."
 
-#: src/merge/generic_packetizer.cpp:1159
+#: src/merge/generic_packetizer.cpp:1140
 #, boost-format
 msgid ""
 "Note that the Matroska specifications regarding the storage of '%1%' have "
@@ -9136,7 +9144,7 @@ msgstr "Bilo je upozorenja"
 msgid "There were warnings, or the process was terminated."
 msgstr "Bilo je upozorenja, ili je proces bio prekinut."
 
-#: src/input/r_avi.cpp:542 src/input/r_real.cpp:292
+#: src/input/r_avi.cpp:539 src/input/r_real.cpp:292
 msgid ""
 "This AAC track does not contain valid headers. Could not parse the AAC "
 "information.\n"
@@ -9144,7 +9152,7 @@ msgstr ""
 "Ova AAC staza ne sadrži ispravna zaglavlja. Ne mogu da parsiram AAC "
 "informaciju.\n"
 
-#: src/output/p_ac3.cpp:70
+#: src/output/p_ac3.cpp:69
 #, boost-format
 msgid ""
 "This AC3 track contains %1% bytes of non-AC3 data at the beginning. This "
@@ -9155,7 +9163,7 @@ msgstr ""
 "odgovara kašnjenju od  %2%ms. Ovo kašnjenje će biti korišćeno umesto "
 "beskorisnih podataka.\n"
 
-#: src/output/p_ac3.cpp:82
+#: src/output/p_ac3.cpp:81
 #, boost-format
 msgid ""
 "This AC3 track contains %1% bytes of non-AC3 data which were skipped. The "
@@ -9814,7 +9822,7 @@ msgstr "Nepoznata opcija '%1%'.\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "Nepoznat režim za parsiranje u '%1% %2%'.\n"
 
-#: src/input/r_avi.cpp:497
+#: src/input/r_avi.cpp:492
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "Nepoznat/nepodržan audio format 0x%|1$04x| za ovu audio stazu.\n"
@@ -9917,7 +9925,7 @@ msgstr "VC1 elementarni potoci"
 msgid "VP8/VP9"
 msgstr "VP8/VP9"
 
-#: src/common/hacks.cpp:66
+#: src/common/hacks.cpp:67
 msgid "Valid hacks are:\n"
 msgstr "Važeći hakovi su:\n"
 
@@ -10216,7 +10224,7 @@ msgstr "[%1% slika za stazu %2%, vremenski kod %3%]"
 msgid "aborted"
 msgstr "prekinuto"
 
-#: src/output/p_ac3.cpp:237
+#: src/output/p_ac3.cpp:236
 msgid ""
 "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If "
 "mkvmerge crashes or if the resulting file does not contain the complete and "
@@ -10322,7 +10330,7 @@ msgstr "završeno sa upozorenjima"
 msgid "compression"
 msgstr "kompresija"
 
-#: src/merge/generic_packetizer.cpp:1178
+#: src/merge/generic_packetizer.cpp:1159
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num nije nađen. %1%\n"
@@ -11269,7 +11277,7 @@ msgstr "ime staze"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 
-#: src/input/r_avi.cpp:876
+#: src/input/r_avi.cpp:872
 msgid "uncompressed"
 msgstr "nekompresovano"
 
@@ -11330,6 +11338,23 @@ msgstr "wavpack_reader: nepoznata učestalost uzorka!\n"
 #: src/mmg/tabs/input_general.cpp:104 src/mmg/tabs/input_general.cpp:126
 msgid "yes"
 msgstr "da"
+
+#~ msgid ""
+#~ "%s.\n"
+#~ "Compiled with libebml %s + libmatroska %s.\n"
+#~ "\n"
+#~ "This program is licensed under the GPL v2 (see COPYING).\n"
+#~ "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "Sources and the latest binaries are always available at\n"
+#~ "http://www.bunkus.org/videotools/mkvtoolnix/"
+#~ msgstr ""
+#~ "%s.\n"
+#~ "Kompajlirano sa libebml %s + libmatroska %s.\n"
+#~ "\n"
+#~ "Ovaj program je licenciran pod GPL v2 (pogl. COPYING).\n"
+#~ "Napisao ga je Moric Bunkus <moritz@bunkus.org>.\n"
+#~ "Izvorni kod i najnovije kompajlirane verzije su uvek dostupne na\n"
+#~ "http://www.bunkus.org/videotools/mkvtoolnix/"
 
 #~ msgid "'--append-to' lacks its argument.\n"
 #~ msgstr "'--append-to' nije naveden argument.\n"
@@ -11392,6 +11417,25 @@ msgstr "da"
 #~ "Grupa blokova nađena na poziciji %1%, ali nijedan element bloka nije "
 #~ "nađen unutar nje. Ovo može srušiti mkvmerge.\n"
 
+#~ msgid ""
+#~ "Could not initialize the iconv library for the conversion from %1% to "
+#~ "UFT-8. Some strings will not be converted to UTF-8 and the resulting "
+#~ "Matroska file might not comply with the Matroska specs (error: %2%, "
+#~ "%3%).\n"
+#~ msgstr ""
+#~ "Ne mogu da inicijalizujem iconv biblioteku za konverziju iz %1% u UTF-8. "
+#~ "Neki nizovi neće biti konvertovani u UTF-8 i dobijeni Matroska fajl se "
+#~ "možda neće pridržavati Matroska specifikacije (greška: %2%, %3%).\n"
+
+#~ msgid ""
+#~ "Could not initialize the iconv library for the conversion from UFT-8 to "
+#~ "%1%. Some strings cannot be converted from UTF-8 and might be displayed "
+#~ "incorrectly (error: %2%, %3%).\n"
+#~ msgstr ""
+#~ "Ne mogu da inicijalizujem iconv biblioteku za konverziju iz UTF-8 u %1%. "
+#~ "Neki nizovi ne mogu biti konvertovani iz UTF-8 i možda mogu biti "
+#~ "prikazani nepravilno (error: %2%, %3%).\n"
+
 #~ msgid "PGS"
 #~ msgstr "PGS"
 
@@ -11434,38 +11478,3 @@ msgstr "da"
 #~ "pr_generic.cpp/generic_reader_c::demuxing_requested(): Nevažeći tip staze "
 #~ "%1%."
 
-#~ msgid ""
-#~ "%s.\n"
-#~ "Compiled with libebml %s + libmatroska %s.\n"
-#~ "\n"
-#~ "This program is licensed under the GPL v2 (see COPYING).\n"
-#~ "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
-#~ "Sources and the latest binaries are always available at\n"
-#~ "http://www.bunkus.org/videotools/mkvtoolnix/"
-#~ msgstr ""
-#~ "%s.\n"
-#~ "Kompajlirano sa libebml %s + libmatroska %s.\n"
-#~ "\n"
-#~ "Ovaj program je licenciran pod GPL v2 (pogl. COPYING).\n"
-#~ "Napisao ga je Moric Bunkus <moritz@bunkus.org>.\n"
-#~ "Izvorni kod i najnovije kompajlirane verzije su uvek dostupne na\n"
-#~ "http://www.bunkus.org/videotools/mkvtoolnix/"
-
-#~ msgid ""
-#~ "Could not initialize the iconv library for the conversion from %1% to "
-#~ "UFT-8. Some strings will not be converted to UTF-8 and the resulting "
-#~ "Matroska file might not comply with the Matroska specs (error: %2%, "
-#~ "%3%).\n"
-#~ msgstr ""
-#~ "Ne mogu da inicijalizujem iconv biblioteku za konverziju iz %1% u UTF-8. "
-#~ "Neki nizovi neće biti konvertovani u UTF-8 i dobijeni Matroska fajl se "
-#~ "možda neće pridržavati Matroska specifikacije (greška: %2%, %3%).\n"
-
-#~ msgid ""
-#~ "Could not initialize the iconv library for the conversion from UFT-8 to "
-#~ "%1%. Some strings cannot be converted from UTF-8 and might be displayed "
-#~ "incorrectly (error: %2%, %3%).\n"
-#~ msgstr ""
-#~ "Ne mogu da inicijalizujem iconv biblioteku za konverziju iz UTF-8 u %1%. "
-#~ "Neki nizovi ne mogu biti konvertovani iz UTF-8 i možda mogu biti "
-#~ "prikazani nepravilno (error: %2%, %3%).\n"

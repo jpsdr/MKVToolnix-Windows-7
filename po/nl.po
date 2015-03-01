@@ -1414,7 +1414,7 @@ msgstr "'%1%' is geen geldig ccTLD land code."
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'%1%' is geen geldige bestands ID in '--track-order %2%'.\n"
 
-#: src/common/hacks.cpp:93
+#: src/common/hacks.cpp:94
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' is geen geldige kraak.\n"
@@ -3192,7 +3192,7 @@ msgstr ""
 "Kan de volgende Ogg pagina niet vinden. Dit geeft een beschadigde Ogg/Ogm "
 "bestand aan. Zal proberen door te gaan.\n"
 
-#: src/input/r_avi.cpp:594 src/input/r_matroska.cpp:1485
+#: src/input/r_avi.cpp:591 src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "Kon geen geldig DTS kopstuk vinden in dit spoor, eerste beeld.\n"
 
@@ -4401,6 +4401,14 @@ msgstr ""
 msgid "Gamma: %1%"
 msgstr "Gamma: %1%"
 
+#: src/mmg/cli_options_dlg.cpp:156
+msgid ""
+"Garbage at the start of audio tracks in AVI files is normally used for "
+"delaying that track. mkvmerge normally calculates the delay implied by its "
+"presence and offsets all of the track's timecodes by it. This option "
+"prevents that behavior."
+msgstr ""
+
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
 msgstr "Algemene spoor opties"
@@ -4828,7 +4836,7 @@ msgstr ""
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "Ongeldig UTF-8 karakter. Eerste byte: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:603 src/input/r_avi.cpp:608 src/input/r_avi.cpp:625
+#: src/input/r_avi.cpp:600 src/input/r_avi.cpp:605 src/input/r_avi.cpp:622
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Ongeldige Vorbis koppen in AVI audio spoor."
 
@@ -5932,7 +5940,7 @@ msgstr "Geen bestandsnaam gegeven.\n"
 msgid "No filename found after the '@'."
 msgstr "Geen bestandsnaam gevonden na '@'."
 
-#: src/mmg/cli_options_dlg.cpp:156
+#: src/mmg/cli_options_dlg.cpp:160
 msgid "No help available."
 msgstr "Geen help beschikbaar."
 
@@ -6041,7 +6049,7 @@ msgstr " (geen segment/niveau 0 element gevonden)"
 msgid "Not a valid number or not positive."
 msgstr "Geen geldig nummer of niet positief."
 
-#: src/merge/generic_packetizer.cpp:1159
+#: src/merge/generic_packetizer.cpp:1140
 #, boost-format
 msgid ""
 "Note that the Matroska specifications regarding the storage of '%1%' have "
@@ -9277,7 +9285,7 @@ msgstr "Er waren waarschuwingen"
 msgid "There were warnings, or the process was terminated."
 msgstr "Er waren waarschuwingen, of het proces is geëindigd."
 
-#: src/input/r_avi.cpp:542 src/input/r_real.cpp:292
+#: src/input/r_avi.cpp:539 src/input/r_real.cpp:292
 msgid ""
 "This AAC track does not contain valid headers. Could not parse the AAC "
 "information.\n"
@@ -9285,7 +9293,7 @@ msgstr ""
 "Dit AAC spoor bevat geen geldige koppen. Kon de AAC informatie niet "
 "ontleden.\n"
 
-#: src/output/p_ac3.cpp:70
+#: src/output/p_ac3.cpp:69
 #, boost-format
 msgid ""
 "This AC3 track contains %1% bytes of non-AC3 data at the beginning. This "
@@ -9296,7 +9304,7 @@ msgstr ""
 "een vertraging van %2%ms. Deze vertraging zal worden gebruikt i.p.v. de niet-"
 "AC3 data.\n"
 
-#: src/output/p_ac3.cpp:82
+#: src/output/p_ac3.cpp:81
 #, boost-format
 msgid ""
 "This AC3 track contains %1% bytes of non-AC3 data which were skipped. The "
@@ -9962,7 +9970,7 @@ msgstr "Onbekende optie '%1%'.\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "Onbekende ontleed mode in '%1% %2%'.\n"
 
-#: src/input/r_avi.cpp:497
+#: src/input/r_avi.cpp:492
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr ""
@@ -10068,7 +10076,7 @@ msgstr "VC1 basisstromen"
 msgid "VP8/VP9"
 msgstr "VP8/VP9"
 
-#: src/common/hacks.cpp:66
+#: src/common/hacks.cpp:67
 msgid "Valid hacks are:\n"
 msgstr "Geldige 'kraken' zijn:\n"
 
@@ -10365,7 +10373,7 @@ msgstr "[%1% beeld voor spoor %2%, tijd code %3%]"
 msgid "aborted"
 msgstr "afgebroken"
 
-#: src/output/p_ac3.cpp:237
+#: src/output/p_ac3.cpp:236
 msgid ""
 "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If "
 "mkvmerge crashes or if the resulting file does not contain the complete and "
@@ -10471,7 +10479,7 @@ msgstr "voltooid met waarschuwingen"
 msgid "compression"
 msgstr "compressie"
 
-#: src/merge/generic_packetizer.cpp:1178
+#: src/merge/generic_packetizer.cpp:1159
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num niet gevonden. %1%\n"
@@ -11429,7 +11437,7 @@ msgstr "spoor naam"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_lezer: markeer_grootte < 0 in de c'tor. %1%\n"
 
-#: src/input/r_avi.cpp:876
+#: src/input/r_avi.cpp:872
 #, fuzzy
 msgid "uncompressed"
 msgstr "compressie"

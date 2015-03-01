@@ -1358,7 +1358,7 @@ msgstr "'%1%' geçerli ccTLD ülke kodu değil."
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'%1%' '--track-order %2%' içindeki geçerli dosya ID değil.\n"
 
-#: src/common/hacks.cpp:93
+#: src/common/hacks.cpp:94
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' geçerli kurcalama değil.\n"
@@ -3081,7 +3081,7 @@ msgstr ""
 "Sonraki Ogg sayfasında bulunamadı. Bu, hasarlı bir Ogg/Ogm dosyasını "
 "belirtir. Devam etmek için tekrarlanacak.\n"
 
-#: src/input/r_avi.cpp:594 src/input/r_matroska.cpp:1485
+#: src/input/r_avi.cpp:591 src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "Bu izin ilk karelerinde geçerli DTS başlıkları bulunamadı.\n"
 
@@ -4248,6 +4248,14 @@ msgstr ""
 msgid "Gamma: %1%"
 msgstr "Gama: %1%"
 
+#: src/mmg/cli_options_dlg.cpp:156
+msgid ""
+"Garbage at the start of audio tracks in AVI files is normally used for "
+"delaying that track. mkvmerge normally calculates the delay implied by its "
+"presence and offsets all of the track's timecodes by it. This option "
+"prevents that behavior."
+msgstr ""
+
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
 msgstr "Genel iz seçenekleri"
@@ -4663,7 +4671,7 @@ msgstr ""
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "Geçersiz UTF-8 kar. İlk bayt: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:603 src/input/r_avi.cpp:608 src/input/r_avi.cpp:625
+#: src/input/r_avi.cpp:600 src/input/r_avi.cpp:605 src/input/r_avi.cpp:622
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "AVI ses izinde geçersiz Vorbis başlıkları."
 
@@ -5754,7 +5762,7 @@ msgstr "Verilen dosya adı yok.\n"
 msgid "No filename found after the '@'."
 msgstr "'@'ten sonra bulunan dosya adı yok."
 
-#: src/mmg/cli_options_dlg.cpp:156
+#: src/mmg/cli_options_dlg.cpp:160
 msgid "No help available."
 msgstr "Yardım mevcut değil."
 
@@ -5852,7 +5860,7 @@ msgstr "Geçerli Matroska dosyası değil (parça yok/seviye 0 unsuru bulundu)"
 msgid "Not a valid number or not positive."
 msgstr "Geçerli bir sayı değil yada olumlu değil."
 
-#: src/merge/generic_packetizer.cpp:1159
+#: src/merge/generic_packetizer.cpp:1140
 #, boost-format
 msgid ""
 "Note that the Matroska specifications regarding the storage of '%1%' have "
@@ -8879,14 +8887,14 @@ msgstr "Uyarılar vardı"
 msgid "There were warnings, or the process was terminated."
 msgstr "Uyarılar vardı ya da işlem sonlandırıldı."
 
-#: src/input/r_avi.cpp:542 src/input/r_real.cpp:292
+#: src/input/r_avi.cpp:539 src/input/r_real.cpp:292
 msgid ""
 "This AAC track does not contain valid headers. Could not parse the AAC "
 "information.\n"
 msgstr ""
 "Bu AAC izi geçerli başlıkları içermiyor. AAC bilgisi ayrıştırılamadı.\n"
 
-#: src/output/p_ac3.cpp:70
+#: src/output/p_ac3.cpp:69
 #, boost-format
 msgid ""
 "This AC3 track contains %1% bytes of non-AC3 data at the beginning. This "
@@ -8894,7 +8902,7 @@ msgid ""
 "AC3 data.\n"
 msgstr ""
 
-#: src/output/p_ac3.cpp:82
+#: src/output/p_ac3.cpp:81
 #, boost-format
 msgid ""
 "This AC3 track contains %1% bytes of non-AC3 data which were skipped. The "
@@ -9488,7 +9496,7 @@ msgstr "Bilinmeyen seçenek '%1%'.\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "'%1% %2%' içinde bilinmeyen ayrıştırma kipi.\n"
 
-#: src/input/r_avi.cpp:497
+#: src/input/r_avi.cpp:492
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "Bu ses izi için bilinmeyen/desteklenmeyen ses biçimi 0x%|1$04x|.\n"
@@ -9584,7 +9592,7 @@ msgstr "VC1 temel akışları"
 msgid "VP8/VP9"
 msgstr "VP8/VP9"
 
-#: src/common/hacks.cpp:66
+#: src/common/hacks.cpp:67
 msgid "Valid hacks are:\n"
 msgstr "Geçerli kurcalamalar:\n"
 
@@ -9878,7 +9886,7 @@ msgstr "[iz %2% için %1% kare, zaman kodu %3%]"
 msgid "aborted"
 msgstr "durduruldu"
 
-#: src/output/p_ac3.cpp:237
+#: src/output/p_ac3.cpp:236
 msgid ""
 "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If "
 "mkvmerge crashes or if the resulting file does not contain the complete and "
@@ -9980,7 +9988,7 @@ msgstr "uyarılarla tamamlandı"
 msgid "compression"
 msgstr "sıkıştırma"
 
-#: src/merge/generic_packetizer.cpp:1178
+#: src/merge/generic_packetizer.cpp:1159
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num bulunamadı. %1%\n"
@@ -10928,7 +10936,7 @@ msgstr "iz adı"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: c'tor içinde tag_size < 0. %1%\n"
 
-#: src/input/r_avi.cpp:876
+#: src/input/r_avi.cpp:872
 #, fuzzy
 msgid "uncompressed"
 msgstr "sıkıştırma"

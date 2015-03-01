@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix 6.8.0\n"
 "Report-Msgid-Bugs-To: moritz@bunkus.org\n"
 "POT-Creation-Date: 2009-02-18 23:52+0100\n"
-"PO-Revision-Date: 2015-02-28 11:54+0100\n"
+"PO-Revision-Date: 2015-03-01 20:24+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -1304,7 +1304,7 @@ msgstr "»%1%« ist kein gültiger ccTLD Ländercode."
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "»%1%« ist keine gültige Datei-ID in »--track-order %2%«.\n"
 
-#: src/common/hacks.cpp:93
+#: src/common/hacks.cpp:94
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "»%1%« ist kein gültiger Hack-Name.\n"
@@ -2900,7 +2900,7 @@ msgstr "Die Codec-Konfigurationsdaten konnten im ersten MPEG-4 Teil 2-Videobild 
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
 msgstr "Die nächste Ogg-Seite konnte nicht gefunden werden. Das deutet auf eine beschädigte Ogg/OGM-Datei hin. Es wird versucht fortzusetzen.\n"
 
-#: src/input/r_avi.cpp:594
+#: src/input/r_avi.cpp:591
 #: src/input/r_matroska.cpp:1485
 msgid "Could not find valid DTS headers in this track's first frames.\n"
 msgstr "In den ersten Bildern der Spur konnten keine gültigen DTS-Kopfdaten gefunden werden.\n"
@@ -3926,6 +3926,10 @@ msgstr "Freitexteingabezeile für benutzerdefinierte Optionen für diese Spur. W
 msgid "Gamma: %1%"
 msgstr "Gamma: %1%"
 
+#: src/mmg/cli_options_dlg.cpp:156
+msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track. mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it. This option prevents that behavior."
+msgstr "In AVI-Dateien wird Müll am Anfang von Audio-Spuren dazu benutzt, um die Spur zu verzögern. mkvmerge berechnet normalerweise die dadurch implizierte Verzögerung und wendet sie auf alle Zeitstempel der Spur an. Diese Option verhindert dieses Verhalten."
+
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
 msgstr "Allgemeine Spuroptionen"
@@ -4256,9 +4260,9 @@ msgstr "ungültige UID. Die Editions-UID wird bereits verwendet. Die bisherige U
 msgid "Invalid UTF-8 char. First byte: 0x%|1$02x|"
 msgstr "ungültiges UTF-8-Zeichen. Erstes Byte: 0x%|1$02x|"
 
-#: src/input/r_avi.cpp:603
-#: src/input/r_avi.cpp:608
-#: src/input/r_avi.cpp:625
+#: src/input/r_avi.cpp:600
+#: src/input/r_avi.cpp:605
+#: src/input/r_avi.cpp:622
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "ungültige Vorbis-Kopfdaten in AVI-Audiospur"
 
@@ -5210,7 +5214,7 @@ msgstr "Es wurde kein Dateiname angegeben.\n"
 msgid "No filename found after the '@'."
 msgstr "Nach dem »@« wurde kein Dateiname angegeben."
 
-#: src/mmg/cli_options_dlg.cpp:156
+#: src/mmg/cli_options_dlg.cpp:160
 msgid "No help available."
 msgstr "keine Hilfe verfügbar"
 
@@ -5300,7 +5304,7 @@ msgstr "Keine gültige Matroska-Datei (kein Segment/Stufe-0-Element gefunden)"
 msgid "Not a valid number or not positive."
 msgstr "keine gültige Zahl oder nicht positiv"
 
-#: src/merge/generic_packetizer.cpp:1159
+#: src/merge/generic_packetizer.cpp:1140
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Beachten Sie, dass die Matroska-Spezifikationen für die Speicherung von »%1%« noch nicht abschließend festgelegt wurden. Änderungen in Mkvmerges Unterstützung dafür bleiben daher vorbehalten und Mkvmerge nutzt derweil die CodecID »%2%/EXPERIMENTAL« anstelle von »%2%«. Diese Warnung wird entfernt, sobald die Spezifikationen fertiggestellt und Mkvmerge entsprechend aktualisiert worden sein wird.\n"
@@ -7824,17 +7828,17 @@ msgstr "Es gab Warnungen."
 msgid "There were warnings, or the process was terminated."
 msgstr "Es gab Warnungen oder Mkvmerge wurde unerwartet beendet."
 
-#: src/input/r_avi.cpp:542
+#: src/input/r_avi.cpp:539
 #: src/input/r_real.cpp:292
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
 msgstr "Diese AAC-Spur enthält keine gültigen Kopfdaten. Die AAC-Parameter konnten nicht ausgewertet werden.\n"
 
-#: src/output/p_ac3.cpp:70
+#: src/output/p_ac3.cpp:69
 #, boost-format
 msgid "This AC3 track contains %1% bytes of non-AC3 data at the beginning. This corresponds to a delay of %2%ms. This delay will be used instead of the non-AC3 data.\n"
 msgstr "Diese AC3-Spur enthält am Anfang %1% Byte Nicht-AC3-Daten. Dies entspricht einer Verzögerung von %2%ms. Diese Verzögerung wird anstelle der Nicht-AC3-Daten benutzt.\n"
 
-#: src/output/p_ac3.cpp:82
+#: src/output/p_ac3.cpp:81
 #, boost-format
 msgid "This AC3 track contains %1% bytes of non-AC3 data which were skipped. The audio/video synchronization may have been lost.\n"
 msgstr "Dieser AC3-Spur enthält %1% Byte Nicht-AC3-Daten, die ausgelassen werden. Die Audio-/Videosynchronisation könnte dadurch beeinträchtigt werden.\n"
@@ -8326,7 +8330,7 @@ msgstr "unbekannte Option »%1%«\n"
 msgid "Unknown parse mode in '%1% %2%'.\n"
 msgstr "unbekannter Analysemodus bei »%1% %2%«\n"
 
-#: src/input/r_avi.cpp:497
+#: src/input/r_avi.cpp:492
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "unbekanntes/nicht unterstütztes Audioformat 0x%|1$04x| in dieser Audiospur\n"
@@ -8421,7 +8425,7 @@ msgstr "VC1 elementary streams"
 msgid "VP8/VP9"
 msgstr "VP8/VP9"
 
-#: src/common/hacks.cpp:66
+#: src/common/hacks.cpp:67
 msgid "Valid hacks are:\n"
 msgstr "Gültige Hacks sind:\n"
 
@@ -8724,7 +8728,7 @@ msgstr "[%1%-Spur für Spur %2%, Zeitstempel %3%]"
 msgid "aborted"
 msgstr "abgebrochen"
 
-#: src/output/p_ac3.cpp:237
+#: src/output/p_ac3.cpp:236
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): ungetesteter Code (»size« ist ungerade). Falls Mkvmerge abstürzt oder die resultierende Datei nicht die vollständige und korrekte Audiospur enthält, dann wenden Sie sich bitte an den Autor Moritz Bunkus <moritz@bunkus.org>.\n"
 
@@ -8828,7 +8832,7 @@ msgstr "mit Warnungen beendet"
 msgid "compression"
 msgstr "Komprimierung"
 
-#: src/merge/generic_packetizer.cpp:1178
+#: src/merge/generic_packetizer.cpp:1159
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: »file_num« nicht gefunden. %1%\n"
@@ -9653,7 +9657,7 @@ msgstr "Spurname"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: tag_size < 0 im Konstruktor. %1%\n"
 
-#: src/input/r_avi.cpp:876
+#: src/input/r_avi.cpp:872
 msgid "uncompressed"
 msgstr "unkomprimiert"
 
