@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2014-12-12 21:46+0100\n"
-"PO-Revision-Date: 2015-01-14 17:26+0100\n"
+"PO-Revision-Date: 2015-03-01 19:54+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
 "Language: sr@latin\n"
@@ -393,16 +393,14 @@ msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priority>   Postavi prioritet pod kojim mkvmerge radi.\n"
 
 #: src/merge/mkvmerge.cpp:224
-#, fuzzy
 msgid ""
 "  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
 msgstr ""
-"  --sub-charset <TID:charset>\n"
-"                           Određuje skup znakova sa kojim su tekstualni "
-"prevodi\n"
-"                           pročitani radi konverzije u UTF-8.\n"
+"  --reduce-to-core <TID>   Zadržava samo jezgro audio staza koje podržavaju\n"
+"                           HD ekstenziju umesto kopiranja i jegra\n"
+"                           i ekstenzije.\n"
 
 #: src/merge/mkvmerge.cpp:100
 msgid ""
@@ -1037,11 +1035,11 @@ msgid ""
 "https://www.bunkus.org/videotools/mkvtoolnix/"
 msgstr ""
 "%s.\n"
-"Kompajlirano sa libebml %s + libmatroska %s.\n"
+"Kompajlovano sa libebml %s + libmatroska %s.\n"
 "\n"
 "Ovaj program je licenciran pod GPL v2 (pogl. COPYING).\n"
-"Napisao ga je Moric Bunkus <moritz@bunkus.org>.\n"
-"Izvorni kod i najnovije kompajlirane verzije su uvek dostupne na\n"
+"Napisao ga je Moritz Bunkus <moritz@bunkus.org>.\n"
+"Izvorni kod i najnoviji kompajlovani izvršni fajlovi su uvek dostupni na\n"
 "https://www.bunkus.org/videotools/mkvtoolnix/"
 
 #: src/mmg/jobs.cpp:98 src/mmg/tabs/scanning_for_playlists_dlg.cpp:45
@@ -2458,7 +2456,7 @@ msgid ""
 "Automatically enabling WebM compliance mode due to output file name "
 "extension.\n"
 msgstr ""
-"Automatsko uključivanje WebM kompatibilnog moda usled ekstenzije izlaznog "
+"Automatsko uključivanje WebM usaglašenog režima usled ekstenzije izlaznog "
 "fajla.\n"
 
 #: src/mmg/cli_options_dlg.cpp:37
@@ -3138,9 +3136,9 @@ msgid ""
 "Some strings will not be converted to UTF-8 and the resulting Matroska file "
 "might not comply with the Matroska specs (error: %2%, %3%).\n"
 msgstr ""
-"Ne mogu da inicijalizujem iconv biblioteku za konverziju iz %1% u UTF-8. "
-"Neki nizovi neće biti konvertovani u UTF-8 i dobijeni Matroska fajl se možda "
-"neće pridržavati Matroska specifikacije (greška: %2%, %3%).\n"
+"Ne mogu da inicijalizujem iconv biblioteku radi konverzije iz %1% u UTF-8. "
+"Neki nizovi neće biti konvertovani u UTF-8 i rezultujući Matroska fajl se "
+"možda neće usaglasiti sa Matroska specifikacijom (greška: %2%, %3%).\n"
 
 #: src/common/locale.cpp:149
 #, boost-format
@@ -3149,9 +3147,9 @@ msgid ""
 "Some strings cannot be converted from UTF-8 and might be displayed "
 "incorrectly (error: %2%, %3%).\n"
 msgstr ""
-"Ne mogu da inicijalizujem iconv biblioteku za konverziju iz UTF-8 u %1%. "
-"Neki nizovi ne mogu biti konvertovani iz UTF-8 i možda mogu biti prikazani "
-"nepravilno (error: %2%, %3%).\n"
+"Ne mogu da inicijalizujem iconv biblioteku radi konverzije iz UTF-8 u %1%. "
+"Neki nizovi ne mogu biti konvertovani iz UTF-8 i možda neće biti pravilno "
+"prikazani (greška: %2%, %3%).\n"
 
 #: src/common/chapters/chapters.cpp:294 src/common/chapters/chapters.cpp:296
 #, boost-format
@@ -3273,9 +3271,8 @@ msgid "Cue duration: %1%"
 msgstr "Cue trajanje: %1%"
 
 #: src/extract/extract_cli_parser.cpp:120
-#, fuzzy
 msgid "Cue extraction"
-msgstr "Izvlačenje poglavlja"
+msgstr "Cue izvlačenje"
 
 #: src/mmg/tabs/global.cpp:355
 msgid "Cue name format:"
@@ -3617,6 +3614,8 @@ msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core. This only works with DTS tracks."
 msgstr ""
+"Odbacuje iz audio staze lossless ekstenziju i zadržava samo njeno lossy "
+"jezgro. Ovo radi samo za DTS tip staza."
 
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:96
 msgid "Duration"
@@ -4350,7 +4349,7 @@ msgstr "&Zaglavlja"
 
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
-msgstr ""
+msgstr "HDMV PGS"
 
 #: src/input/r_hevc.h:31 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
@@ -5197,9 +5196,9 @@ msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "Nevažeća specifikacija za track ID/ime fajla u argumentu '%1%'.\n"
 
 #: src/merge/generic_reader.cpp:109
-#, fuzzy, boost-format
+#, boost-format
 msgid "Invalid track type %1%."
-msgstr "Nevažeći track ID u '%1% %2%'.\n"
+msgstr "Nevažeći tip staze %1%."
 
 #: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
@@ -5818,9 +5817,8 @@ msgstr ""
 "U izvornim fajlovima nije pronađeno poglavlje po kojem se vrši podela.\n"
 
 #: src/extract/cues.cpp:116
-#, fuzzy
 msgid "No cues were found.\n"
-msgstr "Nije nađen broj verzije.\n"
+msgstr "Nisu nađene cue informacije.\n"
 
 #: src/mmg/header_editor/frame.cpp:517
 msgid "No fields modified"
@@ -6657,7 +6655,7 @@ msgstr "Preusmerava sve poruke u ovaj fajl."
 
 #: src/mmg/tabs/input_format.cpp:275
 msgid "Reduce to audio core"
-msgstr ""
+msgstr "Svedi na audio jezgro"
 
 #: src/info/mkvinfo.cpp:198
 #, boost-format
@@ -7971,9 +7969,9 @@ msgid "The cue entries (the index) are being written...\n"
 msgstr "Zapisuju se cue unosi (indeks)...\n"
 
 #: src/extract/cues.cpp:58
-#, fuzzy, boost-format
+#, boost-format
 msgid "The cues for track %1% are written to '%2%'.\n"
-msgstr "CUE list za stazu %1% će biti upisan u '%2%'.\n"
+msgstr "cue informacije za stazu %1% su zapisane u '%2%'.\n"
 
 #: src/mmg/tabs/input.cpp:818
 #, c-format, boost-format
@@ -8237,9 +8235,9 @@ msgstr ""
 "rastave njegova zaglavlja."
 
 #: src/extract/cues.cpp:49
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file does not contain track ID %1%.\n"
-msgstr "Ulazni fajl '%s' na sadrži nikakve staze."
+msgstr "Fajl ne sadrži track ID %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:412
 msgid "The file does not exist."
@@ -9096,7 +9094,7 @@ msgstr "Theora"
 #: src/extract/cues.cpp:53
 #, boost-format
 msgid "There are no cues for track ID %1%.\n"
-msgstr ""
+msgstr "Nema cue informacije za track iD %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:1827
 msgid "There is a new version available online."
@@ -9350,10 +9348,11 @@ msgid "This mode considers only the first video track that is output."
 msgstr "Ovaj režim razmatra samo prvu video stazu koja se zapisuje."
 
 #: src/extract/extract_cli_parser.cpp:121
-#, fuzzy
 msgid ""
 "This mode extracts cue information for some tracks to external text files."
-msgstr "Prvi režim izvlači neke staze u spoljne fajlove."
+msgstr ""
+"Ovaj režim izvlači cue informaciju za neke staze u spoljne tekstualne "
+"fajlove."
 
 #: src/mmg/tabs/global.cpp:282
 msgid ""
@@ -10744,14 +10743,12 @@ msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <inname> [opcije]"
 
 #: src/extract/extract_cli_parser.cpp:125
-#, fuzzy
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
-msgstr "mkvextract timecodes_v2 \"film.mkv\" 1:vremenski_kodovi_staza1.txt"
+msgstr "mkvextract cues \"film.mkv\" 0:cues_track0.txt"
 
 #: src/extract/extract_cli_parser.cpp:51
-#, fuzzy
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract tracks <inname> [opcije] [TID1:out1 [TID2:out2 ...]]"
+msgstr "mkvextract cues <inname> [opcije] [TID1:out1 [TID2:out2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:110
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
@@ -11252,7 +11249,6 @@ msgid "timecodes"
 msgstr "vremenski kodovi"
 
 #: src/mmg/tabs/input.cpp:203
-#, fuzzy
 msgid "toggle all"
 msgstr "uključi sve"
 
@@ -11274,9 +11270,8 @@ msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 
 #: src/input/r_avi.cpp:876
-#, fuzzy
 msgid "uncompressed"
-msgstr "kompresija"
+msgstr "nekompresovano"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"
@@ -11335,9 +11330,6 @@ msgstr "wavpack_reader: nepoznata učestalost uzorka!\n"
 #: src/mmg/tabs/input_general.cpp:104 src/mmg/tabs/input_general.cpp:126
 msgid "yes"
 msgstr "da"
-
-#~ msgid "'--append-mode' lacks its argument.\n"
-#~ msgstr "'--append-mode' nije naveden argument.\n"
 
 #~ msgid "'--append-to' lacks its argument.\n"
 #~ msgstr "'--append-to' nije naveden argument.\n"
@@ -11442,3 +11434,38 @@ msgstr "da"
 #~ "pr_generic.cpp/generic_reader_c::demuxing_requested(): Nevažeći tip staze "
 #~ "%1%."
 
+#~ msgid ""
+#~ "%s.\n"
+#~ "Compiled with libebml %s + libmatroska %s.\n"
+#~ "\n"
+#~ "This program is licensed under the GPL v2 (see COPYING).\n"
+#~ "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "Sources and the latest binaries are always available at\n"
+#~ "http://www.bunkus.org/videotools/mkvtoolnix/"
+#~ msgstr ""
+#~ "%s.\n"
+#~ "Kompajlirano sa libebml %s + libmatroska %s.\n"
+#~ "\n"
+#~ "Ovaj program je licenciran pod GPL v2 (pogl. COPYING).\n"
+#~ "Napisao ga je Moric Bunkus <moritz@bunkus.org>.\n"
+#~ "Izvorni kod i najnovije kompajlirane verzije su uvek dostupne na\n"
+#~ "http://www.bunkus.org/videotools/mkvtoolnix/"
+
+#~ msgid ""
+#~ "Could not initialize the iconv library for the conversion from %1% to "
+#~ "UFT-8. Some strings will not be converted to UTF-8 and the resulting "
+#~ "Matroska file might not comply with the Matroska specs (error: %2%, "
+#~ "%3%).\n"
+#~ msgstr ""
+#~ "Ne mogu da inicijalizujem iconv biblioteku za konverziju iz %1% u UTF-8. "
+#~ "Neki nizovi neće biti konvertovani u UTF-8 i dobijeni Matroska fajl se "
+#~ "možda neće pridržavati Matroska specifikacije (greška: %2%, %3%).\n"
+
+#~ msgid ""
+#~ "Could not initialize the iconv library for the conversion from UFT-8 to "
+#~ "%1%. Some strings cannot be converted from UTF-8 and might be displayed "
+#~ "incorrectly (error: %2%, %3%).\n"
+#~ msgstr ""
+#~ "Ne mogu da inicijalizujem iconv biblioteku za konverziju iz UTF-8 u %1%. "
+#~ "Neki nizovi ne mogu biti konvertovani iz UTF-8 i možda mogu biti "
+#~ "prikazani nepravilno (error: %2%, %3%).\n"
