@@ -20,21 +20,26 @@ BuildRequires: boost-devel >= 1.46.0, gcc-c++ >= 4.6.3, ruby >= 1.9
 %if 0%{?suse_version}
 Group: Productivity/Multimedia/Other
 License: GPL-2.0
-BuildRequires:  gettext-tools, wxWidgets-devel
+BuildRequires:  gettext-tools
+
+%if %{?suse_version} < 1320
+BuildRequires: wxWidgets-devel
+%else
+BuildRequires: wxWidgets-3_0-devel
+%endif
 %endif
 
 %if 0%{?fedora} || 0%{?rhel} || 0%{?centos}
 Group: Applications/Multimedia
 License: GPLv2
+
+%if 0%{?fedora}
+BuildRequires: rubypick, gettext-devel, wxGTK3-devel, pugixml-devel
+
+%else
 BuildRequires: gettext-devel, wxGTK-devel
 %endif
 
-%if 0%{?fedora} >= 19
-BuildRequires: rubypick
-%endif
-
-%if 0%{?fedora}
-BuildRequires: pugixml-devel
 %endif
 
 %description
@@ -57,6 +62,10 @@ export CXXFLAGS="$RPM_OPT_FLAGS"
 export CC=/opt/centos/devtoolset-1.1/root/usr/bin/gcc
 export CXX=/opt/centos/devtoolset-1.1/root/usr/bin/g++
 export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
+%endif
+
+%if 0%{?fedora}
+export EXTRA_CONFIGURE_ARGS="--with-wx-config=/usr/bin/wx-config-3.0"
 %endif
 
 %configure --prefix=%{_prefix} --without-build-timestamp $EXTRA_CONFIGURE_ARGS
