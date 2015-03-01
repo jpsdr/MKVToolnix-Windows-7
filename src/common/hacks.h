@@ -36,7 +36,8 @@
 #define ENGAGE_VOBSUB_SUBPIC_STOP_CMDS      15
 #define ENGAGE_NO_CUE_DURATION              16
 #define ENGAGE_NO_CUE_RELATIVE_POSITION     17
-#define ENGAGE_MAX_IDX                      17
+#define ENGAGE_NO_DELAY_FOR_GARBAGE_IN_AVI  18
+#define ENGAGE_MAX_IDX                      18
 
 void engage_hacks(const std::string &hacks);
 void engage_hack(unsigned int id);

@@ -41,6 +41,7 @@ static const struct {
   { ENGAGE_VOBSUB_SUBPIC_STOP_CMDS,      "vobsub_subpic_stop_cmds"      },
   { ENGAGE_NO_CUE_DURATION,              "no_cue_duration"              },
   { ENGAGE_NO_CUE_RELATIVE_POSITION,     "no_cue_relative_position"     },
+  { ENGAGE_NO_DELAY_FOR_GARBAGE_IN_AVI,  "no_delay_for_garbage_in_avi"  },
   { 0,                                   nullptr },
 };
 static std::vector<bool> s_engaged_hacks(ENGAGE_MAX_IDX + 1, false);

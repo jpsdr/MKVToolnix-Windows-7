@@ -152,6 +152,10 @@ cli_options_dlg::init_cli_option_list() {
                                            Z("Causes mkvmerge not to write 'CueDuration' elemenets in the cues.")));
   all_cli_options.push_back(cli_option_t(wxU("--engage no_cue_relative_position"),
                                            Z("Causes mkvmerge not to write 'CueRelativePosition' elemenets in the cues.")));
+  all_cli_options.push_back(cli_option_t(wxU("--engage no_delay_for_garbage_in_avi"),
+                                           Z("Garbage at the start of audio tracks in AVI files is normally used for delaying that track. "
+                                             "mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it. "
+                                             "This option prevents that behavior.")));
   all_cli_options.push_back(cli_option_t(wxU("--engage cow"),
                                            Z("No help available.")));
 }

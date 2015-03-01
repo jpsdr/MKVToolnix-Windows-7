@@ -1058,7 +1058,7 @@ int64_t
 generic_packetizer_c::calculate_avi_audio_sync(int64_t num_bytes,
                                                int64_t samples_per_packet,
                                                int64_t packet_duration) {
-  if (!m_ti.m_avi_audio_sync_enabled)
+  if (!m_ti.m_avi_audio_sync_enabled || hack_engaged(ENGAGE_NO_DELAY_FOR_GARBAGE_IN_AVI))
     return -1;
 
   return ((num_bytes + samples_per_packet - 1) / samples_per_packet) * packet_duration;
