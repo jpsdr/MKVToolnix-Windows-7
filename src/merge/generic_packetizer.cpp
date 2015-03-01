@@ -1055,32 +1055,13 @@ generic_packetizer_c::force_duration_on_last_packet() {
 }
 
 int64_t
-generic_packetizer_c::handle_avi_audio_sync(int64_t num_bytes,
-                                            bool vbr) {
-  if ((0 == m_ti.m_avi_samples_per_sec) || (0 == m_ti.m_avi_block_align) || (0 == m_ti.m_avi_avg_bytes_per_sec) || !m_ti.m_avi_audio_sync_enabled) {
-    enable_avi_audio_sync(false);
+generic_packetizer_c::calculate_avi_audio_sync(int64_t num_bytes,
+                                               int64_t samples_per_packet,
+                                               int64_t packet_duration) {
+  if (!m_ti.m_avi_audio_sync_enabled)
     return -1;
-  }
 
-  int64_t duration;
-  if (!vbr)
-     duration = num_bytes * 1000000000 / m_ti.m_avi_avg_bytes_per_sec;
-
-  else {
-    unsigned int num_blocks = 0;
-    size_t i;
-    for (i = 0; (m_ti.m_avi_block_sizes.size() > i) && (0 < num_bytes); ++i) {
-      int64_t block_size  = m_ti.m_avi_block_sizes[i];
-      num_blocks         += (block_size + m_ti.m_avi_block_align - 1) / m_ti.m_avi_block_align;
-      num_bytes          -= std::min(num_bytes, block_size);
-    }
-
-    duration = static_cast<int64_t>(num_blocks * 1000000000ll * static_cast<double>(m_ti.m_avi_samples_per_chunk) / static_cast<double>(m_ti.m_avi_sample_scale));
-  }
-
-  enable_avi_audio_sync(false);
-
-  return duration;
+  return ((num_bytes + samples_per_packet - 1) / samples_per_packet) * packet_duration;
 }
 
 void

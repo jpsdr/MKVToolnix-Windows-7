@@ -192,11 +192,6 @@ public:
   // cannot be identified unambiguously (*cough* OGM *cough*).
   std::string m_chapter_charset, m_chapter_language;
 
-  // The following variables are needed for the broken way of
-  // syncing audio in AVIs: by prepending it with trash. Thanks to
-  // the nandub author for this really, really sucky implementation.
-  uint16_t m_avi_block_align, m_avi_samples_per_sec, m_avi_avg_bytes_per_sec, m_avi_samples_per_chunk,  m_avi_sample_scale;
-  std::vector<int64_t> m_avi_block_sizes;
   bool m_avi_audio_sync_enabled;
 
 public:

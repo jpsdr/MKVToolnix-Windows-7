@@ -40,7 +40,6 @@ mp3_packetizer_c::mp3_packetizer_c(generic_reader_c *p_reader,
 {
   set_track_type(track_audio);
   set_track_default_duration(m_packet_duration);
-  enable_avi_audio_sync(true);
 }
 
 mp3_packetizer_c::~mp3_packetizer_c() {
@@ -51,8 +50,9 @@ mp3_packetizer_c::handle_garbage(int64_t bytes) {
   bool warning_printed = false;
 
   if (m_first_packet) {
-    int64_t offset = handle_avi_audio_sync(bytes, !(m_ti.m_avi_block_align % 384) || !(m_ti.m_avi_block_align % 576));
-    if (-1 != offset) {
+    auto offset = calculate_avi_audio_sync(bytes, m_samples_per_frame, m_packet_duration);
+
+    if (0 < offset) {
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format(Y("This MPEG audio track contains %1% bytes of non-MP3 data at the beginning. "
                                  "This corresponds to a delay of %2%ms. This delay will be used instead of the garbage data.\n")) % bytes % (offset / 1000000));
@@ -109,6 +109,13 @@ mp3_packetizer_c::get_mp3_packet(mp3_header_t *mp3header) {
 
     // Great, we have found five consecutive identical headers. Be happy
     // with those!
+    decode_mp3_header(m_byte_buffer.get_buffer() + pos, mp3header);
+
+    set_audio_channels(mp3header->channels);
+    set_audio_sampling_freq(mp3header->sampling_frequency);
+
+    m_samples_per_sec      = mp3header->sampling_frequency;
+    track_headers_changed  = true;
     m_valid_headers_found  = true;
     m_bytes_skipped       += pos;
     if (0 < m_bytes_skipped)
@@ -117,12 +124,6 @@ mp3_packetizer_c::get_mp3_packet(mp3_header_t *mp3header) {
 
     pos             = 0;
     m_bytes_skipped = 0;
-    decode_mp3_header(m_byte_buffer.get_buffer(), mp3header);
-
-    set_audio_channels(mp3header->channels);
-    set_audio_sampling_freq(mp3header->sampling_frequency);
-    m_samples_per_sec     = mp3header->sampling_frequency;
-    track_headers_changed = true;
   }
 
   m_bytes_skipped += pos;

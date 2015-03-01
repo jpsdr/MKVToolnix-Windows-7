@@ -43,7 +43,6 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
 
   set_track_type(track_audio);
   set_track_default_duration(m_packet_duration);
-  enable_avi_audio_sync(!framed);
 }
 
 ac3_packetizer_c::~ac3_packetizer_c() {
@@ -63,9 +62,9 @@ ac3_packetizer_c::get_frame() {
 
   bool warning_printed = false;
   if (m_first_packet) {
-    int64_t offset = handle_avi_audio_sync(frame.m_garbage_size, false);
+    auto offset = calculate_avi_audio_sync(frame.m_garbage_size, m_samples_per_packet, m_packet_duration);
 
-    if (-1 != offset) {
+    if (0 < offset) {
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format(Y("This AC3 track contains %1% bytes of non-AC3 data at the beginning. "
                                  "This corresponds to a delay of %2%ms. "

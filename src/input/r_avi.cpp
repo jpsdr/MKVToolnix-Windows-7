@@ -457,11 +457,6 @@ avi_reader_c::add_audio_demuxer(int aid) {
   demuxer.m_bits_per_sample        = AVI_audio_bits(m_avi);
 
   m_ti.m_id                        = aid + 1;       // ID for this audio track.
-  m_ti.m_avi_block_align           = get_uint16_le(&wfe->n_block_align);
-  m_ti.m_avi_avg_bytes_per_sec     = get_uint32_le(&wfe->n_avg_bytes_per_sec);
-  m_ti.m_avi_samples_per_chunk     = get_uint32_le(&m_avi->stream_headers[aid].dw_scale);
-  m_ti.m_avi_sample_scale          = get_uint32_le(&m_avi->stream_headers[aid].dw_rate);
-  m_ti.m_avi_samples_per_sec       = demuxer.m_samples_per_second;
 
   if ((0xfffe == audio_format) && (get_uint16_le(&wfe->cb_size) >= (sizeof(alWAVEFORMATEXTENSION)))) {
     alWAVEFORMATEXTENSIBLE *ext = reinterpret_cast<alWAVEFORMATEXTENSIBLE *>(wfe);
@@ -495,6 +490,8 @@ avi_reader_c::add_audio_demuxer(int aid) {
 
   else
     mxerror_tid(m_ti.m_fname, aid + 1, boost::format(Y("Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n")) % audio_format);
+
+  packetizer->enable_avi_audio_sync(true);
 
   show_packetizer_info(aid + 1, packetizer);
 
@@ -777,7 +774,6 @@ avi_reader_c::read_audio(avi_demuxer_t &demuxer) {
     if (0 >= size)
       continue;
 
-    PTZR(demuxer.m_ptzr)->add_avi_block_size(size);
     PTZR(demuxer.m_ptzr)->process(new packet_t(chunk));
 
     m_bytes_processed += size;

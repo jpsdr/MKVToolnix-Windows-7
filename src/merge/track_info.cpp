@@ -38,11 +38,6 @@ track_info_c::track_info_c()
   , m_nalu_size_length{}
   , m_no_chapters{}
   , m_no_global_tags{}
-  , m_avi_block_align{}
-  , m_avi_samples_per_sec{}
-  , m_avi_avg_bytes_per_sec{}
-  , m_avi_samples_per_chunk{}
-  , m_avi_sample_scale{}
   , m_avi_audio_sync_enabled{}
 {
 }
@@ -131,14 +126,7 @@ track_info_c::operator =(const track_info_c &src) {
   m_chapter_charset            = src.m_chapter_charset;
   m_chapter_language           = src.m_chapter_language;
 
-  m_avi_block_align            = src.m_avi_block_align;
-  m_avi_samples_per_sec        = src.m_avi_samples_per_sec;
-  m_avi_avg_bytes_per_sec      = src.m_avi_avg_bytes_per_sec;
-  m_avi_samples_per_chunk      = src.m_avi_samples_per_chunk;
-  m_avi_sample_scale           = src.m_avi_sample_scale;
-  m_avi_block_sizes.clear();
   m_avi_audio_sync_enabled     = false;
-
   m_default_durations          = src.m_default_durations;
   m_max_blockadd_ids           = src.m_max_blockadd_ids;
 

@@ -233,12 +233,7 @@ public:
   virtual void enable_avi_audio_sync(bool enable) {
     m_ti.m_avi_audio_sync_enabled = enable;
   }
-  virtual int64_t handle_avi_audio_sync(int64_t num_bytes, bool vbr);
-  virtual void add_avi_block_size(int64_t block_size) {
-    if (m_ti.m_avi_audio_sync_enabled)
-      m_ti.m_avi_block_sizes.push_back(block_size);
-  }
-
+  virtual int64_t calculate_avi_audio_sync(int64_t num_bytes, int64_t samples_per_packet, int64_t packet_duration);
   virtual void set_displacement_maybe(int64_t displacement);
 
   virtual void apply_factory();
