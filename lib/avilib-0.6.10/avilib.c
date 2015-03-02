@@ -415,7 +415,7 @@ static int avi_add_odml_index_entry(avi_t *AVI, unsigned char *tag, long flags, 
              AVI->video_superindex->nEntriesInUse++;
 	    cur_std_idx = AVI->video_superindex->nEntriesInUse-1;
 
-	    if (avi_add_std_index (AVI, "ix00", "00db", AVI->video_superindex->stdindex[ cur_std_idx ]) < 0) 
+      if (avi_add_std_index (AVI, "ix00", "00dc", AVI->video_superindex->stdindex[ cur_std_idx ]) < 0)
 		return -1;
 	} // init
 
@@ -482,7 +482,7 @@ static int avi_add_odml_index_entry(avi_t *AVI, unsigned char *tag, long flags, 
 	    return -1;
 	}
 
-	if (avi_add_std_index (AVI, "ix00", "00db", AVI->video_superindex->stdindex[ cur_std_idx ]) < 0) 
+  if (avi_add_std_index (AVI, "ix00", "00dc", AVI->video_superindex->stdindex[ cur_std_idx ]) < 0)
 	    return -1;
 
 	for (audtr = 0; audtr < AVI->anum; audtr++) {
@@ -1761,8 +1761,8 @@ static int avi_write_data(avi_t *AVI, char *data, unsigned long length, int audi
      if (!AVI->is_opendml) n = avi_add_index_entry(AVI,astr,0x10,AVI->pos,length);
      n += avi_add_odml_index_entry(AVI,astr,0x10,AVI->pos,length);
    } else {
-     if (!AVI->is_opendml) n = avi_add_index_entry(AVI,(unsigned char *)"00db",((keyframe)?0x10:0x0),AVI->pos,length);
-     n += avi_add_odml_index_entry(AVI,(unsigned char *)"00db",((keyframe)?0x10:0x0),AVI->pos,length);
+     if (!AVI->is_opendml) n = avi_add_index_entry(AVI,(unsigned char *)"00dc",((keyframe)?0x10:0x0),AVI->pos,length);
+     n += avi_add_odml_index_entry(AVI,(unsigned char *)"00dc",((keyframe)?0x10:0x0),AVI->pos,length);
    }
    
    if(n) return -1;
@@ -1772,7 +1772,7 @@ static int avi_write_data(avi_t *AVI, char *data, unsigned long length, int audi
    if(audio)
      n = avi_add_chunk(AVI,(unsigned char *)astr,data,length);
    else
-     n = avi_add_chunk(AVI,(unsigned char *)"00db",data,length);
+     n = avi_add_chunk(AVI,(unsigned char *)"00dc",data,length);
    
    if (n) return -1;
    
@@ -1800,7 +1800,7 @@ int AVI_dup_frame(avi_t *AVI)
    if(AVI->mode==AVI_MODE_READ) { AVI_errno = AVI_ERR_NOT_PERM; return -1; }
 
    if(AVI->last_pos==0) return 0; /* No previous real frame */
-   if(avi_add_index_entry(AVI,(unsigned char *)"00db",0x10,AVI->last_pos,AVI->last_len)) return -1;
+   if(avi_add_index_entry(AVI,(unsigned char *)"00dc",0x10,AVI->last_pos,AVI->last_len)) return -1;
    AVI->video_frames++;
    AVI->must_use_index = 1;
    return 0;
