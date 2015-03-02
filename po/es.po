@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Israel Lucas Torrijos <lukillas.ole@gmail.com>\n"
 "POT-Creation-Date: 2010-06-08 10:00+0200\n"
-"PO-Revision-Date: 2015-01-25 22:36+0100\n"
+"PO-Revision-Date: 2015-03-01 21:32+0100\n"
 "Last-Translator: Israel lucas Torrijos aka Overdrive80 <lukillas.ole@gmail."
 "com>\n"
 "Language-Team: Spanish <moritz@bunkus.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.7.1\n"
+"X-Generator: Poedit 1.7.4\n"
 
 #: src/extract/xtr_tta.cpp:107
 #, boost-format
@@ -427,16 +427,16 @@ msgstr ""
 "                           procesamiento de mkvmerge.\n"
 
 #: src/merge/mkvmerge.cpp:224
-#, fuzzy
 msgid ""
 "  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
 msgstr ""
-"  --sub-charset <TID:charset>\n"
-"                           Determina la codificación de caracteres del\n"
-"                           texto de los subtítulos que son\n"
-"                           leídos para la conversión a UTF-8.\n"
+"  --reduce-to-core <TID>   Únicamente conserva el core de la pistas de "
+"audio\n"
+"                           que soporten extensiones HD en vez de copiar "
+"ambos,\n"
+"                           el core y las extensiones.\n"
 
 #: src/merge/mkvmerge.cpp:100
 msgid ""
@@ -3370,9 +3370,8 @@ msgid "Cue duration: %1%"
 msgstr "Duración del cue: %1%"
 
 #: src/extract/extract_cli_parser.cpp:120
-#, fuzzy
 msgid "Cue extraction"
-msgstr "Extracción del capítulo"
+msgstr "Extracción del índice (cue)"
 
 #: src/mmg/tabs/global.cpp:355
 msgid "Cue name format:"
@@ -3722,6 +3721,8 @@ msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core. This only works with DTS tracks."
 msgstr ""
+"Elimina las extensiones lossless de una pista de audio y conserva sólo su "
+"core lossy. Esto sólo funciona con pistas DTS."
 
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:96
 msgid "Duration"
@@ -4460,6 +4461,10 @@ msgid ""
 "presence and offsets all of the track's timecodes by it. This option "
 "prevents that behavior."
 msgstr ""
+"La basura al comienzo de las pistas de audio en archivos AVI, se usa "
+"normalmente para retrasar esa pista. Generalmente, mkvmerge calcula el "
+"retraso implicado y lo compensa en los timecodes de la pista. Esta opción "
+"evita ese comportamiento."
 
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
@@ -4489,7 +4494,7 @@ msgstr "&Encabezados"
 
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
-msgstr ""
+msgstr "HDMV PGS"
 
 #: src/input/r_hevc.h:31 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
@@ -6014,9 +6019,8 @@ msgstr ""
 "encontrados, para dividir.\n"
 
 #: src/extract/cues.cpp:116
-#, fuzzy
 msgid "No cues were found.\n"
-msgstr "No se encontró ningún número de la versión.\n"
+msgstr "No se encontraron índices (cues).\n"
 
 #: src/mmg/header_editor/frame.cpp:517
 msgid "No fields modified"
@@ -6885,7 +6889,7 @@ msgstr "Redirige todos los mensajes de ese archivo."
 
 #: src/mmg/tabs/input_format.cpp:275
 msgid "Reduce to audio core"
-msgstr ""
+msgstr "Reducir al core del audio"
 
 #: src/info/mkvinfo.cpp:198
 #, boost-format
@@ -8250,11 +8254,9 @@ msgid "The cue entries (the index) are being written...\n"
 msgstr "Las entradas del cue (el índice) están siendo escritas...\n"
 
 #: src/extract/cues.cpp:58
-#, fuzzy, boost-format
+#, boost-format
 msgid "The cues for track %1% are written to '%2%'.\n"
-msgstr ""
-"Las hojas de distribución de pistas (CUE Sheet) para la pista %1% serán "
-"escritas a '%2%'.\n"
+msgstr "Los índices (cues) para la pista %1% serán escritas a '%2%'.\n"
 
 #: src/mmg/tabs/input.cpp:818
 #, c-format, boost-format
@@ -8523,9 +8525,9 @@ msgstr ""
 "para analizar sus encabezados."
 
 #: src/extract/cues.cpp:49
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file does not contain track ID %1%.\n"
-msgstr "El archivo de entrada '%s' no contiene ninguna pista."
+msgstr "El archivo no contiene ninguna pista ID %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:412
 msgid "The file does not exist."
@@ -9421,7 +9423,7 @@ msgstr "Theora"
 #: src/extract/cues.cpp:53
 #, boost-format
 msgid "There are no cues for track ID %1%.\n"
-msgstr ""
+msgstr "No hay índices (cues) para la pista ID %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:1827
 msgid "There is a new version available online."
@@ -9687,10 +9689,11 @@ msgstr ""
 "generada."
 
 #: src/extract/extract_cli_parser.cpp:121
-#, fuzzy
 msgid ""
 "This mode extracts cue information for some tracks to external text files."
-msgstr "El primer modo extrae algunas pistas a archivos externos."
+msgstr ""
+"Este modo extrae de algunas pistas la información del índice (cue) a "
+"archivos externos de texto."
 
 #: src/mmg/tabs/global.cpp:282
 msgid ""
@@ -11110,15 +11113,12 @@ msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <archivo> [opciones]"
 
 #: src/extract/extract_cli_parser.cpp:125
-#, fuzzy
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
-msgstr "mkvextract timecodes_v2 \"película.mkv\" 1:timecodes_pista1.txt"
+msgstr "mkvextract cues \"película.mkv\" 0:cues_pista0.txt"
 
 #: src/extract/extract_cli_parser.cpp:51
-#, fuzzy
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr ""
-"mkvextract tracks <archivo> [opciones] [TID1:salida1 [TID2:salida2 ...]]"
+msgstr "mkvextract cues <archivo> [opciones] [TID1:salida1 [TID2:salida2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:110
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
@@ -11629,7 +11629,6 @@ msgid "timecodes"
 msgstr "códigos de tiempo"
 
 #: src/mmg/tabs/input.cpp:203
-#, fuzzy
 msgid "toggle all"
 msgstr "Habilitar todo"
 
@@ -11651,9 +11650,8 @@ msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: tamaño_etiqueta < 0 en el c'tor. %1%\n"
 
 #: src/input/r_avi.cpp:872
-#, fuzzy
 msgid "uncompressed"
-msgstr "compresión"
+msgstr "descomprimido"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"
