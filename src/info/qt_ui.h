@@ -55,6 +55,9 @@ public:
   void expand_all_elements(QTreeWidgetItem *item, bool expand);
 
   void parse_file(const QString &file_name);
+
+  virtual void dragEnterEvent(QDragEnterEvent *event);
+  virtual void dropEvent(QDropEvent *event);
 };
 
 #endif  // MTX_QT_UI_H

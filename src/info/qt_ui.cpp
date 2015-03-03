@@ -27,6 +27,7 @@
 #include "info/mkvinfo.h"
 
 #include <QMessageBox>
+#include <QMimeData>
 #include <QMouseEvent>
 #include <QFileDialog>
 
@@ -61,6 +62,8 @@ main_window_c::main_window_c():
 
   root = new QTreeWidgetItem(tree);
   root->setText(0, QY("no file loaded"));
+
+  setAcceptDrops(true);
 }
 
 void
@@ -233,6 +236,31 @@ main_window_c::show_progress(int percentage,
     last_percent = percentage;
     QCoreApplication::processEvents();
   }
+}
+
+void
+main_window_c::dragEnterEvent(QDragEnterEvent *event) {
+  if (!event->mimeData()->hasUrls())
+    return;
+
+  for (auto const &url : event->mimeData()->urls())
+    if (url.isLocalFile()) {
+      event->acceptProposedAction();
+      return;
+    }
+}
+
+void
+main_window_c::dropEvent(QDropEvent *event) {
+  if (!event->mimeData()->hasUrls())
+    return;
+
+  for (auto const &url : event->mimeData()->urls())
+    if (url.isLocalFile()) {
+      parse_file(url.toLocalFile());
+      event->acceptProposedAction();
+      return;
+    }
 }
 
 static main_window_c *gui;
