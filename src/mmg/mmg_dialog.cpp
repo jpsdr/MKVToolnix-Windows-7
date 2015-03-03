@@ -158,7 +158,7 @@ mmg_dialog::mmg_dialog()
   bs_main->Add(bs_buttons, 0, wxALIGN_CENTER_HORIZONTAL);
 
 #ifdef SYS_WINDOWS
-  auto size = wxSize{850, 680};
+  auto size = wxSize{700, 680};
   wxLogMessage(wxT("dpi is %u/%u"), static_cast<unsigned int>(ms_dpi_x), static_cast<unsigned int>(ms_dpi_y));
   if (is_higher_dpi()) {
     size.SetWidth( size.GetWidth()  + scale_with_dpi((840 - 700) / 1.5, true));
@@ -166,7 +166,7 @@ mmg_dialog::mmg_dialog()
   }
 
 #else
-  auto size = wxSize{850, 660};
+  auto size = wxSize{700, 660};
 #endif
 
   m_geometry_saver.set_default_size(size.GetWidth(), size.GetHeight(), true).restore();
