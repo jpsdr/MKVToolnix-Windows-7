@@ -16,6 +16,7 @@
 #include "common/codec.h"
 #include "common/error.h"
 #include "common/hacks.h"
+#include "common/id3.h"
 #include "common/mm_io_x.h"
 #include "input/r_mp3.h"
 #include "merge/input_x.h"
@@ -29,8 +30,15 @@ mp3_reader_c::probe_file(mm_io_c *in,
                          int64_t probe_range,
                          int num_headers,
                          bool require_zero_offset) {
-  int offset = find_valid_headers(*in, probe_range, num_headers);
-  return (require_zero_offset && (0 == offset)) || (!require_zero_offset && (0 <= offset));
+  try {
+    skip_id3v2_tag(*in);
+
+    auto offset = find_valid_headers(*in, probe_range, num_headers);
+    return (require_zero_offset && (0 == offset)) || (!require_zero_offset && (0 <= offset));
+
+  } catch (...) {
+    return 0;
+  }
 }
 
 mp3_reader_c::mp3_reader_c(const track_info_c &ti,
@@ -43,16 +51,26 @@ mp3_reader_c::mp3_reader_c(const track_info_c &ti,
 void
 mp3_reader_c::read_headers() {
   try {
-    int pos = find_valid_headers(*m_in, 2 * 1024 * 1024, 5);
+    auto tag_size_start = skip_id3v2_tag(*m_in);
+    auto tag_size_end   = id3_tag_present_at_end(*m_in);
+
+    if (0 > tag_size_start)
+      tag_size_start = 0;
+    if (0 < tag_size_end)
+      m_size -= tag_size_end;
+
+    auto init_read_len = std::min(m_size - tag_size_start, static_cast<uint64_t>(CHUNK_SIZE));
+
+    int pos = find_valid_headers(*m_in, init_read_len, 5);
     if (0 > pos)
       throw mtx::input::header_parsing_x();
 
-    m_in->setFilePointer(pos, seek_beginning);
+    m_in->setFilePointer(tag_size_start + pos, seek_beginning);
     m_in->read(m_chunk->get_buffer(), 4);
 
     decode_mp3_header(m_chunk->get_buffer(), &m_mp3header);
 
-    m_in->setFilePointer(pos, seek_beginning);
+    m_in->setFilePointer(tag_size_start + pos, seek_beginning);
 
     show_demuxer_info();
 
@@ -103,11 +121,28 @@ mp3_reader_c::find_valid_headers(mm_io_c &io,
                                  int num_headers) {
   try {
     io.setFilePointer(0, seek_beginning);
+    skip_id3v2_tag(io);
+
     memory_cptr buf = memory_c::alloc(probe_range);
     int nread       = io.read(buf->get_buffer(), probe_range);
+
+    // auto header = mp3_header_t{};
+    // auto idx    = find_mp3_header(buf->get_buffer(), std::min(nread, 32));
+
+    // if ((0 == idx) && decode_mp3_header(&buf->get_buffer()[idx], &header) && header.is_tag) {
+    //   probe_range += header.framesize;
+    //   buf->resize(probe_range);
+
+    //   io.setFilePointer(0, seek_beginning);
+    //   nread = io.read(buf->get_buffer(), probe_range);
+    // }
+
     io.setFilePointer(0, seek_beginning);
 
     return find_consecutive_mp3_headers(buf->get_buffer(), nread, num_headers);
+    // auto result = find_consecutive_mp3_headers(buf->get_buffer(), nread, num_headers);
+    // return -1 == result ? -1 : result + idx;
+
   } catch (...) {
     return -1;
   }
