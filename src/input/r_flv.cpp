@@ -250,8 +250,8 @@ flv_reader_c::probe_file(mm_io_c *io,
 flv_reader_c::flv_reader_c(track_info_c const &ti,
                            mm_io_cptr const &in)
   : generic_reader_c{ti, in}
-  , m_audio_track_idx{0}
-  , m_video_track_idx{0}
+  , m_audio_track_idx{-1}
+  , m_video_track_idx{-1}
   , m_selected_track_idx{-1}
   , m_file_done{false}
   , m_debug{"flv|flv_full"}
