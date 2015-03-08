@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "POT-Creation-Date: 2010-06-08 10:00+0200\n"
-"PO-Revision-Date: 2014-11-05 08:45+0100\n"
+"PO-Revision-Date: 2015-03-07 19:29+0100\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
 "Language: eu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.8\n"
+"X-Generator: Poedit 1.6.11\n"
 
 #: src/extract/xtr_tta.cpp:107
 #, boost-format
@@ -399,15 +399,14 @@ msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <lehentasuna> Ezarri mkvmergeren ekintza lehetasuna.\n"
 
 #: src/merge/mkvmerge.cpp:224
-#, fuzzy
 msgid ""
 "  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
 msgstr ""
-"  --sub-charset <TID:charset>\n"
-"                           UTF-8 bihurketarako irakurriak diren\n"
-"                           azpidatzi idazkien hizkikodea zehazten du.\n"
+"  --reduce-to-core <TID>   HD hedapenak sostengatzen dituzten audio bide\n"
+"                           nukleoei bakarrik heusten die biak nukleoa\n"
+"                           eta hedapenak kopiatu ordez.\n"
 
 #: src/merge/mkvmerge.cpp:100
 msgid ""
@@ -983,13 +982,13 @@ msgstr ""
 #: src/common/kax_file.cpp:56 src/common/kax_file.cpp:61
 #, boost-format
 msgid "%1%: an exception occurred (message: %2%; type: %3%)."
-msgstr ""
+msgstr "%1%: salbuespen bat gertatu da (mezua: %2%; mota: %3%)."
 
 #: src/common/kax_file.cpp:66 src/input/r_matroska.cpp:1244
 #: src/input/r_matroska.cpp:1922
 #, boost-format
 msgid "%1%: an unknown exception occurred."
-msgstr ""
+msgstr "%1%: salbuespen ezezagun bat gertatu da."
 
 #: src/merge/mkvmerge.cpp:638
 #, boost-format
@@ -2312,7 +2311,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:2544
 msgid "An exception occurred when writing the output file."
-msgstr ""
+msgstr "Salbuespen bat gertatu da irteera agiria idazterakoan."
 
 #: src/mmg/header_editor/frame.cpp:679 src/mmg/tabs/chapters.cpp:1860
 #: src/propedit/propedit.cpp:44
@@ -3141,7 +3140,7 @@ msgid ""
 "Some strings will not be converted to UTF-8 and the resulting Matroska file "
 "might not comply with the Matroska specs (error: %2%, %3%).\n"
 msgstr ""
-"Ezin izan da abiarazi iconv liburutegia %1%-tik UTF-8-ra bihurketarako. Kate "
+"Ezin izan da abiarazi iconv liburutegia %1%-tik UFT-8-ra bihurketarako. Kate "
 "batzuk ez dira bihurtuko UTF-8-ra eta badaiteke emaitz Matroska agiriak ez "
 "betetzea Matroska bereizitasunak (akatsa: %2%, %3%).\n"
 
@@ -3152,9 +3151,9 @@ msgid ""
 "Some strings cannot be converted from UTF-8 and might be displayed "
 "incorrectly (error: %2%, %3%).\n"
 msgstr ""
-"Ezin izan da abiarazi iconv liburutegia %1%-tik UTF-8-ra bihurketarako. Kate "
-"batzuk ez dira bihurtuko UTF-8-ra eta badaiteke oker erakustea (akatsa: %2%, "
-"%3%).\n"
+"Ezin izan da abiarazi iconv liburutegia UFT-8-tik %1%-ra bihurketarako. Kate "
+"batzuk ez dira UTF-8-tik bihurtuko eta badaiteke oker erakustea (akatsa: "
+"%2%, %3%).\n"
 
 #: src/common/chapters/chapters.cpp:294 src/common/chapters/chapters.cpp:296
 #, boost-format
@@ -3218,7 +3217,6 @@ msgid "Create WebM compliant file"
 msgstr "Sortu WebM agiri bateragarria"
 
 #: src/mmg/tabs/global.cpp:370
-#, fuzzy
 msgid ""
 "Create a WebM compliant file. mkvmerge also turns this on if the output file "
 "name's extension is \"webm\". This mode enforces several restrictions. The "
@@ -3228,9 +3226,9 @@ msgid ""
 msgstr ""
 "Sortu WebM bateragarritasun agiri bat. mkvmergek ere eragiten du hau irteera "
 "agiri izenaren hedapena \"webm\" bada. Modu honek murrizpen ugari behartzen "
-"ditu. Ahalbideturiko kodek bakarrak VP8 bideoa eta Vorbis audio bideak dira. "
-"Atalak eta etiketak ez daude ahalbideturik. DocType idazburu gaia \"webm\"-"
-"ra aldatzen da."
+"ditu. Ahalbideturiko kodek bakarrak VP8/VP9 bideoa eta Vorbis/Opus audio "
+"bideak dira. Atalak eta etiketak ez daude ahalbideturik. DocType idazburu "
+"gaia \"webm\"-ra aldatzen da."
 
 #: src/mmg/mmg_dialog.cpp:303
 msgid "Create a new chapter file"
@@ -3274,9 +3272,8 @@ msgid "Cue duration: %1%"
 msgstr "Cue iraupena: %1%"
 
 #: src/extract/extract_cli_parser.cpp:120
-#, fuzzy
 msgid "Cue extraction"
-msgstr "Atal aterapena"
+msgstr "Cue aterapena"
 
 #: src/mmg/tabs/global.cpp:355
 msgid "Cue name format:"
@@ -3385,9 +3382,8 @@ msgid "Current version:"
 msgstr "Oraingo bertsioa:"
 
 #: src/mmg/mmg_dialog.cpp:1826
-#, fuzzy
 msgid "Currently no newer version is available online."
-msgstr "Bertsio berri bat dago eskuragarri online."
+msgstr "Ez dago bertsio berriagorik eskuragarri online."
 
 #: src/mmg/jobs.cpp:513
 msgid "D&elete"
@@ -3619,6 +3615,8 @@ msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core. This only works with DTS tracks."
 msgstr ""
+"Eror galeragabeko hedapenak audio bide batetik eta heutsi beren galeradun "
+"nukleoak bakarrik. Honek DTS bideekin bakarrik egiten du lan."
 
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:96
 msgid "Duration"
@@ -3892,7 +3890,7 @@ msgstr "Adibidea"
 
 #: src/merge/mkvmerge.cpp:2544
 msgid "Exception details:"
-msgstr ""
+msgstr "Salbuespen xehetasunak:"
 
 #: src/mmg/options/mkvmerge.cpp:99
 #, c-format, boost-format
@@ -4273,12 +4271,10 @@ msgid "Format specific options"
 msgstr "Heuskarri aukera bereiziak"
 
 #: src/mpegparser/M2VParser.cpp:495
-#, fuzzy
 msgid ""
 "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr ""
-"B frame bat aurkitu da bigarren xehetasuna gabe itxi gabeko GOP batean. "
-"Zuzendu MPEG2 bideo jarioa hura multiplexatzen saiatu aurretik.\n"
+"B frame bat aurkitu da bigarren xehetasuna gabe itxi gabeko GOP batean.\n"
 
 #: src/mmg/tabs/input_format.cpp:240
 msgid "FourCC:"
@@ -4337,6 +4333,10 @@ msgid ""
 "presence and offsets all of the track's timecodes by it. This option "
 "prevents that behavior."
 msgstr ""
+"Audio bideen hasierako zakarrak AVI agirietan arrunt bide hori atzeratzeko "
+"erabiltzen dira. mkvmerge-k arrunt atzerapena beren egotearen arabera "
+"kalkulatzen du eta bide guztien denbora-kodeak horretara orekatzen ditu. "
+"Aukera honek jokabide hori saihesten du."
 
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
@@ -4366,7 +4366,7 @@ msgstr "&Idazburuak"
 
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
-msgstr ""
+msgstr "HDMV PGS"
 
 #: src/input/r_hevc.h:31 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
@@ -5224,9 +5224,9 @@ msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "Bide ID/agiri izen baliogabea adierazi da '%1%' argumentoan.\n"
 
 #: src/merge/generic_reader.cpp:109
-#, fuzzy, boost-format
+#, boost-format
 msgid "Invalid track type %1%."
-msgstr "Bide ID baliogabea hemen: '%1% %2%'.\n"
+msgstr "Bide mota baliogabea %1%."
 
 #: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
@@ -5843,9 +5843,8 @@ msgstr ""
 "Ez da banantzeko atalik aurkitu iturburu agirietan edo atal agirietan.\n"
 
 #: src/extract/cues.cpp:116
-#, fuzzy
 msgid "No cues were found.\n"
-msgstr "Ez da bertsio zenbakirik aurkitu.\n"
+msgstr "Ez da cue-rik aurkitu.\n"
 
 #: src/mmg/header_editor/frame.cpp:517
 msgid "No fields modified"
@@ -6499,12 +6498,12 @@ msgstr ""
 "dekodeatzaile itxurapenik. Bide honi jauzi egiten.\n"
 
 #: src/input/r_qtmp4.cpp:2802
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder "
 "config. Skipping this track.\n"
 msgstr ""
-"Quicktime/MP4 irakurgailua: MPEG4 part 10/AVC %1% bideak ez du dekodeatzaile "
+"Quicktime/MP4 irakurgailua: MPEG4 part 2/HEVC %1% bideak ez du dekodeatzaile "
 "itxurapenik. Bide honi jauzi egiten.\n"
 
 #: src/input/r_qtmp4.cpp:523
@@ -6690,7 +6689,7 @@ msgstr "Mezu guztiak agiri honetara birzuzentzen ditu."
 
 #: src/mmg/tabs/input_format.cpp:275
 msgid "Reduce to audio core"
-msgstr ""
+msgstr "Murriztu audio nukleora"
 
 #: src/info/mkvinfo.cpp:198
 #, boost-format
@@ -8013,9 +8012,9 @@ msgid "The cue entries (the index) are being written...\n"
 msgstr "Cue sarrerak (aurkibidea) idazten ari dira...\n"
 
 #: src/extract/cues.cpp:58
-#, fuzzy, boost-format
+#, boost-format
 msgid "The cues for track %1% are written to '%2%'.\n"
-msgstr "%1% bidearentzako CUE orriak '%2%'-ra idatziko dira.\n"
+msgstr "%1% bidearentzako cue-ak idazten dira hemen '%2%'.\n"
 
 #: src/mmg/tabs/input.cpp:818
 #, c-format, boost-format
@@ -8121,7 +8120,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:2544
 msgid "The drive may be full."
-msgstr ""
+msgstr "Gidagailua beteta egon daiteke."
 
 #: src/mmg/tabs/global.cpp:213
 msgid ""
@@ -8270,9 +8269,9 @@ msgstr ""
 "aztertzeko."
 
 #: src/extract/cues.cpp:49
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file does not contain track ID %1%.\n"
-msgstr "'%s' sarrera agiriak ez dut biderik."
+msgstr "Agiriak ez du bide ID %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:412
 msgid "The file does not exist."
@@ -8377,9 +8376,8 @@ msgstr "Agiria edo zuzenbidea ez da aurkitu"
 #: src/common/kax_file.cpp:57 src/common/kax_file.cpp:62
 #: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1245
 #: src/input/r_matroska.cpp:1923
-#, fuzzy
 msgid "The file will not be processed further."
-msgstr "Agiria ezin da idazteko ireki."
+msgstr "Agiria ez da gehiago prozesatuko."
 
 #: src/mmg/header_editor/frame.cpp:248
 msgid "The file you tried to open is not a Matroska file."
@@ -9141,7 +9139,7 @@ msgstr "Theora"
 #: src/extract/cues.cpp:53
 #, boost-format
 msgid "There are no cues for track ID %1%.\n"
-msgstr ""
+msgstr "Ez dago cue-ri ID %1% biderako.\n"
 
 #: src/mmg/mmg_dialog.cpp:1827
 msgid "There is a new version available online."
@@ -9394,10 +9392,11 @@ msgid "This mode considers only the first video track that is output."
 msgstr "Modu honek irteerako lehen bideo bidea bakarrik hartzen du kontuan."
 
 #: src/extract/extract_cli_parser.cpp:121
-#, fuzzy
 msgid ""
 "This mode extracts cue information for some tracks to external text files."
-msgstr "Lehen moduak bide batzuk kanpoko agirietara ateratzen ditu."
+msgstr ""
+"Modu honek zenbait bideren cue argibideak ateratzen ditu kanpoko idazki "
+"agirietara."
 
 #: src/mmg/tabs/global.cpp:282
 msgid ""
@@ -9485,7 +9484,7 @@ msgstr "Bide hau ez da bateragarria WebM moduarekin eta ezin da gaitu."
 #: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1245
 #: src/input/r_matroska.cpp:1923
 msgid "This usually indicates a damaged file structure."
-msgstr ""
+msgstr "Honek arrunt agiri egitura hondatua adierazten du."
 
 #: src/info/mkvinfo.cpp:1255
 msgid "Time slice"
@@ -10798,15 +10797,13 @@ msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <agiria> [aukerak]"
 
 #: src/extract/extract_cli_parser.cpp:125
-#, fuzzy
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
-msgstr "mkvextract timecodes_v2 \"filma.mkv\" 1:timecodes_bidea1.txt"
+msgstr "mkvextract cue-ak \"filma.mkv\" 0:cues_bidea0.txt"
 
 #: src/extract/extract_cli_parser.cpp:51
-#, fuzzy
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr ""
-"mkvextract tracks <agiria> [aukera] [TID1:irteera1 [TID2:irteera2 ...]]"
+"mkvextract cues <sarrera-izena> [aukerak] [TID1:irteera1 [TID2:irteera2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:110
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
@@ -11313,9 +11310,8 @@ msgid "timecodes"
 msgstr "denbora-kodeak"
 
 #: src/mmg/tabs/input.cpp:203
-#, fuzzy
 msgid "toggle all"
-msgstr "gaitu denak"
+msgstr "aldatu denak"
 
 #: src/common/stereo_mode.cpp:51
 msgid "top bottom (left first)"
@@ -11335,9 +11331,8 @@ msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader: neurria_etiketa < 0 c'tor. %1%\n"
 
 #: src/input/r_avi.cpp:872
-#, fuzzy
 msgid "uncompressed"
-msgstr "konpresioa"
+msgstr "konprimitugabea"
 
 #: src/mmg/tabs/input_general.cpp:148
 msgid "und (Undetermined)"
@@ -11403,6 +11398,7 @@ msgstr "Bai"
 #~ msgid "  -v, --verbose            verbose status\n"
 #~ msgstr "  -v, --verbose            berritsukeria egoera\n"
 
+#, fuzzy
 #~ msgid ""
 #~ "%1.\n"
 #~ "Compiled with libebml %2 + libmatroska %3.\n"
@@ -11418,7 +11414,7 @@ msgstr "Bai"
 #~ "Programa hau GPL v2 baimenpean dago (ikusi COPYING).\n"
 #~ "Programatzailea: Moritz Bunkus <moritz@bunkus.org>.\n"
 #~ "Iturburuak eta azken binarioak betik daude eskuragarri hemen:\n"
-#~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+#~ "http://www.bunkus.org/videotools/mkvtoolnix/"
 
 #~ msgid "'--append-mode' lacks its argument.\n"
 #~ msgstr "'--append-mode' ez du argumentorik.\n"
@@ -11768,4 +11764,3 @@ msgstr "Bai"
 #, fuzzy
 #~ msgid "split by parts"
 #~ msgstr "...zatika:"
-
