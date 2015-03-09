@@ -280,24 +280,25 @@ flv_reader_c::read_headers() {
 
   mxdebug_if(m_debug, boost::format("Header dump: %1%\n") % header);
 
-  if (header.has_video())
-    m_video_track_idx = add_track('v');
-
-  if (header.has_audio())
-    m_audio_track_idx = add_track('a');
-
-  bool headers_read = false;
+  auto audio_track_valid = false;
+  auto video_track_valid = false;
 
   try {
-    while (!headers_read && !m_file_done && (m_in->getFilePointer() < FLV_DETECT_SIZE)) {
-      if (process_tag(true)) {
-        headers_read = true;
-        for (auto &track : m_tracks)
-          if (!track->is_valid()) {
-            headers_read = false;
-            break;
-          }
-      }
+    while (   !(audio_track_valid && video_track_valid)
+           && !m_file_done
+           && (m_in->getFilePointer() < FLV_DETECT_SIZE)) {
+
+      if (process_tag(true))
+        for (auto &track : m_tracks) {
+          if (!track->is_valid())
+            continue;
+
+          else if (track->is_audio())
+            audio_track_valid = true;
+
+          else if (track->is_video())
+            video_track_valid = true;
+        }
 
       if (!m_tag.m_ok)
         break;
@@ -313,14 +314,16 @@ flv_reader_c::read_headers() {
 
   m_audio_track_idx = -1;
   m_video_track_idx = -1;
-  for (int idx = m_tracks.size(); idx > 0; --idx)
+  for (int idx = m_tracks.size(); idx > 0; --idx) {
+    // auto &track = m_tracks
     if (m_tracks[idx - 1]->is_video())
       m_video_track_idx = idx - 1;
     else
       m_audio_track_idx = idx - 1;
+  }
 
-  mxdebug_if(m_debug, boost::format("Detection finished at %1%; headers read? %2%; number valid tracks: %3%\n")
-             % m_in->getFilePointer() % headers_read % m_tracks.size());
+  mxdebug_if(m_debug, boost::format("Detection finished at %1%; audio valid? %2%; video valid? %3%; number valid tracks: %4%\n")
+             % m_in->getFilePointer() % audio_track_valid % video_track_valid % m_tracks.size());
 
   m_in->setFilePointer(9, seek_beginning); // rewind file for later remux
   m_file_done = false;
@@ -687,8 +690,11 @@ flv_reader_c::process_video_tag(flv_track_cptr &track) {
 
 bool
 flv_reader_c::process_script_tag() {
-  if (!m_tag.m_data_size || (-1 == m_video_track_idx))
+  if (!m_tag.m_data_size)
     return true;
+
+  if (-1 == m_video_track_idx)
+    m_video_track_idx = add_track('v');
 
   try {
     mtx::amf::script_parser_c parser{m_in->read(m_tag.m_data_size)};
@@ -732,11 +738,17 @@ flv_reader_c::process_tag(bool skip_payload) {
   if (m_tag.is_script_data())
     return process_script_tag();
 
-  if (m_tag.is_audio())
+  if (m_tag.is_audio()) {
+    if (-1 == m_audio_track_idx)
+      m_audio_track_idx = add_track('a');
     m_selected_track_idx = m_audio_track_idx;
-  else if (m_tag.is_video())
+
+  } else if (m_tag.is_video()) {
+    if (-1 == m_video_track_idx)
+      m_video_track_idx = add_track('v');
     m_selected_track_idx = m_video_track_idx;
-  else
+
+  } else
     return false;
 
   if ((0 > m_selected_track_idx) || (static_cast<int>(m_tracks.size()) <= m_selected_track_idx))
