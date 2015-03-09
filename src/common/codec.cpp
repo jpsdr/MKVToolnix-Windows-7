@@ -41,7 +41,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("DTS",                     A_DTS,       track_audio,    "dts[\\sbcehl]|A_DTS",                   0x2001u);
   ms_codecs.emplace_back("MP2",                     A_MP2,       track_audio,    "mp2.|\\.mp[12]|mp2a|A_MPEG/L2",         0x0050);
   ms_codecs.emplace_back("MP3",                     A_MP3,       track_audio,    "mp3.|\\.mp3|LAME|mpga|A_MPEG/L3",       0x0055);
-  ms_codecs.emplace_back("PCM",                     A_PCM,       track_audio,    "twos|sowt|A_PCM/(?:INT|FLOAT)/.+",      std::vector<uint16_t>{ 0x0001u, 0x0003u });
+  ms_codecs.emplace_back("PCM",                     A_PCM,       track_audio,    "twos|sowt|raw.|A_PCM/(?:INT|FLOAT)/.+", std::vector<uint16_t>{ 0x0001u, 0x0003u });
   ms_codecs.emplace_back("Vorbis",                  A_VORBIS,    track_audio,    "vor[1b]|A_VORBIS",                      std::vector<uint16_t>{ 0x566fu, 0xfffeu });
   ms_codecs.emplace_back("Opus",                    A_OPUS,      track_audio,    "opus|A_OPUS(?:/EXPERIMENTAL)?");
   ms_codecs.emplace_back("QDMC",                    A_QDMC,      track_audio,    "qdm2|A_QUICKTIME/QDM[2C]");
