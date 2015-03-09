@@ -253,9 +253,12 @@ flv_reader_c::flv_reader_c(track_info_c const &ti,
   , m_audio_track_idx{-1}
   , m_video_track_idx{-1}
   , m_selected_track_idx{-1}
-  , m_file_done{false}
+  , m_file_done{}
   , m_debug{"flv|flv_full"}
 {
+}
+
+flv_reader_c::~flv_reader_c() {
 }
 
 translatable_string_c
@@ -321,9 +324,6 @@ flv_reader_c::read_headers() {
 
   m_in->setFilePointer(9, seek_beginning); // rewind file for later remux
   m_file_done = false;
-}
-
-flv_reader_c::~flv_reader_c() {
 }
 
 void
