@@ -48,6 +48,7 @@
 #include "output/p_mpeg4_p10.h"
 #include "output/p_passthrough.h"
 #include "output/p_pcm.h"
+#include "output/p_quicktime.h"
 #include "output/p_video.h"
 #include "output/p_vobsub.h"
 
@@ -1535,7 +1536,7 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_cptr &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_standard(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = dmx->stsd;
-  dmx->ptzr           = add_packetizer(new video_packetizer_c(this, m_ti, MKV_V_QUICKTIME, 0.0, dmx->v_width, dmx->v_height));
+  dmx->ptzr           = add_packetizer(new quicktime_video_packetizer_c(this, m_ti, dmx->v_width, dmx->v_height));
 
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }
