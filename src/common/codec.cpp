@@ -22,6 +22,7 @@ void
 codec_c::initialize() {
   if (!ms_codecs.empty())
     return;
+  ms_codecs.emplace_back("Cinepak",                 V_CINEPAK,   track_video,    "cvid");
   ms_codecs.emplace_back("MPEG-1/2",                V_MPEG12,    track_video,    "mpeg|mpg[12]|m[12]v.|mpgv|mp[12]v|h262|V_MPEG[12]");
   ms_codecs.emplace_back("MPEG-4p2",                V_MPEG4_P2,  track_video,    "3iv2|xvi[dx]|divx|dx50|fmp4|mp4v|V_MPEG4/ISO/(?:SP|AP|ASP)");
   ms_codecs.emplace_back("MPEG-4p10/AVC/h.264",     V_MPEG4_P10, track_video,    "avc.|[hx]264|V_MPEG4/ISO/AVC");
