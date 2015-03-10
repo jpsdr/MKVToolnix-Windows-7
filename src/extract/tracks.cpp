@@ -112,7 +112,7 @@ create_extractors(KaxTracks &kax_tracks,
     extractors.push_back(extractor);
 
     mxinfo(boost::format(Y("Extracting track %1% with the CodecID '%2%' to the file '%3%'. Container format: %4%\n"))
-           % track_id % codec_id % tspec->out_name % extractor->get_container_name());
+           % track_id % codec_id % extractor->get_file_name().string() % extractor->get_container_name());
   }
 
   // Signal that all headers have been taken care of.
