@@ -62,6 +62,9 @@ public:
 
   virtual void headers_done();
 
+  virtual bfs::path get_file_name() const {
+    return m_file_name;
+  }
   virtual const char *get_container_name() {
     return m_container_name.c_str();
   };
