@@ -69,7 +69,7 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
   m_language = kt_get_language(track);
 
   if (!master) {
-    auto sub_file_name = m_base_name.replace_extension("sub").string();
+    auto sub_file_name = m_base_name.replace_extension(".sub").string();
 
     try {
       m_out = mm_write_buffer_io_c::open(sub_file_name, 128 * 1024);
@@ -198,7 +198,7 @@ xtr_vobsub_c::finish_file() {
   if (m_master)
     return;
 
-  auto idx_file_name = m_base_name.replace_extension("idx").string();
+  auto idx_file_name = m_base_name.replace_extension(".idx").string();
 
   try {
     static const char *header_line = "# VobSub index file, v7 (do not modify this line!)\n";
