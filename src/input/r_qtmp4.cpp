@@ -594,7 +594,7 @@ qtmp4_reader_c::handle_moov_atom(qt_atom_t parent,
       new_dmx->id = m_demuxers.size();
 
       handle_trak_atom(new_dmx, atom.to_parent(), level + 1);
-      if ((!new_dmx->is_unknown() && new_dmx->codec) || new_dmx->is_subtitles())
+      if ((!new_dmx->is_unknown() && new_dmx->codec) || new_dmx->is_subtitles() || new_dmx->is_video())
         m_demuxers.push_back(new_dmx);
     }
 
