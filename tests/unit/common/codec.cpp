@@ -205,6 +205,10 @@ TEST(Codec, LookUpAudioFormat) {
   EXPECT_TRUE(codec_c::look_up_audio_format(0xfffeu).is(codec_c::A_VORBIS));
 }
 
+TEST(Codec, LookUpFourCC) {
+  EXPECT_TRUE(codec_c::look_up("\x00\x00\x00\x00").is(codec_c::V_UNCOMPRESSED));
+}
+
 TEST(Codec, LookUpObjectTypeId) {
   EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2AudioMain).is(codec_c::A_AAC));
   EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2AudioLowComplexity).is(codec_c::A_AAC));

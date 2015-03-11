@@ -89,18 +89,19 @@ public:
   enum type_e {
       UNKNOWN  = 0
     , V_CINEPAK = 0x1000
+    , V_DIRAC
     , V_MPEG12
-    , V_MPEG4_P2
     , V_MPEG4_P10
+    , V_MPEG4_P2
     , V_MPEGH_P2
     , V_REAL
-    , V_THEORA
-    , V_DIRAC
-    , V_VP8
-    , V_VP9
     , V_SVQ1
     , V_SVQ3
+    , V_THEORA
+    , V_UNCOMPRESSED
     , V_VC1
+    , V_VP8
+    , V_VP9
 
     , A_AAC = 0x2000
     , A_AC3
@@ -143,6 +144,7 @@ protected:
   type_e m_type;
   track_type m_track_type;
   std::vector<uint16_t> m_audio_formats;
+  std::vector<fourcc_c> m_fourccs;
 
 public:
   codec_c()
@@ -161,6 +163,15 @@ public:
       m_audio_formats.push_back(audio_format);
   }
 
+  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, fourcc_c const &fourcc)
+    : m_match_re{(boost::format("(?:%1%)") % match_re).str(), boost::regex::perl | boost::regex::icase}
+    , m_name{name}
+    , m_type{type}
+    , m_track_type{p_track_type}
+    , m_fourccs{fourcc}
+  {
+  }
+
   codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<uint16_t> audio_formats)
     : m_match_re{(boost::format("(?:%1%)") % match_re).str(), boost::regex::perl | boost::regex::icase}
     , m_name{name}
@@ -170,9 +181,16 @@ public:
   {
   }
 
-  bool matches(std::string const &fourcc_or_codec_id) const {
-    return boost::regex_match(fourcc_or_codec_id, m_match_re);
+  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<fourcc_c> fourccs)
+    : m_match_re{(boost::format("(?:%1%)") % match_re).str(), boost::regex::perl | boost::regex::icase}
+    , m_name{name}
+    , m_type{type}
+    , m_track_type{p_track_type}
+    , m_fourccs{fourccs}
+  {
   }
+
+  bool matches(std::string const &fourcc_or_codec_id) const;
 
   bool valid() const {
     return m_type != UNKNOWN;

@@ -23,18 +23,19 @@ codec_c::initialize() {
   if (!ms_codecs.empty())
     return;
   ms_codecs.emplace_back("Cinepak",                 V_CINEPAK,   track_video,    "cvid");
+  ms_codecs.emplace_back("Dirac",                   V_DIRAC,     track_video,    "drac|V_DIRAC");
   ms_codecs.emplace_back("MPEG-1/2",                V_MPEG12,    track_video,    "mpeg|mpg[12]|m[12]v.|mpgv|mp[12]v|h262|V_MPEG[12]");
   ms_codecs.emplace_back("MPEG-4p2",                V_MPEG4_P2,  track_video,    "3iv2|xvi[dx]|divx|dx50|fmp4|mp4v|V_MPEG4/ISO/(?:SP|AP|ASP)");
   ms_codecs.emplace_back("MPEG-4p10/AVC/h.264",     V_MPEG4_P10, track_video,    "avc.|[hx]264|V_MPEG4/ISO/AVC");
   ms_codecs.emplace_back("MPEG-H/HEVC/h.265",       V_MPEGH_P2,  track_video,    "hevc|hvc1|hev1|[hx]265|V_MPEGH/ISO/HEVC");
   ms_codecs.emplace_back("RealVideo",               V_REAL,      track_video,    "rv[1234]\\d|V_REAL/RV\\d+");
   ms_codecs.emplace_back("Theora",                  V_THEORA,    track_video,    "theo|thra|V_THEORA");
-  ms_codecs.emplace_back("Dirac",                   V_DIRAC,     track_video,    "drac|V_DIRAC");
-  ms_codecs.emplace_back("VP8",                     V_VP8,       track_video,    "vp8\\d|V_VP8");
-  ms_codecs.emplace_back("VP9",                     V_VP9,       track_video,    "vp9\\d|V_VP9");
   ms_codecs.emplace_back("Sorenson v1",             V_SVQ1,      track_video,    "svq[i1]");
   ms_codecs.emplace_back("Sorenson v3",             V_SVQ3,      track_video,    "svq3");
+  ms_codecs.emplace_back("Uncompressed",            V_UNCOMPRESSED, track_video,    "", fourcc_c{0x00000000u});
   ms_codecs.emplace_back("VC1",                     V_VC1,       track_video,    "wvc1|vc-1");
+  ms_codecs.emplace_back("VP8",                     V_VP8,       track_video,    "vp8\\d|V_VP8");
+  ms_codecs.emplace_back("VP9",                     V_VP9,       track_video,    "vp9\\d|V_VP9");
 
   ms_codecs.emplace_back("AAC",                     A_AAC,       track_audio,    "mp4a|aac.|raac|racp|A_AAC.*",           std::vector<uint16_t>{ 0x00ffu, 0x706du });
   ms_codecs.emplace_back("AC3/EAC3",                A_AC3,       track_audio,    "ac3.|ac-3|sac3|eac3|a52[\\sb]|dnet|A_E?AC3", 0x2000u);
@@ -124,6 +125,18 @@ codec_c::look_up_object_type_id(unsigned int object_type_id) {
                  : MP4OTI_MPEG4Visual                          == object_type_id   ? V_MPEG4_P2
                  : MP4OTI_VOBSUB                               == object_type_id   ? S_VOBSUB
                  :                                                                   UNKNOWN);
+}
+
+bool
+codec_c::matches(std::string const &fourcc_or_codec_id)
+  const {
+  if (boost::regex_match(fourcc_or_codec_id, m_match_re))
+    return true;
+
+  if (fourcc_or_codec_id.length() == 4)
+    return brng::find(m_fourccs, fourcc_c{fourcc_or_codec_id}) != m_fourccs.end();
+
+  return false;
 }
 
 std::string const
