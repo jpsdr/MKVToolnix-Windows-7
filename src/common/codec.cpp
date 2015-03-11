@@ -94,7 +94,11 @@ codec_c::look_up(char const *fourcc_or_codec_id) {
 
 codec_c const
 codec_c::look_up(fourcc_c const &fourcc) {
-  return look_up(fourcc.str());
+  initialize();
+
+  auto itr = brng::find_if(ms_codecs, [&fourcc](codec_c const &c) { return brng::find(c.m_fourccs, fourcc) != c.m_fourccs.end(); });
+
+  return itr != ms_codecs.end() ? *itr : look_up(fourcc.str());
 }
 
 codec_c const
