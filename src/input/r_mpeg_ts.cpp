@@ -516,10 +516,10 @@ mpeg_ts_track_c::parse_registration_pmt_descriptor(mpeg_ts_pmt_descriptor_t cons
   if (pmt_descriptor.length < 4)
     return false;
 
- auto fourcc = fourcc_c{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1)};
- auto reg_codec  = codec_c::look_up(fourcc.str());
+  auto fourcc = fourcc_c{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1)};
+  auto reg_codec  = codec_c::look_up(fourcc.str());
 
-  mxdebug_if(reader.m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: Registration descriptor with FourCC: %1% codec: %2%\n") % fourcc % reg_codec);
+  mxdebug_if(reader.m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: Registration descriptor with FourCC: %1% codec: %2%\n") % fourcc.description() % reg_codec);
 
   if (!reg_codec.valid())
     return false;

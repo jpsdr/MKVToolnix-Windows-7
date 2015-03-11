@@ -1777,7 +1777,7 @@ qtmp4_reader_c::identify() {
 
     id_result_track(dmx->id,
                     dmx->is_video() ? ID_RESULT_TRACK_VIDEO : dmx->is_audio() ? ID_RESULT_TRACK_AUDIO : dmx->is_subtitles() ? ID_RESULT_TRACK_SUBTITLES : ID_RESULT_TRACK_UNKNOWN,
-                    dmx->codec.get_name((boost::format("%|1$.4s|") %  dmx->fourcc).str()),
+                    dmx->codec.get_name(dmx->fourcc.description()),
                     verbose_info);
   }
 
@@ -2349,16 +2349,16 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
   memcpy(&sv2_stsd, priv, sizeof(sound_v0_stsd_atom_t));
 
   if (fourcc)
-    mxwarn(boost::format(Y("Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%|2$.4s|) and not this one (%|3$.4s|).\n"))
-           % id % fourcc % reinterpret_cast<const unsigned char *>(sv1_stsd.v0.base.fourcc));
+    mxwarn(boost::format(Y("Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"))
+           % id % fourcc.description() % fourcc_c{sv1_stsd.v0.base.fourcc}.description());
   else
     fourcc = fourcc_c{sv1_stsd.v0.base.fourcc};
 
   auto version = get_uint16_be(&sv1_stsd.v0.version);
 
-  mxdebug_if(m_debug_headers, boost::format("%1%FourCC: %|2$.4s|, channels: %3%, sample size: %4%, compression id: %5%, sample rate: 0x%|6$08x|, version: %7%")
+  mxdebug_if(m_debug_headers, boost::format("%1%FourCC: %2%, channels: %3%, sample size: %4%, compression id: %5%, sample rate: 0x%|6$08x|, version: %7%")
              % space(level * 2 + 1)
-             % reinterpret_cast<const unsigned char *>(sv1_stsd.v0.base.fourcc)
+             % fourcc_c{reinterpret_cast<const unsigned char *>(sv1_stsd.v0.base.fourcc)}.description()
              % get_uint16_be(&sv1_stsd.v0.channels)
              % get_uint16_be(&sv1_stsd.v0.sample_size)
              % get_uint16_be(&sv1_stsd.v0.compression_id)
@@ -2423,17 +2423,17 @@ qtmp4_demuxer_c::handle_video_stsd_atom(uint64_t atom_size,
   memcpy(&v_stsd, priv, sizeof(video_stsd_atom_t));
 
   if (fourcc)
-    mxwarn(boost::format(Y("Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%|2$.4s|) and not this one (%|3$.4s|).\n"))
-           % id % fourcc % reinterpret_cast<const unsigned char *>(v_stsd.base.fourcc));
+    mxwarn(boost::format(Y("Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"))
+           % id % fourcc.description() % fourcc_c{v_stsd.base.fourcc}.description());
 
   else
     fourcc = fourcc_c{v_stsd.base.fourcc};
 
   codec = codec_c::look_up(fourcc);
 
-  mxdebug_if(m_debug_headers, boost::format("%1%FourCC: %|2$.4s|, width: %3%, height: %4%, depth: %5%\n")
+  mxdebug_if(m_debug_headers, boost::format("%1%FourCC: %2%, width: %3%, height: %4%, depth: %5%\n")
              % space(level * 2 + 1)
-             % reinterpret_cast<const unsigned char *>(v_stsd.base.fourcc)
+             % fourcc_c{v_stsd.base.fourcc}.description()
              % get_uint16_be(&v_stsd.width)
              % get_uint16_be(&v_stsd.height)
              % get_uint16_be(&v_stsd.depth));
@@ -2459,7 +2459,7 @@ qtmp4_demuxer_c::handle_subtitles_stsd_atom(uint64_t atom_size,
  stsd_non_priv_struct_size = sizeof(base_stsd_atom_t);
 
   if (m_debug_headers) {
-    mxdebug(boost::format("%1%FourCC: %2%\n") % space(level * 2 + 1) % fourcc);
+    mxdebug(boost::format("%1%FourCC: %2%\n") % space(level * 2 + 1) % fourcc.description());
     debugging_c::hexdump(priv, size);
   }
 }

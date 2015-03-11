@@ -860,8 +860,8 @@ avi_reader_c::identify_video() {
 
   std::vector<std::string> extended_info;
 
-  const char *fourcc_str = AVI_video_compressor(m_avi);
-  auto codec             = codec_c::look_up(fourcc_str);
+  auto codec      = codec_c::look_up(AVI_video_compressor(m_avi));
+  auto fourcc_str = fourcc_c{AVI_video_compressor(m_avi)}.description();
 
   if (codec.is(codec_c::V_MPEG4_P2))
     extended_identify_mpeg4_l2(extended_info);
@@ -869,7 +869,7 @@ avi_reader_c::identify_video() {
   else if (codec.is(codec_c::V_MPEG4_P10))
     extended_info.push_back("packetizer:mpeg4_p10_es_video");
 
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str[0] != 0 ? fourcc_str : Y("uncompressed")), join(" ", extended_info));
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), join(" ", extended_info));
 }
 
 void

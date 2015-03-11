@@ -72,6 +72,7 @@
 #include "common/command_line.h"
 #include "common/ebml.h"
 #include "common/endian.h"
+#include "common/fourcc.h"
 #include "common/hevc.h"
 #include "common/kax_file.h"
 #include "common/mm_io.h"
@@ -332,10 +333,8 @@ create_codec_dependent_private_info(KaxCodecPrivate &c_priv,
                                     char track_type,
                                     const std::string &codec_id) {
   if ((codec_id == MKV_V_MSCOMP) && ('v' == track_type) && (c_priv.GetSize() >= sizeof(alBITMAPINFOHEADER))) {
-    alBITMAPINFOHEADER *bih = reinterpret_cast<alBITMAPINFOHEADER *>(c_priv.GetBuffer());
-    unsigned char *fcc      = reinterpret_cast<unsigned char *>(&bih->bi_compression);
-    return (boost::format(Y(" (FourCC: %1%%2%%3%%4%, 0x%|5$08x|)"))
-            % fcc[0] % fcc[1] % fcc[2] % fcc[3] % get_uint32_le(&bih->bi_compression)).str();
+    auto bih = reinterpret_cast<alBITMAPINFOHEADER *>(c_priv.GetBuffer());
+    return (boost::format(Y(" (FourCC: %1%)")) % fourcc_c{&bih->bi_compression}.description()).str();
 
   } else if ((codec_id == MKV_A_ACM) && ('a' == track_type) && (c_priv.GetSize() >= sizeof(alWAVEFORMATEX))) {
     alWAVEFORMATEX *wfe     = reinterpret_cast<alWAVEFORMATEX *>(c_priv.GetBuffer());
