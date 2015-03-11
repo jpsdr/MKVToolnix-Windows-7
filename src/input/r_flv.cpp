@@ -309,8 +309,7 @@ flv_reader_c::read_headers() {
     throw mtx::input::invalid_format_x();
   }
 
-  m_tracks.erase(std::remove_if(m_tracks.begin(), m_tracks.end(), [](flv_track_cptr &t) { return !t->is_valid(); }),
-                 m_tracks.end());
+  brng::remove_erase_if(m_tracks, [](flv_track_cptr const &t) { return !t->is_valid(); });
 
   m_audio_track_idx = -1;
   m_video_track_idx = -1;
