@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/bswap.h"
+#include "common/codec.h"
 #include "common/endian.h"
 #include "common/fourcc.h"
 
@@ -127,6 +128,27 @@ fourcc_c::str()
 
   return std::string{buffer, 4};
 }
+
+#define C(idx) ((32 <= buffer[idx]) && (127 > buffer[idx]) ? static_cast<char>(buffer[idx]) : '?')
+
+std::string
+fourcc_c::description()
+  const {
+  static auto s_id_fmt   = boost::format("0x%|1$08x| »%2%%3%%4%%5%«");
+  static auto s_name_fmt = boost::format(" (%1%)");
+
+  unsigned char buffer[4];
+  put_uint32_be(buffer, m_value);
+
+  auto result = (s_id_fmt % m_value % C(0) % C(1) % C(2) % C(3)).str();
+  auto codec  = codec_c::look_up(*this);
+  if (codec.valid())
+    result += (s_name_fmt % codec.get_name()).str();
+
+  return result;
+}
+
+#undef C
 
 fourcc_c::operator bool()
   const {

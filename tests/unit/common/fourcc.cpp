@@ -158,6 +158,17 @@ TEST(FourCC, Stringification) {
   EXPECT_EQ(fourcc_c{0x31003200}.str(), "1?2?");
 }
 
+TEST(FourCC, StringificationAsDescription) {
+  EXPECT_EQ("0x31323334 »1234«",                       fourcc_c{big}.description());
+  EXPECT_EQ("0x00000000 »????«",                       fourcc_c{}.description());
+  EXPECT_EQ("0x311732f8 »1?2?«",                       fourcc_c{0x311732f8}.description());
+  EXPECT_EQ("0x1f207e7f »? ~?«",                       fourcc_c{0x1f207e7f}.description());
+
+  EXPECT_EQ("0x63766964 »cvid« (Cinepak)",             fourcc_c{"cvid"}.description());
+  EXPECT_EQ("0x78323634 »x264« (MPEG-4p10/AVC/h.264)", fourcc_c{"x264"}.description());
+  EXPECT_EQ("0x58323634 »X264« (MPEG-4p10/AVC/h.264)", fourcc_c{"X264"}.description());
+}
+
 TEST(FourCC, WritingToMemory) {
   unsigned char buf[4];
   auto mem = memory_c::alloc(4);

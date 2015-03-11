@@ -61,6 +61,7 @@ public:
 
   uint32_t value(byte_order_t byte_order = big_endian) const;
   std::string str() const;
+  std::string description() const;
 
   bool equiv(char const *cmp) const;
   bool equiv(std::vector<std::string> const &cmp) const;
