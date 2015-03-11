@@ -19,8 +19,8 @@ using namespace libmatroska;
 TEST(ConstructAndEquality, EmptyMaster) {
   auto a = ebml_master_cptr{ cons<KaxTracks>() };
   auto b = ebml_master_cptr{ master<KaxTracks>() };
-  EXPECT_EQ(a->ListSize(), 0u);
-  EXPECT_EQ(b->ListSize(), 0u);
+  EXPECT_EQ(0u, a->ListSize());
+  EXPECT_EQ(0u, b->ListSize());
   EXPECT_EBML_EQ(*a, *b);
 }
 

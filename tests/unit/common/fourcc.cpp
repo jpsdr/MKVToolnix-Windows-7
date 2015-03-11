@@ -148,14 +148,14 @@ TEST(FourCC, Equality) {
 TEST(FourCC, Stringification) {
   fourcc_c big_f{big};
 
-  EXPECT_EQ(big_f.str(), "1234");
+  EXPECT_EQ("1234", big_f.str());
 
   std::stringstream sstr;
   EXPECT_NO_THROW(sstr << big_f);
-  EXPECT_EQ(sstr.str(), "1234");
+  EXPECT_EQ("1234", sstr.str());
 
-  EXPECT_EQ(fourcc_c{}.str(),           "????");
-  EXPECT_EQ(fourcc_c{0x31003200}.str(), "1?2?");
+  EXPECT_EQ("????", fourcc_c{}.str());
+  EXPECT_EQ("1?2?", fourcc_c{0x31003200}.str());
 }
 
 TEST(FourCC, StringificationAsDescription) {

@@ -18,13 +18,13 @@ TEST(BasicTimecode, Creation) {
 }
 
 TEST(BasicTimecode, Deconstruction) {
-  EXPECT_EQ(timecode_c::ns(7204003002001ll).to_ns(),    7204003002001ll);
-  EXPECT_EQ(timecode_c::ns(7204003002001ll).to_us(),       7204003002ll);
-  EXPECT_EQ(timecode_c::ns(7204003002001ll).to_ms(),          7204003ll);
-  EXPECT_EQ(timecode_c::ns(7204003002001ll).to_s(),              7204ll);
-  EXPECT_EQ(timecode_c::ns(7204003002001ll).to_m(),               120ll);
-  EXPECT_EQ(timecode_c::ns(7204003002001ll).to_h(),                 2ll);
-  EXPECT_EQ(timecode_c::ns(7204003002001ll).to_mpeg(),      648360270ll);
+  EXPECT_EQ(7204003002001ll, timecode_c::ns(7204003002001ll).to_ns());
+  EXPECT_EQ(   7204003002ll, timecode_c::ns(7204003002001ll).to_us());
+  EXPECT_EQ(      7204003ll, timecode_c::ns(7204003002001ll).to_ms());
+  EXPECT_EQ(         7204ll, timecode_c::ns(7204003002001ll).to_s());
+  EXPECT_EQ(          120ll, timecode_c::ns(7204003002001ll).to_m());
+  EXPECT_EQ(            2ll, timecode_c::ns(7204003002001ll).to_h());
+  EXPECT_EQ(    648360270ll, timecode_c::ns(7204003002001ll).to_mpeg());
 }
 
 TEST(BasicTimecode, ArithmeticBothValid) {
@@ -114,21 +114,21 @@ TEST(BasicTimecode, ThrowOnDeconstructionOfInvalid) {
 }
 
 TEST(BasicTimecode, ConstructFromSamples) {
-  EXPECT_EQ(timecode_c::samples(     0, 48000).to_ns(),          0);
-  EXPECT_EQ(timecode_c::samples( 19999, 48000).to_ns(),  416645833);
-  EXPECT_EQ(timecode_c::samples( 20000, 48000).to_ns(),  416666667);
-  EXPECT_EQ(timecode_c::samples( 48000, 48000).to_ns(), 1000000000);
-  EXPECT_EQ(timecode_c::samples(123456, 48000).to_ns(), 2572000000);
+  EXPECT_EQ(         0, timecode_c::samples(     0, 48000).to_ns());
+  EXPECT_EQ( 416645833, timecode_c::samples( 19999, 48000).to_ns());
+  EXPECT_EQ( 416666667, timecode_c::samples( 20000, 48000).to_ns());
+  EXPECT_EQ(1000000000, timecode_c::samples( 48000, 48000).to_ns());
+  EXPECT_EQ(2572000000, timecode_c::samples(123456, 48000).to_ns());
 
   EXPECT_THROW(timecode_c::samples(123, 0), std::domain_error);
 }
 
 TEST(BasicTimecode, DeconstructToSamples) {
-  EXPECT_EQ(timecode_c::ns(         0).to_samples(48000),      0);
-  EXPECT_EQ(timecode_c::ns( 416645833).to_samples(48000),  19999);
-  EXPECT_EQ(timecode_c::ns( 416666667).to_samples(48000),  20000);
-  EXPECT_EQ(timecode_c::ns(1000000000).to_samples(48000),  48000);
-  EXPECT_EQ(timecode_c::ns(2572000000).to_samples(48000), 123456);
+  EXPECT_EQ(     0, timecode_c::ns(         0).to_samples(48000));
+  EXPECT_EQ( 19999, timecode_c::ns( 416645833).to_samples(48000));
+  EXPECT_EQ( 20000, timecode_c::ns( 416666667).to_samples(48000));
+  EXPECT_EQ( 48000, timecode_c::ns(1000000000).to_samples(48000));
+  EXPECT_EQ(123456, timecode_c::ns(2572000000).to_samples(48000));
 
   EXPECT_THROW(timecode_c::ns(123).to_samples(0), std::domain_error);
 }

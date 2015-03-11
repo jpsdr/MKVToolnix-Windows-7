@@ -105,7 +105,7 @@ TEST(TimecodeCalculator, WithInvalidTimecodesProvided) {
 TEST(TimecodeCalculator, GetDuration) {
   auto calc = timecode_calculator_c{48000ll};
 
-  EXPECT_EQ(timecode_c::s(1),                  calc.get_duration(48000));
+  EXPECT_EQ(timecode_c::s(1),                 calc.get_duration(48000));
   EXPECT_EQ(timecode_c::ns(2572016437500ll),  calc.get_duration(123456789));
   EXPECT_EQ(timecode_c::ns(36000000000000ll), calc.get_duration(1728000000));
 }
