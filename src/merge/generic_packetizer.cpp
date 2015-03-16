@@ -85,6 +85,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_timecode_factory_application_mode{TFA_AUTOMATIC}
   , m_last_cue_timecode{-1}
   , m_has_been_flushed{}
+  , m_prevent_lacing{}
   , m_ti{ti}
   , m_reader{reader}
   , m_connected_to{}
@@ -1186,4 +1187,15 @@ generic_packetizer_c::create_track_number() {
 file_status_e
 generic_packetizer_c::read() {
   return m_reader->read(this);
+}
+
+void
+generic_packetizer_c::prevent_lacing() {
+  m_prevent_lacing = true;
+}
+
+bool
+generic_packetizer_c::is_lacing_prevented()
+  const {
+  return m_prevent_lacing;
 }

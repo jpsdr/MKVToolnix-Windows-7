@@ -453,10 +453,13 @@ cluster_helper_c::render() {
     kax_block_blob_c *previous_block_group = !render_group->m_groups.empty() ? render_group->m_groups.back().get() : nullptr;
     kax_block_blob_c *new_block_group      = previous_block_group;
 
-    if (!pack->is_key_frame() || has_codec_state || pack->has_discard_padding())
-      render_group->m_more_data = false;
+    auto require_new_render_group          = ! render_group->m_more_data
+                                          || !pack->is_key_frame()
+                                          || has_codec_state
+                                          || pack->has_discard_padding()
+                                          || source->is_lacing_prevented();
 
-    if (!render_group->m_more_data) {
+    if (require_new_render_group) {
       set_duration(render_group);
       render_group->m_durations.clear();
       render_group->m_duration_mandatory = false;
