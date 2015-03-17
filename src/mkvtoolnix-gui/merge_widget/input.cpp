@@ -702,7 +702,7 @@ MergeWidget::setOutputFileNameMaybe(QString const &fileName) {
   if (!outputDir.exists())
     outputDir = srcFileName.absoluteDir();
 
-  auto baseName = srcFileName.baseName();
+  auto baseName = srcFileName.completeBaseName();
   auto idx      = 0;
 
   while (true) {
