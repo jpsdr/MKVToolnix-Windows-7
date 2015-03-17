@@ -318,4 +318,43 @@ set_target_type(KaxTag &tag,
   GetChild<KaxTagTargetType>(targets).SetValue(target_type);
 }
 
+void
+remove_elements_unsupported_by_webm(EbmlMaster &master) {
+  static auto s_supported_elements = std::map<uint32, bool>{};
+
+  if (s_supported_elements.empty()) {
+#define add(ref) s_supported_elements[ EBML_ID_VALUE(EBML_ID(ref)) ] = true;
+    add(KaxTags);
+    add(KaxTag);
+    add(KaxTagTargets);
+    add(KaxTagTargetTypeValue);
+    add(KaxTagTargetType);
+    add(KaxTagTrackUID);
+    add(KaxTagSimple);
+    add(KaxTagName);
+    add(KaxTagLangue);
+    add(KaxTagDefault);
+    add(KaxTagString);
+    add(KaxTagBinary);
+#undef add
+  }
+
+  auto is_simple = Is<KaxTagSimple>(master);
+  auto idx       = 0u;
+
+  while (idx < master.ListSize()) {
+    auto e = master[idx];
+
+    if (e && s_supported_elements[ EBML_ID_VALUE(EbmlId(*e)) ] && !(is_simple && Is<KaxTagSimple>(e))) {
+      ++idx;
+
+      auto sub_master = dynamic_cast<EbmlMaster *>(e);
+      if (sub_master)
+        remove_elements_unsupported_by_webm(*sub_master);
+
+    } else
+      master.Remove(idx);
+  }
+}
+
 }}

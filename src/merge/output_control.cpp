@@ -1621,15 +1621,8 @@ prepare_tags_for_rendering() {
   if (!s_kax_tags)
     return;
 
-  if (outputting_webm()) {
-    mxwarn(boost::format(Y("Tags are not allowed in WebM compliant files. No tags will be written into any output file.\n")));
-
-    delete s_kax_tags;
-    s_kax_tags  = nullptr;
-    g_tags_size = 0;
-
-    return;
-  }
+  if (outputting_webm())
+    mtx::tags::remove_elements_unsupported_by_webm(*s_kax_tags);
 
   mtx::tags::fix_mandatory_elements(s_kax_tags);
   sort_ebml_master(s_kax_tags);
