@@ -1574,6 +1574,7 @@ qtmp4_reader_c::create_audio_packetizer_passthrough(qtmp4_demuxer_cptr &dmx) {
   ptzr->set_codec_private(dmx->stsd);
   ptzr->set_audio_sampling_freq(dmx->a_samplerate);
   ptzr->set_audio_channels(dmx->a_channels);
+  ptzr->prevent_lacing();
 
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }
