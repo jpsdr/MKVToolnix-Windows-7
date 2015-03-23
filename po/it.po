@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-18 23:52+0100\n"
-"PO-Revision-Date: 2015-02-23 19:05+0100\n"
+"PO-Revision-Date: 2015-03-23 17:04+0100\n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
 "Language-Team: Italian <moritz@bunkus.org>\n"
 "Language: it\n"
@@ -775,9 +775,9 @@ msgid "  X:  binary in hex\n"
 msgstr "  X:  binario in esadecimale\n"
 
 #: src/info/mkvinfo.cpp:337
-#, fuzzy, boost-format
+#, boost-format
 msgid " (FourCC: %1%)"
-msgstr "FourCC:"
+msgstr " (FourCC: %1%)"
 
 #: src/info/mkvinfo.cpp:365
 #, boost-format
@@ -3302,9 +3302,8 @@ msgid "Cue duration: %1%"
 msgstr "Lunghezza taglio: %1%"
 
 #: src/extract/extract_cli_parser.cpp:120
-#, fuzzy
 msgid "Cue extraction"
-msgstr "Estrazione capitoli"
+msgstr "Estrazione tagli"
 
 #: src/mmg/tabs/global.cpp:355
 msgid "Cue name format:"
@@ -3649,6 +3648,8 @@ msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core. This only works with DTS tracks."
 msgstr ""
+"Rimuove le estensioni lossless da una traccia audio e mantiene solo l'audio "
+"principale. Questa opzione funziona solo con le tracce DTS."
 
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:96
 msgid "Duration"
@@ -4366,6 +4367,10 @@ msgid ""
 "presence and offsets all of the track's timecodes by it. This option "
 "prevents that behavior."
 msgstr ""
+"Disturbi all'inizio dalla traccia audio nel file AVi sono normalmente usati "
+"per ritardare questa traccia. mkvmerge normalmente calcola il ritardo "
+"implicito in base alla sua presenza e sposta tutti timecode delle tracce in "
+"modo relativo. Questa opzione previene questo comportamento."
 
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
@@ -4395,7 +4400,7 @@ msgstr "Int&estazioni"
 
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
-msgstr ""
+msgstr "HDMV PGS"
 
 #: src/input/r_hevc.h:31 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
@@ -5880,9 +5885,8 @@ msgstr ""
 "Nessun capitolo da dividere trovato nei file sorgente o nei file capitolo.\n"
 
 #: src/extract/cues.cpp:116
-#, fuzzy
 msgid "No cues were found.\n"
-msgstr "Nessun numero versione rilevato.\n"
+msgstr "Nessun taglio trovato.\n"
 
 #: src/mmg/header_editor/frame.cpp:517
 msgid "No fields modified"
@@ -6440,9 +6444,8 @@ msgid "QuickTime audio/video files"
 msgstr "File audio/video QuickTime"
 
 #: src/output/p_quicktime.h:27
-#, fuzzy
 msgid "QuickTime compatible video"
-msgstr "Video compatibile VfW"
+msgstr "Video compatibile QuickTime"
 
 #: src/input/r_qtmp4.h:445
 msgid "QuickTime/MP4"
@@ -6653,13 +6656,13 @@ msgstr ""
 "intestazione danneggiati?\n"
 
 #: src/input/r_qtmp4.cpp:2353 src/input/r_qtmp4.cpp:2427
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the "
 "first one (%2%) and not this one (%3%).\n"
 msgstr ""
-"Quicktime/MP4 reader: La traccia ID %1% ha più di un FourCC. Uso solo il "
-"primo (%|2$.4s|) e non questo (%|3$.4s|).\n"
+"Lettore Quicktime/MP4: La traccia ID %1% ha più di un FourCC. Uso solo il "
+"primo (%2%) e non questo (%3%).\n"
 
 #: src/mmg/mmg_dialog.cpp:294
 msgid "Quit the application"
@@ -6736,7 +6739,7 @@ msgstr "Redireziona tutti i messaggi in questo file."
 
 #: src/mmg/tabs/input_format.cpp:275
 msgid "Reduce to audio core"
-msgstr ""
+msgstr "Riduci al solo audio principale"
 
 #: src/info/mkvinfo.cpp:199
 #, boost-format
@@ -8060,9 +8063,9 @@ msgid "The cue entries (the index) are being written...\n"
 msgstr "Scrittura dati cue (l'indice) in corso...\n"
 
 #: src/extract/cues.cpp:58
-#, fuzzy, boost-format
+#, boost-format
 msgid "The cues for track %1% are written to '%2%'.\n"
-msgstr "Il CUE sheet per la traccia %1% verrà scritto in '%2%'.\n"
+msgstr "I tagli per la traccia %1% sono stati scritti in '%2%'.\n"
 
 #: src/mmg/tabs/input.cpp:818
 #, c-format, boost-format
@@ -8319,9 +8322,9 @@ msgstr ""
 "per analizzare le sue intestazioni."
 
 #: src/extract/cues.cpp:49
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file does not contain track ID %1%.\n"
-msgstr "Il file sorgente '%s' non contiene nessuna traccia."
+msgstr "Il file non contiene nessun ID traccia %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:412
 msgid "The file does not exist."
@@ -9194,7 +9197,7 @@ msgstr "Theora"
 #: src/extract/cues.cpp:53
 #, boost-format
 msgid "There are no cues for track ID %1%.\n"
-msgstr ""
+msgstr "Non ci sono tagli per l'ID traccia %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:1827
 msgid "There is a new version available online."
@@ -9451,10 +9454,11 @@ msgid "This mode considers only the first video track that is output."
 msgstr "Questo modo considera solo la prima traccia video destinazione."
 
 #: src/extract/extract_cli_parser.cpp:121
-#, fuzzy
 msgid ""
 "This mode extracts cue information for some tracks to external text files."
-msgstr "Il primo modo estrae alcune tracce in file esterni."
+msgstr ""
+"Questo modo estrae le infomazioni di taglio da alcune tracce in file di "
+"testo esterni."
 
 #: src/mmg/tabs/global.cpp:282
 msgid ""
@@ -10860,14 +10864,12 @@ msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <inname> [opzioni]"
 
 #: src/extract/extract_cli_parser.cpp:125
-#, fuzzy
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
-msgstr "mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_traccia1.txt"
+msgstr "mkvextract cues \"a movie.mkv\" 1:cues_track0.txt"
 
 #: src/extract/extract_cli_parser.cpp:51
-#, fuzzy
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract tracks <inname> [opzioni] [TID1:out1 [TID2:out2 ...]]"
+msgstr "mkvextract cues <inname> [opzioni] [TID1:out1 [TID2:out2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:110
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
@@ -11370,9 +11372,8 @@ msgid "timecodes"
 msgstr "timecode"
 
 #: src/mmg/tabs/input.cpp:203
-#, fuzzy
 msgid "toggle all"
-msgstr "abilita tutto"
+msgstr "cambia tutto"
 
 #: src/common/stereo_mode.cpp:51
 msgid "top bottom (left first)"
