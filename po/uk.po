@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2009-02-18 23:52+0100\n"
-"PO-Revision-Date: 2015-02-22 11:22+0200\n"
+"PO-Revision-Date: 2015-03-14 17:27+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
 "Language: uk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.7.5\n"
 
 #: src/extract/xtr_tta.cpp:107
 #, boost-format
@@ -794,9 +794,9 @@ msgid "  X:  binary in hex\n"
 msgstr "  X:  двійкове у шістнадцятковому\n"
 
 #: src/info/mkvinfo.cpp:337
-#, fuzzy, boost-format
+#, boost-format
 msgid " (FourCC: %1%)"
-msgstr "FourCC:"
+msgstr " (FourCC: %1%)"
 
 #: src/info/mkvinfo.cpp:365
 #, boost-format
@@ -3313,9 +3313,8 @@ msgid "Cue duration: %1%"
 msgstr "Тривалість Cue: %1%"
 
 #: src/extract/extract_cli_parser.cpp:120
-#, fuzzy
 msgid "Cue extraction"
-msgstr "Витягнення розділів"
+msgstr "Витягнення записів cue"
 
 #: src/mmg/tabs/global.cpp:355
 msgid "Cue name format:"
@@ -3658,6 +3657,8 @@ msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core. This only works with DTS tracks."
 msgstr ""
+"Вилучає дані з інформацією стиснення без втрат, залишаючи лише ядро "
+"(стиснення з втратами). Застосовується лише до доріжок DTS."
 
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:96
 msgid "Duration"
@@ -4376,6 +4377,10 @@ msgid ""
 "presence and offsets all of the track's timecodes by it. This option "
 "prevents that behavior."
 msgstr ""
+"Непотрібні дані на початку аудіодоріжки в файлах AVI зазвичай "
+"використовується для зазначення затримки для цієї доріжки. mkvmerge зазвичай "
+"розраховує затримку за її присутності і змінює всі тайм-коди доріжки на це "
+"значення. Ця опція дає змогу не застосовувати даний алгоритм."
 
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
@@ -4405,7 +4410,7 @@ msgstr "&Заголовки"
 
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
-msgstr ""
+msgstr "HDMV PGS"
 
 #: src/input/r_hevc.h:31 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
@@ -5880,9 +5885,8 @@ msgstr ""
 "можливість виконати розбиття.\n"
 
 #: src/extract/cues.cpp:116
-#, fuzzy
 msgid "No cues were found.\n"
-msgstr "Номер версії не знайдено.\n"
+msgstr "Не знайдено жодних записів cue.\n"
 
 #: src/mmg/header_editor/frame.cpp:517
 msgid "No fields modified"
@@ -6439,9 +6443,8 @@ msgid "QuickTime audio/video files"
 msgstr "QuickTime аудіо/відео файли"
 
 #: src/output/p_quicktime.h:27
-#, fuzzy
 msgid "QuickTime compatible video"
-msgstr "сумісне VfW відео"
+msgstr "сумісне QuickTime відео"
 
 #: src/input/r_qtmp4.h:445
 msgid "QuickTime/MP4"
@@ -6655,13 +6658,13 @@ msgstr ""
 "елементи заголовка?\n"
 
 #: src/input/r_qtmp4.cpp:2353 src/input/r_qtmp4.cpp:2427
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the "
 "first one (%2%) and not this one (%3%).\n"
 msgstr ""
 "Quicktime/MP4 зчитувач: Доріжка з ID %1% містить більше, ніж один FourCC. "
-"Використовується тільки перший з них (%|2$.4s|) і не цей (%|3$.4s|).\n"
+"Використовується тільки перший з них (%2%), а не цей (%3%).\n"
 
 #: src/mmg/mmg_dialog.cpp:294
 msgid "Quit the application"
@@ -6738,7 +6741,7 @@ msgstr "Перенаправляти всі повідомлення в цей �
 
 #: src/mmg/tabs/input_format.cpp:275
 msgid "Reduce to audio core"
-msgstr ""
+msgstr "Залишити лише ядро"
 
 #: src/info/mkvinfo.cpp:199
 #, boost-format
@@ -8066,9 +8069,9 @@ msgid "The cue entries (the index) are being written...\n"
 msgstr "Елементи cue (індекс) в процесі запису...\n"
 
 #: src/extract/cues.cpp:58
-#, fuzzy, boost-format
+#, boost-format
 msgid "The cues for track %1% are written to '%2%'.\n"
-msgstr "Трек-лист CUE для доріжки %1% буде записаний до '%2%'.\n"
+msgstr "Елементи CUE для доріжки %1% записуються до '%2%'.\n"
 
 #: src/mmg/tabs/input.cpp:818
 #, c-format, boost-format
@@ -8328,9 +8331,9 @@ msgstr ""
 "аналізу його заголовків."
 
 #: src/extract/cues.cpp:49
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file does not contain track ID %1%.\n"
-msgstr "Вхідний файл '%s' не містить ніяких доріжок."
+msgstr "Файл не містить доріжки з ID %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:412
 msgid "The file does not exist."
@@ -9205,7 +9208,7 @@ msgstr "Theora"
 #: src/extract/cues.cpp:53
 #, boost-format
 msgid "There are no cues for track ID %1%.\n"
-msgstr ""
+msgstr "Немає жодних записів cue для доріжки з ID %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:1827
 msgid "There is a new version available online."
@@ -9459,10 +9462,9 @@ msgid "This mode considers only the first video track that is output."
 msgstr "Даний режим враховує лише першу доріжку відео, що є вихідною."
 
 #: src/extract/extract_cli_parser.cpp:121
-#, fuzzy
 msgid ""
 "This mode extracts cue information for some tracks to external text files."
-msgstr "Перший режим витягує деякі доріжки до зовнішніх файлів."
+msgstr "Даний режим витягує деякі доріжки до зовнішніх файлів."
 
 #: src/mmg/tabs/global.cpp:282
 msgid ""
@@ -10872,14 +10874,12 @@ msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <inname> [опції]"
 
 #: src/extract/extract_cli_parser.cpp:125
-#, fuzzy
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
-msgstr "mkvextract timecodes_v2 \"фільм.mkv\" 1:тайм-коди_доріжка1.txt"
+msgstr "mkvextract cues \"фільм.mkv\" 0:доріжка_cue0.txt"
 
 #: src/extract/extract_cli_parser.cpp:51
-#, fuzzy
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
-msgstr "mkvextract tracks <inname> [опції] [TID1:out1 [TID2:out2 ...]]"
+msgstr "mkvextract cues <inname> [опції] [TID1:out1 [TID2:out2 ...]]"
 
 #: src/extract/extract_cli_parser.cpp:110
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
@@ -11384,9 +11384,8 @@ msgid "timecodes"
 msgstr "тайм-коди"
 
 #: src/mmg/tabs/input.cpp:203
-#, fuzzy
 msgid "toggle all"
-msgstr "Дозволити усі"
+msgstr "Відмітити усі"
 
 #: src/common/stereo_mode.cpp:51
 msgid "top bottom (left first)"
