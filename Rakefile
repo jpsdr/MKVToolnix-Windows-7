@@ -101,7 +101,7 @@ def setup_globals
   cflags_common           += " -DQT_STATICPLUGIN" if c?(:USE_QT) && c?(:MINGW)
   $flags                   = {
     :cflags                => "#{cflags_common} #{c(:USER_CFLAGS)}",
-    :cxxflags              => "#{cflags_common} #{c(:STD_CXX11)} -Wnon-virtual-dtor -Woverloaded-virtual -Wextra -Wno-missing-field-initializers #{c(:WXWIDGETS_CFLAGS)} #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:CURL_CFLAGS)} #{c(:USER_CXXFLAGS)}",
+    :cxxflags              => "#{cflags_common} #{c(:STD_CXX)} -Wnon-virtual-dtor -Woverloaded-virtual -Wextra -Wno-missing-field-initializers #{c(:WXWIDGETS_CFLAGS)} #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:CURL_CFLAGS)} #{c(:USER_CXXFLAGS)}",
     :cppflags              => "#{c(:USER_CPPFLAGS)}",
     :ldflags               => "#{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}",
     :windres               => (c(:MINGW_PROCESSOR_ARCH) == 'amd64' ? '-DMINGW_PROCESSOR_ARCH_AMD64=1 ' : '') + (c?(:USE_WXWIDGETS) ? c(:WXWIDGETS_INCLUDES) : '-DNOWXWIDGETS'),

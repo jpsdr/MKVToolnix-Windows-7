@@ -1,36 +1,44 @@
-AC_DEFUN([AX_CXX_STD_CXX11_FLAG],[
-  AC_CACHE_CHECK([for support for the "-std=c++11"/"-std=c++0x" flag], [ax_cv_std_cxx11_flag],[
-
-    CXXFLAGS_SAVED=$CXXFLAGS
-    CXXFLAGS="$CXXFLAGS -std=c++11"
-    export CXXFLAGS
+AC_DEFUN([AX_CXX_STD_CXX_FLAG],[
+  AC_CACHE_CHECK([for support for the "-std=c++14" flag], [ax_cv_std_cxx_flag],[
 
     AC_LANG_PUSH(C++)
+    CXXFLAGS_SAVED="$CXXFLAGS"
 
-    AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx11_flag="-std=c++11"], [ax_cv_std_cxx11_flag="undecided"])
+    CXXFLAGS="$CXXFLAGS_SAVED -std=c++14"
+    AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++14"], [ax_cv_std_cxx_flag="undecided"])
 
-    if test x"$ax_cv_std_cxx11_flag" = xundecided ; then
+    if test x"$ax_cv_std_cxx_flag" = xundecided ; then
+      CXXFLAGS="$CXXFLAGS_SAVED -std=c++1y"
+      AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++1y"], [ax_cv_std_cxx_flag="undecided"])
+    fi
+
+    if test x"$ax_cv_std_cxx_flag" = xundecided ; then
+      CXXFLAGS="$CXXFLAGS_SAVED -std=c++11"
+      AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++11"], [ax_cv_std_cxx_flag="undecided"])
+    fi
+
+    if test x"$ax_cv_std_cxx_flag" = xundecided ; then
       CXXFLAGS="$CXXFLAGS_SAVED -std=c++0x"
-      AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx11_flag="-std=c++0x"], [ax_cv_std_cxx11_flag="no"])
+      AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++0x"], [ax_cv_std_cxx_flag="no"])
     fi
 
     AC_LANG_POP
     CXXFLAGS="$CXXFLAGS_SAVED"
   ])
 
-  STD_CXX11=""
-  if test x"$ax_cv_std_cxx11_flag" != xno ; then
-    STD_CXX11=$ax_cv_std_cxx11_flag
+  STD_CXX=""
+  if test x"$ax_cv_std_cxx_flag" != xno ; then
+    STD_CXX=$ax_cv_std_cxx_flag
   fi
 
-  AC_SUBST(STD_CXX11)
+  AC_SUBST(STD_CXX)
 ])
 
 AC_DEFUN([AX_CXX11_INITIALIZER_LISTS],[
   AC_CACHE_CHECK([for support for C++11 feature "initializer lists"], [ax_cv_cxx11_initializer_lists],[
 
     CXXFLAGS_SAVED=$CXXFLAGS
-    CXXFLAGS="$CXXFLAGS $STD_CXX11"
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
@@ -48,7 +56,7 @@ AC_DEFUN([AX_CXX11_INITIALIZER_LISTS],[
   ])
 
   if ! test x"$ax_cv_cxx11_initializer_lists" = xyes ; then
-    missing_cxx11_features="$missing_cxx11_features\n  * initializer lists"
+    missing_cxx_features="$missing_cxx_features\n  * initializer lists"
   fi
 ])
 
@@ -56,7 +64,7 @@ AC_DEFUN([AX_CXX11_RANGE_BASED_FOR],[
   AC_CACHE_CHECK([for support for C++11 feature "range-based 'for'"], [ax_cv_cxx11_range_based_for],[
 
     CXXFLAGS_SAVED=$CXXFLAGS
-    CXXFLAGS="$CXXFLAGS $STD_CXX11"
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
@@ -78,7 +86,7 @@ for (std::string &s : listy)
   ])
 
   if ! test x"$ax_cv_cxx11_range_based_for" = xyes ; then
-    missing_cxx11_features="$missing_cxx11_features\n  * range-based 'for'"
+    missing_cxx_features="$missing_cxx_features\n  * range-based 'for'"
   fi
 ])
 
@@ -86,7 +94,7 @@ AC_DEFUN([AX_CXX11_RIGHT_ANGLE_BRACKETS],[
   AC_CACHE_CHECK([for support for C++11 feature "right angle brackets"], [ax_cv_cxx11_right_angle_brackets],[
 
     CXXFLAGS_SAVED=$CXXFLAGS
-    CXXFLAGS="$CXXFLAGS $STD_CXX11"
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
@@ -106,7 +114,7 @@ typedef std::map<int, std::vector<int>> unicorn;
   ])
 
   if ! test x"$ax_cv_cxx11_right_angle_brackets" = xyes ; then
-    missing_cxx11_features="$missing_cxx11_features\n  * right angle brackets"
+    missing_cxx_features="$missing_cxx_features\n  * right angle brackets"
   fi
 ])
 
@@ -114,7 +122,7 @@ AC_DEFUN([AX_CXX11_AUTO_KEYWORD],[
   AC_CACHE_CHECK([for support for C++11 feature "'auto' keyword"], [ax_cv_cxx11_auto_keyword],[
 
     CXXFLAGS_SAVED=$CXXFLAGS
-    CXXFLAGS="$CXXFLAGS $STD_CXX11"
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
@@ -135,7 +143,7 @@ AC_DEFUN([AX_CXX11_AUTO_KEYWORD],[
   ])
 
   if ! test x"$ax_cv_cxx11_auto_keyword" = xyes ; then
-    missing_cxx11_features="$missing_cxx11_features\n  * 'auto' keyword"
+    missing_cxx_features="$missing_cxx_features\n  * 'auto' keyword"
   fi
 ])
 
@@ -143,7 +151,7 @@ AC_DEFUN([AX_CXX11_LAMBDA_FUNCTIONS],[
   AC_CACHE_CHECK([for support for C++11 feature "lambda functions"], [ax_cv_cxx11_lambda_functions],[
 
     CXXFLAGS_SAVED=$CXXFLAGS
-    CXXFLAGS="$CXXFLAGS $STD_CXX11"
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
@@ -165,7 +173,7 @@ std::for_each(listy.begin(), listy.end(), [&](unsigned int i) { sum += i; });
   ])
 
   if ! test x"$ax_cv_cxx11_lambda_functions" = xyes ; then
-    missing_cxx11_features="$missing_cxx11_features\n  * lambda functions"
+    missing_cxx_features="$missing_cxx_features\n  * lambda functions"
   fi
 ])
 
@@ -173,7 +181,7 @@ AC_DEFUN([AX_CXX11_NULLPTR],[
   AC_CACHE_CHECK([for support for C++11 feature "nullptr"], [ax_cv_cxx11_nullptr],[
 
     CXXFLAGS_SAVED=$CXXFLAGS
-    CXXFLAGS="$CXXFLAGS $STD_CXX11"
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
@@ -188,7 +196,7 @@ AC_DEFUN([AX_CXX11_NULLPTR],[
   ])
 
   if ! test x"$ax_cv_cxx11_nullptr" = xyes ; then
-    missing_cxx11_features="$missing_cxx11_features\n  * nullptr"
+    missing_cxx_features="$missing_cxx_features\n  * nullptr"
   fi
 ])
 
@@ -196,7 +204,7 @@ AC_DEFUN([AX_CXX11_TUPLES],[
   AC_CACHE_CHECK([for support for C++11 feature "tuples"], [ax_cv_cxx11_tuples],[
 
     CXXFLAGS_SAVED=$CXXFLAGS
-    CXXFLAGS="$CXXFLAGS $STD_CXX11"
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
@@ -214,7 +222,7 @@ AC_DEFUN([AX_CXX11_TUPLES],[
   ])
 
   if ! test x"$ax_cv_cxx11_tuples" = xyes ; then
-    missing_cxx11_features="$missing_cxx11_features\n  * tuples"
+    missing_cxx_features="$missing_cxx_features\n  * tuples"
   fi
 ])
 
@@ -222,7 +230,7 @@ AC_DEFUN([AX_CXX11_ALIAS_DECLARATIONS],[
   AC_CACHE_CHECK([for support for C++11 feature "alias declarations"], [ax_cv_cxx11_alias_declarations],[
 
     CXXFLAGS_SAVED=$CXXFLAGS
-    CXXFLAGS="$CXXFLAGS $STD_CXX11"
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
@@ -242,7 +250,7 @@ using thingy = std::vector<int>;
   ])
 
   if ! test x"$ax_cv_cxx11_alias_declarations" = xyes ; then
-    missing_cxx11_features="$missing_cxx11_features\n  * alias declarations"
+    missing_cxx_features="$missing_cxx_features\n  * alias declarations"
   fi
 ])
 
@@ -250,7 +258,7 @@ dnl AC_DEFUN([AX_CXX11_DEF_NAME],[
 dnl   AC_CACHE_CHECK([for support for C++11 feature "human"], [ax_cv_cxx11_def_name],[
 dnl
 dnl     CXXFLAGS_SAVED=$CXXFLAGS
-dnl     CXXFLAGS="$CXXFLAGS $STD_CXX11"
+dnl     CXXFLAGS="$CXXFLAGS $STD_CXX"
 dnl     export CXXFLAGS
 dnl
 dnl     AC_LANG_PUSH(C++)
@@ -265,11 +273,11 @@ dnl     CXXFLAGS="$CXXFLAGS_SAVED"
 dnl   ])
 dnl
 dnl   if ! test x"$ax_cv_cxx11_def_name" = xyes ; then
-dnl     missing_cxx11_features="$missing_cxx11_features\n  * human"
+dnl     missing_cxx_features="$missing_cxx_features\n  * human"
 dnl   fi
 dnl ])
 
-AX_CXX_STD_CXX11_FLAG
+AX_CXX_STD_CXX_FLAG
 AX_CXX11_INITIALIZER_LISTS
 AX_CXX11_RANGE_BASED_FOR
 AX_CXX11_RIGHT_ANGLE_BRACKETS
@@ -279,8 +287,8 @@ AX_CXX11_NULLPTR
 AX_CXX11_TUPLES
 AX_CXX11_ALIAS_DECLARATIONS
 
-if test x"$missing_cxx11_features" != x ; then
-  printf "The following features of the C++11 standard are not supported by $CXX:$missing_cxx11_features\n"
+if test x"$missing_cxx_features" != x ; then
+  printf "The following features of the C++11 standard are not supported by $CXX:$missing_cxx_features\n"
   printf "If you are using the GNU C compiler collection (gcc) then you need\n"
   printf "at least v4.6.\n"
   AC_MSG_ERROR([support for required C++11 features incomplete])
