@@ -44,7 +44,7 @@ public:
 
   virtual packet_extension_type_e get_type() const = 0;
 };
-typedef std::shared_ptr<packet_extension_c> packet_extension_cptr;
+using packet_extension_cptr = std::shared_ptr<packet_extension_c>;
 
 struct packet_t {
   memory_cptr data;
@@ -218,6 +218,6 @@ struct packet_t {
 
   void normalize_timecodes();
 };
-typedef std::shared_ptr<packet_t> packet_cptr;
+using packet_cptr = std::shared_ptr<packet_t>;
 
 #endif // MTX_PACKET_H

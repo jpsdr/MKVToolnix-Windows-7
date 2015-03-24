@@ -42,6 +42,6 @@ protected:
   virtual void _log_debug_message(const std::string &message);
   virtual void yield();
 };
-typedef std::shared_ptr<wx_kax_analyzer_c> wx_kax_analyzer_cptr;
+using wx_kax_analyzer_cptr = std::shared_ptr<wx_kax_analyzer_c>;
 
 #endif // MTX_WX_KAX_ANALYZER_H

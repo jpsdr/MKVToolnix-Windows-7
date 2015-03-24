@@ -61,21 +61,21 @@
 
 //// OggDS headers
 // Header for the new header format
-typedef struct {
+struct stream_header_video {
   ogg_int32_t  width;
   ogg_int32_t  height;
-} stream_header_video;
+};
 
-typedef struct {
+struct stream_header_audio {
   ogg_int16_t  channels;
   ogg_int16_t  blockalign;
   ogg_int32_t  avgbytespersec;
-} stream_header_audio;
+};
 
 #if defined(COMP_MSC)
 #pragma pack(push,1)
 #endif
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE stream_header {
   char        streamtype[8];
   char        subtype[4];
 
@@ -97,7 +97,7 @@ typedef struct PACKED_STRUCTURE {
     stream_header_audio  audio;
   } sh;
 
-} stream_header;
+};
 
 struct PACKED_STRUCTURE vp8_ogg_header_t {
   uint8_t header_id;            // VP8 Ogg header mapping ID 0x4f

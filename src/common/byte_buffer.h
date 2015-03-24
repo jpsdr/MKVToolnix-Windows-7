@@ -108,6 +108,6 @@ private:
   }
 };
 
-typedef std::shared_ptr<byte_buffer_c> byte_buffer_cptr;
+using byte_buffer_cptr = std::shared_ptr<byte_buffer_c>;
 
 #endif // MTX_COMMON_BYTE_BUFFER_H

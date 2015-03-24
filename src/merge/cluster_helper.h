@@ -28,7 +28,7 @@
 
 class render_groups_c;
 class packet_t;
-typedef std::shared_ptr<packet_t> packet_cptr;
+using packet_cptr = std::shared_ptr<packet_t>;
 
 class cluster_helper_c {
 private:

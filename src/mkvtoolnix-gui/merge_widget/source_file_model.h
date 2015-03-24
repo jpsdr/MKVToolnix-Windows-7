@@ -11,7 +11,7 @@
 #include <QSet>
 
 class SourceFileModel;
-typedef std::shared_ptr<SourceFileModel> SourceFileModelPtr;
+using SourceFileModelPtr = std::shared_ptr<SourceFileModel>;
 
 class TrackModel;
 

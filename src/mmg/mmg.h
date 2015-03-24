@@ -136,7 +136,7 @@ struct mmg_track_t {
 
   bool is_webm_compatible();
 };
-typedef std::shared_ptr<mmg_track_t> mmg_track_cptr;
+using mmg_track_cptr = std::shared_ptr<mmg_track_t>;
 
 struct mmg_file_t;
 
@@ -154,7 +154,7 @@ struct mmg_attached_file_t {
   {
   }
 };
-typedef std::shared_ptr<mmg_attached_file_t> mmg_attached_file_cptr;
+using mmg_attached_file_cptr = std::shared_ptr<mmg_attached_file_t>;
 
 struct mmg_file_t {
   wxString file_name, title;
@@ -172,7 +172,7 @@ struct mmg_file_t {
   {
   }
 };
-typedef std::shared_ptr<mmg_file_t> mmg_file_cptr;
+using mmg_file_cptr = std::shared_ptr<mmg_file_t>;
 
 struct mmg_attachment_t {
   wxString file_name, stored_name, description, mime_type;
@@ -183,7 +183,7 @@ struct mmg_attachment_t {
   {
   }
 };
-typedef std::shared_ptr<mmg_attachment_t> mmg_attachment_cptr;
+using mmg_attachment_cptr = std::shared_ptr<mmg_attachment_t>;
 
 enum output_directory_mode_e {
   ODM_FROM_FIRST_INPUT_FILE      = 0,
@@ -250,8 +250,8 @@ struct mmg_options_t {
   wxString mkvmerge_exe();
 };
 
-typedef std::pair<const wxString, bool> wxstring_bool_pair_t;
-typedef std::pair<const wxString, wxString> wxstring_wxstring_pair_t;
+using wxstring_bool_pair_t     = std::pair<const wxString, bool>;
+using wxstring_wxstring_pair_t = std::pair<const wxString, wxString>;
 
 extern wxString last_open_dir;
 extern std::vector<wxString> last_settings;

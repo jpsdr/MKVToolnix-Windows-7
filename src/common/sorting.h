@@ -34,9 +34,9 @@ by(Titer first,
    Titer last,
    Tcriterion_maker criterion_maker,
    Tcomparator comparator = Tcomparator{}) {
-  typedef typename std::iterator_traits<Titer>::value_type value_type;
-  typedef decltype( criterion_maker(*first) ) criterion_type;
-  typedef std::pair<value_type, criterion_type> pair_type;
+  using value_type     = typename std::iterator_traits<Titer>::value_type;
+  using criterion_type = decltype( criterion_maker(*first) );
+  using pair_type      = std::pair<value_type, criterion_type>;
 
   if (first == last)
     return;
@@ -133,7 +133,7 @@ template<typename IterT>
 void
 naturally(IterT first,
           IterT last) {
-  typedef typename std::iterator_traits<IterT>::value_type StrT;
+  using StrT = typename std::iterator_traits<IterT>::value_type;
   by(first, last, [](StrT const &string) { return natural_string_c<StrT>{string}; });
 }
 

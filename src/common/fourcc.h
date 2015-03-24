@@ -22,7 +22,7 @@
 
 class fourcc_c {
 public:
-  typedef enum { big_endian, little_endian } byte_order_t;
+  enum byte_order_t { big_endian, little_endian };
 
 private:
   uint32_t m_value;

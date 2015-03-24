@@ -156,7 +156,7 @@ struct kax_track_t {
   void fix_display_dimension_parameters();
   void add_track_tags_to_identification(std::vector<std::string> &verbose_info);
 };
-typedef std::shared_ptr<kax_track_t> kax_track_cptr;
+using kax_track_cptr = std::shared_ptr<kax_track_t>;
 
 class kax_reader_c: public generic_reader_c {
 private:
@@ -182,7 +182,7 @@ private:
   int64_t m_segment_duration, m_last_timecode, m_first_timecode;
   std::string m_title;
 
-  typedef std::map<deferred_l1_type_e, std::vector<int64_t> > deferred_positions_t;
+  using deferred_positions_t = std::map<deferred_l1_type_e, std::vector<int64_t> >;
   deferred_positions_t m_deferred_l1_positions, m_handled_l1_positions;
 
   std::string m_writing_app, m_muxing_app;

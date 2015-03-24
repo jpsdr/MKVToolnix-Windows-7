@@ -435,7 +435,7 @@ protected:
   void init_nalu_names();
   void calculate_frame_order();
 };
-typedef std::shared_ptr<avc_es_parser_c> avc_es_parser_cptr;
+using avc_es_parser_cptr = std::shared_ptr<avc_es_parser_c>;
 
 };
 };

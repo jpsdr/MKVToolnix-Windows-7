@@ -73,7 +73,7 @@ public:
   };
 };
 
-typedef std::shared_ptr<ogm_demuxer_c> ogm_demuxer_cptr;
+using ogm_demuxer_cptr = std::shared_ptr<ogm_demuxer_c>;
 
 class ogm_reader_c: public generic_reader_c {
 private:

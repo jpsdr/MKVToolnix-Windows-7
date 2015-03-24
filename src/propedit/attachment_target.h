@@ -23,8 +23,8 @@
 using namespace libebml;
 using namespace libmatroska;
 
-typedef target_id_manager_c<KaxAttached> attachment_id_manager_c;
-typedef std::shared_ptr<attachment_id_manager_c> attachment_id_manager_cptr;
+using attachment_id_manager_c    = target_id_manager_c<KaxAttached>;
+using attachment_id_manager_cptr = std::shared_ptr<attachment_id_manager_c>;
 
 class attachment_target_c: public target_c {
 public:

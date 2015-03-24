@@ -58,14 +58,14 @@ operator <<(std::ostream &out,
 
 class flv_tag_c {
 public:
-  typedef enum {
+  enum codec_type_e {
       CODEC_SORENSON_H263 = 2
     , CODEC_SCREEN_VIDEO
     , CODEC_VP6
     , CODEC_VP6_WITH_ALPHA
     , CODEC_SCREEN_VIDEO_V2
     , CODEC_H264
-  } codec_type_e;
+  };
 
 public:
   uint32_t m_previous_tag_size;
@@ -125,7 +125,7 @@ public:
   void extract_flv1_width_and_height();
 };
 
-typedef std::shared_ptr<flv_track_c> flv_track_cptr;
+using flv_track_cptr = std::shared_ptr<flv_track_c>;
 
 class flv_reader_c: public generic_reader_c {
 private:

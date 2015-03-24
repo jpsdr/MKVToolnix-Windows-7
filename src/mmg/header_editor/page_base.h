@@ -48,6 +48,6 @@ public:
   virtual void translate_ui() = 0;
   wxString get_title();
 };
-typedef std::shared_ptr<he_page_base_c> he_page_base_cptr;
+using he_page_base_cptr = std::shared_ptr<he_page_base_c>;
 
 #endif // MTX_HE_PAGE_BASE_H

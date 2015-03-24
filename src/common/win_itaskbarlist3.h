@@ -4,7 +4,7 @@
 
 # if !defined(__ITaskbarList3_FWD_DEFINED__)
 #  define __ITaskbarList3_FWD_DEFINED__
-typedef interface ITaskbarList3 ITaskbarList3;
+using ITaskbarList3 = interface ITaskbarList3;
 # endif  // __ITaskbarList3_FWD_DEFINED__
 
 # if !defined(__ITaskbarList3_INTERFACE_DEFINED__)

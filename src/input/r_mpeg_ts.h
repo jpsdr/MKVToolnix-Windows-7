@@ -264,7 +264,7 @@ struct PACKED_STRUCTURE mpeg_ts_pes_header_t {
 class mpeg_ts_reader_c;
 
 class mpeg_ts_track_c;
-typedef std::shared_ptr<mpeg_ts_track_c> mpeg_ts_track_ptr;
+using mpeg_ts_track_ptr = std::shared_ptr<mpeg_ts_track_c>;
 
 class mpeg_ts_track_c {
 public:

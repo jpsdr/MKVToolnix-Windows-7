@@ -218,6 +218,34 @@ AC_DEFUN([AX_CXX11_TUPLES],[
   fi
 ])
 
+AC_DEFUN([AX_CXX11_ALIAS_DECLARATIONS],[
+  AC_CACHE_CHECK([for support for C++11 feature "alias declarations"], [ax_cv_cxx11_alias_declarations],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX11"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [
+#include <vector>
+using thingy = std::vector<int>;
+],[
+  thingy things;
+  things.push_back(42);
+],
+      [ax_cv_cxx11_alias_declarations="yes"],
+      [ax_cv_cxx11_alias_declarations="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx11_alias_declarations" = xyes ; then
+    missing_cxx11_features="$missing_cxx11_features\n  * alias declarations"
+  fi
+])
+
 dnl AC_DEFUN([AX_CXX11_DEF_NAME],[
 dnl   AC_CACHE_CHECK([for support for C++11 feature "human"], [ax_cv_cxx11_def_name],[
 dnl
@@ -249,6 +277,7 @@ AX_CXX11_AUTO_KEYWORD
 AX_CXX11_LAMBDA_FUNCTIONS
 AX_CXX11_NULLPTR
 AX_CXX11_TUPLES
+AX_CXX11_ALIAS_DECLARATIONS
 
 if test x"$missing_cxx11_features" != x ; then
   printf "The following features of the C++11 standard are not supported by $CXX:$missing_cxx11_features\n"

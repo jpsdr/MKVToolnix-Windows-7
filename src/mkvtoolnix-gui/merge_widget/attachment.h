@@ -10,7 +10,7 @@
 #include <QString>
 
 class Attachment;
-typedef std::shared_ptr<Attachment> AttachmentPtr;
+using AttachmentPtr = std::shared_ptr<Attachment>;
 
 class QStringList;
 

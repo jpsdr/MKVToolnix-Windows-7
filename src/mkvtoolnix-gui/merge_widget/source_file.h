@@ -15,7 +15,7 @@
 #include <QString>
 
 class SourceFile;
-typedef std::shared_ptr<SourceFile> SourceFilePtr;
+using SourceFilePtr = std::shared_ptr<SourceFile>;
 
 class SourceFile {
 public:

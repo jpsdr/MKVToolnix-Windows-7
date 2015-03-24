@@ -33,7 +33,7 @@ public:
     void reset();
   };
 
-  typedef std::unordered_map<int, char const *> char_map_t;
+  using char_map_t = std::unordered_map<int, char const *>;
   static std::vector<char_map_t> ms_char_maps;
 
 protected:

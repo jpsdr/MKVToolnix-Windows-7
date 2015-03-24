@@ -23,12 +23,12 @@
 #include "output/p_video.h"
 #include "merge/generic_reader.h"
 
-typedef struct {
+struct rv_segment_t {
   memory_cptr data;
   uint64_t flags;
-} rv_segment_t;
+};
 
-typedef std::shared_ptr<rv_segment_t> rv_segment_cptr;
+using rv_segment_cptr = std::shared_ptr<rv_segment_t>;
 
 struct real_demuxer_t {
   int ptzr;
@@ -83,7 +83,7 @@ struct real_demuxer_t {
   };
 };
 
-typedef std::shared_ptr<real_demuxer_t> real_demuxer_cptr;
+using real_demuxer_cptr = std::shared_ptr<real_demuxer_t>;
 
 class real_reader_c: public generic_reader_c {
 private:

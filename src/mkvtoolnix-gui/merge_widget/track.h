@@ -14,7 +14,7 @@ class SourceFile;
 class MkvmergeOptionBuilder;
 
 class Track;
-typedef std::shared_ptr<Track> TrackPtr;
+using TrackPtr = std::shared_ptr<Track>;
 
 class Track {
 public:

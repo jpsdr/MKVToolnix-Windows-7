@@ -24,11 +24,11 @@ memory_c::resize(size_t new_size)
     its_counter = new counter(nullptr, 0, false);
 
   if (its_counter->is_free) {
-    its_counter->ptr  = (X *)saferealloc(its_counter->ptr, new_size + its_counter->offset);
+    its_counter->ptr  = (unsigned char *)saferealloc(its_counter->ptr, new_size + its_counter->offset);
     its_counter->size = new_size + its_counter->offset;
 
   } else {
-    X *tmp = (X *)safemalloc(new_size);
+    auto tmp = (unsigned char *)safemalloc(new_size);
     memcpy(tmp, its_counter->ptr + its_counter->offset, std::min(new_size, its_counter->size - its_counter->offset));
     its_counter->ptr     = tmp;
     its_counter->is_free = true;

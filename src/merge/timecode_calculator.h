@@ -20,7 +20,7 @@
 #include "common/timecode.h"
 
 class packet_t;
-typedef std::shared_ptr<packet_t> packet_cptr;
+using packet_cptr = std::shared_ptr<packet_t>;
 
 class timecode_calculator_c {
 private:

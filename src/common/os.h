@@ -82,19 +82,19 @@
 #if !defined(HAVE_COREC_H)
 # define strncasecmp _strnicmp
 # define strcasecmp _stricmp
-typedef __int64 int64_t;
-typedef __int32 int32_t;
-typedef __int16 int16_t;
-typedef __int8  int8_t;
-typedef unsigned __int64 uint64_t;
-typedef unsigned __int32 uint32_t;
-typedef unsigned __int16 uint16_t;
-typedef unsigned __int8 uint8_t;
+using int64_t = __int64;
+using int32_t = __int32;
+using int16_t = __int16;
+using int8_t = __int8;
+using uint64_t = unsigned __int64;
+using uint32_t = unsigned __int32;
+using uint16_t = unsigned __int16;
+using uint8_t = unsigned __int8;
 #endif // HAVE_COREC_H
 
 # define nice(a)
 #include <io.h>
-typedef _fsize_t ssize_t;
+using ssize_t = _fsize_t;
 
 #define PACKED_STRUCTURE
 #else // COMP_MSC
@@ -127,10 +127,10 @@ typedef _fsize_t ssize_t;
 #define LLU "%" PRIu64
 
 #if defined(HAVE_NO_INT64_T)
-typedef INT64_TYPE int64_t;
+using int64_t = INT64_TYPE;
 #endif
 #if defined(HAVE_NO_UINT64_T)
-typedef UINT64_TYPE uint64_t;
+using uint64_t = UINT64_TYPE;
 #endif
 
 #if defined(SYS_WINDOWS)

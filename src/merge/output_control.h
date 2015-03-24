@@ -198,7 +198,7 @@ extern std::string g_outfile;
 extern double g_timecode_scale;
 extern timecode_scale_mode_e g_timecode_scale_mode;
 
-typedef std::shared_ptr<bitvalue_c> g_bitvalue_cptr;
+using g_bitvalue_cptr = std::shared_ptr<bitvalue_c>;
 
 extern bitvalue_cptr g_seguid_link_previous, g_seguid_link_next;
 extern std::deque<bitvalue_cptr> g_forced_seguids;

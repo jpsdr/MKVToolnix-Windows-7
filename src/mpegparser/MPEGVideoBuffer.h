@@ -45,7 +45,7 @@ enum MPEG2BufferState_e {
 #define MPEG2_P_FRAME 2
 #define MPEG2_B_FRAME 3
 
-typedef struct MPEG2SequenceHeader{
+struct MPEG2SequenceHeader {
   uint32_t width;
   uint32_t height;
   float aspectRatio;
@@ -54,9 +54,9 @@ typedef struct MPEG2SequenceHeader{
   uint8_t progressiveSequence;
 
   MPEG2SequenceHeader();
-}MPEG2SequenceHeader;
+};
 
-typedef struct MPEG2GOPHeader{
+struct MPEG2GOPHeader {
   uint8_t closedGOP;
   uint8_t brokenLink;
   uint32_t timeFrames;
@@ -65,13 +65,13 @@ typedef struct MPEG2GOPHeader{
   uint32_t timeHours;
 
   MPEG2GOPHeader();
-}MPEG2GOPHeader;
+};
 
 #define MPEG2_PICTURE_TYPE_FRAME  0x03
 #define MPEG2_PICTURE_TYPE_TOP_FIELD  0x01
 #define MPEG2_PICTURE_TYPE_BOTTOM_FIELD  0x02
 
-typedef struct MPEG2PictureHeader{
+struct MPEG2PictureHeader {
   uint32_t temporalReference;
   uint8_t frameType;
   uint32_t pictureStructure;
@@ -80,7 +80,7 @@ typedef struct MPEG2PictureHeader{
   uint8_t progressive;
 
   MPEG2PictureHeader();
-}MPEG2PictureHeader;
+};
 
 class MPEGChunk{
 private:

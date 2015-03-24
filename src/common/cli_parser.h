@@ -17,7 +17,7 @@
 
 #define INDENT_DEFAULT -1
 
-typedef std::function<void(void)> cli_parser_cb_t;
+using cli_parser_cb_t = std::function<void(void)>;
 
 class cli_parser_c {
 protected:

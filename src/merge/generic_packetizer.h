@@ -42,7 +42,7 @@ enum connection_result_e {
   CAN_CONNECT_MAYBE_CODECPRIVATE
 };
 
-typedef std::deque<packet_cptr>::iterator packet_cptr_di;
+using packet_cptr_di = std::deque<packet_cptr>::iterator;
 
 class generic_packetizer_c {
 protected:

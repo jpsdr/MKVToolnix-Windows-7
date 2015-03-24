@@ -48,7 +48,7 @@ public:
   virtual bool probe(mm_io_cptr &io) = 0;
 };
 
-typedef std::shared_ptr<wav_demuxer_c> wav_demuxer_cptr;
+using wav_demuxer_cptr = std::shared_ptr<wav_demuxer_c>;
 
 struct wav_chunk_t {
   int64_t pos;

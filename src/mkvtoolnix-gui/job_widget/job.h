@@ -11,7 +11,7 @@
 
 class QSettings;
 class Job;
-typedef std::shared_ptr<Job> JobPtr;
+using JobPtr = std::shared_ptr<Job>;
 
 class Job: public QObject {
   Q_OBJECT;

@@ -26,10 +26,6 @@
 using namespace libebml;
 using namespace libmatroska;
 
-#if LIBEBML_VERSION < 0x000800
-typedef uint64 filepos_t;
-#endif
-
 class kax_cluster_c: public KaxCluster {
 public:
   kax_cluster_c(): KaxCluster() {
@@ -82,7 +78,7 @@ public:
   void set_block_duration(uint64_t time_length);
   bool replace_simple_by_group();
 };
-typedef std::shared_ptr<kax_block_blob_c> kax_block_blob_cptr;
+using kax_block_blob_cptr = std::shared_ptr<kax_block_blob_c>;
 
 class kax_cues_position_dummy_c: public KaxCues {
 public:

@@ -23,7 +23,7 @@
 #if defined(COMP_MSC)
 #pragma pack(push,1)
 #endif
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE tta_file_header_t {
   char signature[4];            /* TTA1 */
   uint16_t audio_format;        /* 1 for 32 bits per sample, 3 otherwise? */
   uint16_t channels;
@@ -31,7 +31,7 @@ typedef struct PACKED_STRUCTURE {
   uint32_t sample_rate;
   uint32_t data_length;
   uint32_t crc;
-} tta_file_header_t;
+};
 #if defined(COMP_MSC)
 #pragma pack(pop)
 #endif

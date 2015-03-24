@@ -29,7 +29,7 @@ enum algorithm_e {
 };
 
 class base_c;
-typedef std::shared_ptr<base_c> base_cptr;
+using base_cptr = std::shared_ptr<base_c>;
 
 class base_c {
 public:

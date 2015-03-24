@@ -17,7 +17,7 @@
 #include "common/property_element.h"
 
 class change_c;
-typedef std::shared_ptr<change_c> change_cptr;
+using change_cptr = std::shared_ptr<change_c>;
 
 class change_c {
 public:

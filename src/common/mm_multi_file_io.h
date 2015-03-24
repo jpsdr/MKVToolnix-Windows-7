@@ -19,7 +19,7 @@
 #include "common/mm_io.h"
 
 class mm_multi_file_io_c;
-typedef std::shared_ptr<mm_multi_file_io_c> mm_multi_file_io_cptr;
+using mm_multi_file_io_cptr = std::shared_ptr<mm_multi_file_io_c>;
 
 class mm_multi_file_io_c: public mm_io_c {
 protected:

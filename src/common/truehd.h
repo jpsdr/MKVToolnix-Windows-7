@@ -71,7 +71,7 @@ struct truehd_frame_t {
     return ac3 == m_codec;
   }
 };
-typedef std::shared_ptr<truehd_frame_t> truehd_frame_cptr;
+using truehd_frame_cptr = std::shared_ptr<truehd_frame_t>;
 
 class truehd_parser_c {
 protected:
@@ -96,6 +96,6 @@ protected:
   virtual unsigned int resync(unsigned int offset);
   virtual int decode_channel_map(int channel_map);
 };
-typedef std::shared_ptr<truehd_parser_c> truehd_parser_cptr;
+using truehd_parser_cptr = std::shared_ptr<truehd_parser_c>;
 
 #endif // MTX_COMMON_TRUEHD_COMMON_H

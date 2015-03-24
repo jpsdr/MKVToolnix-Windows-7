@@ -25,7 +25,7 @@
 #endif
 
 class charset_converter_c;
-typedef std::shared_ptr<charset_converter_c> charset_converter_cptr;
+using charset_converter_cptr = std::shared_ptr<charset_converter_c>;
 
 class charset_converter_c {
 protected:

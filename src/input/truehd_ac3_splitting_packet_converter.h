@@ -37,6 +37,6 @@ protected:
   virtual void process_frames();
 };
 
-typedef std::shared_ptr<truehd_ac3_splitting_packet_converter_c> truehd_ac3_splitting_packet_converter_cptr;
+using truehd_ac3_splitting_packet_converter_cptr = std::shared_ptr<truehd_ac3_splitting_packet_converter_c>;
 
 #endif  // MTX_INPUT_TRUEHD_AC3_SPLITTING_PACKET_CONVERTER_H

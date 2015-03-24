@@ -19,7 +19,7 @@
 #include "merge/output_control.h"
 #include "output/p_textsubs.h"
 
-typedef struct sub_t {
+struct sub_t {
   int64_t start, end;
   unsigned int number;
   std::string subs;
@@ -31,7 +31,7 @@ typedef struct sub_t {
   bool operator < (const sub_t &cmp) const {
     return start < cmp.start;
   }
-} sub_t;
+};
 
 class subtitles_c {
 private:
@@ -63,7 +63,7 @@ public:
     return current == entries.end();
   }
 };
-typedef std::shared_ptr<subtitles_c> subtitles_cptr;
+using subtitles_cptr = std::shared_ptr<subtitles_c>;
 
 class srt_parser_c: public subtitles_c {
 public:
@@ -87,7 +87,7 @@ public:
 public:
   static bool probe(mm_text_io_c *io);
 };
-typedef std::shared_ptr<srt_parser_c> srt_parser_cptr;
+using srt_parser_cptr = std::shared_ptr<srt_parser_c>;
 
 class ssa_parser_c: public subtitles_c {
 public:
@@ -144,7 +144,7 @@ protected:
   void add_attachment_maybe(std::string &name, std::string &data_uu, ssa_section_e section);
   void decode_chars(unsigned char const *in, unsigned char *out, size_t bytes_in);
 };
-typedef std::shared_ptr<ssa_parser_c> ssa_parser_cptr;
+using ssa_parser_cptr = std::shared_ptr<ssa_parser_c>;
 
 int64_t spu_extract_duration(unsigned char *data, size_t buf_size, int64_t timecode);
 

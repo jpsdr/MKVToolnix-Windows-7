@@ -50,7 +50,7 @@ namespace mtx {
 class mm_io_c;
 class mm_text_io_c;
 
-typedef std::shared_ptr<KaxChapters> kax_chapters_cptr;
+using kax_chapters_cptr = std::shared_ptr<KaxChapters>;
 
 kax_chapters_cptr
 parse_chapters(const std::string &file_name, int64_t min_tc = 0, int64_t max_tc = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",

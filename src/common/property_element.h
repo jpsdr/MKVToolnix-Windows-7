@@ -57,6 +57,6 @@ public:                         // static
   static void init_tables();
   static std::vector<property_element_c> &get_table_for(const EbmlCallbacks &master_callbacks, const EbmlCallbacks *sub_master_callbacks = nullptr, bool full_table = false);
 };
-typedef std::shared_ptr<property_element_c> property_element_cptr;
+using property_element_cptr = std::shared_ptr<property_element_c>;
 
 #endif  // MTX_COMMON_PROPERTY_TABLE_H

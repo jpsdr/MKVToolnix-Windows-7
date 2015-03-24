@@ -24,6 +24,6 @@ uint32_t round_to_nearest_pow2(uint32_t value);
 int int_log2(uint32_t value);
 double int_to_double(int64_t value);
 
-typedef boost::rational<int64_t> int64_rational_c;
+using int64_rational_c = boost::rational<int64_t>;
 
 #endif  // MTX_COMMON_MATH_H

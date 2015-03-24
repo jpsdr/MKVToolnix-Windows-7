@@ -24,7 +24,7 @@
 using namespace libebml;
 using namespace libmatroska;
 
-typedef std::shared_ptr<KaxInfo> kax_info_cptr;
+using kax_info_cptr = std::shared_ptr<KaxInfo>;
 
 void fix_mandatory_segmentinfo_elements(EbmlElement *e);
 

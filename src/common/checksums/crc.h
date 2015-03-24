@@ -30,7 +30,7 @@ protected:
     crc_32_ieee_le = 4,
   };
 
-  typedef std::vector<uint32_t> table_t;
+  using table_t = std::vector<uint32_t>;
 
   struct table_parameters_t {
     uint8_t  le;

@@ -361,7 +361,7 @@ private:
   bool parse_esds_atom(mm_mem_io_c &memio, int level);
   uint32_t read_esds_descr_len(mm_mem_io_c &memio);
 };
-typedef std::shared_ptr<qtmp4_demuxer_c> qtmp4_demuxer_cptr;
+using qtmp4_demuxer_cptr = std::shared_ptr<qtmp4_demuxer_c>;
 
 struct qt_atom_t {
   fourcc_c fourcc;

@@ -20,7 +20,7 @@ public:
 };
 
 class Process;
-typedef std::shared_ptr<Process> ProcessPtr;
+using ProcessPtr = std::shared_ptr<Process>;
 
 class Process: public QObject {
   Q_OBJECT;

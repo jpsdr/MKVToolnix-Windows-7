@@ -25,7 +25,7 @@ static const int64_t max_dts_packet_size = 15384;
    functions below it later available in C
 */
 
-typedef struct dts_header_s {
+struct dts_header_t {
 
   // ---------------------------------------------------
 
@@ -150,27 +150,27 @@ typedef struct dts_header_s {
   } hd_type;
   int hd_part_size;
 
-} dts_header_t;
+};
 
 int find_dts_sync_word(const unsigned char *buf, unsigned int size);
-int find_dts_header(const unsigned char *buf, unsigned int size, struct dts_header_s *dts_header, bool allow_no_hd_search = false);
+int find_dts_header(const unsigned char *buf, unsigned int size, struct dts_header_t *dts_header, bool allow_no_hd_search = false);
 int find_consecutive_dts_headers(const unsigned char *buf, unsigned int size, unsigned int num);
-void print_dts_header(const struct dts_header_s *dts_header);
+void print_dts_header(const struct dts_header_t *dts_header);
 
-bool operator ==(const dts_header_s &h1, const dts_header_s &h2);
+bool operator ==(const dts_header_t &h1, const dts_header_t &h2);
 
 inline int
-get_dts_packet_length_in_core_samples(const struct dts_header_s *dts_header) {
+get_dts_packet_length_in_core_samples(const struct dts_header_t *dts_header) {
   // computes the length (in time, not size) of the packet in "samples".
   int r = dts_header->num_pcm_sample_blocks * 32;
-  if (dts_header_s::FRAMETYPE_TERMINATION == dts_header->frametype)
+  if (dts_header_t::FRAMETYPE_TERMINATION == dts_header->frametype)
     r -= dts_header->deficit_sample_count;
 
   return r;
 }
 
 inline double
-get_dts_packet_length_in_nanoseconds(const struct dts_header_s *dts_header) {
+get_dts_packet_length_in_nanoseconds(const struct dts_header_t *dts_header) {
   // computes the length (in time, not size) of the packet in "samples".
   int samples = get_dts_packet_length_in_core_samples(dts_header);
 

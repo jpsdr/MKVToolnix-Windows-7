@@ -219,6 +219,6 @@ public:
   }
 };
 
-typedef basic_timecode_c<int64_t> timecode_c;
+using timecode_c = basic_timecode_c<int64_t>;
 
 #endif  // MTX_COMMON_TIMECODE_H

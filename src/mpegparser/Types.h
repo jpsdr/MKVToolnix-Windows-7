@@ -3,7 +3,7 @@
 
 #include "common/common_pch.h"
 
-typedef int64_t MediaTime;
-typedef uint8_t binary;
+using MediaTime = int64_t;
+using binary    = uint8_t;
 
 #endif // MTX_TYPES_H

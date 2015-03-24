@@ -39,7 +39,7 @@ namespace clpi {
 
     void dump();
   };
-  typedef std::shared_ptr<program_stream_t> program_stream_cptr;
+  using program_stream_cptr = std::shared_ptr<program_stream_t>;
 
   struct program_t {
     uint32_t spn_program_sequence_start;
@@ -52,7 +52,7 @@ namespace clpi {
 
     void dump();
   };
-  typedef std::shared_ptr<program_t> program_cptr;
+  using program_cptr = std::shared_ptr<program_t>;
 
   class parser_c {
   protected:
@@ -81,7 +81,7 @@ namespace clpi {
     virtual void parse_program_info(bit_reader_cptr &bc);
     virtual void parse_program_stream(bit_reader_cptr &bc, program_cptr &program);
   };
-  typedef std::shared_ptr<parser_c> parser_cptr;
+  using parser_cptr = std::shared_ptr<parser_c>;
 
 };
 #endif // MTX_COMMON_CLPI_COMMON_H

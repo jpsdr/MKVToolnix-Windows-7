@@ -18,7 +18,7 @@
 #if defined(COMP_MSC)
 #pragma pack(push,1)
 #endif
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE mvhd_atom_t {
   uint8_t  version;
   uint8_t  flags[3];
   uint32_t creation_time;
@@ -36,10 +36,10 @@ typedef struct PACKED_STRUCTURE {
   uint32_t selection_duration;
   uint32_t current_time;
   uint32_t next_track_id;
-} mvhd_atom_t;
+};
 
 // 'Track header' atom
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE tkhd_atom_t {
   uint8_t  version;
   uint8_t  flags[3];
   uint32_t creation_time;
@@ -55,10 +55,10 @@ typedef struct PACKED_STRUCTURE {
   uint8_t  matrix_structure[36];
   uint32_t track_width;
   uint32_t track_height;
-} tkhd_atom_t;
+};
 
 // 'Media header' atom
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE mdhd_atom_t {
   uint8_t  version;              // == 0
   uint8_t  flags[3];
   uint32_t creation_time;
@@ -67,10 +67,10 @@ typedef struct PACKED_STRUCTURE {
   uint32_t duration;
   uint16_t language;
   uint16_t quality;
-} mdhd_atom_t;
+};
 
 // 'Media header' atom, 64bit version
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE mdhd64_atom_t {
   uint8_t  version;              // == 1
   uint8_t  flags[3];
   uint64_t creation_time;
@@ -79,10 +79,10 @@ typedef struct PACKED_STRUCTURE {
   uint64_t duration;
   uint16_t language;
   uint16_t quality;
-} mdhd64_atom_t;
+};
 
 // 'Handler reference' atom
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE hdlr_atom_t {
   uint8_t  version;
   uint8_t  flags[3];
   uint32_t type;
@@ -90,18 +90,18 @@ typedef struct PACKED_STRUCTURE {
   uint32_t manufacturer;
   uint32_t flags2;
   uint32_t flags_mask;
-} hdlr_atom_t;
+};
 
 // Base for all 'sample data description' atoms
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE base_stsd_atom_t {
   uint32_t size;
   char     fourcc[4];
   uint8_t  reserved[6];
   uint16_t data_reference_index;
-} base_stsd_atom_t;
+};
 
 // 'sound sample description' atom
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE sound_v0_stsd_atom_t {
   base_stsd_atom_t base;
   uint16_t         version;
   uint16_t         revision;
@@ -111,10 +111,10 @@ typedef struct PACKED_STRUCTURE {
   int16_t          compression_id;
   uint16_t         packet_size;
   uint32_t         sample_rate;         // 32bit fixed-point number
-} sound_v0_stsd_atom_t;
+};
 
 // 'sound sample description' atom v1
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE sound_v1_stsd_atom_t {
   sound_v0_stsd_atom_t v0;
   struct PACKED_STRUCTURE {
     uint32_t samples_per_packet;
@@ -122,10 +122,10 @@ typedef struct PACKED_STRUCTURE {
     uint32_t bytes_per_frame;
     uint32_t bytes_per_sample;
   } v1;
-} sound_v1_stsd_atom_t;
+};
 
 // 'sound sample description' atom v2
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE sound_v2_stsd_atom_t {
   sound_v0_stsd_atom_t v0;
   struct PACKED_STRUCTURE {
     uint32_t v2_struct_size;
@@ -140,10 +140,10 @@ typedef struct PACKED_STRUCTURE {
     uint32_t bytes_per_frame;   // if constant
     uint32_t samples_per_frame; // lpcm frames per audio packet if constant
   } v2;
-} sound_v2_stsd_atom_t;
+};
 
 // 'video sample description' atom
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE video_stsd_atom_t {
   base_stsd_atom_t base;
   uint16_t         version;
   uint16_t         revision;
@@ -159,12 +159,12 @@ typedef struct PACKED_STRUCTURE {
   char             compressor_name[32];
   uint16_t         depth;
   uint16_t         color_table_id;
-} video_stsd_atom_t;
+};
 
-typedef struct PACKED_STRUCTURE {
+struct PACKED_STRUCTURE qt_image_description_t {
   uint32_t size;
   video_stsd_atom_t id;
-} qt_image_description_t;
+};
 #if defined(COMP_MSC)
 #pragma pack(pop)
 #endif

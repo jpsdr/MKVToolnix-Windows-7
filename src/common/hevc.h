@@ -207,7 +207,7 @@ struct codec_private_t {
 };
 
 // UUID -> payload
-typedef std::map< std::vector<unsigned char>, std::vector<unsigned char> > user_data_t;
+using user_data_t = std::map< std::vector<unsigned char>, std::vector<unsigned char> >;
 
 struct vps_info_t {
   unsigned int id;
@@ -624,7 +624,7 @@ protected:
   memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);
   void init_nalu_names();
 };
-typedef std::shared_ptr<hevc_es_parser_c> hevc_es_parser_cptr;
+using hevc_es_parser_cptr = std::shared_ptr<hevc_es_parser_c>;
 
 };
 

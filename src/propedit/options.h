@@ -49,6 +49,6 @@ protected:
   void remove_empty_targets();
   void merge_targets();
 };
-typedef std::shared_ptr<options_c> options_cptr;
+using options_cptr = std::shared_ptr<options_c>;
 
 #endif // MTX_PROPEDIT_OPTIONS_H

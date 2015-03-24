@@ -78,13 +78,11 @@ _safestrdup(const char *s,
 unsigned char *_saferealloc(void *mem, size_t size, const char *file, int line);
 
 class memory_c;
-typedef std::shared_ptr<memory_c> memory_cptr;
-typedef std::vector<memory_cptr> memories_c;
+using memory_cptr = std::shared_ptr<memory_c>;
+using memories_c  = std::vector<memory_cptr>;
 
 class memory_c {
 public:
-  typedef unsigned char X;
-
   explicit memory_c(void *p = nullptr,
                     size_t s = 0,
                     bool f = false) // allocate a new counter
@@ -115,15 +113,15 @@ public:
     return *this;
   }
 
-  X *get_buffer() const throw() {
+  unsigned char *get_buffer() const {
     return its_counter ? its_counter->ptr + its_counter->offset : nullptr;
   }
 
-  size_t get_size() const throw() {
+  size_t get_size() const {
     return its_counter ? its_counter->size - its_counter->offset: 0;
   }
 
-  void set_size(size_t new_size) throw() {
+  void set_size(size_t new_size) {
     if (its_counter)
       its_counter->size = new_size;
   }
@@ -221,13 +219,13 @@ public:
 
 private:
   struct counter {
-    X *ptr;
+    unsigned char *ptr;
     size_t size;
     bool is_free;
     unsigned count;
     size_t offset;
 
-    counter(X *p = nullptr,
+    counter(unsigned char *p = nullptr,
             size_t s = 0,
             bool f = false,
             unsigned c = 1)

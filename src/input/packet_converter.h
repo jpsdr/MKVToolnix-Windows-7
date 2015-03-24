@@ -38,6 +38,6 @@ public:
     m_ptzr = ptzr;
   }
 };
-typedef std::shared_ptr<packet_converter_c> packet_converter_cptr;
+using packet_converter_cptr = std::shared_ptr<packet_converter_c>;
 
 #endif  // MTX_INPUT_PACKET_CONVERTER_H

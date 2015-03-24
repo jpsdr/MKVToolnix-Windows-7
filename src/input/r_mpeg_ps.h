@@ -182,7 +182,7 @@ struct mpeg_ps_track_t {
     delete multiple_timecodes_packet_extension;
   }
 };
-typedef std::shared_ptr<mpeg_ps_track_t> mpeg_ps_track_ptr;
+using mpeg_ps_track_ptr = std::shared_ptr<mpeg_ps_track_t>;
 
 inline bool
 operator <(mpeg_ps_track_ptr const &a,

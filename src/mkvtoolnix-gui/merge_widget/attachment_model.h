@@ -10,7 +10,7 @@
 #include <QList>
 
 class AttachmentModel;
-typedef std::shared_ptr<AttachmentModel> AttachmentModelPtr;
+using AttachmentModelPtr = std::shared_ptr<AttachmentModel>;
 
 class AttachmentModel : public QAbstractItemModel {
   Q_OBJECT;

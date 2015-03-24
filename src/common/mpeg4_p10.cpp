@@ -288,7 +288,7 @@ std::vector<common_default_duration_t> s_common_default_durations{
 static std::pair<int, int>
 find_timing_info(int64_t duration) {
   // search in the common FPS list
-  typedef std::pair<int64_t, common_default_duration_t> common_default_duration_diff_t;
+  using common_default_duration_diff_t = std::pair<int64_t, common_default_duration_t>;
   auto potentials = std::vector<common_default_duration_diff_t>{};
 
   for (auto const &common_default_duration : s_common_default_durations) {

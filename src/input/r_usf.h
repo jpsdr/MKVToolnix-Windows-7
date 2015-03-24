@@ -54,7 +54,7 @@ struct usf_track_t {
   {
   }
 };
-typedef std::shared_ptr<usf_track_t> usf_track_cptr;
+using usf_track_cptr = std::shared_ptr<usf_track_t>;
 
 class usf_reader_c: public generic_reader_c {
 private:

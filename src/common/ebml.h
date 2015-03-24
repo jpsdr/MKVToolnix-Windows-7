@@ -363,8 +363,8 @@ provide_default_for_child(EbmlMaster *master,
   provide_default_for_child<A>(*master, default_value);
 }
 
-typedef std::shared_ptr<EbmlElement> ebml_element_cptr;
-typedef std::shared_ptr<EbmlMaster> ebml_master_cptr;
+using ebml_element_cptr = std::shared_ptr<EbmlElement>;
+using ebml_master_cptr  = std::shared_ptr<EbmlMaster>;
 
 template<typename T>
 std::shared_ptr<T>

@@ -115,7 +115,7 @@ kax_track_t::kax_track_t()
   , mkvmerge_track_id(0)
 {
 }
-typedef std::shared_ptr<kax_track_t> kax_track_cptr;
+using kax_track_cptr = std::shared_ptr<kax_track_t>;
 
 track_info_t::track_info_t()
   : m_size(0)

@@ -101,7 +101,7 @@ find_dts_sync_word(const unsigned char *buf,
 int
 find_dts_header_internal(const unsigned char *buf,
                          unsigned int size,
-                         struct dts_header_s *dts_header,
+                         struct dts_header_t *dts_header,
                          bool allow_no_hd_search) {
   unsigned int size_to_search = size - 15;
   if (size_to_search > size) {
@@ -116,7 +116,7 @@ find_dts_header_internal(const unsigned char *buf,
 
   bit_reader_c bc(buf + offset + 4, size - offset - 4);
 
-  dts_header->frametype             = bc.get_bit() ? dts_header_s::FRAMETYPE_NORMAL : dts_header_s::FRAMETYPE_TERMINATION;
+  dts_header->frametype             = bc.get_bit() ? dts_header_t::FRAMETYPE_NORMAL : dts_header_t::FRAMETYPE_TERMINATION;
   dts_header->deficit_sample_count  = (bc.get_bits(5) + 1) % 32;
   dts_header->crc_present           = bc.get_bit();
   dts_header->num_pcm_sample_blocks = bc.get_bits(7) + 1;
@@ -143,16 +143,16 @@ find_dts_header_internal(const unsigned char *buf,
   dts_header->embedded_time_stamp        = bc.get_bit();
   dts_header->auxiliary_data             = bc.get_bit();
   dts_header->hdcd_master                = bc.get_bit();
-  dts_header->extension_audio_descriptor = static_cast<dts_header_s::extension_audio_descriptor_e>(bc.get_bits(3));
+  dts_header->extension_audio_descriptor = static_cast<dts_header_t::extension_audio_descriptor_e>(bc.get_bits(3));
   dts_header->extended_coding            = bc.get_bit();
   dts_header->audio_sync_word_in_sub_sub = bc.get_bit();
-  dts_header->lfe_type                   = static_cast<dts_header_s::lfe_type_e>(bc.get_bits(2));
+  dts_header->lfe_type                   = static_cast<dts_header_t::lfe_type_e>(bc.get_bits(2));
   dts_header->predictor_history_flag     = bc.get_bit();
 
   if (dts_header->crc_present)
      bc.skip_bits(16);
 
-  dts_header->multirate_interpolator     = static_cast<dts_header_s::multirate_interpolator_e>(bc.get_bit());
+  dts_header->multirate_interpolator     = static_cast<dts_header_t::multirate_interpolator_e>(bc.get_bit());
   dts_header->encoder_software_revision  = bc.get_bits(4);
   dts_header->copy_history               = bc.get_bits(2);
 
@@ -235,7 +235,7 @@ find_dts_header_internal(const unsigned char *buf,
 int
 find_dts_header(const unsigned char *buf,
                 unsigned int size,
-                struct dts_header_s *dts_header,
+                struct dts_header_t *dts_header,
                 bool allow_no_hd_search) {
   try {
     return find_dts_header_internal(buf, size, dts_header, allow_no_hd_search);
@@ -251,7 +251,7 @@ find_consecutive_dts_headers(const unsigned char *buf,
                              unsigned int num) {
   static auto s_debug = debugging_option_c{"dts_detection"};
 
-  dts_header_s dts_header, new_header;
+  dts_header_t dts_header, new_header;
 
   int pos = find_dts_header(buf, size, &dts_header, false);
 
@@ -301,8 +301,8 @@ find_consecutive_dts_headers(const unsigned char *buf,
 }
 
 bool
-operator ==(const dts_header_s &h1,
-            const dts_header_s &h2) {
+operator ==(const dts_header_t &h1,
+            const dts_header_t &h2) {
   return (h1.core_sampling_frequency                == h2.core_sampling_frequency)
       && (h1.lfe_type                               == h2.lfe_type)
       && (h1.audio_channels                         == h2.audio_channels)
@@ -313,11 +313,11 @@ operator ==(const dts_header_s &h1,
 // ============================================================================
 
 void
-print_dts_header(const struct dts_header_s *h) {
+print_dts_header(const struct dts_header_t *h) {
   mxinfo("DTS Frame Header Information:\n");
 
   mxinfo("Frame Type             : ");
-  if (h->frametype == dts_header_s::FRAMETYPE_NORMAL) {
+  if (h->frametype == dts_header_t::FRAMETYPE_NORMAL) {
     mxinfo("normal");
   } else {
     mxinfo(boost::format("termination, deficit sample count = %1%") % h->deficit_sample_count);
@@ -351,13 +351,13 @@ print_dts_header(const struct dts_header_s *h) {
   mxinfo("Extended Coding        : ");
   if (h->extended_coding) {
     switch (h->extension_audio_descriptor) {
-      case dts_header_s::EXTENSION_XCH:
+      case dts_header_t::EXTENSION_XCH:
         mxinfo("Extra Channels");
         break;
-      case dts_header_s::EXTENSION_X96K:
+      case dts_header_t::EXTENSION_X96K:
         mxinfo("Extended frequency (x96k)");
         break;
-      case dts_header_s::EXTENSION_XCH_X96K:
+      case dts_header_t::EXTENSION_XCH_X96K:
         mxinfo("Extra Channels and Extended frequency (x96k)");
         break;
       default:
@@ -372,16 +372,16 @@ print_dts_header(const struct dts_header_s *h) {
 
   mxinfo("Low Frequency Effects  : ");
   switch (h->lfe_type) {
-    case dts_header_s::LFE_NONE:
+    case dts_header_t::LFE_NONE:
       mxinfo("none");
       break;
-    case dts_header_s::LFE_128:
+    case dts_header_t::LFE_128:
       mxinfo("yes, interpolation factor 128");
       break;
-    case dts_header_s::LFE_64:
+    case dts_header_t::LFE_64:
       mxinfo("yes, interpolation factor 64");
       break;
-    case dts_header_s::LFE_INVALID:
+    case dts_header_t::LFE_INVALID:
       mxinfo("Invalid");
       break;
   }
@@ -389,7 +389,7 @@ print_dts_header(const struct dts_header_s *h) {
 
   mxinfo(boost::format("Predictor History used : %1%\n") % (h->predictor_history_flag ? "yes" : "no"));
 
-  mxinfo(boost::format("Multirate Interpolator : %1%\n") % (h->multirate_interpolator == dts_header_s::MI_NON_PERFECT ? "non perfect" : "perfect"));
+  mxinfo(boost::format("Multirate Interpolator : %1%\n") % (h->multirate_interpolator == dts_header_t::MI_NON_PERFECT ? "non perfect" : "perfect"));
 
   mxinfo(boost::format("Encoder Software Vers. : %1%\n") % h->encoder_software_revision);
   mxinfo(boost::format("Copy History Bits      : %1%\n") % h->copy_history);

@@ -25,7 +25,7 @@ using namespace libebml;
 using namespace libmatroska;
 
 class kax_analyzer_data_c;
-typedef std::shared_ptr<kax_analyzer_data_c> kax_analyzer_data_cptr;
+using kax_analyzer_data_cptr = std::shared_ptr<kax_analyzer_data_c>;
 
 class kax_analyzer_data_c {
 public:
@@ -191,7 +191,7 @@ protected:
 protected:
   virtual bool process_internal(parse_mode_e parse_mode, const open_mode mode);
 };
-typedef std::shared_ptr<kax_analyzer_c> kax_analyzer_cptr;
+using kax_analyzer_cptr = std::shared_ptr<kax_analyzer_c>;
 
 class console_kax_analyzer_c: public kax_analyzer_c {
 private:
@@ -210,6 +210,6 @@ public:
 
   virtual void debug_abort_process();
 };
-typedef std::shared_ptr<console_kax_analyzer_c> console_kax_analyzer_cptr;
+using console_kax_analyzer_cptr = std::shared_ptr<console_kax_analyzer_c>;
 
 #endif  // MTX_COMMON_KAX_ANALYZER_H

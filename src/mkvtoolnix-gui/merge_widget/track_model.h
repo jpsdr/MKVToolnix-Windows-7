@@ -11,7 +11,7 @@
 #include <QSet>
 
 class TrackModel;
-typedef std::shared_ptr<TrackModel> TrackModelPtr;
+using TrackModelPtr = std::shared_ptr<TrackModel>;
 
 class TrackModel : public QStandardItemModel {
   Q_OBJECT;

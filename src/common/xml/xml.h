@@ -154,7 +154,7 @@ public:
 std::string escape(const std::string &src);
 std::string create_node_name(const char *name, const char **atts);
 
-typedef std::shared_ptr<pugi::xml_document> document_cptr;
+using document_cptr = std::shared_ptr<pugi::xml_document>;
 
 document_cptr load_file(std::string const &file_name, unsigned int options = pugi::parse_default, boost::optional<int64_t> max_read_size = boost::optional<int64_t>{});
 

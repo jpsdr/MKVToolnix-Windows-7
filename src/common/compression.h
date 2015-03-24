@@ -50,7 +50,7 @@ namespace mtx {
 }
 
 class compressor_c;
-typedef std::shared_ptr<compressor_c> compressor_ptr;
+using compressor_ptr = std::shared_ptr<compressor_c>;
 
 class compressor_c {
 protected:

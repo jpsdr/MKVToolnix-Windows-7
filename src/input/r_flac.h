@@ -29,10 +29,10 @@
 #define FLAC_BLOCK_TYPE_HEADERS 0
 #define FLAC_BLOCK_TYPE_DATA    1
 
-typedef struct {
+struct flac_block_t {
   int64_t filepos;
   unsigned int type, len;
-} flac_block_t;
+};
 
 class flac_reader_c: public generic_reader_c {
 private:

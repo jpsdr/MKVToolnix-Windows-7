@@ -126,7 +126,7 @@ struct frame_t {
   void init();
   bool is_key() const;
 };
-typedef std::shared_ptr<frame_t> frame_cptr;
+using frame_cptr = std::shared_ptr<frame_t>;
 
 inline bool is_marker(uint32_t value) {
   return (value & 0xffffff00) == 0x00000100;

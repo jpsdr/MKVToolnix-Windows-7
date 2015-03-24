@@ -31,6 +31,6 @@ struct playlist_file_t {
 
   playlist_file_t(wxString const &p_file_name, wxArrayString const &p_output);
 };
-typedef std::shared_ptr<playlist_file_t> playlist_file_cptr;
+using playlist_file_cptr = std::shared_ptr<playlist_file_t>;
 
 #endif  // MTX_MMG_TABS_PLAYLIST_FILE_H

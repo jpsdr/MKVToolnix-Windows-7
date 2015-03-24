@@ -59,6 +59,6 @@ public:
 protected:
   virtual void add_or_replace_all_master_elements(EbmlMaster *source);
 };
-typedef std::shared_ptr<target_c> target_cptr;
+using target_cptr = std::shared_ptr<target_c>;
 
 #endif // MTX_PROPEDIT_TARGET_H

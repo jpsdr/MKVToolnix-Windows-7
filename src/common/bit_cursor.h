@@ -199,7 +199,7 @@ protected:
     }
   }
 };
-typedef std::shared_ptr<bit_reader_c> bit_reader_cptr;
+using bit_reader_cptr = std::shared_ptr<bit_reader_c>;
 
 class bit_writer_c {
 private:
@@ -301,6 +301,6 @@ public:
     return pos;
   }
 };
-typedef std::shared_ptr<bit_writer_c> bit_writer_cptr;
+using bit_writer_cptr = std::shared_ptr<bit_writer_c>;
 
 #endif // MTX_COMMON_BIT_CURSOR_H

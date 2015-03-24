@@ -129,14 +129,14 @@ flac_get_num_samples(unsigned char *mem,
 
 #define FPFX "flac_decode_headers: "
 
-typedef struct {
+struct flac_header_extractor_t {
   unsigned char *mem;
   unsigned int size;
   unsigned int nread;
 
   FLAC__StreamMetadata_StreamInfo stream_info;
   bool stream_info_found;
-} flac_header_extractor_t;
+};
 
 static FLAC__StreamDecoderReadStatus
 flac_read_cb(const FLAC__StreamDecoder *,

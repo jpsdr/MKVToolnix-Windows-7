@@ -25,16 +25,14 @@ public:
 }
 
 class Attachment;
-typedef std::shared_ptr<Attachment> AttachmentPtr;
-
-class Track;
-typedef std::shared_ptr<Track> TrackPtr;
-
-class SourceFile;
-typedef std::shared_ptr<SourceFile> SourceFilePtr;
-
 class MuxConfig;
-typedef std::shared_ptr<MuxConfig> MuxConfigPtr;
+class SourceFile;
+class Track;
+
+using AttachmentPtr = std::shared_ptr<Attachment>;
+using MuxConfigPtr  = std::shared_ptr<MuxConfig>;
+using SourceFilePtr = std::shared_ptr<SourceFile>;
+using TrackPtr      = std::shared_ptr<Track>;
 
 class MuxConfig {
 public:

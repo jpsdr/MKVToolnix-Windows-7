@@ -119,7 +119,7 @@ protected:
   virtual void parse_chapters();
   virtual std::string read_string(unsigned int length);
 };
-typedef std::shared_ptr<parser_c> parser_cptr;
+using parser_cptr = std::shared_ptr<parser_c>;
 
 }}
 #endif // MTX_COMMON_MPLS_COMMON_H

@@ -21,8 +21,8 @@
 
 namespace mtx { namespace amf {
 
-typedef boost::variant<double, bool, std::string> value_type_t;
-typedef std::unordered_map<std::string, value_type_t> meta_data_t;
+using value_type_t = boost::variant<double, bool, std::string>;
+using meta_data_t  = std::unordered_map<std::string, value_type_t>;
 
 class value_to_string_c: public boost::static_visitor<std::string> {
 public:
@@ -41,7 +41,7 @@ public:
 
 class script_parser_c {
 public:
-  typedef enum {
+  enum data_type_e {
     TYPE_NUMBER      = 0x00,
     TYPE_BOOL        = 0x01,
     TYPE_STRING      = 0x02,
@@ -55,7 +55,7 @@ public:
     TYPE_ARRAY       = 0x0a,
     TYPE_DATE        = 0x0b,
     TYPE_LONG_STRING = 0x0c,
-  } data_type_e;
+  };
 
 private:
   memory_cptr m_data_mem;

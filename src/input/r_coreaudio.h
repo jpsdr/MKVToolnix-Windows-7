@@ -27,12 +27,12 @@ struct coreaudio_chunk_t {
   std::string m_type;
   uint64_t m_position, m_data_position, m_size;
 };
-typedef std::vector<coreaudio_chunk_t>::iterator coreaudio_chunk_itr;
+using coreaudio_chunk_itr = std::vector<coreaudio_chunk_t>::iterator;
 
 struct coreaudio_packet_t {
   uint64_t m_position, m_size, m_duration, m_timecode;
 };
-typedef std::vector<coreaudio_packet_t>::iterator coreaudio_packet_itr;
+using coreaudio_packet_itr = std::vector<coreaudio_packet_t>::iterator;
 
 class coreaudio_reader_c: public generic_reader_c {
 private:

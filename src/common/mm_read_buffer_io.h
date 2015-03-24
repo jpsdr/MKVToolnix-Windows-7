@@ -47,6 +47,6 @@ protected:
   virtual size_t _write(const void *buffer, size_t size);
 };
 
-typedef std::shared_ptr<mm_read_buffer_io_c> mm_read_buffer_io_cptr;
+using mm_read_buffer_io_cptr = std::shared_ptr<mm_read_buffer_io_c>;
 
 #endif // MTX_COMMON_MM_READ_BUFFER_IO_H

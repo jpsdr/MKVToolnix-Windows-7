@@ -31,7 +31,7 @@ public:
   {
   }
 };
-typedef std::shared_ptr<render_groups_c> render_groups_cptr;
+using render_groups_cptr = std::shared_ptr<render_groups_c>;
 
 struct cluster_helper_c::impl_t {
 public:

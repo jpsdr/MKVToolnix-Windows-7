@@ -23,10 +23,10 @@
 using namespace libebml;
 
 class mm_io_c;
-typedef std::shared_ptr<mm_io_c> mm_io_cptr;
+using mm_io_cptr = std::shared_ptr<mm_io_c>;
 
 class charset_converter_c;
-typedef std::shared_ptr<charset_converter_c> charset_converter_cptr;
+using charset_converter_cptr = std::shared_ptr<charset_converter_c>;
 
 class mm_io_c: public IOCallback {
 protected:
@@ -159,7 +159,7 @@ protected:
   virtual size_t _write(const void *buffer, size_t size);
 };
 
-typedef std::shared_ptr<mm_file_io_c> mm_file_io_cptr;
+using mm_file_io_cptr = std::shared_ptr<mm_file_io_c>;
 
 class mm_proxy_io_c: public mm_io_c {
 protected:
@@ -201,7 +201,7 @@ protected:
   virtual size_t _write(const void *buffer, size_t size);
 };
 
-typedef std::shared_ptr<mm_proxy_io_c> mm_proxy_io_cptr;
+using mm_proxy_io_cptr = std::shared_ptr<mm_proxy_io_c>;
 
 class mm_null_io_c: public mm_io_c {
 protected:
@@ -222,7 +222,7 @@ protected:
   virtual size_t _write(const void *buffer, size_t size);
 };
 
-typedef std::shared_ptr<mm_null_io_c> mm_null_io_cptr;
+using mm_null_io_cptr = std::shared_ptr<mm_null_io_c>;
 
 class mm_mem_io_c: public mm_io_c {
 protected:
@@ -258,7 +258,7 @@ protected:
   virtual size_t _write(const void *buffer, size_t size);
 };
 
-typedef std::shared_ptr<mm_mem_io_c> mm_mem_io_cptr;
+using mm_mem_io_cptr = std::shared_ptr<mm_mem_io_c>;
 
 enum byte_order_e {BO_UTF8, BO_UTF16_LE, BO_UTF16_BE, BO_UTF32_LE, BO_UTF32_BE, BO_NONE};
 
@@ -292,7 +292,7 @@ public:
   static bool detect_byte_order_marker(const unsigned char *buffer, unsigned int size, byte_order_e &byte_order, unsigned int &bom_length);
 };
 
-typedef std::shared_ptr<mm_text_io_c> mm_text_io_cptr;
+using mm_text_io_cptr = std::shared_ptr<mm_text_io_c>;
 
 class mm_stdio_c: public mm_io_c {
 public:
@@ -319,6 +319,6 @@ protected:
   virtual size_t _write(const void *buffer, size_t size);
 };
 
-typedef std::shared_ptr<mm_stdio_c> mm_stdio_cptr;
+using mm_stdio_cptr = std::shared_ptr<mm_stdio_c>;
 
 #endif // MTX_COMMON_MM_IO_H

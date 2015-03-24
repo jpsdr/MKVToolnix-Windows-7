@@ -60,6 +60,6 @@ protected:
   virtual EbmlElement *read_next_level1_element_internal(uint32_t wanted_id = 0);
   virtual EbmlElement *resync_to_level1_element_internal(uint32_t wanted_id = 0);
 };
-typedef std::shared_ptr<kax_file_c> kax_file_cptr;
+using kax_file_cptr = std::shared_ptr<kax_file_c>;
 
 #endif  // MTX_COMMON_KAX_FILE_H

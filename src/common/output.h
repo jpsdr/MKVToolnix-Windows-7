@@ -25,7 +25,7 @@
 
 using namespace libebml;
 
-typedef std::function<void(unsigned int level, std::string const &)> mxmsg_handler_t;
+using mxmsg_handler_t = std::function<void(unsigned int level, std::string const &)>;
 void set_mxmsg_handler(unsigned int level, mxmsg_handler_t const &handler);
 
 extern bool g_suppress_info, g_suppress_warnings;

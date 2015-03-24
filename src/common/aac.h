@@ -195,7 +195,7 @@ protected:
   std::pair<parse_result_e, size_t> decode_loas_latm_header(unsigned char const *buffer, size_t buffer_size);
   void push_frame(frame_c &frame);
 };
-typedef std::shared_ptr<parser_c> parser_cptr;
+using parser_cptr = std::shared_ptr<parser_c>;
 
 } // namespace aac
 

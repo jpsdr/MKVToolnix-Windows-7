@@ -64,7 +64,7 @@ namespace dirac {
     frame_t();
     void init();
   };
-  typedef std::shared_ptr<frame_t> frame_cptr;
+  using frame_cptr = std::shared_ptr<frame_t>;
 
   bool parse_sequence_header(const unsigned char *buf, int size, sequence_header_t &seqhdr);
 

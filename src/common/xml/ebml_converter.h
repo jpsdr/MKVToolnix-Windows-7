@@ -39,8 +39,8 @@ public:
     limits_t limits;
   };
 
-  typedef std::function<void(pugi::xml_node &, EbmlElement &)> value_formatter_t;
-  typedef std::function<void(parser_context_t &ctx)> value_parser_t;
+  using value_formatter_t = std::function<void(pugi::xml_node &, EbmlElement &)>;
+  using value_parser_t    = std::function<void(parser_context_t &ctx)>;
 
 protected:
   std::map<std::string, std::string> m_debug_to_tag_name_map, m_tag_to_debug_name_map;

@@ -16,7 +16,7 @@
 #include "common/strings/utf8.h"
 
 class logger_c;
-typedef std::shared_ptr<logger_c> logger_cptr;
+using logger_cptr = std::shared_ptr<logger_c>;
 
 class logger_c {
 private:

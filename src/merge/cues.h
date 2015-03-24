@@ -22,7 +22,7 @@
 
 #include "common/mm_io.h"
 
-typedef std::pair<uint64_t, uint64_t> id_timecode_t;
+using id_timecode_t = std::pair<uint64_t, uint64_t>;
 
 struct cue_point_t {
   uint64_t timecode, duration, cluster_position;
@@ -30,7 +30,7 @@ struct cue_point_t {
 };
 
 class cues_c;
-typedef std::shared_ptr<cues_c> cues_cptr;
+using cues_cptr = std::shared_ptr<cues_c>;
 
 class cues_c {
 protected:

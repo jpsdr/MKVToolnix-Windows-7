@@ -49,7 +49,7 @@
 #  define THREAD_MODE_BACKGROUND_BEGIN 0x00010000
 # endif
 
-typedef UINT (WINAPI *p_get_error_mode)(void);
+using p_get_error_mode = UINT (WINAPI *)(void);
 static void
 fix_windows_errormode() {
   UINT mode      = SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX;

@@ -11,7 +11,7 @@
 class QTemporaryFile;
 
 class MuxConfig;
-typedef std::shared_ptr<MuxConfig> MuxConfigPtr;
+using MuxConfigPtr = std::shared_ptr<MuxConfig>;
 
 class MuxJob: public Job {
   Q_OBJECT;

@@ -26,7 +26,7 @@
 
 class url_retriever_c {
 public:
-  typedef std::function<void(int64_t, int64_t)> progress_cb_t;
+  using progress_cb_t = std::function<void(int64_t, int64_t)>;
 
 protected:
   progress_cb_t m_progress_cb;

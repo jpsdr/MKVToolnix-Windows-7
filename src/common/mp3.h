@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-typedef struct {
+struct mp3_header_t {
   int version;
   int layer;
   int protection;
@@ -29,7 +29,7 @@ typedef struct {
   size_t framesize;
   int samples_per_channel;
   bool is_tag;
-} mp3_header_t;
+};
 
 int find_mp3_header(const unsigned char *buf, int size);
 int find_consecutive_mp3_headers(const unsigned char *buf, int size, int num, mp3_header_t *header_found = nullptr);

@@ -51,6 +51,6 @@ public:
   static mm_io_cptr open_multi(std::string const &display_file_name);
   static mm_io_cptr open_multi(mm_io_c *in);
 };
-typedef std::shared_ptr<mm_mpls_multi_file_io_c> mm_mpls_multi_file_io_cptr;
+using mm_mpls_multi_file_io_cptr = std::shared_ptr<mm_mpls_multi_file_io_c>;
 
 #endif  // MTX_COMMON_MM_MPLS_MULTI_FILE_IO_H

@@ -24,7 +24,7 @@
 #include "input/subtitles.h"
 #include "output/p_avc.h"
 
-typedef struct avi_demuxer_t {
+struct avi_demuxer_t {
   int m_ptzr;
   int m_channels, m_bits_per_sample, m_samples_per_second, m_aid;
   int64_t m_bytes_processed;
@@ -39,7 +39,7 @@ typedef struct avi_demuxer_t {
     , m_bytes_processed(0)
   {
   }
-} avi_demuxer_t;
+};
 
 struct avi_subs_demuxer_t {
   enum {
