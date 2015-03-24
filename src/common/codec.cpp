@@ -22,6 +22,7 @@ void
 codec_c::initialize() {
   if (!ms_codecs.empty())
     return;
+  ms_codecs.emplace_back("Bitfields",               V_BITFIELDS, track_video,    "", fourcc_c{0x03000000u});
   ms_codecs.emplace_back("Cinepak",                 V_CINEPAK,   track_video,    "cvid");
   ms_codecs.emplace_back("Dirac",                   V_DIRAC,     track_video,    "drac|V_DIRAC");
   ms_codecs.emplace_back("MPEG-1/2",                V_MPEG12,    track_video,    "mpeg|mpg[12]|m[12]v.|mpgv|mp[12]v|h262|V_MPEG[12]");
@@ -32,6 +33,8 @@ codec_c::initialize() {
   ms_codecs.emplace_back("Theora",                  V_THEORA,    track_video,    "theo|thra|V_THEORA");
   ms_codecs.emplace_back("Sorenson v1",             V_SVQ1,      track_video,    "svq[i1]");
   ms_codecs.emplace_back("Sorenson v3",             V_SVQ3,      track_video,    "svq3");
+  ms_codecs.emplace_back("RLE4",                    V_RLE4,      track_video,    "", fourcc_c{0x02000000u});
+  ms_codecs.emplace_back("RLE8",                    V_RLE8,      track_video,    "", fourcc_c{0x01000000u});
   ms_codecs.emplace_back("Uncompressed",            V_UNCOMPRESSED, track_video,    "", fourcc_c{0x00000000u});
   ms_codecs.emplace_back("VC1",                     V_VC1,       track_video,    "wvc1|vc-1");
   ms_codecs.emplace_back("VP8",                     V_VP8,       track_video,    "vp8\\d|V_VP8");

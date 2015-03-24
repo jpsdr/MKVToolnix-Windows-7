@@ -88,13 +88,16 @@ class codec_c {
 public:
   enum type_e {
       UNKNOWN  = 0
-    , V_CINEPAK = 0x1000
+    , V_BITFIELDS = 0x1000
+    , V_CINEPAK
     , V_DIRAC
     , V_MPEG12
     , V_MPEG4_P10
     , V_MPEG4_P2
     , V_MPEGH_P2
     , V_REAL
+    , V_RLE4
+    , V_RLE8
     , V_SVQ1
     , V_SVQ3
     , V_THEORA

@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include "common/codec.h"
+#include "common/fourcc.h"
 #include "common/mp4.h"
 
 #include "gtest/gtest.h"
@@ -206,7 +207,10 @@ TEST(Codec, LookUpAudioFormat) {
 }
 
 TEST(Codec, LookUpFourCC) {
-  EXPECT_TRUE(codec_c::look_up("\x00\x00\x00\x00").is(codec_c::V_UNCOMPRESSED));
+  EXPECT_TRUE(codec_c::look_up(fourcc_c{0x00000000u}).is(codec_c::V_UNCOMPRESSED));
+  EXPECT_TRUE(codec_c::look_up(fourcc_c{0x01000000u}).is(codec_c::V_RLE8));
+  EXPECT_TRUE(codec_c::look_up(fourcc_c{0x02000000u}).is(codec_c::V_RLE4));
+  EXPECT_TRUE(codec_c::look_up(fourcc_c{0x03000000u}).is(codec_c::V_BITFIELDS));
 }
 
 TEST(Codec, LookUpObjectTypeId) {
