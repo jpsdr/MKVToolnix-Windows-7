@@ -62,6 +62,7 @@
 #include "common/xml/ebml_segmentinfo_converter.h"
 #include "common/xml/ebml_tags_converter.h"
 #include "merge/cluster_helper.h"
+#include "merge/filelist.h"
 #include "merge/generic_reader.h"
 #include "merge/output_control.h"
 #include "merge/track_info.h"
@@ -370,37 +371,35 @@ list_file_types() {
 */
 static void
 identify(std::string &filename) {
-  track_info_c ti;
-  filelist_t file;
+  g_files.emplace_back(new filelist_t);
+  auto &file = *g_files.back();
+  file.ti    = std::make_unique<track_info_c>();
 
   if ('=' == filename[0]) {
-    ti.m_disable_multi_file = true;
-    filename                = filename.substr(1);
+    file.ti->m_disable_multi_file = true;
+    filename                      = filename.substr(1);
   }
 
   verbose             = 0;
   g_suppress_warnings = true;
   g_identifying       = true;
+  file.ti->m_fname    = filename;
   file.name           = filename;
   file.all_names.push_back(filename);
 
   get_file_type(file);
-
-  ti.m_fname = file.name;
 
   if (FILE_TYPE_IS_UNKNOWN == file.type)
     mxerror(boost::format(Y("File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and "
                             "contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"))
             % file.name);
 
-  file.ti = new track_info_c(ti);
-
-  g_files.push_back(file);
-
   create_readers();
 
-  g_files[0].reader->identify();
-  g_files[0].reader->display_identification_results();
+  file.reader->identify();
+  file.reader->display_identification_results();
+
+  g_files.clear();
 }
 
 /** \brief Parse a number postfixed with a time-based unit
@@ -1667,7 +1666,7 @@ handle_file_name_arg(const std::string &this_arg,
                      std::vector<std::string>::const_iterator &sit,
                      const std::vector<std::string>::const_iterator &end,
                      bool &append_next_file,
-                     track_info_c *&ti) {
+                     std::unique_ptr<track_info_c> &&ti) {
   std::vector<std::string> file_names;
 
   if (this_arg == "(") {
@@ -1710,7 +1709,8 @@ handle_file_name_arg(const std::string &this_arg,
   if (!ti->m_btracks.empty() && ti->m_btracks.none())
     mxerror(Y("'-B' and '-b' used on the same source file.\n"));
 
-  filelist_t file;
+  auto file_p    = std::make_shared<filelist_t>();
+  auto &file     = *file_p;
   file.all_names = file_names;
   file.name      = file_names[0];
   file.id        = g_files.size();
@@ -1748,13 +1748,11 @@ handle_file_name_arg(const std::string &this_arg,
   }
 
   if (FILE_TYPE_CHAPTERS != file.type) {
-    file.ti = ti;
+    file.ti.swap(ti);
 
-    g_files.push_back(file);
-  } else
-    delete ti;
+    g_files.push_back(file_p);
+  }
 
-  ti = new track_info_c;
   g_chapter_charset.clear();
   g_chapter_language.clear();
 }
@@ -1864,7 +1862,7 @@ parse_args(std::vector<std::string> args) {
     mxinfo(boost::format(Y("Automatically enabling WebM compliance mode due to output file name extension.\n")));
   }
 
-  track_info_c *ti      = new track_info_c;
+  auto ti               = std::make_unique<track_info_c>();
   bool inputs_found     = false;
   bool append_next_file = false;
   attachment_t attachment;
@@ -2331,14 +2329,14 @@ parse_args(std::vector<std::string> args) {
       ti->m_disable_multi_file = true;
 
     // The argument is an input file.
-    else
-      handle_file_name_arg(this_arg, sit, args.end(), append_next_file, ti);
+    else {
+      handle_file_name_arg(this_arg, sit, args.end(), append_next_file, std::move(ti));
+      ti = std::make_unique<track_info_c>();
+    }
   }
 
   if (!g_cluster_helper->splitting() && !g_no_linking)
     mxwarn(Y("'--link' is only useful in combination with '--split'.\n"));
-
-  delete ti;
 
   if (!inputs_found && g_files.empty())
     mxerror(Y("No input files were given. No output will be created.\n"));
@@ -2356,13 +2354,14 @@ display_playlist_scan_progress(size_t num_scanned,
   mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");
 }
 
-static filelist_t
+static filelist_cptr
 create_filelist_for_playlist(bfs::path const &file_name,
                              size_t previous_filelist_id,
                              size_t current_filelist_id,
                              size_t idx,
                              track_info_c const &src_ti) {
-  auto new_filelist                          = filelist_t{};
+  auto new_filelist_p                        = std::make_shared<filelist_t>();
+  auto &new_filelist                         = *new_filelist_p;
   new_filelist.name                          = file_name.string();
   new_filelist.all_names                     = std::vector<std::string>{ new_filelist.name };
   new_filelist.size                          = bfs::file_size(file_name);
@@ -2378,7 +2377,7 @@ create_filelist_for_playlist(bfs::path const &file_name,
     mxerror(boost::format(Y("The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and "
                             "contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n")) % new_filelist.name);
 
-  new_filelist.ti                       = new track_info_c;
+  new_filelist.ti                       = std::make_unique<track_info_c>();
   new_filelist.ti->m_fname              = new_filelist.name;
   new_filelist.ti->m_disable_multi_file = true;
   new_filelist.ti->m_no_chapters        = true;
@@ -2389,7 +2388,7 @@ create_filelist_for_playlist(bfs::path const &file_name,
   new_filelist.ti->m_btracks            = src_ti.m_btracks;
   new_filelist.ti->m_track_tags         = src_ti.m_track_tags;
 
-  return new_filelist;
+  return new_filelist_p;
 }
 
 static void
@@ -2397,11 +2396,11 @@ add_filelists_for_playlists() {
   auto num_playlists = 0u, num_files_in_playlists = 0u;
 
   for (auto const &filelist : g_files) {
-    if (!filelist.is_playlist)
+    if (!filelist->is_playlist)
       continue;
 
     num_playlists          += 1;
-    num_files_in_playlists += filelist.playlist_mpls_in->get_file_names().size();
+    num_files_in_playlists += filelist->playlist_mpls_in->get_file_names().size();
   }
 
   if (num_playlists == num_files_in_playlists)
@@ -2411,12 +2410,12 @@ add_filelists_for_playlists() {
     mxinfo(boost::format("#GUI#begin_scanning_playlists#num_playlists=%1%#num_files_in_playlists=%2%\n") % num_playlists % num_files_in_playlists);
   mxinfo(boost::format(NY("Scanning %1% files in %2% playlist.\n", "Scanning %1% files in %2% playlists.\n", num_playlists)) % num_files_in_playlists % num_playlists);
 
-  std::vector<filelist_t> new_filelists;
+  std::vector<filelist_cptr> new_filelists;
   auto num_scanned_playlists = 0u;
 
   display_playlist_scan_progress(0, num_files_in_playlists);
 
-  for (auto filelist = g_files.begin(), filelist_end = g_files.end(); filelist != filelist_end; ++filelist) {
+  for (auto const &filelist : g_files) {
     if (!filelist->is_playlist)
       continue;
 
@@ -2430,14 +2429,14 @@ add_filelists_for_playlists() {
     filelist->restricted_timecode_max = play_items[0].out_time;
 
     for (size_t idx = 1, idx_end = file_names.size(); idx < idx_end; ++idx) {
-      auto current_filelist_id             = g_files.size() + new_filelists.size();
-      auto new_filelist                    = create_filelist_for_playlist(file_names[idx], previous_filelist_id, current_filelist_id, idx, *filelist->ti);
-      new_filelist.restricted_timecode_min = play_items[idx].in_time;
-      new_filelist.restricted_timecode_max = play_items[idx].out_time;
+      auto current_filelist_id              = g_files.size() + new_filelists.size();
+      auto new_filelist                     = create_filelist_for_playlist(file_names[idx], previous_filelist_id, current_filelist_id, idx, *filelist->ti);
+      new_filelist->restricted_timecode_min = play_items[idx].in_time;
+      new_filelist->restricted_timecode_max = play_items[idx].out_time;
 
       new_filelists.push_back(new_filelist);
 
-      previous_filelist_id = new_filelist.id;
+      previous_filelist_id = new_filelist->id;
 
       display_playlist_scan_progress(++num_scanned_playlists, num_files_in_playlists);
     }
@@ -2455,16 +2454,16 @@ add_filelists_for_playlists() {
 static void
 create_append_mappings_for_playlists() {
   for (auto &src_file : g_files) {
-    if (!src_file.is_playlist || !src_file.playlist_index)
+    if (!src_file->is_playlist || !src_file->playlist_index)
       continue;
 
     // Default mapping.
-    for (auto track_id : src_file.reader->m_used_track_ids) {
+    for (auto track_id : src_file->reader->m_used_track_ids) {
       append_spec_t new_amap;
 
-      new_amap.src_file_id  = src_file.id;
+      new_amap.src_file_id  = src_file->id;
       new_amap.src_track_id = track_id;
-      new_amap.dst_file_id  = src_file.playlist_previous_filelist_id;
+      new_amap.dst_file_id  = src_file->playlist_previous_filelist_id;
       new_amap.dst_track_id = track_id;
 
       g_append_mapping.push_back(new_amap);
@@ -2484,7 +2483,7 @@ setup(int argc,
   clear_list_of_unique_numbers(UNIQUE_ALL_IDS);
 
   mtx_common_init("mkvmerge", argv[0]);
-  g_kax_tracks = new KaxTracks();
+  g_kax_tracks = std::make_unique<KaxTracks>();
 
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
   signal(SIGUSR1, sighandler);
@@ -2493,7 +2492,7 @@ setup(int argc,
 
   auto args = parse_common_args(command_line_utf8(argc, argv));
 
-  g_cluster_helper = new cluster_helper_c;
+  g_cluster_helper = std::make_unique<cluster_helper_c>();
 
   return args;
 }

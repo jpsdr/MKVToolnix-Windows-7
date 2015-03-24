@@ -279,7 +279,7 @@ parse_chapters(const std::string &file_name,
                const std::string &charset,
                bool exception_on_error,
                bool *is_simple_format,
-               KaxTags **tags) {
+               std::unique_ptr<KaxTags> *tags) {
   try {
     mm_text_io_c in(new mm_file_io_c(file_name));
     return parse_chapters(&in, min_tc, max_tc, offset, language, charset, exception_on_error, is_simple_format, tags);
@@ -296,7 +296,7 @@ parse_chapters(const std::string &file_name,
       mxerror(boost::format(Y("Could not open '%1%' for reading.\n")) % file_name);
   }
 
-  return kax_chapters_cptr{};
+  return {};
 }
 
 /** \brief Probe a file for different chapter formats and parse the file.
@@ -331,7 +331,7 @@ parse_chapters(const std::string &file_name,
 
    \return The chapters parsed from the file or \c nullptr if an error occured.
 
-   \see ::parse_chapters(const std::string &file_name,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,bool *is_simple_format,KaxTags **tags)
+   \see ::parse_chapters(const std::string &file_name,int64_t min_tc,int64_t max_tc, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,bool *is_simple_format,std::unique_ptr<KaxTags> *tags)
 */
 kax_chapters_cptr
 parse_chapters(mm_text_io_c *in,
@@ -342,7 +342,7 @@ parse_chapters(mm_text_io_c *in,
                const std::string &charset,
                bool exception_on_error,
                bool *is_simple_format,
-               KaxTags **tags) {
+               std::unique_ptr<KaxTags> *tags) {
   assert(in);
 
   std::string error;
@@ -363,7 +363,7 @@ parse_chapters(mm_text_io_c *in,
 
     if (mtx::xml::ebml_chapters_converter_c::probe_file(in->get_file_name())) {
       auto chapters = mtx::xml::ebml_chapters_converter_c::parse_file(in->get_file_name(), true);
-      return select_chapters_in_timeframe(chapters.get(), min_tc, max_tc, offset) ? chapters : kax_chapters_cptr{};
+      return select_chapters_in_timeframe(chapters.get(), min_tc, max_tc, offset) ? chapters : nullptr;
     }
 
     error = (boost::format(Y("Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n")) % in->get_file_name()).str();
@@ -383,7 +383,7 @@ parse_chapters(mm_text_io_c *in,
     mxerror(error);
   }
 
-  return kax_chapters_cptr{};
+  return {};
 }
 
 /** \brief Get the start timecode for a chapter atom.

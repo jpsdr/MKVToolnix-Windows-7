@@ -80,6 +80,6 @@ private:
   bool add_to_cues_maybe(packet_cptr &pack);
 };
 
-extern cluster_helper_c *g_cluster_helper;
+extern std::unique_ptr<cluster_helper_c> g_cluster_helper;
 
 #endif // MTX_CLUSTER_HELPER_C

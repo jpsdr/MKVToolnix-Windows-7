@@ -22,7 +22,6 @@
 
 #include "common/bitvalue.h"
 #include "common/chapters/chapters.h"
-#include "common/file_types.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/segmentinfo.h"
 #include "merge/file_status.h"
@@ -45,8 +44,8 @@ using namespace libmatroska;
 
 class mm_io_c;
 class generic_packetizer_c;
-class generic_reader_c;
 class track_info_c;
+struct filelist_t;
 
 struct append_spec_t {
   size_t src_file_id, src_track_id, dst_file_id, dst_track_id;
@@ -89,56 +88,6 @@ struct packetizer_t {
     , file{}
     , orig_file{}
     , deferred{}
-  {
-  }
-};
-
-struct deferred_connection_t {
-  append_spec_t amap;
-  packetizer_t *ptzr;
-};
-
-struct filelist_t {
-  std::string name;
-  std::vector<std::string> all_names;
-  int64_t size;
-  size_t id;
-
-  file_type_e type;
-
-  packet_cptr pack;
-
-  generic_reader_c *reader;
-
-  track_info_c *ti;
-  bool appending, appended_to, done;
-
-  int num_unfinished_packetizers, old_num_unfinished_packetizers;
-  std::vector<deferred_connection_t> deferred_connections;
-  int64_t deferred_max_timecode_seen;
-
-  bool is_playlist;
-  std::vector<generic_reader_c *> playlist_readers;
-  size_t playlist_index, playlist_previous_filelist_id;
-  mm_mpls_multi_file_io_cptr playlist_mpls_in;
-
-  timecode_c restricted_timecode_min, restricted_timecode_max;
-
-  filelist_t()
-    : size{}
-    , id{}
-    , type{FILE_TYPE_IS_UNKNOWN}
-    , reader{}
-    , ti{}
-    , appending{}
-    , appended_to{}
-    , done{}
-    , num_unfinished_packetizers{}
-    , old_num_unfinished_packetizers{}
-    , deferred_max_timecode_seen{-1}
-    , is_playlist{}
-    , playlist_index{}
-    , playlist_previous_filelist_id{}
   {
   }
 };
@@ -187,7 +136,6 @@ public:
 };
 
 extern std::vector<packetizer_t> g_packetizers;
-extern std::vector<filelist_t> g_files;
 extern std::vector<attachment_t> g_attachments;
 extern std::vector<track_order_t> g_track_order;
 extern std::vector<append_spec_t> g_append_mapping;
@@ -214,12 +162,12 @@ extern std::string g_chapter_charset;
 
 extern std::string g_segmentinfo_file_name;
 
-extern KaxTags *g_tags_from_cue_chapters;
+extern std::unique_ptr<KaxTags> g_tags_from_cue_chapters;
 
-extern KaxSegment *g_kax_segment;
-extern KaxTracks *g_kax_tracks;
+extern std::unique_ptr<KaxSegment> g_kax_segment;
+extern std::unique_ptr<KaxTracks> g_kax_tracks;
 extern KaxTrackEntry *g_kax_last_entry;
-extern KaxSeekHead *g_kax_sh_main, *g_kax_sh_cues;
+extern std::unique_ptr<KaxSeekHead> g_kax_sh_main, g_kax_sh_cues;
 extern kax_chapters_cptr g_kax_chapters;
 extern int64_t g_tags_size;
 extern std::string g_segment_title;

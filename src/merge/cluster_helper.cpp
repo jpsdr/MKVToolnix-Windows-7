@@ -732,4 +732,4 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
   m->track_statistics.clear();
 }
 
-cluster_helper_c *g_cluster_helper = nullptr;
+std::unique_ptr<cluster_helper_c> g_cluster_helper;

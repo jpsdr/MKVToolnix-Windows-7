@@ -384,4 +384,10 @@ clone(std::shared_ptr<T> const &e) {
   return clone(*e);
 }
 
+template <typename T>
+std::shared_ptr<T>
+clone(std::unique_ptr<T> const &e) {
+  return clone(*e);
+}
+
 #endif // MTX_COMMON_EBML_H

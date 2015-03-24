@@ -114,6 +114,7 @@
 #include "input/r_wavpack.h"
 #include "merge/cluster_helper.h"
 #include "merge/cues.h"
+#include "merge/filelist.h"
 #include "merge/input_x.h"
 #include "merge/output_control.h"
 #include "merge/webm.h"
@@ -131,7 +132,7 @@ namespace libmatroska {
 }
 
 std::vector<packetizer_t> g_packetizers;
-std::vector<filelist_t> g_files;
+std::vector<filelist_cptr> g_files;
 std::vector<attachment_t> g_attachments;
 std::vector<track_order_t> g_track_order;
 std::vector<append_spec_t> g_append_mapping;
@@ -168,14 +169,14 @@ bool g_identifying                          = false;
 bool g_identify_verbose                     = false;
 bool g_identify_for_mmg                     = false;
 
-KaxSegment *g_kax_segment                   = nullptr;
-KaxTracks *g_kax_tracks                     = nullptr;
+std::unique_ptr<KaxSegment> g_kax_segment;
+std::unique_ptr<KaxTracks> g_kax_tracks;
 KaxTrackEntry *g_kax_last_entry             = nullptr;
-KaxSeekHead *g_kax_sh_main                  = nullptr;
-KaxSeekHead *g_kax_sh_cues                  = nullptr;
+std::unique_ptr<KaxSeekHead> g_kax_sh_main;
+std::unique_ptr<KaxSeekHead> g_kax_sh_cues;
 kax_chapters_cptr g_kax_chapters;
 
-KaxTags *g_tags_from_cue_chapters           = nullptr;
+std::unique_ptr<KaxTags> g_tags_from_cue_chapters;
 
 std::string g_chapter_file_name;
 std::string g_chapter_language;
@@ -208,18 +209,18 @@ bitvalue_cptr g_seguid_link_previous;
 bitvalue_cptr g_seguid_link_next;
 std::deque<bitvalue_cptr> g_forced_seguids;
 
-static KaxInfo *s_kax_infos                 = nullptr;
-static KaxMyDuration *s_kax_duration        = nullptr;
+KaxInfo *s_kax_infos;
+static KaxMyDuration *s_kax_duration;
 
-static KaxTags *s_kax_tags                  = nullptr;
+static std::unique_ptr<KaxTags> s_kax_tags;
 static kax_chapters_cptr s_chapters_in_this_file;
 
-static KaxAttachments *s_kax_as             = nullptr;
+static std::unique_ptr<KaxAttachments> s_kax_as;
 
-static EbmlVoid *s_kax_sh_void              = nullptr;
-static EbmlVoid *s_kax_chapters_void        = nullptr;
+static std::unique_ptr<EbmlVoid> s_kax_sh_void;
+static std::unique_ptr<EbmlVoid> s_kax_chapters_void;
 static int64_t s_max_chapter_size           = 0;
-static EbmlVoid *s_void_after_track_headers = nullptr;
+static std::unique_ptr<EbmlVoid> s_void_after_track_headers;
 
 static mm_io_cptr s_out;
 
@@ -229,7 +230,7 @@ static int s_display_files_done           = 0;
 static int s_display_path_length          = 1;
 static generic_reader_c *s_display_reader = nullptr;
 
-static EbmlHead *s_head                   = nullptr;
+static std::unique_ptr<EbmlHead> s_head;
 
 static std::string s_muxing_app, s_writing_app;
 static boost::posix_time::ptime s_writing_date;
@@ -538,17 +539,17 @@ determine_display_reader() {
 
   auto winner = static_cast<filelist_t const *>(nullptr);
   for (auto &current : g_files)
-    if (!current.appending && (0 != current.reader->get_num_packetizers()) && (!winner || (current.size > winner->size)))
-      winner = &current;
+    if (!current->appending && (0 != current->reader->get_num_packetizers()) && (!winner || (current->size > winner->size)))
+      winner = current.get();
 
   if (winner)
-    return winner->reader;
+    return winner->reader.get();
 
   for (auto &current : g_files)
-    if (!current.appending && (!winner || (current.size > winner->size)))
-      winner = &current;
+    if (!current->appending && (!winner || (current->size > winner->size)))
+      winner = current.get();
 
-  return winner->reader;
+  return winner->reader.get();
 }
 
 /** \brief Selects a reader for displaying its progress information
@@ -599,7 +600,7 @@ add_tags(KaxTag *tags) {
     return;
 
   if (!s_kax_tags)
-    s_kax_tags = new KaxTags;
+    s_kax_tags = std::make_unique<KaxTags>();
 
   s_kax_tags->PushElement(*tags);
 }
@@ -648,7 +649,7 @@ add_packetizer_globally(generic_packetizer_c *packetizer) {
 
   int idx = 0;
   for (auto &file : g_files)
-    if (file.reader == packetizer->m_reader) {
+    if (file->reader.get() == packetizer->m_reader) {
       pack.file      = idx;
       pack.orig_file = pack.file;
       break;
@@ -693,7 +694,7 @@ set_timecode_scale() {
     g_timecode_scale = static_cast<int64_t>(1000000000.0 / highest_sample_rate - 1.0);
 
   g_max_ns_per_cluster = std::min<int64_t>(32700 * g_timecode_scale, g_max_ns_per_cluster);
-  GetChild<KaxTimecodeScale>(s_kax_infos).SetValue(g_timecode_scale);
+  GetChild<KaxTimecodeScale>(*s_kax_infos).SetValue(g_timecode_scale);
 
   mxdebug_if(debug, boost::format("timecode_scale: %1% max ns per cluster: %2%\n") % g_timecode_scale % g_max_ns_per_cluster);
 }
@@ -701,7 +702,7 @@ set_timecode_scale() {
 static void
 render_ebml_head(mm_io_c *out) {
   if (!s_head)
-    s_head = new EbmlHead;
+    s_head = std::make_unique<EbmlHead>();
 
   bool v4_features = !hack_engaged(ENGAGE_NO_CUE_DURATION) || !hack_engaged(ENGAGE_NO_CUE_RELATIVE_POSITION);
   bool v3_features = g_stereo_mode_used;
@@ -735,10 +736,7 @@ render_headers(mm_io_c *out) {
 
     s_kax_infos = &GetChild<KaxInfo>(*g_kax_segment);
 
-    if (!g_video_packetizer || (TIMECODE_SCALE_MODE_AUTO == g_timecode_scale_mode))
-      s_kax_duration = new KaxMyDuration(EbmlFloat::FLOAT_64);
-    else
-      s_kax_duration = new KaxMyDuration(EbmlFloat::FLOAT_32);
+    s_kax_duration = new KaxMyDuration{ !g_video_packetizer || (TIMECODE_SCALE_MODE_AUTO == g_timecode_scale_mode) ? EbmlFloat::FLOAT_64 : EbmlFloat::FLOAT_32};
 
     s_kax_duration->SetValue(0.0);
     s_kax_infos->PushElement(*s_kax_duration);
@@ -847,25 +845,25 @@ render_headers(mm_io_c *out) {
     g_kax_segment->WriteHead(*out, 8);
 
     // Reserve some space for the meta seek stuff.
-    g_kax_sh_main = new KaxSeekHead();
-    s_kax_sh_void = new EbmlVoid();
+    g_kax_sh_main = std::make_unique<KaxSeekHead>();
+    s_kax_sh_void = std::make_unique<EbmlVoid>();
     s_kax_sh_void->SetSize(4096);
     s_kax_sh_void->Render(*out);
 
     if (g_write_meta_seek_for_clusters)
-      g_kax_sh_cues = new KaxSeekHead();
+      g_kax_sh_cues = std::make_unique<KaxSeekHead>();
 
     if (first_file) {
       g_kax_last_entry = nullptr;
 
       size_t i;
       for (i = 0; i < g_track_order.size(); i++)
-        if ((g_track_order[i].file_id >= 0) && (g_track_order[i].file_id < static_cast<int>(g_files.size())) && !g_files[g_track_order[i].file_id].appending)
-          g_files[g_track_order[i].file_id].reader->set_headers_for_track(g_track_order[i].track_id);
+        if ((g_track_order[i].file_id >= 0) && (g_track_order[i].file_id < static_cast<int>(g_files.size())) && !g_files[g_track_order[i].file_id]->appending)
+          g_files[g_track_order[i].file_id]->reader->set_headers_for_track(g_track_order[i].track_id);
 
       for (i = 0; i < g_files.size(); i++)
-        if (!g_files[i].appending)
-          g_files[i].reader->set_headers();
+        if (!g_files[i]->appending)
+          g_files[i]->reader->set_headers();
 
       set_timecode_scale();
 
@@ -890,7 +888,7 @@ render_headers(mm_io_c *out) {
 
       // Reserve some small amount of space for header changes by the
       // packetizers.
-      s_void_after_track_headers = new EbmlVoid;
+      s_void_after_track_headers = std::make_unique<EbmlVoid>();
       s_void_after_track_headers->SetSize(1024 + full_header_size - g_kax_tracks->ElementSize(false));
       s_void_after_track_headers->Render(*out);
     }
@@ -939,8 +937,7 @@ static void
 render_void(int64_t new_size) {
   auto actual_size = new_size;
 
-  delete s_void_after_track_headers;
-  s_void_after_track_headers = new EbmlVoid;
+  s_void_after_track_headers = std::make_unique<EbmlVoid>();
   s_void_after_track_headers->SetSize(new_size);
   s_void_after_track_headers->UpdateSize();
 
@@ -1034,11 +1031,8 @@ rerender_track_headers() {
 */
 static void
 render_attachments(IOCallback *out) {
-  if (s_kax_as)
-    delete s_kax_as;
-
-  s_kax_as           = new KaxAttachments();
-  KaxAttached *kax_a = nullptr;
+  s_kax_as   = std::make_unique<KaxAttachments>();
+  auto kax_a = static_cast<KaxAttached *>(nullptr);
 
   for (auto &attch : g_attachments) {
     if ((1 == g_file_num) || attch.to_all_files) {
@@ -1066,11 +1060,9 @@ render_attachments(IOCallback *out) {
 
   if (s_kax_as->ListSize() != 0)
     s_kax_as->Render(*out);
-  else {
+  else
     // Delete the kax_as pointer so that it won't be referenced in a seek head.
-    delete s_kax_as;
-    s_kax_as = nullptr;
-  }
+    s_kax_as.reset();
 }
 
 /** \brief Check the complete append mapping mechanism
@@ -1082,7 +1074,7 @@ render_attachments(IOCallback *out) {
 void
 check_append_mapping() {
   std::vector<int64_t>::iterator id;
-  std::vector<filelist_t>::iterator src_file, dst_file;
+  std::vector<filelist_cptr>::iterator src_file, dst_file;
 
   for (auto &amap : g_append_mapping) {
     // Check each mapping entry for validity.
@@ -1094,8 +1086,8 @@ check_append_mapping() {
     // 2. Is the "source" file in "append mode", meaning does its file name
     // start with a '+'?
     src_file = g_files.begin() + amap.src_file_id;
-    if (!src_file->appending)
-      mxerror(boost::format(Y("The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n")) % amap.src_file_id % src_file->name);
+    if (!(*src_file)->appending)
+      mxerror(boost::format(Y("The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n")) % amap.src_file_id % (*src_file)->name);
 
     // 3. Is there a file with the dst_file_id?
     if (g_files.size() <= amap.dst_file_id)
@@ -1110,24 +1102,24 @@ check_append_mapping() {
   // available (in which case we fill in default ones) or if there are fewer
   // mappings than tracks that are to be copied (which is an error).
   for (auto &src_file : g_files) {
-    if (!src_file.appending)
+    if (!src_file-> appending)
       continue;
 
-    size_t count = boost::count_if(g_append_mapping, [&](const append_spec_t &e) { return e.src_file_id == src_file.id; });
+    size_t count = boost::count_if(g_append_mapping, [&](const append_spec_t &e) { return e.src_file_id == src_file-> id; });
 
-    if ((0 < count) && (src_file.reader->m_used_track_ids.size() > count))
+    if ((0 < count) && (src_file-> reader->m_used_track_ids.size() > count))
       mxerror(boost::format(Y("Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the "
-                              "default mapping will be used) or specify a mapping for all tracks that are to be copied.\n")) % src_file.id % src_file.name);
+                              "default mapping will be used) or specify a mapping for all tracks that are to be copied.\n")) % src_file-> id % src_file-> name);
     else if (0 == count) {
       std::string missing_mappings;
 
       // Default mapping.
-      for (auto id : src_file.reader->m_used_track_ids) {
+      for (auto id : src_file-> reader->m_used_track_ids) {
         append_spec_t new_amap;
 
-        new_amap.src_file_id  = src_file.id;
+        new_amap.src_file_id  = src_file-> id;
         new_amap.src_track_id = id;
-        new_amap.dst_file_id  = src_file.id - 1;
+        new_amap.dst_file_id  = src_file-> id - 1;
         new_amap.dst_track_id = id;
         g_append_mapping.push_back(new_amap);
 
@@ -1137,7 +1129,7 @@ check_append_mapping() {
       }
       mxinfo(boost::format(Y("No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. "
                              "Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"))
-             % src_file.id % src_file.name % missing_mappings);
+             % src_file-> id % src_file-> name % missing_mappings);
     }
   }
 
@@ -1148,15 +1140,15 @@ check_append_mapping() {
 
     // 5. Does the "source" file have a track with the src_track_id, and is
     // that track selected for copying?
-    if (!mxfind2(id, amap.src_track_id, src_file->reader->m_used_track_ids))
+    if (!mxfind2(id, amap.src_track_id, (*src_file)->reader->m_used_track_ids))
       mxerror(boost::format(Y("The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. "
-                              "The argument for '--append-to' was invalid.\n")) % amap.src_file_id % src_file->name % amap.src_track_id);
+                              "The argument for '--append-to' was invalid.\n")) % amap.src_file_id % (*src_file)->name % amap.src_track_id);
 
     // 6. Does the "destination" file have a track with the dst_track_id, and
     // that track selected for copying?
-    if (!mxfind2(id, amap.dst_track_id, dst_file->reader->m_used_track_ids))
+    if (!mxfind2(id, amap.dst_track_id, (*dst_file)->reader->m_used_track_ids))
       mxerror(boost::format(Y("The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no "
-                              "track can be appended to it. The argument for '--append-to' was invalid.\n")) % amap.dst_file_id % dst_file->name % amap.dst_track_id);
+                              "track can be appended to it. The argument for '--append-to' was invalid.\n")) % amap.dst_file_id % (*dst_file)->name % amap.dst_track_id);
 
     // 7. Is this track already mapped to somewhere else?
     for (auto &cmp_amap : g_append_mapping) {
@@ -1166,7 +1158,7 @@ check_append_mapping() {
       if (   (cmp_amap.src_file_id  == amap.src_file_id)
           && (cmp_amap.src_track_id == amap.src_track_id))
         mxerror(boost::format(Y("The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"))
-                % amap.src_track_id % amap.src_file_id % src_file->name);
+                % amap.src_track_id % amap.src_file_id % (*src_file)->name);
     }
 
     // 8. Is there another track that is being appended to the dst_track_id?
@@ -1177,7 +1169,7 @@ check_append_mapping() {
       if (   (cmp_amap.dst_file_id  == amap.dst_file_id)
           && (cmp_amap.dst_track_id == amap.dst_track_id))
         mxerror(boost::format(Y("More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"))
-                % amap.dst_track_id % amap.dst_file_id % dst_file->name);
+                % amap.dst_track_id % amap.dst_file_id % (*dst_file)->name);
     }
   }
 
@@ -1191,7 +1183,7 @@ check_append_mapping() {
 
     src_file = g_files.begin() + amap.src_file_id;
     src_ptzr = nullptr;
-    mxforeach(gptzr, src_file->reader->m_reader_packetizers)
+    mxforeach(gptzr, (*src_file)->reader->m_reader_packetizers)
       if (static_cast<size_t>((*gptzr)->m_ti.m_id) == amap.src_track_id) {
         src_ptzr = (*gptzr);
         break;
@@ -1199,7 +1191,7 @@ check_append_mapping() {
 
     dst_file = g_files.begin() + amap.dst_file_id;
     dst_ptzr = nullptr;
-    mxforeach(gptzr, dst_file->reader->m_reader_packetizers)
+    mxforeach(gptzr, (*dst_file)->reader->m_reader_packetizers)
       if (static_cast<size_t>((*gptzr)->m_ti.m_id) == amap.dst_track_id) {
         dst_ptzr = (*gptzr);
         break;
@@ -1214,8 +1206,8 @@ check_append_mapping() {
       mxwarn(boost::format(Y("The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% "
                              "Please make sure that the resulting file plays correctly the whole time. "
                              "The author of this program will probably not give support for playback issues with the resulting file.\n"))
-             % amap.src_track_id % g_files[amap.src_file_id].name
-             % amap.dst_track_id % g_files[amap.dst_file_id].name
+             % amap.src_track_id % g_files[amap.src_file_id]->name
+             % amap.dst_track_id % g_files[amap.dst_file_id]->name
              % error_message);
 
     else if (CAN_CONNECT_YES != result) {
@@ -1223,13 +1215,13 @@ check_append_mapping() {
                          : result == CAN_CONNECT_NO_PARAMETERS ? Y("The track parameters do not match.")
                          :                                       Y("The reason is unknown."));
       mxerror(boost::format(Y("The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"))
-              % amap.src_track_id % g_files[amap.src_file_id].name
-              % amap.dst_track_id % g_files[amap.dst_file_id].name
+              % amap.src_track_id % g_files[amap.src_file_id]->name
+              % amap.dst_track_id % g_files[amap.dst_file_id]->name
               % reason);
     }
 
     src_ptzr->connect(dst_ptzr);
-    dst_file->appended_to = true;
+    (*dst_file)->appended_to = true;
   }
 
   // Calculate the "longest path" -- meaning the maximum number of
@@ -1279,17 +1271,17 @@ void
 calc_max_chapter_size() {
   // Step 1: Add all chapters from files that are not being appended.
   for (auto &file : g_files) {
-    if (file.appending)
+    if (file->appending)
       continue;
 
-    if (!file.reader->m_chapters)
+    if (!file->reader->m_chapters)
       continue;
 
     if (!g_kax_chapters)
-      g_kax_chapters = kax_chapters_cptr{new KaxChapters};
+      g_kax_chapters = std::make_shared<KaxChapters>();
 
-    move_chapters_by_edition(*g_kax_chapters, *file.reader->m_chapters);
-    file.reader->m_chapters.reset();
+    move_chapters_by_edition(*g_kax_chapters, *file->reader->m_chapters);
+    file->reader->m_chapters.reset();
   }
 
   // Step 2: Fix the mandatory elements and count the size of all chapters.
@@ -1301,7 +1293,7 @@ calc_max_chapter_size() {
   }
 
   for (auto &file : g_files) {
-    KaxChapters *chapters = file.reader->m_chapters.get();
+    auto chapters = file->reader->m_chapters.get();
     if (!chapters)
       continue;
 
@@ -1334,130 +1326,130 @@ create_readers() {
 
   for (auto &file : g_files) {
     try {
-      mm_io_cptr input_file = file.playlist_mpls_in ? std::static_pointer_cast<mm_io_c>(file.playlist_mpls_in) : open_input_file(file);
+      mm_io_cptr input_file = file->playlist_mpls_in ? std::static_pointer_cast<mm_io_c>(file->playlist_mpls_in) : open_input_file(*file);
 
-      switch (file.type) {
+      switch (file->type) {
         case FILE_TYPE_AAC:
-          file.reader = new aac_reader_c(*file.ti, input_file);
+          file->reader.reset(new aac_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_AC3:
-          file.reader = new ac3_reader_c(*file.ti, input_file);
+          file->reader.reset(new ac3_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_AVC_ES:
-          file.reader = new avc_es_reader_c(*file.ti, input_file);
+          file->reader.reset(new avc_es_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_HEVC_ES:
-          file.reader = new hevc_es_reader_c(*file.ti, input_file);
+          file->reader.reset(new hevc_es_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_AVI:
-          file.reader = new avi_reader_c(*file.ti, input_file);
+          file->reader.reset(new avi_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_COREAUDIO:
-          file.reader = new coreaudio_reader_c(*file.ti, input_file);
+          file->reader.reset(new coreaudio_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_DIRAC:
-          file.reader = new dirac_es_reader_c(*file.ti, input_file);
+          file->reader.reset(new dirac_es_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_DTS:
-          file.reader = new dts_reader_c(*file.ti, input_file);
+          file->reader.reset(new dts_reader_c(*file->ti, input_file));
           break;
 #if defined(HAVE_FLAC_FORMAT_H)
         case FILE_TYPE_FLAC:
-          file.reader = new flac_reader_c(*file.ti, input_file);
+          file->reader.reset(new flac_reader_c(*file->ti, input_file));
           break;
 #endif
         case FILE_TYPE_FLV:
-          file.reader = new flv_reader_c(*file.ti, input_file);
+          file->reader.reset(new flv_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_IVF:
-          file.reader = new ivf_reader_c(*file.ti, input_file);
+          file->reader.reset(new ivf_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_MATROSKA:
-          file.reader = new kax_reader_c(*file.ti, input_file);
+          file->reader.reset(new kax_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_MP3:
-          file.reader = new mp3_reader_c(*file.ti, input_file);
+          file->reader.reset(new mp3_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_MPEG_ES:
-          file.reader = new mpeg_es_reader_c(*file.ti, input_file);
+          file->reader.reset(new mpeg_es_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_MPEG_PS:
-          file.reader = new mpeg_ps_reader_c(*file.ti, input_file);
+          file->reader.reset(new mpeg_ps_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_MPEG_TS:
-          file.reader = new mpeg_ts_reader_c(*file.ti, input_file);
+          file->reader.reset(new mpeg_ts_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_OGM:
-          file.reader = new ogm_reader_c(*file.ti, input_file);
+          file->reader.reset(new ogm_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_PGSSUP:
-          file.reader = new pgssup_reader_c(*file.ti, input_file);
+          file->reader.reset(new pgssup_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_QTMP4:
-          file.reader = new qtmp4_reader_c(*file.ti, input_file);
+          file->reader.reset(new qtmp4_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_REAL:
-          file.reader = new real_reader_c(*file.ti, input_file);
+          file->reader.reset(new real_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_SSA:
-          file.reader = new ssa_reader_c(*file.ti, input_file);
+          file->reader.reset(new ssa_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_SRT:
-          file.reader = new srt_reader_c(*file.ti, input_file);
+          file->reader.reset(new srt_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_TRUEHD:
-          file.reader = new truehd_reader_c(*file.ti, input_file);
+          file->reader.reset(new truehd_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_TTA:
-          file.reader = new tta_reader_c(*file.ti, input_file);
+          file->reader.reset(new tta_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_USF:
-          file.reader = new usf_reader_c(*file.ti, input_file);
+          file->reader.reset(new usf_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_VC1:
-          file.reader = new vc1_es_reader_c(*file.ti, input_file);
+          file->reader.reset(new vc1_es_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_VOBBTN:
-          file.reader = new vobbtn_reader_c(*file.ti, input_file);
+          file->reader.reset(new vobbtn_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_VOBSUB:
-          file.reader = new vobsub_reader_c(*file.ti, input_file);
+          file->reader.reset(new vobsub_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_WAV:
-          file.reader = new wav_reader_c(*file.ti, input_file);
+          file->reader.reset(new wav_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_WAVPACK4:
-          file.reader = new wavpack_reader_c(*file.ti, input_file);
+          file->reader.reset(new wavpack_reader_c(*file->ti, input_file));
           break;
         default:
           mxerror(boost::format(Y("EVIL internal bug! (unknown file type). %1%\n")) % BUGMSG);
           break;
       }
 
-      file.reader->read_headers();
-      file.reader->set_timecode_restrictions(file.restricted_timecode_min, file.restricted_timecode_max);
+      file->reader->read_headers();
+      file->reader->set_timecode_restrictions(file->restricted_timecode_min, file->restricted_timecode_max);
 
       // Re-calculate file size because the reader might switch to a
       // multi I/O reader in read_headers().
-      file.size = file.reader->get_file_size();
+      file->size = file->reader->get_file_size();
 
       mxdebug_if(s_debug_timecode_restrictions,
-                 boost::format("Timecode restrictions for %3%: min %1% max %2%\n") % file.restricted_timecode_min % file.restricted_timecode_max % file.ti->m_fname);
+                 boost::format("Timecode restrictions for %3%: min %1% max %2%\n") % file->restricted_timecode_min % file->restricted_timecode_max % file->ti->m_fname);
 
     } catch (mtx::mm_io::open_x &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file.ti->m_fname % Y("The file could not be opened for reading, or there was not enough data to parse its headers."));
+      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % Y("The file could not be opened for reading, or there was not enough data to parse its headers."));
 
     } catch (mtx::input::open_x &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file.ti->m_fname % Y("The file could not be opened for reading, or there was not enough data to parse its headers."));
+      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % Y("The file could not be opened for reading, or there was not enough data to parse its headers."));
 
     } catch (mtx::input::invalid_format_x &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file.ti->m_fname % Y("The file content does not match its format type and was not recognized."));
+      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % Y("The file content does not match its format type and was not recognized."));
 
     } catch (mtx::input::header_parsing_x &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file.ti->m_fname % Y("The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."));
+      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % Y("The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."));
 
     } catch (mtx::input::exception &error) {
-      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file.ti->m_fname % error.error());
+      mxerror(boost::format(Y("The demultiplexer for the file '%1%' failed to initialize:\n%2%\n")) % file->ti->m_fname % error.error());
     }
   }
 }
@@ -1466,11 +1458,11 @@ void
 create_packetizers() {
   // Create the packetizers.
   for (auto &file : g_files) {
-    file.reader->m_appending = file.appending;
-    file.reader->create_packetizers();
+    file->reader->m_appending = file->appending;
+    file->reader->create_packetizers();
 
     if (!s_appending_files)
-      s_appending_files = file.appending;
+      s_appending_files = file->appending;
   }
 }
 
@@ -1479,9 +1471,9 @@ check_track_id_validity() {
   // Check if all track IDs given on the command line are actually
   // present.
   for (auto &file : g_files) {
-    file.reader->check_track_ids_and_packetizers();
-    file.num_unfinished_packetizers     = file.reader->m_reader_packetizers.size();
-    file.old_num_unfinished_packetizers = file.num_unfinished_packetizers;
+    file->reader->check_track_ids_and_packetizers();
+    file->num_unfinished_packetizers     = file->reader->m_reader_packetizers.size();
+    file->old_num_unfinished_packetizers = file->num_unfinished_packetizers;
   }
 }
 
@@ -1565,16 +1557,16 @@ add_tags_from_cue_chapters() {
     GetChild<KaxTagTrackUID>(GetChild<KaxTagTargets>(*static_cast<KaxTag *>(tag))).SetValue(tuid);
 
   if (!s_kax_tags)
-    s_kax_tags = g_tags_from_cue_chapters;
+    s_kax_tags.swap(g_tags_from_cue_chapters);
+
   else {
     while (g_tags_from_cue_chapters->ListSize() > 0) {
       s_kax_tags->PushElement(*(*g_tags_from_cue_chapters)[0]);
       g_tags_from_cue_chapters->Remove(0);
     }
-    delete g_tags_from_cue_chapters;
-  }
 
-  g_tags_from_cue_chapters = nullptr;
+    g_tags_from_cue_chapters.reset();
+  }
 }
 
 /** \brief Render an EbmlVoid element as a placeholder for chapters
@@ -1601,7 +1593,7 @@ render_chapter_void_placeholder() {
     return;
   }
 
-  s_kax_chapters_void = new EbmlVoid;
+  s_kax_chapters_void = std::make_unique<EbmlVoid>();
   s_kax_chapters_void->SetSize(s_max_chapter_size + 100);
   s_kax_chapters_void->Render(*s_out);
 }
@@ -1623,8 +1615,8 @@ prepare_tags_for_rendering() {
   if (outputting_webm())
     mtx::tags::remove_elements_unsupported_by_webm(*s_kax_tags);
 
-  mtx::tags::fix_mandatory_elements(s_kax_tags);
-  sort_ebml_master(s_kax_tags);
+  mtx::tags::fix_mandatory_elements(s_kax_tags.get());
+  sort_ebml_master(s_kax_tags.get());
   if (!s_kax_tags->CheckMandatory())
     mxerror(boost::format(Y("Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n")) % BUGMSG);
 
@@ -1644,7 +1636,7 @@ create_next_output_file() {
   mxdebug_if(s_debug, boost::format("splitting: Create next output file; splitting? %1% discarding? %2%\n") % g_cluster_helper->splitting() % g_cluster_helper->discarding());
 
   auto this_outfile   = g_cluster_helper->split_mode_produces_many_files() ? create_output_name() : g_outfile;
-  g_kax_segment       = new KaxSegment();
+  g_kax_segment       = std::make_unique<KaxSegment>();
 
   // Open the output file.
   try {
@@ -1721,8 +1713,7 @@ render_chapters() {
   if (s_chapters_in_this_file)
     s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, true);
 
-  delete s_kax_chapters_void;
-  s_kax_chapters_void = nullptr;
+  s_kax_chapters_void.reset();
 }
 
 static KaxTags *
@@ -1875,8 +1866,7 @@ finish_file(bool last_file,
 
   if (s_kax_as) {
     g_kax_sh_main->IndexThis(*s_kax_as, *g_kax_segment);
-    delete s_kax_as;
-    s_kax_as = nullptr;
+    s_kax_as.reset();
   }
 
   if ((g_kax_sh_main->ListSize() > 0) && !hack_engaged(ENGAGE_NO_META_SEEK)) {
@@ -1900,15 +1890,12 @@ finish_file(bool last_file,
       delete (*g_kax_segment)[i];
   g_kax_segment->RemoveAll();
 
-  delete g_kax_segment;
-  delete s_kax_sh_void;
-  delete g_kax_sh_main;
-  delete s_void_after_track_headers;
-  if (g_kax_sh_cues)
-    delete g_kax_sh_cues;
-  delete s_head;
-
-  s_head = nullptr;
+  g_kax_segment.reset();
+  s_kax_sh_void.reset();
+  g_kax_sh_main.reset();
+  s_void_after_track_headers.reset();
+  g_kax_sh_cues.reset();
+  s_head.reset();
 }
 
 void
@@ -1936,7 +1923,7 @@ append_chapters_for_track(filelist_t &src_file,
     return;
 
   if (!g_kax_chapters)
-    g_kax_chapters = kax_chapters_cptr{new KaxChapters};
+    g_kax_chapters = std::make_unique<KaxChapters>();
   else
     align_chapter_edition_uids(*g_kax_chapters, *chapters);
 
@@ -1959,8 +1946,8 @@ void
 append_track(packetizer_t &ptzr,
              const append_spec_t &amap,
              filelist_t *deferred_file = nullptr) {
-  filelist_t &src_file = g_files[amap.src_file_id];
-  filelist_t &dst_file = g_files[amap.dst_file_id];
+  auto &src_file = *g_files[amap.src_file_id];
+  auto &dst_file = *g_files[amap.dst_file_id];
 
   if (deferred_file)
     src_file.deferred_max_timecode_seen = deferred_file->reader->m_max_timecode_seen;
@@ -1996,23 +1983,23 @@ append_track(packetizer_t &ptzr,
       && g_video_packetizer) {
 
     for (auto &file : g_files) {
-      if (file.done)
+      if (file->done)
         continue;
 
       std::vector<generic_packetizer_c *>::const_iterator vptzr;
-      mxforeach(vptzr, file.reader->m_reader_packetizers)
+      mxforeach(vptzr, file->reader->m_reader_packetizers)
         if ((*vptzr)->get_track_type() == track_video)
           break;
 
-      if (vptzr == file.reader->m_reader_packetizers.end())
+      if (vptzr == file->reader->m_reader_packetizers.end())
         continue;
 
-      deferred_connection_t new_def_con;
+      filelist_t::deferred_connection_t new_def_con;
 
       ptzr.deferred    = true;
       new_def_con.amap = amap;
       new_def_con.ptzr = &ptzr;
-      file.deferred_connections.push_back(new_def_con);
+      file->deferred_connections.push_back(new_def_con);
 
       return;
     }
@@ -2056,9 +2043,9 @@ append_track(packetizer_t &ptzr,
 
   // Is the current file currently used for displaying the progress? If yes
   // then replace it with the next one.
-  if (s_display_reader == dst_file.reader) {
+  if (s_display_reader == dst_file.reader.get()) {
     s_display_files_done++;
-    s_display_reader = src_file.reader;
+    s_display_reader = src_file.reader.get();
   }
 
   // Also fix the ptzr structure and reset the ptzr's state to "I want more".
@@ -2149,7 +2136,7 @@ append_tracks_maybe() {
     if (ptzr.deferred)
       continue;
 
-    if (!g_files[ptzr.orig_file].appended_to)
+    if (!g_files[ptzr.orig_file]->appended_to)
       continue;
 
     if (FILE_STATUS_DONE_AND_DRY != ptzr.status)
@@ -2188,7 +2175,7 @@ append_tracks_maybe() {
 */
 static void
 establish_deferred_connections(filelist_t &file) {
-  std::vector<deferred_connection_t> def_cons = file.deferred_connections;
+  auto def_cons = file.deferred_connections;
   file.deferred_connections.clear();
 
   for (auto &def_con : def_cons)
@@ -2225,7 +2212,7 @@ pull_packetizers_for_packets() {
     // unfinished packetizers in the corresponding file structure.
     if (   (FILE_STATUS_DONE_AND_DRY == ptzr.status)
         && (ptzr.old_status != ptzr.status)) {
-      filelist_t &file = g_files[ptzr.file];
+      auto &file = *g_files[ptzr.file];
       file.num_unfinished_packetizers--;
 
       // If all packetizers for a file have finished then establish the
@@ -2322,11 +2309,6 @@ main_loop() {
 */
 static void
 destroy_readers() {
-  for (auto &file : g_files) {
-    delete file.reader;
-    delete file.ti;
-  }
-
   g_files.clear();
   g_packetizers.clear();
 }
@@ -2337,28 +2319,16 @@ destroy_readers() {
 */
 void
 cleanup() {
-  delete g_cluster_helper;
-  g_cluster_helper = nullptr;
+  g_cluster_helper.reset();
 
   destroy_readers();
   g_attachments.clear();
 
-  delete s_kax_tags;
-  s_kax_tags = nullptr;
-
-  delete g_tags_from_cue_chapters;
-  g_tags_from_cue_chapters = nullptr;
-
+  s_kax_tags.reset();
+  g_tags_from_cue_chapters.reset();
   g_kax_chapters.reset();
-
-  delete s_kax_as;
-  s_kax_as = nullptr;
-
+  s_kax_as.reset();
   g_kax_info_chap.reset();
-
   g_forced_seguids.clear();
-
-  delete g_kax_tracks;
-  g_kax_tracks = nullptr;
-
+  g_kax_tracks.reset();
 }

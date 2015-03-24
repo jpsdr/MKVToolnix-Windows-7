@@ -30,9 +30,10 @@
 #include "common/strings/formatting.h"
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_tags_converter.h"
-#include "merge/output_control.h"
+#include "merge/filelist.h"
 #include "merge/generic_packetizer.h"
 #include "merge/generic_reader.h"
+#include "merge/output_control.h"
 #include "merge/webm.h"
 
 #define TRACK_TYPE_TO_DEFTRACK_TYPE(track_type)      \
@@ -611,7 +612,7 @@ generic_packetizer_c::set_headers() {
     ptzrs_in_header_order.push_back(this);
 
   if (!m_track_entry) {
-    m_track_entry    = !g_kax_last_entry ? &GetChild<KaxTrackEntry>(g_kax_tracks) : &GetNextChild<KaxTrackEntry>(*g_kax_tracks, *g_kax_last_entry);
+    m_track_entry    = !g_kax_last_entry ? &GetChild<KaxTrackEntry>(*g_kax_tracks) : &GetNextChild<KaxTrackEntry>(*g_kax_tracks, *g_kax_last_entry);
     g_kax_last_entry = m_track_entry;
     m_track_entry->SetGlobalTimecodeScale((int64_t)g_timecode_scale);
   }
@@ -1150,7 +1151,7 @@ generic_packetizer_c::create_track_number() {
   int file_num = -1;
   size_t i;
   for (i = 0; i < g_files.size(); i++)
-    if (g_files[i].reader == this->m_reader) {
+    if (g_files[i]->reader.get() == this->m_reader) {
       found = true;
       file_num = i;
       break;

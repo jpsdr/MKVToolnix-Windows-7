@@ -185,13 +185,13 @@ create_simple_tag(cue_parser_args_t &a,
 
 static void
 add_tag_for_cue_entry(cue_parser_args_t &a,
-                      KaxTags **tags,
+                      std::unique_ptr<KaxTags> *tags,
                       uint64_t cuid) {
   if (!tags)
     return;
 
   if (!*tags)
-    *tags = new KaxTags;
+    *tags = std::make_unique<KaxTags>();
 
   KaxTag *tag            = new KaxTag;
   KaxTagTargets *targets = &GetChild<KaxTagTargets>(*tag);
@@ -222,12 +222,12 @@ add_tag_for_cue_entry(cue_parser_args_t &a,
 
 static void
 add_tag_for_global_cue_settings(cue_parser_args_t &a,
-                                KaxTags **tags) {
+                                std::unique_ptr<KaxTags> *tags) {
   if (!tags)
     return;
 
   if (!*tags)
-    *tags = new KaxTags;
+    *tags = std::make_unique<KaxTags>();
 
   KaxTag *tag            = new KaxTag;
   KaxTagTargets *targets = &GetChild<KaxTagTargets>(*tag);
@@ -275,7 +275,7 @@ add_subchapters_for_index_entries(cue_parser_args_t &a) {
 
 static void
 add_elements_for_cue_entry(cue_parser_args_t &a,
-                           KaxTags **tags) {
+                           std::unique_ptr<KaxTags> *tags) {
   if (a.start_indices.empty())
     mxerror(boost::format(Y("Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n")) % a.line_num);
 
@@ -350,13 +350,13 @@ parse_cue_chapters(mm_text_io_c *in,
                    int64_t offset,
                    const std::string &language,
                    const std::string &charset,
-                   KaxTags **tags) {
+                   std::unique_ptr<KaxTags> *tags) {
   cue_parser_args_t a;
   std::string line;
 
   in->setFilePointer(0);
-  kax_chapters_cptr chapters{new KaxChapters};
-  a.chapters = chapters.get();
+  auto chapters = std::make_shared<KaxChapters>();
+  a.chapters    = chapters.get();
 
   if (in->get_byte_order() == BO_NONE) {
     a.do_convert = true;
@@ -479,5 +479,5 @@ parse_cue_chapters(mm_text_io_c *in,
   if (1 <= a.num)
     add_elements_for_cue_entry(a, tags);
 
-  return 0 == a.num ? kax_chapters_cptr{} : chapters;
+  return 0 == a.num ? nullptr : chapters;
 }
