@@ -70,9 +70,11 @@ xtr_avi_c::create_file(xtr_base_c *master,
   memcpy(ccodec, &m_bih->bi_compression, 4);
   ccodec[4]         = 0;
 
-  if (get_uint32_le(&m_bih->bi_size) != sizeof(alBITMAPINFOHEADER)) {
+  auto mpriv_size   = mpriv->get_size();
+
+  if (mpriv_size != sizeof(alBITMAPINFOHEADER)) {
     m_avi->extradata      = m_bih + 1;
-    m_avi->extradata_size = get_uint32_le(&m_bih->bi_size) - sizeof(alBITMAPINFOHEADER);
+    m_avi->extradata_size = mpriv_size - std::min(mpriv_size, sizeof(alBITMAPINFOHEADER));
   }
 
   AVI_set_video(m_avi, kt_get_v_pixel_width(track), kt_get_v_pixel_height(track), get_uint16_le(&m_bih->bi_bit_count), m_fps, ccodec);

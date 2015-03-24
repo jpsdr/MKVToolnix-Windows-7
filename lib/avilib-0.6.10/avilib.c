@@ -895,7 +895,8 @@ int avi_update_header(avi_t *AVI)
 
    OUT4CC ("strf");
    OUTLONG(40 + xd_size);       /* # of bytes to follow */
-   OUTLONG(40 + xd_size);       /* Size */
+   /* Check for HuffYUV, if so, add xd_size */
+   OUTLONG(40 + (!strcmp(AVI->compressor, "HFYU") ? xd_size : 0));  /* Size */
    OUTLONG(AVI->width);         /* Width */
    OUTLONG(AVI->height);        /* Height */
    OUTSHRT(1); OUTSHRT(AVI->bpp); /* Planes, Count */
@@ -1355,7 +1356,8 @@ static int avi_close_output_file(avi_t *AVI)
 
    OUT4CC ("strf");
    OUTLONG(40 + xd_size);       /* # of bytes to follow */
-   OUTLONG(40 + xd_size);       /* Size */
+   /* Check for HuffYUV, if so, add xd_size */
+   OUTLONG(40 + (!strcmp(AVI->compressor, "HFYU") ? xd_size : 0));  /* Size */
    OUTLONG(AVI->width);         /* Width */
    OUTLONG(AVI->height);        /* Height */
    OUTSHRT(1); OUTSHRT(AVI->bpp); /* Planes, Count */
@@ -2446,12 +2448,12 @@ int avi_parse_input_file(avi_t *AVI, int getIndex)
          if(lasttag == 1)
          {
             uint32_t ck_size = str2ulong(hdrl_data + i - 4);
-            uint32_t bih_size = str2ulong(hdrl_data + i);
-            uint32_t bi_size = bih_size > 40 ? bih_size : ck_size;
-            AVI->bitmap_info_header = (alBITMAPINFOHEADER *)malloc(bi_size);
+            AVI->bitmap_info_header = (alBITMAPINFOHEADER *)malloc(ck_size);
             if (AVI->bitmap_info_header != NULL) {
-                memcpy(AVI->bitmap_info_header, hdrl_data + i, bi_size);
-                long2str(&AVI->bitmap_info_header->bi_size, bi_size);
+                memcpy(AVI->bitmap_info_header, hdrl_data + i, ck_size);
+                long2str(&AVI->bitmap_info_header->bi_size,
+                        !strcmp(AVI->compressor, "HFYU") ? ck_size : sizeof(alBITMAPINFOHEADER));
+                AVI->extradata_size = ck_size - sizeof(alBITMAPINFOHEADER);
             }
 
             AVI->width  = str2ulong(hdrl_data+i+4);

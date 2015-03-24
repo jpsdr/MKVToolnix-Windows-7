@@ -219,7 +219,7 @@ avi_reader_c::create_video_packetizer() {
   }
 
   if (m_avi->bitmap_info_header) {
-    m_ti.m_private_data = memory_c::clone(m_avi->bitmap_info_header, get_uint32_le(&m_avi->bitmap_info_header->bi_size));
+    m_ti.m_private_data = memory_c::clone(m_avi->bitmap_info_header, sizeof(alBITMAPINFOHEADER) + m_avi->extradata_size);
 
     mxverb(4, boost::format("track extra data size: %1%\n") % (m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER)));
 
@@ -329,9 +329,8 @@ avi_reader_c::create_mpeg4_p10_packetizer() {
     if (0 != m_fps)
       ptzr->set_container_default_field_duration(1000000000ll / m_fps / 2);
 
-    uint32_t extra_data_size = get_uint32_le(&m_avi->bitmap_info_header->bi_size) - sizeof(alBITMAPINFOHEADER);
-    if (0 < extra_data_size) {
-      memory_cptr avc_extra_nalus = mpeg4::p10::avcc_to_nalus(reinterpret_cast<unsigned char *>(m_avi->bitmap_info_header + 1), extra_data_size);
+    if (0 < m_avi->extradata_size) {
+      auto avc_extra_nalus = mpeg4::p10::avcc_to_nalus(reinterpret_cast<unsigned char *>(m_avi->bitmap_info_header + 1), m_avi->extradata_size);
       if (avc_extra_nalus)
         ptzr->add_extra_data(avc_extra_nalus);
     }
