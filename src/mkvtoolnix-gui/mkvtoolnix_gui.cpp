@@ -22,7 +22,7 @@ showPreviewWarning(QWidget *parent) {
   if (get_environment_variable("NO_WARNING") == "1")
     return;
 
-  auto dlg = std::unique_ptr<PreviewWarningDialog>(new PreviewWarningDialog{parent});
+  auto dlg = std::make_unique<PreviewWarningDialog>(parent);
   dlg->exec();
 }
 
@@ -31,8 +31,8 @@ main(int argc,
      char **argv) {
   registerMetaTypes();
 
-  auto app        = std::unique_ptr<App>(new App{argc, argv});
-  auto mainWindow = std::unique_ptr<MainWindow>(new MainWindow{});
+  auto app        = std::make_unique<App>(argc, argv);
+  auto mainWindow = std::make_unique<MainWindow>();
 
   showPreviewWarning(mainWindow.get());
 

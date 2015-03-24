@@ -22,7 +22,7 @@ OptionFile::create(QString const &fileName,
 std::unique_ptr<QTemporaryFile>
 OptionFile::createTemporary(QString const &prefix,
                             QStringList const &options) {
-  auto file = std::unique_ptr<QTemporaryFile>(new QTemporaryFile{QDir::temp().filePath(prefix)});
+  auto file = std::make_unique<QTemporaryFile>(QDir::temp().filePath(prefix));
   Q_ASSERT(file->open());
   write(*file, options);
   file->close();
