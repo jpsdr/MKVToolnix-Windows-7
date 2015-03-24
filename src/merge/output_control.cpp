@@ -1051,11 +1051,10 @@ render_attachments(IOCallback *out) {
         GetChild<KaxMimeType>(kax_a).SetValue(attch.mime_type);
 
       std::string name;
-      if (attch.stored_name == "") {
-        int path_sep_idx = attch.name.rfind(PATHSEP);
-        name             = -1 != path_sep_idx ? attch.name.substr(path_sep_idx + 1) : attch.name;
+      if (attch.stored_name == "")
+        name = bfs::path{attch.name}.filename().string();
 
-      } else
+      else
         name = attch.stored_name;
 
       GetChild<KaxFileName>(kax_a).SetValue(cstrutf8_to_UTFstring(name));

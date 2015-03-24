@@ -133,12 +133,6 @@ using int64_t = INT64_TYPE;
 using uint64_t = UINT64_TYPE;
 #endif
 
-#if defined(SYS_WINDOWS)
-# define PATHSEP '\\'
-#else
-# define PATHSEP '/'
-#endif
-
 #if defined(WORDS_BIGENDIAN) && (WORDS_BIGENDIAN == 1)
 # define ARCH_BIGENDIAN
 #else
