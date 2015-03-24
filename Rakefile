@@ -99,7 +99,6 @@ def setup_globals
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0500 -D_WIN32_WINNT=0x0500 " if c?(:MINGW)
   cflags_common           += " -fPIC " if c?(:USE_QT) && !c?(:MINGW)
   cflags_common           += " -DQT_STATICPLUGIN" if c?(:USE_QT) && c?(:MINGW)
-  ldflags_extra            = c?(:MINGW) ? '' : "-Wl,--enable-auto-import"
   $flags                   = {
     :cflags                => "#{cflags_common} #{c(:USER_CFLAGS)}",
     :cxxflags              => "#{cflags_common} #{c(:STD_CXX11)} -Wnon-virtual-dtor -Woverloaded-virtual -Wextra -Wno-missing-field-initializers #{c(:WXWIDGETS_CFLAGS)} #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:CURL_CFLAGS)} #{c(:USER_CXXFLAGS)}",
@@ -413,9 +412,9 @@ EOT
     end
   end
 
-  [ :stats, :statistics ].each_with_index do |name, idx|
+  [ :stats, :statistics ].each_with_index do |task_name, idx|
     desc "Generate statistics about translation coverage" if 0 == idx
-    task name do
+    task task_name do
       FileList["po/*.po", "doc/man/po4a/po/*.po"].each do |name|
         command = "msgfmt --statistics -o /dev/null #{name} 2>&1"
         if ENV["V"].to_bool

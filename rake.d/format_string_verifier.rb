@@ -13,7 +13,7 @@ class FormatStringVerifier
     flags   = {}
 
     IO.readlines(file_name).each_with_index do |line, line_number|
-      line.gsub! /[\r\n]/, ''
+      line.gsub!(/[\r\n]/, '')
 
       if /^msgid /.match line
         entries << { :id => [ line ], :line_number => line_number + 1, :flags => flags }
@@ -29,7 +29,7 @@ class FormatStringVerifier
       elsif /^"/.match line
         entry      = entries[-1]
         str        = entry[:str] ? entry[:str][-1] : entry[:id][-1]
-        str.gsub! /"$/, ''
+        str.gsub!(/"$/, '')
         str << line[1 .. line.length - 1]
 
       elsif /^#,/.match line
@@ -48,7 +48,7 @@ class FormatStringVerifier
                | [0-9]+%?
                )/ix
 
-    errors = read_entries(file_name).select { |e| !e[:flags][:fuzzy] && !e[:id].nil? && (e[:id][0] != 'msgid ""') && !e[:str].nil? && e[:str].detect { |e| e != 'msgstr ""' } }.collect do |entry|
+    errors = read_entries(file_name).select { |e| !e[:flags][:fuzzy] && !e[:id].nil? && (e[:id][0] != 'msgid ""') && !e[:str].nil? && e[:str].detect { |line| line != 'msgstr ""' } }.collect do |entry|
       non_id  = entry[:id][ 1 .. entry[:id].size - 1 ] + entry[:str]
       formats = {
         :id     => entry[:id][0].scan(matcher).uniq.sort,

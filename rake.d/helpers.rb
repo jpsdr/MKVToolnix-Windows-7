@@ -121,7 +121,7 @@ def handle_deps(target, exit_code, skip_abspath=false)
   create_dependency_dirs
 
   File.open("#{$dependency_dir}/" + target.gsub(/[\/\.]/, '_') + '.dep', "w") do |out|
-    line = IO.readlines(dep_file).collect { |line| line.chomp }.join(" ").gsub(/\\/, ' ').gsub(/\s+/, ' ')
+    line = IO.readlines(dep_file).collect { |l| l.chomp }.join(" ").gsub(/\\/, ' ').gsub(/\s+/, ' ')
     if /(.+?):\s*([^\s].*)/.match(line)
       target  = $1
       sources = $2.gsub(/^\s+/, '').gsub(/\s+$/, '').split(/\s+/)
@@ -135,14 +135,14 @@ def handle_deps(target, exit_code, skip_abspath=false)
   end
 
   get_out.call
-rescue Exception => e
+rescue
   get_out.call
 end
 
 def import_dependencies
   return unless FileTest.directory? $dependency_dir
   Dir.glob("#{$dependency_dir}/*.dep").each do |file_name|
-    lines  = IO.readlines(file_name).collect &:chomp
+    lines  = IO.readlines(file_name).collect(&:chomp)
     target = lines.shift
     file target => lines.select { |dep_name| File.exists? dep_name }
   end
@@ -178,7 +178,6 @@ def adjust_to_poedit_style(in_name, out_name, language)
     lines          = IO.readlines(in_name).collect { |line| line.chomp.gsub(/\r/, '') }.reject { |line| /^\s*$/.match(line) }
     state          = :initial
     previous_state = :initial
-    previous_line  = nil
     sources        = []
     one_source     = !$unwrapped_po.include?(language) && !$po_multiple_sources.include?(language)
 
