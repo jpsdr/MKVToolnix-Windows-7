@@ -180,7 +180,7 @@ def adjust_to_poedit_style(in_name, out_name, language)
     previous_state = :initial
     previous_line  = nil
     sources        = []
-    one_source     = !$unwrapped_po.include?(language)
+    one_source     = !$unwrapped_po.include?(language) && !$po_multiple_sources.include?(language)
 
     lines.each do |line|
       previous_state = state
