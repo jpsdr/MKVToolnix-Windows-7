@@ -20,23 +20,6 @@
 // For PRId64 and PRIu64:
 #define __STDC_FORMAT_MACROS
 
-#if defined(HAVE_COREC_H)
-#include "corec.h"
-
-#if defined(TARGET_WIN)
-# define SYS_WINDOWS
-#elif defined(TARGET_OSX)
-# define SYS_APPLE
-#elif defined(TARGET_LINUX)
-# define SYS_UNIX
-# if defined(__sun) && defined(__SVR4)
-#  define SYS_SOLARIS
-# else
-#  define SYS_LINUX
-# endif
-#endif
-
-#else // HAVE_COREC_H
 #if (defined(_WIN32) || defined(WIN32) || defined(__MINGW32__)) && !defined(__CYGWIN__)
 # define SYS_WINDOWS
 #elif defined(__APPLE__)
@@ -60,8 +43,6 @@
 # endif
 #endif
 
-#endif // HAVE_COREC_H
-
 #if defined(SYS_WINDOWS)
 # if defined __MINGW32__
 #  define COMP_MINGW
@@ -79,7 +60,6 @@
 
 #if defined(COMP_MSC)
 
-#if !defined(HAVE_COREC_H)
 # define strncasecmp _strnicmp
 # define strcasecmp _stricmp
 using int64_t = __int64;
@@ -90,7 +70,6 @@ using uint64_t = unsigned __int64;
 using uint32_t = unsigned __int32;
 using uint16_t = unsigned __int16;
 using uint8_t = unsigned __int8;
-#endif // HAVE_COREC_H
 
 # define nice(a)
 #include <io.h>
