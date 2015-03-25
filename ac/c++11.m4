@@ -8,11 +8,6 @@ AC_DEFUN([AX_CXX_STD_CXX_FLAG],[
     AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++14"], [ax_cv_std_cxx_flag="undecided"])
 
     if test x"$ax_cv_std_cxx_flag" = xundecided ; then
-      CXXFLAGS="$CXXFLAGS_SAVED -std=c++1y"
-      AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++1y"], [ax_cv_std_cxx_flag="undecided"])
-    fi
-
-    if test x"$ax_cv_std_cxx_flag" = xundecided ; then
       CXXFLAGS="$CXXFLAGS_SAVED -std=c++11"
       AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++11"], [ax_cv_std_cxx_flag="undecided"])
     fi
