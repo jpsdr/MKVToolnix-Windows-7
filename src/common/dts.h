@@ -72,95 +72,95 @@ enum class source_pcm_resolution_e {
 static const int64_t max_packet_size = 15384;
 
 struct header_t {
-  frametype_e frametype;
+  frametype_e frametype{ frametype_e::normal };
 
   // 0 for normal frames, 1 to 30 for termination frames. Number of PCM
   // samples the frame is shorter than normal.
-  unsigned int deficit_sample_count;
+  unsigned int deficit_sample_count{};
 
   // If true, a CRC-sum is included in the data.
-  bool crc_present;
+  bool crc_present{};
 
   // number of PCM core sample blocks in this frame. Each PCM core sample block
   // consists of 32 samples. Notice that "core samples" means "samples
   // after the input decimator", so at sampling frequencies >48kHz, one core
   // sample represents 2 (or 4 for frequencies >96kHz) output samples.
-  unsigned int num_pcm_sample_blocks;
+  unsigned int num_pcm_sample_blocks{};
 
   // Number of bytes this frame occupies (range: 95 to 16 383).
-  unsigned int frame_byte_size;
+  unsigned int frame_byte_size{};
 
   // Number of audio channels, -1 for "unknown".
-  int audio_channels;
+  int audio_channels{};
 
   // String describing the audio channel arrangement
-  const char *audio_channel_arrangement;
+  const char *audio_channel_arrangement{};
 
   // -1 for "invalid"
-  unsigned int core_sampling_frequency;
+  unsigned int core_sampling_frequency{};
 
   // in bit per second, or -1 == "open", -2 == "variable", -3 == "lossless"
-  int transmission_bitrate;
+  int transmission_bitrate{};
 
   // if true, sub-frames contain coefficients for downmixing to stereo
-  bool embedded_down_mix;
+  bool embedded_down_mix{};
 
   // if true, sub-frames contain coefficients for dynamic range correction
-  bool embedded_dynamic_range;
+  bool embedded_dynamic_range{};
 
   // if true, a time stamp is embedded at the end of the core audio data
-  bool embedded_time_stamp;
+  bool embedded_time_stamp{};
 
   // if true, auxiliary data is appended at the end of the core audio data
-  bool auxiliary_data;
+  bool auxiliary_data{};
 
   // if true, the source material was mastered in HDCD format
-  bool hdcd_master;
+  bool hdcd_master{};
 
-  extension_audio_descriptor_e extension_audio_descriptor; // significant only if extended_coding == true
+  extension_audio_descriptor_e extension_audio_descriptor{ extension_audio_descriptor_e::xch }; // significant only if extended_coding == true
 
   // if true, extended coding data is placed after the core audio data
-  bool extended_coding;
+  bool extended_coding{};
 
   // if true, audio data check words are placed in each sub-sub-frame
   // rather than in each sub-frame, only
-  bool audio_sync_word_in_sub_sub;
+  bool audio_sync_word_in_sub_sub{};
 
-  lfe_type_e lfe_type;
+  lfe_type_e lfe_type{ lfe_type_e::none };
 
   // if true, past frames will be used to predict ADPCM values for the
   // current one. This means, if this flag is false, the current frame is
   // better suited as an audio-jump-point (like an "I-frame" in video-coding).
-  bool predictor_history_flag;
+  bool predictor_history_flag{};
 
   // which FIR coefficients to use for sub-band reconstruction
-  multirate_interpolator_e multirate_interpolator;
+  multirate_interpolator_e multirate_interpolator{ multirate_interpolator_e::non_perfect };
 
   // 0 to 15
-  unsigned int encoder_software_revision;
+  unsigned int encoder_software_revision{};
 
   // 0 to 3 - "top-secret" bits indicating the "copy history" of the material
-  unsigned int copy_history;
+  unsigned int copy_history{};
 
   // 16, 20 or 24 bits per sample, or -1 == invalid
-  int source_pcm_resolution;
+  int source_pcm_resolution{};
 
   // if true, source surround channels are mastered in DTS-ES
-  bool source_surround_in_es;
+  bool source_surround_in_es{};
 
   // if true, left and right front channels are encoded as
   // sum and difference (L = L + R, R = L - R)
-  bool front_sum_difference;
+  bool front_sum_difference{};
 
   // same as front_sum_difference for surround left and right channels
-  bool surround_sum_difference;
+  bool surround_sum_difference{};
 
   // gain in dB to apply for dialog normalization
-  int dialog_normalization_gain;
+  int dialog_normalization_gain{};
 
-  bool hd;
-  hd_type_e hd_type;
-  int hd_part_size;
+  bool has_core{}, has_hd{};
+  hd_type_e hd_type{ hd_type_e::none };
+  int hd_part_size{};
 
 public:
   inline int get_packet_length_in_core_samples() const {
@@ -181,11 +181,13 @@ public:
 
   unsigned int get_total_num_audio_channels() const;
   void print() const;
+
+  bool decode_core_header(unsigned char const *buf, size_t size, bool allow_no_hd_search = false);
 };
 
-int find_sync_word(const unsigned char *buf, unsigned int size);
-int find_header(const unsigned char *buf, unsigned int size, struct header_t *header, bool allow_no_hd_search = false);
-int find_consecutive_headers(const unsigned char *buf, unsigned int size, unsigned int num);
+int find_sync_word(unsigned char const *buf, size_t size);
+int find_header(unsigned char const *buf, size_t size, header_t &header, bool allow_no_hd_search = false);
+int find_consecutive_headers(unsigned char const *buf, size_t size, unsigned int num);
 
 bool operator ==(header_t const &h1, header_t const &h2);
 bool operator!=(header_t const &h1, header_t const &h2);

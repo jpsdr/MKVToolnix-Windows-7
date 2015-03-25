@@ -60,7 +60,7 @@ dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
     buf_size = m_packet_buffer.get_size();
   }
 
-  pos = mtx::dts::find_header(buf, buf_size, &dtsheader, flushing);
+  pos = mtx::dts::find_header(buf, buf_size, dtsheader, flushing);
 
   if ((0 > pos) || (static_cast<int>(pos + dtsheader.frame_byte_size) > buf_size))
     return nullptr;
@@ -87,9 +87,13 @@ dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
 
   auto bytes_to_remove = pos + dtsheader.frame_byte_size;
 
-  if (m_reduce_to_core && dtsheader.hd && (dtsheader.hd_part_size > 0) && (dtsheader.hd_part_size < static_cast<int>(dtsheader.frame_byte_size))) {
+  if (   m_reduce_to_core
+      && dtsheader.has_core
+      && dtsheader.has_hd
+      && (dtsheader.hd_part_size > 0)
+      && (dtsheader.hd_part_size < static_cast<int>(dtsheader.frame_byte_size))) {
     dtsheader.frame_byte_size -= dtsheader.hd_part_size;
-    dtsheader.hd               = false;
+    dtsheader.has_hd           = false;
   }
 
   auto packet_buf = memory_c::clone(buf + pos, dtsheader.frame_byte_size);

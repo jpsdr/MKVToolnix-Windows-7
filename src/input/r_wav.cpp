@@ -325,7 +325,7 @@ wav_dts_demuxer_c::probe(mm_io_cptr &io) {
     len     = decode_buffer(len);
     int pos = mtx::dts::find_consecutive_headers(m_buf[m_cur_buf]->get_buffer(), len, 5);
     if (0 <= pos) {
-      if (0 > mtx::dts::find_header(m_buf[m_cur_buf]->get_buffer() + pos, len - pos, &m_dtsheader))
+      if (0 > mtx::dts::find_header(m_buf[m_cur_buf]->get_buffer() + pos, len - pos, m_dtsheader))
         return false;
 
       mxverb(3, boost::format("DTSinWAV: 14->16 %1% swap %2%\n") % m_pack_14_16 % m_swap_bytes);

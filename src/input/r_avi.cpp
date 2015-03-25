@@ -571,10 +571,10 @@ avi_reader_c::create_dts_packetizer(int aid) {
         AVI_read_audio_chunk(m_avi, reinterpret_cast<char *>(chunk->get_buffer()));
 
         buffer.add(chunk);
-        dts_position = mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), &dtsheader);
+        dts_position = mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), dtsheader);
 
       } else {
-        dts_position = mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), &dtsheader, true);
+        dts_position = mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), dtsheader, true);
         break;
       }
     }

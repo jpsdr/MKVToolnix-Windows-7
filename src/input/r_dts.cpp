@@ -81,7 +81,7 @@ dts_reader_c::read_headers() {
   mxdebug_if(m_debug, boost::format("DTS: 14->16 %1% swap %2%\n") % m_dts14_to_16 % m_swap_bytes);
 
   decode_buffer(READ_SIZE);
-  int pos = mtx::dts::find_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), READ_SIZE, &m_dtsheader);
+  int pos = mtx::dts::find_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), READ_SIZE, m_dtsheader);
 
   if (0 > pos)
     throw mtx::input::header_parsing_x();

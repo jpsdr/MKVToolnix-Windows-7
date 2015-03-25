@@ -69,165 +69,56 @@ static const int transmission_bitrates[32] = {
 };
 
 int
-find_sync_word(const unsigned char *buf,
-               unsigned int size) {
+find_sync_word(unsigned char const *buf,
+               size_t size) {
   if (4 > size)
     // not enough data for one header
     return -1;
 
   unsigned int offset = 0;
   uint32_t sync_word  = get_uint32_be(buf);
-  while ((sync_word_e::core != static_cast<sync_word_e>(sync_word)) && ((offset + 4) < size)) {
+  auto sync_word_ok   = false;
+
+  while ((offset + 4) < size) {
+    sync_word_ok = (sync_word_e::core == static_cast<sync_word_e>(sync_word)); // || (sync_word_e::hd == static_cast<sync_word_e>(sync_word));
+    if (sync_word_ok)
+      break;
+
     sync_word = (sync_word << 8) | buf[offset + 4];
     ++offset;
   }
 
-  if (sync_word_e::core != static_cast<sync_word_e>(sync_word))
-    // no header found
-    return -1;
-
-  return offset;
+  return sync_word_ok ? offset : -1;
 }
 
 static int
-find_header_internal(const unsigned char *buf,
-                     unsigned int size,
-                     struct header_t *header,
+find_header_internal(unsigned char const *buf,
+                     size_t size,
+                     header_t &header,
                      bool allow_no_hd_search) {
-  unsigned int size_to_search = size - 15;
-  if (size_to_search > size) {
+  if (15 > size)
     // not enough data for one header
     return -1;
-  }
 
-  int offset = find_sync_word(buf, size);
+  auto offset = find_sync_word(buf, size);
   if (0 > offset)
     // no header found
     return -1;
 
-  bit_reader_c bc(buf + offset + 4, size - offset - 4);
+  auto sync_word = static_cast<sync_word_e>(get_uint32_be(&buf[offset]));
 
-  header->frametype             = bc.get_bit() ? frametype_e::normal : frametype_e::termination;
-  header->deficit_sample_count  = (bc.get_bits(5) + 1) % 32;
-  header->crc_present           = bc.get_bit();
-  header->num_pcm_sample_blocks = bc.get_bits(7) + 1;
-  header->frame_byte_size       = bc.get_bits(14) + 1;
-
-  if (96 > header->frame_byte_size) {
-    mxwarn(Y("Header problem: invalid frame bytes size\n"));
-    return -1;
-  }
-
-  int t = bc.get_bits(6);
-  if (16 <= t) {
-    header->audio_channels            = -1;
-    header->audio_channel_arrangement = "unknown (user defined)";
-  } else {
-    header->audio_channels            = channel_arrangements[t].num_channels;
-    header->audio_channel_arrangement = channel_arrangements[t].description;
-  }
-
-  header->core_sampling_frequency    = core_samplefreqs[bc.get_bits(4)];
-  header->transmission_bitrate       = transmission_bitrates[bc.get_bits(5)];
-  header->embedded_down_mix          = bc.get_bit();
-  header->embedded_dynamic_range     = bc.get_bit();
-  header->embedded_time_stamp        = bc.get_bit();
-  header->auxiliary_data             = bc.get_bit();
-  header->hdcd_master                = bc.get_bit();
-  header->extension_audio_descriptor = static_cast<extension_audio_descriptor_e>(bc.get_bits(3));
-  header->extended_coding            = bc.get_bit();
-  header->audio_sync_word_in_sub_sub = bc.get_bit();
-  header->lfe_type                   = static_cast<lfe_type_e>(bc.get_bits(2));
-  header->predictor_history_flag     = bc.get_bit();
-
-  if (header->crc_present)
-     bc.skip_bits(16);
-
-  header->multirate_interpolator     = static_cast<multirate_interpolator_e>(bc.get_bit());
-  header->encoder_software_revision  = bc.get_bits(4);
-  header->copy_history               = bc.get_bits(2);
-
-  switch (static_cast<source_pcm_resolution_e>(bc.get_bits(3))) {
-    case source_pcm_resolution_e::spr_16:
-      header->source_pcm_resolution = 16;
-      header->source_surround_in_es = false;
-      break;
-
-    case source_pcm_resolution_e::spr_16_ES:
-      header->source_pcm_resolution = 16;
-      header->source_surround_in_es = true;
-      break;
-
-    case source_pcm_resolution_e::spr_20:
-      header->source_pcm_resolution = 20;
-      header->source_surround_in_es = false;
-      break;
-
-    case source_pcm_resolution_e::spr_20_ES:
-      header->source_pcm_resolution = 20;
-      header->source_surround_in_es = true;
-      break;
-
-    case source_pcm_resolution_e::spr_24:
-      header->source_pcm_resolution = 24;
-      header->source_surround_in_es = false;
-      break;
-
-    case source_pcm_resolution_e::spr_24_ES:
-      header->source_pcm_resolution = 24;
-      header->source_surround_in_es = true;
-      break;
-
-    default:
-      mxwarn(Y("Header problem: invalid source PCM resolution\n"));
+  if (sync_word == sync_word_e::core)
+    if (!header.decode_core_header(&buf[offset], size - offset, allow_no_hd_search))
       return -1;
-  }
-
-  header->front_sum_difference      = bc.get_bit();
-  header->surround_sum_difference   = bc.get_bit();
-  t                                 = bc.get_bits(4);
-  header->dialog_normalization_gain = 7 == header->encoder_software_revision ? -t
-                                    : 6 == header->encoder_software_revision ? -16 - t
-                                    :                                          0;
-
-  // Detect DTS HD master audio / high resolution part
-  header->hd           = false;
-  header->hd_type      = hd_type_e::none;
-  header->hd_part_size = 0;
-
-  size_t hd_offset     = offset + header->frame_byte_size;
-
-  if ((hd_offset + 9) > size)
-    return allow_no_hd_search ? offset : -1;
-
-  if (static_cast<sync_word_e>(get_uint32_be(buf + hd_offset)) != sync_word_e::hd)
-    return offset;
-
-  header->hd = true;
-
-  bc.init(buf + hd_offset, size - hd_offset);
-
-  bc.skip_bits(32);             // sync word
-  bc.skip_bits(8 + 2);          // ??
-  if (bc.get_bit()) {           // Blown-up header bit
-    bc.skip_bits(12);
-    header->hd_part_size = bc.get_bits(20) + 1;
-
-  } else {
-    bc.skip_bits(8);
-    header->hd_part_size = bc.get_bits(16) + 1;
-  }
-
-  header->frame_byte_size += header->hd_part_size;
 
   return offset;
 }
 
 int
-find_header(const unsigned char *buf,
-                unsigned int size,
-                struct header_t *header,
-                bool allow_no_hd_search) {
+find_header(unsigned char const *buf,
+            size_t size,
+            header_t &header,
+            bool allow_no_hd_search) {
   try {
     return find_header_internal(buf, size, header, allow_no_hd_search);
   } catch (...) {
@@ -237,14 +128,14 @@ find_header(const unsigned char *buf,
 }
 
 int
-find_consecutive_headers(const unsigned char *buf,
-                             unsigned int size,
-                             unsigned int num) {
+find_consecutive_headers(unsigned char const *buf,
+                         size_t size,
+                         unsigned int num) {
   static auto s_debug = debugging_option_c{"dts_detection"};
 
   header_t header, new_header;
 
-  int pos = find_header(buf, size, &header, false);
+  auto pos = find_header(buf, size, header, false);
 
   if (0 > pos)
     return -1;
@@ -263,7 +154,7 @@ find_consecutive_headers(const unsigned char *buf,
       if (size < (2 + base + offset))
         break;
 
-      pos = find_header(&buf[base + offset], size - base - offset, &new_header, false);
+      pos = find_header(&buf[base + offset], size - base - offset, new_header, false);
       if (0 == pos) {
         if (new_header == header) {
           mxdebug_if(s_debug, boost::format("find_cons_dts_h: found good header %1%\n") % i);
@@ -280,7 +171,7 @@ find_consecutive_headers(const unsigned char *buf,
 
     ++base;
     offset = 0;
-    pos    = find_header(&buf[base], size - base, &header, false);
+    pos    = find_header(&buf[base], size - base, header, false);
 
     if (-1 == pos)
       return -1;
@@ -380,7 +271,7 @@ header_t::print()
   mxinfo(boost::format("Surr. Encoded as Diff. : %1%\n") % (surround_sum_difference ? "yes" : "no"));
   mxinfo(boost::format("Dialog Normaliz. Gain  : %1%\n") % dialog_normalization_gain);
 
-  if (!hd)
+  if (!has_hd)
     mxinfo("DTS HD                 : no\n");
   else
     mxinfo(boost::format("DTS HD                 : %1%, size %2%\n")
@@ -395,6 +286,131 @@ header_t::get_total_num_audio_channels()
     ++total_num_audio_channels;
 
   return total_num_audio_channels;
+}
+
+bool
+header_t::decode_core_header(unsigned char const *buf,
+                             size_t size,
+                             bool allow_no_hd_search) {
+  auto bc = bit_reader_c{buf, size};
+  bc.skip_bits(32);             // sync word
+
+  frametype             = bc.get_bit() ? frametype_e::normal : frametype_e::termination;
+  deficit_sample_count  = (bc.get_bits(5) + 1) % 32;
+  crc_present           = bc.get_bit();
+  num_pcm_sample_blocks = bc.get_bits(7) + 1;
+  frame_byte_size       = bc.get_bits(14) + 1;
+
+  if (96 > frame_byte_size) {
+    mxwarn(Y("Header problem: invalid frame bytes size\n"));
+    return false;
+  }
+
+  auto t = bc.get_bits(6);
+  if (16 <= t) {
+    audio_channels            = -1;
+    audio_channel_arrangement = "unknown (user defined)";
+  } else {
+    audio_channels            = channel_arrangements[t].num_channels;
+    audio_channel_arrangement = channel_arrangements[t].description;
+  }
+
+  core_sampling_frequency    = core_samplefreqs[bc.get_bits(4)];
+  transmission_bitrate       = transmission_bitrates[bc.get_bits(5)];
+  embedded_down_mix          = bc.get_bit();
+  embedded_dynamic_range     = bc.get_bit();
+  embedded_time_stamp        = bc.get_bit();
+  auxiliary_data             = bc.get_bit();
+  hdcd_master                = bc.get_bit();
+  extension_audio_descriptor = static_cast<extension_audio_descriptor_e>(bc.get_bits(3));
+  extended_coding            = bc.get_bit();
+  audio_sync_word_in_sub_sub = bc.get_bit();
+  lfe_type                   = static_cast<lfe_type_e>(bc.get_bits(2));
+  predictor_history_flag     = bc.get_bit();
+
+  if (crc_present)
+     bc.skip_bits(16);
+
+  multirate_interpolator     = static_cast<multirate_interpolator_e>(bc.get_bit());
+  encoder_software_revision  = bc.get_bits(4);
+  copy_history               = bc.get_bits(2);
+
+  switch (static_cast<source_pcm_resolution_e>(bc.get_bits(3))) {
+    case source_pcm_resolution_e::spr_16:
+      source_pcm_resolution = 16;
+      source_surround_in_es = false;
+      break;
+
+    case source_pcm_resolution_e::spr_16_ES:
+      source_pcm_resolution = 16;
+      source_surround_in_es = true;
+      break;
+
+    case source_pcm_resolution_e::spr_20:
+      source_pcm_resolution = 20;
+      source_surround_in_es = false;
+      break;
+
+    case source_pcm_resolution_e::spr_20_ES:
+      source_pcm_resolution = 20;
+      source_surround_in_es = true;
+      break;
+
+    case source_pcm_resolution_e::spr_24:
+      source_pcm_resolution = 24;
+      source_surround_in_es = false;
+      break;
+
+    case source_pcm_resolution_e::spr_24_ES:
+      source_pcm_resolution = 24;
+      source_surround_in_es = true;
+      break;
+
+    default:
+      mxwarn(Y("Header problem: invalid source PCM resolution\n"));
+      return false;
+  }
+
+  front_sum_difference      = bc.get_bit();
+  surround_sum_difference   = bc.get_bit();
+  t                         = bc.get_bits(4);
+  dialog_normalization_gain = 7 == encoder_software_revision ? -t
+                            : 6 == encoder_software_revision ? -16 - t
+                            :                                  0;
+
+  has_core                  = true;
+
+  // Detect DTS HD master audio / high resolution part
+  has_hd         = false;
+  hd_type        = hd_type_e::none;
+  hd_part_size   = 0;
+
+  auto hd_offset = frame_byte_size;
+
+  if ((hd_offset + 9) > size)
+    return allow_no_hd_search ? true : false;
+
+  if (static_cast<sync_word_e>(get_uint32_be(buf + hd_offset)) != sync_word_e::hd)
+    return true;
+
+  has_hd = true;
+
+  bc.init(buf + hd_offset, size - hd_offset);
+
+  bc.skip_bits(32);             // sync word
+  bc.skip_bits(8 + 2);          // ??
+  if (bc.get_bit()) {           // Blown-up header bit
+    bc.skip_bits(12);
+    hd_part_size = bc.get_bits(20) + 1;
+
+  } else {
+    bc.skip_bits(8);
+    hd_part_size = bc.get_bits(16) + 1;
+  }
+
+  frame_byte_size += hd_part_size;
+
+  return true;
 }
 
 void
@@ -472,7 +488,7 @@ detect(const void *src_buf,
 
       int dst_buf_len = dts_14_16 ? (len * 7 / 8) : len;
 
-      if (find_header(af_buf[cur_buf]->get_buffer(), dst_buf_len, &dtsheader) >= 0) {
+      if (find_header(af_buf[cur_buf]->get_buffer(), dst_buf_len, dtsheader) >= 0) {
         is_dts = true;
         break;
       }
