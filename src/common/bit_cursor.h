@@ -24,15 +24,15 @@ private:
   const unsigned char *m_end_of_data;
   const unsigned char *m_byte_position;
   const unsigned char *m_start_of_data;
-  unsigned int m_bits_valid;
+  std::size_t m_bits_valid;
   bool m_out_of_data;
 
 public:
-  bit_reader_c(const unsigned char *data, unsigned int len) {
+  bit_reader_c(unsigned char const *data, std::size_t len) {
     init(data, len);
   }
 
-  void init(const unsigned char *data, unsigned int len) {
+  void init(const unsigned char *data, std::size_t len) {
     m_end_of_data   = data + len;
     m_byte_position = data;
     m_start_of_data = data;
@@ -44,7 +44,7 @@ public:
     return m_out_of_data;
   }
 
-  uint64_t get_bits(unsigned int n) {
+  uint64_t get_bits(std::size_t n) {
     uint64_t r = 0;
 
     while (n > 0) {
@@ -53,13 +53,13 @@ public:
         throw mtx::mm_io::end_of_file_x();
       }
 
-      unsigned int b = 8; // number of bits to extract from the current byte
+      std::size_t b = 8; // number of bits to extract from the current byte
       if (b > n)
         b = n;
       if (b > m_bits_valid)
         b = m_bits_valid;
 
-      unsigned int rshift = m_bits_valid - b;
+      std::size_t rshift = m_bits_valid - b;
 
       r <<= b;
       r  |= ((*m_byte_position) >> rshift) & (0xff >> (8 - b));
@@ -112,22 +112,22 @@ public:
     return v & 1 ? (v + 1) / 2 : -(v / 2);
   }
 
-  uint64_t peek_bits(unsigned int n) {
+  uint64_t peek_bits(std::size_t n) {
     uint64_t r                             = 0;
     const unsigned char *tmp_byte_position = m_byte_position;
-    unsigned int tmp_bits_valid            = m_bits_valid;
+    std::size_t tmp_bits_valid                  = m_bits_valid;
 
     while (0 < n) {
       if (tmp_byte_position >= m_end_of_data)
         throw mtx::mm_io::end_of_file_x();
 
-      unsigned int b = 8; // number of bits to extract from the current byte
+      std::size_t b = 8; // number of bits to extract from the current byte
       if (b > n)
         b = n;
       if (b > tmp_bits_valid)
         b = tmp_bits_valid;
 
-      unsigned int rshift = tmp_bits_valid - b;
+      std::size_t rshift = tmp_bits_valid - b;
 
       r <<= b;
       r  |= ((*tmp_byte_position) >> rshift) & (0xff >> (8 - b));
@@ -144,7 +144,7 @@ public:
     return r;
   }
 
-  void get_bytes(unsigned char *buf, size_t n) {
+  void get_bytes(unsigned char *buf, std::size_t n) {
     if (8 == m_bits_valid) {
       get_bytes_byte_aligned(buf, n);
       return;
@@ -159,8 +159,8 @@ public:
       skip_bits(m_bits_valid);
   }
 
-  void set_bit_position(unsigned int pos) {
-    if (pos >= (static_cast<unsigned int>(m_end_of_data - m_start_of_data) * 8)) {
+  void set_bit_position(std::size_t pos) {
+    if (pos >= (static_cast<std::size_t>(m_end_of_data - m_start_of_data) * 8)) {
       m_byte_position = m_end_of_data;
       m_out_of_data   = true;
 
@@ -179,7 +179,7 @@ public:
     return (m_end_of_data - m_byte_position) * 8 - 8 + m_bits_valid;
   }
 
-  void skip_bits(unsigned int num) {
+  void skip_bits(std::size_t num) {
     set_bit_position(get_bit_position() + num);
   }
 
@@ -187,8 +187,8 @@ public:
     set_bit_position(get_bit_position() + 1);
   }
 protected:
-  void get_bytes_byte_aligned(unsigned char *buf, size_t n) {
-    auto bytes_to_copy = std::min<size_t>(n, m_end_of_data - m_byte_position);
+  void get_bytes_byte_aligned(unsigned char *buf, std::size_t n) {
+    auto bytes_to_copy = std::min<std::size_t>(n, m_end_of_data - m_byte_position);
     std::memcpy(buf, m_byte_position, bytes_to_copy);
 
     m_byte_position += bytes_to_copy;
@@ -206,12 +206,12 @@ private:
   unsigned char *m_end_of_data;
   unsigned char *m_byte_position;
   unsigned char *m_start_of_data;
-  unsigned int m_mask;
+  std::size_t m_mask;
 
   bool m_out_of_data;
 
 public:
-  bit_writer_c(unsigned char *data, unsigned int len)
+  bit_writer_c(unsigned char *data, std::size_t len)
     : m_end_of_data(data + len)
     , m_byte_position(data)
     , m_start_of_data(data)
@@ -220,7 +220,7 @@ public:
   {
   }
 
-  uint64_t copy_bits(unsigned int n, bit_reader_c &src) {
+  uint64_t copy_bits(std::size_t n, bit_reader_c &src) {
     uint64_t value = src.get_bits(n);
     put_bits(n, value);
 
@@ -247,7 +247,7 @@ public:
     return v & 1 ? (v + 1) / 2 : -(v / 2);
   }
 
-  void put_bits(unsigned int n, uint64_t value) {
+  void put_bits(std::size_t n, uint64_t value) {
     while (0 < n) {
       put_bit(value & (1 << (n - 1)));
       --n;
@@ -278,8 +278,8 @@ public:
       put_bit(0);
   }
 
-  void set_bit_position(unsigned int pos) {
-    if (pos >= (static_cast<unsigned int>(m_end_of_data - m_start_of_data) * 8)) {
+  void set_bit_position(std::size_t pos) {
+    if (pos >= (static_cast<std::size_t>(m_end_of_data - m_start_of_data) * 8)) {
       m_byte_position = m_end_of_data;
       m_out_of_data   = true;
 
@@ -291,9 +291,8 @@ public:
   }
 
   int get_bit_position() {
-    unsigned int i;
-    unsigned int pos = (m_byte_position - m_start_of_data) * 8;
-    for (i = 0; 8 > i; ++i)
+    std::size_t pos = (m_byte_position - m_start_of_data) * 8;
+    for (auto i = 0u; 8 > i; ++i)
       if ((0x80u >> i) == m_mask) {
         pos += i;
         break;
