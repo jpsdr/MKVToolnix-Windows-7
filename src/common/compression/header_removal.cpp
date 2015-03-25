@@ -148,7 +148,7 @@ dirac_compressor_c::dirac_compressor_c() {
 
 dts_compressor_c::dts_compressor_c() {
   memory_cptr bytes = memory_c::alloc(4);
-  put_uint32_be(bytes->get_buffer(), DTS_HEADER_MAGIC);
+  put_uint32_be(bytes->get_buffer(), static_cast<uint32_t>(mtx::dts::sync_word_e::core));
   set_bytes(bytes);
 }
 

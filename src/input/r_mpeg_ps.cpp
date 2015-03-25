@@ -795,7 +795,7 @@ mpeg_ps_reader_c::new_stream_a_dts(mpeg_ps_id_t id,
 
   buffer.add(buf, length);
 
-  while ((-1 == find_dts_header(buffer.get_buffer(), buffer.get_size(), &track->dts_header, false)) && (PS_PROBE_SIZE >= m_in->getFilePointer())) {
+  while ((-1 == mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), &track->dts_header, false)) && (PS_PROBE_SIZE >= m_in->getFilePointer())) {
     if (!find_next_packet_for_id(id, PS_PROBE_SIZE))
       throw false;
 

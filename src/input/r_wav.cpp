@@ -118,7 +118,7 @@ protected:
 class wav_dts_demuxer_c: public wav_demuxer_c {
 private:
   bool m_swap_bytes, m_pack_14_16;
-  dts_header_t m_dtsheader;
+  mtx::dts::header_t m_dtsheader;
   memory_cptr m_buf[2];
   int m_cur_buf;
 
@@ -321,11 +321,11 @@ wav_dts_demuxer_c::probe(mm_io_cptr &io) {
   int len = io->read(m_buf[m_cur_buf]->get_buffer(), DTS_READ_SIZE);
   io->restore_pos();
 
-  if (detect_dts(m_buf[m_cur_buf]->get_buffer(), len, m_pack_14_16, m_swap_bytes)) {
+  if (mtx::dts::detect(m_buf[m_cur_buf]->get_buffer(), len, m_pack_14_16, m_swap_bytes)) {
     len     = decode_buffer(len);
-    int pos = find_consecutive_dts_headers(m_buf[m_cur_buf]->get_buffer(), len, 5);
+    int pos = mtx::dts::find_consecutive_headers(m_buf[m_cur_buf]->get_buffer(), len, 5);
     if (0 <= pos) {
-      if (0 > find_dts_header(m_buf[m_cur_buf]->get_buffer() + pos, len - pos, &m_dtsheader))
+      if (0 > mtx::dts::find_header(m_buf[m_cur_buf]->get_buffer() + pos, len - pos, &m_dtsheader))
         return false;
 
       mxverb(3, boost::format("DTSinWAV: 14->16 %1% swap %2%\n") % m_pack_14_16 % m_swap_bytes);
@@ -344,7 +344,7 @@ wav_dts_demuxer_c::decode_buffer(int len) {
   }
 
   if (m_pack_14_16) {
-    dts_14_to_dts_16((unsigned short *)m_buf[m_cur_buf]->get_buffer(), len / 2, (unsigned short *)m_buf[m_cur_buf ^ 1]->get_buffer());
+    mtx::dts::convert_14_to_16_bits((unsigned short *)m_buf[m_cur_buf]->get_buffer(), len / 2, (unsigned short *)m_buf[m_cur_buf ^ 1]->get_buffer());
     m_cur_buf ^= 1;
     len        = len * 7 / 8;
   }
@@ -357,12 +357,12 @@ wav_dts_demuxer_c::create_packetizer() {
   m_ptzr = new dts_packetizer_c(m_reader, m_ti, m_dtsheader);
 
   // .wav with DTS are always filled up with other stuff to match the bitrate.
-  ((dts_packetizer_c *)m_ptzr)->set_skipping_is_normal(true);
+  static_cast<dts_packetizer_c *>(m_ptzr)->set_skipping_is_normal(true);
 
   show_packetizer_info(0, m_ptzr);
 
   if (1 < verbose)
-    print_dts_header(&m_dtsheader);
+    m_dtsheader.print();
 
   return m_ptzr;
 }

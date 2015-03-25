@@ -561,7 +561,7 @@ avi_reader_c::create_dts_packetizer(int aid) {
     unsigned int num_read = 0;
     int dts_position      = -1;
     byte_buffer_c buffer;
-    dts_header_t dtsheader;
+    mtx::dts::header_t dtsheader;
 
     while ((-1 == dts_position) && (10 > num_read)) {
       int chunk_size = AVI_read_audio_chunk(m_avi, nullptr);
@@ -571,10 +571,10 @@ avi_reader_c::create_dts_packetizer(int aid) {
         AVI_read_audio_chunk(m_avi, reinterpret_cast<char *>(chunk->get_buffer()));
 
         buffer.add(chunk);
-        dts_position = find_dts_header(buffer.get_buffer(), buffer.get_size(), &dtsheader);
+        dts_position = mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), &dtsheader);
 
       } else {
-        dts_position = find_dts_header(buffer.get_buffer(), buffer.get_size(), &dtsheader, true);
+        dts_position = mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), &dtsheader, true);
         break;
       }
     }

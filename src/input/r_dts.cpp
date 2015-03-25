@@ -32,17 +32,17 @@ dts_reader_c::probe_file(mm_io_c *in,
 
   try {
     unsigned char buf[READ_SIZE];
-    bool dts14_to_16 = false, swap_bytes = false;
+    bool convert_14_to_16 = false, swap_bytes = false;
 
     in->setFilePointer(0, seek_beginning);
     if (in->read(buf, READ_SIZE) != READ_SIZE)
       return 0;
     in->setFilePointer(0, seek_beginning);
 
-    if (!strict_mode && detect_dts(buf, READ_SIZE, dts14_to_16, swap_bytes))
+    if (!strict_mode && mtx::dts::detect(buf, READ_SIZE, convert_14_to_16, swap_bytes))
       return 1;
 
-    int pos = find_consecutive_dts_headers(buf, READ_SIZE, 5);
+    int pos = mtx::dts::find_consecutive_headers(buf, READ_SIZE, 5);
     if ((!strict_mode && (0 <= pos)) || (strict_mode && (0 == pos)))
       return 1;
 
@@ -76,12 +76,12 @@ dts_reader_c::read_headers() {
     throw mtx::input::open_x();
   }
 
-  detect_dts(m_buf[m_cur_buf], READ_SIZE, m_dts14_to_16, m_swap_bytes);
+  mtx::dts::detect(m_buf[m_cur_buf], READ_SIZE, m_dts14_to_16, m_swap_bytes);
 
   mxdebug_if(m_debug, boost::format("DTS: 14->16 %1% swap %2%\n") % m_dts14_to_16 % m_swap_bytes);
 
   decode_buffer(READ_SIZE);
-  int pos = find_dts_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), READ_SIZE, &m_dtsheader);
+  int pos = mtx::dts::find_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), READ_SIZE, &m_dtsheader);
 
   if (0 > pos)
     throw mtx::input::header_parsing_x();
@@ -102,7 +102,7 @@ dts_reader_c::decode_buffer(size_t length) {
   }
 
   if (m_dts14_to_16) {
-    dts_14_to_dts_16(m_buf[m_cur_buf], length / 2, m_buf[m_cur_buf ^ 1]);
+    mtx::dts::convert_14_to_16_bits(m_buf[m_cur_buf], length / 2, m_buf[m_cur_buf ^ 1]);
     m_cur_buf ^= 1;
     length     = length * 7 / 8;
   }
@@ -119,7 +119,7 @@ dts_reader_c::create_packetizer(int64_t) {
   show_packetizer_info(0, PTZR0);
 
   if (m_debug)
-    print_dts_header(&m_dtsheader);
+    m_dtsheader.print();
 }
 
 file_status_e

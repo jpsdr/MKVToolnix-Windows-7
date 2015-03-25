@@ -29,7 +29,7 @@ private:
   memory_cptr m_af_buf;
   unsigned short *m_buf[2];
   unsigned int m_cur_buf;
-  dts_header_t m_dtsheader;
+  mtx::dts::header_t m_dtsheader;
   bool m_dts14_to_16, m_swap_bytes;
   debugging_option_c m_debug;
 

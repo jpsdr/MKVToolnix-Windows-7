@@ -122,7 +122,7 @@ struct mpeg_ps_track_t {
   int raw_seq_hdr_size;
 
   int a_channels, a_sample_rate, a_bits_per_sample, a_bsid;
-  dts_header_t dts_header;
+  mtx::dts::header_t dts_header;
 
   unsigned char *buffer;
   unsigned int buffer_usage, buffer_size;

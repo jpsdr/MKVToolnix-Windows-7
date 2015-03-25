@@ -26,12 +26,12 @@ class dts_packetizer_c: public generic_packetizer_c {
 private:
   byte_buffer_c m_packet_buffer;
 
-  dts_header_t m_first_header, m_previous_header;
+  mtx::dts::header_t m_first_header, m_previous_header;
   bool m_skipping_is_normal, m_reduce_to_core;
   timecode_calculator_c m_timecode_calculator;
 
 public:
-  dts_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, const dts_header_t &dts_header);
+  dts_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, mtx::dts::header_t const &dts_header);
   virtual ~dts_packetizer_c();
 
   virtual int process(packet_cptr packet);
@@ -49,7 +49,7 @@ protected:
   virtual void flush_impl();
 
 private:
-  virtual memory_cptr get_dts_packet(dts_header_t &dts_header, bool flushing);
+  virtual memory_cptr get_dts_packet(mtx::dts::header_t &dts_header, bool flushing);
   virtual void process_available_packets(bool flushing);
 };
 

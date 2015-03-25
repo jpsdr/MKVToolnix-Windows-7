@@ -1472,7 +1472,7 @@ qtmp4_reader_c::create_audio_packetizer_dts(qtmp4_demuxer_cptr &dmx) {
   auto const bytes_to_read = 8192u;
   auto buf                 = dmx->read_first_bytes(bytes_to_read);
 
-  if (!buf || (-1 == find_dts_header(buf->get_buffer(), bytes_to_read, &dmx->m_dts_header, false))) {
+  if (!buf || (-1 == mtx::dts::find_header(buf->get_buffer(), bytes_to_read, &dmx->m_dts_header, false))) {
     mxwarn_tid(m_ti.m_fname, dmx->id, Y("No DTS header found in first frames; track will be skipped.\n"));
     dmx->ok = false;
 

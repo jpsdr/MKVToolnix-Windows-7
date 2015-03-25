@@ -285,7 +285,7 @@ int
 mpeg_ts_track_c::new_stream_a_dts() {
   add_pes_payload_to_probe_data();
 
-  if (-1 == find_dts_header(m_probe_data->get_buffer(), m_probe_data->get_size(), &a_dts_header))
+  if (-1 == mtx::dts::find_header(m_probe_data->get_buffer(), m_probe_data->get_size(), &a_dts_header))
     return FILE_STATUS_MOREDATA;
 
   m_apply_dts_timecode_fix = true;

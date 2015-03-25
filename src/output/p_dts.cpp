@@ -23,7 +23,7 @@ using namespace libmatroska;
 
 dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
-                                   const dts_header_t &dtsheader)
+                                   mtx::dts::header_t const &dtsheader)
   : generic_packetizer_c(p_reader, p_ti)
   , m_packet_buffer(128 * 1024)
   , m_first_header(dtsheader)
@@ -39,14 +39,14 @@ dts_packetizer_c::~dts_packetizer_c() {
 }
 
 memory_cptr
-dts_packetizer_c::get_dts_packet(dts_header_t &dtsheader,
+dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
                                  bool flushing) {
   if (0 == m_packet_buffer.get_size())
     return nullptr;
 
   const unsigned char *buf = m_packet_buffer.get_buffer();
   int buf_size             = m_packet_buffer.get_size();
-  int pos                  = find_dts_sync_word(buf, buf_size);
+  int pos                  = mtx::dts::find_sync_word(buf, buf_size);
 
   if (0 > pos) {
     if (4 < buf_size)
@@ -60,14 +60,14 @@ dts_packetizer_c::get_dts_packet(dts_header_t &dtsheader,
     buf_size = m_packet_buffer.get_size();
   }
 
-  pos = find_dts_header(buf, buf_size, &dtsheader, flushing);
+  pos = mtx::dts::find_header(buf, buf_size, &dtsheader, flushing);
 
   if ((0 > pos) || (static_cast<int>(pos + dtsheader.frame_byte_size) > buf_size))
     return nullptr;
 
   if ((1 < verbose) && (dtsheader != m_previous_header)) {
     mxinfo(Y("DTS header information changed! - New format:\n"));
-    print_dts_header(&dtsheader);
+    dtsheader.print();
     m_previous_header = dtsheader;
   }
 
@@ -87,9 +87,9 @@ dts_packetizer_c::get_dts_packet(dts_header_t &dtsheader,
 
   auto bytes_to_remove = pos + dtsheader.frame_byte_size;
 
-  if (m_reduce_to_core && dtsheader.dts_hd && (dtsheader.hd_part_size > 0) && (dtsheader.hd_part_size < static_cast<int>(dtsheader.frame_byte_size))) {
+  if (m_reduce_to_core && dtsheader.hd && (dtsheader.hd_part_size > 0) && (dtsheader.hd_part_size < static_cast<int>(dtsheader.frame_byte_size))) {
     dtsheader.frame_byte_size -= dtsheader.hd_part_size;
-    dtsheader.dts_hd           = false;
+    dtsheader.hd               = false;
   }
 
   auto packet_buf = memory_c::clone(buf + pos, dtsheader.frame_byte_size);
@@ -103,13 +103,13 @@ void
 dts_packetizer_c::set_headers() {
   set_codec_id(MKV_A_DTS);
   set_audio_sampling_freq((float)m_first_header.core_sampling_frequency);
-  if (   (dts_header_t::LFE_64  == m_first_header.lfe_type)
-      || (dts_header_t::LFE_128 == m_first_header.lfe_type))
+  if (   (mtx::dts::header_t::LFE_64  == m_first_header.lfe_type)
+      || (mtx::dts::header_t::LFE_128 == m_first_header.lfe_type))
     set_audio_channels(m_first_header.audio_channels + 1);
   else
     set_audio_channels(m_first_header.audio_channels);
 
-  set_track_default_duration(get_dts_packet_length_in_nanoseconds(&m_first_header));
+  set_track_default_duration(m_first_header.get_packet_length_in_nanoseconds());
 
   generic_packetizer_c::set_headers();
 }
@@ -127,14 +127,14 @@ dts_packetizer_c::process(packet_cptr packet) {
 
 void
 dts_packetizer_c::process_available_packets(bool flushing) {
-  dts_header_t dtsheader;
+  mtx::dts::header_t dtsheader;
   memory_cptr dts_packet;
 
   while ((dts_packet = get_dts_packet(dtsheader, flushing))) {
-    auto samples_in_packet = get_dts_packet_length_in_core_samples(&dtsheader);
+    auto samples_in_packet = dtsheader.get_packet_length_in_core_samples();
     auto new_timecode      = m_timecode_calculator.get_next_timecode(samples_in_packet);
 
-    add_packet(std::make_shared<packet_t>(dts_packet, new_timecode.to_ns(), get_dts_packet_length_in_nanoseconds(&dtsheader)));
+    add_packet(std::make_shared<packet_t>(dts_packet, new_timecode.to_ns(), dtsheader.get_packet_length_in_nanoseconds()));
   }
 }
 

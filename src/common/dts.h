@@ -15,27 +15,21 @@
 #ifndef MTX_COMMON_DTSCOMMON_H
 #define MTX_COMMON_DTSCOMMON_H
 
-#define DTS_HEADER_MAGIC    0x7ffe8001
-#define DTS_HD_HEADER_MAGIC 0x64582025
+namespace mtx { namespace dts {
 
-static const int64_t max_dts_packet_size = 15384;
+enum class sync_word_e {
+  core = 0x7ffe8001,
+  hd   = 0x64582025,
+};
 
-/* The following code looks a little odd as it was written in C++
-   but with the possibility in mind to make this structure and the
-   functions below it later available in C
-*/
 
-struct dts_header_t {
+static const int64_t max_packet_size = 15384;
 
-  // ---------------------------------------------------
-
-  // ---------------------------------------------------
-
+struct header_t {
   enum frametype_e {
     // Used to extremely precisely specify the end-of-stream (single PCM
     // sample resolution).
     FRAMETYPE_TERMINATION = 0,
-
     FRAMETYPE_NORMAL
   } frametype;
 
@@ -142,45 +136,44 @@ struct dts_header_t {
   // gain in dB to apply for dialog normalization
   int dialog_normalization_gain;
 
-  bool dts_hd;
-  enum dts_hd_type_e {
+  bool hd;
+  enum hd_type_e {
     DTSHD_NONE,
     DTSHD_HIGH_RESOLUTION,
     DTSHD_MASTER_AUDIO,
   } hd_type;
   int hd_part_size;
 
+  inline int get_packet_length_in_core_samples() const {
+    // computes the length (in time, not size) of the packet in "samples".
+    int r = num_pcm_sample_blocks * 32;
+    if (FRAMETYPE_TERMINATION == frametype)
+      r -= deficit_sample_count;
+
+    return r;
+  }
+
+  inline double get_packet_length_in_nanoseconds() const {
+    // computes the length (in time, not size) of the packet in "samples".
+    auto samples = get_packet_length_in_core_samples();
+
+    return static_cast<double>(samples) * 1000000000.0 / core_sampling_frequency;
+  }
+
+  void print() const;
 };
 
-int find_dts_sync_word(const unsigned char *buf, unsigned int size);
-int find_dts_header(const unsigned char *buf, unsigned int size, struct dts_header_t *dts_header, bool allow_no_hd_search = false);
-int find_consecutive_dts_headers(const unsigned char *buf, unsigned int size, unsigned int num);
-void print_dts_header(const struct dts_header_t *dts_header);
+int find_sync_word(const unsigned char *buf, unsigned int size);
+int find_header(const unsigned char *buf, unsigned int size, struct header_t *header, bool allow_no_hd_search = false);
+int find_consecutive_headers(const unsigned char *buf, unsigned int size, unsigned int num);
 
-bool operator ==(const dts_header_t &h1, const dts_header_t &h2);
+bool operator ==(header_t const &h1, header_t const &h2);
+bool operator!=(header_t const &h1, header_t const &h2);
 
-inline int
-get_dts_packet_length_in_core_samples(const struct dts_header_t *dts_header) {
-  // computes the length (in time, not size) of the packet in "samples".
-  int r = dts_header->num_pcm_sample_blocks * 32;
-  if (dts_header_t::FRAMETYPE_TERMINATION == dts_header->frametype)
-    r -= dts_header->deficit_sample_count;
+void convert_14_to_16_bits(const unsigned short *src, unsigned long srcwords, unsigned short *dst);
 
-  return r;
-}
+bool detect(const void *src_buf, int len, bool &convert_14_to_16, bool &swap_bytes);
 
-inline double
-get_dts_packet_length_in_nanoseconds(const struct dts_header_t *dts_header) {
-  // computes the length (in time, not size) of the packet in "samples".
-  int samples = get_dts_packet_length_in_core_samples(dts_header);
-
-  return static_cast<double>(samples) * 1000000000.0 / dts_header->core_sampling_frequency;
-}
-
-void dts_14_to_dts_16(const unsigned short *src, unsigned long srcwords, unsigned short *dst);
-
-bool detect_dts(const void *src_buf, int len, bool &dts14_to_16, bool &swap_bytes);
-
-bool operator!=(const dts_header_t &l, const dts_header_t &r);
+}}
 
 #endif // MTX_COMMON_DTSCOMMON_H

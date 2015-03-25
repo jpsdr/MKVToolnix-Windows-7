@@ -1472,8 +1472,8 @@ kax_reader_c::create_dts_audio_packetizer(kax_track_t *t,
     for (auto &frame : t->first_frames_data)
       buffer.add(frame);
 
-    dts_header_t dtsheader;
-    int position = find_dts_header(buffer.get_buffer(), buffer.get_size(), &dtsheader);
+    mtx::dts::header_t dtsheader;
+    int position = mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), &dtsheader);
 
     if (-1 == position)
       throw false;
