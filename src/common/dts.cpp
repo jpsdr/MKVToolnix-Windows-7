@@ -292,6 +292,9 @@ header_t::print()
 unsigned int
 header_t::get_total_num_audio_channels()
   const {
+  if (has_hd && (0 < num_assets) && substream_assets[0].num_channels_total)
+    return substream_assets[0].num_channels_total;
+
   auto total_num_audio_channels = audio_channels;
   if ((lfe_type_e::lfe_64 == lfe_type) || (lfe_type_e::lfe_128 == lfe_type))
     ++total_num_audio_channels;
