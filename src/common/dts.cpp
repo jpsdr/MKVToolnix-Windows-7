@@ -111,6 +111,7 @@ find_header_internal(unsigned char const *buf,
     // no header found
     return -1;
 
+  header         = header_t{};
   auto sync_word = static_cast<sync_word_e>(get_uint32_be(&buf[offset]));
 
   if (sync_word == sync_word_e::core) {
@@ -121,6 +122,12 @@ find_header_internal(unsigned char const *buf,
     if (!header.decode_hd_header(&buf[offset], size - offset))
       return -1;
   }
+
+  // DTS streams without a core (aka DTS Express) is currently not
+  // supported as there's no way to determine the number of samples in
+  // HD-only packets.
+  if (!header.has_core)
+    return -1;
 
   return offset;
 }
