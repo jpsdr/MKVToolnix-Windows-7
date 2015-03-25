@@ -3,7 +3,7 @@
    from component media subtypes
 
    Distributed under the GPL v2
-   see the file COPYING for details
+nn   see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
    Dirac video output module
@@ -13,10 +13,10 @@
 
 #include "common/common_pch.h"
 
+#include <boost/math/special_functions/round.hpp>
 #include <matroska/KaxTracks.h>
 
 #include "common/codec.h"
-#include "common/math.h"
 #include "merge/generic_reader.h"
 #include "merge/output_control.h"
 #include "output/p_dirac.h"
@@ -47,9 +47,9 @@ dirac_video_packetizer_c::set_headers() {
 
     if ((0 != m_seqhdr.aspect_ratio_numerator) && (0 != m_seqhdr.aspect_ratio_denominator)) {
       if (m_seqhdr.aspect_ratio_numerator > m_seqhdr.aspect_ratio_denominator)
-        display_width  = mtx::math::irnd(display_width  * m_seqhdr.aspect_ratio_numerator   / m_seqhdr.aspect_ratio_denominator);
+        display_width  = boost::math::llround(display_width  * m_seqhdr.aspect_ratio_numerator   / m_seqhdr.aspect_ratio_denominator);
       else
-        display_height = mtx::math::irnd(display_height * m_seqhdr.aspect_ratio_denominator / m_seqhdr.aspect_ratio_numerator);
+        display_height = boost::math::llround(display_height * m_seqhdr.aspect_ratio_denominator / m_seqhdr.aspect_ratio_numerator);
     }
 
     set_video_display_width(display_width);

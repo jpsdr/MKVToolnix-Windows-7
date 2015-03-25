@@ -13,11 +13,11 @@
 
 #include "common/common_pch.h"
 
+#include <boost/math/special_functions/round.hpp>
 #include <matroska/KaxTracks.h>
 
 #include "common/codec.h"
 #include "common/endian.h"
-#include "common/math.h"
 #include "merge/connection_checks.h"
 #include "output/p_wavpack.h"
 
@@ -57,12 +57,12 @@ wavpack_packetizer_c::process(packet_cptr packet) {
   int64_t samples = get_uint32_le(packet->data->get_buffer());
 
   if (-1 == packet->duration)
-    packet->duration = mtx::math::irnd(samples * 1000000000 / m_sample_rate);
+    packet->duration = boost::math::llround(samples * 1000000000 / m_sample_rate);
   else
     mxverb(2, boost::format("wavpack_packetizer: incomplete block with duration %1%\n") % packet->duration);
 
   if (-1 == packet->timecode)
-    packet->timecode = mtx::math::irnd((double)m_samples_output * 1000000000 / m_sample_rate);
+    packet->timecode = boost::math::llround((double)m_samples_output * 1000000000 / m_sample_rate);
 
   m_samples_output += samples;
   add_packet(packet);

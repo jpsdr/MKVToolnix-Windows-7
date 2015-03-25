@@ -13,8 +13,9 @@
 
 #include "common/common_pch.h"
 
+#include <boost/math/special_functions/round.hpp>
+
 #include "common/codec.h"
-#include "common/math.h"
 #include "common/tta.h"
 #include "merge/connection_checks.h"
 #include "output/p_tta.h"
@@ -51,14 +52,14 @@ tta_packetizer_c::set_headers() {
 
 int
 tta_packetizer_c::process(packet_cptr packet) {
-  packet->timecode = mtx::math::irnd((double)m_samples_output * 1000000000 / m_sample_rate);
+  packet->timecode = boost::math::llround((double)m_samples_output * 1000000000 / m_sample_rate);
   if (-1 == packet->duration) {
-    packet->duration  = mtx::math::irnd(1000000000.0  * TTA_FRAME_TIME);
-    m_samples_output += mtx::math::irnd(m_sample_rate * TTA_FRAME_TIME);
+    packet->duration  = boost::math::llround(1000000000.0  * TTA_FRAME_TIME);
+    m_samples_output += boost::math::llround(m_sample_rate * TTA_FRAME_TIME);
 
   } else {
     mxverb(2, boost::format("tta_packetizer: incomplete block with duration %1%\n") % packet->duration);
-    m_samples_output += mtx::math::irnd(packet->duration * m_sample_rate / 1000000000ll);
+    m_samples_output += boost::math::llround(packet->duration * m_sample_rate / 1000000000ll);
   }
 
   add_packet(packet);

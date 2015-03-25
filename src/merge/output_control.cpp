@@ -31,6 +31,7 @@
 #endif
 
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/math/special_functions/round.hpp>
 #include <iostream>
 #include <typeinfo>
 
@@ -66,7 +67,6 @@
 #include "common/ebml.h"
 #include "common/fs_sys_helpers.h"
 #include "common/hacks.h"
-#include "common/math.h"
 #include "common/mm_io_x.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/mm_read_buffer_io.h"
@@ -257,7 +257,7 @@ family_uids_c::add_family_uid(const KaxSegmentFamily &family) {
 
 static int64_t
 calculate_file_duration() {
-  return mtx::math::irnd(static_cast<double>(g_cluster_helper->get_duration()) / static_cast<double>(g_timecode_scale));
+  return boost::math::llround(static_cast<double>(g_cluster_helper->get_duration()) / static_cast<double>(g_timecode_scale));
 }
 
 /** \brief Fix the file after mkvmerge has been interrupted

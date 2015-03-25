@@ -13,8 +13,9 @@
 
 #include "common/common_pch.h"
 
+#include <boost/math/special_functions/round.hpp>
+
 #include "common/bit_cursor.h"
-#include "common/math.h"
 #include "common/theora.h"
 
 theora_identification_header_t::theora_identification_header_t() {
@@ -67,11 +68,11 @@ theora_parse_identification_header(unsigned char *buffer,
 
   if ((0 != header.parn) && (0 != header.pard)) {
     if (((float)header.fmbw / (float)header.fmbh) < ((float)header.parn / (float)header.pard)) {
-      header.display_width  = mtx::math::irnd((float)header.fmbw * header.parn / header.pard);
+      header.display_width  = boost::math::llround((float)header.fmbw * header.parn / header.pard);
       header.display_height = header.fmbh;
     } else {
       header.display_width  = header.fmbw;
-      header.display_height = mtx::math::irnd((float)header.fmbh * header.pard / header.parn);
+      header.display_height = boost::math::llround((float)header.fmbh * header.pard / header.parn);
     }
   }
 }

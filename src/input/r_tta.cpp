@@ -13,11 +13,12 @@
 
 #include "common/common_pch.h"
 
+#include <boost/math/special_functions/round.hpp>
+
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/id3.h"
-#include "common/math.h"
 #include "input/r_tta.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
@@ -128,7 +129,7 @@ tta_reader_c::read(generic_packetizer_c *,
     double samples_left = (double)get_uint32_le(&header.data_length) - (seek_points.size() - 1) * TTA_FRAME_TIME * get_uint32_le(&header.sample_rate);
     mxverb(2, boost::format("tta: samples_left %1%\n") % samples_left);
 
-    PTZR0->process(new packet_t(mem, -1, mtx::math::irnd(samples_left * 1000000000.0l / get_uint32_le(&header.sample_rate))));
+    PTZR0->process(new packet_t(mem, -1, boost::math::llround(samples_left * 1000000000.0l / get_uint32_le(&header.sample_rate))));
   } else
     PTZR0->process(new packet_t(mem));
 

@@ -14,6 +14,8 @@
 
 #include "common/common_pch.h"
 
+#include <boost/math/special_functions/round.hpp>
+
 #include <avilib.h>   // for BITMAPINFOHEADER
 
 #include <ebml/EbmlContexts.h>
@@ -49,7 +51,6 @@
 #include "common/hacks.h"
 #include "common/iso639.h"
 #include "common/ivf.h"
-#include "common/math.h"
 #include "common/mm_io.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -803,7 +804,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   info->Read(*m_es, EBML_CLASS_CONTEXT(KaxInfo), upper_lvl_el, l2, true);
 
   m_tc_scale         = FindChildValue<KaxTimecodeScale, uint64_t>(info, 1000000);
-  m_segment_duration = mtx::math::irnd(FindChildValue<KaxDuration>(info) * m_tc_scale);
+  m_segment_duration = boost::math::llround(FindChildValue<KaxDuration>(info) * m_tc_scale);
   m_title            = to_utf8(FindChildValue<KaxTitle>(info));
 
   m_in_file->set_timecode_scale(m_tc_scale);

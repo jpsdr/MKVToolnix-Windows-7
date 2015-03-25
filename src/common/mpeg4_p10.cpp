@@ -20,13 +20,13 @@
 #include "common/common_pch.h"
 
 #include <unordered_map>
+#include <boost/math/special_functions/round.hpp>
 
 #include "common/bit_cursor.h"
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"
 #include "common/endian.h"
 #include "common/hacks.h"
-#include "common/math.h"
 #include "common/mm_io.h"
 #include "common/mpeg4_p10.h"
 #include "common/strings/formatting.h"
@@ -1763,8 +1763,8 @@ mpeg4::p10::avc_es_parser_c::get_display_dimensions(int width,
   if (0 >= height)
     height = get_height();
 
-  return std::make_pair<int64_t, int64_t>(1 <= m_par ? mtx::math::irnd(width * boost::rational_cast<double>(m_par)) : width,
-                                          1 <= m_par ? height                                                       : mtx::math::irnd(height / boost::rational_cast<double>(m_par)));
+  return std::make_pair<int64_t, int64_t>(1 <= m_par ? boost::math::llround(width * boost::rational_cast<double>(m_par)) : width,
+                                          1 <= m_par ? height                                                            : boost::math::llround(height / boost::rational_cast<double>(m_par)));
 }
 
 size_t

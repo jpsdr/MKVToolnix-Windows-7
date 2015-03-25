@@ -13,6 +13,7 @@
 #include "common/common_pch.h"
 
 #include <cassert>
+#include <boost/math/special_functions/round.hpp>
 
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
@@ -31,7 +32,6 @@
 #include "common/ebml.h"
 #include "common/hacks.h"
 #include "common/kax_analyzer.h"
-#include "common/math.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
 #include "common/strings/formatting.h"
@@ -182,7 +182,7 @@ write_cuesheet(std::string file_name,
                % k
                % (temp_index / 1000000 / 1000 / 60)
                % ((temp_index / 1000000 / 1000) % 60)
-               % mtx::math::irnd((double)(temp_index % 1000000000ll) * 75.0 / 1000000000.0));
+               % boost::math::llround((double)(temp_index % 1000000000ll) * 75.0 / 1000000000.0));
     }
 
     print_if_available("DATE",          "    REM DATE \"%1%\"\n"); // until 0.9.6

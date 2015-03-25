@@ -31,11 +31,6 @@ count_1_bits(uint64_t value) {
 #endif
 }
 
-inline int64_t
-irnd(double a) {
-  return a + 0.5;
-}
-
 uint64_t round_to_nearest_pow2(uint64_t value);
 int int_log2(uint64_t value);
 double int_to_double(int64_t value);
