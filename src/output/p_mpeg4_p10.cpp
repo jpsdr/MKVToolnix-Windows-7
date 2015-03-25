@@ -85,8 +85,8 @@ mpeg4_p10_video_packetizer_c::extract_aspect_ratio() {
 
   auto par = static_cast<double>(result.numerator) / static_cast<double>(result.denominator);
 
-  set_video_display_dimensions(1 <= par ? irnd(m_width * par) : m_width,
-                               1 <= par ? m_height            : irnd(m_height / par),
+  set_video_display_dimensions(1 <= par ? mtx::math::irnd(m_width * par) : m_width,
+                               1 <= par ? m_height                       : mtx::math::irnd(m_height / par),
                                OPTION_SOURCE_BITSTREAM);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,

@@ -47,9 +47,9 @@ dirac_video_packetizer_c::set_headers() {
 
     if ((0 != m_seqhdr.aspect_ratio_numerator) && (0 != m_seqhdr.aspect_ratio_denominator)) {
       if (m_seqhdr.aspect_ratio_numerator > m_seqhdr.aspect_ratio_denominator)
-        display_width  = irnd(display_width  * m_seqhdr.aspect_ratio_numerator   / m_seqhdr.aspect_ratio_denominator);
+        display_width  = mtx::math::irnd(display_width  * m_seqhdr.aspect_ratio_numerator   / m_seqhdr.aspect_ratio_denominator);
       else
-        display_height = irnd(display_height * m_seqhdr.aspect_ratio_denominator / m_seqhdr.aspect_ratio_numerator);
+        display_height = mtx::math::irnd(display_height * m_seqhdr.aspect_ratio_denominator / m_seqhdr.aspect_ratio_numerator);
     }
 
     set_video_display_width(display_width);

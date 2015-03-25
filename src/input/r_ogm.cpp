@@ -1405,11 +1405,11 @@ ogm_v_vp8_demuxer_c::initialize() {
 
   if ((0 != par_num) && (0 != par_den)) {
     if (((float)pixel_width / (float)pixel_height) < ((float)par_num / (float)par_den)) {
-      display_width  = irnd((float)pixel_width * par_num / par_den);
+      display_width  = mtx::math::irnd((float)pixel_width * par_num / par_den);
       display_height = pixel_height;
     } else {
       display_width  = pixel_width;
-      display_height = irnd((float)pixel_height * par_den / par_num);
+      display_height = mtx::math::irnd((float)pixel_height * par_den / par_num);
     }
 
   } else {

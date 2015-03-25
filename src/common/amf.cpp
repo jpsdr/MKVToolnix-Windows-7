@@ -92,7 +92,7 @@ script_parser_c::read_value() {
     m_data.skip(10);
 
   else if (TYPE_NUMBER == data_type)
-    value = int_to_double(static_cast<int64_t>(m_data.read_uint64_be()));
+    value = mtx::math::int_to_double(static_cast<int64_t>(m_data.read_uint64_be()));
 
   else if (TYPE_BOOL == data_type)
     value = m_data.read_uint8() != 0;

@@ -89,7 +89,7 @@ xtr_avi_c::handle_frame(xtr_frame_t &f) {
 
   if (((double)f.duration / 1000000.0 - (1000.0 / m_fps)) >= 1.5) {
     int k;
-    int nfr = irnd((double)f.duration / 1000000.0 * m_fps / 1000.0);
+    int nfr = mtx::math::irnd((double)f.duration / 1000000.0 * m_fps / 1000.0);
     for (k = 2; k <= nfr; k++)
       AVI_write_frame(m_avi, nullptr, 0, 0);
   }

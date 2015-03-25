@@ -24,7 +24,7 @@
 #include "common/split_point.h"
 #include "merge/libmatroska_extensions.h"
 
-#define RND_TIMECODE_SCALE(a) (irnd((double)(a) / (double)((int64_t)g_timecode_scale)) * (int64_t)g_timecode_scale)
+#define RND_TIMECODE_SCALE(a) (mtx::math::irnd((double)(a) / (double)((int64_t)g_timecode_scale)) * (int64_t)g_timecode_scale)
 
 class render_groups_c;
 class packet_t;

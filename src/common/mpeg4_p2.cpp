@@ -109,7 +109,7 @@ mpeg4::p2::parse_vol_header(const unsigned char *buffer,
   bits.skip_bits(1);            // marker
 
   int time_base_den                 = bits.get_bits(16); // time base den
-  config_data.m_time_increment_bits = int_log2(time_base_den - 1) + 1;
+  config_data.m_time_increment_bits = mtx::math::int_log2(time_base_den - 1) + 1;
 
   bits.skip_bits(1);            // marker
   if (1 == bits.get_bit())      // fixed vop rate

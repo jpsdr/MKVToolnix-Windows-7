@@ -1763,8 +1763,8 @@ mpeg4::p10::avc_es_parser_c::get_display_dimensions(int width,
   if (0 >= height)
     height = get_height();
 
-  return std::make_pair<int64_t, int64_t>(1 <= m_par ? irnd(width * boost::rational_cast<double>(m_par)) : width,
-                                          1 <= m_par ? height                                            : irnd(height / boost::rational_cast<double>(m_par)));
+  return std::make_pair<int64_t, int64_t>(1 <= m_par ? mtx::math::irnd(width * boost::rational_cast<double>(m_par)) : width,
+                                          1 <= m_par ? height                                                       : mtx::math::irnd(height / boost::rational_cast<double>(m_par)));
 }
 
 size_t

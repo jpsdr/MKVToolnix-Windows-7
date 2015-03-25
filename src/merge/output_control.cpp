@@ -257,7 +257,7 @@ family_uids_c::add_family_uid(const KaxSegmentFamily &family) {
 
 static int64_t
 calculate_file_duration() {
-  return irnd(static_cast<double>(g_cluster_helper->get_duration()) / static_cast<double>(g_timecode_scale));
+  return mtx::math::irnd(static_cast<double>(g_cluster_helper->get_duration()) / static_cast<double>(g_timecode_scale));
 }
 
 /** \brief Fix the file after mkvmerge has been interrupted

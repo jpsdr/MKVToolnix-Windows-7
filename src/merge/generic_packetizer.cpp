@@ -695,12 +695,12 @@ generic_packetizer_c::set_headers() {
             m_ti.m_aspect_ratio = (float)m_hvideo_pixel_width * m_ti.m_aspect_ratio / (float)m_hvideo_pixel_height;
 
           if (m_ti.m_aspect_ratio > ((float)m_hvideo_pixel_width / (float)m_hvideo_pixel_height)) {
-            m_hvideo_display_width  = irnd(m_hvideo_pixel_height * m_ti.m_aspect_ratio);
+            m_hvideo_display_width  = mtx::math::irnd(m_hvideo_pixel_height * m_ti.m_aspect_ratio);
             m_hvideo_display_height = m_hvideo_pixel_height;
 
           } else {
             m_hvideo_display_width  = m_hvideo_pixel_width;
-            m_hvideo_display_height = irnd(m_hvideo_pixel_width / m_ti.m_aspect_ratio);
+            m_hvideo_display_height = mtx::math::irnd(m_hvideo_pixel_width / m_ti.m_aspect_ratio);
           }
         }
       }

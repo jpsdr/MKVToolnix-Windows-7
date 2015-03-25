@@ -16,13 +16,31 @@
 
 #include "common/common_pch.h"
 
-#define irnd(a) ((int64_t)((double)(a) + 0.5))
-#define iabs(a) ((a) < 0 ? (a) * -1 : (a))
+#if defined(COMP_MSC)
+# include <intrin.h>
+#endif
 
-uint32_t round_to_nearest_pow2(uint32_t value);
+namespace mtx { namespace math {
 
-int int_log2(uint32_t value);
+inline std::size_t
+count_1_bits(uint64_t value) {
+#if defined(COMP_MSC)
+  return __popcnt(value);
+#else
+  return __builtin_popcountll(value);
+#endif
+}
+
+inline int64_t
+irnd(double a) {
+  return a + 0.5;
+}
+
+uint64_t round_to_nearest_pow2(uint64_t value);
+int int_log2(uint64_t value);
 double int_to_double(int64_t value);
+
+}}
 
 using int64_rational_c = boost::rational<int64_t>;
 

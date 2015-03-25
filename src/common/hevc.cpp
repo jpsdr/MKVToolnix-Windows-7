@@ -2049,7 +2049,7 @@ hevc::hevc_es_parser_c::parse_slice(memory_cptr &buffer,
       bool PicHeightInCtbsY = ceil(sps.height / CtbSizeY);
       bool PicSizeInCtbsY = PicWidthInCtbsY * PicHeightInCtbsY;
 
-      unsigned int v = ceil(int_log2(PicSizeInCtbsY));
+      unsigned int v = ceil(mtx::math::int_log2(PicSizeInCtbsY));
       r.get_bits(v);  // slice_segment_address
     }
 
@@ -2317,8 +2317,8 @@ hevc::hevc_es_parser_c::get_display_dimensions(int width,
   if (0 >= height)
     height = get_height();
 
-  return std::make_pair<int64_t, int64_t>(1 <= m_par ? irnd(width * boost::rational_cast<double>(m_par)) : width,
-                                          1 <= m_par ? height                                            : irnd(height / boost::rational_cast<double>(m_par)));
+  return std::make_pair<int64_t, int64_t>(1 <= m_par ? mtx::math::irnd(width * boost::rational_cast<double>(m_par)) : width,
+                                          1 <= m_par ? height                                                       : mtx::math::irnd(height / boost::rational_cast<double>(m_par)));
 }
 
 size_t
