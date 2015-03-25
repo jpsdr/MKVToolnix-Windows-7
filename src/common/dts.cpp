@@ -14,11 +14,10 @@
 
 #include "common/common_pch.h"
 
-#include <stdio.h>
-
 #include "common/bit_cursor.h"
 #include "common/dts.h"
 #include "common/endian.h"
+#include "common/math.h"
 
 // ---------------------------------------------------------------------------
 
@@ -68,6 +67,13 @@ static const int transmission_bitrates[32] = {
   // [22] 1411200 is actually 1234800 for 14-bit DTS-CD audio
 };
 
+#define SPEAKER_PAIR_ALL_2 0xae66
+
+static unsigned int
+count_channels_for_mask(unsigned int mask) {
+  return mtx::math::count_1_bits(mask) + mtx::math::count_1_bits(mask & SPEAKER_PAIR_ALL_2);
+}
+
 int
 find_sync_word(unsigned char const *buf,
                size_t size) {
@@ -80,7 +86,7 @@ find_sync_word(unsigned char const *buf,
   auto sync_word_ok   = false;
 
   while ((offset + 4) < size) {
-    sync_word_ok = (sync_word_e::core == static_cast<sync_word_e>(sync_word)); // || (sync_word_e::hd == static_cast<sync_word_e>(sync_word));
+    sync_word_ok = (sync_word_e::core == static_cast<sync_word_e>(sync_word)) || (sync_word_e::hd == static_cast<sync_word_e>(sync_word));
     if (sync_word_ok)
       break;
 
@@ -107,9 +113,14 @@ find_header_internal(unsigned char const *buf,
 
   auto sync_word = static_cast<sync_word_e>(get_uint32_be(&buf[offset]));
 
-  if (sync_word == sync_word_e::core)
+  if (sync_word == sync_word_e::core) {
     if (!header.decode_core_header(&buf[offset], size - offset, allow_no_hd_search))
       return -1;
+
+  } else if (sync_word == sync_word_e::hd) {
+    if (!header.decode_hd_header(&buf[offset], size - offset))
+      return -1;
+  }
 
   return offset;
 }
@@ -292,125 +303,378 @@ bool
 header_t::decode_core_header(unsigned char const *buf,
                              size_t size,
                              bool allow_no_hd_search) {
-  auto bc = bit_reader_c{buf, size};
-  bc.skip_bits(32);             // sync word
+  try {
+    auto bc = bit_reader_c{buf, size};
+    bc.skip_bits(32);             // sync word
 
-  frametype             = bc.get_bit() ? frametype_e::normal : frametype_e::termination;
-  deficit_sample_count  = (bc.get_bits(5) + 1) % 32;
-  crc_present           = bc.get_bit();
-  num_pcm_sample_blocks = bc.get_bits(7) + 1;
-  frame_byte_size       = bc.get_bits(14) + 1;
+    frametype             = bc.get_bit() ? frametype_e::normal : frametype_e::termination;
+    deficit_sample_count  = (bc.get_bits(5) + 1) % 32;
+    crc_present           = bc.get_bit();
+    num_pcm_sample_blocks = bc.get_bits(7) + 1;
+    frame_byte_size       = bc.get_bits(14) + 1;
 
-  if (96 > frame_byte_size) {
-    mxwarn(Y("Header problem: invalid frame bytes size\n"));
-    return false;
-  }
-
-  auto t = bc.get_bits(6);
-  if (16 <= t) {
-    audio_channels            = -1;
-    audio_channel_arrangement = "unknown (user defined)";
-  } else {
-    audio_channels            = channel_arrangements[t].num_channels;
-    audio_channel_arrangement = channel_arrangements[t].description;
-  }
-
-  core_sampling_frequency    = core_samplefreqs[bc.get_bits(4)];
-  transmission_bitrate       = transmission_bitrates[bc.get_bits(5)];
-  embedded_down_mix          = bc.get_bit();
-  embedded_dynamic_range     = bc.get_bit();
-  embedded_time_stamp        = bc.get_bit();
-  auxiliary_data             = bc.get_bit();
-  hdcd_master                = bc.get_bit();
-  extension_audio_descriptor = static_cast<extension_audio_descriptor_e>(bc.get_bits(3));
-  extended_coding            = bc.get_bit();
-  audio_sync_word_in_sub_sub = bc.get_bit();
-  lfe_type                   = static_cast<lfe_type_e>(bc.get_bits(2));
-  predictor_history_flag     = bc.get_bit();
-
-  if (crc_present)
-     bc.skip_bits(16);
-
-  multirate_interpolator     = static_cast<multirate_interpolator_e>(bc.get_bit());
-  encoder_software_revision  = bc.get_bits(4);
-  copy_history               = bc.get_bits(2);
-
-  switch (static_cast<source_pcm_resolution_e>(bc.get_bits(3))) {
-    case source_pcm_resolution_e::spr_16:
-      source_pcm_resolution = 16;
-      source_surround_in_es = false;
-      break;
-
-    case source_pcm_resolution_e::spr_16_ES:
-      source_pcm_resolution = 16;
-      source_surround_in_es = true;
-      break;
-
-    case source_pcm_resolution_e::spr_20:
-      source_pcm_resolution = 20;
-      source_surround_in_es = false;
-      break;
-
-    case source_pcm_resolution_e::spr_20_ES:
-      source_pcm_resolution = 20;
-      source_surround_in_es = true;
-      break;
-
-    case source_pcm_resolution_e::spr_24:
-      source_pcm_resolution = 24;
-      source_surround_in_es = false;
-      break;
-
-    case source_pcm_resolution_e::spr_24_ES:
-      source_pcm_resolution = 24;
-      source_surround_in_es = true;
-      break;
-
-    default:
-      mxwarn(Y("Header problem: invalid source PCM resolution\n"));
+    if (96 > frame_byte_size) {
+      mxwarn(Y("Header problem: invalid frame bytes size\n"));
       return false;
-  }
+    }
 
-  front_sum_difference      = bc.get_bit();
-  surround_sum_difference   = bc.get_bit();
-  t                         = bc.get_bits(4);
-  dialog_normalization_gain = 7 == encoder_software_revision ? -t
-                            : 6 == encoder_software_revision ? -16 - t
-                            :                                  0;
+    auto t = bc.get_bits(6);
+    if (16 <= t) {
+      audio_channels            = -1;
+      audio_channel_arrangement = "unknown (user defined)";
+    } else {
+      audio_channels            = channel_arrangements[t].num_channels;
+      audio_channel_arrangement = channel_arrangements[t].description;
+    }
 
-  has_core                  = true;
+    core_sampling_frequency    = core_samplefreqs[bc.get_bits(4)];
+    transmission_bitrate       = transmission_bitrates[bc.get_bits(5)];
+    embedded_down_mix          = bc.get_bit();
+    embedded_dynamic_range     = bc.get_bit();
+    embedded_time_stamp        = bc.get_bit();
+    auxiliary_data             = bc.get_bit();
+    hdcd_master                = bc.get_bit();
+    extension_audio_descriptor = static_cast<extension_audio_descriptor_e>(bc.get_bits(3));
+    extended_coding            = bc.get_bit();
+    audio_sync_word_in_sub_sub = bc.get_bit();
+    lfe_type                   = static_cast<lfe_type_e>(bc.get_bits(2));
+    predictor_history_flag     = bc.get_bit();
 
-  // Detect DTS HD master audio / high resolution part
-  has_hd         = false;
-  hd_type        = hd_type_e::none;
-  hd_part_size   = 0;
+    if (crc_present)
+       bc.skip_bits(16);
 
-  auto hd_offset = frame_byte_size;
+    multirate_interpolator     = static_cast<multirate_interpolator_e>(bc.get_bit());
+    encoder_software_revision  = bc.get_bits(4);
+    copy_history               = bc.get_bits(2);
 
-  if ((hd_offset + 9) > size)
-    return allow_no_hd_search ? true : false;
+    switch (static_cast<source_pcm_resolution_e>(bc.get_bits(3))) {
+      case source_pcm_resolution_e::spr_16:
+        source_pcm_resolution = 16;
+        source_surround_in_es = false;
+        break;
 
-  if (static_cast<sync_word_e>(get_uint32_be(buf + hd_offset)) != sync_word_e::hd)
+      case source_pcm_resolution_e::spr_16_ES:
+        source_pcm_resolution = 16;
+        source_surround_in_es = true;
+        break;
+
+      case source_pcm_resolution_e::spr_20:
+        source_pcm_resolution = 20;
+        source_surround_in_es = false;
+        break;
+
+      case source_pcm_resolution_e::spr_20_ES:
+        source_pcm_resolution = 20;
+        source_surround_in_es = true;
+        break;
+
+      case source_pcm_resolution_e::spr_24:
+        source_pcm_resolution = 24;
+        source_surround_in_es = false;
+        break;
+
+      case source_pcm_resolution_e::spr_24_ES:
+        source_pcm_resolution = 24;
+        source_surround_in_es = true;
+        break;
+
+      default:
+        mxwarn(Y("Header problem: invalid source PCM resolution\n"));
+        return false;
+    }
+
+    front_sum_difference      = bc.get_bit();
+    surround_sum_difference   = bc.get_bit();
+    t                         = bc.get_bits(4);
+    dialog_normalization_gain = 7 == encoder_software_revision ? -t
+                              : 6 == encoder_software_revision ? -16 - t
+                              :                                  0;
+
+    has_core                  = true;
+
+    // Detect DTS HD master audio / high resolution part
+    has_hd         = false;
+    hd_type        = hd_type_e::none;
+    hd_part_size   = 0;
+
+    auto hd_offset = frame_byte_size;
+
+    if ((hd_offset + 9) > size)
+      return allow_no_hd_search ? true : false;
+
+    if (static_cast<sync_word_e>(get_uint32_be(buf + hd_offset)) == sync_word_e::hd)
+      return decode_hd_header(&buf[hd_offset], size - hd_offset);
+
     return true;
 
-  has_hd = true;
-
-  bc.init(buf + hd_offset, size - hd_offset);
-
-  bc.skip_bits(32);             // sync word
-  bc.skip_bits(8 + 2);          // ??
-  if (bc.get_bit()) {           // Blown-up header bit
-    bc.skip_bits(12);
-    hd_part_size = bc.get_bits(20) + 1;
-
-  } else {
-    bc.skip_bits(8);
-    hd_part_size = bc.get_bits(16) + 1;
+  } catch (mtx::mm_io::end_of_file_x &) {
   }
 
-  frame_byte_size += hd_part_size;
+  return false;
+}
+
+void
+header_t::parse_lbr_parameters(bit_reader_c &bc,
+                               substream_asset_t &asset) {
+  asset.lbr_size = bc.get_bits(14) + 1; // size of LBR component in extension substream
+  if (bc.get_bit())                     // LBR sync word presence flag
+    bc.skip_bits(2);                    // LBR sync distance
+}
+
+void
+header_t::parse_xll_parameters(bit_reader_c &bc,
+                               substream_asset_t &asset) {
+  asset.xll_size         = bc.get_bits(substream_size_bits) + 1; // size of XLL data in extension substream
+  asset.xll_sync_present = bc.get_bit();                         // XLL sync word presence flag
+
+  if (asset.xll_sync_present) {
+    bc.skip_bits(4);                                               // peak bit rate smoothing buffer size
+    auto xll_delay_num_bits    = bc.get_bits(5) + 1;               // number fof bits for XLL decoding delay
+    asset.xll_delay_num_frames = bc.get_bits(xll_delay_num_bits);  // initial XLL decoding delay in frames
+    asset.xll_sync_offset      = bc.get_bits(substream_size_bits); // number of bytes offset to XLL sync
+
+  } else {
+    asset.xll_delay_num_frames = 0;
+    asset.xll_sync_offset      = 0;
+  }
+}
+
+bool
+header_t::decode_asset(bit_reader_c &bc,
+                       substream_asset_t &asset) {
+  static unsigned int const s_substream_sample_rates[16] = {
+      8000,  16000,  32000,  64000,
+    128000,  22050,  44100,  88200,
+    176400, 352800,  12000,  24000,
+     48000,  96000, 192000, 384000
+  };
+
+  auto descriptor_pos  = bc.get_bit_position();
+  auto descriptor_size = bc.get_bits(9) + 1;
+  asset.asset_index    = bc.get_bits(3);
+
+  if (static_fields_present) {
+    if (bc.get_bit())                          // asset type descriptor presence
+      bc.skip_bits(4);                         // asset type descriptor
+
+    if (bc.get_bit())                          // language descriptor presence
+      bc.skip_bits(24);                        // language descriptor
+
+    if (bc.get_bit())                          // additional textual information presence
+      bc.skip_bits((bc.get_bits(10) + 1) * 8); // additional textual information
+
+    asset.pcm_bit_res                       = bc.get_bits(5) + 1;
+    asset.max_sample_rate                   = s_substream_sample_rates[bc.get_bits(4)];
+    asset.num_channels_total                = bc.get_bits(8) + 1;
+    asset.one_to_one_map_channel_to_speaker = bc.get_bit();
+
+    if (asset.one_to_one_map_channel_to_speaker) {
+      if (asset.num_channels_total > 2)
+        asset.embedded_stereo = bc.get_bit();
+
+      if (asset.num_channels_total > 6)
+        asset.embedded_6ch = bc.get_bit();
+
+      auto speaker_mask_num_bits = 16;
+      if (bc.get_bit()) {                                  // speaker mask enabled flag
+        speaker_mask_num_bits = (bc.get_bits(2) + 1) << 2; // number of bits for speaker activity mask
+        bc.skip_bits(speaker_mask_num_bits);               // speaker activity mask
+      }
+
+      auto num_speaker_remapping_sets = bc.get_bits(3);
+      unsigned int num_speakers[8];
+      for (auto set_idx = 0u; set_idx < num_speaker_remapping_sets; ++set_idx)
+        num_speakers[set_idx] = count_channels_for_mask(bc.get_bits(speaker_mask_num_bits));
+
+      for (auto set_idx = 0u; set_idx < num_speaker_remapping_sets; ++set_idx) {
+        auto num_channels_for_remapping = bc.get_bits(5) + 1;
+        for (auto spkr_idx = 0u; spkr_idx < num_speakers[set_idx]; ++spkr_idx) {
+          auto remap_channel_mask  = bc.get_bits(num_channels_for_remapping);
+          auto num_remapping_codes = mtx::math::count_1_bits(remap_channel_mask);
+          bc.skip_bits(num_remapping_codes * 5);
+        }
+      }
+
+    } else {
+      asset.embedded_stereo     = false;
+      asset.embedded_6ch        = false;
+      asset.representation_type = bc.get_bits(3);
+    }
+  }
+
+  auto drc_present = bc.get_bit();
+  if (drc_present)
+    bc.skip_bits(8);            // dynamic range coefficients
+
+  if (bc.get_bit())             // dialog normalization presence flag
+    bc.skip_bits(5);            // dialog normalization code
+
+  if (drc_present && asset.embedded_stereo)
+    bc.skip_bits(8);            // DRC for stereo downmix
+
+  if (mix_metadata_enabled && bc.get_bit()) {
+    bc.skip_bit();              // external mixing flag
+    bc.skip_bits(6);            // Post mixing / replacement gain adjustment
+
+    if (bc.get_bits(2) == 3)    // DRC prior to mixing
+      bc.skip_bits(8);          // custom code for mixing DRC
+    else
+      bc.skip_bits(3);          // limit for mixing DRC
+
+    // Scaling type for channels of main audio; scaling parameters
+    if (bc.get_bit())
+      for (auto mix_idx = 0u; mix_idx < num_mixing_configurations; ++mix_idx)
+        bc.skip_bits(6 * num_mixing_channels[mix_idx]);
+    else
+      bc.skip_bits(6 * num_mixing_configurations);
+
+    auto num_channels_downmix = asset.num_channels_total;
+    if (asset.embedded_6ch)
+      num_channels_downmix += 6;
+    if (asset.embedded_stereo)
+      num_channels_downmix += 2;
+
+    for (auto mix_idx = 0u; mix_idx < num_mixing_configurations; ++mix_idx)
+      for (auto channel_idx = 0u; channel_idx < num_channels_downmix; ++channel_idx) {
+        auto mixing_map_mask         = bc.get_bits(num_mixing_channels[mix_idx]);
+        auto num_mixing_coefficients = mtx::math::count_1_bits(mixing_map_mask);
+        bc.skip_bits(6 * num_mixing_coefficients);
+    }
+  }
+
+  asset.coding_mode = bc.get_bits(2);
+  switch (asset.coding_mode) {
+    case 0:                     // multiple coding components
+      asset.extension_mask = static_cast<extension_mask_e>(bc.get_bits(12));
+      if (asset.extension_mask & exss_core) {
+        asset.core_size = bc.get_bits(14) + 1; // size of core component in extension substream
+        if (bc.get_bit())                      // core sync word presence flace
+          bc.skip_bits(2);                     // core sync distance
+      }
+      if (asset.extension_mask & exss_xbr)
+        asset.xbr_size = bc.get_bits(14) + 1; // size of XBR extension in substream
+      if (asset.extension_mask & exss_xxch)
+        asset.xxch_size = bc.get_bits(14) + 1; // size of XXCH extension in substream
+      if (asset.extension_mask & exss_x96)
+        asset.x96_size = bc.get_bits(12) + 1; // size of X96 extension in substream
+      if (asset.extension_mask & exss_lbr)
+        parse_lbr_parameters(bc, asset);
+      if (asset.extension_mask & exss_xll)
+        parse_xll_parameters(bc, asset);
+      if (asset.extension_mask & exss_rsv1)
+        bc.skip_bits(16);
+      if (asset.extension_mask & exss_rsv2)
+        bc.skip_bits(16);
+      break;
+
+    case 1:                     // lossless coding mode without CBR component
+      asset.extension_mask = extension_mask_e::exss_xll;
+      parse_xll_parameters(bc, asset);
+      break;
+
+    case 2:                     // low bit rate mode
+      asset.extension_mask = extension_mask_e::exss_lbr;
+      parse_lbr_parameters(bc, asset);
+      break;
+
+    case 3:                     // auxiliary coding mode
+      asset.extension_mask = static_cast<extension_mask_e>(0);
+      bc.skip_bits(14);         // size of auxiliary coded data
+      bc.skip_bits(8);          // auxiliary codec identification
+      if (bc.get_bit())         // auxiliary sync word presence flag
+        bc.skip_bits(3);        // auxiliary sync distance
+      break;
+  }
+
+  if (asset.extension_mask & exss_xll) {
+    asset.hd_stream_id = bc.get_bits(3);
+    hd_type = hd_type_e::master_audio;
+
+  } else if (asset.extension_mask & (exss_xbr | exss_x96 | exss_xxch))
+    hd_type = hd_type_e::high_resolution;
+
+  bc.set_bit_position(descriptor_pos + (descriptor_size * 8));
 
   return true;
+}
+
+#undef test_mask
+
+bool
+header_t::decode_hd_header(unsigned char const *buf,
+                           size_t size) {
+  try {
+    auto bc = bit_reader_c{buf, size};
+    bc.skip_bits(32);             // sync word
+    bc.skip_bits(8);              // user defined
+    auto substream_index  = bc.get_bits(2);
+    auto header_size_bits =  8;
+    substream_size_bits   = 16;
+
+    if (bc.get_bit()) {           // Blown-up header bit
+      header_size_bits    = 12;
+      substream_size_bits = 20;
+    }
+
+    bc.skip_bits(header_size_bits);                          // header size
+    hd_part_size     = bc.get_bits(substream_size_bits) + 1; // extension substream size
+    frame_byte_size += hd_part_size;
+    has_hd           = true;
+
+    num_presentations         = 1u;
+    num_assets                = 1u;
+    num_mixing_configurations = 0u;
+    static_fields_present     = bc.get_bit();
+
+    if (static_fields_present) {
+      bc.skip_bits(2);            // reference clock code
+      bc.skip_bits(3);            // substream frame duration
+      if (bc.get_bit())           // timecode presence flag
+        bc.skip_bits(32 + 4);     // timecode data
+
+      num_presentations = bc.get_bits(3) + 1;
+      num_assets        = bc.get_bits(3) + 1;
+
+      int active_substream_mask[8];
+      for (auto pres_idx = 0u; pres_idx < num_presentations; ++pres_idx)
+        active_substream_mask[pres_idx] = bc.get_bits(substream_index + 1);
+
+      for (auto pres_idx = 0u; pres_idx < num_presentations; ++pres_idx)
+        for (auto subs_idx = 0u; subs_idx <= substream_index; ++subs_idx)
+          if (active_substream_mask[pres_idx] & (1 << subs_idx))
+            bc.skip_bits(8);
+
+      mix_metadata_enabled = bc.get_bit();
+      if (mix_metadata_enabled) {
+        bc.skip_bits(2);          // mixing metadata adjustment level
+        auto speaker_mask_num_bits = (bc.get_bits(2) + 1) << 2;
+        num_mixing_configurations  = bc.get_bits(2) + 1;
+
+        for (auto mix_idx = 0u; mix_idx < num_mixing_configurations; ++mix_idx)
+          num_mixing_channels[mix_idx] = count_channels_for_mask(bc.get_bits(speaker_mask_num_bits));
+      }
+    }
+
+    substream_assets.resize(num_assets);
+
+    auto offset = header_size_bits;
+    for (auto asset_idx = 0u; asset_idx < num_assets; ++asset_idx) {
+      auto &asset         = substream_assets[asset_idx];
+      asset.asset_offset  = offset;
+      asset.asset_size    = bc.get_bits(substream_size_bits) + 1;
+      offset             += asset.asset_size;
+    }
+
+    for (auto asset_idx = 0u; asset_idx < num_assets; ++asset_idx)
+      if (!decode_asset(bc, substream_assets[asset_idx]))
+        return false;
+
+    return true;
+
+  } catch (mtx::mm_io::end_of_file_x &) {
+  }
+
+  return false;
 }
 
 void

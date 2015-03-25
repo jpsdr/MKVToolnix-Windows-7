@@ -15,6 +15,8 @@
 #ifndef MTX_COMMON_DTS_H
 #define MTX_COMMON_DTS_H
 
+class bit_reader_c;
+
 namespace mtx { namespace dts {
 
 enum class sync_word_e {
@@ -38,6 +40,21 @@ enum class extension_audio_descriptor_e {
   , unknown5
   , unknown6
   , unknown7
+};
+
+enum extension_mask_e {
+    css_core  = 0x001
+  , css_xxch  = 0x002
+  , css_x96   = 0x004
+  , css_xch   = 0x008
+  , exss_core = 0x010
+  , exss_xbr  = 0x020
+  , exss_xxch = 0x040
+  , exss_x96  = 0x080
+  , exss_lbr  = 0x100
+  , exss_xll  = 0x200
+  , exss_rsv1 = 0x400
+  , exss_rsv2 = 0x800
 };
 
 enum class lfe_type_e {
@@ -162,6 +179,36 @@ struct header_t {
   hd_type_e hd_type{ hd_type_e::none };
   int hd_part_size{};
 
+  bool static_fields_present{}, mix_metadata_enabled{};
+  unsigned int substream_size_bits{}, num_presentations{1}, num_assets{1}, num_mixing_configurations{};
+  unsigned int num_mixing_channels[5];
+
+  struct substream_asset_t {
+    size_t asset_offset{}, asset_size{}, asset_index{};
+
+    unsigned int pcm_bit_res{}, max_sample_rate{}, num_channels_total{};
+    bool one_to_one_map_channel_to_speaker{}, embedded_stereo{}, embedded_6ch{};
+    int representation_type{};
+
+    int coding_mode{};
+    extension_mask_e extension_mask{};
+
+    size_t core_offset{}, core_size{};
+    size_t xbr_offset{}, xbr_size{};
+    size_t xxch_offset{}, xxch_size{};
+    size_t x96_offset{}, x96_size{};
+    size_t lbr_offset{}, lbr_size{};
+    size_t xll_offset{}, xll_size{};
+
+    bool xll_sync_present{};
+    int xll_delay_num_frames{};
+    size_t xll_sync_offset{};
+
+    unsigned int hd_stream_id{};
+  };
+
+  std::vector<substream_asset_t> substream_assets;
+
 public:
   inline int get_packet_length_in_core_samples() const {
     // computes the length (in time, not size) of the packet in "samples".
@@ -183,6 +230,12 @@ public:
   void print() const;
 
   bool decode_core_header(unsigned char const *buf, size_t size, bool allow_no_hd_search = false);
+  bool decode_hd_header(unsigned char const *buf, size_t size);
+
+protected:
+  bool decode_asset(bit_reader_c &bc, substream_asset_t &asset);
+  void parse_lbr_parameters(bit_reader_c &bc, substream_asset_t &asset);
+  void parse_xll_parameters(bit_reader_c &bc, substream_asset_t &asset);
 };
 
 int find_sync_word(unsigned char const *buf, size_t size);
