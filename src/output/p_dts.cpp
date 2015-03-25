@@ -103,12 +103,7 @@ void
 dts_packetizer_c::set_headers() {
   set_codec_id(MKV_A_DTS);
   set_audio_sampling_freq((float)m_first_header.core_sampling_frequency);
-  if (   (mtx::dts::header_t::LFE_64  == m_first_header.lfe_type)
-      || (mtx::dts::header_t::LFE_128 == m_first_header.lfe_type))
-    set_audio_channels(m_first_header.audio_channels + 1);
-  else
-    set_audio_channels(m_first_header.audio_channels);
-
+  set_audio_channels(m_first_header.get_total_num_audio_channels());
   set_track_default_duration(m_first_header.get_packet_length_in_nanoseconds());
 
   generic_packetizer_c::set_headers();
