@@ -1375,13 +1375,10 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
 
       if (pts == track->m_timecode) {
         mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_start_unit_packet: Adding PES with same PTS as previous !!\n"));
-        track->add_pes_payload(ts_payload, ts_payload_size);
 
         mxdebug_if(track->m_debug_delivery,
                    boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PID %1%: Adding PES payload (same PTS case) num %2% bytes; expected %3% actual %4%\n")
                    % track->pid % static_cast<unsigned int>(ts_payload_size) % track->pes_payload_size % track->pes_payload->get_size());
-
-        return false;
 
       } else if ((0 != track->pes_payload->get_size()) && !m_probing)
         track->send_to_packetizer();
