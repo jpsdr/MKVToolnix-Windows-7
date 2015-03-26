@@ -13,15 +13,6 @@
 
 #include "common/common_pch.h"
 
-#if HAVE_NL_LANGINFO
-# include <langinfo.h>
-#elif HAVE_LOCALE_CHARSET
-# include <libcharset.h>
-#endif
-#if defined(SYS_WINDOWS)
-#include <windows.h>
-#endif
-
 #include <ebml/EbmlFloat.h>
 #include <ebml/EbmlSInteger.h>
 #include <ebml/EbmlString.h>

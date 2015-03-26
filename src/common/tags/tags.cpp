@@ -11,13 +11,8 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#include <ctype.h>
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "common/common_pch.h"
+
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/strings/utf8.h"

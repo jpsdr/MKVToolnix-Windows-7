@@ -13,8 +13,7 @@
 
 #include "common/common_pch.h"
 
-#include <avilib.h>
-
+#include "avilib.h"
 #include "common/amf.h"
 #include "common/bit_cursor.h"
 #include "common/codec.h"

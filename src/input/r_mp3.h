@@ -16,8 +16,6 @@
 
 #include "common/common_pch.h"
 
-#include <stdio.h>
-
 #include "common/mm_io.h"
 #include "common/error.h"
 #include "merge/generic_reader.h"

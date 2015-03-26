@@ -16,8 +16,6 @@
 
 #include <boost/math/special_functions/round.hpp>
 
-#include <avilib.h>   // for BITMAPINFOHEADER
-
 #include <ebml/EbmlContexts.h>
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlStream.h>
@@ -42,6 +40,7 @@
 #include <matroska/KaxTrackAudio.h>
 #include <matroska/KaxTrackVideo.h>
 
+#include "avilib.h"
 #include "common/alac.h"
 #include "common/at_scope_exit.h"
 #include "common/chapters/chapters.h"

@@ -17,8 +17,6 @@
 
 #include "common/common_pch.h"
 
-#include <stdarg.h>
-
 #include <FLAC/stream_decoder.h>
 
 #include "common/bit_cursor.h"

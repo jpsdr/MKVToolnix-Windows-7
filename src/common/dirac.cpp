@@ -14,8 +14,6 @@
 
 #include "common/common_pch.h"
 
-#include <string.h>
-
 #include "common/bit_cursor.h"
 #include "common/dirac.h"
 #include "common/endian.h"

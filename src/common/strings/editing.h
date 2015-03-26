@@ -16,8 +16,6 @@
 
 #include "common/common_pch.h"
 
-#include <stdarg.h>
-
 std::vector<std::string> split(std::string const &text, boost::regex const &pattern, size_t max = 0, boost::match_flag_type match_flags = boost::match_default);
 
 inline std::vector<std::string>

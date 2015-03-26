@@ -15,21 +15,6 @@
 
 #include "common/common_pch.h"
 
-#include <errno.h>
-#include <ctype.h>
-#if defined(SYS_UNIX) || defined(SYS_APPLE)
-#include <signal.h>
-#endif
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-#if defined(SYS_WINDOWS)
-#include <windows.h>
-#endif
-
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/math/special_functions/round.hpp>
 #include <iostream>

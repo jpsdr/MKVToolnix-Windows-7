@@ -13,20 +13,12 @@
 
 #include "common/common_pch.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
-#if defined(SYS_WINDOWS)
-#include <windows.h>
-#include <time.h>
-#endif
 
 #include <boost/math/special_functions/round.hpp>
 
-#include <avilib.h>   // for BITMAPINFOHEADER
-
+#include "avilib.h"
 #include "common/aac.h"
 #include "common/chapters/chapters.h"
 #include "common/codec.h"

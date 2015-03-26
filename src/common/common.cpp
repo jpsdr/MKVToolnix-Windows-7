@@ -13,7 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include <stdlib.h>
 #ifdef SYS_WINDOWS
 # include <windows.h>
 #endif

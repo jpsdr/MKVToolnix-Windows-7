@@ -15,14 +15,11 @@
 
 #include "common/common_pch.h"
 
-#include <errno.h>
-#include <ctype.h>
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
 #include <signal.h>
 #endif
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif

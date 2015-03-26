@@ -18,7 +18,6 @@
 
 #include "common/common_pch.h"
 
-#include <string>
 #include <utf8.h>
 
 #include "common/strings/utf8.h"

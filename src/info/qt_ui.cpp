@@ -12,12 +12,12 @@
 
 #include "common/common_pch.h"
 
-#include <ebml/EbmlVersion.h>
-#include <matroska/KaxVersion.h>
-
 #if defined(SYS_WINDOWS)
 # include <windows.h>
 #endif
+
+#include <ebml/EbmlVersion.h>
+#include <matroska/KaxVersion.h>
 
 #include "common/common_pch.h"
 #include "common/locale.h"

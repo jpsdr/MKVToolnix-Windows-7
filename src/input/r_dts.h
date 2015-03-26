@@ -17,8 +17,6 @@
 
 #include "common/common_pch.h"
 
-#include <stdio.h>
-
 #include "common/dts.h"
 #include "common/error.h"
 #include "common/mm_io.h"

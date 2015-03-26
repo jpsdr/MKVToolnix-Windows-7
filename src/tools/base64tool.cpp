@@ -12,9 +12,6 @@
 
 #include "common/common_pch.h"
 
-#include <errno.h>
-#include <string.h>
-
 #include <string>
 
 #include "common/base64.h"

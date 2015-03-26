@@ -14,16 +14,9 @@
 #include "common/common_pch.h"
 
 #include <algorithm>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-// This one goes out to haali ;)
-#include <sys/types.h>
-
-#include <avilib.h>
 #include <boost/math/special_functions/round.hpp>
 
+#include "avilib.h"
 #include "common/aac.h"
 #include "common/codec.h"
 #include "common/endian.h"

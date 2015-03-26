@@ -23,7 +23,6 @@
 #include "common/common_pch.h"
 
 #include "CircBuffer.h"
-#include <string.h>
 #include <cassert>
 
 CircBuffer::CircBuffer(uint32_t size){

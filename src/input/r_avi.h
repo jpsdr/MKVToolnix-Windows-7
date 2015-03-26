@@ -16,8 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include <avilib.h>
-
+#include "avilib.h"
 #include "common/codec.h"
 #include "merge/generic_reader.h"
 #include "common/error.h"

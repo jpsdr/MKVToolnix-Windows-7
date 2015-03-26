@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include "avilib.h"
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/hacks.h"
@@ -21,8 +22,6 @@
 #include "merge/generic_reader.h"
 #include "merge/output_control.h"
 #include "output/p_mpeg4_p2.h"
-
-#include <avilib.h>
 
 mpeg4_p2_video_packetizer_c::
 mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,

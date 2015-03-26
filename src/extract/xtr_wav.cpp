@@ -13,10 +13,9 @@
 
 #include "common/common_pch.h"
 
-#include <avilib.h>
-
 #include <matroska/KaxBlock.h>
 
+#include "avilib.h"
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"

@@ -17,13 +17,7 @@
 
 #include <algorithm>
 
-#if __GNUC__ == 2
-#define MTX_USE_XOPEN
-#include <unistd.h>
-#elif defined(HAVE_UNISTD_H)
-#include <unistd.h>
-#endif
-
+#include "avilib.h"
 #include "common/ac3.h"
 #include "common/dts.h"
 #include "common/endian.h"
@@ -34,8 +28,6 @@
 #include "output/p_ac3.h"
 #include "output/p_dts.h"
 #include "output/p_pcm.h"
-
-#include <avilib.h> // for wave_header
 
 #define AC3ACM_READ_SIZE 100000
 

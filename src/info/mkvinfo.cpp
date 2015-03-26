@@ -12,28 +12,11 @@
 
 #include "common/common_pch.h"
 
-#include <errno.h>
-#include <ctype.h>
-#include <limits.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-
-#if defined(COMP_MSC)
-#include <cassert>
-#else
-#include <unistd.h>
-#endif
-
 #include <algorithm>
 #include <iostream>
 #include <typeinfo>
 
 #include <boost/math/special_functions/round.hpp>
-
-#include <avilib.h>
 
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
@@ -68,6 +51,7 @@
 #define MATROSKA_VERSION 2
 #endif
 
+#include "avilib.h"
 #include "common/chapters/chapters.h"
 #include "common/checksums/base.h"
 #include "common/codec.h"

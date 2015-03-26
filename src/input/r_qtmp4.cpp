@@ -19,10 +19,8 @@
 
 #include <cstring>
 #include <unordered_map>
-#include <zlib.h>
 
-#include <avilib.h>
-
+#include "avilib.h"
 #include "common/aac.h"
 #include "common/alac.h"
 #include "common/chapters/chapters.h"

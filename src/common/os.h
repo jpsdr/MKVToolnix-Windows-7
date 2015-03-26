@@ -72,7 +72,6 @@ using uint16_t = unsigned __int16;
 using uint8_t = unsigned __int8;
 
 # define nice(a)
-#include <io.h>
 using ssize_t = _fsize_t;
 
 #define PACKED_STRUCTURE

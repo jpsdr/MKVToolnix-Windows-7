@@ -16,8 +16,6 @@
 
 #include "common/common_pch.h"
 
-#include <stdio.h>
-
 #include "common/ac3.h"
 #include "common/error.h"
 #include "common/mm_io.h"

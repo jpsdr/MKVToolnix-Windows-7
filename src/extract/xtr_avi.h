@@ -15,8 +15,7 @@
 
 #include "common/common_pch.h"
 
-#include <avilib.h>
-
+#include "avilib.h"
 #include "extract/xtr_base.h"
 
 class xtr_avi_c: public xtr_base_c {

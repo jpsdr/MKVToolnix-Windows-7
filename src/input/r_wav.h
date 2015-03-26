@@ -23,9 +23,8 @@
 #include "common/mm_io.h"
 #include "merge/generic_reader.h"
 
-#include <avilib.h>
-
 class wav_reader_c;
+struct wave_header;
 
 class wav_demuxer_c {
 public:

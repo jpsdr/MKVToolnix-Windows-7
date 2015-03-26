@@ -43,8 +43,6 @@
    Modified by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#include <ctype.h>
-
 #include "common/common_pch.h"
 
 #include "common/base64.h"

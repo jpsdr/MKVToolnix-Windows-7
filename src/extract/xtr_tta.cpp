@@ -12,8 +12,6 @@
 
 #include "common/common_pch.h"
 
-#include <time.h>
-
 #include "common/checksums/base.h"
 #include "common/ebml.h"
 #include "common/endian.h"

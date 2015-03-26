@@ -17,8 +17,6 @@
 
 #include "common/common_pch.h"
 
-#include <stdio.h>
-
 #include "common/mm_io.h"
 #include "merge/generic_reader.h"
 #include "output/p_vobbtn.h"

@@ -15,8 +15,6 @@
 #include <cassert>
 #include <iostream>
 
-#include <avilib.h>
-
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
 #include <ebml/EbmlStream.h>

@@ -15,8 +15,6 @@
 #include "common/common_pch.h"
 
 #include <errno.h>
-#include <string.h>
-#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #ifdef HAVE_UNISTD_H

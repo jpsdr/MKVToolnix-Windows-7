@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include <memory.h>
-
 #include "common/fourcc.h"
 #include "common/ivf.h"
 

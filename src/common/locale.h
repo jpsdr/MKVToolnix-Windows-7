@@ -16,13 +16,7 @@
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_ICONV_H)
-# include <iconv.h>
-#endif
-
-#if !defined(HAVE_ICONV_H) && !defined(SYS_WINDOWS)
-# error Build requires either <iconv.h> or Windows APIs.
-#endif
+#include <iconv.h>
 
 class charset_converter_c;
 using charset_converter_cptr = std::shared_ptr<charset_converter_c>;

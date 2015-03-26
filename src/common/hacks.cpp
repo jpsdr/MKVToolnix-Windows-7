@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include <string.h>
-
 #include "common/base64.h"
 #include "common/hacks.h"
 #include "common/strings/editing.h"

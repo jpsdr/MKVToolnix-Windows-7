@@ -13,12 +13,9 @@
 
 #include "common/common_pch.h"
 
-#include <cstring>
-
 #include <matroska/KaxTracks.h>
 
-#include <avilib.h>
-
+#include "avilib.h"
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/hacks.h"

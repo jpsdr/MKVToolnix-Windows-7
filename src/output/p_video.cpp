@@ -15,6 +15,7 @@
 
 #include <matroska/KaxTracks.h>
 
+#include "avilib.h"
 #include "common/codec.h"
 #include "common/debugging.h"
 #include "common/endian.h"
@@ -23,8 +24,6 @@
 #include "common/mpeg4_p2.h"
 #include "merge/connection_checks.h"
 #include "output/p_video.h"
-
-#include <avilib.h>
 
 using namespace libmatroska;
 

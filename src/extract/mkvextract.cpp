@@ -14,7 +14,6 @@
 
 #include <cassert>
 #include <iostream>
-#include <stdlib.h>
 
 #include "common/chapters/chapters.h"
 #include "common/command_line.h"

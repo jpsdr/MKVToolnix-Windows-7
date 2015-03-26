@@ -14,8 +14,6 @@
 #include <cassert>
 #include <iostream>
 
-#include <avilib.h>
-
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
 #include <ebml/EbmlStream.h>
@@ -24,6 +22,7 @@
 #include <matroska/FileKax.h>
 #include <matroska/KaxChapters.h>
 
+#include "avilib.h"
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/mm_io.h"

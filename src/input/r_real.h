@@ -16,8 +16,6 @@
 
 #include "common/common_pch.h"
 
-#include <stdio.h>
-
 #include "common/error.h"
 #include "librmff/librmff.h"
 #include "output/p_video.h"

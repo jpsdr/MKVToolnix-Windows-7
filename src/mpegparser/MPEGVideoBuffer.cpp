@@ -24,7 +24,6 @@
 
 #include "MPEGVideoBuffer.h"
 #include <cstring>
-#include <stddef.h>
 
 MPEG2SequenceHeader::MPEG2SequenceHeader() {
   memset(this, 0, sizeof(*this));

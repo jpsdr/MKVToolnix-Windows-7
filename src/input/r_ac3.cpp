@@ -15,8 +15,6 @@
 
 #include <algorithm>
 
-#include <avilib.h>
-
 #include "common/codec.h"
 #include "common/error.h"
 #include "common/id3.h"
