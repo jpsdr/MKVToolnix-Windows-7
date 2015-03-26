@@ -15,6 +15,8 @@
 #ifndef MTX_COMMON_DTS_H
 #define MTX_COMMON_DTS_H
 
+#include "common/timecode.h"
+
 class bit_reader_c;
 
 namespace mtx { namespace dts {
@@ -210,21 +212,8 @@ struct header_t {
   std::vector<substream_asset_t> substream_assets;
 
 public:
-  inline int get_packet_length_in_core_samples() const {
-    // computes the length (in time, not size) of the packet in "samples".
-    int r = num_pcm_sample_blocks * 32;
-    if (frametype_e::termination == frametype)
-      r -= deficit_sample_count;
-
-    return r;
-  }
-
-  inline double get_packet_length_in_nanoseconds() const {
-    // computes the length (in time, not size) of the packet in "samples".
-    auto samples = get_packet_length_in_core_samples();
-
-    return static_cast<double>(samples) * 1000000000.0 / core_sampling_frequency;
-  }
+  uint64_t get_packet_length_in_core_samples() const;
+  timecode_c get_packet_length_in_nanoseconds() const;
 
   unsigned int get_total_num_audio_channels() const;
   void print() const;

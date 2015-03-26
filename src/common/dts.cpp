@@ -296,6 +296,27 @@ header_t::print()
            % (hd_type == hd_type_e::master_audio ? "master audio" : "high resolution") % hd_part_size);
 }
 
+uint64_t
+header_t::get_packet_length_in_core_samples()
+  const {
+  // computes the length (in time, not size) of the packet in "samples".
+  auto samples = static_cast<uint64_t>(num_pcm_sample_blocks) * 32;
+
+  if (frametype_e::termination == frametype)
+    samples -= std::min<uint64_t>(samples, deficit_sample_count);
+
+  return samples;
+}
+
+timecode_c
+header_t::get_packet_length_in_nanoseconds()
+  const {
+  // computes the length (in time, not size) of the packet in "samples".
+  auto samples = get_packet_length_in_core_samples();
+
+  return timecode_c::samples(samples, core_sampling_frequency);
+}
+
 unsigned int
 header_t::get_total_num_audio_channels()
   const {

@@ -108,7 +108,7 @@ dts_packetizer_c::set_headers() {
   set_codec_id(MKV_A_DTS);
   set_audio_sampling_freq((float)m_first_header.core_sampling_frequency);
   set_audio_channels(m_first_header.get_total_num_audio_channels());
-  set_track_default_duration(m_first_header.get_packet_length_in_nanoseconds());
+  set_track_default_duration(m_first_header.get_packet_length_in_nanoseconds().to_ns());
 
   generic_packetizer_c::set_headers();
 }
@@ -133,7 +133,7 @@ dts_packetizer_c::process_available_packets(bool flushing) {
     auto samples_in_packet = dtsheader.get_packet_length_in_core_samples();
     auto new_timecode      = m_timecode_calculator.get_next_timecode(samples_in_packet);
 
-    add_packet(std::make_shared<packet_t>(dts_packet, new_timecode.to_ns(), dtsheader.get_packet_length_in_nanoseconds()));
+    add_packet(std::make_shared<packet_t>(dts_packet, new_timecode.to_ns(), dtsheader.get_packet_length_in_nanoseconds().to_ns()));
   }
 }
 
