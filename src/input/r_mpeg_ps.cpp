@@ -805,6 +805,8 @@ mpeg_ps_reader_c::new_stream_a_dts(mpeg_ps_id_t id,
 
     buffer.add(packet.m_buffer->get_buffer(), packet.m_length);
   }
+
+  track->codec.set_specialization(track->dts_header.get_codec_specialization());
 }
 
 void

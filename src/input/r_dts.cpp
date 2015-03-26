@@ -60,6 +60,7 @@ dts_reader_c::dts_reader_c(const track_info_c &ti,
   , m_dts14_to_16(false)
   , m_swap_bytes(false)
   , m_debug{"dts|dts_reader"}
+  , m_codec{codec_c::look_up(codec_c::type_e::A_DTS)}
 {
   m_buf[0] = reinterpret_cast<unsigned short *>(m_af_buf->get_buffer());
   m_buf[1] = reinterpret_cast<unsigned short *>(m_af_buf->get_buffer() + READ_SIZE);
@@ -87,6 +88,8 @@ dts_reader_c::read_headers() {
     throw mtx::input::header_parsing_x();
 
   m_ti.m_id = 0;          // ID for this track.
+
+  m_codec.set_specialization(m_dtsheader.get_codec_specialization());
 
   show_demuxer_info();
 }
@@ -143,5 +146,5 @@ dts_reader_c::read(generic_packetizer_c *,
 void
 dts_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_DTS, "DTS"));
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_codec.get_name());
 }

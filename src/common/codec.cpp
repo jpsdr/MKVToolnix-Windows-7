@@ -17,6 +17,7 @@
 #include "common/mp4.h"
 
 std::vector<codec_c> codec_c::ms_codecs;
+std::unordered_map<codec_c::specialization_e, std::string> codec_c::ms_specialization_descriptions;
 
 void
 codec_c::initialize() {
@@ -70,6 +71,10 @@ codec_c::initialize() {
   ms_codecs.emplace_back("HDMV PGS",                type_e::S_HDMV_PGS,     track_subtitle, MKV_S_HDMV_PGS);
 
   ms_codecs.emplace_back("VobButton",               type_e::B_VOBBTN,       track_buttons,  "B_VOBBTN");
+
+  ms_specialization_descriptions.emplace(specialization_e::dts_hd_master_audio,    "DTS-HD Master Audio");
+  ms_specialization_descriptions.emplace(specialization_e::dts_hd_high_resolution, "DTS-HD High Resolution");
+  ms_specialization_descriptions.emplace(specialization_e::dts_express,            "DTS Express");
 }
 
 codec_c const
@@ -144,6 +149,18 @@ codec_c::matches(std::string const &fourcc_or_codec_id)
     return brng::find(m_fourccs, fourcc_c{fourcc_or_codec_id}) != m_fourccs.end();
 
   return false;
+}
+
+std::string const
+codec_c::get_name(std::string fallback)
+  const {
+  if (!valid())
+    return fallback;
+
+  if (specialization_e::none == m_specialization)
+    return m_name;
+
+  return ms_specialization_descriptions[m_specialization];
 }
 
 std::string const

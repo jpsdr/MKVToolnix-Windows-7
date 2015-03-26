@@ -358,6 +358,28 @@ kax_reader_c::verify_alac_audio_track(kax_track_t *t) {
   return false;
 }
 
+bool
+kax_reader_c::verify_dts_audio_track(kax_track_t *t) {
+  try {
+    mxinfo(boost::format("kax i am at %1%\n") % m_in->getFilePointer());
+    read_first_frames(t, 5);
+
+    byte_buffer_c buffer;
+    for (auto &frame : t->first_frames_data)
+      buffer.add(frame);
+
+    if (-1 == mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), t->dts_header))
+      return false;
+
+    t->codec.set_specialization(t->dts_header.get_codec_specialization());
+
+  } catch (...) {
+    return false;
+  }
+
+  return true;
+}
+
 #if defined(HAVE_FLAC_FORMAT_H)
 bool
 kax_reader_c::verify_flac_audio_track(kax_track_t *) {
@@ -425,6 +447,8 @@ kax_reader_c::verify_audio_track(kax_track_t *t) {
       is_ok = verify_flac_audio_track(t);
     else if (t->codec.is(codec_c::type_e::A_OPUS))
       is_ok = verify_opus_audio_track(t);
+    else if (t->codec.is(codec_c::type_e::A_DTS))
+      is_ok = verify_dts_audio_track(t);
   }
 
   if (!is_ok)
@@ -1128,7 +1152,7 @@ bool
 kax_reader_c::read_headers_internal() {
   // Elements for different levels
 
-  KaxCluster *cluster = nullptr;
+  auto cluster = std::unique_ptr<KaxCluster>{};
   try {
     m_es        = std::shared_ptr<EbmlStream>(new EbmlStream(*m_in));
     m_in_file   = kax_file_cptr(new kax_file_c(m_in));
@@ -1183,7 +1207,7 @@ kax_reader_c::read_headers_internal() {
         handle_seek_head(m_in.get(), l0, l1->GetElementPosition());
 
       else if (Is<KaxCluster>(l1))
-        cluster = static_cast<KaxCluster *>(l1);
+        cluster.reset(static_cast<KaxCluster *>(l1));
 
       else
         l1->SkipData(*m_es, EBML_CONTEXT(l1));
@@ -1245,14 +1269,12 @@ kax_reader_c::read_headers_internal() {
            % Y("This usually indicates a damaged file structure.") % Y("The file will not be processed further."));
   }
 
+  auto cluster_pos = cluster ? cluster->GetElementPosition() : m_in->get_size();
+  m_in->setFilePointer(cluster_pos, seek_beginning);
+
   verify_tracks();
 
-  if (cluster) {
-    m_in->setFilePointer(cluster->GetElementPosition(), seek_beginning);
-    delete cluster;
-
-  } else
-    m_in->setFilePointer(0, seek_end);
+  m_in->setFilePointer(cluster_pos, seek_beginning);
 
   return true;
 }
@@ -1465,25 +1487,8 @@ kax_reader_c::create_alac_audio_packetizer(kax_track_t *t,
 void
 kax_reader_c::create_dts_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
-  try {
-    read_first_frames(t, 5);
-
-    byte_buffer_c buffer;
-    for (auto &frame : t->first_frames_data)
-      buffer.add(frame);
-
-    mtx::dts::header_t dtsheader;
-    int position = mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), dtsheader);
-
-    if (-1 == position)
-      throw false;
-
-    set_track_packetizer(t, new dts_packetizer_c(this, nti, dtsheader));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
-
-  } catch (...) {
-    mxerror_tid(m_ti.m_fname, t->tnum, Y("Could not find valid DTS headers in this track's first frames.\n"));
-  }
+  set_track_packetizer(t, new dts_packetizer_c(this, nti, t->dts_header));
+  show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
 
 #if defined(HAVE_FLAC_FORMAT_H)
@@ -1736,6 +1741,9 @@ kax_reader_c::create_packetizer(int64_t tid) {
 
 void
 kax_reader_c::create_packetizers() {
+  mxinfo(boost::format("create pack at %1%\n") % m_in->getFilePointer());
+  m_in->save_pos();
+
   for (auto &track : m_tracks)
     create_packetizer(track->tnum);
 
@@ -1743,6 +1751,8 @@ kax_reader_c::create_packetizers() {
     g_segment_title     = m_title;
     g_segment_title_set = true;
   }
+
+  m_in->restore_pos();
 }
 
 void
@@ -1795,11 +1805,9 @@ kax_reader_c::read_first_frames(kax_track_t *t,
 
   std::map<int64_t, unsigned int> frames_by_track_id;
 
-  m_in->save_pos();
-
   try {
     while (true) {
-      KaxCluster *cluster = m_in_file->read_next_cluster();
+      auto cluster = std::unique_ptr<KaxCluster>{m_in_file->read_next_cluster()};
       if (!cluster)
         return;
 
@@ -1857,15 +1865,11 @@ kax_reader_c::read_first_frames(kax_track_t *t,
         }
       }
 
-      delete cluster;
-
       if (t->first_frames_data.size() >= num_wanted)
         break;
     }
   } catch (...) {
   }
-
-  m_in->restore_pos();
 }
 
 file_status_e

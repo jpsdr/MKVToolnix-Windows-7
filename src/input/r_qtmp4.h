@@ -212,7 +212,7 @@ class qtmp4_reader_c;
 struct qtmp4_demuxer_c {
   qtmp4_reader_c &m_reader;
 
-  bool ok, m_tables_updated;
+  bool ok{}, m_tables_updated{}, m_timecodes_calculated{};
 
   char type;
   uint32_t id, container_id;
@@ -267,8 +267,6 @@ struct qtmp4_demuxer_c {
 
   qtmp4_demuxer_c(qtmp4_reader_c &reader)
     : m_reader(reader)
-    , ok{}
-    , m_tables_updated{}
     , type{'?'}
     , id{0}
     , container_id{0}
@@ -335,6 +333,7 @@ struct qtmp4_demuxer_c {
 
   bool verify_audio_parameters();
   bool verify_alac_audio_parameters();
+  bool verify_dts_audio_parameters();
   bool verify_mp4a_audio_parameters();
 
   bool verify_video_parameters();

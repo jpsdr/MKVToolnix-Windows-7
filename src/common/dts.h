@@ -15,6 +15,7 @@
 #ifndef MTX_COMMON_DTS_H
 #define MTX_COMMON_DTS_H
 
+#include "common/codec.h"
 #include "common/timecode.h"
 
 class bit_reader_c;
@@ -225,6 +226,8 @@ public:
   timecode_c get_packet_length_in_nanoseconds() const;
 
   unsigned int get_total_num_audio_channels() const;
+  codec_c::specialization_e get_codec_specialization() const;
+
   void print() const;
 
   bool decode_core_header(unsigned char const *buf, size_t size, bool allow_no_exss_search = false);

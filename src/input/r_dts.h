@@ -30,6 +30,7 @@ private:
   mtx::dts::header_t m_dtsheader;
   bool m_dts14_to_16, m_swap_bytes;
   debugging_option_c m_debug;
+  codec_c m_codec;
 
 public:
   dts_reader_c(const track_info_c &ti, const mm_io_cptr &in);

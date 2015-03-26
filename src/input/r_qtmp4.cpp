@@ -327,9 +327,6 @@ qtmp4_reader_c::calculate_timecodes() {
     for (auto &dmx : m_demuxers)
       dmx->adjust_timecodes(-min_timecode);
 
-  for (auto &dmx : m_demuxers)
-    dmx->build_index();
-
   m_timecodes_calculated = true;
 }
 
@@ -1467,16 +1464,6 @@ qtmp4_reader_c::create_audio_packetizer_alac(qtmp4_demuxer_cptr &dmx) {
 
 bool
 qtmp4_reader_c::create_audio_packetizer_dts(qtmp4_demuxer_cptr &dmx) {
-  auto const bytes_to_read = 8192u;
-  auto buf                 = dmx->read_first_bytes(bytes_to_read);
-
-  if (!buf || (-1 == mtx::dts::find_header(buf->get_buffer(), bytes_to_read, dmx->m_dts_header, false))) {
-    mxwarn_tid(m_ti.m_fname, dmx->id, Y("No DTS header found in first frames; track will be skipped.\n"));
-    dmx->ok = false;
-
-    return false;
-  }
-
   dmx->ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, dmx->m_dts_header));
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 
@@ -1983,16 +1970,26 @@ qtmp4_demuxer_c::calculate_timecodes_variable_sample_size() {
 
 void
 qtmp4_demuxer_c::calculate_timecodes() {
+  if (m_timecodes_calculated)
+    return;
+
   if (0 != sample_size)
     calculate_timecodes_constant_sample_size();
   else
     calculate_timecodes_variable_sample_size();
+
+  build_index();
+
+  m_timecodes_calculated = true;
 }
 
 void
 qtmp4_demuxer_c::adjust_timecodes(int64_t delta) {
   for (auto &timecode : timecodes)
     timecode += delta;
+
+  for (auto &index : m_index)
+    index.timecode += delta;
 }
 
 int64_t
@@ -2260,7 +2257,7 @@ qtmp4_demuxer_c::read_first_bytes(int num_bytes) {
   if (!update_tables())
     return memory_cptr{};
 
-  m_reader.calculate_timecodes();
+  calculate_timecodes();
 
   auto buf       = memory_c::alloc(num_bytes);
   size_t buf_pos = 0;
@@ -2733,10 +2730,14 @@ qtmp4_demuxer_c::verify_audio_parameters() {
     return false;
   }
 
-  if (fourcc.equiv("MP4A"))
-    return verify_mp4a_audio_parameters();
-  if (fourcc.equiv("alac"))
+  if (fourcc.equiv("MP4A") && !verify_mp4a_audio_parameters())
+    return false;
+
+  if (codec.is(codec_c::type_e::A_ALAC))
     return verify_alac_audio_parameters();
+
+  if (codec.is(codec_c::type_e::A_DTS))
+    return verify_dts_audio_parameters();
 
   return true;
 }
@@ -2747,6 +2748,20 @@ qtmp4_demuxer_c::verify_alac_audio_parameters() {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n")) % id);
     return false;
   }
+
+  return true;
+}
+
+bool
+qtmp4_demuxer_c::verify_dts_audio_parameters() {
+  auto buf = read_first_bytes(16384);
+
+  if (!buf || (-1 == mtx::dts::find_header(buf->get_buffer(), buf->get_size(), m_dts_header, false))) {
+    mxwarn_tid(m_reader.m_ti.m_fname, id, Y("No DTS header found in first frames; track will be skipped.\n"));
+    return false;
+  }
+
+  codec.set_specialization(m_dts_header.get_codec_specialization());
 
   return true;
 }

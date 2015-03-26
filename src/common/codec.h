@@ -19,6 +19,7 @@
 #include <ostream>
 
 #include "common/fourcc.h"
+#include "common/hash.h"
 #include "matroska/c/libmatroska_t.h"
 
 // see http://www.matroska.org/technical/specs/codecid/index.html
@@ -138,21 +139,29 @@ public:
     , B_VOBBTN = 0x4000
   };
 
+  enum class specialization_e {
+      none
+
+    , dts_hd_master_audio
+    , dts_hd_high_resolution
+    , dts_express
+  };
+
 private:
   static std::vector<codec_c> ms_codecs;
+  static std::unordered_map<specialization_e, std::string> ms_specialization_descriptions;
 
 protected:
   boost::regex m_match_re;
   std::string m_name;
-  type_e m_type;
-  track_type m_track_type;
+  type_e m_type{type_e::UNKNOWN};
+  specialization_e m_specialization{specialization_e::none};
+  track_type m_track_type{static_cast<track_type>(0)};
   std::vector<uint16_t> m_audio_formats;
   std::vector<fourcc_c> m_fourccs;
 
 public:
   codec_c()
-    : m_type{type_e::UNKNOWN}
-    , m_track_type{static_cast<track_type>(0)}
   {
   }
 
@@ -207,18 +216,23 @@ public:
     return type == m_type;
   }
 
-  std::string const get_name(std::string fallback = "") const {
-    if (!valid())
-      return fallback;
-    return m_name;
-  }
+  std::string const get_name(std::string fallback = "") const;
 
   type_e get_type() const {
     return m_type;
   }
 
+  specialization_e get_specialization() const {
+    return m_specialization;
+  }
+
   track_type get_track_type() const {
     return m_track_type;
+  }
+
+  codec_c &set_specialization(specialization_e specialization) {
+    m_specialization = specialization;
+    return *this;
   }
 
 private:

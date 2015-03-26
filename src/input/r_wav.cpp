@@ -320,6 +320,8 @@ wav_dts_demuxer_c::probe(mm_io_cptr &io) {
       if (0 > mtx::dts::find_header(m_buf[m_cur_buf]->get_buffer() + pos, len - pos, m_dtsheader))
         return false;
 
+      m_codec.set_specialization(m_dtsheader.get_codec_specialization());
+
       mxverb(3, boost::format("DTSinWAV: 14->16 %1% swap %2%\n") % m_pack_14_16 % m_swap_bytes);
       return true;
     }

@@ -19,6 +19,7 @@
 
 #include "common/codec.h"
 #include "common/content_decoder.h"
+#include "common/dts.h"
 #include "common/error.h"
 #include "common/kax_file.h"
 #include "common/mm_io.h"
@@ -91,6 +92,8 @@ struct kax_track_t {
   bool ignore_duration_hack;
 
   std::vector<memory_cptr> first_frames_data;
+
+  mtx::dts::header_t dts_header;
 
   kax_track_t()
     : tnum(0)
@@ -228,6 +231,7 @@ protected:
 
   virtual bool verify_acm_audio_track(kax_track_t *t);
   virtual bool verify_alac_audio_track(kax_track_t *t);
+  virtual bool verify_dts_audio_track(kax_track_t *t);
   virtual bool verify_flac_audio_track(kax_track_t *t);
   virtual bool verify_opus_audio_track(kax_track_t *t);
   virtual bool verify_vorbis_audio_track(kax_track_t *t);

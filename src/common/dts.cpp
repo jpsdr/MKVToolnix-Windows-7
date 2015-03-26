@@ -347,6 +347,15 @@ header_t::get_total_num_audio_channels()
   return total_num_audio_channels;
 }
 
+codec_c::specialization_e
+header_t::get_codec_specialization()
+  const {
+  return dts_type_e::master_audio    == dts_type ? codec_c::specialization_e::dts_hd_master_audio
+       : dts_type_e::high_resolution == dts_type ? codec_c::specialization_e::dts_hd_high_resolution
+       : dts_type_e::express         == dts_type ? codec_c::specialization_e::dts_express
+       :                                           codec_c::specialization_e::none;
+}
+
 bool
 header_t::set_one_extension_offset(substream_asset_t &asset,
                                    extension_mask_e wanted_mask,
