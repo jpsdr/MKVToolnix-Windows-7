@@ -90,11 +90,11 @@ dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
 
   if (   m_reduce_to_core
       && dtsheader.has_core
-      && dtsheader.has_hd
-      && (dtsheader.hd_part_size > 0)
-      && (dtsheader.hd_part_size < static_cast<int>(dtsheader.frame_byte_size))) {
-    dtsheader.frame_byte_size -= dtsheader.hd_part_size;
-    dtsheader.has_hd           = false;
+      && dtsheader.has_exss
+      && (dtsheader.exss_part_size > 0)
+      && (dtsheader.exss_part_size < static_cast<int>(dtsheader.frame_byte_size))) {
+    dtsheader.frame_byte_size -= dtsheader.exss_part_size;
+    dtsheader.has_exss         = false;
   }
 
   auto packet_buf = memory_c::clone(buf + pos, dtsheader.frame_byte_size);

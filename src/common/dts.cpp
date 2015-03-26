@@ -101,7 +101,7 @@ static int
 find_header_internal(unsigned char const *buf,
                      size_t size,
                      header_t &header,
-                     bool allow_no_hd_search) {
+                     bool allow_no_exss_search) {
   if (15 > size)
     // not enough data for one header
     return -1;
@@ -115,7 +115,7 @@ find_header_internal(unsigned char const *buf,
   auto sync_word = static_cast<sync_word_e>(get_uint32_be(&buf[offset]));
 
   if (sync_word == sync_word_e::core) {
-    if (!header.decode_core_header(&buf[offset], size - offset, allow_no_hd_search))
+    if (!header.decode_core_header(&buf[offset], size - offset, allow_no_exss_search))
       return -1;
 
   } else if (sync_word == sync_word_e::exss) {
@@ -130,9 +130,9 @@ int
 find_header(unsigned char const *buf,
             size_t size,
             header_t &header,
-            bool allow_no_hd_search) {
+            bool allow_no_exss_search) {
   try {
-    return find_header_internal(buf, size, header, allow_no_hd_search);
+    return find_header_internal(buf, size, header, allow_no_exss_search);
   } catch (...) {
     mxwarn(Y("Header problem: not enough data to read header\n"));
     return -1;
@@ -283,11 +283,16 @@ header_t::print()
   mxinfo(boost::format("Surr. Encoded as Diff. : %1%\n") % (surround_sum_difference ? "yes" : "no"));
   mxinfo(boost::format("Dialog Normaliz. Gain  : %1%\n") % dialog_normalization_gain);
 
-  if (!has_hd)
-    mxinfo("DTS HD                 : no\n");
-  else
-    mxinfo(boost::format("DTS HD                 : %1%, size %2%\n")
-           % (hd_type == hd_type_e::master_audio ? "master audio" : "high resolution") % hd_part_size);
+  if (!has_exss)
+    mxinfo("Extension substream    : no\n");
+  else {
+    auto type_str = dts_type_e::master_audio    == dts_type ? "master audio"
+                  : dts_type_e::high_resolution == dts_type ? "high resolution"
+                  : dts_type_e::express         == dts_type ? "express"
+                  :                                           "unknown";
+
+    mxinfo(boost::format("Extension substream    : %1%, size %2%\n\n") % type_str % exss_part_size);
+  }
 }
 
 uint64_t
@@ -332,7 +337,7 @@ header_t::get_packet_length_in_nanoseconds()
 unsigned int
 header_t::get_total_num_audio_channels()
   const {
-  if (has_hd && (0 < num_assets) && substream_assets[0].num_channels_total)
+  if (has_exss && (0 < num_assets) && substream_assets[0].num_channels_total)
     return substream_assets[0].num_channels_total;
 
   auto total_num_audio_channels = audio_channels;
@@ -379,7 +384,7 @@ header_t::set_extension_offsets(substream_asset_t &asset) {
 bool
 header_t::decode_core_header(unsigned char const *buf,
                              size_t size,
-                             bool allow_no_hd_search) {
+                             bool allow_no_exss_search) {
   try {
     auto bc = bit_reader_c{buf, size};
     bc.skip_bits(32);             // sync word
@@ -470,17 +475,17 @@ header_t::decode_core_header(unsigned char const *buf,
     has_core                  = true;
 
     // Detect DTS HD master audio / high resolution part
-    has_hd         = false;
-    hd_type        = hd_type_e::none;
-    hd_part_size   = 0;
+    has_exss         = false;
+    exss_part_size   = 0;
+    dts_type         = dts_type_e::normal;
 
-    auto hd_offset = frame_byte_size;
+    auto exss_offset = frame_byte_size;
 
-    if ((hd_offset + 9) > size)
-      return allow_no_hd_search ? true : false;
+    if ((exss_offset + 9) > size)
+      return allow_no_exss_search ? true : false;
 
-    if (static_cast<sync_word_e>(get_uint32_be(buf + hd_offset)) == sync_word_e::exss)
-      return decode_exss_header(&buf[hd_offset], size - hd_offset);
+    if (static_cast<sync_word_e>(get_uint32_be(buf + exss_offset)) == sync_word_e::exss)
+      return decode_exss_header(&buf[exss_offset], size - exss_offset);
 
     return true;
 
@@ -695,10 +700,13 @@ header_t::decode_asset(bit_reader_c &bc,
     return false;
 
   if (asset.extension_mask & exss_xll)
-    hd_type = hd_type_e::master_audio;
+    dts_type = dts_type_e::master_audio;
 
   else if (asset.extension_mask & (exss_xbr | exss_x96 | exss_xxch))
-    hd_type = hd_type_e::high_resolution;
+    dts_type = dts_type_e::high_resolution;
+
+  else if (asset.extension_mask & exss_lbr)
+    dts_type = dts_type_e::express;
 
   bc.set_bit_position(descriptor_pos + (descriptor_size * 8));
 
@@ -723,15 +731,15 @@ header_t::decode_exss_header(unsigned char const *buf,
       substream_size_bits = 20;
     }
 
-    auto header_size = bc.get_bits(header_size_bits)    + 1; // header size
-    hd_part_size     = bc.get_bits(substream_size_bits) + 1; // extension substream size
-    frame_byte_size += hd_part_size;
-    has_hd           = true;
+    auto header_size           = bc.get_bits(header_size_bits)    + 1; // header size
+    exss_part_size             = bc.get_bits(substream_size_bits) + 1; // extension substream size
+    frame_byte_size           += exss_part_size;
+    has_exss                   = true;
 
-    num_presentations         = 1u;
-    num_assets                = 1u;
-    num_mixing_configurations = 0u;
-    static_fields_present     = bc.get_bit();
+    num_presentations          = 1u;
+    num_assets                 = 1u;
+    num_mixing_configurations  = 0u;
+    static_fields_present      = bc.get_bit();
 
     if (static_fields_present) {
       reference_clock_code     = bc.get_bits(2);             // reference clock code
@@ -888,30 +896,30 @@ operator ==(const header_t &h1,
 bool
 operator!=(header_t const &h1,
            header_t const &h2) {
-  if (   (h1.crc_present                         != h2.crc_present)
-      || (h1.num_pcm_sample_blocks               != h2.num_pcm_sample_blocks)
-      || ((h1.frame_byte_size - h1.hd_part_size) != (h2.frame_byte_size - h2.hd_part_size))
-      || (h1.audio_channels                      != h2.audio_channels)
-      || (h1.core_sampling_frequency             != h2.core_sampling_frequency)
-      || (h1.transmission_bitrate                != h2.transmission_bitrate)
-      || (h1.embedded_down_mix                   != h2.embedded_down_mix)
-      || (h1.embedded_dynamic_range              != h2.embedded_dynamic_range)
-      || (h1.embedded_time_stamp                 != h2.embedded_time_stamp)
-      || (h1.auxiliary_data                      != h2.auxiliary_data)
-      || (h1.hdcd_master                         != h2.hdcd_master)
-      || (h1.extension_audio_descriptor          != h2.extension_audio_descriptor)
-      || (h1.extended_coding                     != h2.extended_coding)
-      || (h1.audio_sync_word_in_sub_sub          != h2.audio_sync_word_in_sub_sub)
-      || (h1.lfe_type                            != h2.lfe_type)
-      || (h1.predictor_history_flag              != h2.predictor_history_flag)
-      || (h1.multirate_interpolator              != h2.multirate_interpolator)
-      || (h1.encoder_software_revision           != h2.encoder_software_revision)
-      || (h1.copy_history                        != h2.copy_history)
-      || (h1.source_pcm_resolution               != h2.source_pcm_resolution)
-      || (h1.source_surround_in_es               != h2.source_surround_in_es)
-      || (h1.front_sum_difference                != h2.front_sum_difference)
-      || (h1.surround_sum_difference             != h2.surround_sum_difference)
-      || (h1.dialog_normalization_gain           != h2.dialog_normalization_gain))
+  if (   (h1.crc_present                           != h2.crc_present)
+      || (h1.num_pcm_sample_blocks                 != h2.num_pcm_sample_blocks)
+      || ((h1.frame_byte_size - h1.exss_part_size) != (h2.frame_byte_size - h2.exss_part_size))
+      || (h1.audio_channels                        != h2.audio_channels)
+      || (h1.core_sampling_frequency               != h2.core_sampling_frequency)
+      || (h1.transmission_bitrate                  != h2.transmission_bitrate)
+      || (h1.embedded_down_mix                     != h2.embedded_down_mix)
+      || (h1.embedded_dynamic_range                != h2.embedded_dynamic_range)
+      || (h1.embedded_time_stamp                   != h2.embedded_time_stamp)
+      || (h1.auxiliary_data                        != h2.auxiliary_data)
+      || (h1.hdcd_master                           != h2.hdcd_master)
+      || (h1.extension_audio_descriptor            != h2.extension_audio_descriptor)
+      || (h1.extended_coding                       != h2.extended_coding)
+      || (h1.audio_sync_word_in_sub_sub            != h2.audio_sync_word_in_sub_sub)
+      || (h1.lfe_type                              != h2.lfe_type)
+      || (h1.predictor_history_flag                != h2.predictor_history_flag)
+      || (h1.multirate_interpolator                != h2.multirate_interpolator)
+      || (h1.encoder_software_revision             != h2.encoder_software_revision)
+      || (h1.copy_history                          != h2.copy_history)
+      || (h1.source_pcm_resolution                 != h2.source_pcm_resolution)
+      || (h1.source_surround_in_es                 != h2.source_surround_in_es)
+      || (h1.front_sum_difference                  != h2.front_sum_difference)
+      || (h1.surround_sum_difference               != h2.surround_sum_difference)
+      || (h1.dialog_normalization_gain             != h2.dialog_normalization_gain))
     return true;
 
   return false;

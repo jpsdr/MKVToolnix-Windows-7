@@ -72,10 +72,11 @@ enum class multirate_interpolator_e {
   , perfect
 };
 
-enum class hd_type_e {
-    none
+enum class dts_type_e {
+    normal
   , high_resolution
   , master_audio
+  , express
 };
 
 enum class source_pcm_resolution_e {
@@ -183,9 +184,10 @@ struct header_t {
   // gain in dB to apply for dialog normalization
   int dialog_normalization_gain{};
 
-  bool has_core{}, has_hd{};
-  hd_type_e hd_type{ hd_type_e::none };
-  int hd_part_size{};
+  bool has_core{}, has_exss{};
+  int exss_part_size{};
+
+  dts_type_e dts_type{ dts_type_e::normal };
 
   bool static_fields_present{}, mix_metadata_enabled{};
   unsigned int reference_clock_code{}, substream_frame_duration{};
@@ -225,7 +227,7 @@ public:
   unsigned int get_total_num_audio_channels() const;
   void print() const;
 
-  bool decode_core_header(unsigned char const *buf, size_t size, bool allow_no_hd_search = false);
+  bool decode_core_header(unsigned char const *buf, size_t size, bool allow_no_exss_search = false);
   bool decode_exss_header(unsigned char const *buf, size_t size);
 
 protected:
@@ -239,7 +241,7 @@ protected:
 };
 
 int find_sync_word(unsigned char const *buf, size_t size);
-int find_header(unsigned char const *buf, size_t size, header_t &header, bool allow_no_hd_search = false);
+int find_header(unsigned char const *buf, size_t size, header_t &header, bool allow_no_exss_search = false);
 int find_consecutive_headers(unsigned char const *buf, size_t size, unsigned int num);
 
 bool operator ==(header_t const &h1, header_t const &h2);
