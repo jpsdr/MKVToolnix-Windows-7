@@ -82,15 +82,15 @@ find_sync_word(unsigned char const *buf,
     return -1;
 
   unsigned int offset = 0;
-  uint32_t sync_word  = get_uint32_be(buf);
+  auto sync_word      = static_cast<sync_word_e>(get_uint32_be(buf));
   auto sync_word_ok   = false;
 
   while ((offset + 4) < size) {
-    sync_word_ok = (sync_word_e::core == static_cast<sync_word_e>(sync_word)) || (sync_word_e::hd == static_cast<sync_word_e>(sync_word));
+    sync_word_ok = (sync_word_e::core == sync_word) || (sync_word_e::exss == sync_word);
     if (sync_word_ok)
       break;
 
-    sync_word = (sync_word << 8) | buf[offset + 4];
+    sync_word = static_cast<sync_word_e>((static_cast<uint32_t>(sync_word) << 8) | buf[offset + 4]);
     ++offset;
   }
 
@@ -118,16 +118,10 @@ find_header_internal(unsigned char const *buf,
     if (!header.decode_core_header(&buf[offset], size - offset, allow_no_hd_search))
       return -1;
 
-  } else if (sync_word == sync_word_e::hd) {
-    if (!header.decode_hd_header(&buf[offset], size - offset))
+  } else if (sync_word == sync_word_e::exss) {
+    if (!header.decode_exss_header(&buf[offset], size - offset))
       return -1;
   }
-
-  // DTS streams without a core (aka DTS Express) is currently not
-  // supported as there's no way to determine the number of samples in
-  // HD-only packets.
-  if (!header.has_core)
-    return -1;
 
   return offset;
 }
@@ -299,22 +293,40 @@ header_t::print()
 uint64_t
 header_t::get_packet_length_in_core_samples()
   const {
-  // computes the length (in time, not size) of the packet in "samples".
-  auto samples = static_cast<uint64_t>(num_pcm_sample_blocks) * 32;
+  if (has_core) {
+    // computes the length (in time, not size) of the packet in "samples".
+    auto samples = static_cast<uint64_t>(num_pcm_sample_blocks) * 32;
 
-  if (frametype_e::termination == frametype)
-    samples -= std::min<uint64_t>(samples, deficit_sample_count);
+    if (frametype_e::termination == frametype)
+      samples -= std::min<uint64_t>(samples, deficit_sample_count);
 
-  return samples;
+    return samples;
+  }
+
+  auto duration = get_packet_length_in_nanoseconds();
+
+  if (!core_sampling_frequency || !duration.valid())
+    return 0;
+
+  return duration.to_samples(core_sampling_frequency);
 }
 
 timecode_c
 header_t::get_packet_length_in_nanoseconds()
   const {
-  // computes the length (in time, not size) of the packet in "samples".
-  auto samples = get_packet_length_in_core_samples();
+  if (has_core) {
+    // computes the length (in time, not size) of the packet in "samples".
+    auto samples = get_packet_length_in_core_samples();
 
-  return timecode_c::samples(samples, core_sampling_frequency);
+    return timecode_c::samples(samples, core_sampling_frequency);
+  }
+
+  static const unsigned int s_reference_clock_periods[3] = { 32000, 44100, 48000 };
+
+  if (reference_clock_code < 3)
+    return timecode_c::samples(substream_frame_duration, s_reference_clock_periods[reference_clock_code]);
+
+  return timecode_c{};
 }
 
 unsigned int
@@ -328,6 +340,40 @@ header_t::get_total_num_audio_channels()
     ++total_num_audio_channels;
 
   return total_num_audio_channels;
+}
+
+bool
+header_t::set_one_extension_offset(substream_asset_t &asset,
+                                   extension_mask_e wanted_mask,
+                                   size_t &offset,
+                                   size_t &size,
+                                   size_t &offset_in_asset,
+                                   size_t size_in_asset) {
+  if (!(asset.extension_mask & wanted_mask))
+    return true;
+
+  if ((offset & 3) || (size_in_asset > size))
+    return false;
+
+  offset_in_asset  = offset;
+  offset          += size_in_asset;
+  size            -= size_in_asset;
+
+  return true;
+}
+
+bool
+header_t::set_extension_offsets(substream_asset_t &asset) {
+  auto offset = asset.asset_offset;
+  auto size   = asset.asset_size;
+  auto result = set_one_extension_offset(asset, exss_core, offset, size, asset.core_offset, asset.core_size)
+             && set_one_extension_offset(asset, exss_xbr,  offset, size, asset.xbr_offset,  asset.xbr_size)
+             && set_one_extension_offset(asset, exss_xxch, offset, size, asset.xxch_offset, asset.xxch_size)
+             && set_one_extension_offset(asset, exss_x96,  offset, size, asset.x96_offset,  asset.x96_size)
+             && set_one_extension_offset(asset, exss_lbr,  offset, size, asset.lbr_offset,  asset.lbr_size)
+             && set_one_extension_offset(asset, exss_xll,  offset, size, asset.xll_offset,  asset.xll_size);
+
+  return result;
 }
 
 bool
@@ -433,8 +479,8 @@ header_t::decode_core_header(unsigned char const *buf,
     if ((hd_offset + 9) > size)
       return allow_no_hd_search ? true : false;
 
-    if (static_cast<sync_word_e>(get_uint32_be(buf + hd_offset)) == sync_word_e::hd)
-      return decode_hd_header(&buf[hd_offset], size - hd_offset);
+    if (static_cast<sync_word_e>(get_uint32_be(buf + hd_offset)) == sync_word_e::exss)
+      return decode_exss_header(&buf[hd_offset], size - hd_offset);
 
     return true;
 
@@ -468,6 +514,28 @@ header_t::parse_xll_parameters(bit_reader_c &bc,
     asset.xll_delay_num_frames = 0;
     asset.xll_sync_offset      = 0;
   }
+}
+
+bool
+header_t::decode_lbr_header(bit_reader_c &bc,
+                            substream_asset_t &asset) {
+  static const unsigned int s_lbr_sampling_frequencies[16] = {
+    8000, 16000, 32000, 0,     0,     22050, 44100, 0,
+    0,    0,     12000, 24000, 48000, 0,     0,     0,
+  };
+
+  bc.set_bit_position(asset.lbr_offset * 8);
+  if (bc.get_bits(32) != static_cast<uint32_t>(sync_word_e::lbr))
+    return false;
+
+  auto format_info_code = static_cast<lbr_format_info_code_e>(bc.get_bits(8));
+  if (format_info_code == lbr_format_info_code_e::decoder_init) {
+    core_sampling_frequency = s_lbr_sampling_frequencies[ bc.get_bits(8) & 0x0f ];
+
+  } else if (format_info_code != lbr_format_info_code_e::sync_only)
+    return false;
+
+  return true;
 }
 
 bool
@@ -617,11 +685,19 @@ header_t::decode_asset(bit_reader_c &bc,
       break;
   }
 
-  if (asset.extension_mask & exss_xll) {
+  if (asset.extension_mask & exss_xll)
     asset.hd_stream_id = bc.get_bits(3);
+
+  if (!set_extension_offsets(asset))
+    return false;
+
+  if ((asset.extension_mask & exss_lbr) && !decode_lbr_header(bc, asset))
+    return false;
+
+  if (asset.extension_mask & exss_xll)
     hd_type = hd_type_e::master_audio;
 
-  } else if (asset.extension_mask & (exss_xbr | exss_x96 | exss_xxch))
+  else if (asset.extension_mask & (exss_xbr | exss_x96 | exss_xxch))
     hd_type = hd_type_e::high_resolution;
 
   bc.set_bit_position(descriptor_pos + (descriptor_size * 8));
@@ -632,8 +708,8 @@ header_t::decode_asset(bit_reader_c &bc,
 #undef test_mask
 
 bool
-header_t::decode_hd_header(unsigned char const *buf,
-                           size_t size) {
+header_t::decode_exss_header(unsigned char const *buf,
+                             size_t size) {
   try {
     auto bc = bit_reader_c{buf, size};
     bc.skip_bits(32);             // sync word
@@ -647,7 +723,7 @@ header_t::decode_hd_header(unsigned char const *buf,
       substream_size_bits = 20;
     }
 
-    bc.skip_bits(header_size_bits);                          // header size
+    auto header_size = bc.get_bits(header_size_bits)    + 1; // header size
     hd_part_size     = bc.get_bits(substream_size_bits) + 1; // extension substream size
     frame_byte_size += hd_part_size;
     has_hd           = true;
@@ -658,10 +734,10 @@ header_t::decode_hd_header(unsigned char const *buf,
     static_fields_present     = bc.get_bit();
 
     if (static_fields_present) {
-      bc.skip_bits(2);            // reference clock code
-      bc.skip_bits(3);            // substream frame duration
-      if (bc.get_bit())           // timecode presence flag
-        bc.skip_bits(32 + 4);     // timecode data
+      reference_clock_code     = bc.get_bits(2);             // reference clock code
+      substream_frame_duration = (bc.get_bits(3) + 1) * 512; // substream frame duration
+      if (bc.get_bit())                                      // timecode presence flag
+        bc.skip_bits(32 + 4);                                // timecode data
 
       num_presentations = bc.get_bits(3) + 1;
       num_assets        = bc.get_bits(3) + 1;
@@ -688,7 +764,7 @@ header_t::decode_hd_header(unsigned char const *buf,
 
     substream_assets.resize(num_assets);
 
-    auto offset = header_size_bits;
+    auto offset = header_size;
     for (auto asset_idx = 0u; asset_idx < num_assets; ++asset_idx) {
       auto &asset         = substream_assets[asset_idx];
       asset.asset_offset  = offset;

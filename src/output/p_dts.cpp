@@ -17,6 +17,7 @@
 #include "common/codec.h"
 #include "common/dts.h"
 #include "merge/connection_checks.h"
+#include "merge/output_control.h"
 #include "output/p_dts.h"
 
 using namespace libmatroska;
@@ -106,7 +107,7 @@ dts_packetizer_c::get_dts_packet(mtx::dts::header_t &dtsheader,
 void
 dts_packetizer_c::set_headers() {
   set_codec_id(MKV_A_DTS);
-  set_audio_sampling_freq((float)m_first_header.core_sampling_frequency);
+  set_audio_sampling_freq(m_first_header.core_sampling_frequency);
   set_audio_channels(m_first_header.get_total_num_audio_channels());
   set_track_default_duration(m_first_header.get_packet_length_in_nanoseconds().to_ns());
 
@@ -119,27 +120,50 @@ dts_packetizer_c::process(packet_cptr packet) {
 
   m_packet_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
-  process_available_packets(false);
+  queue_available_packets(false);
+  process_available_packets();
 
   return FILE_STATUS_MOREDATA;
 }
 
 void
-dts_packetizer_c::process_available_packets(bool flushing) {
+dts_packetizer_c::queue_available_packets(bool flushing) {
   mtx::dts::header_t dtsheader;
   memory_cptr dts_packet;
 
   while ((dts_packet = get_dts_packet(dtsheader, flushing))) {
-    auto samples_in_packet = dtsheader.get_packet_length_in_core_samples();
-    auto new_timecode      = m_timecode_calculator.get_next_timecode(samples_in_packet);
+    m_queued_packets.emplace_back(std::make_pair(dtsheader, dts_packet));
 
-    add_packet(std::make_shared<packet_t>(dts_packet, new_timecode.to_ns(), dtsheader.get_packet_length_in_nanoseconds().to_ns()));
+    if (!m_first_header.core_sampling_frequency && dtsheader.core_sampling_frequency) {
+      m_first_header.core_sampling_frequency = dtsheader.core_sampling_frequency;
+      m_timecode_calculator                  = timecode_calculator_c{static_cast<int64_t>(m_first_header.core_sampling_frequency)};
+
+      set_audio_sampling_freq(m_first_header.core_sampling_frequency);
+
+      rerender_track_headers();
+    }
   }
 }
 
 void
+dts_packetizer_c::process_available_packets() {
+  if (!m_first_header.core_sampling_frequency)
+    return;
+
+  for (auto const &header_and_packet : m_queued_packets) {
+    auto samples_in_packet = header_and_packet.first.get_packet_length_in_core_samples();
+    auto new_timecode      = m_timecode_calculator.get_next_timecode(samples_in_packet);
+
+    add_packet(std::make_shared<packet_t>(header_and_packet.second, new_timecode.to_ns(), header_and_packet.first.get_packet_length_in_nanoseconds().to_ns()));
+  }
+
+  m_queued_packets.clear();
+}
+
+void
 dts_packetizer_c::flush_impl() {
-  process_available_packets(true);
+  queue_available_packets(true);
+  process_available_packets();
 }
 
 connection_result_e

@@ -23,7 +23,8 @@ namespace mtx { namespace dts {
 
 enum class sync_word_e {
     core = 0x7ffe8001
-  , hd   = 0x64582025
+  , exss = 0x64582025
+  , lbr  = 0x0a801921
 };
 
 enum class frametype_e {
@@ -86,6 +87,11 @@ enum class source_pcm_resolution_e {
   , spr_24_ES
   , spr_24
   , spr_invalid7
+};
+
+enum class lbr_format_info_code_e {
+    sync_only    = 1
+  , decoder_init = 2
 };
 
 static const int64_t max_packet_size = 15384;
@@ -182,6 +188,7 @@ struct header_t {
   int hd_part_size{};
 
   bool static_fields_present{}, mix_metadata_enabled{};
+  unsigned int reference_clock_code{}, substream_frame_duration{};
   unsigned int substream_size_bits{}, num_presentations{1}, num_assets{1}, num_mixing_configurations{};
   unsigned int num_mixing_channels[5];
 
@@ -196,11 +203,11 @@ struct header_t {
     extension_mask_e extension_mask{};
 
     size_t core_offset{}, core_size{};
-    size_t xbr_offset{}, xbr_size{};
+    size_t xbr_offset{},  xbr_size{};
     size_t xxch_offset{}, xxch_size{};
-    size_t x96_offset{}, x96_size{};
-    size_t lbr_offset{}, lbr_size{};
-    size_t xll_offset{}, xll_size{};
+    size_t x96_offset{},  x96_size{};
+    size_t lbr_offset{},  lbr_size{};
+    size_t xll_offset{},  xll_size{};
 
     bool xll_sync_present{};
     int xll_delay_num_frames{};
@@ -219,12 +226,16 @@ public:
   void print() const;
 
   bool decode_core_header(unsigned char const *buf, size_t size, bool allow_no_hd_search = false);
-  bool decode_hd_header(unsigned char const *buf, size_t size);
+  bool decode_exss_header(unsigned char const *buf, size_t size);
 
 protected:
   bool decode_asset(bit_reader_c &bc, substream_asset_t &asset);
+  bool decode_lbr_header(bit_reader_c &bc, substream_asset_t &asset);
   void parse_lbr_parameters(bit_reader_c &bc, substream_asset_t &asset);
   void parse_xll_parameters(bit_reader_c &bc, substream_asset_t &asset);
+
+  bool set_one_extension_offset(substream_asset_t &asset, extension_mask_e wanted_mask, size_t &offset, size_t &size, size_t &offset_in_asset, size_t size_in_asset);
+  bool set_extension_offsets(substream_asset_t &asset);
 };
 
 int find_sync_word(unsigned char const *buf, size_t size);
