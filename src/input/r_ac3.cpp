@@ -115,7 +115,7 @@ ac3_reader_c::read(generic_packetizer_c *,
 void
 ac3_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::A_AC3, "AC3"));
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AC3, "AC3"));
 }
 
 int

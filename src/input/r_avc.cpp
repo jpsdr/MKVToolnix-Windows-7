@@ -139,5 +139,5 @@ avc_es_reader_c::read(generic_packetizer_c *,
 void
 avc_es_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::V_MPEG4_P10, "MPEG-4 part 10 ES"), "packetizer:mpeg4_p10_es_video");
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEG4_P10, "MPEG-4 part 10 ES"), "packetizer:mpeg4_p10_es_video");
 }

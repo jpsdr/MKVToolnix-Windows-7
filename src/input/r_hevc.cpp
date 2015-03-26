@@ -136,5 +136,5 @@ hevc_es_reader_c::read(generic_packetizer_c *,
 void
 hevc_es_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::V_MPEGH_P2, "HEVC"), "packetizer:mpegh_p2_es_video");
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEGH_P2, "HEVC"), "packetizer:mpegh_p2_es_video");
 }

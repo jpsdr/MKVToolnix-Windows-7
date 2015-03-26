@@ -200,7 +200,7 @@ ogm_a_flac_demuxer_c::ogm_a_flac_demuxer_c(ogm_reader_c *p_reader,
   , bits_per_sample(0)
   , mode(p_mode)
 {
-  codec = codec_c::look_up(codec_c::A_FLAC);
+  codec = codec_c::look_up(codec_c::type_e::A_FLAC);
 }
 
 void

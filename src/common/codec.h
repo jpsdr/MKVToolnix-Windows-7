@@ -86,7 +86,7 @@
 
 class codec_c {
 public:
-  enum type_e {
+  enum class type_e {
       UNKNOWN  = 0
     , V_BITFIELDS = 0x1000
     , V_CINEPAK
@@ -107,36 +107,36 @@ public:
     , V_VP9
 
     , A_AAC = 0x2000
-    , A_AC3
-    , A_ALAC
-    , A_DTS
-    , A_MP2
-    , A_MP3
-    , A_PCM
-    , A_VORBIS
-    , A_OPUS
-    , A_QDMC
-    , A_FLAC
-    , A_MLP
-    , A_TRUEHD
-    , A_TTA
-    , A_WAVPACK4
-    , A_COOK
-    , A_ACELP_NET
-    , A_ATRAC3
-    , A_RALF
-    , A_VSELP
-    , A_LD_CELP
+   , A_AC3
+   , A_ALAC
+   , A_DTS
+   , A_MP2
+   , A_MP3
+   , A_PCM
+   , A_VORBIS
+   , A_OPUS
+   , A_QDMC
+   , A_FLAC
+   , A_MLP
+   , A_TRUEHD
+   , A_TTA
+   , A_WAVPACK4
+   , A_COOK
+   , A_ACELP_NET
+   , A_ATRAC3
+   , A_RALF
+   , A_VSELP
+   , A_LD_CELP
 
-    , S_SRT = 0x3000
-    , S_SSA_ASS
-    , S_USF
-    , S_VOBSUB
-    , S_KATE
-    , S_HDMV_PGS
+   , S_SRT = 0x3000
+   , S_SSA_ASS
+   , S_USF
+   , S_VOBSUB
+   , S_KATE
+   , S_HDMV_PGS
 
-    , B_VOBBTN = 0x4000
-  };
+   , B_VOBBTN = 0x4000
+ };
 
 private:
   static std::vector<codec_c> ms_codecs;
@@ -151,7 +151,7 @@ protected:
 
 public:
   codec_c()
-    : m_type{UNKNOWN}
+    : m_type{type_e::UNKNOWN}
     , m_track_type{static_cast<track_type>(0)}
   {
   }
@@ -196,7 +196,7 @@ public:
   bool matches(std::string const &fourcc_or_codec_id) const;
 
   bool valid() const {
-    return m_type != UNKNOWN;
+    return m_type != type_e::UNKNOWN;
   }
 
   operator bool() const {
@@ -240,7 +240,7 @@ inline std::ostream &
 operator <<(std::ostream &out,
             codec_c const &codec) {
   if (codec)
-    out << (boost::format("%1% (0x%|2$04x|)") % codec.get_name() % codec.get_type());
+    out << (boost::format("%1% (0x%|2$04x|)") % codec.get_name() % static_cast<unsigned int>(codec.get_type()));
   else
     out << "<invalid-codec>";
 

@@ -158,9 +158,9 @@ truehd_reader_c::read(generic_packetizer_c *,
 void
 truehd_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(m_header->is_truehd() ? codec_c::A_TRUEHD : codec_c::A_MLP, m_header->is_truehd() ? "TrueHD" : "MLP"));
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(m_header->is_truehd() ? codec_c::type_e::A_TRUEHD : codec_c::type_e::A_MLP, m_header->is_truehd() ? "TrueHD" : "MLP"));
   if (m_ac3_header.m_valid)
-    id_result_track(1, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::A_AC3, "AC3"));
+    id_result_track(1, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AC3, "AC3"));
 }
 
 bool

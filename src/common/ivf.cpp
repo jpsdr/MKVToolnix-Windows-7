@@ -29,9 +29,9 @@ codec_c
 file_header_t::get_codec()
   const {
   auto f = fourcc_c{fourcc};
-  return codec_c::look_up(  f.equiv("VP80") ? codec_c::V_VP8
-                          : f.equiv("VP90") ? codec_c::V_VP9
-                          :                   codec_c::UNKNOWN);
+  return codec_c::look_up(  f.equiv("VP80") ? codec_c::type_e::V_VP8
+                          : f.equiv("VP90") ? codec_c::type_e::V_VP9
+                          :                   codec_c::type_e::UNKNOWN);
 }
 
 frame_header_t::frame_header_t()
@@ -50,7 +50,7 @@ is_keyframe(memory_cptr const &buffer,
 
   auto data = buffer->get_buffer();
 
-  if (codec == codec_c::V_VP8)
+  if (codec == codec_c::type_e::V_VP8)
     return (data[0] & 0x01) == 0x00;
 
   // VP9

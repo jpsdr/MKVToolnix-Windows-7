@@ -33,7 +33,7 @@ ivf_reader_c::probe_file(mm_io_c *io,
   if (io->read(&header, sizeof(ivf::file_header_t)) < sizeof(ivf::file_header_t))
     return 0;
 
-  if (memcmp(header.file_magic, "DKIF", 4) || header.get_codec().is(codec_c::UNKNOWN))
+  if (memcmp(header.file_magic, "DKIF", 4) || header.get_codec().is(codec_c::type_e::UNKNOWN))
     return 0;
 
   return 1;

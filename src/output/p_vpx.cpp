@@ -30,7 +30,7 @@ vpx_video_packetizer_c::vpx_video_packetizer_c(generic_reader_c *p_reader,
   m_timecode_factory_application_mode = TFA_SHORT_QUEUEING;
 
   set_track_type(track_video);
-  set_codec_id(p_codec == codec_c::V_VP8 ? MKV_V_VP8 : MKV_V_VP9);
+  set_codec_id(p_codec == codec_c::type_e::V_VP8 ? MKV_V_VP8 : MKV_V_VP9);
 }
 
 void

@@ -112,5 +112,5 @@ vc1_es_reader_c::read(generic_packetizer_c *,
 void
 vc1_es_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::V_VC1, "VC1"));
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_VC1, "VC1"));
 }
