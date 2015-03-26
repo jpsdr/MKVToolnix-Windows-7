@@ -184,6 +184,7 @@ extern bool g_no_lacing, g_no_linking, g_use_durations, g_no_track_statistics_ta
 extern bool g_identifying, g_identify_verbose, g_identify_for_mmg;
 
 extern int g_file_num;
+extern int64_t g_file_sizes;
 
 extern int64_t g_max_ns_per_cluster;
 extern int g_max_blocks_per_cluster;
@@ -197,9 +198,6 @@ extern append_mode_e g_append_mode;
 
 extern bool g_stereo_mode_used;
 
-void get_file_type(filelist_t &file);
-
-void create_readers();
 void create_packetizers();
 void calc_attachment_sizes();
 void calc_max_chapter_size();

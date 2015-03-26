@@ -51,7 +51,6 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/mm_io.h"
-#include "common/mm_io_x.h"
 #include "common/segmentinfo.h"
 #include "common/split_arg_parsing.h"
 #include "common/strings/formatting.h"
@@ -65,6 +64,7 @@
 #include "merge/filelist.h"
 #include "merge/generic_reader.h"
 #include "merge/output_control.h"
+#include "merge/reader_detection_and_creation.h"
 #include "merge/track_info.h"
 
 using namespace libmatroska;
