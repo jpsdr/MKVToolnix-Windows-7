@@ -15,7 +15,7 @@ override_dh_auto_configure:
 
 #	exit 1
 
-	./drake
+	./drake apps:mkvinfo apps:mmg
 
 	mv src/mkvinfo src/mkvinfo-gui
 	mv src/mmg/mmg src/mmg/mmg-gui
