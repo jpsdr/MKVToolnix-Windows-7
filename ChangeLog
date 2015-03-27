@@ -1,3 +1,10 @@
+2015-03-27  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvextract: bug fix: When extracting HEVC tracks mkvextract will
+        use the same start code lengths that x265 uses (four bytes
+        0x00000001 for the first and video/picture/sequence parameter set
+        NALs and three bytes 0x000001 for all others).
+
 2015-03-26  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: enhancement: File type identification will output a

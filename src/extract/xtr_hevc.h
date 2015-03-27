@@ -18,6 +18,9 @@
 #include "extract/xtr_avc.h"
 
 class xtr_hevc_c: public xtr_avc_c {
+protected:
+  bool m_first_nalu{true};
+
 public:
   xtr_hevc_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec) : xtr_avc_c(codec_id, tid, tspec) { }
 
@@ -26,6 +29,9 @@ public:
   };
 
   virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
+
+  virtual bool write_nal(const binary *data, size_t &pos, size_t data_size, size_t write_nal_size_size);
+
 };
 
 #endif

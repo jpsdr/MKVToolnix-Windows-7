@@ -15,7 +15,7 @@
 #include "common/ebml.h"
 #include "extract/xtr_avc.h"
 
-static const binary s_start_code[4] = { 0x00, 0x00, 0x00, 0x01 };
+binary const xtr_avc_c::ms_start_code[4] = { 0x00, 0x00, 0x00, 0x01 };
 
 xtr_avc_c::xtr_avc_c(const std::string &codec_id,
                      int64_t tid,
@@ -43,7 +43,7 @@ xtr_avc_c::write_nal(const binary *data,
     return false;
   }
 
-  m_out->write(s_start_code, 4);
+  m_out->write(ms_start_code, 4);
   m_out->write(data + pos, nal_size);
 
   pos += nal_size;

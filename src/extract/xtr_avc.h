@@ -21,12 +21,14 @@ class xtr_avc_c: public xtr_base_c {
 protected:
   int m_nal_size_size;
 
+  static binary const ms_start_code[4];
+
 public:
   xtr_avc_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
   virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
   virtual void handle_frame(xtr_frame_t &f);
-  bool write_nal(const binary *data, size_t &pos, size_t data_size, size_t nal_size_size);
+  virtual bool write_nal(const binary *data, size_t &pos, size_t data_size, size_t nal_size_size);
 
   virtual const char *get_container_name() {
     return "AVC/h.264 elementary stream";
