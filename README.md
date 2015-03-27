@@ -16,7 +16,6 @@ Table of contents
 4. Reporting bugs
 
 
-
 1. Introduction
 ---------------
 
@@ -46,7 +45,6 @@ https://www.bunkus.org/videotools/mkvtoolnix/
 Moritz Bunkus <moritz@bunkus.org>
 
 
-
 2. Installation
 ---------------
 
@@ -69,16 +67,16 @@ programs and libraries you absolutely need are:
   v4.6.0.
 
 - libEBML v1.3.1 or later and libMatroska v1.4.2 or later for
-  low-level access to Matroska files.  Instructions on how to compile
+  low-level access to Matroska files. Instructions on how to compile
   them are a bit further down in this file.
 
-- libOgg ( http://downloads.xiph.org/releases/ogg/ ) and libVorbis
-  ( http://downloads.xiph.org/releases/vorbis/ ) for access to Ogg/OGM
+- [libOgg](http://downloads.xiph.org/releases/ogg/) and
+  [libVorbis](http://downloads.xiph.org/releases/vorbis/) for access to Ogg/OGM
   files and Vorbis support
 
-- zlib ( http://www.zlib.net/ ) -- a compression library
+- [zlib](http://www.zlib.net/) -- a compression library
 
-- Boost ( http://www.boost.org/ ) -- Several of Boost's libraries are
+- [Boost](http://www.boost.org/) -- Several of Boost's libraries are
   used: "format", "RegEx", "filesystem", "system", "foreach",
   "Range", "rational", "variant". At least v1.46.0 is required.
 
@@ -98,23 +96,23 @@ Installing "drake" is simple. As root run the following command:
 Other libraries are optional and only limit the features that are
 built. These include:
 
-- wxWidgets ( http://www.wxwidgets.org/ ) -- a cross-platform GUI
+- [wxWidgets](http://www.wxwidgets.org/) -- a cross-platform GUI
   toolkit. You need this if you want to use `mmg` (the mkvmerge GUI) or
   mkvinfo's GUI.
 
-- libFLAC ( http://downloads.xiph.org/releases/flac/ ) for FLAC
+- [libFLAC](http://downloads.xiph.org/releases/flac/) for FLAC
   support (Free Lossless Audio Codec)
 
-- lzo ( http://www.oberhumer.com/opensource/lzo/ ) and bzip2 (
+- [lzo](http://www.oberhumer.com/opensource/lzo/) and bzip2 (
   http://www.bzip.org/ ) are compression libraries. These are the
   least important libraries as almost no application supports Matroska
   content that is compressed with either of these libs. The
   aforementioned zlib is what every program supports.
 
-- libMagic from the "file" package ( http://www.darwinsys.com/file/ )
+- [libMagic](http://www.darwinsys.com/file/) from the "file" package
   for automatic content type detection
 
-- libcurl ( http://curl.haxx.se/ ) for online update checks
+- [libcurl](http://curl.haxx.se/) for online update checks
 
 ### 2.3. Building libmatroska and libebml
 
@@ -153,7 +151,7 @@ development snapshot from my Git repository.
   if you want to build from a release tarball)
 
   All you need for Git repository access is to download a Git client
-  from the Git homepage at http://git-scm.com/ . There are clients
+  from the Git homepage at http://git-scm.com/. There are clients
   for both Unix/Linux and Windows.
 
   First clone my Git repository with this command:
@@ -228,18 +226,17 @@ do this then you have to follow these steps:
         ./drake tests:unit
 
 
-
 3. Reporting bugs
 -----------------
 
-If you're sure you've found a bug - e.g. if one of my programs crashes
+If you're sure you've found a bug -- e.g. if one of my programs crashes
 with an obscur error message, or if the resulting file is missing part
 of the original data, then by all means submit a bug report.
 
-I use GitHub's issue system (
-https://github.com/mbunkus/mkvtoolnix/issues ) as my bug database. You
-can submit your bug reports there. Please be as verbose as possible -
-e.g. include the command line, if you use Windows or Linux etc.pp.
+I use [GitHub's issue system](https://github.com/mbunkus/mkvtoolnix/issues)
+as my bug database. You can submit your bug reports there. Please be as
+verbose as possible -- e.g. include the command line, if you use Windows
+or Linux etc.pp.
 
 If at all possible please include sample files as well so that I can
 reproduce the issue. If they are larger than 1M then please upload
