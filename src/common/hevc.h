@@ -119,7 +119,7 @@
 #define HEVC_EXTENDED_SAR        0xff
 #define HEVC_NUM_PREDEFINED_PARS   17
 
-namespace hevc{
+namespace mtx { namespace hevc {
 
 /*
 Bytes                                    Bits
@@ -343,22 +343,18 @@ bool parse_sei(memory_cptr &buffer, user_data_t &user_data);
 bool handle_sei_payload(mm_mem_io_c &byte_reader, unsigned int sei_payload_type, unsigned int sei_payload_size, user_data_t &user_data);
 
 par_extraction_t extract_par(memory_cptr const &buffer);
-bool is_hevc_fourcc(const char *fourcc);
+bool is_fourcc(const char *fourcc);
 memory_cptr hevcc_to_nalus(const unsigned char *buffer, size_t size);
 
-struct hevc_frame_t {
+struct frame_t {
   memory_cptr m_data;
   int64_t m_start, m_end, m_ref1, m_ref2;
   bool m_keyframe, m_has_provided_timecode;
   slice_info_t m_si;
   int m_presentation_order, m_decode_order;
 
-  hevc_frame_t() {
+  frame_t() {
     clear();
-  }
-
-  hevc_frame_t(const hevc_frame_t &f) {
-    *this = f;
   }
 
   void clear() {
@@ -451,7 +447,7 @@ public:
   static hevcc_c unpack(memory_cptr const &mem);
 };
 
-class hevc_es_parser_c {
+class es_parser_c {
 protected:
   int m_nalu_size_length;
 
@@ -465,7 +461,7 @@ protected:
   bool m_par_found;
   int64_rational_c m_par;
 
-  std::deque<hevc_frame_t> m_frames, m_frames_out;
+  std::deque<frame_t> m_frames, m_frames_out;
   std::deque<int64_t> m_provided_timecodes;
   std::deque<uint64_t> m_provided_stream_positions;
   int64_t m_max_timecode;
@@ -484,7 +480,7 @@ protected:
   memory_cptr m_unparsed_buffer;
   uint64_t m_stream_position, m_parsed_position;
 
-  hevc_frame_t m_incomplete_frame;
+  frame_t m_incomplete_frame;
   bool m_have_incomplete_frame;
   std::deque<memory_cptr> m_unhandled_nalus;
 
@@ -511,8 +507,8 @@ protected:
   } m_stats;
 
 public:
-  hevc_es_parser_c();
-  ~hevc_es_parser_c();
+  es_parser_c();
+  ~es_parser_c();
 
   void force_default_duration(int64_t default_duration) {
     m_forced_default_duration = default_duration;
@@ -537,10 +533,10 @@ public:
     return !m_frames_out.empty();
   }
 
-  hevc_frame_t get_frame() {
+  frame_t get_frame() {
     assert(!m_frames_out.empty());
 
-    hevc_frame_t frame(*m_frames_out.begin());
+    frame_t frame(*m_frames_out.begin());
     m_frames_out.erase(m_frames_out.begin(), m_frames_out.begin() + 1);
 
     return frame;
@@ -624,8 +620,8 @@ protected:
   memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);
   static void init_nalu_names();
 };
-using hevc_es_parser_cptr = std::shared_ptr<hevc_es_parser_c>;
+using es_parser_cptr = std::shared_ptr<es_parser_c>;
 
-};
+}}                              // namespace mtx::hevc
 
 #endif  // MTX_COMMON_HEVC_H

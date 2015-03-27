@@ -196,7 +196,7 @@ mpeg_ts_track_c::new_stream_v_avc() {
 int
 mpeg_ts_track_c::new_stream_v_hevc() {
   if (!m_hevc_parser)
-    m_hevc_parser = std::make_shared<hevc::hevc_es_parser_c>();
+    m_hevc_parser = std::make_shared<mtx::hevc::es_parser_c>();
 
   m_hevc_parser->add_bytes(pes_payload->get_buffer(), pes_payload->get_size());
 

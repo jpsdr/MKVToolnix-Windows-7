@@ -30,9 +30,9 @@
 #include "common/hevc.h"
 #include "common/strings/formatting.h"
 
-namespace hevc {
+namespace mtx { namespace hevc {
 
-std::unordered_map<int, std::string> hevc_es_parser_c::ms_nalu_names_by_type;
+std::unordered_map<int, std::string> es_parser_c::ms_nalu_names_by_type;
 
 hevcc_c::hevcc_c()
   : m_configuration_version{}
@@ -535,12 +535,10 @@ par_extraction_t::is_valid()
   return successful && numerator && denominator;
 }
 
-};
-
 static void
 profile_tier_copy(bit_reader_c &r,
                   bit_writer_c &w,
-                  hevc::vps_info_t &vps,
+                  vps_info_t &vps,
                   unsigned int maxNumSubLayersMinus1) {
   unsigned int i;
   std::vector<bool> sub_layer_profile_present_flag, sub_layer_level_present_flag;
@@ -690,11 +688,11 @@ scaling_list_data_copy(bit_reader_c &r,
 static void
 short_term_ref_pic_set_copy(bit_reader_c &r,
                             bit_writer_c &w,
-                            hevc::short_term_ref_pic_set_t *short_term_ref_pic_sets,
+                            short_term_ref_pic_set_t *short_term_ref_pic_sets,
                             unsigned int idxRps,
                             unsigned int num_short_term_ref_pic_sets) {
-  hevc::short_term_ref_pic_set_t* ref_st_rp_set;
-  hevc::short_term_ref_pic_set_t* cur_st_rp_set = short_term_ref_pic_sets + idxRps;
+  short_term_ref_pic_set_t* ref_st_rp_set;
+  short_term_ref_pic_set_t* cur_st_rp_set = short_term_ref_pic_sets + idxRps;
   unsigned int inter_rps_pred_flag = cur_st_rp_set->inter_ref_pic_set_prediction_flag = 0;
 
   if (idxRps > 0)
@@ -803,7 +801,7 @@ short_term_ref_pic_set_copy(bit_reader_c &r,
 static void
 vui_parameters_copy(bit_reader_c &r,
                     bit_writer_c &w,
-                    hevc::sps_info_t &sps,
+                    sps_info_t &sps,
                     bool keep_ar_info,
                     unsigned int max_sub_layers_minus1) {
   if (r.get_bit() == 1) {                   // aspect_ratio_info_present_flag
@@ -827,8 +825,8 @@ vui_parameters_copy(bit_reader_c &r,
         w.put_bits(16, sps.par_den);
       }
     } else if (HEVC_NUM_PREDEFINED_PARS >= ar_type) {
-      sps.par_num = hevc::s_predefined_pars[ar_type].numerator;
-      sps.par_den = hevc::s_predefined_pars[ar_type].denominator;
+      sps.par_num = s_predefined_pars[ar_type].numerator;
+      sps.par_den = s_predefined_pars[ar_type].denominator;
     }
   } else
     sps.ar_found = false;
@@ -874,7 +872,7 @@ vui_parameters_copy(bit_reader_c &r,
 }
 
 void
-hevc::sps_info_t::dump() {
+sps_info_t::dump() {
   mxinfo(boost::format("sps_info dump:\n"
                        "  id:                                    %1%\n"
                        "  log2_max_pic_order_cnt_lsb:            %2%\n"
@@ -903,7 +901,7 @@ hevc::sps_info_t::dump() {
 }
 
 bool
-hevc::sps_info_t::timing_info_valid()
+sps_info_t::timing_info_valid()
   const {
   return timing_info_present
     && (0 != num_units_in_tick)
@@ -911,13 +909,13 @@ hevc::sps_info_t::timing_info_valid()
 }
 
 int64_t
-hevc::sps_info_t::default_duration()
+sps_info_t::default_duration()
   const {
   return 1000000000ll * num_units_in_tick / time_scale;
 }
 
 void
-hevc::pps_info_t::dump() {
+pps_info_t::dump() {
   mxinfo(boost::format("pps_info dump:\n"
                        "id: %1%\n"
                        "sps_id: %2%\n"
@@ -928,7 +926,7 @@ hevc::pps_info_t::dump() {
 }
 
 void
-hevc::slice_info_t::dump()
+slice_info_t::dump()
   const {
   mxinfo(boost::format("slice_info dump:\n"
                        "  nalu_type:                  %1%\n"
@@ -946,7 +944,7 @@ hevc::slice_info_t::dump()
 }
 
 void
-hevc::nalu_to_rbsp(memory_cptr &buffer) {
+nalu_to_rbsp(memory_cptr &buffer) {
   int pos, size = buffer->get_size();
   mm_mem_io_c d(nullptr, size, 100);
   unsigned char *b = buffer->get_buffer();
@@ -968,7 +966,7 @@ hevc::nalu_to_rbsp(memory_cptr &buffer) {
 }
 
 void
-hevc::rbsp_to_nalu(memory_cptr &buffer) {
+rbsp_to_nalu(memory_cptr &buffer) {
   int pos, size = buffer->get_size();
   mm_mem_io_c d(nullptr, size, 100);
   unsigned char *b = buffer->get_buffer();
@@ -991,8 +989,8 @@ hevc::rbsp_to_nalu(memory_cptr &buffer) {
 }
 
 bool
-hevc::parse_vps(memory_cptr &buffer,
-                vps_info_t &vps) {
+parse_vps(memory_cptr &buffer,
+          vps_info_t &vps) {
   int size              = buffer->get_size();
   unsigned char *newvps = (unsigned char *)safemalloc(size + 100);
   memset(newvps, 0, sizeof(char) * (size+100));
@@ -1066,10 +1064,10 @@ hevc::parse_vps(memory_cptr &buffer,
 }
 
 bool
-hevc::parse_sps(memory_cptr &buffer,
-                sps_info_t &sps,
-                std::vector<vps_info_t> &m_vps_info_list,
-                bool keep_ar_info) {
+parse_sps(memory_cptr &buffer,
+          sps_info_t &sps,
+          std::vector<vps_info_t> &m_vps_info_list,
+          bool keep_ar_info) {
   int size              = buffer->get_size();
   unsigned char *newsps = (unsigned char *)safemalloc(size + 100);
   memory_cptr mcptr_newsps(new memory_c(newsps, size + 100, true));
@@ -1195,8 +1193,8 @@ hevc::parse_sps(memory_cptr &buffer,
 }
 
 bool
-hevc::parse_pps(memory_cptr &buffer,
-                pps_info_t &pps) {
+parse_pps(memory_cptr &buffer,
+          pps_info_t &pps) {
   try {
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
 
@@ -1224,8 +1222,8 @@ hevc::parse_pps(memory_cptr &buffer,
 
 // HEVC spec, 7.3.2.4
 bool
-hevc::parse_sei(memory_cptr &buffer,
-                user_data_t &user_data) {
+parse_sei(memory_cptr &buffer,
+          user_data_t &user_data) {
   try {
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
     mm_mem_io_c byte_reader{*buffer};
@@ -1284,10 +1282,10 @@ hevc::parse_sei(memory_cptr &buffer,
 }
 
 bool
-hevc::handle_sei_payload(mm_mem_io_c &byte_reader,
-                         unsigned int sei_payload_type,
-                         unsigned int sei_payload_size,
-                         user_data_t &user_data) {
+handle_sei_payload(mm_mem_io_c &byte_reader,
+                   unsigned int sei_payload_type,
+                   unsigned int sei_payload_size,
+                   user_data_t &user_data) {
 /*
   switch(sei_payload_type) {
     case HEVC_SEI_BUFFERING_PERIOD:
@@ -1399,8 +1397,8 @@ hevc::handle_sei_payload(mm_mem_io_c &byte_reader,
 
    \return A \c par_extraction_t structure.
 */
-hevc::par_extraction_t
-hevc::extract_par(memory_cptr const &buffer) {
+par_extraction_t
+extract_par(memory_cptr const &buffer) {
   static debugging_option_c s_debug_ar{"extract_par|hevc_sps|sps_aspect_ratio"};
 
   try {
@@ -1418,7 +1416,7 @@ hevc::extract_par(memory_cptr const &buffer) {
 
         try {
           sps_info_t sps_info;
-          if (hevc::parse_sps(nalu, sps_info, new_hevcc.m_vps_info_list)) {
+          if (parse_sps(nalu, sps_info, new_hevcc.m_vps_info_list)) {
             if (s_debug_ar)
               sps_info.dump();
 
@@ -1448,13 +1446,13 @@ hevc::extract_par(memory_cptr const &buffer) {
 }
 
 bool
-hevc::is_hevc_fourcc(const char *fourcc) {
-  return !strncasecmp(fourcc, "hevc",  4);
+is_fourcc(const char *fourcc) {
+  return balg::to_lower_copy(std::string{fourcc, 4}) == "hevc";
 }
 
 memory_cptr
-hevc::hevcc_to_nalus(const unsigned char *buffer,
-                     size_t size) {
+hevcc_to_nalus(const unsigned char *buffer,
+               size_t size) {
   try {
     if (6 > size)
       throw false;
@@ -1501,7 +1499,7 @@ hevc::hevcc_to_nalus(const unsigned char *buffer,
   return memory_cptr{};
 }
 
-hevc::hevc_es_parser_c::hevc_es_parser_c()
+es_parser_c::es_parser_c()
   : m_nalu_size_length(4)
   , m_keep_ar_info(true)
   , m_hevcc_ready(false)
@@ -1528,7 +1526,7 @@ hevc::hevc_es_parser_c::hevc_es_parser_c()
 {
 }
 
-hevc::hevc_es_parser_c::~hevc_es_parser_c() {
+es_parser_c::~es_parser_c() {
   mxdebug_if(debugging_c::requested("hevc_statistics"),
              boost::format("HEVC statistics: #frames: out %1% discarded %2% #timecodes: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7%\n")
              % m_stats.num_frames_out % m_stats.num_frames_discarded % m_stats.num_timecodes_in % m_stats.num_timecodes_generated % m_stats.num_timecodes_discarded
@@ -1551,13 +1549,13 @@ hevc::hevc_es_parser_c::~hevc_es_parser_c() {
 }
 
 void
-hevc::hevc_es_parser_c::discard_actual_frames(bool discard) {
+es_parser_c::discard_actual_frames(bool discard) {
   m_discard_actual_frames = discard;
 }
 
 void
-hevc::hevc_es_parser_c::add_bytes(unsigned char *buffer,
-                                  size_t size) {
+es_parser_c::add_bytes(unsigned char *buffer,
+                       size_t size) {
   memory_slice_cursor_c cursor;
   int marker_size              = 0;
   int previous_marker_size     = 0;
@@ -1617,7 +1615,7 @@ hevc::hevc_es_parser_c::add_bytes(unsigned char *buffer,
 }
 
 void
-hevc::hevc_es_parser_c::flush() {
+es_parser_c::flush() {
   if (m_unparsed_buffer && (5 <= m_unparsed_buffer->get_size())) {
     m_parsed_position += m_unparsed_buffer->get_size();
     int marker_size = get_uint32_be(m_unparsed_buffer->get_buffer()) == NALU_START_CODE ? 4 : 3;
@@ -1634,16 +1632,16 @@ hevc::hevc_es_parser_c::flush() {
 }
 
 void
-hevc::hevc_es_parser_c::add_timecode(int64_t timecode) {
+es_parser_c::add_timecode(int64_t timecode) {
   m_provided_timecodes.push_back(timecode);
   m_provided_stream_positions.push_back(m_stream_position);
   ++m_stats.num_timecodes_in;
 }
 
 void
-hevc::hevc_es_parser_c::write_nalu_size(unsigned char *buffer,
-                                        size_t size,
-                                        int this_nalu_size_length)
+es_parser_c::write_nalu_size(unsigned char *buffer,
+                             size_t size,
+                             int this_nalu_size_length)
   const {
   unsigned int nalu_size_length = -1 == this_nalu_size_length ? m_nalu_size_length : this_nalu_size_length;
 
@@ -1661,7 +1659,7 @@ hevc::hevc_es_parser_c::write_nalu_size(unsigned char *buffer,
 }
 
 void
-hevc::hevc_es_parser_c::flush_incomplete_frame() {
+es_parser_c::flush_incomplete_frame() {
   if (!m_have_incomplete_frame || !m_hevcc_ready)
     return;
 
@@ -1671,7 +1669,7 @@ hevc::hevc_es_parser_c::flush_incomplete_frame() {
 }
 
 void
-hevc::hevc_es_parser_c::flush_unhandled_nalus() {
+es_parser_c::flush_unhandled_nalus() {
   std::deque<memory_cptr>::iterator nalu = m_unhandled_nalus.begin();
 
   while (m_unhandled_nalus.end() != nalu) {
@@ -1683,7 +1681,7 @@ hevc::hevc_es_parser_c::flush_unhandled_nalus() {
 }
 
 void
-hevc::hevc_es_parser_c::handle_slice_nalu(memory_cptr &nalu) {
+es_parser_c::handle_slice_nalu(memory_cptr &nalu) {
   if (!m_hevcc_ready) {
     m_unhandled_nalus.push_back(nalu);
     return;
@@ -1738,7 +1736,7 @@ hevc::hevc_es_parser_c::handle_slice_nalu(memory_cptr &nalu) {
 }
 
 void
-hevc::hevc_es_parser_c::handle_vps_nalu(memory_cptr &nalu) {
+es_parser_c::handle_vps_nalu(memory_cptr &nalu) {
   vps_info_t vps_info;
 
   nalu_to_rbsp(nalu);
@@ -1796,7 +1794,7 @@ hevc::hevc_es_parser_c::handle_vps_nalu(memory_cptr &nalu) {
 }
 
 void
-hevc::hevc_es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
+es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
   sps_info_t sps_info;
 
   nalu_to_rbsp(nalu);
@@ -1868,7 +1866,7 @@ hevc::hevc_es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
 }
 
 void
-hevc::hevc_es_parser_c::handle_pps_nalu(memory_cptr &nalu) {
+es_parser_c::handle_pps_nalu(memory_cptr &nalu) {
   pps_info_t pps_info;
 
   nalu_to_rbsp(nalu);
@@ -1898,7 +1896,7 @@ hevc::hevc_es_parser_c::handle_pps_nalu(memory_cptr &nalu) {
 }
 
 void
-hevc::hevc_es_parser_c::handle_sei_nalu(memory_cptr &nalu) {
+es_parser_c::handle_sei_nalu(memory_cptr &nalu) {
   nalu_to_rbsp(nalu);
   if (!parse_sei(nalu, m_user_data))
       return;
@@ -1908,7 +1906,7 @@ hevc::hevc_es_parser_c::handle_sei_nalu(memory_cptr &nalu) {
 }
 
 void
-hevc::hevc_es_parser_c::handle_nalu(memory_cptr nalu) {
+es_parser_c::handle_nalu(memory_cptr nalu) {
   if (1 > nalu->get_size())
     return;
 
@@ -1994,8 +1992,8 @@ hevc::hevc_es_parser_c::handle_nalu(memory_cptr nalu) {
 }
 
 bool
-hevc::hevc_es_parser_c::parse_slice(memory_cptr &buffer,
-                                    slice_info_t &si) {
+es_parser_c::parse_slice(memory_cptr &buffer,
+                         slice_info_t &si) {
   try {
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
     unsigned int i;
@@ -2079,7 +2077,7 @@ hevc::hevc_es_parser_c::parse_slice(memory_cptr &buffer,
 }
 
 int64_t
-hevc::hevc_es_parser_c::duration_for(slice_info_t const &si)
+es_parser_c::duration_for(slice_info_t const &si)
   const {
   int64_t duration = -1 != m_forced_default_duration                                                  ? m_forced_default_duration * 2
                    : (m_sps_info_list.size() > si.sps) && m_sps_info_list[si.sps].timing_info_valid() ? m_sps_info_list[si.sps].default_duration()
@@ -2090,7 +2088,7 @@ hevc::hevc_es_parser_c::duration_for(slice_info_t const &si)
 }
 
 int64_t
-hevc::hevc_es_parser_c::get_most_often_used_duration()
+es_parser_c::get_most_often_used_duration()
   const {
   int64_t const s_common_default_durations[] = {
     1000000000ll / 50,
@@ -2132,7 +2130,7 @@ hevc::hevc_es_parser_c::get_most_often_used_duration()
 }
 
 void
-hevc::hevc_es_parser_c::cleanup() {
+es_parser_c::cleanup() {
   if (m_frames.empty())
     return;
 
@@ -2201,7 +2199,7 @@ hevc::hevc_es_parser_c::cleanup() {
   }
 
   if (!simple_picture_order)
-    brng::sort(m_frames, [](const hevc_frame_t &f1, const hevc_frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
+    brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
 
   brng::sort(m_provided_timecodes);
 
@@ -2233,13 +2231,13 @@ hevc::hevc_es_parser_c::cleanup() {
   m_provided_timecodes.erase(m_provided_timecodes.begin(), provided_timecode_itr);
 
   mxdebug_if(m_debug_timecodes, boost::format("CLEANUP frames <pres_ord dec_ord has_prov_tc tc dur>: %1%\n")
-             % boost::accumulate(m_frames, std::string(""), [](std::string const &accu, hevc_frame_t const &frame) {
+             % boost::accumulate(m_frames, std::string(""), [](std::string const &accu, frame_t const &frame) {
                  return accu + (boost::format(" <%1% %2% %3% %4% %5%>") % frame.m_presentation_order % frame.m_decode_order % frame.m_has_provided_timecode % frame.m_start % (frame.m_end - frame.m_start)).str();
                }));
 
 
   if (!simple_picture_order)
-    brng::sort(m_frames, [](const hevc_frame_t &f1, const hevc_frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
+    brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
 
   frames_begin       = m_frames.begin();
   frames_end         = m_frames.end();
@@ -2260,8 +2258,8 @@ hevc::hevc_es_parser_c::cleanup() {
 }
 
 memory_cptr
-hevc::hevc_es_parser_c::create_nalu_with_size(const memory_cptr &src,
-                                              bool add_extra_data) {
+es_parser_c::create_nalu_with_size(const memory_cptr &src,
+                                   bool add_extra_data) {
   int final_size = m_nalu_size_length + src->get_size(), offset = 0, size;
   unsigned char *buffer;
 
@@ -2287,28 +2285,28 @@ hevc::hevc_es_parser_c::create_nalu_with_size(const memory_cptr &src,
 }
 
 memory_cptr
-hevc::hevc_es_parser_c::get_hevcc()
+es_parser_c::get_hevcc()
   const {
   return hevcc_c{static_cast<unsigned int>(m_nalu_size_length), m_vps_list, m_sps_list, m_pps_list, m_user_data, m_codec_private}.pack();
 }
 
 bool
-hevc::hevc_es_parser_c::has_par_been_found()
+es_parser_c::has_par_been_found()
   const {
   assert(m_hevcc_ready);
   return m_par_found;
 }
 
 int64_rational_c const &
-hevc::hevc_es_parser_c::get_par()
+es_parser_c::get_par()
   const {
   assert(m_hevcc_ready && m_par_found);
   return m_par;
 }
 
 std::pair<int64_t, int64_t> const
-hevc::hevc_es_parser_c::get_display_dimensions(int width,
-                                               int height)
+es_parser_c::get_display_dimensions(int width,
+                                    int height)
   const {
   assert(m_hevcc_ready && m_par_found);
 
@@ -2322,19 +2320,19 @@ hevc::hevc_es_parser_c::get_display_dimensions(int width,
 }
 
 size_t
-hevc::hevc_es_parser_c::get_num_field_slices()
+es_parser_c::get_num_field_slices()
   const {
   return m_stats.num_field_slices;
 }
 
 size_t
-hevc::hevc_es_parser_c::get_num_frame_slices()
+es_parser_c::get_num_frame_slices()
   const {
   return m_stats.num_frame_slices;
 }
 
 void
-hevc::hevc_es_parser_c::dump_info()
+es_parser_c::dump_info()
   const {
   mxinfo("Dumping m_frames_out:\n");
   for (auto &frame : m_frames_out) {
@@ -2349,14 +2347,14 @@ hevc::hevc_es_parser_c::dump_info()
 }
 
 std::string
-hevc::hevc_es_parser_c::get_nalu_type_name(int type) {
+es_parser_c::get_nalu_type_name(int type) {
   init_nalu_names();
   auto name = ms_nalu_names_by_type.find(type);
   return name == ms_nalu_names_by_type.end() ? "unknown" : name->second;
 }
 
 void
-hevc::hevc_es_parser_c::init_nalu_names() {
+es_parser_c::init_nalu_names() {
   if (!ms_nalu_names_by_type.empty())
     return;
 
@@ -2427,3 +2425,5 @@ hevc::hevc_es_parser_c::init_nalu_names() {
     { HEVC_NALU_TYPE_UNSPEC63,      "unspec63"      },
   };
 }
+
+}}                              // namespace mtx::hevc

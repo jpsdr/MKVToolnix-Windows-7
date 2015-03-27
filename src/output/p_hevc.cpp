@@ -53,7 +53,7 @@ hevc_video_packetizer_c::set_headers() {
 
 void
 hevc_video_packetizer_c::extract_aspect_ratio() {
-  auto result = hevc::extract_par(m_ti.m_private_data);
+  auto result = mtx::hevc::extract_par(m_ti.m_private_data);
 
   set_codec_private(result.new_hevcc);
 

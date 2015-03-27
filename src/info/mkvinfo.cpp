@@ -346,7 +346,7 @@ create_codec_dependent_private_info(KaxCodecPrivate &c_priv,
                :                             Y("Unknown"))
             % (avcc.m_level_idc / 10) % (avcc.m_level_idc % 10)).str();
   } else if ((codec_id == MKV_V_MPEGH_HEVC) && ('v' == track_type) && (c_priv.GetSize() >= 4)) {
-    auto hevcc = hevc::hevcc_c::unpack(std::make_shared<memory_c>(c_priv.GetBuffer(), c_priv.GetSize(), false));
+    auto hevcc = mtx::hevc::hevcc_c::unpack(std::make_shared<memory_c>(c_priv.GetBuffer(), c_priv.GetSize(), false));
 
     return (boost::format(Y(" (HEVC profile: %1% @L%2%.%3%)"))
             % (  hevcc.m_general_profile_idc == 1 ? "Main"

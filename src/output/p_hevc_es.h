@@ -18,11 +18,9 @@
 #include "common/hevc.h"
 #include "merge/generic_packetizer.h"
 
-using namespace hevc;
-
 class hevc_es_video_packetizer_c: public generic_packetizer_c {
 protected:
-  hevc_es_parser_c m_parser;
+  mtx::hevc::es_parser_c m_parser;
   int64_t m_default_duration_for_interlaced_content;
   bool m_first_frame, m_set_display_dimensions, m_debug_timecodes, m_debug_aspect_ratio;
 

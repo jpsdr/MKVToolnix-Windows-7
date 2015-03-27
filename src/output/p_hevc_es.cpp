@@ -23,11 +23,9 @@
 #include "output/p_hevc_es.h"
 
 using namespace libmatroska;
-using namespace hevc;
 
-hevc_es_video_packetizer_c::
-hevc_es_video_packetizer_c(generic_reader_c *p_reader,
-                                track_info_c &p_ti)
+hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reader,
+                                                       track_info_c &p_ti)
   : generic_packetizer_c(p_reader, p_ti)
   , m_default_duration_for_interlaced_content(-1)
   , m_first_frame(true)
@@ -93,7 +91,7 @@ hevc_es_video_packetizer_c::process(packet_cptr packet) {
     m_parser.add_bytes(packet->data->get_buffer(), packet->data->get_size());
     flush_frames();
 
-  } catch (nalu_size_length_x &error) {
+  } catch (mtx::hevc::nalu_size_length_x &error) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id,
                 boost::format(Y("This HEVC contains frames that are too big for the current maximum NALU size. "
                                 "You have to re-run mkvmerge and set the maximum NALU size to %1% for this track "
@@ -173,7 +171,7 @@ hevc_es_video_packetizer_c::flush_frames() {
       m_first_frame = false;
     }
 
-    hevc_frame_t frame(m_parser.get_frame());
+    auto frame = m_parser.get_frame();
     add_packet(new packet_t(frame.m_data, frame.m_start,
                             frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
                             frame.m_keyframe            ? -1                          : frame.m_start + frame.m_ref1));
@@ -194,7 +192,7 @@ hevc_es_video_packetizer_c::connect(generic_packetizer_c *src,
   if (2 != m_connected_to)
     return;
 
-  hevc_es_video_packetizer_c *real_src = dynamic_cast<hevc_es_video_packetizer_c *>(src);
+  auto *real_src = dynamic_cast<hevc_es_video_packetizer_c *>(src);
   assert(real_src);
 
   m_htrack_default_duration = real_src->m_htrack_default_duration;
@@ -209,7 +207,7 @@ hevc_es_video_packetizer_c::connect(generic_packetizer_c *src,
 connection_result_e
 hevc_es_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
                                                 std::string &error_message) {
-  hevc_es_video_packetizer_c *vsrc = dynamic_cast<hevc_es_video_packetizer_c *>(src);
+  auto *vsrc = dynamic_cast<hevc_es_video_packetizer_c *>(src);
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
 

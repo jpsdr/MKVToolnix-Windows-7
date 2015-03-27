@@ -26,8 +26,6 @@
 #define READ_SIZE 1024 * 1024
 #define MAX_PROBE_BUFFERS 50
 
-using namespace hevc;
-
 int
 hevc_es_reader_c::probe_file(mm_io_c *in,
                             uint64_t size) {
@@ -39,7 +37,7 @@ hevc_es_reader_c::probe_file(mm_io_c *in,
     int num_read, i;
     bool first = true;
 
-    hevc_es_parser_c parser;
+    mtx::hevc::es_parser_c parser;
     parser.ignore_nalu_size_length_errors();
     parser.set_nalu_size_length(4);
 
@@ -80,7 +78,7 @@ hevc_es_reader_c::hevc_es_reader_c(const track_info_c &ti,
 void
 hevc_es_reader_c::read_headers() {
   try {
-    hevc_es_parser_c parser;
+    mtx::hevc::es_parser_c parser;
     parser.ignore_nalu_size_length_errors();
 
     int num_read, i;
