@@ -1,23 +1,21 @@
 MKVToolNix 7.8.0
 ================
 
-Table of contents
------------------
+# Table of contents
 
 1. Introduction
 2. Installation
   1. Requirements
   2. Optional components
-  3. Building libmatroska and libebml
+  3. Building libEBML and libMatroska
   4. Building MKVtoolNix
   5. Notes for compilation on (Open)Solaris
   6. Unit tests
-3. Examples
-4. Reporting bugs
+3. Reporting bugs
 
+-----------------
 
-1. Introduction
----------------
+# 1. Introduction
 
 With these tools one can get information about (mkvinfo) Matroska
 files, extract tracks/data from (mkvextract) Matroska files and create
@@ -35,9 +33,8 @@ This code comes under the GPL v2 (see www.gnu.org or the file COPYING).
 Modify as needed.
 
 The icons are based on the work of Alexandr Grigorcea and modified by
-Eduard Geier. They're licensed under the terms of the Creative Commons
-Attribution 3.0 Unported license (see
-http://creativecommons.org/licenses/by/3.0/).
+Eduard Geier. They're licensed under the terms of the
+[Creative Commons Attribution 3.0 Unported license](http://creativecommons.org/licenses/by/3.0/).
 
 The newest version can always be found at
 https://www.bunkus.org/videotools/mkvtoolnix/
@@ -45,8 +42,7 @@ https://www.bunkus.org/videotools/mkvtoolnix/
 Moritz Bunkus <moritz@bunkus.org>
 
 
-2. Installation
----------------
+# 2. Installation
 
 If you want to compile the tools yourself then you must first decide
 if you want to use a 'proper' release version or the current
@@ -55,20 +51,22 @@ development there might be features available in the git repository
 that are not available in the releases. On the other hand the git
 repository version might not even compile.
 
-### 2.1. Requirements
+## 2.1. Requirements
 
 In order to compile MKVToolNix you need a couple of libraries. Most of
 them should be available pre-compiled for your distribution. The
 programs and libraries you absolutely need are:
 
 - A C++ compiler that supports several features of the C++11 standard:
-  initializer lists, range-based 'for' loops, right angle brackets,
-  the 'auto' keyword and lambda functions. For GCC this means at least
-  v4.6.0.
+  initializer lists, range-based »for« loops, right angle brackets,
+  the 'auto' keyword, lambda functions, the »nullptr« key word, tuples
+  and alias declarations. For GCC this means at least v4.7.0; for
+  clang v3.3 or later.
 
-- libEBML v1.3.1 or later and libMatroska v1.4.2 or later for
-  low-level access to Matroska files. Instructions on how to compile
-  them are a bit further down in this file.
+- [libEBML v1.3.1](http://dl.matroska.org/downloads/libebml/) or later
+  and [libMatroska v1.4.2](http://dl.matroska.org/downloads/libmatroska/)
+  or later for low-level access to Matroska files. Instructions on how to
+  compile them are a bit further down in this file.
 
 - [libOgg](http://downloads.xiph.org/releases/ogg/) and
   [libVorbis](http://downloads.xiph.org/releases/vorbis/) for access to Ogg/OGM
@@ -91,7 +89,7 @@ Installing "drake" is simple. As root run the following command:
 
     gem install drake
 
-### 2.2. Optional components
+## 2.2. Optional components
 
 Other libraries are optional and only limit the features that are
 built. These include:
@@ -103,10 +101,10 @@ built. These include:
 - [libFLAC](http://downloads.xiph.org/releases/flac/) for FLAC
   support (Free Lossless Audio Codec)
 
-- [lzo](http://www.oberhumer.com/opensource/lzo/) and bzip2 (
-  http://www.bzip.org/ ) are compression libraries. These are the
-  least important libraries as almost no application supports Matroska
-  content that is compressed with either of these libs. The
+- [lzo](http://www.oberhumer.com/opensource/lzo/) and
+  [bzip2](http://www.bzip.org/) are compression libraries. These are
+  the least important libraries as almost no application supports
+  Matroska content that is compressed with either of these libs. The
   aforementioned zlib is what every program supports.
 
 - [libMagic](http://www.darwinsys.com/file/) from the "file" package
@@ -114,57 +112,53 @@ built. These include:
 
 - [libcurl](http://curl.haxx.se/) for online update checks
 
-### 2.3. Building libmatroska and libebml
+## 2.3. Building libEBML and libMatroska
 
 This is optional as MKVToolNix comes with its own set of the
 libraries. It will use them if no version is found on the system.
 
-Start with the two libraries. Either get libebml 1.3.1 from
-http://dl.matroska.org/downloads/libebml/ and libmatroska 1.4.2 from
-http://dl.matroska.org/downloads/libmatroska/ or a fresh copy from the
-git repository:
+Start with the two libraries. Either download releases of
+[libEBML 1.3.1](http://dl.matroska.org/downloads/libebml/) and
+[libMatroska 1.4.2](http://dl.matroska.org/downloads/libmatroska/) or
+get a fresh copy from the git repository:
 
     git clone https://github.com/Matroska-Org/libebml.git
     git clone https://github.com/Matroska-Org/libmatroska.git
 
-Change to "libebml/make/linux" and run `make staticlib`. If you have
-root-access then run `make install_headers install_staticlib` as
-"root" in order to install the files. Change to
-"libmatroska/make/linux". Once more run `make staticlib`. If you have
-root-access then run `make install_headers install_staticlib` as
-"root" in order to install the files.
+First change to libEBML's directory and run `./configure` followed by
+`make`. Now install libEBML by running `make install` as root
+(e.g. via `sudo`). Change to libMatroska's directory and go through
+the same steps: first `./configure` followed by `make` as a normal
+user and lastly `make install` as root.
 
-Note that if you don't want the libraries to be installed in
-/usr/local/lib and the headers in /usr/local/include then you can
-alter the prefix (which defaults to /usr/local) by adding an argument
-`prefix=/usr` to the install `make` command. Example:
-
-    make prefix=/usr install_headers install_staticlib
-
-### 2.4. Building MKVtoolNix
+## 2.4. Building MKVtoolNix
 
 Either download the current release from
-https://www.bunkus.org/videotools/mkvtoolnix/ and unpack it or get a
-development snapshot from my Git repository.
+[the MKVToolNix home page](https://www.bunkus.org/videotools/mkvtoolnix/)
+and unpack it or get a development snapshot from my Git repository.
 
-- Getting and building a development snapshot (ignore this subsection
-  if you want to build from a release tarball)
+### 2.4.1. Getting and building a development snapshot
 
-  All you need for Git repository access is to download a Git client
-  from the Git homepage at http://git-scm.com/. There are clients
-  for both Unix/Linux and Windows.
+You can ignore this subsection if you want to build from a release
+tarball.
 
-  First clone my Git repository with this command:
+All you need for Git repository access is to download a Git client
+from the Git homepage at http://git-scm.com/. There are clients
+for both Unix/Linux and Windows.
 
-      git clone https://github.com/mbunkus/mkvtoolnix.git
+First clone my Git repository with this command:
 
-  Now change to the MKVtoolNix directory with `cd mkvtoolnix` and run
-  `./autogen.sh` which will generate the "configure" script. You need
-  the GNU "autoconf" utility for this step.
+    git clone https://github.com/mbunkus/mkvtoolnix.git
+
+Now change to the MKVtoolNix directory with `cd mkvtoolnix` and run
+`./autogen.sh` which will generate the "configure" script. You need
+the GNU "autoconf" utility for this step.
+
+### 2.4.2. Configuration and compilation
 
 If you have run `make install` for both libraries then `configure`
 should automatically find the libraries' position. Otherwise you need
-to tell `configure` where the "libebml" and "libmatroska" include and
+to tell `configure` where the libEBML and libMatroska include and
 library files are:
 
     ./configure \
@@ -173,7 +167,7 @@ library files are:
 
 Now run `rake` and, as "root", `rake install`. If you don't have
 "rake" installed yourself then use the version bundled with
-MKVToolNix: `./rake.d/bin/drake` and `./rake.d/bin/drake install`.
+MKVToolNix: `./drake` and `./drake install`.
 
 If you want to use all available CPU cores for building then you have
 to use `drake` instead of `rake`. `drake` knows the parameter `-j`
@@ -188,7 +182,7 @@ or
     export DRAKETHREADS=4
     ./drake
 
-### 2.5. Notes for compilation on (Open)Solaris
+## 2.5. Notes for compilation on (Open)Solaris
 
 You can compile mkvtoolnix with Sun's sunstudio compiler, but you need
 additional options for `configure`:
@@ -199,7 +193,7 @@ additional options for `configure`:
       --with-extra-includes=/where/i/put/libebml\;/where/i/put/libmatroska \
       --with-extra-libs=/where/i/put/libebml/make/linux\;/where/i/put/libmatroska/make/linux
 
-### 2.6. Unit tests
+## 2.6. Unit tests
 
 Building and running unit tests is completely optional. If you want to
 do this then you have to follow these steps:
@@ -213,7 +207,7 @@ do this then you have to follow these steps:
   1. Either extract the framework inside the "lib" sub-folder and
      rename the resulting folder "gtest-1.6.0" to "gtest"
 
-     OR...
+     or…
 
   2. Extract the archive somewhere and create a symbolic link to it
      inside the "lib" folder called or create a symbolic link called
@@ -226,8 +220,7 @@ do this then you have to follow these steps:
         ./drake tests:unit
 
 
-3. Reporting bugs
------------------
+# 3. Reporting bugs
 
 If you're sure you've found a bug -- e.g. if one of my programs crashes
 with an obscur error message, or if the resulting file is missing part
@@ -235,11 +228,11 @@ of the original data, then by all means submit a bug report.
 
 I use [GitHub's issue system](https://github.com/mbunkus/mkvtoolnix/issues)
 as my bug database. You can submit your bug reports there. Please be as
-verbose as possible -- e.g. include the command line, if you use Windows
+verbose as possible – e.g. include the command line, if you use Windows
 or Linux etc.pp.
 
 If at all possible please include sample files as well so that I can
 reproduce the issue. If they are larger than 1M then please upload
-them somewhere (e.g. to my FTP server: host name `ftp.bunkus.org`,
-user name `upload`, password `only`) and post a link or note in the bug
-report.
+them somewhere and post a link in the issue. You can also upload them
+to my FTP server. Details on how to connect can be found in the
+[MKVToolNix FAQ](https://github.com/mbunkus/mkvtoolnix/wiki/FTP-server).
