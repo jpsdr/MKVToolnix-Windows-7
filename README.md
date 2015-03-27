@@ -79,7 +79,7 @@ programs and libraries you absolutely need are:
 - zlib ( http://www.zlib.net/ ) -- a compression library
 
 - Boost ( http://www.boost.org/ ) -- Several of Boost's libraries are
-  used: "format", "RegEx", "filesystem", "system", "foreach",
+  used: "format", "RegEx", "filesystem", "system", "foreach", "math",
   "Range", "rational", "variant". At least v1.46.0 is required.
 
 You also need the `rake` or `drake` build program or at least the
