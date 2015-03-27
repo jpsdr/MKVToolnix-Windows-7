@@ -16,14 +16,18 @@
 
 #include <functional>
 
+namespace mtx {
+
 // Support for hashing all scoped and unscoped enums via their
 // underlying type.
 template<typename Tkey>
-struct std::hash {
+struct hash {
   std::size_t operator()(Tkey const &key) const {
     using T = typename std::underlying_type<Tkey>::type;
     return std::hash<T>()(static_cast<T>(key));
   }
 };
+
+}
 
 #endif  // MTX_COMMON_HASH_H

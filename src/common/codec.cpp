@@ -17,7 +17,7 @@
 #include "common/mp4.h"
 
 std::vector<codec_c> codec_c::ms_codecs;
-std::unordered_map<codec_c::specialization_e, std::string> codec_c::ms_specialization_descriptions;
+codec_c::specialization_map_t codec_c::ms_specialization_descriptions;
 
 void
 codec_c::initialize() {

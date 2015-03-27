@@ -148,8 +148,10 @@ public:
   };
 
 private:
+  using specialization_map_t = std::unordered_map<specialization_e, std::string, mtx::hash<specialization_e> >;
+
   static std::vector<codec_c> ms_codecs;
-  static std::unordered_map<specialization_e, std::string> ms_specialization_descriptions;
+  static specialization_map_t ms_specialization_descriptions;
 
 protected:
   boost::regex m_match_re;
