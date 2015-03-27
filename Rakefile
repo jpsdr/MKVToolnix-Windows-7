@@ -40,6 +40,7 @@ require_relative 'rake.d/gtest' if $have_gtest
 
 def setup_globals
   $build_mkvtoolnix_gui  ||=  c?(:USE_QT) && c?(:BUILD_MKVTOOLNIX_GUI)
+  $build_tools           ||=  c?(:BUILD_TOOLS)
 
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
   $programs                << "mmg" if c?(:USE_WXWIDGETS)
@@ -124,7 +125,7 @@ def define_default_task
   # The applications themselves
   targets = $applications.clone
 
-  targets << "apps:tools" if c?(:BUILD_TOOLS)
+  targets << "apps:tools" if $build_tools
 
   # Build the unit tests only if requested
   targets << ($run_unit_tests ? 'tests:run_unit' : 'tests:unit') if $have_gtest
