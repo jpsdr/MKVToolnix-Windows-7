@@ -32,6 +32,8 @@
 
 namespace hevc {
 
+std::unordered_map<int, std::string> hevc_es_parser_c::ms_nalu_names_by_type;
+
 hevcc_c::hevcc_c()
   : m_configuration_version{}
   , m_general_profile_space{}
@@ -1524,8 +1526,6 @@ hevc::hevc_es_parser_c::hevc_es_parser_c()
   , m_debug_timecodes(         debugging_c::requested("hevc_parser|hevc_timecodes"))
   , m_debug_sps_info(          debugging_c::requested("hevc_parser|hevc_sps|hevc_sps_info"))
 {
-  if (m_debug_nalu_types)
-    init_nalu_names();
 }
 
 hevc::hevc_es_parser_c::~hevc_es_parser_c() {
@@ -2349,79 +2349,81 @@ hevc::hevc_es_parser_c::dump_info()
 }
 
 std::string
-hevc::hevc_es_parser_c::get_nalu_type_name(int type)
-  const {
-  auto name = m_nalu_names_by_type.find(type);
-  return (m_nalu_names_by_type.end() == name) ? "unknown" : name->second;
+hevc::hevc_es_parser_c::get_nalu_type_name(int type) {
+  init_nalu_names();
+  auto name = ms_nalu_names_by_type.find(type);
+  return name == ms_nalu_names_by_type.end() ? "unknown" : name->second;
 }
 
 void
 hevc::hevc_es_parser_c::init_nalu_names() {
-  // VCL NALs
-  m_nalu_names_by_type[HEVC_NALU_TYPE_TRAIL_N] = "TRAIL_N";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_TRAIL_R] = "TRAIL_R";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_TSA_N] = "TSA_N";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_TSA_R] = "TSA_R";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_STSA_N] = "STSA_N";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_STSA_R] = "STSA_R";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RADL_N] = "RADL_N";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RADL_R] = "RADL_R";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RASL_N] = "RASL_N";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RASL_R] = "RASL_R";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL_N10] = "RSV_VCL_N10";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL_N12] = "RSV_VCL_N12";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL_N14] = "RSV_VCL_N14";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL_R11] = "RSV_VCL_R11";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL_R13] = "RSV_VCL_R13";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL_R15] = "RSV_VCL_R15";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_BLA_W_LP] = "BLA_W_LP";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_BLA_W_RADL] = "BLA_W_RADL";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_BLA_N_LP] = "BLA_N_LP";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_IDR_W_RADL] = "IDR_W_RADL";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_IDR_N_LP] = "IDR_N_LP";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_CRA_NUT] = "CRA_NUT";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_RAP_VCL22] = "RSV_RAP_VCL22";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_RAP_VCL23] = "RSV_RAP_VCL23";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL24] = "RSV_VCL24";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL25] = "RSV_VCL25";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL26] = "RSV_VCL26";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL27] = "RSV_VCL27";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL28] = "RSV_VCL28";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL29] = "RSV_VCL29";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL30] = "RSV_VCL30";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_VCL31] = "RSV_VCL31";
+  if (!ms_nalu_names_by_type.empty())
+    return;
 
-  //Non-VCL NALs
-  m_nalu_names_by_type[HEVC_NALU_TYPE_VIDEO_PARAM] = "VIDEO_PARAM";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_SEQ_PARAM] = "SEQ_PARAM";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_PIC_PARAM] = "PIC_PARAM";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_ACCESS_UNIT] = "ACCESS_UNIT";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_END_OF_SEQ] = "END_OF_SEQ";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_END_OF_STREAM] = "END_OF_STREAM";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_FILLER_DATA] = "FILLER_DATA";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_PREFIX_SEI] = "PREFIX_SEI";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_SUFFIX_SEI] = "SUFFIX_SEI";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_NVCL41] = "RSV_NVCL41";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_NVCL42] = "RSV_NVCL42";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_NVCL43] = "RSV_NVCL43";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_NVCL44] = "RSV_NVCL44";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_NVCL45] = "RSV_NVCL45";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_NVCL46] = "RSV_NVCL46";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_RSV_NVCL47] = "RSV_NVCL47";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC48] = "UNSPEC48";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC49] = "UNSPEC49";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC50] = "UNSPEC58";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC51] = "UNSPEC51";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC52] = "UNSPEC52";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC53] = "UNSPEC53";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC54] = "UNSPEC54";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC55] = "UNSPEC55";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC56] = "UNSPEC56";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC57] = "UNSPEC57";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC58] = "UNSPEC58";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC59] = "UNSPEC59";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC60] = "UNSPEC60";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC61] = "UNSPEC61";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC62] = "UNSPEC62";
-  m_nalu_names_by_type[HEVC_NALU_TYPE_UNSPEC63] = "UNSPEC63";
+  ms_nalu_names_by_type = std::unordered_map<int, std::string>{
+    { HEVC_NALU_TYPE_TRAIL_N,       "trail_n"       },
+    { HEVC_NALU_TYPE_TRAIL_R,       "trail_r"       },
+    { HEVC_NALU_TYPE_TSA_N,         "tsa_n"         },
+    { HEVC_NALU_TYPE_TSA_R,         "tsa_r"         },
+    { HEVC_NALU_TYPE_STSA_N,        "stsa_n"        },
+    { HEVC_NALU_TYPE_STSA_R,        "stsa_r"        },
+    { HEVC_NALU_TYPE_RADL_N,        "radl_n"        },
+    { HEVC_NALU_TYPE_RADL_R,        "radl_r"        },
+    { HEVC_NALU_TYPE_RASL_N,        "rasl_n"        },
+    { HEVC_NALU_TYPE_RASL_R,        "rasl_r"        },
+    { HEVC_NALU_TYPE_RSV_VCL_N10,   "rsv_vcl_n10"   },
+    { HEVC_NALU_TYPE_RSV_VCL_N12,   "rsv_vcl_n12"   },
+    { HEVC_NALU_TYPE_RSV_VCL_N14,   "rsv_vcl_n14"   },
+    { HEVC_NALU_TYPE_RSV_VCL_R11,   "rsv_vcl_r11"   },
+    { HEVC_NALU_TYPE_RSV_VCL_R13,   "rsv_vcl_r13"   },
+    { HEVC_NALU_TYPE_RSV_VCL_R15,   "rsv_vcl_r15"   },
+    { HEVC_NALU_TYPE_BLA_W_LP,      "bla_w_lp"      },
+    { HEVC_NALU_TYPE_BLA_W_RADL,    "bla_w_radl"    },
+    { HEVC_NALU_TYPE_BLA_N_LP,      "bla_n_lp"      },
+    { HEVC_NALU_TYPE_IDR_W_RADL,    "idr_w_radl"    },
+    { HEVC_NALU_TYPE_IDR_N_LP,      "idr_n_lp"      },
+    { HEVC_NALU_TYPE_CRA_NUT,       "cra_nut"       },
+    { HEVC_NALU_TYPE_RSV_RAP_VCL22, "rsv_rap_vcl22" },
+    { HEVC_NALU_TYPE_RSV_RAP_VCL23, "rsv_rap_vcl23" },
+    { HEVC_NALU_TYPE_RSV_VCL24,     "rsv_vcl24"     },
+    { HEVC_NALU_TYPE_RSV_VCL25,     "rsv_vcl25"     },
+    { HEVC_NALU_TYPE_RSV_VCL26,     "rsv_vcl26"     },
+    { HEVC_NALU_TYPE_RSV_VCL27,     "rsv_vcl27"     },
+    { HEVC_NALU_TYPE_RSV_VCL28,     "rsv_vcl28"     },
+    { HEVC_NALU_TYPE_RSV_VCL29,     "rsv_vcl29"     },
+    { HEVC_NALU_TYPE_RSV_VCL30,     "rsv_vcl30"     },
+    { HEVC_NALU_TYPE_RSV_VCL31,     "rsv_vcl31"     },
+    { HEVC_NALU_TYPE_VIDEO_PARAM,   "video_param"   },
+    { HEVC_NALU_TYPE_SEQ_PARAM,     "seq_param"     },
+    { HEVC_NALU_TYPE_PIC_PARAM,     "pic_param"     },
+    { HEVC_NALU_TYPE_ACCESS_UNIT,   "access_unit"   },
+    { HEVC_NALU_TYPE_END_OF_SEQ,    "end_of_seq"    },
+    { HEVC_NALU_TYPE_END_OF_STREAM, "end_of_stream" },
+    { HEVC_NALU_TYPE_FILLER_DATA,   "filler_data"   },
+    { HEVC_NALU_TYPE_PREFIX_SEI,    "prefix_sei"    },
+    { HEVC_NALU_TYPE_SUFFIX_SEI,    "suffix_sei"    },
+    { HEVC_NALU_TYPE_RSV_NVCL41,    "rsv_nvcl41"    },
+    { HEVC_NALU_TYPE_RSV_NVCL42,    "rsv_nvcl42"    },
+    { HEVC_NALU_TYPE_RSV_NVCL43,    "rsv_nvcl43"    },
+    { HEVC_NALU_TYPE_RSV_NVCL44,    "rsv_nvcl44"    },
+    { HEVC_NALU_TYPE_RSV_NVCL45,    "rsv_nvcl45"    },
+    { HEVC_NALU_TYPE_RSV_NVCL46,    "rsv_nvcl46"    },
+    { HEVC_NALU_TYPE_RSV_NVCL47,    "rsv_nvcl47"    },
+    { HEVC_NALU_TYPE_UNSPEC48,      "unspec48"      },
+    { HEVC_NALU_TYPE_UNSPEC49,      "unspec49"      },
+    { HEVC_NALU_TYPE_UNSPEC50,      "unspec50"      },
+    { HEVC_NALU_TYPE_UNSPEC51,      "unspec51"      },
+    { HEVC_NALU_TYPE_UNSPEC52,      "unspec52"      },
+    { HEVC_NALU_TYPE_UNSPEC53,      "unspec53"      },
+    { HEVC_NALU_TYPE_UNSPEC54,      "unspec54"      },
+    { HEVC_NALU_TYPE_UNSPEC55,      "unspec55"      },
+    { HEVC_NALU_TYPE_UNSPEC56,      "unspec56"      },
+    { HEVC_NALU_TYPE_UNSPEC57,      "unspec57"      },
+    { HEVC_NALU_TYPE_UNSPEC58,      "unspec58"      },
+    { HEVC_NALU_TYPE_UNSPEC59,      "unspec59"      },
+    { HEVC_NALU_TYPE_UNSPEC60,      "unspec60"      },
+    { HEVC_NALU_TYPE_UNSPEC61,      "unspec61"      },
+    { HEVC_NALU_TYPE_UNSPEC62,      "unspec62"      },
+    { HEVC_NALU_TYPE_UNSPEC63,      "unspec63"      },
+  };
 }

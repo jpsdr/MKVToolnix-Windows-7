@@ -45,7 +45,7 @@ def setup_globals
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
   $programs                << "mmg" if c?(:USE_WXWIDGETS)
   $programs                << "mkvtoolnix-gui" if $build_mkvtoolnix_gui
-  $tools                   =  %w{ac3parser base64tool checksum diracparser ebml_validator mpls_dump vc1parser}
+  $tools                   =  %w{ac3parser base64tool checksum diracparser ebml_validator hevc_dump mpls_dump vc1parser}
   $mmg_bin                 =  c(:MMG_BIN)
   $mmg_bin                 =  "mmg" if $mmg_bin.empty?
 
@@ -867,6 +867,16 @@ Application.new("src/tools/ebml_validator").
   description("Build the ebml_validator executable").
   aliases("tools:ebml_validator").
   sources("src/tools/ebml_validator.cpp", "src/tools/element_info.cpp").
+  libraries($common_libs).
+  create
+
+#
+# tools: hevc_dump
+#
+Application.new("src/tools/hevc_dump").
+  description("Build the hevc_dump executable").
+  aliases("tools:hevc_dump").
+  sources("src/tools/hevc_dump.cpp").
   libraries($common_libs).
   create
 

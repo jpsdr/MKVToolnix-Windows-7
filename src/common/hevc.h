@@ -491,7 +491,7 @@ protected:
   bool m_ignore_nalu_size_length_errors, m_discard_actual_frames;
 
   bool m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timecode_statistics, m_debug_timecodes, m_debug_sps_info;
-  std::map<int, std::string> m_nalu_names_by_type;
+  static std::unordered_map<int, std::string> ms_nalu_names_by_type;
 
   struct stats_t {
     std::vector<int> num_slices_by_type;
@@ -590,8 +590,6 @@ public:
 
   void dump_info() const;
 
-  std::string get_nalu_type_name(int type) const;
-
   bool has_stream_default_duration() const {
     return -1 != m_stream_default_duration;
   }
@@ -610,6 +608,8 @@ public:
   int64_rational_c const &get_par() const;
   std::pair<int64_t, int64_t> const get_display_dimensions(int width = -1, int height = -1) const;
 
+  static std::string get_nalu_type_name(int type);
+
 protected:
   bool parse_slice(memory_cptr &buffer, slice_info_t &si);
   void handle_vps_nalu(memory_cptr &nalu);
@@ -622,7 +622,7 @@ protected:
   void flush_unhandled_nalus();
   void write_nalu_size(unsigned char *buffer, size_t size, int this_nalu_size_length = -1) const;
   memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);
-  void init_nalu_names();
+  static void init_nalu_names();
 };
 using hevc_es_parser_cptr = std::shared_ptr<hevc_es_parser_c>;
 
