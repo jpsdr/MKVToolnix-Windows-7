@@ -828,8 +828,11 @@ vui_parameters_copy(bit_reader_c &r,
       sps.par_num = s_predefined_pars[ar_type].numerator;
       sps.par_den = s_predefined_pars[ar_type].denominator;
     }
-  } else
+
+  } else {
     sps.ar_found = false;
+    w.put_bit(0);
+  }
 
   // copy the rest
   if (w.copy_bits(1, r) == 1)   // overscan_info_present_flag
