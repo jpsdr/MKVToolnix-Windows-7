@@ -18,7 +18,7 @@
 
 /* All integers are little endian. */
 
-#define TTA_FRAME_TIME (double)1.04489795918367346939l
+#define TTA_FRAME_TIME 1.04489795918367346939
 
 #if defined(COMP_MSC)
 #pragma pack(push,1)

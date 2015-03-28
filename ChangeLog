@@ -1,3 +1,10 @@
+2015-03-28  Moritz Bunkus  <moritz@bunkus.org>
+
+        * source code: bug fix: Accidental uses of the »long double« type
+        have been converted to normal »double«s. This fixes compilation on
+        platforms which don't support the »long double« type in
+        combination with Boost::Math. Fixes #1150.
+
 2015-03-27  Moritz Bunkus  <moritz@bunkus.org>
 
         * Released v7.8.0.
