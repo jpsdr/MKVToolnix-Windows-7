@@ -124,7 +124,7 @@ vobsub_reader_c::~vobsub_reader_c() {
 
 void
 vobsub_reader_c::create_packetizer(int64_t tid) {
-  if ((tracks.size() <= static_cast<size_t>(tid)) || !demuxing_requested('s', tid) || (-1 != tracks[tid]->ptzr))
+  if ((tracks.size() <= static_cast<size_t>(tid)) || !demuxing_requested('s', tid, tracks[tid]->language) || (-1 != tracks[tid]->ptzr))
     return;
 
   vobsub_track_c *track = tracks[tid];

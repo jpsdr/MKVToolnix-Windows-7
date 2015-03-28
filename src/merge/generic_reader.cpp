@@ -97,7 +97,8 @@ generic_reader_c::read_all() {
 
 bool
 generic_reader_c::demuxing_requested(char type,
-                                     int64_t id) {
+                                     int64_t id,
+                                     std::string const &language) {
   item_selector_c<bool> *tracks = 'v' == type ? &m_ti.m_vtracks
                                 : 'a' == type ? &m_ti.m_atracks
                                 : 's' == type ? &m_ti.m_stracks
@@ -108,7 +109,7 @@ generic_reader_c::demuxing_requested(char type,
   if (!tracks)
     mxerror(boost::format("generic_reader_c::demuxing_requested: %2%") % (boost::format(Y("Invalid track type %1%.")) % type));
 
-  return tracks->selected(id);
+  return tracks->selected(id, language);
 }
 
 attach_mode_e

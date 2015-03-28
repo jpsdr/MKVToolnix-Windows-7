@@ -291,7 +291,7 @@ qtmp4_reader_c::verify_track_parameters_and_update_indexes() {
     if (m_chapter_track_ids[dmx->container_id])
       dmx->type = 'C';
 
-    else if (!demuxing_requested(dmx->type, dmx->id))
+    else if (!demuxing_requested(dmx->type, dmx->id, dmx->language))
       continue;
 
     else if (dmx->is_audio() && !dmx->verify_audio_parameters())
@@ -1657,7 +1657,7 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
       break;
     }
 
-  if (!dmx || !dmx->ok || !demuxing_requested(dmx->type, dmx->id) || (-1 != dmx->ptzr))
+  if (!dmx || !dmx->ok || !demuxing_requested(dmx->type, dmx->id, dmx->language) || (-1 != dmx->ptzr))
     return;
 
   m_ti.m_id          = dmx->id;
@@ -1825,8 +1825,8 @@ void
 qtmp4_reader_c::detect_interleaving() {
   std::list<qtmp4_demuxer_cptr> demuxers_to_read;
   boost::remove_copy_if(m_demuxers, std::back_inserter(demuxers_to_read), [&](const qtmp4_demuxer_cptr &dmx) {
-      return !(dmx->ok && (dmx->is_audio() || dmx->is_video()) && demuxing_requested(dmx->type, dmx->id) && (dmx->sample_table.size() > 1));
-    });
+    return !(dmx->ok && (dmx->is_audio() || dmx->is_video()) && demuxing_requested(dmx->type, dmx->id, dmx->language) && (dmx->sample_table.size() > 1));
+  });
 
   if (demuxers_to_read.size() < 2) {
     mxdebug_if(m_debug_interleaving, boost::format("Interleaving: Not enough tracks to care about interleaving.\n"));

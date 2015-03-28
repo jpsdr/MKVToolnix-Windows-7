@@ -123,7 +123,7 @@ public:
   virtual void display_identification_results();
 
 protected:
-  virtual bool demuxing_requested(char type, int64_t id);
+  virtual bool demuxing_requested(char type, int64_t id, std::string const &language = "");
 
   virtual void id_result_container(const std::string &verbose_info = empty_string);
   virtual void id_result_container(const std::vector<std::string> &verbose_info);

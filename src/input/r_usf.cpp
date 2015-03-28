@@ -153,7 +153,7 @@ usf_reader_c::create_packetizer(int64_t tid) {
 
   auto track = m_tracks[tid];
 
-  if (!demuxing_requested('s', tid) || (-1 != track->m_ptzr))
+  if (!demuxing_requested('s', tid, track->m_language) || (-1 != track->m_ptzr))
     return;
 
   m_ti.m_private_data = memory_c::clone(m_private_data);

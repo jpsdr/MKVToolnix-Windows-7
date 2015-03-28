@@ -371,11 +371,12 @@ avi_reader_c::create_packetizers() {
 
 void
 avi_reader_c::create_subs_packetizer(int idx) {
-  if (!demuxing_requested('s', 1 + AVI_audio_tracks(m_avi) + idx))
+  auto &demuxer = m_subtitle_demuxers[idx];
+
+  if (!demuxing_requested('s', 1 + AVI_audio_tracks(m_avi) + idx, demuxer.m_sub_language))
     return;
 
   m_ti.m_private_data.reset();
-  avi_subs_demuxer_t &demuxer = m_subtitle_demuxers[idx];
 
   demuxer.m_text_io = mm_text_io_cptr(new mm_text_io_c(new mm_mem_io_c(demuxer.m_subtitles->get_buffer(), demuxer.m_subtitles->get_size())));
 

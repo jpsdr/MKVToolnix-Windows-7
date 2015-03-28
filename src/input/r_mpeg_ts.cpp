@@ -1413,7 +1413,7 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
                            : ES_SUBT_TYPE  == track->type ? 's'
                            :                                'v';
 
-  if (!track->probed_ok || (0 == track->ptzr) || !demuxing_requested(type, id))
+  if (!track->probed_ok || (0 == track->ptzr) || !demuxing_requested(type, id, track->language))
     return;
 
   m_ti.m_id       = id;

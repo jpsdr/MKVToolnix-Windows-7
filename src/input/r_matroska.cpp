@@ -1691,7 +1691,7 @@ void
 kax_reader_c::create_packetizer(int64_t tid) {
   kax_track_t *t = m_tracks[tid].get();
 
-  if ((-1 != t->ptzr) || !t->ok || !demuxing_requested(t->type, t->tnum))
+  if ((-1 != t->ptzr) || !t->ok || !demuxing_requested(t->type, t->tnum, t->language))
     return;
 
   track_info_c nti(m_ti);

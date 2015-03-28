@@ -518,8 +518,10 @@ parse_arg_tracks(std::string s,
     int64_t tid;
     if (parse_number(element, tid))
       tracks.add(tid);
+    else if (is_valid_iso639_2_code(element))
+      tracks.add(element);
     else
-      mxerror(boost::format(Y("Invalid track ID in '%1% %2%'.\n")) % opt % s);
+      mxerror(boost::format(Y("Invalid track ID or language code in '%1% %2%'.\n")) % opt % s);
   }
 }
 
