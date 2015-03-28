@@ -1756,7 +1756,7 @@ mmg_dialog::create_header_editor_window(const wxString &file_name) {
 
 void
 mmg_dialog::header_editor_frame_closed(header_editor_frame_c *frame) {
-  header_editor_frames.erase(mxfind(frame, header_editor_frames));
+  header_editor_frames.erase(brng::find(header_editor_frames, frame));
 }
 
 #if defined(HAVE_CURL_EASY_H)

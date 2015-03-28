@@ -47,6 +47,7 @@
 #include <matroska/KaxVersion.h>
 
 #include "common/chapters/chapters.h"
+#include "common/container.h"
 #include "common/date_time.h"
 #include "common/debugging.h"
 #include "common/ebml.h"
@@ -869,13 +870,13 @@ check_append_mapping() {
 
     // 5. Does the "source" file have a track with the src_track_id, and is
     // that track selected for copying?
-    if (!mxfind2(id, amap.src_track_id, (*src_file)->reader->m_used_track_ids))
+    if (!mtx::includes((*src_file)->reader->m_used_track_ids, amap.src_track_id))
       mxerror(boost::format(Y("The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. "
                               "The argument for '--append-to' was invalid.\n")) % amap.src_file_id % (*src_file)->name % amap.src_track_id);
 
     // 6. Does the "destination" file have a track with the dst_track_id, and
     // that track selected for copying?
-    if (!mxfind2(id, amap.dst_track_id, (*dst_file)->reader->m_used_track_ids))
+    if (!mtx::includes((*dst_file)->reader->m_used_track_ids, amap.dst_track_id))
       mxerror(boost::format(Y("The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no "
                               "track can be appended to it. The argument for '--append-to' was invalid.\n")) % amap.dst_file_id % (*dst_file)->name % amap.dst_track_id);
 

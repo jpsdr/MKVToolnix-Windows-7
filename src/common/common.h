@@ -131,8 +131,6 @@ void set_process_priority(int priority);
 extern unsigned int verbose;
 
 #define mxforeach(it, vec)       for (it = (vec).begin(); it != (vec).end(); it++)
-#define mxfind(value, cont)      std::find(cont.begin(), cont.end(), value)
-#define mxfind2(it, value, cont) ((it = std::find((cont).begin(), (cont).end(), value)) != (cont).end())
 
 void mtx_common_init(std::string const &program_name, char const *argv0);
 std::string const &get_program_name();
