@@ -906,32 +906,18 @@ check_append_mapping() {
   // Finally see if the packetizers can be connected and connect them if they
   // can.
   for (auto &amap : g_append_mapping) {
-    std::vector<generic_packetizer_c *>::const_iterator gptzr;
-    generic_packetizer_c *src_ptzr, *dst_ptzr;
-    std::string error_message;
-    int result;
+    src_file      = g_files.begin() + amap.src_file_id;
+    dst_file      = g_files.begin() + amap.dst_file_id;
 
-    src_file = g_files.begin() + amap.src_file_id;
-    src_ptzr = nullptr;
-    mxforeach(gptzr, (*src_file)->reader->m_reader_packetizers)
-      if (static_cast<size_t>((*gptzr)->m_ti.m_id) == amap.src_track_id) {
-        src_ptzr = (*gptzr);
-        break;
-      }
-
-    dst_file = g_files.begin() + amap.dst_file_id;
-    dst_ptzr = nullptr;
-    mxforeach(gptzr, (*dst_file)->reader->m_reader_packetizers)
-      if (static_cast<size_t>((*gptzr)->m_ti.m_id) == amap.dst_track_id) {
-        dst_ptzr = (*gptzr);
-        break;
-      }
+    auto src_ptzr = (*src_file)->reader->find_packetizer_by_id(amap.src_track_id);
+    auto dst_ptzr = (*dst_file)->reader->find_packetizer_by_id(amap.dst_track_id);
 
     if (!src_ptzr || !dst_ptzr)
       mxerror(boost::format("(!src_ptzr || !dst_ptzr). %1%\n") % BUGMSG);
 
     // And now try to connect the packetizers.
-    result = src_ptzr->can_connect_to(dst_ptzr, error_message);
+    std::string error_message;
+    auto result = src_ptzr->can_connect_to(dst_ptzr, error_message);
     if (CAN_CONNECT_MAYBE_CODECPRIVATE == result)
       mxwarn(boost::format(Y("The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% "
                              "Please make sure that the resulting file plays correctly the whole time. "
@@ -956,8 +942,7 @@ check_append_mapping() {
 
   // Calculate the "longest path" -- meaning the maximum number of
   // concatenated files. This is needed for displaying the progress.
-  std::vector<append_spec_t>::iterator amap;
-  mxforeach(amap, g_append_mapping) {
+  for (auto amap = g_append_mapping.begin(), amap_end = g_append_mapping.end(); amap != amap_end; ++amap) {
     // Is this the first in a chain?
     auto cmp_amap = boost::find_if(g_append_mapping, [&](const append_spec_t &e) {
       return (*amap              != e)
@@ -972,14 +957,14 @@ check_append_mapping() {
     auto trav_amap  = amap;
     int path_length = 2;
     do {
-      mxforeach(cmp_amap, g_append_mapping)
+      for (cmp_amap = g_append_mapping.begin(); cmp_amap != amap_end; ++cmp_amap)
         if (   (trav_amap->src_file_id  == cmp_amap->dst_file_id)
             && (trav_amap->src_track_id == cmp_amap->dst_track_id)) {
           trav_amap = cmp_amap;
           path_length++;
           break;
         }
-    } while (cmp_amap != g_append_mapping.end());
+    } while (cmp_amap != amap_end);
 
     if (path_length > s_display_path_length)
       s_display_path_length = path_length;
@@ -1543,10 +1528,9 @@ append_track(packetizer_t &ptzr,
 
   // Find the generic_packetizer_c that we will be appending to the one
   // stored in ptzr.
-  std::vector<generic_packetizer_c *>::const_iterator gptzr;
-  mxforeach(gptzr, src_file.reader->m_reader_packetizers)
-    if (amap.src_track_id == static_cast<size_t>((*gptzr)->m_ti.m_id))
-      break;
+  auto gptzr = brng::find_if(src_file.reader->m_reader_packetizers, [&amap](generic_packetizer_c *p) -> bool {
+    return amap.src_track_id == static_cast<size_t>(p->m_ti.m_id);
+  });
 
   if (src_file.reader->m_reader_packetizers.end() == gptzr)
     mxerror(boost::format(Y("Could not find gptzr when appending. %1%\n")) % BUGMSG);
@@ -1575,11 +1559,7 @@ append_track(packetizer_t &ptzr,
       if (file->done)
         continue;
 
-      std::vector<generic_packetizer_c *>::const_iterator vptzr;
-      mxforeach(vptzr, file->reader->m_reader_packetizers)
-        if ((*vptzr)->get_track_type() == track_video)
-          break;
-
+      auto vptzr = brng::find_if(file->reader->m_reader_packetizers, [](generic_packetizer_c *p) { return p->get_track_type() == track_video; });
       if (vptzr == file->reader->m_reader_packetizers.end())
         continue;
 
@@ -1677,19 +1657,17 @@ append_track(packetizer_t &ptzr,
       ptzr.status = ptzr.packetizer->read();
 
     if (src_file.reader->m_ptzr_first_packet) {
-      std::vector<append_spec_t>::const_iterator cmp_amap;
-      mxforeach(cmp_amap, g_append_mapping)
-        if (   (cmp_amap->src_file_id  == amap.src_file_id)
-            && (cmp_amap->src_track_id == static_cast<size_t>(src_file.reader->m_ptzr_first_packet->m_ti.m_id))
-            && (cmp_amap->dst_file_id  == amap.dst_file_id))
-          break;
+      auto cmp_amap = brng::find_if(g_append_mapping, [&amap, &src_file](append_spec_t const &m) {
+        return (m.src_file_id  == amap.src_file_id)
+            && (m.src_track_id == static_cast<size_t>(src_file.reader->m_ptzr_first_packet->m_ti.m_id))
+            && (m.dst_file_id  == amap.dst_file_id);
+      });
 
-      if (g_append_mapping.end() != cmp_amap)
-        mxforeach(gptzr, dst_file.reader->m_reader_packetizers)
-          if (static_cast<size_t>((*gptzr)->m_ti.m_id) == cmp_amap->dst_track_id) {
-            timecode_adjustment = (*gptzr)->m_max_timecode_seen;
-            break;
-          }
+      if (g_append_mapping.end() != cmp_amap) {
+        auto gptzr = dst_file.reader->find_packetizer_by_id(cmp_amap->dst_track_id);
+        if (gptzr)
+          timecode_adjustment = gptzr->m_max_timecode_seen;
+      }
     }
   }
 

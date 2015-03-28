@@ -148,6 +148,14 @@ generic_reader_c::get_num_packetizers()
   return m_reader_packetizers.size();
 }
 
+generic_packetizer_c *
+generic_reader_c::find_packetizer_by_id(int64_t id)
+  const {
+  auto itr = brng::find_if(m_reader_packetizers, [id](generic_packetizer_c *p) { return p->m_ti.m_id == id; });
+
+  return itr != m_reader_packetizers.end() ? *itr : nullptr;
+}
+
 void
 generic_reader_c::set_timecode_offset(int64_t offset) {
   m_max_timecode_seen = offset;

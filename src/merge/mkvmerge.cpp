@@ -1661,7 +1661,7 @@ parse_arg_attachments(const std::string &param,
 void
 handle_file_name_arg(const std::string &this_arg,
                      std::vector<std::string>::const_iterator &sit,
-                     const std::vector<std::string>::const_iterator &end,
+                     std::vector<std::string>::const_iterator const &end,
                      bool &append_next_file,
                      std::unique_ptr<track_info_c> &&ti) {
   std::vector<std::string> file_names;
@@ -1803,10 +1803,10 @@ parse_args(std::vector<std::string> args) {
   }
 
   // First parse options that either just print some infos and then exit.
-  std::vector<std::string>::const_iterator sit;
-  mxforeach(sit, args) {
-    const std::string &this_arg = *sit;
-    std::string next_arg        = ((sit + 1) == args.end()) ? "" : *(sit + 1);
+  for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
+    auto const &this_arg = *sit;
+    auto sit_next        = sit + 1;
+    auto next_arg        = sit_next != sit_end ? *sit_next : "";
 
     if ((this_arg == "-l") || (this_arg == "--list-types")) {
       list_file_types();
@@ -1830,10 +1830,11 @@ parse_args(std::vector<std::string> args) {
   mxinfo(boost::format("%1%\n") % get_version_info("mkvmerge", vif_full));
 
   // Now parse options that are needed right at the beginning.
-  mxforeach(sit, args) {
-    const std::string &this_arg = *sit;
-    bool no_next_arg            = (sit + 1) == args.end();
-    std::string next_arg        = no_next_arg ? "" : *(sit + 1);
+  for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
+    auto const &this_arg = *sit;
+    auto sit_next        = sit + 1;
+    auto no_next_arg     = sit_next == sit_end;
+    auto next_arg        = !no_next_arg ? *sit_next : "";
 
     if ((this_arg == "-o") || (this_arg == "--output")) {
       if (no_next_arg)
@@ -1864,10 +1865,11 @@ parse_args(std::vector<std::string> args) {
   bool append_next_file = false;
   attachment_t attachment;
 
-  mxforeach(sit, args) {
-    const std::string &this_arg = *sit;
-    bool no_next_arg            = (sit + 1) == args.end();
-    std::string next_arg        = no_next_arg ? "" : *(sit + 1);
+  for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
+    auto const &this_arg = *sit;
+    auto sit_next        = sit + 1;
+    auto no_next_arg     = sit_next == sit_end;
+    auto next_arg        = !no_next_arg ? *sit_next : "";
 
     // Ignore the options we took care of in the first step.
     if (   (this_arg == "-o")
@@ -2327,7 +2329,7 @@ parse_args(std::vector<std::string> args) {
 
     // The argument is an input file.
     else {
-      handle_file_name_arg(this_arg, sit, args.end(), append_next_file, std::move(ti));
+      handle_file_name_arg(this_arg, sit, sit_end, append_next_file, std::move(ti));
       ti = std::make_unique<track_info_c>();
     }
   }

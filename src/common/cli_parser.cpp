@@ -90,11 +90,11 @@ cli_parser_c::parse_args() {
 
   run_hooks(cli_parser_c::ht_common_options_parsed);
 
-  std::vector<std::string>::const_iterator sit;
-  mxforeach(sit, m_args) {
-    bool no_next_arg = (sit + 1) == m_args.end();
+  for (auto sit = m_args.cbegin(), sit_end = m_args.cend(); sit != sit_end; sit++) {
+    auto sit_next    = sit + 1;
+    auto no_next_arg = sit_next == sit_end;
     m_current_arg    = *sit;
-    m_next_arg       = no_next_arg ? "" : *(sit + 1);
+    m_next_arg       = !no_next_arg ? *sit_next : "";
 
     auto option_it = m_option_map.find(m_current_arg);
     if (option_it != m_option_map.end()) {
