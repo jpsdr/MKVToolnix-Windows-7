@@ -47,10 +47,10 @@ ssa_reader_c::read_headers() {
   if (!ssa_reader_c::probe_file(text_in.get(), 0))
     throw mtx::input::invalid_format_x();
 
-  charset_converter_cptr cc_utf8 = map_has_key(m_ti.m_sub_charsets,  0) ? charset_converter_c::init(m_ti.m_sub_charsets[ 0])
-                                 : map_has_key(m_ti.m_sub_charsets, -1) ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
-                                 : text_in->get_byte_order() != BO_NONE ? charset_converter_c::init("UTF-8")
-                                 :                                        g_cc_local_utf8;
+  charset_converter_cptr cc_utf8 = mtx::includes(m_ti.m_sub_charsets,  0) ? charset_converter_c::init(m_ti.m_sub_charsets[ 0])
+                                 : mtx::includes(m_ti.m_sub_charsets, -1) ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
+                                 : text_in->get_byte_order() != BO_NONE   ? charset_converter_c::init("UTF-8")
+                                 :                                          g_cc_local_utf8;
 
   m_ti.m_id = 0;
   m_subs    = ssa_parser_cptr(new ssa_parser_c(this, text_in.get(), m_ti.m_fname, 0));

@@ -25,6 +25,7 @@
 #include <matroska/KaxTrackVideo.h>
 
 #include "common/compression.h"
+#include "common/container.h"
 #include "common/ebml.h"
 #include "common/hacks.h"
 #include "common/strings/formatting.h"
@@ -41,10 +42,10 @@
    : track_video == track_type ? DEFTRACK_TYPE_VIDEO \
    :                             DEFTRACK_TYPE_SUBS)
 
-#define LOOKUP_TRACK_ID(container)                  \
-      map_has_key(container, m_ti.m_id) ? m_ti.m_id \
-    : map_has_key(container, -1)        ? -1        \
-    :                                     -2
+#define LOOKUP_TRACK_ID(container)                    \
+      mtx::includes(container, m_ti.m_id) ? m_ti.m_id \
+    : mtx::includes(container, -1)        ? -1        \
+    :                                       -2
 
 // ---------------------------------------------------------------------
 
@@ -96,9 +97,9 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_relaxed_timecode_checking{}
 {
   // Let's see if the user specified timecode sync for this track.
-  if (map_has_key(m_ti.m_timecode_syncs, m_ti.m_id))
+  if (mtx::includes(m_ti.m_timecode_syncs, m_ti.m_id))
     m_ti.m_tcsync = m_ti.m_timecode_syncs[m_ti.m_id];
-  else if (map_has_key(m_ti.m_timecode_syncs, -1))
+  else if (mtx::includes(m_ti.m_timecode_syncs, -1))
     m_ti.m_tcsync = m_ti.m_timecode_syncs[-1];
   if (0 == m_ti.m_tcsync.numerator)
     m_ti.m_tcsync.numerator = 1;
@@ -106,74 +107,74 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     m_ti.m_tcsync.denominator = 1;
 
   // Let's see if the user specified "reset timecodes" for this track.
-  m_ti.m_reset_timecodes = map_has_key(m_ti.m_reset_timecodes_specs, m_ti.m_id) || map_has_key(m_ti.m_reset_timecodes_specs, -1);
+  m_ti.m_reset_timecodes = mtx::includes(m_ti.m_reset_timecodes_specs, m_ti.m_id) || mtx::includes(m_ti.m_reset_timecodes_specs, -1);
 
   // Let's see if the user has specified which cues he wants for this track.
-  if (map_has_key(m_ti.m_cue_creations, m_ti.m_id))
+  if (mtx::includes(m_ti.m_cue_creations, m_ti.m_id))
     m_ti.m_cues = m_ti.m_cue_creations[m_ti.m_id];
-  else if (map_has_key(m_ti.m_cue_creations, -1))
+  else if (mtx::includes(m_ti.m_cue_creations, -1))
     m_ti.m_cues = m_ti.m_cue_creations[-1];
 
   // Let's see if the user has given a default track flag for this track.
-  if (map_has_key(m_ti.m_default_track_flags, m_ti.m_id))
+  if (mtx::includes(m_ti.m_default_track_flags, m_ti.m_id))
     m_ti.m_default_track = m_ti.m_default_track_flags[m_ti.m_id];
-  else if (map_has_key(m_ti.m_default_track_flags, -1))
+  else if (mtx::includes(m_ti.m_default_track_flags, -1))
     m_ti.m_default_track = m_ti.m_default_track_flags[-1];
 
   // Let's see if the user has given a fix avc fps flag for this track.
-  if (map_has_key(m_ti.m_fix_bitstream_frame_rate_flags, m_ti.m_id))
+  if (mtx::includes(m_ti.m_fix_bitstream_frame_rate_flags, m_ti.m_id))
     m_ti.m_fix_bitstream_frame_rate = m_ti.m_fix_bitstream_frame_rate_flags[m_ti.m_id];
-  else if (map_has_key(m_ti.m_fix_bitstream_frame_rate_flags, -1))
+  else if (mtx::includes(m_ti.m_fix_bitstream_frame_rate_flags, -1))
     m_ti.m_fix_bitstream_frame_rate = m_ti.m_fix_bitstream_frame_rate_flags[-1];
 
   // Let's see if the user has given a forced track flag for this track.
-  if (map_has_key(m_ti.m_forced_track_flags, m_ti.m_id))
+  if (mtx::includes(m_ti.m_forced_track_flags, m_ti.m_id))
     m_ti.m_forced_track = m_ti.m_forced_track_flags[m_ti.m_id];
-  else if (map_has_key(m_ti.m_forced_track_flags, -1))
+  else if (mtx::includes(m_ti.m_forced_track_flags, -1))
     m_ti.m_forced_track = m_ti.m_forced_track_flags[-1];
 
   // Let's see if the user has given a enabled track flag for this track.
-  if (map_has_key(m_ti.m_enabled_track_flags, m_ti.m_id))
+  if (mtx::includes(m_ti.m_enabled_track_flags, m_ti.m_id))
     m_ti.m_enabled_track = m_ti.m_enabled_track_flags[m_ti.m_id];
-  else if (map_has_key(m_ti.m_enabled_track_flags, -1))
+  else if (mtx::includes(m_ti.m_enabled_track_flags, -1))
     m_ti.m_enabled_track = m_ti.m_enabled_track_flags[-1];
 
   // Let's see if the user has specified a language for this track.
-  if (map_has_key(m_ti.m_languages, m_ti.m_id))
+  if (mtx::includes(m_ti.m_languages, m_ti.m_id))
     m_ti.m_language = m_ti.m_languages[m_ti.m_id];
-  else if (map_has_key(m_ti.m_languages, -1))
+  else if (mtx::includes(m_ti.m_languages, -1))
     m_ti.m_language = m_ti.m_languages[-1];
 
   // Let's see if the user has specified a sub charset for this track.
-  if (map_has_key(m_ti.m_sub_charsets, m_ti.m_id))
+  if (mtx::includes(m_ti.m_sub_charsets, m_ti.m_id))
     m_ti.m_sub_charset = m_ti.m_sub_charsets[m_ti.m_id];
-  else if (map_has_key(m_ti.m_sub_charsets, -1))
+  else if (mtx::includes(m_ti.m_sub_charsets, -1))
     m_ti.m_sub_charset = m_ti.m_sub_charsets[-1];
 
   // Let's see if the user has specified a sub charset for this track.
-  if (map_has_key(m_ti.m_all_tags, m_ti.m_id))
+  if (mtx::includes(m_ti.m_all_tags, m_ti.m_id))
     m_ti.m_tags_file_name = m_ti.m_all_tags[m_ti.m_id];
-  else if (map_has_key(m_ti.m_all_tags, -1))
+  else if (mtx::includes(m_ti.m_all_tags, -1))
     m_ti.m_tags_file_name = m_ti.m_all_tags[-1];
   if (!m_ti.m_tags_file_name.empty())
     m_ti.m_tags = mtx::xml::ebml_tags_converter_c::parse_file(m_ti.m_tags_file_name, false);
 
   // Let's see if the user has specified how this track should be compressed.
-  if (map_has_key(m_ti.m_compression_list, m_ti.m_id))
+  if (mtx::includes(m_ti.m_compression_list, m_ti.m_id))
     m_ti.m_compression = m_ti.m_compression_list[m_ti.m_id];
-  else if (map_has_key(m_ti.m_compression_list, -1))
+  else if (mtx::includes(m_ti.m_compression_list, -1))
     m_ti.m_compression = m_ti.m_compression_list[-1];
 
   // Let's see if the user has specified a name for this track.
-  if (map_has_key(m_ti.m_track_names, m_ti.m_id))
+  if (mtx::includes(m_ti.m_track_names, m_ti.m_id))
     m_ti.m_track_name = m_ti.m_track_names[m_ti.m_id];
-  else if (map_has_key(m_ti.m_track_names, -1))
+  else if (mtx::includes(m_ti.m_track_names, -1))
     m_ti.m_track_name = m_ti.m_track_names[-1];
 
   // Let's see if the user has specified external timecodes for this track.
-  if (map_has_key(m_ti.m_all_ext_timecodes, m_ti.m_id))
+  if (mtx::includes(m_ti.m_all_ext_timecodes, m_ti.m_id))
     m_ti.m_ext_timecodes = m_ti.m_all_ext_timecodes[m_ti.m_id];
-  else if (map_has_key(m_ti.m_all_ext_timecodes, -1))
+  else if (mtx::includes(m_ti.m_all_ext_timecodes, -1))
     m_ti.m_ext_timecodes = m_ti.m_all_ext_timecodes[-1];
 
   // Let's see if the user has specified an aspect ratio or display dimensions
@@ -197,9 +198,9 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   }
 
   // Let's see if the user has specified a FourCC for this track.
-  if (map_has_key(m_ti.m_all_fourccs, m_ti.m_id))
+  if (mtx::includes(m_ti.m_all_fourccs, m_ti.m_id))
     m_ti.m_fourcc = m_ti.m_all_fourccs[m_ti.m_id];
-  else if (map_has_key(m_ti.m_all_fourccs, -1))
+  else if (mtx::includes(m_ti.m_all_fourccs, -1))
     m_ti.m_fourcc = m_ti.m_all_fourccs[-1];
 
   // Let's see if the user has specified a FourCC for this track.
@@ -213,23 +214,23 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     set_video_stereo_mode(m_ti.m_stereo_mode_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified a default duration for this track.
-  if (map_has_key(m_ti.m_default_durations, m_ti.m_id))
+  if (mtx::includes(m_ti.m_default_durations, m_ti.m_id))
     m_htrack_default_duration = m_ti.m_default_durations[m_ti.m_id];
-  else if (map_has_key(m_ti.m_default_durations, -1))
+  else if (mtx::includes(m_ti.m_default_durations, -1))
     m_htrack_default_duration = m_ti.m_default_durations[-1];
   else
     m_default_duration_forced = false;
 
   // Let's see if the user has set a max_block_add_id
-  if (map_has_key(m_ti.m_max_blockadd_ids, m_ti.m_id))
+  if (mtx::includes(m_ti.m_max_blockadd_ids, m_ti.m_id))
     m_htrack_max_add_block_ids = m_ti.m_max_blockadd_ids[m_ti.m_id];
-  else if (map_has_key(m_ti.m_max_blockadd_ids, -1))
+  else if (mtx::includes(m_ti.m_max_blockadd_ids, -1))
     m_htrack_max_add_block_ids = m_ti.m_max_blockadd_ids[-1];
 
   // Let's see if the user has specified a NALU size length for this track.
-  if (map_has_key(m_ti.m_nalu_size_lengths, m_ti.m_id))
+  if (mtx::includes(m_ti.m_nalu_size_lengths, m_ti.m_id))
     m_ti.m_nalu_size_length = m_ti.m_nalu_size_lengths[m_ti.m_id];
-  else if (map_has_key(m_ti.m_nalu_size_lengths, -1))
+  else if (mtx::includes(m_ti.m_nalu_size_lengths, -1))
     m_ti.m_nalu_size_length = m_ti.m_nalu_size_lengths[-1];
 
   // Let's see if the user has specified a compression scheme for this track.

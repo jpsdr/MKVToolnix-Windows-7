@@ -13,6 +13,7 @@
 
 #include "common/cli_parser.h"
 #include "common/command_line.h"
+#include "common/container.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/translation.h"
@@ -132,7 +133,7 @@ cli_parser_c::add_option(const std::string &spec,
                           : 1   == name.length() ? std::string( "-") + name
                           :                        std::string("--") + name;
 
-    if (map_has_key(m_option_map, full_name))
+    if (mtx::includes(m_option_map, full_name))
       mxerror(boost::format("cli_parser_c::add_option(): Programming error: option '%1%' is already used for spec '%2%' "
                             "and cannot be used for spec '%3%'.\n") % full_name % m_option_map[full_name].m_spec % spec);
 

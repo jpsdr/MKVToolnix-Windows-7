@@ -167,9 +167,9 @@ mpeg_ts_track_c::new_stream_v_avc() {
     m_avc_parser = mpeg4::p10::avc_es_parser_cptr(new mpeg4::p10::avc_es_parser_c);
     m_avc_parser->ignore_nalu_size_length_errors();
 
-    if (map_has_key(reader.m_ti.m_nalu_size_lengths, reader.tracks.size()))
+    if (mtx::includes(reader.m_ti.m_nalu_size_lengths, reader.tracks.size()))
       m_avc_parser->set_nalu_size_length(reader.m_ti.m_nalu_size_lengths[0]);
-    else if (map_has_key(reader.m_ti.m_nalu_size_lengths, -1))
+    else if (mtx::includes(reader.m_ti.m_nalu_size_lengths, -1))
       m_avc_parser->set_nalu_size_length(reader.m_ti.m_nalu_size_lengths[-1]);
   }
 

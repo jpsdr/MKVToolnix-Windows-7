@@ -18,8 +18,8 @@
 
 #include <ostream>
 
+#include "common/container.h"
 #include "common/fourcc.h"
-#include "common/hash.h"
 #include "matroska/c/libmatroska_t.h"
 
 // see http://www.matroska.org/technical/specs/codecid/index.html

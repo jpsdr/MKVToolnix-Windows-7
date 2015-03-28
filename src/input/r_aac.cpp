@@ -76,16 +76,16 @@ aac_reader_c::read_headers() {
     if (24000 >= m_aacheader.sample_rate)
       m_aacheader.profile = AAC_PROFILE_SBR;
 
-    if (   (map_has_key(m_ti.m_all_aac_is_sbr,  0) && m_ti.m_all_aac_is_sbr[ 0])
-        || (map_has_key(m_ti.m_all_aac_is_sbr, -1) && m_ti.m_all_aac_is_sbr[-1]))
+    if (   (mtx::includes(m_ti.m_all_aac_is_sbr,  0) && m_ti.m_all_aac_is_sbr[ 0])
+        || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) && m_ti.m_all_aac_is_sbr[-1]))
       m_aacheader.profile = AAC_PROFILE_SBR;
 
-    if (   (map_has_key(m_ti.m_all_aac_is_sbr,  0) && !m_ti.m_all_aac_is_sbr[ 0])
-        || (map_has_key(m_ti.m_all_aac_is_sbr, -1) && !m_ti.m_all_aac_is_sbr[-1]))
+    if (   (mtx::includes(m_ti.m_all_aac_is_sbr,  0) && !m_ti.m_all_aac_is_sbr[ 0])
+        || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) && !m_ti.m_all_aac_is_sbr[-1]))
       m_aacheader.profile = detected_profile;
 
-    if (   map_has_key(m_ti.m_all_aac_is_sbr,  0)
-        || map_has_key(m_ti.m_all_aac_is_sbr, -1))
+    if (   mtx::includes(m_ti.m_all_aac_is_sbr,  0)
+        || mtx::includes(m_ti.m_all_aac_is_sbr, -1))
       m_sbr_status_set = true;
 
   } catch (...) {

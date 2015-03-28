@@ -678,7 +678,7 @@ qtmp4_reader_c::handle_tfhd_atom(qt_atom_t,
   auto track_id  = m_in->read_uint32_be();
   auto track_itr = brng::find_if(m_demuxers, [this, track_id](qtmp4_demuxer_cptr const &dmx) { return dmx->container_id == track_id; });
 
-  if (!track_id || !map_has_key(m_track_defaults, track_id) || (m_demuxers.end() == track_itr)) {
+  if (!track_id || !mtx::includes(m_track_defaults, track_id) || (m_demuxers.end() == track_itr)) {
     mxdebug_if(m_debug_headers,
                boost::format("%1%tfhd atom with track_id(%2%) == 0, no entry in trex for it or no track(%3%) found\n")
                % space(level * 2 + 1) % track_id % (m_demuxers.end() == track_itr ? nullptr : track_itr->get()));

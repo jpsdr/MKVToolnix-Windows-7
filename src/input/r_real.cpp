@@ -315,14 +315,14 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
   if (sbr)
     profile = AAC_PROFILE_SBR;
 
-  if (   (map_has_key(m_ti.m_all_aac_is_sbr, tid) && m_ti.m_all_aac_is_sbr[tid])
-      || (map_has_key(m_ti.m_all_aac_is_sbr, -1)  && m_ti.m_all_aac_is_sbr[-1]))
+  if (   (mtx::includes(m_ti.m_all_aac_is_sbr, tid) && m_ti.m_all_aac_is_sbr[tid])
+      || (mtx::includes(m_ti.m_all_aac_is_sbr, -1)  && m_ti.m_all_aac_is_sbr[-1]))
     profile = AAC_PROFILE_SBR;
 
   if ((-1 != detected_profile)
       &&
-      (   (map_has_key(m_ti.m_all_aac_is_sbr, tid) && !m_ti.m_all_aac_is_sbr[tid])
-       || (map_has_key(m_ti.m_all_aac_is_sbr, -1)  && !m_ti.m_all_aac_is_sbr[-1])))
+      (   (mtx::includes(m_ti.m_all_aac_is_sbr, tid) && !m_ti.m_all_aac_is_sbr[tid])
+       || (mtx::includes(m_ti.m_all_aac_is_sbr, -1)  && !m_ti.m_all_aac_is_sbr[-1])))
     profile = detected_profile;
 
   mxverb(2,

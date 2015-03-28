@@ -687,9 +687,9 @@ mpeg_ps_reader_c::new_stream_v_avc(mpeg_ps_id_t id,
   mpeg4::p10::avc_es_parser_c parser;
 
   parser.ignore_nalu_size_length_errors();
-  if (map_has_key(m_ti.m_nalu_size_lengths, tracks.size()))
+  if (mtx::includes(m_ti.m_nalu_size_lengths, tracks.size()))
     parser.set_nalu_size_length(m_ti.m_nalu_size_lengths[0]);
-  else if (map_has_key(m_ti.m_nalu_size_lengths, -1))
+  else if (mtx::includes(m_ti.m_nalu_size_lengths, -1))
     parser.set_nalu_size_length(m_ti.m_nalu_size_lengths[-1]);
 
   parser.add_bytes(buf, length);
@@ -916,14 +916,14 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
                % id % format_timecode(packet.pts()) % (packet.pts() * 90 / 1000000ll)
                % (packet.has_dts() ? (boost::format("%1% [%2%]") % format_timecode(packet.dts()) % (packet.dts() * 90 / 1000000ll)).str() : std::string{"none"}));
 
-    if (map_has_key(blacklisted_ids, id.idx()))
+    if (mtx::includes(blacklisted_ids, id.idx()))
       return;
 
     int64_t timecode_for_offset = packet.pts();
     if (std::numeric_limits<int64_t>::max() == timecode_for_offset)
       timecode_for_offset = -1;
 
-    if (map_has_key(id2idx, id.idx())) {
+    if (mtx::includes(id2idx, id.idx())) {
       mpeg_ps_track_ptr &track = tracks[id2idx[id.idx()]];
       if ((-1 != timecode_for_offset) && (-1 == track->timecode_offset))
         track->timecode_offset = timecode_for_offset;
@@ -1267,7 +1267,7 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
         continue;
       }
 
-      if (!map_has_key(id2idx, new_id.idx()) || (-1 == tracks[id2idx[new_id.idx()]]->ptzr)) {
+      if (!mtx::includes(id2idx, new_id.idx()) || (-1 == tracks[id2idx[new_id.idx()]]->ptzr)) {
         m_in->setFilePointer(packet_pos + 4 + 2 + packet.m_full_length);
         continue;
       }

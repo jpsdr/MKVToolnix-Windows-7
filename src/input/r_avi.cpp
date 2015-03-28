@@ -226,10 +226,10 @@ avi_reader_c::create_video_packetizer() {
   else if (mpeg4::p2::is_fourcc(codec))
     m_divx_type = DIVX_TYPE_MPEG4;
 
-  if (map_has_key(m_ti.m_default_durations, 0))
+  if (mtx::includes(m_ti.m_default_durations, 0))
     m_fps = 1000000000.0 / m_ti.m_default_durations[0];
 
-  else if (map_has_key(m_ti.m_default_durations, -1))
+  else if (mtx::includes(m_ti.m_default_durations, -1))
     m_fps = 1000000000.0 / m_ti.m_default_durations[-1];
 
   m_ti.m_id = 0;                 // ID for the video track.
@@ -410,8 +410,8 @@ avi_reader_c::create_ssa_packetizer(int idx) {
   ssa_parser_c *parser           = new ssa_parser_c(this, demuxer.m_text_io.get(), m_ti.m_fname, id);
   demuxer.m_subs                 = subtitles_cptr(parser);
 
-  charset_converter_cptr cc_utf8 = map_has_key(m_ti.m_sub_charsets, id)           ? charset_converter_c::init(m_ti.m_sub_charsets[id])
-                                 : map_has_key(m_ti.m_sub_charsets, -1)           ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
+  charset_converter_cptr cc_utf8 = mtx::includes(m_ti.m_sub_charsets, id)         ? charset_converter_c::init(m_ti.m_sub_charsets[id])
+                                 : mtx::includes(m_ti.m_sub_charsets, -1)         ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
                                  : demuxer.m_text_io->get_byte_order() != BO_NONE ? charset_converter_c::init("UTF-8")
                                  :                                                  g_cc_local_utf8;
 
