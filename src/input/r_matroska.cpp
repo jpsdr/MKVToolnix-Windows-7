@@ -361,7 +361,6 @@ kax_reader_c::verify_alac_audio_track(kax_track_t *t) {
 bool
 kax_reader_c::verify_dts_audio_track(kax_track_t *t) {
   try {
-    mxinfo(boost::format("kax i am at %1%\n") % m_in->getFilePointer());
     read_first_frames(t, 5);
 
     byte_buffer_c buffer;
@@ -1741,7 +1740,6 @@ kax_reader_c::create_packetizer(int64_t tid) {
 
 void
 kax_reader_c::create_packetizers() {
-  mxinfo(boost::format("create pack at %1%\n") % m_in->getFilePointer());
   m_in->save_pos();
 
   for (auto &track : m_tracks)
