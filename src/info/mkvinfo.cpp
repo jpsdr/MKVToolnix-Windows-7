@@ -13,10 +13,9 @@
 #include "common/common_pch.h"
 
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <typeinfo>
-
-#include <boost/math/special_functions/round.hpp>
 
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
@@ -1278,7 +1277,7 @@ handle_block_group(EbmlStream *&es,
         mxinfo(BF_BLOCK_GROUP_SUMMARY_WITH_DURATION
                % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
-               % boost::math::llround(lf_timecode / 1000000.0)
+               % std::llround(lf_timecode / 1000000.0)
                % format_timecode(lf_timecode, 3)
                % bduration
                % frame_sizes[fidx]
@@ -1289,7 +1288,7 @@ handle_block_group(EbmlStream *&es,
         mxinfo(BF_BLOCK_GROUP_SUMMARY_NO_DURATION
                % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
-               % boost::math::llround(lf_timecode / 1000000.0)
+               % std::llround(lf_timecode / 1000000.0)
                % format_timecode(lf_timecode, 3)
                % frame_sizes[fidx]
                % frame_adlers[fidx]
@@ -1302,7 +1301,7 @@ handle_block_group(EbmlStream *&es,
                  BF_BLOCK_GROUP_SUMMARY_V2
                  % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                  % lf_tnum
-                 % boost::math::llround(lf_timecode / 1000000.0));
+                 % std::llround(lf_timecode / 1000000.0));
 
   track_info_t &tinfo = s_track_info[lf_tnum];
 
@@ -1336,7 +1335,7 @@ handle_simple_block(EbmlStream *&es,
 
   int64_t frame_pos   = block.GetElementPosition() + block.ElementSize();
   auto timecode_ns    = block.GlobalTimecode();
-  auto timecode_ms    = boost::math::llround(static_cast<double>(timecode_ns) / 1000000.0);
+  auto timecode_ms    = std::llround(static_cast<double>(timecode_ns) / 1000000.0);
   track_info_t &tinfo = s_track_info[block.TrackNum()];
 
   std::string info;

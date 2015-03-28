@@ -18,8 +18,8 @@
 
 #include "common/common_pch.h"
 
+#include <cmath>
 #include <unordered_map>
-#include <boost/math/special_functions/round.hpp>
 
 #include "common/bit_cursor.h"
 #include "common/byte_buffer.h"
@@ -2318,8 +2318,8 @@ es_parser_c::get_display_dimensions(int width,
   if (0 >= height)
     height = get_height();
 
-  return std::make_pair<int64_t, int64_t>(1 <= m_par ? boost::math::llround(width * boost::rational_cast<double>(m_par)) : width,
-                                          1 <= m_par ? height                                                            : boost::math::llround(height / boost::rational_cast<double>(m_par)));
+  return std::make_pair<int64_t, int64_t>(1 <= m_par ? std::llround(width * boost::rational_cast<double>(m_par)) : width,
+                                          1 <= m_par ? height                                                    : std::llround(height / boost::rational_cast<double>(m_par)));
 }
 
 size_t

@@ -13,10 +13,9 @@
 
 #include "common/common_pch.h"
 
+#include <cmath>
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
-
-#include <boost/math/special_functions/round.hpp>
 
 #include "avilib.h"
 #include "common/aac.h"
@@ -1397,12 +1396,12 @@ ogm_v_vp8_demuxer_c::initialize() {
   unsigned int par_den = get_uint16_be(&vp8_header.par_den);
 
   if ((0 != par_num) && (0 != par_den)) {
-    if (((float)pixel_width / (float)pixel_height) < ((float)par_num / (float)par_den)) {
-      display_width  = boost::math::llround((float)pixel_width * par_num / par_den);
+    if ((static_cast<double>(pixel_width) / static_cast<double>(pixel_height)) < (static_cast<double>(par_num) / static_cast<double>(par_den))) {
+      display_width  = std::llround(static_cast<double>(pixel_width) * par_num / par_den);
       display_height = pixel_height;
     } else {
       display_width  = pixel_width;
-      display_height = boost::math::llround((float)pixel_height * par_den / par_num);
+      display_height = std::llround(static_cast<double>(pixel_height) * par_den / par_num);
     }
 
   } else {

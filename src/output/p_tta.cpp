@@ -13,7 +13,7 @@
 
 #include "common/common_pch.h"
 
-#include <boost/math/special_functions/round.hpp>
+#include <cmath>
 
 #include "common/codec.h"
 #include "common/tta.h"
@@ -34,7 +34,7 @@ tta_packetizer_c::tta_packetizer_c(generic_reader_c *p_reader,
   , m_samples_output(0)
 {
   set_track_type(track_audio);
-  set_track_default_duration((int64_t)(1000000000.0 * TTA_FRAME_TIME));
+  set_track_default_duration(std::llround(1000000000.0 * TTA_FRAME_TIME));
 }
 
 tta_packetizer_c::~tta_packetizer_c() {
@@ -52,14 +52,14 @@ tta_packetizer_c::set_headers() {
 
 int
 tta_packetizer_c::process(packet_cptr packet) {
-  packet->timecode = boost::math::llround((double)m_samples_output * 1000000000 / m_sample_rate);
+  packet->timecode = std::llround((double)m_samples_output * 1000000000 / m_sample_rate);
   if (-1 == packet->duration) {
-    packet->duration  = boost::math::llround(1000000000.0  * TTA_FRAME_TIME);
-    m_samples_output += boost::math::llround(m_sample_rate * TTA_FRAME_TIME);
+    packet->duration  = m_htrack_default_duration;
+    m_samples_output += std::llround(m_sample_rate * TTA_FRAME_TIME);
 
   } else {
     mxverb(2, boost::format("tta_packetizer: incomplete block with duration %1%\n") % packet->duration);
-    m_samples_output += boost::math::llround(packet->duration * m_sample_rate / 1000000000ll);
+    m_samples_output += std::llround(packet->duration * m_sample_rate / 1000000000ll);
   }
 
   add_packet(packet);

@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include <boost/date_time/posix_time/ptime.hpp>
-#include <boost/math/special_functions/round.hpp>
+#include <cmath>
 
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxCluster.h>
@@ -25,7 +25,7 @@
 #include "common/split_point.h"
 #include "merge/libmatroska_extensions.h"
 
-#define RND_TIMECODE_SCALE(a) (boost::math::llround((double)(a) / (double)((int64_t)g_timecode_scale)) * (int64_t)g_timecode_scale)
+#define RND_TIMECODE_SCALE(a) (std::llround(static_cast<double>(a) / static_cast<double>(g_timecode_scale)) * static_cast<int64_t>(g_timecode_scale))
 
 class render_groups_c;
 class packet_t;

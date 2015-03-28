@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-#include <boost/math/special_functions/round.hpp>
+#include <cmath>
 
 #include <ebml/EbmlContexts.h>
 #include <ebml/EbmlHead.h>
@@ -826,7 +826,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   info->Read(*m_es, EBML_CLASS_CONTEXT(KaxInfo), upper_lvl_el, l2, true);
 
   m_tc_scale         = FindChildValue<KaxTimecodeScale, uint64_t>(info, 1000000);
-  m_segment_duration = boost::math::llround(FindChildValue<KaxDuration>(info) * m_tc_scale);
+  m_segment_duration = std::llround(FindChildValue<KaxDuration>(info) * m_tc_scale);
   m_title            = to_utf8(FindChildValue<KaxTitle>(info));
 
   m_in_file->set_timecode_scale(m_tc_scale);

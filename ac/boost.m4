@@ -41,8 +41,8 @@ AX_BOOST_CHECK_HEADERS([boost/lexical_cast.hpp],,[
   AC_MSG_ERROR([Boost's lexical_cast library is required but wasn't found])
 ])
 
-AX_BOOST_CHECK_HEADERS([boost/math/special_functions/round.hpp],,[
-  AC_MSG_ERROR([Boost's math library's rounding functions are required but weren't found])
+AX_BOOST_CHECK_HEADERS([boost/math/common_factor.hpp],,[
+  AC_MSG_ERROR([Boost's math library is required but its headers weren't found])
 ])
 
 AX_BOOST_CHECK_HEADERS([boost/range.hpp],,[

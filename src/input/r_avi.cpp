@@ -14,7 +14,7 @@
 #include "common/common_pch.h"
 
 #include <algorithm>
-#include <boost/math/special_functions/round.hpp>
+#include <cmath>
 
 #include "avilib.h"
 #include "common/aac.h"
@@ -824,12 +824,12 @@ avi_reader_c::extended_identify_mpeg4_l2(std::vector<std::string> &extended_info
 
     int disp_width, disp_height;
     if (aspect_ratio > (static_cast<float>(width) / height)) {
-      disp_width  = boost::math::llround(height * aspect_ratio);
+      disp_width  = std::llround(height * aspect_ratio);
       disp_height = height;
 
     } else {
       disp_width  = width;
-      disp_height = boost::math::llround(width / aspect_ratio);
+      disp_height = std::llround(width / aspect_ratio);
     }
 
     extended_info.push_back((boost::format("display_dimensions:%1%x%2%") % disp_width % disp_height).str());
