@@ -703,7 +703,7 @@ header_t::decode_asset(bit_reader_c &bc,
       asset.extension_mask = static_cast<extension_mask_e>(bc.get_bits(12));
       if (asset.extension_mask & exss_core) {
         asset.core_size = bc.get_bits(14) + 1; // size of core component in extension substream
-        if (bc.get_bit())                      // core sync word presence flace
+        if (bc.get_bit())                      // core sync word presence flag
           bc.skip_bits(2);                     // core sync distance
       }
       if (asset.extension_mask & exss_xbr)
