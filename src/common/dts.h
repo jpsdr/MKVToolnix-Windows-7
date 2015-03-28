@@ -26,6 +26,7 @@ enum class sync_word_e {
     core = 0x7ffe8001
   , exss = 0x64582025
   , lbr  = 0x0a801921
+  , xll  = 0x41a29547
 };
 
 enum class frametype_e {
@@ -236,6 +237,7 @@ public:
 protected:
   bool decode_asset(bit_reader_c &bc, substream_asset_t &asset);
   bool decode_lbr_header(bit_reader_c &bc, substream_asset_t &asset);
+  bool decode_xll_header(bit_reader_c &bc, substream_asset_t &asset);
   void parse_lbr_parameters(bit_reader_c &bc, substream_asset_t &asset);
   void parse_xll_parameters(bit_reader_c &bc, substream_asset_t &asset);
 

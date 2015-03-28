@@ -48,6 +48,13 @@ static const channel_arrangement channel_arrangements[16] = {
   // other modes are not defined as of yet
 };
 
+static unsigned int const s_substream_sample_rates[16] = {
+    8000,  16000,  32000,  64000,
+  128000,  22050,  44100,  88200,
+  176400, 352800,  12000,  24000,
+   48000,  96000, 192000, 384000
+};
+
 static const int core_samplefreqs[16] = {
      -1, 8000, 16000, 32000,    -1,    -1, 11025, 22050,
   44100,   -1,    -1, 12000, 24000, 48000,    -1,    -1
@@ -553,15 +560,49 @@ header_t::decode_lbr_header(bit_reader_c &bc,
 }
 
 bool
+header_t::decode_xll_header(bit_reader_c &bc,
+                            substream_asset_t &asset) {
+  bc.set_bit_position(asset.xll_offset * 8);
+  if (bc.get_bits(32) != static_cast<uint32_t>(sync_word_e::xll))
+    return false;
+
+  if (!has_core && !(asset.extension_mask & exss_lbr))
+    core_sampling_frequency = substream_assets[0].max_sample_rate;
+
+  return true;
+
+  // // Decode common header.
+  // bc.skip_bits(4);              // version
+  // auto header_size     = bc.get_bits(8);
+  // auto frame_size_bits = bc.get_bits(5);
+  // bc.skip_bits(frame_size_bits); // frame size
+
+  // auto num_channel_sets = bc.get_bits(4);
+  // if (!num_channel_sets)
+  //   return false;
+
+  // bc.skip_bits(4);              // num segments in frame
+  // auto num_samples_in_segment = 1 << bc.get_bits(4);
+
+  // bc.set_bit_position(asset.xll_offset * 8 + header_size);
+
+  // // Decode first channel set sub-header.
+  // bc.skip_bits(10);             // channel set header size
+  // auto channel_set_ll_channel = bc.get_bits(4);
+  // bc.skip_bits(channel_set_ll_channel); // residual channel encode
+  // bc.skip_bits(5 + 5);                  // bit resolution, bit width
+
+  // auto sampling_frequency_idx      = bc.get_bits(4);
+  // auto sampling_frequency_modifier = bc.get_bits(2);
+  // if (!has_core && !(asset.extension_mask & exss_lbr))
+  //   core_sampling_frequency = substream_assets[0].max_sample_rate;
+
+  // return true;
+}
+
+bool
 header_t::decode_asset(bit_reader_c &bc,
                        substream_asset_t &asset) {
-  static unsigned int const s_substream_sample_rates[16] = {
-      8000,  16000,  32000,  64000,
-    128000,  22050,  44100,  88200,
-    176400, 352800,  12000,  24000,
-     48000,  96000, 192000, 384000
-  };
-
   auto descriptor_pos  = bc.get_bit_position();
   auto descriptor_size = bc.get_bits(9) + 1;
   asset.asset_index    = bc.get_bits(3);
@@ -706,6 +747,9 @@ header_t::decode_asset(bit_reader_c &bc,
     return false;
 
   if ((asset.extension_mask & exss_lbr) && !decode_lbr_header(bc, asset))
+    return false;
+
+  if ((asset.extension_mask & exss_xll) && !decode_xll_header(bc, asset))
     return false;
 
   if (asset.extension_mask & exss_xll)
