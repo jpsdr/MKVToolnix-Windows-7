@@ -984,11 +984,14 @@ Matroska(TM)
 开关获取的轨道 ID。他们不只是简单的轨道序号（参见
 轨道 ID段落）。默认: 复制所有音频轨道。
 .sp
-如果 ID 以
+Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
+.sp
+Default: copy all tracks of this kind\&.
+.sp
+If the IDs are prefixed with
 !
-作为前缀，则含义相反: 复制除了列在
-!
-后面的 ID 以外的所有轨道。
+then the meaning is reversed: copy all tracks of this kind but the ones listed after the
+!\&.
 .RE
 .PP
 \fB\-d\fR, \fB\-\-video\-tracks\fR \fI[!]\fR\fIn,m,\&.\&.\&.\fR
@@ -1000,11 +1003,12 @@ Matroska(TM)
 开关获取的轨道 ID。他们不只是简单的轨道序号（参见
 轨道 ID段落）。默认: 复制所有视频轨道。
 .sp
-如果 ID 以
+Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
+.sp
+If the IDs are prefixed with
 !
-作为前缀，则含义相反: 复制除了列在
-!
-后面的 ID 以外的所有轨道。
+then the meaning is reversed: copy all tracks of this kind but the ones listed after the
+!\&.
 .RE
 .PP
 \fB\-s\fR, \fB\-\-subtitle\-tracks\fR \fI[!]\fR\fIn,m,\&.\&.\&.\fR
@@ -1016,11 +1020,12 @@ Matroska(TM)
 开关获取的轨道 ID。他们不只是简单的轨道序号（参见
 轨道 ID段落）。默认: 复制所有字幕轨道。
 .sp
-如果 ID 以
+Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
+.sp
+If the IDs are prefixed with
 !
-作为前缀，则含义相反: 复制除了列在
-!
-后面的 ID 以外的所有轨道。
+then the meaning is reversed: copy all tracks of this kind but the ones listed after the
+!\&.
 .RE
 .PP
 \fB\-b\fR, \fB\-\-button\-tracks\fR \fI[!]\fR\fIn,m,\&.\&.\&.\fR
@@ -1032,11 +1037,12 @@ Matroska(TM)
 开关获取的轨道 ID。他们不只是简单的轨道序号（参见
 轨道 ID段落）。默认: 复制所有按钮轨道。
 .sp
-如果 ID 以
+Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
+.sp
+If the IDs are prefixed with
 !
-作为前缀，则含义相反: 复制除了列在
-!
-后面的 ID 以外的所有轨道。
+then the meaning is reversed: copy all tracks of this kind but the ones listed after the
+!\&.
 .RE
 .PP
 \fB\-\-track\-tags\fR \fI[!]\fR\fIn,m,\&.\&.\&.\fR

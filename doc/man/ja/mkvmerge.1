@@ -823,28 +823,50 @@ Matroska(TM)ファイルの内部に添付ファイルを作成します。こ�
 .RS 4
 オーディオトラック\fIn\fR、\fIm\fR\&...をコピーします。番号は\fB\-\-identify\fRオプションで得られるトラックIDです。これは単純にトラック番号を示すものではありません(トラックIDのセクションを参照してください)。デフォルト: 全てのオーディオトラックをコピーします。
 .sp
-もしIDにプレフィックス!がついていた場合は、意味が逆になります：!の後に列挙されたIDを除く全てをコピーします。
+Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
+.sp
+Default: copy all tracks of this kind\&.
+.sp
+If the IDs are prefixed with
+!
+then the meaning is reversed: copy all tracks of this kind but the ones listed after the
+!\&.
 .RE
 .PP
 \fB\-d\fR, \fB\-\-video\-tracks\fR \fI[!]\fR\fIn,m,\&.\&.\&.\fR
 .RS 4
 ビデオトラック\fIn\fR、\fIm\fR\&...をコピーします。数字は\fB\-\-identify\fRオプションで得られるトラックIDです。これは単純にトラック番号を示すものではありません(トラックIDのセクションを参照してください)。 デフォルト: 全てのビデオトラックをコピーします。
 .sp
-もしIDにプレフィックス!がついていた場合は、意味が逆になります：!の後に列挙されたIDを除く全てをコピーします。
+Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
+.sp
+If the IDs are prefixed with
+!
+then the meaning is reversed: copy all tracks of this kind but the ones listed after the
+!\&.
 .RE
 .PP
 \fB\-s\fR, \fB\-\-subtitle\-tracks\fR \fI[!]\fR\fIn,m,\&.\&.\&.\fR
 .RS 4
 字幕トラック\fIn\fR、\fIm\fR\&...をコピーします。番号は\fB\-\-identify\fRオプションで得られるトラックIDです。これは単純にトラック番号を示すものではありません(トラックIDのセクションを参照してください)。デフォルト: 全ての字幕トラックをコピーします。
 .sp
-もしIDにプレフィックス!がついていた場合は、意味が逆になります：!の後に列挙されたIDを除く全てをコピーします。
+Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
+.sp
+If the IDs are prefixed with
+!
+then the meaning is reversed: copy all tracks of this kind but the ones listed after the
+!\&.
 .RE
 .PP
 \fB\-b\fR, \fB\-\-button\-tracks\fR \fI[!]\fR\fIn,m,\&.\&.\&.\fR
 .RS 4
 ボタントラック\fIn\fR、\fIm\fR\&...をコピーします。番号は\fB\-\-identify\fRオプションで得られるトラックIDです。これは単純にトラック番号を示すものではありません(トラックIDのセクションを参照してください)。デフォルト: 全てのボタントラックをコピーします。
 .sp
-もしIDにプレフィックス!がついていた場合は、意味が逆になります：!の後に列挙されたIDを除く全てをコピーします。
+Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
+.sp
+If the IDs are prefixed with
+!
+then the meaning is reversed: copy all tracks of this kind but the ones listed after the
+!\&.
 .RE
 .PP
 \fB\-\-track\-tags\fR \fI[!]\fR\fIn,m,\&.\&.\&.\fR
