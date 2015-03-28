@@ -23,46 +23,46 @@
 #define INDENT_COLUMN_SECTION_HEADER      1
 
 cli_parser_c::option_t::option_t()
-  : m_needs_arg(false)
+  : m_needs_arg{}
 {
 }
 
 cli_parser_c::option_t::option_t(cli_parser_c::option_t::option_type_e type,
-                                 const translatable_string_c &description,
+                                 translatable_string_c const &description,
                                  int indent)
-  : m_type(type)
-  , m_description(description)
-  , m_needs_arg(false)
-  , m_indent(indent)
+  : m_type{type}
+  , m_description{description}
+  , m_needs_arg{}
+  , m_indent{indent}
 {
 }
 
-cli_parser_c::option_t::option_t(const std::string &name,
-                                 const translatable_string_c &description)
-  : m_type(cli_parser_c::option_t::ot_informational_option)
-  , m_name(name)
-  , m_description(description)
-  , m_needs_arg(false)
-  , m_indent(INDENT_DEFAULT)
+cli_parser_c::option_t::option_t(std::string const &name,
+                                 translatable_string_c const &description)
+  : m_type{cli_parser_c::option_t::ot_informational_option}
+  , m_name{name}
+  , m_description{description}
+  , m_needs_arg{}
+  , m_indent{INDENT_DEFAULT}
 {
 }
 
-cli_parser_c::option_t::option_t(const std::string &spec,
-                                 const translatable_string_c &description,
-                                 cli_parser_cb_t callback,
+cli_parser_c::option_t::option_t(std::string const &spec,
+                                 translatable_string_c const &description,
+                                 cli_parser_cb_t const &callback,
                                  bool needs_arg)
-  : m_type(cli_parser_c::option_t::ot_option)
-  , m_spec(spec)
-  , m_description(description)
-  , m_callback(callback)
-  , m_needs_arg(needs_arg)
-  , m_indent(INDENT_DEFAULT)
+  : m_type{cli_parser_c::option_t::ot_option}
+  , m_spec{spec}
+  , m_description{description}
+  , m_callback{callback}
+  , m_needs_arg{needs_arg}
+  , m_indent{INDENT_DEFAULT}
 {
 }
 
 std::string
 cli_parser_c::option_t::format_text() {
-  std::string description = m_description.get_translated();
+  auto description = m_description.get_translated();
 
   if ((cli_parser_c::option_t::ot_option == m_type) || (cli_parser_c::option_t::ot_informational_option == m_type))
     return format_paragraph(description, INDENT_DEFAULT == m_indent ? INDENT_COLUMN_OPTION_DESCRIPTION : m_indent, std::string(INDENT_COLUMN_OPTION_NAME, ' ') + m_name);
@@ -75,8 +75,8 @@ cli_parser_c::option_t::format_text() {
 
 // ------------------------------------------------------------
 
-cli_parser_c::cli_parser_c(const std::vector<std::string> &args)
-  : m_args(args)
+cli_parser_c::cli_parser_c(std::vector<std::string> const &args)
+  : m_args{args}
 {
   m_hooks[cli_parser_c::ht_common_options_parsed] = std::vector<cli_parser_cb_t>();
   m_hooks[cli_parser_c::ht_unknown_option]        = std::vector<cli_parser_cb_t>();
@@ -96,9 +96,9 @@ cli_parser_c::parse_args() {
     m_current_arg    = *sit;
     m_next_arg       = no_next_arg ? "" : *(sit + 1);
 
-    std::map<std::string, cli_parser_c::option_t>::iterator option_it(m_option_map.find(m_current_arg));
+    auto option_it = m_option_map.find(m_current_arg);
     if (option_it != m_option_map.end()) {
-      cli_parser_c::option_t &option(option_it->second);
+      auto &option = option_it->second;
 
       if (option.m_needs_arg) {
         if (no_next_arg)
@@ -114,24 +114,24 @@ cli_parser_c::parse_args() {
 }
 
 void
-cli_parser_c::add_informational_option(const std::string &name,
-                                       const translatable_string_c &description) {
-  m_options.push_back(cli_parser_c::option_t(name, description));
+cli_parser_c::add_informational_option(std::string const &name,
+                                       translatable_string_c const &description) {
+  m_options.emplace_back(name, description);
 }
 
 void
-cli_parser_c::add_option(const std::string &spec,
-                         cli_parser_cb_t callback,
-                         const translatable_string_c &description) {
-  std::vector<std::string> parts = split(spec, "=", 2);
-  bool needs_arg                 = parts.size() == 2;
-  cli_parser_c::option_t option(spec, description, callback, needs_arg);
+cli_parser_c::add_option(std::string const &spec,
+                         cli_parser_cb_t const &callback,
+                         translatable_string_c const &description) {
+  auto parts     = split(spec, "=", 2);
+  auto needs_arg = parts.size() == 2;
+  auto option    = cli_parser_c::option_t{spec, description, callback, needs_arg};
+  auto names     = split(parts[0], "|");
 
-  std::vector<std::string> names = split(parts[0], "|");
   for (auto &name : names) {
-    std::string full_name = '@' == name[0]       ? name
-                          : 1   == name.length() ? std::string( "-") + name
-                          :                        std::string("--") + name;
+    auto full_name = '@' == name[0]       ? name
+                   : 1   == name.length() ? std::string( "-") + name
+                   :                        std::string("--") + name;
 
     if (mtx::includes(m_option_map, full_name))
       mxerror(boost::format("cli_parser_c::add_option(): Programming error: option '%1%' is already used for spec '%2%' "
@@ -151,20 +151,20 @@ cli_parser_c::add_option(const std::string &spec,
 }
 
 void
-cli_parser_c::add_section_header(const translatable_string_c &title,
+cli_parser_c::add_section_header(translatable_string_c const &title,
                                  int indent) {
-  m_options.push_back(cli_parser_c::option_t(cli_parser_c::option_t::ot_section_header, title, indent));
+  m_options.emplace_back(cli_parser_c::option_t::ot_section_header, title, indent);
 }
 
 void
-cli_parser_c::add_information(const translatable_string_c &information,
+cli_parser_c::add_information(translatable_string_c const &information,
                               int indent) {
-  m_options.push_back(cli_parser_c::option_t(cli_parser_c::option_t::ot_information, information, indent));
+  m_options.emplace_back(cli_parser_c::option_t::ot_information, information, indent);
 }
 
 void
 cli_parser_c::add_separator() {
-  m_options.push_back(cli_parser_c::option_t(cli_parser_c::option_t::ot_information, translatable_string_c("")));
+  m_options.emplace_back(cli_parser_c::option_t::ot_information, translatable_string_c(""));
 }
 
 #define OPT(name, description) add_option(name, std::bind(&cli_parser_c::dummy_callback, this), description)

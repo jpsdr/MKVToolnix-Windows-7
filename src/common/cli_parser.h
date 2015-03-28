@@ -37,9 +37,9 @@ protected:
     int m_indent;
 
     option_t();
-    option_t(option_type_e type, const translatable_string_c &description, int indent = INDENT_DEFAULT);
-    option_t(const std::string &spec, const translatable_string_c &description, cli_parser_cb_t callback, bool needs_arg);
-    option_t(const std::string &name, const translatable_string_c &description);
+    option_t(option_type_e type, translatable_string_c const &description, int indent = INDENT_DEFAULT);
+    option_t(std::string const &spec, translatable_string_c const &description, cli_parser_cb_t const &callback, bool needs_arg);
+    option_t(std::string const &name, translatable_string_c const &description);
 
     std::string format_text();
   };
@@ -58,12 +58,12 @@ protected:
   std::map<hook_type_e, std::vector<cli_parser_cb_t>> m_hooks;
 
 protected:
-  cli_parser_c(const std::vector<std::string> &args);
+  cli_parser_c(std::vector<std::string> const &args);
 
-  void add_option(const std::string &spec, cli_parser_cb_t callback, const translatable_string_c &description);
-  void add_informational_option(const std::string &name, const translatable_string_c &description);
-  void add_section_header(const translatable_string_c &title, int indent = INDENT_DEFAULT);
-  void add_information(const translatable_string_c &information, int indent = INDENT_DEFAULT);
+  void add_option(std::string const &spec, cli_parser_cb_t const &callback, translatable_string_c const &description);
+  void add_informational_option(std::string const &name, translatable_string_c const &description);
+  void add_section_header(translatable_string_c const &title, int indent = INDENT_DEFAULT);
+  void add_information(translatable_string_c const &information, int indent = INDENT_DEFAULT);
   void add_separator();
   void add_common_options();
 
@@ -72,7 +72,7 @@ protected:
 
   void dummy_callback();
 
-  void add_hook(hook_type_e hook_type, const cli_parser_cb_t &callback);
+  void add_hook(hook_type_e hook_type, cli_parser_cb_t const &callback);
   bool run_hooks(hook_type_e hook_type);
 };
 
