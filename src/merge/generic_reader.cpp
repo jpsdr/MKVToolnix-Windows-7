@@ -19,13 +19,13 @@
 #include "merge/input_x.h"
 #include "merge/output_control.h"
 
-#define add_all_requested_track_ids(type, container)                                                       \
-  for (std::map<int64_t, type>::const_iterator i = m_ti.container.begin(); m_ti.container.end() != i; ++i) \
-    add_requested_track_id(i->first);
-
-#define add_all_requested_track_ids2(container)                                                                            \
-  for (std::map<int64_t, bool>::const_iterator i = m_ti.container.m_items.begin(); m_ti.container.m_items.end() != i; ++i) \
-    add_requested_track_id(i->first);
+template<typename T>
+void
+add_all_requested_track_ids(generic_reader_c &reader,
+                            T const &container) {
+  for (auto const &pair : container)
+    reader.add_requested_track_id(pair.first);
+}
 
 generic_reader_c::generic_reader_c(const track_info_c &ti,
                                    const mm_io_cptr &in)
@@ -40,26 +40,26 @@ generic_reader_c::generic_reader_c(const track_info_c &ti,
   , m_num_subtitle_tracks{}
   , m_reference_timecode_tolerance{}
 {
-  add_all_requested_track_ids2(m_atracks);
-  add_all_requested_track_ids2(m_vtracks);
-  add_all_requested_track_ids2(m_stracks);
-  add_all_requested_track_ids2(m_btracks);
-  add_all_requested_track_ids2(m_track_tags);
-  add_all_requested_track_ids(std::string,          m_all_fourccs);
-  add_all_requested_track_ids(display_properties_t, m_display_properties);
-  add_all_requested_track_ids(timecode_sync_t,      m_timecode_syncs);
-  add_all_requested_track_ids(cue_strategy_e,       m_cue_creations);
-  add_all_requested_track_ids(bool,                 m_default_track_flags);
-  add_all_requested_track_ids(bool,                 m_fix_bitstream_frame_rate_flags);
-  add_all_requested_track_ids(std::string,          m_languages);
-  add_all_requested_track_ids(std::string,          m_sub_charsets);
-  add_all_requested_track_ids(std::string,          m_all_tags);
-  add_all_requested_track_ids(bool,                 m_all_aac_is_sbr);
-  add_all_requested_track_ids(compression_method_e, m_compression_list);
-  add_all_requested_track_ids(std::string,          m_track_names);
-  add_all_requested_track_ids(std::string,          m_all_ext_timecodes);
-  add_all_requested_track_ids(pixel_crop_t,         m_pixel_crop_list);
-  add_all_requested_track_ids(bool,                 m_reduce_to_core);
+  add_all_requested_track_ids(*this, m_ti.m_atracks.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_vtracks.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_stracks.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_btracks.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_track_tags.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_all_fourccs);
+  add_all_requested_track_ids(*this, m_ti.m_display_properties);
+  add_all_requested_track_ids(*this, m_ti.m_timecode_syncs);
+  add_all_requested_track_ids(*this, m_ti.m_cue_creations);
+  add_all_requested_track_ids(*this, m_ti.m_default_track_flags);
+  add_all_requested_track_ids(*this, m_ti.m_fix_bitstream_frame_rate_flags);
+  add_all_requested_track_ids(*this, m_ti.m_languages);
+  add_all_requested_track_ids(*this, m_ti.m_sub_charsets);
+  add_all_requested_track_ids(*this, m_ti.m_all_tags);
+  add_all_requested_track_ids(*this, m_ti.m_all_aac_is_sbr);
+  add_all_requested_track_ids(*this, m_ti.m_compression_list);
+  add_all_requested_track_ids(*this, m_ti.m_track_names);
+  add_all_requested_track_ids(*this, m_ti.m_all_ext_timecodes);
+  add_all_requested_track_ids(*this, m_ti.m_pixel_crop_list);
+  add_all_requested_track_ids(*this, m_ti.m_reduce_to_core);
 }
 
 generic_reader_c::~generic_reader_c() {
