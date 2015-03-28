@@ -511,15 +511,15 @@ parse_arg_tracks(std::string s,
     tracks.set_reversed();
   }
 
-  std::vector<std::string> elements = split(s, ",");
+  auto elements = split(s, ",");
   strip(elements);
 
-  size_t i;
-  for (i = 0; i < elements.size(); i++) {
+  for (auto const &element : elements) {
     int64_t tid;
-    if (!parse_number(elements[i], tid))
+    if (parse_number(element, tid))
+      tracks.add(tid);
+    else
       mxerror(boost::format(Y("Invalid track ID in '%1% %2%'.\n")) % opt % s);
-    tracks.add(tid);
   }
 }
 
