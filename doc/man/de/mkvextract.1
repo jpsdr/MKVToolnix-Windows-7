@@ -2,12 +2,12 @@
 .\"     Title: mkvextract
 .\"    Author: Moritz Bunkus <moritz@bunkus.org>
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 2015-03-27
+.\"      Date: 2015-02-08
 .\"    Manual: Benutzerbefehle
 .\"    Source: MKVToolNix 7.8.0
 .\"  Language: German
 .\"
-.TH "MKVEXTRACT" "1" "2015\-03\-27" "MKVToolNix 7\&.8\&.0" "Benutzerbefehle"
+.TH "MKVEXTRACT" "1" "2015\-02\-08" "MKVToolNix 7\&.8\&.0" "Benutzerbefehle"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -353,7 +353,7 @@ timecode=00:00:13\&.305000000 duration=\- cluster_position=757741 relative_posit
 .PP
 Die m\(:oglichen Schl\(:usselw\(:orter sind:
 .PP
-timecode
+Zeitstempel
 .RS 4
 der Zeitstempel des Indexelementes mit Nanosekunden\-Pr\(:azision\&. Das Format lautet
 HH:MM:SS\&.nnnnnnnnn\&. Dieses Element ist immer gesetzt\&.
@@ -361,8 +361,8 @@ HH:MM:SS\&.nnnnnnnnn\&. Dieses Element ist immer gesetzt\&.
 .PP
 duration
 .RS 4
-The cue point\*(Aqs duration with nanosecond precision\&. The format is
-HH:MM:SS\&.nnnnnnnnn\&.
+Die Dauer des Indexelements mit Nanosekunden\-Pr\(:azision\&. Das Format lautet
+HH:MM::SS\&.nnnnnnnnn\&.
 .RE
 .PP
 cluster_position
@@ -424,7 +424,7 @@ Beispiel:
 .RS 4
 .\}
 .nf
-$ mkvextract cues input\&.mkv 1:cues\-track1\&.txt 2:cues\-track2\&.txt
+$ mkvextract cues Eingabe\&.mkv 1:Cues\-Spur1\&.txt 2:Cues\-Spur2\&.txt
 .fi
 .if n \{\
 .RE
