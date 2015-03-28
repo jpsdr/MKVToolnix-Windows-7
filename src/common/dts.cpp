@@ -514,9 +514,10 @@ header_t::decode_core_header(unsigned char const *buf,
 void
 header_t::parse_lbr_parameters(bit_reader_c &bc,
                                substream_asset_t &asset) {
-  asset.lbr_size = bc.get_bits(14) + 1; // size of LBR component in extension substream
-  if (bc.get_bit())                     // LBR sync word presence flag
-    bc.skip_bits(2);                    // LBR sync distance
+  asset.lbr_size         = bc.get_bits(14) + 1; // size of LBR component in extension substream
+  asset.lbr_sync_present = bc.get_bit();
+  if (asset.lbr_sync_present)   // LBR sync word presence flag
+    bc.skip_bits(2);            // LBR sync distance
 }
 
 void
@@ -546,7 +547,7 @@ header_t::decode_lbr_header(bit_reader_c &bc,
   };
 
   bc.set_bit_position(asset.lbr_offset * 8);
-  if (bc.get_bits(32) != static_cast<uint32_t>(sync_word_e::lbr))
+  if (asset.lbr_sync_present && (bc.get_bits(32) != static_cast<uint32_t>(sync_word_e::lbr)))
     return false;
 
   auto format_info_code = static_cast<lbr_format_info_code_e>(bc.get_bits(8));
@@ -562,8 +563,8 @@ header_t::decode_lbr_header(bit_reader_c &bc,
 bool
 header_t::decode_xll_header(bit_reader_c &bc,
                             substream_asset_t &asset) {
-  bc.set_bit_position(asset.xll_offset * 8);
-  if (bc.get_bits(32) != static_cast<uint32_t>(sync_word_e::xll))
+  bc.set_bit_position((asset.xll_offset + asset.xll_sync_offset) * 8);
+  if (asset.xll_sync_present && (bc.get_bits(32) != static_cast<uint32_t>(sync_word_e::xll)))
     return false;
 
   if (!has_core && !(asset.extension_mask & exss_lbr))

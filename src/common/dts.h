@@ -213,7 +213,7 @@ struct header_t {
     size_t lbr_offset{},  lbr_size{};
     size_t xll_offset{},  xll_size{};
 
-    bool xll_sync_present{};
+    bool lbr_sync_present{}, xll_sync_present{};
     int xll_delay_num_frames{};
     size_t xll_sync_offset{};
 
