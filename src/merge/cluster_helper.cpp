@@ -544,6 +544,8 @@ cluster_helper_c::render() {
     pack->group = new_block_group;
 
     m->track_statistics[ source->get_uid() ].process(*pack);
+
+    source->after_packet_rendered(*pack);
   }
 
   if (!discarding()) {

@@ -1028,6 +1028,18 @@ calc_attachment_sizes() {
   }
 }
 
+static void
+run_before_file_finished_packetizer_hooks() {
+  for (auto &ptzr : g_packetizers)
+    ptzr.packetizer->before_file_finished();
+}
+
+static void
+run_after_file_created_packetizer_hooks() {
+  for (auto &ptzr : g_packetizers)
+    ptzr.packetizer->after_file_created();
+}
+
 void
 create_packetizers() {
   // Create the packetizers.
@@ -1233,9 +1245,11 @@ create_next_output_file() {
   if (g_cluster_helper->discarding())
     return;
 
-  ++g_file_num;
-
   s_chapters_in_this_file.reset();
+
+  run_after_file_created_packetizer_hooks();
+
+  ++g_file_num;
 }
 
 static void
@@ -1320,6 +1334,8 @@ finish_file(bool last_file,
 
   if (!last_file && !create_new_file)
     return;
+
+  run_before_file_finished_packetizer_hooks();
 
   bool do_output = verbose && !dynamic_cast<mm_null_io_c *>(s_out.get());
   if (do_output)

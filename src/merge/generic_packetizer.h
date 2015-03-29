@@ -84,6 +84,7 @@ protected:
   bool m_has_been_flushed;
 
   bool m_prevent_lacing;
+  generic_packetizer_c *m_connected_successor;
 
 protected:                      // static
   static int ms_track_number;
@@ -251,6 +252,11 @@ public:
 
   virtual void prevent_lacing();
   virtual bool is_lacing_prevented() const;
+
+  // Callbacks
+  virtual void after_packet_rendered(packet_t const &packet);
+  virtual void before_file_finished();
+  virtual void after_file_created();
 
 protected:
   virtual void flush_impl() {

@@ -88,6 +88,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_last_cue_timecode{-1}
   , m_has_been_flushed{}
   , m_prevent_lacing{}
+  , m_connected_successor{}
   , m_ti{ti}
   , m_reader{reader}
   , m_connected_to{}
@@ -1089,8 +1090,10 @@ generic_packetizer_c::connect(generic_packetizer_c *src,
     m_append_timecode_offset   = append_timecode_offset;
 
   m_connected_to++;
-  if (2 == m_connected_to)
+  if (2 == m_connected_to) {
     process_deferred_packets();
+    src->m_connected_successor = this;
+  }
 }
 
 void
@@ -1200,4 +1203,16 @@ bool
 generic_packetizer_c::is_lacing_prevented()
   const {
   return m_prevent_lacing;
+}
+
+void
+generic_packetizer_c::after_packet_rendered(packet_t const &) {
+}
+
+void
+generic_packetizer_c::before_file_finished() {
+}
+
+void
+generic_packetizer_c::after_file_created() {
 }
