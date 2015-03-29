@@ -23,29 +23,29 @@ namespace mtx { namespace checksum {
 base_cptr
 for_algorithm(algorithm_e algorithm,
               uint64_t initial_value) {
-  if (adler32 == algorithm)
+  if (algorithm_e::adler32 == algorithm)
     return std::make_shared<adler32_c>();
 
-  else if (crc8_atm == algorithm)
+  else if (algorithm_e::crc8_atm == algorithm)
     return std::make_shared<crc8_atm_c>(initial_value);
 
-  else if (crc16_ansi == algorithm)
+  else if (algorithm_e::crc16_ansi == algorithm)
     return std::make_shared<crc16_ansi_c>(initial_value);
 
-  else if (crc16_ccitt == algorithm)
+  else if (algorithm_e::crc16_ccitt == algorithm)
     return std::make_shared<crc16_ccitt_c>(initial_value);
 
-  else if (crc32_ieee == algorithm)
+  else if (algorithm_e::crc32_ieee == algorithm)
     return std::make_shared<crc32_ieee_c>(initial_value);
 
-  else if (crc32_ieee_le == algorithm)
+  else if (algorithm_e::crc32_ieee_le == algorithm)
     return std::make_shared<crc32_ieee_le_c>(initial_value);
 
-  else if (md5 == algorithm)
+  else if (algorithm_e::md5 == algorithm)
     return std::make_shared<md5_c>();
 
   else
-    mxerror(boost::format("Programming error: unknown checksum algorithm %1%\n") % algorithm);
+    mxerror(boost::format("Programming error: unknown checksum algorithm %1%\n") % static_cast<int>(algorithm));
 
   return {};
 }

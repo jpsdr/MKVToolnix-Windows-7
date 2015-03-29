@@ -1061,7 +1061,7 @@ parse_vps(memory_cptr &buffer,
   //buffer = mcptr_newvps;
   //buffer->set_size(w.get_bit_position() / 8);
 
-  vps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *buffer);
+  vps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffer);
 
   return true;
 }
@@ -1190,7 +1190,7 @@ parse_sps(memory_cptr &buffer,
   buffer = mcptr_newsps;
   buffer->set_size(w.get_bit_position() / 8);
 
-  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *buffer);
+  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffer);
 
   return true;
 }
@@ -1215,7 +1215,7 @@ parse_pps(memory_cptr &buffer,
     pps.output_flag_present_flag = r.get_bits(1);  // output_flag_present_flag
     pps.num_extra_slice_header_bits = r.get_bits(3);  // num_extra_slice_header_bits
 
-    pps.checksum          = mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *buffer);
+    pps.checksum          = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffer);
 
     return true;
   } catch (...) {
@@ -2345,7 +2345,7 @@ es_parser_c::dump_info()
            % format_timecode(frame.m_start)
            % format_timecode(frame.m_end)
            % format_timecode(frame.m_ref1)
-           % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *frame.m_data));
+           % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data));
   }
 }
 

@@ -428,7 +428,7 @@ format_binary(EbmlBinary &bin,
     result += "...";
 
   if (g_options.m_calc_checksums)
-    result += (BF_FORMAT_BINARY_2 % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, bin.GetBuffer(), bin.GetSize())).str();
+    result += (BF_FORMAT_BINARY_2 % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, bin.GetBuffer(), bin.GetSize())).str();
 
   strip(result);
 
@@ -850,7 +850,7 @@ handle_tracks(EbmlStream *&es,
           fourcc_buffer = create_codec_dependent_private_info(c_priv, track->type, kax_codec_id);
 
           if (g_options.m_calc_checksums && !g_options.m_show_summary)
-            fourcc_buffer += (boost::format(Y(" (adler: 0x%|1$08x|)"))        % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, c_priv.GetBuffer(), c_priv.GetSize())).str();
+            fourcc_buffer += (boost::format(Y(" (adler: 0x%|1$08x|)"))        % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, c_priv.GetBuffer(), c_priv.GetSize())).str();
 
           if (g_options.m_show_hexdump)
             fourcc_buffer += create_hexdump(c_priv.GetBuffer(), c_priv.GetSize());
@@ -1158,7 +1158,7 @@ handle_block_group(EbmlStream *&es,
 
       for (size_t i = 0; i < block.NumberFrames(); ++i) {
         auto &data = block.GetBuffer(i);
-        auto adler = mtx::checksum::calculate_as_uint(mtx::checksum::adler32, data.Buffer(), data.Size());
+        auto adler = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, data.Buffer(), data.Size());
 
         std::string adler_str;
         if (g_options.m_calc_checksums)
@@ -1355,7 +1355,7 @@ handle_simple_block(EbmlStream *&es,
   int i;
   for (i = 0; i < (int)block.NumberFrames(); i++) {
     DataBuffer &data = block.GetBuffer(i);
-    uint32_t adler   = mtx::checksum::calculate_as_uint(mtx::checksum::adler32, data.Buffer(), data.Size());
+    uint32_t adler   = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, data.Buffer(), data.Size());
 
     std::string adler_str;
     if (g_options.m_calc_checksums)
