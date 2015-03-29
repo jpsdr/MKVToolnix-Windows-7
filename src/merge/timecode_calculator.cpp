@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/strings/formatting.h"
 #include "merge/timecode_calculator.h"
 #include "merge/packet.h"
 
@@ -21,46 +22,59 @@ timecode_calculator_c::timecode_calculator_c(int64_t samples_per_second)
   , m_samples_per_second{samples_per_second}
   , m_samples_since_reference_timecode{}
   , m_samples_to_timecode{1000000000, static_cast<int64_t>(samples_per_second)}
+  , m_debug{"timecode_calculator"}
 {
 }
 
 void
 timecode_calculator_c::add_timecode(timecode_c const &timecode) {
-  if (timecode.valid())
+  if (!timecode.valid())
+    return;
+
+  if (   (!m_last_timecode_returned.valid() || (timecode > m_last_timecode_returned))
+      && (m_available_timecodes.empty()     || (timecode > m_available_timecodes.back()))) {
+    mxdebug_if(m_debug, boost::format("timecode_calculator::add_timecode: adding %1%\n") % format_timecode(timecode));
     m_available_timecodes.push_back(timecode);
+
+  } else
+    mxdebug_if(m_debug, boost::format("timecode_calculator::add_timecode: dropping %1%\n") % format_timecode(timecode));
 }
 
 void
 timecode_calculator_c::add_timecode(int64_t timecode) {
   if (-1 != timecode)
-    m_available_timecodes.push_back(timecode_c::ns(timecode));
+    add_timecode(timecode_c::ns(timecode));
 }
 
 void
 timecode_calculator_c::add_timecode(packet_cptr const &packet) {
   if (packet->has_timecode())
-    m_available_timecodes.push_back(timecode_c::ns(packet->timecode));
+    add_timecode(timecode_c::ns(packet->timecode));
 }
 
 timecode_c
 timecode_calculator_c::get_next_timecode(int64_t samples_in_frame) {
   if (!m_available_timecodes.empty()) {
-    auto next_timecode                 = m_available_timecodes.front();
-    m_reference_timecode               = next_timecode;
+    m_last_timecode_returned           = m_available_timecodes.front();
+    m_reference_timecode               = m_last_timecode_returned;
     m_samples_since_reference_timecode = samples_in_frame;
 
     m_available_timecodes.pop_front();
 
-    return next_timecode;
+    mxdebug_if(m_debug, boost::format("timecode_calculator_c::get_next_timecode: returning available %1%\n") % format_timecode(m_last_timecode_returned));
+
+    return m_last_timecode_returned;
   }
 
   if (!m_samples_per_second)
     throw std::invalid_argument{"samples per second must not be 0"};
 
-  auto next_timecode                  = m_reference_timecode + timecode_c::ns(m_samples_to_timecode * m_samples_since_reference_timecode);
+  m_last_timecode_returned           = m_reference_timecode + timecode_c::ns(m_samples_to_timecode * m_samples_since_reference_timecode);
   m_samples_since_reference_timecode += samples_in_frame;
 
-  return next_timecode;
+  mxdebug_if(m_debug, boost::format("timecode_calculator_c::get_next_timecode: returning calculated %1%\n") % format_timecode(m_last_timecode_returned));
+
+  return m_last_timecode_returned;
 }
 
 timecode_c

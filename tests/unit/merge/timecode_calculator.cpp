@@ -129,4 +129,23 @@ TEST(TimecodeCalculator, SetSamplesPerSecond) {
   ASSERT_EQ(timecode_c::ns(1954002250259), calc.get_next_timecode(0));
 }
 
+TEST(TimecodeCalculator, AddingSameAndSmallerTimecodes) {
+  auto calc = timecode_calculator_c{48000ll};
+
+  calc.add_timecode(timecode_c::s(10));
+  calc.add_timecode(timecode_c::s(10));
+  calc.add_timecode(timecode_c::s(5));
+  calc.add_timecode(timecode_c::s(20));
+  ASSERT_EQ(timecode_c::s(10), calc.get_next_timecode(48000));
+  ASSERT_EQ(timecode_c::s(20), calc.get_next_timecode(48000));
+  ASSERT_EQ(timecode_c::s(21), calc.get_next_timecode(48000));
+
+  calc.add_timecode(timecode_c::s(20));
+  calc.add_timecode(timecode_c::s(30));
+  calc.add_timecode(timecode_c::s(40));
+  ASSERT_EQ(timecode_c::s(30), calc.get_next_timecode(48000));
+  ASSERT_EQ(timecode_c::s(40), calc.get_next_timecode(48000));
+  ASSERT_EQ(timecode_c::s(41), calc.get_next_timecode(48000));
+}
+
 }

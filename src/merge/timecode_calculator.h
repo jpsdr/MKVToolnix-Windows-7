@@ -16,6 +16,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/debugging.h"
 #include "common/samples_timecode_conv.h"
 #include "common/timecode.h"
 
@@ -25,9 +26,10 @@ using packet_cptr = std::shared_ptr<packet_t>;
 class timecode_calculator_c {
 private:
   std::deque<timecode_c> m_available_timecodes;
-  timecode_c m_reference_timecode;
+  timecode_c m_reference_timecode, m_last_timecode_returned;
   int64_t m_samples_per_second, m_samples_since_reference_timecode;
   samples_to_timecode_converter_c m_samples_to_timecode;
+  debugging_option_c m_debug;
 
 public:
   timecode_calculator_c(int64_t samples_per_second);
