@@ -35,7 +35,6 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
   , m_packet_duration{m_timecode_calculator.get_duration(m_samples_per_packet).to_ns()}
   , m_framed{framed}
   , m_first_packet{true}
-  , m_flush_after_each_packet{true}
 {
   m_first_ac3_header.m_sample_rate = samples_per_sec;
   m_first_ac3_header.m_bs_id       = bsid;
@@ -46,11 +45,6 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
 }
 
 ac3_packetizer_c::~ac3_packetizer_c() {
-}
-
-void
-ac3_packetizer_c::enable_flushing_after_each_packet(bool flush_after_each_packet) {
-  m_flush_after_each_packet = flush_after_each_packet;
 }
 
 ac3::frame_c
@@ -114,8 +108,6 @@ ac3_packetizer_c::process(packet_cptr packet) {
     return process_framed(packet);
 
   add_to_buffer(packet->data->get_buffer(), packet->data->get_size());
-  if (m_flush_after_each_packet)
-    m_parser.parse(true);
 
   flush_packets();
 
