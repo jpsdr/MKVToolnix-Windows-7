@@ -25,8 +25,8 @@
 class flac_packetizer_c: public generic_packetizer_c {
 private:
   memory_cptr m_header;
-  int64_t m_num_packets;
   FLAC__StreamMetadata_StreamInfo m_stream_info;
+  int64_t m_num_packets{};
 
 public:
   flac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, unsigned char *header, int l_header);

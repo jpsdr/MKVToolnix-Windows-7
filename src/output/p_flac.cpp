@@ -31,19 +31,18 @@ flac_packetizer_c::flac_packetizer_c(generic_reader_c *p_reader,
                                      unsigned char *header,
                                      int l_header)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_num_packets(0)
+  , m_header{memory_c::clone(header, l_header)}
 {
   int result;
 
   if ((4 > l_header) || memcmp(header, "fLaC", 4)) {
-    m_header = memory_c::alloc(l_header + 4);
+    m_header->resize(l_header + 4);
     memcpy(m_header->get_buffer(),     "fLaC", 4);
     memcpy(m_header->get_buffer() + 4, header, l_header);
+  }
 
-  } else
-    m_header = memory_cptr(new memory_c((unsigned char *)safememdup(header, l_header), l_header, true));
 
-  result = flac_decode_headers(m_header->get_buffer(), m_header->get_size(), 1, FLAC_HEADER_STREAM_INFO, &m_stream_info);
+  result = mtx::flac::decode_headers(m_header->get_buffer(), m_header->get_size(), 1, FLAC_HEADER_STREAM_INFO, &m_stream_info);
   if (!(result & FLAC_HEADER_STREAM_INFO))
     mxerror_tid(m_ti.m_fname, m_ti.m_id, Y("The FLAC headers could not be parsed: the stream info structure was not found.\n"));
 
@@ -70,7 +69,7 @@ int
 flac_packetizer_c::process(packet_cptr packet) {
   m_num_packets++;
 
-  packet->duration = flac_get_num_samples(packet->data->get_buffer(), packet->data->get_size(), m_stream_info);
+  packet->duration = mtx::flac::get_num_samples(packet->data->get_buffer(), packet->data->get_size(), m_stream_info);
 
   if (-1 == packet->duration) {
     mxwarn_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Packet number %1% contained an invalid FLAC header and is being skipped.\n")) % m_num_packets);

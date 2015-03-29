@@ -22,10 +22,134 @@
 
 #include "common/bit_cursor.h"
 #include "common/flac.h"
+#include "common/mm_io_x.h"
+
+namespace mtx { namespace flac {
+
+static FLAC__StreamDecoderReadStatus
+flac_read_cb(const FLAC__StreamDecoder *,
+             FLAC__byte buffer[],
+             size_t *bytes,
+             void *client_data) {
+  return reinterpret_cast<decoder_c *>(client_data)->flac_read_cb(buffer, bytes);
+}
+
+static FLAC__StreamDecoderWriteStatus
+flac_write_cb(const FLAC__StreamDecoder *,
+              const FLAC__Frame *frame,
+              const FLAC__int32 * const data[],
+              void *client_data) {
+  return reinterpret_cast<decoder_c *>(client_data)->flac_write_cb(frame, data);
+}
+
+static void
+flac_metadata_cb(const FLAC__StreamDecoder *,
+                 const FLAC__StreamMetadata *metadata,
+                 void *client_data) {
+  reinterpret_cast<decoder_c *>(client_data)->flac_metadata_cb(metadata);
+}
+
+static void
+flac_error_cb(const FLAC__StreamDecoder *,
+              FLAC__StreamDecoderErrorStatus status,
+              void *client_data) {
+  reinterpret_cast<decoder_c *>(client_data)->flac_error_cb(status);
+}
+
+static FLAC__StreamDecoderSeekStatus
+flac_seek_cb(const FLAC__StreamDecoder *,
+             FLAC__uint64 absolute_byte_offset,
+             void *client_data) {
+  return reinterpret_cast<decoder_c *>(client_data)->flac_seek_cb(absolute_byte_offset);
+}
+
+static FLAC__StreamDecoderTellStatus
+flac_tell_cb(const FLAC__StreamDecoder *,
+             FLAC__uint64 *absolute_byte_offset,
+             void *client_data) {
+  return reinterpret_cast<decoder_c *>(client_data)->flac_tell_cb(*absolute_byte_offset);
+}
+
+static FLAC__StreamDecoderLengthStatus
+flac_length_cb(const FLAC__StreamDecoder *,
+               FLAC__uint64 *stream_length,
+               void *client_data) {
+  return reinterpret_cast<decoder_c *>(client_data)->flac_length_cb(*stream_length);
+}
+
+static FLAC__bool
+flac_eof_cb(const FLAC__StreamDecoder *,
+            void *client_data) {
+  return reinterpret_cast<decoder_c *>(client_data)->flac_eof_cb();
+}
+
+// ----------------------------------------------------------------------
+
+decoder_c::decoder_c() {
+}
+
+decoder_c::~decoder_c() {
+}
+
+void
+decoder_c::flac_metadata_cb(const FLAC__StreamMetadata *) {
+}
+
+void
+decoder_c::flac_error_cb(FLAC__StreamDecoderErrorStatus) {
+}
+
+FLAC__StreamDecoderSeekStatus
+decoder_c::flac_seek_cb(uint64_t) {
+  return FLAC__STREAM_DECODER_SEEK_STATUS_OK;
+}
+
+FLAC__StreamDecoderTellStatus
+decoder_c::flac_tell_cb(uint64_t &) {
+  return FLAC__STREAM_DECODER_TELL_STATUS_ERROR;
+}
+
+FLAC__StreamDecoderLengthStatus
+decoder_c::flac_length_cb(uint64_t &) {
+  return FLAC__STREAM_DECODER_LENGTH_STATUS_ERROR;
+}
+
+FLAC__bool
+decoder_c::flac_eof_cb() {
+  return false;
+}
+
+FLAC__StreamDecoderReadStatus
+decoder_c::flac_read_cb(FLAC__byte [],
+                        size_t *) {
+  return FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
+}
+
+FLAC__StreamDecoderWriteStatus
+decoder_c::flac_write_cb(FLAC__Frame const *,
+                         FLAC__int32 const * const[]) {
+  return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
+}
+
+void
+decoder_c::init_flac_decoder() {
+  m_flac_decoder.reset(FLAC__stream_decoder_new());
+  if (!m_flac_decoder)
+    mxerror(Y("flac_decoder: FLAC__stream_decoder_new() failed.\n"));
+
+  if (!FLAC__stream_decoder_set_metadata_respond_all(m_flac_decoder.get()))
+    mxerror(Y("flac_decoder: Could not set metadata_respond_all.\n"));
+
+  if (FLAC__stream_decoder_init_stream(m_flac_decoder.get(), mtx::flac::flac_read_cb, mtx::flac::flac_seek_cb, mtx::flac::flac_tell_cb, mtx::flac::flac_length_cb, mtx::flac::flac_eof_cb,
+                                       mtx::flac::flac_write_cb, mtx::flac::flac_metadata_cb, mtx::flac::flac_error_cb, this) != FLAC__STREAM_DECODER_INIT_STATUS_OK)
+    mxerror(Y("flac_decoder: Could not initialize the FLAC decoder.\n"));
+}
+
+// ----------------------------------------------------------------------
 
 static bool
-flac_skip_utf8(bit_reader_c &bits,
-               int size) {
+skip_utf8(bit_reader_c &bits,
+          int size) {
 
   uint32_t value = bits.get_bits(8);
 
@@ -53,10 +177,10 @@ flac_skip_utf8(bit_reader_c &bits,
 }
 
 // See http://flac.sourceforge.net/format.html#frame_header
-int
-flac_get_num_samples_internal(unsigned char *mem,
-                              int size,
-                              FLAC__StreamMetadata_StreamInfo &stream_info) {
+static int
+get_num_samples_internal(unsigned char const *mem,
+                         int size,
+                         FLAC__StreamMetadata_StreamInfo const &stream_info) {
   bit_reader_c bits(mem, size);
 
   // Sync word: 11 1111 1111 1110
@@ -94,10 +218,10 @@ flac_get_num_samples_internal(unsigned char *mem,
   bits.skip_bits(4);
 
   if (stream_info.min_blocksize != stream_info.max_blocksize) {
-    if (!flac_skip_utf8(bits, 64))
+    if (!skip_utf8(bits, 64))
       return -1;
 
-  } else if (!flac_skip_utf8(bits, 32))
+  } else if (!skip_utf8(bits, 32))
       return -1;
 
   if ((6 == free_sample_size) || (7 == free_sample_size)) {
@@ -116,11 +240,11 @@ flac_get_num_samples_internal(unsigned char *mem,
 }
 
 int
-flac_get_num_samples(unsigned char *mem,
-                     int size,
-                     FLAC__StreamMetadata_StreamInfo &stream_info) {
+get_num_samples(unsigned char const *mem,
+                int size,
+                FLAC__StreamMetadata_StreamInfo const &stream_info) {
   try {
-    return flac_get_num_samples_internal(mem, size, stream_info);
+    return get_num_samples_internal(mem, size, stream_info);
   } catch(...) {
     return -1;
   }
@@ -128,8 +252,8 @@ flac_get_num_samples(unsigned char *mem,
 
 #define FPFX "flac_decode_headers: "
 
-struct flac_header_extractor_t {
-  unsigned char *mem;
+struct header_extractor_t {
+  unsigned char const *mem;
   unsigned int size;
   unsigned int nread;
 
@@ -138,11 +262,11 @@ struct flac_header_extractor_t {
 };
 
 static FLAC__StreamDecoderReadStatus
-flac_read_cb(const FLAC__StreamDecoder *,
-             FLAC__byte buffer[],
-             size_t *bytes,
-             void *client_data) {
-  flac_header_extractor_t *fhe = (flac_header_extractor_t *)client_data;
+read_cb(FLAC__StreamDecoder const *,
+        FLAC__byte buffer[],
+        size_t *bytes,
+        void *client_data) {
+  auto fhe = (header_extractor_t *)client_data;
 
   if (fhe->nread == fhe->size)
     return FLAC__STREAM_DECODER_READ_STATUS_ABORT;
@@ -156,12 +280,10 @@ flac_read_cb(const FLAC__StreamDecoder *,
 }
 
 static void
-flac_metadata_cb(const FLAC__StreamDecoder *,
-                 const FLAC__StreamMetadata *metadata,
-                 void *client_data) {
-  flac_header_extractor_t *fhe;
-
-  fhe = (flac_header_extractor_t *)client_data;
+metadata_cb(FLAC__StreamDecoder const *,
+            FLAC__StreamMetadata const *metadata,
+            void *client_data) {
+  auto fhe = (header_extractor_t *)client_data;
   if (metadata->type == FLAC__METADATA_TYPE_STREAMINFO) {
     memcpy(&fhe->stream_info, &metadata->data.stream_info, sizeof(FLAC__StreamMetadata_StreamInfo));
     fhe->stream_info_found = true;
@@ -169,25 +291,25 @@ flac_metadata_cb(const FLAC__StreamDecoder *,
 }
 
 static FLAC__StreamDecoderWriteStatus
-flac_write_cb(const FLAC__StreamDecoder *,
-              const FLAC__Frame *,
-              const FLAC__int32 * const [],
-              void *) {
+write_cb(FLAC__StreamDecoder const *,
+         FLAC__Frame const *,
+         FLAC__int32 const * const [],
+         void *) {
   return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
 }
 
 static void
-flac_error_cb(const FLAC__StreamDecoder *,
-              FLAC__StreamDecoderErrorStatus,
-              void *) {
+error_cb(FLAC__StreamDecoder const *,
+         FLAC__StreamDecoderErrorStatus,
+         void *) {
 }
 
 int
-flac_decode_headers(unsigned char *mem,
-                    int size,
-                    int num_elements,
-                    ...) {
-  flac_header_extractor_t fhe;
+decode_headers(unsigned char const *mem,
+               int size,
+               int num_elements,
+               ...) {
+  header_extractor_t fhe;
   FLAC__StreamDecoder *decoder;
   int result, i;
   va_list ap;
@@ -195,7 +317,7 @@ flac_decode_headers(unsigned char *mem,
   if (!mem || (0 >= size))
     return -1;
 
-  memset(&fhe, 0, sizeof(flac_header_extractor_t));
+  memset(&fhe, 0, sizeof(header_extractor_t));
   fhe.mem  = mem;
   fhe.size = size;
 
@@ -205,10 +327,7 @@ flac_decode_headers(unsigned char *mem,
     mxerror(FPFX "FLAC__stream_decoder_new() failed.\n");
   if (!FLAC__stream_decoder_set_metadata_respond_all(decoder))
     mxerror(FPFX "Could not set metadata_respond_all.\n");
-  if (FLAC__stream_decoder_init_stream(decoder, flac_read_cb,
-                                       nullptr, nullptr, nullptr, nullptr, flac_write_cb,
-                                       flac_metadata_cb, flac_error_cb, &fhe)
-      != FLAC__STREAM_DECODER_INIT_STATUS_OK)
+  if (FLAC__stream_decoder_init_stream(decoder, read_cb, nullptr, nullptr, nullptr, nullptr, write_cb, metadata_cb, error_cb, &fhe) != FLAC__STREAM_DECODER_INIT_STATUS_OK)
     mxerror(FPFX "Could not initialize the FLAC decoder.\n");
 
   FLAC__stream_decoder_process_until_end_of_stream(decoder);
@@ -242,5 +361,7 @@ flac_decode_headers(unsigned char *mem,
 
   return result;
 }
+
+}}                              // namespace mtx::flac
 
 #endif

@@ -24,6 +24,7 @@
 #include <FLAC/export.h>
 #include <FLAC/stream_decoder.h>
 
+#include "common/flac.h"
 #include "output/p_flac.h"
 
 #define FLAC_BLOCK_TYPE_HEADERS 0
@@ -34,12 +35,12 @@ struct flac_block_t {
   unsigned int type, len;
 };
 
-class flac_reader_c: public generic_reader_c {
+class flac_reader_c: public generic_reader_c, public mtx::flac::decoder_c {
 private:
   memory_cptr m_header;
-  int sample_rate;
-  bool metadata_parsed;
-  uint64_t samples;
+  int sample_rate{};
+  bool metadata_parsed{};
+  uint64_t samples{};
   std::vector<flac_block_t> blocks;
   std::vector<flac_block_t>::iterator current_block;
   FLAC__StreamMetadata_StreamInfo stream_info;
@@ -62,18 +63,13 @@ public:
 
   static bool probe_file(mm_io_c *in, uint64_t size);
 
-  virtual FLAC__StreamDecoderReadStatus
-  read_cb(FLAC__byte buffer[], size_t *bytes);
-
-  virtual FLAC__StreamDecoderWriteStatus
-  write_cb(const FLAC__Frame *frame, const FLAC__int32 * const data[]);
-
-  virtual void metadata_cb(const FLAC__StreamMetadata *metadata);
-  virtual void error_cb(FLAC__StreamDecoderErrorStatus status);
-  virtual FLAC__StreamDecoderSeekStatus seek_cb(uint64_t new_pos);
-  virtual FLAC__StreamDecoderTellStatus tell_cb(uint64_t &absolute_byte_offset);
-  virtual FLAC__StreamDecoderLengthStatus length_cb(uint64_t &stream_length);
-  virtual FLAC__bool eof_cb();
+  virtual FLAC__StreamDecoderReadStatus flac_read_cb(FLAC__byte buffer[], size_t *bytes);
+  virtual void flac_metadata_cb(const FLAC__StreamMetadata *metadata);
+  virtual void flac_error_cb(FLAC__StreamDecoderErrorStatus status);
+  virtual FLAC__StreamDecoderSeekStatus flac_seek_cb(uint64_t new_pos);
+  virtual FLAC__StreamDecoderTellStatus flac_tell_cb(uint64_t &absolute_byte_offset);
+  virtual FLAC__StreamDecoderLengthStatus flac_length_cb(uint64_t &stream_length);
+  virtual FLAC__bool flac_eof_cb();
 
 protected:
   virtual bool parse_file();
