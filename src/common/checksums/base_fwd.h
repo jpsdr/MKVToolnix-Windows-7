@@ -29,12 +29,12 @@ enum class algorithm_e {
 };
 
 class base_c;
-using base_cptr = std::shared_ptr<base_c>;
+using base_uptr = std::unique_ptr<base_c>;
 
 class set_initial_value_c;
 class uint_result_c;
 
-base_cptr for_algorithm(algorithm_e algorithm, uint64_t initial_value = 0);
+base_uptr for_algorithm(algorithm_e algorithm, uint64_t initial_value = 0);
 memory_cptr calculate(algorithm_e algorithm, memory_c const &buffer, uint64_t initial_value = 0);
 memory_cptr calculate(algorithm_e algorithm, void const *buffer, size_t size, uint64_t initial_value = 0);
 uint64_t calculate_as_uint(algorithm_e algorithm, memory_c const &buffer, uint64_t initial_value = 0);

@@ -17,32 +17,33 @@
 #include "common/checksums/adler32.h"
 #include "common/checksums/crc.h"
 #include "common/checksums/md5.h"
+#include "common/make_unique.h"
 
 namespace mtx { namespace checksum {
 
-base_cptr
+base_uptr
 for_algorithm(algorithm_e algorithm,
               uint64_t initial_value) {
   if (algorithm_e::adler32 == algorithm)
-    return std::make_shared<adler32_c>();
+    return std::make_unique<adler32_c>();
 
   else if (algorithm_e::crc8_atm == algorithm)
-    return std::make_shared<crc8_atm_c>(initial_value);
+    return std::make_unique<crc8_atm_c>(initial_value);
 
   else if (algorithm_e::crc16_ansi == algorithm)
-    return std::make_shared<crc16_ansi_c>(initial_value);
+    return std::make_unique<crc16_ansi_c>(initial_value);
 
   else if (algorithm_e::crc16_ccitt == algorithm)
-    return std::make_shared<crc16_ccitt_c>(initial_value);
+    return std::make_unique<crc16_ccitt_c>(initial_value);
 
   else if (algorithm_e::crc32_ieee == algorithm)
-    return std::make_shared<crc32_ieee_c>(initial_value);
+    return std::make_unique<crc32_ieee_c>(initial_value);
 
   else if (algorithm_e::crc32_ieee_le == algorithm)
-    return std::make_shared<crc32_ieee_le_c>(initial_value);
+    return std::make_unique<crc32_ieee_le_c>(initial_value);
 
   else if (algorithm_e::md5 == algorithm)
-    return std::make_shared<md5_c>();
+    return std::make_unique<md5_c>();
 
   else
     mxerror(boost::format("Programming error: unknown checksum algorithm %1%\n") % static_cast<int>(algorithm));
