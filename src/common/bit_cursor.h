@@ -299,6 +299,14 @@ public:
       }
     return pos;
   }
+
+  void skip_bits(unsigned int num) {
+    set_bit_position(get_bit_position() + num);
+  }
+
+  void skip_bit() {
+    set_bit_position(get_bit_position() + 1);
+  }
 };
 using bit_writer_cptr = std::shared_ptr<bit_writer_c>;
 
