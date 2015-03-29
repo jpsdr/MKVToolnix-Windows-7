@@ -1117,11 +1117,12 @@ parse_sps(memory_cptr &buffer,
   sps.width = w.copy_unsigned_golomb(r); // pic_width_in_luma_samples
   sps.height = w.copy_unsigned_golomb(r); // pic_height_in_luma_samples
 
-  if (w.copy_bits(1, r) == 1) {
-    w.copy_unsigned_golomb(r); // conf_win_left_offset
-    w.copy_unsigned_golomb(r); // conf_win_right_offset
-    w.copy_unsigned_golomb(r); // conf_win_top_offset
-    w.copy_unsigned_golomb(r); // conf_win_bottom_offset
+  sps.conformance_window_flag = w.copy_bits(1, r);
+  if (sps.conformance_window_flag) {
+    sps.conf_win_left_offset   = w.copy_unsigned_golomb(r); // conf_win_left_offset
+    sps.conf_win_right_offset  = w.copy_unsigned_golomb(r); // conf_win_right_offset
+    sps.conf_win_top_offset    = w.copy_unsigned_golomb(r); // conf_win_top_offset
+    sps.conf_win_bottom_offset = w.copy_unsigned_golomb(r); // conf_win_bottom_offset
   }
 
   sps.bit_depth_luma_minus8 = w.copy_unsigned_golomb(r); // bit_depth_luma_minus8
@@ -1191,6 +1192,16 @@ parse_sps(memory_cptr &buffer,
   buffer->set_size(w.get_bit_position() / 8);
 
   sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffer);
+
+  // See ITU-T H.265 section 7.4.3.2 for the width/height calculation
+  // formula.
+  if (sps.conformance_window_flag) {
+    auto sub_width_c  = ((1 == sps.chroma_format_idc) || (2 == sps.chroma_format_idc)) && (0 == sps.separate_colour_plane_flag) ? 2 : 1;
+    auto sub_height_c =  (1 == sps.chroma_format_idc)                                  && (0 == sps.separate_colour_plane_flag) ? 2 : 1;
+
+    sps.width        -= std::min<unsigned int>((sub_width_c  * sps.conf_win_right_offset)  + (sub_width_c  * sps.conf_win_left_offset), sps.width);
+    sps.height       -= std::min<unsigned int>((sub_height_c * sps.conf_win_bottom_offset) + (sub_height_c * sps.conf_win_top_offset),  sps.height);
+  }
 
   return true;
 }

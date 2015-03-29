@@ -263,6 +263,9 @@ struct sps_info_t {
   unsigned int log2_diff_max_min_luma_coding_block_size;
   unsigned int log2_max_pic_order_cnt_lsb;
 
+  bool conformance_window_flag;
+  unsigned int conf_win_left_offset, conf_win_right_offset, conf_win_top_offset, conf_win_bottom_offset;
+
   // vui:
   bool vui_present, ar_found;
   unsigned int par_num, par_den;

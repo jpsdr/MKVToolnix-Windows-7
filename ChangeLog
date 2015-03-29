@@ -1,5 +1,9 @@
 2015-03-29  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: The calculation of the width and height of
+        h.265/HEVC video tracks did not take the conformance window
+        (cropping) into account. Fixes #1152.
+
         * mkvmerge: bug fix: Fixed the value of the DocTypeVersion header
         field if any of the Matroska elements CodecDelay, DiscardPadding
         or SeekPreRoll is used. This is the case for Opus tracks.
