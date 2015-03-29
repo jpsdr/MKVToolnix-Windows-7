@@ -149,8 +149,6 @@ bool s_appending_files                      = false;
 auto s_debug_appending                      = debugging_option_c{"append|appending"};
 auto s_debug_rerender_track_headers         = debugging_option_c{"rerender|rerender_track_headers"};
 
-bool g_stereo_mode_used                     = false;
-
 std::string g_default_language              = "und";
 
 bitvalue_cptr g_seguid_link_previous;
@@ -182,6 +180,9 @@ static std::unique_ptr<EbmlHead> s_head;
 
 static std::string s_muxing_app, s_writing_app;
 static boost::posix_time::ptime s_writing_date;
+
+static auto s_required_matroska_version      = 1u;
+static auto s_required_matroska_read_version = 1u;
 
 /** \brief Add a segment family UID to the list if it doesn't exist already.
 
@@ -429,18 +430,46 @@ set_timecode_scale() {
   mxdebug_if(debug, boost::format("timecode_scale: %1% max ns per cluster: %2%\n") % g_timecode_scale % g_max_ns_per_cluster);
 }
 
+bool
+set_required_matroska_version(unsigned int required_version) {
+  auto previous               = s_required_matroska_version;
+  s_required_matroska_version = std::max(s_required_matroska_version, required_version);
+  auto version_changed        = s_required_matroska_version != previous;
+
+  if (version_changed)
+    rerender_ebml_head();
+
+  return version_changed;
+}
+
+bool
+set_required_matroska_read_version(unsigned int required_read_version) {
+  auto previous                    = s_required_matroska_read_version;
+  s_required_matroska_read_version = std::max(s_required_matroska_read_version, required_read_version);
+
+  auto read_version_changed        = s_required_matroska_read_version != previous;
+  auto version_changed             = set_required_matroska_version(required_read_version);
+
+  if (read_version_changed && !version_changed)
+    rerender_ebml_head();
+
+  return read_version_changed;
+}
+
 static void
 render_ebml_head(mm_io_c *out) {
+  if (!hack_engaged(ENGAGE_NO_CUE_DURATION) || !hack_engaged(ENGAGE_NO_CUE_RELATIVE_POSITION))
+    set_required_matroska_version(4);
+
+  if (!hack_engaged(ENGAGE_NO_SIMPLE_BLOCKS))
+    set_required_matroska_read_version(2);
+
   if (!s_head)
     s_head = std::make_unique<EbmlHead>();
 
-  bool v4_features = !hack_engaged(ENGAGE_NO_CUE_DURATION) || !hack_engaged(ENGAGE_NO_CUE_RELATIVE_POSITION);
-  bool v3_features = g_stereo_mode_used;
-  bool v2_features = !hack_engaged(ENGAGE_NO_SIMPLE_BLOCKS);
-
   GetChild<EDocType           >(*s_head).SetValue(outputting_webm() ? "webm" : "matroska");
-  GetChild<EDocTypeVersion    >(*s_head).SetValue(v4_features ? 4 : v3_features ? 3 : v2_features ? 2 : 1);
-  GetChild<EDocTypeReadVersion>(*s_head).SetValue(v2_features ? 2 : 1);
+  GetChild<EDocTypeVersion    >(*s_head).SetValue(s_required_matroska_version);
+  GetChild<EDocTypeReadVersion>(*s_head).SetValue(s_required_matroska_read_version);
 
   s_head->Render(*out, true);
 }
@@ -448,6 +477,10 @@ render_ebml_head(mm_io_c *out) {
 void
 rerender_ebml_head() {
   mm_io_c *out = g_cluster_helper->get_output();
+
+  if (!out || !s_head)
+    return;
+
   out->save_pos(s_head->GetElementPosition());
   render_ebml_head(out);
   out->restore_pos();

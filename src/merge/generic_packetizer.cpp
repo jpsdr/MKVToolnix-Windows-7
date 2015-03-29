@@ -585,14 +585,10 @@ void
 generic_packetizer_c::set_video_stereo_mode_impl(EbmlMaster &video,
                                                  stereo_mode_c::mode stereo_mode) {
   GetChild<KaxVideoStereoMode>(video).SetValue(stereo_mode);
-  bool previous_stereo_mode = g_stereo_mode_used;
 
   if (   (stereo_mode_c::mono        != stereo_mode)
       && (stereo_mode_c::unspecified != stereo_mode))
-    g_stereo_mode_used = true;
-
-  if (!previous_stereo_mode)
-    rerender_ebml_head();
+    set_required_matroska_version(3);
 }
 
 void

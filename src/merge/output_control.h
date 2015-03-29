@@ -195,8 +195,6 @@ extern std::string g_splitting_by_chapters_arg;
 
 extern append_mode_e g_append_mode;
 
-extern bool g_stereo_mode_used;
-
 void create_packetizers();
 void calc_attachment_sizes();
 void calc_max_chapter_size();
@@ -215,6 +213,9 @@ void force_close_output_file();
 void rerender_track_headers();
 void rerender_ebml_head();
 std::string create_output_name();
+
+bool set_required_matroska_version(unsigned int required_version);
+bool set_required_matroska_read_version(unsigned int required_version);
 
 int64_t add_attachment(attachment_t attachment);
 
