@@ -413,6 +413,8 @@ generic_packetizer_c::set_track_seek_pre_roll(timecode_c const &seek_pre_roll) {
   m_seek_pre_roll = seek_pre_roll;
   if (m_track_entry)
     GetChild<KaxSeekPreRoll>(m_track_entry).SetValue(seek_pre_roll.to_ns());
+
+  set_required_matroska_version(4);
 }
 
 void
@@ -420,6 +422,8 @@ generic_packetizer_c::set_codec_delay(timecode_c const &codec_delay) {
   m_codec_delay = codec_delay;
   if (m_track_entry)
     GetChild<KaxCodecDelay>(m_track_entry).SetValue(codec_delay.to_ns());
+
+  set_required_matroska_version(4);
 }
 
 void
@@ -828,6 +832,9 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
 
 void
 generic_packetizer_c::add_packet2(packet_cptr pack) {
+  if (pack->has_discard_padding())
+    set_required_matroska_version(4);
+
   pack->timecode   = ADJUST_TIMECODE(pack->timecode);
   if (pack->has_bref())
     pack->bref     = ADJUST_TIMECODE(pack->bref);

@@ -1,5 +1,9 @@
 2015-03-29  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: Fixed the value of the DocTypeVersion header
+        field if any of the Matroska elements CodecDelay, DiscardPadding
+        or SeekPreRoll is used. This is the case for Opus tracks.
+
         * mkvmerge: bug fix: Fixed the handling of E-AC3 tracks in M2TS
         files if the AC3 core and the extension are stored in separate
         packets.
