@@ -25,7 +25,7 @@ public:
   uint64_t m_initial_value, m_xor_result;
 
   cli_options_c()
-    : m_algorithm{mtx::checksum::adler32}
+    : m_algorithm{mtx::checksum::algorithm_e::adler32}
     , m_chunk_size{4096}
     , m_initial_value{}
     , m_xor_result{}
@@ -89,25 +89,25 @@ parse_args(std::vector<std::string> &args) {
       show_version();
 
     else if ((arg == "-a") || (arg == "--adler32"))
-      options.m_algorithm = mtx::checksum::adler32;
+      options.m_algorithm = mtx::checksum::algorithm_e::adler32;
 
     else if (arg == "--crc8-atm")
-      options.m_algorithm = mtx::checksum::crc8_atm;
+      options.m_algorithm = mtx::checksum::algorithm_e::crc8_atm;
 
     else if (arg == "--crc16-ansi")
-      options.m_algorithm = mtx::checksum::crc16_ansi;
+      options.m_algorithm = mtx::checksum::algorithm_e::crc16_ansi;
 
     else if (arg == "--crc16-ccitt")
-      options.m_algorithm = mtx::checksum::crc16_ccitt;
+      options.m_algorithm = mtx::checksum::algorithm_e::crc16_ccitt;
 
     else if ((arg == "-c") || (arg == "--crc32-ieee"))
-      options.m_algorithm = mtx::checksum::crc32_ieee;
+      options.m_algorithm = mtx::checksum::algorithm_e::crc32_ieee;
 
     else if (arg == "--crc32-ieee-le")
-      options.m_algorithm = mtx::checksum::crc32_ieee_le;
+      options.m_algorithm = mtx::checksum::algorithm_e::crc32_ieee_le;
 
     else if ((arg == "-m") || (arg == "--md5"))
-      options.m_algorithm = mtx::checksum::md5;
+      options.m_algorithm = mtx::checksum::algorithm_e::md5;
 
     else if (arg == "--chunk-size") {
       if (next_arg.empty())

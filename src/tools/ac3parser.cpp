@@ -101,7 +101,7 @@ parse_file(const std::string &file_name) {
       std::string output = frame.to_string(g_opt_frame_headers);
 
       if (g_opt_checksum) {
-        uint32_t adler32  = mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *frame.m_data);
+        uint32_t adler32  = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data);
         output           += (boost::format(" checksum 0x%|1$08x|") % adler32).str();
       }
 

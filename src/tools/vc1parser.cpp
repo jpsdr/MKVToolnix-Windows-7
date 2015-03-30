@@ -129,7 +129,7 @@ vc1_info_c::create_checksum_info(memory_cptr packet) {
   if (!g_opt_checksum)
     return "";
 
-  return (boost::format(Y(" checksum 0x%|1$08x|")) % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, *packet)).str();
+  return (boost::format(Y(" checksum 0x%|1$08x|")) % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *packet)).str();
 }
 
 void
