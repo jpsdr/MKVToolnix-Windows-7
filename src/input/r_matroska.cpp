@@ -2259,10 +2259,17 @@ kax_reader_c::identify() {
     if (track->codec)
       info = track->codec.get_name();
 
-    else if (track->ms_compat)
-      info = track->type == 'v' ? std::string{track->v_fourcc} : (boost::format(Y("unknown, format tag 0x%|1$04x|")) % track->a_formattag).str();
+    else if (track->ms_compat) {
+      if (track->type == 'v') {
+        // auto fourcc_str = fourcc_c{track->v_fourcc}.description();
+        // info            = track->codec.get_name(fourcc_str);
 
-    else
+        info = fourcc_c{track->v_fourcc}.description();
+
+      } else
+        info = (boost::format(Y("unknown, format tag 0x%|1$04x|")) % track->a_formattag).str();
+
+    } else
       info = track->codec_id;
 
     track->add_track_tags_to_identification(verbose_info);
