@@ -1798,6 +1798,7 @@ mmg_dialog::on_update_check_state_changed(wxCommandEvent &evt) {
   } else if (UPDATE_CHECK_DONE_DIALOG_DISMISSED == state) {
     wxMutexLocker locker(m_update_check_mutex);
     m_checking_for_updates = false;
+    m_update_check_dlg     = nullptr;
 
   } else {
     wxConfigBase *cfg = wxConfigBase::Get();
