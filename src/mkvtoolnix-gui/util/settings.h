@@ -3,8 +3,12 @@
 
 #include "common/common_pch.h"
 
+#include <QDateTime>
 #include <QDir>
 #include <QString>
+#include <QVariant>
+
+class QSettings;
 
 class Settings: public QObject {
   Q_OBJECT;
@@ -42,6 +46,9 @@ public:
   ScanForPlaylistsPolicy m_scanForPlaylistsPolicy;
   unsigned int m_minimumPlaylistDuration;
 
+  bool m_checkForUpdates;
+  QDateTime m_lastUpdateCheck;
+
 public:
   Settings();
   void load();
@@ -50,8 +57,15 @@ public:
   QString getPriorityAsString() const;
   QString actualMkvmergeExe() const;
 
-public:
+  void setValue(QString const &group, QString const &key, QVariant const &value);
+  QVariant value(QString const &group, QString const &key, QVariant const &defaultValue = QVariant{}) const;
+
+protected:
   static Settings s_settings;
+
+  static void withGroup(QString const &group, std::function<void(QSettings &)> worker);
+
+public:
   static Settings &get();
 
   static QString exeWithPath(QString const &exe);

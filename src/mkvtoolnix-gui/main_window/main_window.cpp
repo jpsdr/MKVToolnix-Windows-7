@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/fs_sys_helpers.h"
 #include "common/qt.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/forms/main_window.h"
@@ -10,6 +11,10 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_job_container_widget/watch_job_container_widget.h"
+
+#if defined(HAVE_CURL_EASY_H)
+# include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
+#endif  // HAVE_CURL_EASY_H
 
 #include <QCloseEvent>
 #include <QIcon>
@@ -33,12 +38,17 @@ MainWindow::MainWindow(QWidget *parent)
   m_statusBarProgress = new StatusBarProgressWidget{this};
   ui->statusBar->addPermanentWidget(m_statusBarProgress);
 
+  setupMenu();
   setupToolSelector();
 
   // Setup window properties.
   setWindowIcon(Util::loadIcon(Q("mkvmergeGUI.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
 
   retranslateUI();
+
+#if defined(HAVE_CURL_EASY_H)
+  silentlyCheckForUpdates();
+#endif  // HAVE_CURL_EASY_H
 }
 
 MainWindow::~MainWindow() {
@@ -72,6 +82,17 @@ MainWindow::createNotImplementedWidget() {
   vlayout->addItem(new QSpacerItem{1, 1, QSizePolicy::Minimum,   QSizePolicy::Expanding});
 
   return widget;
+}
+
+void
+MainWindow::setupMenu() {
+  connect(ui->actionExit,            SIGNAL(triggered()), MainWindow::get(), SLOT(close()));
+
+#if defined(HAVE_CURL_EASY_H)
+  connect(ui->actionCheckForUpdates, SIGNAL(triggered()), MainWindow::get(), SLOT(checkForUpdates()));
+#else
+  ui->actionCheckForUpdates->setVisible(false);
+#endif  // HAVE_CURL_EASY_H
 }
 
 void
@@ -140,3 +161,59 @@ MainWindow::closeEvent(QCloseEvent *event) {
 
   event->accept();
 }
+
+#if defined(HAVE_CURL_EASY_H)
+void
+MainWindow::checkForUpdates() {
+  AvailableUpdateInfoDialog dlg{this};
+  dlg.exec();
+}
+
+void
+MainWindow::silentlyCheckForUpdates() {
+  auto forceUpdateCheck = get_environment_variable("FORCE_UPDATE_CHECK") == "1";
+
+  if (!forceUpdateCheck && !Settings::get().m_checkForUpdates)
+    return;
+
+  auto lastCheck = Settings::get().m_lastUpdateCheck;
+  if (!forceUpdateCheck && lastCheck.isValid() && (lastCheck.addDays(1) >= QDateTime::currentDateTime()))
+    return;
+
+  auto thread = new UpdateCheckThread(this);
+
+  connect(thread, SIGNAL(checkFinished(UpdateCheckStatus, mtx_release_version_t)), this, SLOT(updateCheckFinished(UpdateCheckStatus, mtx_release_version_t)));
+
+  thread->start();
+}
+
+QString
+MainWindow::versionStringForSettings(version_number_t const &version) {
+  return Q("version_%1").arg(to_qs(boost::regex_replace(version.to_string(), boost::regex("[^\\d]+", boost::regex::perl), "_")));
+}
+
+void
+MainWindow::updateCheckFinished(UpdateCheckStatus status,
+                                mtx_release_version_t release) {
+  if ((status == UpdateCheckStatus::Failed) || !release.valid)
+    return;
+
+  auto &settings             = Settings::get();
+  settings.m_lastUpdateCheck = QDateTime::currentDateTime();
+  auto forceUpdateCheck      = get_environment_variable("FORCE_UPDATE_CHECK") == "1";
+
+  if (!forceUpdateCheck && !(release.current_version < release.latest_source))
+    return;
+
+  auto settingsVersionString = versionStringForSettings(release.latest_source);
+  auto wasVersionDisplayed   = settings.value(Q("settings/updates"), settingsVersionString, false).toBool();
+
+  if (!forceUpdateCheck && wasVersionDisplayed)
+    return;
+
+  settings.setValue(Q("settings/updates"), settingsVersionString, true);
+
+  AvailableUpdateInfoDialog dlg{this};
+  dlg.exec();
+}
+#endif  // HAVE_CURL_EASY_H

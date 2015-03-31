@@ -185,8 +185,6 @@ MergeWidget::setupMenu() {
   connect(mwUi->actionSave,                       SIGNAL(triggered()), this,              SLOT(onSaveConfig()));
   connect(mwUi->actionSaveAs,                     SIGNAL(triggered()), this,              SLOT(onSaveConfigAs()));
   connect(mwUi->actionSaveOptionFile,             SIGNAL(triggered()), this,              SLOT(onSaveOptionFile()));
-  connect(mwUi->actionExit,                       SIGNAL(triggered()), MainWindow::get(), SLOT(close()));
-
   connect(mwUi->actionStartMuxing,                SIGNAL(triggered()), this,              SLOT(onStartMuxing()));
   connect(mwUi->actionAddToJobQueue,              SIGNAL(triggered()), this,              SLOT(onAddToJobQueue()));
   connect(mwUi->actionShowMkvmergeCommandLine,    SIGNAL(triggered()), this,              SLOT(onShowCommandLine()));

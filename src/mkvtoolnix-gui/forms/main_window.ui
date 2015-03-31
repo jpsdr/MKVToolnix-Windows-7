@@ -41,20 +41,21 @@
      <x>0</x>
      <y>0</y>
      <width>838</width>
-     <height>20</height>
+     <height>19</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
+   <widget class="QMenu" name="menuGUI">
     <property name="title">
-     <string>&amp;File</string>
+     <string>MKVToolNix &amp;GUI</string>
     </property>
     <addaction name="actionPreferences"/>
+    <addaction name="actionCheckForUpdates"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuMuxing">
+   <widget class="QMenu" name="menuMerge">
     <property name="title">
-     <string>&amp;Muxing</string>
+     <string>&amp;Merge</string>
     </property>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
@@ -68,8 +69,8 @@
     <addaction name="separator"/>
     <addaction name="actionShowMkvmergeCommandLine"/>
    </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuMuxing"/>
+   <addaction name="menuGUI"/>
+   <addaction name="menuMerge"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNew">
@@ -114,7 +115,7 @@
      <normaloff>:/icons/16x16/document-save-as.png</normaloff>:/icons/16x16/document-save-as.png</iconset>
    </property>
    <property name="text">
-    <string>S&amp;ave settings as</string>
+    <string>Sa&amp;ve settings as</string>
    </property>
   </action>
   <action name="actionExit">
@@ -135,7 +136,7 @@
      <normaloff>:/icons/16x16/media-playback-start.png</normaloff>:/icons/16x16/media-playback-start.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Start muxing</string>
+    <string>Start &amp;muxing</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
@@ -143,7 +144,7 @@
   </action>
   <action name="actionSaveOptionFile">
    <property name="text">
-    <string>Create &amp;option file</string>
+    <string>&amp;Create option file</string>
    </property>
   </action>
   <action name="actionShowMkvmergeCommandLine">
@@ -179,6 +180,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionCheckForUpdates">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/system-software-update.png</normaloff>:/icons/16x16/system-software-update.png</iconset>
+   </property>
+   <property name="text">
+    <string>Check for &amp;updates</string>
    </property>
   </action>
  </widget>

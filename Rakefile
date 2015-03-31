@@ -266,7 +266,7 @@ rule '.cpp' => '.qrc' do |t|
 end
 
 rule '.moc' => '.h' do |t|
-  runq "     MOC #{t.prerequisites.first}", "#{c(:MOC)} #{c(:QT_CFLAGS)} -nw #{t.prerequisites.join(" ")} > #{t.name}"
+  runq "     MOC #{t.prerequisites.first}", "#{c(:MOC)} #{c(:QT_CFLAGS)} #{$system_includes} -nw #{t.prerequisites.join(" ")} > #{t.name}"
 end
 
 rule '.moco' => '.moc' do |t|

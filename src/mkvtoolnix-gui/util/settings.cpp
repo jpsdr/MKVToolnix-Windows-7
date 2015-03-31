@@ -39,11 +39,16 @@ Settings::load() {
   m_uniqueOutputFileNames     = reg.value("uniqueOutputFileNames",     true).toBool();
   m_outputFileNamePolicy      = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToPreviousDirectory)).toInt());
   m_fixedOutputDir            = QDir{reg.value("fixedOutputDir").toString()};
-  reg.endGroup();
+
+  reg.beginGroup("updates");
+  m_checkForUpdates = reg.value("checkForUpdates", true).toBool();
+  m_lastUpdateCheck = reg.value("lastUpdateCheck", QDateTime{}).toDateTime();
+  reg.endGroup();               // settings.updates
+  reg.endGroup();               // settings
 
   reg.beginGroup("defaults");
   m_defaultTrackLanguage = reg.value("defaultTrackLanguage", Q("und")).toString();
-  reg.endGroup();
+  reg.endGroup();               // defaults
 }
 
 QString
@@ -74,11 +79,16 @@ Settings::save()
   reg.setValue("outputFileNamePolicy",      static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("fixedOutputDir",            m_fixedOutputDir.path());
   reg.setValue("uniqueOutputFileNames",     m_uniqueOutputFileNames);
-  reg.endGroup();
+
+  reg.beginGroup("updates");
+  reg.setValue("checkForUpdates", m_checkForUpdates);
+  reg.setValue("lastUpdateCheck", m_lastUpdateCheck);
+  reg.endGroup();               // settings.updates
+  reg.endGroup();               // settings
 
   reg.beginGroup("defaults");
   reg.setValue("defaultTrackLanguage", m_defaultTrackLanguage);
-  reg.endGroup();
+  reg.endGroup();               // defaults
 }
 
 QString
@@ -102,4 +112,42 @@ Settings::exeWithPath(QString const &exe) {
 #else  // defined(SYS_WINDOWS)
   return exe;
 #endif // defined(SYS_WINDOWS)
+}
+
+void
+Settings::setValue(QString const &group,
+                   QString const &key,
+                   QVariant const &value) {
+  withGroup(group, [&key, &value](QSettings &reg) {
+    reg.setValue(key, value);
+  });
+}
+
+QVariant
+Settings::value(QString const &group,
+                QString const &key,
+                QVariant const &defaultValue)
+  const {
+  auto result = QVariant{};
+
+  withGroup(group, [&key, &defaultValue, &result](QSettings &reg) {
+    result = reg.value(key, defaultValue);
+  });
+
+  return result;
+}
+
+void
+Settings::withGroup(QString const &group,
+                    std::function<void(QSettings &)> worker) {
+  QSettings reg;
+  auto groups = group.split(Q("/"));
+
+  for (auto const &subGroup : groups)
+    reg.beginGroup(subGroup);
+
+  worker(reg);
+
+  for (auto idx = groups.size(); idx > 0; --idx)
+    reg.endGroup();
 }
