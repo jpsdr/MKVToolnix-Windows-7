@@ -89,6 +89,11 @@ class Target
     @objects       = ( @objects      + new_deps.collect { |a| a.first }.select { |file| obj_re.match file } ).uniq
     @dependencies  = ( @dependencies + new_deps.collect { |a| a.first }                                     ).uniq
     @file_deps     = ( @file_deps    + new_file_deps                                                        ).uniq
+
+    if c?(:USE_PRECOMPILED_HEADERS)
+      new_deps.select { |dep| /\.moco$/.match dep[0] }.each { |dep| file dep[0] => [ dep[0].ext('.moc'), "src/common/common_pch.h.gch" ] }
+    end
+
     self
   end
 
