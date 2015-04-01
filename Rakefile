@@ -63,7 +63,7 @@ def setup_globals
   end
 
 
-  $source_directories      =  %w{lib/avilib-0.6.10 lib/librmff src}
+  $source_directories      =  %w{lib/avilib-0.6.10 lib/librmff src/common src/extract src/info src/input src/merge src/mkvtoolnix-gui src/mmg src/mpegparser src/output src/propedit}
   $all_sources             =  $source_directories.collect { |dir| FileList[ "#{dir}/**/*.c", "#{dir}/**/*.cpp" ].to_a }.flatten.sort
   $all_headers             =  $source_directories.collect { |dir| FileList[ "#{dir}/**/*.h",                   ].to_a }.flatten.sort
   $all_objects             =  $all_sources.collect { |file| file.ext('o') }
