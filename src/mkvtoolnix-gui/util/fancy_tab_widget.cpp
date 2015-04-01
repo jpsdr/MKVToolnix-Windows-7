@@ -426,6 +426,16 @@ void FancyTabWidget::removeTab(int index)
     m_tabBar->removeTab(index);
 }
 
+int FancyTabWidget::count() const
+{
+    return m_modesStack->count();
+}
+
+QWidget *FancyTabWidget::widget(int index) const
+{
+    return m_modesStack->widget(index);
+}
+
 void FancyTabWidget::setBackgroundBrush(const QBrush &brush)
 {
     QPalette pal = m_tabBar->palette();
