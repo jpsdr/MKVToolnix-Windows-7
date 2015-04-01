@@ -141,7 +141,7 @@ find_header(unsigned char const *buf,
   try {
     return find_header_internal(buf, size, header, allow_no_exss_search);
   } catch (...) {
-    mxwarn(Y("Header problem: not enough data to read header\n"));
+    mxwarn(Y("DTS_Header problem: not enough data to read header\n"));
     return -1;
   }
 }
@@ -412,7 +412,7 @@ header_t::decode_core_header(unsigned char const *buf,
     frame_byte_size       = bc.get_bits(14) + 1;
 
     if (96 > frame_byte_size) {
-      mxwarn(Y("Header problem: invalid frame bytes size\n"));
+      mxwarn(Y("DTS_Header problem: invalid frame bytes size\n"));
       return false;
     }
 
@@ -477,7 +477,7 @@ header_t::decode_core_header(unsigned char const *buf,
         break;
 
       default:
-        mxwarn(Y("Header problem: invalid source PCM resolution\n"));
+        mxwarn(Y("DTS_Header problem: invalid source PCM resolution\n"));
         return false;
     }
 
