@@ -48,32 +48,44 @@
     <property name="title">
      <string>MKVToolNix &amp;GUI</string>
     </property>
-    <addaction name="actionPreferences"/>
-    <addaction name="actionCheckForUpdates"/>
+    <addaction name="actionGUIPreferences"/>
+    <addaction name="actionGUICheckForUpdates"/>
     <addaction name="separator"/>
-    <addaction name="actionExit"/>
+    <addaction name="actionGUIExit"/>
    </widget>
    <widget class="QMenu" name="menuMerge">
     <property name="title">
      <string>&amp;Merge</string>
     </property>
-    <addaction name="actionNew"/>
-    <addaction name="actionOpen"/>
-    <addaction name="actionSave"/>
-    <addaction name="actionSaveAs"/>
-    <addaction name="actionSaveOptionFile"/>
+    <addaction name="actionMergeNew"/>
+    <addaction name="actionMergeOpen"/>
+    <addaction name="actionMergeSave"/>
+    <addaction name="actionMergeSaveAs"/>
+    <addaction name="actionMergeSaveOptionFile"/>
     <addaction name="separator"/>
-    <addaction name="actionStartMuxing"/>
+    <addaction name="actionMergeStartMuxing"/>
     <addaction name="separator"/>
-    <addaction name="actionAddToJobQueue"/>
+    <addaction name="actionMergeAddToJobQueue"/>
     <addaction name="separator"/>
-    <addaction name="actionShowMkvmergeCommandLine"/>
+    <addaction name="actionMergeShowMkvmergeCommandLine"/>
+   </widget>
+   <widget class="QMenu" name="menuHeaderEditor">
+    <property name="title">
+     <string>&amp;Header editor</string>
+    </property>
+    <addaction name="actionHeaderEditorOpen"/>
+    <addaction name="actionHeaderEditorReload"/>
+    <addaction name="separator"/>
+    <addaction name="actionHeaderEditorSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionHeaderEditorClose"/>
    </widget>
    <addaction name="menuGUI"/>
    <addaction name="menuMerge"/>
+   <addaction name="menuHeaderEditor"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionNew">
+  <action name="actionMergeNew">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/document-new.png</normaloff>:/icons/16x16/document-new.png</iconset>
@@ -85,7 +97,7 @@
     <string>Ctrl+N</string>
    </property>
   </action>
-  <action name="actionSave">
+  <action name="actionMergeSave">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
@@ -97,7 +109,7 @@
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionOpen">
+  <action name="actionMergeOpen">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
@@ -109,7 +121,7 @@
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionSaveAs">
+  <action name="actionMergeSaveAs">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/document-save-as.png</normaloff>:/icons/16x16/document-save-as.png</iconset>
@@ -118,7 +130,7 @@
     <string>Sa&amp;ve settings as</string>
    </property>
   </action>
-  <action name="actionExit">
+  <action name="actionGUIExit">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/application-exit.png</normaloff>:/icons/16x16/application-exit.png</iconset>
@@ -130,7 +142,7 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="actionStartMuxing">
+  <action name="actionMergeStartMuxing">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/media-playback-start.png</normaloff>:/icons/16x16/media-playback-start.png</iconset>
@@ -142,17 +154,17 @@
     <string>Ctrl+R</string>
    </property>
   </action>
-  <action name="actionSaveOptionFile">
+  <action name="actionMergeSaveOptionFile">
    <property name="text">
     <string>&amp;Create option file</string>
    </property>
   </action>
-  <action name="actionShowMkvmergeCommandLine">
+  <action name="actionMergeShowMkvmergeCommandLine">
    <property name="text">
     <string>S&amp;how command line</string>
    </property>
   </action>
-  <action name="actionCopyCommandLineToClipboard">
+  <action name="actionMergeCopyCommandLineToClipboard">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/edit-copy.png</normaloff>:/icons/16x16/edit-copy.png</iconset>
@@ -161,7 +173,7 @@
     <string>&amp;Copy command line to clipboard</string>
    </property>
   </action>
-  <action name="actionAddToJobQueue">
+  <action name="actionMergeAddToJobQueue">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/task-delegate.png</normaloff>:/icons/16x16/task-delegate.png</iconset>
@@ -170,7 +182,7 @@
     <string>&amp;Add to job queue</string>
    </property>
   </action>
-  <action name="actionPreferences">
+  <action name="actionGUIPreferences">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/preferences-other.png</normaloff>:/icons/16x16/preferences-other.png</iconset>
@@ -182,13 +194,50 @@
     <string>Ctrl+P</string>
    </property>
   </action>
-  <action name="actionCheckForUpdates">
+  <action name="actionGUICheckForUpdates">
    <property name="icon">
     <iconset resource="../qt_resources.qrc">
      <normaloff>:/icons/16x16/system-software-update.png</normaloff>:/icons/16x16/system-software-update.png</iconset>
    </property>
    <property name="text">
     <string>Check for &amp;updates</string>
+   </property>
+  </action>
+  <action name="actionHeaderEditorOpen">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open Matroska file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionHeaderEditorClose">
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionHeaderEditorSave">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionHeaderEditorReload">
+   <property name="text">
+    <string>&amp;Reload</string>
    </property>
   </action>
  </widget>

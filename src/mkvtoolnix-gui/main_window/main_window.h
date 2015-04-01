@@ -14,6 +14,7 @@ namespace Ui {
 class MainWindow;
 }
 
+class HeaderEditorContainerWidget;
 class JobWidget;
 class MergeWidget;
 class StatusBarProgressWidget;
@@ -26,10 +27,11 @@ class MainWindow : public QMainWindow {
 protected:
   // UI stuff:
   std::unique_ptr<Ui::MainWindow> ui;
-  StatusBarProgressWidget *m_statusBarProgress;
-  MergeWidget *m_toolMerge;
-  JobWidget *m_toolJobs;
-  WatchJobContainerWidget *m_watchJobContainer;
+  StatusBarProgressWidget *m_statusBarProgress{};
+  MergeWidget *m_toolMerge{};
+  JobWidget *m_toolJobs{};
+  HeaderEditorContainerWidget *m_toolHeaderEditor{};
+  WatchJobContainerWidget *m_watchJobContainer{};
 
 protected:                      // static
   static MainWindow *ms_mainWindow;
@@ -41,10 +43,16 @@ public:
   virtual void setStatusBarMessage(QString const &message);
   virtual Ui::MainWindow *getUi();
 
+  virtual void showTheseMenusOnly(QList<QMenu *> const &menus);
+  virtual void showAndEnableMenu(QMenu &menu, bool show);
+
 public slots:
+  virtual void toolChanged(int index);
+  virtual void editPreferences();
+
 #if defined(HAVE_CURL_EASY_H)
-  void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t release);
-  void checkForUpdates();
+  virtual void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t release);
+  virtual void checkForUpdates();
 #endif  // HAVE_CURL_EASY_H
 
 public:                         // static
@@ -62,7 +70,7 @@ protected:
   virtual void setupMenu();
   virtual void setupToolSelector();
   virtual QWidget *createNotImplementedWidget();
-  virtual void retranslateUI();
+  virtual void retranslateUi();
 
   virtual void closeEvent(QCloseEvent *event);
 

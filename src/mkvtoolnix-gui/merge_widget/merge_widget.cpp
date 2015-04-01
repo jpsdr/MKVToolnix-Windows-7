@@ -12,16 +12,20 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
+#include <QComboBox>
+#include <QMenu>
+#include <QTreeView>
 #include <QFileDialog>
 #include <QInputDialog>
-#include <QList>
 #include <QMessageBox>
 #include <QString>
 #include <QTimer>
 
-MergeWidget::MergeWidget(QWidget *parent)
-  : QWidget{parent}
+MergeWidget::MergeWidget(QWidget *parent,
+                         QMenu *mergeMenu)
+  : ToolBase{parent}
   , ui{new Ui::MergeWidget}
+  , m_mergeMenu{mergeMenu}
   , m_filesModel{new SourceFileModel{this}}
   , m_tracksModel{new TrackModel{this}}
   , m_currentlySettingInputControlValues{false}
@@ -43,8 +47,6 @@ MergeWidget::MergeWidget(QWidget *parent)
   setupInputControls();
   setupOutputControls();
   setupAttachmentsControls();
-
-  retranslateUI();
 
   setControlValuesFromConfig();
 }
@@ -70,7 +72,7 @@ MergeWidget::onSaveConfig() {
 
 void
 MergeWidget::onSaveOptionFile() {
-  auto fileName = QFileDialog::getSaveFileName(this, Q(""), Settings::get().m_lastConfigDir.path(), QY("All files") + Q(" (*)"));
+  auto fileName = QFileDialog::getSaveFileName(this, QY("Save option file"), Settings::get().m_lastConfigDir.path(), QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
@@ -83,7 +85,7 @@ MergeWidget::onSaveOptionFile() {
 
 void
 MergeWidget::onSaveConfigAs() {
-  auto fileName = QFileDialog::getSaveFileName(this, Q(""), Settings::get().m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
+  auto fileName = QFileDialog::getSaveFileName(this, QY("Save settings file as"), Settings::get().m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
@@ -96,7 +98,7 @@ MergeWidget::onSaveConfigAs() {
 
 void
 MergeWidget::onOpenConfig() {
-  auto fileName = QFileDialog::getOpenFileName(this, Q(""), Settings::get().m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
+  auto fileName = QFileDialog::getOpenFileName(this, QY("Open settings file"), Settings::get().m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
@@ -180,14 +182,14 @@ void
 MergeWidget::setupMenu() {
   auto mwUi = MainWindow::get()->getUi();
 
-  connect(mwUi->actionNew,                        SIGNAL(triggered()), this,              SLOT(onNew()));
-  connect(mwUi->actionOpen,                       SIGNAL(triggered()), this,              SLOT(onOpenConfig()));
-  connect(mwUi->actionSave,                       SIGNAL(triggered()), this,              SLOT(onSaveConfig()));
-  connect(mwUi->actionSaveAs,                     SIGNAL(triggered()), this,              SLOT(onSaveConfigAs()));
-  connect(mwUi->actionSaveOptionFile,             SIGNAL(triggered()), this,              SLOT(onSaveOptionFile()));
-  connect(mwUi->actionStartMuxing,                SIGNAL(triggered()), this,              SLOT(onStartMuxing()));
-  connect(mwUi->actionAddToJobQueue,              SIGNAL(triggered()), this,              SLOT(onAddToJobQueue()));
-  connect(mwUi->actionShowMkvmergeCommandLine,    SIGNAL(triggered()), this,              SLOT(onShowCommandLine()));
+  connect(mwUi->actionMergeNew,                     SIGNAL(triggered()), this, SLOT(onNew()));
+  connect(mwUi->actionMergeOpen,                    SIGNAL(triggered()), this, SLOT(onOpenConfig()));
+  connect(mwUi->actionMergeSave,                    SIGNAL(triggered()), this, SLOT(onSaveConfig()));
+  connect(mwUi->actionMergeSaveAs,                  SIGNAL(triggered()), this, SLOT(onSaveConfigAs()));
+  connect(mwUi->actionMergeSaveOptionFile,          SIGNAL(triggered()), this, SLOT(onSaveOptionFile()));
+  connect(mwUi->actionMergeStartMuxing,             SIGNAL(triggered()), this, SLOT(onStartMuxing()));
+  connect(mwUi->actionMergeAddToJobQueue,           SIGNAL(triggered()), this, SLOT(onAddToJobQueue()));
+  connect(mwUi->actionMergeShowMkvmergeCommandLine, SIGNAL(triggered()), this, SLOT(onShowCommandLine()));
 }
 
 void
@@ -207,7 +209,7 @@ MergeWidget::setControlValuesFromConfig() {
 }
 
 void
-MergeWidget::retranslateUI() {
+MergeWidget::retranslateUi() {
   retranslateInputUI();
   retranslateAttachmentsUI();
 }
@@ -251,4 +253,9 @@ MergeWidget::addToJobQueue(bool startNow) {
   }
 
   MainWindow::getJobWidget()->addJob(std::static_pointer_cast<Job>(job));
+}
+
+void
+MergeWidget::toolShown() {
+  MainWindow::get()->showTheseMenusOnly({ m_mergeMenu });
 }

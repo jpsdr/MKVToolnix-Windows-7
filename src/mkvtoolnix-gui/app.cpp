@@ -2,6 +2,7 @@
 
 #include "common/common.h"
 #include "common/qt.h"
+#include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
@@ -22,6 +23,8 @@ App::App(int &argc,
   Settings::get().load();
 
   QObject::connect(this, SIGNAL(aboutToQuit()), this, SLOT(saveSettings()));
+
+  retranslateUi();
 }
 
 App::~App() {
@@ -36,4 +39,9 @@ App::saveSettings()
 App *
 App::instance() {
   return static_cast<App *>(QApplication::instance());
+}
+
+void
+App::retranslateUi() {
+  setApplicationDisplayName(Q(get_version_info("MKVToolNix GUI")));
 }

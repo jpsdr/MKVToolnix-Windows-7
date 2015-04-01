@@ -136,6 +136,7 @@ public:
     FancyTabWidget(QWidget *parent = 0);
 
     void insertTab(int index, QWidget *tab, const QIcon &icon, const QString &label);
+    void appendTab(QWidget *tab, const QIcon &icon, const QString &label);
     void removeTab(int index);
     int count() const;
     QWidget *widget(int index) const;

@@ -4,16 +4,17 @@
 #include "common/common_pch.h"
 
 #include <QList>
-#include <QMenu>
-#include <QWidget>
 
+#include "mkvtoolnix-gui/main_window/tool_base.h"
 #include "mkvtoolnix-gui/job_widget/job_model.h"
+
+class QAction;
 
 namespace Ui {
 class JobWidget;
 }
 
-class JobWidget : public QWidget {
+class JobWidget : public ToolBase {
   Q_OBJECT;
 
 protected:
@@ -31,6 +32,8 @@ public:
   JobModel *getModel() const;
   void addJob(JobPtr const &job);
 
+  virtual void retranslateUi() override;
+
 public slots:
   void onStart();
   void onRemove();
@@ -42,9 +45,10 @@ public slots:
 
   void resizeColumnsToContents() const;
 
+  virtual void toolShown() override;
+
 protected:
   void setupUiControls();
-  void retranslateUI();
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_MERGE_WIDGET_JOB_WIDGET_H

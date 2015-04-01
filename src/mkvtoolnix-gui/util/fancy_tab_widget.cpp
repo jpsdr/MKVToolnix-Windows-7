@@ -420,6 +420,13 @@ void FancyTabWidget::insertTab(int index, QWidget *tab, const QIcon &icon, const
     m_tabBar->insertTab(index, icon, label);
 }
 
+void FancyTabWidget::appendTab(QWidget *tab, const QIcon &icon, const QString &label)
+{
+    auto index = count();
+    m_modesStack->insertWidget(index, tab);
+    m_tabBar->insertTab(index, icon, label);
+}
+
 void FancyTabWidget::removeTab(int index)
 {
     m_modesStack->removeWidget(m_modesStack->widget(index));

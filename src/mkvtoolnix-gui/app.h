@@ -12,6 +12,8 @@ public:
   App(int &argc, char **argv);
   virtual ~App();
 
+  void retranslateUi();
+
 public slots:
   void saveSettings() const;
 

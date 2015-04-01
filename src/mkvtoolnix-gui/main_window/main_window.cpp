@@ -4,6 +4,7 @@
 #include "common/qt.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/forms/main_window.h"
+#include "mkvtoolnix-gui/header_editor_widget/header_editor_container_widget.h"
 #include "mkvtoolnix-gui/job_widget/job_widget.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
@@ -27,8 +28,6 @@ MainWindow *MainWindow::ms_mainWindow = nullptr;
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow{parent}
   , ui{new Ui::MainWindow}
-  , m_toolMerge{}
-  , m_toolJobs{}
 {
   ms_mainWindow = this;
 
@@ -44,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
   // Setup window properties.
   setWindowIcon(Util::loadIcon(Q("mkvmergeGUI.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
 
-  retranslateUI();
+  retranslateUi();
 
 #if defined(HAVE_CURL_EASY_H)
   silentlyCheckForUpdates();
@@ -86,12 +85,13 @@ MainWindow::createNotImplementedWidget() {
 
 void
 MainWindow::setupMenu() {
-  connect(ui->actionExit,            SIGNAL(triggered()), MainWindow::get(), SLOT(close()));
+  connect(ui->actionGUIExit,            SIGNAL(triggered()), this, SLOT(close()));
+  connect(ui->actionGUIPreferences,     SIGNAL(triggered()), this, SLOT(editPreferences()));
 
 #if defined(HAVE_CURL_EASY_H)
-  connect(ui->actionCheckForUpdates, SIGNAL(triggered()), MainWindow::get(), SLOT(checkForUpdates()));
+  connect(ui->actionGUICheckForUpdates, SIGNAL(triggered()), this, SLOT(checkForUpdates()));
 #else
-  ui->actionCheckForUpdates->setVisible(false);
+  ui->actionGUICheckForUpdates->setVisible(false);
 #endif  // HAVE_CURL_EASY_H
 }
 
@@ -99,26 +99,53 @@ void
 MainWindow::setupToolSelector() {
   // ui->tool->setIconSize(QSize{48, 48});
 
-  m_toolMerge = new MergeWidget{ui->tool};
-  m_toolJobs  = new JobWidget{ui->tool};
+  m_toolMerge         = new MergeWidget{ui->tool, ui->menuMerge};
+  m_toolJobs          = new JobWidget{ui->tool};
+  m_toolHeaderEditor  = new HeaderEditorContainerWidget{ui->tool, ui->menuHeaderEditor};
   m_watchJobContainer = new WatchJobContainerWidget{ui->tool};
 
-  auto numTabs = 0u;
-  ui->tool->insertTab(numTabs++, m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
-  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
-  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
-  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit.png"},              QY("edit headers"));
-  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
-  ui->tool->insertTab(numTabs++, createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
-  ui->tool->insertTab(numTabs++, m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
-  ui->tool->insertTab(numTabs++, m_watchJobContainer,          QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
+  ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
+  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
+  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
+  ui->tool->appendTab(m_toolHeaderEditor,           QIcon{":/icons/48x48/document-edit.png"},              QY("edit headers"));
+  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
+  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
+  ui->tool->appendTab(m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
+  ui->tool->appendTab(m_watchJobContainer,          QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
 
-  for (auto idx = 0u; idx < numTabs; ++idx)
+  for (auto idx = 0, numTabs = ui->tool->count(); idx < numTabs; ++idx)
     ui->tool->setTabEnabled(idx, true);
 
   ui->tool->setCurrentIndex(0);
+  m_toolMerge->toolShown();
 
+  connect(ui->tool,               SIGNAL(currentChanged(int)),                        this,                SLOT(toolChanged(int)));
   connect(m_toolJobs->getModel(), SIGNAL(progressChanged(unsigned int,unsigned int)), m_statusBarProgress, SLOT(setProgress(unsigned int,unsigned int)));
+}
+
+void
+MainWindow::showAndEnableMenu(QMenu &menu,
+                              bool show) {
+  auto &action = *menu.menuAction();
+  action.setVisible(show);
+  action.setEnabled(show);
+  for (auto const &action : menu.actions())
+    action->setEnabled(show);
+}
+
+void
+MainWindow::showTheseMenusOnly(QList<QMenu *> const &menus) {
+  showAndEnableMenu(*ui->menuMerge,        menus.contains(ui->menuMerge));
+  showAndEnableMenu(*ui->menuHeaderEditor, menus.contains(ui->menuHeaderEditor));
+}
+
+void
+MainWindow::toolChanged(int index) {
+  auto widget   = ui->tool->widget(index);
+  auto toolBase = dynamic_cast<ToolBase *>(widget);
+
+  if (toolBase)
+    toolBase->toolShown();
 }
 
 MainWindow *
@@ -147,8 +174,14 @@ MainWindow::getWatchJobContainerWidget() {
 }
 
 void
-MainWindow::retranslateUI() {
+MainWindow::retranslateUi() {
   setWindowTitle(Q(get_version_info("MKVToolNix GUI")));
+
+  for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx) {
+    auto toolBase = dynamic_cast<ToolBase *>(ui->tool->widget(idx));
+    if (toolBase)
+      toolBase->retranslateUi();
+  }
 }
 
 void
@@ -160,6 +193,12 @@ MainWindow::closeEvent(QCloseEvent *event) {
     jobWidget->getModel()->saveJobs(reg);
 
   event->accept();
+}
+
+void
+MainWindow::editPreferences() {
+  // TODO: MainWindow::editPreferences
+  setStatusBarMessage(Q("TODO: MainWindow::editPreferences"));
 }
 
 #if defined(HAVE_CURL_EASY_H)

@@ -3,24 +3,24 @@
 
 #include "common/common_pch.h"
 
+#include "mkvtoolnix-gui/main_window/tool_base.h"
 #include "mkvtoolnix-gui/merge_widget/attachment_model.h"
 #include "mkvtoolnix-gui/merge_widget/mux_config.h"
 #include "mkvtoolnix-gui/merge_widget/source_file_model.h"
 #include "mkvtoolnix-gui/merge_widget/track_model.h"
 
-#include <QComboBox>
-#include <QFileInfo>
 #include <QList>
-#include <QMenu>
-#include <QWidget>
 
+class QComboBox;
+class QLineEdit;
+class QMenu;
 class QTreeView;
 
 namespace Ui {
 class MergeWidget;
 }
 
-class MergeWidget : public QWidget {
+class MergeWidget : public ToolBase {
   Q_OBJECT;
 
 protected:
@@ -29,6 +29,7 @@ protected:
 
   // UI stuff:
   std::unique_ptr<Ui::MergeWidget> ui;
+  QMenu *m_mergeMenu;
 
   // "Input" tab:
   SourceFileModel *m_filesModel;
@@ -45,7 +46,7 @@ protected:
   QAction *m_addAttachmentsAction, *m_removeAttachmentsAction;
 
 public:
-  explicit MergeWidget(QWidget *parent = nullptr);
+  explicit MergeWidget(QWidget *parent, QMenu *mergeMenu);
   ~MergeWidget();
 
 public slots:
@@ -132,6 +133,9 @@ public slots:
 
   virtual void resizeAttachmentsColumnsToContents() const;
 
+  virtual void toolShown() override;
+  virtual void retranslateUi() override;
+
 protected:
   virtual void setupAttachmentsControls();
   virtual void setupControlLists();
@@ -139,7 +143,6 @@ protected:
   virtual void setupOutputControls();
   virtual void setupMenu();
 
-  virtual void retranslateUI();
   virtual void retranslateInputUI();
   virtual void retranslateAttachmentsUI();
 

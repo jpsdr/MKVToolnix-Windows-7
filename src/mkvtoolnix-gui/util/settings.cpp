@@ -28,6 +28,7 @@ Settings::load() {
   m_lastOpenDir               = QDir{reg.value("lastOpenDir").toString()};
   m_lastOutputDir             = QDir{reg.value("lastOutputDir").toString()};
   m_lastConfigDir             = QDir{reg.value("lastConfigDir").toString()};
+  m_lastMatroskaFileDir       = QDir{reg.value("lastMatroskaFileDir").toString()};
 
   m_scanForPlaylistsPolicy    = static_cast<ScanForPlaylistsPolicy>(reg.value("scanForPlaylistsPolicy", static_cast<int>(AskBeforeScanning)).toInt());
   m_minimumPlaylistDuration   = reg.value("minimumPlaylistDuration", 120).toUInt();
@@ -68,6 +69,7 @@ Settings::save()
   reg.setValue("lastOpenDir",               m_lastOpenDir.path());
   reg.setValue("lastOutputDir",             m_lastOutputDir.path());
   reg.setValue("lastConfigDir",             m_lastConfigDir.path());
+  reg.setValue("lastMatroskaFileDir",       m_lastMatroskaFileDir.path());
 
   reg.setValue("scanForPlaylistsPolicy",    static_cast<int>(m_scanForPlaylistsPolicy));
   reg.setValue("minimumPlaylistDuration",   m_minimumPlaylistDuration);

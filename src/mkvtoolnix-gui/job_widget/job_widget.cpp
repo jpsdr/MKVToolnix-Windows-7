@@ -2,6 +2,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/job_widget.h"
+#include "mkvtoolnix-gui/forms/main_window.h"
 #include "mkvtoolnix-gui/job_widget/job_widget.h"
 #include "mkvtoolnix-gui/job_widget/mux_job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -14,7 +15,7 @@
 #include <QString>
 
 JobWidget::JobWidget(QWidget *parent)
-  : QWidget{parent}
+  : ToolBase{parent}
   , ui{new Ui::JobWidget}
   , m_model{new JobModel{this}}
   , m_startAction{new QAction{this}}
@@ -27,7 +28,6 @@ JobWidget::JobWidget(QWidget *parent)
   ui->setupUi(this);
 
   setupUiControls();
-  retranslateUI();
 
   QSettings reg;
   m_model->loadJobs(reg);
@@ -133,10 +133,16 @@ JobWidget::addJob(JobPtr const &job) {
 }
 
 void
-JobWidget::retranslateUI() {
+JobWidget::retranslateUi() {
   m_startAction->setText(QY("&Start selected jobs automatically"));
   m_removeAction->setText(QY("&Remove selected jobs"));
   m_removeDoneAction->setText(QY("Remove &completed jobs"));
   m_removeDoneOkAction->setText(QY("Remove &successfully completed jobs"));
   m_removeAllAction->setText(QY("Remove a&ll jobs"));
+}
+
+void
+JobWidget::toolShown() {
+  auto win = MainWindow::get();
+  win->showTheseMenusOnly({ win->getUi()->menuMerge });
 }

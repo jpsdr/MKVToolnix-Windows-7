@@ -3,7 +3,7 @@
 
 #include "common/common_pch.h"
 
-#include <QWidget>
+#include "mkvtoolnix-gui/main_window/tool_base.h"
 
 namespace Ui {
 class WatchJobContainerWidget;
@@ -11,7 +11,7 @@ class WatchJobContainerWidget;
 
 class WatchJobWidget;
 
-class WatchJobContainerWidget : public QWidget {
+class WatchJobContainerWidget : public ToolBase {
   Q_OBJECT;
 
 protected:
@@ -25,10 +25,10 @@ public:
 
   WatchJobWidget *currentJobWidget();
 
-public slots:
+  virtual void retranslateUi() override;
 
-protected:
-  virtual void retranslateUi();
+public slots:
+  virtual void toolShown() override;
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_WATCH_JOB_CONTAINER_WIDGET_WATCH_JOB_CONTAINER_WIDGET_H

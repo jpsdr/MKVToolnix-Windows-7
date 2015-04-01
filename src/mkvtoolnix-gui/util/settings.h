@@ -36,7 +36,7 @@ public:
 
   QString m_mkvmergeExe, m_defaultTrackLanguage;
   ProcessPriority m_priority;
-  QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
+  QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir, m_lastMatroskaFileDir;
   bool m_setAudioDelayFromFileName, m_disableAVCompression, m_autoSetFileTitle;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
