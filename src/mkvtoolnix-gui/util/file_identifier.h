@@ -6,7 +6,7 @@
 #include <QStringList>
 #include <QWidget>
 
-#include "mkvtoolnix-gui/merge_widget/source_file.h"
+#include "mkvtoolnix-gui/merge/source_file.h"
 
 class FileIdentifier: public QObject {
   Q_OBJECT;
@@ -16,7 +16,7 @@ private:
   int m_exitCode;
   QStringList m_output;
   QString m_fileName;
-  SourceFilePtr m_file;
+  mtx::gui::Merge::SourceFilePtr m_file;
 
 public:
   FileIdentifier(QWidget *parent = nullptr, QString const &fileName = QString{});
@@ -38,7 +38,7 @@ public:
   virtual int exitCode() const;
   virtual QStringList const &output() const;
 
-  virtual SourceFilePtr const &file() const;
+  virtual mtx::gui::Merge::SourceFilePtr const &file() const;
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_FILE_IDENTIFIER_H

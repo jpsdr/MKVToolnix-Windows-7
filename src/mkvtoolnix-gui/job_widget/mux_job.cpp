@@ -7,12 +7,12 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/job_widget/mux_job.h"
-#include "mkvtoolnix-gui/merge_widget/mux_config.h"
+#include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 MuxJob::MuxJob(Status status,
-               MuxConfigPtr const &config)
+               mtx::gui::Merge::MuxConfigPtr const &config)
   : Job{status}
   , m_config{config}
   , m_aborted{}
@@ -156,7 +156,7 @@ MuxJob::saveJobInternal(QSettings &settings)
 
 JobPtr
 MuxJob::loadMuxJob(QSettings &settings) {
-  auto config = std::make_shared<MuxConfig>();
+  auto config = std::make_shared<mtx::gui::Merge::MuxConfig>();
 
   settings.beginGroup("muxConfig");
   config->load(settings);

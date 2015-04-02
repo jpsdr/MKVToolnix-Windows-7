@@ -6,7 +6,7 @@
 #include "mkvtoolnix-gui/job_widget/job_widget.h"
 #include "mkvtoolnix-gui/job_widget/mux_job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
-#include "mkvtoolnix-gui/merge_widget/mux_config.h"
+#include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_job_container_widget/watch_job_widget.h"
 

@@ -8,7 +8,7 @@
 #include "mkvtoolnix-gui/job_widget/job_widget.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
-#include "mkvtoolnix-gui/merge_widget/merge_widget.h"
+#include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_job_container_widget/watch_job_container_widget.h"
@@ -99,7 +99,7 @@ void
 MainWindow::setupToolSelector() {
   // ui->tool->setIconSize(QSize{48, 48});
 
-  m_toolMerge         = new MergeWidget{ui->tool, ui->menuMerge};
+  m_toolMerge         = new mtx::gui::Merge::Tool{ui->tool, ui->menuMerge};
   m_toolJobs          = new JobWidget{ui->tool};
   m_toolHeaderEditor  = new mtx::gui::HeaderEditor::Tool{ui->tool, ui->menuHeaderEditor};
   m_watchJobContainer = new WatchJobContainerWidget{ui->tool};
@@ -153,8 +153,8 @@ MainWindow::get() {
   return ms_mainWindow;
 }
 
-MergeWidget *
-MainWindow::getMergeWidget() {
+mtx::gui::Merge::Tool *
+MainWindow::getMergeTool() {
   return get()->m_toolMerge;
 }
 

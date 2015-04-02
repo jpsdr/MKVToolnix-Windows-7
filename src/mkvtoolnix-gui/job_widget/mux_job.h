@@ -10,20 +10,24 @@
 
 class QTemporaryFile;
 
+namespace mtx { namespace gui { namespace Merge {
+
 class MuxConfig;
 using MuxConfigPtr = std::shared_ptr<MuxConfig>;
+
+}}}
 
 class MuxJob: public Job {
   Q_OBJECT;
 protected:
-  MuxConfigPtr m_config;
+  mtx::gui::Merge::MuxConfigPtr m_config;
   QProcess m_process;
   bool m_aborted;
   QByteArray m_bytesRead;
   std::unique_ptr<QTemporaryFile> m_settingsFile;
 
 public:
-  MuxJob(Status status, MuxConfigPtr const &config);
+  MuxJob(Status status, mtx::gui::Merge::MuxConfigPtr const &config);
   virtual ~MuxJob();
 
   virtual void abort();

@@ -13,7 +13,7 @@
 #include "mkvtoolnix-gui/forms/main_window.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
-#include "mkvtoolnix-gui/merge_widget/mux_config.h"
+#include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
