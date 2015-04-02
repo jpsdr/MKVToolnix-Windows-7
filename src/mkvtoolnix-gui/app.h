@@ -5,6 +5,8 @@
 
 #include <QApplication>
 
+namespace mtx { namespace gui {
+
 class App : public QApplication {
   Q_OBJECT;
 
@@ -20,5 +22,7 @@ public slots:
 public:
   static App *instance();
 };
+
+}}
 
 #endif  // MTX_MKVTOOLNIX_GUI_APP_H

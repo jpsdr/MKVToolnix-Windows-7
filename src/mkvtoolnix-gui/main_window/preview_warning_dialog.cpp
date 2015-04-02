@@ -7,6 +7,8 @@
 #include "mkvtoolnix-gui/forms/preview_warning_dialog.h"
 #include "mkvtoolnix-gui/main_window/preview_warning_dialog.h"
 
+namespace mtx { namespace gui {
+
 PreviewWarningDialog::PreviewWarningDialog(QWidget *parent)
   : QDialog{parent}
   , ui{new Ui::PreviewWarningDialog}
@@ -22,3 +24,5 @@ PreviewWarningDialog::PreviewWarningDialog(QWidget *parent)
 
 PreviewWarningDialog::~PreviewWarningDialog() {
 }
+
+}}

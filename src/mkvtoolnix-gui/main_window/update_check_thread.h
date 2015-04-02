@@ -9,6 +9,8 @@
 
 # include "common/version.h"
 
+namespace mtx { namespace gui {
+
 enum class UpdateCheckStatus {
   Failed,
   NewReleaseAvailable,
@@ -27,6 +29,8 @@ signals:
   void checkFinished(UpdateCheckStatus status, mtx_release_version_t release);
   void releaseInformationRetrieved(std::shared_ptr<pugi::xml_document> releasesInfo);
 };
+
+}}
 
 #endif  // HAVE_CURL_EASY_H
 #endif  // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECK_THREAD_H

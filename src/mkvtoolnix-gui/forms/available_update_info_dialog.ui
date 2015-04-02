@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AvailableUpdateInfoDialog</class>
- <widget class="QDialog" name="AvailableUpdateInfoDialog">
+ <class>mtx::gui::AvailableUpdateInfoDialog</class>
+ <widget class="QDialog" name="mtx::gui::AvailableUpdateInfoDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -173,7 +173,7 @@ p, li { white-space: pre-wrap; }
   <connection>
    <sender>close</sender>
    <signal>clicked()</signal>
-   <receiver>AvailableUpdateInfoDialog</receiver>
+   <receiver>mtx::gui::AvailableUpdateInfoDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -189,7 +189,7 @@ p, li { white-space: pre-wrap; }
   <connection>
    <sender>download</sender>
    <signal>clicked()</signal>
-   <receiver>AvailableUpdateInfoDialog</receiver>
+   <receiver>mtx::gui::AvailableUpdateInfoDialog</receiver>
    <slot>visitDownloadLocation()</slot>
    <hints>
     <hint type="sourcelabel">

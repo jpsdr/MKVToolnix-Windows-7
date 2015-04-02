@@ -6,6 +6,8 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
+namespace mtx { namespace gui {
+
 App::App(int &argc,
          char **argv)
   : QApplication{argc, argv}
@@ -45,3 +47,5 @@ void
 App::retranslateUi() {
   setApplicationDisplayName(Q(get_version_info("MKVToolNix GUI")));
 }
+
+}}

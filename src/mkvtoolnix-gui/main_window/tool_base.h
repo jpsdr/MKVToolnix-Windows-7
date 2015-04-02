@@ -5,6 +5,8 @@
 
 #include <QWidget>
 
+namespace mtx { namespace gui {
+
 class ToolBase : public QWidget {
   Q_OBJECT;
 
@@ -17,5 +19,7 @@ public:
 public slots:
   virtual void toolShown() = 0;
 };
+
+}}
 
 #endif // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_TOOL_BASE_H

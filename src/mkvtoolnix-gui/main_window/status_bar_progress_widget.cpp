@@ -4,6 +4,8 @@
 #include "mkvtoolnix-gui/forms/status_bar_progress_widget.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 
+namespace mtx { namespace gui {
+
 StatusBarProgressWidget::StatusBarProgressWidget(QWidget *parent)
   : QWidget{parent}
   , ui{new Ui::StatusBarProgressWidget}
@@ -20,3 +22,5 @@ StatusBarProgressWidget::setProgress(unsigned int progress,
   ui->progress->setValue(progress);
   ui->totalProgress->setValue(totalProgress);
 }
+
+}}

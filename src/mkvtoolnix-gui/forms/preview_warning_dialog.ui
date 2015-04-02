@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PreviewWarningDialog</class>
- <widget class="QDialog" name="PreviewWarningDialog">
+ <class>mtx::gui::PreviewWarningDialog</class>
+ <widget class="QDialog" name="mtx::gui::PreviewWarningDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -152,7 +152,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>PreviewWarningDialog</receiver>
+   <receiver>mtx::gui::PreviewWarningDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -168,7 +168,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>PreviewWarningDialog</receiver>
+   <receiver>mtx::gui::PreviewWarningDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

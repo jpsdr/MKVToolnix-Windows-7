@@ -5,6 +5,8 @@
 
 #include <QDialog>
 
+namespace mtx { namespace gui {
+
 namespace Ui {
 class PreviewWarningDialog;
 }
@@ -20,5 +22,7 @@ public:
   explicit PreviewWarningDialog(QWidget *parent);
   ~PreviewWarningDialog();
 };
+
+}}
 
 #endif // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_PREVIEW_WARNING_DIALOG_H

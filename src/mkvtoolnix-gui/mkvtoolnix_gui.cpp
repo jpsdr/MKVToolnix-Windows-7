@@ -22,7 +22,7 @@ registerMetaTypes() {
 #if defined(HAVE_CURL_EASY_H)
   qRegisterMetaType<mtx_release_version_t>("mtx_release_version_t");
   qRegisterMetaType<std::shared_ptr<pugi::xml_document>>("std::shared_ptr<pugi::xml_document>");
-  qRegisterMetaType<UpdateCheckStatus>("UpdateCheckStatus");
+  qRegisterMetaType<mtx::gui::UpdateCheckStatus>("UpdateCheckStatus");
 #endif  // HAVE_CURL_EASY_H
 }
 
@@ -31,7 +31,7 @@ showPreviewWarning(QWidget *parent) {
   if (get_environment_variable("NO_WARNING") == "1")
     return;
 
-  auto dlg = std::make_unique<PreviewWarningDialog>(parent);
+  auto dlg = std::make_unique<mtx::gui::PreviewWarningDialog>(parent);
   dlg->exec();
 }
 
@@ -40,8 +40,8 @@ main(int argc,
      char **argv) {
   registerMetaTypes();
 
-  auto app        = std::make_unique<App>(argc, argv);
-  auto mainWindow = std::make_unique<MainWindow>();
+  auto app        = std::make_unique<mtx::gui::App>(argc, argv);
+  auto mainWindow = std::make_unique<mtx::gui::MainWindow>();
 
   showPreviewWarning(mainWindow.get());
 

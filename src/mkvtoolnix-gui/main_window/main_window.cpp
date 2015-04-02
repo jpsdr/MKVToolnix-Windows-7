@@ -23,6 +23,8 @@
 #include <QStaticText>
 #include <QVBoxLayout>
 
+namespace mtx { namespace gui {
+
 MainWindow *MainWindow::ms_mainWindow = nullptr;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -99,10 +101,10 @@ void
 MainWindow::setupToolSelector() {
   // ui->tool->setIconSize(QSize{48, 48});
 
-  m_toolMerge         = new mtx::gui::Merge::Tool{ui->tool, ui->menuMerge};
-  m_toolJobs          = new mtx::gui::Jobs::Tool{ui->tool};
-  m_toolHeaderEditor  = new mtx::gui::HeaderEditor::Tool{ui->tool, ui->menuHeaderEditor};
-  m_watchJobTool      = new mtx::gui::WatchJobs::Tool{ui->tool};
+  m_toolMerge         = new Merge::Tool{ui->tool, ui->menuMerge};
+  m_toolJobs          = new Jobs::Tool{ui->tool};
+  m_toolHeaderEditor  = new HeaderEditor::Tool{ui->tool, ui->menuHeaderEditor};
+  m_watchJobTool      = new WatchJobs::Tool{ui->tool};
 
   ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
   ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
@@ -153,27 +155,27 @@ MainWindow::get() {
   return ms_mainWindow;
 }
 
-mtx::gui::Merge::Tool *
+Merge::Tool *
 MainWindow::getMergeTool() {
   return get()->m_toolMerge;
 }
 
-mtx::gui::HeaderEditor::Tool *
+HeaderEditor::Tool *
 MainWindow::getHeaderEditorTool() {
   return get()->m_toolHeaderEditor;
 }
 
-mtx::gui::Jobs::Tool *
+Jobs::Tool *
 MainWindow::getJobTool() {
   return get()->m_toolJobs;
 }
 
-mtx::gui::WatchJobs::Tab *
+WatchJobs::Tab *
 MainWindow::getWatchCurrentJobTab() {
   return getWatchJobTool()->currentJobTab();
 }
 
-mtx::gui::WatchJobs::Tool *
+WatchJobs::Tool *
 MainWindow::getWatchJobTool() {
   return get()->m_watchJobTool;
 }
@@ -261,3 +263,5 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
   dlg.exec();
 }
 #endif  // HAVE_CURL_EASY_H
+
+}}

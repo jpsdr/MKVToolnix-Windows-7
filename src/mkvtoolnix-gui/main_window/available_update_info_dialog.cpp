@@ -8,6 +8,8 @@
 #include "mkvtoolnix-gui/forms/available_update_info_dialog.h"
 #include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
 
+namespace mtx { namespace gui {
+
 AvailableUpdateInfoDialog::AvailableUpdateInfoDialog(QWidget *parent)
   : QDialog{parent}
   , ui{new Ui::AvailableUpdateInfoDialog}
@@ -125,5 +127,7 @@ void
 AvailableUpdateInfoDialog::visitDownloadLocation() {
   QDesktopServices::openUrl(m_downloadURL);
 }
+
+}}
 
 #endif  // HAVE_CURL_EASY_H
