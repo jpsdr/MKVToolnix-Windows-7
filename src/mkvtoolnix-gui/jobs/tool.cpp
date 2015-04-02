@@ -8,7 +8,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/util.h"
-#include "mkvtoolnix-gui/watch_job_container_widget/watch_job_widget.h"
+#include "mkvtoolnix-gui/watch_jobs/tab.h"
 
 #include <QList>
 #include <QMessageBox>
@@ -128,7 +128,7 @@ Tool::resizeColumnsToContents()
 
 void
 Tool::addJob(JobPtr const &job) {
-  MainWindow::getWatchCurrentJobWidget()->connectToJob(*job);
+  MainWindow::getWatchCurrentJobTab()->connectToJob(*job);
 
   m_model->add(job);
   resizeColumnsToContents();

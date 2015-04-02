@@ -15,13 +15,21 @@ class MainWindow;
 }
 
 namespace mtx { namespace gui {
-namespace HeaderEditor { class Tool; }
-namespace Jobs         { class Tool; }
-namespace Merge        { class Tool; }
-}}
+namespace HeaderEditor {
+class Tool;
+}
+namespace Jobs {
+class Tool;
+}
+namespace Merge {
+class Tool;
+}
+namespace WatchJobs {
+class Tab;
+class Tool;
+}}}
+
 class StatusBarProgressWidget;
-class WatchJobContainerWidget;
-class WatchJobWidget;
 
 class MainWindow : public QMainWindow {
   Q_OBJECT;
@@ -33,7 +41,7 @@ protected:
   mtx::gui::Merge::Tool *m_toolMerge{};
   mtx::gui::Jobs::Tool *m_toolJobs{};
   mtx::gui::HeaderEditor::Tool *m_toolHeaderEditor{};
-  WatchJobContainerWidget *m_watchJobContainer{};
+  mtx::gui::WatchJobs::Tool *m_watchJobTool{};
 
 protected:                      // static
   static MainWindow *ms_mainWindow;
@@ -62,8 +70,8 @@ public:                         // static
   static mtx::gui::Merge::Tool *getMergeTool();
   static mtx::gui::HeaderEditor::Tool *getHeaderEditorTool();
   static mtx::gui::Jobs::Tool *getJobTool();
-  static WatchJobWidget *getWatchCurrentJobWidget();
-  static WatchJobContainerWidget *getWatchJobContainerWidget();
+  static mtx::gui::WatchJobs::Tab *getWatchCurrentJobTab();
+  static mtx::gui::WatchJobs::Tool *getWatchJobTool();
 #if defined(HAVE_CURL_EASY_H)
   static QString versionStringForSettings(version_number_t const &version);
 #endif  // HAVE_CURL_EASY_H

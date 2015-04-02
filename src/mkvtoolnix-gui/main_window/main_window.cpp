@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
-#include "mkvtoolnix-gui/watch_job_container_widget/watch_job_container_widget.h"
+#include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 #if defined(HAVE_CURL_EASY_H)
 # include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
@@ -102,7 +102,7 @@ MainWindow::setupToolSelector() {
   m_toolMerge         = new mtx::gui::Merge::Tool{ui->tool, ui->menuMerge};
   m_toolJobs          = new mtx::gui::Jobs::Tool{ui->tool};
   m_toolHeaderEditor  = new mtx::gui::HeaderEditor::Tool{ui->tool, ui->menuHeaderEditor};
-  m_watchJobContainer = new WatchJobContainerWidget{ui->tool};
+  m_watchJobTool      = new mtx::gui::WatchJobs::Tool{ui->tool};
 
   ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
   ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
@@ -111,7 +111,7 @@ MainWindow::setupToolSelector() {
   ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
   ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
   ui->tool->appendTab(m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
-  ui->tool->appendTab(m_watchJobContainer,          QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
+  ui->tool->appendTab(m_watchJobTool,               QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
 
   for (auto idx = 0, numTabs = ui->tool->count(); idx < numTabs; ++idx)
     ui->tool->setTabEnabled(idx, true);
@@ -168,14 +168,14 @@ MainWindow::getJobTool() {
   return get()->m_toolJobs;
 }
 
-WatchJobWidget *
-MainWindow::getWatchCurrentJobWidget() {
-  return getWatchJobContainerWidget()->currentJobWidget();
+mtx::gui::WatchJobs::Tab *
+MainWindow::getWatchCurrentJobTab() {
+  return getWatchJobTool()->currentJobTab();
 }
 
-WatchJobContainerWidget *
-MainWindow::getWatchJobContainerWidget() {
-  return get()->m_watchJobContainer;
+mtx::gui::WatchJobs::Tool *
+MainWindow::getWatchJobTool() {
+  return get()->m_watchJobTool;
 }
 
 void

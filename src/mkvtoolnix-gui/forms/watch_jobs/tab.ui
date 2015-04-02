@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>WatchJobWidget</class>
- <widget class="QWidget" name="WatchJobWidget">
+ <class>mtx::gui::WatchJobs::Tab</class>
+ <widget class="QWidget" name="mtx::gui::WatchJobs::Tab">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -264,7 +264,7 @@
   <connection>
    <sender>saveOutputButton</sender>
    <signal>clicked()</signal>
-   <receiver>WatchJobWidget</receiver>
+   <receiver>mtx::gui::WatchJobs::Tab</receiver>
    <slot>onSaveOutput()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -280,7 +280,7 @@
   <connection>
    <sender>abortButton</sender>
    <signal>clicked()</signal>
-   <receiver>WatchJobWidget</receiver>
+   <receiver>mtx::gui::WatchJobs::Tab</receiver>
    <slot>onAbort()</slot>
    <hints>
     <hint type="sourcelabel">
