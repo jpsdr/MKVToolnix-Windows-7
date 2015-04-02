@@ -1,25 +1,27 @@
 /**************************************************************************
-**
-** This file is adapted from fancytabwidget.h which is part of Qt Creator
-**
-** Copyright (c) 2011 Nokia Corporation and/or its subsidiary(-ies).
-**
-** Contact: Nokia Corporation (info@qt.nokia.com)
-**
-**
-** GNU General Public License Usage
-**
-** This file may be used under the terms of the GNU General Public
-** License version 2 as published by the Free Software Foundation and
-** appearing in the file COPYING included in the packaging of this file.
-** Please review the following information to ensure the GNU General
-** Public License version 2 requirements will be met:
-** http://www.gnu.org/licenses/old-licenses/gpl-2.0.html.
-**
-**************************************************************************/
+ **
+ ** This file is adapted from fancytabwidget.h which is part of Qt Creator
+ **
+ ** Copyright (c) 2011 Nokia Corporation and/or its subsidiary(-ies).
+ **
+ ** Contact: Nokia Corporation (info@qt.nokia.com)
+ **
+ **
+ ** GNU General Public License Usage
+ **
+ ** This file may be used under the terms of the GNU General Public
+ ** License version 2 as published by the Free Software Foundation and
+ ** appearing in the file COPYING included in the packaging of this file.
+ ** Please review the following information to ensure the GNU General
+ ** Public License version 2 requirements will be met:
+ ** http://www.gnu.org/licenses/old-licenses/gpl-2.0.html.
+ **
+ **************************************************************************/
 
 #ifndef MTX_MKVTOOLNIX_GUI_UTIL_FANCY_TAB_WIDGET_H
 #define MTX_MKVTOOLNIX_GUI_UTIL_FANCY_TAB_WIDGET_H
+
+#include "common/common_pch.h"
 
 #include <memory>
 
@@ -30,146 +32,132 @@
 #include <QtCore/QTimer>
 #include <QtCore/QPropertyAnimation>
 
-QT_BEGIN_NAMESPACE
 class QPainter;
 class QStackedLayout;
-// class QStatusBar;
-QT_END_NAMESPACE
 
-class FancyTab : public QObject
-{
-    Q_OBJECT
+class FancyTabBar;
 
-    Q_PROPERTY(float fader READ fader WRITE setFader)
-public:
-    FancyTab(QWidget *tabbar) : enabled(false), tabbar(tabbar), m_fader(0) {
-        animator.setPropertyName("fader");
-        animator.setTargetObject(this);
-    }
-    float fader() { return m_fader; }
-    void setFader(float value);
+class FancyTab : public QObject {
+  Q_OBJECT;
 
-    void fadeIn();
-    void fadeOut();
+  Q_PROPERTY(float fader READ fader WRITE setFader)
 
-    QIcon icon;
-    QString text;
-    QString toolTip;
-    bool enabled;
+  friend class FancyTabBar;
 
 private:
-    QPropertyAnimation animator;
-    QWidget *tabbar;
-    float m_fader;
-};
+  QPropertyAnimation m_animator;
+  QWidget *m_tabbar{};
+  float m_fader{};
 
-class FancyTabBar : public QWidget
-{
-    Q_OBJECT
+  QIcon m_icon;
+  QString m_text;
+  QString m_toolTip;
+  bool m_enabled{};
 
 public:
-    FancyTabBar(QWidget *parent = 0);
-    ~FancyTabBar();
+  FancyTab(QWidget *tabbar);
 
-    bool event(QEvent *event);
+  float fader();
+  void setFader(float value);
 
-    void paintEvent(QPaintEvent *event);
-    void paintTab(QPainter *painter, int tabIndex) const;
-    void mousePressEvent(QMouseEvent *);
-    void mouseMoveEvent(QMouseEvent *);
-    void enterEvent(QEvent *);
-    void leaveEvent(QEvent *);
-    bool validIndex(int index) const { return index >= 0 && index < m_tabs.count(); }
+  void fadeIn();
+  void fadeOut();
+};
 
-    QSize sizeHint() const;
-    QSize minimumSizeHint() const;
-
-    void setTabEnabled(int index, bool enable);
-    bool isTabEnabled(int index) const;
-
-    void insertTab(int index, const QIcon &icon, const QString &label) {
-        FancyTab *tab = new FancyTab(this);
-        tab->icon = icon;
-        tab->text = label;
-        m_tabs.insert(index, tab);
-    }
-    void setEnabled(int index, bool enabled);
-    void removeTab(int index) {
-        FancyTab *tab = m_tabs.takeAt(index);
-        delete tab;
-    }
-    void setCurrentIndex(int index);
-    int currentIndex() const { return m_currentIndex; }
-
-    void setTabToolTip(int index, QString toolTip) { m_tabs[index]->toolTip = toolTip; }
-    QString tabToolTip(int index) const { return m_tabs.at(index)->toolTip; }
-
-    QIcon tabIcon(int index) const { return m_tabs.at(index)->icon; }
-    QString tabText(int index) const { return m_tabs.at(index)->text; }
-    int count() const {return m_tabs.count(); }
-    QRect tabRect(int index) const;
-
-signals:
-    void currentChanged(int);
-
-public slots:
-    void emitCurrentIndex();
+class FancyTabBar : public QWidget {
+  Q_OBJECT;
 
 private:
-    static const int m_rounding;
-    static const int m_textPadding;
-    QRect m_hoverRect;
-    int m_hoverIndex;
-    int m_currentIndex;
-    QList<FancyTab*> m_tabs;
-    QTimer m_triggerTimer;
-    QSize tabSizeHint(bool minimum = false) const;
-    std::unique_ptr<QStyle> m_style;
-
-};
-
-class FancyTabWidget : public QWidget
-{
-    Q_OBJECT
+  static int const m_rounding;
+  static int const m_textPadding;
+  QRect m_hoverRect;
+  int m_hoverIndex{-1};
+  int m_currentIndex{-1};
+  QList<FancyTab*> m_tabs;
+  QTimer m_triggerTimer;
+  std::unique_ptr<QStyle> m_style;
 
 public:
-    FancyTabWidget(QWidget *parent = 0);
+  FancyTabBar(QWidget *parent = nullptr);
+  ~FancyTabBar();
 
-    void insertTab(int index, QWidget *tab, const QIcon &icon, const QString &label);
-    void appendTab(QWidget *tab, const QIcon &icon, const QString &label);
-    void removeTab(int index);
-    int count() const;
-    QWidget *widget(int index) const;
-    void setBackgroundBrush(const QBrush &brush);
-    void addCornerWidget(QWidget *widget);
-    void insertCornerWidget(int pos, QWidget *widget);
-    int cornerWidgetCount() const;
-    void setTabToolTip(int index, const QString &toolTip);
+  bool event(QEvent *event);
 
-    void paintEvent(QPaintEvent *event);
+  void paintEvent(QPaintEvent *event);
+  void paintTab(QPainter *painter, int tabIndex) const;
+  void mousePressEvent(QMouseEvent *);
+  void mouseMoveEvent(QMouseEvent *);
+  void enterEvent(QEvent *);
+  void leaveEvent(QEvent *);
+  bool validIndex(int index) const;
 
-    int currentIndex() const;
-    // QStatusBar *statusBar() const;
+  QSize sizeHint() const;
+  QSize minimumSizeHint() const;
 
-    void setTabEnabled(int index, bool enable);
-    bool isTabEnabled(int index) const;
+  void setTabEnabled(int index, bool enable);
+  bool isTabEnabled(int index) const;
+
+  void insertTab(int index, QIcon const &icon, QString const &label);
+  void removeTab(int index);
+  void setCurrentIndex(int index);
+  int currentIndex() const;
+
+  void setTabToolTip(int index, QString toolTip);
+  QString tabToolTip(int index) const;
+  QIcon tabIcon(int index) const;
+  QString tabText(int index) const;
+  int count() const;
+  QRect tabRect(int index) const;
 
 signals:
-    void currentAboutToShow(int index);
-    void currentChanged(int index);
+  void currentChanged(int);
 
 public slots:
-    void setCurrentIndex(int index);
+  void emitCurrentIndex();
+
+private:
+  QSize tabSizeHint(bool minimum = false) const;
+};
+
+class FancyTabWidget : public QWidget {
+  Q_OBJECT;
+
+private:
+  FancyTabBar *m_tabBar{};
+  QWidget *m_cornerWidgetContainer{};
+  QStackedLayout *m_modesStack{};
+  QWidget *m_selectionWidget{};
+
+public:
+  FancyTabWidget(QWidget *parent = nullptr);
+
+  void insertTab(int index, QWidget *tab, QIcon const &icon, QString const &label);
+  void appendTab(QWidget *tab, QIcon const &icon, QString const &label);
+  void removeTab(int index);
+  int count() const;
+  QWidget *widget(int index) const;
+  void setBackgroundBrush(QBrush const &brush);
+  void addCornerWidget(QWidget *widget);
+  void insertCornerWidget(int pos, QWidget *widget);
+  int cornerWidgetCount() const;
+  void setTabToolTip(int index, QString const &toolTip);
+
+  void paintEvent(QPaintEvent *event);
+
+  int currentIndex() const;
+
+  void setTabEnabled(int index, bool enable);
+  bool isTabEnabled(int index) const;
+
+signals:
+  void currentAboutToShow(int index);
+  void currentChanged(int index);
+
+public slots:
+  void setCurrentIndex(int index);
 
 private slots:
-    void showWidget(int index);
-
-private:
-    FancyTabBar *m_tabBar;
-    QWidget *m_cornerWidgetContainer;
-    QStackedLayout *m_modesStack;
-    QWidget *m_selectionWidget;
-    // QStatusBar *m_statusBar;
+  void showWidget(int index);
 };
 
 #endif // MTX_MKVTOOLNIX_GUI_UTIL_FANCY_TAB_WIDGET_H
