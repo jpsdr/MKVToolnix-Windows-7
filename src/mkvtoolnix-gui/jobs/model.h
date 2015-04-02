@@ -1,9 +1,9 @@
-#ifndef MTX_MKVTOOLNIX_GUI_JOB_MODEL_H
-#define MTX_MKVTOOLNIX_GUI_JOB_MODEL_H
+#ifndef MTX_MKVTOOLNIX_GUI_JOBS_JOB_MODEL_H
+#define MTX_MKVTOOLNIX_GUI_JOBS_JOB_MODEL_H
 
 #include "common/common_pch.h"
 
-#include "mkvtoolnix-gui/job_widget/job.h"
+#include "mkvtoolnix-gui/jobs/job.h"
 
 #include <QStandardItemModel>
 #include <QList>
@@ -12,7 +12,9 @@
 
 class QAbstractItemView;
 
-class JobModel: public QStandardItemModel {
+namespace mtx { namespace gui { namespace Jobs {
+
+class Model: public QStandardItemModel {
   Q_OBJECT;
 protected:
   QHash<uint64_t, JobPtr> m_jobsById;
@@ -34,8 +36,8 @@ public:
   static int const RowNotFound        = -1;
 
 public:
-  JobModel(QObject *parent);
-  virtual ~JobModel();
+  Model(QObject *parent);
+  virtual ~Model();
 
   QList<Job *> selectedJobs(QAbstractItemView *view) const;
   uint64_t idFromRow(int row) const;
@@ -70,4 +72,6 @@ protected:
   void updateProgress();
 };
 
-#endif  // MTX_MKVTOOLNIX_GUI_JOB_MODEL_H
+}}}
+
+#endif  // MTX_MKVTOOLNIX_GUI_JOBS_JOB_MODEL_H

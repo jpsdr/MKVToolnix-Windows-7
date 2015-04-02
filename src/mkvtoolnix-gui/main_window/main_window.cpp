@@ -5,7 +5,7 @@
 #include "common/version.h"
 #include "mkvtoolnix-gui/forms/main_window.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
-#include "mkvtoolnix-gui/job_widget/job_widget.h"
+#include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 #include "mkvtoolnix-gui/merge/tool.h"
@@ -100,7 +100,7 @@ MainWindow::setupToolSelector() {
   // ui->tool->setIconSize(QSize{48, 48});
 
   m_toolMerge         = new mtx::gui::Merge::Tool{ui->tool, ui->menuMerge};
-  m_toolJobs          = new JobWidget{ui->tool};
+  m_toolJobs          = new mtx::gui::Jobs::Tool{ui->tool};
   m_toolHeaderEditor  = new mtx::gui::HeaderEditor::Tool{ui->tool, ui->menuHeaderEditor};
   m_watchJobContainer = new WatchJobContainerWidget{ui->tool};
 
@@ -163,8 +163,8 @@ MainWindow::getHeaderEditorTool() {
   return get()->m_toolHeaderEditor;
 }
 
-JobWidget *
-MainWindow::getJobWidget() {
+mtx::gui::Jobs::Tool *
+MainWindow::getJobTool() {
   return get()->m_toolJobs;
 }
 
@@ -193,9 +193,9 @@ void
 MainWindow::closeEvent(QCloseEvent *event) {
   QSettings reg;
 
-  auto jobWidget = getJobWidget();
-  if (jobWidget)
-    jobWidget->getModel()->saveJobs(reg);
+  auto jobTool = getJobTool();
+  if (jobTool)
+    jobTool->getModel()->saveJobs(reg);
 
   event->accept();
 }

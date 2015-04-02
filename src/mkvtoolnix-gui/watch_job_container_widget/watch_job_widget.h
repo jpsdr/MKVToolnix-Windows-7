@@ -5,7 +5,7 @@
 
 #include <QWidget>
 
-#include "mkvtoolnix-gui/job_widget/job.h"
+#include "mkvtoolnix-gui/jobs/job.h"
 
 namespace Ui {
 class WatchJobWidget;
@@ -22,13 +22,13 @@ public:
   explicit WatchJobWidget(QWidget *parent = nullptr);
   ~WatchJobWidget();
 
-  virtual void connectToJob(Job const &job);
-  virtual void setInitialDisplay(Job const &job);
+  virtual void connectToJob(mtx::gui::Jobs::Job const &job);
+  virtual void setInitialDisplay(mtx::gui::Jobs::Job const &job);
 
 public slots:
-  void onStatusChanged(uint64_t id, Job::Status status);
+  void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status status);
   void onProgressChanged(uint64_t id, unsigned int progress);
-  void onLineRead(QString const &line, Job::LineType type);
+  void onLineRead(QString const &line, mtx::gui::Jobs::Job::LineType type);
 
 protected:
 };

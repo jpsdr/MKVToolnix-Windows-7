@@ -1,8 +1,8 @@
 #include "common/common_pch.h"
 
 #include "common/qt.h"
-#include "mkvtoolnix-gui/job_widget/job_widget.h"
-#include "mkvtoolnix-gui/job_widget/mux_job.h"
+#include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/tool.h"
@@ -237,7 +237,7 @@ Tool::addToJobQueue(bool startNow) {
     return;
 
   auto newConfig     = std::make_shared<MuxConfig>(m_config);
-  auto job           = std::make_shared<MuxJob>(startNow ? Job::PendingAuto : Job::PendingManual, newConfig);
+  auto job           = std::make_shared<mtx::gui::Jobs::MuxJob>(startNow ? mtx::gui::Jobs::Job::PendingAuto : mtx::gui::Jobs::Job::PendingManual, newConfig);
   job->m_dateAdded   = QDateTime::currentDateTime();
   job->m_description = job->displayableDescription();
 
@@ -254,7 +254,7 @@ Tool::addToJobQueue(bool startNow) {
     job->m_description = newDescription;
   }
 
-  MainWindow::getJobWidget()->addJob(std::static_pointer_cast<Job>(job));
+  MainWindow::getJobTool()->addJob(std::static_pointer_cast<mtx::gui::Jobs::Job>(job));
 }
 
 void

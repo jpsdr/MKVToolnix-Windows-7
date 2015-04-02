@@ -15,14 +15,10 @@ class MainWindow;
 }
 
 namespace mtx { namespace gui {
-namespace HeaderEditor {
-class Tool;
-}
-namespace Merge {
-class Tool;
-}
+namespace HeaderEditor { class Tool; }
+namespace Jobs         { class Tool; }
+namespace Merge        { class Tool; }
 }}
-class JobWidget;
 class StatusBarProgressWidget;
 class WatchJobContainerWidget;
 class WatchJobWidget;
@@ -35,7 +31,7 @@ protected:
   std::unique_ptr<Ui::MainWindow> ui;
   StatusBarProgressWidget *m_statusBarProgress{};
   mtx::gui::Merge::Tool *m_toolMerge{};
-  JobWidget *m_toolJobs{};
+  mtx::gui::Jobs::Tool *m_toolJobs{};
   mtx::gui::HeaderEditor::Tool *m_toolHeaderEditor{};
   WatchJobContainerWidget *m_watchJobContainer{};
 
@@ -65,7 +61,7 @@ public:                         // static
   static MainWindow *get();
   static mtx::gui::Merge::Tool *getMergeTool();
   static mtx::gui::HeaderEditor::Tool *getHeaderEditorTool();
-  static JobWidget *getJobWidget();
+  static mtx::gui::Jobs::Tool *getJobTool();
   static WatchJobWidget *getWatchCurrentJobWidget();
   static WatchJobContainerWidget *getWatchJobContainerWidget();
 #if defined(HAVE_CURL_EASY_H)

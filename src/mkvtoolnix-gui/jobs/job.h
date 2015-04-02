@@ -1,5 +1,5 @@
-#ifndef MTX_MKVTOOLNIX_GUI_JOB_H
-#define MTX_MKVTOOLNIX_GUI_JOB_H
+#ifndef MTX_MKVTOOLNIX_GUI_JOBS_JOB_H
+#define MTX_MKVTOOLNIX_GUI_JOBS_JOB_H
 
 #include "common/common_pch.h"
 
@@ -10,6 +10,9 @@
 #include <QStringList>
 
 class QSettings;
+
+namespace mtx { namespace gui { namespace Jobs {
+
 class Job;
 using JobPtr = std::shared_ptr<Job>;
 
@@ -72,7 +75,7 @@ protected:
 public slots:
   void setStatus(Job::Status status);
   void setProgress(unsigned int progress);
-  void addLineToInternalLogs(QString const &line, LineType type);
+  void addLineToInternalLogs(QString const &line, Job::LineType type);
 
 signals:
   void statusChanged(uint64_t id, Job::Status status);
@@ -85,4 +88,6 @@ public:                         // static
   static JobPtr loadJob(QSettings &settings);
 };
 
-#endif  // MTX_MKVTOOLNIX_GUI_JOB_H
+}}}
+
+#endif  // MTX_MKVTOOLNIX_GUI_JOBS_JOB_H

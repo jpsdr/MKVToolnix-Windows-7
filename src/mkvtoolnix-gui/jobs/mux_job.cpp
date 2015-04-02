@@ -6,10 +6,12 @@
 #include <QTemporaryFile>
 
 #include "common/qt.h"
-#include "mkvtoolnix-gui/job_widget/mux_job.h"
+#include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
+
+namespace mtx { namespace gui { namespace Jobs {
 
 MuxJob::MuxJob(Status status,
                mtx::gui::Merge::MuxConfigPtr const &config)
@@ -168,3 +170,5 @@ MuxJob::loadMuxJob(QSettings &settings) {
 
   return JobPtr{ job };
 }
+
+}}}

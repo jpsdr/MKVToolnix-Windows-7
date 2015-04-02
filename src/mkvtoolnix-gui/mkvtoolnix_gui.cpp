@@ -8,7 +8,7 @@
 # include "common/version.h"
 #endif  // HAVE_CURL_EASY_H
 #include "mkvtoolnix-gui/app.h"
-#include "mkvtoolnix-gui/job_widget/job.h"
+#include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/mkvtoolnix_gui.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/preview_warning_dialog.h"
@@ -16,8 +16,8 @@
 
 static void
 registerMetaTypes() {
-  qRegisterMetaType<Job::LineType>("Job::LineType");
-  qRegisterMetaType<Job::Status>("Job::Status");
+  qRegisterMetaType<mtx::gui::Jobs::Job::LineType>("Job::LineType");
+  qRegisterMetaType<mtx::gui::Jobs::Job::Status>("Job::Status");
   qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
 #if defined(HAVE_CURL_EASY_H)
   qRegisterMetaType<mtx_release_version_t>("mtx_release_version_t");

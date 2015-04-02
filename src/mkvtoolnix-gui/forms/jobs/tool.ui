@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>JobWidget</class>
- <widget class="QWidget" name="JobWidget">
+ <class>mtx::gui::Jobs::Tool</class>
+ <widget class="QWidget" name="mtx::gui::Jobs::Tool">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>JobWidget</string>
+   <string>mtx::gui::Jobs::Tool</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -64,7 +64,7 @@
   <connection>
    <sender>jobs</sender>
    <signal>customContextMenuRequested(QPoint)</signal>
-   <receiver>JobWidget</receiver>
+   <receiver>mtx::gui::Jobs::Tool</receiver>
    <slot>onContextMenu(QPoint)</slot>
    <hints>
     <hint type="sourcelabel">

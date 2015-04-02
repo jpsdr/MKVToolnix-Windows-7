@@ -1,10 +1,10 @@
 #include "common/common_pch.h"
 
 #include "common/qt.h"
-#include "mkvtoolnix-gui/forms/job_widget.h"
+#include "mkvtoolnix-gui/forms/jobs/tool.h"
 #include "mkvtoolnix-gui/forms/main_window.h"
-#include "mkvtoolnix-gui/job_widget/job_widget.h"
-#include "mkvtoolnix-gui/job_widget/mux_job.h"
+#include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -14,10 +14,12 @@
 #include <QMessageBox>
 #include <QString>
 
-JobWidget::JobWidget(QWidget *parent)
+namespace mtx { namespace gui { namespace Jobs {
+
+Tool::Tool(QWidget *parent)
   : ToolBase{parent}
-  , ui{new Ui::JobWidget}
-  , m_model{new JobModel{this}}
+  , ui{new Ui::Tool}
+  , m_model{new Model{this}}
   , m_startAction{new QAction{this}}
   , m_removeAction{new QAction{this}}
   , m_removeDoneAction{new QAction{this}}
@@ -34,17 +36,17 @@ JobWidget::JobWidget(QWidget *parent)
   m_model->start();
 }
 
-JobWidget::~JobWidget() {
+Tool::~Tool() {
 }
 
-JobModel *
-JobWidget::getModel()
+Model *
+Tool::getModel()
   const {
   return m_model;
 }
 
 void
-JobWidget::setupUiControls() {
+Tool::setupUiControls() {
   ui->jobs->setModel(m_model);
 
   connect(m_startAction,        SIGNAL(triggered()), this, SLOT(onStart()));
@@ -55,7 +57,7 @@ JobWidget::setupUiControls() {
 }
 
 void
-JobWidget::onContextMenu(QPoint pos) {
+Tool::onContextMenu(QPoint pos) {
   bool hasJobs      = m_model->hasJobs();
   bool hasSelection = !m_model->selectedJobs(ui->jobs).isEmpty();
 
@@ -79,7 +81,7 @@ JobWidget::onContextMenu(QPoint pos) {
 }
 
 void
-JobWidget::onStart() {
+Tool::onStart() {
   auto jobs = m_model->selectedJobs(ui->jobs);
   for (auto const &job : jobs)
     job->setPendingAuto();
@@ -88,7 +90,7 @@ JobWidget::onStart() {
 }
 
 void
-JobWidget::onRemove() {
+Tool::onRemove() {
   auto idsToRemove  = QMap<uint64_t, bool>{};
   auto selectedJobs = m_model->selectedJobs(ui->jobs);
 
@@ -99,7 +101,7 @@ JobWidget::onRemove() {
 }
 
 void
-JobWidget::onRemoveDone() {
+Tool::onRemoveDone() {
   m_model->removeJobsIf([this](Job const &job) {
       return (Job::DoneOk       == job.m_status)
           || (Job::DoneWarnings == job.m_status)
@@ -109,23 +111,23 @@ JobWidget::onRemoveDone() {
 }
 
 void
-JobWidget::onRemoveDoneOk() {
+Tool::onRemoveDoneOk() {
   m_model->removeJobsIf([this](Job const &job) { return Job::DoneOk == job.m_status; });
 }
 
 void
-JobWidget::onRemoveAll() {
+Tool::onRemoveAll() {
   m_model->removeJobsIf([this](Job const &) { return true; });
 }
 
 void
-JobWidget::resizeColumnsToContents()
+Tool::resizeColumnsToContents()
   const {
   Util::resizeViewColumnsToContents(ui->jobs);
 }
 
 void
-JobWidget::addJob(JobPtr const &job) {
+Tool::addJob(JobPtr const &job) {
   MainWindow::getWatchCurrentJobWidget()->connectToJob(*job);
 
   m_model->add(job);
@@ -133,7 +135,7 @@ JobWidget::addJob(JobPtr const &job) {
 }
 
 void
-JobWidget::retranslateUi() {
+Tool::retranslateUi() {
   m_startAction->setText(QY("&Start selected jobs automatically"));
   m_removeAction->setText(QY("&Remove selected jobs"));
   m_removeDoneAction->setText(QY("Remove &completed jobs"));
@@ -142,7 +144,9 @@ JobWidget::retranslateUi() {
 }
 
 void
-JobWidget::toolShown() {
+Tool::toolShown() {
   auto win = MainWindow::get();
   win->showTheseMenusOnly({ win->getUi()->menuMerge });
 }
+
+}}}

@@ -5,11 +5,13 @@
 #include <QSettings>
 
 #include "common/qt.h"
-#include "mkvtoolnix-gui/job_widget/job_model.h"
-#include "mkvtoolnix-gui/job_widget/mux_job.h"
+#include "mkvtoolnix-gui/jobs/model.h"
+#include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/util/util.h"
 
-JobModel::JobModel(QObject *parent)
+namespace mtx { namespace gui { namespace Jobs {
+
+Model::Model(QObject *parent)
   : QStandardItemModel{parent}
   , m_mutex{QMutex::Recursive}
   , m_started{}
@@ -26,11 +28,11 @@ JobModel::JobModel(QObject *parent)
   horizontalHeaderItem(DateFinishedColumn)->setTextAlignment(Qt::AlignRight);
 }
 
-JobModel::~JobModel() {
+Model::~Model() {
 }
 
 QList<Job *>
-JobModel::selectedJobs(QAbstractItemView *view)
+Model::selectedJobs(QAbstractItemView *view)
   const {
   QList<Job *> jobs;
   Util::withSelectedIndexes(view, [&](QModelIndex const &idx) {
@@ -41,13 +43,13 @@ JobModel::selectedJobs(QAbstractItemView *view)
 }
 
 uint64_t
-JobModel::idFromRow(int row)
+Model::idFromRow(int row)
   const {
   return item(row)->data(Util::JobIdRole).value<uint64_t>();
 }
 
 int
-JobModel::rowFromId(uint64_t id)
+Model::rowFromId(uint64_t id)
   const {
   for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
     if (idFromRow(row) == id)
@@ -56,20 +58,20 @@ JobModel::rowFromId(uint64_t id)
 }
 
 Job *
-JobModel::fromId(uint64_t id)
+Model::fromId(uint64_t id)
   const {
   return m_jobsById.contains(id) ? m_jobsById[id].get() : nullptr;
 }
 
 
 bool
-JobModel::hasJobs()
+Model::hasJobs()
   const {
   return !!rowCount();
 }
 
 QList<QStandardItem *>
-JobModel::createRow(Job const &job)
+Model::createRow(Job const &job)
   const {
   auto items    = QList<QStandardItem *>{};
   auto progress = to_qs(boost::format("%1%%%") % job.m_progress);
@@ -88,7 +90,7 @@ JobModel::createRow(Job const &job)
 }
 
 void
-JobModel::removeJobsIf(std::function<bool(Job const &)> predicate) {
+Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
   QMutexLocker locked{&m_mutex};
 
   auto toBeRemoved = QHash<Job const *, bool>{};
@@ -111,7 +113,7 @@ JobModel::removeJobsIf(std::function<bool(Job const &)> predicate) {
 }
 
 void
-JobModel::add(JobPtr const &job) {
+Model::add(JobPtr const &job) {
   QMutexLocker locked{&m_mutex};
 
   m_jobsById[job->m_id] = job;
@@ -130,8 +132,8 @@ JobModel::add(JobPtr const &job) {
 }
 
 void
-JobModel::onStatusChanged(uint64_t id,
-                          Job::Status status) {
+Model::onStatusChanged(uint64_t id,
+                       Job::Status status) {
   QMutexLocker locked{&m_mutex};
 
   auto row = rowFromId(id);
@@ -159,8 +161,8 @@ JobModel::onStatusChanged(uint64_t id,
 }
 
 void
-JobModel::onProgressChanged(uint64_t id,
-                            unsigned int progress) {
+Model::onProgressChanged(uint64_t id,
+                         unsigned int progress) {
   QMutexLocker locked{&m_mutex};
 
   auto row = rowFromId(id);
@@ -171,7 +173,7 @@ JobModel::onProgressChanged(uint64_t id,
 }
 
 void
-JobModel::startNextAutoJob() {
+Model::startNextAutoJob() {
   if (m_dontStartJobsNow)
     return;
 
@@ -201,18 +203,18 @@ JobModel::startNextAutoJob() {
 }
 
 void
-JobModel::start() {
+Model::start() {
   m_started = true;
   startNextAutoJob();
 }
 
 void
-JobModel::stop() {
+Model::stop() {
   m_started = false;
 }
 
 void
-JobModel::updateProgress() {
+Model::updateProgress() {
   QMutexLocker locked{&m_mutex};
 
   if (!m_toBeProcessed.count()) {
@@ -239,7 +241,7 @@ JobModel::updateProgress() {
 }
 
 void
-JobModel::saveJobs(QSettings &settings)
+Model::saveJobs(QSettings &settings)
   const {
   settings.beginGroup("jobQueue");
   settings.setValue("numberOfJobs", rowCount());
@@ -254,7 +256,7 @@ JobModel::saveJobs(QSettings &settings)
 }
 
 void
-JobModel::loadJobs(QSettings &settings) {
+Model::loadJobs(QSettings &settings) {
   QMutexLocker locked{&m_mutex};
 
   m_dontStartJobsNow = true;
@@ -278,14 +280,16 @@ JobModel::loadJobs(QSettings &settings) {
 }
 
 Qt::DropActions
-JobModel::supportedDropActions()
+Model::supportedDropActions()
   const {
   return Qt::MoveAction;
 }
 
 Qt::ItemFlags
-JobModel::flags(QModelIndex const &index)
+Model::flags(QModelIndex const &index)
   const {
   auto defaultFlags = QStandardItemModel::flags(index) & ~Qt::ItemIsDropEnabled;
   return index.isValid() ? defaultFlags | Qt::ItemIsDragEnabled : defaultFlags | Qt::ItemIsDropEnabled;
 }
+
+}}}

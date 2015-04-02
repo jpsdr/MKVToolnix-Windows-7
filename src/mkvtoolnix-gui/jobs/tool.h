@@ -6,30 +6,32 @@
 #include <QList>
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
-#include "mkvtoolnix-gui/job_widget/job_model.h"
+#include "mkvtoolnix-gui/jobs/model.h"
 
 class QAction;
 
+namespace mtx { namespace gui { namespace Jobs {
+
 namespace Ui {
-class JobWidget;
+class Tool;
 }
 
-class JobWidget : public ToolBase {
+class Tool : public ToolBase {
   Q_OBJECT;
 
 protected:
   // UI stuff:
-  std::unique_ptr<Ui::JobWidget> ui;
+  std::unique_ptr<Ui::Tool> ui;
 
-  JobModel *m_model;
+  Model *m_model;
 
   QAction *m_startAction, *m_removeAction, *m_removeDoneAction, *m_removeDoneOkAction, *m_removeAllAction;
 
 public:
-  explicit JobWidget(QWidget *parent = nullptr);
-  ~JobWidget();
+  explicit Tool(QWidget *parent = nullptr);
+  ~Tool();
 
-  JobModel *getModel() const;
+  Model *getModel() const;
   void addJob(JobPtr const &job);
 
   virtual void retranslateUi() override;
@@ -50,5 +52,7 @@ public slots:
 protected:
   void setupUiControls();
 };
+
+}}}
 
 #endif // MTX_MKVTOOLNIX_GUI_JOBS_JOB_WIDGET_H

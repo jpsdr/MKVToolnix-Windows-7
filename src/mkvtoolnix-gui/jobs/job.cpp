@@ -3,8 +3,10 @@
 #include <QSettings>
 
 #include "common/qt.h"
-#include "mkvtoolnix-gui/job_widget/job.h"
-#include "mkvtoolnix-gui/job_widget/mux_job.h"
+#include "mkvtoolnix-gui/jobs/job.h"
+#include "mkvtoolnix-gui/jobs/mux_job.h"
+
+namespace mtx { namespace gui { namespace Jobs {
 
 uint64_t Job::ms_next_id = 0;
 
@@ -141,3 +143,5 @@ Job::loadJob(QSettings &settings) {
 
   return JobPtr{};
 }
+
+}}}

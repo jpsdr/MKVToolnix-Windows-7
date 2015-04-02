@@ -6,16 +6,20 @@
 #include <QByteArray>
 #include <QProcess>
 
-#include "mkvtoolnix-gui/job_widget/job.h"
+#include "mkvtoolnix-gui/jobs/job.h"
 
 class QTemporaryFile;
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx { namespace gui {
+
+namespace Merge {
 
 class MuxConfig;
 using MuxConfigPtr = std::shared_ptr<MuxConfig>;
 
-}}}
+}
+
+namespace Jobs {
 
 class MuxJob: public Job {
   Q_OBJECT;
@@ -53,5 +57,7 @@ signals:
 public:
   static JobPtr loadMuxJob(QSettings &settings);
 };
+
+}}}
 
 #endif // MTX_MKVTOOLNIX_GUI_MUX_JOB_H
