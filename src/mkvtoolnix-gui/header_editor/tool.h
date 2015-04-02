@@ -1,5 +1,5 @@
-#ifndef MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_WIDGET_HEADER_EDITOR_CONTAINER_WIDGET_H
-#define MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_WIDGET_HEADER_EDITOR_CONTAINER_WIDGET_H
+#ifndef MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_TOOL_H
+#define MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_TOOL_H
 
 #include "common/common_pch.h"
 
@@ -10,20 +10,22 @@ class QDragEnterEvent;
 class QDropEvent;
 class QMenu;
 
+namespace mtx { namespace gui { namespace HeaderEditor {
+
 namespace Ui {
-class HeaderEditorContainerWidget;
+class Tool;
 }
 
-class HeaderEditorContainerWidget : public ToolBase {
+class Tool : public ToolBase {
   Q_OBJECT;
 
 protected:
   // UI stuff:
-  std::unique_ptr<Ui::HeaderEditorContainerWidget> ui;
+  std::unique_ptr<Ui::Tool> ui;
   QMenu *m_headerEditorMenu;
 public:
-  explicit HeaderEditorContainerWidget(QWidget *parent, QMenu *headerEditorMenu);
-  ~HeaderEditorContainerWidget();
+  explicit Tool(QWidget *parent, QMenu *headerEditorMenu);
+  ~Tool();
 
   virtual void retranslateUi() override;
 
@@ -44,4 +46,6 @@ protected:
   virtual void showHeaderEditorsWidget();
 };
 
-#endif // MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_WIDGET_HEADER_EDITOR_CONTAINER_WIDGET_H
+}}}
+
+#endif // MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_TOOL_H

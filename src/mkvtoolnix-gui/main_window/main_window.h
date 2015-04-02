@@ -14,7 +14,11 @@ namespace Ui {
 class MainWindow;
 }
 
-class HeaderEditorContainerWidget;
+namespace mtx { namespace gui {
+namespace HeaderEditor {
+class Tool;
+}
+}}
 class JobWidget;
 class MergeWidget;
 class StatusBarProgressWidget;
@@ -30,7 +34,7 @@ protected:
   StatusBarProgressWidget *m_statusBarProgress{};
   MergeWidget *m_toolMerge{};
   JobWidget *m_toolJobs{};
-  HeaderEditorContainerWidget *m_toolHeaderEditor{};
+  mtx::gui::HeaderEditor::Tool *m_toolHeaderEditor{};
   WatchJobContainerWidget *m_watchJobContainer{};
 
 protected:                      // static
@@ -58,6 +62,7 @@ public slots:
 public:                         // static
   static MainWindow *get();
   static MergeWidget *getMergeWidget();
+  static mtx::gui::HeaderEditor::Tool *getHeaderEditorTool();
   static JobWidget *getJobWidget();
   static WatchJobWidget *getWatchCurrentJobWidget();
   static WatchJobContainerWidget *getWatchJobContainerWidget();

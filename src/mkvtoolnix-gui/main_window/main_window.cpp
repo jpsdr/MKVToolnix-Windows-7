@@ -4,7 +4,7 @@
 #include "common/qt.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/forms/main_window.h"
-#include "mkvtoolnix-gui/header_editor_widget/header_editor_container_widget.h"
+#include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/job_widget/job_widget.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
@@ -101,7 +101,7 @@ MainWindow::setupToolSelector() {
 
   m_toolMerge         = new MergeWidget{ui->tool, ui->menuMerge};
   m_toolJobs          = new JobWidget{ui->tool};
-  m_toolHeaderEditor  = new HeaderEditorContainerWidget{ui->tool, ui->menuHeaderEditor};
+  m_toolHeaderEditor  = new mtx::gui::HeaderEditor::Tool{ui->tool, ui->menuHeaderEditor};
   m_watchJobContainer = new WatchJobContainerWidget{ui->tool};
 
   ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
@@ -156,6 +156,11 @@ MainWindow::get() {
 MergeWidget *
 MainWindow::getMergeWidget() {
   return get()->m_toolMerge;
+}
+
+mtx::gui::HeaderEditor::Tool *
+MainWindow::getHeaderEditorTool() {
+  return get()->m_toolHeaderEditor;
 }
 
 JobWidget *
