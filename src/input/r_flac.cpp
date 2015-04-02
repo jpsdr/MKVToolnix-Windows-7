@@ -49,7 +49,7 @@ flac_reader_c::probe_file(mm_io_c *io,
 flac_reader_c::flac_reader_c(const track_info_c &ti,
                              const mm_io_cptr &in)
   : generic_reader_c{ti, in}
-  , decoder_c{}
+  , decoder_c()                 // Don't use initializer-list syntax due to a bug in gcc < 4.8
 {
 }
 
