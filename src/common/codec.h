@@ -145,6 +145,7 @@ public:
     , dts_hd_master_audio
     , dts_hd_high_resolution
     , dts_express
+    , dts_es
   };
 
 private:

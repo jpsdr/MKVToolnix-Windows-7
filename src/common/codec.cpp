@@ -75,6 +75,7 @@ codec_c::initialize() {
   ms_specialization_descriptions.emplace(specialization_e::dts_hd_master_audio,    "DTS-HD Master Audio");
   ms_specialization_descriptions.emplace(specialization_e::dts_hd_high_resolution, "DTS-HD High Resolution");
   ms_specialization_descriptions.emplace(specialization_e::dts_express,            "DTS Express");
+  ms_specialization_descriptions.emplace(specialization_e::dts_es,                 "DTS-ES");
 }
 
 codec_c const

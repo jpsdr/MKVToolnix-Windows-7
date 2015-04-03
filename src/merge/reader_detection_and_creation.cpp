@@ -1,7 +1,7 @@
 /** \brief output handling
 
-   mkvmerge -- utility for splicing together matroska files
-   from component media subtypes
+   mkvmerge -- utility for splicing together Matroska files
+   from component media sub-types
 
    Distributed under the GPL v2
    see the file COPYING for details
@@ -194,10 +194,10 @@ get_file_type_internal(filelist_t &file) {
 
   if (FILE_TYPE_IS_UNKNOWN != type)
     ;                           // intentional fall-through
-  // File types that are misdetected sometimes and that aren't supported
+  // File types that are mis-detected sometimes and that aren't supported
   else if (dv_reader_c::probe_file(io, size))
     type = FILE_TYPE_DV;
-  // File types that are misdetected sometimes
+  // File types that are mis-detected sometimes
   else if (dts_reader_c::probe_file(io, size, true))
     type = FILE_TYPE_DTS;
   else if (mpeg_ts_reader_c::probe_file(io, size))
@@ -278,8 +278,8 @@ get_file_type(filelist_t &file) {
 
    For each file the appropriate file reader class is instantiated.
    The newly created class must read all track information in its
-   contrsuctor and throw an exception in case of an error. Otherwise
-   it is assumed that the file can be hanlded.
+   constructor and throw an exception in case of an error. Otherwise
+   it is assumed that the file can be handled.
 */
 void
 create_readers() {

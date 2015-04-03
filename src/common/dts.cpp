@@ -296,6 +296,7 @@ header_t::print()
     auto type_str = dts_type_e::master_audio    == dts_type ? "master audio"
                   : dts_type_e::high_resolution == dts_type ? "high resolution"
                   : dts_type_e::express         == dts_type ? "express"
+                  : dts_type_e::es              == dts_type ? "extended surround"
                   :                                           "unknown";
 
     mxinfo(boost::format("Extension substream    : %1%, size %2%\n\n") % type_str % exss_part_size);
@@ -360,6 +361,7 @@ header_t::get_codec_specialization()
   return dts_type_e::master_audio    == dts_type ? codec_c::specialization_e::dts_hd_master_audio
        : dts_type_e::high_resolution == dts_type ? codec_c::specialization_e::dts_hd_high_resolution
        : dts_type_e::express         == dts_type ? codec_c::specialization_e::dts_express
+       : dts_type_e::es              == dts_type ? codec_c::specialization_e::dts_es
        :                                           codec_c::specialization_e::none;
 }
 
@@ -502,6 +504,9 @@ header_t::decode_core_header(unsigned char const *buf,
 
     if (static_cast<sync_word_e>(get_uint32_be(buf + exss_offset)) == sync_word_e::exss)
       return decode_exss_header(&buf[exss_offset], size - exss_offset);
+
+    if ((dts_type_e::normal == dts_type) && source_surround_in_es)
+      dts_type = dts_type_e::es;
 
     return true;
 
