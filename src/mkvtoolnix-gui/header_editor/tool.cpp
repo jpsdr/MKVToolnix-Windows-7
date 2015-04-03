@@ -19,6 +19,8 @@
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
+using namespace mtx::gui;
+
 Tool::Tool(QWidget *parent,
            QMenu *headerEditorMenu)
   : ToolBase{parent}
@@ -103,7 +105,7 @@ Tool::openFile(QString const &fileName) {
   // TODO: Tool::openFile
   MainWindow::get()->setStatusBarMessage(fileName);
 
-  auto &settings = mtx::gui::Util::Settings::get();
+  auto &settings = Util::Settings::get();
   settings.m_lastMatroskaFileDir = QFileInfo{fileName}.path();
   settings.save();
 
@@ -134,7 +136,7 @@ Tool::openFile(QString const &fileName) {
 
 void
 Tool::selectFileToOpen() {
-  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in header editor"), mtx::gui::Util::Settings::get().m_lastMatroskaFileDir.path(),
+  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in header editor"), Util::Settings::get().m_lastMatroskaFileDir.path(),
                                                 QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
   if (fileNames.isEmpty())
     return;

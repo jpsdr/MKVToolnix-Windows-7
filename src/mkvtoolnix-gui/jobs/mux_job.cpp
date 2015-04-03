@@ -13,8 +13,10 @@
 
 namespace mtx { namespace gui { namespace Jobs {
 
+using namespace mtx::gui;
+
 MuxJob::MuxJob(Status status,
-               mtx::gui::Merge::MuxConfigPtr const &config)
+               Merge::MuxConfigPtr const &config)
   : Job{status}
   , m_config{config}
   , m_aborted{}
@@ -39,12 +41,12 @@ MuxJob::abort() {
 void
 MuxJob::start() {
   m_aborted      = false;
-  m_settingsFile = mtx::gui::Util::OptionFile::createTemporary("MKVToolNix-GUI-MuxJob-XXXXXX", m_config->buildMkvmergeOptions());
+  m_settingsFile = Util::OptionFile::createTemporary("MKVToolNix-GUI-MuxJob-XXXXXX", m_config->buildMkvmergeOptions());
 
   setStatus(Job::Running);
   setProgress(0);
 
-  m_process.start(mtx::gui::Util::Settings::get().actualMkvmergeExe(), QStringList{} << "--gui-mode" << QString{"@%1"}.arg(m_settingsFile->fileName()), QIODevice::ReadOnly);
+  m_process.start(Util::Settings::get().actualMkvmergeExe(), QStringList{} << "--gui-mode" << QString{"@%1"}.arg(m_settingsFile->fileName()), QIODevice::ReadOnly);
 }
 
 void
@@ -158,7 +160,7 @@ MuxJob::saveJobInternal(QSettings &settings)
 
 JobPtr
 MuxJob::loadMuxJob(QSettings &settings) {
-  auto config = std::make_shared<mtx::gui::Merge::MuxConfig>();
+  auto config = std::make_shared<Merge::MuxConfig>();
 
   settings.beginGroup("muxConfig");
   config->load(settings);

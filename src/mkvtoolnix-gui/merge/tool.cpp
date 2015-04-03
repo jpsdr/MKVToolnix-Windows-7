@@ -23,6 +23,8 @@
 
 namespace mtx { namespace gui { namespace Merge {
 
+using namespace mtx::gui;
+
 Tool::Tool(QWidget *parent,
            QMenu *mergeMenu)
   : ToolBase{parent}
@@ -58,7 +60,7 @@ Tool::~Tool() {
 
 void
 Tool::onShowCommandLine() {
-  auto options = (QStringList{} << mtx::gui::Util::Settings::get().actualMkvmergeExe()) + m_config.buildMkvmergeOptions();
+  auto options = (QStringList{} << Util::Settings::get().actualMkvmergeExe()) + m_config.buildMkvmergeOptions();
   CommandLineDialog{this, options, QY("mkvmerge command line")}.exec();
 }
 
@@ -74,12 +76,12 @@ Tool::onSaveConfig() {
 
 void
 Tool::onSaveOptionFile() {
-  auto &settings = mtx::gui::Util::Settings::get();
+  auto &settings = Util::Settings::get();
   auto fileName  = QFileDialog::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
-  mtx::gui::Util::OptionFile::create(fileName, m_config.buildMkvmergeOptions());
+  Util::OptionFile::create(fileName, m_config.buildMkvmergeOptions());
   settings.m_lastConfigDir = QFileInfo{fileName}.path();
   settings.save();
 
@@ -88,7 +90,7 @@ Tool::onSaveOptionFile() {
 
 void
 Tool::onSaveConfigAs() {
-  auto &settings = mtx::gui::Util::Settings::get();
+  auto &settings = Util::Settings::get();
   auto fileName  = QFileDialog::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
@@ -102,7 +104,7 @@ Tool::onSaveConfigAs() {
 
 void
 Tool::onOpenConfig() {
-  auto &settings = mtx::gui::Util::Settings::get();
+  auto &settings = Util::Settings::get();
   auto fileName  = QFileDialog::getOpenFileName(this, QY("Open settings file"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
@@ -148,7 +150,7 @@ Tool::getOpenFileName(QString const &title,
     fullFilter += Q(";;");
   fullFilter += QY("All files") + Q(" (*)");
 
-  auto &settings = mtx::gui::Util::Settings::get();
+  auto &settings = Util::Settings::get();
   auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOpenDir.path() : QFileInfo{ lineEdit->text() }.path();
   auto fileName  = QFileDialog::getOpenFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
@@ -171,7 +173,7 @@ Tool::getSaveFileName(QString const &title,
     fullFilter += Q(";;");
   fullFilter += QY("All files") + Q(" (*)");
 
-  auto &settings = mtx::gui::Util::Settings::get();
+  auto &settings = Util::Settings::get();
   auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOutputDir.path() : QFileInfo{ lineEdit->text() }.path();
   auto fileName  = QFileDialog::getSaveFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
@@ -242,7 +244,7 @@ Tool::addToJobQueue(bool startNow) {
     return;
 
   auto newConfig     = std::make_shared<MuxConfig>(m_config);
-  auto job           = std::make_shared<mtx::gui::Jobs::MuxJob>(startNow ? mtx::gui::Jobs::Job::PendingAuto : mtx::gui::Jobs::Job::PendingManual, newConfig);
+  auto job           = std::make_shared<Jobs::MuxJob>(startNow ? Jobs::Job::PendingAuto : Jobs::Job::PendingManual, newConfig);
   job->m_dateAdded   = QDateTime::currentDateTime();
   job->m_description = job->displayableDescription();
 
@@ -259,7 +261,7 @@ Tool::addToJobQueue(bool startNow) {
     job->m_description = newDescription;
   }
 
-  MainWindow::getJobTool()->addJob(std::static_pointer_cast<mtx::gui::Jobs::Job>(job));
+  MainWindow::getJobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
 }
 
 void

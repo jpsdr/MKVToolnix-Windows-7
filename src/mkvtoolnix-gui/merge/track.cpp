@@ -12,6 +12,8 @@
 
 namespace mtx { namespace gui { namespace Merge {
 
+using namespace mtx::gui;
+
 Track::Track(SourceFile *file,
              Track::Type type)
   : m_properties{}
@@ -108,7 +110,7 @@ Track::isRegular()
 
 void
 Track::setDefaults() {
-  auto &settings = mtx::gui::Util::Settings::get();
+  auto &settings = Util::Settings::get();
 
   if (isAudio() && settings.m_setAudioDelayFromFileName)
     m_delay = extractAudioDelayFromFileName();
@@ -127,7 +129,7 @@ Track::setDefaults() {
 
   auto language = m_properties[Q("language")];
   if (language.isEmpty())
-    language = mtx::gui::Util::Settings::get().m_defaultTrackLanguage;
+    language = Util::Settings::get().m_defaultTrackLanguage;
   auto idx = map_to_iso639_2_code(to_utf8(language), true);
   if (0 <= idx)
     m_language = to_qs(iso639_languages[idx].iso639_2_code);

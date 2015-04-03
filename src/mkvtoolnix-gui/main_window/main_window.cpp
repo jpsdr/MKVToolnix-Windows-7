@@ -219,10 +219,10 @@ void
 MainWindow::silentlyCheckForUpdates() {
   auto forceUpdateCheck = get_environment_variable("FORCE_UPDATE_CHECK") == "1";
 
-  if (!forceUpdateCheck && !mtx::gui::Util::Settings::get().m_checkForUpdates)
+  if (!forceUpdateCheck && !Util::Settings::get().m_checkForUpdates)
     return;
 
-  auto lastCheck = mtx::gui::Util::Settings::get().m_lastUpdateCheck;
+  auto lastCheck = Util::Settings::get().m_lastUpdateCheck;
   if (!forceUpdateCheck && lastCheck.isValid() && (lastCheck.addDays(1) >= QDateTime::currentDateTime()))
     return;
 
@@ -244,7 +244,7 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
   if ((status == UpdateCheckStatus::Failed) || !release.valid)
     return;
 
-  auto &settings             = mtx::gui::Util::Settings::get();
+  auto &settings             = Util::Settings::get();
   settings.m_lastUpdateCheck = QDateTime::currentDateTime();
   auto forceUpdateCheck      = get_environment_variable("FORCE_UPDATE_CHECK") == "1";
 

@@ -11,6 +11,8 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+using namespace mtx::gui;
+
 FileIdentifier::FileIdentifier(QWidget *parent,
                                QString const &fileName)
   : m_parent(parent)
@@ -74,7 +76,7 @@ FileIdentifier::output()
   return m_output;
 }
 
-mtx::gui::Merge::SourceFilePtr const &
+Merge::SourceFilePtr const &
 FileIdentifier::file()
   const {
   return m_file;
@@ -82,7 +84,7 @@ FileIdentifier::file()
 
 bool
 FileIdentifier::parseOutput() {
-  m_file = std::make_shared<mtx::gui::Merge::SourceFile>(m_fileName);
+  m_file = std::make_shared<Merge::SourceFile>(m_fileName);
 
   for (auto &line : m_output) {
     if (line.startsWith("File"))
@@ -118,7 +120,7 @@ FileIdentifier::parseAttachmentLine(QString const &line) {
   if (-1 == re.indexIn(line))
     return;
 
-  auto track                     = std::make_shared<mtx::gui::Merge::Track>(m_file.get(), mtx::gui::Merge::Track::Attachment);
+  auto track                     = std::make_shared<Merge::Track>(m_file.get(), Merge::Track::Attachment);
   track->m_properties            = parseProperties(line);
   track->m_id                    = re.cap(1).toLongLong();
   track->m_codec                 = re.cap(2);
@@ -137,7 +139,7 @@ FileIdentifier::parseChaptersLine(QString const &line) {
   if (-1 == re.indexIn(line))
     return;
 
-  auto track    = std::make_shared<mtx::gui::Merge::Track>(m_file.get(), mtx::gui::Merge::Track::Chapters);
+  auto track    = std::make_shared<Merge::Track>(m_file.get(), Merge::Track::Chapters);
   track->m_size = re.cap(1).toLongLong();
 
   m_file->m_tracks << track;
@@ -166,7 +168,7 @@ FileIdentifier::parseContainerLine(QString const &line) {
     return;
 
   for (auto &fileName : m_file->m_properties["other_file"].split("\t")) {
-    auto additionalPart              = std::make_shared<mtx::gui::Merge::SourceFile>(fileName);
+    auto additionalPart              = std::make_shared<Merge::SourceFile>(fileName);
     additionalPart->m_additionalPart = true;
     additionalPart->m_appendedTo     = m_file.get();
     m_file->m_additionalParts       << additionalPart;
@@ -181,7 +183,7 @@ FileIdentifier::parseGlobalTagsLine(QString const &line) {
   if (-1 == re.indexIn(line))
     return;
 
-  auto track    = std::make_shared<mtx::gui::Merge::Track>(m_file.get(), mtx::gui::Merge::Track::GlobalTags);
+  auto track    = std::make_shared<Merge::Track>(m_file.get(), Merge::Track::GlobalTags);
   track->m_size = re.cap(1).toLongLong();
 
   m_file->m_tracks << track;
@@ -195,7 +197,7 @@ FileIdentifier::parseTagsLine(QString const &line) {
   if (-1 == re.indexIn(line))
     return;
 
-  auto track    = std::make_shared<mtx::gui::Merge::Track>(m_file.get(), mtx::gui::Merge::Track::Tags);
+  auto track    = std::make_shared<Merge::Track>(m_file.get(), Merge::Track::Tags);
   track->m_id   = re.cap(1).toLongLong();
   track->m_size = re.cap(2).toLongLong();
 
@@ -211,11 +213,11 @@ FileIdentifier::parseTrackLine(QString const &line) {
   if (-1 == re.indexIn(line))
     return;
 
-  auto type                       = re.cap(2) == "audio"     ? mtx::gui::Merge::Track::Audio
-                                  : re.cap(2) == "video"     ? mtx::gui::Merge::Track::Video
-                                  : re.cap(2) == "subtitles" ? mtx::gui::Merge::Track::Subtitles
-                                  :                            mtx::gui::Merge::Track::Buttons;
-  auto track                      = std::make_shared<mtx::gui::Merge::Track>(m_file.get(), type);
+  auto type                       = re.cap(2) == "audio"     ? Merge::Track::Audio
+                                  : re.cap(2) == "video"     ? Merge::Track::Video
+                                  : re.cap(2) == "subtitles" ? Merge::Track::Subtitles
+                                  :                            Merge::Track::Buttons;
+  auto track                      = std::make_shared<Merge::Track>(m_file.get(), type);
   track->m_id                     = re.cap(1).toLongLong();
   track->m_codec                  = re.cap(3);
   track->m_properties             = parseProperties(line);

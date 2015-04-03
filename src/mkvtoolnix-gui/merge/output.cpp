@@ -10,6 +10,8 @@
 
 namespace mtx { namespace gui { namespace Merge {
 
+using namespace mtx::gui;
+
 void
 Tool::setupOutputControls() {
   m_splitControls << ui->splitOptionsLabel << ui->splitOptions << ui->splittingOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;
@@ -37,7 +39,7 @@ Tool::onBrowseOutput() {
   auto fileName = getSaveFileName(QY("Select output file name"), filter, ui->output);
   if (!fileName.isEmpty()) {
     m_config.m_destination = fileName;
-    auto &settings         = mtx::gui::Util::Settings::get();
+    auto &settings         = Util::Settings::get();
     settings.m_lastOutputDir = QFileInfo{ fileName }.absoluteDir();
     settings.save();
   }

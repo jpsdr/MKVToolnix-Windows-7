@@ -9,6 +9,8 @@
 
 namespace mtx { namespace gui { namespace WatchJobs {
 
+using namespace mtx::gui;
+
 Tab::Tab(QWidget *parent)
   : QWidget{parent}
   , ui{new Ui::Tab}
@@ -21,25 +23,25 @@ Tab::~Tab() {
 }
 
 void
-Tab::connectToJob(mtx::gui::Jobs::Job const &job) {
-  connect(&job, SIGNAL(statusChanged(uint64_t,mtx::gui::Jobs::Job::Status)),    this, SLOT(onStatusChanged(uint64_t,mtx::gui::Jobs::Job::Status)));
+Tab::connectToJob(Jobs::Job const &job) {
+  connect(&job, SIGNAL(statusChanged(uint64_t,Jobs::Job::Status)),    this, SLOT(onStatusChanged(uint64_t,Jobs::Job::Status)));
   connect(&job, SIGNAL(progressChanged(uint64_t,unsigned int)),                 this, SLOT(onProgressChanged(uint64_t,unsigned int)));
-  connect(&job, SIGNAL(lineRead(const QString&,mtx::gui::Jobs::Job::LineType)), this, SLOT(onLineRead(const QString&,mtx::gui::Jobs::Job::LineType)));
+  connect(&job, SIGNAL(lineRead(const QString&,Jobs::Job::LineType)), this, SLOT(onLineRead(const QString&,Jobs::Job::LineType)));
 }
 
 void
 Tab::onStatusChanged(uint64_t id,
-                     mtx::gui::Jobs::Job::Status status) {
+                     Jobs::Job::Status status) {
   auto job = MainWindow::getJobTool()->getModel()->fromId(id);
   if (!job)
     return;
 
-  ui->status->setText(mtx::gui::Jobs::Job::displayableStatus(status));
+  ui->status->setText(Jobs::Job::displayableStatus(status));
 
-  if (mtx::gui::Jobs::Job::Running == status)
+  if (Jobs::Job::Running == status)
     setInitialDisplay(*job);
 
-  else if ((mtx::gui::Jobs::Job::DoneOk == status) || (mtx::gui::Jobs::Job::DoneWarnings == status) || (mtx::gui::Jobs::Job::Failed == status) || (mtx::gui::Jobs::Job::Aborted == status))
+  else if ((Jobs::Job::DoneOk == status) || (Jobs::Job::DoneWarnings == status) || (Jobs::Job::Failed == status) || (Jobs::Job::Aborted == status))
     ui->finishedAt->setText(Util::displayableDate(job->m_dateFinished));
 }
 
@@ -51,16 +53,16 @@ Tab::onProgressChanged(uint64_t,
 
 void
 Tab::onLineRead(QString const &line,
-                mtx::gui::Jobs::Job::LineType type) {
-  auto &storage = mtx::gui::Jobs::Job::InfoLine    == type ? ui->output
-                : mtx::gui::Jobs::Job::WarningLine == type ? ui->warnings
+                Jobs::Job::LineType type) {
+  auto &storage = Jobs::Job::InfoLine    == type ? ui->output
+                : Jobs::Job::WarningLine == type ? ui->warnings
                 :                                            ui->errors;
 
   storage->appendPlainText(line);
 }
 
 void
-Tab::setInitialDisplay(mtx::gui::Jobs::Job const &job) {
+Tab::setInitialDisplay(Jobs::Job const &job) {
   ui->description->setText(job.m_description);
   ui->progressBar->setValue(job.m_progress);
 

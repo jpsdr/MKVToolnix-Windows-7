@@ -11,6 +11,8 @@
 
 namespace mtx { namespace gui { namespace Merge {
 
+using namespace mtx::gui;
+
 AskScanForPlaylistsDialog::AskScanForPlaylistsDialog(QWidget *parent)
   : QDialog{parent}
   , ui{new Ui::AskScanForPlaylistsDialog}
@@ -22,7 +24,7 @@ AskScanForPlaylistsDialog::AskScanForPlaylistsDialog(QWidget *parent)
   auto iconSize = style->pixelMetric(QStyle::PM_MessageBoxIconSize);
 
   ui->iconLabel->setPixmap(style->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(iconSize, iconSize));
-  ui->scanPolicy->setCurrentIndex(static_cast<int>(mtx::gui::Util::Settings::get().m_scanForPlaylistsPolicy));
+  ui->scanPolicy->setCurrentIndex(static_cast<int>(Util::Settings::get().m_scanForPlaylistsPolicy));
 
   auto yesButton = Util::buttonForRole(ui->buttonBox, QDialogButtonBox::YesRole);
   yesButton->setText(QY("&Scan for other playlists"));
@@ -47,7 +49,7 @@ AskScanForPlaylistsDialog::ask(SourceFile const &file,
     QY("The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you chose which one to add."),
   };
 
-  auto minimumDuration = mtx::gui::Util::Settings::get().m_minimumPlaylistDuration;
+  auto minimumDuration = Util::Settings::get().m_minimumPlaylistDuration;
   auto info2           = QStringList {
     QNY("Playlists shorter than %1 second will be ignored.",
         "Playlists shorter than %1 seconds will be ignored.",
@@ -59,8 +61,8 @@ AskScanForPlaylistsDialog::ask(SourceFile const &file,
 
   auto const result = exec();
 
-  auto &settings    = mtx::gui::Util::Settings::get();
-  settings.m_scanForPlaylistsPolicy = static_cast<mtx::gui::Util::Settings::ScanForPlaylistsPolicy>(ui->scanPolicy->currentIndex());
+  auto &settings    = Util::Settings::get();
+  settings.m_scanForPlaylistsPolicy = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->scanPolicy->currentIndex());
   settings.save();
 
   return result == QDialog::Accepted;

@@ -13,6 +13,8 @@
 
 namespace mtx { namespace gui { namespace Merge {
 
+using namespace mtx::gui;
+
 static void
 addToMaps(SourceFile *oldFile,
           SourceFile *newFile,
@@ -329,13 +331,13 @@ MuxConfig::buildMkvmergeOptions()
   const {
   auto options = QStringList{};
 
-  auto &settings = mtx::gui::Util::Settings::get();
+  auto &settings = Util::Settings::get();
 
   // TODO: buildMkvmergeOptions get ui locale from prefs
   // if (!preferences.m_uiLocale.isEmpty())
   //   options << Q("--ui-language") << settings.m_uiLocale;
 
-  if (mtx::gui::Util::Settings::NormalPriority != settings.m_priority)
+  if (Util::Settings::NormalPriority != settings.m_priority)
     options << Q("--prioriy") << settings.getPriorityAsString();
 
   options << Q("--output") << m_destination;

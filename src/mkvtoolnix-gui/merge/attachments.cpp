@@ -11,6 +11,8 @@
 
 namespace mtx { namespace gui { namespace Merge {
 
+using namespace mtx::gui;
+
 void
 Tool::setupAttachmentsControls() {
   ui->attachments->setModel(m_attachmentsModel);
@@ -103,13 +105,13 @@ Tool::selectAttachmentsToAdd() {
   QFileDialog dlg{this};
   dlg.setNameFilter(QY("All files") + Q(" (*)"));
   dlg.setFileMode(QFileDialog::ExistingFiles);
-  dlg.setDirectory(mtx::gui::Util::Settings::get().m_lastOpenDir);
+  dlg.setDirectory(Util::Settings::get().m_lastOpenDir);
   dlg.setWindowTitle(QY("Add attachments"));
 
   if (!dlg.exec())
     return QStringList{};
 
-  mtx::gui::Util::Settings::get().m_lastOpenDir = dlg.directory();
+  Util::Settings::get().m_lastOpenDir = dlg.directory();
 
   return dlg.selectedFiles();
 }
@@ -124,7 +126,7 @@ Tool::onRemoveAttachments() {
 void
 Tool::resizeAttachmentsColumnsToContents()
   const {
-  mtx::gui::Util::resizeViewColumnsToContents(ui->attachments);
+  Util::resizeViewColumnsToContents(ui->attachments);
 }
 
 void

@@ -21,6 +21,8 @@
 
 namespace mtx { namespace gui { namespace Merge {
 
+using namespace mtx::gui;
+
 void
 Tool::setupControlLists() {
   m_typeIndependantControls << ui->muxThisLabel << ui->muxThis << ui->miscellaneousBox << ui->userDefinedTrackOptionsLabel << ui->userDefinedTrackOptions;
@@ -498,7 +500,7 @@ Tool::addOrAppendFiles(bool append) {
 
   QList<SourceFilePtr> identifiedFiles;
   for (auto &fileName : fileNames) {
-    mtx::gui::Util::FileIdentifier identifier{ this, fileName };
+    Util::FileIdentifier identifier{ this, fileName };
     if (identifier.identify())
       identifiedFiles << identifier.file();
   }
@@ -519,16 +521,16 @@ Tool::addOrAppendFiles(bool append) {
 QStringList
 Tool::selectFilesToAdd(QString const &title) {
   QFileDialog dlg{this};
-  dlg.setNameFilters(mtx::gui::Util::FileTypeFilter::get());
+  dlg.setNameFilters(Util::FileTypeFilter::get());
   dlg.setFileMode(QFileDialog::ExistingFiles);
-  dlg.setDirectory(mtx::gui::Util::Settings::get().m_lastOpenDir);
+  dlg.setDirectory(Util::Settings::get().m_lastOpenDir);
   dlg.setWindowTitle(title);
   dlg.setOptions(QFileDialog::HideNameFilterDetails);
 
   if (!dlg.exec())
     return QStringList{};
 
-  mtx::gui::Util::Settings::get().m_lastOpenDir = dlg.directory();
+  Util::Settings::get().m_lastOpenDir = dlg.directory();
 
   return dlg.selectedFiles();
 }
@@ -642,7 +644,7 @@ Tool::setTitleMaybe(QList<SourceFilePtr> const &files) {
 
 void
 Tool::setTitleMaybe(QString const &title) {
-  if (!mtx::gui::Util::Settings::get().m_autoSetFileTitle || title.isEmpty() || !m_config.m_title.isEmpty())
+  if (!Util::Settings::get().m_autoSetFileTitle || title.isEmpty() || !m_config.m_title.isEmpty())
     return;
 
   ui->title->setText(title);
@@ -679,23 +681,23 @@ Tool::suggestOutputFileNameExtension()
 
 void
 Tool::setOutputFileNameMaybe(QString const &fileName) {
-  auto &settings = mtx::gui::Util::Settings::get();
+  auto &settings = Util::Settings::get();
   auto policy    = settings.m_outputFileNamePolicy;
 
-  if (fileName.isEmpty() || (mtx::gui::Util::Settings::DontSetOutputFileName == policy))
+  if (fileName.isEmpty() || (Util::Settings::DontSetOutputFileName == policy))
     return;
 
   auto currentOutput = ui->output->text();
   auto srcFileName   = QFileInfo{ currentOutput.isEmpty() ? fileName : currentOutput };
   QDir outputDir;
 
-  if (mtx::gui::Util::Settings::ToPreviousDirectory == policy)
+  if (Util::Settings::ToPreviousDirectory == policy)
     outputDir = settings.m_lastOutputDir;
 
-  else if (mtx::gui::Util::Settings::ToFixedDirectory == policy)
+  else if (Util::Settings::ToFixedDirectory == policy)
     outputDir = settings.m_fixedOutputDir;
 
-  else if (mtx::gui::Util::Settings::ToParentOfFirstInputFile == policy)
+  else if (Util::Settings::ToParentOfFirstInputFile == policy)
     outputDir = srcFileName.absoluteDir();
 
   else
