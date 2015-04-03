@@ -51,6 +51,15 @@
     <addaction name="actionGUIPreferences"/>
     <addaction name="actionGUICheckForUpdates"/>
     <addaction name="separator"/>
+    <addaction name="actionGUIMergeTool"/>
+    <addaction name="actionGUIExtractionTool"/>
+    <addaction name="actionGUIInfoTool"/>
+    <addaction name="actionGUIHeaderEditor"/>
+    <addaction name="actionGUIChapterEditor"/>
+    <addaction name="actionGUITagEditor"/>
+    <addaction name="actionGUIJobQueue"/>
+    <addaction name="actionGUIJobOutput"/>
+    <addaction name="separator"/>
     <addaction name="actionGUIExit"/>
    </widget>
    <widget class="QMenu" name="menuMerge">
@@ -238,6 +247,102 @@
   <action name="actionHeaderEditorReload">
    <property name="text">
     <string>&amp;Reload</string>
+   </property>
+  </action>
+  <action name="actionGUIMergeTool">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/merge.png</normaloff>:/icons/16x16/merge.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Merge tool</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+1</string>
+   </property>
+  </action>
+  <action name="actionGUIExtractionTool">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/split.png</normaloff>:/icons/16x16/split.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Extraction tool</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+2</string>
+   </property>
+  </action>
+  <action name="actionGUIInfoTool">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-preview-archive.png</normaloff>:/icons/16x16/document-preview-archive.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Info tool</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+3</string>
+   </property>
+  </action>
+  <action name="actionGUIHeaderEditor">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-edit.png</normaloff>:/icons/16x16/document-edit.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Header editor</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+4</string>
+   </property>
+  </action>
+  <action name="actionGUIChapterEditor">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/story-editor.png</normaloff>:/icons/16x16/story-editor.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Chapter editor</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+5</string>
+   </property>
+  </action>
+  <action name="actionGUIJobQueue">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/view-task.png</normaloff>:/icons/16x16/view-task.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Job queue</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+7</string>
+   </property>
+  </action>
+  <action name="actionGUIJobOutput">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/system-run.png</normaloff>:/icons/16x16/system-run.png</iconset>
+   </property>
+   <property name="text">
+    <string>Job &amp;output</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+8</string>
+   </property>
+  </action>
+  <action name="actionGUITagEditor">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-edit-sign-encrypt.png</normaloff>:/icons/16x16/document-edit-sign-encrypt.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Tag editor</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+6</string>
    </property>
   </action>
  </widget>

@@ -43,6 +43,7 @@ protected:
   Jobs::Tool *m_toolJobs{};
   HeaderEditor::Tool *m_toolHeaderEditor{};
   WatchJobs::Tool *m_watchJobTool{};
+  QList<QAction *> m_toolSelectionActions;
 
 protected:                      // static
   static MainWindow *ms_mainWindow;
@@ -58,6 +59,7 @@ public:
   virtual void showAndEnableMenu(QMenu &menu, bool show);
 
 public slots:
+  virtual void changeTool();
   virtual void toolChanged(int index);
   virtual void editPreferences();
 

@@ -121,8 +121,21 @@ MainWindow::setupToolSelector() {
   ui->tool->setCurrentIndex(0);
   m_toolMerge->toolShown();
 
-  connect(ui->tool,               SIGNAL(currentChanged(int)),                        this,                SLOT(toolChanged(int)));
-  connect(m_toolJobs->getModel(), SIGNAL(progressChanged(unsigned int,unsigned int)), m_statusBarProgress, SLOT(setProgress(unsigned int,unsigned int)));
+  m_toolSelectionActions << ui->actionGUIMergeTool    << ui->actionGUIExtractionTool << ui->actionGUIInfoTool
+                         << ui->actionGUIHeaderEditor << ui->actionGUIChapterEditor  << ui->actionGUITagEditor
+                         << ui->actionGUIJobQueue     << ui->actionGUIJobOutput;
+
+  connect(ui->actionGUIMergeTool,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+  connect(ui->actionGUIExtractionTool, SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+  connect(ui->actionGUIInfoTool,       SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+  connect(ui->actionGUIHeaderEditor,   SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+  connect(ui->actionGUIChapterEditor,  SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+  connect(ui->actionGUITagEditor,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+  connect(ui->actionGUIJobQueue,       SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+  connect(ui->actionGUIJobOutput,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+
+  connect(ui->tool,                    SIGNAL(currentChanged(int)),                        this,                SLOT(toolChanged(int)));
+  connect(m_toolJobs->getModel(),      SIGNAL(progressChanged(unsigned int,unsigned int)), m_statusBarProgress, SLOT(setProgress(unsigned int,unsigned int)));
 }
 
 void
@@ -139,6 +152,13 @@ void
 MainWindow::showTheseMenusOnly(QList<QMenu *> const &menus) {
   showAndEnableMenu(*ui->menuMerge,        menus.contains(ui->menuMerge));
   showAndEnableMenu(*ui->menuHeaderEditor, menus.contains(ui->menuHeaderEditor));
+}
+
+void
+MainWindow::changeTool() {
+  auto toolIndex = m_toolSelectionActions.indexOf(static_cast<QAction *>(sender()));
+  if (-1 != toolIndex)
+    ui->tool->setCurrentIndex(toolIndex);
 }
 
 void
