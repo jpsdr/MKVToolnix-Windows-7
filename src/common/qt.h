@@ -16,6 +16,9 @@
 
 #include <QString>
 
+#include <ebml/EbmlString.h>
+#include <ebml/EbmlUnicodeString.h>
+
 #define Q(s)  to_qs(s)
 #define QY(s) to_qs(Y(s))
 #define QNY(singular, plural, count) to_qs(NY(singular, plural, count))
@@ -38,6 +41,30 @@ to_qs(std::wstring const &source) {
 inline QString
 to_qs(boost::format const &source) {
   return QString::fromUtf8(source.str().c_str());
+}
+
+inline QString
+to_qs(::libebml::EbmlString const &s) {
+  return to_qs(static_cast<std::string const &>(s));
+}
+
+inline QString
+to_qs(::libebml::EbmlString *s) {
+  if (!s)
+    return QString{};
+  return to_qs(static_cast<std::string const &>(*s));
+}
+
+inline QString
+to_qs(::libebml::UTFstring const &s) {
+  return to_qs(s.GetUTF8());
+}
+
+inline QString
+to_qs(::libebml::UTFstring *s) {
+  if (!s)
+    return QString{};
+  return to_qs(*s);
 }
 
 inline std::string
