@@ -74,4 +74,14 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   ui->finishedAt->setText(job.m_dateFinished.isValid() ? Util::displayableDate(job.m_dateFinished) : QY("not finished yet"));
 }
 
+void
+Tab::onSaveOutput() {
+  // TODO: Tab::onSaveOutput
+}
+
+void
+Tab::onAbort() {
+  // TODO: Tab::onAbort
+}
+
 }}}
