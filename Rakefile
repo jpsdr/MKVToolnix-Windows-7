@@ -68,6 +68,8 @@ def setup_globals
   $all_headers             =  $source_directories.collect { |dir| FileList[ "#{dir}/**/*.h",                   ].to_a }.flatten.sort
   $all_objects             =  $all_sources.collect { |file| file.ext('o') }
 
+  $gui_ui_files            = FileList["src/mkvtoolnix-gui/forms/**/*.ui"].to_a if $build_mkvtoolnix_gui
+
   $top_srcdir              = c(:top_srcdir)
   $dependency_dir          = "#{$top_srcdir}/rake.d/dependency.d"
   $dependency_tmp_dir      = "#{$dependency_dir}/tmp"
@@ -488,6 +490,29 @@ namespace :dev do
       formatter.width   = 9999999
       formatter.write doc, File.open(qrc, "w")
     end
+
+    desc "Update Qt project file"
+    task "update-qt-project" do
+      project_file = "src/mkvtoolnix-gui/qtcreator/mkvtoolnix-gui.pro"
+      content      = []
+      skipping     = false
+      IO.readlines(project_file).collect { |line| line.chomp }.each do |line|
+        content << line unless skipping
+
+        if /^FORMS\b/.match line
+          skipping  = true
+          content  += $gui_ui_files.collect { |ui| ui.gsub!(/.*forms\//, '../forms/'); "    #{ui} \\" }.sort
+
+        elsif skipping && /^\s*$/.match(line)
+          skipping  = false
+          content  << line
+        end
+      end
+
+      File.open(project_file, "w") do |file|
+        file.puts content.join("\n")
+      end
+    end
   end
 
   desc "Create source code tarball from current version in .."
@@ -778,8 +803,7 @@ end
 #
 
 if $build_mkvtoolnix_gui
-  ui_files        = FileList["src/mkvtoolnix-gui/forms/**/*.ui"].to_a
-  ui_h_files      = ui_files.collect { |ui| ui.ext 'h' }
+  ui_h_files      = $gui_ui_files.collect { |ui| ui.ext 'h' }
   cpp_files       = FileList['src/mkvtoolnix-gui/**/*.cpp'].to_a
   h_files         = FileList['src/mkvtoolnix-gui/**/*.h'].to_a - ui_h_files
   cpp_content     = read_files cpp_files
@@ -803,7 +827,7 @@ if $build_mkvtoolnix_gui
     description("Build the mkvtoolnix-gui executable").
     aliases("mkvtoolnix-gui").
     sources(qobject_h_files.collect { |h| h.ext 'moc' }).
-    sources(cpp_files, ui_files, 'src/mkvtoolnix-gui/qt_resources.cpp').
+    sources(cpp_files, $gui_ui_files, 'src/mkvtoolnix-gui/qt_resources.cpp').
     sources("src/mkvtoolnix-gui/resources.o", :if => c?(:MINGW)).
     libraries($common_libs, :qt).
     libraries("-mwindows", :if => c?(:MINGW)).
