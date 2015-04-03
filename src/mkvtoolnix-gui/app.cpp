@@ -22,7 +22,7 @@ App::App(int &argc,
   QApplication::setStyle(Q("windows"));
 #endif
 
-  Settings::get().load();
+  Util::Settings::get().load();
 
   QObject::connect(this, SIGNAL(aboutToQuit()), this, SLOT(saveSettings()));
 
@@ -35,7 +35,7 @@ App::~App() {
 void
 App::saveSettings()
   const {
-  Settings::get().save();
+  Util::Settings::get().save();
 }
 
 App *

@@ -9,6 +9,8 @@
 #include <QMessageBox>
 #include <QStringList>
 
+namespace mtx { namespace gui { namespace Util {
+
 FileIdentifier::FileIdentifier(QWidget *parent,
                                QString const &fileName)
   : m_parent(parent)
@@ -245,3 +247,5 @@ FileIdentifier::parseProperties(QString const &line)
 
   return properties;
 }
+
+}}}

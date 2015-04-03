@@ -10,6 +10,8 @@
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/util.h"
 
+namespace mtx { namespace gui { namespace Util {
+
 void
 OptionFile::create(QString const &fileName,
                    QStringList const &options) {
@@ -41,3 +43,5 @@ OptionFile::write(QFile &file,
   for (auto &option : escapedOptions)
     file.write(Q("%1\n").arg(option).toUtf8());
 }
+
+}}}

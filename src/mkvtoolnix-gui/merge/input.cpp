@@ -498,7 +498,7 @@ Tool::addOrAppendFiles(bool append) {
 
   QList<SourceFilePtr> identifiedFiles;
   for (auto &fileName : fileNames) {
-    FileIdentifier identifier{ this, fileName };
+    mtx::gui::Util::FileIdentifier identifier{ this, fileName };
     if (identifier.identify())
       identifiedFiles << identifier.file();
   }
@@ -519,16 +519,16 @@ Tool::addOrAppendFiles(bool append) {
 QStringList
 Tool::selectFilesToAdd(QString const &title) {
   QFileDialog dlg{this};
-  dlg.setNameFilters(FileTypeFilter::get());
+  dlg.setNameFilters(mtx::gui::Util::FileTypeFilter::get());
   dlg.setFileMode(QFileDialog::ExistingFiles);
-  dlg.setDirectory(Settings::get().m_lastOpenDir);
+  dlg.setDirectory(mtx::gui::Util::Settings::get().m_lastOpenDir);
   dlg.setWindowTitle(title);
   dlg.setOptions(QFileDialog::HideNameFilterDetails);
 
   if (!dlg.exec())
     return QStringList{};
 
-  Settings::get().m_lastOpenDir = dlg.directory();
+  mtx::gui::Util::Settings::get().m_lastOpenDir = dlg.directory();
 
   return dlg.selectedFiles();
 }
@@ -642,7 +642,7 @@ Tool::setTitleMaybe(QList<SourceFilePtr> const &files) {
 
 void
 Tool::setTitleMaybe(QString const &title) {
-  if (!Settings::get().m_autoSetFileTitle || title.isEmpty() || !m_config.m_title.isEmpty())
+  if (!mtx::gui::Util::Settings::get().m_autoSetFileTitle || title.isEmpty() || !m_config.m_title.isEmpty())
     return;
 
   ui->title->setText(title);
@@ -679,23 +679,23 @@ Tool::suggestOutputFileNameExtension()
 
 void
 Tool::setOutputFileNameMaybe(QString const &fileName) {
-  auto &settings = Settings::get();
+  auto &settings = mtx::gui::Util::Settings::get();
   auto policy    = settings.m_outputFileNamePolicy;
 
-  if (fileName.isEmpty() || (Settings::DontSetOutputFileName == policy))
+  if (fileName.isEmpty() || (mtx::gui::Util::Settings::DontSetOutputFileName == policy))
     return;
 
   auto currentOutput = ui->output->text();
   auto srcFileName   = QFileInfo{ currentOutput.isEmpty() ? fileName : currentOutput };
   QDir outputDir;
 
-  if (Settings::ToPreviousDirectory == policy)
+  if (mtx::gui::Util::Settings::ToPreviousDirectory == policy)
     outputDir = settings.m_lastOutputDir;
 
-  else if (Settings::ToFixedDirectory == policy)
+  else if (mtx::gui::Util::Settings::ToFixedDirectory == policy)
     outputDir = settings.m_fixedOutputDir;
 
-  else if (Settings::ToParentOfFirstInputFile == policy)
+  else if (mtx::gui::Util::Settings::ToParentOfFirstInputFile == policy)
     outputDir = srcFileName.absoluteDir();
 
   else

@@ -22,7 +22,7 @@ PlaylistScanner::PlaylistScanner(QWidget *parent)
 
 void
 PlaylistScanner::checkAddingPlaylists(QList<SourceFilePtr> &files) {
-  if (Settings::NeverScan == Settings::get().m_scanForPlaylistsPolicy)
+  if (mtx::gui::Util::Settings::NeverScan == mtx::gui::Util::Settings::get().m_scanForPlaylistsPolicy)
     return;
 
   for (auto &file : files) {
@@ -34,7 +34,7 @@ PlaylistScanner::checkAddingPlaylists(QList<SourceFilePtr> &files) {
     if (otherFiles.isEmpty())
       continue;
 
-    auto doScan = Settings::AlwaysScan == Settings::get().m_scanForPlaylistsPolicy;
+    auto doScan = mtx::gui::Util::Settings::AlwaysScan == mtx::gui::Util::Settings::get().m_scanForPlaylistsPolicy;
     if (!doScan)
       doScan = askScanForPlaylists(*file, otherFiles.size());
 
@@ -80,12 +80,12 @@ PlaylistScanner::scanForPlaylists(QFileInfoList const &otherFiles) {
     if (progress.wasCanceled())
       return QList<SourceFilePtr>{};
 
-    FileIdentifier identifier{m_parent, otherFile.filePath()};
+    mtx::gui::Util::FileIdentifier identifier{m_parent, otherFile.filePath()};
     if (!identifier.identify())
       continue;
 
     auto file = identifier.file();
-    if (file->isPlaylist() && (file->m_playlistDuration >= (Settings::get().m_minimumPlaylistDuration * 1000000000ull)))
+    if (file->isPlaylist() && (file->m_playlistDuration >= (mtx::gui::Util::Settings::get().m_minimumPlaylistDuration * 1000000000ull)))
       identifiedFiles << file;
   }
 

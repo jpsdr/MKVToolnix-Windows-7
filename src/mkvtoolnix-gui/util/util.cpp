@@ -12,7 +12,7 @@
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/util/util.h"
 
-namespace Util {
+namespace mtx { namespace gui { namespace Util {
 
 QIcon
 loadIcon(QString const &name,
@@ -200,4 +200,4 @@ displayableDate(QDateTime const &date) {
   return date.isValid() ? date.toString(QString{"yyyy-MM-dd hh:mm:ss"}) : QString{""};
 }
 
-}
+}}}

@@ -6,6 +6,8 @@
 
 #include <QSettings>
 
+namespace mtx { namespace gui { namespace Util {
+
 Settings Settings::s_settings;
 
 Settings::Settings()
@@ -153,3 +155,5 @@ Settings::withGroup(QString const &group,
   for (auto idx = groups.size(); idx > 0; --idx)
     reg.endGroup();
 }
+
+}}}

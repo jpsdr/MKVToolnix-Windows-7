@@ -8,6 +8,8 @@ class QString;
 class QStringList;
 class QTemporaryFile;
 
+namespace mtx { namespace gui { namespace Util {
+
 class OptionFile {
 public:
   static void create(QString const &fileName, QStringList const &options);
@@ -15,5 +17,7 @@ public:
 
   static void write(QFile &file, QStringList const &options);
 };
+
+}}}
 
 #endif  // MTX_MKVTOOLNIX_GUI_UTIL_OPTION_FILE_H

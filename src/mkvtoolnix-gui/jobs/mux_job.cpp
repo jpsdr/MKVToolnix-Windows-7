@@ -39,12 +39,12 @@ MuxJob::abort() {
 void
 MuxJob::start() {
   m_aborted      = false;
-  m_settingsFile = OptionFile::createTemporary("MKVToolNix-GUI-MuxJob-XXXXXX", m_config->buildMkvmergeOptions());
+  m_settingsFile = mtx::gui::Util::OptionFile::createTemporary("MKVToolNix-GUI-MuxJob-XXXXXX", m_config->buildMkvmergeOptions());
 
   setStatus(Job::Running);
   setProgress(0);
 
-  m_process.start(Settings::get().actualMkvmergeExe(), QStringList{} << "--gui-mode" << QString{"@%1"}.arg(m_settingsFile->fileName()), QIODevice::ReadOnly);
+  m_process.start(mtx::gui::Util::Settings::get().actualMkvmergeExe(), QStringList{} << "--gui-mode" << QString{"@%1"}.arg(m_settingsFile->fileName()), QIODevice::ReadOnly);
 }
 
 void

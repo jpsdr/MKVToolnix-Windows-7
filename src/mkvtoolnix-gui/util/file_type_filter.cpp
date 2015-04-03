@@ -6,6 +6,8 @@
 
 #include <QStringList>
 
+namespace mtx { namespace gui { namespace Util {
+
 QStringList FileTypeFilter::s_filter;
 
 QStringList const &
@@ -46,3 +48,5 @@ FileTypeFilter::get() {
 
   return s_filter;
 }
+
+}}}

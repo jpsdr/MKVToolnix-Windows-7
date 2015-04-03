@@ -103,13 +103,13 @@ Tool::selectAttachmentsToAdd() {
   QFileDialog dlg{this};
   dlg.setNameFilter(QY("All files") + Q(" (*)"));
   dlg.setFileMode(QFileDialog::ExistingFiles);
-  dlg.setDirectory(Settings::get().m_lastOpenDir);
+  dlg.setDirectory(mtx::gui::Util::Settings::get().m_lastOpenDir);
   dlg.setWindowTitle(QY("Add attachments"));
 
   if (!dlg.exec())
     return QStringList{};
 
-  Settings::get().m_lastOpenDir = dlg.directory();
+  mtx::gui::Util::Settings::get().m_lastOpenDir = dlg.directory();
 
   return dlg.selectedFiles();
 }
@@ -124,7 +124,7 @@ Tool::onRemoveAttachments() {
 void
 Tool::resizeAttachmentsColumnsToContents()
   const {
-  Util::resizeViewColumnsToContents(ui->attachments);
+  mtx::gui::Util::resizeViewColumnsToContents(ui->attachments);
 }
 
 void

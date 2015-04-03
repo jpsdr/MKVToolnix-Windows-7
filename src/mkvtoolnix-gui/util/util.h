@@ -1,5 +1,5 @@
-#ifndef MTX_MKVTOOLNIX_GUI_UTIL_H
-#define MTX_MKVTOOLNIX_GUI_UTIL_H
+#ifndef MTX_MKVTOOLNIX_GUI_UTIL_UTIL_H
+#define MTX_MKVTOOLNIX_GUI_UTIL_UTIL_H
 
 #include "common/common_pch.h"
 
@@ -16,7 +16,7 @@ class QTreeView;
 class QString;
 class QVariant;
 
-namespace Util {
+namespace mtx { namespace gui { namespace Util {
 
 // Container stuff
 template<typename Tstored, typename Tcontainer>
@@ -67,6 +67,6 @@ QString joinSentences(QStringList const &sentences);
 
 QString displayableDate(QDateTime const &date);
 
-};
+}}}
 
-#endif  // MTX_MKVTOOLNIX_GUI_UTIL_H
+#endif  // MTX_MKVTOOLNIX_GUI_UTIL_UTIL_H

@@ -103,8 +103,9 @@ Tool::openFile(QString const &fileName) {
   // TODO: Tool::openFile
   MainWindow::get()->setStatusBarMessage(fileName);
 
-  Settings::get().m_lastMatroskaFileDir = QFileInfo{fileName}.path();
-  Settings::get().save();
+  auto &settings = mtx::gui::Util::Settings::get();
+  settings.m_lastMatroskaFileDir = QFileInfo{fileName}.path();
+  settings.save();
 
   if (!kax_analyzer_c::probe(to_utf8(fileName))) {
     QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(fileName));
@@ -133,7 +134,7 @@ Tool::openFile(QString const &fileName) {
 
 void
 Tool::selectFileToOpen() {
-  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in header editor"), Settings::get().m_lastMatroskaFileDir.path(),
+  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in header editor"), mtx::gui::Util::Settings::get().m_lastMatroskaFileDir.path(),
                                                 QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
   if (fileNames.isEmpty())
     return;

@@ -33,6 +33,8 @@
 // We should consider adding this as a public helper function.
 void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0);
 
+namespace mtx { namespace gui { namespace Util {
+
 // Clamps float color values within (0, 255)
 static
 int clamp(float x) {
@@ -544,3 +546,5 @@ bool
 StyleHelper::usePixmapCache() {
   return true;
 }
+
+}}}

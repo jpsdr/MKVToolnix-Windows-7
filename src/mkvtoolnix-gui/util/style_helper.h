@@ -28,12 +28,15 @@ class QPalette;
 class QPainter;
 class QRect;
 
+namespace mtx { namespace gui { namespace Util {
+
 // Helper class holding all custom color values
 
 class StyleHelper {
 private:
   static QColor m_baseColor;
   static QColor m_requestedBaseColor;
+
 public:
   static const unsigned int DEFAULT_BASE_COLOR = 0x666666;
 
@@ -72,5 +75,7 @@ public:
 
   static void tintImage(QImage &img, QColor const &tintColor);
 };
+
+}}}
 
 #endif // MTX_MKVTOOLNIX_GUI_UTIL_STYLE_HELPER_H

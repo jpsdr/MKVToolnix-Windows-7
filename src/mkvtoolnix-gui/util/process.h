@@ -1,10 +1,12 @@
-#ifndef MTX_MKVTOOLNIX_GUI_PROCESS_H
-#define MTX_MKVTOOLNIX_GUI_PROCESS_H
+#ifndef MTX_MKVTOOLNIX_GUI_UTIL_PROCESS_H
+#define MTX_MKVTOOLNIX_GUI_UTIL_PROCESS_H
 
 #include "common/common_pch.h"
 
 #include <QProcess>
 #include <QString>
+
+namespace mtx { namespace gui { namespace Util {
 
 class ProcessX : public mtx::exception {
 protected:
@@ -44,4 +46,6 @@ public:
   static ProcessPtr execute(QString const &command, QStringList const &args, bool useTempFile = true);
 };
 
-#endif  // MTX_MKVTOOLNIX_GUI_PROCESS_H
+}}}
+
+#endif  // MTX_MKVTOOLNIX_GUI_UTIL_PROCESS_H

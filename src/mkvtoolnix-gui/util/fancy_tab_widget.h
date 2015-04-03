@@ -35,6 +35,8 @@
 class QPainter;
 class QStackedLayout;
 
+namespace mtx { namespace gui { namespace Util {
+
 class FancyTabBar;
 
 class FancyTab : public QObject {
@@ -159,5 +161,7 @@ public slots:
 private slots:
   void showWidget(int index);
 };
+
+}}}
 
 #endif // MTX_MKVTOOLNIX_GUI_UTIL_FANCY_TAB_WIDGET_H

@@ -6,6 +6,8 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/process.h"
 
+namespace mtx { namespace gui { namespace Util {
+
 Process::Process(QString const &command,
                  QStringList const &args)
   : m_command(command)
@@ -69,3 +71,5 @@ Process::execute(QString const &command,
   argsToUse << QString{"@%1"}.arg(optFile.fileName());
   return runner(command, argsToUse);
 }
+
+}}}

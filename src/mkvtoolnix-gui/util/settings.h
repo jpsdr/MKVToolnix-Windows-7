@@ -1,5 +1,5 @@
-#ifndef MTX_MKVTOOLNIX_GUI_SETTINGS_H
-#define MTX_MKVTOOLNIX_GUI_SETTINGS_H
+#ifndef MTX_MKVTOOLNIX_GUI_UTIL_SETTINGS_H
+#define MTX_MKVTOOLNIX_GUI_UTIL_SETTINGS_H
 
 #include "common/common_pch.h"
 
@@ -9,6 +9,8 @@
 #include <QVariant>
 
 class QSettings;
+
+namespace mtx { namespace gui { namespace Util {
 
 class Settings: public QObject {
   Q_OBJECT;
@@ -73,4 +75,6 @@ public:
 
 // extern Settings g_settings;
 
-#endif  // MTX_MKVTOOLNIX_GUI_SETTINGS_H
+}}}
+
+#endif  // MTX_MKVTOOLNIX_GUI_UTIL_SETTINGS_H

@@ -58,7 +58,7 @@ Tool::~Tool() {
 
 void
 Tool::onShowCommandLine() {
-  auto options = (QStringList{} << Settings::get().actualMkvmergeExe()) + m_config.buildMkvmergeOptions();
+  auto options = (QStringList{} << mtx::gui::Util::Settings::get().actualMkvmergeExe()) + m_config.buildMkvmergeOptions();
   CommandLineDialog{this, options, QY("mkvmerge command line")}.exec();
 }
 
@@ -74,38 +74,41 @@ Tool::onSaveConfig() {
 
 void
 Tool::onSaveOptionFile() {
-  auto fileName = QFileDialog::getSaveFileName(this, QY("Save option file"), Settings::get().m_lastConfigDir.path(), QY("All files") + Q(" (*)"));
+  auto &settings = mtx::gui::Util::Settings::get();
+  auto fileName  = QFileDialog::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
-  OptionFile::create(fileName, m_config.buildMkvmergeOptions());
-  Settings::get().m_lastConfigDir = QFileInfo{fileName}.path();
-  Settings::get().save();
+  mtx::gui::Util::OptionFile::create(fileName, m_config.buildMkvmergeOptions());
+  settings.m_lastConfigDir = QFileInfo{fileName}.path();
+  settings.save();
 
   MainWindow::get()->setStatusBarMessage(QY("The option file has been created."));
 }
 
 void
 Tool::onSaveConfigAs() {
-  auto fileName = QFileDialog::getSaveFileName(this, QY("Save settings file as"), Settings::get().m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
+  auto &settings = mtx::gui::Util::Settings::get();
+  auto fileName  = QFileDialog::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
   m_config.save(fileName);
-  Settings::get().m_lastConfigDir = QFileInfo{fileName}.path();
-  Settings::get().save();
+  settings.m_lastConfigDir = QFileInfo{fileName}.path();
+  settings.save();
 
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
 }
 
 void
 Tool::onOpenConfig() {
-  auto fileName = QFileDialog::getOpenFileName(this, QY("Open settings file"), Settings::get().m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
+  auto &settings = mtx::gui::Util::Settings::get();
+  auto fileName  = QFileDialog::getOpenFileName(this, QY("Open settings file"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
-  Settings::get().m_lastConfigDir = QFileInfo{fileName}.path();
-  Settings::get().save();
+  settings.m_lastConfigDir = QFileInfo{fileName}.path();
+  settings.save();
 
   try {
     m_config.load(fileName);
@@ -145,13 +148,14 @@ Tool::getOpenFileName(QString const &title,
     fullFilter += Q(";;");
   fullFilter += QY("All files") + Q(" (*)");
 
-  auto dir      = lineEdit->text().isEmpty() ? Settings::get().m_lastOpenDir.path() : QFileInfo{ lineEdit->text() }.path();
-  auto fileName = QFileDialog::getOpenFileName(this, title, dir, fullFilter);
+  auto &settings = mtx::gui::Util::Settings::get();
+  auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOpenDir.path() : QFileInfo{ lineEdit->text() }.path();
+  auto fileName  = QFileDialog::getOpenFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
     return fileName;
 
-  Settings::get().m_lastOpenDir = QFileInfo{fileName}.path();
-  Settings::get().save();
+  settings.m_lastOpenDir = QFileInfo{fileName}.path();
+  settings.save();
 
   lineEdit->setText(fileName);
 
@@ -167,13 +171,14 @@ Tool::getSaveFileName(QString const &title,
     fullFilter += Q(";;");
   fullFilter += QY("All files") + Q(" (*)");
 
-  auto dir      = lineEdit->text().isEmpty() ? Settings::get().m_lastOutputDir.path() : QFileInfo{ lineEdit->text() }.path();
-  auto fileName = QFileDialog::getSaveFileName(this, title, dir, fullFilter);
+  auto &settings = mtx::gui::Util::Settings::get();
+  auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOutputDir.path() : QFileInfo{ lineEdit->text() }.path();
+  auto fileName  = QFileDialog::getSaveFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
     return fileName;
 
-  Settings::get().m_lastOutputDir = QFileInfo{fileName}.path();
-  Settings::get().save();
+  settings.m_lastOutputDir = QFileInfo{fileName}.path();
+  settings.save();
 
   lineEdit->setText(fileName);
 

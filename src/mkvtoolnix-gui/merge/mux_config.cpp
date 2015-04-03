@@ -329,13 +329,13 @@ MuxConfig::buildMkvmergeOptions()
   const {
   auto options = QStringList{};
 
-  auto &settings = Settings::get();
+  auto &settings = mtx::gui::Util::Settings::get();
 
   // TODO: buildMkvmergeOptions get ui locale from prefs
   // if (!preferences.m_uiLocale.isEmpty())
   //   options << Q("--ui-language") << settings.m_uiLocale;
 
-  if (Settings::NormalPriority != settings.m_priority)
+  if (mtx::gui::Util::Settings::NormalPriority != settings.m_priority)
     options << Q("--prioriy") << settings.getPriorityAsString();
 
   options << Q("--output") << m_destination;

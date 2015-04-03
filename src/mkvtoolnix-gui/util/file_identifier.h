@@ -1,5 +1,5 @@
-#ifndef MTX_MKVTOOLNIX_GUI_FILE_IDENTIFIER_H
-#define MTX_MKVTOOLNIX_GUI_FILE_IDENTIFIER_H
+#ifndef MTX_MKVTOOLNIX_GUI_UTIL_FILE_IDENTIFIER_H
+#define MTX_MKVTOOLNIX_GUI_UTIL_FILE_IDENTIFIER_H
 
 #include "common/common_pch.h"
 
@@ -7,6 +7,8 @@
 #include <QWidget>
 
 #include "mkvtoolnix-gui/merge/source_file.h"
+
+namespace mtx { namespace gui { namespace Util {
 
 class FileIdentifier: public QObject {
   Q_OBJECT;
@@ -41,4 +43,6 @@ public:
   virtual mtx::gui::Merge::SourceFilePtr const &file() const;
 };
 
-#endif // MTX_MKVTOOLNIX_GUI_FILE_IDENTIFIER_H
+}}}
+
+#endif // MTX_MKVTOOLNIX_GUI_UTIL_FILE_IDENTIFIER_H
