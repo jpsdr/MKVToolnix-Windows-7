@@ -79,6 +79,7 @@ enum class dts_type_e {
   , high_resolution
   , master_audio
   , express
+  , es
 };
 
 enum class source_pcm_resolution_e {
