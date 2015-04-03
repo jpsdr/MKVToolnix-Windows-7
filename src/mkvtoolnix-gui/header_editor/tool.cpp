@@ -11,6 +11,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/header_editor/tool.h"
 #include "mkvtoolnix-gui/forms/main_window.h"
+#include "mkvtoolnix-gui/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
@@ -114,18 +115,14 @@ Tool::openFile(QString const &fileName) {
     return;
   }
 
-  // m_e_segment_info.reset();
-  // m_e_tracks.reset();
-
   auto analyzer = std::make_unique<QtKaxAnalyzer>(this, fileName);
 
-  if (!analyzer->process(kax_analyzer_c::parse_mode_full)) {
+  if (!analyzer->process(kax_analyzer_c::parse_mode_fast)) {
     QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(fileName));
     return;
   }
 
-  // ui->headerEditors->addTab(new HeaderEditorTab{fileName, std::move(analyzer)}, QFileInfo{fileName}.fileName());
-  ui->headerEditors->addTab(new QWidget{}, QFileInfo{fileName}.fileName());
+  ui->headerEditors->addTab(new Tab{this, fileName, std::move(analyzer)}, QFileInfo{fileName}.fileName());
 
   showHeaderEditorsWidget();
 

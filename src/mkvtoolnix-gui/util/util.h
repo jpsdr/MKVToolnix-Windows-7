@@ -38,6 +38,7 @@ enum MtxGuiRoles {
   SourceFileRole = Qt::UserRole + 1,
   TrackRole,
   JobIdRole,
+  HeaderEditorPageIdRole,
 };
 
 void resizeViewColumnsToContents(QTreeView *view);
