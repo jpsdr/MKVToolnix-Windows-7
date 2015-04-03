@@ -63,7 +63,7 @@ signals:
   void progressChanged(unsigned int progress, unsigned int totalProgress);
 
 public slots:
-  void onStatusChanged(uint64_t id, Job::Status status);
+  void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status status);
   void onProgressChanged(uint64_t id, unsigned int progress);
 
 protected:

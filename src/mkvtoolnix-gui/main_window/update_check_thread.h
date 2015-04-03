@@ -26,11 +26,15 @@ public:
 
 signals:
   void checkStarted();
-  void checkFinished(UpdateCheckStatus status, mtx_release_version_t release);
+  void checkFinished(mtx::gui::UpdateCheckStatus status, mtx_release_version_t release);
   void releaseInformationRetrieved(std::shared_ptr<pugi::xml_document> releasesInfo);
 };
 
 }}
+
+Q_DECLARE_METATYPE(mtx::gui::UpdateCheckStatus);
+Q_DECLARE_METATYPE(mtx_release_version_t);
+Q_DECLARE_METATYPE(std::shared_ptr<pugi::xml_document>);
 
 #endif  // HAVE_CURL_EASY_H
 #endif  // MTX_MKVTOOLNIX_GUI_MAIN_WINDOW_UPDATE_CHECK_THREAD_H

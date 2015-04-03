@@ -125,8 +125,8 @@ Model::add(JobPtr const &job) {
 
   invisibleRootItem()->appendRow(createRow(*job));
 
-  connect(job.get(), SIGNAL(progressChanged(uint64_t,unsigned int)), this, SLOT(onProgressChanged(uint64_t,unsigned int)));
-  connect(job.get(), SIGNAL(statusChanged(uint64_t,Job::Status)),    this, SLOT(onStatusChanged(uint64_t,Job::Status)));
+  connect(job.get(), SIGNAL(progressChanged(uint64_t,unsigned int)),              this, SLOT(onProgressChanged(uint64_t,unsigned int)));
+  connect(job.get(), SIGNAL(statusChanged(uint64_t,mtx::gui::Jobs::Job::Status)), this, SLOT(onStatusChanged(uint64_t,mtx::gui::Jobs::Job::Status)));
 
   startNextAutoJob();
 }

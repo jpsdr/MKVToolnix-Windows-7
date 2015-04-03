@@ -17,7 +17,7 @@ Job::Job(Status status)
   , m_exitCode{std::numeric_limits<unsigned int>::max()}
   , m_mutex{QMutex::Recursive}
 {
-  connect(this, SIGNAL(lineRead(const QString&,Job::LineType)), this, SLOT(addLineToInternalLogs(const QString&,Job::LineType)));
+  connect(this, SIGNAL(lineRead(const QString&,mtx::gui::Jobs::Job::LineType)), this, SLOT(addLineToInternalLogs(const QString&,mtx::gui::Jobs::Job::LineType)));
 }
 
 Job::~Job() {

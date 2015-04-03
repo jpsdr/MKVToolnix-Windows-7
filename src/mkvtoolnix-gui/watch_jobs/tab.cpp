@@ -24,9 +24,9 @@ Tab::~Tab() {
 
 void
 Tab::connectToJob(Jobs::Job const &job) {
-  connect(&job, SIGNAL(statusChanged(uint64_t,Jobs::Job::Status)),    this, SLOT(onStatusChanged(uint64_t,Jobs::Job::Status)));
+  connect(&job, SIGNAL(statusChanged(uint64_t,mtx::gui::Jobs::Job::Status)),    this, SLOT(onStatusChanged(uint64_t,mtx::gui::Jobs::Job::Status)));
   connect(&job, SIGNAL(progressChanged(uint64_t,unsigned int)),                 this, SLOT(onProgressChanged(uint64_t,unsigned int)));
-  connect(&job, SIGNAL(lineRead(const QString&,Jobs::Job::LineType)), this, SLOT(onLineRead(const QString&,Jobs::Job::LineType)));
+  connect(&job, SIGNAL(lineRead(const QString&,mtx::gui::Jobs::Job::LineType)), this, SLOT(onLineRead(const QString&,mtx::gui::Jobs::Job::LineType)));
 }
 
 void

@@ -75,13 +75,13 @@ protected:
 public slots:
   void setStatus(Job::Status status);
   void setProgress(unsigned int progress);
-  void addLineToInternalLogs(QString const &line, Job::LineType type);
+  void addLineToInternalLogs(QString const &line, mtx::gui::Jobs::Job::LineType type);
 
 signals:
-  void statusChanged(uint64_t id, Job::Status status);
+  void statusChanged(uint64_t id, mtx::gui::Jobs::Job::Status status);
   void progressChanged(uint64_t id, unsigned int progress);
 
-  void lineRead(QString const &line, Job::LineType type);
+  void lineRead(QString const &line, mtx::gui::Jobs::Job::LineType type);
 
 public:                         // static
   static QString displayableStatus(Status status);
@@ -89,5 +89,8 @@ public:                         // static
 };
 
 }}}
+
+Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::LineType);
+Q_DECLARE_METATYPE(mtx::gui::Jobs::Job::Status);
 
 #endif  // MTX_MKVTOOLNIX_GUI_JOBS_JOB_H

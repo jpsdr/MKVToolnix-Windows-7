@@ -33,7 +33,7 @@ public:
 
 public slots:
   void setReleaseInformation(std::shared_ptr<pugi::xml_document> releasesInfo);
-  void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t releaseVersion);
+  void updateCheckFinished(mtx::gui::UpdateCheckStatus status, mtx_release_version_t releaseVersion);
   void visitDownloadLocation();
 };
 
