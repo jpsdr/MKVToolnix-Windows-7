@@ -33,11 +33,15 @@ Tab::Tab(QWidget *parent,
   , ui{new Ui::Tab}
   , m_fileName{fileName}
   , m_model{new PageModel{this}}
+  , m_expandAllAction{new QAction{this}}
+  , m_collapseAllAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
 
   setupUi();
+
+  retranslateUi();
 }
 
 Tab::~Tab() {
@@ -81,10 +85,14 @@ Tab::setupUi() {
   ui->directory->setText(info.path());
 
   ui->elements->setModel(m_model);
+  ui->elements->addAction(m_expandAllAction);
+  ui->elements->addAction(m_collapseAllAction);
 
   m_pageContainerLayout = new QVBoxLayout{ui->pageContainer};
 
   connect(ui->elements->selectionModel(), &QItemSelectionModel::currentChanged, this, &Tab::selectionChanged);
+  connect(m_expandAllAction,              &QAction::triggered,                  this, &Tab::expandAll);
+  connect(m_collapseAllAction,            &QAction::triggered,                  this, &Tab::collapseAll);
 }
 
 void
@@ -104,6 +112,9 @@ void
 Tab::retranslateUi() {
   ui->fileNameLabel->setText(QY("File name:"));
   ui->directoryLabel->setText(QY("Directory:"));
+
+  m_expandAllAction->setText(QY("&Expand all"));
+  m_collapseAllAction->setText(QY("&Collapse all"));
 
   auto &pages = m_model->getPages();
   for (auto const &page : pages)
@@ -328,6 +339,22 @@ Tab::validate() {
   selectionChanged(pageIdx, QModelIndex{});
 
   QMessageBox::warning(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
+}
+
+void
+Tab::expandAll() {
+  expandCollapseAll(true);
+}
+
+void
+Tab::collapseAll() {
+  expandCollapseAll(false);
+}
+
+void
+Tab::expandCollapseAll(bool expand) {
+  for (auto const &page : m_model->getTopLevelPages())
+    ui->elements->setExpanded(page->m_pageIdx, expand);
 }
 
 }}}

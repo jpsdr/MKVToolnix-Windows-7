@@ -6,6 +6,7 @@
 #include "common/qt_kax_analyzer.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 
+class QAction;
 class QVBoxLayout;
 
 namespace mtx { namespace gui { namespace HeaderEditor {
@@ -25,6 +26,8 @@ protected:
   QString m_fileName;
   std::unique_ptr<QtKaxAnalyzer> m_analyzer;
   PageModel *m_model;
+
+  QAction *m_expandAllAction, *m_collapseAllAction;
 
   std::shared_ptr<EbmlElement> m_eSegmentInfo, m_eTracks;
 
@@ -47,6 +50,8 @@ signals:
 public slots:
   virtual void selectionChanged(QModelIndex const &current, QModelIndex const &previous);
   virtual void load();
+  virtual void expandAll();
+  virtual void collapseAll();
 
 protected:
   void setupUi();
@@ -55,6 +60,7 @@ protected:
   void populateTree();
   void resetData();
   void doModifications();
+  void expandCollapseAll(bool expand);
 };
 
 }}}
