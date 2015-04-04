@@ -53,14 +53,14 @@ public:
   virtual void init();
 
   virtual QWidget *createInputControl() = 0;
-  virtual QString getOriginalValueAsString() = 0;
-  virtual QString getCurrentValueAsString() = 0;
+  virtual QString getOriginalValueAsString() const = 0;
+  virtual QString getCurrentValueAsString() const = 0;
   virtual void resetValue() = 0;
-  virtual bool validateValue() = 0;
+  virtual bool validateValue() const = 0;
   virtual void copyValueToElement() = 0;
 
-  virtual bool hasThisBeenModified() override;
-  virtual bool validateThis() override;
+  virtual bool hasThisBeenModified() const override;
+  virtual bool validateThis() const override;
   virtual void modifyThis() override;
   virtual void retranslateUi() override;
 

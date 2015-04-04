@@ -31,6 +31,8 @@ public:
   QList<PageBase *> &getTopLevelPages();
 
   void reset();
+
+  QModelIndex validate() const;
 };
 
 }}}

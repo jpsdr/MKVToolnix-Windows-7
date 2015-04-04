@@ -47,12 +47,14 @@ EmptyPage::setupUi() {
 }
 
 bool
-EmptyPage::hasThisBeenModified() {
+EmptyPage::hasThisBeenModified()
+  const {
   return false;
 }
 
 bool
-EmptyPage::validateThis() {
+EmptyPage::validateThis()
+  const {
   return true;
 }
 

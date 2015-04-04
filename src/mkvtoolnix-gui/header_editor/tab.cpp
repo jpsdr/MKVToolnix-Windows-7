@@ -177,4 +177,21 @@ Tab::handleTracks(kax_analyzer_data_c &data) {
   // TODO: Tab::handleTracks
 }
 
+bool
+Tab::validate() {
+  auto pageIdx = m_model->validate();
+
+  if (!pageIdx.isValid()) {
+    QMessageBox::information(this, QY("Header validation"), QY("All header values are OK."));
+    return true;
+  }
+
+  ui->elements->selectionModel()->select(pageIdx, QItemSelectionModel::ClearAndSelect);
+  itemSelected(pageIdx);
+
+  QMessageBox::warning(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
+
+  return false;
+}
+
 }}}

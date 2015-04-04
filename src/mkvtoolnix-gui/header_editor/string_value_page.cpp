@@ -34,12 +34,14 @@ StringValuePage::createInputControl() {
 }
 
 QString
-StringValuePage::getOriginalValueAsString() {
+StringValuePage::getOriginalValueAsString()
+  const {
   return m_originalValue;
 }
 
 QString
-StringValuePage::getCurrentValueAsString() {
+StringValuePage::getCurrentValueAsString()
+  const {
   return m_leText->text();
 }
 
@@ -49,7 +51,8 @@ StringValuePage::resetValue() {
 }
 
 bool
-StringValuePage::validateValue() {
+StringValuePage::validateValue()
+  const {
   return true;
 }
 

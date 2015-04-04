@@ -46,10 +46,11 @@ void
 Tool::setupMenu() {
   auto mwUi = MainWindow::get()->getUi();
 
-  connect(mwUi->actionHeaderEditorOpen,   SIGNAL(triggered()), this, SLOT(selectFileToOpen()));
-  connect(mwUi->actionHeaderEditorSave,   SIGNAL(triggered()), this, SLOT(save()));
-  connect(mwUi->actionHeaderEditorReload, SIGNAL(triggered()), this, SLOT(reload()));
-  connect(mwUi->actionHeaderEditorClose,  SIGNAL(triggered()), this, SLOT(closeCurrentTab()));
+  connect(mwUi->actionHeaderEditorOpen,     SIGNAL(triggered()), this, SLOT(selectFileToOpen()));
+  connect(mwUi->actionHeaderEditorSave,     SIGNAL(triggered()), this, SLOT(save()));
+  connect(mwUi->actionHeaderEditorValidate, SIGNAL(triggered()), this, SLOT(validate()));
+  connect(mwUi->actionHeaderEditorReload,   SIGNAL(triggered()), this, SLOT(reload()));
+  connect(mwUi->actionHeaderEditorClose,    SIGNAL(triggered()), this, SLOT(closeCurrentTab()));
 }
 
 void
@@ -144,7 +145,8 @@ Tool::reload() {
     return;
 
   if (tab->hasBeenModified()) {
-    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()));
+    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
+                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes)
       return;
   }
@@ -153,14 +155,28 @@ Tool::reload() {
 }
 
 void
+Tool::validate() {
+  auto tab = currentTab();
+  if (tab)
+    tab->validate();
+}
+
+void
 Tool::closeTab(int index) {
   if ((0  > index) || (ui->headerEditors->count() <= index))
     return;
 
-  auto widget = ui->headerEditors->widget(index);
-  // TODO: Tool::closeTab: test if modified
+  auto tab = static_cast<Tab *>(ui->headerEditors->widget(index));
+
+  if (tab->hasBeenModified()) {
+    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
+                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    if (answer != QMessageBox::Yes)
+      return;
+  }
+
   ui->headerEditors->removeTab(index);
-  delete widget;
+  delete tab;
 
   showHeaderEditorsWidget();
 }

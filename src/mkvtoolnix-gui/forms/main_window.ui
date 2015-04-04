@@ -85,6 +85,7 @@
     <addaction name="actionHeaderEditorOpen"/>
     <addaction name="actionHeaderEditorReload"/>
     <addaction name="separator"/>
+    <addaction name="actionHeaderEditorValidate"/>
     <addaction name="actionHeaderEditorSave"/>
     <addaction name="separator"/>
     <addaction name="actionHeaderEditorClose"/>
@@ -351,6 +352,15 @@
    </property>
    <property name="shortcut">
     <string>Alt+6</string>
+   </property>
+  </action>
+  <action name="actionHeaderEditorValidate">
+   <property name="icon">
+    <iconset resource="../qt_resources.qrc">
+     <normaloff>:/icons/16x16/dialog-ok-apply.png</normaloff>:/icons/16x16/dialog-ok-apply.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Validate values</string>
    </property>
   </action>
  </widget>

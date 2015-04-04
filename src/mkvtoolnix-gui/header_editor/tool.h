@@ -37,6 +37,7 @@ public slots:
   virtual void toolShown() override;
   virtual void selectFileToOpen();
   virtual void save();
+  virtual void validate();
   virtual void closeTab(int index);
   virtual void closeCurrentTab();
   virtual void closeSendingTab();

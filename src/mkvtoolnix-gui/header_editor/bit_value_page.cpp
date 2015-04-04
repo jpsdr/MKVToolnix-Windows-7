@@ -37,7 +37,8 @@ BitValuePage::createInputControl() {
 }
 
 QString
-BitValuePage::getOriginalValueAsString() {
+BitValuePage::getOriginalValueAsString()
+  const {
   auto value = std::string{};
   auto data  = m_originalValue.data();
 
@@ -49,7 +50,8 @@ BitValuePage::getOriginalValueAsString() {
 }
 
 QString
-BitValuePage::getCurrentValueAsString() {
+BitValuePage::getCurrentValueAsString()
+  const {
   return m_leText->text();
 }
 
@@ -59,7 +61,8 @@ BitValuePage::resetValue() {
 }
 
 bool
-BitValuePage::validateValue() {
+BitValuePage::validateValue()
+  const {
   try {
     auto bitValue = bitvalue_c{to_utf8(m_leText->text()), m_bitLength};
   } catch (...) {

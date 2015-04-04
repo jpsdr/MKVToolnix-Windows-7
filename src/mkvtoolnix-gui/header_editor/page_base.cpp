@@ -22,7 +22,8 @@ PageBase::~PageBase() {
 }
 
 bool
-PageBase::hasBeenModified() {
+PageBase::hasBeenModified()
+  const {
   if (hasThisBeenModified())
     return true;
 
@@ -42,7 +43,8 @@ PageBase::doModifications() {
 }
 
 QModelIndex
-PageBase::validate() {
+PageBase::validate()
+  const {
   if (!validateThis())
     return m_pageIdx;
 
@@ -56,7 +58,8 @@ PageBase::validate() {
 }
 
 QString
-PageBase::getTitle() {
+PageBase::getTitle()
+  const {
   return Q(m_title.get_translated());
 }
 

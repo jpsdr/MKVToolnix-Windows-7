@@ -203,12 +203,14 @@ ValuePage::onAddOrRemoveChecked() {
 }
 
 bool
-ValuePage::hasThisBeenModified() {
+ValuePage::hasThisBeenModified()
+  const {
   return m_cbAddOrRemove->isChecked() || (getCurrentValueAsString() != getOriginalValueAsString());
 }
 
 bool
-ValuePage::validateThis() {
+ValuePage::validateThis()
+  const {
   if (!m_input->isEnabled())
     return true;
   return validateValue();

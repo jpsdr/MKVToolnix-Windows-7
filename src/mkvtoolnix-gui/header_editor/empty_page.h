@@ -23,8 +23,8 @@ public:
   EmptyPage(Tab &parent, translatable_string_c const &title, translatable_string_c const &content);
   virtual ~EmptyPage();
 
-  virtual bool hasThisBeenModified() override;
-  virtual bool validateThis() override;
+  virtual bool hasThisBeenModified() const override;
+  virtual bool validateThis() const override;
   virtual void modifyThis() override;
   virtual void retranslateUi() override;
 

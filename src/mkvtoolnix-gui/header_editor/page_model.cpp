@@ -71,4 +71,16 @@ PageModel::reset() {
   endResetModel();
 }
 
+QModelIndex
+PageModel::validate()
+  const {
+  for (auto page : m_topLevelPages) {
+    auto result = page->validate();
+    if (result.isValid())
+      return result;
+  }
+
+  return QModelIndex{};
+}
+
 }}}

@@ -31,14 +31,14 @@ public:
   PageBase(Tab &parent, translatable_string_c const &title);
   virtual ~PageBase();
 
-  virtual bool hasBeenModified();
-  virtual bool hasThisBeenModified() = 0;
+  virtual bool hasBeenModified() const;
+  virtual bool hasThisBeenModified() const = 0;
   virtual void doModifications();
   virtual void modifyThis() = 0;
-  virtual QModelIndex validate();
-  virtual bool validateThis() = 0;
+  virtual QModelIndex validate() const;
+  virtual bool validateThis() const = 0;
   virtual void retranslateUi() = 0;
-  virtual QString getTitle();
+  virtual QString getTitle() const;
 };
 
 }}}

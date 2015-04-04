@@ -23,10 +23,10 @@ public:
   virtual ~BitValuePage();
 
   virtual QWidget *createInputControl() override;
-  virtual QString getOriginalValueAsString() override;
-  virtual QString getCurrentValueAsString() override;
+  virtual QString getOriginalValueAsString() const override;
+  virtual QString getCurrentValueAsString() const override;
   virtual void resetValue() override;
-  virtual bool validateValue() override;
+  virtual bool validateValue() const override;
   virtual void copyValueToElement() override;
 };
 

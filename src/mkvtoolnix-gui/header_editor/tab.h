@@ -39,6 +39,7 @@ public:
   virtual QWidget *getPageContainer() const;
   virtual void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
   virtual QString const &getFileName() const;
+  virtual bool validate();
 
 signals:
   void removeThisTab();
