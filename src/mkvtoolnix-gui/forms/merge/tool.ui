@@ -20,7 +20,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="inputTab">
       <attribute name="title">
@@ -556,7 +556,7 @@
                   <item row="1" column="0">
                    <widget class="QRadioButton" name="setDisplayWidthHeight">
                     <property name="text">
-                     <string>Display width/height:</string>
+                     <string>Display width/&amp;height:</string>
                     </property>
                    </widget>
                   </item>
@@ -1041,7 +1041,7 @@
               <item row="1" column="0">
                <widget class="QLabel" name="previousSegmentUIDLabel">
                 <property name="text">
-                 <string>Previous segment UID:</string>
+                 <string>Pre&amp;vious segment UID:</string>
                 </property>
                 <property name="buddy">
                  <cstring>previousSegmentUID</cstring>
@@ -1054,7 +1054,7 @@
               <item row="2" column="0">
                <widget class="QLabel" name="nextSegmentUIDLabel">
                 <property name="text">
-                 <string>Next segment UID:</string>
+                 <string>Ne&amp;xt segment UID:</string>
                 </property>
                 <property name="buddy">
                  <cstring>nextSegmentUID</cstring>
@@ -1221,9 +1221,12 @@
         </widget>
        </item>
        <item>
-        <widget class="QTreeView" name="attachments">
+        <widget class="AttachmentsTreeView" name="attachments">
          <property name="contextMenuPolicy">
           <enum>Qt::ActionsContextMenu</enum>
+         </property>
+         <property name="acceptDrops">
+          <bool>true</bool>
          </property>
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
@@ -1378,6 +1381,13 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>AttachmentsTreeView</class>
+   <extends>QTreeView</extends>
+   <header>mkvtoolnix-gui/merge/attachments_tree_view.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>mainTab</tabstop>
   <tabstop>files</tabstop>

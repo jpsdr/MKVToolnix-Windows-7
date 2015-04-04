@@ -4,6 +4,7 @@
 
 #include "common/extern_data.h"
 #include "common/qt.h"
+#include "mkvtoolnix-gui/merge/attachments_tree_view.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/forms/merge/tool.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -34,6 +35,7 @@ Tool::setupAttachmentsControls() {
   ui->attachmentStyle   ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   // Signals & slots
+  connect(ui->attachments,                   &AttachmentsTreeView::filesDropped,                                       this, &Tool::addAttachments);
   connect(ui->attachments->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onAttachmentSelectionChanged()));
   connect(m_addAttachmentsAction,            SIGNAL(triggered()),                                                      this, SLOT(onAddAttachments()));
   connect(m_removeAttachmentsAction,         SIGNAL(triggered()),                                                      this, SLOT(onRemoveAttachments()));
@@ -85,11 +87,7 @@ Tool::onAttachmentStyleChanged(int newValue) {
 }
 
 void
-Tool::onAddAttachments() {
-  auto fileNames = selectAttachmentsToAdd();
-  if (fileNames.isEmpty())
-    return;
-
+Tool::addAttachments(QStringList const &fileNames) {
   QList<AttachmentPtr> attachmentsToAdd;
   for (auto &fileName : fileNames) {
     attachmentsToAdd << std::make_shared<Attachment>(fileName);
@@ -98,6 +96,13 @@ Tool::onAddAttachments() {
 
   m_attachmentsModel->addAttachments(attachmentsToAdd);
   resizeAttachmentsColumnsToContents();
+}
+
+void
+Tool::onAddAttachments() {
+  auto fileNames = selectAttachmentsToAdd();
+  if (!fileNames.isEmpty())
+    addAttachments(fileNames);
 }
 
 QStringList

@@ -132,6 +132,7 @@ public slots:
   virtual void onAttachmentStyleChanged(int newValue);
   virtual void onAddAttachments();
   virtual void onRemoveAttachments();
+  virtual void addAttachments(QStringList const &fileNames);
 
   virtual void resizeAttachmentsColumnsToContents() const;
 
