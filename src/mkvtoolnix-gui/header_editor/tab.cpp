@@ -59,6 +59,20 @@ Tab::resetData() {
 
 void
 Tab::load() {
+  auto selectedIdx         = ui->elements->selectionModel()->currentIndex();
+  auto selectedTopLevelRow = !selectedIdx.isValid()         ? -1
+                           : selectedIdx.parent().isValid() ? selectedIdx.parent().row()
+                           :                                  selectedIdx.row();
+  auto selected2ndLevelRow = !selectedIdx.isValid()         ? -1
+                           : selectedIdx.parent().isValid() ? selectedIdx.row()
+                           :                                  -1;
+  auto expansionStatus     = QHash<QString, bool>{};
+
+  for (auto const &page : m_model->getTopLevelPages()) {
+    auto key             = page == m_segmentinfoPage ? Q("segmentinfo") : QString::number(static_cast<TrackTypePage &>(*page).m_trackNumber);
+    expansionStatus[key] = ui->elements->isExpanded(page->m_pageIdx);
+  }
+
   resetData();
 
   if (!kax_analyzer_c::probe(to_utf8(m_fileName))) {
@@ -80,6 +94,21 @@ Tab::load() {
   populateTree();
 
   m_analyzer->close_file();
+
+  for (auto const &page : m_model->getTopLevelPages()) {
+    auto key = page == m_segmentinfoPage ? Q("segmentinfo") : QString::number(static_cast<TrackTypePage &>(*page).m_trackNumber);
+    ui->elements->setExpanded(page->m_pageIdx, expansionStatus[key]);
+  }
+
+  if (!selectedIdx.isValid() || (-1 == selectedTopLevelRow))
+    return;
+
+  selectedIdx = m_model->index(selectedTopLevelRow, 0);
+  if (-1 != selected2ndLevelRow)
+    selectedIdx = m_model->index(selected2ndLevelRow, 0, selectedIdx);
+
+  ui->elements->selectionModel()->select(selectedIdx, QItemSelectionModel::ClearAndSelect);
+  selectionChanged(selectedIdx, QModelIndex{});
 }
 
 void
