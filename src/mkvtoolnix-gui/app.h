@@ -4,11 +4,15 @@
 #include "common/common_pch.h"
 
 #include <QApplication>
+#include <QStringList>
 
 namespace mtx { namespace gui {
 
 class App : public QApplication {
   Q_OBJECT;
+
+protected:
+  static QStringList ms_iso639LanguageDescriptions, ms_iso639Language2Codes;
 
 public:
   App(int &argc, char **argv);
@@ -21,6 +25,11 @@ public slots:
 
 public:
   static App *instance();
+
+  static QStringList const &getIso639LanguageDescriptions();
+  static QStringList const &getIso639Language2Codes();
+  static void initializeLanguageLists();
+  static void reinitializeLanguageLists();
 };
 
 }}

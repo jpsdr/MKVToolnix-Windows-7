@@ -4,6 +4,7 @@
 #include "common/iso639.h"
 #include "common/qt.h"
 #include "common/stereo_mode.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
 #include "mkvtoolnix-gui/forms/merge/tool.h"
@@ -66,17 +67,14 @@ Tool::setupInputControls() {
   ui->tracks->setModel(m_tracksModel);
 
   // Track & chapter language
-  std::vector<std::pair<QString, QString> > languages;
-  for (auto &language : iso639_languages)
-    languages.push_back(std::make_pair(QString{"%1 (%2)"}.arg(to_qs(language.english_name)).arg(to_qs(language.iso639_2_code)), to_qs(language.iso639_2_code)));
-
-  brng::sort(languages, [](std::pair<QString, QString> const &a, std::pair<QString, QString> const &b) { return a.first < b.first; });
+  auto &languageDescriptions = App::getIso639LanguageDescriptions();
+  auto &languageCodes        = App::getIso639Language2Codes();
 
   ui->chapterLanguage->addItem(Q(""), Q(""));
 
-  for (auto &language: languages) {
-    ui->trackLanguage->addItem(language.first, language.second);
-    ui->chapterLanguage->addItem(language.first, language.second);
+  for (auto idx = 0, count = languageDescriptions.count(); idx < count; ++idx) {
+    ui->trackLanguage->addItem(languageDescriptions[idx], languageCodes[idx]);
+    ui->chapterLanguage->addItem(languageDescriptions[idx], languageCodes[idx]);
   }
 
   // Track & chapter character set
