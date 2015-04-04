@@ -20,12 +20,12 @@ protected:
   std::unique_ptr<Ui::TrackTypePage> ui;
 
 public:
-  uint64_t m_trackType, m_trackNumber, m_trackIdxMkvmerge;
-  KaxTrackEntry &m_trackEntry;
+  EbmlMaster &m_master;
+  uint64_t m_trackIdxMkvmerge, m_trackType, m_trackNumber;
   QString m_codecId;
 
 public:
-  TrackTypePage(Tab &parent, uint64_t trackIdxMkvmerge, ebml_element_cptr const &l1Element, KaxTrackEntry &trackEntry);
+  TrackTypePage(Tab &parent, EbmlMaster &master, uint64_t trackIdxMkvmerge);
   virtual ~TrackTypePage();
 
 public slots:

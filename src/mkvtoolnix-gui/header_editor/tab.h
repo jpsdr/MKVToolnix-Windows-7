@@ -45,7 +45,7 @@ signals:
   void removeThisTab();
 
 public slots:
-  virtual void itemSelected(QModelIndex idx);
+  virtual void selectionChanged(QModelIndex const &current, QModelIndex const &previous);
   virtual void load();
 
 protected:

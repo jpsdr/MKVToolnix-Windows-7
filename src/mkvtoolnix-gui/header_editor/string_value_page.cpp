@@ -27,10 +27,10 @@ StringValuePage::createInputControl() {
   if (m_element)
     m_originalValue = Q(static_cast<EbmlUnicodeString *>(m_element)->GetValue());
 
-  m_leText = new QLineEdit{this};
-  m_leText->setText(m_originalValue);
+  m_leValue = new QLineEdit{this};
+  m_leValue->setText(m_originalValue);
 
-  return m_leText;
+  return m_leValue;
 }
 
 QString
@@ -42,12 +42,12 @@ StringValuePage::getOriginalValueAsString()
 QString
 StringValuePage::getCurrentValueAsString()
   const {
-  return m_leText->text();
+  return m_leValue->text();
 }
 
 void
 StringValuePage::resetValue() {
-  m_leText->setText(m_originalValue);
+  m_leValue->setText(m_originalValue);
 }
 
 bool
@@ -58,7 +58,7 @@ StringValuePage::validateValue()
 
 void
 StringValuePage::copyValueToElement() {
-  static_cast<EbmlUnicodeString *>(m_element)->SetValue(to_wide(m_leText->text()));
+  static_cast<EbmlUnicodeString *>(m_element)->SetValue(to_wide(m_leValue->text()));
 }
 
 }}}

@@ -16,7 +16,7 @@ BitValuePage::BitValuePage(Tab &parent,
                            translatable_string_c const &title,
                            translatable_string_c const &description,
                            unsigned int bitLength)
-  : ValuePage{parent, topLevelPage, master, callbacks, ValueType::String, title, description}
+  : ValuePage{parent, topLevelPage, master, callbacks, ValueType::Binary, title, description}
   , m_originalValue{128}
   , m_bitLength{bitLength}
 {
@@ -30,10 +30,10 @@ BitValuePage::createInputControl() {
   if (m_element)
     m_originalValue = bitvalue_c{*static_cast<EbmlBinary *>(m_element)};
 
-  m_leText = new QLineEdit{this};
-  m_leText->setText(getOriginalValueAsString());
+  m_leValue = new QLineEdit{this};
+  m_leValue->setText(getOriginalValueAsString());
 
-  return m_leText;
+  return m_leValue;
 }
 
 QString
@@ -52,19 +52,19 @@ BitValuePage::getOriginalValueAsString()
 QString
 BitValuePage::getCurrentValueAsString()
   const {
-  return m_leText->text();
+  return m_leValue->text();
 }
 
 void
 BitValuePage::resetValue() {
-  m_leText->setText(getOriginalValueAsString());
+  m_leValue->setText(getOriginalValueAsString());
 }
 
 bool
 BitValuePage::validateValue()
   const {
   try {
-    auto bitValue = bitvalue_c{to_utf8(m_leText->text()), m_bitLength};
+    auto bitValue = bitvalue_c{to_utf8(m_leValue->text()), m_bitLength};
   } catch (...) {
     return false;
   }
@@ -74,7 +74,7 @@ BitValuePage::validateValue()
 
 void
 BitValuePage::copyValueToElement() {
-  auto bitValue = bitvalue_c{to_utf8(m_leText->text()), m_bitLength};
+  auto bitValue = bitvalue_c{to_utf8(m_leValue->text()), m_bitLength};
   static_cast<EbmlBinary *>(m_element)->CopyBuffer(bitValue.data(), m_bitLength / 8);
 }
 

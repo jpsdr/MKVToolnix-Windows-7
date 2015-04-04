@@ -14,7 +14,7 @@ class Tab;
 
 class BitValuePage: public ValuePage {
 public:
-  QLineEdit *m_leText{};
+  QLineEdit *m_leValue{};
   bitvalue_c m_originalValue;
   unsigned int m_bitLength;
 

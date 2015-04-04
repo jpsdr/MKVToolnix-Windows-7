@@ -10,16 +10,15 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 using namespace mtx::gui;
 
 TrackTypePage::TrackTypePage(Tab &parent,
-                             uint64_t trackIdxMkvmerge,
-                             ebml_element_cptr const &l1Element,
-                             KaxTrackEntry &trackEntry)
-  : TopLevelPage{parent, "", l1Element, true}
+                             EbmlMaster &master,
+                             uint64_t trackIdxMkvmerge)
+  : TopLevelPage{parent, "", true}
   , ui{new Ui::TrackTypePage}
-  , m_trackType{FindChildValue<KaxTrackType>(trackEntry)}
-  , m_trackNumber{FindChildValue<KaxTrackNumber>(trackEntry)}
+  , m_master{master}
   , m_trackIdxMkvmerge{trackIdxMkvmerge}
-  , m_trackEntry{trackEntry}
-  , m_codecId{Q(FindChildValue<KaxCodecID>(trackEntry))}
+  , m_trackType{FindChildValue<KaxTrackType>(m_master)}
+  , m_trackNumber{FindChildValue<KaxTrackNumber>(m_master)}
+  , m_codecId{Q(FindChildValue<KaxCodecID>(m_master))}
 {
   ui->setupUi(this);
 }

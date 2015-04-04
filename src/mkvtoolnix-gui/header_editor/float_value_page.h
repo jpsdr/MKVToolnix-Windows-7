@@ -1,5 +1,5 @@
-#ifndef MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_STRING_VALUE_PAGE_H
-#define MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_STRING_VALUE_PAGE_H
+#ifndef MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_FLOAT_VALUE_PAGE_H
+#define MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_FLOAT_VALUE_PAGE_H
 
 #include "common/common_pch.h"
 
@@ -11,14 +11,14 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 
 class Tab;
 
-class StringValuePage: public ValuePage {
+class FloatValuePage: public ValuePage {
 public:
   QLineEdit *m_leValue{};
-  QString m_originalValue;
+  double m_originalValue{};
 
 public:
-  StringValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
-  virtual ~StringValuePage();
+  FloatValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
+  virtual ~FloatValuePage();
 
   virtual QWidget *createInputControl() override;
   virtual QString getOriginalValueAsString() const override;
@@ -30,4 +30,4 @@ public:
 
 }}}
 
-#endif  // MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_STRING_VALUE_PAGE_H
+#endif  // MTX_MKVTOOLNIX_GUI_HEADER_EDITOR_FLOAT_VALUE_PAGE_H

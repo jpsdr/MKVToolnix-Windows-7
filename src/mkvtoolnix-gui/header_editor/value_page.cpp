@@ -151,7 +151,6 @@ ValuePage::retranslateUi() {
   auto type = ValueType::AsciiString     == m_valueType ? QY("ASCII string (no special chars like Umlaute etc)")
             : ValueType::String          == m_valueType ? QY("String")
             : ValueType::UnsignedInteger == m_valueType ? QY("Unsigned integer")
-            : ValueType::SignedInteger   == m_valueType ? QY("Signed integer")
             : ValueType::Float           == m_valueType ? QY("Floating point number")
             : ValueType::Binary          == m_valueType ? QY("Binary (displayed as hex numbers)")
             : ValueType::Bool            == m_valueType ? QY("Boolean (yes/no, on/off etc)")
@@ -221,28 +220,15 @@ ValuePage::modifyThis() {
   if (!hasThisBeenModified())
     return;
 
-  auto actualMaster = static_cast<EbmlMaster *>(nullptr);
-  if (m_subMasterCallbacks) {
-    actualMaster = static_cast<EbmlMaster *>(find_ebml_element_by_id(&m_master, m_subMasterCallbacks->GlobalId));
-
-    if (!actualMaster) {
-      actualMaster = static_cast<EbmlMaster *>(&m_subMasterCallbacks->Create());
-      m_master.PushElement(*actualMaster);
-    }
-  }
-
-  if (!actualMaster)
-    actualMaster = &m_master;
-
   if (m_present && m_cbAddOrRemove->isChecked()) {
-    for (auto i = 0u; actualMaster->ListSize() > i; ++i) {
-      if ((*actualMaster)[i]->Generic().GlobalId != m_callbacks.GlobalId)
+    for (auto i = 0u; m_master.ListSize() > i; ++i) {
+      if (m_master[i]->Generic().GlobalId != m_callbacks.GlobalId)
         continue;
 
-      auto e = (*actualMaster)[i];
+      auto e = m_master[i];
       delete e;
 
-      actualMaster->Remove(i);
+      m_master.Remove(i);
 
       break;
     }
@@ -252,19 +238,10 @@ ValuePage::modifyThis() {
 
   if (!m_present) {
     m_element = &m_callbacks.Create();
-    actualMaster->PushElement(*m_element);
+    m_master.PushElement(*m_element);
   }
 
   copyValueToElement();
-}
-
-void
-ValuePage::setSubMasterCallbacks(EbmlCallbacks const &callbacks) {
-  m_subMasterCallbacks = &callbacks;
-
-  auto subMaster = static_cast<EbmlMaster *>(find_ebml_element_by_id(&m_master, m_subMasterCallbacks->GlobalId));
-  if (subMaster)
-    m_element = find_ebml_element_by_id(subMaster, m_callbacks.GlobalId);
 }
 
 }}}

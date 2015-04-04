@@ -21,7 +21,6 @@ public:
     AsciiString,
     String,
     UnsignedInteger,
-    SignedInteger,
     Float,
     Binary,
     Bool,
@@ -30,7 +29,6 @@ public:
 public:
   EbmlMaster &m_master;
   EbmlCallbacks const &m_callbacks;
-  EbmlCallbacks const *m_subMasterCallbacks{};
 
   translatable_string_c m_description;
 
@@ -63,8 +61,6 @@ public:
   virtual bool validateThis() const override;
   virtual void modifyThis() override;
   virtual void retranslateUi() override;
-
-  virtual void setSubMasterCallbacks(EbmlCallbacks const &callbacks);
 
 public slots:
   virtual void onResetClicked();

@@ -24,7 +24,6 @@ public:
   QList<PageBase *> m_children;
   Tab &m_parent;
   QModelIndex m_pageIdx;
-  ebml_element_cptr m_l1Element;
   translatable_string_c m_title;
 
 public:
