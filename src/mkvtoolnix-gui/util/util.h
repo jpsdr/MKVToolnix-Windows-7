@@ -39,6 +39,7 @@ enum MtxGuiRoles {
   TrackRole,
   JobIdRole,
   HeaderEditorPageIdRole,
+  AttachmentRole,
 };
 
 void resizeViewColumnsToContents(QTreeView *view);

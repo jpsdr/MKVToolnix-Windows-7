@@ -5,16 +5,16 @@
 
 #include "mkvtoolnix-gui/merge/attachment.h"
 
-#include <QAbstractItemModel>
 #include <QItemSelection>
 #include <QList>
+#include <QStandardItemModel>
 
 namespace mtx { namespace gui { namespace Merge {
 
 class AttachmentModel;
 using AttachmentModelPtr = std::shared_ptr<AttachmentModel>;
 
-class AttachmentModel : public QAbstractItemModel {
+class AttachmentModel : public QStandardItemModel {
   Q_OBJECT;
 
 protected:
@@ -25,38 +25,33 @@ protected:
   static int const SourceFileColumn  = 4;
   static int const NumberOfColumns   = 5;
 
-  QList<AttachmentPtr> *m_attachments;
-
-  debugging_option_c m_debug;
-
 public:
-  AttachmentModel(QObject *parent, QList<AttachmentPtr> &attachments);
+  AttachmentModel(QObject *parent);
   virtual ~AttachmentModel();
 
-  virtual void setAttachments(QList<AttachmentPtr> &attachments);
-
-  virtual QModelIndex index(int row, int column, QModelIndex const &parent) const;
-  virtual QModelIndex parent(QModelIndex const &child) const;
-
-  virtual int rowCount(QModelIndex const &parent) const;
-  virtual int columnCount(QModelIndex const &parent) const;
-
-  virtual QVariant data(QModelIndex const &index, int role) const;
-  virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-
-  virtual void attachmentUpdated(Attachment *attachment);
-
-  virtual bool removeRows(int row, int count, QModelIndex const &parent = QModelIndex{});
+  virtual void reset();
   virtual void removeSelectedAttachments(QItemSelection const &selection);
 
   virtual void addAttachments(QList<AttachmentPtr> const &attachmentsToAdd);
+  virtual void replaceAttachments(QList<AttachmentPtr> const &newAttachments);
+
+  virtual void attachmentUpdated(Attachment const &attachment);
+
+  virtual AttachmentPtr attachmentForRow(int row) const;
+  virtual int rowForAttachment(Attachment const &attachment) const;
+  virtual QList<QStandardItem *> itemsForRow(int row);
+  virtual QList<AttachmentPtr> attachments();
+
+  virtual void retranslateUi();
 
 protected:
-  Attachment *attachmentFromIndex(QModelIndex const &index) const;
+  QList<QStandardItem *> createRowItems(AttachmentPtr const &attachment) const;
+  void setRowData(QList<QStandardItem *> const &items, Attachment const &attachment);
 
-  QVariant dataDisplay(QModelIndex const &index, Attachment *attachment) const;
 };
 
 }}}
+
+Q_DECLARE_METATYPE(mtx::gui::Merge::AttachmentPtr);
 
 #endif  // MTX_MKVTOOLNIX_GUI_MERGE_ATTACHMENT_MODEL_H

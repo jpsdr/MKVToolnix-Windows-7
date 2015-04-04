@@ -159,6 +159,7 @@ protected:
   virtual void setAttachmentControlValues(Attachment *attachment);
   virtual void clearInputControlValues();
   virtual void setControlValuesFromConfig();
+  virtual MuxConfig &updateConfigFromControlValues();
   virtual void withSelectedTracks(std::function<void(Track *)> code, bool notIfAppending = false, QWidget *widget = nullptr);
   virtual void withSelectedAttachments(std::function<void(Attachment *)> code);
   virtual void addOrRemoveEmptyComboBoxItem(bool add);

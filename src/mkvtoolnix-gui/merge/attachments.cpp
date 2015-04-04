@@ -53,10 +53,10 @@ Tool::withSelectedAttachments(std::function<void(Attachment *)> code) {
     if (idxs.isEmpty() || !idxs.at(0).isValid())
       continue;
 
-    auto attachment = static_cast<Attachment *>(idxs.at(0).internalPointer());
+    auto attachment = m_attachmentsModel->attachmentForRow(idxs.at(0).row());
     if (attachment) {
-      code(attachment);
-      m_attachmentsModel->attachmentUpdated(attachment);
+      code(attachment.get());
+      m_attachmentsModel->attachmentUpdated(*attachment);
     }
   }
 }
@@ -153,11 +153,11 @@ Tool::onAttachmentSelectionChanged() {
   if (idxs.isEmpty() || !idxs.at(0).isValid())
     return;
 
-  auto attachment = static_cast<Attachment *>(idxs.at(0).internalPointer());
+  auto attachment = m_attachmentsModel->attachmentForRow(idxs.at(0).row());
   if (!attachment)
     return;
 
-  setAttachmentControlValues(attachment);
+  setAttachmentControlValues(attachment.get());
 }
 
 void

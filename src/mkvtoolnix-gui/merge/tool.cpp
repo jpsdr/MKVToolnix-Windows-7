@@ -38,7 +38,7 @@ Tool::Tool(QWidget *parent,
   , m_addAdditionalPartsAction{new QAction{this}}
   , m_removeFilesAction{new QAction{this}}
   , m_removeAllFilesAction{new QAction{this}}
-  , m_attachmentsModel{new AttachmentModel{this, m_config.m_attachments}}
+  , m_attachmentsModel{new AttachmentModel{this}}
   , m_addAttachmentsAction{new QAction{this}}
   , m_removeAttachmentsAction{new QAction{this}}
 {
@@ -60,7 +60,7 @@ Tool::~Tool() {
 
 void
 Tool::onShowCommandLine() {
-  auto options = (QStringList{} << Util::Settings::get().actualMkvmergeExe()) + m_config.buildMkvmergeOptions();
+  auto options = (QStringList{} << Util::Settings::get().actualMkvmergeExe()) + updateConfigFromControlValues().buildMkvmergeOptions();
   CommandLineDialog{this, options, QY("mkvmerge command line")}.exec();
 }
 
@@ -69,6 +69,7 @@ Tool::onSaveConfig() {
   if (m_config.m_configFileName.isEmpty())
     onSaveConfigAs();
   else {
+    updateConfigFromControlValues();
     m_config.save();
     MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
   }
@@ -81,7 +82,7 @@ Tool::onSaveOptionFile() {
   if (fileName.isEmpty())
     return;
 
-  Util::OptionFile::create(fileName, m_config.buildMkvmergeOptions());
+  Util::OptionFile::create(fileName, updateConfigFromControlValues().buildMkvmergeOptions());
   settings.m_lastConfigDir = QFileInfo{fileName}.path();
   settings.save();
 
@@ -95,6 +96,7 @@ Tool::onSaveConfigAs() {
   if (fileName.isEmpty())
     return;
 
+  updateConfigFromControlValues();
   m_config.save(fileName);
   settings.m_lastConfigDir = QFileInfo{fileName}.path();
   settings.save();
@@ -205,7 +207,7 @@ void
 Tool::setControlValuesFromConfig() {
   m_filesModel->setSourceFiles(m_config.m_files);
   m_tracksModel->setTracks(m_config.m_tracks);
-  m_attachmentsModel->setAttachments(m_config.m_attachments);
+  m_attachmentsModel->replaceAttachments(m_config.m_attachments);
 
   resizeFilesColumnsToContents();
   resizeTracksColumnsToContents();
@@ -215,6 +217,13 @@ Tool::setControlValuesFromConfig() {
   onTrackSelectionChanged();
   setOutputControlValues();
   onAttachmentSelectionChanged();
+}
+
+MuxConfig &
+Tool::updateConfigFromControlValues() {
+  m_config.m_attachments = m_attachmentsModel->attachments();
+
+  return m_config;
 }
 
 void
