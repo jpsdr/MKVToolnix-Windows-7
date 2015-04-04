@@ -18,10 +18,9 @@ class PageModel: public QStandardItemModel {
   Q_OBJECT;
 protected:
   QList<PageBase *> m_pages, m_topLevelPages;
-  QtKaxAnalyzer &m_analyzer;
 
 public:
-  PageModel(QObject *parent, QtKaxAnalyzer &analyzer);
+  PageModel(QObject *parent);
   virtual ~PageModel();
 
   PageBase *selectedPage(QModelIndex const &idx) const;
@@ -29,10 +28,9 @@ public:
   void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
 
   QList<PageBase *> &getPages();
+  QList<PageBase *> &getTopLevelPages();
 
-public slots:
-
-protected:
+  void reset();
 };
 
 }}}

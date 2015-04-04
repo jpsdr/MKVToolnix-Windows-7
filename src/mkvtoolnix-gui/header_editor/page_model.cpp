@@ -8,10 +8,8 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 
 using namespace mtx::gui;
 
-PageModel::PageModel(QObject *parent,
-                     QtKaxAnalyzer &analyzer)
+PageModel::PageModel(QObject *parent)
   : QStandardItemModel{parent}
-  , m_analyzer{analyzer}
 {
 }
 
@@ -51,6 +49,26 @@ PageModel::appendPage(PageBase *page,
 QList<PageBase *> &
 PageModel::getPages() {
   return m_pages;
+}
+
+QList<PageBase *> &
+PageModel::getTopLevelPages() {
+  return m_topLevelPages;
+}
+
+void
+PageModel::reset() {
+  beginResetModel();
+
+  for (auto const &page : m_pages)
+    delete page;
+
+  m_pages.clear();
+  m_topLevelPages.clear();
+
+  removeRows(0, rowCount());
+
+  endResetModel();
 }
 
 }}}

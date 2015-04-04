@@ -3,7 +3,6 @@
 
 #include "common/common_pch.h"
 
-#include "common/qt_kax_analyzer.h"
 #include "mkvtoolnix-gui/main_window/tool_base.h"
 
 class QDragEnterEvent;
@@ -15,6 +14,8 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 namespace Ui {
 class Tool;
 }
+
+class Tab;
 
 class Tool : public ToolBase {
   Q_OBJECT;
@@ -38,12 +39,14 @@ public slots:
   virtual void save();
   virtual void closeTab(int index);
   virtual void closeCurrentTab();
+  virtual void closeSendingTab();
   virtual void reload();
 
 protected:
   virtual void openFile(QString const &fileName);
   virtual void setupMenu();
   virtual void showHeaderEditorsWidget();
+  virtual Tab *currentTab();
 };
 
 }}}

@@ -103,32 +103,20 @@ Tool::dropEvent(QDropEvent *event) {
 
 void
 Tool::openFile(QString const &fileName) {
-  // TODO: Tool::openFile
-  MainWindow::get()->setStatusBarMessage(fileName);
-
   auto &settings = Util::Settings::get();
   settings.m_lastMatroskaFileDir = QFileInfo{fileName}.path();
   settings.save();
 
-  if (!kax_analyzer_c::probe(to_utf8(fileName))) {
-    QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(fileName));
-    return;
-  }
+  auto tab = new Tab{this, fileName};
 
-  auto analyzer = std::make_unique<QtKaxAnalyzer>(this, fileName);
-
-  if (!analyzer->process(kax_analyzer_c::parse_mode_fast)) {
-    QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(fileName));
-    return;
-  }
-
-  ui->headerEditors->addTab(new Tab{this, fileName, std::move(analyzer)}, QFileInfo{fileName}.fileName());
+  connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
+  ui->headerEditors->addTab(tab, QFileInfo{fileName}.fileName());
 
   showHeaderEditorsWidget();
 
   ui->headerEditors->setCurrentIndex(ui->headerEditors->count() - 1);
 
-  // TODO: Tool::openFile
+  tab->load();
 }
 
 void
@@ -137,6 +125,8 @@ Tool::selectFileToOpen() {
                                                 QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
   if (fileNames.isEmpty())
     return;
+
+  MainWindow::get()->setStatusBarMessage(QNY("Opening %1 file in the header editor…", "Opening %1 files in the header editor…", fileNames.count()).arg(fileNames.count()));
 
   for (auto const &fileName : fileNames)
     openFile(fileName);
@@ -149,7 +139,17 @@ Tool::save() {
 
 void
 Tool::reload() {
-  // TODO: Tool::reload
+  auto tab = currentTab();
+  if (!tab)
+    return;
+
+  if (tab->hasBeenModified()) {
+    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()));
+    if (answer != QMessageBox::Yes)
+      return;
+  }
+
+  tab->load();
 }
 
 void
@@ -168,6 +168,24 @@ Tool::closeTab(int index) {
 void
 Tool::closeCurrentTab() {
   closeTab(ui->headerEditors->currentIndex());
+}
+
+void
+Tool::closeSendingTab() {
+  auto toRemove = static_cast<Tab *>(sender());
+
+  for (auto idx = 0, count = ui->headerEditors->count(); idx < count; ++idx) {
+    auto tab = static_cast<Tab *>(ui->headerEditors->widget(idx));
+    if (tab == toRemove) {
+      closeTab(idx);
+      return;
+    }
+  }
+}
+
+Tab *
+Tool::currentTab() {
+  return static_cast<Tab *>(ui->headerEditors->widget(ui->headerEditors->currentIndex()));
 }
 
 }}}

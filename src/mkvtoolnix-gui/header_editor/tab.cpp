@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QFileInfo>
+#include <QMessageBox>
 
 #include <matroska/KaxInfoData.h>
 #include <matroska/KaxSemantic.h>
@@ -18,23 +19,50 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 using namespace mtx::gui;
 
 Tab::Tab(QWidget *parent,
-         QString const &fileName,
-         std::unique_ptr<QtKaxAnalyzer> &&analyzer)
+         QString const &fileName)
   : QWidget{parent}
   , ui{new Ui::Tab}
   , m_fileName{fileName}
-  , m_analyzer{std::move(analyzer)}
-  , m_model{new PageModel{this, *m_analyzer}}
+  , m_model{new PageModel{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
 
   setupUi();
-
-  populateTree();
 }
 
 Tab::~Tab() {
+}
+
+void
+Tab::resetData() {
+  m_analyzer.reset();
+  m_eSegmentInfo.reset();
+  m_eTracks.reset();
+  m_model->reset();
+}
+
+void
+Tab::load() {
+  resetData();
+
+  if (!kax_analyzer_c::probe(to_utf8(m_fileName))) {
+    QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(m_fileName));
+    emit removeThisTab();
+    return;
+  }
+
+  m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
+
+  if (!m_analyzer->process(kax_analyzer_c::parse_mode_fast)) {
+    QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName));
+    emit removeThisTab();
+    return;
+  }
+
+  populateTree();
+
+  m_analyzer->close_file();
 }
 
 void
@@ -84,8 +112,6 @@ Tab::populateTree() {
       handleTracks(*data);
       break;
     }
-
-  m_analyzer->close_file();
 }
 
 void
@@ -103,6 +129,22 @@ QWidget *
 Tab::getPageContainer()
   const {
   return ui->pageContainer;
+}
+
+QString const &
+Tab::getFileName()
+  const {
+  return m_fileName;
+}
+
+bool
+Tab::hasBeenModified() {
+  auto pages = m_model->getTopLevelPages();
+  for (auto const &page : pages)
+    if (page->hasBeenModified())
+      return true;
+
+  return false;
 }
 
 void
