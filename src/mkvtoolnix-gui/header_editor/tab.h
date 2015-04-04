@@ -39,7 +39,7 @@ public:
   virtual QWidget *getPageContainer() const;
   virtual void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
   virtual QString const &getFileName() const;
-  virtual bool validate();
+  virtual void validate();
 
 signals:
   void removeThisTab();
@@ -54,6 +54,7 @@ protected:
   void handleTracks(kax_analyzer_data_c &data);
   void populateTree();
   void resetData();
+  void doModifications();
 };
 
 }}}

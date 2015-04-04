@@ -10,10 +10,9 @@ namespace mtx { namespace gui { namespace HeaderEditor {
 class TopLevelPage: public EmptyPage {
   Q_OBJECT;
 public:
-  TopLevelPage(Tab &parent, translatable_string_c const &title, ebml_element_cptr const &l1Element);
+  TopLevelPage(Tab &parent, translatable_string_c const &title, ebml_element_cptr const &l1Element, bool customLayout = false);
   virtual ~TopLevelPage();
 
-  virtual void doModifications();
   virtual void init();
 };
 

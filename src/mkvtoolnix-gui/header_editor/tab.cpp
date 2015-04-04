@@ -6,13 +6,17 @@
 #include <matroska/KaxInfoData.h>
 #include <matroska/KaxSemantic.h>
 
+#include "common/ebml.h"
 #include "common/qt.h"
+#include "common/segmentinfo.h"
+#include "common/segment_tracks.h"
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/bit_value_page.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 #include "mkvtoolnix-gui/header_editor/string_value_page.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
+#include "mkvtoolnix-gui/header_editor/track_type_page.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -148,6 +152,23 @@ Tab::hasBeenModified() {
 }
 
 void
+Tab::doModifications() {
+  auto pages = m_model->getTopLevelPages();
+  for (auto const &page : pages)
+    page->doModifications();
+
+  if (m_eSegmentInfo) {
+    fix_mandatory_segmentinfo_elements(m_eSegmentInfo.get());
+    m_eSegmentInfo->UpdateSize(true, true);
+  }
+
+  if (m_eTracks) {
+    fix_mandatory_segment_tracks_elements(m_eTracks.get());
+    m_eTracks->UpdateSize(true, true);
+  }
+}
+
+void
 Tab::handleSegmentInfo(kax_analyzer_data_c &data) {
   m_eSegmentInfo = m_analyzer->read_element(&data);
   if (!m_eSegmentInfo)
@@ -175,23 +196,37 @@ Tab::handleTracks(kax_analyzer_data_c &data) {
   // auto kaxTracks = static_cast<KaxTracks *>(m_eTracks.get());
 
   // TODO: Tab::handleTracks
+
+  auto trackIdxMkvmerge = 0u;
+
+  for (auto const &element : static_cast<EbmlMaster &>(*m_eTracks)) {
+    auto kTrackEntry = dynamic_cast<KaxTrackEntry *>(element);
+    if (!kTrackEntry)
+      continue;
+
+    auto kTrackType = FindChild<KaxTrackType>(kTrackEntry);
+    if (!kTrackType)
+      continue;
+
+    auto page = new TrackTypePage{*this, trackIdxMkvmerge++, m_eTracks, *kTrackEntry};
+    page->init();
+
+  }
 }
 
-bool
+void
 Tab::validate() {
   auto pageIdx = m_model->validate();
 
   if (!pageIdx.isValid()) {
     QMessageBox::information(this, QY("Header validation"), QY("All header values are OK."));
-    return true;
+    return;
   }
 
   ui->elements->selectionModel()->select(pageIdx, QItemSelectionModel::ClearAndSelect);
   itemSelected(pageIdx);
 
   QMessageBox::warning(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
-
-  return false;
 }
 
 }}}

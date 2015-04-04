@@ -13,11 +13,13 @@ using namespace mtx::gui;
 
 EmptyPage::EmptyPage(Tab &parent,
                      translatable_string_c const &title,
-                     translatable_string_c const &content)
+                     translatable_string_c const &content,
+                     bool customLayout)
   : PageBase{parent, title}
   , m_content{content}
 {
-  setupUi();
+  if (!customLayout)
+    setupUi();
 }
 
 EmptyPage::~EmptyPage() {
@@ -64,6 +66,9 @@ EmptyPage::modifyThis() {
 
 void
 EmptyPage::retranslateUi() {
+  if (!m_lTitle)
+    return;
+
   m_lTitle->setText(Q(m_title.get_translated()));
   m_lContent->setText(Q(m_content.get_translated()));
 }

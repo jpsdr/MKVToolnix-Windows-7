@@ -17,10 +17,10 @@ class EmptyPage: public PageBase {
 public:
   translatable_string_c m_content;
 
-  QLabel *m_lTitle, *m_lContent;
+  QLabel *m_lTitle{}, *m_lContent{};
 
 public:
-  EmptyPage(Tab &parent, translatable_string_c const &title, translatable_string_c const &content);
+  EmptyPage(Tab &parent, translatable_string_c const &title, translatable_string_c const &content, bool customLayout = false);
   virtual ~EmptyPage();
 
   virtual bool hasThisBeenModified() const override;
