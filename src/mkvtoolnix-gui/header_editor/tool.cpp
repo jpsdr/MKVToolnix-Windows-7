@@ -135,7 +135,9 @@ Tool::selectFileToOpen() {
 
 void
 Tool::save() {
-  // TODO: Tool::save
+  auto tab = currentTab();
+  if (tab)
+    tab->save();
 }
 
 void

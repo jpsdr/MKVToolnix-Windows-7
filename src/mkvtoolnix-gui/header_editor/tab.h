@@ -3,6 +3,8 @@
 
 #include "common/common_pch.h"
 
+#include <QDateTime>
+
 #include "common/qt_kax_analyzer.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 
@@ -25,7 +27,10 @@ protected:
 
   QString m_fileName;
   std::unique_ptr<QtKaxAnalyzer> m_analyzer;
+  QDateTime m_fileModificationTime;
+
   PageModel *m_model;
+  PageBase *m_segmentinfoPage{};
 
   QAction *m_expandAllAction, *m_collapseAllAction;
 
@@ -50,6 +55,7 @@ signals:
 public slots:
   virtual void selectionChanged(QModelIndex const &current, QModelIndex const &previous);
   virtual void load();
+  virtual void save();
   virtual void expandAll();
   virtual void collapseAll();
 
@@ -61,6 +67,8 @@ protected:
   void resetData();
   void doModifications();
   void expandCollapseAll(bool expand);
+  void reportValidationFailure(bool isCritical, QModelIndex const &pageIdx);
+  void displayUpdateElementResult(kax_analyzer_c::update_element_result_e result, QString const &message);
 };
 
 }}}

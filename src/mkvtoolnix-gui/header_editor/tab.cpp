@@ -22,6 +22,7 @@
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -53,6 +54,7 @@ Tab::resetData() {
   m_eSegmentInfo.reset();
   m_eTracks.reset();
   m_model->reset();
+  m_segmentinfoPage = nullptr;
 }
 
 void
@@ -73,9 +75,62 @@ Tab::load() {
     return;
   }
 
+  m_fileModificationTime = QFileInfo{m_fileName}.lastModified();
+
   populateTree();
 
   m_analyzer->close_file();
+}
+
+void
+Tab::save() {
+  auto segmentinfoModified = false;
+  auto tracksModified      = false;
+
+  for (auto const &page : m_model->getTopLevelPages()) {
+    if (!page->hasBeenModified())
+      continue;
+
+    if (page == m_segmentinfoPage)
+      segmentinfoModified = true;
+    else
+      tracksModified      = true;
+  }
+
+  if (!segmentinfoModified && !tracksModified) {
+    QMessageBox::information(this, QY("File has not been modified"), QY("The header values have not been modified. There is nothing to save."));
+    return;
+  }
+
+  auto pageIdx = m_model->validate();
+  if (pageIdx.isValid()) {
+    reportValidationFailure(false, pageIdx);
+    return;
+  }
+
+  if (QFileInfo{m_fileName}.lastModified() != m_fileModificationTime) {
+    QMessageBox::critical(this, QY("File has been modified"),
+                          QY("The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."));
+    return;
+  }
+
+  doModifications();
+
+  if (segmentinfoModified && m_eSegmentInfo) {
+    auto result = m_analyzer->update_element(m_eSegmentInfo, true);
+    if (kax_analyzer_c::uer_success != result)
+      displayUpdateElementResult(result, QY("Saving the modified segment information header failed."));
+  }
+
+  if (tracksModified && m_eTracks) {
+    auto result = m_analyzer->update_element(m_eTracks, true);
+    if (kax_analyzer_c::uer_success != result)
+      displayUpdateElementResult(result, QY("Saving the modified track headers failed."));
+  }
+
+  load();
+
+  MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
 }
 
 void
@@ -204,6 +259,8 @@ Tab::handleSegmentInfo(kax_analyzer_data_c &data) {
   (new BitValuePage{   *this, *page, info, KaxSegmentUID::ClassInfos,      YT("Segment unique ID"),            YT("A randomly generated unique ID to identify the current segment between many others (128 bits)."), 128})->init();
   (new BitValuePage{   *this, *page, info, KaxPrevUID::ClassInfos,         YT("Previous segment's unique ID"), YT("A unique ID to identify the previous chained segment (128 bits)."), 128})->init();
   (new BitValuePage{   *this, *page, info, KaxNextUID::ClassInfos,         YT("Next segment's unique ID"),     YT("A unique ID to identify the next chained segment (128 bits)."), 128})->init();
+
+  m_segmentinfoPage = page;
 }
 
 void
@@ -335,10 +392,19 @@ Tab::validate() {
     return;
   }
 
+  reportValidationFailure(false, pageIdx);
+}
+
+void
+Tab::reportValidationFailure(bool isCritical,
+                             QModelIndex const &pageIdx) {
   ui->elements->selectionModel()->select(pageIdx, QItemSelectionModel::ClearAndSelect);
   selectionChanged(pageIdx, QModelIndex{});
 
-  QMessageBox::warning(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
+  if (isCritical)
+    QMessageBox::critical(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
+  else
+    QMessageBox::warning(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
 }
 
 void
@@ -355,6 +421,36 @@ void
 Tab::expandCollapseAll(bool expand) {
   for (auto const &page : m_model->getTopLevelPages())
     ui->elements->setExpanded(page->m_pageIdx, expand);
+}
+
+void
+Tab::displayUpdateElementResult(kax_analyzer_c::update_element_result_e result,
+                                QString const &message) {
+  switch (result) {
+    case kax_analyzer_c::uer_success:
+      return;
+
+    case kax_analyzer_c::uer_error_segment_size_for_element:
+      QMessageBox::critical(this, QY("Error writing Matroska file"),
+                            Q("%1 %2").arg(message).arg(QY("The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. "
+                                                           "The process will be aborted. The file has been changed!")));
+      return;
+
+    case kax_analyzer_c::uer_error_segment_size_for_meta_seek:
+      QMessageBox::critical(this, QY("Error writing Matroska file"),
+                            Q("%1 %2").arg(message).arg(QY("The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. "
+                                                           "The process will be aborted. The file has been changed!")));
+      return;
+
+    case kax_analyzer_c::uer_error_meta_seek:
+      QMessageBox::warning(this, QY("File structure warning"),
+                           Q("%1 %2").arg(message).arg(QY("The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. "
+                                                          "Please use your favorite player to check this file.")));
+      return;
+
+    default:
+      QMessageBox::critical(this, QY("Internal program error"), Q("%1 %2").arg(message).arg(QY("An unknown error occured. The file has been modified.")));
+  }
 }
 
 }}}
