@@ -37,6 +37,8 @@ UnsignedIntegerValuePage::createInputControl() {
 QString
 UnsignedIntegerValuePage::getOriginalValueAsString()
   const {
+  if (!m_element)
+    return Q("");
   return QString::number(m_originalValue);
 }
 

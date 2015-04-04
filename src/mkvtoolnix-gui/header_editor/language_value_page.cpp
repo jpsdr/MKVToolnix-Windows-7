@@ -55,7 +55,8 @@ LanguageValuePage::getOriginalValueAsString()
 QString
 LanguageValuePage::getCurrentValueAsString()
   const {
-  return m_cbValue->currentText();
+  auto &codes = App::getIso639Language2Codes();
+  return codes[ m_cbValue->currentIndex() ];
 }
 
 void
@@ -71,8 +72,7 @@ LanguageValuePage::validateValue()
 
 void
 LanguageValuePage::copyValueToElement() {
-  auto &codes = App::getIso639Language2Codes();
-  static_cast<EbmlString *>(m_element)->SetValue(to_utf8(codes[ m_cbValue->currentIndex() ]));
+  static_cast<EbmlString *>(m_element)->SetValue(to_utf8(getCurrentValueAsString()));
 }
 
 }}}
