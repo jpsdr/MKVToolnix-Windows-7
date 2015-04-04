@@ -136,10 +136,11 @@ Tool::onTrackSelectionChanged() {
   Util::enableWidgets(m_allInputControls, false);
 
   auto selection = ui->tracks->selectionModel()->selection();
-  if (selection.isEmpty())
+  auto numRows   = Util::numSelectedRows(selection);
+  if (!numRows)
     return;
 
-  if (1 < selection.size()) {
+  if (1 < numRows) {
     setInputControlValues(nullptr);
     Util::enableWidgets(m_allInputControls, true);
     return;

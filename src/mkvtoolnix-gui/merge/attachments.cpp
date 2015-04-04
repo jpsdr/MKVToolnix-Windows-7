@@ -137,14 +137,15 @@ Tool::resizeAttachmentsColumnsToContents()
 void
 Tool::onAttachmentSelectionChanged() {
   auto selection = ui->attachments->selectionModel()->selection();
-  if (selection.isEmpty()) {
+  auto numRows   = Util::numSelectedRows(selection);
+  if (!numRows) {
     enableAttachmentControls(false);
     return;
   }
 
   enableAttachmentControls(true);
 
-  if (1 < selection.size()) {
+  if (1 < numRows) {
     setAttachmentControlValues(nullptr);
     return;
   }

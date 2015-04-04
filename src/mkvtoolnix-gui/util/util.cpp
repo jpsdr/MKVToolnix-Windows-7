@@ -79,6 +79,18 @@ withSelectedIndexes(QItemSelectionModel *selectionModel,
     }
 }
 
+int
+numSelectedRows(QItemSelection &selection) {
+  auto rowsSeen = QMap< std::pair<QModelIndex, int>, bool >{};
+  for (auto const &range : selection)
+    for (auto const &index : range.indexes()) {
+      auto seenIdx      = std::make_pair(index.parent(), index.row());
+      rowsSeen[seenIdx] = true;
+    }
+
+  return rowsSeen.count();
+}
+
 QModelIndex
 toTopLevelIdx(QModelIndex const &idx) {
   if (!idx.isValid())
