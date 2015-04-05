@@ -15,6 +15,8 @@
 
 #if defined(HAVE_QT)
 
+#include <QMessageBox>
+
 #include "common/qt.h"
 #include "common/qt_kax_analyzer.h"
 #include "common/qt_kax_analyzer.h"
@@ -46,6 +48,37 @@ void
 QtKaxAnalyzer::show_progress_done() {
   m_progressDialog->setValue(100);
   m_progressDialog.reset();
+}
+
+void
+QtKaxAnalyzer::displayUpdateElementResult(QWidget *parent,
+                                          update_element_result_e result,
+                                          QString const &message) {
+  switch (result) {
+    case kax_analyzer_c::uer_success:
+      return;
+
+    case kax_analyzer_c::uer_error_segment_size_for_element:
+      QMessageBox::critical(parent, QY("Error writing Matroska file"),
+                            Q("%1 %2").arg(message).arg(QY("The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. "
+                                                           "The process will be aborted. The file has been changed!")));
+      return;
+
+    case kax_analyzer_c::uer_error_segment_size_for_meta_seek:
+      QMessageBox::critical(parent, QY("Error writing Matroska file"),
+                            Q("%1 %2").arg(message).arg(QY("The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. "
+                                                           "The process will be aborted. The file has been changed!")));
+      return;
+
+    case kax_analyzer_c::uer_error_meta_seek:
+      QMessageBox::warning(parent, QY("File structure warning"),
+                           Q("%1 %2").arg(message).arg(QY("The Matroska file was modified, but the meta seek entry could not be updated. Parent means that players might have a hard time finding parent element. "
+                                                          "Please use your favorite player to check parent file.")));
+      return;
+
+    default:
+      QMessageBox::critical(parent, QY("Internal program error"), Q("%1 %2").arg(message).arg(QY("An unknown error occured. The file has been modified.")));
+  }
 }
 
 #endif  // HAVE_QT

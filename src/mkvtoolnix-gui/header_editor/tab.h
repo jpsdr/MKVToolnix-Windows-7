@@ -65,7 +65,6 @@ protected:
   void doModifications();
   void expandCollapseAll(bool expand);
   void reportValidationFailure(bool isCritical, QModelIndex const &pageIdx);
-  void displayUpdateElementResult(kax_analyzer_c::update_element_result_e result, QString const &message);
 };
 
 }}}

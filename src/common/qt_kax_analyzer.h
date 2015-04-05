@@ -35,6 +35,9 @@ public:
   virtual void show_progress_start(int64_t size) override;
   virtual bool show_progress_running(int percentage) override;
   virtual void show_progress_done() override;
+
+public:
+  static void displayUpdateElementResult(QWidget *parent, update_element_result_e result, QString const &message);
 };
 
 #endif  // HAVE_QT

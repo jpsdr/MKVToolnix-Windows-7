@@ -148,13 +148,13 @@ Tab::save() {
   if (segmentinfoModified && m_eSegmentInfo) {
     auto result = m_analyzer->update_element(m_eSegmentInfo, true);
     if (kax_analyzer_c::uer_success != result)
-      displayUpdateElementResult(result, QY("Saving the modified segment information header failed."));
+      QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified segment information header failed."));
   }
 
   if (tracksModified && m_eTracks) {
     auto result = m_analyzer->update_element(m_eTracks, true);
     if (kax_analyzer_c::uer_success != result)
-      displayUpdateElementResult(result, QY("Saving the modified track headers failed."));
+      QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified track headers failed."));
   }
 
   load();
@@ -438,36 +438,6 @@ void
 Tab::expandCollapseAll(bool expand) {
   for (auto const &page : m_model->getTopLevelPages())
     ui->elements->setExpanded(page->m_pageIdx, expand);
-}
-
-void
-Tab::displayUpdateElementResult(kax_analyzer_c::update_element_result_e result,
-                                QString const &message) {
-  switch (result) {
-    case kax_analyzer_c::uer_success:
-      return;
-
-    case kax_analyzer_c::uer_error_segment_size_for_element:
-      QMessageBox::critical(this, QY("Error writing Matroska file"),
-                            Q("%1 %2").arg(message).arg(QY("The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. "
-                                                           "The process will be aborted. The file has been changed!")));
-      return;
-
-    case kax_analyzer_c::uer_error_segment_size_for_meta_seek:
-      QMessageBox::critical(this, QY("Error writing Matroska file"),
-                            Q("%1 %2").arg(message).arg(QY("The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. "
-                                                           "The process will be aborted. The file has been changed!")));
-      return;
-
-    case kax_analyzer_c::uer_error_meta_seek:
-      QMessageBox::warning(this, QY("File structure warning"),
-                           Q("%1 %2").arg(message).arg(QY("The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. "
-                                                          "Please use your favorite player to check this file.")));
-      return;
-
-    default:
-      QMessageBox::critical(this, QY("Internal program error"), Q("%1 %2").arg(message).arg(QY("An unknown error occured. The file has been modified.")));
-  }
 }
 
 }}}
