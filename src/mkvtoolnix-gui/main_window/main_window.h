@@ -12,6 +12,9 @@
 
 namespace mtx { namespace gui {
 
+namespace ChapterEditor {
+class Tool;
+}
 namespace HeaderEditor {
 class Tool;
 }
@@ -42,6 +45,7 @@ protected:
   Merge::Tool *m_toolMerge{};
   Jobs::Tool *m_toolJobs{};
   HeaderEditor::Tool *m_toolHeaderEditor{};
+  ChapterEditor::Tool *m_toolChapterEditor{};
   WatchJobs::Tool *m_watchJobTool{};
   QList<QAction *> m_toolSelectionActions;
 
@@ -72,6 +76,7 @@ public:                         // static
   static MainWindow *get();
   static Merge::Tool *getMergeTool();
   static HeaderEditor::Tool *getHeaderEditorTool();
+  static ChapterEditor::Tool *getChapterEditorTool();
   static Jobs::Tool *getJobTool();
   static WatchJobs::Tab *getWatchCurrentJobTab();
   static WatchJobs::Tool *getWatchJobTool();

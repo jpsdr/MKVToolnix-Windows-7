@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mtx::gui::ChapterEditor::Tab</class>
+ <widget class="QWidget" name="mtx::gui::ChapterEditor::Tab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>735</width>
+    <height>563</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_5">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="fileNameLabel">
+       <property name="text">
+        <string>File name:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="fileName">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="directoryLabel">
+       <property name="text">
+        <string>Directory:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="directory">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="childrenCollapsible">
+      <bool>false</bool>
+     </property>
+     <widget class="QTreeView" name="elements">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::ActionsContextMenu</enum>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="headerHidden">
+       <bool>false</bool>
+      </property>
+      <attribute name="headerVisible">
+       <bool>true</bool>
+      </attribute>
+     </widget>
+     <widget class="QStackedWidget" name="pageContainer">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="emptyPage"/>
+      <widget class="QWidget" name="editionPage">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="lEditionEntry">
+          <property name="text">
+           <string>Edition entry</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0" alignment="Qt::AlignTop">
+           <widget class="QLabel" name="lEdFlags">
+            <property name="text">
+             <string>Flags:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QCheckBox" name="cbEdFlagHidden">
+              <property name="text">
+               <string>&amp;Hidden</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbEdFlagDefault">
+              <property name="text">
+               <string>&amp;Default</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbEdFlagOrdered">
+              <property name="text">
+               <string>&amp;Ordered</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lEdUid">
+            <property name="text">
+             <string>&amp;UID:</string>
+            </property>
+            <property name="buddy">
+             <cstring>leEdUid</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="leEdUid"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>334</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="atomPage">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLabel" name="lChapter">
+          <property name="text">
+           <string>Chapter XYZ</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="lChStart">
+            <property name="text">
+             <string>&amp;Start:</string>
+            </property>
+            <property name="buddy">
+             <cstring>leChStart</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="leChStart"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lChEnd">
+            <property name="text">
+             <string>&amp;End:</string>
+            </property>
+            <property name="buddy">
+             <cstring>leChEnd</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="leChEnd"/>
+          </item>
+          <item row="2" column="0" alignment="Qt::AlignTop">
+           <widget class="QLabel" name="lChFlags">
+            <property name="text">
+             <string>Flags:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QCheckBox" name="cbChFlagHidden">
+              <property name="text">
+               <string>&amp;Hidden</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbChFlagDefault">
+              <property name="text">
+               <string>&amp;Default</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="lChUid">
+            <property name="text">
+             <string>&amp;UID:</string>
+            </property>
+            <property name="buddy">
+             <cstring>leChUid</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="leChUid"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="lChSegmentUid">
+            <property name="text">
+             <string>Seg&amp;ment UID:</string>
+            </property>
+            <property name="buddy">
+             <cstring>leChSegmentUid</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="leChSegmentUid"/>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="lChSegmentEditionUid">
+            <property name="text">
+             <string>Seg&amp;ment edition UID:</string>
+            </property>
+            <property name="buddy">
+             <cstring>leChSegmentEditionUid</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="leChSegmentEditionUid"/>
+          </item>
+          <item row="6" column="0" alignment="Qt::AlignTop">
+           <widget class="QLabel" name="lChNames">
+            <property name="text">
+             <string>&amp;Names:</string>
+            </property>
+            <property name="buddy">
+             <cstring>tvChNames</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QTableView" name="tvChNames"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>50</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>elements</tabstop>
+  <tabstop>cbEdFlagHidden</tabstop>
+  <tabstop>cbEdFlagDefault</tabstop>
+  <tabstop>cbEdFlagOrdered</tabstop>
+  <tabstop>leEdUid</tabstop>
+  <tabstop>leChStart</tabstop>
+  <tabstop>leChEnd</tabstop>
+  <tabstop>cbChFlagHidden</tabstop>
+  <tabstop>cbChFlagDefault</tabstop>
+  <tabstop>leChUid</tabstop>
+  <tabstop>leChSegmentUid</tabstop>
+  <tabstop>leChSegmentEditionUid</tabstop>
+  <tabstop>tvChNames</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>itemSelected(QModelIndex)</slot>
+ </slots>
+</ui>

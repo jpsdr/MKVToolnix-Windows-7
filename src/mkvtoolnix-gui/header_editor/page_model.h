@@ -6,8 +6,6 @@
 #include <QList>
 #include <QStandardItemModel>
 
-#include "common/qt_kax_analyzer.h"
-
 class QAbstractItemView;
 
 namespace mtx { namespace gui { namespace HeaderEditor {

@@ -3,6 +3,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/qt.h"
 #include "common/version.h"
+#include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
@@ -104,13 +105,14 @@ MainWindow::setupToolSelector() {
   m_toolMerge         = new Merge::Tool{ui->tool, ui->menuMerge};
   m_toolJobs          = new Jobs::Tool{ui->tool};
   m_toolHeaderEditor  = new HeaderEditor::Tool{ui->tool, ui->menuHeaderEditor};
+  m_toolChapterEditor = new ChapterEditor::Tool{ui->tool, ui->menuChapterEditor};
   m_watchJobTool      = new WatchJobs::Tool{ui->tool};
 
   ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
   ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
   ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
   ui->tool->appendTab(m_toolHeaderEditor,           QIcon{":/icons/48x48/document-edit.png"},              QY("edit headers"));
-  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
+  ui->tool->appendTab(m_toolChapterEditor,          QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
   ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
   ui->tool->appendTab(m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
   ui->tool->appendTab(m_watchJobTool,               QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
@@ -150,8 +152,9 @@ MainWindow::showAndEnableMenu(QMenu &menu,
 
 void
 MainWindow::showTheseMenusOnly(QList<QMenu *> const &menus) {
-  showAndEnableMenu(*ui->menuMerge,        menus.contains(ui->menuMerge));
-  showAndEnableMenu(*ui->menuHeaderEditor, menus.contains(ui->menuHeaderEditor));
+  showAndEnableMenu(*ui->menuMerge,         menus.contains(ui->menuMerge));
+  showAndEnableMenu(*ui->menuHeaderEditor,  menus.contains(ui->menuHeaderEditor));
+  showAndEnableMenu(*ui->menuChapterEditor, menus.contains(ui->menuChapterEditor));
 }
 
 void
@@ -183,6 +186,11 @@ MainWindow::getMergeTool() {
 HeaderEditor::Tool *
 MainWindow::getHeaderEditorTool() {
   return get()->m_toolHeaderEditor;
+}
+
+ChapterEditor::Tool *
+MainWindow::getChapterEditorTool() {
+  return get()->m_toolChapterEditor;
 }
 
 Jobs::Tool *
