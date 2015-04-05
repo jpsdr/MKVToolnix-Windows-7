@@ -6,6 +6,7 @@
 #include <QList>
 #include <QPushButton>
 #include <QString>
+#include <QTableView>
 #include <QTreeView>
 
 #include "common/qt.h"
@@ -50,6 +51,13 @@ buttonForRole(QDialogButtonBox *box,
   auto buttons = box->buttons();
   auto button  = boost::find_if(buttons, [&](QAbstractButton *b) { return box->buttonRole(b) == role; });
   return button == buttons.end() ? nullptr : static_cast<QPushButton *>(*button);
+}
+
+void
+resizeViewColumnsToContents(QTableView *view) {
+  auto columnCount = view->model()->columnCount(QModelIndex{});
+  for (auto column = 0; columnCount > column; ++column)
+    view->resizeColumnToContents(column);
 }
 
 void

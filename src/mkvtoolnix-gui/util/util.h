@@ -13,6 +13,7 @@ class QIcon;
 class QItemSelection;
 class QItemSelectionModel;
 class QModelIndex;
+class QTableView;
 class QTreeView;
 class QString;
 class QVariant;
@@ -45,6 +46,7 @@ enum MtxGuiRoles {
   AttachmentRole,
 };
 
+void resizeViewColumnsToContents(QTableView *view);
 void resizeViewColumnsToContents(QTreeView *view);
 int numSelectedRows(QItemSelection &selection);
 void withSelectedIndexes(QItemSelectionModel *selectionModel, std::function<void(QModelIndex const &)> worker);
