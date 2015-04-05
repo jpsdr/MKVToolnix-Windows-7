@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+if Signal.list.key?('ALRM')
+  Signal.trap('ALRM') { |signo| }
+end
+
 version = RUBY_VERSION.gsub(/[^0-9\.]+/, "").split(/\./).collect(&:to_i)
 version << 0 while version.size < 3
 if (version[0] < 2) && (version[1] < 9)
