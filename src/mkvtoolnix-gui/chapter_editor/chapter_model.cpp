@@ -24,16 +24,6 @@ ChapterModel::retranslateUi() {
   setHorizontalHeaderLabels(labels);
 }
 
-// ChapterBase *
-// ChapterModel::selectedChapter(QModelIndex const &idx)
-//   const {
-//   auto selectedItem = itemFromIndex(idx);
-//   if (!selectedItem)
-//     return nullptr;
-
-//   return m_chapters[ data(idx, Util::ChapterEditorChapterIdRole).value<unsigned int>() ];
-// }
-
 QList<QStandardItem *>
 ChapterModel::newRowItems() {
   auto items = QList<QStandardItem *>{} << new QStandardItem{} << new QStandardItem{} << new QStandardItem{};
@@ -46,21 +36,24 @@ ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems,
   rowItems[0]->setText(QY("Edition entry %1").arg(row + 1));
 }
 
+ChapterPtr
+ChapterModel::chapterFromItem(QStandardItem *item) {
+  return item ? item->data(Util::ChapterEditorChapterRole).value<ChapterPtr>() : ChapterPtr{};
+}
+
+EditionPtr
+ChapterModel::editionFromItem(QStandardItem *item) {
+  return item ? item->data(Util::ChapterEditorEditionRole).value<EditionPtr>() : EditionPtr{};
+}
+
 void
 ChapterModel::setChapterRowText(QList<QStandardItem *> const &rowItems) {
-  auto &chapter    = *rowItems[0]->data(Util::ChapterEditorChapterRole).value<ChapterPtr>();
+  auto &chapter = *chapterFromItem(rowItems[0]);
 
-  auto kStart      = FindChild<KaxChapterTimeStart>(chapter);
-  auto kEnd        = FindChild<KaxChapterTimeEnd>(chapter);
-  auto chapterName = chapterNameForLanguage(chapter, "und");
+  auto kStart   = FindChild<KaxChapterTimeStart>(chapter);
+  auto kEnd     = FindChild<KaxChapterTimeEnd>(chapter);
 
-  if (chapterName.isEmpty())
-    chapterName = chapterNameForLanguage(chapter, "");
-
-  if (chapterName.isEmpty())
-    chapterName = QY("<unnamed>");
-
-  rowItems[0]->setText(chapterName);
+  rowItems[0]->setText(chapterDisplayName(chapter));
   rowItems[1]->setText(kStart ? Q(format_timecode(kStart->GetValue(), 0)) : Q(""));
   rowItems[2]->setText(kEnd   ? Q(format_timecode(kEnd->GetValue(),   0)) : Q(""));
 }
@@ -91,18 +84,6 @@ ChapterModel::reset() {
   endResetModel();
 }
 
-// QModelIndex
-// ChapterModel::validate()
-//   const {
-//   for (auto chapter : m_topLevelChapters) {
-//     auto result = chapter->validate();
-//     if (result.isValid())
-//       return result;
-//   }
-
-//   return QModelIndex{};
-// }
-
 QString
 ChapterModel::chapterNameForLanguage(KaxChapterAtom &chapter,
                                      std::string const &language) {
@@ -117,6 +98,19 @@ ChapterModel::chapterNameForLanguage(KaxChapterAtom &chapter,
   }
 
   return Q("");
+}
+
+QString
+ChapterModel::chapterDisplayName(KaxChapterAtom &chapter) {
+  auto chapterName = chapterNameForLanguage(chapter, "und");
+
+  if (chapterName.isEmpty())
+    chapterName = chapterNameForLanguage(chapter, "");
+
+  if (chapterName.isEmpty())
+    chapterName = QY("<unnamed>");
+
+  return chapterName;
 }
 
 void

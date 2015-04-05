@@ -26,22 +26,25 @@ protected:
   // QList<ChapterBase *> m_chapters, m_topLevelChapters;
 
 public:
+  enum class ElementType {
+    Unknown,
+    Edition,
+    Chapter,
+  };
+
+public:
   ChapterModel(QObject *parent);
   virtual ~ChapterModel();
 
-  // ChapterBase *selectedChapter(QModelIndex const &idx) const;
-
   void appendEdition(EditionPtr const &edition);
   void appendChapter(ChapterPtr const &chapter, QModelIndex const &parentIdx);
-
-  // QList<ChapterBase *> &getChapters();
-  // QList<ChapterBase *> &getTopLevelChapters();
 
   void populate(EbmlMaster &master);
   void reset();
   void retranslateUi();
 
-  // QModelIndex validate() const;
+  ChapterPtr chapterFromItem(QStandardItem *item);
+  EditionPtr editionFromItem(QStandardItem *item);
 
 protected:
   void setEditionRowText(QList<QStandardItem *> const &rowItems, int row);
@@ -50,6 +53,9 @@ protected:
 
 protected:
   static QList<QStandardItem *> newRowItems();
+
+public:
+  static QString chapterDisplayName(KaxChapterAtom &chapter);
   static QString chapterNameForLanguage(KaxChapterAtom &chapter, std::string const &language);
 };
 

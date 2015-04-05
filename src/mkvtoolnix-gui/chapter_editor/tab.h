@@ -7,10 +7,16 @@
 #include <QModelIndex>
 
 #include "common/qt_kax_analyzer.h"
+#include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
 
 class QAction;
+class QItemSelection;
 
 using ChaptersPtr = std::shared_ptr<KaxChapters>;
+
+namespace libebml {
+class EbmlBinary;
+};
 
 namespace mtx { namespace gui { namespace ChapterEditor {
 
@@ -34,6 +40,7 @@ protected:
   ChapterModel *m_chapterModel;
 
   QAction *m_expandAllAction, *m_collapseAllAction;
+  QList<QWidget *> m_nameWidgets;
 
 public:
   explicit Tab(QWidget *parent, QString const &fileName = QString{});
@@ -45,33 +52,36 @@ public:
   virtual QString const &getFileName() const;
   QString getTitle() const;
 
-  // virtual bool hasBeenModified();
-  // virtual void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
-  // virtual void validate();
-
 signals:
   void removeThisTab();
   void titleChanged(QString const &title);
 
 public slots:
-  // virtual void selectionChanged(QModelIndex const &current, QModelIndex const &previous);
   virtual void newFile();
   virtual void load();
   // virtual void save();
   virtual void expandAll();
   virtual void collapseAll();
 
+  virtual void chapterSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
+
 protected:
   void setupUi();
   void resetData();
-  // void doModifications();
-  // void reportValidationFailure(bool isCritical, QModelIndex const &pageIdx);
   void expandCollapseAll(bool expand, QModelIndex const &parentIdx = {});
 
   ChaptersPtr loadFromChapterFile();
   ChaptersPtr loadFromMatroskaFile();
 
   void resizeChapterColumnsToContents() const;
+
+  void copyControlsToStorage(QModelIndex const &idx);
+  bool setControlsFromStorage(QModelIndex const &idx);
+  bool setChapterControlsFromStorage(ChapterPtr const &chapter);
+  bool setEditionControlsFromStorage(EditionPtr const &edition);
+
+protected:
+  static QString formatEbmlBinary(EbmlBinary *binary);
 };
 
 }}}

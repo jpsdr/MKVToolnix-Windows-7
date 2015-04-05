@@ -11,8 +11,8 @@
 #include "common/qt.h"
 #include "common/segmentinfo.h"
 #include "common/segment_tracks.h"
+#include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
-#include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
 #include "mkvtoolnix-gui/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -47,9 +47,19 @@ Tab::setupUi() {
   ui->elements->addAction(m_expandAllAction);
   ui->elements->addAction(m_collapseAllAction);
 
-  // connect(ui->elements->selectionModel(), &QItemSelectionModel::currentChanged, this, &Tab::selectionChanged);
-  connect(m_expandAllAction,              &QAction::triggered,                  this, &Tab::expandAll);
-  connect(m_collapseAllAction,            &QAction::triggered,                  this, &Tab::collapseAll);
+  connect(ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged, this, &Tab::chapterSelectionChanged);
+  // connect(ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Tab::nameSelectionChanged);
+  // connect(ui->teChName,                    &QLineEdit::textEdited,                 this, &Tab::chapterNameEdited);
+  // connect(ui->cbChNameLanguage,            &QLineEdit::currentIndexChanged,        this, &Tab::chapterNameLanguageChanged);
+  // connect(ui->cbChNameCountry,             &QLineEdit::currentIndexChanged,        this, &Tab::chapterNameCountryChanged);
+
+  connect(m_expandAllAction,               &QAction::triggered,                    this, &Tab::expandAll);
+  connect(m_collapseAllAction,             &QAction::triggered,                    this, &Tab::collapseAll);
+
+  m_nameWidgets << ui->pbChRemoveName
+                << ui->lChName         << ui->leChName
+                << ui->lChNameLanguage << ui->cbChNameLanguage
+                << ui->lChNameCountry  << ui->cbChNameCountry;
 }
 
 void
@@ -71,6 +81,7 @@ Tab::retranslateUi() {
   m_collapseAllAction->setText(QY("&Collapse all"));
 
   m_chapterModel->retranslateUi();
+  // m_nameModel->retranslateUi();
 
   resizeChapterColumnsToContents();
 }
@@ -79,6 +90,7 @@ void
 Tab::resizeChapterColumnsToContents()
   const {
   Util::resizeViewColumnsToContents(ui->elements);
+  // Util::resizeViewColumnsToContents(ui->tvChNames);
 }
 
 QString
@@ -241,54 +253,82 @@ Tab::load() {
 //   MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
 // }
 
-// void
-// Tab::appendPage(PageBase *page,
-//                 QModelIndex const &parentIdx) {
-//   ui->pageContainer->addWidget(page);
-//   m_chapterModel->appendPage(page, parentIdx);
-// }
+void
+Tab::copyControlsToStorage(QModelIndex const &) {
+  // TODO: Tab::copyControlsToStorage
+  mxinfo(boost::format("TODO: copyControlsFromStorage\n"));
+}
 
-// void
-// Tab::selectionChanged(QModelIndex const &current,
-//                       QModelIndex const &) {
-//   auto selectedPage = m_chapterModel->selectedPage(current);
-//   if (selectedPage)
-//     ui->pageContainer->setCurrentWidget(selectedPage);
-// }
+bool
+Tab::setControlsFromStorage(QModelIndex const &idx) {
+  auto stdItem = m_chapterModel->itemFromIndex(idx);
+  if (!stdItem)
+    return false;
 
-// bool
-// Tab::hasBeenModified() {
-//   auto pages = m_chapterModel->getTopLevelPages();
-//   for (auto const &page : pages)
-//     if (page->hasBeenModified())
-//       return true;
+  if (!idx.parent().isValid())
+    return setEditionControlsFromStorage(m_chapterModel->editionFromItem(stdItem));
+  return setChapterControlsFromStorage(m_chapterModel->chapterFromItem(stdItem));
+}
 
-//   return false;
-// }
+bool
+Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
+  if (!chapter)
+    return false;
 
-// void
-// Tab::validate() {
-//   auto pageIdx = m_chapterModel->validate();
+  auto end               = FindChild<KaxChapterTimeEnd>(*chapter);
+  auto segmentEditionUid = FindChild<KaxChapterSegmentEditionUID>(*chapter);
 
-//   if (!pageIdx.isValid()) {
-//     QMessageBox::information(this, QY("Chapter validation"), QY("All chapter values are OK."));
-//     return;
-//   }
+  ui->lChapter->setText(m_chapterModel->chapterDisplayName(*chapter));
+  ui->leChStart->setText(Q(format_timecode(FindChildValue<KaxChapterTimeStart>(*chapter))));
+  ui->leChEnd->setText(end ? Q(format_timecode(end->GetValue())) : Q(""));
+  ui->cbChFlagEnabled->setChecked(!!FindChildValue<KaxChapterFlagEnabled>(*chapter));
+  ui->cbChFlagHidden->setChecked(!!FindChildValue<KaxChapterFlagHidden>(*chapter));
+  ui->leChUid->setText(QString::number(FindChildValue<KaxChapterUID>(*chapter)));
+  ui->leChSegmentUid->setText(formatEbmlBinary(FindChild<KaxChapterSegmentUID>(*chapter)));
+  ui->leChSegmentEditionUid->setText(segmentEditionUid ? QString::number(segmentEditionUid->GetValue()) : Q(""));
 
-//   reportValidationFailure(false, pageIdx);
-// }
+  // TODO: Tab::setChapterControlsFromStorage: names
+  // m_namesModel->populate(GetChild<KaxChapterDisplay>(*chapter));
+  for (auto const &widget : m_nameWidgets)
+    widget->setEnabled(false);
 
-// void
-// Tab::reportValidationFailure(bool isCritical,
-//                              QModelIndex const &pageIdx) {
-//   ui->elements->selectionModel()->select(pageIdx, QItemSelectionModel::ClearAndSelect);
-//   selectionChanged(pageIdx, QModelIndex{});
+  ui->pageContainer->setCurrentWidget(ui->chapterPage);
 
-//   if (isCritical)
-//     QMessageBox::critical(this, QY("Chapter validation"), QY("There were errors in the chapter values preventing the chapters from being saved. The first error has been selected."));
-//   else
-//     QMessageBox::warning(this, QY("Chapter validation"), QY("There were errors in the chapter values preventing the chapters from being saved. The first error has been selected."));
-// }
+  return true;
+}
+
+bool
+Tab::setEditionControlsFromStorage(EditionPtr const &edition) {
+  if (!edition)
+    return false;
+
+  ui->leEdUid->setText(QString::number(FindChildValue<KaxEditionUID>(*edition)));
+  ui->cbEdFlagDefault->setChecked(!!FindChildValue<KaxEditionFlagDefault>(*edition));
+  ui->cbEdFlagHidden->setChecked(!!FindChildValue<KaxEditionFlagHidden>(*edition));
+  ui->cbEdFlagOrdered->setChecked(!!FindChildValue<KaxEditionFlagOrdered>(*edition));
+
+  ui->pageContainer->setCurrentWidget(ui->editionPage);
+
+  return true;
+}
+
+void
+Tab::chapterSelectionChanged(QItemSelection const &selected,
+                             QItemSelection const &deselected) {
+  if (!deselected.isEmpty()) {
+    auto indexes = deselected.at(0).indexes();
+    if (!indexes.isEmpty())
+      copyControlsToStorage(indexes.at(0));
+  }
+
+  if (!selected.isEmpty()) {
+    auto indexes = selected.at(0).indexes();
+    if (!indexes.isEmpty() && setControlsFromStorage(indexes.at(0)))
+      return;
+  }
+
+  ui->pageContainer->setCurrentWidget(ui->emptyPage);
+}
 
 void
 Tab::expandAll() {
@@ -308,6 +348,18 @@ Tab::expandCollapseAll(bool expand,
 
   for (auto row = 0, numRows = m_chapterModel->rowCount(parentIdx); row < numRows; ++row)
     expandCollapseAll(expand, m_chapterModel->index(row, 0, parentIdx));
+}
+
+QString
+Tab::formatEbmlBinary(EbmlBinary *binary) {
+  auto value = std::string{};
+  auto data  = static_cast<unsigned char const *>(binary ? binary->GetBuffer() : nullptr);
+
+  if (data)
+    for (auto end = data + binary->GetSize(); data < end; ++data)
+      value += (boost::format("%|1$02x|") % static_cast<unsigned int>(*data)).str();
+
+  return Q(value);
 }
 
 }}}

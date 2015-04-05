@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>735</width>
-    <height>563</height>
+    <width>702</width>
+    <height>552</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -111,7 +111,7 @@
       </property>
       <widget class="QWidget" name="emptyPage"/>
       <widget class="QWidget" name="editionPage">
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QLabel" name="lEditionEntry">
           <property name="text">
@@ -128,7 +128,7 @@
         </item>
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0" alignment="Qt::AlignTop">
+          <item row="0" column="0">
            <widget class="QLabel" name="lEdFlags">
             <property name="text">
              <string>Flags:</string>
@@ -136,18 +136,18 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <widget class="QCheckBox" name="cbEdFlagHidden">
-              <property name="text">
-               <string>&amp;Hidden</string>
-              </property>
-             </widget>
-            </item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <widget class="QCheckBox" name="cbEdFlagDefault">
               <property name="text">
                <string>&amp;Default</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbEdFlagHidden">
+              <property name="text">
+               <string>&amp;Hidden</string>
               </property>
              </widget>
             </item>
@@ -157,6 +157,19 @@
                <string>&amp;Ordered</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>
@@ -190,8 +203,8 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="atomPage">
-       <layout class="QVBoxLayout" name="verticalLayout_4">
+      <widget class="QWidget" name="chapterPage">
+       <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
          <widget class="QLabel" name="lChapter">
           <property name="text">
@@ -207,124 +220,235 @@
          </widget>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QLabel" name="lChStart">
-            <property name="text">
-             <string>&amp;Start:</string>
-            </property>
-            <property name="buddy">
-             <cstring>leChStart</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="leChStart"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="lChEnd">
-            <property name="text">
-             <string>&amp;End:</string>
-            </property>
-            <property name="buddy">
-             <cstring>leChEnd</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="leChEnd"/>
-          </item>
-          <item row="2" column="0" alignment="Qt::AlignTop">
-           <widget class="QLabel" name="lChFlags">
-            <property name="text">
-             <string>Flags:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <layout class="QVBoxLayout" name="verticalLayout_3">
+         <widget class="QScrollArea" name="scrollArea">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>399</width>
+             <height>434</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
             <item>
-             <widget class="QCheckBox" name="cbChFlagHidden">
-              <property name="text">
-               <string>&amp;Hidden</string>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <item row="0" column="0">
+               <widget class="QLabel" name="lChStart">
+                <property name="text">
+                 <string>&amp;Start &amp;&amp; end:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>leChStart</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <item>
+                 <widget class="QLineEdit" name="leChStart"/>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="leChEnd"/>
+                </item>
+               </layout>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lChFlags">
+                <property name="text">
+                 <string>Flags:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QCheckBox" name="cbChFlagEnabled">
+                  <property name="text">
+                   <string>&amp;Enabled</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cbChFlagHidden">
+                  <property name="text">
+                   <string>&amp;Hidden</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lChUid">
+                <property name="text">
+                 <string>&amp;UID:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>leChUid</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="leChUid"/>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="lChSegmentUid">
+                <property name="text">
+                 <string>Seg&amp;ment UID:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>leChSegmentUid</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="leChSegmentUid"/>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="lChSegmentEditionUid">
+                <property name="text">
+                 <string>Segment e&amp;dition UID:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>leChSegmentEditionUid</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="leChSegmentEditionUid"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="gbChNames">
+              <property name="title">
+               <string>Names</string>
               </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QTableView" name="tvChNames"/>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_3">
+                   <item>
+                    <widget class="QPushButton" name="pbChAddName">
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../../qt_resources.qrc">
+                       <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="pbChRemoveName">
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="../../qt_resources.qrc">
+                       <normaloff>:/icons/16x16/list-remove.png</normaloff>:/icons/16x16/list-remove.png</iconset>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_2">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout_4">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="lChName">
+                   <property name="text">
+                    <string>&amp;Name:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>leChName</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="leChName"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="lChNameLanguage">
+                   <property name="text">
+                    <string>&amp;Language:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>cbChNameLanguage</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QComboBox" name="cbChNameLanguage"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="lChNameCountry">
+                   <property name="text">
+                    <string>&amp;Country:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>cbChNameCountry</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QComboBox" name="cbChNameCountry"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="cbChFlagDefault">
-              <property name="text">
-               <string>&amp;Default</string>
+             <spacer name="verticalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
               </property>
-             </widget>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>13</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="lChUid">
-            <property name="text">
-             <string>&amp;UID:</string>
-            </property>
-            <property name="buddy">
-             <cstring>leChUid</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="leChUid"/>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="lChSegmentUid">
-            <property name="text">
-             <string>Seg&amp;ment UID:</string>
-            </property>
-            <property name="buddy">
-             <cstring>leChSegmentUid</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="leChSegmentUid"/>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="lChSegmentEditionUid">
-            <property name="text">
-             <string>Seg&amp;ment edition UID:</string>
-            </property>
-            <property name="buddy">
-             <cstring>leChSegmentEditionUid</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLineEdit" name="leChSegmentEditionUid"/>
-          </item>
-          <item row="6" column="0" alignment="Qt::AlignTop">
-           <widget class="QLabel" name="lChNames">
-            <property name="text">
-             <string>&amp;Names:</string>
-            </property>
-            <property name="buddy">
-             <cstring>tvChNames</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QTableView" name="tvChNames"/>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>50</height>
-           </size>
-          </property>
-         </spacer>
+          </widget>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -335,20 +459,28 @@
  </widget>
  <tabstops>
   <tabstop>elements</tabstop>
-  <tabstop>cbEdFlagHidden</tabstop>
   <tabstop>cbEdFlagDefault</tabstop>
+  <tabstop>cbEdFlagHidden</tabstop>
   <tabstop>cbEdFlagOrdered</tabstop>
   <tabstop>leEdUid</tabstop>
+  <tabstop>scrollArea</tabstop>
   <tabstop>leChStart</tabstop>
   <tabstop>leChEnd</tabstop>
+  <tabstop>cbChFlagEnabled</tabstop>
   <tabstop>cbChFlagHidden</tabstop>
-  <tabstop>cbChFlagDefault</tabstop>
   <tabstop>leChUid</tabstop>
   <tabstop>leChSegmentUid</tabstop>
   <tabstop>leChSegmentEditionUid</tabstop>
   <tabstop>tvChNames</tabstop>
+  <tabstop>pbChAddName</tabstop>
+  <tabstop>pbChRemoveName</tabstop>
+  <tabstop>leChName</tabstop>
+  <tabstop>cbChNameLanguage</tabstop>
+  <tabstop>cbChNameCountry</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../qt_resources.qrc"/>
+ </resources>
  <connections/>
  <slots>
   <slot>itemSelected(QModelIndex)</slot>
