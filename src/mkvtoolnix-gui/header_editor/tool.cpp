@@ -31,9 +31,6 @@ Tool::Tool(QWidget *parent,
   // Setup UI controls.
   ui->setupUi(this);
 
-  ui->headerEditors->setVisible(false);
-  ui->noFileOpened->setVisible(true);
-
   setupMenu();
 
   showHeaderEditorsWidget();
@@ -58,8 +55,7 @@ Tool::showHeaderEditorsWidget() {
   auto hasTabs = !!ui->headerEditors->count();
   auto mwUi    = MainWindow::get()->getUi();
 
-  ui->headerEditors->setVisible(hasTabs);
-  ui->noFileOpened->setVisible(!hasTabs);
+  ui->stack->setCurrentWidget(hasTabs ? ui->editorsPage : ui->noFilesPage);
 
   mwUi->actionHeaderEditorSave->setEnabled(hasTabs);
   mwUi->actionHeaderEditorReload->setEnabled(hasTabs);

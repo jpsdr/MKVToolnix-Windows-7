@@ -172,8 +172,6 @@ Tab::setupUi() {
   ui->elements->addAction(m_expandAllAction);
   ui->elements->addAction(m_collapseAllAction);
 
-  m_pageContainerLayout = new QVBoxLayout{ui->pageContainer};
-
   connect(ui->elements->selectionModel(), &QItemSelectionModel::currentChanged, this, &Tab::selectionChanged);
   connect(m_expandAllAction,              &QAction::triggered,                  this, &Tab::expandAll);
   connect(m_collapseAllAction,            &QAction::triggered,                  this, &Tab::collapseAll);
@@ -182,7 +180,7 @@ Tab::setupUi() {
 void
 Tab::appendPage(PageBase *page,
                 QModelIndex const &parentIdx) {
-  m_pageContainerLayout->addWidget(page);
+  ui->pageContainer->addWidget(page);
   m_model->appendPage(page, parentIdx);
 }
 
@@ -224,18 +222,8 @@ void
 Tab::selectionChanged(QModelIndex const &current,
                       QModelIndex const &) {
   auto selectedPage = m_model->selectedPage(current);
-  if (!selectedPage)
-    return;
-
-  auto pages = m_model->getPages();
-  for (auto const &page : pages)
-    page->setVisible(page == selectedPage);
-}
-
-QWidget *
-Tab::getPageContainer()
-  const {
-  return ui->pageContainer;
+  if (selectedPage)
+    ui->pageContainer->setCurrentWidget(selectedPage);
 }
 
 QString const &

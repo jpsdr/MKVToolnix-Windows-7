@@ -9,7 +9,6 @@
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 
 class QAction;
-class QVBoxLayout;
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -23,7 +22,6 @@ class Tab : public QWidget {
 protected:
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
-  QVBoxLayout *m_pageContainerLayout{};
 
   QString m_fileName;
   std::unique_ptr<QtKaxAnalyzer> m_analyzer;
@@ -44,7 +42,6 @@ public:
 
   virtual bool hasBeenModified();
   virtual void retranslateUi();
-  virtual QWidget *getPageContainer() const;
   virtual void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
   virtual QString const &getFileName() const;
   virtual void validate();
