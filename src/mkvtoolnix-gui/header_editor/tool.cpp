@@ -59,6 +59,7 @@ Tool::showHeaderEditorsWidget() {
 
   mwUi->actionHeaderEditorSave->setEnabled(hasTabs);
   mwUi->actionHeaderEditorReload->setEnabled(hasTabs);
+  mwUi->actionHeaderEditorValidate->setEnabled(hasTabs);
   mwUi->actionHeaderEditorClose->setEnabled(hasTabs);
 }
 
