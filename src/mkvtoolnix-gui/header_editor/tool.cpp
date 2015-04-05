@@ -52,7 +52,7 @@ Tool::setupMenu() {
 
 void
 Tool::showHeaderEditorsWidget() {
-  auto hasTabs = !!ui->headerEditors->count();
+  auto hasTabs = !!ui->editors->count();
   auto mwUi    = MainWindow::get()->getUi();
 
   ui->stack->setCurrentWidget(hasTabs ? ui->editorsPage : ui->noFilesPage);
@@ -107,11 +107,11 @@ Tool::openFile(QString const &fileName) {
   auto tab = new Tab{this, fileName};
 
   connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
-  ui->headerEditors->addTab(tab, QFileInfo{fileName}.fileName());
+  ui->editors->addTab(tab, QFileInfo{fileName}.fileName());
 
   showHeaderEditorsWidget();
 
-  ui->headerEditors->setCurrentIndex(ui->headerEditors->count() - 1);
+  ui->editors->setCurrentIndex(ui->editors->count() - 1);
 
   tab->load();
 }
@@ -161,10 +161,10 @@ Tool::validate() {
 
 void
 Tool::closeTab(int index) {
-  if ((0  > index) || (ui->headerEditors->count() <= index))
+  if ((0  > index) || (ui->editors->count() <= index))
     return;
 
-  auto tab = static_cast<Tab *>(ui->headerEditors->widget(index));
+  auto tab = static_cast<Tab *>(ui->editors->widget(index));
 
   if (tab->hasBeenModified()) {
     auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
@@ -173,7 +173,7 @@ Tool::closeTab(int index) {
       return;
   }
 
-  ui->headerEditors->removeTab(index);
+  ui->editors->removeTab(index);
   delete tab;
 
   showHeaderEditorsWidget();
@@ -181,15 +181,15 @@ Tool::closeTab(int index) {
 
 void
 Tool::closeCurrentTab() {
-  closeTab(ui->headerEditors->currentIndex());
+  closeTab(ui->editors->currentIndex());
 }
 
 void
 Tool::closeSendingTab() {
   auto toRemove = static_cast<Tab *>(sender());
 
-  for (auto idx = 0, count = ui->headerEditors->count(); idx < count; ++idx) {
-    auto tab = static_cast<Tab *>(ui->headerEditors->widget(idx));
+  for (auto idx = 0, count = ui->editors->count(); idx < count; ++idx) {
+    auto tab = static_cast<Tab *>(ui->editors->widget(idx));
     if (tab == toRemove) {
       closeTab(idx);
       return;
@@ -199,7 +199,7 @@ Tool::closeSendingTab() {
 
 Tab *
 Tool::currentTab() {
-  return static_cast<Tab *>(ui->headerEditors->widget(ui->headerEditors->currentIndex()));
+  return static_cast<Tab *>(ui->editors->widget(ui->editors->currentIndex()));
 }
 
 }}}

@@ -90,9 +90,26 @@
     <addaction name="separator"/>
     <addaction name="actionHeaderEditorClose"/>
    </widget>
+   <widget class="QMenu" name="menuChapterEditor">
+    <property name="title">
+     <string>&amp;Chapter editor</string>
+    </property>
+    <addaction name="actionChapterEditorNew"/>
+    <addaction name="separator"/>
+    <addaction name="actionChapterEditorOpen"/>
+    <addaction name="actionChapterEditorReload"/>
+    <addaction name="separator"/>
+    <addaction name="actionChapterEditorValidate"/>
+    <addaction name="actionChapterEditorSave"/>
+    <addaction name="actionChapterEditorSaveAsXML"/>
+    <addaction name="actionChapterEditorSaveToMatroska"/>
+    <addaction name="separator"/>
+    <addaction name="actionChapterEditorClose"/>
+   </widget>
    <addaction name="menuGUI"/>
    <addaction name="menuMerge"/>
    <addaction name="menuHeaderEditor"/>
+   <addaction name="menuChapterEditor"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionMergeNew">
@@ -259,6 +276,82 @@
    </property>
   </action>
   <action name="actionHeaderEditorValidate">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/dialog-ok-apply.png</normaloff>:/icons/16x16/dialog-ok-apply.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Validate values</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorNew">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-new.png</normaloff>:/icons/16x16/document-new.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorOpen">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open Matroska or XML file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorClose">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorSave">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorSaveAsXML">
+   <property name="text">
+    <string>Save as &amp;XML file</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorSaveToMatroska">
+   <property name="text">
+    <string>Save to &amp;Matroska file</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorReload">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-revert.png</normaloff>:/icons/16x16/document-revert.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Reload</string>
+   </property>
+  </action>
+  <action name="actionChapterEditorValidate">
    <property name="icon">
     <iconset resource="../../qt_resources.qrc">
      <normaloff>:/icons/16x16/dialog-ok-apply.png</normaloff>:/icons/16x16/dialog-ok-apply.png</iconset>

@@ -107,7 +107,7 @@
             <item>
              <widget class="QLabel" name="howToOpenLabel">
               <property name="text">
-               <string>Open a file via the &quot;header editor&quot; menu or drag &amp; drop one here.</string>
+               <string>Open a file via the »header editor« menu or drag &amp; drop one here.</string>
               </property>
              </widget>
             </item>
@@ -147,7 +147,7 @@
      <widget class="QWidget" name="editorsPage">
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QTabWidget" name="headerEditors">
+        <widget class="QTabWidget" name="editors">
          <property name="currentIndex">
           <number>-1</number>
          </property>
@@ -168,7 +168,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>headerEditors</sender>
+   <sender>editors</sender>
    <signal>tabCloseRequested(int)</signal>
    <receiver>mtx::gui::HeaderEditor::Tool</receiver>
    <slot>closeTab(int)</slot>
