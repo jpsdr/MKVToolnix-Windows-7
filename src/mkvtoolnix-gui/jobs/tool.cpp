@@ -2,7 +2,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/jobs/tool.h"
-#include "mkvtoolnix-gui/forms/main_window.h"
+#include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"

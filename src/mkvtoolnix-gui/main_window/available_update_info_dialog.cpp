@@ -5,7 +5,7 @@
 #include <QDesktopServices>
 
 #include "common/qt.h"
-#include "mkvtoolnix-gui/forms/available_update_info_dialog.h"
+#include "mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h"
 #include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
 
 namespace mtx { namespace gui {

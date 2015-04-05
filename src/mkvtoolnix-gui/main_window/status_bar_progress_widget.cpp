@@ -1,7 +1,7 @@
 #include "common/common_pch.h"
 
 #include "common/qt.h"
-#include "mkvtoolnix-gui/forms/status_bar_progress_widget.h"
+#include "mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 
 namespace mtx { namespace gui {
