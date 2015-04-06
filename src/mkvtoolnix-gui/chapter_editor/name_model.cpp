@@ -30,7 +30,7 @@ NameModel::newRowItems() {
 
 KaxChapterDisplay *
 NameModel::displayFromItem(QStandardItem *item) {
-  return item ? item->data(Util::ChapterEditorChapterDisplayRole).value<KaxChapterDisplay *>() : nullptr;
+  return m_displayRegistry[ registryIdFromItem(item) ];
 }
 
 KaxChapterDisplay *
@@ -64,7 +64,7 @@ NameModel::updateRow(int row) {
 void
 NameModel::append(KaxChapterDisplay &display) {
   auto rowItems = newRowItems();
-  rowItems[0]->setData(QVariant::fromValue(&display), Util::ChapterEditorChapterDisplayRole);
+  rowItems[0]->setData(registerDisplay(display), Util::ChapterEditorChapterDisplayRole);
 
   setRowText(rowItems);
   appendRow(rowItems);
@@ -82,28 +82,38 @@ NameModel::addNew() {
 
 void
 NameModel::remove(QModelIndex const &idx) {
-  auto chapter = displayFromItem(itemFromIndex(idx));
-  if (!chapter)
+  auto displayItem = itemFromIndex(idx);
+  auto display     = displayFromItem(displayItem);
+  if (!display)
     return;
 
+  m_displayRegistry.remove(registryIdFromItem(displayItem));
+
   removeRow(idx.row());
-  DeleteChild(*m_chapter, chapter);
+  DeleteChild(*m_chapter, display);
 }
 
 void
 NameModel::reset() {
   beginResetModel();
+
   removeRows(0, rowCount());
-  m_chapter = nullptr;
+
+  m_displayRegistry.empty();
+  m_nextDisplayRegistryIdx = 0;
+  m_chapter                = nullptr;
+
   endResetModel();
 }
 
 void
 NameModel::populate(KaxChapterAtom &chapter) {
   beginResetModel();
-  removeRows(0, rowCount());
 
-  m_chapter = &chapter;
+  removeRows(0, rowCount());
+  m_displayRegistry.empty();
+  m_nextDisplayRegistryIdx = 0;
+  m_chapter                = &chapter;
 
   for (auto const &child : chapter) {
     auto display = dynamic_cast<KaxChapterDisplay *>(child);
@@ -112,6 +122,32 @@ NameModel::populate(KaxChapterAtom &chapter) {
   }
 
   endResetModel();
+}
+
+Qt::DropActions
+NameModel::supportedDropActions()
+  const {
+  return Qt::MoveAction;
+}
+
+Qt::ItemFlags
+NameModel::flags(QModelIndex const &index)
+  const {
+  if (!index.isValid())
+    return Qt::ItemIsDropEnabled;
+
+  return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled | Qt::ItemNeverHasChildren;
+}
+
+qulonglong
+NameModel::registerDisplay(KaxChapterDisplay &display) {
+  m_displayRegistry[ ++m_nextDisplayRegistryIdx ] = &display;
+  return m_nextDisplayRegistryIdx;
+}
+
+qulonglong
+NameModel::registryIdFromItem(QStandardItem *item) {
+  return item ? item->data(Util::ChapterEditorChapterDisplayRole).value<qulonglong>() : 0;
 }
 
 }}}

@@ -482,6 +482,10 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
     GetChild<KaxChapterSegmentEditionUID>(*chapter).SetValue(uid);
   }
 
+  RemoveChildren<KaxChapterDisplay>(*chapter);
+  for (auto row = 0, numRows = m_nameModel->rowCount(); row < numRows; ++row)
+    chapter->PushElement(*m_nameModel->displayFromIndex(m_nameModel->index(row, 0)));
+
   return { true, QString{} };
 }
 

@@ -344,7 +344,17 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
-                  <widget class="QTreeView" name="tvChNames"/>
+                  <widget class="mtx::gui::ChapterEditor::NameTreeView" name="tvChNames">
+                   <property name="dragEnabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="dragDropMode">
+                    <enum>QAbstractItemView::InternalMove</enum>
+                   </property>
+                   <property name="defaultDropAction">
+                    <enum>Qt::MoveAction</enum>
+                   </property>
+                  </widget>
                  </item>
                  <item>
                   <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -462,6 +472,11 @@
    <class>mtx::gui::ChapterEditor::ChapterTreeView</class>
    <extends>QTreeView</extends>
    <header>mkvtoolnix-gui/chapter_editor/chapter_tree_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::ChapterEditor::NameTreeView</class>
+   <extends>QTreeView</extends>
+   <header>mkvtoolnix-gui/chapter_editor/name_tree_view.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

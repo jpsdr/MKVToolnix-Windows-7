@@ -21,6 +21,8 @@ class NameModel: public QStandardItemModel {
 
 protected:
   KaxChapterAtom *m_chapter{};
+  QHash<qulonglong, KaxChapterDisplay *> m_displayRegistry;
+  qulonglong m_nextDisplayRegistryIdx{};
 
 public:
   NameModel(QObject *parent);
@@ -38,9 +40,15 @@ public:
   KaxChapterDisplay *displayFromIndex(QModelIndex const &idx);
   KaxChapterDisplay *displayFromItem(QStandardItem *item);
 
+  virtual Qt::DropActions supportedDropActions() const override;
+  virtual Qt::ItemFlags flags(QModelIndex const &index) const override;
+
+
 protected:
   void setRowText(QList<QStandardItem *> const &rowItems);
   QList<QStandardItem *> itemsForRow(int row);
+  qulonglong registerDisplay(KaxChapterDisplay &display);
+  qulonglong registryIdFromItem(QStandardItem *item);
 
 protected:
   static QList<QStandardItem *> newRowItems();
