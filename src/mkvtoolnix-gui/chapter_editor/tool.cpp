@@ -43,28 +43,31 @@ void
 Tool::setupMenu() {
   auto mwUi = MainWindow::get()->getUi();
 
-  connect(mwUi->actionChapterEditorNew,      &QAction::triggered, this, &Tool::newFile);
-  connect(mwUi->actionChapterEditorOpen,     &QAction::triggered, this, &Tool::selectFileToOpen);
-  // connect(mwUi->actionChapterEditorSave,     &QAction::triggered, this, &Tool::save);
-  // connect(mwUi->actionChapterEditorValidate, &QAction::triggered, this, &Tool::validate);
-  // connect(mwUi->actionChapterEditorReload,   &QAction::triggered, this, &Tool::reload);
-  connect(mwUi->actionChapterEditorClose,    &QAction::triggered, this, &Tool::closeCurrentTab);
+  connect(mwUi->actionChapterEditorNew,    &QAction::triggered,         this, &Tool::newFile);
+  connect(mwUi->actionChapterEditorOpen,   &QAction::triggered,         this, &Tool::selectFileToOpen);
+  // connect(mwUi->actionChapterEditorSave,   &QAction::triggered,         this, &Tool::save);
+  // connect(mwUi->actionChapterEditorReload, &QAction::triggered,         this, &Tool::reload);
+  connect(mwUi->actionChapterEditorClose,  &QAction::triggered,         this, &Tool::closeCurrentTab);
+
+  connect(ui->editors,                     &QTabWidget::currentChanged, this, &Tool::enableMenuActions);
 }
 
 void
 Tool::showChapterEditorsWidget() {
-  auto hasTabs = !!ui->editors->count();
-  auto mwUi    = MainWindow::get()->getUi();
+  ui->stack->setCurrentWidget(ui->editors->count() ? ui->editorsPage : ui->noFilesPage);
+  enableMenuActions();
+}
 
-  ui->stack->setCurrentWidget(hasTabs ? ui->editorsPage : ui->noFilesPage);
+void
+Tool::enableMenuActions() {
+  auto mwUi = MainWindow::get()->getUi();
+  auto tab  = currentTab();
 
-  mwUi->actionChapterEditorSave->setEnabled(hasTabs);
-  mwUi->actionChapterEditorSaveAsXml->setEnabled(hasTabs);
-  mwUi->actionChapterEditorSaveToMatroska->setEnabled(hasTabs);
-  mwUi->actionChapterEditorValidate->setEnabled(hasTabs);
-  mwUi->actionChapterEditorReload->setEnabled(hasTabs);
-  mwUi->actionChapterEditorClose->setEnabled(hasTabs);
-  // TODO: Tool::showChapterEditorsWidget: enable reload only if tab has file
+  mwUi->actionChapterEditorSave->setEnabled(tab && !tab->getFileName().isEmpty());
+  mwUi->actionChapterEditorSaveAsXml->setEnabled(!!tab);
+  mwUi->actionChapterEditorSaveToMatroska->setEnabled(!!tab);
+  mwUi->actionChapterEditorReload->setEnabled(tab && !tab->getFileName().isEmpty());
+  mwUi->actionChapterEditorClose->setEnabled(!!tab);
 }
 
 void
@@ -171,13 +174,6 @@ Tool::selectFileToOpen() {
 //   }
 
 //   tab->load();
-// }
-
-// void
-// Tool::validate() {
-//   auto tab = currentTab();
-//   if (tab)
-//     tab->validate();
 // }
 
 void

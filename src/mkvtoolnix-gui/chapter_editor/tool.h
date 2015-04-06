@@ -36,10 +36,10 @@ public:
 public slots:
   virtual void toolShown() override;
   virtual void tabTitleChanged(QString const &title);
+  virtual void enableMenuActions();
   virtual void newFile();
   virtual void selectFileToOpen();
   // virtual void save();
-  // virtual void validate();
   virtual void closeTab(int index);
   virtual void closeCurrentTab();
   virtual void closeSendingTab();

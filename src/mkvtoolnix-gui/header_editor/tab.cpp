@@ -415,6 +415,7 @@ Tab::validate() {
 void
 Tab::reportValidationFailure(bool isCritical,
                              QModelIndex const &pageIdx) {
+  ui->elements->selectionModel()->setCurrentIndex(pageIdx, QItemSelectionModel::ClearAndSelect);
   ui->elements->selectionModel()->select(pageIdx, QItemSelectionModel::ClearAndSelect);
   selectionChanged(pageIdx, QModelIndex{});
 

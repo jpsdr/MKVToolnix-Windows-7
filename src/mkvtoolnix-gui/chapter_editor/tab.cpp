@@ -6,6 +6,7 @@
 
 #include <matroska/KaxSemantic.h>
 
+#include "common/bitvalue.h"
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/mm_io_x.h"
@@ -13,6 +14,7 @@
 #include "common/segmentinfo.h"
 #include "common/segment_tracks.h"
 #include "common/strings/formatting.h"
+#include "common/strings/parsing.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
@@ -275,9 +277,133 @@ Tab::load() {
 // }
 
 void
-Tab::copyControlsToStorage(QModelIndex const &) {
-  // TODO: Tab::copyControlsToStorage
-  mxinfo(boost::format("TODO: copyControlsFromStorage\n"));
+Tab::selectChapterRow(QModelIndex const &idx,
+                      bool ignoreSelectionChanges) {
+  auto selection = QItemSelection{idx.sibling(idx.row(), 0), idx.sibling(idx.row(), 2)};
+
+  m_ignoreChapterSelectionChanges = ignoreSelectionChanges;
+  ui->elements->selectionModel()->setCurrentIndex(idx.sibling(idx.row(), 0), QItemSelectionModel::ClearAndSelect);
+  ui->elements->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+  m_ignoreChapterSelectionChanges = false;
+}
+
+bool
+Tab::copyControlsToStorage(QModelIndex const &idx) {
+  auto result = copyControlsToStorageImpl(idx);
+  if (result.first) {
+    m_chapterModel->updateRow(idx);
+    return true;
+  }
+
+  selectChapterRow(idx, true);
+
+  QMessageBox::critical(this, QY("Validation failed"), result.second);
+
+  return false;
+}
+
+Tab::ValidationResult
+Tab::copyControlsToStorageImpl(QModelIndex const &idx) {
+  auto stdItem = m_chapterModel->itemFromIndex(idx);
+  if (!stdItem)
+    return { true, QString{} };
+
+  if (!idx.parent().isValid())
+    return copyEditionControlsToStorage(m_chapterModel->editionFromItem(stdItem));
+  return copyChapterControlsToStorage(m_chapterModel->chapterFromItem(stdItem));
+}
+
+Tab::ValidationResult
+Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
+  if (!chapter)
+    return { true, QString{} };
+
+  auto ok  = false;
+  auto uid = ui->leChUid->text().toULongLong(&ok);
+  if (!ok || !uid)
+    return { false, QY("The chapter UID must be positive number.") };
+
+  GetChild<KaxChapterUID>(*chapter).SetValue(uid);
+
+  if (!ui->cbChFlagEnabled->isChecked())
+    GetChild<KaxChapterFlagEnabled>(*chapter).SetValue(0);
+  else
+    DeleteChildren<KaxChapterFlagEnabled>(*chapter);
+
+  if (ui->cbChFlagHidden->isChecked())
+    GetChild<KaxChapterFlagHidden>(*chapter).SetValue(1);
+  else
+    DeleteChildren<KaxChapterFlagHidden>(*chapter);
+
+  auto startTimecode = int64_t{};
+  if (!parse_timecode(to_utf8(ui->leChStart->text()), startTimecode))
+    return { false, QY("The start time could not be parsed: %1").arg(Q(timecode_parser_error)) };
+  GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTimecode);
+
+  if (!ui->leChEnd->text().isEmpty()) {
+    auto endTimecode = int64_t{};
+    if (!parse_timecode(to_utf8(ui->leChEnd->text()), endTimecode))
+      return { false, QY("The end time could not be parsed: %1").arg(Q(timecode_parser_error)) };
+
+    if (endTimecode <= startTimecode)
+      return { false, QY("The end time must be greater than the start timecode.") };
+
+    GetChild<KaxChapterTimeEnd>(*chapter).SetValue(endTimecode);
+
+  } else
+    DeleteChildren<KaxChapterTimeEnd>(*chapter);
+
+  if (!ui->leChSegmentUid->text().isEmpty()) {
+    try {
+      auto value = bitvalue_c{to_utf8(ui->leChSegmentUid->text())};
+      GetChild<KaxChapterSegmentUID>(*chapter).CopyBuffer(value.data(), value.byte_size());
+
+    } catch (mtx::bitvalue_parser_x const &ex) {
+      return { false, QY("The segment UID could not be parsed: %1").arg(ex.what()) };
+    }
+
+  } else
+    DeleteChildren<KaxChapterSegmentUID>(*chapter);
+
+  if (!ui->leChSegmentEditionUid->text().isEmpty()) {
+    uid = ui->leChSegmentEditionUid->text().toULongLong(&ok);
+    if (!ok || !uid)
+      return { false, QY("The segment edition UID must be positive number if it is given.") };
+
+    GetChild<KaxChapterSegmentEditionUID>(*chapter).SetValue(uid);
+  }
+
+  return { true, QString{} };
+}
+
+Tab::ValidationResult
+Tab::copyEditionControlsToStorage(EditionPtr const &edition) {
+  if (!edition)
+    return { true, QString{} };
+
+  auto ok  = false;
+  auto uid = ui->leEdUid->text().toULongLong(&ok);
+  if (!ok || !uid)
+    return { false, QY("The edition UID must be positive number.") };
+
+  GetChild<KaxEditionUID>(*edition).SetValue(uid);
+
+  if (ui->cbEdFlagDefault->isChecked())
+    GetChild<KaxEditionFlagDefault>(*edition).SetValue(1);
+  else
+    DeleteChildren<KaxEditionFlagDefault>(*edition);
+
+  if (ui->cbEdFlagHidden->isChecked())
+    GetChild<KaxEditionFlagHidden>(*edition).SetValue(1);
+  else
+    DeleteChildren<KaxEditionFlagHidden>(*edition);
+
+  if (ui->cbEdFlagOrdered->isChecked())
+    GetChild<KaxEditionFlagOrdered>(*edition).SetValue(1);
+  else
+    DeleteChildren<KaxEditionFlagOrdered>(*edition);
+
+  return { true, QString{} };
 }
 
 bool
@@ -302,7 +428,7 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
   ui->lChapter->setText(m_chapterModel->chapterDisplayName(*chapter));
   ui->leChStart->setText(Q(format_timecode(FindChildValue<KaxChapterTimeStart>(*chapter))));
   ui->leChEnd->setText(end ? Q(format_timecode(end->GetValue())) : Q(""));
-  ui->cbChFlagEnabled->setChecked(!!FindChildValue<KaxChapterFlagEnabled>(*chapter));
+  ui->cbChFlagEnabled->setChecked(!!FindChildValue<KaxChapterFlagEnabled>(*chapter, 1));
   ui->cbChFlagHidden->setChecked(!!FindChildValue<KaxChapterFlagHidden>(*chapter));
   ui->leChUid->setText(QString::number(FindChildValue<KaxChapterUID>(*chapter)));
   ui->leChSegmentUid->setText(formatEbmlBinary(FindChild<KaxChapterSegmentUID>(*chapter)));
@@ -331,19 +457,31 @@ Tab::setEditionControlsFromStorage(EditionPtr const &edition) {
   return true;
 }
 
+bool
+Tab::handleChapterDeselection(QItemSelection const &deselected) {
+  if (deselected.isEmpty())
+    return true;
+
+  auto indexes = deselected.at(0).indexes();
+  return indexes.isEmpty() ? true : copyControlsToStorage(indexes.at(0));
+}
+
 void
 Tab::chapterSelectionChanged(QItemSelection const &selected,
                              QItemSelection const &deselected) {
-  if (!deselected.isEmpty()) {
-    auto indexes = deselected.at(0).indexes();
-    if (!indexes.isEmpty())
-      copyControlsToStorage(indexes.at(0));
-  }
+  if (m_ignoreChapterSelectionChanges)
+    return;
+
+  if (!handleChapterDeselection(deselected))
+    return;
 
   if (!selected.isEmpty()) {
     auto indexes = selected.at(0).indexes();
-    if (!indexes.isEmpty() && setControlsFromStorage(indexes.at(0)))
-      return;
+    if (!indexes.isEmpty()) {
+      auto idx = indexes.at(0);
+      if (setControlsFromStorage(idx.sibling(idx.row(), 0)))
+        return;
+    }
   }
 
   ui->pageContainer->setCurrentWidget(ui->emptyPage);

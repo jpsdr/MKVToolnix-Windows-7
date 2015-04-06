@@ -31,6 +31,9 @@ class Tab : public QWidget {
   Q_OBJECT;
 
 protected:
+  using ValidationResult = std::pair<bool, QString>;
+
+protected:
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
 
@@ -43,6 +46,8 @@ protected:
 
   QAction *m_expandAllAction, *m_collapseAllAction;
   QList<QWidget *> m_nameWidgets;
+
+  bool m_ignoreChapterSelectionChanges{};
 
 public:
   explicit Tab(QWidget *parent, QString const &fileName = QString{});
@@ -82,7 +87,11 @@ protected:
   void resizeChapterColumnsToContents() const;
   void resizeNameColumnsToContents() const;
 
-  void copyControlsToStorage(QModelIndex const &idx);
+  bool copyControlsToStorage(QModelIndex const &idx);
+  ValidationResult copyControlsToStorageImpl(QModelIndex const &idx);
+  ValidationResult copyChapterControlsToStorage(ChapterPtr const &chapter);
+  ValidationResult copyEditionControlsToStorage(EditionPtr const &edition);
+
   bool setControlsFromStorage(QModelIndex const &idx);
   bool setChapterControlsFromStorage(ChapterPtr const &chapter);
   bool setEditionControlsFromStorage(EditionPtr const &edition);
@@ -91,6 +100,9 @@ protected:
   void enableNameWidgets(bool enable);
 
   void withSelectedName(std::function<void(QModelIndex const &, KaxChapterDisplay &)> const &worker);
+
+  void selectChapterRow(QModelIndex const &idx, bool ignoreSelectionChanges);
+  bool handleChapterDeselection(QItemSelection const &deselected);
 
 protected:
   static QString formatEbmlBinary(EbmlBinary *binary);
