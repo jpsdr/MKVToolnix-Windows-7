@@ -102,9 +102,7 @@ Tab::setupUi() {
 }
 
 void
-Tab::retranslateUi() {
-  ui->retranslateUi(this);
-
+Tab::updateFileNameDisplay() {
   if (!m_fileName.isEmpty()) {
     auto info = QFileInfo{m_fileName};
     ui->fileName->setText(info.fileName());
@@ -115,6 +113,13 @@ Tab::retranslateUi() {
     ui->directory->setText(Q(""));
 
   }
+}
+
+void
+Tab::retranslateUi() {
+  ui->retranslateUi(this);
+
+  updateFileNameDisplay();
 
   m_expandAllAction->setText(QY("&Expand all"));
   m_collapseAllAction->setText(QY("&Collapse all"));
@@ -258,12 +263,8 @@ Tab::save() {
 }
 
 void
-Tab::saveAsXml() {
-  saveAsXmlImpl(true);
-}
-
-void
-Tab::saveAsXmlImpl(bool requireNewFileName) {
+Tab::saveAsImpl(bool requireNewFileName,
+                std::function<bool(bool, QString &)> const &worker) {
   if (!copyControlsToStorage())
     return;
 
@@ -274,35 +275,55 @@ Tab::saveAsXmlImpl(bool requireNewFileName) {
   if (m_fileName.isEmpty())
     requireNewFileName = true;
 
-  if (requireNewFileName) {
-    auto &settings       = Util::Settings::get();
-    auto defaultFileName = !m_fileName.isEmpty() ? m_fileName : settings.m_lastMatroskaFileDir.path();
-    newFileName          = QFileDialog::getSaveFileName(this, QY("Save chapters as XML"), defaultFileName, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"));
-
-    if (newFileName.isEmpty())
-      return;
-  }
-
-  try {
-    auto chapters = m_chapterModel->allChapters();
-    auto out      = mm_file_io_c{to_utf8(newFileName), MODE_CREATE};
-    mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, out);
-
-  } catch (mtx::mm_io::exception &) {
-    QMessageBox::critical(this, QY("Saving failed"), QY("Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."));
+  if (!worker(requireNewFileName, newFileName))
     return;
 
-  } catch (mtx::xml::conversion_x &ex) {
-    QMessageBox::critical(this, QY("Saving failed"), QY("Converting the chapters to XML failed: %1").arg(ex.what()));
-    return;
-  }
+  if (newFileName != m_fileName) {
+    m_fileName                     = newFileName;
 
-  if (requireNewFileName) {
-    m_fileName = newFileName;
+    auto &settings                 = Util::Settings::get();
+    settings.m_lastMatroskaFileDir = QFileInfo{newFileName}.path();
+    settings.save();
+
+    updateFileNameDisplay();
     emit titleChanged(getTitle());
   }
 
   MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
+}
+
+void
+Tab::saveAsXml() {
+  saveAsXmlImpl(true);
+}
+
+void
+Tab::saveAsXmlImpl(bool requireNewFileName) {
+  saveAsImpl(requireNewFileName, [this](bool doRequireNewFileName, QString &newFileName) -> bool {
+    if (doRequireNewFileName) {
+      auto defaultFilePath = !m_fileName.isEmpty() ? QFileInfo{m_fileName}.path() : Util::Settings::get().m_lastMatroskaFileDir.path();
+      newFileName          = QFileDialog::getSaveFileName(this, QY("Save chapters as XML"), defaultFilePath, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"));
+
+      if (newFileName.isEmpty())
+        return false;
+    }
+
+    try {
+      auto chapters = m_chapterModel->allChapters();
+      auto out      = mm_file_io_c{to_utf8(newFileName), MODE_CREATE};
+      mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, out);
+
+    } catch (mtx::mm_io::exception &) {
+      QMessageBox::critical(this, QY("Saving failed"), QY("Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."));
+      return false;
+
+    } catch (mtx::xml::conversion_x &ex) {
+      QMessageBox::critical(this, QY("Saving failed"), QY("Converting the chapters to XML failed: %1").arg(ex.what()));
+      return false;
+    }
+
+    return true;
+  });
 }
 
 void
@@ -312,46 +333,39 @@ Tab::saveToMatroska() {
 
 void
 Tab::saveToMatroskaImpl(bool requireNewFileName) {
-  if (!copyControlsToStorage())
-    return;
+  saveAsImpl(requireNewFileName, [this](bool doRequireNewFileName, QString &newFileName) -> bool {
+    if (!m_analyzer)
+      doRequireNewFileName = true;
 
-  m_chapterModel->fixMandatoryElements();
-  setControlsFromStorage();
+    if (doRequireNewFileName) {
+      auto defaultFilePath = !m_fileName.isEmpty() ? QFileInfo{m_fileName}.path() : Util::Settings::get().m_lastMatroskaFileDir.path();
+      newFileName          = QFileDialog::getOpenFileName(this, QY("Save chapters to Matroska file"), defaultFilePath, QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d);;") + QY("All files") + Q(" (*)"));
 
-  auto newFileName = m_fileName;
-  if (m_fileName.isEmpty())
-    requireNewFileName = true;
+      if (newFileName.isEmpty())
+        return false;
+    }
 
-  if (requireNewFileName) {
-    auto &settings       = Util::Settings::get();
-    auto defaultFileName = !m_fileName.isEmpty() ? m_fileName : settings.m_lastMatroskaFileDir.path();
-    newFileName          = QFileDialog::getSaveFileName(this, QY("Save chapters to Matroska file"), defaultFileName, QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d);;") + QY("All files") + Q(" (*)"));
+    if (doRequireNewFileName || (QFileInfo{newFileName}.lastModified() != m_fileModificationTime)) {
+      m_analyzer = std::make_unique<QtKaxAnalyzer>(this, newFileName);
+      if (!m_analyzer->process(kax_analyzer_c::parse_mode_fast)) {
+        QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(newFileName));
+        return false;
+      }
+    }
 
-    if (newFileName.isEmpty())
-      return;
-  }
+    auto chapters = m_chapterModel->allChapters();
+    auto result   = m_analyzer->update_element(chapters, true);
+    m_analyzer->close_file();
 
-  // try {
-  //   auto chapters = m_chapterModel->allChapters();
-  //   auto out      = mm_file_io_c{to_utf8(newFileName), MODE_CREATE};
-  //   mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, out);
+    if (kax_analyzer_c::uer_success != result) {
+      QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the chapters failed."));
+      return false;
+    }
 
-  // } catch (mtx::mm_io::exception &) {
-  //   QMessageBox::critical(this, QY("Saving failed"), QY("Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."));
-  //   return;
+    m_fileModificationTime = QFileInfo{m_fileName}.lastModified();
 
-  // } catch (mtx::xml::conversion_x &ex) {
-  //   QMessageBox::critical(this, QY("Saving failed"), QY("Converting the chapters to XML failed: %1").arg(ex.what()));
-  //   return;
-  // }
-  // TODO: Tab::saveToMatroskaImpl
-
-  if (requireNewFileName) {
-    m_fileName = newFileName;
-    emit titleChanged(getTitle());
-  }
-
-  MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
+    return true;
+  });
 }
 
 void

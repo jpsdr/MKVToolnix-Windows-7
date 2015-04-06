@@ -157,6 +157,8 @@ Tab::save() {
       QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified track headers failed."));
   }
 
+  m_analyzer->close_file();
+
   load();
 
   MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));

@@ -124,8 +124,10 @@ protected:
 
   ChapterPtr createEmptyChapter(int64_t startTime);
 
+  void saveAsImpl(bool requireNewFileName, std::function<bool(bool, QString &)> const &worker);
   void saveAsXmlImpl(bool requireNewFileName);
   void saveToMatroskaImpl(bool requireNewFileName);
+  void updateFileNameDisplay();
 
 protected:
   static QString formatEbmlBinary(EbmlBinary *binary);
