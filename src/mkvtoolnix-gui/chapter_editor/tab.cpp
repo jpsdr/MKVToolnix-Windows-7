@@ -3,6 +3,7 @@
 #include <QFileInfo>
 #include <QMenu>
 #include <QMessageBox>
+#include <QTimer>
 
 #include <matroska/KaxSemantic.h>
 
@@ -459,6 +460,8 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
 
   ui->pageContainer->setCurrentWidget(ui->chapterPage);
 
+  QTimer::singleShot(0, ui->leChStart, SLOT(setFocus()));
+
   return true;
 }
 
@@ -521,8 +524,9 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
 
   resizeNameColumnsToContents();
 
-  ui->leChName->setFocus();
   ui->leChName->selectAll();
+
+  QTimer::singleShot(0, ui->leChName, SLOT(setFocus()));
 
   return true;
 }
