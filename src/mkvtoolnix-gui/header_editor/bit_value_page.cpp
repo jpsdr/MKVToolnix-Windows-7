@@ -43,7 +43,7 @@ BitValuePage::getOriginalValueAsString()
   auto data  = m_originalValue.data();
 
   if (data)
-    for (auto end = data + (m_originalValue.size() / 8); data < end; ++data)
+    for (auto end = data + m_originalValue.byte_size(); data < end; ++data)
       value += (boost::format("%|1$02x|") % static_cast<unsigned int>(*data)).str();
 
   return Q(value);

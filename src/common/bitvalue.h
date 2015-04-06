@@ -52,8 +52,11 @@ public:
   inline bool empty() const {
     return 0 == m_value->get_size();
   }
-  inline size_t size() const {
+  inline size_t bit_size() const {
     return m_value->get_size() * 8;
+  }
+  inline size_t byte_size() const {
+    return m_value->get_size();
   }
   void generate_random();
   unsigned char *data() const {

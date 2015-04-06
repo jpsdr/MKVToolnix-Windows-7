@@ -54,7 +54,7 @@ he_bit_value_page_c::get_original_value_as_string() {
   unsigned char *data = m_original_value.data();
 
   if (data) {
-    int i, num_bytes = m_original_value.size() / 8;
+    int i, num_bytes = m_original_value.byte_size();
     for (i = 0; i < num_bytes; ++i)
       value += wxString::Format(wxT("%02x"), data[i]);
   }
