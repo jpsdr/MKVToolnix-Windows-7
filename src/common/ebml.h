@@ -105,6 +105,42 @@ int write_ebml_element_head(mm_io_c &out, EbmlId const &id, int64_t content_size
 #define INVALID_FILEPOS_T 0
 #endif
 
+template<typename T>
+bool
+Is(EbmlId const &id) {
+  return id == T::ClassInfos.GlobalId;
+}
+
+template<typename T1, typename T2, typename... Trest>
+bool
+Is(EbmlId const &id) {
+  return Is<T1>(id) || Is<T2, Trest...>(id);
+}
+
+template<typename T>
+bool
+Is(EbmlElement *e) {
+  return !e ? false : (EbmlId(*e) == T::ClassInfos.GlobalId);
+}
+
+template<typename T1, typename T2, typename... Trest>
+bool
+Is(EbmlElement *e) {
+  return !e ? false : Is<T1>(e) || Is<T2, Trest...>(e);
+}
+
+template<typename T>
+bool
+Is(EbmlElement const &e) {
+  return EbmlId(e) == T::ClassInfos.GlobalId;
+}
+
+template<typename T1, typename T2, typename... Trest>
+bool
+Is(EbmlElement const &e) {
+  return Is<T1>(e) || Is<T2, Trest...>(e);
+}
+
 template <typename type>type &
 GetEmptyChild(EbmlMaster &master) {
   EbmlElement *e;
@@ -208,21 +244,37 @@ GetFirstOrNextChild(EbmlMaster *master,
 }
 
 template<typename T>
-EbmlMaster *
-DeleteChildren(EbmlMaster *master) {
-  for (auto idx = master->ListSize(); 0 < idx; --idx)
-    if (dynamic_cast<T *>((*master)[idx - 1])) {
-      delete (*master)[idx - 1];
-      master->Remove(idx - 1);
+void
+DeleteChildren(EbmlMaster &master) {
+  for (auto idx = master.ListSize(); 0 < idx; --idx) {
+    auto element = master[idx - 1];
+    if (Is<T>(element)) {
+      delete element;
+      master.Remove(idx - 1);
     }
-
-  return master;
+  }
 }
 
 template<typename T>
-EbmlMaster &
-DeleteChildren(EbmlMaster &master) {
-  return *DeleteChildren<T>(&master);
+void
+DeleteChildren(EbmlMaster *master) {
+  if (master)
+    DeleteChildren<T>(*master);
+}
+
+template<typename T>
+void
+RemoveChildren(EbmlMaster &master) {
+  for (auto idx = master.ListSize(); 0 < idx; --idx)
+    if (Is<T>(master[idx - 1]))
+      master.Remove(idx - 1);
+}
+
+template<typename T>
+void
+RemoveChildren(EbmlMaster *master) {
+  if (master)
+    RemoveChildren<T>(*master);
 }
 
 inline void
@@ -323,42 +375,6 @@ template<typename Telement>
 decltype(Telement().GetValue())
 GetChildValue(EbmlMaster *master) {
   return GetChild<Telement>(master).GetValue();
-}
-
-template<typename T>
-bool
-Is(EbmlId const &id) {
-  return id == T::ClassInfos.GlobalId;
-}
-
-template<typename T1, typename T2, typename... Trest>
-bool
-Is(EbmlId const &id) {
-  return Is<T1>(id) || Is<T2, Trest...>(id);
-}
-
-template<typename T>
-bool
-Is(EbmlElement *e) {
-  return !e ? false : (EbmlId(*e) == T::ClassInfos.GlobalId);
-}
-
-template<typename T1, typename T2, typename... Trest>
-bool
-Is(EbmlElement *e) {
-  return !e ? false : Is<T1>(e) || Is<T2, Trest...>(e);
-}
-
-template<typename T>
-bool
-Is(EbmlElement const &e) {
-  return EbmlId(e) == T::ClassInfos.GlobalId;
-}
-
-template<typename T1, typename T2, typename... Trest>
-bool
-Is(EbmlElement const &e) {
-  return Is<T1>(e) || Is<T2, Trest...>(e);
 }
 
 EbmlElement *empty_ebml_master(EbmlElement *e);
