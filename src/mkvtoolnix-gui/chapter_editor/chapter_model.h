@@ -28,7 +28,9 @@ public:
   virtual ~ChapterModel();
 
   void appendEdition(EditionPtr const &edition);
+  void insertEdition(int row, EditionPtr const &edition);
   void appendChapter(ChapterPtr const &chapter, QModelIndex const &parentIdx);
+  void insertChapter(int row, ChapterPtr const &chapter, QModelIndex const &parentIdx);
 
   void updateRow(QModelIndex const &idx);
   void populate(EbmlMaster &master);

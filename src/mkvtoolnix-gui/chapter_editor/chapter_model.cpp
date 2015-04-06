@@ -42,7 +42,8 @@ ChapterModel::itemsForRow(QModelIndex const &idx) {
 
 void
 ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
-  rowItems[0]->setText(QY("Edition entry"));
+  auto edition = editionFromItem(rowItems[0]);
+  rowItems[0]->setText(QY("Edition UID %1").arg(GetChildValue<KaxEditionUID>(*edition)));
 }
 
 ChapterPtr
@@ -80,21 +81,34 @@ ChapterModel::updateRow(QModelIndex const &idx) {
 
 void
 ChapterModel::appendEdition(EditionPtr const &edition) {
+  insertEdition(rowCount(), edition);
+}
+
+void
+ChapterModel::insertEdition(int row,
+                            EditionPtr const &edition) {
   auto rowItems = newRowItems();
   rowItems[0]->setData(QVariant::fromValue(edition), Util::ChapterEditorEditionRole);
 
   setEditionRowText(rowItems);
-  appendRow(rowItems);
+  insertRow(row, rowItems);
 }
 
 void
 ChapterModel::appendChapter(ChapterPtr const &chapter,
                             QModelIndex const &parentIdx) {
+  insertChapter(rowCount(parentIdx), chapter, parentIdx);
+}
+
+void
+ChapterModel::insertChapter(int row,
+                            ChapterPtr const &chapter,
+                            QModelIndex const &parentIdx) {
   auto rowItems = newRowItems();
   rowItems[0]->setData(QVariant::fromValue(chapter), Util::ChapterEditorChapterRole);
 
   setChapterRowText(rowItems);
-  itemFromIndex(parentIdx)->appendRow(rowItems);
+  itemFromIndex(parentIdx)->insertRow(row, rowItems);
 }
 
 void

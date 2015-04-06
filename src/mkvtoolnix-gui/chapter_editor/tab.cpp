@@ -1,7 +1,7 @@
 #include "common/common_pch.h"
 
-#include <QComboBox>
 #include <QFileInfo>
+#include <QMenu>
 #include <QMessageBox>
 
 #include <matroska/KaxSemantic.h>
@@ -35,6 +35,12 @@ Tab::Tab(QWidget *parent,
   , m_nameModel{new NameModel{this}}
   , m_expandAllAction{new QAction{this}}
   , m_collapseAllAction{new QAction{this}}
+  , m_addEditionBeforeAction{new QAction{this}}
+  , m_addEditionAfterAction{new QAction{this}}
+  , m_addChapterBeforeAction{new QAction{this}}
+  , m_addChapterAfterAction{new QAction{this}}
+  , m_addSubChapterAction{new QAction{this}}
+  , m_removeElementAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -50,9 +56,6 @@ Tab::~Tab() {
 void
 Tab::setupUi() {
   ui->elements->setModel(m_chapterModel);
-  ui->elements->addAction(m_expandAllAction);
-  ui->elements->addAction(m_collapseAllAction);
-
   ui->tvChNames->setModel(m_nameModel);
 
   ui->cbChNameLanguage->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -73,6 +76,7 @@ Tab::setupUi() {
                 << ui->lChNameLanguage << ui->cbChNameLanguage
                 << ui->lChNameCountry  << ui->cbChNameCountry;
 
+  connect(ui->elements,                    &ChapterTreeView::customContextMenuRequested,                           this, &Tab::showChapterContextMenu);
   connect(ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this, &Tab::chapterSelectionChanged);
   connect(ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this, &Tab::nameSelectionChanged);
   connect(ui->leChName,                    &QLineEdit::textEdited,                                                 this, &Tab::chapterNameEdited);
@@ -83,6 +87,12 @@ Tab::setupUi() {
 
   connect(m_expandAllAction,               &QAction::triggered,                                                    this, &Tab::expandAll);
   connect(m_collapseAllAction,             &QAction::triggered,                                                    this, &Tab::collapseAll);
+  connect(m_addEditionBeforeAction,        &QAction::triggered,                                                    this, &Tab::addEditionBefore);
+  connect(m_addEditionAfterAction,         &QAction::triggered,                                                    this, &Tab::addEditionAfter);
+  connect(m_addChapterBeforeAction,        &QAction::triggered,                                                    this, &Tab::addChapterBefore);
+  connect(m_addChapterAfterAction,         &QAction::triggered,                                                    this, &Tab::addChapterAfter);
+  connect(m_addSubChapterAction,           &QAction::triggered,                                                    this, &Tab::addSubChapter);
+  connect(m_removeElementAction,           &QAction::triggered,                                                    this, &Tab::removeElement);
 }
 
 void
@@ -102,6 +112,12 @@ Tab::retranslateUi() {
 
   m_expandAllAction->setText(QY("&Expand all"));
   m_collapseAllAction->setText(QY("&Collapse all"));
+  m_addEditionBeforeAction->setText(QY("Add new e&dition before"));
+  m_addEditionAfterAction->setText(QY("Add new ed&ition after"));
+  m_addChapterBeforeAction->setText(QY("Add new c&hapter before"));
+  m_addChapterAfterAction->setText(QY("Add new ch&apter after"));
+  m_addSubChapterAction->setText(QY("Add new &sub-chapter inside"));
+  m_removeElementAction->setText(QY("&Remove selected edition or chapter"));
 
   m_chapterModel->retranslateUi();
   m_nameModel->retranslateUi();
@@ -315,6 +331,7 @@ Tab::copyControlsToStorageImpl(QModelIndex const &idx) {
 
 Tab::ValidationResult
 Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
+  // TODO: Tab::copyChapterControlsToStorage: propagate start time to parent?
   if (!chapter)
     return { true, QString{} };
 
@@ -597,6 +614,89 @@ Tab::collapseAll() {
 }
 
 void
+Tab::addEditionBefore() {
+  addEdition(true);
+}
+
+void
+Tab::addEditionAfter() {
+  addEdition(false);
+}
+
+void
+Tab::addEdition(bool before) {
+  auto edition     = std::make_shared<KaxEditionEntry>();
+  auto selectedIdx = Util::selectedRowIdx(ui->elements);
+  auto row         = 0;
+
+  if (selectedIdx.isValid()) {
+    while (selectedIdx.parent().isValid())
+      selectedIdx = selectedIdx.parent();
+
+    row = selectedIdx.row() + (before ? 0 : 1);
+  }
+
+  GetChild<KaxEditionUID>(*edition).SetValue(0);
+
+  m_chapterModel->insertEdition(row, edition);
+}
+
+ChapterPtr
+Tab::createEmptyChapter(int64_t startTime) {
+  auto chapter  = std::make_shared<KaxChapterAtom>();
+  auto &display = GetChild<KaxChapterDisplay>(*chapter);
+
+  GetChild<KaxChapterUID>(*chapter).SetValue(0);
+  GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTime);
+  GetChild<KaxChapterString>(display).SetValueUTF8(Y("<unnamed>"));
+  GetChild<KaxChapterLanguage>(display).SetValue(Y("und"));
+
+  return chapter;
+}
+
+void
+Tab::addChapterBefore() {
+  addChapter(true);
+}
+
+void
+Tab::addChapterAfter() {
+  addChapter(false);
+}
+
+void
+Tab::addChapter(bool before) {
+  auto selectedIdx = Util::selectedRowIdx(ui->elements);
+  if (!selectedIdx.isValid() || !selectedIdx.parent().isValid())
+    return;
+
+  // TODO: Tab::addChapter: start time
+  auto chapter = createEmptyChapter(0);
+  auto row     = selectedIdx.row() + (before ? 0 : 1);
+
+  m_chapterModel->insertChapter(row, chapter, selectedIdx.parent());
+}
+
+void
+Tab::addSubChapter() {
+  auto selectedIdx = Util::selectedRowIdx(ui->elements);
+  if (!selectedIdx.isValid())
+    return;
+
+  // TODO: Tab::addSubChapter: start time
+  auto chapter = createEmptyChapter(0);
+  m_chapterModel->appendChapter(chapter, selectedIdx);
+  expandCollapseAll(true, selectedIdx);
+}
+
+void
+Tab::removeElement() {
+  auto selectedIdx = Util::selectedRowIdx(ui->elements);
+  if (selectedIdx.isValid())
+    m_chapterModel->removeRow(selectedIdx.row(), selectedIdx.parent());
+}
+
+void
 Tab::expandCollapseAll(bool expand,
                        QModelIndex const &parentIdx) {
   if (parentIdx.isValid())
@@ -616,6 +716,38 @@ Tab::formatEbmlBinary(EbmlBinary *binary) {
       value += (boost::format("%|1$02x|") % static_cast<unsigned int>(*data)).str();
 
   return Q(value);
+}
+
+void
+Tab::showChapterContextMenu(QPoint const &pos) {
+  auto selectedIdx     = Util::selectedRowIdx(ui->elements);
+  auto hasSelection    = selectedIdx.isValid();
+  auto chapterSelected = hasSelection && selectedIdx.parent().isValid();
+  auto hasEntries      = !!m_chapterModel->rowCount();
+
+  m_expandAllAction->setEnabled(hasEntries);
+  m_collapseAllAction->setEnabled(hasEntries);
+
+  m_addChapterBeforeAction->setEnabled(chapterSelected);
+  m_addChapterAfterAction->setEnabled(chapterSelected);
+  m_addSubChapterAction->setEnabled(hasSelection);
+  m_removeElementAction->setEnabled(hasSelection);
+
+  QMenu menu{this};
+
+  menu.addAction(m_addEditionBeforeAction);
+  menu.addAction(m_addEditionAfterAction);
+  menu.addSeparator();
+  menu.addAction(m_addChapterBeforeAction);
+  menu.addAction(m_addChapterAfterAction);
+  menu.addAction(m_addSubChapterAction);
+  menu.addSeparator();
+  menu.addAction(m_removeElementAction);
+  menu.addSeparator();
+  menu.addAction(m_expandAllAction);
+  menu.addAction(m_collapseAllAction);
+
+  menu.exec(ui->elements->viewport()->mapToGlobal(pos));
 }
 
 }}}

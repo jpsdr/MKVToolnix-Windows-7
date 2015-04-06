@@ -44,7 +44,7 @@ protected:
   ChapterModel *m_chapterModel;
   NameModel *m_nameModel;
 
-  QAction *m_expandAllAction, *m_collapseAllAction;
+  QAction *m_expandAllAction, *m_collapseAllAction, *m_addEditionBeforeAction, *m_addEditionAfterAction, *m_addChapterBeforeAction, *m_addChapterAfterAction, *m_addSubChapterAction, *m_removeElementAction;
   QList<QWidget *> m_nameWidgets;
 
   bool m_ignoreChapterSelectionChanges{};
@@ -67,6 +67,12 @@ public slots:
   // virtual void save();
   virtual void expandAll();
   virtual void collapseAll();
+  virtual void addEditionBefore();
+  virtual void addEditionAfter();
+  virtual void addChapterBefore();
+  virtual void addChapterAfter();
+  virtual void addSubChapter();
+  virtual void removeElement();
 
   virtual void chapterSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void nameSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
@@ -75,6 +81,8 @@ public slots:
   virtual void chapterNameCountryChanged(int index);
   virtual void addChapterName();
   virtual void removeChapterName();
+
+  virtual void showChapterContextMenu(QPoint const &pos);
 
 protected:
   void setupUi();
@@ -103,6 +111,12 @@ protected:
 
   void selectChapterRow(QModelIndex const &idx, bool ignoreSelectionChanges);
   bool handleChapterDeselection(QItemSelection const &deselected);
+
+  void addEdition(bool before);
+  void addChapter(bool before);
+
+  ChapterPtr createEmptyChapter(int64_t startTime);
+
 
 protected:
   static QString formatEbmlBinary(EbmlBinary *binary);

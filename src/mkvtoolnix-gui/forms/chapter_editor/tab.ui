@@ -79,7 +79,7 @@
      <property name="childrenCollapsible">
       <bool>false</bool>
      </property>
-     <widget class="QTreeView" name="elements">
+     <widget class="mtx::gui::ChapterEditor::ChapterTreeView" name="elements">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -87,7 +87,7 @@
        </sizepolicy>
       </property>
       <property name="contextMenuPolicy">
-       <enum>Qt::ActionsContextMenu</enum>
+       <enum>Qt::CustomContextMenu</enum>
       </property>
       <property name="editTriggers">
        <set>QAbstractItemView::NoEditTriggers</set>
@@ -457,6 +457,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mtx::gui::ChapterEditor::ChapterTreeView</class>
+   <extends>QTreeView</extends>
+   <header>mkvtoolnix-gui/chapter_editor/chapter_tree_view.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>elements</tabstop>
   <tabstop>cbEdFlagDefault</tabstop>
