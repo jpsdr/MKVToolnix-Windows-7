@@ -225,6 +225,34 @@ DeleteChildren(EbmlMaster &master) {
   return *DeleteChildren<T>(&master);
 }
 
+inline void
+RemoveDeleteChildImpl(EbmlMaster &master,
+                      EbmlElement *element,
+                      bool do_delete) {
+  if (!element)
+    return;
+
+  for (auto idx = master.ListSize(); idx > 0; --idx) {
+    if (master[idx - 1] == element)
+      master.Remove(idx - 1);
+  }
+
+  if (do_delete)
+    delete element;
+}
+
+inline void
+RemoveChild(EbmlMaster &master,
+            EbmlElement *element) {
+  RemoveDeleteChildImpl(master, element, false);
+}
+
+inline void
+DeleteChild(EbmlMaster &master,
+            EbmlElement *element) {
+  RemoveDeleteChildImpl(master, element, true);
+}
+
 template<typename T>
 void
 FixMandatoryElement(EbmlMaster &master) {
