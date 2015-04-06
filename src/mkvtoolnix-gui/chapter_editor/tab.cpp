@@ -46,6 +46,7 @@ Tab::Tab(QWidget *parent,
   , m_addSubChapterAction{new QAction{this}}
   , m_removeElementAction{new QAction{this}}
   , m_sortSubtreeAction{new QAction{this}}
+  , m_duplicateAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -99,6 +100,7 @@ Tab::setupUi() {
   connect(m_addSubChapterAction,           &QAction::triggered,                                                    this, &Tab::addSubChapter);
   connect(m_removeElementAction,           &QAction::triggered,                                                    this, &Tab::removeElement);
   connect(m_sortSubtreeAction,             &QAction::triggered,                                                    this, &Tab::sortSubtree);
+  connect(m_duplicateAction,               &QAction::triggered,                                                    this, &Tab::duplicateElement);
 }
 
 void
@@ -130,6 +132,7 @@ Tab::retranslateUi() {
   m_addSubChapterAction->setText(QY("Add new &sub-chapter inside"));
   m_removeElementAction->setText(QY("&Remove selected edition or chapter"));
   m_sortSubtreeAction->setText(QY("Sor&t elements by their start time"));
+  m_duplicateAction->setText(QY("D&uplicate selected edition or chapter"));
 
   m_chapterModel->retranslateUi();
   m_nameModel->retranslateUi();
@@ -812,6 +815,15 @@ Tab::sortSubtree() {
 }
 
 void
+Tab::duplicateElement() {
+  auto selectedIdx   = Util::selectedRowIdx(ui->elements);
+  auto newElementIdx = m_chapterModel->duplicateTree(selectedIdx);
+
+  if (newElementIdx.isValid())
+    expandCollapseAll(true, newElementIdx);
+}
+
+void
 Tab::expandCollapseAll(bool expand,
                        QModelIndex const &parentIdx) {
   if (parentIdx.isValid())
@@ -847,6 +859,7 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   m_addChapterAfterAction->setEnabled(chapterSelected);
   m_addSubChapterAction->setEnabled(hasSelection);
   m_removeElementAction->setEnabled(hasSelection);
+  m_duplicateAction->setEnabled(hasSelection);
 
   QMenu menu{this};
 
@@ -857,9 +870,11 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   menu.addAction(m_addChapterAfterAction);
   menu.addAction(m_addSubChapterAction);
   menu.addSeparator();
-  menu.addAction(m_removeElementAction);
+  menu.addAction(m_duplicateAction);
   menu.addSeparator();
   menu.addAction(m_sortSubtreeAction);
+  menu.addSeparator();
+  menu.addAction(m_removeElementAction);
   menu.addSeparator();
   menu.addAction(m_expandAllAction);
   menu.addAction(m_collapseAllAction);

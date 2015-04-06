@@ -187,9 +187,40 @@ ChapterModel::populate(EbmlMaster &master,
   }
 }
 
+QModelIndex
+ChapterModel::duplicateTree(QModelIndex const &srcIdx) {
+  if (!srcIdx.isValid())
+    return {};
+
+  duplicateTree(srcIdx.parent(), srcIdx.row() + 1, srcIdx);
+
+  return index(srcIdx.row() + 1, 0, srcIdx.parent());
+}
+
 void
-ChapterModel::cloneElements(QModelIndex const &parentIdx,
-                            EbmlMaster &target) {
+ChapterModel::duplicateTree(QModelIndex const &destParentIdx,
+                            int destRow,
+                            QModelIndex const &srcIdx) {
+  auto srcItem = itemFromIndex(srcIdx);
+
+  if (destParentIdx.isValid()) {
+    auto newChapter = clone(chapterFromItem(srcItem));
+    insertChapter(destRow, newChapter, destParentIdx);
+
+  } else {
+    auto newEdition = clone(editionFromItem(srcItem));
+    insertEdition(destRow, newEdition);
+  }
+
+  auto newDestParentIdx = index(destRow, 0, destParentIdx);
+
+  for (auto row = 0, numRows = rowCount(srcIdx); row < numRows; ++row)
+    duplicateTree(newDestParentIdx, row, index(row, 0, srcIdx));
+                  }
+
+void
+ChapterModel::cloneElementsForRetrieval(QModelIndex const &parentIdx,
+                                        EbmlMaster &target) {
   for (auto row = 0, numRows = rowCount(parentIdx); row < numRows; ++row) {
     auto elementIdx  = index(row, 0, parentIdx);
     auto elementItem = itemFromIndex(elementIdx);
@@ -197,14 +228,14 @@ ChapterModel::cloneElements(QModelIndex const &parentIdx,
 
     target.PushElement(*newElement);
 
-    cloneElements(elementIdx, *newElement);
+    cloneElementsForRetrieval(elementIdx, *newElement);
   }
 }
 
 ChaptersPtr
 ChapterModel::allChapters() {
   auto chapters = std::make_shared<KaxChapters>();
-  cloneElements(QModelIndex{}, *chapters);
+  cloneElementsForRetrieval(QModelIndex{}, *chapters);
 
   return chapters;
 }

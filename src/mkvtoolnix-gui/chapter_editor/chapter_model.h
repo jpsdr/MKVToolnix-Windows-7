@@ -33,6 +33,8 @@ public:
   void appendChapter(ChapterPtr const &chapter, QModelIndex const &parentIdx);
   void insertChapter(int row, ChapterPtr const &chapter, QModelIndex const &parentIdx);
 
+  QModelIndex duplicateTree(QModelIndex const &srcIdx);
+
   void updateRow(QModelIndex const &idx);
   void populate(EbmlMaster &master);
   void reset();
@@ -50,7 +52,8 @@ protected:
   void setChapterRowText(QList<QStandardItem *> const &rowItems);
   void populate(EbmlMaster &master, QModelIndex const &parentIdx);
   QList<QStandardItem *> itemsForRow(QModelIndex const &idx);
-  void cloneElements(QModelIndex const &parentIdx, EbmlMaster &target);
+  void cloneElementsForRetrieval(QModelIndex const &parentIdx, EbmlMaster &target);
+  void duplicateTree(QModelIndex const &destParentIdx, int destRow, QModelIndex const &srcIdx);
 
 
 protected:

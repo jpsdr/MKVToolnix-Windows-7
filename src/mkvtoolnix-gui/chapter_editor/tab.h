@@ -45,7 +45,7 @@ protected:
   NameModel *m_nameModel;
 
   QAction *m_expandAllAction, *m_collapseAllAction, *m_addEditionBeforeAction, *m_addEditionAfterAction, *m_addChapterBeforeAction, *m_addChapterAfterAction, *m_addSubChapterAction, *m_removeElementAction;
-  QAction *m_sortSubtreeAction;
+  QAction *m_sortSubtreeAction, *m_duplicateAction;
   QList<QWidget *> m_nameWidgets;
 
   bool m_ignoreChapterSelectionChanges{};
@@ -78,6 +78,7 @@ public slots:
   virtual void addSubChapter();
   virtual void removeElement();
   virtual void sortSubtree();
+  virtual void duplicateElement();
 
   virtual void chapterSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void nameSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
