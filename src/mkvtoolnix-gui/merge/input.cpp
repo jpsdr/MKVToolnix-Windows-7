@@ -68,7 +68,7 @@ Tool::setupInputControls() {
 
   // Track & chapter language
   auto &languageDescriptions = App::getIso639LanguageDescriptions();
-  auto &languageCodes        = App::getIso639Language2Codes();
+  auto &languageCodes        = App::getIso639_2LanguageCodes();
 
   ui->chapterLanguage->addItem(Q(""), Q(""));
 
@@ -208,14 +208,15 @@ Tool::setInputControlValues(Track *track) {
   }
 
   Util::setComboBoxIndexIf(ui->muxThis,              [&](QString const &, QVariant const &data) { return data.isValid() && (data.toInt()    == (track->m_muxThis ? 0 : 1)); });
-  Util::setComboBoxIndexIf(ui->trackLanguage,        [&](QString const &, QVariant const &data) { return data.isValid() && (data.toString() == track->m_language);          });
   Util::setComboBoxIndexIf(ui->defaultTrackFlag,     [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_defaultTrackFlag);  });
   Util::setComboBoxIndexIf(ui->forcedTrackFlag,      [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_forcedTrackFlag);   });
   Util::setComboBoxIndexIf(ui->compression,          [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_compression);       });
   Util::setComboBoxIndexIf(ui->cues,                 [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_cues);              });
   Util::setComboBoxIndexIf(ui->stereoscopy,          [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_stereoscopy);       });
   Util::setComboBoxIndexIf(ui->aacIsSBR,             [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_aacIsSBR);          });
-  Util::setComboBoxIndexIf(ui->subtitleCharacterSet, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toString() == track->m_characterSet);      });
+
+  Util::setComboBoxTextByData(ui->trackLanguage,        track->m_language);
+  Util::setComboBoxTextByData(ui->subtitleCharacterSet, track->m_characterSet);
 
   ui->trackName->setText(                track->m_name);
   ui->trackTags->setText(                track->m_tags);

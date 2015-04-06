@@ -38,6 +38,12 @@ setComboBoxIndexIf(QComboBox *comboBox,
   return false;
 }
 
+bool
+setComboBoxTextByData(QComboBox *comboBox,
+                      QString const &data) {
+  return setComboBoxIndexIf(comboBox, [&data](QString const &, QVariant const &itemData) { return itemData.isValid() && (itemData.toString() == data); });
+}
+
 void
 enableWidgets(QList<QWidget *> const &widgets,
               bool enable) {
@@ -97,6 +103,26 @@ numSelectedRows(QItemSelection &selection) {
     }
 
   return rowsSeen.count();
+}
+
+QModelIndex
+selectedRowIdx(QItemSelection const &selection) {
+  if (selection.isEmpty())
+    return {};
+
+  auto indexes = selection.at(0).indexes();
+  if (indexes.isEmpty() || !indexes.at(0).isValid())
+    return {};
+
+  auto idx = indexes.at(0);
+  return idx.sibling(idx.row(), 0);
+}
+
+QModelIndex
+selectedRowIdx(QAbstractItemView *view) {
+  if (!view)
+    return {};
+  return selectedRowIdx(view->selectionModel()->selection());
 }
 
 QModelIndex

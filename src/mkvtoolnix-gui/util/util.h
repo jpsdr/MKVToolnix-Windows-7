@@ -32,6 +32,7 @@ findPtr(Tstored *needle,
 // Miscellaneous widget stuff
 QIcon loadIcon(QString const &name, QList<int> const &sizes);
 bool setComboBoxIndexIf(QComboBox *comboBox, std::function<bool(QString const &, QVariant const &)> test);
+bool setComboBoxTextByData(QComboBox *comboBox, QString const &data);
 void enableWidgets(QList<QWidget *> const &widgets, bool enable);
 QPushButton *buttonForRole(QDialogButtonBox *box, QDialogButtonBox::ButtonRole role = QDialogButtonBox::AcceptRole);
 
@@ -43,12 +44,15 @@ enum MtxGuiRoles {
   HeaderEditorPageIdRole,
   ChapterEditorEditionRole,
   ChapterEditorChapterRole,
+  ChapterEditorChapterDisplayRole,
   AttachmentRole,
 };
 
 void resizeViewColumnsToContents(QTableView *view);
 void resizeViewColumnsToContents(QTreeView *view);
 int numSelectedRows(QItemSelection &selection);
+QModelIndex SelectedRowIdx(QItemSelection const &selection);
+QModelIndex selectedRowIdx(QAbstractItemView *view);
 void withSelectedIndexes(QItemSelectionModel *selectionModel, std::function<void(QModelIndex const &)> worker);
 void withSelectedIndexes(QAbstractItemView *view, std::function<void(QModelIndex const &)> worker);
 QModelIndex toTopLevelIdx(QModelIndex const &idx);

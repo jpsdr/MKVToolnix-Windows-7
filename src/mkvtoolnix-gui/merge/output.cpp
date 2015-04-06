@@ -267,8 +267,8 @@ Tool::setOutputControlValues() {
   ui->userDefinedOptions->setText(m_config.m_userDefinedOptions);
   ui->webmMode->setChecked(m_config.m_webmMode);
 
-  Util::setComboBoxIndexIf(ui->chapterLanguage,     [&](QString const &, QVariant const &data) { return data.isValid() && (data.toString() == m_config.m_chapterLanguage);     });
-  Util::setComboBoxIndexIf(ui->chapterCharacterSet, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toString() == m_config.m_chapterCharacterSet); });
+  Util::setComboBoxTextByData(ui->chapterLanguage,     m_config.m_chapterLanguage);
+  Util::setComboBoxTextByData(ui->chapterCharacterSet, m_config.m_chapterCharacterSet);
 }
 
 }}}

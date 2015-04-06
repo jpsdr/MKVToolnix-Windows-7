@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QComboBox>
 #include <QFileInfo>
 #include <QMessageBox>
 
@@ -12,7 +13,9 @@
 #include "common/segmentinfo.h"
 #include "common/segment_tracks.h"
 #include "common/strings/formatting.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
+#include "mkvtoolnix-gui/chapter_editor/name_model.h"
 #include "mkvtoolnix-gui/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -27,6 +30,7 @@ Tab::Tab(QWidget *parent,
   , ui{new Ui::Tab}
   , m_fileName{fileName}
   , m_chapterModel{new ChapterModel{this}}
+  , m_nameModel{new NameModel{this}}
   , m_expandAllAction{new QAction{this}}
   , m_collapseAllAction{new QAction{this}}
 {
@@ -47,19 +51,36 @@ Tab::setupUi() {
   ui->elements->addAction(m_expandAllAction);
   ui->elements->addAction(m_collapseAllAction);
 
-  connect(ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged, this, &Tab::chapterSelectionChanged);
-  // connect(ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Tab::nameSelectionChanged);
-  // connect(ui->teChName,                    &QLineEdit::textEdited,                 this, &Tab::chapterNameEdited);
-  // connect(ui->cbChNameLanguage,            &QLineEdit::currentIndexChanged,        this, &Tab::chapterNameLanguageChanged);
-  // connect(ui->cbChNameCountry,             &QLineEdit::currentIndexChanged,        this, &Tab::chapterNameCountryChanged);
+  ui->tvChNames->setModel(m_nameModel);
 
-  connect(m_expandAllAction,               &QAction::triggered,                    this, &Tab::expandAll);
-  connect(m_collapseAllAction,             &QAction::triggered,                    this, &Tab::collapseAll);
+  ui->cbChNameLanguage->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  ui->cbChNameCountry ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
+  auto &languageDescriptions = App::getIso639LanguageDescriptions();
+  auto &languageCodes        = App::getIso639_2LanguageCodes();
+  auto &countryCodes         = App::getIso3166_1Alpha2CountryCodes();
+
+  for (auto idx = 0, count = languageDescriptions.count(); idx < count; ++idx)
+    ui->cbChNameLanguage->addItem(languageDescriptions[idx], languageCodes[idx]);
+
+  ui->cbChNameCountry->addItem(Q(""));
+  ui->cbChNameCountry->addItems(countryCodes);
 
   m_nameWidgets << ui->pbChRemoveName
                 << ui->lChName         << ui->leChName
                 << ui->lChNameLanguage << ui->cbChNameLanguage
                 << ui->lChNameCountry  << ui->cbChNameCountry;
+
+  connect(ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this, &Tab::chapterSelectionChanged);
+  connect(ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this, &Tab::nameSelectionChanged);
+  connect(ui->leChName,                    &QLineEdit::textEdited,                                                 this, &Tab::chapterNameEdited);
+  connect(ui->cbChNameLanguage,            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Tab::chapterNameLanguageChanged);
+  connect(ui->cbChNameCountry,             static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Tab::chapterNameCountryChanged);
+  connect(ui->pbChAddName,                 &QPushButton::clicked,                                                  this, &Tab::addChapterName);
+  connect(ui->pbChRemoveName,              &QPushButton::clicked,                                                  this, &Tab::removeChapterName);
+
+  connect(m_expandAllAction,               &QAction::triggered,                                                    this, &Tab::expandAll);
+  connect(m_collapseAllAction,             &QAction::triggered,                                                    this, &Tab::collapseAll);
 }
 
 void
@@ -81,7 +102,7 @@ Tab::retranslateUi() {
   m_collapseAllAction->setText(QY("&Collapse all"));
 
   m_chapterModel->retranslateUi();
-  // m_nameModel->retranslateUi();
+  m_nameModel->retranslateUi();
 
   resizeChapterColumnsToContents();
 }
@@ -90,7 +111,12 @@ void
 Tab::resizeChapterColumnsToContents()
   const {
   Util::resizeViewColumnsToContents(ui->elements);
-  // Util::resizeViewColumnsToContents(ui->tvChNames);
+}
+
+void
+Tab::resizeNameColumnsToContents()
+  const {
+  Util::resizeViewColumnsToContents(ui->tvChNames);
 }
 
 QString
@@ -107,12 +133,6 @@ Tab::getFileName()
   return m_fileName;
 }
 
-ChapterModel *
-Tab::getChapterModel()
-  const {
-  return m_chapterModel;
-}
-
 void
 Tab::newFile() {
 }
@@ -120,6 +140,7 @@ Tab::newFile() {
 void
 Tab::resetData() {
   m_analyzer.reset();
+  m_nameModel->reset();
   m_chapterModel->reset();
 }
 
@@ -287,10 +308,8 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
   ui->leChSegmentUid->setText(formatEbmlBinary(FindChild<KaxChapterSegmentUID>(*chapter)));
   ui->leChSegmentEditionUid->setText(segmentEditionUid ? QString::number(segmentEditionUid->GetValue()) : Q(""));
 
-  // TODO: Tab::setChapterControlsFromStorage: names
-  // m_namesModel->populate(GetChild<KaxChapterDisplay>(*chapter));
-  for (auto const &widget : m_nameWidgets)
-    widget->setEnabled(false);
+  m_nameModel->populate(*chapter);
+  enableNameWidgets(false);
 
   ui->pageContainer->setCurrentWidget(ui->chapterPage);
 
@@ -328,6 +347,105 @@ Tab::chapterSelectionChanged(QItemSelection const &selected,
   }
 
   ui->pageContainer->setCurrentWidget(ui->emptyPage);
+}
+
+bool
+Tab::setNameControlsFromStorage(QModelIndex const &idx) {
+  auto display = m_nameModel->displayFromIndex(idx);
+  if (!display)
+    return false;
+
+  auto country = FindChild<KaxChapterCountry>(display);
+
+  ui->leChName->setText(Q(GetChildValue<KaxChapterString>(display)));
+  Util::setComboBoxTextByData(ui->cbChNameLanguage, Q(FindChildValue<KaxChapterLanguage>(display, std::string{"eng"})));
+  ui->cbChNameCountry->setCurrentText(country ? Q(country->GetValue()) : Q(""));
+
+  resizeNameColumnsToContents();
+
+  ui->leChName->setFocus();
+  ui->leChName->selectAll();
+
+  return true;
+}
+
+void
+Tab::nameSelectionChanged(QItemSelection const &selected,
+                          QItemSelection const &) {
+  if (!selected.isEmpty()) {
+    auto indexes = selected.at(0).indexes();
+    if (!indexes.isEmpty() && setNameControlsFromStorage(indexes.at(0))) {
+      enableNameWidgets(true);
+      return;
+    }
+  }
+
+  enableNameWidgets(false);
+}
+
+void
+Tab::withSelectedName(std::function<void(QModelIndex const &, KaxChapterDisplay &)> const &worker) {
+  auto selectedRows = ui->tvChNames->selectionModel()->selectedRows();
+  if (selectedRows.isEmpty())
+    return;
+
+  auto idx     = selectedRows.at(0);
+  auto display = m_nameModel->displayFromIndex(idx);
+  if (display)
+    worker(idx, *display);
+}
+
+void
+Tab::chapterNameEdited(QString const &text) {
+  withSelectedName([this, &text](QModelIndex const &idx, KaxChapterDisplay &display) {
+    GetChild<KaxChapterString>(display).SetValueUTF8(to_utf8(text));
+    m_nameModel->updateRow(idx.row());
+  });
+}
+
+void
+Tab::chapterNameLanguageChanged(int index) {
+  if (0 > index)
+    return;
+
+  withSelectedName([this, index](QModelIndex const &idx, KaxChapterDisplay &display) {
+    GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(ui->cbChNameLanguage->itemData(index).toString()));
+    m_nameModel->updateRow(idx.row());
+  });
+}
+
+void
+Tab::chapterNameCountryChanged(int index) {
+  if (0 > index)
+    return;
+
+  withSelectedName([this, index](QModelIndex const &idx, KaxChapterDisplay &display) {
+    if (0 == index)
+      DeleteChildren<KaxChapterCountry>(display);
+    else
+      GetChild<KaxChapterCountry>(display).SetValue(to_utf8(ui->cbChNameCountry->currentText()));
+    m_nameModel->updateRow(idx.row());
+  });
+}
+
+void
+Tab::addChapterName() {
+  m_nameModel->addNew();
+}
+
+void
+Tab::removeChapterName() {
+  auto idx = Util::selectedRowIdx(ui->tvChNames);
+  if (!idx.isValid())
+    return;
+
+  m_nameModel->remove(idx);
+}
+
+void
+Tab::enableNameWidgets(bool enable) {
+  for (auto const &widget : m_nameWidgets)
+    widget->setEnabled(enable);
 }
 
 void

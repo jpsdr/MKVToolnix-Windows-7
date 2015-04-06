@@ -12,7 +12,7 @@ class App : public QApplication {
   Q_OBJECT;
 
 protected:
-  static QStringList ms_iso639LanguageDescriptions, ms_iso639Language2Codes;
+  static QStringList ms_iso639LanguageDescriptions, ms_iso639_2LanguageCodes, ms_iso3166_1Alpha2CountryCodes;
 
 public:
   App(int &argc, char **argv);
@@ -27,7 +27,8 @@ public:
   static App *instance();
 
   static QStringList const &getIso639LanguageDescriptions();
-  static QStringList const &getIso639Language2Codes();
+  static QStringList const &getIso639_2LanguageCodes();
+  static QStringList const &getIso3166_1Alpha2CountryCodes();
   static void initializeLanguageLists();
   static void reinitializeLanguageLists();
 };

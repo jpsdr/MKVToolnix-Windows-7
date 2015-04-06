@@ -30,10 +30,19 @@ ChapterModel::newRowItems() {
   return items;
 }
 
+QList<QStandardItem *>
+ChapterModel::itemsForRow(QModelIndex const &idx) {
+  auto rowItems = QList<QStandardItem *>{};
+
+  for (auto column = 0; 3 > column; ++column)
+    rowItems << itemFromIndex(idx.sibling(idx.row(), column));
+
+  return rowItems;
+}
+
 void
-ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems,
-                                int row) {
-  rowItems[0]->setText(QY("Edition entry %1").arg(row + 1));
+ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
+  rowItems[0]->setText(QY("Edition entry"));
 }
 
 ChapterPtr
@@ -59,11 +68,22 @@ ChapterModel::setChapterRowText(QList<QStandardItem *> const &rowItems) {
 }
 
 void
+ChapterModel::updateRow(QModelIndex const &idx) {
+  if (!idx.isValid())
+    return;
+
+  if (idx.parent().isValid())
+    setChapterRowText(itemsForRow(idx));
+  else
+    setEditionRowText(itemsForRow(idx));
+}
+
+void
 ChapterModel::appendEdition(EditionPtr const &edition) {
   auto rowItems = newRowItems();
   rowItems[0]->setData(QVariant::fromValue(edition), Util::ChapterEditorEditionRole);
 
-  setEditionRowText(rowItems, rowCount());
+  setEditionRowText(rowItems);
   appendRow(rowItems);
 }
 

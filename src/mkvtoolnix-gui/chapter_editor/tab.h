@@ -25,6 +25,7 @@ class Tab;
 }
 
 class ChapterModel;
+class NameModel;
 
 class Tab : public QWidget {
   Q_OBJECT;
@@ -38,6 +39,7 @@ protected:
   QDateTime m_fileModificationTime;
 
   ChapterModel *m_chapterModel;
+  NameModel *m_nameModel;
 
   QAction *m_expandAllAction, *m_collapseAllAction;
   QList<QWidget *> m_nameWidgets;
@@ -45,8 +47,6 @@ protected:
 public:
   explicit Tab(QWidget *parent, QString const &fileName = QString{});
   ~Tab();
-
-  ChapterModel *getChapterModel() const;
 
   virtual void retranslateUi();
   virtual QString const &getFileName() const;
@@ -64,6 +64,12 @@ public slots:
   virtual void collapseAll();
 
   virtual void chapterSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
+  virtual void nameSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
+  virtual void chapterNameEdited(QString const &text);
+  virtual void chapterNameLanguageChanged(int index);
+  virtual void chapterNameCountryChanged(int index);
+  virtual void addChapterName();
+  virtual void removeChapterName();
 
 protected:
   void setupUi();
@@ -74,11 +80,17 @@ protected:
   ChaptersPtr loadFromMatroskaFile();
 
   void resizeChapterColumnsToContents() const;
+  void resizeNameColumnsToContents() const;
 
   void copyControlsToStorage(QModelIndex const &idx);
   bool setControlsFromStorage(QModelIndex const &idx);
   bool setChapterControlsFromStorage(ChapterPtr const &chapter);
   bool setEditionControlsFromStorage(EditionPtr const &edition);
+
+  bool setNameControlsFromStorage(QModelIndex const &idx);
+  void enableNameWidgets(bool enable);
+
+  void withSelectedName(std::function<void(QModelIndex const &, KaxChapterDisplay &)> const &worker);
 
 protected:
   static QString formatEbmlBinary(EbmlBinary *binary);

@@ -30,7 +30,7 @@ LanguageValuePage::createInputControl() {
     m_originalValue = static_cast<EbmlString *>(m_element)->GetValue();
 
   auto &descriptions = App::getIso639LanguageDescriptions();
-  auto &codes        = App::getIso639Language2Codes();
+  auto &codes        = App::getIso639_2LanguageCodes();
   m_originalValueIdx = codes.indexOf(Q(m_originalValue));
 
   if (-1 == m_originalValueIdx)
@@ -55,7 +55,7 @@ LanguageValuePage::getOriginalValueAsString()
 QString
 LanguageValuePage::getCurrentValueAsString()
   const {
-  auto &codes = App::getIso639Language2Codes();
+  auto &codes = App::getIso639_2LanguageCodes();
   return codes[ m_cbValue->currentIndex() ];
 }
 

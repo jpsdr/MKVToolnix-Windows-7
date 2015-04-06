@@ -1,6 +1,6 @@
 #include "common/common_pch.h"
 
-#include "common/common.h"
+#include "common/extern_data.h"
 #include "common/iso639.h"
 #include "common/qt.h"
 #include "common/version.h"
@@ -9,7 +9,7 @@
 
 namespace mtx { namespace gui {
 
-QStringList App::ms_iso639LanguageDescriptions, App::ms_iso639Language2Codes;
+QStringList App::ms_iso639LanguageDescriptions, App::ms_iso639_2LanguageCodes, App::ms_iso3166_1Alpha2CountryCodes;
 
 App::App(int &argc,
          char **argv)
@@ -54,7 +54,8 @@ App::retranslateUi() {
 void
 App::reinitializeLanguageLists() {
   ms_iso639LanguageDescriptions.clear();
-  ms_iso639Language2Codes.clear();
+  ms_iso639_2LanguageCodes.clear();
+  ms_iso3166_1Alpha2CountryCodes.clear();
 
   initializeLanguageLists();
 }
@@ -69,7 +70,7 @@ App::initializeLanguageLists() {
 
   languages.reserve(iso639_languages.size());
   ms_iso639LanguageDescriptions.reserve(iso639_languages.size());
-  ms_iso639Language2Codes.reserve(iso639_languages.size());
+  ms_iso639_2LanguageCodes.reserve(iso639_languages.size());
 
   for (auto const &language : iso639_languages)
     languages.emplace_back(Q(language.iso639_2_code), Q(language.english_name));
@@ -78,8 +79,14 @@ App::initializeLanguageLists() {
 
   for (auto const &language : languages) {
     ms_iso639LanguageDescriptions << Q("%1 (%2)").arg(language.second).arg(language.first);
-    ms_iso639Language2Codes       << language.first;
+    ms_iso639_2LanguageCodes      << language.first;
   }
+
+  ms_iso3166_1Alpha2CountryCodes.reserve(cctlds.size());
+  for (auto const &code : cctlds)
+    ms_iso3166_1Alpha2CountryCodes << Q(code);
+
+  ms_iso3166_1Alpha2CountryCodes.sort();
 }
 
 QStringList const &
@@ -89,9 +96,15 @@ App::getIso639LanguageDescriptions() {
 }
 
 QStringList const &
-App::getIso639Language2Codes() {
+App::getIso639_2LanguageCodes() {
   initializeLanguageLists();
-  return ms_iso639Language2Codes;
+  return ms_iso639_2LanguageCodes;
+}
+
+QStringList const &
+App::getIso3166_1Alpha2CountryCodes() {
+  initializeLanguageLists();
+  return ms_iso3166_1Alpha2CountryCodes;
 }
 
 }}
