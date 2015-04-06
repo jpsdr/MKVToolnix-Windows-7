@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
@@ -42,8 +43,7 @@ ChapterModel::itemsForRow(QModelIndex const &idx) {
 
 void
 ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
-  auto edition = editionFromItem(rowItems[0]);
-  rowItems[0]->setText(QY("Edition UID %1").arg(GetChildValue<KaxEditionUID>(*edition)));
+  rowItems[0]->setText(QY("Edition entry"));
 }
 
 ChapterPtr
@@ -184,6 +184,41 @@ ChapterModel::populate(EbmlMaster &master,
     }
 
     ++masterIdx;
+  }
+}
+
+void
+ChapterModel::cloneElements(QModelIndex const &parentIdx,
+                            EbmlMaster &target) {
+  for (auto row = 0, numRows = rowCount(parentIdx); row < numRows; ++row) {
+    auto elementIdx  = index(row, 0, parentIdx);
+    auto elementItem = itemFromIndex(elementIdx);
+    auto newElement  = static_cast<EbmlMaster *>(parentIdx.isValid() ? chapterFromItem(elementItem)->Clone() : editionFromItem(elementItem)->Clone());
+
+    target.PushElement(*newElement);
+
+    cloneElements(elementIdx, *newElement);
+  }
+}
+
+ChaptersPtr
+ChapterModel::allChapters() {
+  auto chapters = std::make_shared<KaxChapters>();
+  cloneElements(QModelIndex{}, *chapters);
+
+  return chapters;
+}
+
+void
+ChapterModel::fixMandatoryElements(QModelIndex const &parentIdx) {
+  for (auto row = 0, numRows = rowCount(parentIdx); row < numRows; ++row) {
+    auto elementIdx  = index(row, 0, parentIdx);
+    auto elementItem = itemFromIndex(elementIdx);
+    auto element     = parentIdx.isValid() ? static_cast<EbmlMaster *>(chapterFromItem(elementItem).get()) : static_cast<EbmlMaster *>(editionFromItem(elementItem).get());
+
+    fix_mandatory_chapter_elements(element);
+
+    fixMandatoryElements(elementIdx);
   }
 }
 

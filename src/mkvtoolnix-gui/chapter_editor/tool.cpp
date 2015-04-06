@@ -43,13 +43,15 @@ void
 Tool::setupMenu() {
   auto mwUi = MainWindow::get()->getUi();
 
-  connect(mwUi->actionChapterEditorNew,    &QAction::triggered,         this, &Tool::newFile);
-  connect(mwUi->actionChapterEditorOpen,   &QAction::triggered,         this, &Tool::selectFileToOpen);
-  // connect(mwUi->actionChapterEditorSave,   &QAction::triggered,         this, &Tool::save);
-  // connect(mwUi->actionChapterEditorReload, &QAction::triggered,         this, &Tool::reload);
-  connect(mwUi->actionChapterEditorClose,  &QAction::triggered,         this, &Tool::closeCurrentTab);
+  connect(mwUi->actionChapterEditorNew,            &QAction::triggered,         this, &Tool::newFile);
+  connect(mwUi->actionChapterEditorOpen,           &QAction::triggered,         this, &Tool::selectFileToOpen);
+  connect(mwUi->actionChapterEditorSave,           &QAction::triggered,         this, &Tool::save);
+  connect(mwUi->actionChapterEditorSaveAsXml,      &QAction::triggered,         this, &Tool::saveAsXml);
+  connect(mwUi->actionChapterEditorSaveToMatroska, &QAction::triggered,         this, &Tool::saveToMatroska);
+  connect(mwUi->actionChapterEditorReload,         &QAction::triggered,         this, &Tool::reload);
+  connect(mwUi->actionChapterEditorClose,          &QAction::triggered,         this, &Tool::closeCurrentTab);
 
-  connect(ui->editors,                     &QTabWidget::currentChanged, this, &Tool::enableMenuActions);
+  connect(ui->editors,                             &QTabWidget::currentChanged, this, &Tool::enableMenuActions);
 }
 
 void
@@ -60,13 +62,15 @@ Tool::showChapterEditorsWidget() {
 
 void
 Tool::enableMenuActions() {
-  auto mwUi = MainWindow::get()->getUi();
-  auto tab  = currentTab();
+  auto mwUi        = MainWindow::get()->getUi();
+  auto tab         = currentTab();
+  auto hasFileName = tab && !tab->getFileName().isEmpty();
+  auto hasElements = tab && !tab->isEmpty();
 
-  mwUi->actionChapterEditorSave->setEnabled(tab && !tab->getFileName().isEmpty());
-  mwUi->actionChapterEditorSaveAsXml->setEnabled(!!tab);
-  mwUi->actionChapterEditorSaveToMatroska->setEnabled(!!tab);
-  mwUi->actionChapterEditorReload->setEnabled(tab && !tab->getFileName().isEmpty());
+  mwUi->actionChapterEditorSave->setEnabled(hasFileName && hasElements);
+  mwUi->actionChapterEditorSaveAsXml->setEnabled(!!tab && hasElements);
+  mwUi->actionChapterEditorSaveToMatroska->setEnabled(!!tab && hasElements);
+  mwUi->actionChapterEditorReload->setEnabled(hasFileName);
   mwUi->actionChapterEditorClose->setEnabled(!!tab);
 }
 
@@ -102,6 +106,7 @@ Tool::newFile() {
      ->newFile();
 }
 
+// TODO: Tool::dragEnterEvent: drag & drop
 // void
 // Tool::dragEnterEvent(QDragEnterEvent *event) {
 //   if (!event->mimeData()->hasUrls())
@@ -139,8 +144,8 @@ Tool::openFile(QString const &fileName) {
 void
 Tool::selectFileToOpen() {
   auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in chapter editor"), Util::Settings::get().m_lastMatroskaFileDir.path(),
-                                                 QY("Supported file types")           + Q(" (*.mkv *.mka *.mks *.mk3d *.txt *.webm *.xml);;") +
-                                                 QY("Matroska and WebM files")        + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") +
+                                                 QY("Supported file types")           + Q(" (*.mkv *.mka *.mks *.mk3d *.txt *.xml);;") +
+                                                 QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
                                                  QY("XML chapter files")              + Q(" (*.xml);;") +
                                                  QY("Simple OGM-style chapter files") + Q(" (*.txt);;") +
                                                  QY("All files")                      + Q(" (*)"));
@@ -153,19 +158,34 @@ Tool::selectFileToOpen() {
     openFile(fileName);
 }
 
-// void
-// Tool::save() {
-//   auto tab = currentTab();
-//   if (tab)
-//     tab->save();
-// }
+void
+Tool::save() {
+  auto tab = currentTab();
+  if (tab)
+    tab->save();
+}
 
-// void
-// Tool::reload() {
-//   auto tab = currentTab();
-//   if (!tab)
-//     return;
+void
+Tool::saveAsXml() {
+  auto tab = currentTab();
+  if (tab)
+    tab->saveAsXml();
+}
 
+void
+Tool::saveToMatroska() {
+  auto tab = currentTab();
+  if (tab)
+    tab->saveToMatroska();
+}
+
+void
+Tool::reload() {
+  auto tab = currentTab();
+  if (!tab || tab->getFileName().isEmpty())
+    return;
+
+  // TODO: Tool::reload: hasBeenModified
 //   if (tab->hasBeenModified()) {
 //     auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
 //                                         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
@@ -173,8 +193,8 @@ Tool::selectFileToOpen() {
 //       return;
 //   }
 
-//   tab->load();
-// }
+  tab->load();
+}
 
 void
 Tool::closeTab(int index) {
@@ -183,6 +203,7 @@ Tool::closeTab(int index) {
 
   auto tab = static_cast<Tab *>(ui->editors->widget(index));
 
+  // TODO: Tool::closeTab: hasBeenModified
   // if (tab->hasBeenModified()) {
   //   auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
   //                                       QMessageBox::Yes | QMessageBox::No, QMessageBox::No);

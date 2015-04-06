@@ -56,7 +56,8 @@ public:
 
   virtual void retranslateUi();
   virtual QString const &getFileName() const;
-  QString getTitle() const;
+  virtual QString getTitle() const;
+  virtual bool isEmpty() const;
 
 signals:
   void removeThisTab();
@@ -65,7 +66,9 @@ signals:
 public slots:
   virtual void newFile();
   virtual void load();
-  // virtual void save();
+  virtual void save();
+  virtual void saveAsXml();
+  virtual void saveToMatroska();
   virtual void expandAll();
   virtual void collapseAll();
   virtual void addEditionBefore();
@@ -97,11 +100,13 @@ protected:
   void resizeChapterColumnsToContents() const;
   void resizeNameColumnsToContents() const;
 
+  bool copyControlsToStorage();
   bool copyControlsToStorage(QModelIndex const &idx);
   ValidationResult copyControlsToStorageImpl(QModelIndex const &idx);
   ValidationResult copyChapterControlsToStorage(ChapterPtr const &chapter);
   ValidationResult copyEditionControlsToStorage(EditionPtr const &edition);
 
+  bool setControlsFromStorage();
   bool setControlsFromStorage(QModelIndex const &idx);
   bool setChapterControlsFromStorage(ChapterPtr const &chapter);
   bool setEditionControlsFromStorage(EditionPtr const &edition);
@@ -119,6 +124,8 @@ protected:
 
   ChapterPtr createEmptyChapter(int64_t startTime);
 
+  void saveAsXmlImpl(bool requireNewFileName);
+  void saveToMatroskaImpl(bool requireNewFileName);
 
 protected:
   static QString formatEbmlBinary(EbmlBinary *binary);

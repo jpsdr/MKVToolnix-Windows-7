@@ -39,11 +39,13 @@ public slots:
   virtual void enableMenuActions();
   virtual void newFile();
   virtual void selectFileToOpen();
-  // virtual void save();
+  virtual void save();
+  virtual void saveAsXml();
+  virtual void saveToMatroska();
   virtual void closeTab(int index);
   virtual void closeCurrentTab();
   virtual void closeSendingTab();
-  // virtual void reload();
+  virtual void reload();
 
 protected:
   Tab * appendTab(Tab *tab);

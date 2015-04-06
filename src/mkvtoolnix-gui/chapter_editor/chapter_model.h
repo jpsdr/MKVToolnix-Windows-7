@@ -12,7 +12,8 @@
 
 using namespace libmatroska;
 
-using EditionPtr = std::shared_ptr<KaxEditionEntry>;
+using ChaptersPtr = std::shared_ptr<KaxChapters>;
+using EditionPtr  = std::shared_ptr<KaxEditionEntry>;
 using ChapterPtr  = std::shared_ptr<KaxChapterAtom>;
 
 Q_DECLARE_METATYPE(EditionPtr);
@@ -37,14 +38,20 @@ public:
   void reset();
   void retranslateUi();
 
+  void fixMandatoryElements(QModelIndex const &parentIdx = QModelIndex{});
+
   ChapterPtr chapterFromItem(QStandardItem *item);
   EditionPtr editionFromItem(QStandardItem *item);
+
+  ChaptersPtr allChapters();
 
 protected:
   void setEditionRowText(QList<QStandardItem *> const &rowItems);
   void setChapterRowText(QList<QStandardItem *> const &rowItems);
   void populate(EbmlMaster &master, QModelIndex const &parentIdx);
   QList<QStandardItem *> itemsForRow(QModelIndex const &idx);
+  void cloneElements(QModelIndex const &parentIdx, EbmlMaster &target);
+
 
 protected:
   static QList<QStandardItem *> newRowItems();

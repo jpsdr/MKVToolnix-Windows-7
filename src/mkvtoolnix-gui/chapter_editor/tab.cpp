@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QFileDialog>
 #include <QFileInfo>
 #include <QMenu>
 #include <QMessageBox>
@@ -16,11 +17,13 @@
 #include "common/segment_tracks.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
+#include "common/xml/ebml_chapters_converter.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
 #include "mkvtoolnix-gui/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace ChapterEditor {
@@ -209,7 +212,7 @@ Tab::loadFromChapterFile() {
   }
 
   if (!chapters) {
-    auto message = QY("The file you tried to open (%1) is not recognized as either a valid Matroska/WebM or a valid chapter file.").arg(m_fileName);
+    auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(m_fileName);
     if (!error.isEmpty())
       message = Q("%1 %2").arg(message).arg(QY("Error message from the parser: %1").arg(error));
 
@@ -218,7 +221,7 @@ Tab::loadFromChapterFile() {
 
   } else if (isSimpleFormat) {
     QMessageBox::warning(this, QY("Simple chapter file format"), QY("The file you tried to open (%1) is a simple chapter file format. This can only be read but not written. "
-                                                                    "You will have to save the file to a Matroska/WebM or an XML chapter file.").arg(m_fileName));
+                                                                    "You will have to save the file to a Matroska or an XML chapter file.").arg(m_fileName));
     m_fileName.clear();
     emit titleChanged(getTitle());
   }
@@ -245,56 +248,111 @@ Tab::load() {
   MainWindow::get()->setStatusBarMessage(Q("yay loaded %1").arg(chapters->ListSize()));
 }
 
-// void
-// Tab::save() {
-//   auto segmentinfoModified = false;
-//   auto tracksModified      = false;
+void
+Tab::save() {
+  if (!m_analyzer)
+    saveAsXmlImpl(false);
 
-//   for (auto const &page : m_chapterModel->getTopLevelPages()) {
-//     if (!page->hasBeenModified())
-//       continue;
+  else
+    saveToMatroskaImpl(false);
+}
 
-//     if (page == m_segmentinfoPage)
-//       segmentinfoModified = true;
-//     else
-//       tracksModified      = true;
-//   }
+void
+Tab::saveAsXml() {
+  saveAsXmlImpl(true);
+}
 
-//   if (!segmentinfoModified && !tracksModified) {
-//     QMessageBox::information(this, QY("File has not been modified"), QY("The chapter values have not been modified. There is nothing to save."));
-//     return;
-//   }
+void
+Tab::saveAsXmlImpl(bool requireNewFileName) {
+  if (!copyControlsToStorage())
+    return;
 
-//   auto pageIdx = m_chapterModel->validate();
-//   if (pageIdx.isValid()) {
-//     reportValidationFailure(false, pageIdx);
-//     return;
-//   }
+  m_chapterModel->fixMandatoryElements();
+  setControlsFromStorage();
 
-//   if (QFileInfo{m_fileName}.lastModified() != m_fileModificationTime) {
-//     QMessageBox::critical(this, QY("File has been modified"),
-//                           QY("The file has been changed by another program since it was read by the chapter editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."));
-//     return;
-//   }
+  auto newFileName = m_fileName;
+  if (m_fileName.isEmpty())
+    requireNewFileName = true;
 
-//   doModifications();
+  if (requireNewFileName) {
+    auto &settings       = Util::Settings::get();
+    auto defaultFileName = !m_fileName.isEmpty() ? m_fileName : settings.m_lastMatroskaFileDir.path();
+    newFileName          = QFileDialog::getSaveFileName(this, QY("Save chapters as XML"), defaultFileName, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"));
 
-//   if (segmentinfoModified && m_eSegmentInfo) {
-//     auto result = m_analyzer->update_element(m_eSegmentInfo, true);
-//     if (kax_analyzer_c::uer_success != result)
-//       displayUpdateElementResult(result, QY("Saving the modified segment information chapter failed."));
-//   }
+    if (newFileName.isEmpty())
+      return;
+  }
 
-//   if (tracksModified && m_eTracks) {
-//     auto result = m_analyzer->update_element(m_eTracks, true);
-//     if (kax_analyzer_c::uer_success != result)
-//       displayUpdateElementResult(result, QY("Saving the modified track chapters failed."));
-//   }
+  try {
+    auto chapters = m_chapterModel->allChapters();
+    auto out      = mm_file_io_c{to_utf8(newFileName), MODE_CREATE};
+    mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, out);
 
-//   load();
+  } catch (mtx::mm_io::exception &) {
+    QMessageBox::critical(this, QY("Saving failed"), QY("Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."));
+    return;
 
-//   MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
-// }
+  } catch (mtx::xml::conversion_x &ex) {
+    QMessageBox::critical(this, QY("Saving failed"), QY("Converting the chapters to XML failed: %1").arg(ex.what()));
+    return;
+  }
+
+  if (requireNewFileName) {
+    m_fileName = newFileName;
+    emit titleChanged(getTitle());
+  }
+
+  MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
+}
+
+void
+Tab::saveToMatroska() {
+  saveToMatroskaImpl(true);
+}
+
+void
+Tab::saveToMatroskaImpl(bool requireNewFileName) {
+  if (!copyControlsToStorage())
+    return;
+
+  m_chapterModel->fixMandatoryElements();
+  setControlsFromStorage();
+
+  auto newFileName = m_fileName;
+  if (m_fileName.isEmpty())
+    requireNewFileName = true;
+
+  if (requireNewFileName) {
+    auto &settings       = Util::Settings::get();
+    auto defaultFileName = !m_fileName.isEmpty() ? m_fileName : settings.m_lastMatroskaFileDir.path();
+    newFileName          = QFileDialog::getSaveFileName(this, QY("Save chapters to Matroska file"), defaultFileName, QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d);;") + QY("All files") + Q(" (*)"));
+
+    if (newFileName.isEmpty())
+      return;
+  }
+
+  // try {
+  //   auto chapters = m_chapterModel->allChapters();
+  //   auto out      = mm_file_io_c{to_utf8(newFileName), MODE_CREATE};
+  //   mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, out);
+
+  // } catch (mtx::mm_io::exception &) {
+  //   QMessageBox::critical(this, QY("Saving failed"), QY("Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."));
+  //   return;
+
+  // } catch (mtx::xml::conversion_x &ex) {
+  //   QMessageBox::critical(this, QY("Saving failed"), QY("Converting the chapters to XML failed: %1").arg(ex.what()));
+  //   return;
+  // }
+  // TODO: Tab::saveToMatroskaImpl
+
+  if (requireNewFileName) {
+    m_fileName = newFileName;
+    emit titleChanged(getTitle());
+  }
+
+  MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
+}
 
 void
 Tab::selectChapterRow(QModelIndex const &idx,
@@ -305,6 +363,12 @@ Tab::selectChapterRow(QModelIndex const &idx,
   ui->elements->selectionModel()->setCurrentIndex(idx.sibling(idx.row(), 0), QItemSelectionModel::ClearAndSelect);
   ui->elements->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
   m_ignoreChapterSelectionChanges = false;
+}
+
+bool
+Tab::copyControlsToStorage() {
+  auto idx = Util::selectedRowIdx(ui->elements);
+  return idx.isValid() ? copyControlsToStorage(idx) : true;
 }
 
 bool
@@ -335,16 +399,22 @@ Tab::copyControlsToStorageImpl(QModelIndex const &idx) {
 
 Tab::ValidationResult
 Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
-  // TODO: Tab::copyChapterControlsToStorage: propagate start time to parent?
   if (!chapter)
     return { true, QString{} };
 
-  auto ok  = false;
-  auto uid = ui->leChUid->text().toULongLong(&ok);
-  if (!ok || !uid)
-    return { false, QY("The chapter UID must be positive number.") };
+  auto uid = uint64_t{};
 
-  GetChild<KaxChapterUID>(*chapter).SetValue(uid);
+  if (!ui->leChUid->text().isEmpty()) {
+    auto ok = false;
+    uid     = ui->leChUid->text().toULongLong(&ok);
+    if (!ok)
+      return { false, QY("The chapter UID must be a number if given.") };
+  }
+
+  if (uid)
+    GetChild<KaxChapterUID>(*chapter).SetValue(uid);
+  else
+    DeleteChildren<KaxChapterUID>(*chapter);
 
   if (!ui->cbChFlagEnabled->isChecked())
     GetChild<KaxChapterFlagEnabled>(*chapter).SetValue(0);
@@ -387,9 +457,10 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
     DeleteChildren<KaxChapterSegmentUID>(*chapter);
 
   if (!ui->leChSegmentEditionUid->text().isEmpty()) {
-    uid = ui->leChSegmentEditionUid->text().toULongLong(&ok);
+    auto ok = false;
+    uid     = ui->leChSegmentEditionUid->text().toULongLong(&ok);
     if (!ok || !uid)
-      return { false, QY("The segment edition UID must be positive number if it is given.") };
+      return { false, QY("The segment edition UID must be a positive number if given.") };
 
     GetChild<KaxChapterSegmentEditionUID>(*chapter).SetValue(uid);
   }
@@ -402,12 +473,19 @@ Tab::copyEditionControlsToStorage(EditionPtr const &edition) {
   if (!edition)
     return { true, QString{} };
 
-  auto ok  = false;
-  auto uid = ui->leEdUid->text().toULongLong(&ok);
-  if (!ok || !uid)
-    return { false, QY("The edition UID must be positive number.") };
+  auto uid = uint64_t{};
 
-  GetChild<KaxEditionUID>(*edition).SetValue(uid);
+  if (!ui->leEdUid->text().isEmpty()) {
+    auto ok = false;
+    uid     = ui->leEdUid->text().toULongLong(&ok);
+    if (!ok)
+      return { false, QY("The edition UID must be a number if given.") };
+  }
+
+  if (uid)
+    GetChild<KaxEditionUID>(*edition).SetValue(uid);
+  else
+    DeleteChildren<KaxEditionUID>(*edition);
 
   if (ui->cbEdFlagDefault->isChecked())
     GetChild<KaxEditionFlagDefault>(*edition).SetValue(1);
@@ -428,6 +506,12 @@ Tab::copyEditionControlsToStorage(EditionPtr const &edition) {
 }
 
 bool
+Tab::setControlsFromStorage() {
+  auto idx = Util::selectedRowIdx(ui->elements);
+  return idx.isValid() ? setControlsFromStorage(idx) : true;
+}
+
+bool
 Tab::setControlsFromStorage(QModelIndex const &idx) {
   auto stdItem = m_chapterModel->itemFromIndex(idx);
   if (!stdItem)
@@ -443,6 +527,7 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
   if (!chapter)
     return false;
 
+  auto uid               = FindChildValue<KaxChapterUID>(*chapter);
   auto end               = FindChild<KaxChapterTimeEnd>(*chapter);
   auto segmentEditionUid = FindChild<KaxChapterSegmentEditionUID>(*chapter);
 
@@ -451,7 +536,7 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
   ui->leChEnd->setText(end ? Q(format_timecode(end->GetValue())) : Q(""));
   ui->cbChFlagEnabled->setChecked(!!FindChildValue<KaxChapterFlagEnabled>(*chapter, 1));
   ui->cbChFlagHidden->setChecked(!!FindChildValue<KaxChapterFlagHidden>(*chapter));
-  ui->leChUid->setText(QString::number(FindChildValue<KaxChapterUID>(*chapter)));
+  ui->leChUid->setText(uid ? QString::number(uid) : Q(""));
   ui->leChSegmentUid->setText(formatEbmlBinary(FindChild<KaxChapterSegmentUID>(*chapter)));
   ui->leChSegmentEditionUid->setText(segmentEditionUid ? QString::number(segmentEditionUid->GetValue()) : Q(""));
 
@@ -470,7 +555,9 @@ Tab::setEditionControlsFromStorage(EditionPtr const &edition) {
   if (!edition)
     return false;
 
-  ui->leEdUid->setText(QString::number(FindChildValue<KaxEditionUID>(*edition)));
+  auto uid = FindChildValue<KaxEditionUID>(*edition);
+
+  ui->leEdUid->setText(uid ? QString::number(uid) : Q(""));
   ui->cbEdFlagDefault->setChecked(!!FindChildValue<KaxEditionFlagDefault>(*edition));
   ui->cbEdFlagHidden->setChecked(!!FindChildValue<KaxEditionFlagHidden>(*edition));
   ui->cbEdFlagOrdered->setChecked(!!FindChildValue<KaxEditionFlagOrdered>(*edition));
@@ -764,6 +851,12 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   menu.addAction(m_collapseAllAction);
 
   menu.exec(ui->elements->viewport()->mapToGlobal(pos));
+}
+
+bool
+Tab::isEmpty()
+  const {
+  return !!m_chapterModel->rowCount();
 }
 
 }}}
