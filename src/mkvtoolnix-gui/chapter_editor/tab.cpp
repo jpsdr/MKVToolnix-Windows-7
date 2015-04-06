@@ -41,6 +41,7 @@ Tab::Tab(QWidget *parent,
   , m_addChapterAfterAction{new QAction{this}}
   , m_addSubChapterAction{new QAction{this}}
   , m_removeElementAction{new QAction{this}}
+  , m_sortSubtreeAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -93,6 +94,7 @@ Tab::setupUi() {
   connect(m_addChapterAfterAction,         &QAction::triggered,                                                    this, &Tab::addChapterAfter);
   connect(m_addSubChapterAction,           &QAction::triggered,                                                    this, &Tab::addSubChapter);
   connect(m_removeElementAction,           &QAction::triggered,                                                    this, &Tab::removeElement);
+  connect(m_sortSubtreeAction,             &QAction::triggered,                                                    this, &Tab::sortSubtree);
 }
 
 void
@@ -118,6 +120,7 @@ Tab::retranslateUi() {
   m_addChapterAfterAction->setText(QY("Add new ch&apter after"));
   m_addSubChapterAction->setText(QY("Add new &sub-chapter inside"));
   m_removeElementAction->setText(QY("&Remove selected edition or chapter"));
+  m_sortSubtreeAction->setText(QY("Sor&t elements by their start time"));
 
   m_chapterModel->retranslateUi();
   m_nameModel->retranslateUi();
@@ -697,6 +700,13 @@ Tab::removeElement() {
 }
 
 void
+Tab::sortSubtree() {
+  auto selectedIdx = Util::selectedRowIdx(ui->elements);
+  auto parentItem  = !selectedIdx.isValid() ? m_chapterModel->invisibleRootItem() : m_chapterModel->itemFromIndex(selectedIdx);
+  parentItem->sortChildren(1);
+}
+
+void
 Tab::expandCollapseAll(bool expand,
                        QModelIndex const &parentIdx) {
   if (parentIdx.isValid())
@@ -743,6 +753,8 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   menu.addAction(m_addSubChapterAction);
   menu.addSeparator();
   menu.addAction(m_removeElementAction);
+  menu.addSeparator();
+  menu.addAction(m_sortSubtreeAction);
   menu.addSeparator();
   menu.addAction(m_expandAllAction);
   menu.addAction(m_collapseAllAction);
