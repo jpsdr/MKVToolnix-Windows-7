@@ -46,7 +46,7 @@ parse_timecode(const std::string &src,
   bool decimal_point_found;
 
   if (src.empty())
-    return false;
+    return set_tcp_error(Y("Invalid format: the string is empty."));
 
   if ('-' == src[0]) {
     if (!allow_negative)
