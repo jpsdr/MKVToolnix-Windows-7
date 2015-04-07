@@ -14,6 +14,7 @@ using namespace mtx::gui;
 ChapterModel::ChapterModel(QObject *parent)
   : QStandardItemModel{parent}
 {
+  connect(this, &QAbstractItemModel::rowsAboutToBeRemoved, this, &ChapterModel::invalidateRegistryEntriesBeforeRemoval);
 }
 
 ChapterModel::~ChapterModel() {
@@ -48,24 +49,26 @@ ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
 
 ChapterPtr
 ChapterModel::chapterFromItem(QStandardItem *item) {
-  return item ? item->data(Util::ChapterEditorChapterRole).value<ChapterPtr>() : ChapterPtr{};
+  return std::static_pointer_cast<KaxChapterAtom>(m_elementRegistry[ registryIdFromItem(item) ]);
 }
 
 EditionPtr
 ChapterModel::editionFromItem(QStandardItem *item) {
-  return item ? item->data(Util::ChapterEditorEditionRole).value<EditionPtr>() : EditionPtr{};
+  return std::static_pointer_cast<KaxEditionEntry>(m_elementRegistry[ registryIdFromItem(item) ]);
 }
 
 void
 ChapterModel::setChapterRowText(QList<QStandardItem *> const &rowItems) {
-  auto &chapter = *chapterFromItem(rowItems[0]);
+  auto chapter = chapterFromItem(rowItems[0]);
+  if (!chapter)
+    return;
 
-  auto kStart   = FindChild<KaxChapterTimeStart>(chapter);
-  auto kEnd     = FindChild<KaxChapterTimeEnd>(chapter);
+  auto kStart = FindChild<KaxChapterTimeStart>(*chapter);
+  auto kEnd   = FindChild<KaxChapterTimeEnd>(*chapter);
 
   rowItems[1]->setData(static_cast<qulonglong>(kStart ? kStart->GetValue() : 0), QStandardItemModel::sortRole());
 
-  rowItems[0]->setText(chapterDisplayName(chapter));
+  rowItems[0]->setText(chapterDisplayName(*chapter));
   rowItems[1]->setText(kStart ? Q(format_timecode(kStart->GetValue(), 0)) : Q(""));
   rowItems[2]->setText(kEnd   ? Q(format_timecode(kEnd->GetValue(),   0)) : Q(""));
 }
@@ -90,7 +93,7 @@ void
 ChapterModel::insertEdition(int row,
                             EditionPtr const &edition) {
   auto rowItems = newRowItems();
-  rowItems[0]->setData(QVariant::fromValue(edition), Util::ChapterEditorEditionRole);
+  rowItems[0]->setData(registerElement(std::static_pointer_cast<EbmlMaster>(edition)), Util::ChapterEditorChapterOrEditionRole);
 
   setEditionRowText(rowItems);
   insertRow(row, rowItems);
@@ -107,7 +110,7 @@ ChapterModel::insertChapter(int row,
                             ChapterPtr const &chapter,
                             QModelIndex const &parentIdx) {
   auto rowItems = newRowItems();
-  rowItems[0]->setData(QVariant::fromValue(chapter), Util::ChapterEditorChapterRole);
+  rowItems[0]->setData(registerElement(std::static_pointer_cast<EbmlMaster>(chapter)), Util::ChapterEditorChapterOrEditionRole);
 
   setChapterRowText(rowItems);
   itemFromIndex(parentIdx)->insertRow(row, rowItems);
@@ -116,7 +119,11 @@ ChapterModel::insertChapter(int row,
 void
 ChapterModel::reset() {
   beginResetModel();
+
+  m_elementRegistry.clear();
+  m_nextElementRegistryIdx = 0;
   removeRows(0, rowCount());
+
   endResetModel();
 }
 
@@ -150,10 +157,27 @@ ChapterModel::chapterDisplayName(KaxChapterAtom &chapter) {
 }
 
 void
+ChapterModel::invalidateRegistryEntriesBeforeRemoval(QModelIndex const &parent,
+                                                     int first,
+                                                     int last) {
+  for (auto row = first; row <= last; ++row)
+    walkTree(index(row, 0, parent), [this](QModelIndex const &idx) {
+      auto id = registryIdFromItem(itemFromIndex(idx));
+      mxinfo(boost::format("invalidating id %1%\n") % id);
+      m_elementRegistry.remove(id);
+    });
+}
+
+void
 ChapterModel::populate(EbmlMaster &master) {
   beginResetModel();
+
+  m_elementRegistry.clear();
+  m_nextElementRegistryIdx = 0;
+
   removeRows(0, rowCount());
   populate(master, QModelIndex{});
+
   endResetModel();
 }
 
@@ -216,7 +240,7 @@ ChapterModel::duplicateTree(QModelIndex const &destParentIdx,
 
   for (auto row = 0, numRows = rowCount(srcIdx); row < numRows; ++row)
     duplicateTree(newDestParentIdx, row, index(row, 0, srcIdx));
-                  }
+}
 
 void
 ChapterModel::cloneElementsForRetrieval(QModelIndex const &parentIdx,
@@ -242,15 +266,31 @@ ChapterModel::allChapters() {
 
 void
 ChapterModel::fixMandatoryElements(QModelIndex const &parentIdx) {
-  for (auto row = 0, numRows = rowCount(parentIdx); row < numRows; ++row) {
-    auto elementIdx  = index(row, 0, parentIdx);
-    auto elementItem = itemFromIndex(elementIdx);
-    auto element     = parentIdx.isValid() ? static_cast<EbmlMaster *>(chapterFromItem(elementItem).get()) : static_cast<EbmlMaster *>(editionFromItem(elementItem).get());
+  walkTree(parentIdx, [this](QModelIndex const &idx) {
+    auto element = m_elementRegistry[ registryIdFromItem(itemFromIndex(idx)) ];
+    if (element)
+      fix_mandatory_chapter_elements(element.get());
+  });
+}
 
-    fix_mandatory_chapter_elements(element);
+void
+ChapterModel::walkTree(QModelIndex const &idx,
+                       std::function<void(QModelIndex const &)> const &worker) {
+  worker(idx);
 
-    fixMandatoryElements(elementIdx);
-  }
+  for (auto row = 0, numRows = rowCount(idx); row < numRows; ++row)
+    walkTree(index(row, 0, idx), worker);
+}
+
+qulonglong
+ChapterModel::registerElement(std::shared_ptr<EbmlMaster> const &element) {
+  m_elementRegistry[ ++m_nextElementRegistryIdx ] = element;
+  return m_nextElementRegistryIdx;
+}
+
+qulonglong
+ChapterModel::registryIdFromItem(QStandardItem *item) {
+  return item ? item->data(Util::ChapterEditorChapterOrEditionRole).value<qulonglong>() : 0;
 }
 
 }}}

@@ -546,7 +546,7 @@ Tab::setControlsFromStorage(QModelIndex const &idx) {
 bool
 Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
   if (!chapter)
-    return false;
+    return true;
 
   auto uid               = FindChildValue<KaxChapterUID>(*chapter);
   auto end               = FindChild<KaxChapterTimeEnd>(*chapter);
@@ -574,7 +574,7 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
 bool
 Tab::setEditionControlsFromStorage(EditionPtr const &edition) {
   if (!edition)
-    return false;
+    return true;
 
   auto uid = FindChildValue<KaxEditionUID>(*edition);
 

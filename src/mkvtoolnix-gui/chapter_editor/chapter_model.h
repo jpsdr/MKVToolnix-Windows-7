@@ -24,6 +24,10 @@ namespace mtx { namespace gui { namespace ChapterEditor {
 class ChapterModel: public QStandardItemModel {
   Q_OBJECT;
 
+protected:
+  QHash<qulonglong, std::shared_ptr<EbmlMaster>> m_elementRegistry;
+  qulonglong m_nextElementRegistryIdx{};
+
 public:
   ChapterModel(QObject *parent);
   virtual ~ChapterModel();
@@ -47,6 +51,9 @@ public:
 
   ChaptersPtr allChapters();
 
+public slots:
+  void invalidateRegistryEntriesBeforeRemoval(QModelIndex const &parent, int first, int last);
+
 protected:
   void setEditionRowText(QList<QStandardItem *> const &rowItems);
   void setChapterRowText(QList<QStandardItem *> const &rowItems);
@@ -55,6 +62,10 @@ protected:
   void cloneElementsForRetrieval(QModelIndex const &parentIdx, EbmlMaster &target);
   void duplicateTree(QModelIndex const &destParentIdx, int destRow, QModelIndex const &srcIdx);
 
+  qulonglong registerElement(std::shared_ptr<EbmlMaster> const &element);
+  qulonglong registryIdFromItem(QStandardItem *item);
+
+  void walkTree(QModelIndex const &idx, std::function<void(QModelIndex const &)> const &worker);
 
 protected:
   static QList<QStandardItem *> newRowItems();

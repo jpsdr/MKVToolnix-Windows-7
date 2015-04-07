@@ -42,8 +42,7 @@ enum MtxGuiRoles {
   TrackRole,
   JobIdRole,
   HeaderEditorPageIdRole,
-  ChapterEditorEditionRole,
-  ChapterEditorChapterRole,
+  ChapterEditorChapterOrEditionRole,
   ChapterEditorChapterDisplayRole,
   AttachmentRole,
 };
