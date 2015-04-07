@@ -856,14 +856,14 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   auto chapterSelected = hasSelection && selectedIdx.parent().isValid();
   auto hasEntries      = !!m_chapterModel->rowCount();
 
-  m_expandAllAction->setEnabled(hasEntries);
-  m_collapseAllAction->setEnabled(hasEntries);
-
   m_addChapterBeforeAction->setEnabled(chapterSelected);
   m_addChapterAfterAction->setEnabled(chapterSelected);
   m_addSubChapterAction->setEnabled(hasSelection);
   m_removeElementAction->setEnabled(hasSelection);
   m_duplicateAction->setEnabled(hasSelection);
+  m_sortSubtreeAction->setEnabled(hasEntries);
+  m_expandAllAction->setEnabled(hasEntries);
+  m_collapseAllAction->setEnabled(hasEntries);
 
   QMenu menu{this};
 
