@@ -58,8 +58,12 @@ def setup_globals
   $manpages                =  $programs.collect { |name| "doc/man/#{name}.1" }
   $manpages                << "doc/man/mkvtoolnix-gui.1" if !$build_mkvtoolnix_gui
 
-  $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Ilib/utf8-cpp/source -Isrc"
+  $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Isrc"
   $system_libdirs          = "-Llib/avilib-0.6.10 -Llib/librmff -Lsrc/common"
+
+  if c?(:UTF8CPP_INTERNAL)
+    $system_includes      += " -Ilib/utf8-cpp/source"
+  end
 
   if c?(:PUGIXML_INTERNAL)
     $system_includes      += " -Ilib/pugixml/src"
