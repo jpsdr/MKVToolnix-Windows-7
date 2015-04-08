@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
-#include "common/qt.h"
+#include <QDragMoveEvent>
+
 #include "mkvtoolnix-gui/chapter_editor/chapter_tree_view.h"
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
 
@@ -14,6 +15,16 @@ ChapterTreeView::ChapterTreeView(QWidget *parent)
 }
 
 ChapterTreeView::~ChapterTreeView() {
+}
+
+void
+ChapterTreeView::dragMoveEvent(QDragMoveEvent *event) {
+  if (event->pos().x() > columnWidth(0)) {
+    event->ignore();
+    return;
+ }
+
+  QTreeView::dragMoveEvent(event);
 }
 
 }}}
