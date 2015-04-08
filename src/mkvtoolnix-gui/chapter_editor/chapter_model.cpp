@@ -14,7 +14,6 @@ using namespace mtx::gui;
 ChapterModel::ChapterModel(QObject *parent)
   : QStandardItemModel{parent}
 {
-  connect(this, &QAbstractItemModel::rowsAboutToBeRemoved, this, &ChapterModel::invalidateRegistryEntriesBeforeRemoval);
 }
 
 ChapterModel::~ChapterModel() {
@@ -157,15 +156,15 @@ ChapterModel::chapterDisplayName(KaxChapterAtom &chapter) {
 }
 
 void
-ChapterModel::invalidateRegistryEntriesBeforeRemoval(QModelIndex const &parent,
-                                                     int first,
-                                                     int last) {
-  for (auto row = first; row <= last; ++row)
-    walkTree(index(row, 0, parent), [this](QModelIndex const &idx) {
-      auto id = registryIdFromItem(itemFromIndex(idx));
-      mxinfo(boost::format("invalidating id %1%\n") % id);
-      m_elementRegistry.remove(id);
-    });
+ChapterModel::removeTree(QModelIndex const &idx) {
+  if (!idx.isValid())
+    return;
+
+  walkTree(idx, [this](QModelIndex const &currIdx) {
+    m_elementRegistry.remove(registryIdFromItem(itemFromIndex(currIdx)));
+  });
+
+  removeRow(idx.row(), idx.parent());
 }
 
 void
@@ -291,6 +290,44 @@ ChapterModel::registerElement(std::shared_ptr<EbmlMaster> const &element) {
 qulonglong
 ChapterModel::registryIdFromItem(QStandardItem *item) {
   return item ? item->data(Util::ChapterEditorChapterOrEditionRole).value<qulonglong>() : 0;
+}
+
+void
+ChapterModel::setSelectedIdx(QModelIndex const &idx) {
+  m_selectedIdx = idx;
+}
+
+Qt::DropActions
+ChapterModel::supportedDropActions()
+  const {
+  return Qt::MoveAction;
+}
+
+Qt::ItemFlags
+ChapterModel::flags(QModelIndex const &idx)
+  const {
+  auto selectedIsChapter = m_selectedIdx.isValid() && m_selectedIdx.parent().isValid();
+
+  auto effectiveFlags = QFlags<Qt::ItemFlag>{};
+
+  // Querying the canvas? Cannot be dragged, and only editions may be
+  // dropped on it.
+  if (!idx.isValid())
+    effectiveFlags = selectedIsChapter ? Qt::NoItemFlags : Qt::ItemIsDropEnabled;
+
+  else {
+    // Querying an edition? An edition may always be dragged, but only
+    // chapters may be dropped on it. The same holds true for chapters,
+    // though.
+    auto defaultFlags = Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled;
+    effectiveFlags    = selectedIsChapter ? defaultFlags | Qt::ItemIsDropEnabled : defaultFlags;
+  }
+
+  // mxinfo(boost::format("sele is %1%/%2% (%3%/%4%) seleIsChap %5% flags %|6$04x| %7%\n")
+  //        % m_selectedIdx.row() % m_selectedIdx.column() % m_selectedIdx.parent().row() % m_selectedIdx.parent().column() % selectedIsChapter %
+  //        effectiveFlags % Util::itemFlagsToString(effectiveFlags));
+
+  return effectiveFlags;
 }
 
 }}}

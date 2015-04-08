@@ -600,20 +600,23 @@ Tab::handleChapterDeselection(QItemSelection const &deselected) {
 void
 Tab::chapterSelectionChanged(QItemSelection const &selected,
                              QItemSelection const &deselected) {
+  auto selectedIdx = QModelIndex{};
+  if (!selected.isEmpty()) {
+    auto indexes = selected.at(0).indexes();
+    if (!indexes.isEmpty())
+      selectedIdx = indexes.at(0);
+  }
+
+  m_chapterModel->setSelectedIdx(selectedIdx);
+
   if (m_ignoreChapterSelectionChanges)
     return;
 
   if (!handleChapterDeselection(deselected))
     return;
 
-  if (!selected.isEmpty()) {
-    auto indexes = selected.at(0).indexes();
-    if (!indexes.isEmpty()) {
-      auto idx = indexes.at(0);
-      if (setControlsFromStorage(idx.sibling(idx.row(), 0)))
-        return;
-    }
-  }
+  if (selectedIdx.isValid() && setControlsFromStorage(selectedIdx.sibling(selectedIdx.row(), 0)))
+    return;
 
   ui->pageContainer->setCurrentWidget(ui->emptyPage);
 }
@@ -806,9 +809,7 @@ Tab::addSubChapter() {
 
 void
 Tab::removeElement() {
-  auto selectedIdx = Util::selectedRowIdx(ui->elements);
-  if (selectedIdx.isValid())
-    m_chapterModel->removeRow(selectedIdx.row(), selectedIdx.parent());
+  m_chapterModel->removeTree(Util::selectedRowIdx(ui->elements));
 }
 
 void

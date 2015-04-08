@@ -28,6 +28,8 @@ protected:
   QHash<qulonglong, std::shared_ptr<EbmlMaster>> m_elementRegistry;
   qulonglong m_nextElementRegistryIdx{};
 
+  QModelIndex m_selectedIdx;
+
 public:
   ChapterModel(QObject *parent);
   virtual ~ChapterModel();
@@ -38,6 +40,7 @@ public:
   void insertChapter(int row, ChapterPtr const &chapter, QModelIndex const &parentIdx);
 
   QModelIndex duplicateTree(QModelIndex const &srcIdx);
+  void removeTree(QModelIndex const &idx);
 
   void updateRow(QModelIndex const &idx);
   void populate(EbmlMaster &master);
@@ -51,8 +54,10 @@ public:
 
   ChaptersPtr allChapters();
 
-public slots:
-  void invalidateRegistryEntriesBeforeRemoval(QModelIndex const &parent, int first, int last);
+  void setSelectedIdx(QModelIndex const &idx);
+
+  virtual Qt::DropActions supportedDropActions() const override;
+  virtual Qt::ItemFlags flags(QModelIndex const &idx) const override;
 
 protected:
   void setEditionRowText(QList<QStandardItem *> const &rowItems);

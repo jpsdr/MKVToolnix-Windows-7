@@ -5,6 +5,8 @@
 
 #include <QTreeView>
 
+class QDragMoveEvent;
+
 namespace mtx { namespace gui { namespace ChapterEditor {
 
 class Tool;
@@ -15,6 +17,8 @@ class ChapterTreeView : public QTreeView {
 public:
   ChapterTreeView(QWidget *parent);
   virtual ~ChapterTreeView();
+
+  virtual void dragMoveEvent(QDragMoveEvent *event) override;
 };
 
 }}}

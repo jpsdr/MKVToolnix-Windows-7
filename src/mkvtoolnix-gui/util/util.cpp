@@ -246,4 +246,20 @@ displayableDate(QDateTime const &date) {
   return date.isValid() ? date.toString(QString{"yyyy-MM-dd hh:mm:ss"}) : QString{""};
 }
 
+QString
+itemFlagsToString(Qt::ItemFlags const &flags) {
+  auto items = QStringList{};
+
+  if (flags & Qt::ItemIsSelectable)     items << "IsSelectable";
+  if (flags & Qt::ItemIsEditable)       items << "IsEditable";
+  if (flags & Qt::ItemIsDragEnabled)    items << "IsDragEnabled";
+  if (flags & Qt::ItemIsDropEnabled)    items << "IsDropEnabled";
+  if (flags & Qt::ItemIsUserCheckable)  items << "IsUserCheckable";
+  if (flags & Qt::ItemIsEnabled)        items << "IsEnabled";
+  if (flags & Qt::ItemIsTristate)       items << "IsTristate";
+  if (flags & Qt::ItemNeverHasChildren) items << "NeverHasChildren";
+
+  return items.join(Q("|"));
+}
+
 }}}

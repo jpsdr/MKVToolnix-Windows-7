@@ -78,6 +78,8 @@ QString joinSentences(QStringList const &sentences);
 
 QString displayableDate(QDateTime const &date);
 
+QString itemFlagsToString(Qt::ItemFlags const &flags);
+
 }}}
 
 #endif  // MTX_MKVTOOLNIX_GUI_UTIL_UTIL_H
