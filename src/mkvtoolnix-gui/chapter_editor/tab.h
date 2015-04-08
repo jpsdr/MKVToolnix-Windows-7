@@ -81,6 +81,8 @@ public slots:
   virtual void duplicateElement();
 
   virtual void chapterSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
+  virtual void expandInsertedElements(QModelIndex const &parentIdx, int start, int end);
+
   virtual void nameSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void chapterNameEdited(QString const &text);
   virtual void chapterNameLanguageChanged(int index);

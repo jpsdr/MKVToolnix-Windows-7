@@ -249,9 +249,13 @@ Tab::load() {
   if (!m_fileName.isEmpty())
     m_fileModificationTime = QFileInfo{m_fileName}.lastModified();
 
+  disconnect(m_chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
+
   m_chapterModel->populate(*chapters);
   expandAll();
   resizeChapterColumnsToContents();
+
+  connect(m_chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
 
   MainWindow::get()->setStatusBarMessage(Q("yay loaded %1").arg(chapters->ListSize()));
 }
@@ -836,6 +840,13 @@ Tab::expandCollapseAll(bool expand,
 
   for (auto row = 0, numRows = m_chapterModel->rowCount(parentIdx); row < numRows; ++row)
     expandCollapseAll(expand, m_chapterModel->index(row, 0, parentIdx));
+}
+
+void
+Tab::expandInsertedElements(QModelIndex const &parentIdx,
+                            int,
+                            int) {
+  expandCollapseAll(true, parentIdx);
 }
 
 QString
