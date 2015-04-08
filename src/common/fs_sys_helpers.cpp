@@ -272,8 +272,12 @@ static bfs::path
 get_current_exe_path(std::string const &argv0) {
   // Linux
   auto exe = bfs::path{"/proc/self/exe"};
-  if (bfs::exists(exe))
-    return bfs::absolute(bfs::read_symlink(exe)).parent_path();
+  if (bfs::exists(exe)) {
+    auto exe_path = bfs::read_symlink(exe);
+
+    // only make absolute if needed, to avoid crash in case the current dir is deleted (as bfs::absolute calls bfs::current_path here)
+    return (exe_path.is_absolute() ? exe_path : bfs::absolute(exe_path)).parent_path();
+  }
 
   if (argv0.empty())
     return bfs::current_path();
