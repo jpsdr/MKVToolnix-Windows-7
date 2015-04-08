@@ -267,8 +267,16 @@ void
 ChapterModel::fixMandatoryElements(QModelIndex const &parentIdx) {
   walkTree(parentIdx, [this](QModelIndex const &idx) {
     auto element = m_elementRegistry[ registryIdFromItem(itemFromIndex(idx)) ];
-    if (element)
-      fix_mandatory_chapter_elements(element.get());
+    if (!element)
+      return;
+
+    if (Is<KaxChapterAtom>(*element) && !FindChildValue<KaxChapterUID>(*element, 0))
+      DeleteChildren<KaxChapterUID>(*element);
+
+    else if (Is<KaxEditionEntry>(*element) && !FindChildValue<KaxEditionUID>(*element, 0))
+      DeleteChildren<KaxEditionUID>(*element);
+
+    fix_mandatory_chapter_elements(element.get());
   });
 }
 
