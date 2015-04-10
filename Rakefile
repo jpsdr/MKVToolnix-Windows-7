@@ -687,7 +687,7 @@ end
   { :name => 'rmff',        :dir => 'lib/librmff'                                                                                            },
   { :name => 'pugixml',     :dir => 'lib/pugixml/src'                                                                                        },
   { :name => 'mpegparser',  :dir => 'src/mpegparser'                                                                                         },
-  { :name => 'mtxcommon',   :dir => [ 'src/common' ] + %w{chapters checksums compression strings tags xml}.collect { |e| "src/common/#{e}" } },
+  { :name => 'mtxcommon',   :dir => [ 'src/common' ] + FileList['src/common/*'].select { |e| FileTest.directory? e } },
   { :name => 'mtxinput',    :dir => 'src/input'                                                                                              },
   { :name => 'mtxoutput',   :dir => 'src/output'                                                                                             },
   { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                                           },

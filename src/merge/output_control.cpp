@@ -304,7 +304,7 @@ display_progress(bool is_100percent = false) {
 
   bool display_progress  = false;
   int current_percentage = (s_display_reader->get_progress() + s_display_files_done * 100) / s_display_path_length;
-  int64_t current_time   = get_current_time_millis();
+  int64_t current_time   = mtx::sys::get_current_time_millis();
 
   if (   (-1 == s_previous_percentage)
       || ((100 == current_percentage) && (100 > s_previous_percentage))

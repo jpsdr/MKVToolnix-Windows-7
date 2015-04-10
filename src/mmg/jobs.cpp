@@ -112,11 +112,11 @@ job_run_dialog::job_run_dialog(wxWindow *,
   m_geometry_saver.set_default_size(700, 700, true).restore();
 
 #if defined(SYS_WINDOWS)
-  if (get_windows_version() >= WINDOWS_VERSION_7)
+  if (mtx::sys::get_windows_version() >= WINDOWS_VERSION_7)
     m_taskbar_progress = new taskbar_progress_c(this);
 #endif
 
-  m_start_time_total                 = get_current_time_millis();
+  m_start_time_total                 = mtx::sys::get_current_time_millis();
   m_next_remaining_time_update_total = m_start_time_total + 8000;
 
   start_next_job();
@@ -155,7 +155,7 @@ job_run_dialog::start_next_job() {
     return;
   }
 
-  m_start_time                 = get_current_time_millis();
+  m_start_time                 = mtx::sys::get_current_time_millis();
   m_next_remaining_time_update = m_start_time + 8000;
   st_remaining_time->SetLabel(Z("is being estimated"));
 
@@ -251,7 +251,7 @@ job_run_dialog::process_input() {
       else if (wx_line.Find(wxT("#GUI#end_scanning_playlists")) == 0) {
         m_scanning_playlists         = false;
 
-        m_start_time                 = get_current_time_millis();
+        m_start_time                 = mtx::sys::get_current_time_millis();
         m_next_remaining_time_update = m_start_time + 8000;
 
         if (!current_job) {
@@ -300,7 +300,7 @@ job_run_dialog::update_remaining_time() {
   if (m_scanning_playlists || !m_progress)
     return;
 
-  int64_t now = get_current_time_millis();
+  int64_t now = mtx::sys::get_current_time_millis();
 
   if ((0 != (m_progress % 100)) && (now >= m_next_remaining_time_update)) {
     int64_t total_time           = (now - m_start_time) * 100 / (m_progress % 100);

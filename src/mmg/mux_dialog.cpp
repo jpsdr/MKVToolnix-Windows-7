@@ -123,7 +123,7 @@ mux_dialog::run() {
   }
 
 #if defined(SYS_WINDOWS)
-  if (get_windows_version() >= WINDOWS_VERSION_7) {
+  if (mtx::sys::get_windows_version() >= WINDOWS_VERSION_7) {
     m_taskbar_progress = new taskbar_progress_c(mdlg);
     m_taskbar_progress->set_state(TBPF_NORMAL);
     m_taskbar_progress->set_value(0, 100);
@@ -132,7 +132,7 @@ mux_dialog::run() {
 
   update_label(Z("Muxing in progress."));
 
-  m_start_time                 = get_current_time_millis();
+  m_start_time                 = mtx::sys::get_current_time_millis();
   m_next_remaining_time_update = m_start_time + 8000;
 
   m_process                    = new mux_process{this};
@@ -187,7 +187,7 @@ mux_dialog::update_remaining_time() {
   if (m_scanning_playlists)
     return;
 
-  int64_t now = get_current_time_millis();
+  int64_t now = mtx::sys::get_current_time_millis();
 
   if ((0 == m_progress) || (now < m_next_remaining_time_update))
     return;
@@ -289,7 +289,7 @@ mux_dialog::on_output_available(wxCommandEvent &evt) {
   else if (line.Find(wxT("#GUI#end_scanning_playlists")) == 0) {
     m_scanning_playlists         = false;
 
-    m_start_time                 = get_current_time_millis();
+    m_start_time                 = mtx::sys::get_current_time_millis();
     m_next_remaining_time_update = m_start_time + 8000;
 
   } else if (line.Find(Z("Progress")) == 0) {

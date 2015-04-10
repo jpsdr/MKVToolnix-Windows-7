@@ -196,7 +196,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
   m_resync_start_pos = m_in->getFilePointer();
 
   uint32_t actual_id = m_in->read_uint32_be();
-  int64_t start_time = get_current_time_millis();
+  int64_t start_time = mtx::sys::get_current_time_millis();
   bool is_cluster_id = !wanted_id || (EBML_ID_VALUE(EBML_ID(KaxCluster)) == wanted_id); // 0 means: any level 1 element will do
 
   mxinfo(boost::format(Y("%1%: Error in the Matroska file structure at position %2%. Resyncing to the next level 1 element.\n"))
@@ -211,7 +211,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
     mxinfo(boost::format("kax_file::resync_to_level1_element(): starting at %1% potential ID %|2$08x|\n") % m_resync_start_pos % actual_id);
 
   while (m_in->getFilePointer() < m_file_size) {
-    int64_t now = get_current_time_millis();
+    int64_t now = mtx::sys::get_current_time_millis();
     if ((now - start_time) >= 10000) {
       mxinfo(boost::format("Still resyncing at position %1%.\n") % m_in->getFilePointer());
       start_time = now;

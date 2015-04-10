@@ -13,50 +13,21 @@
 
 #include "common/common_pch.h"
 
+#if defined(SYS_WINDOWS)
+
+#include <io.h>
+#include <windows.h>
+#include <winreg.h>
+#include <direct.h>
+#include <shlobj.h>
+#include <sys/timeb.h>
+
 #include "common/error.h"
 #include "common/fs_sys_helpers.h"
 #include "common/strings/editing.h"
 #include "common/strings/utf8.h"
 
-#if defined(SYS_APPLE)
-# include <mach-o/dyld.h>
-#endif
-
-#if defined(SYS_WINDOWS)
-
-# include <io.h>
-# include <windows.h>
-# include <winreg.h>
-# include <direct.h>
-# include <shlobj.h>
-# include <sys/timeb.h>
-
-#else
-
-# include <stdlib.h>
-# include <sys/time.h>
-
-#endif
-
-static bfs::path s_current_executable_path;
-
-#if defined(SYS_WINDOWS)
-
-HANDLE
-CreateFileUtf8(LPCSTR lpFileName,
-               DWORD dwDesiredAccess,
-               DWORD dwShareMode,
-               LPSECURITY_ATTRIBUTES lpSecurityAttributes,
-               DWORD dwCreationDisposition,
-               DWORD dwFlagsAndAttributes,
-               HANDLE hTemplateFile) {
-  // convert the name to wide chars
-  wchar_t *wbuffer = win32_utf8_to_utf16(lpFileName);
-  HANDLE ret       = CreateFileW(wbuffer, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
-  delete []wbuffer;
-
-  return ret;
-}
+namespace mtx { namespace sys {
 
 int64_t
 get_current_time_millis() {
@@ -138,7 +109,7 @@ get_windows_version() {
 }
 
 bfs::path
-mtx::get_application_data_folder() {
+get_application_data_folder() {
   wchar_t szPath[MAX_PATH];
 
   if (SUCCEEDED(SHGetFolderPathW(nullptr, CSIDL_APPDATA | CSIDL_FLAG_CREATE, nullptr, 0, szPath)))
@@ -147,51 +118,8 @@ mtx::get_application_data_folder() {
   return bfs::path{};
 }
 
-#else // SYS_WINDOWS
-
-int64_t
-get_current_time_millis() {
-  struct timeval tv;
-  if (0 != gettimeofday(&tv, nullptr))
-    return -1;
-
-  return (int64_t)tv.tv_sec * 1000 + (int64_t)tv.tv_usec / 1000;
-}
-
-bfs::path
-mtx::get_application_data_folder() {
-  const char *home = getenv("HOME");
-  if (!home)
-    return bfs::path{};
-
-  // If $HOME/.mkvtoolnix exists already then keep using it to avoid
-  // losing existing user configuration.
-  auto old_default_folder = bfs::path{home} / ".mkvtoolnix";
-  if (boost::filesystem::exists(old_default_folder))
-    return old_default_folder;
-
-  // If XDG_CONFIG_HOME is set then use that folder.
-  auto xdg_config_home = getenv("XDG_CONFIG_HOME");
-  if (xdg_config_home)
-    return bfs::path{xdg_config_home} / "mkvtoolnix";
-
-  // If all fails then use the XDG fallback folder for config files.
-  return bfs::path{home} / ".config" / "mkvtoolnix";
-}
-
-std::string
-get_environment_variable(std::string const &key) {
-  auto var = getenv(key.c_str());
-  return var ? var : "";
-}
-
-#endif // SYS_WINDOWS
-
-namespace mtx {
-
 int
 system(std::string const &command) {
-#ifdef SYS_WINDOWS
   std::wstring wcommand = to_wide(command);
   auto mem              = memory_c::clone(wcommand.c_str(), (wcommand.length() + 1) * sizeof(wchar_t));
 
@@ -221,13 +149,9 @@ system(std::string const &command) {
 
   return !result ? -1 : 0;
 
-#else  // SYS_WINDOWS
-  return ::system(command.c_str());
-#endif  // SYS_WINDOWS
 }
 
-#if defined(SYS_WINDOWS)
-static bfs::path
+bfs::path
 get_current_exe_path(std::string const &) {
   std::wstring file_name;
   file_name.resize(4000);
@@ -246,59 +170,6 @@ get_current_exe_path(std::string const &) {
   return bfs::absolute(bfs::path{to_utf8(file_name)}).parent_path();
 }
 
-#elif defined(SYS_APPLE)
+}}
 
-static bfs::path
-get_current_exe_path(std::string const &) {
-  std::string file_name;
-  file_name.resize(4000);
-
-  while (true) {
-    memset(&file_name[0], 0, file_name.size());
-    uint32_t size = file_name.size();
-    auto result   = _NSGetExecutablePath(&file_name[0], &size);
-    file_name.resize(size);
-
-    if (0 == result)
-      break;
-  }
-
-  return bfs::absolute(bfs::path{file_name}).parent_path();
-}
-
-#else // Neither Windows nor Mac OS
-
-static bfs::path
-get_current_exe_path(std::string const &argv0) {
-  // Linux
-  auto exe = bfs::path{"/proc/self/exe"};
-  if (bfs::exists(exe)) {
-    auto exe_path = bfs::read_symlink(exe);
-
-    // only make absolute if needed, to avoid crash in case the current dir is deleted (as bfs::absolute calls bfs::current_path here)
-    return (exe_path.is_absolute() ? exe_path : bfs::absolute(exe_path)).parent_path();
-  }
-
-  if (argv0.empty())
-    return bfs::current_path();
-
-  exe = bfs::absolute(argv0);
-  if (bfs::exists(exe))
-    return exe.parent_path();
-
-  return bfs::current_path();
-}
-
-#endif
-
-bfs::path
-get_installation_path() {
-  return s_current_executable_path;
-}
-
-void
-determine_path_to_current_executable(std::string const &argv0) {
-  s_current_executable_path = get_current_exe_path(argv0);
-}
-
-}
+#endif  // SYS_WINDOWS

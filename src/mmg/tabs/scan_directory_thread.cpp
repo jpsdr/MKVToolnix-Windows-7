@@ -89,7 +89,7 @@ scan_directory_thread_c::identify_file(wxString const &file_name)
 
   // log_it(boost::format("command: %1%\n") % to_utf8(command));
 
-  int result = mtx::system(to_utf8(command));
+  int result = mtx::sys::system(to_utf8(command));
 
   try {
     mm_text_io_c in{new mm_file_io_c{to_utf8(opt_file_name + wxT("-out")), MODE_READ}};

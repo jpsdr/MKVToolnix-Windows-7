@@ -2511,7 +2511,7 @@ main(int argc,
 
   parse_args(args);
 
-  int64_t start = get_current_time_millis();
+  int64_t start = mtx::sys::get_current_time_millis();
 
   add_filelists_for_playlists();
   create_readers();
@@ -2545,7 +2545,7 @@ main(int argc,
             % ex.what() % ex.error());
   }
 
-  mxinfo(boost::format(Y("Muxing took %1%.\n")) % create_minutes_seconds_time_string((get_current_time_millis() - start + 500) / 1000, true));
+  mxinfo(boost::format(Y("Muxing took %1%.\n")) % create_minutes_seconds_time_string((mtx::sys::get_current_time_millis() - start + 500) / 1000, true));
 
   cleanup();
 

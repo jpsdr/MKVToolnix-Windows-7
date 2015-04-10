@@ -665,7 +665,7 @@ mmg_dialog::display_help(int id) {
     wxDirDialog dlg(this, Z("Choose the location of the mkvmerge GUI help files"));
     std::vector<wxString> potential_help_paths;
 
-    wxString installation_path = wxU(mtx::get_installation_path().string());
+    wxString installation_path = wxU(mtx::sys::get_installation_path().string());
     if (!installation_path.IsEmpty())
       potential_help_paths.push_back(installation_path + wxT("/doc"));
 

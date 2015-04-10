@@ -78,9 +78,9 @@ cues_c::write(mm_io_c &out,
   if (!m_points.size() || !g_cue_writing_requested)
     return;
 
-  // auto start = get_current_time_millis();
+  // auto start = mtx::sys::get_current_time_millis();
   sort();
-  // auto end_sort = get_current_time_millis();
+  // auto end_sort = mtx::sys::get_current_time_millis();
 
   // Need to write the (empty) cues element so that its position will
   // be set for indexing in g_kax_sh_main. Necessary because there's
@@ -126,7 +126,7 @@ cues_c::write(mm_io_c &out,
   m_codec_state_position_map.clear();
   m_num_cue_points_postprocessed = 0;
 
-  // auto end_all = get_current_time_millis();
+  // auto end_all = mtx::sys::get_current_time_millis();
   // mxinfo(boost::format("dur sort %1% write %2% total %3%\n") % (end_sort - start) % (end_all - end_sort) % (end_all - start));
 }
 

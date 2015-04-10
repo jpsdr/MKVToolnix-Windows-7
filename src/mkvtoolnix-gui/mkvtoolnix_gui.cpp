@@ -30,7 +30,7 @@ registerMetaTypes() {
 
 static void
 showPreviewWarning(QWidget *parent) {
-  if (get_environment_variable("NO_WARNING") == "1")
+  if (mtx::sys::get_environment_variable("NO_WARNING") == "1")
     return;
 
   auto dlg = std::make_unique<PreviewWarningDialog>(parent);

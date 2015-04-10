@@ -131,11 +131,11 @@ translation_c::get_default_ui_locale() {
 
 #if defined(HAVE_LIBINTL_H)
 # if defined(SYS_WINDOWS)
-  std::string env_var = get_environment_variable("LC_MESSAGES");
+  std::string env_var = mtx::sys::get_environment_variable("LC_MESSAGES");
   if (!env_var.empty() && (-1 != look_up_translation(env_var)))
     return env_var;
 
-  env_var = get_environment_variable("LANG");
+  env_var = mtx::sys::get_environment_variable("LANG");
   if (!env_var.empty() && (-1 != look_up_translation(env_var)))
     return env_var;
 
@@ -250,7 +250,7 @@ init_locales(std::string locale) {
   }
 
 # if defined(SYS_WINDOWS)
-  set_environment_variable("LANGUAGE", "");
+  mtx::sys::set_environment_variable("LANGUAGE", "");
 
   if (!locale.empty()) {
     // The Windows system headers define LC_MESSAGES but
@@ -261,8 +261,8 @@ init_locales(std::string locale) {
     // modified by SetEnvironmentVariable() and the C library's cache
     // of said environment which is modified via _putenv().
 
-    set_environment_variable("LANG",        locale);
-    set_environment_variable("LC_MESSAGES", locale);
+    mtx::sys::set_environment_variable("LANG",        locale);
+    mtx::sys::set_environment_variable("LC_MESSAGES", locale);
 
     translation_c::set_active_translation(locale);
   }
@@ -273,7 +273,7 @@ init_locales(std::string locale) {
   std::locale::global(utf8_locale);
   boost::filesystem::path::imbue(utf8_locale);
 
-  locale_dir = g_cc_local_utf8->native((mtx::get_installation_path() / "locale").string());
+  locale_dir = g_cc_local_utf8->native((mtx::sys::get_installation_path() / "locale").string());
 
 # else  // SYS_WINDOWS
   std::string chosen_locale;

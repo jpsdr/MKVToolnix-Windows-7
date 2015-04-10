@@ -246,7 +246,7 @@ MainWindow::checkForUpdates() {
 
 void
 MainWindow::silentlyCheckForUpdates() {
-  auto forceUpdateCheck = get_environment_variable("FORCE_UPDATE_CHECK") == "1";
+  auto forceUpdateCheck = mtx::sys::get_environment_variable("FORCE_UPDATE_CHECK") == "1";
 
   if (!forceUpdateCheck && !Util::Settings::get().m_checkForUpdates)
     return;
@@ -275,7 +275,7 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
 
   auto &settings             = Util::Settings::get();
   settings.m_lastUpdateCheck = QDateTime::currentDateTime();
-  auto forceUpdateCheck      = get_environment_variable("FORCE_UPDATE_CHECK") == "1";
+  auto forceUpdateCheck      = mtx::sys::get_environment_variable("FORCE_UPDATE_CHECK") == "1";
 
   if (!forceUpdateCheck && !(release.current_version < release.latest_source))
     return;

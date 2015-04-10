@@ -135,7 +135,7 @@ set_process_priority(int priority) {
   // If the lowest priority should be used and we're on Vista or later
   // then use background priority. This also selects a lower I/O
   // priority.
-  if ((-2 == priority) && (get_windows_version() >= WINDOWS_VERSION_VISTA)) {
+  if ((-2 == priority) && (mtx::sys::get_windows_version() >= WINDOWS_VERSION_VISTA)) {
     SetPriorityClass(GetCurrentProcess(), PROCESS_MODE_BACKGROUND_BEGIN);
     SetThreadPriority(GetCurrentThread(), THREAD_MODE_BACKGROUND_BEGIN);
     return;
@@ -189,7 +189,7 @@ mtx_common_init(std::string const &program_name,
 
   stereo_mode_c::init();
 
-  mtx::determine_path_to_current_executable(argv0 ? std::string{argv0} : std::string{});
+  mtx::sys::determine_path_to_current_executable(argv0 ? std::string{argv0} : std::string{});
 }
 
 std::string const &

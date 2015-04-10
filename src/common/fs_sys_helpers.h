@@ -15,14 +15,22 @@
 
 #include "common/common_pch.h"
 
+namespace mtx { namespace sys {
+
 int64_t get_current_time_millis();
+
+int system(std::string const &command);
+
+void determine_path_to_current_executable(std::string const &argv0);
+bfs::path get_current_exe_path(std::string const &argv0);
+bfs::path get_application_data_folder();
+bfs::path get_installation_path();
 
 std::string get_environment_variable(const std::string &key);
 
 #if defined(SYS_WINDOWS)
 
 bool get_registry_key_value(const std::string &key, const std::string &value_name, std::string &value);
-
 void set_environment_variable(const std::string &key, const std::string &value);
 
 #define WINDOWS_VERSION_UNKNOWN      0x00000000
@@ -38,13 +46,6 @@ unsigned int get_windows_version();
 
 #endif
 
-namespace mtx {
-
-int system(std::string const &command);
-void determine_path_to_current_executable(std::string const &argv0);
-bfs::path get_application_data_folder();
-bfs::path get_installation_path();
-
-}
+}}
 
 #endif

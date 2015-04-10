@@ -277,7 +277,7 @@ format_tooltip(const wxString &s) {
 
 wxString
 get_temp_settings_file_name() {
-  return wxU((bfs::temp_directory_path() / (boost::format("mmg-mkvmerge-options-%1%-%2%") % wxGetProcessId() % get_current_time_millis()).str()).string());
+  return wxU((bfs::temp_directory_path() / (boost::format("mmg-mkvmerge-options-%1%-%2%") % wxGetProcessId() % mtx::sys::get_current_time_millis()).str()).string());
 }
 
 wxString

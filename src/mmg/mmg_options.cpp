@@ -81,7 +81,7 @@ mmg_options_t::mkvmerge_exe() {
     exe = bfs::path{};
 
   if (exe.empty()) {
-    exe = mtx::get_installation_path();
+    exe = mtx::sys::get_installation_path();
     if (!exe.empty() && bfs::exists(exe) && bfs::exists(exe / exe_with_ext))
       exe = exe / exe_with_ext;
     else
@@ -91,7 +91,7 @@ mmg_options_t::mkvmerge_exe() {
   if (exe.empty())
     exe = exe_with_ext;
 
-  wxLogMessage(wxT("mkvmerge_exe %s installation_path %s\n"), wxU(exe.string()).c_str(), wxU(mtx::get_installation_path().string()).c_str());
+  wxLogMessage(wxT("mkvmerge_exe %s installation_path %s\n"), wxU(exe.string()).c_str(), wxU(mtx::sys::get_installation_path().string()).c_str());
 
   return wxU(exe.string());
 }

@@ -24,7 +24,7 @@ static auto s_program_start_time = std::chrono::system_clock::now();
 
 logger_c::logger_c(bfs::path const &file_name)
   : m_file_name(file_name)
-  , m_log_start(get_current_time_millis())
+  , m_log_start(mtx::sys::get_current_time_millis())
 {
   if (!m_file_name.is_absolute())
     m_file_name = bfs::temp_directory_path() / m_file_name;
