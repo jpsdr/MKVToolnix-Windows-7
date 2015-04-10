@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QMessageBox>
+#include <QRegularExpression>
 #include <QStringList>
 
 #include "common/qt.h"
@@ -153,7 +154,7 @@ FileIdentifier::parseContainerLine(QString const &line) {
   if (-1 == re.indexIn(line))
     return;
 
-  m_file->setContainer(re.cap(1));
+  m_file->setContainer(re.cap(1).replace(QRegularExpression{"\\s+$"}, Q("")));
   m_file->m_properties       = parseProperties(line);
   m_file->m_isPlaylist       = m_file->m_properties["playlist"] == "1";
   m_file->m_playlistDuration = m_file->m_properties["playlist_duration"].toULongLong();
