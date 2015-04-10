@@ -149,16 +149,13 @@ MuxConfig::loadProperties(QSettings &settings,
 
 void
 MuxConfig::load(QString const &fileName) {
-  reset();
-
-  if (!fileName.isEmpty())
-    m_configFileName = fileName;
-
-  if (m_configFileName.isEmpty())
+  if (fileName.isEmpty())
     throw InvalidSettingsX{};
 
-  QSettings settings{m_configFileName, QSettings::IniFormat};
+  QSettings settings{fileName, QSettings::IniFormat};
   load(settings);
+
+  m_configFileName = fileName;
 }
 
 void

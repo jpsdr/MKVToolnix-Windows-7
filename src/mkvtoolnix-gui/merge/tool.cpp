@@ -1,25 +1,20 @@
 #include "common/common_pch.h"
 
-#include "common/qt.h"
-#include "mkvtoolnix-gui/jobs/mux_job.h"
-#include "mkvtoolnix-gui/jobs/tool.h"
-#include "mkvtoolnix-gui/main_window/main_window.h"
-#include "mkvtoolnix-gui/merge/command_line_dialog.h"
-#include "mkvtoolnix-gui/merge/tool.h"
-#include "mkvtoolnix-gui/forms/main_window/main_window.h"
-#include "mkvtoolnix-gui/forms/merge/tool.h"
-#include "mkvtoolnix-gui/util/option_file.h"
-#include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
-
-#include <QComboBox>
-#include <QMenu>
-#include <QTreeView>
+// #include <QDragEnterEvent>
+// #include <QDropEvent>
 #include <QFileDialog>
-#include <QInputDialog>
+#include <QFileInfo>
+#include <QMenu>
 #include <QMessageBox>
-#include <QString>
-#include <QTimer>
+// #include <QMimeData>
+
+#include "common/qt.h"
+#include "mkvtoolnix-gui/forms/merge/tool.h"
+#include "mkvtoolnix-gui/forms/main_window/main_window.h"
+#include "mkvtoolnix-gui/merge/tab.h"
+#include "mkvtoolnix-gui/merge/tool.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui { namespace Merge {
 
@@ -30,252 +25,189 @@ Tool::Tool(QWidget *parent,
   : ToolBase{parent}
   , ui{new Ui::Tool}
   , m_mergeMenu{mergeMenu}
-  , m_filesModel{new SourceFileModel{this}}
-  , m_tracksModel{new TrackModel{this}}
-  , m_currentlySettingInputControlValues{false}
-  , m_addFilesAction{new QAction{this}}
-  , m_appendFilesAction{new QAction{this}}
-  , m_addAdditionalPartsAction{new QAction{this}}
-  , m_removeFilesAction{new QAction{this}}
-  , m_removeAllFilesAction{new QAction{this}}
-  , m_attachmentsModel{new AttachmentModel{this}}
-  , m_addAttachmentsAction{new QAction{this}}
-  , m_removeAttachmentsAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
 
-  m_filesModel->setTracksModel(m_tracksModel);
+  appendTab(new Tab{this});
+  showMergeWidget();
 
   setupMenu();
-  setupInputControls();
-  setupOutputControls();
-  setupAttachmentsControls();
+  reconnectMenuActions();
 
-  setControlValuesFromConfig();
+  retranslateUi();
 }
 
 Tool::~Tool() {
 }
 
 void
-Tool::onShowCommandLine() {
-  auto options = (QStringList{} << Util::Settings::get().actualMkvmergeExe()) + updateConfigFromControlValues().buildMkvmergeOptions();
-  CommandLineDialog{this, options, QY("mkvmerge command line")}.exec();
-}
-
-void
-Tool::onSaveConfig() {
-  if (m_config.m_configFileName.isEmpty())
-    onSaveConfigAs();
-  else {
-    updateConfigFromControlValues();
-    m_config.save();
-    MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
-  }
-}
-
-void
-Tool::onSaveOptionFile() {
-  auto &settings = Util::Settings::get();
-  auto fileName  = QFileDialog::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), QY("All files") + Q(" (*)"));
-  if (fileName.isEmpty())
-    return;
-
-  Util::OptionFile::create(fileName, updateConfigFromControlValues().buildMkvmergeOptions());
-  settings.m_lastConfigDir = QFileInfo{fileName}.path();
-  settings.save();
-
-  MainWindow::get()->setStatusBarMessage(QY("The option file has been created."));
-}
-
-void
-Tool::onSaveConfigAs() {
-  auto &settings = Util::Settings::get();
-  auto fileName  = QFileDialog::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
-  if (fileName.isEmpty())
-    return;
-
-  updateConfigFromControlValues();
-  m_config.save(fileName);
-  settings.m_lastConfigDir = QFileInfo{fileName}.path();
-  settings.save();
-
-  MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
-}
-
-void
-Tool::onOpenConfig() {
-  auto &settings = Util::Settings::get();
-  auto fileName  = QFileDialog::getOpenFileName(this, QY("Open settings file"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
-  if (fileName.isEmpty())
-    return;
-
-  settings.m_lastConfigDir = QFileInfo{fileName}.path();
-  settings.save();
-
-  try {
-    m_config.load(fileName);
-    MainWindow::get()->setStatusBarMessage(QY("The configuration has been loaded."));
-
-  } catch (InvalidSettingsX &) {
-    m_config.reset();
-    QMessageBox::critical(this, QY("Error loading settings file"), QY("The settings file '%1' contains invalid settings and was not loaded.").arg(fileName));
-  }
-
-  setControlValuesFromConfig();
-}
-
-void
-Tool::onNew() {
-  m_config.reset();
-  setControlValuesFromConfig();
-  MainWindow::get()->setStatusBarMessage(QY("The configuration has been reset."));
-}
-
-void
-Tool::onAddToJobQueue() {
-  addToJobQueue(false);
-}
-
-void
-Tool::onStartMuxing() {
-  addToJobQueue(true);
-}
-
-QString
-Tool::getOpenFileName(QString const &title,
-                      QString const &filter,
-                      QLineEdit *lineEdit) {
-  auto fullFilter = filter;
-  if (!fullFilter.isEmpty())
-    fullFilter += Q(";;");
-  fullFilter += QY("All files") + Q(" (*)");
-
-  auto &settings = Util::Settings::get();
-  auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOpenDir.path() : QFileInfo{ lineEdit->text() }.path();
-  auto fileName  = QFileDialog::getOpenFileName(this, title, dir, fullFilter);
-  if (fileName.isEmpty())
-    return fileName;
-
-  settings.m_lastOpenDir = QFileInfo{fileName}.path();
-  settings.save();
-
-  lineEdit->setText(fileName);
-
-  return fileName;
-}
-
-QString
-Tool::getSaveFileName(QString const &title,
-                      QString const &filter,
-                      QLineEdit *lineEdit) {
-  auto fullFilter = filter;
-  if (!fullFilter.isEmpty())
-    fullFilter += Q(";;");
-  fullFilter += QY("All files") + Q(" (*)");
-
-  auto &settings = Util::Settings::get();
-  auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOutputDir.path() : QFileInfo{ lineEdit->text() }.path();
-  auto fileName  = QFileDialog::getSaveFileName(this, title, dir, fullFilter);
-  if (fileName.isEmpty())
-    return fileName;
-
-  settings.m_lastOutputDir = QFileInfo{fileName}.path();
-  settings.save();
-
-  lineEdit->setText(fileName);
-
-  return fileName;
-}
-
-void
 Tool::setupMenu() {
   auto mwUi = MainWindow::get()->getUi();
 
-  connect(mwUi->actionMergeNew,                     SIGNAL(triggered()), this, SLOT(onNew()));
-  connect(mwUi->actionMergeOpen,                    SIGNAL(triggered()), this, SLOT(onOpenConfig()));
-  connect(mwUi->actionMergeSave,                    SIGNAL(triggered()), this, SLOT(onSaveConfig()));
-  connect(mwUi->actionMergeSaveAs,                  SIGNAL(triggered()), this, SLOT(onSaveConfigAs()));
-  connect(mwUi->actionMergeSaveOptionFile,          SIGNAL(triggered()), this, SLOT(onSaveOptionFile()));
-  connect(mwUi->actionMergeStartMuxing,             SIGNAL(triggered()), this, SLOT(onStartMuxing()));
-  connect(mwUi->actionMergeAddToJobQueue,           SIGNAL(triggered()), this, SLOT(onAddToJobQueue()));
-  connect(mwUi->actionMergeShowMkvmergeCommandLine, SIGNAL(triggered()), this, SLOT(onShowCommandLine()));
+  connect(mwUi->actionMergeNew,   &QAction::triggered, this, &Tool::newConfig);
+  connect(mwUi->actionMergeOpen,  &QAction::triggered, this, &Tool::openConfig);
+  connect(mwUi->actionMergeClose, &QAction::triggered, this, &Tool::closeCurrentTab);
 }
 
 void
-Tool::setControlValuesFromConfig() {
-  m_filesModel->setSourceFiles(m_config.m_files);
-  m_tracksModel->setTracks(m_config.m_tracks);
-  m_attachmentsModel->replaceAttachments(m_config.m_attachments);
+Tool::reconnectMenuActions() {
+  auto mwUi = MainWindow::get()->getUi();
+  auto tab  = currentTab();
 
-  resizeFilesColumnsToContents();
-  resizeTracksColumnsToContents();
-  resizeAttachmentsColumnsToContents();
+  mwUi->actionMergeSave->disconnect(SIGNAL(triggered()));
+  mwUi->actionMergeSaveAs->disconnect(SIGNAL(triggered()));
+  mwUi->actionMergeSaveOptionFile->disconnect(SIGNAL(triggered()));
+  mwUi->actionMergeStartMuxing->disconnect(SIGNAL(triggered()));
+  mwUi->actionMergeAddToJobQueue->disconnect(SIGNAL(triggered()));
+  mwUi->actionMergeShowMkvmergeCommandLine->disconnect(SIGNAL(triggered()));
 
-  onFileSelectionChanged();
-  onTrackSelectionChanged();
-  setOutputControlValues();
-  onAttachmentSelectionChanged();
-}
-
-MuxConfig &
-Tool::updateConfigFromControlValues() {
-  m_config.m_attachments = m_attachmentsModel->attachments();
-
-  return m_config;
-}
-
-void
-Tool::retranslateUi() {
-  retranslateInputUI();
-  retranslateAttachmentsUI();
-}
-
-bool
-Tool::isReadyForMerging() {
-  if (m_config.m_files.isEmpty()) {
-    QMessageBox::critical(this, QY("Cannot start merging"), QY("You have to add at least one source file before you can start merging or add a job to the job queue."));
-    return false;
-  }
-
-  if (m_config.m_destination.isEmpty()) {
-    QMessageBox::critical(this, QY("Cannot start merging"), QY("You have to set the output file name before you can start merging or add a job to the job queue."));
-    return false;
-  }
-
-  return true;
-}
-
-void
-Tool::addToJobQueue(bool startNow) {
-  if (!isReadyForMerging())
+  if (!tab)
     return;
 
-  auto newConfig     = std::make_shared<MuxConfig>(m_config);
-  auto job           = std::make_shared<Jobs::MuxJob>(startNow ? Jobs::Job::PendingAuto : Jobs::Job::PendingManual, newConfig);
-  job->m_dateAdded   = QDateTime::currentDateTime();
-  job->m_description = job->displayableDescription();
+  connect(mwUi->actionMergeSave,                    &QAction::triggered, tab, &Tab::onSaveConfig);
+  connect(mwUi->actionMergeSaveAs,                  &QAction::triggered, tab, &Tab::onSaveConfigAs);
+  connect(mwUi->actionMergeSaveOptionFile,          &QAction::triggered, tab, &Tab::onSaveOptionFile);
+  connect(mwUi->actionMergeStartMuxing,             &QAction::triggered, tab, &Tab::onStartMuxing);
+  connect(mwUi->actionMergeAddToJobQueue,           &QAction::triggered, tab, &Tab::onAddToJobQueue);
+  connect(mwUi->actionMergeShowMkvmergeCommandLine, &QAction::triggered, tab, &Tab::onShowCommandLine);
+}
 
-  if (!startNow) {
-    auto newDescription = QString{};
+void
+Tool::enableMenuActions() {
+  auto mwUi   = MainWindow::get()->getUi();
+  auto hasTab = !!currentTab();
 
-    while (newDescription.isEmpty()) {
-      bool ok = false;
-      newDescription = QInputDialog::getText(this, QY("Enter job description"), QY("Please enter the new job's description."), QLineEdit::Normal, job->m_description, &ok);
-      if (!ok)
-        return;
-    }
+  mwUi->actionMergeSave->setEnabled(hasTab);
+  mwUi->actionMergeSaveAs->setEnabled(hasTab);
+  mwUi->actionMergeSaveOptionFile->setEnabled(hasTab);
+  mwUi->actionMergeClose->setEnabled(hasTab);
+  mwUi->actionMergeStartMuxing->setEnabled(hasTab);
+  mwUi->actionMergeAddToJobQueue->setEnabled(hasTab);
+  mwUi->actionMergeShowMkvmergeCommandLine->setEnabled(hasTab);
+}
 
-    job->m_description = newDescription;
-  }
-
-  MainWindow::getJobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
+void
+Tool::showMergeWidget() {
+  ui->stack->setCurrentWidget(ui->merges->count() ? ui->mergesPage : ui->noMergesPage);
+  enableMenuActions();
 }
 
 void
 Tool::toolShown() {
   MainWindow::get()->showTheseMenusOnly({ m_mergeMenu });
+  showMergeWidget();
+}
+
+void
+Tool::retranslateUi() {
+  ui->retranslateUi(this);
+  for (auto idx = 0, numTabs = ui->merges->count(); idx < numTabs; ++idx)
+    static_cast<Tab *>(ui->merges->widget(idx))->retranslateUi();
+}
+
+Tab *
+Tool::currentTab() {
+  return static_cast<Tab *>(ui->merges->widget(ui->merges->currentIndex()));
+}
+
+Tab *
+Tool::appendTab(Tab *tab) {
+  connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
+  connect(tab, &Tab::titleChanged,  this, &Tool::tabTitleChanged);
+
+  ui->merges->addTab(tab, tab->getTitle());
+  ui->merges->setCurrentIndex(ui->merges->count() - 1);
+
+  showMergeWidget();
+  reconnectMenuActions();
+
+  return tab;
+}
+
+// TODO: Tool::dragEnterEvent: drag & drop
+// void
+// Tool::dragEnterEvent(QDragEnterEvent *event) {
+//   if (!event->mimeData()->hasUrls())
+//     return;
+
+//   for (auto const &url : event->mimeData()->urls())
+//     if (!url.isLocalFile() || !QFileInfo{url.toLocalFile()}.isFile())
+//       return;
+
+//   event->acceptProposedAction();
+// }
+
+// void
+// Tool::dropEvent(QDropEvent *event) {
+//   if (!event->mimeData()->hasUrls())
+//     return;
+
+//   event->acceptProposedAction();
+
+//   for (auto const &url : event->mimeData()->urls())
+//     if (url.isLocalFile())
+//       openFile(url.toLocalFile());
+// }
+
+void
+Tool::newConfig() {
+  appendTab(new Tab{this});
+}
+
+void
+Tool::openConfig() {
+  auto &settings = Util::Settings::get();
+  auto fileName  = QFileDialog::getOpenFileName(this, QY("Open settings file"), settings.m_lastConfigDir.path(), QY("MKVToolnix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
+  if (fileName.isEmpty())
+    return;
+
+  settings.m_lastConfigDir = QFileInfo{fileName}.path();
+  settings.save();
+
+  appendTab(new Tab{this})
+   ->load(fileName);
+}
+
+void
+Tool::closeTab(int index) {
+  if ((0  > index) || (ui->merges->count() <= index))
+    return;
+
+  auto tab = static_cast<Tab *>(ui->merges->widget(index));
+
+  // TODO: Tool::closeTab: hasBeenModified
+  // if (tab->hasBeenModified()) {
+  //   auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
+  //                                       QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+  //   if (answer != QMessageBox::Yes)
+  //     return;
+  // }
+
+  ui->merges->removeTab(index);
+  delete tab;
+
+  showMergeWidget();
+}
+
+void
+Tool::closeCurrentTab() {
+  closeTab(ui->merges->currentIndex());
+}
+
+void
+Tool::closeSendingTab() {
+  auto idx = ui->merges->indexOf(dynamic_cast<Tab *>(sender()));
+  if (-1 != idx)
+    closeTab(idx);
+}
+
+void
+Tool::tabTitleChanged() {
+  auto tab = dynamic_cast<Tab *>(sender());
+  auto idx = ui->merges->indexOf(tab);
+  if (tab && (-1 != idx))
+    ui->merges->setTabText(idx, tab->getTitle());
 }
 
 }}}

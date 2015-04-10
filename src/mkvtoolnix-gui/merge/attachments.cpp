@@ -5,8 +5,8 @@
 #include "common/extern_data.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/attachments_tree_view.h"
-#include "mkvtoolnix-gui/merge/tool.h"
-#include "mkvtoolnix-gui/forms/merge/tool.h"
+#include "mkvtoolnix-gui/merge/tab.h"
+#include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -15,7 +15,7 @@ namespace mtx { namespace gui { namespace Merge {
 using namespace mtx::gui;
 
 void
-Tool::setupAttachmentsControls() {
+Tab::setupAttachmentsControls() {
   ui->attachments->setModel(m_attachmentsModel);
   ui->splitMaxFiles->setMaximum(std::numeric_limits<int>::max());
 
@@ -35,7 +35,7 @@ Tool::setupAttachmentsControls() {
   ui->attachmentStyle   ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   // Signals & slots
-  connect(ui->attachments,                   &AttachmentsTreeView::filesDropped,                                       this, &Tool::addAttachments);
+  connect(ui->attachments,                   &AttachmentsTreeView::filesDropped,                                       this, &Tab::addAttachments);
   connect(ui->attachments->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onAttachmentSelectionChanged()));
   connect(m_addAttachmentsAction,            SIGNAL(triggered()),                                                      this, SLOT(onAddAttachments()));
   connect(m_removeAttachmentsAction,         SIGNAL(triggered()),                                                      this, SLOT(onRemoveAttachments()));
@@ -44,7 +44,7 @@ Tool::setupAttachmentsControls() {
 }
 
 void
-Tool::withSelectedAttachments(std::function<void(Attachment *)> code) {
+Tab::withSelectedAttachments(std::function<void(Attachment *)> code) {
   if (m_currentlySettingInputControlValues)
     return;
 
@@ -62,22 +62,22 @@ Tool::withSelectedAttachments(std::function<void(Attachment *)> code) {
 }
 
 void
-Tool::onAttachmentNameEdited(QString newValue) {
+Tab::onAttachmentNameEdited(QString newValue) {
   withSelectedAttachments([&](Attachment *attachment) { attachment->m_name = newValue; });
 }
 
 void
-Tool::onAttachmentDescriptionEdited(QString newValue) {
+Tab::onAttachmentDescriptionEdited(QString newValue) {
   withSelectedAttachments([&](Attachment *attachment) { attachment->m_description = newValue; });
 }
 
 void
-Tool::onAttachmentMIMETypeEdited(QString newValue) {
+Tab::onAttachmentMIMETypeEdited(QString newValue) {
   withSelectedAttachments([&](Attachment *attachment) { attachment->m_MIMEType = newValue; });
 }
 
 void
-Tool::onAttachmentStyleChanged(int newValue) {
+Tab::onAttachmentStyleChanged(int newValue) {
   auto data = ui->attachmentStyle->itemData(newValue);
   if (!data.isValid())
     return;
@@ -87,7 +87,7 @@ Tool::onAttachmentStyleChanged(int newValue) {
 }
 
 void
-Tool::addAttachments(QStringList const &fileNames) {
+Tab::addAttachments(QStringList const &fileNames) {
   QList<AttachmentPtr> attachmentsToAdd;
   for (auto &fileName : fileNames) {
     attachmentsToAdd << std::make_shared<Attachment>(fileName);
@@ -99,14 +99,14 @@ Tool::addAttachments(QStringList const &fileNames) {
 }
 
 void
-Tool::onAddAttachments() {
+Tab::onAddAttachments() {
   auto fileNames = selectAttachmentsToAdd();
   if (!fileNames.isEmpty())
     addAttachments(fileNames);
 }
 
 QStringList
-Tool::selectAttachmentsToAdd() {
+Tab::selectAttachmentsToAdd() {
   QFileDialog dlg{this};
   dlg.setNameFilter(QY("All files") + Q(" (*)"));
   dlg.setFileMode(QFileDialog::ExistingFiles);
@@ -122,20 +122,20 @@ Tool::selectAttachmentsToAdd() {
 }
 
 void
-Tool::onRemoveAttachments() {
+Tab::onRemoveAttachments() {
   m_attachmentsModel->removeSelectedAttachments(ui->attachments->selectionModel()->selection());
 
   onAttachmentSelectionChanged();
 }
 
 void
-Tool::resizeAttachmentsColumnsToContents()
+Tab::resizeAttachmentsColumnsToContents()
   const {
   Util::resizeViewColumnsToContents(ui->attachments);
 }
 
 void
-Tool::onAttachmentSelectionChanged() {
+Tab::onAttachmentSelectionChanged() {
   auto selection = ui->attachments->selectionModel()->selection();
   auto numRows   = Util::numSelectedRows(selection);
   if (!numRows) {
@@ -162,7 +162,7 @@ Tool::onAttachmentSelectionChanged() {
 }
 
 void
-Tool::enableAttachmentControls(bool enable) {
+Tab::enableAttachmentControls(bool enable) {
   auto controls = std::vector<QWidget *>{ui->attachmentName,     ui->attachmentNameLabel,     ui->attachmentDescription, ui->attachmentDescriptionLabel,
                                          ui->attachmentMIMEType, ui->attachmentMIMETypeLabel, ui->attachmentStyle,       ui->attachmentStyleLabel,};
   for (auto &control : controls)
@@ -172,7 +172,7 @@ Tool::enableAttachmentControls(bool enable) {
 }
 
 void
-Tool::setAttachmentControlValues(Attachment *attachment) {
+Tab::setAttachmentControlValues(Attachment *attachment) {
   m_currentlySettingInputControlValues = true;
 
   if (!attachment && ui->attachmentStyle->itemData(0).isValid())
@@ -199,7 +199,7 @@ Tool::setAttachmentControlValues(Attachment *attachment) {
 }
 
 void
-Tool::retranslateAttachmentsUI() {
+Tab::retranslateAttachmentsUI() {
   m_addAttachmentsAction->setText(QY("&Add"));
   m_removeAttachmentsAction->setText(QY("&Remove"));
 }

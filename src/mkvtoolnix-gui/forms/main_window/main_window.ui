@@ -72,6 +72,8 @@
     <addaction name="actionMergeSaveAs"/>
     <addaction name="actionMergeSaveOptionFile"/>
     <addaction name="separator"/>
+    <addaction name="actionMergeClose"/>
+    <addaction name="separator"/>
     <addaction name="actionMergeStartMuxing"/>
     <addaction name="separator"/>
     <addaction name="actionMergeAddToJobQueue"/>
@@ -182,7 +184,7 @@
   </action>
   <action name="actionMergeSaveOptionFile">
    <property name="text">
-    <string>&amp;Create option file</string>
+    <string>C&amp;reate option file</string>
    </property>
   </action>
   <action name="actionMergeShowMkvmergeCommandLine">
@@ -444,6 +446,18 @@
    </property>
    <property name="shortcut">
     <string>Alt+6</string>
+   </property>
+  </action>
+  <action name="actionMergeClose">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
    </property>
   </action>
  </widget>

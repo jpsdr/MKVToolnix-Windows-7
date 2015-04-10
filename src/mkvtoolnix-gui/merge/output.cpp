@@ -1,8 +1,8 @@
 #include "common/common_pch.h"
 
 #include "common/qt.h"
-#include "mkvtoolnix-gui/merge/tool.h"
-#include "mkvtoolnix-gui/forms/merge/tool.h"
+#include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -13,7 +13,7 @@ namespace mtx { namespace gui { namespace Merge {
 using namespace mtx::gui;
 
 void
-Tool::setupOutputControls() {
+Tab::setupOutputControls() {
   m_splitControls << ui->splitOptionsLabel << ui->splitOptions << ui->splittingOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;
 
   auto comboBoxControls = QList<QComboBox *>{} << ui->splitMode << ui->chapterLanguage << ui->chapterCharacterSet;
@@ -24,21 +24,23 @@ Tool::setupOutputControls() {
 }
 
 void
-Tool::onTitleEdited(QString newValue) {
+Tab::onTitleEdited(QString newValue) {
   m_config.m_title = newValue;
 }
 
 void
-Tool::onOutputEdited(QString newValue) {
+Tab::setDestination(QString const &newValue) {
   m_config.m_destination = newValue;
+  emit titleChanged();
 }
 
 void
-Tool::onBrowseOutput() {
+Tab::onBrowseOutput() {
   auto filter   = m_config.m_webmMode ? QY("WebM files") + Q(" (*.webm)") : QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d)");
   auto fileName = getSaveFileName(QY("Select output file name"), filter, ui->output);
   if (!fileName.isEmpty()) {
-    m_config.m_destination = fileName;
+    setDestination(fileName);
+
     auto &settings         = Util::Settings::get();
     settings.m_lastOutputDir = QFileInfo{ fileName }.absoluteDir();
     settings.save();
@@ -46,31 +48,31 @@ Tool::onBrowseOutput() {
 }
 
 void
-Tool::onGlobalTagsEdited(QString newValue) {
+Tab::onGlobalTagsEdited(QString newValue) {
   m_config.m_globalTags = newValue;
 }
 
 void
-Tool::onBrowseGlobalTags() {
+Tab::onBrowseGlobalTags() {
   auto fileName = getOpenFileName(QY("Select tags file"), QY("XML files") + Q(" (*.xml)"), ui->globalTags);
   if (!fileName.isEmpty())
     m_config.m_globalTags = fileName;
 }
 
 void
-Tool::onSegmentInfoEdited(QString newValue) {
+Tab::onSegmentInfoEdited(QString newValue) {
   m_config.m_segmentInfo = newValue;
 }
 
 void
-Tool::onBrowseSegmentInfo() {
+Tab::onBrowseSegmentInfo() {
   auto fileName = getOpenFileName(QY("Select segment info file"), QY("XML files") + Q(" (*.xml)"), ui->segmentInfo);
   if (!fileName.isEmpty())
     m_config.m_segmentInfo = fileName;
 }
 
 void
-Tool::onSplitModeChanged(int newMode) {
+Tab::onSplitModeChanged(int newMode) {
   auto splitMode       = static_cast<MuxConfig::SplitMode>(newMode);
   m_config.m_splitMode = splitMode;
 
@@ -175,82 +177,82 @@ Tool::onSplitModeChanged(int newMode) {
 }
 
 void
-Tool::onSplitOptionsEdited(QString newValue) {
+Tab::onSplitOptionsEdited(QString newValue) {
   m_config.m_splitOptions = newValue;
 }
 
 void
-Tool::onLinkFilesClicked(bool newValue) {
+Tab::onLinkFilesClicked(bool newValue) {
   m_config.m_linkFiles = newValue;
 }
 
 void
-Tool::onSplitMaxFilesChanged(int newValue) {
+Tab::onSplitMaxFilesChanged(int newValue) {
   m_config.m_splitMaxFiles = newValue;
 }
 
 void
-Tool::onSegmentUIDsEdited(QString newValue) {
+Tab::onSegmentUIDsEdited(QString newValue) {
   m_config.m_segmentUIDs = newValue;
 }
 
 void
-Tool::onPreviousSegmentUIDEdited(QString newValue) {
+Tab::onPreviousSegmentUIDEdited(QString newValue) {
   m_config.m_previousSegmentUID = newValue;
 }
 
 void
-Tool::onNextSegmentUIDEdited(QString newValue) {
+Tab::onNextSegmentUIDEdited(QString newValue) {
   m_config.m_nextSegmentUID = newValue;
 }
 
 void
-Tool::onChaptersEdited(QString newValue) {
+Tab::onChaptersEdited(QString newValue) {
   m_config.m_chapters = newValue;
 }
 
 void
-Tool::onBrowseChapters() {
+Tab::onBrowseChapters() {
   auto fileName = getOpenFileName(QY("Select chapter file"), QY("XML files") + Q(" (*.xml)"), ui->chapters);
   if (!fileName.isEmpty())
     m_config.m_chapters = fileName;
 }
 
 void
-Tool::onChapterLanguageChanged(int newValue) {
+Tab::onChapterLanguageChanged(int newValue) {
   auto data = ui->chapterLanguage->itemData(newValue);
   if (data.isValid())
     m_config.m_chapterLanguage = data.toString();
 }
 
 void
-Tool::onChapterCharacterSetChanged(QString newValue) {
+Tab::onChapterCharacterSetChanged(QString newValue) {
   m_config.m_chapterCharacterSet = newValue;
 }
 
 void
-Tool::onChapterCueNameFormatChanged(QString newValue) {
+Tab::onChapterCueNameFormatChanged(QString newValue) {
   m_config.m_chapterCueNameFormat = newValue;
 }
 
 void
-Tool::onWebmClicked(bool newValue) {
+Tab::onWebmClicked(bool newValue) {
   m_config.m_webmMode = newValue;
   // TODO: change output file extension
 }
 
 void
-Tool::onUserDefinedOptionsEdited(QString newValue) {
+Tab::onUserDefinedOptionsEdited(QString newValue) {
   m_config.m_userDefinedOptions = newValue;
 }
 
 void
-Tool::onEditUserDefinedOptions() {
+Tab::onEditUserDefinedOptions() {
   // TODO
 }
 
 void
-Tool::setOutputControlValues() {
+Tab::setOutputControlValues() {
   ui->title->setText(m_config.m_title);
   ui->output->setText(m_config.m_destination);
   ui->globalTags->setText(m_config.m_globalTags);
