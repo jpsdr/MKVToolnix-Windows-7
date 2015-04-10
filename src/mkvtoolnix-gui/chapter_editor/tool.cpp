@@ -82,8 +82,9 @@ Tool::toolShown() {
 
 void
 Tool::retranslateUi() {
-  ui->noFileOpenedLabel->setText(QY("No file has been opened yet."));
-  ui->howToOpenLabel->setText(QY("Open a file via the \"chapter editor\" menu or drag & drop one here."));
+  ui->retranslateUi(this);
+  for (auto idx = 0, numTabs = ui->editors->count(); idx < numTabs; ++idx)
+    static_cast<Tab *>(ui->editors->widget(idx))->retranslateUi();
 }
 
 Tab *
