@@ -108,6 +108,11 @@ get_current_exe_path(std::string const &argv0) {
 #endif
 }
 
+bool
+is_installed() {
+  return true;
+}
+
 }}
 
 #endif  // !SYS_WINDOWS

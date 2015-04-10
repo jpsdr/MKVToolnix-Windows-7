@@ -26,11 +26,12 @@ bfs::path get_current_exe_path(std::string const &argv0);
 bfs::path get_application_data_folder();
 bfs::path get_installation_path();
 
+bool is_installed();
+
 std::string get_environment_variable(const std::string &key);
 
 #if defined(SYS_WINDOWS)
 
-bool is_installed();
 void set_environment_variable(const std::string &key, const std::string &value);
 
 #define WINDOWS_VERSION_UNKNOWN      0x00000000

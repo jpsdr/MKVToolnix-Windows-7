@@ -2,6 +2,7 @@
 
 #include "common/fs_sys_helpers.h"
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 #include <QSettings>
@@ -20,9 +21,19 @@ Settings::get() {
   return s_settings;
 }
 
+std::unique_ptr<QSettings>
+Settings::getRegistry() {
+#if defined(SYS_WINDOWS)
+  if (!App::isInstalled())
+    return std::make_unique<QSettings>(Q((mtx::sys::get_installation_path() / "mkvtoolnix-gui.ini").string()), QSettings::IniFormat);
+#endif
+  return std::make_unique<QSettings>();
+}
+
 void
 Settings::load() {
-  QSettings reg;
+  auto regPtr = getRegistry();
+  auto &reg   = *regPtr;
 
   reg.beginGroup("settings");
   m_mkvmergeExe               = reg.value("mkvmergeExe", "mkvmerge").toString();
@@ -63,7 +74,8 @@ Settings::actualMkvmergeExe()
 void
 Settings::save()
   const {
-  QSettings reg;
+  auto regPtr = getRegistry();
+  auto &reg   = *regPtr;
 
   reg.beginGroup("settings");
   reg.setValue("mkvmergeExe",               m_mkvmergeExe);
@@ -144,16 +156,16 @@ Settings::value(QString const &group,
 void
 Settings::withGroup(QString const &group,
                     std::function<void(QSettings &)> worker) {
-  QSettings reg;
+  auto reg    = getRegistry();
   auto groups = group.split(Q("/"));
 
   for (auto const &subGroup : groups)
-    reg.beginGroup(subGroup);
+    reg->beginGroup(subGroup);
 
-  worker(reg);
+  worker(*reg);
 
   for (auto idx = groups.size(); idx > 0; --idx)
-    reg.endGroup();
+    reg->endGroup();
 }
 
 }}}

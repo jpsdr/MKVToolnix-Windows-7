@@ -1,6 +1,9 @@
 #include "common/common_pch.h"
 
+#include <boost/optional.hpp>
+
 #include "common/extern_data.h"
+#include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
 #include "common/version.h"
@@ -9,7 +12,8 @@
 
 namespace mtx { namespace gui {
 
-QStringList App::ms_iso639LanguageDescriptions, App::ms_iso639_2LanguageCodes, App::ms_iso3166_1Alpha2CountryCodes;
+static QStringList s_iso639LanguageDescriptions, s_iso639_2LanguageCodes, s_iso3166_1Alpha2CountryCodes;
+static boost::optional<bool> s_is_installed;
 
 App::App(int &argc,
          char **argv)
@@ -53,24 +57,24 @@ App::retranslateUi() {
 
 void
 App::reinitializeLanguageLists() {
-  ms_iso639LanguageDescriptions.clear();
-  ms_iso639_2LanguageCodes.clear();
-  ms_iso3166_1Alpha2CountryCodes.clear();
+  s_iso639LanguageDescriptions.clear();
+  s_iso639_2LanguageCodes.clear();
+  s_iso3166_1Alpha2CountryCodes.clear();
 
   initializeLanguageLists();
 }
 
 void
 App::initializeLanguageLists() {
-  if (!ms_iso639LanguageDescriptions.isEmpty())
+  if (!s_iso639LanguageDescriptions.isEmpty())
     return;
 
   using LangStorage = std::pair<QString, QString>;
   auto languages    = std::vector<LangStorage>{};
 
   languages.reserve(iso639_languages.size());
-  ms_iso639LanguageDescriptions.reserve(iso639_languages.size());
-  ms_iso639_2LanguageCodes.reserve(iso639_languages.size());
+  s_iso639LanguageDescriptions.reserve(iso639_languages.size());
+  s_iso639_2LanguageCodes.reserve(iso639_languages.size());
 
   for (auto const &language : iso639_languages)
     languages.emplace_back(Q(language.iso639_2_code), Q(language.english_name));
@@ -78,33 +82,40 @@ App::initializeLanguageLists() {
   brng::sort(languages, [](LangStorage const &a, LangStorage const &b) { return a.first < b.first; });
 
   for (auto const &language : languages) {
-    ms_iso639LanguageDescriptions << Q("%1 (%2)").arg(language.second).arg(language.first);
-    ms_iso639_2LanguageCodes      << language.first;
+    s_iso639LanguageDescriptions << Q("%1 (%2)").arg(language.second).arg(language.first);
+    s_iso639_2LanguageCodes      << language.first;
   }
 
-  ms_iso3166_1Alpha2CountryCodes.reserve(cctlds.size());
+  s_iso3166_1Alpha2CountryCodes.reserve(cctlds.size());
   for (auto const &code : cctlds)
-    ms_iso3166_1Alpha2CountryCodes << Q(code);
+    s_iso3166_1Alpha2CountryCodes << Q(code);
 
-  ms_iso3166_1Alpha2CountryCodes.sort();
+  s_iso3166_1Alpha2CountryCodes.sort();
 }
 
 QStringList const &
 App::getIso639LanguageDescriptions() {
   initializeLanguageLists();
-  return ms_iso639LanguageDescriptions;
+  return s_iso639LanguageDescriptions;
 }
 
 QStringList const &
 App::getIso639_2LanguageCodes() {
   initializeLanguageLists();
-  return ms_iso639_2LanguageCodes;
+  return s_iso639_2LanguageCodes;
 }
 
 QStringList const &
 App::getIso3166_1Alpha2CountryCodes() {
   initializeLanguageLists();
-  return ms_iso3166_1Alpha2CountryCodes;
+  return s_iso3166_1Alpha2CountryCodes;
+}
+
+bool
+App::isInstalled() {
+  if (!s_is_installed)
+    s_is_installed.reset(mtx::sys::is_installed());
+  return *s_is_installed;
 }
 
 }}

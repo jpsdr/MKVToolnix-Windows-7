@@ -69,6 +69,7 @@ protected:
 
 public:
   static Settings &get();
+  static std::unique_ptr<QSettings> getRegistry();
 
   static QString exeWithPath(QString const &exe);
 };
