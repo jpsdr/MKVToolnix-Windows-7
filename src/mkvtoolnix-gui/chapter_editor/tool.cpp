@@ -27,11 +27,12 @@ Tool::Tool(QWidget *parent,
   : ToolBase{parent}
   , ui{new Ui::Tool}
   , m_chapterEditorMenu{chapterEditorMenu}
+  , m_fileDDHandler{Util::FilesDragDropHandler::Mode::Remember}
 {
   // Setup UI controls.
   ui->setupUi(this);
 
-  setupMenu();
+  setupActions();
 
   showChapterEditorsWidget();
 }
@@ -40,7 +41,7 @@ Tool::~Tool() {
 }
 
 void
-Tool::setupMenu() {
+Tool::setupActions() {
   auto mwUi = MainWindow::get()->getUi();
 
   connect(mwUi->actionChapterEditorNew,            &QAction::triggered,         this, &Tool::newFile);
@@ -107,30 +108,16 @@ Tool::newFile() {
     ->newFile();
 }
 
-// TODO: Tool::dragEnterEvent: drag & drop
-// void
-// Tool::dragEnterEvent(QDragEnterEvent *event) {
-//   if (!event->mimeData()->hasUrls())
-//     return;
+void
+Tool::dragEnterEvent(QDragEnterEvent *event) {
+  m_fileDDHandler.handle(event);
+}
 
-//   for (auto const &url : event->mimeData()->urls())
-//     if (!url.isLocalFile() || !QFileInfo{url.toLocalFile()}.isFile())
-//       return;
-
-//   event->acceptProposedAction();
-// }
-
-// void
-// Tool::dropEvent(QDropEvent *event) {
-//   if (!event->mimeData()->hasUrls())
-//     return;
-
-//   event->acceptProposedAction();
-
-//   for (auto const &url : event->mimeData()->urls())
-//     if (url.isLocalFile())
-//       openFile(url.toLocalFile());
-// }
+void
+Tool::dropEvent(QDropEvent *event) {
+  if (m_fileDDHandler.handle(event))
+    filesDropped(m_fileDDHandler.getFileNames());
+}
 
 void
 Tool::openFile(QString const &fileName) {
@@ -140,6 +127,12 @@ Tool::openFile(QString const &fileName) {
 
   appendTab(new Tab{this, fileName})
    ->load();
+}
+
+void
+Tool::filesDropped(QStringList const &fileNames) {
+  for (auto const &fileName : fileNames)
+    openFile(fileName);
 }
 
 void

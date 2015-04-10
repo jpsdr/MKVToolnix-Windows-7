@@ -4,6 +4,7 @@
 #include "common/common_pch.h"
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
+#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
 class QDragEnterEvent;
 class QDropEvent;
@@ -24,14 +25,13 @@ protected:
   // UI stuff:
   std::unique_ptr<Ui::Tool> ui;
   QMenu *m_chapterEditorMenu;
+  mtx::gui::Util::FilesDragDropHandler m_fileDDHandler;
+
 public:
   explicit Tool(QWidget *parent, QMenu *chapterEditorMenu);
   ~Tool();
 
   virtual void retranslateUi() override;
-
-  // virtual void dragEnterEvent(QDragEnterEvent *event) override;
-  // virtual void dropEvent(QDropEvent *event) override;
 
 public slots:
   virtual void toolShown() override;
@@ -46,14 +46,18 @@ public slots:
   virtual void closeCurrentTab();
   virtual void closeSendingTab();
   virtual void reload();
+  virtual void filesDropped(QStringList const &fileNames);
 
 protected:
   Tab * appendTab(Tab *tab);
 
   virtual void openFile(QString const &fileName);
-  virtual void setupMenu();
+  virtual void setupActions();
   virtual void showChapterEditorsWidget();
   virtual Tab *currentTab();
+
+  virtual void dragEnterEvent(QDragEnterEvent *event) override;
+  virtual void dropEvent(QDropEvent *event) override;
 };
 
 }}}

@@ -22,6 +22,7 @@
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
 #include "mkvtoolnix-gui/chapter_editor/tab.h"
+#include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"

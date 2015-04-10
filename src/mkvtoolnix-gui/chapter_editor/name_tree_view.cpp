@@ -11,6 +11,7 @@ using namespace mtx::gui;
 
 NameTreeView::NameTreeView(QWidget *parent)
   : QTreeView{parent}
+  , m_fileDDHandler{Util::FilesDragDropHandler::Mode::PassThrough}
 {
 }
 
@@ -19,22 +20,8 @@ NameTreeView::~NameTreeView() {
 
 void
 NameTreeView::dragMoveEvent(QDragMoveEvent *event) {
-  if (event->pos().x() > columnWidth(0)) {
-    event->ignore();
-    return;
-  }
-
-  QTreeView::dragMoveEvent(event);
-}
-
-void
-NameTreeView::dropEvent(QDropEvent *event) {
-  if (event->pos().x() > columnWidth(0)) {
-    event->ignore();
-    return;
-  }
-
-  QTreeView::dropEvent(event);
+  if (!m_fileDDHandler.handle(event) && (event->pos().x() <= columnWidth(0)))
+    QTreeView::dragMoveEvent(event);
 }
 
 }}}

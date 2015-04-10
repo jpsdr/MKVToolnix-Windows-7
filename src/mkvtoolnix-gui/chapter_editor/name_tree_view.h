@@ -5,6 +5,8 @@
 
 #include <QTreeView>
 
+#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
+
 class QDragMoveEvent;
 class QDropEvent;
 
@@ -15,13 +17,15 @@ class Tool;
 class NameTreeView : public QTreeView {
   Q_OBJECT;
 
+protected:
+  mtx::gui::Util::FilesDragDropHandler m_fileDDHandler;
+
 public:
   NameTreeView(QWidget *parent);
   virtual ~NameTreeView();
 
 protected:
   virtual void dragMoveEvent(QDragMoveEvent *event) override;
-  virtual void dropEvent(QDropEvent *event) override;
 };
 
 }}}
