@@ -102,8 +102,8 @@ Tool::appendTab(Tab *tab) {
 
 void
 Tool::newFile() {
-   appendTab(new Tab{this})
-     ->newFile();
+  appendTab(new Tab{this})
+    ->newFile();
 }
 
 // TODO: Tool::dragEnterEvent: drag & drop

@@ -1,5 +1,12 @@
 #include "common/common_pch.h"
 
+#include <QCloseEvent>
+#include <QIcon>
+#include <QLabel>
+#include <QSettings>
+#include <QStaticText>
+#include <QVBoxLayout>
+
 #include "common/fs_sys_helpers.h"
 #include "common/qt.h"
 #include "common/version.h"
@@ -17,12 +24,6 @@
 #if defined(HAVE_CURL_EASY_H)
 # include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
 #endif  // HAVE_CURL_EASY_H
-
-#include <QCloseEvent>
-#include <QIcon>
-#include <QLabel>
-#include <QStaticText>
-#include <QVBoxLayout>
 
 namespace mtx { namespace gui {
 

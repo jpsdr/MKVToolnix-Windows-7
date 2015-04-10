@@ -1,13 +1,13 @@
 #include "common/common_pch.h"
 
+#include <QMessageBox>
+#include <QStringList>
+
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
-
-#include <QMessageBox>
-#include <QStringList>
 
 namespace mtx { namespace gui { namespace Util {
 
