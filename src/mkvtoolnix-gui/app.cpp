@@ -22,7 +22,7 @@ App::App(int &argc,
   QCoreApplication::setApplicationName("mkvtoolnix-gui");
 
 #ifdef SYS_WINDOWS
-  QApplication::setStyle(Q("windows"));
+  QApplication::setStyle(Q("windowsvista"));
 #endif
 
   Util::Settings::get().load();
