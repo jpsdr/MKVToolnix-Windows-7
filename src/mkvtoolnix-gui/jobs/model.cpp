@@ -7,6 +7,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace Jobs {
@@ -266,13 +267,20 @@ Model::loadJobs(QSettings &settings) {
 
   settings.beginGroup("jobQueue");
   auto numberOfJobs = settings.value("numberOfJobs").toUInt();
-  for (auto idx = 0u; idx < numberOfJobs; ++idx) {
-    settings.beginGroup(Q("job %1").arg(idx));
-    add(Job::loadJob(settings));
-    settings.endGroup();
-  }
-
   settings.endGroup();
+
+  for (auto idx = 0u; idx < numberOfJobs; ++idx) {
+    settings.beginGroup("jobQueue");
+    settings.beginGroup(Q("job %1").arg(idx));
+
+    try {
+      add(Job::loadJob(settings));
+    } catch (Merge::InvalidSettingsX &) {
+    }
+
+    while (!settings.group().isEmpty())
+      settings.endGroup();
+  }
 
   updateProgress();
 
