@@ -30,7 +30,7 @@ std::string get_environment_variable(const std::string &key);
 
 #if defined(SYS_WINDOWS)
 
-bool get_registry_key_value(const std::string &key, const std::string &value_name, std::string &value);
+bool is_installed();
 void set_environment_variable(const std::string &key, const std::string &value);
 
 #define WINDOWS_VERSION_UNKNOWN      0x00000000

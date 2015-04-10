@@ -37,38 +37,6 @@ get_current_time_millis() {
   return (int64_t)tb.time * 1000 + tb.millitm;
 }
 
-bool
-get_registry_key_value(const std::string &key,
-                       const std::string &value_name,
-                       std::string &value) {
-  std::vector<std::string> key_parts = split(key, "\\", 2);
-  HKEY hkey;
-  HKEY hkey_base = key_parts[0] == "HKEY_CURRENT_USER" ? HKEY_CURRENT_USER : HKEY_LOCAL_MACHINE;
-  DWORD error    = RegOpenKeyExA(hkey_base, key_parts[1].c_str(), 0, KEY_READ, &hkey);
-
-  if (ERROR_SUCCESS != error)
-    return false;
-
-  bool ok        = false;
-  DWORD data_len = 0;
-  DWORD dwDisp;
-  if (ERROR_SUCCESS == RegQueryValueExA(hkey, value_name.c_str(), nullptr, &dwDisp, nullptr, &data_len)) {
-    char *data = new char[data_len + 1];
-    memset(data, 0, data_len + 1);
-
-    if (ERROR_SUCCESS == RegQueryValueExA(hkey, value_name.c_str(), nullptr, &dwDisp, (BYTE *)data, &data_len)) {
-      value = data;
-      ok    = true;
-    }
-
-    delete []data;
-  }
-
-  RegCloseKey(hkey);
-
-  return ok;
-}
-
 void
 set_environment_variable(const std::string &key,
                          const std::string &value) {
@@ -168,6 +136,17 @@ get_current_exe_path(std::string const &) {
   }
 
   return bfs::absolute(bfs::path{to_utf8(file_name)}).parent_path();
+}
+
+bool
+is_installed() {
+  auto sub_key  = "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\mmg.exe";
+  auto data_len = DWORD{};
+
+  if (ERROR_SUCCESS != RegGetValueA(HKEY_LOCAL_MACHINE, sub_key, NULL, RRF_RT_REG_SZ, NULL, NULL, &data_len))
+    return false;
+
+  return data_len > 1;
 }
 
 }}

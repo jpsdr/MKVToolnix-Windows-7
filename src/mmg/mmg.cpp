@@ -79,9 +79,7 @@ mmg_track_t::is_webm_compatible() {
 
 mmg_app::mmg_app() {
 #if defined(SYS_WINDOWS)
-  wxString dummy;
-  wxRegKey key(wxU("HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\mmg.exe"));
-  m_is_installed = key.Exists() && key.QueryValue(wxU(""), dummy) && !dummy.IsEmpty();
+  m_is_installed = mtx::sys::is_installed();
 #endif
 }
 
