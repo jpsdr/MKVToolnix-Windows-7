@@ -104,6 +104,10 @@ public slots:
   virtual void resizeTracksColumnsToContents() const;
   virtual void reinitFilesTracksControls();
 
+  virtual void onFileRowsInserted(QModelIndex const &parentIdx, int first, int last);
+  virtual void onTrackRowsInserted(QModelIndex const &parentIdx, int first, int last);
+  virtual void addOrAppendDroppedFiles(QStringList const &fileNames);
+
   // Output tab:
   virtual void setDestination(QString const &newValue);
 
@@ -155,6 +159,7 @@ protected:
   virtual QStringList selectFilesToAdd(QString const &title);
   virtual QStringList selectAttachmentsToAdd();
   virtual void addOrAppendFiles(bool append);
+  virtual void addOrAppendFiles(bool append, QStringList const &fileNames, QModelIndex const &sourceFileIdx);
   virtual void enableFilesActions();
   virtual void enableAttachmentControls(bool enable);
   virtual void setInputControlValues(Track *track);

@@ -13,6 +13,7 @@
 #include "common/stereo_mode.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
@@ -62,6 +63,8 @@ Tab::setupControlLists() {
 void
 Tab::setupInputControls() {
   setupControlLists();
+
+  ui->files->acceptDroppedFiles(true);
 
   ui->files->setModel(m_filesModel);
   ui->tracks->setModel(m_tracksModel);
@@ -124,7 +127,26 @@ Tab::setupInputControls() {
   connect(m_removeFilesAction,          &QAction::triggered,                    this,          &Tab::onRemoveFiles);
   connect(m_removeAllFilesAction,       &QAction::triggered,                    this,          &Tab::onRemoveAllFiles);
 
+  connect(m_filesModel,                 &SourceFileModel::rowsInserted,         this,          &Tab::onFileRowsInserted);
+  connect(m_tracksModel,                &TrackModel::rowsInserted,              this,          &Tab::onTrackRowsInserted);
+
   onTrackSelectionChanged();
+}
+
+void
+Tab::onFileRowsInserted(QModelIndex const &parentIdx,
+                        int,
+                        int) {
+  if (parentIdx.isValid())
+    ui->files->setExpanded(parentIdx, true);
+}
+
+void
+Tab::onTrackRowsInserted(QModelIndex const &parentIdx,
+                         int,
+                         int) {
+  if (parentIdx.isValid())
+    ui->tracks->setExpanded(parentIdx, true);
 }
 
 void
@@ -496,9 +518,14 @@ Tab::onAppendFiles() {
 void
 Tab::addOrAppendFiles(bool append) {
   auto fileNames = selectFilesToAdd(append ? QY("Append media files") : QY("Add media files"));
-  if (fileNames.isEmpty())
-    return;
+  if (!fileNames.isEmpty())
+    addOrAppendFiles(append, fileNames, selectedSourceFile());
+}
 
+void
+Tab::addOrAppendFiles(bool append,
+                      QStringList const &fileNames,
+                      QModelIndex const &sourceFileIdx) {
   QList<SourceFilePtr> identifiedFiles;
   for (auto &fileName : fileNames) {
     Util::FileIdentifier identifier{ this, fileName };
@@ -512,7 +539,7 @@ Tab::addOrAppendFiles(bool append) {
   if (identifiedFiles.isEmpty())
     return;
 
-  m_filesModel->addOrAppendFilesAndTracks(selectedSourceFile(), identifiedFiles, append);
+  m_filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
   reinitFilesTracksControls();
 
   setTitleMaybe(identifiedFiles);
@@ -723,6 +750,27 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
 
     ++idx;
   }
+}
+
+void
+Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
+  if (m_config.m_files.isEmpty()) {
+    addOrAppendFiles(false, fileNames, {});
+    return;
+  }
+
+  AddingAppendingFilesDialog dlg{this, m_config.m_files};
+  if (!dlg.exec())
+    return;
+
+  auto decision = dlg.decision();
+  auto fileIdx  = m_filesModel->index(dlg.fileIndex(), 0);
+
+  if (AddingAppendingFilesDialog::Decision::AddAdditionalParts == decision)
+    m_filesModel->addAdditionalParts(fileIdx, fileNames);
+
+  else
+    addOrAppendFiles(AddingAppendingFilesDialog::Decision::Append == decision, fileNames, fileIdx);
 }
 
 }}}
