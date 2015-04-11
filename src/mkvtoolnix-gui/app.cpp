@@ -13,7 +13,8 @@
 
 namespace mtx { namespace gui {
 
-static QStringList s_iso639LanguageDescriptions, s_iso639_2LanguageCodes, s_iso3166_1Alpha2CountryCodes;
+static Iso639LanguageList s_iso639Languages;
+static QStringList s_iso3166_1Alpha2CountryCodes;
 static boost::optional<bool> s_is_installed;
 
 App::App(int &argc,
@@ -64,8 +65,7 @@ App::retranslateUi() {
 
 void
 App::reinitializeLanguageLists() {
-  s_iso639LanguageDescriptions.clear();
-  s_iso639_2LanguageCodes.clear();
+  s_iso639Languages.clear();
   s_iso3166_1Alpha2CountryCodes.clear();
 
   initializeLanguageLists();
@@ -73,25 +73,14 @@ App::reinitializeLanguageLists() {
 
 void
 App::initializeLanguageLists() {
-  if (!s_iso639LanguageDescriptions.isEmpty())
+  if (!s_iso639Languages.empty())
     return;
 
-  using LangStorage = std::pair<QString, QString>;
-  auto languages    = std::vector<LangStorage>{};
-
-  languages.reserve(iso639_languages.size());
-  s_iso639LanguageDescriptions.reserve(iso639_languages.size());
-  s_iso639_2LanguageCodes.reserve(iso639_languages.size());
-
+  s_iso639Languages.reserve(iso639_languages.size());
   for (auto const &language : iso639_languages)
-    languages.emplace_back(Q(language.iso639_2_code), Q(language.english_name));
+    s_iso639Languages.emplace_back(Q("%1 (%2)").arg(Q(language.english_name)).arg(Q(language.iso639_2_code)), Q(language.iso639_2_code));
 
-  brng::sort(languages, [](LangStorage const &a, LangStorage const &b) { return a.first < b.first; });
-
-  for (auto const &language : languages) {
-    s_iso639LanguageDescriptions << Q("%1 (%2)").arg(language.second).arg(language.first);
-    s_iso639_2LanguageCodes      << language.first;
-  }
+  brng::sort(s_iso639Languages);
 
   s_iso3166_1Alpha2CountryCodes.reserve(cctlds.size());
   for (auto const &code : cctlds)
@@ -100,22 +89,24 @@ App::initializeLanguageLists() {
   s_iso3166_1Alpha2CountryCodes.sort();
 }
 
-QStringList const &
-App::getIso639LanguageDescriptions() {
+Iso639LanguageList const &
+App::getIso639Languages() {
   initializeLanguageLists();
-  return s_iso639LanguageDescriptions;
-}
-
-QStringList const &
-App::getIso639_2LanguageCodes() {
-  initializeLanguageLists();
-  return s_iso639_2LanguageCodes;
+  return s_iso639Languages;
 }
 
 QStringList const &
 App::getIso3166_1Alpha2CountryCodes() {
   initializeLanguageLists();
   return s_iso3166_1Alpha2CountryCodes;
+}
+
+int
+App::indexOfLanguage(QString const &englishName) {
+  initializeLanguageLists();
+
+  auto itr = std::find_if(s_iso639Languages.begin(), s_iso639Languages.end(), [&englishName](Iso639Language const &l) { return l.second == englishName; });
+  return itr == s_iso639Languages.end() ? -1 : std::distance(s_iso639Languages.begin(), itr);
 }
 
 bool

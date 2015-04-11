@@ -8,6 +8,9 @@
 
 namespace mtx { namespace gui {
 
+using Iso639Language     = std::pair<QString, QString>;
+using Iso639LanguageList = std::vector<Iso639Language>;
+
 class App : public QApplication {
   Q_OBJECT;
 
@@ -23,11 +26,11 @@ public slots:
 public:
   static App *instance();
 
-  static QStringList const &getIso639LanguageDescriptions();
-  static QStringList const &getIso639_2LanguageCodes();
+  static Iso639LanguageList const &getIso639Languages();
   static QStringList const &getIso3166_1Alpha2CountryCodes();
   static void initializeLanguageLists();
   static void reinitializeLanguageLists();
+  static int indexOfLanguage(QString const &englishName);
 
   static bool isInstalled();
 };

@@ -65,16 +65,11 @@ Tab::setupUi() {
   ui->elements->setModel(m_chapterModel);
   ui->tvChNames->setModel(m_nameModel);
 
-  ui->cbChNameLanguage->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   ui->cbChNameCountry ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-  auto &languageDescriptions = App::getIso639LanguageDescriptions();
-  auto &languageCodes        = App::getIso639_2LanguageCodes();
-  auto &countryCodes         = App::getIso3166_1Alpha2CountryCodes();
+  Util::setupLanguageComboBox(*ui->cbChNameLanguage);
 
-  for (auto idx = 0, count = languageDescriptions.count(); idx < count; ++idx)
-    ui->cbChNameLanguage->addItem(languageDescriptions[idx], languageCodes[idx]);
-
+  auto &countryCodes = App::getIso3166_1Alpha2CountryCodes();
   ui->cbChNameCountry->addItem(Q(""));
   ui->cbChNameCountry->addItems(countryCodes);
 

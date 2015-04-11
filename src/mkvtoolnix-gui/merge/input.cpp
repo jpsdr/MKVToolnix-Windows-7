@@ -70,15 +70,8 @@ Tab::setupInputControls() {
   ui->tracks->setModel(m_tracksModel);
 
   // Track & chapter language
-  auto &languageDescriptions = App::getIso639LanguageDescriptions();
-  auto &languageCodes        = App::getIso639_2LanguageCodes();
-
-  ui->chapterLanguage->addItem(Q(""), Q(""));
-
-  for (auto idx = 0, count = languageDescriptions.count(); idx < count; ++idx) {
-    ui->trackLanguage->addItem(languageDescriptions[idx], languageCodes[idx]);
-    ui->chapterLanguage->addItem(languageDescriptions[idx], languageCodes[idx]);
-  }
+  Util::setupLanguageComboBox(*ui->trackLanguage);
+  Util::setupLanguageComboBox(*ui->chapterLanguage, QString{}, true);
 
   // Track & chapter character set
   QStringList characterSets;

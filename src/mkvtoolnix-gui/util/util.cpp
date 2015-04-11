@@ -11,6 +11,7 @@
 
 #include "common/qt.h"
 #include "common/strings/editing.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -42,6 +43,43 @@ bool
 setComboBoxTextByData(QComboBox *comboBox,
                       QString const &data) {
   return setComboBoxIndexIf(comboBox, [&data](QString const &, QVariant const &itemData) { return itemData.isValid() && (itemData.toString() == data); });
+}
+
+int
+setupLanguageComboBox(QComboBox &comboBox,
+                      QStringList const &initiallySelected,
+                      bool withEmpty,
+                      QString const &emptyTitle) {
+  auto initialIdx = -1;
+  for (auto const &language : initiallySelected) {
+    if (language.isEmpty())
+      continue;
+
+    initialIdx = App::indexOfLanguage(language);
+    if (-1 != initialIdx)
+      break;
+  }
+
+  if (withEmpty)
+    comboBox.addItem(emptyTitle);
+
+  for (auto const &language : App::getIso639Languages())
+    comboBox.addItem(language.first, language.second);
+
+  if (-1 != initialIdx)
+    comboBox.setCurrentIndex(initialIdx);
+
+  comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
+  return initialIdx;
+}
+
+int
+setupLanguageComboBox(QComboBox &comboBox,
+                      QString const &initiallySelected,
+                      bool withEmpty,
+                      QString const &emptyTitle) {
+  return setupLanguageComboBox(comboBox, QStringList{} << initiallySelected, withEmpty, emptyTitle);
 }
 
 void
