@@ -39,16 +39,19 @@ AttachmentModel::createRowItems(AttachmentPtr const &attachment)
 void
 AttachmentModel::setRowData(QList<QStandardItem *> const &items,
                             Attachment const &attachment) {
+  auto info = QFileInfo{attachment.m_fileName};
+
   items[NameColumn       ]->setText(attachment.m_name);
   items[MIMETypeColumn   ]->setText(attachment.m_MIMEType);
   items[DescriptionColumn]->setText(attachment.m_description);
   items[StyleColumn      ]->setText(attachment.m_style == Attachment::ToAllFiles ? QY("to all files") : QY("only to the first file"));
-  items[SourceFileColumn ]->setText(attachment.m_fileName);
+  items[SourceFileColumn ]->setText(info.fileName());
+  items[SourceDirColumn  ]->setText(info.path());
 }
 
 void
 AttachmentModel::retranslateUi() {
-  auto labels = QStringList{} << QY("Name") << QY("MIME type") << QY("Description") << QY("Source file") << QY("Attach to") << QY("Source file name");
+  auto labels = QStringList{} << QY("Name") << QY("MIME type") << QY("Description") << QY("Attach to") << QY("Source file name") << QY("Directory");
   setHorizontalHeaderLabels(labels);
 }
 
