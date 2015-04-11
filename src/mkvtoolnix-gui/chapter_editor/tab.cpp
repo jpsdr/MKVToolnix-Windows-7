@@ -83,7 +83,7 @@ Tab::setupUi() {
                 << ui->lChNameLanguage << ui->cbChNameLanguage
                 << ui->lChNameCountry  << ui->cbChNameCountry;
 
-  connect(ui->elements,                    &ChapterTreeView::customContextMenuRequested,                           this, &Tab::showChapterContextMenu);
+  connect(ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this, &Tab::showChapterContextMenu);
   connect(ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this, &Tab::chapterSelectionChanged);
   connect(ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this, &Tab::nameSelectionChanged);
   connect(ui->leChName,                    &QLineEdit::textEdited,                                                 this, &Tab::chapterNameEdited);

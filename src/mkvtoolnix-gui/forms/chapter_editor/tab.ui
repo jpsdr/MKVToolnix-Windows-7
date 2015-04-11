@@ -79,7 +79,7 @@
      <property name="childrenCollapsible">
       <bool>false</bool>
      </property>
-     <widget class="mtx::gui::ChapterEditor::ChapterTreeView" name="elements">
+     <widget class="mtx::gui::Util::BasicTreeView" name="elements">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -238,8 +238,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>399</width>
-             <height>434</height>
+             <width>421</width>
+             <height>435</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -353,7 +353,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
-                  <widget class="mtx::gui::ChapterEditor::NameTreeView" name="tvChNames">
+                  <widget class="mtx::gui::Util::BasicTreeView" name="tvChNames">
                    <property name="dragEnabled">
                     <bool>true</bool>
                    </property>
@@ -478,14 +478,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>mtx::gui::ChapterEditor::ChapterTreeView</class>
+   <class>mtx::gui::Util::BasicTreeView</class>
    <extends>QTreeView</extends>
-   <header>mkvtoolnix-gui/chapter_editor/chapter_tree_view.h</header>
-  </customwidget>
-  <customwidget>
-   <class>mtx::gui::ChapterEditor::NameTreeView</class>
-   <extends>QTreeView</extends>
-   <header>mkvtoolnix-gui/chapter_editor/name_tree_view.h</header>
+   <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
