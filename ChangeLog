@@ -1,5 +1,11 @@
 2015-04-11  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: MPEG-1/2 parser: fixed a long-standing issue
+        that prevented mkvmerge from recognizing certain MPEG-1/2 video
+        tracks and files if the frame's sequence numbers didn't follow a
+        certain expected pattern. Fixes #1162 and probably others like
+        #1145 or #1099.
+
         * MKVToolNix GUI: merge tool enhancement: Implemented adding and
         append files and adding files as additional parts via drag & drop
         from external applications.

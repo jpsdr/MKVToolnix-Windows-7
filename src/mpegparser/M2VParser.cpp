@@ -64,6 +64,7 @@ void M2VParser::SetEOS(){
   c = mpgBuf->ReadChunk();
   if(c) chunks.push_back(c);
   FillQueues();
+  TimestampWaitingFrames();
   m_eos = true;
 }
 
@@ -117,7 +118,6 @@ M2VParser::M2VParser()
   notReachedFirstGOP = true;
   previousTimecode = 0;
   previousDuration = 0;
-  queueTime = 0;
   waitExpectedTime = 0;
   probing = false;
   b_frame_warning_printed = false;
@@ -205,12 +205,15 @@ MPEG2ParserState_e M2VParser::GetState(){
 void M2VParser::FlushWaitQueue(){
   waitSecondField = false;
 
-  while(!waitQueue.empty()){
-    delete waitQueue.front();
-    waitQueue.pop();
-    if (!m_timecodes.empty())
-      m_timecodes.pop_front();
+  for (auto const &frame : waitQueue)
+    delete frame;
+  while (!buffers.empty()) {
+    delete buffers.front();
+    buffers.pop();
   }
+
+  waitQueue.clear();
+  m_timecodes.clear();
 }
 
 void M2VParser::StampFrame(MPEGFrame* frame){
@@ -248,7 +251,8 @@ void M2VParser::UpdateFrame(MPEGFrame* frame){
 
 int32_t M2VParser::OrderFrame(MPEGFrame* frame){
   MPEGFrame *p = frame;
-  bool flushQueue = false;
+
+  // mxinfo(boost::format("picStr %1% frame type %2% qt tc %3%\n") % p->timecode % static_cast<int>(p->pictureStructure) % p->frameType);
 
   if (waitSecondField && (p->pictureStructure == MPEG2_PICTURE_TYPE_FRAME)){
     auto error = Y("Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n");
@@ -257,84 +261,36 @@ int32_t M2VParser::OrderFrame(MPEGFrame* frame){
     mxerror(error);
   }
 
-  /* While the refs of a frame are set in SetFrameRef, the actual final timecodes are possibly derived later.
-   * Based on display order, a dependent frame (below: "DEP") can be located after or before a ref frame (below: "REF").
-   * This leads to the following behaviour:
-   *
-   * ***** case "after"  => REF takes branch 1 below *****
-   * - REF: ShoveRef/StampFrame set both frame pointer and timecode at M2VParser::refs.
-   * - DEP: SetFrameRef already derives the timecode.
-   *
-   * ***** case "before" => REF takes branch 2 below *****
-   * - REF: ShoveRef sets the frame pointer at M2VParser::refs.
-   * - DEP: SetFrameRef derives that pointer in the first place.
-   * Later, while queue flushing:
-   * - REF: StampFrame sets the timecode.
-   * - DEP: UpdateFrame derives the timecode via frame pointer.
-   * The queue frames are in decoding order, therefore DEP's UpdateFrame happens before REF's StampFrame.
-   * In addition, tmpForwardQueue ensures that the pointed to ref frame is still available.
-   */
   SetFrameRef(p);
   ShoveRef(p);
 
-  /*
-   * Process incoming frames (being in decoding order) and ensure correct stamping (in display order) - output again happens in decoding order.
-   * - branch 1: not waiting; forward frame, which has consecutive sequence number
-   * - branch 2: not waiting;   queue frame, which has preceding frames (regarding display order) + start waiting for that intermediate frames
-   * - branch 3:     waiting:   queue frame (if last intermediate frame, finish waiting by invoking flush)
-   * - branch 4:     waiting;   queue frame - sequence number beyond expected range (this can only occur at defective streams!)
-   */
-  if ((p->timecode == queueTime) && waitQueue.empty()) {       // branch 1
-    if ((p->pictureStructure == MPEG2_PICTURE_TYPE_FRAME) || waitSecondField)
-      queueTime++;
-    StampFrame(p);
-    UpdateFrame(p);
-    buffers.push(p);
-  } else if ((p->timecode > queueTime) && waitQueue.empty()) { // branch 2
-    waitExpectedTime = p->timecode - 1;
-    waitQueue.push(p);
-  } else if (p->timecode <= waitExpectedTime) {                // branch 3
-    if ((p->timecode == waitExpectedTime) && ((p->pictureStructure == MPEG2_PICTURE_TYPE_FRAME) || waitSecondField))
-      flushQueue = true;
-    StampFrame(p);
-    waitQueue.push(p);
-  } else                                                       // branch 4
-    waitQueue.push(p);
+  if (('I' == p->frameType) && !waitQueue.empty())
+    TimestampWaitingFrames();
 
-  if(flushQueue){
-    int i,l;
-    waitSecondField = false;
-
-    l = waitQueue.size();
-    for(i=0;i<l;i++){
-      p = waitQueue.front();
-      waitQueue.pop();
-      if(!p->stamped) {
-        StampFrame(p);
-      }
-      UpdateFrame(p);
-
-      // temporarily cache all frames, to ensure that all needed ref frames are still available while UpdateFrame (see above)
-      tmpForwardQueue.push(p);
-    }
-    for (i = 0; i < l; i++) {
-      p = tmpForwardQueue.front();
-      tmpForwardQueue.pop();
-
-      if((p->pictureStructure == MPEG2_PICTURE_TYPE_FRAME) || waitSecondField){
-        queueTime++;
-      }
-      if(p->pictureStructure != MPEG2_PICTURE_TYPE_FRAME)
-        waitSecondField = !waitSecondField;
-
-      buffers.push(p);
-    }
-    waitSecondField = false;
-  }else if (p->pictureStructure != MPEG2_PICTURE_TYPE_FRAME){
-    waitSecondField = !waitSecondField;
-  }
+  waitQueue.push_back(p);
 
   return 0;
+}
+
+void
+M2VParser::TimestampWaitingFrames() {
+  // mxinfo(boost::format("  flushing %1%\n") % waitQueue.size());
+
+  for (std::size_t idx = 0, numFrames = waitQueue.size(); idx < numFrames; ++idx)
+    waitQueue[idx]->decodingOrder = idx;
+
+  brng::sort(waitQueue, [](MPEGFrame *a, MPEGFrame *b) { return a->timecode < b->timecode; });
+
+  for (auto const &frame : waitQueue)
+    StampFrame(frame);
+  for (auto const &frame : waitQueue)
+    UpdateFrame(frame);
+
+  brng::sort(waitQueue, [](MPEGFrame *a, MPEGFrame *b) { return a->decodingOrder < b->decodingOrder; });
+
+  for (auto const &frame : waitQueue)
+    buffers.push(frame);
+  waitQueue.clear();
 }
 
 int32_t M2VParser::PrepareFrame(MPEGChunk* chunk, MediaTime timecode, MPEG2PictureHeader picHdr){

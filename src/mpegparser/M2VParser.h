@@ -61,6 +61,7 @@ public:
   MediaTime duration;
   char frameType;
   MediaTime timecode; // before stamping: sequence number; after stamping: real timecode
+  unsigned int decodingOrder;
   MediaTime refs[2];
   MPEGFrameRef tmpRefs[2];
   bool stamped;
@@ -78,8 +79,7 @@ public:
 class M2VParser {
 private:
   std::vector<MPEGChunk*> chunks; //Hold the chunks until we can order them
-  std::queue<MPEGFrame*> waitQueue; //Holds unstamped buffers until we can stamp them.
-  std::queue<MPEGFrame*> tmpForwardQueue; //Temporarily holds stamped buffers until we can forward them.
+  std::vector<MPEGFrame*> waitQueue; //Holds unstamped buffers until we can stamp them.
   std::queue<MPEGFrame*> buffers; //Holds stamped buffers until they are requested.
   MediaTime previousTimecode;
   MediaTime previousDuration;
@@ -87,7 +87,6 @@ private:
   MPEGChunk* seqHdrChunk, *gopChunk;
   MPEG2SequenceHeader m_seqHdr; //current sequence header
   MPEG2GOPHeader m_gopHdr; //current GOP header
-  MediaTime queueTime;
   MediaTime waitExpectedTime;
   bool      waitSecondField;
   bool      probing;
@@ -168,6 +167,8 @@ public:
   void AddTimecode(int64_t timecode);
 
   void SetThrowOnError(bool doThrow);
+
+  void TimestampWaitingFrames();
 };
 
 

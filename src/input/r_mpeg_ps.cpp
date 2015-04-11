@@ -602,19 +602,26 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
 
   bool found_i_frame       = false;
   bool found_non_b_frame   = false;
+  bool flushed             = false;
   MPEG2SequenceHeader seq_hdr;
 
   while (   (MPV_PARSER_STATE_EOS   != state)
          && (MPV_PARSER_STATE_ERROR != state)
          && (PS_PROBE_SIZE >= m_in->getFilePointer())) {
-    if (!find_next_packet_for_id(id, PS_PROBE_SIZE))
+    if (find_next_packet_for_id(id, PS_PROBE_SIZE)) {
+      auto packet = parse_packet(id);
+      if (!packet)
+        break;
+
+      m2v_parser->WriteData(packet.m_buffer->get_buffer(), packet.m_length);
+
+    } else if (flushed)
       break;
 
-    auto packet = parse_packet(id);
-    if (!packet)
-      break;
-
-    m2v_parser->WriteData(packet.m_buffer->get_buffer(), packet.m_length);
+    else {
+      m2v_parser->SetEOS();
+      flushed = true;
+    }
 
     state = m2v_parser->GetState();
 
