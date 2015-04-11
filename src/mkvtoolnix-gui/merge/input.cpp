@@ -104,12 +104,6 @@ Tab::setupInputControls() {
   for (auto const &control : m_comboBoxControls)
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-  // Connect signals & slots.
-  connect(ui->files->selectionModel(),  SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onFileSelectionChanged()));
-  connect(ui->files->selectionModel(),  SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), m_filesModel,  SLOT(updateSelectionStatus()));
-  connect(ui->tracks->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onTrackSelectionChanged()));
-  connect(ui->tracks->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), m_tracksModel, SLOT(updateSelectionStatus()));
-
   // "files" context menu
   ui->files->addAction(m_addFilesAction);
   ui->files->addAction(m_appendFilesAction);
@@ -117,11 +111,18 @@ Tab::setupInputControls() {
   ui->files->addAction(m_removeFilesAction);
   ui->files->addAction(m_removeAllFilesAction);
 
-  connect(m_addFilesAction,           SIGNAL(triggered()), this, SLOT(onAddFiles()));
-  connect(m_appendFilesAction,        SIGNAL(triggered()), this, SLOT(onAppendFiles()));
-  connect(m_addAdditionalPartsAction, SIGNAL(triggered()), this, SLOT(onAddAdditionalParts()));
-  connect(m_removeFilesAction,        SIGNAL(triggered()), this, SLOT(onRemoveFiles()));
-  connect(m_removeAllFilesAction,     SIGNAL(triggered()), this, SLOT(onRemoveAllFiles()));
+  // Connect signals & slots.
+  connect(ui->files,                    &Util::BasicTreeView::filesDropped,     this,          &Tab::addOrAppendDroppedFiles);
+  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged, this,          &Tab::onFileSelectionChanged);
+  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged, m_filesModel,  &SourceFileModel::updateSelectionStatus);
+  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged, this,          &Tab::onTrackSelectionChanged);
+  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged, m_tracksModel, &TrackModel::updateSelectionStatus);
+
+  connect(m_addFilesAction,             &QAction::triggered,                    this,          &Tab::onAddFiles);
+  connect(m_appendFilesAction,          &QAction::triggered,                    this,          &Tab::onAppendFiles);
+  connect(m_addAdditionalPartsAction,   &QAction::triggered,                    this,          &Tab::onAddAdditionalParts);
+  connect(m_removeFilesAction,          &QAction::triggered,                    this,          &Tab::onRemoveFiles);
+  connect(m_removeAllFilesAction,       &QAction::triggered,                    this,          &Tab::onRemoveAllFiles);
 
   onTrackSelectionChanged();
 }
