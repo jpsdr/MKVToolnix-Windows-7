@@ -27,7 +27,7 @@ Tool::Tool(QWidget *parent,
   : ToolBase{parent}
   , ui{new Ui::Tool}
   , m_chapterEditorMenu{chapterEditorMenu}
-  , m_fileDDHandler{Util::FilesDragDropHandler::Mode::Remember}
+  , m_filesDDHandler{Util::FilesDragDropHandler::Mode::Remember}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -110,13 +110,13 @@ Tool::newFile() {
 
 void
 Tool::dragEnterEvent(QDragEnterEvent *event) {
-  m_fileDDHandler.handle(event);
+  m_filesDDHandler.handle(event, false);
 }
 
 void
 Tool::dropEvent(QDropEvent *event) {
-  if (m_fileDDHandler.handle(event))
-    filesDropped(m_fileDDHandler.getFileNames());
+  if (m_filesDDHandler.handle(event, true))
+    filesDropped(m_filesDDHandler.fileNames());
 }
 
 void

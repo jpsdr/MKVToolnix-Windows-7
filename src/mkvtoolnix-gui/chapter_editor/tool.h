@@ -25,7 +25,7 @@ protected:
   // UI stuff:
   std::unique_ptr<Ui::Tool> ui;
   QMenu *m_chapterEditorMenu;
-  mtx::gui::Util::FilesDragDropHandler m_fileDDHandler;
+  mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
 
 public:
   explicit Tool(QWidget *parent, QMenu *chapterEditorMenu);

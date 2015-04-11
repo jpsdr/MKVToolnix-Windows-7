@@ -25,8 +25,8 @@ protected:
 public:
   FilesDragDropHandler(Mode mode);
 
-  bool handle(QDropEvent *event);
-  QStringList const & getFileNames() const;
+  bool handle(QDropEvent *event, bool isDrop);
+  QStringList const & fileNames() const;
 };
 
 }}}

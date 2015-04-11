@@ -4,7 +4,6 @@
 
 #include "common/extern_data.h"
 #include "common/qt.h"
-#include "mkvtoolnix-gui/merge/attachments_tree_view.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -16,6 +15,8 @@ using namespace mtx::gui;
 
 void
 Tab::setupAttachmentsControls() {
+  ui->attachments->acceptDroppedFiles(true);
+
   ui->attachments->setModel(m_attachmentsModel);
   ui->splitMaxFiles->setMaximum(std::numeric_limits<int>::max());
 
@@ -35,7 +36,7 @@ Tab::setupAttachmentsControls() {
   ui->attachmentStyle   ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   // Signals & slots
-  connect(ui->attachments,                   &AttachmentsTreeView::filesDropped,                                       this, &Tab::addAttachments);
+  connect(ui->attachments,                   &Util::BasicTreeView::filesDropped,                                       this, &Tab::addAttachments);
   connect(ui->attachments->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onAttachmentSelectionChanged()));
   connect(m_addAttachmentsAction,            SIGNAL(triggered()),                                                      this, SLOT(onAddAttachments()));
   connect(m_removeAttachmentsAction,         SIGNAL(triggered()),                                                      this, SLOT(onRemoveAttachments()));

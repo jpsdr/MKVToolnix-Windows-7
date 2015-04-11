@@ -55,7 +55,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QTreeView" name="files">
+             <widget class="mtx::gui::Util::BasicTreeView" name="files">
               <property name="minimumSize">
                <size>
                 <width>370</width>
@@ -103,7 +103,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QTreeView" name="tracks">
+             <widget class="mtx::gui::Util::BasicTreeView" name="tracks">
               <property name="contextMenuPolicy">
                <enum>Qt::CustomContextMenu</enum>
               </property>
@@ -1221,7 +1221,7 @@
         </widget>
        </item>
        <item>
-        <widget class="mtx::gui::Merge::AttachmentsTreeView" name="attachments">
+        <widget class="mtx::gui::Util::BasicTreeView" name="attachments">
          <property name="contextMenuPolicy">
           <enum>Qt::ActionsContextMenu</enum>
          </property>
@@ -1383,9 +1383,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>mtx::gui::Merge::AttachmentsTreeView</class>
+   <class>mtx::gui::Util::BasicTreeView</class>
    <extends>QTreeView</extends>
-   <header>mkvtoolnix-gui/merge/attachments_tree_view.h</header>
+   <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

@@ -14,19 +14,20 @@ FilesDragDropHandler::FilesDragDropHandler(Mode mode)
 }
 
 bool
-FilesDragDropHandler::handle(QDropEvent *event) {
+FilesDragDropHandler::handle(QDropEvent *event,
+                             bool isDrop) {
   event->ignore();
 
   if (!event->mimeData()->hasUrls())
     return false;
 
-  if (Mode::Remember == m_mode)
+  if (isDrop && (Mode::Remember == m_mode))
     m_fileNames = QStringList{};
 
   for (auto const &url : event->mimeData()->urls())
     if (!url.isLocalFile())
       return false;
-    else if (Mode::Remember == m_mode)
+    else if (isDrop && (Mode::Remember == m_mode))
       m_fileNames << url.toLocalFile();
 
   if (Mode::Remember == m_mode)
@@ -36,7 +37,7 @@ FilesDragDropHandler::handle(QDropEvent *event) {
 }
 
 QStringList const &
-FilesDragDropHandler::getFileNames()
+FilesDragDropHandler::fileNames()
   const {
   return m_fileNames;
 }
