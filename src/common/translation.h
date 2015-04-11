@@ -37,7 +37,7 @@ public:
                 int language_id,
                 int sub_language_id);
 
-  std::string get_locale();
+  std::string get_locale() const;
 
   static void initialize_available_translations();
   static int look_up_translation(const std::string &locale);

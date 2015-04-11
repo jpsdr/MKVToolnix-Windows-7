@@ -171,7 +171,8 @@ translation_c::get_default_ui_locale() {
 }
 
 std::string
-translation_c::get_locale() {
+translation_c::get_locale()
+  const {
 #if defined(SYS_WINDOWS)
   return m_windows_locale;
 #else
