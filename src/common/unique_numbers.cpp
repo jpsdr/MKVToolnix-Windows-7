@@ -13,11 +13,13 @@
 
 #include "common/common_pch.h"
 
+#include "common/container.h"
 #include "common/hacks.h"
 #include "common/random.h"
 #include "common/unique_numbers.h"
 
 static std::vector<uint64_t> s_random_unique_numbers[4];
+static std::unordered_map<unique_id_category_e, bool, mtx::hash<unique_id_category_e>> s_ignore_unique_numbers;
 
 static void
 assert_valid_category(unique_id_category_e category) {
@@ -41,6 +43,9 @@ is_unique_number(uint64_t number,
                  unique_id_category_e category) {
   assert_valid_category(category);
 
+  if (s_ignore_unique_numbers[category])
+    return true;
+
   if (hack_engaged(ENGAGE_NO_VARIABLE_DATA))
     return true;
 
@@ -63,6 +68,7 @@ void
 remove_unique_number(uint64_t number,
                      unique_id_category_e category) {
   assert_valid_category(category);
+
   boost::remove_erase_if(s_random_unique_numbers[category], [=](uint64_t stored_number) { return number == stored_number; });
 }
 
@@ -82,4 +88,10 @@ create_unique_number(unique_id_category_e category) {
   add_unique_number(random_number, category);
 
   return random_number;
+}
+
+void
+ignore_unique_numbers(unique_id_category_e category) {
+  assert_valid_category(category);
+  s_ignore_unique_numbers[category] = true;
 }

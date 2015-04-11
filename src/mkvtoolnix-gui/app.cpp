@@ -6,6 +6,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
+#include "common/unique_numbers.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -20,6 +21,12 @@ App::App(int &argc,
   : QApplication{argc, argv}
 {
   mtx_common_init("mkvtoolnix-gui", argv[0]);
+
+  // The routines for handling unique numbers cannot cope with
+  // multiple chapters being worked on at the same time as they safe
+  // already-used numbers in one static container. So just disable them.
+  ignore_unique_numbers(UNIQUE_CHAPTER_IDS);
+  ignore_unique_numbers(UNIQUE_EDITION_IDS);
 
   QCoreApplication::setOrganizationName("bunkus.org");
   QCoreApplication::setOrganizationDomain("bunkus.org");
