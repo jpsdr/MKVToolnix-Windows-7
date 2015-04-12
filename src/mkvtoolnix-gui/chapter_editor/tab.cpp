@@ -68,10 +68,7 @@ Tab::setupUi() {
   ui->cbChNameCountry ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   Util::setupLanguageComboBox(*ui->cbChNameLanguage);
-
-  auto &countryCodes = App::getIso3166_1Alpha2CountryCodes();
-  ui->cbChNameCountry->addItem(Q(""));
-  ui->cbChNameCountry->addItems(countryCodes);
+  Util::setupCountryComboBox(*ui->cbChNameCountry, Q(""), true);
 
   m_nameWidgets << ui->pbChRemoveName
                 << ui->lChName         << ui->leChName
@@ -696,7 +693,7 @@ Tab::chapterNameCountryChanged(int index) {
     if (0 == index)
       DeleteChildren<KaxChapterCountry>(display);
     else
-      GetChild<KaxChapterCountry>(display).SetValue(to_utf8(ui->cbChNameCountry->currentText()));
+      GetChild<KaxChapterCountry>(display).SetValue(to_utf8(ui->cbChNameCountry->currentData().toString()));
     m_nameModel->updateRow(idx.row());
   });
 }

@@ -113,10 +113,10 @@ chapter_values_dlg::chapter_values_dlg(wxWindow *parent)
   append_combobox_items(cob_language, sorted_iso_codes);
 
   auto entries = wxArrayString{};
-  entries.Alloc(cctlds.size() + 1);
+  entries.Alloc(g_cctlds.size() + 1);
   entries.Add(wxEmptyString);
-  for (auto &cctld : cctlds)
-    entries.Add(wxU(cctld));
+  for (auto &cctld : g_cctlds)
+    entries.Add(wxU(cctld.code));
   append_combobox_items(cob_country, entries);
 
   auto siz_buttons = new wxBoxSizer(wxHORIZONTAL);
@@ -299,10 +299,10 @@ tab_chapters::tab_chapters(wxWindow *parent,
   cob_country_code = new wxMTX_COMBOBOX_TYPE(this, ID_CB_CHAPTERSELECTCOUNTRYCODE, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, nullptr, wxCB_DROPDOWN | wxCB_READONLY);
 
   auto entries     = wxArrayString{};
-  entries.Alloc(cctlds.size() + 1);
+  entries.Alloc(g_cctlds.size() + 1);
   entries.Add(wxEmptyString);
-  for (auto &cctld : cctlds)
-    entries.Add(wxU(cctld));
+  for (auto &cctld : g_cctlds)
+    entries.Add(wxU(cctld.code));
   append_combobox_items(cob_country_code, entries);
 
   cob_country_code->SetValue(wxEmptyString);

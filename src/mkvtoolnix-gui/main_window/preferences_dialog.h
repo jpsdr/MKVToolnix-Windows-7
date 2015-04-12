@@ -55,9 +55,10 @@ protected:
   void setupDefaultSubtitleCharset();
   void setupPlaylistScanningPolicy();
   void setupOutputFileNamePolicy();
-  void setupDefaultChapterCountry();
 
   void moveSelectedListWidgetItems(QListWidget &from, QListWidget &to);
+
+  void saveCommonList(QListWidget &from, QStringList &to);
 };
 
 }}

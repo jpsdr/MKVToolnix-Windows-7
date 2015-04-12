@@ -27,7 +27,13 @@ struct mime_type_t {
   }
 };
 
-extern std::vector<std::string> const sub_charsets, cctlds;
+struct iso3166_1alpha_2_t {
+  std::string code, country;
+};
+
+extern std::vector<std::string> const sub_charsets;
+extern std::vector<iso3166_1alpha_2_t> const g_cctlds;
+extern std::vector<std::string> const g_popular_country_codes;
 extern std::vector<mime_type_t> const mime_types;
 
 std::string guess_mime_type(std::string ext, bool is_file);

@@ -33,8 +33,11 @@ findPtr(Tstored *needle,
 QIcon loadIcon(QString const &name, QList<int> const &sizes);
 bool setComboBoxIndexIf(QComboBox *comboBox, std::function<bool(QString const &, QVariant const &)> test);
 bool setComboBoxTextByData(QComboBox *comboBox, QString const &data);
-int setupLanguageComboBox(QComboBox &comboBox, QStringList const &initiallySelected = {}, bool withEmpty = false, QString const &emptyTitle = {});
-int setupLanguageComboBox(QComboBox &comboBox, QString const &initiallySelected, bool withEmpty = false, QString const &emptyTitle = {});
+
+void setupLanguageComboBox(QComboBox &comboBox, QStringList const &initiallySelected = {}, bool withEmpty = false, QString const &emptyTitle = {});
+void setupLanguageComboBox(QComboBox &comboBox, QString const &initiallySelected, bool withEmpty = false, QString const &emptyTitle = {});
+void setupCountryComboBox(QComboBox &comboBox, QStringList const &initiallySelected = {}, bool withEmpty = false, QString const &emptyTitle = {});
+void setupCountryComboBox(QComboBox &comboBox, QString const &initiallySelected, bool withEmpty = false, QString const &emptyTitle = {});
 
 void enableWidgets(QList<QWidget *> const &widgets, bool enable);
 QPushButton *buttonForRole(QDialogButtonBox *box, QDialogButtonBox::ButtonRole role = QDialogButtonBox::AcceptRole);

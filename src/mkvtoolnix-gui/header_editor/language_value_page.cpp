@@ -34,7 +34,8 @@ LanguageValuePage::createInputControl() {
   m_cbValue->setFrame(true);
   m_cbValue->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
 
-  m_originalValueIdx = Util::setupLanguageComboBox(*m_cbValue, QStringList{} << Q(m_originalValue) << Q("und"));
+  Util::setupLanguageComboBox(*m_cbValue, QStringList{} << Q(m_originalValue) << Q("und"));
+  m_originalValueIdx = m_cbValue->currentIndex();
 
   return m_cbValue;
 }

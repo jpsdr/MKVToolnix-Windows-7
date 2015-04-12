@@ -12,6 +12,7 @@
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/app.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -45,41 +46,64 @@ setComboBoxTextByData(QComboBox *comboBox,
   return setComboBoxIndexIf(comboBox, [&data](QString const &, QVariant const &itemData) { return itemData.isValid() && (itemData.toString() == data); });
 }
 
-int
+void
 setupLanguageComboBox(QComboBox &comboBox,
                       QStringList const &initiallySelected,
                       bool withEmpty,
                       QString const &emptyTitle) {
-  auto initialIdx = -1;
-  for (auto const &language : initiallySelected) {
-    if (language.isEmpty())
-      continue;
-
-    initialIdx = App::indexOfLanguage(language);
-    if (-1 != initialIdx)
-      break;
-  }
-
   if (withEmpty)
     comboBox.addItem(emptyTitle);
 
   for (auto const &language : App::getIso639Languages())
     comboBox.addItem(language.first, language.second);
 
-  if (-1 != initialIdx)
-    comboBox.setCurrentIndex(initialIdx);
+  auto &cfg = Settings::get();
+  if (!cfg.m_oftenUsedLanguages.isEmpty())
+    comboBox.insertSeparator(cfg.m_oftenUsedLanguages.count() + (withEmpty ? 1 : 0));
 
   comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-  return initialIdx;
+  for (auto const &value : initiallySelected)
+    if (setComboBoxTextByData(&comboBox, value))
+      return;
 }
 
-int
+void
 setupLanguageComboBox(QComboBox &comboBox,
                       QString const &initiallySelected,
                       bool withEmpty,
                       QString const &emptyTitle) {
-  return setupLanguageComboBox(comboBox, QStringList{} << initiallySelected, withEmpty, emptyTitle);
+  setupLanguageComboBox(comboBox, QStringList{} << initiallySelected, withEmpty, emptyTitle);
+}
+
+void
+setupCountryComboBox(QComboBox &comboBox,
+                      QStringList const &initiallySelected,
+                      bool withEmpty,
+                      QString const &emptyTitle) {
+  if (withEmpty)
+    comboBox.addItem(emptyTitle);
+
+  for (auto const &country : App::getIso3166_1Alpha2Countries())
+    comboBox.addItem(country.first, country.second);
+
+  auto &cfg = Settings::get();
+  if (!cfg.m_oftenUsedCountries.isEmpty())
+    comboBox.insertSeparator(cfg.m_oftenUsedCountries.count() + (withEmpty ? 1 : 0));
+
+  comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
+  for (auto const &value : initiallySelected)
+    if (setComboBoxTextByData(&comboBox, value))
+      return;
+}
+
+void
+setupCountryComboBox(QComboBox &comboBox,
+                      QString const &initiallySelected,
+                      bool withEmpty,
+                      QString const &emptyTitle) {
+  setupCountryComboBox(comboBox, QStringList{} << initiallySelected, withEmpty, emptyTitle);
 }
 
 void

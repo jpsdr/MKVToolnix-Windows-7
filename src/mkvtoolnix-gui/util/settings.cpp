@@ -1,6 +1,8 @@
 #include "common/common_pch.h"
 
+#include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
+#include "common/iso639.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -42,6 +44,9 @@ Settings::load() {
   m_lastConfigDir             = QDir{reg.value("lastConfigDir").toString()};
   m_lastMatroskaFileDir       = QDir{reg.value("lastMatroskaFileDir").toString()};
 
+  m_oftenUsedLanguages        = reg.value("oftenUsedLanguages").toStringList();
+  m_oftenUsedCountries        = reg.value("oftenUsedCountries").toStringList();
+
   m_scanForPlaylistsPolicy    = static_cast<ScanForPlaylistsPolicy>(reg.value("scanForPlaylistsPolicy", static_cast<int>(AskBeforeScanning)).toInt());
   m_minimumPlaylistDuration   = reg.value("minimumPlaylistDuration", 120).toUInt();
 
@@ -63,6 +68,14 @@ Settings::load() {
   m_defaultChapterLanguage = reg.value("defaultChapterLanguage", Q("und")).toString();
   m_defaultChapterCountry  = reg.value("defaultChapterCountry").toString();
   reg.endGroup();               // defaults
+
+  if (m_oftenUsedLanguages.isEmpty())
+    for (auto const &languageCode : g_popular_language_codes)
+      m_oftenUsedLanguages << Q(languageCode);
+
+  if (m_oftenUsedCountries.isEmpty())
+    for (auto const &countryCode : g_popular_country_codes)
+      m_oftenUsedCountries << Q(countryCode);
 }
 
 QString
@@ -83,6 +96,9 @@ Settings::save()
   reg.setValue("lastOutputDir",             m_lastOutputDir.path());
   reg.setValue("lastConfigDir",             m_lastConfigDir.path());
   reg.setValue("lastMatroskaFileDir",       m_lastMatroskaFileDir.path());
+
+  reg.setValue("oftenUsedLanguages",        m_oftenUsedLanguages);
+  reg.setValue("oftenUsedCountries",        m_oftenUsedCountries);
 
   reg.setValue("scanForPlaylistsPolicy",    static_cast<int>(m_scanForPlaylistsPolicy));
   reg.setValue("minimumPlaylistDuration",   m_minimumPlaylistDuration);

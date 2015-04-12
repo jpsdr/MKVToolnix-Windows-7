@@ -53,10 +53,10 @@ optdlg_chapters_tab::optdlg_chapters_tab(wxWindow *parent,
   }
 
   auto ary = wxArrayString{};
-  ary.Alloc(cctlds.size() + 1);
+  ary.Alloc(g_cctlds.size() + 1);
   ary.Add(wxEmptyString);
-  for (auto &cctld : cctlds)
-    ary.Add(wxU(cctld));
+  for (auto &cctld : g_cctlds)
+    ary.Add(wxU(cctld.code));
 
   append_combobox_items(cob_country, ary);
   set_combobox_selection(cob_country, wxU(g_default_chapter_country));

@@ -38,7 +38,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 
   // Chapter editor page
   Util::setupLanguageComboBox(*ui->cbCEDefaultLanguage, m_cfg.m_defaultChapterLanguage);
-  setupDefaultChapterCountry();
+  Util::setupCountryComboBox(*ui->cbCEDefaultCountry, m_cfg.m_defaultChapterCountry, true, QY("– no selection by default –"));
 
   // Force scroll bars on combo boxes with a high number of entries.
   ui->cbMDefaultSubtitleCharset->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -111,13 +111,16 @@ PreferencesDialog::setupJobsJobOutput() {
 void
 PreferencesDialog::setupCommonLanguages() {
   auto &languages = App::getIso639Languages();
+  auto isCommon   = QHash<QString, bool>{};
+
+  for (auto const &language : m_cfg.m_oftenUsedLanguages)
+    isCommon[language] = true;
 
   for (auto const &language : languages) {
-    auto isCommon = false;      // TODO: auto isCommon = true;
-    auto item     = new QListWidgetItem{language.first};
+    auto item = new QListWidgetItem{language.first};
 
     item->setData(Qt::UserRole, language.second);
-    if (isCommon)
+    if (isCommon[language.second])
       ui->lwGuiSelectedCommonLanguages->addItem(item);
     else
       ui->lwGuiAvailableCommonLanguages->addItem(item);
@@ -129,14 +132,17 @@ PreferencesDialog::setupCommonLanguages() {
 
 void
 PreferencesDialog::setupCommonCountries() {
-  auto &countryCodes = App::getIso3166_1Alpha2CountryCodes();
+  auto &countries = App::getIso3166_1Alpha2Countries();
+  auto isCommon   = QHash<QString, bool>{};
 
-  for (auto const &countryCode : countryCodes) {
-    auto isCommon = false;      // TODO: auto isCommon = true;
-    auto item     = new QListWidgetItem{countryCode};
+  for (auto const &country : m_cfg.m_oftenUsedCountries)
+    isCommon[country] = true;
 
-    item->setData(Qt::UserRole, countryCode);
-    if (isCommon)
+  for (auto const &country : countries) {
+    auto item = new QListWidgetItem{country.first};
+
+    item->setData(Qt::UserRole, country.second);
+    if (isCommon[country.second])
       ui->lwGuiSelectedCommonCountries->addItem(item);
     else
       ui->lwGuiAvailableCommonCountries->addItem(item);
@@ -197,22 +203,13 @@ PreferencesDialog::setupOutputFileNamePolicy() {
 }
 
 void
-PreferencesDialog::setupDefaultChapterCountry() {
-  auto &countryCodes = App::getIso3166_1Alpha2CountryCodes();
-
-  ui->cbCEDefaultCountry->addItem(QY("– no selection by default –")); // TODO: ui->cbCEDefaultCountry->addItem(QY("– no selection by default –")); set current
-  for (auto const &countryCode : countryCodes)
-    ui->cbCEDefaultCountry->addItem(countryCode, countryCode);
-
-  Util::setComboBoxTextByData(ui->cbCEDefaultCountry, m_cfg.m_defaultChapterCountry);
-}
-
-void
 PreferencesDialog::save() {
   // TODO: PreferencesDialog::save
 
   // GUI page:
   m_cfg.m_checkForUpdates           = ui->cbGuiCheckForUpdates->isChecked();
+  saveCommonList(*ui->lwGuiSelectedCommonLanguages, m_cfg.m_oftenUsedLanguages);
+  saveCommonList(*ui->lwGuiSelectedCommonCountries, m_cfg.m_oftenUsedCountries);
 
   // Merge page:
   m_cfg.m_autoSetFileTitle          = ui->cbMAutoSetFileTitle->isChecked();
@@ -236,6 +233,15 @@ PreferencesDialog::save() {
   m_cfg.m_defaultChapterCountry     = ui->cbCEDefaultCountry->currentData().toString();
 
   // TODO: PreferencesDialog::save actually save
+}
+
+void
+PreferencesDialog::saveCommonList(QListWidget &from,
+                                  QStringList &to) {
+  to.clear();
+
+  for (auto row = 0, numRows = from.count(); row < numRows; ++row)
+    to << from.item(row)->data(Qt::UserRole).toString();
 }
 
 void

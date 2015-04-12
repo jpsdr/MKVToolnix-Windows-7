@@ -14,7 +14,7 @@
 namespace mtx { namespace gui {
 
 static Iso639LanguageList s_iso639Languages;
-static QStringList s_iso3166_1Alpha2CountryCodes;
+static Iso3166CountryList s_iso3166_1Alpha2Countries;
 static boost::optional<bool> s_is_installed;
 
 App::App(int &argc,
@@ -66,7 +66,7 @@ App::retranslateUi() {
 void
 App::reinitializeLanguageLists() {
   s_iso639Languages.clear();
-  s_iso3166_1Alpha2CountryCodes.clear();
+  s_iso3166_1Alpha2Countries.clear();
 
   initializeLanguageLists();
 }
@@ -76,17 +76,52 @@ App::initializeLanguageLists() {
   if (!s_iso639Languages.empty())
     return;
 
+  initializeIso639Languages();
+  initializeIso3166_1Alpha2Countries();
+}
+
+void
+App::initializeIso639Languages() {
+  using LanguageSorter = std::tuple<int, QString, QString>;
+  auto toSort          = std::vector<LanguageSorter>{};
+  auto &cfg            = Util::Settings::get();
+
   s_iso639Languages.reserve(g_iso639_languages.size());
-  for (auto const &language : g_iso639_languages)
-    s_iso639Languages.emplace_back(Q("%1 (%2)").arg(Q(language.english_name)).arg(Q(language.iso639_2_code)), Q(language.iso639_2_code));
+  toSort.reserve(g_iso639_languages.size());
 
-  brng::sort(s_iso639Languages);
+  for (auto const &language : g_iso639_languages) {
+    auto languageCode = Q(language.iso639_2_code);
+    auto commonOrder  = cfg.m_oftenUsedLanguages.indexOf(languageCode) != -1 ? 0 : 1;
 
-  s_iso3166_1Alpha2CountryCodes.reserve(cctlds.size());
-  for (auto const &code : cctlds)
-    s_iso3166_1Alpha2CountryCodes << Q(code);
+    toSort.emplace_back(commonOrder, Q("%1 (%2)").arg(Q(language.english_name)).arg(languageCode), languageCode);
+  }
 
-  s_iso3166_1Alpha2CountryCodes.sort();
+  brng::sort(toSort);
+
+  for (auto const &languageSorter : toSort)
+    s_iso639Languages.emplace_back(std::get<1>(languageSorter), std::get<2>(languageSorter));
+}
+
+void
+App::initializeIso3166_1Alpha2Countries() {
+  using CountrySorter = std::tuple<int, QString, QString>;
+  auto toSort         = std::vector<CountrySorter>{};
+  auto &cfg           = Util::Settings::get();
+
+  s_iso3166_1Alpha2Countries.reserve(g_cctlds.size());
+  toSort.reserve(g_cctlds.size());
+
+  for (auto const &country : g_cctlds) {
+    auto countryCode = Q(country.code);
+    auto commonOrder = cfg.m_oftenUsedCountries.indexOf(countryCode) != -1 ? 0 : 1;
+
+    toSort.emplace_back(commonOrder, Q("%1 (%2)").arg(Q(country.country)).arg(countryCode), countryCode);
+  }
+
+  brng::sort(toSort);
+
+  for (auto const &countrySorter : toSort)
+    s_iso3166_1Alpha2Countries.emplace_back(std::get<1>(countrySorter), std::get<2>(countrySorter));
 }
 
 Iso639LanguageList const &
@@ -95,10 +130,10 @@ App::getIso639Languages() {
   return s_iso639Languages;
 }
 
-QStringList const &
-App::getIso3166_1Alpha2CountryCodes() {
+Iso3166CountryList const &
+App::getIso3166_1Alpha2Countries() {
   initializeLanguageLists();
-  return s_iso3166_1Alpha2CountryCodes;
+  return s_iso3166_1Alpha2Countries;
 }
 
 int
