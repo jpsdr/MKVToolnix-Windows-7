@@ -166,9 +166,9 @@
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
+                <y>-602</y>
                 <width>465</width>
-                <height>998</height>
+                <height>1027</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -611,37 +611,48 @@
                  <property name="title">
                   <string>Audio properties</string>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <layout class="QVBoxLayout" name="verticalLayout_12">
                   <item>
-                   <widget class="QLabel" name="aacIsSBRLabel">
-                    <property name="text">
-                     <string>AAC is SBR/HE-AAC/AAC+:</string>
-                    </property>
-                   </widget>
+                   <layout class="QHBoxLayout" name="horizontalLayout_3">
+                    <item>
+                     <widget class="QLabel" name="aacIsSBRLabel">
+                      <property name="text">
+                       <string>AAC is SBR/HE-AAC/AAC+:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="aacIsSBR">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>yes</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>no</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                   </layout>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="aacIsSBR">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
+                   <widget class="QCheckBox" name="reduceToAudioCore">
+                    <property name="text">
+                     <string>Reduce to core</string>
                     </property>
-                    <item>
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>yes</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>no</string>
-                     </property>
-                    </item>
                    </widget>
                   </item>
                  </layout>
@@ -1414,6 +1425,8 @@
   <tabstop>displayHeight</tabstop>
   <tabstop>stereoscopy</tabstop>
   <tabstop>cropping</tabstop>
+  <tabstop>aacIsSBR</tabstop>
+  <tabstop>reduceToAudioCore</tabstop>
   <tabstop>subtitleCharacterSet</tabstop>
   <tabstop>cues</tabstop>
   <tabstop>userDefinedTrackOptions</tabstop>
@@ -1513,7 +1526,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>174</y>
+     <y>-344</y>
     </hint>
     <hint type="destinationlabel">
      <x>613</x>
@@ -1528,8 +1541,8 @@
    <slot>onMuxThisChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>840</x>
-     <y>107</y>
+     <x>845</x>
+     <y>-381</y>
     </hint>
     <hint type="destinationlabel">
      <x>638</x>
@@ -1545,7 +1558,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>211</y>
+     <y>-307</y>
     </hint>
     <hint type="destinationlabel">
      <x>673</x>
@@ -1561,7 +1574,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>285</y>
+     <y>-233</y>
     </hint>
     <hint type="destinationlabel">
      <x>818</x>
@@ -1577,7 +1590,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>248</y>
+     <y>-270</y>
     </hint>
     <hint type="destinationlabel">
      <x>658</x>
@@ -1593,7 +1606,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>322</y>
+     <y>-196</y>
     </hint>
     <hint type="destinationlabel">
      <x>820</x>
@@ -1609,7 +1622,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>802</x>
-     <y>360</y>
+     <y>-158</y>
     </hint>
     <hint type="destinationlabel">
      <x>820</x>
@@ -1625,7 +1638,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>441</y>
+     <y>-77</y>
     </hint>
     <hint type="destinationlabel">
      <x>819</x>
@@ -1641,7 +1654,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>478</y>
+     <y>-40</y>
     </hint>
     <hint type="destinationlabel">
      <x>815</x>
@@ -1657,7 +1670,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>515</y>
+     <y>-3</y>
     </hint>
     <hint type="destinationlabel">
      <x>818</x>
@@ -1673,7 +1686,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>553</y>
+     <y>35</y>
     </hint>
     <hint type="destinationlabel">
      <x>817</x>
@@ -1689,7 +1702,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>361</y>
+     <y>-157</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1705,7 +1718,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>843</x>
-     <y>554</y>
+     <y>36</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1721,7 +1734,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>563</x>
-     <y>644</y>
+     <y>138</y>
     </hint>
     <hint type="destinationlabel">
      <x>557</x>
@@ -1737,7 +1750,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>563</x>
-     <y>694</y>
+     <y>176</y>
     </hint>
     <hint type="destinationlabel">
      <x>534</x>
@@ -1753,7 +1766,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>638</y>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
      <x>551</x>
@@ -1769,7 +1782,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>638</y>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1785,7 +1798,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>515</y>
+     <y>-3</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1801,7 +1814,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>697</x>
-     <y>699</y>
+     <y>181</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1817,7 +1830,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>699</y>
+     <y>181</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1833,7 +1846,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>737</y>
+     <y>219</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1849,7 +1862,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>774</y>
+     <y>256</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1865,7 +1878,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>900</y>
+     <y>441</y>
     </hint>
     <hint type="destinationlabel">
      <x>819</x>
@@ -1881,7 +1894,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>978</y>
+     <y>519</y>
     </hint>
     <hint type="destinationlabel">
      <x>818</x>
@@ -1897,7 +1910,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>1015</y>
+     <y>556</y>
     </hint>
     <hint type="destinationlabel">
      <x>819</x>
@@ -1912,8 +1925,8 @@
    <slot>onAacIsSBRChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>845</x>
-     <y>822</y>
+     <x>844</x>
+     <y>335</y>
     </hint>
     <hint type="destinationlabel">
      <x>815</x>
@@ -2248,8 +2261,8 @@
    <slot>onAttachmentNameEdited(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>115</x>
-     <y>88</y>
+     <x>205</x>
+     <y>449</y>
     </hint>
     <hint type="destinationlabel">
      <x>112</x>
@@ -2264,8 +2277,8 @@
    <slot>onAttachmentMIMETypeEdited(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>96</x>
-     <y>89</y>
+     <x>186</x>
+     <y>486</y>
     </hint>
     <hint type="destinationlabel">
      <x>90</x>
@@ -2280,8 +2293,8 @@
    <slot>onAttachmentMIMETypeEdited(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>96</x>
-     <y>89</y>
+     <x>186</x>
+     <y>486</y>
     </hint>
     <hint type="destinationlabel">
      <x>52</x>
@@ -2296,8 +2309,8 @@
    <slot>onAttachmentDescriptionEdited(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>115</x>
-     <y>88</y>
+     <x>634</x>
+     <y>449</y>
     </hint>
     <hint type="destinationlabel">
      <x>518</x>
@@ -2312,8 +2325,8 @@
    <slot>onAttachmentStyleChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>115</x>
-     <y>88</y>
+     <x>634</x>
+     <y>486</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
@@ -2360,8 +2373,8 @@
    <slot>resizeAttachmentsColumnsToContents()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>103</x>
-     <y>52</y>
+     <x>113</x>
+     <y>104</y>
     </hint>
     <hint type="destinationlabel">
      <x>629</x>
@@ -2425,11 +2438,27 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>583</y>
+     <y>65</y>
     </hint>
     <hint type="destinationlabel">
      <x>410</x>
      <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>reduceToAudioCore</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>mtx::gui::Merge::Tab</receiver>
+   <slot>onReduceAudioToCoreChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>739</x>
+     <y>353</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>895</x>
+     <y>346</y>
     </hint>
    </hints>
   </connection>
@@ -2501,5 +2530,6 @@
   <slot>resizeFilesColumnsToContents()</slot>
   <slot>resizeTracksColumnsToContents()</slot>
   <slot>onFixBitstreamTimingInfoChanged(bool)</slot>
+  <slot>onReduceAudioToCoreChanged(bool)</slot>
  </slots>
 </ui>

@@ -96,6 +96,7 @@ public slots:
   virtual void onStereoscopyChanged(int newValue);
   virtual void onCroppingEdited(QString newValue);
   virtual void onAacIsSBRChanged(int newValue);
+  virtual void onReduceAudioToCoreChanged(bool newValue);
   virtual void onSubtitleCharacterSetChanged(int newValue);
   virtual void onCuesChanged(int newValue);
   virtual void onUserDefinedTrackOptionsEdited(QString newValue);

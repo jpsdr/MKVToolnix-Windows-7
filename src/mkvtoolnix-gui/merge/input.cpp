@@ -32,7 +32,7 @@ Tab::setupControlLists() {
   m_audioControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag << ui->forcedTrackFlagLabel << ui->forcedTrackFlag
                   << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
                   << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timecodesLabel << ui->timecodes << ui->browseTimecodes << ui->audioPropertiesBox << ui->aacIsSBR << ui->cuesLabel << ui->cues
-                  << ui->propertiesLabel << ui->generalOptionsBox;
+                  << ui->propertiesLabel << ui->generalOptionsBox << ui->reduceToAudioCore;
 
   m_videoControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
                   << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
@@ -55,7 +55,7 @@ Tab::setupControlLists() {
                      << ui->picturePropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
                      << ui->stereoscopy << ui->croppingLabel << ui->cropping << ui->audioPropertiesBox << ui->aacIsSBR << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet
                      << ui->miscellaneousBox << ui->cuesLabel << ui->cues << ui->userDefinedTrackOptionsLabel << ui->userDefinedTrackOptions
-                     << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo;
+                     << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore;
 
   m_comboBoxControls << ui->muxThis << ui->trackLanguage << ui->defaultTrackFlag << ui->forcedTrackFlag << ui->compression << ui->cues << ui->stereoscopy << ui->aacIsSBR << ui->subtitleCharacterSet;
 }
@@ -249,6 +249,7 @@ Tab::setInputControlValues(Track *track) {
   ui->setAspectRatio->setChecked(        track->m_setAspectRatio);
   ui->setDisplayWidthHeight->setChecked(!track->m_setAspectRatio);
   ui->fixBitstreamTimingInfo->setChecked(track->m_fixBitstreamTimingInfo);
+  ui->reduceToAudioCore->setChecked(     track->m_reduceAudioToCore);
 
   m_currentlySettingInputControlValues = false;
 }
@@ -466,6 +467,11 @@ Tab::onAacIsSBRChanged(int newValue) {
   newValue = data.toInt();
 
   withSelectedTracks([&](Track *track) { track->m_aacIsSBR = newValue; }, true);
+}
+
+void
+Tab::onReduceAudioToCoreChanged(bool newValue) {
+  withSelectedTracks([&](Track *track) { track->m_reduceAudioToCore = newValue; });
 }
 
 void
