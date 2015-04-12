@@ -335,7 +335,7 @@ MuxConfig::buildMkvmergeOptions()
   //   options << Q("--ui-language") << settings.m_uiLocale;
 
   if (Util::Settings::NormalPriority != settings.m_priority)
-    options << Q("--prioriy") << settings.getPriorityAsString();
+    options << Q("--priority") << settings.getPriorityAsString();
 
   options << Q("--output") << m_destination;
 
