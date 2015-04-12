@@ -718,10 +718,14 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
   else if (Util::Settings::ToFixedDirectory == policy)
     outputDir = settings.m_fixedOutputDir;
 
-  else if (Util::Settings::ToParentOfFirstInputFile == policy)
+  else if (Util::Settings::ToSameAsFirstInputFile == policy)
     outputDir = srcFileName.absoluteDir();
 
-  else
+  else if (Util::Settings::ToParentOfFirstInputFile == policy) {
+    outputDir = srcFileName.absoluteDir();
+    outputDir.cdUp();
+
+  } else
     Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested output file name policy");
 
   if (!outputDir.exists())

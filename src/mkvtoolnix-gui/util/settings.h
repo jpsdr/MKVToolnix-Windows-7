@@ -34,6 +34,7 @@ public:
     ToPreviousDirectory,
     ToFixedDirectory,
     ToParentOfFirstInputFile,
+    ToSameAsFirstInputFile,
   };
 
   QString m_mkvmergeExe, m_defaultTrackLanguage;
