@@ -6,8 +6,6 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
-#include <QFileDialog>
-
 namespace mtx { namespace gui { namespace Merge {
 
 using namespace mtx::gui;
@@ -38,13 +36,14 @@ void
 Tab::onBrowseOutput() {
   auto filter   = m_config.m_webmMode ? QY("WebM files") + Q(" (*.webm)") : QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d)");
   auto fileName = getSaveFileName(QY("Select output file name"), filter, ui->output);
-  if (!fileName.isEmpty()) {
-    setDestination(fileName);
+  if (fileName.isEmpty())
+    return;
 
-    auto &settings         = Util::Settings::get();
-    settings.m_lastOutputDir = QFileInfo{ fileName }.absoluteDir();
-    settings.save();
-  }
+  setDestination(fileName);
+
+  auto &settings           = Util::Settings::get();
+  settings.m_lastOutputDir = QFileInfo{ fileName }.absoluteDir();
+  settings.save();
 }
 
 void
