@@ -624,11 +624,9 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
   if (!display)
     return false;
 
-  auto country = FindChild<KaxChapterCountry>(display);
-
   ui->leChName->setText(Q(GetChildValue<KaxChapterString>(display)));
   Util::setComboBoxTextByData(ui->cbChNameLanguage, Q(FindChildValue<KaxChapterLanguage>(display, std::string{"eng"})));
-  ui->cbChNameCountry->setCurrentText(country ? Q(country->GetValue()) : Q(""));
+  Util::setComboBoxTextByData(ui->cbChNameCountry,  Q(FindChildValue<KaxChapterCountry>(display)));
 
   resizeNameColumnsToContents();
 

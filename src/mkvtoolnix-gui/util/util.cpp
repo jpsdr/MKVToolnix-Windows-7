@@ -52,7 +52,7 @@ setupLanguageComboBox(QComboBox &comboBox,
                       bool withEmpty,
                       QString const &emptyTitle) {
   if (withEmpty)
-    comboBox.addItem(emptyTitle);
+    comboBox.addItem(emptyTitle, Q(""));
 
   for (auto const &language : App::iso639Languages())
     comboBox.addItem(language.first, language.second);
@@ -82,7 +82,7 @@ setupCountryComboBox(QComboBox &comboBox,
                       bool withEmpty,
                       QString const &emptyTitle) {
   if (withEmpty)
-    comboBox.addItem(emptyTitle);
+    comboBox.addItem(emptyTitle, Q(""));
 
   for (auto const &country : App::iso3166_1Alpha2Countries())
     comboBox.addItem(country.first, country.second);
