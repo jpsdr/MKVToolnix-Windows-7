@@ -46,7 +46,6 @@ Settings::load() {
   m_minimumPlaylistDuration   = reg.value("minimumPlaylistDuration", 120).toUInt();
 
   m_setAudioDelayFromFileName = reg.value("setAudioDelayFromFileName", true).toBool();
-  m_disableAVCompression      = reg.value("disableAVCompression",      false).toBool();
   m_autoSetFileTitle          = reg.value("autoSetFileTitle",          true).toBool();
 
   m_uniqueOutputFileNames     = reg.value("uniqueOutputFileNames",     true).toBool();
@@ -88,7 +87,6 @@ Settings::save()
 
   reg.setValue("setAudioDelayFromFileName", m_setAudioDelayFromFileName);
   reg.setValue("autoSetFileTitle",          m_autoSetFileTitle);
-  reg.setValue("disableAVCompression",      m_disableAVCompression);
 
   reg.setValue("outputFileNamePolicy",      static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("fixedOutputDir",            m_fixedOutputDir.path());

@@ -115,9 +115,6 @@ Track::setDefaults() {
   if (isAudio() && settings.m_setAudioDelayFromFileName)
     m_delay = extractAudioDelayFromFileName();
 
-  if (settings.m_disableAVCompression && (isVideo() || isAudio()))
-    m_compression = CompNone;
-
   m_forcedTrackFlag        = m_properties["forced_track"]  == Q("1") ? 1 : 0;
   m_forcedTrackFlagWasSet  = m_forcedTrackFlag == 1;
   m_defaultTrackFlagWasSet = m_properties[Q("default_track")] == "1";
