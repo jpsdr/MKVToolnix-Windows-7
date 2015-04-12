@@ -38,7 +38,7 @@ Tab::setupControlLists() {
                   << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
                   << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timecodesLabel << ui->timecodes << ui->browseTimecodes
                   << ui->picturePropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
-                  << ui->stereoscopy << ui->croppingLabel << ui->cropping << ui->cuesLabel << ui->cues
+                  << ui->stereoscopy << ui->naluSizeLengthLabel << ui->naluSizeLength << ui->croppingLabel << ui->cropping << ui->cuesLabel << ui->cues
                   << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo;
 
   m_subtitleControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
@@ -55,9 +55,9 @@ Tab::setupControlLists() {
                      << ui->picturePropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
                      << ui->stereoscopy << ui->croppingLabel << ui->cropping << ui->audioPropertiesBox << ui->aacIsSBR << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet
                      << ui->miscellaneousBox << ui->cuesLabel << ui->cues << ui->userDefinedTrackOptionsLabel << ui->userDefinedTrackOptions
-                     << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore;
+                     << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore << ui->naluSizeLengthLabel << ui->naluSizeLength;
 
-  m_comboBoxControls << ui->muxThis << ui->trackLanguage << ui->defaultTrackFlag << ui->forcedTrackFlag << ui->compression << ui->cues << ui->stereoscopy << ui->aacIsSBR << ui->subtitleCharacterSet;
+  m_comboBoxControls << ui->muxThis << ui->trackLanguage << ui->defaultTrackFlag << ui->forcedTrackFlag << ui->compression << ui->cues << ui->stereoscopy << ui->naluSizeLength << ui->aacIsSBR << ui->subtitleCharacterSet;
 }
 
 void
@@ -90,6 +90,11 @@ Tab::setupInputControls() {
   ui->stereoscopy->addItem(Q(""), 0);
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
     ui->stereoscopy->addItem(QString{"%1 (%2; %3)"}.arg(to_qs(stereo_mode_c::translate(idx))).arg(idx).arg(to_qs(stereo_mode_c::s_modes[idx])), idx + 1);
+
+  // NALU size length
+  ui->naluSizeLength->addItem(QY("don't change"),  0);
+  ui->naluSizeLength->addItem(QY("force 2 bytes"), 2);
+  ui->naluSizeLength->addItem(QY("force 4 bytes"), 4);
 
   // Set item data to index for distinguishing between empty values
   // added by "multiple selection mode".
@@ -229,6 +234,7 @@ Tab::setInputControlValues(Track *track) {
   Util::setComboBoxIndexIf(ui->compression,          [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_compression);       });
   Util::setComboBoxIndexIf(ui->cues,                 [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_cues);              });
   Util::setComboBoxIndexIf(ui->stereoscopy,          [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_stereoscopy);       });
+  Util::setComboBoxIndexIf(ui->naluSizeLength,       [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_naluSizeLength);    });
   Util::setComboBoxIndexIf(ui->aacIsSBR,             [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_aacIsSBR);          });
 
   Util::setComboBoxTextByData(ui->trackLanguage,        track->m_language);
@@ -452,6 +458,16 @@ Tab::onStereoscopyChanged(int newValue) {
   newValue = data.toInt();
 
   withSelectedTracks([&](Track *track) { track->m_stereoscopy = newValue; }, true);
+}
+
+void
+Tab::onNaluSizeLengthChanged(int newValue) {
+  auto data = ui->naluSizeLength->itemData(newValue);
+  if (!data.isValid())
+    return;
+  newValue = data.toInt();
+
+  withSelectedTracks([&](Track *track) { track->m_naluSizeLength = newValue; }, true);
 }
 
 void

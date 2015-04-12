@@ -32,6 +32,7 @@ Track::Track(SourceFile *file,
   , m_defaultTrackFlag{}
   , m_forcedTrackFlag{}
   , m_stereoscopy{}
+  , m_naluSizeLength{}
   , m_cues{}
   , m_aacIsSBR{}
   , m_compression{CompDefault}
@@ -185,6 +186,7 @@ Track::saveSettings(QSettings &settings)
   settings.setValue("defaultTrackFlag",       m_defaultTrackFlag);
   settings.setValue("forcedTrackFlag",        m_forcedTrackFlag);
   settings.setValue("stereoscopy",            m_stereoscopy);
+  settings.setValue("naluSizeLength",         m_naluSizeLength);
   settings.setValue("cues",                   m_cues);
   settings.setValue("aacIsSBR",               m_aacIsSBR);
   settings.setValue("reduceAudioToCore",      m_reduceAudioToCore);
@@ -228,6 +230,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_defaultTrackFlag          = l.settings.value("defaultTrackFlag").toInt();
   m_forcedTrackFlag           = l.settings.value("forcedTrackFlag").toInt();
   m_stereoscopy               = l.settings.value("stereoscopy").toInt();
+  m_naluSizeLength            = l.settings.value("naluSizeLength").toInt();
   m_cues                      = l.settings.value("cues").toInt();
   m_aacIsSBR                  = l.settings.value("aacIsSBR").toInt();
   m_reduceAudioToCore         = l.settings.value("reduceAudioToCore").toBool();
@@ -327,6 +330,9 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 
     if (m_stereoscopy)
       opt.options << Q("--stereo-mode") << Q("%1:%2").arg(sid).arg(m_stereoscopy);
+
+    if (m_naluSizeLength)
+      opt.options << Q("--nalu-size-length") << Q("%1:%2").arg(sid).arg(m_naluSizeLength);
 
     if (m_compression)
       opt.options << Q("--compression") << Q("%1:%2").arg(sid).arg(1 == m_compression ? Q("none") : Q("zlib"));

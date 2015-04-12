@@ -94,6 +94,7 @@ public slots:
   virtual void onDisplayWidthEdited(QString newValue);
   virtual void onDisplayHeightEdited(QString newValue);
   virtual void onStereoscopyChanged(int newValue);
+  virtual void onNaluSizeLengthChanged(int newValue);
   virtual void onCroppingEdited(QString newValue);
   virtual void onAacIsSBRChanged(int newValue);
   virtual void onReduceAudioToCoreChanged(bool newValue);

@@ -166,9 +166,9 @@
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-602</y>
+                <y>-425</y>
                 <width>465</width>
-                <height>1027</height>
+                <height>1064</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -496,9 +496,36 @@
                <item>
                 <widget class="QGroupBox" name="picturePropertiesBox">
                  <property name="title">
-                  <string>Picture properties</string>
+                  <string>Video properties</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_7">
+                  <item row="1" column="1">
+                   <layout class="QHBoxLayout" name="horizontalLayout_14">
+                    <item>
+                     <widget class="QLineEdit" name="displayWidth"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="displayDimensionsXLabel">
+                      <property name="text">
+                       <string>x</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="displayHeight"/>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QComboBox" name="stereoscopy"/>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="naluSizeLengthLabel">
+                    <property name="text">
+                     <string>NALU size length:</string>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="0" column="0">
                    <widget class="QRadioButton" name="setAspectRatio">
                     <property name="text">
@@ -560,37 +587,10 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="1">
-                   <layout class="QHBoxLayout" name="horizontalLayout_14">
-                    <item>
-                     <widget class="QLineEdit" name="displayWidth"/>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="displayDimensionsXLabel">
-                      <property name="text">
-                       <string>x</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="displayHeight"/>
-                    </item>
-                   </layout>
+                  <item row="3" column="1">
+                   <widget class="QLineEdit" name="cropping"/>
                   </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="stereoscopyLabel">
-                    <property name="text">
-                     <string>Stereoscopy:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>stereoscopy</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="1" rowspan="2">
-                   <widget class="QComboBox" name="stereoscopy"/>
-                  </item>
-                  <item row="3" column="0" rowspan="2">
+                  <item row="3" column="0">
                    <widget class="QLabel" name="croppingLabel">
                     <property name="text">
                      <string>Cropping:</string>
@@ -600,8 +600,18 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="1">
-                   <widget class="QLineEdit" name="cropping"/>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="stereoscopyLabel">
+                    <property name="text">
+                     <string>Stereoscopy:</string>
+                    </property>
+                    <property name="buddy">
+                     <cstring>stereoscopy</cstring>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QComboBox" name="naluSizeLength"/>
                   </item>
                  </layout>
                 </widget>
@@ -1423,9 +1433,10 @@
   <tabstop>setDisplayWidthHeight</tabstop>
   <tabstop>displayWidth</tabstop>
   <tabstop>displayHeight</tabstop>
-  <tabstop>stereoscopy</tabstop>
-  <tabstop>cropping</tabstop>
   <tabstop>aacIsSBR</tabstop>
+  <tabstop>cropping</tabstop>
+  <tabstop>stereoscopy</tabstop>
+  <tabstop>naluSizeLength</tabstop>
   <tabstop>reduceToAudioCore</tabstop>
   <tabstop>subtitleCharacterSet</tabstop>
   <tabstop>cues</tabstop>
@@ -1526,7 +1537,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>-344</y>
+     <y>-275</y>
     </hint>
     <hint type="destinationlabel">
      <x>613</x>
@@ -1542,7 +1553,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>-381</y>
+     <y>-318</y>
     </hint>
     <hint type="destinationlabel">
      <x>638</x>
@@ -1558,7 +1569,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>-307</y>
+     <y>-214</y>
     </hint>
     <hint type="destinationlabel">
      <x>673</x>
@@ -1574,7 +1585,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>-233</y>
+     <y>-140</y>
     </hint>
     <hint type="destinationlabel">
      <x>818</x>
@@ -1590,7 +1601,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>-270</y>
+     <y>-177</y>
     </hint>
     <hint type="destinationlabel">
      <x>658</x>
@@ -1606,7 +1617,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>-196</y>
+     <y>-103</y>
     </hint>
     <hint type="destinationlabel">
      <x>820</x>
@@ -1622,7 +1633,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>802</x>
-     <y>-158</y>
+     <y>-65</y>
     </hint>
     <hint type="destinationlabel">
      <x>820</x>
@@ -1638,7 +1649,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>-77</y>
+     <y>16</y>
     </hint>
     <hint type="destinationlabel">
      <x>819</x>
@@ -1654,7 +1665,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>-40</y>
+     <y>53</y>
     </hint>
     <hint type="destinationlabel">
      <x>815</x>
@@ -1670,7 +1681,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>-3</y>
+     <y>90</y>
     </hint>
     <hint type="destinationlabel">
      <x>818</x>
@@ -1686,7 +1697,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
-     <y>35</y>
+     <y>128</y>
     </hint>
     <hint type="destinationlabel">
      <x>817</x>
@@ -1702,7 +1713,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>-157</y>
+     <y>-64</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1718,7 +1729,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>843</x>
-     <y>36</y>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1734,7 +1745,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>563</x>
-     <y>138</y>
+     <y>231</y>
     </hint>
     <hint type="destinationlabel">
      <x>557</x>
@@ -1750,7 +1761,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>563</x>
-     <y>176</y>
+     <y>269</y>
     </hint>
     <hint type="destinationlabel">
      <x>534</x>
@@ -1766,7 +1777,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>143</y>
+     <y>236</y>
     </hint>
     <hint type="destinationlabel">
      <x>551</x>
@@ -1782,7 +1793,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>143</y>
+     <y>236</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1798,7 +1809,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>-3</y>
+     <y>90</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1814,7 +1825,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>697</x>
-     <y>181</y>
+     <y>274</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1830,7 +1841,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>181</y>
+     <y>274</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1846,7 +1857,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>219</y>
+     <y>349</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1862,7 +1873,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>256</y>
+     <y>312</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1878,7 +1889,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>441</y>
+     <y>571</y>
     </hint>
     <hint type="destinationlabel">
      <x>819</x>
@@ -1894,7 +1905,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>519</y>
+     <y>649</y>
     </hint>
     <hint type="destinationlabel">
      <x>818</x>
@@ -1910,7 +1921,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>556</y>
+     <y>686</y>
     </hint>
     <hint type="destinationlabel">
      <x>819</x>
@@ -1926,7 +1937,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
-     <y>335</y>
+     <y>465</y>
     </hint>
     <hint type="destinationlabel">
      <x>815</x>
@@ -2438,7 +2449,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
-     <y>65</y>
+     <y>158</y>
     </hint>
     <hint type="destinationlabel">
      <x>410</x>
@@ -2453,12 +2464,28 @@
    <slot>onReduceAudioToCoreChanged(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>739</x>
-     <y>353</y>
+     <x>845</x>
+     <y>493</y>
     </hint>
     <hint type="destinationlabel">
      <x>895</x>
      <y>346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>naluSizeLength</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>mtx::gui::Merge::Tab</receiver>
+   <slot>onNaluSizeLengthChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>819</x>
+     <y>370</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>898</x>
+     <y>371</y>
     </hint>
    </hints>
   </connection>
@@ -2531,5 +2558,6 @@
   <slot>resizeTracksColumnsToContents()</slot>
   <slot>onFixBitstreamTimingInfoChanged(bool)</slot>
   <slot>onReduceAudioToCoreChanged(bool)</slot>
+  <slot>onNaluSizeLengthChanged(int)</slot>
  </slots>
 </ui>
