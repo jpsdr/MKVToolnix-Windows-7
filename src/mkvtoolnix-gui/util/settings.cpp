@@ -59,7 +59,9 @@ Settings::load() {
   reg.endGroup();               // settings
 
   reg.beginGroup("defaults");
-  m_defaultTrackLanguage = reg.value("defaultTrackLanguage", Q("und")).toString();
+  m_defaultTrackLanguage   = reg.value("defaultTrackLanguage", Q("und")).toString();
+  m_defaultChapterLanguage = reg.value("defaultChapterLanguage", Q("und")).toString();
+  m_defaultChapterCountry  = reg.value("defaultChapterCountry").toString();
   reg.endGroup();               // defaults
 }
 
@@ -99,7 +101,9 @@ Settings::save()
   reg.endGroup();               // settings
 
   reg.beginGroup("defaults");
-  reg.setValue("defaultTrackLanguage", m_defaultTrackLanguage);
+  reg.setValue("defaultTrackLanguage",   m_defaultTrackLanguage);
+  reg.setValue("defaultChapterLanguage", m_defaultChapterLanguage);
+  reg.setValue("defaultChapterCountry",  m_defaultChapterCountry);
   reg.endGroup();               // defaults
 }
 

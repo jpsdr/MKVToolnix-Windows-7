@@ -37,7 +37,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   setupOutputFileNamePolicy();
 
   // Chapter editor page
-  Util::setupLanguageComboBox(*ui->cbCEDefaultLanguage); // TODO: Util::setupLanguageComboBox(*ui->cbCEDefaultLanguage); set current
+  Util::setupLanguageComboBox(*ui->cbCEDefaultLanguage, m_cfg.m_defaultChapterLanguage);
   setupDefaultChapterCountry();
 
   // Force scroll bars on combo boxes with a high number of entries.
@@ -203,6 +203,8 @@ PreferencesDialog::setupDefaultChapterCountry() {
   ui->cbCEDefaultCountry->addItem(QY("– no selection by default –")); // TODO: ui->cbCEDefaultCountry->addItem(QY("– no selection by default –")); set current
   for (auto const &countryCode : countryCodes)
     ui->cbCEDefaultCountry->addItem(countryCode, countryCode);
+
+  Util::setComboBoxTextByData(ui->cbCEDefaultCountry, m_cfg.m_defaultChapterCountry);
 }
 
 void
@@ -228,6 +230,10 @@ PreferencesDialog::save() {
                                     :                                                Util::Settings::ToSameAsFirstInputFile;
   m_cfg.m_fixedOutputDir            = ui->leMAutoSetFixedDirectory->text();
   m_cfg.m_uniqueOutputFileNames     = ui->cbMUniqueOutputFileNames->isChecked();
+
+  // Chapter editor page:
+  m_cfg.m_defaultChapterLanguage    = ui->cbCEDefaultLanguage->currentData().toString();
+  m_cfg.m_defaultChapterCountry     = ui->cbCEDefaultCountry->currentData().toString();
 
   // TODO: PreferencesDialog::save actually save
 }

@@ -3,6 +3,7 @@
 #include "common/ebml.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace ChapterEditor {
@@ -72,9 +73,12 @@ NameModel::append(KaxChapterDisplay &display) {
 
 void
 NameModel::addNew() {
+  auto &cfg     = Util::Settings::get();
   auto display = new KaxChapterDisplay;
+
   GetChild<KaxChapterString>(display).SetValueUTF8(Y("<unnamed>"));
-  GetChild<KaxChapterLanguage>(display).SetValue("eng");
+  GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(cfg.m_defaultChapterLanguage));
+  GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
 
   m_chapter->PushElement(*display);
   append(*display);

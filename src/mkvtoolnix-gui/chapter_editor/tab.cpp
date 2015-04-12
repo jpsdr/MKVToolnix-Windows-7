@@ -761,13 +761,15 @@ Tab::addEdition(bool before) {
 
 ChapterPtr
 Tab::createEmptyChapter(int64_t startTime) {
+  auto &cfg     = Util::Settings::get();
   auto chapter  = std::make_shared<KaxChapterAtom>();
   auto &display = GetChild<KaxChapterDisplay>(*chapter);
 
   GetChild<KaxChapterUID>(*chapter).SetValue(0);
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTime);
   GetChild<KaxChapterString>(display).SetValueUTF8(Y("<unnamed>"));
-  GetChild<KaxChapterLanguage>(display).SetValue(Y("und"));
+  GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(cfg.m_defaultChapterLanguage));
+  GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
 
   return chapter;
 }
