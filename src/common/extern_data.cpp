@@ -2606,7 +2606,7 @@ std::vector<iso3166_1alpha_2_t> const g_cctlds = {
   { "zw", "Zimbabwe"                                             },
 };
 
-auto const g_popular_country_codes = std::vector<std::string>{ "cn", "de", "es", "fi", "fr", "gb", "it", "jp", "nl", "no", "pt", "ru", "se", "us" };
+std::vector<std::string> const g_popular_country_codes{ "cn", "de", "es", "fi", "fr", "gb", "it", "jp", "nl", "no", "pt", "ru", "se", "us" };
 
 static std::string
 guess_mime_type_by_ext(std::string ext) {

@@ -154,7 +154,7 @@ void
 PreferencesDialog::setupProcessPriority() {
 #if defined(SYS_WINDOWS)
   ui->cbMProcessPriority->addItem(QY("highest"), static_cast<int>(Util::Settings::HighestPriority)); // value 4, index 0
-  ui->cbMProcessPriority->addItem(QY("higher"),  static_cast<int>(Util::Settings::HigherPriority));  // value 3, index 1
+  ui->cbMProcessPriority->addItem(QY("higher"),  static_cast<int>(Util::Settings::HighPriority));    // value 3, index 1
 #endif
   ui->cbMProcessPriority->addItem(QY("normal"),  static_cast<int>(Util::Settings::NormalPriority));  // value 2, index 2/0
   ui->cbMProcessPriority->addItem(QY("lower"),   static_cast<int>(Util::Settings::LowPriority));     // value 1, index 3/1
