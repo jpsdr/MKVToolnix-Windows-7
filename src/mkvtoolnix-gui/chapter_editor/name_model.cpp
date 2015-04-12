@@ -2,6 +2,7 @@
 
 #include "common/ebml.h"
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -44,8 +45,8 @@ NameModel::setRowText(QList<QStandardItem *> const &rowItems) {
   auto &display = *displayFromItem(rowItems[0]);
 
   rowItems[0]->setText(Q(GetChildValue<KaxChapterString>(display)));
-  rowItems[1]->setText(Q(FindChildValue<KaxChapterLanguage>(display, std::string{"eng"})));
-  rowItems[2]->setText(Q(FindChildValue<KaxChapterCountry>(display, std::string{""})));
+  rowItems[1]->setText(App::descriptionFromIso639_2LanguageCode(Q(FindChildValue<KaxChapterLanguage>(display, std::string{"eng"}))));
+  rowItems[2]->setText(App::descriptionFromIso3166_1Alpha2CountryCode(Q(FindChildValue<KaxChapterCountry>(display, std::string{""}))));
 }
 
 QList<QStandardItem *>
