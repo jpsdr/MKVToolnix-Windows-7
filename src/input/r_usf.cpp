@@ -85,7 +85,7 @@ usf_reader_c::parse_metadata(mtx::xml::document_cptr &doc) {
   if (attribute && !std::string{attribute.value()}.empty()) {
     int index = map_to_iso639_2_code(attribute.value());
     if (-1 != index)
-      m_default_language = iso639_languages[index].iso639_2_code;
+      m_default_language = g_iso639_languages[index].iso639_2_code;
     else if (!g_identifying)
       mxwarn_fn(m_ti.m_fname, boost::format(Y("The default language code '%1%' is not a valid ISO639-2 language code and will be ignored.\n")) % attribute.value());
   }
@@ -101,7 +101,7 @@ usf_reader_c::parse_subtitles(mtx::xml::document_cptr &doc) {
     if (attribute && !std::string{attribute.value()}.empty()) {
       int index = map_to_iso639_2_code(attribute.value());
       if (-1 != index)
-        track->m_language = iso639_languages[index].iso639_2_code;
+        track->m_language = g_iso639_languages[index].iso639_2_code;
       else if (!g_identifying)
         mxwarn_tid(m_ti.m_fname, m_tracks.size() - 1, boost::format(Y("The language code '%1%' is not a valid ISO639-2 language code and will be ignored.\n")) % attribute.value());
     }

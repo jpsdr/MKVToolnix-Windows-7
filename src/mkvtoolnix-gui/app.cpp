@@ -76,8 +76,8 @@ App::initializeLanguageLists() {
   if (!s_iso639Languages.empty())
     return;
 
-  s_iso639Languages.reserve(iso639_languages.size());
-  for (auto const &language : iso639_languages)
+  s_iso639Languages.reserve(g_iso639_languages.size());
+  for (auto const &language : g_iso639_languages)
     s_iso639Languages.emplace_back(Q("%1 (%2)").arg(Q(language.english_name)).arg(Q(language.iso639_2_code)), Q(language.iso639_2_code));
 
   brng::sort(s_iso639Languages);

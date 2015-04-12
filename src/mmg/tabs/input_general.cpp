@@ -152,7 +152,7 @@ tab_input_general::setup_languages() {
   for (i = 0; i < mdlg->options.popular_languages.Count(); ++i)
     is_popular[ mdlg->options.popular_languages[i] ] = true;
 
-  for (auto &lang : iso639_languages) {
+  for (auto &lang : g_iso639_languages) {
     wxString code = wxU(lang.iso639_2_code);
     if (!is_popular[code])
       continue;
@@ -164,7 +164,7 @@ tab_input_general::setup_languages() {
   sorted_iso_codes.Add(Z("---all---"));
 
   wxArrayString temp;
-  for (auto &lang : iso639_languages)
+  for (auto &lang : g_iso639_languages)
     temp.Add(wxString::Format(wxT("%s (%s)"), wxUCS(lang.iso639_2_code), wxUCS(lang.english_name)));
   temp.Sort();
 

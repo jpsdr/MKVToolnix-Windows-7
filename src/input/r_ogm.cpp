@@ -746,7 +746,7 @@ ogm_reader_c::handle_stream_comments() {
 
         index = map_to_iso639_2_code(comment[1].c_str());
         if (-1 != index)
-          dmx->language = iso639_languages[index].iso639_2_code;
+          dmx->language = g_iso639_languages[index].iso639_2_code;
         else {
 
           std::string lang = comment[1];
@@ -770,7 +770,7 @@ ogm_reader_c::handle_stream_comments() {
 
           index = map_to_iso639_2_code(lang.c_str());
           if (-1 != index)
-            dmx->language = iso639_languages[index].iso639_2_code;
+            dmx->language = g_iso639_languages[index].iso639_2_code;
         }
 
       } else if (comment[0] == "TITLE")

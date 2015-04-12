@@ -20,7 +20,7 @@
 #include "common/strings/editing.h"
 #include "common/strings/utf8.h"
 
-std::vector<iso639_language_t> const iso639_languages{
+std::vector<iso639_language_t> const g_iso639_languages{
   { "Abkhazian",                                                                        "abk", "ab",          std::string{}  },
   { "Achinese",                                                                         "ace", std::string{}, std::string{}  },
   { "Acoli",                                                                            "ach", std::string{}, std::string{}  },
@@ -507,7 +507,7 @@ std::vector<iso639_language_t> const iso639_languages{
   { "Zuni",                                                                             "zun", std::string{}, std::string{}  },
 };
 
-std::unordered_map<std::string, std::string> s_deprecated_1_and_2_codes{
+static std::unordered_map<std::string, std::string> s_deprecated_1_and_2_codes{
   // ISO 639-1
   { "iw", "he" },
 
@@ -517,9 +517,11 @@ std::unordered_map<std::string, std::string> s_deprecated_1_and_2_codes{
   { "mol", "rum" },
 };
 
+auto const g_popular_language_codes = std::vector<std::string>{ "chi", "dut", "eng", "fin", "fre", "ger", "ita", "jpn", "nor", "por", "rus", "spa", "swe", "und" };
+
 bool
 is_valid_iso639_2_code(std::string const &iso639_2_code) {
-  return brng::find_if(iso639_languages, [&](iso639_language_t const &lang) { return lang.iso639_2_code == iso639_2_code; }) != iso639_languages.end();
+  return brng::find_if(g_iso639_languages, [&](iso639_language_t const &lang) { return lang.iso639_2_code == iso639_2_code; }) != g_iso639_languages.end();
 }
 
 #define FILL(s, idx) s + std::wstring(longest[idx] - get_width_in_em(s), L' ')
@@ -532,7 +534,7 @@ list_iso639_languages() {
 
   size_t longest[3]   = { get_width_in_em(w_col1), get_width_in_em(w_col2), get_width_in_em(w_col3) };
 
-  for (auto &lang : iso639_languages) {
+  for (auto &lang : g_iso639_languages) {
     longest[0] = std::max(longest[0], get_width_in_em(to_wide(lang.english_name)));
     longest[1] = std::max(longest[1], get_width_in_em(to_wide(lang.iso639_2_code)));
     longest[2] = std::max(longest[2], get_width_in_em(to_wide(lang.iso639_1_code)));
@@ -541,7 +543,7 @@ list_iso639_languages() {
   mxinfo(FILL(w_col1, 0) + L" | " + FILL(w_col2, 1) + L" | " + FILL(w_col3, 2) + L"\n");
   mxinfo(std::wstring(longest[0] + 1, L'-') + L'+' + std::wstring(longest[1] + 2, L'-') + L'+' + std::wstring(longest[2] + 1, L'-') + L"\n");
 
-  for (auto &lang : iso639_languages) {
+  for (auto &lang : g_iso639_languages) {
     std::wstring english = to_wide(lang.english_name);
     std::wstring code2   = to_wide(lang.iso639_2_code);
     std::wstring code1   = to_wide(lang.iso639_1_code);
@@ -551,8 +553,8 @@ list_iso639_languages() {
 
 std::string const &
 map_iso639_2_to_iso639_1(std::string const &iso639_2_code) {
-  auto lang = brng::find_if(iso639_languages, [&](iso639_language_t const &lang) { return lang.iso639_2_code == iso639_2_code; });
-  return (lang != iso639_languages.end()) ? lang->iso639_1_code : empty_string;
+  auto lang = brng::find_if(g_iso639_languages, [&](iso639_language_t const &lang) { return lang.iso639_2_code == iso639_2_code; });
+  return (lang != g_iso639_languages.end()) ? lang->iso639_1_code : empty_string;
 }
 
 bool
@@ -563,8 +565,7 @@ is_popular_language(std::string const &language) {
 
 bool
 is_popular_language_code(std::string const &code) {
-  static std::vector<std::string> s_popular_language_codes = { "chi", "dut", "eng", "fin", "fre", "ger", "ita", "jpn", "nor", "por", "rus", "spa", "swe" };
-  return brng::find(s_popular_language_codes, code) != s_popular_language_codes.end();
+  return brng::find(g_popular_language_codes, code) != g_popular_language_codes.end();
 }
 
 /** \brief Map a string to a ISO 639-2 language code
@@ -572,10 +573,10 @@ is_popular_language_code(std::string const &code) {
    Searches the array of ISO 639 codes. If \c s is a valid ISO 639-2
    code, a valid ISO 639-1 code, a valid terminology abbreviation
    for an ISO 639-2 code or the English name for an ISO 639-2 code
-   then it returns the index of that entry in the \c iso639_languages array.
+   then it returns the index of that entry in the \c g_iso639_languages array.
 
    \param c The string to look for in the array of ISO 639 codes.
-   \return The index into the \c iso639_languages array if found or
+   \return The index into the \c g_iso639_languages array if found or
      \c -1 if no such entry was found.
 */
 int
@@ -586,11 +587,11 @@ map_to_iso639_2_code(std::string const &s,
   if (deprecated_code != s_deprecated_1_and_2_codes.end())
     source = deprecated_code->second;
 
-  auto lang = brng::find_if(iso639_languages, [&](iso639_language_t const &lang) { return (lang.iso639_2_code == source) || (lang.terminology_abbrev == source) || (lang.iso639_1_code == source); });
-  if (lang != iso639_languages.end())
-    return std::distance(iso639_languages.begin(), lang);
+  auto lang = brng::find_if(g_iso639_languages, [&](iso639_language_t const &lang) { return (lang.iso639_2_code == source) || (lang.terminology_abbrev == source) || (lang.iso639_1_code == source); });
+  if (lang != g_iso639_languages.end())
+    return std::distance(g_iso639_languages.begin(), lang);
 
-  auto range = iso639_languages | badap::indexed(0);
+  auto range = g_iso639_languages | badap::indexed(0);
   auto end   = boost::end(range);
   for (auto lang = boost::begin(range); lang != end; lang++) {
 #if BOOST_VERSION < 105600

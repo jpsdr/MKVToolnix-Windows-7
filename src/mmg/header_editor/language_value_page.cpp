@@ -80,7 +80,7 @@ he_language_value_page_c::reset_value() {
   wxString iso639_2_code = m_original_value;
   int idx                = map_to_iso639_2_code(wxMB(m_original_value), false);
   if (-1 != idx)
-    iso639_2_code = wxU(iso639_languages[idx].iso639_2_code);
+    iso639_2_code = wxU(g_iso639_languages[idx].iso639_2_code);
 
   size_t i;
   for (i = 0; sorted_iso_codes.size() > i; ++i)

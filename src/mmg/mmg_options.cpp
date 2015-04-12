@@ -35,7 +35,7 @@ mmg_options_t::init_popular_languages(const wxString &list) {
 
   if (popular_languages.IsEmpty()) {
     std::map<std::string, bool> codes_found;
-    for (auto lang : iso639_languages)
+    for (auto lang : g_iso639_languages)
       if (!codes_found[lang.iso639_2_code] && is_popular_language_code(lang.iso639_2_code)) {
         popular_languages.Add(wxU(lang.iso639_2_code));
         codes_found[lang.iso639_2_code] = true;

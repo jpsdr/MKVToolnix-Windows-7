@@ -1789,7 +1789,7 @@ qtmp4_reader_c::decode_and_verify_language(uint16_t coded_language) {
 
   int idx = map_to_iso639_2_code(balg::to_lower_copy(language));
   if (-1 != idx)
-    return iso639_languages[idx].iso639_2_code;
+    return g_iso639_languages[idx].iso639_2_code;
 
   return "";
 }

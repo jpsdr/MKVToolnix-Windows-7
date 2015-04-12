@@ -563,7 +563,7 @@ mpeg_ts_track_c::parse_iso639_language_from(void const *buffer) {
   auto value        = std::string{ reinterpret_cast<char const *>(buffer), 3 };
   auto language_idx = map_to_iso639_2_code(balg::to_lower_copy(value));
   if (-1 != language_idx)
-    language = iso639_languages[language_idx].iso639_2_code;
+    language = g_iso639_languages[language_idx].iso639_2_code;
 }
 
 // ------------------------------------------------------------
@@ -1675,7 +1675,7 @@ mpeg_ts_reader_c::parse_clip_info_file() {
         if (-1 == language_idx)
           continue;
 
-        track->language = iso639_languages[language_idx].iso639_2_code;
+        track->language = g_iso639_languages[language_idx].iso639_2_code;
         found = true;
         break;
       }

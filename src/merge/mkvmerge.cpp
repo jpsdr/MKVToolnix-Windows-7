@@ -1148,7 +1148,7 @@ parse_arg_language(const std::string &s,
       mxerror(boost::format(Y("'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. "
                               "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n")) % parts[1]);
 
-    parts[1] = iso639_languages[index].iso639_2_code;
+    parts[1] = g_iso639_languages[index].iso639_2_code;
   }
 
   storage[id] = parts[1];
@@ -1555,8 +1555,8 @@ parse_arg_chapter_language(const std::string &arg,
     mxerror(boost::format(Y("'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--chapter-language %1%'. "
                             "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n")) % arg);
 
-  g_chapter_language    = iso639_languages[i].iso639_2_code;
-  ti.m_chapter_language = iso639_languages[i].iso639_2_code;
+  g_chapter_language    = g_iso639_languages[i].iso639_2_code;
+  ti.m_chapter_language = g_iso639_languages[i].iso639_2_code;
 }
 
 static void
@@ -1621,7 +1621,7 @@ parse_arg_default_language(const std::string &arg) {
     mxerror(boost::format(Y("'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--default-language %1%'. "
                             "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n")) % arg);
 
-  g_default_language = iso639_languages[i].iso639_2_code;
+  g_default_language = g_iso639_languages[i].iso639_2_code;
 }
 
 static void

@@ -231,7 +231,7 @@ mmg_app::OnInit() {
   if (-1 == index)
     g_default_chapter_language = "und";
   else
-    g_default_chapter_language = iso639_languages[index].iso639_2_code;
+    g_default_chapter_language = g_iso639_languages[index].iso639_2_code;
   if (cfg->Read(wxT("default_country"), &k) && (0 < k.length()))
     g_default_chapter_country = wxMB(k);
   if (!is_valid_cctld(g_default_chapter_country.c_str()))

@@ -130,7 +130,7 @@ Track::setDefaults() {
     language = Util::Settings::get().m_defaultTrackLanguage;
   auto idx = map_to_iso639_2_code(to_utf8(language), true);
   if (0 <= idx)
-    m_language = to_qs(iso639_languages[idx].iso639_2_code);
+    m_language = to_qs(g_iso639_languages[idx].iso639_2_code);
 
   QRegExp re_displayDimensions{"^(\\d+)x(\\d+)$"};
   if (-1 != re_displayDimensions.indexIn(m_properties[Q("display_dimensions")])) {
