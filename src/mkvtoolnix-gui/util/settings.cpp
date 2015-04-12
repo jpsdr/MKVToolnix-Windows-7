@@ -36,7 +36,6 @@ Settings::load() {
   auto &reg   = *regPtr;
 
   reg.beginGroup("settings");
-  m_mkvmergeExe               = reg.value("mkvmergeExe", "mkvmerge").toString();
   m_priority                  = static_cast<ProcessPriority>(reg.value("priority", static_cast<int>(NormalPriority)).toInt());
   m_lastOpenDir               = QDir{reg.value("lastOpenDir").toString()};
   m_lastOutputDir             = QDir{reg.value("lastOutputDir").toString()};
@@ -68,7 +67,7 @@ Settings::load() {
 QString
 Settings::actualMkvmergeExe()
   const {
-  return exeWithPath(m_mkvmergeExe);
+  return exeWithPath(Q("mkvmerge"));
 }
 
 void
@@ -78,7 +77,6 @@ Settings::save()
   auto &reg   = *regPtr;
 
   reg.beginGroup("settings");
-  reg.setValue("mkvmergeExe",               m_mkvmergeExe);
   reg.setValue("priority",                  static_cast<int>(m_priority));
   reg.setValue("lastOpenDir",               m_lastOpenDir.path());
   reg.setValue("lastOutputDir",             m_lastOutputDir.path());
