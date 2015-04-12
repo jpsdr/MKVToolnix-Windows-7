@@ -28,8 +28,8 @@ public slots:
 public:
   static App *instance();
 
-  static Iso639LanguageList const &getIso639Languages();
-  static Iso3166CountryList const &getIso3166_1Alpha2Countries();
+  static Iso639LanguageList const &iso639Languages();
+  static Iso3166CountryList const &iso3166_1Alpha2Countries();
   static void initializeLanguageLists();
   static void initializeIso3166_1Alpha2Countries();
   static void initializeIso639Languages();

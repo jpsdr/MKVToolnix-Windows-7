@@ -125,13 +125,13 @@ App::initializeIso3166_1Alpha2Countries() {
 }
 
 Iso639LanguageList const &
-App::getIso639Languages() {
+App::iso639Languages() {
   initializeLanguageLists();
   return s_iso639Languages;
 }
 
 Iso3166CountryList const &
-App::getIso3166_1Alpha2Countries() {
+App::iso3166_1Alpha2Countries() {
   initializeLanguageLists();
   return s_iso3166_1Alpha2Countries;
 }

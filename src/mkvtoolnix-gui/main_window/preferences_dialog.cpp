@@ -108,7 +108,7 @@ PreferencesDialog::setupJobsJobOutput() {
 
 void
 PreferencesDialog::setupCommonLanguages() {
-  auto &languages = App::getIso639Languages();
+  auto &languages = App::iso639Languages();
   auto isCommon   = QHash<QString, bool>{};
 
   for (auto const &language : m_cfg.m_oftenUsedLanguages)
@@ -130,7 +130,7 @@ PreferencesDialog::setupCommonLanguages() {
 
 void
 PreferencesDialog::setupCommonCountries() {
-  auto &countries = App::getIso3166_1Alpha2Countries();
+  auto &countries = App::iso3166_1Alpha2Countries();
   auto isCommon   = QHash<QString, bool>{};
 
   for (auto const &country : m_cfg.m_oftenUsedCountries)
