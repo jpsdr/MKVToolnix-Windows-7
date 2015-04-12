@@ -44,8 +44,6 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMDefaultSubtitleCharset->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   ui->cbCEDefaultCountry       ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-  // TODO: PreferencesDialog::PreferencesDialog
-
   setupConnections();
 }
 
@@ -204,8 +202,6 @@ PreferencesDialog::setupOutputFileNamePolicy() {
 
 void
 PreferencesDialog::save() {
-  // TODO: PreferencesDialog::save
-
   // GUI page:
   m_cfg.m_checkForUpdates           = ui->cbGuiCheckForUpdates->isChecked();
   saveCommonList(*ui->lwGuiSelectedCommonLanguages, m_cfg.m_oftenUsedLanguages);
@@ -232,7 +228,7 @@ PreferencesDialog::save() {
   m_cfg.m_defaultChapterLanguage    = ui->cbCEDefaultLanguage->currentData().toString();
   m_cfg.m_defaultChapterCountry     = ui->cbCEDefaultCountry->currentData().toString();
 
-  // TODO: PreferencesDialog::save actually save
+  m_cfg.save();
 }
 
 void
