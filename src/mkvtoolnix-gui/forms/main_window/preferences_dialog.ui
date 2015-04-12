@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mtx::gui::PreferencesDialog</class>
+ <widget class="QDialog" name="mtx::gui::PreferencesDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>620</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MKVToolNix GUI preferences</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_16">
+   <item>
+    <widget class="QTabWidget" name="chapterEditorPage">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="guiTab">
+      <attribute name="title">
+       <string>&amp;GUI</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>General options</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QLabel" name="label_3">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="text">
+                 <string>Interface &amp;language:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>cbGuiInterfaceLanguage</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cbGuiInterfaceLanguage">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbGuiCheckForUpdates">
+              <property name="text">
+               <string>Check online for available &amp;updates</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_4">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="title">
+            <string>Jobs and job output</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QCheckBox" name="cbGuiRemoveJobs">
+              <property name="text">
+               <string>&amp;Remove job from queue after completion</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cbGuiJobRemovalPolicy">
+                <item>
+                 <property name="text">
+                  <string>Only if the job completed successfully</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Even if there were warnings</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Always remove the job afterwards</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_6">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="title">
+          <string>Common languages</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_9">
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Available:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListWidget" name="lwGuiAvailableCommonLanguages">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <spacer name="verticalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pbGuiAddCommonLanguages">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../qt_resources.qrc">
+                <normaloff>:/icons/16x16/arrow-right.png</normaloff>:/icons/16x16/arrow-right.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pbGuiRemoveCommonLanguages">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../qt_resources.qrc">
+                <normaloff>:/icons/16x16/arrow-left.png</normaloff>:/icons/16x16/arrow-left.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_11">
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Selected:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListWidget" name="lwGuiSelectedCommonLanguages">
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_7">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="title">
+          <string>Common countries</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_12">
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Available:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListWidget" name="lwGuiAvailableCommonCountries">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_13">
+            <item>
+             <spacer name="verticalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pbGuiAddCommonCountries">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../qt_resources.qrc">
+                <normaloff>:/icons/16x16/arrow-right.png</normaloff>:/icons/16x16/arrow-right.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pbGuiRemoveCommonCountries">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../qt_resources.qrc">
+                <normaloff>:/icons/16x16/arrow-left.png</normaloff>:/icons/16x16/arrow-left.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_14">
+            <item>
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Selected:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListWidget" name="lwGuiSelectedCommonCountries">
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>1</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="mergeTab">
+      <attribute name="title">
+       <string>&amp;Merging</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QGroupBox" name="groupBox_3">
+             <property name="title">
+              <string>General options</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QCheckBox" name="cbMAutoSetFileTitle">
+                <property name="text">
+                 <string>Automatically set the segment &amp;title from source files</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbMSetAudioDelayFromFileName">
+                <property name="text">
+                 <string>Automatically set track &amp;delays from source file name</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbMWarnBeforeOverwriting">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="text">
+                 <string>Warn before &amp;overwriting existing items (files, jobs etc.)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_2">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_12">
+                  <property name="text">
+                   <string>Default track &amp;language to set:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>cbMDefaultTrackLanguage</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="cbMDefaultTrackLanguage"/>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_4">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="text">
+                   <string>Default &amp;subtitle charset to set:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>cbMDefaultSubtitleCharset</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="cbMDefaultSubtitleCharset">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_5">
+                  <property name="text">
+                   <string>Process &amp;priority:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>cbMProcessPriority</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QComboBox" name="cbMProcessPriority"/>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="title">
+              <string>Scanning playlists</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>&amp;Scan directory for other playlists:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>cbMScanPlaylistsPolicy</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="cbMScanPlaylistsPolicy">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Always ask the user</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Always scan for other playlists</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Never scan for other playlists</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Mi&amp;nimum playlist duration:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>sbMMinPlaylistDuration</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QSpinBox" name="sbMMinPlaylistDuration">
+                <property name="suffix">
+                 <string> seconds</string>
+                </property>
+                <property name="maximum">
+                 <number>99999</number>
+                </property>
+                <property name="singleStep">
+                 <number>10</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_5">
+           <property name="title">
+            <string>Output file name</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QCheckBox" name="cbMAutoSetOutputFileName">
+              <property name="text">
+               <string>&amp;Automatically set the output file name</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbMAutoSetSameDirectory">
+              <property name="text">
+               <string>Same directory as the first input file</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbMAutoSetParentDirectory">
+              <property name="text">
+               <string>Parent directory of the first input file</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbMAutoSetPreviousDirectory">
+              <property name="text">
+               <string>Pre&amp;viously used output directory</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbMAutoSetFixedDirectory">
+              <property name="text">
+               <string>&amp;Use this directory:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <spacer name="horizontalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="leMAutoSetFixedDirectory"/>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pbMBrowseAutoSetFixedDirectory">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../qt_resources.qrc">
+                  <normaloff>:/icons/16x16/code-class.png</normaloff>:/icons/16x16/code-class.png</iconset>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbMUniqueOutputFileNames">
+              <property name="text">
+               <string>Ensure the file name is uni&amp;que</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>63</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>&amp;Chapter editor</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_18">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QGroupBox" name="groupBox_8">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="title">
+            <string>Defaults for new chapters</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_17">
+            <item>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_10">
+                <property name="text">
+                 <string>&amp;Language:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>cbCEDefaultLanguage</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="cbCEDefaultLanguage"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_11">
+                <property name="text">
+                 <string>C&amp;ountry:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>cbCEDefaultCountry</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="cbCEDefaultCountry"/>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>300</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttons">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>chapterEditorPage</tabstop>
+  <tabstop>cbGuiInterfaceLanguage</tabstop>
+  <tabstop>cbGuiCheckForUpdates</tabstop>
+  <tabstop>cbGuiRemoveJobs</tabstop>
+  <tabstop>cbGuiJobRemovalPolicy</tabstop>
+  <tabstop>lwGuiAvailableCommonLanguages</tabstop>
+  <tabstop>pbGuiAddCommonLanguages</tabstop>
+  <tabstop>pbGuiRemoveCommonLanguages</tabstop>
+  <tabstop>lwGuiSelectedCommonLanguages</tabstop>
+  <tabstop>lwGuiAvailableCommonCountries</tabstop>
+  <tabstop>pbGuiAddCommonCountries</tabstop>
+  <tabstop>pbGuiRemoveCommonCountries</tabstop>
+  <tabstop>lwGuiSelectedCommonCountries</tabstop>
+  <tabstop>cbMAutoSetFileTitle</tabstop>
+  <tabstop>cbMSetAudioDelayFromFileName</tabstop>
+  <tabstop>cbMWarnBeforeOverwriting</tabstop>
+  <tabstop>cbMDefaultTrackLanguage</tabstop>
+  <tabstop>cbMDefaultSubtitleCharset</tabstop>
+  <tabstop>cbMProcessPriority</tabstop>
+  <tabstop>cbMScanPlaylistsPolicy</tabstop>
+  <tabstop>sbMMinPlaylistDuration</tabstop>
+  <tabstop>cbMAutoSetOutputFileName</tabstop>
+  <tabstop>rbMAutoSetSameDirectory</tabstop>
+  <tabstop>rbMAutoSetParentDirectory</tabstop>
+  <tabstop>rbMAutoSetPreviousDirectory</tabstop>
+  <tabstop>rbMAutoSetFixedDirectory</tabstop>
+  <tabstop>leMAutoSetFixedDirectory</tabstop>
+  <tabstop>pbMBrowseAutoSetFixedDirectory</tabstop>
+  <tabstop>cbMUniqueOutputFileNames</tabstop>
+  <tabstop>cbCEDefaultLanguage</tabstop>
+  <tabstop>cbCEDefaultCountry</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../qt_resources.qrc"/>
+ </resources>
+ <connections/>
+ <slots>
+  <slot>addCommonLanguages()</slot>
+  <slot>removeCommonLanguages()</slot>
+  <slot>addCommonCountries()</slot>
+  <slot>removeCommonCountries()</slot>
+  <slot>enableOutputFileNameControls()</slot>
+ </slots>
+</ui>

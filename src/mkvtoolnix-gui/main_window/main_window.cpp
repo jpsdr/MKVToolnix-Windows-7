@@ -15,6 +15,7 @@
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -233,8 +234,9 @@ MainWindow::closeEvent(QCloseEvent *event) {
 
 void
 MainWindow::editPreferences() {
-  // TODO: MainWindow::editPreferences
-  setStatusBarMessage(Q("TODO: MainWindow::editPreferences"));
+  PreferencesDialog dlg{this};
+  if (dlg.exec())
+    dlg.save();
 }
 
 #if defined(HAVE_CURL_EASY_H)
