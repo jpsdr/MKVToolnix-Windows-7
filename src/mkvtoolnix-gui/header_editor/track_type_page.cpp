@@ -2,6 +2,7 @@
 
 #include "common/ebml.h"
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 
@@ -19,6 +20,7 @@ TrackTypePage::TrackTypePage(Tab &parent,
   , m_trackType{FindChildValue<KaxTrackType>(m_master)}
   , m_trackNumber{FindChildValue<KaxTrackNumber>(m_master)}
   , m_codecId{Q(FindChildValue<KaxCodecID>(m_master))}
+  , m_language{Q(FindChildValue<KaxTrackLanguage>(m_master, std::string{"ung"}))}
 {
   ui->setupUi(this);
 }
@@ -28,11 +30,12 @@ TrackTypePage::~TrackTypePage() {
 
 void
 TrackTypePage::retranslateUi() {
-  auto title = track_audio    == m_trackType ? QY("Audio track %1 (%2)")
-             : track_video    == m_trackType ? QY("Video track %1 (%2)")
-             : track_subtitle == m_trackType ? QY("Subtitle track %1 (%2)")
-             :                                 QY("Button track %1 (%2)");
+  auto title = track_audio    == m_trackType ? QY("Audio track %1, %2, %3")
+             : track_video    == m_trackType ? QY("Video track %1, %2")
+             : track_subtitle == m_trackType ? QY("Subtitle track %1, %2, %3")
+             :                                 QY("Button track %1, %2");
   title      = title.arg(m_trackNumber).arg(m_codecId);
+  title      = (track_audio == m_trackType) || (track_subtitle == m_trackType) ? title.arg(App::descriptionFromIso639_2LanguageCode(m_language)) : title;
   m_title    = translatable_string_c{to_utf8(title)};
 
   auto type  = track_audio    == m_trackType ? QY("Audio")

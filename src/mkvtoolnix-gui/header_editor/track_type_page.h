@@ -22,7 +22,7 @@ protected:
 public:
   EbmlMaster &m_master;
   uint64_t m_trackIdxMkvmerge, m_trackType, m_trackNumber;
-  QString m_codecId;
+  QString m_codecId, m_language;
 
 public:
   TrackTypePage(Tab &parent, EbmlMaster &master, uint64_t trackIdxMkvmerge);
