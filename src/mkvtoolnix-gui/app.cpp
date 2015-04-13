@@ -15,6 +15,7 @@ namespace mtx { namespace gui {
 
 static Iso639LanguageList s_iso639Languages;
 static Iso3166CountryList s_iso3166_1Alpha2Countries;
+static CharacterSetList s_characterSets;
 static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_iso3166_1Alpha2CountryCodeToDescription;
 
 static boost::optional<bool> s_is_installed;
@@ -71,6 +72,7 @@ App::reinitializeLanguageLists() {
   s_iso3166_1Alpha2Countries.clear();
   s_iso639_2LanguageCodeToDescription.clear();
   s_iso3166_1Alpha2CountryCodeToDescription.clear();
+  s_characterSets.clear();
 
   initializeLanguageLists();
 }
@@ -82,6 +84,7 @@ App::initializeLanguageLists() {
 
   initializeIso639Languages();
   initializeIso3166_1Alpha2Countries();
+  initializeCharacterSets();
 }
 
 void
@@ -133,6 +136,28 @@ App::initializeIso3166_1Alpha2Countries() {
     s_iso3166_1Alpha2Countries.emplace_back(std::get<1>(countrySorter), std::get<2>(countrySorter));
 }
 
+void
+App::initializeCharacterSets() {
+  using CharacterSetSorter = std::tuple<int, QString, QString>;
+  auto toSort              = std::vector<CharacterSetSorter>{};
+  auto &cfg                = Util::Settings::get();
+
+  s_characterSets.reserve(sub_charsets.size());
+  toSort.reserve(sub_charsets.size());
+
+  for (auto const &characterSet : sub_charsets) {
+    auto qCharacterSet = Q(characterSet);
+    auto commonOrder   = cfg.m_oftenUsedCharacterSets.indexOf(qCharacterSet) != -1 ? 0 : 1;
+
+    toSort.emplace_back(commonOrder, qCharacterSet.toLower(), qCharacterSet);
+  }
+
+  brng::sort(toSort);
+
+  for (auto const &characterSetSorter : toSort)
+    s_characterSets.emplace_back(std::get<2>(characterSetSorter));
+}
+
 Iso639LanguageList const &
 App::iso639Languages() {
   initializeLanguageLists();
@@ -143,6 +168,12 @@ Iso3166CountryList const &
 App::iso3166_1Alpha2Countries() {
   initializeLanguageLists();
   return s_iso3166_1Alpha2Countries;
+}
+
+CharacterSetList const &
+App::characterSets() {
+  initializeLanguageLists();
+  return s_characterSets;
 }
 
 QString const &

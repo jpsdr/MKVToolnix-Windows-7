@@ -107,6 +107,36 @@ setupCountryComboBox(QComboBox &comboBox,
 }
 
 void
+setupCharacterSetComboBox(QComboBox &comboBox,
+                          QStringList const &initiallySelected,
+                          bool withEmpty,
+                          QString const &emptyTitle) {
+  if (withEmpty)
+    comboBox.addItem(emptyTitle, Q(""));
+
+  for (auto const &characterSet : App::characterSets())
+    comboBox.addItem(characterSet, characterSet);
+
+  auto &cfg = Settings::get();
+  if (!cfg.m_oftenUsedCharacterSets.isEmpty())
+    comboBox.insertSeparator(cfg.m_oftenUsedCharacterSets.count() + (withEmpty ? 1 : 0));
+
+  comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
+  for (auto const &value : initiallySelected)
+    if (setComboBoxTextByData(&comboBox, value))
+      return;
+}
+
+void
+setupCharacterSetComboBox(QComboBox &comboBox,
+                          QString const &initiallySelected,
+                          bool withEmpty,
+                          QString const &emptyTitle) {
+  setupCharacterSetComboBox(comboBox, QStringList{} << initiallySelected, withEmpty, emptyTitle);
+}
+
+void
 enableWidgets(QList<QWidget *> const &widgets,
               bool enable) {
   for (auto &widget : widgets)

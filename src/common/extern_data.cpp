@@ -1729,6 +1729,15 @@ std::vector<std::string> const sub_charsets = {
 };
 #endif
 
+std::vector<std::string> const g_popular_character_sets{
+  "ISO-8859-15",
+  "MS-ANSI",
+  "US-ASCII",
+  "UTF-8",
+  "WINDOWS-1250",
+  "WINDOWS-1252",
+};
+
 std::vector<mime_type_t> const mime_types = {
   { "application/activemessage",                              {}                                                       },
   { "application/andrew-inset",                               { "ez" }                                                 },

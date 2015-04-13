@@ -37,11 +37,15 @@ public slots:
   void selectedCommonLanguagesSelectionChanged();
   void availableCommonCountriesSelectionChanged();
   void selectedCommonCountriesSelectionChanged();
+  void availableCommonCharacterSetsSelectionChanged();
+  void selectedCommonCharacterSetsSelectionChanged();
 
   void addCommonLanguages();
   void removeCommonLanguages();
   void addCommonCountries();
   void removeCommonCountries();
+  void addCommonCharacterSets();
+  void removeCommonCharacterSets();
 
 protected:
   void setupConnections();
@@ -51,8 +55,8 @@ protected:
   void setupJobsJobOutput();
   void setupCommonLanguages();
   void setupCommonCountries();
+  void setupCommonCharacterSets();
   void setupProcessPriority();
-  void setupDefaultSubtitleCharset();
   void setupPlaylistScanningPolicy();
   void setupOutputFileNamePolicy();
 

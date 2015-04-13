@@ -38,6 +38,8 @@ void setupLanguageComboBox(QComboBox &comboBox, QStringList const &initiallySele
 void setupLanguageComboBox(QComboBox &comboBox, QString const &initiallySelected, bool withEmpty = false, QString const &emptyTitle = {});
 void setupCountryComboBox(QComboBox &comboBox, QStringList const &initiallySelected = {}, bool withEmpty = false, QString const &emptyTitle = {});
 void setupCountryComboBox(QComboBox &comboBox, QString const &initiallySelected, bool withEmpty = false, QString const &emptyTitle = {});
+void setupCharacterSetComboBox(QComboBox &comboBox, QStringList const &initiallySelected = {}, bool withEmpty = false, QString const &emptyTitle = {});
+void setupCharacterSetComboBox(QComboBox &comboBox, QString const &initiallySelected, bool withEmpty = false, QString const &emptyTitle = {});
 
 void enableWidgets(QList<QWidget *> const &widgets, bool enable);
 QPushButton *buttonForRole(QDialogButtonBox *box, QDialogButtonBox::ButtonRole role = QDialogButtonBox::AcceptRole);

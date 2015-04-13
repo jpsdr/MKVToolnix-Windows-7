@@ -45,7 +45,7 @@ public:
   };
 
   QString m_defaultTrackLanguage, m_defaultChapterLanguage, m_defaultChapterCountry, m_defaultSubtitleCharset;
-  QStringList m_oftenUsedLanguages, m_oftenUsedCountries;
+  QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   ProcessPriority m_priority;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir, m_lastMatroskaFileDir;
   bool m_setAudioDelayFromFileName, m_autoSetFileTitle;

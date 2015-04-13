@@ -74,17 +74,8 @@ Tab::setupInputControls() {
   Util::setupLanguageComboBox(*ui->chapterLanguage, QString{}, true);
 
   // Track & chapter character set
-  QStringList characterSets;
-  for (auto &subCharset : sub_charsets)
-    characterSets << to_qs(subCharset);
-  characterSets.sort();
-
-  ui->subtitleCharacterSet->addItem(Q(""), Q(""));
-  ui->chapterCharacterSet->addItem(Q(""), Q(""));
-  for (auto &characterSet : characterSets) {
-    ui->subtitleCharacterSet->addItem(characterSet, characterSet);
-    ui->chapterCharacterSet->addItem(characterSet, characterSet);
-  }
+  Util::setupCharacterSetComboBox(*ui->subtitleCharacterSet, QString{}, true);
+  Util::setupCharacterSetComboBox(*ui->chapterCharacterSet,  QString{}, true);
 
   // Stereoscopy
   ui->stereoscopy->addItem(Q(""), 0);

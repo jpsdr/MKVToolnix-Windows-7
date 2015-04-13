@@ -12,6 +12,7 @@ using Iso639Language     = std::pair<QString, QString>;
 using Iso639LanguageList = std::vector<Iso639Language>;
 using Iso3166Country     = std::pair<QString, QString>;
 using Iso3166CountryList = std::vector<Iso3166Country>;
+using CharacterSetList   = std::vector<QString>;
 
 class App : public QApplication {
   Q_OBJECT;
@@ -32,11 +33,13 @@ public:
   static Iso3166CountryList const &iso3166_1Alpha2Countries();
   static QString const &descriptionFromIso639_2LanguageCode(QString const &code);
   static QString const &descriptionFromIso3166_1Alpha2CountryCode(QString const &code);
+  static CharacterSetList const &characterSets();
 
+  static void reinitializeLanguageLists();
   static void initializeLanguageLists();
   static void initializeIso3166_1Alpha2Countries();
   static void initializeIso639Languages();
-  static void reinitializeLanguageLists();
+  static void initializeCharacterSets();
 
   static bool isInstalled();
 };
