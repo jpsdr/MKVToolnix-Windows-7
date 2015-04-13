@@ -44,7 +44,7 @@ public:
     Always,
   };
 
-  QString m_defaultTrackLanguage, m_defaultChapterLanguage, m_defaultChapterCountry;
+  QString m_defaultTrackLanguage, m_defaultChapterLanguage, m_defaultChapterCountry, m_defaultSubtitleCharset;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries;
   ProcessPriority m_priority;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir, m_lastMatroskaFileDir;

@@ -124,10 +124,11 @@ Track::setDefaults() {
   m_cropping               = m_properties[Q("cropping")];
   m_aacSbrWasDetected      = m_properties["aac_is_sbr"].contains(QRegExp{"1|true"});
   m_stereoscopy            = m_properties[Q("stereo_mode")].isEmpty() ? 0 : m_properties[Q("stereo_mode")].toUInt() + 1;
+  m_characterSet           = m_properties[Q("text_subtitles")] == Q("1") ? settings.m_defaultSubtitleCharset : Q("");
 
   auto language = m_properties[Q("language")];
   if (language.isEmpty())
-    language = Util::Settings::get().m_defaultTrackLanguage;
+    language = settings.m_defaultTrackLanguage;
   auto idx = map_to_iso639_2_code(to_utf8(language), true);
   if (0 <= idx)
     m_language = to_qs(g_iso639_languages[idx].iso639_2_code);

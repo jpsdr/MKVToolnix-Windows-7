@@ -175,9 +175,9 @@ void
 PreferencesDialog::setupDefaultSubtitleCharset() {
   ui->cbMDefaultSubtitleCharset->addItem(QY("– no selection by default –"));
   for (auto const &charset : sub_charsets)
-    ui->cbMDefaultSubtitleCharset->addItem(Q(charset));
+    ui->cbMDefaultSubtitleCharset->addItem(Q(charset), Q(charset));
 
-  // TODO: PreferencesDialog::setupDefaultSubtitleCharset: set current
+  Util::setComboBoxTextByData(ui->cbMDefaultSubtitleCharset, m_cfg.m_defaultSubtitleCharset);
 }
 
 void
@@ -217,8 +217,9 @@ PreferencesDialog::save() {
   // Merge page:
   m_cfg.m_autoSetFileTitle          = ui->cbMAutoSetFileTitle->isChecked();
   m_cfg.m_setAudioDelayFromFileName = ui->cbMSetAudioDelayFromFileName->isChecked();
-  m_cfg.m_priority                  = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
   m_cfg.m_defaultTrackLanguage      = ui->cbMDefaultTrackLanguage->currentData().toString();
+  m_cfg.m_defaultSubtitleCharset    = ui->cbMDefaultSubtitleCharset->currentData().toString();
+  m_cfg.m_priority                  = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
 
   m_cfg.m_scanForPlaylistsPolicy    = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
   m_cfg.m_minimumPlaylistDuration   = ui->sbMMinPlaylistDuration->value();
