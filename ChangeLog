@@ -1,3 +1,12 @@
+2015-04-13  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: enhancement for MPEG program stream handling: mkvmerge
+        will only look for additional files automatically if the source
+        file begins with »VTS_…« and just if it ends in a
+        number. E.g. when reading »video_1.mpg« another file called
+        »video_2.mpg« will no longer be read automatically. Implements
+        #1164.
+
 2015-04-12  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: enhancement: display country names in addition
