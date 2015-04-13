@@ -102,8 +102,12 @@ PreferencesDialog::setupInterfaceLanguage() {
 
 void
 PreferencesDialog::setupJobsJobOutput() {
-  // TODO: PreferencesDialog::setupJobsJobOutput
-  ui->cbGuiJobRemovalPolicy->setEnabled(false);
+  auto doRemove = Util::Settings::JobRemovalPolicy::Never != m_cfg.m_jobRemovalPolicy;
+  auto idx      = std::max(static_cast<int>(m_cfg.m_jobRemovalPolicy), 1) - 1;
+
+  ui->cbGuiRemoveJobs->setChecked(doRemove);
+  ui->cbGuiJobRemovalPolicy->setEnabled(doRemove);
+  ui->cbGuiJobRemovalPolicy->setCurrentIndex(idx);
 }
 
 void
@@ -204,6 +208,9 @@ void
 PreferencesDialog::save() {
   // GUI page:
   m_cfg.m_checkForUpdates           = ui->cbGuiCheckForUpdates->isChecked();
+  auto idx                          = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
+  m_cfg.m_jobRemovalPolicy          = static_cast<Util::Settings::JobRemovalPolicy>(idx);
+
   saveCommonList(*ui->lwGuiSelectedCommonLanguages, m_cfg.m_oftenUsedLanguages);
   saveCommonList(*ui->lwGuiSelectedCommonCountries, m_cfg.m_oftenUsedCountries);
 

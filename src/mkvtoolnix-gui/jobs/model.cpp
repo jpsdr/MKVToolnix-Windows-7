@@ -3,11 +3,13 @@
 #include <QAbstractItemView>
 #include <QMutexLocker>
 #include <QSettings>
+#include <QTimer>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace Jobs {
@@ -159,6 +161,41 @@ Model::onStatusChanged(uint64_t id,
     item(row, DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
 
   startNextAutoJob();
+
+  processAutomaticJobRemoval(id, status);
+}
+
+void
+Model::removeScheduledJobs() {
+  QMutexLocker locked{&m_mutex};
+
+  removeJobsIf([this](Job const &job) { return m_toBeRemoved[job.m_id]; });
+  m_toBeRemoved.clear();
+}
+
+void
+Model::scheduleJobForRemoval(uint64_t id) {
+  QMutexLocker locked{&m_mutex};
+
+  m_toBeRemoved[id] = true;
+  QTimer::singleShot(0, this, SLOT(removeScheduledJobs()));
+}
+
+void
+Model::processAutomaticJobRemoval(uint64_t id,
+                                  Job::Status status) {
+  auto const &cfg = Util::Settings::get();
+  if (cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::Never)
+    return;
+
+  bool doneOk       = Job::DoneOk       == status;
+  bool doneWarnings = Job::DoneWarnings == status;
+  bool done         = doneOk || doneWarnings || (Job::Failed == status) || (Job::Aborted == status);
+
+  if (   ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::IfSuccessful)    && doneOk)
+      || ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::IfWarningsFound) && doneWarnings)
+      || ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::Always)          && done))
+    scheduleJobForRemoval(id);
 }
 
 void

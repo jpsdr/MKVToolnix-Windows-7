@@ -57,6 +57,8 @@ Settings::load() {
   m_outputFileNamePolicy      = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToPreviousDirectory)).toInt());
   m_fixedOutputDir            = QDir{reg.value("fixedOutputDir").toString()};
 
+  m_jobRemovalPolicy          = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
+
   reg.beginGroup("updates");
   m_checkForUpdates = reg.value("checkForUpdates", true).toBool();
   m_lastUpdateCheck = reg.value("lastUpdateCheck", QDateTime{}).toDateTime();
@@ -109,6 +111,8 @@ Settings::save()
   reg.setValue("outputFileNamePolicy",      static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("fixedOutputDir",            m_fixedOutputDir.path());
   reg.setValue("uniqueOutputFileNames",     m_uniqueOutputFileNames);
+
+  reg.setValue("jobRemovalPolicy",          static_cast<int>(m_jobRemovalPolicy));
 
   reg.beginGroup("updates");
   reg.setValue("checkForUpdates", m_checkForUpdates);

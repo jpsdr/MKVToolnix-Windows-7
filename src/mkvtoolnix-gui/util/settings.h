@@ -37,6 +37,13 @@ public:
     ToSameAsFirstInputFile,
   };
 
+  enum class JobRemovalPolicy {
+    Never,
+    IfSuccessful,
+    IfWarningsFound,
+    Always,
+  };
+
   QString m_defaultTrackLanguage, m_defaultChapterLanguage, m_defaultChapterCountry;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries;
   ProcessPriority m_priority;
@@ -49,6 +56,8 @@ public:
 
   ScanForPlaylistsPolicy m_scanForPlaylistsPolicy;
   unsigned int m_minimumPlaylistDuration;
+
+  JobRemovalPolicy m_jobRemovalPolicy;
 
   bool m_checkForUpdates;
   QDateTime m_lastUpdateCheck;

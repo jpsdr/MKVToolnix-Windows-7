@@ -19,6 +19,7 @@ class Model: public QStandardItemModel {
 protected:
   QHash<uint64_t, JobPtr> m_jobsById;
   QSet<Job const *> m_toBeProcessed;
+  QHash<uint64_t, bool> m_toBeRemoved;
   QMutex m_mutex;
 
   bool m_started, m_dontStartJobsNow;
@@ -65,11 +66,14 @@ signals:
 public slots:
   void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status status);
   void onProgressChanged(uint64_t id, unsigned int progress);
+  void removeScheduledJobs();
 
 protected:
   QList<QStandardItem *> createRow(Job const &job) const;
 
   void updateProgress();
+  void processAutomaticJobRemoval(uint64_t id, Job::Status status);
+  void scheduleJobForRemoval(uint64_t id);
 };
 
 }}}
