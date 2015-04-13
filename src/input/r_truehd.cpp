@@ -119,6 +119,8 @@ truehd_reader_c::create_packetizer(int64_t tid) {
   if (!demuxing_requested('a', tid))
     return;
 
+  m_ti.m_id = tid;
+
   if (0 == tid) {
     m_truehd_ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, m_header->m_codec, m_header->m_sampling_rate, m_header->m_channels));
     show_packetizer_info(0, PTZR(m_truehd_ptzr));

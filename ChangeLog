@@ -1,5 +1,9 @@
 2015-04-13  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: fixed specifying track properties like
+        language or name for AC3 cores embedded in TrueHD tracks when
+        they're read from raw thd+ac3 files. Fixes #1158.
+
         * mkvmerge: enhancement for MPEG program stream handling: mkvmerge
         will only look for additional files automatically if the source
         file begins with »VTS_…« and just if it ends in a
