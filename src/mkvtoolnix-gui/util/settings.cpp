@@ -140,7 +140,7 @@ Settings::exeWithPath(QString const &exe) {
   if (path.is_absolute())
     return exe;
 
-  return to_qs((mtx::sys::get_installation_path() / path).native());
+  return to_qs((mtx::sys::get_installation_path() / path).string());
 #else  // defined(SYS_WINDOWS)
   return exe;
 #endif // defined(SYS_WINDOWS)

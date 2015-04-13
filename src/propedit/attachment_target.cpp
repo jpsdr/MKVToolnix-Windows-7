@@ -171,7 +171,7 @@ attachment_target_c::execute() {
 void
 attachment_target_c::execute_add() {
   auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : guess_mime_type(m_file_name, true);
-  auto file_name   = m_options.m_name && !m_options.m_name->empty() ? *m_options.m_name        : to_utf8(bfs::path{m_file_name}.filename().native());
+  auto file_name   = m_options.m_name && !m_options.m_name->empty() ? *m_options.m_name        : to_utf8(bfs::path{m_file_name}.filename().string());
   auto description = m_options.m_description                        ? *m_options.m_description : std::string{""};
 
   auto att          = mtx::construct::cons<KaxAttached>(new KaxFileName,                                         to_wide(file_name),
@@ -295,7 +295,7 @@ attachment_target_c::replace_by_uid_name_mime_type() {
 void
 attachment_target_c::replace_attachment_values(KaxAttached &att) {
   if (m_options.m_name) {
-    auto file_name = !m_options.m_name->empty() ? *m_options.m_name : to_utf8(bfs::path{m_file_name}.filename().native());
+    auto file_name = !m_options.m_name->empty() ? *m_options.m_name : to_utf8(bfs::path{m_file_name}.filename().string());
     GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring(file_name));
   }
 
