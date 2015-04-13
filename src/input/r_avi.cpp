@@ -885,11 +885,18 @@ avi_reader_c::identify_audio() {
 void
 avi_reader_c::identify_subtitles() {
   size_t i;
-  for (i = 0; m_subtitle_demuxers.size() > i; ++i)
+  for (i = 0; m_subtitle_demuxers.size() > i; ++i) {
+    auto verbose_info = std::vector<std::string>{};
+    if (   (avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type)
+        || (avi_subs_demuxer_t::TYPE_SSA == m_subtitle_demuxers[i].m_type))
+      verbose_info.push_back("text_subtitles:1");
+
     id_result_track(1 + AVI_audio_tracks(m_avi) + i, ID_RESULT_TRACK_SUBTITLES,
                       avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type ? codec_c::get_name(codec_c::type_e::S_SRT, "SRT")
                     : avi_subs_demuxer_t::TYPE_SSA == m_subtitle_demuxers[i].m_type ? codec_c::get_name(codec_c::type_e::S_SSA_ASS, "SSA/ASS")
-                    :                                                                 "unknown");
+                    :                                                                 "unknown",
+                    verbose_info);
+  }
 }
 
 void

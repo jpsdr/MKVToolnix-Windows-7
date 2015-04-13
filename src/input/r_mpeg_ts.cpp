@@ -815,6 +815,9 @@ mpeg_ts_reader_c::identify() {
       verbose_info.push_back((boost::format("bits_per_sample:%1%") % track->a_bits_per_sample).str());
     }
 
+    if (ES_SUBT_TYPE == track->type)
+      verbose_info.push_back("text_subtitles:1");
+
     std::string type = ES_AUDIO_TYPE == track->type ? ID_RESULT_TRACK_AUDIO
                      : ES_VIDEO_TYPE == track->type ? ID_RESULT_TRACK_VIDEO
                      :                                ID_RESULT_TRACK_SUBTITLES;

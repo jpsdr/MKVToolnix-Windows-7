@@ -707,6 +707,9 @@ ogm_reader_c::identify() {
     if ((0 != sdemuxers[i]->display_width) && (0 != sdemuxers[i]->display_height))
       verbose_info.push_back((boost::format("display_dimensions:%1%x%2%") % sdemuxers[i]->display_width % sdemuxers[i]->display_height).str());
 
+    if (dynamic_cast<ogm_s_text_demuxer_c *>(sdemuxers[i].get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(sdemuxers[i].get()))
+      verbose_info.push_back("text_subtitles:1");
+
     id_result_track(i, sdemuxers[i]->get_type(), sdemuxers[i]->get_codec(), verbose_info);
   }
 

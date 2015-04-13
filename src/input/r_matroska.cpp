@@ -2250,6 +2250,10 @@ kax_reader_c::identify() {
         verbose_info.push_back((boost::format("audio_sampling_frequency:%1%") % track->a_sfreq).str());
       if (0 != track->a_channels)
         verbose_info.push_back((boost::format("audio_channels:%1%") % track->a_channels).str());
+
+    } else if ('s' == track->type) {
+      if (track->codec.is(codec_c::type_e::S_SRT) || track->codec.is(codec_c::type_e::S_SSA_ASS) || track->codec.is(codec_c::type_e::S_KATE))
+        verbose_info.push_back("text_subtitles:1");
     }
 
     if (track->content_decoder.has_encodings())
