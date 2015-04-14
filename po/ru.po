@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-14 21:36+0200\n"
+"POT-Creation-Date: 2015-04-14 22:50+0200\n"
 "PO-Revision-Date: 2014-11-05 08:50+0100\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
@@ -996,8 +996,8 @@ msgstr ""
 "Исходники и последние сборки всегда доступны на\n"
 "https://www.bunkus.org/videotools/mkvtoolnix/"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:85
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
 msgid "%p%"
 msgstr ""
 
@@ -1072,7 +1072,7 @@ msgstr "&Вложения\tAlt-2"
 msgid "&Automatically set the output file name"
 msgstr "Выбрать название для выходного файла автоматически"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:169
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:168
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:91
 msgid "&Cancel"
 msgstr ""
@@ -1134,6 +1134,12 @@ msgstr "&Скопировать в буфер обмена"
 msgid "&Country:"
 msgstr "Страна:"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1359
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1399
+#, fuzzy
+msgid "&Custom options:"
+msgstr "параметры mmg"
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:487
 #, fuzzy
 msgid "&Default"
@@ -1153,7 +1159,7 @@ msgstr ""
 msgid "&Down"
 msgstr "&Вниз"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:168
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:167
 #: src/mmg/update_checker.cpp:76
 msgid "&Download"
 msgstr "&Скачать"
@@ -1467,16 +1473,6 @@ msgstr "&Вверх"
 #, fuzzy
 msgid "&Use this directory:"
 msgstr "Использовать этот каталог:"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1359
-#, fuzzy
-msgid "&User defined options:"
-msgstr "Пользовательские параметры:"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1399
-#, fuzzy
-msgid "&User-defined options:"
-msgstr "Пользовательские параметры:"
 
 #: src/mmg/header_editor/frame.cpp:149
 msgid "&Validate\tCtrl-T"
@@ -1903,8 +1899,6 @@ msgstr "(новый файл глав)"
 msgid "(unnamed chapter)"
 msgstr "(безымянная глава)"
 
-#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #: src/mmg/tabs/chapters.cpp:886
 #: src/mmg/tabs/chapters.cpp:935
 #: src/mmg/tabs/chapters.cpp:1052
@@ -2049,10 +2043,6 @@ msgstr "<Simple> должен содержать элемент <String> или 
 msgid "<Tag> is missing the <Simple> child."
 msgstr "В <Tag> отсутствует дочерний элемент <Simple>."
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:151
-msgid "<a href=\"https://trac.bunkus.org/wiki/MkvToolNixGuiStatus\">https://trac.bunkus.org/wiki/MkvToolNixGuiStatus</a>"
-msgstr ""
-
 #: src/mkvtoolnix-gui/merge/attachments.cpp:180
 #: src/mkvtoolnix-gui/merge/input.cpp:190
 #: src/mkvtoolnix-gui/merge/input.cpp:653
@@ -2065,6 +2055,8 @@ msgid "<no output file>"
 msgstr "&Установить выходной файл"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:153
+#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #, fuzzy
 msgid "<unnamed>"
 msgstr "(безымянный)"
@@ -2438,6 +2430,11 @@ msgstr "&Добавить в очередь заданий"
 msgid "Added on"
 msgstr "Добавлено"
 
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:132
+#, fuzzy
+msgid "Adding or appending files"
+msgstr "Ошибка при открытии файла"
+
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:133
 #, fuzzy
 msgid "Adding, appending or adding as additional parts"
@@ -2493,6 +2490,7 @@ msgstr "Все файлы (*.*)|*.*"
 msgid "All chapter entries are valid."
 msgstr "Все записи глав верны."
 
+#: src/info/qt_ui.cpp:77
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:305
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:342
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:145
@@ -2503,15 +2501,10 @@ msgstr "Все записи глав верны."
 #: src/mkvtoolnix-gui/merge/tab.cpp:156
 #: src/mkvtoolnix-gui/merge/tab.cpp:180
 #: src/mkvtoolnix-gui/merge/tool.cpp:161
+#: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #, fuzzy
 msgid "All files"
 msgstr "Для всех файлов"
-
-#: src/info/qt_ui.cpp:77
-#: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#, fuzzy
-msgid "All files (*)"
-msgstr "Все файлы (*)|*"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 #: src/mmg/header_editor/frame.cpp:615
@@ -2533,7 +2526,7 @@ msgstr "Все поддерживаемые файлы|*.mkv;*.mka;*.mks;*.mk3d;
 #: src/info/qt_ui.cpp:74
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:47
 #, fuzzy
-msgid "All supported media files (%1)"
+msgid "All supported media files"
 msgstr "Все поддерживаемые медиафайлы|%s%s|%s"
 
 #: src/mmg/tabs/input.cpp:267
@@ -2859,7 +2852,7 @@ msgstr "Доступные параметры:"
 msgid "Available translations:\n"
 msgstr "Доступные переводы:\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:164
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:163
 #: src/mmg/update_checker.cpp:67
 msgid "Available version:"
 msgstr "Доступна версия:"
@@ -3225,6 +3218,11 @@ msgstr "Кодировка:"
 msgid "Check for &updates"
 msgstr "&Проверить наличие обновлений"
 
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:158
+#, fuzzy
+msgid "Check for available updates"
+msgstr "Проверить обновления в сети"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:704
 #, fuzzy
 msgid "Check online for available &updates"
@@ -3243,10 +3241,6 @@ msgstr "Проверить обновления в сети."
 #: src/mmg/options/mmg.cpp:81
 msgid "Check online whether or not a new release of MKVToolNix is available on the home page. Will only check when mmg starts and at most once a day. No information is transmitted to the server."
 msgstr "Проверить в сети наличие новой версии MKVToolNix на домашней странице проекта. Проверка производится при запуске mmg не более одного раза в день. Никакой информации на сервер не передаётся."
-
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:182
-msgid "CheckBox"
-msgstr ""
 
 #: src/mmg/mmg_dialog.cpp:1794
 msgid "Checking for updates online; please wait"
@@ -3373,7 +3367,7 @@ msgstr "ID кодека"
 msgid "Codec ID"
 msgstr "ID кодека"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:137
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:140
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:51
 #, fuzzy
 msgid "Codec ID:"
@@ -3635,10 +3629,6 @@ msgstr "Страна:"
 msgid "Country:"
 msgstr "Страна:"
 
-#: src/mkvtoolnix-gui/forms/merge/tool.h:149
-msgid "Crate a new one or open an existing one via the »merge« menu."
-msgstr ""
-
 #: src/mmg/mmg_dialog.cpp:299
 msgid "Create &option file"
 msgstr "&Создать файл конфигурации"
@@ -3656,6 +3646,10 @@ msgstr "Создать WebM-совместимый файл. mkvmerge также
 #: src/mmg/mmg_dialog.cpp:303
 msgid "Create a new chapter file"
 msgstr "Создать новый файл глав"
+
+#: src/mkvtoolnix-gui/forms/merge/tool.h:149
+msgid "Create a new one or open an existing one via the »merge« menu."
+msgstr ""
 
 #: src/common/mm_io_x.h:118
 msgid "Creating directory '%1%' failed: %2%"
@@ -3834,13 +3828,13 @@ msgstr "ID текущей задачи %d:"
 msgid "Current job ID 1000:"
 msgstr "ID текущей задачи 1000:"
 
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:187
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:175
 #: src/mmg/header_editor/value_page.cpp:166
 msgid "Current value:"
 msgstr "Текущее значение:"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:162
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:161
 #: src/mmg/update_checker.cpp:64
 msgid "Current version:"
 msgstr "Текущая версия:"
@@ -4003,7 +3997,7 @@ msgstr "Описание"
 msgid "Description already exists"
 msgstr "Описание уже существует"
 
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:178
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:184
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1405
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:163
 #: src/mmg/cli_options_dlg.cpp:52
@@ -4015,10 +4009,6 @@ msgstr "Описание:"
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:243
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:76
 msgid "Details"
-msgstr ""
-
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-msgid "Dialog"
 msgstr ""
 
 #: src/common/file_types.cpp:30
@@ -4035,8 +4025,8 @@ msgstr "Dirac"
 msgid "Directory"
 msgstr "Каталог"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:138
+#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:484
+#: src/mkvtoolnix-gui/forms/header_editor/tab.h:139
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:198
 #: src/mmg/tabs/additional_parts_dlg.cpp:56
 msgid "Directory:"
@@ -4139,7 +4129,7 @@ msgstr ""
 msgid "Done.\n"
 msgstr "Готово.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:166
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:165
 #: src/mmg/update_checker.cpp:70
 msgid "Download URL:"
 msgstr "URL для скачивания:"
@@ -4476,7 +4466,7 @@ msgid "Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds)."
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:126
-msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 1800s,3000s,00:10:00 (after three, five and ten minutes)."
+msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:2544
@@ -4679,8 +4669,8 @@ msgstr "Файл изменён"
 msgid "File name"
 msgstr "Имя файла"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:481
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:136
+#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
+#: src/mkvtoolnix-gui/forms/header_editor/tab.h:138
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:197
 #, fuzzy
 msgid "File name:"
@@ -4830,19 +4820,6 @@ msgstr "Принудительно устанавливает длину раз�
 #: src/mmg/cli_options_dlg.cpp:113
 msgid "Forces the timecode scale factor to REPLACEME. You have to replace REPLACEME with a value between 1000 and 10000000 or with -1. Normally mkvmerge will use a value of 1000000 which means that timecodes and durations will have a precision of 1ms. For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timecode scale factor so that all timecodes and durations have a precision of one sample. This causes bigger overhead but allows precise seeking and extraction. If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present."
 msgstr "Принудительно устанавливает множитель тайм-кода в REPLACEME. Вы должны заменить REPLACEME на число от 1000 до 10000000 или на -1. Обычно mkvmerge использует значение 1000000, что означает, что тайм-коды и длительности указываются с точностью в 1 мс. Для файлов, которые не содержат видеодорожек, но содержат по крайней мере одну аудиодорожку, mkvmerge будет автоматически выбирать множитель так, чтобы все тайм-коды и длительности указывались с точностью в один сэмпл. Это увеличивает накладные расходы на служебную информацию, но обеспечивает точный поиск и извлечение. Если использовано значение -1, то mkvmerge будет использовать точность до одного сэмпла, даже если присутствуют видеодорожки."
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:480
-#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:147
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:135
-#: src/mkvtoolnix-gui/forms/header_editor/tool.h:147
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:133
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:174
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:132
-#: src/mkvtoolnix-gui/forms/merge/tool.h:147
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
-#: src/mkvtoolnix-gui/forms/watch_jobs/tool.h:54
-msgid "Form"
-msgstr ""
 
 #: src/mmg/tabs/input.cpp:206
 msgid "Format specific options"
@@ -5168,7 +5145,7 @@ msgstr "Если вы обнаружили проблемы при воспро�
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:150
+#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:151
 msgid "If you want to know more about the current status then take a look at the following web page:"
 msgstr ""
 
@@ -5986,16 +5963,12 @@ msgstr "Аудио/видеофайлы Matroska"
 msgid "Matroska audio/video files"
 msgstr "Аудио/видеофайлы Matroska"
 
+#: src/info/qt_ui.cpp:75
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:342
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:142
 #: src/mkvtoolnix-gui/merge/output.cpp:37
 #, fuzzy
 msgid "Matroska files"
-msgstr "Общие файлы Matroska"
-
-#: src/info/qt_ui.cpp:75
-#, fuzzy
-msgid "Matroska files (%1)"
 msgstr "Общие файлы Matroska"
 
 #: src/mmg/tabs/chapters.cpp:679
@@ -6186,7 +6159,7 @@ msgid "Mux this"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1296
-msgid "Mux this:"
+msgid "Mux this track:"
 msgstr ""
 
 #: src/info/mkvinfo.cpp:487
@@ -6456,7 +6429,7 @@ msgstr "Ни одно из полей заголовка не было изме�
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252
 #, fuzzy
-msgid "Normal output:"
+msgid "Nor&mal output:"
 msgstr "Вывод отчёта:"
 
 #: src/mmg/tabs/input_format.cpp:279
@@ -6711,7 +6684,7 @@ msgstr "Аудиофайлы Opus (в Ogg)"
 msgid "Order: %1%"
 msgstr "Порядок: %1%"
 
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:183
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:186
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:178
 #: src/mmg/header_editor/value_page.cpp:176
 msgid "Original value:"
@@ -6909,7 +6882,7 @@ msgstr "UID предыдущего сегмента:"
 msgid "Pre&viously used output directory"
 msgstr "Использовать предыдущий каталог вывода"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
+#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:149
 #, fuzzy
 msgid "Preview warning"
 msgstr "Были предупреждения"
@@ -6972,7 +6945,7 @@ msgstr "Обработка задания %d/%d"
 msgid "Progress"
 msgstr "Обработано"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:84
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:85
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
 #, fuzzy
 msgid "Progress:"
@@ -7004,11 +6977,6 @@ msgstr "Обработано: [%1%%2%] %3%%%"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1294
 msgid "Properties:"
 msgstr ""
-
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:187
-#, fuzzy
-msgid "PushButton"
-msgstr "кнопки"
 
 #: src/mmg/mmg_dialog.cpp:1882
 msgid "Querying mkvmerge's capabilities"
@@ -7482,7 +7450,7 @@ msgstr "  --segmentinfo <file>    Читать информацию о сегм�
 msgid "Saving the modified track headers failed."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:139
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
 #: src/mmg/tabs/ask_scan_for_playlists_dlg.cpp:24
 msgid "Scan directory for other playlists"
 msgstr ""
@@ -8207,8 +8175,8 @@ msgstr "Состояние"
 msgid "Status and progress"
 msgstr "Состояние и прогресс"
 
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:180
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:160
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:167
 #: src/mmg/header_editor/value_page.cpp:174
@@ -8370,26 +8338,6 @@ msgstr "Текстовые файлы (*.txt)|*.txt|%s"
 #: src/info/wxwidgets_ui.cpp:282
 msgid "Text files (*.txt)|*.txt|All files|*.*"
 msgstr "Текстовые файлы (*.txt)|*.txt|Все файлы|*.*"
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:482
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:484
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:137
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:139
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:134
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:136
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:138
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:140
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:142
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:175
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:177
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:179
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:181
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:184
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:186
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:147
-msgid "TextLabel"
-msgstr ""
 
 #: src/input/r_vobsub.cpp:239
 msgid "The .idx file does not contain an 'id: ...' line to indicate the language.\n"
@@ -8679,7 +8627,7 @@ msgstr "Текущий файл (номер %d) не может быть уда�
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Тайм-код текущего пакета меньше, чем у предыдущего пакета. Это обычно означает, что исходный файл представляет собой файл Matroska, созданный не совсем правильно. Тайм-коды всех пакетов будут скорректированы на %1%ms, чтобы избежать потерь данных. Это может сбить синхронизацию аудио/видео, что может быть исправлено с помощью параметра mkvmerge \"--sync\". Если вы уже используете \"--sync\" и всё равно получаете это предупреждение, не беспокойтесь — это нормально. Если эта ошибка происходит несколько раз, и вы получаете это сообщение более одного раза для некоторой дорожки, то либо это исходный файл плохо собран, либо mkvmerge содержит ошибку. В этом случае вам следует связаться с автором Moritz Bunkus <moritz@bunkus.org>.\n"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:149
+#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:150
 msgid "The current version of this GUI is just a preview. It's not an alpha release, and certainly not a beta release. Many features present in the old GUI haven't been implemented yet, and there are many bugs. Its purpose is to give interested users a glimpse of what the new GUI will look and feel like."
 msgstr ""
 
@@ -9859,7 +9807,7 @@ msgstr "Этот файл не содержит правильных глав."
 msgid "This has not been implemented yet."
 msgstr "Файл не был изменён."
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:146
+#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
 msgid "This is a preview!"
 msgstr ""
 
@@ -10100,7 +10048,7 @@ msgstr "Дорожка ID %1% имеет неизвестный тип AAC.\n"
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "ID дорожки %1%: %2% (%3%)"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:139
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:141
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:54
 #, fuzzy
 msgid "Track ID for mkvmerge & mkvextract:"
@@ -10142,7 +10090,7 @@ msgstr "Номер дорожки"
 msgid "Track number %1% has been encrypted and decryption has not yet been implemented.\n"
 msgstr "Дорожка номер %1% была зашифрована, а расшифровка ещё не реализована.\n"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:141
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:142
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:57
 msgid "Track number for mkvpropedit:"
 msgstr ""
@@ -10220,8 +10168,8 @@ msgstr ""
 "Единица измерения для ширины/высоты изображения\n"
 "(0: пиксели, 1: сантиметры, 2: дюймы)."
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:135
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:176
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:139
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:183
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:48
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:159
 #: src/mmg/header_editor/value_page.cpp:152
@@ -10628,14 +10576,11 @@ msgstr "Предупреждения:"
 msgid "WebM audio/video files"
 msgstr "Аудио/видеофайлы WebM"
 
+#: src/info/qt_ui.cpp:76
 #: src/mkvtoolnix-gui/merge/output.cpp:37
 #, fuzzy
 msgid "WebM files"
 msgstr "Аудио/видеофайлы WebM"
-
-#: src/info/qt_ui.cpp:76
-msgid "WebM files (%1)"
-msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:134
 msgid "What do you want to do with the files you've dragged & dropped here?"
@@ -10779,7 +10724,7 @@ msgstr ""
 "на 5 минут и на 23 секунды."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:577
-msgid "You cannot append tracks or add additional parts to files that contain tracks."
+msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:228
@@ -11044,10 +10989,6 @@ msgstr "готово/предупреждения"
 #: src/mmg/tabs/input.cpp:202
 msgid "down"
 msgstr "вниз"
-
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
-msgid "dummy"
-msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:117
 #, fuzzy
@@ -11653,18 +11594,6 @@ msgstr "mpeg_ps_reader: Не должно было случиться #1. %1%"
 msgid "mpeg_ps_reader: Should not have happened #2. %1%"
 msgstr "mpeg_ps_reader: Не должно было случиться #2. %1%"
 
-#: src/mkvtoolnix-gui/forms/jobs/tool.h:78
-msgid "mtx::gui::Jobs::Tool"
-msgstr ""
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1291
-msgid "mtx::gui::Merge::Tab"
-msgstr ""
-
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:83
-msgid "mtx::gui::StatusBarProgressWidget"
-msgstr ""
-
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:147
 #: src/mmg/options/mmg.cpp:129
 #: src/mmg/tabs/ask_scan_for_playlists_dlg.cpp:43
@@ -12178,6 +12107,14 @@ msgstr ""
 #~ "Помощь доступна в виде подсказки, в меню\n"
 #~ "'Справка' или при нажатии на кнопку 'F1'."
 
+#, fuzzy
+#~ msgid "&User defined options:"
+#~ msgstr "Пользовательские параметры:"
+
+#, fuzzy
+#~ msgid "&User-defined options:"
+#~ msgstr "Пользовательские параметры:"
+
 #~ msgid "'--append-mode' lacks its argument.\n"
 #~ msgstr "'--append-mode' не указан аргумент.\n"
 
@@ -12253,6 +12190,14 @@ msgstr ""
 
 #~ msgid "Actions"
 #~ msgstr "Действия"
+
+#, fuzzy
+#~ msgid "All files (*)"
+#~ msgstr "Все файлы (*)|*"
+
+#, fuzzy
+#~ msgid "All supported media files (%1)"
+#~ msgstr "Все поддерживаемые медиафайлы|%s%s|%s"
 
 #~ msgid "At least one <EditionEntry> element is needed."
 #~ msgstr "Нужен по крайней мере один элемент <EditionEntry>."
@@ -12393,6 +12338,10 @@ msgstr ""
 #~ msgid "Matroska A/V files (*.mka;*.mkv)|*.mkv;*.mka|%s"
 #~ msgstr "Matroska Audio/Video файлы (*.mka;*.mkv)|*.mkv;*.mka|%s"
 
+#, fuzzy
+#~ msgid "Matroska files (%1)"
+#~ msgstr "Общие файлы Matroska"
+
 #~ msgid "Matroska files (*.mkv *.mka *.mks *.mk3d);;All files (*.*)"
 #~ msgstr "Файлы Matroska (*.mkv *.mka *.mks *.mk3d);;Все файлы (*.*)"
 
@@ -12428,6 +12377,10 @@ msgstr ""
 
 #~ msgid "PGS"
 #~ msgstr "PGS"
+
+#, fuzzy
+#~ msgid "PushButton"
+#~ msgstr "кнопки"
 
 #~ msgid "Quicktime/MP4 audio and video"
 #~ msgstr "Аудио и видео Quicktime/MP4"

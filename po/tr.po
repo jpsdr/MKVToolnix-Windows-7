@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 7.1.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-14 21:36+0200\n"
+"POT-Creation-Date: 2015-04-14 22:50+0200\n"
 "PO-Revision-Date: 2014-11-05 08:50+0100\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
@@ -1046,8 +1046,8 @@ msgstr ""
 "Kaynakları ve en son binarileri her zaman\n"
 "https://www.bunkus.org/videotools/mkvtoolnix/ adresinde mevcuttur."
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:85
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
 msgid "%p%"
 msgstr ""
 
@@ -1120,7 +1120,7 @@ msgstr "&Ekler\tAlt-2"
 msgid "&Automatically set the output file name"
 msgstr "Çıktı dosya adını otomatik ayarla"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:169
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:168
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:91
 msgid "&Cancel"
 msgstr "İ&ptal"
@@ -1181,6 +1181,12 @@ msgstr "Panoya &kopyala"
 msgid "&Country:"
 msgstr "Ülke:"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1359
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1399
+#, fuzzy
+msgid "&Custom options:"
+msgstr "mmg seçenekleri"
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:487
 #, fuzzy
 msgid "&Default"
@@ -1199,7 +1205,7 @@ msgstr "Tara&ma, sadece dosyayı ekle"
 msgid "&Down"
 msgstr "&Aşağı"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:168
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:167
 #: src/mmg/update_checker.cpp:76
 msgid "&Download"
 msgstr "İ&ndir"
@@ -1504,16 +1510,6 @@ msgstr "&Yukarı"
 #, fuzzy
 msgid "&Use this directory:"
 msgstr "Bu dizini kullan:"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1359
-#, fuzzy
-msgid "&User defined options:"
-msgstr "Kullanıcı tanımlı seçenekler:"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1399
-#, fuzzy
-msgid "&User-defined options:"
-msgstr "Kullanıcı tanımlı seçenekler:"
 
 #: src/mmg/header_editor/frame.cpp:149
 msgid "&Validate\tCtrl-T"
@@ -1989,11 +1985,9 @@ msgstr "(yeni bölüm dosyası)"
 msgid "(unnamed chapter)"
 msgstr "(isimsiz bölüm)"
 
-#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765 src/mmg/tabs/chapters.cpp:886
-#: src/mmg/tabs/chapters.cpp:935 src/mmg/tabs/chapters.cpp:1052
-#: src/mmg/tabs/chapters.cpp:1435 src/mmg/tabs/chapters.cpp:1442
-#: src/mmg/tabs/chapters.cpp:1767
+#: src/mmg/tabs/chapters.cpp:886 src/mmg/tabs/chapters.cpp:935
+#: src/mmg/tabs/chapters.cpp:1052 src/mmg/tabs/chapters.cpp:1435
+#: src/mmg/tabs/chapters.cpp:1442 src/mmg/tabs/chapters.cpp:1767
 msgid "(unnamed)"
 msgstr "(isimsiz)"
 
@@ -2145,12 +2139,6 @@ msgstr "<Simple>, ya <String> ya da <Binary> ürünü içermek zorundadır."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> eksik <Simple> ürünü."
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:151
-msgid ""
-"<a href=\"https://trac.bunkus.org/wiki/MkvToolNixGuiStatus\">https://trac."
-"bunkus.org/wiki/MkvToolNixGuiStatus</a>"
-msgstr ""
-
 #: src/mkvtoolnix-gui/merge/attachments.cpp:180
 #: src/mkvtoolnix-gui/merge/input.cpp:190
 #: src/mkvtoolnix-gui/merge/input.cpp:653
@@ -2163,6 +2151,8 @@ msgid "<no output file>"
 msgstr "Çık&tı dosyasını ayarla"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:153
+#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #, fuzzy
 msgid "<unnamed>"
 msgstr "(isimsiz)"
@@ -2567,6 +2557,11 @@ msgstr "İş kuyruğuna &ekle"
 msgid "Added on"
 msgstr "Eklenme"
 
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:132
+#, fuzzy
+msgid "Adding or appending files"
+msgstr "Dosya açma hatası"
+
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:133
 #, fuzzy
 msgid "Adding, appending or adding as additional parts"
@@ -2622,7 +2617,7 @@ msgstr "Tüm Dosyalar (*.*)|*.*"
 msgid "All chapter entries are valid."
 msgstr "Tüm bölüm girdileri geçerli."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:305
+#: src/info/qt_ui.cpp:77 src/mkvtoolnix-gui/chapter_editor/tab.cpp:305
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:342
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:145
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:124
@@ -2630,14 +2625,10 @@ msgstr "Tüm bölüm girdileri geçerli."
 #: src/mkvtoolnix-gui/merge/tab.cpp:111 src/mkvtoolnix-gui/merge/tab.cpp:125
 #: src/mkvtoolnix-gui/merge/tab.cpp:156 src/mkvtoolnix-gui/merge/tab.cpp:180
 #: src/mkvtoolnix-gui/merge/tool.cpp:161
+#: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #, fuzzy
 msgid "All files"
 msgstr "Tüm dosyalara"
-
-#: src/info/qt_ui.cpp:77 src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#, fuzzy
-msgid "All files (*)"
-msgstr "Tüm Dosyalar (*)|*"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 #: src/mmg/header_editor/frame.cpp:615
@@ -2666,7 +2657,7 @@ msgstr ""
 
 #: src/info/qt_ui.cpp:74 src/mkvtoolnix-gui/util/file_type_filter.cpp:47
 #, fuzzy
-msgid "All supported media files (%1)"
+msgid "All supported media files"
 msgstr "Tüm destek. medya dosyaları|%s%s|%s"
 
 #: src/mmg/tabs/input.cpp:267
@@ -3025,7 +3016,7 @@ msgstr "Mevcut seçenekler:"
 msgid "Available translations:\n"
 msgstr "Mevcut çeviriler:\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:164
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:163
 #: src/mmg/update_checker.cpp:67
 msgid "Available version:"
 msgstr "Kullanılabilir sürüm:"
@@ -3411,6 +3402,11 @@ msgstr "Karakter grubu:"
 msgid "Check for &updates"
 msgstr "&Güncellemeleri kontrol et"
 
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:158
+#, fuzzy
+msgid "Check for available updates"
+msgstr "En son yayımı çevrimiçi kontrol et"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:704
 #, fuzzy
 msgid "Check online for available &updates"
@@ -3433,10 +3429,6 @@ msgstr ""
 "Ana sayfada MKVToolNix'in yeni bir yayımının mevcut olup olmadığını "
 "çevrimiçi kontrol eder. Sadece mmg başlatıldığında ve günde en çok bir defa "
 "kontrol eder. Sunucuya bilgi aktarılmaz."
-
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:182
-msgid "CheckBox"
-msgstr ""
 
 #: src/mmg/mmg_dialog.cpp:1794
 msgid "Checking for updates online; please wait"
@@ -3556,7 +3548,7 @@ msgstr "Kodek"
 msgid "Codec ID"
 msgstr "Kodek ID"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:137
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:140
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:51
 #, fuzzy
 msgid "Codec ID:"
@@ -3839,10 +3831,6 @@ msgstr "Ülke:"
 msgid "Country:"
 msgstr "Ülke:"
 
-#: src/mkvtoolnix-gui/forms/merge/tool.h:149
-msgid "Crate a new one or open an existing one via the »merge« menu."
-msgstr ""
-
 #: src/mmg/mmg_dialog.cpp:299
 msgid "Create &option file"
 msgstr "&Seçenek dosyası oluştur"
@@ -3869,6 +3857,10 @@ msgstr ""
 #: src/mmg/mmg_dialog.cpp:303
 msgid "Create a new chapter file"
 msgstr "Yeni bölüm dosyası oluştur"
+
+#: src/mkvtoolnix-gui/forms/merge/tool.h:149
+msgid "Create a new one or open an existing one via the »merge« menu."
+msgstr ""
 
 #: src/common/mm_io_x.h:118
 msgid "Creating directory '%1%' failed: %2%"
@@ -4057,13 +4049,13 @@ msgstr "Şu anki iş ID %d:"
 msgid "Current job ID 1000:"
 msgstr "Şu anki iş ID 1000:"
 
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:187
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:175
 #: src/mmg/header_editor/value_page.cpp:166
 msgid "Current value:"
 msgstr "Şu anki değer:"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:162
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:161
 #: src/mmg/update_checker.cpp:64
 msgid "Current version:"
 msgstr "Şu anki sürüm:"
@@ -4229,7 +4221,7 @@ msgstr "Tanım"
 msgid "Description already exists"
 msgstr "Tanım zaten var"
 
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:178
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:184
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1405
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:163
 #: src/mmg/cli_options_dlg.cpp:52 src/mmg/header_editor/value_page.cpp:155
@@ -4241,10 +4233,6 @@ msgstr "Tanım:"
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:76
 msgid "Details"
 msgstr "Ayrıntılar"
-
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-msgid "Dialog"
-msgstr ""
 
 #: src/common/file_types.cpp:30 src/input/r_dirac.h:33 src/output/p_dirac.h:38
 msgid "Dirac"
@@ -4258,8 +4246,8 @@ msgstr "Dirac"
 msgid "Directory"
 msgstr "Dizin"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:138
+#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:484
+#: src/mkvtoolnix-gui/forms/header_editor/tab.h:139
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:198
 #: src/mmg/tabs/additional_parts_dlg.cpp:56
 msgid "Directory:"
@@ -4369,7 +4357,7 @@ msgstr "Oynatma listelerini tarama bitti.\n"
 msgid "Done.\n"
 msgstr "Bitti.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:166
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:165
 #: src/mmg/update_checker.cpp:70
 msgid "Download URL:"
 msgstr "İndirme URL'si:"
@@ -4729,7 +4717,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:126
 msgid ""
 "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty "
-"minutes) or 1800s,3000s,00:10:00 (after three, five and ten minutes)."
+"minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:2544
@@ -4960,8 +4948,8 @@ msgstr "Dosya değiştirildi"
 msgid "File name"
 msgstr "Dosya adı"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:481
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:136
+#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
+#: src/mkvtoolnix-gui/forms/header_editor/tab.h:138
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:197
 #, fuzzy
 msgid "File name:"
@@ -5143,19 +5131,6 @@ msgid ""
 "causes bigger overhead but allows precise seeking and extraction. If the "
 "magical value -1 is used then mkvmerge will use sample precision even if a "
 "video track is present."
-msgstr ""
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:480
-#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:147
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:135
-#: src/mkvtoolnix-gui/forms/header_editor/tool.h:147
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:133
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:174
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:132
-#: src/mkvtoolnix-gui/forms/merge/tool.h:147
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
-#: src/mkvtoolnix-gui/forms/watch_jobs/tool.h:54
-msgid "Form"
 msgstr ""
 
 #: src/mmg/tabs/input.cpp:206
@@ -5576,7 +5551,7 @@ msgid ""
 "which input file to append or add them to:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:150
+#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:151
 msgid ""
 "If you want to know more about the current status then take a look at the "
 "following web page:"
@@ -6513,16 +6488,11 @@ msgstr "Matroska ses/görüntü dosyaları"
 msgid "Matroska audio/video files"
 msgstr "Matroska ses/görüntü dosyaları"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:342
+#: src/info/qt_ui.cpp:75 src/mkvtoolnix-gui/chapter_editor/tab.cpp:342
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:142
 #: src/mkvtoolnix-gui/merge/output.cpp:37
 #, fuzzy
 msgid "Matroska files"
-msgstr "Matroska dosyası aç"
-
-#: src/info/qt_ui.cpp:75
-#, fuzzy
-msgid "Matroska files (%1)"
 msgstr "Matroska dosyası aç"
 
 #: src/mmg/tabs/chapters.cpp:679
@@ -6730,7 +6700,7 @@ msgid "Mux this"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1296
-msgid "Mux this:"
+msgid "Mux this track:"
 msgstr ""
 
 #: src/info/mkvinfo.cpp:487
@@ -7002,7 +6972,7 @@ msgstr "Başlık alanlarının hiçbiri değiştirilmedi. Hiçbir şey kaydedilm
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252
 #, fuzzy
-msgid "Normal output:"
+msgid "Nor&mal output:"
 msgstr "Günlük çıktısı:"
 
 #: src/mmg/tabs/input_format.cpp:279
@@ -7282,7 +7252,7 @@ msgstr "Opus (Ogg içinde) ses dosyaları"
 msgid "Order: %1%"
 msgstr "Sıra: %1%"
 
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:183
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:186
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:178
 #: src/mmg/header_editor/value_page.cpp:176
 msgid "Original value:"
@@ -7479,7 +7449,7 @@ msgstr "Önceki parça UID:"
 msgid "Pre&viously used output directory"
 msgstr "Önceki çıktı dizinini kullan"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
+#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:149
 #, fuzzy
 msgid "Preview warning"
 msgstr "Uyarılar vardı"
@@ -7540,7 +7510,7 @@ msgstr "İşlenen iş %d/%d"
 msgid "Progress"
 msgstr "İlerleme"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:84
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:85
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
 #, fuzzy
 msgid "Progress:"
@@ -7569,11 +7539,6 @@ msgstr "İlerleme: [%1%%2%] %3%%%"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1294
 msgid "Properties:"
 msgstr ""
-
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:187
-#, fuzzy
-msgid "PushButton"
-msgstr "butonlar"
 
 #: src/mmg/mmg_dialog.cpp:1882
 msgid "Querying mkvmerge's capabilities"
@@ -8147,7 +8112,7 @@ msgstr "  --segmentinfo <file>     Parça bilgisini dosyadan oku.\n"
 msgid "Saving the modified track headers failed."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:139
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
 #: src/mmg/tabs/ask_scan_for_playlists_dlg.cpp:24
 msgid "Scan directory for other playlists"
 msgstr "Diğer oynatma listeleri için dizini tara"
@@ -8966,8 +8931,8 @@ msgstr "Durum"
 msgid "Status and progress"
 msgstr "Durum ve ilerleme"
 
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:180
-#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:160
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
+#: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:167
 #: src/mmg/header_editor/value_page.cpp:174 src/mmg/update_checker.cpp:61
@@ -9147,26 +9112,6 @@ msgstr "Metin dosyaları (*.txt)|*.txt|%s"
 #: src/info/wxwidgets_ui.cpp:282
 msgid "Text files (*.txt)|*.txt|All files|*.*"
 msgstr "Metin dosyaları (*.txt)|*.txt|Tüm dosyalar|*.*"
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:482
-#: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:484
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:137
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:139
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:134
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:136
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:138
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:140
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:142
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:175
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:177
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:179
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:181
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:184
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:186
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:147
-msgid "TextLabel"
-msgstr ""
 
 #: src/input/r_vobsub.cpp:239
 msgid ""
@@ -9537,7 +9482,7 @@ msgid ""
 "should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:149
+#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:150
 msgid ""
 "The current version of this GUI is just a preview. It's not an alpha "
 "release, and certainly not a beta release. Many features present in the old "
@@ -10968,7 +10913,7 @@ msgstr ""
 msgid "This has not been implemented yet."
 msgstr "Dosya değiştirilmiş."
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:146
+#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
 msgid "This is a preview!"
 msgstr ""
 
@@ -11267,7 +11212,7 @@ msgstr "İz ID %1% bilinmeyen bir AAC türüne sahip.\n"
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "İz ID %1%: %2% (%3%)"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:139
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:141
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:54
 #, fuzzy
 msgid "Track ID for mkvmerge & mkvextract:"
@@ -11310,7 +11255,7 @@ msgid ""
 "implemented.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:141
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:142
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:57
 msgid "Track number for mkvpropedit:"
 msgstr ""
@@ -11393,8 +11338,8 @@ msgstr ""
 "GörüntüGenişliği/Yüksekliği için birimin türü\n"
 "(0: piksel, 1: santimetre, 2: inç, 3: en-boy oranı)."
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:135
-#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:176
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:139
+#: src/mkvtoolnix-gui/forms/header_editor/value_page.h:183
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:48
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:159
 #: src/mmg/header_editor/value_page.cpp:152
@@ -11827,14 +11772,10 @@ msgstr "Uyarılar:"
 msgid "WebM audio/video files"
 msgstr "WebM ses/görüntü dosyaları"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:37
+#: src/info/qt_ui.cpp:76 src/mkvtoolnix-gui/merge/output.cpp:37
 #, fuzzy
 msgid "WebM files"
 msgstr "WebM ses/görüntü dosyaları"
-
-#: src/info/qt_ui.cpp:76
-msgid "WebM files (%1)"
-msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:134
 msgid "What do you want to do with the files you've dragged & dropped here?"
@@ -11994,9 +11935,7 @@ msgstr ""
 "önce başlamasına izin verecektir."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:577
-msgid ""
-"You cannot append tracks or add additional parts to files that contain "
-"tracks."
+msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:228
@@ -12260,10 +12199,6 @@ msgstr "bitti/uyarılar"
 #: src/mmg/tabs/input.cpp:202
 msgid "down"
 msgstr "aşağı"
-
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
-msgid "dummy"
-msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:117
 #, fuzzy
@@ -12968,18 +12903,6 @@ msgstr "mpeg_ps_reader: Olmamalıydı #1. %1%"
 msgid "mpeg_ps_reader: Should not have happened #2. %1%"
 msgstr "mpeg_ps_reader: Olmamalıydı #2. %1%"
 
-#: src/mkvtoolnix-gui/forms/jobs/tool.h:78
-msgid "mtx::gui::Jobs::Tool"
-msgstr ""
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1291
-msgid "mtx::gui::Merge::Tab"
-msgstr ""
-
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:83
-msgid "mtx::gui::StatusBarProgressWidget"
-msgstr ""
-
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:147
 #: src/mmg/options/mmg.cpp:129 src/mmg/tabs/ask_scan_for_playlists_dlg.cpp:43
 msgid "never scan for other playlists"
@@ -13483,6 +13406,14 @@ msgstr ""
 #~ msgid "%d minute(s) %d second(s)"
 #~ msgstr "%d dakika %d saniye"
 
+#, fuzzy
+#~ msgid "&User defined options:"
+#~ msgstr "Kullanıcı tanımlı seçenekler:"
+
+#, fuzzy
+#~ msgid "&User-defined options:"
+#~ msgstr "Kullanıcı tanımlı seçenekler:"
+
 #~ msgid "'--append-mode' lacks its argument.\n"
 #~ msgstr "'--append-mode' bağımsız değişkenine ihtiyacı olur.\n"
 
@@ -13556,6 +13487,14 @@ msgstr ""
 
 #~ msgid "Actions"
 #~ msgstr "Eylemler"
+
+#, fuzzy
+#~ msgid "All files (*)"
+#~ msgstr "Tüm Dosyalar (*)|*"
+
+#, fuzzy
+#~ msgid "All supported media files (%1)"
+#~ msgstr "Tüm destek. medya dosyaları|%s%s|%s"
 
 #~ msgid "BZ2_bzCompressInit() failed. Result: %1%\n"
 #~ msgstr "BZ2_bzCompressInit() başarısız oldu. Sonuç: %1%\n"
@@ -13645,6 +13584,10 @@ msgstr ""
 #~ msgid "Matroska A/V files (*.mka;*.mkv)|*.mkv;*.mka|%s"
 #~ msgstr "Matroska S/G dosyaları (*.mka;*.mkv)|*.mkv;*.mka|%s"
 
+#, fuzzy
+#~ msgid "Matroska files (%1)"
+#~ msgstr "Matroska dosyası aç"
+
 #~ msgid "Matroska files (*.mkv *.mka *.mks *.mk3d);;All files (*.*)"
 #~ msgstr "Matroska dosyaları (*.mkv *.mka *.mks *.mk3d);;Tüm dosyalar (*.*)"
 
@@ -13671,6 +13614,10 @@ msgstr ""
 
 #~ msgid "PGS"
 #~ msgstr "PGS"
+
+#, fuzzy
+#~ msgid "PushButton"
+#~ msgstr "butonlar"
 
 #~ msgid "Quicktime/MP4 reader: Track %1% has an unknown type.\n"
 #~ msgstr ""
