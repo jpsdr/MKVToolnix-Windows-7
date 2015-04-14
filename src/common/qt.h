@@ -22,6 +22,7 @@
 #define Q(s)  to_qs(s)
 #define QY(s) to_qs(Y(s))
 #define QNY(singular, plural, count) to_qs(NY(singular, plural, count))
+#define QTR(s, dummy) to_qs(Y(s))
 
 inline QString
 to_qs(char const *source) {

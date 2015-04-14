@@ -76,7 +76,8 @@ def setup_globals
   $all_headers             =  $source_directories.collect { |dir| FileList[ "#{dir}/**/*.h",                   ].to_a }.flatten.sort
   $all_objects             =  $all_sources.collect { |file| file.ext('o') }
 
-  $gui_ui_files            = FileList["src/mkvtoolnix-gui/forms/**/*.ui"].to_a if $build_mkvtoolnix_gui
+  $gui_ui_files            = FileList["src/mkvtoolnix-gui/forms/**/*.ui"].to_a
+  $gui_ui_h_files          = $gui_ui_files.collect { |file| file.ext 'h' }
 
   $top_srcdir              = c(:top_srcdir)
   $dependency_dir          = "#{$top_srcdir}/rake.d/dependency.d"
@@ -267,7 +268,7 @@ end
 
 # Qt files
 rule '.h' => '.ui' do |t|
-  runq "     UIC #{t.source}", "#{c(:UIC)} #{t.sources.join(" ")} > #{t.name}"
+  runq "     UIC #{t.source}", "#{c(:UIC)} -tr QTR #{t.sources.join(" ")} > #{t.name}"
 end
 
 rule '.cpp' => '.qrc' do |t|
@@ -302,11 +303,20 @@ file "doc/development.html" => [ "doc/development.md", "doc/pandoc-template.html
     "--css=pandoc.css --template=doc/pandoc-template.html doc/development.md"
 end
 
-file "po/mkvtoolnix.pot" => $all_sources + $all_headers + %w{Rakefile} do |t|
-  sources = t.prerequisites.dup - %w{Rakefile}
-  runq "XGETTEXT #{t.name}", <<-COMMAND
-    xgettext --keyword=YT --keyword=Y --keyword=Z --keyword=TIP --keyword=NY:1,2 --keyword=NZ:1,2 --default-domain=mkvtoolnix --from-code=UTF-8 -s --omit-header --boost -o #{t.name} #{sources.join(" ")}
-  COMMAND
+file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{Rakefile} do |t|
+  sources   = (t.prerequisites.dup - %w{Rakefile}).sort.uniq
+
+  keywords  = %w{--keyword=Y --keyword=NY:1,2}   # singular & plural forms returning std::string
+  keywords += %w{--keyword=YT}                   # singular form returning translatable_string_c
+  keywords += %w{--keyword=Z --keyword=TIP}      # singular form & tooltip formatting returning wxString
+  keywords += %w{--keyword=QTR}                  # singular form returning QString, used by uic
+  keywords += %w{--keyword=QY --keyword=QNY:1,2} # singular & plural forms returning QString
+
+  options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --sort-output --boost}
+  options  += ["'--msgid-bugs-address=Moritz Bunkus <moritz@bunkus.org>'"]
+  options  += ["'--copyright-holder=Moritz Bunkus <moritz@bunkus.org>'", "--package-name=MKVToolNix", "--package-version=#{c(:PACKAGE_VERSION)}", "--foreign-user"]
+
+  runq "XGETTEXT #{t.name}", "xgettext #{keywords.join(" ")} #{options.join(" ")} -o #{t.name} #{sources.join(" ")}"
 end
 
 task :manpages => $manpages
