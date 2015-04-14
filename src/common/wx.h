@@ -97,12 +97,10 @@ operator <<(std::ostream &out,
 # include <libintl.h>
 # if !defined Z
 #  define Z(s) wxU(gettext(s))
-#  define NZ(s_singular, s_plural, count) wxU(ngettext(s_singular, s_plural, count))
 # endif
 #else /* HAVE_LIBINTL_H */
 # if !defined Z
 #  define Z(s) wxU(s)
-#  define NZ(s_singular, s_plural, count) wxU(s_singular)
 # endif
 #endif
 
