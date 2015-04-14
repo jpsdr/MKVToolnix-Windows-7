@@ -123,7 +123,7 @@ Tab::onSplitModeChanged(int newMode) {
             << QY("If given then you may use up to nine digits after the decimal point.")
             << QY("If two or more timecodes are used then you have to separate them with commas.")
             << QY("The formats can be mixed, too.")
-            << QY("Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 1800s,3000s,00:10:00 (after three, five and ten minutes).");
+            << QY("Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes).");
 
   } else if (MuxConfig::SplitByParts == splitMode) {
     label    = QY("Parts:");

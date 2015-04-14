@@ -70,11 +70,11 @@ void
 main_window_c::open() {
   auto matroska_extensions = Q("*.mkv *.mka *.mks *.mk3d");
   auto webm_extensions     = Q("*.webm *.webma *.webmv");
-  auto filter              = Q("%1;;%2;;%3;;%4")
-    .arg(QY("All supported media files (%1)").arg(Q("%1 %2").arg(matroska_extensions).arg(webm_extensions)))
-    .arg(QY("Matroska files (%1)").arg(matroska_extensions))
-    .arg(QY("WebM files (%1)").arg(webm_extensions))
-    .arg(QY("All files (*)"));
+  auto filter              = Q("%1 (%2);;%3 (%4);;%5 (%6);;%7 (*)")
+    .arg(QY("All supported media files")).arg(Q("%1 %2").arg(matroska_extensions).arg(webm_extensions))
+    .arg(QY("Matroska files")).arg(matroska_extensions)
+    .arg(QY("WebM files")).arg(webm_extensions)
+    .arg(QY("All files"));
 
   QString file_name = QFileDialog::getOpenFileName(this, QY("Open File"), "", filter);
   if (!file_name.isEmpty())

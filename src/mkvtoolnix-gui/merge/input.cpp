@@ -574,7 +574,7 @@ Tab::onAddAdditionalParts() {
   auto currentIdx = selectedSourceFile();
   auto sourceFile = m_filesModel->fromIndex(currentIdx);
   if (sourceFile && !sourceFile->m_tracks.size()) {
-    QMessageBox::critical(this, QY("Unable to append files"), QY("You cannot append tracks or add additional parts to files that contain tracks."));
+    QMessageBox::critical(this, QY("Unable to append files"), QY("You cannot add additional parts to files that don't contain tracks."));
     return;
   }
 

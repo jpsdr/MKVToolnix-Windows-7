@@ -43,8 +43,8 @@ FileTypeFilter::get() {
 
   std::sort(s_filter.begin(), s_filter.end());
 
-  s_filter.push_front(QY("All files (*)"));
-  s_filter.push_front(QY("All supported media files (%1)").arg(all_extensions.join(" ")));
+  s_filter.push_front(Q("%1 (*)").arg(QY("All files")));
+  s_filter.push_front(Q("%1 (%2)").arg(QY("All supported media files")).arg(all_extensions.join(" ")));
 
   return s_filter;
 }
