@@ -58,7 +58,7 @@ Tab::~Tab() {
 }
 
 QString
-Tab::getTitle()
+Tab::title()
   const {
   auto title = m_config.m_destination.isEmpty() ? QY("<no output file>") : QFileInfo{m_config.m_destination}.fileName();
   if (!m_config.m_configFileName.isEmpty())
@@ -218,8 +218,12 @@ Tab::updateConfigFromControlValues() {
 
 void
 Tab::retranslateUi() {
+  ui->retranslateUi(this);
+
   retranslateInputUI();
   retranslateAttachmentsUI();
+
+  emit titleChanged();
 }
 
 bool

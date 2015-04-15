@@ -109,7 +109,7 @@ Tool::openFile(QString const &fileName) {
   auto tab = new Tab{this, fileName};
 
   connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
-  ui->editors->addTab(tab, QFileInfo{fileName}.fileName());
+  ui->editors->addTab(tab, tab->title());
 
   showHeaderEditorsWidget();
 

@@ -44,6 +44,7 @@ public:
   virtual void retranslateUi();
   virtual void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
   virtual QString const &getFileName() const;
+  virtual QString title() const;
   virtual void validate();
 
 signals:

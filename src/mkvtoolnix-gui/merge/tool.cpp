@@ -102,6 +102,7 @@ Tool::toolShown() {
 void
 Tool::retranslateUi() {
   ui->retranslateUi(this);
+
   for (auto idx = 0, numTabs = ui->merges->count(); idx < numTabs; ++idx)
     static_cast<Tab *>(ui->merges->widget(idx))->retranslateUi();
 }
@@ -116,7 +117,7 @@ Tool::appendTab(Tab *tab) {
   connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
   connect(tab, &Tab::titleChanged,  this, &Tool::tabTitleChanged);
 
-  ui->merges->addTab(tab, tab->getTitle());
+  ui->merges->addTab(tab, tab->title());
   ui->merges->setCurrentIndex(ui->merges->count() - 1);
 
   showMergeWidget();
@@ -182,7 +183,7 @@ Tool::tabTitleChanged() {
   auto tab = dynamic_cast<Tab *>(sender());
   auto idx = ui->merges->indexOf(tab);
   if (tab && (-1 != idx))
-    ui->merges->setTabText(idx, tab->getTitle());
+    ui->merges->setTabText(idx, tab->title());
 }
 
 }}}

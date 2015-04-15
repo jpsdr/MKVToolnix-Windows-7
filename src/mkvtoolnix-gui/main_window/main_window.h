@@ -61,6 +61,7 @@ public:
 
   virtual void showTheseMenusOnly(QList<QMenu *> const &menus);
   virtual void showAndEnableMenu(QMenu &menu, bool show);
+  virtual void retranslateUi();
 
 public slots:
   virtual void changeTool();
@@ -89,7 +90,6 @@ protected:
   virtual void setupMenu();
   virtual void setupToolSelector();
   virtual QWidget *createNotImplementedWidget();
-  virtual void retranslateUi();
 
   virtual void closeEvent(QCloseEvent *event);
 

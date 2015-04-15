@@ -5,6 +5,7 @@
 
 #include <QApplication>
 #include <QStringList>
+#include <QTranslator>
 
 namespace mtx { namespace gui {
 
@@ -17,11 +18,16 @@ using CharacterSetList   = std::vector<QString>;
 class App : public QApplication {
   Q_OBJECT;
 
+protected:
+  std::unique_ptr<QTranslator> m_currentTranslator;
+
 public:
   App(int &argc, char **argv);
   virtual ~App();
 
   void retranslateUi();
+  void initializeLocale(QString const &requestedLocale = QString{});
+
 
 public slots:
   void saveSettings() const;

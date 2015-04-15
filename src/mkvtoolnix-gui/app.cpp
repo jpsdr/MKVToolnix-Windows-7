@@ -1,14 +1,18 @@
 #include "common/common_pch.h"
 
+#include <QLibraryInfo>
+
 #include <boost/optional.hpp>
 
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
+#include "common/translation.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui {
@@ -44,7 +48,7 @@ App::App(int &argc,
 
   QObject::connect(this, SIGNAL(aboutToQuit()), this, SLOT(saveSettings()));
 
-  retranslateUi();
+  initializeLocale();
 }
 
 App::~App() {
@@ -63,7 +67,8 @@ App::instance() {
 
 void
 App::retranslateUi() {
-  setApplicationDisplayName(Q(get_version_info("MKVToolNix GUI")));
+  if (MainWindow::get())
+    MainWindow::get()->retranslateUi();
 }
 
 void
@@ -193,6 +198,53 @@ App::isInstalled() {
   if (!s_is_installed)
     s_is_installed.reset(mtx::sys::is_installed());
   return *s_is_installed;
+}
+
+void
+App::initializeLocale(QString const &requestedLocale) {
+  auto locale = to_utf8(requestedLocale);
+
+#if defined(HAVE_LIBINTL_H)
+  auto &cfg = Util::Settings::get();
+
+  if (m_currentTranslator)
+    removeTranslator(m_currentTranslator.get());
+  m_currentTranslator.reset();
+
+  translation_c::initialize_available_translations();
+
+  if (locale.empty())
+    locale = to_utf8(cfg.m_uiLocale);
+
+  if (-1 == translation_c::look_up_translation(locale))
+    locale = "";
+
+  if (locale.empty()) {
+    locale = boost::regex_replace(translation_c::get_default_ui_locale(), boost::regex{"\\..*", boost::regex::perl}, "");
+    if (-1 == translation_c::look_up_translation(locale))
+      locale = "";
+  }
+
+  if (!locale.empty()) {
+    auto translator = std::make_unique<QTranslator>();
+#ifdef SYS_WINDOWS
+    auto path       = Q("%1/locale/%2/LC_MESSAGES").arg(applicationDirPath()).arg(Q(locale));
+#else
+    auto path       = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+#endif
+
+    auto result = translator->load(Q("qtbase_%1").arg(Q(locale)), path);
+    installTranslator(translator.get());
+
+    m_currentTranslator = std::move(translator);
+    cfg.m_uiLocale      = Q(locale);
+  }
+
+#endif  // HAVE_LIBINTL_H
+
+  init_locales(locale);
+
+  retranslateUi();
 }
 
 }}

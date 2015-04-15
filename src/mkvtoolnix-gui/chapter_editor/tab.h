@@ -55,13 +55,13 @@ public:
   ~Tab();
 
   virtual void retranslateUi();
-  virtual QString const &getFileName() const;
-  virtual QString getTitle() const;
+  virtual QString const &fileName() const;
+  virtual QString title() const;
   virtual bool isEmpty() const;
 
 signals:
   void removeThisTab();
-  void titleChanged(QString const &title);
+  void titleChanged();
 
 public slots:
   virtual void newFile();

@@ -234,6 +234,12 @@ Tab::getFileName()
   return m_fileName;
 }
 
+QString
+Tab::title()
+  const {
+  return QFileInfo{m_fileName}.fileName();
+}
+
 bool
 Tab::hasBeenModified() {
   auto pages = m_model->getTopLevelPages();

@@ -131,6 +131,8 @@ Tab::retranslateUi() {
   m_nameModel->retranslateUi();
 
   resizeChapterColumnsToContents();
+
+  emit titleChanged();
 }
 
 void
@@ -146,7 +148,7 @@ Tab::resizeNameColumnsToContents()
 }
 
 QString
-Tab::getTitle()
+Tab::title()
   const {
   if (m_fileName.isEmpty())
     return QY("<unsaved file>");
@@ -154,7 +156,7 @@ Tab::getTitle()
 }
 
 QString const &
-Tab::getFileName()
+Tab::fileName()
   const {
   return m_fileName;
 }
@@ -224,7 +226,7 @@ Tab::loadFromChapterFile() {
     QMessageBox::warning(this, QY("Simple chapter file format"), QY("The file you tried to open (%1) is a simple chapter file format. This can only be read but not written. "
                                                                     "You will have to save the file to a Matroska or an XML chapter file.").arg(m_fileName));
     m_fileName.clear();
-    emit titleChanged(getTitle());
+    emit titleChanged();
   }
 
   return chapters;
@@ -286,7 +288,7 @@ Tab::saveAsImpl(bool requireNewFileName,
     settings.save();
 
     updateFileNameDisplay();
-    emit titleChanged(getTitle());
+    emit titleChanged();
   }
 
   MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));

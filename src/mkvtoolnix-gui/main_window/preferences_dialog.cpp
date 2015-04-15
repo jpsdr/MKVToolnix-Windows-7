@@ -16,6 +16,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   : QDialog{parent}
   , ui{new Ui::PreferencesDialog}
   , m_cfg{Util::Settings::get()}
+  , m_previousUiLocale{m_cfg.m_uiLocale}
 {
   ui->setupUi(this);
 
@@ -49,6 +50,12 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 }
 
 PreferencesDialog::~PreferencesDialog() {
+}
+
+bool
+PreferencesDialog::uiLocaleChanged()
+  const {
+  return m_previousUiLocale != m_cfg.m_uiLocale;
 }
 
 void
@@ -96,12 +103,12 @@ PreferencesDialog::setupInterfaceLanguage() {
   for (auto const &translation : translation_c::ms_available_translations)
     translations.emplace_back(Q("%1 (%2)").arg(Q(translation.m_translated_name)).arg(Q(translation.m_english_name)), Q(translation.get_locale()));
 
-  brng::sort(translations, [](TranslationSorter const &a, TranslationSorter const &b) { return a.second < b.second; });
+  brng::sort(translations);
 
   for (auto const &translation : translations)
     ui->cbGuiInterfaceLanguage->addItem(translation.first, translation.second);
 
-  // TODO: PreferencesDialog::setupInterfaceLanguage: change locale
+  Util::setComboBoxTextByData(ui->cbGuiInterfaceLanguage, m_cfg.m_uiLocale);
 #endif  // HAVE_LIBINTL_H
 }
 
@@ -225,6 +232,7 @@ PreferencesDialog::setupOutputFileNamePolicy() {
 void
 PreferencesDialog::save() {
   // GUI page:
+  m_cfg.m_uiLocale                  = ui->cbGuiInterfaceLanguage->currentData().toString();
   m_cfg.m_checkForUpdates           = ui->cbGuiCheckForUpdates->isChecked();
   auto idx                          = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy          = static_cast<Util::Settings::JobRemovalPolicy>(idx);

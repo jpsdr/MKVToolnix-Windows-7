@@ -60,6 +60,10 @@ Settings::load() {
 
   m_jobRemovalPolicy          = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
 
+#if defined(HAVE_LIBINTL_H)
+  m_uiLocale                  = reg.value("uiLocale").toString();
+#endif
+
   reg.beginGroup("updates");
   m_checkForUpdates = reg.value("checkForUpdates", true).toBool();
   m_lastUpdateCheck = reg.value("lastUpdateCheck", QDateTime{}).toDateTime();
@@ -120,6 +124,8 @@ Settings::save()
   reg.setValue("uniqueOutputFileNames",     m_uniqueOutputFileNames);
 
   reg.setValue("jobRemovalPolicy",          static_cast<int>(m_jobRemovalPolicy));
+
+  reg.setValue("uiLocale",                  m_uiLocale);
 
   reg.beginGroup("updates");
   reg.setValue("checkForUpdates", m_checkForUpdates);

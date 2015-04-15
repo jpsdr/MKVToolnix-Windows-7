@@ -35,7 +35,7 @@ public:
 
 public slots:
   virtual void toolShown() override;
-  virtual void tabTitleChanged(QString const &title);
+  virtual void tabTitleChanged();
   virtual void enableMenuActions();
   virtual void newFile();
   virtual void selectFileToOpen();

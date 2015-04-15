@@ -50,7 +50,7 @@ public:
   explicit Tab(QWidget *parent);
   ~Tab();
 
-  virtual QString getTitle() const;
+  virtual QString title() const;
   virtual void load(QString const &fileName);
 
 signals:

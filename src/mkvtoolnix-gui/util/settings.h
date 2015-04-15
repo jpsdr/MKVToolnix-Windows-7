@@ -62,6 +62,8 @@ public:
   bool m_checkForUpdates;
   QDateTime m_lastUpdateCheck;
 
+  QString m_uiLocale;
+
 public:
   Settings();
   void load();

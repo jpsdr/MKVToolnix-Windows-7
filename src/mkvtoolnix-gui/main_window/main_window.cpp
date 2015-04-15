@@ -10,6 +10,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/qt.h"
 #include "common/version.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
@@ -212,6 +213,8 @@ MainWindow::getWatchJobTool() {
 
 void
 MainWindow::retranslateUi() {
+  ui->retranslateUi(this);
+
   setWindowTitle(Q(get_version_info("MKVToolNix GUI")));
 
   for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx) {
@@ -235,8 +238,13 @@ MainWindow::closeEvent(QCloseEvent *event) {
 void
 MainWindow::editPreferences() {
   PreferencesDialog dlg{this};
-  if (dlg.exec())
-    dlg.save();
+  if (!dlg.exec())
+    return;
+
+  dlg.save();
+
+  if (dlg.uiLocaleChanged())
+    App::instance()->initializeLocale();
 }
 
 #if defined(HAVE_CURL_EASY_H)

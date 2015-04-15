@@ -65,7 +65,7 @@ void
 Tool::enableMenuActions() {
   auto mwUi        = MainWindow::get()->getUi();
   auto tab         = currentTab();
-  auto hasFileName = tab && !tab->getFileName().isEmpty();
+  auto hasFileName = tab && !tab->fileName().isEmpty();
   auto hasElements = tab && !tab->isEmpty();
 
   mwUi->actionChapterEditorSave->setEnabled(hasFileName && hasElements);
@@ -93,7 +93,7 @@ Tool::appendTab(Tab *tab) {
   connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
   connect(tab, &Tab::titleChanged,  this, &Tool::tabTitleChanged);
 
-  ui->editors->addTab(tab, tab->getTitle());
+  ui->editors->addTab(tab, tab->title());
 
   showChapterEditorsWidget();
 
@@ -176,12 +176,12 @@ Tool::saveToMatroska() {
 void
 Tool::reload() {
   auto tab = currentTab();
-  if (!tab || tab->getFileName().isEmpty())
+  if (!tab || tab->fileName().isEmpty())
     return;
 
   // TODO: Tool::reload: hasBeenModified
 //   if (tab->hasBeenModified()) {
-//     auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
+//     auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
 //                                         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
 //     if (answer != QMessageBox::Yes)
 //       return;
@@ -199,7 +199,7 @@ Tool::closeTab(int index) {
 
   // TODO: Tool::closeTab: hasBeenModified
   // if (tab->hasBeenModified()) {
-  //   auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
+  //   auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
   //                                       QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
   //   if (answer != QMessageBox::Yes)
   //     return;
@@ -229,10 +229,11 @@ Tool::currentTab() {
 }
 
 void
-Tool::tabTitleChanged(QString const &title) {
-  auto idx = ui->editors->indexOf(dynamic_cast<Tab *>(sender()));
-  if (-1 != idx)
-    ui->editors->setTabText(idx, title);
+Tool::tabTitleChanged() {
+  auto tab = dynamic_cast<Tab *>(sender());
+  auto idx = ui->editors->indexOf(tab);
+  if (tab && (-1 != idx))
+    ui->editors->setTabText(idx, tab->title());
 }
 
 }}}

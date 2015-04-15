@@ -22,12 +22,14 @@ protected:
   // UI stuff:
   std::unique_ptr<Ui::PreferencesDialog> ui;
   Util::Settings &m_cfg;
+  QString const m_previousUiLocale;
 
 public:
   explicit PreferencesDialog(QWidget *parent);
   ~PreferencesDialog();
 
   void save();
+  bool uiLocaleChanged() const;
 
 public slots:
   void enableOutputFileNameControls();
