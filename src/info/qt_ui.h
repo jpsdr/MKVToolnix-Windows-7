@@ -21,6 +21,7 @@
 #include <QTreeWidgetItem>
 #include <QVector>
 
+#include "common/qt.h"
 #include "info/ui/mainwindow.h"
 
 class main_window_c: public QMainWindow, public Ui_main_window {
