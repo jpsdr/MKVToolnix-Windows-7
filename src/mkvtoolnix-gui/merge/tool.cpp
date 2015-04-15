@@ -125,31 +125,6 @@ Tool::appendTab(Tab *tab) {
   return tab;
 }
 
-// TODO: Tool::dragEnterEvent: drag & drop
-// void
-// Tool::dragEnterEvent(QDragEnterEvent *event) {
-//   if (!event->mimeData()->hasUrls())
-//     return;
-
-//   for (auto const &url : event->mimeData()->urls())
-//     if (!url.isLocalFile() || !QFileInfo{url.toLocalFile()}.isFile())
-//       return;
-
-//   event->acceptProposedAction();
-// }
-
-// void
-// Tool::dropEvent(QDropEvent *event) {
-//   if (!event->mimeData()->hasUrls())
-//     return;
-
-//   event->acceptProposedAction();
-
-//   for (auto const &url : event->mimeData()->urls())
-//     if (url.isLocalFile())
-//       openFile(url.toLocalFile());
-// }
-
 void
 Tool::newConfig() {
   appendTab(new Tab{this});

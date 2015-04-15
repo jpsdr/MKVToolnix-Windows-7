@@ -31,9 +31,6 @@ public:
 
   virtual void retranslateUi() override;
 
-  // virtual void dragEnterEvent(QDragEnterEvent *event) override;
-  // virtual void dropEvent(QDropEvent *event) override;
-
 public slots:
   virtual void newConfig();
   virtual void openConfig();
