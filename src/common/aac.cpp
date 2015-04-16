@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/aac.h"
+#include "common/aac_x.h"
 #include "common/at_scope_exit.h"
 #include "common/codec.h"
 #include "common/endian.h"
@@ -908,7 +909,7 @@ header_c::read_ga_specific_config() {
 
 void
 header_c::read_error_protection_specific_config() {
-  mxerror(boost::format("aac_error_proection_specific_config. %1%\n") % BUGMSG);
+  throw unsupported_feature_x{"AAC error specific configuration"};
 }
 
 void
