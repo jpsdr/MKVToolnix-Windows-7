@@ -565,8 +565,6 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
 
   ui->pageContainer->setCurrentWidget(ui->chapterPage);
 
-  QTimer::singleShot(0, ui->leChStart, SLOT(setFocus()));
-
   return true;
 }
 
