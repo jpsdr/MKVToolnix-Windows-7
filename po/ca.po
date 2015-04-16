@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix 7.6.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-15 22:31+0200\n"
+"POT-Creation-Date: 2015-04-17 14:50+0200\n"
 "PO-Revision-Date: 2015-02-28 19:42+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1078,25 +1078,6 @@ msgstr "%1%: divisor absent en «%2% %3%».\n"
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: ID de la pista és absent a «%2% %3%».\n"
-
-#: src/info/qt_ui.cpp:131
-#, fuzzy
-msgid ""
-"%1.\n"
-"Compiled with libebml %2 + libmatroska %3.\n"
-"\n"
-"This program is licensed under the GPL v2 (see COPYING).\n"
-"It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
-"Sources and the latest binaries are always available at\n"
-"https://www.bunkus.org/videotools/mkvtoolnix/"
-msgstr ""
-"%s.\n"
-"Compilat amb libebml %s + libmatroska %s.\n"
-"\n"
-"Aquest programa està llicenciat sota la GPL v. 2 (vegeu COPYING).\n"
-"L'ha escrit en Moritz Bunkus <moritz@bunkus.org>.\n"
-"El codi font i els últims binaris estan sempre disponibles a\n"
-"https://www.bunkus.org/vídeotools/mkvtoolnix/"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
@@ -2237,7 +2218,7 @@ msgstr "Estableix el directori de &sortida"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:153
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:767
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #, fuzzy
 msgid "<unnamed>"
 msgstr "(sense nom)"
@@ -2717,7 +2698,8 @@ msgstr "Tots els fitxers (*.*)|*.*"
 msgid "All chapter entries are valid."
 msgstr "Totes les entrades de capítol són vàlides."
 
-#: src/info/qt_ui.cpp:77 src/mkvtoolnix-gui/chapter_editor/tab.cpp:307
+#: src/info/qt_ui.cpp:77 src/info/qt_ui.cpp:86
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:307
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:344
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:145
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:124
@@ -3752,6 +3734,10 @@ msgstr "Línia d'ordres emprada:"
 #: src/mmg/options/languages.cpp:74
 msgid "Common languages"
 msgstr "Idiomes habituals"
+
+#: src/info/qt_ui.cpp:136
+msgid "Compiled with libebml %1 + libmatroska %2."
+msgstr ""
 
 #: src/merge/generic_packetizer.cpp:810
 #, boost-format
@@ -6364,6 +6350,10 @@ msgstr "Tipus de pista no vàlid %1%."
 #: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
 msgstr "També es pot obrir des del menú «Ajuda»."
+
+#: src/info/qt_ui.cpp:138
+msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:350
 #, fuzzy
@@ -9411,15 +9401,10 @@ msgstr ""
 "Li indica al «mkvmerge» que crei un element meta seek al final del fitxer "
 "que contingui tots els clústers."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:402
+#: src/info/qt_ui.cpp:86 src/mkvtoolnix-gui/merge/input.cpp:402
 #, fuzzy
 msgid "Text files"
 msgstr "El següent nom de fitxer"
-
-#: src/info/qt_ui.cpp:86
-#, fuzzy
-msgid "Text files (*.txt);;All files (*.*)"
-msgstr "Fitxers de text (*.txt)|*.txt|Tots els fitxers|*.*"
 
 #: src/mmg/jobs.cpp:438
 #, c-format, boost-format
@@ -9551,8 +9536,8 @@ msgstr ""
 #, fuzzy
 msgid ""
 "The Matroska file was modified, but the meta seek entry could not be "
-"updated. Parent means that players might have a hard time finding parent "
-"element. Please use your favorite player to check parent file."
+"updated. This means that players might have a hard time finding the this "
+"element. Please use your favorite player to check this file."
 msgstr ""
 "El fitxer Matroska ha estat modificat, però el registre meta seek no s'ha "
 "pogut actualitzar. Això vol dir que els reproductors podrien tenir "
@@ -11549,6 +11534,11 @@ msgstr ""
 "que el «mkvmerge» admet és de 60000 blocs i 32000 ms; la longitud mínima és "
 "de 100 ms. Els programes només seran capaços de cercar als clústers, pel que "
 "el crear clústers molt grans podria portar a una cerca lenta o imprecisa."
+
+#: src/info/qt_ui.cpp:137
+#, fuzzy
+msgid "This program is licensed under the GPL v2 (see COPYING)."
+msgstr "MKVToolNix està llicenciat sota la GPL v2 de GNU"
 
 #: src/propedit/change.cpp:252
 #, boost-format
@@ -14010,6 +14000,24 @@ msgstr ""
 #~ msgstr " (FourCC: %1%%2%%3%%4%, 0x%|5$08x|)"
 
 #, fuzzy
+#~ msgid ""
+#~ "%1.\n"
+#~ "Compiled with libebml %2 + libmatroska %3.\n"
+#~ "\n"
+#~ "This program is licensed under the GPL v2 (see COPYING).\n"
+#~ "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "Sources and the latest binaries are always available at\n"
+#~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+#~ msgstr ""
+#~ "%s.\n"
+#~ "Compilat amb libebml %s + libmatroska %s.\n"
+#~ "\n"
+#~ "Aquest programa està llicenciat sota la GPL v. 2 (vegeu COPYING).\n"
+#~ "L'ha escrit en Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "El codi font i els últims binaris estan sempre disponibles a\n"
+#~ "https://www.bunkus.org/vídeotools/mkvtoolnix/"
+
+#, fuzzy
 #~ msgid "&User defined options:"
 #~ msgstr "Opcions definides per l'usuari:"
 
@@ -14117,6 +14125,21 @@ msgstr ""
 #~ msgstr ""
 #~ "Les etiquetes no estan permeses en els fitxers conformes amb WebM. Les "
 #~ "etiquetes no seran escrites en cap fitxer de sortida.\n"
+
+#, fuzzy
+#~ msgid "Text files (*.txt);;All files (*.*)"
+#~ msgstr "Fitxers de text (*.txt)|*.txt|Tots els fitxers|*.*"
+
+#, fuzzy
+#~ msgid ""
+#~ "The Matroska file was modified, but the meta seek entry could not be "
+#~ "updated. Parent means that players might have a hard time finding parent "
+#~ "element. Please use your favorite player to check parent file."
+#~ msgstr ""
+#~ "El fitxer Matroska ha estat modificat, però el registre meta seek no s'ha "
+#~ "pogut actualitzar. Això vol dir que els reproductors podrien tenir "
+#~ "dificultats en trobar aquest element. Si us plau, useu el vostre "
+#~ "reproductor preferit per a comprovar aquest fitxer."
 
 #~ msgid ""
 #~ "TrueHD audio streams know two frame types: sync frames and non-sync "

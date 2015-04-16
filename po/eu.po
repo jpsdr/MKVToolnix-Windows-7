@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-15 22:31+0200\n"
+"POT-Creation-Date: 2015-04-17 14:50+0200\n"
 "PO-Revision-Date: 2015-03-07 19:29+0100\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -1042,25 +1042,6 @@ msgstr "%1%: ez dago zatikatzailea: '%2% %3%'.\n"
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: ez dago bide ID-a: '%2% %3%'.\n"
-
-#: src/info/qt_ui.cpp:131
-#, fuzzy
-msgid ""
-"%1.\n"
-"Compiled with libebml %2 + libmatroska %3.\n"
-"\n"
-"This program is licensed under the GPL v2 (see COPYING).\n"
-"It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
-"Sources and the latest binaries are always available at\n"
-"https://www.bunkus.org/videotools/mkvtoolnix/"
-msgstr ""
-"%1.\n"
-"Bilduta:  libebml %2 + libmatroska %3.\n"
-"\n"
-"Programa hau GPL v2 baimenpean dago (ikusi COPYING).\n"
-"Programatzailea: Moritz Bunkus <moritz@bunkus.org>.\n"
-"Iturburuak eta azken binarioak betik daude eskuragarri hemen:\n"
-"http://www.bunkus.org/videotools/mkvtoolnix/"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
@@ -2201,7 +2182,7 @@ msgstr "Ezarri &Irteera agiria"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:153
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:767
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #, fuzzy
 msgid "<unnamed>"
 msgstr "(izengabea)"
@@ -2676,7 +2657,8 @@ msgstr "Agiri Denak (*.*)|*.*"
 msgid "All chapter entries are valid."
 msgstr "Atal sarrera guztiek balio dute."
 
-#: src/info/qt_ui.cpp:77 src/mkvtoolnix-gui/chapter_editor/tab.cpp:307
+#: src/info/qt_ui.cpp:77 src/info/qt_ui.cpp:86
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:307
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:344
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:145
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:124
@@ -3695,6 +3677,10 @@ msgstr "Erabilitako agindu lerroa:"
 #: src/mmg/options/languages.cpp:74
 msgid "Common languages"
 msgstr "Hizkuntza arruntak"
+
+#: src/info/qt_ui.cpp:136
+msgid "Compiled with libebml %1 + libmatroska %2."
+msgstr ""
 
 #: src/merge/generic_packetizer.cpp:810
 #, boost-format
@@ -6272,6 +6258,10 @@ msgstr "Bide mota baliogabea %1%."
 #: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
 msgstr "'Laguntza' menutik ere ireki daiteke."
+
+#: src/info/qt_ui.cpp:138
+msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:350
 #, fuzzy
@@ -9281,14 +9271,10 @@ msgstr ""
 "mkvmergeri adierazten dio meta bilaketa gai bat sortzeko kluster guztiak "
 "dituen agiriaren amaieran."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:402
+#: src/info/qt_ui.cpp:86 src/mkvtoolnix-gui/merge/input.cpp:402
 #, fuzzy
 msgid "Text files"
 msgstr "Hurrengo agirizena"
-
-#: src/info/qt_ui.cpp:86
-msgid "Text files (*.txt);;All files (*.*)"
-msgstr "Idazki agiriak (*.txt);;Agiri denak (*.*)"
 
 #: src/mmg/jobs.cpp:438
 #, c-format, boost-format
@@ -9418,8 +9404,8 @@ msgstr ""
 #, fuzzy
 msgid ""
 "The Matroska file was modified, but the meta seek entry could not be "
-"updated. Parent means that players might have a hard time finding parent "
-"element. Please use your favorite player to check parent file."
+"updated. This means that players might have a hard time finding the this "
+"element. Please use your favorite player to check this file."
 msgstr ""
 "Matroska agiria aldatu egin da, baina meta bilatzaile sarrera ezin da "
 "eguneratu. Honek esanahi du irakurgailuek denbora gehiago beharko dutela gai "
@@ -11378,6 +11364,11 @@ msgstr ""
 "60000 bloke eta 32000sm dira; gutxienezko luzera 100sm da. Programak "
 "klusterretan bakarrik bilatzeko gauza izango dira, hortaz kluster handiagoak "
 "sortzeak bilaketa zehazgabera edo astirora eraman dezake."
+
+#: src/info/qt_ui.cpp:137
+#, fuzzy
+msgid "This program is licensed under the GPL v2 (see COPYING)."
+msgstr "MKVToolNix GNU GPL v2 baimenpean dago"
 
 #: src/propedit/change.cpp:252
 #, boost-format
@@ -13823,6 +13814,24 @@ msgstr ""
 #~ msgstr " (FourCC: %1%%2%%3%%4%, 0x%|5$08x|)"
 
 #, fuzzy
+#~ msgid ""
+#~ "%1.\n"
+#~ "Compiled with libebml %2 + libmatroska %3.\n"
+#~ "\n"
+#~ "This program is licensed under the GPL v2 (see COPYING).\n"
+#~ "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "Sources and the latest binaries are always available at\n"
+#~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+#~ msgstr ""
+#~ "%1.\n"
+#~ "Bilduta:  libebml %2 + libmatroska %3.\n"
+#~ "\n"
+#~ "Programa hau GPL v2 baimenpean dago (ikusi COPYING).\n"
+#~ "Programatzailea: Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "Iturburuak eta azken binarioak betik daude eskuragarri hemen:\n"
+#~ "http://www.bunkus.org/videotools/mkvtoolnix/"
+
+#, fuzzy
 #~ msgid "&User defined options:"
 #~ msgstr "Erabiltzaileak zehazturiko aukerak:"
 
@@ -14035,8 +14044,22 @@ msgstr ""
 #~ "Etiketak ez daude ahalbideturik WebM bateragarritasun agirietan. Etiketak "
 #~ "ez dira idatziko irteera agirietan.\n"
 
+#~ msgid "Text files (*.txt);;All files (*.*)"
+#~ msgstr "Idazki agiriak (*.txt);;Agiri denak (*.*)"
+
 #~ msgid "The Matroska file is analyzed."
 #~ msgstr "Matroska agiria aztertzen..."
+
+#, fuzzy
+#~ msgid ""
+#~ "The Matroska file was modified, but the meta seek entry could not be "
+#~ "updated. Parent means that players might have a hard time finding parent "
+#~ "element. Please use your favorite player to check parent file."
+#~ msgstr ""
+#~ "Matroska agiria aldatu egin da, baina meta bilatzaile sarrera ezin da "
+#~ "eguneratu. Honek esanahi du irakurgailuek denbora gehiago beharko dutela "
+#~ "gai hau bilatzeko. Mesedez erabili zure irakurgailu gogokoena agiri hau "
+#~ "egiaztatzeko."
 
 #~ msgid "The file '%1%' could not be opened for reading (%2%)."
 #~ msgstr "%1% agiria ezin da irakurtzeko ireki (%2%)."

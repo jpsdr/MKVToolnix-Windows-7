@@ -83,7 +83,7 @@ main_window_c::open() {
 
 void
 main_window_c::save_text_file() {
-  QString file_name = QFileDialog::getSaveFileName(this, QY("Save information as"), "", QY("Text files (*.txt);;All files (*.*)"));
+  QString file_name = QFileDialog::getSaveFileName(this, QY("Save information as"), "", Q("%1 (*.txt);;%2 (*)").arg(QY("Text files")).arg(QY("All files")));
   if (file_name.isEmpty())
     return;
 
@@ -127,16 +127,16 @@ main_window_c::show_all() {
 
 void
 main_window_c::about() {
-  QString msg =
-    QY("%1.\n"
-       "Compiled with libebml %2 + libmatroska %3.\n\n"
-       "This program is licensed under the GPL v2 (see COPYING).\n"
-       "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
-       "Sources and the latest binaries are always available at\n"
-       "https://www.bunkus.org/videotools/mkvtoolnix/")
+  auto msg =
+    Q("%1\n"
+      "%2\n\n"
+      "%3\n"
+      "%4\n")
     .arg(Q(get_version_info("mkvinfo GUI")))
-    .arg(Q(EbmlCodeVersion))
-    .arg(Q(KaxCodeVersion));
+    .arg(QY("Compiled with libebml %1 + libmatroska %2.").arg(Q(EbmlCodeVersion)).arg(Q(KaxCodeVersion)))
+    .arg(QY("This program is licensed under the GPL v2 (see COPYING)."))
+    .arg(QY("It was written by Moritz Bunkus <moritz@bunkus.org>."));
+
   QMessageBox::about(this, QY("About mkvinfo"), msg);
 }
 

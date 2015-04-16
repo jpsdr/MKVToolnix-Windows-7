@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-15 22:31+0200\n"
+"POT-Creation-Date: 2015-04-17 14:50+0200\n"
 "PO-Revision-Date: 2014-11-05 08:51+0100\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese Traditional <zh-l10n@linux.org.tw>\n"
@@ -951,24 +951,6 @@ msgstr "%1%: 在「%2% %3%」中缺少除數。\n"
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: 缺少軌道 ID，在「%2% %3%」。\n"
-
-#: src/info/qt_ui.cpp:131
-msgid ""
-"%1.\n"
-"Compiled with libebml %2 + libmatroska %3.\n"
-"\n"
-"This program is licensed under the GPL v2 (see COPYING).\n"
-"It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
-"Sources and the latest binaries are always available at\n"
-"https://www.bunkus.org/videotools/mkvtoolnix/"
-msgstr ""
-"%1.\n"
-"使用 libebml %2 + libmatroska %3 編譯。\n"
-"\n"
-"本程式以 GPL v2 授權發佈 (詳見 COPYING)。\n"
-"由 Moritz Bunkus <moritz@bunkus.org> 編寫。\n"
-"原始碼及最新程式會在下面的位址提供: \n"
-"https://www.bunkus.org/videotools/mkvtoolnix/"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
@@ -2051,7 +2033,7 @@ msgstr "設定輸出檔(&O)"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:153
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:767
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #, fuzzy
 msgid "<unnamed>"
 msgstr "(未命名)"
@@ -2475,6 +2457,7 @@ msgid "All chapter entries are valid."
 msgstr "所有章節項目皆正確。"
 
 #: src/info/qt_ui.cpp:77
+#: src/info/qt_ui.cpp:86
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:307
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:344
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:145
@@ -3425,6 +3408,10 @@ msgstr "使用命令列:"
 #: src/mmg/options/languages.cpp:74
 msgid "Common languages"
 msgstr "共通語言"
+
+#: src/info/qt_ui.cpp:136
+msgid "Compiled with libebml %1 + libmatroska %2."
+msgstr ""
 
 #: src/merge/generic_packetizer.cpp:810
 #, boost-format
@@ -5642,6 +5629,10 @@ msgstr "無效軌道 ID，在「%1% %2%」。\n"
 #: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
 msgstr "也可以從「說明」選單開啟。"
+
+#: src/info/qt_ui.cpp:138
+msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:350
 #, fuzzy
@@ -8292,14 +8283,11 @@ msgstr ""
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
 msgstr "告訴 mkvmerge 要在檔案結尾部建立變換定位元件。"
 
+#: src/info/qt_ui.cpp:86
 #: src/mkvtoolnix-gui/merge/input.cpp:402
 #, fuzzy
 msgid "Text files"
 msgstr "下一個檔名"
-
-#: src/info/qt_ui.cpp:86
-msgid "Text files (*.txt);;All files (*.*)"
-msgstr "純文字檔 (*.txt);;所有檔 (*.*)"
 
 #: src/mmg/jobs.cpp:438
 #, c-format, boost-format
@@ -8383,7 +8371,7 @@ msgstr "此 MP4 檔「%1%」含有無法辨識格式的章節。若章節不是�
 
 #: src/common/qt_kax_analyzer.cpp:75
 #, fuzzy
-msgid "The Matroska file was modified, but the meta seek entry could not be updated. Parent means that players might have a hard time finding parent element. Please use your favorite player to check parent file."
+msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the this element. Please use your favorite player to check this file."
 msgstr "Matroska 檔已經修改過，但變換定位項目無法更新。這表示播放器可能很難找到該元件。請使用您喜歡的播放器檢查此檔案。"
 
 #: src/mmg/header_editor/frame.cpp:673
@@ -9786,6 +9774,11 @@ msgstr "此模式只會將最上層章節視為橫跨全部版本項目。"
 #: src/mmg/cli_options_dlg.cpp:95
 msgid "This option needs an additional argument 'n'. Tells mkvmerge to put at most 'n' data blocks into each cluster. If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster. The maximum length for a cluster that mkvmerge accepts is 60000 blocks and 32000ms; the minimum length is 100ms. Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr "此選項需要附加參數「n」。告知 mkvmerge 在每叢集最多放置「n」個資料塊。如果數字尾碼有「ms」則在每叢集中最多放置「n」毫秒的資料。單個叢集的最大長度為 60000區塊數和 32000 毫秒。程式定位只能精確至叢集，因此建立大大小的叢集將導致不精確的定位與/或處理。"
+
+#: src/info/qt_ui.cpp:137
+#, fuzzy
+msgid "This program is licensed under the GPL v2 (see COPYING)."
+msgstr "MKVToolNix 授權為 GNU GPL 第二版"
 
 #: src/propedit/change.cpp:252
 #, boost-format
@@ -12033,6 +12026,23 @@ msgstr ""
 #~ msgid "%1%: Source is not a valid %1% file."
 #~ msgstr "avi_reader: 來源非有效的 AVI 檔案。"
 
+#~ msgid ""
+#~ "%1.\n"
+#~ "Compiled with libebml %2 + libmatroska %3.\n"
+#~ "\n"
+#~ "This program is licensed under the GPL v2 (see COPYING).\n"
+#~ "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "Sources and the latest binaries are always available at\n"
+#~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+#~ msgstr ""
+#~ "%1.\n"
+#~ "使用 libebml %2 + libmatroska %3 編譯。\n"
+#~ "\n"
+#~ "本程式以 GPL v2 授權發佈 (詳見 COPYING)。\n"
+#~ "由 Moritz Bunkus <moritz@bunkus.org> 編寫。\n"
+#~ "原始碼及最新程式會在下面的位址提供: \n"
+#~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+
 #~ msgid "%d minute(s) %d second(s)"
 #~ msgstr "%d 分鐘 %d 秒"
 
@@ -12463,6 +12473,9 @@ msgstr ""
 #~ msgid "Tags are not allowed in WebM compliant files. No tags will be written into any output file.\n"
 #~ msgstr "在 WebM 遵循檔裡不能有標籤。不會將標籤寫進任何輸出檔。\n"
 
+#~ msgid "Text files (*.txt);;All files (*.*)"
+#~ msgstr "純文字檔 (*.txt);;所有檔 (*.*)"
+
 #, fuzzy
 #~ msgid "The ALAC header data is different for the two tracks (lengths: %1% and %2%)"
 #~ msgstr "兩軌的 FLAC 表頭資料不同 (長度: %1% 與 %2%)"
@@ -12475,6 +12488,10 @@ msgstr ""
 
 #~ msgid "The Matroska file is analyzed."
 #~ msgstr "正在分析 Matroska 檔。"
+
+#, fuzzy
+#~ msgid "The Matroska file was modified, but the meta seek entry could not be updated. Parent means that players might have a hard time finding parent element. Please use your favorite player to check parent file."
+#~ msgstr "Matroska 檔已經修改過，但變換定位項目無法更新。這表示播放器可能很難找到該元件。請使用您喜歡的播放器檢查此檔案。"
 
 #~ msgid "The binary data must be at least %1% bytes long."
 #~ msgstr "此二位元資料最少 %1% 位元組長。"

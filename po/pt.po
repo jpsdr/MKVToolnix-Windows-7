@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-15 22:31+0200\n"
+"POT-Creation-Date: 2015-04-17 14:50+0200\n"
 "PO-Revision-Date: 2013-06-17 00:22-0000\n"
 "Last-Translator: Ricardo Perdigão <ricardofonseca1977@gmail.com>\n"
 "Language-Team: Portuguese <moritz@bunkus.org>\n"
@@ -850,17 +850,6 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:607
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
-msgstr ""
-
-#: src/info/qt_ui.cpp:131
-msgid ""
-"%1.\n"
-"Compiled with libebml %2 + libmatroska %3.\n"
-"\n"
-"This program is licensed under the GPL v2 (see COPYING).\n"
-"It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
-"Sources and the latest binaries are always available at\n"
-"https://www.bunkus.org/videotools/mkvtoolnix/"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
@@ -1934,7 +1923,7 @@ msgstr "Definir ficheir&o de saída"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:153
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:767
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #, fuzzy
 msgid "<unnamed>"
 msgstr "(sem nome)"
@@ -2366,6 +2355,7 @@ msgid "All chapter entries are valid."
 msgstr "Todos os capítulos são válidos."
 
 #: src/info/qt_ui.cpp:77
+#: src/info/qt_ui.cpp:86
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:307
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:344
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:145
@@ -3316,6 +3306,10 @@ msgstr "Linha de comando utilizada:"
 #: src/mmg/options/languages.cpp:74
 msgid "Common languages"
 msgstr "Idiomas comuns"
+
+#: src/info/qt_ui.cpp:136
+msgid "Compiled with libebml %1 + libmatroska %2."
+msgstr ""
 
 #: src/merge/generic_packetizer.cpp:810
 #, boost-format
@@ -5529,6 +5523,10 @@ msgstr "Tipo de pista: %1%"
 
 #: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
+msgstr ""
+
+#: src/info/qt_ui.cpp:138
+msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:350
@@ -8175,14 +8173,11 @@ msgstr ""
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
 msgstr ""
 
+#: src/info/qt_ui.cpp:86
 #: src/mkvtoolnix-gui/merge/input.cpp:402
 #, fuzzy
 msgid "Text files"
 msgstr "Nome do ficheiro seguinte"
-
-#: src/info/qt_ui.cpp:86
-msgid "Text files (*.txt);;All files (*.*)"
-msgstr "Ficheiros de texto (*.txt);;Todos os ficheiros (*.*)"
 
 #: src/mmg/jobs.cpp:438
 #, c-format, boost-format
@@ -8264,7 +8259,7 @@ msgid "The MP4 file '%1%' contains chapters whose format was not recognized. Thi
 msgstr ""
 
 #: src/common/qt_kax_analyzer.cpp:75
-msgid "The Matroska file was modified, but the meta seek entry could not be updated. Parent means that players might have a hard time finding parent element. Please use your favorite player to check parent file."
+msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the this element. Please use your favorite player to check this file."
 msgstr ""
 
 #: src/mmg/header_editor/frame.cpp:673
@@ -9642,6 +9637,11 @@ msgstr ""
 #: src/mmg/cli_options_dlg.cpp:95
 msgid "This option needs an additional argument 'n'. Tells mkvmerge to put at most 'n' data blocks into each cluster. If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster. The maximum length for a cluster that mkvmerge accepts is 60000 blocks and 32000ms; the minimum length is 100ms. Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr ""
+
+#: src/info/qt_ui.cpp:137
+#, fuzzy
+msgid "This program is licensed under the GPL v2 (see COPYING)."
+msgstr "MKVToolNix is licensed under the GNU GPL v2"
 
 #: src/propedit/change.cpp:252
 #, boost-format
@@ -11871,6 +11871,9 @@ msgstr ""
 
 #~ msgid "Sets the priority that mkvmerge will run with."
 #~ msgstr "Escolha a prioridade que o mkvmerge terá quando executado."
+
+#~ msgid "Text files (*.txt);;All files (*.*)"
+#~ msgstr "Ficheiros de texto (*.txt);;Todos os ficheiros (*.*)"
 
 #~ msgid "Unknown AAC MPEG-2 profile %1%."
 #~ msgstr "Perfil AAC MPEG-2 desconhecido %1%"

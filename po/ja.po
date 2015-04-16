@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-15 22:31+0200\n"
+"POT-Creation-Date: 2015-04-17 14:50+0200\n"
 "PO-Revision-Date: 2014-11-05 08:47+0100\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -962,24 +962,6 @@ msgstr "%1%：'%2% %3%'に除数がありません。\n"
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%：'%2% %3%'にトラックIDがありません。\n"
-
-#: src/info/qt_ui.cpp:131
-msgid ""
-"%1.\n"
-"Compiled with libebml %2 + libmatroska %3.\n"
-"\n"
-"This program is licensed under the GPL v2 (see COPYING).\n"
-"It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
-"Sources and the latest binaries are always available at\n"
-"https://www.bunkus.org/videotools/mkvtoolnix/"
-msgstr ""
-"%1.\n"
-"Compiled with libebml %2 + libmatroska %3.\n"
-"\n"
-"このプログラムはGPL v2でライセンスされています（COPYINGを参照してください）。\n"
-"このプログラムはMoritz Bunkus <moritz@bunkus.org>によって書かれました。\n"
-"ソースや最新のバイナリは、いつでも以下のURLから入手できます。\n"
-"https://www.bunkus.org/videotools/mkvtoolnix/"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
@@ -2062,7 +2044,7 @@ msgstr "出力ファイルを指定(&O)"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:153
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:767
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #, fuzzy
 msgid "<unnamed>"
 msgstr "（名前をつけてください）"
@@ -2483,6 +2465,7 @@ msgid "All chapter entries are valid."
 msgstr "全てのチャプタエントリは有効です。"
 
 #: src/info/qt_ui.cpp:77
+#: src/info/qt_ui.cpp:86
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:307
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:344
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:145
@@ -3433,6 +3416,10 @@ msgstr "使用されたコマンドライン："
 #: src/mmg/options/languages.cpp:74
 msgid "Common languages"
 msgstr "よく使用される言語"
+
+#: src/info/qt_ui.cpp:136
+msgid "Compiled with libebml %1 + libmatroska %2."
+msgstr ""
 
 #: src/merge/generic_packetizer.cpp:810
 #, boost-format
@@ -5652,6 +5639,10 @@ msgstr "'%1% %2%'で無効なトラックIDが指定されました。\n"
 #: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
 msgstr "'ヘルプ'メニューから開くこともできます。"
+
+#: src/info/qt_ui.cpp:138
+msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:350
 #, fuzzy
@@ -8300,14 +8291,11 @@ msgstr ""
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
 msgstr "mkvmergeがファイルの終端で全てのクラスタを含むメタシーク要素を作成するようにします。"
 
+#: src/info/qt_ui.cpp:86
 #: src/mkvtoolnix-gui/merge/input.cpp:402
 #, fuzzy
 msgid "Text files"
 msgstr "次のファイル名"
-
-#: src/info/qt_ui.cpp:86
-msgid "Text files (*.txt);;All files (*.*)"
-msgstr "テキストファイル (*.txt);;全てのファイル (*.*)"
 
 #: src/mmg/jobs.cpp:438
 #, c-format, boost-format
@@ -8391,7 +8379,7 @@ msgstr "MP4ファイル '%1%' は、認識できないフォーマットのチ�
 
 #: src/common/qt_kax_analyzer.cpp:75
 #, fuzzy
-msgid "The Matroska file was modified, but the meta seek entry could not be updated. Parent means that players might have a hard time finding parent element. Please use your favorite player to check parent file."
+msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the this element. Please use your favorite player to check this file."
 msgstr "Matroskaファイルは修正されましたが、メタシークエントリを更新することができませんでした。これはプレーヤがこの要素を見つけるのにかなり時間がかかることを意味します。好きなプレーヤでこのファイルをチェックしてください。"
 
 #: src/mmg/header_editor/frame.cpp:673
@@ -9790,6 +9778,11 @@ msgstr "このモードでは、全エディションエントリに渡って最
 #: src/mmg/cli_options_dlg.cpp:95
 msgid "This option needs an additional argument 'n'. Tells mkvmerge to put at most 'n' data blocks into each cluster. If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster. The maximum length for a cluster that mkvmerge accepts is 60000 blocks and 32000ms; the minimum length is 100ms. Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr "このオプションにはパラメータ'n'を追加する必要があります。mkvmergeが各クラスタに最大でn個のデータブロックを配置するようにします。もし数字の後に'ms'がついていた場合は、各クラスタに最大nミリ秒のデータを配置するようにします。mkvmergeが対応するクラスタの長さは最大で60000ブロックまたは32000ms、最小で100msです。プログラムはクラスタ単位でしかシークできないので、大きいクラスタを作成するとシークが不正確になったり遅くなったりする可能性があります。"
+
+#: src/info/qt_ui.cpp:137
+#, fuzzy
+msgid "This program is licensed under the GPL v2 (see COPYING)."
+msgstr "MKVToolNixはGNU GPL v2でライセンスされています"
 
 #: src/propedit/change.cpp:252
 #, boost-format
@@ -12019,6 +12012,23 @@ msgstr ""
 #~ msgid "%1%: Source is not a valid %1% file."
 #~ msgstr "%1%：ソースファイルは有効な%1%ファイルではありません。"
 
+#~ msgid ""
+#~ "%1.\n"
+#~ "Compiled with libebml %2 + libmatroska %3.\n"
+#~ "\n"
+#~ "This program is licensed under the GPL v2 (see COPYING).\n"
+#~ "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "Sources and the latest binaries are always available at\n"
+#~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+#~ msgstr ""
+#~ "%1.\n"
+#~ "Compiled with libebml %2 + libmatroska %3.\n"
+#~ "\n"
+#~ "このプログラムはGPL v2でライセンスされています（COPYINGを参照してください）。\n"
+#~ "このプログラムはMoritz Bunkus <moritz@bunkus.org>によって書かれました。\n"
+#~ "ソースや最新のバイナリは、いつでも以下のURLから入手できます。\n"
+#~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+
 #~ msgid "%d minute(s) %d second(s)"
 #~ msgstr "%d分%d秒"
 
@@ -12363,6 +12373,9 @@ msgstr ""
 #~ msgid "Tags are not allowed in WebM compliant files. No tags will be written into any output file.\n"
 #~ msgstr "タグはWebMの規格に準拠したファイルでは使用することができません。どの出力ファイルにもタグは書き込まれません。\n"
 
+#~ msgid "Text files (*.txt);;All files (*.*)"
+#~ msgstr "テキストファイル (*.txt);;全てのファイル (*.*)"
+
 #, fuzzy
 #~ msgid "The ALAC header data is different for the two tracks (lengths: %1% and %2%)"
 #~ msgstr "FLACヘッダデータが2つのトラック間で異なっています（長さ：%1%と%2%）"
@@ -12372,6 +12385,10 @@ msgstr ""
 
 #~ msgid "The Matroska file is analyzed."
 #~ msgstr "Matroskaファイルを解析中です。"
+
+#, fuzzy
+#~ msgid "The Matroska file was modified, but the meta seek entry could not be updated. Parent means that players might have a hard time finding parent element. Please use your favorite player to check parent file."
+#~ msgstr "Matroskaファイルは修正されましたが、メタシークエントリを更新することができませんでした。これはプレーヤがこの要素を見つけるのにかなり時間がかかることを意味します。好きなプレーヤでこのファイルをチェックしてください。"
 
 #~ msgid "The binary data must be at least %1% bytes long."
 #~ msgstr "そのバイナリデータは最低でも%1%バイトでなければなりません。"

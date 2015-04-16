@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-15 22:31+0200\n"
+"POT-Creation-Date: 2015-04-17 14:50+0200\n"
 "PO-Revision-Date: 2014-11-05 08:46+0100\n"
 "Last-Translator: DenB <denb10@free.fr>\n"
 "Language-Team: DenB <denb10@free.fr>\n"
@@ -979,24 +979,6 @@ msgstr "%1% : diviseur absent dans '%2% %3%'.\n"
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1% : numéro de piste absent dans '%2% %3%'.\n"
-
-#: src/info/qt_ui.cpp:131
-msgid ""
-"%1.\n"
-"Compiled with libebml %2 + libmatroska %3.\n"
-"\n"
-"This program is licensed under the GPL v2 (see COPYING).\n"
-"It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
-"Sources and the latest binaries are always available at\n"
-"https://www.bunkus.org/videotools/mkvtoolnix/"
-msgstr ""
-"%1.\n"
-"Compilé avec libebml %2 + libmatroska %3.\n"
-"\n"
-"Ce programme est diffusé sous licence GNU GPL v2 (voir COPYING).\n"
-"Il a été écrit par Moritz Bunkus <moritz@bunkus.org>.\n"
-"Les dernières sources et installations sont disponibles à l'adresse :\n"
-"https://www.bunkus.org/videotools/mkvtoolnix/"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
@@ -2079,7 +2061,7 @@ msgstr "&Définir le fichier cible"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:153
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:767
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:765
 #, fuzzy
 msgid "<unnamed>"
 msgstr "(sans nom)"
@@ -2505,6 +2487,7 @@ msgid "All chapter entries are valid."
 msgstr "Toutes les entrées de chapitre sont correctes."
 
 #: src/info/qt_ui.cpp:77
+#: src/info/qt_ui.cpp:86
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:307
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:344
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:145
@@ -3455,6 +3438,10 @@ msgstr "Ligne de commande utilisée :"
 #: src/mmg/options/languages.cpp:74
 msgid "Common languages"
 msgstr "Langues communes"
+
+#: src/info/qt_ui.cpp:136
+msgid "Compiled with libebml %1 + libmatroska %2."
+msgstr ""
 
 #: src/merge/generic_packetizer.cpp:810
 #, boost-format
@@ -5669,6 +5656,10 @@ msgstr "Numéro de piste incorrect dans '%1% %2%'.\n"
 #: src/mmg/mmg_dialog.cpp:1987
 msgid "It can also be opened from the 'Help' menu."
 msgstr "Cette page est également accessible depuis le menu 'Aide'."
+
+#: src/info/qt_ui.cpp:138
+msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:350
 #, fuzzy
@@ -8321,14 +8312,11 @@ msgstr ""
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
 msgstr "Demander à mkvmerge de créer un méta-index de recherche à la fin du fichier contenant tous les clusters."
 
+#: src/info/qt_ui.cpp:86
 #: src/mkvtoolnix-gui/merge/input.cpp:402
 #, fuzzy
 msgid "Text files"
 msgstr "Fichier suivant"
-
-#: src/info/qt_ui.cpp:86
-msgid "Text files (*.txt);;All files (*.*)"
-msgstr "Fichiers texte (*.txt);;Tous les fichiers (*.*)"
 
 #: src/mmg/jobs.cpp:438
 #, c-format, boost-format
@@ -8412,7 +8400,7 @@ msgstr "Le fichier MP4 '%1%' contient des chapitres dont le format n'est pas rec
 
 #: src/common/qt_kax_analyzer.cpp:75
 #, fuzzy
-msgid "The Matroska file was modified, but the meta seek entry could not be updated. Parent means that players might have a hard time finding parent element. Please use your favorite player to check parent file."
+msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the this element. Please use your favorite player to check this file."
 msgstr "Le fichier Matroska a été modifié mais l'entrée du méta-index de recherche ne peut pas être actualisée, ce qui signifie que les lecteurs auront du mal à localiser cet élément. Testez ce fichier dans votre lecteur préféré."
 
 #: src/mmg/header_editor/frame.cpp:673
@@ -9839,6 +9827,11 @@ msgstr "Ce mode ne prend en compte que le niveau supérieur des chapitres dans t
 #: src/mmg/cli_options_dlg.cpp:95
 msgid "This option needs an additional argument 'n'. Tells mkvmerge to put at most 'n' data blocks into each cluster. If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster. The maximum length for a cluster that mkvmerge accepts is 60000 blocks and 32000ms; the minimum length is 100ms. Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr "Cette option nécessite un argument 'n' supplémentaire. Il dit à mkvmerge de mettre au plus 'n' blocs de données (ou 'n' millisecondes de données si le nombre est suivi de 'ms') dans chaque cluster. La longueur maximale acceptée par mkvmerge pour un cluster est de 60000 blocs ou 32000ms et la longueur minimale 100ms. Les programmes de lecture pourront seulement faire des recherches de cluster en cluster, de sorte que la création de clusters plus grands peut conduire à des recherches imprécises ou lentes."
+
+#: src/info/qt_ui.cpp:137
+#, fuzzy
+msgid "This program is licensed under the GPL v2 (see COPYING)."
+msgstr "MKVToolNix est diffusé sous licence GNU GPL v2."
 
 #: src/propedit/change.cpp:252
 #, boost-format
@@ -12064,6 +12057,23 @@ msgstr ""
 #~ msgid "%1%: Source is not a valid %1% file."
 #~ msgstr "avi_reader : la source n'est pas un fichier AVI correct."
 
+#~ msgid ""
+#~ "%1.\n"
+#~ "Compiled with libebml %2 + libmatroska %3.\n"
+#~ "\n"
+#~ "This program is licensed under the GPL v2 (see COPYING).\n"
+#~ "It was written by Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "Sources and the latest binaries are always available at\n"
+#~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+#~ msgstr ""
+#~ "%1.\n"
+#~ "Compilé avec libebml %2 + libmatroska %3.\n"
+#~ "\n"
+#~ "Ce programme est diffusé sous licence GNU GPL v2 (voir COPYING).\n"
+#~ "Il a été écrit par Moritz Bunkus <moritz@bunkus.org>.\n"
+#~ "Les dernières sources et installations sont disponibles à l'adresse :\n"
+#~ "https://www.bunkus.org/videotools/mkvtoolnix/"
+
 #~ msgid "%d minute(s) %d second(s)"
 #~ msgstr "%d min %d s"
 
@@ -12321,6 +12331,9 @@ msgstr ""
 #~ msgid "Tags are not allowed in WebM compliant files. No tags will be written into any output file.\n"
 #~ msgstr "Les étiquettes ne sont pas autorisées dans les fichiers conformes WebM. Aucune étiquette ne sera écrite dans le fichier cible.\n"
 
+#~ msgid "Text files (*.txt);;All files (*.*)"
+#~ msgstr "Fichiers texte (*.txt);;Tous les fichiers (*.*)"
+
 #, fuzzy
 #~ msgid "The ALAC header data is different for the two tracks (lengths: %1% and %2%)"
 #~ msgstr "Les données d'en-tête FLAC des deux pistes sont différentes (longueur : %1% et %2%)."
@@ -12330,6 +12343,10 @@ msgstr ""
 
 #~ msgid "The Matroska file is analyzed."
 #~ msgstr "Le fichier Matroska est analysé."
+
+#, fuzzy
+#~ msgid "The Matroska file was modified, but the meta seek entry could not be updated. Parent means that players might have a hard time finding parent element. Please use your favorite player to check parent file."
+#~ msgstr "Le fichier Matroska a été modifié mais l'entrée du méta-index de recherche ne peut pas être actualisée, ce qui signifie que les lecteurs auront du mal à localiser cet élément. Testez ce fichier dans votre lecteur préféré."
 
 #~ msgid "The binary data must be at least %1% bytes long."
 #~ msgstr "Les données binaires doivent avoir une longueur d'au moins %1% octets."
