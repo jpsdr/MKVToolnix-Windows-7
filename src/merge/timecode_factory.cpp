@@ -60,17 +60,8 @@ timecode_factory_c::create(const std::string &file_name,
 
 timecode_factory_cptr
 timecode_factory_c::create_fps_factory(int64_t default_duration,
-                                       const std::string &source_name,
-                                       int64_t tid) {
-  mm_text_io_c text_io(new mm_mem_io_c(nullptr, 0, 1024));
-  text_io.puts("# timecode format v1\n");
-  text_io.puts(boost::format("assume %1%\n") % to_string(1000000000.0 / default_duration, 9));
-  text_io.setFilePointer(0, seek_beginning);
-
-  timecode_factory_cptr factory(new timecode_factory_v1_c("dummy", source_name, tid));
-  factory->parse(text_io);
-
-  return factory;
+                                       timecode_sync_t const &tcsync) {
+  return timecode_factory_cptr{ new forced_default_duration_timecode_factory_c{default_duration, tcsync, "", 1} };
 }
 
 void
@@ -407,4 +398,13 @@ timecode_factory_v3_c::get_next(packet_cptr &packet) {
   mxdebug_if(m_debug, boost::format("ext_timecodes v3: tc %1% dur %2%\n") % packet->assigned_timecode % packet->duration);
 
   return result;
+}
+
+bool
+forced_default_duration_timecode_factory_c::get_next(packet_cptr &packet) {
+  packet->assigned_timecode = m_frameno * m_default_duration + m_tcsync.displacement;
+  packet->duration          = m_default_duration;
+  ++m_frameno;
+
+  return false;
 }

@@ -250,7 +250,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   // given then create a simple timecode factory that generates the
   // timecodes for the given FPS.
   if (!m_timecode_factory && (-1 != m_htrack_default_duration))
-    m_timecode_factory = timecode_factory_c::create_fps_factory(m_htrack_default_duration, m_ti.m_fname, m_ti.m_id);
+    m_timecode_factory = timecode_factory_c::create_fps_factory(m_htrack_default_duration, m_ti.m_tcsync);
 }
 
 generic_packetizer_c::~generic_packetizer_c() {
