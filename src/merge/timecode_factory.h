@@ -17,6 +17,7 @@
 #include "common/common_pch.h"
 
 #include "merge/packet.h"
+#include "merge/track_info.h"
 
 enum timecode_factory_application_e {
   TFA_AUTOMATIC,
@@ -89,7 +90,7 @@ public:
   }
 
   static timecode_factory_cptr create(const std::string &file_name, const std::string &source_name, int64_t tid);
-  static timecode_factory_cptr create_fps_factory(int64_t default_duration, const std::string &source_name, int64_t tid);
+  static timecode_factory_cptr create_fps_factory(int64_t default_duration, timecode_sync_t const &tcsync);
 };
 
 class timecode_factory_v1_c: public timecode_factory_c {
@@ -172,6 +173,31 @@ public:
   virtual bool get_next(packet_cptr &packet);
   virtual bool contains_gap() {
     return true;
+  }
+};
+
+class forced_default_duration_timecode_factory_c: public timecode_factory_c {
+protected:
+  int64_t m_default_duration{}, m_frameno{};
+  timecode_sync_t m_tcsync{};
+
+public:
+  forced_default_duration_timecode_factory_c(int64_t default_duration,
+                                             timecode_sync_t const &tcsync,
+                                             const std::string &source_name,
+                                             int64_t tid)
+    : timecode_factory_c{"", source_name, tid, 1}
+    , m_default_duration{std::llround(default_duration * tcsync.numerator / tcsync.denominator)}
+    , m_tcsync{tcsync}
+  {
+  }
+
+  virtual ~forced_default_duration_timecode_factory_c() {
+  }
+
+  virtual bool get_next(packet_cptr &packet);
+  virtual double get_default_duration(double) {
+    return m_default_duration;
   }
 };
 
