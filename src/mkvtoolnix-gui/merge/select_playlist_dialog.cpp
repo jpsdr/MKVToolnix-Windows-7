@@ -49,8 +49,8 @@ ScannedFileItem::create(SourceFile const &scannedFile) {
       to_qs(format_file_size(scannedFile.m_playlistSize)),
     }};
 
-  item->setTextAlignment(1, Qt::AlignRight);
-  item->setTextAlignment(2, Qt::AlignRight);
+  item->setTextAlignment(1, Qt::AlignRight | Qt::AlignVCenter);
+  item->setTextAlignment(2, Qt::AlignRight | Qt::AlignVCenter);
 
   return item;
 }
@@ -99,7 +99,7 @@ TrackItem::create(Track const &track) {
       track.m_language,
     }};
 
-  item->setTextAlignment(0, Qt::AlignRight);
+  item->setTextAlignment(0, Qt::AlignRight | Qt::AlignVCenter);
 
   return item;
 }

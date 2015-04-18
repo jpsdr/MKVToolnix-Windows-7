@@ -41,7 +41,7 @@ void
 TrackModel::retranslateUi() {
   auto labels = QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID");
   setHorizontalHeaderLabels(labels);
-  horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight);
+  horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
 void
@@ -98,7 +98,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                     : track->isGlobalTags() ? m_tagsIcon
                     :                         m_genericIcon);
   items[2]->setIcon(track->m_muxThis ? m_yesIcon : m_noIcon);
-  items[6]->setTextAlignment(Qt::AlignRight);
+  items[6]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
 Track *

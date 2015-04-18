@@ -21,12 +21,6 @@ Model::Model(QObject *parent)
   , m_dontStartJobsNow{}
 {
   retranslateUi();
-
-  horizontalHeaderItem(DescriptionColumn) ->setTextAlignment(Qt::AlignLeft);
-  horizontalHeaderItem(ProgressColumn)    ->setTextAlignment(Qt::AlignRight);
-  horizontalHeaderItem(DateAddedColumn)   ->setTextAlignment(Qt::AlignRight);
-  horizontalHeaderItem(DateStartedColumn) ->setTextAlignment(Qt::AlignRight);
-  horizontalHeaderItem(DateFinishedColumn)->setTextAlignment(Qt::AlignRight);
 }
 
 Model::~Model() {
@@ -38,6 +32,12 @@ Model::retranslateUi() {
 
   auto labels = QStringList{} << QY("Description") << QY("Type") << QY("Status") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
   setHorizontalHeaderLabels(labels);
+
+  horizontalHeaderItem(DescriptionColumn) ->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
+  horizontalHeaderItem(ProgressColumn)    ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  horizontalHeaderItem(DateAddedColumn)   ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  horizontalHeaderItem(DateStartedColumn) ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  horizontalHeaderItem(DateFinishedColumn)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
     auto idx = index(row, 0);
@@ -95,6 +95,12 @@ Model::setRowText(QList<QStandardItem *> const &items,
   items.at(4)->setText(Util::displayableDate(job.m_dateAdded));
   items.at(5)->setText(Util::displayableDate(job.m_dateStarted));
   items.at(6)->setText(Util::displayableDate(job.m_dateFinished));
+
+  items[DescriptionColumn ]->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
+  items[ProgressColumn    ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  items[DateAddedColumn   ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  items[DateStartedColumn ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  items[DateFinishedColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
 QList<QStandardItem *>
@@ -116,11 +122,6 @@ Model::createRow(Job const &job)
   setRowText(items, job);
 
   items[DescriptionColumn ]->setData(QVariant::fromValue(job.m_id), Util::JobIdRole);
-  items[DescriptionColumn ]->setTextAlignment(Qt::AlignLeft);
-  items[ProgressColumn    ]->setTextAlignment(Qt::AlignRight);
-  items[DateAddedColumn   ]->setTextAlignment(Qt::AlignRight);
-  items[DateStartedColumn ]->setTextAlignment(Qt::AlignRight);
-  items[DateFinishedColumn]->setTextAlignment(Qt::AlignRight);
 
   return items;
 }

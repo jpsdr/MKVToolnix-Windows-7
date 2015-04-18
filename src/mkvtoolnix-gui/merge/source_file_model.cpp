@@ -34,7 +34,7 @@ void
 SourceFileModel::retranslateUi() {
   auto labels = QStringList{} << QY("File name") << QY("Container") << QY("File size") << QY("Directory");
   setHorizontalHeaderLabels(labels);
-  horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight);
+  horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
 void
@@ -100,7 +100,7 @@ SourceFileModel::createRow(SourceFile *sourceFile)
                     : sourceFile->isAppended()       ? m_addedIcon
                     :                                  m_normalIcon);
 
-  items[2]->setTextAlignment(Qt::AlignRight);
+  items[2]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   return items;
 }
