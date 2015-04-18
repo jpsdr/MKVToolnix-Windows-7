@@ -67,10 +67,10 @@ WindowGeometrySaver::save()
   reg->beginGroup(Q("windowGeometry"));
   reg->beginGroup(m_name);
 
-#if defined(Q_WS_X11)
-  auto pos  = m_widget->mapToGlobal(QPoint{0, 0});
-#else
+#if defined(SYS_WINDOWS) || defined(SYS_APPLE)
   auto pos  = m_widget->pos();
+#else
+  auto pos  = m_widget->mapToGlobal(QPoint{0, 0});
 #endif
   auto size = m_widget->size();
 
