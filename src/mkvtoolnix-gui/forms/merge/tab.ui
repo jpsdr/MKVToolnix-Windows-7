@@ -237,9 +237,6 @@
                     <property name="text">
                      <string>&quot;Default track&quot; flag:</string>
                     </property>
-                    <property name="buddy">
-                     <cstring>defaultTrackFlag</cstring>
-                    </property>
                    </widget>
                   </item>
                   <item row="3" column="1">
@@ -290,9 +287,6 @@
                     <property name="text">
                      <string>Compression:</string>
                     </property>
-                    <property name="buddy">
-                     <cstring>compression</cstring>
-                    </property>
                    </widget>
                   </item>
                   <item row="5" column="1">
@@ -318,9 +312,6 @@
                    <widget class="QLabel" name="trackTagsLabel">
                     <property name="text">
                      <string>Tags:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>trackTags</cstring>
                     </property>
                    </widget>
                   </item>
@@ -358,9 +349,6 @@
                       <property name="text">
                        <string>Delay (in ms):</string>
                       </property>
-                      <property name="buddy">
-                       <cstring>delay</cstring>
-                      </property>
                      </widget>
                     </item>
                     <item row="0" column="1">
@@ -371,9 +359,6 @@
                       <property name="text">
                        <string>Stretch by:</string>
                       </property>
-                      <property name="buddy">
-                       <cstring>stretchBy</cstring>
-                      </property>
                      </widget>
                     </item>
                     <item row="1" column="1">
@@ -383,9 +368,6 @@
                      <widget class="QLabel" name="defaultDurationLabel">
                       <property name="text">
                        <string>Default duration/FPS:</string>
-                      </property>
-                      <property name="buddy">
-                       <cstring>defaultDuration</cstring>
                       </property>
                      </widget>
                     </item>
@@ -461,9 +443,6 @@
                       <property name="text">
                        <string>Timecode file:</string>
                       </property>
-                      <property name="buddy">
-                       <cstring>timecodes</cstring>
-                      </property>
                      </widget>
                     </item>
                     <item row="3" column="1">
@@ -524,11 +503,11 @@
                   </item>
                   <item row="7" column="0">
                    <widget class="QLabel" name="naluSizeLengthLabel">
+                    <property name="mouseTracking">
+                     <bool>false</bool>
+                    </property>
                     <property name="text">
                      <string>NALU size length:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>naluSizeLength</cstring>
                     </property>
                    </widget>
                   </item>
@@ -601,18 +580,12 @@
                     <property name="text">
                      <string>Cropping:</string>
                     </property>
-                    <property name="buddy">
-                     <cstring>cropping</cstring>
-                    </property>
                    </widget>
                   </item>
                   <item row="5" column="0">
                    <widget class="QLabel" name="stereoscopyLabel">
                     <property name="text">
                      <string>Stereoscopy:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>stereoscopy</cstring>
                     </property>
                    </widget>
                   </item>
@@ -691,9 +664,6 @@
                     <property name="text">
                      <string>Character set:</string>
                     </property>
-                    <property name="buddy">
-                     <cstring>subtitleCharacterSet</cstring>
-                    </property>
                    </widget>
                   </item>
                   <item>
@@ -722,9 +692,6 @@
                    <widget class="QLabel" name="cuesLabel">
                     <property name="text">
                      <string>Indexing (cues):</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>cues</cstring>
                     </property>
                    </widget>
                   </item>
@@ -756,9 +723,6 @@
                    <widget class="QLabel" name="userDefinedTrackOptionsLabel">
                     <property name="text">
                      <string>Custom options:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>userDefinedTrackOptions</cstring>
                     </property>
                    </widget>
                   </item>
@@ -830,9 +794,6 @@
                 <property name="text">
                  <string>Output file:</string>
                 </property>
-                <property name="buddy">
-                 <cstring>output</cstring>
-                </property>
                </widget>
               </item>
               <item row="1" column="1">
@@ -858,9 +819,6 @@
                 <property name="text">
                  <string>Global tags:</string>
                 </property>
-                <property name="buddy">
-                 <cstring>globalTags</cstring>
-                </property>
                </widget>
               </item>
               <item row="2" column="1">
@@ -885,9 +843,6 @@
                <widget class="QLabel" name="segmentInfoLabel">
                 <property name="text">
                  <string>Segment info:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>segmentInfo</cstring>
                 </property>
                </widget>
               </item>
@@ -928,9 +883,6 @@
                <widget class="QLabel" name="splitModeLabel">
                 <property name="text">
                  <string>Split mode:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>splitMode</cstring>
                 </property>
                </widget>
               </item>
@@ -990,9 +942,6 @@
                 <property name="text">
                  <string>Maximum number of files:</string>
                 </property>
-                <property name="buddy">
-                 <cstring>splitMaxFiles</cstring>
-                </property>
                </widget>
               </item>
               <item row="3" column="1">
@@ -1013,9 +962,6 @@
                <widget class="QLabel" name="splitOptionsLabel">
                 <property name="text">
                  <string>Options:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>splitOptions</cstring>
                 </property>
                </widget>
               </item>
@@ -1050,9 +996,6 @@
                 <property name="text">
                  <string>Segment UIDs:</string>
                 </property>
-                <property name="buddy">
-                 <cstring>segmentUIDs</cstring>
-                </property>
                </widget>
               </item>
               <item row="0" column="1">
@@ -1063,9 +1006,6 @@
                 <property name="text">
                  <string>Previous segment UID:</string>
                 </property>
-                <property name="buddy">
-                 <cstring>previousSegmentUID</cstring>
-                </property>
                </widget>
               </item>
               <item row="1" column="1">
@@ -1075,9 +1015,6 @@
                <widget class="QLabel" name="nextSegmentUIDLabel">
                 <property name="text">
                  <string>Next segment UID:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>nextSegmentUID</cstring>
                 </property>
                </widget>
               </item>
@@ -1104,9 +1041,6 @@
                 <property name="text">
                  <string>Chapter file:</string>
                 </property>
-                <property name="buddy">
-                 <cstring>chapters</cstring>
-                </property>
                </widget>
               </item>
               <item row="0" column="1">
@@ -1132,9 +1066,6 @@
                 <property name="text">
                  <string>Language:</string>
                 </property>
-                <property name="buddy">
-                 <cstring>chapterLanguage</cstring>
-                </property>
                </widget>
               </item>
               <item row="1" column="1">
@@ -1145,9 +1076,6 @@
                 <property name="text">
                  <string>Character set:</string>
                 </property>
-                <property name="buddy">
-                 <cstring>chapterCharacterSet</cstring>
-                </property>
                </widget>
               </item>
               <item row="2" column="1">
@@ -1157,9 +1085,6 @@
                <widget class="QLabel" name="chapterCueNameFormatLabel">
                 <property name="text">
                  <string>Cue name format:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>chapterCueNameFormat</cstring>
                 </property>
                </widget>
               </item>
@@ -1188,9 +1113,6 @@
                  <widget class="QLabel" name="userDefinedOptionsLabel">
                   <property name="text">
                    <string>Custom options:</string>
-                  </property>
-                  <property name="buddy">
-                   <cstring>userDefinedOptions</cstring>
                   </property>
                  </widget>
                 </item>
@@ -1230,7 +1152,7 @@
      </widget>
      <widget class="QWidget" name="attachmentsTab">
       <attribute name="title">
-       <string>Attachments</string>
+       <string>Attach&amp;ments</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_10">
        <item>
