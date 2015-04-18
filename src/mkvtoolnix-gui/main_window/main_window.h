@@ -10,6 +10,8 @@
 #include <QAction>
 #include <QMainWindow>
 
+#include "mkvtoolnix-gui/util/window_geometry_saver.h"
+
 namespace mtx { namespace gui {
 
 namespace ChapterEditor {
@@ -48,6 +50,7 @@ protected:
   ChapterEditor::Tool *m_toolChapterEditor{};
   WatchJobs::Tool *m_watchJobTool{};
   QList<QAction *> m_toolSelectionActions;
+  Util::WindowGeometrySaver m_geometrySaver;
 
 protected:                      // static
   static MainWindow *ms_mainWindow;

@@ -233,7 +233,7 @@ App::initializeLocale(QString const &requestedLocale) {
     auto path       = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 #endif
 
-    auto result = translator->load(Q("qtbase_%1").arg(Q(locale)), path);
+    translator->load(Q("qtbase_%1").arg(Q(locale)), path);
     installTranslator(translator.get());
 
     m_currentTranslator = std::move(translator);

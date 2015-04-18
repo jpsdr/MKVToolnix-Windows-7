@@ -34,6 +34,7 @@ MainWindow *MainWindow::ms_mainWindow = nullptr;
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow{parent}
   , ui{new Ui::MainWindow}
+  , m_geometrySaver{this, Q("MainWindow")}
 {
   ms_mainWindow = this;
 
@@ -50,6 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
   setWindowIcon(Util::loadIcon(Q("mkvmergeGUI.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
 
   retranslateUi();
+
+  m_geometrySaver.restore();
 
 #if defined(HAVE_CURL_EASY_H)
   silentlyCheckForUpdates();
