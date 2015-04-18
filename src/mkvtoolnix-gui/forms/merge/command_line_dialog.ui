@@ -96,7 +96,14 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pbCopyToClipboard">
+       <property name="text">
+        <string>C&amp;opy to clipboard</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbClose">
        <property name="text">
         <string>&amp;Close</string>
        </property>
@@ -106,6 +113,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>escapeMode</tabstop>
+  <tabstop>commandLine</tabstop>
+  <tabstop>pbCopyToClipboard</tabstop>
+  <tabstop>pbClose</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -125,14 +138,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton</sender>
+   <sender>pbClose</sender>
    <signal>clicked()</signal>
    <receiver>mtx::gui::Merge::CommandLineDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>177</x>
-     <y>264</y>
+     <x>542</x>
+     <y>287</y>
     </hint>
     <hint type="destinationlabel">
      <x>179</x>
@@ -140,8 +153,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pbCopyToClipboard</sender>
+   <signal>clicked()</signal>
+   <receiver>mtx::gui::Merge::CommandLineDialog</receiver>
+   <slot>copyToClipboard()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>383</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>309</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onEscapeModeChanged(int)</slot>
+  <slot>copyToClipboard()</slot>
  </slots>
 </ui>

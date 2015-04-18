@@ -26,6 +26,7 @@ public:
 
 public slots:
   void onEscapeModeChanged(int index);
+  void copyToClipboard();
 };
 
 }}}

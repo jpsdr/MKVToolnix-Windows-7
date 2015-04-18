@@ -1,5 +1,8 @@
 #include "common/common_pch.h"
 
+#include <QApplication>
+#include <QClipboard>
+
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
@@ -45,6 +48,11 @@ CommandLineDialog::onEscapeModeChanged(int index) {
   auto sep  = Util::EscapeMkvtoolnix == mode ? "\n" : " ";
 
   ui->commandLine->setPlainText(Util::escape(m_options, mode).join(Q(sep)));
+}
+
+void
+CommandLineDialog::copyToClipboard() {
+  QApplication::clipboard()->setText(ui->commandLine->toPlainText());
 }
 
 }}}
