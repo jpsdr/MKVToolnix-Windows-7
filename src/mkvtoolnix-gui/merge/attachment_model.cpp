@@ -44,7 +44,7 @@ AttachmentModel::setRowData(QList<QStandardItem *> const &items,
   items[NameColumn       ]->setText(attachment.m_name);
   items[MIMETypeColumn   ]->setText(attachment.m_MIMEType);
   items[DescriptionColumn]->setText(attachment.m_description);
-  items[StyleColumn      ]->setText(attachment.m_style == Attachment::ToAllFiles ? QY("to all files") : QY("only to the first file"));
+  items[StyleColumn      ]->setText(attachment.m_style == Attachment::ToAllFiles ? QY("to all output files") : QY("only to the first output file"));
   items[SourceFileColumn ]->setText(info.fileName());
   items[SourceDirColumn  ]->setText(info.path());
 }

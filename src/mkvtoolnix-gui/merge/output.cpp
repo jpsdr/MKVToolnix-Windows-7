@@ -12,7 +12,7 @@ using namespace mtx::gui;
 
 void
 Tab::setupOutputControls() {
-  m_splitControls << ui->splitOptionsLabel << ui->splitOptions << ui->splittingOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;
+  m_splitControls << ui->splitOptions << ui->splitOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;
 
   auto comboBoxControls = QList<QComboBox *>{} << ui->splitMode << ui->chapterLanguage << ui->chapterCharacterSet;
   for (auto const &control : comboBoxControls)
@@ -53,7 +53,7 @@ Tab::onGlobalTagsEdited(QString newValue) {
 
 void
 Tab::onBrowseGlobalTags() {
-  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML files") + Q(" (*.xml)"), ui->globalTags);
+  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML tag files") + Q(" (*.xml)"), ui->globalTags);
   if (!fileName.isEmpty())
     m_config.m_globalTags = fileName;
 }
@@ -65,7 +65,7 @@ Tab::onSegmentInfoEdited(QString newValue) {
 
 void
 Tab::onBrowseSegmentInfo() {
-  auto fileName = getOpenFileName(QY("Select segment info file"), QY("XML files") + Q(" (*.xml)"), ui->segmentInfo);
+  auto fileName = getOpenFileName(QY("Select segment info file"), QY("XML segment info files") + Q(" (*.xml)"), ui->segmentInfo);
   if (!fileName.isEmpty())
     m_config.m_segmentInfo = fileName;
 }
@@ -212,7 +212,7 @@ Tab::onChaptersEdited(QString newValue) {
 
 void
 Tab::onBrowseChapters() {
-  auto fileName = getOpenFileName(QY("Select chapter file"), QY("XML files") + Q(" (*.xml)"), ui->chapters);
+  auto fileName = getOpenFileName(QY("Select chapter file"), QY("XML chapter files") + Q(" (*.xml)"), ui->chapters);
   if (!fileName.isEmpty())
     m_config.m_chapters = fileName;
 }

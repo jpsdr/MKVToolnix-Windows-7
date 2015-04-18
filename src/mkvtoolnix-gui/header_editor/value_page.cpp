@@ -168,9 +168,9 @@ ValuePage::retranslateUi() {
   if (m_present) {
     auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, m_callbacks.GlobalId);
     if (semantic && semantic->Mandatory)
-      m_lStatus->setText(QY("This element is currently present in the file. It cannot be removed because it is a mandatory header field."));
+      m_lStatus->setText(Q("%1 %2").arg(QY("This element is currently present in the file.")).arg(QY("It cannot be removed because it is a mandatory header field.")));
     else
-      m_lStatus->setText(QY("This element is currently present in the file. You can let the header editor remove the element from the file."));
+      m_lStatus->setText(Q("%1 %2").arg(QY("This element is currently present in the file.")).arg(QY("You can let the header editor remove the element from the file.")));
 
     m_lValueLabel->setText(QY("Current value:"));
     m_cbAddOrRemove->setText(QY("Remove element"));
@@ -179,7 +179,7 @@ ValuePage::retranslateUi() {
     m_lOriginalValue->setText(getOriginalValueAsString());
 
   } else {
-    m_lStatus->setText(QY("This element is not currently present in the file. You can let the header editor add the element to the file."));
+    m_lStatus->setText(Q("%1 %2").arg(QY("This element is not currently present in the file.")).arg(QY("You can let the header editor add the element to the file.")));
     m_lValueLabel->setText(QY("New value:"));
     m_cbAddOrRemove->setText(QY("Add element"));
 

@@ -20,11 +20,11 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="inputTab">
       <attribute name="title">
-       <string>Input</string>
+       <string>&amp;Input</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
@@ -47,7 +47,7 @@
             <item>
              <widget class="QLabel" name="filesLabel">
               <property name="text">
-               <string>Files:</string>
+               <string>&amp;Files:</string>
               </property>
               <property name="buddy">
                <cstring>files</cstring>
@@ -95,7 +95,7 @@
             <item>
              <widget class="QLabel" name="tracksLabel">
               <property name="text">
-               <string>Tracks, chapters, tags and attachments:</string>
+               <string>&amp;Tracks, chapters, tags and attachments:</string>
               </property>
               <property name="buddy">
                <cstring>tracks</cstring>
@@ -166,7 +166,7 @@
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-639</y>
+                <y>0</y>
                 <width>465</width>
                 <height>1064</height>
                </rect>
@@ -181,7 +181,10 @@
                   <item row="0" column="0">
                    <widget class="QLabel" name="muxThisLabel">
                     <property name="text">
-                     <string>Mux this track:</string>
+                     <string>Mu&amp;x this track:</string>
+                    </property>
+                    <property name="buddy">
+                     <cstring>muxThis</cstring>
                     </property>
                    </widget>
                   </item>
@@ -345,7 +348,7 @@
                <item>
                 <widget class="QGroupBox" name="timecodesAndDefaultDurationBox">
                  <property name="title">
-                  <string>Timecodes and default duration:</string>
+                  <string>Timecodes and default duration</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_11">
                   <item>
@@ -353,7 +356,7 @@
                     <item row="0" column="0">
                      <widget class="QLabel" name="delayLabel">
                       <property name="text">
-                       <string>Delay (in &amp;ms):</string>
+                       <string>Delay (in ms):</string>
                       </property>
                       <property name="buddy">
                        <cstring>delay</cstring>
@@ -524,6 +527,9 @@
                     <property name="text">
                      <string>NALU size length:</string>
                     </property>
+                    <property name="buddy">
+                     <cstring>naluSizeLength</cstring>
+                    </property>
                    </widget>
                   </item>
                   <item row="0" column="0">
@@ -583,7 +589,7 @@
                   <item row="1" column="0">
                    <widget class="QRadioButton" name="setDisplayWidthHeight">
                     <property name="text">
-                     <string>Display width/&amp;height:</string>
+                     <string>Display width/height:</string>
                     </property>
                    </widget>
                   </item>
@@ -715,7 +721,7 @@
                   <item row="0" column="0">
                    <widget class="QLabel" name="cuesLabel">
                     <property name="text">
-                     <string>Inde&amp;xing (cues):</string>
+                     <string>Indexing (cues):</string>
                     </property>
                     <property name="buddy">
                      <cstring>cues</cstring>
@@ -749,7 +755,7 @@
                   <item row="1" column="0">
                    <widget class="QLabel" name="userDefinedTrackOptionsLabel">
                     <property name="text">
-                     <string>&amp;Custom options:</string>
+                     <string>Custom options:</string>
                     </property>
                     <property name="buddy">
                      <cstring>userDefinedTrackOptions</cstring>
@@ -787,7 +793,7 @@
      </widget>
      <widget class="QWidget" name="outputTab">
       <attribute name="title">
-       <string>Output</string>
+       <string>&amp;Output</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -809,7 +815,7 @@
               <item row="0" column="0">
                <widget class="QLabel" name="titleLael">
                 <property name="text">
-                 <string>File title:</string>
+                 <string>File &amp;title:</string>
                 </property>
                 <property name="buddy">
                  <cstring>title</cstring>
@@ -972,16 +978,6 @@
                 </item>
                </widget>
               </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="splitOptionsLabel">
-                <property name="text">
-                 <string>Options</string>
-                </property>
-                <property name="buddy">
-                 <cstring>splitOptions</cstring>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="1">
                <widget class="QComboBox" name="splitOptions">
                 <property name="editable">
@@ -989,17 +985,10 @@
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="splittingOptionsLabel">
-                <property name="text">
-                 <string>Options:</string>
-                </property>
-               </widget>
-              </item>
               <item row="3" column="0">
                <widget class="QLabel" name="splitMaxFilesLabel">
                 <property name="text">
-                 <string>&amp;Maximum number of files:</string>
+                 <string>Maximum number of files:</string>
                 </property>
                 <property name="buddy">
                  <cstring>splitMaxFiles</cstring>
@@ -1017,6 +1006,16 @@
                <widget class="QCheckBox" name="linkFiles">
                 <property name="text">
                  <string>Link files</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="splitOptionsLabel">
+                <property name="text">
+                 <string>Options:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>splitOptions</cstring>
                 </property>
                </widget>
               </item>
@@ -1062,7 +1061,7 @@
               <item row="1" column="0">
                <widget class="QLabel" name="previousSegmentUIDLabel">
                 <property name="text">
-                 <string>Pre&amp;vious segment UID:</string>
+                 <string>Previous segment UID:</string>
                 </property>
                 <property name="buddy">
                  <cstring>previousSegmentUID</cstring>
@@ -1075,7 +1074,7 @@
               <item row="2" column="0">
                <widget class="QLabel" name="nextSegmentUIDLabel">
                 <property name="text">
-                 <string>Ne&amp;xt segment UID:</string>
+                 <string>Next segment UID:</string>
                 </property>
                 <property name="buddy">
                  <cstring>nextSegmentUID</cstring>
@@ -1131,7 +1130,7 @@
               <item row="1" column="0">
                <widget class="QLabel" name="chapterLanguageLabel">
                 <property name="text">
-                 <string>&amp;Language:</string>
+                 <string>Language:</string>
                 </property>
                 <property name="buddy">
                  <cstring>chapterLanguage</cstring>
@@ -1188,7 +1187,7 @@
                 <item>
                  <widget class="QLabel" name="userDefinedOptionsLabel">
                   <property name="text">
-                   <string>&amp;Custom options:</string>
+                   <string>Custom options:</string>
                   </property>
                   <property name="buddy">
                    <cstring>userDefinedOptions</cstring>
@@ -1237,7 +1236,10 @@
        <item>
         <widget class="QLabel" name="attachmentsLabel">
          <property name="text">
-          <string>Attachments:</string>
+          <string>Atta&amp;chments:</string>
+         </property>
+         <property name="buddy">
+          <cstring>attachments</cstring>
          </property>
         </widget>
        </item>
@@ -1266,7 +1268,10 @@
           <item row="0" column="0">
            <widget class="QLabel" name="attachmentNameLabel">
             <property name="text">
-             <string>Name:</string>
+             <string>&amp;Name:</string>
+            </property>
+            <property name="buddy">
+             <cstring>attachmentName</cstring>
             </property>
            </widget>
           </item>
@@ -1276,7 +1281,10 @@
           <item row="0" column="2">
            <widget class="QLabel" name="attachmentDescriptionLabel">
             <property name="text">
-             <string>Description:</string>
+             <string>&amp;Description:</string>
+            </property>
+            <property name="buddy">
+             <cstring>attachmentDescription</cstring>
             </property>
            </widget>
           </item>
@@ -1286,7 +1294,10 @@
           <item row="1" column="0">
            <widget class="QLabel" name="attachmentMIMETypeLabel">
             <property name="text">
-             <string>MIME type:</string>
+             <string>&amp;MIME type:</string>
+            </property>
+            <property name="buddy">
+             <cstring>attachmentMIMEType</cstring>
             </property>
            </widget>
           </item>
@@ -1300,7 +1311,10 @@
           <item row="1" column="2">
            <widget class="QLabel" name="attachmentStyleLabel">
             <property name="text">
-             <string>Attach to:</string>
+             <string>Attach &amp;to:</string>
+            </property>
+            <property name="buddy">
+             <cstring>attachmentStyle</cstring>
             </property>
            </widget>
           </item>
@@ -1365,7 +1379,7 @@
      <item>
       <widget class="QPushButton" name="addToJobQueue">
        <property name="text">
-        <string>Add to job &amp;queue</string>
+        <string>Add to &amp;job queue</string>
        </property>
        <property name="icon">
         <iconset resource="../../qt_resources.qrc">

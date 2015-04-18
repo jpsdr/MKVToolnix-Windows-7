@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-17 14:50+0200\n"
+"POT-Creation-Date: 2015-04-18 08:41+0200\n"
 "PO-Revision-Date: 2014-11-05 08:50+0100\n"
 "Last-Translator: Louis Larsen\n"
 "Language-Team: Chinese Simplified <mkvtoolnix@lidian.info>\n"
@@ -816,12 +816,12 @@ msgstr " 尺寸 %1%"
 msgid " size is unknown"
 msgstr " 尺寸未知"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1304
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1305
 #, fuzzy
 msgid "\"Default track\" flag:"
 msgstr "“默认轨”标记:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1311
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1312
 #, fuzzy
 msgid "\"Forced track\" flag:"
 msgstr "“强制轨”标记:"
@@ -1090,16 +1090,15 @@ msgstr "复制命令行(&C)"
 msgid "&Country:"
 msgstr "国家:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1359
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1399
-#, fuzzy
-msgid "&Custom options:"
-msgstr "mmg 选项"
-
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:488
 #, fuzzy
 msgid "&Default"
 msgstr "默认"
+
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1405
+#, fuzzy
+msgid "&Description:"
+msgstr "描述:"
 
 #: src/mmg/jobs.cpp:508
 msgid "&Disable"
@@ -1159,6 +1158,11 @@ msgstr "额外选项"
 msgid "&File"
 msgstr "文件(&F)"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1293
+#, fuzzy
+msgid "&Files:"
+msgstr "文件(&F)"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:715
 msgid "&GUI"
 msgstr ""
@@ -1199,6 +1203,11 @@ msgstr "隐藏"
 msgid "&Info tool"
 msgstr ""
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1361
+#, fuzzy
+msgid "&Input"
+msgstr "输入"
+
 #: src/mmg/mmg_dialog.cpp:309
 msgid "&Input\tAlt-1"
 msgstr "输入选项(&I)\tAlt-1"
@@ -1210,8 +1219,7 @@ msgstr "添加到任务队列(&A)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:503
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:713
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1303
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1394
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1304
 #, fuzzy
 msgid "&Language:"
 msgstr "语言:"
@@ -1224,14 +1232,14 @@ msgstr "载入(&L)"
 msgid "&Load settings\tCtrl-L"
 msgstr "载入配置文件(&L)\tCtrl-L"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1406
+#, fuzzy
+msgid "&MIME type:"
+msgstr "MIME 类型:"
+
 #: src/mmg/mmg_dialog.cpp:301
 msgid "&Manage jobs\tCtrl-J"
 msgstr "管理任务(&M)\tCtrl-J"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1384
-#, fuzzy
-msgid "&Maximum number of files:"
-msgstr "最大文件数:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:357
 #, fuzzy
@@ -1251,6 +1259,7 @@ msgid "&Muxing"
 msgstr "混流(&M)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:502
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1404
 #, fuzzy
 msgid "&Name:"
 msgstr "名称:"
@@ -1311,6 +1320,11 @@ msgstr "选项(&O)"
 #, fuzzy
 msgid "&Ordered"
 msgstr "有序"
+
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1401
+#, fuzzy
+msgid "&Output"
+msgstr "输出"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:316
 #, fuzzy
@@ -1426,6 +1440,11 @@ msgstr ""
 #, fuzzy
 msgid "&Tag editor"
 msgstr "头部编辑器"
+
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1294
+#, fuzzy
+msgid "&Tracks, chapters, tags and attachments:"
+msgstr "轨道、章节与标签:"
 
 #: src/mmg/mmg_dialog.cpp:315
 msgid "&Troubleshooting"
@@ -2183,7 +2202,7 @@ msgstr "AAC 文件可能包含 HE-AAC / AAC+ / SBR AAC 音频。这 *不会* 被
 msgid "AAC is SBR/HE-AAC/AAC+"
 msgstr "AAC 是 SBR/HE-AAC/AAC+"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1340
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1341
 #, fuzzy
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC 是 SBR/HE-AAC/AAC+"
@@ -2382,8 +2401,12 @@ msgstr "添加子章节"
 msgid "Add the file 'filename' as a new attachment"
 msgstr "将文件“filename”作为一个新的附件添加"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:315
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1416
+#, fuzzy
+msgid "Add to &job queue"
+msgstr "添加到任务队列(&A)"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:315
 #, fuzzy
 msgid "Add to job &queue"
 msgstr "添加到任务队列(&A)"
@@ -2688,14 +2711,19 @@ msgstr "宽高比:"
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "至少需要一个 <ChapterAtom> 元素。"
 
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:54
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1402
 #, fuzzy
-msgid "Attach to"
-msgstr "附加的"
+msgid "Atta&chments:"
+msgstr "附件"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1407
 #, fuzzy
-msgid "Attach to:"
+msgid "Attach &to:"
+msgstr "附加的"
+
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:54
+#, fuzzy
+msgid "Attach to"
 msgstr "附加的"
 
 #: src/info/mkvinfo.cpp:1087
@@ -2731,11 +2759,6 @@ msgstr "附加方式:"
 msgid "Attachments"
 msgstr "附件"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1402
-#, fuzzy
-msgid "Attachments:"
-msgstr "附件"
-
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
 #, fuzzy
 msgid "Audio"
@@ -2759,7 +2782,7 @@ msgstr "音频声道数"
 msgid "Audio output sampling frequency"
 msgstr "音频输出采样率"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1339
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1340
 #, fuzzy
 msgid "Audio properties"
 msgstr "编辑属性选择器"
@@ -3153,7 +3176,7 @@ msgstr "章节:"
 msgid "Chapters: %1% entries"
 msgstr "章节: %1% 条记录"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1349
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1350
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1395
 #, fuzzy
 msgid "Character set:"
@@ -3416,7 +3439,7 @@ msgstr ""
 msgid "Compression failed: %1%\n"
 msgstr "压缩失败: %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1317
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1318
 #: src/mmg/tabs/input_extra.cpp:54
 #: src/mmg/tabs/input_extra.cpp:128
 msgid "Compression:"
@@ -3622,7 +3645,7 @@ msgstr ""
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '%1%').\n"
 msgstr "裁减参数: 未以 <TID>:<left>,<top>,<right>,<bottom> 的形式给出 例如 0:10,5,10,5 (您的参数为 '%1%')。\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1337
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1338
 #: src/mmg/tabs/input_format.cpp:269
 msgid "Cropping:"
 msgstr "画面裁剪:"
@@ -3814,6 +3837,12 @@ msgstr "当前版本:"
 msgid "Currently no newer version is available online."
 msgstr "有新版本可用。"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1360
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1399
+#, fuzzy
+msgid "Custom options:"
+msgstr "mmg 选项"
+
 #: src/mmg/jobs.cpp:513
 msgid "D&elete"
 msgstr "删除(&E)"
@@ -3891,7 +3920,7 @@ msgstr "字幕字符集:"
 msgid "Default duration"
 msgstr "默认时长"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1326
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1327
 #, fuzzy
 msgid "Default duration/FPS:"
 msgstr "默认时长"
@@ -3925,11 +3954,7 @@ msgstr "“默认轨”标记:"
 msgid "Defaults for new chapters"
 msgstr "在章节开始之前切割"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1324
-#, fuzzy
-msgid "Delay (in &ms):"
-msgstr "延时 (ms):"
-
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1325
 #: src/mmg/tabs/input_format.cpp:253
 msgid "Delay (in ms):"
 msgstr "延时 (ms):"
@@ -3967,7 +3992,6 @@ msgid "Description already exists"
 msgstr "描述已存在"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:184
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1405
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:163
 #: src/mmg/cli_options_dlg.cpp:52
 #: src/mmg/header_editor/value_page.cpp:155
@@ -4039,11 +4063,7 @@ msgstr "显示单位: %1%%2%"
 msgid "Display usage information"
 msgstr "显示用法信息"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1336
-#, fuzzy
-msgid "Display width/&height:"
-msgstr "显示宽/高:"
-
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1337
 #: src/mmg/tabs/input_format.cpp:237
 msgid "Display width/height:"
 msgstr "显示宽/高:"
@@ -4057,7 +4077,7 @@ msgstr "显示宽度: %1%"
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "不要在元定位元素中添加章节项。"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1373
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1374
 #, fuzzy
 msgid "Do not split"
 msgstr "不作切割"
@@ -4562,6 +4582,11 @@ msgstr "族 UID: %1%"
 msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "文件 %1% 类型未知。请查看受支持的文件类型列表 ('mkvmerge --list-types')，如果您的文件类型受支持但没被正常识别，请联系作者 Moritz Bunkus <moritz@bunkus.org>。\n"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1363
+#, fuzzy
+msgid "File &title:"
+msgstr "文件/剪辑标题:"
+
 #: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid "File '%1%': container: %2%"
@@ -4682,11 +4707,6 @@ msgstr "文件名"
 msgid "File structure warning"
 msgstr "文件结构警告"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1362
-#, fuzzy
-msgid "File title:"
-msgstr "文件/剪辑标题:"
-
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1387
 #, fuzzy
 msgid "File/Segment linking"
@@ -4703,11 +4723,6 @@ msgstr "文件/剪辑标题:"
 #: src/merge/output_control.cpp:861
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "文件不能被追加合并到文件自己。'--append-to' 的参数无效。\n"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1292
-#, fuzzy
-msgid "Files:"
-msgstr "文件(&F)"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
 #, fuzzy
@@ -4728,7 +4743,7 @@ msgstr "完成时间"
 msgid "Finished processing on %s"
 msgstr "已完成对 %s 的处理"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1329
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1330
 #, fuzzy
 msgid "Fix bitstream timing info"
 msgstr "修正位流时间同步信息"
@@ -4851,13 +4866,13 @@ msgstr "伽玛修正: %1%"
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track. mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it. This option prevents that behavior."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1361
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1362
 msgid "General"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:701
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:716
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1295
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1296
 #, fuzzy
 msgid "General options"
 msgstr "轨道常规选项"
@@ -4880,7 +4895,7 @@ msgstr "全局选项"
 msgid "Global tags (%d entries) from %s"
 msgstr "全局标签 (%d 项) 自 %s"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1365
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1366
 #, fuzzy
 msgid "Global tags:"
 msgstr "全局标签"
@@ -5154,11 +5169,10 @@ msgstr "不相容的 AAC 音频包 (长: %1% != len_check %2%)\n"
 msgid "Increase verbosity."
 msgstr "增强“详细”程度。"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1351
-msgid "Inde&xing (cues):"
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1352
+msgid "Indexing (cues):"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1360
 #: src/mmg/mmg_dialog.cpp:326
 msgid "Input"
 msgstr "输入"
@@ -5628,6 +5642,13 @@ msgstr "无效轨道 ID，在 '%1% %2%'。\n"
 msgid "It can also be opened from the 'Help' menu."
 msgstr "您也可以从“帮助”菜单访问该网页。"
 
+#: src/mkvtoolnix-gui/header_editor/value_page.cpp:171
+#, fuzzy
+msgid "It cannot be removed because it is a mandatory header field."
+msgstr ""
+"此文件中目前存在本元素。\n"
+"它不能被移除，因为它属于必要头部字段。"
+
 #: src/info/qt_ui.cpp:138
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr ""
@@ -5703,6 +5724,7 @@ msgstr "此轨的语言。选择一个 ISO639-2 语言代码。"
 msgid "Language is not NUL terminated"
 msgstr "语言未以 NUL 收尾"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1394
 #: src/mmg/options/chapters.cpp:86
 #: src/mmg/tabs/chapters.cpp:377
 #: src/mmg/tabs/global.cpp:347
@@ -5727,18 +5749,18 @@ msgstr "在输出文件的章节中留额外的空格 (EbmlVoid)。"
 msgid "Lets you add arbitrary options to the command line"
 msgstr "允许您向命令行添加任意选项"
 
-#: src/merge/timecode_factory.cpp:355
+#: src/merge/timecode_factory.cpp:346
 #, boost-format
 msgid "Line %1% of the timecode file '%2%' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
 msgstr "行 %1% 自时间码文件 '%2%' 包含不相容的数据 (如 时长 或 FPS 小于零)。\n"
 
-#: src/merge/timecode_factory.cpp:118
+#: src/merge/timecode_factory.cpp:109
 #, boost-format
 msgid "Line %1% of the timecode file '%2%' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
 msgstr "行 %1% 自时间码文件 '%2%' 包含不相容的数据 (如起始帧数大于终止帧数，或者某些值小于零)。\n"
 
-#: src/merge/timecode_factory.cpp:113
-#: src/merge/timecode_factory.cpp:348
+#: src/merge/timecode_factory.cpp:104
+#: src/merge/timecode_factory.cpp:339
 #, boost-format
 msgid "Line %1% of the timecode file '%2%' could not be parsed.\n"
 msgstr "无法解析行 %1% 自时间码文件 '%2%'。\n"
@@ -5764,7 +5786,7 @@ msgstr "行 %1%: 此行似乎是字幕条目但格式无法识别。此条将被
 msgid "Line %1%: The line seems to be a subtitle entry but the timecode was negative even after adding the track delay. Negative timecodes are not supported in Matroska. This entry will be skipped.\n"
 msgstr "行 %1%: 此行似乎是字幕条目但时间码为负即使添加了轨道延时。负的时间码不受 Matroska 的支持。此条将被跳过。\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1386
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1385
 #, fuzzy
 msgid "Link files"
 msgstr "连接文件"
@@ -5807,7 +5829,6 @@ msgstr "MIME 类型:"
 msgid "MIME type for this track. Select one of the pre-defined MIME types or enter one yourself."
 msgstr "此轨的 MIME 类型。选择一个预定义的 MIME 类型或亲自输入。"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1406
 #: src/mmg/tabs/attachments.cpp:162
 msgid "MIME type:"
 msgstr "MIME 类型:"
@@ -5983,6 +6004,11 @@ msgstr "允许的最大值: %1%, 实际值: %2%"
 msgid "Maximum cache"
 msgstr "最大缓存"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1383
+#, fuzzy
+msgid "Maximum number of files:"
+msgstr "最大文件数:"
+
 #: src/extract/xtr_rmff.cpp:47
 #, boost-format
 msgid "Memory allocation error: %1% (%2%).\n"
@@ -6029,7 +6055,7 @@ msgstr "最小缓存"
 msgid "Minimum duration for playlists in seconds:"
 msgstr "播放列表最短时长 (秒):"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1350
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1351
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1397
 msgid "Miscellaneous"
 msgstr ""
@@ -6125,12 +6151,12 @@ msgstr "将所选任务下移"
 msgid "Move the selected jobs up"
 msgstr "将所选任务上移"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:33
-msgid "Mux this"
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1297
+msgid "Mu&x this track:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1296
-msgid "Mux this track:"
+#: src/mkvtoolnix-gui/merge/track_model.cpp:33
+msgid "Mux this"
 msgstr ""
 
 #: src/info/mkvinfo.cpp:487
@@ -6147,7 +6173,7 @@ msgstr "混流进行中。"
 msgid "Muxing took %1%.\n"
 msgstr "混流耗时 %1%。\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1332
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1333
 #: src/mmg/tabs/input_format.cpp:248
 msgid "NALU size length:"
 msgstr "NALU 长:"
@@ -6165,7 +6191,6 @@ msgstr "名称"
 msgid "Name for this track, e.g. \"director's comments\"."
 msgstr "此轨的名称，如“导演评论”。"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1404
 #: src/mmg/tabs/attachments.cpp:159
 #: src/mmg/tabs/chapters.cpp:376
 msgid "Name:"
@@ -6180,11 +6205,6 @@ msgstr "名称: %1%"
 #, fuzzy
 msgid "Names"
 msgstr "名称"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1390
-#, fuzzy
-msgid "Ne&xt segment UID:"
-msgstr "下一剪辑 UID:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:729
 #, fuzzy
@@ -6216,6 +6236,7 @@ msgstr "下一文件名: %1%"
 msgid "Next level 0 element is not a segment but %1%"
 msgstr "下一个 0 层级元素不是剪辑而是 %1%"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1390
 #: src/mmg/tabs/global.cpp:340
 msgid "Next segment UID:"
 msgstr "下一剪辑 UID:"
@@ -6624,7 +6645,6 @@ msgid "Option file created."
 msgstr "选项文件已创建。"
 
 #: src/info/info_cli_parser.cpp:35
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1382
 #: src/mmg/options/dialog.cpp:37
 #: src/propedit/propedit_cli_parser.cpp:191
 msgid "Options"
@@ -6634,7 +6654,7 @@ msgstr "选项"
 msgid "Options meant ONLY for developpers. Do not use them. If something is considered to be an officially supported option then it's NOT in this list!"
 msgstr "*仅* 为开发者设计的选项。不要用它们。凡是被官方支持的选项都 *不在* 这个列表中!"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1383
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1386
 #, fuzzy
 msgid "Options:"
 msgstr "选项"
@@ -6662,7 +6682,6 @@ msgstr "原值:"
 msgid "Other options"
 msgstr "其他选项"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1401
 #: src/mmg/mux_dialog.cpp:64
 #: src/mmg/options/output.cpp:159
 msgid "Output"
@@ -6673,7 +6692,7 @@ msgstr "输出"
 msgid "Output file name"
 msgstr "输出文件名"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1363
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1364
 #, fuzzy
 msgid "Output file:"
 msgstr "输出文件名"
@@ -6835,11 +6854,6 @@ msgstr ""
 "请阅读 mkvmerge 命令行自述页。\n"
 "它以大篇幅解释了本列表中不易看透的细节。\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1389
-#, fuzzy
-msgid "Pre&vious segment UID:"
-msgstr "上一剪辑 UID:"
-
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:737
 #, fuzzy
 msgid "Pre&viously used output directory"
@@ -6865,6 +6879,7 @@ msgstr "上一文件名"
 msgid "Previous filename: %1%"
 msgstr "上一文件名: %1%"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1389
 #: src/mmg/tabs/global.cpp:338
 msgid "Previous segment UID:"
 msgstr "上一剪辑 UID:"
@@ -6937,7 +6952,7 @@ msgstr "进度: 100%%%1%"
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "进度: [%1%%2%] %3%%%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1294
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1295
 msgid "Properties:"
 msgstr ""
 
@@ -7157,7 +7172,7 @@ msgstr "将所有消息重定向至此文件。"
 msgid "Reduce to audio core"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1347
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1348
 msgid "Reduce to core"
 msgstr ""
 
@@ -7539,7 +7554,7 @@ msgstr "剪辑信息文件:"
 msgid "Segment info files (*.xml)|*.xml|%s"
 msgstr "剪辑信息文件 (*.xml)|*.xml|%s"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1367
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1368
 #, fuzzy
 msgid "Segment info:"
 msgstr "剪辑信息文件:"
@@ -7656,7 +7671,7 @@ msgstr "选择字幕文件或章节信息中使用的字符集。"
 msgid "Set &output file"
 msgstr "设置输出文件(&O)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1333
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1334
 #, fuzzy
 msgid "Set aspect ratio:"
 msgstr " (宽高比)"
@@ -8034,12 +8049,12 @@ msgstr ""
 "指定对宽高比的可行修正\n"
 "(0: 自由调整, 1: 保持宽高比, 2: 固定)。"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1370
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1371
 #: src/mmg/tabs/global.cpp:306
 msgid "Split mode:"
 msgstr "切割模式:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1369
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1370
 #: src/mmg/tabs/global.cpp:305
 msgid "Splitting"
 msgstr "切割"
@@ -8156,12 +8171,12 @@ msgstr "立体视法: %1% (%2%)"
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "立体 3D 视频模式 (0 - 11，参见文档)。"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1338
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1339
 #: src/mmg/tabs/input_format.cpp:243
 msgid "Stereoscopy:"
 msgstr "立体视法:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1325
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1326
 #: src/mmg/tabs/input_format.cpp:256
 msgid "Stretch by:"
 msgstr "伸展比率:"
@@ -8175,7 +8190,7 @@ msgstr "伸展此轨的时间码。本项支持两种格式。既可以是正的
 msgid "String"
 msgstr "字符串"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1348
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1349
 #, fuzzy
 msgid "Subtitle and chapter properties"
 msgstr "编辑属性选择器"
@@ -8260,7 +8275,7 @@ msgstr "轨道 %1% 的标签: %2% 条记录"
 msgid "Tags for track ID %lld (%d entries) from %s"
 msgstr "轨道 ID %lld 的标签 (%d 项) 自 %s"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1321
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1322
 #: src/mmg/tabs/input_general.cpp:191
 msgid "Tags:"
 msgstr "标签:"
@@ -9082,7 +9097,7 @@ msgstr "出现错误前，最后处理的时间码为 %1%。\n"
 msgid "The letters 'G', 'M' and 'K' can be used to indicate giga/mega/kilo bytes respectively."
 msgstr "在此尺寸后开始新的输出文件。字母 'G', 'M' 和 'K' 分别可以用来代表吉/兆/千比特。所有单位换算均基于 1024 (G = 1024^3, M = 1024^2, K = 1024)。"
 
-#: src/merge/timecode_factory.cpp:212
+#: src/merge/timecode_factory.cpp:203
 #, boost-format
 msgid "The line %1% of the timecode file '%2%' does not contain a valid floating point number.\n"
 msgstr "时间码文件 '%2%' 的 %1% 行不包含有效的浮点数。\n"
@@ -9175,7 +9190,7 @@ msgstr "两轨的比特每采样数（音频位深）不同: %1% 与 %2%"
 msgid "The number of channels of the two audio tracks is different: %1% and %2%"
 msgstr "两音频轨的声道数不同: %1% 与 %2%"
 
-#: src/merge/timecode_factory.cpp:268
+#: src/merge/timecode_factory.cpp:259
 #, boost-format
 msgid "The number of external timecodes %1% is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
 msgstr "外部时间码数 %1% 小于此轨的帧数。此轨的其余帧将可能不按您想要的方式标记时间戳。mkvmerge 甚至可能崩溃。\n"
@@ -9444,26 +9459,26 @@ msgstr "时间码文件 '%1%' 包含格式不支持/无法识别的行。最靠�
 msgid "The timecode file '%1%' could not be opened for reading.\n"
 msgstr "时间码文件 '%1%' 无法以读取模式打开。\n"
 
-#: src/merge/timecode_factory.cpp:86
-#: src/merge/timecode_factory.cpp:94
-#: src/merge/timecode_factory.cpp:100
-#: src/merge/timecode_factory.cpp:302
+#: src/merge/timecode_factory.cpp:77
+#: src/merge/timecode_factory.cpp:85
+#: src/merge/timecode_factory.cpp:91
+#: src/merge/timecode_factory.cpp:293
 #, boost-format
 msgid "The timecode file '%1%' does not contain a valid 'Assume' line with the default number of frames per second.\n"
 msgstr "时间码文件 '%1%' 不含有效的 'Assume' 行（包含帧率的默认值）。\n"
 
-#: src/merge/timecode_factory.cpp:337
+#: src/merge/timecode_factory.cpp:328
 #, boost-format
 msgid "The timecode file '%1%' does not contain a valid 'Gap' line with the duration of the gap.\n"
 msgstr "时间码文件 '%1%' 不含有效的 'Gap' 行（包含间隙时长）。\n"
 
-#: src/merge/timecode_factory.cpp:239
-#: src/merge/timecode_factory.cpp:366
+#: src/merge/timecode_factory.cpp:230
+#: src/merge/timecode_factory.cpp:357
 #, boost-format
 msgid "The timecode file '%1%' does not contain any valid entry.\n"
 msgstr "时间码文件 '%1%' 不含任何有效项目。\n"
 
-#: src/merge/timecode_factory.cpp:215
+#: src/merge/timecode_factory.cpp:206
 #, boost-format
 msgid ""
 "The timecode v2 file '%1%' contains timecodes that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timecode file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timecodes in the timecode file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timecode file with the first timecodes being '0', '40', '80', '120' etc and not '0', '120', '40', '80' etc.\n"
@@ -9652,6 +9667,14 @@ msgstr "此 Ogg/OGM 文件包含章节或标题信息。不幸的是此文件中
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
 msgstr "Ogg/OGM文件存在章节但是无法解析。这可能是由于没有设置合适的字符集，或是由于章节入点与SRT-style格式不匹配。\n"
 
+#: src/mkvtoolnix-gui/header_editor/value_page.cpp:171
+#: src/mkvtoolnix-gui/header_editor/value_page.cpp:173
+#, fuzzy
+msgid "This element is currently present in the file."
+msgstr ""
+"此文件中目前存在本元素。\n"
+"它不能被移除，因为它属于必要头部字段。"
+
 #: src/mmg/header_editor/value_page.cpp:171
 msgid ""
 "This element is currently present in the file.\n"
@@ -9670,32 +9693,18 @@ msgstr ""
 "此文件中目前存在本元素。\n"
 "您可以让头部编辑器从该文件移除此元素。"
 
-#: src/mkvtoolnix-gui/header_editor/value_page.cpp:171
+#: src/mkvtoolnix-gui/header_editor/value_page.cpp:182
 #, fuzzy
-msgid "This element is currently present in the file. It cannot be removed because it is a mandatory header field."
+msgid "This element is not currently present in the file."
 msgstr ""
-"此文件中目前存在本元素。\n"
-"它不能被移除，因为它属于必要头部字段。"
-
-#: src/mkvtoolnix-gui/header_editor/value_page.cpp:173
-#, fuzzy
-msgid "This element is currently present in the file. You can let the header editor remove the element from the file."
-msgstr ""
-"此文件中目前存在本元素。\n"
-"您可以让头部编辑器从该文件移除此元素。"
+"此文件中目前不存在本元素。\n"
+"您可以让头部编辑器为该文件添加此元素。"
 
 #: src/mmg/header_editor/value_page.cpp:160
 msgid ""
 "This element is not currently present in the file.\n"
 "You can let the header editor add the element\n"
 "to the file."
-msgstr ""
-"此文件中目前不存在本元素。\n"
-"您可以让头部编辑器为该文件添加此元素。"
-
-#: src/mkvtoolnix-gui/header_editor/value_page.cpp:182
-#, fuzzy
-msgid "This element is not currently present in the file. You can let the header editor add the element to the file."
 msgstr ""
 "此文件中目前不存在本元素。\n"
 "您可以让头部编辑器为该文件添加此元素。"
@@ -9822,7 +9831,7 @@ msgstr "时间切片"
 msgid "Timecode extraction"
 msgstr "时间码提取"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1327
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1328
 #, fuzzy
 msgid "Timecode file:"
 msgstr "时间码:"
@@ -9839,9 +9848,9 @@ msgstr "时间码文件 (*.tmc;*.txt)|*.tmc;*.txt|%s"
 msgid "Timecode scale: %1%"
 msgstr "时间码缩放比例: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1323
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1324
 #, fuzzy
-msgid "Timecodes and default duration:"
+msgid "Timecodes and default duration"
 msgstr "时间码提取"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:117
@@ -9865,7 +9874,7 @@ msgstr "标题: %1%"
 msgid "To all files"
 msgstr "附加到所有的文件"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1302
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1303
 #, fuzzy
 msgid "Trac&k name:"
 msgstr "轨道名称:"
@@ -10042,11 +10051,6 @@ msgstr "使用不支持的内容编码（压缩或加密）方案的轨道不能
 
 #: src/mmg/tabs/input.cpp:200
 msgid "Tracks, chapters and tags:"
-msgstr "轨道、章节与标签:"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1293
-#, fuzzy
-msgid "Tracks, chapters, tags and attachments:"
 msgstr "轨道、章节与标签:"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:250
@@ -10389,7 +10393,7 @@ msgstr "视频像素高度"
 msgid "Video pixel width"
 msgstr "视频像素宽度"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1330
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1331
 #, fuzzy
 msgid "Video properties"
 msgstr "视频左边裁减"
@@ -10606,21 +10610,39 @@ msgstr "错误的识别串: '%|1$7s|' != 'kate\\0\\0\\0'"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:307
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:143
+#: src/mkvtoolnix-gui/merge/output.cpp:215
 #, fuzzy
 msgid "XML chapter files"
 msgstr "(新章节文件)"
 
+#: src/mkvtoolnix-gui/merge/output.cpp:68
+#, fuzzy
+msgid "XML segment info files"
+msgstr "剪辑信息文件:"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:414
 #: src/mkvtoolnix-gui/merge/output.cpp:56
-#: src/mkvtoolnix-gui/merge/output.cpp:68
-#: src/mkvtoolnix-gui/merge/output.cpp:215
 #, fuzzy
-msgid "XML files"
+msgid "XML tag files"
 msgstr "连接文件"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:57
 msgid "You can change this value in the preferences."
 msgstr ""
+
+#: src/mkvtoolnix-gui/header_editor/value_page.cpp:182
+#, fuzzy
+msgid "You can let the header editor add the element to the file."
+msgstr ""
+"此文件中目前不存在本元素。\n"
+"您可以让头部编辑器为该文件添加此元素。"
+
+#: src/mkvtoolnix-gui/header_editor/value_page.cpp:173
+#, fuzzy
+msgid "You can let the header editor remove the element from the file."
+msgstr ""
+"此文件中目前存在本元素。\n"
+"您可以让头部编辑器从该文件移除此元素。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:122
 msgid "You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' or none at all."
@@ -10700,22 +10722,22 @@ msgstr "添加"
 msgid "additional parts"
 msgstr "添加其余部分"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1379
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1380
 #, fuzzy
 msgid "after frame/field numbers"
 msgstr "在帧/场编号之后切割"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1375
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1376
 #, fuzzy
 msgid "after output duration"
 msgstr "满足一定时长后切割"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1374
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1375
 #, fuzzy
 msgid "after output size"
 msgstr "...按尺寸:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1376
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1377
 #, fuzzy
 msgid "after specific timecodes"
 msgstr "...按特定时间码:"
@@ -10763,7 +10785,7 @@ msgstr "附件"
 msgid "audio"
 msgstr "音频"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1380
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1381
 #, fuzzy
 msgid "before chapters"
 msgstr "在章节开始之前切割"
@@ -10792,12 +10814,12 @@ msgstr "%1% 编译于 %2% %3%"
 msgid "buttons"
 msgstr "按钮"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1378
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1379
 #, fuzzy
 msgid "by parts based on frame/field numbers"
 msgstr "根据帧/场编号切割为分段"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1377
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1378
 #, fuzzy
 msgid "by parts based on timecodes"
 msgstr "根据时间码切割为分段"
@@ -10847,7 +10869,7 @@ msgstr "压缩"
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num 未找到。 %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1354
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1355
 #: src/mmg/tabs/chapters.cpp:393
 #: src/mmg/tabs/input_extra.cpp:81
 #: src/mmg/tabs/input_extra.cpp:160
@@ -10865,8 +10887,8 @@ msgstr "默认时长: %|1$.3f|ms (对于视频轨为 %|2$.3f| 帧/场每秒)"
 msgid "deflateInit() failed. Result: %1%\n"
 msgstr "deflateInit() 失败。结果: %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1307
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1318
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1308
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1319
 msgid "determine automatically"
 msgstr ""
 
@@ -11007,7 +11029,7 @@ msgstr "flac_reader: 解析文件出错: %1%\n"
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: 无法初始化 FLAC 封装器。\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1356
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1357
 #: src/mmg/tabs/input_extra.cpp:83
 msgid "for all frames"
 msgstr "全部帧"
@@ -11527,8 +11549,8 @@ msgstr "mpeg_ps_reader: 不该发生 #2。 %1%"
 msgid "never scan for other playlists"
 msgstr "从不扫描其他播放列表"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1300
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1345
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1301
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1346
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:28
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
 #: src/mkvtoolnix-gui/merge/track_model.cpp:83
@@ -11539,7 +11561,7 @@ msgstr "从不扫描其他播放列表"
 msgid "no"
 msgstr "否"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1357
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1358
 msgid "no cues"
 msgstr ""
 
@@ -11556,7 +11578,7 @@ msgstr "无错误发生"
 msgid "no errors yet"
 msgstr "无错误发生"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1319
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1320
 #, fuzzy
 msgid "no extra compression"
 msgstr "内容压缩"
@@ -11616,7 +11638,7 @@ msgstr ", 完成于 %s"
 msgid "not started yet"
 msgstr ", 开始于 %s"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1314
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1315
 msgid "off"
 msgstr ""
 
@@ -11629,12 +11651,12 @@ msgstr "ogg_stream_init 对流号 %1% 失败。将尝试继续并忽略该流。
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer 失败\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1315
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1316
 #, fuzzy
 msgid "on"
 msgstr "完成"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1355
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1356
 #: src/mmg/tabs/input_extra.cpp:82
 msgid "only for I frames"
 msgstr "仅 I 帧"
@@ -11643,12 +11665,8 @@ msgstr "仅 I 帧"
 msgid "only if the run was successfull"
 msgstr "仅当成功执行时"
 
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:47
-#, fuzzy
-msgid "only to the first file"
-msgstr "仅附加到首个文件"
-
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1411
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:47
 #, fuzzy
 msgid "only to the first output file"
 msgstr "仅附加到首个文件"
@@ -11763,11 +11781,11 @@ msgstr "警告信息:"
 msgid "sampling freq: %1%"
 msgstr "采样率: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1309
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1310
 msgid "set to \"no\""
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1308
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1309
 msgid "set to \"yes\""
 msgstr ""
 
@@ -11844,12 +11862,8 @@ msgstr "文本字幕"
 msgid "timecodes"
 msgstr "时间码"
 
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:47
-#, fuzzy
-msgid "to all files"
-msgstr "附加到所有的文件"
-
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1410
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:47
 #, fuzzy
 msgid "to all output files"
 msgstr "附加到所有的文件"
@@ -11906,7 +11920,7 @@ msgstr "未知"
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "未知，格式标识 0x%|1$04x|"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1385
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1384
 msgid "unlimited"
 msgstr ""
 
@@ -11943,12 +11957,12 @@ msgstr "wavpack_reader: 未发现音频块\n"
 msgid "wavpack_reader: unknown sample rate!\n"
 msgstr "wavpack_reader: 未知采样率!\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1331
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1332
 msgid "x"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1299
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1344
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1300
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1345
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:29
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
 #: src/mkvtoolnix-gui/merge/track_model.cpp:83
@@ -12054,6 +12068,10 @@ msgstr ""
 #~ "https://www.bunkus.org/videotools/mkvtoolnix/\n"
 #~ "\n"
 #~ "帮助可通过工具提示、“帮助”菜单或按“F1”键获取。"
+
+#, fuzzy
+#~ msgid "&Custom options:"
+#~ msgstr "mmg 选项"
 
 #, fuzzy
 #~ msgid "&User defined options:"
@@ -12234,11 +12252,19 @@ msgstr ""
 #~ msgid "Data is not allowed inside <%1%>."
 #~ msgstr "<%1%> 内部不允许有数据。"
 
+#, fuzzy
+#~ msgid "Delay (in &ms):"
+#~ msgstr "延时 (ms):"
+
 #~ msgid "Dirac elementary stream"
 #~ msgstr "Dirac 基本流"
 
 #~ msgid "Disable header removal compression for audio and video tracks by default"
 #~ msgstr "默认禁用音频与视频轨道的去头压缩"
+
+#, fuzzy
+#~ msgid "Display width/&height:"
+#~ msgstr "显示宽/高:"
 
 #~ msgid "Do not copy chapters from this file. Only applies to a couple of formats (e.g. Matroska files)."
 #~ msgstr "不要从此文件中复制章节。仅适用于部分格式（如 Matroska 文件）。"
@@ -12365,6 +12391,14 @@ msgstr ""
 #~ msgid "Muxing took 1 second.\n"
 #~ msgstr "混流耗时 1 秒。\n"
 
+#, fuzzy
+#~ msgid "NALU si&ze length:"
+#~ msgstr "NALU 长:"
+
+#, fuzzy
+#~ msgid "Ne&xt segment UID:"
+#~ msgstr "下一剪辑 UID:"
+
 #~ msgid "No FPS selected for AVC/h.264 track"
 #~ msgstr "AVC/h.264 轨道的帧率尚未选择"
 
@@ -12401,6 +12435,10 @@ msgstr ""
 
 #~ msgid "PGS"
 #~ msgstr "PGS"
+
+#, fuzzy
+#~ msgid "Pre&vious segment UID:"
+#~ msgstr "上一剪辑 UID:"
 
 #, fuzzy
 #~ msgid "PushButton"
@@ -12990,6 +13028,10 @@ msgstr ""
 #~ msgid "XML parser error at line %1%: %2%."
 #~ msgstr "XML 解析器出错，于行 %1%: %2%。"
 
+#, fuzzy
+#~ msgid "XML tab files"
+#~ msgstr "连接文件"
+
 #~ msgid "You are already running the latest version."
 #~ msgstr "您已在使用最新版。"
 
@@ -13214,6 +13256,10 @@ msgstr ""
 #~ msgid "on_entry_selected: display == nullptr. Should not have happened."
 #~ msgstr "on_entry_selected: display == nullptr。此情况不应出现。"
 
+#, fuzzy
+#~ msgid "only to the first file"
+#~ msgstr "仅附加到首个文件"
+
 #~ msgid "pgssup_reader: Could not open the file."
 #~ msgstr "pgssup_reader: 无法打开文件。"
 
@@ -13252,6 +13298,14 @@ msgstr ""
 
 #~ msgid "tet_index: '%1%' not found\n"
 #~ msgstr "tet_index: '%1%' 未发现\n"
+
+#, fuzzy
+#~ msgid "to all files"
+#~ msgstr "附加到所有的文件"
+
+#, fuzzy
+#~ msgid "to all files output files"
+#~ msgstr "附加到所有的文件"
 
 #~ msgid "truehd_reader: Could not open the source file."
 #~ msgstr "truehd_reader: 无法打开源文件。"

@@ -411,7 +411,7 @@ Tab::onFixBitstreamTimingInfoChanged(bool newValue) {
 
 void
 Tab::onBrowseTrackTags() {
-  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML files") + Q(" (*.xml)"), ui->trackTags);
+  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML tag files") + Q(" (*.xml)"), ui->trackTags);
   if (!fileName.isEmpty())
     withSelectedTracks([&](Track *track) { track->m_tags = fileName; }, true);
 }
