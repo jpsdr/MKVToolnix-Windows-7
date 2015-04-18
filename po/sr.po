@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-18 15:36+0200\n"
+"POT-Creation-Date: 2015-04-18 20:06+0200\n"
 "PO-Revision-Date: 2015-03-31 22:18+0200\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -3286,6 +3286,14 @@ msgstr ""
 "Uzrokuje da mkvmerge doda 'stop display' komandu za pakete VobSub prevoda "
 "koji ne sadrže polje sa trajanjem."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:82
+msgid "Certain file formats have 'title' property."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:96
+msgid "Certain file formats have a 'language' property for their tracks."
+msgstr ""
+
 #: src/propedit/change.cpp:206
 #, boost-format
 msgid ""
@@ -4208,16 +4216,16 @@ msgstr "DTS_Header problem: nema dovoljno podataka da se iščita zaglavlje\n"
 msgid "Date (invalid, value: %1%)"
 msgstr "Datum (nevažeći, vrednost: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 msgid "Date added"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 #, fuzzy
 msgid "Date finished"
 msgstr ", završeno u %s"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 msgid "Date started"
 msgstr ""
 
@@ -4313,7 +4321,7 @@ msgstr "Obriši jedan ili više priloga"
 msgid "Delete the selected jobs from the job queue"
 msgstr "Obriši odabrane zadatke iz reda zadataka"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:54 src/mmg/jobs.cpp:468
 msgid "Description"
 msgstr "Opis"
@@ -5540,6 +5548,12 @@ msgstr ""
 "trebalo da prikaže postojanje tog poglavlja/edicije korisniku. Takve stavke "
 "bi i dalje mogle da se koriste za sistem menija."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:100
+msgid ""
+"If a character set is selected here then the program will automatically set "
+"the character set input to this value for newly added text subtitle tracks."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:155 src/mmg/tabs/global.cpp:258
 msgid ""
 "If a range's start number is prefixed with '+' then its content will be "
@@ -5631,9 +5645,42 @@ msgstr ""
 "Ako je čekirano mmg će upozoriti ako misli da ga koristite nepravilno. Takva "
 "upozorenja su prikazana barem jednom čak iako isključite ovu funkciju."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:118
+#, fuzzy
+msgid ""
+"If checked the program makes sure the suggested output file name is unique "
+"by adding a number (e.g. ' (1)') to the end of the file name."
+msgstr ""
+"Ako je čekirano mmg će se pobrinuti da je predloženo ime izlaznog fajla "
+"jedinstveno dodajući broj (npr. ' (1)') na kraju imena fajla. To se radi "
+"samo ako nemodifikovano ime fajla već postoji."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:91
+msgid ""
+"If enabled the program will ask for confirmation before overwriting files "
+"and jobs."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:67
+msgid ""
+"If enabled the program will check online whether or not a new release of "
+"MKVToolNix is available on the home page."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:110
 msgid "If given then you may use up to nine digits after the decimal point."
 msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:89
+#, fuzzy
+msgid ""
+"If it contains the word 'DELAY' followed by a number then this number is "
+"automatically put into the 'delay' input field for any audio track found in "
+"the file."
+msgstr ""
+"Kada je fajl dodat njegovo ime je skenirano. Ako sadrži reč 'DELAY' praćen "
+"brojem onda se ovaj broj automatski stavlja u polje za unos 'kašnjenje' za "
+"svaku audio stazu nađenu u fajlu."
 
 #: src/mmg/options/output.cpp:47
 msgid ""
@@ -5658,6 +5705,12 @@ msgid ""
 msgstr ""
 "Ako se deljenje koristi prilog može biti zakačen svim napravljenim fajlovima "
 "ili samo prvom fajlu. Nema efekta ako se deljenje ne koristi."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
+msgid ""
+"If this option is enabled and if there is currently no output file name set "
+"then the program will set one for you when you add an input file."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:127
 msgid ""
@@ -7044,6 +7097,10 @@ msgstr "Nije nađeno ime fajla posle '@'."
 msgid "No help available."
 msgstr "Pomoć nedostupna."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:69
+msgid "No information is trasmitted to the server."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:2343
 msgid "No input files were given. No output will be created.\n"
 msgstr "Nema ulaznih fajlova. Izlaznog rezultata neće biti.\n"
@@ -7120,6 +7177,12 @@ msgstr "Nijedno od polja zaglavlja nije promenjeno. Ništa nije sačuvano."
 msgid "Nor&mal output:"
 msgstr "Izlaz loga:"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:73
+msgid ""
+"Normally completed jobs stay in the queue even over restarts until the user "
+"clears them out manually."
+msgstr ""
+
 #: src/mmg/tabs/input_format.cpp:279
 msgid ""
 "Normally mkvmerge does not change the timing information (frame/field rate) "
@@ -7160,6 +7223,12 @@ msgstr "Nije važeći Matroska fajl (nije nađen segment/level 0 element)"
 #: src/merge/mkvmerge.cpp:820
 msgid "Not a valid number or not positive."
 msgstr "Broj je pogrešan ili nije pozitivan."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:84
+msgid ""
+"Note that even if the option is disabled mkvmerge will copy a source file's "
+"title property unless a title is manually set by the user."
+msgstr ""
 
 #: src/merge/generic_packetizer.cpp:1149
 #, boost-format
@@ -7289,6 +7358,15 @@ msgstr ""
 "Navedena su samo delimična mapiranja za fajl broj %1% ('%2%'). Ne navodite "
 "mapiranje uopšte (u tom slučaju će default mapiranje biti korišćeno) ili "
 "navedite mapiranje za sve staze koje se kopiraju.\n"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:109
+#, fuzzy
+msgid ""
+"Only play lists whose duration are at least this long are considered and "
+"offered to the user for selection."
+msgstr ""
+"Samo plejliste čije je trajanje bar ovoliko dugačko su uzete u obzir i "
+"ponuđene korisniku za odabir."
 
 #: src/mmg/options/mmg.cpp:135
 msgid ""
@@ -7658,7 +7736,7 @@ msgstr "Obrađujem 1000/1000"
 msgid "Processing job %d/%d"
 msgstr "Obrađujem zadatak %d/%d"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39 src/mmg/jobs.cpp:262
+#: src/mkvtoolnix-gui/jobs/model.cpp:33 src/mmg/jobs.cpp:262
 #: src/mmg/mux_dialog.cpp:295
 msgid "Progress"
 msgstr "Progres"
@@ -8438,7 +8516,7 @@ msgstr "Izaberite Matroska fajl"
 msgid "Select file to add"
 msgstr "Izaberite fajl za dodavanje"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:299
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:370
 #, fuzzy
 msgid "Select output directory"
 msgstr "Izaberite izlazni fajl"
@@ -9097,7 +9175,7 @@ msgstr ""
 "trajanje u sekundama: %4%; približan bitski protok u bitovima po sekundi: "
 "%5%\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39 src/mmg/jobs.cpp:466
+#: src/mkvtoolnix-gui/jobs/model.cpp:33 src/mmg/jobs.cpp:466
 msgid "Status"
 msgstr "Status"
 
@@ -9595,6 +9673,13 @@ msgstr ""
 "Opaska: Ovo upozorenje može biti isključeno u dijalogu 'opcije'. Isključite "
 "opciju 'Upozori o mogućoj...'."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:128
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:129
+msgid ""
+"The character sets selected here will be shown at the top of all the "
+"character set drop-down boxes in the program."
+msgstr ""
+
 #: src/output/p_hevc.cpp:157 src/output/p_mpeg4_p10.cpp:183
 #, boost-format
 msgid "The chosen NALU size length of %1% is too small. Try using '4'.\n"
@@ -9637,6 +9722,13 @@ msgstr "Konfiguracija sačuvana."
 #: src/input/r_wavpack.cpp:73
 msgid "The correction file header was not read correctly.\n"
 msgstr "Ispravka zaglavlja fajla nije pravilno pročitana.\n"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:125
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:126
+msgid ""
+"The countries selected here will be shown at the top of all the country drop-"
+"down boxes in the program."
+msgstr ""
 
 #: src/mmg/options/chapters.cpp:120
 #, c-format, boost-format
@@ -10247,6 +10339,12 @@ msgstr ""
 "Četvrti režim izvlači poglavlja i konvertuje ih u XML. Rezultat je zapisan u "
 "standardni izlaz. Izlaz može biti korišćen kao izvor za mkvmerge."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:114
+msgid ""
+"The generated output file name has the same base name as the input file name "
+"but with an extension based on the track types present in the file."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:1610
 msgid ""
 "The given timecode scale factor is outside the valid range (1...10000000 or "
@@ -10325,6 +10423,22 @@ msgid ""
 "The language code '%1%' is not a valid ISO639-2 language code and will be "
 "ignored.\n"
 msgstr "Jezički kod '%1%' nije važeći ISO639-2 jezički kod i biće ignorisan.\n"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:98
+msgid ""
+"The language selected here is used for tracks for which their source file "
+"contains no such property."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:122
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:123
+#, fuzzy
+msgid ""
+"The languages selected here will be shown at the top of all the language "
+"drop-down boxes in the program."
+msgstr ""
+"Odaberite jezike koje želite da budu prikazani na vrhu\n"
+"padajuće liste jezika."
 
 #: src/common/kax_file.cpp:206
 #, boost-format
@@ -11020,6 +11134,10 @@ msgstr "Parametri staze se ne slažu."
 msgid "The update information could not be retrieved from %1%.\n"
 msgstr "Informacija o obnavljanju ne može biti dobijena od %1%.\n"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:105
+msgid "The user can then select which play list to actually add."
+msgstr ""
+
 #: src/merge/connection_checks.h:34
 msgid "The width of the two tracks is different: %1% and %2%"
 msgstr "Širina dve staze se razlikuje: %1% and %2%"
@@ -11278,13 +11396,35 @@ msgid ""
 "This file does not contain valid chapters. Error message from the parser: %1%"
 msgstr "Ovaj fajl ne sadrži važeća poglavlja. Poruka o grešci iz parsera: %1%"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:77
 #, fuzzy
 msgid "This has not been implemented yet."
 msgstr "Fajl nije izmenjen."
 
 #: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
 msgid "This is a preview!"
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:68
+msgid "This is done at startup and at most once within 24 hours."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:119
+msgid ""
+"This is done only if there is already a file whose name matches the "
+"unmodified output file name."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:77
+msgid ""
+"This is the country that newly added chapter names get assigned "
+"automatically."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:76
+msgid ""
+"This is the language that newly added chapter names get assigned "
+"automatically."
 msgstr ""
 
 #: src/mmg/tabs/attachments.cpp:160
@@ -11300,6 +11440,13 @@ msgid ""
 "This is the title that players may show as the 'main title' for this movie."
 msgstr ""
 "Ovo je naslov koji plejeri mogu pokazati kao 'glavni naslov' za ovaj film."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:106
+msgid ""
+"This is useful for situations like Blu-ray discs on which a multitude of "
+"play lists exists in the same directory and where it is not obvious which "
+"feature (e.g. main movie, extras etc.) a play list belongs to."
+msgstr ""
 
 #: src/mmg/tabs/additional_parts_dlg.cpp:62
 msgid "This list is for informational purposes only and cannot be changed."
@@ -11707,7 +11854,7 @@ msgstr ""
 "CodecPrivate podaci slažu. Ovo nije slučaj za staze %1% i %2%.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 #: src/mkvtoolnix-gui/merge/track_model.cpp:42
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -12193,6 +12340,10 @@ msgstr ""
 msgid "What to do in the future:"
 msgstr "Šta da uradim ubuduće:"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:88
+msgid "When a file is added its name is scanned."
+msgstr ""
+
 #: src/mmg/options/mmg.cpp:54
 msgid ""
 "When a file is added its name is scanned. If it contains the word 'DELAY' "
@@ -12202,6 +12353,25 @@ msgstr ""
 "Kada je fajl dodat njegovo ime je skenirano. Ako sadrži reč 'DELAY' praćen "
 "brojem onda se ovaj broj automatski stavlja u polje za unos 'kašnjenje' za "
 "svaku audio stazu nađenu u fajlu."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:83
+msgid ""
+"When the user adds a file containing such a title then the program will copy "
+"the title into the »file title« input box if this option is enabled."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:97
+msgid ""
+"When the user adds such a file the track's language input is set to the "
+"language property from the source file."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:104
+msgid ""
+"Whenever the user adds a play list the program can automatically scan the "
+"directory for other play lists and present the user with a detailed list of "
+"the play lists found."
+msgstr ""
 
 #: src/common/property_element.cpp:135
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:359
@@ -12334,6 +12504,11 @@ msgstr ""
 "Ovaj element je trenutno prisutan u fajlu.\n"
 "Možete dozvoliti uređivaču zaglavlja da ukloni element\n"
 "iz fajla."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:74
+msgid ""
+"You can opt for having them removed automatically under certain conditions."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:125
 msgid ""
@@ -12634,20 +12809,20 @@ msgstr "gotovo/upozorenja"
 msgid "down"
 msgstr "dole"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:118
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:116
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "edit chapters"
 msgstr "&Nova poglavlja"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:117
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:115
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "edit headers"
 msgstr "Zaglavlja staze"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:119
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:117
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 msgid "edit tags"
 msgstr ""
 
@@ -12667,8 +12842,8 @@ msgstr "šifrovanje"
 msgid "even if there were warnings"
 msgstr "čak iako je bilo upozorenja"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:115
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:113
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "extract"
 msgstr "Cue izvlačenje"
@@ -12766,12 +12941,12 @@ msgstr "uklanjanje zaglavlja"
 msgid "hidden"
 msgstr "skriveno"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:195
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:266
 #: src/mmg/options/mkvmerge.cpp:41
 msgid "higher"
 msgstr "više"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:194
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:265
 #: src/mmg/options/mkvmerge.cpp:40
 msgid "highest"
 msgstr "najviše"
@@ -12781,8 +12956,8 @@ msgstr "najviše"
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() failed. Result: %1%\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:116
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:114
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 msgid "info"
 msgstr ""
 
@@ -12791,14 +12966,14 @@ msgstr ""
 msgid "is being estimated"
 msgstr "se procenjuje"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:121
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:119
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "job output"
 msgstr "Rezultat zadatka"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:120
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:118
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "job queue"
 msgstr "&Dodaj u red za čekanje"
@@ -12826,12 +13001,12 @@ msgstr "linija %1%: vremenska oznaka 'kašnjenje' ne može biti raščlanjena.\n
 msgid "link files"
 msgstr "poveži fajlove"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:198
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 #: src/mmg/options/mkvmerge.cpp:44
 msgid "lower"
 msgstr "niže"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:199
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
 #: src/mmg/options/mkvmerge.cpp:45
 msgid "lowest"
 msgstr "najniže"
@@ -13031,8 +13206,8 @@ msgstr ""
 "nullptr for a size of %3% bytes.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:140
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:114
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:112
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "merge"
 msgstr "mkvmerge"
@@ -13424,7 +13599,7 @@ msgstr ", završeno u %s"
 msgid "none"
 msgstr "ništa"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:197
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:268
 #: src/mmg/options/mkvmerge.cpp:43
 msgid "normal"
 msgstr "normalno"

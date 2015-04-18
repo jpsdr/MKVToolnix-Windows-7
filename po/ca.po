@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix 7.6.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-04-18 15:36+0200\n"
+"POT-Creation-Date: 2015-04-18 20:06+0200\n"
 "PO-Revision-Date: 2015-02-28 19:42+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -3340,6 +3340,14 @@ msgstr ""
 "Provoca que el «mkvmerge» afegeixi odres «stop display» als paquets de "
 "subtítols VobSub que no continguin un camp de durada."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:82
+msgid "Certain file formats have 'title' property."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:96
+msgid "Certain file formats have a 'language' property for their tracks."
+msgstr ""
+
 #: src/propedit/change.cpp:206
 #, boost-format
 msgid ""
@@ -4282,16 +4290,16 @@ msgstr ""
 msgid "Date (invalid, value: %1%)"
 msgstr "Data (no vàlida, valor: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 msgid "Date added"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 #, fuzzy
 msgid "Date finished"
 msgstr ", finalitzada el %s"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 msgid "Date started"
 msgstr ""
 
@@ -4387,7 +4395,7 @@ msgstr "Elimina un o més adjunts"
 msgid "Delete the selected jobs from the job queue"
 msgstr "Elimina les tasques seleccionades de la cua de tasques"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:54 src/mmg/jobs.cpp:468
 msgid "Description"
 msgstr "Descripció"
@@ -5628,6 +5636,12 @@ msgstr ""
 "de mostrar a l'usuari aquesta entrada del capítol. Dites entrades encara "
 "seran emprades pel sistema de menús."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:100
+msgid ""
+"If a character set is selected here then the program will automatically set "
+"the character set input to this value for newly added text subtitle tracks."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:155 src/mmg/tabs/global.cpp:258
 msgid ""
 "If a range's start number is prefixed with '+' then its content will be "
@@ -5719,9 +5733,42 @@ msgstr ""
 "avisos es mostraran almenys una vegada encara que desactiveu aquesta "
 "característica."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:118
+#, fuzzy
+msgid ""
+"If checked the program makes sure the suggested output file name is unique "
+"by adding a number (e.g. ' (1)') to the end of the file name."
+msgstr ""
+"Si està marcada, «mmg» s'assegurarà que el nom del fitxer de sortida que "
+"suggereix és únic, afegint un número (p. ex. «(1)») al final del nom de "
+"fitxer. Això només es fa si ja existeix el nom de fitxer sense modificar."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:91
+msgid ""
+"If enabled the program will ask for confirmation before overwriting files "
+"and jobs."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:67
+msgid ""
+"If enabled the program will check online whether or not a new release of "
+"MKVToolNix is available on the home page."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:110
 msgid "If given then you may use up to nine digits after the decimal point."
 msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:89
+#, fuzzy
+msgid ""
+"If it contains the word 'DELAY' followed by a number then this number is "
+"automatically put into the 'delay' input field for any audio track found in "
+"the file."
+msgstr ""
+"Quan s'afegeix un fitxer, s'analitza el seu nom. Si conté la paraula «DELAY» "
+"seguida per un número, llavors aquest últim serà posat automàticament al "
+"camp d'entrada «Retard» per a qualsevol pista d'àudio que aparegui al fitxer."
 
 #: src/mmg/options/output.cpp:47
 msgid ""
@@ -5747,6 +5794,12 @@ msgid ""
 msgstr ""
 "Durant la divisió, un fitxer es pot adjuntar a tots els fitxers creats o "
 "només al primer. No tindrà efecte si no s'usa la divisió."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
+msgid ""
+"If this option is enabled and if there is currently no output file name set "
+"then the program will set one for you when you add an input file."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:127
 msgid ""
@@ -7158,6 +7211,10 @@ msgstr "No s'ha trobat cap nom de fitxer després de la «@»."
 msgid "No help available."
 msgstr "No hi ha ajuda disponible."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:69
+msgid "No information is trasmitted to the server."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:2343
 msgid "No input files were given. No output will be created.\n"
 msgstr "No s'ha indicat cap fitxer d'entrada. No es crearà cap sortida.\n"
@@ -7237,6 +7294,12 @@ msgstr "No s'ha modificat cap dels camps de la capçalera. No s'ha desat res."
 msgid "Nor&mal output:"
 msgstr "Sortida del registre:"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:73
+msgid ""
+"Normally completed jobs stay in the queue even over restarts until the user "
+"clears them out manually."
+msgstr ""
+
 #: src/mmg/tabs/input_format.cpp:279
 msgid ""
 "Normally mkvmerge does not change the timing information (frame/field rate) "
@@ -7281,6 +7344,12 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:820
 msgid "Not a valid number or not positive."
 msgstr "No és un número vàlid o no és positiu."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:84
+msgid ""
+"Note that even if the option is disabled mkvmerge will copy a source file's "
+"title property unless a title is manually set by the user."
+msgstr ""
 
 #: src/merge/generic_packetizer.cpp:1149
 #, boost-format
@@ -7411,6 +7480,15 @@ msgstr ""
 "Només s'ha donat una part de les assignacions d'annexió al fitxer núm. %1% "
 "(«%2%»). Si no s'especifica cap assignació s'usarà l'establerta com a "
 "predefinida o es pot establir una per a totes las pistes que es copiaran.\n"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:109
+#, fuzzy
+msgid ""
+"Only play lists whose duration are at least this long are considered and "
+"offered to the user for selection."
+msgstr ""
+"Només es consideraran les llistes de reproducció si la seva durada és "
+"almenys d'aquesta longitud, i s'oferiran a l'usuari per a selecció."
 
 #: src/mmg/options/mmg.cpp:135
 msgid ""
@@ -7780,7 +7858,7 @@ msgstr "S'està processant 1000/1000"
 msgid "Processing job %d/%d"
 msgstr "S'està processant la tasca %d/%d"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39 src/mmg/jobs.cpp:262
+#: src/mkvtoolnix-gui/jobs/model.cpp:33 src/mmg/jobs.cpp:262
 #: src/mmg/mux_dialog.cpp:295
 msgid "Progress"
 msgstr "Progrés"
@@ -8569,7 +8647,7 @@ msgstr "Seleccioneu el fitxer Matroska"
 msgid "Select file to add"
 msgstr "Seleccioneu el fitxer a afegir"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:299
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:370
 #, fuzzy
 msgid "Select output directory"
 msgstr "Seleccioneu el fitxer de sortida"
@@ -9239,7 +9317,7 @@ msgstr ""
 "bytes: %3%; durada en segons: %4%; taxa de bits aproximada en bits/segon: "
 "%5%\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39 src/mmg/jobs.cpp:466
+#: src/mkvtoolnix-gui/jobs/model.cpp:33 src/mmg/jobs.cpp:466
 msgid "Status"
 msgstr "Estat"
 
@@ -9755,6 +9833,13 @@ msgstr ""
 "Nota: Aquest avís es pot desactivar al diàleg «opcions». Desactiveu l'opció "
 "«Avisa sobre l'ús...»."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:128
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:129
+msgid ""
+"The character sets selected here will be shown at the top of all the "
+"character set drop-down boxes in the program."
+msgstr ""
+
 #: src/output/p_hevc.cpp:157 src/output/p_mpeg4_p10.cpp:183
 #, boost-format
 msgid "The chosen NALU size length of %1% is too small. Try using '4'.\n"
@@ -9799,6 +9884,13 @@ msgstr "S'ha desat la configuració."
 #: src/input/r_wavpack.cpp:73
 msgid "The correction file header was not read correctly.\n"
 msgstr "La capçalera del fitxer de correcció no es pot llegir correctament.\n"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:125
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:126
+msgid ""
+"The countries selected here will be shown at the top of all the country drop-"
+"down boxes in the program."
+msgstr ""
 
 #: src/mmg/options/chapters.cpp:120
 #, c-format, boost-format
@@ -10410,6 +10502,12 @@ msgstr ""
 "és escrita a la sortida estàndard. La sortida es pot usar com una font per a "
 "«mkvmerge»."
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:114
+msgid ""
+"The generated output file name has the same base name as the input file name "
+"but with an extension based on the track types present in the file."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:1610
 msgid ""
 "The given timecode scale factor is outside the valid range (1...10000000 or "
@@ -10494,6 +10592,22 @@ msgid ""
 msgstr ""
 "El codi d'idioma «%1%» no és un codi d'idioma ISO639-2 vàlid i serà "
 "ignorat.\n"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:98
+msgid ""
+"The language selected here is used for tracks for which their source file "
+"contains no such property."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:122
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:123
+#, fuzzy
+msgid ""
+"The languages selected here will be shown at the top of all the language "
+"drop-down boxes in the program."
+msgstr ""
+"Trieu els idiomes que voleu que es mostrin a la\n"
+"part superior de les llistes desplegables d'idioma."
 
 #: src/common/kax_file.cpp:206
 #, boost-format
@@ -11205,6 +11319,10 @@ msgstr "Els paràmetres de la pista no coincideixen."
 msgid "The update information could not be retrieved from %1%.\n"
 msgstr "No s'ha pogut recuperar la informació d'actualitzacions des de %1%.\n"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:105
+msgid "The user can then select which play list to actually add."
+msgstr ""
+
 #: src/merge/connection_checks.h:34
 msgid "The width of the two tracks is different: %1% and %2%"
 msgstr "L'amplada de les dues pistes és diferent: %1% i %2%"
@@ -11467,13 +11585,35 @@ msgstr ""
 "Aquest fitxer no conté capítols vàlids. Missatge d'error des de "
 "l'analitzador: %1%"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:77
 #, fuzzy
 msgid "This has not been implemented yet."
 msgstr "El fitxer no ha estat modificat."
 
 #: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
 msgid "This is a preview!"
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:68
+msgid "This is done at startup and at most once within 24 hours."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:119
+msgid ""
+"This is done only if there is already a file whose name matches the "
+"unmodified output file name."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:77
+msgid ""
+"This is the country that newly added chapter names get assigned "
+"automatically."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:76
+msgid ""
+"This is the language that newly added chapter names get assigned "
+"automatically."
 msgstr ""
 
 #: src/mmg/tabs/attachments.cpp:160
@@ -11491,6 +11631,13 @@ msgid ""
 msgstr ""
 "Aquest és el títol que el reproductor mostrarà com el «títol principal» per "
 "aquesta pel·lícula."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:106
+msgid ""
+"This is useful for situations like Blu-ray discs on which a multitude of "
+"play lists exists in the same directory and where it is not obvious which "
+"feature (e.g. main movie, extras etc.) a play list belongs to."
+msgstr ""
 
 #: src/mmg/tabs/additional_parts_dlg.cpp:62
 msgid "This list is for informational purposes only and cannot be changed."
@@ -11905,7 +12052,7 @@ msgstr ""
 "les pistes %1% i %2%.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:33
 #: src/mkvtoolnix-gui/merge/track_model.cpp:42
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -12396,6 +12543,10 @@ msgstr ""
 msgid "What to do in the future:"
 msgstr "Què fer en el futur:"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:88
+msgid "When a file is added its name is scanned."
+msgstr ""
+
 #: src/mmg/options/mmg.cpp:54
 msgid ""
 "When a file is added its name is scanned. If it contains the word 'DELAY' "
@@ -12405,6 +12556,25 @@ msgstr ""
 "Quan s'afegeix un fitxer, s'analitza el seu nom. Si conté la paraula «DELAY» "
 "seguida per un número, llavors aquest últim serà posat automàticament al "
 "camp d'entrada «Retard» per a qualsevol pista d'àudio que aparegui al fitxer."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:83
+msgid ""
+"When the user adds a file containing such a title then the program will copy "
+"the title into the »file title« input box if this option is enabled."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:97
+msgid ""
+"When the user adds such a file the track's language input is set to the "
+"language property from the source file."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:104
+msgid ""
+"Whenever the user adds a play list the program can automatically scan the "
+"directory for other play lists and present the user with a detailed list of "
+"the play lists found."
+msgstr ""
 
 #: src/common/property_element.cpp:135
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:359
@@ -12537,6 +12707,11 @@ msgstr ""
 "Aquest element està present al fitxer.\n"
 "Podeu permetre a l'editor de la capçalera\n"
 "que elimini aquest element del fitxer."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:74
+msgid ""
+"You can opt for having them removed automatically under certain conditions."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:125
 msgid ""
@@ -12836,20 +13011,20 @@ msgstr "feta/avisos"
 msgid "down"
 msgstr "Avall"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:118
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:116
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "edit chapters"
 msgstr "Capítols &nous"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:117
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:115
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "edit headers"
 msgstr "Capçaleres de la pista"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:119
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:117
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 msgid "edit tags"
 msgstr ""
 
@@ -12869,8 +13044,8 @@ msgstr "encriptatge"
 msgid "even if there were warnings"
 msgstr "fins i tot si hi ha avisos"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:115
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:113
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "extract"
 msgstr "Extracció de l'índex"
@@ -12969,12 +13144,12 @@ msgstr "Eliminació de les capçaleres"
 msgid "hidden"
 msgstr "ocult"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:195
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:266
 #: src/mmg/options/mkvmerge.cpp:41
 msgid "higher"
 msgstr "alt"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:194
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:265
 #: src/mmg/options/mkvmerge.cpp:40
 msgid "highest"
 msgstr "molt alt"
@@ -12984,8 +13159,8 @@ msgstr "molt alt"
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() ha fallat. Resultat: %1%\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:116
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:114
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 msgid "info"
 msgstr ""
 
@@ -12994,14 +13169,14 @@ msgstr ""
 msgid "is being estimated"
 msgstr "s'està estimant"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:121
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:119
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "job output"
 msgstr "Sortida de la tasca"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:120
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:118
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "job queue"
 msgstr "&Afegeix a la cua de treball"
@@ -13029,12 +13204,12 @@ msgstr "línia %1%: La marca de temps «retard» no s'ha pogut analitzar.\n"
 msgid "link files"
 msgstr "fitxers vinculats"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:198
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 #: src/mmg/options/mkvmerge.cpp:44
 msgid "lower"
 msgstr "baixa"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:199
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
 #: src/mmg/options/mkvmerge.cpp:45
 msgid "lowest"
 msgstr "molt baixa"
@@ -13237,8 +13412,8 @@ msgstr ""
 "retornat «nullptr» per a un mida de %3% bytes.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:140
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:114
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:223
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:112
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:226
 #, fuzzy
 msgid "merge"
 msgstr "mkvmerge"
@@ -13646,7 +13821,7 @@ msgstr ", finalitzada el %s"
 msgid "none"
 msgstr "cap"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:197
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:268
 #: src/mmg/options/mkvmerge.cpp:43
 msgid "normal"
 msgstr "normal"
