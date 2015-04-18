@@ -354,4 +354,14 @@ itemFlagsToString(Qt::ItemFlags const &flags) {
   return items.join(Q("|"));
 }
 
+void
+setToolTip(QWidget *widget,
+           QString const &toolTip) {
+  // Qt up to and including 5.3 only word-wraps tool tips
+  // automatically if the format is recognized to be Rich Text. See
+  // http://doc.qt.io/qt-5/qstandarditem.html
+
+  widget->setToolTip(toolTip.startsWith('<') ? toolTip : Q("<span>%1</span>").arg(toolTip.toHtmlEscaped()));
+}
+
 }}}

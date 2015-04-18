@@ -104,9 +104,10 @@ Tab::onSplitModeChanged(int newMode) {
   } else if (MuxConfig::SplitAfterDuration == splitMode) {
     label    = QY("Duration:");
     tooltip << QY("The duration after which a new output file is started.")
-            << QY("The time can be given either in the form HH:MM:SS.nnnnnnnnn or as the number of seconds followed by 's'.")
-            << QY("You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'.")
-            << QY("If given then you may use up to nine digits after the decimal point.")
+            << (Q("%1 %2 %3")
+                .arg(QY("The time can be given either in the form HH:MM:SS.nnnnnnnnn or as the number of seconds followed by 's'."))
+                .arg(QY("You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."))
+                .arg(QY("If given then you may use up to nine digits after the decimal point.")))
             << QY("Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds).");
 
     entries << Q("")
@@ -115,54 +116,66 @@ Tab::onSplitModeChanged(int newMode) {
 
   } else if (MuxConfig::SplitAfterTimecodes == splitMode) {
     label    = QY("Timecodes:");
-    tooltip << QY("The timecodes after which a new output file is started.")
-            << QY("The timecodes refer to the whole stream and not to each individual output file.")
-            << QY("The timecodes can be given either in the form HH:MM:SS.nnnnnnnnn or as the number of seconds followed by 's'.")
-            << QY("You may omit the number of hours 'HH'.")
-            << QY("You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' or none at all.")
-            << QY("If given then you may use up to nine digits after the decimal point.")
-            << QY("If two or more timecodes are used then you have to separate them with commas.")
-            << QY("The formats can be mixed, too.")
+    tooltip << (Q("%1 %2")
+                .arg(QY("The timecodes after which a new output file is started."))
+                .arg(QY("The timecodes refer to the whole stream and not to each individual output file.")))
+            << (Q("%1 %2 %3")
+                .arg(QY("The timecodes can be given either in the form HH:MM:SS.nnnnnnnnn or as the number of seconds followed by 's'."))
+                .arg(QY("You may omit the number of hours 'HH'."))
+                .arg(QY("You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' or none at all.")))
+            << (Q("%1 %2")
+                .arg(QY("If two or more timecodes are used then you have to separate them with commas."))
+                .arg(QY("The formats can be mixed, too.")))
             << QY("Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes).");
 
   } else if (MuxConfig::SplitByParts == splitMode) {
     label    = QY("Parts:");
     tooltip << QY("A comma-separated list of timecode ranges of content to keep.")
-            << QY("Each range consists of a start and end timecode with a '-' in the middle, e.g. '00:01:15-00:03:20'.")
-            << QY("If a start timecode is left out then the previous range's end timecode is used, or the start of the file if there was no previous range.")
+            << (Q("%1 %2")
+                .arg(QY("Each range consists of a start and end timecode with a '-' in the middle, e.g. '00:01:15-00:03:20'."))
+                .arg(QY("If a start timecode is left out then the previous range's end timecode is used, or the start of the file if there was no previous range.")))
             << QY("The timecodes can be given either in the form HH:MM:SS.nnnnnnnnn or as the number of seconds followed by 's'.")
             << QY("If a range's start timecode is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range.");
 
   } else if (MuxConfig::SplitByPartsFrames == splitMode) {
     label    = QY("Parts:");
-    tooltip << QY("A comma-separated list of frame/field number ranges of content to keep.")
-            << QY("Each range consists of a start and end frame/field number with a '-' in the middle, e.g. '157-238'.")
-            << QY("The numbering starts at 1.")
-            << QY("This mode considers only the first video track that is output.")
-            << QY("If no video track is output no splitting will occur.")
-            << QY("The numbers given with this argument are interpreted based on the number of Matroska blocks that are output.")
-            << QY("A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content).")
-            << QY("mkvmerge does not distinguish between those two and simply counts the number of blocks.")
-            << QY("If a start number is left out then the previous range's end number is used, or the start of the file if there was no previous range.")
-            << QY("If a range's start number is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range.");
+    tooltip << (Q("%1 %2 %3")
+                .arg(QY("A comma-separated list of frame/field number ranges of content to keep."))
+                .arg(QY("Each range consists of a start and end frame/field number with a '-' in the middle, e.g. '157-238'."))
+                .arg(QY("The numbering starts at 1.")))
+            << (Q("%1 %2")
+                .arg(QY("This mode considers only the first video track that is output."))
+                .arg(QY("If no video track is output no splitting will occur.")))
+            << (Q("%1 %2 %3")
+                .arg(QY("The numbers given with this argument are interpreted based on the number of Matroska blocks that are output."))
+                .arg(QY("A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."))
+                .arg(QY("mkvmerge does not distinguish between those two and simply counts the number of blocks.")))
+            << (Q("%1 %2")
+                .arg(QY("If a start number is left out then the previous range's end number is used, or the start of the file if there was no previous range."))
+                .arg(QY("If a range's start number is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range.")));
 
   } else if (MuxConfig::SplitByFrames == splitMode) {
     label    = QY("Frames/fields:");
-    tooltip << QY("A comma-separated list of frame/field numbers after which to split.")
-            << QY("The numbering starts at 1.")
-            << QY("This mode considers only the first video track that is output.")
-            << QY("If no video track is output no splitting will occur.")
-            << QY("The numbers given with this argument are interpreted based on the number of Matroska blocks that are output.")
-            << QY("A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content).")
-            << QY("mkvmerge does not distinguish between those two and simply counts the number of blocks.");
+    tooltip << (Q("%1 %2")
+                .arg(QY("A comma-separated list of frame/field numbers after which to split."))
+                .arg(QY("The numbering starts at 1.")))
+            << (Q("%1 %2")
+                .arg(QY("This mode considers only the first video track that is output."))
+                .arg(QY("If no video track is output no splitting will occur.")))
+            << (Q("%1 %2 %3")
+                .arg(QY("The numbers given with this argument are interpreted based on the number of Matroska blocks that are output."))
+                .arg(QY("A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."))
+                .arg(QY("mkvmerge does not distinguish between those two and simply counts the number of blocks.")));
 
   } else if (MuxConfig::SplitAfterChapters == splitMode) {
     label    = QY("Chapter numbers:");
-    tooltip << QY("Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split.")
-            << QY("The numbering starts at 1.")
+    tooltip << (Q("%1 %2")
+                .arg(QY("Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."))
+                .arg(QY("The numbering starts at 1.")))
             << QY("Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed.")
-            << QY("A chapter starting at 0s is never considered for splitting and discarded silently.")
-            << QY("This mode only considers the top-most level of chapters across all edition entries.");
+            << (Q("%1 %2")
+                .arg(QY("A chapter starting at 0s is never considered for splitting and discarded silently."))
+                .arg(QY("This mode only considers the top-most level of chapters across all edition entries.")));
 
   }
 
@@ -172,7 +185,8 @@ Tab::onSplitModeChanged(int newMode) {
   ui->splitOptions->clear();
   ui->splitOptions->addItems(entries);
   ui->splitOptions->setCurrentText(options);
-  ui->splitOptions->setToolTip(tooltip.join(Q(" ")));
+
+  Util::setToolTip(ui->splitOptions, Q("<p>%1</p>").arg(tooltip.join(Q("</p><p>"))));
 }
 
 void

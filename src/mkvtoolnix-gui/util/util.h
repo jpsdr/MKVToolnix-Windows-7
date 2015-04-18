@@ -30,6 +30,8 @@ findPtr(Tstored *needle,
 }
 
 // Miscellaneous widget stuff
+void setToolTip(QWidget *widget, QString const &toolTip);
+
 QIcon loadIcon(QString const &name, QList<int> const &sizes);
 bool setComboBoxIndexIf(QComboBox *comboBox, std::function<bool(QString const &, QVariant const &)> test);
 bool setComboBoxTextByData(QComboBox *comboBox, QString const &data);
