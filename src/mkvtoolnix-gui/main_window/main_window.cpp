@@ -67,11 +67,6 @@ MainWindow::setStatusBarMessage(QString const &message) {
   ui->statusBar->showMessage(message, 3000);
 }
 
-Ui::MainWindow *
-MainWindow::getUi() {
-  return ui.get();
-}
-
 QWidget *
 MainWindow::createNotImplementedWidget() {
   auto widget   = new QWidget{ui->tool};
@@ -143,7 +138,7 @@ MainWindow::setupToolSelector() {
   connect(ui->actionGUIJobOutput,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
 
   connect(ui->tool,                    SIGNAL(currentChanged(int)),                        this,                SLOT(toolChanged(int)));
-  connect(m_toolJobs->getModel(),      SIGNAL(progressChanged(unsigned int,unsigned int)), m_statusBarProgress, SLOT(setProgress(unsigned int,unsigned int)));
+  connect(m_toolJobs->model(),      SIGNAL(progressChanged(unsigned int,unsigned int)), m_statusBarProgress, SLOT(setProgress(unsigned int,unsigned int)));
 }
 
 void
@@ -184,33 +179,38 @@ MainWindow::get() {
   return ms_mainWindow;
 }
 
+Ui::MainWindow *
+MainWindow::getUi() {
+  return ms_mainWindow->ui.get();
+}
+
 Merge::Tool *
-MainWindow::getMergeTool() {
+MainWindow::mergeTool() {
   return get()->m_toolMerge;
 }
 
 HeaderEditor::Tool *
-MainWindow::getHeaderEditorTool() {
+MainWindow::headerEditorTool() {
   return get()->m_toolHeaderEditor;
 }
 
 ChapterEditor::Tool *
-MainWindow::getChapterEditorTool() {
+MainWindow::chapterEditorTool() {
   return get()->m_toolChapterEditor;
 }
 
 Jobs::Tool *
-MainWindow::getJobTool() {
+MainWindow::jobTool() {
   return get()->m_toolJobs;
 }
 
 WatchJobs::Tab *
-MainWindow::getWatchCurrentJobTab() {
-  return getWatchJobTool()->currentJobTab();
+MainWindow::watchCurrentJobTab() {
+  return watchJobTool()->currentJobTab();
 }
 
 WatchJobs::Tool *
-MainWindow::getWatchJobTool() {
+MainWindow::watchJobTool() {
   return get()->m_watchJobTool;
 }
 
@@ -239,9 +239,9 @@ void
 MainWindow::closeEvent(QCloseEvent *event) {
   QSettings reg;
 
-  auto jobTool = getJobTool();
-  if (jobTool)
-    jobTool->getModel()->saveJobs(reg);
+  auto tool = jobTool();
+  if (tool)
+    tool->model()->saveJobs(reg);
 
   event->accept();
 }

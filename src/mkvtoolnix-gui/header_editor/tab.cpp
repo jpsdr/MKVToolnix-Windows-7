@@ -68,7 +68,7 @@ Tab::load() {
                            :                                  -1;
   auto expansionStatus     = QHash<QString, bool>{};
 
-  for (auto const &page : m_model->getTopLevelPages()) {
+  for (auto const &page : m_model->topLevelPages()) {
     auto key             = page == m_segmentinfoPage ? Q("segmentinfo") : QString::number(static_cast<TrackTypePage &>(*page).m_trackNumber);
     expansionStatus[key] = ui->elements->isExpanded(page->m_pageIdx);
   }
@@ -95,7 +95,7 @@ Tab::load() {
 
   m_analyzer->close_file();
 
-  for (auto const &page : m_model->getTopLevelPages()) {
+  for (auto const &page : m_model->topLevelPages()) {
     auto key = page == m_segmentinfoPage ? Q("segmentinfo") : QString::number(static_cast<TrackTypePage &>(*page).m_trackNumber);
     ui->elements->setExpanded(page->m_pageIdx, expansionStatus[key]);
   }
@@ -116,7 +116,7 @@ Tab::save() {
   auto segmentinfoModified = false;
   auto tracksModified      = false;
 
-  for (auto const &page : m_model->getTopLevelPages()) {
+  for (auto const &page : m_model->topLevelPages()) {
     if (!page->hasBeenModified())
       continue;
 
@@ -187,7 +187,7 @@ Tab::appendPage(PageBase *page,
 }
 
 PageModel *
-Tab::getModel()
+Tab::model()
   const {
   return m_model;
 }
@@ -200,7 +200,7 @@ Tab::retranslateUi() {
   m_expandAllAction->setText(QY("&Expand all"));
   m_collapseAllAction->setText(QY("&Collapse all"));
 
-  auto &pages = m_model->getPages();
+  auto &pages = m_model->pages();
   for (auto const &page : pages)
     page->retranslateUi();
 }
@@ -229,7 +229,7 @@ Tab::selectionChanged(QModelIndex const &current,
 }
 
 QString const &
-Tab::getFileName()
+Tab::fileName()
   const {
   return m_fileName;
 }
@@ -242,7 +242,7 @@ Tab::title()
 
 bool
 Tab::hasBeenModified() {
-  auto pages = m_model->getTopLevelPages();
+  auto pages = m_model->topLevelPages();
   for (auto const &page : pages)
     if (page->hasBeenModified())
       return true;
@@ -252,7 +252,7 @@ Tab::hasBeenModified() {
 
 void
 Tab::doModifications() {
-  auto pages = m_model->getTopLevelPages();
+  auto pages = m_model->topLevelPages();
   for (auto const &page : pages)
     page->doModifications();
 
@@ -445,7 +445,7 @@ Tab::collapseAll() {
 
 void
 Tab::expandCollapseAll(bool expand) {
-  for (auto const &page : m_model->getTopLevelPages())
+  for (auto const &page : m_model->topLevelPages())
     ui->elements->setExpanded(page->m_pageIdx, expand);
 }
 

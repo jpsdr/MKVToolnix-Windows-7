@@ -60,7 +60,6 @@ public:
   ~MainWindow();
 
   virtual void setStatusBarMessage(QString const &message);
-  virtual Ui::MainWindow *getUi();
 
   virtual void showTheseMenusOnly(QList<QMenu *> const &menus);
   virtual void showAndEnableMenu(QMenu &menu, bool show);
@@ -78,12 +77,13 @@ public slots:
 
 public:                         // static
   static MainWindow *get();
-  static Merge::Tool *getMergeTool();
-  static HeaderEditor::Tool *getHeaderEditorTool();
-  static ChapterEditor::Tool *getChapterEditorTool();
-  static Jobs::Tool *getJobTool();
-  static WatchJobs::Tab *getWatchCurrentJobTab();
-  static WatchJobs::Tool *getWatchJobTool();
+  static Ui::MainWindow *getUi();
+  static Merge::Tool *mergeTool();
+  static HeaderEditor::Tool *headerEditorTool();
+  static ChapterEditor::Tool *chapterEditorTool();
+  static Jobs::Tool *jobTool();
+  static WatchJobs::Tab *watchCurrentJobTab();
+  static WatchJobs::Tool *watchJobTool();
 #if defined(HAVE_CURL_EASY_H)
   static QString versionStringForSettings(version_number_t const &version);
 #endif  // HAVE_CURL_EASY_H

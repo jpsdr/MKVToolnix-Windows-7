@@ -24,7 +24,7 @@ WindowGeometrySaver::~WindowGeometrySaver() {
 
 void
 WindowGeometrySaver::restore() {
-  auto reg = Util::Settings::getRegistry();
+  auto reg = Util::Settings::registry();
   reg->beginGroup(Q("windowGeometry"));
   reg->beginGroup(m_name);
 
@@ -63,7 +63,7 @@ WindowGeometrySaver::restore() {
 void
 WindowGeometrySaver::save()
   const {
-  auto reg = Util::Settings::getRegistry();
+  auto reg = Util::Settings::registry();
   reg->beginGroup(Q("windowGeometry"));
   reg->beginGroup(m_name);
 

@@ -40,7 +40,7 @@ Tool::~Tool() {
 }
 
 Model *
-Tool::getModel()
+Tool::model()
   const {
   return m_model;
 }
@@ -128,7 +128,7 @@ Tool::resizeColumnsToContents()
 
 void
 Tool::addJob(JobPtr const &job) {
-  MainWindow::getWatchCurrentJobTab()->connectToJob(*job);
+  MainWindow::watchCurrentJobTab()->connectToJob(*job);
 
   m_model->add(job);
   resizeColumnsToContents();
@@ -148,8 +148,7 @@ Tool::retranslateUi() {
 
 void
 Tool::toolShown() {
-  auto win = MainWindow::get();
-  win->showTheseMenusOnly({ win->getUi()->menuMerge });
+  MainWindow::get()->showTheseMenusOnly({ MainWindow::getUi()->menuMerge });
 }
 
 }}}

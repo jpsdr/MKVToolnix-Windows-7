@@ -176,7 +176,7 @@ ValuePage::retranslateUi() {
     m_cbAddOrRemove->setText(QY("Remove element"));
 
     m_lOriginalValueLabel->setText(QY("Original value:"));
-    m_lOriginalValue->setText(getOriginalValueAsString());
+    m_lOriginalValue->setText(originalValueAsString());
 
   } else {
     m_lStatus->setText(Q("%1 %2").arg(QY("This element is not currently present in the file.")).arg(QY("You can let the header editor add the element to the file.")));
@@ -204,7 +204,7 @@ ValuePage::onAddOrRemoveChecked() {
 bool
 ValuePage::hasThisBeenModified()
   const {
-  return m_cbAddOrRemove->isChecked() || (getCurrentValueAsString() != getOriginalValueAsString());
+  return m_cbAddOrRemove->isChecked() || (currentValueAsString() != originalValueAsString());
 }
 
 bool

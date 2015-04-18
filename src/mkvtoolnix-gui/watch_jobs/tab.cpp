@@ -37,7 +37,7 @@ Tab::connectToJob(Jobs::Job const &job) {
 void
 Tab::onStatusChanged(uint64_t id,
                      Jobs::Job::Status status) {
-  auto job = MainWindow::getJobTool()->getModel()->fromId(id);
+  auto job = MainWindow::jobTool()->model()->fromId(id);
   if (!job)
     return;
 

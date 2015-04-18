@@ -35,7 +35,7 @@ FloatValuePage::createInputControl() {
 }
 
 QString
-FloatValuePage::getOriginalValueAsString()
+FloatValuePage::originalValueAsString()
   const {
   if (!m_element)
     return Q("");
@@ -43,7 +43,7 @@ FloatValuePage::getOriginalValueAsString()
 }
 
 QString
-FloatValuePage::getCurrentValueAsString()
+FloatValuePage::currentValueAsString()
   const {
   return m_leValue->text();
 }

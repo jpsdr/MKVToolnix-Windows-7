@@ -22,8 +22,8 @@ public:
   virtual ~LanguageValuePage();
 
   virtual QWidget *createInputControl() override;
-  virtual QString getOriginalValueAsString() const override;
-  virtual QString getCurrentValueAsString() const override;
+  virtual QString originalValueAsString() const override;
+  virtual QString currentValueAsString() const override;
   virtual void resetValue() override;
   virtual bool validateValue() const override;
   virtual void copyValueToElement() override;

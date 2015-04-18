@@ -41,13 +41,13 @@ LanguageValuePage::createInputControl() {
 }
 
 QString
-LanguageValuePage::getOriginalValueAsString()
+LanguageValuePage::originalValueAsString()
   const {
   return Q(m_originalValue);
 }
 
 QString
-LanguageValuePage::getCurrentValueAsString()
+LanguageValuePage::currentValueAsString()
   const {
   return m_cbValue->currentData().toString();
 }
@@ -65,7 +65,7 @@ LanguageValuePage::validateValue()
 
 void
 LanguageValuePage::copyValueToElement() {
-  static_cast<EbmlString *>(m_element)->SetValue(to_utf8(getCurrentValueAsString()));
+  static_cast<EbmlString *>(m_element)->SetValue(to_utf8(currentValueAsString()));
 }
 
 }}}

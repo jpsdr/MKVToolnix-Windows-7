@@ -264,7 +264,7 @@ Tab::addToJobQueue(bool startNow) {
     job->m_description = newDescription;
   }
 
-  MainWindow::getJobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
+  MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
 }
 
 }}}

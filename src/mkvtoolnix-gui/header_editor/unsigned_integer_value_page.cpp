@@ -35,7 +35,7 @@ UnsignedIntegerValuePage::createInputControl() {
 }
 
 QString
-UnsignedIntegerValuePage::getOriginalValueAsString()
+UnsignedIntegerValuePage::originalValueAsString()
   const {
   if (!m_element)
     return Q("");
@@ -43,7 +43,7 @@ UnsignedIntegerValuePage::getOriginalValueAsString()
 }
 
 QString
-UnsignedIntegerValuePage::getCurrentValueAsString()
+UnsignedIntegerValuePage::currentValueAsString()
   const {
   return m_leValue->text();
 }

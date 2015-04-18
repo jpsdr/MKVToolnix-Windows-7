@@ -37,13 +37,13 @@ BoolValuePage::createInputControl() {
 }
 
 QString
-BoolValuePage::getOriginalValueAsString()
+BoolValuePage::originalValueAsString()
   const {
   return m_originalValue ? QY("yes") : QY("no");
 }
 
 QString
-BoolValuePage::getCurrentValueAsString()
+BoolValuePage::currentValueAsString()
   const {
   return m_cbValue->currentText();
 }

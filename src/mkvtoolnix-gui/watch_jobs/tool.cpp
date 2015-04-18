@@ -38,8 +38,7 @@ Tool::currentJobTab() {
 
 void
 Tool::toolShown() {
-  auto win = MainWindow::get();
-  win->showTheseMenusOnly({ win->getUi()->menuMerge });
+  MainWindow::get()->showTheseMenusOnly({ MainWindow::getUi()->menuMerge });
 }
 
 }}}

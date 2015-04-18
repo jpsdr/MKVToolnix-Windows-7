@@ -37,7 +37,7 @@ public:
   virtual QModelIndex validate() const;
   virtual bool validateThis() const = 0;
   virtual void retranslateUi() = 0;
-  virtual QString getTitle() const;
+  virtual QString title() const;
 };
 
 }}}

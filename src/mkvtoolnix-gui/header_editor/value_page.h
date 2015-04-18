@@ -51,8 +51,8 @@ public:
   virtual void init();
 
   virtual QWidget *createInputControl() = 0;
-  virtual QString getOriginalValueAsString() const = 0;
-  virtual QString getCurrentValueAsString() const = 0;
+  virtual QString originalValueAsString() const = 0;
+  virtual QString currentValueAsString() const = 0;
   virtual void resetValue() = 0;
   virtual bool validateValue() const = 0;
   virtual void copyValueToElement() = 0;

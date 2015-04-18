@@ -38,12 +38,12 @@ public:
   explicit Tab(QWidget *parent, QString const &fileName);
   ~Tab();
 
-  PageModel *getModel() const;
+  PageModel *model() const;
 
   virtual bool hasBeenModified();
   virtual void retranslateUi();
   virtual void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
-  virtual QString const &getFileName() const;
+  virtual QString const &fileName() const;
   virtual QString title() const;
   virtual void validate();
 

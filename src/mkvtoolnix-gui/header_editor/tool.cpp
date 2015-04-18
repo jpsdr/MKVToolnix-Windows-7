@@ -41,7 +41,7 @@ Tool::~Tool() {
 
 void
 Tool::setupMenu() {
-  auto mwUi = MainWindow::get()->getUi();
+  auto mwUi = MainWindow::getUi();
 
   connect(mwUi->actionHeaderEditorOpen,     SIGNAL(triggered()), this, SLOT(selectFileToOpen()));
   connect(mwUi->actionHeaderEditorSave,     SIGNAL(triggered()), this, SLOT(save()));
@@ -53,7 +53,7 @@ Tool::setupMenu() {
 void
 Tool::showHeaderEditorsWidget() {
   auto hasTabs = !!ui->editors->count();
-  auto mwUi    = MainWindow::get()->getUi();
+  auto mwUi    = MainWindow::getUi();
 
   ui->stack->setCurrentWidget(hasTabs ? ui->editorsPage : ui->noFilesPage);
 
@@ -145,7 +145,7 @@ Tool::reload() {
     return;
 
   if (tab->hasBeenModified()) {
-    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
+    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
                                         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes)
       return;
@@ -169,7 +169,7 @@ Tool::closeTab(int index) {
   auto tab = static_cast<Tab *>(ui->editors->widget(index));
 
   if (tab->hasBeenModified()) {
-    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
+    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
                                         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes)
       return;

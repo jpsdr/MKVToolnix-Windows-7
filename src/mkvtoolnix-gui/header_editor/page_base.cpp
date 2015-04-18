@@ -58,7 +58,7 @@ PageBase::validate()
 }
 
 QString
-PageBase::getTitle()
+PageBase::title()
   const {
   return Q(m_title.get_translated());
 }

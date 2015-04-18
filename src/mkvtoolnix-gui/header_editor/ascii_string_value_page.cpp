@@ -34,13 +34,13 @@ AsciiStringValuePage::createInputControl() {
 }
 
 QString
-AsciiStringValuePage::getOriginalValueAsString()
+AsciiStringValuePage::originalValueAsString()
   const {
   return Q(m_originalValue);
 }
 
 QString
-AsciiStringValuePage::getCurrentValueAsString()
+AsciiStringValuePage::currentValueAsString()
   const {
   return m_leValue->text();
 }

@@ -69,7 +69,7 @@ public:
   void load();
   void save() const;
 
-  QString getPriorityAsString() const;
+  QString priorityAsString() const;
   QString actualMkvmergeExe() const;
 
   void setValue(QString const &group, QString const &key, QVariant const &value);
@@ -82,7 +82,7 @@ protected:
 
 public:
   static Settings &get();
-  static std::unique_ptr<QSettings> getRegistry();
+  static std::unique_ptr<QSettings> registry();
 
   static QString exeWithPath(QString const &exe);
 };

@@ -25,8 +25,8 @@ public:
 
   void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
 
-  QList<PageBase *> &getPages();
-  QList<PageBase *> &getTopLevelPages();
+  QList<PageBase *> &pages();
+  QList<PageBase *> &topLevelPages();
 
   void reset();
 

@@ -42,7 +42,7 @@ Tool::~Tool() {
 
 void
 Tool::setupActions() {
-  auto mwUi = MainWindow::get()->getUi();
+  auto mwUi = MainWindow::getUi();
 
   connect(mwUi->actionChapterEditorNew,            &QAction::triggered,         this, &Tool::newFile);
   connect(mwUi->actionChapterEditorOpen,           &QAction::triggered,         this, &Tool::selectFileToOpen);
@@ -63,7 +63,7 @@ Tool::showChapterEditorsWidget() {
 
 void
 Tool::enableMenuActions() {
-  auto mwUi        = MainWindow::get()->getUi();
+  auto mwUi        = MainWindow::getUi();
   auto tab         = currentTab();
   auto hasFileName = tab && !tab->fileName().isEmpty();
   auto hasElements = tab && !tab->isEmpty();

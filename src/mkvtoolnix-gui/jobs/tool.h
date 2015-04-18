@@ -31,7 +31,7 @@ public:
   explicit Tool(QWidget *parent = nullptr);
   ~Tool();
 
-  Model *getModel() const;
+  Model *model() const;
   void addJob(JobPtr const &job);
 
   virtual void retranslateUi() override;

@@ -31,13 +31,13 @@ BitValuePage::createInputControl() {
     m_originalValue = bitvalue_c{*static_cast<EbmlBinary *>(m_element)};
 
   m_leValue = new QLineEdit{this};
-  m_leValue->setText(getOriginalValueAsString());
+  m_leValue->setText(originalValueAsString());
 
   return m_leValue;
 }
 
 QString
-BitValuePage::getOriginalValueAsString()
+BitValuePage::originalValueAsString()
   const {
   auto value = std::string{};
   auto data  = m_originalValue.data();
@@ -50,14 +50,14 @@ BitValuePage::getOriginalValueAsString()
 }
 
 QString
-BitValuePage::getCurrentValueAsString()
+BitValuePage::currentValueAsString()
   const {
   return m_leValue->text();
 }
 
 void
 BitValuePage::resetValue() {
-  m_leValue->setText(getOriginalValueAsString());
+  m_leValue->setText(originalValueAsString());
 }
 
 bool

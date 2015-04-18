@@ -24,7 +24,7 @@ Settings::get() {
 }
 
 std::unique_ptr<QSettings>
-Settings::getRegistry() {
+Settings::registry() {
 #if defined(SYS_WINDOWS)
   if (!App::isInstalled())
     return std::make_unique<QSettings>(Q((mtx::sys::get_installation_path() / "mkvtoolnix-gui.ini").string()), QSettings::IniFormat);
@@ -34,7 +34,7 @@ Settings::getRegistry() {
 
 void
 Settings::load() {
-  auto regPtr = getRegistry();
+  auto regPtr = registry();
   auto &reg   = *regPtr;
 
   reg.beginGroup("settings");
@@ -99,7 +99,7 @@ Settings::actualMkvmergeExe()
 void
 Settings::save()
   const {
-  auto regPtr = getRegistry();
+  auto regPtr = registry();
   auto &reg   = *regPtr;
 
   reg.beginGroup("settings");
@@ -142,7 +142,7 @@ Settings::save()
 }
 
 QString
-Settings::getPriorityAsString()
+Settings::priorityAsString()
   const {
   return LowestPriority == m_priority ? Q("lowest")
        : LowPriority    == m_priority ? Q("lower")
@@ -190,7 +190,7 @@ Settings::value(QString const &group,
 void
 Settings::withGroup(QString const &group,
                     std::function<void(QSettings &)> worker) {
-  auto reg    = getRegistry();
+  auto reg    = registry();
   auto groups = group.split(Q("/"));
 
   for (auto const &subGroup : groups)

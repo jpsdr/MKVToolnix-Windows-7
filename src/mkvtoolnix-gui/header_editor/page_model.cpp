@@ -35,7 +35,7 @@ PageModel::appendPage(PageBase *page,
   auto newItem    = new QStandardItem{};
 
   newItem->setData(static_cast<unsigned int>(m_pages.count()), Util::HeaderEditorPageIdRole);
-  newItem->setText(page->getTitle());
+  newItem->setText(page->title());
 
   parentItem->appendRow(newItem);
 
@@ -47,12 +47,12 @@ PageModel::appendPage(PageBase *page,
 }
 
 QList<PageBase *> &
-PageModel::getPages() {
+PageModel::pages() {
   return m_pages;
 }
 
 QList<PageBase *> &
-PageModel::getTopLevelPages() {
+PageModel::topLevelPages() {
   return m_topLevelPages;
 }
 

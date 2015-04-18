@@ -43,7 +43,7 @@ Tool::~Tool() {
 
 void
 Tool::setupMenu() {
-  auto mwUi = MainWindow::get()->getUi();
+  auto mwUi = MainWindow::getUi();
 
   connect(mwUi->actionMergeNew,   &QAction::triggered, this, &Tool::newConfig);
   connect(mwUi->actionMergeOpen,  &QAction::triggered, this, &Tool::openConfig);
@@ -52,7 +52,7 @@ Tool::setupMenu() {
 
 void
 Tool::reconnectMenuActions() {
-  auto mwUi = MainWindow::get()->getUi();
+  auto mwUi = MainWindow::getUi();
   auto tab  = currentTab();
 
   mwUi->actionMergeSave->disconnect(SIGNAL(triggered()));
@@ -75,7 +75,7 @@ Tool::reconnectMenuActions() {
 
 void
 Tool::enableMenuActions() {
-  auto mwUi   = MainWindow::get()->getUi();
+  auto mwUi   = MainWindow::getUi();
   auto hasTab = !!currentTab();
 
   mwUi->actionMergeSave->setEnabled(hasTab);
