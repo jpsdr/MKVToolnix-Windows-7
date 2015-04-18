@@ -40,6 +40,8 @@ public:
   Model(QObject *parent);
   virtual ~Model();
 
+  void retranslateUi();
+
   QList<Job *> selectedJobs(QAbstractItemView *view) const;
   uint64_t idFromRow(int row) const;
   Job *fromId(uint64_t id) const;
@@ -70,6 +72,8 @@ public slots:
 
 protected:
   QList<QStandardItem *> createRow(Job const &job) const;
+  void setRowText(QList<QStandardItem *> const &items, Job const &job) const;
+  QList<QStandardItem *> itemsForRow(QModelIndex const &idx);
 
   void updateProgress();
   void processAutomaticJobRemoval(uint64_t id, Job::Status status);

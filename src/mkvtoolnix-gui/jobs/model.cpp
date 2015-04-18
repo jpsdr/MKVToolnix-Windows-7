@@ -20,9 +20,7 @@ Model::Model(QObject *parent)
   , m_started{}
   , m_dontStartJobsNow{}
 {
-  auto labels = QStringList{};
-  labels << QY("Description") << QY("Type") << QY("Status") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
-  setHorizontalHeaderLabels(labels);
+  retranslateUi();
 
   horizontalHeaderItem(DescriptionColumn) ->setTextAlignment(Qt::AlignLeft);
   horizontalHeaderItem(ProgressColumn)    ->setTextAlignment(Qt::AlignRight);
@@ -32,6 +30,19 @@ Model::Model(QObject *parent)
 }
 
 Model::~Model() {
+}
+
+void
+Model::retranslateUi() {
+  QMutexLocker locked{&m_mutex};
+
+  auto labels = QStringList{} << QY("Description") << QY("Type") << QY("Status") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
+  setHorizontalHeaderLabels(labels);
+
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
+    auto idx = index(row, 0);
+    setRowText(itemsForRow(idx), *m_jobsById[ data(idx, Util::JobIdRole).value<uint64_t>() ]);
+  }
 }
 
 QList<Job *>
@@ -73,14 +84,36 @@ Model::hasJobs()
   return !!rowCount();
 }
 
+void
+Model::setRowText(QList<QStandardItem *> const &items,
+                  Job const &job)
+  const {
+  items.at(0)->setText(job.m_description);
+  items.at(1)->setText(job.displayableType());
+  items.at(2)->setText(Job::displayableStatus(job.m_status));
+  items.at(3)->setText(to_qs(boost::format("%1%%%") % job.m_progress));
+  items.at(4)->setText(Util::displayableDate(job.m_dateAdded));
+  items.at(5)->setText(Util::displayableDate(job.m_dateStarted));
+  items.at(6)->setText(Util::displayableDate(job.m_dateFinished));
+}
+
+QList<QStandardItem *>
+Model::itemsForRow(QModelIndex const &idx) {
+  auto rowItems = QList<QStandardItem *>{};
+
+  for (auto column = 0; 7 > column; ++column)
+    rowItems << itemFromIndex(idx.sibling(idx.row(), column));
+
+  return rowItems;
+}
+
 QList<QStandardItem *>
 Model::createRow(Job const &job)
   const {
-  auto items    = QList<QStandardItem *>{};
-  auto progress = to_qs(boost::format("%1%%%") % job.m_progress);
-
-  items << (new QStandardItem{job.m_description})                      << (new QStandardItem{job.displayableType()})                    << (new QStandardItem{Job::displayableStatus(job.m_status)}) << (new QStandardItem{progress})
-        << (new QStandardItem{Util::displayableDate(job.m_dateAdded)}) << (new QStandardItem{Util::displayableDate(job.m_dateStarted)}) << (new QStandardItem{Util::displayableDate(job.m_dateFinished)});
+  auto items = QList<QStandardItem *>{};
+  for (auto idx = 0; idx < 7; ++idx)
+    items << new QStandardItem{};
+  setRowText(items, job);
 
   items[DescriptionColumn ]->setData(QVariant::fromValue(job.m_id), Util::JobIdRole);
   items[DescriptionColumn ]->setTextAlignment(Qt::AlignLeft);

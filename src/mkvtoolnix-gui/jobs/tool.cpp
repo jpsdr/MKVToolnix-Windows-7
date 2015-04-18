@@ -136,6 +136,9 @@ Tool::addJob(JobPtr const &job) {
 
 void
 Tool::retranslateUi() {
+  ui->retranslateUi(this);
+  m_model->retranslateUi();
+
   m_startAction->setText(QY("&Start selected jobs automatically"));
   m_removeAction->setText(QY("&Remove selected jobs"));
   m_removeDoneAction->setText(QY("Remove &completed jobs"));
