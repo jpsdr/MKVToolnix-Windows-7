@@ -50,6 +50,7 @@ public slots:
   void removeCommonCharacterSets();
 
 protected:
+  void setupToolTips();
   void setupConnections();
 
   void setupInterfaceLanguage();

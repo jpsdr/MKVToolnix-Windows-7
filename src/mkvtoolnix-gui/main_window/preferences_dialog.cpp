@@ -46,6 +46,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMDefaultSubtitleCharset->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   ui->cbCEDefaultCountry       ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
+  setupToolTips();
   setupConnections();
 }
 
@@ -56,6 +57,76 @@ bool
 PreferencesDialog::uiLocaleChanged()
   const {
   return m_previousUiLocale != m_cfg.m_uiLocale;
+}
+
+void
+PreferencesDialog::setupToolTips() {
+  // GUI page
+  Util::setToolTip(ui->cbGuiCheckForUpdates,
+                   Q("%1 %2 %3")
+                   .arg(QY("If enabled the program will check online whether or not a new release of MKVToolNix is available on the home page."))
+                   .arg(QY("This is done at startup and at most once within 24 hours."))
+                   .arg(QY("No information is trasmitted to the server.")));
+
+  Util::setToolTip(ui->cbGuiRemoveJobs,
+                   Q("%1 %2")
+                   .arg(QY("Normally completed jobs stay in the queue even over restarts until the user clears them out manually."))
+                   .arg(QY("You can opt for having them removed automatically under certain conditions.")));
+
+  Util::setToolTip(ui->cbCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
+  Util::setToolTip(ui->cbCEDefaultCountry, QY("This is the country that newly added chapter names get assigned automatically."));
+
+  // Merge page
+  Util::setToolTip(ui->cbMAutoSetFileTitle,
+                   Q("<p>%1 %2</p><p>%3</p>")
+                   .arg(QY("Certain file formats have 'title' property."))
+                   .arg(QY("When the user adds a file containing such a title then the program will copy the title into the »file title« input box if this option is enabled."))
+                   .arg(QY("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
+
+  Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
+                   Q("%1 %2")
+                   .arg(QY("When a file is added its name is scanned."))
+                   .arg(QY("If it contains the word 'DELAY' followed by a number then this number is automatically put into the 'delay' input field for any audio track found in the file.")));
+
+  Util::setToolTip(ui->cbMWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
+  ui->cbMWarnBeforeOverwriting->setEnabled(true);
+
+  Util::setToolTip(ui->cbMDefaultTrackLanguage,
+                   Q("<p>%1 %2</p><p>%3</p>")
+                   .arg(QY("Certain file formats have a 'language' property for their tracks."))
+                   .arg(QY("When the user adds such a file the track's language input is set to the language property from the source file."))
+                   .arg(QY("The language selected here is used for tracks for which their source file contains no such property.")));
+
+  Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."));
+
+  Util::setToolTip(ui->cbMScanPlaylistsPolicy,
+                   Q("<p>%1 %2</p><p>%3</p>")
+                   .arg(QY("Whenever the user adds a play list the program can automatically scan the directory for other play lists and present the user with a detailed list of the play lists found."))
+                   .arg(QY("The user can then select which play list to actually add."))
+                   .arg(QY("This is useful for situations like Blu-ray discs on which a multitude of play lists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) "
+                           "a play list belongs to.")));
+
+  Util::setToolTip(ui->sbMMinPlaylistDuration, QY("Only play lists whose duration are at least this long are considered and offered to the user for selection."));
+
+  Util::setToolTip(ui->cbMAutoSetOutputFileName,
+                   Q("%1 %2")
+                   .arg(QY("If this option is enabled and if there is currently no output file name set then the program will set one for you when you add an input file."))
+                   .arg(QY("The generated output file name has the same base name as the input file name but with an extension based on the track types present in the file.")));
+
+  Util::setToolTip(ui->cbMUniqueOutputFileNames,
+                   Q("%1 %2")
+                   .arg(QY("If checked the program makes sure the suggested output file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
+                   .arg(QY("This is done only if there is already a file whose name matches the unmodified output file name.")));
+
+  // Often used XYZ page
+  Util::setToolTip(ui->lwGuiAvailableCommonLanguages,     QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
+  Util::setToolTip(ui->lwGuiSelectedCommonLanguages,      QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
+
+  Util::setToolTip(ui->lwGuiAvailableCommonCountries,     QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
+  Util::setToolTip(ui->lwGuiSelectedCommonCountries,      QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
+
+  Util::setToolTip(ui->lwGuiAvailableCommonCharacterSets, QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
+  Util::setToolTip(ui->lwGuiSelectedCommonCharacterSets,  QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
 }
 
 void
