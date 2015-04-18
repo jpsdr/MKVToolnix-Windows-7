@@ -379,6 +379,16 @@ FancyTabBar::tabText(int index)
   return m_tabs.at(index)->m_text;
 }
 
+void
+FancyTabBar::setTabText(int index,
+                        QString const &text) {
+  if ((0 > index) || (m_tabs.count() <= index))
+    return;
+
+  m_tabs.at(index)->m_text = text;
+  updateGeometry();
+}
+
 int
 FancyTabBar::count()
   const {
@@ -489,6 +499,13 @@ void
 FancyTabWidget::removeTab(int index) {
   m_modesStack->removeWidget(m_modesStack->widget(index));
   m_tabBar->removeTab(index);
+}
+
+void
+FancyTabWidget::setTabText(int index,
+                           QString const &text) {
+  m_tabBar->setTabText(index, text);
+  update();
 }
 
 int

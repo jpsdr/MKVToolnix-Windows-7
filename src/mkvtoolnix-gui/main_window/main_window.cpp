@@ -218,11 +218,18 @@ MainWindow::retranslateUi() {
 
   setWindowTitle(Q(get_version_info("MKVToolNix GUI")));
 
+  ui->tool->setUpdatesEnabled(false);
+
+  auto toolTitles = QStringList{} << QY("merge") << QY("extract") << QY("info") << QY("edit headers") << QY("edit chapters") << QY("edit tags") << QY("job queue") << QY("job output");
+
   for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx) {
+    ui->tool->setTabText(idx, toolTitles[idx]);
     auto toolBase = dynamic_cast<ToolBase *>(ui->tool->widget(idx));
     if (toolBase)
       toolBase->retranslateUi();
   }
+
+  ui->tool->setUpdatesEnabled(true);
 }
 
 void

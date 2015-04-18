@@ -108,6 +108,7 @@ public:
   QString tabToolTip(int index) const;
   QIcon tabIcon(int index) const;
   QString tabText(int index) const;
+  void setTabText(int index, QString const &text);
   int count() const;
   QRect tabRect(int index) const;
 
@@ -136,6 +137,7 @@ public:
   void insertTab(int index, QWidget *tab, QIcon const &icon, QString const &label);
   void appendTab(QWidget *tab, QIcon const &icon, QString const &label);
   void removeTab(int index);
+  void setTabText(int index, QString const &text);
   int count() const;
   QWidget *widget(int index) const;
   void setBackgroundBrush(QBrush const &brush);
