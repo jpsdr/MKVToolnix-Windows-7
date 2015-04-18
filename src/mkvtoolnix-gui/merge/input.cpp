@@ -642,6 +642,8 @@ Tab::enableFilesActions() {
 
 void
 Tab::retranslateInputUI() {
+  m_filesModel->retranslateUi();
+  m_tracksModel->retranslateUi();
   m_addFilesAction->setText(QY("&Add files"));
   m_appendFilesAction->setText(QY("A&ppend files"));
   m_addAdditionalPartsAction->setText(QY("Add files as a&dditional parts"));

@@ -29,17 +29,19 @@ TrackModel::TrackModel(QObject *parent)
   , m_selectedTrackType{}
   , m_debug{"track_model"}
 {
-  auto labels = QStringList{};
-  labels << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID");
-  setHorizontalHeaderLabels(labels);
-  horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight);
-
   connect(this, SIGNAL(rowsInserted(const QModelIndex&,int,int)),                     this, SLOT(updateTrackLists()));
   connect(this, SIGNAL(rowsRemoved(const QModelIndex&,int,int)),                      this, SLOT(updateTrackLists()));
   connect(this, SIGNAL(rowsMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(updateTrackLists()));
 }
 
 TrackModel::~TrackModel() {
+}
+
+void
+TrackModel::retranslateUi() {
+  auto labels = QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID");
+  setHorizontalHeaderLabels(labels);
+  horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight);
 }
 
 void

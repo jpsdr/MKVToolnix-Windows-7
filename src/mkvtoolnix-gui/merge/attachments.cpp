@@ -201,6 +201,7 @@ Tab::setAttachmentControlValues(Attachment *attachment) {
 
 void
 Tab::retranslateAttachmentsUI() {
+  m_attachmentsModel->retranslateUi();
   m_addAttachmentsAction->setText(QY("&Add"));
   m_removeAttachmentsAction->setText(QY("&Remove"));
 }

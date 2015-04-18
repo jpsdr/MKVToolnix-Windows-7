@@ -25,14 +25,16 @@ SourceFileModel::SourceFileModel(QObject *parent)
   m_additionalPartIcon.addFile(":/icons/16x16/distribute-horizontal-margin.png");
   m_addedIcon.addFile(":/icons/16x16/distribute-horizontal-x.png");
   m_normalIcon.addFile(":/icons/16x16/distribute-vertical-page.png");
-
-  auto labels = QStringList{};
-  labels << QY("File name") << QY("Container") << QY("File size") << QY("Directory");
-  setHorizontalHeaderLabels(labels);
-  horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight);
 }
 
 SourceFileModel::~SourceFileModel() {
+}
+
+void
+SourceFileModel::retranslateUi() {
+  auto labels = QStringList{} << QY("File name") << QY("Container") << QY("File size") << QY("Directory");
+  setHorizontalHeaderLabels(labels);
+  horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight);
 }
 
 void

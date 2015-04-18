@@ -31,6 +31,8 @@ public:
   TrackModel(QObject *parent);
   virtual ~TrackModel();
 
+  virtual void retranslateUi();
+
   virtual void setTracks(QList<Track *> &tracks);
   virtual void addTracks(QList<TrackPtr> const &tracks);
   virtual void appendTracks(SourceFile *fileToAppendTo, QList<TrackPtr> const &tracks);

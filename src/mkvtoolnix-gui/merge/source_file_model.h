@@ -31,6 +31,8 @@ public:
   SourceFileModel(QObject *parent);
   virtual ~SourceFileModel();
 
+  virtual void retranslateUi();
+
   virtual void setSourceFiles(QList<SourceFilePtr> &sourceFiles);
   virtual void setTracksModel(TrackModel *tracksModel);
   virtual void addOrAppendFilesAndTracks(QModelIndex const &fileToAddToIdx, QList<SourceFilePtr> const &files, bool append);
