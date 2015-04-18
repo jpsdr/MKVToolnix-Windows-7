@@ -25,7 +25,10 @@ Tool::~Tool() {
 
 void
 Tool::retranslateUi() {
+  ui->retranslateUi(this);
   ui->widgets->setTabText(0, QY("Current job"));
+
+  m_currentJobTab->retranslateUi();
 }
 
 Tab *

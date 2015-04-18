@@ -24,6 +24,8 @@ public:
   explicit Tab(QWidget *parent);
   ~Tab();
 
+  virtual void retranslateUi();
+
   virtual void connectToJob(mtx::gui::Jobs::Job const &job);
   virtual void setInitialDisplay(mtx::gui::Jobs::Job const &job);
 

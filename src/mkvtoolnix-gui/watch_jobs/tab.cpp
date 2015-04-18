@@ -23,6 +23,11 @@ Tab::~Tab() {
 }
 
 void
+Tab::retranslateUi() {
+  ui->retranslateUi(this);
+}
+
+void
 Tab::connectToJob(Jobs::Job const &job) {
   connect(&job, SIGNAL(statusChanged(uint64_t,mtx::gui::Jobs::Job::Status)),    this, SLOT(onStatusChanged(uint64_t,mtx::gui::Jobs::Job::Status)));
   connect(&job, SIGNAL(progressChanged(uint64_t,unsigned int)),                 this, SLOT(onProgressChanged(uint64_t,unsigned int)));
