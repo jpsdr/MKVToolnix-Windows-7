@@ -23,6 +23,8 @@ public:
   explicit StatusBarProgressWidget(QWidget *parent = nullptr);
   ~StatusBarProgressWidget();
 
+  void retranslateUi();
+
 public slots:
   void setProgress(unsigned int progress, unsigned int totalProgress);
 };

@@ -214,6 +214,7 @@ MainWindow::getWatchJobTool() {
 void
 MainWindow::retranslateUi() {
   ui->retranslateUi(this);
+  m_statusBarProgress->retranslateUi();
 
   setWindowTitle(Q(get_version_info("MKVToolNix GUI")));
 

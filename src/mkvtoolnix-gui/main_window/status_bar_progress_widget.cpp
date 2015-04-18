@@ -23,4 +23,9 @@ StatusBarProgressWidget::setProgress(unsigned int progress,
   ui->totalProgress->setValue(totalProgress);
 }
 
+void
+StatusBarProgressWidget::retranslateUi() {
+  ui->retranslateUi(this);
+}
+
 }}
