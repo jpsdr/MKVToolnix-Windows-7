@@ -4,11 +4,21 @@ dnl
 
 AC_ARG_ENABLE([qt],
   AC_HELP_STRING([--enable-qt],[compile the Qt version of the GUIs (no)]))
+AC_ARG_ENABLE([static_qt],
+  AC_HELP_STRING([--enable-static-qt],[link to static versions of the Qt library (no)]))
+AC_ARG_WITH([qt_pkg_config_modules],
+  AC_HELP_STRING([--with-qt-pkg-config-modules=modules],[gather include/link flags for additional Qt modules from pkg-config]))
 
 qt_min_ver=5.0.0
 
 if test x"$enable_qt" = "xyes" -a \
   '(' x"$enable_gui" = x"yes" -o x"$enable_gui" = "x" ')'; then
+  if test x"$enable_static_qt" = "xyes"; then
+    QT_PKG_CONFIG_STATIC=--static
+  else
+    QT_PKG_CONFIG_STATIC=
+  fi
+
   dnl Find moc.
   AC_ARG_WITH(moc,
     AC_HELP_STRING([--with-moc=prog],[use prog instead of looking for moc]),
@@ -118,13 +128,15 @@ if test x"$enable_qt" = "xyes" -a \
   fi
 
   if test $ok = 1; then
+    with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/ /,/g'`"
     PKG_CHECK_EXISTS([Qt5Core,Qt5Gui,Qt5Widgets,Qt5PlatformSupport],,[ok=0])
   fi
 
   if test $ok = 1; then
     dnl Try compiling and linking an application.
-    QT_CFLAGS="`$PKG_CONFIG --cflags Qt5Core Qt5Gui Qt5Widgets Qt5PlatformSupport`"
-    QT_LIBS="`$PKG_CONFIG --libs Qt5Core Qt5Gui Qt5Widgets Qt5PlatformSupport`"
+    with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/,/ /g'`"
+    QT_CFLAGS="`$PKG_CONFIG --cflags Qt5Core Qt5Gui Qt5Widgets Qt5PlatformSupport $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
+    QT_LIBS="`$PKG_CONFIG --libs Qt5Core Qt5Gui Qt5Widgets Qt5PlatformSupport $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
 
     AC_LANG_PUSH(C++)
     AC_CACHE_VAL(am_cv_qt_compilation, [
