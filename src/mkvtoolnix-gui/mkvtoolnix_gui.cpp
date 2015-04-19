@@ -14,6 +14,15 @@
 #include "mkvtoolnix-gui/main_window/preview_warning_dialog.h"
 #include "mkvtoolnix-gui/main_window/update_check_thread.h"
 
+#if defined(SYS_APPLE)
+# include <QtPlugin>
+Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
+
+#elif defined(SYS_WINDOWS)
+# include <QtPlugin>
+Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
+
+#endif  // SYS_APPLE, SYS_WINDOWS
 using namespace mtx::gui;
 
 static void

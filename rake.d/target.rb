@@ -1,12 +1,4 @@
 class Target
-  private
-  def qt_libraries args = {}
-    libs  = ''
-    libs += "-L#{c(:QT_PLUGINS_DIR)}/platforms -lqwindows " if c?(:MINGW)
-    libs += c(:QT_LIBS)
-    return libs
-  end
-
   public
 
   begin
@@ -148,7 +140,7 @@ class Target
       when :boost_regex      then c(:BOOST_REGEX_LIB)
       when :boost_filesystem then c(:BOOST_FILESYSTEM_LIB)
       when :boost_system     then c(:BOOST_SYSTEM_LIB)
-      when :qt               then qt_libraries
+      when :qt               then c(:QT_LIBS)
       when :wxwidgets        then c(:WXWIDGETS_LIBS)
       when :static           then c(:LINK_STATICALLY)
       when :mpegparser       then [ '-Lsrc/mpegparser', '-lmpegparser'  ]
