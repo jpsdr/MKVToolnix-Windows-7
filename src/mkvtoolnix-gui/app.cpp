@@ -227,13 +227,13 @@ App::initializeLocale(QString const &requestedLocale) {
 
   if (!locale.empty()) {
     auto translator = std::make_unique<QTranslator>();
-#ifdef SYS_WINDOWS
-    auto path       = Q("%1/locale/%2/LC_MESSAGES").arg(applicationDirPath()).arg(Q(locale));
-#else
-    auto path       = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-#endif
+    auto paths      = QStringList{} << Q("%1/locale/%2/LC_MESSAGES").arg(applicationDirPath()).arg(Q(locale))
+                                    << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 
-    translator->load(Q("qtbase_%1").arg(Q(locale)), path);
+    for (auto const &path : paths)
+      if (translator->load(Q("qtbase_%1").arg(Q(locale)), path))
+        break;
+
     installTranslator(translator.get());
 
     m_currentTranslator = std::move(translator);
