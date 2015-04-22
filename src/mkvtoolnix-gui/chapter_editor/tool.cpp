@@ -162,15 +162,19 @@ Tool::save() {
 void
 Tool::saveAsXml() {
   auto tab = currentTab();
-  if (tab)
+  if (tab) {
     tab->saveAsXml();
+    enableMenuActions();
+  }
 }
 
 void
 Tool::saveToMatroska() {
   auto tab = currentTab();
-  if (tab)
+  if (tab) {
     tab->saveToMatroska();
+    enableMenuActions();
+  }
 }
 
 void
