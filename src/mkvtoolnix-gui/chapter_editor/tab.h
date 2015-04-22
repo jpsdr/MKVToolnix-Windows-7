@@ -57,11 +57,12 @@ public:
   virtual void retranslateUi();
   virtual QString const &fileName() const;
   virtual QString title() const;
-  virtual bool isEmpty() const;
+  virtual bool hasChapters() const;
 
 signals:
   void removeThisTab();
   void titleChanged();
+  void numberOfEntriesChanged();
 
 public slots:
   virtual void newFile();

@@ -752,6 +752,8 @@ Tab::addEdition(bool before) {
   GetChild<KaxEditionUID>(*edition).SetValue(0);
 
   m_chapterModel->insertEdition(row, edition);
+
+  emit numberOfEntriesChanged();
 }
 
 ChapterPtr
@@ -790,6 +792,8 @@ Tab::addChapter(bool before) {
   auto row     = selectedIdx.row() + (before ? 0 : 1);
 
   m_chapterModel->insertChapter(row, chapter, selectedIdx.parent());
+
+  emit numberOfEntriesChanged();
 }
 
 void
@@ -802,11 +806,14 @@ Tab::addSubChapter() {
   auto chapter = createEmptyChapter(0);
   m_chapterModel->appendChapter(chapter, selectedIdx);
   expandCollapseAll(true, selectedIdx);
+
+  emit numberOfEntriesChanged();
 }
 
 void
 Tab::removeElement() {
   m_chapterModel->removeTree(Util::selectedRowIdx(ui->elements));
+  emit numberOfEntriesChanged();
 }
 
 void
@@ -823,6 +830,8 @@ Tab::duplicateElement() {
 
   if (newElementIdx.isValid())
     expandCollapseAll(true, newElementIdx);
+
+  emit numberOfEntriesChanged();
 }
 
 void
@@ -892,9 +901,12 @@ Tab::showChapterContextMenu(QPoint const &pos) {
 }
 
 bool
-Tab::isEmpty()
+Tab::hasChapters()
   const {
-  return !!m_chapterModel->rowCount();
+  for (auto idx = 0, numEditions = m_chapterModel->rowCount(); idx < numEditions; ++idx)
+    if (m_chapterModel->item(idx)->rowCount())
+      return true;
+  return false;
 }
 
 }}}

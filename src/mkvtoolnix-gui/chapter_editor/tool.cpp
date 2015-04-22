@@ -66,7 +66,7 @@ Tool::enableMenuActions() {
   auto mwUi        = MainWindow::getUi();
   auto tab         = currentTab();
   auto hasFileName = tab && !tab->fileName().isEmpty();
-  auto hasElements = tab && !tab->isEmpty();
+  auto hasElements = tab && tab->hasChapters();
 
   mwUi->actionChapterEditorSave->setEnabled(hasFileName && hasElements);
   mwUi->actionChapterEditorSaveAsXml->setEnabled(!!tab && hasElements);
@@ -90,8 +90,9 @@ Tool::retranslateUi() {
 
 Tab *
 Tool::appendTab(Tab *tab) {
-  connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
-  connect(tab, &Tab::titleChanged,  this, &Tool::tabTitleChanged);
+  connect(tab, &Tab::removeThisTab,          this, &Tool::closeSendingTab);
+  connect(tab, &Tab::titleChanged,           this, &Tool::tabTitleChanged);
+  connect(tab, &Tab::numberOfEntriesChanged, this, &Tool::enableMenuActions);
 
   ui->editors->addTab(tab, tab->title());
 
