@@ -766,7 +766,8 @@ Tab::createEmptyChapter(int64_t startTime) {
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTime);
   GetChild<KaxChapterString>(display).SetValueUTF8(Y("<unnamed>"));
   GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(cfg.m_defaultChapterLanguage));
-  GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
+  if (!cfg.m_defaultChapterCountry.isEmpty())
+    GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
 
   return chapter;
 }
