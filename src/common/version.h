@@ -46,9 +46,8 @@ struct mtx_release_version_t {
 };
 
 enum version_info_flags_e {
-  vif_timestamp    = 0x0001,
-  vif_untranslated = 0x0002,
-  vif_architecture = 0x0004,
+  vif_untranslated = 0x0001,
+  vif_architecture = 0x0002,
 
   vif_none         = 0x0000,
   vif_default      = vif_architecture,

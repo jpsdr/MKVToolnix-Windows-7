@@ -140,15 +140,6 @@ get_version_info(const std::string &program,
     info.push_back("32bit");
 #endif
 
-#if defined(HAVE_BUILD_TIMESTAMP)
-  if (flags & vif_timestamp) {
-    if (flags & vif_untranslated)
-      info.push_back((boost::format("built on %1% %2%") % __DATE__ % __TIME__).str());
-    else
-      info.push_back((boost::format(Y("built on %1% %2%")) % __DATE__ % __TIME__).str());
-  }
-#endif  // !defined(HAVE_BUILD_TIMESTAMP)
-
   return join(" ", info);
 }
 
