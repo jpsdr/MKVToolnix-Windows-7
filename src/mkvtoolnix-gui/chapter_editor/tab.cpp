@@ -21,6 +21,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
+#include "mkvtoolnix-gui/chapter_editor/mass_modification_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -46,8 +47,8 @@ Tab::Tab(QWidget *parent,
   , m_addChapterAfterAction{new QAction{this}}
   , m_addSubChapterAction{new QAction{this}}
   , m_removeElementAction{new QAction{this}}
-  , m_sortSubtreeAction{new QAction{this}}
   , m_duplicateAction{new QAction{this}}
+  , m_massModificationAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -92,8 +93,8 @@ Tab::setupUi() {
   connect(m_addChapterAfterAction,         &QAction::triggered,                                                    this, &Tab::addChapterAfter);
   connect(m_addSubChapterAction,           &QAction::triggered,                                                    this, &Tab::addSubChapter);
   connect(m_removeElementAction,           &QAction::triggered,                                                    this, &Tab::removeElement);
-  connect(m_sortSubtreeAction,             &QAction::triggered,                                                    this, &Tab::sortSubtree);
   connect(m_duplicateAction,               &QAction::triggered,                                                    this, &Tab::duplicateElement);
+  connect(m_massModificationAction,        &QAction::triggered,                                                    this, &Tab::massModify);
 }
 
 void
@@ -124,8 +125,8 @@ Tab::retranslateUi() {
   m_addChapterAfterAction->setText(QY("Add new ch&apter after"));
   m_addSubChapterAction->setText(QY("Add new &sub-chapter inside"));
   m_removeElementAction->setText(QY("&Remove selected edition or chapter"));
-  m_sortSubtreeAction->setText(QY("Sor&t elements by their start time"));
   m_duplicateAction->setText(QY("D&uplicate selected edition or chapter"));
+  m_massModificationAction->setText(QY("Additional &modifications"));
 
   m_chapterModel->retranslateUi();
   m_nameModel->retranslateUi();
@@ -818,10 +819,151 @@ Tab::removeElement() {
 }
 
 void
-Tab::sortSubtree() {
+Tab::shiftTimecodes(QStandardItem *item,
+                    int64_t delta) {
+  if (!item)
+    return;
+
+  if (item->parent()) {
+    auto chapter = m_chapterModel->chapterFromItem(item);
+    if (chapter) {
+      auto kStart = FindChild<KaxChapterTimeStart>(*chapter);
+      auto kEnd   = FindChild<KaxChapterTimeEnd>(*chapter);
+
+      if (kStart)
+        kStart->SetValue(std::max<int64_t>(static_cast<int64_t>(kStart->GetValue()) + delta, 0));
+      if (kEnd)
+        kEnd->SetValue(std::max<int64_t>(static_cast<int64_t>(kEnd->GetValue()) + delta, 0));
+
+      if (kStart || kEnd)
+        m_chapterModel->updateRow(item->index());
+    }
+  }
+
+  for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
+    shiftTimecodes(item->child(row), delta);
+}
+
+void
+Tab::constrictTimecodes(QStandardItem *item,
+                        boost::optional<uint64_t> const &constrictStart,
+                        boost::optional<uint64_t> const &constrictEnd) {
+  if (!item)
+    return;
+
+  auto start = boost::optional<uint64_t>();
+  auto end   = boost::optional<uint64_t>();
+
+  if (item->parent()) {
+    auto chapter = m_chapterModel->chapterFromItem(item);
+    if (chapter) {
+      auto kStart   = FindChild<KaxChapterTimeStart>(*chapter);
+      auto kEnd     = FindChild<KaxChapterTimeEnd>(*chapter);
+      auto modified = false;
+
+      if (kStart) {
+        start.reset(kStart->GetValue());
+        if (constrictStart && (*start < *constrictStart)) {
+          kStart->SetValue(*constrictStart);
+          modified = true;
+        }
+      }
+
+      if (kEnd) {
+        end.reset(kEnd->GetValue());
+        if (constrictEnd && (*end > *constrictEnd)) {
+          kEnd->SetValue(*constrictEnd);
+          modified = true;
+        }
+      }
+
+      if (modified)
+        m_chapterModel->updateRow(item->index());
+    }
+  }
+
+  for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
+    constrictTimecodes(item->child(row), start, end);
+}
+
+template<typename T>
+boost::optional<T>
+opt_min(boost::optional<T> const &a,
+        boost::optional<T> const &b) {
+  return !a ? b
+       : !b ? a
+       :      std::min(*a, *b);
+}
+
+template<typename T>
+boost::optional<T>
+opt_max(boost::optional<T> const &a,
+        boost::optional<T> const &b) {
+  return !a ? b
+       : !b ? a
+       :      std::max(*a, *b);
+}
+
+std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>>
+Tab::expandTimecodes(QStandardItem *item) {
+  if (!item)
+    return {};
+
+  auto chapter  = m_chapterModel->chapterFromItem(item);
+  auto kStart   = chapter ? FindChild<KaxChapterTimeStart>(*chapter)      : nullptr;
+  auto kEnd     = chapter ? FindChild<KaxChapterTimeEnd>(*chapter)        : nullptr;
+  auto start    = kStart  ? boost::optional<uint64_t>{kStart->GetValue()} : boost::optional<uint64_t>{};
+  auto end      = kEnd    ? boost::optional<uint64_t>{kEnd->GetValue()}   : boost::optional<uint64_t>{};
+  auto modified = false;
+
+  for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row) {
+    auto startAndEnd = expandTimecodes(item->child(row));
+    start            = opt_min(start, startAndEnd.first);
+    end              = opt_max(end,   startAndEnd.second);
+
+    if (kStart && startAndEnd.first && (kStart->GetValue() > *startAndEnd.first)) {
+      kStart->SetValue(*startAndEnd.first);
+      modified = true;
+    }
+
+    if (kEnd && startAndEnd.second && (kEnd->GetValue() < *startAndEnd.second)) {
+      kEnd->SetValue(*startAndEnd.second);
+      modified = true;
+    }
+
+    if (modified)
+      m_chapterModel->updateRow(item->index());
+  }
+
+  return std::make_pair(start, end);
+}
+
+void
+Tab::massModify() {
+  if (!copyControlsToStorage())
+    return;
+
   auto selectedIdx = Util::selectedRowIdx(ui->elements);
-  auto parentItem  = !selectedIdx.isValid() ? m_chapterModel->invisibleRootItem() : m_chapterModel->itemFromIndex(selectedIdx);
-  parentItem->sortChildren(1);
+  MassModificationDialog dlg{this, selectedIdx.isValid()};
+  if (!dlg.exec())
+    return;
+
+  auto decision = dlg.decision();
+  auto item     = selectedIdx.isValid() ? m_chapterModel->itemFromIndex(selectedIdx) : m_chapterModel->invisibleRootItem();
+
+  if (MassModificationDialog::Decision::Sort == decision)
+    item->sortChildren(1);
+
+  else if (MassModificationDialog::Decision::Shift == decision)
+    shiftTimecodes(item, dlg.shiftBy());
+
+  else if (MassModificationDialog::Decision::Constrict == decision)
+    constrictTimecodes(item, {}, {});
+
+  else
+    expandTimecodes(item);
+
+  setControlsFromStorage();
 }
 
 void
@@ -876,7 +1018,6 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   m_addSubChapterAction->setEnabled(hasSelection);
   m_removeElementAction->setEnabled(hasSelection);
   m_duplicateAction->setEnabled(hasSelection);
-  m_sortSubtreeAction->setEnabled(hasEntries);
   m_expandAllAction->setEnabled(hasEntries);
   m_collapseAllAction->setEnabled(hasEntries);
 
@@ -891,9 +1032,9 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   menu.addSeparator();
   menu.addAction(m_duplicateAction);
   menu.addSeparator();
-  menu.addAction(m_sortSubtreeAction);
-  menu.addSeparator();
   menu.addAction(m_removeElementAction);
+  menu.addSeparator();
+  menu.addAction(m_massModificationAction);
   menu.addSeparator();
   menu.addAction(m_expandAllAction);
   menu.addAction(m_collapseAllAction);

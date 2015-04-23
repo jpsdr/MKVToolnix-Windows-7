@@ -45,7 +45,7 @@ protected:
   NameModel *m_nameModel;
 
   QAction *m_expandAllAction, *m_collapseAllAction, *m_addEditionBeforeAction, *m_addEditionAfterAction, *m_addChapterBeforeAction, *m_addChapterAfterAction, *m_addSubChapterAction, *m_removeElementAction;
-  QAction *m_sortSubtreeAction, *m_duplicateAction;
+  QAction *m_duplicateAction, *m_massModificationAction;
   QList<QWidget *> m_nameWidgets;
 
   bool m_ignoreChapterSelectionChanges{};
@@ -78,8 +78,8 @@ public slots:
   virtual void addChapterAfter();
   virtual void addSubChapter();
   virtual void removeElement();
-  virtual void sortSubtree();
   virtual void duplicateElement();
+  virtual void massModify();
 
   virtual void chapterSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void expandInsertedElements(QModelIndex const &parentIdx, int start, int end);
@@ -132,6 +132,10 @@ protected:
   void saveAsXmlImpl(bool requireNewFileName);
   void saveToMatroskaImpl(bool requireNewFileName);
   void updateFileNameDisplay();
+
+  void shiftTimecodes(QStandardItem *item, int64_t delta);
+  void constrictTimecodes(QStandardItem *item, boost::optional<uint64_t> const &constrictStart, boost::optional<uint64_t> const &constrictEnd);
+  std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>> expandTimecodes(QStandardItem *item);
 
 protected:
   static QString formatEbmlBinary(EbmlBinary *binary);

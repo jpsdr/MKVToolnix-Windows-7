@@ -105,7 +105,7 @@ Tab::onSplitModeChanged(int newMode) {
     label    = QY("Duration:");
     tooltip << QY("The duration after which a new output file is started.")
             << (Q("%1 %2 %3")
-                .arg(QY("The time can be given either in the form HH:MM:SS.nnnnnnnnn or as the number of seconds followed by 's'."))
+                .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
                 .arg(QY("You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."))
                 .arg(QY("If given then you may use up to nine digits after the decimal point.")))
             << QY("Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds).");
@@ -120,7 +120,7 @@ Tab::onSplitModeChanged(int newMode) {
                 .arg(QY("The timecodes after which a new output file is started."))
                 .arg(QY("The timecodes refer to the whole stream and not to each individual output file.")))
             << (Q("%1 %2 %3")
-                .arg(QY("The timecodes can be given either in the form HH:MM:SS.nnnnnnnnn or as the number of seconds followed by 's'."))
+                .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
                 .arg(QY("You may omit the number of hours 'HH'."))
                 .arg(QY("You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' or none at all.")))
             << (Q("%1 %2")
@@ -134,7 +134,7 @@ Tab::onSplitModeChanged(int newMode) {
             << (Q("%1 %2")
                 .arg(QY("Each range consists of a start and end timecode with a '-' in the middle, e.g. '00:01:15-00:03:20'."))
                 .arg(QY("If a start timecode is left out then the previous range's end timecode is used, or the start of the file if there was no previous range.")))
-            << QY("The timecodes can be given either in the form HH:MM:SS.nnnnnnnnn or as the number of seconds followed by 's'.")
+            << QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'.")
             << QY("If a range's start timecode is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range.");
 
   } else if (MuxConfig::SplitByPartsFrames == splitMode) {
