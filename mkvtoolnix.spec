@@ -68,7 +68,7 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 export EXTRA_CONFIGURE_ARGS="--with-wx-config=/usr/bin/wx-config-3.0"
 %endif
 
-%configure --prefix=%{_prefix} --without-build-timestamp $EXTRA_CONFIGURE_ARGS
+%configure --prefix=%{_prefix} $EXTRA_CONFIGURE_ARGS
 
 %build
 ./drake
