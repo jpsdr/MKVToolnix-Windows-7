@@ -103,7 +103,8 @@ default_mxinfo(unsigned int,
 
 void
 mxinfo(std::string const &info) {
-  s_mxmsg_info_handler(MXMSG_INFO, info);
+  if (s_mxmsg_info_handler)
+    s_mxmsg_info_handler(MXMSG_INFO, info);
 }
 
 void
@@ -129,7 +130,8 @@ default_mxwarn(unsigned int,
 
 void
 mxwarn(std::string const &warning) {
-  s_mxmsg_warning_handler(MXMSG_WARNING, warning);
+  if (s_mxmsg_warning_handler)
+    s_mxmsg_warning_handler(MXMSG_WARNING, warning);
 }
 
 static void
@@ -141,7 +143,8 @@ default_mxerror(unsigned int,
 
 void
 mxerror(std::string const &error) {
-  s_mxmsg_error_handler(MXMSG_ERROR, error);
+  if (s_mxmsg_error_handler)
+    s_mxmsg_error_handler(MXMSG_ERROR, error);
 }
 
 void
