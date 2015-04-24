@@ -222,7 +222,7 @@ parse_simple_chapters(mm_text_io_c *in,
 
         auto &display = GetChild<KaxChapterDisplay>(*atom);
 
-        GetChild<KaxChapterString>(display).SetValue(cstrutf8_to_UTFstring(do_convert ? cc_utf8->utf8(name) : name));
+        GetChild<KaxChapterString>(display).SetValueUTF8(do_convert ? cc_utf8->utf8(name) : name);
         GetChild<KaxChapterLanguage>(display).SetValue(use_language);
 
         if (!g_default_chapter_country.empty())
@@ -443,7 +443,7 @@ get_chapter_name(KaxChapterAtom &atom) {
   if (!name)
     return "";
 
-  return UTFstring_to_cstrutf8(UTFstring(*name));
+  return name->GetValueUTF8();
 }
 
 /** \brief Get the unique ID for a chapter atom.

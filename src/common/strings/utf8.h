@@ -40,6 +40,28 @@ to_wide(::libebml::UTFstring const &source) {
   return source.c_str();
 }
 
+inline ::libebml::UTFstring
+to_utfstring(std::wstring const &source) {
+  return UTFstring{source};
+}
+
+inline ::libebml::UTFstring
+to_utfstring(boost::wformat const &source) {
+  return to_utfstring(source.str());
+}
+
+inline ::libebml::UTFstring
+to_utfstring(std::string const &source) {
+  auto u = UTFstring{};
+  u.SetUTF8(source);
+  return u;
+}
+
+inline ::libebml::UTFstring
+to_utfstring(boost::format const &source) {
+  return to_utfstring(source.str());
+}
+
 std::string to_utf8(const std::wstring &source);
 
 inline std::string

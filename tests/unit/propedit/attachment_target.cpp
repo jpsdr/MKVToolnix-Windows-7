@@ -332,7 +332,7 @@ TEST(AttachmentTarget, ReplaceById) {
       opt.description("").name("").mime_type("");
 
       DeleteChildren<KaxFileDescription>(att);
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("chunky_bacon.txt"));
+      GetChild<KaxFileName>(att).SetValueUTF8("chunky_bacon.txt");
       GetChild<KaxMimeType>(att).SetValue("text/plain");
     });
 
@@ -341,8 +341,8 @@ TEST(AttachmentTarget, ReplaceById) {
 
       opt.description("Moocow").name("miau&wuff.html").mime_type("bacon/chunky");
 
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
     });
 
@@ -351,7 +351,7 @@ TEST(AttachmentTarget, ReplaceById) {
 
       opt.description("Moocow");
 
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
     });
 }
 
@@ -364,7 +364,7 @@ TEST(AttachmentTarget, ReplaceByUid) {
       opt.description("").name("").mime_type("");
 
       DeleteChildren<KaxFileDescription>(att);
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("chunky_bacon.txt"));
+      GetChild<KaxFileName>(att).SetValueUTF8("chunky_bacon.txt");
       GetChild<KaxMimeType>(att).SetValue("text/plain");
     });
 
@@ -373,8 +373,8 @@ TEST(AttachmentTarget, ReplaceByUid) {
 
       opt.description("Moocow").name("miau&wuff.html").mime_type("bacon/chunky");
 
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
     });
 }
@@ -387,12 +387,12 @@ TEST(AttachmentTarget, ReplaceByName) {
 
       auto att = static_cast<EbmlMaster *>(b[1]);
       DeleteChildren<KaxFileDescription>(att);
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("chunky_bacon.txt"));
+      GetChild<KaxFileName>(att).SetValueUTF8("chunky_bacon.txt");
       GetChild<KaxMimeType>(att).SetValue("text/plain");
 
       att = static_cast<EbmlMaster *>(b[3]);
       DeleteChildren<KaxFileDescription>(att);
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("chunky_bacon.txt"));
+      GetChild<KaxFileName>(att).SetValueUTF8("chunky_bacon.txt");
       GetChild<KaxMimeType>(att).SetValue("text/plain");
     });
 
@@ -400,13 +400,13 @@ TEST(AttachmentTarget, ReplaceByName) {
       opt.description("Moocow").name("miau&wuff.html").mime_type("bacon/chunky");
 
       auto att = static_cast<EbmlMaster *>(b[1]);
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
 
       att = static_cast<EbmlMaster *>(b[3]);
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
     });
 
@@ -414,13 +414,13 @@ TEST(AttachmentTarget, ReplaceByName) {
       opt.description("Moocow").name("miau&wuff.html").mime_type("bacon/chunky");
 
       auto att = static_cast<EbmlMaster *>(b[1]);
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
 
       att = static_cast<EbmlMaster *>(b[3]);
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
     });
 
@@ -428,8 +428,8 @@ TEST(AttachmentTarget, ReplaceByName) {
       opt.description("Moocow").name("miau&wuff.html").mime_type("bacon/chunky");
 
       auto att = static_cast<EbmlMaster *>(b[2]);
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
     });
 }
@@ -442,12 +442,12 @@ TEST(AttachmentTarget, ReplaceByMimeType) {
 
       auto att = static_cast<EbmlMaster *>(b[1]);
       DeleteChildren<KaxFileDescription>(att);
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("chunky_bacon.txt"));
+      GetChild<KaxFileName>(att).SetValueUTF8("chunky_bacon.txt");
       GetChild<KaxMimeType>(att).SetValue("text/plain");
 
       att = static_cast<EbmlMaster *>(b[3]);
       DeleteChildren<KaxFileDescription>(att);
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("chunky_bacon.txt"));
+      GetChild<KaxFileName>(att).SetValueUTF8("chunky_bacon.txt");
       GetChild<KaxMimeType>(att).SetValue("text/plain");
     });
 
@@ -455,13 +455,13 @@ TEST(AttachmentTarget, ReplaceByMimeType) {
       opt.description("Moocow").name("miau&wuff.html").mime_type("bacon/chunky");
 
       auto att = static_cast<EbmlMaster *>(b[1]);
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
 
       att = static_cast<EbmlMaster *>(b[3]);
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
     });
 
@@ -469,13 +469,13 @@ TEST(AttachmentTarget, ReplaceByMimeType) {
       opt.description("Moocow").name("miau&wuff.html").mime_type("bacon/chunky");
 
       auto att = static_cast<EbmlMaster *>(b[1]);
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
 
       att = static_cast<EbmlMaster *>(b[3]);
-      GetChild<KaxFileDescription>(att).SetValue(cstrutf8_to_UTFstring("Moocow"));
-      GetChild<KaxFileName>(att).SetValue(cstrutf8_to_UTFstring("miau&wuff.html"));
+      GetChild<KaxFileDescription>(att).SetValueUTF8("Moocow");
+      GetChild<KaxFileName>(att).SetValueUTF8("miau&wuff.html");
       GetChild<KaxMimeType>(att).SetValue("bacon/chunky");
     });
 }

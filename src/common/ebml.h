@@ -26,10 +26,6 @@ using namespace libmatroska;
 
 #define can_be_cast(c, e) (dynamic_cast<c *>(e))
 
-bool is_valid_utf8_string(const std::string &c);
-UTFstring cstrutf8_to_UTFstring(const std::string &c);
-std::string UTFstring_to_cstrutf8(const UTFstring &u);
-
 int64_t kt_get_default_duration(KaxTrackEntry &track);
 int64_t kt_get_number(KaxTrackEntry &track);
 int64_t kt_get_uid(KaxTrackEntry &track);

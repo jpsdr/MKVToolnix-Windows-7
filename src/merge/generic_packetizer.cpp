@@ -332,7 +332,7 @@ void
 generic_packetizer_c::set_track_name(const std::string &name) {
   m_ti.m_track_name = name;
   if (m_track_entry && !name.empty())
-    GetChild<KaxTrackName>(m_track_entry).SetValue(cstrutf8_to_UTFstring(m_ti.m_track_name));
+    GetChild<KaxTrackName>(m_track_entry).SetValueUTF8(m_ti.m_track_name);
 }
 
 void
@@ -661,7 +661,7 @@ generic_packetizer_c::set_headers() {
   GetChild<KaxTrackLanguage>(m_track_entry).SetValue(m_ti.m_language != "" ? m_ti.m_language : g_default_language.c_str());
 
   if (!m_ti.m_track_name.empty())
-    GetChild<KaxTrackName>(m_track_entry).SetValue(cstrutf8_to_UTFstring(m_ti.m_track_name));
+    GetChild<KaxTrackName>(m_track_entry).SetValueUTF8(m_ti.m_track_name);
 
   if (!boost::logic::indeterminate(m_ti.m_forced_track))
     GetChild<KaxTrackFlagForced>(m_track_entry).SetValue(m_ti.m_forced_track ? 1 : 0);

@@ -518,12 +518,12 @@ render_headers(mm_io_c *out) {
       }
     }
 
-    GetChild<KaxMuxingApp >(*s_kax_infos).SetValue(cstrutf8_to_UTFstring(s_muxing_app));
-    GetChild<KaxWritingApp>(*s_kax_infos).SetValue(cstrutf8_to_UTFstring(s_writing_app));
+    GetChild<KaxMuxingApp >(*s_kax_infos).SetValueUTF8(s_muxing_app);
+    GetChild<KaxWritingApp>(*s_kax_infos).SetValueUTF8(s_writing_app);
     GetChild<KaxDateUTC   >(*s_kax_infos).SetEpochDate(s_writing_date.is_not_a_date_time() ? 0 : mtx::date_time::to_time_t(s_writing_date));
 
     if (!g_segment_title.empty())
-      GetChild<KaxTitle>(*s_kax_infos).SetValue(cstrutf8_to_UTFstring(g_segment_title.c_str()));
+      GetChild<KaxTitle>(*s_kax_infos).SetValueUTF8(g_segment_title.c_str());
 
     bool first_file = (1 == g_file_num);
 
@@ -594,13 +594,13 @@ render_headers(mm_io_c *out) {
       }
 
       if (!g_segment_filename.empty())
-        GetChild<KaxSegmentFilename>(*s_kax_infos).SetValue(cstrutf8_to_UTFstring(g_segment_filename));
+        GetChild<KaxSegmentFilename>(*s_kax_infos).SetValueUTF8(g_segment_filename);
 
       if (!g_next_segment_filename.empty())
-        GetChild<KaxNextFilename>(*s_kax_infos).SetValue(cstrutf8_to_UTFstring(g_next_segment_filename));
+        GetChild<KaxNextFilename>(*s_kax_infos).SetValueUTF8(g_next_segment_filename);
 
       if (!g_previous_segment_filename.empty())
-        GetChild<KaxPrevFilename>(*s_kax_infos).SetValue(cstrutf8_to_UTFstring(g_previous_segment_filename));
+        GetChild<KaxPrevFilename>(*s_kax_infos).SetValueUTF8(g_previous_segment_filename);
 
       g_segment_filename.clear();
       g_next_segment_filename.clear();
@@ -803,7 +803,7 @@ render_attachments(IOCallback *out) {
       kax_a = !kax_a ? &GetChild<KaxAttached>(*s_kax_as) : &GetNextChild<KaxAttached>(*s_kax_as, *kax_a);
 
       if (attch.description != "")
-        GetChild<KaxFileDescription>(kax_a).SetValue(cstrutf8_to_UTFstring(attch.description));
+        GetChild<KaxFileDescription>(kax_a).SetValueUTF8(attch.description);
 
       if (attch.mime_type != "")
         GetChild<KaxMimeType>(kax_a).SetValue(attch.mime_type);
@@ -815,7 +815,7 @@ render_attachments(IOCallback *out) {
       else
         name = attch.stored_name;
 
-      GetChild<KaxFileName>(kax_a).SetValue(cstrutf8_to_UTFstring(name));
+      GetChild<KaxFileName>(kax_a).SetValueUTF8(name);
       GetChild<KaxFileUID >(kax_a).SetValue(attch.id);
 
       GetChild<KaxFileData>(*kax_a).CopyBuffer(attch.data->get_buffer(), attch.data->get_size());

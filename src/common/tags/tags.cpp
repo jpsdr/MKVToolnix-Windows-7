@@ -91,13 +91,13 @@ select_for_chapters(KaxTags &tags,
 
 KaxTagSimple &
 find_simple(const std::string &name,
-                EbmlMaster &m) {
-  return find_simple(cstrutf8_to_UTFstring(name), m);
+            EbmlMaster &m) {
+  return find_simple(to_utfstring(name), m);
 }
 
 KaxTagSimple &
 find_simple(const UTFstring &name,
-                EbmlMaster &m) {
+            EbmlMaster &m) {
   if (Is<KaxTagSimple>(&m)) {
     KaxTagName *tname = FindChild<KaxTagName>(&m);
     if (tname && (name == UTFstring(*tname)))

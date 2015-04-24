@@ -27,6 +27,7 @@
 #include "common/mm_io.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
+#include "common/strings/utf8.h"
 #include "common/tags/target_type.h"
 #include "common/unique_numbers.h"
 
@@ -153,10 +154,7 @@ struct cue_parser_args_t {
 static UTFstring
 cue_str_internal_to_utf(cue_parser_args_t &a,
                         const std::string &s) {
-  if (a.do_convert)
-    return cstrutf8_to_UTFstring(a.cc_utf8->utf8(s));
-  else
-    return cstrutf8_to_UTFstring(s);
+  return to_utfstring(a.do_convert ? a.cc_utf8->utf8(s) : s);
 }
 
 static KaxTagSimple *
@@ -263,7 +261,7 @@ add_subchapters_for_index_entries(cue_parser_args_t &a) {
     GetChild<KaxChapterPhysicalEquiv>(*atom).SetValue(CHAPTER_PHYSEQUIV_INDEX);
 
     auto &display = GetChild<KaxChapterDisplay>(*atom);
-    GetChild<KaxChapterString>(display).SetValue(cstrutf8_to_UTFstring((boost::format("INDEX %|1$02d|") % (i + offset)).str().c_str()));
+    GetChild<KaxChapterString>(display).SetValueUTF8(boost::format("INDEX %|1$02d|") % (i + offset));
     GetChild<KaxChapterLanguage>(display).SetValue("eng");
   }
 }

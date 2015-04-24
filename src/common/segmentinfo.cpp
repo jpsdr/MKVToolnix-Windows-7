@@ -24,6 +24,7 @@
 #include "common/ebml.h"
 #include "common/hacks.h"
 #include "common/segmentinfo.h"
+#include "common/strings/utf8.h"
 #include "common/version.h"
 
 using namespace libmatroska;
@@ -51,10 +52,10 @@ fix_mandatory_segmentinfo_elements(EbmlElement *e) {
   GetChild<KaxTimecodeScale>(info);
 
   if (!hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
-    provide_default_for_child<KaxMuxingApp>( info, cstrutf8_to_UTFstring((boost::format("libebml v%1% + libmatroska v%2%") %  EbmlCodeVersion % KaxCodeVersion).str()));
-    provide_default_for_child<KaxWritingApp>(info, cstrutf8_to_UTFstring(get_version_info("mkvmerge", static_cast<version_info_flags_e>(vif_full | vif_untranslated))));
+    provide_default_for_child<KaxMuxingApp>( info, to_utfstring(boost::format("libebml v%1% + libmatroska v%2%") %  EbmlCodeVersion % KaxCodeVersion));
+    provide_default_for_child<KaxWritingApp>(info, to_utfstring(get_version_info("mkvmerge", static_cast<version_info_flags_e>(vif_full | vif_untranslated))));
   } else {
-    provide_default_for_child<KaxMuxingApp>( info, cstrutf8_to_UTFstring("no_variable_data"));
-    provide_default_for_child<KaxWritingApp>(info, cstrutf8_to_UTFstring("no_variable_data"));
+    provide_default_for_child<KaxMuxingApp>( info, to_utfstring("no_variable_data"));
+    provide_default_for_child<KaxWritingApp>(info, to_utfstring("no_variable_data"));
   }
 }

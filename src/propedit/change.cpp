@@ -235,7 +235,7 @@ change_c::set_element_at(int idx) {
 
   switch (m_property.m_type) {
     case property_element_c::EBMLT_STRING:  static_cast<EbmlString        *>(e)->SetValue(m_s_value);                                 break;
-    case property_element_c::EBMLT_USTRING: static_cast<EbmlUnicodeString *>(e)->SetValue(cstrutf8_to_UTFstring(m_s_value));          break;
+    case property_element_c::EBMLT_USTRING: static_cast<EbmlUnicodeString *>(e)->SetValueUTF8(m_s_value);                             break;
     case property_element_c::EBMLT_UINT:    static_cast<EbmlUInteger      *>(e)->SetValue(m_ui_value);                                break;
     case property_element_c::EBMLT_INT:     static_cast<EbmlSInteger      *>(e)->SetValue(m_si_value);                                break;
     case property_element_c::EBMLT_BOOL:    static_cast<EbmlUInteger      *>(e)->SetValue(m_b_value ? 1 : 0);                         break;
