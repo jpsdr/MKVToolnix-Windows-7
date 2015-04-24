@@ -155,7 +155,7 @@ bitvalue_cptr g_seguid_link_previous;
 bitvalue_cptr g_seguid_link_next;
 std::deque<bitvalue_cptr> g_forced_seguids;
 
-KaxInfo *s_kax_infos;
+std::unique_ptr<KaxInfo> s_kax_infos;
 static KaxMyDuration *s_kax_duration;
 
 static std::unique_ptr<KaxTags> s_kax_tags;
@@ -258,6 +258,8 @@ sighandler(int /* signum */) {
     g_kax_segment->OverwriteHead(*s_out);
 
   mxinfo(Y(" done\n"));
+
+  cleanup();
 
   mxerror(Y("mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"));
 }
@@ -497,7 +499,7 @@ render_headers(mm_io_c *out) {
   try {
     render_ebml_head(out);
 
-    s_kax_infos = &GetChild<KaxInfo>(*g_kax_segment);
+    s_kax_infos = std::make_unique<KaxInfo>();
 
     s_kax_duration = new KaxMyDuration{ !g_video_packetizer || (TIMECODE_SCALE_MODE_AUTO == g_timecode_scale_mode) ? EbmlFloat::FLOAT_64 : EbmlFloat::FLOAT_32};
 
@@ -516,12 +518,12 @@ render_headers(mm_io_c *out) {
       }
     }
 
-    GetChild<KaxMuxingApp >(s_kax_infos).SetValue(cstrutf8_to_UTFstring(s_muxing_app));
-    GetChild<KaxWritingApp>(s_kax_infos).SetValue(cstrutf8_to_UTFstring(s_writing_app));
-    GetChild<KaxDateUTC   >(s_kax_infos).SetEpochDate(s_writing_date.is_not_a_date_time() ? 0 : mtx::date_time::to_time_t(s_writing_date));
+    GetChild<KaxMuxingApp >(*s_kax_infos).SetValue(cstrutf8_to_UTFstring(s_muxing_app));
+    GetChild<KaxWritingApp>(*s_kax_infos).SetValue(cstrutf8_to_UTFstring(s_writing_app));
+    GetChild<KaxDateUTC   >(*s_kax_infos).SetEpochDate(s_writing_date.is_not_a_date_time() ? 0 : mtx::date_time::to_time_t(s_writing_date));
 
     if (!g_segment_title.empty())
-      GetChild<KaxTitle>(s_kax_infos).SetValue(cstrutf8_to_UTFstring(g_segment_title.c_str()));
+      GetChild<KaxTitle>(*s_kax_infos).SetValue(cstrutf8_to_UTFstring(g_segment_title.c_str()));
 
     bool first_file = (1 == g_file_num);
 
@@ -645,7 +647,6 @@ render_headers(mm_io_c *out) {
       uint64_t full_header_size = g_kax_tracks->ElementSize(true);
       g_kax_tracks->UpdateSize(false);
 
-      g_kax_segment->PushElement(*g_kax_tracks);
       g_kax_tracks->Render(*out, false);
       g_kax_sh_main->IndexThis(*g_kax_tracks, *g_kax_segment);
 
@@ -1505,13 +1506,6 @@ finish_file(bool last_file,
     g_kax_segment->OverwriteHead(*s_out);
 
   s_out.reset();
-
-  // The tracks element must not be deleted.
-  size_t i;
-  for (i = 0; i < g_kax_segment->ListSize(); ++i)
-    if (!dynamic_cast<KaxTracks *>((*g_kax_segment)[i]))
-      delete (*g_kax_segment)[i];
-  g_kax_segment->RemoveAll();
 
   g_kax_segment.reset();
   s_kax_sh_void.reset();
