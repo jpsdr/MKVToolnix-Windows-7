@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <iostream>
+
 #include <QRegularExpression>
 #include <QSettings>
 #include <QStringList>

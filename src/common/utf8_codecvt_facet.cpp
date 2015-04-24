@@ -11,13 +11,10 @@
 # define BOOST_SYSTEM_NO_DEPRECATED
 #endif
 
-#define BOOST_FILESYSTEM_SOURCE
-#include <boost/filesystem/config.hpp>
-
 #define BOOST_UTF8_BEGIN_NAMESPACE namespace mtx {
 
 #define BOOST_UTF8_END_NAMESPACE }
-#define BOOST_UTF8_DECL BOOST_FILESYSTEM_DECL
+#define BOOST_UTF8_DECL
 
 #include "../../lib/boost/utf8_codecvt_facet/utf8_codecvt_facet.cpp"
 

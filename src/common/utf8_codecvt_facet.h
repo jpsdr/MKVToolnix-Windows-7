@@ -7,14 +7,12 @@
 #ifndef MTX_COMMON_UTF8_FILECVT_FACET_H
 #define MTX_COMMON_UTF8_FILECVT_FACET_H
 
-#include <boost/filesystem/config.hpp>
-
 #define BOOST_UTF8_BEGIN_NAMESPACE namespace mtx {
 
 #define BOOST_UTF8_END_NAMESPACE }
-#define BOOST_UTF8_DECL BOOST_FILESYSTEM_DECL
+#define BOOST_UTF8_DECL
 
-#include <boost/detail/utf8_codecvt_facet.hpp>
+#include "../../lib/boost/utf8_codecvt_facet/utf8_codecvt_facet.hpp"
 
 #undef BOOST_UTF8_BEGIN_NAMESPACE
 #undef BOOST_UTF8_END_NAMESPACE
