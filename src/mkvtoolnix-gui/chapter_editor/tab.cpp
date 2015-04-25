@@ -851,39 +851,30 @@ Tab::constrictTimecodes(QStandardItem *item,
   if (!item)
     return;
 
-  auto start = boost::optional<uint64_t>();
-  auto end   = boost::optional<uint64_t>();
-
-  if (item->parent()) {
-    auto chapter = m_chapterModel->chapterFromItem(item);
-    if (chapter) {
-      auto kStart   = FindChild<KaxChapterTimeStart>(*chapter);
-      auto kEnd     = FindChild<KaxChapterTimeEnd>(*chapter);
-      auto modified = false;
-
-      if (kStart) {
-        start.reset(kStart->GetValue());
-        if (constrictStart && (*start < *constrictStart)) {
-          kStart->SetValue(*constrictStart);
-          modified = true;
-        }
-      }
-
-      if (kEnd) {
-        end.reset(kEnd->GetValue());
-        if (constrictEnd && (*end > *constrictEnd)) {
-          kEnd->SetValue(*constrictEnd);
-          modified = true;
-        }
-      }
-
-      if (modified)
-        m_chapterModel->updateRow(item->index());
-    }
+  auto chapter = item->parent() ? m_chapterModel->chapterFromItem(item) : ChapterPtr{};
+  if (!chapter) {
+    for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
+      constrictTimecodes(item->child(row), {}, {});
+  return;
   }
 
+  auto kStart   = &GetChild<KaxChapterTimeStart>(*chapter);
+  auto kEnd     = FindChild<KaxChapterTimeEnd>(*chapter);
+  auto newStart = !constrictStart ? kStart->GetValue()
+                : !constrictEnd   ? std::max(*constrictStart, kStart->GetValue())
+                :                   std::min(*constrictEnd, std::max(*constrictStart, kStart->GetValue()));
+  auto newEnd   = !kEnd           ? boost::optional<uint64_t>{}
+                : !constrictEnd   ? std::max(newStart, kEnd->GetValue())
+                :                   std::max(newStart, std::min(*constrictEnd, kEnd->GetValue()));
+
+  kStart->SetValue(newStart);
+  if (newEnd)
+    GetChild<KaxChapterTimeEnd>(*chapter).SetValue(*newEnd);
+
+  m_chapterModel->updateRow(item->index());
+
   for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
-    constrictTimecodes(item->child(row), start, end);
+    constrictTimecodes(item->child(row), newStart, newEnd);
 }
 
 std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>>
