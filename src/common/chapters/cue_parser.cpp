@@ -261,7 +261,7 @@ add_subchapters_for_index_entries(cue_parser_args_t &a) {
     GetChild<KaxChapterPhysicalEquiv>(*atom).SetValue(CHAPTER_PHYSEQUIV_INDEX);
 
     auto &display = GetChild<KaxChapterDisplay>(*atom);
-    GetChild<KaxChapterString>(display).SetValueUTF8(boost::format("INDEX %|1$02d|") % (i + offset));
+    GetChild<KaxChapterString>(display).SetValueUTF8((boost::format("INDEX %|1$02d|") % (i + offset)).str());
     GetChild<KaxChapterLanguage>(display).SetValue("eng");
   }
 }
