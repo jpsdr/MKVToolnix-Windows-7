@@ -922,6 +922,47 @@ Tab::expandTimecodes(QStandardItem *item) {
 }
 
 void
+Tab::setLanguages(QStandardItem *item,
+                  QString const &language) {
+  if (!item)
+    return;
+
+  auto chapter = m_chapterModel->chapterFromItem(item);
+  if (chapter)
+    for (auto const &element : *chapter) {
+      auto kDisplay = dynamic_cast<KaxChapterDisplay *>(element);
+      if (kDisplay)
+        GetChild<KaxChapterLanguage>(*kDisplay).SetValue(to_utf8(language));
+    }
+
+  for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
+    setLanguages(item->child(row), language);
+}
+
+void
+Tab::setCountries(QStandardItem *item,
+                  QString const &country) {
+  if (!item)
+    return;
+
+  auto chapter = m_chapterModel->chapterFromItem(item);
+  if (chapter)
+    for (auto const &element : *chapter) {
+      auto kDisplay = dynamic_cast<KaxChapterDisplay *>(element);
+      if (!kDisplay)
+        continue;
+
+      if (country.isEmpty())
+        DeleteChildren<KaxChapterCountry>(*kDisplay);
+      else
+        GetChild<KaxChapterCountry>(*kDisplay).SetValue(to_utf8(country));
+    }
+
+  for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
+    setCountries(item->child(row), country);
+}
+
+void
 Tab::massModify() {
   if (!copyControlsToStorage())
     return;
@@ -931,20 +972,26 @@ Tab::massModify() {
   if (!dlg.exec())
     return;
 
-  auto decision = dlg.decision();
-  auto item     = selectedIdx.isValid() ? m_chapterModel->itemFromIndex(selectedIdx) : m_chapterModel->invisibleRootItem();
+  auto actions = dlg.actions();
+  auto item    = selectedIdx.isValid() ? m_chapterModel->itemFromIndex(selectedIdx) : m_chapterModel->invisibleRootItem();
 
-  if (MassModificationDialog::Decision::Sort == decision)
-    item->sortChildren(1);
-
-  else if (MassModificationDialog::Decision::Shift == decision)
+  if (actions & MassModificationDialog::Shift)
     shiftTimecodes(item, dlg.shiftBy());
 
-  else if (MassModificationDialog::Decision::Constrict == decision)
+  if (actions & MassModificationDialog::Constrict)
     constrictTimecodes(item, {}, {});
 
-  else
+  if (actions & MassModificationDialog::Expand)
     expandTimecodes(item);
+
+  if (actions & MassModificationDialog::SetLanguage)
+    setLanguages(item, dlg.language());
+
+  if (actions & MassModificationDialog::SetCountry)
+    setCountries(item, dlg.country());
+
+  if (actions & MassModificationDialog::Sort)
+    item->sortChildren(1);
 
   setControlsFromStorage();
 }

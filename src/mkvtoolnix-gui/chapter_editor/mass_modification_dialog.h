@@ -4,6 +4,7 @@
 #include "common/common_pch.h"
 
 #include <QDialog>
+#include <QFlags>
 
 namespace mtx { namespace gui { namespace ChapterEditor {
 
@@ -14,27 +15,38 @@ class MassModificationDialog;
 class MassModificationDialog : public QDialog {
   Q_OBJECT;
 public:
-  enum class Decision {
+  enum Action {
     Shift,
     Sort,
     Constrict,
     Expand,
+    SetLanguage,
+    SetCountry,
   };
+  Q_DECLARE_FLAGS(Actions, Action);
 
 private:
-  std::unique_ptr<Ui::MassModificationDialog> ui;
+  std::unique_ptr<Ui::MassModificationDialog> m_ui;
+  bool m_editionOrChapterSelected;
 
 public:
   explicit MassModificationDialog(QWidget *parent, bool editionOrChapterSelected);
   ~MassModificationDialog();
 
-  Decision decision() const;
+  Actions actions() const;
   int64_t shiftBy() const;
+  QString language() const;
+  QString country() const;
+
+  void setupUi();
+  void retranslateUi();
 
 public slots:
-  void selectionOrShiftByChanged();
+  void shiftByStateChanged();
 };
 
 }}}
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::ChapterEditor::MassModificationDialog::Actions);
 
 #endif // MTX_MKVTOOLNIX_GUI_CHAPTER_EDITOR_MASS_MODIFICATION__DIALOG_H

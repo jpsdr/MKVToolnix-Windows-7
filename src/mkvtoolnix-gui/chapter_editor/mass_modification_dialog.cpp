@@ -1,6 +1,10 @@
 #include "common/common_pch.h"
 
+#include <QCheckBox>
+#include <QComboBox>
+#include <QLineEdit>
 #include <QPushButton>
+#include <QRadioButton>
 
 #include "common/qt.h"
 #include "common/strings/parsing.h"
@@ -15,56 +19,98 @@ using namespace mtx::gui;
 MassModificationDialog::MassModificationDialog(QWidget *parent,
                                                bool editionOrChapterSelected)
   : QDialog{parent}
-  , ui{new Ui::MassModificationDialog}
+  , m_ui{new Ui::MassModificationDialog}
+  , m_editionOrChapterSelected{editionOrChapterSelected}
 {
-  // Setup UI controls.
-  ui->setupUi(this);
-
-  Util::setToolTip(ui->leShiftBy,
-                   Q("%1 %2")
-                   .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
-                   .arg(QY("Negative values are allowed.")));
-
-  if (editionOrChapterSelected)
-    ui->lTitle->setText(QY("Please select the action to apply to the selected edition or chapter and all of its children."));
-  else
-    ui->lTitle->setText(QY("Please select the action to apply to all editions, chapters and sub-chapters."));
-
-  ui->rbShift->setChecked(true);
-  ui->leShiftBy->setEnabled(true);
-  ui->leShiftBy->setFocus();
-
-  selectionOrShiftByChanged();
+  setupUi();
+  retranslateUi();
 }
 
 MassModificationDialog::~MassModificationDialog() {
 }
 
-MassModificationDialog::Decision
-MassModificationDialog::decision()
+void
+MassModificationDialog::setupUi() {
+  m_ui->setupUi(this);
+
+  Util::setupLanguageComboBox(*m_ui->cbLanguage);
+  Util::setupCountryComboBox(*m_ui->cbCountry, QString{}, true, QY("– set to none –"));
+
+  connect(m_ui->cbShift,           &QCheckBox::toggled,         m_ui->leShiftBy,   &QLineEdit::setEnabled);
+  connect(m_ui->leShiftBy,         &QLineEdit::textChanged,     this,              &MassModificationDialog::shiftByStateChanged);
+  connect(m_ui->cbSetLanguage,     &QCheckBox::toggled,         m_ui->cbLanguage,  &QComboBox::setEnabled);
+  connect(m_ui->cbSetCountry,      &QCheckBox::toggled,         m_ui->cbCountry,   &QComboBox::setEnabled);
+  connect(m_ui->cbConstrictExpand, &QCheckBox::toggled,         m_ui->rbConstrict, &QRadioButton::setEnabled);
+  connect(m_ui->cbConstrictExpand, &QCheckBox::toggled,         m_ui->rbExpand,    &QRadioButton::setEnabled);
+  connect(m_ui->buttonBox,         &QDialogButtonBox::accepted, this,              &MassModificationDialog::accept);
+  connect(m_ui->buttonBox,         &QDialogButtonBox::rejected, this,              &MassModificationDialog::reject);
+
+  m_ui->leShiftBy->setEnabled(false);
+  m_ui->cbLanguage->setEnabled(false);
+  m_ui->cbCountry->setEnabled(false);
+  m_ui->rbConstrict->setEnabled(false);
+  m_ui->rbExpand->setEnabled(false);
+  m_ui->rbConstrict->setChecked(true);
+
+  m_ui->cbShift->setFocus();
+}
+
+void
+MassModificationDialog::retranslateUi() {
+  Util::setToolTip(m_ui->leShiftBy,
+                   Q("%1 %2")
+                   .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
+                   .arg(QY("Negative values are allowed.")));
+
+  if (m_editionOrChapterSelected)
+    m_ui->lTitle->setText(QY("Please select the actions to apply to the selected edition or chapter and all of its children."));
+  else
+    m_ui->lTitle->setText(QY("Please select the actions to apply to all editions, chapters and sub-chapters."));
+}
+
+MassModificationDialog::Actions
+MassModificationDialog::actions()
   const {
-  return ui->rbShift->isChecked()     ? Decision::Shift
-       : ui->rbSort->isChecked()      ? Decision::Sort
-       : ui->rbConstrict->isChecked() ? Decision::Constrict
-       :                                Decision::Expand;
+  auto result = Actions{};
+
+  if (m_ui->cbShift->isChecked())                                             result |= Action::Shift;
+  if (m_ui->cbSort->isChecked())                                              result |= Action::Sort;
+  if (m_ui->cbConstrictExpand->isChecked() && m_ui->rbConstrict->isChecked()) result |= Action::Constrict;
+  if (m_ui->cbConstrictExpand->isChecked() && m_ui->rbExpand->isChecked())    result |= Action::Expand;
+  if (m_ui->cbSetLanguage->isChecked())                                       result |= Action::SetLanguage;
+  if (m_ui->cbSetCountry->isChecked())                                        result |= Action::SetCountry;
+
+  return result;
 }
 
 int64_t
 MassModificationDialog::shiftBy()
   const {
   auto timecode = int64_t{};
-  parse_timecode(to_utf8(ui->leShiftBy->text()), timecode, true);
+  parse_timecode(to_utf8(m_ui->leShiftBy->text()), timecode, true);
   return timecode;
 }
 
-void
-MassModificationDialog::selectionOrShiftByChanged() {
-  auto shifting      = decision() == Decision::Shift;
-  auto timecode      = int64_t{};
-  auto timecodeValid = parse_timecode(to_utf8(ui->leShiftBy->text()), timecode, true);
+QString
+MassModificationDialog::language()
+  const {
+  return m_ui->cbLanguage->currentData().toString();
+}
 
-  ui->leShiftBy->setEnabled(shifting);
-  Util::buttonForRole(ui->buttonBox)->setEnabled(!shifting || timecodeValid);
+QString
+MassModificationDialog::country()
+  const {
+  return m_ui->cbCountry->currentData().toString();
+}
+
+void
+MassModificationDialog::shiftByStateChanged() {
+  auto shifting      = m_ui->cbShift->isChecked();
+  auto timecode      = int64_t{};
+  auto timecodeValid = parse_timecode(to_utf8(m_ui->leShiftBy->text()), timecode, true);
+
+  m_ui->leShiftBy->setEnabled(shifting);
+  Util::buttonForRole(m_ui->buttonBox)->setEnabled(!shifting || timecodeValid);
 }
 
 }}}

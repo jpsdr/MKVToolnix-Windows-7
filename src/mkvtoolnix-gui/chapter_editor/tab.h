@@ -136,6 +136,8 @@ protected:
   void shiftTimecodes(QStandardItem *item, int64_t delta);
   void constrictTimecodes(QStandardItem *item, boost::optional<uint64_t> const &constrictStart, boost::optional<uint64_t> const &constrictEnd);
   std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>> expandTimecodes(QStandardItem *item);
+  void setLanguages(QStandardItem *item, QString const &language);
+  void setCountries(QStandardItem *item, QString const &country);
 
 protected:
   static QString formatEbmlBinary(EbmlBinary *binary);
