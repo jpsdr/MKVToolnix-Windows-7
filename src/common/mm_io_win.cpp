@@ -34,22 +34,6 @@
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
 
-static HANDLE
-create_file_utf8(LPCSTR lpFileName,
-                 DWORD dwDesiredAccess,
-                 DWORD dwShareMode,
-                 LPSECURITY_ATTRIBUTES lpSecurityAttributes,
-                 DWORD dwCreationDisposition,
-                 DWORD dwFlagsAndAttributes,
-                 HANDLE hTemplateFile) {
-  // convert the name to wide chars
-  wchar_t *wbuffer = win32_utf8_to_utf16(lpFileName);
-  HANDLE ret       = CreateFileW(wbuffer, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
-  delete []wbuffer;
-
-  return ret;
-}
-
 mm_file_io_c::mm_file_io_c(const std::string &path,
                            const open_mode mode)
   : m_file_name(path)
@@ -86,7 +70,8 @@ mm_file_io_c::mm_file_io_c(const std::string &path,
   if ((MODE_WRITE == mode) || (MODE_CREATE == mode))
     prepare_path(path);
 
-  m_file = (void *)create_file_utf8(path.c_str(), access_mode, share_mode, nullptr, disposition, 0, nullptr);
+  auto w_path = to_wide(path);
+  m_file      = static_cast<void *>(CreateFileW(w_path.c_str(), access_mode, share_mode, nullptr, disposition, 0, nullptr));
   if (static_cast<HANDLE>(m_file) == INVALID_HANDLE_VALUE)
     throw mtx::mm_io::open_x{mtx::mm_io::make_error_code()};
 

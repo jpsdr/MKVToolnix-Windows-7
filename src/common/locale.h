@@ -88,11 +88,6 @@ private:                        // Static functions
   static std::string convert(unsigned int source_code_page, unsigned int destination_code_page, const std::string &source);
   static unsigned int extract_code_page(const std::string &charset);
 };
-
-unsigned Utf8ToUtf16(const char *utf8, int utf8len, wchar_t *utf16, unsigned utf16len);
-char * win32_wide_to_multi(const wchar_t *wbuffer);
-wchar_t * win32_utf8_to_utf16(const char *s);
-std::string win32_wide_to_multi_utf8(const wchar_t *wbuffer);
 #endif
 
 extern charset_converter_cptr g_cc_local_utf8;

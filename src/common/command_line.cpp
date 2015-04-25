@@ -24,6 +24,7 @@
 #include "common/mm_io_x.h"
 #include "common/mm_write_buffer_io.h"
 #include "common/strings/editing.h"
+#include "common/strings/utf8.h"
 #include "common/translation.h"
 #include "common/version.h"
 
@@ -149,9 +150,9 @@ command_line_utf8(int,
 
   int i;
   for (i = 1; i < num_args; i++) {
-    std::string arg = win32_wide_to_multi_utf8(arg_list[i]);
+    auto arg = to_utf8(std::wstring{arg_list[i]});
 
-    if (arg[0] == L'@')
+    if (arg[0] == '@')
       read_args_from_file(args, arg.substr(1));
 
     else
