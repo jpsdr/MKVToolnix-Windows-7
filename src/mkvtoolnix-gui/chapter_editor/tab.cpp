@@ -886,56 +886,48 @@ Tab::constrictTimecodes(QStandardItem *item,
     constrictTimecodes(item->child(row), start, end);
 }
 
-template<typename T>
-boost::optional<T>
-opt_min(boost::optional<T> const &a,
-        boost::optional<T> const &b) {
-  return !a ? b
-       : !b ? a
-       :      std::min(*a, *b);
-}
-
-template<typename T>
-boost::optional<T>
-opt_max(boost::optional<T> const &a,
-        boost::optional<T> const &b) {
-  return !a ? b
-       : !b ? a
-       :      std::max(*a, *b);
-}
-
 std::pair<boost::optional<uint64_t>, boost::optional<uint64_t>>
 Tab::expandTimecodes(QStandardItem *item) {
   if (!item)
     return {};
 
-  auto chapter  = m_chapterModel->chapterFromItem(item);
+  auto chapter = m_chapterModel->chapterFromItem(item);
+  if (!chapter) {
+    for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
+      expandTimecodes(item->child(row));
+    return {};
+  }
+
   auto kStart   = chapter ? FindChild<KaxChapterTimeStart>(*chapter)      : nullptr;
   auto kEnd     = chapter ? FindChild<KaxChapterTimeEnd>(*chapter)        : nullptr;
-  auto start    = kStart  ? boost::optional<uint64_t>{kStart->GetValue()} : boost::optional<uint64_t>{};
-  auto end      = kEnd    ? boost::optional<uint64_t>{kEnd->GetValue()}   : boost::optional<uint64_t>{};
+  auto newStart = kStart  ? boost::optional<uint64_t>{kStart->GetValue()} : boost::optional<uint64_t>{};
+  auto newEnd   = kEnd    ? boost::optional<uint64_t>{kEnd->GetValue()}   : boost::optional<uint64_t>{};
   auto modified = false;
 
   for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row) {
     auto startAndEnd = expandTimecodes(item->child(row));
-    start            = opt_min(start, startAndEnd.first);
-    end              = opt_max(end,   startAndEnd.second);
 
-    if (kStart && startAndEnd.first && (kStart->GetValue() > *startAndEnd.first)) {
-      kStart->SetValue(*startAndEnd.first);
-      modified = true;
-    }
+    if (!newStart || (startAndEnd.first && (*startAndEnd.first < *newStart)))
+      newStart = startAndEnd.first;
 
-    if (kEnd && startAndEnd.second && (kEnd->GetValue() < *startAndEnd.second)) {
-      kEnd->SetValue(*startAndEnd.second);
-      modified = true;
-    }
-
-    if (modified)
-      m_chapterModel->updateRow(item->index());
+    if (!newEnd || (startAndEnd.second && (*startAndEnd.second > *newEnd)))
+      newEnd = startAndEnd.second;
   }
 
-  return std::make_pair(start, end);
+  if (newStart && (!kStart || (kStart->GetValue() > *newStart))) {
+    GetChild<KaxChapterTimeStart>(*chapter).SetValue(*newStart);
+    modified = true;
+  }
+
+  if (newEnd && (!kEnd || (kEnd->GetValue() < *newEnd))) {
+    GetChild<KaxChapterTimeEnd>(*chapter).SetValue(*newEnd);
+    modified = true;
+  }
+
+  if (modified)
+    m_chapterModel->updateRow(item->index());
+
+  return std::make_pair(newStart, newEnd);
 }
 
 void
