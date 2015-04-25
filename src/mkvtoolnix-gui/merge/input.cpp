@@ -27,7 +27,7 @@ using namespace mtx::gui;
 
 void
 Tab::setupControlLists() {
-  m_typeIndependantControls << ui->muxThisLabel << ui->muxThis << ui->miscellaneousBox << ui->userDefinedTrackOptionsLabel << ui->userDefinedTrackOptions;
+  m_typeIndependantControls << ui->muxThisLabel << ui->muxThis << ui->miscellaneousBox << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions;
 
   m_audioControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag << ui->forcedTrackFlagLabel << ui->forcedTrackFlag
                   << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
@@ -54,7 +54,7 @@ Tab::setupControlLists() {
                      << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timecodesLabel << ui->timecodes << ui->browseTimecodes
                      << ui->picturePropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
                      << ui->stereoscopy << ui->croppingLabel << ui->cropping << ui->audioPropertiesBox << ui->aacIsSBR << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet
-                     << ui->miscellaneousBox << ui->cuesLabel << ui->cues << ui->userDefinedTrackOptionsLabel << ui->userDefinedTrackOptions
+                     << ui->miscellaneousBox << ui->cuesLabel << ui->cues << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions
                      << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore << ui->naluSizeLengthLabel << ui->naluSizeLength;
 
   m_comboBoxControls << ui->muxThis << ui->trackLanguage << ui->defaultTrackFlag << ui->forcedTrackFlag << ui->compression << ui->cues << ui->stereoscopy << ui->naluSizeLength << ui->aacIsSBR << ui->subtitleCharacterSet;
@@ -197,7 +197,7 @@ Tab::clearInputControlValues() {
   for (auto comboBox : m_comboBoxControls)
     comboBox->setCurrentIndex(0);
 
-  for (auto control : std::vector<QLineEdit *>{ui->trackName, ui->trackTags, ui->delay, ui->stretchBy, ui->timecodes, ui->displayWidth, ui->displayHeight, ui->cropping, ui->userDefinedTrackOptions})
+  for (auto control : std::vector<QLineEdit *>{ui->trackName, ui->trackTags, ui->delay, ui->stretchBy, ui->timecodes, ui->displayWidth, ui->displayHeight, ui->cropping, ui->additionalTrackOptions})
     control->setText(Q(""));
 
   ui->defaultDuration->setEditText(Q(""));
@@ -239,7 +239,7 @@ Tab::setInputControlValues(Track *track) {
   ui->displayWidth->setText(             track->m_displayWidth);
   ui->displayHeight->setText(            track->m_displayHeight);
   ui->cropping->setText(                 track->m_cropping);
-  ui->userDefinedTrackOptions->setText(  track->m_userDefinedOptions);
+  ui->additionalTrackOptions->setText(   track->m_additionalOptions);
   ui->defaultDuration->setEditText(      track->m_defaultDuration);
   ui->aspectRatio->setEditText(          track->m_aspectRatio);
 
@@ -501,8 +501,8 @@ Tab::onCuesChanged(int newValue) {
 }
 
 void
-Tab::onUserDefinedTrackOptionsEdited(QString newValue) {
-  withSelectedTracks([&](Track *track) { track->m_userDefinedOptions = newValue; }, true);
+Tab::onAdditionalTrackOptionsEdited(QString newValue) {
+  withSelectedTracks([&](Track *track) { track->m_additionalOptions = newValue; }, true);
 }
 
 void

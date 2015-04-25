@@ -327,7 +327,7 @@
                       </property>
                       <property name="icon">
                        <iconset resource="../../qt_resources.qrc">
-                        <normaloff>:/icons/16x16/code-class.png</normaloff>:/icons/16x16/code-class.png</iconset>
+                        <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
                       </property>
                      </widget>
                     </item>
@@ -457,7 +457,7 @@
                         </property>
                         <property name="icon">
                          <iconset resource="../../qt_resources.qrc">
-                          <normaloff>:/icons/16x16/code-class.png</normaloff>:/icons/16x16/code-class.png</iconset>
+                          <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -720,14 +720,14 @@
                    </widget>
                   </item>
                   <item row="1" column="0">
-                   <widget class="QLabel" name="userDefinedTrackOptionsLabel">
+                   <widget class="QLabel" name="additionalTrackOptionsLabel">
                     <property name="text">
-                     <string>Custom options:</string>
+                     <string>Additional options:</string>
                     </property>
                    </widget>
                   </item>
                   <item row="1" column="1">
-                   <widget class="QLineEdit" name="userDefinedTrackOptions"/>
+                   <widget class="QLineEdit" name="additionalTrackOptions"/>
                   </item>
                  </layout>
                 </widget>
@@ -779,7 +779,7 @@
               <item row="0" column="0">
                <widget class="QLabel" name="titleLael">
                 <property name="text">
-                 <string>File &amp;title:</string>
+                 <string>Fi&amp;le title:</string>
                 </property>
                 <property name="buddy">
                  <cstring>title</cstring>
@@ -808,7 +808,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../qt_resources.qrc">
-                    <normaloff>:/icons/16x16/code-class.png</normaloff>:/icons/16x16/code-class.png</iconset>
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -833,7 +833,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../qt_resources.qrc">
-                    <normaloff>:/icons/16x16/code-class.png</normaloff>:/icons/16x16/code-class.png</iconset>
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -858,7 +858,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../qt_resources.qrc">
-                    <normaloff>:/icons/16x16/code-class.png</normaloff>:/icons/16x16/code-class.png</iconset>
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1055,7 +1055,7 @@
                   </property>
                   <property name="icon">
                    <iconset resource="../../qt_resources.qrc">
-                    <normaloff>:/icons/16x16/code-class.png</normaloff>:/icons/16x16/code-class.png</iconset>
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1110,19 +1110,23 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_10">
                 <item>
-                 <widget class="QLabel" name="userDefinedOptionsLabel">
+                 <widget class="QLabel" name="additionalOptionsLabel">
                   <property name="text">
-                   <string>Custom options:</string>
+                   <string>Additional options:</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="userDefinedOptions"/>
+                 <widget class="QLineEdit" name="additionalOptions"/>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="editUserDefinedOptions">
+                 <widget class="QPushButton" name="editAdditionalOptions">
                   <property name="text">
-                   <string>Edit</string>
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/view-choose.png</normaloff>:/icons/16x16/view-choose.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1376,7 +1380,7 @@
   <tabstop>reduceToAudioCore</tabstop>
   <tabstop>subtitleCharacterSet</tabstop>
   <tabstop>cues</tabstop>
-  <tabstop>userDefinedTrackOptions</tabstop>
+  <tabstop>additionalTrackOptions</tabstop>
   <tabstop>title</tabstop>
   <tabstop>output</tabstop>
   <tabstop>browseOutput</tabstop>
@@ -1397,8 +1401,8 @@
   <tabstop>chapterCharacterSet</tabstop>
   <tabstop>chapterCueNameFormat</tabstop>
   <tabstop>webmMode</tabstop>
-  <tabstop>userDefinedOptions</tabstop>
-  <tabstop>editUserDefinedOptions</tabstop>
+  <tabstop>additionalOptions</tabstop>
+  <tabstop>editAdditionalOptions</tabstop>
   <tabstop>attachments</tabstop>
   <tabstop>attachmentNameLabel</tabstop>
   <tabstop>attachmentName</tabstop>
@@ -1850,7 +1854,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>userDefinedTrackOptions</sender>
+   <sender>additionalTrackOptions</sender>
    <signal>textEdited(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
    <slot>onUserDefinedTrackOptionsEdited(QString)</slot>
@@ -2170,7 +2174,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>userDefinedOptions</sender>
+   <sender>additionalOptions</sender>
    <signal>textEdited(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
    <slot>onUserDefinedOptionsEdited(QString)</slot>
@@ -2186,7 +2190,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>editUserDefinedOptions</sender>
+   <sender>editAdditionalOptions</sender>
    <signal>clicked()</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
    <slot>onEditUserDefinedOptions()</slot>

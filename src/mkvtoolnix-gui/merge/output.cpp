@@ -255,12 +255,12 @@ Tab::onWebmClicked(bool newValue) {
 }
 
 void
-Tab::onUserDefinedOptionsEdited(QString newValue) {
-  m_config.m_userDefinedOptions = newValue;
+Tab::onAdditionalOptionsEdited(QString newValue) {
+  m_config.m_additionalOptions = newValue;
 }
 
 void
-Tab::onEditUserDefinedOptions() {
+Tab::onEditAdditionalOptions() {
   // TODO
 }
 
@@ -279,7 +279,7 @@ Tab::setOutputControlValues() {
   ui->nextSegmentUID->setText(m_config.m_nextSegmentUID);
   ui->chapters->setText(m_config.m_chapters);
   ui->chapterCueNameFormat->setText(m_config.m_chapterCueNameFormat);
-  ui->userDefinedOptions->setText(m_config.m_userDefinedOptions);
+  ui->additionalOptions->setText(m_config.m_additionalOptions);
   ui->webmMode->setChecked(m_config.m_webmMode);
 
   Util::setComboBoxTextByData(ui->chapterLanguage,     m_config.m_chapterLanguage);

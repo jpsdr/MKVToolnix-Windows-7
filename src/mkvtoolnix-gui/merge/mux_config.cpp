@@ -101,7 +101,7 @@ MuxConfig::operator =(MuxConfig const &other) {
   m_chapterLanguage      = other.m_chapterLanguage;
   m_chapterCharacterSet  = other.m_chapterCharacterSet;
   m_chapterCueNameFormat = other.m_chapterCueNameFormat;
-  m_userDefinedOptions   = other.m_userDefinedOptions;
+  m_additionalOptions    = other.m_additionalOptions;
   m_splitMode            = other.m_splitMode;
   m_splitMaxFiles        = other.m_splitMaxFiles;
   m_linkFiles            = other.m_linkFiles;
@@ -206,7 +206,7 @@ MuxConfig::load(QSettings &settings) {
   m_chapterLanguage      = settings.value("chapterLanguage").toString();
   m_chapterCharacterSet  = settings.value("chapterCharacterSet").toString();
   m_chapterCueNameFormat = settings.value("chapterCueNameFormat").toString();
-  m_userDefinedOptions   = settings.value("userDefinedOptions").toString();
+  m_additionalOptions    = settings.value("additionalOptions").toString();
   m_splitMode            = static_cast<SplitMode>(settings.value("splitMode").toInt());
   m_splitMaxFiles        = settings.value("splitMaxFiles").toInt();
   m_linkFiles            = settings.value("linkFiles").toBool();
@@ -250,7 +250,7 @@ MuxConfig::save(QSettings &settings)
   settings.setValue("chapterLanguage",      m_chapterLanguage);
   settings.setValue("chapterCharacterSet",  m_chapterCharacterSet);
   settings.setValue("chapterCueNameFormat", m_chapterCueNameFormat);
-  settings.setValue("userDefinedOptions",   m_userDefinedOptions);
+  settings.setValue("additionalOptions",    m_additionalOptions);
   settings.setValue("splitMode",            m_splitMode);
   settings.setValue("splitMaxFiles",        m_splitMaxFiles);
   settings.setValue("linkFiles",            m_linkFiles);
@@ -387,9 +387,9 @@ MuxConfig::buildMkvmergeOptions()
 
   add(Q("--global-tags"), m_globalTags);
 
-  auto userDefinedOptions = Q(strip_copy(to_utf8(m_userDefinedOptions)));
-  if (!userDefinedOptions.isEmpty())
-    options += userDefinedOptions.split(QRegExp{" +"});
+  auto additionalOptions = Q(strip_copy(to_utf8(m_additionalOptions)));
+  if (!additionalOptions.isEmpty())
+    options += additionalOptions.split(QRegExp{" +"});
 
   auto fileNumbers  = buildFileNumbers();
   options          += buildTrackOrder(fileNumbers);

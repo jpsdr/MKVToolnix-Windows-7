@@ -68,7 +68,7 @@ public:
   QList<AttachmentPtr> m_attachments;
 
   QString m_title, m_destination, m_globalTags, m_segmentInfo, m_splitOptions;
-  QString m_segmentUIDs, m_previousSegmentUID, m_nextSegmentUID, m_chapters, m_chapterLanguage, m_chapterCharacterSet, m_chapterCueNameFormat, m_userDefinedOptions;
+  QString m_segmentUIDs, m_previousSegmentUID, m_nextSegmentUID, m_chapters, m_chapterLanguage, m_chapterCharacterSet, m_chapterCueNameFormat, m_additionalOptions;
   SplitMode m_splitMode;
   unsigned int m_splitMaxFiles;
   bool m_linkFiles, m_webmMode, m_titleWasPresent;

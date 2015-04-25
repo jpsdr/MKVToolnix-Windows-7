@@ -183,7 +183,7 @@ Track::saveSettings(QSettings &settings)
   settings.setValue("displayHeight",          m_displayHeight);
   settings.setValue("cropping",               m_cropping);
   settings.setValue("characterSet",           m_characterSet);
-  settings.setValue("userDefinedOptions",     m_userDefinedOptions);
+  settings.setValue("additionalOptions",      m_additionalOptions);
   settings.setValue("defaultTrackFlag",       m_defaultTrackFlag);
   settings.setValue("forcedTrackFlag",        m_forcedTrackFlag);
   settings.setValue("stereoscopy",            m_stereoscopy);
@@ -227,7 +227,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_displayHeight             = l.settings.value("displayHeight").toString();
   m_cropping                  = l.settings.value("cropping").toString();
   m_characterSet              = l.settings.value("characterSet").toString();
-  m_userDefinedOptions        = l.settings.value("userDefinedOptions").toString();
+  m_additionalOptions         = l.settings.value("additionalOptions").toString();
   m_defaultTrackFlag          = l.settings.value("defaultTrackFlag").toInt();
   m_forcedTrackFlag           = l.settings.value("forcedTrackFlag").toInt();
   m_stereoscopy               = l.settings.value("stereoscopy").toInt();
@@ -362,9 +362,9 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
   if (m_fixBitstreamTimingInfo)
     opt.options << Q("--fix-bitstream-timing-info") << Q("%1:1").arg(sid);
 
-  auto userDefinedOptions = Q(strip_copy(to_utf8(m_userDefinedOptions)));
-  if (!userDefinedOptions.isEmpty())
-    opt.options += userDefinedOptions.split(QRegExp{" +"});
+  auto additionalOptions = Q(strip_copy(to_utf8(m_additionalOptions)));
+  if (!additionalOptions.isEmpty())
+    opt.options += additionalOptions.split(QRegExp{" +"});
 }
 
 QString

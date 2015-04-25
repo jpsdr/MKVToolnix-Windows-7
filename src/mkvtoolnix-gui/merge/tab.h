@@ -100,7 +100,7 @@ public slots:
   virtual void onReduceAudioToCoreChanged(bool newValue);
   virtual void onSubtitleCharacterSetChanged(int newValue);
   virtual void onCuesChanged(int newValue);
-  virtual void onUserDefinedTrackOptionsEdited(QString newValue);
+  virtual void onAdditionalTrackOptionsEdited(QString newValue);
 
   virtual void resizeFilesColumnsToContents() const;
   virtual void resizeTracksColumnsToContents() const;
@@ -132,8 +132,8 @@ public slots:
   virtual void onChapterCharacterSetChanged(QString newValue);
   virtual void onChapterCueNameFormatChanged(QString newValue);
   virtual void onWebmClicked(bool newValue);
-  virtual void onUserDefinedOptionsEdited(QString newValue);
-  virtual void onEditUserDefinedOptions();
+  virtual void onAdditionalOptionsEdited(QString newValue);
+  virtual void onEditAdditionalOptions();
 
   // Attachments tab:
   virtual void onAttachmentSelectionChanged();

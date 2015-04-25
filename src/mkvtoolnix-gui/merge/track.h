@@ -51,7 +51,7 @@ public:
   int64_t m_id;
 
   bool m_muxThis, m_setAspectRatio, m_defaultTrackFlagWasSet, m_forcedTrackFlagWasSet, m_aacSbrWasDetected, m_nameWasPresent, m_fixBitstreamTimingInfo, m_reduceAudioToCore;
-  QString m_name, m_codec, m_language, m_tags, m_delay, m_stretchBy, m_defaultDuration, m_timecodes, m_aspectRatio, m_displayWidth, m_displayHeight, m_cropping, m_characterSet, m_userDefinedOptions;
+  QString m_name, m_codec, m_language, m_tags, m_delay, m_stretchBy, m_defaultDuration, m_timecodes, m_aspectRatio, m_displayWidth, m_displayHeight, m_cropping, m_characterSet, m_additionalOptions;
   unsigned int m_defaultTrackFlag, m_forcedTrackFlag, m_stereoscopy, m_naluSizeLength, m_cues, m_aacIsSBR;
   Compression m_compression;
 
