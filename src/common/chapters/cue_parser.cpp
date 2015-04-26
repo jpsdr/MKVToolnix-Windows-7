@@ -24,7 +24,6 @@
 #include "common/ebml.h"
 #include "common/error.h"
 #include "common/locale.h"
-#include "common/make_unique.h"
 #include "common/mm_io.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"

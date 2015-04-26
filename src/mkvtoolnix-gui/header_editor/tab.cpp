@@ -7,7 +7,6 @@
 #include <matroska/KaxSemantic.h>
 
 #include "common/ebml.h"
-#include "common/make_unique.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"
 #include "common/segment_tracks.h"

@@ -4,7 +4,6 @@
 #include <QProcess>
 
 #include "common/fs_sys_helpers.h"
-#include "common/make_unique.h"
 #if defined(HAVE_CURL_EASY_H)
 # include "common/version.h"
 #endif  // HAVE_CURL_EASY_H
