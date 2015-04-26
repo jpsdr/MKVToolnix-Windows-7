@@ -3,6 +3,7 @@
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
+#include "common/make_unique.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/settings.h"

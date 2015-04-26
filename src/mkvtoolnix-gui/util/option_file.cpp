@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QTemporaryFile>
 
+#include "common/make_unique.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/util.h"

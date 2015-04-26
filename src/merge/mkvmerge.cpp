@@ -47,6 +47,7 @@
 #include "common/file_types.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
+#include "common/make_unique.h"
 #include "common/mm_io.h"
 #include "common/segmentinfo.h"
 #include "common/split_arg_parsing.h"

@@ -7,6 +7,7 @@
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
+#include "common/make_unique.h"
 #include "common/qt.h"
 #include "common/translation.h"
 #include "common/unique_numbers.h"

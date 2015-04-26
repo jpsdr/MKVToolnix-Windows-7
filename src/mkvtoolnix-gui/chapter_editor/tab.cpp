@@ -11,6 +11,7 @@
 #include "common/bitvalue.h"
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
+#include "common/make_unique.h"
 #include "common/mm_io_x.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"
