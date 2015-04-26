@@ -17,7 +17,6 @@
 #include "common/checksums/adler32.h"
 #include "common/checksums/crc.h"
 #include "common/checksums/md5.h"
-#include "common/make_unique.h"
 
 namespace mtx { namespace checksum {
 
