@@ -2,6 +2,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -261,7 +262,18 @@ Tab::onAdditionalOptionsEdited(QString newValue) {
 
 void
 Tab::onEditAdditionalOptions() {
-  // TODO
+  AdditionalCommandLineOptionsDialog dlg{this, m_config.m_additionalOptions};
+  if (!dlg.exec())
+    return;
+
+  m_config.m_additionalOptions = dlg.additionalOptions();
+  ui->additionalOptions->setText(m_config.m_additionalOptions);
+
+  if (dlg.saveAsDefault()) {
+    auto &settings = Util::Settings::get();
+    settings.m_defaultAdditionalMergeOptions = m_config.m_additionalOptions;
+    settings.save();
+  }
 }
 
 void

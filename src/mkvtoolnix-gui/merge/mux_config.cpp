@@ -73,6 +73,8 @@ MuxConfig::MuxConfig(QString const &fileName)
   , m_webmMode{false}
   , m_titleWasPresent{}
 {
+  auto &settings      = Util::Settings::get();
+  m_additionalOptions = settings.m_defaultAdditionalMergeOptions;
 }
 
 MuxConfig::~MuxConfig() {
