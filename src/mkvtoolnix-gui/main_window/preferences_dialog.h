@@ -32,6 +32,7 @@ public:
   bool uiLocaleChanged() const;
 
 public slots:
+  void editDefaultAdditionalCommandLineOptions();
   void enableOutputFileNameControls();
   void browseFixedOutputDirectory();
 

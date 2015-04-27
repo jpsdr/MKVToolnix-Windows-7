@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
+#include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui {
@@ -33,6 +34,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
   Util::setupLanguageComboBox(*ui->cbMDefaultTrackLanguage, m_cfg.m_defaultTrackLanguage);
   Util::setupCharacterSetComboBox(*ui->cbMDefaultSubtitleCharset, m_cfg.m_defaultSubtitleCharset);
+  ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
 
   setupProcessPriority();
   setupPlaylistScanningPolicy();
@@ -99,6 +101,8 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."));
 
+  Util::setToolTip(ui->leMDefaultAdditionalCommandLineOptions, QY("The options entered here are set for all new merge jobs by default."));
+
   Util::setToolTip(ui->cbMScanPlaylistsPolicy,
                    Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QY("Whenever the user adds a play list the program can automatically scan the directory for other play lists and present the user with a detailed list of the play lists found."))
@@ -131,6 +135,8 @@ PreferencesDialog::setupToolTips() {
 
 void
 PreferencesDialog::setupConnections() {
+  connect(ui->pbMEditDefaultAdditionalCommandLineOptions,          &QPushButton::clicked,                  this,                      &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
+
   connect(ui->lwGuiAvailableCommonLanguages->selectionModel(),     &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::availableCommonLanguagesSelectionChanged);
   connect(ui->lwGuiSelectedCommonLanguages->selectionModel(),      &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::selectedCommonLanguagesSelectionChanged);
   connect(ui->lwGuiAvailableCommonCountries->selectionModel(),     &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::availableCommonCountriesSelectionChanged);
@@ -313,26 +319,27 @@ PreferencesDialog::save() {
   saveCommonList(*ui->lwGuiSelectedCommonCharacterSets, m_cfg.m_oftenUsedCharacterSets);
 
   // Merge page:
-  m_cfg.m_autoSetFileTitle          = ui->cbMAutoSetFileTitle->isChecked();
-  m_cfg.m_setAudioDelayFromFileName = ui->cbMSetAudioDelayFromFileName->isChecked();
-  m_cfg.m_defaultTrackLanguage      = ui->cbMDefaultTrackLanguage->currentData().toString();
-  m_cfg.m_defaultSubtitleCharset    = ui->cbMDefaultSubtitleCharset->currentData().toString();
-  m_cfg.m_priority                  = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
+  m_cfg.m_autoSetFileTitle              = ui->cbMAutoSetFileTitle->isChecked();
+  m_cfg.m_setAudioDelayFromFileName     = ui->cbMSetAudioDelayFromFileName->isChecked();
+  m_cfg.m_defaultTrackLanguage          = ui->cbMDefaultTrackLanguage->currentData().toString();
+  m_cfg.m_defaultSubtitleCharset        = ui->cbMDefaultSubtitleCharset->currentData().toString();
+  m_cfg.m_priority                      = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
+  m_cfg.m_defaultAdditionalMergeOptions = ui->leMDefaultAdditionalCommandLineOptions->text();
 
-  m_cfg.m_scanForPlaylistsPolicy    = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
-  m_cfg.m_minimumPlaylistDuration   = ui->sbMMinPlaylistDuration->value();
+  m_cfg.m_scanForPlaylistsPolicy        = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
+  m_cfg.m_minimumPlaylistDuration       = ui->sbMMinPlaylistDuration->value();
 
-  m_cfg.m_outputFileNamePolicy      = !ui->cbMAutoSetOutputFileName->isChecked()   ? Util::Settings::DontSetOutputFileName
-                                    : ui->rbMAutoSetParentDirectory->isChecked()   ? Util::Settings::ToParentOfFirstInputFile
-                                    : ui->rbMAutoSetFixedDirectory->isChecked()    ? Util::Settings::ToFixedDirectory
-                                    : ui->rbMAutoSetPreviousDirectory->isChecked() ? Util::Settings::ToPreviousDirectory
-                                    :                                                Util::Settings::ToSameAsFirstInputFile;
-  m_cfg.m_fixedOutputDir            = ui->leMAutoSetFixedDirectory->text();
-  m_cfg.m_uniqueOutputFileNames     = ui->cbMUniqueOutputFileNames->isChecked();
+  m_cfg.m_outputFileNamePolicy          = !ui->cbMAutoSetOutputFileName->isChecked()   ? Util::Settings::DontSetOutputFileName
+                                        : ui->rbMAutoSetParentDirectory->isChecked()   ? Util::Settings::ToParentOfFirstInputFile
+                                        : ui->rbMAutoSetFixedDirectory->isChecked()    ? Util::Settings::ToFixedDirectory
+                                        : ui->rbMAutoSetPreviousDirectory->isChecked() ? Util::Settings::ToPreviousDirectory
+                                        :                                                Util::Settings::ToSameAsFirstInputFile;
+  m_cfg.m_fixedOutputDir                = ui->leMAutoSetFixedDirectory->text();
+  m_cfg.m_uniqueOutputFileNames         = ui->cbMUniqueOutputFileNames->isChecked();
 
   // Chapter editor page:
-  m_cfg.m_defaultChapterLanguage    = ui->cbCEDefaultLanguage->currentData().toString();
-  m_cfg.m_defaultChapterCountry     = ui->cbCEDefaultCountry->currentData().toString();
+  m_cfg.m_defaultChapterLanguage        = ui->cbCEDefaultLanguage->currentData().toString();
+  m_cfg.m_defaultChapterCountry         = ui->cbCEDefaultCountry->currentData().toString();
 
   m_cfg.save();
 }
@@ -436,6 +443,14 @@ PreferencesDialog::addCommonCharacterSets() {
 void
 PreferencesDialog::removeCommonCharacterSets() {
   moveSelectedListWidgetItems(*ui->lwGuiSelectedCommonCharacterSets, *ui->lwGuiAvailableCommonCharacterSets);
+}
+
+void
+PreferencesDialog::editDefaultAdditionalCommandLineOptions() {
+  Merge::AdditionalCommandLineOptionsDialog dlg{this, ui->leMDefaultAdditionalCommandLineOptions->text()};
+  dlg.hideSaveAsDefaultCheckbox();
+  if (dlg.exec())
+    ui->leMDefaultAdditionalCommandLineOptions->setText(dlg.additionalOptions());
 }
 
 }}
