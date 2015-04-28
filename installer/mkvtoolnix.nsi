@@ -88,6 +88,7 @@ Page custom showExternalLinks
 !insertmacro LANG_LOAD "SimpChinese"
 !insertmacro LANG_LOAD "Swedish"
 !insertmacro LANG_LOAD "TradChinese"
+!insertmacro LANG_LOAD "Turkish"
 !insertmacro LANG_LOAD "Ukrainian"
 !define MUI_LANGDLL_ALLLANGUAGES
 
