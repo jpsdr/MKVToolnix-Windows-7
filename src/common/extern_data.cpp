@@ -2711,13 +2711,15 @@ guess_mime_type_internal(std::string ext,
     return ret;
   }
 }
+
 #else  // HAVE_MAGIC_H
+
 static std::string
 guess_mime_type_internal(std::string ext,
                          bool) {
   return guess_mime_type_by_ext(ext);
-#endif  // HAVE_MAGIC_H
 }
+#endif  // HAVE_MAGIC_H
 
 std::string
 guess_mime_type(std::string ext,
