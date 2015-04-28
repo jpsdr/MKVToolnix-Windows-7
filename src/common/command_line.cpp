@@ -299,7 +299,7 @@ handle_common_cli_args(std::vector<std::string> &args,
         mxerror(boost::format(Y("The update information could not be retrieved from %1%.\n")) % MTX_VERSION_CHECK_URL);
 
       std::vector<std::string> keys;
-      brng::push_back(keys, rel.urls | badap::map_keys | badap::filtered([](std::string const &key) { return key != "general"; }));
+      brng::push_back(keys, rel.urls | badap::map_keys | badap::filtered(+[](std::string const &key) { return key != "general"; }));
       brng::sort(keys);
 
       std::string urls;

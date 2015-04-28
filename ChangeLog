@@ -1,7 +1,11 @@
 2015-04-28  Moritz Bunkus  <moritz@bunkus.org>
 
-        * all: fix compilation on MacOS in version.cpp due to wrong usage
-        of std::stringstream and ostream operators. Fixes #1176.
+        * all: fix compilation on Mac OS in common/command_line.cpp due to
+        boost::range::filtered requiring a copyable functor. Fixes #1175.
+
+        * all: fix compilation on Mac OS in common/version.cpp due to
+        wrong usage of std::stringstream and ostream operators. Fixes
+        #1176.
 
 2015-04-27  Moritz Bunkus  <moritz@bunkus.org>
 
