@@ -31,7 +31,7 @@ ask_scan_for_playlists_dlg::ask_scan_for_playlists_dlg(wxWindow *parent,
                                       "The directory it is located in contains %1% other files with the same extension.",
                                       num_other_files))
                      % num_other_files)
-                  % Y("mmg can scan these files, present the results including duration and number of tracks of each playlist found and let you chose which one to add."));
+                  % Y("mmg can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."));
 	auto st_question = new wxStaticText(this, wxID_ANY, text);
 	st_question->Wrap(480);
 

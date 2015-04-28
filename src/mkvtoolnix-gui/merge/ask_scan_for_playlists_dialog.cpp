@@ -46,7 +46,7 @@ AskScanForPlaylistsDialog::ask(SourceFile const &file,
     QNY("The directory it is located in contains %1 other file with the same extension.",
         "The directory it is located in contains %1 other files with the same extension.",
         numOtherFiles).arg(numOtherFiles),
-    QY("The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you chose which one to add."),
+    QY("The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."),
   };
 
   auto minimumDuration = Util::Settings::get().m_minimumPlaylistDuration;
