@@ -2667,10 +2667,10 @@ guess_mime_type_by_content(magic_t &m,
 }
 #endif  // HAVE_MAGIC_H
 
+#if HAVE_MAGIC_H
 static std::string
 guess_mime_type_internal(std::string ext,
                          bool is_file) {
-#if HAVE_MAGIC_H
   std::string ret;
   magic_t m;
 
@@ -2710,7 +2710,11 @@ guess_mime_type_internal(std::string ext,
 
     return ret;
   }
+}
 #else  // HAVE_MAGIC_H
+static std::string
+guess_mime_type_internal(std::string ext,
+                         bool) {
   return guess_mime_type_by_ext(ext);
 #endif  // HAVE_MAGIC_H
 }
