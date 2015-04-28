@@ -28,15 +28,6 @@ if test x"$EBML_MATROSKA_INTERNAL" = xyes; then
     echo '*** git submodule update'
     exit 1
   fi
-
-  EBML_CFLAGS="-Ilib/libebml"
-  EBML_LIBS="-Llib/libebml/src -lebml"
-  MATROSKA_CFLAGS="-Ilib/libmatroska"
-  MATROSKA_LIBS="-Llib/libmatroska/src -lmatroska"
 fi
 
-AC_SUBST(EBML_CFLAGS)
-AC_SUBST(EBML_LIBS)
-AC_SUBST(MATROSKA_CFLAGS)
-AC_SUBST(MATROSKA_LIBS)
 AC_SUBST(EBML_MATROSKA_INTERNAL)

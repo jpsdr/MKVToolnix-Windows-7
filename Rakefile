@@ -106,17 +106,22 @@ def setup_globals
 
   cflags_common            = "-Wall -Wno-comment -Wfatal-errors #{c(:WLOGICAL_OP)} #{c(:WNO_MISMATCHED_TAGS)} #{c(:WNO_SELF_ASSIGN)} #{c(:QUNUSED_ARGUMENTS)}"
   cflags_common           += " #{c(:WNO_INCONSISTENT_MISSING_OVERRIDE)} #{c(:WNO_POTENTIALLY_EVALUATED_EXPRESSION)}"
-  cflags_common           += " #{c(:OPTIMIZATION_CFLAGS)} -D_FILE_OFFSET_BITS=64 #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:DEBUG_CFLAGS)} #{c(:PROFILING_CFLAGS)} #{c(:USER_CPPFLAGS)}"
+  cflags_common           += " #{c(:OPTIMIZATION_CFLAGS)} -D_FILE_OFFSET_BITS=64"
   cflags_common           += " -DMTX_LOCALE_DIR=\\\"#{c(:localedir)}\\\" -DMTX_PKG_DATA_DIR=\\\"#{c(:pkgdatadir)}\\\" -DMTX_DOC_DIR=\\\"#{c(:docdir)}\\\""
+  cflags_common           += " -Ilib/libebml -Ilib/libmatroska" if c?(:EBML_MATROSKA_INTERNAL)
+  cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:DEBUG_CFLAGS)} #{c(:PROFILING_CFLAGS)} #{c(:USER_CPPFLAGS)}"
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0500 -D_WIN32_WINNT=0x0500 " if c?(:MINGW)
   cflags_common           += " -fPIC " if c?(:USE_QT) && !c?(:MINGW)
   cflags_common           += " -DQT_STATICPLUGIN" if c?(:USE_QT) && c?(:MINGW)
+  ldflags                  = ""
+  ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
+  ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
   $flags                   = {
     :cflags                => "#{cflags_common} #{c(:USER_CFLAGS)}",
     :cxxflags              => "#{cflags_common} #{c(:STD_CXX)} -Wnon-virtual-dtor -Woverloaded-virtual -Wextra -Wno-missing-field-initializers #{c(:WXWIDGETS_CFLAGS)} #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:CURL_CFLAGS)} #{c(:USER_CXXFLAGS)}",
     :cppflags              => "#{c(:USER_CPPFLAGS)}",
-    :ldflags               => "#{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}",
     :windres               => (c(:MINGW_PROCESSOR_ARCH) == 'amd64' ? '-DMINGW_PROCESSOR_ARCH_AMD64=1 ' : '') + (c?(:USE_WXWIDGETS) ? c(:WXWIDGETS_INCLUDES) : '-DNOWXWIDGETS'),
+    :ldflags               => ldflags,
   }
 
   $build_system_modules.values.each { |bsm| bsm[:setup].call if bsm[:setup] }
