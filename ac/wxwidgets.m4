@@ -20,7 +20,7 @@ dnl
     AC_ARG_WITH(wx_config,
       AC_HELP_STRING([--with-wx-config=prog],[use prog instead of looking for wx-config]),
       [ WX_CONFIG="$with_wx_config" ],)
-    AC_PATH_PROG(WX_CONFIG, wx-config, no, $PATH:/usr/local/bin)
+    AC_PATH_TOOL(WX_CONFIG, wx-config, no, $PATH:/usr/local/bin)
     if test x"$WX_CONFIG" = "xno" ; then
       echo "*** Not checking for wxWidgets: wx-config not found"
       continue_wx_check=0

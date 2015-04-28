@@ -10,7 +10,7 @@ AC_ARG_WITH(curl_config,
   [ CURL_CONFIG="$with_curl_config" ],)
 
 if test "x$with_curl" != "xno"; then
-  AC_PATH_PROG(CURL_CONFIG, curl-config, no)
+  AC_PATH_TOOL(CURL_CONFIG, curl-config, no)
 
   if test x"$CURL_CONFIG" != "xno" ; then
     curl_found=yes
