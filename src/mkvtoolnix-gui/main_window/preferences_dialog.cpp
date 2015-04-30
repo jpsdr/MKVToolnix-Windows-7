@@ -68,7 +68,7 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2 %3")
                    .arg(QY("If enabled the program will check online whether or not a new release of MKVToolNix is available on the home page."))
                    .arg(QY("This is done at startup and at most once within 24 hours."))
-                   .arg(QY("No information is trasmitted to the server.")));
+                   .arg(QY("No information is transmitted to the server.")));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
