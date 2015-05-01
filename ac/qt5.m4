@@ -14,6 +14,7 @@ qt_min_ver=5.0.0
 if test x"$enable_qt" = "xyes" -a \
   '(' x"$enable_gui" = x"yes" -o x"$enable_gui" = "x" ')'; then
   if test x"$enable_static_qt" = "xyes"; then
+    AC_DEFINE(HAVE_STATIC_QT,,[define if building against a static Qt library])
     QT_PKG_CONFIG_STATIC=--static
   else
     QT_PKG_CONFIG_STATIC=
