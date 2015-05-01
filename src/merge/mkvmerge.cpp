@@ -1306,16 +1306,16 @@ parse_arg_append_mode(const std::string &s) {
 
 /** \brief Parse the argument for \c --default-duration
 
-   The argument must be a tuple consisting of a track ID and the default
-   duration separated by a colon. The duration must be postfixed by 'ms',
-   'us', 'ns', 'fps', 'p' or 'i' (see \c parse_number_with_unit).
+   The argument must consist of a track ID and the default duration
+   separated by a colon. The duration must be postfixed by 'ms', 'us',
+   'ns', 'fps', 'p' or 'i' (see \c parse_number_with_unit).
 */
 static void
 parse_arg_default_duration(const std::string &s,
                            track_info_c &ti) {
   std::vector<std::string> parts = split(s, ":");
   if (parts.size() != 2)
-    mxerror(boost::format(Y("'%1%' is not a valid tuple of track ID and default duration in '--default-duration %1%'.\n")) % s);
+    mxerror(boost::format(Y("'%1%' is not a valid pair of track ID and default duration in '--default-duration %1%'.\n")) % s);
 
   int64_t id = 0;
   if (!parse_number(parts[0], id))
@@ -1326,8 +1326,9 @@ parse_arg_default_duration(const std::string &s,
 
 /** \brief Parse the argument for \c --nalu-size-length
 
-   The argument must be a tuple consisting of a track ID and the NALU size
-   length, an integer between 2 and 4 inclusively.
+   The argument must consist of a track ID and the NALU size length
+   separated by a colon. The NALU size length must be an integer
+   between 2 and 4 inclusively.
 */
 static void
 parse_arg_nalu_size_length(const std::string &s,
@@ -1336,7 +1337,7 @@ parse_arg_nalu_size_length(const std::string &s,
 
   std::vector<std::string> parts = split(s, ":");
   if (parts.size() != 2)
-    mxerror(boost::format(Y("'%1%' is not a valid tuple of track ID and NALU size length in '--nalu-size-length %1%'.\n")) % s);
+    mxerror(boost::format(Y("'%1%' is not a valid pair of track ID and NALU size length in '--nalu-size-length %1%'.\n")) % s);
 
   int64_t id = 0;
   if (!parse_number(parts[0], id))
