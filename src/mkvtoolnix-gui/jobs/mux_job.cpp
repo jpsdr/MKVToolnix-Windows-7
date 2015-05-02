@@ -75,7 +75,6 @@ MuxJob::processLine(QString const &rawLine) {
   auto line = rawLine;
 
   line.replace(QRegularExpression{"[\r\n]+$"}, "");
-  std::cout << "processLine: " << to_utf8(line) << std::endl;
 
   // TODO: MuxJob::processLine
   if (line.startsWith("Warning:")) {

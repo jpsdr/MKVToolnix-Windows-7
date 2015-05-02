@@ -69,8 +69,6 @@ SourceFileModel::setSourceFiles(QList<SourceFilePtr> &sourceFiles) {
   for (auto const &file : *m_sourceFiles) {
     createAndAppendRow(invisibleRootItem(), file);
 
-    mxinfo(boost::format("file %1% #add %2% #app %3%\n") % file->m_fileName % file->m_additionalParts.size() % file->m_appendedFiles.size());
-
     auto rowItem  = item(row);
     auto position = 0;
 
@@ -325,8 +323,6 @@ SourceFileModel::updateSelectionStatus() {
     else if (sourceFile->isAdditionalPart())
       m_additionalPartSelected = true;
   });
-
-  mxinfo(boost::format("file sel changed nonApp %1% app %2% addPart %3%\n") % m_nonAppendedSelected % m_appendedSelected % m_additionalPartSelected);
 }
 
 void
@@ -443,11 +439,8 @@ SourceFileModel::mimeData(QModelIndexList const &indexes)
 
   QDataStream stream{&encoded, QIODevice::WriteOnly};
 
-  mxinfo(boost::format("mimeData %1% entries\n") % valuesToStore.size());
-  for (auto const &value : valuesToStore) {
-    mxinfo(boost::format("  store %|1$08x|\n") % value);
+  for (auto const &value : valuesToStore)
     stream << value;
-  }
 
   data->setData(MIME_TYPE, encoded);
   return data;
@@ -490,8 +483,6 @@ SourceFileModel::dropSourceFiles(QMimeData const *data,
   if (action != Qt::MoveAction)
     return QAbstractItemModel::dropMimeData(data, action, row, 0, parent);
 
-  mxinfo(boost::format("dropMimeData row %1% parent %2%/%3%\n") % row % parent.row() % parent.column());
-
   auto encoded = data->data(MIME_TYPE);
   QDataStream stream{&encoded, QIODevice::ReadOnly};
 
@@ -504,18 +495,13 @@ SourceFileModel::dropSourceFiles(QMimeData const *data,
     if (!sourceIdx.isValid())
       continue;
 
-    mxinfo(boost::format("  val %|1$08x| ptr %2% idx %3%/%4%\n") % value % sourceFile.get() % sourceIdx.row() % sourceIdx.column());
-
     auto sourceParent     = sourceIdx.parent();
     auto sourceParentItem = sourceParent.isValid() ? itemFromIndex(sourceParent) : invisibleRootItem();
-    auto priorRow         = row;
     auto rowItems         = sourceParentItem->takeRow(sourceIdx.row());
 
     if (!parent.isValid()) {
       if ((sourceParent == parent) && (sourceIdx.row() < row))
         --row;
-
-      mxinfo(boost::format("tried moving case 1 from %1% row %2% to new parent %3% row %4% new row %5%\n") % dumpIdx(sourceIdx.parent()) % sourceIdx.row() % dumpIdx(parent) % priorRow % (row + 1));
 
       invisibleRootItem()->insertRow(row, rowItems);
       ++row;
@@ -531,8 +517,6 @@ SourceFileModel::dropSourceFiles(QMimeData const *data,
 
       if ((sourceParent == parent) && (sourceIdx.row() < row))
         --row;
-
-      mxinfo(boost::format("tried moving case 2 from %1% row %2% to new parent %3% row %4% new row %5%\n") % dumpIdx(sourceIdx.parent()) % sourceIdx.row() % dumpIdx(parent) % priorRow % (row + 1));
 
       itemFromIndex(parent)->insertRow(row, rowItems);
       ++row;

@@ -326,8 +326,6 @@ TrackModel::updateSelectionStatus() {
       m_appendedSelected  = true;
     }
   });
-
-  mxinfo(boost::format("sel changed nonApp %1% app %2% nonReg %3%\n") % m_nonAppendedSelected % m_appendedSelected % m_nonRegularSelected);
 }
 
 void
