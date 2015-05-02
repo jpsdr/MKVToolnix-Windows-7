@@ -58,7 +58,6 @@ public:
   void action(std::function<void()> code);
   bool isToBeProcessed() const;
 
-  virtual void abort() = 0;
   virtual void start() = 0;
 
   virtual QString displayableType() const = 0;
@@ -73,12 +72,13 @@ protected:
   virtual void loadJobBasis(QSettings &settings);
 
 public slots:
-  void setStatus(Job::Status status);
-  void setProgress(unsigned int progress);
-  void addLineToInternalLogs(QString const &line, mtx::gui::Jobs::Job::LineType type);
+  virtual void setStatus(Job::Status status);
+  virtual void setProgress(unsigned int progress);
+  virtual void addLineToInternalLogs(QString const &line, mtx::gui::Jobs::Job::LineType type);
+  virtual void abort() = 0;
 
 signals:
-  void statusChanged(uint64_t id, mtx::gui::Jobs::Job::Status status);
+  void statusChanged(uint64_t id);
   void progressChanged(uint64_t id, unsigned int progress);
 
   void lineRead(QString const &line, mtx::gui::Jobs::Job::LineType type);

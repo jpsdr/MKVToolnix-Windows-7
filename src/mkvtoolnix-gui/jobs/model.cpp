@@ -8,9 +8,11 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/watch_jobs/tab.h"
 
 namespace mtx { namespace gui { namespace Jobs {
 
@@ -162,15 +164,14 @@ Model::add(JobPtr const &job) {
 
   invisibleRootItem()->appendRow(createRow(*job));
 
-  connect(job.get(), SIGNAL(progressChanged(uint64_t,unsigned int)),              this, SLOT(onProgressChanged(uint64_t,unsigned int)));
-  connect(job.get(), SIGNAL(statusChanged(uint64_t,mtx::gui::Jobs::Job::Status)), this, SLOT(onStatusChanged(uint64_t,mtx::gui::Jobs::Job::Status)));
+  connect(job.get(), &Job::progressChanged, this, &Model::onProgressChanged);
+  connect(job.get(), &Job::statusChanged,   this, &Model::onStatusChanged);
 
   startNextAutoJob();
 }
 
 void
-Model::onStatusChanged(uint64_t id,
-                       Job::Status status) {
+Model::onStatusChanged(uint64_t id) {
   QMutexLocker locked{&m_mutex};
 
   auto row = rowFromId(id);
@@ -178,6 +179,7 @@ Model::onStatusChanged(uint64_t id,
     return;
 
   auto const &job = *m_jobsById[id];
+  auto status     = job.m_status;
   auto numBefore  = m_toBeProcessed.count();
 
   if (job.isToBeProcessed())
@@ -331,6 +333,7 @@ void
 Model::loadJobs(QSettings &settings) {
   QMutexLocker locked{&m_mutex};
 
+  auto watchTab      = MainWindow::watchCurrentJobTab();
   m_dontStartJobsNow = true;
 
   m_jobsById.clear();
@@ -345,7 +348,12 @@ Model::loadJobs(QSettings &settings) {
     settings.beginGroup(Q("job %1").arg(idx));
 
     try {
-      add(Job::loadJob(settings));
+      auto job = Job::loadJob(settings);
+      add(job);
+
+      if (watchTab)
+        watchTab->connectToJob(*job);
+
     } catch (Merge::InvalidSettingsX &) {
     }
 

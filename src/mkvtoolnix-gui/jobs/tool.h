@@ -33,6 +33,7 @@ public:
 
   Model *model() const;
   void addJob(JobPtr const &job);
+  void loadAndStart();
 
   virtual void retranslateUi() override;
 

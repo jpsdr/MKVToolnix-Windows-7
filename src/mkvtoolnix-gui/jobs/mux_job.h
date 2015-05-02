@@ -34,16 +34,16 @@ public:
   MuxJob(Status status, mtx::gui::Merge::MuxConfigPtr const &config);
   virtual ~MuxJob();
 
-  virtual void abort();
   virtual void start();
 
   virtual QString displayableType() const;
   virtual QString displayableDescription() const;
 
 public slots:
-  void readAvailable();
-  void processFinished(int exitCode, QProcess::ExitStatus exitStatus);
-  void processError(QProcess::ProcessError error);
+  virtual void readAvailable();
+  virtual void processFinished(int exitCode, QProcess::ExitStatus exitStatus);
+  virtual void processError(QProcess::ProcessError error);
+  virtual void abort() override;
 
 protected:
   void processBytesRead();

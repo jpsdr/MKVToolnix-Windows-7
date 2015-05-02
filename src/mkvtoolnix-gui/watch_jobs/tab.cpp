@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <QPushButton>
+
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
@@ -29,18 +31,24 @@ Tab::retranslateUi() {
 
 void
 Tab::connectToJob(Jobs::Job const &job) {
-  connect(&job, SIGNAL(statusChanged(uint64_t,mtx::gui::Jobs::Job::Status)),    this, SLOT(onStatusChanged(uint64_t,mtx::gui::Jobs::Job::Status)));
-  connect(&job, SIGNAL(progressChanged(uint64_t,unsigned int)),                 this, SLOT(onProgressChanged(uint64_t,unsigned int)));
-  connect(&job, SIGNAL(lineRead(const QString&,mtx::gui::Jobs::Job::LineType)), this, SLOT(onLineRead(const QString&,mtx::gui::Jobs::Job::LineType)));
+  connect(&job,            &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged);
+  connect(&job,            &Jobs::Job::progressChanged, this, &Tab::onProgressChanged);
+  connect(&job,            &Jobs::Job::lineRead,        this, &Tab::onLineRead);
+  connect(ui->abortButton, &QPushButton::clicked,       &job, &Jobs::Job::abort);
 }
 
 void
-Tab::onStatusChanged(uint64_t id,
-                     Jobs::Job::Status status) {
+Tab::onStatusChanged(uint64_t id) {
   auto job = MainWindow::jobTool()->model()->fromId(id);
-  if (!job)
+  if (!job) {
+    ui->abortButton->setEnabled(false);
     return;
+  }
 
+  QMutexLocker locker{&job->m_mutex};
+  auto status = job->m_status;
+
+  ui->abortButton->setEnabled(Jobs::Job::Running == status);
   ui->status->setText(Jobs::Job::displayableStatus(status));
 
   if (Jobs::Job::Running == status)
@@ -82,11 +90,6 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
 void
 Tab::onSaveOutput() {
   // TODO: Tab::onSaveOutput
-}
-
-void
-Tab::onAbort() {
-  // TODO: Tab::onAbort
 }
 
 }}}
