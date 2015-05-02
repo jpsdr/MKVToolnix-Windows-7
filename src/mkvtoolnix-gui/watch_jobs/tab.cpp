@@ -61,7 +61,7 @@ Tab::onLineRead(QString const &line,
                 Jobs::Job::LineType type) {
   auto &storage = Jobs::Job::InfoLine    == type ? ui->output
                 : Jobs::Job::WarningLine == type ? ui->warnings
-                :                                            ui->errors;
+                :                                  ui->errors;
 
   storage->appendPlainText(line);
 }
