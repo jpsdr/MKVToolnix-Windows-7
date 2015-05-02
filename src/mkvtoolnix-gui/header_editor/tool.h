@@ -4,6 +4,7 @@
 #include "common/common_pch.h"
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
+#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
 class QDragEnterEvent;
 class QDropEvent;
@@ -24,6 +25,8 @@ protected:
   // UI stuff:
   std::unique_ptr<Ui::Tool> ui;
   QMenu *m_headerEditorMenu;
+  mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
+
 public:
   explicit Tool(QWidget *parent, QMenu *headerEditorMenu);
   ~Tool();

@@ -27,6 +27,7 @@ Tool::Tool(QWidget *parent,
   : ToolBase{parent}
   , ui{new Ui::Tool}
   , m_headerEditorMenu{headerEditorMenu}
+  , m_filesDDHandler{Util::FilesDragDropHandler::Mode::Remember}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -78,26 +79,17 @@ Tool::retranslateUi() {
 
 void
 Tool::dragEnterEvent(QDragEnterEvent *event) {
-  if (!event->mimeData()->hasUrls())
-    return;
-
-  for (auto const &url : event->mimeData()->urls())
-    if (!url.isLocalFile() || !QFileInfo{url.toLocalFile()}.isFile())
-      return;
-
-  event->acceptProposedAction();
+  m_filesDDHandler.handle(event, false);
 }
 
 void
 Tool::dropEvent(QDropEvent *event) {
-  if (!event->mimeData()->hasUrls())
+  if (!m_filesDDHandler.handle(event, true))
     return;
 
-  event->acceptProposedAction();
-
-  for (auto const &url : event->mimeData()->urls())
-    if (url.isLocalFile())
-      openFile(url.toLocalFile());
+  auto files = m_filesDDHandler.fileNames();
+  for (auto const &file : files)
+    openFile(file);
 }
 
 void
