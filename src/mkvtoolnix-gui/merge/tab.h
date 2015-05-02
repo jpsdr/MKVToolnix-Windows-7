@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file_model.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
+#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
 #include <QList>
 
@@ -31,6 +32,7 @@ protected:
 
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
+  mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
 
   // "Input" tab:
   SourceFileModel *m_filesModel;
@@ -52,6 +54,9 @@ public:
 
   virtual QString title() const;
   virtual void load(QString const &fileName);
+
+  virtual void dragEnterEvent(QDragEnterEvent *event) override;
+  virtual void dropEvent(QDropEvent *event) override;
 
 signals:
   void removeThisTab();

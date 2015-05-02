@@ -1,6 +1,8 @@
 #include "common/common_pch.h"
 
 #include <QDir>
+#include <QDragEnterEvent>
+#include <QDropEvent>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QList>
@@ -63,8 +65,6 @@ Tab::setupControlLists() {
 void
 Tab::setupInputControls() {
   setupControlLists();
-
-  ui->files->acceptDroppedFiles(true);
 
   ui->files->setModel(m_filesModel);
   ui->tracks->setModel(m_tracksModel);
@@ -783,6 +783,18 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
 
   else
     addOrAppendFiles(AddingAppendingFilesDialog::Decision::Append == decision, fileNames, fileIdx);
+}
+
+
+void
+Tab::dragEnterEvent(QDragEnterEvent *event) {
+  m_filesDDHandler.handle(event, false);
+}
+
+void
+Tab::dropEvent(QDropEvent *event) {
+  if (m_filesDDHandler.handle(event, true))
+    addOrAppendDroppedFiles(m_filesDDHandler.fileNames());
 }
 
 }}}
