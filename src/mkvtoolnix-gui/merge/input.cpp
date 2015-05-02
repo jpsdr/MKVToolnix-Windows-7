@@ -87,12 +87,6 @@ Tab::setupInputControls() {
   ui->naluSizeLength->addItem(QY("force 2 bytes"), 2);
   ui->naluSizeLength->addItem(QY("force 4 bytes"), 4);
 
-  // Set item data to index for distinguishing between empty values
-  // added by "multiple selection mode".
-  for (auto control : std::vector<QComboBox *>{ui->defaultTrackFlag, ui->forcedTrackFlag, ui->cues, ui->compression, ui->muxThis, ui->aacIsSBR})
-    for (auto idx = 0; control->count() > idx; ++idx)
-      control->setItemData(idx, idx);
-
   for (auto const &control : m_comboBoxControls)
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
@@ -650,8 +644,15 @@ Tab::retranslateInputUI() {
   m_removeFilesAction->setText(QY("&Remove files"));
   m_removeAllFilesAction->setText(QY("Remove a&ll files"));
 
+  // Set item data to index for distinguishing between empty values
+  // added by "multiple selection mode". This must be done after every
+  // re-translation as that clears the items or the items's data.
+  for (auto control : std::vector<QComboBox *>{ui->defaultTrackFlag, ui->forcedTrackFlag, ui->cues, ui->compression, ui->muxThis, ui->aacIsSBR})
+    for (auto idx = 0, num = control->count(); num > idx; ++idx)
+      control->setItemData(idx, idx);
+
   for (auto &comboBox : m_comboBoxControls)
-    if (!((0 == comboBox->count()) || comboBox->itemData(0).isValid()))
+    if (comboBox->count() && !comboBox->itemData(0).isValid())
       comboBox->setItemText(0, QY("<do not change>"));
 }
 
