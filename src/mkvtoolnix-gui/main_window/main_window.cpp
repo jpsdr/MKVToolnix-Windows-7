@@ -54,6 +54,8 @@ MainWindow::MainWindow(QWidget *parent)
 
   m_geometrySaver.restore();
 
+  jobTool()->loadAndStart();
+
 #if defined(HAVE_CURL_EASY_H)
   silentlyCheckForUpdates();
 #endif  // HAVE_CURL_EASY_H

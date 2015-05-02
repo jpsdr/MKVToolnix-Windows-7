@@ -30,13 +30,19 @@ Tool::Tool(QWidget *parent)
   ui->setupUi(this);
 
   setupUiControls();
-
-  QSettings reg;
-  m_model->loadJobs(reg);
-  m_model->start();
 }
 
 Tool::~Tool() {
+}
+
+void
+Tool::loadAndStart() {
+  QSettings reg;
+  m_model->loadJobs(reg);
+
+  resizeColumnsToContents();
+
+  m_model->start();
 }
 
 Model *
