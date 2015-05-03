@@ -143,7 +143,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(ui->delay,
                    Q("%1 %2 %3")
                    .arg(QY("Delay this track's timestamps by a couple of ms."))
-                   .arg(QY("The value can be negative, but keep in mind that any frame whose timecode is negative after this calculation is dropped."))
+                   .arg(QY("The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."))
                    .arg(QY("This works with all track types.")));
   Util::setToolTip(ui->stretchBy,
                    Q("<p>%1 %2</p><p>%3</p>")
@@ -192,7 +192,7 @@ Tab::setupInputToolTips() {
                    .arg(QY("Forces the NALU size length to a certain number of bytes."))
                    .arg(QY("It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."))
                    .arg(QY("For such files you can use this parameter and decrease the size to 2."))
-                   .arg(QY("This parameter is only effective for AVC/h.264 elementary streams read from AVC/h.264 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'.")));
+                   .arg(QY("This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary streams read from AVC/h.264/ ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'.")));
   Util::setToolTip(ui->aacIsSBR,
                    Q("%1 %2 %3")
                    .arg(QY("This track contains SBR AAC/HE-AAC/AAC+ data."))
@@ -201,12 +201,12 @@ Tab::setupInputToolTips() {
   Util::setToolTip(ui->reduceToAudioCore,
                    Q("%1 %2")
                    .arg(QY("Drops the lossless extensions from an audio track and keeps only its lossy core."))
-                   .arg(QY("This only works with DTS tracks.")));
+                   .arg(QY("This only works with DTS audio tracks.")));
   Util::setToolTip(ui->subtitleCharacterSet,
                    Q("<p>%1 %2</p><p><ol><li>%3</li><li>%4</li></p>")
                    .arg(QY("Selects the character set a subtitle file or chapter information was written with."))
                    .arg(QY("Only needed in certain situations:"))
-                   .arg(QY("for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1%)").arg(Q(g_cc_local_utf8->get_charset())))
+                   .arg(QY("for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)").arg(Q(g_cc_local_utf8->get_charset())))
                    .arg(QY("for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly")));
   Util::setToolTip(ui->cues,
                    Q("%1 %2")
