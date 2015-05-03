@@ -169,7 +169,7 @@
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
+                <y>-639</y>
                 <width>465</width>
                 <height>1064</height>
                </rect>
@@ -1157,7 +1157,10 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="attachmentsTab">
+     <widget class="mtx::gui::Util::FilesDragDropWidget" name="attachmentsTab">
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
       <attribute name="title">
        <string>Attach&amp;ments</string>
       </attribute>
@@ -1350,6 +1353,12 @@
    <class>mtx::gui::Util::BasicTreeView</class>
    <extends>QTreeView</extends>
    <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::FilesDragDropWidget</class>
+   <extends>QWidget</extends>
+   <header>mkvtoolnix-gui/util/files_drag_drop_widget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>
