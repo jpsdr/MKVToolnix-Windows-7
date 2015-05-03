@@ -16,27 +16,8 @@ using namespace mtx::gui;
 
 Track::Track(SourceFile *file,
              Track::Type type)
-  : m_properties{}
-  , m_file{file}
-  , m_appendedTo{nullptr}
-  , m_appendedTracks{}
+  : m_file{file}
   , m_type{type}
-  , m_id{-1}
-  , m_muxThis{true}
-  , m_setAspectRatio{true}
-  , m_defaultTrackFlagWasSet{}
-  , m_forcedTrackFlagWasSet{}
-  , m_aacSbrWasDetected{}
-  , m_nameWasPresent{}
-  , m_fixBitstreamTimingInfo{}
-  , m_defaultTrackFlag{}
-  , m_forcedTrackFlag{}
-  , m_stereoscopy{}
-  , m_naluSizeLength{}
-  , m_cues{}
-  , m_aacIsSBR{}
-  , m_compression{CompDefault}
-  , m_size{}
 {
 }
 

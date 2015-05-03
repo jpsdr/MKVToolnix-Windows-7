@@ -43,19 +43,19 @@ public:
 
   QHash<QString, QString> m_properties;
 
-  SourceFile *m_file;
-  Track *m_appendedTo;
+  SourceFile *m_file{};
+  Track *m_appendedTo{};
   QList<Track *> m_appendedTracks;
 
-  Type m_type;
-  int64_t m_id;
+  Type m_type{Audio};
+  int64_t m_id{-1};
 
-  bool m_muxThis, m_setAspectRatio, m_defaultTrackFlagWasSet, m_forcedTrackFlagWasSet, m_aacSbrWasDetected, m_nameWasPresent, m_fixBitstreamTimingInfo, m_reduceAudioToCore;
+  bool m_muxThis{true}, m_setAspectRatio{true}, m_defaultTrackFlagWasSet{}, m_forcedTrackFlagWasSet{}, m_aacSbrWasDetected{}, m_nameWasPresent{}, m_fixBitstreamTimingInfo{}, m_reduceAudioToCore{};
   QString m_name, m_codec, m_language, m_tags, m_delay, m_stretchBy, m_defaultDuration, m_timecodes, m_aspectRatio, m_displayWidth, m_displayHeight, m_cropping, m_characterSet, m_additionalOptions;
-  unsigned int m_defaultTrackFlag, m_forcedTrackFlag, m_stereoscopy, m_naluSizeLength, m_cues, m_aacIsSBR;
-  Compression m_compression;
+  unsigned int m_defaultTrackFlag{}, m_forcedTrackFlag{}, m_stereoscopy{}, m_naluSizeLength{}, m_cues{}, m_aacIsSBR{};
+  Compression m_compression{CompDefault};
 
-  int64_t m_size;
+  int64_t m_size{};
   QString m_attachmentDescription;
 
 public:
