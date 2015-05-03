@@ -125,7 +125,7 @@ def setup_globals
   ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
 
   windres                  = c?(:USE_WXWIDGETS) ? c(:WXWIDGETS_INCLUDES) : "-DNOWXWIDGETS"
-  windres                 += " -DMINGW_PROCESSOR_ARCH_AMD64=1" if c(:MINGW_PROCESSOR_ARCH)
+  windres                 += " -DMINGW_PROCESSOR_ARCH_AMD64=1" if c(:MINGW_PROCESSOR_ARCH) == 'amd64'
 
   $flags                   = {
     :cflags                => cflags,
