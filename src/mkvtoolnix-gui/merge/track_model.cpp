@@ -72,8 +72,6 @@ TrackModel::createRow(Track *track) {
 
   setItemsFromTrack(items, track);
 
-  m_tracksToItems[track] = items[0];
-
   return items;
 }
 
@@ -181,7 +179,9 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
     if (!newTrack->m_appendedTo)
       newTrack->m_appendedTo = lastTrack;
 
-    m_tracksToItems[ newTrack->m_appendedTo ]->appendRow(createRow(newTrack));
+    auto row = m_tracks->indexOf(newTrack->m_appendedTo);
+    Q_ASSERT(row != -1);
+    item(row)->appendRow(createRow(newTrack));
   }
 }
 

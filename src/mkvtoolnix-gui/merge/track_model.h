@@ -20,7 +20,6 @@ class TrackModel : public QStandardItemModel {
 
 protected:
   QList<Track *> *m_tracks;
-  QMap<Track *, QStandardItem *> m_tracksToItems;
   QIcon m_audioIcon, m_videoIcon, m_subtitleIcon, m_attachmentIcon, m_chaptersIcon, m_tagsIcon, m_genericIcon, m_yesIcon, m_noIcon;
   bool m_ignoreTrackRemovals, m_nonAppendedSelected, m_appendedSelected, m_nonRegularSelected, m_appendedMultiParentsSelected, m_appendedMultiTypeSelected;
   Track::Type m_selectedTrackType;
