@@ -364,7 +364,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 
   auto additionalOptions = Q(strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
-    opt.options += additionalOptions.split(QRegExp{" +"});
+    opt.options += additionalOptions.replace(Q("<TID>"), sid).split(QRegExp{" +"});
 }
 
 QString
