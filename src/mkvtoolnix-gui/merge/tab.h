@@ -160,6 +160,8 @@ protected:
   virtual void setupInputControls();
   virtual void setupOutputControls();
 
+  virtual void setupInputToolTips();
+
   virtual void retranslateInputUI();
   virtual void retranslateAttachmentsUI();
 

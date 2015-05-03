@@ -90,6 +90,8 @@ Tab::setupInputControls() {
   for (auto const &control : m_comboBoxControls)
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
+  setupInputToolTips();
+
   // "files" context menu
   ui->files->addAction(m_addFilesAction);
   ui->files->addAction(m_appendFilesAction);
@@ -114,6 +116,107 @@ Tab::setupInputControls() {
   connect(m_tracksModel,                &TrackModel::rowsInserted,              this,          &Tab::onTrackRowsInserted);
 
   onTrackSelectionChanged();
+}
+
+void
+Tab::setupInputToolTips() {
+  Util::setToolTip(ui->muxThis,   QY("If set to 'no' then the selected tracks will not be copied to the output file."));
+  Util::setToolTip(ui->trackName, QY("A name for this track that players can display helping the user chose the right track to play, e.g. \"director's comments\"."));
+  Util::setToolTip(ui->trackLanguage,
+                   Q("%1 %2")
+                   .arg(QY("The language for this track that players can use for automatic track selection and display for the user."))
+                   .arg(QY("Select one of the ISO639-2 language codes.")));
+  Util::setToolTip(ui->defaultTrackFlag,
+                   Q("%1 %2 %3")
+                   .arg(QY("Make this track the default track for its type (audio, video, subtitles)."))
+                   .arg(QY("Players should prefer tracks with the default track flag set."))
+                   .arg(QY("If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks.")));
+  Util::setToolTip(ui->forcedTrackFlag,
+                   Q("%1 %2")
+                   .arg(QY("Mark this track as 'forced'."))
+                   .arg(QY("Players must play this track.")));
+  Util::setToolTip(ui->compression,
+                   Q("%1 %2 %3")
+                   .arg(QY("Sets the lossless compression algorithm to be used for this track."))
+                   .arg(QY("If set to 'determine automatically' then mkvmerge will decide whether or not to compress and which algorithm to use based on the track type."))
+                   .arg(QY("Currently only certain subtitle formats are compressed with the zlib algorithm.")));
+  Util::setToolTip(ui->delay,
+                   Q("%1 %2 %3")
+                   .arg(QY("Delay this track's timestamps by a couple of ms."))
+                   .arg(QY("The value can be negative, but keep in mind that any frame whose timecode is negative after this calculation is dropped."))
+                   .arg(QY("This works with all track types.")));
+  Util::setToolTip(ui->stretchBy,
+                   Q("<p>%1 %2</p><p>%3</p>")
+                   .arg(QY("Multiply this track's timestamps with a factor."))
+                   .arg(QY("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."))
+                   .arg(QY("This works well for video and subtitle tracks but should not be used with audio tracks.")));
+  Util::setToolTip(ui->defaultDuration,
+                   Q("%1 %2")
+                   .arg(QY("Forces the default duration or number of frames per second for a track."))
+                   .arg(QY("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456).")));
+  Util::setToolTip(ui->fixBitstreamTimingInfo,
+                   Q("%1 %2 %3")
+                   .arg(QY("Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."))
+                   .arg(QY("With this option that information is adjusted to match the container's timing information."))
+                   .arg(QY("The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, "
+                           "the source container or the video bitstream.")));
+  Util::setToolTip(ui->aspectRatio,
+                   Q("<p>%1 %2 %3</p><p>%4</p>")
+                   .arg(QY("The Matroska container format can store the display width/height for a video track."))
+                   .arg(QY("This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."))
+                   .arg(QY("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."))
+                   .arg(QY("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456).")));
+  Util::setToolTip(ui->displayWidth,
+                   Q("<p>%1 %2</p><p>%3</p>")
+                   .arg(QY("The Matroska container format can store the display width/height for a video track."))
+                   .arg(QY("This parameter is the display width in pixels."))
+                   .arg(QY("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
+  Util::setToolTip(ui->displayHeight,
+                   Q("<p>%1 %2</p><p>%3</p>")
+                   .arg(QY("The Matroska container format can store the display width/height for a video track."))
+                   .arg(QY("This parameter is the display height in pixels."))
+                   .arg(QY("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
+  Util::setToolTip(ui->cropping,
+                   Q("<p>%1 %2</p><p>%3 %4</p><p>%5</p>")
+                   .arg(QY("Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."))
+                   .arg(QY("This must be comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."))
+                   .arg(QY("Note that the video content is not modified by this option."))
+                   .arg(QY("The values are only stored in the track headers."))
+                   .arg(QY("Note also that there are not a lot of players that support the cropping parameters.")));
+  Util::setToolTip(ui->stereoscopy,
+                   Q("%1 %2")
+                   .arg(QY("Sets the stereo mode of the video track to this value."))
+                   .arg("If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all."));
+  Util::setToolTip(ui->naluSizeLength,
+                   Q("<p>%1 %2 %3</p><p>%4</p>")
+                   .arg(QY("Forces the NALU size length to a certain number of bytes."))
+                   .arg(QY("It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."))
+                   .arg(QY("For such files you can use this parameter and decrease the size to 2."))
+                   .arg(QY("This parameter is only effective for AVC/h.264 elementary streams read from AVC/h.264 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'.")));
+  Util::setToolTip(ui->aacIsSBR,
+                   Q("%1 %2 %3")
+                   .arg(QY("This track contains SBR AAC/HE-AAC/AAC+ data."))
+                   .arg(QY("Only needed for AAC input files as SBR AAC cannot be detected automatically for these files."))
+                   .arg(QY("Not needed for AAC tracks read from other container formats like MP4 or Matroska files.")));
+  Util::setToolTip(ui->reduceToAudioCore,
+                   Q("%1 %2")
+                   .arg(QY("Drops the lossless extensions from an audio track and keeps only its lossy core."))
+                   .arg(QY("This only works with DTS tracks.")));
+  Util::setToolTip(ui->subtitleCharacterSet,
+                   Q("<p>%1 %2</p><p><ol><li>%3</li><li>%4</li></p>")
+                   .arg(QY("Selects the character set a subtitle file or chapter information was written with."))
+                   .arg(QY("Only needed in certain situations:"))
+                   .arg(QY("for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1%)").arg(Q(g_cc_local_utf8->get_charset())))
+                   .arg(QY("for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly")));
+  Util::setToolTip(ui->cues,
+                   Q("%1 %2")
+                   .arg(QY("Selects for which blocks mkvmerge will produce index entries ( = cue entries)."))
+                   .arg(QY("\"default\" is a good choice for almost all situations.")));
+  Util::setToolTip(ui->additionalTrackOptions,
+                   Q("%1 %2 %3")
+                   .arg(QY("Free-form edit field for user defined options for this track."))
+                   .arg(QY("What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."))
+                   .arg(QY("All occurences of the string \"<TID>\" will be replaced by the track's track ID.")));
 }
 
 void
