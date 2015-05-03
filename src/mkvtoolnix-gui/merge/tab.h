@@ -48,6 +48,8 @@ protected:
   AttachmentModel *m_attachmentsModel;
   QAction *m_addAttachmentsAction, *m_removeAttachmentsAction;
 
+  debugging_option_c m_debugTrackModel;
+
 public:
   explicit Tab(QWidget *parent);
   ~Tab();

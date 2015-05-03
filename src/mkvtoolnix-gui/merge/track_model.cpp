@@ -354,6 +354,11 @@ TrackModel::updateTrackLists() {
       track->m_appendedTracks << appendedTrack;
     }
   }
+
+  if (m_debug) {
+    mxinfo(boost::format("### AFTER drag & drop ###\n"));
+    MuxConfig::debugDumpSpecificTrackList(*m_tracks);
+  }
 }
 
 bool

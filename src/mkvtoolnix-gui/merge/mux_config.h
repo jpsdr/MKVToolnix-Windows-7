@@ -87,6 +87,9 @@ public:
 
   QStringList buildMkvmergeOptions() const;
 
+  virtual void debugDumpFileList() const;
+  virtual void debugDumpTrackList() const;
+
 protected:
   QHash<SourceFile *, unsigned int> buildFileNumbers() const;
   QStringList buildTrackOrder(QHash<SourceFile *, unsigned int> const &fileNumbers) const;
@@ -96,6 +99,7 @@ public:
   static MuxConfigPtr loadSettings(QString const &fileName);
   static void saveProperties(QSettings &settings, QHash<QString, QString> const &properties);
   static void loadProperties(QSettings &settings, QHash<QString, QString> &properties);
+  static void debugDumpSpecificTrackList(QList<Track *> const &tracks);
 };
 
 template<typename T>

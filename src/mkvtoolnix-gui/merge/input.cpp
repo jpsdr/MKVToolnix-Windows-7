@@ -642,7 +642,20 @@ Tab::addOrAppendFiles(bool append,
   if (identifiedFiles.isEmpty())
     return;
 
+  if (m_debugTrackModel) {
+    mxinfo(boost::format("### BEFORE adding/appending ###\n"));
+    m_config.debugDumpFileList();
+    m_config.debugDumpTrackList();
+  }
+
   m_filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
+
+  if (m_debugTrackModel) {
+    mxinfo(boost::format("### AFTER adding/appending ###\n"));
+    m_config.debugDumpFileList();
+    m_config.debugDumpTrackList();
+  }
+
   reinitFilesTracksControls();
 
   setTitleMaybe(identifiedFiles);
