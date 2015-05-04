@@ -38,7 +38,7 @@ protected:
   SourceFileModel *m_filesModel;
   TrackModel *m_tracksModel;
 
-  QList<QWidget *> m_audioControls, m_videoControls, m_subtitleControls, m_chapterControls, m_typeIndependantControls, m_allInputControls, m_splitControls;
+  QList<QWidget *> m_audioControls, m_videoControls, m_subtitleControls, m_chapterControls, m_typeIndependantControls, m_allInputControls, m_splitControls, m_notIfAppendingControls;
   QList<QComboBox *> m_comboBoxControls;
   bool m_currentlySettingInputControlValues;
 

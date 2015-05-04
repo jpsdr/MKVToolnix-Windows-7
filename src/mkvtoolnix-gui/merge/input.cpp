@@ -60,6 +60,13 @@ Tab::setupControlLists() {
                      << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore << ui->naluSizeLengthLabel << ui->naluSizeLength;
 
   m_comboBoxControls << ui->muxThis << ui->trackLanguage << ui->defaultTrackFlag << ui->forcedTrackFlag << ui->compression << ui->cues << ui->stereoscopy << ui->naluSizeLength << ui->aacIsSBR << ui->subtitleCharacterSet;
+
+  m_notIfAppendingControls << ui->trackLanguageLabel   << ui->trackLanguage           << ui->trackNameLabel              << ui->trackName        << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
+                           << ui->forcedTrackFlagLabel << ui->forcedTrackFlag         << ui->compressionLabel            << ui->compression      << ui->trackTagsLabel        << ui->trackTags         << ui->browseTrackTags
+                           << ui->defaultDurationLabel << ui->defaultDuration         << ui->fixBitstreamTimingInfo      << ui->setAspectRatio   << ui->setDisplayWidthHeight << ui->aspectRatio
+                           << ui->displayWidth         << ui->displayDimensionsXLabel << ui->displayHeight               << ui->stereoscopyLabel << ui->stereoscopy
+                           << ui->naluSizeLengthLabel  << ui->naluSizeLength          << ui->croppingLabel               << ui->cropping         << ui->aacIsSBR              << ui->characterSetLabel << ui->subtitleCharacterSet
+                           << ui->cuesLabel            << ui->cues                    << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions;
 }
 
 void
@@ -283,6 +290,9 @@ Tab::onTrackSelectionChanged() {
 
   else if (track->isChapters())
     Util::enableWidgets(m_chapterControls, true);
+
+  if (track->isAppended())
+    Util::enableWidgets(m_notIfAppendingControls, false);
 }
 
 void
@@ -508,7 +518,7 @@ Tab::onBrowseTimecodes() {
 
 void
 Tab::onFixBitstreamTimingInfoChanged(bool newValue) {
-  withSelectedTracks([&](Track *track) { track->m_fixBitstreamTimingInfo = newValue; });
+  withSelectedTracks([&](Track *track) { track->m_fixBitstreamTimingInfo = newValue; }, true);
 }
 
 void
