@@ -99,6 +99,9 @@ Tab::setupInputControls() {
   ui->files->addAction(m_removeFilesAction);
   ui->files->addAction(m_removeAllFilesAction);
 
+  // "tracks" context menu
+  ui->tracks->addAction(m_selectAllTracksAction);
+
   // Connect signals & slots.
   connect(ui->files,                    &Util::BasicTreeView::filesDropped,     this,          &Tab::addOrAppendDroppedFiles);
   connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged, this,          &Tab::onFileSelectionChanged);
@@ -111,6 +114,8 @@ Tab::setupInputControls() {
   connect(m_addAdditionalPartsAction,   &QAction::triggered,                    this,          &Tab::onAddAdditionalParts);
   connect(m_removeFilesAction,          &QAction::triggered,                    this,          &Tab::onRemoveFiles);
   connect(m_removeAllFilesAction,       &QAction::triggered,                    this,          &Tab::onRemoveAllFiles);
+
+  connect(m_selectAllTracksAction,      &QAction::triggered,                    this,          &Tab::selectAllTracks);
 
   connect(m_filesModel,                 &SourceFileModel::rowsInserted,         this,          &Tab::onFileRowsInserted);
   connect(m_tracksModel,                &TrackModel::rowsInserted,              this,          &Tab::onTrackRowsInserted);
@@ -760,6 +765,8 @@ Tab::retranslateInputUI() {
   m_removeFilesAction->setText(QY("&Remove files"));
   m_removeAllFilesAction->setText(QY("Remove a&ll files"));
 
+  m_selectAllTracksAction->setText(QY("Select &all tracks"));
+
   // Set item data to index for distinguishing between empty values
   // added by "multiple selection mode". This must be done after every
   // re-translation as that clears the items or the items's data.
@@ -912,6 +919,29 @@ void
 Tab::dropEvent(QDropEvent *event) {
   if (m_filesDDHandler.handle(event, true))
     addOrAppendDroppedFiles(m_filesDDHandler.fileNames());
+}
+
+void
+Tab::selectAllTracks() {
+  auto numRows = m_tracksModel->rowCount();
+  if (!numRows)
+    return;
+
+  auto numColumns = m_tracksModel->columnCount() - 1;
+  auto selection  = QItemSelection{m_tracksModel->index(0, 0), m_tracksModel->index(numRows - 1, numColumns - 1)};
+
+  for (auto row = 0; row < numRows; ++row) {
+    auto &track      = *m_config.m_tracks[row];
+    auto numAppended = track.m_appendedTracks.count();
+
+    if (!numAppended)
+      continue;
+
+    auto rowIdx = m_tracksModel->index(row, 0);
+    selection.select(m_tracksModel->index(0, 0, rowIdx), m_tracksModel->index(numAppended - 1, numColumns - 1, rowIdx));
+  }
+
+  ui->tracks->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
 }}}

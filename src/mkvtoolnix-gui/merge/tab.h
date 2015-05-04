@@ -42,7 +42,7 @@ protected:
   QList<QComboBox *> m_comboBoxControls;
   bool m_currentlySettingInputControlValues;
 
-  QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_removeFilesAction, *m_removeAllFilesAction;
+  QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction;
 
   // "Attachments" tab:
   AttachmentModel *m_attachmentsModel;
@@ -77,6 +77,8 @@ public slots:
   virtual void onAddToJobQueue();
   virtual void onStartMuxing();
   virtual void onShowCommandLine();
+
+  virtual void selectAllTracks();
 
   virtual void onFileSelectionChanged();
   virtual void onTrackSelectionChanged();
