@@ -39,6 +39,8 @@ Tab::Tab(QWidget *parent)
   , m_removeFilesAction{new QAction{this}}
   , m_removeAllFilesAction{new QAction{this}}
   , m_selectAllTracksAction{new QAction{this}}
+  , m_enableAllTracksAction{new QAction{this}}
+  , m_disableAllTracksAction{new QAction{this}}
   , m_attachmentsModel{new AttachmentModel{this}}
   , m_addAttachmentsAction{new QAction{this}}
   , m_removeAttachmentsAction{new QAction{this}}

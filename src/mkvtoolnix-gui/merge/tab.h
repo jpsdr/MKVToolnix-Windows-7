@@ -42,7 +42,7 @@ protected:
   QList<QComboBox *> m_comboBoxControls;
   bool m_currentlySettingInputControlValues;
 
-  QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction;
+  QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
 
   // "Attachments" tab:
   AttachmentModel *m_attachmentsModel;
@@ -79,6 +79,8 @@ public slots:
   virtual void onShowCommandLine();
 
   virtual void selectAllTracks();
+  virtual void enableAllTracks();
+  virtual void disableAllTracks();
 
   virtual void onFileSelectionChanged();
   virtual void onTrackSelectionChanged();
@@ -175,6 +177,7 @@ protected:
   virtual void addOrAppendFiles(bool append);
   virtual void addOrAppendFiles(bool append, QStringList const &fileNames, QModelIndex const &sourceFileIdx);
   virtual void enableFilesActions();
+  virtual void enableTracksActions();
   virtual void enableAttachmentControls(bool enable);
   virtual void setInputControlValues(Track *track);
   virtual void setOutputControlValues();
@@ -201,6 +204,8 @@ protected:
 
   virtual void setOutputFileNameMaybe(QString const &fileName);
   virtual QString suggestOutputFileNameExtension() const;
+
+  virtual void enableDisableAllTracks(bool enable);
 };
 
 }}}

@@ -108,6 +108,8 @@ Tab::setupInputControls() {
 
   // "tracks" context menu
   ui->tracks->addAction(m_selectAllTracksAction);
+  ui->tracks->addAction(m_enableAllTracksAction);
+  ui->tracks->addAction(m_disableAllTracksAction);
 
   // Connect signals & slots.
   connect(ui->files,                    &Util::BasicTreeView::filesDropped,     this,          &Tab::addOrAppendDroppedFiles);
@@ -123,11 +125,14 @@ Tab::setupInputControls() {
   connect(m_removeAllFilesAction,       &QAction::triggered,                    this,          &Tab::onRemoveAllFiles);
 
   connect(m_selectAllTracksAction,      &QAction::triggered,                    this,          &Tab::selectAllTracks);
+  connect(m_enableAllTracksAction,      &QAction::triggered,                    this,          &Tab::enableAllTracks);
+  connect(m_disableAllTracksAction,     &QAction::triggered,                    this,          &Tab::disableAllTracks);
 
   connect(m_filesModel,                 &SourceFileModel::rowsInserted,         this,          &Tab::onFileRowsInserted);
   connect(m_tracksModel,                &TrackModel::rowsInserted,              this,          &Tab::onTrackRowsInserted);
 
   onTrackSelectionChanged();
+  enableTracksActions();
 }
 
 void
@@ -245,6 +250,7 @@ Tab::onTrackRowsInserted(QModelIndex const &parentIdx,
                          int) {
   if (parentIdx.isValid())
     ui->tracks->setExpanded(parentIdx, true);
+  enableTracksActions();
 }
 
 void
@@ -737,6 +743,7 @@ Tab::reinitFilesTracksControls() {
   onFileSelectionChanged();
   onTrackSelectionChanged();
   enableFilesActions();
+  enableTracksActions();
 }
 
 void
@@ -766,6 +773,15 @@ Tab::enableFilesActions() {
 }
 
 void
+Tab::enableTracksActions() {
+  bool hasTracks = !!m_tracksModel->rowCount();
+
+  m_selectAllTracksAction->setEnabled(hasTracks);
+  m_enableAllTracksAction->setEnabled(hasTracks);
+  m_disableAllTracksAction->setEnabled(hasTracks);
+}
+
+void
 Tab::retranslateInputUI() {
   m_filesModel->retranslateUi();
   m_tracksModel->retranslateUi();
@@ -775,7 +791,9 @@ Tab::retranslateInputUI() {
   m_removeFilesAction->setText(QY("&Remove files"));
   m_removeAllFilesAction->setText(QY("Remove a&ll files"));
 
-  m_selectAllTracksAction->setText(QY("Select &all tracks"));
+  m_selectAllTracksAction->setText(QY("&Select all tracks"));
+  m_enableAllTracksAction->setText(QY("&Enable all tracks"));
+  m_disableAllTracksAction->setText(QY("&Disable all tracks"));
 
   // Set item data to index for distinguishing between empty values
   // added by "multiple selection mode". This must be done after every
@@ -952,6 +970,33 @@ Tab::selectAllTracks() {
   }
 
   ui->tracks->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+}
+
+void
+Tab::enableAllTracks() {
+  enableDisableAllTracks(true);
+}
+
+void
+Tab::disableAllTracks() {
+  enableDisableAllTracks(false);
+}
+
+void
+Tab::enableDisableAllTracks(bool enable) {
+  for (auto row = 0, numRows = m_tracksModel->rowCount(); row < numRows; ++row) {
+    auto track       = m_tracksModel->fromIndex(m_tracksModel->index(row, 0));
+    track->m_muxThis = enable;
+    m_tracksModel->trackUpdated(track);
+
+    for (auto const &appendedTrack : track->m_appendedTracks) {
+      appendedTrack->m_muxThis = enable;
+      m_tracksModel->trackUpdated(appendedTrack);
+    }
+  }
+
+  auto base = ui->muxThis->itemData(0).isValid() ? 0 : 1;
+  ui->muxThis->setCurrentIndex(base + (enable ? 0 : 1));
 }
 
 }}}
