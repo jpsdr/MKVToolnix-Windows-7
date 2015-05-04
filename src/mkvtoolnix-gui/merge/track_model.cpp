@@ -81,8 +81,8 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[0]->setText(track->isChapters() || track->isGlobalTags() || track->isTags() ? QY("%1 entries").arg(track->m_size) : track->m_codec);
   items[1]->setText(track->nameForType());
   items[2]->setText(track->m_muxThis ? QY("yes") : QY("no"));
-  items[3]->setText(track->m_language);
-  items[4]->setText(track->m_name);
+  items[3]->setText(track->isAppended() ? QString{} : track->m_language);
+  items[4]->setText(track->isAppended() ? QString{} : track->m_name);
   items[5]->setText(QFileInfo{ track->m_file->m_fileName }.fileName());
   items[6]->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
 
