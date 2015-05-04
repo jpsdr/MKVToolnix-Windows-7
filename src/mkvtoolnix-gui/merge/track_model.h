@@ -57,9 +57,6 @@ protected:
 
   void dumpTracks(QString const &label) const;
   bool hasUnsetTrackRole(QModelIndex const &idx = QModelIndex{});
-
-public:                         // static
-  static int rowForTrack(QList<Track *> const &tracks, Track *trackToLookFor);
 };
 
 }}}

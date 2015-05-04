@@ -109,35 +109,20 @@ TrackModel::fromIndex(QModelIndex const &idx)
                                    .value<qulonglong>());
 }
 
-int
-TrackModel::rowForTrack(QList<Track *> const &tracks,
-                        Track *trackToLookFor) {
-  int idx = 0;
-  for (auto track : tracks) {
-    if (track == trackToLookFor)
-      return idx;
-
-    int result = rowForTrack(track->m_appendedTracks, trackToLookFor);
-    if (-1 != result)
-      return result;
-
-    ++idx;
-  }
-
-  return -1;
-}
-
 void
 TrackModel::trackUpdated(Track *track) {
   Q_ASSERT(m_tracks);
 
-  int row = rowForTrack(*m_tracks, track);
-  if (-1 == row)
+  auto topRow     = m_tracks->indexOf(track->isAppended() ? track->m_appendedTo : track);
+  auto parentItem = track->isAppended() ? item(topRow, 0)                                      : invisibleRootItem();
+  auto row        = track->isAppended() ? track->m_appendedTo->m_appendedTracks.indexOf(track) : topRow;
+
+  if ((-1 == topRow) || (-1 == row) || !parentItem)
     return;
 
   auto items = QList<QStandardItem *>{};
-  for (int column = 0; column < columnCount(); ++column)
-    items << item(row, column);
+  for (auto column = 0, numColumns = columnCount(); column < numColumns; ++column)
+    items << parentItem->child(row, column);
 
   setItemsFromTrack(items, track);
 }
