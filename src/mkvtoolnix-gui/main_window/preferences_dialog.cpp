@@ -105,12 +105,12 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMScanPlaylistsPolicy,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("Whenever the user adds a play list the program can automatically scan the directory for other play lists and present the user with a detailed list of the play lists found."))
-                   .arg(QY("The user can then select which play list to actually add."))
-                   .arg(QY("This is useful for situations like Blu-ray discs on which a multitude of play lists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) "
-                           "a play list belongs to.")));
+                   .arg(QY("Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."))
+                   .arg(QY("The user can then select which playlist to actually add."))
+                   .arg(QY("This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) "
+                           "a playlist belongs to.")));
 
-  Util::setToolTip(ui->sbMMinPlaylistDuration, QY("Only play lists whose duration are at least this long are considered and offered to the user for selection."));
+  Util::setToolTip(ui->sbMMinPlaylistDuration, QY("Only playlists whose duration are at least this long are considered and offered to the user for selection."));
 
   Util::setToolTip(ui->cbMAutoSetOutputFileName,
                    Q("%1 %2")
