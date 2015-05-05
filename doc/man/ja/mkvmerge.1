@@ -1809,7 +1809,7 @@ sound\&.ogg
 .PP
 特殊文字をエスケープしなければならない、あるいはすべき場所が少しだけあります。エスケープのルールは単純です：エスケープする必要のある各文字を、バックスラッシュ（Windows上の日本語フォントでは\e記号）の後ろに違う文字が1つついたものと入れ替えます。
 .PP
-ルール：\*(Aq \*(Aq（半角スペース）は\*(Aq\es\*(Aqに、\*(Aq"\*(Aq（ダブルクォーテーション）は\*(Aq\e2\*(Aqに、\*(Aq:\*(Aqは\*(Aq\ec\*(Aqに、\*(Aq#\*(Aqは\*(Aq\eh\*(Aqに、そして\*(Aq\e\*(Aqそれ自体は\*(Aq\e\e\*(Aqになります。
+The rules are: \*(Aq \*(Aq (a space) becomes \*(Aq\es\*(Aq, \*(Aq"\*(Aq (double quotes) becomes \*(Aq\e2\*(Aq, \*(Aq:\*(Aq becomes \*(Aq\ec\*(Aq, \*(Aq#\*(Aq becomes \*(Aq\eh\*(Aq, \*(Aq[\*(Aq becomes \*(Aq\eb\*(Aq, \*(Aq]\*(Aq becomes \*(Aq\eB\*(Aq and \*(Aq\e\*(Aq (a single backslash) itself becomes \*(Aq\e\e\*(Aq\&.
 .SH "字幕"
 .PP
 Matroska(TM)に埋め込むことのできるテキスト及びビットマップ字幕フォーマットがいくつかあります。テキスト字幕は、プレイヤーで正しく表示されるためにUTF\-8で保存されなればなりません(\fBmkvmerge\fR(1)の文字コード変換についてはテキストファイルと文字コードのセクションを参照してください)。Kate字幕は既にUTF\-8でエンコードされているので、再変換する必要はありません。
