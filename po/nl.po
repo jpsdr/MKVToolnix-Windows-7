@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-05-04 22:26+0200\n"
-"PO-Revision-Date: 2015-05-01 13:11+0100\n"
+"PO-Revision-Date: 2015-05-04 23:52+0100\n"
 "Last-Translator: René Maassen <bmom43@gmail.com>\n"
 "Language-Team: Dutch <bmom43@gmail.com>\n"
 "Language: nl\n"
@@ -1229,9 +1229,8 @@ msgid "&Disable"
 msgstr "&Deactiveren"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:796
-#, fuzzy
 msgid "&Disable all tracks"
-msgstr "Zet aaneensluiten uit voor alle sporen."
+msgstr "&uitzetten voor alle sporen."
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:33
 #: src/mmg/tabs/ask_scan_for_playlists_dlg.cpp:50
@@ -1248,9 +1247,8 @@ msgid "&Download"
 msgstr "&Ophalen"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:795
-#, fuzzy
 msgid "&Enable all tracks"
-msgstr "Vink alles aan"
+msgstr "&Aanzetten voor alle sporen."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:494
 msgid "&Enabled"
@@ -1521,9 +1519,8 @@ msgid "&Scan for other playlists"
 msgstr "&Scan voor andere afspeellijsten"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:794
-#, fuzzy
 msgid "&Select all tracks"
-msgstr "Segment sporen"
+msgstr "&Selecteer alle sporen"
 
 #: src/mmg/tabs/additional_parts_dlg.cpp:51
 msgid "&Sort"
@@ -3982,9 +3979,8 @@ msgid "Create WebM compliant file"
 msgstr "Creëer WebM herkenbaar bestand"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:73
-#, fuzzy
 msgid "Create a WebM compliant file."
-msgstr "Creëer WebM herkenbaar bestand"
+msgstr "Creëer WebM herkenbaar bestand."
 
 #: src/mmg/tabs/global.cpp:370
 msgid ""
@@ -4533,13 +4529,10 @@ msgid "Downloading release information"
 msgstr "Ophalen versie informatie"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:220
-#, fuzzy
 msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core."
-msgstr ""
-"Verlaat de verliesvrije extensies van een audiospoor en houdt alleen de "
-"lossy kern. Dit werkt alleen met DTS sporen."
+msgstr "&Aanzetten voor alle sporen"
 
 #: src/mmg/tabs/input_format.cpp:276
 msgid ""
@@ -5339,11 +5332,9 @@ msgstr ""
 "bestanden kan je deze parameter gebruiken en de grootte verlagen naar 2."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:172
-#, fuzzy
 msgid "Forces the default duration or number of frames per second for a track."
 msgstr ""
-"Zet de standaard duur of aantal beelden per seconde voor dit spoor. Dit kan "
-"zijn een veranderbaar nummer of een fractie."
+"Forceert de standaard duur of het aantal beelden per seconde voor een spoor."
 
 #: src/mmg/cli_options_dlg.cpp:113
 msgid ""
@@ -5857,14 +5848,13 @@ msgid ""
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:158
-#, fuzzy
 msgid ""
 "If set to 'determine automatically' then mkvmerge will decide whether or not "
 "to compress and which algorithm to use based on the track type."
 msgstr ""
-"Stelt de compressie algoritme in voor dit spoor. Indien niets geselecteerd, "
-"dan zal mkvmerge zelf beslissen wat te selecteren op basis van het spoor "
-"type. Meeste sporen zijn niet eens gecomprimeerd. "
+"Als ingesteld op 'automatisch te bepalen', dan zal mkvmerge beslissen al dan "
+"niet niet te comprimeren en dat algoritme te gebruiken op basis van het "
+"soort spoor."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:140
 msgid ""
@@ -5882,15 +5872,12 @@ msgstr ""
 "splitsen wordt gebruikt."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:62
-#, fuzzy
 msgid ""
 "If the OGM format is used and the file's character set is not recognized "
 "correctly then this option can be used to correct that."
 msgstr ""
-"mkvmerge ondersteunt twee hoofdstuk formaten: Het OGM gelijkend tekst format "
-"en het uitgebreide XML format. Als het OGM format is gebruikt en de bestands "
-"karakter set is niet juist herkend dan kan deze optie gebruikt worden dat te "
-"corrigeren. Het negeert dan XML hoofdstuk bestanden."
+"Als het OGM format is gebruikt en de bestands karakter set is niet juist "
+"herkend dan kan deze optie gebruikt worden dat te corrigeren."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:51
 msgid ""
@@ -6552,9 +6539,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:58
 #: src/mkvtoolnix-gui/merge/output.cpp:63
-#, fuzzy
 msgid "It is ignored for XML chapter files."
-msgstr "XML hoofdstuk(ken) bestand(en)"
+msgstr "Wordt genegeerd voor XML hoofdstuk(ken) bestand(en)"
 
 #: src/info/qt_ui.cpp:150
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
@@ -6855,10 +6841,11 @@ msgid ""
 "Make this track the default track for its type (audio, video, subtitles)."
 msgstr ""
 "Maak dit spoor als standaard spoor voor het type (audio, video, "
-"ondertiteling). Af spelers zouden sporen prefereren als de standaard "
-"markering is gezet."
+"ondertiteling). "
 
+# I think this none is now obsolete!
 #: src/mmg/tabs/input_general.cpp:188
+#, fuzzy
 msgid ""
 "Make this track the default track for its type (audio, video, subtitles). "
 "Players should prefer tracks with the default track flag set."
@@ -6883,10 +6870,8 @@ msgid "Malformed line? (%1%)\n"
 msgstr "Misvormde regel? (%1%)\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:153
-#, fuzzy
 msgid "Mark this track as 'forced'."
-msgstr ""
-"Markeer dit spoor als 'geforceerd'. Af spelers moeten dit spoor afspelen."
+msgstr "Markeer dit spoor als 'geforceerd'. "
 
 #: src/mmg/tabs/input_general.cpp:190
 msgid "Mark this track as 'forced'. Players must play this track."
@@ -7610,15 +7595,12 @@ msgid "Only if the job completed successfully"
 msgstr "Alleen als de taak succesvol voltooid is"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:216
-#, fuzzy
 msgid ""
 "Only needed for AAC input files as SBR AAC cannot be detected automatically "
 "for these files."
 msgstr ""
-"Dit spoor bevat SBR AAC/HE-AAC/AAC+ data. Alleen nodig voor AAC invoer "
-"bestanden, omdat SBR AAC niet automatisch gedetecteerd kan worden voor deze "
-"bestanden. Niet benodigd voor AAC sporen gelezen van MP4 of Matroska "
-"bestanden."
+"Alléén nodig voor AAC invoer bestanden omdat SBR AAC  niet automatisch "
+"gedetecteerdkan worden voor deze bestanden."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:225 src/mmg/tabs/input_format.cpp:263
 msgid "Only needed in certain situations:"
@@ -7927,18 +7909,14 @@ msgid "Pixel width: %1%"
 msgstr "Pixel breedte: %1%"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:154
-#, fuzzy
 msgid "Players must play this track."
-msgstr ""
-"Markeer dit spoor als 'geforceerd'. Af spelers moeten dit spoor afspelen."
+msgstr "Af spelers moeten dit spoor afspelen."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:149
 #, fuzzy
 msgid "Players should prefer tracks with the default track flag set."
 msgstr ""
-"Maak dit spoor als standaard spoor voor het type (audio, video, "
-"ondertiteling). Af spelers zouden sporen prefereren als de standaard "
-"markering is gezet."
+"Af spelers zouden sporen prefereren als de standaard markering is gezet."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:256
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:86
@@ -8824,9 +8802,8 @@ msgid "Select file to add"
 msgstr "Selecteer toe te voegen bestand"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:145
-#, fuzzy
 msgid "Select one of the ISO639-2 language codes."
-msgstr "Taal voor dit spoor. Selecteer een van de ISO639-2 taal codes."
+msgstr "Selecteer een van de ISO639-2 taal codes."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:377
 msgid "Select output directory"
@@ -8876,14 +8853,12 @@ msgid "Selected:"
 msgstr "Geselecteerd:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:230
-#, fuzzy
 msgid ""
 "Selects for which blocks mkvmerge will produce index entries ( = cue "
 "entries)."
 msgstr ""
 "Selecteert voor welke blokken mkvmerge index ingangen aanmaakt ( = volg "
-"document(en) (cue) ingangen). \"standaard\" is een goede keuze voor bijna "
-"alle situaties."
+"document(en) (cue) ingangen)."
 
 #: src/mmg/tabs/input_extra.cpp:127
 msgid ""
@@ -9102,9 +9077,8 @@ msgstr ""
 "'laagste' zal zorgen dat mkvmerge ook een lage I / O prioriteit zal kiezen."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:45
-#, fuzzy
 msgid "Sets the segment UIDs to use."
-msgstr "Volgend segment UID:"
+msgstr "Stel de te gebruiken UID's segment in."
 
 #: src/mmg/tabs/global.cpp:332
 msgid ""
@@ -10880,15 +10854,12 @@ msgstr ""
 "en 32000ms, de minimum lengte is 100ms"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:36
-#, fuzzy
 msgid ""
 "The maximum number of files that will be created even if the last file might "
 "contain more bytes/time than wanted."
 msgstr ""
 "Het maximaal aantal bestanden dat wordt gecreëerd zelfs wanneer het laatste "
-"bestand meer bytes/tijd bevat dan benodigd was. Zinvol b.v. wanneer je "
-"precies twee bestanden wilt. Als je dit leeg laat dan is er geen maximaal "
-"aantal bestanden dat mkvmerge zou kunnen creëren."
+"bestand meer bytes/tijd bevat dan benodigd was."
 
 #: src/mmg/tabs/global.cpp:327
 msgid ""
@@ -11231,19 +11202,14 @@ msgstr ""
 "Selecteer a.u.b. een vooraf opgeven taal."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:68
-#, fuzzy
 msgid ""
 "The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by "
 "the track's TITLE, '%n' by the track's number and '%N' by the track's number "
 "padded with a leading 0 for track numbers < 10."
 msgstr ""
-"mkvmerge kan volg document(en) (cue) voor audio cd's lezen en ze automatisch "
-"converteren naar hoofdstukken. Deze optie regelt hoe hoofdstuk namen worden "
-"gecreëerd. De reeks '%p' is vervangen door het spoor van de artist, de reeks "
-"'%t' door het spoor titel, '%n' door het spoornummer en '%N' door het "
-"spoornummer opgevuld beginnend met een 0 voor spoor nummers < 10. De rest is "
-"gekopieerd zoals het was. Als niets is ingegeven dan wordt '%p - %t' "
-"gebruikt."
+"De reeks '%p' is vervangen door het spoor van de artist, de reeks '%t' door "
+"het spoor titel, '%n' door het spoornummer en '%N' door het spoornummer "
+"opgevuld beginnend met een 0 voor spoor nummers < 10."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:95
 msgid "The settings file '%1' contains invalid settings and was not loaded."
@@ -11601,9 +11567,8 @@ msgid ""
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:201
-#, fuzzy
 msgid "The values are only stored in the track headers."
-msgstr "Het spoornummer zoals gebruikt in de kop blok."
+msgstr "De waarden worden alléén opgeslagen in de spoor koppen."
 
 #: src/merge/connection_checks.h:34
 msgid "The width of the two tracks is different: %1% and %2%"
@@ -11886,17 +11851,14 @@ msgid "This has not been implemented yet."
 msgstr "Dit is nog niet geïmplementeerd."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:46
-#, fuzzy
 msgid ""
 "This is a comma-separated list of 128bit segment UIDs in the usual UID form: "
 "hex numbers with or without the \"0x\" prefix, with or without spaces, "
 "exactly 32 digits."
 msgstr ""
-"Een segment afspelen in plaats van dit hoofdstuk. De editie ingesteld via "
-"het segment editie UID moet gebruikt worden voor dit segment, anders wordt "
-"er géén editie gebruikt. Dit is een 128bit segment UID in het gebruikelijke "
-"UID vorm: hex nummers met of zonder het \"0x\" voorzetsel, met of zonder "
-"spatie, exact 32 cijfers.\n"
+" Dit is een komma gescheiden lijst van 128bit segment UID in het "
+"gebruikelijke UID vorm: hex nummers met of zonder het \"0x\" voorzetsel, met "
+"of zonder spatie, exact 32 cijfers."
 
 #: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
 msgid "This is a preview!"
@@ -12000,14 +11962,12 @@ msgstr ""
 "over alle editie ingaven."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:199
-#, fuzzy
 msgid ""
 "This must be comma-separated list of four numbers for the cropping to be "
 "used at the left, top, right and bottom, e.g. '0,20,0,20'."
 msgstr ""
-"Stelt de uitsnij parameters in. Moet een komma gescheiden lijst van vier "
-"nummers zijn, die voor het uitsnijden gebruikt wordt zijnde links, boven, "
-"rechts en onder."
+"Dit moet door komma's gescheiden lijst van vier nummers voor het uitsnijden "
+"zijn op links, boven, rechts en onder, zoals zijn '0,20,0,20'."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:221
 msgid "This only works with DTS audio tracks."
@@ -12022,9 +11982,8 @@ msgstr ""
 "bitstream verwijderd."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:67
-#, fuzzy
 msgid "This option controls how the chapter names are created."
-msgstr "Het optie bestand is aangemaakt."
+msgstr "Deze optie bepaalt hoe de hoofdstuk namen worden aangemaakt."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:30
 msgid "This option needs an additional argument 'n'."
@@ -12974,16 +12933,13 @@ msgid "What to do in the future:"
 msgstr "Wat in de toekomst te doen:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:235
-#, fuzzy
 msgid ""
 "What you input here is added after all the other options the GUI adds so "
 "that you could overwrite any of the GUI's options for this track."
 msgstr ""
-"Vrij-formulier bewerk veld voor gebruiker gedefinieerde optie voor dit "
-"spoor. Wat je hier ingeeft, wordt toegevoegd na alle andere opties die mmg "
-"toevoegt. Daardoor kan je enig andere mmg optie overschrijven voor dit "
-"spoor. Alle gebeurtenissen van de reeks\"<TID>\" zullen vervangen worden "
-"door het sporen, spoor ID."
+"Wat je hier ingeeft, wordt toegevoegd na alle andere opties die GUI "
+"toevoegt. Daardoor kan je enig andere GUI's optie overschrijven voor dit "
+"spoor."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:90
 msgid "When a file is added its name is scanned."
@@ -13566,22 +13522,20 @@ msgid "for all frames"
 msgstr "voor alle beelden"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:227
-#, fuzzy
 msgid ""
 "for files with chapter information (e.g. OGM, MP4) for which mkvmerge does "
 "not detect the encoding correctly"
 msgstr ""
-"2. voor bestanden met hoofdstuk informatie (b.v. OGM, MP4) waarvan mkvmerge "
-"het coderen niet juist detecteert."
+"voor bestanden met hoofdstuk informatie (b.v. OGM, MP4) waarvan mkvmerge het "
+"codering niet juist detecteert."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:226
-#, fuzzy
 msgid ""
 "for subtitle files that do not use a byte order marker (BOM) and that are "
 "not encoded in the system's current character set (%1)"
 msgstr ""
-"1 voor ondertitel bestanden welke geen 'byte order marker (BOM)' gebruiken "
-"en niet gecodeerd zijn in het huidige systeem karakterset (%1%);"
+"voor ondertitel bestanden welke geen 'byte order marker (BOM)' gebruiken en "
+"niet gecodeerd zijn in het huidige systeem karakterset (%1)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:94
 msgid "force 2 bytes"
