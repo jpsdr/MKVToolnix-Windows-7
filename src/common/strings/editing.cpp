@@ -150,6 +150,10 @@ escape(const std::string &source) {
       dst += "\\c";
     else if (*src == '#')
       dst += "\\h";
+    else if (*src == '[')
+      dst += "\\b";
+    else if (*src == ']')
+      dst += "\\B";
     else
       dst += *src;
   }
@@ -177,6 +181,10 @@ unescape(const std::string &source) {
           dst += ':';
         else if (*next_char == 'h')
           dst += '#';
+        else if (*next_char == 'b')
+          dst += '[';
+        else if (*next_char == 'B')
+          dst += ']';
         else
           dst += *next_char;
         src++;
