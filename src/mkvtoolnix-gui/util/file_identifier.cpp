@@ -233,19 +233,22 @@ FileIdentifier::parseProperties(QString const &line)
   const {
   QHash<QString, QString> properties;
 
-  QRegExp re{"\\[(.+)\\]"};
-  if (-1 == re.indexIn(line))
+  QRegularExpression reLine{".*\\[(.*?)\\]\\s*$"};
+  QRegularExpression rePair{"(.+):(.+)"};
+
+  auto match = reLine.match(line);
+  if (!match.hasMatch())
     return properties;
 
-  for (auto &pair : re.cap(1).split(QRegExp{"\\s+"}, QString::SkipEmptyParts)) {
-    QRegExp re{"(.+):(.+)"};
-    if (-1 == re.indexIn(pair))
+  for (auto &pair : match.captured(1).split(QRegExp{"\\s+"}, QString::SkipEmptyParts)) {
+    match = rePair.match(pair);
+    if (!match.hasMatch())
       continue;
 
-    auto key = to_qs(unescape(to_utf8(re.cap(1))));
+    auto key = to_qs(unescape(to_utf8(match.captured(1))));
     if (!properties[key].isEmpty())
       properties[key] += Q("\t");
-    properties[key] += to_qs(unescape(to_utf8(re.cap(2))));
+    properties[key] += to_qs(unescape(to_utf8(match.captured(2))));
   }
 
   return properties;
