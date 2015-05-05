@@ -11,7 +11,6 @@
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/mkvtoolnix_gui.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
-#include "mkvtoolnix-gui/main_window/preview_warning_dialog.h"
 #include "mkvtoolnix-gui/main_window/update_check_thread.h"
 
 #if defined(HAVE_STATIC_QT)
@@ -39,15 +38,6 @@ registerMetaTypes() {
 #endif  // HAVE_CURL_EASY_H
 }
 
-static void
-showPreviewWarning(QWidget *parent) {
-  if (mtx::sys::get_environment_variable("NO_WARNING") == "1")
-    return;
-
-  auto dlg = std::make_unique<PreviewWarningDialog>(parent);
-  dlg->exec();
-}
-
 int
 main(int argc,
      char **argv) {
@@ -55,8 +45,6 @@ main(int argc,
 
   auto app        = std::make_unique<App>(argc, argv);
   auto mainWindow = std::make_unique<MainWindow>();
-
-  showPreviewWarning(mainWindow.get());
 
   mainWindow->show();
   app->exec();
