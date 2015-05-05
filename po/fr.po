@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-04 22:26+0200\n"
+"POT-Creation-Date: 2015-05-05 18:43+0200\n"
 "PO-Revision-Date: 2015-05-01 20:45+0100\n"
 "Last-Translator: DenB <denb10@free.fr>\n"
 "Language-Team: Denis Baron <denb10@free.fr>\n"
@@ -5261,10 +5261,6 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr "Si vous voulez les concaténer ou les ajouter en tant que parties supplémentaires, vous devez sélectionner à quel fichier source vous voulez le faire :"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:151
-msgid "If you want to know more about the current status then take a look at the following web page:"
-msgstr "Si vous voulez en savoir plus sur l'état d'avancement actuel, jetez un œil sur la page web suivante :"
-
 #: src/output/p_textsubs.cpp:66
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
@@ -6740,9 +6736,6 @@ msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Eit
 msgstr "Un plan de concaténation incomplet a été donné pour le fichier n° %1% (« %2% »). Soit vous n'indiquez aucun plan (auquel cas le plan par défaut est utilisé), soit vous précisez un plan pour toutes les pistes copiées.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
-msgid "Only play lists whose duration are at least this long are considered and offered to the user for selection."
-msgstr "Seules les listes de lecture ayant au moins cette durée sont retenues et présentées au choix de l'utilisateur."
-
 #: src/mmg/options/mmg.cpp:135
 msgid "Only playlists whose duration are at least this long are considered and offered to the user for selection."
 msgstr "Seules les listes de lecture ayant au moins cette durée sont retenues et présentées au choix de l'utilisateur."
@@ -7044,10 +7037,6 @@ msgstr "Veuillez sélectionner les actions à appliquer à l'édition sélection
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:764
 msgid "Pre&viously used output directory"
 msgstr "Dossier de destination précé&demment utilisé"
-
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:149
-msgid "Preview warning"
-msgstr "Avertissement concernant cet aperçu"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 msgid "Previous file name"
@@ -8812,10 +8801,6 @@ msgstr "Le fichier actuel (numéro %d) ne peut pas être supprimé. D'autres fic
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Le code temporel du paquet actuel est inférieur à celui du précédent, ce qui signifie habituellement que le fichier source est un fichier Matroska qui n'est pas à 100%% correctement construit. Le code temporel de tous les paquets doit être corrigé de %1% ms pour ne perdre aucune donnée. La désynchronisation éventuelle de l'audio et de la vidéo peut se corriger par l'option « --sync ». Si vous utilisez cette option et que vous obtenez quand même cet avertissement, ne vous inquiétez PAS, c'est normal. Si cela se reproduit pour une piste particulière, c'est que le fichier source est mal numérisé ou que mkvmerge contient un bogue. Contactez dans ce cas l'auteur Moritz Bunkus <moritz@bunkus.org>.\n"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:150
-msgid "The current version of this GUI is just a preview. It's not an alpha release, and certainly not a beta release. Many features present in the old GUI haven't been implemented yet, and there are many bugs. Its purpose is to give interested users a glimpse of what the new GUI will look and feel like."
-msgstr "La version actuelle de cette interface constitue juste un aperçu. Ce n'est pas une version alpha, encore moins une bêta. Un certain nombre de fonctionnalités présentes dans l'ancienne interface n'ont pas encore été implémentées. Le but est de permettre aux utilisateurs intéressés d'entrevoir ce que sera la nouvelle interface."
-
 #: src/input/r_usf.cpp:90
 #, boost-format
 msgid "The default language code '%1%' is not a valid ISO639-2 language code and will be ignored.\n"
@@ -9802,7 +9787,8 @@ msgid "The update information could not be retrieved from %1%.\n"
 msgstr "Les informations de mise à jour ne peuvent pas être récupérées depuis %1%.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:109
-msgid "The user can then select which play list to actually add."
+#, fuzzy
+msgid "The user can then select which playlist to actually add."
 msgstr "L'utilisateur peut ensuite sélectionner la liste de lecture à ajouter effectivement."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:168
@@ -10010,10 +9996,6 @@ msgstr "Cela n'a pas encore été implémenté."
 msgid "This is a comma-separated list of 128bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."
 msgstr "Un segment à lire à la place de ce chapitre. Le jeu d'édition via l'UID d'édition de segment doit être utilisé pour ce segment, sinon aucune édition n'est utilisée. C'est un UID de segment de 128 bits de forme habituelle : nombre hexadécimal d'exactement 32 chiffres, avec ou sans le préfixe « 0x », avec ou sans espaces.\n"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
-msgid "This is a preview!"
-msgstr "Ceci est un aperçu !"
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:70
 msgid "This is done at startup and at most once within 24 hours."
 msgstr "Cela est effectué au démarrage et au plus une fois en 24 heures."
@@ -10044,7 +10026,8 @@ msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence hea
 msgstr "Cela est utilisé par exemple pour enregistrer les en-têtes de séquence des pistes vidéo MPEG-1/2."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:110
-msgid "This is useful for situations like Blu-ray discs on which a multitude of play lists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a play list belongs to."
+#, fuzzy
+msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr "C'est utile dans des situations comme les disques Blu-ray où un même dossier contient une multitude de listes de lecture pour lesquelles il n'est pas évident de savoir à quelle rubrique (film principal, extras, etc.) elles appartiennent."
 
 #: src/mmg/tabs/additional_parts_dlg.cpp:62
@@ -10917,7 +10900,8 @@ msgid "When the user adds such a file the track's language input is set to the l
 msgstr "Quand l'utilisateur ajoute un tel fichier, la langue de la piste est réglée sur la propriété langue du fichier source."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:108
-msgid "Whenever the user adds a play list the program can automatically scan the directory for other play lists and present the user with a detailed list of the play lists found."
+#, fuzzy
+msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
 msgstr "Quand l'utilisateur ajoute une liste de lecture, le programme peut automatiquement en rechercher d'autres dans le dossier et présenter une liste détaillée de celles qu'il a trouvées."
 
 #: src/common/property_element.cpp:135
@@ -12378,4 +12362,19 @@ msgstr "– pas de sélection par défaut –"
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:37
 msgid "– set to none –"
 msgstr "– réglé sur sans –"
+
+#~ msgid "If you want to know more about the current status then take a look at the following web page:"
+#~ msgstr "Si vous voulez en savoir plus sur l'état d'avancement actuel, jetez un œil sur la page web suivante :"
+
+#~ msgid "Only play lists whose duration are at least this long are considered and offered to the user for selection."
+#~ msgstr "Seules les listes de lecture ayant au moins cette durée sont retenues et présentées au choix de l'utilisateur."
+
+#~ msgid "Preview warning"
+#~ msgstr "Avertissement concernant cet aperçu"
+
+#~ msgid "The current version of this GUI is just a preview. It's not an alpha release, and certainly not a beta release. Many features present in the old GUI haven't been implemented yet, and there are many bugs. Its purpose is to give interested users a glimpse of what the new GUI will look and feel like."
+#~ msgstr "La version actuelle de cette interface constitue juste un aperçu. Ce n'est pas une version alpha, encore moins une bêta. Un certain nombre de fonctionnalités présentes dans l'ancienne interface n'ont pas encore été implémentées. Le but est de permettre aux utilisateurs intéressés d'entrevoir ce que sera la nouvelle interface."
+
+#~ msgid "This is a preview!"
+#~ msgstr "Ceci est un aperçu !"
 

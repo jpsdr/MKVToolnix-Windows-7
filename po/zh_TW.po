@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-04 22:26+0200\n"
+"POT-Creation-Date: 2015-05-05 18:43+0200\n"
 "PO-Revision-Date: 2015-05-01 08:28+0200\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -5226,10 +5226,6 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr "若你要添加或加入作為附加部分那麼你必須選擇要加入的輸入檔案:"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:151
-msgid "If you want to know more about the current status then take a look at the following web page:"
-msgstr "若你想要知道更多有關目前狀態的資訊請到下面網頁查詢:"
-
 #: src/output/p_textsubs.cpp:66
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
@@ -6706,9 +6702,6 @@ msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Eit
 msgstr "只給出了檔案 %1% (「%2%」) 的部分添加對應。只有不指定任何對應 (此時將使用預設對應) 或為所有軌道指定對應時，才會複製所有軌道。\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
-msgid "Only play lists whose duration are at least this long are considered and offered to the user for selection."
-msgstr "只有播放清單的時間長度至少有一定長度並提供使用者選擇。"
-
 #: src/mmg/options/mmg.cpp:135
 msgid "Only playlists whose duration are at least this long are considered and offered to the user for selection."
 msgstr "只有播放清單的時間長度至少有一定長度並提供使用者選擇。"
@@ -7008,10 +7001,6 @@ msgstr "請選擇要套用到選擇的版本或章節和所有子章節的動作
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:764
 msgid "Pre&viously used output directory"
 msgstr "上次使用的輸出目錄"
-
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:149
-msgid "Preview warning"
-msgstr "預覽警告訊息"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 msgid "Previous file name"
@@ -8765,10 +8754,6 @@ msgstr "目前檔案 (序號 %d) 不能移除。有其他檔案 -- 至少檔案�
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "目前套件的時間碼比前一個套件的小。這通常表明來源檔未正常 100%% 建立的 Matroska 檔案。所有套件的時間碼將以 %1%ms 調整以避免丟失任何資料。這可能導致音/視訊不同步，但可以透過 mkvmerge 的 \"--sync\" 選項修正。如果您已經使用了 \"--sync\" 但仍然收到本警告，請 *不要* 著急 -- 這是正常的。如果對於一個特定軌超過一次出現本錯誤且您超過一次收到本訊息，既可能是因為來源檔嚴重錯誤，也可能是因為 mkvmerge 包含了某個 bug。如果是這樣，請聯繫作者 Moritz Bunkus <moritz@bunkus.org>。\n"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:150
-msgid "The current version of this GUI is just a preview. It's not an alpha release, and certainly not a beta release. Many features present in the old GUI haven't been implemented yet, and there are many bugs. Its purpose is to give interested users a glimpse of what the new GUI will look and feel like."
-msgstr "目前的圖形介面只是個預覽版本。這稱不上是早期測試版本，也絕對不是候選測試版本。舊版圖形介面的很多功能都尚未實現，且還有很多程式錯誤。這只是為了提供對圖形介面感興趣的使用者可以體驗新版圖形介面的外觀跟使用性。"
-
 #: src/input/r_usf.cpp:90
 #, boost-format
 msgid "The default language code '%1%' is not a valid ISO639-2 language code and will be ignored.\n"
@@ -9743,7 +9728,8 @@ msgid "The update information could not be retrieved from %1%.\n"
 msgstr "無法從 %1% 取得更新資訊。\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:109
-msgid "The user can then select which play list to actually add."
+#, fuzzy
+msgid "The user can then select which playlist to actually add."
 msgstr "使用者能選擇實際要加入的播放清單。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:168
@@ -9951,10 +9937,6 @@ msgstr "這功能尚未實現。"
 msgid "This is a comma-separated list of 128bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."
 msgstr "在此章節要播放的剪輯。此版本應該會用到剪輯版本 UID 的設定，也就是不會用到版本。這是以一般 UID 形式表示的 128 位元剪輯 UID: 可於字首加上或不加上「0x」來切換十六進位碼格式，加上或不加上空格表示 32 位數字。\n"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
-msgid "This is a preview!"
-msgstr "這是預覽版本！"
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:70
 msgid "This is done at startup and at most once within 24 hours."
 msgstr "程式啟動時已完成且最快 24 小時內再次執行一次。"
@@ -9985,7 +9967,8 @@ msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence hea
 msgstr "這被用於 MPEG-1/-2 視訊軌的序列表頭存儲。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:110
-msgid "This is useful for situations like Blu-ray discs on which a multitude of play lists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a play list belongs to."
+#, fuzzy
+msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr "這項在某些情況很有用，例如藍光光碟目錄有多份播放清單且清單所屬的目錄不明顯 (即主體影片、幕後花絮等等)。"
 
 #: src/mmg/tabs/additional_parts_dlg.cpp:62
@@ -10858,7 +10841,8 @@ msgid "When the user adds such a file the track's language input is set to the l
 msgstr "當使用者加入檔案時軌道語言會設定成來源檔案的語言屬性。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:108
-msgid "Whenever the user adds a play list the program can automatically scan the directory for other play lists and present the user with a detailed list of the play lists found."
+#, fuzzy
+msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
 msgstr "當使用者加入播放清單時程式都會自動掃描其他播放清單的目錄，並提供找到播放清單的詳細清單。"
 
 #: src/common/property_element.cpp:135
@@ -12318,4 +12302,19 @@ msgstr "- 預設無選項目 -"
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:37
 msgid "– set to none –"
 msgstr "- 設定為無 -"
+
+#~ msgid "If you want to know more about the current status then take a look at the following web page:"
+#~ msgstr "若你想要知道更多有關目前狀態的資訊請到下面網頁查詢:"
+
+#~ msgid "Only play lists whose duration are at least this long are considered and offered to the user for selection."
+#~ msgstr "只有播放清單的時間長度至少有一定長度並提供使用者選擇。"
+
+#~ msgid "Preview warning"
+#~ msgstr "預覽警告訊息"
+
+#~ msgid "The current version of this GUI is just a preview. It's not an alpha release, and certainly not a beta release. Many features present in the old GUI haven't been implemented yet, and there are many bugs. Its purpose is to give interested users a glimpse of what the new GUI will look and feel like."
+#~ msgstr "目前的圖形介面只是個預覽版本。這稱不上是早期測試版本，也絕對不是候選測試版本。舊版圖形介面的很多功能都尚未實現，且還有很多程式錯誤。這只是為了提供對圖形介面感興趣的使用者可以體驗新版圖形介面的外觀跟使用性。"
+
+#~ msgid "This is a preview!"
+#~ msgstr "這是預覽版本！"
 

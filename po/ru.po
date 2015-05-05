@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-04 22:26+0200\n"
+"POT-Creation-Date: 2015-05-05 18:43+0200\n"
 "PO-Revision-Date: 2014-11-05 08:50+0100\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
@@ -5431,10 +5431,6 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:151
-msgid "If you want to know more about the current status then take a look at the following web page:"
-msgstr ""
-
 #: src/output/p_textsubs.cpp:66
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
@@ -6941,9 +6937,6 @@ msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Eit
 msgstr "Дано неполное сопоставление для файла номер %1% (%2%). Либо не указывайте сопоставление вообще (тогда будет использоваться сопоставление, заданное по умолчанию), либо определите для всех копируемых дорожек.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
-msgid "Only play lists whose duration are at least this long are considered and offered to the user for selection."
-msgstr ""
-
 #: src/mmg/options/mmg.cpp:135
 msgid "Only playlists whose duration are at least this long are considered and offered to the user for selection."
 msgstr ""
@@ -7261,11 +7254,6 @@ msgstr ""
 #, fuzzy
 msgid "Pre&viously used output directory"
 msgstr "Использовать предыдущий каталог вывода"
-
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:149
-#, fuzzy
-msgid "Preview warning"
-msgstr "Были предупреждения"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 #, fuzzy
@@ -9095,10 +9083,6 @@ msgstr "Текущий файл (номер %d) не может быть уда�
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Тайм-код текущего пакета меньше, чем у предыдущего пакета. Это обычно означает, что исходный файл представляет собой файл Matroska, созданный не совсем правильно. Тайм-коды всех пакетов будут скорректированы на %1%ms, чтобы избежать потерь данных. Это может сбить синхронизацию аудио/видео, что может быть исправлено с помощью параметра mkvmerge \"--sync\". Если вы уже используете \"--sync\" и всё равно получаете это предупреждение, не беспокойтесь — это нормально. Если эта ошибка происходит несколько раз, и вы получаете это сообщение более одного раза для некоторой дорожки, то либо это исходный файл плохо собран, либо mkvmerge содержит ошибку. В этом случае вам следует связаться с автором Moritz Bunkus <moritz@bunkus.org>.\n"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:150
-msgid "The current version of this GUI is just a preview. It's not an alpha release, and certainly not a beta release. Many features present in the old GUI haven't been implemented yet, and there are many bugs. Its purpose is to give interested users a glimpse of what the new GUI will look and feel like."
-msgstr ""
-
 #: src/input/r_usf.cpp:90
 #, boost-format
 msgid "The default language code '%1%' is not a valid ISO639-2 language code and will be ignored.\n"
@@ -10135,7 +10119,7 @@ msgid "The update information could not be retrieved from %1%.\n"
 msgstr "Информация об обновлениях не может быть получена из %1%.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:109
-msgid "The user can then select which play list to actually add."
+msgid "The user can then select which playlist to actually add."
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:168
@@ -10356,10 +10340,6 @@ msgstr "Файл не был изменён."
 msgid "This is a comma-separated list of 128bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."
 msgstr "Сегмент, который надо воспроизвести вместо этой главы. Будет использована редакция, заданная через UID редакции сегмента, иначе не будет использовано никакой редакции вообще. Это 128-битный UID сегмента в обычной форме записи UID: шестнадцатиричное число с префиксом \"0x\" или без, с пробелами или без, длиной ровно в 32 символа.\n"
 
-#: src/mkvtoolnix-gui/forms/preview_warning_dialog.h:148
-msgid "This is a preview!"
-msgstr ""
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:70
 msgid "This is done at startup and at most once within 24 hours."
 msgstr ""
@@ -10391,7 +10371,7 @@ msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence hea
 msgstr "Позволяет использовать элемент CodecState. Используется, например, в видеодорожках MPEG-1/-2 для хранения заголовков последовательностей."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:110
-msgid "This is useful for situations like Blu-ray discs on which a multitude of play lists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a play list belongs to."
+msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr ""
 
 #: src/mmg/tabs/additional_parts_dlg.cpp:62
@@ -11291,7 +11271,7 @@ msgid "When the user adds such a file the track's language input is set to the l
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:108
-msgid "Whenever the user adds a play list the program can automatically scan the directory for other play lists and present the user with a detailed list of the play lists found."
+msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
 msgstr ""
 
 #: src/common/property_element.cpp:135
@@ -13212,6 +13192,10 @@ msgstr ""
 #, fuzzy
 #~ msgid "Pre&vious segment UID:"
 #~ msgstr "UID предыдущего сегмента:"
+
+#, fuzzy
+#~ msgid "Preview warning"
+#~ msgstr "Были предупреждения"
 
 #, fuzzy
 #~ msgid "PushButton"
