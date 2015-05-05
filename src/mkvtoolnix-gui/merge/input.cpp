@@ -8,6 +8,7 @@
 #include <QList>
 #include <QMessageBox>
 #include <QString>
+#include <QTimer>
 
 #include "common/extern_data.h"
 #include "common/iso639.h"
@@ -937,6 +938,10 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
     addOrAppendFiles(AddingAppendingFilesDialog::Decision::Append == decision, fileNames, fileIdx);
 }
 
+void
+Tab::addOrAppendDroppedFilesDelayed() {
+  addOrAppendDroppedFiles(m_filesToAddDelayed);
+}
 
 void
 Tab::dragEnterEvent(QDragEnterEvent *event) {
@@ -945,8 +950,10 @@ Tab::dragEnterEvent(QDragEnterEvent *event) {
 
 void
 Tab::dropEvent(QDropEvent *event) {
-  if (m_filesDDHandler.handle(event, true))
-    addOrAppendDroppedFiles(m_filesDDHandler.fileNames());
+  if (m_filesDDHandler.handle(event, true)) {
+    m_filesToAddDelayed += m_filesDDHandler.fileNames();
+    QTimer::singleShot(0, this, SLOT(addOrAppendDroppedFilesDelayed()));
+  }
 }
 
 void

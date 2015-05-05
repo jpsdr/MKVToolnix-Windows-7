@@ -33,6 +33,7 @@ protected:
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
   mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
+  QStringList m_filesToAddDelayed;
 
   // "Input" tab:
   SourceFileModel *m_filesModel;
@@ -120,6 +121,7 @@ public slots:
   virtual void onFileRowsInserted(QModelIndex const &parentIdx, int first, int last);
   virtual void onTrackRowsInserted(QModelIndex const &parentIdx, int first, int last);
   virtual void addOrAppendDroppedFiles(QStringList const &fileNames);
+  virtual void addOrAppendDroppedFilesDelayed();
 
   // Output tab:
   virtual void setDestination(QString const &newValue);
