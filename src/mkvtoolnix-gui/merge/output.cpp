@@ -19,9 +19,12 @@ Tab::setupOutputControls() {
   for (auto const &control : comboBoxControls)
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-  setupOutputToolTips();
-
   onSplitModeChanged(MuxConfig::DoNotSplit);
+}
+
+void
+Tab::retranslateOutputUI() {
+  setupOutputToolTips();
 }
 
 void

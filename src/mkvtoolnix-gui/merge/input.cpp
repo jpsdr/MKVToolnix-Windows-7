@@ -98,8 +98,6 @@ Tab::setupInputControls() {
   for (auto const &control : m_comboBoxControls)
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-  setupInputToolTips();
-
   // "files" context menu
   ui->files->addAction(m_addFilesAction);
   ui->files->addAction(m_appendFilesAction);
@@ -806,6 +804,8 @@ Tab::retranslateInputUI() {
   for (auto &comboBox : m_comboBoxControls)
     if (comboBox->count() && !comboBox->itemData(0).isValid())
       comboBox->setItemText(0, QY("<do not change>"));
+
+  setupInputToolTips();
 }
 
 QModelIndex

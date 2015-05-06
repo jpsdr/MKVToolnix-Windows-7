@@ -227,6 +227,7 @@ Tab::retranslateUi() {
   ui->retranslateUi(this);
 
   retranslateInputUI();
+  retranslateOutputUI();
   retranslateAttachmentsUI();
 
   emit titleChanged();

@@ -172,6 +172,7 @@ protected:
   virtual void setupOutputToolTips();
 
   virtual void retranslateInputUI();
+  virtual void retranslateOutputUI();
   virtual void retranslateAttachmentsUI();
 
   virtual QStringList selectFilesToAdd(QString const &title);
