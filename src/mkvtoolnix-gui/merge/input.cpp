@@ -941,6 +941,7 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
 void
 Tab::addOrAppendDroppedFilesDelayed() {
   addOrAppendDroppedFiles(m_filesToAddDelayed);
+  m_filesToAddDelayed.clear();
 }
 
 void
