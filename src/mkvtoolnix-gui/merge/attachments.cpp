@@ -23,10 +23,6 @@ Tab::setupAttachmentsControls() {
   for (auto &mime_type : mime_types)
     ui->attachmentMIMEType->addItem(to_qs(mime_type.name), to_qs(mime_type.name));
 
-  // Attachment style
-  ui->attachmentStyle->setItemData(0, static_cast<int>(Attachment::ToAllFiles));
-  ui->attachmentStyle->setItemData(1, static_cast<int>(Attachment::ToFirstFile));
-
   // Context menu
   ui->attachments->addAction(m_addAttachmentsAction);
   ui->attachments->addAction(m_removeAttachmentsAction);
@@ -201,8 +197,13 @@ Tab::setAttachmentControlValues(Attachment *attachment) {
 void
 Tab::retranslateAttachmentsUI() {
   m_attachmentsModel->retranslateUi();
+
   m_addAttachmentsAction->setText(QY("&Add"));
   m_removeAttachmentsAction->setText(QY("&Remove"));
+
+  // Attachment style
+  ui->attachmentStyle->setItemData(0, static_cast<int>(Attachment::ToAllFiles));
+  ui->attachmentStyle->setItemData(1, static_cast<int>(Attachment::ToFirstFile));
 }
 
 }}}
