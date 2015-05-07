@@ -1601,7 +1601,7 @@ process_file(const std::string &file_name) {
   try {
     in = mm_file_io_c::open(file_name);
   } catch (mtx::mm_io::exception &ex) {
-    show_error((boost::format(Y("Error: Couldn't open input file %1% (%2%).\n")) % file_name % ex).str());
+    show_error((boost::format(Y("Error: Couldn't open input file %1% (%2%).")) % file_name % ex).str());
     return false;
   }
 
