@@ -32,6 +32,7 @@ console_show_element(int level,
 void
 console_show_error(const std::string &error) {
   mxinfo(boost::format("(%1%) %2%\n") % NAME % error);
+  mxexit(2);
 }
 
 #if !defined(HAVE_QT) && !defined(HAVE_WXWIDGETS)
