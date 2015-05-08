@@ -151,7 +151,6 @@ Section "Program files" SEC01
   File "doc\ChangeLog.txt"
   File "doc\COPYING.txt"
   File "doc\README.txt"
-  File "doc\README.Windows.txt"
   SetOutPath "$INSTDIR\doc\en"
   File "doc\en\mkvextract.html"
   File "doc\en\mkvinfo.html"
@@ -437,6 +436,8 @@ Section "Program files" SEC01
   Delete "$INSTDIR\doc\mkvmerge-gui.*"
   Delete "$INSTDIR\doc\images\*.gif"
   RMDir "$INSTDIR\doc\images"
+
+  Delete "$INSTDIR\doc\README.Windows.txt"
 
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\App Paths\AppMainExe.exe"
   Delete "$SMPROGRAMS\$ICONS_GROUP\Documentation\Command line reference\base64tool CLI reference.lnk"
