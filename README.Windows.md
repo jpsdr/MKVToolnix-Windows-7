@@ -20,7 +20,7 @@ C++ himself and couldn't provide project files for it.
 You will need:
 
 - a mingw cross compiler
-- roughly 2 GB of free space available
+- roughly 4 GB of free space available
 
 Luckily there's the [mingw-cross-env project]
 (http://mingw-cross-env.nongnu.org/) that provides an easy-to-use way
