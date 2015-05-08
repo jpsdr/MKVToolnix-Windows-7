@@ -1,5 +1,5 @@
-Building MKVToolNix 7.8.0 on Windows
-====================================
+Building MKVToolNix 7.8.0 for Windows
+=====================================
 
 There is currently only one supported way to build MKVToolNix for
 Windows: on Linux using a mingw cross compiler. It is known that you
