@@ -10,7 +10,7 @@ using namespace mtx::gui;
 PageBase::PageBase(Tab &parent,
                    translatable_string_c const &title)
   : QWidget{&parent}
-  , m_parent{parent}
+  , m_parent(parent)
   , m_title{title}
 {
   setVisible(false);

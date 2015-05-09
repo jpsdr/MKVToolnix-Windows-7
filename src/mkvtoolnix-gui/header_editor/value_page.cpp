@@ -25,13 +25,13 @@ ValuePage::ValuePage(Tab &parent,
                      translatable_string_c const &title,
                      translatable_string_c const &description)
   : PageBase{parent, title}
-  , m_master{master}
-  , m_callbacks{callbacks}
+  , m_master(master)
+  , m_callbacks(callbacks)
   , m_description{description}
   , m_valueType{valueType}
   , m_element{find_ebml_element_by_id(&m_master, m_callbacks.GlobalId)}
   , m_present{!!m_element}
-  , m_topLevelPage{topLevelPage}
+  , m_topLevelPage(topLevelPage)
 {
 }
 

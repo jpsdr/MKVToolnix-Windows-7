@@ -15,7 +15,7 @@ TrackTypePage::TrackTypePage(Tab &parent,
                              uint64_t trackIdxMkvmerge)
   : TopLevelPage{parent, "", true}
   , ui{new Ui::TrackTypePage}
-  , m_master{master}
+  , m_master(master)
   , m_trackIdxMkvmerge{trackIdxMkvmerge}
   , m_trackType{FindChildValue<KaxTrackType>(m_master)}
   , m_trackNumber{FindChildValue<KaxTrackNumber>(m_master)}

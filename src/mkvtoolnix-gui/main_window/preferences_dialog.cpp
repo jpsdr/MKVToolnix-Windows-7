@@ -16,7 +16,7 @@ namespace mtx { namespace gui {
 PreferencesDialog::PreferencesDialog(QWidget *parent)
   : QDialog{parent}
   , ui{new Ui::PreferencesDialog}
-  , m_cfg{Util::Settings::get()}
+  , m_cfg(Util::Settings::get())
   , m_previousUiLocale{m_cfg.m_uiLocale}
 {
   ui->setupUi(this);
