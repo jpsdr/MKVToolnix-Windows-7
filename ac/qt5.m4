@@ -9,7 +9,7 @@ AC_ARG_ENABLE([static_qt],
 AC_ARG_WITH([qt_pkg_config_modules],
   AC_HELP_STRING([--with-qt-pkg-config-modules=modules],[gather include/link flags for additional Qt modules from pkg-config]))
 
-qt_min_ver=5.0.0
+qt_min_ver=5.2.0
 
 if test x"$enable_qt" = "xyes" -a \
   '(' x"$enable_gui" = x"yes" -o x"$enable_gui" = "x" ')'; then
