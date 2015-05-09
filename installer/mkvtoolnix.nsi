@@ -8,7 +8,7 @@
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
 
-!define MTX_REGKEY "Software\mkvmergeGUI"
+!define MTX_REGKEY "Software\bunkus.org"
 
 SetCompressor /SOLID lzma
 #SetCompress off
