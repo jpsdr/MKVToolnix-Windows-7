@@ -13,7 +13,6 @@ def create_source_tarball suffix = ""
       "git submodule init",
       "git submodule update",
       "rm -rf .git",
-      "mv debian-upstream debian",
       "cd ..",
       "tar cJf \"#{tarball}\" mkvtoolnix-#{c(:PACKAGE_VERSION)}",
     ]
