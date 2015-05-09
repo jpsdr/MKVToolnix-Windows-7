@@ -20,7 +20,7 @@ BuildRequires: boost-devel >= 1.46.0, gcc-c++ >= 4.6.3, ruby >= 1.9
 %if 0%{?suse_version}
 Group: Productivity/Multimedia/Other
 License: GPL-2.0
-BuildRequires:  gettext-tools
+BuildRequires: gettext-tools libqt5-qtbase-devel
 
 %if %{?suse_version} < 1320
 BuildRequires: wxWidgets-devel
@@ -32,12 +32,13 @@ BuildRequires: wxWidgets-3_0-devel
 %if 0%{?fedora} || 0%{?rhel} || 0%{?centos}
 Group: Applications/Multimedia
 License: GPLv2
+BuildRequires: qt5-qtbase-devel, gettext-devel
 
 %if 0%{?fedora}
-BuildRequires: rubypick, gettext-devel, wxGTK3-devel, pugixml-devel
+BuildRequires: rubypick, wxGTK3-devel, pugixml-devel
 
 %else
-BuildRequires: gettext-devel, wxGTK-devel
+BuildRequires: wxGTK-devel
 %endif
 
 %endif
@@ -68,9 +69,11 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 export EXTRA_CONFIGURE_ARGS="--with-wx-config=/usr/bin/wx-config-3.0"
 %endif
 
-%configure --prefix=%{_prefix} $EXTRA_CONFIGURE_ARGS
+%configure --prefix=%{_prefix} $EXTRA_CONFIGURE_ARGS \
+  --enable-qt --with-mkvtoolnix-gui
 
 %build
+export LC_CTYPE=en_US.UTF-8
 ./drake
 ./drake apps:strip
 %if 0%{?suse_version}
@@ -78,6 +81,7 @@ sed -i -e 's/^Exec=mmg/Exec=mkvmerge-gui/' share/desktop/mkvmergeGUI.desktop
 %endif
 
 %install
+export LC_CTYPE=en_US.UTF-8
 %if 0%{?suse_version}
 ./drake DESTDIR=$RPM_BUILD_ROOT MMG_BIN=mkvmerge-gui install
 %else
@@ -122,5 +126,8 @@ sed -i -e 's/^Exec=mmg/Exec=mkvmerge-gui/' share/desktop/mkvmergeGUI.desktop
 %{_datadir}/man/zh_CN
 
 %changelog -n mkvtoolnix
+* Sat May  9 2015 Moritz Bunkus <moritz@bunkus.org> 7.8.0-1
+- Add support for the Qt-based GUIs
+
 * Sat Nov 15 2014 Moritz Bunkus <moritz@bunkus.org> 7.3.0-1
 - Serious reorganization & fixes for rpmlint complaints
