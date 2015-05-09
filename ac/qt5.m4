@@ -130,14 +130,19 @@ if test x"$enable_qt" = "xyes" -a \
 
   if test $ok = 1; then
     with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/ /,/g'`"
-    PKG_CHECK_EXISTS([Qt5Core,Qt5Gui,Qt5Widgets,Qt5PlatformSupport],,[ok=0])
+    if test x"$with_qt_pkg_config_modules" != x ; then
+      with_qt_pkg_config_modules="$with_qt_pkg_config_modules,"
+    fi
+    with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Core,Qt5Core,Qt5Gui,Qt5Widgets"
+    PKG_CHECK_EXISTS([$with_qt_pkg_config_modules],,[ok=0])
+    PKG_CHECK_EXISTS([Qt5PlatformSupport],[with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5PlatformSupport"])
   fi
 
   if test $ok = 1; then
     dnl Try compiling and linking an application.
     with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/,/ /g'`"
-    QT_CFLAGS="`$PKG_CONFIG --cflags Qt5Core Qt5Gui Qt5Widgets Qt5PlatformSupport $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
-    QT_LIBS="`$PKG_CONFIG --libs Qt5Core Qt5Gui Qt5Widgets Qt5PlatformSupport $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
+    QT_CFLAGS="`$PKG_CONFIG --cflags $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
+    QT_LIBS="`$PKG_CONFIG --libs $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
 
     AC_LANG_PUSH(C++)
     AC_CACHE_VAL(am_cv_qt_compilation, [
