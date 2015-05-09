@@ -167,7 +167,6 @@ Config::Config(int &argc, char **argv)
 int ai = 0;
 char **ac = 0;
 Config app(ai,ac);
-qWarning(qPrintable(app.applicationName()));
 return 0;
           ], [ am_cv_qt_compilation=1 ], [ am_cv_qt_compilation=0 ])
 
@@ -254,6 +253,10 @@ fi
 
 if test x"$have_qt" != "xyes" ; then
   opt_features_no="$opt_features_no\n   * GUIs (Qt version)"
+  QT_CFLAGS=
+  QT_LIBS=
+  MOC=
+  UIC=
 elif test x"$BUILD_MKVTOOLNIX_GUI" = "xyes" ; then
   opt_features_yes="$opt_features_yes\n   * mkvtoolnix-gui"
 fi
