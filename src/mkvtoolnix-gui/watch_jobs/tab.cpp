@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QPushButton>
+#include <QtGlobal>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/watch_jobs/tab.h"
@@ -27,6 +28,12 @@ Tab::~Tab() {
 void
 Tab::retranslateUi() {
   ui->retranslateUi(this);
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
+  ui->output->setPlaceholderText(QY("no output yet"));
+  ui->warnings->setPlaceholderText(QY("no warnings yet"));
+  ui->errors->setPlaceholderText(QY("no errors yet"));
+#endif
 }
 
 void
