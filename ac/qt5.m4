@@ -3,7 +3,8 @@ dnl Check for Qt 5
 dnl
 
 AC_ARG_ENABLE([qt],
-  AC_HELP_STRING([--enable-qt],[compile the Qt version of the GUIs (no)]))
+  AC_HELP_STRING([--enable-qt],[compile the Qt version of the GUIs (yes)]),
+  [],[enable_qt=yes])
 AC_ARG_ENABLE([static_qt],
   AC_HELP_STRING([--enable-static-qt],[link to static versions of the Qt library (no)]))
 AC_ARG_WITH([qt_pkg_config_modules],
@@ -240,8 +241,15 @@ return 0;
     AC_MSG_RESULT(no: not found by pkg-config)
   fi
 
-  AC_ARG_WITH(mkvtoolnix-gui,[AS_HELP_STRING([--with-mkvtoolnix-gui],[build mkvtoolnix-gui (not working yet, only for development)])],
-              [BUILD_MKVTOOLNIX_GUI=yes],[BUILD_MKVTOOLNIX_GUI=no])
+  AC_ARG_WITH(mkvtoolnix-gui,[AS_HELP_STRING([--without-mkvtoolnix-gui],[do not build mkvtoolnix-gui])])
+  if test x"$with_mkvtoolnix_gui" = xyes -o x"$with_mkvtoolnix_gui" = x; then
+    BUILD_MKVTOOLNIX_GUI=yes
+  else
+    BUILD_MKVTOOLNIX_GUI=no
+  fi
+
+else
+  echo '*** Not checking for Qt: disabled by user request'
 fi
 
 if test x"$have_qt" != "xyes" ; then

@@ -2,7 +2,7 @@ dnl
 dnl Check for wxWidgets
 dnl
   AC_ARG_ENABLE([gui],
-    AC_HELP_STRING([--enable-gui],[compile mkvinfo's GUI and mmg (yes)]))
+    AC_HELP_STRING([--enable-gui],[compile mkvinfo's GUI and mmg/mkvtoolnix-gui (yes)]))
 
   AC_ARG_ENABLE([wxwidgets],
     AC_HELP_STRING([--enable-wxwidgets],[compile the wxWidgets version of the GUIs (yes)]))
