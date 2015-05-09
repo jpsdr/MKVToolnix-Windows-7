@@ -33,7 +33,6 @@ FORMS += \
     ../forms/merge/select_playlist_dialog.ui \
     ../forms/merge/tab.ui \
     ../forms/merge/tool.ui \
-    ../forms/preview_warning_dialog.ui \
     ../forms/watch_jobs/tab.ui \
     ../forms/watch_jobs/tool.ui \
 
