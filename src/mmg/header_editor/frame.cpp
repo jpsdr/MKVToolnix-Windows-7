@@ -45,7 +45,7 @@
 #include "mmg/mmg.h"
 
 #if !defined(SYS_WINDOWS)
-# include "share/icons/64x64/mkvmergeGUI.h"
+# include "share/icons/64x64/mkvtoolnix-gui.h"
 #endif
 
 class header_editor_drop_target_c: public wxFileDropTarget {
@@ -128,7 +128,7 @@ header_editor_frame_c::header_editor_frame_c(wxWindow *parent)
 
   m_status_bar_timer.SetOwner(this, ID_T_HE_STATUS_BAR);
 
-  SetIcon(wx_get_png_or_icon(mkvmergeGUI));
+  SetIcon(wx_get_png_or_icon(mkvtoolnix_gui));
   SetDropTarget(new header_editor_drop_target_c(this));
 
   set_status_bar(Z("Header editor ready."));

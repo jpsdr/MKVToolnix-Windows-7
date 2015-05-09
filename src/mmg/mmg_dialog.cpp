@@ -58,7 +58,7 @@
 #endif  // defined(HAVE_CURL_EASY_H)
 
 #if !defined(SYS_WINDOWS)
-# include "share/icons/64x64/mkvmergeGUI.h"
+# include "share/icons/64x64/mkvtoolnix-gui.h"
 #endif
 
 mmg_dialog *mdlg;
@@ -181,7 +181,7 @@ mmg_dialog::mmg_dialog()
 
   load_job_queue();
 
-  SetIcon(wx_get_png_or_icon(mkvmergeGUI));
+  SetIcon(wx_get_png_or_icon(mkvtoolnix_gui));
 
   help = nullptr;
 

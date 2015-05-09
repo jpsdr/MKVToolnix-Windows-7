@@ -242,7 +242,7 @@ end
 if c?(:MINGW)
   $programs.each do |program|
     path = program.gsub(/^mkv/, '')
-    icon = program == 'mkvinfo' ? 'share/icons/windows/mkvinfo.ico' : 'share/icons/windows/mkvmergeGUI.ico'
+    icon = program == 'mkvinfo' ? 'share/icons/windows/mkvinfo.ico' : 'share/icons/windows/mkvtoolnix-gui.ico'
     file "src/#{path}/resources.o" => [ "src/#{path}/manifest-#{c(:MINGW_PROCESSOR_ARCH)}.xml", "src/#{path}/resources.rc", icon ]
   end
 end
@@ -582,7 +582,7 @@ namespace :install do
     install_data :desktopdir, FileList[ "#{$top_srcdir}/share/desktop/*.desktop" ]
     install_data :mimepackagesdir, FileList[ "#{$top_srcdir}/share/mime/*.xml" ]
 
-    wanted_apps     = %w{mkvmerge mkvmergeGUI mkvinfo mkvextract mkvpropedit}.collect { |e| "#{e}.png" }.to_hash_by
+    wanted_apps     = %w{mkvmerge mkvtoolnix-gui mkvinfo mkvextract mkvpropedit}.collect { |e| "#{e}.png" }.to_hash_by
     wanted_dirs     = %w{16x16 24x24 32x32 48x48 64x64 96x96 128x128 256x256}.to_hash_by
     dirs_to_install = FileList[ "#{$top_srcdir}/share/icons/*"   ].select { |dir|  wanted_dirs[ dir.gsub(/.*icons\//, '').gsub(/\/.*/, '') ] }.sort.uniq
 
@@ -823,7 +823,7 @@ if c?(:USE_WXWIDGETS)
     aliases(:mmg).
     sources("src/mmg", "src/mmg/header_editor", "src/mmg/options", "src/mmg/tabs", :type => :dir).
     sources("src/mmg/resources.o", :if => c?(:MINGW)).
-    png_icon("share/icons/64x64/mkvmergeGUI.png", "src/mmg/mmg_dialog.cpp", "src/mmg/header_editor/frame.cpp").
+    png_icon("share/icons/64x64/mkvtoolnix-gui.png", "src/mmg/mmg_dialog.cpp", "src/mmg/header_editor/frame.cpp").
     png_icon("share/icons/16x16/sort_ascending.png", "src/mmg/tabs/select_scanned_file_dlg.cpp").
     png_icon("share/icons/16x16/sort_descending.png", "src/mmg/tabs/select_scanned_file_dlg.cpp").
     libraries($common_libs, :wxwidgets).
@@ -864,7 +864,7 @@ if $build_mkvtoolnix_gui
     sources("src/mkvtoolnix-gui/resources.o", :if => c?(:MINGW)).
     libraries($common_libs, :qt).
     libraries("-mwindows", :if => c?(:MINGW)).
-    png_icon("share/icons/64x64/mkvmergeGUI.png").
+    png_icon("share/icons/64x64/mkvtoolnix-gui.png").
     libraries($custom_libs).
     create
 end

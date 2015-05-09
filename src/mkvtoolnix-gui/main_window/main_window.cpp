@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
   setupToolSelector();
 
   // Setup window properties.
-  setWindowIcon(Util::loadIcon(Q("mkvmergeGUI.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
+  setWindowIcon(Util::loadIcon(Q("mkvtoolnix-gui.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
 
   retranslateUi();
 
