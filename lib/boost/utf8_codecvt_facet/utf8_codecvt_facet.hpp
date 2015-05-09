@@ -93,6 +93,21 @@ namespace std {
 }
 #endif
 
+// mbunkus: older versions of Boost don't know BOOST_NOEXCEPT_OR_NOTHROW.
+#if !defined(BOOST_NOEXCEPT_OR_NOTHROW)
+# ifdef BOOST_NO_CXX11_NOEXCEPT
+#  define BOOST_NOEXCEPT
+#  define BOOST_NOEXCEPT_OR_NOTHROW throw()
+#  define BOOST_NOEXCEPT_IF(Predicate)
+#  define BOOST_NOEXCEPT_EXPR(Expression) false
+# else
+#  define BOOST_NOEXCEPT noexcept
+#  define BOOST_NOEXCEPT_OR_NOTHROW noexcept
+#  define BOOST_NOEXCEPT_IF(Predicate) noexcept((Predicate))
+#  define BOOST_NOEXCEPT_EXPR(Expression) noexcept((Expression))
+# endif
+#endif
+
 // maximum lenght of a multibyte string
 #define MB_LENGTH_MAX 8
 
