@@ -34,23 +34,21 @@ if test x"$enable_qt" = "xyes" -a \
       AC_PATH_PROG(MOC, moc,, $PATH)
     fi
   fi
-  if test -z "$MOC" -o ! -x "$MOC"; then
-    echo "*** The 'moc' binary was not found or is not executable."
-    exit 1
-  fi
 
-  dnl Check its version.
-  AC_MSG_CHECKING(for the Qt version $MOC uses)
-  moc_ver=`"$MOC" -v 2>&1 | sed -e 's:.*Qt ::' -e 's:.* ::' -e 's:[[^0-9\.]]::g'`
-  if test -z "moc_ver"; then
-    AC_MSG_RESULT(unknown; please contact the author)
-    exit 1
-  elif ! check_version $qt_min_ver $moc_ver; then
-    AC_MSG_RESULT(too old: $moc_ver)
-    exit 1
-  else
-    AC_MSG_RESULT($moc_ver)
-    moc_found=1
+  if test -n "$MOC" -a -x "$MOC"; then
+    dnl Check its version.
+    AC_MSG_CHECKING(for the Qt version $MOC uses)
+    moc_ver=`"$MOC" -v 2>&1 | sed -e 's:.*Qt ::' -e 's:.* ::' -e 's:[[^0-9\.]]::g'`
+    if test -z "moc_ver"; then
+      AC_MSG_RESULT(unknown; please contact the author)
+      exit 1
+    elif ! check_version $qt_min_ver $moc_ver; then
+      AC_MSG_RESULT(too old: $moc_ver)
+      exit 1
+    else
+      AC_MSG_RESULT($moc_ver)
+      moc_found=1
+    fi
   fi
 
   AC_ARG_WITH(uic,
@@ -66,23 +64,21 @@ if test x"$enable_qt" = "xyes" -a \
       AC_PATH_PROG(UIC, uic,, $PATH)
     fi
   fi
-  if test -z "$UIC" -o ! -x "$UIC"; then
-    echo "*** The 'uic' binary was not found or is not executable."
-    exit 1
-  fi
 
-  dnl Check its version.
-  AC_MSG_CHECKING(for the Qt version $UIC uses)
-  uic_ver=`"$UIC" -v 2>&1 | sed -e 's:.*Qt ::' -e 's:.* ::' -e 's:[[^0-9\.]]::g'`
-  if test -z "uic_ver"; then
-    AC_MSG_RESULT(unknown; please contact the author)
-    exit 1
-  elif ! check_version $qt_min_ver $uic_ver; then
-    AC_MSG_RESULT(too old: $uic_ver)
-    exit 1
-  else
-    AC_MSG_RESULT($uic_ver)
-    uic_found=1
+  if test -n "$UIC" -a -x "$UIC"; then
+    dnl Check its version.
+    AC_MSG_CHECKING(for the Qt version $UIC uses)
+    uic_ver=`"$UIC" -v 2>&1 | sed -e 's:.*Qt ::' -e 's:.* ::' -e 's:[[^0-9\.]]::g'`
+    if test -z "uic_ver"; then
+      AC_MSG_RESULT(unknown; please contact the author)
+      exit 1
+    elif ! check_version $qt_min_ver $uic_ver; then
+      AC_MSG_RESULT(too old: $uic_ver)
+      exit 1
+    else
+      AC_MSG_RESULT($uic_ver)
+      uic_found=1
+    fi
   fi
 
   AC_ARG_WITH(rcc,
@@ -98,23 +94,21 @@ if test x"$enable_qt" = "xyes" -a \
       AC_PATH_PROG(RCC, rcc,, $PATH)
     fi
   fi
-  if test -z "$RCC" -o ! -x "$RCC"; then
-    echo "*** The 'rcc' binary was not found or is not executable."
-    exit 1
-  fi
 
-  dnl Check its version.
-  AC_MSG_CHECKING(for the Qt version $RCC uses)
-  rcc_ver=`"$RCC" -v 2>&1 | sed -e 's:.*Qt ::' -e 's:.* ::' -e 's:[[^0-9\.]]::g'`
-  if test -z "rcc_ver"; then
-    AC_MSG_RESULT(unknown; please contact the author)
-    exit 1
-  elif ! check_version $qt_min_ver $rcc_ver; then
-    AC_MSG_RESULT(too old: $rcc_ver)
-    exit 1
-  else
-    AC_MSG_RESULT($rcc_ver)
-    rcc_found=1
+  if test -n "$RCC" -a -x "$RCC"; then
+    dnl Check its version.
+    AC_MSG_CHECKING(for the Qt version $RCC uses)
+    rcc_ver=`"$RCC" -v 2>&1 | sed -e 's:.*Qt ::' -e 's:.* ::' -e 's:[[^0-9\.]]::g'`
+    if test -z "rcc_ver"; then
+      AC_MSG_RESULT(unknown; please contact the author)
+      exit 1
+    elif ! check_version $qt_min_ver $rcc_ver; then
+      AC_MSG_RESULT(too old: $rcc_ver)
+      exit 1
+    else
+      AC_MSG_RESULT($rcc_ver)
+      rcc_found=1
+    fi
   fi
 
   ok=0
@@ -137,6 +131,10 @@ if test x"$enable_qt" = "xyes" -a \
     with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Core,Qt5Gui,Qt5Widgets"
     PKG_CHECK_EXISTS([$with_qt_pkg_config_modules],,[ok=0])
     PKG_CHECK_EXISTS([Qt5PlatformSupport],[with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5PlatformSupport"])
+
+    if test $ok = 0; then
+      AC_MSG_RESULT(no: not found by pkg-config)
+    fi
   fi
 
   if test $ok = 1; then
@@ -177,21 +175,6 @@ return 0;
           break
 
         elif test x"$run_qt_test" = "x1"; then
-          dnl On some systems (notably OpenSuSE 10.0) the pkg-config for the
-          dnl --cflags don't include the QtCore and QtGui subdirectories.
-          dnl Add them now.
-          set - $QT_CFLAGS
-          while test ! -z "$1" ; do
-            case "$1" in
-              -I*qt*)
-                QT_CFLAGS="$QT_CFLAGS $1/QtCore $1/QtGui $1/QtWidgets"
-                ;;
-            esac
-            shift
-          done
-          run_qt_test=2
-
-        elif test x"$run_qt_test" = "x2"; then
           QT_CFLAGS="$QT_CFLAGS -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include/QtWidgets -I/usr/local/include/QtCore -I/usr/local/include/QtGui -I/usr/local/include/QtWidgets -I/usr/local/include/QtPlatformSupport"
           run_qt_test=3
 
@@ -236,8 +219,6 @@ return 0;
     else
       AC_MSG_RESULT(no: test program could not be compiled)
     fi
-  else
-    AC_MSG_RESULT(no: not found by pkg-config)
   fi
 
   AC_ARG_WITH(mkvtoolnix-gui,[AS_HELP_STRING([--without-mkvtoolnix-gui],[do not build mkvtoolnix-gui])])
