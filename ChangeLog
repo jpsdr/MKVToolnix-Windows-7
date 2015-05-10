@@ -1,3 +1,14 @@
+2015-05-10  Moritz Bunkus  <moritz@bunkus.org>
+
+        * build system: configure will now check for Qt by default. If at
+        least v5.2.0 is found then the Qt versions of mkvinfo's GUI and
+        the new mkvtoolnix-gui will be enabled. You can affect this
+        detection with the options --disable-gui (turns off all GUIs;
+        works the same as before), --disable-qt (will compile the
+        wxWidgets GUI for mkvinfo and mmg) and --without-mkvtoolnix-gui
+        (will compile the Qt version of mkvinfo's GUI but no
+        mkvtoolnix-gui).
+
 2015-05-07  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvinfo: bug fix: mkvinfo would exit with the wrong return code
