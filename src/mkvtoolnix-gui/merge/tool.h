@@ -47,7 +47,7 @@ protected:
   Tab *appendTab(Tab *tab);
   virtual Tab *currentTab();
 
-  virtual void setupMenu();
+  virtual void setupActions();
   virtual void enableMenuActions();
   virtual void showMergeWidget();
 };

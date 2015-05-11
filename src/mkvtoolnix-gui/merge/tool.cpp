@@ -32,7 +32,7 @@ Tool::Tool(QWidget *parent,
   appendTab(new Tab{this});
   showMergeWidget();
 
-  setupMenu();
+  setupActions();
   reconnectMenuActions();
 
   retranslateUi();
@@ -42,12 +42,15 @@ Tool::~Tool() {
 }
 
 void
-Tool::setupMenu() {
+Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionMergeNew,   &QAction::triggered, this, &Tool::newConfig);
-  connect(mwUi->actionMergeOpen,  &QAction::triggered, this, &Tool::openConfig);
-  connect(mwUi->actionMergeClose, &QAction::triggered, this, &Tool::closeCurrentTab);
+  connect(mwUi->actionMergeNew,   &QAction::triggered,   this, &Tool::newConfig);
+  connect(mwUi->actionMergeOpen,  &QAction::triggered,   this, &Tool::openConfig);
+  connect(mwUi->actionMergeClose, &QAction::triggered,   this, &Tool::closeCurrentTab);
+
+  connect(ui->newFileButton,      &QPushButton::clicked, this, &Tool::newConfig);
+  connect(ui->openFileButton,     &QPushButton::clicked, this, &Tool::openConfig);
 }
 
 void
