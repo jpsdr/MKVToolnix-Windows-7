@@ -140,7 +140,7 @@ MainWindow::setupToolSelector() {
   connect(ui->actionGUIJobOutput,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
 
   connect(ui->tool,                    SIGNAL(currentChanged(int)),                        this,                SLOT(toolChanged(int)));
-  connect(m_toolJobs->model(),      SIGNAL(progressChanged(unsigned int,unsigned int)), m_statusBarProgress, SLOT(setProgress(unsigned int,unsigned int)));
+  connect(m_toolJobs->model(),         SIGNAL(progressChanged(unsigned int,unsigned int)), m_statusBarProgress, SLOT(setProgress(unsigned int,unsigned int)));
 }
 
 void
@@ -169,6 +169,8 @@ MainWindow::changeTool() {
 
 void
 MainWindow::toolChanged(int index) {
+  showTheseMenusOnly({});
+
   auto widget   = ui->tool->widget(index);
   auto toolBase = dynamic_cast<ToolBase *>(widget);
 

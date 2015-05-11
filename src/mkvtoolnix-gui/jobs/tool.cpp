@@ -161,7 +161,6 @@ Tool::setupToolTips() {
 
 void
 Tool::toolShown() {
-  MainWindow::get()->showTheseMenusOnly({ MainWindow::getUi()->menuMerge });
 }
 
 }}}
