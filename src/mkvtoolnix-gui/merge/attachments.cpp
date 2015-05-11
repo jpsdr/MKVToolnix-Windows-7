@@ -204,6 +204,13 @@ Tab::retranslateAttachmentsUI() {
   // Attachment style
   ui->attachmentStyle->setItemData(0, static_cast<int>(Attachment::ToAllFiles));
   ui->attachmentStyle->setItemData(1, static_cast<int>(Attachment::ToFirstFile));
+
+  setupAttachmentsToolTips();
+}
+
+void
+Tab::setupAttachmentsToolTips() {
+  Util::setToolTip(ui->attachments, QY("Right-click to add and remove attachments"));
 }
 
 }}}

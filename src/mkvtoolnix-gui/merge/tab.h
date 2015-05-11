@@ -170,6 +170,7 @@ protected:
 
   virtual void setupInputToolTips();
   virtual void setupOutputToolTips();
+  virtual void setupAttachmentsToolTips();
 
   virtual void retranslateInputUI();
   virtual void retranslateOutputUI();
