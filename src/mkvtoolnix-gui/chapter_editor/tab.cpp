@@ -577,8 +577,23 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
   ui->leChSegmentUid->setText(formatEbmlBinary(FindChild<KaxChapterSegmentUID>(*chapter)));
   ui->leChSegmentEditionUid->setText(segmentEditionUid ? QString::number(segmentEditionUid->GetValue()) : Q(""));
 
+  auto nameSelectionModel        = ui->tvChNames->selectionModel();
+  auto previouslySelectedNameIdx = nameSelectionModel->currentIndex();
   m_nameModel->populate(*chapter);
   enableNameWidgets(false);
+
+  if (m_nameModel->rowCount()) {
+    auto oldBlocked  = nameSelectionModel->blockSignals(true);
+    auto rowToSelect = std::min(previouslySelectedNameIdx.isValid() ? previouslySelectedNameIdx.row() : 0, m_nameModel->rowCount());
+    auto selection   = QItemSelection{ m_nameModel->index(rowToSelect, 0), m_nameModel->index(rowToSelect, m_nameModel->columnCount() - 1) };
+
+    nameSelectionModel->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+
+    setNameControlsFromStorage(m_nameModel->index(rowToSelect, 0));
+    enableNameWidgets(true);
+
+    nameSelectionModel->blockSignals(oldBlocked);
+  }
 
   ui->pageContainer->setCurrentWidget(ui->chapterPage);
 
@@ -647,10 +662,6 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
 
   resizeNameColumnsToContents();
 
-  ui->leChName->selectAll();
-
-  QTimer::singleShot(0, ui->leChName, SLOT(setFocus()));
-
   return true;
 }
 
@@ -661,6 +672,10 @@ Tab::nameSelectionChanged(QItemSelection const &selected,
     auto indexes = selected.at(0).indexes();
     if (!indexes.isEmpty() && setNameControlsFromStorage(indexes.at(0))) {
       enableNameWidgets(true);
+
+      ui->leChName->selectAll();
+      QTimer::singleShot(0, ui->leChName, SLOT(setFocus()));
+
       return;
     }
   }
