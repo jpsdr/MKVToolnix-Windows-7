@@ -563,7 +563,8 @@ end
 # Installation tasks
 desc "Install all applications and support files"
 targets  = [ "install:programs", "install:manpages", "install:translations:manpages", "install:translations:applications" ]
-targets += [ "install:translations:guides", "install:shared" ] if c?(:USE_WXWIDGETS)
+targets += [ "install:translations:guides" ] if c?(:USE_WXWIDGETS)
+targets += [ "install:shared" ]              if c?(:USE_WXWIDGETS) || c?(:USE_QT)
 task :install => targets
 
 namespace :install do
@@ -579,8 +580,10 @@ namespace :install do
 
   task :shared do
     install_dir :desktopdir, :mimepackagesdir
-    install_data :desktopdir, FileList[ "#{$top_srcdir}/share/desktop/*.desktop" ]
     install_data :mimepackagesdir, FileList[ "#{$top_srcdir}/share/mime/*.xml" ]
+    install_data :desktopdir, "#{$top_srcdir}/share/desktop/mkvinfo.desktop"
+    install_data :desktopdir, "#{$top_srcdir}/share/desktop/mkvmergeGUI.desktop"    if c?(:USE_WXWIDGETS)
+    install_data :desktopdir, "#{$top_srcdir}/share/desktop/mkvtoolnix-gui.desktop" if c?(:USE_QT)
 
     wanted_apps     = %w{mkvmerge mkvtoolnix-gui mkvinfo mkvextract mkvpropedit}.collect { |e| "#{e}.png" }.to_hash_by
     wanted_dirs     = %w{16x16 24x24 32x32 48x48 64x64 96x96 128x128 256x256}.to_hash_by
