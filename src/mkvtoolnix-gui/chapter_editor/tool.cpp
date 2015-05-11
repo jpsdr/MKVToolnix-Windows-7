@@ -7,6 +7,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QMimeData>
+#include <QPushButton>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/tool.h"
@@ -51,6 +52,9 @@ Tool::setupActions() {
   connect(mwUi->actionChapterEditorSaveToMatroska, &QAction::triggered,         this, &Tool::saveToMatroska);
   connect(mwUi->actionChapterEditorReload,         &QAction::triggered,         this, &Tool::reload);
   connect(mwUi->actionChapterEditorClose,          &QAction::triggered,         this, &Tool::closeCurrentTab);
+
+  connect(ui->newFileButton,                       &QPushButton::clicked,       this, &Tool::newFile);
+  connect(ui->openFileButton,                      &QPushButton::clicked,       this, &Tool::selectFileToOpen);
 
   connect(ui->editors,                             &QTabWidget::currentChanged, this, &Tool::enableMenuActions);
 }
