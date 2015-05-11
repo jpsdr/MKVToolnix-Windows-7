@@ -32,7 +32,7 @@ Tool::Tool(QWidget *parent,
   // Setup UI controls.
   ui->setupUi(this);
 
-  setupMenu();
+  setupActions();
 
   showHeaderEditorsWidget();
 }
@@ -41,14 +41,16 @@ Tool::~Tool() {
 }
 
 void
-Tool::setupMenu() {
+Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionHeaderEditorOpen,     SIGNAL(triggered()), this, SLOT(selectFileToOpen()));
-  connect(mwUi->actionHeaderEditorSave,     SIGNAL(triggered()), this, SLOT(save()));
-  connect(mwUi->actionHeaderEditorValidate, SIGNAL(triggered()), this, SLOT(validate()));
-  connect(mwUi->actionHeaderEditorReload,   SIGNAL(triggered()), this, SLOT(reload()));
-  connect(mwUi->actionHeaderEditorClose,    SIGNAL(triggered()), this, SLOT(closeCurrentTab()));
+  connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,   this, &Tool::selectFileToOpen);
+  connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,   this, &Tool::save);
+  connect(mwUi->actionHeaderEditorValidate, &QAction::triggered,   this, &Tool::validate);
+  connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,   this, &Tool::reload);
+  connect(mwUi->actionHeaderEditorClose,    &QAction::triggered,   this, &Tool::closeCurrentTab);
+
+  connect(ui->openFileButton,               &QPushButton::clicked, this, &Tool::selectFileToOpen);
 }
 
 void

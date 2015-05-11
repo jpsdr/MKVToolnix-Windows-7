@@ -48,7 +48,7 @@ public slots:
 
 protected:
   virtual void openFile(QString const &fileName);
-  virtual void setupMenu();
+  virtual void setupActions();
   virtual void showHeaderEditorsWidget();
   virtual Tab *currentTab();
 };
