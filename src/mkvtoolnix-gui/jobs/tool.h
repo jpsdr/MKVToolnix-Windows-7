@@ -52,6 +52,7 @@ public slots:
 
 protected:
   void setupUiControls();
+  void setupToolTips();
 };
 
 }}}

@@ -150,6 +150,13 @@ Tool::retranslateUi() {
   m_removeDoneAction->setText(QY("Remove &completed jobs"));
   m_removeDoneOkAction->setText(QY("Remove &successfully completed jobs"));
   m_removeAllAction->setText(QY("Remove a&ll jobs"));
+
+  setupToolTips();
+}
+
+void
+Tool::setupToolTips() {
+  Util::setToolTip(ui->jobs, QY("Right-click for actions for jobs"));
 }
 
 void
