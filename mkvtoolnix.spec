@@ -72,7 +72,6 @@ export EXTRA_CONFIGURE_ARGS="--with-wx-config=/usr/bin/wx-config-3.0"
 %configure --prefix=%{_prefix} $EXTRA_CONFIGURE_ARGS
 
 %build
-export LC_CTYPE=en_US.UTF-8
 ./drake
 ./drake apps:strip
 %if 0%{?suse_version}
@@ -80,7 +79,6 @@ sed -i -e 's/^Exec=mmg/Exec=mkvmerge-gui/' share/desktop/mkvmergeGUI.desktop
 %endif
 
 %install
-export LC_CTYPE=en_US.UTF-8
 %if 0%{?suse_version}
 ./drake DESTDIR=$RPM_BUILD_ROOT MMG_BIN=mkvmerge-gui install
 %else

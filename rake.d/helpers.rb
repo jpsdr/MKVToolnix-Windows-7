@@ -237,7 +237,7 @@ def remove_files_by_patters patterns
 end
 
 def read_files *file_names
-  Hash[ *file_names.flatten.collect { |file_name| [ file_name, IO.readlines(file_name) ] }.flatten(1) ]
+  Hash[ *file_names.flatten.collect { |file_name| [ file_name, IO.readlines(file_name).collect { |line| line.force_encoding "UTF-8" } ] }.flatten(1) ]
 end
 
 class Rake::Task
