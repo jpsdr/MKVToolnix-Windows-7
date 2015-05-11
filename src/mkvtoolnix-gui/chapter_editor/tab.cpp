@@ -164,6 +164,22 @@ Tab::fileName()
 
 void
 Tab::newFile() {
+  addEdition(false);
+
+  auto selectionModel = ui->elements->selectionModel();
+  auto selection      = QItemSelection{m_chapterModel->index(0, 0), m_chapterModel->index(0, m_chapterModel->columnCount() - 1)};
+  selectionModel->select(selection, QItemSelectionModel::ClearAndSelect);
+
+  addSubChapter();
+
+  auto parentIdx = m_chapterModel->index(0, 0);
+  selection      = QItemSelection{m_chapterModel->index(0, 0, parentIdx), m_chapterModel->index(0, m_chapterModel->columnCount() - 1, parentIdx)};
+  selectionModel->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+
+  resizeChapterColumnsToContents();
+
+  ui->leChStart->selectAll();
+  ui->leChStart->setFocus();
 }
 
 void
