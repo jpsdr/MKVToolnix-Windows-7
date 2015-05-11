@@ -88,9 +88,11 @@ Create a WebM compliant file\&. This is also turned on if the output file name\*
 .PP
 \fB\-\-default\-language\fR \fI语言代码\fR
 .RS 4
-设置默认语言代码。所有轨道将使用此语言码，除非被用
+Sets the default language code that will be used for tracks for which no language is set with the
 \fB\-\-language\fR
-选项覆盖。默认的语言代码是 \*(Aqund\*(Aq 代表 \*(Aqundefined\*(Aq（未定）。
+option and for which the source container doesn\*(Aqt provide a language\&.
+.sp
+The default language code is \*(Aqund\*(Aq for \*(Aqundefined\*(Aq\&.
 .RE
 .SS "剪辑信息处理 (全局选项)"
 .PP

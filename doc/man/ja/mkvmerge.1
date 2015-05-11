@@ -80,7 +80,11 @@ Create a WebM compliant file\&. This is also turned on if the output file name\*
 .PP
 \fB\-\-default\-language\fR \fIlanguage\-code\fR
 .RS 4
-デフォルトの言語コードを指定します。\fB\-\-language\fRオプションで指定しなかったトラックはすべてここで指定した言語コードになります。デフォルトは\*(Aqund\*(Aq、つまり\*(Aq未定義\*(Aqです。
+Sets the default language code that will be used for tracks for which no language is set with the
+\fB\-\-language\fR
+option and for which the source container doesn\*(Aqt provide a language\&.
+.sp
+The default language code is \*(Aqund\*(Aq for \*(Aqundefined\*(Aq\&.
 .RE
 .SS "セグメント情報の扱い (グローバルオプション)"
 .PP
