@@ -17,5 +17,6 @@ def create_source_tarball suffix = ""
       "tar cJf \"#{tarball}\" mkvtoolnix-#{c(:PACKAGE_VERSION)}",
     ]
     system commands.join(" && ")
+    puts tarball
   end
 end
