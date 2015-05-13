@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-12 21:06+0200\n"
+"POT-Creation-Date: 2015-05-13 20:15+0200\n"
 "PO-Revision-Date: 2015-05-13 18:39+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -2023,12 +2023,12 @@ msgstr "+-> pred-raščlanjivanje FLAC fajla: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> pred-raščlanjivanje FLAC fajla: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", opis '%1%'"
 
-#: src/merge/generic_reader.cpp:333
+#: src/merge/generic_reader.cpp:330
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", ime fajla '%1%'"
@@ -2960,7 +2960,7 @@ msgstr "Priloženo"
 msgid "Attached files"
 msgstr "Priloženi fajlovi"
 
-#: src/merge/generic_reader.cpp:331
+#: src/merge/generic_reader.cpp:328
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Attachment ID %1%: tip '%2%', veličina %3% bajt"
@@ -3441,10 +3441,13 @@ msgstr "Poglavlja zapisana."
 msgid "Chapters:"
 msgstr "Poglavlja:"
 
-#: src/merge/generic_reader.cpp:334
-#, boost-format
-msgid "Chapters: %1% entries"
-msgstr "Poglavlja: %1% upisi"
+#: src/merge/generic_reader.cpp:368
+#, fuzzy, boost-format
+msgid "Chapters: %1% entry"
+msgid_plural "Chapters: %1% entries"
+msgstr[0] "Poglavlja: %1% upisi"
+msgstr[1] "Poglavlja: %1% upisi"
+msgstr[2] "Poglavlja: %1% upisi"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1329
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1374
@@ -5006,7 +5009,7 @@ msgstr ""
 "fajlova ('mkvmerge --list-types') i kontaktirajte autora Morica Bunkusa "
 "<moritz@bunkus.org>  ako je vaš fajl podržan ali nije ispravno prepoznat.\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Fajl '%1%': kontejner: %2%"
@@ -5422,10 +5425,13 @@ msgstr "Globalni tagovi (%d unosa) iz %s"
 msgid "Global tags:"
 msgstr "Globalni tagovi:"
 
-#: src/merge/generic_reader.cpp:335
-#, boost-format
-msgid "Global tags: %1% entries"
-msgstr "Globalni tagovi: %1% zapisi"
+#: src/merge/generic_reader.cpp:377
+#, fuzzy, boost-format
+msgid "Global tags: %1% entry"
+msgid_plural "Global tags: %1% entries"
+msgstr[0] "Globalni tagovi: %1% zapisi"
+msgstr[1] "Globalni tagovi: %1% zapisi"
+msgstr[2] "Globalni tagovi: %1% zapisi"
 
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
@@ -9561,10 +9567,13 @@ msgstr "Tagovi"
 msgid "Tags are allowed, but chapters are not."
 msgstr "Tagovi su dozvoljeni, ali nisu poglavlja."
 
-#: src/merge/generic_reader.cpp:336
-#, boost-format
-msgid "Tags for track ID %1%: %2% entries"
-msgstr "Tagovi za stazu sa ID %1%: %2% zapisi"
+#: src/merge/generic_reader.cpp:382
+#, fuzzy, boost-format
+msgid "Tags for track ID %1%: %2% entry"
+msgid_plural "Tags for track ID %1%: %2% entries"
+msgstr[0] "Tagovi za stazu sa ID %1%: %2% zapisi"
+msgstr[1] "Tagovi za stazu sa ID %1%: %2% zapisi"
+msgstr[2] "Tagovi za stazu sa ID %1%: %2% zapisi"
 
 #: src/mmg/mmg.cpp:59
 #, c-format, boost-format
@@ -12194,7 +12203,7 @@ msgstr "Staza %1%: AAC informacija ne može biti raščlanjena.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Staza sa ID %1% ima nepoznat tip AAC.\n"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "ID staze %1%: %2% (%3%)"

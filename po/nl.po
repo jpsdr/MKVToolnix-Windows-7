@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-11 21:34+0200\n"
+"POT-Creation-Date: 2015-05-13 20:15+0200\n"
 "PO-Revision-Date: 2015-05-11 12:59+0100\n"
 "Last-Translator: René Maassen <bmom43@gmail.com>\n"
 "Language-Team: Dutch <bmom43@gmail.com>\n"
@@ -2075,12 +2075,12 @@ msgstr "+-> Voor-ontleden FLAC bestand: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Voor-ontleden FLAC bestand: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", beschrijving '%1%'"
 
-#: src/merge/generic_reader.cpp:333
+#: src/merge/generic_reader.cpp:330
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", bestandsnaam '%1%'"
@@ -3028,7 +3028,7 @@ msgstr "Vastgemaakt"
 msgid "Attached files"
 msgstr "Bestand bijlagen"
 
-#: src/merge/generic_reader.cpp:331
+#: src/merge/generic_reader.cpp:328
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Bijlage ID %1%: type '%2%', grootte %3% bytes"
@@ -3515,10 +3515,12 @@ msgstr "Hoofdstuk geschreven."
 msgid "Chapters:"
 msgstr "Hoofdstukken:"
 
-#: src/merge/generic_reader.cpp:334
-#, boost-format
-msgid "Chapters: %1% entries"
-msgstr "Hoofdstukken: %1% ingangen"
+#: src/merge/generic_reader.cpp:368
+#, fuzzy, boost-format
+msgid "Chapters: %1% entry"
+msgid_plural "Chapters: %1% entries"
+msgstr[0] "Hoofdstukken: %1% ingangen"
+msgstr[1] "Hoofdstukken: %1% ingangen"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1329
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1374
@@ -5088,7 +5090,7 @@ msgstr ""
 "Bunkus <moritz@bunkus.org> als je bestand wordt ondersteund maar niet "
 "correct wordt herkend.\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Bestand '%1%': houder: %2%"
@@ -5511,10 +5513,12 @@ msgstr "Globale markeringen (%d ingangen) van %s"
 msgid "Global tags:"
 msgstr "Globale markeringen:"
 
-#: src/merge/generic_reader.cpp:335
-#, boost-format
-msgid "Global tags: %1% entries"
-msgstr "Globale markeer: %1% ingangen"
+#: src/merge/generic_reader.cpp:377
+#, fuzzy, boost-format
+msgid "Global tags: %1% entry"
+msgid_plural "Global tags: %1% entries"
+msgstr[0] "Globale markeer: %1% ingangen"
+msgstr[1] "Globale markeer: %1% ingangen"
 
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
@@ -9670,10 +9674,12 @@ msgstr "Markeringen"
 msgid "Tags are allowed, but chapters are not."
 msgstr "Markeringen zijn toegestaan, maar hoofdstukken niet."
 
-#: src/merge/generic_reader.cpp:336
-#, boost-format
-msgid "Tags for track ID %1%: %2% entries"
-msgstr "Markeringen voor spoor ID %1%: %2% ingangen"
+#: src/merge/generic_reader.cpp:382
+#, fuzzy, boost-format
+msgid "Tags for track ID %1%: %2% entry"
+msgid_plural "Tags for track ID %1%: %2% entries"
+msgstr[0] "Markeringen voor spoor ID %1%: %2% ingangen"
+msgstr[1] "Markeringen voor spoor ID %1%: %2% ingangen"
 
 #: src/mmg/mmg.cpp:59
 #, c-format, boost-format
@@ -12379,7 +12385,7 @@ msgstr "Spoor %1%: De AAC informatie kon niet ontleed worden.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Spoor ID %1% heeft een onbekend AAC type.\n"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Spoor ID %1%: %2% (%3%)"

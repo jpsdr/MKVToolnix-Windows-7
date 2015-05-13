@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-11 21:34+0200\n"
+"POT-Creation-Date: 2015-05-13 20:15+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: Daniel Kluz <sir.daniel.k@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -2050,12 +2050,12 @@ msgstr "+-> Wstępna analiza pliku FLAC: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Wstępna analiza pliku FLAC: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", opis '%1%'"
 
-#: src/merge/generic_reader.cpp:333
+#: src/merge/generic_reader.cpp:330
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", nazwa pliku '%1%'"
@@ -3001,7 +3001,7 @@ msgstr "Załączony"
 msgid "Attached files"
 msgstr "Załączone pliki"
 
-#: src/merge/generic_reader.cpp:331
+#: src/merge/generic_reader.cpp:328
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID załącznika %1%: rodzaj '%2%', rozmiar %3% bajtów"
@@ -3484,10 +3484,13 @@ msgstr "Rozdziały zostały zapisane."
 msgid "Chapters:"
 msgstr "Rozdziały:"
 
-#: src/merge/generic_reader.cpp:334
-#, boost-format
-msgid "Chapters: %1% entries"
-msgstr "Rozdziały: %1% pozycji"
+#: src/merge/generic_reader.cpp:368
+#, fuzzy, boost-format
+msgid "Chapters: %1% entry"
+msgid_plural "Chapters: %1% entries"
+msgstr[0] "Rozdziały: %1% pozycji"
+msgstr[1] "Rozdziały: %1% pozycji"
+msgstr[2] "Rozdziały: %1% pozycji"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1329
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1374
@@ -5053,7 +5056,7 @@ msgstr ""
 "<moritz@bunkus.org>, jeśli twój plik powinien być obsługiwany, a nie jest "
 "poprawnie rozpoznawany.\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Plik '%1%': kontener: %2%"
@@ -5466,10 +5469,13 @@ msgstr " Tagi globalne (%d pozycji) z %s"
 msgid "Global tags:"
 msgstr "Tagi globalne:"
 
-#: src/merge/generic_reader.cpp:335
-#, boost-format
-msgid "Global tags: %1% entries"
-msgstr "Tagi globalne: %1% pozycji"
+#: src/merge/generic_reader.cpp:377
+#, fuzzy, boost-format
+msgid "Global tags: %1% entry"
+msgid_plural "Global tags: %1% entries"
+msgstr[0] "Tagi globalne: %1% pozycji"
+msgstr[1] "Tagi globalne: %1% pozycji"
+msgstr[2] "Tagi globalne: %1% pozycji"
 
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
@@ -9654,10 +9660,13 @@ msgstr "Tagi"
 msgid "Tags are allowed, but chapters are not."
 msgstr ""
 
-#: src/merge/generic_reader.cpp:336
-#, boost-format
-msgid "Tags for track ID %1%: %2% entries"
-msgstr "Tagi dla ID ścieżki %1%: %2% pozycji"
+#: src/merge/generic_reader.cpp:382
+#, fuzzy, boost-format
+msgid "Tags for track ID %1%: %2% entry"
+msgid_plural "Tags for track ID %1%: %2% entries"
+msgstr[0] "Tagi dla ID ścieżki %1%: %2% pozycji"
+msgstr[1] "Tagi dla ID ścieżki %1%: %2% pozycji"
+msgstr[2] "Tagi dla ID ścieżki %1%: %2% pozycji"
 
 #: src/mmg/mmg.cpp:59
 #, c-format, boost-format
@@ -12344,7 +12353,7 @@ msgstr "Ścieżka %1%: Informacja o AAC nie może być wczytana.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Ścieżka o ID %1% posiada nieznany typ AAC.\n"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "ID ścieżki %1%: %2% (%3%)"
