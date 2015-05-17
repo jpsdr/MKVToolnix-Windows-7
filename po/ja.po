@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-05-12 05:46-0700\n"
-"PO-Revision-Date: 2015-05-13 22:07+0900\n"
+"PO-Revision-Date: 2015-05-17 14:23+0900\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
 "Language: ja\n"
@@ -266,7 +266,7 @@ msgid ""
 "                           Do not write tags with track statistics.\n"
 msgstr ""
 "  --disable-track-statistics-tags\n"
-"                           Do not write tags with track statistics.\n"
+"                           トラックの統計情報が含まれるタグを書き込みません。\n"
 
 #: src/merge/mkvmerge.cpp:247
 msgid ""
@@ -4616,11 +4616,11 @@ msgstr "例：01:00:00（一時間後）や1800s（1800秒後）。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:191
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
-msgstr ""
+msgstr "例：01:00:00、01:30:00（1時間後、1時間30分後）または180s、300s、00:10:00（3秒後、5分後、10分後）"
 
 #: src/merge/mkvmerge.cpp:2545
 msgid "Exception details:"
-msgstr ""
+msgstr "例外の詳細："
 
 #: src/mmg/options/mkvmerge.cpp:99
 #, c-format, boost-format
@@ -4686,7 +4686,7 @@ msgstr "コーデックID '%2%'のトラックID%1%の抽出はサポートさ�
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: src/input/r_flac.h:53
 #: src/output/p_flac.h:39
@@ -4936,11 +4936,11 @@ msgstr "ファイル/セグメントリンクとこの機能についての詳�
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:49
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timecode scale factor so that all timecodes and durations have a precision of one sample."
-msgstr ""
+msgstr "ビデオトラックは含まないが1つ以上のオーディオトラックを含むファイルに対してはmkvmergeは自動的に、全てのタイムコードと継続時間が1サンプル単位の精度を持つようにタイムコードのスケール係数を選択します。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:213
 msgid "For such files you can use this parameter and decrease the size to 2."
-msgstr ""
+msgstr "そのようなファイルに対してはこのパラメーターを使用してサイズを2に増やすことができます。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:59
 #: src/mmg/cli_options_dlg.cpp:131
@@ -4976,7 +4976,7 @@ msgstr "既知のサポートされたトラックタイプに対しても、Mat
 
 #: src/mkvtoolnix-gui/merge/input.cpp:211
 msgid "Forces the NALU size length to a certain number of bytes."
-msgstr ""
+msgstr "NALUサイズ長を特定のバイト数に強制します。"
 
 #: src/mmg/tabs/input_format.cpp:249
 msgid "Forces the NALU size length to a certain number of bytes. This parameter is only available for AVC/h.264 elementary streams read from AVC/h.264 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'. It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes. For such files you can use this parameter and decrease the size to 2."
@@ -5042,7 +5042,7 @@ msgstr "フレーム・フィールド："
 
 #: src/mkvtoolnix-gui/merge/input.cpp:236
 msgid "Free-form edit field for user defined options for this track."
-msgstr ""
+msgstr "このトラックのユーザー定義オプション用のフリーフォームフィールドです。"
 
 #: src/mmg/tabs/input_extra.cpp:133
 msgid "Free-form edit field for user defined options for this track. What you input here is added after all the other options mmg adds so that you could overwrite any of mmg's options for this track. All occurences of the string \"<TID>\" will be replaced by the track's track ID."
@@ -5055,15 +5055,15 @@ msgstr "ガンマ：%1%"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track."
-msgstr ""
+msgstr "AVIファイル中のオーディオトラックの冒頭にある不要なデータは、通常はそのトラックにディレイを入れるために使用されます。"
 
 #: src/mmg/cli_options_dlg.cpp:156
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track. mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it. This option prevents that behavior."
-msgstr ""
+msgstr "AVIファイル中のオーディオトラックの冒頭にある不要なデータは、通常はそのトラックにディレイを入れるために使用されます。mkvmergeは通常、不要なデータの存在によって暗黙に指定されたこのディレイを計算し、全てのトラックのタイムコードにその分のオフセットを付加します。このオプションを使用すると、その動作を行わないようになります。"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1341
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:726
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:741
@@ -5111,7 +5111,7 @@ msgstr "ヘッダ(&E)"
 
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
-msgstr ""
+msgstr "HDMV PGS"
 
 #: src/input/r_hevc.h:31
 #: src/output/p_hevc.h:33
@@ -5258,7 +5258,7 @@ msgstr "チャプタやエディションが'隠す'としてマークされて�
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:102
 msgid "If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."
-msgstr ""
+msgstr "ここで文字セットが指定されなかった場合、新しく追加されたテキスト字幕トラックのこの設定値に入力する文字セットをプログラムが自動的に指定します。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:217
 #: src/mmg/tabs/global.cpp:258
@@ -5311,19 +5311,19 @@ msgstr "チェックが入っていると、mkvmergeGUIはファイル名の最�
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:93
 msgid "If enabled the program will ask for confirmation before overwriting files and jobs."
-msgstr ""
+msgstr "このオプションが有効化されると、プログラムはファイルやジョブを上書きする前に確認を求めます。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:69
 msgid "If enabled the program will check online whether or not a new release of MKVToolNix is available on the home page."
-msgstr ""
+msgstr "このオプションが有効化されると、プログラムはMKVToolNixの新しいリリースがホームページで入手できるかどうかを確認します。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:52
 msgid "If fewer UIDs are specified than segments are created then random UIDs will be created for them."
-msgstr ""
+msgstr "作成されたセグメントよりも少ないUIDが指定された場合は、ランダムなUIDが生成されます。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:172
 msgid "If given then you may use up to nine digits after the decimal point."
-msgstr ""
+msgstr "指定する場合は、小数第9位までの桁を使用することができます。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:91
 #, fuzzy
@@ -5336,7 +5336,7 @@ msgstr "空白のままにしておくと、mmgはこのジョブに最初に追
 
 #: src/mkvtoolnix-gui/merge/output.cpp:51
 msgid "If more segment UIDs are specified than segments are created then the surplus UIDs are ignored."
-msgstr ""
+msgstr "作成されたセグメントよりも多いUIDが指定された場合は、余分なUIDは無視されます。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:210
 #: src/mkvtoolnix-gui/merge/output.cpp:226
@@ -5348,7 +5348,7 @@ msgstr "ビデオトラックが出力されない場合は分割は行われま
 #: src/mkvtoolnix-gui/merge/output.cpp:73
 #, boost-format
 msgid "If nothing is entered then '%p - %t' will be used."
-msgstr ""
+msgstr "何も入力しなかった場合は、「%p - %t」が使用されます。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:152
 msgid "If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks."
