@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 7.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-12 21:06+0200\n"
+"POT-Creation-Date: 2015-05-13 20:15+0200\n"
 "PO-Revision-Date: 2015-05-12 21:43+0200\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
@@ -2008,12 +2008,12 @@ msgstr "+-> FLAC dosyası ön-ayrıştırması yapılıyor: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> FLAC dosyası ön-ayrıştırması yapılıyor: %100\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", tanımı '%1%'"
 
-#: src/merge/generic_reader.cpp:333
+#: src/merge/generic_reader.cpp:330
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", dosya adı '%1%'"
@@ -2927,7 +2927,7 @@ msgstr "Ekli"
 msgid "Attached files"
 msgstr "Ekli dosyalar"
 
-#: src/merge/generic_reader.cpp:331
+#: src/merge/generic_reader.cpp:328
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Ek ID %1%: türü '%2%', boyutu %3% bayt"
@@ -3402,10 +3402,12 @@ msgstr "Bölümler yazıldı."
 msgid "Chapters:"
 msgstr "Bölümler:"
 
-#: src/merge/generic_reader.cpp:334
-#, boost-format
-msgid "Chapters: %1% entries"
-msgstr "Bölüm: %1% girdi"
+#: src/merge/generic_reader.cpp:368
+#, fuzzy, boost-format
+msgid "Chapters: %1% entry"
+msgid_plural "Chapters: %1% entries"
+msgstr[0] "Bölüm: %1% girdi"
+msgstr[1] "Bölüm: %1% girdi"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1329
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1374
@@ -4934,7 +4936,7 @@ msgstr ""
 "bir şekilde tanınmıyorsa, yazar Moritz Bunkus <moritz@bunkus.org> ile "
 "irtibata geçin.\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Dosya '%1%': kalıp: %2%"
@@ -5330,10 +5332,12 @@ msgstr "Genel etiket (%d girdi), dosya: %s"
 msgid "Global tags:"
 msgstr "Genel etiketler:"
 
-#: src/merge/generic_reader.cpp:335
-#, boost-format
-msgid "Global tags: %1% entries"
-msgstr "Genel etiket: %1% girdi"
+#: src/merge/generic_reader.cpp:377
+#, fuzzy, boost-format
+msgid "Global tags: %1% entry"
+msgid_plural "Global tags: %1% entries"
+msgstr[0] "Genel etiket: %1% girdi"
+msgstr[1] "Genel etiket: %1% girdi"
 
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
@@ -9355,10 +9359,12 @@ msgstr "Etiketler"
 msgid "Tags are allowed, but chapters are not."
 msgstr "Etiketlere izin verilir ancak bölümlere verilmez."
 
-#: src/merge/generic_reader.cpp:336
-#, boost-format
-msgid "Tags for track ID %1%: %2% entries"
-msgstr "İz ID %1% için etiket: %2% giriş"
+#: src/merge/generic_reader.cpp:382
+#, fuzzy, boost-format
+msgid "Tags for track ID %1%: %2% entry"
+msgid_plural "Tags for track ID %1%: %2% entries"
+msgstr[0] "İz ID %1% için etiket: %2% giriş"
+msgstr[1] "İz ID %1% için etiket: %2% giriş"
 
 #: src/mmg/mmg.cpp:59
 #, c-format, boost-format
@@ -11742,7 +11748,7 @@ msgstr "İz %1%: AAC bilgisi ayrıştırılamadı.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "İz ID %1% bilinmeyen bir AAC türüne sahip.\n"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "İz ID %1%: %2% (%3%)"

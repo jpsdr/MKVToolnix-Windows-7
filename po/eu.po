@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-11 21:34+0200\n"
+"POT-Creation-Date: 2015-05-13 20:15+0200\n"
 "PO-Revision-Date: 2015-05-07 21:15+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -2076,12 +2076,12 @@ msgstr "+-> FLAC agiriaren aurre-azterketa: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> FLAC agiriaren aurre-azterketa: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", azalpena '%1%'"
 
-#: src/merge/generic_reader.cpp:333
+#: src/merge/generic_reader.cpp:330
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", agiri izena '%1%'"
@@ -3064,7 +3064,7 @@ msgstr "Erantsita"
 msgid "Attached files"
 msgstr "Erantsitako agiriak"
 
-#: src/merge/generic_reader.cpp:331
+#: src/merge/generic_reader.cpp:328
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Eranskin ID-a %1%: mota '%2%', neurria %3% byte"
@@ -3559,10 +3559,12 @@ msgstr "Idatziriko atalak."
 msgid "Chapters:"
 msgstr "Atalak:"
 
-#: src/merge/generic_reader.cpp:334
-#, boost-format
-msgid "Chapters: %1% entries"
-msgstr "Atalak: %1% sarrera"
+#: src/merge/generic_reader.cpp:368
+#, fuzzy, boost-format
+msgid "Chapters: %1% entry"
+msgid_plural "Chapters: %1% entries"
+msgstr[0] "Atalak: %1% sarrera"
+msgstr[1] "Atalak: %1% sarrera"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1329
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1374
@@ -5140,7 +5142,7 @@ msgstr ""
 "Moritz Bunkus <moritz@bunkus.org> zure agiri mota sostengatua bada baina ez "
 "da egoki ezagutua.\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Agiria '%1%': edukiontzia: %2%"
@@ -5567,10 +5569,12 @@ msgstr "Etiketa orokorrak (%d sarrera) --> %s"
 msgid "Global tags:"
 msgstr "Aukera orokorrak"
 
-#: src/merge/generic_reader.cpp:335
-#, boost-format
-msgid "Global tags: %1% entries"
-msgstr "Etiketa orokorrak: %1% sarrera"
+#: src/merge/generic_reader.cpp:377
+#, fuzzy, boost-format
+msgid "Global tags: %1% entry"
+msgid_plural "Global tags: %1% entries"
+msgstr[0] "Etiketa orokorrak: %1% sarrera"
+msgstr[1] "Etiketa orokorrak: %1% sarrera"
 
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
@@ -9789,10 +9793,12 @@ msgstr "Etiketak"
 msgid "Tags are allowed, but chapters are not."
 msgstr ""
 
-#: src/merge/generic_reader.cpp:336
-#, boost-format
-msgid "Tags for track ID %1%: %2% entries"
-msgstr "Etiketak bide ID-arentzat %1%: %2% sarrera"
+#: src/merge/generic_reader.cpp:382
+#, fuzzy, boost-format
+msgid "Tags for track ID %1%: %2% entry"
+msgid_plural "Tags for track ID %1%: %2% entries"
+msgstr[0] "Etiketak bide ID-arentzat %1%: %2% sarrera"
+msgstr[1] "Etiketak bide ID-arentzat %1%: %2% sarrera"
 
 #: src/mmg/mmg.cpp:59
 #, c-format, boost-format
@@ -12468,7 +12474,7 @@ msgstr "%1% bidea: AAC argibideak ezin dira aztertu.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "%1% ID-dun bideak AAC mota ezezaguna du.\n"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "%1% ID-dun bidea: %1%: %2% (%3%)"

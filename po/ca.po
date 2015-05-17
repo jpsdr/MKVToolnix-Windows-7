@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix 7.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-11 21:34+0200\n"
+"POT-Creation-Date: 2015-05-13 20:15+0200\n"
 "PO-Revision-Date: 2015-05-09 21:16+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2062,12 +2062,12 @@ msgstr "+-> S'està fent una anàlisi prèvia del fitxer FLAC: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> S'està fent una anàlisi prèvia del fitxer FLAC: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", descripció «%1%»"
 
-#: src/merge/generic_reader.cpp:333
+#: src/merge/generic_reader.cpp:330
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", nom de fitxer «%1%»"
@@ -3012,7 +3012,7 @@ msgstr "Adjuntat"
 msgid "Attached files"
 msgstr "Fitxers adjunts"
 
-#: src/merge/generic_reader.cpp:331
+#: src/merge/generic_reader.cpp:328
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID %1% de l'adjunt: tipus «%2%», mida %3% bytes"
@@ -3511,10 +3511,12 @@ msgstr "S'han escrit els capítols."
 msgid "Chapters:"
 msgstr "Capítols:"
 
-#: src/merge/generic_reader.cpp:334
-#, boost-format
-msgid "Chapters: %1% entries"
-msgstr "Capítols: %1% entrades"
+#: src/merge/generic_reader.cpp:368
+#, fuzzy, boost-format
+msgid "Chapters: %1% entry"
+msgid_plural "Chapters: %1% entries"
+msgstr[0] "Capítols: %1% entrades"
+msgstr[1] "Capítols: %1% entrades"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1329
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1374
@@ -5099,7 +5101,7 @@ msgstr ""
 "Bunkus <moritz@bunkus.org> si el tipus de fitxer és admès però no el "
 "reconeix correctament.\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Fitxer «%1%»: contenidor: %2%"
@@ -5526,10 +5528,12 @@ msgstr "Etiquetes globals (%d entrades) des de %s"
 msgid "Global tags:"
 msgstr "Etiquetes globals:"
 
-#: src/merge/generic_reader.cpp:335
-#, boost-format
-msgid "Global tags: %1% entries"
-msgstr "Etiquetes globals: %1% entrades"
+#: src/merge/generic_reader.cpp:377
+#, fuzzy, boost-format
+msgid "Global tags: %1% entry"
+msgid_plural "Global tags: %1% entries"
+msgstr[0] "Etiquetes globals: %1% entrades"
+msgstr[1] "Etiquetes globals: %1% entrades"
 
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
@@ -9698,10 +9702,12 @@ msgstr "Etiquetes"
 msgid "Tags are allowed, but chapters are not."
 msgstr ""
 
-#: src/merge/generic_reader.cpp:336
-#, boost-format
-msgid "Tags for track ID %1%: %2% entries"
-msgstr "Etiquetes per a l'ID de la pista %1%: %2% entrades"
+#: src/merge/generic_reader.cpp:382
+#, fuzzy, boost-format
+msgid "Tags for track ID %1%: %2% entry"
+msgid_plural "Tags for track ID %1%: %2% entries"
+msgstr[0] "Etiquetes per a l'ID de la pista %1%: %2% entrades"
+msgstr[1] "Etiquetes per a l'ID de la pista %1%: %2% entrades"
 
 #: src/mmg/mmg.cpp:59
 #, c-format, boost-format
@@ -12351,7 +12357,7 @@ msgstr "Pista %1%: La informació AAC no s'ha pogut analitzar.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "L'ID de la pista %1% té un tipus AAC desconegut.\n"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "ID de la pista %1%: %2% (%3%)"

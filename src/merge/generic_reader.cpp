@@ -313,7 +313,7 @@ generic_reader_c::id_result_tags(int64_t track_id,
 
 void
 generic_reader_c::display_identification_results() {
-  std::string format_file, format_track, format_attachment, format_att_description, format_att_file_name, format_chapters, format_tags_global, format_tags_track;
+  std::string format_file, format_track, format_attachment, format_att_description, format_att_file_name;
 
   if (g_identify_for_mmg) {
     format_file            =   "File '%1%': container: %2%";
@@ -321,9 +321,6 @@ generic_reader_c::display_identification_results() {
     format_attachment      =   "Attachment ID %1%: type \"%2%\", size %3% bytes";
     format_att_description =   ", description \"%1%\"";
     format_att_file_name   =   ", file name \"%1%\"";
-    format_chapters        =   "Chapters: %1% entries";
-    format_tags_global     =   "Global tags: %1% entries";
-    format_tags_track      =   "Tags for track ID %1%: %2% entries";
 
   } else {
     format_file            = Y("File '%1%': container: %2%");
@@ -331,9 +328,6 @@ generic_reader_c::display_identification_results() {
     format_attachment      = Y("Attachment ID %1%: type '%2%', size %3% bytes");
     format_att_description = Y(", description '%1%'");
     format_att_file_name   = Y(", file name '%1%'");
-    format_chapters        = Y("Chapters: %1% entries");
-    format_tags_global     = Y("Global tags: %1% entries");
-    format_tags_track      = Y("Tags for track ID %1%: %2% entries");
   }
 
   mxinfo(boost::format(format_file) % m_ti.m_fname % m_id_results_container.info);
@@ -368,15 +362,24 @@ generic_reader_c::display_identification_results() {
   }
 
   for (auto &result : m_id_results_chapters) {
-    mxinfo(boost::format(format_chapters) % result.size);
+    if (g_identify_for_mmg)
+      mxinfo(boost::format("Chapters: %1% entries") % result.size);
+    else
+      mxinfo(boost::format(NY("Chapters: %1% entry", "Chapters: %1% entries", result.size)) % result.size);
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_tags) {
-    if (ID_RESULT_GLOBAL_TAGS_ID == result.id)
-      mxinfo(boost::format(format_tags_global) % result.size);
+    if (ID_RESULT_GLOBAL_TAGS_ID == result.id) {
+      if (g_identify_for_mmg)
+        mxinfo(boost::format("Global tags: %1% entries") % result.size);
+      else
+        mxinfo(boost::format(NY("Global tags: %1% entry", "Global tags: %1% entries", result.size)) % result.size);
+
+    } else if (g_identify_for_mmg)
+      mxinfo(boost::format("Tags for track ID %1%: %2% entries") % result.id % result.size);
     else
-      mxinfo(boost::format(format_tags_track) % result.id % result.size);
+      mxinfo(boost::format(NY("Tags for track ID %1%: %2% entry", "Tags for track ID %1%: %2% entries", result.size)) % result.id % result.size);
 
     mxinfo("\n");
   }

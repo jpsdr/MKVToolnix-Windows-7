@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-11 21:34+0200\n"
+"POT-Creation-Date: 2015-05-13 20:15+0200\n"
 "PO-Revision-Date: 2015-05-07 21:12+0200\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech <trottel09@gmail.com>\n"
@@ -1950,12 +1950,12 @@ msgstr "+-> Předběžná analýza FLAC souboru: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Předběžná analýza FLAC souboru: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", popis '%1%'"
 
-#: src/merge/generic_reader.cpp:333
+#: src/merge/generic_reader.cpp:330
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", název souboru '%1%'"
@@ -2834,7 +2834,7 @@ msgstr "Přiloženo"
 msgid "Attached files"
 msgstr "Přiložené soubory"
 
-#: src/merge/generic_reader.cpp:331
+#: src/merge/generic_reader.cpp:328
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID přílohy %1%: typ '%2%', velikost %3% bajtů"
@@ -3300,10 +3300,13 @@ msgstr "Kapitoly zapsány."
 msgid "Chapters:"
 msgstr "Kapitoly:"
 
-#: src/merge/generic_reader.cpp:334
-#, boost-format
-msgid "Chapters: %1% entries"
-msgstr "Kapitoly: %1% položek"
+#: src/merge/generic_reader.cpp:368
+#, fuzzy, boost-format
+msgid "Chapters: %1% entry"
+msgid_plural "Chapters: %1% entries"
+msgstr[0] "Kapitoly: %1% položek"
+msgstr[1] "Kapitoly: %1% položek"
+msgstr[2] "Kapitoly: %1% položek"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1329
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1374
@@ -4750,7 +4753,7 @@ msgstr "Název souboru nebo úseku:"
 msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "Soubor %1% má neznámý typ. Podívejte se na podporované typy souborů ('mkvmerge --list-types') a kontaktujte autora Moritze Bunkuse <moritz@bunkus.org>, pokud je váš typ souboru podporován, ale není správně rozpoznán.\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Soubor '%1%': kontejner: %2%"
@@ -5103,10 +5106,13 @@ msgstr "Všeobecné štítky (%d položek) z %s"
 msgid "Global tags:"
 msgstr "Všeobecné volby"
 
-#: src/merge/generic_reader.cpp:335
-#, boost-format
-msgid "Global tags: %1% entries"
-msgstr "Všeobecné štítky: %1% položek"
+#: src/merge/generic_reader.cpp:377
+#, fuzzy, boost-format
+msgid "Global tags: %1% entry"
+msgid_plural "Global tags: %1% entries"
+msgstr[0] "Všeobecné štítky: %1% položek"
+msgstr[1] "Všeobecné štítky: %1% položek"
+msgstr[2] "Všeobecné štítky: %1% položek"
 
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
@@ -8663,10 +8669,13 @@ msgstr "Štítky"
 msgid "Tags are allowed, but chapters are not."
 msgstr ""
 
-#: src/merge/generic_reader.cpp:336
-#, boost-format
-msgid "Tags for track ID %1%: %2% entries"
-msgstr "Štítky pro stopu s ID %1%: %2% položek"
+#: src/merge/generic_reader.cpp:382
+#, fuzzy, boost-format
+msgid "Tags for track ID %1%: %2% entry"
+msgid_plural "Tags for track ID %1%: %2% entries"
+msgstr[0] "Štítky pro stopu s ID %1%: %2% položek"
+msgstr[1] "Štítky pro stopu s ID %1%: %2% položek"
+msgstr[2] "Štítky pro stopu s ID %1%: %2% položek"
 
 #: src/mmg/mmg.cpp:59
 #, c-format, boost-format
@@ -10530,7 +10539,7 @@ msgstr ""
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Stopa s ID %1% má neznámý typ AAC.\n"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Stopa s ID %1%: %2% (%3%)"

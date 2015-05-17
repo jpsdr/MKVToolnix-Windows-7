@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-11 21:34+0200\n"
+"POT-Creation-Date: 2015-05-13 20:15+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
@@ -1976,12 +1976,12 @@ msgstr "+-> Предварительный анализ FLAC файла: %1%%%%2
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Предварительный анализ FLAC файла: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", описание '%1%'"
 
-#: src/merge/generic_reader.cpp:333
+#: src/merge/generic_reader.cpp:330
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", имя файла '%1%'"
@@ -2860,7 +2860,7 @@ msgstr "Прикреплено"
 msgid "Attached files"
 msgstr "Файлы-вложения"
 
-#: src/merge/generic_reader.cpp:331
+#: src/merge/generic_reader.cpp:328
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID вложения %1%: тип '%2%', размер %3% байт"
@@ -3325,10 +3325,13 @@ msgstr "Главы записаны."
 msgid "Chapters:"
 msgstr "Главы:"
 
-#: src/merge/generic_reader.cpp:334
-#, boost-format
-msgid "Chapters: %1% entries"
-msgstr "Главы: %1% записи"
+#: src/merge/generic_reader.cpp:368
+#, fuzzy, boost-format
+msgid "Chapters: %1% entry"
+msgid_plural "Chapters: %1% entries"
+msgstr[0] "Главы: %1% записи"
+msgstr[1] "Главы: %1% записи"
+msgstr[2] "Главы: %1% записи"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1329
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1374
@@ -4784,7 +4787,7 @@ msgstr "Название файла/сегмента:"
 msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "Тип файла %1% неизвестен. Пожалуйста, проверьте список поддерживаемых типов файлов ('mkvmerge --list-types') и свяжитесь с автором Moritz Bunkus <moritz@bunkus.org>, если ваш тип файла поддерживается, но не распознаётся должным образом.\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Файл '%1%': контейнер: %2%"
@@ -5139,10 +5142,13 @@ msgstr "Глобальные тэги (%d записей) из %s"
 msgid "Global tags:"
 msgstr "Глобальные параметры"
 
-#: src/merge/generic_reader.cpp:335
-#, boost-format
-msgid "Global tags: %1% entries"
-msgstr "Глобальные тэги: %1% записей"
+#: src/merge/generic_reader.cpp:377
+#, fuzzy, boost-format
+msgid "Global tags: %1% entry"
+msgid_plural "Global tags: %1% entries"
+msgstr[0] "Глобальные тэги: %1% записей"
+msgstr[1] "Глобальные тэги: %1% записей"
+msgstr[2] "Глобальные тэги: %1% записей"
 
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
@@ -8748,10 +8754,13 @@ msgstr "Теги"
 msgid "Tags are allowed, but chapters are not."
 msgstr ""
 
-#: src/merge/generic_reader.cpp:336
-#, boost-format
-msgid "Tags for track ID %1%: %2% entries"
-msgstr "Теги для дорожки ID %1%: %2% записей"
+#: src/merge/generic_reader.cpp:382
+#, fuzzy, boost-format
+msgid "Tags for track ID %1%: %2% entry"
+msgid_plural "Tags for track ID %1%: %2% entries"
+msgstr[0] "Теги для дорожки ID %1%: %2% записей"
+msgstr[1] "Теги для дорожки ID %1%: %2% записей"
+msgstr[2] "Теги для дорожки ID %1%: %2% записей"
 
 #: src/mmg/mmg.cpp:59
 #, c-format, boost-format
@@ -10700,7 +10709,7 @@ msgstr "Дорожка %1%: Информация AAC не может быть п
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Дорожка ID %1% имеет неизвестный тип AAC.\n"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "ID дорожки %1%: %2% (%3%)"

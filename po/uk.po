@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-11 21:34+0200\n"
+"POT-Creation-Date: 2015-05-13 20:15+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -2066,12 +2066,12 @@ msgstr "+-> Попередній аналіз файлу FLAC: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Попередній аналіз файлу FLAC: 100%\n"
 
-#: src/merge/generic_reader.cpp:332
+#: src/merge/generic_reader.cpp:329
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", опис '%1%'"
 
-#: src/merge/generic_reader.cpp:333
+#: src/merge/generic_reader.cpp:330
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", назва файлу '%1%'"
@@ -3028,7 +3028,7 @@ msgstr "Приєднано"
 msgid "Attached files"
 msgstr "Вкладені файли"
 
-#: src/merge/generic_reader.cpp:331
+#: src/merge/generic_reader.cpp:328
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID вкладення %1%: тип '%2%', розмір %3% байт"
@@ -3526,10 +3526,13 @@ msgstr "Розділи записані."
 msgid "Chapters:"
 msgstr "Розділи:"
 
-#: src/merge/generic_reader.cpp:334
-#, boost-format
-msgid "Chapters: %1% entries"
-msgstr "Розділи: %1% запис(и)(ів)"
+#: src/merge/generic_reader.cpp:368
+#, fuzzy, boost-format
+msgid "Chapters: %1% entry"
+msgid_plural "Chapters: %1% entries"
+msgstr[0] "Розділи: %1% запис(и)(ів)"
+msgstr[1] "Розділи: %1% запис(и)(ів)"
+msgstr[2] "Розділи: %1% запис(и)(ів)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1329
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1374
@@ -5104,7 +5107,7 @@ msgstr ""
 "<moritz@bunkus.org>, якщо ваш тип файлу підтримується, але не розпізнається "
 "належним чином.\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:326
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Файл '%1%': контейнер: %2%"
@@ -5526,10 +5529,13 @@ msgstr "Глобальні теги (%d записів) з %s"
 msgid "Global tags:"
 msgstr "Глобальні теги:"
 
-#: src/merge/generic_reader.cpp:335
-#, boost-format
-msgid "Global tags: %1% entries"
-msgstr "Глобальні теги: %1% записів"
+#: src/merge/generic_reader.cpp:377
+#, fuzzy, boost-format
+msgid "Global tags: %1% entry"
+msgid_plural "Global tags: %1% entries"
+msgstr[0] "Глобальні теги: %1% записів"
+msgstr[1] "Глобальні теги: %1% записів"
+msgstr[2] "Глобальні теги: %1% записів"
 
 #: src/mmg/header_editor/frame.cpp:152
 msgid "H&eaders"
@@ -9748,10 +9754,13 @@ msgstr "Теги"
 msgid "Tags are allowed, but chapters are not."
 msgstr ""
 
-#: src/merge/generic_reader.cpp:336
-#, boost-format
-msgid "Tags for track ID %1%: %2% entries"
-msgstr "Теги для доріжки з ID %1%: %2% записи(ів)"
+#: src/merge/generic_reader.cpp:382
+#, fuzzy, boost-format
+msgid "Tags for track ID %1%: %2% entry"
+msgid_plural "Tags for track ID %1%: %2% entries"
+msgstr[0] "Теги для доріжки з ID %1%: %2% записи(ів)"
+msgstr[1] "Теги для доріжки з ID %1%: %2% записи(ів)"
+msgstr[2] "Теги для доріжки з ID %1%: %2% записи(ів)"
 
 #: src/mmg/mmg.cpp:59
 #, c-format, boost-format
@@ -12428,7 +12437,7 @@ msgstr "Доріжка %1%: Інформація AAC не може бути зч
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Доріжка з ID %1% має невідомий AAC тип.\n"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:327
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Доріжка з ID %1%: %2% (%3%)"
