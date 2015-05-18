@@ -632,12 +632,6 @@ Tab::onAddFiles() {
 
 void
 Tab::onAppendFiles() {
-  // auto selectedFile = m_filesModel->fromIndex(selectedSourceFile());
-  // if (selectedFile && !selectedFile->m_tracks.size()) {
-  //   QMessageBox::critical(this, QY("Unable to append files"), QY("You cannot append tracks or add additional parts to files that contain tracks."));
-  //   return;
-  // }
-
   addOrAppendFiles(true);
 }
 
