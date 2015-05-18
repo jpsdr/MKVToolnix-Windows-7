@@ -53,7 +53,7 @@ MuxJob::start() {
 
 void
 MuxJob::processBytesRead() {
-  m_bytesRead.replace('\r', '\n').replace("\r\n", "\n");
+  m_bytesRead.replace("\r\n", "\n").replace('\r', '\n');
 
   auto start = 0, num_read = m_bytesRead.size();
 
@@ -74,7 +74,7 @@ void
 MuxJob::processLine(QString const &rawLine) {
   auto line = rawLine;
 
-  line.replace(QRegularExpression{"[\r\n]+$"}, "");
+  line.replace(QRegularExpression{"[\r\n]+"}, "");
 
   // TODO: MuxJob::processLine
   if (line.startsWith("Warning:")) {
