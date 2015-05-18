@@ -204,6 +204,14 @@ SourceFileModel::addFilesAndTracks(QList<SourceFilePtr> const &files) {
   for (auto const &file : files) {
     createAndAppendRow(invisibleRootItem(), file);
     *m_sourceFiles << file;
+
+    if (file->m_additionalParts.isEmpty())
+      continue;
+
+    auto itemToAddTo = item(rowCount() - 1, 0);
+    auto row         = 0;
+    for (auto const &additionalPart : file->m_additionalParts)
+      createAndAppendRow(itemToAddTo, additionalPart, row++);
   }
 
   m_tracksModel->addTracks(std::accumulate(files.begin(), files.end(), QList<TrackPtr>{}, [](QList<TrackPtr> &accu, SourceFilePtr const &file) { return accu << file->m_tracks; }));
