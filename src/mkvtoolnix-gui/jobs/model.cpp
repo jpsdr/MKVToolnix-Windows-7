@@ -291,10 +291,8 @@ void
 Model::updateProgress() {
   QMutexLocker locked{&m_mutex};
 
-  if (!m_toBeProcessed.count()) {
-    emit progressChanged(0, 0);
+  if (!m_toBeProcessed.count())
     return;
-  }
 
   auto numRunning      = 0u;
   auto numDone         = 0u;
