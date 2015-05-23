@@ -22,6 +22,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->setupUi(this);
 
   // GUI page
+  ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);
   setupOnlineCheck();
   setupInterfaceLanguage();
   setupJobsJobOutput();
@@ -69,6 +70,8 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If enabled the program will check online whether or not a new release of MKVToolNix is available on the home page."))
                    .arg(QY("This is done at startup and at most once within 24 hours."))
                    .arg(QY("No information is transmitted to the server.")));
+
+  Util::setToolTip(ui->cbGuiDisableAnimations, QY("If checked several short animations used throughout the program as visual clues for the user will be disabled."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
@@ -311,6 +314,7 @@ PreferencesDialog::save() {
   // GUI page:
   m_cfg.m_uiLocale                  = ui->cbGuiInterfaceLanguage->currentData().toString();
   m_cfg.m_checkForUpdates           = ui->cbGuiCheckForUpdates->isChecked();
+  m_cfg.m_disableAnimations         = ui->cbGuiDisableAnimations->isChecked();
   auto idx                          = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy          = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 

@@ -323,6 +323,9 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
 void
 MainWindow::showIconMovingToTool(QString const &pixmapName,
                                  ToolBase const &tool) {
+  if (Util::Settings::get().m_disableAnimations)
+    return;
+
   for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx)
     if (&tool == ui->tool->widget(idx)) {
       auto size = 32;

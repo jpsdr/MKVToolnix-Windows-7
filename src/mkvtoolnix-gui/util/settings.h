@@ -62,6 +62,7 @@ public:
   bool m_checkForUpdates;
   QDateTime m_lastUpdateCheck;
 
+  bool m_disableAnimations;
   QString m_uiLocale;
 
 public:
