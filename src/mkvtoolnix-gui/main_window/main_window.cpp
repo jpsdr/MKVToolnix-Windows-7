@@ -19,6 +19,7 @@
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 #include "mkvtoolnix-gui/merge/tool.h"
+#include "mkvtoolnix-gui/util/moving_pixmap_overlay.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
@@ -40,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   // Setup UI controls.
   ui->setupUi(this);
+  m_movingPixmapOverlay = std::make_unique<Util::MovingPixmapOverlay>(centralWidget());
 
   m_statusBarProgress = new StatusBarProgressWidget{this};
   ui->statusBar->addPermanentWidget(m_statusBarProgress);
@@ -317,5 +319,30 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
   dlg.exec();
 }
 #endif  // HAVE_CURL_EASY_H
+
+void
+MainWindow::showIconMovingToTool(QString const &pixmapName,
+                                 ToolBase const &tool) {
+  for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx)
+    if (&tool == ui->tool->widget(idx)) {
+      auto size = 32;
+      auto rect = ui->tool->tabBar()->tabRect(idx);
+
+      auto from = centralWidget()->mapFromGlobal(QCursor::pos());
+      auto to   = QPoint{rect.x() + (rect.width()  - size) / 2,
+                         rect.y() + (rect.height() - size) / 2};
+      to        = centralWidget()->mapFromGlobal(ui->tool->tabBar()->mapToGlobal(to));
+
+      m_movingPixmapOverlay->addMovingPixmap(Q(":/icons/%1x%1/%2").arg(size).arg(pixmapName), from, to);
+
+      return;
+    }
+}
+
+void
+MainWindow::resizeEvent(QResizeEvent *event) {
+  m_movingPixmapOverlay->resize(event->size());
+  event->accept();
+}
 
 }}

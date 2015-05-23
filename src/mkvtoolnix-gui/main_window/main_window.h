@@ -12,7 +12,12 @@
 
 #include "mkvtoolnix-gui/util/window_geometry_saver.h"
 
+class QResizeEvent;
+
 namespace mtx { namespace gui {
+
+class StatusBarProgressWidget;
+class ToolBase;
 
 namespace ChapterEditor {
 class Tool;
@@ -26,6 +31,9 @@ class Tool;
 namespace Merge {
 class Tool;
 }
+namespace Util {
+class MovingPixmapOverlay;
+}
 namespace WatchJobs {
 class Tab;
 class Tool;
@@ -34,8 +42,6 @@ class Tool;
 namespace Ui {
 class MainWindow;
 }
-
-class StatusBarProgressWidget;
 
 class MainWindow : public QMainWindow {
   Q_OBJECT;
@@ -51,6 +57,7 @@ protected:
   WatchJobs::Tool *m_watchJobTool{};
   QList<QAction *> m_toolSelectionActions;
   Util::WindowGeometrySaver m_geometrySaver;
+  std::unique_ptr<Util::MovingPixmapOverlay> m_movingPixmapOverlay;
 
 protected:                      // static
   static MainWindow *ms_mainWindow;
@@ -64,6 +71,10 @@ public:
   virtual void showTheseMenusOnly(QList<QMenu *> const &menus);
   virtual void showAndEnableMenu(QMenu &menu, bool show);
   virtual void retranslateUi();
+
+  virtual void showIconMovingToTool(QString const &pixmapName, ToolBase const &tool);
+
+  virtual void resizeEvent(QResizeEvent *event) override;
 
 public slots:
   virtual void changeTool();

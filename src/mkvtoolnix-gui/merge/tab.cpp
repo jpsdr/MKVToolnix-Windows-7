@@ -12,6 +12,7 @@
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 #include <QComboBox>
 #include <QMenu>
@@ -269,7 +270,11 @@ Tab::addToJobQueue(bool startNow) {
     }
 
     job->m_description = newDescription;
-  }
+
+    MainWindow::get()->showIconMovingToTool(Q("task-delegate.png"), *MainWindow::jobTool());
+
+  } else
+    MainWindow::get()->showIconMovingToTool(Q("media-playback-start.png"), *MainWindow::watchJobTool());
 
   MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
 }
