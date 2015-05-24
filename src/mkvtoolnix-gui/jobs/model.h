@@ -63,7 +63,8 @@ public:
   virtual Qt::ItemFlags flags(QModelIndex const &index) const;
 
 signals:
-  void progressChanged(unsigned int progress, unsigned int totalProgress);
+  void progressChanged(int progress, int totalProgress);
+  void jobStatsChanged(int numPendingAutomatic, int numPendingManual, int numOther);
 
 public slots:
   void onStatusChanged(uint64_t id);
@@ -76,6 +77,7 @@ protected:
   QList<QStandardItem *> itemsForRow(QModelIndex const &idx);
 
   void updateProgress();
+  void updateJobStats();
   void processAutomaticJobRemoval(uint64_t id, Job::Status status);
   void scheduleJobForRemoval(uint64_t id);
 };

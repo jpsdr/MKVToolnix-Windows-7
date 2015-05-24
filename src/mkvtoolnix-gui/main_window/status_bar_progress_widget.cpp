@@ -17,15 +17,27 @@ StatusBarProgressWidget::~StatusBarProgressWidget() {
 }
 
 void
-StatusBarProgressWidget::setProgress(unsigned int progress,
-                                     unsigned int totalProgress) {
+StatusBarProgressWidget::setProgress(int progress,
+                                     int totalProgress) {
   ui->progress->setValue(progress);
   ui->totalProgress->setValue(totalProgress);
 }
 
 void
+StatusBarProgressWidget::setJobStats(int numPendingAuto,
+                                     int numPendingManual,
+                                     int) {
+  m_numPendingAuto   = numPendingAuto;
+  m_numPendingManual = numPendingManual;
+
+  ui->numJobsLabel->setText(QY("%1 automatic, %2 manual").arg(m_numPendingAuto).arg(m_numPendingManual));
+}
+
+void
 StatusBarProgressWidget::retranslateUi() {
   ui->retranslateUi(this);
+
+  ui->numJobsLabel->setText(QY("%1 automatic, %2 manual").arg(m_numPendingAuto).arg(m_numPendingManual));
 }
 
 }}

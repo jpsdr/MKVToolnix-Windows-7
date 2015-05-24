@@ -142,7 +142,8 @@ MainWindow::setupToolSelector() {
   connect(ui->actionGUIJobOutput,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
 
   connect(ui->tool,                    SIGNAL(currentChanged(int)),                        this,                SLOT(toolChanged(int)));
-  connect(m_toolJobs->model(),         SIGNAL(progressChanged(unsigned int,unsigned int)), m_statusBarProgress, SLOT(setProgress(unsigned int,unsigned int)));
+  connect(m_toolJobs->model(),         &Jobs::Model::progressChanged,                      m_statusBarProgress, &StatusBarProgressWidget::setProgress);
+  connect(m_toolJobs->model(),         &Jobs::Model::jobStatsChanged,                      m_statusBarProgress, &StatusBarProgressWidget::setJobStats);
 }
 
 void

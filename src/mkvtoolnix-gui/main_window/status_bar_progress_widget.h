@@ -18,6 +18,7 @@ class StatusBarProgressWidget : public QWidget {
 
 protected:
   std::unique_ptr<Ui::StatusBarProgressWidget> ui;
+  int m_numPendingAuto{}, m_numPendingManual{};
 
 public:
   explicit StatusBarProgressWidget(QWidget *parent = nullptr);
@@ -26,7 +27,8 @@ public:
   void retranslateUi();
 
 public slots:
-  void setProgress(unsigned int progress, unsigned int totalProgress);
+  void setProgress(int progress, int totalProgress);
+  void setJobStats(int numPendingAutomatic, int numPendingManual, int numOther);
 };
 
 }}

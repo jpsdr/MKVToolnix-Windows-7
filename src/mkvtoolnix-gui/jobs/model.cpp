@@ -149,6 +149,7 @@ Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
     m_toBeProcessed.remove(job);
 
   updateProgress();
+  updateJobStats();
 }
 
 void
@@ -156,6 +157,8 @@ Model::add(JobPtr const &job) {
   QMutexLocker locked{&m_mutex};
 
   m_jobsById[job->m_id] = job;
+
+  updateJobStats();
 
   if (job->isToBeProcessed()) {
     m_toBeProcessed.insert(job.get());
@@ -268,12 +271,14 @@ Model::startNextAutoJob() {
 
   if (toStart) {
     toStart->start();
+    updateJobStats();
     return;
   }
 
   // All jobs are done. Clear total progress.
   m_toBeProcessed.clear();
   updateProgress();
+  updateJobStats();
 }
 
 void
@@ -294,9 +299,9 @@ Model::updateProgress() {
   if (!m_toBeProcessed.count())
     return;
 
-  auto numRunning      = 0u;
-  auto numDone         = 0u;
-  auto runningProgress = 0u;
+  auto numRunning       = 0;
+  auto numDone          = 0;
+  auto runningProgress  = 0;
 
   for (auto const &job : m_toBeProcessed)
     if (Job::Running == job->m_status) {
@@ -310,6 +315,27 @@ Model::updateProgress() {
   auto totalProgress = (numDone * 100 + runningProgress) / m_toBeProcessed.count();
 
   emit progressChanged(progress, totalProgress);
+}
+
+void
+Model::updateJobStats() {
+  QMutexLocker locked{&m_mutex};
+
+  auto numPendingAuto   = 0;
+  auto numPendingManual = 0;
+  auto numOther         = 0;
+
+  for (auto const &job : m_jobsById)
+    if (Job::PendingAuto == job->m_status)
+      ++numPendingAuto;
+
+    else if (Job::PendingManual == job->m_status)
+      ++numPendingManual;
+
+    else
+      ++numOther;
+
+  emit jobStatsChanged(numPendingAuto, numPendingManual, numOther);
 }
 
 void
