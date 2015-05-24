@@ -86,9 +86,9 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   ui->description->setText(job.m_description);
   ui->progressBar->setValue(job.m_progress);
 
-  ui->output  ->setPlainText(job.m_output.isEmpty()   ? Q("%1\n").arg(job.m_output.join("\n"))   : Q(""));
-  ui->warnings->setPlainText(job.m_warnings.isEmpty() ? Q("%1\n").arg(job.m_warnings.join("\n")) : Q(""));
-  ui->errors  ->setPlainText(job.m_errors.isEmpty()   ? Q("%1\n").arg(job.m_errors.join("\n"))   : Q(""));
+  ui->output  ->setPlainText(!job.m_output.isEmpty()   ? Q("%1\n").arg(job.m_output.join("\n"))   : Q(""));
+  ui->warnings->setPlainText(!job.m_warnings.isEmpty() ? Q("%1\n").arg(job.m_warnings.join("\n")) : Q(""));
+  ui->errors  ->setPlainText(!job.m_errors.isEmpty()   ? Q("%1\n").arg(job.m_errors.join("\n"))   : Q(""));
 
   ui->startedAt ->setText(job.m_dateStarted .isValid() ? Util::displayableDate(job.m_dateStarted)  : QY("not started yet"));
   ui->finishedAt->setText(job.m_dateFinished.isValid() ? Util::displayableDate(job.m_dateFinished) : QY("not finished yet"));
