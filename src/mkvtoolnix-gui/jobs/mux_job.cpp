@@ -55,9 +55,9 @@ void
 MuxJob::processBytesRead() {
   m_bytesRead.replace("\r\n", "\n").replace('\r', '\n');
 
-  auto start = 0, num_read = m_bytesRead.size();
+  auto start = 0, numRead = m_bytesRead.size();
 
-  while (start < num_read) {
+  while (start < numRead) {
     auto pos = m_bytesRead.indexOf('\n', start);
     if (-1 == pos)
       break;
