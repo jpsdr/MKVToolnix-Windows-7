@@ -89,7 +89,9 @@ Tool::onContextMenu(QPoint pos) {
   m_removeAllAction->setEnabled(hasJobs);
 
   m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
+  m_acknowledgeAllWarningsAction->setEnabled(hasJobs);
   m_acknowledgeSelectedErrorsAction->setEnabled(hasSelection);
+  m_acknowledgeAllErrorsAction->setEnabled(hasJobs);
 
   QMenu menu{this};
 
