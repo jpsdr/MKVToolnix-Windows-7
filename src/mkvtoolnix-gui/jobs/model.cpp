@@ -19,6 +19,8 @@ namespace mtx { namespace gui { namespace Jobs {
 Model::Model(QObject *parent)
   : QStandardItemModel{parent}
   , m_mutex{QMutex::Recursive}
+  , m_warningsIcon{Q(":/icons/16x16/dialog-warning.png")}
+  , m_errorsIcon{Q(":/icons/16x16/dialog-error.png")}
   , m_started{}
   , m_dontStartJobsNow{}
 {
@@ -32,8 +34,10 @@ void
 Model::retranslateUi() {
   QMutexLocker locked{&m_mutex};
 
-  auto labels = QStringList{} << QY("Status") << QY("Description") << QY("Type") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
+  auto labels = QStringList{} << QY("Status") << Q("") << QY("Description") << QY("Type") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
   setHorizontalHeaderLabels(labels);
+
+  horizontalHeaderItem(StatusIconColumn)->setIcon(QIcon{Q(":/icons/16x16/dialog-warning-grayscale.png")});
 
   horizontalHeaderItem(DescriptionColumn) ->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
   horizontalHeaderItem(ProgressColumn)    ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -103,13 +107,18 @@ Model::setRowText(QList<QStandardItem *> const &items,
   items[DateAddedColumn   ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
   items[DateStartedColumn ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
   items[DateFinishedColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+  auto numWarnings = job.numUnacknowledgedWarnings();
+  auto numErrors   = job.numUnacknowledgedErrors();
+
+  items[StatusIconColumn]->setIcon(numErrors ? m_errorsIcon : numWarnings ? m_warningsIcon : QIcon{});
 }
 
 QList<QStandardItem *>
 Model::itemsForRow(QModelIndex const &idx) {
   auto rowItems = QList<QStandardItem *>{};
 
-  for (auto column = 0; 7 > column; ++column)
+  for (auto column = 0; 8 > column; ++column)
     rowItems << itemFromIndex(idx.sibling(idx.row(), column));
 
   return rowItems;
@@ -119,7 +128,7 @@ QList<QStandardItem *>
 Model::createRow(Job const &job)
   const {
   auto items = QList<QStandardItem *>{};
-  for (auto idx = 0; idx < 7; ++idx)
+  for (auto idx = 0; idx < 8; ++idx)
     items << new QStandardItem{};
   setRowText(items, job);
 
@@ -159,6 +168,7 @@ Model::add(JobPtr const &job) {
   m_jobsById[job->m_id] = job;
 
   updateJobStats();
+  updateNumUnacknowledgedWarningsOrErrors();
 
   if (job->isToBeProcessed()) {
     m_toBeProcessed.insert(job.get());
@@ -167,8 +177,9 @@ Model::add(JobPtr const &job) {
 
   invisibleRootItem()->appendRow(createRow(*job));
 
-  connect(job.get(), &Job::progressChanged, this, &Model::onProgressChanged);
-  connect(job.get(), &Job::statusChanged,   this, &Model::onStatusChanged);
+  connect(job.get(), &Job::progressChanged,                          this, &Model::onProgressChanged);
+  connect(job.get(), &Job::statusChanged,                            this, &Model::onStatusChanged);
+  connect(job.get(), &Job::numUnacknowledgedWarningsOrErrorsChanged, this, &Model::onNumUnacknowledgedWarningsOrErrorsChanged);
 
   startNextAutoJob();
 }
@@ -247,6 +258,32 @@ Model::onProgressChanged(uint64_t id,
     item(row, ProgressColumn)->setText(to_qs(boost::format("%1%%%") % progress));
     updateProgress();
   }
+}
+
+void
+Model::onNumUnacknowledgedWarningsOrErrorsChanged(uint64_t id,
+                                                  int,
+                                                  int) {
+  QMutexLocker locked{&m_mutex};
+
+  auto row = rowFromId(id);
+  if (-1 != row)
+    setRowText(itemsForRow(index(row, 0)), *m_jobsById[id]);
+
+  updateNumUnacknowledgedWarningsOrErrors();
+}
+
+void
+Model::updateNumUnacknowledgedWarningsOrErrors() {
+  auto numWarnings = 0;
+  auto numErrors   = 0;
+
+  for (auto const &job : m_jobsById) {
+    numWarnings += job->numUnacknowledgedWarnings();
+    numErrors   += job->numUnacknowledgedErrors();
+  }
+
+  emit numUnacknowledgedWarningsOrErrorsChanged(numWarnings, numErrors);
 }
 
 void

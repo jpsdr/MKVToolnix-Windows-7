@@ -132,18 +132,19 @@ MainWindow::setupToolSelector() {
                          << ui->actionGUIHeaderEditor << ui->actionGUIChapterEditor  << ui->actionGUITagEditor
                          << ui->actionGUIJobQueue     << ui->actionGUIJobOutput;
 
-  connect(ui->actionGUIMergeTool,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIExtractionTool, SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIInfoTool,       SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIHeaderEditor,   SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIChapterEditor,  SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUITagEditor,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIJobQueue,       SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIJobOutput,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+  connect(ui->actionGUIMergeTool,      SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
+  connect(ui->actionGUIExtractionTool, SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
+  connect(ui->actionGUIInfoTool,       SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
+  connect(ui->actionGUIHeaderEditor,   SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
+  connect(ui->actionGUIChapterEditor,  SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
+  connect(ui->actionGUITagEditor,      SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
+  connect(ui->actionGUIJobQueue,       SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
+  connect(ui->actionGUIJobOutput,      SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
 
-  connect(ui->tool,                    SIGNAL(currentChanged(int)),                        this,                SLOT(toolChanged(int)));
-  connect(m_toolJobs->model(),         &Jobs::Model::progressChanged,                      m_statusBarProgress, &StatusBarProgressWidget::setProgress);
-  connect(m_toolJobs->model(),         &Jobs::Model::jobStatsChanged,                      m_statusBarProgress, &StatusBarProgressWidget::setJobStats);
+  connect(ui->tool,                    SIGNAL(currentChanged(int)),                            this,                SLOT(toolChanged(int)));
+  connect(m_toolJobs->model(),         &Jobs::Model::progressChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setProgress);
+  connect(m_toolJobs->model(),         &Jobs::Model::jobStatsChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setJobStats);
+  connect(m_toolJobs->model(),         &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, m_statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
 }
 
 void

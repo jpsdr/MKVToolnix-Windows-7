@@ -21,18 +21,20 @@ protected:
   QSet<Job const *> m_toBeProcessed;
   QHash<uint64_t, bool> m_toBeRemoved;
   QMutex m_mutex;
+  QIcon m_warningsIcon, m_errorsIcon;
 
   bool m_started, m_dontStartJobsNow;
 
 public:
   // labels << QY("Status") << QY("Description") << QY("Type") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
   static int const StatusColumn       = 0;
-  static int const DescriptionColumn  = 1;
-  static int const TypeColumn         = 2;
-  static int const ProgressColumn     = 3;
-  static int const DateAddedColumn    = 4;
-  static int const DateStartedColumn  = 5;
-  static int const DateFinishedColumn = 6;
+  static int const StatusIconColumn   = 1;
+  static int const DescriptionColumn  = 2;
+  static int const TypeColumn         = 3;
+  static int const ProgressColumn     = 4;
+  static int const DateAddedColumn    = 5;
+  static int const DateStartedColumn  = 6;
+  static int const DateFinishedColumn = 7;
 
   static int const RowNotFound        = -1;
 
@@ -65,10 +67,12 @@ public:
 signals:
   void progressChanged(int progress, int totalProgress);
   void jobStatsChanged(int numPendingAutomatic, int numPendingManual, int numOther);
+  void numUnacknowledgedWarningsOrErrorsChanged(int numWarnings, int numErrors);
 
 public slots:
   void onStatusChanged(uint64_t id);
   void onProgressChanged(uint64_t id, unsigned int progress);
+  void onNumUnacknowledgedWarningsOrErrorsChanged(uint64_t id, int numWarnings, int numErrors);
   void removeScheduledJobs();
 
 protected:
@@ -78,6 +82,8 @@ protected:
 
   void updateProgress();
   void updateJobStats();
+  void updateNumUnacknowledgedWarningsOrErrors();
+
   void processAutomaticJobRemoval(uint64_t id, Job::Status status);
   void scheduleJobForRemoval(uint64_t id);
 };
