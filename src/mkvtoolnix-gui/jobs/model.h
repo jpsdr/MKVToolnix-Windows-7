@@ -44,11 +44,12 @@ public:
 
   void retranslateUi();
 
-  QList<Job *> selectedJobs(QAbstractItemView *view) const;
   uint64_t idFromRow(int row) const;
   Job *fromId(uint64_t id) const;
   int rowFromId(uint64_t id) const;
   bool hasJobs() const;
+
+  void withSelectedJobs(QAbstractItemView *view, std::function<void(Job &)> const &worker);
 
   void removeJobsIf(std::function<bool(Job const &)> predicate);
   void add(JobPtr const &job);
@@ -91,6 +92,8 @@ protected:
 
   void processAutomaticJobRemoval(uint64_t id, Job::Status status);
   void scheduleJobForRemoval(uint64_t id);
+
+  QList<Job *> selectedJobs(QAbstractItemView *view);
 };
 
 }}}

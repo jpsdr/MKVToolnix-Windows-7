@@ -74,7 +74,9 @@ Tool::setupUiControls() {
 void
 Tool::onContextMenu(QPoint pos) {
   bool hasJobs      = m_model->hasJobs();
-  bool hasSelection = !m_model->selectedJobs(ui->jobs).isEmpty();
+  bool hasSelection = false;
+
+  m_model->withSelectedJobs(ui->jobs, [&hasSelection](Job &) { hasSelection = true; });
 
   m_startAction->setEnabled(hasSelection);
   m_removeAction->setEnabled(hasSelection);
@@ -105,20 +107,16 @@ Tool::onContextMenu(QPoint pos) {
 
 void
 Tool::onStart() {
-  auto jobs = m_model->selectedJobs(ui->jobs);
-  for (auto const &job : jobs)
-    job->setPendingAuto();
+  m_model->withSelectedJobs(ui->jobs, [](Job &job) { job.setPendingAuto(); });
 
   m_model->startNextAutoJob();
 }
 
 void
 Tool::onRemove() {
-  auto idsToRemove  = QMap<uint64_t, bool>{};
-  auto selectedJobs = m_model->selectedJobs(ui->jobs);
+  auto idsToRemove = QMap<uint64_t, bool>{};
 
-  for (auto const &job : selectedJobs)
-    idsToRemove[job->m_id] = true;
+  m_model->withSelectedJobs(ui->jobs, [&idsToRemove](Job &job) { idsToRemove[job.m_id] = true; });
 
   m_model->removeJobsIf([&](Job const &job) { return idsToRemove[job.m_id]; });
 }

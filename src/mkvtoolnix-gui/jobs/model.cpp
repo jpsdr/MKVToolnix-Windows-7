@@ -52,8 +52,9 @@ Model::retranslateUi() {
 }
 
 QList<Job *>
-Model::selectedJobs(QAbstractItemView *view)
-  const {
+Model::selectedJobs(QAbstractItemView *view) {
+  QMutexLocker locked{&m_mutex};
+
   QList<Job *> jobs;
   Util::withSelectedIndexes(view, [&](QModelIndex const &idx) {
     jobs << m_jobsById[ data(idx, Util::JobIdRole).value<uint64_t>() ].get();
@@ -135,6 +136,16 @@ Model::createRow(Job const &job)
   items[0]->setData(QVariant::fromValue(job.m_id), Util::JobIdRole);
 
   return items;
+}
+
+void
+Model::withSelectedJobs(QAbstractItemView *view,
+                        std::function<void(Job &)> const &worker) {
+  QMutexLocker locked{&m_mutex};
+
+  auto jobs = selectedJobs(view);
+  for (auto const &job : jobs)
+    worker(*job);
 }
 
 void
@@ -459,20 +470,12 @@ Model::acknowledgeAllErrors() {
 
 void
 Model::acknowledgeSelectedWarnings(QAbstractItemView *view) {
-  QMutexLocker locked{&m_mutex};
-
-  auto jobs = selectedJobs(view);
-  for (auto const &job : jobs)
-    job->acknowledgeWarnings();
+  withSelectedJobs(view, [](Job &job) { job.acknowledgeWarnings(); });
 }
 
 void
 Model::acknowledgeSelectedErrors(QAbstractItemView *view) {
-  QMutexLocker locked{&m_mutex};
-
-  auto jobs = selectedJobs(view);
-  for (auto const &job : jobs)
-    job->acknowledgeErrors();
+  withSelectedJobs(view, [](Job &job) { job.acknowledgeErrors(); });
 }
 
 }}}
