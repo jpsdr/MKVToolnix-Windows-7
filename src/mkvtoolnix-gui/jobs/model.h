@@ -59,6 +59,7 @@ public:
 
   void startNextAutoJob();
 
+  void saveJobs() const;
   void saveJobs(QSettings &settings) const;
   void loadJobs(QSettings &settings);
 

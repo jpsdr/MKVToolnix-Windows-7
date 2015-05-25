@@ -171,6 +171,8 @@ Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
   updateProgress();
   updateJobStats();
   updateNumUnacknowledgedWarningsOrErrors();
+
+  saveJobs();
 }
 
 void
@@ -192,6 +194,11 @@ Model::add(JobPtr const &job) {
   connect(job.get(), &Job::progressChanged,                          this, &Model::onProgressChanged);
   connect(job.get(), &Job::statusChanged,                            this, &Model::onStatusChanged);
   connect(job.get(), &Job::numUnacknowledgedWarningsOrErrorsChanged, this, &Model::onNumUnacknowledgedWarningsOrErrorsChanged);
+
+  if (m_dontStartJobsNow)
+    return;
+
+  saveJobs();
 
   startNextAutoJob();
 }
@@ -318,6 +325,8 @@ Model::startNextAutoJob() {
       toStart = job;
   }
 
+  saveJobs();
+
   if (toStart) {
     toStart->start();
     updateJobStats();
@@ -388,6 +397,13 @@ Model::updateJobStats() {
 }
 
 void
+Model::saveJobs()
+  const {
+  QSettings reg;
+  saveJobs(reg);
+}
+
+void
 Model::saveJobs(QSettings &settings)
   const {
   settings.beginGroup("jobQueue");
@@ -413,7 +429,7 @@ Model::loadJobs(QSettings &settings) {
   m_toBeProcessed.clear();
   removeRows(0, rowCount());
 
-  settings.remove("jobQueue");
+  settings.remove("jobqQueue");
   settings.beginGroup("jobQueue");
   auto numberOfJobs = settings.value("numberOfJobs").toUInt();
   settings.endGroup();
