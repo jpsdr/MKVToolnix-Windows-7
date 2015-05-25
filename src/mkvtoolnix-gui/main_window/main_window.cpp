@@ -105,8 +105,6 @@ MainWindow::setupMenu() {
 
 void
 MainWindow::setupToolSelector() {
-  // ui->tool->setIconSize(QSize{48, 48});
-
   m_toolMerge         = new Merge::Tool{ui->tool,         ui->menuMerge};
   m_toolJobs          = new Jobs::Tool{ui->tool};
   m_toolHeaderEditor  = new HeaderEditor::Tool{ui->tool,  ui->menuHeaderEditor};
@@ -114,11 +112,11 @@ MainWindow::setupToolSelector() {
   m_watchJobTool      = new WatchJobs::Tool{ui->tool,     ui->menuJobOutput};
 
   ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
-  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
-  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
   ui->tool->appendTab(m_toolHeaderEditor,           QIcon{":/icons/48x48/document-edit.png"},              QY("edit headers"));
   ui->tool->appendTab(m_toolChapterEditor,          QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
-  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
   ui->tool->appendTab(m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
   ui->tool->appendTab(m_watchJobTool,               QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
 
@@ -128,16 +126,20 @@ MainWindow::setupToolSelector() {
   ui->tool->setCurrentIndex(0);
   m_toolMerge->toolShown();
 
-  m_toolSelectionActions << ui->actionGUIMergeTool    << ui->actionGUIExtractionTool << ui->actionGUIInfoTool
-                         << ui->actionGUIHeaderEditor << ui->actionGUIChapterEditor  << ui->actionGUITagEditor
+  m_toolSelectionActions << ui->actionGUIMergeTool    /* << ui->actionGUIExtractionTool << ui->actionGUIInfoTool*/
+                         << ui->actionGUIHeaderEditor << ui->actionGUIChapterEditor  /*<< ui->actionGUITagEditor*/
                          << ui->actionGUIJobQueue     << ui->actionGUIJobOutput;
 
+  ui->actionGUIExtractionTool->setVisible(false);
+  ui->actionGUIInfoTool->setVisible(false);
+  ui->actionGUITagEditor->setVisible(false);
+
   connect(ui->actionGUIMergeTool,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
-  connect(ui->actionGUIExtractionTool, &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
-  connect(ui->actionGUIInfoTool,       &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  // connect(ui->actionGUIExtractionTool, &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  // connect(ui->actionGUIInfoTool,       &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
   connect(ui->actionGUIHeaderEditor,   &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
   connect(ui->actionGUIChapterEditor,  &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
-  connect(ui->actionGUITagEditor,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  // connect(ui->actionGUITagEditor,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
   connect(ui->actionGUIJobQueue,       &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
   connect(ui->actionGUIJobOutput,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
 
@@ -241,7 +243,7 @@ MainWindow::retranslateUi() {
 
   ui->tool->setUpdatesEnabled(false);
 
-  auto toolTitles = QStringList{} << QY("merge") << QY("extract") << QY("info") << QY("edit headers") << QY("edit chapters") << QY("edit tags") << QY("job queue") << QY("job output");
+  auto toolTitles = QStringList{} << QY("merge") /* << QY("extract") << QY("info") */ << QY("edit headers") << QY("edit chapters") /* << QY("edit tags") */ << QY("job queue") << QY("job output");
 
   for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx) {
     ui->tool->setTabText(idx, toolTitles[idx]);
