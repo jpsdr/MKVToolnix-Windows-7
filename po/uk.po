@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-25 11:11+0200\n"
+"POT-Creation-Date: 2015-05-25 14:02+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -1122,7 +1122,7 @@ msgstr ""
 "Програмний код і останні скомпільовані збірки завжди доступні на\n"
 "https://www.bunkus.org/videotools/mkvtoolnix/"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:255 src/mmg/jobs.cpp:98
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254 src/mmg/jobs.cpp:98
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:45
 msgid "&Abort"
 msgstr "&Перервати"
@@ -1525,7 +1525,7 @@ msgstr "&Зберегти\tCtrl-S"
 msgid "&Save info as text\tCtrl-S"
 msgstr "&Зберегти інформацію як текст\tCtrl-S"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253
 #, fuzzy
 msgid "&Save output"
 msgstr "Вихідна інформація mkvmerge:"
@@ -2767,6 +2767,7 @@ msgstr "Всі записи розділу є коректними."
 #: src/mkvtoolnix-gui/merge/tab.cpp:163 src/mkvtoolnix-gui/merge/tab.cpp:187
 #: src/mkvtoolnix-gui/merge/tool.cpp:140
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "All files"
 msgstr "Усі файли"
 
@@ -4965,7 +4966,7 @@ msgstr ""
 "Помилка: vorbis_packetizer: Неможливо витягнути параметри потоку з перших "
 "пакетів.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253 src/mmg/mux_dialog.cpp:71
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:71
 msgid "Errors:"
 msgstr "Помилки:"
 
@@ -5301,7 +5302,7 @@ msgstr ""
 "Файли не можуть бути приєднані самі до себе. Аргумент '--append-to' був "
 "некорректним.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 msgid "Finished at:"
 msgstr "Завершено:"
 
@@ -7447,7 +7448,7 @@ msgstr ""
 msgid "No input files were given. No output will be created.\n"
 msgstr "Немає вхідних файлів. Тому, на виході нічого створено не буде.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:242
 #, fuzzy
 msgid "No job has been started yet."
 msgstr ", розпочато %s"
@@ -7516,7 +7517,7 @@ msgstr "Натраплено на нешістнадцяткові цифри."
 msgid "None of the header fields has been modified. Nothing has been saved."
 msgstr "Ні одне з полів заголовка не було змінено. Нічого не було збережено."
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
 #, fuzzy
 msgid "Nor&mal output:"
 msgstr "Протокол виконання:"
@@ -8169,7 +8170,7 @@ msgid "Progress"
 msgstr "Прогрес виконання"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
 #, fuzzy
 msgid "Progress:"
 msgstr "Прогрес виконання"
@@ -8724,6 +8725,11 @@ msgstr "&Зберегти до файлу Matroska"
 #: src/info/qt_ui.cpp:98
 msgid "Save information as"
 msgstr "Зберегти інформацію як"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
+#, fuzzy
+msgid "Save job output"
+msgstr "Вихідна інформація mkvmerge:"
 
 #: src/mmg/mux_dialog.cpp:84
 msgid "Save log"
@@ -9653,7 +9659,7 @@ msgstr "Розпочати використання з незаданими оп
 msgid "Start:"
 msgstr "Початок:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
 #, fuzzy
 msgid "Started at:"
 msgstr "Розпочато"
@@ -9686,7 +9692,7 @@ msgstr "Статус і прогрес виконання"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:167
 #: src/mmg/header_editor/value_page.cpp:174 src/mmg/update_checker.cpp:61
 msgid "Status:"
@@ -9871,6 +9877,7 @@ msgstr ""
 "Повідомляє mkvmerge не записувати теги зі статистикою для кожної доріжки."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:522
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "Text files"
 msgstr "Текстові файли"
 
@@ -13095,7 +13102,7 @@ msgstr "Попередження:"
 msgid "Warning: "
 msgstr "Попередження:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:68
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251 src/mmg/mux_dialog.cpp:68
 msgid "Warnings:"
 msgstr "Попередження:"
 
@@ -14407,7 +14414,7 @@ msgstr "без шифрування"
 msgid "no error"
 msgstr "без помилок"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:37
 #, fuzzy
 msgid "no errors yet"
 msgstr "без помилок"
@@ -14421,12 +14428,12 @@ msgstr "Стиснення вмісту"
 msgid "no file loaded"
 msgstr "жодного файлу не завантажено"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
 #, fuzzy
 msgid "no job started yet"
 msgstr ", розпочато %s"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:33
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
 #, fuzzy
 msgid "no output yet"
 msgstr "&Задати вихідний файл"
@@ -14443,7 +14450,7 @@ msgstr "немає сигнатури хеш алгоритму"
 msgid "no splitting"
 msgstr "без розбиття"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:34
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:36
 #, fuzzy
 msgid "no warnings yet"
 msgstr ", завершено %s"
@@ -14458,14 +14465,14 @@ msgstr "не використовувати"
 msgid "normal"
 msgstr "стандартний"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:94
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:106
 #, fuzzy
 msgid "not finished yet"
 msgstr ", завершено %s"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:93
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:105
 #, fuzzy
 msgid "not started yet"
 msgstr ", розпочато %s"

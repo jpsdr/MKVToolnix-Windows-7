@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-25 11:11+0200\n"
+"POT-Creation-Date: 2015-05-25 14:02+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -1003,7 +1003,7 @@ msgstr ""
 "原始碼及最新程式會在下面的位址提供: \n"
 "https://www.bunkus.org/videotools/mkvtoolnix/"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:255
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254
 #: src/mmg/jobs.cpp:98
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:45
 msgid "&Abort"
@@ -1414,7 +1414,7 @@ msgstr "儲存(&S)\tCtrl-S"
 msgid "&Save info as text\tCtrl-S"
 msgstr "另存資訊為純文字檔(&S)\tCtrl-S"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253
 msgid "&Save output"
 msgstr "儲存輸出(&S)"
 
@@ -2510,6 +2510,7 @@ msgstr "所有章節項目皆正確。"
 #: src/mkvtoolnix-gui/merge/tab.cpp:187
 #: src/mkvtoolnix-gui/merge/tool.cpp:140
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "All files"
 msgstr "所有檔案"
 
@@ -4491,7 +4492,7 @@ msgstr ""
 msgid "Error: vorbis_packetizer: Could not extract the stream's parameters from the first packets.\n"
 msgstr "發生錯誤: vorbis_packetizer: 無法從第一個套件中提取媒體流參數。\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252
 #: src/mmg/mux_dialog.cpp:71
 msgid "Errors:"
 msgstr "錯誤資訊:"
@@ -4781,7 +4782,7 @@ msgstr "檔案/剪輯標題:"
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "檔案不能被添加至自己上。「--append-to」的參數無效。\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 msgid "Finished at:"
 msgstr "完成時間:"
 
@@ -6517,7 +6518,7 @@ msgstr "沒有任何資訊傳送到此伺服器。"
 msgid "No input files were given. No output will be created.\n"
 msgstr "未給定任何輸入檔。將不建立輸出檔。\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:242
 msgid "No job has been started yet."
 msgstr "尚無任務開始。"
 
@@ -6582,7 +6583,7 @@ msgstr "遇到非十六進位的數字。"
 msgid "None of the header fields has been modified. Nothing has been saved."
 msgstr "表頭欄位未被修改。未儲存任何改動。"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
 msgid "Nor&mal output:"
 msgstr "一般輸出(&M):"
 
@@ -7121,7 +7122,7 @@ msgid "Progress"
 msgstr "進度"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
 msgid "Progress:"
 msgstr "進度:"
 
@@ -7562,6 +7563,11 @@ msgstr "將章節另存為 Matroska 檔"
 #: src/info/qt_ui.cpp:98
 msgid "Save information as"
 msgstr "另存資訊"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
+#, fuzzy
+msgid "Save job output"
+msgstr "儲存輸出(&S)"
 
 #: src/mmg/mux_dialog.cpp:84
 msgid "Save log"
@@ -8321,7 +8327,7 @@ msgstr "清空所有設定並重新啟動"
 msgid "Start:"
 msgstr "開始時間:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
 msgid "Started at:"
 msgstr "啟動時間:"
 
@@ -8351,7 +8357,7 @@ msgstr "狀態和進度"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:167
 #: src/mmg/header_editor/value_page.cpp:174
 #: src/mmg/update_checker.cpp:61
@@ -8509,6 +8515,7 @@ msgstr "告訴 mkvmerge 將大部分的「n」資料區塊放到每個叢集中�
 
 #: src/info/qt_ui.cpp:98
 #: src/mkvtoolnix-gui/merge/input.cpp:522
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "Text files"
 msgstr "純文字檔"
 
@@ -10860,7 +10867,7 @@ msgstr "警告:"
 msgid "Warning: "
 msgstr "警告: "
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251
 #: src/mmg/mux_dialog.cpp:68
 msgid "Warnings:"
 msgstr "警告:"
@@ -11967,7 +11974,7 @@ msgstr "未加密"
 msgid "no error"
 msgstr "無錯誤發生"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:37
 msgid "no errors yet"
 msgstr "尚無錯誤發生"
 
@@ -11979,11 +11986,11 @@ msgstr "無額外壓縮"
 msgid "no file loaded"
 msgstr "未載入檔案"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
 msgid "no job started yet"
 msgstr "尚無任務開始"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:33
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
 msgid "no output yet"
 msgstr "輸出"
 
@@ -11999,7 +12006,7 @@ msgstr "未使用簽章雜湊演算法"
 msgid "no splitting"
 msgstr "不分割"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:34
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:36
 msgid "no warnings yet"
 msgstr "尚無警告出現"
 
@@ -12015,13 +12022,13 @@ msgstr "無"
 msgid "normal"
 msgstr "一般"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:94
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:106
 msgid "not finished yet"
 msgstr "尚未完成"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:93
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:105
 msgid "not started yet"
 msgstr "尚未開始"
 

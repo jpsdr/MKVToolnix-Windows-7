@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-25 11:11+0200\n"
+"POT-Creation-Date: 2015-05-25 14:02+0200\n"
 "PO-Revision-Date: 2015-05-07 21:15+0200\n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
 "Language-Team: Italian <moritz@bunkus.org>\n"
@@ -1103,7 +1103,7 @@ msgstr ""
 "I sorgenti e i programmi aggiornati sono sempre disponibili su\n"
 "https://www.bunkus.org/videotools/mkvtoolnix/"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:255 src/mmg/jobs.cpp:98
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254 src/mmg/jobs.cpp:98
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:45
 msgid "&Abort"
 msgstr "&Interrompi"
@@ -1533,7 +1533,7 @@ msgstr "&Salva\tCtrl-S"
 msgid "&Save info as text\tCtrl-S"
 msgstr "&Salva info come testo\tCtrl-S"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253
 #, fuzzy
 msgid "&Save output"
 msgstr "messaggi mkvmerge:"
@@ -2800,6 +2800,7 @@ msgstr "Tutti i capitoli sono validi."
 #: src/mkvtoolnix-gui/merge/tab.cpp:163 src/mkvtoolnix-gui/merge/tab.cpp:187
 #: src/mkvtoolnix-gui/merge/tool.cpp:140
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 #, fuzzy
 msgid "All files"
 msgstr "Su tutti i file"
@@ -5032,7 +5033,7 @@ msgstr ""
 "Errore: vorbis_packetizer: impossibile estrarre i parametri del flusso dai "
 "primi pacchetti.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253 src/mmg/mux_dialog.cpp:71
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:71
 msgid "Errors:"
 msgstr "Errori:"
 
@@ -5373,7 +5374,7 @@ msgstr ""
 "Il file non può essere aggiunto a sè stesso. L'argomento per '--append-to' "
 "non è valido.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 #, fuzzy
 msgid "Finished at:"
 msgstr "Completato il"
@@ -7538,7 +7539,7 @@ msgstr ""
 "Non è stato specificato nessun file sorgente. Non verrà creato nessun file "
 "destinazione.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:242
 #, fuzzy
 msgid "No job has been started yet."
 msgstr ", iniziato il %s"
@@ -7609,7 +7610,7 @@ msgid "None of the header fields has been modified. Nothing has been saved."
 msgstr ""
 "Nessuno dei campi intestazione è stato modificato. Nulla verrà salvato."
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
 #, fuzzy
 msgid "Nor&mal output:"
 msgstr "Registro attività:"
@@ -8258,7 +8259,7 @@ msgid "Progress"
 msgstr "Progresso"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
 #, fuzzy
 msgid "Progress:"
 msgstr "Progresso"
@@ -8809,6 +8810,11 @@ msgstr "Salva in un file &Matroska"
 #: src/info/qt_ui.cpp:98
 msgid "Save information as"
 msgstr "Salva informazioni come"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
+#, fuzzy
+msgid "Save job output"
+msgstr "messaggi mkvmerge:"
 
 #: src/mmg/mux_dialog.cpp:84
 msgid "Save log"
@@ -9741,7 +9747,7 @@ msgstr "Avvia con impostazioni vuote"
 msgid "Start:"
 msgstr "Inizio:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
 #, fuzzy
 msgid "Started at:"
 msgstr "Partito alle"
@@ -9774,7 +9780,7 @@ msgstr "Stato avanzamento"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:167
 #: src/mmg/header_editor/value_page.cpp:174 src/mmg/update_checker.cpp:61
 msgid "Status:"
@@ -9961,6 +9967,7 @@ msgstr ""
 "Dice a mkvmerge di non scrivere i tag con le statistiche per ogni traccia."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:522
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 #, fuzzy
 msgid "Text files"
 msgstr "File successivo"
@@ -13204,7 +13211,7 @@ msgstr "Avviso:"
 msgid "Warning: "
 msgstr "Avviso: "
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:68
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251 src/mmg/mux_dialog.cpp:68
 msgid "Warnings:"
 msgstr "Avvisi:"
 
@@ -14514,7 +14521,7 @@ msgstr "nessuna criptazione"
 msgid "no error"
 msgstr "nessun errore"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:37
 #, fuzzy
 msgid "no errors yet"
 msgstr "nessun errore"
@@ -14528,12 +14535,12 @@ msgstr "Compressione contenuto"
 msgid "no file loaded"
 msgstr "nessun file caricato"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
 #, fuzzy
 msgid "no job started yet"
 msgstr ", iniziato il %s"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:33
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
 #, fuzzy
 msgid "no output yet"
 msgstr "Imposta file &destinazione"
@@ -14550,7 +14557,7 @@ msgstr "nessun algoritmo di firma hash"
 msgid "no splitting"
 msgstr "nessuna suddivisione"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:34
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:36
 #, fuzzy
 msgid "no warnings yet"
 msgstr ", completato il %s"
@@ -14565,14 +14572,14 @@ msgstr "nessuno"
 msgid "normal"
 msgstr "normale"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:94
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:106
 #, fuzzy
 msgid "not finished yet"
 msgstr ", completato il %s"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:93
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:105
 #, fuzzy
 msgid "not started yet"
 msgstr ", iniziato il %s"

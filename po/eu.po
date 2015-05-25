@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-25 11:11+0200\n"
+"POT-Creation-Date: 2015-05-25 14:02+0200\n"
 "PO-Revision-Date: 2015-05-24 17:53+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -1094,7 +1094,7 @@ msgstr ""
 "Iturburuak eta azken binarioak betik daude eskuragarri hemen:\n"
 "https://www.bunkus.org/videotools/mkvtoolnix/"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:255 src/mmg/jobs.cpp:98
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254 src/mmg/jobs.cpp:98
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:45
 msgid "&Abort"
 msgstr "&Utzi"
@@ -1488,7 +1488,7 @@ msgstr "&Gorde\tCtrl-S"
 msgid "&Save info as text\tCtrl-S"
 msgstr "&Gorde argibideak idazki bezala\tCtrl-S"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253
 msgid "&Save output"
 msgstr "&Gorde irteera"
 
@@ -2711,6 +2711,7 @@ msgstr "Atal sarrera guztiek balio dute."
 #: src/mkvtoolnix-gui/merge/tab.cpp:163 src/mkvtoolnix-gui/merge/tab.cpp:187
 #: src/mkvtoolnix-gui/merge/tool.cpp:140
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "All files"
 msgstr "Agiri guztiak"
 
@@ -4870,7 +4871,7 @@ msgstr ""
 "Akatsa: vorbis_paketatzailea: Ezin dira jarioaren parametroak atera lehen "
 "paketetatik.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253 src/mmg/mux_dialog.cpp:71
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:71
 msgid "Errors:"
 msgstr "Akatsak:"
 
@@ -5208,7 +5209,7 @@ msgstr ""
 "Agiriak ezin dira berari erantsi. '--append-to' argumentoa baliogabea izan "
 "da.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 msgid "Finished at:"
 msgstr "Amaituta:"
 
@@ -7352,7 +7353,7 @@ msgstr "Ez da argibiderik igortzen zerbitzarira."
 msgid "No input files were given. No output will be created.\n"
 msgstr "Ez dira sarrera agiriak eman. Ezin da irteerarik sortu.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:242
 msgid "No job has been started yet."
 msgstr "Ez da lanik hasi oraindik."
 
@@ -7418,7 +7419,7 @@ msgstr "Ez-hex. zenbakiak aurkitu dira."
 msgid "None of the header fields has been modified. Nothing has been saved."
 msgstr "Idazburu eremuetako bat ere ez da aldatu. Ez da ezer gordeko."
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
 msgid "Nor&mal output:"
 msgstr "Irteera arrunta:"
 
@@ -8063,7 +8064,7 @@ msgid "Progress"
 msgstr "Garapena"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
 msgid "Progress:"
 msgstr "Garapena:"
 
@@ -8604,6 +8605,11 @@ msgstr "Gorde atalak Matroska agirian"
 #: src/info/qt_ui.cpp:98
 msgid "Save information as"
 msgstr "Gorde argibideak honela"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
+#, fuzzy
+msgid "Save job output"
+msgstr "&Gorde irteera"
 
 #: src/mmg/mux_dialog.cpp:84
 msgid "Save log"
@@ -9490,7 +9496,7 @@ msgstr "Hasi ezarpen hutsekin"
 msgid "Start:"
 msgstr "Hasiera:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
 msgid "Started at:"
 msgstr "Hasiera:"
 
@@ -9523,7 +9529,7 @@ msgstr "Egoera eta garapena"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:167
 #: src/mmg/header_editor/value_page.cpp:174 src/mmg/update_checker.cpp:61
 msgid "Status:"
@@ -9708,6 +9714,7 @@ msgstr ""
 "mkvmerge-ri kluster bakoitzean 'n' datu bloke gehiago jartzeko esaten dio."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:522
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "Text files"
 msgstr "Idazki agiriak"
 
@@ -12896,7 +12903,7 @@ msgstr "Kontuz:"
 msgid "Warning: "
 msgstr "Kontuz:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:68
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251 src/mmg/mux_dialog.cpp:68
 msgid "Warnings:"
 msgstr "Kontuz oharrak:"
 
@@ -14193,7 +14200,7 @@ msgstr "enkriptaketatu gabe"
 msgid "no error"
 msgstr "akatsik ez"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:37
 msgid "no errors yet"
 msgstr "ez dago akatsik oraindik"
 
@@ -14205,11 +14212,11 @@ msgstr "gain konpresiorik ez"
 msgid "no file loaded"
 msgstr "ez dago agiririk gertatuta"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
 msgid "no job started yet"
 msgstr "ez da lanik hasi oraindik"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:33
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
 msgid "no output yet"
 msgstr "ez dago irteerarik oraindik"
 
@@ -14225,7 +14232,7 @@ msgstr "hash algoritmo sinadurarik ez"
 msgid "no splitting"
 msgstr "Bananketarik ez"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:34
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:36
 msgid "no warnings yet"
 msgstr "ez dago kontuz oharrik oraindik"
 
@@ -14239,13 +14246,13 @@ msgstr "bat ere ez"
 msgid "normal"
 msgstr "arrunta"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:94
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:106
 msgid "not finished yet"
 msgstr "ez dago amaiturik oraindik"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:93
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:105
 msgid "not started yet"
 msgstr "ez dago hasita oraindik"
 

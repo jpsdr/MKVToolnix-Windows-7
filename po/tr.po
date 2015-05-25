@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 7.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-25 11:11+0200\n"
+"POT-Creation-Date: 2015-05-25 14:02+0200\n"
 "PO-Revision-Date: 2015-05-23 22:50+0200\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
@@ -1081,7 +1081,7 @@ msgstr ""
 "Kaynakları ve en son binarileri her zaman\n"
 "https://www.bunkus.org/videotools/mkvtoolnix/ adresinde mevcuttur."
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:255 src/mmg/jobs.cpp:98
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254 src/mmg/jobs.cpp:98
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:45
 msgid "&Abort"
 msgstr "&Durdur"
@@ -1475,7 +1475,7 @@ msgstr "&Kaydet\tCtrl-S"
 msgid "&Save info as text\tCtrl-S"
 msgstr "Bilgiyi metin olarak &kaydet\tCtrl-S"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253
 msgid "&Save output"
 msgstr "Çıktıyı &kaydet"
 
@@ -2671,6 +2671,7 @@ msgstr "Tüm bölüm girişleri geçerli."
 #: src/mkvtoolnix-gui/merge/tab.cpp:163 src/mkvtoolnix-gui/merge/tab.cpp:187
 #: src/mkvtoolnix-gui/merge/tool.cpp:140
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "All files"
 msgstr "Tüm dosyalar"
 
@@ -4800,7 +4801,7 @@ msgstr ""
 "Hata: vorbis_packetizer: Akışın parametreleri ilk paketlerden "
 "çıkartılamadı.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253 src/mmg/mux_dialog.cpp:71
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:71
 msgid "Errors:"
 msgstr "Hatalar:"
 
@@ -5121,7 +5122,7 @@ msgstr ""
 "Dosyalar kendi kendilerine eklenemez. '--append-to' için bağımsız değişken "
 "geçersizdi.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 msgid "Finished at:"
 msgstr "Bitiş:"
 
@@ -7181,7 +7182,7 @@ msgid "No input files were given. No output will be created.\n"
 msgstr ""
 "Hiç verilen girdi dosyaları yok. Hiç çıktı dosyası oluşturulmayacaktır.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:242
 msgid "No job has been started yet."
 msgstr "Henüz hiç başlatılmış iş yok."
 
@@ -7245,7 +7246,7 @@ msgstr "Onaltılık olmayan rakamlarla karşılaşılmadı."
 msgid "None of the header fields has been modified. Nothing has been saved."
 msgstr "Başlık alanlarının hiçbiri değiştirilmemiş. Hiçbir şey kaydedilmedi."
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
 msgid "Nor&mal output:"
 msgstr "Nor&mal çıktı:"
 
@@ -7845,7 +7846,7 @@ msgid "Progress"
 msgstr "İlerleme"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
 msgid "Progress:"
 msgstr "İlerleme:"
 
@@ -8381,6 +8382,11 @@ msgstr "Bölümleri Matroska dosyasına kaydet"
 #: src/info/qt_ui.cpp:98
 msgid "Save information as"
 msgstr "Bilgiyi farklı kaydet"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
+#, fuzzy
+msgid "Save job output"
+msgstr "Çıktıyı &kaydet"
 
 #: src/mmg/mux_dialog.cpp:84
 msgid "Save log"
@@ -9258,7 +9264,7 @@ msgstr "Boş ayarlarla başlat"
 msgid "Start:"
 msgstr "Başlangıç:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
 msgid "Started at:"
 msgstr "Başlama:"
 
@@ -9290,7 +9296,7 @@ msgstr "Durum ve ilerleme"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:167
 #: src/mmg/header_editor/value_page.cpp:174 src/mmg/update_checker.cpp:61
 msgid "Status:"
@@ -9468,6 +9474,7 @@ msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr "mkvmerge'e her küme içine çoğu 'n' veri bloklarını koymasını söyler."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:522
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "Text files"
 msgstr "Metin dosyaları"
 
@@ -12379,7 +12386,7 @@ msgstr "Uyarı:"
 msgid "Warning: "
 msgstr "Uyarı: "
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:68
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251 src/mmg/mux_dialog.cpp:68
 msgid "Warnings:"
 msgstr "Uyarılar:"
 
@@ -13637,7 +13644,7 @@ msgstr "şifreleme yok"
 msgid "no error"
 msgstr "hata yok"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:37
 msgid "no errors yet"
 msgstr "henüz hata yok"
 
@@ -13649,11 +13656,11 @@ msgstr "ilave sıkıştırma yok"
 msgid "no file loaded"
 msgstr "yüklenen dosya yok"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
 msgid "no job started yet"
 msgstr "henüz başlayan iş yok"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:33
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
 msgid "no output yet"
 msgstr "henüz çıktı yok"
 
@@ -13669,7 +13676,7 @@ msgstr "imza adresleme algoritması yok"
 msgid "no splitting"
 msgstr "bölme yok"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:34
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:36
 msgid "no warnings yet"
 msgstr "henüz uyarılar yok"
 
@@ -13683,13 +13690,13 @@ msgstr "yok"
 msgid "normal"
 msgstr "normal"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:94
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:106
 msgid "not finished yet"
 msgstr "henüz tamamlanmadı"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:93
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:105
 msgid "not started yet"
 msgstr "henüz başlatılmadı"
 

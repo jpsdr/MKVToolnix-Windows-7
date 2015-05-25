@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-25 11:11+0200\n"
+"POT-Creation-Date: 2015-05-25 14:02+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>\n"
 "Language-Team: Swedish <moritz@bunkus.org>\n"
@@ -868,7 +868,7 @@ msgid ""
 "https://www.bunkus.org/videotools/mkvtoolnix/"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:255 src/mmg/jobs.cpp:98
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254 src/mmg/jobs.cpp:98
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:45
 msgid "&Abort"
 msgstr "&Avbryt"
@@ -1295,7 +1295,7 @@ msgstr "&Spara\tCtrl-S"
 msgid "&Save info as text\tCtrl-S"
 msgstr "&Spara information som text\tCtrl-S"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253
 #, fuzzy
 msgid "&Save output"
 msgstr "utdata från mkvmerge:"
@@ -2376,6 +2376,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/tab.cpp:163 src/mkvtoolnix-gui/merge/tab.cpp:187
 #: src/mkvtoolnix-gui/merge/tool.cpp:140
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 #, fuzzy
 msgid "All files"
 msgstr "Till alla filer"
@@ -4337,7 +4338,7 @@ msgstr ""
 msgid "Error: vorbis_packetizer: Could not extract the stream's parameters from the first packets.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253 src/mmg/mux_dialog.cpp:71
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:71
 msgid "Errors:"
 msgstr "Felen:"
 
@@ -4622,7 +4623,7 @@ msgstr ""
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 #, fuzzy
 msgid "Finished at:"
 msgstr "Avslutade på"
@@ -6328,7 +6329,7 @@ msgstr ""
 msgid "No input files were given. No output will be created.\n"
 msgstr "Inga inmatningsfiler angavs. Ingen utmatning kommer att skapas.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:242
 #, fuzzy
 msgid "No job has been started yet."
 msgstr ", startade på %s"
@@ -6393,7 +6394,7 @@ msgstr ""
 msgid "None of the header fields has been modified. Nothing has been saved."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
 #, fuzzy
 msgid "Nor&mal output:"
 msgstr "Utdata för loggen:"
@@ -6928,7 +6929,7 @@ msgid "Progress"
 msgstr "Framgång"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
 #, fuzzy
 msgid "Progress:"
 msgstr "Framgång"
@@ -7373,6 +7374,11 @@ msgstr "Spara till &Matroska-fil"
 #, fuzzy
 msgid "Save information as"
 msgstr "Segmentets information"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
+#, fuzzy
+msgid "Save job output"
+msgstr "utdata från mkvmerge:"
 
 #: src/mmg/mux_dialog.cpp:84
 msgid "Save log"
@@ -8129,7 +8135,7 @@ msgstr "Starta med tomma inställningar"
 msgid "Start:"
 msgstr "Starta:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
 #, fuzzy
 msgid "Started at:"
 msgstr "Startade vid"
@@ -8158,7 +8164,7 @@ msgstr "Status och framsteg"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:167
 #: src/mmg/header_editor/value_page.cpp:174 src/mmg/update_checker.cpp:61
 msgid "Status:"
@@ -8311,6 +8317,7 @@ msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr ""
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:522
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 #, fuzzy
 msgid "Text files"
 msgstr "Nästa filnamn"
@@ -10581,7 +10588,7 @@ msgstr "Varning:"
 msgid "Warning: "
 msgstr "Varning:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:68
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251 src/mmg/mux_dialog.cpp:68
 msgid "Warnings:"
 msgstr "Varningar:"
 
@@ -11654,7 +11661,7 @@ msgstr "ingen kryptering"
 msgid "no error"
 msgstr "inga fel"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:37
 #, fuzzy
 msgid "no errors yet"
 msgstr "inga fel"
@@ -11669,12 +11676,12 @@ msgstr "Innehållets komprimering"
 msgid "no file loaded"
 msgstr "Ingen fil är laddad"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
 #, fuzzy
 msgid "no job started yet"
 msgstr ", startade på %s"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:33
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
 #, fuzzy
 msgid "no output yet"
 msgstr "Ställ in fil för utmatning"
@@ -11691,7 +11698,7 @@ msgstr "ingen hash-algoritm för signaturen"
 msgid "no splitting"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:34
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:36
 #, fuzzy
 msgid "no warnings yet"
 msgstr ", slutfördes vid %s"
@@ -11706,14 +11713,14 @@ msgstr "ingen"
 msgid "normal"
 msgstr "normal"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:94
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:106
 #, fuzzy
 msgid "not finished yet"
 msgstr ", slutfördes vid %s"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:93
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:105
 #, fuzzy
 msgid "not started yet"
 msgstr ", startade på %s"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix 7.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-25 11:11+0200\n"
+"POT-Creation-Date: 2015-05-25 14:02+0200\n"
 "PO-Revision-Date: 2015-05-09 21:16+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1129,7 +1129,7 @@ msgstr ""
 "El codi font i els últims binaris estan sempre disponibles a\n"
 "https://www.bunkus.org/vídeotools/mkvtoolnix/"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:255 src/mmg/jobs.cpp:98
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254 src/mmg/jobs.cpp:98
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:45
 msgid "&Abort"
 msgstr "&Interromp"
@@ -1525,7 +1525,7 @@ msgstr "De&sa\tCtrl-S"
 msgid "&Save info as text\tCtrl-S"
 msgstr "De&sa la informació com a text\tCtrl-S"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:254
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253
 msgid "&Save output"
 msgstr "De&sa la sortida"
 
@@ -2752,6 +2752,7 @@ msgstr "Totes les entrades de capítol són vàlides."
 #: src/mkvtoolnix-gui/merge/tab.cpp:163 src/mkvtoolnix-gui/merge/tab.cpp:187
 #: src/mkvtoolnix-gui/merge/tool.cpp:140
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "All files"
 msgstr "Tots els fitxers"
 
@@ -4951,7 +4952,7 @@ msgstr ""
 "Error: vorbis_packetizer: No s'han pogut extreure els paràmetres del flux "
 "dels paquets inicials.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:253 src/mmg/mux_dialog.cpp:71
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:71
 msgid "Errors:"
 msgstr "Errors:"
 
@@ -5292,7 +5293,7 @@ msgstr ""
 "Els fitxers no és poden annexar a sí mateixos. L'argument per «--append-to» "
 "no és vàlid.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 msgid "Finished at:"
 msgstr "Finalitzada el:"
 
@@ -7462,7 +7463,7 @@ msgstr ""
 msgid "No input files were given. No output will be created.\n"
 msgstr "No s'ha indicat cap fitxer d'entrada. No es crearà cap sortida.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:242
 msgid "No job has been started yet."
 msgstr "La tasca encara no s'ha iniciat."
 
@@ -7530,7 +7531,7 @@ msgstr "No s'ha trobat cap dígit hexadecimal."
 msgid "None of the header fields has been modified. Nothing has been saved."
 msgstr "No s'ha modificat cap dels camps de la capçalera. No s'ha desat res."
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
 msgid "Nor&mal output:"
 msgstr "Sortida nor&mal:"
 
@@ -8158,7 +8159,7 @@ msgid "Progress"
 msgstr "Progrés"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
 msgid "Progress:"
 msgstr "Progrés:"
 
@@ -8703,6 +8704,11 @@ msgstr "Desa els capítols a un fitxer Matroska"
 #: src/info/qt_ui.cpp:98
 msgid "Save information as"
 msgstr "Desa la informació com a"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
+#, fuzzy
+msgid "Save job output"
+msgstr "De&sa la sortida"
 
 #: src/mmg/mux_dialog.cpp:84
 msgid "Save log"
@@ -9599,7 +9605,7 @@ msgstr "Inicia amb els ajustaments buits"
 msgid "Start:"
 msgstr "Inici:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
 msgid "Started at:"
 msgstr "Iniciada el:"
 
@@ -9632,7 +9638,7 @@ msgstr "Estat i progrés "
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:185
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:243
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:167
 #: src/mmg/header_editor/value_page.cpp:174 src/mmg/update_checker.cpp:61
 msgid "Status:"
@@ -9817,6 +9823,7 @@ msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr ""
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:522
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:115
 msgid "Text files"
 msgstr "Fitxers de text"
 
@@ -13009,7 +13016,7 @@ msgstr "Avís:"
 msgid "Warning: "
 msgstr "Avís: "
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:252 src/mmg/mux_dialog.cpp:68
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:251 src/mmg/mux_dialog.cpp:68
 msgid "Warnings:"
 msgstr "Avisos:"
 
@@ -14289,7 +14296,7 @@ msgstr "sense encriptatge"
 msgid "no error"
 msgstr "cap error"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:37
 msgid "no errors yet"
 msgstr "encara sense errors"
 
@@ -14301,11 +14308,11 @@ msgstr "sense compressió extra"
 msgid "no file loaded"
 msgstr "no s'ha carregat cap fitxer"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:245
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:244
 msgid "no job started yet"
 msgstr "encara no s'ha iniciat la tasca"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:33
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
 msgid "no output yet"
 msgstr "encara sense sortida"
 
@@ -14321,7 +14328,7 @@ msgstr "cap signatura amb algoritme hash"
 msgid "no splitting"
 msgstr "no dividir"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:34
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:36
 msgid "no warnings yet"
 msgstr "encara sense avisos"
 
@@ -14335,13 +14342,13 @@ msgstr "cap"
 msgid "normal"
 msgstr "normal"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:250
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:94
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:106
 msgid "not finished yet"
 msgstr "encara sense finalitzar"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:247
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:93
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:246
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:105
 msgid "not started yet"
 msgstr "encara no iniciada"
 
