@@ -19,6 +19,7 @@ class Tab : public QWidget {
 protected:
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
+  QStringList m_fullOutput;
 
 public:
   explicit Tab(QWidget *parent);

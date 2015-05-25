@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QFileDialog>
 #include <QPushButton>
 #include <QtGlobal>
 
@@ -7,6 +8,7 @@
 #include "mkvtoolnix-gui/forms/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 
@@ -38,10 +40,13 @@ Tab::retranslateUi() {
 
 void
 Tab::connectToJob(Jobs::Job const &job) {
-  connect(&job,            &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged);
-  connect(&job,            &Jobs::Job::progressChanged, this, &Tab::onProgressChanged);
-  connect(&job,            &Jobs::Job::lineRead,        this, &Tab::onLineRead);
-  connect(ui->abortButton, &QPushButton::clicked,       &job, &Jobs::Job::abort);
+  auto connType = static_cast<Qt::ConnectionType>(Qt::AutoConnection | Qt::UniqueConnection);
+
+  connect(&job,                 &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged,   connType);
+  connect(&job,                 &Jobs::Job::progressChanged, this, &Tab::onProgressChanged, connType);
+  connect(&job,                 &Jobs::Job::lineRead,        this, &Tab::onLineRead,        connType);
+  connect(ui->saveOutputButton, &QPushButton::clicked,       this, &Tab::onSaveOutput,      connType);
+  connect(ui->abortButton,      &QPushButton::clicked,       &job, &Jobs::Job::abort,       connType);
 }
 
 void
@@ -49,6 +54,7 @@ Tab::onStatusChanged(uint64_t id) {
   auto job = MainWindow::jobTool()->model()->fromId(id);
   if (!job) {
     ui->abortButton->setEnabled(false);
+    ui->saveOutputButton->setEnabled(false);
     return;
   }
 
@@ -56,6 +62,7 @@ Tab::onStatusChanged(uint64_t id) {
   auto status = job->m_status;
 
   ui->abortButton->setEnabled(Jobs::Job::Running == status);
+  ui->saveOutputButton->setEnabled(true);
   ui->status->setText(Jobs::Job::displayableStatus(status));
 
   if (Jobs::Job::Running == status)
@@ -79,6 +86,7 @@ Tab::onLineRead(QString const &line,
                 :                                  ui->errors;
 
   storage->appendPlainText(line);
+  m_fullOutput << line;
 }
 
 void
@@ -92,11 +100,26 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
 
   ui->startedAt ->setText(job.m_dateStarted .isValid() ? Util::displayableDate(job.m_dateStarted)  : QY("not started yet"));
   ui->finishedAt->setText(job.m_dateFinished.isValid() ? Util::displayableDate(job.m_dateFinished) : QY("not finished yet"));
+
+  m_fullOutput = job.m_fullOutput;
 }
 
 void
 Tab::onSaveOutput() {
-  // TODO: Tab::onSaveOutput
+  auto &cfg = Util::Settings::get();
+
+  auto fileName = QFileDialog::getSaveFileName(this, QY("Save job output"), cfg.m_lastConfigDir.path(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"));
+  if (fileName.isEmpty())
+    return;
+
+  QFile out{fileName};
+  if (out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+    out.write(Q("%1\n").arg(m_fullOutput.join(Q("\n"))).toUtf8());
+    out.close();
+  }
+
+  cfg.m_lastConfigDir = QFileInfo{fileName}.path();
+  cfg.save();
 }
 
 }}}
