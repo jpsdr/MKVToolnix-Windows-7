@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix 7.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-23 20:08+0200\n"
+"POT-Creation-Date: 2015-05-25 11:11+0200\n"
 "PO-Revision-Date: 2015-05-09 21:16+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -949,16 +949,34 @@ msgstr "### Millores en desenvolupament ###"
 msgid "### Global output control ###"
 msgstr " ### Control global de la sortida ###"
 
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:82
+msgid "%1 automatic, %2 manual"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/track_model.cpp:81
 #: src/mkvtoolnix-gui/merge/track_model.cpp:212
 msgid "%1 entries"
 msgstr "%1 entrades"
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:84
+#, fuzzy
+msgid "%1 error"
+msgid_plural "%1 errors"
+msgstr[0] "cap error"
+msgstr[1] "cap error"
 
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:78
 msgid "%1 of %2 file processed"
 msgid_plural "%1 of %2 files processed"
 msgstr[0] "S'ha processat %1 fitxer de %2"
 msgstr[1] "S'han processat %1 fitxers de %2"
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:83
+#, fuzzy
+msgid "%1 warning"
+msgid_plural "%1 warnings"
+msgstr[0] "Avís:"
+msgstr[1] "Avís:"
 
 #: src/common/strings/formatting.cpp:268
 #, boost-format
@@ -1077,8 +1095,8 @@ msgstr "%1%: divisor absent en «%2% %3%».\n"
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: ID de la pista és absent a «%2% %3%».\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:179
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:180
 msgid "%p%"
 msgstr "%p%"
 
@@ -1484,7 +1502,7 @@ msgstr "Sup&rimeix la tasca de la cua després d'executar-la:"
 msgid "&Remove selected edition or chapter"
 msgstr "Sup&rimeix l'edició o capítol seleccionat"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:149
+#: src/mkvtoolnix-gui/jobs/tool.cpp:166
 msgid "&Remove selected jobs"
 msgstr "Sup&rimeix les tasques seleccionades"
 
@@ -1545,7 +1563,7 @@ msgstr "&Inicia"
 msgid "&Start && end:"
 msgstr "&Inici i final:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:148
+#: src/mkvtoolnix-gui/jobs/tool.cpp:165
 msgid "&Start selected jobs automatically"
 msgstr "&Inicia automàticament les tasques seleccionades"
 
@@ -2505,6 +2523,26 @@ msgstr "S'ha interromput el procés el %s"
 #: src/info/qt_ui.cpp:152 src/info/wxwidgets_ui.cpp:345
 msgid "About mkvinfo"
 msgstr "Quant a «mkvinfo»"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:174
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:123
+msgid "Acknowledge all &errors"
+msgstr ""
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:172
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:106
+#, fuzzy
+msgid "Acknowledge all &warnings"
+msgstr "s'ha completat amb avisos"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:173
+msgid "Acknowledge selected errors"
+msgstr ""
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:171
+#, fuzzy
+msgid "Acknowledge selected warnings"
+msgstr "s'ha completat amb avisos"
 
 #: src/propedit/propedit_cli_parser.cpp:210
 msgid "Actions for handling attachments"
@@ -4300,15 +4338,15 @@ msgstr ""
 msgid "Date (invalid, value: %1%)"
 msgstr "Data (no vàlida, valor: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date added"
 msgstr "Data d'afegida"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date finished"
 msgstr "Data de finalitzada"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date started"
 msgstr "Data d'iniciada"
 
@@ -4410,7 +4448,7 @@ msgstr "Elimina les tasques seleccionades de la cua de treball"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:242
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:54 src/mmg/jobs.cpp:468
 msgid "Description"
 msgstr "Descripció"
@@ -4884,7 +4922,7 @@ msgstr "Error en escriure el fitxer Matroska"
 msgid "Error:"
 msgstr "Error:"
 
-#: src/common/output.cpp:79 src/mkvtoolnix-gui/jobs/job.cpp:82
+#: src/common/output.cpp:79 src/mkvtoolnix-gui/jobs/job.cpp:84
 msgid "Error: "
 msgstr "Error: "
 
@@ -6656,6 +6694,10 @@ msgstr "Gestió de la cua de treball"
 msgid "Jobs and job output"
 msgstr "Sortida de les tasques i tasca"
 
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:175
+msgid "Jobs to execute:"
+msgstr ""
+
 #: src/output/p_kate.h:39
 msgid "Kate"
 msgstr "Kate"
@@ -8110,12 +8152,12 @@ msgid ""
 "may lead to imprecise or slow seeking."
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35 src/mmg/jobs.cpp:262
+#: src/mkvtoolnix-gui/jobs/model.cpp:37 src/mmg/jobs.cpp:262
 #: src/mmg/mux_dialog.cpp:295
 msgid "Progress"
 msgstr "Progrés"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:85
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 msgid "Progress:"
 msgstr "Progrés:"
@@ -8498,11 +8540,11 @@ msgstr "Torna a carregar el fitxer actual sense desar els canvis"
 msgid "Remaining time:"
 msgstr "Temps restant:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:150
+#: src/mkvtoolnix-gui/jobs/tool.cpp:167
 msgid "Remove &completed jobs"
 msgstr "Suprimeix les tasques &finalitzades"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:151
+#: src/mkvtoolnix-gui/jobs/tool.cpp:168
 msgid "Remove &successfully completed jobs"
 msgstr "Suprimeix les tasques correctament &finalitzades"
 
@@ -8510,7 +8552,7 @@ msgstr "Suprimeix les tasques correctament &finalitzades"
 msgid "Remove a&ll files"
 msgstr "Sup&rimeix tots els fitxers"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:152
+#: src/mkvtoolnix-gui/jobs/tool.cpp:169
 msgid "Remove a&ll jobs"
 msgstr "Suprimeix &totes les tasques"
 
@@ -8551,7 +8593,7 @@ msgstr "Resincronització amb èxit a la posició %1%.\n"
 msgid "Right-click for actions for all tracks"
 msgstr "Deshabilita els lligams per a totes les pistes."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:159
+#: src/mkvtoolnix-gui/jobs/tool.cpp:181
 msgid "Right-click for actions for jobs"
 msgstr ""
 
@@ -9580,7 +9622,7 @@ msgstr ""
 "bytes: %3%; durada en segons: %4%; taxa de bits aproximada en bits/segon: "
 "%5%\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35 src/mmg/jobs.cpp:466
+#: src/mkvtoolnix-gui/jobs/model.cpp:37 src/mmg/jobs.cpp:466
 msgid "Status"
 msgstr "Estat"
 
@@ -12487,7 +12529,7 @@ msgstr ""
 "ajustaments i el commutador activat."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mkvtoolnix-gui/merge/track_model.cpp:42
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -12963,7 +13005,7 @@ msgstr ""
 msgid "Warning:"
 msgstr "Avís:"
 
-#: src/common/output.cpp:82 src/mkvtoolnix-gui/jobs/job.cpp:81
+#: src/common/output.cpp:82 src/mkvtoolnix-gui/jobs/job.cpp:83
 msgid "Warning: "
 msgstr "Avís: "
 
@@ -13246,7 +13288,7 @@ msgstr "[%1% fotogrames per pista %2%, codi de temps %3%]"
 msgid "aborted"
 msgstr "interrompuda"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:96
+#: src/mkvtoolnix-gui/jobs/job.cpp:101
 msgid "aborted by user"
 msgstr "interrompuda per l'usuari"
 
@@ -13379,11 +13421,11 @@ msgstr "columna intercalada (primer esquerra)"
 msgid "column interleaved (right first)"
 msgstr "columna intercalada (primer dreta)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:93 src/mmg/jobs.cpp:362
+#: src/mkvtoolnix-gui/jobs/job.cpp:98 src/mmg/jobs.cpp:362
 msgid "completed OK"
 msgstr "completada amb èxit"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:94 src/mmg/jobs.cpp:366
+#: src/mkvtoolnix-gui/jobs/job.cpp:99 src/mmg/jobs.cpp:366
 msgid "completed with warnings"
 msgstr "s'ha completat amb avisos"
 
@@ -13425,7 +13467,7 @@ msgstr "determina-la automàticament"
 msgid "disable all"
 msgstr "Deshabilita-ho tot"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:97
+#: src/mkvtoolnix-gui/jobs/job.cpp:102
 msgid "disabled"
 msgstr "deshabilitat"
 
@@ -13460,17 +13502,17 @@ msgid "down"
 msgstr "Avall"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:120
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "edit chapters"
 msgstr "Edita els capítols"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:119
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "edit headers"
 msgstr "Edita les capçaleres"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:121
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "edit tags"
 msgstr "Edita les etiquetes"
 
@@ -13491,11 +13533,12 @@ msgid "even if there were warnings"
 msgstr "fins i tot si hi ha avisos"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:117
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "extract"
 msgstr "extreu"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:95 src/mmg/jobs.cpp:370 src/mmg/jobs.cpp:563
+#: src/mkvtoolnix-gui/jobs/job.cpp:100 src/mmg/jobs.cpp:370
+#: src/mmg/jobs.cpp:563
 msgid "failed"
 msgstr "ha fallat"
 
@@ -13615,7 +13658,7 @@ msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() ha fallat. Resultat: %1%\n"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:118
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "info"
 msgstr "informació"
 
@@ -13625,12 +13668,12 @@ msgid "is being estimated"
 msgstr "s'està estimant"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:123
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "job output"
 msgstr "sortida de la tasca"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:122
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "job queue"
 msgstr "cua de treball"
 
@@ -13864,13 +13907,13 @@ msgstr ""
 "memory.cpp/saferealloc() crida des del fitxer %1%, línia %2%: malloc() ha "
 "retornat «nullptr» per a un mida de %3% bytes.\n"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:141
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:140
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:116
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "merge"
 msgstr "fusiona"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:148
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:147
 msgid "merging to file »%1« in directory »%2«"
 msgstr ""
 
@@ -14357,11 +14400,11 @@ msgstr "passa per"
 msgid "pending"
 msgstr "pendent"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:91
+#: src/mkvtoolnix-gui/jobs/job.cpp:96
 msgid "pending automatic start"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:90
+#: src/mkvtoolnix-gui/jobs/job.cpp:95
 msgid "pending manual start"
 msgstr ""
 
@@ -14441,7 +14484,7 @@ msgstr "fila intercalada (esquerra primer)"
 msgid "row interleaved (right first)"
 msgstr "fila intercalada (dreta primer)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:92
+#: src/mkvtoolnix-gui/jobs/job.cpp:97
 msgid "running"
 msgstr "executant-se"
 
@@ -14578,7 +14621,7 @@ msgstr "und (sense determinar)"
 #: src/info/mkvinfo.cpp:938 src/input/r_matroska.cpp:99
 #: src/input/r_matroska.cpp:2286
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:157
-#: src/mkvtoolnix-gui/jobs/job.cpp:98
+#: src/mkvtoolnix-gui/jobs/job.cpp:103
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:45
 #: src/mmg/header_editor/value_page.cpp:150 src/mmg/mmg.cpp:68
 #: src/mmg/tabs/input.cpp:570 src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
@@ -14651,6 +14694,14 @@ msgstr "– per omissió sense selecció –"
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:37
 msgid "– set to none –"
 msgstr "– establert a «no» –"
+
+#, fuzzy
+#~ msgid "0 errors"
+#~ msgstr "cap error"
+
+#, fuzzy
+#~ msgid "0 warnings"
+#~ msgstr "Avisos:"
 
 #~ msgid "Interface &language:"
 #~ msgstr "&Idioma de la interfície:"

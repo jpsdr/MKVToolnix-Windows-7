@@ -4,10 +4,10 @@
 # This file is distributed under the same license as the mkvtoolnix package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MKVToolNix 7.8.0\n"
+"Project-Id-Version: MKVToolNix 7.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-23 20:08+0200\n"
-"PO-Revision-Date: 2015-05-24 20:31+0200\n"
+"POT-Creation-Date: 2015-05-25 11:11+0200\n"
+"PO-Revision-Date: 2015-05-25 11:12+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -871,16 +871,32 @@ msgstr "### Entwicklungs-Hacks ###"
 msgid "### Global output control ###"
 msgstr "### globale Einstellungen zur Ausgabe ###"
 
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:82
+msgid "%1 automatic, %2 manual"
+msgstr "%1 automatisch, %2 manuell"
+
 #: src/mkvtoolnix-gui/merge/track_model.cpp:81
 #: src/mkvtoolnix-gui/merge/track_model.cpp:212
 msgid "%1 entries"
 msgstr "%1 Einträge"
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:84
+msgid "%1 error"
+msgid_plural "%1 errors"
+msgstr[0] "%1 Fehler"
+msgstr[1] "%1 Fehler"
 
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:78
 msgid "%1 of %2 file processed"
 msgid_plural "%1 of %2 files processed"
 msgstr[0] "%1 von %2 Datei verarbeitet"
 msgstr[1] "%1 von %2 Dateien verarbeitet"
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:83
+msgid "%1 warning"
+msgid_plural "%1 warnings"
+msgstr[0] "%1 Warnung"
+msgstr[1] "%1 Warnungen"
 
 #: src/common/strings/formatting.cpp:268
 #, boost-format
@@ -987,8 +1003,8 @@ msgstr "%1%: Teiler fehlt in »%2% %3%«.\n"
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: fehlende Spur-ID »%2% %3%«\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:179
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:180
 msgid "%p%"
 msgstr "%p%"
 
@@ -1407,7 +1423,7 @@ msgstr "Job nach Ausführung aus Warteschlange &entfernen"
 msgid "&Remove selected edition or chapter"
 msgstr "Ausgewählte Edition oder Kapitel &entfernen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:149
+#: src/mkvtoolnix-gui/jobs/tool.cpp:166
 msgid "&Remove selected jobs"
 msgstr "&Ausgewählte Jobs entfernen"
 
@@ -1469,7 +1485,7 @@ msgstr "&Starten"
 msgid "&Start && end:"
 msgstr "&Start && Ende:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:148
+#: src/mkvtoolnix-gui/jobs/tool.cpp:165
 msgid "&Start selected jobs automatically"
 msgstr "Ausgewählte Jobs automatisch &starten"
 
@@ -2312,6 +2328,24 @@ msgstr "Muxen am %s abgebrochen"
 #: src/info/wxwidgets_ui.cpp:345
 msgid "About mkvinfo"
 msgstr "Über Mkvinfo"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:174
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:123
+msgid "Acknowledge all &errors"
+msgstr "Alle &Fehler bestätigen"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:172
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:106
+msgid "Acknowledge all &warnings"
+msgstr "Alle &Warnungen bestätigen"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:173
+msgid "Acknowledge selected errors"
+msgstr "Ausgewählte Fehler bestätigen"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:171
+msgid "Acknowledge selected warnings"
+msgstr "Ausgewählte Warnungen bestätigen"
 
 #: src/propedit/propedit_cli_parser.cpp:210
 msgid "Actions for handling attachments"
@@ -3935,15 +3969,15 @@ msgstr "DTS_Kopfdatenproblem: nicht genug Daten vorhanden, um Kopf zu lesen\n"
 msgid "Date (invalid, value: %1%)"
 msgstr "Datum (ungültig, Wert: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date added"
 msgstr "Hinzufügezeitpunkt"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date finished"
 msgstr "Fertigstellzeitpunkt"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date started"
 msgstr "Startzeitpunkt"
 
@@ -4038,7 +4072,7 @@ msgstr "Die ausgewählten Jobs aus der Jobwarteschlange löschen"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:242
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:54
 #: src/mmg/jobs.cpp:468
 msgid "Description"
@@ -4470,7 +4504,7 @@ msgid "Error:"
 msgstr "Fehler:"
 
 #: src/common/output.cpp:79
-#: src/mkvtoolnix-gui/jobs/job.cpp:82
+#: src/mkvtoolnix-gui/jobs/job.cpp:84
 msgid "Error: "
 msgstr "Fehler: "
 
@@ -5838,6 +5872,10 @@ msgstr "Jobwarteschlangenverwaltung"
 msgid "Jobs and job output"
 msgstr "Jobs und Jobausgabe"
 
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:175
+msgid "Jobs to execute:"
+msgstr "Auszuführende Jobs:"
+
 #: src/output/p_kate.h:39
 msgid "Kate"
 msgstr "Kate"
@@ -7116,13 +7154,13 @@ msgstr "Ausführung von Job %d/%d"
 msgid "Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr "Abspielprogramme können nur Cluster-Grenzen direkt anspringen, sodass das Erstellen großer Cluster zu ungenauem oder langsamem Springen führen kann."
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mmg/jobs.cpp:262
 #: src/mmg/mux_dialog.cpp:295
 msgid "Progress"
 msgstr "Fortschritt"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:85
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 msgid "Progress:"
 msgstr "Fortschritt:"
@@ -7403,11 +7441,11 @@ msgstr "Die aktuelle Datei neu laden, ohne zu speichern"
 msgid "Remaining time:"
 msgstr "verbleibende Zeit:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:150
+#: src/mkvtoolnix-gui/jobs/tool.cpp:167
 msgid "Remove &completed jobs"
 msgstr "&Fertiggestellte Jobs entfernen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:151
+#: src/mkvtoolnix-gui/jobs/tool.cpp:168
 msgid "Remove &successfully completed jobs"
 msgstr "&Erfolgreich ausgeführte Jobs entfernen"
 
@@ -7415,7 +7453,7 @@ msgstr "&Erfolgreich ausgeführte Jobs entfernen"
 msgid "Remove a&ll files"
 msgstr "A&lle Dateien entfernen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:152
+#: src/mkvtoolnix-gui/jobs/tool.cpp:169
 msgid "Remove a&ll jobs"
 msgstr "A&lle Jobs entfernen"
 
@@ -7453,7 +7491,7 @@ msgstr "Die Suche war an Position %1% erfolgreich.\n"
 msgid "Right-click for actions for all tracks"
 msgstr "rechts-klicken für Aktionen für alle Spuren"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:159
+#: src/mkvtoolnix-gui/jobs/tool.cpp:181
 msgid "Right-click for actions for jobs"
 msgstr "rechts-klicken für Job-Aktionen"
 
@@ -8349,7 +8387,7 @@ msgstr "Job mit ID %d (%s) wird am %s gestartet"
 msgid "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"
 msgstr "Statistiken für Spur Nummer %1%: Anzahl Blöcke: %2%; Größe in Byte: %3%; Dauer in Sekunden: %4%; ungefähre Bitrate in Bits/Sekunde: %5%\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mmg/jobs.cpp:466
 msgid "Status"
 msgstr "Status"
@@ -10457,7 +10495,7 @@ msgid "Two files muxed with the same settings and this switch activated will be 
 msgstr "Zwei Dateien, die beide mit identischen Einstellungen und diesem Schalter gemuxt wurden, werden identisch sein."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mkvtoolnix-gui/merge/track_model.cpp:42
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -10895,7 +10933,7 @@ msgid "Warning:"
 msgstr "Warnung:"
 
 #: src/common/output.cpp:82
-#: src/mkvtoolnix-gui/jobs/job.cpp:81
+#: src/mkvtoolnix-gui/jobs/job.cpp:83
 msgid "Warning: "
 msgstr "Warnung: "
 
@@ -11144,7 +11182,7 @@ msgstr "[%1%-Spur für Spur %2%, Zeitstempel %3%]"
 msgid "aborted"
 msgstr "abgebrochen"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:96
+#: src/mkvtoolnix-gui/jobs/job.cpp:101
 msgid "aborted by user"
 msgstr "vom Benutzer abgebrochen"
 
@@ -11275,12 +11313,12 @@ msgstr "spaltenversetzt (links zuerst)"
 msgid "column interleaved (right first)"
 msgstr "spaltenversetzt (rechts zuerst)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:93
+#: src/mkvtoolnix-gui/jobs/job.cpp:98
 #: src/mmg/jobs.cpp:362
 msgid "completed OK"
 msgstr "erfolgreich beendet"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:94
+#: src/mkvtoolnix-gui/jobs/job.cpp:99
 #: src/mmg/jobs.cpp:366
 msgid "completed with warnings"
 msgstr "mit Warnungen beendet"
@@ -11321,7 +11359,7 @@ msgstr "automatisch festlegen"
 msgid "disable all"
 msgstr "alle deaktivieren"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:97
+#: src/mkvtoolnix-gui/jobs/job.cpp:102
 msgid "disabled"
 msgstr "deaktiviert"
 
@@ -11357,17 +11395,17 @@ msgid "down"
 msgstr "runter"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:120
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "edit chapters"
 msgstr "Kapitel bearbeiten"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:119
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "edit headers"
 msgstr "Kopfdaten bearbeiten"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:121
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "edit tags"
 msgstr "Tags bearbeiten"
 
@@ -11388,11 +11426,11 @@ msgid "even if there were warnings"
 msgstr "selbst, wenn es Warnungen gab"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:117
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "extract"
 msgstr "Extraktion"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:95
+#: src/mkvtoolnix-gui/jobs/job.cpp:100
 #: src/mmg/jobs.cpp:370
 #: src/mmg/jobs.cpp:563
 msgid "failed"
@@ -11505,7 +11543,7 @@ msgid "inflateInit() failed. Result: %1%\n"
 msgstr "»inflateInit()« schlug fehl. Fehlercode: %1%\n"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:118
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "info"
 msgstr "Info"
 
@@ -11518,12 +11556,12 @@ msgid "is being estimated"
 msgstr "wird abgeschätzt."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:123
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "job output"
 msgstr "Jobausgabe"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:122
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "job queue"
 msgstr "Jobwarteschlange"
 
@@ -11692,13 +11730,13 @@ msgstr "memory.cpp/safememdup() aus Datei %1%, Zeile %2% aufgerufen: malloc() ha
 msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned nullptr for a size of %3% bytes.\n"
 msgstr "memory.cpp/saferealloc() aus Datei %1%, Zeile %2% aufgerufen: realloc() hat für eine Größe von %3% Byte »nullptr« zurückgegeben.\n"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:141
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:140
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:116
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "merge"
 msgstr "mergen"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:148
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:147
 msgid "merging to file »%1« in directory »%2«"
 msgstr "merge in Datei »%1« im Verzeichnis »%2«"
 
@@ -12122,11 +12160,11 @@ msgstr "1:1 durchreichen"
 msgid "pending"
 msgstr "wartend"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:91
+#: src/mkvtoolnix-gui/jobs/job.cpp:96
 msgid "pending automatic start"
 msgstr "auf automatisches Starten wartend"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:90
+#: src/mkvtoolnix-gui/jobs/job.cpp:95
 msgid "pending manual start"
 msgstr "auf manuelles Starten wartend"
 
@@ -12200,7 +12238,7 @@ msgstr "zeilenversetzt (links zuerst)"
 msgid "row interleaved (right first)"
 msgstr "zeilenversetzt (rechts zuerst)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:92
+#: src/mkvtoolnix-gui/jobs/job.cpp:97
 msgid "running"
 msgstr "läuft"
 
@@ -12331,7 +12369,7 @@ msgstr "und (nicht festgelegt)"
 #: src/input/r_matroska.cpp:99
 #: src/input/r_matroska.cpp:2286
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:157
-#: src/mkvtoolnix-gui/jobs/job.cpp:98
+#: src/mkvtoolnix-gui/jobs/job.cpp:103
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:45
 #: src/mmg/header_editor/value_page.cpp:150
 #: src/mmg/mmg.cpp:68
@@ -12405,22 +12443,3 @@ msgstr "– keine Vorauswahl –"
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:37
 msgid "– set to none –"
 msgstr "– leer setzen –"
-
-#~ msgid "If you want to know more about the current status then take a look at the following web page:"
-#~ msgstr "Falls Sie weitere Details über den aktuellen Status erfahren möchten, so besuchen Sie die folgende Webseite:"
-
-#~ msgid "Interface &language:"
-#~ msgstr "&Sprache der Benutzeroberfläche:"
-
-#~ msgid "Only play lists whose duration are at least this long are considered and offered to the user for selection."
-#~ msgstr "Nur Abspiellisten, die mindestens so lang sind, werden berücksichtigt und der BenutzerIn zur Auswahl angeboten."
-
-#~ msgid "Preview warning"
-#~ msgstr "Vorschau-Warnungen"
-
-#~ msgid "The current version of this GUI is just a preview. It's not an alpha release, and certainly not a beta release. Many features present in the old GUI haven't been implemented yet, and there are many bugs. Its purpose is to give interested users a glimpse of what the new GUI will look and feel like."
-#~ msgstr "Die aktuelle Version dieses GUI ist nur eine Vorschau. Es ist keine Alpha-Ausgabe, und definitiv noch keine Beta. Viele Features, die im alten GUI enthalten waren, sind noch nicht implementiert worden, und es gibt noch viele Fehler. Der Sinn und Zweck ist es, interessierten Benutzern einen Vorgeschmack darauf zu geben, wie sich neue GUI aussehen und sich anführen wird."
-
-#~ msgid "This is a preview!"
-#~ msgstr "This ist eine Vorschau!"
-

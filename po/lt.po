@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-4.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-23 20:08+0200\n"
+"POT-Creation-Date: 2015-05-25 11:11+0200\n"
 "PO-Revision-Date: 2013-01-17 17:40+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <embar@users.berlios.de>\n"
@@ -712,10 +712,22 @@ msgstr ""
 msgid "### Global output control ###"
 msgstr ""
 
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:82
+msgid "%1 automatic, %2 manual"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/track_model.cpp:81
 #: src/mkvtoolnix-gui/merge/track_model.cpp:212
 msgid "%1 entries"
 msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:84
+#, fuzzy
+msgid "%1 error"
+msgid_plural "%1 errors"
+msgstr[0] "klaidų nėra"
+msgstr[1] "klaidų nėra"
+msgstr[2] "klaidų nėra"
 
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:78
 msgid "%1 of %2 file processed"
@@ -723,6 +735,14 @@ msgid_plural "%1 of %2 files processed"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:83
+#, fuzzy
+msgid "%1 warning"
+msgid_plural "%1 warnings"
+msgstr[0] "Įspėjimas:"
+msgstr[1] "Įspėjimas:"
+msgstr[2] "Įspėjimas:"
 
 #: src/common/strings/formatting.cpp:268
 #, fuzzy, boost-format
@@ -832,8 +852,8 @@ msgstr ""
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:179
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:180
 msgid "%p%"
 msgstr ""
 
@@ -1283,7 +1303,7 @@ msgstr ""
 msgid "&Remove selected edition or chapter"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:149
+#: src/mkvtoolnix-gui/jobs/tool.cpp:166
 #, fuzzy
 msgid "&Remove selected jobs"
 msgstr "Pasirinktus darbus kelti aukščiau"
@@ -1351,7 +1371,7 @@ msgstr "&Pradėti"
 msgid "&Start && end:"
 msgstr "&Pradėti"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:148
+#: src/mkvtoolnix-gui/jobs/tool.cpp:165
 msgid "&Start selected jobs automatically"
 msgstr ""
 
@@ -2190,6 +2210,26 @@ msgstr ""
 #: src/info/wxwidgets_ui.cpp:345
 msgid "About mkvinfo"
 msgstr "Apie mkvinfo"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:174
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:123
+msgid "Acknowledge all &errors"
+msgstr ""
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:172
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:106
+#, fuzzy
+msgid "Acknowledge all &warnings"
+msgstr "užbaigta, bet buvo įspėjimų"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:173
+msgid "Acknowledge selected errors"
+msgstr ""
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:171
+#, fuzzy
+msgid "Acknowledge selected warnings"
+msgstr "užbaigta, bet buvo įspėjimų"
 
 #: src/propedit/propedit_cli_parser.cpp:210
 msgid "Actions for handling attachments"
@@ -3856,16 +3896,16 @@ msgstr ""
 msgid "Date (invalid, value: %1%)"
 msgstr "Data (klaidinga, reikšmė: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date added"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #, fuzzy
 msgid "Date finished"
 msgstr ", baigta %s"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date started"
 msgstr ""
 
@@ -3967,7 +4007,7 @@ msgstr "Pasirinktus darbus pašalinti iš darbų sąrašo"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:242
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:54
 #: src/mmg/jobs.cpp:468
 msgid "Description"
@@ -4410,7 +4450,7 @@ msgid "Error:"
 msgstr "Klaida:"
 
 #: src/common/output.cpp:79
-#: src/mkvtoolnix-gui/jobs/job.cpp:82
+#: src/mkvtoolnix-gui/jobs/job.cpp:84
 msgid "Error: "
 msgstr "Klaida: "
 
@@ -5790,6 +5830,10 @@ msgstr "Darbų eilės tvarkymas"
 msgid "Jobs and job output"
 msgstr "Darbo išvedimas"
 
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:175
+msgid "Jobs to execute:"
+msgstr ""
+
 #: src/output/p_kate.h:39
 msgid "Kate"
 msgstr "Kate"
@@ -7095,13 +7139,13 @@ msgstr "Vykdomas darbas: %d/%d"
 msgid "Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mmg/jobs.cpp:262
 #: src/mmg/mux_dialog.cpp:295
 msgid "Progress"
 msgstr "Eiga"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:85
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 #, fuzzy
 msgid "Progress:"
@@ -7385,12 +7429,12 @@ msgstr ""
 msgid "Remaining time:"
 msgstr "Likęs laikas:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:150
+#: src/mkvtoolnix-gui/jobs/tool.cpp:167
 #, fuzzy
 msgid "Remove &completed jobs"
 msgstr "Pašalinti skyrių"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:151
+#: src/mkvtoolnix-gui/jobs/tool.cpp:168
 msgid "Remove &successfully completed jobs"
 msgstr ""
 
@@ -7399,7 +7443,7 @@ msgstr ""
 msgid "Remove a&ll files"
 msgstr "prie visų rinkmenų"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:152
+#: src/mkvtoolnix-gui/jobs/tool.cpp:169
 #, fuzzy
 msgid "Remove a&ll jobs"
 msgstr "pašalinti visas"
@@ -7438,7 +7482,7 @@ msgstr ""
 msgid "Right-click for actions for all tracks"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:159
+#: src/mkvtoolnix-gui/jobs/tool.cpp:181
 msgid "Right-click for actions for jobs"
 msgstr ""
 
@@ -8355,7 +8399,7 @@ msgstr "Pradedamas darbas ID %d (%s): %s"
 msgid "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mmg/jobs.cpp:466
 msgid "Status"
 msgstr "Būsena"
@@ -10426,7 +10470,7 @@ msgid "Two files muxed with the same settings and this switch activated will be 
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mkvtoolnix-gui/merge/track_model.cpp:42
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 #, fuzzy
@@ -10861,7 +10905,7 @@ msgid "Warning:"
 msgstr "Įspėjimas:"
 
 #: src/common/output.cpp:82
-#: src/mkvtoolnix-gui/jobs/job.cpp:81
+#: src/mkvtoolnix-gui/jobs/job.cpp:83
 msgid "Warning: "
 msgstr "Įspėjimas: "
 
@@ -11103,7 +11147,7 @@ msgstr ""
 msgid "aborted"
 msgstr "nutraukta"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:96
+#: src/mkvtoolnix-gui/jobs/job.cpp:101
 #, fuzzy
 msgid "aborted by user"
 msgstr "nutraukta"
@@ -11243,12 +11287,12 @@ msgstr ""
 msgid "column interleaved (right first)"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:93
+#: src/mkvtoolnix-gui/jobs/job.cpp:98
 #: src/mmg/jobs.cpp:362
 msgid "completed OK"
 msgstr "užbaigta sėkmingai"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:94
+#: src/mkvtoolnix-gui/jobs/job.cpp:99
 #: src/mmg/jobs.cpp:366
 msgid "completed with warnings"
 msgstr "užbaigta, bet buvo įspėjimų"
@@ -11289,7 +11333,7 @@ msgstr ""
 msgid "disable all"
 msgstr "uždrausti visus"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:97
+#: src/mkvtoolnix-gui/jobs/job.cpp:102
 #, fuzzy
 msgid "disabled"
 msgstr "&Uždrausti"
@@ -11327,19 +11371,19 @@ msgid "down"
 msgstr "žemyn"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:120
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "edit chapters"
 msgstr "&Naujas skyrius"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:119
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "edit headers"
 msgstr "Takelio antraštės"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:121
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "edit tags"
 msgstr ""
 
@@ -11361,12 +11405,12 @@ msgid "even if there were warnings"
 msgstr "užbaigta, bet buvo įspėjimų"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:117
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "extract"
 msgstr "Gairių ištraukimas"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:95
+#: src/mkvtoolnix-gui/jobs/job.cpp:100
 #: src/mmg/jobs.cpp:370
 #: src/mmg/jobs.cpp:563
 msgid "failed"
@@ -11482,7 +11526,7 @@ msgid "inflateInit() failed. Result: %1%\n"
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:118
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "info"
 msgstr ""
 
@@ -11495,13 +11539,13 @@ msgid "is being estimated"
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:123
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "job output"
 msgstr "Darbo išvedimas"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:122
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "job queue"
 msgstr "Įtraukti į &darbų eilę"
@@ -11671,14 +11715,14 @@ msgstr ""
 msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned nullptr for a size of %3% bytes.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:141
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:140
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:116
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "merge"
 msgstr "mkvmerge"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:148
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:147
 msgid "merging to file »%1« in directory »%2«"
 msgstr ""
 
@@ -12109,11 +12153,11 @@ msgstr ""
 msgid "pending"
 msgstr "laukiama"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:91
+#: src/mkvtoolnix-gui/jobs/job.cpp:96
 msgid "pending automatic start"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:90
+#: src/mkvtoolnix-gui/jobs/job.cpp:95
 msgid "pending manual start"
 msgstr ""
 
@@ -12187,7 +12231,7 @@ msgstr ""
 msgid "row interleaved (right first)"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:92
+#: src/mkvtoolnix-gui/jobs/job.cpp:97
 #, fuzzy
 msgid "running"
 msgstr "Įspėjimas:"
@@ -12324,7 +12368,7 @@ msgstr "und (nenurodyta)"
 #: src/input/r_matroska.cpp:99
 #: src/input/r_matroska.cpp:2286
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:157
-#: src/mkvtoolnix-gui/jobs/job.cpp:98
+#: src/mkvtoolnix-gui/jobs/job.cpp:103
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:45
 #: src/mmg/header_editor/value_page.cpp:150
 #: src/mmg/mmg.cpp:68
@@ -12447,6 +12491,14 @@ msgstr ""
 
 #~ msgid "(none)"
 #~ msgstr "(nieko)"
+
+#, fuzzy
+#~ msgid "0 errors"
+#~ msgstr "klaidų nėra"
+
+#, fuzzy
+#~ msgid "0 warnings"
+#~ msgstr "Įspėjimai:"
 
 #~ msgid "About mkvmerge's GUI"
 #~ msgstr "Apie mkvmerge grafinę sąsają"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-23 20:08+0200\n"
+"POT-Creation-Date: 2015-05-25 11:11+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -937,10 +937,22 @@ msgstr "### Опції для розробників ###"
 msgid "### Global output control ###"
 msgstr "### Глобальний вихідний контроль ###"
 
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:82
+msgid "%1 automatic, %2 manual"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/track_model.cpp:81
 #: src/mkvtoolnix-gui/merge/track_model.cpp:212
 msgid "%1 entries"
 msgstr "%1 запис(и)(ів)"
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:84
+#, fuzzy
+msgid "%1 error"
+msgid_plural "%1 errors"
+msgstr[0] "без помилок"
+msgstr[1] "без помилок"
+msgstr[2] "без помилок"
 
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:78
 #, fuzzy
@@ -949,6 +961,14 @@ msgid_plural "%1 of %2 files processed"
 msgstr[0] "%1% з %2% файла оброблено"
 msgstr[1] "%1% з %2% файлів оброблено"
 msgstr[2] "%1% з %2% файлів оброблено"
+
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:83
+#, fuzzy
+msgid "%1 warning"
+msgid_plural "%1 warnings"
+msgstr[0] "Попередження:"
+msgstr[1] "Попередження:"
+msgstr[2] "Попередження:"
 
 #: src/common/strings/formatting.cpp:268
 #, boost-format
@@ -1068,8 +1088,8 @@ msgstr "%1%: відсутній дільник в '%2% %3%'.\n"
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: відсутній ID доріжки в '%2% %3%'.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:86
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:87
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:179
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:180
 msgid "%p%"
 msgstr ""
 
@@ -1482,7 +1502,7 @@ msgstr "&Видалити завдання з черги після заверш
 msgid "&Remove selected edition or chapter"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:149
+#: src/mkvtoolnix-gui/jobs/tool.cpp:166
 msgid "&Remove selected jobs"
 msgstr "&Видалити обрані завдання"
 
@@ -1548,7 +1568,7 @@ msgstr "&Розпочати виконання"
 msgid "&Start && end:"
 msgstr "&Розпочати виконання"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:148
+#: src/mkvtoolnix-gui/jobs/tool.cpp:165
 msgid "&Start selected jobs automatically"
 msgstr ""
 
@@ -2510,6 +2530,26 @@ msgstr "Перервано обробку завдання %s"
 #: src/info/qt_ui.cpp:152 src/info/wxwidgets_ui.cpp:345
 msgid "About mkvinfo"
 msgstr "Про mkvinfo"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:174
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:123
+msgid "Acknowledge all &errors"
+msgstr ""
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:172
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:106
+#, fuzzy
+msgid "Acknowledge all &warnings"
+msgstr "Завершено з попередженнями"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:173
+msgid "Acknowledge selected errors"
+msgstr ""
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:171
+#, fuzzy
+msgid "Acknowledge selected warnings"
+msgstr "Завершено з попередженнями"
 
 #: src/propedit/propedit_cli_parser.cpp:210
 msgid "Actions for handling attachments"
@@ -4303,16 +4343,16 @@ msgstr "Проблема DTS_Header: не достатньо даних, щоб 
 msgid "Date (invalid, value: %1%)"
 msgstr "Дата (невірна, значення: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date added"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #, fuzzy
 msgid "Date finished"
 msgstr ", завершено %s"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Date started"
 msgstr ""
 
@@ -4418,7 +4458,7 @@ msgstr "Видалити вибрані завдання з черги завд�
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:242
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:54 src/mmg/jobs.cpp:468
 msgid "Description"
 msgstr "Опис"
@@ -4896,7 +4936,7 @@ msgstr "Помилка запису файла Matroska"
 msgid "Error:"
 msgstr "Помилка:"
 
-#: src/common/output.cpp:79 src/mkvtoolnix-gui/jobs/job.cpp:82
+#: src/common/output.cpp:79 src/mkvtoolnix-gui/jobs/job.cpp:84
 msgid "Error: "
 msgstr "Помилка: "
 
@@ -6630,6 +6670,10 @@ msgstr "Керування чергою завдань"
 msgid "Jobs and job output"
 msgstr "Завдання та вихідна інформація щодо виконання завдань"
 
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:175
+msgid "Jobs to execute:"
+msgstr ""
+
 #: src/output/p_kate.h:39
 msgid "Kate"
 msgstr "Kate"
@@ -8119,12 +8163,12 @@ msgid ""
 "may lead to imprecise or slow seeking."
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35 src/mmg/jobs.cpp:262
+#: src/mkvtoolnix-gui/jobs/model.cpp:37 src/mmg/jobs.cpp:262
 #: src/mmg/mux_dialog.cpp:295
 msgid "Progress"
 msgstr "Прогрес виконання"
 
-#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:85
+#: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:248
 #, fuzzy
 msgid "Progress:"
@@ -8507,12 +8551,12 @@ msgstr "Перезавантажити поточний файл без збер
 msgid "Remaining time:"
 msgstr "Час, що залишився:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:150
+#: src/mkvtoolnix-gui/jobs/tool.cpp:167
 #, fuzzy
 msgid "Remove &completed jobs"
 msgstr "Видалити розділ"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:151
+#: src/mkvtoolnix-gui/jobs/tool.cpp:168
 msgid "Remove &successfully completed jobs"
 msgstr ""
 
@@ -8521,7 +8565,7 @@ msgstr ""
 msgid "Remove a&ll files"
 msgstr "Для всіх файлів"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:152
+#: src/mkvtoolnix-gui/jobs/tool.cpp:169
 #, fuzzy
 msgid "Remove a&ll jobs"
 msgstr "Видалити всі"
@@ -8562,7 +8606,7 @@ msgstr "Повторна синхронізація завершена успі�
 msgid "Right-click for actions for all tracks"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:159
+#: src/mkvtoolnix-gui/jobs/tool.cpp:181
 msgid "Right-click for actions for jobs"
 msgstr ""
 
@@ -9632,7 +9676,7 @@ msgstr ""
 "Статистика для доріжки номер %1%: кількість блоків: %2%; розмір в байтах: "
 "%3%; тривалість в секундах: %4%; орієнтовний бітрейт в бітах/с: %5%\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:35 src/mmg/jobs.cpp:466
+#: src/mkvtoolnix-gui/jobs/model.cpp:37 src/mmg/jobs.cpp:466
 msgid "Status"
 msgstr "Статус"
 
@@ -12564,7 +12608,7 @@ msgid ""
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:35
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 #: src/mkvtoolnix-gui/merge/track_model.cpp:42
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -13047,7 +13091,7 @@ msgstr ""
 msgid "Warning:"
 msgstr "Попередження:"
 
-#: src/common/output.cpp:82 src/mkvtoolnix-gui/jobs/job.cpp:81
+#: src/common/output.cpp:82 src/mkvtoolnix-gui/jobs/job.cpp:83
 msgid "Warning: "
 msgstr "Попередження:"
 
@@ -13344,7 +13388,7 @@ msgstr "[%1% кадр для доріжки %2%, тайм-код %3%]"
 msgid "aborted"
 msgstr "перервано"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:96
+#: src/mkvtoolnix-gui/jobs/job.cpp:101
 msgid "aborted by user"
 msgstr "перервано користувачем"
 
@@ -13486,11 +13530,11 @@ msgstr "черезрядково з вертикальним роздільни�
 msgid "column interleaved (right first)"
 msgstr "черезрядково з вертикальним роздільником (правий спочатку)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:93 src/mmg/jobs.cpp:362
+#: src/mkvtoolnix-gui/jobs/job.cpp:98 src/mmg/jobs.cpp:362
 msgid "completed OK"
 msgstr "Завершено без помилок і попереджень"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:94 src/mmg/jobs.cpp:366
+#: src/mkvtoolnix-gui/jobs/job.cpp:99 src/mmg/jobs.cpp:366
 msgid "completed with warnings"
 msgstr "Завершено з попередженнями"
 
@@ -13532,7 +13576,7 @@ msgstr ""
 msgid "disable all"
 msgstr "Заборонити усі"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:97
+#: src/mkvtoolnix-gui/jobs/job.cpp:102
 #, fuzzy
 msgid "disabled"
 msgstr "&Вимкнути"
@@ -13569,19 +13613,19 @@ msgid "down"
 msgstr "Вниз"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:120
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "edit chapters"
 msgstr "&Нові розділи"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:119
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "edit headers"
 msgstr "Заголовки доріжки"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:121
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "edit tags"
 msgstr ""
 
@@ -13602,12 +13646,13 @@ msgid "even if there were warnings"
 msgstr "навіть, якщо там були попередження"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:117
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "extract"
 msgstr "Витягнення записів cue"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:95 src/mmg/jobs.cpp:370 src/mmg/jobs.cpp:563
+#: src/mkvtoolnix-gui/jobs/job.cpp:100 src/mmg/jobs.cpp:370
+#: src/mmg/jobs.cpp:563
 msgid "failed"
 msgstr "Не вдалося"
 
@@ -13731,7 +13776,7 @@ msgid "inflateInit() failed. Result: %1%\n"
 msgstr "збій inflateInit(). Результат: %1%\n"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:118
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "info"
 msgstr ""
 
@@ -13741,13 +13786,13 @@ msgid "is being estimated"
 msgstr "оцінка часу"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:123
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "job output"
 msgstr "Вихідна інформація щодо виконання завдань"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:122
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 msgid "job queue"
 msgstr "черга завдань"
 
@@ -13984,14 +14029,14 @@ msgstr ""
 "memory.cpp/saferealloc() викликано з файлу %1%, рядок %2%: realloc() "
 "повернуто nullptr для розміру %3% байт.\n"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:141
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:140
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:116
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:232
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:234
 #, fuzzy
 msgid "merge"
 msgstr "mkvmerge"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:148
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:147
 msgid "merging to file »%1« in directory »%2«"
 msgstr ""
 
@@ -14482,11 +14527,11 @@ msgstr "пропуск"
 msgid "pending"
 msgstr "очікування"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:91
+#: src/mkvtoolnix-gui/jobs/job.cpp:96
 msgid "pending automatic start"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:90
+#: src/mkvtoolnix-gui/jobs/job.cpp:95
 msgid "pending manual start"
 msgstr ""
 
@@ -14566,7 +14611,7 @@ msgstr "черезрядково з горизонтальним розділь�
 msgid "row interleaved (right first)"
 msgstr "черезрядково з горизонтальним роздільником (правий спочатку)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:92
+#: src/mkvtoolnix-gui/jobs/job.cpp:97
 #, fuzzy
 msgid "running"
 msgstr "Попередження:"
@@ -14705,7 +14750,7 @@ msgstr "und (Невизначено)"
 #: src/info/mkvinfo.cpp:938 src/input/r_matroska.cpp:99
 #: src/input/r_matroska.cpp:2286
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:157
-#: src/mkvtoolnix-gui/jobs/job.cpp:98
+#: src/mkvtoolnix-gui/jobs/job.cpp:103
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:45
 #: src/mmg/header_editor/value_page.cpp:150 src/mmg/mmg.cpp:68
 #: src/mmg/tabs/input.cpp:570 src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
@@ -14778,6 +14823,14 @@ msgstr ""
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:37
 msgid "– set to none –"
 msgstr ""
+
+#, fuzzy
+#~ msgid "0 errors"
+#~ msgstr "без помилок"
+
+#, fuzzy
+#~ msgid "0 warnings"
+#~ msgstr "Попередження:"
 
 #~ msgid "Interface &language:"
 #~ msgstr "&Мова інтерфейсу:"
