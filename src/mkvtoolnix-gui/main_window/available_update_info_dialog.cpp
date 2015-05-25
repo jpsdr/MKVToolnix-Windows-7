@@ -11,7 +11,7 @@
 namespace mtx { namespace gui {
 
 AvailableUpdateInfoDialog::AvailableUpdateInfoDialog(QWidget *parent)
-  : QDialog{parent}
+  : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::AvailableUpdateInfoDialog}
 {
   // Setup UI controls.
