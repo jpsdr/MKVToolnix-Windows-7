@@ -69,12 +69,16 @@ setupLanguageComboBox(QComboBox &comboBox,
     break;
   }
 
+  auto &commonLanguages = App::commonIso639Languages();
+  if (!commonLanguages.empty()) {
+    for (auto const &language : commonLanguages)
+      comboBox.addItem(language.first, language.second);
+
+    comboBox.insertSeparator(commonLanguages.size() + separatorOffset);
+  }
+
   for (auto const &language : App::iso639Languages())
     comboBox.addItem(language.first, language.second);
-
-  auto &cfg = Settings::get();
-  if (!cfg.m_oftenUsedLanguages.isEmpty())
-    comboBox.insertSeparator(cfg.m_oftenUsedLanguages.count() + separatorOffset);
 
   comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 

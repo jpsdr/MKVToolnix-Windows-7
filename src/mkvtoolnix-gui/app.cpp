@@ -17,7 +17,7 @@
 
 namespace mtx { namespace gui {
 
-static Iso639LanguageList s_iso639Languages;
+static Iso639LanguageList s_iso639Languages, s_commonIso639Languages;
 static Iso3166CountryList s_iso3166_1Alpha2Countries;
 static CharacterSetList s_characterSets;
 static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_iso3166_1Alpha2CountryCodeToDescription;
@@ -74,6 +74,7 @@ App::retranslateUi() {
 void
 App::reinitializeLanguageLists() {
   s_iso639Languages.clear();
+  s_commonIso639Languages.clear();
   s_iso3166_1Alpha2Countries.clear();
   s_iso639_2LanguageCodeToDescription.clear();
   s_iso3166_1Alpha2CountryCodeToDescription.clear();
@@ -94,27 +95,25 @@ App::initializeLanguageLists() {
 
 void
 App::initializeIso639Languages() {
-  using LanguageSorter = std::tuple<int, QString, QString>;
-  auto toSort          = std::vector<LanguageSorter>{};
-  auto &cfg            = Util::Settings::get();
+  auto &cfg = Util::Settings::get();
 
   s_iso639Languages.reserve(g_iso639_languages.size());
-  toSort.reserve(g_iso639_languages.size());
+  s_commonIso639Languages.reserve(cfg.m_oftenUsedLanguages.size());
 
   for (auto const &language : g_iso639_languages) {
     auto languageCode = Q(language.iso639_2_code);
     auto description  = Q("%1 (%2)").arg(Q(language.english_name)).arg(languageCode);
-    auto commonOrder  = cfg.m_oftenUsedLanguages.indexOf(languageCode) != -1 ? 0 : 1;
+    auto isCommon     = cfg.m_oftenUsedLanguages.indexOf(languageCode) != -1;
 
-    toSort.emplace_back(commonOrder, description, languageCode);
+    s_iso639Languages.emplace_back(description, languageCode);
+    if (isCommon)
+      s_commonIso639Languages.emplace_back(description, languageCode);
+
     s_iso639_2LanguageCodeToDescription[languageCode] = description;
   }
 
-  brng::sort(toSort);
-
-  for (auto const &languageSorter : toSort) {
-    s_iso639Languages.emplace_back(std::get<1>(languageSorter), std::get<2>(languageSorter));
-  }
+  brng::sort(s_iso639Languages);
+  brng::sort(s_commonIso639Languages);
 }
 
 void
@@ -167,6 +166,12 @@ Iso639LanguageList const &
 App::iso639Languages() {
   initializeLanguageLists();
   return s_iso639Languages;
+}
+
+Iso639LanguageList const &
+App::commonIso639Languages() {
+  initializeLanguageLists();
+  return s_commonIso639Languages;
 }
 
 Iso3166CountryList const &
