@@ -9,6 +9,7 @@
 #include <QTableView>
 #include <QTreeView>
 
+#include "common/logger.h"
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/app.h"
@@ -51,15 +52,29 @@ setupLanguageComboBox(QComboBox &comboBox,
                       QStringList const &initiallySelected,
                       bool withEmpty,
                       QString const &emptyTitle) {
-  if (withEmpty)
+  auto separatorOffset = 0;
+
+  if (withEmpty) {
     comboBox.addItem(emptyTitle, Q(""));
+    ++separatorOffset;
+  }
+
+  for (auto const &language : App::iso639Languages()) {
+    if (language.second != Q("und"))
+      continue;
+
+    comboBox.addItem(language.first, language.second);
+    comboBox.insertSeparator(1 + separatorOffset);
+    separatorOffset += 2;
+    break;
+  }
 
   for (auto const &language : App::iso639Languages())
     comboBox.addItem(language.first, language.second);
 
   auto &cfg = Settings::get();
   if (!cfg.m_oftenUsedLanguages.isEmpty())
-    comboBox.insertSeparator(cfg.m_oftenUsedLanguages.count() + (withEmpty ? 1 : 0));
+    comboBox.insertSeparator(cfg.m_oftenUsedLanguages.count() + separatorOffset);
 
   comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
