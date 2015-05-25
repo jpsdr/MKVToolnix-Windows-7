@@ -59,11 +59,11 @@ void
 Tool::setupUiControls() {
   ui->jobs->setModel(m_model);
 
-  connect(m_startAction,        SIGNAL(triggered()), this, SLOT(onStart()));
-  connect(m_removeAction,       SIGNAL(triggered()), this, SLOT(onRemove()));
-  connect(m_removeDoneAction,   SIGNAL(triggered()), this, SLOT(onRemoveDone()));
-  connect(m_removeDoneOkAction, SIGNAL(triggered()), this, SLOT(onRemoveDoneOk()));
-  connect(m_removeAllAction,    SIGNAL(triggered()), this, SLOT(onRemoveAll()));
+  connect(m_startAction,                       &QAction::triggered, this,    &Tool::onStart);
+  connect(m_removeAction,                      &QAction::triggered, this,    &Tool::onRemove);
+  connect(m_removeDoneAction,                  &QAction::triggered, this,    &Tool::onRemoveDone);
+  connect(m_removeDoneOkAction,                &QAction::triggered, this,    &Tool::onRemoveDoneOk);
+  connect(m_removeAllAction,                   &QAction::triggered, this,    &Tool::onRemoveAll);
 
   connect(m_acknowledgeAllWarningsAction,      &QAction::triggered, m_model, &Model::acknowledgeAllWarnings);
   connect(m_acknowledgeSelectedWarningsAction, &QAction::triggered, this,    &Tool::acknowledgeSelectedWarnings);
