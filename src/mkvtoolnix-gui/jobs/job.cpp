@@ -40,6 +40,8 @@ Job::setStatus(Status status) {
     m_output.clear();
     m_warnings.clear();
     m_errors.clear();
+    m_warningsAcknowledged = 0;
+    m_errorsAcknowledged   = 0;
 
   } else if ((DoneOk == status) || (DoneWarnings == status) || (Failed == status) || (Aborted == status))
     m_dateFinished = QDateTime::currentDateTime();
@@ -134,8 +136,8 @@ Job::loadJobBasis(QSettings &settings) {
   m_fullOutput           = settings.value("fullOutput").toStringList();
   m_progress             = settings.value("progress").toUInt();
   m_exitCode             = settings.value("exitCode").toUInt();
-  m_warningsAcknowledged = settings.value("warningsAcknowledged").toUInt();
-  m_errorsAcknowledged   = settings.value("errorsAcknowledged").toUInt();
+  m_warningsAcknowledged = settings.value("warningsAcknowledged", 0).toUInt();
+  m_errorsAcknowledged   = settings.value("errorsAcknowledged",   0).toUInt();
   m_dateAdded            = settings.value("dateAdded").toDateTime();
   m_dateStarted          = settings.value("dateStarted").toDateTime();
   m_dateFinished         = settings.value("dateFinished").toDateTime();
