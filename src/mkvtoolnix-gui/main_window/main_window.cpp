@@ -243,7 +243,11 @@ MainWindow::retranslateUi() {
 
   ui->tool->setUpdatesEnabled(false);
 
-  auto toolTitles = QStringList{} << QY("merge") /* << QY("extract") << QY("info") */ << QY("edit headers") << QY("edit chapters") /* << QY("edit tags") */ << QY("job queue") << QY("job output");
+  // Intentionally replacing the list right away again in order not to
+  // lose the translations for the three currently unimplemented
+  // tools.
+  auto toolTitles = QStringList{} << QY("extract") << QY("info") << QY("edit tags");
+  toolTitles      = QStringList{} << QY("merge") << QY("edit headers") << QY("edit chapters") << QY("job queue") << QY("job output");
 
   for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx) {
     ui->tool->setTabText(idx, toolTitles[idx]);
