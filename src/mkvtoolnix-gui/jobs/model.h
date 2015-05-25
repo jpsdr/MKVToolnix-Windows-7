@@ -75,6 +75,11 @@ public slots:
   void onNumUnacknowledgedWarningsOrErrorsChanged(uint64_t id, int numWarnings, int numErrors);
   void removeScheduledJobs();
 
+  void acknowledgeAllWarnings();
+  void acknowledgeSelectedWarnings(QAbstractItemView *view);
+  void acknowledgeAllErrors();
+  void acknowledgeSelectedErrors(QAbstractItemView *view);
+
 protected:
   QList<QStandardItem *> createRow(Job const &job) const;
   void setRowText(QList<QStandardItem *> const &items, Job const &job) const;

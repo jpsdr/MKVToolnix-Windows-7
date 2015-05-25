@@ -26,6 +26,7 @@ protected:
   Model *m_model;
 
   QAction *m_startAction, *m_removeAction, *m_removeDoneAction, *m_removeDoneOkAction, *m_removeAllAction;
+  QAction *m_acknowledgeSelectedWarningsAction, *m_acknowledgeAllWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeAllErrorsAction;
 
 public:
   explicit Tool(QWidget *parent = nullptr);
@@ -49,6 +50,9 @@ public slots:
   void resizeColumnsToContents() const;
 
   virtual void toolShown() override;
+
+  void acknowledgeSelectedWarnings();
+  void acknowledgeSelectedErrors();
 
 protected:
   void setupUiControls();

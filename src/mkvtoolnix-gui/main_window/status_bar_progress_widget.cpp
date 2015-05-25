@@ -1,7 +1,12 @@
 #include "common/common_pch.h"
 
+#include <QAction>
+#include <QMenu>
+
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h"
+#include "mkvtoolnix-gui/jobs/tool.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 
 namespace mtx { namespace gui {
@@ -20,6 +25,9 @@ StatusBarProgressWidget::StatusBarProgressWidget(QWidget *parent)
   m_timer.setInterval(1000);
 
   connect(&m_timer, &QTimer::timeout, this, &StatusBarProgressWidget::updateWarningsAndErrorsIcons);
+
+  connect(ui->warningsContainer, &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showWarningsContextMenu);
+  connect(ui->errorsContainer,   &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showErrorsContextMenu);
 }
 
 StatusBarProgressWidget::~StatusBarProgressWidget() {
@@ -85,6 +93,40 @@ StatusBarProgressWidget::updateWarningsAndErrorsIcons() {
   ui->errorsIconLabel  ->setPixmap(m_pixmaps[2 + errorOffset]);
 
   ++m_timerStep;
+}
+
+void
+StatusBarProgressWidget::showWarningsContextMenu(QPoint const &pos) {
+  if (!m_numWarnings)
+    return;
+
+  QMenu menu{this};
+
+  auto acknowledge = new QAction{&menu};
+  acknowledge->setText(QY("Acknowledge all &warnings"));
+
+  connect(acknowledge, &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllWarnings);
+
+  menu.addAction(acknowledge);
+
+  menu.exec(static_cast<QWidget *>(sender())->mapToGlobal(pos));
+}
+
+void
+StatusBarProgressWidget::showErrorsContextMenu(QPoint const &pos) {
+  if (!m_numErrors)
+    return;
+
+  QMenu menu{this};
+
+  auto acknowledge = new QAction{&menu};
+  acknowledge->setText(QY("Acknowledge all &errors"));
+
+  connect(acknowledge, &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllErrors);
+
+  menu.addAction(acknowledge);
+
+  menu.exec(static_cast<QWidget *>(sender())->mapToGlobal(pos));
 }
 
 }}

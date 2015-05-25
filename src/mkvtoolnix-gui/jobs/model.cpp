@@ -441,4 +441,38 @@ Model::flags(QModelIndex const &index)
   return index.isValid() ? defaultFlags | Qt::ItemIsDragEnabled : defaultFlags | Qt::ItemIsDropEnabled;
 }
 
+void
+Model::acknowledgeAllWarnings() {
+  QMutexLocker locked{&m_mutex};
+
+  for (auto const &job : m_jobsById)
+    job->acknowledgeWarnings();
+}
+
+void
+Model::acknowledgeAllErrors() {
+  QMutexLocker locked{&m_mutex};
+
+  for (auto const &job : m_jobsById)
+    job->acknowledgeErrors();
+}
+
+void
+Model::acknowledgeSelectedWarnings(QAbstractItemView *view) {
+  QMutexLocker locked{&m_mutex};
+
+  auto jobs = selectedJobs(view);
+  for (auto const &job : jobs)
+    job->acknowledgeWarnings();
+}
+
+void
+Model::acknowledgeSelectedErrors(QAbstractItemView *view) {
+  QMutexLocker locked{&m_mutex};
+
+  auto jobs = selectedJobs(view);
+  for (auto const &job : jobs)
+    job->acknowledgeErrors();
+}
+
 }}}

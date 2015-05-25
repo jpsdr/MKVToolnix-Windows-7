@@ -35,6 +35,9 @@ public slots:
   void setNumUnacknowledgedWarningsOrErrors(int numWarnings, int numErrors);
   void updateWarningsAndErrorsIcons();
 
+  void showWarningsContextMenu(QPoint const &pos);
+  void showErrorsContextMenu(QPoint const &pos);
+
 protected:
   void setLabelTexts();
 };

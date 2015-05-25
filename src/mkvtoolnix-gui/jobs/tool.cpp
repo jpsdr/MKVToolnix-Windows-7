@@ -25,6 +25,10 @@ Tool::Tool(QWidget *parent)
   , m_removeDoneAction{new QAction{this}}
   , m_removeDoneOkAction{new QAction{this}}
   , m_removeAllAction{new QAction{this}}
+  , m_acknowledgeSelectedWarningsAction{new QAction{this}}
+  , m_acknowledgeAllWarningsAction{new QAction{this}}
+  , m_acknowledgeSelectedErrorsAction{new QAction{this}}
+  , m_acknowledgeAllErrorsAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -60,6 +64,11 @@ Tool::setupUiControls() {
   connect(m_removeDoneAction,   SIGNAL(triggered()), this, SLOT(onRemoveDone()));
   connect(m_removeDoneOkAction, SIGNAL(triggered()), this, SLOT(onRemoveDoneOk()));
   connect(m_removeAllAction,    SIGNAL(triggered()), this, SLOT(onRemoveAll()));
+
+  connect(m_acknowledgeAllWarningsAction,      &QAction::triggered, m_model, &Model::acknowledgeAllWarnings);
+  connect(m_acknowledgeSelectedWarningsAction, &QAction::triggered, this,    &Tool::acknowledgeSelectedWarnings);
+  connect(m_acknowledgeAllErrorsAction,        &QAction::triggered, m_model, &Model::acknowledgeAllErrors);
+  connect(m_acknowledgeSelectedErrorsAction,   &QAction::triggered, this,    &Tool::acknowledgeSelectedErrors);
 }
 
 void
@@ -73,6 +82,9 @@ Tool::onContextMenu(QPoint pos) {
   m_removeDoneOkAction->setEnabled(hasJobs);
   m_removeAllAction->setEnabled(hasJobs);
 
+  m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
+  m_acknowledgeSelectedErrorsAction->setEnabled(hasSelection);
+
   QMenu menu{this};
 
   menu.addSeparator();
@@ -82,6 +94,11 @@ Tool::onContextMenu(QPoint pos) {
   menu.addAction(m_removeDoneAction);
   menu.addAction(m_removeDoneOkAction);
   menu.addAction(m_removeAllAction);
+  menu.addSeparator();
+  menu.addAction(m_acknowledgeSelectedWarningsAction);
+  menu.addAction(m_acknowledgeAllWarningsAction);
+  menu.addAction(m_acknowledgeSelectedErrorsAction);
+  menu.addAction(m_acknowledgeAllErrorsAction);
 
   menu.exec(ui->jobs->viewport()->mapToGlobal(pos));
 }
@@ -151,6 +168,11 @@ Tool::retranslateUi() {
   m_removeDoneOkAction->setText(QY("Remove &successfully completed jobs"));
   m_removeAllAction->setText(QY("Remove a&ll jobs"));
 
+  m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge selected warnings"));
+  m_acknowledgeAllWarningsAction->setText(QY("Acknowledge all &warnings"));
+  m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge selected errors"));
+  m_acknowledgeAllErrorsAction->setText(QY("Acknowledge all &errors"));
+
   setupToolTips();
 }
 
@@ -161,6 +183,16 @@ Tool::setupToolTips() {
 
 void
 Tool::toolShown() {
+}
+
+void
+Tool::acknowledgeSelectedWarnings() {
+  m_model->acknowledgeSelectedWarnings(ui->jobs);
+}
+
+void
+Tool::acknowledgeSelectedErrors() {
+  m_model->acknowledgeSelectedErrors(ui->jobs);
 }
 
 }}}
