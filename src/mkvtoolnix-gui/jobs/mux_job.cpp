@@ -119,7 +119,6 @@ MuxJob::processFinished(int exitCode,
                         QProcess::ExitStatus exitStatus) {
   if (!m_bytesRead.isEmpty())
     processLine(QString::fromUtf8(m_bytesRead));
-  // TODO: MuxJob::processFinished
 
   auto status = m_aborted                          ? Job::Aborted
               : QProcess::NormalExit != exitStatus ? Job::Failed
