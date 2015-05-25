@@ -25,10 +25,10 @@ protected:
   bool m_started, m_dontStartJobsNow;
 
 public:
-  // labels << QY("Description") << QY("Type") << QY("Status") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
-  static int const DescriptionColumn  = 0;
-  static int const TypeColumn         = 1;
-  static int const StatusColumn       = 2;
+  // labels << QY("Status") << QY("Description") << QY("Type") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
+  static int const StatusColumn       = 0;
+  static int const DescriptionColumn  = 1;
+  static int const TypeColumn         = 2;
   static int const ProgressColumn     = 3;
   static int const DateAddedColumn    = 4;
   static int const DateStartedColumn  = 5;

@@ -32,7 +32,7 @@ void
 Model::retranslateUi() {
   QMutexLocker locked{&m_mutex};
 
-  auto labels = QStringList{} << QY("Description") << QY("Type") << QY("Status") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
+  auto labels = QStringList{} << QY("Status") << QY("Description") << QY("Type") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
   setHorizontalHeaderLabels(labels);
 
   horizontalHeaderItem(DescriptionColumn) ->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
@@ -90,13 +90,13 @@ void
 Model::setRowText(QList<QStandardItem *> const &items,
                   Job const &job)
   const {
-  items.at(0)->setText(job.m_description);
-  items.at(1)->setText(job.displayableType());
-  items.at(2)->setText(Job::displayableStatus(job.m_status));
-  items.at(3)->setText(to_qs(boost::format("%1%%%") % job.m_progress));
-  items.at(4)->setText(Util::displayableDate(job.m_dateAdded));
-  items.at(5)->setText(Util::displayableDate(job.m_dateStarted));
-  items.at(6)->setText(Util::displayableDate(job.m_dateFinished));
+  items.at(StatusColumn)      ->setText(Job::displayableStatus(job.m_status));
+  items.at(DescriptionColumn) ->setText(job.m_description);
+  items.at(TypeColumn)        ->setText(job.displayableType());
+  items.at(ProgressColumn)    ->setText(to_qs(boost::format("%1%%%") % job.m_progress));
+  items.at(DateAddedColumn)   ->setText(Util::displayableDate(job.m_dateAdded));
+  items.at(DateStartedColumn) ->setText(Util::displayableDate(job.m_dateStarted));
+  items.at(DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
 
   items[DescriptionColumn ]->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
   items[ProgressColumn    ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -123,7 +123,7 @@ Model::createRow(Job const &job)
     items << new QStandardItem{};
   setRowText(items, job);
 
-  items[DescriptionColumn ]->setData(QVariant::fromValue(job.m_id), Util::JobIdRole);
+  items[0]->setData(QVariant::fromValue(job.m_id), Util::JobIdRole);
 
   return items;
 }
@@ -361,6 +361,7 @@ Model::loadJobs(QSettings &settings) {
   m_dontStartJobsNow = true;
 
   m_jobsById.clear();
+  m_toBeProcessed.clear();
   removeRows(0, rowCount());
 
   settings.beginGroup("jobQueue");
