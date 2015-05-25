@@ -210,4 +210,12 @@ Tool::onViewOutput() {
   mtx::gui::MainWindow::get()->changeToTool(tool);
 }
 
+void
+Tool::acknowledgeWarningsAndErrors(uint64_t id) {
+  m_model->withJob(id, [](Job &job) {
+    job.acknowledgeWarnings();
+    job.acknowledgeErrors();
+  });
+}
+
 }}}

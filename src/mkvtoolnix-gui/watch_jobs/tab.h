@@ -45,7 +45,7 @@ public slots:
 
   void onSaveOutput();
 
-protected:
+  void acknowledgeWarningsAndErrors();
 };
 
 }}}

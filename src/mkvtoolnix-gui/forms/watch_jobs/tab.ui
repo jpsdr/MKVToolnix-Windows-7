@@ -214,6 +214,16 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="acknowledgeWarningsAndErrorsButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>&amp;Acknowledge warnings/errors</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="saveOutputButton">
        <property name="enabled">
         <bool>false</bool>
@@ -250,6 +260,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>output</tabstop>
+  <tabstop>warnings</tabstop>
+  <tabstop>errors</tabstop>
+  <tabstop>acknowledgeWarningsAndErrorsButton</tabstop>
+  <tabstop>saveOutputButton</tabstop>
+  <tabstop>abortButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
  <slots>

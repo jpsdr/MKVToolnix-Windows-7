@@ -50,6 +50,7 @@ public:
   bool hasJobs() const;
 
   void withSelectedJobs(QAbstractItemView *view, std::function<void(Job &)> const &worker);
+  void withJob(uint64_t id, std::function<void(Job &)> const &worker);
 
   void removeJobsIf(std::function<bool(Job const &)> predicate);
   void add(JobPtr const &job);

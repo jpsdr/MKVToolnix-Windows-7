@@ -44,11 +44,12 @@ Tab::connectToJob(Jobs::Job const &job) {
   m_id          = job.m_id;
   auto connType = static_cast<Qt::ConnectionType>(Qt::AutoConnection | Qt::UniqueConnection);
 
-  connect(&job,                 &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged,   connType);
-  connect(&job,                 &Jobs::Job::progressChanged, this, &Tab::onProgressChanged, connType);
-  connect(&job,                 &Jobs::Job::lineRead,        this, &Tab::onLineRead,        connType);
-  connect(ui->saveOutputButton, &QPushButton::clicked,       this, &Tab::onSaveOutput,      connType);
-  connect(ui->abortButton,      &QPushButton::clicked,       &job, &Jobs::Job::abort,       connType);
+  connect(&job,                                   &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged,              connType);
+  connect(&job,                                   &Jobs::Job::progressChanged, this, &Tab::onProgressChanged,            connType);
+  connect(&job,                                   &Jobs::Job::lineRead,        this, &Tab::onLineRead,                   connType);
+  connect(ui->saveOutputButton,                   &QPushButton::clicked,       this, &Tab::onSaveOutput,                 connType);
+  connect(ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,       this, &Tab::acknowledgeWarningsAndErrors, connType);
+  connect(ui->abortButton,                        &QPushButton::clicked,       &job, &Jobs::Job::abort,                  connType);
 }
 
 void
@@ -57,7 +58,7 @@ Tab::onStatusChanged(uint64_t id) {
   if (!job) {
     ui->abortButton->setEnabled(false);
     ui->saveOutputButton->setEnabled(false);
-    mtx::gui::MainWindow::watchJobTool()->enableMenuActions();
+    MainWindow::watchJobTool()->enableMenuActions();
     return;
   }
 
@@ -67,7 +68,7 @@ Tab::onStatusChanged(uint64_t id) {
   ui->abortButton->setEnabled(Jobs::Job::Running == status);
   ui->saveOutputButton->setEnabled(true);
   ui->status->setText(Jobs::Job::displayableStatus(status));
-  mtx::gui::MainWindow::watchJobTool()->enableMenuActions();
+  MainWindow::watchJobTool()->enableMenuActions();
 
   if (Jobs::Job::Running == status)
     setInitialDisplay(*job);
@@ -91,6 +92,9 @@ Tab::onLineRead(QString const &line,
 
   storage->appendPlainText(line);
   m_fullOutput << line;
+
+  if ((Jobs::Job::WarningLine == type) || (Jobs::Job::ErrorLine == type))
+    ui->acknowledgeWarningsAndErrorsButton->setEnabled(true);
 }
 
 void
@@ -109,6 +113,8 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
 
   ui->abortButton->setEnabled(Jobs::Job::Running == job.m_status);
   ui->saveOutputButton->setEnabled(true);
+
+  ui->acknowledgeWarningsAndErrorsButton->setEnabled(job.numUnacknowledgedWarnings() || job.numUnacknowledgedErrors());
 }
 
 void
@@ -139,6 +145,12 @@ bool
 Tab::isSaveOutputEnabled()
   const {
   return ui->saveOutputButton->isEnabled();
+}
+
+void
+Tab::acknowledgeWarningsAndErrors() {
+  MainWindow::jobTool()->acknowledgeWarningsAndErrors(m_id);
+  ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
 }
 
 }}}

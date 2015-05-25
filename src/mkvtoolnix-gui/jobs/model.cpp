@@ -149,6 +149,15 @@ Model::withSelectedJobs(QAbstractItemView *view,
 }
 
 void
+Model::withJob(uint64_t id,
+               std::function<void(Job &)> const &worker) {
+  QMutexLocker locked{&m_mutex};
+
+  if (m_jobsById.contains(id))
+    worker(*m_jobsById[id]);
+}
+
+void
 Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
   QMutexLocker locked{&m_mutex};
 

@@ -54,6 +54,7 @@ public slots:
 
   void acknowledgeSelectedWarnings();
   void acknowledgeSelectedErrors();
+  void acknowledgeWarningsAndErrors(uint64_t id);
 
 protected:
   void setupUiControls();
