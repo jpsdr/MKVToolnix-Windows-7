@@ -107,11 +107,11 @@ void
 MainWindow::setupToolSelector() {
   // ui->tool->setIconSize(QSize{48, 48});
 
-  m_toolMerge         = new Merge::Tool{ui->tool, ui->menuMerge};
+  m_toolMerge         = new Merge::Tool{ui->tool,         ui->menuMerge};
   m_toolJobs          = new Jobs::Tool{ui->tool};
-  m_toolHeaderEditor  = new HeaderEditor::Tool{ui->tool, ui->menuHeaderEditor};
+  m_toolHeaderEditor  = new HeaderEditor::Tool{ui->tool,  ui->menuHeaderEditor};
   m_toolChapterEditor = new ChapterEditor::Tool{ui->tool, ui->menuChapterEditor};
-  m_watchJobTool      = new WatchJobs::Tool{ui->tool};
+  m_watchJobTool      = new WatchJobs::Tool{ui->tool,     ui->menuJobOutput};
 
   ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
   ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
@@ -132,16 +132,16 @@ MainWindow::setupToolSelector() {
                          << ui->actionGUIHeaderEditor << ui->actionGUIChapterEditor  << ui->actionGUITagEditor
                          << ui->actionGUIJobQueue     << ui->actionGUIJobOutput;
 
-  connect(ui->actionGUIMergeTool,      SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
-  connect(ui->actionGUIExtractionTool, SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
-  connect(ui->actionGUIInfoTool,       SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
-  connect(ui->actionGUIHeaderEditor,   SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
-  connect(ui->actionGUIChapterEditor,  SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
-  connect(ui->actionGUITagEditor,      SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
-  connect(ui->actionGUIJobQueue,       SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
-  connect(ui->actionGUIJobOutput,      SIGNAL(triggered()),                                    this,                SLOT(changeTool()));
+  connect(ui->actionGUIMergeTool,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIExtractionTool, &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIInfoTool,       &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIHeaderEditor,   &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIChapterEditor,  &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUITagEditor,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIJobQueue,       &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIJobOutput,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
 
-  connect(ui->tool,                    SIGNAL(currentChanged(int)),                            this,                SLOT(toolChanged(int)));
+  connect(ui->tool,                    &Util::FancyTabWidget::currentChanged,                  this,                &MainWindow::toolChanged);
   connect(m_toolJobs->model(),         &Jobs::Model::progressChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setProgress);
   connect(m_toolJobs->model(),         &Jobs::Model::jobStatsChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setJobStats);
   connect(m_toolJobs->model(),         &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, m_statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
@@ -162,10 +162,20 @@ MainWindow::showTheseMenusOnly(QList<QMenu *> const &menus) {
   showAndEnableMenu(*ui->menuMerge,         menus.contains(ui->menuMerge));
   showAndEnableMenu(*ui->menuHeaderEditor,  menus.contains(ui->menuHeaderEditor));
   showAndEnableMenu(*ui->menuChapterEditor, menus.contains(ui->menuChapterEditor));
+  showAndEnableMenu(*ui->menuJobOutput,     menus.contains(ui->menuJobOutput));
 }
 
 void
-MainWindow::changeTool() {
+MainWindow::changeToTool(ToolBase *tool) {
+  for (auto idx = 0, numTabs = ui->tool->count(); idx < numTabs; ++idx)
+    if (ui->tool->widget(idx) == tool) {
+      ui->tool->setCurrentIndex(idx);
+      return;
+    }
+}
+
+void
+MainWindow::changeToolToSender() {
   auto toolIndex = m_toolSelectionActions.indexOf(static_cast<QAction *>(sender()));
   if (-1 != toolIndex)
     ui->tool->setCurrentIndex(toolIndex);

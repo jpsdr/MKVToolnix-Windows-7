@@ -11,6 +11,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
+#include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 namespace mtx { namespace gui { namespace WatchJobs {
 
@@ -40,6 +41,7 @@ Tab::retranslateUi() {
 
 void
 Tab::connectToJob(Jobs::Job const &job) {
+  m_id          = job.m_id;
   auto connType = static_cast<Qt::ConnectionType>(Qt::AutoConnection | Qt::UniqueConnection);
 
   connect(&job,                 &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged,   connType);
@@ -55,6 +57,7 @@ Tab::onStatusChanged(uint64_t id) {
   if (!job) {
     ui->abortButton->setEnabled(false);
     ui->saveOutputButton->setEnabled(false);
+    mtx::gui::MainWindow::watchJobTool()->enableMenuActions();
     return;
   }
 
@@ -64,6 +67,7 @@ Tab::onStatusChanged(uint64_t id) {
   ui->abortButton->setEnabled(Jobs::Job::Running == status);
   ui->saveOutputButton->setEnabled(true);
   ui->status->setText(Jobs::Job::displayableStatus(status));
+  mtx::gui::MainWindow::watchJobTool()->enableMenuActions();
 
   if (Jobs::Job::Running == status)
     setInitialDisplay(*job);
@@ -102,6 +106,9 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   ui->finishedAt->setText(job.m_dateFinished.isValid() ? Util::displayableDate(job.m_dateFinished) : QY("not finished yet"));
 
   m_fullOutput = job.m_fullOutput;
+
+  ui->abortButton->setEnabled(Jobs::Job::Running == job.m_status);
+  ui->saveOutputButton->setEnabled(true);
 }
 
 void
@@ -120,6 +127,18 @@ Tab::onSaveOutput() {
 
   cfg.m_lastConfigDir = QFileInfo{fileName}.path();
   cfg.save();
+}
+
+uint64_t
+Tab::id()
+  const {
+  return m_id;
+}
+
+bool
+Tab::isSaveOutputEnabled()
+  const {
+  return ui->saveOutputButton->isEnabled();
 }
 
 }}}

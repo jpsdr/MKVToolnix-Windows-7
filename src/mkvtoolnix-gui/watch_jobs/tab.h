@@ -20,6 +20,7 @@ protected:
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
   QStringList m_fullOutput;
+  uint64_t m_id;
 
 public:
   explicit Tab(QWidget *parent);
@@ -29,6 +30,10 @@ public:
 
   virtual void connectToJob(mtx::gui::Jobs::Job const &job);
   virtual void setInitialDisplay(mtx::gui::Jobs::Job const &job);
+
+  uint64_t id() const;
+
+  bool isSaveOutputEnabled() const;
 
 signals:
   void abortJob();

@@ -107,10 +107,19 @@
     <addaction name="separator"/>
     <addaction name="actionChapterEditorClose"/>
    </widget>
+   <widget class="QMenu" name="menuJobOutput">
+    <property name="title">
+     <string>&amp;Job output</string>
+    </property>
+    <addaction name="actionJobOutputSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionJobOutputClose"/>
+   </widget>
    <addaction name="menuGUI"/>
    <addaction name="menuMerge"/>
    <addaction name="menuHeaderEditor"/>
    <addaction name="menuChapterEditor"/>
+   <addaction name="menuJobOutput"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionMergeNew">
@@ -449,6 +458,30 @@
    </property>
   </action>
   <action name="actionMergeClose">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionJobOutputSave">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionJobOutputClose">
    <property name="icon">
     <iconset resource="../../qt_resources.qrc">
      <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>

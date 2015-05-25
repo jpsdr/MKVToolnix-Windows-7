@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
+#include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 #include <QList>
 #include <QMessageBox>
@@ -21,6 +22,7 @@ Tool::Tool(QWidget *parent)
   , ui{new Ui::Tool}
   , m_model{new Model{this}}
   , m_startAction{new QAction{this}}
+  , m_viewOutputAction{new QAction{this}}
   , m_removeAction{new QAction{this}}
   , m_removeDoneAction{new QAction{this}}
   , m_removeDoneOkAction{new QAction{this}}
@@ -60,6 +62,7 @@ Tool::setupUiControls() {
   ui->jobs->setModel(m_model);
 
   connect(m_startAction,                       &QAction::triggered, this,    &Tool::onStart);
+  connect(m_viewOutputAction,                  &QAction::triggered, this,    &Tool::onViewOutput);
   connect(m_removeAction,                      &QAction::triggered, this,    &Tool::onRemove);
   connect(m_removeDoneAction,                  &QAction::triggered, this,    &Tool::onRemoveDone);
   connect(m_removeDoneOkAction,                &QAction::triggered, this,    &Tool::onRemoveDoneOk);
@@ -79,6 +82,7 @@ Tool::onContextMenu(QPoint pos) {
   m_model->withSelectedJobs(ui->jobs, [&hasSelection](Job &) { hasSelection = true; });
 
   m_startAction->setEnabled(hasSelection);
+  m_viewOutputAction->setEnabled(hasSelection);
   m_removeAction->setEnabled(hasSelection);
   m_removeDoneAction->setEnabled(hasJobs);
   m_removeDoneOkAction->setEnabled(hasJobs);
@@ -91,6 +95,8 @@ Tool::onContextMenu(QPoint pos) {
 
   menu.addSeparator();
   menu.addAction(m_startAction);
+  menu.addSeparator();
+  menu.addAction(m_viewOutputAction);
   menu.addSeparator();
   menu.addAction(m_removeAction);
   menu.addAction(m_removeDoneAction);
@@ -161,6 +167,7 @@ Tool::retranslateUi() {
   m_model->retranslateUi();
 
   m_startAction->setText(QY("&Start selected jobs automatically"));
+  m_viewOutputAction->setText(QY("&View output of selected jobs"));
   m_removeAction->setText(QY("&Remove selected jobs"));
   m_removeDoneAction->setText(QY("Remove &completed jobs"));
   m_removeDoneOkAction->setText(QY("Remove &successfully completed jobs"));
@@ -191,6 +198,14 @@ Tool::acknowledgeSelectedWarnings() {
 void
 Tool::acknowledgeSelectedErrors() {
   m_model->acknowledgeSelectedErrors(ui->jobs);
+}
+
+void
+Tool::onViewOutput() {
+  auto tool = mtx::gui::MainWindow::watchJobTool();
+  m_model->withSelectedJobs(ui->jobs, [tool](Job &job) { tool->viewOutput(job); });
+
+  mtx::gui::MainWindow::get()->changeToTool(tool);
 }
 
 }}}

@@ -25,7 +25,7 @@ protected:
 
   Model *m_model;
 
-  QAction *m_startAction, *m_removeAction, *m_removeDoneAction, *m_removeDoneOkAction, *m_removeAllAction;
+  QAction *m_startAction, *m_viewOutputAction, *m_removeAction, *m_removeDoneAction, *m_removeDoneOkAction, *m_removeAllAction;
   QAction *m_acknowledgeSelectedWarningsAction, *m_acknowledgeAllWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeAllErrorsAction;
 
 public:
@@ -40,6 +40,7 @@ public:
 
 public slots:
   void onStart();
+  void onViewOutput();
   void onRemove();
   void onRemoveDone();
   void onRemoveDoneOk();
