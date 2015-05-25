@@ -170,6 +170,7 @@ Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
 
   updateProgress();
   updateJobStats();
+  updateNumUnacknowledgedWarningsOrErrors();
 }
 
 void
