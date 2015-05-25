@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QCloseEvent>
+#include <QDesktopServices>
 #include <QIcon>
 #include <QLabel>
 #include <QSettings>
@@ -48,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   setupMenu();
   setupToolSelector();
+  setupHelpURLs();
 
   // Setup window properties.
   setWindowIcon(Util::loadIcon(Q("mkvtoolnix-gui.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
@@ -101,6 +103,11 @@ MainWindow::setupMenu() {
 #else
   ui->actionGUICheckForUpdates->setVisible(false);
 #endif  // HAVE_CURL_EASY_H
+
+  connect(ui->actionHelpFAQ,                   &QAction::triggered, this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpKnownProblems,         &QAction::triggered, this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpMkvmergeDocumentation, &QAction::triggered, this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpWebSite,               &QAction::triggered, this, &MainWindow::visitHelpURL);
 }
 
 void
@@ -147,6 +154,14 @@ MainWindow::setupToolSelector() {
   connect(m_toolJobs->model(),         &Jobs::Model::progressChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setProgress);
   connect(m_toolJobs->model(),         &Jobs::Model::jobStatsChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setJobStats);
   connect(m_toolJobs->model(),         &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, m_statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
+}
+
+void
+MainWindow::setupHelpURLs() {
+  m_helpURLs[ui->actionHelpFAQ]                   = "https://github.com/mbunkus/mkvtoolnix/wiki";
+  m_helpURLs[ui->actionHelpKnownProblems]         = "https://github.com/mbunkus/mkvtoolnix/wiki/Troubleshooting";
+  m_helpURLs[ui->actionHelpMkvmergeDocumentation] = "https://www.bunkus.org/videotools/mkvtoolnix/doc/mkvmerge.html";
+  m_helpURLs[ui->actionHelpWebSite]               = "https://www.bunkus.org/videotools/mkvtoolnix/";
 }
 
 void
@@ -364,6 +379,12 @@ void
 MainWindow::resizeEvent(QResizeEvent *event) {
   m_movingPixmapOverlay->resize(event->size());
   event->accept();
+}
+
+void
+MainWindow::visitHelpURL() {
+  if (m_helpURLs.contains(sender()))
+    QDesktopServices::openUrl(m_helpURLs[sender()]);
 }
 
 }}

@@ -59,6 +59,8 @@ protected:
   Util::WindowGeometrySaver m_geometrySaver;
   std::unique_ptr<Util::MovingPixmapOverlay> m_movingPixmapOverlay;
 
+  QHash<QObject *, QString> m_helpURLs;
+
 protected:                      // static
   static MainWindow *ms_mainWindow;
 
@@ -82,6 +84,7 @@ public slots:
   virtual void changeToolToSender();
   virtual void toolChanged(int index);
   virtual void editPreferences();
+  virtual void visitHelpURL();
 
 #if defined(HAVE_CURL_EASY_H)
   virtual void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t release);
@@ -105,6 +108,7 @@ public:                         // static
 protected:
   virtual void setupMenu();
   virtual void setupToolSelector();
+  virtual void setupHelpURLs();
   virtual QWidget *createNotImplementedWidget();
 
   virtual void closeEvent(QCloseEvent *event);
