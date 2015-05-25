@@ -18,7 +18,7 @@
 namespace mtx { namespace gui {
 
 static Iso639LanguageList s_iso639Languages, s_commonIso639Languages;
-static Iso3166CountryList s_iso3166_1Alpha2Countries;
+static Iso3166CountryList s_iso3166_1Alpha2Countries, s_commonIso3166_1Alpha2Countries;
 static CharacterSetList s_characterSets;
 static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_iso3166_1Alpha2CountryCodeToDescription;
 
@@ -76,6 +76,7 @@ App::reinitializeLanguageLists() {
   s_iso639Languages.clear();
   s_commonIso639Languages.clear();
   s_iso3166_1Alpha2Countries.clear();
+  s_commonIso3166_1Alpha2Countries.clear();
   s_iso639_2LanguageCodeToDescription.clear();
   s_iso3166_1Alpha2CountryCodeToDescription.clear();
   s_characterSets.clear();
@@ -118,26 +119,25 @@ App::initializeIso639Languages() {
 
 void
 App::initializeIso3166_1Alpha2Countries() {
-  using CountrySorter = std::tuple<int, QString, QString>;
-  auto toSort         = std::vector<CountrySorter>{};
-  auto &cfg           = Util::Settings::get();
+  auto &cfg = Util::Settings::get();
 
   s_iso3166_1Alpha2Countries.reserve(g_cctlds.size());
-  toSort.reserve(g_cctlds.size());
+  s_commonIso3166_1Alpha2Countries.reserve(g_cctlds.size());
 
   for (auto const &country : g_cctlds) {
     auto countryCode = Q(country.code);
     auto description = Q("%1 (%2)").arg(Q(country.country)).arg(countryCode);
-    auto commonOrder = cfg.m_oftenUsedCountries.indexOf(countryCode) != -1 ? 0 : 1;
+    auto isCommon    = cfg.m_oftenUsedCountries.indexOf(countryCode) != -1;
 
-    toSort.emplace_back(commonOrder, description, countryCode);
+    s_iso3166_1Alpha2Countries.emplace_back(description, countryCode);
+    if (isCommon)
+      s_commonIso3166_1Alpha2Countries.emplace_back(description, countryCode);
+
     s_iso3166_1Alpha2CountryCodeToDescription[countryCode] = description;
   }
 
-  brng::sort(toSort);
-
-  for (auto const &countrySorter : toSort)
-    s_iso3166_1Alpha2Countries.emplace_back(std::get<1>(countrySorter), std::get<2>(countrySorter));
+  brng::sort(s_iso3166_1Alpha2Countries);
+  brng::sort(s_commonIso3166_1Alpha2Countries);
 }
 
 void
@@ -178,6 +178,12 @@ Iso3166CountryList const &
 App::iso3166_1Alpha2Countries() {
   initializeLanguageLists();
   return s_iso3166_1Alpha2Countries;
+}
+
+Iso3166CountryList const &
+App::commonIso3166_1Alpha2Countries() {
+  initializeLanguageLists();
+  return s_commonIso3166_1Alpha2Countries;
 }
 
 CharacterSetList const &

@@ -38,6 +38,7 @@ public:
   static Iso639LanguageList const &iso639Languages();
   static Iso639LanguageList const &commonIso639Languages();
   static Iso3166CountryList const &iso3166_1Alpha2Countries();
+  static Iso3166CountryList const &commonIso3166_1Alpha2Countries();
   static QString const &descriptionFromIso639_2LanguageCode(QString const &code);
   static QString const &descriptionFromIso3166_1Alpha2CountryCode(QString const &code);
   static CharacterSetList const &characterSets();

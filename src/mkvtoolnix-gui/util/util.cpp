@@ -103,12 +103,16 @@ setupCountryComboBox(QComboBox &comboBox,
   if (withEmpty)
     comboBox.addItem(emptyTitle, Q(""));
 
+  auto &commonCountries = App::commonIso3166_1Alpha2Countries();
+  if (!commonCountries.empty()) {
+    for (auto const &country : commonCountries)
+      comboBox.addItem(country.first, country.second);
+
+    comboBox.insertSeparator(commonCountries.size() + (withEmpty ? 1 : 0));
+  }
+
   for (auto const &country : App::iso3166_1Alpha2Countries())
     comboBox.addItem(country.first, country.second);
-
-  auto &cfg = Settings::get();
-  if (!cfg.m_oftenUsedCountries.isEmpty())
-    comboBox.insertSeparator(cfg.m_oftenUsedCountries.count() + (withEmpty ? 1 : 0));
 
   comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
