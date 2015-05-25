@@ -23,9 +23,9 @@ MuxJob::MuxJob(Status status,
   , m_config{config}
   , m_aborted{}
 {
- connect(&m_process, SIGNAL(readyReadStandardOutput()),          this, SLOT(readAvailable()));
- connect(&m_process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processFinished(int,QProcess::ExitStatus)));
- connect(&m_process, SIGNAL(error(QProcess::ProcessError)),      this, SLOT(processError(QProcess::ProcessError)));
+ connect(&m_process, &QProcess::readyReadStandardOutput,                                              this, &MuxJob::readAvailable);
+ connect(&m_process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &MuxJob::processFinished);
+ connect(&m_process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error),       this, &MuxJob::processError);
 }
 
 MuxJob::~MuxJob() {

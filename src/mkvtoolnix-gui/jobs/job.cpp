@@ -19,7 +19,7 @@ Job::Job(Status status)
   , m_errorsAcknowledged{}
   , m_mutex{QMutex::Recursive}
 {
-  connect(this, SIGNAL(lineRead(const QString&,mtx::gui::Jobs::Job::LineType)), this, SLOT(addLineToInternalLogs(const QString&,mtx::gui::Jobs::Job::LineType)));
+  connect(this, &Job::lineRead, this, &Job::addLineToInternalLogs);
 }
 
 Job::~Job() {
