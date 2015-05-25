@@ -412,6 +412,7 @@ Model::loadJobs(QSettings &settings) {
   m_toBeProcessed.clear();
   removeRows(0, rowCount());
 
+  settings.remove("jobQueue");
   settings.beginGroup("jobQueue");
   auto numberOfJobs = settings.value("numberOfJobs").toUInt();
   settings.endGroup();
