@@ -16,6 +16,9 @@
 #include "common/common_pch.h"
 
 #include <algorithm>
+#if defined(HAVE_UNISTD_H)
+# include <unistd.h>
+#endif  // HAVE_UNISTD_H
 
 #include "avilib.h"
 #include "common/ac3.h"

@@ -15,7 +15,9 @@
 
 #ifdef SYS_WINDOWS
 # include <windows.h>
-#endif
+#elsif defined(HAVE_UNISTD_H)
+# include <unistd.h>
+#endif  // HAVE_UNISTD_H
 #if defined(HAVE_SYS_SYSCALL_H)
 # include <sys/syscall.h>
 #endif
