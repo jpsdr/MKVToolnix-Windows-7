@@ -10,8 +10,7 @@ LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 	dh $@ --parallel
 
 override_dh_auto_configure:
-	dh_auto_configure -- \
-	--enable-gui
+	dh_auto_configure
 
 #	exit 1
 
@@ -35,8 +34,8 @@ override_dh_clean:
 	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
 
 override_dh_install:
-	./drake install 'install:translations:guides' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
-	./drake install 'install:shared' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+	./drake install 'install:translations:guides' 'install:shared' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+	./drake 'install:manpages' DESTDIR=$(CURDIR)/debian/tmp USE_QT=yes BUILD_MKVTOOLNIX_GUI=yes docdir='$${datarootdir}/doc/mkvtoolnix-gui'
 
 	dh_install --fail-missing -Xmkvtoolnix.xml
 
