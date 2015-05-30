@@ -31,12 +31,16 @@ kax_file_c::kax_file_c(mm_io_cptr &in)
   , m_resynced(false)
   , m_resync_start_pos(0)
   , m_file_size(m_in->get_size())
+  , m_segment_end{}
   , m_timecode_scale{TIMECODE_SCALE}
   , m_last_timecode{-1}
   , m_es(new EbmlStream(*m_in))
   , m_debug_read_next{"kax_file|kax_file_read_next"}
   , m_debug_resync{   "kax_file|kax_file_resync"}
 {
+}
+
+kax_file_c::~kax_file_c() {
 }
 
 EbmlElement *
@@ -69,11 +73,11 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
   return nullptr;
 }
 
-kax_file_c::~kax_file_c() {
-}
-
 EbmlElement *
 kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
+  if (m_segment_end && (m_in->getFilePointer() >= m_segment_end))
+    return nullptr;
+
   m_resynced         = false;
   m_resync_start_pos = 0;
 
@@ -133,6 +137,9 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
 
 EbmlElement *
 kax_file_c::read_one_element() {
+  if (m_segment_end && (m_in->getFilePointer() >= m_segment_end))
+    return nullptr;
+
   int upper_lvl_el = 0;
   EbmlElement *l1  = m_es->FindNextElement(EBML_CLASS_CONTEXT(KaxSegment), upper_lvl_el, 0xFFFFFFFFL, true);
 
@@ -192,6 +199,9 @@ kax_file_c::resync_to_level1_element(uint32_t wanted_id) {
 
 EbmlElement *
 kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
+  if (m_segment_end && (m_in->getFilePointer() >= m_segment_end))
+    return nullptr;
+
   m_resynced         = true;
   m_resync_start_pos = m_in->getFilePointer();
 
@@ -322,4 +332,9 @@ kax_file_c::set_timecode_scale(int64_t timecode_scale) {
 void
 kax_file_c::set_last_timecode(int64_t last_timecode) {
   m_last_timecode = last_timecode;
+}
+
+void
+kax_file_c::set_segment_end(EbmlElement const &segment) {
+  m_segment_end = segment.IsFiniteSize() ? segment.GetElementPosition() + segment.HeadSize() + segment.GetSize() : m_in->get_size();
 }
