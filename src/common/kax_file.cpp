@@ -338,3 +338,9 @@ void
 kax_file_c::set_segment_end(EbmlElement const &segment) {
   m_segment_end = segment.IsFiniteSize() ? segment.GetElementPosition() + segment.HeadSize() + segment.GetSize() : m_in->get_size();
 }
+
+uint64_t
+kax_file_c::get_segment_end()
+  const {
+  return m_segment_end;
+}

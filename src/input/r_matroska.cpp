@@ -1181,12 +1181,22 @@ kax_reader_c::read_headers_internal() {
       return false;
     }
 
+    m_in_file->set_segment_end(*l0);
+
     // We've got our segment, so let's find the m_tracks
     int upper_lvl_el = 0;
-    m_tc_scale         = TIMECODE_SCALE;
-    EbmlElement *l1  = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true, 1);
+    m_tc_scale       = TIMECODE_SCALE;
+    EbmlElement *l1  = nullptr;
 
-    while (l1 && (0 >= upper_lvl_el)) {
+    while (m_in->getFilePointer() < m_in_file->get_segment_end()) {
+      if (!l1)
+        l1 = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true, 1);
+
+      if (!l1 || (0 < upper_lvl_el)) {
+        delete l1;
+        break;
+      }
+
       if (Is<KaxInfo>(l1))
         m_deferred_l1_positions[dl1t_info].push_back(l1->GetElementPosition());
 
@@ -1237,6 +1247,8 @@ kax_reader_c::read_headers_internal() {
       l1->SkipData(*m_es, EBML_CONTEXT(l1));
       delete l1;
       l1 = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true);
+      if (!l1)
+        break;
 
     } // while (l1)
 

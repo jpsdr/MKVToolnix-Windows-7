@@ -54,6 +54,7 @@ public:
   virtual void set_timecode_scale(int64_t timecode_scale);
   virtual void set_last_timecode(int64_t last_timecode);
   virtual void set_segment_end(EbmlElement const &segment);
+  virtual uint64_t get_segment_end() const;
 
 protected:
   virtual EbmlElement *read_one_element();
