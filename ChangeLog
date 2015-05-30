@@ -1,5 +1,14 @@
 2015-05-30  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: the track statistics tags of Matroska source
+        files are always discarded, no matter whether or not they're to be
+        created for the output file. That way they won't be reported as
+        track tags by mkvmerge's identification mode. This makes it easier
+        for the user to create output files without track statistics tags
+        as (s)he only has to use the option
+        »--disable-track-statistics-tags« and not disable all the track
+        tags as well anymore. Fixes #1186.
+
         * mkvmerge, mkvinfo, mkvextract: bug fix: fixed a crash with
         certain types of invalid Matroska files. Fix for #1183.
 
