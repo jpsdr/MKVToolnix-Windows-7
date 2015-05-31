@@ -2353,7 +2353,11 @@ display_playlist_scan_progress(size_t num_scanned,
     return;
 
   auto current_percentage = (num_scanned * 1000 + 5) / total_num_to_scan / 10;
-  mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");
+
+  if (g_gui_mode)
+    mxinfo(boost::format("#GUI#progress %1%%%\n") % current_percentage);
+  else
+    mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_percentage % "\r");
 }
 
 static filelist_cptr
