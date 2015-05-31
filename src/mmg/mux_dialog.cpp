@@ -292,7 +292,7 @@ mux_dialog::on_output_available(wxCommandEvent &evt) {
     m_start_time                 = mtx::sys::get_current_time_millis();
     m_next_remaining_time_update = m_start_time + 8000;
 
-  } else if (line.Find(Z("Progress")) == 0) {
+  } else if (line.Find(wxT("#GUI#progress ")) == 0) {
     if (line.Find(wxT("%")) != 0) {
       line.Remove(line.Find(wxT("%")));
       auto tmp   = line.AfterLast(wxT(' '));

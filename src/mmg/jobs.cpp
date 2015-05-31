@@ -259,7 +259,7 @@ job_run_dialog::process_input() {
           m_next_remaining_time_update_total = m_next_remaining_time_update;
         }
 
-      } else if (wx_line.Find(Z("Progress")) == 0) {
+      } else if (wx_line.Find(wxT("#GUI#progress")) == 0) {
         int percent_pos = wx_line.Find(wxT("%"));
         if (0 < percent_pos) {
           wx_line.Remove(percent_pos);

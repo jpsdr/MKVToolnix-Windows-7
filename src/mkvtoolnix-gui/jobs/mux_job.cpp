@@ -99,7 +99,7 @@ MuxJob::processLine(QString const &rawLine) {
     return;
   }
 
-  auto matches = QRegularExpression{"^Progress: *(\\d+)%"}.match(line);
+  auto matches = QRegularExpression{"^#GUI#progress\\s+(\\d+)%"}.match(line);
   if (matches.hasMatch()) {
     setProgress(matches.captured(1).toUInt());
     return;
