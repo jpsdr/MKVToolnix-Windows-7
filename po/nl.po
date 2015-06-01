@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-06-01 22:04+0200\n"
+"POT-Creation-Date: 2015-06-01 22:50+0200\n"
 "PO-Revision-Date: 2015-05-11 12:59+0100\n"
 "Last-Translator: René Maassen <bmom43@gmail.com>\n"
 "Language-Team: Dutch <bmom43@gmail.com>\n"
@@ -2550,6 +2550,11 @@ msgstr "Breek af na huidige taak"
 msgid "Abort processing after the current job"
 msgstr "Breek uitvoering af na huidige taak"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:288
+#, fuzzy
+msgid "Abort running jobs"
+msgstr "Breek af na huidige taak"
+
 #: src/mmg/jobs.cpp:99
 msgid "Abort the muxing process right now"
 msgstr "Breek het samenvoeg proces nu af"
@@ -4588,6 +4593,10 @@ msgstr "Niet splitsen"
 msgid "Do not write meta seek elements at all."
 msgstr "Schrijf helemaal geen meta zoek elementen."
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:288
+msgid "Do you want to abort that job and quit?"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:1553
 #, boost-format
 msgid "Doc type read version: %1%"
@@ -4940,7 +4949,7 @@ msgstr "Fout bij schrijven MATROSKA bestand"
 msgid "Error:"
 msgstr "Fout:"
 
-#: src/common/output.cpp:79 src/mkvtoolnix-gui/jobs/job.cpp:86
+#: src/common/output.cpp:79 src/mkvtoolnix-gui/jobs/job.cpp:87
 msgid "Error: "
 msgstr "Fout: "
 
@@ -11751,6 +11760,10 @@ msgstr "Er zijn géén cues voor spoor ID %1%.\n"
 msgid "There is a new version available online."
 msgstr "Er is online een nieuwere versie beschikbaar."
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:288
+msgid "There is currently a job running."
+msgstr ""
+
 #: src/merge/output_control.cpp:855 src/merge/output_control.cpp:865
 #, boost-format
 msgid ""
@@ -12009,7 +12022,7 @@ msgid ""
 msgstr ""
 "Dit bestand bevat geen geldige hoofdstukken. Fout bericht van ontleder: %1%"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:83
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:84
 msgid "This has not been implemented yet."
 msgstr "Dit is nog niet geïmplementeerd."
 
@@ -13079,7 +13092,7 @@ msgstr ""
 msgid "Warning:"
 msgstr "Waarschuwing:"
 
-#: src/common/output.cpp:82 src/mkvtoolnix-gui/jobs/job.cpp:85
+#: src/common/output.cpp:82 src/mkvtoolnix-gui/jobs/job.cpp:86
 msgid "Warning: "
 msgstr "Waarschuwing: "
 
@@ -13386,7 +13399,7 @@ msgstr "[%1% beeld voor spoor %2%, tijd code %3%]"
 msgid "aborted"
 msgstr "afgebroken"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:103
+#: src/mkvtoolnix-gui/jobs/job.cpp:104
 msgid "aborted by user"
 msgstr "afgebroken door gebruiker"
 
@@ -13519,11 +13532,11 @@ msgstr "kolom volgorde (links eerst)"
 msgid "column interleaved (right first)"
 msgstr "kolom volgorde (rechts eerst)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:100 src/mmg/jobs.cpp:362
+#: src/mkvtoolnix-gui/jobs/job.cpp:101 src/mmg/jobs.cpp:362
 msgid "completed OK"
 msgstr "voltooid OK"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:101 src/mmg/jobs.cpp:366
+#: src/mkvtoolnix-gui/jobs/job.cpp:102 src/mmg/jobs.cpp:366
 msgid "completed with warnings"
 msgstr "voltooid met waarschuwingen"
 
@@ -13565,7 +13578,7 @@ msgstr "automatisch te bepalen"
 msgid "disable all"
 msgstr "Vink alles uit"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:104
+#: src/mkvtoolnix-gui/jobs/job.cpp:105
 msgid "disabled"
 msgstr "uitgezet"
 
@@ -13599,17 +13612,17 @@ msgstr "gedaan/waarschuwingen"
 msgid "down"
 msgstr "Omlaag"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:125
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:265
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:126
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:266
 msgid "edit chapters"
 msgstr "bewerk hoofdstukken"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:124
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:265
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:125
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:266
 msgid "edit headers"
 msgstr "bewerk koppen"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:264
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:265
 msgid "edit tags"
 msgstr "bewerk markeringen"
 
@@ -13629,11 +13642,11 @@ msgstr "versleuteling"
 msgid "even if there were warnings"
 msgstr "zelfs als er waarschuwingen waren"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:264
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:265
 msgid "extract"
 msgstr "splitsen"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:102 src/mmg/jobs.cpp:370
+#: src/mkvtoolnix-gui/jobs/job.cpp:103 src/mmg/jobs.cpp:370
 #: src/mmg/jobs.cpp:563
 msgid "failed"
 msgstr "mislukt"
@@ -13752,7 +13765,7 @@ msgstr "hoogst"
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() mislukt. Resultaat: %1%\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:264
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:265
 msgid "info"
 msgstr "info"
 
@@ -13761,13 +13774,13 @@ msgstr "info"
 msgid "is being estimated"
 msgstr "Wordt berekend..."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:128
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:265
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:129
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:266
 msgid "job output"
 msgstr "taak uitvoer"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:127
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:265
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:128
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:266
 msgid "job queue"
 msgstr "taak wachtrij"
 
@@ -13999,13 +14012,13 @@ msgstr ""
 "memory.cpp/saferealloc() opgeroepen van bestand %1%, regel %2%: realloc() "
 "retourneerde nullptr voor de grootte van %3% bytes.\n"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:140
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:121
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:265
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:122
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:266
 msgid "merge"
 msgstr "samenvoegen"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:147
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:152
 msgid "merging to file »%1« in directory »%2«"
 msgstr "samenvoegen naar bestand »%1« in map »%2«"
 
@@ -14492,11 +14505,11 @@ msgstr "doorvoer"
 msgid "pending"
 msgstr "Wachtend"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:98
+#: src/mkvtoolnix-gui/jobs/job.cpp:99
 msgid "pending automatic start"
 msgstr "in afwachting van een automatische start"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:97
+#: src/mkvtoolnix-gui/jobs/job.cpp:98
 msgid "pending manual start"
 msgstr "in afwachting van een handmatige start"
 
@@ -14576,7 +14589,7 @@ msgstr "rij volgorde (links eerst)"
 msgid "row interleaved (right first)"
 msgstr "rij volgorde (rechts eerst)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:99
+#: src/mkvtoolnix-gui/jobs/job.cpp:100
 msgid "running"
 msgstr "werkend"
 
@@ -14713,7 +14726,7 @@ msgstr "und (Onbekend)"
 #: src/info/mkvinfo.cpp:938 src/input/r_matroska.cpp:100
 #: src/input/r_matroska.cpp:2353
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
-#: src/mkvtoolnix-gui/jobs/job.cpp:105
+#: src/mkvtoolnix-gui/jobs/job.cpp:106
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:45
 #: src/mmg/header_editor/value_page.cpp:150 src/mmg/mmg.cpp:68
 #: src/mmg/tabs/input.cpp:570 src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
