@@ -225,7 +225,7 @@ SourceFile::loadSettings(MuxConfig::Loader &l) {
 
 void
 SourceFile::fixAssociations(MuxConfig::Loader &l) {
-  if (isRegular())
+  if (isRegular() || isAdditionalPart())
     m_appendedTo = nullptr;
 
   else {
