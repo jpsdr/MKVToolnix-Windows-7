@@ -74,7 +74,7 @@ Tab::onStatusChanged(uint64_t id) {
   if (Jobs::Job::Running == status)
     setInitialDisplay(*job);
 
-  else if ((Jobs::Job::DoneOk == status) || (Jobs::Job::DoneWarnings == status) || (Jobs::Job::Failed == status) || (Jobs::Job::Aborted == status))
+  else if (mtx::included_in(status, Jobs::Job::DoneOk, Jobs::Job::DoneWarnings, Jobs::Job::Failed, Jobs::Job::Aborted))
     ui->finishedAt->setText(Util::displayableDate(job->m_dateFinished));
 }
 
@@ -94,7 +94,7 @@ Tab::onLineRead(QString const &line,
   storage->appendPlainText(line);
   m_fullOutput << line;
 
-  if ((Jobs::Job::WarningLine == type) || (Jobs::Job::ErrorLine == type))
+  if (mtx::included_in(type, Jobs::Job::WarningLine, Jobs::Job::ErrorLine))
     ui->acknowledgeWarningsAndErrorsButton->setEnabled(true);
 }
 
