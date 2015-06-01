@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 7.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-05-25 22:51+0200\n"
+"POT-Creation-Date: 2015-06-01 22:04+0200\n"
 "PO-Revision-Date: 2015-05-23 22:50+0200\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "İz ID %1% için geçici TTA dosyası son TTA dosyasına kopyalandı. Bu biraz "
 "zaman alabilir.\n"
 
-#: src/merge/output_control.cpp:228
+#: src/merge/output_control.cpp:229
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). "
@@ -865,8 +865,8 @@ msgstr " Parça bilgisi işleme:\n"
 msgid " at %1%"
 msgstr " de %1%"
 
-#: src/merge/output_control.cpp:236 src/merge/output_control.cpp:245
-#: src/merge/output_control.cpp:253 src/merge/output_control.cpp:260
+#: src/merge/output_control.cpp:237 src/merge/output_control.cpp:246
+#: src/merge/output_control.cpp:254 src/merge/output_control.cpp:261
 msgid " done\n"
 msgstr " bitti\n"
 
@@ -1002,7 +1002,7 @@ msgstr "%1%.%2% MiB"
 msgid "%1%: Could not open the sub file"
 msgstr "%1%: Sub dosyası açılamadı"
 
-#: src/common/kax_file.cpp:202
+#: src/common/kax_file.cpp:212
 #, boost-format
 msgid ""
 "%1%: Error in the Matroska file structure at position %2%. Resyncing to the "
@@ -1011,13 +1011,13 @@ msgstr ""
 "%1%: %2% konumunda Matroska dosya yapısında hata. Sonraki seviye 1 öğe "
 "yeniden eşitleniyor.\n"
 
-#: src/common/kax_file.cpp:56 src/common/kax_file.cpp:61
+#: src/common/kax_file.cpp:60 src/common/kax_file.cpp:65
 #, boost-format
 msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: beklenmedik bir olay meydana geldi (ileti: %2%; türü: %3%)."
 
-#: src/common/kax_file.cpp:66 src/input/r_matroska.cpp:1267
-#: src/input/r_matroska.cpp:1924
+#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1334
+#: src/input/r_matroska.cpp:1991
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: bilinmeyen bir istisna meydana geldi."
@@ -1371,10 +1371,10 @@ msgstr "Ç&oklama"
 msgid "&Name:"
 msgstr "&Adı:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:195
+#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:197
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:337
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:363
-#: src/mkvtoolnix-gui/forms/merge/tool.h:195
+#: src/mkvtoolnix-gui/forms/merge/tool.h:198
 msgid "&New"
 msgstr "&Yeni"
 
@@ -1402,18 +1402,18 @@ msgstr "&Aç"
 msgid "&Open\tCtrl-O"
 msgstr "&Aç\tCtrl-O"
 
-#: src/mkvtoolnix-gui/forms/header_editor/tool.h:181
+#: src/mkvtoolnix-gui/forms/header_editor/tool.h:183
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:355
 msgid "&Open Matroska file"
 msgstr "Matroska dosyası &aç"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:196
+#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:198
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:365
 msgid "&Open Matroska or XML file"
 msgstr "Matroska veya XML dosyası &aç"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:341
-#: src/mkvtoolnix-gui/forms/merge/tool.h:196
+#: src/mkvtoolnix-gui/forms/merge/tool.h:199
 msgid "&Open settings"
 msgstr "Ayarları &aç"
 
@@ -1467,7 +1467,7 @@ msgstr "Tamamlamadan sonra işi kuyruktan &kaldır"
 msgid "&Remove selected edition or chapter"
 msgstr "Seçilen yayını ya da bölümü &kaldır"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:173
+#: src/mkvtoolnix-gui/jobs/tool.cpp:199
 msgid "&Remove selected jobs"
 msgstr "Seçilen işleri &kaldır"
 
@@ -1531,7 +1531,7 @@ msgstr "&Başlat"
 msgid "&Start && end:"
 msgstr "&Başlangıç ve bitiş:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:171
+#: src/mkvtoolnix-gui/jobs/tool.cpp:197
 msgid "&Start selected jobs automatically"
 msgstr "Seçilen işleri otomatik olarak &başlat"
 
@@ -1572,7 +1572,7 @@ msgstr "&Doğrula"
 msgid "&View log"
 msgstr "&Günlüğü göster"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:172
+#: src/mkvtoolnix-gui/jobs/tool.cpp:198
 #, fuzzy
 msgid "&View output of selected jobs"
 msgstr "Seçilen işlerin çıktısı:"
@@ -1691,7 +1691,7 @@ msgstr "'%1%' geçerli ccTLD ülke kodu değil."
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'%1%' '--track-order %2%' içindeki geçerli dosya ID değil.\n"
 
-#: src/common/hacks.cpp:92
+#: src/common/hacks.cpp:90
 #, boost-format
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' geçerli kurcalama değil.\n"
@@ -1833,7 +1833,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Aşağıdaki dosyalar dahi işleniyor: %2%\n"
 
-#: src/input/r_matroska.cpp:1545
+#: src/input/r_matroska.cpp:1612
 #, boost-format
 msgid ""
 "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. "
@@ -2208,7 +2208,7 @@ msgstr "(adlandırılmamış)"
 msgid "<unsaved file>"
 msgstr "<kaydedilmemiş dosya>"
 
-#: src/input/r_matroska.cpp:1945 src/input/r_matroska.cpp:2041
+#: src/input/r_matroska.cpp:2012 src/input/r_matroska.cpp:2108
 #, boost-format
 msgid ""
 "A block was found at timestamp %1% for track number %2%. However, no headers "
@@ -2467,22 +2467,22 @@ msgstr "%s üzerindeki işlem durduruldu"
 msgid "About mkvinfo"
 msgstr "mkvinfo Hakkında"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:181
+#: src/mkvtoolnix-gui/jobs/tool.cpp:207
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:123
 msgid "Acknowledge all &errors"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:179
+#: src/mkvtoolnix-gui/jobs/tool.cpp:205
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:106
 #, fuzzy
 msgid "Acknowledge all &warnings"
 msgstr "uyarılarla tamamlandı"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:180
+#: src/mkvtoolnix-gui/jobs/tool.cpp:206
 msgid "Acknowledge selected errors"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:178
+#: src/mkvtoolnix-gui/jobs/tool.cpp:204
 #, fuzzy
 msgid "Acknowledge selected warnings"
 msgstr "uyarılarla tamamlandı"
@@ -2694,7 +2694,7 @@ msgstr "Tüm bölüm girişleri geçerli."
 #: src/mkvtoolnix-gui/merge/tab.cpp:163 src/mkvtoolnix-gui/merge/tab.cpp:187
 #: src/mkvtoolnix-gui/merge/tool.cpp:140
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:124
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:126
 msgid "All files"
 msgstr "Tüm dosyalar"
 
@@ -2867,7 +2867,7 @@ msgstr ""
 "Önceki parçayla ilgili olarak gözden kaçan\n"
 "dosya adı."
 
-#: src/merge/mkvmerge.cpp:2545
+#: src/merge/mkvmerge.cpp:2549
 msgid "An exception occurred when writing the output file."
 msgstr "Çıktı dosyası yazılırken bir istisna meydana geldi."
 
@@ -2934,7 +2934,7 @@ msgstr ""
 "Dosyadan bir izi aynı dosyadan başka bir ize eklemeye izin verilmez. İz "
 "numaraları %u ve %u için durum böyledir."
 
-#: src/merge/output_control.cpp:1653
+#: src/merge/output_control.cpp:1660
 #, boost-format
 msgid ""
 "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% "
@@ -3262,7 +3262,7 @@ msgid "Category is not NUL terminated"
 msgstr "Kategori NUL olarak sonlandırılmaz"
 
 #: src/extract/timecodes_v2.cpp:382 src/extract/tracks.cpp:513
-#: src/info/mkvinfo.cpp:1708
+#: src/info/mkvinfo.cpp:1707
 msgid "Caught exception"
 msgstr "Yakalanan istisna"
 
@@ -3447,7 +3447,7 @@ msgstr "Bölümler"
 msgid "Chapters (%d entries) from %s"
 msgstr "Bölümler (%d giriş), dosya: %s"
 
-#: src/merge/output_control.cpp:1208
+#: src/merge/output_control.cpp:1215
 msgid ""
 "Chapters are not allowed in WebM compliant files. No chapters will be "
 "written into any output file.\n"
@@ -3593,7 +3593,7 @@ msgid "Close the current file without saving"
 msgstr "Şu anki dosyayı kaydetmeden kapat"
 
 #: src/extract/timecodes_v2.cpp:284 src/extract/tracks.cpp:436
-#: src/info/mkvinfo.cpp:1668
+#: src/info/mkvinfo.cpp:1595
 msgid "Cluster"
 msgstr "Küme"
 
@@ -3829,7 +3829,7 @@ msgstr ""
 "Ses izi %1% için bir indeks bulunamadı (avilib hata iletisi: %2%). İz "
 "atlanıyor.\n"
 
-#: src/merge/output_control.cpp:1579
+#: src/merge/output_control.cpp:1586
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "Eklenirken gptzr bulunamadı. %1%\n"
@@ -3961,7 +3961,7 @@ msgstr ""
 msgid "Create a new chapter file"
 msgstr "Yeni bir bölüm dosyası oluştur"
 
-#: src/mkvtoolnix-gui/forms/merge/tool.h:194
+#: src/mkvtoolnix-gui/forms/merge/tool.h:197
 msgid ""
 "Create a new one or open an existing one via the »merge« menu or the buttons "
 "below."
@@ -4209,15 +4209,15 @@ msgstr "DTS başlığı bilgisi değişti! - Yeni biçim:\n"
 msgid "DTS/DTS-HD (Digital Theater System)"
 msgstr "DTS/DTS-HD (Digital Theater System)"
 
-#: src/common/dts.cpp:417
+#: src/common/dts.cpp:421
 msgid "DTS_Header problem: invalid frame bytes size\n"
 msgstr "DTS_Başlığı sorunu: geçersiz kare bayt boyutu\n"
 
-#: src/common/dts.cpp:482
+#: src/common/dts.cpp:486
 msgid "DTS_Header problem: invalid source PCM resolution\n"
 msgstr "DTS_Başlığı sorunu: geçersiz kaynak PCM çözünürlüğü\n"
 
-#: src/common/dts.cpp:144
+#: src/common/dts.cpp:148
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr "DTS_Başlığı sorunu: başlığı okumak için yeterli veri yok\n"
 
@@ -4478,7 +4478,7 @@ msgstr "Dolby TrueHD"
 msgid "Don't escape"
 msgstr "Gözden kaçırma"
 
-#: src/merge/mkvmerge.cpp:2453
+#: src/merge/mkvmerge.cpp:2457
 msgid "Done scanning playlists.\n"
 msgstr "Oynatma listelerini tarama bitti.\n"
 
@@ -4801,7 +4801,7 @@ msgstr "Hata:"
 msgid "Error: "
 msgstr "Hata:"
 
-#: src/info/mkvinfo.cpp:1604
+#: src/info/mkvinfo.cpp:1663
 #, boost-format
 msgid "Error: Couldn't open input file %1% (%2%)."
 msgstr "Hata: Girdi dosyası %1% (%2%) açılamadı."
@@ -4858,7 +4858,7 @@ msgstr ""
 "Örnekler: 01:00:00,01:30:00 (bir saat sonra ve bir saat otuz dakika sonra) "
 "ya da 180s,300s,00:10:00 (üç, beş ve on dakika sonra)."
 
-#: src/merge/mkvmerge.cpp:2545
+#: src/merge/mkvmerge.cpp:2549
 msgid "Exception details:"
 msgstr "İstisna ayrıntıları:"
 
@@ -5139,7 +5139,7 @@ msgstr "Dosya/parça bağlama"
 msgid "File/segment title:"
 msgstr "Dosya/parça başlığı:"
 
-#: src/merge/output_control.cpp:862
+#: src/merge/output_control.cpp:869
 msgid ""
 "Files cannot be appended to themselves. The argument for '--append-to' was "
 "invalid.\n"
@@ -5916,7 +5916,7 @@ msgstr "Dahili program hatası"
 msgid "Invalid %1% specified in '--%2% %3%'.\n"
 msgstr "'--%2% %3%' içinde belirtilmiş geçersiz %1%.\n"
 
-#: src/common/xml/ebml_converter.cpp:289
+#: src/common/xml/ebml_converter.cpp:285
 #, boost-format
 msgid "Invalid 'format' attribute '%1%'."
 msgstr "Geçersiz 'biçim' özniteliği: '%1%'."
@@ -6028,7 +6028,7 @@ msgid "Invalid cues option. No track ID specified in '--cues %1%'.\n"
 msgstr ""
 "Geçersiz cue'lar seçeneği. '--cues %1%' içinde belirtilmiş iz ID yok.\n"
 
-#: src/common/xml/ebml_converter.cpp:281 src/common/xml/ebml_converter.cpp:285
+#: src/common/xml/ebml_converter.cpp:281
 msgid "Invalid data for Base64 encoding found."
 msgstr "Base64 kodlaması için geçersiz veri bulundu."
 
@@ -6452,7 +6452,7 @@ msgstr "İş tanımı"
 msgid "Job output"
 msgstr "İş çıktısı"
 
-#: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/forms/jobs/tool.h:80
 msgid "Job queue"
 msgstr "İş kuyruğu"
 
@@ -6750,11 +6750,11 @@ msgstr ""
 "Türleri (ses, görüntü, altyazılar) için bu izi varsayılan iz yapın. "
 "Oynatıcılar varsayılan iz işareti ayarlı izleri tercih ederler."
 
-#: src/input/r_matroska.cpp:1434 src/input/r_matroska.cpp:1449
+#: src/input/r_matroska.cpp:1501 src/input/r_matroska.cpp:1516
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Arızalanmış AAC kodek başlatma verisi bulundu.\n"
 
-#: src/input/r_matroska.cpp:1442
+#: src/input/r_matroska.cpp:1509
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Arızalanmış kodek id '%1%'.\n"
@@ -6774,7 +6774,7 @@ msgid "Mark this track as 'forced'. Players must play this track."
 msgstr ""
 "Bu izi 'zorlanan' olarak işaretleyin. Oynatıcılar bu izi oynatmak zorundadır."
 
-#: src/input/r_matroska.h:209
+#: src/input/r_matroska.h:210
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -6988,7 +6988,7 @@ msgstr ""
 "Tek bir ek için birden fazla isim verildi. '%1%' göz ardı edilecektir ve "
 "bunun yerine '%2%' kullanılacaktır.\n"
 
-#: src/merge/output_control.cpp:935
+#: src/merge/output_control.cpp:942
 #, boost-format
 msgid ""
 "More than one track is to be appended to the track %1% from file no. %2% "
@@ -7029,7 +7029,7 @@ msgstr "Çoklama uygulaması: %1%"
 msgid "Muxing in progress."
 msgstr "Çoklama devam ediyor."
 
-#: src/merge/mkvmerge.cpp:2549
+#: src/merge/mkvmerge.cpp:2553
 #, boost-format
 msgid "Muxing took %1%.\n"
 msgstr "Çoklama %1% sürdü.\n"
@@ -7092,11 +7092,6 @@ msgstr "Sonraki dosya adı"
 msgid "Next filename: %1%"
 msgstr "Sonraki dosya adı: %1%"
 
-#: src/info/mkvinfo.cpp:1644
-#, boost-format
-msgid "Next level 0 element is not a segment but %1%"
-msgstr "Sonraki seviye 0 öğesi bir parça değil ama %1%"
-
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1358 src/mmg/tabs/global.cpp:340
 msgid "Next segment UID:"
 msgstr "Sonraki parça UID:"
@@ -7125,7 +7120,7 @@ msgstr "İlk karede bulunan AC3 başlığı yok; iz atlanacaktır.\n"
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "İlk karede bulunan DTS başlığı yok; iz atlanacaktır.\n"
 
-#: src/info/mkvinfo.cpp:1618
+#: src/info/mkvinfo.cpp:1674
 msgid "No EBML head found."
 msgstr "Bulunan EBML başı yok."
 
@@ -7141,7 +7136,7 @@ msgid ""
 "guessed.\n"
 msgstr "'%1%' eki için seçilmiş MIME türü yok ve tahmin edilemez.\n"
 
-#: src/merge/output_control.cpp:894
+#: src/merge/output_control.cpp:901
 #, boost-format
 msgid ""
 "No append mapping was given for the file no. %1% ('%2%'). A default mapping "
@@ -7189,8 +7184,8 @@ msgstr ""
 "Henüz yüklenmiş dosya yok. Dosyayı 'Dosya' menüsünden\n"
 "'Aç'ı seçerek açabilirsiniz."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:193
-#: src/mkvtoolnix-gui/forms/header_editor/tool.h:179
+#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:195
+#: src/mkvtoolnix-gui/forms/header_editor/tool.h:181
 msgid "No file has been opened yet."
 msgstr "Henüz hiç açılmış dosya yok."
 
@@ -7198,7 +7193,7 @@ msgstr "Henüz hiç açılmış dosya yok."
 msgid "No file loaded"
 msgstr "Dosya yüklenmedi"
 
-#: src/info/mkvinfo.cpp:1729 src/propedit/options.cpp:33
+#: src/info/mkvinfo.cpp:1728 src/propedit/options.cpp:33
 msgid "No file name given.\n"
 msgstr "Verilen dosya adı yok.\n"
 
@@ -7224,7 +7219,7 @@ msgstr ""
 msgid "No job has been started yet."
 msgstr "Henüz hiç başlatılmış iş yok."
 
-#: src/mkvtoolnix-gui/forms/merge/tool.h:193
+#: src/mkvtoolnix-gui/forms/merge/tool.h:196
 msgid "No merge job has been opened yet."
 msgstr "Henüz açılmış hiç birleştirme işi yok."
 
@@ -7241,7 +7236,6 @@ msgid "No permission to read from, to write to or to create"
 msgstr "Şundan okumaya, şuna yazmaya veya oluşturmak için izin yok"
 
 #: src/extract/timecodes_v2.cpp:218 src/extract/tracks.cpp:407
-#: src/info/mkvinfo.cpp:1632
 msgid "No segment/level 0 element found."
 msgstr "Bulunan parça/seviye 0 öğesi yok."
 
@@ -7249,7 +7243,7 @@ msgstr "Bulunan parça/seviye 0 öğesi yok."
 msgid "No space left to write to"
 msgstr "Yazmak için kalan alan yok"
 
-#: src/merge/mkvmerge.cpp:2523
+#: src/merge/mkvmerge.cpp:2527
 msgid "No streams to output were found. Aborting.\n"
 msgstr "Çıktı için akışlar bulunamadı. Durduruluyor.\n"
 
@@ -7490,7 +7484,7 @@ msgstr "Sadece bir çıktı dosyasına izin verildi.\n"
 msgid "Only one segment info file allowed in '%1% %2%'.\n"
 msgstr "'%1% %2%' içinde sadece bir parça bilgisi dosyasına izin verilir.\n"
 
-#: src/merge/output_control.cpp:875
+#: src/merge/output_control.cpp:882
 #, boost-format
 msgid ""
 "Only partial append mappings were given for the file no. %1% ('%2%'). Either "
@@ -7536,7 +7530,7 @@ msgstr "Dosya Aç"
 msgid "Open a Matroska file"
 msgstr "Matroska dosyası aç"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:194
+#: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:196
 msgid ""
 "Open a file via the »chapter editor« menu, the buttons below or drag & drop "
 "one here."
@@ -7544,7 +7538,7 @@ msgstr ""
 "Dosyayı »bölüm düzenleyici« menüsü, aşağıdaki düğmeler aracılığıyla ya da "
 "bir taneyi buraya sürükle ve bırakarak açın."
 
-#: src/mkvtoolnix-gui/forms/header_editor/tool.h:180
+#: src/mkvtoolnix-gui/forms/header_editor/tool.h:182
 msgid ""
 "Open a file via the »header editor« menu, the button below or drag & drop "
 "one here."
@@ -7878,8 +7872,7 @@ msgid ""
 "may lead to imprecise or slow seeking."
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:37 src/mmg/jobs.cpp:262
-#: src/mmg/mux_dialog.cpp:295
+#: src/mkvtoolnix-gui/jobs/model.cpp:37
 msgid "Progress"
 msgstr "İlerleme"
 
@@ -7889,7 +7882,7 @@ msgid "Progress:"
 msgstr "İlerleme:"
 
 #: src/extract/timecodes_v2.cpp:289 src/extract/tracks.cpp:440
-#: src/merge/mkvmerge.cpp:2356 src/merge/output_control.cpp:322
+#: src/merge/mkvmerge.cpp:2360 src/merge/output_control.cpp:329
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "İlerleme: %1%%%%2%"
@@ -7898,12 +7891,12 @@ msgstr "İlerleme: %1%%%%2%"
 msgid "Progress: 100%\n"
 msgstr "İlerleme: 100%\n"
 
-#: src/merge/output_control.cpp:300
+#: src/merge/output_control.cpp:304
 #, boost-format
 msgid "Progress: 100%%%1%"
 msgstr "İlerleme: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1180
+#: src/common/kax_analyzer.cpp:1186
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "İlerleme: [%1%%2%] %3%%%"
@@ -8158,7 +8151,7 @@ msgstr "RSA"
 msgid "Re-enable the selected jobs"
 msgstr "Seçilen işleri yeniden etkinleştir"
 
-#: src/merge/output_control.cpp:765
+#: src/merge/output_control.cpp:772
 #, boost-format
 msgid "Re-rendering track headers: data_size != 0 not implemented yet. %1%\n"
 msgstr ""
@@ -8258,11 +8251,11 @@ msgstr "Şu anki dosyayı kaydetmeden yeniden yükle"
 msgid "Remaining time:"
 msgstr "Kalan süre:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:174
+#: src/mkvtoolnix-gui/jobs/tool.cpp:200
 msgid "Remove &completed jobs"
 msgstr "&Tamamlanan işleri kaldır"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:175
+#: src/mkvtoolnix-gui/jobs/tool.cpp:201
 msgid "Remove &successfully completed jobs"
 msgstr "&Başarılı olarak tamamlanan işleri kaldır"
 
@@ -8270,7 +8263,7 @@ msgstr "&Başarılı olarak tamamlanan işleri kaldır"
 msgid "Remove a&ll files"
 msgstr "Tüm dosyaları ka&ldır"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:176
+#: src/mkvtoolnix-gui/jobs/tool.cpp:202
 msgid "Remove a&ll jobs"
 msgstr "Tüm işleri ka&ldır"
 
@@ -8299,13 +8292,13 @@ msgstr "Eki  'dosyaadı' dosyasıyla değiştir"
 msgid "Resets the header value on this page to how it's saved in the file."
 msgstr ""
 
-#: src/common/kax_file.cpp:277
+#: src/common/kax_file.cpp:287
 msgid "Resync failed: no valid Matroska level 1 element found.\n"
 msgstr ""
 "Yeniden eşitleme başarısız oldu: geçerli Matroska seviye 1 öğesi "
 "bulunamadı.\n"
 
-#: src/common/kax_file.cpp:269
+#: src/common/kax_file.cpp:279
 #, boost-format
 msgid "Resyncing successful at position %1%.\n"
 msgstr "Yeniden eşitleme %1% konumunda başarılı.\n"
@@ -8314,7 +8307,7 @@ msgstr "Yeniden eşitleme %1% konumunda başarılı.\n"
 msgid "Right-click for actions for all tracks"
 msgstr "Tüm izlerin eylemleri için sağ tuşa tıklayın"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:188
+#: src/mkvtoolnix-gui/jobs/tool.cpp:214
 msgid "Right-click for actions for jobs"
 msgstr "İşlerin eylemleri için sağ tuşa tıklayın"
 
@@ -8333,6 +8326,10 @@ msgstr "mkvmerge'ü çalıştır ve çoklama işlemini başlat"
 #: src/mmg/mmg_dialog.cpp:293
 msgid "Run the header field editor"
 msgstr "Başlık alanı düzenleyiciyi çalıştır"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:144 src/mkvtoolnix-gui/jobs/tool.cpp:175
+msgid "Running jobs cannot be removed."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:758
 msgid "S&can directory for other playlists:"
@@ -8425,7 +8422,7 @@ msgstr "Bölümleri Matroska dosyasına kaydet"
 msgid "Save information as"
 msgstr "Bilgiyi farklı kaydet"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:124
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:126
 #, fuzzy
 msgid "Save job output"
 msgstr "Çıktıyı &kaydet"
@@ -8514,7 +8511,7 @@ msgstr "Taranan Dosyalar"
 msgid "Scanned files"
 msgstr "Taranan dosyalar"
 
-#: src/merge/mkvmerge.cpp:2413
+#: src/merge/mkvmerge.cpp:2417
 #, boost-format
 msgid "Scanning %1% files in %2% playlist.\n"
 msgid_plural "Scanning %1% files in %2% playlists.\n"
@@ -8638,12 +8635,12 @@ msgstr "Parça izleri"
 msgid "Segment unique ID"
 msgstr "Parça benzersiz ID"
 
-#: src/info/mkvinfo.cpp:1640
+#: src/info/mkvinfo.cpp:1577
 #, boost-format
 msgid "Segment, size %1%"
 msgstr "Parça, boyutu %1%"
 
-#: src/info/mkvinfo.cpp:1638
+#: src/info/mkvinfo.cpp:1575
 msgid "Segment, size unknown"
 msgstr "Parça, boyutu bilinmiyor"
 
@@ -9191,7 +9188,7 @@ msgstr ""
 "Bazı başlık değerleri değiştirilmiş. Dosyayı kaydetmeden yeniden yüklemek "
 "istiyor musunuz?"
 
-#: src/merge/output_control.cpp:1241
+#: src/merge/output_control.cpp:1248
 #, boost-format
 msgid ""
 "Some tag elements are missing (this error should not have occured - another "
@@ -9319,7 +9316,7 @@ msgstr "Başlama"
 msgid "Starting job ID %d (%s) on %s"
 msgstr "Başlayan iş ID'si %d (%s), dosya: %s"
 
-#: src/info/mkvinfo.cpp:1579
+#: src/info/mkvinfo.cpp:1640
 #, boost-format
 msgid ""
 "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; "
@@ -9516,7 +9513,7 @@ msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr "mkvmerge'e her küme içine çoğu 'n' veri bloklarını koymasını söyler."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:522
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:124
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:126
 msgid "Text files"
 msgstr "Metin dosyaları"
 
@@ -9715,7 +9712,7 @@ msgstr "XML bölüm dosyası '%1%', bir hata içeriyor: %2%\n"
 msgid "The XML chapter file '%1%' could not be read.\n"
 msgstr "XML bölüm dosyası '%1%' okunamadı.\n"
 
-#: src/common/xml/ebml_converter.cpp:349
+#: src/common/xml/ebml_converter.cpp:345
 msgid "The XML root element is not a master element."
 msgstr "XML kök öğesi asıl öğe değildir."
 
@@ -9891,7 +9888,7 @@ msgstr ""
 msgid "The country '%s' is not a valid ccTLD and cannot be selected."
 msgstr "'%s' ülkesi geçerli bir ccTLD değil ve seçilemez."
 
-#: src/merge/output_control.cpp:1388
+#: src/merge/output_control.cpp:1395
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Cue girişleri (indeks) yazılıyor...\n"
 
@@ -10004,7 +10001,7 @@ msgstr ""
 "Sürüklenen dosya '%s'\n"
 "Matroska dosyası değil."
 
-#: src/merge/mkvmerge.cpp:2545
+#: src/merge/mkvmerge.cpp:2549
 msgid "The drive may be full."
 msgstr "Sürücü dolu olabilir."
 
@@ -10104,17 +10101,17 @@ msgstr "'%1%' dosyası okumak için açılamadı: %2%.\n"
 #: src/extract/tracks.cpp:299 src/extract/xtr_avi.cpp:57
 #: src/extract/xtr_avi.cpp:61 src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74 src/extract/xtr_wav.cpp:116
-#: src/merge/output_control.cpp:1265
+#: src/merge/output_control.cpp:1272
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "'%1%' dosyası yazmak için açılamadı: %2%.\n"
 
-#: src/merge/output_control.cpp:1269
+#: src/merge/output_control.cpp:1276
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "'%1%' dosyası yazmak için açıldı.\n"
 
-#: src/merge/mkvmerge.cpp:1742 src/merge/mkvmerge.cpp:2379
+#: src/merge/mkvmerge.cpp:1742 src/merge/mkvmerge.cpp:2383
 #, boost-format
 msgid ""
 "The file '%1%' has unknown type. Please have a look at the supported file "
@@ -10227,19 +10224,19 @@ msgstr "Dosya desteklenmeyen kalıp biçimidir (%s)."
 msgid "The file is being analyzed."
 msgstr "Dosya çözümleniyor."
 
-#: src/merge/output_control.cpp:232
+#: src/merge/output_control.cpp:233
 msgid "The file is being fixed, part 1/4..."
 msgstr "Dosya onarılıyor, kısım 1/4..."
 
-#: src/merge/output_control.cpp:238
+#: src/merge/output_control.cpp:239
 msgid "The file is being fixed, part 2/4..."
 msgstr "Dosya onarılıyor, kısım 2/4..."
 
-#: src/merge/output_control.cpp:247
+#: src/merge/output_control.cpp:248
 msgid "The file is being fixed, part 3/4..."
 msgstr "Dosya onarılıyor, kısım 3/4..."
 
-#: src/merge/output_control.cpp:255
+#: src/merge/output_control.cpp:256
 msgid "The file is being fixed, part 4/4..."
 msgstr "Dosya onarılıyor, kısım 4/4..."
 
@@ -10249,14 +10246,14 @@ msgstr "Dosya onarılıyor, kısım 4/4..."
 msgid "The file name for this segment."
 msgstr "Bu parça için dosya adı."
 
-#: src/merge/output_control.cpp:908
+#: src/merge/output_control.cpp:915
 #, boost-format
 msgid ""
 "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that "
 "track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:914
+#: src/merge/output_control.cpp:921
 #, boost-format
 msgid ""
 "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that "
@@ -10264,7 +10261,7 @@ msgid ""
 "argument for '--append-to' was invalid.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:854
+#: src/merge/output_control.cpp:861
 #, boost-format
 msgid ""
 "The file no. %1% ('%2%') is not being appended. The argument for '--append-"
@@ -10279,9 +10276,9 @@ msgstr "Dosya veya dizin bulunamadı"
 msgid "The file was not recognized as a supported format (exit code: %1)."
 msgstr "Dosya desteklenmeyen bir biçim olarak tanınmadı (çıkış kodu: %1)."
 
-#: src/common/kax_file.cpp:57 src/common/kax_file.cpp:62
-#: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1268
-#: src/input/r_matroska.cpp:1925
+#: src/common/kax_file.cpp:61 src/common/kax_file.cpp:66
+#: src/common/kax_file.cpp:71 src/input/r_matroska.cpp:1335
+#: src/input/r_matroska.cpp:1992
 msgid "The file will not be processed further."
 msgstr "Dosya daha fazla işlenmeyecektir."
 
@@ -10358,7 +10355,7 @@ msgstr ""
 "Dosya »%1« değiştirilmiş. Gerçekten yeniden yüklemek istiyor musunuz? Tüm "
 "değişiklikler kaybolacaktır."
 
-#: src/common/kax_file.cpp:49
+#: src/common/kax_file.cpp:53
 #, boost-format
 msgid "The first cluster timecode after the resync is %1%.\n"
 msgstr "Yeniden eşitlemeden sonraki ilk küme zaman kodu %1%.\n"
@@ -10419,7 +10416,7 @@ msgstr "Bölme zaman kodunun/süresinin biçimi geçersiz."
 msgid "The formats can be mixed, too."
 msgstr "Biçimler de karıştırılabilir."
 
-#: src/merge/output_control.cpp:964
+#: src/merge/output_control.cpp:971
 msgid "The formats do not match."
 msgstr "Biçimler uyuşmuyor."
 
@@ -10537,7 +10534,7 @@ msgstr ""
 "Burada seçilen diller, programda tüm aşağı açılır dil listesinin en üstünde "
 "gösterilecektir."
 
-#: src/common/kax_file.cpp:206
+#: src/common/kax_file.cpp:216
 #, boost-format
 msgid "The last timecode processed before the error was encountered was %1%.\n"
 msgstr ""
@@ -10829,7 +10826,7 @@ msgstr "Özellik değeri, '%1%' içinde geçerli bir imzalı tam sayı değil. %
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "Özellik değeri, '%1%' içinde geçerli bir imzasız sayı değil. %2%\n"
 
-#: src/merge/output_control.cpp:966
+#: src/merge/output_control.cpp:973
 msgid "The reason is unknown."
 msgstr "Sebep bilinmiyor."
 
@@ -10837,7 +10834,7 @@ msgstr "Sebep bilinmiyor."
 msgid "The rest is copied as is."
 msgstr "Geri kalanı olduğu gibi kopyalanır."
 
-#: src/common/xml/ebml_converter.cpp:341
+#: src/common/xml/ebml_converter.cpp:337
 #, boost-format
 msgid "The root element must be <%1%>."
 msgstr "Kök öğe <%1%> olmak zorundadır."
@@ -11124,7 +11121,7 @@ msgstr ""
 msgid "The title for the whole movie."
 msgstr "Bütün film için başlık."
 
-#: src/merge/output_control.cpp:924
+#: src/merge/output_control.cpp:931
 #, boost-format
 msgid ""
 "The track %1% from file no. %2% ('%3%') is to be appended more than once. "
@@ -11136,12 +11133,12 @@ msgstr ""
 msgid "The track ID %1% does not have a valid CodecID.\n"
 msgstr "İz ID %1% geçerli KodekID'sine sahip değil.\n"
 
-#: src/merge/output_control.cpp:661
+#: src/merge/output_control.cpp:668
 #, boost-format
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "İz başlıkları doğru olarak hareketlendirilemedi. %1%\n"
 
-#: src/merge/output_control.cpp:956
+#: src/merge/output_control.cpp:963
 #, boost-format
 msgid ""
 "The track number %1% from the file '%2%' can probably not be appended "
@@ -11151,7 +11148,7 @@ msgid ""
 "resulting file.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:967
+#: src/merge/output_control.cpp:974
 #, boost-format
 msgid ""
 "The track number %1% from the file '%2%' cannot be appended to the track "
@@ -11164,7 +11161,7 @@ msgstr ""
 msgid "The track number as used in the Block Header."
 msgstr "Blok Başlığında kullanıldığı gibi iz numarası."
 
-#: src/merge/output_control.cpp:965
+#: src/merge/output_control.cpp:972
 msgid "The track parameters do not match."
 msgstr "İz parametreleri uyuşmuyor."
 
@@ -11213,7 +11210,7 @@ msgstr "İz ID %1% için cue'lar yok.\n"
 msgid "There is a new version available online."
 msgstr "Çevrimiçi mevcut yeni bir sürüm var."
 
-#: src/merge/output_control.cpp:848 src/merge/output_control.cpp:858
+#: src/merge/output_control.cpp:855 src/merge/output_control.cpp:865
 #, boost-format
 msgid ""
 "There is no file with the ID '%1%'. The argument for '--append-to' was "
@@ -11601,14 +11598,14 @@ msgid "This property is unique. More instances cannot be added in '%1%'. %2%\n"
 msgstr ""
 "Bu özellik benzersiz. Daha fazla benzerleri '%1%' içinde eklenemez. %2%\n"
 
-#: src/merge/output_control.cpp:251
+#: src/merge/output_control.cpp:252
 #, boost-format
 msgid ""
 "This should REALLY not have happened. The space reserved for the first meta "
 "seek element was too small. %1%\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1499
+#: src/merge/output_control.cpp:1506
 #, boost-format
 msgid ""
 "This should REALLY not have happened. The space reserved for the first meta "
@@ -11645,9 +11642,9 @@ msgstr ""
 msgid "This track is not compatible with the WebM mode and cannot be enabled."
 msgstr "Bu iz WebM kipi ile uyumlu değil ve etkinleştirilemez."
 
-#: src/common/kax_file.cpp:57 src/common/kax_file.cpp:62
-#: src/common/kax_file.cpp:67 src/input/r_matroska.cpp:1268
-#: src/input/r_matroska.cpp:1925
+#: src/common/kax_file.cpp:61 src/common/kax_file.cpp:66
+#: src/common/kax_file.cpp:71 src/input/r_matroska.cpp:1335
+#: src/input/r_matroska.cpp:1992
 msgid "This usually indicates a damaged file structure."
 msgstr "Bu genellikle hasarlı bir dosya yapısını gösterir."
 
@@ -11740,7 +11737,7 @@ msgstr ""
 "İz %1% bilinmeyen/desteklenmeyen bir sıkıştırma algoritması ile "
 "sıkıştırılmış (%2%).\n"
 
-#: src/input/r_matroska.cpp:1001
+#: src/input/r_matroska.cpp:1054
 #, boost-format
 msgid ""
 "Track %1% is missing its track UID element which is required to be present "
@@ -12054,6 +12051,11 @@ msgstr ""
 msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr "%2% izi için bilinmeyen içerik kodlama türü %1%.\n"
 
+#: src/info/mkvinfo.cpp:1688
+#, fuzzy
+msgid "Unknown element"
+msgstr "Bilinmiyor"
+
 #: src/merge/mkvmerge.cpp:1475
 #, boost-format
 msgid "Unknown format for the next UID in '%1% %2%'.\n"
@@ -12123,7 +12125,7 @@ msgstr "Desteklenmeyen dosya biçimi"
 msgid "Unsupported format"
 msgstr "Desteklenmeyen biçim"
 
-#: src/input/r_matroska.cpp:1733
+#: src/input/r_matroska.cpp:1800
 msgid "Unsupported track type for this track.\n"
 msgstr "Bu iz için desteklenmeyen biçim.\n"
 
@@ -12199,7 +12201,7 @@ msgstr ""
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "'%1%' biçimi için demultiplexer kullanılıyor.\n"
 
-#: src/input/r_matroska.cpp:1297
+#: src/input/r_matroska.cpp:1364
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "'%1%' iz türü için genel çıktı modülü kullanılıyor.\n"
@@ -12780,7 +12782,7 @@ msgstr "ilave et"
 msgid "attachment"
 msgstr "ek"
 
-#: src/info/mkvinfo.cpp:934 src/input/r_matroska.cpp:100
+#: src/info/mkvinfo.cpp:934 src/input/r_matroska.cpp:101
 #: src/mkvtoolnix-gui/merge/track.cpp:354 src/mmg/mmg.cpp:65
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "audio"
@@ -12803,7 +12805,7 @@ msgstr "her iki göz bir bloğa bağlı (önce sol)"
 msgid "both eyes laced in one block (right first)"
 msgstr "her iki göz bir bloğa bağlı (önce sağ)"
 
-#: src/info/mkvinfo.cpp:937 src/input/r_matroska.cpp:101
+#: src/info/mkvinfo.cpp:937 src/input/r_matroska.cpp:102
 #: src/mkvtoolnix-gui/merge/track.cpp:357
 msgid "buttons"
 msgstr "butonlar"
@@ -12960,7 +12962,7 @@ msgstr "çıkart"
 msgid "failed"
 msgstr "başarısız"
 
-#: src/merge/output_control.cpp:393
+#: src/merge/output_control.cpp:400
 #, boost-format
 msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "filelist_t, generic_packetizer_c için bulunamadı. %1%\n"
@@ -13124,7 +13126,7 @@ msgstr "düşük"
 msgid "lowest"
 msgstr "en düşük"
 
-#: src/input/r_matroska.cpp:341
+#: src/input/r_matroska.cpp:388
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -13134,7 +13136,7 @@ msgstr ""
 "matroska_okuyucusu: (İz %1% için MS uyumluluk kipi) Matroska örnek başına "
 "%2% bit var diyor, ama WAVEFORMATEX %3% var diyor.\n"
 
-#: src/input/r_matroska.cpp:332
+#: src/input/r_matroska.cpp:379
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -13143,7 +13145,7 @@ msgstr ""
 "matroska_okuyucusu: (İz %1% için MS uyumluluk kipi) Matroska %2% kanal var "
 "diyor, ama WAVEFORMATEX %3% var diyor.\n"
 
-#: src/input/r_matroska.cpp:323
+#: src/input/r_matroska.cpp:370
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -13152,7 +13154,7 @@ msgstr ""
 "matroska_okuyucusu: (İz %1% için MS uyumluluk kipi) Matroska saniye başına "
 "%2% örnek var diyor, ama WAVEFORMATEX %3% var diyor.\n"
 
-#: src/input/r_matroska.cpp:491
+#: src/input/r_matroska.cpp:538
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode, track %1%) Matroska says video "
@@ -13161,7 +13163,7 @@ msgstr ""
 "matroska_okuyucusu: (MS uyumluluk kipi, iz %1%) Matroska görüntü yüksekliği "
 "%2% diyor, ama BITMAPINFOHEADER %3% diyor.\n"
 
-#: src/input/r_matroska.cpp:482
+#: src/input/r_matroska.cpp:529
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode, track %1%) Matroska says video "
@@ -13170,11 +13172,11 @@ msgstr ""
 "matroska_okuyucusu: (MS uyumluluk kipi, iz %1%) Matroska görüntü genişliği "
 "%2% diyor, ama BITMAPINFOHEADER %3% diyor.\n"
 
-#: src/input/r_matroska.cpp:990
+#: src/input/r_matroska.cpp:1043
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_okuyucusu: İz eksik olan iz numarası.\n"
 
-#: src/input/r_matroska.cpp:1363
+#: src/input/r_matroska.cpp:1430
 #, boost-format
 msgid ""
 "matroska_reader: Could not keep the track UID %1% because it is already "
@@ -13183,25 +13185,25 @@ msgstr ""
 "matroska_okuyucusu: İz UID %1% tutulmadı çünkü zaten yeni dosya için "
 "ayrıldı.\n"
 
-#: src/input/r_matroska.cpp:1175 src/input/r_matroska.cpp:1180
+#: src/input/r_matroska.cpp:1228 src/input/r_matroska.cpp:1233
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_okuyucusu: Bulunan parça yok.\n"
 
-#: src/input/r_matroska.cpp:953
+#: src/input/r_matroska.cpp:1006
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_okuyucusu: Piksel yüksekliği eksik.\n"
 
-#: src/input/r_matroska.cpp:951
+#: src/input/r_matroska.cpp:1004
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_okuyucusu: Piksel genişliği eksik.\n"
 
-#: src/input/r_matroska.cpp:592
+#: src/input/r_matroska.cpp:639
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_okuyucusu: İz %2% için KodekID '%1%' bilinmiyor.\n"
 
-#: src/input/r_matroska.cpp:356 src/input/r_matroska.cpp:401
-#: src/input/r_matroska.cpp:422
+#: src/input/r_matroska.cpp:403 src/input/r_matroska.cpp:448
+#: src/input/r_matroska.cpp:469
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but the private codec "
@@ -13210,7 +13212,7 @@ msgstr ""
 "matroska_okuyucusu: İz '%1%' için KodekID %2%, ama özel kodek verisi geçerli "
 "başlıkları içermiyor.\n"
 
-#: src/input/r_matroska.cpp:470
+#: src/input/r_matroska.cpp:517
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -13221,7 +13223,7 @@ msgstr ""
 "sunumu yoktur. Bu nedenle kullanılan görüntü kodekini tanımlamak için "
 "FourCC'ye sahip değiliz.\n"
 
-#: src/input/r_matroska.cpp:301
+#: src/input/r_matroska.cpp:348
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -13232,7 +13234,7 @@ msgstr ""
 "yoktur. Bu nedenle kullanılan ses kodekini tanımlamak için biçim ID'sine "
 "sahip değiliz.\n"
 
-#: src/input/r_matroska.cpp:510
+#: src/input/r_matroska.cpp:557
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec "
@@ -13241,7 +13243,7 @@ msgstr ""
 "matroska_okuyucusu: İz '%1%' için KodekID %2%, ama kodek özel başlıkları "
 "yoktur.\n"
 
-#: src/input/r_matroska.cpp:556 src/input/r_matroska.cpp:567
+#: src/input/r_matroska.cpp:603 src/input/r_matroska.cpp:614
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -13250,30 +13252,30 @@ msgstr ""
 "matroska_okuyucusu: İz '%1%' için KodekID %2%, ama bulunan özel veri "
 "yoktur.\n"
 
-#: src/input/r_matroska.cpp:1052
+#: src/input/r_matroska.cpp:1105
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_okuyucusu: Kodek ID eksik.\n"
 
-#: src/input/r_matroska.cpp:542
+#: src/input/r_matroska.cpp:589
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_okuyucusu: İz '%1%' için yükseklik ayarlı değildi.\n"
 
-#: src/input/r_matroska.cpp:536
+#: src/input/r_matroska.cpp:583
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_okuyucusu: İz '%1%' için genişlik ayarlı değildi.\n"
 
-#: src/input/r_matroska.cpp:634
+#: src/input/r_matroska.cpp:681
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_okuyucusu: İz %1% tamam görünüyor.\n"
 
-#: src/input/r_matroska.cpp:1008
+#: src/input/r_matroska.cpp:1061
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_okuyucusu: İz türü bulunmadı.\n"
 
-#: src/input/r_matroska.cpp:392
+#: src/input/r_matroska.cpp:439
 #, boost-format
 msgid ""
 "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track "
@@ -13282,11 +13284,11 @@ msgstr ""
 "matroska_okuyucusu: mkvmerge FLAC desteği ile derlenmedi. İz %1% "
 "yoksayılıyor.\n"
 
-#: src/input/r_matroska.cpp:1162
+#: src/input/r_matroska.cpp:1215
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_okuyucusu: Bulunan EBML başı yok.\n"
 
-#: src/input/r_matroska.cpp:629
+#: src/input/r_matroska.cpp:676
 #, boost-format
 msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
 msgstr "matroska_okuyucusu: iz %1% için bilinmeyen ayıklayacı türü: '%2%'\n"
@@ -13607,7 +13609,7 @@ msgstr ""
 "bölümler ile ilişkilendirmek için dili belirtir. Bu seçenek XML bölüm "
 "dosyaları için yoksayılır."
 
-#: src/merge/output_control.cpp:226 src/merge/output_control.cpp:264
+#: src/merge/output_control.cpp:227 src/merge/output_control.cpp:265
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge'ün SIGINT tarafından çalışması kesildi (Ctrl+C?)\n"
 
@@ -13688,7 +13690,7 @@ msgstr "şifreleme yok"
 msgid "no error"
 msgstr "hata yok"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:38
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:39
 msgid "no errors yet"
 msgstr "henüz hata yok"
 
@@ -13704,7 +13706,7 @@ msgstr "yüklenen dosya yok"
 msgid "no job started yet"
 msgstr "henüz başlayan iş yok"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:36
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:37
 msgid "no output yet"
 msgstr "henüz çıktı yok"
 
@@ -13720,7 +13722,7 @@ msgstr "imza adresleme algoritması yok"
 msgid "no splitting"
 msgstr "bölme yok"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:37
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:38
 msgid "no warnings yet"
 msgstr "henüz uyarılar yok"
 
@@ -13735,12 +13737,12 @@ msgid "normal"
 msgstr "normal"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:261
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:110
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:112
 msgid "not finished yet"
 msgstr "henüz tamamlanmadı"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:258
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:109
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:111
 msgid "not started yet"
 msgstr "henüz başlatılmadı"
 
@@ -13963,7 +13965,7 @@ msgstr ""
 "start >= m->ListSize(). Bu olmamalıydı. Lütfen bir hata raporu doldurun. "
 "Teşekkürler."
 
-#: src/input/r_matroska.cpp:103
+#: src/input/r_matroska.cpp:104
 msgid "subtitle"
 msgstr "altyazı"
 
@@ -14017,8 +14019,8 @@ msgstr "und (Belirsiz)"
 #: src/common/mm_io_win.cpp:161 src/common/stereo_mode.cpp:68
 #: src/info/mkvinfo.cpp:683 src/info/mkvinfo.cpp:693 src/info/mkvinfo.cpp:708
 #: src/info/mkvinfo.cpp:730 src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752
-#: src/info/mkvinfo.cpp:938 src/input/r_matroska.cpp:99
-#: src/input/r_matroska.cpp:2286
+#: src/info/mkvinfo.cpp:938 src/input/r_matroska.cpp:100
+#: src/input/r_matroska.cpp:2353
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:105
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:45
@@ -14027,7 +14029,7 @@ msgstr "und (Belirsiz)"
 msgid "unknown"
 msgstr "bilinmiyor"
 
-#: src/input/r_matroska.cpp:2274
+#: src/input/r_matroska.cpp:2341
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "bilinmiyor, biçim etiketi: 0x%|1$04x|"
@@ -14040,11 +14042,6 @@ msgstr "sınırsız"
 msgid "up"
 msgstr "yukarı"
 
-#: src/common/strings/editing.cpp:234
-#, boost-format
-msgid "utf8_strlen(): Invalid UTF-8 char. First byte: 0x%|1$02x|"
-msgstr "utf8_strlen(): Geçersiz UTF-8 kar. İlk bayt: 0x%|1$02x|"
-
 #: src/mmg/tabs/chapters.cpp:854
 msgid ""
 "verify failed: chapters->CheckMandatory() is false. This should not have "
@@ -14053,7 +14050,7 @@ msgstr ""
 "doğrulama başarısız: bölümler->CheckMandatory() yanlış. Bu olmamalıydı. "
 "Lütfen bir hata raporu doldurun.\n"
 
-#: src/info/mkvinfo.cpp:935 src/input/r_matroska.cpp:102
+#: src/info/mkvinfo.cpp:935 src/input/r_matroska.cpp:103
 #: src/mkvtoolnix-gui/merge/track.cpp:355 src/mmg/mmg.cpp:66
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "video"
@@ -14101,4 +14098,10 @@ msgstr "– hiçbiri olarak ayarla –"
 #, fuzzy
 #~ msgid "0 warnings"
 #~ msgstr "Uyarılar:"
+
+#~ msgid "Next level 0 element is not a segment but %1%"
+#~ msgstr "Sonraki seviye 0 öğesi bir parça değil ama %1%"
+
+#~ msgid "utf8_strlen(): Invalid UTF-8 char. First byte: 0x%|1$02x|"
+#~ msgstr "utf8_strlen(): Geçersiz UTF-8 kar. İlk bayt: 0x%|1$02x|"
 
