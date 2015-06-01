@@ -14,6 +14,7 @@
 #include <QList>
 #include <QMessageBox>
 #include <QString>
+#include <QTreeView>
 
 namespace mtx { namespace gui { namespace Jobs {
 
@@ -61,17 +62,19 @@ void
 Tool::setupUiControls() {
   ui->jobs->setModel(m_model);
 
-  connect(m_startAction,                       &QAction::triggered, this,    &Tool::onStart);
-  connect(m_viewOutputAction,                  &QAction::triggered, this,    &Tool::onViewOutput);
-  connect(m_removeAction,                      &QAction::triggered, this,    &Tool::onRemove);
-  connect(m_removeDoneAction,                  &QAction::triggered, this,    &Tool::onRemoveDone);
-  connect(m_removeDoneOkAction,                &QAction::triggered, this,    &Tool::onRemoveDoneOk);
-  connect(m_removeAllAction,                   &QAction::triggered, this,    &Tool::onRemoveAll);
+  connect(m_startAction,                       &QAction::triggered,       this,    &Tool::onStart);
+  connect(m_viewOutputAction,                  &QAction::triggered,       this,    &Tool::onViewOutput);
+  connect(m_removeAction,                      &QAction::triggered,       this,    &Tool::onRemove);
+  connect(m_removeDoneAction,                  &QAction::triggered,       this,    &Tool::onRemoveDone);
+  connect(m_removeDoneOkAction,                &QAction::triggered,       this,    &Tool::onRemoveDoneOk);
+  connect(m_removeAllAction,                   &QAction::triggered,       this,    &Tool::onRemoveAll);
 
-  connect(m_acknowledgeAllWarningsAction,      &QAction::triggered, m_model, &Model::acknowledgeAllWarnings);
-  connect(m_acknowledgeSelectedWarningsAction, &QAction::triggered, this,    &Tool::acknowledgeSelectedWarnings);
-  connect(m_acknowledgeAllErrorsAction,        &QAction::triggered, m_model, &Model::acknowledgeAllErrors);
-  connect(m_acknowledgeSelectedErrorsAction,   &QAction::triggered, this,    &Tool::acknowledgeSelectedErrors);
+  connect(m_acknowledgeAllWarningsAction,      &QAction::triggered,       m_model, &Model::acknowledgeAllWarnings);
+  connect(m_acknowledgeSelectedWarningsAction, &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
+  connect(m_acknowledgeAllErrorsAction,        &QAction::triggered,       m_model, &Model::acknowledgeAllErrors);
+  connect(m_acknowledgeSelectedErrorsAction,   &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
+
+  connect(ui->jobs,                            &QTreeView::doubleClicked, this,    &Tool::onViewOutput);
 }
 
 void
