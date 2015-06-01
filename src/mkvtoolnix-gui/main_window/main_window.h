@@ -112,6 +112,7 @@ protected:
   virtual QWidget *createNotImplementedWidget();
 
   virtual void closeEvent(QCloseEvent *event);
+  virtual bool beforeCloseCheckRunningJobs();
 
 #if defined(HAVE_CURL_EASY_H)
   virtual void silentlyCheckForUpdates();

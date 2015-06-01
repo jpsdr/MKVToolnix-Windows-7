@@ -48,8 +48,10 @@ public:
   Job *fromId(uint64_t id) const;
   int rowFromId(uint64_t id) const;
   bool hasJobs() const;
+  bool hasRunningJobs();
 
   void withSelectedJobs(QAbstractItemView *view, std::function<void(Job &)> const &worker);
+  void withAllJobs(std::function<void(Job &)> const &worker);
   void withJob(uint64_t id, std::function<void(Job &)> const &worker);
 
   void removeJobsIf(std::function<bool(Job const &)> predicate);

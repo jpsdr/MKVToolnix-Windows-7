@@ -48,6 +48,7 @@ public:
   QStringList m_output, m_warnings, m_errors, m_fullOutput;
   unsigned int m_progress, m_exitCode, m_warningsAcknowledged, m_errorsAcknowledged;
   QDateTime m_dateAdded, m_dateStarted, m_dateFinished;
+  bool m_quitAfterFinished;
 
   QMutex m_mutex;
 

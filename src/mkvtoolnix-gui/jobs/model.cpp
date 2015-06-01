@@ -91,6 +91,17 @@ Model::hasJobs()
   return !!rowCount();
 }
 
+bool
+Model::hasRunningJobs() {
+  QMutexLocker locked{&m_mutex};
+
+  for (auto const &job : m_jobsById)
+    if (Job::Running == job->m_status)
+      return true;
+
+  return false;
+}
+
 void
 Model::setRowText(QList<QStandardItem *> const &items,
                   Job const &job)
@@ -145,6 +156,14 @@ Model::withSelectedJobs(QAbstractItemView *view,
 
   auto jobs = selectedJobs(view);
   for (auto const &job : jobs)
+    worker(*job);
+}
+
+void
+Model::withAllJobs(std::function<void(Job &)> const &worker) {
+  QMutexLocker locked{&m_mutex};
+
+  for (auto const &job : m_jobsById)
     worker(*job);
 }
 

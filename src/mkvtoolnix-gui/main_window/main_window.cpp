@@ -4,6 +4,7 @@
 #include <QDesktopServices>
 #include <QIcon>
 #include <QLabel>
+#include <QMessageBox>
 #include <QSettings>
 #include <QStaticText>
 #include <QVBoxLayout>
@@ -274,8 +275,39 @@ MainWindow::retranslateUi() {
   ui->tool->setUpdatesEnabled(true);
 }
 
+bool
+MainWindow::beforeCloseCheckRunningJobs() {
+  auto tool = jobTool();
+  if (!tool)
+    return true;
+
+  auto model = tool->model();
+  if (!model->hasRunningJobs())
+    return true;
+
+  if (QMessageBox::question(this, QY("Abort running jobs"), Q("%1 %2").arg(QY("There is currently a job running.")).arg(QY("Do you want to abort that job and quit?"))) == QMessageBox::No)
+    return false;
+
+  model->stop();
+  model->withAllJobs([](Jobs::Job &job) {
+    if (Jobs::Job::Running == job.m_status) {
+      job.m_quitAfterFinished = true;
+      job.abort();
+    }
+  });
+
+  return false;
+}
+
 void
 MainWindow::closeEvent(QCloseEvent *event) {
+  auto ok = beforeCloseCheckRunningJobs();
+
+  if (!ok) {
+    event->ignore();
+    return;
+  }
+
   QSettings reg;
 
   auto tool = jobTool();

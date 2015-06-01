@@ -17,6 +17,7 @@ Job::Job(Status status)
   , m_exitCode{std::numeric_limits<unsigned int>::max()}
   , m_warningsAcknowledged{}
   , m_errorsAcknowledged{}
+  , m_quitAfterFinished{}
   , m_mutex{QMutex::Recursive}
 {
   connect(this, &Job::lineRead, this, &Job::addLineToInternalLogs);
