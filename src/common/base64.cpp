@@ -96,12 +96,12 @@ base64_encode(const unsigned char *src,
   return out;
 }
 
-int
-base64_decode(const std::string &src,
-              unsigned char *dst) {
-  unsigned int pos     = 0;
-  unsigned int dst_pos = 0;
-  unsigned int pad     = 0;
+std::string
+base64_decode(std::string const &src) {
+  auto pos = 0u;
+  auto pad = 0u;
+  auto dst = std::string{};
+
   while (pos < src.size()) {
     unsigned char in[4];
     unsigned int in_pos = 0;
@@ -118,7 +118,7 @@ base64_decode(const std::string &src,
         pad++;
 
       else if (!isblanktab(c) && !iscr(c))
-        return -1;
+        throw mtx::base64::invalid_data_x{};
     }
 
     unsigned int values_idx;
@@ -134,7 +134,7 @@ base64_decode(const std::string &src,
         :                                                        255;
 
       if (255 == values[values_idx])
-        throw mtx::base64::invalid_data_x();
+        throw mtx::base64::invalid_data_x{};
     }
 
     unsigned char mid[6];
@@ -145,20 +145,16 @@ base64_decode(const std::string &src,
     mid[4] = values[2] << 6;
     mid[5] = values[3];
 
-    dst[dst_pos] = mid[0] | mid[1];
-    dst_pos++;
+    dst += mid[0] | mid[1];
     if (1 >= pad) {
-      dst[dst_pos] = mid[2] | mid[3];
-      dst_pos++;
-      if (0 == pad) {
-        dst[dst_pos] = mid[4] | mid[5];
-        dst_pos++;
-      }
+      dst += mid[2] | mid[3];
+      if (0 == pad)
+        dst += mid[4] | mid[5];
     }
 
     if (0 != pad)
-      return dst_pos;
+      break;
   }
 
-  return dst_pos;
+  return dst;
 }

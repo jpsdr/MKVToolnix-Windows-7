@@ -275,11 +275,7 @@ ebml_converter_c::parse_binary(parser_context_t &ctx) {
 
   } else if (format == "base64") {
     try {
-      std::string destination(' ', content.size());
-      auto dest_len = base64_decode(content, reinterpret_cast<unsigned char *>(&destination[0]));
-      if (-1 == dest_len)
-        throw malformed_data_x{ ctx.name, ctx.node.offset_debug(), Y("Invalid data for Base64 encoding found.") };
-      content = destination.substr(0, dest_len);
+      content = base64_decode(content);
 
     } catch (mtx::base64::exception &) {
       throw malformed_data_x{ ctx.name, ctx.node.offset_debug(), Y("Invalid data for Base64 encoding found.") };
