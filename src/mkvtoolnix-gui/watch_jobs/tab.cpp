@@ -101,6 +101,7 @@ Tab::onLineRead(QString const &line,
 void
 Tab::setInitialDisplay(Jobs::Job const &job) {
   ui->description->setText(job.m_description);
+  ui->status->setText(Jobs::Job::displayableStatus(job.m_status));
   ui->progressBar->setValue(job.m_progress);
 
   ui->output  ->setPlainText(!job.m_output.isEmpty()   ? Q("%1\n").arg(job.m_output.join("\n"))   : Q(""));
