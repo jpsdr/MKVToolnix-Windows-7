@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QtGlobal>
 
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
@@ -112,7 +113,7 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   m_fullOutput = job.m_fullOutput;
 
   ui->abortButton->setEnabled(Jobs::Job::Running == job.m_status);
-  ui->saveOutputButton->setEnabled(true);
+  ui->saveOutputButton->setEnabled(!mtx::includes(job.m_status, Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
 
   ui->acknowledgeWarningsAndErrorsButton->setEnabled(job.numUnacknowledgedWarnings() || job.numUnacknowledgedErrors());
 }
