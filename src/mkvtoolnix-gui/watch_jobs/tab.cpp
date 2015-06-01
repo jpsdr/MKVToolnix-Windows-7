@@ -113,7 +113,7 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   m_fullOutput = job.m_fullOutput;
 
   ui->abortButton->setEnabled(Jobs::Job::Running == job.m_status);
-  ui->saveOutputButton->setEnabled(!mtx::includes(job.m_status, Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
+  ui->saveOutputButton->setEnabled(!mtx::included_in(job.m_status, Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
 
   ui->acknowledgeWarningsAndErrorsButton->setEnabled(job.numUnacknowledgedWarnings() || job.numUnacknowledgedErrors());
 }

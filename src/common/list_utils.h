@@ -18,7 +18,7 @@ namespace mtx {
 
 template<typename T>
 bool
-includes(T const &needle,
+included_in(T const &needle,
          T const &val) {
   return needle == val;
 }
@@ -26,10 +26,10 @@ includes(T const &needle,
 template<typename T,
          typename... Trest>
 bool
-includes(T const &needle,
-         T const &val,
-         Trest... rest) {
-  return (needle == val) || includes(needle, rest...);
+included_in(T const &needle,
+            T const &val,
+            Trest... rest) {
+  return (needle == val) || included_in(needle, rest...);
 }
 
 template<typename T>

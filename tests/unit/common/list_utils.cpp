@@ -6,16 +6,16 @@
 
 namespace {
 
-TEST(ListUtils, includes) {
-  EXPECT_TRUE(mtx::includes(42, 42));
-  EXPECT_TRUE(mtx::includes(42, 54, 42, 48));
-  EXPECT_TRUE(mtx::includes(42, 42, 54, 48));
-  EXPECT_TRUE(mtx::includes(42, 54, 48, 42));
+TEST(ListUtils, included_in) {
+  EXPECT_TRUE(mtx::included_in(42, 42));
+  EXPECT_TRUE(mtx::included_in(42, 54, 42, 48));
+  EXPECT_TRUE(mtx::included_in(42, 42, 54, 48));
+  EXPECT_TRUE(mtx::included_in(42, 54, 48, 42));
 
-  EXPECT_FALSE(mtx::includes(23, 42));
-  EXPECT_FALSE(mtx::includes(23, 54, 42, 48));
-  EXPECT_FALSE(mtx::includes(23, 42, 54, 48));
-  EXPECT_FALSE(mtx::includes(23, 54, 48, 42));
+  EXPECT_FALSE(mtx::included_in(23, 42));
+  EXPECT_FALSE(mtx::included_in(23, 54, 42, 48));
+  EXPECT_FALSE(mtx::included_in(23, 42, 54, 48));
+  EXPECT_FALSE(mtx::included_in(23, 54, 48, 42));
 }
 
 TEST(ListUtils, any_of) {
