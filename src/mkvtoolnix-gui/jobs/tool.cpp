@@ -125,11 +125,23 @@ Tool::onStart() {
 
 void
 Tool::onRemove() {
-  auto idsToRemove = QMap<uint64_t, bool>{};
+  auto idsToRemove        = QMap<uint64_t, bool>{};
+  auto emitRunningWarning = false;
 
   m_model->withSelectedJobs(ui->jobs, [&idsToRemove](Job &job) { idsToRemove[job.m_id] = true; });
 
-  m_model->removeJobsIf([&](Job const &job) { return idsToRemove[job.m_id]; });
+  m_model->removeJobsIf([&idsToRemove, &emitRunningWarning](Job const &job) -> bool {
+    if (!idsToRemove[job.m_id])
+      return false;
+    if (Job::Running != job.m_status)
+      return true;
+
+    emitRunningWarning = true;
+    return false;
+  });
+
+  if (emitRunningWarning)
+    MainWindow::get()->setStatusBarMessage(QY("Running jobs cannot be removed."));
 }
 
 void
@@ -149,7 +161,18 @@ Tool::onRemoveDoneOk() {
 
 void
 Tool::onRemoveAll() {
-  m_model->removeJobsIf([this](Job const &) { return true; });
+  auto emitRunningWarning = false;
+
+  m_model->removeJobsIf([&emitRunningWarning](Job const &job) -> bool {
+    if (Job::Running != job.m_status)
+      return true;
+
+    emitRunningWarning = true;
+    return false;
+  });
+
+  if (emitRunningWarning)
+    MainWindow::get()->setStatusBarMessage(QY("Running jobs cannot be removed."));
 }
 
 void
