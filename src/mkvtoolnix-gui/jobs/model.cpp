@@ -415,6 +415,7 @@ Model::saveJobs()
 void
 Model::saveJobs(QSettings &settings)
   const {
+  settings.remove("jobQueue");
   settings.beginGroup("jobQueue");
   settings.setValue("numberOfJobs", rowCount());
 
@@ -438,7 +439,6 @@ Model::loadJobs(QSettings &settings) {
   m_toBeProcessed.clear();
   removeRows(0, rowCount());
 
-  settings.remove("jobqQueue");
   settings.beginGroup("jobQueue");
   auto numberOfJobs = settings.value("numberOfJobs").toUInt();
   settings.endGroup();
