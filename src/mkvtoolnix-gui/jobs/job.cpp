@@ -141,6 +141,9 @@ Job::loadJobBasis(QSettings &settings) {
   m_dateAdded            = settings.value("dateAdded").toDateTime();
   m_dateStarted          = settings.value("dateStarted").toDateTime();
   m_dateFinished         = settings.value("dateFinished").toDateTime();
+
+  if (Running == m_status)
+    m_status = Aborted;
 }
 
 JobPtr
