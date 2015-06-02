@@ -7,6 +7,7 @@
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
@@ -44,8 +45,8 @@ Tool::~Tool() {
 
 void
 Tool::loadAndStart() {
-  QSettings reg;
-  m_model->loadJobs(reg);
+  auto reg = Util::Settings::registry();
+  m_model->loadJobs(*reg);
 
   resizeColumnsToContents();
 

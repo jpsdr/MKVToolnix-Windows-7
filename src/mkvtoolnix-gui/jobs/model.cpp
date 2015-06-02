@@ -427,8 +427,8 @@ Model::updateJobStats() {
 void
 Model::saveJobs()
   const {
-  QSettings reg;
-  saveJobs(reg);
+  auto reg = Util::Settings::registry();
+  saveJobs(*reg);
 }
 
 void
@@ -459,7 +459,7 @@ Model::loadJobs(QSettings &settings) {
   removeRows(0, rowCount());
 
   settings.beginGroup("jobQueue");
-  auto numberOfJobs = settings.value("numberOfJobs").toUInt();
+  auto numberOfJobs = settings.value("numberOfJobs", 0).toUInt();
   settings.endGroup();
 
   for (auto idx = 0u; idx < numberOfJobs; ++idx) {

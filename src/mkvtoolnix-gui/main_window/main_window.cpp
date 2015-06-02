@@ -308,11 +308,10 @@ MainWindow::closeEvent(QCloseEvent *event) {
     return;
   }
 
-  QSettings reg;
-
+  auto reg  = Util::Settings::registry();
   auto tool = jobTool();
   if (tool)
-    tool->model()->saveJobs(reg);
+    tool->model()->saveJobs(*reg);
 
   event->accept();
 }
