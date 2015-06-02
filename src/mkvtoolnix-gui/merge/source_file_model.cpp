@@ -2,6 +2,7 @@
 
 #include "common/sorting.h"
 #include "common/strings/formatting.h"
+#include "mkvtoolnix-gui/mime_types.h"
 #include "mkvtoolnix-gui/merge/source_file_model.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -422,12 +423,10 @@ SourceFileModel::flags(QModelIndex const &index)
   return actualFlags;
 }
 
-#define MIME_TYPE "application/x-mkvtoolnixgui-sourcefilemodelitems"
-
 QStringList
 SourceFileModel::mimeTypes()
   const {
-  return QStringList{} << Q(MIME_TYPE);
+  return QStringList{} << mtx::gui::MimeTypes::MergeSourceFileModelItem;
 }
 
 QMimeData *
@@ -450,7 +449,7 @@ SourceFileModel::mimeData(QModelIndexList const &indexes)
   for (auto const &value : valuesToStore)
     stream << value;
 
-  data->setData(MIME_TYPE, encoded);
+  data->setData(mtx::gui::MimeTypes::MergeSourceFileModelItem, encoded);
   return data;
 }
 
@@ -468,7 +467,7 @@ SourceFileModel::dropMimeData(QMimeData const *data,
   if (row == -1)
     row = rowCount(parent);
 
-  if (data->hasFormat(MIME_TYPE))
+  if (data->hasFormat(mtx::gui::MimeTypes::MergeSourceFileModelItem))
     return dropSourceFiles(data, action, row, parent);
 
   return false;
@@ -491,7 +490,7 @@ SourceFileModel::dropSourceFiles(QMimeData const *data,
   if (action != Qt::MoveAction)
     return QAbstractItemModel::dropMimeData(data, action, row, 0, parent);
 
-  auto encoded = data->data(MIME_TYPE);
+  auto encoded = data->data(mtx::gui::MimeTypes::MergeSourceFileModelItem);
   QDataStream stream{&encoded, QIODevice::ReadOnly};
 
   while (!stream.atEnd()) {
