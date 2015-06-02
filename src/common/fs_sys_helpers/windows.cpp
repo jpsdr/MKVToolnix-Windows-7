@@ -140,13 +140,18 @@ get_current_exe_path(std::string const &) {
 
 bool
 is_installed() {
-  auto sub_key  = "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\mmg.exe";
-  auto data_len = DWORD{};
+  auto sub_key   = "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\mmg.exe";
+  auto data_len  = DWORD{};
+  auto type      = DWORD{REG_SZ};
+  auto h_sub_key = HKEY{};
 
-  if (ERROR_SUCCESS != RegGetValueA(HKEY_LOCAL_MACHINE, sub_key, NULL, RRF_RT_REG_SZ, NULL, NULL, &data_len))
+  if (ERROR_SUCCESS != RegOpenKeyExA(HKEY_LOCAL_MACHINE, sub_key, 0, KEY_READ, &h_sub_key))
     return false;
 
-  return data_len > 1;
+  auto result = RegQueryValueExA(h_sub_key, NULL, NULL, &type, NULL, &data_len);
+  RegCloseKey(h_sub_key);
+
+  return ERROR_SUCCESS != result ? false : (data_len > 1);
 }
 
 }}
