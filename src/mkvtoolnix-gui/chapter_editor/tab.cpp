@@ -268,8 +268,6 @@ Tab::load() {
   resizeChapterColumnsToContents();
 
   connect(m_chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
-
-  MainWindow::get()->setStatusBarMessage(Q("yay loaded %1").arg(chapters->ListSize()));
 }
 
 void
