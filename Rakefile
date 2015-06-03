@@ -173,6 +173,9 @@ def define_default_task
   # The GUI help
   targets << "translations:guides" if c?(:USE_WXWIDGETS)
 
+  # The Qt translation files: only for Windows
+  targets << "translations:qt" if c?(:MINGW) && !c(:LCONVERT).blank?
+
   task :default => targets do
     puts "Done. Enjoy :)"
   end
@@ -249,6 +252,12 @@ end
 
 rule '.mo' => '.po' do |t|
   runq "  MSGFMT #{t.source}", "msgfmt -c -o #{t.name} #{t.sources.join(" ")}"
+end
+
+if !c(:LCONVERT).blank?
+  rule '.qm' => '.ts' do |t|
+    runq "LCONVERT #{t.source}", "#{c(:LCONVERT)} -o #{t.name} -i #{t.sources.join(" ")}"
+  end
 end
 
 # HTML help book stuff
@@ -400,6 +409,8 @@ EOT
   end
 
   [ :applications, :manpages, :guides ].each { |type| task type => $translations[type] }
+
+  task :qt => FileList[ "#{$top_srcdir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
 
   $available_languages[:manpages].each do |language|
     $manpages.each do |manpage|
@@ -643,7 +654,7 @@ task :clean do
     share/icons/*x*/*.h
     src/info/ui/*.h src/mkvtoolnix-gui/forms/**/*.h src/**/*.moc src/**/*.moco src/mkvtoolnix-gui/qt_resources.cpp
     tests/unit/**/*.o tests/unit/**/*.a tests/unit/all
-    po/*.mo doc/guide/**/*.hhk
+    po/*.mo po/qt/*.qm doc/guide/**/*.hhk
   }
   patterns += $applications + $tools.collect { |name| "src/tools/#{name}" }
 
