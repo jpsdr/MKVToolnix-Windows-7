@@ -1,6 +1,6 @@
 !define PRODUCT_NAME "MKVToolNix"
 !define PRODUCT_VERSION "7.9.0"
-!define PRODUCT_VERSION_BUILD ""  # Intentionally left empty for releases
+!define PRODUCT_VERSION_BUILD " [20150603-759]"
 !define PRODUCT_PUBLISHER "Moritz Bunkus"
 !define PRODUCT_WEB_SITE "https://www.bunkus.org/videotools/mkvtoolnix/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\mmg.exe"
@@ -364,6 +364,7 @@ Section "Program files" SEC01
   File "/oname=wxstd.mo" "wxWidgets-po\nl\LC_MESSAGES\wxstd.mo"
   SetOutPath "$INSTDIR\locale\pl\LC_MESSAGES"
   File "/oname=mkvtoolnix.mo" "po\pl.mo"
+  File "/oname=qtbase.qm" "po\qt\qtbase_pl.qm"
   File "/oname=wxstd.mo" "wxWidgets-po\pl\LC_MESSAGES\wxstd.mo"
   SetOutPath "$INSTDIR\locale\pt\LC_MESSAGES"
   File "/oname=mkvtoolnix.mo" "po\pt.mo"
