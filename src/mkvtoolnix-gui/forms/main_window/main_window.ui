@@ -117,7 +117,7 @@
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Hel&amp;p</string>
+     <string>He&amp;lp</string>
     </property>
     <addaction name="actionHelpMkvmergeDocumentation"/>
     <addaction name="actionHelpFAQ"/>
@@ -125,10 +125,22 @@
     <addaction name="separator"/>
     <addaction name="actionHelpWebSite"/>
    </widget>
+   <widget class="QMenu" name="menuJobQueue">
+    <property name="title">
+     <string>Job &amp;queue</string>
+    </property>
+    <addaction name="actionJobQueueRemoveDoneOk"/>
+    <addaction name="actionJobQueueRemoveDone"/>
+    <addaction name="actionJobQueueRemoveAll"/>
+    <addaction name="separator"/>
+    <addaction name="actionJobQueueAcknowledgeAllWarnings"/>
+    <addaction name="actionJobQueueAcknowledgeAllErrors"/>
+   </widget>
    <addaction name="menuGUI"/>
    <addaction name="menuMerge"/>
    <addaction name="menuHeaderEditor"/>
    <addaction name="menuChapterEditor"/>
+   <addaction name="menuJobQueue"/>
    <addaction name="menuJobOutput"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -522,6 +534,31 @@
   <action name="actionHelpMkvmergeDocumentation">
    <property name="text">
     <string>mkv&amp;merge documentation</string>
+   </property>
+  </action>
+  <action name="actionJobQueueRemoveDoneOk">
+   <property name="text">
+    <string>Remove &amp;successfully completed jobs</string>
+   </property>
+  </action>
+  <action name="actionJobQueueRemoveAll">
+   <property name="text">
+    <string>Remove a&amp;ll jobs</string>
+   </property>
+  </action>
+  <action name="actionJobQueueAcknowledgeAllWarnings">
+   <property name="text">
+    <string>Acknowledge all &amp;warnings</string>
+   </property>
+  </action>
+  <action name="actionJobQueueAcknowledgeAllErrors">
+   <property name="text">
+    <string>Acknowledge all &amp;errors</string>
+   </property>
+  </action>
+  <action name="actionJobQueueRemoveDone">
+   <property name="text">
+    <string>Remove &amp;completed jobs</string>
    </property>
   </action>
  </widget>

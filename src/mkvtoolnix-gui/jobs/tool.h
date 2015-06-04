@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/jobs/model.h"
 
 class QAction;
+class QMenu;
 
 namespace mtx { namespace gui { namespace Jobs {
 
@@ -25,11 +26,11 @@ protected:
 
   Model *m_model;
 
-  QAction *m_startAction, *m_viewOutputAction, *m_removeAction, *m_removeDoneAction, *m_removeDoneOkAction, *m_removeAllAction;
-  QAction *m_acknowledgeSelectedWarningsAction, *m_acknowledgeAllWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeAllErrorsAction;
+  QAction *m_startAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction;
+  QMenu *m_jobQueueMenu;
 
 public:
-  explicit Tool(QWidget *parent = nullptr);
+  explicit Tool(QWidget *parent, QMenu *jobQueueMenu);
   ~Tool();
 
   Model *model() const;
@@ -46,6 +47,7 @@ public slots:
   void onRemoveDoneOk();
   void onRemoveAll();
 
+  void onJobQueueMenu();
   void onContextMenu(QPoint pos);
 
   void resizeColumnsToContents() const;

@@ -114,9 +114,9 @@ MainWindow::setupMenu() {
 void
 MainWindow::setupToolSelector() {
   m_toolMerge         = new Merge::Tool{ui->tool,         ui->menuMerge};
-  m_toolJobs          = new Jobs::Tool{ui->tool};
   m_toolHeaderEditor  = new HeaderEditor::Tool{ui->tool,  ui->menuHeaderEditor};
   m_toolChapterEditor = new ChapterEditor::Tool{ui->tool, ui->menuChapterEditor};
+  m_toolJobs          = new Jobs::Tool{ui->tool,          ui->menuJobQueue};
   m_watchJobTool      = new WatchJobs::Tool{ui->tool,     ui->menuJobOutput};
 
   ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
@@ -180,6 +180,7 @@ MainWindow::showTheseMenusOnly(QList<QMenu *> const &menus) {
   showAndEnableMenu(*ui->menuMerge,         menus.contains(ui->menuMerge));
   showAndEnableMenu(*ui->menuHeaderEditor,  menus.contains(ui->menuHeaderEditor));
   showAndEnableMenu(*ui->menuChapterEditor, menus.contains(ui->menuChapterEditor));
+  showAndEnableMenu(*ui->menuJobQueue,      menus.contains(ui->menuJobQueue));
   showAndEnableMenu(*ui->menuJobOutput,     menus.contains(ui->menuJobOutput));
 }
 
