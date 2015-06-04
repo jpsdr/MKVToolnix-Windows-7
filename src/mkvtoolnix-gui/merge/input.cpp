@@ -114,6 +114,7 @@ Tab::setupInputControls() {
 
   // Connect signals & slots.
   connect(ui->files,                    &Util::BasicTreeView::filesDropped,         this,          &Tab::addOrAppendDroppedFiles);
+  connect(ui->files,                    &Util::BasicTreeView::deletePressed,        this,          &Tab::onRemoveFiles);
   connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     this,          &Tab::onFileSelectionChanged);
   connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     m_filesModel,  &SourceFileModel::updateSelectionStatus);
   connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     this,          &Tab::onTrackSelectionChanged);

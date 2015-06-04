@@ -75,7 +75,12 @@ BasicTreeView::keyPressEvent(QKeyEvent *event) {
       && mtx::included_in(static_cast<Qt::Key>(event->key()), Qt::Key_Return, Qt::Key_Enter)) {
     emit allSelectedActivated();
     event->accept();
-  } else
+
+  } else if (   (event->modifiers() == Qt::NoModifier)
+             && mtx::included_in(static_cast<Qt::Key>(event->key()), Qt::Key_Backspace, Qt::Key_Delete))
+    emit deletePressed();
+
+  else
     QTreeView::keyPressEvent(event);
 }
 
