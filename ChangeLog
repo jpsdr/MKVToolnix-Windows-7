@@ -1,3 +1,15 @@
+2015-06-04  Moritz Bunkus  <moritz@bunkus.org>
+
+        * all: the detection whether or not the applications are installed
+        on Windows is done by checking for the presence of a special file
+        in the program folder instead of checking for an entry in the
+        registry written by the installer. This enables users to try new
+        portable versions without having to uninstall an installed version
+        first as their settings will be kept separate now. A side effect
+        is that compatibility with Windows XP should be restored.
+
+        Implements #1229.
+
 2015-06-02  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: bug fix: on Windows the job queue was
@@ -6,10 +18,6 @@
 
         * MKVToolNix GUI: job queue bug fix: fixed accidental duplication
         of lines when using drag & drop in certain ways. Fixes #1221.
-
-2015-06-02  Yaroslav Panych  <panych.y@gmail.com>
-
-        * all: restored compatibility with Windows XP.
 
 2015-06-01  Moritz Bunkus  <moritz@bunkus.org>
 
