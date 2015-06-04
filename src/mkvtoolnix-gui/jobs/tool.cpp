@@ -65,6 +65,8 @@ Tool::setupUiControls() {
 
   connect(m_jobQueueMenu,                             &QMenu::aboutToShow,       this,    &Tool::onJobQueueMenu);
 
+  connect(mwUi->actionJobQueueStartAllPending,        &QAction::triggered,       this,    &Tool::onStartAllPending);
+
   connect(mwUi->actionJobQueueRemoveDone,             &QAction::triggered,       this,    &Tool::onRemoveDone);
   connect(mwUi->actionJobQueueRemoveDoneOk,           &QAction::triggered,       this,    &Tool::onRemoveDoneOk);
   connect(mwUi->actionJobQueueRemoveAll,              &QAction::triggered,       this,    &Tool::onRemoveAll);
@@ -83,8 +85,16 @@ Tool::setupUiControls() {
 
 void
 Tool::onJobQueueMenu() {
-  auto mwUi    = MainWindow::getUi();
-  auto hasJobs = m_model->hasJobs();
+  auto mwUi             = MainWindow::getUi();
+  auto hasJobs          = m_model->hasJobs();
+  auto hasPendingManual = false;
+
+  m_model->withAllJobs([&hasPendingManual](Job &job) {
+    if (Job::PendingManual == job.m_status)
+      hasPendingManual = true;
+  });
+
+  mwUi->actionJobQueueStartAllPending->setEnabled(hasPendingManual);
 
   mwUi->actionJobQueueRemoveDone->setEnabled(hasJobs);
   mwUi->actionJobQueueRemoveDoneOk->setEnabled(hasJobs);
@@ -126,6 +136,15 @@ void
 Tool::onStart() {
   m_model->withSelectedJobs(ui->jobs, [](Job &job) { job.setPendingAuto(); });
 
+  m_model->startNextAutoJob();
+}
+
+void
+Tool::onStartAllPending() {
+  m_model->withAllJobs([](Job &job) {
+    if (Job::PendingManual == job.m_status)
+      job.setPendingAuto();
+  });
   m_model->startNextAutoJob();
 }
 

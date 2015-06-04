@@ -117,7 +117,7 @@
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>He&amp;lp</string>
+     <string>Hel&amp;p</string>
     </property>
     <addaction name="actionHelpMkvmergeDocumentation"/>
     <addaction name="actionHelpFAQ"/>
@@ -127,8 +127,10 @@
    </widget>
    <widget class="QMenu" name="menuJobQueue">
     <property name="title">
-     <string>Job &amp;queue</string>
+     <string>&amp;Job queue</string>
     </property>
+    <addaction name="actionJobQueueStartAllPending"/>
+    <addaction name="separator"/>
     <addaction name="actionJobQueueRemoveDoneOk"/>
     <addaction name="actionJobQueueRemoveDone"/>
     <addaction name="actionJobQueueRemoveAll"/>
@@ -559,6 +561,11 @@
   <action name="actionJobQueueRemoveDone">
    <property name="text">
     <string>Remove &amp;completed jobs</string>
+   </property>
+  </action>
+  <action name="actionJobQueueStartAllPending">
+   <property name="text">
+    <string>&amp;Start all pending jobs</string>
    </property>
   </action>
  </widget>

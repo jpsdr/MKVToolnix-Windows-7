@@ -41,6 +41,7 @@ public:
 
 public slots:
   void onStart();
+  void onStartAllPending();
   void onViewOutput();
   void onRemove();
   void onRemoveDone();
