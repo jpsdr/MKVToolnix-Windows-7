@@ -77,6 +77,7 @@ Tab::setupInputControls() {
 
   ui->files->setModel(m_filesModel);
   ui->tracks->setModel(m_tracksModel);
+  ui->tracks->enterActivatesAllSelected(true);
 
   // Track & chapter language
   Util::setupLanguageComboBox(*ui->trackLanguage);
@@ -112,24 +113,26 @@ Tab::setupInputControls() {
   ui->tracks->addAction(m_disableAllTracksAction);
 
   // Connect signals & slots.
-  connect(ui->files,                    &Util::BasicTreeView::filesDropped,     this,          &Tab::addOrAppendDroppedFiles);
-  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged, this,          &Tab::onFileSelectionChanged);
-  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged, m_filesModel,  &SourceFileModel::updateSelectionStatus);
-  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged, this,          &Tab::onTrackSelectionChanged);
-  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged, m_tracksModel, &TrackModel::updateSelectionStatus);
+  connect(ui->files,                    &Util::BasicTreeView::filesDropped,         this,          &Tab::addOrAppendDroppedFiles);
+  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     this,          &Tab::onFileSelectionChanged);
+  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     m_filesModel,  &SourceFileModel::updateSelectionStatus);
+  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     this,          &Tab::onTrackSelectionChanged);
+  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     m_tracksModel, &TrackModel::updateSelectionStatus);
+  connect(ui->tracks,                   &Util::BasicTreeView::allSelectedActivated, this,          &Tab::toggleMuxThisForSelectedTracks);
+  connect(ui->tracks,                   &QTreeView::doubleClicked,                  this,          &Tab::toggleMuxThisForSelectedTracks);
 
-  connect(m_addFilesAction,             &QAction::triggered,                    this,          &Tab::onAddFiles);
-  connect(m_appendFilesAction,          &QAction::triggered,                    this,          &Tab::onAppendFiles);
-  connect(m_addAdditionalPartsAction,   &QAction::triggered,                    this,          &Tab::onAddAdditionalParts);
-  connect(m_removeFilesAction,          &QAction::triggered,                    this,          &Tab::onRemoveFiles);
-  connect(m_removeAllFilesAction,       &QAction::triggered,                    this,          &Tab::onRemoveAllFiles);
+  connect(m_addFilesAction,             &QAction::triggered,                        this,          &Tab::onAddFiles);
+  connect(m_appendFilesAction,          &QAction::triggered,                        this,          &Tab::onAppendFiles);
+  connect(m_addAdditionalPartsAction,   &QAction::triggered,                        this,          &Tab::onAddAdditionalParts);
+  connect(m_removeFilesAction,          &QAction::triggered,                        this,          &Tab::onRemoveFiles);
+  connect(m_removeAllFilesAction,       &QAction::triggered,                        this,          &Tab::onRemoveAllFiles);
 
-  connect(m_selectAllTracksAction,      &QAction::triggered,                    this,          &Tab::selectAllTracks);
-  connect(m_enableAllTracksAction,      &QAction::triggered,                    this,          &Tab::enableAllTracks);
-  connect(m_disableAllTracksAction,     &QAction::triggered,                    this,          &Tab::disableAllTracks);
+  connect(m_selectAllTracksAction,      &QAction::triggered,                        this,          &Tab::selectAllTracks);
+  connect(m_enableAllTracksAction,      &QAction::triggered,                        this,          &Tab::enableAllTracks);
+  connect(m_disableAllTracksAction,     &QAction::triggered,                        this,          &Tab::disableAllTracks);
 
-  connect(m_filesModel,                 &SourceFileModel::rowsInserted,         this,          &Tab::onFileRowsInserted);
-  connect(m_tracksModel,                &TrackModel::rowsInserted,              this,          &Tab::onTrackRowsInserted);
+  connect(m_filesModel,                 &SourceFileModel::rowsInserted,             this,          &Tab::onFileRowsInserted);
+  connect(m_tracksModel,                &TrackModel::rowsInserted,                  this,          &Tab::onTrackRowsInserted);
 
   onTrackSelectionChanged();
   enableTracksActions();
@@ -446,6 +449,28 @@ Tab::onMuxThisChanged(int newValue) {
   newValue = data.toInt();
 
   withSelectedTracks([&](Track *track) { track->m_muxThis = 0 == newValue; });
+}
+
+void
+Tab::toggleMuxThisForSelectedTracks() {
+  auto allEnabled     = true;
+  auto tracksSelected = false;
+
+  withSelectedTracks([&allEnabled, &tracksSelected](Track *track) {
+    tracksSelected = true;
+
+    if (!track->m_muxThis)
+      allEnabled = false;
+  }, false, ui->muxThis);
+
+  if (!tracksSelected)
+    return;
+
+  auto newEnabled = !allEnabled;
+
+  withSelectedTracks([newEnabled](Track *track) { track->m_muxThis = newEnabled; }, false, ui->muxThis);
+
+  Util::setComboBoxIndexIf(ui->muxThis, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toInt() == (newEnabled ? 0 : 1)); });
 }
 
 void

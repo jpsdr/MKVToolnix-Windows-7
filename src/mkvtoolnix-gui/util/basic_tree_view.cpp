@@ -3,6 +3,7 @@
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 
+#include "common/list_utils.h"
 #include "mkvtoolnix-gui/util/basic_tree_view.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -27,6 +28,12 @@ BasicTreeView::acceptDroppedFiles(bool enable) {
 BasicTreeView &
 BasicTreeView::dropInFirstColumnOnly(bool enable) {
   m_dropInFirstColumnOnly = enable;
+  return *this;
+}
+
+BasicTreeView &
+BasicTreeView::enterActivatesAllSelected(bool enable) {
+  m_enterActivatesAllSelected = enable;
   return *this;
 }
 
@@ -59,6 +66,17 @@ BasicTreeView::dropEvent(QDropEvent *event) {
   }
 
   QTreeView::dropEvent(event);
+}
+
+void
+BasicTreeView::keyPressEvent(QKeyEvent *event) {
+  if (   m_enterActivatesAllSelected
+      && (event->modifiers() == Qt::NoModifier)
+      && mtx::included_in(static_cast<Qt::Key>(event->key()), Qt::Key_Return, Qt::Key_Enter)) {
+    emit allSelectedActivated();
+    event->accept();
+  } else
+    QTreeView::keyPressEvent(event);
 }
 
 }}}

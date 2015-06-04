@@ -83,6 +83,8 @@ public slots:
   virtual void enableAllTracks();
   virtual void disableAllTracks();
 
+  virtual void toggleMuxThisForSelectedTracks();
+
   virtual void onFileSelectionChanged();
   virtual void onTrackSelectionChanged();
 
