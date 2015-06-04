@@ -15,6 +15,7 @@
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -139,8 +140,8 @@ Tool::reload() {
     return;
 
   if (tab->hasBeenModified()) {
-    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
-                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
+                                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes)
       return;
   }
@@ -163,8 +164,8 @@ Tool::closeTab(int index) {
   auto tab = static_cast<Tab *>(ui->editors->widget(index));
 
   if (tab->hasBeenModified()) {
-    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
-                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
+                                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes)
       return;
   }

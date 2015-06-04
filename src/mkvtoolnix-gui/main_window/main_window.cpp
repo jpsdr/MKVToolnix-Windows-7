@@ -21,6 +21,7 @@
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 #include "mkvtoolnix-gui/merge/tool.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/moving_pixmap_overlay.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -286,7 +287,7 @@ MainWindow::beforeCloseCheckRunningJobs() {
   if (!model->hasRunningJobs())
     return true;
 
-  if (QMessageBox::question(this, QY("Abort running jobs"), Q("%1 %2").arg(QY("There is currently a job running.")).arg(QY("Do you want to abort that job and quit?"))) == QMessageBox::No)
+  if (Util::MessageBox::question(this, QY("Abort running jobs"), Q("%1 %2").arg(QY("There is currently a job running.")).arg(QY("Do you want to abort that job and quit?"))) == QMessageBox::No)
     return false;
 
   model->stop();

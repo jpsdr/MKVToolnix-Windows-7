@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -93,7 +94,7 @@ Tab::load(QString const &fileName) {
   } catch (InvalidSettingsX &) {
     m_config.reset();
 
-    QMessageBox::critical(this, QY("Error loading settings file"), QY("The settings file '%1' contains invalid settings and was not loaded.").arg(fileName));
+    Util::MessageBox::critical(this, QY("Error loading settings file"), QY("The settings file '%1' contains invalid settings and was not loaded.").arg(fileName));
 
     emit removeThisTab();
   }
@@ -237,12 +238,12 @@ Tab::retranslateUi() {
 bool
 Tab::isReadyForMerging() {
   if (m_config.m_files.isEmpty()) {
-    QMessageBox::critical(this, QY("Cannot start merging"), QY("You have to add at least one source file before you can start merging or add a job to the job queue."));
+    Util::MessageBox::critical(this, QY("Cannot start merging"), QY("You have to add at least one source file before you can start merging or add a job to the job queue."));
     return false;
   }
 
   if (m_config.m_destination.isEmpty()) {
-    QMessageBox::critical(this, QY("Cannot start merging"), QY("You have to set the output file name before you can start merging or add a job to the job queue."));
+    Util::MessageBox::critical(this, QY("Cannot start merging"), QY("You have to set the output file name before you can start merging or add a job to the job queue."));
     return false;
   }
 

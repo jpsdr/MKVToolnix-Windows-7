@@ -190,8 +190,8 @@ Tool::reload() {
 
   // TODO: Tool::reload: hasBeenModified
 //   if (tab->hasBeenModified()) {
-//     auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
-//                                         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+//     auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
+//                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
 //     if (answer != QMessageBox::Yes)
 //       return;
 //   }
@@ -208,8 +208,8 @@ Tool::closeTab(int index) {
 
   // TODO: Tool::closeTab: hasBeenModified
   // if (tab->hasBeenModified()) {
-  //   auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
-  //                                       QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+  //   auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
+  //                                            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
   //   if (answer != QMessageBox::Yes)
   //     return;
   // }

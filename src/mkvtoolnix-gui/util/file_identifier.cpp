@@ -7,6 +7,7 @@
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
@@ -44,12 +45,12 @@ FileIdentifier::identify() {
     auto pos       = m_output.isEmpty() ? -1            : m_output[0].indexOf("container:");
     auto container = -1 == pos          ? QY("unknown") : m_output[0].mid(pos + 11);
 
-    QMessageBox::critical(m_parent, QY("Unsupported file format"), QY("The file is an unsupported container format (%1).").arg(container));
+    Util::MessageBox::critical(m_parent, QY("Unsupported file format"), QY("The file is an unsupported container format (%1).").arg(container));
 
     return false;
   }
 
-  QMessageBox::critical(m_parent, QY("Unrecognized file format"), QY("The file was not recognized as a supported format (exit code: %1).").arg(exitCode));
+  Util::MessageBox::critical(m_parent, QY("Unrecognized file format"), QY("The file was not recognized as a supported format (exit code: %1).").arg(exitCode));
 
   return false;
 }

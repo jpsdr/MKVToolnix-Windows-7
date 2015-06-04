@@ -25,6 +25,7 @@
 #include "mkvtoolnix-gui/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -194,21 +195,21 @@ Tab::loadFromMatroskaFile() {
   m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
 
   if (!m_analyzer->process(kax_analyzer_c::parse_mode_fast)) {
-    QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName));
+    Util::MessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName));
     emit removeThisTab();
     return {};
   }
 
   auto idx = m_analyzer->find(KaxChapters::ClassInfos.GlobalId);
   if (-1 == idx) {
-    QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) does not contain any chapters.").arg(m_fileName));
+    Util::MessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) does not contain any chapters.").arg(m_fileName));
     emit removeThisTab();
     return {};
   }
 
   auto chapters = m_analyzer->read_element(idx);
   if (!chapters) {
-    QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName));
+    Util::MessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName));
     emit removeThisTab();
   }
 
@@ -236,12 +237,12 @@ Tab::loadFromChapterFile() {
     if (!error.isEmpty())
       message = Q("%1 %2").arg(message).arg(QY("Error message from the parser: %1").arg(error));
 
-    QMessageBox::critical(this, QY("File parsing failed"), message);
+    Util::MessageBox::critical(this, QY("File parsing failed"), message);
     emit removeThisTab();
 
   } else if (isSimpleFormat) {
-    QMessageBox::warning(this, QY("Simple chapter file format"), QY("The file you tried to open (%1) is a simple chapter file format. This can only be read but not written. "
-                                                                    "You will have to save the file to a Matroska or an XML chapter file.").arg(m_fileName));
+    Util::MessageBox::warning(this, QY("Simple chapter file format"), QY("The file you tried to open (%1) is a simple chapter file format. This can only be read but not written. "
+                                                                         "You will have to save the file to a Matroska or an XML chapter file.").arg(m_fileName));
     m_fileName.clear();
     emit titleChanged();
   }
@@ -331,11 +332,11 @@ Tab::saveAsXmlImpl(bool requireNewFileName) {
       mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, out);
 
     } catch (mtx::mm_io::exception &) {
-      QMessageBox::critical(this, QY("Saving failed"), QY("Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."));
+      Util::MessageBox::critical(this, QY("Saving failed"), QY("Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."));
       return false;
 
     } catch (mtx::xml::conversion_x &ex) {
-      QMessageBox::critical(this, QY("Saving failed"), QY("Converting the chapters to XML failed: %1").arg(ex.what()));
+      Util::MessageBox::critical(this, QY("Saving failed"), QY("Converting the chapters to XML failed: %1").arg(ex.what()));
       return false;
     }
 
@@ -365,7 +366,7 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
     if (doRequireNewFileName || (QFileInfo{newFileName}.lastModified() != m_fileModificationTime)) {
       m_analyzer = std::make_unique<QtKaxAnalyzer>(this, newFileName);
       if (!m_analyzer->process(kax_analyzer_c::parse_mode_fast)) {
-        QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(newFileName));
+        Util::MessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(newFileName));
         return false;
       }
     }
@@ -412,7 +413,7 @@ Tab::copyControlsToStorage(QModelIndex const &idx) {
 
   selectChapterRow(idx, true);
 
-  QMessageBox::critical(this, QY("Validation failed"), result.second);
+  Util::MessageBox::critical(this, QY("Validation failed"), result.second);
 
   return false;
 }

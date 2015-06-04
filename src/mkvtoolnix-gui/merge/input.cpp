@@ -21,6 +21,7 @@
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/file_type_filter.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -701,7 +702,7 @@ Tab::onAddAdditionalParts() {
   auto currentIdx = selectedSourceFile();
   auto sourceFile = m_filesModel->fromIndex(currentIdx);
   if (sourceFile && !sourceFile->m_tracks.size()) {
-    QMessageBox::critical(this, QY("Unable to append files"), QY("You cannot add additional parts to files that don't contain tracks."));
+    Util::MessageBox::critical(this, QY("Unable to append files"), QY("You cannot add additional parts to files that don't contain tracks."));
     return;
   }
 
