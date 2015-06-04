@@ -14,7 +14,7 @@
 namespace mtx { namespace gui {
 
 PreferencesDialog::PreferencesDialog(QWidget *parent)
-  : QDialog{parent}
+  : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::PreferencesDialog}
   , m_cfg(Util::Settings::get())
   , m_previousUiLocale{m_cfg.m_uiLocale}

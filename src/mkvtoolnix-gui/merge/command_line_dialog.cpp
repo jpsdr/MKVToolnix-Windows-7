@@ -13,7 +13,7 @@ namespace mtx { namespace gui { namespace Merge {
 CommandLineDialog::CommandLineDialog(QWidget *parent,
                                      QStringList const &options,
                                      QString const &title)
-  : QDialog{parent}
+  : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::CommandLineDialog}
   , m_options{options}
 {

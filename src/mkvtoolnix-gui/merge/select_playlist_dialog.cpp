@@ -108,7 +108,7 @@ TrackItem::create(Track const &track) {
 
 SelectPlaylistDialog::SelectPlaylistDialog(QWidget *parent,
                                            QList<SourceFilePtr> const &scannedFiles)
-  : QDialog{parent}
+  : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::SelectPlaylistDialog}
   , m_scannedFiles{scannedFiles}
 {

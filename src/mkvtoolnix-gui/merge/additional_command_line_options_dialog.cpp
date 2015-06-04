@@ -17,7 +17,7 @@ using namespace mtx::gui;
 
 AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *parent,
                                                                        QString const &options)
-  : QDialog{parent}
+  : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , m_ui{new Ui::AdditionalCommandLineOptionsDialog}
   , m_customOptions{options}
 {
