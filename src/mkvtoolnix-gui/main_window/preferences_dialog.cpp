@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QFileDialog>
+#include <QVector>
 
 #include "common/extern_data.h"
 #include "common/qt.h"
@@ -126,44 +127,30 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("This is done only if there is already a file whose name matches the unmodified output file name.")));
 
   // Often used XYZ page
-  Util::setToolTip(ui->lwGuiAvailableCommonLanguages,     QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
-  Util::setToolTip(ui->lwGuiSelectedCommonLanguages,      QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
+  ui->tbOftenUsedLanguages->setToolTips(QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."),
+                                        QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
 
-  Util::setToolTip(ui->lwGuiAvailableCommonCountries,     QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
-  Util::setToolTip(ui->lwGuiSelectedCommonCountries,      QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
+  ui->tbOftenUsedCountries->setToolTips(QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."),
+                                        QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
 
-  Util::setToolTip(ui->lwGuiAvailableCommonCharacterSets, QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
-  Util::setToolTip(ui->lwGuiSelectedCommonCharacterSets,  QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
+  ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."),
+                                            QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
 }
 
 void
 PreferencesDialog::setupConnections() {
-  connect(ui->pbMEditDefaultAdditionalCommandLineOptions,          &QPushButton::clicked,                  this,                      &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
+  connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,       this,                      &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
-  connect(ui->lwGuiAvailableCommonLanguages->selectionModel(),     &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::availableCommonLanguagesSelectionChanged);
-  connect(ui->lwGuiSelectedCommonLanguages->selectionModel(),      &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::selectedCommonLanguagesSelectionChanged);
-  connect(ui->lwGuiAvailableCommonCountries->selectionModel(),     &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::availableCommonCountriesSelectionChanged);
-  connect(ui->lwGuiSelectedCommonCountries->selectionModel(),      &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::selectedCommonCountriesSelectionChanged);
-  connect(ui->lwGuiAvailableCommonCharacterSets->selectionModel(), &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::availableCommonCharacterSetsSelectionChanged);
-  connect(ui->lwGuiSelectedCommonCharacterSets->selectionModel(),  &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::selectedCommonCharacterSetsSelectionChanged);
+  connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,         ui->cbGuiJobRemovalPolicy, &QComboBox::setEnabled);
+  connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,         this,                      &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,      this,                      &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetParentDirectory,                  &QRadioButton::toggled,      this,                      &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetPreviousDirectory,                &QRadioButton::toggled,      this,                      &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetFixedDirectory,                   &QRadioButton::toggled,      this,                      &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->pbMBrowseAutoSetFixedDirectory,             &QPushButton::clicked,       this,                      &PreferencesDialog::browseFixedOutputDirectory);
 
-  connect(ui->pbGuiAddCommonLanguages,                             &QPushButton::clicked,                  this,                      &PreferencesDialog::addCommonLanguages);
-  connect(ui->pbGuiRemoveCommonLanguages,                          &QPushButton::clicked,                  this,                      &PreferencesDialog::removeCommonLanguages);
-  connect(ui->pbGuiAddCommonCountries,                             &QPushButton::clicked,                  this,                      &PreferencesDialog::addCommonCountries);
-  connect(ui->pbGuiRemoveCommonCountries,                          &QPushButton::clicked,                  this,                      &PreferencesDialog::removeCommonCountries);
-  connect(ui->pbGuiAddCommonLanguages,                             &QPushButton::clicked,                  this,                      &PreferencesDialog::addCommonLanguages);
-  connect(ui->pbGuiRemoveCommonLanguages,                          &QPushButton::clicked,                  this,                      &PreferencesDialog::removeCommonLanguages);
-
-  connect(ui->cbGuiRemoveJobs,                                     &QCheckBox::toggled,                    ui->cbGuiJobRemovalPolicy, &QComboBox::setEnabled);
-  connect(ui->cbMAutoSetOutputFileName,                            &QCheckBox::toggled,                    this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetSameDirectory,                             &QRadioButton::toggled,                 this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetParentDirectory,                           &QRadioButton::toggled,                 this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetPreviousDirectory,                         &QRadioButton::toggled,                 this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetFixedDirectory,                            &QRadioButton::toggled,                 this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->pbMBrowseAutoSetFixedDirectory,                      &QPushButton::clicked,                  this,                      &PreferencesDialog::browseFixedOutputDirectory);
-
-  connect(ui->buttons,                                             &QDialogButtonBox::accepted,            this,                      &PreferencesDialog::accept);
-  connect(ui->buttons,                                             &QDialogButtonBox::rejected,            this,                      &PreferencesDialog::reject);
+  connect(ui->buttons,                                    &QDialogButtonBox::accepted, this,                      &PreferencesDialog::accept);
+  connect(ui->buttons,                                    &QDialogButtonBox::rejected, this,                      &PreferencesDialog::reject);
 }
 
 void
@@ -204,68 +191,39 @@ PreferencesDialog::setupJobsJobOutput() {
 
 void
 PreferencesDialog::setupCommonLanguages() {
-  auto &languages = App::iso639Languages();
-  auto isCommon   = QHash<QString, bool>{};
+  auto &allLanguages   = App::iso639Languages();
+  auto isCommon        = QHash<QString, bool>{};
+  auto commonLanguages = Util::SideBySideMultiSelect::ItemList{};
 
   for (auto const &language : m_cfg.m_oftenUsedLanguages)
     isCommon[language] = true;
 
-  for (auto const &language : languages) {
-    auto item = new QListWidgetItem{language.first};
-
-    item->setData(Qt::UserRole, language.second);
+  for (auto const &language : allLanguages)
     if (isCommon[language.second])
-      ui->lwGuiSelectedCommonLanguages->addItem(item);
-    else
-      ui->lwGuiAvailableCommonLanguages->addItem(item);
-  }
+      commonLanguages << language;
 
-  ui->pbGuiAddCommonLanguages->setEnabled(false);
-  ui->pbGuiRemoveCommonLanguages->setEnabled(false);
+  ui->tbOftenUsedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allLanguages)), commonLanguages);
 }
 
 void
 PreferencesDialog::setupCommonCountries() {
-  auto &countries = App::iso3166_1Alpha2Countries();
-  auto isCommon   = QHash<QString, bool>{};
+  auto &allCountries   = App::iso3166_1Alpha2Countries();
+  auto isCommon        = QHash<QString, bool>{};
+  auto commonCountries = Util::SideBySideMultiSelect::ItemList{};
 
   for (auto const &country : m_cfg.m_oftenUsedCountries)
     isCommon[country] = true;
 
-  for (auto const &country : countries) {
-    auto item = new QListWidgetItem{country.first};
-
-    item->setData(Qt::UserRole, country.second);
+  for (auto const &country : allCountries)
     if (isCommon[country.second])
-      ui->lwGuiSelectedCommonCountries->addItem(item);
-    else
-      ui->lwGuiAvailableCommonCountries->addItem(item);
-  }
+      commonCountries << country;
 
-  ui->pbGuiAddCommonCountries->setEnabled(false);
-  ui->pbGuiRemoveCommonCountries->setEnabled(false);
+  ui->tbOftenUsedCountries->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allCountries)), commonCountries);
 }
 
 void
 PreferencesDialog::setupCommonCharacterSets() {
-  auto &characterSets = App::characterSets();
-  auto isCommon       = QHash<QString, bool>{};
-
-  for (auto const &characterSet : m_cfg.m_oftenUsedCharacterSets)
-    isCommon[characterSet] = true;
-
-  for (auto const &characterSet : characterSets) {
-    auto item = new QListWidgetItem{characterSet};
-
-    item->setData(Qt::UserRole, characterSet);
-    if (isCommon[characterSet])
-      ui->lwGuiSelectedCommonCharacterSets->addItem(item);
-    else
-      ui->lwGuiAvailableCommonCharacterSets->addItem(item);
-  }
-
-  ui->pbGuiAddCommonCharacterSets->setEnabled(false);
-  ui->pbGuiRemoveCommonCharacterSets->setEnabled(false);
+  ui->tbOftenUsedCharacterSets->setItems(QList<QString>::fromVector(QVector<QString>::fromStdVector(App::characterSets())), m_cfg.m_oftenUsedCharacterSets);
 }
 
 void
@@ -312,15 +270,14 @@ PreferencesDialog::setupOutputFileNamePolicy() {
 void
 PreferencesDialog::save() {
   // GUI page:
-  m_cfg.m_uiLocale                  = ui->cbGuiInterfaceLanguage->currentData().toString();
-  m_cfg.m_checkForUpdates           = ui->cbGuiCheckForUpdates->isChecked();
-  m_cfg.m_disableAnimations         = ui->cbGuiDisableAnimations->isChecked();
-  auto idx                          = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
-  m_cfg.m_jobRemovalPolicy          = static_cast<Util::Settings::JobRemovalPolicy>(idx);
+  m_cfg.m_uiLocale                      = ui->cbGuiInterfaceLanguage->currentData().toString();
+  m_cfg.m_checkForUpdates               = ui->cbGuiCheckForUpdates->isChecked();
+  m_cfg.m_disableAnimations             = ui->cbGuiDisableAnimations->isChecked();
+  auto idx                              = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
+  m_cfg.m_jobRemovalPolicy              = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 
-  saveCommonList(*ui->lwGuiSelectedCommonLanguages,     m_cfg.m_oftenUsedLanguages);
-  saveCommonList(*ui->lwGuiSelectedCommonCountries,     m_cfg.m_oftenUsedCountries);
-  saveCommonList(*ui->lwGuiSelectedCommonCharacterSets, m_cfg.m_oftenUsedCharacterSets);
+  m_cfg.m_defaultChapterLanguage        = ui->cbCEDefaultLanguage->currentData().toString();
+  m_cfg.m_defaultChapterCountry         = ui->cbCEDefaultCountry->currentData().toString();
 
   // Merge page:
   m_cfg.m_autoSetFileTitle              = ui->cbMAutoSetFileTitle->isChecked();
@@ -341,30 +298,12 @@ PreferencesDialog::save() {
   m_cfg.m_fixedOutputDir                = ui->leMAutoSetFixedDirectory->text();
   m_cfg.m_uniqueOutputFileNames         = ui->cbMUniqueOutputFileNames->isChecked();
 
-  // Chapter editor page:
-  m_cfg.m_defaultChapterLanguage        = ui->cbCEDefaultLanguage->currentData().toString();
-  m_cfg.m_defaultChapterCountry         = ui->cbCEDefaultCountry->currentData().toString();
+  // Often used selections page:
+  m_cfg.m_oftenUsedLanguages            = ui->tbOftenUsedLanguages->selectedItemValues();
+  m_cfg.m_oftenUsedCountries            = ui->tbOftenUsedCountries->selectedItemValues();
+  m_cfg.m_oftenUsedCharacterSets        = ui->tbOftenUsedCharacterSets->selectedItemValues();
 
   m_cfg.save();
-}
-
-void
-PreferencesDialog::saveCommonList(QListWidget &from,
-                                  QStringList &to) {
-  to.clear();
-
-  for (auto row = 0, numRows = from.count(); row < numRows; ++row)
-    to << from.item(row)->data(Qt::UserRole).toString();
-}
-
-void
-PreferencesDialog::moveSelectedListWidgetItems(QListWidget &from,
-                                               QListWidget &to) {
-  for (auto const &item : from.selectedItems()) {
-    auto actualItem = from.takeItem(from.row(item));
-    if (actualItem)
-      to.addItem(actualItem);
-  }
 }
 
 void
@@ -381,72 +320,6 @@ PreferencesDialog::browseFixedOutputDirectory() {
   auto dir = QFileDialog::getExistingDirectory(this, QY("Select output directory"), ui->leMAutoSetFixedDirectory->text());
   if (!dir.isEmpty())
     ui->leMAutoSetFixedDirectory->setText(dir);
-}
-
-void
-PreferencesDialog::availableCommonLanguagesSelectionChanged() {
-  auto hasSelected = !ui->lwGuiAvailableCommonLanguages->selectedItems().isEmpty();
-  ui->pbGuiAddCommonLanguages->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::selectedCommonLanguagesSelectionChanged() {
-  auto hasSelected = !ui->lwGuiSelectedCommonLanguages->selectedItems().isEmpty();
-  ui->pbGuiRemoveCommonLanguages->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::availableCommonCountriesSelectionChanged() {
-  auto hasSelected = !ui->lwGuiAvailableCommonCountries->selectedItems().isEmpty();
-  ui->pbGuiAddCommonCountries->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::selectedCommonCountriesSelectionChanged() {
-  auto hasSelected = !ui->lwGuiSelectedCommonCountries->selectedItems().isEmpty();
-  ui->pbGuiRemoveCommonCountries->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::availableCommonCharacterSetsSelectionChanged() {
-  auto hasSelected = !ui->lwGuiAvailableCommonCharacterSets->selectedItems().isEmpty();
-  ui->pbGuiAddCommonCharacterSets->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::selectedCommonCharacterSetsSelectionChanged() {
-  auto hasSelected = !ui->lwGuiSelectedCommonCharacterSets->selectedItems().isEmpty();
-  ui->pbGuiRemoveCommonCharacterSets->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::addCommonLanguages() {
-  moveSelectedListWidgetItems(*ui->lwGuiAvailableCommonLanguages, *ui->lwGuiSelectedCommonLanguages);
-}
-
-void
-PreferencesDialog::removeCommonLanguages() {
-  moveSelectedListWidgetItems(*ui->lwGuiSelectedCommonLanguages, *ui->lwGuiAvailableCommonLanguages);
-}
-
-void
-PreferencesDialog::addCommonCountries() {
-  moveSelectedListWidgetItems(*ui->lwGuiAvailableCommonCountries, *ui->lwGuiSelectedCommonCountries);
-}
-
-void
-PreferencesDialog::removeCommonCountries() {
-  moveSelectedListWidgetItems(*ui->lwGuiSelectedCommonCountries, *ui->lwGuiAvailableCommonCountries);
-}
-
-void
-PreferencesDialog::addCommonCharacterSets() {
-  moveSelectedListWidgetItems(*ui->lwGuiAvailableCommonCharacterSets, *ui->lwGuiSelectedCommonCharacterSets);
-}
-
-void
-PreferencesDialog::removeCommonCharacterSets() {
-  moveSelectedListWidgetItems(*ui->lwGuiSelectedCommonCharacterSets, *ui->lwGuiAvailableCommonCharacterSets);
 }
 
 void
