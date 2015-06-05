@@ -23,7 +23,9 @@ protected:
   QMutex m_mutex;
   QIcon m_warningsIcon, m_errorsIcon;
 
-  bool m_started, m_dontStartJobsNow;
+  bool m_started, m_dontStartJobsNow, m_running;
+
+  QDateTime m_queueStartTime;
 
 public:
   // labels << QY("Status") << QY("Description") << QY("Type") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
@@ -49,6 +51,7 @@ public:
   int rowFromId(uint64_t id) const;
   bool hasJobs() const;
   bool hasRunningJobs();
+  bool isRunning() const;
 
   void withSelectedJobs(QAbstractItemView *view, std::function<void(Job &)> const &worker);
   void withAllJobs(std::function<void(Job &)> const &worker);
@@ -69,10 +72,15 @@ public:
   virtual Qt::DropActions supportedDropActions() const;
   virtual Qt::ItemFlags flags(QModelIndex const &index) const;
 
+  QDateTime queueStartTime() const;
+
 signals:
   void progressChanged(int progress, int totalProgress);
   void jobStatsChanged(int numPendingAutomatic, int numPendingManual, int numOther);
   void numUnacknowledgedWarningsOrErrorsChanged(int numWarnings, int numErrors);
+
+  void queueStarted();
+  void queueStopped();
 
 public slots:
   void onStatusChanged(uint64_t id);

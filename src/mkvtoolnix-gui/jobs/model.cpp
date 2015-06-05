@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QTimer>
 
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
@@ -23,6 +24,7 @@ Model::Model(QObject *parent)
   , m_errorsIcon{Q(":/icons/16x16/dialog-error.png")}
   , m_started{}
   , m_dontStartJobsNow{}
+  , m_running{}
 {
   retranslateUi();
 }
@@ -100,6 +102,12 @@ Model::hasRunningJobs() {
       return true;
 
   return false;
+}
+
+bool
+Model::isRunning()
+  const {
+  return m_running;
 }
 
 void
@@ -251,10 +259,17 @@ Model::onStatusChanged(uint64_t id) {
 
   item(row, StatusColumn)->setText(Job::displayableStatus(job.m_status));
 
-  if (Job::Running == status)
+  if (Job::Running == status) {
     item(row, DateStartedColumn)->setText(Util::displayableDate(job.m_dateStarted));
 
-  else if ((Job::DoneOk == status) || (Job::DoneWarnings == status) || (Job::Failed == status) || (Job::Aborted == status))
+    if (!m_running) {
+      m_running        = true;
+      m_queueStartTime = QDateTime::currentDateTime();
+
+      emit queueStarted();
+    }
+
+  } else if (mtx::included_in(status, Job::DoneOk, Job::DoneWarnings, Job::Failed, Job::Aborted))
     item(row, DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
 
   startNextAutoJob();
@@ -356,6 +371,8 @@ Model::startNextAutoJob() {
   saveJobs();
 
   if (toStart) {
+    MainWindow::watchCurrentJobTab()->connectToJob(*toStart);
+
     toStart->start();
     updateJobStats();
     return;
@@ -365,6 +382,11 @@ Model::startNextAutoJob() {
   m_toBeProcessed.clear();
   updateProgress();
   updateJobStats();
+
+  auto wasRunning = m_running;
+  m_running       = false;
+  if (wasRunning)
+    emit queueStopped();
 }
 
 void
@@ -376,6 +398,11 @@ Model::start() {
 void
 Model::stop() {
   m_started = false;
+
+  auto wasRunning = m_running;
+  m_running       = false;
+  if (wasRunning)
+    emit queueStopped();
 }
 
 void
@@ -470,8 +497,7 @@ Model::loadJobs(QSettings &settings) {
       auto job = Job::loadJob(settings);
       add(job);
 
-      if (watchTab)
-        watchTab->connectToJob(*job);
+      watchTab->connectToJob(*job);
 
     } catch (Merge::InvalidSettingsX &) {
     }
@@ -522,6 +548,12 @@ Model::acknowledgeSelectedWarnings(QAbstractItemView *view) {
 void
 Model::acknowledgeSelectedErrors(QAbstractItemView *view) {
   withSelectedJobs(view, [](Job &job) { job.acknowledgeErrors(); });
+}
+
+QDateTime
+Model::queueStartTime()
+  const {
+  return m_queueStartTime;
 }
 
 }}}

@@ -7,6 +7,9 @@
 
 #include "mkvtoolnix-gui/jobs/job.h"
 
+class QDateTime;
+class QLabel;
+
 namespace mtx { namespace gui { namespace WatchJobs {
 
 namespace Ui {
@@ -20,7 +23,13 @@ protected:
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
   QStringList m_fullOutput;
-  uint64_t m_id;
+  uint64_t m_id, m_currentJobProgress, m_queueProgress;
+  Jobs::Job::Status m_currentJobStatus;
+  QDateTime m_currentJobStartTime;
+
+  // Only use this variable for determining whether or not to ignore
+  // certain signals.
+  QObject const *m_currentlyConnectedJob;
 
 public:
   explicit Tab(QWidget *parent);
@@ -40,12 +49,18 @@ signals:
 
 public slots:
   void onStatusChanged(uint64_t id);
-  void onProgressChanged(uint64_t id, unsigned int progress);
+  void onJobProgressChanged(uint64_t id, unsigned int progress);
+  void onQueueProgressChanged(int progress, int totalProgress);
   void onLineRead(QString const &line, mtx::gui::Jobs::Job::LineType type);
 
   void onSaveOutput();
 
   void acknowledgeWarningsAndErrors();
+
+  void updateRemainingTime();
+
+protected:
+  void updateOneRemainingTimeLabel(QLabel *label, QDateTime const &startTime, uint64_t progress);
 };
 
 }}}

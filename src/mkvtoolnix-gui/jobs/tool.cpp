@@ -208,8 +208,6 @@ Tool::resizeColumnsToContents()
 
 void
 Tool::addJob(JobPtr const &job) {
-  MainWindow::watchCurrentJobTab()->connectToJob(*job);
-
   m_model->add(job);
   resizeColumnsToContents();
 }
