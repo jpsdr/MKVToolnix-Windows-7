@@ -55,7 +55,7 @@ Settings::load() {
   m_autoSetFileTitle          = reg.value("autoSetFileTitle",          true).toBool();
 
   m_uniqueOutputFileNames     = reg.value("uniqueOutputFileNames",     true).toBool();
-  m_outputFileNamePolicy      = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToPreviousDirectory)).toInt());
+  m_outputFileNamePolicy      = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
   m_fixedOutputDir            = QDir{reg.value("fixedOutputDir").toString()};
 
   m_jobRemovalPolicy          = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
