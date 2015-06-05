@@ -171,8 +171,8 @@ void
 Model::withAllJobs(std::function<void(Job &)> const &worker) {
   QMutexLocker locked{&m_mutex};
 
-  for (auto const &job : m_jobsById)
-    worker(*job);
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
+    worker(*m_jobsById[idFromRow(row)]);
 }
 
 void
