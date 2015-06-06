@@ -10,8 +10,6 @@
 #include <QAction>
 #include <QMainWindow>
 
-#include "mkvtoolnix-gui/util/window_geometry_saver.h"
-
 class QResizeEvent;
 
 namespace mtx { namespace gui {
@@ -56,7 +54,6 @@ protected:
   ChapterEditor::Tool *m_toolChapterEditor{};
   WatchJobs::Tool *m_watchJobTool{};
   QList<QAction *> m_toolSelectionActions;
-  Util::WindowGeometrySaver m_geometrySaver;
   std::unique_ptr<Util::MovingPixmapOverlay> m_movingPixmapOverlay;
 
   QHash<QObject *, QString> m_helpURLs;

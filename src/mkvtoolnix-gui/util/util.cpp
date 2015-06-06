@@ -5,6 +5,7 @@
 #include <QIcon>
 #include <QList>
 #include <QPushButton>
+#include <QSettings>
 #include <QString>
 #include <QTableView>
 #include <QTreeView>
@@ -385,6 +386,24 @@ setToolTip(QWidget *widget,
   // http://doc.qt.io/qt-5/qstandarditem.html
 
   widget->setToolTip(toolTip.startsWith('<') ? toolTip : Q("<span>%1</span>").arg(toolTip.toHtmlEscaped()));
+}
+
+void
+saveWidgetGeometry(QWidget *widget) {
+  auto reg = Util::Settings::registry();
+
+  reg->beginGroup("windowGeometry");
+  reg->setValue(widget->objectName(), widget->saveGeometry());
+  reg->endGroup();
+}
+
+void
+restoreWidgetGeometry(QWidget *widget) {
+  auto reg = Util::Settings::registry();
+
+  reg->beginGroup("windowGeometry");
+  widget->restoreGeometry(reg->value(widget->objectName()).toByteArray());
+  reg->endGroup();
 }
 
 }}}

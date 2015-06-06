@@ -38,7 +38,6 @@ MainWindow *MainWindow::ms_mainWindow = nullptr;
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow{parent}
   , ui{new Ui::MainWindow}
-  , m_geometrySaver{this, Q("MainWindow")}
 {
   ms_mainWindow = this;
 
@@ -58,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   retranslateUi();
 
-  m_geometrySaver.restore();
+  Util::restoreWidgetGeometry(this);
 
   jobTool()->loadAndStart();
 
@@ -314,6 +313,8 @@ MainWindow::closeEvent(QCloseEvent *event) {
   auto tool = jobTool();
   if (tool)
     tool->model()->saveJobs(*reg);
+
+  Util::saveWidgetGeometry(this);
 
   event->accept();
 }

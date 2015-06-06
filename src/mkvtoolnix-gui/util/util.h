@@ -46,6 +46,9 @@ void setupCharacterSetComboBox(QComboBox &comboBox, QString const &initiallySele
 void enableWidgets(QList<QWidget *> const &widgets, bool enable);
 QPushButton *buttonForRole(QDialogButtonBox *box, QDialogButtonBox::ButtonRole role = QDialogButtonBox::AcceptRole);
 
+void saveWidgetGeometry(QWidget *widget);
+void restoreWidgetGeometry(QWidget *widget);
+
 // Model stuff
 enum MtxGuiRoles {
   SourceFileRole = Qt::UserRole + 1,
