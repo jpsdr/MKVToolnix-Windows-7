@@ -95,7 +95,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If it contains the word 'DELAY' followed by a number then this number is automatically put into the 'delay' input field for any audio track found in the file.")));
 
   Util::setToolTip(ui->cbMWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
-  ui->cbMWarnBeforeOverwriting->setEnabled(true);
+  ui->cbMWarnBeforeOverwriting->setEnabled(false);
 
   Util::setToolTip(ui->cbMDefaultTrackLanguage,
                    Q("<p>%1 %2</p><p>%3</p>")
