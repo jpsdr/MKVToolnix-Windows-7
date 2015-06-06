@@ -31,10 +31,15 @@ FileIdentifier::identify() {
   if (m_fileName.isEmpty())
     return false;
 
+  auto &cfg = Settings::get();
+
   QStringList args;
   args << "--output-charset" << "utf-8" << "--identify-for-mmg" << m_fileName;
 
-  auto process  = Process::execute(Settings::get().actualMkvmergeExe(), args);
+  if (cfg.m_defaultAdditionalMergeOptions.contains(Q("keep_last_chapter_in_mpls")))
+    args << "--engage" << "keep_last_chapter_in_mpls";
+
+  auto process  = Process::execute(cfg.actualMkvmergeExe(), args);
   auto exitCode = process->process().exitCode();
   m_output      = process->output();
 

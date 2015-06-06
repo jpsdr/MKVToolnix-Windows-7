@@ -1,5 +1,11 @@
 2015-06-06  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge, MKVToolNix GUI: new feature: added an option
+        (»--engage keep_last_chapter_in_mpls«) that will cause mkvmerge
+        not to remove the last chapter entry from a Blu-ray play list file
+        which mkvmerge normally does if that entry's timecode is within
+        five seconds of the movie's end. Implements #1226.
+
         * MKVToolNix GUI: fixed updating the number of pending jobs info
         in the status bar when manually starting jobs. Fixes #1236.
 

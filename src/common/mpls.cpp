@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "common/debugging.h"
+#include "common/hacks.h"
 #include "common/mpls.h"
 #include "common/strings/formatting.h"
 
@@ -333,7 +334,9 @@ parser_c::parse_chapters() {
     m_chapters.push_back(timecode - play_item.in_time + play_item.relative_in_time);
   }
 
-  if ((0 < num_chapters) && (timecode_c::s(5) >= (m_playlist.duration - m_chapters.back())))
+  if (   !hack_engaged(ENGAGE_KEEP_LAST_CHAPTER_IN_MPLS)
+      && (0 < num_chapters)
+      && (timecode_c::s(5) >= (m_playlist.duration - m_chapters.back())))
     m_chapters.pop_back();
 }
 
