@@ -4,17 +4,17 @@ AC_DEFUN([AX_CXX_STD_CXX_FLAG],[
     AC_LANG_PUSH(C++)
     CXXFLAGS_SAVED="$CXXFLAGS"
 
-    CXXFLAGS="$CXXFLAGS_SAVED -std=c++14"
-    AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++14"], [ax_cv_std_cxx_flag="undecided"])
+    for flag in gnu++14 c++14 gnu++11 c++11 c++0x; do
+      CXXFLAGS="$CXXFLAGS_SAVED -std=$flag"
+      AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=$flag"], [ax_cv_std_cxx_flag="undecided"])
+
+      if test x"$ax_cv_std_cxx_flag" != xundecided ; then
+        break
+      fi
+    done
 
     if test x"$ax_cv_std_cxx_flag" = xundecided ; then
-      CXXFLAGS="$CXXFLAGS_SAVED -std=c++11"
-      AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++11"], [ax_cv_std_cxx_flag="undecided"])
-    fi
-
-    if test x"$ax_cv_std_cxx_flag" = xundecided ; then
-      CXXFLAGS="$CXXFLAGS_SAVED -std=c++0x"
-      AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=c++0x"], [ax_cv_std_cxx_flag="no"])
+      ax_cv_std_cxx_flag="no"
     fi
 
     AC_LANG_POP
