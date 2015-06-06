@@ -253,7 +253,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
   const {
   ++opt.numTracksOfType[m_type];
 
-  if (!m_muxThis)
+  if (!m_muxThis || (m_appendedTo && !m_appendedTo->m_muxThis))
     return;
 
   auto sid = QString::number(m_id);

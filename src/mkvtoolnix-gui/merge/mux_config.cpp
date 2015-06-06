@@ -304,7 +304,9 @@ MuxConfig::buildTrackOrder(QHash<SourceFile *, unsigned int> const &fileNumbers)
   const {
   auto trackOrder = QStringList{};
   for (auto const &track : m_tracks)
-    if (track->m_muxThis && (track->isAudio() || track->isVideo() || track->isSubtitles() || track->isButtons()))
+    if (   track->m_muxThis
+        && (!track->m_appendedTo || track->m_appendedTo->m_muxThis)
+        && (track->isAudio() || track->isVideo() || track->isSubtitles() || track->isButtons()))
       trackOrder << Q("%1:%2").arg(fileNumbers.value(track->m_file)).arg(track->m_id);
 
   if (trackOrder.size() > 1)
