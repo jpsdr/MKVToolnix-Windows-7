@@ -537,7 +537,7 @@ namespace :dev do
 
     desc "Update Qt project file"
     task "update-qt-project" do
-      project_file = "src/mkvtoolnix-gui/qtcreator/mkvtoolnix-gui.pro"
+      project_file = "src/mkvtoolnix-gui/mkvtoolnix-gui.pro"
       content      = []
       skipping     = false
       IO.readlines(project_file).collect { |line| line.chomp }.each do |line|
@@ -545,7 +545,7 @@ namespace :dev do
 
         if /^FORMS\b/.match line
           skipping  = true
-          content  += $gui_ui_files.collect { |ui| ui.gsub!(/.*forms\//, '../forms/'); "    #{ui} \\" }.sort
+          content  << $gui_ui_files.collect { |ui| ui.gsub!(/.*forms\//, 'forms/'); "    #{ui}" }.sort.join(" \\\n")
 
         elsif skipping && /^\s*$/.match(line)
           skipping  = false
