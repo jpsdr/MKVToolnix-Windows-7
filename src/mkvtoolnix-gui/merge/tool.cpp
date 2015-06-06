@@ -1,12 +1,9 @@
 #include "common/common_pch.h"
 
-// #include <QDragEnterEvent>
-// #include <QDropEvent>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMenu>
 #include <QMessageBox>
-// #include <QMimeData>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tool.h"
