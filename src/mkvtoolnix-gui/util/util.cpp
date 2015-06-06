@@ -410,8 +410,8 @@ QWidget *
 tabWidgetCloseTabButton(QTabWidget &tabWidget,
                         int tabIdx) {
   auto tabBar = tabWidget.tabBar();
-  return mtx::first_of<QWidget *>([](QWidget *button) { return !!button; }, tabBar->tabButton(tabIdx, QTabBar::LeftSide), tabBar->tabButton(tabIdx, QTabBar::RightSide))
-    .value_or(nullptr);
+  auto result = mtx::first_of<QWidget *>([](QWidget *button) { return !!button; }, tabBar->tabButton(tabIdx, QTabBar::LeftSide), tabBar->tabButton(tabIdx, QTabBar::RightSide));
+  return result ? result.get() : nullptr;
 }
 
 }}}
