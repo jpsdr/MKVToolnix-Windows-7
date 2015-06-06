@@ -321,7 +321,8 @@ SourceFileModel::updateSelectionStatus() {
 
   Util::withSelectedIndexes(selectionModel, [this](QModelIndex const &selectedIndex) {
     auto sourceFile = fromIndex(selectedIndex);
-    Q_ASSERT(!!sourceFile);
+    if (!sourceFile)
+      return;
 
     if (sourceFile->isRegular())
       m_nonAppendedSelected = true;

@@ -291,7 +291,8 @@ TrackModel::updateSelectionStatus() {
 
   Util::withSelectedIndexes(selectionModel, [this,&appendedParent](QModelIndex const &selectedIndex) {
     auto track = fromIndex(selectedIndex);
-    Q_ASSERT(!!track);
+    if (!track)
+      return;
 
     if (!track->isRegular())
       m_nonRegularSelected = true;
