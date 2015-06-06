@@ -7,6 +7,7 @@
 #include "mkvtoolnix-gui/forms/watch_jobs/tool.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 
@@ -31,10 +32,9 @@ Tool::Tool(QWidget *parent,
   m_currentJobTab = new Tab{ui->widgets};
   ui->widgets->insertTab(0, m_currentJobTab, Q(""));
 
-  auto buttons = QList<QWidget *>{} << ui->widgets->tabBar()->tabButton(0, QTabBar::LeftSide) << ui->widgets->tabBar()->tabButton(0, QTabBar::RightSide);
-  for (auto const &button : buttons)
-    if (button)
-      button->resize(0, 0);
+  auto button = Util::tabWidgetCloseTabButton(*ui->widgets, 0);
+  if (button)
+    button->resize(0, 0);
 
   enableMenuActions();
 }

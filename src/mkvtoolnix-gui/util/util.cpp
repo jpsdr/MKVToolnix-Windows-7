@@ -10,7 +10,7 @@
 #include <QTableView>
 #include <QTreeView>
 
-#include "common/logger.h"
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/app.h"
@@ -404,6 +404,14 @@ restoreWidgetGeometry(QWidget *widget) {
   reg->beginGroup("windowGeometry");
   widget->restoreGeometry(reg->value(widget->objectName()).toByteArray());
   reg->endGroup();
+}
+
+QWidget *
+tabWidgetCloseTabButton(QTabWidget &tabWidget,
+                        int tabIdx) {
+  auto tabBar = tabWidget.tabBar();
+  return mtx::first_of<QWidget *>([](QWidget *button) { return !!button; }, tabBar->tabButton(tabIdx, QTabBar::LeftSide), tabBar->tabButton(tabIdx, QTabBar::RightSide))
+    .value_or(nullptr);
 }
 
 }}}

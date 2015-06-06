@@ -13,6 +13,7 @@ class QIcon;
 class QItemSelection;
 class QItemSelectionModel;
 class QModelIndex;
+class QTabWidget;
 class QTableView;
 class QTreeView;
 class QString;
@@ -48,6 +49,8 @@ QPushButton *buttonForRole(QDialogButtonBox *box, QDialogButtonBox::ButtonRole r
 
 void saveWidgetGeometry(QWidget *widget);
 void restoreWidgetGeometry(QWidget *widget);
+
+QWidget *tabWidgetCloseTabButton(QTabWidget &tabWidget, int tabIdx);
 
 // Model stuff
 enum MtxGuiRoles {
