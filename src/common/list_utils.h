@@ -14,6 +14,8 @@
 #ifndef MTX_COMMON_LIST_UTILS_H
 #define MTX_COMMON_LIST_UTILS_H
 
+#include <boost/optional.hpp>
+
 namespace mtx {
 
 template<typename T>
@@ -71,6 +73,22 @@ none_of(std::function<bool(T const &)> pred,
         T const &val,
         Trest... rest) {
   return !any_of<T, Trest...>(pred, val, rest...);
+}
+
+template<typename T>
+boost::optional<T>
+first_of(std::function<bool(T const &)> pred,
+       T const &val) {
+  return pred(val) ? val : boost::optional<T>{};
+}
+
+template<typename T,
+         typename... Trest>
+boost::optional<T>
+first_of(std::function<bool(T const &)> pred,
+       T const &val,
+       Trest... rest) {
+  return pred(val) ? val : first_of(pred, rest...);
 }
 
 }
