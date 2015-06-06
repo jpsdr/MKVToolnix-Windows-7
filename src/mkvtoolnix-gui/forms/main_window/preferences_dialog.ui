@@ -201,9 +201,9 @@
       <attribute name="title">
        <string>&amp;Merging</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_7">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <item>
@@ -223,6 +223,13 @@
                <widget class="QCheckBox" name="cbMSetAudioDelayFromFileName">
                 <property name="text">
                  <string>Automatically set track &amp;delays from source file name</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbMDisableCompressionForAllTrackTypes">
+                <property name="text">
+                 <string>Disable additi&amp;onal lossless compression for all track types</string>
                 </property>
                </widget>
               </item>
@@ -383,6 +390,23 @@
           </layout>
          </item>
          <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
           <widget class="QGroupBox" name="groupBox_5">
            <property name="title">
             <string>Output file name</string>
@@ -419,7 +443,7 @@
             <item>
              <widget class="QRadioButton" name="rbMAutoSetFixedDirectory">
               <property name="text">
-               <string>Use fi&amp;xed directory:</string>
+               <string>&amp;Use fixed directory:</string>
               </property>
              </widget>
             </item>
@@ -464,36 +488,23 @@
               </property>
              </widget>
             </item>
-            <item>
-             <spacer name="verticalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>63</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
            </layout>
           </widget>
          </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>63</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
@@ -555,6 +566,7 @@
   <tabstop>cbGuiJobRemovalPolicy</tabstop>
   <tabstop>cbMAutoSetFileTitle</tabstop>
   <tabstop>cbMSetAudioDelayFromFileName</tabstop>
+  <tabstop>cbMDisableCompressionForAllTrackTypes</tabstop>
   <tabstop>cbMWarnBeforeOverwriting</tabstop>
   <tabstop>cbMDefaultTrackLanguage</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>

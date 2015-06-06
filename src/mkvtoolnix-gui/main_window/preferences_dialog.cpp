@@ -34,6 +34,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   // Merge page
   ui->cbMAutoSetFileTitle->setChecked(m_cfg.m_autoSetFileTitle);
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
+  ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
   Util::setupLanguageComboBox(*ui->cbMDefaultTrackLanguage, m_cfg.m_defaultTrackLanguage);
   Util::setupCharacterSetComboBox(*ui->cbMDefaultSubtitleCharset, m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
@@ -93,6 +94,11 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("When a file is added its name is scanned."))
                    .arg(QY("If it contains the word 'DELAY' followed by a number then this number is automatically put into the 'delay' input field for any audio track found in the file.")));
+
+  Util::setToolTip(ui->cbMDisableCompressionForAllTrackTypes,
+                   Q("%1 %2")
+                   .arg(QY("Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."))
+                   .arg(QY("Checking this option causes the GUI to set that compression to »none« by default for all track types when adding files.")));
 
   Util::setToolTip(ui->cbMWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
   ui->cbMWarnBeforeOverwriting->setEnabled(false);
@@ -282,6 +288,7 @@ PreferencesDialog::save() {
   // Merge page:
   m_cfg.m_autoSetFileTitle              = ui->cbMAutoSetFileTitle->isChecked();
   m_cfg.m_setAudioDelayFromFileName     = ui->cbMSetAudioDelayFromFileName->isChecked();
+  m_cfg.m_disableCompressionForAllTrackTypes = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
   m_cfg.m_defaultTrackLanguage          = ui->cbMDefaultTrackLanguage->currentData().toString();
   m_cfg.m_defaultSubtitleCharset        = ui->cbMDefaultSubtitleCharset->currentData().toString();
   m_cfg.m_priority                      = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());

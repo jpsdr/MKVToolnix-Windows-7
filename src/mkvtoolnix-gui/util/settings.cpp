@@ -53,6 +53,7 @@ Settings::load() {
 
   m_setAudioDelayFromFileName = reg.value("setAudioDelayFromFileName", true).toBool();
   m_autoSetFileTitle          = reg.value("autoSetFileTitle",          true).toBool();
+  m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
 
   m_uniqueOutputFileNames     = reg.value("uniqueOutputFileNames",     true).toBool();
   m_outputFileNamePolicy      = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
@@ -121,6 +122,7 @@ Settings::save()
 
   reg.setValue("setAudioDelayFromFileName", m_setAudioDelayFromFileName);
   reg.setValue("autoSetFileTitle",          m_autoSetFileTitle);
+  reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
 
   reg.setValue("outputFileNamePolicy",      static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("fixedOutputDir",            m_fixedOutputDir.path());

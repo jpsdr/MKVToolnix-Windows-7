@@ -692,6 +692,8 @@ Tab::addOrAppendFiles(bool append,
     m_config.debugDumpTrackList();
   }
 
+  setDefaultsFromSettingsForAddedFiles(identifiedFiles);
+
   m_filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
 
   if (m_debugTrackModel) {
@@ -704,6 +706,16 @@ Tab::addOrAppendFiles(bool append,
 
   setTitleMaybe(identifiedFiles);
   setOutputFileNameMaybe(identifiedFiles[0]->m_fileName);
+}
+
+void
+Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
+  auto &cfg = Util::Settings::get();
+
+  for (auto const &file : files)
+    for (auto const &track : file->m_tracks)
+      if (cfg.m_disableCompressionForAllTrackTypes)
+        track->m_compression = Track::CompNone;
 }
 
 QStringList
