@@ -145,6 +145,7 @@ Tool::onStartAllPending() {
     if (Job::PendingManual == job.m_status)
       job.setPendingAuto();
   });
+
   m_model->startNextAutoJob();
 }
 

@@ -355,6 +355,8 @@ Model::startNextAutoJob() {
 
   QMutexLocker locked{&m_mutex};
 
+  updateJobStats();
+
   if (!m_started)
     return;
 
@@ -439,7 +441,7 @@ Model::updateJobStats() {
   auto numOther         = 0;
 
   for (auto const &job : m_jobsById)
-    if (Job::PendingAuto == job->m_status)
+    if (mtx::included_in(job->m_status, Job::PendingAuto, Job::Running))
       ++numPendingAuto;
 
     else if (Job::PendingManual == job->m_status)
