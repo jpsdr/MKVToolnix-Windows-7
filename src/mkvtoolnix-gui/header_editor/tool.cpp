@@ -9,6 +9,7 @@
 #include <QMimeData>
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/header_editor/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
@@ -76,8 +77,12 @@ Tool::toolShown() {
 void
 Tool::retranslateUi() {
   ui->retranslateUi(this);
-  for (auto idx = 0, numTabs = ui->editors->count(); idx < numTabs; ++idx)
+  for (auto idx = 0, numTabs = ui->editors->count(); idx < numTabs; ++idx) {
     static_cast<Tab *>(ui->editors->widget(idx))->retranslateUi();
+    auto button = Util::tabWidgetCloseTabButton(*ui->editors, idx);
+    if (button)
+      button->setToolTip(App::translate("CloseButton", "Close Tab"));
+  }
 }
 
 void

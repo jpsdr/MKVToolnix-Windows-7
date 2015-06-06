@@ -6,12 +6,14 @@
 #include <QMessageBox>
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/merge/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace Merge {
 
@@ -103,8 +105,12 @@ void
 Tool::retranslateUi() {
   ui->retranslateUi(this);
 
-  for (auto idx = 0, numTabs = ui->merges->count(); idx < numTabs; ++idx)
+  for (auto idx = 0, numTabs = ui->merges->count(); idx < numTabs; ++idx) {
     static_cast<Tab *>(ui->merges->widget(idx))->retranslateUi();
+    auto button = Util::tabWidgetCloseTabButton(*ui->merges, idx);
+    if (button)
+      button->setToolTip(App::translate("CloseButton", "Close Tab"));
+  }
 }
 
 Tab *

@@ -3,6 +3,7 @@
 #include <QMenu>
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/forms/watch_jobs/tool.h"
 #include "mkvtoolnix-gui/jobs/job.h"
@@ -48,6 +49,12 @@ Tool::retranslateUi() {
   ui->widgets->setTabText(0, QY("Current job"));
 
   m_currentJobTab->retranslateUi();
+
+  for (auto idx = 0, numTabs = ui->widgets->count(); idx < numTabs; ++idx) {
+    auto button = Util::tabWidgetCloseTabButton(*ui->widgets, idx);
+    if (button)
+      button->setToolTip(App::translate("CloseButton", "Close Tab"));
+  }
 }
 
 Tab *
