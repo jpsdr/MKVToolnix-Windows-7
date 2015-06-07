@@ -32,7 +32,7 @@ public:
 
   void retranslateUi();
   void setToolTips(QString const &available, QString const &selected);
-  void setItems(ItemList const &all, ItemList const &selected);
+  void setItems(ItemList const &all, QStringList const &selected);
   void setItems(QStringList const &all, QStringList const &selected);
 
   ItemList selectedItems() const;

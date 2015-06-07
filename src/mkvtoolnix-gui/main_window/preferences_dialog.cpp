@@ -197,34 +197,16 @@ PreferencesDialog::setupJobsJobOutput() {
 
 void
 PreferencesDialog::setupCommonLanguages() {
-  auto &allLanguages   = App::iso639Languages();
-  auto isCommon        = QHash<QString, bool>{};
-  auto commonLanguages = Util::SideBySideMultiSelect::ItemList{};
+  auto &allLanguages = App::iso639Languages();
 
-  for (auto const &language : m_cfg.m_oftenUsedLanguages)
-    isCommon[language] = true;
-
-  for (auto const &language : allLanguages)
-    if (isCommon[language.second])
-      commonLanguages << language;
-
-  ui->tbOftenUsedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allLanguages)), commonLanguages);
+  ui->tbOftenUsedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allLanguages)), m_cfg.m_oftenUsedLanguages);
 }
 
 void
 PreferencesDialog::setupCommonCountries() {
-  auto &allCountries   = App::iso3166_1Alpha2Countries();
-  auto isCommon        = QHash<QString, bool>{};
-  auto commonCountries = Util::SideBySideMultiSelect::ItemList{};
+  auto &allCountries = App::iso3166_1Alpha2Countries();
 
-  for (auto const &country : m_cfg.m_oftenUsedCountries)
-    isCommon[country] = true;
-
-  for (auto const &country : allCountries)
-    if (isCommon[country.second])
-      commonCountries << country;
-
-  ui->tbOftenUsedCountries->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allCountries)), commonCountries);
+  ui->tbOftenUsedCountries->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allCountries)), m_cfg.m_oftenUsedCountries);
 }
 
 void

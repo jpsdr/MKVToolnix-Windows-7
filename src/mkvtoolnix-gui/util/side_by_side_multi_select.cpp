@@ -48,14 +48,14 @@ SideBySideMultiSelect::setupConnections() {
 
 void
 SideBySideMultiSelect::setItems(ItemList const &all,
-                                ItemList const &selected) {
+                                QStringList const &selected) {
   ui->available->clear();
   ui->selected->clear();
 
   auto isSelected = QHash<QString, bool>{};
 
   for (auto const &item : selected)
-    isSelected[item.second] = true;
+    isSelected[item] = true;
 
   for (auto const &item : all) {
     auto addTo  = isSelected[item.second] ? ui->selected : ui->available;
@@ -72,24 +72,13 @@ SideBySideMultiSelect::setItems(ItemList const &all,
 void
 SideBySideMultiSelect::setItems(QStringList const &all,
                                 QStringList const &selected) {
-  ui->available->clear();
-  ui->selected->clear();
+  auto items = ItemList{};
+  items.reserve(all.count());
 
-  auto isSelected = QHash<QString, bool>{};
+  for (auto const &item : all)
+    items << std::make_pair(item, item);
 
-  for (auto const &item : selected)
-    isSelected[item] = true;
-
-  for (auto const &item : all) {
-    auto addTo  = isSelected[item] ? ui->selected : ui->available;
-    auto lwItem = new QListWidgetItem{item};
-
-    lwItem->setData(Qt::UserRole, item);
-    addTo->addItem(lwItem);
-  }
-
-  ui->moveToAvailableButton->setEnabled(false);
-  ui->moveToSelectedButton->setEnabled(false);
+  setItems(items, selected);
 }
 
 SideBySideMultiSelect::ItemList
