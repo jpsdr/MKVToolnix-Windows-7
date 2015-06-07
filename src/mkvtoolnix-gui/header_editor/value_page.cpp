@@ -199,8 +199,14 @@ ValuePage::onResetClicked() {
 
 void
 ValuePage::onAddOrRemoveChecked() {
-  m_input->setEnabled(   (!m_present &&  m_cbAddOrRemove->isChecked())
-                      || ( m_present && !m_cbAddOrRemove->isChecked()));
+  m_input->setEnabled(willBePresent());
+}
+
+bool
+ValuePage::willBePresent()
+  const {
+  return (!m_present &&  m_cbAddOrRemove->isChecked())
+      || ( m_present && !m_cbAddOrRemove->isChecked());
 }
 
 bool

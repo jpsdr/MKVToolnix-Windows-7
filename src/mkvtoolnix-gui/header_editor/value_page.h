@@ -57,6 +57,7 @@ public:
   virtual bool validateValue() const = 0;
   virtual void copyValueToElement() = 0;
 
+  virtual bool willBePresent() const;
   virtual bool hasThisBeenModified() const override;
   virtual bool validateThis() const override;
   virtual void modifyThis() override;
