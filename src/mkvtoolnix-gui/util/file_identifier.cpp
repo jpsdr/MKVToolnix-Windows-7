@@ -220,14 +220,14 @@ FileIdentifier::parseTrackLine(QString const &line) {
   if (-1 == re.indexIn(line))
     return;
 
-  auto type                       = re.cap(2) == "audio"     ? Merge::Track::Audio
-                                  : re.cap(2) == "video"     ? Merge::Track::Video
-                                  : re.cap(2) == "subtitles" ? Merge::Track::Subtitles
-                                  :                            Merge::Track::Buttons;
-  auto track                      = std::make_shared<Merge::Track>(m_file.get(), type);
-  track->m_id                     = re.cap(1).toLongLong();
-  track->m_codec                  = re.cap(3);
-  track->m_properties             = parseProperties(line);
+  auto type           = re.cap(2) == "audio"     ? Merge::Track::Audio
+                      : re.cap(2) == "video"     ? Merge::Track::Video
+                      : re.cap(2) == "subtitles" ? Merge::Track::Subtitles
+                      :                            Merge::Track::Buttons;
+  auto track          = std::make_shared<Merge::Track>(m_file.get(), type);
+  track->m_id         = re.cap(1).toLongLong();
+  track->m_codec      = re.cap(3);
+  track->m_properties = parseProperties(line);
 
   m_file->m_tracks << track;
 
