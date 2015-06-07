@@ -13,6 +13,7 @@ class QIcon;
 class QItemSelection;
 class QItemSelectionModel;
 class QModelIndex;
+class QScrollArea;
 class QTabWidget;
 class QTableView;
 class QTreeView;
@@ -51,6 +52,7 @@ void saveWidgetGeometry(QWidget *widget);
 void restoreWidgetGeometry(QWidget *widget);
 
 QWidget *tabWidgetCloseTabButton(QTabWidget &tabWidget, int tabIdx);
+void setScrollAreaBackgroundTransparent(QScrollArea *scrollArea);
 
 // Model stuff
 enum MtxGuiRoles {

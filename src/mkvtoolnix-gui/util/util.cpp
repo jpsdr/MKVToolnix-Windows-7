@@ -5,6 +5,7 @@
 #include <QIcon>
 #include <QList>
 #include <QPushButton>
+#include <QScrollArea>
 #include <QSettings>
 #include <QString>
 #include <QTableView>
@@ -412,6 +413,18 @@ tabWidgetCloseTabButton(QTabWidget &tabWidget,
   auto tabBar = tabWidget.tabBar();
   auto result = mtx::first_of<QWidget *>([](QWidget *button) { return !!button; }, tabBar->tabButton(tabIdx, QTabBar::LeftSide), tabBar->tabButton(tabIdx, QTabBar::RightSide));
   return result ? result.get() : nullptr;
+}
+
+void
+setScrollAreaBackgroundTransparent(QScrollArea *scrollArea) {
+  QPalette pal;
+  pal.setColor(QPalette::Window,QColor(0,0,0,0));
+
+  scrollArea->setPalette(pal);
+  scrollArea->setBackgroundRole(QPalette::Window);
+
+  scrollArea->widget()->setPalette(pal);
+  scrollArea->widget()->setBackgroundRole(QPalette::Window);
 }
 
 }}}

@@ -60,6 +60,8 @@ Tab::Tab(QWidget *parent)
   setControlValuesFromConfig();
 
   retranslateUi();
+
+  Util::setScrollAreaBackgroundTransparent(ui->scrollArea);
 }
 
 Tab::~Tab() {
