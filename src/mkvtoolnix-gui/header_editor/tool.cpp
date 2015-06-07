@@ -161,25 +161,28 @@ Tool::validate() {
     tab->validate();
 }
 
-void
+bool
 Tool::closeTab(int index) {
   if ((0  > index) || (ui->editors->count() <= index))
-    return;
+    return false;
 
   auto tab = static_cast<Tab *>(ui->editors->widget(index));
 
   if (tab->hasBeenModified()) {
+    MainWindow::get()->switchToTool(this);
     ui->editors->setCurrentIndex(index);
     auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes)
-      return;
+      return false;
   }
 
   ui->editors->removeTab(index);
   delete tab;
 
   showHeaderEditorsWidget();
+
+  return true;
 }
 
 void
@@ -198,6 +201,15 @@ Tool::closeSendingTab() {
       return;
     }
   }
+}
+
+bool
+Tool::closeAllTabs() {
+  for (auto index = ui->editors->count(); index > 0; --index)
+    if (!closeTab(index - 1))
+      return false;
+
+  return true;
 }
 
 Tab *
