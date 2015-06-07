@@ -60,7 +60,7 @@ Settings::load() {
   m_fixedOutputDir            = QDir{reg.value("fixedOutputDir").toString()};
 
   m_enableMuxingTracksByLanguage       = reg.value("enableMuxingTracksByLanguage", false).toBool();
-  m_enableMuxingAllVideoTracks         = reg.value("enableMuxingAllVideoTracks", false).toBool();
+  m_enableMuxingAllVideoTracks         = reg.value("enableMuxingAllVideoTracks", true).toBool();
   m_enableMuxingAllAudioTracks         = reg.value("enableMuxingAllAudioTracks", false).toBool();
   m_enableMuxingAllSubtitleTracks      = reg.value("enableMuxingAllSubtitleTracks", false).toBool();
   m_enableMuxingTracksByTheseLanguages = reg.value("enableMuxingTracksByTheseLanguages").toStringList();
