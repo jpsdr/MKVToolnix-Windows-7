@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-06-07 21:42+0200\n"
-"PO-Revision-Date: 2015-05-25 22:56+0100\n"
+"POT-Creation-Date: 2015-06-07 22:42+0200\n"
+"PO-Revision-Date: 2015-06-07 22:19+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
 "Language: sr@latin\n"
@@ -1265,7 +1265,7 @@ msgstr "&Izvlačenje"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:427
 msgid "&FAQ"
-msgstr ""
+msgstr "&FAQ"
 
 #: src/info/ui/mainwindow.h:121 src/info/wxwidgets_ui.cpp:128
 #: src/mmg/header_editor/frame.cpp:151 src/mmg/mmg_dialog.cpp:320
@@ -1469,7 +1469,7 @@ msgstr "&Ukloni fajlove"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:643
 msgid "&Remove job from queue after completion"
-msgstr "&Ukloni zadatak sa liste zadataka posle obrade"
+msgstr "&Ukloni zadatak sa liste posle obrade"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:128
 msgid "&Remove selected edition or chapter"
@@ -1541,7 +1541,7 @@ msgstr "Početak && kraj:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:435
 msgid "&Start all pending jobs"
-msgstr ""
+msgstr "&Započni sve zadatke koji čekaju"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:221
 msgid "&Start selected jobs automatically"
@@ -2491,9 +2491,8 @@ msgid "Abort processing after the current job"
 msgstr "Prekini obradu nakon tekućeg zadatka"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:289
-#, fuzzy
 msgid "Abort running jobs"
-msgstr "Prekini nakon tekućeg zadatka"
+msgstr "Prekini zadatke koji su u toku"
 
 #: src/mmg/jobs.cpp:99
 msgid "Abort the muxing process right now"
@@ -2850,10 +2849,11 @@ msgid "Always ask the user"
 msgstr "Uvek pitaj korisnika"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:683
+#, fuzzy
 msgid ""
 "Always enable muxing for all tracks of the following types regardless of "
 "their language:"
-msgstr ""
+msgstr "Uvek omogući muksovanje za sve staze sledećih tipova:"
 
 #: src/mmg/options/mmg.cpp:71
 msgid "Always on top"
@@ -3192,7 +3192,7 @@ msgstr "Virtuelni blok: %1%"
 msgid ""
 "Blu-ray discs often contain a chapter entry very close to the end of the "
 "movie."
-msgstr ""
+msgstr "Blu-Ray diskovi često sadrže poglavlje veoma blizu kraja filma."
 
 #: src/input/r_vobsub.cpp:551
 #, boost-format
@@ -3582,6 +3582,8 @@ msgid ""
 "Checking this option causes the GUI to set that compression to »none« by "
 "default for all track types when adding files."
 msgstr ""
+"Čekiranje ove opcije uzrokuje da GUI podrazumevano postavi kompresiju na "
+"»none« za sve tipove staza prilikom dodavanja fajlova."
 
 #: src/mmg/tabs/chapters.cpp:579
 msgid "Choose a chapter file"
@@ -3903,7 +3905,7 @@ msgid ""
 "frame. This track cannot be stored in native mode.\n"
 msgstr ""
 "Ne mogu da nađem konfiguraciju kodeka u prvoj MPEG-4 part 2 video slici. Ova "
-"traka ne može biti uskladištena u originalnom režimu.\n"
+"staza ne može biti uskladištena u originalnom režimu.\n"
 
 #: src/input/r_ogm.cpp:355
 msgid ""
@@ -4303,15 +4305,15 @@ msgstr "Datum (nevažeći, vrednost: %1%)"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:39
 msgid "Date added"
-msgstr "Dodato u"
+msgstr "Dodato"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:39
 msgid "Date finished"
-msgstr "Završeno u"
+msgstr "Završeno"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:39
 msgid "Date started"
-msgstr "Započeto u"
+msgstr "Započeto"
 
 #: src/info/mkvinfo.cpp:498
 #, boost-format
@@ -4461,7 +4463,7 @@ msgstr "Isključi &animacije"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:657
 msgid "Disable additi&onal lossless compression for all track types"
-msgstr ""
+msgstr "Onemogući d&odatnu lossless kompresiju za sve tipove staza"
 
 #: src/mmg/jobs.cpp:509
 msgid "Disable the selected jobs and set their status to 'done'"
@@ -4537,7 +4539,7 @@ msgstr "Uopšte ne zapisuj meta seek elemente."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:289
 msgid "Do you want to abort that job and quit?"
-msgstr ""
+msgstr "Da li želite da prekinete taj zadatak i odustanete?"
 
 #: src/info/mkvinfo.cpp:1553
 #, boost-format
@@ -4758,7 +4760,7 @@ msgstr "Elementi u kategoriji '%1%' ('--edit %2%'):\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:681
 msgid "Enable muxing of tracks by their language"
-msgstr ""
+msgstr "Omogući muksovanje staza po njihovom jeziku"
 
 #: src/info/mkvinfo.cpp:838
 #, boost-format
@@ -4780,10 +4782,8 @@ msgstr ""
 "vremenskih kodova."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:81
-#, fuzzy
 msgid "Enabling this option causes mkvmerge to keep that last entry."
-msgstr ""
-"Ova opcija tera mkvmerge da ukloni informaciju o formatu slike iz bit-potoka."
+msgstr "Omogućavanje ove opcije uzrokuje da mkvmerge zadrži tu zadnju stavku."
 
 #: src/info/mkvinfo.cpp:722
 #, boost-format
@@ -5267,7 +5267,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:287
 msgid "Finished at:"
-msgstr "Završeno u:"
+msgstr "Završio u:"
 
 #: src/mmg/jobs.cpp:376
 #, c-format, boost-format
@@ -5629,7 +5629,7 @@ msgstr "Visina video slike koja se prikazuje."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:441
 msgid "Hel&p"
-msgstr ""
+msgstr "&Help"
 
 #: src/mmg/mmg_dialog.cpp:714 src/mmg/mmg_dialog.cpp:720
 msgid "Help file not found"
@@ -5878,6 +5878,8 @@ msgid ""
 "If enabled then tracks of this type will always be set to be muxed "
 "regardless of their language."
 msgstr ""
+"Ako je čekirano onda će staze ovog tipa uvek biti obeležene za muksovanje "
+"bez obzira na njihov jezik."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:52
 msgid ""
@@ -6001,6 +6003,8 @@ msgid ""
 "If this option is enabled then only those tracks will be set to be muxed "
 "whose language is selected below."
 msgstr ""
+"Ako je ova opcija čekirana onda će samo staze čiji je jezik dole izabran "
+"biti obeležene za muksovanje."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:189
 msgid ""
@@ -6683,7 +6687,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:428
 msgid "Known &problems in recent releases"
-msgstr ""
+msgstr "Poznati &problemi u nedavnim izdanjima"
 
 #: src/info/mkvinfo.cpp:190
 #, boost-format
@@ -6862,9 +6866,8 @@ msgid "MKVToolNix &GUI"
 msgstr "MKVToolNix &GUI"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:426
-#, fuzzy
 msgid "MKVToolNix &web site"
-msgstr "MKVToolNix &GUI"
+msgstr "MKVToolNix &web stranica"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:634
 msgid "MKVToolNix GUI preferences"
@@ -7548,6 +7551,8 @@ msgid ""
 "Normally mkvmerge will apply additional lossless compression for subtitle "
 "tracks for certain codecs."
 msgstr ""
+"mkvmerge će uobičajeno primeniti dodatnu lossless kompresiju za titl staze "
+"pojedinih kodeka."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:48
 msgid ""
@@ -7630,6 +7635,8 @@ msgid ""
 "Note that the language »Undetermined (und)« is assumed for tracks for which "
 "no language is known (e.g. those read from SRT subtitle files)."
 msgstr ""
+"Imajte na umu da je stavka jezika »Neodređen (und)« preuzeta za staze za "
+"koje jezik nije poznat (npr. one pročitane iz SRT titl fajlova)."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:207
 msgid "Note that the video content is not modified by this option."
@@ -7701,7 +7708,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:682
 msgid "Only enable muxing of tracks with specific languages by default"
-msgstr ""
+msgstr "Podrazumevano omogući muksovanje samo staza sa specifičnim jezicima"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:646
 msgid "Only if the job completed successfully"
@@ -7781,6 +7788,8 @@ msgstr "Samo za prvi"
 msgid ""
 "Only tracks with a language in this list will be set to be muxed by default."
 msgstr ""
+"Samo će staze sa jezikom iz ove liste biti postavljene za muksovanje "
+"podrazumevano."
 
 #: src/input/r_vobsub.cpp:106
 msgid ""
@@ -8528,14 +8537,12 @@ msgid "Reload the current file without saving"
 msgstr "Učitaj ponovo tekući fajl bez snimanja"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
-#, fuzzy
 msgid "Remaining time for current job:"
-msgstr "Preostalo vreme:"
+msgstr "Preostalo vreme za tekući zadatak:"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:289
-#, fuzzy
 msgid "Remaining time for queue:"
-msgstr "Preostalo vreme:"
+msgstr "Preostalo vreme za listu:"
 
 #: src/mmg/jobs.cpp:67 src/mmg/jobs.cpp:69 src/mmg/mux_dialog.cpp:52
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:43
@@ -8620,7 +8627,7 @@ msgstr "Pokreni uređivač polja sa zaglavljem"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:170 src/mkvtoolnix-gui/jobs/tool.cpp:201
 msgid "Running jobs cannot be removed."
-msgstr ""
+msgstr "Zadaci koji se obrađuju se ne mogu ukloniti."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:664
 msgid "S&can directory for other playlists:"
@@ -9606,7 +9613,7 @@ msgstr "Početak:"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:283
 msgid "Started at:"
-msgstr "Započeto u:"
+msgstr "Započeo u:"
 
 #: src/mmg/jobs.cpp:472
 msgid "Started on"
@@ -9893,7 +9900,7 @@ msgstr "FPS je 0.0 ali čitač nije naveo vremenski kod za paket. %1%\n"
 #: src/mmg/tabs/input.cpp:1459
 #, c-format, boost-format
 msgid "The FPS setting for track nr. %s in file '%s' is invalid."
-msgstr "FPS parametar za traku %s u fajlu '%s' je nevažeći."
+msgstr "FPS parametar za stazu %s u fajlu '%s' je nevažeći."
 
 #: src/merge/mkvmerge.cpp:1223
 #, boost-format
@@ -11627,7 +11634,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:313
 #: src/mmg/header_editor/frame.cpp:377
 msgid "The track number as used in the Block Header."
-msgstr "Broj trake, kako je korišćen u zaglavlju bloka."
+msgstr "Broj staze, kako je korišćen u zaglavlju bloka."
 
 #: src/merge/output_control.cpp:972
 msgid "The track parameters do not match."
@@ -11684,7 +11691,7 @@ msgstr "Dostupna je nova verzija."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:289
 msgid "There is currently a job running."
-msgstr ""
+msgstr "Postoji trenutno zadatak koji se obrađuje."
 
 #: src/merge/output_control.cpp:855 src/merge/output_control.cpp:865
 #, boost-format
@@ -12484,7 +12491,7 @@ msgstr "Tip staze: %1%"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:152
 msgid ""
 "Tracks with a language in this list will be set not to be muxed by default."
-msgstr ""
+msgstr "Staze sa jezikom sa ove liste neće biti muksovane podrazumevano."
 
 #: src/extract/xtr_base.cpp:121
 msgid ""
@@ -12621,9 +12628,8 @@ msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr "Nepoznat tip kodovanja sadržaja %1% za stazu %2%.\n"
 
 #: src/info/mkvinfo.cpp:1688
-#, fuzzy
 msgid "Unknown element"
-msgstr "Nepoznat"
+msgstr "Nepoznat element"
 
 #: src/merge/mkvmerge.cpp:1475
 #, boost-format
@@ -13016,9 +13022,8 @@ msgid "Warning: "
 msgstr "Upozorenje: "
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:639
-#, fuzzy
 msgid "Warnings"
-msgstr "Upozorenja:"
+msgstr "Upozorenja"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291 src/mmg/mux_dialog.cpp:68
 msgid "Warnings:"
@@ -13068,6 +13073,8 @@ msgid ""
 "When adding source files all tracks are normally set to be muxed into the "
 "output file."
 msgstr ""
+"Kada se dodaju izvorni fajlovi sve staze su uobičajeno obeležene za "
+"muksovanje u izlazni fajl."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:101
 msgid ""
@@ -13225,6 +13232,8 @@ msgid ""
 "You can exempt certain track types from this restriction by checking the "
 "corresponding check box below, e.g. for video tracks."
 msgstr ""
+"Možete izuzeti određene tipove staza iz ovog ograničenja čekiranjem "
+"odgovarajućeg polja ispod, npr. za video staze."
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:183
 msgid "You can let the header editor add the element to the file."
@@ -13959,9 +13968,8 @@ msgid "missing value"
 msgstr "nedostaje vrednost"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:429
-#, fuzzy
 msgid "mkv&merge documentation"
-msgstr "mkvmerge opcije"
+msgstr "mkv&merge dokumentacija"
 
 #: src/info/ui/mainwindow.h:106
 msgid "mkvInfo"
@@ -14193,6 +14201,8 @@ msgid ""
 "mkvmerge normally removes that last entry if it's timecode is within five "
 "seconds of the total duration."
 msgstr ""
+"mkvmerge uobičajeno uklanja tu zadnju stavku ako je njen vremenski kod "
+"unutar 5 sekundi od kraja trajanja."
 
 #: src/mmg/options/mkvmerge.cpp:74
 msgid "mkvmerge options"
