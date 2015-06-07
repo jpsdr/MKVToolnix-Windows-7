@@ -159,7 +159,7 @@ Tool::closeTab(int index) {
 
   auto tab = static_cast<Tab *>(ui->merges->widget(index));
 
-  if (tab->hasBeenModified()) {
+  if (Util::Settings::get().m_warnBeforeClosingModifiedTabs && tab->hasBeenModified()) {
     MainWindow::get()->switchToTool(this);
     ui->merges->setCurrentIndex(index);
 

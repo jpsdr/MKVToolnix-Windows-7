@@ -26,6 +26,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 
   // GUI page
   ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);
+  ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
   setupOnlineCheck();
   setupInterfaceLanguage();
   setupJobsJobOutput();
@@ -77,6 +78,13 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("No information is transmitted to the server.")));
 
   Util::setToolTip(ui->cbGuiDisableAnimations, QY("If checked several short animations used throughout the program as visual clues for the user will be disabled."));
+  Util::setToolTip(ui->cbGuiWarnBeforeClosingModifiedTabs,
+                   Q("%1 %2")
+                   .arg(QY("If checked the program will ask for confirmation before closing or reloading tabs that have been modified."))
+                   .arg(QY("This also done when quitting the application.")));
+
+  Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
+  ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
@@ -85,9 +93,6 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDefaultCountry, QY("This is the country that newly added chapter names get assigned automatically."));
-
-  Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
-  ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
 
   // Merge page
   Util::setToolTip(ui->cbMAutoSetFileTitle,
@@ -297,6 +302,7 @@ PreferencesDialog::save() {
   m_cfg.m_uiLocale                      = ui->cbGuiInterfaceLanguage->currentData().toString();
   m_cfg.m_checkForUpdates               = ui->cbGuiCheckForUpdates->isChecked();
   m_cfg.m_disableAnimations             = ui->cbGuiDisableAnimations->isChecked();
+  m_cfg.m_warnBeforeClosingModifiedTabs = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
   auto idx                              = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy              = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 

@@ -68,6 +68,7 @@ Settings::load() {
   m_jobRemovalPolicy          = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
 
   m_disableAnimations         = reg.value("disableAnimations", false).toBool();
+  m_warnBeforeClosingModifiedTabs = reg.value("warnBeforeClosingModifiedTabs", true).toBool();
 
 #if defined(HAVE_LIBINTL_H)
   m_uiLocale                  = reg.value("uiLocale").toString();
@@ -143,6 +144,7 @@ Settings::save()
   reg.setValue("jobRemovalPolicy",          static_cast<int>(m_jobRemovalPolicy));
 
   reg.setValue("disableAnimations",         m_disableAnimations);
+  reg.setValue("warnBeforeClosingModifiedTabs", m_warnBeforeClosingModifiedTabs);
 
   reg.setValue("uiLocale",                  m_uiLocale);
 
