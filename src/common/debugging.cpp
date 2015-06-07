@@ -269,6 +269,21 @@ ebml_dumper_c::dump_impl(EbmlElement const *element,
     dump_impl((*master)[idx], level + 1, idx);
 }
 
+std::string
+ebml_dumper_c::dump_to_string(libebml::EbmlElement const *element,
+                              dump_style_e style) {
+  auto mem = mm_mem_io_c{nullptr, 0ull, 1000};
+  ebml_dumper_c dumper{};
+
+  dumper.target(MM_IO, &mem)
+    .values(   !!(style & style_with_values))
+    .addresses(!!(style & style_with_addresses))
+    .indexes(  !!(style & style_with_indexes))
+    .dump(element);
+
+  return mem.get_content();
+}
+
 void
 dump_ebml_elements(EbmlElement *element,
                    bool with_values) {
