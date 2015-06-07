@@ -75,7 +75,7 @@ public:
 
   virtual void resizeEvent(QResizeEvent *event) override;
 
-  virtual void changeToTool(ToolBase *tool);
+  virtual void switchToTool(ToolBase *tool);
 
 public slots:
   virtual void changeToolToSender();

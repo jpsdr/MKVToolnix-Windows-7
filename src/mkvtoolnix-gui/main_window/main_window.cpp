@@ -185,7 +185,7 @@ MainWindow::showTheseMenusOnly(QList<QMenu *> const &menus) {
 }
 
 void
-MainWindow::changeToTool(ToolBase *tool) {
+MainWindow::switchToTool(ToolBase *tool) {
   for (auto idx = 0, numTabs = ui->tool->count(); idx < numTabs; ++idx)
     if (ui->tool->widget(idx) == tool) {
       ui->tool->setCurrentIndex(idx);

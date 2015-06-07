@@ -253,7 +253,7 @@ Tool::onViewOutput() {
   auto tool = mtx::gui::MainWindow::watchJobTool();
   m_model->withSelectedJobs(ui->jobs, [tool](Job &job) { tool->viewOutput(job); });
 
-  mtx::gui::MainWindow::get()->changeToTool(tool);
+  mtx::gui::MainWindow::get()->switchToTool(tool);
 }
 
 void
