@@ -65,6 +65,9 @@ public:
   bool m_disableAnimations;
   QString m_uiLocale;
 
+  bool m_enableMuxingTracksByLanguage, m_enableMuxingAllVideoTracks, m_enableMuxingAllAudioTracks, m_enableMuxingAllSubtitleTracks;
+  QStringList m_enableMuxingTracksByTheseLanguages;
+
 public:
   Settings();
   void load();

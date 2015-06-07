@@ -49,6 +49,7 @@ protected:
   void setupProcessPriority();
   void setupPlaylistScanningPolicy();
   void setupOutputFileNamePolicy();
+  void setupEnableMuxingTracksByLanguage();
 };
 
 }}

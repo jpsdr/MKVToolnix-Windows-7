@@ -59,6 +59,12 @@ Settings::load() {
   m_outputFileNamePolicy      = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
   m_fixedOutputDir            = QDir{reg.value("fixedOutputDir").toString()};
 
+  m_enableMuxingTracksByLanguage       = reg.value("enableMuxingTracksByLanguage", false).toBool();
+  m_enableMuxingAllVideoTracks         = reg.value("enableMuxingAllVideoTracks", false).toBool();
+  m_enableMuxingAllAudioTracks         = reg.value("enableMuxingAllAudioTracks", false).toBool();
+  m_enableMuxingAllSubtitleTracks      = reg.value("enableMuxingAllSubtitleTracks", false).toBool();
+  m_enableMuxingTracksByTheseLanguages = reg.value("enableMuxingTracksByTheseLanguages").toStringList();
+
   m_jobRemovalPolicy          = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
 
   m_disableAnimations         = reg.value("disableAnimations", false).toBool();
@@ -127,6 +133,12 @@ Settings::save()
   reg.setValue("outputFileNamePolicy",      static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("fixedOutputDir",            m_fixedOutputDir.path());
   reg.setValue("uniqueOutputFileNames",     m_uniqueOutputFileNames);
+
+  reg.setValue("enableMuxingTracksByLanguage",       m_enableMuxingTracksByLanguage);
+  reg.setValue("enableMuxingAllVideoTracks",         m_enableMuxingAllVideoTracks);
+  reg.setValue("enableMuxingAllAudioTracks",         m_enableMuxingAllAudioTracks);
+  reg.setValue("enableMuxingAllSubtitleTracks",      m_enableMuxingAllSubtitleTracks);
+  reg.setValue("enableMuxingTracksByTheseLanguages", m_enableMuxingTracksByTheseLanguages);
 
   reg.setValue("jobRemovalPolicy",          static_cast<int>(m_jobRemovalPolicy));
 

@@ -22,6 +22,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 {
   ui->setupUi(this);
 
+  Util::setScrollAreaBackgroundTransparent(ui->mergeScrollArea);
+
   // GUI page
   ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);
   setupOnlineCheck();
@@ -42,6 +44,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   setupProcessPriority();
   setupPlaylistScanningPolicy();
   setupOutputFileNamePolicy();
+  setupEnableMuxingTracksByLanguage();
 
   // Chapter editor page
   Util::setupLanguageComboBox(*ui->cbCEDefaultLanguage, m_cfg.m_defaultChapterLanguage);
@@ -83,6 +86,9 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDefaultCountry, QY("This is the country that newly added chapter names get assigned automatically."));
 
+  Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
+  ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
+
   // Merge page
   Util::setToolTip(ui->cbMAutoSetFileTitle,
                    Q("<p>%1 %2</p><p>%3</p>")
@@ -99,9 +105,6 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."))
                    .arg(QY("Checking this option causes the GUI to set that compression to »none« by default for all track types when adding files.")));
-
-  Util::setToolTip(ui->cbMWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
-  ui->cbMWarnBeforeOverwriting->setEnabled(false);
 
   Util::setToolTip(ui->cbMDefaultTrackLanguage,
                    Q("<p>%1 %2</p><p>%3</p>")
@@ -132,6 +135,18 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If checked the program makes sure the suggested output file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
                    .arg(QY("This is done only if there is already a file whose name matches the unmodified output file name.")));
 
+  Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
+                   Q("<p>%1 %2 %3</p><p>%4</p>")
+                   .arg(QY("When adding source files all tracks are normally set to be muxed into the output file."))
+                   .arg(QY("If this option is enabled then only those tracks will be set to be muxed whose language is selected below."))
+                   .arg(QY("You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."))
+                   .arg(QY("Note that the language »Undetermined (und)« is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files).")));
+  Util::setToolTip(ui->cbMEnableMuxingAllVideoTracks,    QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
+  Util::setToolTip(ui->cbMEnableMuxingAllAudioTracks,    QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
+  Util::setToolTip(ui->cbMEnableMuxingAllSubtitleTracks, QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
+  ui->tbMEnableMuxingTracksByLanguage->setToolTips(QY("Tracks with a language in this list will be set not to be muxed by default."),
+                                                   QY("Only tracks with a language in this list will be set to be muxed by default."));
+
   // Often used XYZ page
   ui->tbOftenUsedLanguages->setToolTips(QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."),
                                         QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
@@ -145,18 +160,24 @@ PreferencesDialog::setupToolTips() {
 
 void
 PreferencesDialog::setupConnections() {
-  connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,       this,                      &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
+  connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,       this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
-  connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,         ui->cbGuiJobRemovalPolicy, &QComboBox::setEnabled);
-  connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,         this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,      this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetParentDirectory,                  &QRadioButton::toggled,      this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetPreviousDirectory,                &QRadioButton::toggled,      this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetFixedDirectory,                   &QRadioButton::toggled,      this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->pbMBrowseAutoSetFixedDirectory,             &QPushButton::clicked,       this,                      &PreferencesDialog::browseFixedOutputDirectory);
+  connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,         ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
+  connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,         this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetParentDirectory,                  &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetPreviousDirectory,                &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetFixedDirectory,                   &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->pbMBrowseAutoSetFixedDirectory,             &QPushButton::clicked,       this,                                 &PreferencesDialog::browseFixedOutputDirectory);
 
-  connect(ui->buttons,                                    &QDialogButtonBox::accepted, this,                      &PreferencesDialog::accept);
-  connect(ui->buttons,                                    &QDialogButtonBox::rejected, this,                      &PreferencesDialog::reject);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->lMEnableMuxingAllTracksOfType,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->cbMEnableMuxingAllVideoTracks,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->cbMEnableMuxingAllAudioTracks,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
+
+  connect(ui->buttons,                                    &QDialogButtonBox::accepted, this,                                 &PreferencesDialog::accept);
+  connect(ui->buttons,                                    &QDialogButtonBox::rejected, this,                                 &PreferencesDialog::reject);
 }
 
 void
@@ -256,6 +277,21 @@ PreferencesDialog::setupOutputFileNamePolicy() {
 }
 
 void
+PreferencesDialog::setupEnableMuxingTracksByLanguage() {
+  auto widgets = QList<QWidget *>{} << ui->lMEnableMuxingAllTracksOfType << ui->cbMEnableMuxingAllVideoTracks << ui->cbMEnableMuxingAllAudioTracks << ui->cbMEnableMuxingAllSubtitleTracks << ui->tbMEnableMuxingTracksByLanguage;
+  for (auto const &widget : widgets)
+    widget->setEnabled(m_cfg.m_enableMuxingTracksByLanguage);
+
+  ui->cbMEnableMuxingTracksByLanguage->setChecked(m_cfg.m_enableMuxingTracksByLanguage);
+  ui->cbMEnableMuxingAllVideoTracks->setChecked(m_cfg.m_enableMuxingAllVideoTracks);
+  ui->cbMEnableMuxingAllAudioTracks->setChecked(m_cfg.m_enableMuxingAllAudioTracks);
+  ui->cbMEnableMuxingAllSubtitleTracks->setChecked(m_cfg.m_enableMuxingAllSubtitleTracks);
+
+  auto &allLanguages = App::iso639Languages();
+  ui->tbMEnableMuxingTracksByLanguage->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allLanguages)), m_cfg.m_enableMuxingTracksByTheseLanguages);
+}
+
+void
 PreferencesDialog::save() {
   // GUI page:
   m_cfg.m_uiLocale                      = ui->cbGuiInterfaceLanguage->currentData().toString();
@@ -286,6 +322,12 @@ PreferencesDialog::save() {
                                         :                                                Util::Settings::ToSameAsFirstInputFile;
   m_cfg.m_fixedOutputDir                = ui->leMAutoSetFixedDirectory->text();
   m_cfg.m_uniqueOutputFileNames         = ui->cbMUniqueOutputFileNames->isChecked();
+
+  m_cfg.m_enableMuxingTracksByLanguage       = ui->cbMEnableMuxingTracksByLanguage->isChecked();
+  m_cfg.m_enableMuxingAllVideoTracks         = ui->cbMEnableMuxingAllVideoTracks->isChecked();
+  m_cfg.m_enableMuxingAllAudioTracks         = ui->cbMEnableMuxingAllAudioTracks->isChecked();
+  m_cfg.m_enableMuxingAllSubtitleTracks      = ui->cbMEnableMuxingAllSubtitleTracks->isChecked();
+  m_cfg.m_enableMuxingTracksByTheseLanguages = ui->tbMEnableMuxingTracksByLanguage->selectedItemValues();
 
   // Often used selections page:
   m_cfg.m_oftenUsedLanguages            = ui->tbOftenUsedLanguages->selectedItemValues();
