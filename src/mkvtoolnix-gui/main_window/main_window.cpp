@@ -302,7 +302,8 @@ MainWindow::beforeCloseCheckRunningJobs() {
 
 void
 MainWindow::closeEvent(QCloseEvent *event) {
-  auto ok =       headerEditorTool()->closeAllTabs();
+  auto ok =       mergeTool()->closeAllTabs();
+  ok      = ok && headerEditorTool()->closeAllTabs();
   ok      = ok && chapterEditorTool()->closeAllTabs();
   ok      = ok && beforeCloseCheckRunningJobs();
 

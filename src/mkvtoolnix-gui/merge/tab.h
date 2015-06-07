@@ -49,12 +49,17 @@ protected:
   AttachmentModel *m_attachmentsModel;
   QAction *m_addAttachmentsAction, *m_removeAttachmentsAction;
 
+  QString m_savedState;
+
   debugging_option_c m_debugTrackModel;
 
 public:
   explicit Tab(QWidget *parent);
   ~Tab();
 
+  virtual bool hasBeenModified() const;
+
+  virtual QString const &fileName() const;
   virtual QString title() const;
   virtual void load(QString const &fileName);
 
@@ -213,6 +218,8 @@ protected:
   virtual QString suggestOutputFileNameExtension() const;
 
   virtual void enableDisableAllTracks(bool enable);
+
+  virtual QString currentState() const;
 };
 
 }}}

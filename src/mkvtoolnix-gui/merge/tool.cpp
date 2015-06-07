@@ -12,6 +12,7 @@
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -151,25 +152,29 @@ Tool::openConfig() {
    ->load(fileName);
 }
 
-void
+bool
 Tool::closeTab(int index) {
   if ((0  > index) || (ui->merges->count() <= index))
-    return;
+    return false;
 
   auto tab = static_cast<Tab *>(ui->merges->widget(index));
 
-  // TODO: Tool::closeTab: hasBeenModified
-  // if (tab->hasBeenModified()) {
-  //   auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->getFileName()}.fileName()),
-  //                                            QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-  //   if (answer != QMessageBox::Yes)
-  //     return;
-  // }
+  if (tab->hasBeenModified()) {
+    MainWindow::get()->switchToTool(this);
+    ui->merges->setCurrentIndex(index);
+
+    auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(tab->title()),
+                                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    if (answer != QMessageBox::Yes)
+      return false;
+  }
 
   ui->merges->removeTab(index);
   delete tab;
 
   showMergeWidget();
+
+  return true;
 }
 
 void
@@ -182,6 +187,15 @@ Tool::closeSendingTab() {
   auto idx = ui->merges->indexOf(dynamic_cast<Tab *>(sender()));
   if (-1 != idx)
     closeTab(idx);
+}
+
+bool
+Tool::closeAllTabs() {
+  for (auto index = ui->merges->count(); index > 0; --index)
+    if (!closeTab(index - 1))
+      return false;
+
+  return true;
 }
 
 void

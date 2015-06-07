@@ -35,9 +35,10 @@ public slots:
   virtual void newConfig();
   virtual void openConfig();
 
-  virtual void closeTab(int index);
+  virtual bool closeTab(int index);
   virtual void closeCurrentTab();
   virtual void closeSendingTab();
+  virtual bool closeAllTabs();
 
   virtual void toolShown() override;
   virtual void tabTitleChanged();

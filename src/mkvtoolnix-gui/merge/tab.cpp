@@ -62,9 +62,17 @@ Tab::Tab(QWidget *parent)
   retranslateUi();
 
   Util::setScrollAreaBackgroundTransparent(ui->scrollArea);
+
+  m_savedState = currentState();
 }
 
 Tab::~Tab() {
+}
+
+QString const &
+Tab::fileName()
+  const {
+  return m_config.m_configFileName;
 }
 
 QString
@@ -89,6 +97,8 @@ Tab::load(QString const &fileName) {
     m_config.load(fileName);
     setControlValuesFromConfig();
 
+    m_savedState = currentState();
+
     MainWindow::get()->setStatusBarMessage(QY("The configuration has been loaded."));
 
     emit titleChanged();
@@ -111,6 +121,8 @@ Tab::onSaveConfig() {
 
   updateConfigFromControlValues();
   m_config.save();
+
+  m_savedState = currentState();
 
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
 }
@@ -140,6 +152,8 @@ Tab::onSaveConfigAs() {
   m_config.save(fileName);
   settings.m_lastConfigDir = QFileInfo{fileName}.path();
   settings.save();
+
+  m_savedState = currentState();
 
   emit titleChanged();
 
@@ -280,6 +294,20 @@ Tab::addToJobQueue(bool startNow) {
     MainWindow::get()->showIconMovingToTool(Q("media-playback-start.png"), *MainWindow::watchJobTool());
 
   MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
+
+  m_savedState = currentState();
+}
+
+QString
+Tab::currentState()
+  const {
+  return m_config.toString();
+}
+
+bool
+Tab::hasBeenModified()
+  const {
+  return currentState() != m_savedState;
 }
 
 }}}

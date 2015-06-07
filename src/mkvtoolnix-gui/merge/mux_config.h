@@ -85,6 +85,7 @@ public:
   virtual void save(QString const &fileName = QString{""});
   virtual void reset();
 
+  QString toString() const;
   QStringList buildMkvmergeOptions() const;
 
   virtual void debugDumpFileList() const;
