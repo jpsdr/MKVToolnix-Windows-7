@@ -42,9 +42,10 @@ public slots:
   virtual void save();
   virtual void saveAsXml();
   virtual void saveToMatroska();
-  virtual void closeTab(int index);
+  virtual bool closeTab(int index);
   virtual void closeCurrentTab();
   virtual void closeSendingTab();
+  virtual bool closeAllTabs();
   virtual void reload();
   virtual void filesDropped(QStringList const &fileNames);
 

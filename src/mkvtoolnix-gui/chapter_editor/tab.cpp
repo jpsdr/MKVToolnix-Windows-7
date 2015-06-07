@@ -181,6 +181,8 @@ Tab::newFile() {
 
   ui->leChStart->selectAll();
   ui->leChStart->setFocus();
+
+  m_savedState = currentState();
 }
 
 void
@@ -265,6 +267,8 @@ Tab::load() {
   disconnect(m_chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
 
   m_chapterModel->populate(*chapters);
+  m_savedState = currentState();
+
   expandAll();
   resizeChapterColumnsToContents();
 
@@ -295,6 +299,8 @@ Tab::saveAsImpl(bool requireNewFileName,
 
   if (!worker(requireNewFileName, newFileName))
     return;
+
+  m_savedState = currentState();
 
   if (newFileName != m_fileName) {
     m_fileName                     = newFileName;
@@ -1109,6 +1115,19 @@ Tab::hasChapters()
     if (m_chapterModel->item(idx)->rowCount())
       return true;
   return false;
+}
+
+QString
+Tab::currentState()
+  const {
+  auto chapters = m_chapterModel->allChapters();
+  return chapters ? Q(ebml_dumper_c::dump_to_string(chapters.get(), static_cast<ebml_dumper_c::dump_style_e>(ebml_dumper_c::style_with_values | ebml_dumper_c::style_with_indexes))) : QString{};
+}
+
+bool
+Tab::hasBeenModified()
+  const {
+  return currentState() != m_savedState;
 }
 
 }}}
