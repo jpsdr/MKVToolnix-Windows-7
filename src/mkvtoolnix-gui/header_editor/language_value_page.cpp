@@ -27,8 +27,7 @@ LanguageValuePage::~LanguageValuePage() {
 
 QWidget *
 LanguageValuePage::createInputControl() {
-  if (m_element)
-    m_originalValue = static_cast<EbmlString *>(m_element)->GetValue();
+  m_originalValue = m_element ? static_cast<EbmlString *>(m_element)->GetValue() : "eng";
 
   m_cbValue = new QComboBox{this};
   m_cbValue->setFrame(true);
