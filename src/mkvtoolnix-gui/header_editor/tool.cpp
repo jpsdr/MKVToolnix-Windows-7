@@ -169,6 +169,7 @@ Tool::closeTab(int index) {
   auto tab = static_cast<Tab *>(ui->editors->widget(index));
 
   if (tab->hasBeenModified()) {
+    ui->editors->setCurrentIndex(index);
     auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes)
