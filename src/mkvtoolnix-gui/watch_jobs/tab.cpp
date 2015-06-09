@@ -91,11 +91,10 @@ Tab::onStatusChanged(uint64_t id) {
   ui->status->setText(Jobs::Job::displayableStatus(m_currentJobStatus));
   MainWindow::watchJobTool()->enableMenuActions();
 
-  if (Jobs::Job::Running == m_currentJobStatus) {
+  if (Jobs::Job::Running == m_currentJobStatus)
     setInitialDisplay(*job);
-    m_currentJobStartTime = job->m_dateStarted;
 
-  } else if (mtx::included_in(m_currentJobStatus, Jobs::Job::DoneOk, Jobs::Job::DoneWarnings, Jobs::Job::Failed, Jobs::Job::Aborted))
+  else if (mtx::included_in(m_currentJobStatus, Jobs::Job::DoneOk, Jobs::Job::DoneWarnings, Jobs::Job::Failed, Jobs::Job::Aborted))
     ui->finishedAt->setText(Util::displayableDate(job->m_dateFinished));
 
   updateRemainingTime();
@@ -172,6 +171,12 @@ Tab::onLineRead(QString const &line,
 
 void
 Tab::setInitialDisplay(Jobs::Job const &job) {
+  m_fullOutput          = job.m_fullOutput;
+  m_currentJobStatus    = job.m_status;
+  m_currentJobProgress  = job.m_progress;
+  m_currentJobStartTime = job.m_dateStarted;
+  m_queueProgress       = MainWindow::watchCurrentJobTab()->m_queueProgress;
+
   ui->description->setText(job.m_description);
   ui->status->setText(Jobs::Job::displayableStatus(job.m_status));
   ui->progressBar->setValue(job.m_progress);
@@ -182,8 +187,6 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
 
   ui->startedAt ->setText(job.m_dateStarted .isValid() ? Util::displayableDate(job.m_dateStarted)  : QY("not started yet"));
   ui->finishedAt->setText(job.m_dateFinished.isValid() ? Util::displayableDate(job.m_dateFinished) : QY("not finished yet"));
-
-  m_fullOutput = job.m_fullOutput;
 
   ui->abortButton->setEnabled(Jobs::Job::Running == job.m_status);
   ui->saveOutputButton->setEnabled(!mtx::included_in(job.m_status, Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
