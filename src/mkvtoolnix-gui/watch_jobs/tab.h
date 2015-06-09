@@ -52,6 +52,7 @@ public slots:
   void onJobProgressChanged(uint64_t id, unsigned int progress);
   void onQueueProgressChanged(int progress, int totalProgress);
   void onLineRead(QString const &line, mtx::gui::Jobs::Job::LineType type);
+  void onAbort();
 
   void onSaveOutput();
 

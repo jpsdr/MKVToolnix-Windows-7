@@ -10,6 +10,7 @@
 #include "mkvtoolnix-gui/forms/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
@@ -22,6 +23,7 @@ using namespace mtx::gui;
 Tab::Tab(QWidget *parent)
   : QWidget{parent}
   , ui{new Ui::Tab}
+  , m_id{std::numeric_limits<uint64_t>::max()}
   , m_currentJobProgress{}
   , m_queueProgress{}
   , m_currentJobStatus{Jobs::Job::PendingManual}
@@ -57,12 +59,24 @@ Tab::connectToJob(Jobs::Job const &job) {
   connect(&job,                                   &Jobs::Job::statusChanged,     this,    &Tab::onStatusChanged,              connType);
   connect(&job,                                   &Jobs::Job::progressChanged,   this,    &Tab::onJobProgressChanged,         connType);
   connect(&job,                                   &Jobs::Job::lineRead,          this,    &Tab::onLineRead,                   connType);
-  connect(ui->abortButton,                        &QPushButton::clicked,         &job,    &Jobs::Job::abort,                  connType);
+  connect(ui->abortButton,                        &QPushButton::clicked,         this,    &Tab::onAbort,                      connType);
   connect(ui->saveOutputButton,                   &QPushButton::clicked,         this,    &Tab::onSaveOutput,                 connType);
   connect(ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,         this,    &Tab::acknowledgeWarningsAndErrors, connType);
   connect(model,                                  &Jobs::Model::progressChanged, this,    &Tab::onQueueProgressChanged,       connType);
   connect(model,                                  &Jobs::Model::queueStarted,    this,    &Tab::updateRemainingTime,          connType);
   connect(model,                                  &Jobs::Model::queueStopped,    this,    &Tab::updateRemainingTime,          connType);
+}
+
+void
+Tab::onAbort() {
+  if (std::numeric_limits<uint64_t>::max() == m_id)
+    return;
+
+  if (   (Jobs::Job::Running == m_currentJobStatus)
+      && (Util::MessageBox::question(this, QY("Abort running jobs"), QY("Do you really want to abort this job?")) == QMessageBox::No))
+    return;
+
+  MainWindow::jobTool()->model()->withJob(m_id, [](Jobs::Job &job) { job.abort(); });
 }
 
 void
