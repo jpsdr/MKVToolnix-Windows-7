@@ -69,6 +69,7 @@ Settings::load() {
 
   m_disableAnimations                  = reg.value("disableAnimations", false).toBool();
   m_warnBeforeClosingModifiedTabs      = reg.value("warnBeforeClosingModifiedTabs", true).toBool();
+  m_warnBeforeAbortingJobs             = reg.value("warnBeforeAbortingJobs", true).toBool();
 
 #if defined(HAVE_LIBINTL_H)
   m_uiLocale                           = reg.value("uiLocale").toString();
@@ -145,6 +146,7 @@ Settings::save()
 
   reg.setValue("disableAnimations",                  m_disableAnimations);
   reg.setValue("warnBeforeClosingModifiedTabs",      m_warnBeforeClosingModifiedTabs);
+  reg.setValue("warnBeforeAbortingJobs",             m_warnBeforeAbortingJobs);
 
   reg.setValue("uiLocale",                           m_uiLocale);
 

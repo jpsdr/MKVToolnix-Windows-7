@@ -27,6 +27,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   // GUI page
   ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);
   ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
+  ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
   setupOnlineCheck();
   setupInterfaceLanguage();
   setupJobsJobOutput();
@@ -81,7 +82,11 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbGuiWarnBeforeClosingModifiedTabs,
                    Q("%1 %2")
                    .arg(QY("If checked the program will ask for confirmation before closing or reloading tabs that have been modified."))
-                   .arg(QY("This also done when quitting the application.")));
+                   .arg(QY("This is also done when quitting the application.")));
+  Util::setToolTip(ui->cbGuiWarnBeforeAbortingJobs,
+                   Q("%1 %2")
+                   .arg(QY("If checked the program will ask for confirmation before aborting a running job."))
+                   .arg(QY("This happens when clicking the »abort« button in a »job output« tab and when quitting the application.")));
 
   Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
   ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
@@ -303,6 +308,7 @@ PreferencesDialog::save() {
   m_cfg.m_checkForUpdates               = ui->cbGuiCheckForUpdates->isChecked();
   m_cfg.m_disableAnimations             = ui->cbGuiDisableAnimations->isChecked();
   m_cfg.m_warnBeforeClosingModifiedTabs = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
+  m_cfg.m_warnBeforeAbortingJobs        = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
   auto idx                              = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy              = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 

@@ -286,7 +286,8 @@ MainWindow::beforeCloseCheckRunningJobs() {
   if (!model->hasRunningJobs())
     return true;
 
-  if (Util::MessageBox::question(this, QY("Abort running jobs"), Q("%1 %2").arg(QY("There is currently a job running.")).arg(QY("Do you want to abort that job and quit?"))) == QMessageBox::No)
+  if (   Util::Settings::get().m_warnBeforeAbortingJobs
+      && Util::MessageBox::question(this, QY("Abort running jobs"), Q("%1 %2").arg(QY("There is currently a job running.")).arg(QY("Do you want to abort that job and quit?"))) == QMessageBox::No)
     return false;
 
   model->stop();

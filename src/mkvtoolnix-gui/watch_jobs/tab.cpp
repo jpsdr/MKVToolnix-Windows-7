@@ -72,7 +72,7 @@ Tab::onAbort() {
   if (std::numeric_limits<uint64_t>::max() == m_id)
     return;
 
-  if (   (Jobs::Job::Running == m_currentJobStatus)
+  if (   Util::Settings::get().m_warnBeforeAbortingJobs
       && (Util::MessageBox::question(this, QY("Abort running jobs"), QY("Do you really want to abort this job?")) == QMessageBox::No))
     return;
 
