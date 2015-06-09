@@ -120,9 +120,9 @@ Tool::onContextMenu(QPoint pos) {
   QMenu menu{this};
 
   menu.addSeparator();
-  menu.addAction(m_startAction);
-  menu.addSeparator();
   menu.addAction(m_viewOutputAction);
+  menu.addSeparator();
+  menu.addAction(m_startAction);
   menu.addSeparator();
   menu.addAction(m_removeAction);
   menu.addSeparator();
@@ -218,12 +218,12 @@ Tool::retranslateUi() {
   ui->retranslateUi(this);
   m_model->retranslateUi();
 
-  m_startAction->setText(QY("&Start selected jobs automatically"));
-  m_viewOutputAction->setText(QY("&View output of selected jobs"));
-  m_removeAction->setText(QY("&Remove selected jobs"));
+  m_viewOutputAction->setText(QY("&View output"));
+  m_startAction->setText(QY("&Start jobs automatically"));
+  m_removeAction->setText(QY("&Remove jobs"));
 
-  m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge selected warnings"));
-  m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge selected errors"));
+  m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge warnings"));
+  m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge errors"));
 
   setupToolTips();
 }
