@@ -76,6 +76,10 @@ codec_c::initialize() {
   ms_specialization_descriptions.emplace(specialization_e::dts_hd_high_resolution, "DTS-HD High Resolution");
   ms_specialization_descriptions.emplace(specialization_e::dts_express,            "DTS Express");
   ms_specialization_descriptions.emplace(specialization_e::dts_es,                 "DTS-ES");
+
+  ms_specialization_descriptions.emplace(specialization_e::mpeg_1_2_layer_1,       "MP1");
+  ms_specialization_descriptions.emplace(specialization_e::mpeg_1_2_layer_2,       "MP2");
+  ms_specialization_descriptions.emplace(specialization_e::mpeg_1_2_layer_3,       "MP3");
 }
 
 codec_c const

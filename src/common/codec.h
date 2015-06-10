@@ -146,6 +146,10 @@ public:
     , dts_hd_high_resolution
     , dts_express
     , dts_es
+
+    , mpeg_1_2_layer_1
+    , mpeg_1_2_layer_2
+    , mpeg_1_2_layer_3
   };
 
 private:
