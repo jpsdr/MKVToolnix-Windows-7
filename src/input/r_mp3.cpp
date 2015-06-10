@@ -110,9 +110,8 @@ mp3_reader_c::read(generic_packetizer_c *,
 
 void
 mp3_reader_c::identify() {
-  auto type = (boost::format("MP%1%") % m_mp3header.layer).str();
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(type, type));
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_mp3header.get_codec().get_name());
 }
 
 int
