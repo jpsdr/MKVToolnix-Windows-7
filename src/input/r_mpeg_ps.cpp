@@ -772,7 +772,7 @@ mpeg_ps_reader_c::new_stream_a_mpeg(mpeg_ps_id_t,
 
   track->a_channels    = header.channels;
   track->a_sample_rate = header.sampling_frequency;
-  track->codec         = codec_c::look_up(codec_c::type_e::A_MP3);
+  track->codec         = header.get_codec();
 }
 
 void
