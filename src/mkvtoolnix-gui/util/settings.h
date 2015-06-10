@@ -86,6 +86,7 @@ protected:
 
 public:
   static Settings &get();
+  static void change(std::function<void(Settings &)> worker);
   static std::unique_ptr<QSettings> registry();
 
   static QString exeWithPath(QString const &exe);

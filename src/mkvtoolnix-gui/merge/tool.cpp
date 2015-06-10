@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <QDragEnterEvent>
+#include <QDropEvent>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMenu>
@@ -25,6 +27,7 @@ Tool::Tool(QWidget *parent,
   : ToolBase{parent}
   , ui{new Ui::Tool}
   , m_mergeMenu{mergeMenu}
+  , m_filesDDHandler{Util::FilesDragDropHandler::Mode::Remember}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -145,8 +148,14 @@ Tool::openConfig() {
   if (fileName.isEmpty())
     return;
 
-  settings.m_lastConfigDir = QFileInfo{fileName}.path();
-  settings.save();
+  openConfigFile(fileName);
+}
+
+void
+Tool::openConfigFile(QString const &fileName) {
+  Util::Settings::change([&fileName](Util::Settings &cfg) {
+    cfg.m_lastConfigDir = QFileInfo{fileName}.path();
+  });
 
   appendTab(new Tab{this})
    ->load(fileName);
@@ -204,6 +213,40 @@ Tool::tabTitleChanged() {
   auto idx = ui->merges->indexOf(tab);
   if (tab && (-1 != idx))
     ui->merges->setTabText(idx, tab->title());
+}
+
+void
+Tool::dragEnterEvent(QDragEnterEvent *event) {
+  m_filesDDHandler.handle(event, false);
+}
+
+void
+Tool::dropEvent(QDropEvent *event) {
+  if (m_filesDDHandler.handle(event, true))
+    filesDropped(m_filesDDHandler.fileNames());
+}
+
+void
+Tool::filesDropped(QStringList const &fileNames) {
+  auto configExt  = Q(".mtxcfg");
+  auto mediaFiles = QStringList{};
+
+  for (auto const &fileName : fileNames)
+    if (fileName.endsWith(configExt))
+      openConfigFile(fileName);
+    else
+      mediaFiles << fileName;
+
+  if (mediaFiles.isEmpty())
+    return;
+
+  if (!ui->merges->count())
+    newConfig();
+
+  auto tab = currentTab();
+  Q_ASSERT(!!tab);
+
+  tab->addFilesToBeAddedOrAppendedDelayed(mediaFiles);
 }
 
 }}}

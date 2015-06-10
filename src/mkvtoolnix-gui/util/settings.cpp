@@ -18,6 +18,12 @@ Settings::Settings()
   load();
 }
 
+void
+Settings::change(std::function<void(Settings &)> worker) {
+  worker(s_settings);
+  s_settings.save();
+}
+
 Settings &
 Settings::get() {
   return s_settings;

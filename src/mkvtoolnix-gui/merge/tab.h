@@ -129,6 +129,7 @@ public slots:
   virtual void onTrackRowsInserted(QModelIndex const &parentIdx, int first, int last);
   virtual void addOrAppendDroppedFiles(QStringList const &fileNames);
   virtual void addOrAppendDroppedFilesDelayed();
+  virtual void addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames);
 
   // Output tab:
   virtual void setDestination(QString const &newValue);

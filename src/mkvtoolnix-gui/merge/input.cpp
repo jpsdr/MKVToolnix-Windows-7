@@ -981,16 +981,20 @@ Tab::addOrAppendDroppedFilesDelayed() {
 }
 
 void
+Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames) {
+  m_filesToAddDelayed += fileNames;
+  QTimer::singleShot(0, this, SLOT(addOrAppendDroppedFilesDelayed()));
+}
+
+void
 Tab::dragEnterEvent(QDragEnterEvent *event) {
   m_filesDDHandler.handle(event, false);
 }
 
 void
 Tab::dropEvent(QDropEvent *event) {
-  if (m_filesDDHandler.handle(event, true)) {
-    m_filesToAddDelayed += m_filesDDHandler.fileNames();
-    QTimer::singleShot(0, this, SLOT(addOrAppendDroppedFilesDelayed()));
-  }
+  if (m_filesDDHandler.handle(event, true))
+    addFilesToBeAddedOrAppendedDelayed(m_filesDDHandler.fileNames());
 }
 
 void
