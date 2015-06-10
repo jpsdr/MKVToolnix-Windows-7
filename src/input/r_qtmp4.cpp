@@ -2716,6 +2716,7 @@ qtmp4_demuxer_c::derive_track_params_from_mp3_audio_bitstream() {
 
   a_channels   = header.channels;
   a_samplerate = header.sampling_frequency;
+  codec        = header.get_codec();
 }
 
 bool
