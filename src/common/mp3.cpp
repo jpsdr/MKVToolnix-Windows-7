@@ -100,6 +100,18 @@
 //   Layer-3 | 1152 |  576 |  576 |
 //   --------+------+------+------+
 
+codec_c
+mp3_header_t::get_codec()
+  const {
+  auto codec = codec_c::look_up(codec_c::type_e::A_MP3);
+  if ((layer >= 1) && (layer <= 3))
+    codec.set_specialization(  1 == layer ? codec_c::specialization_e::mpeg_1_2_layer_1
+                             : 2 == layer ? codec_c::specialization_e::mpeg_1_2_layer_2
+                             :              codec_c::specialization_e::mpeg_1_2_layer_3);
+
+  return codec;
+}
+
 static int mp3_bitrates_mpeg1[3][16] = {
   {0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 0},
   {0, 32, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 384, 0},
