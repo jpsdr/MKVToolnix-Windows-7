@@ -31,7 +31,6 @@ using namespace mtx::gui;
 Tab::Tab(QWidget *parent)
   : QWidget{parent}
   , ui{new Ui::Tab}
-  , m_filesDDHandler{Util::FilesDragDropHandler::Mode::Remember}
   , m_filesModel{new SourceFileModel{this}}
   , m_tracksModel{new TrackModel{this}}
   , m_currentlySettingInputControlValues{false}

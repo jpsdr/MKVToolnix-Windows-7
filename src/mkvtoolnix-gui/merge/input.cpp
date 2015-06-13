@@ -987,17 +987,6 @@ Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames) {
 }
 
 void
-Tab::dragEnterEvent(QDragEnterEvent *event) {
-  m_filesDDHandler.handle(event, false);
-}
-
-void
-Tab::dropEvent(QDropEvent *event) {
-  if (m_filesDDHandler.handle(event, true))
-    addFilesToBeAddedOrAppendedDelayed(m_filesDDHandler.fileNames());
-}
-
-void
 Tab::selectAllTracks() {
   auto numRows = m_tracksModel->rowCount();
   if (!numRows)
