@@ -36,6 +36,19 @@ SourceFileModel::retranslateUi() {
   auto labels = QStringList{} << QY("File name") << QY("Container") << QY("File size") << QY("Directory");
   setHorizontalHeaderLabels(labels);
   horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+  if (!m_sourceFiles)
+    return;
+
+  for (auto const &sourceFile : *m_sourceFiles) {
+    sourceFileUpdated(sourceFile.get());
+
+    for (auto const &additionalPart : sourceFile->m_additionalParts)
+      sourceFileUpdated(additionalPart.get());
+
+    for (auto const &appendedFile : sourceFile->m_appendedFiles)
+      sourceFileUpdated(appendedFile.get());
+  }
 }
 
 void
@@ -87,12 +100,24 @@ QList<QStandardItem *>
 SourceFileModel::createRow(SourceFile *sourceFile)
   const {
   auto items = QList<QStandardItem *>{};
-  auto info  = QFileInfo{sourceFile->m_fileName};
+  for (int idx = 0; idx < 4; ++idx)
+    items << new QStandardItem{};
 
-  items << new QStandardItem{info.fileName()};
-  items << new QStandardItem{sourceFile->isAdditionalPart() ? QY("(additional part)") : sourceFile->m_container};
-  items << new QStandardItem{to_qs(format_file_size(sourceFile->isPlaylist() ? sourceFile->m_playlistSize : info.size()))};
-  items << new QStandardItem{info.path()};
+  setItemsFromSourceFile(items, sourceFile);
+
+  return items;
+}
+
+void
+SourceFileModel::setItemsFromSourceFile(QList<QStandardItem *> const &items,
+                                        SourceFile *sourceFile)
+  const {
+  auto info = QFileInfo{sourceFile->m_fileName};
+
+  items[0]->setText(info.fileName());
+  items[1]->setText(sourceFile->isAdditionalPart() ? QY("(additional part)") : sourceFile->m_container);
+  items[2]->setText(to_qs(format_file_size(sourceFile->isPlaylist() ? sourceFile->m_playlistSize : info.size())));
+  items[3]->setText(info.path());
 
   items[0]->setData(reinterpret_cast<quint64>(sourceFile), Util::SourceFileRole);
   items[0]->setIcon(  sourceFile->isAdditionalPart() ? m_additionalPartIcon
@@ -100,8 +125,20 @@ SourceFileModel::createRow(SourceFile *sourceFile)
                     :                                  m_normalIcon);
 
   items[2]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+}
 
-  return items;
+void
+SourceFileModel::sourceFileUpdated(SourceFile *sourceFile) {
+  auto idx = indexFromSourceFile(sourceFile);
+  if (!idx.isValid())
+    return;
+
+  auto items = QList<QStandardItem *>{};
+
+  for (auto column = 0, numColumns = columnCount(); column < numColumns; ++column)
+    items << itemFromIndex(idx.sibling(idx.row(), column));
+
+  setItemsFromSourceFile(items, sourceFile);
 }
 
 quint64

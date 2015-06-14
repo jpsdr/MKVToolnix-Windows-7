@@ -58,6 +58,7 @@ protected:
   virtual void addFilesAndTracks(QList<SourceFilePtr> const &files);
   virtual void appendFilesAndTracks(QModelIndex const &fileToAddToIdx, QList<SourceFilePtr> const &files);
 
+  void setItemsFromSourceFile(QList<QStandardItem *> const &items, SourceFile *sourceFile) const;
   QList<QStandardItem *> createRow(SourceFile *sourceFile) const;
   void createAndAppendRow(QStandardItem *item, SourceFilePtr const &file, int position = -1);
   void dumpSourceFiles(QString const &label) const;
@@ -67,6 +68,8 @@ protected:
   bool dropSourceFiles(QMimeData const *data, Qt::DropAction action, int row, const QModelIndex &parent);
 
   QModelIndex indexFromSourceFile(quint64 value, QModelIndex const &parent) const;
+
+  void sourceFileUpdated(SourceFile *sourceFile);
 };
 
 }}}

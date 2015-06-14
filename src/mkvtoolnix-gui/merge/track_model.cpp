@@ -42,6 +42,13 @@ TrackModel::retranslateUi() {
   auto labels = QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID");
   setHorizontalHeaderLabels(labels);
   horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+  for (auto const &track : *m_tracks) {
+    trackUpdated(track);
+
+    for (auto const &appendedTrack : track->m_appendedTracks)
+      trackUpdated(appendedTrack);
+  }
 }
 
 void
