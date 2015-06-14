@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-06-09 22:03+0200\n"
+"POT-Creation-Date: 2015-06-14 10:39+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: Louis Larsen\n"
 "Language-Team: Chinese Simplified <mkvtoolnix@lidian.info>\n"
@@ -1331,7 +1331,7 @@ msgstr "名称:"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:197
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:367
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:393
-#: src/mkvtoolnix-gui/forms/merge/tool.h:198
+#: src/mkvtoolnix-gui/forms/merge/tool.h:221
 msgid "&New"
 msgstr ""
 
@@ -1375,7 +1375,7 @@ msgid "&Open Matroska or XML file"
 msgstr "打开 Matroska 文件"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:371
-#: src/mkvtoolnix-gui/forms/merge/tool.h:199
+#: src/mkvtoolnix-gui/forms/merge/tool.h:222
 #, fuzzy
 msgid "&Open settings"
 msgstr "将混流配置保存到文件"
@@ -2122,7 +2122,7 @@ msgstr "<Tag> 缺 <Simple> 子元素。"
 msgid "<do not change>"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:81
+#: src/mkvtoolnix-gui/merge/tab.cpp:80
 #, fuzzy
 msgid "<no output file>"
 msgstr "设置输出文件(&O)"
@@ -2615,11 +2615,11 @@ msgstr "所有章节条目都有效。"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:156
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:124
 #: src/mkvtoolnix-gui/merge/attachments.cpp:107
-#: src/mkvtoolnix-gui/merge/tab.cpp:133
-#: src/mkvtoolnix-gui/merge/tab.cpp:147
-#: src/mkvtoolnix-gui/merge/tab.cpp:180
-#: src/mkvtoolnix-gui/merge/tab.cpp:204
-#: src/mkvtoolnix-gui/merge/tool.cpp:144
+#: src/mkvtoolnix-gui/merge/tab.cpp:132
+#: src/mkvtoolnix-gui/merge/tab.cpp:146
+#: src/mkvtoolnix-gui/merge/tab.cpp:179
+#: src/mkvtoolnix-gui/merge/tab.cpp:203
+#: src/mkvtoolnix-gui/merge/tool.cpp:147
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:217
 #, fuzzy
@@ -3142,8 +3142,8 @@ msgstr "在源容器不提供时间码或帧率值的情况下，无法将非原
 msgid "Cannot extract tracks of different kinds to the same file. This was requested for the tracks %1% and %2%.\n"
 msgstr "无法将不同类型的轨道提取到一个文件。轨道 %1% 和 %2% 被要求这样提取。\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:257
-#: src/mkvtoolnix-gui/merge/tab.cpp:262
+#: src/mkvtoolnix-gui/merge/tab.cpp:256
+#: src/mkvtoolnix-gui/merge/tab.cpp:261
 #, fuzzy
 msgid "Cannot start merging"
 msgstr "不能启动其他混流任务"
@@ -3840,8 +3840,8 @@ msgstr "创建一个符合 WebM 标准的文件。如果输出文件扩展名为
 msgid "Create a new chapter file"
 msgstr "创建一个新的章节文件"
 
-#: src/mkvtoolnix-gui/forms/merge/tool.h:197
-msgid "Create a new one or open an existing one via the »merge« menu or the buttons below."
+#: src/mkvtoolnix-gui/forms/merge/tool.h:219
+msgid "Create a new one or open an existing one via the »merge« menu, the buttons below or drag & drop one here."
 msgstr ""
 
 #: src/common/mm_io_x.h:118
@@ -4584,7 +4584,7 @@ msgstr "英文语言名"
 msgid "Ensure the file name is uni&que"
 msgstr "确保推荐的输出文件名唯一"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:284
+#: src/mkvtoolnix-gui/merge/tab.cpp:283
 #, fuzzy
 msgid "Enter job description"
 msgstr "任务描述"
@@ -4620,7 +4620,7 @@ msgstr "在行 %1% 处出错: 应为字幕号码但发现一些文字。\n"
 msgid "Error loading settings"
 msgstr "载入配置出错"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:109
+#: src/mkvtoolnix-gui/merge/tab.cpp:108
 #, fuzzy
 msgid "Error loading settings file"
 msgstr "载入配置出错"
@@ -4901,7 +4901,7 @@ msgstr "文件描述: %1%"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:142
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:148
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:174
-#: src/mkvtoolnix-gui/merge/tool.cpp:166
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
 #, fuzzy
 msgid "File has been modified"
 msgstr "文件未改动。"
@@ -6276,8 +6276,8 @@ msgstr "MKVToolNix 依 GNU GPL v2 授权"
 msgid "MKVToolNix option files"
 msgstr "创建选项文件(&O)"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:147
-#: src/mkvtoolnix-gui/merge/tool.cpp:144
+#: src/mkvtoolnix-gui/merge/tab.cpp:146
+#: src/mkvtoolnix-gui/merge/tool.cpp:147
 msgid "MKVToolnix GUI config files"
 msgstr ""
 
@@ -6706,7 +6706,7 @@ msgstr "未指定 %1%，在 '--%2% %3%'。\n"
 msgid "No AC3 header found in first frame; track will be skipped.\n"
 msgstr "首帧未发现 AC3 头; 此轨将被跳过。\n"
 
-#: src/input/r_qtmp4.cpp:2760
+#: src/input/r_qtmp4.cpp:2761
 #, fuzzy
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "首帧未发现 AC3 头; 此轨将被跳过。\n"
@@ -6808,7 +6808,7 @@ msgstr "未给定任何输入文件。将不创建输出文件。\n"
 msgid "No job has been started yet."
 msgstr ", 开始于 %s"
 
-#: src/mkvtoolnix-gui/forms/merge/tool.h:196
+#: src/mkvtoolnix-gui/forms/merge/tool.h:218
 #, fuzzy
 msgid "No merge job has been opened yet."
 msgstr "尚未创建任何章节条目。"
@@ -7121,7 +7121,7 @@ msgstr "退出头部编辑器"
 msgid "Open folder"
 msgstr "打开文件夹"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:144
+#: src/mkvtoolnix-gui/merge/tool.cpp:147
 #, fuzzy
 msgid "Open settings file"
 msgstr "将混流配置保存到文件"
@@ -7340,7 +7340,7 @@ msgstr "请不要把 'mmg' 自己当作 'mkvmerge' 可执行程序选择。"
 msgid "Please enter a description for the new job:"
 msgstr "请输入新任务的描述:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:284
+#: src/mkvtoolnix-gui/merge/tab.cpp:283
 #, fuzzy
 msgid "Please enter the new job's description."
 msgstr "请输入新任务的描述:"
@@ -7535,17 +7535,17 @@ msgstr "Quicktime/MP4 读取器: 未发现 'mdat' 单元。找不到影片数据
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 读取器: 无效的块尺寸 %1% 于 %2%。\n"
 
-#: src/input/r_qtmp4.cpp:2807
+#: src/input/r_qtmp4.cpp:2808
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 part 10/AVC 轨道 %1% 缺解码器配置信息。正在跳过该轨。\n"
 
-#: src/input/r_qtmp4.cpp:2833
+#: src/input/r_qtmp4.cpp:2834
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 轨 %1% 缺 esds 单元/解码器配置信息。正在跳过该轨。\n"
 
-#: src/input/r_qtmp4.cpp:2817
+#: src/input/r_qtmp4.cpp:2818
 #, fuzzy, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 part 10/AVC 轨道 %1% 缺解码器配置信息。正在跳过该轨。\n"
@@ -7564,17 +7564,17 @@ msgstr "Quicktime/MP4 读取器: 轨道 %1% 的流描述单元的 'size' 字段�
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 读取器: 'time scale' 时间缩放参数为 0。这是不支持的。\n"
 
-#: src/input/r_qtmp4.cpp:2778
+#: src/input/r_qtmp4.cpp:2779
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 该 AAC 轨道 %1% 缺 esds 单元/解码器配置信息。正在跳过该轨。\n"
 
-#: src/input/r_qtmp4.cpp:2773
+#: src/input/r_qtmp4.cpp:2774
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 音频轨 %1% 的 'esds' 单元使用了不支持的 'object type id' 对象类别号 %2%。正在跳过该轨。\n"
 
-#: src/input/r_qtmp4.cpp:2827
+#: src/input/r_qtmp4.cpp:2828
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 视频轨 %1% 缺 ESDS 单元。正在跳过此轨。\n"
@@ -7599,10 +7599,10 @@ msgstr "Quicktime/MP4 读取器: 此文件头部经压缩，但无法初始化 z
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 读取器: 此文件头部经压缩，但无法解压。zlib 错误代码: %1%。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:2729
-#: src/input/r_qtmp4.cpp:2748
-#: src/input/r_qtmp4.cpp:2788
-#: src/input/r_qtmp4.cpp:2851
+#: src/input/r_qtmp4.cpp:2730
+#: src/input/r_qtmp4.cpp:2749
+#: src/input/r_qtmp4.cpp:2789
+#: src/input/r_qtmp4.cpp:2852
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 读取器: 轨道 %1% 缺一些数据。头部单元损坏?\n"
@@ -7925,12 +7925,12 @@ msgstr "保存日志"
 msgid "Save muxing settings to a file"
 msgstr "将混流配置保存到文件"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:133
+#: src/mkvtoolnix-gui/merge/tab.cpp:132
 #, fuzzy
 msgid "Save option file"
 msgstr "创建选项文件(&O)"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:147
+#: src/mkvtoolnix-gui/merge/tab.cpp:146
 #, fuzzy
 msgid "Save settings file as"
 msgstr "将混流配置保存到文件"
@@ -9190,13 +9190,13 @@ msgstr "编解码器专有数据不匹配 (长: %1% 与 %2%)。"
 msgid "The codec's private data does not match. Both have the same length (%1%) but different content."
 msgstr "编解码器专有数据不匹配。长度相同 (%1%) 但内容不同。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:102
+#: src/mkvtoolnix-gui/merge/tab.cpp:101
 #, fuzzy
 msgid "The configuration has been loaded."
 msgstr "配置已加载。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:127
-#: src/mkvtoolnix-gui/merge/tab.cpp:160
+#: src/mkvtoolnix-gui/merge/tab.cpp:126
+#: src/mkvtoolnix-gui/merge/tab.cpp:159
 #, fuzzy
 msgid "The configuration has been saved."
 msgstr "配置已保存。"
@@ -9579,7 +9579,7 @@ msgstr "文件头太短。\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:217
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:174
-#: src/mkvtoolnix-gui/merge/tool.cpp:166
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
 #, fuzzy
 msgid "The file »%1« has been modified. Do you really want to close? All changes will be lost."
 msgstr "一些头部值已被修改。您确实要在不保存文件的情况下关闭?"
@@ -9938,7 +9938,7 @@ msgstr ""
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "选项 '--meta-seek-size' 不再受支持。请阅读 mkvmerge 的自述文档，尤其是关于 *Matroska 文件规划* 的段落。\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:141
+#: src/mkvtoolnix-gui/merge/tab.cpp:140
 #, fuzzy
 msgid "The option file has been created."
 msgstr "选项文件已创建。"
@@ -10040,7 +10040,7 @@ msgstr "选定的语言 '%s' （章节 '%s'）不是有效的语言代码。请�
 msgid "The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."
 msgstr "mkvmerge 能够从音频 CD 中读取 CUE 表单，并自动转换为章节。此选项控制章节名称的创建方式。'%p' 将被轨道的 *表演者* 替换，'%t' 被轨道的 *标题* 替换，'%n' 被轨道的序号替换，'%N' 被轨道的衬式序号替换（若序号 < 10 则在前面补 0）。其余的照抄不误。若此处留空则默认使用 '%p - %t'。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:109
+#: src/mkvtoolnix-gui/merge/tab.cpp:108
 msgid "The settings file '%1' contains invalid settings and was not loaded."
 msgstr ""
 
@@ -11542,6 +11542,10 @@ msgstr "剪辑信息文件:"
 msgid "XML tag files"
 msgstr "连接文件"
 
+#: src/mkvtoolnix-gui/forms/merge/tool.h:220
+msgid "You can also drag & drop media files here."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:57
 msgid "You can change this value in the preferences."
 msgstr ""
@@ -11598,7 +11602,7 @@ msgstr ""
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:257
+#: src/mkvtoolnix-gui/merge/tab.cpp:256
 msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
 msgstr ""
 
@@ -11606,7 +11610,7 @@ msgstr ""
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:262
+#: src/mkvtoolnix-gui/merge/tab.cpp:261
 msgid "You have to set the output file name before you can start merging or add a job to the job queue."
 msgstr ""
 
@@ -12371,7 +12375,7 @@ msgstr "mkvmerge 能够从音频 CD 中读取 CUE 表单，并自动转换为章
 msgid "mkvmerge can read and use timecodes from an external text file. This feature is a very advanced feature. Almost all users should leave this entry empty."
 msgstr "mkvmerge 可以读取并使用外部文本文件中的时间码。这是一项非常高级的功能，几乎所有用户应该留空。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:91
+#: src/mkvtoolnix-gui/merge/tab.cpp:90
 #, fuzzy
 msgid "mkvmerge command line"
 msgstr "保存命令行(&V)"

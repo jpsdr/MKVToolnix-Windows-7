@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-06-09 22:03+0200\n"
+"POT-Creation-Date: 2015-06-14 10:39+0200\n"
 "PO-Revision-Date: 2015-05-10 21:09+0100\n"
 "Last-Translator: DenB <denb10@free.fr>\n"
 "Language-Team: Denis Baron <denb10@free.fr>\n"
@@ -1332,7 +1332,7 @@ msgstr "&Nom :"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:197
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:367
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:393
-#: src/mkvtoolnix-gui/forms/merge/tool.h:198
+#: src/mkvtoolnix-gui/forms/merge/tool.h:221
 msgid "&New"
 msgstr "&Nouveau"
 
@@ -1374,7 +1374,7 @@ msgid "&Open Matroska or XML file"
 msgstr "&Ouvrir un fichier Matroska ou XML"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:371
-#: src/mkvtoolnix-gui/forms/merge/tool.h:199
+#: src/mkvtoolnix-gui/forms/merge/tool.h:222
 msgid "&Open settings"
 msgstr "&Ouvrir une configuration"
 
@@ -2104,7 +2104,7 @@ msgstr "<Tag> n'a pas d'enfant <Simple>."
 msgid "<do not change>"
 msgstr "<ne pas modifier>"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:81
+#: src/mkvtoolnix-gui/merge/tab.cpp:80
 msgid "<no output file>"
 msgstr "<aucun fichier cible>"
 
@@ -2572,11 +2572,11 @@ msgstr "Toutes les entrées de chapitre sont correctes."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:156
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:124
 #: src/mkvtoolnix-gui/merge/attachments.cpp:107
-#: src/mkvtoolnix-gui/merge/tab.cpp:133
-#: src/mkvtoolnix-gui/merge/tab.cpp:147
-#: src/mkvtoolnix-gui/merge/tab.cpp:180
-#: src/mkvtoolnix-gui/merge/tab.cpp:204
-#: src/mkvtoolnix-gui/merge/tool.cpp:144
+#: src/mkvtoolnix-gui/merge/tab.cpp:132
+#: src/mkvtoolnix-gui/merge/tab.cpp:146
+#: src/mkvtoolnix-gui/merge/tab.cpp:179
+#: src/mkvtoolnix-gui/merge/tab.cpp:203
+#: src/mkvtoolnix-gui/merge/tool.cpp:147
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:217
 msgid "All files"
@@ -3079,8 +3079,8 @@ msgstr "Impossible de convertir des images vidéo MPEG-4 non natives en des nati
 msgid "Cannot extract tracks of different kinds to the same file. This was requested for the tracks %1% and %2%.\n"
 msgstr "Impossible d'extraire des pistes de types différents dans le même fichier, ce qui a été demandé pour les pistes %1% et %2%.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:257
-#: src/mkvtoolnix-gui/merge/tab.cpp:262
+#: src/mkvtoolnix-gui/merge/tab.cpp:256
+#: src/mkvtoolnix-gui/merge/tab.cpp:261
 msgid "Cannot start merging"
 msgstr "Impossible de démarrer le multiplexage"
 
@@ -3764,9 +3764,9 @@ msgstr "Créer un fichier conforme au format WebM. mkvmerge active automatiqueme
 msgid "Create a new chapter file"
 msgstr "Créer un nouveau fichier de chapitrage"
 
-#: src/mkvtoolnix-gui/forms/merge/tool.h:197
+#: src/mkvtoolnix-gui/forms/merge/tool.h:219
 #, fuzzy
-msgid "Create a new one or open an existing one via the »merge« menu or the buttons below."
+msgid "Create a new one or open an existing one via the »merge« menu, the buttons below or drag & drop one here."
 msgstr "En créer une nouvelle ou en ouvrir une existante via le menu « Fusion »."
 
 #: src/common/mm_io_x.h:118
@@ -4486,7 +4486,7 @@ msgstr "Nom anglais de la langue"
 msgid "Ensure the file name is uni&que"
 msgstr "Assurer que le nom du fichier est uni&que"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:284
+#: src/mkvtoolnix-gui/merge/tab.cpp:283
 msgid "Enter job description"
 msgstr "Entrer la description de la tâche"
 
@@ -4521,7 +4521,7 @@ msgstr "Erreur à la ligne %1% : un numéro de sous-titre était attendu et un a
 msgid "Error loading settings"
 msgstr "Erreur au chargement de la configuration"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:109
+#: src/mkvtoolnix-gui/merge/tab.cpp:108
 msgid "Error loading settings file"
 msgstr "Erreur au chargement du fichier de configuration"
 
@@ -4798,7 +4798,7 @@ msgstr "Description du fichier : %1%"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:142
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:148
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:174
-#: src/mkvtoolnix-gui/merge/tool.cpp:166
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
 msgid "File has been modified"
 msgstr "Fichier modifié"
 
@@ -6142,8 +6142,8 @@ msgstr "MKVToolNix diffusé sous licence GNU GPL v2"
 msgid "MKVToolNix option files"
 msgstr "Fichiers d'options MKVToolNix"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:147
-#: src/mkvtoolnix-gui/merge/tool.cpp:144
+#: src/mkvtoolnix-gui/merge/tab.cpp:146
+#: src/mkvtoolnix-gui/merge/tool.cpp:147
 msgid "MKVToolnix GUI config files"
 msgstr "Fichiers de configuration MKVToolNix GUI"
 
@@ -6560,7 +6560,7 @@ msgstr "Aucun %1% spécifié dans « --%2% %3% ».\n"
 msgid "No AC3 header found in first frame; track will be skipped.\n"
 msgstr "Aucun en-tête AC3 trouvé dans la première image, la piste sera passée.\n"
 
-#: src/input/r_qtmp4.cpp:2760
+#: src/input/r_qtmp4.cpp:2761
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Aucun en-tête DTS trouvé dans les premières images, la piste sera ignorée.\n"
 
@@ -6658,7 +6658,7 @@ msgstr "Aucun fichier source n'a été donné. Aucun fichier cible ne sera cré�
 msgid "No job has been started yet."
 msgstr "Aucune tâche n'a été démarrée pour l'instant."
 
-#: src/mkvtoolnix-gui/forms/merge/tool.h:196
+#: src/mkvtoolnix-gui/forms/merge/tool.h:218
 msgid "No merge job has been opened yet."
 msgstr "Aucune tâche de fusion n'est ouverte pour l'instant."
 
@@ -6966,7 +6966,7 @@ msgstr "Ouvrir les fichiers dans l'éditeur d'en-têtes"
 msgid "Open folder"
 msgstr "Ouvrir le dossier"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:144
+#: src/mkvtoolnix-gui/merge/tool.cpp:147
 msgid "Open settings file"
 msgstr "Ouvrir le fichier de configuration"
 
@@ -7177,7 +7177,7 @@ msgstr "Veuillez ne pas confondre « mmg » lui-même et l'exécutable « mkvmer
 msgid "Please enter a description for the new job:"
 msgstr "Veuillez saisir une description pour la nouvelle tâche :"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:284
+#: src/mkvtoolnix-gui/merge/tab.cpp:283
 msgid "Please enter the new job's description."
 msgstr "Veuillez saisir la description de la nouvelle tâche."
 
@@ -7368,17 +7368,17 @@ msgstr "Lecteur Quicktime/MP4 : atome « mdat » non trouvé. Aucune donnée vid
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Lecteur Quicktime/MP4 : taille de bloc %1% incorrecte à la position %2%.\n"
 
-#: src/input/r_qtmp4.cpp:2807
+#: src/input/r_qtmp4.cpp:2808
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Lecteur Quicktime/MP4 : la piste MPEG4 part 10/AVC %1% n'a pas sa configuration du décodeur. Piste ignorée.\n"
 
-#: src/input/r_qtmp4.cpp:2833
+#: src/input/r_qtmp4.cpp:2834
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lecteur Quicktime/MP4 : la piste MPEG4 %1% n'a pas d'atome esds/configuration du décodeur. Piste ignorée.\n"
 
-#: src/input/r_qtmp4.cpp:2817
+#: src/input/r_qtmp4.cpp:2818
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Lecteur Quicktime/MP4 : la piste MPEGH part 2/HEVC %1% n'a pas sa configuration du décodeur. Cette piste sera ignorée.\n"
@@ -7397,17 +7397,17 @@ msgstr "Lecteur Quicktime/MP4 : le champ taille est trop petit dans l'atome de d
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Lecteur Quicktime/MP4 : le paramètre de coefficient temporel est 0, ce qui n'est pas supporté.\n"
 
-#: src/input/r_qtmp4.cpp:2778
+#: src/input/r_qtmp4.cpp:2779
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lecteur Quicktime/MP4 : la piste AAC %1% n'a pas d'atome esds/configuration du décodeur. Piste ignorée.\n"
 
-#: src/input/r_qtmp4.cpp:2773
+#: src/input/r_qtmp4.cpp:2774
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Lecteur Quicktime/MP4 : la piste audio %1% utilise l'identifiant de type d'objet %2% non supporté dans l'atome « esds ». Piste ignorée.\n"
 
-#: src/input/r_qtmp4.cpp:2827
+#: src/input/r_qtmp4.cpp:2828
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Lecteur Quicktime/MP4 : la piste vidéo %1% n'a pas d'atome esds. Piste ignorée.\n"
@@ -7432,10 +7432,10 @@ msgstr "Lecteur Quicktime/MP4 : ce fichier utilise des en-têtes compressés mai
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Lecteur Quicktime/MP4 : ce fichier utilise des en-têtes compressés qui ne peuvent pas être décompressés, code d'erreur zlib : %1%. Abandon.\n"
 
-#: src/input/r_qtmp4.cpp:2729
-#: src/input/r_qtmp4.cpp:2748
-#: src/input/r_qtmp4.cpp:2788
-#: src/input/r_qtmp4.cpp:2851
+#: src/input/r_qtmp4.cpp:2730
+#: src/input/r_qtmp4.cpp:2749
+#: src/input/r_qtmp4.cpp:2789
+#: src/input/r_qtmp4.cpp:2852
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Lecteur Quicktime/MP4 : des données manquent à la piste %1%. Atomes d'en-tête endommagés ?\n"
@@ -7747,11 +7747,11 @@ msgstr "Enregistrer le journal"
 msgid "Save muxing settings to a file"
 msgstr "Enregistrer les paramètres de multiplexage dans un fichier"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:133
+#: src/mkvtoolnix-gui/merge/tab.cpp:132
 msgid "Save option file"
 msgstr "Enregistrer le fichier d'options"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:147
+#: src/mkvtoolnix-gui/merge/tab.cpp:146
 msgid "Save settings file as"
 msgstr "Enregistrer le fichier de configuration sous"
 
@@ -8972,12 +8972,12 @@ msgstr "Les données privées du codec ne correspondent pas (longueur : %1% et %
 msgid "The codec's private data does not match. Both have the same length (%1%) but different content."
 msgstr "Les données privées du codec ne correspondent pas, elles ont la même longueur (%1%) mais un contenu différent."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:102
+#: src/mkvtoolnix-gui/merge/tab.cpp:101
 msgid "The configuration has been loaded."
 msgstr "La configuration a été chargée."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:127
-#: src/mkvtoolnix-gui/merge/tab.cpp:160
+#: src/mkvtoolnix-gui/merge/tab.cpp:126
+#: src/mkvtoolnix-gui/merge/tab.cpp:159
 msgid "The configuration has been saved."
 msgstr "La configuration a été enregistrée."
 
@@ -9347,7 +9347,7 @@ msgstr "Le fichier que vous avez ajouté est une liste de lecture."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:217
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:174
-#: src/mkvtoolnix-gui/merge/tool.cpp:166
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
 msgid "The file »%1« has been modified. Do you really want to close? All changes will be lost."
 msgstr "Le fichier « %1 » a été modifié. Voulez-vous vraiment le fermer ? Tous les changements seront perdus."
 
@@ -9700,7 +9700,7 @@ msgstr "Les seuls codecs autorisés sont VP8/VP9 pour les pistes vidéo et Vorbi
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "L'option « --meta-seek-size » n'est plus prise en charge. Lisez la documentation de mkvmerge, particulièrement la rubrique concernant la structure des fichiers Matroska.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:141
+#: src/mkvtoolnix-gui/merge/tab.cpp:140
 msgid "The option file has been created."
 msgstr "Le fichier d'options a été créé."
 
@@ -9799,7 +9799,7 @@ msgstr "Le code de la langue « %s » sélectionnée pour le chapitre « %s » n
 msgid "The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."
 msgstr "La séquence « %p » est remplacée par l'interprète de la piste, « %t » par le titre, « %n » par le numéro de piste et « %N » par le numéro de piste précédé d'un 0 pour les numéros inférieurs à 10."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:109
+#: src/mkvtoolnix-gui/merge/tab.cpp:108
 msgid "The settings file '%1' contains invalid settings and was not loaded."
 msgstr "Le fichier de configuration « %1 » contient des réglages incorrects et n'a pas été chargé."
 
@@ -11259,6 +11259,10 @@ msgstr "Fichier d'informations de segment XML"
 msgid "XML tag files"
 msgstr "Fichiers d'étiquetage XML"
 
+#: src/mkvtoolnix-gui/forms/merge/tool.h:220
+msgid "You can also drag & drop media files here."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:57
 msgid "You can change this value in the preferences."
 msgstr "Vous pouvez modifier cette valeur dans les préférences."
@@ -11311,7 +11315,7 @@ msgstr ""
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "Vous ne pouvez pas ajouter de parties supplémentaires à des fichiers qui ne contiennent pas de pistes."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:257
+#: src/mkvtoolnix-gui/merge/tab.cpp:256
 msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
 msgstr "Vous devez ajouter au moins un fichier source avant de pouvoir démarrer la fusion ou ajouter une tâche à la liste d'attente."
 
@@ -11319,7 +11323,7 @@ msgstr "Vous devez ajouter au moins un fichier source avant de pouvoir démarrer
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "Vous devez entrer une valeur comprise entre 1000 et 10000000 ou la valeur magique -1."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:262
+#: src/mkvtoolnix-gui/merge/tab.cpp:261
 msgid "You have to set the output file name before you can start merging or add a job to the job queue."
 msgstr "Vous devez préciser le nom du fichier cible avant de pouvoir démarrer la fusion ou ajouter une tâche à la liste d'attente."
 
@@ -12055,7 +12059,7 @@ msgstr "mkvmerge peut lire une feuille de montage CUE pour CD audio et la transf
 msgid "mkvmerge can read and use timecodes from an external text file. This feature is a very advanced feature. Almost all users should leave this entry empty."
 msgstr "mkvmerge peut utiliser les codes temporels d'un fichier texte externe. Cette fonction est très avancée, la plupart des utilisateurs laisseront ce champ vide."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:91
+#: src/mkvtoolnix-gui/merge/tab.cpp:90
 msgid "mkvmerge command line"
 msgstr "Ligne de commande de mkvmerge"
 
