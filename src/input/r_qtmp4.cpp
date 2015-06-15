@@ -736,7 +736,7 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
     auto sample_size     = flags & QTMP4_TRUN_SAMPLE_SIZE       ? m_in->read_uint32_be() : m_fragment->sample_size;
     auto sample_flags    = flags & QTMP4_TRUN_SAMPLE_FLAGS      ? m_in->read_uint32_be() : idx > 0 ? m_fragment->sample_flags : first_sample_flags;
     auto ctts_duration   = flags & QTMP4_TRUN_SAMPLE_CTS_OFFSET ? m_in->read_uint32_be() : 0;
-    auto keyframe        = track.type == 'v'                    ? true                   : !(sample_flags & (QTMP4_FRAG_SAMPLE_FLAG_IS_NON_SYNC | QTMP4_FRAG_SAMPLE_FLAG_DEPENDS_YES));
+    auto keyframe        = !track.is_video()                    ? true                   : !(sample_flags & (QTMP4_FRAG_SAMPLE_FLAG_IS_NON_SYNC | QTMP4_FRAG_SAMPLE_FLAG_DEPENDS_YES));
 
     track.durmap_table.emplace_back(1, sample_duration);
     track.sample_table.emplace_back(sample_size);
@@ -744,7 +744,7 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
     track.raw_frame_offset_table.emplace_back(1, ctts_duration);
 
     if (keyframe)
-      track.keyframe_table.emplace_back(track.num_frames_from_trun);
+      track.keyframe_table.emplace_back(track.num_frames_from_trun + 1);
 
     offset += sample_size;
 
@@ -2716,6 +2716,7 @@ qtmp4_demuxer_c::derive_track_params_from_mp3_audio_bitstream() {
 
   a_channels   = header.channels;
   a_samplerate = header.sampling_frequency;
+  codec        = header.get_codec();
 }
 
 bool

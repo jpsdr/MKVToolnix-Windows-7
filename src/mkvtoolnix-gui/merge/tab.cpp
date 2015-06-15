@@ -9,9 +9,11 @@
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 #include <QComboBox>
 #include <QMenu>
@@ -29,7 +31,6 @@ using namespace mtx::gui;
 Tab::Tab(QWidget *parent)
   : QWidget{parent}
   , ui{new Ui::Tab}
-  , m_filesDDHandler{Util::FilesDragDropHandler::Mode::Remember}
   , m_filesModel{new SourceFileModel{this}}
   , m_tracksModel{new TrackModel{this}}
   , m_currentlySettingInputControlValues{false}
@@ -58,9 +59,19 @@ Tab::Tab(QWidget *parent)
   setControlValuesFromConfig();
 
   retranslateUi();
+
+  Util::setScrollAreaBackgroundTransparent(ui->scrollArea);
+
+  m_savedState = currentState();
 }
 
 Tab::~Tab() {
+}
+
+QString const &
+Tab::fileName()
+  const {
+  return m_config.m_configFileName;
 }
 
 QString
@@ -85,6 +96,8 @@ Tab::load(QString const &fileName) {
     m_config.load(fileName);
     setControlValuesFromConfig();
 
+    m_savedState = currentState();
+
     MainWindow::get()->setStatusBarMessage(QY("The configuration has been loaded."));
 
     emit titleChanged();
@@ -92,7 +105,7 @@ Tab::load(QString const &fileName) {
   } catch (InvalidSettingsX &) {
     m_config.reset();
 
-    QMessageBox::critical(this, QY("Error loading settings file"), QY("The settings file '%1' contains invalid settings and was not loaded.").arg(fileName));
+    Util::MessageBox::critical(this, QY("Error loading settings file"), QY("The settings file '%1' contains invalid settings and was not loaded.").arg(fileName));
 
     emit removeThisTab();
   }
@@ -107,6 +120,8 @@ Tab::onSaveConfig() {
 
   updateConfigFromControlValues();
   m_config.save();
+
+  m_savedState = currentState();
 
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
 }
@@ -136,6 +151,8 @@ Tab::onSaveConfigAs() {
   m_config.save(fileName);
   settings.m_lastConfigDir = QFileInfo{fileName}.path();
   settings.save();
+
+  m_savedState = currentState();
 
   emit titleChanged();
 
@@ -186,7 +203,7 @@ Tab::getSaveFileName(QString const &title,
   fullFilter += QY("All files") + Q(" (*)");
 
   auto &settings = Util::Settings::get();
-  auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOutputDir.path() : QFileInfo{ lineEdit->text() }.path();
+  auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOutputDir.path() : lineEdit->text();
   auto fileName  = QFileDialog::getSaveFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
     return fileName;
@@ -236,12 +253,12 @@ Tab::retranslateUi() {
 bool
 Tab::isReadyForMerging() {
   if (m_config.m_files.isEmpty()) {
-    QMessageBox::critical(this, QY("Cannot start merging"), QY("You have to add at least one source file before you can start merging or add a job to the job queue."));
+    Util::MessageBox::critical(this, QY("Cannot start merging"), QY("You have to add at least one source file before you can start merging or add a job to the job queue."));
     return false;
   }
 
   if (m_config.m_destination.isEmpty()) {
-    QMessageBox::critical(this, QY("Cannot start merging"), QY("You have to set the output file name before you can start merging or add a job to the job queue."));
+    Util::MessageBox::critical(this, QY("Cannot start merging"), QY("You have to set the output file name before you can start merging or add a job to the job queue."));
     return false;
   }
 
@@ -269,9 +286,27 @@ Tab::addToJobQueue(bool startNow) {
     }
 
     job->m_description = newDescription;
-  }
+
+    MainWindow::get()->showIconMovingToTool(Q("task-delegate.png"), *MainWindow::jobTool());
+
+  } else
+    MainWindow::get()->showIconMovingToTool(Q("media-playback-start.png"), *MainWindow::watchJobTool());
 
   MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
+
+  m_savedState = currentState();
+}
+
+QString
+Tab::currentState()
+  const {
+  return m_config.toString();
+}
+
+bool
+Tab::hasBeenModified()
+  const {
+  return currentState() != m_savedState;
 }
 
 }}}

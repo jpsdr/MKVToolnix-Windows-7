@@ -600,4 +600,9 @@ FancyTabWidget::isTabEnabled(int index)
   return m_tabBar->isTabEnabled(index);
 }
 
+FancyTabBar *
+FancyTabWidget::tabBar() {
+  return m_tabBar;
+}
+
 }}}

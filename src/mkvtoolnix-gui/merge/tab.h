@@ -8,7 +8,6 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file_model.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
-#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
 #include <QList>
 
@@ -32,7 +31,6 @@ protected:
 
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
-  mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
   QStringList m_filesToAddDelayed;
 
   // "Input" tab:
@@ -49,17 +47,19 @@ protected:
   AttachmentModel *m_attachmentsModel;
   QAction *m_addAttachmentsAction, *m_removeAttachmentsAction;
 
+  QString m_savedState;
+
   debugging_option_c m_debugTrackModel;
 
 public:
   explicit Tab(QWidget *parent);
   ~Tab();
 
+  virtual bool hasBeenModified() const;
+
+  virtual QString const &fileName() const;
   virtual QString title() const;
   virtual void load(QString const &fileName);
-
-  virtual void dragEnterEvent(QDragEnterEvent *event) override;
-  virtual void dropEvent(QDropEvent *event) override;
 
 signals:
   void removeThisTab();
@@ -82,6 +82,8 @@ public slots:
   virtual void selectAllTracks();
   virtual void enableAllTracks();
   virtual void disableAllTracks();
+
+  virtual void toggleMuxThisForSelectedTracks();
 
   virtual void onFileSelectionChanged();
   virtual void onTrackSelectionChanged();
@@ -122,6 +124,7 @@ public slots:
   virtual void onTrackRowsInserted(QModelIndex const &parentIdx, int first, int last);
   virtual void addOrAppendDroppedFiles(QStringList const &fileNames);
   virtual void addOrAppendDroppedFilesDelayed();
+  virtual void addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames);
 
   // Output tab:
   virtual void setDestination(QString const &newValue);
@@ -180,6 +183,7 @@ protected:
   virtual QStringList selectAttachmentsToAdd();
   virtual void addOrAppendFiles(bool append);
   virtual void addOrAppendFiles(bool append, QStringList const &fileNames, QModelIndex const &sourceFileIdx);
+  virtual void setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files);
   virtual void enableFilesActions();
   virtual void enableTracksActions();
   virtual void enableAttachmentControls(bool enable);
@@ -210,6 +214,8 @@ protected:
   virtual QString suggestOutputFileNameExtension() const;
 
   virtual void enableDisableAllTracks(bool enable);
+
+  virtual QString currentState() const;
 };
 
 }}}

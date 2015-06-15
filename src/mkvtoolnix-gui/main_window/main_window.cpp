@@ -1,8 +1,10 @@
 #include "common/common_pch.h"
 
 #include <QCloseEvent>
+#include <QDesktopServices>
 #include <QIcon>
 #include <QLabel>
+#include <QMessageBox>
 #include <QSettings>
 #include <QStaticText>
 #include <QVBoxLayout>
@@ -19,6 +21,8 @@
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 #include "mkvtoolnix-gui/merge/tool.h"
+#include "mkvtoolnix-gui/util/message_box.h"
+#include "mkvtoolnix-gui/util/moving_pixmap_overlay.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
@@ -34,25 +38,26 @@ MainWindow *MainWindow::ms_mainWindow = nullptr;
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow{parent}
   , ui{new Ui::MainWindow}
-  , m_geometrySaver{this, Q("MainWindow")}
 {
   ms_mainWindow = this;
 
   // Setup UI controls.
   ui->setupUi(this);
+  m_movingPixmapOverlay = std::make_unique<Util::MovingPixmapOverlay>(centralWidget());
 
   m_statusBarProgress = new StatusBarProgressWidget{this};
   ui->statusBar->addPermanentWidget(m_statusBarProgress);
 
   setupMenu();
   setupToolSelector();
+  setupHelpURLs();
 
   // Setup window properties.
   setWindowIcon(Util::loadIcon(Q("mkvtoolnix-gui.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
 
   retranslateUi();
 
-  m_geometrySaver.restore();
+  Util::restoreWidgetGeometry(this);
 
   jobTool()->loadAndStart();
 
@@ -99,24 +104,27 @@ MainWindow::setupMenu() {
 #else
   ui->actionGUICheckForUpdates->setVisible(false);
 #endif  // HAVE_CURL_EASY_H
+
+  connect(ui->actionHelpFAQ,                   &QAction::triggered, this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpKnownProblems,         &QAction::triggered, this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpMkvmergeDocumentation, &QAction::triggered, this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpWebSite,               &QAction::triggered, this, &MainWindow::visitHelpURL);
 }
 
 void
 MainWindow::setupToolSelector() {
-  // ui->tool->setIconSize(QSize{48, 48});
-
-  m_toolMerge         = new Merge::Tool{ui->tool, ui->menuMerge};
-  m_toolJobs          = new Jobs::Tool{ui->tool};
-  m_toolHeaderEditor  = new HeaderEditor::Tool{ui->tool, ui->menuHeaderEditor};
+  m_toolMerge         = new Merge::Tool{ui->tool,         ui->menuMerge};
+  m_toolHeaderEditor  = new HeaderEditor::Tool{ui->tool,  ui->menuHeaderEditor};
   m_toolChapterEditor = new ChapterEditor::Tool{ui->tool, ui->menuChapterEditor};
-  m_watchJobTool      = new WatchJobs::Tool{ui->tool};
+  m_toolJobs          = new Jobs::Tool{ui->tool,          ui->menuJobQueue};
+  m_watchJobTool      = new WatchJobs::Tool{ui->tool,     ui->menuJobOutput};
 
   ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
-  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
-  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
   ui->tool->appendTab(m_toolHeaderEditor,           QIcon{":/icons/48x48/document-edit.png"},              QY("edit headers"));
   ui->tool->appendTab(m_toolChapterEditor,          QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
-  ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
   ui->tool->appendTab(m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
   ui->tool->appendTab(m_watchJobTool,               QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
 
@@ -126,21 +134,35 @@ MainWindow::setupToolSelector() {
   ui->tool->setCurrentIndex(0);
   m_toolMerge->toolShown();
 
-  m_toolSelectionActions << ui->actionGUIMergeTool    << ui->actionGUIExtractionTool << ui->actionGUIInfoTool
-                         << ui->actionGUIHeaderEditor << ui->actionGUIChapterEditor  << ui->actionGUITagEditor
+  m_toolSelectionActions << ui->actionGUIMergeTool    /* << ui->actionGUIExtractionTool << ui->actionGUIInfoTool*/
+                         << ui->actionGUIHeaderEditor << ui->actionGUIChapterEditor  /*<< ui->actionGUITagEditor*/
                          << ui->actionGUIJobQueue     << ui->actionGUIJobOutput;
 
-  connect(ui->actionGUIMergeTool,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIExtractionTool, SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIInfoTool,       SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIHeaderEditor,   SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIChapterEditor,  SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUITagEditor,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIJobQueue,       SIGNAL(triggered()),                                this,                SLOT(changeTool()));
-  connect(ui->actionGUIJobOutput,      SIGNAL(triggered()),                                this,                SLOT(changeTool()));
+  ui->actionGUIExtractionTool->setVisible(false);
+  ui->actionGUIInfoTool->setVisible(false);
+  ui->actionGUITagEditor->setVisible(false);
 
-  connect(ui->tool,                    SIGNAL(currentChanged(int)),                        this,                SLOT(toolChanged(int)));
-  connect(m_toolJobs->model(),         SIGNAL(progressChanged(unsigned int,unsigned int)), m_statusBarProgress, SLOT(setProgress(unsigned int,unsigned int)));
+  connect(ui->actionGUIMergeTool,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  // connect(ui->actionGUIExtractionTool, &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  // connect(ui->actionGUIInfoTool,       &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIHeaderEditor,   &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIChapterEditor,  &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  // connect(ui->actionGUITagEditor,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIJobQueue,       &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+  connect(ui->actionGUIJobOutput,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
+
+  connect(ui->tool,                    &Util::FancyTabWidget::currentChanged,                  this,                &MainWindow::toolChanged);
+  connect(m_toolJobs->model(),         &Jobs::Model::progressChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setProgress);
+  connect(m_toolJobs->model(),         &Jobs::Model::jobStatsChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setJobStats);
+  connect(m_toolJobs->model(),         &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, m_statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
+}
+
+void
+MainWindow::setupHelpURLs() {
+  m_helpURLs[ui->actionHelpFAQ]                   = "https://github.com/mbunkus/mkvtoolnix/wiki";
+  m_helpURLs[ui->actionHelpKnownProblems]         = "https://github.com/mbunkus/mkvtoolnix/wiki/Troubleshooting";
+  m_helpURLs[ui->actionHelpMkvmergeDocumentation] = "https://www.bunkus.org/videotools/mkvtoolnix/doc/mkvmerge.html";
+  m_helpURLs[ui->actionHelpWebSite]               = "https://www.bunkus.org/videotools/mkvtoolnix/";
 }
 
 void
@@ -158,10 +180,21 @@ MainWindow::showTheseMenusOnly(QList<QMenu *> const &menus) {
   showAndEnableMenu(*ui->menuMerge,         menus.contains(ui->menuMerge));
   showAndEnableMenu(*ui->menuHeaderEditor,  menus.contains(ui->menuHeaderEditor));
   showAndEnableMenu(*ui->menuChapterEditor, menus.contains(ui->menuChapterEditor));
+  showAndEnableMenu(*ui->menuJobQueue,      menus.contains(ui->menuJobQueue));
+  showAndEnableMenu(*ui->menuJobOutput,     menus.contains(ui->menuJobOutput));
 }
 
 void
-MainWindow::changeTool() {
+MainWindow::switchToTool(ToolBase *tool) {
+  for (auto idx = 0, numTabs = ui->tool->count(); idx < numTabs; ++idx)
+    if (ui->tool->widget(idx) == tool) {
+      ui->tool->setCurrentIndex(idx);
+      return;
+    }
+}
+
+void
+MainWindow::changeToolToSender() {
   auto toolIndex = m_toolSelectionActions.indexOf(static_cast<QAction *>(sender()));
   if (-1 != toolIndex)
     ui->tool->setCurrentIndex(toolIndex);
@@ -227,7 +260,11 @@ MainWindow::retranslateUi() {
 
   ui->tool->setUpdatesEnabled(false);
 
-  auto toolTitles = QStringList{} << QY("merge") << QY("extract") << QY("info") << QY("edit headers") << QY("edit chapters") << QY("edit tags") << QY("job queue") << QY("job output");
+  // Intentionally replacing the list right away again in order not to
+  // lose the translations for the three currently unimplemented
+  // tools.
+  auto toolTitles = QStringList{} << QY("extract") << QY("info") << QY("edit tags");
+  toolTitles      = QStringList{} << QY("merge") << QY("edit headers") << QY("edit chapters") << QY("job queue") << QY("job output");
 
   for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx) {
     ui->tool->setTabText(idx, toolTitles[idx]);
@@ -239,13 +276,49 @@ MainWindow::retranslateUi() {
   ui->tool->setUpdatesEnabled(true);
 }
 
+bool
+MainWindow::beforeCloseCheckRunningJobs() {
+  auto tool = jobTool();
+  if (!tool)
+    return true;
+
+  auto model = tool->model();
+  if (!model->hasRunningJobs())
+    return true;
+
+  if (   Util::Settings::get().m_warnBeforeAbortingJobs
+      && Util::MessageBox::question(this, QY("Abort running jobs"), Q("%1 %2").arg(QY("There is currently a job running.")).arg(QY("Do you want to abort that job and quit?"))) == QMessageBox::No)
+    return false;
+
+  model->stop();
+  model->withAllJobs([](Jobs::Job &job) {
+    if (Jobs::Job::Running == job.m_status) {
+      job.m_quitAfterFinished = true;
+      job.abort();
+    }
+  });
+
+  return false;
+}
+
 void
 MainWindow::closeEvent(QCloseEvent *event) {
-  QSettings reg;
+  auto ok =       mergeTool()->closeAllTabs();
+  ok      = ok && headerEditorTool()->closeAllTabs();
+  ok      = ok && chapterEditorTool()->closeAllTabs();
+  ok      = ok && beforeCloseCheckRunningJobs();
 
+  if (!ok) {
+    event->ignore();
+    return;
+  }
+
+  auto reg  = Util::Settings::registry();
   auto tool = jobTool();
   if (tool)
-    tool->model()->saveJobs(reg);
+    tool->model()->saveJobs(*reg);
+
+  Util::saveWidgetGeometry(this);
 
   event->accept();
 }
@@ -317,5 +390,39 @@ MainWindow::updateCheckFinished(UpdateCheckStatus status,
   dlg.exec();
 }
 #endif  // HAVE_CURL_EASY_H
+
+void
+MainWindow::showIconMovingToTool(QString const &pixmapName,
+                                 ToolBase const &tool) {
+  if (Util::Settings::get().m_disableAnimations)
+    return;
+
+  for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx)
+    if (&tool == ui->tool->widget(idx)) {
+      auto size = 32;
+      auto rect = ui->tool->tabBar()->tabRect(idx);
+
+      auto from = centralWidget()->mapFromGlobal(QCursor::pos());
+      auto to   = QPoint{rect.x() + (rect.width()  - size) / 2,
+                         rect.y() + (rect.height() - size) / 2};
+      to        = centralWidget()->mapFromGlobal(ui->tool->tabBar()->mapToGlobal(to));
+
+      m_movingPixmapOverlay->addMovingPixmap(Q(":/icons/%1x%1/%2").arg(size).arg(pixmapName), from, to);
+
+      return;
+    }
+}
+
+void
+MainWindow::resizeEvent(QResizeEvent *event) {
+  m_movingPixmapOverlay->resize(event->size());
+  event->accept();
+}
+
+void
+MainWindow::visitHelpURL() {
+  if (m_helpURLs.contains(sender()))
+    QDesktopServices::openUrl(m_helpURLs[sender()]);
+}
 
 }}

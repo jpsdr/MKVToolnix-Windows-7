@@ -20,7 +20,7 @@ TrackTypePage::TrackTypePage(Tab &parent,
   , m_trackType{FindChildValue<KaxTrackType>(m_master)}
   , m_trackNumber{FindChildValue<KaxTrackNumber>(m_master)}
   , m_codecId{Q(FindChildValue<KaxCodecID>(m_master))}
-  , m_language{Q(FindChildValue<KaxTrackLanguage>(m_master, std::string{"ung"}))}
+  , m_language{Q(FindChildValue<KaxTrackLanguage>(m_master, std::string{"eng"}))}
 {
   ui->setupUi(this);
 }

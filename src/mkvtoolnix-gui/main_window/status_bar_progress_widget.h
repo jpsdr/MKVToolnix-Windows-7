@@ -3,6 +3,7 @@
 
 #include "common/common_pch.h"
 
+#include <QTimer>
 #include <QWidget>
 
 class QTreeView;
@@ -18,6 +19,9 @@ class StatusBarProgressWidget : public QWidget {
 
 protected:
   std::unique_ptr<Ui::StatusBarProgressWidget> ui;
+  int m_numPendingAuto{}, m_numPendingManual{}, m_numWarnings{}, m_numErrors{}, m_timerStep{};
+  QTimer m_timer;
+  QList<QPixmap> m_pixmaps;
 
 public:
   explicit StatusBarProgressWidget(QWidget *parent = nullptr);
@@ -26,7 +30,16 @@ public:
   void retranslateUi();
 
 public slots:
-  void setProgress(unsigned int progress, unsigned int totalProgress);
+  void setProgress(int progress, int totalProgress);
+  void setJobStats(int numPendingAutomatic, int numPendingManual, int numOther);
+  void setNumUnacknowledgedWarningsOrErrors(int numWarnings, int numErrors);
+  void updateWarningsAndErrorsIcons();
+
+  void showWarningsContextMenu(QPoint const &pos);
+  void showErrorsContextMenu(QPoint const &pos);
+
+protected:
+  void setLabelTexts();
 };
 
 }}

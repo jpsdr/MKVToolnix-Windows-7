@@ -23,6 +23,7 @@
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -76,7 +77,7 @@ Tab::load() {
   resetData();
 
   if (!kax_analyzer_c::probe(to_utf8(m_fileName))) {
-    QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(m_fileName));
+    Util::MessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(m_fileName));
     emit removeThisTab();
     return;
   }
@@ -84,7 +85,7 @@ Tab::load() {
   m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
 
   if (!m_analyzer->process(kax_analyzer_c::parse_mode_fast)) {
-    QMessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName));
+    Util::MessageBox::critical(this, QY("File parsing failed"), QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName));
     emit removeThisTab();
     return;
   }
@@ -127,7 +128,7 @@ Tab::save() {
   }
 
   if (!segmentinfoModified && !tracksModified) {
-    QMessageBox::information(this, QY("File has not been modified"), QY("The header values have not been modified. There is nothing to save."));
+    Util::MessageBox::information(this, QY("File has not been modified"), QY("The header values have not been modified. There is nothing to save."));
     return;
   }
 
@@ -138,8 +139,8 @@ Tab::save() {
   }
 
   if (QFileInfo{m_fileName}.lastModified() != m_fileModificationTime) {
-    QMessageBox::critical(this, QY("File has been modified"),
-                          QY("The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."));
+    Util::MessageBox::critical(this, QY("File has been modified"),
+                               QY("The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."));
     return;
   }
 
@@ -413,7 +414,7 @@ Tab::validate() {
   auto pageIdx = m_model->validate();
 
   if (!pageIdx.isValid()) {
-    QMessageBox::information(this, QY("Header validation"), QY("All header values are OK."));
+    Util::MessageBox::information(this, QY("Header validation"), QY("All header values are OK."));
     return;
   }
 
@@ -428,9 +429,9 @@ Tab::reportValidationFailure(bool isCritical,
   selectionChanged(pageIdx, QModelIndex{});
 
   if (isCritical)
-    QMessageBox::critical(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
+    Util::MessageBox::critical(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
   else
-    QMessageBox::warning(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
+    Util::MessageBox::warning(this, QY("Header validation"), QY("There were errors in the header values preventing the headers from being saved. The first error has been selected."));
 }
 
 void

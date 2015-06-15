@@ -153,6 +153,8 @@ public:
   void setTabEnabled(int index, bool enable);
   bool isTabEnabled(int index) const;
 
+  FancyTabBar *tabBar();
+
 signals:
   void currentAboutToShow(int index);
   void currentChanged(int index);

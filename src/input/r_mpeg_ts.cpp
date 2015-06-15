@@ -234,7 +234,7 @@ mpeg_ts_track_c::new_stream_a_mpeg() {
   decode_mp3_header(m_probe_data->get_buffer() + offset, &header);
   a_channels    = header.channels;
   a_sample_rate = header.sampling_frequency;
-  codec         = codec_c::look_up(codec_c::type_e::A_MP3);
+  codec         = header.get_codec();
 
   mxdebug_if(m_debug_headers, boost::format("mpeg_ts_track_c::new_stream_a_mpeg: Channels: %1%, sample rate: %2%\n") %a_channels % a_sample_rate);
   return 0;

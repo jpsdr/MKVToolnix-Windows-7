@@ -36,20 +36,6 @@ public slots:
   void enableOutputFileNameControls();
   void browseFixedOutputDirectory();
 
-  void availableCommonLanguagesSelectionChanged();
-  void selectedCommonLanguagesSelectionChanged();
-  void availableCommonCountriesSelectionChanged();
-  void selectedCommonCountriesSelectionChanged();
-  void availableCommonCharacterSetsSelectionChanged();
-  void selectedCommonCharacterSetsSelectionChanged();
-
-  void addCommonLanguages();
-  void removeCommonLanguages();
-  void addCommonCountries();
-  void removeCommonCountries();
-  void addCommonCharacterSets();
-  void removeCommonCharacterSets();
-
 protected:
   void setupToolTips();
   void setupConnections();
@@ -63,10 +49,7 @@ protected:
   void setupProcessPriority();
   void setupPlaylistScanningPolicy();
   void setupOutputFileNamePolicy();
-
-  void moveSelectedListWidgetItems(QListWidget &from, QListWidget &to);
-
-  void saveCommonList(QListWidget &from, QStringList &to);
+  void setupEnableMuxingTracksByLanguage();
 };
 
 }}

@@ -158,6 +158,7 @@ struct kax_track_t {
   void handle_packetizer_default_duration();
   void fix_display_dimension_parameters();
   void add_track_tags_to_identification(std::vector<std::string> &verbose_info);
+  void discard_track_statistics_tags();
 };
 using kax_track_cptr = std::shared_ptr<kax_track_t>;
 
@@ -251,6 +252,7 @@ protected:
   virtual void handle_seek_head(mm_io_c *io, EbmlElement *l0, int64_t pos);
   virtual void handle_tags(mm_io_c *io, EbmlElement *l0, int64_t pos);
   virtual void process_global_tags();
+  virtual void discard_track_statistics_tags();
 
   virtual bool unlace_vorbis_private_data(kax_track_t *t, unsigned char *buffer, int size);
 

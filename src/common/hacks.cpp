@@ -40,6 +40,7 @@ static const struct {
   { ENGAGE_NO_CUE_DURATION,              "no_cue_duration"              },
   { ENGAGE_NO_CUE_RELATIVE_POSITION,     "no_cue_relative_position"     },
   { ENGAGE_NO_DELAY_FOR_GARBAGE_IN_AVI,  "no_delay_for_garbage_in_avi"  },
+  { ENGAGE_KEEP_LAST_CHAPTER_IN_MPLS,    "keep_last_chapter_in_mpls"    },
   { 0,                                   nullptr },
 };
 static std::vector<bool> s_engaged_hacks(ENGAGE_MAX_IDX + 1, false);
@@ -72,9 +73,7 @@ engage_hacks(const std::string &hacks) {
         "IE9oIGhvbmV5LCB0aGF0J3Mgc28gc3dlZXQhCiAgIC8tLS0tLS0tXC8gICBPZiB"
         "jb3Vyc2UgSSdsbCBtYXJyeSB5b3UhCiAgLyB8ICAgICB8fAogKiAgfHwtLS0tfH"
         "wKICAgIF5eICAgIF5eCg==";
-      char correction[200];
-      memset(correction, 0, 200);
-      base64_decode(initial, (unsigned char *)correction);
+      auto correction = base64_decode(initial);
       mxinfo(correction);
       mxexit();
     }

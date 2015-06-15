@@ -9,12 +9,14 @@
 #include <QMimeData>
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/header_editor/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -75,8 +77,12 @@ Tool::toolShown() {
 void
 Tool::retranslateUi() {
   ui->retranslateUi(this);
-  for (auto idx = 0, numTabs = ui->editors->count(); idx < numTabs; ++idx)
+  for (auto idx = 0, numTabs = ui->editors->count(); idx < numTabs; ++idx) {
     static_cast<Tab *>(ui->editors->widget(idx))->retranslateUi();
+    auto button = Util::tabWidgetCloseTabButton(*ui->editors, idx);
+    if (button)
+      button->setToolTip(App::translate("CloseButton", "Close Tab"));
+  }
 }
 
 void
@@ -138,9 +144,9 @@ Tool::reload() {
   if (!tab)
     return;
 
-  if (tab->hasBeenModified()) {
-    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
-                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+  if (Util::Settings::get().m_warnBeforeClosingModifiedTabs && tab->hasBeenModified()) {
+    auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
+                                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes)
       return;
   }
@@ -155,24 +161,28 @@ Tool::validate() {
     tab->validate();
 }
 
-void
+bool
 Tool::closeTab(int index) {
   if ((0  > index) || (ui->editors->count() <= index))
-    return;
+    return false;
 
   auto tab = static_cast<Tab *>(ui->editors->widget(index));
 
-  if (tab->hasBeenModified()) {
-    auto answer = QMessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
-                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+  if (Util::Settings::get().m_warnBeforeClosingModifiedTabs && tab->hasBeenModified()) {
+    MainWindow::get()->switchToTool(this);
+    ui->editors->setCurrentIndex(index);
+    auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()),
+                                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes)
-      return;
+      return false;
   }
 
   ui->editors->removeTab(index);
   delete tab;
 
   showHeaderEditorsWidget();
+
+  return true;
 }
 
 void
@@ -191,6 +201,15 @@ Tool::closeSendingTab() {
       return;
     }
   }
+}
+
+bool
+Tool::closeAllTabs() {
+  for (auto index = ui->editors->count(); index > 0; --index)
+    if (!closeTab(index - 1))
+      return false;
+
+  return true;
 }
 
 Tab *

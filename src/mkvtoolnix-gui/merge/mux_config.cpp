@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/at_scope_exit.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/merge/attachment.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
@@ -272,6 +273,32 @@ MuxConfig::save(QString const &fileName) {
   save(settings);
 }
 
+QString
+MuxConfig::toString()
+  const {
+  auto tempFileName = QString{};
+
+  at_scope_exit_c cleaner([tempFileName]() { QFile{tempFileName}.remove(); });
+
+  {
+    QTemporaryFile tempFile{QDir::temp().filePath(Q("MKVToolNix-GUI-MuxConfig-XXXXXX"))};
+    tempFile.setAutoRemove(false);
+    if (!tempFile.open())
+      return QString{};
+    tempFileName = tempFile.fileName();
+  }
+
+  QSettings settings{tempFileName, QSettings::IniFormat};
+  save(settings);
+  settings.sync();
+
+  QFile file{tempFileName};
+  if (file.open(QIODevice::ReadOnly))
+    return QString::fromUtf8(file.readAll());
+
+  return QString{};
+}
+
 void
 MuxConfig::reset() {
   *this = MuxConfig{};
@@ -304,7 +331,9 @@ MuxConfig::buildTrackOrder(QHash<SourceFile *, unsigned int> const &fileNumbers)
   const {
   auto trackOrder = QStringList{};
   for (auto const &track : m_tracks)
-    if (track->m_muxThis && (track->isAudio() || track->isVideo() || track->isSubtitles() || track->isButtons()))
+    if (   track->m_muxThis
+        && (!track->m_appendedTo || track->m_appendedTo->m_muxThis)
+        && (track->isAudio() || track->isVideo() || track->isSubtitles() || track->isButtons()))
       trackOrder << Q("%1:%2").arg(fileNumbers.value(track->m_file)).arg(track->m_id);
 
   if (trackOrder.size() > 1)

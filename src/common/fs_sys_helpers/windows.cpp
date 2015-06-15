@@ -140,13 +140,8 @@ get_current_exe_path(std::string const &) {
 
 bool
 is_installed() {
-  auto sub_key  = "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\mmg.exe";
-  auto data_len = DWORD{};
-
-  if (ERROR_SUCCESS != RegGetValueA(HKEY_LOCAL_MACHINE, sub_key, NULL, RRF_RT_REG_SZ, NULL, NULL, &data_len))
-    return false;
-
-  return data_len > 1;
+  auto file_to_test = get_installation_path() / "data" / "portable-app";
+  return !bfs::exists(file_to_test);
 }
 
 }}

@@ -34,6 +34,6 @@ namespace mtx {
 }
 
 std::string base64_encode(const unsigned char *src, int src_len, bool line_breaks = false, int max_line_len = 72);
-int base64_decode(const std::string &src, unsigned char *dst);
+std::string base64_decode(std::string const &src);
 
 #endif // MTX_COMMON_BASE64_H

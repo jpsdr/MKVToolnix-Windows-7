@@ -1,3 +1,255 @@
+2015-06-10  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: merge tool enhancement: drag & drop of files
+        works even if no mux settings are currently open. Implements
+        #1245.
+
+        * mkvmerge: bug fix: fixed codec identification for MP2 audio read
+        from MPEG program/transport streams. Fixes #1242.
+
+2015-06-09  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: job output enhancement: when clicking the
+        »abort« button the GUI asks for confirmation before aborting. Both
+        this check and the one when quitting the application can be turned
+        off via an option in the preferences. Implements #1238.
+
+        * MKVToolNix GUI: job output bug fix: fixed displaying the
+        estimated remaining time in tabs that have been opened for
+        specific jobs. Fixes #1244.
+
+2015-06-07  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: new merge tool, header & chapter editor
+        features: the GUI will ask for confirmation before closing or
+        reloading tabs that have been modified and before quitting if
+        there are modified tabs. This check can be disabled in the
+        preferences. Implements #1211.
+
+        * MKVToolNix GUI: new merge tool feature: implemented an option
+        that allows the user to set up a list of languages. When adding
+        files only those tracks whose language is included in that list
+        are set to be muxed by default. Implements #1227.
+
+        * MKVToolNix GUI: header editor bug fix: fixed the editor assuming
+        values were changed if a track is present whose language element
+        is not present in the file. Fixes #1240.
+
+2015-06-06  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: bug fix: fixed the translation of the tool tip
+        for the »close tab« buttons after changing the interface
+        language. Fixes #1237.
+
+        * MKVToolNix GUI: bug fix: appended tracks will be disabled
+        automatically when starting to mux if the track they're appended
+        to has been disabled by the user.
+
+        * MKVToolNix GUI: new feature: added an option in the preferences
+        for disabling additional lossless compression for all track
+        types. Implements #1174.
+
+        * mkvmerge, MKVToolNix GUI: new feature: added an option
+        (»--engage keep_last_chapter_in_mpls«) that will cause mkvmerge
+        not to remove the last chapter entry from a Blu-ray play list file
+        which mkvmerge normally does if that entry's timecode is within
+        five seconds of the movie's end. Implements #1226.
+
+        * MKVToolNix GUI: fixed updating the number of pending jobs info
+        in the status bar when manually starting jobs. Fixes #1236.
+
+        * MKVToolNix GUI: merge tool bug fix: fixed a crash when removing
+        source files. Fixes #1235.
+
+2015-06-05  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: new watch jobs tool feature: implemented
+        estimating the remaining time for both the current job and the
+        whole queue.
+
+        * MKVToolNix GUI: merge tool bug fix: the default settings for the
+        »output directory policy« was changed to »same directory as the
+        first input file«. Fixes #1234.
+
+2015-06-04  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: enhancement: the following dialogs can now be
+        maximized: the »preferences« dialog; the »additional command line
+        options« dialog; the dialog showing the command line; the dialog
+        where the user selects the play list to add. Implements #1231.
+
+        * MKVToolNix GUI: merge tool enhancement: pressing delete when the
+        source files view is focused will cause the selected source files
+        to be removed. Implements #1225.
+
+        * MKVToolNix GUI: merge tool enhancement: implemented toggling of
+        »mux this« for all selected tracks by either double-clicking on
+        the tracks or pressing enter/return when the tracks view is
+        currently focused. Implements #1225.
+
+        * MKVToolNix GUI: job queue enhancement: added a menu entry for
+        starting all jobs pending manual start. Implements #1228.
+
+        * MKVToolNix GUI: enhancement: the text in all message box dialogs
+        can now be selected & copied, even on Windows. Implements #1230.
+
+        * all: the detection whether or not the applications are installed
+        on Windows is done by checking for the presence of a special file
+        in the program folder instead of checking for an entry in the
+        registry written by the installer. This enables users to try new
+        portable versions without having to uninstall an installed version
+        first as their settings will be kept separate now. A side effect
+        is that compatibility with Windows XP should be restored.
+
+        Implements #1229.
+
+2015-06-02  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: bug fix: on Windows the job queue was
+        accidentally always saved to and loaded from the registry even if
+        the portable version was used.
+
+        * MKVToolNix GUI: job queue bug fix: fixed accidental duplication
+        of lines when using drag & drop in certain ways. Fixes #1221.
+
+2015-06-01  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: bug fix: if a job is running when the user wants
+        to quit requires confirmation from the user that the running job
+        should be aborted. Fixes #1219.
+
+        * MKVToolNix GUI: bug fix: fixed the initial status display when
+        viewing a job's output from the queue.
+
+        * MKVToolNix GUI: bug fix: running jobs cannot be removed from the
+        job queue anymore. Fixes #1220.
+
+        * MKVToolNix GUI: bug fix: when starting the GUI old jobs from the
+        queue were silently discarded if they included additional parts
+        (e.g. VOBs).
+
+        * MKVToolNix GUI: bug fix: job queue: when saving the job queue
+        jobs removed in the GUI were not removed from the stored settings.
+
+        * MKVToolNix GUI: bug fix: when viewing the job output of a job
+        that hasn't been run yet the »save output« button was enabled.
+
+        * mkvmerge, mkvpropedit: bug fix: fixed an invalid memory access
+        leading to a crash in the Base 64 decoder. Fixes #1222.
+
+2015-05-31  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: bug fix: fixed progress parsing for interface
+        languages other than English.
+
+        * mkvmerge: enhancement: if running in GUI mode (parameter
+        »--gui-mode«) then the progress will be output as the untranslated
+        »#GUI#progress …%« in order to facilitate parsing of progress by
+        GUIs.
+
+        * mkvmerge: bug fix: fixed key frame designation for video tracks
+        in MP4 DASH files.
+
+2015-05-30  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: the track statistics tags of Matroska source
+        files are always discarded, no matter whether or not they're to be
+        created for the output file. That way they won't be reported as
+        track tags by mkvmerge's identification mode. This makes it easier
+        for the user to create output files without track statistics tags
+        as (s)he only has to use the option
+        »--disable-track-statistics-tags« and not disable all the track
+        tags as well anymore. Fixes #1186.
+
+        * mkvmerge, mkvinfo, mkvextract: bug fix: fixed a crash with
+        certain types of invalid Matroska files. Fix for #1183.
+
+2015-05-26  Moritz Bunkus  <moritz@bunkus.org>
+
+        * all: bug fix: removed some unused code thereby fixing
+        compilation on OpenBSD (#1215).
+
+2015-05-25  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: bug fix: fix alignment of the tool contents with
+        the tool selector at the bottom. Fixes #1194.
+
+        * MKVToolNix GUI: new feature: added a »help« menu with links to
+        several parts of the MKVToolNix documentation. Implements #1195.
+
+        * MKVToolNix GUI: job output tool: added a button for acknowleding
+        the warnings/errors produced for the job shown. Implements #1210
+        and is the last part of the implementation of #1196.
+
+        * MKVToolNix GUI: merge tool: the »save« button has been removed
+        in favor of the »save…« menu entries. This also improves
+        consistency with the other tools.
+
+        * MKVToolNix GUI: enhancement: header editor: made the meaning of
+        the »Reset« button clearer with a better label and an additional
+        tool tip. Implements #1212.
+
+        * MKVToolNix GUI: enhancement: the tabs for the tools that haven't
+        been implemented yet (extraction, info and the tag editor) are not
+        shown anymore.
+
+        * MKVToolNix GUI: bug fix: header editor: fixed the track language
+        shown if the element is not present in the file.
+
+        * MKVToolNix GUI: bug fix: when browsing the output file name the
+        currently entered file name is pre-selected in the dialog. Fixes
+        #1207.
+
+        * MKVToolNix GUI: enhancement: the update check dialog showing the
+        change log can now be maximized. Implements #1204.
+
+        * MKVToolNix GUI: new feature: implemented viewing the output of
+        any job in the job queue.
+
+        * MKVToolNix GUI: new feature: implemented saving the job output
+        to a file.
+
+        * MKVToolNix GUI: enhancement: language and country drop-down
+        boxes will contain the common languages/countries both at the top
+        as well as in the full list. Part of the implementation of #1200.
+
+        * MKVToolNix GUI: enhancement: the entry »Undefined (und)« is
+        always shown at the top of the language drop-down boxes. Part of
+        the implementation of #1200.
+
+        * MKVToolNix GUI: enhancement: the number of new warnings and
+        errors are shown in the status bar. Both counters can be
+        acknowledged via context menus on the status bar and in the job
+        queue view. Part of the implementation of #1199.
+
+2015-05-24  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: enhancement: the number of jobs pending
+        automatic/manual execution is listed in the status bar. Part of
+        the implementation of #1199.
+
+2015-05-23  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: enhancement: the progress widget in the stats
+        bar is not reset to 0 once all the jobs have been processed in
+        order to signal the user that the jobs have actually been
+        processed. Part of the implementation of #1198.
+
+        * MKVToolNix GUI: merge tool enhancement: a short animation of a
+        moving icon is shown when a job is started or added to the job
+        queue as a clue to the user what's happening and where to look for
+        output. This animation can be disabled in the preferences.
+        Implements #1198.
+
+2015-05-18  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: job output bug fix: fixed superfluous empty
+        lines in job output/warning/error output.
+
+        * MKVToolNix GUI: merge tool bug fix: when adding a VOB from a DVD
+        the tree items for the additional parts (the other VOBs processed
+        automatically) weren't shown.
+
 2015-05-11  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: merge tool: fixed the scroll bar not

@@ -1,7 +1,11 @@
 #include "common/common_pch.h"
 
+// #include <QDebug>
+// #include <typeinfo>
+
 #include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/page_base.h"
+#include "mkvtoolnix-gui/header_editor/value_page.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -24,8 +28,12 @@ PageBase::~PageBase() {
 bool
 PageBase::hasBeenModified()
   const {
-  if (hasThisBeenModified())
+  if (hasThisBeenModified()) {
+    // auto vp = dynamic_cast<ValuePage const *>(this);
+    // qDebug() << "I have been modified: " << typeid(*this).name() << " title " << title()
+    //          << " orig " << (vp ? vp->originalValueAsString() : Q("<not a value page>")) << " current " << (vp ? vp->currentValueAsString() : Q("<not a value page>"));
     return true;
+  }
 
   for (auto child : m_children)
     if (child->hasBeenModified())

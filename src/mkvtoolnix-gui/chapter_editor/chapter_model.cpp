@@ -23,6 +23,9 @@ void
 ChapterModel::retranslateUi() {
   auto labels = QStringList{} << QY("Edition/Chapter") << QY("Start") << QY("End");
   setHorizontalHeaderLabels(labels);
+
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
+    setEditionRowText(itemsForRow(index(row, 0)));
 }
 
 QList<QStandardItem *>

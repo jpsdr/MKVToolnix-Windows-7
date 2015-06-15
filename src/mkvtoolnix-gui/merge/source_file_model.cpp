@@ -2,6 +2,7 @@
 
 #include "common/sorting.h"
 #include "common/strings/formatting.h"
+#include "mkvtoolnix-gui/mime_types.h"
 #include "mkvtoolnix-gui/merge/source_file_model.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -35,6 +36,19 @@ SourceFileModel::retranslateUi() {
   auto labels = QStringList{} << QY("File name") << QY("Container") << QY("File size") << QY("Directory");
   setHorizontalHeaderLabels(labels);
   horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+  if (!m_sourceFiles)
+    return;
+
+  for (auto const &sourceFile : *m_sourceFiles) {
+    sourceFileUpdated(sourceFile.get());
+
+    for (auto const &additionalPart : sourceFile->m_additionalParts)
+      sourceFileUpdated(additionalPart.get());
+
+    for (auto const &appendedFile : sourceFile->m_appendedFiles)
+      sourceFileUpdated(appendedFile.get());
+  }
 }
 
 void
@@ -86,12 +100,24 @@ QList<QStandardItem *>
 SourceFileModel::createRow(SourceFile *sourceFile)
   const {
   auto items = QList<QStandardItem *>{};
-  auto info  = QFileInfo{sourceFile->m_fileName};
+  for (int idx = 0; idx < 4; ++idx)
+    items << new QStandardItem{};
 
-  items << new QStandardItem{info.fileName()};
-  items << new QStandardItem{sourceFile->isAdditionalPart() ? QY("(additional part)") : sourceFile->m_container};
-  items << new QStandardItem{to_qs(format_file_size(sourceFile->isPlaylist() ? sourceFile->m_playlistSize : info.size()))};
-  items << new QStandardItem{info.path()};
+  setItemsFromSourceFile(items, sourceFile);
+
+  return items;
+}
+
+void
+SourceFileModel::setItemsFromSourceFile(QList<QStandardItem *> const &items,
+                                        SourceFile *sourceFile)
+  const {
+  auto info = QFileInfo{sourceFile->m_fileName};
+
+  items[0]->setText(info.fileName());
+  items[1]->setText(sourceFile->isAdditionalPart() ? QY("(additional part)") : sourceFile->m_container);
+  items[2]->setText(to_qs(format_file_size(sourceFile->isPlaylist() ? sourceFile->m_playlistSize : info.size())));
+  items[3]->setText(info.path());
 
   items[0]->setData(reinterpret_cast<quint64>(sourceFile), Util::SourceFileRole);
   items[0]->setIcon(  sourceFile->isAdditionalPart() ? m_additionalPartIcon
@@ -99,8 +125,20 @@ SourceFileModel::createRow(SourceFile *sourceFile)
                     :                                  m_normalIcon);
 
   items[2]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+}
 
-  return items;
+void
+SourceFileModel::sourceFileUpdated(SourceFile *sourceFile) {
+  auto idx = indexFromSourceFile(sourceFile);
+  if (!idx.isValid())
+    return;
+
+  auto items = QList<QStandardItem *>{};
+
+  for (auto column = 0, numColumns = columnCount(); column < numColumns; ++column)
+    items << itemFromIndex(idx.sibling(idx.row(), column));
+
+  setItemsFromSourceFile(items, sourceFile);
 }
 
 quint64
@@ -204,6 +242,14 @@ SourceFileModel::addFilesAndTracks(QList<SourceFilePtr> const &files) {
   for (auto const &file : files) {
     createAndAppendRow(invisibleRootItem(), file);
     *m_sourceFiles << file;
+
+    if (file->m_additionalParts.isEmpty())
+      continue;
+
+    auto itemToAddTo = item(rowCount() - 1, 0);
+    auto row         = 0;
+    for (auto const &additionalPart : file->m_additionalParts)
+      createAndAppendRow(itemToAddTo, additionalPart, row++);
   }
 
   m_tracksModel->addTracks(std::accumulate(files.begin(), files.end(), QList<TrackPtr>{}, [](QList<TrackPtr> &accu, SourceFilePtr const &file) { return accu << file->m_tracks; }));
@@ -312,7 +358,8 @@ SourceFileModel::updateSelectionStatus() {
 
   Util::withSelectedIndexes(selectionModel, [this](QModelIndex const &selectedIndex) {
     auto sourceFile = fromIndex(selectedIndex);
-    Q_ASSERT(!!sourceFile);
+    if (!sourceFile)
+      return;
 
     if (sourceFile->isRegular())
       m_nonAppendedSelected = true;
@@ -414,12 +461,10 @@ SourceFileModel::flags(QModelIndex const &index)
   return actualFlags;
 }
 
-#define MIME_TYPE "application/x-mkvtoolnixgui-sourcefilemodelitems"
-
 QStringList
 SourceFileModel::mimeTypes()
   const {
-  return QStringList{} << Q(MIME_TYPE);
+  return QStringList{} << mtx::gui::MimeTypes::MergeSourceFileModelItem;
 }
 
 QMimeData *
@@ -442,7 +487,7 @@ SourceFileModel::mimeData(QModelIndexList const &indexes)
   for (auto const &value : valuesToStore)
     stream << value;
 
-  data->setData(MIME_TYPE, encoded);
+  data->setData(mtx::gui::MimeTypes::MergeSourceFileModelItem, encoded);
   return data;
 }
 
@@ -460,7 +505,7 @@ SourceFileModel::dropMimeData(QMimeData const *data,
   if (row == -1)
     row = rowCount(parent);
 
-  if (data->hasFormat(MIME_TYPE))
+  if (data->hasFormat(mtx::gui::MimeTypes::MergeSourceFileModelItem))
     return dropSourceFiles(data, action, row, parent);
 
   return false;
@@ -483,7 +528,7 @@ SourceFileModel::dropSourceFiles(QMimeData const *data,
   if (action != Qt::MoveAction)
     return QAbstractItemModel::dropMimeData(data, action, row, 0, parent);
 
-  auto encoded = data->data(MIME_TYPE);
+  auto encoded = data->data(mtx::gui::MimeTypes::MergeSourceFileModelItem);
   QDataStream stream{&encoded, QIODevice::ReadOnly};
 
   while (!stream.atEnd()) {

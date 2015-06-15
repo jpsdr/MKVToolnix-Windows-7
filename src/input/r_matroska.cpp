@@ -36,6 +36,7 @@
 #include <matroska/KaxSeekHead.h>
 #include <matroska/KaxSegment.h>
 #include <matroska/KaxTag.h>
+#include <matroska/KaxTags.h>
 #include <matroska/KaxTracks.h>
 #include <matroska/KaxTrackAudio.h>
 #include <matroska/KaxTrackVideo.h>
@@ -195,6 +196,52 @@ kax_track_t::add_track_tags_to_identification(std::vector<std::string> &verbose_
       if (!name.empty())
         verbose_info.emplace_back((boost::format("tag_%1%:%2%") % balg::to_lower_copy(name) % escape(value)).str());
     }
+  }
+}
+
+void
+kax_track_t::discard_track_statistics_tags() {
+  if (!tags)
+    return;
+
+  auto tags_to_discard = std::set<std::string>{
+    "_STATISTICS_TAGS",
+    "_STATISTICS_WRITING_APP",
+    "_STATISTICS_WRITING_DATE_UTC",
+  };
+
+  auto const wanted_target_type = static_cast<unsigned int>(mtx::tags::Movie);
+
+  for (auto const &tag_elt : *tags) {
+    auto tag = dynamic_cast<KaxTag *>(tag_elt);
+    if (!tag)
+      continue;
+
+    auto targets = FindChild<KaxTagTargets>(tag);
+    if (!targets || (FindChildValue<KaxTagTargetTypeValue>(targets, wanted_target_type) != wanted_target_type))
+      continue;
+
+    for (auto const &simple_tag_elt : *tag) {
+      auto simple_tag = dynamic_cast<KaxTagSimple *>(simple_tag_elt);
+      if (!simple_tag)
+        continue;
+
+      auto simple_tag_name = mtx::tags::get_simple_name(*simple_tag);
+      if (simple_tag_name != "_STATISTICS_TAGS")
+        continue;
+
+      auto all_to_discard = split(mtx::tags::get_simple_value(*simple_tag), boost::regex{"\\s+", boost::regex::perl});
+      for (auto const &to_discard : all_to_discard)
+        tags_to_discard.insert(to_discard);
+    }
+  }
+
+  for (auto const &tag_name : tags_to_discard)
+    mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(*tags, track_uid, tag_name);
+
+  if (!tags->ListSize()) {
+    delete tags;
+    tags = nullptr;
   }
 }
 
@@ -803,6 +850,12 @@ kax_reader_c::handle_tags(mm_io_c *io,
 }
 
 void
+kax_reader_c::discard_track_statistics_tags() {
+  for (auto const &track : m_tracks)
+    track->discard_track_statistics_tags();
+}
+
+void
 kax_reader_c::read_headers_info(mm_io_c *io,
                                 EbmlElement *l0,
                                 int64_t pos) {
@@ -1181,12 +1234,22 @@ kax_reader_c::read_headers_internal() {
       return false;
     }
 
+    m_in_file->set_segment_end(*l0);
+
     // We've got our segment, so let's find the m_tracks
     int upper_lvl_el = 0;
-    m_tc_scale         = TIMECODE_SCALE;
-    EbmlElement *l1  = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true, 1);
+    m_tc_scale       = TIMECODE_SCALE;
+    EbmlElement *l1  = nullptr;
 
-    while (l1 && (0 >= upper_lvl_el)) {
+    while (m_in->getFilePointer() < m_in_file->get_segment_end()) {
+      if (!l1)
+        l1 = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true, 1);
+
+      if (!l1 || (0 < upper_lvl_el)) {
+        delete l1;
+        break;
+      }
+
       if (Is<KaxInfo>(l1))
         m_deferred_l1_positions[dl1t_info].push_back(l1->GetElementPosition());
 
@@ -1237,6 +1300,8 @@ kax_reader_c::read_headers_internal() {
       l1->SkipData(*m_es, EBML_CONTEXT(l1));
       delete l1;
       l1 = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true);
+      if (!l1)
+        break;
 
     } // while (l1)
 
@@ -1258,6 +1323,8 @@ kax_reader_c::read_headers_internal() {
 
     for (auto position : m_deferred_l1_positions[dl1t_tags])
       handle_tags(m_in.get(), l0, position);
+
+    discard_track_statistics_tags();
 
     if (!m_ti.m_no_global_tags)
       process_global_tags();

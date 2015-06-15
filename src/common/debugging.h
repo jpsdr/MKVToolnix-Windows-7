@@ -106,6 +106,14 @@ public:
     LOGGER,
   };
 
+  enum dump_style_e {
+    style_with_values    = 0x01,
+    style_with_addresses = 0x02,
+    style_with_indexes   = 0x04,
+
+    style_default        = style_with_addresses | style_with_indexes,
+  };
+
 private:
   bool m_values, m_addresses, m_indexes;
   size_t m_max_level;
@@ -126,6 +134,9 @@ public:
   ebml_dumper_c &dump_if(bool do_it, libebml::EbmlElement const *element) {
     return do_it ? dump(element) : *this;
   }
+
+public:
+  static std::string dump_to_string(libebml::EbmlElement const *element, dump_style_e style = style_default);
 
 private:
   void dump_impl(libebml::EbmlElement const *element, size_t level, size_t index);

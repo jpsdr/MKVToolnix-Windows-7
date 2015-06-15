@@ -6,9 +6,11 @@
 #include <QSettings>
 #include <QStringList>
 #include <QTemporaryFile>
+#include <QTimer>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -23,9 +25,9 @@ MuxJob::MuxJob(Status status,
   , m_config{config}
   , m_aborted{}
 {
- connect(&m_process, SIGNAL(readyReadStandardOutput()),          this, SLOT(readAvailable()));
- connect(&m_process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processFinished(int,QProcess::ExitStatus)));
- connect(&m_process, SIGNAL(error(QProcess::ProcessError)),      this, SLOT(processError(QProcess::ProcessError)));
+ connect(&m_process, &QProcess::readyReadStandardOutput,                                              this, &MuxJob::readAvailable);
+ connect(&m_process, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &MuxJob::processFinished);
+ connect(&m_process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error),       this, &MuxJob::processError);
 }
 
 MuxJob::~MuxJob() {
@@ -53,11 +55,11 @@ MuxJob::start() {
 
 void
 MuxJob::processBytesRead() {
-  m_bytesRead.replace('\r', '\n').replace("\r\n", "\n");
+  m_bytesRead.replace("\r\n", "\n").replace('\r', '\n');
 
-  auto start = 0, num_read = m_bytesRead.size();
+  auto start = 0, numRead = m_bytesRead.size();
 
-  while (start < num_read) {
+  while (start < numRead) {
     auto pos = m_bytesRead.indexOf('\n', start);
     if (-1 == pos)
       break;
@@ -74,7 +76,7 @@ void
 MuxJob::processLine(QString const &rawLine) {
   auto line = rawLine;
 
-  line.replace(QRegularExpression{"[\r\n]+$"}, "");
+  line.replace(QRegularExpression{"[\r\n]+"}, "");
 
   // TODO: MuxJob::processLine
   if (line.startsWith("Warning:")) {
@@ -99,7 +101,7 @@ MuxJob::processLine(QString const &rawLine) {
     return;
   }
 
-  auto matches = QRegularExpression{"^Progress: *(\\d+)%"}.match(line);
+  auto matches = QRegularExpression{"^#GUI#progress\\s+(\\d+)%"}.match(line);
   if (matches.hasMatch()) {
     setProgress(matches.captured(1).toUInt());
     return;
@@ -119,7 +121,6 @@ MuxJob::processFinished(int exitCode,
                         QProcess::ExitStatus exitStatus) {
   if (!m_bytesRead.isEmpty())
     processLine(QString::fromUtf8(m_bytesRead));
-  // TODO: MuxJob::processFinished
 
   auto status = m_aborted                          ? Job::Aborted
               : QProcess::NormalExit != exitStatus ? Job::Failed
@@ -128,6 +129,9 @@ MuxJob::processFinished(int exitCode,
               :                                      Job::Failed;
 
   setStatus(status);
+
+  if (m_quitAfterFinished)
+    QTimer::singleShot(0, MainWindow::get(), SLOT(close()));
 }
 
 void

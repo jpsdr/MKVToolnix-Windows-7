@@ -13,6 +13,8 @@ class QIcon;
 class QItemSelection;
 class QItemSelectionModel;
 class QModelIndex;
+class QScrollArea;
+class QTabWidget;
 class QTableView;
 class QTreeView;
 class QString;
@@ -45,6 +47,12 @@ void setupCharacterSetComboBox(QComboBox &comboBox, QString const &initiallySele
 
 void enableWidgets(QList<QWidget *> const &widgets, bool enable);
 QPushButton *buttonForRole(QDialogButtonBox *box, QDialogButtonBox::ButtonRole role = QDialogButtonBox::AcceptRole);
+
+void saveWidgetGeometry(QWidget *widget);
+void restoreWidgetGeometry(QWidget *widget);
+
+QWidget *tabWidgetCloseTabButton(QTabWidget &tabWidget, int tabIdx);
+void setScrollAreaBackgroundTransparent(QScrollArea *scrollArea);
 
 // Model stuff
 enum MtxGuiRoles {

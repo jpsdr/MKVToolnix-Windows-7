@@ -10,9 +10,12 @@
 #include <QAction>
 #include <QMainWindow>
 
-#include "mkvtoolnix-gui/util/window_geometry_saver.h"
+class QResizeEvent;
 
 namespace mtx { namespace gui {
+
+class StatusBarProgressWidget;
+class ToolBase;
 
 namespace ChapterEditor {
 class Tool;
@@ -26,6 +29,9 @@ class Tool;
 namespace Merge {
 class Tool;
 }
+namespace Util {
+class MovingPixmapOverlay;
+}
 namespace WatchJobs {
 class Tab;
 class Tool;
@@ -34,8 +40,6 @@ class Tool;
 namespace Ui {
 class MainWindow;
 }
-
-class StatusBarProgressWidget;
 
 class MainWindow : public QMainWindow {
   Q_OBJECT;
@@ -50,7 +54,9 @@ protected:
   ChapterEditor::Tool *m_toolChapterEditor{};
   WatchJobs::Tool *m_watchJobTool{};
   QList<QAction *> m_toolSelectionActions;
-  Util::WindowGeometrySaver m_geometrySaver;
+  std::unique_ptr<Util::MovingPixmapOverlay> m_movingPixmapOverlay;
+
+  QHash<QObject *, QString> m_helpURLs;
 
 protected:                      // static
   static MainWindow *ms_mainWindow;
@@ -65,10 +71,17 @@ public:
   virtual void showAndEnableMenu(QMenu &menu, bool show);
   virtual void retranslateUi();
 
+  virtual void showIconMovingToTool(QString const &pixmapName, ToolBase const &tool);
+
+  virtual void resizeEvent(QResizeEvent *event) override;
+
+  virtual void switchToTool(ToolBase *tool);
+
 public slots:
-  virtual void changeTool();
+  virtual void changeToolToSender();
   virtual void toolChanged(int index);
   virtual void editPreferences();
+  virtual void visitHelpURL();
 
 #if defined(HAVE_CURL_EASY_H)
   virtual void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t release);
@@ -92,9 +105,11 @@ public:                         // static
 protected:
   virtual void setupMenu();
   virtual void setupToolSelector();
+  virtual void setupHelpURLs();
   virtual QWidget *createNotImplementedWidget();
 
   virtual void closeEvent(QCloseEvent *event);
+  virtual bool beforeCloseCheckRunningJobs();
 
 #if defined(HAVE_CURL_EASY_H)
   virtual void silentlyCheckForUpdates();

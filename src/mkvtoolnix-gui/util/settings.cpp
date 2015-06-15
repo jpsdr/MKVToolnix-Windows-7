@@ -18,6 +18,12 @@ Settings::Settings()
   load();
 }
 
+void
+Settings::change(std::function<void(Settings &)> worker) {
+  worker(s_settings);
+  s_settings.save();
+}
+
 Settings &
 Settings::get() {
   return s_settings;
@@ -38,44 +44,55 @@ Settings::load() {
   auto &reg   = *regPtr;
 
   reg.beginGroup("settings");
-  m_priority                  = static_cast<ProcessPriority>(reg.value("priority", static_cast<int>(NormalPriority)).toInt());
-  m_lastOpenDir               = QDir{reg.value("lastOpenDir").toString()};
-  m_lastOutputDir             = QDir{reg.value("lastOutputDir").toString()};
-  m_lastConfigDir             = QDir{reg.value("lastConfigDir").toString()};
-  m_lastMatroskaFileDir       = QDir{reg.value("lastMatroskaFileDir").toString()};
+  m_priority                           = static_cast<ProcessPriority>(reg.value("priority", static_cast<int>(NormalPriority)).toInt());
+  m_lastOpenDir                        = QDir{reg.value("lastOpenDir").toString()};
+  m_lastOutputDir                      = QDir{reg.value("lastOutputDir").toString()};
+  m_lastConfigDir                      = QDir{reg.value("lastConfigDir").toString()};
+  m_lastMatroskaFileDir                = QDir{reg.value("lastMatroskaFileDir").toString()};
 
-  m_oftenUsedLanguages        = reg.value("oftenUsedLanguages").toStringList();
-  m_oftenUsedCountries        = reg.value("oftenUsedCountries").toStringList();
-  m_oftenUsedCharacterSets    = reg.value("oftenUsedCharacterSets").toStringList();
+  m_oftenUsedLanguages                 = reg.value("oftenUsedLanguages").toStringList();
+  m_oftenUsedCountries                 = reg.value("oftenUsedCountries").toStringList();
+  m_oftenUsedCharacterSets             = reg.value("oftenUsedCharacterSets").toStringList();
 
-  m_scanForPlaylistsPolicy    = static_cast<ScanForPlaylistsPolicy>(reg.value("scanForPlaylistsPolicy", static_cast<int>(AskBeforeScanning)).toInt());
-  m_minimumPlaylistDuration   = reg.value("minimumPlaylistDuration", 120).toUInt();
+  m_scanForPlaylistsPolicy             = static_cast<ScanForPlaylistsPolicy>(reg.value("scanForPlaylistsPolicy", static_cast<int>(AskBeforeScanning)).toInt());
+  m_minimumPlaylistDuration            = reg.value("minimumPlaylistDuration", 120).toUInt();
 
-  m_setAudioDelayFromFileName = reg.value("setAudioDelayFromFileName", true).toBool();
-  m_autoSetFileTitle          = reg.value("autoSetFileTitle",          true).toBool();
+  m_setAudioDelayFromFileName          = reg.value("setAudioDelayFromFileName", true).toBool();
+  m_autoSetFileTitle                   = reg.value("autoSetFileTitle",          true).toBool();
+  m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
 
-  m_uniqueOutputFileNames     = reg.value("uniqueOutputFileNames",     true).toBool();
-  m_outputFileNamePolicy      = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToPreviousDirectory)).toInt());
-  m_fixedOutputDir            = QDir{reg.value("fixedOutputDir").toString()};
+  m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
+  m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
+  m_fixedOutputDir                     = QDir{reg.value("fixedOutputDir").toString()};
 
-  m_jobRemovalPolicy          = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
+  m_enableMuxingTracksByLanguage       = reg.value("enableMuxingTracksByLanguage", false).toBool();
+  m_enableMuxingAllVideoTracks         = reg.value("enableMuxingAllVideoTracks", true).toBool();
+  m_enableMuxingAllAudioTracks         = reg.value("enableMuxingAllAudioTracks", false).toBool();
+  m_enableMuxingAllSubtitleTracks      = reg.value("enableMuxingAllSubtitleTracks", false).toBool();
+  m_enableMuxingTracksByTheseLanguages = reg.value("enableMuxingTracksByTheseLanguages").toStringList();
+
+  m_jobRemovalPolicy                   = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
+
+  m_disableAnimations                  = reg.value("disableAnimations", false).toBool();
+  m_warnBeforeClosingModifiedTabs      = reg.value("warnBeforeClosingModifiedTabs", true).toBool();
+  m_warnBeforeAbortingJobs             = reg.value("warnBeforeAbortingJobs", true).toBool();
 
 #if defined(HAVE_LIBINTL_H)
-  m_uiLocale                  = reg.value("uiLocale").toString();
+  m_uiLocale                           = reg.value("uiLocale").toString();
 #endif
 
   reg.beginGroup("updates");
-  m_checkForUpdates = reg.value("checkForUpdates", true).toBool();
-  m_lastUpdateCheck = reg.value("lastUpdateCheck", QDateTime{}).toDateTime();
+  m_checkForUpdates                    = reg.value("checkForUpdates", true).toBool();
+  m_lastUpdateCheck                    = reg.value("lastUpdateCheck", QDateTime{}).toDateTime();
   reg.endGroup();               // settings.updates
   reg.endGroup();               // settings
 
   reg.beginGroup("defaults");
-  m_defaultTrackLanguage          = reg.value("defaultTrackLanguage", Q("und")).toString();
-  m_defaultChapterLanguage        = reg.value("defaultChapterLanguage", Q("und")).toString();
-  m_defaultChapterCountry         = reg.value("defaultChapterCountry").toString();
-  m_defaultSubtitleCharset        = reg.value("defaultSubtitleCharset").toString();
-  m_defaultAdditionalMergeOptions = reg.value("defaultAdditionalMergeOptions").toString();
+  m_defaultTrackLanguage               = reg.value("defaultTrackLanguage", Q("und")).toString();
+  m_defaultChapterLanguage             = reg.value("defaultChapterLanguage", Q("und")).toString();
+  m_defaultChapterCountry              = reg.value("defaultChapterCountry").toString();
+  m_defaultSubtitleCharset             = reg.value("defaultSubtitleCharset").toString();
+  m_defaultAdditionalMergeOptions      = reg.value("defaultAdditionalMergeOptions").toString();
   reg.endGroup();               // defaults
 
   if (m_oftenUsedLanguages.isEmpty())
@@ -104,42 +121,53 @@ Settings::save()
   auto &reg   = *regPtr;
 
   reg.beginGroup("settings");
-  reg.setValue("priority",                  static_cast<int>(m_priority));
-  reg.setValue("lastOpenDir",               m_lastOpenDir.path());
-  reg.setValue("lastOutputDir",             m_lastOutputDir.path());
-  reg.setValue("lastConfigDir",             m_lastConfigDir.path());
-  reg.setValue("lastMatroskaFileDir",       m_lastMatroskaFileDir.path());
+  reg.setValue("priority",                           static_cast<int>(m_priority));
+  reg.setValue("lastOpenDir",                        m_lastOpenDir.path());
+  reg.setValue("lastOutputDir",                      m_lastOutputDir.path());
+  reg.setValue("lastConfigDir",                      m_lastConfigDir.path());
+  reg.setValue("lastMatroskaFileDir",                m_lastMatroskaFileDir.path());
 
-  reg.setValue("oftenUsedLanguages",        m_oftenUsedLanguages);
-  reg.setValue("oftenUsedCountries",        m_oftenUsedCountries);
-  reg.setValue("oftenUsedCharacterSets",    m_oftenUsedCharacterSets);
+  reg.setValue("oftenUsedLanguages",                 m_oftenUsedLanguages);
+  reg.setValue("oftenUsedCountries",                 m_oftenUsedCountries);
+  reg.setValue("oftenUsedCharacterSets",             m_oftenUsedCharacterSets);
 
-  reg.setValue("scanForPlaylistsPolicy",    static_cast<int>(m_scanForPlaylistsPolicy));
-  reg.setValue("minimumPlaylistDuration",   m_minimumPlaylistDuration);
+  reg.setValue("scanForPlaylistsPolicy",             static_cast<int>(m_scanForPlaylistsPolicy));
+  reg.setValue("minimumPlaylistDuration",            m_minimumPlaylistDuration);
 
-  reg.setValue("setAudioDelayFromFileName", m_setAudioDelayFromFileName);
-  reg.setValue("autoSetFileTitle",          m_autoSetFileTitle);
+  reg.setValue("setAudioDelayFromFileName",          m_setAudioDelayFromFileName);
+  reg.setValue("autoSetFileTitle",                   m_autoSetFileTitle);
+  reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
 
-  reg.setValue("outputFileNamePolicy",      static_cast<int>(m_outputFileNamePolicy));
-  reg.setValue("fixedOutputDir",            m_fixedOutputDir.path());
-  reg.setValue("uniqueOutputFileNames",     m_uniqueOutputFileNames);
+  reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));
+  reg.setValue("fixedOutputDir",                     m_fixedOutputDir.path());
+  reg.setValue("uniqueOutputFileNames",              m_uniqueOutputFileNames);
 
-  reg.setValue("jobRemovalPolicy",          static_cast<int>(m_jobRemovalPolicy));
+  reg.setValue("enableMuxingTracksByLanguage",       m_enableMuxingTracksByLanguage);
+  reg.setValue("enableMuxingAllVideoTracks",         m_enableMuxingAllVideoTracks);
+  reg.setValue("enableMuxingAllAudioTracks",         m_enableMuxingAllAudioTracks);
+  reg.setValue("enableMuxingAllSubtitleTracks",      m_enableMuxingAllSubtitleTracks);
+  reg.setValue("enableMuxingTracksByTheseLanguages", m_enableMuxingTracksByTheseLanguages);
 
-  reg.setValue("uiLocale",                  m_uiLocale);
+  reg.setValue("jobRemovalPolicy",                   static_cast<int>(m_jobRemovalPolicy));
+
+  reg.setValue("disableAnimations",                  m_disableAnimations);
+  reg.setValue("warnBeforeClosingModifiedTabs",      m_warnBeforeClosingModifiedTabs);
+  reg.setValue("warnBeforeAbortingJobs",             m_warnBeforeAbortingJobs);
+
+  reg.setValue("uiLocale",                           m_uiLocale);
 
   reg.beginGroup("updates");
-  reg.setValue("checkForUpdates", m_checkForUpdates);
-  reg.setValue("lastUpdateCheck", m_lastUpdateCheck);
+  reg.setValue("checkForUpdates",                    m_checkForUpdates);
+  reg.setValue("lastUpdateCheck",                    m_lastUpdateCheck);
   reg.endGroup();               // settings.updates
   reg.endGroup();               // settings
 
   reg.beginGroup("defaults");
-  reg.setValue("defaultTrackLanguage",          m_defaultTrackLanguage);
-  reg.setValue("defaultChapterLanguage",        m_defaultChapterLanguage);
-  reg.setValue("defaultChapterCountry",         m_defaultChapterCountry);
-  reg.setValue("defaultSubtitleCharset",        m_defaultSubtitleCharset);
-  reg.setValue("defaultAdditionalMergeOptions", m_defaultAdditionalMergeOptions);
+  reg.setValue("defaultTrackLanguage",               m_defaultTrackLanguage);
+  reg.setValue("defaultChapterLanguage",             m_defaultChapterLanguage);
+  reg.setValue("defaultChapterCountry",              m_defaultChapterCountry);
+  reg.setValue("defaultSubtitleCharset",             m_defaultSubtitleCharset);
+  reg.setValue("defaultAdditionalMergeOptions",      m_defaultAdditionalMergeOptions);
   reg.endGroup();               // defaults
 }
 

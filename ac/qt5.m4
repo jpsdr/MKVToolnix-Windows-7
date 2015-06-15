@@ -228,6 +228,8 @@ return 0;
     BUILD_MKVTOOLNIX_GUI=no
   fi
 
+  AC_PATH_PROG(LCONVERT, lconvert)
+
 else
   echo '*** Not checking for Qt: disabled by user request'
 fi

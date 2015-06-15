@@ -15,9 +15,12 @@ Job::Job(Status status)
   , m_status{status}
   , m_progress{}
   , m_exitCode{std::numeric_limits<unsigned int>::max()}
+  , m_warningsAcknowledged{}
+  , m_errorsAcknowledged{}
+  , m_quitAfterFinished{}
   , m_mutex{QMutex::Recursive}
 {
-  connect(this, SIGNAL(lineRead(const QString&,mtx::gui::Jobs::Job::LineType)), this, SLOT(addLineToInternalLogs(const QString&,mtx::gui::Jobs::Job::LineType)));
+  connect(this, &Job::lineRead, this, &Job::addLineToInternalLogs);
 }
 
 Job::~Job() {
@@ -38,6 +41,8 @@ Job::setStatus(Status status) {
     m_output.clear();
     m_warnings.clear();
     m_errors.clear();
+    m_warningsAcknowledged = 0;
+    m_errorsAcknowledged   = 0;
 
   } else if ((DoneOk == status) || (DoneWarnings == status) || (Failed == status) || (Aborted == status))
     m_dateFinished = QDateTime::currentDateTime();
@@ -83,6 +88,9 @@ Job::addLineToInternalLogs(QString const &line,
 
   m_fullOutput << Q("%1%2\n").arg(prefix).arg(line);
   storage      << line;
+
+  if ((WarningLine == type) || (ErrorLine == type))
+    updateUnacknowledgedWarningsAndErrors();
 }
 
 QString
@@ -102,34 +110,41 @@ void
 Job::saveJob(QSettings &settings)
   const {
 
-  settings.setValue("status",       static_cast<unsigned int>(m_status));
-  settings.setValue("description",  m_description);
-  settings.setValue("output",       m_output);
-  settings.setValue("warnings",     m_warnings);
-  settings.setValue("errors",       m_errors);
-  settings.setValue("fullOutput",   m_fullOutput);
-  settings.setValue("progress",     m_progress);
-  settings.setValue("exitCode",     m_exitCode);
-  settings.setValue("dateAdded",    m_dateAdded);
-  settings.setValue("dateStarted",  m_dateStarted);
-  settings.setValue("dateFinished", m_dateFinished);
+  settings.setValue("status",               static_cast<unsigned int>(m_status));
+  settings.setValue("description",          m_description);
+  settings.setValue("output",               m_output);
+  settings.setValue("warnings",             m_warnings);
+  settings.setValue("errors",               m_errors);
+  settings.setValue("fullOutput",           m_fullOutput);
+  settings.setValue("progress",             m_progress);
+  settings.setValue("exitCode",             m_exitCode);
+  settings.setValue("warningsAcknowledged", m_warningsAcknowledged);
+  settings.setValue("errorsAcknowledged",   m_errorsAcknowledged);
+  settings.setValue("dateAdded",            m_dateAdded);
+  settings.setValue("dateStarted",          m_dateStarted);
+  settings.setValue("dateFinished",         m_dateFinished);
 
   saveJobInternal(settings);
 }
 
 void
 Job::loadJobBasis(QSettings &settings) {
-  m_status       = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
-  m_description  = settings.value("description").toString();
-  m_output       = settings.value("output").toStringList();
-  m_warnings     = settings.value("warnings").toStringList();
-  m_errors       = settings.value("errors").toStringList();
-  m_fullOutput   = settings.value("fullOutput").toStringList();
-  m_progress     = settings.value("progress").toUInt();
-  m_exitCode     = settings.value("exitCode").toUInt();
-  m_dateAdded    = settings.value("dateAdded").toDateTime();
-  m_dateStarted  = settings.value("dateStarted").toDateTime();
-  m_dateFinished = settings.value("dateFinished").toDateTime();
+  m_status               = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
+  m_description          = settings.value("description").toString();
+  m_output               = settings.value("output").toStringList();
+  m_warnings             = settings.value("warnings").toStringList();
+  m_errors               = settings.value("errors").toStringList();
+  m_fullOutput           = settings.value("fullOutput").toStringList();
+  m_progress             = settings.value("progress").toUInt();
+  m_exitCode             = settings.value("exitCode").toUInt();
+  m_warningsAcknowledged = settings.value("warningsAcknowledged", 0).toUInt();
+  m_errorsAcknowledged   = settings.value("errorsAcknowledged",   0).toUInt();
+  m_dateAdded            = settings.value("dateAdded").toDateTime();
+  m_dateStarted          = settings.value("dateStarted").toDateTime();
+  m_dateFinished         = settings.value("dateFinished").toDateTime();
+
+  if (Running == m_status)
+    m_status = Aborted;
 }
 
 JobPtr
@@ -142,6 +157,35 @@ Job::loadJob(QSettings &settings) {
   Q_ASSERT_X(false, "Job::loadJob", "Unknown job type encountered");
 
   return JobPtr{};
+}
+
+void
+Job::acknowledgeWarnings() {
+  m_warningsAcknowledged = m_warnings.count();
+  updateUnacknowledgedWarningsAndErrors();
+}
+
+void
+Job::acknowledgeErrors() {
+  m_errorsAcknowledged = m_errors.count();
+  updateUnacknowledgedWarningsAndErrors();
+}
+
+void
+Job::updateUnacknowledgedWarningsAndErrors() {
+  emit numUnacknowledgedWarningsOrErrorsChanged(m_id, numUnacknowledgedWarnings(), numUnacknowledgedErrors());
+}
+
+int
+Job::numUnacknowledgedWarnings()
+  const {
+  return m_warnings.count() - m_warningsAcknowledged;
+}
+
+int
+Job::numUnacknowledgedErrors()
+  const {
+  return m_errors.count() - m_errorsAcknowledged;
 }
 
 }}}

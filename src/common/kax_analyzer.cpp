@@ -258,10 +258,17 @@ kax_analyzer_c::process_internal(kax_analyzer_c::parse_mode_e parse_mode,
   bool aborted         = false;
   bool cluster_found   = false;
   bool meta_seek_found = false;
+  auto segment_end     = m_segment->IsFiniteSize() ? m_segment->GetElementPosition() + m_segment->HeadSize() + m_segment->GetSize() : m_file->get_size();
+  EbmlElement *l1      = nullptr;
 
   // We've got our segment, so let's find all level 1 elements.
-  EbmlElement *l1 = m_stream->FindNextElement(EBML_CONTEXT(m_segment), upper_lvl_el, 0xFFFFFFFFFFFFFFFFLL, true, 1);
-  while (l1 && (0 >= upper_lvl_el)) {
+  while (m_file->getFilePointer() < segment_end) {
+    if (!l1)
+      l1 = m_stream->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true, 1);
+
+    if (!l1 || (0 < upper_lvl_el))
+      break;
+
     m_data.push_back(kax_analyzer_data_c::create(EbmlId(*l1), l1->GetElementPosition(), l1->ElementSize(true)));
 
     cluster_found   |= Is<KaxCluster>(l1);
@@ -276,7 +283,6 @@ kax_analyzer_c::process_internal(kax_analyzer_c::parse_mode_e parse_mode,
     if (!in_parent(m_segment) || aborted || (cluster_found && meta_seek_found && !parse_fully))
       break;
 
-    l1 = m_stream->FindNextElement(EBML_CONTEXT(m_segment), upper_lvl_el, 0xFFFFFFFFL, true);
   } // while (l1)
 
   if (l1)

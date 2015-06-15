@@ -48,7 +48,7 @@ public:
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   ProcessPriority m_priority;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir, m_lastMatroskaFileDir;
-  bool m_setAudioDelayFromFileName, m_autoSetFileTitle;
+  bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
   QDir m_fixedOutputDir;
@@ -62,7 +62,11 @@ public:
   bool m_checkForUpdates;
   QDateTime m_lastUpdateCheck;
 
+  bool m_disableAnimations, m_warnBeforeClosingModifiedTabs, m_warnBeforeAbortingJobs;
   QString m_uiLocale;
+
+  bool m_enableMuxingTracksByLanguage, m_enableMuxingAllVideoTracks, m_enableMuxingAllAudioTracks, m_enableMuxingAllSubtitleTracks;
+  QStringList m_enableMuxingTracksByTheseLanguages;
 
 public:
   Settings();
@@ -82,6 +86,7 @@ protected:
 
 public:
   static Settings &get();
+  static void change(std::function<void(Settings &)> worker);
   static std::unique_ptr<QSettings> registry();
 
   static QString exeWithPath(QString const &exe);

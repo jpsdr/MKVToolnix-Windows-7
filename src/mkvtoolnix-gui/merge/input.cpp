@@ -21,6 +21,7 @@
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/file_type_filter.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -76,6 +77,7 @@ Tab::setupInputControls() {
 
   ui->files->setModel(m_filesModel);
   ui->tracks->setModel(m_tracksModel);
+  ui->tracks->enterActivatesAllSelected(true);
 
   // Track & chapter language
   Util::setupLanguageComboBox(*ui->trackLanguage);
@@ -111,24 +113,27 @@ Tab::setupInputControls() {
   ui->tracks->addAction(m_disableAllTracksAction);
 
   // Connect signals & slots.
-  connect(ui->files,                    &Util::BasicTreeView::filesDropped,     this,          &Tab::addOrAppendDroppedFiles);
-  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged, this,          &Tab::onFileSelectionChanged);
-  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged, m_filesModel,  &SourceFileModel::updateSelectionStatus);
-  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged, this,          &Tab::onTrackSelectionChanged);
-  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged, m_tracksModel, &TrackModel::updateSelectionStatus);
+  connect(ui->files,                    &Util::BasicTreeView::filesDropped,         this,          &Tab::addOrAppendDroppedFiles);
+  connect(ui->files,                    &Util::BasicTreeView::deletePressed,        this,          &Tab::onRemoveFiles);
+  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     this,          &Tab::onFileSelectionChanged);
+  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     m_filesModel,  &SourceFileModel::updateSelectionStatus);
+  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     this,          &Tab::onTrackSelectionChanged);
+  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     m_tracksModel, &TrackModel::updateSelectionStatus);
+  connect(ui->tracks,                   &Util::BasicTreeView::allSelectedActivated, this,          &Tab::toggleMuxThisForSelectedTracks);
+  connect(ui->tracks,                   &QTreeView::doubleClicked,                  this,          &Tab::toggleMuxThisForSelectedTracks);
 
-  connect(m_addFilesAction,             &QAction::triggered,                    this,          &Tab::onAddFiles);
-  connect(m_appendFilesAction,          &QAction::triggered,                    this,          &Tab::onAppendFiles);
-  connect(m_addAdditionalPartsAction,   &QAction::triggered,                    this,          &Tab::onAddAdditionalParts);
-  connect(m_removeFilesAction,          &QAction::triggered,                    this,          &Tab::onRemoveFiles);
-  connect(m_removeAllFilesAction,       &QAction::triggered,                    this,          &Tab::onRemoveAllFiles);
+  connect(m_addFilesAction,             &QAction::triggered,                        this,          &Tab::onAddFiles);
+  connect(m_appendFilesAction,          &QAction::triggered,                        this,          &Tab::onAppendFiles);
+  connect(m_addAdditionalPartsAction,   &QAction::triggered,                        this,          &Tab::onAddAdditionalParts);
+  connect(m_removeFilesAction,          &QAction::triggered,                        this,          &Tab::onRemoveFiles);
+  connect(m_removeAllFilesAction,       &QAction::triggered,                        this,          &Tab::onRemoveAllFiles);
 
-  connect(m_selectAllTracksAction,      &QAction::triggered,                    this,          &Tab::selectAllTracks);
-  connect(m_enableAllTracksAction,      &QAction::triggered,                    this,          &Tab::enableAllTracks);
-  connect(m_disableAllTracksAction,     &QAction::triggered,                    this,          &Tab::disableAllTracks);
+  connect(m_selectAllTracksAction,      &QAction::triggered,                        this,          &Tab::selectAllTracks);
+  connect(m_enableAllTracksAction,      &QAction::triggered,                        this,          &Tab::enableAllTracks);
+  connect(m_disableAllTracksAction,     &QAction::triggered,                        this,          &Tab::disableAllTracks);
 
-  connect(m_filesModel,                 &SourceFileModel::rowsInserted,         this,          &Tab::onFileRowsInserted);
-  connect(m_tracksModel,                &TrackModel::rowsInserted,              this,          &Tab::onTrackRowsInserted);
+  connect(m_filesModel,                 &SourceFileModel::rowsInserted,             this,          &Tab::onFileRowsInserted);
+  connect(m_tracksModel,                &TrackModel::rowsInserted,                  this,          &Tab::onTrackRowsInserted);
 
   onTrackSelectionChanged();
   enableTracksActions();
@@ -448,6 +453,28 @@ Tab::onMuxThisChanged(int newValue) {
 }
 
 void
+Tab::toggleMuxThisForSelectedTracks() {
+  auto allEnabled     = true;
+  auto tracksSelected = false;
+
+  withSelectedTracks([&allEnabled, &tracksSelected](Track *track) {
+    tracksSelected = true;
+
+    if (!track->m_muxThis)
+      allEnabled = false;
+  }, false, ui->muxThis);
+
+  if (!tracksSelected)
+    return;
+
+  auto newEnabled = !allEnabled;
+
+  withSelectedTracks([newEnabled](Track *track) { track->m_muxThis = newEnabled; }, false, ui->muxThis);
+
+  Util::setComboBoxIndexIf(ui->muxThis, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toInt() == (newEnabled ? 0 : 1)); });
+}
+
+void
 Tab::onTrackLanguageChanged(int newValue) {
   auto code = ui->trackLanguage->itemData(newValue).toString();
   if (code.isEmpty())
@@ -632,12 +659,6 @@ Tab::onAddFiles() {
 
 void
 Tab::onAppendFiles() {
-  // auto selectedFile = m_filesModel->fromIndex(selectedSourceFile());
-  // if (selectedFile && !selectedFile->m_tracks.size()) {
-  //   QMessageBox::critical(this, QY("Unable to append files"), QY("You cannot append tracks or add additional parts to files that contain tracks."));
-  //   return;
-  // }
-
   addOrAppendFiles(true);
 }
 
@@ -671,6 +692,8 @@ Tab::addOrAppendFiles(bool append,
     m_config.debugDumpTrackList();
   }
 
+  setDefaultsFromSettingsForAddedFiles(identifiedFiles);
+
   m_filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
 
   if (m_debugTrackModel) {
@@ -683,6 +706,16 @@ Tab::addOrAppendFiles(bool append,
 
   setTitleMaybe(identifiedFiles);
   setOutputFileNameMaybe(identifiedFiles[0]->m_fileName);
+}
+
+void
+Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
+  auto &cfg = Util::Settings::get();
+
+  for (auto const &file : files)
+    for (auto const &track : file->m_tracks)
+      if (cfg.m_disableCompressionForAllTrackTypes)
+        track->m_compression = Track::CompNone;
 }
 
 QStringList
@@ -707,7 +740,7 @@ Tab::onAddAdditionalParts() {
   auto currentIdx = selectedSourceFile();
   auto sourceFile = m_filesModel->fromIndex(currentIdx);
   if (sourceFile && !sourceFile->m_tracks.size()) {
-    QMessageBox::critical(this, QY("Unable to append files"), QY("You cannot add additional parts to files that don't contain tracks."));
+    Util::MessageBox::critical(this, QY("Unable to append files"), QY("You cannot add additional parts to files that don't contain tracks."));
     return;
   }
 
@@ -787,6 +820,10 @@ void
 Tab::retranslateInputUI() {
   m_filesModel->retranslateUi();
   m_tracksModel->retranslateUi();
+
+  resizeFilesColumnsToContents();
+  resizeTracksColumnsToContents();
+
   m_addFilesAction->setText(QY("&Add files"));
   m_appendFilesAction->setText(QY("A&ppend files"));
   m_addAdditionalPartsAction->setText(QY("Add files as a&dditional parts"));
@@ -948,16 +985,9 @@ Tab::addOrAppendDroppedFilesDelayed() {
 }
 
 void
-Tab::dragEnterEvent(QDragEnterEvent *event) {
-  m_filesDDHandler.handle(event, false);
-}
-
-void
-Tab::dropEvent(QDropEvent *event) {
-  if (m_filesDDHandler.handle(event, true)) {
-    m_filesToAddDelayed += m_filesDDHandler.fileNames();
-    QTimer::singleShot(0, this, SLOT(addOrAppendDroppedFilesDelayed()));
-  }
+Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames) {
+  m_filesToAddDelayed += fileNames;
+  QTimer::singleShot(0, this, SLOT(addOrAppendDroppedFilesDelayed()));
 }
 
 void

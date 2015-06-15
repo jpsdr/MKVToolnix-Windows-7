@@ -7,6 +7,7 @@
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
@@ -30,10 +31,15 @@ FileIdentifier::identify() {
   if (m_fileName.isEmpty())
     return false;
 
+  auto &cfg = Settings::get();
+
   QStringList args;
   args << "--output-charset" << "utf-8" << "--identify-for-mmg" << m_fileName;
 
-  auto process  = Process::execute(Settings::get().actualMkvmergeExe(), args);
+  if (cfg.m_defaultAdditionalMergeOptions.contains(Q("keep_last_chapter_in_mpls")))
+    args << "--engage" << "keep_last_chapter_in_mpls";
+
+  auto process  = Process::execute(cfg.actualMkvmergeExe(), args);
   auto exitCode = process->process().exitCode();
   m_output      = process->output();
 
@@ -44,12 +50,12 @@ FileIdentifier::identify() {
     auto pos       = m_output.isEmpty() ? -1            : m_output[0].indexOf("container:");
     auto container = -1 == pos          ? QY("unknown") : m_output[0].mid(pos + 11);
 
-    QMessageBox::critical(m_parent, QY("Unsupported file format"), QY("The file is an unsupported container format (%1).").arg(container));
+    Util::MessageBox::critical(m_parent, QY("Unsupported file format"), QY("The file is an unsupported container format (%1).").arg(container));
 
     return false;
   }
 
-  QMessageBox::critical(m_parent, QY("Unrecognized file format"), QY("The file was not recognized as a supported format (exit code: %1).").arg(exitCode));
+  Util::MessageBox::critical(m_parent, QY("Unrecognized file format"), QY("The file was not recognized as a supported format (exit code: %1).").arg(exitCode));
 
   return false;
 }
@@ -214,14 +220,14 @@ FileIdentifier::parseTrackLine(QString const &line) {
   if (-1 == re.indexIn(line))
     return;
 
-  auto type                       = re.cap(2) == "audio"     ? Merge::Track::Audio
-                                  : re.cap(2) == "video"     ? Merge::Track::Video
-                                  : re.cap(2) == "subtitles" ? Merge::Track::Subtitles
-                                  :                            Merge::Track::Buttons;
-  auto track                      = std::make_shared<Merge::Track>(m_file.get(), type);
-  track->m_id                     = re.cap(1).toLongLong();
-  track->m_codec                  = re.cap(3);
-  track->m_properties             = parseProperties(line);
+  auto type           = re.cap(2) == "audio"     ? Merge::Track::Audio
+                      : re.cap(2) == "video"     ? Merge::Track::Video
+                      : re.cap(2) == "subtitles" ? Merge::Track::Subtitles
+                      :                            Merge::Track::Buttons;
+  auto track          = std::make_shared<Merge::Track>(m_file.get(), type);
+  track->m_id         = re.cap(1).toLongLong();
+  track->m_codec      = re.cap(3);
+  track->m_properties = parseProperties(line);
 
   m_file->m_tracks << track;
 

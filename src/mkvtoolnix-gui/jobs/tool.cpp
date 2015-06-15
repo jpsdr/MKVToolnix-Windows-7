@@ -7,24 +7,30 @@
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
+#include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 #include <QList>
+#include <QMenu>
 #include <QMessageBox>
 #include <QString>
+#include <QTreeView>
 
 namespace mtx { namespace gui { namespace Jobs {
 
-Tool::Tool(QWidget *parent)
+Tool::Tool(QWidget *parent,
+           QMenu *jobQueueMenu)
   : ToolBase{parent}
   , ui{new Ui::Tool}
   , m_model{new Model{this}}
   , m_startAction{new QAction{this}}
+  , m_viewOutputAction{new QAction{this}}
   , m_removeAction{new QAction{this}}
-  , m_removeDoneAction{new QAction{this}}
-  , m_removeDoneOkAction{new QAction{this}}
-  , m_removeAllAction{new QAction{this}}
+  , m_acknowledgeSelectedWarningsAction{new QAction{this}}
+  , m_acknowledgeSelectedErrorsAction{new QAction{this}}
+  , m_jobQueueMenu{jobQueueMenu}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -37,8 +43,8 @@ Tool::~Tool() {
 
 void
 Tool::loadAndStart() {
-  QSettings reg;
-  m_model->loadJobs(reg);
+  auto reg = Util::Settings::registry();
+  m_model->loadJobs(*reg);
 
   resizeColumnsToContents();
 
@@ -53,57 +59,115 @@ Tool::model()
 
 void
 Tool::setupUiControls() {
+  auto mwUi = MainWindow::getUi();
+
   ui->jobs->setModel(m_model);
 
-  connect(m_startAction,        SIGNAL(triggered()), this, SLOT(onStart()));
-  connect(m_removeAction,       SIGNAL(triggered()), this, SLOT(onRemove()));
-  connect(m_removeDoneAction,   SIGNAL(triggered()), this, SLOT(onRemoveDone()));
-  connect(m_removeDoneOkAction, SIGNAL(triggered()), this, SLOT(onRemoveDoneOk()));
-  connect(m_removeAllAction,    SIGNAL(triggered()), this, SLOT(onRemoveAll()));
+  connect(m_jobQueueMenu,                             &QMenu::aboutToShow,       this,    &Tool::onJobQueueMenu);
+
+  connect(mwUi->actionJobQueueStartAllPending,        &QAction::triggered,       this,    &Tool::onStartAllPending);
+
+  connect(mwUi->actionJobQueueRemoveDone,             &QAction::triggered,       this,    &Tool::onRemoveDone);
+  connect(mwUi->actionJobQueueRemoveDoneOk,           &QAction::triggered,       this,    &Tool::onRemoveDoneOk);
+  connect(mwUi->actionJobQueueRemoveAll,              &QAction::triggered,       this,    &Tool::onRemoveAll);
+
+  connect(mwUi->actionJobQueueAcknowledgeAllWarnings, &QAction::triggered,       m_model, &Model::acknowledgeAllWarnings);
+  connect(mwUi->actionJobQueueAcknowledgeAllErrors,   &QAction::triggered,       m_model, &Model::acknowledgeAllErrors);
+
+  connect(m_startAction,                              &QAction::triggered,       this,    &Tool::onStart);
+  connect(m_viewOutputAction,                         &QAction::triggered,       this,    &Tool::onViewOutput);
+  connect(m_removeAction,                             &QAction::triggered,       this,    &Tool::onRemove);
+  connect(m_acknowledgeSelectedWarningsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
+  connect(m_acknowledgeSelectedErrorsAction,          &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
+
+  connect(ui->jobs,                                   &QTreeView::doubleClicked, this,    &Tool::onViewOutput);
+}
+
+void
+Tool::onJobQueueMenu() {
+  auto mwUi             = MainWindow::getUi();
+  auto hasJobs          = m_model->hasJobs();
+  auto hasPendingManual = false;
+
+  m_model->withAllJobs([&hasPendingManual](Job &job) {
+    if (Job::PendingManual == job.m_status)
+      hasPendingManual = true;
+  });
+
+  mwUi->actionJobQueueStartAllPending->setEnabled(hasPendingManual);
+
+  mwUi->actionJobQueueRemoveDone->setEnabled(hasJobs);
+  mwUi->actionJobQueueRemoveDoneOk->setEnabled(hasJobs);
+  mwUi->actionJobQueueRemoveAll->setEnabled(hasJobs);
+
+  mwUi->actionJobQueueAcknowledgeAllWarnings->setEnabled(hasJobs);
+  mwUi->actionJobQueueAcknowledgeAllErrors->setEnabled(hasJobs);
 }
 
 void
 Tool::onContextMenu(QPoint pos) {
-  bool hasJobs      = m_model->hasJobs();
-  bool hasSelection = !m_model->selectedJobs(ui->jobs).isEmpty();
+  bool hasSelection = false;
+
+  m_model->withSelectedJobs(ui->jobs, [&hasSelection](Job &) { hasSelection = true; });
 
   m_startAction->setEnabled(hasSelection);
+  m_viewOutputAction->setEnabled(hasSelection);
   m_removeAction->setEnabled(hasSelection);
-  m_removeDoneAction->setEnabled(hasJobs);
-  m_removeDoneOkAction->setEnabled(hasJobs);
-  m_removeAllAction->setEnabled(hasJobs);
+
+  m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
+  m_acknowledgeSelectedErrorsAction->setEnabled(hasSelection);
 
   QMenu menu{this};
 
   menu.addSeparator();
+  menu.addAction(m_viewOutputAction);
+  menu.addSeparator();
   menu.addAction(m_startAction);
   menu.addSeparator();
   menu.addAction(m_removeAction);
-  menu.addAction(m_removeDoneAction);
-  menu.addAction(m_removeDoneOkAction);
-  menu.addAction(m_removeAllAction);
+  menu.addSeparator();
+  menu.addAction(m_acknowledgeSelectedWarningsAction);
+  menu.addAction(m_acknowledgeSelectedErrorsAction);
 
   menu.exec(ui->jobs->viewport()->mapToGlobal(pos));
 }
 
 void
 Tool::onStart() {
-  auto jobs = m_model->selectedJobs(ui->jobs);
-  for (auto const &job : jobs)
-    job->setPendingAuto();
+  m_model->withSelectedJobs(ui->jobs, [](Job &job) { job.setPendingAuto(); });
+
+  m_model->startNextAutoJob();
+}
+
+void
+Tool::onStartAllPending() {
+  m_model->withAllJobs([](Job &job) {
+    if (Job::PendingManual == job.m_status)
+      job.setPendingAuto();
+  });
 
   m_model->startNextAutoJob();
 }
 
 void
 Tool::onRemove() {
-  auto idsToRemove  = QMap<uint64_t, bool>{};
-  auto selectedJobs = m_model->selectedJobs(ui->jobs);
+  auto idsToRemove        = QMap<uint64_t, bool>{};
+  auto emitRunningWarning = false;
 
-  for (auto const &job : selectedJobs)
-    idsToRemove[job->m_id] = true;
+  m_model->withSelectedJobs(ui->jobs, [&idsToRemove](Job &job) { idsToRemove[job.m_id] = true; });
 
-  m_model->removeJobsIf([&](Job const &job) { return idsToRemove[job.m_id]; });
+  m_model->removeJobsIf([&idsToRemove, &emitRunningWarning](Job const &job) -> bool {
+    if (!idsToRemove[job.m_id])
+      return false;
+    if (Job::Running != job.m_status)
+      return true;
+
+    emitRunningWarning = true;
+    return false;
+  });
+
+  if (emitRunningWarning)
+    MainWindow::get()->setStatusBarMessage(QY("Running jobs cannot be removed."));
 }
 
 void
@@ -123,7 +187,18 @@ Tool::onRemoveDoneOk() {
 
 void
 Tool::onRemoveAll() {
-  m_model->removeJobsIf([this](Job const &) { return true; });
+  auto emitRunningWarning = false;
+
+  m_model->removeJobsIf([&emitRunningWarning](Job const &job) -> bool {
+    if (Job::Running != job.m_status)
+      return true;
+
+    emitRunningWarning = true;
+    return false;
+  });
+
+  if (emitRunningWarning)
+    MainWindow::get()->setStatusBarMessage(QY("Running jobs cannot be removed."));
 }
 
 void
@@ -134,8 +209,6 @@ Tool::resizeColumnsToContents()
 
 void
 Tool::addJob(JobPtr const &job) {
-  MainWindow::watchCurrentJobTab()->connectToJob(*job);
-
   m_model->add(job);
   resizeColumnsToContents();
 }
@@ -145,11 +218,12 @@ Tool::retranslateUi() {
   ui->retranslateUi(this);
   m_model->retranslateUi();
 
-  m_startAction->setText(QY("&Start selected jobs automatically"));
-  m_removeAction->setText(QY("&Remove selected jobs"));
-  m_removeDoneAction->setText(QY("Remove &completed jobs"));
-  m_removeDoneOkAction->setText(QY("Remove &successfully completed jobs"));
-  m_removeAllAction->setText(QY("Remove a&ll jobs"));
+  m_viewOutputAction->setText(QY("&View output"));
+  m_startAction->setText(QY("&Start jobs automatically"));
+  m_removeAction->setText(QY("&Remove jobs"));
+
+  m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge warnings"));
+  m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge errors"));
 
   setupToolTips();
 }
@@ -161,6 +235,33 @@ Tool::setupToolTips() {
 
 void
 Tool::toolShown() {
+  MainWindow::get()->showTheseMenusOnly({ m_jobQueueMenu });
+}
+
+void
+Tool::acknowledgeSelectedWarnings() {
+  m_model->acknowledgeSelectedWarnings(ui->jobs);
+}
+
+void
+Tool::acknowledgeSelectedErrors() {
+  m_model->acknowledgeSelectedErrors(ui->jobs);
+}
+
+void
+Tool::onViewOutput() {
+  auto tool = mtx::gui::MainWindow::watchJobTool();
+  m_model->withSelectedJobs(ui->jobs, [tool](Job &job) { tool->viewOutput(job); });
+
+  mtx::gui::MainWindow::get()->switchToTool(tool);
+}
+
+void
+Tool::acknowledgeWarningsAndErrors(uint64_t id) {
+  m_model->withJob(id, [](Job &job) {
+    job.acknowledgeWarnings();
+    job.acknowledgeErrors();
+  });
 }
 
 }}}

@@ -14,6 +14,10 @@
 
 #include "common/common_pch.h"
 
+#if defined(HAVE_UNISTD_H)
+# include <unistd.h>
+#endif  // HAVE_UNISTD_H
+
 #include "common/codec.h"
 #include "common/debugging.h"
 #include "common/dts.h"

@@ -78,6 +78,20 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="remainingTimeCurrentJobLabel">
+       <property name="text">
+        <string>Remaining time for current job:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="remainingTimeCurrentJob">
+       <property name="text">
+        <string notr="true">–</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="2">
       <widget class="QLabel" name="finishedAtLabel">
        <property name="text">
@@ -95,6 +109,20 @@
        </property>
        <property name="text">
         <string>not finished yet</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLabel" name="remainingTimeQueueLabel">
+       <property name="text">
+        <string>Remaining time for queue:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QLabel" name="remainingTimeQueue">
+       <property name="text">
+        <string notr="true">–</string>
        </property>
       </widget>
      </item>
@@ -214,6 +242,16 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="acknowledgeWarningsAndErrorsButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>&amp;Acknowledge warnings/errors</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="saveOutputButton">
        <property name="enabled">
         <bool>false</bool>
@@ -250,25 +288,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>output</tabstop>
+  <tabstop>warnings</tabstop>
+  <tabstop>errors</tabstop>
+  <tabstop>acknowledgeWarningsAndErrorsButton</tabstop>
+  <tabstop>saveOutputButton</tabstop>
+  <tabstop>abortButton</tabstop>
+ </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>saveOutputButton</sender>
-   <signal>clicked()</signal>
-   <receiver>mtx::gui::WatchJobs::Tab</receiver>
-   <slot>onSaveOutput()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>394</x>
-     <y>572</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>241</x>
-     <y>558</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>onSaveOutput()</slot>
   <slot>onAbort()</slot>

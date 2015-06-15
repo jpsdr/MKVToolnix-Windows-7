@@ -37,7 +37,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("RLE4",                    type_e::V_RLE4,         track_video,    "", fourcc_c{0x02000000u});
   ms_codecs.emplace_back("RLE8",                    type_e::V_RLE8,         track_video,    "", fourcc_c{0x01000000u});
   ms_codecs.emplace_back("Uncompressed",            type_e::V_UNCOMPRESSED, track_video,    "", fourcc_c{0x00000000u});
-  ms_codecs.emplace_back("VC1",                     type_e::V_VC1,          track_video,    "wvc1|vc-1");
+  ms_codecs.emplace_back("VC-1",                    type_e::V_VC1,          track_video,    "wvc1|vc-1");
   ms_codecs.emplace_back("VP8",                     type_e::V_VP8,          track_video,    "vp8\\d|V_VP8");
   ms_codecs.emplace_back("VP9",                     type_e::V_VP9,          track_video,    "vp9\\d|V_VP9");
 
@@ -76,6 +76,10 @@ codec_c::initialize() {
   ms_specialization_descriptions.emplace(specialization_e::dts_hd_high_resolution, "DTS-HD High Resolution");
   ms_specialization_descriptions.emplace(specialization_e::dts_express,            "DTS Express");
   ms_specialization_descriptions.emplace(specialization_e::dts_es,                 "DTS-ES");
+
+  ms_specialization_descriptions.emplace(specialization_e::mpeg_1_2_layer_1,       "MP1");
+  ms_specialization_descriptions.emplace(specialization_e::mpeg_1_2_layer_2,       "MP2");
+  ms_specialization_descriptions.emplace(specialization_e::mpeg_1_2_layer_3,       "MP3");
 }
 
 codec_c const

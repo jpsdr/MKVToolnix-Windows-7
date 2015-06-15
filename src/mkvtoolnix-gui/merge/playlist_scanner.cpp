@@ -60,7 +60,7 @@ PlaylistScanner::checkAddingPlaylists(QList<SourceFilePtr> &files) {
 
 bool
 PlaylistScanner::askScanForPlaylists(SourceFile const &file,
-                                 unsigned int numOtherFiles) {
+                                     unsigned int numOtherFiles) {
 
   AskScanForPlaylistsDialog dialog{m_parent};
   return dialog.ask(file, numOtherFiles);

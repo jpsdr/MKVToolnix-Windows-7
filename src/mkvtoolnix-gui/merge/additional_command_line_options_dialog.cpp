@@ -17,7 +17,7 @@ using namespace mtx::gui;
 
 AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *parent,
                                                                        QString const &options)
-  : QDialog{parent}
+  : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , m_ui{new Ui::AdditionalCommandLineOptionsDialog}
   , m_customOptions{options}
 {
@@ -75,6 +75,10 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
       { QY("Garbage at the start of audio tracks in AVI files is normally used for delaying that track."),
         QY("mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it."),
         QY("This option prevents that behavior.") });
+  add(Q("--engage keep_last_chapter_in_mpls"),    false, hacks,
+      { QY("Blu-ray discs often contain a chapter entry very close to the end of the movie."),
+        QY("mkvmerge normally removes that last entry if it's timecode is within five seconds of the total duration."),
+        QY("Enabling this option causes mkvmerge to keep that last entry.") });
   add(Q("--engage cow"),                          false, hacks, { QY("No help available.") });
 
   m_ui->gbGlobalOutputControl->layout()->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));

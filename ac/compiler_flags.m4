@@ -20,8 +20,12 @@ if test x"$ac_cv_compiler_is_clang" = xyes; then
   AC_LANG_POP()
   CXXFLAGS="$ac_save_CXXFLAGS"
 
-elif check_version 4.8.0 $ac_cv_gcc_version ; then
-  WLOGICAL_OP="-Wlogical-op"
+else
+  WNO_MAYBE_UNINITIALIZED="-Wno-maybe-uninitialized"
+
+  if check_version 4.8.0 $ac_cv_gcc_version ; then
+    WLOGICAL_OP="-Wlogical-op"
+  fi
 fi
 
 AC_SUBST(QUNUSED_ARGUMENTS)
@@ -30,3 +34,4 @@ AC_SUBST(WNO_MISMATCHED_TAGS)
 AC_SUBST(WLOGICAL_OP)
 AC_SUBST(WNO_INCONSISTENT_MISSING_OVERRIDE)
 AC_SUBST(WNO_POTENTIALLY_EVALUATED_EXPRESSION)
+AC_SUBST(WNO_MAYBE_UNINITIALIZED)

@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QFileDialog>
+#include <QVector>
 
 #include "common/extern_data.h"
 #include "common/qt.h"
@@ -14,14 +15,19 @@
 namespace mtx { namespace gui {
 
 PreferencesDialog::PreferencesDialog(QWidget *parent)
-  : QDialog{parent}
+  : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::PreferencesDialog}
   , m_cfg(Util::Settings::get())
   , m_previousUiLocale{m_cfg.m_uiLocale}
 {
   ui->setupUi(this);
 
+  Util::setScrollAreaBackgroundTransparent(ui->mergeScrollArea);
+
   // GUI page
+  ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);
+  ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
+  ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
   setupOnlineCheck();
   setupInterfaceLanguage();
   setupJobsJobOutput();
@@ -32,6 +38,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   // Merge page
   ui->cbMAutoSetFileTitle->setChecked(m_cfg.m_autoSetFileTitle);
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
+  ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
   Util::setupLanguageComboBox(*ui->cbMDefaultTrackLanguage, m_cfg.m_defaultTrackLanguage);
   Util::setupCharacterSetComboBox(*ui->cbMDefaultSubtitleCharset, m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
@@ -39,6 +46,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   setupProcessPriority();
   setupPlaylistScanningPolicy();
   setupOutputFileNamePolicy();
+  setupEnableMuxingTracksByLanguage();
 
   // Chapter editor page
   Util::setupLanguageComboBox(*ui->cbCEDefaultLanguage, m_cfg.m_defaultChapterLanguage);
@@ -70,6 +78,19 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("This is done at startup and at most once within 24 hours."))
                    .arg(QY("No information is transmitted to the server.")));
 
+  Util::setToolTip(ui->cbGuiDisableAnimations, QY("If checked several short animations used throughout the program as visual clues for the user will be disabled."));
+  Util::setToolTip(ui->cbGuiWarnBeforeClosingModifiedTabs,
+                   Q("%1 %2")
+                   .arg(QY("If checked the program will ask for confirmation before closing or reloading tabs that have been modified."))
+                   .arg(QY("This is also done when quitting the application.")));
+  Util::setToolTip(ui->cbGuiWarnBeforeAbortingJobs,
+                   Q("%1 %2")
+                   .arg(QY("If checked the program will ask for confirmation before aborting a running job."))
+                   .arg(QY("This happens when clicking the »abort« button in a »job output« tab and when quitting the application.")));
+
+  Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
+  ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
+
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
                    .arg(QY("Normally completed jobs stay in the queue even over restarts until the user clears them out manually."))
@@ -90,8 +111,10 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("When a file is added its name is scanned."))
                    .arg(QY("If it contains the word 'DELAY' followed by a number then this number is automatically put into the 'delay' input field for any audio track found in the file.")));
 
-  Util::setToolTip(ui->cbMWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
-  ui->cbMWarnBeforeOverwriting->setEnabled(true);
+  Util::setToolTip(ui->cbMDisableCompressionForAllTrackTypes,
+                   Q("%1 %2")
+                   .arg(QY("Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."))
+                   .arg(QY("Checking this option causes the GUI to set that compression to »none« by default for all track types when adding files.")));
 
   Util::setToolTip(ui->cbMDefaultTrackLanguage,
                    Q("<p>%1 %2</p><p>%3</p>")
@@ -122,45 +145,49 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If checked the program makes sure the suggested output file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
                    .arg(QY("This is done only if there is already a file whose name matches the unmodified output file name.")));
 
+  Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
+                   Q("<p>%1 %2 %3</p><p>%4</p>")
+                   .arg(QY("When adding source files all tracks are normally set to be muxed into the output file."))
+                   .arg(QY("If this option is enabled then only those tracks will be set to be muxed whose language is selected below."))
+                   .arg(QY("You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."))
+                   .arg(QY("Note that the language »Undetermined (und)« is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files).")));
+  Util::setToolTip(ui->cbMEnableMuxingAllVideoTracks,    QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
+  Util::setToolTip(ui->cbMEnableMuxingAllAudioTracks,    QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
+  Util::setToolTip(ui->cbMEnableMuxingAllSubtitleTracks, QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
+  ui->tbMEnableMuxingTracksByLanguage->setToolTips(QY("Tracks with a language in this list will be set not to be muxed by default."),
+                                                   QY("Only tracks with a language in this list will be set to be muxed by default."));
+
   // Often used XYZ page
-  Util::setToolTip(ui->lwGuiAvailableCommonLanguages,     QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
-  Util::setToolTip(ui->lwGuiSelectedCommonLanguages,      QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
+  ui->tbOftenUsedLanguages->setToolTips(QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."),
+                                        QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
 
-  Util::setToolTip(ui->lwGuiAvailableCommonCountries,     QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
-  Util::setToolTip(ui->lwGuiSelectedCommonCountries,      QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
+  ui->tbOftenUsedCountries->setToolTips(QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."),
+                                        QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
 
-  Util::setToolTip(ui->lwGuiAvailableCommonCharacterSets, QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
-  Util::setToolTip(ui->lwGuiSelectedCommonCharacterSets,  QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
+  ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."),
+                                            QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
 }
 
 void
 PreferencesDialog::setupConnections() {
-  connect(ui->pbMEditDefaultAdditionalCommandLineOptions,          &QPushButton::clicked,                  this,                      &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
+  connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,       this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
-  connect(ui->lwGuiAvailableCommonLanguages->selectionModel(),     &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::availableCommonLanguagesSelectionChanged);
-  connect(ui->lwGuiSelectedCommonLanguages->selectionModel(),      &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::selectedCommonLanguagesSelectionChanged);
-  connect(ui->lwGuiAvailableCommonCountries->selectionModel(),     &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::availableCommonCountriesSelectionChanged);
-  connect(ui->lwGuiSelectedCommonCountries->selectionModel(),      &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::selectedCommonCountriesSelectionChanged);
-  connect(ui->lwGuiAvailableCommonCharacterSets->selectionModel(), &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::availableCommonCharacterSetsSelectionChanged);
-  connect(ui->lwGuiSelectedCommonCharacterSets->selectionModel(),  &QItemSelectionModel::selectionChanged, this,                      &PreferencesDialog::selectedCommonCharacterSetsSelectionChanged);
+  connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,         ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
+  connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,         this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetParentDirectory,                  &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetPreviousDirectory,                &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetFixedDirectory,                   &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->pbMBrowseAutoSetFixedDirectory,             &QPushButton::clicked,       this,                                 &PreferencesDialog::browseFixedOutputDirectory);
 
-  connect(ui->pbGuiAddCommonLanguages,                             &QPushButton::clicked,                  this,                      &PreferencesDialog::addCommonLanguages);
-  connect(ui->pbGuiRemoveCommonLanguages,                          &QPushButton::clicked,                  this,                      &PreferencesDialog::removeCommonLanguages);
-  connect(ui->pbGuiAddCommonCountries,                             &QPushButton::clicked,                  this,                      &PreferencesDialog::addCommonCountries);
-  connect(ui->pbGuiRemoveCommonCountries,                          &QPushButton::clicked,                  this,                      &PreferencesDialog::removeCommonCountries);
-  connect(ui->pbGuiAddCommonLanguages,                             &QPushButton::clicked,                  this,                      &PreferencesDialog::addCommonLanguages);
-  connect(ui->pbGuiRemoveCommonLanguages,                          &QPushButton::clicked,                  this,                      &PreferencesDialog::removeCommonLanguages);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->lMEnableMuxingAllTracksOfType,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->cbMEnableMuxingAllVideoTracks,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->cbMEnableMuxingAllAudioTracks,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
 
-  connect(ui->cbGuiRemoveJobs,                                     &QCheckBox::toggled,                    ui->cbGuiJobRemovalPolicy, &QComboBox::setEnabled);
-  connect(ui->cbMAutoSetOutputFileName,                            &QCheckBox::toggled,                    this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetSameDirectory,                             &QRadioButton::toggled,                 this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetParentDirectory,                           &QRadioButton::toggled,                 this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetPreviousDirectory,                         &QRadioButton::toggled,                 this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetFixedDirectory,                            &QRadioButton::toggled,                 this,                      &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->pbMBrowseAutoSetFixedDirectory,                      &QPushButton::clicked,                  this,                      &PreferencesDialog::browseFixedOutputDirectory);
-
-  connect(ui->buttons,                                             &QDialogButtonBox::accepted,            this,                      &PreferencesDialog::accept);
-  connect(ui->buttons,                                             &QDialogButtonBox::rejected,            this,                      &PreferencesDialog::reject);
+  connect(ui->buttons,                                    &QDialogButtonBox::accepted, this,                                 &PreferencesDialog::accept);
+  connect(ui->buttons,                                    &QDialogButtonBox::rejected, this,                                 &PreferencesDialog::reject);
 }
 
 void
@@ -201,68 +228,21 @@ PreferencesDialog::setupJobsJobOutput() {
 
 void
 PreferencesDialog::setupCommonLanguages() {
-  auto &languages = App::iso639Languages();
-  auto isCommon   = QHash<QString, bool>{};
+  auto &allLanguages = App::iso639Languages();
 
-  for (auto const &language : m_cfg.m_oftenUsedLanguages)
-    isCommon[language] = true;
-
-  for (auto const &language : languages) {
-    auto item = new QListWidgetItem{language.first};
-
-    item->setData(Qt::UserRole, language.second);
-    if (isCommon[language.second])
-      ui->lwGuiSelectedCommonLanguages->addItem(item);
-    else
-      ui->lwGuiAvailableCommonLanguages->addItem(item);
-  }
-
-  ui->pbGuiAddCommonLanguages->setEnabled(false);
-  ui->pbGuiRemoveCommonLanguages->setEnabled(false);
+  ui->tbOftenUsedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allLanguages)), m_cfg.m_oftenUsedLanguages);
 }
 
 void
 PreferencesDialog::setupCommonCountries() {
-  auto &countries = App::iso3166_1Alpha2Countries();
-  auto isCommon   = QHash<QString, bool>{};
+  auto &allCountries = App::iso3166_1Alpha2Countries();
 
-  for (auto const &country : m_cfg.m_oftenUsedCountries)
-    isCommon[country] = true;
-
-  for (auto const &country : countries) {
-    auto item = new QListWidgetItem{country.first};
-
-    item->setData(Qt::UserRole, country.second);
-    if (isCommon[country.second])
-      ui->lwGuiSelectedCommonCountries->addItem(item);
-    else
-      ui->lwGuiAvailableCommonCountries->addItem(item);
-  }
-
-  ui->pbGuiAddCommonCountries->setEnabled(false);
-  ui->pbGuiRemoveCommonCountries->setEnabled(false);
+  ui->tbOftenUsedCountries->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allCountries)), m_cfg.m_oftenUsedCountries);
 }
 
 void
 PreferencesDialog::setupCommonCharacterSets() {
-  auto &characterSets = App::characterSets();
-  auto isCommon       = QHash<QString, bool>{};
-
-  for (auto const &characterSet : m_cfg.m_oftenUsedCharacterSets)
-    isCommon[characterSet] = true;
-
-  for (auto const &characterSet : characterSets) {
-    auto item = new QListWidgetItem{characterSet};
-
-    item->setData(Qt::UserRole, characterSet);
-    if (isCommon[characterSet])
-      ui->lwGuiSelectedCommonCharacterSets->addItem(item);
-    else
-      ui->lwGuiAvailableCommonCharacterSets->addItem(item);
-  }
-
-  ui->pbGuiAddCommonCharacterSets->setEnabled(false);
-  ui->pbGuiRemoveCommonCharacterSets->setEnabled(false);
+  ui->tbOftenUsedCharacterSets->setItems(QList<QString>::fromVector(QVector<QString>::fromStdVector(App::characterSets())), m_cfg.m_oftenUsedCharacterSets);
 }
 
 void
@@ -307,20 +287,38 @@ PreferencesDialog::setupOutputFileNamePolicy() {
 }
 
 void
+PreferencesDialog::setupEnableMuxingTracksByLanguage() {
+  auto widgets = QList<QWidget *>{} << ui->lMEnableMuxingAllTracksOfType << ui->cbMEnableMuxingAllVideoTracks << ui->cbMEnableMuxingAllAudioTracks << ui->cbMEnableMuxingAllSubtitleTracks << ui->tbMEnableMuxingTracksByLanguage;
+  for (auto const &widget : widgets)
+    widget->setEnabled(m_cfg.m_enableMuxingTracksByLanguage);
+
+  ui->cbMEnableMuxingTracksByLanguage->setChecked(m_cfg.m_enableMuxingTracksByLanguage);
+  ui->cbMEnableMuxingAllVideoTracks->setChecked(m_cfg.m_enableMuxingAllVideoTracks);
+  ui->cbMEnableMuxingAllAudioTracks->setChecked(m_cfg.m_enableMuxingAllAudioTracks);
+  ui->cbMEnableMuxingAllSubtitleTracks->setChecked(m_cfg.m_enableMuxingAllSubtitleTracks);
+
+  auto &allLanguages = App::iso639Languages();
+  ui->tbMEnableMuxingTracksByLanguage->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allLanguages)), m_cfg.m_enableMuxingTracksByTheseLanguages);
+}
+
+void
 PreferencesDialog::save() {
   // GUI page:
-  m_cfg.m_uiLocale                  = ui->cbGuiInterfaceLanguage->currentData().toString();
-  m_cfg.m_checkForUpdates           = ui->cbGuiCheckForUpdates->isChecked();
-  auto idx                          = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
-  m_cfg.m_jobRemovalPolicy          = static_cast<Util::Settings::JobRemovalPolicy>(idx);
+  m_cfg.m_uiLocale                      = ui->cbGuiInterfaceLanguage->currentData().toString();
+  m_cfg.m_checkForUpdates               = ui->cbGuiCheckForUpdates->isChecked();
+  m_cfg.m_disableAnimations             = ui->cbGuiDisableAnimations->isChecked();
+  m_cfg.m_warnBeforeClosingModifiedTabs = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
+  m_cfg.m_warnBeforeAbortingJobs        = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
+  auto idx                              = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
+  m_cfg.m_jobRemovalPolicy              = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 
-  saveCommonList(*ui->lwGuiSelectedCommonLanguages,     m_cfg.m_oftenUsedLanguages);
-  saveCommonList(*ui->lwGuiSelectedCommonCountries,     m_cfg.m_oftenUsedCountries);
-  saveCommonList(*ui->lwGuiSelectedCommonCharacterSets, m_cfg.m_oftenUsedCharacterSets);
+  m_cfg.m_defaultChapterLanguage        = ui->cbCEDefaultLanguage->currentData().toString();
+  m_cfg.m_defaultChapterCountry         = ui->cbCEDefaultCountry->currentData().toString();
 
   // Merge page:
   m_cfg.m_autoSetFileTitle              = ui->cbMAutoSetFileTitle->isChecked();
   m_cfg.m_setAudioDelayFromFileName     = ui->cbMSetAudioDelayFromFileName->isChecked();
+  m_cfg.m_disableCompressionForAllTrackTypes = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
   m_cfg.m_defaultTrackLanguage          = ui->cbMDefaultTrackLanguage->currentData().toString();
   m_cfg.m_defaultSubtitleCharset        = ui->cbMDefaultSubtitleCharset->currentData().toString();
   m_cfg.m_priority                      = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
@@ -337,30 +335,18 @@ PreferencesDialog::save() {
   m_cfg.m_fixedOutputDir                = ui->leMAutoSetFixedDirectory->text();
   m_cfg.m_uniqueOutputFileNames         = ui->cbMUniqueOutputFileNames->isChecked();
 
-  // Chapter editor page:
-  m_cfg.m_defaultChapterLanguage        = ui->cbCEDefaultLanguage->currentData().toString();
-  m_cfg.m_defaultChapterCountry         = ui->cbCEDefaultCountry->currentData().toString();
+  m_cfg.m_enableMuxingTracksByLanguage       = ui->cbMEnableMuxingTracksByLanguage->isChecked();
+  m_cfg.m_enableMuxingAllVideoTracks         = ui->cbMEnableMuxingAllVideoTracks->isChecked();
+  m_cfg.m_enableMuxingAllAudioTracks         = ui->cbMEnableMuxingAllAudioTracks->isChecked();
+  m_cfg.m_enableMuxingAllSubtitleTracks      = ui->cbMEnableMuxingAllSubtitleTracks->isChecked();
+  m_cfg.m_enableMuxingTracksByTheseLanguages = ui->tbMEnableMuxingTracksByLanguage->selectedItemValues();
+
+  // Often used selections page:
+  m_cfg.m_oftenUsedLanguages            = ui->tbOftenUsedLanguages->selectedItemValues();
+  m_cfg.m_oftenUsedCountries            = ui->tbOftenUsedCountries->selectedItemValues();
+  m_cfg.m_oftenUsedCharacterSets        = ui->tbOftenUsedCharacterSets->selectedItemValues();
 
   m_cfg.save();
-}
-
-void
-PreferencesDialog::saveCommonList(QListWidget &from,
-                                  QStringList &to) {
-  to.clear();
-
-  for (auto row = 0, numRows = from.count(); row < numRows; ++row)
-    to << from.item(row)->data(Qt::UserRole).toString();
-}
-
-void
-PreferencesDialog::moveSelectedListWidgetItems(QListWidget &from,
-                                               QListWidget &to) {
-  for (auto const &item : from.selectedItems()) {
-    auto actualItem = from.takeItem(from.row(item));
-    if (actualItem)
-      to.addItem(actualItem);
-  }
 }
 
 void
@@ -377,72 +363,6 @@ PreferencesDialog::browseFixedOutputDirectory() {
   auto dir = QFileDialog::getExistingDirectory(this, QY("Select output directory"), ui->leMAutoSetFixedDirectory->text());
   if (!dir.isEmpty())
     ui->leMAutoSetFixedDirectory->setText(dir);
-}
-
-void
-PreferencesDialog::availableCommonLanguagesSelectionChanged() {
-  auto hasSelected = !ui->lwGuiAvailableCommonLanguages->selectedItems().isEmpty();
-  ui->pbGuiAddCommonLanguages->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::selectedCommonLanguagesSelectionChanged() {
-  auto hasSelected = !ui->lwGuiSelectedCommonLanguages->selectedItems().isEmpty();
-  ui->pbGuiRemoveCommonLanguages->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::availableCommonCountriesSelectionChanged() {
-  auto hasSelected = !ui->lwGuiAvailableCommonCountries->selectedItems().isEmpty();
-  ui->pbGuiAddCommonCountries->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::selectedCommonCountriesSelectionChanged() {
-  auto hasSelected = !ui->lwGuiSelectedCommonCountries->selectedItems().isEmpty();
-  ui->pbGuiRemoveCommonCountries->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::availableCommonCharacterSetsSelectionChanged() {
-  auto hasSelected = !ui->lwGuiAvailableCommonCharacterSets->selectedItems().isEmpty();
-  ui->pbGuiAddCommonCharacterSets->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::selectedCommonCharacterSetsSelectionChanged() {
-  auto hasSelected = !ui->lwGuiSelectedCommonCharacterSets->selectedItems().isEmpty();
-  ui->pbGuiRemoveCommonCharacterSets->setEnabled(hasSelected);
-}
-
-void
-PreferencesDialog::addCommonLanguages() {
-  moveSelectedListWidgetItems(*ui->lwGuiAvailableCommonLanguages, *ui->lwGuiSelectedCommonLanguages);
-}
-
-void
-PreferencesDialog::removeCommonLanguages() {
-  moveSelectedListWidgetItems(*ui->lwGuiSelectedCommonLanguages, *ui->lwGuiAvailableCommonLanguages);
-}
-
-void
-PreferencesDialog::addCommonCountries() {
-  moveSelectedListWidgetItems(*ui->lwGuiAvailableCommonCountries, *ui->lwGuiSelectedCommonCountries);
-}
-
-void
-PreferencesDialog::removeCommonCountries() {
-  moveSelectedListWidgetItems(*ui->lwGuiSelectedCommonCountries, *ui->lwGuiAvailableCommonCountries);
-}
-
-void
-PreferencesDialog::addCommonCharacterSets() {
-  moveSelectedListWidgetItems(*ui->lwGuiAvailableCommonCharacterSets, *ui->lwGuiSelectedCommonCharacterSets);
-}
-
-void
-PreferencesDialog::removeCommonCharacterSets() {
-  moveSelectedListWidgetItems(*ui->lwGuiSelectedCommonCharacterSets, *ui->lwGuiAvailableCommonCharacterSets);
 }
 
 void

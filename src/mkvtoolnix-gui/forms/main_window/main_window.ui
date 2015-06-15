@@ -107,10 +107,44 @@
     <addaction name="separator"/>
     <addaction name="actionChapterEditorClose"/>
    </widget>
+   <widget class="QMenu" name="menuJobOutput">
+    <property name="title">
+     <string>&amp;Job output</string>
+    </property>
+    <addaction name="actionJobOutputSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionJobOutputClose"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Hel&amp;p</string>
+    </property>
+    <addaction name="actionHelpMkvmergeDocumentation"/>
+    <addaction name="actionHelpFAQ"/>
+    <addaction name="actionHelpKnownProblems"/>
+    <addaction name="separator"/>
+    <addaction name="actionHelpWebSite"/>
+   </widget>
+   <widget class="QMenu" name="menuJobQueue">
+    <property name="title">
+     <string>&amp;Job queue</string>
+    </property>
+    <addaction name="actionJobQueueStartAllPending"/>
+    <addaction name="separator"/>
+    <addaction name="actionJobQueueRemoveDoneOk"/>
+    <addaction name="actionJobQueueRemoveDone"/>
+    <addaction name="actionJobQueueRemoveAll"/>
+    <addaction name="separator"/>
+    <addaction name="actionJobQueueAcknowledgeAllWarnings"/>
+    <addaction name="actionJobQueueAcknowledgeAllErrors"/>
+   </widget>
    <addaction name="menuGUI"/>
    <addaction name="menuMerge"/>
    <addaction name="menuHeaderEditor"/>
    <addaction name="menuChapterEditor"/>
+   <addaction name="menuJobQueue"/>
+   <addaction name="menuJobOutput"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionMergeNew">
@@ -458,6 +492,80 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionJobOutputSave">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionJobOutputClose">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionHelpWebSite">
+   <property name="text">
+    <string>MKVToolNix &amp;web site</string>
+   </property>
+  </action>
+  <action name="actionHelpFAQ">
+   <property name="text">
+    <string>&amp;FAQ</string>
+   </property>
+  </action>
+  <action name="actionHelpKnownProblems">
+   <property name="text">
+    <string>Known &amp;problems in recent releases</string>
+   </property>
+  </action>
+  <action name="actionHelpMkvmergeDocumentation">
+   <property name="text">
+    <string>mkv&amp;merge documentation</string>
+   </property>
+  </action>
+  <action name="actionJobQueueRemoveDoneOk">
+   <property name="text">
+    <string>Remove &amp;successfully completed jobs</string>
+   </property>
+  </action>
+  <action name="actionJobQueueRemoveAll">
+   <property name="text">
+    <string>Remove a&amp;ll jobs</string>
+   </property>
+  </action>
+  <action name="actionJobQueueAcknowledgeAllWarnings">
+   <property name="text">
+    <string>Acknowledge all &amp;warnings</string>
+   </property>
+  </action>
+  <action name="actionJobQueueAcknowledgeAllErrors">
+   <property name="text">
+    <string>Acknowledge all &amp;errors</string>
+   </property>
+  </action>
+  <action name="actionJobQueueRemoveDone">
+   <property name="text">
+    <string>Remove &amp;completed jobs</string>
+   </property>
+  </action>
+  <action name="actionJobQueueStartAllPending">
+   <property name="text">
+    <string>&amp;Start all pending jobs</string>
    </property>
   </action>
  </widget>

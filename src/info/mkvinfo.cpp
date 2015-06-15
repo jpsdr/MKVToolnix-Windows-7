@@ -1561,6 +1561,67 @@ handle_ebml_head(EbmlElement *l0,
 }
 
 void
+handle_segment(EbmlElement *l0,
+               mm_io_cptr &in,
+               EbmlStream *es) {
+  auto file_size         = in->get_size();
+  auto l1                = static_cast<EbmlElement *>(nullptr);
+  auto upper_lvl_el      = 0;
+  kax_file_cptr kax_file = kax_file_cptr(new kax_file_c(in));
+
+  kax_file->set_segment_end(*l0);
+
+  if (!l0->IsFiniteSize())
+    show_element(l0, 0, Y("Segment, size unknown"));
+  else
+    show_element(l0, 0, boost::format(Y("Segment, size %1%")) % l0->GetSize());
+
+  // Prevent reporting "first timecode after resync":
+  kax_file->set_timecode_scale(-1);
+
+  while ((l1 = kax_file->read_next_level1_element())) {
+    std::shared_ptr<EbmlElement> af_l1(l1);
+
+    if (Is<KaxInfo>(l1))
+      handle_info(es, upper_lvl_el, l1);
+
+    else if (Is<KaxTracks>(l1))
+      handle_tracks(es, upper_lvl_el, l1);
+
+    else if (Is<KaxSeekHead>(l1))
+      handle_seek_head(es, upper_lvl_el, l1);
+
+    else if (Is<KaxCluster>(l1)) {
+      show_element(l1, 1, Y("Cluster"));
+      if ((g_options.m_verbose == 0) && !g_options.m_show_summary)
+        return;
+      handle_cluster(es, upper_lvl_el, l1, file_size);
+
+    } else if (Is<KaxCues>(l1))
+      handle_cues(es, upper_lvl_el, l1);
+
+    // Weee! Attachments!
+    else if (Is<KaxAttachments>(l1))
+      handle_attachments(es, upper_lvl_el, l1);
+
+    else if (Is<KaxChapters>(l1))
+      handle_chapters(es, upper_lvl_el, l1);
+
+    // Let's handle some TAGS.
+    else if (Is<KaxTags>(l1))
+      handle_tags(es, upper_lvl_el, l1);
+
+    else if (!is_global(es, l1, 1))
+      show_unknown_element(l1, 1);
+
+    if (!in->setFilePointer2(l1->GetElementPosition() + kax_file->get_element_size(l1)))
+      break;
+    if (!in_parent(l0))
+      break;
+  } // while (l1)
+}
+
+void
 display_track_info() {
   if (!g_options.m_show_track_info)
     return;
@@ -1587,9 +1648,7 @@ display_track_info() {
 
 bool
 process_file(const std::string &file_name) {
-  int upper_lvl_el;
   // Elements for different levels
-  EbmlElement *l0 = nullptr, *l1 = nullptr;
 
   s_tc_scale = TIMECODE_SCALE;
   s_tracks.clear();
@@ -1605,100 +1664,40 @@ process_file(const std::string &file_name) {
     return false;
   }
 
-  in->setFilePointer(0, seek_end);
-  uint64_t file_size = in->getFilePointer();
-  in->setFilePointer(0, seek_beginning);
-
   try {
-    EbmlStream *es = new EbmlStream(*in);
+    auto es_ptr = std::make_shared<EbmlStream>(*in);
+    auto es     = es_ptr.get();
 
     // Find the EbmlHead element. Must be the first one.
-    l0 = es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL);
-    if (!l0 || !Is<EbmlHead>(l0)) {
+    auto l0 = ebml_element_cptr{ es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL) };
+    if (!l0 || !Is<EbmlHead>(*l0)) {
       show_error(Y("No EBML head found."));
-      delete es;
-
       return false;
     }
 
-    handle_ebml_head(l0, in, es);
+    handle_ebml_head(l0.get(), in, es);
     l0->SkipData(*es, EBML_CONTEXT(l0));
-    delete l0;
 
     while (1) {
       // NEXT element must be a segment
-      l0 = es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL);
-      if (!l0) {
-        show_error(Y("No segment/level 0 element found."));
-        return false;
-      }
-
-      if (Is<KaxSegment>(l0)) {
-        if (!l0->IsFiniteSize())
-          show_element(l0, 0, Y("Segment, size unknown"));
-        else
-          show_element(l0, 0, boost::format(Y("Segment, size %1%")) % l0->GetSize());
+      l0 = ebml_element_cptr{ es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL) };
+      if (!l0)
         break;
+
+      if (!Is<KaxSegment>(*l0)) {
+        show_element(l0.get(), 0, Y("Unknown element"));
+        l0->SkipData(*es, EBML_CONTEXT(l0));
+
+        continue;
       }
 
-      show_element(l0, 0, boost::format(Y("Next level 0 element is not a segment but %1%")) % typeid(*l0).name());
+      handle_segment(l0.get(), in, es);
 
       l0->SkipData(*es, EBML_CONTEXT(l0));
-      delete l0;
+
+      if ((g_options.m_verbose == 0) && !g_options.m_show_summary)
+        break;
     }
-
-    kax_file_cptr kax_file = kax_file_cptr(new kax_file_c(in));
-
-    // Prevent reporting "first timecode after resync":
-    kax_file->set_timecode_scale(-1);
-
-    while ((l1 = kax_file->read_next_level1_element())) {
-      std::shared_ptr<EbmlElement> af_l1(l1);
-
-      if (Is<KaxInfo>(l1))
-        handle_info(es, upper_lvl_el, l1);
-
-      else if (Is<KaxTracks>(l1))
-        handle_tracks(es, upper_lvl_el, l1);
-
-      else if (Is<KaxSeekHead>(l1))
-        handle_seek_head(es, upper_lvl_el, l1);
-
-      else if (Is<KaxCluster>(l1)) {
-        show_element(l1, 1, Y("Cluster"));
-        if ((g_options.m_verbose == 0) && !g_options.m_show_summary) {
-          delete l0;
-          delete es;
-
-          return true;
-        }
-        handle_cluster(es, upper_lvl_el, l1, file_size);
-
-      } else if (Is<KaxCues>(l1))
-        handle_cues(es, upper_lvl_el, l1);
-
-        // Weee! Attachments!
-      else if (Is<KaxAttachments>(l1))
-        handle_attachments(es, upper_lvl_el, l1);
-
-      else if (Is<KaxChapters>(l1))
-        handle_chapters(es, upper_lvl_el, l1);
-
-        // Let's handle some TAGS.
-      else if (Is<KaxTags>(l1))
-        handle_tags(es, upper_lvl_el, l1);
-
-      else if (!is_global(es, l1, 1))
-        show_unknown_element(l1, 1);
-
-      if (!in->setFilePointer2(l1->GetElementPosition() + kax_file->get_element_size(l1)))
-        break;
-      if (!in_parent(l0))
-        break;
-    } // while (l1)
-
-    delete l0;
-    delete es;
 
     if (!g_options.m_use_gui && g_options.m_show_track_info)
       display_track_info();

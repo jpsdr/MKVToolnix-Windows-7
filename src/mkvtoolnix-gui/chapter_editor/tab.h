@@ -50,6 +50,8 @@ protected:
 
   bool m_ignoreChapterSelectionChanges{};
 
+  QString m_savedState;
+
 public:
   explicit Tab(QWidget *parent, QString const &fileName = QString{});
   ~Tab();
@@ -58,6 +60,7 @@ public:
   virtual QString const &fileName() const;
   virtual QString title() const;
   virtual bool hasChapters() const;
+  virtual bool hasBeenModified() const;
 
 signals:
   void removeThisTab();
@@ -140,6 +143,8 @@ protected:
   void setCountries(QStandardItem *item, QString const &country);
 
 protected:
+  QString currentState() const;
+
   static QString formatEbmlBinary(EbmlBinary *binary);
 };
 

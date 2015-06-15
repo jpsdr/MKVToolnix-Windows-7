@@ -28,7 +28,7 @@ class kax_file_c {
 protected:
   mm_io_cptr m_in;
   bool m_resynced;
-  uint64_t m_resync_start_pos, m_file_size;
+  uint64_t m_resync_start_pos, m_file_size, m_segment_end;
   int64_t m_timecode_scale, m_last_timecode;
   std::shared_ptr<EbmlStream> m_es;
 
@@ -53,6 +53,8 @@ public:
 
   virtual void set_timecode_scale(int64_t timecode_scale);
   virtual void set_last_timecode(int64_t last_timecode);
+  virtual void set_segment_end(EbmlElement const &segment);
+  virtual uint64_t get_segment_end() const;
 
 protected:
   virtual EbmlElement *read_one_element();

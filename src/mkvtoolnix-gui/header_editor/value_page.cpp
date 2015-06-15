@@ -12,6 +12,7 @@
 #include "mkvtoolnix-gui/forms/header_editor/value_page.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/value_page.h"
+#include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -185,7 +186,8 @@ ValuePage::retranslateUi() {
 
   }
 
-  m_bReset->setText(QY("&Reset"));
+  m_bReset->setText(QY("&Reset this value"));
+  Util::setToolTip(m_bReset, QY("Resets the header value on this page to how it's saved in the file."));
 }
 
 void
@@ -197,8 +199,14 @@ ValuePage::onResetClicked() {
 
 void
 ValuePage::onAddOrRemoveChecked() {
-  m_input->setEnabled(   (!m_present &&  m_cbAddOrRemove->isChecked())
-                      || ( m_present && !m_cbAddOrRemove->isChecked()));
+  m_input->setEnabled(willBePresent());
+}
+
+bool
+ValuePage::willBePresent()
+  const {
+  return (!m_present &&  m_cbAddOrRemove->isChecked())
+      || ( m_present && !m_cbAddOrRemove->isChecked());
 }
 
 bool

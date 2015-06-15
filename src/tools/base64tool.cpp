@@ -106,15 +106,13 @@ main(int argc,
       s += line;
     }
 
-    buffer = (unsigned char *)safemalloc(s.length() / 4 * 3 + 100);
+    auto decoded = std::string{};
     try {
-      size = base64_decode(s, buffer);
+      decoded = base64_decode(s);
     } catch(...) {
       mxerror(Y("The Base64 encoded data could not be decoded.\n"));
     }
-    out->write(buffer, size);
-
-    safefree(buffer);
+    out->write(decoded);
   }
 
   mxinfo(Y("Done.\n"));

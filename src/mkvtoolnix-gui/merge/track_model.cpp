@@ -42,6 +42,13 @@ TrackModel::retranslateUi() {
   auto labels = QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID");
   setHorizontalHeaderLabels(labels);
   horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+  for (auto const &track : *m_tracks) {
+    trackUpdated(track);
+
+    for (auto const &appendedTrack : track->m_appendedTracks)
+      trackUpdated(appendedTrack);
+  }
 }
 
 void
@@ -291,7 +298,8 @@ TrackModel::updateSelectionStatus() {
 
   Util::withSelectedIndexes(selectionModel, [this,&appendedParent](QModelIndex const &selectedIndex) {
     auto track = fromIndex(selectedIndex);
-    Q_ASSERT(!!track);
+    if (!track)
+      return;
 
     if (!track->isRegular())
       m_nonRegularSelected = true;

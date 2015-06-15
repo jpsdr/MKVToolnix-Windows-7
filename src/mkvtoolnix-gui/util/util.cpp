@@ -5,10 +5,13 @@
 #include <QIcon>
 #include <QList>
 #include <QPushButton>
+#include <QScrollArea>
+#include <QSettings>
 #include <QString>
 #include <QTableView>
 #include <QTreeView>
 
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/app.h"
@@ -51,15 +54,33 @@ setupLanguageComboBox(QComboBox &comboBox,
                       QStringList const &initiallySelected,
                       bool withEmpty,
                       QString const &emptyTitle) {
-  if (withEmpty)
+  auto separatorOffset = 0;
+
+  if (withEmpty) {
     comboBox.addItem(emptyTitle, Q(""));
+    ++separatorOffset;
+  }
+
+  for (auto const &language : App::iso639Languages()) {
+    if (language.second != Q("und"))
+      continue;
+
+    comboBox.addItem(language.first, language.second);
+    comboBox.insertSeparator(1 + separatorOffset);
+    separatorOffset += 2;
+    break;
+  }
+
+  auto &commonLanguages = App::commonIso639Languages();
+  if (!commonLanguages.empty()) {
+    for (auto const &language : commonLanguages)
+      comboBox.addItem(language.first, language.second);
+
+    comboBox.insertSeparator(commonLanguages.size() + separatorOffset);
+  }
 
   for (auto const &language : App::iso639Languages())
     comboBox.addItem(language.first, language.second);
-
-  auto &cfg = Settings::get();
-  if (!cfg.m_oftenUsedLanguages.isEmpty())
-    comboBox.insertSeparator(cfg.m_oftenUsedLanguages.count() + (withEmpty ? 1 : 0));
 
   comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
@@ -84,12 +105,16 @@ setupCountryComboBox(QComboBox &comboBox,
   if (withEmpty)
     comboBox.addItem(emptyTitle, Q(""));
 
+  auto &commonCountries = App::commonIso3166_1Alpha2Countries();
+  if (!commonCountries.empty()) {
+    for (auto const &country : commonCountries)
+      comboBox.addItem(country.first, country.second);
+
+    comboBox.insertSeparator(commonCountries.size() + (withEmpty ? 1 : 0));
+  }
+
   for (auto const &country : App::iso3166_1Alpha2Countries())
     comboBox.addItem(country.first, country.second);
-
-  auto &cfg = Settings::get();
-  if (!cfg.m_oftenUsedCountries.isEmpty())
-    comboBox.insertSeparator(cfg.m_oftenUsedCountries.count() + (withEmpty ? 1 : 0));
 
   comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
@@ -362,6 +387,44 @@ setToolTip(QWidget *widget,
   // http://doc.qt.io/qt-5/qstandarditem.html
 
   widget->setToolTip(toolTip.startsWith('<') ? toolTip : Q("<span>%1</span>").arg(toolTip.toHtmlEscaped()));
+}
+
+void
+saveWidgetGeometry(QWidget *widget) {
+  auto reg = Util::Settings::registry();
+
+  reg->beginGroup("windowGeometry");
+  reg->setValue(widget->objectName(), widget->saveGeometry());
+  reg->endGroup();
+}
+
+void
+restoreWidgetGeometry(QWidget *widget) {
+  auto reg = Util::Settings::registry();
+
+  reg->beginGroup("windowGeometry");
+  widget->restoreGeometry(reg->value(widget->objectName()).toByteArray());
+  reg->endGroup();
+}
+
+QWidget *
+tabWidgetCloseTabButton(QTabWidget &tabWidget,
+                        int tabIdx) {
+  auto tabBar = tabWidget.tabBar();
+  auto result = mtx::first_of<QWidget *>([](QWidget *button) { return !!button; }, tabBar->tabButton(tabIdx, QTabBar::LeftSide), tabBar->tabButton(tabIdx, QTabBar::RightSide));
+  return result ? result.get() : nullptr;
+}
+
+void
+setScrollAreaBackgroundTransparent(QScrollArea *scrollArea) {
+  QPalette pal;
+  pal.setColor(QPalette::Window,QColor(0,0,0,0));
+
+  scrollArea->setPalette(pal);
+  scrollArea->setBackgroundRole(QPalette::Window);
+
+  scrollArea->widget()->setPalette(pal);
+  scrollArea->widget()->setBackgroundRole(QPalette::Window);
 }
 
 }}}

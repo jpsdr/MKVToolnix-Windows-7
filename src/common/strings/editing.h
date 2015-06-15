@@ -42,9 +42,4 @@ std::string get_displayable_string(std::string const &src);
 
 extern const std::string empty_string;
 
-int get_arg_len(const char *fmt, ...);
-int get_varg_len(const char *fmt, va_list ap);
-
-size_t utf8_strlen(const std::string &s);
-
 #endif  // MTX_COMMON_STRINGS_EDITING_H

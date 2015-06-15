@@ -16,6 +16,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/codec.h"
+
 struct mp3_header_t {
   int version;
   int layer;
@@ -29,6 +31,8 @@ struct mp3_header_t {
   size_t framesize;
   int samples_per_channel;
   bool is_tag;
+
+  codec_c get_codec() const;
 };
 
 int find_mp3_header(const unsigned char *buf, int size);

@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QTimer>
 
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
@@ -19,8 +20,11 @@ namespace mtx { namespace gui { namespace Jobs {
 Model::Model(QObject *parent)
   : QStandardItemModel{parent}
   , m_mutex{QMutex::Recursive}
+  , m_warningsIcon{Q(":/icons/16x16/dialog-warning.png")}
+  , m_errorsIcon{Q(":/icons/16x16/dialog-error.png")}
   , m_started{}
   , m_dontStartJobsNow{}
+  , m_running{}
 {
   retranslateUi();
 }
@@ -32,8 +36,10 @@ void
 Model::retranslateUi() {
   QMutexLocker locked{&m_mutex};
 
-  auto labels = QStringList{} << QY("Description") << QY("Type") << QY("Status") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
+  auto labels = QStringList{} << QY("Status") << Q("") << QY("Description") << QY("Type") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
   setHorizontalHeaderLabels(labels);
+
+  horizontalHeaderItem(StatusIconColumn)->setIcon(QIcon{Q(":/icons/16x16/dialog-warning-grayscale.png")});
 
   horizontalHeaderItem(DescriptionColumn) ->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
   horizontalHeaderItem(ProgressColumn)    ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -48,8 +54,9 @@ Model::retranslateUi() {
 }
 
 QList<Job *>
-Model::selectedJobs(QAbstractItemView *view)
-  const {
+Model::selectedJobs(QAbstractItemView *view) {
+  QMutexLocker locked{&m_mutex};
+
   QList<Job *> jobs;
   Util::withSelectedIndexes(view, [&](QModelIndex const &idx) {
     jobs << m_jobsById[ data(idx, Util::JobIdRole).value<uint64_t>() ].get();
@@ -86,30 +93,52 @@ Model::hasJobs()
   return !!rowCount();
 }
 
+bool
+Model::hasRunningJobs() {
+  QMutexLocker locked{&m_mutex};
+
+  for (auto const &job : m_jobsById)
+    if (Job::Running == job->m_status)
+      return true;
+
+  return false;
+}
+
+bool
+Model::isRunning()
+  const {
+  return m_running;
+}
+
 void
 Model::setRowText(QList<QStandardItem *> const &items,
                   Job const &job)
   const {
-  items.at(0)->setText(job.m_description);
-  items.at(1)->setText(job.displayableType());
-  items.at(2)->setText(Job::displayableStatus(job.m_status));
-  items.at(3)->setText(to_qs(boost::format("%1%%%") % job.m_progress));
-  items.at(4)->setText(Util::displayableDate(job.m_dateAdded));
-  items.at(5)->setText(Util::displayableDate(job.m_dateStarted));
-  items.at(6)->setText(Util::displayableDate(job.m_dateFinished));
+  items.at(StatusColumn)      ->setText(Job::displayableStatus(job.m_status));
+  items.at(DescriptionColumn) ->setText(job.m_description);
+  items.at(TypeColumn)        ->setText(job.displayableType());
+  items.at(ProgressColumn)    ->setText(to_qs(boost::format("%1%%%") % job.m_progress));
+  items.at(DateAddedColumn)   ->setText(Util::displayableDate(job.m_dateAdded));
+  items.at(DateStartedColumn) ->setText(Util::displayableDate(job.m_dateStarted));
+  items.at(DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
 
   items[DescriptionColumn ]->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
   items[ProgressColumn    ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
   items[DateAddedColumn   ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
   items[DateStartedColumn ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
   items[DateFinishedColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+  auto numWarnings = job.numUnacknowledgedWarnings();
+  auto numErrors   = job.numUnacknowledgedErrors();
+
+  items[StatusIconColumn]->setIcon(numErrors ? m_errorsIcon : numWarnings ? m_warningsIcon : QIcon{});
 }
 
 QList<QStandardItem *>
 Model::itemsForRow(QModelIndex const &idx) {
   auto rowItems = QList<QStandardItem *>{};
 
-  for (auto column = 0; 7 > column; ++column)
+  for (auto column = 0; 8 > column; ++column)
     rowItems << itemFromIndex(idx.sibling(idx.row(), column));
 
   return rowItems;
@@ -119,13 +148,40 @@ QList<QStandardItem *>
 Model::createRow(Job const &job)
   const {
   auto items = QList<QStandardItem *>{};
-  for (auto idx = 0; idx < 7; ++idx)
+  for (auto idx = 0; idx < 8; ++idx)
     items << new QStandardItem{};
   setRowText(items, job);
 
-  items[DescriptionColumn ]->setData(QVariant::fromValue(job.m_id), Util::JobIdRole);
+  items[0]->setData(QVariant::fromValue(job.m_id), Util::JobIdRole);
 
   return items;
+}
+
+void
+Model::withSelectedJobs(QAbstractItemView *view,
+                        std::function<void(Job &)> const &worker) {
+  QMutexLocker locked{&m_mutex};
+
+  auto jobs = selectedJobs(view);
+  for (auto const &job : jobs)
+    worker(*job);
+}
+
+void
+Model::withAllJobs(std::function<void(Job &)> const &worker) {
+  QMutexLocker locked{&m_mutex};
+
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
+    worker(*m_jobsById[idFromRow(row)]);
+}
+
+void
+Model::withJob(uint64_t id,
+               std::function<void(Job &)> const &worker) {
+  QMutexLocker locked{&m_mutex};
+
+  if (m_jobsById.contains(id))
+    worker(*m_jobsById[id]);
 }
 
 void
@@ -149,6 +205,10 @@ Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
     m_toBeProcessed.remove(job);
 
   updateProgress();
+  updateJobStats();
+  updateNumUnacknowledgedWarningsOrErrors();
+
+  saveJobs();
 }
 
 void
@@ -157,6 +217,9 @@ Model::add(JobPtr const &job) {
 
   m_jobsById[job->m_id] = job;
 
+  updateJobStats();
+  updateNumUnacknowledgedWarningsOrErrors();
+
   if (job->isToBeProcessed()) {
     m_toBeProcessed.insert(job.get());
     updateProgress();
@@ -164,8 +227,14 @@ Model::add(JobPtr const &job) {
 
   invisibleRootItem()->appendRow(createRow(*job));
 
-  connect(job.get(), &Job::progressChanged, this, &Model::onProgressChanged);
-  connect(job.get(), &Job::statusChanged,   this, &Model::onStatusChanged);
+  connect(job.get(), &Job::progressChanged,                          this, &Model::onProgressChanged);
+  connect(job.get(), &Job::statusChanged,                            this, &Model::onStatusChanged);
+  connect(job.get(), &Job::numUnacknowledgedWarningsOrErrorsChanged, this, &Model::onNumUnacknowledgedWarningsOrErrorsChanged);
+
+  if (m_dontStartJobsNow)
+    return;
+
+  saveJobs();
 
   startNextAutoJob();
 }
@@ -190,10 +259,17 @@ Model::onStatusChanged(uint64_t id) {
 
   item(row, StatusColumn)->setText(Job::displayableStatus(job.m_status));
 
-  if (Job::Running == status)
+  if (Job::Running == status) {
     item(row, DateStartedColumn)->setText(Util::displayableDate(job.m_dateStarted));
 
-  else if ((Job::DoneOk == status) || (Job::DoneWarnings == status) || (Job::Failed == status) || (Job::Aborted == status))
+    if (!m_running) {
+      m_running        = true;
+      m_queueStartTime = QDateTime::currentDateTime();
+
+      emit queueStarted();
+    }
+
+  } else if (mtx::included_in(status, Job::DoneOk, Job::DoneWarnings, Job::Failed, Job::Aborted))
     item(row, DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
 
   startNextAutoJob();
@@ -247,11 +323,39 @@ Model::onProgressChanged(uint64_t id,
 }
 
 void
+Model::onNumUnacknowledgedWarningsOrErrorsChanged(uint64_t id,
+                                                  int,
+                                                  int) {
+  QMutexLocker locked{&m_mutex};
+
+  auto row = rowFromId(id);
+  if (-1 != row)
+    setRowText(itemsForRow(index(row, 0)), *m_jobsById[id]);
+
+  updateNumUnacknowledgedWarningsOrErrors();
+}
+
+void
+Model::updateNumUnacknowledgedWarningsOrErrors() {
+  auto numWarnings = 0;
+  auto numErrors   = 0;
+
+  for (auto const &job : m_jobsById) {
+    numWarnings += job->numUnacknowledgedWarnings();
+    numErrors   += job->numUnacknowledgedErrors();
+  }
+
+  emit numUnacknowledgedWarningsOrErrorsChanged(numWarnings, numErrors);
+}
+
+void
 Model::startNextAutoJob() {
   if (m_dontStartJobsNow)
     return;
 
   QMutexLocker locked{&m_mutex};
+
+  updateJobStats();
 
   if (!m_started)
     return;
@@ -266,14 +370,25 @@ Model::startNextAutoJob() {
       toStart = job;
   }
 
+  saveJobs();
+
   if (toStart) {
+    MainWindow::watchCurrentJobTab()->connectToJob(*toStart);
+
     toStart->start();
+    updateJobStats();
     return;
   }
 
   // All jobs are done. Clear total progress.
   m_toBeProcessed.clear();
   updateProgress();
+  updateJobStats();
+
+  auto wasRunning = m_running;
+  m_running       = false;
+  if (wasRunning)
+    emit queueStopped();
 }
 
 void
@@ -285,20 +400,23 @@ Model::start() {
 void
 Model::stop() {
   m_started = false;
+
+  auto wasRunning = m_running;
+  m_running       = false;
+  if (wasRunning)
+    emit queueStopped();
 }
 
 void
 Model::updateProgress() {
   QMutexLocker locked{&m_mutex};
 
-  if (!m_toBeProcessed.count()) {
-    emit progressChanged(0, 0);
+  if (!m_toBeProcessed.count())
     return;
-  }
 
-  auto numRunning      = 0u;
-  auto numDone         = 0u;
-  auto runningProgress = 0u;
+  auto numRunning       = 0;
+  auto numDone          = 0;
+  auto runningProgress  = 0;
 
   for (auto const &job : m_toBeProcessed)
     if (Job::Running == job->m_status) {
@@ -315,8 +433,37 @@ Model::updateProgress() {
 }
 
 void
+Model::updateJobStats() {
+  QMutexLocker locked{&m_mutex};
+
+  auto numPendingAuto   = 0;
+  auto numPendingManual = 0;
+  auto numOther         = 0;
+
+  for (auto const &job : m_jobsById)
+    if (mtx::included_in(job->m_status, Job::PendingAuto, Job::Running))
+      ++numPendingAuto;
+
+    else if (Job::PendingManual == job->m_status)
+      ++numPendingManual;
+
+    else
+      ++numOther;
+
+  emit jobStatsChanged(numPendingAuto, numPendingManual, numOther);
+}
+
+void
+Model::saveJobs()
+  const {
+  auto reg = Util::Settings::registry();
+  saveJobs(*reg);
+}
+
+void
 Model::saveJobs(QSettings &settings)
   const {
+  settings.remove("jobQueue");
   settings.beginGroup("jobQueue");
   settings.setValue("numberOfJobs", rowCount());
 
@@ -337,10 +484,11 @@ Model::loadJobs(QSettings &settings) {
   m_dontStartJobsNow = true;
 
   m_jobsById.clear();
+  m_toBeProcessed.clear();
   removeRows(0, rowCount());
 
   settings.beginGroup("jobQueue");
-  auto numberOfJobs = settings.value("numberOfJobs").toUInt();
+  auto numberOfJobs = settings.value("numberOfJobs", 0).toUInt();
   settings.endGroup();
 
   for (auto idx = 0u; idx < numberOfJobs; ++idx) {
@@ -351,8 +499,7 @@ Model::loadJobs(QSettings &settings) {
       auto job = Job::loadJob(settings);
       add(job);
 
-      if (watchTab)
-        watchTab->connectToJob(*job);
+      watchTab->connectToJob(*job);
 
     } catch (Merge::InvalidSettingsX &) {
     }
@@ -377,6 +524,38 @@ Model::flags(QModelIndex const &index)
   const {
   auto defaultFlags = QStandardItemModel::flags(index) & ~Qt::ItemIsDropEnabled;
   return index.isValid() ? defaultFlags | Qt::ItemIsDragEnabled : defaultFlags | Qt::ItemIsDropEnabled;
+}
+
+void
+Model::acknowledgeAllWarnings() {
+  QMutexLocker locked{&m_mutex};
+
+  for (auto const &job : m_jobsById)
+    job->acknowledgeWarnings();
+}
+
+void
+Model::acknowledgeAllErrors() {
+  QMutexLocker locked{&m_mutex};
+
+  for (auto const &job : m_jobsById)
+    job->acknowledgeErrors();
+}
+
+void
+Model::acknowledgeSelectedWarnings(QAbstractItemView *view) {
+  withSelectedJobs(view, [](Job &job) { job.acknowledgeWarnings(); });
+}
+
+void
+Model::acknowledgeSelectedErrors(QAbstractItemView *view) {
+  withSelectedJobs(view, [](Job &job) { job.acknowledgeErrors(); });
+}
+
+QDateTime
+Model::queueStartTime()
+  const {
+  return m_queueStartTime;
 }
 
 }}}

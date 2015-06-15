@@ -46,8 +46,9 @@ public:
   Status m_status;
   QString m_description;
   QStringList m_output, m_warnings, m_errors, m_fullOutput;
-  unsigned int m_progress, m_exitCode;
+  unsigned int m_progress, m_exitCode, m_warningsAcknowledged, m_errorsAcknowledged;
   QDateTime m_dateAdded, m_dateStarted, m_dateFinished;
+  bool m_quitAfterFinished;
 
   QMutex m_mutex;
 
@@ -67,6 +68,12 @@ public:
 
   void saveJob(QSettings &settings) const;
 
+  void acknowledgeWarnings();
+  void acknowledgeErrors();
+
+  int numUnacknowledgedWarnings() const;
+  int numUnacknowledgedErrors() const;
+
 protected:
   virtual void saveJobInternal(QSettings &settings) const = 0;
   virtual void loadJobBasis(QSettings &settings);
@@ -76,10 +83,12 @@ public slots:
   virtual void setProgress(unsigned int progress);
   virtual void addLineToInternalLogs(QString const &line, mtx::gui::Jobs::Job::LineType type);
   virtual void abort() = 0;
+  virtual void updateUnacknowledgedWarningsAndErrors();
 
 signals:
   void statusChanged(uint64_t id);
   void progressChanged(uint64_t id, unsigned int progress);
+  void numUnacknowledgedWarningsOrErrorsChanged(uint64_t id, int numWarnings, int numErrors);
 
   void lineRead(QString const &line, mtx::gui::Jobs::Job::LineType type);
 

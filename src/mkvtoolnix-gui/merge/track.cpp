@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include "common/iso639.h"
+#include "common/list_utils.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/merge/mkvmerge_option_builder.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
@@ -118,6 +119,18 @@ Track::setDefaults() {
   if (-1 != re_displayDimensions.indexIn(m_properties[Q("display_dimensions")])) {
     m_displayWidth  = re_displayDimensions.cap(1);
     m_displayHeight = re_displayDimensions.cap(2);
+  }
+
+  if (   !settings.m_enableMuxingTracksByLanguage
+      || !mtx::included_in(m_type, Video, Audio, Subtitles)
+      || ((Video     == m_type) && settings.m_enableMuxingAllVideoTracks)
+      || ((Audio     == m_type) && settings.m_enableMuxingAllAudioTracks)
+      || ((Subtitles == m_type) && settings.m_enableMuxingAllSubtitleTracks))
+    m_muxThis = true;
+
+  else {
+    auto language = m_language.isEmpty() ? Q("und") : m_language;
+    m_muxThis     = settings.m_enableMuxingTracksByTheseLanguages.contains(language);
   }
 }
 
@@ -253,7 +266,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
   const {
   ++opt.numTracksOfType[m_type];
 
-  if (!m_muxThis)
+  if (!m_muxThis || (m_appendedTo && !m_appendedTo->m_muxThis))
     return;
 
   auto sid = QString::number(m_id);
