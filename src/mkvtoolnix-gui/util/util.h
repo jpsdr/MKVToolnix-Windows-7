@@ -37,6 +37,7 @@ void setToolTip(QWidget *widget, QString const &toolTip);
 QIcon loadIcon(QString const &name, QList<int> const &sizes);
 bool setComboBoxIndexIf(QComboBox *comboBox, std::function<bool(QString const &, QVariant const &)> test);
 bool setComboBoxTextByData(QComboBox *comboBox, QString const &data);
+void setComboBoxTexts(QComboBox *comboBox, QStringList const &texts);
 
 void setupLanguageComboBox(QComboBox &comboBox, QStringList const &initiallySelected = {}, bool withEmpty = false, QString const &emptyTitle = {});
 void setupLanguageComboBox(QComboBox &comboBox, QString const &initiallySelected, bool withEmpty = false, QString const &emptyTitle = {});
