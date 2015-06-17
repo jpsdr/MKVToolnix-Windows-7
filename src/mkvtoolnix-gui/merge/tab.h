@@ -89,7 +89,7 @@ public slots:
   virtual void onTrackSelectionChanged();
 
   virtual void onTrackNameEdited(QString newValue);
-  virtual void onMuxThisChanged(int newValue);
+  virtual void onMuxThisChanged(int selected);
   virtual void onTrackLanguageChanged(int newValue);
   virtual void onDefaultTrackFlagChanged(int newValue);
   virtual void onForcedTrackFlagChanged(int newValue);

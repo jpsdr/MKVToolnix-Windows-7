@@ -87,15 +87,32 @@ Tab::setupInputControls() {
   Util::setupCharacterSetComboBox(*ui->subtitleCharacterSet, QString{}, true);
   Util::setupCharacterSetComboBox(*ui->chapterCharacterSet,  QString{}, true);
 
+  ui->muxThis->addItem(QString{}, true);
+  ui->muxThis->addItem(QString{}, false);
+
   // Stereoscopy
   ui->stereoscopy->addItem(Q(""), 0);
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
     ui->stereoscopy->addItem(QString{"%1 (%2; %3)"}.arg(to_qs(stereo_mode_c::translate(idx))).arg(idx).arg(to_qs(stereo_mode_c::s_modes[idx])), idx + 1);
 
   // NALU size length
-  ui->naluSizeLength->addItem(QY("don't change"),  0);
-  ui->naluSizeLength->addItem(QY("force 2 bytes"), 2);
-  ui->naluSizeLength->addItem(QY("force 4 bytes"), 4);
+  for (auto idx = 0; idx < 3; ++idx)
+    ui->naluSizeLength->addItem(QString{}, idx * 2);
+
+  for (auto idx = 0; idx < 3; ++idx)
+    ui->defaultTrackFlag->addItem(QString{}, idx);
+
+  for (auto idx = 0; idx < 2; ++idx)
+    ui->forcedTrackFlag->addItem(QString{}, idx);
+
+  for (auto idx = 0; idx < 3; ++idx)
+    ui->compression->addItem(QString{}, idx);
+
+  for (auto idx = 0; idx < 4; ++idx)
+    ui->cues->addItem(QString{}, idx);
+
+  for (auto idx = 0; idx < 3; ++idx)
+    ui->aacIsSBR->addItem(QString{}, idx);
 
   for (auto const &control : m_comboBoxControls)
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -344,7 +361,7 @@ Tab::setInputControlValues(Track *track) {
     return;
   }
 
-  Util::setComboBoxIndexIf(ui->muxThis,              [&](QString const &, QVariant const &data) { return data.isValid() && (data.toInt()    == (track->m_muxThis ? 0 : 1)); });
+  Util::setComboBoxIndexIf(ui->muxThis,              [&](QString const &, QVariant const &data) { return data.isValid() && (data.toBool()   == track->m_muxThis);           });
   Util::setComboBoxIndexIf(ui->defaultTrackFlag,     [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_defaultTrackFlag);  });
   Util::setComboBoxIndexIf(ui->forcedTrackFlag,      [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_forcedTrackFlag);   });
   Util::setComboBoxIndexIf(ui->compression,          [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_compression);       });
@@ -443,13 +460,13 @@ Tab::onTrackNameEdited(QString newValue) {
 }
 
 void
-Tab::onMuxThisChanged(int newValue) {
-  auto data = ui->muxThis->itemData(newValue);
+Tab::onMuxThisChanged(int selected) {
+  auto data = ui->muxThis->itemData(selected);
   if (!data.isValid())
     return;
-  newValue = data.toInt();
+  auto muxThis = data.toBool();
 
-  withSelectedTracks([&](Track *track) { track->m_muxThis = 0 == newValue; });
+  withSelectedTracks([&](Track *track) { track->m_muxThis = muxThis; });
 }
 
 void
@@ -471,7 +488,7 @@ Tab::toggleMuxThisForSelectedTracks() {
 
   withSelectedTracks([newEnabled](Track *track) { track->m_muxThis = newEnabled; }, false, ui->muxThis);
 
-  Util::setComboBoxIndexIf(ui->muxThis, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toInt() == (newEnabled ? 0 : 1)); });
+  Util::setComboBoxIndexIf(ui->muxThis, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == newEnabled); });
 }
 
 void
@@ -834,16 +851,17 @@ Tab::retranslateInputUI() {
   m_enableAllTracksAction->setText(QY("&Enable all tracks"));
   m_disableAllTracksAction->setText(QY("&Disable all tracks"));
 
-  // Set item data to index for distinguishing between empty values
-  // added by "multiple selection mode". This must be done after every
-  // re-translation as that clears the items or the items's data.
-  for (auto control : std::vector<QComboBox *>{ui->defaultTrackFlag, ui->forcedTrackFlag, ui->cues, ui->compression, ui->muxThis, ui->aacIsSBR})
-    for (auto idx = 0, num = control->count(); num > idx; ++idx)
-      control->setItemData(idx, idx);
-
   for (auto &comboBox : m_comboBoxControls)
     if (comboBox->count() && !comboBox->itemData(0).isValid())
       comboBox->setItemText(0, QY("<do not change>"));
+
+  Util::setComboBoxTexts(ui->muxThis,          QStringList{} << QY("yes")                     << QY("no"));
+  Util::setComboBoxTexts(ui->naluSizeLength,   QStringList{} << QY("don't change")            << QY("force 2 bytes")        << QY("force 4 bytes"));
+  Util::setComboBoxTexts(ui->defaultTrackFlag, QStringList{} << QY("determine automatically") << QY("set to \"yes\"")       << QY("set to \"no\""));
+  Util::setComboBoxTexts(ui->forcedTrackFlag,  QStringList{} << QY("off")                     << QY("on"));
+  Util::setComboBoxTexts(ui->compression,      QStringList{} << QY("determine automatically") << QY("no extra compression") << Q("zlib"));
+  Util::setComboBoxTexts(ui->cues,             QStringList{} << QY("default")                 << QY("only for I frames")    << QY("for all frames") << QY("no cues"));
+  Util::setComboBoxTexts(ui->aacIsSBR,         QStringList{} << QY("default")                 << QY("yes")                  << QY("no"));
 
   setupInputToolTips();
 }

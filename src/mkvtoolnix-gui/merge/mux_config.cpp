@@ -278,7 +278,7 @@ MuxConfig::toString()
   const {
   auto tempFileName = QString{};
 
-  at_scope_exit_c cleaner([tempFileName]() { QFile{tempFileName}.remove(); });
+  at_scope_exit_c cleaner([&tempFileName]() { QFile{tempFileName}.remove(); });
 
   {
     QTemporaryFile tempFile{QDir::temp().filePath(Q("MKVToolNix-GUI-MuxConfig-XXXXXX"))};

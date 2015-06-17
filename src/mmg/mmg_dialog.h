@@ -282,6 +282,7 @@ protected:
   void show_update_notices();
   void show_update_notice(wxString const &version, std::vector<wxString> const &info);
   void show_update_notice_600();
+  void show_deprecation_warning();
 };
 
 extern mmg_dialog *mdlg;

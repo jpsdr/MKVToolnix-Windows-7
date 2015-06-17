@@ -50,6 +50,24 @@ setComboBoxTextByData(QComboBox *comboBox,
 }
 
 void
+setComboBoxTexts(QComboBox *comboBox,
+                 QStringList const &texts) {
+  auto numItems    = comboBox->count();
+  auto numTexts    = texts.count();
+  auto textIdx     = 0;
+  auto comboBoxIdx = 0;
+
+  while ((comboBoxIdx < numItems) && (textIdx < numTexts)) {
+    if (comboBox->itemData(comboBoxIdx).isValid()) {
+      comboBox->setItemText(comboBoxIdx, texts[textIdx]);
+      ++textIdx;
+    }
+
+    ++comboBoxIdx;
+  }
+}
+
+void
 setupLanguageComboBox(QComboBox &comboBox,
                       QStringList const &initiallySelected,
                       bool withEmpty,
