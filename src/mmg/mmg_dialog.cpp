@@ -198,6 +198,8 @@ mmg_dialog::mmg_dialog()
 #endif  // defined(HAVE_CURL_EASY_H)
 
   show_update_notices();
+
+  show_deprecation_warning();
 }
 
 mmg_dialog::~mmg_dialog() {
@@ -1991,6 +1993,15 @@ mmg_dialog::show_update_notice_600() {
 void
 mmg_dialog::show_update_notices() {
   show_update_notice_600();
+}
+
+void
+mmg_dialog::show_deprecation_warning() {
+  auto text = Z("Please note that this program (mkvmerge GUI) is deprecated and will be removed within one or two releases.")
+    + wxU(" ")
+    + Z("It has been superseded by the new MKVToolNix GUI which should also be included in the same package.");
+
+  wxMessageBox(text, Z("Deprecation warning"), wxCENTER | wxOK | wxICON_WARNING);
 }
 
 IMPLEMENT_CLASS(mmg_dialog, wxFrame);
