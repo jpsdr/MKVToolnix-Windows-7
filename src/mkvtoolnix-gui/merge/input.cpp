@@ -859,7 +859,7 @@ Tab::retranslateInputUI() {
   Util::setComboBoxTexts(ui->naluSizeLength,   QStringList{} << QY("don't change")            << QY("force 2 bytes")        << QY("force 4 bytes"));
   Util::setComboBoxTexts(ui->defaultTrackFlag, QStringList{} << QY("determine automatically") << QY("set to \"yes\"")       << QY("set to \"no\""));
   Util::setComboBoxTexts(ui->forcedTrackFlag,  QStringList{} << QY("off")                     << QY("on"));
-  Util::setComboBoxTexts(ui->compression,      QStringList{} << QY("determine automatically") << QY("no extra compression") << QY("zlib"));
+  Util::setComboBoxTexts(ui->compression,      QStringList{} << QY("determine automatically") << QY("no extra compression") << Q("zlib"));
   Util::setComboBoxTexts(ui->cues,             QStringList{} << QY("default")                 << QY("only for I frames")    << QY("for all frames") << QY("no cues"));
   Util::setComboBoxTexts(ui->aacIsSBR,         QStringList{} << QY("default")                 << QY("yes")                  << QY("no"));
 
