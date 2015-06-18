@@ -256,6 +256,7 @@ void
 Tab::load() {
   resetData();
 
+  m_savedState  = currentState();
   auto chapters = kax_analyzer_c::probe(to_utf8(m_fileName)) ? loadFromMatroskaFile() : loadFromChapterFile();
 
   if (!chapters)
