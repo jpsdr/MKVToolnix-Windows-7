@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-06-17 12:11+0200\n"
+"POT-Creation-Date: 2015-06-19 12:50+0200\n"
 "PO-Revision-Date: 2015-05-07 21:12+0200\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech <trottel09@gmail.com>\n"
@@ -2136,7 +2136,7 @@ msgstr "&Nastavit výstupní soubor"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:156
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:804
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:805
 #, fuzzy
 msgid "<unnamed>"
 msgstr "(bez názvu)"
@@ -2628,8 +2628,8 @@ msgstr "Všechny položky kapitoly jsou platné."
 
 #: src/info/qt_ui.cpp:89
 #: src/info/qt_ui.cpp:98
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:329
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:366
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:330
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:367
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:156
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:124
 #: src/mkvtoolnix-gui/merge/attachments.cpp:107
@@ -3709,7 +3709,7 @@ msgstr "Šifrování obsahu"
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr "Převést textové titulky na tuto znakovou sadu (výchozí: UTF-8)."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:345
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:346
 #, fuzzy
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Uložit aktuální kapitoly do souboru XML"
@@ -3874,7 +3874,7 @@ msgstr ""
 msgid "Creating directory '%1%' failed: %2%"
 msgstr "Vytváření adresáře '%1%' selhalo: %2%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:341
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:342
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
 msgstr ""
 
@@ -4619,8 +4619,12 @@ msgstr "Chyba"
 msgid "Error %1%\n"
 msgstr "Chyba %1%\n"
 
-#: src/mkvtoolnix-gui/util/process.cpp:62
+#: src/mkvtoolnix-gui/util/process.cpp:75
 msgid "Error creating a temporary file (reason: %1)."
+msgstr ""
+
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:46
+msgid "Error executing mkvmerge"
 msgstr ""
 
 #: src/input/subtitles.cpp:136
@@ -4977,7 +4981,7 @@ msgstr "Název souboru: %1%"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:207
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:214
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:242
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:375
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:376
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:80
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:88
 #: src/mmg/header_editor/frame.cpp:258
@@ -6410,7 +6414,7 @@ msgid "Matroska audio/video files"
 msgstr "Audio/video soubory Matroska"
 
 #: src/info/qt_ui.cpp:87
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:366
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:367
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:153
 #: src/mkvtoolnix-gui/merge/output.cpp:99
 #, fuzzy
@@ -7915,12 +7919,12 @@ msgstr "Uložit jako výchozí pro nové úlohy"
 msgid "Save as default for new jobs"
 msgstr "Uložit jako výchozí pro nové úlohy"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:329
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:330
 #, fuzzy
 msgid "Save chapters as XML"
 msgstr "Uložit aktuální kapitoly do souboru XML"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:366
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:367
 #, fuzzy
 msgid "Save chapters to Matroska file"
 msgstr "Uložit do souboru &Matroska"
@@ -7985,13 +7989,13 @@ msgstr "Uložit do souboru &Matroska"
 msgid "Saves the information from the current file to a text file"
 msgstr "Uloží informace z aktuálního souboru do textového souboru"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:341
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:345
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:342
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:346
 #, fuzzy
 msgid "Saving failed"
 msgstr "Analýza souboru"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:385
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:386
 #, fuzzy
 msgid "Saving the chapters failed."
 msgstr "Vyberte soubor kapitol"
@@ -9134,7 +9138,7 @@ msgstr ""
 msgid "The chapter '%s' is missing the start time."
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:449
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:450
 msgid "The chapter UID must be a number if given."
 msgstr ""
 
@@ -9296,7 +9300,7 @@ msgstr "Délka, po které je založen nový výstupní soubor. Čas může být 
 msgid "The edit specifications '%1%' and '%2%' resolve to the same track with the UID %3%.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:524
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:525
 msgid "The edition UID must be a number if given."
 msgstr ""
 
@@ -9311,12 +9315,12 @@ msgstr ""
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:475
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:476
 #, fuzzy
 msgid "The end time could not be parsed: %1"
 msgstr "XML soubor štítků '%1%' nemohl být přečten.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:478
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:479
 msgid "The end time must be greater than the start timecode."
 msgstr ""
 
@@ -9427,7 +9431,7 @@ msgstr "Soubor pravděpodobně není platným souborem nastavení mkvmerge GUI."
 msgid "The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."
 msgstr "Soubor byl změněn jiným program od jeho přečtení editorem hlavičky. Proto ho musíte znovu značíst. To bohužel znamená, že všechny vaše změny budou ztraceny."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:316
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:317
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:165
 #, fuzzy
 msgid "The file has been saved successfully."
@@ -9449,7 +9453,7 @@ msgstr "Hlavička souboru nebyla správně přečtena.\n"
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Hlavičky souboru nemohly být analyzovány, např. protože jsou nekompletní, neplatné nebo poškozené."
 
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:53
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:59
 #, fuzzy
 msgid "The file is an unsupported container format (%1)."
 msgstr "Soubor má nepodporovaný formát kontejneru (%s)."
@@ -9506,7 +9510,7 @@ msgstr "Soubor č. %1% ('%2%') nebyl připojen.  Parametr pro '--append-to' byl 
 msgid "The file or directory was not found"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:58
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:64
 #, fuzzy
 msgid "The file was not recognized as a supported format (exit code: %1)."
 msgstr "Soubor má nepodporovaný formát kontejneru (%s)."
@@ -9522,7 +9526,7 @@ msgstr "Soubor nemohl být otevřen pro zápis."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:200
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:214
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:375
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:376
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:88
 #, fuzzy
 msgid "The file you tried to open (%1) could not be read successfully."
@@ -9792,6 +9796,12 @@ msgid ""
 "Please select the location of the 'mkvmerge-gui.hhp' file."
 msgstr ""
 
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:140
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:46
+#, fuzzy
+msgid "The mkvmerge executable was not found."
+msgstr "Spustitelný soubor mkvmerge"
+
 #: src/propedit/change.cpp:61
 #, boost-format
 msgid "The name '%1%' is not a valid property name for the current edit specification in '%2%'.\n"
@@ -9971,12 +9981,12 @@ msgstr ""
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:491
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:492
 #, fuzzy
 msgid "The segment UID could not be parsed: %1"
 msgstr "XML soubor informací o úseku '%1%' nemohl být přečten.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:501
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:502
 msgid "The segment edition UID must be a positive number if given."
 msgstr ""
 
@@ -10021,7 +10031,7 @@ msgstr ""
 msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:469
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:470
 #, fuzzy
 msgid "The start time could not be parsed: %1"
 msgstr "XML soubor štítků '%1%' nemohl být přečten.\n"
@@ -10980,7 +10990,7 @@ msgstr "Neznámý nebo nepodporovaný formát audia 0x%|1$04x| pro tuto stopu au
 msgid "Unrecognized command line option '%1%'.\n"
 msgstr "Nerozpoznaná volba příkazového řádku '%1%'.\n"
 
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:58
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:64
 msgid "Unrecognized file format"
 msgstr ""
 
@@ -10994,7 +11004,7 @@ msgstr "Celé číslo bez znaménka"
 msgid "Unsupported MPEG mpeg_version: 0x%|1$02x| in packet %2% for timecode %3%, assuming MPEG2. No further warnings will be printed for this track.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:53
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:59
 #, fuzzy
 msgid "Unsupported file format"
 msgstr "Nepodporovaný formát"
@@ -11100,7 +11110,7 @@ msgstr ""
 msgid "Validates the content of all changeable headers"
 msgstr "Schválit obsah všech změnitelných hlaviček"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:422
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:423
 #, fuzzy
 msgid "Validation failed"
 msgstr "Selhalo vytvoření souboru"
@@ -11463,7 +11473,7 @@ msgstr ""
 msgid "Wrong identification string: '%|1$7s|' != 'kate\\0\\0\\0'"
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:329
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:330
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:154
 #: src/mkvtoolnix-gui/merge/output.cpp:291
 #, fuzzy
@@ -12147,14 +12157,14 @@ msgstr ""
 msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned nullptr for a size of %3% bytes.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:145
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:148
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:122
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:267
 #, fuzzy
 msgid "merge"
 msgstr "mkvmerge"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:152
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:155
 msgid "merging to file »%1« in directory »%2«"
 msgstr ""
 
@@ -12813,7 +12823,7 @@ msgstr "und (Neurčeno)"
 #: src/input/r_matroska.cpp:2353
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:106
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:51
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:57
 #: src/mmg/header_editor/value_page.cpp:150
 #: src/mmg/mmg.cpp:68
 #: src/mmg/tabs/input.cpp:570

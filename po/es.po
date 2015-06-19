@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-06-17 12:11+0200\n"
+"POT-Creation-Date: 2015-06-19 12:50+0200\n"
 "PO-Revision-Date: 2015-06-18 19:11+0100\n"
 "Last-Translator: Israel Lucas Torrijos (Overdrive80) <lukillas.ole@gmail."
 "com>\n"
@@ -2288,7 +2288,7 @@ msgstr "<Archivo de salida no especificado>"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:156
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:804
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:805
 msgid "<unnamed>"
 msgstr "<Sin nombre>"
 
@@ -2800,8 +2800,8 @@ msgid "All chapter entries are valid."
 msgstr "Todos los registros son válidos."
 
 #: src/info/qt_ui.cpp:89 src/info/qt_ui.cpp:98
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:329
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:366
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:330
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:367
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:156
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:124
 #: src/mkvtoolnix-gui/merge/attachments.cpp:107
@@ -3956,7 +3956,7 @@ msgstr ""
 "Convertir subtítulos de texto a esta codificación de caracteres (charset). "
 "Por defecto: UTF-8."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:345
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:346
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Error al convertir los capítulos a XML: %1"
 
@@ -4166,7 +4166,7 @@ msgstr ""
 msgid "Creating directory '%1%' failed: %2%"
 msgstr "La creación del directorio '%1%' ha fallado: %2%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:341
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:342
 msgid ""
 "Creating the file failed. Check to make sure you have permission to write to "
 "that directory and that the drive is not full."
@@ -4959,9 +4959,13 @@ msgstr "Error"
 msgid "Error %1%\n"
 msgstr "Error %1%\n"
 
-#: src/mkvtoolnix-gui/util/process.cpp:62
+#: src/mkvtoolnix-gui/util/process.cpp:75
 msgid "Error creating a temporary file (reason: %1)."
 msgstr "Error al crear un archivo temporal (motivo: %1)."
+
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:46
+msgid "Error executing mkvmerge"
+msgstr ""
 
 #: src/input/subtitles.cpp:136
 #, boost-format
@@ -5379,7 +5383,7 @@ msgstr "Nombre de archivo: %1%"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:207
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:214
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:242
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:375
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:376
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:80
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:88
 #: src/mmg/header_editor/frame.cpp:258 src/mmg/tabs/chapters.cpp:598
@@ -7231,7 +7235,7 @@ msgstr "Archivos Matroska y WebM"
 msgid "Matroska audio/video files"
 msgstr "Archivos Matroska de audio/video"
 
-#: src/info/qt_ui.cpp:87 src/mkvtoolnix-gui/chapter_editor/tab.cpp:366
+#: src/info/qt_ui.cpp:87 src/mkvtoolnix-gui/chapter_editor/tab.cpp:367
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:153
 #: src/mkvtoolnix-gui/merge/output.cpp:99
 msgid "Matroska files"
@@ -8997,11 +9001,11 @@ msgstr "Guardar por &defecto para las nuevas tareas de multiplexado"
 msgid "Save as default for new jobs"
 msgstr "Guardar por defecto para las nuevas tareas"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:329
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:330
 msgid "Save chapters as XML"
 msgstr "Guardar capítulos en formato XML"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:366
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:367
 msgid "Save chapters to Matroska file"
 msgstr "Guardar capítulos en el archivo Matroska"
 
@@ -9064,12 +9068,12 @@ msgstr "Guardar como archivo &Matroska"
 msgid "Saves the information from the current file to a text file"
 msgstr "Guarde la información desde el actual archivo a uno de texto"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:341
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:345
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:342
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:346
 msgid "Saving failed"
 msgstr "Error al guardar"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:385
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:386
 msgid "Saving the chapters failed."
 msgstr "Error al guardar capítulos."
 
@@ -10089,8 +10093,7 @@ msgstr[1] "Etiquetas para el ID de la pista %1%: %2% registros"
 msgid "Tags for track ID %lld (%d entries) from %s"
 msgstr "Etiquetas para el ID de la pista %lld (%d registros) de %s"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1267
-#: src/mmg/tabs/input_general.cpp:191
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1267 src/mmg/tabs/input_general.cpp:191
 msgid "Tags:"
 msgstr "Etiquetas:"
 
@@ -10472,7 +10475,7 @@ msgstr "En el capítulo '%s' está ausente el idioma."
 msgid "The chapter '%s' is missing the start time."
 msgstr "En el capítulo '%s' está ausente el tiempo de inicio."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:449
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:450
 msgid "The chapter UID must be a number if given."
 msgstr "El UID del capítulo debe ser un número si se establece."
 
@@ -10738,7 +10741,7 @@ msgid ""
 msgstr ""
 "Los ajustes de edición '%1%' y '%2%' determinan la misma pista con UID %3%.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:524
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:525
 msgid "The edition UID must be a number if given."
 msgstr "El UID de la edición debe ser un número si se establece."
 
@@ -10761,11 +10764,11 @@ msgstr ""
 "pudo ser actualizado. Por lo tanto, el elemento no será visible. El proceso "
 "será cancelado. ¡El archivo ha sido cambiado!"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:475
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:476
 msgid "The end time could not be parsed: %1"
 msgstr "El tiempo final no puede ser analizado: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:478
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:479
 msgid "The end time must be greater than the start timecode."
 msgstr ""
 "El tiempo del fin debe ser mayor que el tiempo inicial del código de tiempo."
@@ -10913,7 +10916,7 @@ msgstr ""
 "editor del encabezado. Por lo tanto, tienes que recargarlo. "
 "Desafortunadamente, esto significa que todos los cambios se perderán."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:316
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:317
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:165
 msgid "The file has been saved successfully."
 msgstr "El archivo se ha guardado correctamente."
@@ -10938,7 +10941,7 @@ msgstr ""
 "Los encabezados del archvo no pudieron ser analizados, p.e. porque están "
 "incompletos, dañados o son inválidos."
 
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:53
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:59
 msgid "The file is an unsupported container format (%1)."
 msgstr "El archivo es un formato de contenedor no compatible (%1)."
 
@@ -11007,7 +11010,7 @@ msgstr ""
 msgid "The file or directory was not found"
 msgstr "El archivo o directorio no fue encontrado"
 
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:58
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:64
 msgid "The file was not recognized as a supported format (exit code: %1)."
 msgstr ""
 "El archivo no se reconoció como un formato compatible (código de salida: %1)."
@@ -11020,7 +11023,7 @@ msgstr "El archivo no volverá a ser procesado."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:200
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:214
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:375
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:376
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:88
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "El archivo que intentas abrir (%1) no se pudo leer correctamente."
@@ -11432,6 +11435,12 @@ msgstr ""
 "\n"
 "Por favor, selecciona la localización del archivo mkvmerge-gui.hhp."
 
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:140
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:46
+#, fuzzy
+msgid "The mkvmerge executable was not found."
+msgstr "Ejecutable de mkvmerge"
+
 #: src/propedit/change.cpp:61
 #, boost-format
 msgid ""
@@ -11672,11 +11681,11 @@ msgstr ""
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr "La tabla de búsqueda en este archivo TTA parece que está corrupta.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:491
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:492
 msgid "The segment UID could not be parsed: %1"
 msgstr "El UID del segmento no pudo ser analizado: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:501
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:502
 msgid "The segment edition UID must be a positive number if given."
 msgstr ""
 "El UID del segmento de la edición debe ser un numero positivo si se "
@@ -11757,7 +11766,7 @@ msgstr ""
 "valor dado en la línea de comandos con la opción '--default-duration', "
 "contenedor del archivo original o bitstream del video."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:469
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:470
 msgid "The start time could not be parsed: %1"
 msgstr "El tiempo de inicio no pudo ser analizado: %1"
 
@@ -13126,7 +13135,7 @@ msgstr ""
 msgid "Unrecognized command line option '%1%'.\n"
 msgstr "Opción de línea de comandos no reconocida '%1%'.\n"
 
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:58
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:64
 msgid "Unrecognized file format"
 msgstr "Formato de archivo desconocido"
 
@@ -13145,7 +13154,7 @@ msgstr ""
 "de tiempo %3%, asumiendo MPEG2. Ninguna advertencia más será mostrada para "
 "esta pista.\n"
 
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:53
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:59
 msgid "Unsupported file format"
 msgstr "Formato de archivo no compatible"
 
@@ -13267,7 +13276,7 @@ msgstr "Las modificaciones validas son:\n"
 msgid "Validates the content of all changeable headers"
 msgstr "Valide el contenido de todos los encabezados modificados"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:422
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:423
 msgid "Validation failed"
 msgstr "La validación ha fallado"
 
@@ -13672,7 +13681,7 @@ msgid "Wrong identification string: '%|1$7s|' != 'kate\\0\\0\\0'"
 msgstr ""
 "Cadena de caracteres de identificación errónea: '%|1$7s|' != 'kate\\0\\0\\0'"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:329
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:330
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:154
 #: src/mkvtoolnix-gui/merge/output.cpp:291
 msgid "XML chapter files"
@@ -14434,13 +14443,13 @@ msgstr ""
 "memory.cpp/saferealloc() llamada desde el archivo %1%, línea %2%: realloc() "
 "returned nullptr por un tamaño de %3% bytes.\n"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:145
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:148
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:122
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:267
 msgid "merge"
 msgstr "Multiplexar"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:152
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:155
 msgid "merging to file »%1« in directory »%2«"
 msgstr "Multiplexando al archivo »%1« en el directorio »%2«"
 
@@ -15166,7 +15175,7 @@ msgstr "und (Indeterminado)"
 #: src/input/r_matroska.cpp:2353
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:106
-#: src/mkvtoolnix-gui/util/file_identifier.cpp:51
+#: src/mkvtoolnix-gui/util/file_identifier.cpp:57
 #: src/mmg/header_editor/value_page.cpp:150 src/mmg/mmg.cpp:68
 #: src/mmg/tabs/input.cpp:570 src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "unknown"
