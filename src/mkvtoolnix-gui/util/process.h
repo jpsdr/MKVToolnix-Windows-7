@@ -30,6 +30,7 @@ private:
   QProcess m_process;
   QString m_command, m_output;
   QStringList m_args;
+  bool m_hasError;
 
 public:
   Process(QString const &command, QStringList const &args);
@@ -37,10 +38,12 @@ public:
 
   virtual QStringList output() const;
   virtual QProcess const &process() const;
+  virtual bool hasError() const;
   virtual void run();
 
 public slots:
   virtual void dataAvailable();
+  virtual void onError();
 
 public:
   static ProcessPtr execute(QString const &command, QStringList const &args, bool useTempFile = true);

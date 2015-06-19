@@ -10,10 +10,12 @@ namespace mtx { namespace gui { namespace Util {
 
 Process::Process(QString const &command,
                  QStringList const &args)
-  : m_command(command)
-  , m_args(args)
+  : m_command{command}
+  , m_args{args}
+  , m_hasError{}
 {
-  connect(&m_process, SIGNAL(readyReadStandardOutput()), this, SLOT(dataAvailable()));
+  connect(&m_process, &QProcess::readyReadStandardOutput,                                        this, &Process::dataAvailable);
+  connect(&m_process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), this, &Process::onError);
 }
 
 Process::~Process() {
@@ -35,6 +37,17 @@ QProcess const &
 Process::process()
   const {
   return m_process;
+}
+
+bool
+Process::hasError()
+  const {
+  return m_hasError;
+}
+
+void
+Process::onError() {
+  m_hasError = true;
 }
 
 void

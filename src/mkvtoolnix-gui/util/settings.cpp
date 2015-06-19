@@ -183,15 +183,23 @@ Settings::priorityAsString()
 
 QString
 Settings::exeWithPath(QString const &exe) {
-#if defined(SYS_WINDOWS)
   auto path = bfs::path{ to_utf8(exe) };
   if (path.is_absolute())
     return exe;
 
-  return to_qs((mtx::sys::get_installation_path() / path).string());
-#else  // defined(SYS_WINDOWS)
+  auto installPath   = mtx::sys::get_installation_path();
+  auto potentialExes = QList<bfs::path>{} << (installPath / path) << (installPath / ".." / path);
+
+#if defined(SYS_WINDOWS)
+  for (auto &potentialExe : potentialExes)
+    potentialExe.replace_extension(bfs::path{"exe"});
+#endif  // SYS_WINDOWS
+
+  for (auto const &potentialExe : potentialExes)
+    if (bfs::exists(potentialExe))
+      return to_qs(bfs::canonical(potentialExe).string());
+
   return exe;
-#endif // defined(SYS_WINDOWS)
 }
 
 void

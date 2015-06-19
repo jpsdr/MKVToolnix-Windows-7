@@ -41,7 +41,13 @@ FileIdentifier::identify() {
 
   auto process  = Process::execute(cfg.actualMkvmergeExe(), args);
   auto exitCode = process->process().exitCode();
-  m_output      = process->output();
+
+  if (process->hasError()) {
+    Util::MessageBox::critical(m_parent, QY("Error executing mkvmerge"), QY("The mkvmerge executable was not found.").arg(exitCode));
+    return false;
+  }
+
+  m_output = process->output();
 
   if (0 == exitCode)
     return parseOutput();

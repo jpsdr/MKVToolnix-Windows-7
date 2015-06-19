@@ -135,7 +135,10 @@ MuxJob::processFinished(int exitCode,
 }
 
 void
-MuxJob::processError(QProcess::ProcessError /*error*/) {
+MuxJob::processError(QProcess::ProcessError error) {
+  if (QProcess::FailedToStart == error)
+    emit lineRead(QY("The mkvmerge executable was not found."), ErrorLine);
+
   setStatus(Job::Failed);
 }
 
