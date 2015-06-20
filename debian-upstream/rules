@@ -37,7 +37,7 @@ override_dh_install:
 	./drake install 'install:translations:guides' 'install:shared' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
 	./drake 'install:manpages' DESTDIR=$(CURDIR)/debian/tmp USE_QT=yes BUILD_MKVTOOLNIX_GUI=yes docdir='$${datarootdir}/doc/mkvtoolnix-gui'
 
-	dh_install --fail-missing -Xmkvtoolnix.xml
+	dh_install --list-missing -Xmkvtoolnix.xml
 
 	mv debian/mkvtoolnix/usr/bin/mkvinfo debian/mkvtoolnix/usr/bin/mkvinfo-text
 	mv debian/mkvtoolnix-gui/usr/bin/mmg-gui debian/mkvtoolnix-gui/usr/bin/mmg
