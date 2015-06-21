@@ -285,6 +285,9 @@ unescape_mkvtoolnix(QString const &source) {
 
 static QString
 escape_shell_unix(QString const &source) {
+  if (source.isEmpty())
+    return Q("\"\"");
+
   if (!source.contains(QRegExp{"[^\\w%+,\\-./:=@]"}))
     return source;
 
@@ -301,6 +304,9 @@ escape_shell_unix(QString const &source) {
 
 static QString
 escape_shell_windows(QString const &source) {
+  if (source.isEmpty())
+    return Q("^\"^\"");
+
   if (!source.contains(QRegExp{"[\\w+,\\-./:=@]"}))
     return source;
 
