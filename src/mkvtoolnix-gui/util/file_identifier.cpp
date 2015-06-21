@@ -126,20 +126,22 @@ FileIdentifier::parseOutput() {
 }
 
 // Attachment ID 1: type "cue", size 1844 bytes, description "dummy", file name "cuewithtags2.cue"
+// The »description« and »file name« parts are optional.
 void
 FileIdentifier::parseAttachmentLine(QString const &line) {
-  QRegExp re{"^Attachment ID (\\d+): type \"(.*)\", size (\\d+) bytes, description \"(.*)\", file name \"(.*)\"$"};
+  static QRegularExpression s_re{"^Attachment ID (\\d+): type \"(.*)\", size (\\d+) bytes(?:, description \"(.*)\")?(?:, file name \"(.*)\")"};
+  auto matches = s_re.match(line);
 
-  if (-1 == re.indexIn(line))
+  if (!matches.hasMatch())
     return;
 
   auto track                     = std::make_shared<Merge::Track>(m_file.get(), Merge::Track::Attachment);
   track->m_properties            = parseProperties(line);
-  track->m_id                    = re.cap(1).toLongLong();
-  track->m_codec                 = re.cap(2);
-  track->m_size                  = re.cap(3).toLongLong();
-  track->m_attachmentDescription = re.cap(4);
-  track->m_name                  = re.cap(5);
+  track->m_id                    = matches.captured(1).toLongLong();
+  track->m_codec                 = matches.captured(2);
+  track->m_size                  = matches.captured(3).toLongLong();
+  track->m_attachmentDescription = matches.captured(4);
+  track->m_name                  = matches.captured(5);
 
   m_file->m_tracks << track;
 }
