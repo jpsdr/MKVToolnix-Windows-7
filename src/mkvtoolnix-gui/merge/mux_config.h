@@ -71,7 +71,7 @@ public:
   QString m_segmentUIDs, m_previousSegmentUID, m_nextSegmentUID, m_chapters, m_chapterLanguage, m_chapterCharacterSet, m_chapterCueNameFormat, m_additionalOptions;
   SplitMode m_splitMode;
   unsigned int m_splitMaxFiles;
-  bool m_linkFiles, m_webmMode, m_titleWasPresent;
+  bool m_linkFiles, m_webmMode;
 
 public:
   MuxConfig(QString const &fileName = QString{""});
@@ -87,6 +87,8 @@ public:
 
   QString toString() const;
   QStringList buildMkvmergeOptions() const;
+
+  virtual bool hasSourceFileWithTitle() const;
 
   virtual void debugDumpFileList() const;
   virtual void debugDumpTrackList() const;

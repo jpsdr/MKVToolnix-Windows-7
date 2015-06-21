@@ -72,7 +72,6 @@ MuxConfig::MuxConfig(QString const &fileName)
   , m_splitMaxFiles{0}
   , m_linkFiles{false}
   , m_webmMode{false}
-  , m_titleWasPresent{}
 {
   auto &settings      = Util::Settings::get();
   m_additionalOptions = settings.m_defaultAdditionalMergeOptions;
@@ -403,7 +402,7 @@ MuxConfig::buildMkvmergeOptions()
       options << arg << value;
   };
 
-  add(Q("--title"), m_title, m_titleWasPresent || !m_title.isEmpty());
+  add(Q("--title"), m_title, !m_title.isEmpty() || hasSourceFileWithTitle());
   add(Q("--segment-uid"), m_segmentUIDs);
   add(Q("--previous-segment-uid"), m_previousSegmentUID);
   add(Q("--next-segment-uid"), m_nextSegmentUID);
@@ -427,6 +426,16 @@ MuxConfig::buildMkvmergeOptions()
   options          += buildAppendToMapping(fileNumbers);
 
   return options;
+}
+
+bool
+MuxConfig::hasSourceFileWithTitle()
+  const {
+  for (auto const &sourceFile : m_files)
+    if (sourceFile->m_properties.contains(Q("title")) && !sourceFile->m_properties[Q("title")].isEmpty())
+      return true;
+
+  return false;
 }
 
 void
