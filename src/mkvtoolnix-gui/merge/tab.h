@@ -55,7 +55,7 @@ public:
   explicit Tab(QWidget *parent);
   ~Tab();
 
-  virtual bool hasBeenModified() const;
+  virtual bool hasBeenModified();
 
   virtual QString const &fileName() const;
   virtual QString title() const;
@@ -216,7 +216,7 @@ protected:
 
   virtual void enableDisableAllTracks(bool enable);
 
-  virtual QString currentState() const;
+  virtual QString currentState();
 };
 
 }}}

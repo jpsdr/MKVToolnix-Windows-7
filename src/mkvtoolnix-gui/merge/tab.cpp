@@ -267,6 +267,8 @@ Tab::isReadyForMerging() {
 
 void
 Tab::addToJobQueue(bool startNow) {
+  updateConfigFromControlValues();
+
   if (!isReadyForMerging())
     return;
 
@@ -298,14 +300,13 @@ Tab::addToJobQueue(bool startNow) {
 }
 
 QString
-Tab::currentState()
-  const {
+Tab::currentState() {
+  updateConfigFromControlValues();
   return m_config.toString();
 }
 
 bool
-Tab::hasBeenModified()
-  const {
+Tab::hasBeenModified() {
   return currentState() != m_savedState;
 }
 
