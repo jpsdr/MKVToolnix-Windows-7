@@ -773,6 +773,9 @@ Tab::onRemoveFiles() {
   m_filesModel->removeFiles(selectedFiles);
 
   reinitFilesTracksControls();
+
+  if (!m_filesModel->rowCount())
+    clearDestination();
 }
 
 void
@@ -786,6 +789,7 @@ Tab::onRemoveAllFiles() {
   m_config.m_tracks.clear();
 
   reinitFilesTracksControls();
+  clearDestination();
 }
 
 void
