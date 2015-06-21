@@ -231,10 +231,10 @@ Model::add(JobPtr const &job) {
   connect(job.get(), &Job::statusChanged,                            this, &Model::onStatusChanged);
   connect(job.get(), &Job::numUnacknowledgedWarningsOrErrorsChanged, this, &Model::onNumUnacknowledgedWarningsOrErrorsChanged);
 
+  saveJobs();
+
   if (m_dontStartJobsNow)
     return;
-
-  saveJobs();
 
   startNextAutoJob();
 }
