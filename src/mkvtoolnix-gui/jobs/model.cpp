@@ -305,7 +305,7 @@ Model::processAutomaticJobRemoval(uint64_t id,
   bool done         = doneOk || doneWarnings || (Job::Failed == status) || (Job::Aborted == status);
 
   if (   ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::IfSuccessful)    && doneOk)
-      || ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::IfWarningsFound) && doneWarnings)
+      || ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::IfWarningsFound) && (doneOk || doneWarnings))
       || ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::Always)          && done))
     scheduleJobForRemoval(id);
 }
