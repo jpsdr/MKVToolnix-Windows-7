@@ -219,7 +219,7 @@ options_c::merge_targets() {
 
   for (auto &target : m_targets) {
     auto track_target = dynamic_cast<track_target_c *>(target.get());
-    if (!track_target || dynamic_cast<segment_info_target_c *>(target.get())) {
+    if (!track_target || dynamic_cast<tag_target_c *>(target.get())) {
       targets_to_keep.push_back(target);
       continue;
     }
