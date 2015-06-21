@@ -72,7 +72,7 @@ SourceFile::operator =(SourceFile const &other) {
   m_playlistSize     = other.m_playlistSize;
   m_playlistChapters = other.m_playlistChapters;
   m_playlistFiles    = other.m_playlistFiles;
-  m_appendedTo       = nullptr;
+  m_appendedTo       = other.m_appendedTo;
 
   m_tracks.clear();
   m_additionalParts.clear();

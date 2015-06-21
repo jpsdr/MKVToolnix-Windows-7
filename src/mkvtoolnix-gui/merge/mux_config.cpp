@@ -43,6 +43,11 @@ fixMappings(SourceFile *oldFile,
 
   Q_ASSERT(!!oldFile && !!newFile);
 
+  if (oldFile->m_appendedTo) {
+    newFile->m_appendedTo = fileMap[oldFile->m_appendedTo];
+    Q_ASSERT(!!newFile->m_appendedTo);
+  }
+
   for (auto idx = 0, end = oldFile->m_tracks.size(); idx < end; ++idx) {
     auto oldTrack = oldFile->m_tracks[idx].get();
     auto newTrack = trackMap[oldTrack];
