@@ -31,6 +31,9 @@ findPtr(Tstored *needle,
   return haystack.end() == itr ? -1 : std::distance(haystack.begin(), itr);
 }
 
+std::vector<std::string> toStdStringVector(QStringList const &strings, int offset = 0);
+QStringList toStringList(std::vector<std::string> const &stdStrings, int offset = 0);
+
 // Miscellaneous widget stuff
 void setToolTip(QWidget *widget, QString const &toolTip);
 
