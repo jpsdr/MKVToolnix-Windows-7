@@ -21,6 +21,8 @@ public:
   void run();
   bool exitAfterParsing() const;
 
+  QStringList rebuildCommandLine() const;
+
 protected:
   void initParser();
   void handleFileNameArg();

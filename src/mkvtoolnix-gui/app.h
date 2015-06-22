@@ -9,6 +9,8 @@
 
 #include "mkvtoolnix-gui/gui_cli_parser.h"
 
+class QLocalServer;
+
 namespace mtx { namespace gui {
 
 using Iso639Language     = std::pair<QString, QString>;
@@ -21,8 +23,17 @@ class App : public QApplication {
   Q_OBJECT;
 
 protected:
+  enum class CliCommand {
+    OpenConfigFiles,
+    AddToMerge,
+    EditChapters,
+    EditHeaders,
+  };
+
+protected:
   std::unique_ptr<QTranslator> m_currentTranslator;
   std::unique_ptr<GuiCliParser> m_cliParser;
+  QLocalServer *m_instanceCommunicator{};
 
 public:
   App(int &argc, char **argv);
@@ -45,6 +56,10 @@ signals:
 
 public slots:
   void saveSettings() const;
+  void receiveInstanceCommunication();
+
+protected:
+  void setupInstanceCommunicator();
 
 public:
   static App *instance();
@@ -64,6 +79,8 @@ public:
   static void initializeCharacterSets();
 
   static bool isInstalled();
+
+  static QString communicatorSocketName();
 };
 
 }}

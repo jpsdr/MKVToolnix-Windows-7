@@ -1,7 +1,8 @@
 #include "common/common_pch.h"
 
-#include <QDebug>
 #include <QLibraryInfo>
+#include <QLocalServer>
+#include <QLocalSocket>
 
 #include <boost/optional.hpp>
 
@@ -15,6 +16,7 @@
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui {
@@ -49,12 +51,44 @@ App::App(int &argc,
 
   Util::Settings::get().load();
 
-  QObject::connect(this, SIGNAL(aboutToQuit()), this, SLOT(saveSettings()));
+  setupInstanceCommunicator();
+
+  QObject::connect(this, &App::aboutToQuit, this, &App::saveSettings);
 
   initializeLocale();
 }
 
 App::~App() {
+}
+
+QString
+App::communicatorSocketName() {
+  return Q("MKVToolNix-GUI-Instance-Communicator");
+}
+
+void
+App::setupInstanceCommunicator() {
+  m_instanceCommunicator = new QLocalServer{this};
+  auto socketName        = communicatorSocketName();
+  auto ok                = m_instanceCommunicator->listen(socketName);
+
+  if (!ok) {
+    // Try connecting to the socket. If that fails then it's likely a
+    // dead socket that can be removed.
+    auto socket = std::make_unique<QLocalSocket>(this);
+    socket->connectToServer(socketName);
+
+    if ((socket->state() != QLocalSocket::ConnectedState) && QLocalServer::removeServer(socketName))
+      ok = m_instanceCommunicator->listen(socketName);
+  }
+
+  if (ok)
+    connect(m_instanceCommunicator, &QLocalServer::newConnection, this, &App::receiveInstanceCommunication);
+
+  else {
+    delete m_instanceCommunicator;
+    m_instanceCommunicator = nullptr;
+  }
 }
 
 void
@@ -264,13 +298,29 @@ App::initializeLocale(QString const &requestedLocale) {
 bool
 App::isOtherInstanceRunning()
   const {
-  // TODO: App::isOtherInstanceRunning
-  return false;
+  return !m_instanceCommunicator;
 }
 
 void
 App::sendArgumentsToRunningInstance() {
-  // TODO: App::sendArgumentsToOtherInstance
+  auto args = m_cliParser->rebuildCommandLine();
+  if (args.isEmpty())
+    return;
+
+  auto block = QByteArray{};
+  QDataStream out{&block, QIODevice::WriteOnly};
+
+  out.setVersion(QDataStream::Qt_5_0);
+  out << args;
+
+  auto socket = std::make_unique<QLocalSocket>(this);
+  socket->connectToServer(communicatorSocketName());
+
+  if (socket->state() != QLocalSocket::ConnectedState)
+    return;
+
+  socket->write(block);
+  socket->flush();
 }
 
 bool
@@ -278,22 +328,17 @@ App::parseCommandLineArguments(QStringList const &args) {
   if (args.isEmpty())
     return true;
 
-  auto stringArgs = std::vector<std::string>{};
-  stringArgs.reserve(args.count() - 1);
-
-  for (auto idx = 1, numArgs = args.count(); idx < numArgs; ++idx)
-    stringArgs.emplace_back(to_utf8(args[idx]));
-
-  m_cliParser.reset(new GuiCliParser{stringArgs});
+  m_cliParser.reset(new GuiCliParser{Util::toStdStringVector(args, 1)});
   m_cliParser->run();
 
   if (m_cliParser->exitAfterParsing())
     return false;
 
-  if (isOtherInstanceRunning())
-    sendArgumentsToRunningInstance();
+  if (!isOtherInstanceRunning())
+    return true;
 
-  return true;
+  sendArgumentsToRunningInstance();
+  return false;
 }
 
 void
@@ -309,6 +354,26 @@ App::handleCommandLineArgumentsLocally() {
 
   if (!m_cliParser->m_editHeaders.isEmpty())
     emit editingHeadersRequested(m_cliParser->m_editHeaders);
+}
+
+void
+App::receiveInstanceCommunication() {
+  auto socket = m_instanceCommunicator->nextPendingConnection();
+  connect(socket, &QLocalSocket::disconnected, socket, &QLocalSocket::deleteLater);
+
+  if (!socket->waitForReadyRead(0))
+    return;
+
+  QDataStream in{socket};
+  in.setVersion(QDataStream::Qt_5_0);
+
+  auto args = QStringList{};
+  in >> args;
+  socket->disconnect();
+
+  m_cliParser.reset(new GuiCliParser{Util::toStdStringVector(args)});
+  m_cliParser->run();
+  handleCommandLineArgumentsLocally();
 }
 
 }}

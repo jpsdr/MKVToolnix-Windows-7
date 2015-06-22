@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QFileInfo>
 #include <QStringList>
 
 #include "common/command_line.h"
@@ -49,7 +50,7 @@ GuiCliParser::initParser() {
 
 void
 GuiCliParser::handleFileNameArg() {
-  auto arg = Q(m_current_arg);
+  auto arg = QFileInfo{Q(m_current_arg)}.absoluteFilePath();
 
   if (arg.endsWith(Q(".mtxcfg")))
     m_configFiles << arg;
@@ -98,6 +99,20 @@ bool
 GuiCliParser::exitAfterParsing()
   const {
   return m_exitAfterParsing;
+}
+
+QStringList
+GuiCliParser::rebuildCommandLine()
+  const {
+  auto args = QStringList{} << m_configFiles << m_addToMerge;
+
+  if (!m_editChapters.isEmpty())
+    args << Q("--edit-chapters") << m_editChapters;
+
+  if (!m_editHeaders.isEmpty())
+    args << Q("--edit-headers") << m_editHeaders;
+
+  return args;
 }
 
 }}
