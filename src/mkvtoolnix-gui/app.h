@@ -7,6 +7,8 @@
 #include <QStringList>
 #include <QTranslator>
 
+#include "mkvtoolnix-gui/gui_cli_parser.h"
+
 namespace mtx { namespace gui {
 
 using Iso639Language     = std::pair<QString, QString>;
@@ -20,6 +22,7 @@ class App : public QApplication {
 
 protected:
   std::unique_ptr<QTranslator> m_currentTranslator;
+  std::unique_ptr<GuiCliParser> m_cliParser;
 
 public:
   App(int &argc, char **argv);
@@ -28,6 +31,17 @@ public:
   void retranslateUi();
   void initializeLocale(QString const &requestedLocale = QString{});
 
+  bool parseCommandLineArguments(QStringList const &args);
+  void handleCommandLineArgumentsLocally();
+
+  bool isOtherInstanceRunning() const;
+  void sendArgumentsToRunningInstance();
+
+signals:
+  void addingFilesToMergeRequested(QStringList const &fileNames);
+  void editingChaptersRequested(QStringList const &fileNames);
+  void editingHeadersRequested(QStringList const &fileNames);
+  void openConfigFilesRequested(QStringList const &fileNames);
 
 public slots:
   void saveSettings() const;

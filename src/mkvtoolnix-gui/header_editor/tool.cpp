@@ -46,13 +46,15 @@ void
 Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,   this, &Tool::selectFileToOpen);
-  connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,   this, &Tool::save);
-  connect(mwUi->actionHeaderEditorValidate, &QAction::triggered,   this, &Tool::validate);
-  connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,   this, &Tool::reload);
-  connect(mwUi->actionHeaderEditorClose,    &QAction::triggered,   this, &Tool::closeCurrentTab);
+  connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,           this, &Tool::selectFileToOpen);
+  connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,           this, &Tool::save);
+  connect(mwUi->actionHeaderEditorValidate, &QAction::triggered,           this, &Tool::validate);
+  connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,           this, &Tool::reload);
+  connect(mwUi->actionHeaderEditorClose,    &QAction::triggered,           this, &Tool::closeCurrentTab);
 
-  connect(ui->openFileButton,               &QPushButton::clicked, this, &Tool::selectFileToOpen);
+  connect(ui->openFileButton,               &QPushButton::clicked,         this, &Tool::selectFileToOpen);
+
+  connect(App::instance(),                  &App::editingHeadersRequested, this, &Tool::openFilesFromCommandLine);
 }
 
 void
@@ -92,12 +94,20 @@ Tool::dragEnterEvent(QDragEnterEvent *event) {
 
 void
 Tool::dropEvent(QDropEvent *event) {
-  if (!m_filesDDHandler.handle(event, true))
-    return;
+  if (m_filesDDHandler.handle(event, true))
+    openFiles(m_filesDDHandler.fileNames());
+}
 
-  auto files = m_filesDDHandler.fileNames();
-  for (auto const &file : files)
+void
+Tool::openFiles(QStringList const &fileNames) {
+  for (auto const &file : fileNames)
     openFile(file);
+}
+
+void
+Tool::openFilesFromCommandLine(QStringList const &fileNames) {
+  MainWindow::get()->switchToTool(this);
+  openFiles(fileNames);
 }
 
 void

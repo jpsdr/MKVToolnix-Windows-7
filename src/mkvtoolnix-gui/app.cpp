@@ -1,9 +1,11 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
 #include <QLibraryInfo>
 
 #include <boost/optional.hpp>
 
+#include "common/command_line.h"
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
@@ -29,6 +31,7 @@ App::App(int &argc,
   : QApplication{argc, argv}
 {
   mtx_common_init("mkvtoolnix-gui", argv[0]);
+  version_info = get_version_info("mkvtoolnix-gui", vif_full);
 
   // The routines for handling unique numbers cannot cope with
   // multiple chapters being worked on at the same time as they safe
@@ -256,6 +259,56 @@ App::initializeLocale(QString const &requestedLocale) {
   init_locales(locale);
 
   retranslateUi();
+}
+
+bool
+App::isOtherInstanceRunning()
+  const {
+  // TODO: App::isOtherInstanceRunning
+  return false;
+}
+
+void
+App::sendArgumentsToRunningInstance() {
+  // TODO: App::sendArgumentsToOtherInstance
+}
+
+bool
+App::parseCommandLineArguments(QStringList const &args) {
+  if (args.isEmpty())
+    return true;
+
+  auto stringArgs = std::vector<std::string>{};
+  stringArgs.reserve(args.count() - 1);
+
+  for (auto idx = 1, numArgs = args.count(); idx < numArgs; ++idx)
+    stringArgs.emplace_back(to_utf8(args[idx]));
+
+  m_cliParser.reset(new GuiCliParser{stringArgs});
+  m_cliParser->run();
+
+  if (m_cliParser->exitAfterParsing())
+    return false;
+
+  if (isOtherInstanceRunning())
+    sendArgumentsToRunningInstance();
+
+  return true;
+}
+
+void
+App::handleCommandLineArgumentsLocally() {
+  if (!m_cliParser->m_configFiles.isEmpty())
+    emit openConfigFilesRequested(m_cliParser->m_configFiles);
+
+  if (!m_cliParser->m_addToMerge.isEmpty())
+    emit addingFilesToMergeRequested(m_cliParser->m_addToMerge);
+
+  if (!m_cliParser->m_editChapters.isEmpty())
+    emit editingChaptersRequested(m_cliParser->m_editChapters);
+
+  if (!m_cliParser->m_editHeaders.isEmpty())
+    emit editingHeadersRequested(m_cliParser->m_editHeaders);
 }
 
 }}

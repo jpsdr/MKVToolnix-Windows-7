@@ -43,13 +43,15 @@ main(int argc,
      char **argv) {
   registerMetaTypes();
 
-  auto app        = std::make_unique<App>(argc, argv);
-  auto mainWindow = std::make_unique<MainWindow>();
+  auto app = std::make_unique<App>(argc, argv);
 
-  mainWindow->show();
-  app->exec();
+  if (app->parseCommandLineArguments(App::arguments())) {
+    auto mainWindow = std::make_unique<MainWindow>();
+    mainWindow->show();
+    app->handleCommandLineArgumentsLocally();
+    app->exec();
+  }
 
-  mainWindow.reset();
   app.reset();
 
   mxexit();

@@ -49,6 +49,10 @@ public slots:
 
   virtual void filesDropped(QStringList const &fileNames);
 
+  virtual void addMultipleFiles(QStringList const &fileNames);
+  virtual void addMultipleFilesFromCommandLine(QStringList const &fileNames);
+  virtual void openMultipleConfigFilesFromCommandLine(QStringList const &fileNames);
+
 protected:
   Tab *appendTab(Tab *tab);
   virtual Tab *currentTab();

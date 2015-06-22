@@ -77,6 +77,7 @@ cli_parser_c::option_t::format_text() {
 
 cli_parser_c::cli_parser_c(std::vector<std::string> const &args)
   : m_args{args}
+  , m_no_common_cli_args{}
 {
   m_hooks[cli_parser_c::ht_common_options_parsed] = std::vector<cli_parser_cb_t>();
   m_hooks[cli_parser_c::ht_unknown_option]        = std::vector<cli_parser_cb_t>();
@@ -85,7 +86,7 @@ cli_parser_c::cli_parser_c(std::vector<std::string> const &args)
 void
 cli_parser_c::parse_args() {
   set_usage();
-  while (handle_common_cli_args(m_args, ""))
+  while (!m_no_common_cli_args && handle_common_cli_args(m_args, ""))
     set_usage();
 
   run_hooks(cli_parser_c::ht_common_options_parsed);

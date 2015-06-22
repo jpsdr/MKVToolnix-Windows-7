@@ -48,12 +48,15 @@ void
 Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionMergeNew,   &QAction::triggered,   this, &Tool::newConfig);
-  connect(mwUi->actionMergeOpen,  &QAction::triggered,   this, &Tool::openConfig);
-  connect(mwUi->actionMergeClose, &QAction::triggered,   this, &Tool::closeCurrentTab);
+  connect(mwUi->actionMergeNew,   &QAction::triggered,               this, &Tool::newConfig);
+  connect(mwUi->actionMergeOpen,  &QAction::triggered,               this, &Tool::openConfig);
+  connect(mwUi->actionMergeClose, &QAction::triggered,               this, &Tool::closeCurrentTab);
 
-  connect(ui->newFileButton,      &QPushButton::clicked, this, &Tool::newConfig);
-  connect(ui->openFileButton,     &QPushButton::clicked, this, &Tool::openConfig);
+  connect(ui->newFileButton,      &QPushButton::clicked,             this, &Tool::newConfig);
+  connect(ui->openFileButton,     &QPushButton::clicked,             this, &Tool::openConfig);
+
+  connect(App::instance(),        &App::addingFilesToMergeRequested, this, &Tool::addMultipleFilesFromCommandLine);
+  connect(App::instance(),        &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
 }
 
 void
@@ -237,16 +240,32 @@ Tool::filesDropped(QStringList const &fileNames) {
     else
       mediaFiles << fileName;
 
-  if (mediaFiles.isEmpty())
-    return;
+  if (!mediaFiles.isEmpty())
+    addMultipleFiles(mediaFiles);
+}
 
+void
+Tool::addMultipleFiles(QStringList const &fileNames) {
   if (!ui->merges->count())
     newConfig();
 
   auto tab = currentTab();
   Q_ASSERT(!!tab);
 
-  tab->addFilesToBeAddedOrAppendedDelayed(mediaFiles);
+  tab->addFilesToBeAddedOrAppendedDelayed(fileNames);
+}
+
+void
+Tool::addMultipleFilesFromCommandLine(QStringList const &fileNames) {
+  MainWindow::get()->switchToTool(this);
+  addMultipleFiles(fileNames);
+}
+
+void
+Tool::openMultipleConfigFilesFromCommandLine(QStringList const &fileNames) {
+  MainWindow::get()->switchToTool(this);
+  for (auto const &fileName : fileNames)
+    openConfigFile(fileName);
 }
 
 }}}

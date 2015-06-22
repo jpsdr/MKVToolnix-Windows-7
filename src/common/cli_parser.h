@@ -57,6 +57,8 @@ protected:
 
   std::map<hook_type_e, std::vector<cli_parser_cb_t>> m_hooks;
 
+  bool m_no_common_cli_args;
+
 protected:
   cli_parser_c(std::vector<std::string> const &args);
 

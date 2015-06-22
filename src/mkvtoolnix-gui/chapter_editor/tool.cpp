@@ -47,18 +47,20 @@ void
 Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionChapterEditorNew,            &QAction::triggered,         this, &Tool::newFile);
-  connect(mwUi->actionChapterEditorOpen,           &QAction::triggered,         this, &Tool::selectFileToOpen);
-  connect(mwUi->actionChapterEditorSave,           &QAction::triggered,         this, &Tool::save);
-  connect(mwUi->actionChapterEditorSaveAsXml,      &QAction::triggered,         this, &Tool::saveAsXml);
-  connect(mwUi->actionChapterEditorSaveToMatroska, &QAction::triggered,         this, &Tool::saveToMatroska);
-  connect(mwUi->actionChapterEditorReload,         &QAction::triggered,         this, &Tool::reload);
-  connect(mwUi->actionChapterEditorClose,          &QAction::triggered,         this, &Tool::closeCurrentTab);
+  connect(mwUi->actionChapterEditorNew,            &QAction::triggered,            this, &Tool::newFile);
+  connect(mwUi->actionChapterEditorOpen,           &QAction::triggered,            this, &Tool::selectFileToOpen);
+  connect(mwUi->actionChapterEditorSave,           &QAction::triggered,            this, &Tool::save);
+  connect(mwUi->actionChapterEditorSaveAsXml,      &QAction::triggered,            this, &Tool::saveAsXml);
+  connect(mwUi->actionChapterEditorSaveToMatroska, &QAction::triggered,            this, &Tool::saveToMatroska);
+  connect(mwUi->actionChapterEditorReload,         &QAction::triggered,            this, &Tool::reload);
+  connect(mwUi->actionChapterEditorClose,          &QAction::triggered,            this, &Tool::closeCurrentTab);
 
-  connect(ui->newFileButton,                       &QPushButton::clicked,       this, &Tool::newFile);
-  connect(ui->openFileButton,                      &QPushButton::clicked,       this, &Tool::selectFileToOpen);
+  connect(ui->newFileButton,                       &QPushButton::clicked,          this, &Tool::newFile);
+  connect(ui->openFileButton,                      &QPushButton::clicked,          this, &Tool::selectFileToOpen);
 
-  connect(ui->editors,                             &QTabWidget::currentChanged, this, &Tool::enableMenuActions);
+  connect(ui->editors,                             &QTabWidget::currentChanged,    this, &Tool::enableMenuActions);
+
+  connect(App::instance(),                         &App::editingChaptersRequested, this, &Tool::openFilesFromCommandLine);
 }
 
 void
@@ -127,7 +129,7 @@ Tool::dragEnterEvent(QDragEnterEvent *event) {
 void
 Tool::dropEvent(QDropEvent *event) {
   if (m_filesDDHandler.handle(event, true))
-    filesDropped(m_filesDDHandler.fileNames());
+    openFiles(m_filesDDHandler.fileNames());
 }
 
 void
@@ -141,9 +143,15 @@ Tool::openFile(QString const &fileName) {
 }
 
 void
-Tool::filesDropped(QStringList const &fileNames) {
+Tool::openFiles(QStringList const &fileNames) {
   for (auto const &fileName : fileNames)
     openFile(fileName);
+}
+
+void
+Tool::openFilesFromCommandLine(QStringList const &fileNames) {
+  MainWindow::get()->switchToTool(this);
+  openFiles(fileNames);
 }
 
 void

@@ -47,7 +47,8 @@ public slots:
   virtual void closeSendingTab();
   virtual bool closeAllTabs();
   virtual void reload();
-  virtual void filesDropped(QStringList const &fileNames);
+  virtual void openFiles(QStringList const &fileNames);
+  virtual void openFilesFromCommandLine(QStringList const &fileNames);
 
 protected:
   Tab * appendTab(Tab *tab);
