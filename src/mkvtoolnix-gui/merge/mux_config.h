@@ -103,6 +103,7 @@ public:
   static void saveProperties(QSettings &settings, QHash<QString, QString> const &properties);
   static void loadProperties(QSettings &settings, QHash<QString, QString> &properties);
   static void debugDumpSpecificTrackList(QList<Track *> const &tracks);
+  static QString settingsType();
 };
 
 template<typename T>

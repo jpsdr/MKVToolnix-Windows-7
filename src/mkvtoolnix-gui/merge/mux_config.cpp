@@ -2,6 +2,7 @@
 
 #include "common/at_scope_exit.h"
 #include "common/strings/editing.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/merge/attachment.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
@@ -170,7 +171,15 @@ MuxConfig::load(QSettings &settings) {
   reset();
 
   // Check supported config file version
-  if (settings.value("version", std::numeric_limits<int>::max()).toInt() > MTXCFG_VERSION)
+  if (settings.childGroups().contains(App::settingsBaseGroupName())) {
+    settings.beginGroup(App::settingsBaseGroupName());
+    if (   (settings.value("version", std::numeric_limits<int>::max()).toInt() > MTXCFG_VERSION)
+        || (settings.value("type").toString() != settingsType()))
+      throw InvalidSettingsX{};
+    settings.endGroup();
+
+  } else if (settings.value("version", std::numeric_limits<int>::max()).toInt() > MTXCFG_VERSION)
+    // Config files written until 8.0.0 didn't use that group.
     throw InvalidSettingsX{};
 
   settings.beginGroup("input");
@@ -235,7 +244,10 @@ MuxConfig::saveProperties(QSettings &settings,
 void
 MuxConfig::save(QSettings &settings)
   const {
+  settings.beginGroup(App::settingsBaseGroupName());
   settings.setValue("version", MTXCFG_VERSION);
+  settings.setValue("type",    settingsType());
+  settings.endGroup();
 
   settings.beginGroup("input");
   saveSettingsGroup("files",       m_files,       settings);
@@ -481,6 +493,11 @@ MuxConfig::debugDumpSpecificTrackList(QList<Track *> const &tracks) {
       mxinfo(boost::format("  %1%/%2% %3% %4% from %5%\n") % appIdx % appNum % appTrack.nameForType() % appTrack.m_codec % to_utf8(QFileInfo{appTrack.m_file->m_fileName}.fileName()));
     }
   }
+}
+
+QString
+MuxConfig::settingsType() {
+  return Q("MuxConfig");
 }
 
 }}}

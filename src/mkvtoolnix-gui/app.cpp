@@ -376,4 +376,9 @@ App::receiveInstanceCommunication() {
   handleCommandLineArgumentsLocally();
 }
 
+QString
+App::settingsBaseGroupName() {
+  return Q("MKVToolNix GUI Settings");
+}
+
 }}

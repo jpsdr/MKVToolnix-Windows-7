@@ -81,6 +81,7 @@ public:
   static bool isInstalled();
 
   static QString communicatorSocketName();
+  static QString settingsBaseGroupName();
 };
 
 }}
