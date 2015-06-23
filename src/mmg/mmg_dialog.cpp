@@ -1997,11 +1997,21 @@ mmg_dialog::show_update_notices() {
 
 void
 mmg_dialog::show_deprecation_warning() {
+  auto cfg       = wxConfigBase::Get();
+  auto const key = wxU("/GUI/deprecation_warning_shown");
+  bool warned    = false;
+
+  if (cfg->Read(key, &warned, false) && warned)
+    return;
+
   auto text = Z("Please note that this program (mkvmerge GUI) is deprecated and will be removed within one or two releases.")
     + wxU(" ")
     + Z("It has been superseded by the new MKVToolNix GUI which should also be included in the same package.");
 
   wxMessageBox(text, Z("mkvmerge GUI deprecated"), wxCENTER | wxOK | wxICON_WARNING);
+
+  cfg->Write(key, true);
+  cfg->Flush();
 }
 
 IMPLEMENT_CLASS(mmg_dialog, wxFrame);
