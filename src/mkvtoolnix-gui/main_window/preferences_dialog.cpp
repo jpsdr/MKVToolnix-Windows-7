@@ -30,7 +30,10 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
   setupOnlineCheck();
   setupInterfaceLanguage();
+
+  ui->cbGuiUseDefaultJobDescription->setChecked(m_cfg.m_useDefaultJobDescription);
   setupJobRemovalPolicy();
+
   setupCommonLanguages();
   setupCommonCountries();
   setupCommonCharacterSets();
@@ -92,6 +95,8 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
   ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
+
+  Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled the GUI will let you enter a description for a job when adding it to the queue."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
@@ -321,6 +326,7 @@ PreferencesDialog::save() {
   m_cfg.m_disableAnimations             = ui->cbGuiDisableAnimations->isChecked();
   m_cfg.m_warnBeforeClosingModifiedTabs = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
   m_cfg.m_warnBeforeAbortingJobs        = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
+  m_cfg.m_useDefaultJobDescription      = ui->cbGuiUseDefaultJobDescription->isChecked();
   auto idx                              = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy              = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 

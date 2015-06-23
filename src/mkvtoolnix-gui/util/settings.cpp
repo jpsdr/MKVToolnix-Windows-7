@@ -73,6 +73,7 @@ Settings::load() {
   m_enableMuxingAllSubtitleTracks      = reg.value("enableMuxingAllSubtitleTracks", false).toBool();
   m_enableMuxingTracksByTheseLanguages = reg.value("enableMuxingTracksByTheseLanguages").toStringList();
 
+  m_useDefaultJobDescription           = reg.value("useDefaultJobDescription", false).toBool();
   m_jobRemovalPolicy                   = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
 
   m_disableAnimations                  = reg.value("disableAnimations", false).toBool();
@@ -152,6 +153,7 @@ Settings::save()
   reg.setValue("enableMuxingAllSubtitleTracks",      m_enableMuxingAllSubtitleTracks);
   reg.setValue("enableMuxingTracksByTheseLanguages", m_enableMuxingTracksByTheseLanguages);
 
+  reg.setValue("useDefaultJobDescription",           m_useDefaultJobDescription);
   reg.setValue("jobRemovalPolicy",                   static_cast<int>(m_jobRemovalPolicy));
 
   reg.setValue("disableAnimations",                  m_disableAnimations);

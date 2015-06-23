@@ -279,16 +279,18 @@ Tab::addToJobQueue(bool startNow) {
   job->m_description = job->displayableDescription();
 
   if (!startNow) {
-    auto newDescription = QString{};
+    if (!Util::Settings::get().m_useDefaultJobDescription) {
+      auto newDescription = QString{};
 
-    while (newDescription.isEmpty()) {
-      bool ok = false;
-      newDescription = QInputDialog::getText(this, QY("Enter job description"), QY("Please enter the new job's description."), QLineEdit::Normal, job->m_description, &ok);
-      if (!ok)
-        return;
+      while (newDescription.isEmpty()) {
+        bool ok = false;
+        newDescription = QInputDialog::getText(this, QY("Enter job description"), QY("Please enter the new job's description."), QLineEdit::Normal, job->m_description, &ok);
+        if (!ok)
+          return;
+      }
+
+      job->m_description = newDescription;
     }
-
-    job->m_description = newDescription;
 
     MainWindow::get()->showIconMovingToTool(Q("task-delegate.png"), *MainWindow::jobTool());
 
