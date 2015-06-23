@@ -1,5 +1,12 @@
 2015-06-23  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: merge tool bug fix: when appending files with
+        multiple tracks of a type (e.g. multiple audio tracks) then all
+        tracks of that kind would get assigned to the first track of that
+        kind of the file they're appended to. Now the second audio track
+        from the appended file is appended to the second audio track of
+        the existing file, the third to the third etc. Fixes #1257.
+
         * MKVToolNix GUI: merge tool bug fix: fixed automatic output file
         name re-generation when the mux status of tracks changes. Fixes
         #1253.

@@ -244,10 +244,22 @@ SourceFile::fixAssociations(MuxConfig::Loader &l) {
 }
 
 Track *
-SourceFile::findFirstTrackOfType(Track::Type type)
+SourceFile::findNthOrLastTrackOfType(Track::Type type,
+                                     int nth)
   const {
-  auto itr = brng::find_if(m_tracks, [type](TrackPtr const &track) { return type == track->m_type; });
-  return itr != m_tracks.end() ? itr->get() : nullptr;
+  auto nthFound   = -1;
+  auto lastOfType = static_cast<Track *>(nullptr);
+
+  for (auto const &track : m_tracks)
+    if (track->m_type == type) {
+      ++nthFound;
+      if (nthFound == nth)
+        return track.get();
+
+      lastOfType = track.get();
+    }
+
+  return lastOfType;
 }
 
 void

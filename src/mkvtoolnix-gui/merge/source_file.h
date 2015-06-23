@@ -52,7 +52,7 @@ public:
   virtual void loadSettings(MuxConfig::Loader &l);
   virtual void fixAssociations(MuxConfig::Loader &l);
 
-  virtual Track *findFirstTrackOfType(Track::Type type) const;
+  virtual Track *findNthOrLastTrackOfType(Track::Type type, int nth) const;
 
   void buildMkvmergeOptions(QStringList &options) const;
 };

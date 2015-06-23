@@ -159,6 +159,8 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
   auto lastTrack = boost::accumulate(*m_tracks, static_cast<Track *>(nullptr), [](Track *accu, Track *t) { return t->isRegular() ? t : accu; });
   Q_ASSERT(!!lastTrack);
 
+  auto trackOffsets = QHash<Track::Type, int>{};
+
   for (auto &newTrack : tracks) {
     // Things like tags, chapters and attachments aren't appended to a
     // specific track. Instead they're appended to the top list.
@@ -167,9 +169,11 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
       continue;
     }
 
-    newTrack->m_appendedTo = fileToAppendTo->findFirstTrackOfType(newTrack->m_type);
-    if (!newTrack->m_appendedTo)
+    newTrack->m_appendedTo = fileToAppendTo->findNthOrLastTrackOfType(newTrack->m_type, trackOffsets[newTrack->m_type]++);
+    if (!newTrack->m_appendedTo) {
       newTrack->m_appendedTo = lastTrack;
+      newTrack->m_muxThis    = false;
+    }
 
     auto row = m_tracks->indexOf(newTrack->m_appendedTo);
     Q_ASSERT(row != -1);
