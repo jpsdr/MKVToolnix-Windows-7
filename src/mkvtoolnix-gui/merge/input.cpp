@@ -981,7 +981,7 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
 
 void
 Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
-  if (m_config.m_files.isEmpty()) {
+  if (m_config.m_files.isEmpty() || Util::Settings::get().m_mergeAlwaysAddDroppedFiles) {
     addOrAppendFiles(false, fileNames, {});
     return;
   }

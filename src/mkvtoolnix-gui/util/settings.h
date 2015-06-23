@@ -54,7 +54,7 @@ public:
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   ProcessPriority m_priority;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir, m_lastMatroskaFileDir;
-  bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes;
+  bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes, m_mergeAlwaysAddDroppedFiles;
   ClearMergeSettingsAction m_clearMergeSettings;
 
   OutputFileNamePolicy m_outputFileNamePolicy;

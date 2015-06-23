@@ -61,6 +61,7 @@ Settings::load() {
   m_autoSetFileTitle                   = reg.value("autoSetFileTitle",          true).toBool();
   m_clearMergeSettings                 = static_cast<ClearMergeSettingsAction>(reg.value("clearMergeSettings", static_cast<int>(ClearMergeSettingsAction::None)).toInt());
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
+  m_mergeAlwaysAddDroppedFiles         = reg.value("mergeAlwaysAddDroppedFiles", true).toBool();
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
   m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
@@ -139,6 +140,7 @@ Settings::save()
   reg.setValue("autoSetFileTitle",                   m_autoSetFileTitle);
   reg.setValue("clearMergeSettings",                 static_cast<int>(m_clearMergeSettings));
   reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
+  reg.setValue("mergeAlwaysAddDroppedFiles",         m_mergeAlwaysAddDroppedFiles);
 
   reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("fixedOutputDir",                     m_fixedOutputDir.path());
