@@ -89,6 +89,7 @@ public slots:
   virtual void onTrackSelectionChanged();
 
   virtual void onTrackNameEdited(QString newValue);
+  virtual void onTrackItemChanged(QStandardItem *item);
   virtual void onMuxThisChanged(int selected);
   virtual void onTrackLanguageChanged(int newValue);
   virtual void onDefaultTrackFlagChanged(int newValue);

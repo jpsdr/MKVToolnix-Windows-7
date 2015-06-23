@@ -94,6 +94,8 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[6]->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
 
   items[0]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
+  items[0]->setCheckable(true);
+  items[0]->setCheckState(track->m_muxThis ? Qt::Checked : Qt::Unchecked);
   items[1]->setIcon(  track->isAudio()      ? m_audioIcon
                     : track->isVideo()      ? m_videoIcon
                     : track->isSubtitles()  ? m_subtitleIcon

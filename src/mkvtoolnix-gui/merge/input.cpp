@@ -152,6 +152,7 @@ Tab::setupInputControls() {
 
   connect(m_filesModel,                 &SourceFileModel::rowsInserted,             this,          &Tab::onFileRowsInserted);
   connect(m_tracksModel,                &TrackModel::rowsInserted,                  this,          &Tab::onTrackRowsInserted);
+  connect(m_tracksModel,                &TrackModel::itemChanged,                   this,          &Tab::onTrackItemChanged);
 
   onTrackSelectionChanged();
   enableTracksActions();
@@ -458,6 +459,33 @@ Tab::withSelectedTracks(std::function<void(Track *)> code,
 void
 Tab::onTrackNameEdited(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_name = newValue; }, true);
+}
+
+void
+Tab::onTrackItemChanged(QStandardItem *item) {
+  if (!item)
+    return;
+
+  auto idx = m_tracksModel->indexFromItem(item);
+  if (idx.column())
+    return;
+
+  auto track = m_tracksModel->fromIndex(idx);
+  if (!track)
+    return;
+
+  auto newMuxThis = item->checkState() == Qt::Checked;
+  if (newMuxThis == track->m_muxThis)
+    return;
+
+  track->m_muxThis = newMuxThis;
+  m_tracksModel->trackUpdated(track);
+
+  auto selected = selectedTracks();
+  if ((1 == selected.count()) && selected.contains(track))
+    Util::setComboBoxIndexIf(ui->muxThis, [newMuxThis](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == newMuxThis); });
+
+  setOutputFileNameMaybe(ui->output->text());
 }
 
 void
