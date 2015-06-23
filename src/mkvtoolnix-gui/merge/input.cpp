@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QList>
 #include <QMessageBox>
+#include <QRegularExpression>
 #include <QString>
 #include <QTimer>
 
@@ -467,6 +468,8 @@ Tab::onMuxThisChanged(int selected) {
   auto muxThis = data.toBool();
 
   withSelectedTracks([&](Track *track) { track->m_muxThis = muxThis; });
+
+  setOutputFileNameMaybe(ui->output->text());
 }
 
 void
@@ -961,7 +964,7 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
   if (!outputDir.exists())
     outputDir = srcFileName.absoluteDir();
 
-  auto baseName = srcFileName.completeBaseName();
+  auto baseName = srcFileName.completeBaseName().replace(QRegularExpression{" \\(\\d+\\)$"}, Q(""));
   auto idx      = 0;
 
   while (true) {
