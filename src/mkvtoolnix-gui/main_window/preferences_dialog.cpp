@@ -39,6 +39,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMAutoSetFileTitle->setChecked(m_cfg.m_autoSetFileTitle);
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
   ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
+  ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
   Util::setupLanguageComboBox(*ui->cbMDefaultTrackLanguage, m_cfg.m_defaultTrackLanguage);
   Util::setupCharacterSetComboBox(*ui->cbMDefaultSubtitleCharset, m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
@@ -115,6 +116,14 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."))
                    .arg(QY("Checking this option causes the GUI to set that compression to »none« by default for all track types when adding files.")));
+
+  Util::setToolTip(ui->cbMClearMergeSettings,
+                   Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li></ol>")
+                   .arg(QY("The GUI can help you start your next merge settings after having started a job or having added a one to the job queue."))
+                   .arg(QY("With »create new settings« a new set of merge settings will be added."))
+                   .arg(QY("The current merge settings will be closed."))
+                   .arg(QY("With »remove input files« all input files will be removed."))
+                   .arg(QY("Most of the other settings on the output tab will be kept intact, though.")));
 
   Util::setToolTip(ui->cbMDefaultTrackLanguage,
                    Q("<p>%1 %2</p><p>%3</p>")
@@ -319,6 +328,7 @@ PreferencesDialog::save() {
   m_cfg.m_autoSetFileTitle              = ui->cbMAutoSetFileTitle->isChecked();
   m_cfg.m_setAudioDelayFromFileName     = ui->cbMSetAudioDelayFromFileName->isChecked();
   m_cfg.m_disableCompressionForAllTrackTypes = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
+  m_cfg.m_clearMergeSettings                 = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
   m_cfg.m_defaultTrackLanguage          = ui->cbMDefaultTrackLanguage->currentData().toString();
   m_cfg.m_defaultSubtitleCharset        = ui->cbMDefaultSubtitleCharset->currentData().toString();
   m_cfg.m_priority                      = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());

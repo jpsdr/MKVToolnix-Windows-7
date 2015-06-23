@@ -280,8 +280,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>767</width>
-            <height>661</height>
+            <width>860</width>
+            <height>627</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -320,59 +320,7 @@
                     </item>
                     <item>
                      <layout class="QGridLayout" name="gridLayout_2">
-                      <item row="1" column="1">
-                       <widget class="QComboBox" name="cbMDefaultSubtitleCharset"/>
-                      </item>
-                      <item row="0" column="1">
-                       <widget class="QComboBox" name="cbMDefaultTrackLanguage"/>
-                      </item>
-                      <item row="1" column="0">
-                       <widget class="QLabel" name="label_4">
-                        <property name="text">
-                         <string>Default &amp;subtitle charset to set:</string>
-                        </property>
-                        <property name="buddy">
-                         <cstring>cbMDefaultSubtitleCharset</cstring>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="0">
-                       <widget class="QLabel" name="label_5">
-                        <property name="text">
-                         <string>Process &amp;priority:</string>
-                        </property>
-                        <property name="buddy">
-                         <cstring>cbMProcessPriority</cstring>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="1">
-                       <widget class="QComboBox" name="cbMProcessPriority"/>
-                      </item>
-                      <item row="0" column="0">
-                       <widget class="QLabel" name="label_12">
-                        <property name="text">
-                         <string>Default track &amp;language to set:</string>
-                        </property>
-                        <property name="buddy">
-                         <cstring>cbMDefaultTrackLanguage</cstring>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="0">
-                       <widget class="QLabel" name="label_15">
-                        <property name="text">
-                         <string>Default add&amp;itional command line options:</string>
-                        </property>
-                        <property name="wordWrap">
-                         <bool>true</bool>
-                        </property>
-                        <property name="buddy">
-                         <cstring>leMDefaultAdditionalCommandLineOptions</cstring>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="1">
+                      <item row="4" column="1">
                        <layout class="QHBoxLayout" name="horizontalLayout_9">
                         <item>
                          <widget class="QLineEdit" name="leMDefaultAdditionalCommandLineOptions"/>
@@ -390,74 +338,88 @@
                         </item>
                        </layout>
                       </item>
+                      <item row="3" column="1">
+                       <widget class="QComboBox" name="cbMProcessPriority"/>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="label_12">
+                        <property name="text">
+                         <string>Default track &amp;language to set:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>cbMDefaultTrackLanguage</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="label_5">
+                        <property name="text">
+                         <string>Process &amp;priority:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>cbMProcessPriority</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0">
+                       <widget class="QLabel" name="label_4">
+                        <property name="text">
+                         <string>Default &amp;subtitle charset to set:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>cbMDefaultSubtitleCharset</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="4" column="0">
+                       <widget class="QLabel" name="label_15">
+                        <property name="text">
+                         <string>Default add&amp;itional command line options:</string>
+                        </property>
+                        <property name="wordWrap">
+                         <bool>true</bool>
+                        </property>
+                        <property name="buddy">
+                         <cstring>leMDefaultAdditionalCommandLineOptions</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QComboBox" name="cbMDefaultTrackLanguage"/>
+                      </item>
+                      <item row="2" column="1">
+                       <widget class="QComboBox" name="cbMDefaultSubtitleCharset"/>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_6">
+                        <property name="text">
+                         <string>&amp;Clearing settings automatically:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>cbMClearMergeSettings</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QComboBox" name="cbMClearMergeSettings">
+                        <item>
+                         <property name="text">
+                          <string>no</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>create new settings</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>remove input files</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
                      </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QGroupBox" name="groupBox_2">
-                   <property name="title">
-                    <string>Scanning playlists</string>
-                   </property>
-                   <layout class="QGridLayout" name="gridLayout">
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="label">
-                      <property name="text">
-                       <string>S&amp;can directory for other playlists:</string>
-                      </property>
-                      <property name="buddy">
-                       <cstring>cbMScanPlaylistsPolicy</cstring>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="1">
-                     <widget class="QComboBox" name="cbMScanPlaylistsPolicy">
-                      <property name="minimumSize">
-                       <size>
-                        <width>100</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <item>
-                       <property name="text">
-                        <string>Always ask the user</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>Always scan for other playlists</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>Never scan for other playlists</string>
-                       </property>
-                      </item>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="label_2">
-                      <property name="text">
-                       <string>Mi&amp;nimum playlist duration:</string>
-                      </property>
-                      <property name="buddy">
-                       <cstring>sbMMinPlaylistDuration</cstring>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="1">
-                     <widget class="QSpinBox" name="sbMMinPlaylistDuration">
-                      <property name="suffix">
-                       <string> seconds</string>
-                      </property>
-                      <property name="maximum">
-                       <number>99999</number>
-                      </property>
-                      <property name="singleStep">
-                       <number>10</number>
-                      </property>
-                     </widget>
                     </item>
                    </layout>
                   </widget>
@@ -560,6 +522,73 @@
                    <widget class="QCheckBox" name="cbMUniqueOutputFileNames">
                     <property name="text">
                      <string>Ensure the file name is uni&amp;que</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox_2">
+                 <property name="title">
+                  <string>Scanning playlists</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label">
+                    <property name="text">
+                     <string>S&amp;can directory for other playlists:</string>
+                    </property>
+                    <property name="buddy">
+                     <cstring>cbMScanPlaylistsPolicy</cstring>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="cbMScanPlaylistsPolicy">
+                    <property name="minimumSize">
+                     <size>
+                      <width>100</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>Always ask the user</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Always scan for other playlists</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Never scan for other playlists</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_2">
+                    <property name="text">
+                     <string>Mi&amp;nimum playlist duration:</string>
+                    </property>
+                    <property name="buddy">
+                     <cstring>sbMMinPlaylistDuration</cstring>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QSpinBox" name="sbMMinPlaylistDuration">
+                    <property name="suffix">
+                     <string> seconds</string>
+                    </property>
+                    <property name="maximum">
+                     <number>99999</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>10</number>
                     </property>
                    </widget>
                   </item>

@@ -7,6 +7,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
+#include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/util/message_box.h"
@@ -297,6 +298,24 @@ Tab::addToJobQueue(bool startNow) {
   MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
 
   m_savedState = currentState();
+
+  handleClearingMergeSettings();
+}
+
+void
+Tab::handleClearingMergeSettings() {
+  auto action = Util::Settings::get().m_clearMergeSettings;
+  if (Util::Settings::ClearMergeSettingsAction::None == action)
+    return;
+
+  if (Util::Settings::ClearMergeSettingsAction::RemoveInputFiles == action) {
+    onRemoveAllFiles();
+    return;
+  }
+
+  // Util::Settings::ClearMergeSettingsAction::NewSettings
+  MainWindow::mergeTool()->newConfig();
+  emit removeThisTab();
 }
 
 QString

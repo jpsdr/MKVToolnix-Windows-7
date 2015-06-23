@@ -165,6 +165,7 @@ public slots:
   virtual void resizeAttachmentsColumnsToContents() const;
 
   virtual void retranslateUi();
+  virtual void handleClearingMergeSettings();
 
 protected:
   virtual void setupAttachmentsControls();
