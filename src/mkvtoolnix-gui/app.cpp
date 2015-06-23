@@ -3,6 +3,7 @@
 #include <QLibraryInfo>
 #include <QLocalServer>
 #include <QLocalSocket>
+#include <QLockFile>
 
 #include <boost/optional.hpp>
 
@@ -68,27 +69,25 @@ App::communicatorSocketName() {
 
 void
 App::setupInstanceCommunicator() {
-  m_instanceCommunicator = new QLocalServer{this};
-  auto socketName        = communicatorSocketName();
-  auto ok                = m_instanceCommunicator->listen(socketName);
+  auto socketName   = communicatorSocketName();
+  auto lockFilePath = QDir{QDir::tempPath()}.filePath(Q("%1.lock").arg(socketName));
+  m_instanceLock    = std::make_unique<QLockFile>(lockFilePath);
 
-  if (!ok) {
-    // Try connecting to the socket. If that fails then it's likely a
-    // dead socket that can be removed.
-    auto socket = std::make_unique<QLocalSocket>(this);
-    socket->connectToServer(socketName);
-
-    if ((socket->state() != QLocalSocket::ConnectedState) && QLocalServer::removeServer(socketName))
-      ok = m_instanceCommunicator->listen(socketName);
+  m_instanceLock->setStaleLockTime(0);
+  if (!m_instanceLock->tryLock(0)) {
+    m_instanceLock.reset(nullptr);
+    return;
   }
 
-  if (ok)
-    connect(m_instanceCommunicator, &QLocalServer::newConnection, this, &App::receiveInstanceCommunication);
+  QLocalServer::removeServer(socketName);
 
-  else {
-    delete m_instanceCommunicator;
-    m_instanceCommunicator = nullptr;
-  }
+  m_instanceCommunicator = std::make_unique<QLocalServer>(this);
+
+  if (m_instanceCommunicator->listen(socketName))
+    connect(m_instanceCommunicator.get(), &QLocalServer::newConnection, this, &App::receiveInstanceCommunication);
+
+  else
+    m_instanceCommunicator.reset(nullptr);
 }
 
 void
@@ -298,7 +297,7 @@ App::initializeLocale(QString const &requestedLocale) {
 bool
 App::isOtherInstanceRunning()
   const {
-  return !m_instanceCommunicator;
+  return !m_instanceLock;
 }
 
 void
