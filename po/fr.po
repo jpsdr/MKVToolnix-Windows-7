@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-06-21 13:03+0200\n"
+"POT-Creation-Date: 2015-06-23 17:07+0200\n"
 "PO-Revision-Date: 2015-06-21 13:12+0200\n"
 "Last-Translator: DenB <denb10@free.fr>\n"
 "Language-Team: Denis Baron <denb10@free.fr>\n"
@@ -2569,18 +2569,30 @@ msgstr "Toutes les entrées de chapitre sont correctes."
 #: src/info/qt_ui.cpp:98
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:330
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:367
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:156
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:124
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:164
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:134
 #: src/mkvtoolnix-gui/merge/attachments.cpp:107
 #: src/mkvtoolnix-gui/merge/tab.cpp:132
 #: src/mkvtoolnix-gui/merge/tab.cpp:146
 #: src/mkvtoolnix-gui/merge/tab.cpp:179
 #: src/mkvtoolnix-gui/merge/tab.cpp:203
-#: src/mkvtoolnix-gui/merge/tool.cpp:147
+#: src/mkvtoolnix-gui/merge/tool.cpp:150
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:217
 msgid "All files"
 msgstr "Tous les fichiers"
+
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:37
+msgid "All following file names will be added as input files to the current merge job."
+msgstr ""
+
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:38
+msgid "All following file names will be opened in the chapter editor."
+msgstr ""
+
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:39
+msgid "All following file names will be opened in the header editor."
+msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:417
 #: src/mmg/header_editor/frame.cpp:615
@@ -2773,6 +2785,10 @@ msgstr "Une autre tâche de multiplexage est déjà en cours. Veuillez attendre 
 #: src/mkvtoolnix-gui/merge/output.cpp:83
 msgid "Any option given here will be added at the end of the mkvmerge command line."
 msgstr "Toute option indiquée ici sera ajoutée à la fin de la ligne de commande de mkvmerge."
+
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:31
+msgid "Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor depending on the current mode."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:684
 msgid "Append media files"
@@ -3308,7 +3324,7 @@ msgstr[1] "Chapitres : %1% entrées"
 msgid "Character set:"
 msgstr "Jeu de caractères :"
 
-#: src/common/cli_parser.cpp:177
+#: src/common/cli_parser.cpp:178
 msgid "Charset for strings on the command line"
 msgstr "Jeu de caractères pour les chaînes de la ligne de commande"
 
@@ -3334,7 +3350,7 @@ msgstr "Rechercher en ligne une mise à jo&ur disponible"
 msgid "Check online for the latest release"
 msgstr "Rechercher la dernière version en ligne"
 
-#: src/common/cli_parser.cpp:184
+#: src/common/cli_parser.cpp:185
 #: src/merge/mkvmerge.cpp:286
 msgid "Check online for the latest release."
 msgstr "Rechercher la dernière version en ligne."
@@ -4486,7 +4502,7 @@ msgstr "Nom anglais de la langue"
 msgid "Ensure the file name is uni&que"
 msgstr "Assurer que le nom du fichier est uni&que"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:283
+#: src/mkvtoolnix-gui/merge/tab.cpp:285
 msgid "Enter job description"
 msgstr "Entrer la description de la tâche"
 
@@ -4797,12 +4813,12 @@ msgstr "Données du fichier, taille : %1%"
 msgid "File description: %1%"
 msgstr "Description du fichier : %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:198
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:217
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:206
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:225
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:142
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:148
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:174
-#: src/mkvtoolnix-gui/merge/tool.cpp:175
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:158
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:184
+#: src/mkvtoolnix-gui/merge/tool.cpp:178
 msgid "File has been modified"
 msgstr "Fichier modifié"
 
@@ -4962,7 +4978,7 @@ msgstr "Forcer le laçage de style EBML."
 msgid "Force Xiph style lacing."
 msgstr "Forcer le laçage de style Xiph."
 
-#: src/common/cli_parser.cpp:176
+#: src/common/cli_parser.cpp:177
 msgid "Force the translations for 'code' to be used."
 msgstr "Forcer l'utilisation de la traduction pour « code »."
 
@@ -5087,6 +5103,7 @@ msgid "Global"
 msgstr "Global"
 
 #: src/extract/extract_cli_parser.cpp:60
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:41
 #: src/mmg/tabs/global.cpp:301
 msgid "Global options"
 msgstr "Options globales"
@@ -5454,7 +5471,7 @@ msgstr "Piste incompatible"
 msgid "Inconsistent AAC audio packet (length: %1% != len_check %2%)\n"
 msgstr "Paquet audio AAC incohérent (longueur : %1% != len_check %2%)\n"
 
-#: src/common/cli_parser.cpp:174
+#: src/common/cli_parser.cpp:175
 #: src/merge/mkvmerge.cpp:79
 msgid "Increase verbosity."
 msgstr "Augmenter la verbosité."
@@ -6096,6 +6113,10 @@ msgstr "Interpréteurs Linux/Unix (bash, zsh, etc.)"
 msgid "List all valid property names and exit"
 msgstr "Lister tous les noms de propriétés corrects et quitter"
 
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:30
+msgid "Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool."
+msgstr ""
+
 #: src/mmg/mmg_dialog.cpp:306
 msgid "Load a chapter file (simple/OGM format or XML format)"
 msgstr "Charger un fichier de chapitrage (format simple/OGM ou format XML)"
@@ -6151,7 +6172,7 @@ msgid "MKVToolNix option files"
 msgstr "Fichiers d'options MKVToolNix"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:146
-#: src/mkvtoolnix-gui/merge/tool.cpp:147
+#: src/mkvtoolnix-gui/merge/tool.cpp:150
 msgid "MKVToolnix GUI config files"
 msgstr "Fichiers de configuration MKVToolNix GUI"
 
@@ -6253,7 +6274,7 @@ msgstr "Matroska"
 msgid "Matroska A/V files (*.mka;*.mkv;*.mk3d)|*.mkv;*.mka;*.mk3d|%s"
 msgstr "Fichiers Matroska (*.mkv;*.mka;*.mks;*.mk3d)|*.mkv;*.mka;*.mks;*.mk3d|%s"
 
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:124
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:134
 msgid "Matroska and WebM files"
 msgstr "Fichiers WebM et Matroska"
 
@@ -6263,7 +6284,7 @@ msgstr "Fichiers Matroska audio/vidéo"
 
 #: src/info/qt_ui.cpp:87
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:367
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:153
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:161
 #: src/mkvtoolnix-gui/merge/output.cpp:105
 msgid "Matroska files"
 msgstr "Fichiers Matroska"
@@ -6376,7 +6397,7 @@ msgstr "Argument manquant pour « --output-charset ».\n"
 msgid "Missing argument for '--ui-language'.\n"
 msgstr "Argument manquant pour « --ui-language ».\n"
 
-#: src/common/cli_parser.cpp:105
+#: src/common/cli_parser.cpp:106
 #, boost-format
 msgid "Missing argument to '%1%'.\n"
 msgstr "Argument manquant pour « %1% ».\n"
@@ -6962,11 +6983,11 @@ msgstr "Ouvrir un fichier via le menu « Éditeur d'en-têtes » ou par glisser-
 msgid "Open an existing Matroska file"
 msgstr "Ouvrir un fichier Matroska existant"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:151
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:159
 msgid "Open files in chapter editor"
 msgstr "Ouvrir les fichiers dans l'éditeur de chapitres"
 
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:123
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:133
 msgid "Open files in header editor"
 msgstr "Ouvrir les fichiers dans l'éditeur d'en-têtes"
 
@@ -6974,17 +6995,17 @@ msgstr "Ouvrir les fichiers dans l'éditeur d'en-têtes"
 msgid "Open folder"
 msgstr "Ouvrir le dossier"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:147
+#: src/mkvtoolnix-gui/merge/tool.cpp:150
 msgid "Open settings file"
 msgstr "Ouvrir le fichier de configuration"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:160
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:168
 msgid "Opening %1 file in the chapter editor…"
 msgid_plural "Opening %1 files in the chapter editor…"
 msgstr[0] "Ouverture de %1 fichier dans l'éditeur de chapitres…"
 msgstr[1] "Ouverture de %1 fichiers dans l'éditeur de chapitres…"
 
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:128
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:138
 msgid "Opening %1 file in the header editor…"
 msgid_plural "Opening %1 files in the header editor…"
 msgstr[0] "Ouverture de %1 fichier dans l'éditeur d'en-têtes…"
@@ -7000,6 +7021,7 @@ msgid "Option file created."
 msgstr "Fichier d'options créé."
 
 #: src/info/info_cli_parser.cpp:35
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:35
 #: src/mmg/options/dialog.cpp:37
 #: src/propedit/propedit_cli_parser.cpp:191
 msgid "Options"
@@ -7053,7 +7075,7 @@ msgstr "Fichier cible :"
 msgid "Output filename"
 msgstr "Nom du fichier cible"
 
-#: src/common/cli_parser.cpp:178
+#: src/common/cli_parser.cpp:179
 msgid "Output messages in this charset"
 msgstr "Messages du rapport dans ce jeu de caractères"
 
@@ -7185,7 +7207,7 @@ msgstr "Veuillez ne pas confondre « mmg » lui-même et l'exécutable « mkvmer
 msgid "Please enter a description for the new job:"
 msgstr "Veuillez saisir une description pour la nouvelle tâche :"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:283
+#: src/mkvtoolnix-gui/merge/tab.cpp:285
 msgid "Please enter the new job's description."
 msgstr "Veuillez saisir la description de la nouvelle tâche."
 
@@ -7491,7 +7513,7 @@ msgstr "Lire le journal complet des modifications en ligne"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "Lecture des VOB chiffrés non prise en charge.\n"
 
-#: src/common/cli_parser.cpp:180
+#: src/common/cli_parser.cpp:181
 msgid "Reads additional command line options from the specified file (see man page)."
 msgstr "Lire les options de ligne de commande supplémentaires dans le fichier spécifié (voir la documentation)."
 
@@ -7522,7 +7544,7 @@ msgstr "Fichiers audio/vidéo RealMedia"
 msgid "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases this can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr %1%' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 msgstr "Les fichiers RealMedia peuvent contenir de l'audio HE-AAC / AAC+ / SBR AAC qui n'est parfois PAS détecté automatiquement. Vous devez donc préciser manuellement « --aac-is-sbr %1% » pour ce fichier source s'il contient du SBR AAC, sinon il sera multiplexé de façon INCORRECTE. Lisez également la documentation de mkvmerge.\n"
 
-#: src/common/cli_parser.cpp:179
+#: src/common/cli_parser.cpp:180
 msgid "Redirects all messages into this file."
 msgstr "Rediriger tous les messages dans ce fichier."
 
@@ -8296,11 +8318,13 @@ msgstr "Afficher la taille de chaque élément en incluant son en-tête"
 msgid "Show the size of each element including its header."
 msgstr "Afficher la taille de chaque élément y compris son en-tête."
 
-#: src/common/cli_parser.cpp:181
+#: src/common/cli_parser.cpp:182
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
 msgid "Show this help."
 msgstr "Afficher cette aide."
 
-#: src/common/cli_parser.cpp:182
+#: src/common/cli_parser.cpp:183
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:44
 msgid "Show version information."
 msgstr "Afficher les informations de version."
 
@@ -8337,7 +8361,7 @@ msgstr "Nombre entier avec signe"
 msgid "Silent Track Number: %1%"
 msgstr "Numéro de piste muet : %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:155
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:163
 msgid "Simple OGM-style chapter files"
 msgstr "Fichiers de chapitrage style OGM simple"
 
@@ -8614,7 +8638,7 @@ msgstr "Piste de sous-titres %u"
 msgid "Subtitles"
 msgstr "Sous-titres"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:152
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:160
 msgid "Supported file types"
 msgstr "Types de fichiers supportés"
 
@@ -8622,7 +8646,7 @@ msgstr "Types de fichiers supportés"
 msgid "Supported file types:\n"
 msgstr "Types de fichiers supportés :\n"
 
-#: src/common/cli_parser.cpp:175
+#: src/common/cli_parser.cpp:176
 #: src/merge/mkvmerge.cpp:80
 msgid "Suppress status output."
 msgstr "Supprimer les messages d'état."
@@ -9021,6 +9045,10 @@ msgstr "Les repères d'index pour la piste %1% sont écrits dans « %2% ».\n"
 msgid "The current file (number %d) cannot be removed. There are other files -- at least file number %d -- whose tracks are supposed to be appended to tracks from this file. Please remove those files first."
 msgstr "Le fichier actuel (numéro %d) ne peut pas être supprimé. D'autres fichiers (au moins le numéro %d) ont des pistes susceptibles d'être ajoutées aux siennes. Supprimez d'abord ces fichiers."
 
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:32
+msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
+msgstr ""
+
 #: src/merge/generic_packetizer.cpp:873
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
@@ -9030,6 +9058,10 @@ msgstr "Le code temporel du paquet actuel est inférieur à celui du précédent
 #, boost-format
 msgid "The default language code '%1%' is not a valid ISO639-2 language code and will be ignored.\n"
 msgstr "Le code de langue par défaut « %1% » n'est pas un code de langue ISO639-2 correct et sera ignoré.\n"
+
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:33
+msgid "The default mode is adding files for merging."
+msgstr ""
 
 #: src/mmg/tabs/input.cpp:1426
 #, c-format, boost-format
@@ -9357,14 +9389,14 @@ msgstr "Le fichier dans lequel vous essayez d'enregistrer est un fichier Matrosk
 msgid "The file you've added is a playlist."
 msgstr "Le fichier que vous avez ajouté est une liste de lecture."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:217
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:174
-#: src/mkvtoolnix-gui/merge/tool.cpp:175
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:225
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:184
+#: src/mkvtoolnix-gui/merge/tool.cpp:178
 msgid "The file »%1« has been modified. Do you really want to close? All changes will be lost."
 msgstr "Le fichier « %1 » a été modifié. Voulez-vous vraiment le fermer ? Tous les changements seront perdus."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:198
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:148
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:206
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:158
 msgid "The file »%1« has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "Le fichier « %1 » a été modifié. Voulez-vous vraiment le recharger ? Tous les changements seront perdus."
 
@@ -10249,6 +10281,10 @@ msgstr "C'est fait uniquement s'il y a déjà un fichier dont le nom correspond 
 msgid "This is the country that newly added chapter names get assigned automatically."
 msgstr "C'est le pays attribué automatiquement aux noms des chapitres récemment ajoutés."
 
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:37
+msgid "This is the default mode."
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:99
 msgid "This is the language that newly added chapter names get assigned automatically."
 msgstr "C'est la langue attribuée automatiquement aux noms des chapitres récemment ajoutés."
@@ -10770,7 +10806,7 @@ msgstr "En-tête inconnu 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgid "Unknown mode '%1%'.\n"
 msgstr "Mode inconnu « %1% ».\n"
 
-#: src/common/cli_parser.cpp:112
+#: src/common/cli_parser.cpp:113
 #, boost-format
 msgid "Unknown option '%1%'.\n"
 msgstr "Option inconnue « %1% ».\n"
@@ -10822,6 +10858,7 @@ msgid "Updating the '%1%' element failed. Reason:"
 msgstr "La mise à jour de l'élément « %1% » a échoué. Raison :"
 
 #: src/extract/extract_cli_parser.cpp:44
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:23
 msgid "Usage"
 msgstr "Utilisation"
 
@@ -11263,7 +11300,7 @@ msgid "Wrong identification string: '%|1$7s|' != 'kate\\0\\0\\0'"
 msgstr "Mauvaise chaîne d'identification : '%|1$7s|' != 'kate\\0\\0\\0'"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:330
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:154
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/merge/output.cpp:297
 msgid "XML chapter files"
 msgstr "Fichiers de chapitrage XML"
@@ -12181,6 +12218,19 @@ msgstr "Identifiant de piste mkvmerge/mkvextract : %1%"
 #: src/propedit/propedit_cli_parser.cpp:189
 msgid "mkvpropedit [options] <file> <actions>"
 msgstr "mkvpropedit [options] <fichier> <actions>"
+
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:24
+msgid "mkvtoolnix-gui <configuration file names>"
+msgstr ""
+
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:25
+msgid "mkvtoolnix-gui [--merge|--edit-chapters|--edit-headers] <file names>"
+msgstr ""
+
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:21
+#, fuzzy
+msgid "mkvtoolnix-gui [options] [file names]"
+msgstr "mkvinfo [options] <source>"
 
 #: src/common/mm_io.cpp:1025
 msgid "mm_text_io_c: UTF32_* is not supported at the moment.\n"
