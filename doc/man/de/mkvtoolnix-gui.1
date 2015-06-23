@@ -31,46 +31,45 @@
 mkvtoolnix-gui \- eine grafische Benutzeroberfl\(:ache f\(:ur \fBmkvmerge\fR(1) einschlie\(sslich eines Editors f\(:ur Kapitel und Kopfdaten
 .SH "\(:UBERSICHT"
 .HP \w'\fBmkvtoolnix\-gui\fR\ 'u
-\fBmkvtoolnix\-gui\fR [[configuration\-file\-name\&.mtxcfg] | [source\-file\&.ext] | [\-\-edit\-chapters\ [chapter\-file\&.ext]] | [\-\-edit\-headers\ [matroska\-file\&.mkv]]]
+\fBmkvtoolnix\-gui\fR [[Konfigurationsdateiname\&.mtxcfg] | [Quelldatei\&.ext] | [\-\-edit\-chapters\ [Kapiteldatei\&.ext]] | [\-\-edit\-headers\ [Matroska\-Datei\&.mkv]]]
 .SH "BESCHREIBUNG"
 .PP
 \fBmkvtoolnix-gui\fR(1)
-is a
+ist eine auf
 Qt(TM)
-based
-GUI
-for
+basierende graphische Benutzeroberfl\(:ache f\(:ur
 \fBmkvmerge\fR(1)
-(and will evolve to cover
+(und wird sich dahin weiterentwickeln, auch
 \fBmkvinfo\fR(1)
-and
+und
 \fBmkvextract\fR(1)
-as well)\&. It offers easy access to most of
-\fBmkvmerge\fR(1)\*(Aqs options\&. All settings (e\&.g\&. source files, track options etc) can be saved and restored\&.
+abzudecken)\&. Es bietet einen einfachen Zugang zu den meisten Optionen von
+\fBmkvmerge\fR(1)\&. Alle Einstellungen (z\&.B\&. Quelldateien, Spuroptionen etc\&.) k\(:onnen gespeichert und wiederhergestellt werden\&.
 .PP
-Listing configuration file names with the extension
+Das Auff\(:uhren von Konfigurationsdateinamen mit der Endung
 \&.mtxcfg
-causes the GUI to load the those configuration files in the appropriate tool\&. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor depending on the current mode\&. The current mode can be changed with
+sorgt daf\(:ur, dass die GUI diese Konfigurationsdateien im dazugeh\(:origen Werkzeug l\(:adt\&. Jeglicher anderer Dateiname wird abh\(:angig vom aktuellen Modus als Quelldatei zum Muxen hinzugef\(:ugt, im Kapiteleditor oder im Kopfdateneditor ge\(:offnet\&. Der aktuelle Modus kann mit
 \fB\-\-merge\fR,
 \fB\-\-edit\-chapters\fR
-or
-\fB\-\-edit\-headers\fR\&. The default mode is adding files for merging\&.
+oder
+\fB\-\-edit\-headers\fR
+ge\(:andert werden\&. Der Standardmodus ist das Hinzuf\(:ugen zum Muxen\&.
 .PP
-Note that if an instance of the application is already running when the application is started a second time all file names given on the command line are handled by the already\-running instance\&.
+Beachten Sie, dass, wenn bereits eine Instanz der Anwendung l\(:auft und eine zweite Instanz mit angegebenen Dateinamen gestartet wird, die Dateinamen in der bereits laufenden, ersten Instanz behandelt werden\&.
 .PP
 \fB\-\-merge\fR
 .RS 4
-All following file names will be added as input files to the current merge job\&. This is the default mode\&.
+Alle folgenden Dateinamen werden als Quelldateien zum aktuellen Mux\-Job hinzugef\(:ugt\&. Dies ist der Standardmodus\&.
 .RE
 .PP
 \fB\-\-edit\-chapters\fR
 .RS 4
-All following file names will be opened in the chapter editor\&.
+Alle folgenden Dateinamen werden im Kapiteleditor ge\(:offnet\&.
 .RE
 .PP
 \fB\-\-edit\-headers\fR
 .RS 4
-All following file names will be opened in the header editor\&.
+Alle folgenden Dateinamen werden im Kopfdateneditor ge\(:offnet\&.
 .RE
 .PP
 \fB\-h\fR, \fB\-\-help\fR
