@@ -10,11 +10,12 @@
 
 !define MTX_REGKEY "Software\bunkus.org"
 
-SetCompressor /SOLID lzma
 #SetCompress off
+SetCompressor /SOLID lzma
 SetCompressorDictSize 64
 
 !include "MUI2.nsh"
+!include "file_association.nsh"
 
 # MUI Settings
 !define MUI_ABORTWARNING
@@ -558,6 +559,8 @@ Section "Program files" SEC01
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Documentation\README.lnk" "$INSTDIR\doc\README.txt"
   !insertmacro MUI_STARTMENU_WRITE_END
 
+  ${registerExtension} "$INSTDIR\mkvtoolnix-gui.exe" ".mtxcfg" "MKVToolNix GUI Settings"
+
   SetOutPath "$INSTDIR"
   IfSilent +4 0
   MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(STRING_SHORTCUT_ON_DESKTOP)" IDNO +3
@@ -612,6 +615,8 @@ FunctionEnd
 
 Section Uninstall
   SetShellVarContext all
+
+  ${unregisterExtension} ".mtxcfg" "MKVToolNix GUI Settings"
 
   !insertmacro MUI_STARTMENU_GETFOLDER "Application" $ICONS_GROUP
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
