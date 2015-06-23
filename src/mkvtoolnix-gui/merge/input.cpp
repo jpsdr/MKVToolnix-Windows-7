@@ -760,10 +760,21 @@ void
 Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
   auto &cfg = Util::Settings::get();
 
+  auto defaultFlagSet = QHash<Track::Type, bool>{};
+  for (auto const &track : m_config.m_tracks)
+    if (track->m_defaultTrackFlag == 1)
+      defaultFlagSet[track->m_type] = true;
+
   for (auto const &file : files)
-    for (auto const &track : file->m_tracks)
+    for (auto const &track : file->m_tracks) {
       if (cfg.m_disableCompressionForAllTrackTypes)
         track->m_compression = Track::CompNone;
+
+      if (track->m_defaultTrackFlagWasSet && !defaultFlagSet[track->m_type]) {
+        track->m_defaultTrackFlag     = 1;
+        defaultFlagSet[track->m_type] = true;
+      }
+    }
 }
 
 QStringList
