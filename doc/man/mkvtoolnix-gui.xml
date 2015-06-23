@@ -50,8 +50,10 @@
   <cmdsynopsis>
    <command>mkvtoolnix-gui</command>
    <group>
-    <arg choice="opt">preferences-file.mtxcfg</arg>
+    <arg choice="opt">configuration-file-name.mtxcfg</arg>
     <arg choice="opt">source-file.ext</arg>
+    <arg choice="opt">--edit-chapters <arg>chapter-file.ext</arg></arg>
+    <arg choice="opt">--edit-headers <arg>matroska-file.mkv</arg></arg>
    </group>
   </cmdsynopsis>
  </refsynopsisdiv>
@@ -65,10 +67,57 @@
   </para>
 
   <para>
-   &mkvtoolnix-gui; knows few options. At the moment it only supports a single file name. If that file name's extenion is
-   '<literal>.mtxcfg</literal>' then it will be treated as a settings file and &mkvtoolnix-gui; will load its setting when it
-   starts. Otherwise the name is interpreted as being the name of an input file which will be added.
+   Listing configuration file names with the extension <literal>.mtxcfg</literal> causes the GUI to load the those configuration files in
+   the appropriate tool. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor
+   depending on the current mode. The current mode can be changed with <option>--merge</option>, <option>--edit-chapters</option> or
+   <option>--edit-headers</option>. The default mode is adding files for merging.
   </para>
+
+  <para>
+   Note that if an instance of the application is already running when the application is started a second time all file names given on the
+   command line are handled by the already-running instance.
+  </para>
+
+  <variablelist>
+   <varlistentry>
+    <term><option>--merge</option></term>
+    <listitem>
+     <para>All following file names will be added as input files to the current merge job. This is the default mode.</para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term><option>--edit-chapters</option></term>
+    <listitem>
+     <para>All following file names will be opened in the chapter editor.</para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term><option>--edit-headers</option></term>
+    <listitem>
+     <para>All following file names will be opened in the header editor.</para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term><option>-h</option>, <option>--help</option></term>
+    <listitem>
+     <para>
+      Show usage information and exit.
+     </para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term><option>-V</option>, <option>--version</option></term>
+    <listitem>
+     <para>
+      Show version information and exit.
+     </para>
+    </listitem>
+   </varlistentry>
+  </variablelist>
  </refsect1>
 
  <refsect1 id="mkvtoolnix-gui.seealso">

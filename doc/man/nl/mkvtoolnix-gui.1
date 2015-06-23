@@ -31,7 +31,7 @@
 mkvtoolnix-gui \- een grafische schil voor \fBmkvmerge\fR(1) inclusief een hoofdstuk en kop bewerker
 .SH "BEKNOPTE INHOUDSBESCHRIJVING"
 .HP \w'\fBmkvtoolnix\-gui\fR\ 'u
-\fBmkvtoolnix\-gui\fR [[preferences\-file\&.mtxcfg] | [source\-file\&.ext]]
+\fBmkvtoolnix\-gui\fR [[configuration\-file\-name\&.mtxcfg] | [source\-file\&.ext] | [\-\-edit\-chapters\ [chapter\-file\&.ext]] | [\-\-edit\-headers\ [matroska\-file\&.mkv]]]
 .SH "BESCHRIJVING"
 .PP
 \fBmkvtoolnix-gui\fR(1)
@@ -48,10 +48,40 @@ and
 as well)\&. It offers easy access to most of
 \fBmkvmerge\fR(1)\*(Aqs options\&. All settings (e\&.g\&. source files, track options etc) can be saved and restored\&.
 .PP
-\fBmkvtoolnix-gui\fR(1)
-knows few options\&. At the moment it only supports a single file name\&. If that file name\*(Aqs extenion is \*(Aq\&.mtxcfg\*(Aq then it will be treated as a settings file and
-\fBmkvtoolnix-gui\fR(1)
-will load its setting when it starts\&. Otherwise the name is interpreted as being the name of an input file which will be added\&.
+Listing configuration file names with the extension
+\&.mtxcfg
+causes the GUI to load the those configuration files in the appropriate tool\&. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor depending on the current mode\&. The current mode can be changed with
+\fB\-\-merge\fR,
+\fB\-\-edit\-chapters\fR
+or
+\fB\-\-edit\-headers\fR\&. The default mode is adding files for merging\&.
+.PP
+Note that if an instance of the application is already running when the application is started a second time all file names given on the command line are handled by the already\-running instance\&.
+.PP
+\fB\-\-merge\fR
+.RS 4
+All following file names will be added as input files to the current merge job\&. This is the default mode\&.
+.RE
+.PP
+\fB\-\-edit\-chapters\fR
+.RS 4
+All following file names will be opened in the chapter editor\&.
+.RE
+.PP
+\fB\-\-edit\-headers\fR
+.RS 4
+All following file names will be opened in the header editor\&.
+.RE
+.PP
+\fB\-h\fR, \fB\-\-help\fR
+.RS 4
+Toon gebruik informatie en sluit af\&.
+.RE
+.PP
+\fB\-V\fR, \fB\-\-version\fR
+.RS 4
+Toon versie informatie en sluit af\&.
+.RE
 .SH "ZIE OOK"
 .PP
 \fBmkvmerge\fR(1),
