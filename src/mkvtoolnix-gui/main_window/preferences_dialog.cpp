@@ -30,7 +30,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
   setupOnlineCheck();
   setupInterfaceLanguage();
-  setupJobsJobOutput();
+  setupJobRemovalPolicy();
   setupCommonLanguages();
   setupCommonCountries();
   setupCommonCharacterSets();
@@ -229,7 +229,7 @@ PreferencesDialog::setupInterfaceLanguage() {
 }
 
 void
-PreferencesDialog::setupJobsJobOutput() {
+PreferencesDialog::setupJobRemovalPolicy() {
   auto doRemove = Util::Settings::JobRemovalPolicy::Never != m_cfg.m_jobRemovalPolicy;
   auto idx      = std::max(static_cast<int>(m_cfg.m_jobRemovalPolicy), 1) - 1;
 

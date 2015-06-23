@@ -42,7 +42,7 @@ protected:
 
   void setupInterfaceLanguage();
   void setupOnlineCheck();
-  void setupJobsJobOutput();
+  void setupJobRemovalPolicy();
   void setupCommonLanguages();
   void setupCommonCountries();
   void setupCommonCharacterSets();
