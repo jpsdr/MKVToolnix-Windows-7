@@ -48,7 +48,6 @@ Settings::load() {
   m_lastOpenDir                        = QDir{reg.value("lastOpenDir").toString()};
   m_lastOutputDir                      = QDir{reg.value("lastOutputDir").toString()};
   m_lastConfigDir                      = QDir{reg.value("lastConfigDir").toString()};
-  m_lastMatroskaFileDir                = QDir{reg.value("lastMatroskaFileDir").toString()};
 
   m_oftenUsedLanguages                 = reg.value("oftenUsedLanguages").toStringList();
   m_oftenUsedCountries                 = reg.value("oftenUsedCountries").toStringList();
@@ -128,7 +127,6 @@ Settings::save()
   reg.setValue("lastOpenDir",                        m_lastOpenDir.path());
   reg.setValue("lastOutputDir",                      m_lastOutputDir.path());
   reg.setValue("lastConfigDir",                      m_lastConfigDir.path());
-  reg.setValue("lastMatroskaFileDir",                m_lastMatroskaFileDir.path());
 
   reg.setValue("oftenUsedLanguages",                 m_oftenUsedLanguages);
   reg.setValue("oftenUsedCountries",                 m_oftenUsedCountries);

@@ -135,7 +135,7 @@ Tool::dropEvent(QDropEvent *event) {
 void
 Tool::openFile(QString const &fileName) {
   auto &settings = Util::Settings::get();
-  settings.m_lastMatroskaFileDir = QFileInfo{fileName}.path();
+  settings.m_lastOpenDir = QFileInfo{fileName}.path();
   settings.save();
 
   appendTab(new Tab{this, fileName})
@@ -156,7 +156,7 @@ Tool::openFilesFromCommandLine(QStringList const &fileNames) {
 
 void
 Tool::selectFileToOpen() {
-  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in chapter editor"), Util::Settings::get().m_lastMatroskaFileDir.path(),
+  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in chapter editor"), Util::Settings::get().m_lastOpenDir.path(),
                                                  QY("Supported file types")           + Q(" (*.mkv *.mka *.mks *.mk3d *.txt *.xml);;") +
                                                  QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
                                                  QY("XML chapter files")              + Q(" (*.xml);;") +

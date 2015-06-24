@@ -112,8 +112,8 @@ Tool::openFilesFromCommandLine(QStringList const &fileNames) {
 
 void
 Tool::openFile(QString const &fileName) {
-  auto &settings = Util::Settings::get();
-  settings.m_lastMatroskaFileDir = QFileInfo{fileName}.path();
+  auto &settings         = Util::Settings::get();
+  settings.m_lastOpenDir = QFileInfo{fileName}.path();
   settings.save();
 
   auto tab = new Tab{this, fileName};
@@ -130,7 +130,7 @@ Tool::openFile(QString const &fileName) {
 
 void
 Tool::selectFileToOpen() {
-  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in header editor"), Util::Settings::get().m_lastMatroskaFileDir.path(),
+  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in header editor"), Util::Settings::get().m_lastOpenDir.path(),
                                                 QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
   if (fileNames.isEmpty())
     return;
