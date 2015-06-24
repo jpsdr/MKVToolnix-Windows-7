@@ -64,6 +64,7 @@ Settings::load() {
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
   m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
+  m_relativeOutputDir                  = QDir{reg.value("relativeOutputDir").toString()};
   m_fixedOutputDir                     = QDir{reg.value("fixedOutputDir").toString()};
 
   m_enableMuxingTracksByLanguage       = reg.value("enableMuxingTracksByLanguage", false).toBool();
@@ -108,6 +109,11 @@ Settings::load() {
   if (m_oftenUsedCharacterSets.isEmpty())
     for (auto const &characterSet : g_popular_character_sets)
       m_oftenUsedCharacterSets << Q(characterSet);
+
+  if (ToParentOfFirstInputFile == m_outputFileNamePolicy) {
+    m_outputFileNamePolicy = ToRelativeOfFirstInputFile;
+    m_relativeOutputDir    = Q("..");
+  }
 }
 
 QString
@@ -142,6 +148,7 @@ Settings::save()
   reg.setValue("mergeAlwaysAddDroppedFiles",         m_mergeAlwaysAddDroppedFiles);
 
   reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));
+  reg.setValue("relativeOutputDir",                  m_relativeOutputDir.path());
   reg.setValue("fixedOutputDir",                     m_fixedOutputDir.path());
   reg.setValue("uniqueOutputFileNames",              m_uniqueOutputFileNames);
 

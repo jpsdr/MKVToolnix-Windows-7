@@ -35,6 +35,7 @@ public:
     ToFixedDirectory,
     ToParentOfFirstInputFile,
     ToSameAsFirstInputFile,
+    ToRelativeOfFirstInputFile,
   };
 
   enum class JobRemovalPolicy {
@@ -58,7 +59,7 @@ public:
   ClearMergeSettingsAction m_clearMergeSettings;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
-  QDir m_fixedOutputDir;
+  QDir m_relativeOutputDir, m_fixedOutputDir;
   bool m_uniqueOutputFileNames;
 
   ScanForPlaylistsPolicy m_scanForPlaylistsPolicy;

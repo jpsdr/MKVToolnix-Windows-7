@@ -997,15 +997,11 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
   else if (Util::Settings::ToSameAsFirstInputFile == policy)
     outputDir = srcFileName.absoluteDir();
 
-  else if (Util::Settings::ToParentOfFirstInputFile == policy) {
-    outputDir = srcFileName.absoluteDir();
-    outputDir.cdUp();
+  else if (Util::Settings::ToRelativeOfFirstInputFile == policy)
+    outputDir = QDir{ srcFileName.absoluteDir().path() + Q("/") + settings.m_relativeOutputDir.path() };
 
-  } else
+  else
     Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested output file name policy");
-
-  if (!outputDir.exists())
-    outputDir = srcFileName.absoluteDir();
 
   auto baseName = srcFileName.completeBaseName().replace(QRegularExpression{" \\(\\d+\\)$"}, Q(""));
   auto idx      = 0;

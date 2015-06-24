@@ -478,18 +478,41 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QRadioButton" name="rbMAutoSetParentDirectory">
-                    <property name="text">
-                     <string>Pa&amp;rent directory of the first input file</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
                    <widget class="QRadioButton" name="rbMAutoSetPreviousDirectory">
                     <property name="text">
                      <string>Pre&amp;viously used output directory</string>
                     </property>
                    </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="rbMAutoSetRelativeDirectory">
+                    <property name="text">
+                     <string>Directory &amp;relative to first input file's directory:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_7">
+                    <item>
+                     <spacer name="horizontalSpacer_4">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeType">
+                       <enum>QSizePolicy::Fixed</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="leMAutoSetRelativeDirectory"/>
+                    </item>
+                   </layout>
                   </item>
                   <item>
                    <widget class="QRadioButton" name="rbMAutoSetFixedDirectory">
@@ -617,7 +640,7 @@
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>20</width>
-                   <height>0</height>
+                   <height>13</height>
                   </size>
                  </property>
                 </spacer>
@@ -770,23 +793,28 @@
   <tabstop>cbMAutoSetFileTitle</tabstop>
   <tabstop>cbMSetAudioDelayFromFileName</tabstop>
   <tabstop>cbMDisableCompressionForAllTrackTypes</tabstop>
-  <tabstop>cbMClearMergeSettings</tabstop>
   <tabstop>cbMAlwaysAddDroppedFiles</tabstop>
+  <tabstop>cbMClearMergeSettings</tabstop>
   <tabstop>cbMDefaultTrackLanguage</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
   <tabstop>cbMProcessPriority</tabstop>
   <tabstop>leMDefaultAdditionalCommandLineOptions</tabstop>
   <tabstop>pbMEditDefaultAdditionalCommandLineOptions</tabstop>
-  <tabstop>cbMScanPlaylistsPolicy</tabstop>
-  <tabstop>sbMMinPlaylistDuration</tabstop>
   <tabstop>cbMAutoSetOutputFileName</tabstop>
   <tabstop>rbMAutoSetSameDirectory</tabstop>
-  <tabstop>rbMAutoSetParentDirectory</tabstop>
   <tabstop>rbMAutoSetPreviousDirectory</tabstop>
+  <tabstop>rbMAutoSetRelativeDirectory</tabstop>
+  <tabstop>leMAutoSetRelativeDirectory</tabstop>
   <tabstop>rbMAutoSetFixedDirectory</tabstop>
   <tabstop>leMAutoSetFixedDirectory</tabstop>
   <tabstop>pbMBrowseAutoSetFixedDirectory</tabstop>
   <tabstop>cbMUniqueOutputFileNames</tabstop>
+  <tabstop>cbMScanPlaylistsPolicy</tabstop>
+  <tabstop>sbMMinPlaylistDuration</tabstop>
+  <tabstop>cbMEnableMuxingTracksByLanguage</tabstop>
+  <tabstop>cbMEnableMuxingAllVideoTracks</tabstop>
+  <tabstop>cbMEnableMuxingAllAudioTracks</tabstop>
+  <tabstop>cbMEnableMuxingAllSubtitleTracks</tabstop>
   <tabstop>tbOftenUsedXYZ</tabstop>
  </tabstops>
  <resources>

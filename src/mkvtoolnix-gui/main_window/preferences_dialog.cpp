@@ -192,7 +192,7 @@ PreferencesDialog::setupConnections() {
   connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,         ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
   connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,         this,                                 &PreferencesDialog::enableOutputFileNameControls);
   connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetParentDirectory,                  &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetRelativeDirectory,                &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
   connect(ui->rbMAutoSetPreviousDirectory,                &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
   connect(ui->rbMAutoSetFixedDirectory,                   &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
   connect(ui->pbMBrowseAutoSetFixedDirectory,             &QPushButton::clicked,       this,                                 &PreferencesDialog::browseFixedOutputDirectory);
@@ -290,13 +290,14 @@ PreferencesDialog::setupPlaylistScanningPolicy() {
 void
 PreferencesDialog::setupOutputFileNamePolicy() {
   auto isChecked = Util::Settings::DontSetOutputFileName != m_cfg.m_outputFileNamePolicy;
-  auto rbToCheck = Util::Settings::ToPreviousDirectory      == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetPreviousDirectory
-                 : Util::Settings::ToFixedDirectory         == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetFixedDirectory
-                 : Util::Settings::ToParentOfFirstInputFile == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetParentDirectory
-                 :                                                                            ui->rbMAutoSetSameDirectory;
+  auto rbToCheck = Util::Settings::ToPreviousDirectory        == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetPreviousDirectory
+                 : Util::Settings::ToFixedDirectory           == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetFixedDirectory
+                 : Util::Settings::ToRelativeOfFirstInputFile == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetRelativeDirectory
+                 :                                                                              ui->rbMAutoSetSameDirectory;
 
   ui->cbMAutoSetOutputFileName->setChecked(isChecked);
   rbToCheck->setChecked(true);
+  ui->leMAutoSetRelativeDirectory->setText(m_cfg.m_relativeOutputDir.path());
   ui->leMAutoSetFixedDirectory->setText(m_cfg.m_fixedOutputDir.path());
   ui->cbMUniqueOutputFileNames->setChecked(m_cfg.m_uniqueOutputFileNames);
 
@@ -348,10 +349,11 @@ PreferencesDialog::save() {
   m_cfg.m_minimumPlaylistDuration       = ui->sbMMinPlaylistDuration->value();
 
   m_cfg.m_outputFileNamePolicy          = !ui->cbMAutoSetOutputFileName->isChecked()   ? Util::Settings::DontSetOutputFileName
-                                        : ui->rbMAutoSetParentDirectory->isChecked()   ? Util::Settings::ToParentOfFirstInputFile
+                                        : ui->rbMAutoSetRelativeDirectory->isChecked() ? Util::Settings::ToRelativeOfFirstInputFile
                                         : ui->rbMAutoSetFixedDirectory->isChecked()    ? Util::Settings::ToFixedDirectory
                                         : ui->rbMAutoSetPreviousDirectory->isChecked() ? Util::Settings::ToPreviousDirectory
                                         :                                                Util::Settings::ToSameAsFirstInputFile;
+  m_cfg.m_relativeOutputDir             = ui->leMAutoSetRelativeDirectory->text();
   m_cfg.m_fixedOutputDir                = ui->leMAutoSetFixedDirectory->text();
   m_cfg.m_uniqueOutputFileNames         = ui->cbMUniqueOutputFileNames->isChecked();
 
@@ -371,11 +373,13 @@ PreferencesDialog::save() {
 
 void
 PreferencesDialog::enableOutputFileNameControls() {
-  bool isChecked     = ui->cbMAutoSetOutputFileName->isChecked();
-  bool fixedSelected = ui->rbMAutoSetFixedDirectory->isChecked();
+  bool isChecked        = ui->cbMAutoSetOutputFileName->isChecked();
+  bool relativeSelected = ui->rbMAutoSetRelativeDirectory->isChecked();
+  bool fixedSelected    = ui->rbMAutoSetFixedDirectory->isChecked();
 
-  Util::enableWidgets(QList<QWidget *>{} << ui->rbMAutoSetSameDirectory  << ui->rbMAutoSetParentDirectory << ui->rbMAutoSetPreviousDirectory << ui->rbMAutoSetFixedDirectory << ui->cbMUniqueOutputFileNames, isChecked);
+  Util::enableWidgets(QList<QWidget *>{} << ui->rbMAutoSetSameDirectory  << ui->rbMAutoSetPreviousDirectory << ui->rbMAutoSetRelativeDirectory << ui->rbMAutoSetFixedDirectory << ui->cbMUniqueOutputFileNames, isChecked);
   Util::enableWidgets(QList<QWidget *>{} << ui->leMAutoSetFixedDirectory << ui->pbMBrowseAutoSetFixedDirectory, isChecked && fixedSelected);
+  ui->leMAutoSetRelativeDirectory->setEnabled(isChecked && relativeSelected);
 }
 
 void
