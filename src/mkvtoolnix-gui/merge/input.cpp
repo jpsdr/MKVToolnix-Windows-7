@@ -538,7 +538,11 @@ Tab::onDefaultTrackFlagChanged(int newValue) {
     return;
   newValue = data.toInt();
 
-  withSelectedTracks([&](Track *track) { track->m_defaultTrackFlag = newValue; }, true);
+  withSelectedTracks([&](Track *track) {
+    track->m_defaultTrackFlag = newValue;
+    if (1 == newValue)
+      ensureOneDefaultFlagOnly(track);
+  }, true);
 }
 
 void
@@ -1102,6 +1106,19 @@ Tab::enableDisableAllTracks(bool enable) {
 
   auto base = ui->muxThis->itemData(0).isValid() ? 0 : 1;
   ui->muxThis->setCurrentIndex(base + (enable ? 0 : 1));
+}
+
+void
+Tab::ensureOneDefaultFlagOnly(Track *thisOneHasIt) {
+  auto selection = selectedTracks();
+  for (auto const &track : m_config.m_tracks)
+    if (   (track->m_defaultTrackFlag == 1)
+        && (track->m_type             == thisOneHasIt->m_type)
+        && (track                     != thisOneHasIt)) {
+      track->m_defaultTrackFlag = 0;
+      if ((selection.count() == 1) && (selection[0] == track))
+        ui->defaultTrackFlag->setCurrentIndex(0);
+    }
 }
 
 }}}
