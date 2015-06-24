@@ -821,7 +821,7 @@ Tab::onRemoveFiles() {
   reinitFilesTracksControls();
 
   if (!m_filesModel->rowCount())
-    clearDestination();
+    clearDestinationMaybe();
 }
 
 void
@@ -835,7 +835,7 @@ Tab::onRemoveAllFiles() {
   m_config.m_tracks.clear();
 
   reinitFilesTracksControls();
-  clearDestination();
+  clearDestinationMaybe();
 }
 
 void
