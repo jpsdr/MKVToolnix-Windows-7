@@ -214,7 +214,7 @@ void
 Tab::onSaveOutput() {
   auto &cfg = Util::Settings::get();
 
-  auto fileName = QFileDialog::getSaveFileName(this, QY("Save job output"), cfg.m_lastConfigDir.path(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"));
+  auto fileName = QFileDialog::getSaveFileName(this, QY("Save job output"), cfg.m_lastOpenDir.path(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
@@ -224,7 +224,7 @@ Tab::onSaveOutput() {
     out.close();
   }
 
-  cfg.m_lastConfigDir = QFileInfo{fileName}.path();
+  cfg.m_lastOpenDir = QFileInfo{fileName}.path();
   cfg.save();
 }
 
