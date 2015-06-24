@@ -118,20 +118,43 @@ TrackModel::fromIndex(QModelIndex const &idx)
                                    .value<qulonglong>());
 }
 
+QModelIndex
+TrackModel::indexFromTrack(Track *track) {
+  for (auto topRow = 0, numTopRows = rowCount(); topRow < numTopRows; ++topRow) {
+    auto topIdx = index(topRow, 0);
+    if (fromIndex(topIdx) == track)
+      return topIdx;
+
+    auto topItem = itemFromIndex(topIdx);
+    if (!topItem)
+      continue;
+
+    for (auto childRow = 0, numChildRows = topItem->rowCount(); childRow < numChildRows; ++childRow) {
+      auto childIdx = topIdx.child(childRow, 0);
+      if (fromIndex(childIdx) == track)
+        return childIdx;
+    }
+  }
+
+  return {};
+}
+
+QStandardItem *
+TrackModel::itemFromTrack(Track *track) {
+  return itemFromIndex(indexFromTrack(track));
+}
+
 void
 TrackModel::trackUpdated(Track *track) {
   Q_ASSERT(m_tracks);
 
-  auto topRow     = m_tracks->indexOf(track->isAppended() ? track->m_appendedTo : track);
-  auto parentItem = track->isAppended() ? item(topRow, 0)                                      : invisibleRootItem();
-  auto row        = track->isAppended() ? track->m_appendedTo->m_appendedTracks.indexOf(track) : topRow;
-
-  if ((-1 == topRow) || (-1 == row) || !parentItem)
+  auto idx = indexFromTrack(track);
+  if (!idx.isValid())
     return;
 
   auto items = QList<QStandardItem *>{};
   for (auto column = 0, numColumns = columnCount(); column < numColumns; ++column)
-    items << parentItem->child(row, column);
+    items << itemFromIndex(idx.sibling(idx.row(), column));
 
   setItemsFromTrack(items, track);
 }

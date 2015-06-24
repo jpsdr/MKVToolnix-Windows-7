@@ -43,6 +43,8 @@ public:
   virtual void trackUpdated(Track *track);
 
   virtual Track *fromIndex(QModelIndex const &idx) const;
+  virtual QModelIndex indexFromTrack(Track *track);
+  virtual QStandardItem *itemFromTrack(Track *track);
 
   virtual Qt::DropActions supportedDropActions() const;
   virtual Qt::ItemFlags flags(QModelIndex const &index) const;
