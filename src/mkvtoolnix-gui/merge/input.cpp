@@ -820,8 +820,10 @@ Tab::onRemoveFiles() {
 
   reinitFilesTracksControls();
 
-  if (!m_filesModel->rowCount())
+  if (!m_filesModel->rowCount()) {
     clearDestinationMaybe();
+    clearTitleMaybe();
+  }
 }
 
 void
@@ -836,6 +838,7 @@ Tab::onRemoveAllFiles() {
 
   reinitFilesTracksControls();
   clearDestinationMaybe();
+  clearTitleMaybe();
 }
 
 void

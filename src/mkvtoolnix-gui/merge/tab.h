@@ -131,6 +131,8 @@ public slots:
   virtual void setDestination(QString const &newValue);
   virtual void clearDestination();
   virtual void clearDestinationMaybe();
+  virtual void clearTitle();
+  virtual void clearTitleMaybe();
 
   virtual void onTitleEdited(QString newValue);
   virtual void onBrowseOutput();

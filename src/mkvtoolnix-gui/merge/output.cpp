@@ -107,6 +107,18 @@ Tab::clearDestinationMaybe() {
 }
 
 void
+Tab::clearTitle() {
+  ui->title->setText(Q(""));
+  m_config.m_title.clear();
+}
+
+void
+Tab::clearTitleMaybe() {
+  if (Util::Settings::get().m_autoSetFileTitle)
+    clearTitle();
+}
+
+void
 Tab::onBrowseOutput() {
   auto filter   = m_config.m_webmMode ? QY("WebM files") + Q(" (*.webm)") : QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d)");
   auto fileName = getSaveFileName(QY("Select output file name"), filter, ui->output);
