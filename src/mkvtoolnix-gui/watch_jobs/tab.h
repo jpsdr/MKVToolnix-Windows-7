@@ -43,6 +43,7 @@ public:
   uint64_t id() const;
 
   bool isSaveOutputEnabled() const;
+  bool isCurrentJobTab() const;
 
 signals:
   void abortJob();

@@ -32,6 +32,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   setupInterfaceLanguage();
 
   ui->cbGuiUseDefaultJobDescription->setChecked(m_cfg.m_useDefaultJobDescription);
+  ui->cbGuiShowOutputOfAllJobs->setChecked(m_cfg.m_showOutputOfAllJobs);
   setupJobRemovalPolicy();
 
   setupCommonLanguages();
@@ -97,6 +98,7 @@ PreferencesDialog::setupToolTips() {
   ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
 
   Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled the GUI will let you enter a description for a job when adding it to the queue."));
+  Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the »watch jobs« tool will not be cleared when a new job starts."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
@@ -328,6 +330,7 @@ PreferencesDialog::save() {
   m_cfg.m_warnBeforeClosingModifiedTabs = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
   m_cfg.m_warnBeforeAbortingJobs        = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
   m_cfg.m_useDefaultJobDescription      = ui->cbGuiUseDefaultJobDescription->isChecked();
+  m_cfg.m_showOutputOfAllJobs           = ui->cbGuiShowOutputOfAllJobs->isChecked();
   auto idx                              = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy              = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 

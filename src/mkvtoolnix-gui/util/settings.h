@@ -66,7 +66,7 @@ public:
   unsigned int m_minimumPlaylistDuration;
 
   JobRemovalPolicy m_jobRemovalPolicy;
-  bool m_useDefaultJobDescription;
+  bool m_useDefaultJobDescription, m_showOutputOfAllJobs;
 
   bool m_checkForUpdates;
   QDateTime m_lastUpdateCheck;
