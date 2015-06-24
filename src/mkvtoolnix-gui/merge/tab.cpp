@@ -204,7 +204,9 @@ Tab::getSaveFileName(QString const &title,
   fullFilter += QY("All files") + Q(" (*)");
 
   auto &settings = Util::Settings::get();
-  auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOutputDir.path() : lineEdit->text();
+  auto dir       = !lineEdit->text().isEmpty()                                                               ? lineEdit->text()
+                 : !settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != Q(".")) ? settings.m_lastOutputDir.path()
+                 :                                                                                             settings.m_lastOpenDir.path();
   auto fileName  = QFileDialog::getSaveFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
     return fileName;
