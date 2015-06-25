@@ -859,14 +859,18 @@ Tab::addEdition(bool before) {
 }
 
 ChapterPtr
-Tab::createEmptyChapter(int64_t startTime) {
+Tab::createEmptyChapter(int64_t startTime,
+                        int chapterNumber) {
   auto &cfg     = Util::Settings::get();
   auto chapter  = std::make_shared<KaxChapterAtom>();
   auto &display = GetChild<KaxChapterDisplay>(*chapter);
+  auto name     = QString{ cfg.m_chapterNameTemplate };
+
+  name.replace(Q("<NUM>"), QString::number(chapterNumber));
 
   GetChild<KaxChapterUID>(*chapter).SetValue(0);
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTime);
-  GetChild<KaxChapterString>(display).SetValueUTF8(Y("<unnamed>"));
+  GetChild<KaxChapterString>(display).SetValue(to_wide(name));
   GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(cfg.m_defaultChapterLanguage));
   if (!cfg.m_defaultChapterCountry.isEmpty())
     GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
@@ -891,8 +895,8 @@ Tab::addChapter(bool before) {
     return;
 
   // TODO: Tab::addChapter: start time
-  auto chapter = createEmptyChapter(0);
   auto row     = selectedIdx.row() + (before ? 0 : 1);
+  auto chapter = createEmptyChapter(0, row + 1);
 
   m_chapterModel->insertChapter(row, chapter, selectedIdx.parent());
 
@@ -906,7 +910,9 @@ Tab::addSubChapter() {
     return;
 
   // TODO: Tab::addSubChapter: start time
-  auto chapter = createEmptyChapter(0);
+  auto selectedItem = m_chapterModel->itemFromIndex(selectedIdx);
+  auto chapter      = createEmptyChapter(0, (selectedItem ? selectedItem->rowCount() : 0) + 1);
+
   m_chapterModel->appendChapter(chapter, selectedIdx);
   expandCollapseAll(true, selectedIdx);
 

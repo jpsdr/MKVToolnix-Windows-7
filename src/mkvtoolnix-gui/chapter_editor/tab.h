@@ -131,7 +131,7 @@ protected:
   void addEdition(bool before);
   void addChapter(bool before);
 
-  ChapterPtr createEmptyChapter(int64_t startTime);
+  ChapterPtr createEmptyChapter(int64_t startTime, int chapterNumber);
 
   void saveAsImpl(bool requireNewFileName, std::function<bool(bool, QString &)> const &worker);
   void saveAsXmlImpl(bool requireNewFileName);
