@@ -26,7 +26,7 @@ protected:
 
   Model *m_model;
 
-  QAction *m_startAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction;
+  QAction *m_startAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeSelectedWarningsErrorsAction;
   QMenu *m_jobQueueMenu;
 
 public:

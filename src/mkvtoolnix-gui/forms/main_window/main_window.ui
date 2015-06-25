@@ -137,6 +137,7 @@
     <addaction name="separator"/>
     <addaction name="actionJobQueueAcknowledgeAllWarnings"/>
     <addaction name="actionJobQueueAcknowledgeAllErrors"/>
+    <addaction name="actionJobQueueAcknowledgeAllWarningsErrors"/>
    </widget>
    <addaction name="menuGUI"/>
    <addaction name="menuMerge"/>
@@ -556,6 +557,11 @@
   <action name="actionJobQueueAcknowledgeAllErrors">
    <property name="text">
     <string>Acknowledge all &amp;errors</string>
+   </property>
+  </action>
+  <action name="actionJobQueueAcknowledgeAllWarningsErrors">
+   <property name="text">
+    <string>Acknowledge &amp;all warnings and errors</string>
    </property>
   </action>
   <action name="actionJobQueueRemoveDone">

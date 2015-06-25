@@ -30,6 +30,7 @@ Tool::Tool(QWidget *parent,
   , m_removeAction{new QAction{this}}
   , m_acknowledgeSelectedWarningsAction{new QAction{this}}
   , m_acknowledgeSelectedErrorsAction{new QAction{this}}
+  , m_acknowledgeSelectedWarningsErrorsAction{new QAction{this}}
   , m_jobQueueMenu{jobQueueMenu}
 {
   // Setup UI controls.
@@ -63,24 +64,28 @@ Tool::setupUiControls() {
 
   ui->jobs->setModel(m_model);
 
-  connect(m_jobQueueMenu,                             &QMenu::aboutToShow,       this,    &Tool::onJobQueueMenu);
+  connect(m_jobQueueMenu,                                   &QMenu::aboutToShow,       this,    &Tool::onJobQueueMenu);
 
-  connect(mwUi->actionJobQueueStartAllPending,        &QAction::triggered,       this,    &Tool::onStartAllPending);
+  connect(mwUi->actionJobQueueStartAllPending,              &QAction::triggered,       this,    &Tool::onStartAllPending);
 
-  connect(mwUi->actionJobQueueRemoveDone,             &QAction::triggered,       this,    &Tool::onRemoveDone);
-  connect(mwUi->actionJobQueueRemoveDoneOk,           &QAction::triggered,       this,    &Tool::onRemoveDoneOk);
-  connect(mwUi->actionJobQueueRemoveAll,              &QAction::triggered,       this,    &Tool::onRemoveAll);
+  connect(mwUi->actionJobQueueRemoveDone,                   &QAction::triggered,       this,    &Tool::onRemoveDone);
+  connect(mwUi->actionJobQueueRemoveDoneOk,                 &QAction::triggered,       this,    &Tool::onRemoveDoneOk);
+  connect(mwUi->actionJobQueueRemoveAll,                    &QAction::triggered,       this,    &Tool::onRemoveAll);
 
-  connect(mwUi->actionJobQueueAcknowledgeAllWarnings, &QAction::triggered,       m_model, &Model::acknowledgeAllWarnings);
-  connect(mwUi->actionJobQueueAcknowledgeAllErrors,   &QAction::triggered,       m_model, &Model::acknowledgeAllErrors);
+  connect(mwUi->actionJobQueueAcknowledgeAllWarnings,       &QAction::triggered,       m_model, &Model::acknowledgeAllWarnings);
+  connect(mwUi->actionJobQueueAcknowledgeAllErrors,         &QAction::triggered,       m_model, &Model::acknowledgeAllErrors);
+  connect(mwUi->actionJobQueueAcknowledgeAllWarningsErrors, &QAction::triggered,       m_model, &Model::acknowledgeAllWarnings);
+  connect(mwUi->actionJobQueueAcknowledgeAllWarningsErrors, &QAction::triggered,       m_model, &Model::acknowledgeAllErrors);
 
-  connect(m_startAction,                              &QAction::triggered,       this,    &Tool::onStart);
-  connect(m_viewOutputAction,                         &QAction::triggered,       this,    &Tool::onViewOutput);
-  connect(m_removeAction,                             &QAction::triggered,       this,    &Tool::onRemove);
-  connect(m_acknowledgeSelectedWarningsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
-  connect(m_acknowledgeSelectedErrorsAction,          &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
+  connect(m_startAction,                                    &QAction::triggered,       this,    &Tool::onStart);
+  connect(m_viewOutputAction,                               &QAction::triggered,       this,    &Tool::onViewOutput);
+  connect(m_removeAction,                                   &QAction::triggered,       this,    &Tool::onRemove);
+  connect(m_acknowledgeSelectedWarningsAction,              &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
+  connect(m_acknowledgeSelectedErrorsAction,                &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
+  connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
+  connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
 
-  connect(ui->jobs,                                   &QTreeView::doubleClicked, this,    &Tool::onViewOutput);
+  connect(ui->jobs,                                         &QTreeView::doubleClicked, this,    &Tool::onViewOutput);
 }
 
 void
@@ -102,6 +107,7 @@ Tool::onJobQueueMenu() {
 
   mwUi->actionJobQueueAcknowledgeAllWarnings->setEnabled(hasJobs);
   mwUi->actionJobQueueAcknowledgeAllErrors->setEnabled(hasJobs);
+  mwUi->actionJobQueueAcknowledgeAllWarningsErrors->setEnabled(hasJobs);
 }
 
 void
@@ -116,6 +122,7 @@ Tool::onContextMenu(QPoint pos) {
 
   m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
   m_acknowledgeSelectedErrorsAction->setEnabled(hasSelection);
+  m_acknowledgeSelectedWarningsErrorsAction->setEnabled(hasSelection);
 
   QMenu menu{this};
 
@@ -128,6 +135,7 @@ Tool::onContextMenu(QPoint pos) {
   menu.addSeparator();
   menu.addAction(m_acknowledgeSelectedWarningsAction);
   menu.addAction(m_acknowledgeSelectedErrorsAction);
+  menu.addAction(m_acknowledgeSelectedWarningsErrorsAction);
 
   menu.exec(ui->jobs->viewport()->mapToGlobal(pos));
 }
@@ -224,6 +232,7 @@ Tool::retranslateUi() {
 
   m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge warnings"));
   m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge errors"));
+  m_acknowledgeSelectedWarningsErrorsAction->setText(QY("Acknowledge warnings and errors"));
 
   setupToolTips();
 }
