@@ -24,15 +24,16 @@ public:
   static int ms_active_translation_idx;
 
 public:
-  std::string m_unix_locale, m_windows_locale, m_windows_locale_sysname, m_english_name, m_translated_name;
+  std::string m_iso639_2_code, m_unix_locale, m_windows_locale, m_windows_locale_sysname, m_english_name, m_translated_name;
   bool m_line_breaks_anywhere;
   int m_language_id, m_sub_language_id;
 
-  translation_c(const std::string &unix_locale,
-                const std::string &windows_locale,
-                const std::string &windows_locale_sysname,
-                const std::string &english_name,
-                const std::string &translated_name,
+  translation_c(std::string const &iso639_2_code,
+                std::string const &unix_locale,
+                std::string const &windows_locale,
+                std::string const &windows_locale_sysname,
+                std::string const &english_name,
+                std::string const &translated_name,
                 bool line_breaks_anywhere,
                 int language_id,
                 int sub_language_id);
