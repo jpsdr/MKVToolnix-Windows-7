@@ -7,6 +7,7 @@
 #include <QModelIndex>
 
 #include "common/qt_kax_analyzer.h"
+#include "common/timecode.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
 
 class QAction;
@@ -103,6 +104,7 @@ protected:
 
   ChaptersPtr loadFromChapterFile();
   ChaptersPtr loadFromMatroskaFile();
+  ChaptersPtr loadFromMplsFile();
 
   void resizeChapterColumnsToContents() const;
   void resizeNameColumnsToContents() const;
@@ -144,6 +146,7 @@ protected:
 
 protected:
   QString currentState() const;
+  ChaptersPtr timecodesToChapters(std::vector<timecode_c> const &timecodes) const;
 
   static QString formatEbmlBinary(EbmlBinary *binary);
 };

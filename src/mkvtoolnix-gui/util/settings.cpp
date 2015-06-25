@@ -93,6 +93,7 @@ Settings::load() {
 
   reg.beginGroup("defaults");
   m_defaultTrackLanguage               = reg.value("defaultTrackLanguage", Q("und")).toString();
+  m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM>")).toString();
   m_defaultChapterLanguage             = reg.value("defaultChapterLanguage", Q("und")).toString();
   m_defaultChapterCountry              = reg.value("defaultChapterCountry").toString();
   m_defaultSubtitleCharset             = reg.value("defaultSubtitleCharset").toString();
@@ -177,6 +178,7 @@ Settings::save()
 
   reg.beginGroup("defaults");
   reg.setValue("defaultTrackLanguage",               m_defaultTrackLanguage);
+  reg.setValue("chapterNameTemplate",                m_chapterNameTemplate);
   reg.setValue("defaultChapterLanguage",             m_defaultChapterLanguage);
   reg.setValue("defaultChapterCountry",              m_defaultChapterCountry);
   reg.setValue("defaultSubtitleCharset",             m_defaultSubtitleCharset);

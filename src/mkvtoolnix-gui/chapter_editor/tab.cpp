@@ -10,13 +10,16 @@
 
 #include "common/bitvalue.h"
 #include "common/chapters/chapters.h"
+#include "common/construct.h"
 #include "common/ebml.h"
 #include "common/mm_io_x.h"
+#include "common/mpls.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"
 #include "common/segment_tracks.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
+#include "common/translation.h"
 #include "common/xml/ebml_chapters_converter.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
@@ -252,12 +255,73 @@ Tab::loadFromChapterFile() {
   return chapters;
 }
 
+ChaptersPtr
+Tab::timecodesToChapters(std::vector<timecode_c> const &timecodes)
+  const {
+  auto &cfg     = Util::Settings::get();
+  auto chapters = ChaptersPtr{ static_cast<KaxChapters *>(mtx::construct::cons<KaxChapters>(mtx::construct::cons<KaxEditionEntry>())) };
+  auto &edition = GetChild<KaxEditionEntry>(*chapters);
+  auto idx      = 0;
+
+  for (auto const &timecode : timecodes) {
+    auto nameTemplate = QString{ cfg.m_chapterNameTemplate };
+    auto name         = to_wide(nameTemplate.replace(Q("<NUM>"), QString::number(++idx)));
+    auto atom         = mtx::construct::cons<KaxChapterAtom>(new KaxChapterTimeStart, timecode.to_ns(),
+                                                             mtx::construct::cons<KaxChapterDisplay>(new KaxChapterString,   name,
+                                                                                                     new KaxChapterLanguage, to_utf8(cfg.m_defaultChapterLanguage)));
+    if (!cfg.m_defaultChapterCountry.isEmpty())
+      GetChild<KaxChapterCountry>(GetChild<KaxChapterDisplay>(atom)).SetValue(to_utf8(cfg.m_defaultChapterCountry));
+
+    edition.PushElement(*atom);
+  }
+
+  return chapters;
+}
+
+ChaptersPtr
+Tab::loadFromMplsFile() {
+  auto chapters = ChaptersPtr{};
+  auto error    = QString{};
+
+  try {
+    auto in     = mm_file_io_c{to_utf8(m_fileName)};
+    auto parser = mpls::parser_c{};
+
+    if (parser.parse(&in))
+      chapters = timecodesToChapters(parser.get_chapters());
+
+  } catch (mtx::mm_io::exception &ex) {
+    error = Q(ex.what());
+
+  } catch (mtx::mpls::exception &ex) {
+    error = Q(ex.what());
+
+  }
+
+  if (!chapters) {
+    auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(m_fileName);
+    if (!error.isEmpty())
+      message = Q("%1 %2").arg(message).arg(QY("Error message from the parser: %1").arg(error));
+
+    Util::MessageBox::critical(this, QY("File parsing failed"), message);
+    emit removeThisTab();
+
+  } else {
+    m_fileName.clear();
+    emit titleChanged();
+  }
+
+  return chapters;
+}
+
 void
 Tab::load() {
   resetData();
 
   m_savedState  = currentState();
-  auto chapters = kax_analyzer_c::probe(to_utf8(m_fileName)) ? loadFromMatroskaFile() : loadFromChapterFile();
+  auto chapters = kax_analyzer_c::probe(to_utf8(m_fileName)) ? loadFromMatroskaFile()
+                : m_fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile()
+                :                                              loadFromChapterFile();
 
   if (!chapters)
     return;

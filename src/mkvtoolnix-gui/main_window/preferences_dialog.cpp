@@ -55,6 +55,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   setupEnableMuxingTracksByLanguage();
 
   // Chapter editor page
+  ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   Util::setupLanguageComboBox(*ui->cbCEDefaultLanguage, m_cfg.m_defaultChapterLanguage);
   Util::setupCountryComboBox(*ui->cbCEDefaultCountry, m_cfg.m_defaultChapterCountry, true, QY("– no selection by default –"));
 
@@ -105,6 +106,10 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("Normally completed jobs stay in the queue even over restarts until the user clears them out manually."))
                    .arg(QY("You can opt for having them removed automatically under certain conditions.")));
 
+  Util::setToolTip(ui->leCENameTemplate,
+                   Q("%1 %2")
+                   .arg(QY("This template will be used for new chapter entries."))
+                   .arg(QY("The string '<NUM>' will be replaced by the chapter number.")));
   Util::setToolTip(ui->cbCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDefaultCountry, QY("This is the country that newly added chapter names get assigned automatically."));
 
@@ -334,6 +339,7 @@ PreferencesDialog::save() {
   auto idx                                   = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy                   = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 
+  m_cfg.m_chapterNameTemplate                = ui->leCENameTemplate->text();
   m_cfg.m_defaultChapterLanguage             = ui->cbCEDefaultLanguage->currentData().toString();
   m_cfg.m_defaultChapterCountry              = ui->cbCEDefaultCountry->currentData().toString();
 

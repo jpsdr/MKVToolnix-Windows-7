@@ -157,8 +157,9 @@ Tool::openFilesFromCommandLine(QStringList const &fileNames) {
 void
 Tool::selectFileToOpen() {
   auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in chapter editor"), Util::Settings::get().m_lastOpenDir.path(),
-                                                 QY("Supported file types")           + Q(" (*.mkv *.mka *.mks *.mk3d *.txt *.xml);;") +
+                                                 QY("Supported file types")           + Q(" (*.mpls *.mkv *.mka *.mks *.mk3d *.txt *.xml);;") +
                                                  QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
+                                                 QY("Blu-ray playlist files")         + Q(" (*.mpls);;") +
                                                  QY("XML chapter files")              + Q(" (*.xml);;") +
                                                  QY("Simple OGM-style chapter files") + Q(" (*.txt);;") +
                                                  QY("All files")                      + Q(" (*)"));
