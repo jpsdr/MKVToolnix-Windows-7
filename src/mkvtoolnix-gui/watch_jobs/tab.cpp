@@ -190,8 +190,8 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
     m_fullOutput << outputOfJobLine << job.m_fullOutput;
 
     ui->output  ->appendPlainText(outputOfJobLine);
-    ui->warnings->appendPlainText(outputOfJobLine);
-    ui->errors  ->appendPlainText(outputOfJobLine);
+    ui->warnings->appendPlainText(QY("--- Warnings emitted by job '%1' started on %2 ---").arg(job.m_description).arg(Util::displayableDate(job.m_dateStarted)));
+    ui->errors  ->appendPlainText(QY("--- Errors emitted by job '%1' started on %2 ---").arg(job.m_description).arg(Util::displayableDate(job.m_dateStarted)));
 
   } else {
     m_fullOutput = job.m_fullOutput;
