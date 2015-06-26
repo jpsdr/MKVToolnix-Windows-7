@@ -33,6 +33,7 @@ class Tab : public QWidget {
 
 protected:
   using ValidationResult = std::pair<bool, QString>;
+  using LoadResult       = std::pair<ChaptersPtr, bool>;
 
 protected:
   // UI stuff:
@@ -102,9 +103,9 @@ protected:
   void resetData();
   void expandCollapseAll(bool expand, QModelIndex const &parentIdx = {});
 
-  ChaptersPtr loadFromChapterFile();
-  ChaptersPtr loadFromMatroskaFile();
-  ChaptersPtr loadFromMplsFile();
+  LoadResult loadFromChapterFile();
+  LoadResult loadFromMatroskaFile();
+  LoadResult loadFromMplsFile();
 
   void resizeChapterColumnsToContents() const;
   void resizeNameColumnsToContents() const;

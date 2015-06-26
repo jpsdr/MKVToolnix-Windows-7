@@ -195,7 +195,7 @@ Tab::resetData() {
   m_chapterModel->reset();
 }
 
-ChaptersPtr
+Tab::LoadResult
 Tab::loadFromMatroskaFile() {
   m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
 
@@ -218,10 +218,10 @@ Tab::loadFromMatroskaFile() {
     emit removeThisTab();
   }
 
-  return std::static_pointer_cast<KaxChapters>(chapters);
+  return { std::static_pointer_cast<KaxChapters>(chapters), true };
 }
 
-ChaptersPtr
+Tab::LoadResult
 Tab::loadFromChapterFile() {
   auto isSimpleFormat = false;
   auto chapters       = ChaptersPtr{};
@@ -252,7 +252,7 @@ Tab::loadFromChapterFile() {
     emit titleChanged();
   }
 
-  return chapters;
+  return { chapters, !isSimpleFormat };
 }
 
 ChaptersPtr
@@ -278,7 +278,7 @@ Tab::timecodesToChapters(std::vector<timecode_c> const &timecodes)
   return chapters;
 }
 
-ChaptersPtr
+Tab::LoadResult
 Tab::loadFromMplsFile() {
   auto chapters = ChaptersPtr{};
   auto error    = QString{};
@@ -313,19 +313,19 @@ Tab::loadFromMplsFile() {
     emit titleChanged();
   }
 
-  return chapters;
+  return { chapters, false };
 }
 
 void
 Tab::load() {
   resetData();
 
-  m_savedState  = currentState();
-  auto chapters = kax_analyzer_c::probe(to_utf8(m_fileName)) ? loadFromMatroskaFile()
-                : m_fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile()
-                :                                              loadFromChapterFile();
+  m_savedState = currentState();
+  auto result  = kax_analyzer_c::probe(to_utf8(m_fileName)) ? loadFromMatroskaFile()
+               : m_fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile()
+               :                                              loadFromChapterFile();
 
-  if (!chapters)
+  if (!result.first)
     return;
 
   if (!m_fileName.isEmpty())
@@ -333,8 +333,10 @@ Tab::load() {
 
   disconnect(m_chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
 
-  m_chapterModel->populate(*chapters);
-  m_savedState = currentState();
+  m_chapterModel->populate(*result.first);
+
+  if (result.second)
+    m_savedState = currentState();
 
   expandAll();
   resizeChapterColumnsToContents();
