@@ -201,9 +201,11 @@ def adjust_to_poedit_style(in_name, out_name, language)
           sources.each { |source| out.puts "#: #{source}" }
         else
           while !sources.empty?
-            new_line = "#:"
-            while !sources.empty? && ((new_line.length + sources[0].length + 1) < 80)
-              new_line += " " + sources.shift
+            new_line      = "#:"
+            first_in_line = true
+            while !sources.empty? && (first_in_line || ((new_line.length + sources[0].length + 1) < 80))
+              new_line      += " " + sources.shift
+              first_in_line  = false
             end
             out.puts new_line
           end
