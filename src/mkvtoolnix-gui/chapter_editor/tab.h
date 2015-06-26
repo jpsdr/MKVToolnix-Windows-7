@@ -9,11 +9,11 @@
 #include "common/qt_kax_analyzer.h"
 #include "common/timecode.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
+#include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
+#include "mkvtoolnix-gui/types.h"
 
 class QAction;
 class QItemSelection;
-
-using ChaptersPtr = std::shared_ptr<KaxChapters>;
 
 namespace libebml {
 class EbmlBinary;
@@ -47,7 +47,7 @@ protected:
   NameModel *m_nameModel;
 
   QAction *m_expandAllAction, *m_collapseAllAction, *m_addEditionBeforeAction, *m_addEditionAfterAction, *m_addChapterBeforeAction, *m_addChapterAfterAction, *m_addSubChapterAction, *m_removeElementAction;
-  QAction *m_duplicateAction, *m_massModificationAction;
+  QAction *m_duplicateAction, *m_massModificationAction, *m_generateSubChaptersAction;
   QList<QWidget *> m_nameWidgets;
 
   bool m_ignoreChapterSelectionChanges{};
@@ -85,6 +85,7 @@ public slots:
   virtual void removeElement();
   virtual void duplicateElement();
   virtual void massModify();
+  virtual void generateSubChapters();
 
   virtual void chapterSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void expandInsertedElements(QModelIndex const &parentIdx, int start, int end);
@@ -132,7 +133,7 @@ protected:
   void addEdition(bool before);
   void addChapter(bool before);
 
-  ChapterPtr createEmptyChapter(int64_t startTime, int chapterNumber);
+  ChapterPtr createEmptyChapter(int64_t startTime, int chapterNumber, OptQString const &nameTemplate = OptQString{}, OptQString const &language = OptQString{}, OptQString const &country = OptQString{});
 
   void saveAsImpl(bool requireNewFileName, std::function<bool(bool, QString &)> const &worker);
   void saveAsXmlImpl(bool requireNewFileName);

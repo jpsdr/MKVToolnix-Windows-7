@@ -23,6 +23,7 @@
 #include "common/xml/ebml_chapters_converter.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
+#include "mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
 #include "mkvtoolnix-gui/chapter_editor/mass_modification_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/tab.h"
@@ -53,6 +54,7 @@ Tab::Tab(QWidget *parent,
   , m_removeElementAction{new QAction{this}}
   , m_duplicateAction{new QAction{this}}
   , m_massModificationAction{new QAction{this}}
+  , m_generateSubChaptersAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -99,6 +101,7 @@ Tab::setupUi() {
   connect(m_removeElementAction,           &QAction::triggered,                                                    this, &Tab::removeElement);
   connect(m_duplicateAction,               &QAction::triggered,                                                    this, &Tab::duplicateElement);
   connect(m_massModificationAction,        &QAction::triggered,                                                    this, &Tab::massModify);
+  connect(m_generateSubChaptersAction,     &QAction::triggered,                                                    this, &Tab::generateSubChapters);
 }
 
 void
@@ -131,6 +134,7 @@ Tab::retranslateUi() {
   m_removeElementAction->setText(QY("&Remove selected edition or chapter"));
   m_duplicateAction->setText(QY("D&uplicate selected edition or chapter"));
   m_massModificationAction->setText(QY("Additional &modifications"));
+  m_generateSubChaptersAction->setText(QY("&Generate sub-chapters"));
 
   m_chapterModel->retranslateUi();
   m_nameModel->retranslateUi();
@@ -862,20 +866,23 @@ Tab::addEdition(bool before) {
 
 ChapterPtr
 Tab::createEmptyChapter(int64_t startTime,
-                        int chapterNumber) {
+                        int chapterNumber,
+                        boost::optional<QString> const &nameTemplate,
+                        boost::optional<QString> const &language,
+                        boost::optional<QString> const &country) {
   auto &cfg     = Util::Settings::get();
   auto chapter  = std::make_shared<KaxChapterAtom>();
   auto &display = GetChild<KaxChapterDisplay>(*chapter);
-  auto name     = QString{ cfg.m_chapterNameTemplate };
+  auto name     = QString{ nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate };
 
   name.replace(Q("<NUM>"), QString::number(chapterNumber));
 
   GetChild<KaxChapterUID>(*chapter).SetValue(0);
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTime);
   GetChild<KaxChapterString>(display).SetValue(to_wide(name));
-  GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(cfg.m_defaultChapterLanguage));
-  if (!cfg.m_defaultChapterCountry.isEmpty())
-    GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
+  GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(language ? *language : cfg.m_defaultChapterLanguage));
+  if ((country && !country->isEmpty()) || !cfg.m_defaultChapterCountry.isEmpty())
+    GetChild<KaxChapterCountry>(display).SetValue(to_utf8((country && !country->isEmpty()) ? *country : cfg.m_defaultChapterCountry));
 
   return chapter;
 }
@@ -1117,6 +1124,54 @@ Tab::duplicateElement() {
 }
 
 void
+Tab::generateSubChapters() {
+  auto selectedIdx = Util::selectedRowIdx(ui->elements);
+  if (!selectedIdx.isValid())
+    return;
+
+  if (!copyControlsToStorage())
+    return;
+
+  auto selectedItem    = m_chapterModel->itemFromIndex(selectedIdx);
+  auto selectedChapter = m_chapterModel->chapterFromItem(selectedItem);
+  auto maxEndTimecode  = selectedChapter ? FindChildValue<KaxChapterTimeStart>(*selectedChapter, 0ull) : 0ull;
+  auto numRows         = selectedItem->rowCount();
+
+  for (auto row = 0; row < numRows; ++row) {
+    auto chapter = m_chapterModel->chapterFromItem(selectedItem->child(row));
+    if (chapter)
+      maxEndTimecode = std::max(maxEndTimecode, std::max(FindChildValue<KaxChapterTimeStart>(*chapter, 0ull), FindChildValue<KaxChapterTimeEnd>(*chapter, 0ull)));
+  }
+
+  GenerateSubChaptersParametersDialog dlg{this, numRows + 1, maxEndTimecode};
+  if (!dlg.exec())
+    return;
+
+  auto toCreate      = dlg.numberOfEntries();
+  auto chapterNumber = dlg.firstChapterNumber();
+  auto timecode      = dlg.startTimecode();
+  auto duration      = dlg.durationInNs();
+  auto nameTemplate  = dlg.nameTemplate();
+  auto language      = dlg.language();
+  auto country       = dlg.country();
+
+  while (toCreate > 0) {
+    auto chapter = createEmptyChapter(timecode, chapterNumber, nameTemplate, language, country);
+    timecode    += duration;
+
+    ++chapterNumber;
+    --toCreate;
+
+    m_chapterModel->appendChapter(chapter, selectedIdx);
+  }
+
+  expandCollapseAll(true, selectedIdx);
+  resizeNameColumnsToContents();
+
+  emit numberOfEntriesChanged();
+}
+
+void
 Tab::expandCollapseAll(bool expand,
                        QModelIndex const &parentIdx) {
   if (parentIdx.isValid())
@@ -1155,6 +1210,7 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   m_addChapterBeforeAction->setEnabled(chapterSelected);
   m_addChapterAfterAction->setEnabled(chapterSelected);
   m_addSubChapterAction->setEnabled(hasSelection);
+  m_generateSubChaptersAction->setEnabled(hasSelection);
   m_removeElementAction->setEnabled(hasSelection);
   m_duplicateAction->setEnabled(hasSelection);
   m_expandAllAction->setEnabled(hasEntries);
@@ -1168,6 +1224,7 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   menu.addAction(m_addChapterBeforeAction);
   menu.addAction(m_addChapterAfterAction);
   menu.addAction(m_addSubChapterAction);
+  menu.addAction(m_generateSubChaptersAction);
   menu.addSeparator();
   menu.addAction(m_duplicateAction);
   menu.addSeparator();
