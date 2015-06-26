@@ -36,7 +36,6 @@ Tool::Tool(QWidget *parent,
   showMergeWidget();
 
   setupActions();
-  reconnectMenuActions();
 
   retranslateUi();
 }
@@ -48,38 +47,21 @@ void
 Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionMergeNew,   &QAction::triggered,               this, &Tool::newConfig);
-  connect(mwUi->actionMergeOpen,  &QAction::triggered,               this, &Tool::openConfig);
-  connect(mwUi->actionMergeClose, &QAction::triggered,               this, &Tool::closeCurrentTab);
+  connect(mwUi->actionMergeNew,                     &QAction::triggered,               this, &Tool::newConfig);
+  connect(mwUi->actionMergeOpen,                    &QAction::triggered,               this, &Tool::openConfig);
+  connect(mwUi->actionMergeClose,                   &QAction::triggered,               this, &Tool::closeCurrentTab);
+  connect(mwUi->actionMergeSave,                    &QAction::triggered,               this, &Tool::saveConfig);
+  connect(mwUi->actionMergeSaveAs,                  &QAction::triggered,               this, &Tool::saveConfigAs);
+  connect(mwUi->actionMergeSaveOptionFile,          &QAction::triggered,               this, &Tool::saveOptionFile);
+  connect(mwUi->actionMergeStartMuxing,             &QAction::triggered,               this, &Tool::startMuxing);
+  connect(mwUi->actionMergeAddToJobQueue,           &QAction::triggered,               this, &Tool::addToJobQueue);
+  connect(mwUi->actionMergeShowMkvmergeCommandLine, &QAction::triggered,               this, &Tool::showCommandLine);
 
-  connect(ui->newFileButton,      &QPushButton::clicked,             this, &Tool::newConfig);
-  connect(ui->openFileButton,     &QPushButton::clicked,             this, &Tool::openConfig);
+  connect(ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::newConfig);
+  connect(ui->openFileButton,                       &QPushButton::clicked,             this, &Tool::openConfig);
 
-  connect(App::instance(),        &App::addingFilesToMergeRequested, this, &Tool::addMultipleFilesFromCommandLine);
-  connect(App::instance(),        &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
-}
-
-void
-Tool::reconnectMenuActions() {
-  auto mwUi = MainWindow::getUi();
-  auto tab  = currentTab();
-
-  mwUi->actionMergeSave->disconnect(SIGNAL(triggered()));
-  mwUi->actionMergeSaveAs->disconnect(SIGNAL(triggered()));
-  mwUi->actionMergeSaveOptionFile->disconnect(SIGNAL(triggered()));
-  mwUi->actionMergeStartMuxing->disconnect(SIGNAL(triggered()));
-  mwUi->actionMergeAddToJobQueue->disconnect(SIGNAL(triggered()));
-  mwUi->actionMergeShowMkvmergeCommandLine->disconnect(SIGNAL(triggered()));
-
-  if (!tab)
-    return;
-
-  connect(mwUi->actionMergeSave,                    &QAction::triggered, tab, &Tab::onSaveConfig);
-  connect(mwUi->actionMergeSaveAs,                  &QAction::triggered, tab, &Tab::onSaveConfigAs);
-  connect(mwUi->actionMergeSaveOptionFile,          &QAction::triggered, tab, &Tab::onSaveOptionFile);
-  connect(mwUi->actionMergeStartMuxing,             &QAction::triggered, tab, &Tab::onStartMuxing);
-  connect(mwUi->actionMergeAddToJobQueue,           &QAction::triggered, tab, &Tab::onAddToJobQueue);
-  connect(mwUi->actionMergeShowMkvmergeCommandLine, &QAction::triggered, tab, &Tab::onShowCommandLine);
+  connect(App::instance(),                          &App::addingFilesToMergeRequested, this, &Tool::addMultipleFilesFromCommandLine);
+  connect(App::instance(),                          &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
 }
 
 void
@@ -134,7 +116,6 @@ Tool::appendTab(Tab *tab) {
   ui->merges->setCurrentIndex(ui->merges->count() - 1);
 
   showMergeWidget();
-  reconnectMenuActions();
 
   return tab;
 }
@@ -208,6 +189,48 @@ Tool::closeAllTabs() {
       return false;
 
   return true;
+}
+
+void
+Tool::saveConfig() {
+  auto tab = currentTab();
+  if (tab)
+    tab->onSaveConfig();
+}
+
+void
+Tool::saveConfigAs() {
+  auto tab = currentTab();
+  if (tab)
+    tab->onSaveConfigAs();
+}
+
+void
+Tool::saveOptionFile() {
+  auto tab = currentTab();
+  if (tab)
+    tab->onSaveOptionFile();
+}
+
+void
+Tool::startMuxing() {
+  auto tab = currentTab();
+  if (tab)
+    tab->onStartMuxing();
+}
+
+void
+Tool::addToJobQueue() {
+  auto tab = currentTab();
+  if (tab)
+    tab->onAddToJobQueue();
+}
+
+void
+Tool::showCommandLine() {
+  auto tab = currentTab();
+  if (tab)
+    tab->onShowCommandLine();
 }
 
 void

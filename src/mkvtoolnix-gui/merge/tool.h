@@ -43,9 +43,15 @@ public slots:
   virtual void closeSendingTab();
   virtual bool closeAllTabs();
 
+  virtual void saveConfig();
+  virtual void saveConfigAs();
+  virtual void saveOptionFile();
+  virtual void startMuxing();
+  virtual void addToJobQueue();
+  virtual void showCommandLine();
+
   virtual void toolShown() override;
   virtual void tabTitleChanged();
-  virtual void reconnectMenuActions();
 
   virtual void filesDropped(QStringList const &fileNames);
 
