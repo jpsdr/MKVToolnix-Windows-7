@@ -105,12 +105,18 @@ stream_t::dump(std::string const &type)
 
 parser_c::parser_c()
   : m_ok{}
+  , m_drop_last_entry_if_at_end{true}
   , m_debug{"mpls"}
   , m_header(header_t())
 {
 }
 
 parser_c::~parser_c() {
+}
+
+void
+parser_c::enable_dropping_last_entry_if_at_end(bool enable) {
+  m_drop_last_entry_if_at_end = enable;
 }
 
 bool
@@ -335,6 +341,7 @@ parser_c::parse_chapters() {
   }
 
   if (   !hack_engaged(ENGAGE_KEEP_LAST_CHAPTER_IN_MPLS)
+      && m_drop_last_entry_if_at_end
       && (0 < num_chapters)
       && (timecode_c::s(5) >= (m_playlist.duration - m_chapters.back())))
     m_chapters.pop_back();

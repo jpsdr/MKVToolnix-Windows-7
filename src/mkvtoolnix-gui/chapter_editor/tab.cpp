@@ -287,6 +287,8 @@ Tab::loadFromMplsFile() {
     auto in     = mm_file_io_c{to_utf8(m_fileName)};
     auto parser = mpls::parser_c{};
 
+    parser.enable_dropping_last_entry_if_at_end(Util::Settings::get().m_dropLastChapterFromBlurayPlaylist);
+
     if (parser.parse(&in))
       chapters = timecodesToChapters(parser.get_chapters());
 

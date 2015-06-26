@@ -81,6 +81,9 @@ Settings::load() {
   m_warnBeforeClosingModifiedTabs      = reg.value("warnBeforeClosingModifiedTabs", true).toBool();
   m_warnBeforeAbortingJobs             = reg.value("warnBeforeAbortingJobs", true).toBool();
 
+  m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM>")).toString();
+  m_dropLastChapterFromBlurayPlaylist  = reg.value("dropLastChapterFromBlurayPlaylist", true).toBool();
+
 #if defined(HAVE_LIBINTL_H)
   m_uiLocale                           = reg.value("uiLocale").toString();
 #endif
@@ -93,7 +96,6 @@ Settings::load() {
 
   reg.beginGroup("defaults");
   m_defaultTrackLanguage               = reg.value("defaultTrackLanguage", Q("und")).toString();
-  m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM>")).toString();
   m_defaultChapterLanguage             = reg.value("defaultChapterLanguage", Q("und")).toString();
   m_defaultChapterCountry              = reg.value("defaultChapterCountry").toString();
   m_defaultSubtitleCharset             = reg.value("defaultSubtitleCharset").toString();
@@ -168,6 +170,9 @@ Settings::save()
   reg.setValue("warnBeforeClosingModifiedTabs",      m_warnBeforeClosingModifiedTabs);
   reg.setValue("warnBeforeAbortingJobs",             m_warnBeforeAbortingJobs);
 
+  reg.setValue("chapterNameTemplate",                m_chapterNameTemplate);
+  reg.setValue("dropLastChapterFromBlurayPlaylist",  m_dropLastChapterFromBlurayPlaylist);
+
   reg.setValue("uiLocale",                           m_uiLocale);
 
   reg.beginGroup("updates");
@@ -178,7 +183,6 @@ Settings::save()
 
   reg.beginGroup("defaults");
   reg.setValue("defaultTrackLanguage",               m_defaultTrackLanguage);
-  reg.setValue("chapterNameTemplate",                m_chapterNameTemplate);
   reg.setValue("defaultChapterLanguage",             m_defaultChapterLanguage);
   reg.setValue("defaultChapterCountry",              m_defaultChapterCountry);
   reg.setValue("defaultSubtitleCharset",             m_defaultSubtitleCharset);

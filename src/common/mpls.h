@@ -82,7 +82,7 @@ struct playlist_t {
 
 class parser_c {
 protected:
-  bool m_ok;
+  bool m_ok, m_drop_last_entry_if_at_end;
   debugging_option_c m_debug;
 
   header_t m_header;
@@ -109,6 +109,8 @@ public:
   std::vector<timecode_c> const &get_chapters() const {
     return m_chapters;
   }
+
+  void enable_dropping_last_entry_if_at_end(bool enable);
 
 protected:
   virtual void parse_header();

@@ -23,7 +23,7 @@
       <attribute name="title">
        <string>&amp;GUI</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_10">
          <item>
@@ -115,7 +115,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_11">
+        <layout class="QVBoxLayout" name="verticalLayout_15">
          <item>
           <widget class="QGroupBox" name="groupBox_4">
            <property name="title">
@@ -194,63 +194,97 @@
             </sizepolicy>
            </property>
            <property name="title">
-            <string>Defaults for new chapters</string>
+            <string>Chapter editor</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_17">
+           <layout class="QVBoxLayout" name="verticalLayout_11">
             <item>
-             <layout class="QGridLayout" name="gridLayout_3">
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_11">
-                <property name="text">
-                 <string>Countr&amp;y:</string>
+             <widget class="QCheckBox" name="cbCEDropLastFromBlurayPlaylist">
+              <property name="text">
+               <string>Drop last entry from imported &amp;Blu-ray playlits if it's near the end</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Defaults for new chapter entries:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <spacer name="horizontalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="buddy">
-                 <cstring>cbCEDefaultCountry</cstring>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
                 </property>
-               </widget>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
-              <item row="2" column="1">
-               <widget class="QComboBox" name="cbCEDefaultCountry">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="cbCEDefaultLanguage">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_10">
-                <property name="text">
-                 <string>&amp;Language:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>cbCEDefaultLanguage</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_7">
-                <property name="text">
-                 <string>Name &amp;template:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>leCENameTemplate</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="leCENameTemplate"/>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_3">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_7">
+                  <property name="text">
+                   <string>Name &amp;template:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>leCENameTemplate</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QComboBox" name="cbCEDefaultCountry">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_11">
+                  <property name="text">
+                   <string>Countr&amp;y:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>cbCEDefaultCountry</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_10">
+                  <property name="text">
+                   <string>&amp;Language:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>cbCEDefaultLanguage</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="cbCEDefaultLanguage">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="leCENameTemplate"/>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
@@ -265,7 +299,7 @@
            <property name="sizeHint" stdset="0">
             <size>
              <width>20</width>
-             <height>0</height>
+             <height>13</height>
             </size>
            </property>
           </spacer>
@@ -809,6 +843,7 @@
   <tabstop>cbGuiShowOutputOfAllJobs</tabstop>
   <tabstop>cbGuiRemoveJobs</tabstop>
   <tabstop>cbGuiJobRemovalPolicy</tabstop>
+  <tabstop>cbCEDropLastFromBlurayPlaylist</tabstop>
   <tabstop>leCENameTemplate</tabstop>
   <tabstop>cbCEDefaultLanguage</tabstop>
   <tabstop>cbCEDefaultCountry</tabstop>

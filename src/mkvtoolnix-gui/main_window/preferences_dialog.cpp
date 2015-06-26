@@ -56,6 +56,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 
   // Chapter editor page
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
+  ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
   Util::setupLanguageComboBox(*ui->cbCEDefaultLanguage, m_cfg.m_defaultChapterLanguage);
   Util::setupCountryComboBox(*ui->cbCEDefaultCountry, m_cfg.m_defaultChapterCountry, true, QY("– no selection by default –"));
 
@@ -112,6 +113,10 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("The string '<NUM>' will be replaced by the chapter number.")));
   Util::setToolTip(ui->cbCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDefaultCountry, QY("This is the country that newly added chapter names get assigned automatically."));
+  Util::setToolTip(ui->cbCEDropLastFromBlurayPlaylist,
+                   Q("%1 %2")
+                   .arg(QY("Blu-ray discs often contain a chapter entry very close to the end of the movie."))
+                   .arg(QY("If enabled the last entry will be skipped when loading chapters from such playlists in the chapter editor if it is located within five seconds of the end of the movie.")));
 
   // Merge page
   Util::setToolTip(ui->cbMAutoSetFileTitle,
@@ -342,6 +347,7 @@ PreferencesDialog::save() {
   m_cfg.m_chapterNameTemplate                = ui->leCENameTemplate->text();
   m_cfg.m_defaultChapterLanguage             = ui->cbCEDefaultLanguage->currentData().toString();
   m_cfg.m_defaultChapterCountry              = ui->cbCEDefaultCountry->currentData().toString();
+  m_cfg.m_dropLastChapterFromBlurayPlaylist  = ui->cbCEDropLastFromBlurayPlaylist->isChecked();
 
   // Merge page:
   m_cfg.m_autoSetFileTitle                   = ui->cbMAutoSetFileTitle->isChecked();
