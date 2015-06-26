@@ -246,8 +246,6 @@ Tab::loadFromChapterFile() {
     emit removeThisTab();
 
   } else if (isSimpleFormat) {
-    Util::MessageBox::warning(this, QY("Simple chapter file format"), QY("The file you tried to open (%1) is a simple chapter file format. This can only be read but not written. "
-                                                                         "You will have to save the file to a Matroska or an XML chapter file.").arg(m_fileName));
     m_fileName.clear();
     emit titleChanged();
   }
