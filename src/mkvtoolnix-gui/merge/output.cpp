@@ -2,6 +2,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -13,6 +14,8 @@ using namespace mtx::gui;
 
 void
 Tab::setupOutputControls() {
+  setupOutputFileControls();
+
   m_splitControls << ui->splitOptions << ui->splitOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;
 
   auto comboBoxControls = QList<QComboBox *>{} << ui->splitMode << ui->chapterLanguage << ui->chapterCharacterSet;
@@ -20,6 +23,70 @@ Tab::setupOutputControls() {
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   onSplitModeChanged(MuxConfig::DoNotSplit);
+
+  connect(MainWindow::get(), &MainWindow::preferencesChanged, this, &Tab::setupOutputFileControls);
+}
+
+void
+Tab::setupOutputFileControls() {
+  if (Util::Settings::get().m_mergeAlwaysShowOutputFileControls)
+    moveOutputFileNameToGlobal();
+  else
+    moveOutputFileNameToOutputTab();
+}
+
+void
+Tab::moveOutputFileNameToGlobal() {
+  if (!ui->hlOutput)
+    return;
+
+  ui->outputLabel->setParent(ui->gbOutputFile);
+  ui->output->setParent(ui->gbOutputFile);
+  ui->browseOutput->setParent(ui->gbOutputFile);
+
+  ui->outputLabel->show();
+  ui->output->show();
+  ui->browseOutput->show();
+
+  delete ui->hlOutput;
+  ui->hlOutput = nullptr;
+
+  delete ui->gbOutputFile->layout();
+  auto layout = new QHBoxLayout{ui->gbOutputFile};
+  layout->setSpacing(6);
+  layout->setContentsMargins(6, 6, 6, 6);
+
+  layout->addWidget(ui->outputLabel);
+  layout->addWidget(ui->output);
+  layout->addWidget(ui->browseOutput);
+
+  ui->gbOutputFile->show();
+}
+
+void
+Tab::moveOutputFileNameToOutputTab() {
+    ui->gbOutputFile->hide();
+
+  if (ui->hlOutput)
+    return;
+
+  ui->gbOutputFile->hide();
+
+  ui->outputLabel->setParent(ui->generalBox);
+  ui->output->setParent(ui->generalBox);
+  ui->browseOutput->setParent(ui->generalBox);
+
+  ui->outputLabel->show();
+  ui->output->show();
+  ui->browseOutput->show();
+
+  ui->hlOutput = new QHBoxLayout{ui->gbOutputFile};
+  ui->hlOutput->setSpacing(6);
+  ui->hlOutput->addWidget(ui->output);
+  ui->hlOutput->addWidget(ui->browseOutput);
+
+  ui->generalGridLayout->addWidget(ui->outputLabel, 1, 0, 1, 1);
+  ui->generalGridLayout->addLayout(ui->hlOutput,    1, 1, 1, 1);
 }
 
 void

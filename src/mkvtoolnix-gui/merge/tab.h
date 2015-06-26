@@ -128,6 +128,7 @@ public slots:
   virtual void addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames);
 
   // Output tab:
+  virtual void setupOutputFileControls();
   virtual void setDestination(QString const &newValue);
   virtual void clearDestination();
   virtual void clearDestinationMaybe();
@@ -204,6 +205,9 @@ protected:
   virtual void addOrRemoveEmptyComboBoxItem(bool add);
   virtual QString getOpenFileName(QString const &title, QString const &filter, QLineEdit *lineEdit);
   virtual QString getSaveFileName(QString const &title, QString const &filter, QLineEdit *lineEdit);
+
+  virtual void moveOutputFileNameToGlobal();
+  virtual void moveOutputFileNameToOutputTab();
 
   virtual QModelIndex selectedSourceFile() const;
   virtual QList<SourceFile *> selectedSourceFiles() const;

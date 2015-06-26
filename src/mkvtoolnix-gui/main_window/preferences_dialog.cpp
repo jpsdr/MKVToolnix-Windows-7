@@ -44,6 +44,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
   ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
   ui->cbMAlwaysAddDroppedFiles->setChecked(m_cfg.m_mergeAlwaysAddDroppedFiles);
+  ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
   Util::setupLanguageComboBox(*ui->cbMDefaultTrackLanguage, m_cfg.m_defaultTrackLanguage);
   Util::setupCharacterSetComboBox(*ui->cbMDefaultSubtitleCharset, m_cfg.m_defaultSubtitleCharset);
@@ -136,6 +137,10 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("Checking this option causes the GUI to set that compression to »none« by default for all track types when adding files.")));
 
   Util::setToolTip(ui->cbMAlwaysAddDroppedFiles, QY("If disabled the GUI will ask whether you want to add the dropped files, append them or add them as additional parts."));
+  Util::setToolTip(ui->cbMAlwaysShowOutputFileControls,
+                   Q("%1 %2")
+                   .arg(QY("If enabled the output file name controls will always be visible no matter which tab is currently shown."))
+                   .arg(QY("Otherwise they're shown on the 'output' tab.")));
 
   Util::setToolTip(ui->cbMClearMergeSettings,
                    Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li></ol>")
@@ -354,6 +359,7 @@ PreferencesDialog::save() {
   m_cfg.m_setAudioDelayFromFileName          = ui->cbMSetAudioDelayFromFileName->isChecked();
   m_cfg.m_disableCompressionForAllTrackTypes = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
   m_cfg.m_mergeAlwaysAddDroppedFiles         = ui->cbMAlwaysAddDroppedFiles->isChecked();
+  m_cfg.m_mergeAlwaysShowOutputFileControls  = ui->cbMAlwaysShowOutputFileControls->isChecked();
   m_cfg.m_clearMergeSettings                 = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
   m_cfg.m_defaultTrackLanguage               = ui->cbMDefaultTrackLanguage->currentData().toString();
   m_cfg.m_defaultSubtitleCharset             = ui->cbMDefaultSubtitleCharset->currentData().toString();

@@ -333,6 +333,8 @@ MainWindow::editPreferences() {
 
   if (dlg.uiLocaleChanged())
     App::instance()->initializeLocale();
+
+  emit preferencesChanged();
 }
 
 #if defined(HAVE_CURL_EASY_H)

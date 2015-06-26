@@ -77,6 +77,9 @@ public:
 
   virtual void switchToTool(ToolBase *tool);
 
+signals:
+  void preferencesChanged();
+
 public slots:
   virtual void changeToolToSender();
   virtual void toolChanged(int index);
