@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-06-26 18:24+0200\n"
+"POT-Creation-Date: 2015-06-26 20:58+0200\n"
 "PO-Revision-Date: 2015-06-21 13:13+0200\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
@@ -1139,7 +1139,7 @@ msgstr "&Закрыть"
 msgid "&Close\tCtrl-W"
 msgstr "&Закрыть\tCtrl-W"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:125
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:128
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:202
 #, fuzzy
 msgid "&Collapse all"
@@ -1197,6 +1197,10 @@ msgstr "&Вниз"
 msgid "&Download"
 msgstr "&Скачать"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
+msgid "&Duration of each entry in seconds:"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/input.cpp:904
 #, fuzzy
 msgid "&Enable all tracks"
@@ -1211,7 +1215,7 @@ msgstr "включен"
 msgid "&Escape arguments for:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:124
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:127
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:201
 msgid "&Expand all"
 msgstr ""
@@ -1253,6 +1257,11 @@ msgstr "&Файл"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:762
 msgid "&GUI"
 msgstr ""
+
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:137
+#, fuzzy
+msgid "&Generate sub-chapters"
+msgstr "разбить перед главами"
 
 #: src/mmg/mmg_dialog.cpp:313
 msgid "&Global options\tAlt-3"
@@ -1315,6 +1324,7 @@ msgstr "Вывод задания"
 msgid "&Job queue"
 msgstr "&Добавить в очередь заданий"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:503
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:761
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1263
@@ -1478,7 +1488,7 @@ msgstr "Удалить задание из очереди заданий пос�
 msgid "&Remove jobs"
 msgstr "удалить все"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:131
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:134
 msgid "&Remove selected edition or chapter"
 msgstr ""
 
@@ -1554,6 +1564,10 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:230
 msgid "&Start jobs automatically"
+msgstr ""
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:202
+msgid "&Start timecode of first created entry:"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:422
@@ -2176,8 +2190,8 @@ msgstr "&Установить выходной файл"
 msgid "<unnamed>"
 msgstr "(безымянный)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:112
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:159
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:115
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:163
 msgid "<unsaved file>"
 msgstr ""
 
@@ -2542,26 +2556,26 @@ msgstr "Добавить дополнительные части"
 msgid "Add name"
 msgstr "Добавить имя"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:130
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:133
 #, fuzzy
 msgid "Add new &sub-chapter inside"
 msgstr "Добавить подраздел"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:128
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:131
 #, fuzzy
 msgid "Add new c&hapter before"
 msgstr "(новый файл глав)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:129
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:132
 #, fuzzy
 msgid "Add new ch&apter after"
 msgstr "(новый файл глав)"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:126
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:129
 msgid "Add new e&dition before"
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:127
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:130
 #, fuzzy
 msgid "Add new ed&ition after"
 msgstr "Добавить дополнительные части"
@@ -2606,7 +2620,7 @@ msgstr "Ошибка при открытии файла"
 msgid "Adding, appending or adding as additional parts"
 msgstr "Добавить дополнительные части"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:133
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:136
 #, fuzzy
 msgid "Additional &modifications"
 msgstr "Другие настройки"
@@ -2674,8 +2688,8 @@ msgstr "Все записи глав верны."
 
 #: src/info/qt_ui.cpp:89
 #: src/info/qt_ui.cpp:98
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:433
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:400
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:437
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:165
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:134
 #: src/mkvtoolnix-gui/merge/attachments.cpp:107
@@ -2683,7 +2697,7 @@ msgstr "Все записи глав верны."
 #: src/mkvtoolnix-gui/merge/tab.cpp:147
 #: src/mkvtoolnix-gui/merge/tab.cpp:180
 #: src/mkvtoolnix-gui/merge/tab.cpp:204
-#: src/mkvtoolnix-gui/merge/tool.cpp:150
+#: src/mkvtoolnix-gui/merge/tool.cpp:131
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:228
 #, fuzzy
@@ -3209,6 +3223,11 @@ msgstr "&Скопировать в буфер обмена"
 msgid "C&ountries"
 msgstr "Страна:"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:203
+#, fuzzy
+msgid "C&ountry:"
+msgstr "Страна:"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:382
 #, fuzzy
 msgid "C&reate option file"
@@ -3333,6 +3352,10 @@ msgstr "Расположение каналов: %1%"
 #, boost-format
 msgid "Channels: %1%"
 msgstr "Каналы: %1%"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:197
+msgid "Chapter &number of first created entry:"
+msgstr ""
 
 #: src/mkvtoolnix-gui/util/settings.cpp:84
 #, fuzzy
@@ -3792,7 +3815,7 @@ msgstr "Шифрование содержимого"
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr "Конвертировать текстовые субтитры в эту кодировку (по умолчанию: UTF-8)."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:412
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:416
 #, fuzzy
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Сохранить текущие главы в файл XML"
@@ -3957,7 +3980,7 @@ msgstr ""
 msgid "Creating directory '%1%' failed: %2%"
 msgstr "Создание каталога '%1%' не удалось: %2%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:408
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:412
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
 msgstr ""
 
@@ -4169,7 +4192,7 @@ msgstr ""
 msgid "D&elete"
 msgstr "&Удалить"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:132
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:135
 msgid "D&uplicate selected edition or chapter"
 msgstr ""
 
@@ -4748,8 +4771,8 @@ msgstr "Ошибка при загрузке настроек"
 msgid "Error loading settings file"
 msgstr "Ошибка при загрузке настроек"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:243
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:304
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:247
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:308
 #, fuzzy
 msgid "Error message from the parser: %1"
 msgstr "Этот файл не содержит правильных глав."
@@ -5025,7 +5048,7 @@ msgstr "Описание файла: %1%"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:142
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:158
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:184
-#: src/mkvtoolnix-gui/merge/tool.cpp:178
+#: src/mkvtoolnix-gui/merge/tool.cpp:159
 #, fuzzy
 msgid "File has been modified"
 msgstr "Файл не был изменён."
@@ -5079,12 +5102,12 @@ msgstr "Имя файла"
 msgid "File name: %1%"
 msgstr "Имя файла: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:203
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:210
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:217
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:245
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:306
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:442
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:207
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:214
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:221
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:249
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:310
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:446
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:80
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:88
 #: src/mmg/header_editor/frame.cpp:258
@@ -5317,6 +5340,15 @@ msgstr "Общие параметры дорожки"
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
 msgstr "Общие параметры дорожки"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:194
+#, fuzzy
+msgid "Generate sub-chapters"
+msgstr "разбить перед главами"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
+msgid "Generating a number of chapters spaced evenly apart"
+msgstr ""
 
 #: src/mmg/mmg_dialog.cpp:330
 msgid "Global"
@@ -6431,7 +6463,7 @@ msgid "MKVToolNix option files"
 msgstr "&Создать файл конфигурации"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:147
-#: src/mkvtoolnix-gui/merge/tool.cpp:150
+#: src/mkvtoolnix-gui/merge/tool.cpp:131
 msgid "MKVToolnix GUI config files"
 msgstr ""
 
@@ -6546,7 +6578,7 @@ msgid "Matroska audio/video files"
 msgstr "Аудио/видеофайлы Matroska"
 
 #: src/info/qt_ui.cpp:87
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:433
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:437
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:161
 #: src/mkvtoolnix-gui/merge/output.cpp:123
 #, fuzzy
@@ -6797,6 +6829,10 @@ msgstr ""
 #: src/mmg/tabs/input_general.cpp:184
 msgid "Name for this track, e.g. \"director's comments\"."
 msgstr "Название для этой дорожки, например, \"комментарии режиссера\"."
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:199
+msgid "Name tem&plate:"
+msgstr ""
 
 #: src/mmg/tabs/attachments.cpp:159
 #: src/mmg/tabs/chapters.cpp:376
@@ -7124,6 +7160,11 @@ msgstr "Нечего делать.\n"
 msgid "Notice"
 msgstr "Обратите внимание"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:198
+#, fuzzy
+msgid "Nu&mber of entries to create:"
+msgstr "&Новые главы"
+
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:247
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:82
 #, fuzzy
@@ -7282,7 +7323,7 @@ msgstr "Закрыть редактор заголовков"
 msgid "Open folder"
 msgstr "Открыть папку"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:150
+#: src/mkvtoolnix-gui/merge/tool.cpp:131
 #, fuzzy
 msgid "Open settings file"
 msgstr "Сохранить настройки мультиплексирования в файл"
@@ -8067,12 +8108,12 @@ msgstr "Сохранить как параметры по умолчанию д�
 msgid "Save as default for new jobs"
 msgstr "Сохранить как параметры по умолчанию для новых заданий"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:400
 #, fuzzy
 msgid "Save chapters as XML"
 msgstr "Сохранить текущие главы в файл XML"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:433
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:437
 #, fuzzy
 msgid "Save chapters to Matroska file"
 msgstr "&Сохранить в файл Matroska"
@@ -8137,13 +8178,13 @@ msgstr "&Сохранить в файл Matroska"
 msgid "Saves the information from the current file to a text file"
 msgstr "Сохраняет информацию из текущего файла в текстовый файл"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:408
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:412
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:416
 #, fuzzy
 msgid "Saving failed"
 msgstr "Анализ файла"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:452
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:456
 #, fuzzy
 msgid "Saving the chapters failed."
 msgstr "Выберите файл глав"
@@ -9326,7 +9367,7 @@ msgstr "Главе '%s' не задан язык."
 msgid "The chapter '%s' is missing the start time."
 msgstr "Главе '%s' не задано время начала."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:516
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:520
 msgid "The chapter UID must be a number if given."
 msgstr ""
 
@@ -9509,7 +9550,7 @@ msgstr "Длительность, после которой будет созд�
 msgid "The edit specifications '%1%' and '%2%' resolve to the same track with the UID %3%.\n"
 msgstr "Спецификации редактирования '%1%' и '%2%' раскладываются в одну и ту же дорожку с UID %3%.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:591
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:595
 msgid "The edition UID must be a number if given."
 msgstr ""
 
@@ -9524,12 +9565,12 @@ msgstr "UID редакции, предназначенной для воспро
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "Элемент был записан в конце файла, но размер сегмента не мог быть обновлён. Поэтому элемент не будет видим. Процесс будет прерван. Файл был изменён!"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:542
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:546
 #, fuzzy
 msgid "The end time could not be parsed: %1"
 msgstr "Идентификационный заголовок Kate не может быть обработан (%1%).\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:545
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:549
 msgid "The end time must be greater than the start timecode."
 msgstr ""
 
@@ -9640,7 +9681,7 @@ msgstr "Файл, видимо, не является правильным фа�
 msgid "The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."
 msgstr "Файл был изменён другой программой с того момента, как он был прочитан редактором заголовков. Вам придётся повторно загрузить его. К сожалению, это означает, что все внесённые вами изменения будут потеряны."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:383
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:387
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:165
 #, fuzzy
 msgid "The file has been saved successfully."
@@ -9734,15 +9775,15 @@ msgstr "Файл имеет неподдерживаемый формат кон
 msgid "The file will not be processed further."
 msgstr "Этот файл не может быть открыт для записи."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:203
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:217
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:442
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:207
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:221
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:446
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:88
 #, fuzzy
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Файл, который вы попытались открыть, не является файлом Matroska."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:210
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:214
 #, fuzzy
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "Этот файл не содержит глав."
@@ -9752,8 +9793,8 @@ msgstr "Этот файл не содержит глав."
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
 msgstr "Файл, который вы попытались открыть, не является файлом Matroska."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:241
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:302
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:245
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:306
 #, fuzzy
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
 msgstr "Файл, который вы попытались открыть, не является файлом Matroska."
@@ -9777,7 +9818,7 @@ msgstr "Заголовок файла слишком короткий.\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:226
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:184
-#: src/mkvtoolnix-gui/merge/tool.cpp:178
+#: src/mkvtoolnix-gui/merge/tool.cpp:159
 #, fuzzy
 msgid "The file »%1« has been modified. Do you really want to close? All changes will be lost."
 msgstr "Некоторые значения заголовка были изменены. Вы действительно хотите закрыть без сохранения файла?"
@@ -9813,6 +9854,7 @@ msgstr ""
 msgid "The following parts are read after the primary file as if they were all part of one big file."
 msgstr "Следующие части читаются после основного файла, как если бы они были частью одного большого файла."
 
+#: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:55
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:62
 #: src/mkvtoolnix-gui/merge/output.cpp:194
 #: src/mkvtoolnix-gui/merge/output.cpp:209
@@ -10251,12 +10293,12 @@ msgstr "Второй режим извлекает теги и преобраз�
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr "Похоже, таблица поиска в этом файле TTA повреждена.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:558
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:562
 #, fuzzy
 msgid "The segment UID could not be parsed: %1"
 msgstr "Идентификационный заголовок Kate не может быть обработан (%1%).\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:568
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:572
 msgid "The segment edition UID must be a positive number if given."
 msgstr ""
 
@@ -10301,7 +10343,7 @@ msgstr "Исходный файл '%1%' не может быть успешно 
 msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:536
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:540
 #, fuzzy
 msgid "The start time could not be parsed: %1"
 msgstr "Идентификационный заголовок Kate не может быть обработан (%1%).\n"
@@ -10311,6 +10353,7 @@ msgstr "Идентификационный заголовок Kate не може
 msgid "The stretch setting for track nr. %s in file '%s' is invalid."
 msgstr "Значение растяжения для дорожки номер %s в файле '%s' неверно."
 
+#: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:59
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
 msgid "The string '<NUM>' will be replaced by the chapter number."
 msgstr ""
@@ -10857,6 +10900,7 @@ msgstr "Такого НА САМОМ ДЕЛЕ не должно происход
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "Такого не должно было случиться. Пожалуйста сообщите автору Moritz Bunkus <moritz@bunkus.org> об этой ошибке/предупреждении, с описанием того, что вы пытались сделать, используемой командной строки, а также укажите, какую операционную систему вы используете. Спасибо."
 
+#: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:58
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:112
 msgid "This template will be used for new chapter entries."
 msgstr ""
@@ -11411,7 +11455,7 @@ msgstr "Действительные хаки:\n"
 msgid "Validates the content of all changeable headers"
 msgstr "Проверяет содержание всех заменяемых заголовков"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:489
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:493
 #, fuzzy
 msgid "Validation failed"
 msgstr "Не удалось создать файл"
@@ -11784,7 +11828,7 @@ msgstr "Неправильная строка идентификации: '%|1$6
 msgid "Wrong identification string: '%|1$7s|' != 'kate\\0\\0\\0'"
 msgstr "Неправильная строка идентификации: '%|1$7s|' != 'kate\\0\\0\\0'"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:400
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:163
 #: src/mkvtoolnix-gui/merge/output.cpp:315
 #, fuzzy
@@ -13235,6 +13279,7 @@ msgstr "да"
 msgid "– no selection by default –"
 msgstr ""
 
+#: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:46
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:37
 msgid "– set to none –"
 msgstr ""

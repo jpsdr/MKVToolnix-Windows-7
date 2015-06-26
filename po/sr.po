@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-06-26 18:24+0200\n"
+"POT-Creation-Date: 2015-06-26 20:58+0200\n"
 "PO-Revision-Date: 2015-06-21 13:13+0200\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -1183,7 +1183,7 @@ msgstr "&Zatvori"
 msgid "&Close\tCtrl-W"
 msgstr "&Zatvori\tCtrl-W"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:125
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:128
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:202
 msgid "&Collapse all"
 msgstr "&Skupi sve stavke"
@@ -1235,6 +1235,11 @@ msgstr "&Dole"
 msgid "&Download"
 msgstr "&Skini"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
+#, fuzzy
+msgid "&Duration of each entry in seconds:"
+msgstr "Minimalno trajanje plejliste u sekundama:"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:904
 msgid "&Enable all tracks"
 msgstr "&Uključi sve staze"
@@ -1247,7 +1252,7 @@ msgstr "&Uključeno"
 msgid "&Escape arguments for:"
 msgstr "&Escape karakteri za:"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:124
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:127
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:201
 msgid "&Expand all"
 msgstr "&Proširi sve"
@@ -1284,6 +1289,11 @@ msgstr "&Fajlovi:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:762
 msgid "&GUI"
 msgstr "&GUI"
+
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:137
+#, fuzzy
+msgid "&Generate sub-chapters"
+msgstr "pre poglavlja"
 
 #: src/mmg/mmg_dialog.cpp:313
 msgid "&Global options\tAlt-3"
@@ -1337,6 +1347,7 @@ msgstr "&Rezultat zadatka"
 msgid "&Job queue"
 msgstr "&Lista zadataka"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:503
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:761
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1263
@@ -1481,7 +1492,7 @@ msgstr "&Ukloni zadatak sa liste posle obrade"
 msgid "&Remove jobs"
 msgstr "&Ukloni zadatke"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:131
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:134
 msgid "&Remove selected edition or chapter"
 msgstr "&Ukloni izabranu ediciju ili poglavlje"
 
@@ -1552,6 +1563,10 @@ msgstr "Za&počni sve zadatke na čekanju"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:230
 msgid "&Start jobs automatically"
 msgstr "&Započni zadatke automatski"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:202
+msgid "&Start timecode of first created entry:"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:422
 msgid "&Tag editor"
@@ -2240,8 +2255,8 @@ msgstr "<nema izlaznog fajla>"
 msgid "<unnamed>"
 msgstr "<neimenovano>"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:112
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:159
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:115
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:163
 msgid "<unsaved file>"
 msgstr "<nesačuvan fajl>"
 
@@ -2614,23 +2629,23 @@ msgstr "Dodaj media fajlove kao dodatne delove"
 msgid "Add name"
 msgstr "Dodaj ime"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:130
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:133
 msgid "Add new &sub-chapter inside"
 msgstr "Dodaj novo &pod-poglavlje"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:128
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:131
 msgid "Add new c&hapter before"
 msgstr "Dodaj novo p&oglavlje pre"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:129
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:132
 msgid "Add new ch&apter after"
 msgstr "Dodaj novo po&glavlje posle"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:126
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:129
 msgid "Add new e&dition before"
 msgstr "Dodaj novu e&diciju pre"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:127
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:130
 msgid "Add new ed&ition after"
 msgstr "Dodaj novu ed&iciju posle"
 
@@ -2678,7 +2693,7 @@ msgstr "Dodavanje ili pripajanje fajlova"
 msgid "Adding, appending or adding as additional parts"
 msgstr "Dodavanje, pripajanje ili dodavanje kao dodatnih delova"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:133
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:136
 msgid "Additional &modifications"
 msgstr "Dodatne &izmene"
 
@@ -2742,14 +2757,14 @@ msgid "All chapter entries are valid."
 msgstr "Sve stavke poglavlja su važeće."
 
 #: src/info/qt_ui.cpp:89 src/info/qt_ui.cpp:98
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:433
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:400
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:437
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:165
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:134
 #: src/mkvtoolnix-gui/merge/attachments.cpp:107
 #: src/mkvtoolnix-gui/merge/tab.cpp:133 src/mkvtoolnix-gui/merge/tab.cpp:147
 #: src/mkvtoolnix-gui/merge/tab.cpp:180 src/mkvtoolnix-gui/merge/tab.cpp:204
-#: src/mkvtoolnix-gui/merge/tool.cpp:150
+#: src/mkvtoolnix-gui/merge/tool.cpp:131
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:228
 msgid "All files"
@@ -3299,6 +3314,11 @@ msgstr "K&opiraj u clipboard"
 msgid "C&ountries"
 msgstr "&Države"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:203
+#, fuzzy
+msgid "C&ountry:"
+msgstr "Država:"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:382
 msgid "C&reate option file"
 msgstr "&Kreiraj konfiguracioni fajl"
@@ -3445,6 +3465,10 @@ msgstr "Pozicije kanala: %1%"
 #, boost-format
 msgid "Channels: %1%"
 msgstr "Kanali: %1%"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:197
+msgid "Chapter &number of first created entry:"
+msgstr ""
 
 #: src/mkvtoolnix-gui/util/settings.cpp:84
 #, fuzzy
@@ -3909,7 +3933,7 @@ msgstr "Šifrovanje sadržaja"
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr "Konvertuj tekstualne titlove u ovaj skup znakova (default: UTF-8)."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:412
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:416
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Konvertovanje poglavlja u XML nije uspelo: %1"
 
@@ -4113,7 +4137,7 @@ msgstr ""
 msgid "Creating directory '%1%' failed: %2%"
 msgstr "Pravljenje direktorijuma '%1%' nije uspelo: %2%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:408
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:412
 msgid ""
 "Creating the file failed. Check to make sure you have permission to write to "
 "that directory and that the drive is not full."
@@ -4337,7 +4361,7 @@ msgstr ""
 msgid "D&elete"
 msgstr "&Obriši"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:132
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:135
 msgid "D&uplicate selected edition or chapter"
 msgstr "D&upliraj izabranu ediciju ili poglavlje"
 
@@ -4935,8 +4959,8 @@ msgstr "Greška prilikom učitavanja parametara"
 msgid "Error loading settings file"
 msgstr "Greška prilikom učitavanja parametara"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:243
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:304
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:247
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:308
 msgid "Error message from the parser: %1"
 msgstr "Poruka o grešci iz raščlanjivača: %1"
 
@@ -5253,7 +5277,7 @@ msgstr "Opis fajla: %1%"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:142
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:158
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:184
-#: src/mkvtoolnix-gui/merge/tool.cpp:178
+#: src/mkvtoolnix-gui/merge/tool.cpp:159
 msgid "File has been modified"
 msgstr "Fajl je izmenjen"
 
@@ -5307,12 +5331,12 @@ msgstr "Ime fajla:"
 msgid "File name: %1%"
 msgstr "Ime fajla: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:203
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:210
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:217
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:245
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:306
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:442
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:207
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:214
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:221
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:249
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:310
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:446
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:80
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:88
 #: src/mmg/header_editor/frame.cpp:258 src/mmg/tabs/chapters.cpp:598
@@ -5608,6 +5632,15 @@ msgstr "Opšte opcije"
 #: src/mmg/tabs/input.cpp:205
 msgid "General track options"
 msgstr "Opšte opcije staza"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:194
+#, fuzzy
+msgid "Generate sub-chapters"
+msgstr "pre poglavlja"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
+msgid "Generating a number of chapters spaced evenly apart"
+msgstr ""
 
 #: src/mmg/mmg_dialog.cpp:330
 msgid "Global"
@@ -7015,7 +7048,7 @@ msgstr "MKVToolNix je licenciran pod GNU GPL v2"
 msgid "MKVToolNix option files"
 msgstr "MKVToolNix konfiguracioni fajlovi"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:147 src/mkvtoolnix-gui/merge/tool.cpp:150
+#: src/mkvtoolnix-gui/merge/tab.cpp:147 src/mkvtoolnix-gui/merge/tool.cpp:131
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix GUI kofiguracioni fajlovi"
 
@@ -7131,7 +7164,7 @@ msgstr "Matroska i WebM fajlovi"
 msgid "Matroska audio/video files"
 msgstr "Matroska audio/video fajlovi"
 
-#: src/info/qt_ui.cpp:87 src/mkvtoolnix-gui/chapter_editor/tab.cpp:433
+#: src/info/qt_ui.cpp:87 src/mkvtoolnix-gui/chapter_editor/tab.cpp:437
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:161
 #: src/mkvtoolnix-gui/merge/output.cpp:123
 msgid "Matroska files"
@@ -7403,6 +7436,10 @@ msgstr ""
 #: src/mmg/tabs/input_general.cpp:184
 msgid "Name for this track, e.g. \"director's comments\"."
 msgstr "Ime za ovu stazu, npr. \"komentari režisera\"."
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:199
+msgid "Name tem&plate:"
+msgstr ""
 
 #: src/mmg/tabs/attachments.cpp:159 src/mmg/tabs/chapters.cpp:376
 msgid "Name:"
@@ -7795,6 +7832,11 @@ msgstr "Nothing to do.\n"
 msgid "Notice"
 msgstr "Obratiti pažnju"
 
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:198
+#, fuzzy
+msgid "Nu&mber of entries to create:"
+msgstr "Broj poglavlja:"
+
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:247
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:82
 msgid "Number of chapters:"
@@ -7988,7 +8030,7 @@ msgstr "Otvori fajlove u uredniku zaglavlja"
 msgid "Open folder"
 msgstr "Otvori folder"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:150
+#: src/mkvtoolnix-gui/merge/tool.cpp:131
 msgid "Open settings file"
 msgstr "Otvori fajl sa podešavanjima"
 
@@ -8855,11 +8897,11 @@ msgstr "Sačuvaj kao &podrazumevano za nove zadatke"
 msgid "Save as default for new jobs"
 msgstr "Sačuvaj kao podrazumevano za nove zadatke"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:400
 msgid "Save chapters as XML"
 msgstr "Sačuvaj poglavlja kao XML"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:433
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:437
 msgid "Save chapters to Matroska file"
 msgstr "Sačuvaj poglavlja u Matroska fajl"
 
@@ -8922,12 +8964,12 @@ msgstr "Sačuvaj u &Matroska fajl"
 msgid "Saves the information from the current file to a text file"
 msgstr "Čuva informaciju iz tekućeg fajla u tekstualni fajl"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:408
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:412
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:416
 msgid "Saving failed"
 msgstr "Snimanje nije uspelo"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:452
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:456
 msgid "Saving the chapters failed."
 msgstr "Snimanje poglavlja nije uspelo."
 
@@ -10287,7 +10329,7 @@ msgstr "Poglavlju '%s' nedostaje njegov jezik."
 msgid "The chapter '%s' is missing the start time."
 msgstr "Poglavlju '%s' nedostaje početno vreme."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:516
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:520
 msgid "The chapter UID must be a number if given."
 msgstr "Ako se navodi, chapter UID mora biti broj."
 
@@ -10560,7 +10602,7 @@ msgstr ""
 "The edit specifications '%1%' and '%2%' resolve to the same track with the "
 "UID %3%.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:591
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:595
 msgid "The edition UID must be a number if given."
 msgstr "edition UID mora biti broj ako se navodi."
 
@@ -10583,11 +10625,11 @@ msgstr ""
 "obnovljena. Iz tog razloga element neće bit vidljiv. Proces će biti "
 "prekinut. Fajl je izmenjen!"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:542
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:546
 msgid "The end time could not be parsed: %1"
 msgstr "Krajnje vreme ne može biti raščlanjeno: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:545
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:549
 msgid "The end time must be greater than the start timecode."
 msgstr "Krajnje vreme mora biti veće od početnog vremenskog koda."
 
@@ -10730,7 +10772,7 @@ msgstr ""
 "zaglavlja. Zbog toga treba ponovo da ga učitate. Ovo nažalost znači da će "
 "sve vaše izmene biti izgubljene."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:383
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:387
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:165
 msgid "The file has been saved successfully."
 msgstr "Fajl je uspešno sačuvan."
@@ -10834,14 +10876,14 @@ msgstr "Fajl nije prepoznat kao podržan format (exit kod: %1)."
 msgid "The file will not be processed further."
 msgstr "Fajl neće biti dalje obrađen."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:203
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:217
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:442
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:207
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:221
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:446
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:88
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Fajl koji ste pokušali da otvorite (%1) ne može biti uspešno pročitan."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:210
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:214
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "Fajl koji ste pokušali da otvorite (%1) ne sadrži nikakva poglavlja."
 
@@ -10853,8 +10895,8 @@ msgstr ""
 "Fajl koji ste pokušali da otvorite (%1) nije prepoznat kao važeći Matroska/"
 "WebM fajl."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:241
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:302
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:245
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:306
 msgid ""
 "The file you tried to open (%1) is recognized as neither a valid Matroska "
 "nor a valid chapter file."
@@ -10884,7 +10926,7 @@ msgstr "Fajl koji ste dodali je plejlista."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:226
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:184
-#: src/mkvtoolnix-gui/merge/tool.cpp:178
+#: src/mkvtoolnix-gui/merge/tool.cpp:159
 msgid ""
 "The file »%1« has been modified. Do you really want to close? All changes "
 "will be lost."
@@ -10938,6 +10980,7 @@ msgstr ""
 "Sledeći delovi su čitani posle primarnog fajla kao da su svi oni deo jednog "
 "velikog fajla."
 
+#: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:55
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:62
 #: src/mkvtoolnix-gui/merge/output.cpp:194
 #: src/mkvtoolnix-gui/merge/output.cpp:209
@@ -11450,11 +11493,11 @@ msgstr ""
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr "seek tabela u ovom TTA fajlu izgleda da je oštećena.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:558
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:562
 msgid "The segment UID could not be parsed: %1"
 msgstr "Segment UID ne može biti raščlanjen: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:568
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:572
 msgid "The segment edition UID must be a positive number if given."
 msgstr "Ako se navodi, segment edition UID mora biti pozitivan broj."
 
@@ -11528,7 +11571,7 @@ msgstr ""
 "data preko komandne linije sa '--default-duration' parametrom, izvorni "
 "kontejner ili video bit-potok."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:536
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:540
 msgid "The start time could not be parsed: %1"
 msgstr "Početno vreme ne može biti raščlanjeno: %1"
 
@@ -11537,6 +11580,7 @@ msgstr "Početno vreme ne može biti raščlanjeno: %1"
 msgid "The stretch setting for track nr. %s in file '%s' is invalid."
 msgstr "Vrednost za rastezanje staze br. %s iz fajla '%s' je nevažeća."
 
+#: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:59
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
 #, fuzzy
 msgid "The string '<NUM>' will be replaced by the chapter number."
@@ -12363,6 +12407,7 @@ msgstr ""
 "pokušali da uradite, korišćenom komandnom linijom i informacijom o "
 "operativnom sistemu koji koristite. Hvala."
 
+#: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:58
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:112
 msgid "This template will be used for new chapter entries."
 msgstr ""
@@ -12999,7 +13044,7 @@ msgstr "Važeći hakovi su:\n"
 msgid "Validates the content of all changeable headers"
 msgstr "Potvrđuje sadržaj od svih izmenljivih zaglavlja"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:489
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:493
 msgid "Validation failed"
 msgstr "Validacija neuspešna"
 
@@ -13405,7 +13450,7 @@ msgstr "Pogrešan identifikacion string: '%|1$6s|' != 'theora'"
 msgid "Wrong identification string: '%|1$7s|' != 'kate\\0\\0\\0'"
 msgstr "Pogrešan identifikacion string: '%|1$7s|' != 'kate\\0\\0\\0'"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:396
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:400
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:163
 #: src/mkvtoolnix-gui/merge/output.cpp:315
 msgid "XML chapter files"
@@ -14959,6 +15004,7 @@ msgstr "da"
 msgid "– no selection by default –"
 msgstr "– bez selekcije –"
 
+#: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:46
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:37
 msgid "– set to none –"
 msgstr "– nijedna –"
