@@ -226,36 +226,7 @@ strip(std::vector<wxString> &v,
 
 wxString
 unescape(const wxString &src) {
-  wxString dst;
-
-  if (src.length() <= 1)
-    return src;
-  size_t current_char = 0;
-  size_t next_char    = 1;
-  while (current_char < src.length()) {
-    if (src[current_char] == wxT('\\')) {
-      if (next_char == src.length()) // This is an error...
-        dst += wxT('\\');
-      else {
-        if (src[next_char] == wxT('2'))
-          dst += wxT('"');
-        else if (src[next_char] == wxT('s'))
-          dst += wxT(' ');
-        else if (src[next_char] == wxT('c'))
-          dst += wxT(':');
-        else if (src[next_char] == wxT('h'))
-          dst += wxT('#');
-        else
-          dst += src[next_char];
-        current_char++;
-      }
-    } else
-      dst += src[current_char];
-    current_char++;
-    next_char = current_char + 1;
-  }
-
-  return dst;
+  return wxU(unescape(to_utf8(src)));
 }
 
 wxString
