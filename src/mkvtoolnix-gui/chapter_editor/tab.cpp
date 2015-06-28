@@ -346,6 +346,8 @@ Tab::load() {
   resizeChapterColumnsToContents();
 
   connect(m_chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
+
+  MainWindow::chapterEditorTool()->enableMenuActions();
 }
 
 void
