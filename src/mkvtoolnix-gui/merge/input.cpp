@@ -17,6 +17,7 @@
 #include "common/stereo_mode.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
@@ -73,7 +74,18 @@ Tab::setupControlLists() {
 }
 
 void
+Tab::setupMoveUpDownButtons() {
+  auto show    = Util::Settings::get().m_mergeShowMoveUpDownButtons;
+  auto widgets = QList<QWidget *>{} << ui->moveTracksButtons;
+
+  for (auto const &widget : widgets)
+    widget->setVisible(show);
+}
+
+void
 Tab::setupInputControls() {
+  setupMoveUpDownButtons();
+
   setupControlLists();
 
   ui->files->setModel(m_filesModel);
@@ -139,6 +151,8 @@ Tab::setupInputControls() {
   connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     m_tracksModel, &TrackModel::updateSelectionStatus);
   connect(ui->tracks,                   &Util::BasicTreeView::allSelectedActivated, this,          &Tab::toggleMuxThisForSelectedTracks);
   connect(ui->tracks,                   &QTreeView::doubleClicked,                  this,          &Tab::toggleMuxThisForSelectedTracks);
+  connect(ui->moveTracksUp,             &QPushButton::clicked,                      this,          &Tab::onMoveTracksUp);
+  connect(ui->moveTracksDown,           &QPushButton::clicked,                      this,          &Tab::onMoveTracksDown);
 
   connect(m_addFilesAction,             &QAction::triggered,                        this,          &Tab::onAddFiles);
   connect(m_appendFilesAction,          &QAction::triggered,                        this,          &Tab::onAppendFiles);
@@ -153,6 +167,8 @@ Tab::setupInputControls() {
   connect(m_filesModel,                 &SourceFileModel::rowsInserted,             this,          &Tab::onFileRowsInserted);
   connect(m_tracksModel,                &TrackModel::rowsInserted,                  this,          &Tab::onTrackRowsInserted);
   connect(m_tracksModel,                &TrackModel::itemChanged,                   this,          &Tab::onTrackItemChanged);
+
+  connect(MainWindow::get(),            &MainWindow::preferencesChanged,            this,          &Tab::setupMoveUpDownButtons);
 
   onTrackSelectionChanged();
   enableTracksActions();
@@ -287,11 +303,16 @@ Tab::onFileSelectionChanged() {
 void
 Tab::onTrackSelectionChanged() {
   Util::enableWidgets(m_allInputControls, false);
+  ui->moveTracksUp->setEnabled(false);
+  ui->moveTracksDown->setEnabled(false);
 
   auto selection = ui->tracks->selectionModel()->selection();
   auto numRows   = Util::numSelectedRows(selection);
   if (!numRows)
     return;
+
+  ui->moveTracksUp->setEnabled(true);
+  ui->moveTracksDown->setEnabled(true);
 
   if (1 < numRows) {
     setInputControlValues(nullptr);
@@ -1081,6 +1102,19 @@ Tab::selectAllTracks() {
 }
 
 void
+Tab::selectTracks(QList<Track *> const &tracks) {
+  auto numColumns = m_tracksModel->columnCount() - 1;
+  auto selection  = QItemSelection{};
+
+  for (auto const &track : tracks) {
+    auto idx = m_tracksModel->indexFromTrack(track);
+    selection.select(idx.sibling(idx.row(), 0), idx.sibling(idx.row(), numColumns));
+  }
+
+  ui->tracks->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+}
+
+void
 Tab::enableAllTracks() {
   enableDisableAllTracks(true);
 }
@@ -1118,6 +1152,32 @@ Tab::ensureOneDefaultFlagOnly(Track *thisOneHasIt) {
       if ((selection.count() == 1) && (selection[0] == track))
         ui->defaultTrackFlag->setCurrentIndex(0);
     }
+}
+
+void
+Tab::moveTracksUpOrDown(bool up) {
+  auto tracks = selectedTracks();
+
+  if (up)
+    m_tracksModel->moveTracksUp(tracks);
+  else
+    m_tracksModel->moveTracksDown(tracks);
+
+  for (auto const &track : tracks)
+    if (track->isRegular() && !track->m_appendedTo)
+      ui->tracks->setExpanded(m_tracksModel->indexFromTrack(track), true);
+
+  selectTracks(tracks);
+}
+
+void
+Tab::onMoveTracksUp() {
+  moveTracksUpOrDown(true);
+}
+
+void
+Tab::onMoveTracksDown() {
+  moveTracksUpOrDown(false);
 }
 
 }}}

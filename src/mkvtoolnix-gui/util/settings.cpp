@@ -62,6 +62,7 @@ Settings::load() {
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
   m_mergeAlwaysAddDroppedFiles         = reg.value("mergeAlwaysAddDroppedFiles", true).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls", true).toBool();
+  m_mergeShowMoveUpDownButtons         = reg.value("mergeShowMoveUpDownButtons", false).toBool();
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
   m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
@@ -152,6 +153,7 @@ Settings::save()
   reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
   reg.setValue("mergeAlwaysAddDroppedFiles",         m_mergeAlwaysAddDroppedFiles);
   reg.setValue("mergeAlwaysShowOutputFileControls",  m_mergeAlwaysShowOutputFileControls);
+  reg.setValue("mergeShowMoveUpDownButtons",         m_mergeShowMoveUpDownButtons);
 
   reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("relativeOutputDir",                  m_relativeOutputDir.path());

@@ -10,6 +10,8 @@
 #include <QList>
 #include <QSet>
 
+class QItemSelectionModel;
+
 namespace mtx { namespace gui { namespace Merge {
 
 class TrackModel;
@@ -40,6 +42,9 @@ public:
   virtual void removeTracks(QSet<Track *> const &tracks);
   virtual void reDistributeAppendedTracksForFileRemoval(QSet<SourceFile *> const &filesToRemove);
 
+  virtual void moveTracksUp(QList<Track *> const &tracks);
+  virtual void moveTracksDown(QList<Track *> const &tracks);
+
   virtual void trackUpdated(Track *track);
 
   virtual Track *fromIndex(QModelIndex const &idx) const;
@@ -54,11 +59,14 @@ public slots:
   void updateSelectionStatus();
 
 protected:
-  QList<QStandardItem *>createRow(Track *track);
+  QList<QStandardItem *> createRow(Track *track);
   void setItemsFromTrack(QList<QStandardItem *> items, Track *track);
 
   void dumpTracks(QString const &label) const;
   bool hasUnsetTrackRole(QModelIndex const &idx = QModelIndex{});
+
+  void sortTracks(QList<Track *> &tracks, bool reverse = false);
+  void moveTracksUpOrDown(QList<Track *> tracks, bool up);
 };
 
 }}}

@@ -88,6 +88,10 @@ public slots:
   virtual void onFileSelectionChanged();
   virtual void onTrackSelectionChanged();
 
+  virtual void onMoveTracksUp();
+  virtual void onMoveTracksDown();
+  virtual void setupMoveUpDownButtons();
+
   virtual void onTrackNameEdited(QString newValue);
   virtual void onTrackItemChanged(QStandardItem *item);
   virtual void onMuxThisChanged(int selected);
@@ -206,12 +210,15 @@ protected:
   virtual QString getOpenFileName(QString const &title, QString const &filter, QLineEdit *lineEdit);
   virtual QString getSaveFileName(QString const &title, QString const &filter, QLineEdit *lineEdit);
 
+  virtual void moveTracksUpOrDown(bool up);
+
   virtual void moveOutputFileNameToGlobal();
   virtual void moveOutputFileNameToOutputTab();
 
   virtual QModelIndex selectedSourceFile() const;
   virtual QList<SourceFile *> selectedSourceFiles() const;
   virtual QList<Track *> selectedTracks() const;
+  virtual void selectTracks(QList<Track *> const &tracks);
 
   virtual void addToJobQueue(bool startNow);
 

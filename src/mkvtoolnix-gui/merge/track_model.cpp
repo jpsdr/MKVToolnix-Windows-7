@@ -1,10 +1,11 @@
 #include "common/common_pch.h"
 
-#include "mkvtoolnix-gui/merge/track_model.h"
-#include "mkvtoolnix-gui/util/util.h"
-
+#include <QDebug>
 #include <QFileInfo>
 #include <QItemSelectionModel>
+
+#include "mkvtoolnix-gui/merge/track_model.h"
+#include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace Merge {
 
@@ -417,6 +418,129 @@ TrackModel::reDistributeAppendedTracksForFileRemoval(QSet<SourceFile *> const &f
   Q_ASSERT(!m_tracks->isEmpty());
 
   appendTracks(m_tracks->at(0)->m_file, tracksToRedistribute);
+}
+
+void
+TrackModel::sortTracks(QList<Track *> &tracks,
+                       bool reverse) {
+  auto rows = QHash<Track *, int>{};
+
+  for (auto const &track : tracks)
+    rows[track] = indexFromTrack(track).row();
+
+  std::sort(tracks.begin(), tracks.end(), [&rows](Track *a, Track *b) -> bool {
+    auto rowA = rows[a];
+    auto rowB = rows[b];
+
+    if (!a->m_appendedTo && !b->m_appendedTo)
+      return rowA < rowB;
+
+    if (!a->m_appendedTo &&  b->m_appendedTo)
+      return true;
+
+    if ( a->m_appendedTo && !b->m_appendedTo)
+      return false;
+
+    auto parentA = rows[a->m_appendedTo];
+    auto parentB = rows[b->m_appendedTo];
+
+    return (parentA < parentB)
+        || ((parentA == parentB) && (rowA < rowB));
+  });
+
+  if (reverse) {
+    std::reverse(tracks.begin(), tracks.end());
+    std::stable_partition(tracks.begin(), tracks.end(), [](Track *track) { return track->isRegular() && !track->isAppended(); });
+  }
+}
+
+void
+TrackModel::moveTracksUpOrDown(QList<Track *> tracks,
+                               bool up) {
+  sortTracks(tracks, !up);
+
+  // qDebug() << "move up?" << up << "tracks" << tracks;
+
+  auto couldNotBeMoved = QHash<Track *, bool>{};
+  auto isSelected      = QHash<Track *, bool>{};
+  auto const direction = up ? -1 : +1;
+  auto const topRows   = rowCount();
+
+  for (auto const &track : tracks) {
+    isSelected[track] = true;
+
+    if (!track->isRegular())
+      continue;
+
+    if (track->isAppended() && isSelected[track->m_appendedTo])
+      continue;
+
+    auto idx = indexFromTrack(track);
+    Q_ASSERT(idx.isValid());
+
+    auto targetRow = idx.row() + direction;
+    if (couldNotBeMoved[fromIndex(idx.sibling(targetRow, 0))]) {
+      couldNotBeMoved[track] = true;
+      continue;
+    }
+
+    if (!track->isAppended()) {
+      if (!((0 <= targetRow) && (targetRow < topRows))) {
+        couldNotBeMoved[track] = true;
+        continue;
+      }
+
+      // qDebug() << "top level: would like to move" << idx.row() << "to" << targetRow;
+
+      insertRow(targetRow, takeRow(idx.row()));
+
+      continue;
+    }
+
+    auto parentItem         = itemFromIndex(idx.parent());
+    auto const appendedRows = parentItem->rowCount();
+
+    if ((0 <= targetRow) && (targetRow < appendedRows)) {
+      // qDebug() << "appended level normal: would like to move" << idx.row() << "to" << targetRow;
+
+      parentItem->insertRow(targetRow, parentItem->takeRow(idx.row()));
+      continue;
+    }
+
+    auto parentIdx = indexFromTrack(track->m_appendedTo);
+    Q_ASSERT(parentIdx.isValid());
+
+    for (auto row = parentIdx.row() + direction; (0 <= row) && (row < topRows); row += direction) {
+      auto otherParent = fromIndex(index(row, 0));
+      Q_ASSERT(!!otherParent);
+
+      if (otherParent->m_type != track->m_type)
+        continue;
+
+      auto otherParentItem = itemFromIndex(index(row, 0));
+      auto rowItems        = parentItem->takeRow(idx.row());
+      targetRow            = up ? otherParentItem->rowCount() : 0;
+
+      // qDebug() << "appended level cross: would like to move" << idx.row() << "from" << track->m_appendedTo << "to" << otherParent << "as" << targetRow;
+
+      otherParentItem->insertRow(targetRow, rowItems);
+      track->m_appendedTo = otherParent;
+
+      break;
+    }
+  }
+
+  updateTrackLists();
+}
+
+void
+TrackModel::moveTracksUp(QList<Track *> const &tracks) {
+  moveTracksUpOrDown(tracks, true);
+}
+
+void
+TrackModel::moveTracksDown(QList<Track *> const &tracks) {
+  moveTracksUpOrDown(tracks, false);
 }
 
 }}}

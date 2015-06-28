@@ -114,32 +114,77 @@
              </widget>
             </item>
             <item>
-             <widget class="mtx::gui::Util::BasicTreeView" name="tracks">
-              <property name="contextMenuPolicy">
-               <enum>Qt::ActionsContextMenu</enum>
-              </property>
-              <property name="acceptDrops">
-               <bool>true</bool>
-              </property>
-              <property name="editTriggers">
-               <set>QAbstractItemView::NoEditTriggers</set>
-              </property>
-              <property name="dragEnabled">
-               <bool>true</bool>
-              </property>
-              <property name="dragDropMode">
-               <enum>QAbstractItemView::InternalMove</enum>
-              </property>
-              <property name="defaultDropAction">
-               <enum>Qt::MoveAction</enum>
-              </property>
-              <property name="selectionMode">
-               <enum>QAbstractItemView::ExtendedSelection</enum>
-              </property>
-              <property name="expandsOnDoubleClick">
-               <bool>false</bool>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="mtx::gui::Util::BasicTreeView" name="tracks">
+                <property name="contextMenuPolicy">
+                 <enum>Qt::ActionsContextMenu</enum>
+                </property>
+                <property name="acceptDrops">
+                 <bool>true</bool>
+                </property>
+                <property name="editTriggers">
+                 <set>QAbstractItemView::NoEditTriggers</set>
+                </property>
+                <property name="dragEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="dragDropMode">
+                 <enum>QAbstractItemView::InternalMove</enum>
+                </property>
+                <property name="defaultDropAction">
+                 <enum>Qt::MoveAction</enum>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
+                </property>
+                <property name="expandsOnDoubleClick">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="moveTracksButtons" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_1">
+                 <item>
+                  <widget class="QPushButton" name="moveTracksUp">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../qt_resources.qrc">
+                     <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="moveTracksDown">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../qt_resources.qrc">
+                     <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -1287,6 +1332,8 @@
   <tabstop>mainTab</tabstop>
   <tabstop>files</tabstop>
   <tabstop>tracks</tabstop>
+  <tabstop>moveTracksUp</tabstop>
+  <tabstop>moveTracksDown</tabstop>
   <tabstop>scrollArea</tabstop>
   <tabstop>muxThis</tabstop>
   <tabstop>trackName</tabstop>
