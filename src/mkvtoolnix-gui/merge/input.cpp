@@ -84,13 +84,17 @@ Tab::setupMoveUpDownButtons() {
 
 void
 Tab::setupInputControls() {
-  setupMoveUpDownButtons();
+  auto &cfg = Util::Settings::get();
 
   setupControlLists();
+  setupMoveUpDownButtons();
 
   ui->files->setModel(m_filesModel);
   ui->tracks->setModel(m_tracksModel);
   ui->tracks->enterActivatesAllSelected(true);
+
+  cfg.handleSplitterSizes(ui->mergeInputSplitter);
+  cfg.handleSplitterSizes(ui->mergeFilesTracksSplitter);
 
   // Track & chapter language
   Util::setupLanguageComboBox(*ui->trackLanguage);

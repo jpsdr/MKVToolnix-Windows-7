@@ -9,6 +9,7 @@
 #include <QVariant>
 
 class QSettings;
+class QSplitter;
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -77,6 +78,8 @@ public:
   bool m_enableMuxingTracksByLanguage, m_enableMuxingAllVideoTracks, m_enableMuxingAllAudioTracks, m_enableMuxingAllSubtitleTracks;
   QStringList m_enableMuxingTracksByTheseLanguages;
 
+  QHash<QString, QList<int> > m_splitterSizes;
+
 public:
   Settings();
   void load();
@@ -87,6 +90,12 @@ public:
 
   void setValue(QString const &group, QString const &key, QVariant const &value);
   QVariant value(QString const &group, QString const &key, QVariant const &defaultValue = QVariant{}) const;
+
+  void handleSplitterSizes(QSplitter *splitter);
+  void restoreSplitterSizes(QSplitter *splitter);
+
+public slots:
+  void storeSplitterSizes();
 
 protected:
   static Settings s_settings;

@@ -5,6 +5,7 @@
 #include "mkvtoolnix-gui/forms/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/track.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 #include <QPushButton>
@@ -123,6 +124,11 @@ SelectPlaylistDialog::~SelectPlaylistDialog() {
 
 void
 SelectPlaylistDialog::setupUi() {
+  auto &cfg = Util::Settings::get();
+
+  cfg.handleSplitterSizes(ui->selectPlaylistDialogSplitter1);
+  cfg.handleSplitterSizes(ui->selectPlaylistDialogSplitter2);
+
   auto items = QList<QTreeWidgetItem *>{};
   for (auto const &scannedFile : m_scannedFiles)
     items << ScannedFileItem::create(*scannedFile);

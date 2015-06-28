@@ -1,13 +1,15 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
+#include <QSettings>
+#include <QSplitter>
+
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/settings.h"
-
-#include <QSettings>
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -104,6 +106,17 @@ Settings::load() {
   m_defaultAdditionalMergeOptions      = reg.value("defaultAdditionalMergeOptions").toString();
   reg.endGroup();               // defaults
 
+  reg.beginGroup("splitterSizes");
+
+  m_splitterSizes.clear();
+  for (auto const &name : reg.childKeys()) {
+    auto sizes = reg.value(name).toList();
+    for (auto const &size : sizes)
+      m_splitterSizes[name] << size.toInt();
+  }
+
+  reg.endGroup();               // splitterSizes
+
   if (m_oftenUsedLanguages.isEmpty())
     for (auto const &languageCode : g_popular_language_codes)
       m_oftenUsedLanguages << Q(languageCode);
@@ -192,6 +205,15 @@ Settings::save()
   reg.setValue("defaultSubtitleCharset",             m_defaultSubtitleCharset);
   reg.setValue("defaultAdditionalMergeOptions",      m_defaultAdditionalMergeOptions);
   reg.endGroup();               // defaults
+
+  reg.beginGroup("splitterSizes");
+  for (auto const &name : m_splitterSizes.keys()) {
+    auto sizes = QVariantList{};
+    for (auto const &size : m_splitterSizes[name])
+      sizes << size;
+    reg.setValue(name, sizes);
+  }
+  reg.endGroup();               // splitterSizes
 }
 
 QString
@@ -261,6 +283,33 @@ Settings::withGroup(QString const &group,
 
   for (auto idx = groups.size(); idx > 0; --idx)
     reg->endGroup();
+}
+
+void
+Settings::handleSplitterSizes(QSplitter *splitter) {
+  restoreSplitterSizes(splitter);
+  connect(splitter, &QSplitter::splitterMoved, this, &Settings::storeSplitterSizes);
+}
+
+void
+Settings::restoreSplitterSizes(QSplitter *splitter) {
+ auto name   = splitter->objectName();
+ auto &sizes = m_splitterSizes[name];
+
+  if (sizes.isEmpty())
+    for (auto idx = 0, numWidgets = splitter->count(); idx < numWidgets; ++idx)
+      sizes << 1;
+
+  splitter->setSizes(sizes);
+}
+
+void
+Settings::storeSplitterSizes() {
+  auto splitter = dynamic_cast<QSplitter *>(sender());
+  if (splitter)
+    m_splitterSizes[ splitter->objectName() ] = splitter->sizes();
+  else
+    qDebug() << "storeSplitterSize() signal from non-splitter" << sender() << sender()->objectName();
 }
 
 }}}

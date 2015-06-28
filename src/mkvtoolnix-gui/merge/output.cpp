@@ -14,6 +14,10 @@ using namespace mtx::gui;
 
 void
 Tab::setupOutputControls() {
+  auto &cfg = Util::Settings::get();
+
+  cfg.handleSplitterSizes(ui->mergeOutputSplitter);
+
   setupOutputFileControls();
 
   m_splitControls << ui->splitOptions << ui->splitOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;

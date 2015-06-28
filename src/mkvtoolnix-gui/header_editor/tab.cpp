@@ -24,6 +24,7 @@
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/message_box.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -167,6 +168,8 @@ Tab::save() {
 
 void
 Tab::setupUi() {
+  Util::Settings::get().handleSplitterSizes(ui->headerEditorSplitter);
+
   auto info = QFileInfo{m_fileName};
   ui->fileName->setText(info.fileName());
   ui->directory->setText(info.path());
