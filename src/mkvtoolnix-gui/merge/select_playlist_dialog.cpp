@@ -120,6 +120,7 @@ SelectPlaylistDialog::SelectPlaylistDialog(QWidget *parent,
 }
 
 SelectPlaylistDialog::~SelectPlaylistDialog() {
+  Util::saveWidgetGeometry(this);
 }
 
 void
@@ -142,6 +143,8 @@ SelectPlaylistDialog::setupUi() {
   auto okButton = Util::buttonForRole(ui->buttonBox, QDialogButtonBox::AcceptRole);
   okButton->setText(QY("&Add"));
   okButton->setDefault(true);
+
+  Util::restoreWidgetGeometry(this);
 }
 
 void

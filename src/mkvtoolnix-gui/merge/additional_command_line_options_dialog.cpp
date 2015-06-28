@@ -85,9 +85,12 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   m_ui->gbDevelopmentHacks   ->layout()->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
   m_customOptions.replace(QRegularExpression{"^\\s+|\\s+$"}, Q(""));
+
+  Util::restoreWidgetGeometry(this);
 }
 
 AdditionalCommandLineOptionsDialog::~AdditionalCommandLineOptionsDialog() {
+  Util::saveWidgetGeometry(this);
 }
 
 void

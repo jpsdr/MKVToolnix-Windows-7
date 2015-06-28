@@ -33,9 +33,12 @@ CommandLineDialog::CommandLineDialog(QWidget *parent,
   onEscapeModeChanged(index);
 
   ui->commandLine->setFocus();
+
+  Util::restoreWidgetGeometry(this);
 }
 
 CommandLineDialog::~CommandLineDialog() {
+  Util::saveWidgetGeometry(this);
 }
 
 void

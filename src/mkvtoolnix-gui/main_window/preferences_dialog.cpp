@@ -22,6 +22,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 {
   ui->setupUi(this);
 
+  Util::restoreWidgetGeometry(this);
   Util::fixScrollAreaBackground(ui->mergeScrollArea);
 
   // GUI page
@@ -66,6 +67,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 }
 
 PreferencesDialog::~PreferencesDialog() {
+  Util::saveWidgetGeometry(this);
 }
 
 bool
