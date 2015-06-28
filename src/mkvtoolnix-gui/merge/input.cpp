@@ -388,14 +388,14 @@ Tab::setInputControlValues(Track *track) {
     return;
   }
 
-  Util::setComboBoxIndexIf(ui->muxThis,              [&](QString const &, QVariant const &data) { return data.isValid() && (data.toBool()   == track->m_muxThis);           });
-  Util::setComboBoxIndexIf(ui->defaultTrackFlag,     [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_defaultTrackFlag);  });
-  Util::setComboBoxIndexIf(ui->forcedTrackFlag,      [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_forcedTrackFlag);   });
-  Util::setComboBoxIndexIf(ui->compression,          [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_compression);       });
-  Util::setComboBoxIndexIf(ui->cues,                 [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_cues);              });
-  Util::setComboBoxIndexIf(ui->stereoscopy,          [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_stereoscopy);       });
-  Util::setComboBoxIndexIf(ui->naluSizeLength,       [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_naluSizeLength);    });
-  Util::setComboBoxIndexIf(ui->aacIsSBR,             [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_aacIsSBR);          });
+  Util::setComboBoxIndexIf(ui->muxThis,          [&](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);          });
+  Util::setComboBoxIndexIf(ui->defaultTrackFlag, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag); });
+  Util::setComboBoxIndexIf(ui->forcedTrackFlag,  [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);  });
+  Util::setComboBoxIndexIf(ui->compression,      [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_compression);      });
+  Util::setComboBoxIndexIf(ui->cues,             [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_cues);             });
+  Util::setComboBoxIndexIf(ui->stereoscopy,      [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);      });
+  Util::setComboBoxIndexIf(ui->naluSizeLength,   [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);   });
+  Util::setComboBoxIndexIf(ui->aacIsSBR,         [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);         });
 
   ui->trackLanguage->setCurrentByData(track->m_language);
   ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
