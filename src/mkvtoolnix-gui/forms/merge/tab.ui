@@ -665,7 +665,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="subtitleCharacterSet">
+                   <widget class="mtx::gui::Util::CharacterSetComboBox" name="subtitleCharacterSet">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -1056,7 +1056,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QComboBox" name="chapterCharacterSet"/>
+               <widget class="mtx::gui::Util::CharacterSetComboBox" name="chapterCharacterSet"/>
               </item>
               <item row="3" column="0">
                <widget class="QLabel" name="chapterCueNameFormatLabel">
@@ -1334,6 +1334,11 @@
    <class>mtx::gui::Util::LanguageComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/language_combo_box.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::CharacterSetComboBox</class>
+   <extends>QComboBox</extends>
+   <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

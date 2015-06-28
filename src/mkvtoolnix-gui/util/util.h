@@ -42,9 +42,6 @@ bool setComboBoxIndexIf(QComboBox *comboBox, std::function<bool(QString const &,
 bool setComboBoxTextByData(QComboBox *comboBox, QString const &data);
 void setComboBoxTexts(QComboBox *comboBox, QStringList const &texts);
 
-void setupCharacterSetComboBox(QComboBox &comboBox, QStringList const &initiallySelected = {}, bool withEmpty = false, QString const &emptyTitle = {});
-void setupCharacterSetComboBox(QComboBox &comboBox, QString const &initiallySelected, bool withEmpty = false, QString const &emptyTitle = {});
-
 void enableWidgets(QList<QWidget *> const &widgets, bool enable);
 QPushButton *buttonForRole(QDialogButtonBox *box, QDialogButtonBox::ButtonRole role = QDialogButtonBox::AcceptRole);
 

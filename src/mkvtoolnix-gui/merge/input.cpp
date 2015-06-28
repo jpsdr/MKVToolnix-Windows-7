@@ -101,8 +101,8 @@ Tab::setupInputControls() {
   ui->chapterLanguage->setup(true);
 
   // Track & chapter character set
-  Util::setupCharacterSetComboBox(*ui->subtitleCharacterSet, QString{}, true);
-  Util::setupCharacterSetComboBox(*ui->chapterCharacterSet,  QString{}, true);
+  ui->subtitleCharacterSet->setup(true);
+  ui->chapterCharacterSet->setup(true);
 
   ui->muxThis->addItem(QString{}, true);
   ui->muxThis->addItem(QString{}, false);
@@ -398,7 +398,7 @@ Tab::setInputControlValues(Track *track) {
   Util::setComboBoxIndexIf(ui->aacIsSBR,             [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_aacIsSBR);          });
 
   ui->trackLanguage->setCurrentByData(track->m_language);
-  Util::setComboBoxTextByData(ui->subtitleCharacterSet, track->m_characterSet);
+  ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
 
   ui->trackName->setText(                track->m_name);
   ui->trackTags->setText(                track->m_tags);

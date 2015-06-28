@@ -47,7 +47,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
   ui->cbMDefaultTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultTrackLanguage);
-  Util::setupCharacterSetComboBox(*ui->cbMDefaultSubtitleCharset, m_cfg.m_defaultSubtitleCharset);
+  ui->cbMDefaultSubtitleCharset->setup().setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
 
   setupProcessPriority();
@@ -60,9 +60,6 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
   ui->cbCEDefaultLanguage->setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
   ui->cbCEDefaultCountry->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
-
-  // Force scroll bars on combo boxes with a high number of entries.
-  ui->cbMDefaultSubtitleCharset->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   setupToolTips();
   setupConnections();
