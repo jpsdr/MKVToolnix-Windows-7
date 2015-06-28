@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <boost/optional/optional_io.hpp>
+
 #include "common/list_utils.h"
 
 #include "gtest/gtest.h"
