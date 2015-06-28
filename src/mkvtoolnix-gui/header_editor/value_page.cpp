@@ -122,6 +122,7 @@ ValuePage::init() {
   resetLayout->addWidget(m_bReset);
 
   auto widgetLayout = new QVBoxLayout{this};
+  widgetLayout->setContentsMargins(-1, 0, 0, 0);
   widgetLayout->addWidget(m_lTitle);
   widgetLayout->addWidget(line);
   widgetLayout->addLayout(gridLayout);
