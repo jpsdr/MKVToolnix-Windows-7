@@ -6,6 +6,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/header_editor/language_value_page.h"
+#include "mkvtoolnix-gui/util/language_combo_box.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
@@ -29,11 +30,11 @@ QWidget *
 LanguageValuePage::createInputControl() {
   m_originalValue = m_element ? static_cast<EbmlString *>(m_element)->GetValue() : "eng";
 
-  m_cbValue = new QComboBox{this};
+  m_cbValue = new Util::LanguageComboBox{this};
   m_cbValue->setFrame(true);
   m_cbValue->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
 
-  Util::setupLanguageComboBox(*m_cbValue, QStringList{} << Q(m_originalValue) << Q("und"));
+  m_cbValue->setup().setCurrentByData(QStringList{} << Q(m_originalValue) << Q("und"));
   m_originalValueIdx = m_cbValue->currentIndex();
 
   return m_cbValue;

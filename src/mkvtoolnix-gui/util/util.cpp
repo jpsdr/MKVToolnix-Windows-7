@@ -102,54 +102,6 @@ setComboBoxTexts(QComboBox *comboBox,
 }
 
 void
-setupLanguageComboBox(QComboBox &comboBox,
-                      QStringList const &initiallySelected,
-                      bool withEmpty,
-                      QString const &emptyTitle) {
-  auto separatorOffset = 0;
-
-  if (withEmpty) {
-    comboBox.addItem(emptyTitle, Q(""));
-    ++separatorOffset;
-  }
-
-  for (auto const &language : App::iso639Languages()) {
-    if (language.second != Q("und"))
-      continue;
-
-    comboBox.addItem(language.first, language.second);
-    comboBox.insertSeparator(1 + separatorOffset);
-    separatorOffset += 2;
-    break;
-  }
-
-  auto &commonLanguages = App::commonIso639Languages();
-  if (!commonLanguages.empty()) {
-    for (auto const &language : commonLanguages)
-      comboBox.addItem(language.first, language.second);
-
-    comboBox.insertSeparator(commonLanguages.size() + separatorOffset);
-  }
-
-  for (auto const &language : App::iso639Languages())
-    comboBox.addItem(language.first, language.second);
-
-  comboBox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-
-  for (auto const &value : initiallySelected)
-    if (setComboBoxTextByData(&comboBox, value))
-      return;
-}
-
-void
-setupLanguageComboBox(QComboBox &comboBox,
-                      QString const &initiallySelected,
-                      bool withEmpty,
-                      QString const &emptyTitle) {
-  setupLanguageComboBox(comboBox, QStringList{} << initiallySelected, withEmpty, emptyTitle);
-}
-
-void
 setupCountryComboBox(QComboBox &comboBox,
                       QStringList const &initiallySelected,
                       bool withEmpty,

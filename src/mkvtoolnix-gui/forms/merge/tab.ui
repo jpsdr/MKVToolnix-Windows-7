@@ -289,7 +289,7 @@
                    </widget>
                   </item>
                   <item row="2" column="1">
-                   <widget class="QComboBox" name="trackLanguage">
+                   <widget class="mtx::gui::Util::LanguageComboBox" name="trackLanguage">
                     <property name="sizeAdjustPolicy">
                      <enum>QComboBox::AdjustToMinimumContentsLength</enum>
                     </property>
@@ -1046,7 +1046,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QComboBox" name="chapterLanguage"/>
+               <widget class="mtx::gui::Util::LanguageComboBox" name="chapterLanguage"/>
               </item>
               <item row="2" column="0">
                <widget class="QLabel" name="chapterCharacterSetLabel">
@@ -1329,6 +1329,11 @@
    <extends>QWidget</extends>
    <header>mkvtoolnix-gui/util/files_drag_drop_widget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::LanguageComboBox</class>
+   <extends>QComboBox</extends>
+   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

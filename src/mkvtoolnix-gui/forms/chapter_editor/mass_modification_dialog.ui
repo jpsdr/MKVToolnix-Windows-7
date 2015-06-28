@@ -61,7 +61,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="cbLanguage"/>
+      <widget class="mtx::gui::Util::LanguageComboBox" name="cbLanguage"/>
      </item>
      <item row="2" column="0">
       <widget class="QCheckBox" name="cbSetCountry">
@@ -152,6 +152,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mtx::gui::Util::LanguageComboBox</class>
+   <extends>QComboBox</extends>
+   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>cbShift</tabstop>
   <tabstop>leShiftBy</tabstop>

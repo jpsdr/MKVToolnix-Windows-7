@@ -97,8 +97,8 @@ Tab::setupInputControls() {
   cfg.handleSplitterSizes(ui->mergeFilesTracksSplitter);
 
   // Track & chapter language
-  Util::setupLanguageComboBox(*ui->trackLanguage);
-  Util::setupLanguageComboBox(*ui->chapterLanguage, QString{}, true);
+  ui->trackLanguage->setup();
+  ui->chapterLanguage->setup(true);
 
   // Track & chapter character set
   Util::setupCharacterSetComboBox(*ui->subtitleCharacterSet, QString{}, true);
@@ -397,7 +397,7 @@ Tab::setInputControlValues(Track *track) {
   Util::setComboBoxIndexIf(ui->naluSizeLength,       [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_naluSizeLength);    });
   Util::setComboBoxIndexIf(ui->aacIsSBR,             [&](QString const &, QVariant const &data) { return data.isValid() && (data.toUInt()   == track->m_aacIsSBR);          });
 
-  Util::setComboBoxTextByData(ui->trackLanguage,        track->m_language);
+  ui->trackLanguage->setCurrentByData(track->m_language);
   Util::setComboBoxTextByData(ui->subtitleCharacterSet, track->m_characterSet);
 
   ui->trackName->setText(                track->m_name);

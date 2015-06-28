@@ -5,15 +5,19 @@
 
 #include "mkvtoolnix-gui/header_editor/value_page.h"
 
-class QComboBox;
+namespace mtx { namespace gui {
 
-namespace mtx { namespace gui { namespace HeaderEditor {
+namespace Util {
+class LanguageComboBox;
+}
+
+namespace HeaderEditor {
 
 class Tab;
 
 class LanguageValuePage: public ValuePage {
 public:
-  QComboBox *m_cbValue{};
+  Util::LanguageComboBox *m_cbValue{};
   std::string m_originalValue;
   int m_originalValueIdx{};
 

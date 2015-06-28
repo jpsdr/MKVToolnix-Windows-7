@@ -450,7 +450,7 @@ Tab::setOutputControlValues() {
   ui->additionalOptions->setText(m_config.m_additionalOptions);
   ui->webmMode->setChecked(m_config.m_webmMode);
 
-  Util::setComboBoxTextByData(ui->chapterLanguage,     m_config.m_chapterLanguage);
+  ui->chapterLanguage->setCurrentByData(m_config.m_chapterLanguage);
   Util::setComboBoxTextByData(ui->chapterCharacterSet, m_config.m_chapterCharacterSet);
 }
 

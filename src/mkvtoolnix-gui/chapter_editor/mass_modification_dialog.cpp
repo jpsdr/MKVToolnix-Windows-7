@@ -33,7 +33,7 @@ void
 MassModificationDialog::setupUi() {
   m_ui->setupUi(this);
 
-  Util::setupLanguageComboBox(*m_ui->cbLanguage);
+  m_ui->cbLanguage->setup();
   Util::setupCountryComboBox(*m_ui->cbCountry, QString{}, true, QY("– set to none –"));
 
   connect(m_ui->cbShift,           &QCheckBox::toggled,         m_ui->leShiftBy,   &QLineEdit::setEnabled);

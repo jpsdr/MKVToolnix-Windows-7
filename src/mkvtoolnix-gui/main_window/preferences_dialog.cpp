@@ -46,7 +46,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMAlwaysAddDroppedFiles->setChecked(m_cfg.m_mergeAlwaysAddDroppedFiles);
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
-  Util::setupLanguageComboBox(*ui->cbMDefaultTrackLanguage, m_cfg.m_defaultTrackLanguage);
+  ui->cbMDefaultTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultTrackLanguage);
   Util::setupCharacterSetComboBox(*ui->cbMDefaultSubtitleCharset, m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
 
@@ -58,7 +58,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   // Chapter editor page
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
-  Util::setupLanguageComboBox(*ui->cbCEDefaultLanguage, m_cfg.m_defaultChapterLanguage);
+  ui->cbCEDefaultLanguage->setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
   Util::setupCountryComboBox(*ui->cbCEDefaultCountry, m_cfg.m_defaultChapterCountry, true, QY("– no selection by default –"));
 
   // Force scroll bars on combo boxes with a high number of entries.
