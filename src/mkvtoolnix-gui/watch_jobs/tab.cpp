@@ -31,6 +31,8 @@ Tab::Tab(QWidget *parent)
 {
   // Setup UI controls.
   ui->setupUi(this);
+
+  ui->description->setText(QY("No job has been started yet."));
 }
 
 Tab::~Tab() {

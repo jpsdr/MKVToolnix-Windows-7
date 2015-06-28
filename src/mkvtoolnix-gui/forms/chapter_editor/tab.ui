@@ -18,41 +18,47 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="fileNameLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>File name:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLabel" name="fileName">
+      <widget class="mtx::gui::Util::ElideLabel" name="fileName">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="text">
-        <string notr="true">TextLabel</string>
-       </property>
       </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="directoryLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Directory:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="directory">
+      <widget class="mtx::gui::Util::ElideLabel" name="directory">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="text">
-        <string notr="true">TextLabel</string>
        </property>
       </widget>
      </item>
@@ -238,8 +244,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>421</width>
-             <height>435</height>
+             <width>315</width>
+             <height>433</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -481,6 +487,11 @@
    <class>mtx::gui::Util::BasicTreeView</class>
    <extends>QTreeView</extends>
    <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::ElideLabel</class>
+   <extends>QLabel</extends>
+   <header>mkvtoolnix-gui/util/elide_label.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

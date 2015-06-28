@@ -32,6 +32,12 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0" alignment="Qt::AlignTop">
       <widget class="QLabel" name="m_lTypeLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Type:</string>
        </property>
@@ -52,6 +58,12 @@
      </item>
      <item row="1" column="0" alignment="Qt::AlignTop">
       <widget class="QLabel" name="m_lDescriptionLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Description:</string>
        </property>
@@ -75,6 +87,12 @@
      </item>
      <item row="2" column="0" alignment="Qt::AlignTop">
       <widget class="QLabel" name="m_lStatusLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Status:</string>
        </property>
@@ -109,29 +127,47 @@
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="m_lOriginalValueLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Original value:</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLabel" name="m_lOriginalValue">
-       <property name="text">
-        <string notr="true">TextLabel</string>
+      <widget class="mtx::gui::Util::ElideLabel" name="m_lOriginalValue">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
       </widget>
      </item>
      <item row="4" column="0" alignment="Qt::AlignTop">
       <widget class="QLabel" name="m_lCurrentValueLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Current value:</string>
        </property>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLabel" name="m_lCurrentValue">
-       <property name="text">
-        <string notr="true">TextLabel</string>
+      <widget class="mtx::gui::Util::ElideLabel" name="m_lCurrentValue">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
       </widget>
      </item>
@@ -179,6 +215,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mtx::gui::Util::ElideLabel</class>
+   <extends>QFrame</extends>
+   <header>mkvtoolnix-gui/util/elide_label.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

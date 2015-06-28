@@ -15,11 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
-    <widget class="QLabel" name="description">
-     <property name="text">
-      <string>No job has been started yet.</string>
-     </property>
-    </widget>
+    <widget class="mtx::gui::Util::ElideLabel" name="description"/>
    </item>
    <item>
     <widget class="Line" name="line">
@@ -288,6 +284,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mtx::gui::Util::ElideLabel</class>
+   <extends>QFrame</extends>
+   <header>mkvtoolnix-gui/util/elide_label.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>output</tabstop>
   <tabstop>warnings</tabstop>
