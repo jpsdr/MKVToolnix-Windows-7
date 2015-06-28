@@ -6,6 +6,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/header_editor/language_value_page.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/language_combo_box.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -36,6 +37,8 @@ LanguageValuePage::createInputControl() {
 
   m_cbValue->setup().setCurrentByData(QStringList{} << Q(m_originalValue) << Q("und"));
   m_originalValueIdx = m_cbValue->currentIndex();
+
+  connect(MainWindow::get(), &MainWindow::preferencesChanged, m_cbValue, &Util::ComboBoxBase::reInitialize);
 
   return m_cbValue;
 }

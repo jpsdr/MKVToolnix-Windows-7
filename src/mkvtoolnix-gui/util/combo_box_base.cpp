@@ -34,4 +34,25 @@ ComboBoxBase::setCurrentByData(QStringList const &values) {
   return *this;
 }
 
+void
+ComboBoxBase::reInitialize() {
+  auto previousBlocked = blockSignals(true);
+  auto data            = currentData();
+  auto firstText       = itemText(0);
+  auto firstData       = itemData(0);
+
+  clear();
+  setup(m_withEmpty, m_emptyTitle);
+
+  if (!firstData.isValid())
+    insertItem(0, firstText, firstData);
+
+  if (!data.isValid())
+    setCurrentIndex(0);
+  else
+    setCurrentByData(data.toString());
+
+  blockSignals(previousBlocked);
+}
+
 }}}

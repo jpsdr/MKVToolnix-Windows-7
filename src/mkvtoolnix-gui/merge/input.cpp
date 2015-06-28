@@ -147,6 +147,7 @@ Tab::setupInputControls() {
   ui->tracks->addAction(m_disableAllTracksAction);
 
   // Connect signals & slots.
+  auto mw = MainWindow::get();
   connect(ui->files,                    &Util::BasicTreeView::filesDropped,         this,          &Tab::addOrAppendDroppedFiles);
   connect(ui->files,                    &Util::BasicTreeView::deletePressed,        this,          &Tab::onRemoveFiles);
   connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     this,          &Tab::onFileSelectionChanged);
@@ -172,7 +173,11 @@ Tab::setupInputControls() {
   connect(m_tracksModel,                &TrackModel::rowsInserted,                  this,          &Tab::onTrackRowsInserted);
   connect(m_tracksModel,                &TrackModel::itemChanged,                   this,          &Tab::onTrackItemChanged);
 
-  connect(MainWindow::get(),            &MainWindow::preferencesChanged,            this,          &Tab::setupMoveUpDownButtons);
+  connect(mw,                           &MainWindow::preferencesChanged,            this,                     &Tab::setupMoveUpDownButtons);
+  connect(mw,                           &MainWindow::preferencesChanged,            ui->trackLanguage,        &Util::ComboBoxBase::reInitialize);
+  connect(mw,                           &MainWindow::preferencesChanged,            ui->chapterLanguage,      &Util::ComboBoxBase::reInitialize);
+  connect(mw,                           &MainWindow::preferencesChanged,            ui->subtitleCharacterSet, &Util::ComboBoxBase::reInitialize);
+  connect(mw,                           &MainWindow::preferencesChanged,            ui->chapterCharacterSet,  &Util::ComboBoxBase::reInitialize);
 
   onTrackSelectionChanged();
   enableTracksActions();

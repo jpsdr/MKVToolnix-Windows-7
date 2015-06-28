@@ -86,6 +86,7 @@ Tab::setupUi() {
 
   Util::fixScrollAreaBackground(ui->scrollArea);
 
+  auto mw = MainWindow::get();
   connect(ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this, &Tab::showChapterContextMenu);
   connect(ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this, &Tab::chapterSelectionChanged);
   connect(ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this, &Tab::nameSelectionChanged);
@@ -106,6 +107,9 @@ Tab::setupUi() {
   connect(m_duplicateAction,               &QAction::triggered,                                                    this, &Tab::duplicateElement);
   connect(m_massModificationAction,        &QAction::triggered,                                                    this, &Tab::massModify);
   connect(m_generateSubChaptersAction,     &QAction::triggered,                                                    this, &Tab::generateSubChapters);
+
+  connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameLanguage, &Util::ComboBoxBase::reInitialize);
+  connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameCountry,  &Util::ComboBoxBase::reInitialize);
 }
 
 void

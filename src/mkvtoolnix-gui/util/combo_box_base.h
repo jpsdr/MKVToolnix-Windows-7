@@ -22,6 +22,9 @@ public:
 
   virtual ComboBoxBase &setCurrentByData(QString const &value);
   virtual ComboBoxBase &setCurrentByData(QStringList const &values);
+
+public slots:
+  virtual void reInitialize();
 };
 
 }}}

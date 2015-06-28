@@ -9,8 +9,9 @@
 #include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
-#include "mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.h"
+#include "mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -47,7 +48,10 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
 
   m_ui->sbNumberOfEntries->setFocus();
 
+  auto mw = MainWindow::get();
   connect(m_ui->leStartTimecode, &QLineEdit::textChanged, this, &GenerateSubChaptersParametersDialog::verifyStartTimecode);
+  connect(mw,                    &MainWindow::preferencesChanged, m_ui->cbLanguage, &Util::ComboBoxBase::reInitialize);
+  connect(mw,                    &MainWindow::preferencesChanged, m_ui->cbCountry,  &Util::ComboBoxBase::reInitialize);
 }
 
 void

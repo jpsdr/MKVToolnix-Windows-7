@@ -10,6 +10,7 @@
 #include "common/strings/parsing.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/mass_modification_dialog.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace ChapterEditor {
@@ -36,6 +37,7 @@ MassModificationDialog::setupUi() {
   m_ui->cbLanguage->setup();
   m_ui->cbCountry->setup(true, QY("– set to none –"));
 
+  auto mw = MainWindow::get();
   connect(m_ui->cbShift,           &QCheckBox::toggled,         m_ui->leShiftBy,   &QLineEdit::setEnabled);
   connect(m_ui->leShiftBy,         &QLineEdit::textChanged,     this,              &MassModificationDialog::shiftByStateChanged);
   connect(m_ui->cbSetLanguage,     &QCheckBox::toggled,         m_ui->cbLanguage,  &QComboBox::setEnabled);
@@ -44,6 +46,8 @@ MassModificationDialog::setupUi() {
   connect(m_ui->cbConstrictExpand, &QCheckBox::toggled,         m_ui->rbExpand,    &QRadioButton::setEnabled);
   connect(m_ui->buttonBox,         &QDialogButtonBox::accepted, this,              &MassModificationDialog::accept);
   connect(m_ui->buttonBox,         &QDialogButtonBox::rejected, this,              &MassModificationDialog::reject);
+  connect(mw,                      &MainWindow::preferencesChanged, m_ui->cbLanguage, &Util::ComboBoxBase::reInitialize);
+  connect(mw,                      &MainWindow::preferencesChanged, m_ui->cbCountry,  &Util::ComboBoxBase::reInitialize);
 
   m_ui->leShiftBy->setEnabled(false);
   m_ui->cbLanguage->setEnabled(false);

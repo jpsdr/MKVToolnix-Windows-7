@@ -334,6 +334,8 @@ MainWindow::editPreferences() {
   if (dlg.uiLocaleChanged())
     App::instance()->initializeLocale();
 
+  App::instance()->reinitializeLanguageLists();
+
   emit preferencesChanged();
 }
 
