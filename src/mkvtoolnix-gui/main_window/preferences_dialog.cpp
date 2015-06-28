@@ -59,11 +59,10 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
   ui->cbCEDefaultLanguage->setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
-  Util::setupCountryComboBox(*ui->cbCEDefaultCountry, m_cfg.m_defaultChapterCountry, true, QY("– no selection by default –"));
+  ui->cbCEDefaultCountry->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
   // Force scroll bars on combo boxes with a high number of entries.
   ui->cbMDefaultSubtitleCharset->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-  ui->cbCEDefaultCountry       ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   setupToolTips();
   setupConnections();

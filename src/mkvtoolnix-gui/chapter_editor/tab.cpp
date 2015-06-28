@@ -77,7 +77,7 @@ Tab::setupUi() {
   ui->cbChNameCountry ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   ui->cbChNameLanguage->setup();
-  Util::setupCountryComboBox(*ui->cbChNameCountry, Q(""), true);
+  ui->cbChNameCountry->setup(true);
 
   m_nameWidgets << ui->pbChRemoveName
                 << ui->lChName         << ui->leChName
@@ -740,7 +740,7 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
 
   ui->leChName->setText(Q(GetChildValue<KaxChapterString>(display)));
   ui->cbChNameLanguage->setCurrentByData(Q(FindChildValue<KaxChapterLanguage>(display, std::string{"eng"})));
-  Util::setComboBoxTextByData(ui->cbChNameCountry,  Q(FindChildValue<KaxChapterCountry>(display)));
+  ui->cbChNameCountry->setCurrentByData(Q(FindChildValue<KaxChapterCountry>(display)));
 
   resizeNameColumnsToContents();
 
