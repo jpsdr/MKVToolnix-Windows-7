@@ -148,30 +148,30 @@ Tab::setupInputControls() {
 
   // Connect signals & slots.
   auto mw = MainWindow::get();
-  connect(ui->files,                    &Util::BasicTreeView::filesDropped,         this,          &Tab::addOrAppendDroppedFiles);
-  connect(ui->files,                    &Util::BasicTreeView::deletePressed,        this,          &Tab::onRemoveFiles);
-  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     this,          &Tab::onFileSelectionChanged);
-  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     m_filesModel,  &SourceFileModel::updateSelectionStatus);
-  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     this,          &Tab::onTrackSelectionChanged);
-  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     m_tracksModel, &TrackModel::updateSelectionStatus);
-  connect(ui->tracks,                   &Util::BasicTreeView::allSelectedActivated, this,          &Tab::toggleMuxThisForSelectedTracks);
-  connect(ui->tracks,                   &QTreeView::doubleClicked,                  this,          &Tab::toggleMuxThisForSelectedTracks);
-  connect(ui->moveTracksUp,             &QPushButton::clicked,                      this,          &Tab::onMoveTracksUp);
-  connect(ui->moveTracksDown,           &QPushButton::clicked,                      this,          &Tab::onMoveTracksDown);
+  connect(ui->files,                    &Util::BasicTreeView::filesDropped,         this,                     &Tab::addOrAppendDroppedFiles);
+  connect(ui->files,                    &Util::BasicTreeView::deletePressed,        this,                     &Tab::onRemoveFiles);
+  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     this,                     &Tab::onFileSelectionChanged);
+  connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     m_filesModel,             &SourceFileModel::updateSelectionStatus);
+  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     this,                     &Tab::onTrackSelectionChanged);
+  connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     m_tracksModel,            &TrackModel::updateSelectionStatus);
+  connect(ui->tracks,                   &Util::BasicTreeView::allSelectedActivated, this,                     &Tab::toggleMuxThisForSelectedTracks);
+  connect(ui->tracks,                   &QTreeView::doubleClicked,                  this,                     &Tab::toggleMuxThisForSelectedTracks);
+  connect(ui->moveTracksUp,             &QPushButton::clicked,                      this,                     &Tab::onMoveTracksUp);
+  connect(ui->moveTracksDown,           &QPushButton::clicked,                      this,                     &Tab::onMoveTracksDown);
 
-  connect(m_addFilesAction,             &QAction::triggered,                        this,          &Tab::onAddFiles);
-  connect(m_appendFilesAction,          &QAction::triggered,                        this,          &Tab::onAppendFiles);
-  connect(m_addAdditionalPartsAction,   &QAction::triggered,                        this,          &Tab::onAddAdditionalParts);
-  connect(m_removeFilesAction,          &QAction::triggered,                        this,          &Tab::onRemoveFiles);
-  connect(m_removeAllFilesAction,       &QAction::triggered,                        this,          &Tab::onRemoveAllFiles);
+  connect(m_addFilesAction,             &QAction::triggered,                        this,                     &Tab::onAddFiles);
+  connect(m_appendFilesAction,          &QAction::triggered,                        this,                     &Tab::onAppendFiles);
+  connect(m_addAdditionalPartsAction,   &QAction::triggered,                        this,                     &Tab::onAddAdditionalParts);
+  connect(m_removeFilesAction,          &QAction::triggered,                        this,                     &Tab::onRemoveFiles);
+  connect(m_removeAllFilesAction,       &QAction::triggered,                        this,                     &Tab::onRemoveAllFiles);
 
-  connect(m_selectAllTracksAction,      &QAction::triggered,                        this,          &Tab::selectAllTracks);
-  connect(m_enableAllTracksAction,      &QAction::triggered,                        this,          &Tab::enableAllTracks);
-  connect(m_disableAllTracksAction,     &QAction::triggered,                        this,          &Tab::disableAllTracks);
+  connect(m_selectAllTracksAction,      &QAction::triggered,                        this,                     &Tab::selectAllTracks);
+  connect(m_enableAllTracksAction,      &QAction::triggered,                        this,                     &Tab::enableAllTracks);
+  connect(m_disableAllTracksAction,     &QAction::triggered,                        this,                     &Tab::disableAllTracks);
 
-  connect(m_filesModel,                 &SourceFileModel::rowsInserted,             this,          &Tab::onFileRowsInserted);
-  connect(m_tracksModel,                &TrackModel::rowsInserted,                  this,          &Tab::onTrackRowsInserted);
-  connect(m_tracksModel,                &TrackModel::itemChanged,                   this,          &Tab::onTrackItemChanged);
+  connect(m_filesModel,                 &SourceFileModel::rowsInserted,             this,                     &Tab::onFileRowsInserted);
+  connect(m_tracksModel,                &TrackModel::rowsInserted,                  this,                     &Tab::onTrackRowsInserted);
+  connect(m_tracksModel,                &TrackModel::itemChanged,                   this,                     &Tab::onTrackItemChanged);
 
   connect(mw,                           &MainWindow::preferencesChanged,            this,                     &Tab::setupMoveUpDownButtons);
   connect(mw,                           &MainWindow::preferencesChanged,            ui->trackLanguage,        &Util::ComboBoxBase::reInitialize);

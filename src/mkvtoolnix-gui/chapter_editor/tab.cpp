@@ -87,26 +87,26 @@ Tab::setupUi() {
   Util::fixScrollAreaBackground(ui->scrollArea);
 
   auto mw = MainWindow::get();
-  connect(ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this, &Tab::showChapterContextMenu);
-  connect(ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this, &Tab::chapterSelectionChanged);
-  connect(ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this, &Tab::nameSelectionChanged);
-  connect(ui->leChName,                    &QLineEdit::textEdited,                                                 this, &Tab::chapterNameEdited);
-  connect(ui->cbChNameLanguage,            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Tab::chapterNameLanguageChanged);
-  connect(ui->cbChNameCountry,             static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Tab::chapterNameCountryChanged);
-  connect(ui->pbChAddName,                 &QPushButton::clicked,                                                  this, &Tab::addChapterName);
-  connect(ui->pbChRemoveName,              &QPushButton::clicked,                                                  this, &Tab::removeChapterName);
+  connect(ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                 &Tab::showChapterContextMenu);
+  connect(ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this,                 &Tab::chapterSelectionChanged);
+  connect(ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this,                 &Tab::nameSelectionChanged);
+  connect(ui->leChName,                    &QLineEdit::textEdited,                                                 this,                 &Tab::chapterNameEdited);
+  connect(ui->cbChNameLanguage,            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                 &Tab::chapterNameLanguageChanged);
+  connect(ui->cbChNameCountry,             static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                 &Tab::chapterNameCountryChanged);
+  connect(ui->pbChAddName,                 &QPushButton::clicked,                                                  this,                 &Tab::addChapterName);
+  connect(ui->pbChRemoveName,              &QPushButton::clicked,                                                  this,                 &Tab::removeChapterName);
 
-  connect(m_expandAllAction,               &QAction::triggered,                                                    this, &Tab::expandAll);
-  connect(m_collapseAllAction,             &QAction::triggered,                                                    this, &Tab::collapseAll);
-  connect(m_addEditionBeforeAction,        &QAction::triggered,                                                    this, &Tab::addEditionBefore);
-  connect(m_addEditionAfterAction,         &QAction::triggered,                                                    this, &Tab::addEditionAfter);
-  connect(m_addChapterBeforeAction,        &QAction::triggered,                                                    this, &Tab::addChapterBefore);
-  connect(m_addChapterAfterAction,         &QAction::triggered,                                                    this, &Tab::addChapterAfter);
-  connect(m_addSubChapterAction,           &QAction::triggered,                                                    this, &Tab::addSubChapter);
-  connect(m_removeElementAction,           &QAction::triggered,                                                    this, &Tab::removeElement);
-  connect(m_duplicateAction,               &QAction::triggered,                                                    this, &Tab::duplicateElement);
-  connect(m_massModificationAction,        &QAction::triggered,                                                    this, &Tab::massModify);
-  connect(m_generateSubChaptersAction,     &QAction::triggered,                                                    this, &Tab::generateSubChapters);
+  connect(m_expandAllAction,               &QAction::triggered,                                                    this,                 &Tab::expandAll);
+  connect(m_collapseAllAction,             &QAction::triggered,                                                    this,                 &Tab::collapseAll);
+  connect(m_addEditionBeforeAction,        &QAction::triggered,                                                    this,                 &Tab::addEditionBefore);
+  connect(m_addEditionAfterAction,         &QAction::triggered,                                                    this,                 &Tab::addEditionAfter);
+  connect(m_addChapterBeforeAction,        &QAction::triggered,                                                    this,                 &Tab::addChapterBefore);
+  connect(m_addChapterAfterAction,         &QAction::triggered,                                                    this,                 &Tab::addChapterAfter);
+  connect(m_addSubChapterAction,           &QAction::triggered,                                                    this,                 &Tab::addSubChapter);
+  connect(m_removeElementAction,           &QAction::triggered,                                                    this,                 &Tab::removeElement);
+  connect(m_duplicateAction,               &QAction::triggered,                                                    this,                 &Tab::duplicateElement);
+  connect(m_massModificationAction,        &QAction::triggered,                                                    this,                 &Tab::massModify);
+  connect(m_generateSubChaptersAction,     &QAction::triggered,                                                    this,                 &Tab::generateSubChapters);
 
   connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameLanguage, &Util::ComboBoxBase::reInitialize);
   connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameCountry,  &Util::ComboBoxBase::reInitialize);
