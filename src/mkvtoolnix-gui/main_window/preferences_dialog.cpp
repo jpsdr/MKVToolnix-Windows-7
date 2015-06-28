@@ -101,7 +101,7 @@ PreferencesDialog::setupToolTips() {
   ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
 
   Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled the GUI will let you enter a description for a job when adding it to the queue."));
-  Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the »watch jobs« tool will not be cleared when a new job starts."));
+  Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the »job output« tool will not be cleared when a new job starts."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
