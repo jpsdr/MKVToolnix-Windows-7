@@ -362,9 +362,16 @@ MuxConfig::buildAppendToMapping(QHash<SourceFile *, unsigned int> const &fileNum
   const {
   auto appendToMapping = QStringList{};
   for (auto const &destinationTrack : m_tracks) {
+    auto currentDestinationFileNumber = fileNumbers.value(destinationTrack->m_file);
+    auto currentDestinationTrackId    = destinationTrack->m_id;
+
     for (auto const &sourceTrack : destinationTrack->m_appendedTracks)
-      if (sourceTrack->m_muxThis && (sourceTrack->isAudio() || sourceTrack->isVideo() || sourceTrack->isSubtitles() || sourceTrack->isButtons()))
-        appendToMapping << Q("%1:%2:%3:%4").arg(fileNumbers.value(sourceTrack->m_file)).arg(sourceTrack->m_id).arg(fileNumbers.value(destinationTrack->m_file)).arg(destinationTrack->m_id);
+      if (sourceTrack->m_muxThis && (sourceTrack->isAudio() || sourceTrack->isVideo() || sourceTrack->isSubtitles() || sourceTrack->isButtons())) {
+        appendToMapping << Q("%1:%2:%3:%4").arg(fileNumbers.value(sourceTrack->m_file)).arg(sourceTrack->m_id).arg(currentDestinationFileNumber).arg(currentDestinationTrackId);
+
+        currentDestinationFileNumber = fileNumbers.value(sourceTrack->m_file);
+        currentDestinationTrackId    = sourceTrack->m_id;
+      }
   }
 
   return appendToMapping.isEmpty() ? QStringList{} : QStringList{} << Q("--append-to") << appendToMapping.join(Q(","));
