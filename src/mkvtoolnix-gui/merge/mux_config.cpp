@@ -384,10 +384,6 @@ MuxConfig::buildMkvmergeOptions()
 
   auto &settings = Util::Settings::get();
 
-  // TODO: buildMkvmergeOptions get ui locale from prefs
-  // if (!preferences.m_uiLocale.isEmpty())
-  //   options << Q("--ui-language") << settings.m_uiLocale;
-
   if (Util::Settings::NormalPriority != settings.m_priority)
     options << Q("--priority") << settings.priorityAsString();
 
