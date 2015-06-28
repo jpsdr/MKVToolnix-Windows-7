@@ -22,7 +22,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 {
   ui->setupUi(this);
 
-  Util::setScrollAreaBackgroundTransparent(ui->mergeScrollArea);
+  Util::fixScrollAreaBackground(ui->mergeScrollArea);
 
   // GUI page
   ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);

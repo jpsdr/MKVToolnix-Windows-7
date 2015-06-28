@@ -474,15 +474,8 @@ tabWidgetCloseTabButton(QTabWidget &tabWidget,
 }
 
 void
-setScrollAreaBackgroundTransparent(QScrollArea *scrollArea) {
-  QPalette pal;
-  pal.setColor(QPalette::Window,QColor(0,0,0,0));
-
-  scrollArea->setPalette(pal);
-  scrollArea->setBackgroundRole(QPalette::Window);
-
-  scrollArea->widget()->setPalette(pal);
-  scrollArea->widget()->setBackgroundRole(QPalette::Window);
+fixScrollAreaBackground(QScrollArea *scrollArea) {
+  scrollArea->setBackgroundRole(QPalette::Base);
 }
 
 }}}

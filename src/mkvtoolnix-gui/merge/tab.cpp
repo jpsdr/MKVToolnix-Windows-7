@@ -61,7 +61,7 @@ Tab::Tab(QWidget *parent)
 
   retranslateUi();
 
-  Util::setScrollAreaBackgroundTransparent(ui->scrollArea);
+  Util::fixScrollAreaBackground(ui->scrollArea);
 
   m_savedState = currentState();
 }

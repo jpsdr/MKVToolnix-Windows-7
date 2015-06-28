@@ -56,7 +56,7 @@ void saveWidgetGeometry(QWidget *widget);
 void restoreWidgetGeometry(QWidget *widget);
 
 QWidget *tabWidgetCloseTabButton(QTabWidget &tabWidget, int tabIdx);
-void setScrollAreaBackgroundTransparent(QScrollArea *scrollArea);
+void fixScrollAreaBackground(QScrollArea *scrollArea);
 
 // Model stuff
 enum MtxGuiRoles {
