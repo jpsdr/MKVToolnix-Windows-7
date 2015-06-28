@@ -324,7 +324,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
       opt.options << Q("--display-dimensions") << Q("%1:%2x%3").arg(sid).arg(m_displayWidth).arg(m_displayHeight);
 
     if (m_stereoscopy)
-      opt.options << Q("--stereo-mode") << Q("%1:%2").arg(sid).arg(m_stereoscopy);
+      opt.options << Q("--stereo-mode") << Q("%1:%2").arg(sid).arg(m_stereoscopy - 1);
 
     if (m_naluSizeLength)
       opt.options << Q("--nalu-size-length") << Q("%1:%2").arg(sid).arg(m_naluSizeLength);
