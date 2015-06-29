@@ -306,11 +306,17 @@ App::sendArgumentsToRunningInstance() {
   if (args.isEmpty())
     return;
 
+  auto size  = 0;
   auto block = QByteArray{};
   QDataStream out{&block, QIODevice::WriteOnly};
 
   out.setVersion(QDataStream::Qt_5_0);
+  out << size;
   out << args;
+
+  size = block.size() - sizeof(int);
+  out.device()->seek(0);
+  out << size;
 
   auto socket = std::make_unique<QLocalSocket>(this);
   socket->connectToServer(communicatorSocketName());
@@ -320,6 +326,12 @@ App::sendArgumentsToRunningInstance() {
 
   socket->write(block);
   socket->flush();
+
+  if (!socket->waitForReadyRead(10000))
+    return;
+
+  bool ok = false;
+  socket->read(reinterpret_cast<char *>(&ok), sizeof(bool));
 }
 
 bool
@@ -360,15 +372,39 @@ App::receiveInstanceCommunication() {
   auto socket = m_instanceCommunicator->nextPendingConnection();
   connect(socket, &QLocalSocket::disconnected, socket, &QLocalSocket::deleteLater);
 
-  if (!socket->waitForReadyRead(0))
-    return;
-
   QDataStream in{socket};
   in.setVersion(QDataStream::Qt_5_0);
 
-  auto args = QStringList{};
-  in >> args;
-  socket->disconnect();
+  auto start = QDateTime::currentDateTime();
+  auto size  = 0;
+  auto args  = QStringList{};
+  auto ok    = false;
+
+  while (true) {
+    if (!socket->waitForReadyRead(10000))
+      break;
+
+    if (!size && (socket->bytesAvailable() >= static_cast<int>(sizeof(int))))
+      in >> size;
+
+    if (size && (socket->bytesAvailable()) >= size) {
+      in >> args;
+      ok = true;
+      break;
+    }
+
+    auto elapsed = start.msecsTo(QDateTime::currentDateTime());
+    if (elapsed >= 10000)
+      break;
+  }
+
+  if (!ok) {
+    socket->disconnectFromServer();
+    return;
+  }
+
+  socket->write(reinterpret_cast<char *>(&ok), sizeof(bool));
+  socket->flush();
 
   m_cliParser.reset(new GuiCliParser{Util::toStdStringVector(args)});
   m_cliParser->run();
