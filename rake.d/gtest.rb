@@ -5,11 +5,11 @@ $gtest_internal = c(:GTEST_TYPE) == "internal"
 
 namespace :tests do
   desc "Build the unit tests"
-  task :unit => $gtest_apps.collect { |app| "tests/unit/#{app}/#{app}" }
+  task :unit => $gtest_apps.collect { |app| "tests/unit/#{app}/#{app}" + c(:EXEEXT) }
 
   desc "Build and run the unit tests"
   task :run_unit => 'tests:unit' do
-    $gtest_apps.each { |app| run "./tests/unit/#{app}/#{app}" + c(:EXEEXT) }
+    $gtest_apps.each { |app| run "./tests/unit/#{app}/#{app}" }
   end
 end
 
