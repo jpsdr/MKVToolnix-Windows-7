@@ -38,7 +38,7 @@ PlaylistScanner::checkOneFile(SourceFilePtr const &file)
     doScan = askScanForPlaylists(*file, otherFiles.size());
 
   if (!doScan)
-    return {};
+    return file;
 
   auto identifiedFiles = scanForPlaylists(otherFiles);
   if (identifiedFiles.isEmpty())
