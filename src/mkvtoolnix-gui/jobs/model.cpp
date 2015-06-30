@@ -247,7 +247,7 @@ Model::onStatusChanged(uint64_t id) {
   if (row == RowNotFound)
     return;
 
-  auto const &job = *m_jobsById[id];
+  auto &job       = *m_jobsById[id];
   auto status     = job.m_status;
   auto numBefore  = m_toBeProcessed.count();
 
@@ -257,20 +257,19 @@ Model::onStatusChanged(uint64_t id) {
   if (m_toBeProcessed.count() != numBefore)
     updateProgress();
 
+  if (included_in(status, Job::PendingManual, Job::PendingAuto, Job::Running))
+    job.m_dateFinished = QDateTime{};
+
   item(row, StatusColumn)->setText(Job::displayableStatus(job.m_status));
+  item(row, DateStartedColumn)->setText(Util::displayableDate(job.m_dateStarted));
+  item(row, DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
 
-  if (Job::Running == status) {
-    item(row, DateStartedColumn)->setText(Util::displayableDate(job.m_dateStarted));
+  if ((Job::Running == status) && !m_running) {
+    m_running        = true;
+    m_queueStartTime = QDateTime::currentDateTime();
 
-    if (!m_running) {
-      m_running        = true;
-      m_queueStartTime = QDateTime::currentDateTime();
-
-      emit queueStarted();
-    }
-
-  } else if (mtx::included_in(status, Job::DoneOk, Job::DoneWarnings, Job::Failed, Job::Aborted))
-    item(row, DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
+    emit queueStarted();
+  }
 
   startNextAutoJob();
 
