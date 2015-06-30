@@ -763,7 +763,7 @@ Tab::addOrAppendFiles(bool append,
   }
 
   if (!append)
-    PlaylistScanner{this}.checkAddingPlaylists(identifiedFiles);
+    identifiedFiles = PlaylistScanner{this}.checkAddingPlaylists(identifiedFiles);
 
   if (identifiedFiles.isEmpty())
     return;

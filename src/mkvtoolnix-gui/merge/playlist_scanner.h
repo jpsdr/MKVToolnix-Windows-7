@@ -18,11 +18,12 @@ protected:
 public:
   explicit PlaylistScanner(QWidget *parent);
 
-  void checkAddingPlaylists(QList<SourceFilePtr> &files);
+  QList<SourceFilePtr> checkAddingPlaylists(QList<SourceFilePtr> const &files) const;
 
 protected:
-  bool askScanForPlaylists(SourceFile const &file, unsigned int numOtherFiles);
-  QList<SourceFilePtr> scanForPlaylists(QFileInfoList const &otherFiles);
+  bool askScanForPlaylists(SourceFile const &file, unsigned int numOtherFiles) const;
+  QList<SourceFilePtr> scanForPlaylists(QFileInfoList const &otherFiles) const;
+  SourceFilePtr checkOneFile(SourceFilePtr const &file) const;
 };
 
 }}}

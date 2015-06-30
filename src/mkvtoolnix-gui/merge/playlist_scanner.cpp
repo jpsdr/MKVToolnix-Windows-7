@@ -22,52 +22,62 @@ PlaylistScanner::PlaylistScanner(QWidget *parent)
 {
 }
 
-void
-PlaylistScanner::checkAddingPlaylists(QList<SourceFilePtr> &files) {
+SourceFilePtr
+PlaylistScanner::checkOneFile(SourceFilePtr const &file)
+  const {
+  if (!file->isPlaylist())
+    return file;
+
+  auto info       = QFileInfo{file->m_fileName};
+  auto otherFiles = QDir{info.path()}.entryInfoList(QStringList{QString{"*.%1"}.arg(info.suffix())}, QDir::Files, QDir::Name);
+  if (otherFiles.isEmpty())
+    return file;
+
+  auto doScan = Util::Settings::AlwaysScan == Util::Settings::get().m_scanForPlaylistsPolicy;
+  if (!doScan)
+    doScan = askScanForPlaylists(*file, otherFiles.size());
+
+  if (!doScan)
+    return {};
+
+  auto identifiedFiles = scanForPlaylists(otherFiles);
+  if (identifiedFiles.isEmpty())
+    return file;
+
+  if (1 == identifiedFiles.size())
+    return identifiedFiles[0];
+
+  return SelectPlaylistDialog{m_parent, identifiedFiles}.select();
+}
+
+QList<SourceFilePtr>
+PlaylistScanner::checkAddingPlaylists(QList<SourceFilePtr> const &files)
+  const {
   if (Util::Settings::NeverScan == Util::Settings::get().m_scanForPlaylistsPolicy)
-    return;
+    return files;
+
+  auto actualFiles = QList<SourceFilePtr>{};
 
   for (auto &file : files) {
-    if (!file->isPlaylist())
-      continue;
-
-    auto info       = QFileInfo{file->m_fileName};
-    auto otherFiles = QDir{info.path()}.entryInfoList(QStringList{QString{"*.%1"}.arg(info.suffix())}, QDir::Files, QDir::Name);
-    if (otherFiles.isEmpty())
-      continue;
-
-    auto doScan = Util::Settings::AlwaysScan == Util::Settings::get().m_scanForPlaylistsPolicy;
-    if (!doScan)
-      doScan = askScanForPlaylists(*file, otherFiles.size());
-
-    if (!doScan)
-      continue;
-
-    auto identifiedFiles = scanForPlaylists(otherFiles);
-    if (identifiedFiles.isEmpty())
-      continue;
-
-    else if (1 == identifiedFiles.size())
-      file = identifiedFiles[0];
-
-    else {
-      auto selectedFile = SelectPlaylistDialog{m_parent, identifiedFiles}.select();
-      if (selectedFile)
-        file = selectedFile;
-    }
+    auto actualFile = checkOneFile(file);
+    if (actualFile)
+      actualFiles << actualFile;
   }
+
+  return actualFiles;
 }
 
 bool
 PlaylistScanner::askScanForPlaylists(SourceFile const &file,
-                                     unsigned int numOtherFiles) {
-
+                                     unsigned int numOtherFiles)
+  const {
   AskScanForPlaylistsDialog dialog{m_parent};
   return dialog.ask(file, numOtherFiles);
 }
 
 QList<SourceFilePtr>
-PlaylistScanner::scanForPlaylists(QFileInfoList const &otherFiles) {
+PlaylistScanner::scanForPlaylists(QFileInfoList const &otherFiles)
+  const {
   QProgressDialog progress{ QY("Scanning directory"), QY("Cancel"), 0, otherFiles.size(), m_parent };
   progress.setWindowModality(Qt::ApplicationModal);
 
