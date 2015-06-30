@@ -39,17 +39,22 @@ enum MPEG2ParserState_e {
 class MPEGFrame;
 class MPEGFrameRef {
 public:
-  MPEGFrame *frame;
+  uint64_t frameNumber;
   MediaTime timecode;
 
   MPEGFrameRef() {
     Clear();
   }
   void Clear() {
-    frame    = nullptr;
-    timecode = -1;
+    frameNumber = std::numeric_limits<uint64_t>::max();
+    timecode    = -1;
   }
-  void TryUpdate();
+  bool HasFrameNumber() const {
+    return std::numeric_limits<uint64_t>::max() != frameNumber;
+  }
+  bool HasTimecode() const {
+    return -1 != timecode;
+  }
 };
 
 class MPEGFrame {
@@ -71,6 +76,7 @@ public:
   bool progressive;
   uint8_t pictureStructure;
   bool bCopy;
+  uint64_t frameNumber;
 
   MPEGFrame(binary* data, uint32_t size, bool bCopy);
   ~MPEGFrame();
@@ -81,6 +87,8 @@ private:
   std::vector<MPEGChunk*> chunks; //Hold the chunks until we can order them
   std::vector<MPEGFrame*> waitQueue; //Holds unstamped buffers until we can stamp them.
   std::queue<MPEGFrame*> buffers; //Holds stamped buffers until they are requested.
+  std::unordered_map<uint64_t, uint64_t> frameTimecodes;
+  uint64_t frameCounter;
   MediaTime previousTimecode;
   MediaTime previousDuration;
   //Added to allow reading the header's raw data, contains first found seq hdr.
@@ -169,6 +177,7 @@ public:
   void SetThrowOnError(bool doThrow);
 
   void TimestampWaitingFrames();
+  void TryUpdate(MPEGFrameRef &frame);
 };
 
 
