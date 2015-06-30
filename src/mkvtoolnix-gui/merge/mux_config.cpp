@@ -206,6 +206,12 @@ MuxConfig::load(QSettings &settings) {
       throw InvalidSettingsX{};
     m_tracks << objectIDToTrack.value(trackID.toLongLong());
   }
+
+  auto value           = settings.value("firstInputFileName");
+  m_firstInputFileName = value.isValid()    ? value.toString()
+                       : !m_files.isEmpty() ? m_files[0]->m_fileName
+                       :                      QString{};
+
   settings.endGroup();
 
   // Load global settings
@@ -253,7 +259,8 @@ MuxConfig::save(QSettings &settings)
   saveSettingsGroup("files",       m_files,       settings);
   saveSettingsGroup("attachments", m_attachments, settings);
 
-  settings.setValue("trackOrder", std::accumulate(m_tracks.begin(), m_tracks.end(), QList<QVariant>{}, [](QList<QVariant> &accu, Track *track) { accu << QVariant{reinterpret_cast<qulonglong>(track)}; return accu; }));
+  settings.setValue("trackOrder",         std::accumulate(m_tracks.begin(), m_tracks.end(), QList<QVariant>{}, [](QList<QVariant> &accu, Track *track) { accu << QVariant{reinterpret_cast<qulonglong>(track)}; return accu; }));
+  settings.setValue("firstInputFileName", m_firstInputFileName);
   settings.endGroup();
 
   settings.beginGroup("global");

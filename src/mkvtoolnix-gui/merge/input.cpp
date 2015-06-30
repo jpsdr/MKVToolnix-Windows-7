@@ -776,6 +776,9 @@ Tab::addOrAppendFiles(bool append,
 
   setDefaultsFromSettingsForAddedFiles(identifiedFiles);
 
+  if (m_config.m_firstInputFileName.isEmpty())
+    m_config.m_firstInputFileName = identifiedFiles[0]->m_fileName;
+
   m_filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
 
   if (m_debugTrackModel) {
@@ -851,6 +854,7 @@ Tab::onRemoveFiles() {
   reinitFilesTracksControls();
 
   if (!m_filesModel->rowCount()) {
+    m_config.m_firstInputFileName.clear();
     clearDestinationMaybe();
     clearTitleMaybe();
   }
@@ -865,6 +869,7 @@ Tab::onRemoveAllFiles() {
   m_tracksModel->removeRows(0, m_tracksModel->rowCount());
   m_config.m_files.clear();
   m_config.m_tracks.clear();
+  m_config.m_firstInputFileName.clear();
 
   reinitFilesTracksControls();
   clearDestinationMaybe();
@@ -1028,10 +1033,10 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
     outputDir = settings.m_fixedOutputDir;
 
   else if (Util::Settings::ToSameAsFirstInputFile == policy)
-    outputDir = srcFileName.absoluteDir();
+    outputDir = QFileInfo{m_config.m_firstInputFileName}.absoluteDir();
 
   else if (Util::Settings::ToRelativeOfFirstInputFile == policy)
-    outputDir = QDir{ srcFileName.absoluteDir().path() + Q("/") + settings.m_relativeOutputDir.path() };
+    outputDir = QDir{ QFileInfo{m_config.m_firstInputFileName}.absoluteDir().path() + Q("/") + settings.m_relativeOutputDir.path() };
 
   else
     Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested output file name policy");

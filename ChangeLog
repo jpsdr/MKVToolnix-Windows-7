@@ -1,8 +1,13 @@
 2015-06-30  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: bug fix: when adding a Blu-ray playlist and
-        aborting the »select playlist to add« dialog the originally opened
-        playlist was added even so.
+        * MKVToolNix GUI: merge tool bug fix: the option »set output file
+        name relative to first input file« caused the relative path to be
+        applied each time a file was added resulting in the wrong
+        directory. Fixes #1321.
+
+        * MKVToolNix GUI: merge tool bug fix: when adding a Blu-ray
+        playlist and aborting the »select playlist to add« dialog the
+        originally opened playlist was added even so.
 
         * mkvmerge: bug fix: the MPEG-1/2 video code was causing an
         illegal memory access under certain conditions. Fixes #1278.
