@@ -119,8 +119,12 @@ Tab::setupInputControls() {
   for (auto idx = 0; idx < 3; ++idx)
     ui->defaultTrackFlag->addItem(QString{}, idx);
 
-  for (auto idx = 0; idx < 2; ++idx)
-    ui->forcedTrackFlag->addItem(QString{}, idx);
+  // Originally the »forced track« flag's options where ordered »off,
+  // on«; now they're ordered »yes, no« for consistency with other
+  // flags, requiring the values to be reversed.
+  ui->forcedTrackFlag->addItem(QString{}, 1);
+  ui->forcedTrackFlag->addItem(QString{}, 0);
+  ui->forcedTrackFlag->setCurrentIndex(1);
 
   for (auto idx = 0; idx < 3; ++idx)
     ui->compression->addItem(QString{}, idx);
@@ -943,13 +947,13 @@ Tab::retranslateInputUI() {
     if (comboBox->count() && !comboBox->itemData(0).isValid())
       comboBox->setItemText(0, QY("<do not change>"));
 
-  Util::setComboBoxTexts(ui->muxThis,          QStringList{} << QY("yes")                     << QY("no"));
+  Util::setComboBoxTexts(ui->muxThis,          QStringList{}                                  << QY("yes")                  << QY("no"));
   Util::setComboBoxTexts(ui->naluSizeLength,   QStringList{} << QY("don't change")            << QY("force 2 bytes")        << QY("force 4 bytes"));
-  Util::setComboBoxTexts(ui->defaultTrackFlag, QStringList{} << QY("determine automatically") << QY("set to \"yes\"")       << QY("set to \"no\""));
-  Util::setComboBoxTexts(ui->forcedTrackFlag,  QStringList{} << QY("off")                     << QY("on"));
+  Util::setComboBoxTexts(ui->defaultTrackFlag, QStringList{} << QY("determine automatically") << QY("yes")                  << QY("no"));
+  Util::setComboBoxTexts(ui->forcedTrackFlag,  QStringList{}                                  << QY("yes")                  << QY("no"));
   Util::setComboBoxTexts(ui->compression,      QStringList{} << QY("determine automatically") << QY("no extra compression") << Q("zlib"));
-  Util::setComboBoxTexts(ui->cues,             QStringList{} << QY("default")                 << QY("only for I frames")    << QY("for all frames") << QY("no cues"));
-  Util::setComboBoxTexts(ui->aacIsSBR,         QStringList{} << QY("default")                 << QY("yes")                  << QY("no"));
+  Util::setComboBoxTexts(ui->cues,             QStringList{} << QY("determine automatically") << QY("only for I frames")    << QY("for all frames") << QY("no cues"));
+  Util::setComboBoxTexts(ui->aacIsSBR,         QStringList{} << QY("determine automatically") << QY("yes")                  << QY("no"));
 
   setupInputToolTips();
 }
