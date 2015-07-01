@@ -117,6 +117,7 @@ sed -i -e 's/^Exec=mmg/Exec=mkvmerge-gui/' share/desktop/mkvmergeGUI.desktop
 %lang(zh_TW) %{_datadir}/locale/zh_TW/*/*.mo
 %{_datadir}/man/man1/*
 %{_datadir}/man/de
+%{_datadir}/man/es
 %{_datadir}/man/ja
 %{_datadir}/man/nl
 %{_datadir}/man/uk
