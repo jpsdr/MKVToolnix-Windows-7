@@ -3,6 +3,7 @@
 
 #include "common/common_pch.h"
 
+#include <QObject>
 #include <QStringList>
 
 class QDropEvent;
