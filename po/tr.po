@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the mkvtoolnix package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MKVToolNix 8.0.0\n"
+"Project-Id-Version: MKVToolNix 8.1.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-07-01 16:02+0200\n"
-"PO-Revision-Date: 2015-06-27 12:33+0200\n"
+"PO-Revision-Date: 2015-07-01 22:14+0300\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
 "Language: tr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.2\n"
 
 #: src/extract/xtr_tta.cpp:105
 #, boost-format
@@ -143,7 +143,7 @@ msgstr ""
 msgid ""
 "  --attachment-name <name> The name should be stored for the \n"
 "                           following attachment.\n"
-msgstr "  --attachment-name <name> Aşağıdaki ek için ad depolanmalıdır.\n"
+msgstr "  --attachment-name <isim> İsmi aşağıdaki ek için saklanmalıdır.\n"
 
 #: src/merge/mkvmerge.cpp:212
 msgid ""
@@ -2414,7 +2414,7 @@ msgstr ""
 
 #: src/mmg/tabs/input_format.cpp:271
 msgid "AAC is SBR/HE-AAC/AAC+"
-msgstr "SBR/HE-AAC/AAC+, AAC'dir"
+msgstr "AAC, SBR/HE-AAC/AAC+ olsun"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1351
 msgid "AAC is SBR/HE-AAC/AAC+:"
@@ -3959,7 +3959,7 @@ msgid ""
 "frame. This track cannot be stored in native mode.\n"
 msgstr ""
 "Kodek yapılandırma verisi ilk MPEG-4 kısım 2 görüntü karesinde bulunamadı. "
-"Bu iz yerel kip içinde depolanamaz.\n"
+"Bu iz yerel kip içinde saklanamaz.\n"
 
 #: src/input/r_ogm.cpp:355
 msgid ""
@@ -4636,18 +4636,24 @@ msgstr "Yayım bilgisi indiriliyor"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:793
 msgid "Drop last entry from imported &Blu-ray playlits if it's near the end"
 msgstr ""
+"Sona yakınsa içe aktarılmış &Blu-ray oynatma listelerinden son girişleri "
+"kaldır"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:275
 msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core."
 msgstr ""
+"Bir ses izinden kayıpsız uzantıları kaldırır ve sadece kayıplı çekirdeği "
+"tutar."
 
 #: src/mmg/tabs/input_format.cpp:276
 msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core. This only works with DTS tracks."
 msgstr ""
+"Bir ses izinden kayıpsız uzantıları kaldırır ve sadece kayıplı çekirdeği "
+"tutar. Bu sadece DTS izlerle çalışır."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:241
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:96
@@ -5327,11 +5333,11 @@ msgstr "İşlemin bitme zamanı %s"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1340
 msgid "Fix bitstream timing info"
-msgstr "Bit akışı zamanlaması bilgisini düzeltir"
+msgstr "Bit akışı zamanlaması bilgisini düzelt"
 
 #: src/mmg/tabs/input_format.cpp:278
 msgid "Fix bitstream timing information"
-msgstr "Bit akışı zamanlaması bilgisini düzeltir"
+msgstr "Bit akışı zamanlaması bilgisini düzelt"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:496
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:502
@@ -5985,6 +5991,9 @@ msgid ""
 "each type to have this flag set based on the information in the source files "
 "and the order of the tracks."
 msgstr ""
+"Eğer 'otomatik olarak belirle' ayarlarsanız o zaman mkvmerge, izlerin "
+"sırasına ve kaynak dosyalardaki bilgiye dayanarak ayarlanmış bu işarete "
+"sahip her türün bir izini seçecek."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:213
 msgid ""
@@ -7264,7 +7273,7 @@ msgstr "Bu izi ço&kla"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:222
 msgid "Multiply this track's timestamps with a factor."
-msgstr ""
+msgstr "Bu izin zaman damgalarını bir etken ile çoğaltır."
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:43
 msgid "Mux this"
@@ -7551,6 +7560,8 @@ msgid ""
 "Normally mkvmerge does not change the timing information (frame/field rate) "
 "stored in the video bitstream."
 msgstr ""
+"Normalde mkvmerge görüntü bit akışında saklanan zamanlama bilgisini (kare/"
+"alan oranı) değiştirmez."
 
 #: src/mmg/tabs/input_format.cpp:279
 msgid ""
@@ -7560,6 +7571,11 @@ msgid ""
 "can come from various sources: from the command line via --default-duration, "
 "the source container or derived from the bitstream."
 msgstr ""
+"Normalde mkvmerge görüntü bit akışında saklanan zamanlama bilgisini (kare/"
+"alan oranı) değiştirmez. Bu seçenek ile bu bilgi kalıp zamanlama bilgisiyle "
+"eşleşmesi için ayarlanır. Bu kalıbın zamanlama bilgisi çeşitli kaynaklardan "
+"gelebilir: --default-duration komutu aracılığıyla komut satırından, kaynak "
+"kalıbından ya da bit akışından türeyerek."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 msgid ""
@@ -7608,12 +7624,16 @@ msgid ""
 "Not needed for AAC tracks read from other container formats like MP4 or "
 "Matroska files."
 msgstr ""
+"MP4 veya Matroska dosyaları gibi diğer kalıp biçimlerinden okunan AAC izleri "
+"için gerekmez."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:257
 msgid ""
 "Note also that there are not a lot of players that support the cropping "
 "parameters."
 msgstr ""
+"Kırpma parametrelerini destekleyen çok sayıda oynatıcının olmadığını ayrıca "
+"unutmayın."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:125
 msgid ""
@@ -7629,6 +7649,9 @@ msgid ""
 "but only use the ratio given by these values when setting the initial window "
 "size."
 msgstr ""
+"Birçok oynatıcının görüntü genişlik/yükseklik değerlerini doğrudan "
+"kullanmadığını ancak sadece ilk pencere boyutunu ayarlarken bu değerler "
+"tarafından verilen oranı kullandığını unutmayın."
 
 #: src/merge/generic_packetizer.cpp:1147
 #, boost-format
@@ -8582,7 +8605,7 @@ msgstr "Öğeyi kaldır"
 
 #: src/mmg/options/mmg.cpp:68
 msgid "Remove job from job queue after run:"
-msgstr "Şunu çalıştırdıktan sonra iş kuyruğundan işi kaldır:"
+msgstr "Çalıştırdıktan sonra iş kuyruğundan işi kaldır:"
 
 #: src/mmg/tabs/chapters.cpp:375
 msgid "Remove name"
@@ -9695,7 +9718,8 @@ msgid ""
 "resulting SSA/ASS file for entries that have the same start and end time.\n"
 msgstr ""
 "Bazı süre öğelerinde altyazı izi %1% eksik. Lütfen aynı başlama ve bitiş "
-"zamanına sahip olan girişler için SSA/ASS dosyası sonucunu kontrol edin.\n"
+"zamanına sahip olan girişler için sonuçta oluşan SSA/ASS dosyasını kontrol "
+"edin.\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:35
 msgid "Subtitle track %1, %2, %3"
@@ -9773,7 +9797,8 @@ msgstr[1] "İz ID %1% için etiket: %2% giriş"
 msgid "Tags for track ID %lld (%d entries) from %s"
 msgstr "İz ID %lld (%d giriş) için etiket, dosya %s"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1332 src/mmg/tabs/input_general.cpp:191
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1332
+#: src/mmg/tabs/input_general.cpp:191
 msgid "Tags:"
 msgstr "Etiketler:"
 
@@ -9782,6 +9807,8 @@ msgid ""
 "Tells mkvmerge not to create and write the cue data which can be compared to "
 "an index in an AVI."
 msgstr ""
+"mkvmerge'e AVI içindeki indeksi karşılaştırabilen cue verisini yazmamasını "
+"ve oluşturmamasını söyler."
 
 #: src/mmg/cli_options_dlg.cpp:101
 msgid ""
@@ -9946,7 +9973,7 @@ msgid ""
 "track."
 msgstr ""
 "Matroska kalıbı biçimi bir görüntü izi için görüntüleme genişliği/"
-"yüksekliğini depolayabilir."
+"yüksekliğini saklayabilir."
 
 #: src/common/qt_kax_analyzer.cpp:75
 msgid ""
@@ -11250,6 +11277,9 @@ msgid ""
 "given on the command line with the '--default-duration' option, the source "
 "container or the video bitstream."
 msgstr ""
+"Kalıbın zamanlama bilgisi için kaynak çeşitli şeyler olabilir: '--default-"
+"duration' seçeneği ile komut satırında verilen bir değer, kaynak kalıp ya da "
+"görüntü bit akışı."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:550
 msgid "The start time could not be parsed: %1"
@@ -11513,6 +11543,8 @@ msgid ""
 "The value can be given either as a floating point number (e.g. 12.345) or a "
 "fraction of integer values (e.g. 123/456)."
 msgstr ""
+"Değer, ya kayan noktalı bir sayı (örn. 12.345) ya da kesirli bir tam sayı "
+"değerlerinde (örn. 123/456) verilebilir."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:218
 msgid ""
@@ -11818,7 +11850,7 @@ msgid ""
 "It defaults to the file name of the original file but can be changed."
 msgstr ""
 "Bu, bu ek için çıktı dosyasından saklanacak olan addır. Varsayılanı orijinal "
-"dosyanın dosya adıdır ama değiştirilebilir."
+"dosyanın dosya adıdır ancak değiştirilebilir."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:103 src/mmg/tabs/global.cpp:303
 msgid ""
@@ -11923,6 +11955,8 @@ msgid ""
 "This option tells mkvmerge the display aspect ratio to use when it "
 "calculates the display width/height."
 msgstr ""
+"Bu seçenek, mkvmerge'e görüntü genişliğini/yüksekliğini hesapladığında "
+"kullanması için görüntü en-boy oranını söyler."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:267
 msgid ""
@@ -11983,7 +12017,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:62
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:111
 msgid "This template will be used for new chapter entries."
-msgstr ""
+msgstr "Bu şablon yeni bölüm girişleri için kullanılacaktır."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:270
 msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
@@ -12028,6 +12062,8 @@ msgid ""
 "This works well for video and subtitle tracks but should not be used with "
 "audio tracks."
 msgstr ""
+"Bu, görüntü ve altyazı izleri için iyi çalışır ancak ses izleri ile "
+"kullanılmamalıdır."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:219
 msgid "This works with all track types."
@@ -12506,15 +12542,15 @@ msgstr "Kullanım"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:115
 msgid "Use 'segment linking' for the resulting files."
-msgstr ""
+msgstr "Sonuçta oluşan dosyalar için 'parça bağlama' kullanın."
 
 #: src/mmg/tabs/global.cpp:325
 msgid ""
 "Use 'segment linking' for the resulting files. For an in-depth explanation "
 "of this feature consult the mkvmerge documentation."
 msgstr ""
-"Dosyaları sonuçlandırmak için 'parça bağlama' kullan. Bu özelliğin geniş "
-"kapsamlı açıklaması için mkvmerge'ün belgesine danışın."
+"Sonuçta oluşan dosyalar için 'parça bağlama' kullanın. Bu özelliğin geniş "
+"kapsamlı açıklaması için mkvmerge'ün belgelerine danışın."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:822
 msgid "Use fi&xed directory:"
@@ -12896,14 +12932,17 @@ msgid ""
 "With this option that information is adjusted to match the container's "
 "timing information."
 msgstr ""
+"Bu seçenek ile bu bilgi kalıbın zamanlama bilgisiyle eşleşmesi için "
+"ayarlanır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:146
 msgid "With »create new settings« a new set of merge settings will be added."
 msgstr ""
+"»yeni ayarları oluştur« ile yeni bir birleştirme ayarları grubu eklenecektir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "With »remove input files« all input files will be removed."
-msgstr ""
+msgstr "»girdi dosyalarını kaldır« ile tüm girdi dosyaları kaldırılacaktır."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 msgid "Write durations for all blocks."
@@ -14575,4 +14614,3 @@ msgstr "– hiçbiri olarak ayarla –"
 
 #~ msgid "utf8_strlen(): Invalid UTF-8 char. First byte: 0x%|1$02x|"
 #~ msgstr "utf8_strlen(): Geçersiz UTF-8 kar. İlk bayt: 0x%|1$02x|"
-
