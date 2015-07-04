@@ -14,6 +14,11 @@ class QAbstractItemView;
 
 namespace mtx { namespace gui { namespace Jobs {
 
+enum class QueueStatus {
+  Stopped,
+  Running,
+};
+
 class Model: public QStandardItemModel {
   Q_OBJECT;
 protected:
@@ -79,8 +84,7 @@ signals:
   void jobStatsChanged(int numPendingAutomatic, int numPendingManual, int numOther);
   void numUnacknowledgedWarningsOrErrorsChanged(int numWarnings, int numErrors);
 
-  void queueStarted();
-  void queueStopped();
+  void queueStatusChanged(QueueStatus status);
 
 public slots:
   void onStatusChanged(uint64_t id);

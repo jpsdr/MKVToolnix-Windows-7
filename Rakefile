@@ -127,11 +127,14 @@ def setup_globals
   windres                  = c?(:USE_WXWIDGETS) ? c(:WXWIDGETS_INCLUDES) : "-DNOWXWIDGETS"
   windres                 += " -DMINGW_PROCESSOR_ARCH_AMD64=1" if c(:MINGW_PROCESSOR_ARCH) == 'amd64'
 
+  mocflags                 = c?(:MINGW) ? "-DSYS_WINDOWS" : ""
+
   $flags                   = {
     :cflags                => cflags,
     :cxxflags              => cxxflags,
     :ldflags               => ldflags,
     :windres               => windres,
+    :moc                   => mocflags,
   }
 
   $build_system_modules.values.each { |bsm| bsm[:setup].call if bsm[:setup] }
@@ -300,7 +303,7 @@ rule '.cpp' => '.qrc' do |t|
 end
 
 rule '.moc' => '.h' do |t|
-  runq "     MOC #{t.prerequisites.first}", "#{c(:MOC)} #{c(:QT_CFLAGS)} #{$system_includes} -nw #{t.prerequisites.join(" ")} > #{t.name}"
+  runq "     MOC #{t.prerequisites.first}", "#{c(:MOC)} #{c(:QT_CFLAGS)} #{$system_includes} #{$flags[:moc]} -nw #{t.prerequisites.join(" ")} > #{t.name}"
 end
 
 rule '.moco' => '.moc' do |t|

@@ -58,15 +58,14 @@ Tab::connectToJob(Jobs::Job const &job) {
 
   ui->abortButton->disconnect();
 
-  connect(&job,                                   &Jobs::Job::statusChanged,     this,    &Tab::onStatusChanged,              connType);
-  connect(&job,                                   &Jobs::Job::progressChanged,   this,    &Tab::onJobProgressChanged,         connType);
-  connect(&job,                                   &Jobs::Job::lineRead,          this,    &Tab::onLineRead,                   connType);
-  connect(ui->abortButton,                        &QPushButton::clicked,         this,    &Tab::onAbort,                      connType);
-  connect(ui->saveOutputButton,                   &QPushButton::clicked,         this,    &Tab::onSaveOutput,                 connType);
-  connect(ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,         this,    &Tab::acknowledgeWarningsAndErrors, connType);
-  connect(model,                                  &Jobs::Model::progressChanged, this,    &Tab::onQueueProgressChanged,       connType);
-  connect(model,                                  &Jobs::Model::queueStarted,    this,    &Tab::updateRemainingTime,          connType);
-  connect(model,                                  &Jobs::Model::queueStopped,    this,    &Tab::updateRemainingTime,          connType);
+  connect(&job,                                   &Jobs::Job::statusChanged,        this, &Tab::onStatusChanged,              connType);
+  connect(&job,                                   &Jobs::Job::progressChanged,      this, &Tab::onJobProgressChanged,         connType);
+  connect(&job,                                   &Jobs::Job::lineRead,             this, &Tab::onLineRead,                   connType);
+  connect(ui->abortButton,                        &QPushButton::clicked,            this, &Tab::onAbort,                      connType);
+  connect(ui->saveOutputButton,                   &QPushButton::clicked,            this, &Tab::onSaveOutput,                 connType);
+  connect(ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,            this, &Tab::acknowledgeWarningsAndErrors, connType);
+  connect(model,                                  &Jobs::Model::progressChanged,    this, &Tab::onQueueProgressChanged,       connType);
+  connect(model,                                  &Jobs::Model::queueStatusChanged, this, &Tab::updateRemainingTime,          connType);
 }
 
 void

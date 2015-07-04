@@ -20,6 +20,9 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
+#if defined(SYS_WINDOWS)
+# include "mkvtoolnix-gui/main_window/taskbar_progress.h"
+#endif
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/moving_pixmap_overlay.h"
@@ -64,6 +67,10 @@ MainWindow::MainWindow(QWidget *parent)
 #if defined(HAVE_CURL_EASY_H)
   silentlyCheckForUpdates();
 #endif  // HAVE_CURL_EASY_H
+
+#if defined(SYS_WINDOWS)
+  new TaskbarProgress{this};
+#endif
 }
 
 MainWindow::~MainWindow() {
@@ -427,6 +434,12 @@ void
 MainWindow::visitHelpURL() {
   if (m_helpURLs.contains(sender()))
     QDesktopServices::openUrl(m_helpURLs[sender()]);
+}
+
+void
+MainWindow::showEvent(QShowEvent *event) {
+  emit windowShown();
+  event->accept();
 }
 
 }}

@@ -11,6 +11,7 @@
 #include <QMainWindow>
 
 class QResizeEvent;
+class QShowEvent;
 
 namespace mtx { namespace gui {
 
@@ -78,6 +79,7 @@ public:
   virtual void switchToTool(ToolBase *tool);
 
 signals:
+  void windowShown();
   void preferencesChanged();
 
 public slots:
@@ -111,6 +113,7 @@ protected:
   virtual void setupHelpURLs();
   virtual QWidget *createNotImplementedWidget();
 
+  virtual void showEvent(QShowEvent *event);
   virtual void closeEvent(QCloseEvent *event);
   virtual bool beforeCloseCheckRunningJobs();
 

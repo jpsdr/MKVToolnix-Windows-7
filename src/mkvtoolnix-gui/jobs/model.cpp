@@ -268,7 +268,7 @@ Model::onStatusChanged(uint64_t id) {
     m_running        = true;
     m_queueStartTime = QDateTime::currentDateTime();
 
-    emit queueStarted();
+    emit queueStatusChanged(QueueStatus::Running);
   }
 
   startNextAutoJob();
@@ -387,7 +387,7 @@ Model::startNextAutoJob() {
   auto wasRunning = m_running;
   m_running       = false;
   if (wasRunning)
-    emit queueStopped();
+    emit queueStatusChanged(QueueStatus::Stopped);
 }
 
 void
@@ -403,7 +403,7 @@ Model::stop() {
   auto wasRunning = m_running;
   m_running       = false;
   if (wasRunning)
-    emit queueStopped();
+    emit queueStatusChanged(QueueStatus::Stopped);
 }
 
 void
