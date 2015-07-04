@@ -89,8 +89,6 @@ FancyTabBar::FancyTabBar(QWidget *parent)
   setMouseTracking(true); // Needed for hover events
   m_triggerTimer.setSingleShot(true);
 
-  setAutoFillBackground(true);
-
   // We use a zerotimer to keep the sidebar responsive
   connect(&m_triggerTimer, SIGNAL(timeout()), this, SLOT(emitCurrentIndex()));
 }
@@ -293,10 +291,10 @@ FancyTabBar::paintTab(QPainter *painter,
   painter->setPen(selected ? QColor(255, 255, 255, 160) : QColor(0, 0, 0, 110));
   int textFlags = Qt::AlignCenter | Qt::AlignBottom | Qt::TextWordWrap;
   if (enabled) {
-    // painter->drawText(tabTextRect, textFlags, tabText);
-    painter->setPen(selected ? QColor(60, 60, 60) : QColor(100, 100, 100));
+    painter->drawText(tabTextRect, textFlags, tabText);
+    painter->setPen(selected ? QColor(60, 60, 60) : StyleHelper::panelTextColor());
   } else {
-    painter->setPen(selected ? StyleHelper::panelTextColor(true) : QColor(255, 255, 255, 120));
+    painter->setPen(selected ? StyleHelper::panelTextColor() : QColor(255, 255, 255, 120));
   }
 #ifndef Q_WS_MAC
   if (!selected && enabled) {
