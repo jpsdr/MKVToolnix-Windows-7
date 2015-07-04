@@ -21,6 +21,7 @@ void
 AttachmentModel::reset() {
   beginResetModel();
   removeRows(0, rowCount());
+  m_attachmentMap.clear();
   endResetModel();
 }
 
@@ -31,7 +32,7 @@ AttachmentModel::createRowItems(AttachmentPtr const &attachment)
   for (auto column = 0; column < NumberOfColumns; ++column)
     list << new QStandardItem{};
 
-  list[0]->setData(QVariant::fromValue(attachment), Util::AttachmentRole);
+  list[0]->setData(reinterpret_cast<quint64>(attachment.get()), Util::AttachmentRole);
 
   return list;
 }
@@ -91,6 +92,7 @@ AttachmentModel::addAttachments(QList<AttachmentPtr> const &attachmentsToAdd) {
   for (auto const &attachment : attachmentsToAdd) {
     auto newRow = createRowItems(attachment);
     setRowData(newRow, *attachment);
+    m_attachmentMap[reinterpret_cast<quint64>(attachment.get())] = attachment;
     appendRow(newRow);
   }
 }
@@ -104,7 +106,7 @@ AttachmentModel::replaceAttachments(QList<AttachmentPtr> const &newAttachments) 
 AttachmentPtr
 AttachmentModel::attachmentForRow(int row)
   const {
-  return item(row)->data(Util::AttachmentRole).value<AttachmentPtr>();
+  return m_attachmentMap.value(item(row)->data(Util::AttachmentRole).value<quint64>(), AttachmentPtr{});
 }
 
 int

@@ -18,6 +18,9 @@ class AttachmentModel : public QStandardItemModel {
   Q_OBJECT;
 
 protected:
+  QHash<quint64, AttachmentPtr> m_attachmentMap;
+
+protected:
   static int const NameColumn        = 0;
   static int const MIMETypeColumn    = 1;
   static int const DescriptionColumn = 2;
@@ -52,7 +55,5 @@ protected:
 };
 
 }}}
-
-Q_DECLARE_METATYPE(mtx::gui::Merge::AttachmentPtr);
 
 #endif  // MTX_MKVTOOLNIX_GUI_MERGE_ATTACHMENT_MODEL_H
