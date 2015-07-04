@@ -48,6 +48,9 @@ public:
 
   virtual void retranslateUi();
 
+  virtual Qt::DropActions supportedDropActions() const override;
+  virtual Qt::ItemFlags flags(QModelIndex const &index) const override;
+
 protected:
   QList<QStandardItem *> createRowItems(AttachmentPtr const &attachment) const;
   void setRowData(QList<QStandardItem *> const &items, Attachment const &attachment);

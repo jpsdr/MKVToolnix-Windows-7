@@ -137,4 +137,17 @@ AttachmentModel::itemsForRow(int row) {
   return list;
 }
 
+Qt::DropActions
+AttachmentModel::supportedDropActions()
+  const {
+  return Qt::MoveAction;
+}
+
+Qt::ItemFlags
+AttachmentModel::flags(QModelIndex const &index)
+  const {
+  auto defaultFlags = QStandardItemModel::flags(index) & ~Qt::ItemIsDropEnabled;
+  return index.isValid() ? defaultFlags | Qt::ItemIsDragEnabled : defaultFlags | Qt::ItemIsDropEnabled;
+}
+
 }}}
