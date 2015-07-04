@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.1.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-07-01 16:02+0200\n"
-"PO-Revision-Date: 2015-07-01 22:14+0300\n"
+"PO-Revision-Date: 2015-07-04 00:03+0300\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
 "Language: tr\n"
@@ -260,7 +260,7 @@ msgid ""
 "                           overridden with the --language option.\n"
 msgstr ""
 "  --default-language <lng>  Bu dili, --language seçeneğiyle geçersiz\n"
-"                           kılmadıkça tüm izler için kullan.\n"
+"                           kılmadıkça tüm izler için kullanın.\n"
 
 #: src/merge/mkvmerge.cpp:206
 msgid ""
@@ -491,7 +491,7 @@ msgid ""
 msgstr ""
 "  --stereo-mode <TID:n|anahtarkelime>\n"
 "                           Stereo kipi parametrelerini ayarlar. Bu ya\n"
-"                           bir numara 0 - 14ya da anahtar kelime olabilir\n"
+"                           bir numara 0 - 14 ya da anahtar kelime olabilir\n"
 "                           (tam liste için belgelere bakın).\n"
 
 #: src/merge/mkvmerge.cpp:257
@@ -2149,6 +2149,8 @@ msgid ""
 "1. for subtitle files that do not use a byte order marker (BOM) and that are "
 "not encoded in the system's current character set (%1%);"
 msgstr ""
+"1. bir bayt sırası işaretçisi (BOM) kullanmayan ve sistemin şu anki karakter "
+"kümesinde (%1%) kodlanmayan altyazı dosyaları için;"
 
 #: src/info/mkvinfo.cpp:677
 msgid "1: all frames"
@@ -2410,7 +2412,7 @@ msgstr ""
 "AAC dosyaları HE-AAC / AAC+ / SBR AAC ses içerebilir. Bu otomatik olarak "
 "ALGILANAMAZ. Bu nedenle eğer dosya aslında SBR AAC içeriyorsa bu girdi "
 "dosyası için elle '--aac-is-sbr 0' belirtmek zorundasınız. Yoksa dosya "
-"YANLIŞ yolla çoklanmış olacaktır. Ayrıca mkvmerge'ün belgesini okuyun.\n"
+"YANLIŞ yolla çoklanmış olacaktır. Ayrıca mkvmerge'ün belgelerini okuyun.\n"
 
 #: src/mmg/tabs/input_format.cpp:271
 msgid "AAC is SBR/HE-AAC/AAC+"
@@ -2418,7 +2420,7 @@ msgstr "AAC, SBR/HE-AAC/AAC+ olsun"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1351
 msgid "AAC is SBR/HE-AAC/AAC+:"
-msgstr "SBR/HE-AAC/AAC+, AAC'dir:"
+msgstr "AAC, SBR/HE-AAC/AAC+ olsun:"
 
 #: src/input/r_aac_adif.cpp:35
 msgid "AAC with ADIF headers"
@@ -2769,6 +2771,8 @@ msgid ""
 "All occurences of the string \"<TID>\" will be replaced by the track's track "
 "ID."
 msgstr ""
+"\"<TID>\" dizgisinin tüm oluşumları izin iz ID'si tarafından "
+"değiştirilecektir."
 
 #: src/propedit/propedit_cli_parser.cpp:238
 msgid ""
@@ -5363,7 +5367,7 @@ msgid ""
 "read mkvmerge's documentation."
 msgstr ""
 "Dosya/parça bağlamasının geniş kapsamlı açıklaması ve bu özellik için lütfen "
-"mkvmerge'ün belgesini okuyun."
+"mkvmerge'ün belgelerini okuyun."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:49
 msgid ""
@@ -5375,6 +5379,8 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:266
 msgid "For such files you can use this parameter and decrease the size to 2."
 msgstr ""
+"Böyle dosyalar için bu parametreyi kullanabilir ve boyutu 2'ye "
+"düşürebilirsiniz."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:59
 #: src/mmg/cli_options_dlg.cpp:131
@@ -5419,7 +5425,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:264
 msgid "Forces the NALU size length to a certain number of bytes."
-msgstr ""
+msgstr "NALU boyutu uzunluğunu belirli bir bayt sayısına zorlar."
 
 #: src/mmg/tabs/input_format.cpp:249
 msgid ""
@@ -5430,12 +5436,12 @@ msgid ""
 "slice that is bigger than 65535 bytes. For such files you can use this "
 "parameter and decrease the size to 2."
 msgstr ""
-"NALU boyutu uzunluğunu belirli bayt sayısına zorlar. Bu parametre sadece AVC/"
-"h.264 ES dosyalarından, '--engage allow_avc_in_vwf_mode' ile oluşturulmuş "
-"AVI'ler veya Matroska dosyalarından AVC/h.264 temel akışlarını okumak için "
-"kullanılabilir. Varsayılanı 4 bayttır ama kare içermeyen veya 65535 bayttan "
-"büyük kesilmiş dosyalar vardır. Böyle dosyalar için parametreler "
-"kullanabilirsiniz ve boyutu 2'ye düşürebilirsiniz."
+"NALU boyutu uzunluğunu belirli bir bayt sayısına zorlar. Bu parametre sadece "
+"'--engage allow_avc_in_vwf_mode' ile oluşturulmuş AVI'ler veya Matroska "
+"dosyalarından, AVC/h.264 ES dosyalarından okunan AVC/h.264 temel akışları "
+"için kullanılabilir. Varsayılanı 4 bayttır, ancak 65535 bayttan daha büyük "
+"kare veya dilim içermeyen dosyalar vardır. Böyle dosyalar için bu "
+"parametreyi kullanabilir ve boyutu 2'ye düşürebilirsiniz."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:227
 msgid "Forces the default duration or number of frames per second for a track."
@@ -5505,6 +5511,7 @@ msgstr "Kareler/alanlar:"
 #: src/mkvtoolnix-gui/merge/input.cpp:289
 msgid "Free-form edit field for user defined options for this track."
 msgstr ""
+"Bu iz için kullanıcı tanımlı seçenekler için serbest-form düzenleme alanı."
 
 #: src/mmg/tabs/input_extra.cpp:133
 msgid ""
@@ -6669,6 +6676,8 @@ msgid ""
 "It defaults to 4 bytes, but there are files which do not contain a frame or "
 "slice that is bigger than 65535 bytes."
 msgstr ""
+"Varsayılanı 4 bayttır, ancak 65535 bayttan daha büyük bir kare veya dilim "
+"içermeyen dosyalar vardır."
 
 #: src/mmg/mmg_dialog.cpp:2009
 msgid ""
@@ -6715,7 +6724,7 @@ msgstr "İşler ve iş çıktısı"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:175
 msgid "Jobs to execute:"
-msgstr "Yürütmek için işler:"
+msgstr "Yürütülen işler:"
 
 #: src/output/p_kate.h:39
 msgid "Kate"
@@ -8113,7 +8122,7 @@ msgid ""
 "explains several details in great length which are not obvious from\n"
 "this listing.\n"
 msgstr ""
-"Lütfen mkvmerge için ana sayfayı/HTML belgesini okuyun.\n"
+"Lütfen mkvmerge için ana sayfayı/HTML belgelerini okuyun.\n"
 "Bu listelemede anlaşılmayan birkaç ayrıntıyı önemli ölçüde anlatır.\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:73
@@ -8527,7 +8536,7 @@ msgstr ""
 "bu otomatik olarak algılanmayabilir. Bundan dolayı eğer dosya aslında SBR "
 "AAC içeriyorsa, bu girdi dosyası için el ile '--aac-is-sbr %1%' belirtmek "
 "zorundasınız. Yoksa dosya YANLIŞ yolla çoklanacaktır. Ayrıca mkvmerge'ün "
-"belgesini okuyun.\n"
+"belgelerini okuyun.\n"
 
 #: src/common/cli_parser.cpp:180
 msgid "Redirects all messages into this file."
@@ -9196,6 +9205,8 @@ msgid ""
 "Sets the cropping parameters which tell a player to omit a certain number of "
 "pixels on the four sides during playback."
 msgstr ""
+"Oynatıcıya oynatma sırasında dört kenardaki belirli piksel sayısını "
+"çıkarmasını söyleyen kırpma parametrelerini ayarlar."
 
 #: src/mmg/tabs/input_format.cpp:270
 msgid ""
@@ -9249,6 +9260,8 @@ msgid ""
 "Sets the priority that mkvmerge will run with. Chosing 'lowest' will cause "
 "mkvmerge to select a low I/O priority as well."
 msgstr ""
+"mkvmerge'ün birlikte çalıştırılacağı önceliği ayarlar. 'En düşük'ü seçmek "
+"mkvmerge'ün de düşük bir G/Ç önceliği seçmesine neden olacak."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:119
 msgid "Sets the segment UIDs to use."
@@ -9278,7 +9291,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:260
 msgid "Sets the stereo mode of the video track to this value."
-msgstr ""
+msgstr "Görüntü izinin stereo kipini bu değere ayarlar."
 
 #: src/mmg/tabs/input_format.cpp:244
 msgid ""
@@ -9286,7 +9299,7 @@ msgid ""
 "the track's original stereo mode will be kept or, if it didn't have one, "
 "none will be set at all."
 msgstr ""
-"Bu değere görüntü izinin stereo kipini ayarlar. Eğer boş bırakılırsa o zaman "
+"Görüntü izinin stereo kipini bu değere ayarlar. Eğer boş bırakılırsa o zaman "
 "izin orijinal stereo kipi tutulacaktır ya da eğer birine sahip olmadıysa, "
 "hiçbir şekilde hiçbiri ayarlanmayacaktır."
 
@@ -10170,6 +10183,8 @@ msgid ""
 "The character sets selected here will be shown at the top of all the "
 "character set drop-down boxes in the program."
 msgstr ""
+"Burada seçilen karakter kümeleri, programdaki tüm aşağı açılır karakter "
+"kümesi listesinin en üstünde gösterilecektir."
 
 #: src/output/p_hevc.cpp:157 src/output/p_mpeg4_p10.cpp:183
 #, boost-format
@@ -10217,6 +10232,8 @@ msgid ""
 "The countries selected here will be shown at the top of all the country drop-"
 "down boxes in the program."
 msgstr ""
+"Burada seçilen ülkeler, programdaki tüm aşağı açılır ülke listesinin en "
+"üstünde gösterilecektir."
 
 #: src/mmg/options/chapters.cpp:120
 #, c-format, boost-format
@@ -10879,8 +10896,8 @@ msgid ""
 "The languages selected here will be shown at the top of all the language "
 "drop-down boxes in the program."
 msgstr ""
-"Burada seçilen diller, programda tüm aşağı açılır dil listesinin en üstünde "
-"gösterilecektir."
+"Burada seçilen diller, programdaki tüm aşağı açılır dil listesinin en "
+"üstünde gösterilecektir."
 
 #: src/common/kax_file.cpp:216
 #, boost-format
@@ -11964,6 +11981,9 @@ msgid ""
 "streams read from AVC/h.264/ ES or HEVC/h.265 ES files, AVIs or Matroska "
 "files created with '--engage allow_avc_in_vwf_mode'."
 msgstr ""
+"Bu parametre sadece '--engage allow_avc_in_vwf_mode' ile oluşturulmuş "
+"AVI'ler veya Matroska dosyalarından, AVC/h.264 ES veya HEVC/h.265 ES "
+"dosyalarından okunan  AVC/h.264 ve HEVC/h.265 temel akışları için etkilidir."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:249
 msgid "This parameter is the display height in pixels."
