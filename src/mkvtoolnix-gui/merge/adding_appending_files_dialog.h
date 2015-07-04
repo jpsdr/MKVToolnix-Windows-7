@@ -20,6 +20,7 @@ public:
     Add,
     Append,
     AddAdditionalParts,
+    AddToNew,
   };
 
 protected:

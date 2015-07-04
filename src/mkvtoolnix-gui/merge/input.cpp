@@ -20,6 +20,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
+#include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/file_type_filter.h"
@@ -1079,6 +1080,9 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
 
   if (AddingAppendingFilesDialog::Decision::AddAdditionalParts == decision)
     m_filesModel->addAdditionalParts(fileIdx, fileNames);
+
+  else if (AddingAppendingFilesDialog::Decision::AddToNew == decision)
+    MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames);
 
   else
     addOrAppendFiles(AddingAppendingFilesDialog::Decision::Append == decision, fileNames, fileIdx);

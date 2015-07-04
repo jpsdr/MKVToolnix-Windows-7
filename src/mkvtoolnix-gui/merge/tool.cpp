@@ -291,4 +291,14 @@ Tool::openMultipleConfigFilesFromCommandLine(QStringList const &fileNames) {
     openConfigFile(fileName);
 }
 
+void
+Tool::addMultipleFilesToNewSettings(QStringList const &fileNames) {
+  newConfig();
+
+  auto tab = currentTab();
+  Q_ASSERT(!!tab);
+
+  tab->addFilesToBeAddedOrAppendedDelayed(fileNames);
+}
+
 }}}

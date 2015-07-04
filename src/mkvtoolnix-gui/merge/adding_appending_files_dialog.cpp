@@ -36,9 +36,10 @@ AddingAppendingFilesDialog::~AddingAppendingFilesDialog() {
 AddingAppendingFilesDialog::Decision
 AddingAppendingFilesDialog::decision()
   const {
-  return ui->rbAdd->isChecked()    ? Decision::Add
-       : ui->rbAppend->isChecked() ? Decision::Append
-       :                             Decision::AddAdditionalParts;
+  return ui->rbAdd->isChecked()      ? Decision::Add
+       : ui->rbAppend->isChecked()   ? Decision::Append
+       : ui->rbAddToNew->isChecked() ? Decision::AddToNew
+       :                               Decision::AddAdditionalParts;
 }
 
 int
@@ -49,7 +50,7 @@ AddingAppendingFilesDialog::fileIndex()
 
 void
 AddingAppendingFilesDialog::selectionChanged() {
-  ui->cbFileName->setEnabled(!ui->rbAdd->isChecked());
+  ui->cbFileName->setEnabled(!ui->rbAdd->isChecked() && !ui->rbAddToNew->isChecked());
 }
 
 }}}
