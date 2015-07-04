@@ -690,16 +690,13 @@ mpeg_ts_reader_c::read_headers() {
                  boost::format("mpeg_ts_reader_c::read_headers: EOF during detection. #tracks %1% #PAT CRC errors %2% #PMT CRC errors %3% PAT found %4% PMT found %5%\n")
                  % tracks.size() % m_num_pat_crc_errors % m_num_pmt_crc_errors % PAT_found % PMT_found);
 
-      // If this is the second time around then abort.
-      if (!m_validate_pat_crc || ! m_validate_pmt_crc)
-        break;
+      if (!PAT_found && m_validate_pat_crc)
+        m_validate_pat_crc = false;
 
-      m_validate_pat_crc = PAT_found || (m_num_pat_crc_errors == 0);
-      m_validate_pmt_crc = PMT_found || (m_num_pmt_crc_errors == 0);
+      else if (PAT_found && !PMT_found && m_validate_pmt_crc)
+        m_validate_pmt_crc = false;
 
-      // If there haven't been any errors for neither PAT nor PMT then
-      // abort.
-      if (m_validate_pat_crc && m_validate_pmt_crc)
+      else
         break;
 
       m_in->setFilePointer(0);
@@ -858,7 +855,7 @@ mpeg_ts_reader_c::parse_pat(unsigned char *pat) {
   uint32_t read_CRC                 = get_uint32_be(pat + 3 + pat_section_length - 4);
 
   if (elapsed_CRC != read_CRC) {
-    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pat: Wrong PAT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|\n") % elapsed_CRC % read_CRC);
+    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pat: Wrong PAT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|, validate PAT CRC? %3%\n") % elapsed_CRC % read_CRC % m_validate_pat_crc);
     ++m_num_pat_crc_errors;
     if (m_validate_pat_crc)
       return -1;
@@ -940,7 +937,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
   uint32_t read_CRC                 = get_uint32_be(pmt + 3 + pmt_section_length - 4);
 
   if (elapsed_CRC != read_CRC) {
-    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: Wrong PMT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|\n") % elapsed_CRC % read_CRC);
+    mxdebug_if(m_debug_pat_pmt, boost::format("mpeg_ts_reader_c::parse_pmt: Wrong PMT CRC !!! Elapsed = 0x%|1$08x|, read 0x%|2$08x|, validate PMT CRC? %3%\n") % elapsed_CRC % read_CRC % m_validate_pmt_crc);
     ++m_num_pmt_crc_errors;
     if (m_validate_pmt_crc)
       return -1;
