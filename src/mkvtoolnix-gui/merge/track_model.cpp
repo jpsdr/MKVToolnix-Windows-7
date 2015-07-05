@@ -533,14 +533,4 @@ TrackModel::moveTracksUpOrDown(QList<Track *> tracks,
   updateTrackLists();
 }
 
-void
-TrackModel::moveTracksUp(QList<Track *> const &tracks) {
-  moveTracksUpOrDown(tracks, true);
-}
-
-void
-TrackModel::moveTracksDown(QList<Track *> const &tracks) {
-  moveTracksUpOrDown(tracks, false);
-}
-
 }}}

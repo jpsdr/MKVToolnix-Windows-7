@@ -48,15 +48,7 @@
           <property name="childrenCollapsible">
            <bool>false</bool>
           </property>
-          <widget class="QWidget" name="">
-           <property name="geometry">
-            <rect>
-             <x>1</x>
-             <y>1</y>
-             <width>372</width>
-             <height>217</height>
-            </rect>
-           </property>
+          <widget class="QWidget" name="layoutWidget">
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
              <widget class="QLabel" name="filesLabel">
@@ -69,50 +61,99 @@
              </widget>
             </item>
             <item>
-             <widget class="mtx::gui::Util::BasicTreeView" name="files">
-              <property name="minimumSize">
-               <size>
-                <width>370</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="contextMenuPolicy">
-               <enum>Qt::ActionsContextMenu</enum>
-              </property>
-              <property name="acceptDrops">
-               <bool>true</bool>
-              </property>
-              <property name="editTriggers">
-               <set>QAbstractItemView::NoEditTriggers</set>
-              </property>
-              <property name="dragEnabled">
-               <bool>true</bool>
-              </property>
-              <property name="dragDropMode">
-               <enum>QAbstractItemView::InternalMove</enum>
-              </property>
-              <property name="defaultDropAction">
-               <enum>Qt::MoveAction</enum>
-              </property>
-              <property name="alternatingRowColors">
-               <bool>false</bool>
-              </property>
-              <property name="selectionMode">
-               <enum>QAbstractItemView::ExtendedSelection</enum>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="horizontalLayout_1">
+              <item>
+               <widget class="mtx::gui::Util::BasicTreeView" name="files">
+                <property name="minimumSize">
+                 <size>
+                  <width>370</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="contextMenuPolicy">
+                 <enum>Qt::ActionsContextMenu</enum>
+                </property>
+                <property name="acceptDrops">
+                 <bool>true</bool>
+                </property>
+                <property name="editTriggers">
+                 <set>QAbstractItemView::NoEditTriggers</set>
+                </property>
+                <property name="dragEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="dragDropMode">
+                 <enum>QAbstractItemView::InternalMove</enum>
+                </property>
+                <property name="defaultDropAction">
+                 <enum>Qt::MoveAction</enum>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>false</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="moveFilesButtons" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_1">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QPushButton" name="moveFilesUp">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../qt_resources.qrc">
+                     <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="moveFilesDown">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../qt_resources.qrc">
+                     <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_1">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="">
-           <property name="geometry">
-            <rect>
-             <x>1</x>
-             <y>229</y>
-             <width>314</width>
-             <height>219</height>
-            </rect>
-           </property>
+          <widget class="QWidget" name="layoutWidget1">
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <widget class="QLabel" name="tracksLabel">
@@ -156,7 +197,19 @@
               </item>
               <item>
                <widget class="QWidget" name="moveTracksButtons" native="true">
-                <layout class="QVBoxLayout" name="verticalLayout_1">
+                <layout class="QVBoxLayout" name="verticalLayout_13">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
                   <widget class="QPushButton" name="moveTracksUp">
                    <property name="text">
@@ -164,7 +217,7 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../qt_resources.qrc">
-                    <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
+                     <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -175,7 +228,7 @@
                    </property>
                    <property name="icon">
                     <iconset resource="../../qt_resources.qrc">
-                    <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
+                     <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -249,7 +302,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>465</width>
+                <width>425</width>
                 <height>1064</height>
                </rect>
               </property>
@@ -1376,6 +1429,8 @@
  <tabstops>
   <tabstop>mainTab</tabstop>
   <tabstop>files</tabstop>
+  <tabstop>moveFilesUp</tabstop>
+  <tabstop>moveFilesDown</tabstop>
   <tabstop>tracks</tabstop>
   <tabstop>moveTracksUp</tabstop>
   <tabstop>moveTracksDown</tabstop>

@@ -42,8 +42,7 @@ public:
   virtual void removeTracks(QSet<Track *> const &tracks);
   virtual void reDistributeAppendedTracksForFileRemoval(QSet<SourceFile *> const &filesToRemove);
 
-  virtual void moveTracksUp(QList<Track *> const &tracks);
-  virtual void moveTracksDown(QList<Track *> const &tracks);
+  virtual void moveTracksUpOrDown(QList<Track *> tracks, bool up);
 
   virtual void trackUpdated(Track *track);
 
@@ -66,7 +65,6 @@ protected:
   bool hasUnsetTrackRole(QModelIndex const &idx = QModelIndex{});
 
   void sortTracks(QList<Track *> &tracks, bool reverse = false);
-  void moveTracksUpOrDown(QList<Track *> tracks, bool up);
 };
 
 }}}

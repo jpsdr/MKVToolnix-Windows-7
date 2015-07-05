@@ -88,6 +88,8 @@ public slots:
   virtual void onFileSelectionChanged();
   virtual void onTrackSelectionChanged();
 
+  virtual void onMoveFilesUp();
+  virtual void onMoveFilesDown();
   virtual void onMoveTracksUp();
   virtual void onMoveTracksDown();
   virtual void setupMoveUpDownButtons();
@@ -210,6 +212,7 @@ protected:
   virtual QString getOpenFileName(QString const &title, QString const &filter, QLineEdit *lineEdit);
   virtual QString getSaveFileName(QString const &title, QString const &filter, QLineEdit *lineEdit);
 
+  virtual void moveSourceFilesUpOrDown(bool up);
   virtual void moveTracksUpOrDown(bool up);
 
   virtual void moveOutputFileNameToGlobal();
@@ -217,6 +220,7 @@ protected:
 
   virtual QModelIndex selectedSourceFile() const;
   virtual QList<SourceFile *> selectedSourceFiles() const;
+  virtual void selectSourceFiles(QList<SourceFile *> const &files);
   virtual QList<Track *> selectedTracks() const;
   virtual void selectTracks(QList<Track *> const &tracks);
 

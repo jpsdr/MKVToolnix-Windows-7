@@ -77,7 +77,7 @@ Tab::setupControlLists() {
 void
 Tab::setupMoveUpDownButtons() {
   auto show    = Util::Settings::get().m_mergeShowMoveUpDownButtons;
-  auto widgets = QList<QWidget *>{} << ui->moveTracksButtons;
+  auto widgets = QList<QWidget *>{} << ui->moveFilesButtons << ui->moveTracksButtons;
 
   for (auto const &widget : widgets)
     widget->setVisible(show);
@@ -161,6 +161,8 @@ Tab::setupInputControls() {
   connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     m_tracksModel,            &TrackModel::updateSelectionStatus);
   connect(ui->tracks,                   &Util::BasicTreeView::allSelectedActivated, this,                     &Tab::toggleMuxThisForSelectedTracks);
   connect(ui->tracks,                   &QTreeView::doubleClicked,                  this,                     &Tab::toggleMuxThisForSelectedTracks);
+  connect(ui->moveFilesUp,              &QPushButton::clicked,                      this,                     &Tab::onMoveFilesUp);
+  connect(ui->moveFilesDown,            &QPushButton::clicked,                      this,                     &Tab::onMoveFilesDown);
   connect(ui->moveTracksUp,             &QPushButton::clicked,                      this,                     &Tab::onMoveTracksUp);
   connect(ui->moveTracksDown,           &QPushButton::clicked,                      this,                     &Tab::onMoveTracksDown);
 
@@ -915,6 +917,8 @@ Tab::enableFilesActions() {
   m_addAdditionalPartsAction->setEnabled(1 == numSelected);
   m_removeFilesAction->setEnabled(0 < numSelected);
   m_removeAllFilesAction->setEnabled(!m_config.m_files.isEmpty());
+  ui->moveFilesUp->setEnabled(!!numSelected);
+  ui->moveFilesDown->setEnabled(!!numSelected);
 }
 
 void
@@ -1137,6 +1141,19 @@ Tab::selectTracks(QList<Track *> const &tracks) {
 }
 
 void
+Tab::selectSourceFiles(QList<SourceFile *> const &files) {
+  auto numColumns = m_filesModel->columnCount() - 1;
+  auto selection  = QItemSelection{};
+
+  for (auto const &file : files) {
+    auto idx = m_filesModel->indexFromSourceFile(file);
+    selection.select(idx.sibling(idx.row(), 0), idx.sibling(idx.row(), numColumns));
+  }
+
+  ui->files->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+}
+
+void
 Tab::enableAllTracks() {
   enableDisableAllTracks(true);
 }
@@ -1177,13 +1194,33 @@ Tab::ensureOneDefaultFlagOnly(Track *thisOneHasIt) {
 }
 
 void
+Tab::moveSourceFilesUpOrDown(bool up) {
+  auto files = selectedSourceFiles();
+
+  m_filesModel->moveSourceFilesUpOrDown(files, up);
+
+  for (auto const &file : files)
+    if (file->isRegular())
+      ui->files->setExpanded(m_filesModel->indexFromSourceFile(file), true);
+
+  selectSourceFiles(files);
+}
+
+void
+Tab::onMoveFilesUp() {
+  moveSourceFilesUpOrDown(true);
+}
+
+void
+Tab::onMoveFilesDown() {
+  moveSourceFilesUpOrDown(false);
+}
+
+void
 Tab::moveTracksUpOrDown(bool up) {
   auto tracks = selectedTracks();
 
-  if (up)
-    m_tracksModel->moveTracksUp(tracks);
-  else
-    m_tracksModel->moveTracksDown(tracks);
+  m_tracksModel->moveTracksUpOrDown(tracks, up);
 
   for (auto const &track : tracks)
     if (track->isRegular() && !track->m_appendedTo)

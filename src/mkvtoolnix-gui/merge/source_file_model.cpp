@@ -1,17 +1,18 @@
 #include "common/common_pch.h"
 
+// #include <QDebug>
+#include <QFileInfo>
+#include <QItemSelectionModel>
+#include <QMimeData>
+#include <QByteArray>
+#include <QDataStream>
+
 #include "common/sorting.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/mime_types.h"
 #include "mkvtoolnix-gui/merge/source_file_model.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/util.h"
-
-#include <QFileInfo>
-#include <QItemSelectionModel>
-#include <QMimeData>
-#include <QByteArray>
-#include <QDataStream>
 
 namespace mtx { namespace gui { namespace Merge {
 
@@ -571,6 +572,145 @@ SourceFileModel::dropSourceFiles(QMimeData const *data,
   }
 
   return false;
+}
+
+void
+SourceFileModel::sortSourceFiles(QList<SourceFile *> &files,
+                                 bool reverse) {
+  auto rows = QHash<SourceFile *, int>{};
+
+  for (auto const &file : files)
+    rows[file] = indexFromSourceFile(file).row();
+
+  auto totalNumFiles = m_sourceFiles->count();
+  for (auto const &file : *m_sourceFiles)
+    totalNumFiles += file->m_appendedFiles.count() + file->m_additionalParts.count();
+
+  std::sort(files.begin(), files.end(), [&rows](SourceFile *a, SourceFile *b) -> bool {
+    auto rowA = rows[a];
+    auto rowB = rows[b];
+
+    if ( a->isRegular() &&  b->isRegular())
+      return rowA < rowB;
+
+    if ( a->isRegular() && !b->isRegular())
+      return true;
+
+    if (!a->isRegular() &&  b->isRegular())
+      return false;
+
+    auto parentA = rows[a->m_appendedTo];
+    auto parentB = rows[b->m_appendedTo];
+
+    return (parentA < parentB)
+        || ((parentA == parentB) && (rowA < rowB));
+  });
+
+  if (reverse) {
+    std::reverse(files.begin(), files.end());
+    std::stable_partition(files.begin(), files.end(), [](SourceFile *file) { return file->isRegular(); });
+  }
+}
+
+std::pair<int, int>
+SourceFileModel::countAppendedAndAdditionalParts(QStandardItem *parentItem) {
+  auto numbers = std::make_pair(0, 0);
+
+  for (auto row = 0, numRows = parentItem->rowCount(); row < numRows; ++row) {
+    auto sourceFile = fromIndex(parentItem->child(row)->index());
+    Q_ASSERT(!!sourceFile);
+
+    if (sourceFile->isAdditionalPart())
+      ++numbers.first;
+    else
+      ++numbers.second;
+  }
+
+  return numbers;
+}
+
+void
+SourceFileModel::moveSourceFilesUpOrDown(QList<SourceFile *> files,
+                                         bool up) {
+  sortSourceFiles(files, !up);
+
+  // qDebug() << "move up?" << up << "files" << files;
+
+  auto couldNotBeMoved = QHash<SourceFile *, bool>{};
+  auto isSelected      = QHash<SourceFile *, bool>{};
+  auto const direction = up ? -1 : +1;
+  auto const topRows   = rowCount();
+
+  for (auto const &file : files) {
+    isSelected[file] = true;
+
+    if (!file->isRegular() && isSelected[file->m_appendedTo])
+      continue;
+
+    auto idx = indexFromSourceFile(file);
+    Q_ASSERT(idx.isValid());
+
+    auto targetRow = idx.row() + direction;
+    if (couldNotBeMoved[fromIndex(idx.sibling(targetRow, 0)).get()]) {
+      couldNotBeMoved[file] = true;
+      continue;
+    }
+
+    if (file->isRegular()) {
+      if (!((0 <= targetRow) && (targetRow < topRows))) {
+        couldNotBeMoved[file] = true;
+        continue;
+      }
+
+      // qDebug() << "top level: would like to move" << idx.row() << "to" << targetRow;
+
+      insertRow(targetRow, takeRow(idx.row()));
+
+      continue;
+    }
+
+    auto parentItem                   = itemFromIndex(idx.parent());
+    auto const appendedAdditionalRows = countAppendedAndAdditionalParts(parentItem);
+    auto const additionalPartsRows    = appendedAdditionalRows.first;
+    auto const appendedRows           = appendedAdditionalRows.second;
+    auto const lowerLimit             = (file->isAdditionalPart() ? 0 : additionalPartsRows);
+    auto const upperLimit             = (file->isAdditionalPart() ? 0 : appendedRows) +  additionalPartsRows;
+
+    if ((lowerLimit <= targetRow) && (targetRow < upperLimit)) {
+      // qDebug() << "appended level normal: would like to move" << idx.row() << "to" << targetRow;
+
+      parentItem->insertRow(targetRow, parentItem->takeRow(idx.row()));
+      continue;
+    }
+
+    auto parentIdx = parentItem->index();
+    Q_ASSERT(parentIdx.isValid());
+
+    auto newParentRow = parentIdx.row() + direction;
+    if ((0 > newParentRow) || (rowCount() <= newParentRow)) {
+      // qDebug() << "appended, cannot move further";
+      couldNotBeMoved[file] = true;
+      continue;
+    }
+
+    auto newParent        = fromIndex(index(newParentRow, 0));
+    auto newParentItem    = itemFromIndex(index(newParentRow, 0));
+    auto rowItems         = parentItem->takeRow(idx.row());
+    auto newParentNumbers = countAppendedAndAdditionalParts(newParentItem);
+    targetRow             = up  && file->isAdditionalPart() ? newParentNumbers.first
+                          : up                              ? newParentNumbers.first + newParentNumbers.second
+                          : !up && file->isAdditionalPart() ? 0
+                          :                                   newParentNumbers.first;
+
+    Q_ASSERT(!!newParent);
+
+    // qDebug() << "appended level cross: would like to move" << idx.row() << "from" << file->m_appendedTo << "to" << newParent.get() << "as" << targetRow;
+
+    newParentItem->insertRow(targetRow, rowItems);
+    file->m_appendedTo = newParent.get();
+  }
+
+  updateSourceFileLists();
 }
 
 }}}

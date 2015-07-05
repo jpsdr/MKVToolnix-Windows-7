@@ -40,6 +40,8 @@ public:
   virtual void removeFiles(QList<SourceFile *> const &files);
   virtual void removeFile(SourceFile *fileToBeRemoved);
 
+  virtual void moveSourceFilesUpOrDown(QList<SourceFile *> files, bool up);
+
   virtual SourceFilePtr fromIndex(QModelIndex const &idx) const;
   virtual QModelIndex indexFromSourceFile(SourceFile *sourceFile) const;
 
@@ -70,6 +72,10 @@ protected:
   QModelIndex indexFromSourceFile(quint64 value, QModelIndex const &parent) const;
 
   void sourceFileUpdated(SourceFile *sourceFile);
+
+  void sortSourceFiles(QList<SourceFile *> &files, bool reverse = false);
+
+  std::pair<int, int> countAppendedAndAdditionalParts(QStandardItem *parentItem);
 };
 
 }}}
