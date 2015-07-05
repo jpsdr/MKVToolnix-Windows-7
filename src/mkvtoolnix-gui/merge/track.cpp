@@ -240,7 +240,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
 
 void
 Track::fixAssociations(MuxConfig::Loader &l) {
-  if (isAppended()) {
+  if (isRegular() && isAppended()) {
     auto appendedToID = l.settings.value("appendedTo").toULongLong();
     if ((0 >= appendedToID) || !l.objectIDToTrack.contains(appendedToID))
       throw InvalidSettingsX{};
