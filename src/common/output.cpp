@@ -78,10 +78,10 @@ mxmsg(unsigned int level,
       g_mm_stdio->puts("\n");
     if (balg::starts_with(message, Y("Error:")))
       message.erase(0, std::string{Y("Error:")}.length());
-    g_mm_stdio->puts(g_gui_mode ? "#GUI#error " : (boost::format("%1 ") % Y("Error:")).str());
+    g_mm_stdio->puts(g_gui_mode ? "#GUI#error " : (boost::format("%1% ") % Y("Error:")).str());
 
   } else if (level == MXMSG_WARNING)
-    g_mm_stdio->puts(g_gui_mode ? "#GUI#warning " : (boost::format("%1 ") % Y("Warning:")).str());
+    g_mm_stdio->puts(g_gui_mode ? "#GUI#warning " : (boost::format("%1% ") % Y("Warning:")).str());
 
   else if (level == MXMSG_DEBUG)
     g_mm_stdio->puts(Y("Debug> "));
