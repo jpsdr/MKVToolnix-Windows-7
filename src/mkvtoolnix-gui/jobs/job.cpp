@@ -83,10 +83,10 @@ Job::addLineToInternalLogs(QString const &line,
                 :                       m_errors;
 
   auto prefix   = InfoLine    == type ? Q("")
-                : WarningLine == type ? QY("Warning: ")
-                :                       QY("Error: ");
+                : WarningLine == type ? Q("%1 ").arg(QY("Warning:"))
+                :                       Q("%1 ").arg(QY("Error:"));
 
-  m_fullOutput << Q("%1%2\n").arg(prefix).arg(line);
+  m_fullOutput << Q("%1%2").arg(prefix).arg(line);
   storage      << line;
 
   if ((WarningLine == type) || (ErrorLine == type))

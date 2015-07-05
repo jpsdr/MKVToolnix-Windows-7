@@ -277,11 +277,11 @@ mux_dialog::on_output_available(wxCommandEvent &evt) {
   if (line.Right(1) != wxT("\r"))
     log += wxT("\n");
 
-  if (line.Find(Z("Warning:")) == 0)
-    tc_warnings->AppendText(line + wxT("\n"));
+  if (line.Find(wxT("#GUI#warning")) == 0)
+    tc_warnings->AppendText(Z("Warning:") + wxT(" ") + line.Mid(13) + wxT("\n"));
 
-  else if (line.Find(Z("Error:")) == 0)
-    tc_errors->AppendText(line + wxT("\n"));
+  else if (line.Find(wxT("#GUI#error")) == 0)
+    tc_errors->AppendText(Z("Error:") + wxT(" ") + line.Mid(11) + wxT("\n"));
 
   else if (line.Find(wxT("#GUI#begin_scanning_playlists")) == 0)
     m_scanning_playlists = true;

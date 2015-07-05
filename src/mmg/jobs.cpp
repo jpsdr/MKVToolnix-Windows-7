@@ -270,7 +270,14 @@ job_run_dialog::process_input() {
           if ((value >= 0) && (value <= 100))
             set_progress_value(value);
         }
-      } else if (wx_line.Length() > 0)
+
+      } else if (wx_line.Find(wxT("#GUI#warning")) == 0)
+        *jobs[jobs_to_start[current_job]].log += Z("Warning:") + wxT(" ") + wx_line.Mid(11) + wxT("\n");
+
+      else if (wx_line.Find(wxT("#GUI#error")) == 0)
+        *jobs[jobs_to_start[current_job]].log += Z("Error:") + wxT(" ") + wx_line.Mid(13) + wxT("\n");
+
+      else if (wx_line.Length() > 0)
         *jobs[jobs_to_start[current_job]].log += wx_line + wxT("\n");
       line = "";
     } else if ((unsigned char)c != 0xff)

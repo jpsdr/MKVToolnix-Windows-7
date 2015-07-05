@@ -177,8 +177,12 @@ Tab::onLineRead(QString const &line,
                 : Jobs::Job::WarningLine == type ? ui->warnings
                 :                                  ui->errors;
 
+  auto prefix   = Jobs::Job::InfoLine    == type ? Q("")
+                : Jobs::Job::WarningLine == type ? Q("%1 ").arg(QY("Warning:"))
+                :                                  Q("%1 ").arg(QY("Error:"));
+
+  m_fullOutput << Q("%1%2").arg(prefix).arg(line);
   storage->appendPlainText(line);
-  m_fullOutput << line;
 
   if (mtx::included_in(type, Jobs::Job::WarningLine, Jobs::Job::ErrorLine))
     ui->acknowledgeWarningsAndErrorsButton->setEnabled(true);

@@ -78,15 +78,14 @@ MuxJob::processLine(QString const &rawLine) {
 
   line.replace(QRegularExpression{"[\r\n]+"}, "");
 
-  // TODO: MuxJob::processLine
-  if (line.startsWith("Warning:")) {
-    line.replace(QRegularExpression{"^Warning: *"}, "");
+  if (line.startsWith("#GUI#warning ")) {
+    line.replace(QRegularExpression{"^#GUI#warning *"}, "");
     emit lineRead(line, WarningLine);
     return;
   }
 
-  if (line.startsWith("Error:")) {
-    line.replace(QRegularExpression{"^Error: *"}, "");
+  if (line.startsWith("#GUI#error ")) {
+    line.replace(QRegularExpression{"^#GUI#error *"}, "");
     emit lineRead(line, ErrorLine);
     return;
   }
