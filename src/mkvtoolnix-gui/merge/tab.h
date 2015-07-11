@@ -42,7 +42,8 @@ protected:
   bool m_currentlySettingInputControlValues;
 
   QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
-  QMenu *m_filesMenu, *m_tracksMenu, *m_attachmentsMenu;
+  QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction;
+  QMenu *m_filesMenu, *m_tracksMenu, *m_attachmentsMenu, *m_selectTracksOfTypeMenu;
 
   // "Attachments" tab:
   AttachmentModel *m_attachmentsModel;
@@ -81,6 +82,9 @@ public slots:
   virtual void onShowCommandLine();
 
   virtual void selectAllTracks();
+  virtual void selectAllVideoTracks();
+  virtual void selectAllAudioTracks();
+  virtual void selectAllSubtitlesTracks();
   virtual void enableAllTracks();
   virtual void disableAllTracks();
 
@@ -232,6 +236,7 @@ protected:
 
   virtual QList<Track *> selectedTracks() const;
   virtual void selectTracks(QList<Track *> const &tracks);
+  virtual void selectAllTracksOfType(boost::optional<Track::Type> type);
 
   virtual QList<Attachment *> selectedAttachments() const;
   virtual void selectAttachments(QList<Attachment *> const &attachments);

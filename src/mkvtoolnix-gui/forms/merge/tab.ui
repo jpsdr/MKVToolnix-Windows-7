@@ -71,7 +71,7 @@
                  </size>
                 </property>
                 <property name="contextMenuPolicy">
-                 <enum>Qt::ActionsContextMenu</enum>
+                 <enum>Qt::CustomContextMenu</enum>
                 </property>
                 <property name="acceptDrops">
                  <bool>true</bool>
@@ -170,7 +170,7 @@
               <item>
                <widget class="mtx::gui::Util::BasicTreeView" name="tracks">
                 <property name="contextMenuPolicy">
-                 <enum>Qt::ActionsContextMenu</enum>
+                 <enum>Qt::CustomContextMenu</enum>
                 </property>
                 <property name="acceptDrops">
                  <bool>true</bool>
@@ -1233,7 +1233,7 @@
          <item>
           <widget class="mtx::gui::Util::BasicTreeView" name="attachments">
            <property name="contextMenuPolicy">
-            <enum>Qt::ActionsContextMenu</enum>
+            <enum>Qt::CustomContextMenu</enum>
            </property>
            <property name="acceptDrops">
             <bool>true</bool>
@@ -1462,6 +1462,16 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>mtx::gui::Util::LanguageComboBox</class>
+   <extends>QComboBox</extends>
+   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::CharacterSetComboBox</class>
+   <extends>QComboBox</extends>
+   <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
+  </customwidget>
+  <customwidget>
    <class>mtx::gui::Util::BasicTreeView</class>
    <extends>QTreeView</extends>
    <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
@@ -1471,16 +1481,6 @@
    <extends>QWidget</extends>
    <header>mkvtoolnix-gui/util/files_drag_drop_widget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>mtx::gui::Util::LanguageComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
-  </customwidget>
-  <customwidget>
-   <class>mtx::gui::Util::CharacterSetComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

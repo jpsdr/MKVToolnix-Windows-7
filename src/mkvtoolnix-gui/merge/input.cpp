@@ -150,8 +150,13 @@ Tab::setupInputControls() {
 
   // "tracks" context menu
   m_tracksMenu->addAction(m_selectAllTracksAction);
+  m_tracksMenu->addMenu(m_selectTracksOfTypeMenu);
   m_tracksMenu->addAction(m_enableAllTracksAction);
   m_tracksMenu->addAction(m_disableAllTracksAction);
+
+  m_selectTracksOfTypeMenu->addAction(m_selectAllVideoTracksAction);
+  m_selectTracksOfTypeMenu->addAction(m_selectAllAudioTracksAction);
+  m_selectTracksOfTypeMenu->addAction(m_selectAllSubtitlesTracksAction);
 
   // Connect signals & slots.
   auto mw = MainWindow::get();
@@ -180,6 +185,9 @@ Tab::setupInputControls() {
   connect(m_removeAllFilesAction,           &QAction::triggered,                              this,                     &Tab::onRemoveAllFiles);
 
   connect(m_selectAllTracksAction,          &QAction::triggered,                              this,                     &Tab::selectAllTracks);
+  connect(m_selectAllVideoTracksAction,     &QAction::triggered,                              this,                     &Tab::selectAllVideoTracks);
+  connect(m_selectAllAudioTracksAction,     &QAction::triggered,                              this,                     &Tab::selectAllAudioTracks);
+  connect(m_selectAllSubtitlesTracksAction, &QAction::triggered,                              this,                     &Tab::selectAllSubtitlesTracks);
   connect(m_enableAllTracksAction,          &QAction::triggered,                              this,                     &Tab::enableAllTracks);
   connect(m_disableAllTracksAction,         &QAction::triggered,                              this,                     &Tab::disableAllTracks);
 
@@ -923,8 +931,13 @@ Tab::enableTracksActions() {
   bool hasTracks = !!m_tracksModel->rowCount();
 
   m_selectAllTracksAction->setEnabled(hasTracks);
+  m_selectTracksOfTypeMenu->setEnabled(hasTracks);
   m_enableAllTracksAction->setEnabled(hasTracks);
   m_disableAllTracksAction->setEnabled(hasTracks);
+
+  m_selectAllVideoTracksAction->setEnabled(hasTracks);
+  m_selectAllAudioTracksAction->setEnabled(hasTracks);
+  m_selectAllSubtitlesTracksAction->setEnabled(hasTracks);
 }
 
 void
@@ -942,8 +955,13 @@ Tab::retranslateInputUI() {
   m_removeAllFilesAction->setText(QY("Remove a&ll files"));
 
   m_selectAllTracksAction->setText(QY("&Select all tracks"));
+  m_selectTracksOfTypeMenu->setTitle(QY("Select all tracks of specific &type"));
   m_enableAllTracksAction->setText(QY("&Enable all tracks"));
   m_disableAllTracksAction->setText(QY("&Disable all tracks"));
+
+  m_selectAllVideoTracksAction->setText(QY("&Video"));
+  m_selectAllAudioTracksAction->setText(QY("&Audio"));
+  m_selectAllSubtitlesTracksAction->setText(QY("&Subtitles"));
 
   for (auto &comboBox : m_comboBoxControls)
     if (comboBox->count() && !comboBox->itemData(0).isValid())
@@ -1110,26 +1128,54 @@ Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames) {
 }
 
 void
-Tab::selectAllTracks() {
+Tab::selectAllTracksOfType(boost::optional<Track::Type> type) {
   auto numRows = m_tracksModel->rowCount();
   if (!numRows)
     return;
 
   auto numColumns = m_tracksModel->columnCount() - 1;
-  auto selection  = QItemSelection{m_tracksModel->index(0, 0), m_tracksModel->index(numRows - 1, numColumns - 1)};
+  auto selection  = QItemSelection{};
 
   for (auto row = 0; row < numRows; ++row) {
     auto &track      = *m_config.m_tracks[row];
     auto numAppended = track.m_appendedTracks.count();
 
+    if (!type || (track.m_type == *type))
+      selection.select(m_tracksModel->index(row, 0), m_tracksModel->index(row, numColumns - 1));
+
     if (!numAppended)
       continue;
 
     auto rowIdx = m_tracksModel->index(row, 0);
-    selection.select(m_tracksModel->index(0, 0, rowIdx), m_tracksModel->index(numAppended - 1, numColumns - 1, rowIdx));
+
+    for (auto appendedRow = 0; appendedRow < numAppended; ++appendedRow) {
+      auto &appendedTrack = *track.m_appendedTracks[appendedRow];
+      if (!type || (appendedTrack.m_type == *type))
+        selection.select(m_tracksModel->index(appendedRow, 0, rowIdx), m_tracksModel->index(appendedRow, numColumns - 1, rowIdx));
+    }
   }
 
   ui->tracks->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+}
+
+void
+Tab::selectAllTracks() {
+  selectAllTracksOfType({});
+}
+
+void
+Tab::selectAllVideoTracks() {
+  selectAllTracksOfType(Track::Video);
+}
+
+void
+Tab::selectAllAudioTracks() {
+  selectAllTracksOfType(Track::Audio);
+}
+
+void
+Tab::selectAllSubtitlesTracks() {
+  selectAllTracksOfType(Track::Subtitles);
 }
 
 void
