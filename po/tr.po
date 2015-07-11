@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.1.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-07-01 16:02+0200\n"
-"PO-Revision-Date: 2015-07-07 10:17+0200\n"
+"PO-Revision-Date: 2015-07-11 12:43+0200\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
 "Language: tr\n"
@@ -697,9 +697,9 @@ msgstr ""
 "                           eşitle.\n"
 "                           'o/p': Doğrusal sürüklemeleri sabitlemek için 'o/"
 "p'\n"
-"                           ile çarparak zaman kodlarını ayarlar. Eğer dahil\n"
-"                           edilirse 'p' varsayılanı 1'dir. Her iki 'o' ve "
-"'p'\n"
+"                           ile çarparak zaman kodlarını ayarlar. Eğer "
+"atlandıysa\n"
+"                           'p' varsayılanı 1'dir. Her iki 'o' ve 'p'\n"
 "                           kayan noktalı sayılar olabilir.\n"
 
 #: src/merge/mkvmerge.cpp:150
@@ -2617,7 +2617,7 @@ msgstr "Öncesine yeni &yayın ekle"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:138
 msgid "Add new ed&ition after"
-msgstr "Sonrasına yen&i yayını ekle"
+msgstr "Sonrasına yen&i yayın ekle"
 
 #: src/propedit/propedit_cli_parser.cpp:207
 msgid ""
@@ -3878,7 +3878,7 @@ msgid ""
 "and end timecodes"
 msgstr ""
 "Alt bölümlerin başlangıç ve bitiş za&man kodlarını onların esas başlangıç ve "
-"bitiş zaman kodlarına daraltır"
+"bitiş zaman kodlarına daralt"
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:36
 msgid "Container"
@@ -4530,7 +4530,7 @@ msgstr "Blok Gruplarının yerine Basit Blokların kullanımı etkisizleştirir.
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Disables lacing for all tracks."
-msgstr ""
+msgstr "Tüm izler için bağlamayı etkisizleştirir."
 
 #: src/mmg/cli_options_dlg.cpp:107
 msgid ""
@@ -4696,6 +4696,8 @@ msgid ""
 "E&xpand chapter's start and end timecodes to include the minimum/maximum "
 "timecodes of all their sub-chapters"
 msgstr ""
+"Bölümün başlangıç ​​ve bitiş zaman kodlarını, tüm alt bölümlerinin en az/en "
+"fazla zaman kodlarını dahil etmek için &genişlet"
 
 #: src/info/mkvinfo.cpp:1523
 msgid "EBML head"
@@ -5051,8 +5053,8 @@ msgid ""
 msgstr ""
 "Beklenen zaman biçimi: HH:MM:SS.nnn (HH = saat, MM = dakika, SS = saniye, "
 "nnn = millisaniye; nanosaniye'ye kadar. Nanosaniye hassasiyeti anlamına "
-"gelen 'n' için dokuz rakama kadar kullanabilirsiniz). Saati de dahil "
-"edebilirsiniz. Bunun yerine '%1%' bulundu. İlave hata iletisi: %2%"
+"gelen 'n' için dokuz rakama kadar kullanabilirsiniz). Saati de "
+"atlayabilirsiniz. Bunun yerine '%1%' bulun. İlave hata iletisi: %2%"
 
 #: src/extract/extract_cli_parser.cpp:97
 msgid ""
@@ -5565,11 +5567,11 @@ msgstr "Genel iz seçenekleri"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
 msgid "Generate sub-chapters"
-msgstr "Alt bölümleri oluştur"
+msgstr "Alt bölümleri oluşturma"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
 msgid "Generating a number of chapters spaced evenly apart"
-msgstr ""
+msgstr "Birtakım bölümü ayrı eşit miktarda aralıklı oluşturma"
 
 #: src/mmg/mmg_dialog.cpp:330
 msgid "Global"
@@ -5993,6 +5995,9 @@ msgid ""
 "automatically put into the 'delay' input field for any audio track found in "
 "the file."
 msgstr ""
+"Eğer 'DELAY' kelimesinin ardında bir sayı içeriyorsa, o zaman dosya içinde "
+"bulunan herhangi bir ses izi için bu sayı otomatik olarak 'gecikme' girdi "
+"alanı içine koyulur."
 
 #: src/mmg/options/output.cpp:47
 msgid ""
@@ -7691,6 +7696,9 @@ msgid ""
 "Note that even if the option is disabled mkvmerge will copy a source file's "
 "title property unless a title is manually set by the user."
 msgstr ""
+"Seçenek etkisizleştirilse bile bir başlık el ile kullanıcı tarafından "
+"ayarlanmadığı sürece mkvmerge'ün bir kaynak dosyasının başlık özelliğini "
+"kopyalayacağını unutmayın."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:239
 #: src/mkvtoolnix-gui/merge/input.cpp:245
@@ -7719,6 +7727,8 @@ msgid ""
 "Note that the language »Undetermined (und)« is assumed for tracks for which "
 "no language is known (e.g. those read from SRT subtitle files)."
 msgstr ""
+"»Undetermined (und)« dilinin, bilinen hiçbir dili olmayan izler için kabul "
+"edildiğini unutmayın (örn. onlar SRT altyazı dosyalarından okunur)."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:255
 msgid "Note that the video content is not modified by this option."
@@ -7864,6 +7874,8 @@ msgstr "Sadece ilkine"
 msgid ""
 "Only tracks with a language in this list will be set to be muxed by default."
 msgstr ""
+"Sadece bu listede bir dili olan izler varsayılan olarak çoklanması için "
+"ayarlanacaktır."
 
 #: src/input/r_vobsub.cpp:106
 msgid ""
@@ -9184,11 +9196,11 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:184
 msgid "Set the chapter names's &languages:"
-msgstr "Bölüm adlarının &dillerini ayarla:"
+msgstr "Bölüm adlarının &dillerini şuna ayarla:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:185
 msgid "Set the chapter names's co&untries"
-msgstr "Bölüm adlarının ü&lkelerini ayarla"
+msgstr "Bölüm adlarının ü&lkelerini şuna ayarla:"
 
 #: src/mmg/options/mmg.cpp:53
 msgid "Set the delay input field from the file name"
@@ -9248,7 +9260,7 @@ msgid ""
 "pixels on the four sides during playback."
 msgstr ""
 "Oynatıcıya oynatma sırasında dört kenardaki belirli piksel sayısını "
-"çıkarmasını söyleyen kırpma parametrelerini ayarlar."
+"atlamasını söyleyen kırpma parametrelerini ayarlar."
 
 #: src/mmg/tabs/input_format.cpp:270
 msgid ""
@@ -9361,6 +9373,7 @@ msgstr "mkvmerge'ün oluşturduğu bütün çıktıyı denetleyen birkaç seçen
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:183
 msgid "Shift start and end ti&mecodes by the following amount:"
 msgstr ""
+"Şurada belirtilen miktarda başlangıç ​ve bitiş za&man kodlarını değiştir:"
 
 #: src/input/r_real.cpp:557
 #, boost-format
@@ -10429,12 +10442,12 @@ msgid ""
 "'nnnnnnnnn'. If given then you may use up to nine digits after the decimal "
 "point. Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds)."
 msgstr ""
-"Yeni bir çıktı dosyası başladıktan sonraki süre. Süre ya HH:MM:SS.nnnnnnnnn "
-"formunda verilebilir ya da 's' ile takip eden saniye sayısı olarak "
-"verilebilir. Saat sayısını 'HH' ve nanosaniye sayısını 'nnnnnnnnn' dahil "
-"edebilirsiniz. Eğer verilmişse o zaman ondalık noktasından sonra dokuz "
-"rakama kadar kullanabilirsiniz. Örnekler: 01:00:00 (bir saatten sonra) veya "
-"1800s (1800 saniyeden sonra)."
+"Yeni bir çıktı dosyası başlatıldıktan sonraki süre. Süre ya HH:MM:SS."
+"nnnnnnnnn biçiminde ya da saniye sayısının ardında 's' olarak verilebilir. "
+"Saat sayısını 'HH' ve nanosaniye sayısını 'nnnnnnnnn' atlayabilirsiniz. Eğer "
+"verilmişse o zaman ondalık noktasından sonra dokuz rakama kadar "
+"kullanabilirsiniz. Örnekler: 01:00:00 (bir saatten sonra) veya 1800s (1800 "
+"saniyeden sonra)."
 
 #: src/propedit/options.cpp:237
 #, boost-format
@@ -10802,6 +10815,8 @@ msgid ""
 "The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by "
 "one of the units 's', 'ms' or 'us'."
 msgstr ""
+"Biçim ya 'HH:MM:SS.nnnnnnnnn' biçimindedir ya da 's', 'ms' veya 'us' "
+"birimlerinden birinin ardından geldiği bir sayıdır."
 
 #: src/mmg/tabs/global.cpp:631 src/mmg/tabs/global.cpp:653
 msgid "The format of the split argument is invalid."
@@ -10933,6 +10948,8 @@ msgid ""
 "The language selected here is used for tracks for which their source file "
 "contains no such property."
 msgstr ""
+"Burada seçilen dil, kaynak dosyası böyle bir özellik içermeyen izler için "
+"kullanılır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:193
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:194
@@ -11509,13 +11526,13 @@ msgid ""
 "one hour and after one hour and thirty minutes) or 1800s,3000s,00:10:00 "
 "(after three, five and ten minutes)."
 msgstr ""
-"Yeni bir çıktı dosyası başladıktan sonraki zaman kodları. Zaman kodları "
+"Yeni bir çıktı dosyası başlatıldıktan sonraki zaman kodları. Zaman kodları "
 "bütün akışı işaret eder ve her bireysel çıktı dosyasını değil. Zaman kodları "
-"ya HH:MM:SS.nnnnnnnnn formunda verilebilir ya da 's' ile takip eden saniye "
-"sayısı olarak verilebilir. Saat sayısını 'HH' dahil edebilirsiniz. "
-"Nanosaniye sayısı 'nnnnnnnnn' için dokuz rakama kadar belirtebilirsiniz ya "
-"da hiç belirtmezsiniz. Eğer verilmişse o zaman ondalık noktasından sonra "
-"dokuz rakama kadar kullanabilirsiniz. Eğer iki veya daha fazla zaman kodları "
+"ya HH:MM:SS.nnnnnnnnn biçiminde ya da saniye sayısının ardında 's' olarak "
+"verilebilir. Saat sayısını 'HH' atlayabilirsiniz. Nanosaniye sayısı "
+"'nnnnnnnnn' için dokuz rakama kadar belirtebilirsiniz ya da hiç "
+"belirtmezsiniz. Eğer verilmişse o zaman ondalık noktasından sonra dokuz "
+"rakama kadar kullanabilirsiniz. Eğer iki veya daha fazla zaman kodları "
 "kullanılırsa sonrasında onları virgül ile ayırmak zorundasınız. Biçimler de "
 "karıştırılabilir. Örnekler: 01:00:00,01:30:00 (bir saatten sonra ve bir "
 "saatten sonra ve otuz dakika) veya 1800s,3000s,00:10:00 (üç, beş ve on "
@@ -11526,6 +11543,8 @@ msgid ""
 "The timecodes can be given either in the form HH:MM:SS.nnnnnnnnn or as the "
 "number of seconds followed by 's'."
 msgstr ""
+"Zaman kodları ya HH:MM:SS.nnnnnnnnn biçiminde ya da saniye sayısının ardında "
+"'s' olarak verilebilir."
 
 #: src/input/r_ogm.cpp:575
 msgid ""
@@ -12392,6 +12411,8 @@ msgstr "İz türü: %1%"
 msgid ""
 "Tracks with a language in this list will be set not to be muxed by default."
 msgstr ""
+"Bu listede bir dili olan izler varsayılan olarak çoklanmaması için "
+"ayarlanacaktır."
 
 #: src/extract/xtr_base.cpp:121
 msgid ""
@@ -12956,12 +12977,17 @@ msgid ""
 "followed by a number then this number is automatically put into the 'delay' "
 "input field for any audio track found in the file."
 msgstr ""
+"Bir dosya eklendiğinde adı taranır. Eğer 'DELAY' kelimesinin ardında bir "
+"sayı içeriyorsa, o zaman dosya içinde bulunan herhangi bir ses izi için bu "
+"sayı otomatik olarak 'gecikme' girdi alanı içine koyulur."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:182
 msgid ""
 "When adding source files all tracks are normally set to be muxed into the "
 "output file."
 msgstr ""
+"Kaynak dosyalar eklenirken, tüm izler normalde çıktı dosyası içine "
+"çoklanması için ayarlanır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:124
 msgid ""
@@ -12977,6 +13003,8 @@ msgid ""
 "When the user adds such a file the track's language input is set to the "
 "language property from the source file."
 msgstr ""
+"Kullanıcı böyle bir dosya eklediğinde, izin dil girdisi kaynak dosyadan "
+"gelen dil özelliğine ayarlanır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:163
 msgid ""
@@ -13128,6 +13156,8 @@ msgid ""
 "You can exempt certain track types from this restriction by checking the "
 "corresponding check box below, e.g. for video tracks."
 msgstr ""
+"Belli iz türlerini aşağıdaki ilgili onay kutusunu işaretleyerek bu "
+"kısıtlamadan hariç tutabilirsiniz, örn. görüntü izleri için."
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:184
 msgid "You can let the header editor add the element to the file."
@@ -13150,6 +13180,8 @@ msgid ""
 "You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' "
 "or none at all."
 msgstr ""
+"Nanosaniye sayısı 'nnnnnnnnn' için dokuz rakama kadar belirtebilirsiniz ya "
+"da hiç belirtmezsiniz."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:107
 msgid ""
@@ -13173,12 +13205,12 @@ msgid ""
 "5minutes and 23seconds earlier than now."
 msgstr ""
 "Seçilen bölümün zaman kodlarını ve sabit miktara göre tüm\n"
-"alttakileri ayarlamak için bu işlevi kullanabilirsiniz. Miktar artı veya "
+"altındakilerini ayarlamak için bu işlevi kullanabilirsiniz. Miktar artı veya "
 "eksi\n"
 "olabilir. Kullanılan biçim ya saniye sayısı olarak yorumlanır ki bu durumda\n"
-"sadece sayı olabilir, sırasıyla milisaniye ve saniye için 'ms' veya 's' "
-"gibi\n"
-"birimle takip edebilir ya da alışılmış HH:MM:SS.mmm veya HH:MM:SS biçimine\n"
+"sadece sayı olabilir, saniye sayısının ardından sırasıyla milisaniye ve "
+"saniye için 'ms' veya 's' gibi\n"
+"birimler gelebilir ya da alışılmış HH:MM:SS.mmm veya HH:MM:SS biçimine\n"
 "sahip olabilir. Örnek: -00:05:23 tüm bölümlerin şu andan 5 dakika ve 23 "
 "saniye\n"
 "önce başlamasına izin verecektir."
@@ -13215,10 +13247,11 @@ msgid ""
 "You may omit the number of hours 'HH' and the number of nanoseconds "
 "'nnnnnnnnn'."
 msgstr ""
+"Saat sayısını 'HH' ve nanosaniye sayısını 'nnnnnnnnn' atlayabilirsiniz."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:281
 msgid "You may omit the number of hours 'HH'."
-msgstr ""
+msgstr "Saat sayısını 'HH' atlayabilirsiniz."
 
 #: src/common/compression/zlib.cpp:51 src/common/compression/zlib.cpp:88
 #, boost-format
@@ -14245,7 +14278,7 @@ msgstr "hata yok"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:48
 msgid "no errors yet"
-msgstr "henüz hata yok"
+msgstr "henüz hatalar yok"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:954
 msgid "no extra compression"
