@@ -37,6 +37,8 @@ Tab::setupAttachmentsControls() {
   connect(m_removeAttachmentsAction,         &QAction::triggered,                      this, &Tab::onRemoveAttachments);
   connect(ui->moveAttachmentsUp,             &QPushButton::clicked,                    this, &Tab::onMoveAttachmentsUp);
   connect(ui->moveAttachmentsDown,           &QPushButton::clicked,                    this, &Tab::onMoveAttachmentsDown);
+  connect(ui->attachments,                   &Util::BasicTreeView::ctrlUpPressed,      this, &Tab::onMoveAttachmentsUp);
+  connect(ui->attachments,                   &Util::BasicTreeView::ctrlDownPressed,    this, &Tab::onMoveAttachmentsDown);
 
   onAttachmentSelectionChanged();
 }

@@ -155,12 +155,16 @@ Tab::setupInputControls() {
   auto mw = MainWindow::get();
   connect(ui->files,                    &Util::BasicTreeView::filesDropped,         this,                     &Tab::addOrAppendDroppedFiles);
   connect(ui->files,                    &Util::BasicTreeView::deletePressed,        this,                     &Tab::onRemoveFiles);
+  connect(ui->files,                    &Util::BasicTreeView::ctrlUpPressed,        this,                     &Tab::onMoveFilesUp);
+  connect(ui->files,                    &Util::BasicTreeView::ctrlDownPressed,      this,                     &Tab::onMoveFilesDown);
   connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     this,                     &Tab::onFileSelectionChanged);
   connect(ui->files->selectionModel(),  &QItemSelectionModel::selectionChanged,     m_filesModel,             &SourceFileModel::updateSelectionStatus);
   connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     this,                     &Tab::onTrackSelectionChanged);
   connect(ui->tracks->selectionModel(), &QItemSelectionModel::selectionChanged,     m_tracksModel,            &TrackModel::updateSelectionStatus);
   connect(ui->tracks,                   &Util::BasicTreeView::allSelectedActivated, this,                     &Tab::toggleMuxThisForSelectedTracks);
   connect(ui->tracks,                   &QTreeView::doubleClicked,                  this,                     &Tab::toggleMuxThisForSelectedTracks);
+  connect(ui->tracks,                   &Util::BasicTreeView::ctrlUpPressed,        this,                     &Tab::onMoveTracksUp);
+  connect(ui->tracks,                   &Util::BasicTreeView::ctrlDownPressed,      this,                     &Tab::onMoveTracksDown);
   connect(ui->moveFilesUp,              &QPushButton::clicked,                      this,                     &Tab::onMoveFilesUp);
   connect(ui->moveFilesDown,            &QPushButton::clicked,                      this,                     &Tab::onMoveFilesDown);
   connect(ui->moveTracksUp,             &QPushButton::clicked,                      this,                     &Tab::onMoveTracksUp);

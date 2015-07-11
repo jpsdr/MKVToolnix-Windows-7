@@ -80,6 +80,14 @@ BasicTreeView::keyPressEvent(QKeyEvent *event) {
              && mtx::included_in(static_cast<Qt::Key>(event->key()), Qt::Key_Backspace, Qt::Key_Delete))
     emit deletePressed();
 
+  else if (   (event->modifiers() == Qt::ControlModifier)
+           && (event->key()       == Qt::Key_Up))
+    emit ctrlUpPressed();
+
+  else if (   (event->modifiers() == Qt::ControlModifier)
+           && (event->key()       == Qt::Key_Down))
+    emit ctrlDownPressed();
+
   else
     QTreeView::keyPressEvent(event);
 }

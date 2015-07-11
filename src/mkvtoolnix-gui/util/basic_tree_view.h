@@ -32,6 +32,8 @@ signals:
   void filesDropped(QStringList const &fileNames);
   void allSelectedActivated();
   void deletePressed();
+  void ctrlUpPressed();
+  void ctrlDownPressed();
 
 protected:
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
