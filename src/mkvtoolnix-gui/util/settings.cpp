@@ -64,7 +64,6 @@ Settings::load() {
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
   m_mergeAlwaysAddDroppedFiles         = reg.value("mergeAlwaysAddDroppedFiles", true).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls", true).toBool();
-  m_mergeShowMoveUpDownButtons         = reg.value("mergeShowMoveUpDownButtons", false).toBool();
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
   m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
@@ -84,6 +83,7 @@ Settings::load() {
   m_disableAnimations                  = reg.value("disableAnimations", false).toBool();
   m_warnBeforeClosingModifiedTabs      = reg.value("warnBeforeClosingModifiedTabs", true).toBool();
   m_warnBeforeAbortingJobs             = reg.value("warnBeforeAbortingJobs", true).toBool();
+  m_showMoveUpDownButtons              = reg.value("showMoveUpDownButtons", false).toBool();
 
   m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM>")).toString();
   m_dropLastChapterFromBlurayPlaylist  = reg.value("dropLastChapterFromBlurayPlaylist", true).toBool();
@@ -166,7 +166,6 @@ Settings::save()
   reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
   reg.setValue("mergeAlwaysAddDroppedFiles",         m_mergeAlwaysAddDroppedFiles);
   reg.setValue("mergeAlwaysShowOutputFileControls",  m_mergeAlwaysShowOutputFileControls);
-  reg.setValue("mergeShowMoveUpDownButtons",         m_mergeShowMoveUpDownButtons);
 
   reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("relativeOutputDir",                  m_relativeOutputDir.path());
@@ -186,6 +185,7 @@ Settings::save()
   reg.setValue("disableAnimations",                  m_disableAnimations);
   reg.setValue("warnBeforeClosingModifiedTabs",      m_warnBeforeClosingModifiedTabs);
   reg.setValue("warnBeforeAbortingJobs",             m_warnBeforeAbortingJobs);
+  reg.setValue("showMoveUpDownButtons",              m_showMoveUpDownButtons);
 
   reg.setValue("chapterNameTemplate",                m_chapterNameTemplate);
   reg.setValue("dropLastChapterFromBlurayPlaylist",  m_dropLastChapterFromBlurayPlaylist);

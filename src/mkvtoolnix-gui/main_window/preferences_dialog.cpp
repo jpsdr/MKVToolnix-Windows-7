@@ -29,6 +29,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);
   ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
+  ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
   setupOnlineCheck();
   setupInterfaceLanguage();
 
@@ -94,6 +95,11 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("If checked the program will ask for confirmation before aborting a running job."))
                    .arg(QY("This happens when clicking the »abort« button in a »job output« tab and when quitting the application.")));
+
+  Util::setToolTip(ui->cbGuiShowMoveUpDownButtons,
+                   Q("%1 %2")
+                   .arg(QY("Normally selected entries in list view can be moved around via drag & drop and with keyboard shortcuts (Ctrl+Up, Ctrl+Down)."))
+                   .arg(QY("If checked additional buttons for moving selected entries up and down will be shown next to several list views.")));
 
   Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
   ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
@@ -342,6 +348,7 @@ PreferencesDialog::save() {
   m_cfg.m_disableAnimations                  = ui->cbGuiDisableAnimations->isChecked();
   m_cfg.m_warnBeforeClosingModifiedTabs      = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
   m_cfg.m_warnBeforeAbortingJobs             = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
+  m_cfg.m_showMoveUpDownButtons              = ui->cbGuiShowMoveUpDownButtons->isChecked();
   m_cfg.m_useDefaultJobDescription           = ui->cbGuiUseDefaultJobDescription->isChecked();
   m_cfg.m_showOutputOfAllJobs                = ui->cbGuiShowOutputOfAllJobs->isChecked();
   auto idx                                   = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
