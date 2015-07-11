@@ -150,4 +150,39 @@ AttachmentModel::flags(QModelIndex const &index)
   return index.isValid() ? defaultFlags | Qt::ItemIsDragEnabled : defaultFlags | Qt::ItemIsDropEnabled;
 }
 
+void
+AttachmentModel::moveAttachmentsUpOrDown(QList<Attachment *> attachments,
+                                         bool up) {
+  auto attachmentRowMap = QHash<Attachment *, int>{};
+  for (auto const &attachment : attachments)
+    attachmentRowMap[attachment] = rowForAttachment(*attachment);
+
+  std::sort(attachments.begin(), attachments.end(), [&attachmentRowMap](Attachment *a, Attachment *b) { return attachmentRowMap[a] < attachmentRowMap[b]; });
+
+  if (!up)
+    std::reverse(attachments.begin(), attachments.end());
+
+  auto couldNotBeMoved = QHash<Attachment *, bool>{};
+  auto isSelected      = QHash<Attachment *, bool>{};
+  auto const direction = up ? -1 : +1;
+  auto const numRows   = rowCount();
+
+  for (auto const &attachment : attachments) {
+    isSelected[attachment] = true;
+
+    auto currentRow = rowForAttachment(*attachment);
+    Q_ASSERT(0 <= currentRow);
+
+    auto targetRow = currentRow + direction;
+
+    if (   (0       >  targetRow)
+        || (numRows <= targetRow)
+        || couldNotBeMoved[attachmentForRow(targetRow).get()])
+      couldNotBeMoved[attachment] = true;
+
+    else
+      insertRow(targetRow, takeRow(currentRow));
+  }
+}
+
 }}}

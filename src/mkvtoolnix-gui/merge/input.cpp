@@ -77,7 +77,7 @@ Tab::setupControlLists() {
 void
 Tab::setupMoveUpDownButtons() {
   auto show    = Util::Settings::get().m_mergeShowMoveUpDownButtons;
-  auto widgets = QList<QWidget *>{} << ui->moveFilesButtons << ui->moveTracksButtons;
+  auto widgets = QList<QWidget *>{} << ui->moveFilesButtons << ui->moveTracksButtons << ui->moveAttachmentsButtons;
 
   for (auto const &widget : widgets)
     widget->setVisible(show);

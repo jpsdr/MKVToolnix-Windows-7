@@ -92,6 +92,8 @@ public slots:
   virtual void onMoveFilesDown();
   virtual void onMoveTracksUp();
   virtual void onMoveTracksDown();
+  virtual void onMoveAttachmentsUp();
+  virtual void onMoveAttachmentsDown();
   virtual void setupMoveUpDownButtons();
 
   virtual void onTrackNameEdited(QString newValue);
@@ -214,6 +216,7 @@ protected:
 
   virtual void moveSourceFilesUpOrDown(bool up);
   virtual void moveTracksUpOrDown(bool up);
+  virtual void moveAttachmentsUpOrDown(bool up);
 
   virtual void moveOutputFileNameToGlobal();
   virtual void moveOutputFileNameToOutputTab();
@@ -221,8 +224,12 @@ protected:
   virtual QModelIndex selectedSourceFile() const;
   virtual QList<SourceFile *> selectedSourceFiles() const;
   virtual void selectSourceFiles(QList<SourceFile *> const &files);
+
   virtual QList<Track *> selectedTracks() const;
   virtual void selectTracks(QList<Track *> const &tracks);
+
+  virtual QList<Attachment *> selectedAttachments() const;
+  virtual void selectAttachments(QList<Attachment *> const &attachments);
 
   virtual void addToJobQueue(bool startNow);
 

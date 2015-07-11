@@ -31,10 +31,12 @@ Tab::setupAttachmentsControls() {
   ui->attachmentStyle   ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   // Signals & slots
-  connect(ui->attachmentsTab,                &Util::FilesDragDropWidget::filesDropped,                                 this, &Tab::addAttachments);
-  connect(ui->attachments->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this, SLOT(onAttachmentSelectionChanged()));
-  connect(m_addAttachmentsAction,            SIGNAL(triggered()),                                                      this, SLOT(onAddAttachments()));
-  connect(m_removeAttachmentsAction,         SIGNAL(triggered()),                                                      this, SLOT(onRemoveAttachments()));
+  connect(ui->attachmentsTab,                &Util::FilesDragDropWidget::filesDropped, this, &Tab::addAttachments);
+  connect(ui->attachments->selectionModel(), &QItemSelectionModel::selectionChanged,   this, &Tab::onAttachmentSelectionChanged);
+  connect(m_addAttachmentsAction,            &QAction::triggered,                      this, &Tab::onAddAttachments);
+  connect(m_removeAttachmentsAction,         &QAction::triggered,                      this, &Tab::onRemoveAttachments);
+  connect(ui->moveAttachmentsUp,             &QPushButton::clicked,                    this, &Tab::onMoveAttachmentsUp);
+  connect(ui->moveAttachmentsDown,           &QPushButton::clicked,                    this, &Tab::onMoveAttachmentsDown);
 
   onAttachmentSelectionChanged();
 }
@@ -55,6 +57,32 @@ Tab::withSelectedAttachments(std::function<void(Attachment *)> code) {
       m_attachmentsModel->attachmentUpdated(*attachment);
     }
   }
+}
+
+QList<Attachment *>
+Tab::selectedAttachments()
+  const {
+  auto attachments = QList<Attachment *>{};
+  Util::withSelectedIndexes(ui->attachments, [&attachments, this](QModelIndex const &idx) {
+    auto attachment = m_attachmentsModel->attachmentForRow(idx.row());
+    if (attachment)
+      attachments << attachment.get();
+  });
+
+  return attachments;
+}
+
+void
+Tab::selectAttachments(QList<Attachment *> const &attachments) {
+  auto numColumns = m_attachmentsModel->columnCount() - 1;
+  auto selection  = QItemSelection{};
+
+  for (auto const &attachment : attachments) {
+    auto row = m_attachmentsModel->rowForAttachment(*attachment);
+    selection.select(m_attachmentsModel->index(row, 0), m_attachmentsModel->index(row, numColumns));
+  }
+
+  ui->attachments->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
 void
@@ -134,6 +162,10 @@ void
 Tab::onAttachmentSelectionChanged() {
   auto selection = ui->attachments->selectionModel()->selection();
   auto numRows   = Util::numSelectedRows(selection);
+
+  ui->moveAttachmentsUp->setEnabled(!!numRows);
+  ui->moveAttachmentsDown->setEnabled(!!numRows);
+
   if (!numRows) {
     enableAttachmentControls(false);
     return;
@@ -212,6 +244,25 @@ Tab::retranslateAttachmentsUI() {
 void
 Tab::setupAttachmentsToolTips() {
   Util::setToolTip(ui->attachments, QY("Right-click to add and remove attachments"));
+}
+
+void
+Tab::moveAttachmentsUpOrDown(bool up) {
+  auto attachments = selectedAttachments();
+
+  m_attachmentsModel->moveAttachmentsUpOrDown(attachments, up);
+
+  selectAttachments(attachments);
+}
+
+void
+Tab::onMoveAttachmentsUp() {
+  moveAttachmentsUpOrDown(true);
+}
+
+void
+Tab::onMoveAttachmentsDown() {
+  moveAttachmentsUpOrDown(false);
 }
 
 }}}

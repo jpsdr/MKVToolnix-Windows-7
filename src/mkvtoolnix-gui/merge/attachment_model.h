@@ -51,6 +51,8 @@ public:
   virtual Qt::DropActions supportedDropActions() const override;
   virtual Qt::ItemFlags flags(QModelIndex const &index) const override;
 
+  virtual void moveAttachmentsUpOrDown(QList<Attachment *> attachments, bool up);
+
 protected:
   QList<QStandardItem *> createRowItems(AttachmentPtr const &attachment) const;
   void setRowData(QList<QStandardItem *> const &items, Attachment const &attachment);
