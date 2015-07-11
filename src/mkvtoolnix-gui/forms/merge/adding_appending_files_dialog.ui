@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>485</width>
-    <height>276</height>
+    <height>303</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,6 +45,13 @@
     <widget class="QRadioButton" name="rbAdd">
      <property name="text">
       <string>Add as new input fi&amp;les</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="rbAlwaysAdd">
+     <property name="text">
+      <string>Alwa&amp;ys add as new input files and don't ask again</string>
      </property>
     </widget>
    </item>
@@ -123,6 +130,7 @@
  </widget>
  <tabstops>
   <tabstop>rbAdd</tabstop>
+  <tabstop>rbAlwaysAdd</tabstop>
   <tabstop>rbAppend</tabstop>
   <tabstop>rbAddAdditionalParts</tabstop>
   <tabstop>rbAddToNew</tabstop>
@@ -153,8 +161,8 @@
    <slot>selectionChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>41</x>
-     <y>103</y>
+     <x>47</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
      <x>38</x>
@@ -169,8 +177,8 @@
    <slot>selectionChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>117</x>
-     <y>126</y>
+     <x>123</x>
+     <y>162</y>
     </hint>
     <hint type="destinationlabel">
      <x>105</x>
@@ -207,6 +215,38 @@
     <hint type="destinationlabel">
      <x>236</x>
      <y>268</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbAddToNew</sender>
+   <signal>clicked()</signal>
+   <receiver>mtx::gui::Merge::AddingAppendingFilesDialog</receiver>
+   <slot>selectionChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>184</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbAlwaysAdd</sender>
+   <signal>clicked()</signal>
+   <receiver>mtx::gui::Merge::AddingAppendingFilesDialog</receiver>
+   <slot>selectionChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>203</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>173</x>
+     <y>285</y>
     </hint>
    </hints>
   </connection>

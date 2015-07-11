@@ -1074,7 +1074,9 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
 
 void
 Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
-  if (m_config.m_files.isEmpty() || Util::Settings::get().m_mergeAlwaysAddDroppedFiles) {
+  auto &settings = Util::Settings::get();
+
+  if (m_config.m_files.isEmpty() || settings.m_mergeAlwaysAddDroppedFiles) {
     addOrAppendFiles(false, fileNames, {});
     return;
   }
@@ -1092,8 +1094,14 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
   else if (AddingAppendingFilesDialog::Decision::AddToNew == decision)
     MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames);
 
-  else
+  else {
+    if (AddingAppendingFilesDialog::Decision::AlwaysAdd == decision) {
+      settings.m_mergeAlwaysAddDroppedFiles = true;
+      settings.save();
+    }
+
     addOrAppendFiles(AddingAppendingFilesDialog::Decision::Append == decision, fileNames, fileIdx);
+  }
 }
 
 void

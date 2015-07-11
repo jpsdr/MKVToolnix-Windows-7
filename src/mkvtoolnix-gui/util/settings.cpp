@@ -62,7 +62,7 @@ Settings::load() {
   m_autoSetFileTitle                   = reg.value("autoSetFileTitle",          true).toBool();
   m_clearMergeSettings                 = static_cast<ClearMergeSettingsAction>(reg.value("clearMergeSettings", static_cast<int>(ClearMergeSettingsAction::None)).toInt());
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
-  m_mergeAlwaysAddDroppedFiles         = reg.value("mergeAlwaysAddDroppedFiles", true).toBool();
+  m_mergeAlwaysAddDroppedFiles         = reg.value("mergeAlwaysAddDroppedFiles", false).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls", true).toBool();
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();

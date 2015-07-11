@@ -18,6 +18,7 @@ class AddingAppendingFilesDialog : public QDialog {
 public:
   enum class Decision {
     Add,
+    AlwaysAdd,
     Append,
     AddAdditionalParts,
     AddToNew,
