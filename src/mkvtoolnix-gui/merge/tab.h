@@ -42,6 +42,7 @@ protected:
   bool m_currentlySettingInputControlValues;
 
   QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
+  QMenu *m_filesMenu, *m_tracksMenu, *m_attachmentsMenu;
 
   // "Attachments" tab:
   AttachmentModel *m_attachmentsModel;
@@ -85,7 +86,6 @@ public slots:
 
   virtual void toggleMuxThisForSelectedTracks();
 
-  virtual void onFileSelectionChanged();
   virtual void onTrackSelectionChanged();
 
   virtual void onMoveFilesUp();
@@ -134,6 +134,10 @@ public slots:
   virtual void addOrAppendDroppedFiles(QStringList const &fileNames);
   virtual void addOrAppendDroppedFilesDelayed();
   virtual void addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames);
+
+  virtual void showFilesContextMenu(QPoint const &pos);
+  virtual void showTracksContextMenu(QPoint const &pos);
+  virtual void showAttachmentsContextMenu(QPoint const &pos);
 
   // Output tab:
   virtual void setupOutputFileControls();
@@ -201,6 +205,7 @@ protected:
   virtual void setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files);
   virtual void enableFilesActions();
   virtual void enableTracksActions();
+  virtual void enableAttachmentsActions();
   virtual void enableAttachmentControls(bool enable);
   virtual void setInputControlValues(Track *track);
   virtual void setOutputControlValues();

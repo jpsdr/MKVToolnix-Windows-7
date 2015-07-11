@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QFileDialog>
+#include <QMenu>
 
 #include "common/extern_data.h"
 #include "common/qt.h"
@@ -24,21 +25,22 @@ Tab::setupAttachmentsControls() {
     ui->attachmentMIMEType->addItem(to_qs(mime_type.name), to_qs(mime_type.name));
 
   // Context menu
-  ui->attachments->addAction(m_addAttachmentsAction);
-  ui->attachments->addAction(m_removeAttachmentsAction);
+  m_attachmentsMenu->addAction(m_addAttachmentsAction);
+  m_attachmentsMenu->addAction(m_removeAttachmentsAction);
 
   ui->attachmentMIMEType->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   ui->attachmentStyle   ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   // Signals & slots
-  connect(ui->attachmentsTab,                &Util::FilesDragDropWidget::filesDropped, this, &Tab::addAttachments);
-  connect(ui->attachments->selectionModel(), &QItemSelectionModel::selectionChanged,   this, &Tab::onAttachmentSelectionChanged);
-  connect(m_addAttachmentsAction,            &QAction::triggered,                      this, &Tab::onAddAttachments);
-  connect(m_removeAttachmentsAction,         &QAction::triggered,                      this, &Tab::onRemoveAttachments);
-  connect(ui->moveAttachmentsUp,             &QPushButton::clicked,                    this, &Tab::onMoveAttachmentsUp);
-  connect(ui->moveAttachmentsDown,           &QPushButton::clicked,                    this, &Tab::onMoveAttachmentsDown);
-  connect(ui->attachments,                   &Util::BasicTreeView::ctrlUpPressed,      this, &Tab::onMoveAttachmentsUp);
-  connect(ui->attachments,                   &Util::BasicTreeView::ctrlDownPressed,    this, &Tab::onMoveAttachmentsDown);
+  connect(ui->attachmentsTab,                &Util::FilesDragDropWidget::filesDropped,         this, &Tab::addAttachments);
+  connect(ui->attachments->selectionModel(), &QItemSelectionModel::selectionChanged,           this, &Tab::onAttachmentSelectionChanged);
+  connect(m_addAttachmentsAction,            &QAction::triggered,                              this, &Tab::onAddAttachments);
+  connect(m_removeAttachmentsAction,         &QAction::triggered,                              this, &Tab::onRemoveAttachments);
+  connect(ui->moveAttachmentsUp,             &QPushButton::clicked,                            this, &Tab::onMoveAttachmentsUp);
+  connect(ui->moveAttachmentsDown,           &QPushButton::clicked,                            this, &Tab::onMoveAttachmentsDown);
+  connect(ui->attachments,                   &Util::BasicTreeView::ctrlUpPressed,              this, &Tab::onMoveAttachmentsUp);
+  connect(ui->attachments,                   &Util::BasicTreeView::ctrlDownPressed,            this, &Tab::onMoveAttachmentsDown);
+  connect(ui->attachments,                   &Util::BasicTreeView::customContextMenuRequested, this, &Tab::showAttachmentsContextMenu);
 
   onAttachmentSelectionChanged();
 }
@@ -197,8 +199,13 @@ Tab::enableAttachmentControls(bool enable) {
                                          ui->attachmentMIMEType, ui->attachmentMIMETypeLabel, ui->attachmentStyle,       ui->attachmentStyleLabel,};
   for (auto &control : controls)
     control->setEnabled(enable);
+}
 
-  m_removeAttachmentsAction->setEnabled(enable);
+void
+Tab::enableAttachmentsActions() {
+  auto hasSelection = !ui->attachments->selectionModel()->selection().isEmpty();
+
+  m_removeAttachmentsAction->setEnabled(hasSelection);
 }
 
 void
@@ -265,6 +272,12 @@ Tab::onMoveAttachmentsUp() {
 void
 Tab::onMoveAttachmentsDown() {
   moveAttachmentsUpOrDown(false);
+}
+
+void
+Tab::showAttachmentsContextMenu(QPoint const &pos) {
+  enableAttachmentsActions();
+  m_attachmentsMenu->exec(ui->attachments->viewport()->mapToGlobal(pos));
 }
 
 }}}

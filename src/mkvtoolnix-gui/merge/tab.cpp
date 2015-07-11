@@ -43,6 +43,9 @@ Tab::Tab(QWidget *parent)
   , m_selectAllTracksAction{new QAction{this}}
   , m_enableAllTracksAction{new QAction{this}}
   , m_disableAllTracksAction{new QAction{this}}
+  , m_filesMenu{new QMenu{this}}
+  , m_tracksMenu{new QMenu{this}}
+  , m_attachmentsMenu{new QMenu{this}}
   , m_attachmentsModel{new AttachmentModel{this}}
   , m_addAttachmentsAction{new QAction{this}}
   , m_removeAttachmentsAction{new QAction{this}}
@@ -229,7 +232,6 @@ Tab::setControlValuesFromConfig() {
   resizeTracksColumnsToContents();
   resizeAttachmentsColumnsToContents();
 
-  onFileSelectionChanged();
   onTrackSelectionChanged();
   setOutputControlValues();
   onAttachmentSelectionChanged();
