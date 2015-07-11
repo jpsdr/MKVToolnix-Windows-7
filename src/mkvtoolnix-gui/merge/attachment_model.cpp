@@ -80,7 +80,7 @@ AttachmentModel::removeSelectedAttachments(QItemSelection const &selection) {
   auto sortedRowsToRemove = rowsToRemove.toList();
   std::sort(sortedRowsToRemove.begin(), sortedRowsToRemove.end(), std::greater<int>());
 
-  for (auto row : rowsToRemove)
+  for (auto row : sortedRowsToRemove)
     removeRow(row);
 }
 
