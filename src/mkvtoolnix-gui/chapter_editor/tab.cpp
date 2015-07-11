@@ -230,6 +230,8 @@ Tab::loadFromMatroskaFile() {
     emit removeThisTab();
   }
 
+  m_analyzer->close_file();
+
   return { std::static_pointer_cast<KaxChapters>(chapters), true };
 }
 
