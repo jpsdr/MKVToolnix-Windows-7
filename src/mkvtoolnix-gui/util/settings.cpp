@@ -8,6 +8,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
+#include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
@@ -44,6 +45,10 @@ void
 Settings::load() {
   auto regPtr = registry();
   auto &reg   = *regPtr;
+
+  reg.beginGroup("info");
+  auto guiVersion                      = reg.value("guiVersion").toString();
+  reg.endGroup();
 
   reg.beginGroup("settings");
   m_priority                           = static_cast<ProcessPriority>(reg.value("priority", static_cast<int>(NormalPriority)).toInt());
@@ -103,7 +108,8 @@ Settings::load() {
   m_defaultTrackLanguage               = reg.value("defaultTrackLanguage", Q("und")).toString();
   m_defaultChapterLanguage             = reg.value("defaultChapterLanguage", Q("und")).toString();
   m_defaultChapterCountry              = reg.value("defaultChapterCountry").toString();
-  m_defaultSubtitleCharset             = reg.value("defaultSubtitleCharset").toString();
+  auto subtitleCharset                 = reg.value("defaultSubtitleCharset").toString();
+  m_defaultSubtitleCharset             = guiVersion.isEmpty() && (subtitleCharset == Q("ISO-8859-15")) ? Q("") : subtitleCharset; // Fix for a bug in versions prior to 8.2.0.
   m_defaultAdditionalMergeOptions      = reg.value("defaultAdditionalMergeOptions").toString();
   reg.endGroup();               // defaults
 
@@ -147,6 +153,10 @@ Settings::save()
   const {
   auto regPtr = registry();
   auto &reg   = *regPtr;
+
+  reg.beginGroup("info");
+  reg.setValue("guiVersion",                         Q(get_current_version().to_string()));
+  reg.endGroup();
 
   reg.beginGroup("settings");
   reg.setValue("priority",                           static_cast<int>(m_priority));
