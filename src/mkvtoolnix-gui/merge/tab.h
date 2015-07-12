@@ -99,6 +99,7 @@ public slots:
   virtual void onMoveAttachmentsUp();
   virtual void onMoveAttachmentsDown();
   virtual void setupMoveUpDownButtons();
+  virtual void enableMoveFilesButtons();
 
   virtual void onTrackNameEdited(QString newValue);
   virtual void onTrackItemChanged(QStandardItem *item);

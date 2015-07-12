@@ -165,6 +165,7 @@ Tab::setupInputControls() {
   connect(ui->files,                        &Util::BasicTreeView::ctrlUpPressed,              this,                     &Tab::onMoveFilesUp);
   connect(ui->files,                        &Util::BasicTreeView::ctrlDownPressed,            this,                     &Tab::onMoveFilesDown);
   connect(ui->files,                        &Util::BasicTreeView::customContextMenuRequested, this,                     &Tab::showFilesContextMenu);
+  connect(ui->files->selectionModel(),      &QItemSelectionModel::selectionChanged,           this,                     &Tab::enableMoveFilesButtons);
   connect(ui->files->selectionModel(),      &QItemSelectionModel::selectionChanged,           m_filesModel,             &SourceFileModel::updateSelectionStatus);
   connect(ui->tracks->selectionModel(),     &QItemSelectionModel::selectionChanged,           this,                     &Tab::onTrackSelectionChanged);
   connect(ui->tracks->selectionModel(),     &QItemSelectionModel::selectionChanged,           m_tracksModel,            &TrackModel::updateSelectionStatus);
@@ -201,6 +202,7 @@ Tab::setupInputControls() {
   connect(mw,                               &MainWindow::preferencesChanged,                  ui->subtitleCharacterSet, &Util::ComboBoxBase::reInitialize);
   connect(mw,                               &MainWindow::preferencesChanged,                  ui->chapterCharacterSet,  &Util::ComboBoxBase::reInitialize);
 
+  enableMoveFilesButtons();
   onTrackSelectionChanged();
 }
 
@@ -911,6 +913,14 @@ Tab::resizeTracksColumnsToContents()
 }
 
 void
+Tab::enableMoveFilesButtons() {
+  auto hasSelected = !ui->files->selectionModel()->selection().isEmpty();
+
+  ui->moveFilesUp->setEnabled(hasSelected);
+  ui->moveFilesDown->setEnabled(hasSelected);
+}
+
+void
 Tab::enableFilesActions() {
   int numSelected      = ui->files->selectionModel()->selection().size();
   bool hasRegularTrack = false;
@@ -922,8 +932,6 @@ Tab::enableFilesActions() {
   m_addAdditionalPartsAction->setEnabled(1 == numSelected);
   m_removeFilesAction->setEnabled(0 < numSelected);
   m_removeAllFilesAction->setEnabled(!m_config.m_files.isEmpty());
-  ui->moveFilesUp->setEnabled(!!numSelected);
-  ui->moveFilesDown->setEnabled(!!numSelected);
 }
 
 void
