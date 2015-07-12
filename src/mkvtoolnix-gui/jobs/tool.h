@@ -26,8 +26,8 @@ protected:
 
   Model *m_model;
 
-  QAction *m_startAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeSelectedWarningsErrorsAction;
-  QMenu *m_jobQueueMenu;
+  QAction *m_startAutomaticallyAction, *m_startManuallyAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeSelectedWarningsErrorsAction;
+  QMenu *m_jobQueueMenu, *m_jobsMenu;
 
 public:
   explicit Tool(QWidget *parent, QMenu *jobQueueMenu);
@@ -40,7 +40,8 @@ public:
   virtual void retranslateUi() override;
 
 public slots:
-  void onStart();
+  void onStartAutomatically();
+  void onStartManually();
   void onStartAllPending();
   void onViewOutput();
   void onRemove();

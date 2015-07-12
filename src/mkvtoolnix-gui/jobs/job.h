@@ -65,6 +65,7 @@ public:
   virtual QString displayableDescription() const = 0;
 
   void setPendingAuto();
+  void setPendingManual();
 
   void saveJob(QSettings &settings) const;
 

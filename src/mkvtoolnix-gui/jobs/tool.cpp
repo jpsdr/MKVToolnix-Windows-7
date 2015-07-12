@@ -25,13 +25,15 @@ Tool::Tool(QWidget *parent,
   : ToolBase{parent}
   , ui{new Ui::Tool}
   , m_model{new Model{this}}
-  , m_startAction{new QAction{this}}
+  , m_startAutomaticallyAction{new QAction{this}}
+  , m_startManuallyAction{new QAction{this}}
   , m_viewOutputAction{new QAction{this}}
   , m_removeAction{new QAction{this}}
   , m_acknowledgeSelectedWarningsAction{new QAction{this}}
   , m_acknowledgeSelectedErrorsAction{new QAction{this}}
   , m_acknowledgeSelectedWarningsErrorsAction{new QAction{this}}
   , m_jobQueueMenu{jobQueueMenu}
+  , m_jobsMenu{new QMenu{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -64,6 +66,17 @@ Tool::setupUiControls() {
 
   ui->jobs->setModel(m_model);
 
+  m_jobsMenu->addAction(m_viewOutputAction);
+  m_jobsMenu->addSeparator();
+  m_jobsMenu->addAction(m_startAutomaticallyAction);
+  m_jobsMenu->addAction(m_startManuallyAction);
+  m_jobsMenu->addSeparator();
+  m_jobsMenu->addAction(m_removeAction);
+  m_jobsMenu->addSeparator();
+  m_jobsMenu->addAction(m_acknowledgeSelectedWarningsAction);
+  m_jobsMenu->addAction(m_acknowledgeSelectedErrorsAction);
+  m_jobsMenu->addAction(m_acknowledgeSelectedWarningsErrorsAction);
+
   connect(m_jobQueueMenu,                                   &QMenu::aboutToShow,       this,    &Tool::onJobQueueMenu);
 
   connect(mwUi->actionJobQueueStartAllPending,              &QAction::triggered,       this,    &Tool::onStartAllPending);
@@ -77,7 +90,8 @@ Tool::setupUiControls() {
   connect(mwUi->actionJobQueueAcknowledgeAllWarningsErrors, &QAction::triggered,       m_model, &Model::acknowledgeAllWarnings);
   connect(mwUi->actionJobQueueAcknowledgeAllWarningsErrors, &QAction::triggered,       m_model, &Model::acknowledgeAllErrors);
 
-  connect(m_startAction,                                    &QAction::triggered,       this,    &Tool::onStart);
+  connect(m_startAutomaticallyAction,                       &QAction::triggered,       this,    &Tool::onStartAutomatically);
+  connect(m_startManuallyAction,                            &QAction::triggered,       this,    &Tool::onStartManually);
   connect(m_viewOutputAction,                               &QAction::triggered,       this,    &Tool::onViewOutput);
   connect(m_removeAction,                                   &QAction::triggered,       this,    &Tool::onRemove);
   connect(m_acknowledgeSelectedWarningsAction,              &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
@@ -116,7 +130,8 @@ Tool::onContextMenu(QPoint pos) {
 
   m_model->withSelectedJobs(ui->jobs, [&hasSelection](Job &) { hasSelection = true; });
 
-  m_startAction->setEnabled(hasSelection);
+  m_startAutomaticallyAction->setEnabled(hasSelection);
+  m_startManuallyAction->setEnabled(hasSelection);
   m_viewOutputAction->setEnabled(hasSelection);
   m_removeAction->setEnabled(hasSelection);
 
@@ -124,27 +139,19 @@ Tool::onContextMenu(QPoint pos) {
   m_acknowledgeSelectedErrorsAction->setEnabled(hasSelection);
   m_acknowledgeSelectedWarningsErrorsAction->setEnabled(hasSelection);
 
-  QMenu menu{this};
-
-  menu.addSeparator();
-  menu.addAction(m_viewOutputAction);
-  menu.addSeparator();
-  menu.addAction(m_startAction);
-  menu.addSeparator();
-  menu.addAction(m_removeAction);
-  menu.addSeparator();
-  menu.addAction(m_acknowledgeSelectedWarningsAction);
-  menu.addAction(m_acknowledgeSelectedErrorsAction);
-  menu.addAction(m_acknowledgeSelectedWarningsErrorsAction);
-
-  menu.exec(ui->jobs->viewport()->mapToGlobal(pos));
+  m_jobsMenu->exec(ui->jobs->viewport()->mapToGlobal(pos));
 }
 
 void
-Tool::onStart() {
+Tool::onStartAutomatically() {
   m_model->withSelectedJobs(ui->jobs, [](Job &job) { job.setPendingAuto(); });
 
   m_model->startNextAutoJob();
+}
+
+void
+Tool::onStartManually() {
+  m_model->withSelectedJobs(ui->jobs, [](Job &job) { job.setPendingManual(); });
 }
 
 void
@@ -227,7 +234,8 @@ Tool::retranslateUi() {
   m_model->retranslateUi();
 
   m_viewOutputAction->setText(QY("&View output"));
-  m_startAction->setText(QY("&Start jobs automatically"));
+  m_startAutomaticallyAction->setText(QY("&Start jobs automatically"));
+  m_startManuallyAction->setText(QY("Start jobs &manually"));
   m_removeAction->setText(QY("&Remove jobs"));
 
   m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge warnings"));

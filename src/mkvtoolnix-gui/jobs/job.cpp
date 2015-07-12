@@ -76,6 +76,14 @@ Job::setPendingAuto() {
 }
 
 void
+Job::setPendingManual() {
+  QMutexLocker locked{&m_mutex};
+
+  if ((PendingManual != m_status) && (Running != m_status))
+    setStatus(PendingManual);
+}
+
+void
 Job::addLineToInternalLogs(QString const &line,
                            LineType type) {
   auto &storage = InfoLine    == type ? m_output
