@@ -7,6 +7,7 @@
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
@@ -80,6 +81,9 @@ Tool::setupUiControls() {
   connect(m_jobQueueMenu,                                   &QMenu::aboutToShow,       this,    &Tool::onJobQueueMenu);
 
   connect(mwUi->actionJobQueueStartAllPending,              &QAction::triggered,       this,    &Tool::onStartAllPending);
+
+  connect(mwUi->actionJobQueueStopAfterCurrentJob,          &QAction::triggered,       this,    &Tool::onStopQueueAfterCurrentJob);
+  connect(mwUi->actionJobQueueStopImmediately,              &QAction::triggered,       this,    &Tool::onStopQueueImmediately);
 
   connect(mwUi->actionJobQueueRemoveDone,                   &QAction::triggered,       this,    &Tool::onRemoveDone);
   connect(mwUi->actionJobQueueRemoveDoneOk,                 &QAction::triggered,       this,    &Tool::onRemoveDoneOk);
@@ -217,6 +221,16 @@ Tool::onRemoveAll() {
 }
 
 void
+Tool::onStopQueueAfterCurrentJob() {
+  stopQueue(false);
+}
+
+void
+Tool::onStopQueueImmediately() {
+  stopQueue(true);
+}
+
+void
 Tool::resizeColumnsToContents()
   const {
   Util::resizeViewColumnsToContents(ui->jobs);
@@ -278,6 +292,36 @@ Tool::acknowledgeWarningsAndErrors(uint64_t id) {
   m_model->withJob(id, [](Job &job) {
     job.acknowledgeWarnings();
     job.acknowledgeErrors();
+  });
+}
+
+void
+Tool::stopQueue(bool immediately) {
+  auto askBeforeAborting   = Util::Settings::get().m_warnBeforeAbortingJobs;
+  auto askedBeforeAborting = false;
+
+  m_model->withAllJobs([](Job &job) {
+    job.action([&job]() {
+      if (job.m_status == Job::PendingAuto)
+        job.setPendingManual();
+    });
+  });
+
+  if (!immediately)
+    return;
+
+  m_model->withAllJobs([this, askBeforeAborting, &askedBeforeAborting](Job &job) {
+    job.action([this, &job, askBeforeAborting, &askedBeforeAborting]() {
+      if (job.m_status != Job::Running)
+        return;
+
+      if (   !askBeforeAborting
+          ||  askedBeforeAborting
+          || (Util::MessageBox::question(this, QY("Abort running jobs"), QY("Do you really want to abort the currently running?")) == QMessageBox::Yes))
+        job.abort();
+
+      askedBeforeAborting = true;
+    });
   });
 }
 

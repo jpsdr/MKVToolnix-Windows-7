@@ -43,6 +43,8 @@ public slots:
   void onStartAutomatically();
   void onStartManually();
   void onStartAllPending();
+  void onStopQueueAfterCurrentJob();
+  void onStopQueueImmediately();
   void onViewOutput();
   void onRemove();
   void onRemoveDone();
@@ -63,6 +65,8 @@ public slots:
 protected:
   void setupUiControls();
   void setupToolTips();
+
+  void stopQueue(bool immediately);
 };
 
 }}}

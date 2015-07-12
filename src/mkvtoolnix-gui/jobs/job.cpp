@@ -27,6 +27,13 @@ Job::~Job() {
 }
 
 void
+Job::action(std::function<void()> code) {
+  QMutexLocker locked{&m_mutex};
+
+  code();
+}
+
+void
 Job::setStatus(Status status) {
   QMutexLocker locked{&m_mutex};
 

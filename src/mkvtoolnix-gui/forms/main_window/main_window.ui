@@ -129,7 +129,16 @@
     <property name="title">
      <string>&amp;Job queue</string>
     </property>
+    <widget class="QMenu" name="menuStopJobQueue">
+     <property name="title">
+      <string>S&amp;top job queue</string>
+     </property>
+     <addaction name="actionJobQueueStopAfterCurrentJob"/>
+     <addaction name="actionJobQueueStopImmediately"/>
+    </widget>
     <addaction name="actionJobQueueStartAllPending"/>
+    <addaction name="separator"/>
+    <addaction name="menuStopJobQueue"/>
     <addaction name="separator"/>
     <addaction name="actionJobQueueRemoveDoneOk"/>
     <addaction name="actionJobQueueRemoveDone"/>
@@ -575,6 +584,16 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionJobQueueStopAfterCurrentJob">
+   <property name="text">
+    <string>Stop &amp;after the current job finishes</string>
+   </property>
+  </action>
+  <action name="actionJobQueueStopImmediately">
+   <property name="text">
+    <string>Abort current job and stop &amp;immediantely</string>
    </property>
   </action>
  </widget>
