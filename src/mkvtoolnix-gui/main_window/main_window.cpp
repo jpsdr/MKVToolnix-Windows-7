@@ -46,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent)
 
   // Setup UI controls.
   ui->setupUi(this);
+  setToolSelectorVisibility();
+
   m_movingPixmapOverlay = std::make_unique<Util::MovingPixmapOverlay>(centralWidget());
 
   m_statusBarProgress = new StatusBarProgressWidget{this};
@@ -112,10 +114,12 @@ MainWindow::setupMenu() {
   ui->actionGUICheckForUpdates->setVisible(false);
 #endif  // HAVE_CURL_EASY_H
 
-  connect(ui->actionHelpFAQ,                   &QAction::triggered, this, &MainWindow::visitHelpURL);
-  connect(ui->actionHelpKnownProblems,         &QAction::triggered, this, &MainWindow::visitHelpURL);
-  connect(ui->actionHelpMkvmergeDocumentation, &QAction::triggered, this, &MainWindow::visitHelpURL);
-  connect(ui->actionHelpWebSite,               &QAction::triggered, this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpFAQ,                   &QAction::triggered,             this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpKnownProblems,         &QAction::triggered,             this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpMkvmergeDocumentation, &QAction::triggered,             this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpWebSite,               &QAction::triggered,             this, &MainWindow::visitHelpURL);
+
+  connect(this,                                &MainWindow::preferencesChanged, this, &MainWindow::setToolSelectorVisibility);
 }
 
 void
@@ -440,6 +444,11 @@ void
 MainWindow::showEvent(QShowEvent *event) {
   emit windowShown();
   event->accept();
+}
+
+void
+MainWindow::setToolSelectorVisibility() {
+  ui->tool->tabBar()->setVisible(Util::Settings::get().m_showToolSelector);
 }
 
 }}

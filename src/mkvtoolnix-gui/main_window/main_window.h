@@ -87,6 +87,7 @@ public slots:
   virtual void toolChanged(int index);
   virtual void editPreferences();
   virtual void visitHelpURL();
+  virtual void setToolSelectorVisibility();
 
 #if defined(HAVE_CURL_EASY_H)
   virtual void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t release);

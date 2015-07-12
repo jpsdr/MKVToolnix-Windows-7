@@ -532,6 +532,9 @@ FancyTabWidget::setBackgroundBrush(QBrush const &brush) {
 
 void
 FancyTabWidget::paintEvent(QPaintEvent *) {
+  if (!tabBar()->isVisible())
+    return;
+
   QPainter painter(this);
 
   QRect rect = m_selectionWidget->rect().adjusted(0, 0, 1, 0);
