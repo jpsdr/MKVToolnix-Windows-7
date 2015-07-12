@@ -317,7 +317,7 @@ Tool::stopQueue(bool immediately) {
 
       if (   !askBeforeAborting
           ||  askedBeforeAborting
-          || (Util::MessageBox::question(this, QY("Abort running jobs"), QY("Do you really want to abort the currently running?")) == QMessageBox::Yes))
+          || (Util::MessageBox::question(this, QY("Abort running jobs"), QY("Do you really want to abort the currently running job?")) == QMessageBox::Yes))
         job.abort();
 
       askedBeforeAborting = true;
