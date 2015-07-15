@@ -41,6 +41,7 @@ protected:
   void setupConnections();
 
   void setupInterfaceLanguage();
+  void setupTabPositions();
   void setupOnlineCheck();
   void setupJobRemovalPolicy();
   void setupCommonLanguages();

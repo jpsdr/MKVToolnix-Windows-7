@@ -49,6 +49,7 @@ public slots:
   virtual void closeCurrentTab();
   virtual void saveCurrentTabOutput();
   virtual void enableMenuActions();
+  virtual void setupTabPositions();
 };
 
 }}}

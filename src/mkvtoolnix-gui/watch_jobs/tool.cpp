@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/forms/watch_jobs/tool.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
@@ -23,12 +24,16 @@ Tool::Tool(QWidget *parent,
   // Setup UI controls.
   ui->setupUi(this);
 
+  setupTabPositions();
+
+  auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionJobOutputSave,  &QAction::triggered,            this, &Tool::saveCurrentTabOutput);
-  connect(mwUi->actionJobOutputClose, &QAction::triggered,            this, &Tool::closeCurrentTab);
-  connect(ui->widgets,                &QTabWidget::tabCloseRequested, this, &Tool::closeTab);
-  connect(ui->widgets,                &QTabWidget::currentChanged,    this, &Tool::enableMenuActions);
+  connect(mwUi->actionJobOutputSave,  &QAction::triggered,             this, &Tool::saveCurrentTabOutput);
+  connect(mwUi->actionJobOutputClose, &QAction::triggered,             this, &Tool::closeCurrentTab);
+  connect(ui->widgets,                &QTabWidget::tabCloseRequested,  this, &Tool::closeTab);
+  connect(ui->widgets,                &QTabWidget::currentChanged,     this, &Tool::enableMenuActions);
+  connect(mw,                         &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
 
   m_currentJobTab = new Tab{ui->widgets};
   ui->widgets->insertTab(0, m_currentJobTab, Q(""));
@@ -125,6 +130,11 @@ Tool::enableMenuActions() {
 
   mwUi->actionJobOutputSave->setEnabled(currentTab()->isSaveOutputEnabled());
   mwUi->actionJobOutputClose->setEnabled(ui->widgets->currentIndex() > 0);
+}
+
+void
+Tool::setupTabPositions() {
+  ui->widgets->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 }}}

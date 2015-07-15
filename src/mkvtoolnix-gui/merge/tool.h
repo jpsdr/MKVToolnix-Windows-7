@@ -60,6 +60,8 @@ public slots:
   virtual void openMultipleConfigFilesFromCommandLine(QStringList const &fileNames);
   virtual void addMultipleFilesToNewSettings(QStringList const &fileNames);
 
+  virtual void setupTabPositions();
+
 protected:
   Tab *appendTab(Tab *tab);
   virtual Tab *currentTab();

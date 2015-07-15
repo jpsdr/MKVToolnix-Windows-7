@@ -32,6 +32,8 @@ Tool::Tool(QWidget *parent,
   // Setup UI controls.
   ui->setupUi(this);
 
+  setupTabPositions();
+
   appendTab(new Tab{this});
   showMergeWidget();
 
@@ -45,6 +47,7 @@ Tool::~Tool() {
 
 void
 Tool::setupActions() {
+  auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
 
   connect(mwUi->actionMergeNew,                     &QAction::triggered,               this, &Tool::newConfig);
@@ -59,6 +62,8 @@ Tool::setupActions() {
 
   connect(ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::newConfig);
   connect(ui->openFileButton,                       &QPushButton::clicked,             this, &Tool::openConfig);
+
+  connect(mw,                                       &MainWindow::preferencesChanged,   this, &Tool::setupTabPositions);
 
   connect(App::instance(),                          &App::addingFilesToMergeRequested, this, &Tool::addMultipleFilesFromCommandLine);
   connect(App::instance(),                          &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
@@ -299,6 +304,11 @@ Tool::addMultipleFilesToNewSettings(QStringList const &fileNames) {
   Q_ASSERT(!!tab);
 
   tab->addFilesToBeAddedOrAppendedDelayed(fileNames);
+}
+
+void
+Tool::setupTabPositions() {
+  ui->merges->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 }}}

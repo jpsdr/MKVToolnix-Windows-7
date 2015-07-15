@@ -188,6 +188,7 @@ public slots:
 
   virtual void retranslateUi();
   virtual void handleClearingMergeSettings();
+  virtual void setupTabPositions();
 
 protected:
   virtual void setupAttachmentsControls();

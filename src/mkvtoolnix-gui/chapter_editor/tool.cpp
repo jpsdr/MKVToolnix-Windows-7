@@ -36,6 +36,7 @@ Tool::Tool(QWidget *parent,
   ui->setupUi(this);
 
   setupActions();
+  setupTabPositions();
 
   showChapterEditorsWidget();
 }
@@ -45,22 +46,24 @@ Tool::~Tool() {
 
 void
 Tool::setupActions() {
+  auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionChapterEditorNew,            &QAction::triggered,            this, &Tool::newFile);
-  connect(mwUi->actionChapterEditorOpen,           &QAction::triggered,            this, &Tool::selectFileToOpen);
-  connect(mwUi->actionChapterEditorSave,           &QAction::triggered,            this, &Tool::save);
-  connect(mwUi->actionChapterEditorSaveAsXml,      &QAction::triggered,            this, &Tool::saveAsXml);
-  connect(mwUi->actionChapterEditorSaveToMatroska, &QAction::triggered,            this, &Tool::saveToMatroska);
-  connect(mwUi->actionChapterEditorReload,         &QAction::triggered,            this, &Tool::reload);
-  connect(mwUi->actionChapterEditorClose,          &QAction::triggered,            this, &Tool::closeCurrentTab);
+  connect(mwUi->actionChapterEditorNew,            &QAction::triggered,             this, &Tool::newFile);
+  connect(mwUi->actionChapterEditorOpen,           &QAction::triggered,             this, &Tool::selectFileToOpen);
+  connect(mwUi->actionChapterEditorSave,           &QAction::triggered,             this, &Tool::save);
+  connect(mwUi->actionChapterEditorSaveAsXml,      &QAction::triggered,             this, &Tool::saveAsXml);
+  connect(mwUi->actionChapterEditorSaveToMatroska, &QAction::triggered,             this, &Tool::saveToMatroska);
+  connect(mwUi->actionChapterEditorReload,         &QAction::triggered,             this, &Tool::reload);
+  connect(mwUi->actionChapterEditorClose,          &QAction::triggered,             this, &Tool::closeCurrentTab);
 
-  connect(ui->newFileButton,                       &QPushButton::clicked,          this, &Tool::newFile);
-  connect(ui->openFileButton,                      &QPushButton::clicked,          this, &Tool::selectFileToOpen);
+  connect(ui->newFileButton,                       &QPushButton::clicked,           this, &Tool::newFile);
+  connect(ui->openFileButton,                      &QPushButton::clicked,           this, &Tool::selectFileToOpen);
 
-  connect(ui->editors,                             &QTabWidget::currentChanged,    this, &Tool::enableMenuActions);
+  connect(ui->editors,                             &QTabWidget::currentChanged,     this, &Tool::enableMenuActions);
+  connect(mw,                                      &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
 
-  connect(App::instance(),                         &App::editingChaptersRequested, this, &Tool::openFilesFromCommandLine);
+  connect(App::instance(),                         &App::editingChaptersRequested,  this, &Tool::openFilesFromCommandLine);
 }
 
 void
@@ -269,6 +272,11 @@ Tool::tabTitleChanged() {
   auto idx = ui->editors->indexOf(tab);
   if (tab && (-1 != idx))
     ui->editors->setTabText(idx, tab->title());
+}
+
+void
+Tool::setupTabPositions() {
+  ui->editors->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 }}}

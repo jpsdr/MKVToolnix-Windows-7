@@ -35,6 +35,7 @@ Tool::Tool(QWidget *parent,
   ui->setupUi(this);
 
   setupActions();
+  setupTabPositions();
 
   showHeaderEditorsWidget();
 }
@@ -44,17 +45,20 @@ Tool::~Tool() {
 
 void
 Tool::setupActions() {
+  auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,           this, &Tool::selectFileToOpen);
-  connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,           this, &Tool::save);
-  connect(mwUi->actionHeaderEditorValidate, &QAction::triggered,           this, &Tool::validate);
-  connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,           this, &Tool::reload);
-  connect(mwUi->actionHeaderEditorClose,    &QAction::triggered,           this, &Tool::closeCurrentTab);
+  connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,             this, &Tool::selectFileToOpen);
+  connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,             this, &Tool::save);
+  connect(mwUi->actionHeaderEditorValidate, &QAction::triggered,             this, &Tool::validate);
+  connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,             this, &Tool::reload);
+  connect(mwUi->actionHeaderEditorClose,    &QAction::triggered,             this, &Tool::closeCurrentTab);
 
-  connect(ui->openFileButton,               &QPushButton::clicked,         this, &Tool::selectFileToOpen);
+  connect(ui->openFileButton,               &QPushButton::clicked,           this, &Tool::selectFileToOpen);
 
-  connect(App::instance(),                  &App::editingHeadersRequested, this, &Tool::openFilesFromCommandLine);
+  connect(mw,                               &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
+
+  connect(App::instance(),                  &App::editingHeadersRequested,   this, &Tool::openFilesFromCommandLine);
 }
 
 void
@@ -225,6 +229,11 @@ Tool::closeAllTabs() {
 Tab *
 Tool::currentTab() {
   return static_cast<Tab *>(ui->editors->widget(ui->editors->currentIndex()));
+}
+
+void
+Tool::setupTabPositions() {
+  ui->editors->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 }}}

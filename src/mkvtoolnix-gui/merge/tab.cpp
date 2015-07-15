@@ -58,11 +58,15 @@ Tab::Tab(QWidget *parent)
   // Setup UI controls.
   ui->setupUi(this);
 
+  auto mw = MainWindow::get();
+  connect(mw, &MainWindow::preferencesChanged, this, &Tab::setupTabPositions);
+
   m_filesModel->setTracksModel(m_tracksModel);
 
   setupInputControls();
   setupOutputControls();
   setupAttachmentsControls();
+  setupTabPositions();
 
   setControlValuesFromConfig();
 
@@ -337,6 +341,11 @@ Tab::currentState() {
 bool
 Tab::hasBeenModified() {
   return currentState() != m_savedState;
+}
+
+void
+Tab::setupTabPositions() {
+  ui->tabs->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 }}}

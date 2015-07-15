@@ -22,6 +22,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 {
   ui->setupUi(this);
 
+  ui->tabs->setTabPosition(m_cfg.m_tabPosition);
+  ui->tbOftenUsedXYZ->setTabPosition(m_cfg.m_tabPosition);
+
   Util::restoreWidgetGeometry(this);
   Util::fixScrollAreaBackground(ui->mergeScrollArea);
 
@@ -33,6 +36,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
   setupOnlineCheck();
   setupInterfaceLanguage();
+  setupTabPositions();
 
   ui->cbGuiUseDefaultJobDescription->setChecked(m_cfg.m_useDefaultJobDescription);
   ui->cbGuiShowOutputOfAllJobs->setChecked(m_cfg.m_showOutputOfAllJobs);
@@ -343,9 +347,23 @@ PreferencesDialog::setupEnableMuxingTracksByLanguage() {
 }
 
 void
+PreferencesDialog::setupTabPositions() {
+  ui->cbGuiTabPositions->clear();
+  ui->cbGuiTabPositions->addItem(QY("top"),    static_cast<int>(QTabWidget::North));
+  ui->cbGuiTabPositions->addItem(QY("bottom"), static_cast<int>(QTabWidget::South));
+  ui->cbGuiTabPositions->addItem(QY("left"),   static_cast<int>(QTabWidget::West));
+  ui->cbGuiTabPositions->addItem(QY("right"),  static_cast<int>(QTabWidget::East));
+
+  Util::setComboBoxIndexIf(ui->cbGuiTabPositions, [this](QString const &, QVariant const &data) {
+    return data.toInt() == static_cast<int>(m_cfg.m_tabPosition);
+  });
+}
+
+void
 PreferencesDialog::save() {
   // GUI page:
   m_cfg.m_uiLocale                           = ui->cbGuiInterfaceLanguage->currentData().toString();
+  m_cfg.m_tabPosition                        = static_cast<QTabWidget::TabPosition>(ui->cbGuiTabPositions->currentData().toInt());
   m_cfg.m_checkForUpdates                    = ui->cbGuiCheckForUpdates->isChecked();
   m_cfg.m_disableAnimations                  = ui->cbGuiDisableAnimations->isChecked();
   m_cfg.m_showToolSelector                   = ui->cbGuiShowToolSelector->isChecked();
