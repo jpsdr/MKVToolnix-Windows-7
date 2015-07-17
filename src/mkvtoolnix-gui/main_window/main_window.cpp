@@ -105,8 +105,8 @@ MainWindow::createNotImplementedWidget() {
 
 void
 MainWindow::setupMenu() {
-  connect(ui->actionGUIExit,            SIGNAL(triggered()), this, SLOT(close()));
-  connect(ui->actionGUIPreferences,     SIGNAL(triggered()), this, SLOT(editPreferences()));
+  connect(ui->actionGUIExit,                   &QAction::triggered,             this, &MainWindow::close);
+  connect(ui->actionGUIPreferences,            &QAction::triggered,             this, &MainWindow::editPreferences);
 
   connect(ui->actionHelpFAQ,                   &QAction::triggered,             this, &MainWindow::visitHelpURL);
   connect(ui->actionHelpKnownProblems,         &QAction::triggered,             this, &MainWindow::visitHelpURL);
