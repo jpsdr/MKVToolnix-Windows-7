@@ -108,18 +108,18 @@ MainWindow::setupMenu() {
   connect(ui->actionGUIExit,            SIGNAL(triggered()), this, SLOT(close()));
   connect(ui->actionGUIPreferences,     SIGNAL(triggered()), this, SLOT(editPreferences()));
 
-#if defined(HAVE_CURL_EASY_H)
-  connect(ui->actionGUICheckForUpdates, SIGNAL(triggered()), this, SLOT(checkForUpdates()));
-#else
-  ui->actionGUICheckForUpdates->setVisible(false);
-#endif  // HAVE_CURL_EASY_H
-
   connect(ui->actionHelpFAQ,                   &QAction::triggered,             this, &MainWindow::visitHelpURL);
   connect(ui->actionHelpKnownProblems,         &QAction::triggered,             this, &MainWindow::visitHelpURL);
   connect(ui->actionHelpMkvmergeDocumentation, &QAction::triggered,             this, &MainWindow::visitHelpURL);
   connect(ui->actionHelpWebSite,               &QAction::triggered,             this, &MainWindow::visitHelpURL);
 
   connect(this,                                &MainWindow::preferencesChanged, this, &MainWindow::setToolSelectorVisibility);
+
+#if defined(HAVE_CURL_EASY_H)
+  connect(ui->actionHelpCheckForUpdates,       &QAction::triggered,             this, &MainWindow::checkForUpdates);
+#else
+  ui->actionGUICheckForUpdates->setVisible(false);
+#endif  // HAVE_CURL_EASY_H
 }
 
 void
