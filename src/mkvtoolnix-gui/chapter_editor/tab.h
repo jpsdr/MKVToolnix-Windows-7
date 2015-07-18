@@ -9,7 +9,7 @@
 #include "common/qt_kax_analyzer.h"
 #include "common/timecode.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
-#include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
+#include "mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/types.h"
 
 class QAction;
@@ -47,7 +47,7 @@ protected:
   NameModel *m_nameModel;
 
   QAction *m_expandAllAction, *m_collapseAllAction, *m_addEditionBeforeAction, *m_addEditionAfterAction, *m_addChapterBeforeAction, *m_addChapterAfterAction, *m_addSubChapterAction, *m_removeElementAction;
-  QAction *m_duplicateAction, *m_massModificationAction, *m_generateSubChaptersAction;
+  QAction *m_duplicateAction, *m_massModificationAction, *m_generateSubChaptersAction, *m_renumberSubChaptersAction;
   QList<QWidget *> m_nameWidgets;
 
   bool m_ignoreChapterSelectionChanges{};
@@ -86,6 +86,7 @@ public slots:
   virtual void duplicateElement();
   virtual void massModify();
   virtual void generateSubChapters();
+  virtual void renumberSubChapters();
 
   virtual void chapterSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void expandInsertedElements(QModelIndex const &parentIdx, int start, int end);
@@ -149,6 +150,8 @@ protected:
 protected:
   QString currentState() const;
   ChaptersPtr timecodesToChapters(std::vector<timecode_c> const &timecodes) const;
+  QString formatChapterName(QString const &nameTemplate, int chapterNumer) const;
+  void changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace);
 
   static QString formatEbmlBinary(EbmlBinary *binary);
 };

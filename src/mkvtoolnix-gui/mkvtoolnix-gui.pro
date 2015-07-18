@@ -36,7 +36,8 @@ FORMS += \
     forms/util/side_by_side_multi_select.ui \
     forms/watch_jobs/tab.ui \
     forms/watch_jobs/tool.ui \
-    forms/chapter_editor/generate_sub_chapters_parameters_dialog.ui
+    forms/chapter_editor/generate_sub_chapters_parameters_dialog.ui \
+    forms/chapter_editor/renumber_sub_chapters_parameters_dialog.ui
 
 RESOURCES += \
     qt_resources.qrc

@@ -55,6 +55,7 @@ Tab::Tab(QWidget *parent,
   , m_duplicateAction{new QAction{this}}
   , m_massModificationAction{new QAction{this}}
   , m_generateSubChaptersAction{new QAction{this}}
+  , m_renumberSubChaptersAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -107,6 +108,7 @@ Tab::setupUi() {
   connect(m_duplicateAction,               &QAction::triggered,                                                    this,                 &Tab::duplicateElement);
   connect(m_massModificationAction,        &QAction::triggered,                                                    this,                 &Tab::massModify);
   connect(m_generateSubChaptersAction,     &QAction::triggered,                                                    this,                 &Tab::generateSubChapters);
+  connect(m_renumberSubChaptersAction,     &QAction::triggered,                                                    this,                 &Tab::renumberSubChapters);
 
   connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameLanguage, &Util::ComboBoxBase::reInitialize);
   connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameCountry,  &Util::ComboBoxBase::reInitialize);
@@ -143,6 +145,7 @@ Tab::retranslateUi() {
   m_duplicateAction->setText(QY("D&uplicate selected edition or chapter"));
   m_massModificationAction->setText(QY("Additional &modifications"));
   m_generateSubChaptersAction->setText(QY("&Generate sub-chapters"));
+  m_renumberSubChaptersAction->setText(QY("Re&number sub-chapters"));
 
   m_chapterModel->retranslateUi();
   m_nameModel->retranslateUi();
@@ -277,7 +280,7 @@ Tab::timecodesToChapters(std::vector<timecode_c> const &timecodes)
 
   for (auto const &timecode : timecodes) {
     auto nameTemplate = QString{ cfg.m_chapterNameTemplate };
-    auto name         = to_wide(nameTemplate.replace(Q("<NUM>"), QString::number(++idx)));
+    auto name         = formatChapterName(nameTemplate, ++idx);
     auto atom         = mtx::construct::cons<KaxChapterAtom>(new KaxChapterTimeStart, timecode.to_ns(),
                                                              mtx::construct::cons<KaxChapterDisplay>(new KaxChapterString,   name,
                                                                                                      new KaxChapterLanguage, to_utf8(cfg.m_defaultChapterLanguage)));
@@ -885,9 +888,7 @@ Tab::createEmptyChapter(int64_t startTime,
   auto &cfg     = Util::Settings::get();
   auto chapter  = std::make_shared<KaxChapterAtom>();
   auto &display = GetChild<KaxChapterDisplay>(*chapter);
-  auto name     = QString{ nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate };
-
-  name.replace(Q("<NUM>"), QString::number(chapterNumber));
+  auto name     = formatChapterName(nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate, chapterNumber);
 
   GetChild<KaxChapterUID>(*chapter).SetValue(0);
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTime);
@@ -1135,6 +1136,13 @@ Tab::duplicateElement() {
   emit numberOfEntriesChanged();
 }
 
+QString
+Tab::formatChapterName(QString const &nameTemplate,
+                       int chapterNumber)
+  const {
+  return QString{ nameTemplate }.replace(Q("<NUM>"), QString::number(chapterNumber));
+}
+
 void
 Tab::generateSubChapters() {
   auto selectedIdx = Util::selectedRowIdx(ui->elements);
@@ -1184,6 +1192,100 @@ Tab::generateSubChapters() {
 }
 
 void
+Tab::changeChapterName(QModelIndex const &parentIdx,
+                       int row,
+                       int chapterNumber,
+                       QString const &nameTemplate,
+                       RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode,
+                       QString const &languageOfNamesToReplace) {
+  auto idx     = m_chapterModel->index(row, 0, parentIdx);
+  auto item    = m_chapterModel->itemFromIndex(idx);
+  auto chapter = m_chapterModel->chapterFromItem(item);
+
+  if (!chapter)
+    return;
+
+  auto name = to_wide(formatChapterName(nameTemplate, chapterNumber));
+
+  if (RenumberSubChaptersParametersDialog::NameMatch::First == nameMatchingMode) {
+    GetChild<KaxChapterString>(GetChild<KaxChapterDisplay>(*chapter)).SetValue(name);
+    m_chapterModel->updateRow(idx);
+
+    return;
+  }
+
+  for (auto const &element : *chapter) {
+    auto kDisplay = dynamic_cast<KaxChapterDisplay *>(element);
+    if (!kDisplay)
+      continue;
+
+    auto language = FindChildValue<KaxChapterLanguage>(kDisplay, std::string{"eng"});
+    if (   (RenumberSubChaptersParametersDialog::NameMatch::All == nameMatchingMode)
+        || (Q(language)                                         == languageOfNamesToReplace))
+      GetChild<KaxChapterString>(*kDisplay).SetValue(name);
+  }
+
+  m_chapterModel->updateRow(idx);
+}
+
+void
+Tab::renumberSubChapters() {
+  auto selectedIdx = Util::selectedRowIdx(ui->elements);
+  if (!selectedIdx.isValid())
+    return;
+
+  if (!copyControlsToStorage())
+    return;
+
+  auto selectedItem    = m_chapterModel->itemFromIndex(selectedIdx);
+  auto selectedChapter = m_chapterModel->chapterFromItem(selectedItem);
+  auto numRows         = selectedItem->rowCount();
+  auto chapterTitles   = QStringList{};
+  auto firstName       = QString{};
+
+  for (auto row = 0; row < numRows; ++row) {
+    auto chapter = m_chapterModel->chapterFromItem(selectedItem->child(row));
+    if (!chapter)
+      continue;
+
+    auto start = GetChild<KaxChapterTimeStart>(*chapter).GetValue();
+    auto end   = FindChild<KaxChapterTimeEnd>(*chapter);
+    auto name  = ChapterModel::chapterDisplayName(*chapter);
+
+    if (firstName.isEmpty())
+      firstName = name;
+
+    if (end)
+      chapterTitles << Q("%1 (%2 – %3)").arg(name).arg(Q(format_timecode(start))).arg(Q(format_timecode(end->GetValue())));
+    else
+      chapterTitles << Q("%1 (%2)").arg(name).arg(Q(format_timecode(start)));
+  }
+
+  auto matches     = QRegularExpression{Q("(\\d+)$")}.match(firstName);
+  auto firstNumber = matches.hasMatch() ? matches.captured(0).toInt() : 1;
+
+  RenumberSubChaptersParametersDialog dlg{this, firstNumber, chapterTitles};
+  if (!dlg.exec())
+    return;
+
+  auto row               = dlg.firstEntryToRenumber();
+  auto toRenumber        = dlg.numberOfEntries() ? dlg.numberOfEntries() : numRows;
+  auto chapterNumber     = dlg.firstChapterNumber();
+  auto nameTemplate      = dlg.nameTemplate();
+  auto nameMatchingMode  = dlg.nameMatchingMode();
+  auto languageToReplace = dlg.languageOfNamesToReplace();
+
+  while ((row < numRows) && (0 < toRenumber)) {
+    changeChapterName(selectedIdx, row, chapterNumber, nameTemplate, nameMatchingMode, languageToReplace);
+
+    ++chapterNumber;
+    ++row;
+  }
+
+  resizeNameColumnsToContents();
+}
+
+void
 Tab::expandCollapseAll(bool expand,
                        QModelIndex const &parentIdx) {
   if (parentIdx.isValid())
@@ -1218,11 +1320,13 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   auto hasSelection    = selectedIdx.isValid();
   auto chapterSelected = hasSelection && selectedIdx.parent().isValid();
   auto hasEntries      = !!m_chapterModel->rowCount();
+  auto hasSubEntries   = selectedIdx.isValid() ? !!m_chapterModel->rowCount(selectedIdx) : false;
 
   m_addChapterBeforeAction->setEnabled(chapterSelected);
   m_addChapterAfterAction->setEnabled(chapterSelected);
   m_addSubChapterAction->setEnabled(hasSelection);
   m_generateSubChaptersAction->setEnabled(hasSelection);
+  m_renumberSubChaptersAction->setEnabled(hasSelection && hasSubEntries);
   m_removeElementAction->setEnabled(hasSelection);
   m_duplicateAction->setEnabled(hasSelection);
   m_expandAllAction->setEnabled(hasEntries);
@@ -1242,6 +1346,7 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   menu.addSeparator();
   menu.addAction(m_removeElementAction);
   menu.addSeparator();
+  menu.addAction(m_renumberSubChaptersAction);
   menu.addAction(m_massModificationAction);
   menu.addSeparator();
   menu.addAction(m_expandAllAction);
