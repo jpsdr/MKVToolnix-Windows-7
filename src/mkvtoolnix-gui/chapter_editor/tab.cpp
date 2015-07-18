@@ -1140,7 +1140,21 @@ QString
 Tab::formatChapterName(QString const &nameTemplate,
                        int chapterNumber)
   const {
-  return QString{ nameTemplate }.replace(Q("<NUM>"), QString::number(chapterNumber));
+  auto name = QString{ nameTemplate };
+  auto re   = QRegularExpression{Q("<NUM(?::(\\d+))?>")};
+
+  while (true) {
+    auto matches = re.match(name);
+    if (!matches.hasMatch())
+      break;
+
+    auto minWidth  = matches.capturedLength(1) ? matches.captured(1).toInt() : 1;
+    auto strNumber = Q("%1").arg(QString::number(chapterNumber), minWidth, '0');
+
+    name.replace(matches.capturedStart(), matches.capturedLength(), strNumber);
+  }
+
+  return name;
 }
 
 void

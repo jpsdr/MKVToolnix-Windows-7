@@ -51,9 +51,11 @@ RenumberSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->cbLanguageOfNamesToReplace->setCurrentIndex(0);
 
   Util::setToolTip(m_ui->leNameTemplate,
-                   Q("%1 %2")
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QY("This template will be used for new chapter entries."))
-                   .arg(QY("The string '<NUM>' will be replaced by the chapter number.")));
+                   .arg(QY("The string '<NUM>' will be replaced by the chapter number.").toHtmlEscaped())
+                   .arg(QY("You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'.").toHtmlEscaped())
+                   .arg(QY("The resulting number will be padded with leading zeroes if the number of places is less than specified.")));
 
   m_ui->cbFirstEntryToRenumber->setFocus();
 

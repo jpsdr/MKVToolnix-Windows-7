@@ -119,9 +119,11 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("You can opt for having them removed automatically under certain conditions.")));
 
   Util::setToolTip(ui->leCENameTemplate,
-                   Q("%1 %2")
+                   Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QY("This template will be used for new chapter entries."))
-                   .arg(QY("The string '<NUM>' will be replaced by the chapter number.")));
+                   .arg(QY("The string '<NUM>' will be replaced by the chapter number.").toHtmlEscaped())
+                   .arg(QY("You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'.").toHtmlEscaped())
+                   .arg(QY("The resulting number will be padded with leading zeroes if the number of places is less than specified.")));
   Util::setToolTip(ui->cbCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDefaultCountry, QY("This is the country that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDropLastFromBlurayPlaylist,

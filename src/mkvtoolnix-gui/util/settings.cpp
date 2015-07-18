@@ -92,7 +92,7 @@ Settings::load() {
   m_warnBeforeAbortingJobs             = reg.value("warnBeforeAbortingJobs", true).toBool();
   m_showMoveUpDownButtons              = reg.value("showMoveUpDownButtons", false).toBool();
 
-  m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM>")).toString();
+  m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM:2>")).toString();
   m_dropLastChapterFromBlurayPlaylist  = reg.value("dropLastChapterFromBlurayPlaylist", true).toBool();
 
 #if defined(HAVE_LIBINTL_H)
