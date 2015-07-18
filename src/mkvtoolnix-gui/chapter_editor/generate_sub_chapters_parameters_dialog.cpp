@@ -48,6 +48,8 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
 
   m_ui->sbNumberOfEntries->setFocus();
 
+  adjustSize();
+
   auto mw = MainWindow::get();
   connect(m_ui->leStartTimecode, &QLineEdit::textChanged,         this,             &GenerateSubChaptersParametersDialog::verifyStartTimecode);
   connect(mw,                    &MainWindow::preferencesChanged, m_ui->cbLanguage, &Util::ComboBoxBase::reInitialize);
