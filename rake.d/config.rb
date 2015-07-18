@@ -1,5 +1,5 @@
 def read_config
-  error "build-config not found: please run ./configure" unless File.exists?("build-config")
+  fail "build-config not found: please run ./configure" unless File.exists?("build-config")
 
   $config = Hash[ *IO.readlines("build-config").collect { |line| line.chomp.gsub(/#.*/, "") }.select { |line| !line.empty? }.collect do |line|
                      parts = line.split(/\s*=\s*/, 2).collect { |part| part.gsub(/^\s+/, '').gsub(/\s+$/, '') }
