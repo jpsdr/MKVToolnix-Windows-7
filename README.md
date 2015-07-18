@@ -1,4 +1,4 @@
-MKVToolNix 8.1.0
+MKVToolNix 8.2.0
 ================
 
 # Table of contents
