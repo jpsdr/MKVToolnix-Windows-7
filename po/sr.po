@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-07-18 10:10+0200\n"
+"POT-Creation-Date: 2015-07-18 13:22+0200\n"
 "PO-Revision-Date: 2015-06-28 16:45+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -2105,12 +2105,12 @@ msgstr "+-> pred-raščlanjivanje FLAC fajla: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> pred-raščlanjivanje FLAC fajla: 100%\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:337
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", opis '%1%'"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:338
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", ime fajla '%1%'"
@@ -2444,7 +2444,7 @@ msgstr "&Pripoji fajlove"
 msgid "A/52 (aka AC3)"
 msgstr "A/52 (poznat kao AC3)"
 
-#: src/input/r_aac.h:36 src/output/p_aac.h:42
+#: src/common/file_types.cpp:67 src/output/p_aac.h:42
 msgid "AAC"
 msgstr "AAC"
 
@@ -2473,11 +2473,11 @@ msgstr "AAC je SBR/HE-AAC/AAC+"
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC je SBR/HE-AAC/AAC+"
 
-#: src/input/r_aac_adif.cpp:35
+#: src/input/r_aac_adif.cpp:36
 msgid "AAC with ADIF headers"
 msgstr "AAC sa ADIF zaglavljima"
 
-#: src/input/r_ac3.h:34 src/output/p_ac3.h:41
+#: src/common/file_types.cpp:68 src/output/p_ac3.h:41
 msgid "AC3"
 msgstr "AC3"
 
@@ -2505,7 +2505,7 @@ msgstr ""
 msgid "ASCII string (no special chars like Umlaute etc)"
 msgstr "ASCII niz (bez specijalnih znakova kao Umlaut itd.)"
 
-#: src/input/r_avc.h:35 src/output/p_mpeg4_p10.h:34
+#: src/common/file_types.cpp:70 src/output/p_mpeg4_p10.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
 
@@ -2517,7 +2517,7 @@ msgstr "AVC/h.264 (unframed)"
 msgid "AVC/h.264 elementary streams"
 msgstr "AVC/H.264 elementarni potoci"
 
-#: src/input/r_avi.h:85
+#: src/common/file_types.cpp:71
 msgid "AVI"
 msgstr "AVI"
 
@@ -3139,7 +3139,7 @@ msgstr "Priloženo"
 msgid "Attached files"
 msgstr "Priloženi fajlovi"
 
-#: src/merge/generic_reader.cpp:328
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Attachment ID %1%: tip '%2%', veličina %3% bajt"
@@ -3648,7 +3648,7 @@ msgstr "Poglavlja zapisana."
 msgid "Chapters:"
 msgstr "Poglavlja:"
 
-#: src/merge/generic_reader.cpp:368
+#: src/merge/generic_reader.cpp:376
 #, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -3977,7 +3977,7 @@ msgstr "Konvertovanje poglavlja u XML nije uspelo: %1"
 msgid "Copy the command line to the clipboard"
 msgstr "Kopiraj komandnu liniju u clipboard"
 
-#: src/input/r_coreaudio.h:62
+#: src/common/file_types.cpp:74
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4405,7 +4405,7 @@ msgstr "&Obriši"
 msgid "D&uplicate selected edition or chapter"
 msgstr "D&upliraj izabranu ediciju ili poglavlje"
 
-#: src/input/r_dts.h:64 src/output/p_dts.h:46
+#: src/common/file_types.cpp:76 src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
 
@@ -4428,6 +4428,11 @@ msgstr "DTS_Header problem: nevažeća PCM rezolucija izvora\n"
 #: src/common/dts.cpp:148
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr "DTS_Header problem: nema dovoljno podataka da se iščita zaglavlje\n"
+
+#: src/common/file_types.cpp:77
+#, fuzzy
+msgid "DV video format"
+msgstr "Video staza"
 
 #: src/info/mkvinfo.cpp:500
 #, boost-format
@@ -4569,7 +4574,8 @@ msgstr "Detalji"
 msgid "Development hacks"
 msgstr "Development hacks"
 
-#: src/common/file_types.cpp:30 src/input/r_dirac.h:33 src/output/p_dirac.h:38
+#: src/common/file_types.cpp:30 src/common/file_types.cpp:75
+#: src/output/p_dirac.h:38
 msgid "Dirac"
 msgstr "Dirac"
 
@@ -5215,7 +5221,7 @@ msgstr "Izvlačenje track ID %1% sa CodecID '%2%' nije podržano.\n"
 msgid "F1"
 msgstr "F1"
 
-#: src/input/r_flac.h:53 src/output/p_flac.h:39
+#: src/common/file_types.cpp:78 src/output/p_flac.h:39
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -5277,12 +5283,12 @@ msgstr ""
 "fajlova ('mkvmerge --list-types') i kontaktirajte autora Morica Bunkusa "
 "<moritz@bunkus.org>  ako je vaš fajl podržan ali nije ispravno prepoznat.\n"
 
-#: src/merge/generic_reader.cpp:326
+#: src/merge/generic_reader.cpp:334
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Fajl '%1%': kontejner: %2%"
 
-#: src/merge/id_result.cpp:24
+#: src/merge/id_result.cpp:25
 #, boost-format
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr "Fajl '%1%': nepodržan kontejner: %2%\n"
@@ -5455,7 +5461,7 @@ msgstr "Popravi tajming informaciju bit-potoka"
 msgid "Flags:"
 msgstr "Zastavice:"
 
-#: src/input/r_flv.cpp:266
+#: src/common/file_types.cpp:79
 msgid "Flash Video"
 msgstr "Flash video"
 
@@ -5710,7 +5716,7 @@ msgstr "Globalni tagovi (%d unosa) iz %s"
 msgid "Global tags:"
 msgstr "Globalni tagovi:"
 
-#: src/merge/generic_reader.cpp:377
+#: src/merge/generic_reader.cpp:385
 #, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -5722,11 +5728,16 @@ msgstr[2] "Globalni tagovi: %1% zapisa"
 msgid "H&eaders"
 msgstr "&Zaglavlja"
 
+#: src/common/file_types.cpp:81
+#, fuzzy
+msgid "HD-DVD subtitles"
+msgstr "titlovi"
+
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
 msgstr "HDMV PGS"
 
-#: src/input/r_hevc.h:31 src/output/p_hevc.h:33
+#: src/common/file_types.cpp:80 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
 
@@ -5863,7 +5874,7 @@ msgstr "Kod ISO639-1"
 msgid "ISO639-2 code"
 msgstr "Kod ISO639-2"
 
-#: src/input/r_ivf.h:35
+#: src/common/file_types.cpp:82
 msgid "IVF (VP8/VP9)"
 msgstr "IVF (VP8/VP9)"
 
@@ -7128,7 +7139,7 @@ msgstr "MKVToolNix konfiguracioni fajlovi"
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix GUI kofiguracioni fajlovi"
 
-#: src/input/r_mp3.h:34
+#: src/common/file_types.cpp:85
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -7144,7 +7155,7 @@ msgstr "MP4 audio/video fajlovi"
 msgid "MPEG audio files"
 msgstr "MPEG audio fajlovi"
 
-#: src/input/r_mpeg_ps.h:214
+#: src/common/file_types.cpp:87
 msgid "MPEG program stream"
 msgstr "MPEG programski potok"
 
@@ -7152,7 +7163,7 @@ msgstr "MPEG programski potok"
 msgid "MPEG program streams"
 msgstr "MPEG programski potoci"
 
-#: src/input/r_mpeg_ts.h:418
+#: src/common/file_types.cpp:88
 msgid "MPEG transport stream"
 msgstr "MPEG transportni potok"
 
@@ -7160,7 +7171,7 @@ msgstr "MPEG transportni potok"
 msgid "MPEG transport streams"
 msgstr "MPEG transportni potoci"
 
-#: src/input/r_mpeg_es.h:34
+#: src/common/file_types.cpp:86
 msgid "MPEG video elementary stream"
 msgstr "MPEG elementarni video potok"
 
@@ -7222,7 +7233,7 @@ msgstr ""
 "Označi ovu stazu sa zastavicom 'forced'. Plejeri moraju reprodukovati ovu "
 "stazu."
 
-#: src/input/r_matroska.h:210
+#: src/common/file_types.cpp:83
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -7313,6 +7324,10 @@ msgstr "Memorija za RealAudio/RealVideo okvir ne može biti dodeljena.\n"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:861
 msgid "Mi&nimum playlist duration:"
 msgstr "Minimalno &trajanje plejliste:"
+
+#: src/common/file_types.cpp:84
+msgid "MicroDVD"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:1097
 #, boost-format
@@ -7945,7 +7960,7 @@ msgstr "Broj nanosekundi (nije skalirano) po slici."
 msgid "Numbers of channels in the track."
 msgstr "Broj kanala u stazi."
 
-#: src/input/r_ogm.h:89
+#: src/common/file_types.cpp:89
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
@@ -8245,7 +8260,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "PGS/SUP titlovi"
 
-#: src/input/r_pgssup.h:33
+#: src/common/file_types.cpp:90
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -8495,7 +8510,7 @@ msgstr "QuickTime audio/video fajlovi"
 msgid "QuickTime compatible video"
 msgstr "QuickTime kompatibilan video"
 
-#: src/input/r_qtmp4.h:444
+#: src/common/file_types.cpp:91
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -8723,6 +8738,10 @@ msgstr "Izađi iz uredjivača zaglavlja"
 msgid "Quits mkvinfo"
 msgstr "Napusti mkvinfo"
 
+#: src/common/file_types.cpp:72
+msgid "RIFF CDXA"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:741
 msgid "RSA"
 msgstr "RSA"
@@ -8770,7 +8789,7 @@ msgstr "Prava izlazna frekvencija uzorkovanja u Hz."
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/input/r_real.h:97
+#: src/common/file_types.cpp:92
 msgid "RealMedia"
 msgstr "RealMedia"
 
@@ -8957,7 +8976,7 @@ msgstr "&Dodaj u red za posao"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/input/r_srt.h:33
+#: src/common/file_types.cpp:93
 msgid "SRT subtitles"
 msgstr "SRT titlovi"
 
@@ -8965,7 +8984,7 @@ msgstr "SRT titlovi"
 msgid "SRT text subtitles"
 msgstr "SRT tekstualni titlovi"
 
-#: src/input/r_ssa.h:32
+#: src/common/file_types.cpp:94
 msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS titlovi"
 
@@ -10066,7 +10085,7 @@ msgstr "Podržani tipovi fajlova:\n"
 msgid "Suppress status output."
 msgstr "Suzbij izlaz statusa."
 
-#: src/input/r_tta.h:36 src/output/p_tta.h:34
+#: src/common/file_types.cpp:96 src/output/p_tta.h:34
 msgid "TTA"
 msgstr "TTA"
 
@@ -10108,7 +10127,7 @@ msgstr "Tagovi"
 msgid "Tags are allowed, but chapters are not."
 msgstr "Tagovi su dozvoljeni, ali nisu poglavlja."
 
-#: src/merge/generic_reader.cpp:382
+#: src/merge/generic_reader.cpp:390
 #, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -10858,7 +10877,7 @@ msgstr ""
 "fajlova ('mkvmerge --list-types') i kontaktirajte autora Morica Bunkusa "
 "<moritz@bunkus.org> ako je vaš fajl podržan ali nije ispravno prepoznat.\n"
 
-#: src/merge/id_result.cpp:28
+#: src/merge/id_result.cpp:29
 #, boost-format
 msgid "The file '%1%' is a non-supported file type (%2%).\n"
 msgstr "Fajl '%1%' nije podrzan tip fajla (%2%).\n"
@@ -12809,7 +12828,7 @@ msgstr "Staza %1%: AAC informacija ne može biti raščlanjena.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Staza sa ID %1% ima nepoznat tip AAC.\n"
 
-#: src/merge/generic_reader.cpp:327
+#: src/merge/generic_reader.cpp:335
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "ID staze %1%: %2% (%3%)"
@@ -12903,7 +12922,7 @@ msgstr "Staze:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Savet za rešavanje problema sa reprodukcijom"
 
-#: src/input/r_truehd.h:39 src/output/p_truehd.h:41
+#: src/common/file_types.cpp:95 src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -12972,7 +12991,7 @@ msgstr ""
 msgid "UID:"
 msgstr "UID:"
 
-#: src/input/r_usf.h:70
+#: src/common/file_types.cpp:97
 msgid "USF subtitles"
 msgstr "USF titlovi"
 
@@ -13171,7 +13190,7 @@ msgstr ""
 "Korišćenje NALU veličine od 3 bajta može rezultirati stazama koje ne mogu "
 "biti dekodirane sa određenim AVC/h.264 kodecima.\n"
 
-#: src/merge/generic_reader.h:44
+#: src/merge/generic_reader.h:45
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Koristim demultiplekser za format '%1%'.\n"
 
@@ -13180,11 +13199,11 @@ msgstr "Koristim demultiplekser za format '%1%'.\n"
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Koristim opšti izlazni modul za stazu tipa '%1%'.\n"
 
-#: src/merge/generic_reader.h:46
+#: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Koristim izlazni modul za format '%1%'.\n"
 
-#: src/input/r_vc1.h:34 src/output/p_vc1.h:37
+#: src/common/file_types.cpp:98 src/output/p_vc1.h:37
 msgid "VC1"
 msgstr "VC1"
 
@@ -13340,7 +13359,7 @@ msgstr ""
 "Pogledajte izlaz koji je mkvmerge proizveo tokom procesa muksovanja za "
 "odabrane zadatke"
 
-#: src/input/r_vobbtn.h:34 src/output/p_vobbtn.h:36
+#: src/common/file_types.cpp:99 src/output/p_vobbtn.h:36
 msgid "VobBtn"
 msgstr "VobBtn"
 
@@ -13348,7 +13367,7 @@ msgstr "VobBtn"
 msgid "VobButtons"
 msgstr "VobButtons"
 
-#: src/input/r_vobsub.h:73 src/output/p_vobsub.h:31
+#: src/common/file_types.cpp:100 src/output/p_vobsub.h:31
 msgid "VobSub"
 msgstr "VobSub"
 
@@ -13360,7 +13379,7 @@ msgstr "VobSub titlovi"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/input/r_wav.h:75
+#: src/common/file_types.cpp:101
 msgid "WAV"
 msgstr "WAV"
 
@@ -13368,7 +13387,7 @@ msgstr "WAV"
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE (nekompresovani PCM audio)"
 
-#: src/input/r_wavpack.h:35
+#: src/common/file_types.cpp:102
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
@@ -13509,6 +13528,10 @@ msgstr "Širina video slike koja se prikazuje."
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
 msgid "Windows (cmd.exe)"
 msgstr "Windows (cmd.exe)"
+
+#: src/common/file_types.cpp:69
+msgid "Windows Media (ASF/WMV)"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:251
 msgid ""
@@ -15104,11 +15127,11 @@ msgstr "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgid "und (Undetermined)"
 msgstr "und (Neodređen)"
 
-#: src/common/mm_io_win.cpp:161 src/common/stereo_mode.cpp:68
-#: src/info/mkvinfo.cpp:683 src/info/mkvinfo.cpp:693 src/info/mkvinfo.cpp:708
-#: src/info/mkvinfo.cpp:730 src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752
-#: src/info/mkvinfo.cpp:938 src/input/r_matroska.cpp:100
-#: src/input/r_matroska.cpp:2353
+#: src/common/file_types.cpp:103 src/common/mm_io_win.cpp:161
+#: src/common/stereo_mode.cpp:68 src/info/mkvinfo.cpp:683
+#: src/info/mkvinfo.cpp:693 src/info/mkvinfo.cpp:708 src/info/mkvinfo.cpp:730
+#: src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752 src/info/mkvinfo.cpp:938
+#: src/input/r_matroska.cpp:100 src/input/r_matroska.cpp:2353
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:159
 #: src/mkvtoolnix-gui/jobs/job.cpp:121
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57

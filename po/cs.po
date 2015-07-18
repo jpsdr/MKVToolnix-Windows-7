@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-07-18 10:10+0200\n"
+"POT-Creation-Date: 2015-07-18 13:22+0200\n"
 "PO-Revision-Date: 2015-06-21 13:09+0200\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech <trottel09@gmail.com>\n"
@@ -2041,12 +2041,12 @@ msgstr "+-> Předběžná analýza FLAC souboru: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Předběžná analýza FLAC souboru: 100%\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:337
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", popis '%1%'"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:338
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", název souboru '%1%'"
@@ -2339,7 +2339,7 @@ msgstr "Přiložené soubory"
 msgid "A/52 (aka AC3)"
 msgstr "A/52 (neboli AC3)"
 
-#: src/input/r_aac.h:36
+#: src/common/file_types.cpp:67
 #: src/output/p_aac.h:42
 msgid "AAC"
 msgstr "AAC"
@@ -2361,11 +2361,11 @@ msgstr "AAC je SBR/HE-AAC/AAC+"
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC je SBR/HE-AAC/AAC+"
 
-#: src/input/r_aac_adif.cpp:35
+#: src/input/r_aac_adif.cpp:36
 msgid "AAC with ADIF headers"
 msgstr "AAC s hlavičkami ADIF"
 
-#: src/input/r_ac3.h:34
+#: src/common/file_types.cpp:68
 #: src/output/p_ac3.h:41
 msgid "AC3"
 msgstr "AC3"
@@ -2397,7 +2397,7 @@ msgstr ""
 "ASCII řetězec (žádné speciální znaky\n"
 "jako přehlásky atd.)"
 
-#: src/input/r_avc.h:35
+#: src/common/file_types.cpp:70
 #: src/output/p_mpeg4_p10.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
@@ -2410,7 +2410,7 @@ msgstr ""
 msgid "AVC/h.264 elementary streams"
 msgstr "Základní datové proudy AVC/h.264"
 
-#: src/input/r_avi.h:85
+#: src/common/file_types.cpp:71
 msgid "AVI"
 msgstr "AVI"
 
@@ -3016,7 +3016,7 @@ msgstr "Přiloženo"
 msgid "Attached files"
 msgstr "Přiložené soubory"
 
-#: src/merge/generic_reader.cpp:328
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID přílohy %1%: typ '%2%', velikost %3% bajtů"
@@ -3510,7 +3510,7 @@ msgstr "Kapitoly zapsány."
 msgid "Chapters:"
 msgstr "Kapitoly:"
 
-#: src/merge/generic_reader.cpp:368
+#: src/merge/generic_reader.cpp:376
 #, fuzzy, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -3841,7 +3841,7 @@ msgstr "Uložit aktuální kapitoly do souboru XML"
 msgid "Copy the command line to the clipboard"
 msgstr "Kopírovat příkazový řádek do schránky"
 
-#: src/input/r_coreaudio.h:62
+#: src/common/file_types.cpp:74
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4216,7 +4216,7 @@ msgstr "&Odstranit"
 msgid "D&uplicate selected edition or chapter"
 msgstr ""
 
-#: src/input/r_dts.h:64
+#: src/common/file_types.cpp:76
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
@@ -4240,6 +4240,11 @@ msgstr "Problém DTS_Header: neplatné rozlišení zdrojového PCM\n"
 #: src/common/dts.cpp:148
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr "Problém DTS_Header: nedostatek dat pro přečtení hlavičky\n"
+
+#: src/common/file_types.cpp:77
+#, fuzzy
+msgid "DV video format"
+msgstr "Stopa videa"
 
 #: src/info/mkvinfo.cpp:500
 #, boost-format
@@ -4384,7 +4389,7 @@ msgid "Development hacks"
 msgstr "### Vychytávky vývojářů ###"
 
 #: src/common/file_types.cpp:30
-#: src/input/r_dirac.h:33
+#: src/common/file_types.cpp:75
 #: src/output/p_dirac.h:38
 msgid "Dirac"
 msgstr "Dirac"
@@ -4965,7 +4970,7 @@ msgstr ""
 msgid "F1"
 msgstr ""
 
-#: src/input/r_flac.h:53
+#: src/common/file_types.cpp:78
 #: src/output/p_flac.h:39
 msgid "FLAC"
 msgstr "FLAC"
@@ -5023,12 +5028,12 @@ msgstr "Název souboru nebo úseku:"
 msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "Soubor %1% má neznámý typ. Podívejte se na podporované typy souborů ('mkvmerge --list-types') a kontaktujte autora Moritze Bunkuse <moritz@bunkus.org>, pokud je váš typ souboru podporován, ale není správně rozpoznán.\n"
 
-#: src/merge/generic_reader.cpp:326
+#: src/merge/generic_reader.cpp:334
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Soubor '%1%': kontejner: %2%"
 
-#: src/merge/id_result.cpp:24
+#: src/merge/id_result.cpp:25
 #, boost-format
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr "Soubor '%1%': nepodporovaný kontejner: %2%\n"
@@ -5202,7 +5207,7 @@ msgstr "Opravit informaci o časování bitového datového proudu"
 msgid "Flags:"
 msgstr "Štítky:"
 
-#: src/input/r_flv.cpp:266
+#: src/common/file_types.cpp:79
 msgid "Flash Video"
 msgstr "Flash video"
 
@@ -5394,7 +5399,7 @@ msgstr "Všeobecné štítky (%d položek) z %s"
 msgid "Global tags:"
 msgstr "Všeobecné volby"
 
-#: src/merge/generic_reader.cpp:377
+#: src/merge/generic_reader.cpp:385
 #, fuzzy, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -5406,11 +5411,16 @@ msgstr[2] "Všeobecné štítky: %1% položek"
 msgid "H&eaders"
 msgstr "&Hlavičky"
 
+#: src/common/file_types.cpp:81
+#, fuzzy
+msgid "HD-DVD subtitles"
+msgstr "titulky"
+
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
 msgstr ""
 
-#: src/input/r_hevc.h:31
+#: src/common/file_types.cpp:80
 #: src/output/p_hevc.h:33
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
@@ -5534,7 +5544,7 @@ msgstr "Kód ISO639-1"
 msgid "ISO639-2 code"
 msgstr "Kód ISO639-2"
 
-#: src/input/r_ivf.h:35
+#: src/common/file_types.cpp:82
 msgid "IVF (VP8/VP9)"
 msgstr "IVF (VP8/VP9)"
 
@@ -6493,7 +6503,7 @@ msgstr "&Vytvořit soubor voleb"
 msgid "MKVToolnix GUI config files"
 msgstr ""
 
-#: src/input/r_mp3.h:34
+#: src/common/file_types.cpp:85
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -6509,7 +6519,7 @@ msgstr "Audio/video soubory MP4"
 msgid "MPEG audio files"
 msgstr ""
 
-#: src/input/r_mpeg_ps.h:214
+#: src/common/file_types.cpp:87
 msgid "MPEG program stream"
 msgstr ""
 
@@ -6517,7 +6527,7 @@ msgstr ""
 msgid "MPEG program streams"
 msgstr ""
 
-#: src/input/r_mpeg_ts.h:418
+#: src/common/file_types.cpp:88
 msgid "MPEG transport stream"
 msgstr ""
 
@@ -6525,7 +6535,7 @@ msgstr ""
 msgid "MPEG transport streams"
 msgstr ""
 
-#: src/input/r_mpeg_es.h:34
+#: src/common/file_types.cpp:86
 msgid "MPEG video elementary stream"
 msgstr ""
 
@@ -6584,7 +6594,7 @@ msgstr "Označit tuto stopu jako 'vynucenou'. Přehrávače tuto stopu musí př
 msgid "Mark this track as 'forced'. Players must play this track."
 msgstr "Označit tuto stopu jako 'vynucenou'. Přehrávače tuto stopu musí přehrát."
 
-#: src/input/r_matroska.h:210
+#: src/common/file_types.cpp:83
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -6674,6 +6684,10 @@ msgstr ""
 #, fuzzy
 msgid "Mi&nimum playlist duration:"
 msgstr "Minimální délka pro seznamy stop v sekundách:"
+
+#: src/common/file_types.cpp:84
+msgid "MicroDVD"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:1097
 #, boost-format
@@ -7217,7 +7231,7 @@ msgstr ""
 msgid "Numbers of channels in the track."
 msgstr "Počet kanálů ve stopě."
 
-#: src/input/r_ogm.h:89
+#: src/common/file_types.cpp:89
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
@@ -7489,7 +7503,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "Titulky PGS/SUP"
 
-#: src/input/r_pgssup.h:33
+#: src/common/file_types.cpp:90
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -7729,7 +7743,7 @@ msgstr "Audio/video soubory QuickTime"
 msgid "QuickTime compatible video"
 msgstr "Audio/video soubory QuickTime"
 
-#: src/input/r_qtmp4.h:444
+#: src/common/file_types.cpp:91
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -7871,6 +7885,10 @@ msgstr "Ukončit editor hlavičky"
 msgid "Quits mkvinfo"
 msgstr "Ukončí mkvinfo"
 
+#: src/common/file_types.cpp:72
+msgid "RIFF CDXA"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:741
 msgid "RSA"
 msgstr "RSA"
@@ -7915,7 +7933,7 @@ msgstr "Skutečná výstupní vzorkovací frekvence v Hz."
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/input/r_real.h:97
+#: src/common/file_types.cpp:92
 msgid "RealMedia"
 msgstr "RealMedia"
 
@@ -8100,7 +8118,7 @@ msgstr "&Přidat do fronty úloh"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/input/r_srt.h:33
+#: src/common/file_types.cpp:93
 msgid "SRT subtitles"
 msgstr "Titulky SRT"
 
@@ -8108,7 +8126,7 @@ msgstr "Titulky SRT"
 msgid "SRT text subtitles"
 msgstr "Textové titulky SRT"
 
-#: src/input/r_ssa.h:32
+#: src/common/file_types.cpp:94
 msgid "SSA/ASS subtitles"
 msgstr "Titulky SSA/ASS"
 
@@ -9100,7 +9118,7 @@ msgstr "Podporované typy souborů:\n"
 msgid "Suppress status output."
 msgstr "Potlačit stav výstupu."
 
-#: src/input/r_tta.h:36
+#: src/common/file_types.cpp:96
 #: src/output/p_tta.h:34
 msgid "TTA"
 msgstr "TTA"
@@ -9144,7 +9162,7 @@ msgstr "Štítky"
 msgid "Tags are allowed, but chapters are not."
 msgstr ""
 
-#: src/merge/generic_reader.cpp:382
+#: src/merge/generic_reader.cpp:390
 #, fuzzy, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -9667,7 +9685,7 @@ msgstr "Soubor '%1%' byl otevřen pro zápis.\n"
 msgid "The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "Soubor '%1%' je neznámého typu. Podívejte se na podporované typy souborů ('mkvmerge --list-types') a kontaktujte autora Moritze Bunkuse <moritz@bunkus.org>, pokud je váš typ podporován, ale nebyl správně rozpoznán.\n"
 
-#: src/merge/id_result.cpp:28
+#: src/merge/id_result.cpp:29
 #, boost-format
 msgid "The file '%1%' is a non-supported file type (%2%).\n"
 msgstr "Soubor '%1%' je nepodporovaného typu (%2%).\n"
@@ -11071,7 +11089,7 @@ msgstr ""
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Stopa s ID %1% má neznámý typ AAC.\n"
 
-#: src/merge/generic_reader.cpp:327
+#: src/merge/generic_reader.cpp:335
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Stopa s ID %1%: %2% (%3%)"
@@ -11158,7 +11176,7 @@ msgstr "Stopy:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Poradce při potížích pro problémy s přehráváním"
 
-#: src/input/r_truehd.h:39
+#: src/common/file_types.cpp:95
 #: src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -11211,7 +11229,7 @@ msgstr ""
 msgid "UID:"
 msgstr "UID:"
 
-#: src/input/r_usf.h:70
+#: src/common/file_types.cpp:97
 msgid "USF subtitles"
 msgstr "Titulky USF"
 
@@ -11384,7 +11402,7 @@ msgstr "Vlastní volby:"
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
 msgstr ""
 
-#: src/merge/generic_reader.h:44
+#: src/merge/generic_reader.h:45
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Použit demultiplexer pro formát '%1%'.\n"
 
@@ -11393,11 +11411,11 @@ msgstr "Použit demultiplexer pro formát '%1%'.\n"
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Použit všeobecný výstupní modul pro stopu typu '%1%'.\n"
 
-#: src/merge/generic_reader.h:46
+#: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Použit výstupní modul pro formát '%1%'.\n"
 
-#: src/input/r_vc1.h:34
+#: src/common/file_types.cpp:98
 #: src/output/p_vc1.h:37
 msgid "VC1"
 msgstr "VC1"
@@ -11555,7 +11573,7 @@ msgstr ""
 msgid "View the output that mkvmerge generated during the muxing process for the selected jobs"
 msgstr ""
 
-#: src/input/r_vobbtn.h:34
+#: src/common/file_types.cpp:99
 #: src/output/p_vobbtn.h:36
 msgid "VobBtn"
 msgstr ""
@@ -11564,7 +11582,7 @@ msgstr ""
 msgid "VobButtons"
 msgstr ""
 
-#: src/input/r_vobsub.h:73
+#: src/common/file_types.cpp:100
 #: src/output/p_vobsub.h:31
 msgid "VobSub"
 msgstr "VobSub"
@@ -11577,7 +11595,7 @@ msgstr "Titulky VobSub"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/input/r_wav.h:75
+#: src/common/file_types.cpp:101
 msgid "WAV"
 msgstr "WAV"
 
@@ -11585,7 +11603,7 @@ msgstr "WAV"
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE (nekomprimované audio PCM)"
 
-#: src/input/r_wavpack.h:35
+#: src/common/file_types.cpp:102
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
@@ -11700,6 +11718,10 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
 msgid "Windows (cmd.exe)"
+msgstr ""
+
+#: src/common/file_types.cpp:69
+msgid "Windows Media (ASF/WMV)"
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:251
@@ -13161,6 +13183,7 @@ msgstr ""
 msgid "und (Undetermined)"
 msgstr "und (Neurčeno)"
 
+#: src/common/file_types.cpp:103
 #: src/common/mm_io_win.cpp:161
 #: src/common/stereo_mode.cpp:68
 #: src/info/mkvinfo.cpp:683

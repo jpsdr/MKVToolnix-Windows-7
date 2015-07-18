@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-07-18 10:10+0200\n"
+"POT-Creation-Date: 2015-07-18 13:22+0200\n"
 "PO-Revision-Date: 2015-06-21 13:14+0200\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -1993,12 +1993,12 @@ msgstr "+-> 預先解析 FLAC 檔案: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> 預先解析 FLAC 檔案: 100%\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:337
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", 描述 「%1%」"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:338
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", 檔名「%1%」"
@@ -2269,7 +2269,7 @@ msgstr "附加檔案(&P)"
 msgid "A/52 (aka AC3)"
 msgstr "A/52 (亦稱 AC3)"
 
-#: src/input/r_aac.h:36
+#: src/common/file_types.cpp:67
 #: src/output/p_aac.h:42
 msgid "AAC"
 msgstr "AAC"
@@ -2290,11 +2290,11 @@ msgstr "AAC 是 SBR/HE-AAC/AAC+"
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC 是 SBR/HE-AAC/AAC+:"
 
-#: src/input/r_aac_adif.cpp:35
+#: src/input/r_aac_adif.cpp:36
 msgid "AAC with ADIF headers"
 msgstr "含 ADIF 表頭的 AAC"
 
-#: src/input/r_ac3.h:34
+#: src/common/file_types.cpp:68
 #: src/output/p_ac3.h:41
 msgid "AC3"
 msgstr "AC3"
@@ -2323,7 +2323,7 @@ msgstr ""
 msgid "ASCII string (no special chars like Umlaute etc)"
 msgstr "ASCII 字串 (不能使用特殊字元，像德語變音符號等等)"
 
-#: src/input/r_avc.h:35
+#: src/common/file_types.cpp:70
 #: src/output/p_mpeg4_p10.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
@@ -2336,7 +2336,7 @@ msgstr "AVC/h.264 (未加框)"
 msgid "AVC/h.264 elementary streams"
 msgstr "AVC/h.264 基本流"
 
-#: src/input/r_avi.h:85
+#: src/common/file_types.cpp:71
 msgid "AVI"
 msgstr "AVI"
 
@@ -2906,7 +2906,7 @@ msgstr "附加的檔案"
 msgid "Attached files"
 msgstr "附加檔案清單"
 
-#: src/merge/generic_reader.cpp:328
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "附件 ID %1%: 類型「%2%」, 大小 %3% 位元組"
@@ -3387,7 +3387,7 @@ msgstr "章節已寫入。"
 msgid "Chapters:"
 msgstr "章節:"
 
-#: src/merge/generic_reader.cpp:368
+#: src/merge/generic_reader.cpp:376
 #, fuzzy, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -3710,7 +3710,7 @@ msgstr "將章節轉換成 XML 檔失敗: %1"
 msgid "Copy the command line to the clipboard"
 msgstr "複製命令列至剪貼簿"
 
-#: src/input/r_coreaudio.h:62
+#: src/common/file_types.cpp:74
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4081,7 +4081,7 @@ msgstr "刪除(&E)"
 msgid "D&uplicate selected edition or chapter"
 msgstr "複製選擇的版本或章節(&U)"
 
-#: src/input/r_dts.h:64
+#: src/common/file_types.cpp:76
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
@@ -4105,6 +4105,11 @@ msgstr "DTS_Header 問題: 無效的源 PCM 解析度\n"
 #: src/common/dts.cpp:148
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr "DTS_Header 問題: 資料不足以讀取表頭\n"
+
+#: src/common/file_types.cpp:77
+#, fuzzy
+msgid "DV video format"
+msgstr "視訊軌"
 
 #: src/info/mkvinfo.cpp:500
 #, boost-format
@@ -4243,7 +4248,7 @@ msgid "Development hacks"
 msgstr "程式碼開發"
 
 #: src/common/file_types.cpp:30
-#: src/input/r_dirac.h:33
+#: src/common/file_types.cpp:75
 #: src/output/p_dirac.h:38
 msgid "Dirac"
 msgstr "Dirac"
@@ -4814,7 +4819,7 @@ msgstr "不支援要提取的軌道識別碼 %1%（CodecID 為「%2%」）。\n"
 msgid "F1"
 msgstr "F1"
 
-#: src/input/r_flac.h:53
+#: src/common/file_types.cpp:78
 #: src/output/p_flac.h:39
 msgid "FLAC"
 msgstr "FLAC"
@@ -4871,12 +4876,12 @@ msgstr "檔案標題(&L):"
 msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "檔案 %1% 類型未知。請查看受支援的檔案類型清單 (「mkvmerge --list-types」)，如果您的檔案類型受支援但沒被正常識別，請聯繫作者 Moritz Bunkus <moritz@bunkus.org>。\n"
 
-#: src/merge/generic_reader.cpp:326
+#: src/merge/generic_reader.cpp:334
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "檔案「%1%」: 容器: %2%"
 
-#: src/merge/id_result.cpp:24
+#: src/merge/id_result.cpp:25
 #, boost-format
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr "檔案「%1%」: 不支援的容器: %2%\n"
@@ -5043,7 +5048,7 @@ msgstr "修復位元串流時間資訊"
 msgid "Flags:"
 msgstr "標記:"
 
-#: src/input/r_flv.cpp:266
+#: src/common/file_types.cpp:79
 msgid "Flash Video"
 msgstr "Flash 視訊"
 
@@ -5230,7 +5235,7 @@ msgstr "標籤 (%d 個項目) 自 %s"
 msgid "Global tags:"
 msgstr "總體標籤:"
 
-#: src/merge/generic_reader.cpp:377
+#: src/merge/generic_reader.cpp:385
 #, fuzzy, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -5241,11 +5246,16 @@ msgstr[1] "總體標籤: %1% 項目"
 msgid "H&eaders"
 msgstr "表頭(&E)"
 
+#: src/common/file_types.cpp:81
+#, fuzzy
+msgid "HD-DVD subtitles"
+msgstr "字幕"
+
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
 msgstr "HDMV PGS"
 
-#: src/input/r_hevc.h:31
+#: src/common/file_types.cpp:80
 #: src/output/p_hevc.h:33
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
@@ -5368,7 +5378,7 @@ msgstr "ISO639-1 碼"
 msgid "ISO639-2 code"
 msgstr "ISO639-2 碼"
 
-#: src/input/r_ivf.h:35
+#: src/common/file_types.cpp:82
 msgid "IVF (VP8/VP9)"
 msgstr "IVF (VP8/VP9)"
 
@@ -6313,7 +6323,7 @@ msgstr "MKVToolNix 選項檔"
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix 圖形介面設定檔"
 
-#: src/input/r_mp3.h:34
+#: src/common/file_types.cpp:85
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -6329,7 +6339,7 @@ msgstr "MP4 音/視訊檔"
 msgid "MPEG audio files"
 msgstr "MPEG 音訊檔"
 
-#: src/input/r_mpeg_ps.h:214
+#: src/common/file_types.cpp:87
 msgid "MPEG program stream"
 msgstr "MPEG 節目串流"
 
@@ -6337,7 +6347,7 @@ msgstr "MPEG 節目串流"
 msgid "MPEG program streams"
 msgstr "MPEG 節目串流"
 
-#: src/input/r_mpeg_ts.h:418
+#: src/common/file_types.cpp:88
 msgid "MPEG transport stream"
 msgstr "MPEG 傳輸串流"
 
@@ -6345,7 +6355,7 @@ msgstr "MPEG 傳輸串流"
 msgid "MPEG transport streams"
 msgstr "MPEG 傳輸串流"
 
-#: src/input/r_mpeg_es.h:34
+#: src/common/file_types.cpp:86
 msgid "MPEG video elementary stream"
 msgstr "MPEG 視訊基本串流"
 
@@ -6402,7 +6412,7 @@ msgstr "將此軌道標記為「強制」。"
 msgid "Mark this track as 'forced'. Players must play this track."
 msgstr "將此軌標記為「強制」。播放器必須播放此軌。"
 
-#: src/input/r_matroska.h:210
+#: src/common/file_types.cpp:83
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -6488,6 +6498,10 @@ msgstr "無法為一個 RealAudio/RealVideo 畫格分配記憶體。\n"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:861
 msgid "Mi&nimum playlist duration:"
 msgstr "播放清單的最短時間長度(&N):"
+
+#: src/common/file_types.cpp:84
+msgid "MicroDVD"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:1097
 #, boost-format
@@ -7023,7 +7037,7 @@ msgstr "每畫格的毫微秒數 (未縮放前的)。"
 msgid "Numbers of channels in the track."
 msgstr "此軌道的聲道數。"
 
-#: src/input/r_ogm.h:89
+#: src/common/file_types.cpp:89
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
@@ -7285,7 +7299,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "PGS/SUP 字幕"
 
-#: src/input/r_pgssup.h:33
+#: src/common/file_types.cpp:90
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -7520,7 +7534,7 @@ msgstr "QuickTime 音訊/視訊檔"
 msgid "QuickTime compatible video"
 msgstr "QuickTime 相容視訊"
 
-#: src/input/r_qtmp4.h:444
+#: src/common/file_types.cpp:91
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -7662,6 +7676,10 @@ msgstr "離開表頭編輯器"
 msgid "Quits mkvinfo"
 msgstr "離開 mkvinfo"
 
+#: src/common/file_types.cpp:72
+msgid "RIFF CDXA"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:741
 msgid "RSA"
 msgstr "RSA"
@@ -7706,7 +7724,7 @@ msgstr "實際輸出的取樣頻率，單位 Hz。"
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/input/r_real.h:97
+#: src/common/file_types.cpp:92
 msgid "RealMedia"
 msgstr "RealMedia"
 
@@ -7887,7 +7905,7 @@ msgstr "加入到任務佇列(&A)"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/input/r_srt.h:33
+#: src/common/file_types.cpp:93
 msgid "SRT subtitles"
 msgstr "SRT 字幕"
 
@@ -7895,7 +7913,7 @@ msgstr "SRT 字幕"
 msgid "SRT text subtitles"
 msgstr "SRT 文字字幕"
 
-#: src/input/r_ssa.h:32
+#: src/common/file_types.cpp:94
 msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS 字幕"
 
@@ -8853,7 +8871,7 @@ msgstr "支援的檔案類型:\n"
 msgid "Suppress status output."
 msgstr "停用狀態輸出。"
 
-#: src/input/r_tta.h:36
+#: src/common/file_types.cpp:96
 #: src/output/p_tta.h:34
 msgid "TTA"
 msgstr "TTA"
@@ -8897,7 +8915,7 @@ msgstr "標籤"
 msgid "Tags are allowed, but chapters are not."
 msgstr "允許標籤，但不允許章節。"
 
-#: src/merge/generic_reader.cpp:382
+#: src/merge/generic_reader.cpp:390
 #, fuzzy, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -9425,7 +9443,7 @@ msgstr "檔案「%1%」已開啟以寫入。\n"
 msgid "The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "檔案「%1%」類型未知。請查看支援的檔案類型 (「mkvmerge --list-types」)，若您的檔案類型受支援但被錯誤識別，請聯繫作者 Moritz Bunkus <moritz@bunkus.org>。\n"
 
-#: src/merge/id_result.cpp:28
+#: src/merge/id_result.cpp:29
 #, boost-format
 msgid "The file '%1%' is a non-supported file type (%2%).\n"
 msgstr "此檔案「%1%」類型不支援 (%2%)。\n"
@@ -10817,7 +10835,7 @@ msgstr "軌道 %1%: AAC 資訊無法解析。\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "軌道 ID %1% 的 AAC 類型未知。\n"
 
-#: src/merge/generic_reader.cpp:327
+#: src/merge/generic_reader.cpp:335
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "軌道 ID %1%: %2% (%3%)"
@@ -10904,7 +10922,7 @@ msgstr "軌道列表:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "播放問題的故障排除建議"
 
-#: src/input/r_truehd.h:39
+#: src/common/file_types.cpp:95
 #: src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -10959,7 +10977,7 @@ msgstr "典型使用情形包括讀取 DVD 的 VOB (例如 VTS_01_1.VOB、VTS_01
 msgid "UID:"
 msgstr "UID:"
 
-#: src/input/r_usf.h:70
+#: src/common/file_types.cpp:97
 msgid "USF subtitles"
 msgstr "USF 字幕"
 
@@ -11130,7 +11148,7 @@ msgstr "使用者定義選項:"
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
 msgstr "使用 3 位元組的 NALU 長可能會導致某些 AVC/h.264 編解碼器無法解碼該軌道。\n"
 
-#: src/merge/generic_reader.h:44
+#: src/merge/generic_reader.h:45
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "此格式「%1%」使用多工解訊器。\n"
 
@@ -11139,11 +11157,11 @@ msgstr "此格式「%1%」使用多工解訊器。\n"
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "軌道類型「%1%」使用一般輸出模組。\n"
 
-#: src/merge/generic_reader.h:46
+#: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "格式「%1%」使用此輸出模組。\n"
 
-#: src/input/r_vc1.h:34
+#: src/common/file_types.cpp:98
 #: src/output/p_vc1.h:37
 msgid "VC1"
 msgstr "VC1"
@@ -11295,7 +11313,7 @@ msgstr "檢視播放清單的檔案"
 msgid "View the output that mkvmerge generated during the muxing process for the selected jobs"
 msgstr "檢視選擇的任務合成處理過程期間由 mkvmerge 生成的輸出資訊"
 
-#: src/input/r_vobbtn.h:34
+#: src/common/file_types.cpp:99
 #: src/output/p_vobbtn.h:36
 msgid "VobBtn"
 msgstr "VobBtn"
@@ -11304,7 +11322,7 @@ msgstr "VobBtn"
 msgid "VobButtons"
 msgstr "VobBtn 按鈕"
 
-#: src/input/r_vobsub.h:73
+#: src/common/file_types.cpp:100
 #: src/output/p_vobsub.h:31
 msgid "VobSub"
 msgstr "VobSub"
@@ -11317,7 +11335,7 @@ msgstr "VobSub 字幕"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/input/r_wav.h:75
+#: src/common/file_types.cpp:101
 msgid "WAV"
 msgstr "WAV"
 
@@ -11325,7 +11343,7 @@ msgstr "WAV"
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE (未壓縮的 PCM 音訊)"
 
-#: src/input/r_wavpack.h:35
+#: src/common/file_types.cpp:102
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
@@ -11438,6 +11456,10 @@ msgstr "視訊畫格的顯示寬度。"
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
 msgid "Windows (cmd.exe)"
 msgstr "Windows (cmd.exe)"
+
+#: src/common/file_types.cpp:69
+msgid "Windows Media (ASF/WMV)"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:251
 msgid "With this option that information is adjusted to match the container's timing information."
@@ -12856,6 +12878,7 @@ msgstr "tta_reader: c'tor 中 tag_size < 0。 %1%\n"
 msgid "und (Undetermined)"
 msgstr "und (未定)"
 
+#: src/common/file_types.cpp:103
 #: src/common/mm_io_win.cpp:161
 #: src/common/stereo_mode.cpp:68
 #: src/info/mkvinfo.cpp:683

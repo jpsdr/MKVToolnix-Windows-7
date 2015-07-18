@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-4.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-07-18 10:10+0200\n"
+"POT-Creation-Date: 2015-07-18 13:22+0200\n"
 "PO-Revision-Date: 2015-06-21 13:13+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <embar@users.berlios.de>\n"
@@ -1912,12 +1912,12 @@ msgstr ""
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr ""
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:337
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", „%1%“ aprašas"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:338
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", „%1%“ rinkmena"
@@ -2188,7 +2188,7 @@ msgstr "Esami priedai"
 msgid "A/52 (aka AC3)"
 msgstr "A/52 (aka AC3)"
 
-#: src/input/r_aac.h:36
+#: src/common/file_types.cpp:67
 #: src/output/p_aac.h:42
 msgid "AAC"
 msgstr ""
@@ -2209,11 +2209,11 @@ msgstr ""
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr ""
 
-#: src/input/r_aac_adif.cpp:35
+#: src/input/r_aac_adif.cpp:36
 msgid "AAC with ADIF headers"
 msgstr ""
 
-#: src/input/r_ac3.h:34
+#: src/common/file_types.cpp:68
 #: src/output/p_ac3.h:41
 msgid "AC3"
 msgstr "AC3"
@@ -2240,7 +2240,7 @@ msgstr ""
 msgid "ASCII string (no special chars like Umlaute etc)"
 msgstr ""
 
-#: src/input/r_avc.h:35
+#: src/common/file_types.cpp:70
 #: src/output/p_mpeg4_p10.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
@@ -2254,7 +2254,7 @@ msgstr "AVC/h.264"
 msgid "AVC/h.264 elementary streams"
 msgstr "AVC/h.264 elementarieji srautai"
 
-#: src/input/r_avi.h:85
+#: src/common/file_types.cpp:71
 msgid "AVI"
 msgstr "AVI"
 
@@ -2845,7 +2845,7 @@ msgstr "Pridėta"
 msgid "Attached files"
 msgstr "Esami priedai"
 
-#: src/merge/generic_reader.cpp:328
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr ""
@@ -3335,7 +3335,7 @@ msgstr "Skyriai įrašyti."
 msgid "Chapters:"
 msgstr "Skyriai:"
 
-#: src/merge/generic_reader.cpp:368
+#: src/merge/generic_reader.cpp:376
 #, fuzzy, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -3667,7 +3667,7 @@ msgstr "Dabartinius skyrius įrašyti į XML rinkmeną"
 msgid "Copy the command line to the clipboard"
 msgstr "Komandinę eilutę nukopijuoti į iškarpinę"
 
-#: src/input/r_coreaudio.h:62
+#: src/common/file_types.cpp:74
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4041,7 +4041,7 @@ msgstr "Ša&linti"
 msgid "D&uplicate selected edition or chapter"
 msgstr ""
 
-#: src/input/r_dts.h:64
+#: src/common/file_types.cpp:76
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr ""
@@ -4065,6 +4065,11 @@ msgstr ""
 #: src/common/dts.cpp:148
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr ""
+
+#: src/common/file_types.cpp:77
+#, fuzzy
+msgid "DV video format"
+msgstr "Vaizdo takelis"
 
 #: src/info/mkvinfo.cpp:500
 #, boost-format
@@ -4211,7 +4216,7 @@ msgid "Development hacks"
 msgstr "Segmento takeliai"
 
 #: src/common/file_types.cpp:30
-#: src/input/r_dirac.h:33
+#: src/common/file_types.cpp:75
 #: src/output/p_dirac.h:38
 msgid "Dirac"
 msgstr "Dirac"
@@ -4789,7 +4794,7 @@ msgstr ""
 msgid "F1"
 msgstr ""
 
-#: src/input/r_flac.h:53
+#: src/common/file_types.cpp:78
 #: src/output/p_flac.h:39
 msgid "FLAC"
 msgstr "FLAC"
@@ -4847,12 +4852,12 @@ msgstr "Rinkmenos/segmento antraštė:"
 msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr ""
 
-#: src/merge/generic_reader.cpp:326
+#: src/merge/generic_reader.cpp:334
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr ""
 
-#: src/merge/id_result.cpp:24
+#: src/merge/id_result.cpp:25
 #, boost-format
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr ""
@@ -5028,7 +5033,7 @@ msgstr "Klaida įrašant informaciją"
 msgid "Flags:"
 msgstr "Gairės:"
 
-#: src/input/r_flv.cpp:266
+#: src/common/file_types.cpp:79
 msgid "Flash Video"
 msgstr "Flash vaizdas"
 
@@ -5218,7 +5223,7 @@ msgstr ""
 msgid "Global tags:"
 msgstr "Bendros parinktys"
 
-#: src/merge/generic_reader.cpp:377
+#: src/merge/generic_reader.cpp:385
 #, fuzzy, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -5230,11 +5235,16 @@ msgstr[2] "Bendros parinktys"
 msgid "H&eaders"
 msgstr "&Antraštės"
 
+#: src/common/file_types.cpp:81
+#, fuzzy
+msgid "HD-DVD subtitles"
+msgstr "subtitrai"
+
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
 msgstr ""
 
-#: src/input/r_hevc.h:31
+#: src/common/file_types.cpp:80
 #: src/output/p_hevc.h:33
 #, fuzzy
 msgid "HEVC/h.265"
@@ -5352,7 +5362,7 @@ msgstr "ISO639-1 kodas"
 msgid "ISO639-2 code"
 msgstr "ISO639-2 kodas"
 
-#: src/input/r_ivf.h:35
+#: src/common/file_types.cpp:82
 #, fuzzy
 msgid "IVF (VP8/VP9)"
 msgstr "IVF (VP8)"
@@ -6303,7 +6313,7 @@ msgstr "Sukurti &nuostatų rinkmeną"
 msgid "MKVToolnix GUI config files"
 msgstr ""
 
-#: src/input/r_mp3.h:34
+#: src/common/file_types.cpp:85
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -6319,7 +6329,7 @@ msgstr "MP4 garso/vaizdo rinkmenos"
 msgid "MPEG audio files"
 msgstr "MPEG garso rinkmenos"
 
-#: src/input/r_mpeg_ps.h:214
+#: src/common/file_types.cpp:87
 msgid "MPEG program stream"
 msgstr "MPEG programos srautas"
 
@@ -6327,7 +6337,7 @@ msgstr "MPEG programos srautas"
 msgid "MPEG program streams"
 msgstr "MPEG programos srautai"
 
-#: src/input/r_mpeg_ts.h:418
+#: src/common/file_types.cpp:88
 msgid "MPEG transport stream"
 msgstr ""
 
@@ -6335,7 +6345,7 @@ msgstr ""
 msgid "MPEG transport streams"
 msgstr ""
 
-#: src/input/r_mpeg_es.h:34
+#: src/common/file_types.cpp:86
 msgid "MPEG video elementary stream"
 msgstr ""
 
@@ -6393,7 +6403,7 @@ msgstr ""
 msgid "Mark this track as 'forced'. Players must play this track."
 msgstr ""
 
-#: src/input/r_matroska.h:210
+#: src/common/file_types.cpp:83
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -6482,6 +6492,10 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:861
 msgid "Mi&nimum playlist duration:"
+msgstr ""
+
+#: src/common/file_types.cpp:84
+msgid "MicroDVD"
 msgstr ""
 
 #: src/info/mkvinfo.cpp:1097
@@ -7024,7 +7038,7 @@ msgstr ""
 msgid "Numbers of channels in the track."
 msgstr "Takelyje esančių kanalų skaičius."
 
-#: src/input/r_ogm.h:89
+#: src/common/file_types.cpp:89
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
@@ -7296,7 +7310,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "PGS/SUP subtitrai"
 
-#: src/input/r_pgssup.h:33
+#: src/common/file_types.cpp:90
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -7535,7 +7549,7 @@ msgstr "QuickTime garso/vaizdo rinkmenos"
 msgid "QuickTime compatible video"
 msgstr "QuickTime garso/vaizdo rinkmenos"
 
-#: src/input/r_qtmp4.h:444
+#: src/common/file_types.cpp:91
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -7677,6 +7691,10 @@ msgstr "Užverti antraščių redagavimo priemonę"
 msgid "Quits mkvinfo"
 msgstr ""
 
+#: src/common/file_types.cpp:72
+msgid "RIFF CDXA"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:741
 msgid "RSA"
 msgstr ""
@@ -7722,7 +7740,7 @@ msgstr ""
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/input/r_real.h:97
+#: src/common/file_types.cpp:92
 msgid "RealMedia"
 msgstr ""
 
@@ -7906,7 +7924,7 @@ msgstr "Įtraukti į &darbų eilę"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/input/r_srt.h:33
+#: src/common/file_types.cpp:93
 msgid "SRT subtitles"
 msgstr "SRT subtitrai"
 
@@ -7914,7 +7932,7 @@ msgstr "SRT subtitrai"
 msgid "SRT text subtitles"
 msgstr ""
 
-#: src/input/r_ssa.h:32
+#: src/common/file_types.cpp:94
 msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS subtitrai"
 
@@ -8900,7 +8918,7 @@ msgstr "Palaikomi rinkmenų tipai:\n"
 msgid "Suppress status output."
 msgstr ""
 
-#: src/input/r_tta.h:36
+#: src/common/file_types.cpp:96
 #: src/output/p_tta.h:34
 msgid "TTA"
 msgstr "TTA"
@@ -8944,7 +8962,7 @@ msgstr "Gairės"
 msgid "Tags are allowed, but chapters are not."
 msgstr ""
 
-#: src/merge/generic_reader.cpp:382
+#: src/merge/generic_reader.cpp:390
 #, fuzzy, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -9466,7 +9484,7 @@ msgstr "Rinkmeną „%1%“ atverėme įrašymui.\n"
 msgid "The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr ""
 
-#: src/merge/id_result.cpp:28
+#: src/merge/id_result.cpp:29
 #, boost-format
 msgid "The file '%1%' is a non-supported file type (%2%).\n"
 msgstr "Šios rinkmenos „%1%“ tipo nepalaikome (%2%).\n"
@@ -10843,7 +10861,7 @@ msgstr ""
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr ""
 
-#: src/merge/generic_reader.cpp:327
+#: src/merge/generic_reader.cpp:335
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Takelio ID %1%: %2% (%3%)"
@@ -10931,7 +10949,7 @@ msgstr "Takelio pavadinimas:"
 msgid "Troubleshooting advice for playback issues"
 msgstr ""
 
-#: src/input/r_truehd.h:39
+#: src/common/file_types.cpp:95
 #: src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -10985,7 +11003,7 @@ msgstr ""
 msgid "UID:"
 msgstr "UID:"
 
-#: src/input/r_usf.h:70
+#: src/common/file_types.cpp:97
 msgid "USF subtitles"
 msgstr "USF subtitrai"
 
@@ -11158,7 +11176,7 @@ msgstr "Naudotojo apibrėžtos parinktys:"
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
 msgstr ""
 
-#: src/merge/generic_reader.h:44
+#: src/merge/generic_reader.h:45
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr ""
 
@@ -11167,11 +11185,11 @@ msgstr ""
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr ""
 
-#: src/merge/generic_reader.h:46
+#: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr ""
 
-#: src/input/r_vc1.h:34
+#: src/common/file_types.cpp:98
 #: src/output/p_vc1.h:37
 msgid "VC1"
 msgstr "VC1"
@@ -11328,7 +11346,7 @@ msgstr ""
 msgid "View the output that mkvmerge generated during the muxing process for the selected jobs"
 msgstr ""
 
-#: src/input/r_vobbtn.h:34
+#: src/common/file_types.cpp:99
 #: src/output/p_vobbtn.h:36
 msgid "VobBtn"
 msgstr ""
@@ -11337,7 +11355,7 @@ msgstr ""
 msgid "VobButtons"
 msgstr ""
 
-#: src/input/r_vobsub.h:73
+#: src/common/file_types.cpp:100
 #: src/output/p_vobsub.h:31
 msgid "VobSub"
 msgstr "VobSub"
@@ -11350,7 +11368,7 @@ msgstr ""
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/input/r_wav.h:75
+#: src/common/file_types.cpp:101
 msgid "WAV"
 msgstr "WAV"
 
@@ -11358,7 +11376,7 @@ msgstr "WAV"
 msgid "WAVE (uncompressed PCM audio)"
 msgstr ""
 
-#: src/input/r_wavpack.h:35
+#: src/common/file_types.cpp:102
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
@@ -11471,6 +11489,10 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
 msgid "Windows (cmd.exe)"
+msgstr ""
+
+#: src/common/file_types.cpp:69
+msgid "Windows Media (ASF/WMV)"
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:251
@@ -12921,6 +12943,7 @@ msgstr ""
 msgid "und (Undetermined)"
 msgstr "und (nenurodyta)"
 
+#: src/common/file_types.cpp:103
 #: src/common/mm_io_win.cpp:161
 #: src/common/stereo_mode.cpp:68
 #: src/info/mkvinfo.cpp:683

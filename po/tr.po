@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.1.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-07-18 10:10+0200\n"
+"POT-Creation-Date: 2015-07-18 13:22+0200\n"
 "PO-Revision-Date: 2015-07-12 23:45+0300\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
@@ -2085,12 +2085,12 @@ msgstr "+-> FLAC dosyası ön-ayrıştırması yapılıyor: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> FLAC dosyası ön-ayrıştırması yapılıyor: %100\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:337
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", tanımı '%1%'"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:338
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", dosya adı '%1%'"
@@ -2409,7 +2409,7 @@ msgstr "D&osyaları ilave et"
 msgid "A/52 (aka AC3)"
 msgstr "A/52 (AC3 olarak bilinir)"
 
-#: src/input/r_aac.h:36 src/output/p_aac.h:42
+#: src/common/file_types.cpp:67 src/output/p_aac.h:42
 msgid "AAC"
 msgstr "AAC"
 
@@ -2438,11 +2438,11 @@ msgstr "AAC, SBR/HE-AAC/AAC+ olsun"
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC, SBR/HE-AAC/AAC+ olsun:"
 
-#: src/input/r_aac_adif.cpp:35
+#: src/input/r_aac_adif.cpp:36
 msgid "AAC with ADIF headers"
 msgstr "ADIF başlıkları ile AAC"
 
-#: src/input/r_ac3.h:34 src/output/p_ac3.h:41
+#: src/common/file_types.cpp:68 src/output/p_ac3.h:41
 msgid "AC3"
 msgstr "AC3"
 
@@ -2470,7 +2470,7 @@ msgstr ""
 msgid "ASCII string (no special chars like Umlaute etc)"
 msgstr "ASCII dizgisi (çift noktalı harfler vb. gibi özel karakterler yok)"
 
-#: src/input/r_avc.h:35 src/output/p_mpeg4_p10.h:34
+#: src/common/file_types.cpp:70 src/output/p_mpeg4_p10.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
 
@@ -2482,7 +2482,7 @@ msgstr "AVC/h.264 (karesiz)"
 msgid "AVC/h.264 elementary streams"
 msgstr "AVC/h.264 temel akışları"
 
-#: src/input/r_avi.h:85
+#: src/common/file_types.cpp:71
 msgid "AVI"
 msgstr "AVI"
 
@@ -3105,7 +3105,7 @@ msgstr "Ekli"
 msgid "Attached files"
 msgstr "Ekli dosyalar"
 
-#: src/merge/generic_reader.cpp:328
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Ek ID %1%: türü '%2%', boyutu %3% bayt"
@@ -3611,7 +3611,7 @@ msgstr "Bölümler yazıldı."
 msgid "Chapters:"
 msgstr "Bölümler:"
 
-#: src/merge/generic_reader.cpp:368
+#: src/merge/generic_reader.cpp:376
 #, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -3939,7 +3939,7 @@ msgstr "Bölümleri XML'e dönüştürme başarısız oldu: %1"
 msgid "Copy the command line to the clipboard"
 msgstr "Komut satırını panoya kopyala"
 
-#: src/input/r_coreaudio.h:62
+#: src/common/file_types.cpp:74
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4358,7 +4358,7 @@ msgstr "&Sil"
 msgid "D&uplicate selected edition or chapter"
 msgstr "Seçilen yayını ya da bölümü ç&oğalt"
 
-#: src/input/r_dts.h:64 src/output/p_dts.h:46
+#: src/common/file_types.cpp:76 src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
 
@@ -4381,6 +4381,11 @@ msgstr "DTS_Başlığı sorunu: geçersiz kaynak PCM çözünürlüğü\n"
 #: src/common/dts.cpp:148
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr "DTS_Başlığı sorunu: başlığı okumak için yeterli veri yok\n"
+
+#: src/common/file_types.cpp:77
+#, fuzzy
+msgid "DV video format"
+msgstr "Görüntü izi"
 
 #: src/info/mkvinfo.cpp:500
 #, boost-format
@@ -4521,7 +4526,8 @@ msgstr "Ayrıntılar"
 msgid "Development hacks"
 msgstr "Geliştirme kurcalamaları"
 
-#: src/common/file_types.cpp:30 src/input/r_dirac.h:33 src/output/p_dirac.h:38
+#: src/common/file_types.cpp:30 src/common/file_types.cpp:75
+#: src/output/p_dirac.h:38
 msgid "Dirac"
 msgstr "Dirac"
 
@@ -5156,7 +5162,7 @@ msgstr "KodekID '%2%' ile olan iz ID %1% çıkartılması desteklenmiyor.\n"
 msgid "F1"
 msgstr "F1"
 
-#: src/input/r_flac.h:53 src/output/p_flac.h:39
+#: src/common/file_types.cpp:78 src/output/p_flac.h:39
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -5219,12 +5225,12 @@ msgstr ""
 "bir şekilde tanınmıyorsa, yazar Moritz Bunkus <moritz@bunkus.org> ile "
 "irtibata geçin.\n"
 
-#: src/merge/generic_reader.cpp:326
+#: src/merge/generic_reader.cpp:334
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Dosya '%1%': kalıp: %2%"
 
-#: src/merge/id_result.cpp:24
+#: src/merge/id_result.cpp:25
 #, boost-format
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr "Dosya '%1%': desteklenmeyen kalıp: %2%\n"
@@ -5395,7 +5401,7 @@ msgstr "Bit akışı zamanlaması bilgisini düzelt"
 msgid "Flags:"
 msgstr "İşaretler:"
 
-#: src/input/r_flv.cpp:266
+#: src/common/file_types.cpp:79
 msgid "Flash Video"
 msgstr "Flash Video"
 
@@ -5635,7 +5641,7 @@ msgstr "Genel etiket (%d giriş), dosya: %s"
 msgid "Global tags:"
 msgstr "Genel etiketler:"
 
-#: src/merge/generic_reader.cpp:377
+#: src/merge/generic_reader.cpp:385
 #, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -5646,11 +5652,16 @@ msgstr[1] "Genel etiket: %1% giriş"
 msgid "H&eaders"
 msgstr "&Başlıklar"
 
+#: src/common/file_types.cpp:81
+#, fuzzy
+msgid "HD-DVD subtitles"
+msgstr "altyazı"
+
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
 msgstr "HDMV PGS"
 
-#: src/input/r_hevc.h:31 src/output/p_hevc.h:33
+#: src/common/file_types.cpp:80 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
 
@@ -5782,7 +5793,7 @@ msgstr "ISO639-1 kodu"
 msgid "ISO639-2 code"
 msgstr "ISO639-2 kodu"
 
-#: src/input/r_ivf.h:35
+#: src/common/file_types.cpp:82
 msgid "IVF (VP8/VP9)"
 msgstr "IVF (VP8/VP9)"
 
@@ -7041,7 +7052,7 @@ msgstr "MKVToolNix seçenek dosyaları"
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix GKA yapılandırma dosyaları"
 
-#: src/input/r_mp3.h:34
+#: src/common/file_types.cpp:85
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -7057,7 +7068,7 @@ msgstr "MP4 ses/görüntü dosyaları"
 msgid "MPEG audio files"
 msgstr "MPEG ses dosyaları"
 
-#: src/input/r_mpeg_ps.h:214
+#: src/common/file_types.cpp:87
 msgid "MPEG program stream"
 msgstr "MPEG program akışı"
 
@@ -7065,7 +7076,7 @@ msgstr "MPEG program akışı"
 msgid "MPEG program streams"
 msgstr "MPEG program akışları"
 
-#: src/input/r_mpeg_ts.h:418
+#: src/common/file_types.cpp:88
 msgid "MPEG transport stream"
 msgstr "MPEG taşıma akışı"
 
@@ -7073,7 +7084,7 @@ msgstr "MPEG taşıma akışı"
 msgid "MPEG transport streams"
 msgstr "MPEG taşıma akışları"
 
-#: src/input/r_mpeg_es.h:34
+#: src/common/file_types.cpp:86
 msgid "MPEG video elementary stream"
 msgstr "MPEG görüntü temel akışı"
 
@@ -7134,7 +7145,7 @@ msgid "Mark this track as 'forced'. Players must play this track."
 msgstr ""
 "Bu izi 'zorlanan' olarak işaretler. Oynatıcılar bu izi oynatmak zorundadır."
 
-#: src/input/r_matroska.h:210
+#: src/common/file_types.cpp:83
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -7223,6 +7234,10 @@ msgstr "RealAudio/RealVideo karesi için bellek ayrılamadı.\n"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:861
 msgid "Mi&nimum playlist duration:"
 msgstr "E&n az oynatma listesi süresi:"
+
+#: src/common/file_types.cpp:84
+msgid "MicroDVD"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:1097
 #, boost-format
@@ -7839,7 +7854,7 @@ msgstr "Kare başına nanosaniye (ölçeklendirilmemiş) sayısı."
 msgid "Numbers of channels in the track."
 msgstr "İzdeki kanal sayısı."
 
-#: src/input/r_ogm.h:89
+#: src/common/file_types.cpp:89
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
@@ -8130,7 +8145,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "PGS/SUP altyazıları"
 
-#: src/input/r_pgssup.h:33
+#: src/common/file_types.cpp:90
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -8375,7 +8390,7 @@ msgstr "QuickTime ses/görüntü dosyaları"
 msgid "QuickTime compatible video"
 msgstr "QuickTime uyumlu görüntü"
 
-#: src/input/r_qtmp4.h:444
+#: src/common/file_types.cpp:91
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -8601,6 +8616,10 @@ msgstr "Başlık düzenleyiciden çık"
 msgid "Quits mkvinfo"
 msgstr "mkvinfo'dan çık"
 
+#: src/common/file_types.cpp:72
+msgid "RIFF CDXA"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:741
 msgid "RSA"
 msgstr "RSA"
@@ -8650,7 +8669,7 @@ msgstr "Hz. olarak gerçek çıktı örnekleme sıklığı."
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/input/r_real.h:97
+#: src/common/file_types.cpp:92
 msgid "RealMedia"
 msgstr "RealMedia"
 
@@ -8836,7 +8855,7 @@ msgstr "İş kuyruğunu &durdur"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/input/r_srt.h:33
+#: src/common/file_types.cpp:93
 msgid "SRT subtitles"
 msgstr "SRT altyazıları"
 
@@ -8844,7 +8863,7 @@ msgstr "SRT altyazıları"
 msgid "SRT text subtitles"
 msgstr "SRT metin altyazıları"
 
-#: src/input/r_ssa.h:32
+#: src/common/file_types.cpp:94
 msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS altyazıları"
 
@@ -9932,7 +9951,7 @@ msgstr "Desteklenen dosya türleri:\n"
 msgid "Suppress status output."
 msgstr "Durdurma durumu çıktısı."
 
-#: src/input/r_tta.h:36 src/output/p_tta.h:34
+#: src/common/file_types.cpp:96 src/output/p_tta.h:34
 msgid "TTA"
 msgstr "TTA"
 
@@ -9974,7 +9993,7 @@ msgstr "Etiketler"
 msgid "Tags are allowed, but chapters are not."
 msgstr "Etiketlere izin verilir ancak bölümlere verilmez."
 
-#: src/merge/generic_reader.cpp:382
+#: src/merge/generic_reader.cpp:390
 #, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -10669,7 +10688,7 @@ msgstr ""
 "düzgün olarak tanınmıyorsa, yazar Moritz Bunkus <moritz@bunkus.org> ile "
 "irtibata geçin.\n"
 
-#: src/merge/id_result.cpp:28
+#: src/merge/id_result.cpp:29
 #, boost-format
 msgid "The file '%1%' is a non-supported file type (%2%).\n"
 msgstr "'%1%' dosyası desteklenmeyen bir dosya türü (%2%).\n"
@@ -12482,7 +12501,7 @@ msgstr "İz %1%: AAC bilgisi ayrıştırılamadı.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "İz ID %1% bilinmeyen bir AAC türüne sahip.\n"
 
-#: src/merge/generic_reader.cpp:327
+#: src/merge/generic_reader.cpp:335
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "İz ID %1%: %2% (%3%)"
@@ -12577,7 +12596,7 @@ msgstr "İzler:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Oynatma sorunları için sorun giderme tavsiye et"
 
-#: src/input/r_truehd.h:39 src/output/p_truehd.h:41
+#: src/common/file_types.cpp:95 src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -12644,7 +12663,7 @@ msgstr ""
 msgid "UID:"
 msgstr "UID:"
 
-#: src/input/r_usf.h:70
+#: src/common/file_types.cpp:97
 msgid "USF subtitles"
 msgstr "USF altyazıları"
 
@@ -12833,7 +12852,7 @@ msgid ""
 "decodable with certain AVC/h.264 codecs.\n"
 msgstr ""
 
-#: src/merge/generic_reader.h:44
+#: src/merge/generic_reader.h:45
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "'%1%' biçimi için demultiplexer kullanılıyor.\n"
 
@@ -12842,11 +12861,11 @@ msgstr "'%1%' biçimi için demultiplexer kullanılıyor.\n"
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "'%1%' iz türü için genel çıktı modülü kullanılıyor.\n"
 
-#: src/merge/generic_reader.h:46
+#: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "'%1%' biçimi için çıktı modülü kullanılıyor.\n"
 
-#: src/input/r_vc1.h:34 src/output/p_vc1.h:37
+#: src/common/file_types.cpp:98 src/output/p_vc1.h:37
 msgid "VC1"
 msgstr "VC1"
 
@@ -13002,7 +13021,7 @@ msgstr ""
 "Seçilen işler için çoklama işlemi sırasında mkvmerge'ün oluşturduğu çıktıyı "
 "göster"
 
-#: src/input/r_vobbtn.h:34 src/output/p_vobbtn.h:36
+#: src/common/file_types.cpp:99 src/output/p_vobbtn.h:36
 msgid "VobBtn"
 msgstr "VobBtn"
 
@@ -13010,7 +13029,7 @@ msgstr "VobBtn"
 msgid "VobButtons"
 msgstr "VobButtons"
 
-#: src/input/r_vobsub.h:73 src/output/p_vobsub.h:31
+#: src/common/file_types.cpp:100 src/output/p_vobsub.h:31
 msgid "VobSub"
 msgstr "VobSub"
 
@@ -13022,7 +13041,7 @@ msgstr "VobSub altyazıları"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/input/r_wav.h:75
+#: src/common/file_types.cpp:101
 msgid "WAV"
 msgstr "WAV"
 
@@ -13030,7 +13049,7 @@ msgstr "WAV"
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE (sıkıştırılmamış PCM sesi)"
 
-#: src/input/r_wavpack.h:35
+#: src/common/file_types.cpp:102
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
@@ -13171,6 +13190,10 @@ msgstr "Görüntülemek için görüntü kareleri genişliği."
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
 msgid "Windows (cmd.exe)"
 msgstr "Windows (cmd.exe)"
+
+#: src/common/file_types.cpp:69
+msgid "Windows Media (ASF/WMV)"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:251
 msgid ""
@@ -14764,11 +14787,11 @@ msgstr "tta_reader: c'tor içinde tag_size < 0. %1%\n"
 msgid "und (Undetermined)"
 msgstr "und (Belirsiz)"
 
-#: src/common/mm_io_win.cpp:161 src/common/stereo_mode.cpp:68
-#: src/info/mkvinfo.cpp:683 src/info/mkvinfo.cpp:693 src/info/mkvinfo.cpp:708
-#: src/info/mkvinfo.cpp:730 src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752
-#: src/info/mkvinfo.cpp:938 src/input/r_matroska.cpp:100
-#: src/input/r_matroska.cpp:2353
+#: src/common/file_types.cpp:103 src/common/mm_io_win.cpp:161
+#: src/common/stereo_mode.cpp:68 src/info/mkvinfo.cpp:683
+#: src/info/mkvinfo.cpp:693 src/info/mkvinfo.cpp:708 src/info/mkvinfo.cpp:730
+#: src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752 src/info/mkvinfo.cpp:938
+#: src/input/r_matroska.cpp:100 src/input/r_matroska.cpp:2353
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:159
 #: src/mkvtoolnix-gui/jobs/job.cpp:121
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57

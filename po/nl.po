@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-07-18 10:10+0200\n"
+"POT-Creation-Date: 2015-07-18 13:22+0200\n"
 "PO-Revision-Date: 2015-06-21 13:13+0200\n"
 "Last-Translator: René Maassen <bmom43@gmail.com>\n"
 "Language-Team: Dutch <bmom43@gmail.com>\n"
@@ -2167,12 +2167,12 @@ msgstr "+-> Voor-ontleden FLAC bestand: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Voor-ontleden FLAC bestand: 100%\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:337
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", beschrijving '%1%'"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:338
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", bestandsnaam '%1%'"
@@ -2514,7 +2514,7 @@ msgstr "&Bijvoegen bestanden"
 msgid "A/52 (aka AC3)"
 msgstr "A/52 (alias AC3)"
 
-#: src/input/r_aac.h:36 src/output/p_aac.h:42
+#: src/common/file_types.cpp:67 src/output/p_aac.h:42
 msgid "AAC"
 msgstr "AAC"
 
@@ -2544,11 +2544,11 @@ msgstr "AAC is SBR/HE-AAC/AAC+"
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC is SBR/HE-AAC/AAC+:"
 
-#: src/input/r_aac_adif.cpp:35
+#: src/input/r_aac_adif.cpp:36
 msgid "AAC with ADIF headers"
 msgstr "AAC met ADIF koppen (headers)"
 
-#: src/input/r_ac3.h:34 src/output/p_ac3.h:41
+#: src/common/file_types.cpp:68 src/output/p_ac3.h:41
 msgid "AC3"
 msgstr "AC3"
 
@@ -2576,7 +2576,7 @@ msgstr ""
 msgid "ASCII string (no special chars like Umlaute etc)"
 msgstr "ASCII reeks (geen speciale karakters zoals Umlaut etc.)"
 
-#: src/input/r_avc.h:35 src/output/p_mpeg4_p10.h:34
+#: src/common/file_types.cpp:70 src/output/p_mpeg4_p10.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
 
@@ -2588,7 +2588,7 @@ msgstr "AVC/h.264 (niet ingelijst)"
 msgid "AVC/h.264 elementary streams"
 msgstr "AVC/h.264 basisstroom"
 
-#: src/input/r_avi.h:85
+#: src/common/file_types.cpp:71
 msgid "AVI"
 msgstr "AVI"
 
@@ -3218,7 +3218,7 @@ msgstr "Vastgemaakt"
 msgid "Attached files"
 msgstr "Bestand bijlagen"
 
-#: src/merge/generic_reader.cpp:328
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Bijlage ID %1%: type '%2%', grootte %3% bytes"
@@ -3736,7 +3736,7 @@ msgstr "Hoofdstuk geschreven."
 msgid "Chapters:"
 msgstr "Hoofdstukken:"
 
-#: src/merge/generic_reader.cpp:368
+#: src/merge/generic_reader.cpp:376
 #, fuzzy, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -4062,7 +4062,7 @@ msgstr "Hoofdstukken converteren naar XML mislukt: %1"
 msgid "Copy the command line to the clipboard"
 msgstr "Kopieer commando regel naar klembord"
 
-#: src/input/r_coreaudio.h:62
+#: src/common/file_types.cpp:74
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4494,7 +4494,7 @@ msgstr "V&erwijder"
 msgid "D&uplicate selected edition or chapter"
 msgstr "D&upliceer geselecteerde editie of hoofdstuk"
 
-#: src/input/r_dts.h:64 src/output/p_dts.h:46
+#: src/common/file_types.cpp:76 src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
 
@@ -4517,6 +4517,11 @@ msgstr "DTS_Header probleem: ongeldig PCM bron resolutie\n"
 #: src/common/dts.cpp:148
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr "DTS_Header probleem: onvoldoende data in de kop te lezen\n"
+
+#: src/common/file_types.cpp:77
+#, fuzzy
+msgid "DV video format"
+msgstr "Video spoor"
 
 #: src/info/mkvinfo.cpp:500
 #, boost-format
@@ -4659,7 +4664,8 @@ msgstr "Details"
 msgid "Development hacks"
 msgstr "### Ontwikkel hacks ###"
 
-#: src/common/file_types.cpp:30 src/input/r_dirac.h:33 src/output/p_dirac.h:38
+#: src/common/file_types.cpp:30 src/common/file_types.cpp:75
+#: src/output/p_dirac.h:38
 msgid "Dirac"
 msgstr "Dirac"
 
@@ -5312,7 +5318,7 @@ msgstr ""
 msgid "F1"
 msgstr "F1"
 
-#: src/input/r_flac.h:53 src/output/p_flac.h:39
+#: src/common/file_types.cpp:78 src/output/p_flac.h:39
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -5375,12 +5381,12 @@ msgstr ""
 "Bunkus <moritz@bunkus.org> als je bestand wordt ondersteund maar niet "
 "correct wordt herkend.\n"
 
-#: src/merge/generic_reader.cpp:326
+#: src/merge/generic_reader.cpp:334
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Bestand '%1%': houder: %2%"
 
-#: src/merge/id_result.cpp:24
+#: src/merge/id_result.cpp:25
 #, boost-format
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr "Bestand '%1%': niet ondersteunde houder: %2%\n"
@@ -5553,7 +5559,7 @@ msgstr "Repareer bit stroom tijdinformatie"
 msgid "Flags:"
 msgstr "Markeringen:"
 
-#: src/input/r_flv.cpp:266
+#: src/common/file_types.cpp:79
 msgid "Flash Video"
 msgstr "Flash video"
 
@@ -5816,7 +5822,7 @@ msgstr "Globale markeringen (%d ingangen) van %s"
 msgid "Global tags:"
 msgstr "Globale markeringen:"
 
-#: src/merge/generic_reader.cpp:377
+#: src/merge/generic_reader.cpp:385
 #, fuzzy, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -5827,11 +5833,16 @@ msgstr[1] "Globale markeer: %1% ingangen"
 msgid "H&eaders"
 msgstr "K&oppen"
 
+#: src/common/file_types.cpp:81
+#, fuzzy
+msgid "HD-DVD subtitles"
+msgstr "ondertitels"
+
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
 msgstr "HDMV PGS"
 
-#: src/input/r_hevc.h:31 src/output/p_hevc.h:33
+#: src/common/file_types.cpp:80 src/output/p_hevc.h:33
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
 
@@ -5968,7 +5979,7 @@ msgstr "ISO639-1 code"
 msgid "ISO639-2 code"
 msgstr "ISO639-2 code"
 
-#: src/input/r_ivf.h:35
+#: src/common/file_types.cpp:82
 msgid "IVF (VP8/VP9)"
 msgstr "IVF (VP8/VP9)"
 
@@ -7224,7 +7235,7 @@ msgstr "MKVToolNix optie bestand"
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix GUI configuratie bestanden"
 
-#: src/input/r_mp3.h:34
+#: src/common/file_types.cpp:85
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -7240,7 +7251,7 @@ msgstr "MP4 audio/video bestanden"
 msgid "MPEG audio files"
 msgstr "MPEG audio bestanden"
 
-#: src/input/r_mpeg_ps.h:214
+#: src/common/file_types.cpp:87
 msgid "MPEG program stream"
 msgstr "MPEG programma stroom"
 
@@ -7248,7 +7259,7 @@ msgstr "MPEG programma stroom"
 msgid "MPEG program streams"
 msgstr "MPEG programma stromen"
 
-#: src/input/r_mpeg_ts.h:418
+#: src/common/file_types.cpp:88
 msgid "MPEG transport stream"
 msgstr "MPEG transportstroom"
 
@@ -7256,7 +7267,7 @@ msgstr "MPEG transportstroom"
 msgid "MPEG transport streams"
 msgstr "MPEG transportstromen"
 
-#: src/input/r_mpeg_es.h:34
+#: src/common/file_types.cpp:86
 msgid "MPEG video elementary stream"
 msgstr "MPEG video basisstromen"
 
@@ -7320,7 +7331,7 @@ msgid "Mark this track as 'forced'. Players must play this track."
 msgstr ""
 "Markeer dit spoor als 'geforceerd'. Af spelers moeten dit spoor afspelen."
 
-#: src/input/r_matroska.h:210
+#: src/common/file_types.cpp:83
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -7412,6 +7423,10 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:861
 msgid "Mi&nimum playlist duration:"
 msgstr "Mi&nimum afspeellijsten duur:"
+
+#: src/common/file_types.cpp:84
+msgid "MicroDVD"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:1097
 #, boost-format
@@ -8044,7 +8059,7 @@ msgstr "Aantal nanoseconden (niet geschaald) per beeld."
 msgid "Numbers of channels in the track."
 msgstr "Aantal kanalen in het spoor."
 
-#: src/input/r_ogm.h:89
+#: src/common/file_types.cpp:89
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
@@ -8344,7 +8359,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "PGS/SUP ondertitels"
 
-#: src/input/r_pgssup.h:33
+#: src/common/file_types.cpp:90
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -8591,7 +8606,7 @@ msgstr "QuickTime audio/video bestanden"
 msgid "QuickTime compatible video"
 msgstr "QuickTime compatible video"
 
-#: src/input/r_qtmp4.h:444
+#: src/common/file_types.cpp:91
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -8821,6 +8836,10 @@ msgstr "Koppen bewerker afsluiten"
 msgid "Quits mkvinfo"
 msgstr "Sluit mkvinfo"
 
+#: src/common/file_types.cpp:72
+msgid "RIFF CDXA"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:741
 msgid "RSA"
 msgstr "RSA"
@@ -8868,7 +8887,7 @@ msgstr "Real uitvoer voorbeeld frequentie in Hz."
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/input/r_real.h:97
+#: src/common/file_types.cpp:92
 msgid "RealMedia"
 msgstr "RealMedia"
 
@@ -9057,7 +9076,7 @@ msgstr "&Voeg toe aan taak wachtrij"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/input/r_srt.h:33
+#: src/common/file_types.cpp:93
 msgid "SRT subtitles"
 msgstr "SRT ondertiteling"
 
@@ -9065,7 +9084,7 @@ msgstr "SRT ondertiteling"
 msgid "SRT text subtitles"
 msgstr "SRT tekst ondertiteling"
 
-#: src/input/r_ssa.h:32
+#: src/common/file_types.cpp:94
 msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS ondertiteling"
 
@@ -10169,7 +10188,7 @@ msgstr "Ondersteunde bestandstypen:\n"
 msgid "Suppress status output."
 msgstr "Onderdrukt status uitvoer."
 
-#: src/input/r_tta.h:36 src/output/p_tta.h:34
+#: src/common/file_types.cpp:96 src/output/p_tta.h:34
 msgid "TTA"
 msgstr "TTA"
 
@@ -10211,7 +10230,7 @@ msgstr "Markeringen"
 msgid "Tags are allowed, but chapters are not."
 msgstr "Markeringen zijn toegestaan, maar hoofdstukken niet."
 
-#: src/merge/generic_reader.cpp:382
+#: src/merge/generic_reader.cpp:390
 #, fuzzy, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -10975,7 +10994,7 @@ msgstr ""
 "Bunkus <moritz@bunkus.org> als je bestand wordt ondersteund maar niet wordt "
 "herkend.\n"
 
-#: src/merge/id_result.cpp:28
+#: src/merge/id_result.cpp:29
 #, boost-format
 msgid "The file '%1%' is a non-supported file type (%2%).\n"
 msgstr "Het bestand '%1%' is een niet ondersteund bestandstype (%2%).\n"
@@ -12985,7 +13004,7 @@ msgstr "Spoor %1%: De AAC informatie kon niet ontleed worden.\n"
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Spoor ID %1% heeft een onbekend AAC type.\n"
 
-#: src/merge/generic_reader.cpp:327
+#: src/merge/generic_reader.cpp:335
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Spoor ID %1%: %2% (%3%)"
@@ -13078,7 +13097,7 @@ msgstr "Sporen:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Advies voor probleemoplossing voor afspeelproblemen"
 
-#: src/input/r_truehd.h:39 src/output/p_truehd.h:41
+#: src/common/file_types.cpp:95 src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
 
@@ -13148,7 +13167,7 @@ msgstr ""
 msgid "UID:"
 msgstr "UID:"
 
-#: src/input/r_usf.h:70
+#: src/common/file_types.cpp:97
 msgid "USF subtitles"
 msgstr "USF ondertiteling"
 
@@ -13351,7 +13370,7 @@ msgstr ""
 "Gebruikmakend van een NALU lengte grootte van 3 bytes kan resulteren in "
 "sporen die niet decodeer baar zijn met bepaalde AVC/h.264 codecs.\n"
 
-#: src/merge/generic_reader.h:44
+#: src/merge/generic_reader.h:45
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Gebruikmakend van de demultiplexer voor het format '%1%'.\n"
 
@@ -13360,11 +13379,11 @@ msgstr "Gebruikmakend van de demultiplexer voor het format '%1%'.\n"
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Gebruikmakend van de generieke uitvoer module voor spoor type '%1%'.\n"
 
-#: src/merge/generic_reader.h:46
+#: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Gebruikmakend van de uitvoer module voor het format '%1%'.\n"
 
-#: src/input/r_vc1.h:34 src/output/p_vc1.h:37
+#: src/common/file_types.cpp:98 src/output/p_vc1.h:37
 msgid "VC1"
 msgstr "VC1"
 
@@ -13519,7 +13538,7 @@ msgstr ""
 "Bekijk de uitvoer welke mkvmerge maakt gedurende het samenvoeg proces voor "
 "de geselecteerde ta(a)k(en)"
 
-#: src/input/r_vobbtn.h:34 src/output/p_vobbtn.h:36
+#: src/common/file_types.cpp:99 src/output/p_vobbtn.h:36
 msgid "VobBtn"
 msgstr "VobBtn"
 
@@ -13527,7 +13546,7 @@ msgstr "VobBtn"
 msgid "VobButtons"
 msgstr "VobKnoppen"
 
-#: src/input/r_vobsub.h:73 src/output/p_vobsub.h:31
+#: src/common/file_types.cpp:100 src/output/p_vobsub.h:31
 msgid "VobSub"
 msgstr "VobSub"
 
@@ -13539,7 +13558,7 @@ msgstr "VobSub ondertitels"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/input/r_wav.h:75
+#: src/common/file_types.cpp:101
 msgid "WAV"
 msgstr "WAV"
 
@@ -13547,7 +13566,7 @@ msgstr "WAV"
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE (niet gecomprimeerd PCM audio)"
 
-#: src/input/r_wavpack.h:35
+#: src/common/file_types.cpp:102
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
@@ -13692,6 +13711,10 @@ msgstr "Breedte van de video te tonen beelden."
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
 msgid "Windows (cmd.exe)"
 msgstr "Windows (cmd.exe)"
+
+#: src/common/file_types.cpp:69
+msgid "Windows Media (ASF/WMV)"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:251
 msgid ""
@@ -15297,11 +15320,11 @@ msgstr "tta_reader: markeer_grootte < 0 in de c'tor. %1%\n"
 msgid "und (Undetermined)"
 msgstr "und (Onbekend)"
 
-#: src/common/mm_io_win.cpp:161 src/common/stereo_mode.cpp:68
-#: src/info/mkvinfo.cpp:683 src/info/mkvinfo.cpp:693 src/info/mkvinfo.cpp:708
-#: src/info/mkvinfo.cpp:730 src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752
-#: src/info/mkvinfo.cpp:938 src/input/r_matroska.cpp:100
-#: src/input/r_matroska.cpp:2353
+#: src/common/file_types.cpp:103 src/common/mm_io_win.cpp:161
+#: src/common/stereo_mode.cpp:68 src/info/mkvinfo.cpp:683
+#: src/info/mkvinfo.cpp:693 src/info/mkvinfo.cpp:708 src/info/mkvinfo.cpp:730
+#: src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752 src/info/mkvinfo.cpp:938
+#: src/input/r_matroska.cpp:100 src/input/r_matroska.cpp:2353
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:159
 #: src/mkvtoolnix-gui/jobs/job.cpp:121
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 7.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-07-18 10:10+0200\n"
-"PO-Revision-Date: 2015-07-18 10:19+0200\n"
+"POT-Creation-Date: 2015-07-18 13:22+0200\n"
+"PO-Revision-Date: 2015-07-18 13:23+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -2014,12 +2014,12 @@ msgstr "+-> Die FLAC-Datei wird oberflächlich untersucht: %1%%%%2%"
 msgid "+-> Pre-parsing FLAC file: 100%\n"
 msgstr "+-> Die FLAC-Datei wird oberflächlich untersucht: 100%\n"
 
-#: src/merge/generic_reader.cpp:329
+#: src/merge/generic_reader.cpp:337
 #, boost-format
 msgid ", description '%1%'"
 msgstr ", Beschreibung »%1%«"
 
-#: src/merge/generic_reader.cpp:330
+#: src/merge/generic_reader.cpp:338
 #, boost-format
 msgid ", file name '%1%'"
 msgstr ", Dateiname »%1%«"
@@ -2297,7 +2297,7 @@ msgstr "Dateien an&hängen"
 msgid "A/52 (aka AC3)"
 msgstr "A/52 (aka AC3)"
 
-#: src/input/r_aac.h:36
+#: src/common/file_types.cpp:67
 #: src/output/p_aac.h:42
 msgid "AAC"
 msgstr "AAC"
@@ -2318,11 +2318,11 @@ msgstr "AAC ist SBR/HE-AAC/AAC+"
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC ist SBR/HE-AAC/AAC+:"
 
-#: src/input/r_aac_adif.cpp:35
+#: src/input/r_aac_adif.cpp:36
 msgid "AAC with ADIF headers"
 msgstr "AAC mit ADIF-Kopfdaten"
 
-#: src/input/r_ac3.h:34
+#: src/common/file_types.cpp:68
 #: src/output/p_ac3.h:41
 msgid "AC3"
 msgstr "AC3"
@@ -2351,7 +2351,7 @@ msgstr ""
 msgid "ASCII string (no special chars like Umlaute etc)"
 msgstr "ASCII-Zeichenkette (keine Sonderzeichen wie Umlaute etc)"
 
-#: src/input/r_avc.h:35
+#: src/common/file_types.cpp:70
 #: src/output/p_mpeg4_p10.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
@@ -2364,7 +2364,7 @@ msgstr "AVC/h.264 (unframed)"
 msgid "AVC/h.264 elementary streams"
 msgstr "AVC/h.264 elementary streams"
 
-#: src/input/r_avi.h:85
+#: src/common/file_types.cpp:71
 msgid "AVI"
 msgstr "AVI"
 
@@ -2930,7 +2930,7 @@ msgstr "Dateianhang"
 msgid "Attached files"
 msgstr "angehängte Dateien"
 
-#: src/merge/generic_reader.cpp:328
+#: src/merge/generic_reader.cpp:336
 #, boost-format
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Dateianhang ID %1%: Typ »%2%«, Größe %3% Byte"
@@ -3407,7 +3407,7 @@ msgstr "Kapitel geschrieben"
 msgid "Chapters:"
 msgstr "Kapitel:"
 
-#: src/merge/generic_reader.cpp:368
+#: src/merge/generic_reader.cpp:376
 #, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
@@ -3730,7 +3730,7 @@ msgstr "Das Umwandeln der Kapitel nach XML schlug fehl: %1"
 msgid "Copy the command line to the clipboard"
 msgstr "Die Befehlszeile in die Zwischenablage kopieren"
 
-#: src/input/r_coreaudio.h:62
+#: src/common/file_types.cpp:74
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4099,7 +4099,7 @@ msgstr "Lösch&en"
 msgid "D&uplicate selected edition or chapter"
 msgstr "Ausgewählte Edition oder Kapitel d&uplizieren"
 
-#: src/input/r_dts.h:64
+#: src/common/file_types.cpp:76
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
@@ -4123,6 +4123,10 @@ msgstr "DTS_Header-Problem: ungültige Quell-PCM-Auflösung\n"
 #: src/common/dts.cpp:148
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr "DTS_Kopfdatenproblem: nicht genug Daten vorhanden, um Kopf zu lesen\n"
+
+#: src/common/file_types.cpp:77
+msgid "DV video format"
+msgstr "DV Videoformat"
 
 #: src/info/mkvinfo.cpp:500
 #, boost-format
@@ -4260,7 +4264,7 @@ msgid "Development hacks"
 msgstr "Entwicklungs-Hacks"
 
 #: src/common/file_types.cpp:30
-#: src/input/r_dirac.h:33
+#: src/common/file_types.cpp:75
 #: src/output/p_dirac.h:38
 msgid "Dirac"
 msgstr "Dirac"
@@ -4828,7 +4832,7 @@ msgstr "Das Extrahieren von Spur-ID %1% mit der CodecID »%2%« wird nicht unter
 msgid "F1"
 msgstr "F1"
 
-#: src/input/r_flac.h:53
+#: src/common/file_types.cpp:78
 #: src/output/p_flac.h:39
 msgid "FLAC"
 msgstr "FLAC"
@@ -4885,12 +4889,12 @@ msgstr "Datei&titel:"
 msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "Die Datei %1% hat einen unbekannten Typ. Schauen Sie bitte in der Liste der unterstützten Dateiformate nach (»mkvmerge --list-types«) und kontaktieren Sie den Autor Moritz Bunkus <moritz@bunkus.org>, falls Ihre Datei zwar von Mkvmerge unterstützt aber nicht erkannt wird.\n"
 
-#: src/merge/generic_reader.cpp:326
+#: src/merge/generic_reader.cpp:334
 #, boost-format
 msgid "File '%1%': container: %2%"
 msgstr "Datei »%1%«: Container: %2%"
 
-#: src/merge/id_result.cpp:24
+#: src/merge/id_result.cpp:25
 #, boost-format
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr "Datei »%1%«: nicht unterstützter Container: %2%\n"
@@ -5057,7 +5061,7 @@ msgstr "Zeiteinteilungsinformationen im Bitstream anpassen"
 msgid "Flags:"
 msgstr "Schalter:"
 
-#: src/input/r_flv.cpp:266
+#: src/common/file_types.cpp:79
 msgid "Flash Video"
 msgstr "Flash-Video"
 
@@ -5243,7 +5247,7 @@ msgstr "Globale Tags (%d Einträge) aus %s"
 msgid "Global tags:"
 msgstr "Globale Tags:"
 
-#: src/merge/generic_reader.cpp:377
+#: src/merge/generic_reader.cpp:385
 #, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
@@ -5254,11 +5258,15 @@ msgstr[1] "Globale Tags: %1% Einträge"
 msgid "H&eaders"
 msgstr "Kopfw&erte"
 
+#: src/common/file_types.cpp:81
+msgid "HD-DVD subtitles"
+msgstr "HD-DVD-Untertitel"
+
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
 msgstr "HDMV PGS"
 
-#: src/input/r_hevc.h:31
+#: src/common/file_types.cpp:80
 #: src/output/p_hevc.h:33
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
@@ -5382,7 +5390,7 @@ msgstr "ISO639-1-Code"
 msgid "ISO639-2 code"
 msgstr "ISO639-2-Code"
 
-#: src/input/r_ivf.h:35
+#: src/common/file_types.cpp:82
 msgid "IVF (VP8/VP9)"
 msgstr "IVF (VP8/VP9)"
 
@@ -6324,7 +6332,7 @@ msgstr "MKVToolNix-Optionsdateien"
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolNix GUI Konfigurationsdatei"
 
-#: src/input/r_mp3.h:34
+#: src/common/file_types.cpp:85
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -6340,7 +6348,7 @@ msgstr "MP4-Audio/Video-Dateien"
 msgid "MPEG audio files"
 msgstr "MPEG-Audiodateien"
 
-#: src/input/r_mpeg_ps.h:214
+#: src/common/file_types.cpp:87
 msgid "MPEG program stream"
 msgstr "MPEG-Programmdatenstrom"
 
@@ -6348,7 +6356,7 @@ msgstr "MPEG-Programmdatenstrom"
 msgid "MPEG program streams"
 msgstr "MPEG-Programmdatenströme"
 
-#: src/input/r_mpeg_ts.h:418
+#: src/common/file_types.cpp:88
 msgid "MPEG transport stream"
 msgstr "MPEG-Transportdatenstrom"
 
@@ -6356,7 +6364,7 @@ msgstr "MPEG-Transportdatenstrom"
 msgid "MPEG transport streams"
 msgstr "MPEG-Transportdatenströme"
 
-#: src/input/r_mpeg_es.h:34
+#: src/common/file_types.cpp:86
 msgid "MPEG video elementary stream"
 msgstr "MPEG-Video-Elementardatenstrom"
 
@@ -6413,7 +6421,7 @@ msgstr "Setzt den Schalter »Abspielen erzwingen« der Spur."
 msgid "Mark this track as 'forced'. Players must play this track."
 msgstr "den Schalter »Abspielen erzwingen« der Spur setzen. Abspielprogramme müssen diese Spur abspielen."
 
-#: src/input/r_matroska.h:210
+#: src/common/file_types.cpp:83
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -6499,6 +6507,10 @@ msgstr "Es konnte nicht genug Speicher für ein RealAudio-/RealVideo-Bild reserv
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:861
 msgid "Mi&nimum playlist duration:"
 msgstr "Mi&ndestdauer für Abspiellisten:"
+
+#: src/common/file_types.cpp:84
+msgid "MicroDVD"
+msgstr "MicroDVD"
 
 #: src/info/mkvinfo.cpp:1097
 #, boost-format
@@ -7032,7 +7044,7 @@ msgstr "Anzahl Nanosekunden (nicht skaliert) pro Bild"
 msgid "Numbers of channels in the track."
 msgstr "Anzahl Kanäle in dieser Spur"
 
-#: src/input/r_ogm.h:89
+#: src/common/file_types.cpp:89
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
@@ -7291,7 +7303,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "PGS-/SUP-Untertitel"
 
-#: src/input/r_pgssup.h:33
+#: src/common/file_types.cpp:90
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -7528,7 +7540,7 @@ msgstr "QuickTime-Audio/Video-Dateien"
 msgid "QuickTime compatible video"
 msgstr "QuickTime-kompatibles Video"
 
-#: src/input/r_qtmp4.h:444
+#: src/common/file_types.cpp:91
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -7670,6 +7682,10 @@ msgstr "Den Kopfdateneditor beenden"
 msgid "Quits mkvinfo"
 msgstr "beendet Mkvinfo"
 
+#: src/common/file_types.cpp:72
+msgid "RIFF CDXA"
+msgstr "RIFF CDXA"
+
 #: src/info/mkvinfo.cpp:741
 msgid "RSA"
 msgstr "RSA"
@@ -7713,7 +7729,7 @@ msgstr "tatsächliche Ausgabeabtastrate in Hz"
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/input/r_real.h:97
+#: src/common/file_types.cpp:92
 msgid "RealMedia"
 msgstr "RealMedia"
 
@@ -7888,7 +7904,7 @@ msgstr "Jobwarteschlange &anhalten"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/input/r_srt.h:33
+#: src/common/file_types.cpp:93
 msgid "SRT subtitles"
 msgstr "SRT-Textuntertitel"
 
@@ -7896,7 +7912,7 @@ msgstr "SRT-Textuntertitel"
 msgid "SRT text subtitles"
 msgstr "SRT-Textuntertitel"
 
-#: src/input/r_ssa.h:32
+#: src/common/file_types.cpp:94
 msgid "SSA/ASS subtitles"
 msgstr "SSA-/ASS-Textuntertitel"
 
@@ -8858,7 +8874,7 @@ msgstr "unterstützte Dateitypen:\n"
 msgid "Suppress status output."
 msgstr "Statusausgaben unterdrücken"
 
-#: src/input/r_tta.h:36
+#: src/common/file_types.cpp:96
 #: src/output/p_tta.h:34
 msgid "TTA"
 msgstr "TTA"
@@ -8902,7 +8918,7 @@ msgstr "Tags"
 msgid "Tags are allowed, but chapters are not."
 msgstr "Tags sind erlaubt, Kapitelinformationen hingegen nicht."
 
-#: src/merge/generic_reader.cpp:382
+#: src/merge/generic_reader.cpp:390
 #, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
@@ -9434,7 +9450,7 @@ msgstr "Die Datei »%1%« wurde zum Schreiben geöffnet.\n"
 msgid "The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "Die Datei »%1%« hat einen unbekannten Typ. Schauen Sie sich bitte die Liste der unterstützten Formate an (»mkvmerge --list-types«) und wenden Sie sich an den Autor Moritz Bunkus <moritz@bunkus.org>, falls Ihr Dateityp zwar offiziell unterstützt, aber in diesem Falle nicht erkannt wird.\n"
 
-#: src/merge/id_result.cpp:28
+#: src/merge/id_result.cpp:29
 #, boost-format
 msgid "The file '%1%' is a non-supported file type (%2%).\n"
 msgstr "Die Datei »%1%« hat einen nicht unterstützten Typ (%2%).\n"
@@ -10840,7 +10856,7 @@ msgstr "Spur %1%: Die AAC-Codec-Konfigurationsdaten konnten nicht ausgewertet we
 msgid "Track ID %1% has an unknown AAC type.\n"
 msgstr "Spur ID %1% hat einen unbekannten AAC-Typ.\n"
 
-#: src/merge/generic_reader.cpp:327
+#: src/merge/generic_reader.cpp:335
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Spur ID %1%: %2% (%3%)"
@@ -10927,7 +10943,7 @@ msgstr "Spuren:"
 msgid "Troubleshooting advice for playback issues"
 msgstr "Ratschläge zur Behebung von Problemen beim Abspielen"
 
-#: src/input/r_truehd.h:39
+#: src/common/file_types.cpp:95
 #: src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -10982,7 +10998,7 @@ msgstr "Typische Anwendungsfälle beinhalten VOBs von DVDs (z.B. VTS_01_1.VOB, V
 msgid "UID:"
 msgstr "UID:"
 
-#: src/input/r_usf.h:70
+#: src/common/file_types.cpp:97
 msgid "USF subtitles"
 msgstr "USF-Textuntertitel"
 
@@ -11155,7 +11171,7 @@ msgstr "Benutzerdefinierte Optionen:"
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
 msgstr "Das NALU-Längenfeld drei Byte lang zu machen kann dazu führen, dass es zu Abspielproblemen mit manchen AVC-/h.264-Codecs kommt.\n"
 
-#: src/merge/generic_reader.h:44
+#: src/merge/generic_reader.h:45
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Der Demultiplexer für das folgende Format wird benutzt: »%1%«.\n"
 
@@ -11164,11 +11180,11 @@ msgstr "Der Demultiplexer für das folgende Format wird benutzt: »%1%«.\n"
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Das allgemeine Ausgabemodul wird für den folgenden Spurtyp benutzt: »%1%«.\n"
 
-#: src/merge/generic_reader.h:46
+#: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Das Ausgabemodul für das folgende Format wird benutzt: »%1%«.\n"
 
-#: src/input/r_vc1.h:34
+#: src/common/file_types.cpp:98
 #: src/output/p_vc1.h:37
 msgid "VC1"
 msgstr "VC1"
@@ -11326,7 +11342,7 @@ msgstr "Dateien in Abspielliste anzeigen"
 msgid "View the output that mkvmerge generated during the muxing process for the selected jobs"
 msgstr "Die Ausgabe ansehen, die Mkvmerge während des Muxprozesses der ausgewählten Jobs erzeugt hat"
 
-#: src/input/r_vobbtn.h:34
+#: src/common/file_types.cpp:99
 #: src/output/p_vobbtn.h:36
 msgid "VobBtn"
 msgstr "VobBtn"
@@ -11335,7 +11351,7 @@ msgstr "VobBtn"
 msgid "VobButtons"
 msgstr "VobButtons"
 
-#: src/input/r_vobsub.h:73
+#: src/common/file_types.cpp:100
 #: src/output/p_vobsub.h:31
 msgid "VobSub"
 msgstr "VobSub"
@@ -11348,7 +11364,7 @@ msgstr "VobSub-Untertitel"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/input/r_wav.h:75
+#: src/common/file_types.cpp:101
 msgid "WAV"
 msgstr "WAV"
 
@@ -11356,7 +11372,7 @@ msgstr "WAV"
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE (unkomprimiertes PCM)"
 
-#: src/input/r_wavpack.h:35
+#: src/common/file_types.cpp:102
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
@@ -11467,6 +11483,10 @@ msgstr "Breite, mit der das Videobild angezeigt werden soll"
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
 msgid "Windows (cmd.exe)"
 msgstr "Windows (cmd.exe)"
+
+#: src/common/file_types.cpp:69
+msgid "Windows Media (ASF/WMV)"
+msgstr "Windows Media (ASF/WMV)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:251
 msgid "With this option that information is adjusted to match the container's timing information."
@@ -12884,6 +12904,7 @@ msgstr "tta_reader: tag_size < 0 im Konstruktor. %1%\n"
 msgid "und (Undetermined)"
 msgstr "und (nicht festgelegt)"
 
+#: src/common/file_types.cpp:103
 #: src/common/mm_io_win.cpp:161
 #: src/common/stereo_mode.cpp:68
 #: src/info/mkvinfo.cpp:683
