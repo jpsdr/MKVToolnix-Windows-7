@@ -249,6 +249,12 @@ generic_reader_c::flush_packetizers() {
   return FILE_STATUS_DONE;
 }
 
+translatable_string_c
+generic_reader_c::get_format_name()
+  const {
+  return file_type_t::get_name(get_format_type());
+}
+
 void
 generic_reader_c::id_result_container(const std::string &verbose_info) {
   std::vector<std::string> verbose_info_list;
@@ -259,9 +265,11 @@ generic_reader_c::id_result_container(const std::string &verbose_info) {
 
 void
 generic_reader_c::id_result_container(const std::vector<std::string> &verbose_info) {
-  m_id_results_container.info         = get_format_name().get_translated();
+  auto type                           = get_format_type();
+  m_id_results_container.info         = file_type_t::get_name(type).get_translated();
   m_id_results_container.verbose_info = verbose_info;
-  m_id_results_container.verbose_info.push_back((boost::format("is_providing_timecodes:%1%") % (is_providing_timecodes() ? 1 : 0)).str());
+  m_id_results_container.verbose_info.emplace_back((boost::format("container_type:%1%") % static_cast<int>(type)).str());
+  m_id_results_container.verbose_info.emplace_back((boost::format("is_providing_timecodes:%1%") % (is_providing_timecodes() ? 1 : 0)).str());
 }
 
 void

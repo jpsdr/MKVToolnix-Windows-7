@@ -210,8 +210,8 @@ public:
   mpeg_ps_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~mpeg_ps_reader_c();
 
-  virtual translatable_string_c get_format_name() const {
-    return YT("MPEG program stream");
+  virtual file_type_e get_format_type() const {
+    return FILE_TYPE_MPEG_PS;
   }
 
   virtual void read_headers();

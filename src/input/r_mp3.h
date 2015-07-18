@@ -30,8 +30,8 @@ public:
   mp3_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~mp3_reader_c();
 
-  virtual translatable_string_c get_format_name() const {
-    return YT("MP2/MP3");
+  virtual file_type_e get_format_type() const {
+    return FILE_TYPE_MP3;
   }
 
   virtual void read_headers();

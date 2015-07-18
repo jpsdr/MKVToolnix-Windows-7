@@ -16,7 +16,17 @@
 
 #include "common/common_pch.h"
 
-/* file types */
+#include "common/translation.h"
+
+// File types
+
+// !!!!!!!!!!!!! ATTENTION !!!!!!!!!!!!!
+
+// These values are stored in .mtxcfg files as types.  Therefore their
+// numbers must not change. New file types must always only be added
+// at the end now, even if it disturbs the current alphabetical order.
+
+// !!!!!!!!!!!!! ATTENTION !!!!!!!!!!!!!
 enum file_type_e {
   FILE_TYPE_IS_UNKNOWN = 0,
   FILE_TYPE_AAC,
@@ -68,6 +78,7 @@ struct file_type_t {
   }
 
   static std::vector<file_type_t> &get_supported();
+  static translatable_string_c get_name(file_type_e type);
 };
 
 #endif // MTX_COMMON_FILE_TYPES_H

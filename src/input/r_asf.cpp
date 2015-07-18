@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/endian.h"
+#include "common/file_types.h"
 #include "input/r_asf.h"
 #include "merge/id_result.h"
 
@@ -34,7 +35,7 @@ asf_reader_c::probe_file(mm_io_c *in,
     in->setFilePointer(0, seek_beginning);
 
     if (MAGIC_ASF_WMV == get_uint32_be(buf)) {
-      id_result_container_unsupported(in->get_file_name(), "Windows Media (ASF/WMV)");
+      id_result_container_unsupported(in->get_file_name(), file_type_t::get_name(FILE_TYPE_ASF));
       // Never reached:
       return 1;
     }

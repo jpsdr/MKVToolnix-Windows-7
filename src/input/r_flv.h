@@ -154,7 +154,9 @@ public:
 
   static int probe_file(mm_io_c *io, uint64_t size);
 
-  virtual translatable_string_c get_format_name() const;
+  virtual file_type_e get_format_type() const {
+    return FILE_TYPE_FLV;
+  }
 
 protected:
   bool process_tag(bool skip_payload = false);

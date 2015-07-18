@@ -116,7 +116,7 @@ SourceFileModel::setItemsFromSourceFile(QList<QStandardItem *> const &items,
   auto info = QFileInfo{sourceFile->m_fileName};
 
   items[0]->setText(info.fileName());
-  items[1]->setText(sourceFile->isAdditionalPart() ? QY("(additional part)") : sourceFile->m_container);
+  items[1]->setText(sourceFile->isAdditionalPart() ? QY("(additional part)") : sourceFile->container());
   items[2]->setText(to_qs(format_file_size(sourceFile->isPlaylist() ? sourceFile->m_playlistSize : info.size())));
   items[3]->setText(info.path());
 

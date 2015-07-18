@@ -18,6 +18,7 @@
 
 #include <boost/optional.hpp>
 
+#include "common/file_types.h"
 #include "common/chapters/chapters.h"
 #include "common/translation.h"
 #include "merge/file_status.h"
@@ -71,7 +72,8 @@ public:
   generic_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~generic_reader_c();
 
-  virtual translatable_string_c get_format_name() const = 0;
+  virtual file_type_e get_format_type() const = 0;
+  virtual translatable_string_c get_format_name() const;
   virtual bool is_providing_timecodes() const {
     return true;
   }

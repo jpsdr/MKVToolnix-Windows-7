@@ -58,6 +58,6 @@ struct id_result_t {
   }
 };
 
-void id_result_container_unsupported(const std::string &filename, const std::string &info);
+void id_result_container_unsupported(std::string const &filename, translatable_string_c const &info);
 
 #endif  // MTX_MERGE_ID_RESULT_H

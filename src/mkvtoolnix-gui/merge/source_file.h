@@ -22,7 +22,7 @@ using SourceFilePtr = std::shared_ptr<SourceFile>;
 class SourceFile {
 public:
   QHash<QString, QString> m_properties;
-  QString m_fileName, m_container;
+  QString m_fileName;
   QList<TrackPtr> m_tracks;
   QList<SourceFilePtr> m_additionalParts, m_appendedFiles;
   QList<QFileInfo> m_playlistFiles;
@@ -40,7 +40,7 @@ public:
 
   SourceFile &operator =(SourceFile const &other);
 
-  virtual void setContainer(QString const &container);
+  virtual QString container() const;
   virtual bool isValid() const;
   virtual bool isRegular() const;
   virtual bool isAppended() const;

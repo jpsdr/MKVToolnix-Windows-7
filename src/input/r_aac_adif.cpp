@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/endian.h"
+#include "common/file_types.h"
 #include "merge/id_result.h"
 #include "input/r_aac_adif.h"
 

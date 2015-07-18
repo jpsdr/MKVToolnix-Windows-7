@@ -17,6 +17,7 @@
 #include <algorithm>
 
 #include "common/endian.h"
+#include "common/file_types.h"
 #include "input/r_dv.h"
 #include "merge/id_result.h"
 
@@ -64,7 +65,7 @@ dv_reader_c::probe_file(mm_io_c *in,
         && (   (matches > 4)
             || (   (secondary_matches                >= 10)
                 && ((probe_size / secondary_matches) <  24000)))) {
-      id_result_container_unsupported(in->get_file_name(), "DV video format");
+      id_result_container_unsupported(in->get_file_name(), file_type_t::get_name(FILE_TYPE_DV));
       // Never reached:
       return 1;
     }

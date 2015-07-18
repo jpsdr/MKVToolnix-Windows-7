@@ -32,8 +32,8 @@ public:
   aac_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~aac_reader_c();
 
-  virtual translatable_string_c get_format_name() const {
-    return YT("AAC");
+  virtual file_type_e get_format_type() const {
+    return FILE_TYPE_AAC;
   }
 
   virtual void read_headers();

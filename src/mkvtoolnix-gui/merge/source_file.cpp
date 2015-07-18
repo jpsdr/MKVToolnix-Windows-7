@@ -32,7 +32,6 @@ fixAssociationsFor(char const *group,
 SourceFile::SourceFile(QString const &fileName)
   : m_properties{}
   , m_fileName{fileName}
-  , m_container{}
   , m_tracks{}
   , m_additionalParts{}
   , m_appendedFiles{}
@@ -63,7 +62,6 @@ SourceFile::operator =(SourceFile const &other) {
 
   m_properties       = other.m_properties;
   m_fileName         = other.m_fileName;
-  m_container        = other.m_container;
   m_type             = other.m_type;
   m_appended         = other.m_appended;
   m_additionalPart   = other.m_additionalPart;
@@ -94,7 +92,7 @@ SourceFile::operator =(SourceFile const &other) {
 bool
 SourceFile::isValid()
   const {
-  return !m_container.isEmpty() || isAdditionalPart();
+  return !container().isEmpty() || isAdditionalPart();
 }
 
 
@@ -128,37 +126,10 @@ SourceFile::hasRegularTrack()
   return m_tracks.end() != brng::find_if(m_tracks, [](TrackPtr const &track) { return track->isRegular(); });
 }
 
-void
-SourceFile::setContainer(QString const &container) {
-  m_container = container;
-  m_type      = container == "AAC"                          ? FILE_TYPE_AAC
-              : container == "AC3"                          ? FILE_TYPE_AC3
-              : container == "AVC/h.264"                    ? FILE_TYPE_AVC_ES
-              : container == "AVI"                          ? FILE_TYPE_AVI
-              : container == "Dirac"                        ? FILE_TYPE_DIRAC
-              : container == "DTS"                          ? FILE_TYPE_DTS
-              : container == "FLAC"                         ? FILE_TYPE_FLAC
-              : container == "IVF (VP8)"                    ? FILE_TYPE_IVF
-              : container == "Matroska"                     ? FILE_TYPE_MATROSKA
-              : container == "MP2/MP3"                      ? FILE_TYPE_MP3
-              : container == "MPEG video elementary stream" ? FILE_TYPE_MPEG_ES
-              : container == "MPEG program stream"          ? FILE_TYPE_MPEG_PS
-              : container == "MPEG transport stream"        ? FILE_TYPE_MPEG_TS
-              : container == "Ogg/OGM"                      ? FILE_TYPE_OGM
-              : container == "PGSSUP"                       ? FILE_TYPE_PGSSUP
-              : container == "QuickTime/MP4"                ? FILE_TYPE_QTMP4
-              : container == "RealMedia"                    ? FILE_TYPE_REAL
-              : container == "SRT subtitles"                ? FILE_TYPE_SRT
-              : container == "SSA/ASS subtitles"            ? FILE_TYPE_SSA
-              : container == "TrueHD"                       ? FILE_TYPE_TRUEHD
-              : container == "TTA"                          ? FILE_TYPE_TTA
-              : container == "USF subtitles"                ? FILE_TYPE_USF
-              : container == "VC1 elementary stream"        ? FILE_TYPE_VC1
-              : container == "VobBtn"                       ? FILE_TYPE_VOBBTN
-              : container == "VobSub"                       ? FILE_TYPE_VOBSUB
-              : container == "WAV"                          ? FILE_TYPE_WAV
-              : container == "WAVPACK"                      ? FILE_TYPE_WAVPACK4
-              :                                               FILE_TYPE_IS_UNKNOWN;
+QString
+SourceFile::container()
+  const {
+  return Q(file_type_t::get_name(m_type).get_translated());
 }
 
 void
@@ -172,7 +143,6 @@ SourceFile::saveSettings(QSettings &settings)
 
   settings.setValue("objectID",        reinterpret_cast<qulonglong>(this));
   settings.setValue("fileName",        m_fileName);
-  settings.setValue("container",       m_container);
   settings.setValue("type",            m_type);
   settings.setValue("appended",        m_appended);
   settings.setValue("additionalPart",  m_additionalPart);
@@ -197,7 +167,6 @@ SourceFile::loadSettings(MuxConfig::Loader &l) {
 
   l.objectIDToSourceFile[objectID] = this;
   m_fileName                       = l.settings.value("fileName").toString();
-  m_container                      = l.settings.value("container").toString();
   m_type                           = static_cast<file_type_e>(l.settings.value("type").toInt());
   m_appended                       = l.settings.value("appended").toBool();
   m_additionalPart                 = l.settings.value("additionalPart").toBool();

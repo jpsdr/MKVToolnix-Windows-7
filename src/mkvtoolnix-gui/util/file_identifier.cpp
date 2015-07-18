@@ -168,8 +168,8 @@ FileIdentifier::parseContainerLine(QString const &line) {
   if (-1 == re.indexIn(line))
     return;
 
-  m_file->setContainer(re.cap(1).replace(QRegularExpression{"\\s+$"}, Q("")));
   m_file->m_properties       = parseProperties(line);
+  m_file->m_type             = static_cast<file_type_e>(m_file->m_properties["container_type"].toInt());
   m_file->m_isPlaylist       = m_file->m_properties["playlist"] == "1";
   m_file->m_playlistDuration = m_file->m_properties["playlist_duration"].toULongLong();
   m_file->m_playlistSize     = m_file->m_properties["playlist_size"].toULongLong();

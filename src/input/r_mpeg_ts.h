@@ -414,8 +414,8 @@ public:
 
   static bool probe_file(mm_io_c *in, uint64_t size);
 
-  virtual translatable_string_c get_format_name() const {
-    return YT("MPEG transport stream");
+  virtual file_type_e get_format_type() const {
+    return FILE_TYPE_MPEG_TS;
   }
 
   virtual void read_headers();

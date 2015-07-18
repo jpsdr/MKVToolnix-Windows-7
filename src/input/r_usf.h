@@ -66,8 +66,8 @@ public:
   usf_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~usf_reader_c();
 
-  virtual translatable_string_c get_format_name() const {
-    return YT("USF subtitles");
+  virtual file_type_e get_format_type() const {
+    return FILE_TYPE_USF;
   }
 
   virtual void read_headers();

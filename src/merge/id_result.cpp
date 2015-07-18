@@ -11,12 +11,13 @@
 
 #include "common/common_pch.h"
 
+#include "common/translation.h"
 #include "merge/id_result.h"
 #include "merge/output_control.h"
 
 void
-id_result_container_unsupported(const std::string &filename,
-                                const std::string &info) {
+id_result_container_unsupported(std::string const &filename,
+                                translatable_string_c const &info) {
   if (g_identifying) {
     if (g_identify_for_mmg)
       mxinfo(boost::format("File '%1%': unsupported container: %2%\n") % filename % info);

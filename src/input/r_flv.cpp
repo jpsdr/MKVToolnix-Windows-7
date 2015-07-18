@@ -260,12 +260,6 @@ flv_reader_c::flv_reader_c(track_info_c const &ti,
 flv_reader_c::~flv_reader_c() {
 }
 
-translatable_string_c
-flv_reader_c::get_format_name()
-  const {
-  return YT("Flash Video");
-}
-
 unsigned int
 flv_reader_c::add_track(char type) {
   m_tracks.push_back(flv_track_cptr{new flv_track_c(type)});

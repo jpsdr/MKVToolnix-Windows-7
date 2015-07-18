@@ -28,8 +28,8 @@ public:
   ssa_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~ssa_reader_c();
 
-  virtual translatable_string_c get_format_name() const {
-    return YT("SSA/ASS subtitles");
+  virtual file_type_e get_format_type() const {
+    return FILE_TYPE_SSA;
   }
 
   virtual void read_headers();

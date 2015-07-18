@@ -71,8 +71,8 @@ public:
   wav_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~wav_reader_c();
 
-  virtual translatable_string_c get_format_name() const {
-    return YT("WAV");
+  virtual file_type_e get_format_type() const {
+    return FILE_TYPE_WAV;
   }
 
   virtual void read_headers();
