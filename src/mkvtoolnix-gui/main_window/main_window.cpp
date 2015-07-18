@@ -118,7 +118,7 @@ MainWindow::setupMenu() {
 #if defined(HAVE_CURL_EASY_H)
   connect(ui->actionHelpCheckForUpdates,       &QAction::triggered,             this, &MainWindow::checkForUpdates);
 #else
-  ui->actionGUICheckForUpdates->setVisible(false);
+  ui->actionHelpCheckForUpdates->setVisible(false);
 #endif  // HAVE_CURL_EASY_H
 }
 
