@@ -284,6 +284,8 @@ EOF
     if [[ -d ${lcdir} ]] cp -v ${file} ${lcdir}/
   done
 
+  ln -s /Applications ${dmgbase}/
+
   cat <<EOF > $dmgcnt/PkgInfo
 APPL????
 EOF
