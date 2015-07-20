@@ -383,7 +383,12 @@ Tab::onChaptersEdited(QString newValue) {
 
 void
 Tab::onBrowseChapters() {
-  auto fileName = getOpenFileName(QY("Select chapter file"), QY("XML chapter files") + Q(" (*.xml)"), ui->chapters);
+  auto fileName = getOpenFileName(QY("Select chapter file"),
+                                  QY("Supported file types")           + Q(" (*.txt *.xml);;") +
+                                  QY("XML chapter files")              + Q(" (*.xml);;") +
+                                  QY("Simple OGM-style chapter files") + Q(" (*.txt)"),
+                                  ui->chapters);
+
   if (!fileName.isEmpty())
     m_config.m_chapters = fileName;
 }
