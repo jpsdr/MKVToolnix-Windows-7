@@ -201,7 +201,7 @@ return 0;
 
     if test x"$wanted_plugin" != x; then
       plugins_dir=
-      for dir in `echo $QT_LIBS | sed -e 's/-l[^ ]*\( \|$\)//g' -e 's/-L//'` ; do
+      for dir in `echo $QT_LIBS | sed -e 's/-l[^ ]*\( \|$\)//g' -e 's/-L//g'` ; do
         if test -f "$dir/../plugins/platforms/libq${wanted_plugin}.a" ; then
           plugins_dir="$dir/../plugins"
           break
