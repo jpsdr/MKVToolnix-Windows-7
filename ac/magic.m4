@@ -2,12 +2,18 @@ dnl
 dnl Check for libmagic
 dnl
 
-magic_mingw_libs=""
-if test "x$ac_cv_mingw32" = "xyes"; then
-  magic_mingw_libs="-lshlwapi"
-fi
+AC_ARG_ENABLE([magic],
+  AC_HELP_STRING([--enable-magic],[file type detection via libmagic (yes)]),
+  [],[enable_magic=yes])
 
-AC_CHECK_LIB(magic, magic_open, [ magic_found=yes ], [ magic_found=no ], [-lz $GNURX_LIBS $magic_mingw_libs])
+if test x"$enable_magic" = xyes; then
+  magic_mingw_libs=""
+  if test "x$ac_cv_mingw32" = "xyes"; then
+    magic_mingw_libs="-lshlwapi"
+  fi
+
+  AC_CHECK_LIB(magic, magic_open, [ magic_found=yes ], [ magic_found=no ], [-lz $GNURX_LIBS $magic_mingw_libs])
+fi
 
 if test "x$magic_found" = "xyes" ; then
   AC_CHECK_HEADERS([magic.h])
