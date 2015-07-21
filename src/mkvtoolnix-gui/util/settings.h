@@ -110,6 +110,11 @@ public:
   static std::unique_ptr<QSettings> registry();
 
   static QString exeWithPath(QString const &exe);
+
+#if defined(SYS_WINDOWS)
+  static void migrateFromRegistry();
+  static QString iniFileLocation();
+#endif
 };
 
 // extern Settings g_settings;

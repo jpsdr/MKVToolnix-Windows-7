@@ -3,9 +3,9 @@
 #include <QDebug>
 #include <QSettings>
 #include <QSplitter>
+#include <QStandardPaths>
 
 #include "common/extern_data.h"
-#include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
 #include "common/version.h"
@@ -32,13 +32,49 @@ Settings::get() {
   return s_settings;
 }
 
+#if defined(SYS_WINDOWS)
+QString
+Settings::iniFileLocation() {
+  auto path = App::isInstalled() ? QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) : App::applicationDirPath();
+  return Q("%1/mkvtoolnix-gui.ini").arg(path);
+}
+
+void
+Settings::migrateFromRegistry() {
+  // Migration of settings from the Windows registry into an .ini file
+  // due to performance issues.
+
+  // If this is the portable version the no settings have to be migrated.
+  if (!App::isInstalled())
+    return;
+
+  // Don't do anything if such a file exists already.
+  auto targetFileName = iniFileLocation();
+  if (QFileInfo{targetFileName}.exists())
+    return;
+
+  // Copy all settings.
+  QSettings target{targetFileName, QSettings::IniFormat};
+  QSettings source{};
+
+  for (auto const &key : source.allKeys())
+    target.setValue(key, source.value(key));
+
+  // Ensure the new file is written and remove the keys from the
+  // registry.
+  target.sync();
+  source.clear();
+  source.sync();
+}
+#endif
+
 std::unique_ptr<QSettings>
 Settings::registry() {
 #if defined(SYS_WINDOWS)
-  if (!App::isInstalled())
-    return std::make_unique<QSettings>(Q((mtx::sys::get_installation_path() / "mkvtoolnix-gui.ini").string()), QSettings::IniFormat);
-#endif
+  return std::make_unique<QSettings>(iniFileLocation(), QSettings::IniFormat);
+#else
   return std::make_unique<QSettings>();
+#endif
 }
 
 void
@@ -246,7 +282,7 @@ Settings::exeWithPath(QString const &exe) {
   if (path.is_absolute())
     return exe;
 
-  auto installPath   = mtx::sys::get_installation_path();
+  auto installPath   = bfs::path{ to_utf8(App::applicationDirPath()) };
   auto potentialExes = QList<bfs::path>{} << (installPath / path) << (installPath / ".." / path);
 
 #if defined(SYS_WINDOWS)
