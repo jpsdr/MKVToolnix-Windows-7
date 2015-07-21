@@ -324,10 +324,9 @@ MainWindow::closeEvent(QCloseEvent *event) {
     return;
   }
 
-  auto reg  = Util::Settings::registry();
   auto tool = jobTool();
   if (tool)
-    tool->model()->saveJobs(*reg);
+    tool->model()->saveJobs();
 
   Util::saveWidgetGeometry(this);
 

@@ -2,11 +2,11 @@
 
 #include <QAbstractItemView>
 #include <QMutexLocker>
-#include <QSettings>
 #include <QTimer>
 
 #include "common/list_utils.h"
 #include "common/qt.h"
+#include "common/sorting.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -194,6 +194,7 @@ Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
     auto job = m_jobsById[idFromRow(row - 1)].get();
 
     if (predicate(*job)) {
+      job->removeQueueFile();
       m_jobsById.remove(job->m_id);
       toBeRemoved[job] = true;
       removeRow(row - 1);
@@ -207,8 +208,6 @@ Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
   updateProgress();
   updateJobStats();
   updateNumUnacknowledgedWarningsOrErrors();
-
-  saveJobs();
 }
 
 void
@@ -233,8 +232,6 @@ Model::add(JobPtr const &job) {
 
   if (m_dontStartJobsNow)
     return;
-
-  saveJobs();
 
   startNextAutoJob();
 }
@@ -369,8 +366,6 @@ Model::startNextAutoJob() {
       toStart = job;
   }
 
-  saveJobs();
-
   if (toStart) {
     MainWindow::watchCurrentJobTab()->connectToJob(*toStart);
 
@@ -453,30 +448,64 @@ Model::updateJobStats() {
 }
 
 void
-Model::saveJobs()
-  const {
+Model::convertJobQueueToSeparateIniFiles() {
   auto reg = Util::Settings::registry();
-  saveJobs(*reg);
-}
 
-void
-Model::saveJobs(QSettings &settings)
-  const {
-  settings.remove("jobQueue");
-  settings.beginGroup("jobQueue");
-  settings.setValue("numberOfJobs", rowCount());
+  reg->beginGroup("jobQueue");
 
-  for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
-    settings.beginGroup(Q("job %1").arg(row));
-    m_jobsById[idFromRow(row)]->saveJob(settings);
-    settings.endGroup();
+  auto order        = reg->value("order").toStringList();
+  auto numberOfJobs = reg->value("numberOfJobs", 0).toUInt();
+
+  reg->endGroup();
+
+  for (auto idx = 0u; idx < numberOfJobs; ++idx) {
+    reg->beginGroup("jobQueue");
+    reg->beginGroup(Q("job %1").arg(idx));
+
+    try {
+      auto job = Job::loadJob(*reg);
+      if (!job)
+        continue;
+
+      job->saveQueueFile();
+      order << job->m_uuid.toString();
+
+    } catch (Merge::InvalidSettingsX &) {
+    }
+
+    while (!reg->group().isEmpty())
+      reg->endGroup();
   }
 
-  settings.endGroup();
+  reg->beginGroup("jobQueue");
+  reg->remove("numberOfJobs");
+  for (auto idx = 0u; idx < numberOfJobs; ++idx)
+    reg->remove(Q("job %1").arg(idx));
+  reg->setValue("order", order);
+  reg->endGroup();
 }
 
 void
-Model::loadJobs(QSettings &settings) {
+Model::saveJobs() {
+  QMutexLocker locked{&m_mutex};
+
+  auto order = QStringList{};
+
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
+    auto &job = m_jobsById[idFromRow(row)];
+
+    job->saveQueueFile();
+    order << job->m_uuid.toString();
+  }
+
+  auto reg = Util::Settings::registry();
+  reg->beginGroup("jobQueue");
+  reg->setValue("order", order);
+  reg->endGroup();
+}
+
+void
+Model::loadJobs() {
   QMutexLocker locked{&m_mutex};
 
   auto watchTab      = MainWindow::watchCurrentJobTab();
@@ -486,25 +515,38 @@ Model::loadJobs(QSettings &settings) {
   m_toBeProcessed.clear();
   removeRows(0, rowCount());
 
-  settings.beginGroup("jobQueue");
-  auto numberOfJobs = settings.value("numberOfJobs", 0).toUInt();
-  settings.endGroup();
+  auto order       = Util::Settings::registry()->value("jobQueue/order").toStringList();
+  auto orderByUuid = QHash<QString, int>{};
+  auto orderIdx    = 0;
 
-  for (auto idx = 0u; idx < numberOfJobs; ++idx) {
-    settings.beginGroup("jobQueue");
-    settings.beginGroup(Q("job %1").arg(idx));
+  for (auto const &uuid : order)
+    orderByUuid[uuid] = orderIdx++;
 
+  auto queueLocation = Job::queueLocation();
+  auto jobQueueFiles = QDir{queueLocation}.entryList(QStringList{} << Q("*.ini"), QDir::Files);
+  auto loadedJobs    = QList<JobPtr>{};
+
+  for (auto const &fileName : jobQueueFiles) {
     try {
-      auto job = Job::loadJob(settings);
-      add(job);
+      auto job = Job::loadJob(Q("%1/%2").arg(queueLocation).arg(fileName));
+      if (!job)
+        continue;
 
-      watchTab->connectToJob(*job);
+      loadedJobs << job;
+
+      auto uuid = job->m_uuid.toString();
+      if (!orderByUuid.contains(uuid))
+        orderByUuid[uuid] = orderIdx++;
 
     } catch (Merge::InvalidSettingsX &) {
     }
+  }
 
-    while (!settings.group().isEmpty())
-      settings.endGroup();
+  mtx::sort::by(loadedJobs.begin(), loadedJobs.end(), [&orderByUuid](JobPtr const &job) { return orderByUuid[ job->m_uuid.toString() ]; });
+
+  for (auto const &job : loadedJobs) {
+    add(job);
+    watchTab->connectToJob(*job);
   }
 
   updateProgress();

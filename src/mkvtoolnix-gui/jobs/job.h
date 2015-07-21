@@ -8,6 +8,7 @@
 #include <QMutex>
 #include <QString>
 #include <QStringList>
+#include <QUuid>
 
 class QSettings;
 
@@ -42,6 +43,7 @@ private:
   static uint64_t ms_next_id;
 
 public:
+  QUuid m_uuid;
   uint64_t m_id;
   Status m_status;
   QString m_description;
@@ -67,6 +69,9 @@ public:
   void setPendingAuto();
   void setPendingManual();
 
+  QString queueFileName() const;
+  void removeQueueFile() const;
+  void saveQueueFile();
   void saveJob(QSettings &settings) const;
 
   void acknowledgeWarnings();
@@ -96,6 +101,9 @@ signals:
 public:                         // static
   static QString displayableStatus(Status status);
   static JobPtr loadJob(QSettings &settings);
+  static JobPtr loadJob(QString const &fileName);
+
+  static QString queueLocation();
 };
 
 }}}

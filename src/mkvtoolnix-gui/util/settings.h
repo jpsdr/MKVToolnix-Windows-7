@@ -113,8 +113,10 @@ public:
 
 #if defined(SYS_WINDOWS)
   static void migrateFromRegistry();
-  static QString iniFileLocation();
 #endif
+
+  static QString iniFileLocation();
+  static QString iniFileName();
 };
 
 // extern Settings g_settings;

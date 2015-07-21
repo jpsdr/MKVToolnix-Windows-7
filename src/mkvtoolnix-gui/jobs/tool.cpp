@@ -47,8 +47,8 @@ Tool::~Tool() {
 
 void
 Tool::loadAndStart() {
-  auto reg = Util::Settings::registry();
-  m_model->loadJobs(*reg);
+  Model::convertJobQueueToSeparateIniFiles();
+  m_model->loadJobs();
 
   resizeColumnsToContents();
 
@@ -238,6 +238,7 @@ Tool::resizeColumnsToContents()
 
 void
 Tool::addJob(JobPtr const &job) {
+  job->saveQueueFile();
   m_model->add(job);
   resizeColumnsToContents();
 }
