@@ -4,6 +4,7 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/attachment.h"
+#include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 #include <QFileInfo>
@@ -21,7 +22,7 @@ Attachment::~Attachment() {
 }
 
 void
-Attachment::saveSettings(QSettings &settings)
+Attachment::saveSettings(Util::ConfigFile &settings)
   const {
   settings.setValue("fileName",    m_fileName);
   settings.setValue("name",        m_name);

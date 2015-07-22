@@ -1,11 +1,11 @@
 #include "common/common_pch.h"
 
 #include <QFileInfo>
-#include <QSettings>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui { namespace Jobs {
@@ -145,12 +145,12 @@ Job::saveQueueFile() {
   if (m_uuid.isNull())
     m_uuid = QUuid::createUuid();
 
-  QSettings settings{queueFileName(), QSettings::IniFormat};
-  saveJob(settings);
+  auto settings = Util::ConfigFile::create(queueFileName());
+  saveJob(*settings);
 }
 
 void
-Job::saveJob(QSettings &settings)
+Job::saveJob(Util::ConfigFile &settings)
   const {
 
   settings.setValue("uuid",                 m_uuid);
@@ -172,7 +172,7 @@ Job::saveJob(QSettings &settings)
 }
 
 void
-Job::loadJobBasis(QSettings &settings) {
+Job::loadJobBasis(Util::ConfigFile &settings) {
   m_uuid                 = settings.value("uuid").toUuid();
   m_status               = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
   m_description          = settings.value("description").toString();
@@ -200,12 +200,12 @@ Job::loadJob(QString const &fileName) {
   if (!QFileInfo{fileName}.exists())
     return {};
 
-  QSettings settings{fileName, QSettings::IniFormat};
-  return loadJob(settings);
+  auto settings = Util::ConfigFile::open(fileName);
+  return loadJob(*settings);
 }
 
 JobPtr
-Job::loadJob(QSettings &settings) {
+Job::loadJob(Util::ConfigFile &settings) {
   auto jobType = settings.value("jobType");
 
   if (jobType == "MuxJob")

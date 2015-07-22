@@ -5,7 +5,6 @@
 #include <QIcon>
 #include <QLabel>
 #include <QMessageBox>
-#include <QSettings>
 #include <QStaticText>
 #include <QVBoxLayout>
 

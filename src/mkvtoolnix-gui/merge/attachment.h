@@ -6,12 +6,17 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 
-#include <QSettings>
 #include <QString>
 
 class QStringList;
 
-namespace mtx { namespace gui { namespace Merge {
+namespace mtx { namespace gui {
+
+namespace Util {
+class ConfigFile;
+}
+
+namespace Merge {
 
 class Attachment;
 using AttachmentPtr = std::shared_ptr<Attachment>;
@@ -32,7 +37,7 @@ public:
   explicit Attachment(QString const &fileName = QString{""});
   virtual ~Attachment();
 
-  virtual void saveSettings(QSettings &settings) const;
+  virtual void saveSettings(Util::ConfigFile &settings) const;
   virtual void loadSettings(MuxConfig::Loader &l);
   virtual void guessMIMEType();
 

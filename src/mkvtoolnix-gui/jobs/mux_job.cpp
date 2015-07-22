@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include <QRegularExpression>
-#include <QSettings>
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QTimer>
@@ -12,6 +11,7 @@
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
@@ -155,7 +155,7 @@ MuxJob::displayableDescription()
 }
 
 void
-MuxJob::saveJobInternal(QSettings &settings)
+MuxJob::saveJobInternal(Util::ConfigFile &settings)
   const {
   settings.setValue("jobType", "MuxJob");
   settings.setValue("aborted", m_aborted);
@@ -166,7 +166,7 @@ MuxJob::saveJobInternal(QSettings &settings)
 }
 
 JobPtr
-MuxJob::loadMuxJob(QSettings &settings) {
+MuxJob::loadMuxJob(Util::ConfigFile &settings) {
   auto config = std::make_shared<Merge::MuxConfig>();
 
   settings.beginGroup("muxConfig");

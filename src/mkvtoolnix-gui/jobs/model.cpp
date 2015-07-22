@@ -2,6 +2,7 @@
 
 #include <QAbstractItemView>
 #include <QMutexLocker>
+#include <QSettings>
 #include <QTimer>
 
 #include "common/list_utils.h"
@@ -11,6 +12,7 @@
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/ini_config_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
@@ -463,7 +465,8 @@ Model::convertJobQueueToSeparateIniFiles() {
     reg->beginGroup(Q("job %1").arg(idx));
 
     try {
-      auto job = Job::loadJob(*reg);
+      Util::IniConfigFile cfg{*reg};
+      auto job = Job::loadJob(cfg);
       if (!job)
         continue;
 
