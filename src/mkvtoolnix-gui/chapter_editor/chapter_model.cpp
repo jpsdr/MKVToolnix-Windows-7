@@ -314,6 +314,14 @@ ChapterModel::supportedDropActions()
   return Qt::MoveAction;
 }
 
+bool
+ChapterModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) {
+  if ((0 > row) || (0 > column))
+    return false;
+
+  return QStandardItemModel::dropMimeData(data, action, row, column, parent);
+}
+
 Qt::ItemFlags
 ChapterModel::flags(QModelIndex const &idx)
   const {
