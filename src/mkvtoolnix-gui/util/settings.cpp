@@ -16,9 +16,7 @@ namespace mtx { namespace gui { namespace Util {
 
 Settings Settings::s_settings;
 
-Settings::Settings()
-{
-  load();
+Settings::Settings() {
 }
 
 void

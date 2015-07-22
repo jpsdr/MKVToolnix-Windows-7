@@ -51,7 +51,7 @@ App::App(int &argc,
   Util::Settings::migrateFromRegistry();
 #endif
 
-  Util::Settings::get();        // Ensure that the settings have been loaded
+  Util::Settings::get().load();
 
   setupInstanceCommunicator();
 
