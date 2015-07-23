@@ -1,10 +1,11 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
+#include <QFileInfo>
+#include <QMimeData>
+
 #include "mkvtoolnix-gui/merge/attachment_model.h"
 #include "mkvtoolnix-gui/util/util.h"
-
-#include <boost/range/adaptor/uniqued.hpp>
-#include <QFileInfo>
 
 namespace mtx { namespace gui { namespace Merge {
 
@@ -141,6 +142,24 @@ Qt::DropActions
 AttachmentModel::supportedDropActions()
   const {
   return Qt::MoveAction;
+}
+
+bool
+AttachmentModel::canDropMimeData(QMimeData const *data,
+                                 Qt::DropAction action,
+                                 int row,
+                                 int column,
+                                 QModelIndex const &parent)
+  const {
+  if (!QStandardItemModel::canDropMimeData(data, action, row, column, parent))
+    return false;
+
+  bool ok = (Qt::MoveAction == action)
+         && !parent.isValid()
+         && (   ((0  <= row) && ( 0 == column))
+             || ((-1 == row) && (-1 == column)));
+
+  return ok;
 }
 
 Qt::ItemFlags
