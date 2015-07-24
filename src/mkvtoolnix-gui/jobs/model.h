@@ -76,6 +76,8 @@ public:
 
   virtual Qt::DropActions supportedDropActions() const;
   virtual Qt::ItemFlags flags(QModelIndex const &index) const;
+  virtual bool canDropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) const override;
+  virtual bool dropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) override;
 
   QDateTime queueStartTime() const;
 

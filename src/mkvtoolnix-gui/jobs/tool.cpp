@@ -65,6 +65,7 @@ void
 Tool::setupUiControls() {
   auto mwUi = MainWindow::getUi();
 
+  ui->jobs->dropInFirstColumnOnly(false);
   ui->jobs->setModel(m_model);
 
   m_jobsMenu->addAction(m_viewOutputAction);
