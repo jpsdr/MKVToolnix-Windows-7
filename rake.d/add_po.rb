@@ -42,6 +42,8 @@ module AddPo
         Dir["**/*.po"].each { |unpacked_file| handle_po unpacked_file }
       end
     end
+
+    File.unlink file_name
   end
 
   def self.add file_name
