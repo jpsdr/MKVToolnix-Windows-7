@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-07-24 14:54+0200\n"
-"PO-Revision-Date: 2015-07-18 01:59+0200\n"
+"PO-Revision-Date: 2015-07-26 23:48+0200\n"
 "Last-Translator: Israel Lucas Torrijos (Overdrive80) <lukillas.ole@gmail."
 "com>\n"
 "Language-Team: Spanish <moritz@bunkus.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.2\n"
+"X-Generator: Poedit 1.8.3\n"
 
 #: src/extract/xtr_tta.cpp:105
 #, boost-format
@@ -1302,7 +1302,7 @@ msgstr "&Descarga"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:202
 msgid "&Duration of each entry in seconds:"
-msgstr "&Duración de cada entrada en segundos:"
+msgstr "&Duración de cada registro en segundos:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:967
 msgid "&Enable all tracks"
@@ -1412,7 +1412,7 @@ msgstr "&Lista de tareas"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:163
 msgid "&Language of chapter names to replace:"
-msgstr ""
+msgstr "&Idioma de los nombres de capítulos a reemplazar:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:197
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:512
@@ -1632,7 +1632,7 @@ msgstr "&Iniciar automáticamente las tareas"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:203
 msgid "&Start timecode of first created entry:"
-msgstr "&Código de tiempo inicial de la primera entrada creada:"
+msgstr "&Código de tiempo inicial del primer registro creado:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:972
 msgid "&Subtitles"
@@ -3389,7 +3389,7 @@ msgid ""
 "Blu-ray discs often contain a chapter entry very close to the end of the "
 "movie."
 msgstr ""
-"Los discos Blu-ray a veces contienen una entrada de capítulos muy próxima al "
+"Los discos Blu-ray a veces contienen un registro de capítulos muy próxima al "
 "final de la película."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:165
@@ -3613,12 +3613,11 @@ msgstr "Canales: %1%"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:198
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:164
 msgid "Chapter &number of first created entry:"
-msgstr "El &número del capítulo de la primera entrada creada:"
+msgstr "El &número del capítulo del primer registro creado:"
 
 #: src/mkvtoolnix-gui/util/settings.cpp:129
-#, fuzzy
 msgid "Chapter <NUM:2>"
-msgstr "Capítulo <NUM>"
+msgstr "Capítulo <NUM:2>"
 
 #: src/mmg/mmg_dialog.cpp:331
 msgid "Chapter Editor"
@@ -4558,9 +4557,8 @@ msgstr ""
 "cabecera\n"
 
 #: src/common/file_types.cpp:77
-#, fuzzy
 msgid "DV video format"
-msgstr "Pista de video"
+msgstr "formato de video DV"
 
 #: src/info/mkvinfo.cpp:500
 #, boost-format
@@ -4639,7 +4637,7 @@ msgstr "Flag de pista predefinida:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:822
 msgid "Defaults for new chapter entries:"
-msgstr "Valores predeterminados para nuevas entradas de capítulo:"
+msgstr "Valores predeterminados para nuevos registros de capítulo:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1413 src/mmg/tabs/input_format.cpp:253
 msgid "Delay (in ms):"
@@ -5008,7 +5006,7 @@ msgstr "Edición"
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:49
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:495
 msgid "Edition entry"
-msgstr "Entrada de la edición"
+msgstr "Registro de edición"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:24
 msgid "Edition/Chapter"
@@ -5017,7 +5015,7 @@ msgstr "Edición/Capítulo"
 #: src/mmg/tabs/chapters.cpp:881 src/mmg/tabs/chapters.cpp:928
 #, c-format, boost-format
 msgid "EditionEntry %u"
-msgstr "Edición de entrada %u"
+msgstr "Registro de edición %u"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:330 src/mmg/tabs/global.cpp:278
 msgid ""
@@ -5072,7 +5070,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:81
 msgid "Enabling this option causes mkvmerge to keep that last entry."
 msgstr ""
-"Habilitar esta opción provoca que mkvmerge mantenga esa última entrada."
+"Habilitar esta opción provoca que mkvmerge mantenga ese último registro."
 
 #: src/info/mkvinfo.cpp:722
 #, boost-format
@@ -5600,7 +5598,7 @@ msgstr "Finalizado el proceso en %s"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:165
 msgid "First entry to &renumber:"
-msgstr ""
+msgstr "Primer registro a &renumerar:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1418
 msgid "Fix bitstream timing info"
@@ -5893,9 +5891,8 @@ msgid "H&eaders"
 msgstr "&Cabeceras"
 
 #: src/common/file_types.cpp:81
-#, fuzzy
 msgid "HD-DVD subtitles"
-msgstr "subtítulos"
+msgstr "subtítulos HD-DVD"
 
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
@@ -6144,8 +6141,8 @@ msgid ""
 "If checked additional buttons for moving selected entries up and down will "
 "be shown next to several list views."
 msgstr ""
-"Si está activada, los botones adicionales para mover, arriba y abajo, las "
-"entradas seleccionadas se mostrarán junto a diversas listas visualizadas."
+"Si está activada, los botones adicionales para mover, arriba y abajo, los "
+"registros seleccionados se mostrarán junto a diversas listas visualizadas."
 
 #: src/mmg/options/output.cpp:51
 msgid ""
@@ -6250,7 +6247,7 @@ msgid ""
 "playlists in the chapter editor if it is located within five seconds of the "
 "end of the movie."
 msgstr ""
-"Si se habilita, la última entrada se omitirá si, al cargar los capítulos de "
+"Si se habilita, el último registro se omitirá si, al cargar los capítulos de "
 "las playlists en el editor de capítulos, se encuentra dentro de los últimos "
 "cinco segundos de la película."
 
@@ -6461,7 +6458,7 @@ msgstr ""
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr ""
-"Ignorando una entrada que se inicia después de haber finalizado (%1%).\n"
+"Ignorando un registro que se inicia después de haber finalizado (%1%).\n"
 
 #: src/input/subtitles.cpp:532
 #, boost-format
@@ -7553,7 +7550,7 @@ msgstr "Duración mí&nima del playlist:"
 
 #: src/common/file_types.cpp:84
 msgid "MicroDVD"
-msgstr ""
+msgstr "MicroDVD"
 
 #: src/info/mkvinfo.cpp:1097
 #, boost-format
@@ -7742,9 +7739,8 @@ msgid "NALU size length:"
 msgstr "Extensión de tamaño NALU:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:166
-#, fuzzy
 msgid "Na&me template:"
-msgstr "Nombre &plantilla:"
+msgstr "No&mbre plantilla:"
 
 #: src/common/property_element.cpp:127
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:24
@@ -8088,7 +8084,7 @@ msgid ""
 "Normally selected entries in list view can be moved around via drag & drop "
 "and with keyboard shortcuts (Ctrl+Up, Ctrl+Down)."
 msgstr ""
-"Generalmente, las entradas seleccionadas en la lista visualizada se pueden "
+"Generalmente, los registros seleccionados en la lista visualizada se pueden "
 "mover usando 'arrastrar y soltar', y con los atajos de teclado (Ctrl+Up, Ctrl"
 "+Down)."
 
@@ -8189,7 +8185,7 @@ msgstr "Nota"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:199
 msgid "Nu&mber of entries to create:"
-msgstr "Nú&meros de entradas a crear:"
+msgstr "Nú&meros de registros a crear:"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:247
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:82
@@ -8197,9 +8193,8 @@ msgid "Number of chapters:"
 msgstr "Números de capítulos:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:169
-#, fuzzy
 msgid "Number of entries to &renumber:"
-msgstr "Nú&meros de entradas a crear:"
+msgstr "Número de registros a &renumerar:"
 
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:345
@@ -8280,7 +8275,7 @@ msgstr "Solo un archivo de capítulo permitido en '%1% %2%'.\n"
 
 #: src/info/info_cli_parser.cpp:107
 msgid "Only one input file is allowed.\n"
-msgstr "Solo un archivo de entrada permitido.\n"
+msgstr "Sólo se permite un archivo de entrada.\n"
 
 #: src/common/xml/xml.h:92
 msgid "Only one instance of <%1%> is allowed beneath <%2%> at position %3%."
@@ -9010,16 +9005,15 @@ msgstr "Cerrar mkvinfo"
 
 #: src/common/file_types.cpp:72
 msgid "RIFF CDXA"
-msgstr ""
+msgstr "RIFF CDXA"
 
 #: src/info/mkvinfo.cpp:741
 msgid "RSA"
 msgstr "RSA"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:148
-#, fuzzy
 msgid "Re&number sub-chapters"
-msgstr "Generar sub-capítulos"
+msgstr "Re&numerar sub-capítulos"
 
 #: src/mmg/jobs.cpp:513
 msgid "Re-enable the selected jobs"
@@ -9168,14 +9162,12 @@ msgid "Remove name"
 msgstr "Eliminar nombre"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:162
-#, fuzzy
 msgid "Renumbering existing sub-chapters"
-msgstr "Generar sub-capítulos"
+msgstr "Renumerar sub-capítulos existentes"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:161
-#, fuzzy
 msgid "Renumbering sub-chapters"
-msgstr "Generar sub-capítulos"
+msgstr "Renumerar sub-capítulos"
 
 #: src/propedit/propedit_cli_parser.cpp:212
 msgid "Replace an attachment with the file 'filename'"
@@ -9927,7 +9919,7 @@ msgstr "Muestra todos los bytes de cada fotograma como un volcado hexadecimal."
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:805
 msgid "Show buttons for moving list view entries up and down"
 msgstr ""
-"Mostrar botones para mover, arriba y abajo, las entradas visualizadas en "
+"Mostrar botones para mover, arriba y abajo, los registros visualizados en "
 "lista"
 
 #: src/info/wxwidgets_ui.cpp:119
@@ -10643,8 +10635,8 @@ msgid ""
 "updated. This means that players might have a hard time finding the this "
 "element. Please use your favorite player to check this file."
 msgstr ""
-"El archivo Matroska ha sido modificado, pero la entrada meta seek no fue "
-"posible actualizar. Esto significa que los reproductores podrían tener "
+"El archivo Matroska ha sido modificado, pero el registro meta seek no se "
+"pudo actualizar. Esto significa que los reproductores podrían tener "
 "dificultades en encontrar este elemento. Por favor, usa tu reproductor "
 "favorito para comprobar este archivo."
 
@@ -10921,7 +10913,7 @@ msgstr "El país '%s' no es un ccTLD válido y no puede ser seleccionado."
 
 #: src/merge/output_control.cpp:1395
 msgid "The cue entries (the index) are being written...\n"
-msgstr "Las entradas del cue (el índice) están siendo escritas...\n"
+msgstr "Los registros del cue (el índice) están siendo escritos...\n"
 
 #: src/extract/cues.cpp:58
 #, boost-format
@@ -11019,7 +11011,7 @@ msgid ""
 "one track."
 msgstr ""
 "La diferencia entre etiquetas asociadas con una pista y las etiquetas "
-"generales estan explicadas en la documentación de mkvmerge. En pocas "
+"generales están explicadas en la documentación de mkvmerge. En pocas "
 "palabras, las etiquetas generales se aplican a un archivo completo, mientras "
 "que las etiquetas que puedes añadir en la pestaña Entrada, se aplican a una "
 "sola pista."
@@ -11255,7 +11247,7 @@ msgstr "El archivo no fue posible abrir para su escritura."
 #: src/extract/cues.cpp:49
 #, boost-format
 msgid "The file does not contain track ID %1%.\n"
-msgstr "El archivo no contiene ninguna pista ID %1%.\n"
+msgstr "El archivo no contiene ninguna pista con ID %1%.\n"
 
 #: src/mmg/mmg_dialog.cpp:414
 msgid "The file does not exist."
@@ -12015,6 +12007,8 @@ msgid ""
 "The resulting number will be padded with leading zeroes if the number of "
 "places is less than specified."
 msgstr ""
+"El número final será rellenado con ceros a la izquierda si el número de "
+"posiciones es menor que el especificado."
 
 #: src/common/xml/ebml_converter.cpp:337
 #, boost-format
@@ -12465,7 +12459,7 @@ msgstr "Theora"
 #: src/extract/cues.cpp:53
 #, boost-format
 msgid "There are no cues for track ID %1%.\n"
-msgstr "No hay índices (cues) para la pista ID %1%.\n"
+msgstr "No hay índices (cues) para la pista con ID %1%.\n"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:63
 #: src/mmg/mmg_dialog.cpp:1829
@@ -12660,7 +12654,7 @@ msgid ""
 msgstr ""
 "Este archivo Ogg/OGM contiene chapters pero no pueden ser analizados. Puede "
 "ser debido a que el juego de caracteres (charset) no ha sido bien "
-"configurado para ellos o que las entradas no coinciden con el formato de "
+"configurado para ellos o que los registros no coinciden con el formato de "
 "estilo SRT.\n"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
@@ -12863,8 +12857,8 @@ msgid ""
 "This mode only considers the top-most level of chapters across all edition "
 "entries."
 msgstr ""
-"Este modo unicamente tiene en cuenta el nivel superior de los capítulos, a "
-"través de todas las entradas de edición."
+"Este modo únicamente tiene en cuenta el nivel superior de los capítulos, a "
+"través de todos los registros de edición."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:273
 msgid ""
@@ -13001,7 +12995,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:55
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:123
 msgid "This template will be used for new chapter entries."
-msgstr "Esta plantilla se usará para nuevas entradas de capítulo."
+msgstr "Esta plantilla se usará para nuevos registros de capítulo."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:289
 msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
@@ -13965,7 +13959,7 @@ msgstr "Windows (cmd.exe)"
 
 #: src/common/file_types.cpp:69
 msgid "Windows Media (ASF/WMV)"
-msgstr ""
+msgstr "Windows Media (ASF/WMV)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:251
 msgid ""
@@ -14126,6 +14120,8 @@ msgid ""
 "You can specify a minimum number of places for the chapter number with '<NUM:"
 "places>', e.g. '<NUM:3>'."
 msgstr ""
+"Puedes especificar un número mínimo de posiciones para el número de capítulo "
+"con '<NUM:places>', p.e. '<NUM:3>'."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:282
 msgid ""
@@ -14261,9 +14257,8 @@ msgid "after specific timecodes"
 msgstr "Después de códigos de tiempo específicos"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:167
-#, fuzzy
 msgid "all entries"
-msgstr "%1 registros"
+msgstr "todos los registros"
 
 #: src/mmg/options/mmg.cpp:66
 msgid "always"
@@ -14301,7 +14296,7 @@ msgstr "Adjunto"
 #: src/mkvtoolnix-gui/merge/track.cpp:367 src/mmg/mmg.cpp:65
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "audio"
-msgstr "audio"
+msgstr "Audio"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1456
 msgid "before chapters"
@@ -15122,8 +15117,8 @@ msgid ""
 "mkvmerge normally removes that last entry if it's timecode is within five "
 "seconds of the total duration."
 msgstr ""
-"Normalmente, mkvmerge elimina esa última entrada si su código de tiempo esta "
-"dentro de los últimos cinco segundos de la duración total."
+"Normalmente, mkvmerge elimina ese último registro si su código de tiempo "
+"esta dentro de los últimos cinco segundos de la duración total."
 
 #: src/mmg/options/mkvmerge.cpp:74
 msgid "mkvmerge options"
@@ -15226,7 +15221,7 @@ msgstr "Opciones de mmg"
 #: src/mmg/options/languages.cpp:81
 msgid "mmg will reset to the default list if no entry is selected."
 msgstr ""
-"Mmg reiniciará la lista a predeterminada si ninguna entrada se  selecciona."
+"Mmg reiniciará la lista a predeterminada si ningún registro se selecciona."
 
 #: src/common/stereo_mode.cpp:48
 msgid "mono"
@@ -15547,7 +15542,7 @@ msgstr "subtítulo"
 #: src/info/mkvinfo.cpp:936 src/mkvtoolnix-gui/merge/track.cpp:369
 #: src/mmg/mmg.cpp:67 src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "subtitles"
-msgstr "subtítulos"
+msgstr "Subtítulos"
 
 #: src/mkvtoolnix-gui/merge/track.cpp:373
 msgid "tags"
@@ -15633,7 +15628,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/track.cpp:368 src/mmg/mmg.cpp:66
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "video"
-msgstr "video"
+msgstr "Video"
 
 #: src/input/r_vobsub.cpp:578
 msgid "vobsub_reader: sub file read failure"
@@ -15666,11 +15661,11 @@ msgstr "Sí"
 
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:48
 msgid "– all chapter names regardless of their language –"
-msgstr ""
+msgstr "– todos los nombres del capítulo independientemente de su idioma –"
 
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:47
 msgid "– first chapter name regardless of its language –"
-msgstr ""
+msgstr "– primer nombre del capítulo independientemente de su idioma –"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:57
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:69
