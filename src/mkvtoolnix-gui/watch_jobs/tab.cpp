@@ -122,7 +122,7 @@ Tab::onStatusChanged(uint64_t id,
   }
 
   QMutexLocker locker{&job->m_mutex};
-  m_currentJobStatus = status;
+  m_currentJobStatus = job->m_status;
   m_id               = job->m_id;
 
   ui->abortButton->setEnabled(Jobs::Job::Running == m_currentJobStatus);
@@ -130,7 +130,10 @@ Tab::onStatusChanged(uint64_t id,
   ui->status->setText(Jobs::Job::displayableStatus(m_currentJobStatus));
   MainWindow::watchJobTool()->enableMenuActions();
 
-  if (Jobs::Job::Running == m_currentJobStatus)
+  // Check for the signalled status, not the current one, in order to
+  // detect a change from »not running« to »running« only once, no
+  // matter which order the signals arrive in.
+  if (Jobs::Job::Running == status)
     setInitialDisplay(*job);
 
   else if (mtx::included_in(m_currentJobStatus, Jobs::Job::DoneOk, Jobs::Job::DoneWarnings, Jobs::Job::Failed, Jobs::Job::Aborted))
