@@ -154,6 +154,13 @@ MuxJob::displayableDescription()
   return QY("merging to file »%1« in directory »%2«").arg(info.fileName()).arg(info.dir().path());
 }
 
+QString
+MuxJob::outputFolder()
+  const {
+  QFileInfo info{m_config->m_destination};
+  return info.dir().path();
+}
+
 void
 MuxJob::saveJobInternal(QSettings &settings)
   const {

@@ -36,8 +36,9 @@ public:
 
   virtual void start();
 
-  virtual QString displayableType() const;
-  virtual QString displayableDescription() const;
+  virtual QString displayableType() const override;
+  virtual QString displayableDescription() const override;
+  virtual QString outputFolder() const override;
 
 public slots:
   virtual void readAvailable();

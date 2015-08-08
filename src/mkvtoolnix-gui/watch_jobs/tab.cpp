@@ -10,6 +10,7 @@
 #include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/forms/watch_jobs/tab.h"
+#include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/message_box.h"
@@ -32,6 +33,7 @@ Tab::Tab(QWidget *parent)
   , m_currentlyConnectedJob{}
   , m_saveOutputAction{new QAction{this}}
   , m_clearOutputAction{new QAction{this}}
+  , m_openFolderAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -50,6 +52,7 @@ Tab::retranslateUi() {
 
   m_saveOutputAction->setText(QY("&Save output"));
   m_clearOutputAction->setText(QY("&Clear output"));
+  m_openFolderAction->setText(QY("&Open folder"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
   ui->output->setPlaceholderText(QY("no output yet"));
@@ -61,7 +64,6 @@ Tab::retranslateUi() {
 void
 Tab::connectToJob(Jobs::Job const &job) {
   m_currentlyConnectedJob = &job;
-  m_id                    = job.m_id;
   auto connType           = static_cast<Qt::ConnectionType>(Qt::AutoConnection | Qt::UniqueConnection);
   auto model              = MainWindow::jobTool()->model();
 
@@ -77,6 +79,7 @@ Tab::connectToJob(Jobs::Job const &job) {
   connect(model,                                  &Jobs::Model::queueStatusChanged, this, &Tab::updateRemainingTime,          connType);
   connect(m_saveOutputAction,                     &QAction::triggered,              this, &Tab::onSaveOutput,                 connType);
   connect(m_clearOutputAction,                    &QAction::triggered,              this, &Tab::clearOutput,                  connType);
+  connect(m_openFolderAction,                     &QAction::triggered,              this, &Tab::openFolder,                   connType);
 }
 
 void
@@ -102,6 +105,7 @@ Tab::onStatusChanged(uint64_t id) {
     m_saveOutputAction->setEnabled(false);
     MainWindow::watchJobTool()->enableMenuActions();
 
+    m_id                 = std::numeric_limits<uint64_t>::max();
     m_currentJobProgress = 0;
     m_currentJobProgress = Jobs::Job::Aborted;
     updateRemainingTime();
@@ -111,6 +115,7 @@ Tab::onStatusChanged(uint64_t id) {
 
   QMutexLocker locker{&job->m_mutex};
   m_currentJobStatus = job->m_status;
+  m_id               = job->m_id;
 
   ui->abortButton->setEnabled(Jobs::Job::Running == m_currentJobStatus);
   m_saveOutputAction->setEnabled(true);
@@ -287,8 +292,20 @@ Tab::clearOutput() {
 }
 
 void
+Tab::openFolder() {
+  MainWindow::jobTool()->model()->withJob(m_id, [](Jobs::Job &job) { job.openOutputFolder(); });
+}
+
+void
 Tab::showMoreActionsMenu() {
   QMenu menu{this};
+
+  auto hasJob = std::numeric_limits<uint64_t>::max() != m_id;
+  m_openFolderAction->setEnabled(hasJob);
+  m_clearOutputAction->setEnabled(!ui->output->toPlainText().isEmpty() || !ui->warnings->toPlainText().isEmpty() || !ui->errors->toPlainText().isEmpty());
+
+  menu.addAction(m_openFolderAction);
+  menu.addSeparator();
   menu.addAction(m_saveOutputAction);
   menu.addAction(m_clearOutputAction);
 

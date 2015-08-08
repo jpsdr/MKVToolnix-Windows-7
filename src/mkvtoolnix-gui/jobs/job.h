@@ -63,6 +63,7 @@ public:
 
   virtual QString displayableType() const = 0;
   virtual QString displayableDescription() const = 0;
+  virtual QString outputFolder() const;
 
   void setPendingAuto();
   void setPendingManual();
@@ -85,6 +86,7 @@ public slots:
   virtual void addLineToInternalLogs(QString const &line, mtx::gui::Jobs::Job::LineType type);
   virtual void abort() = 0;
   virtual void updateUnacknowledgedWarningsAndErrors();
+  virtual void openOutputFolder() const;
 
 signals:
   void statusChanged(uint64_t id);

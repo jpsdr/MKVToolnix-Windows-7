@@ -1,6 +1,8 @@
 #include "common/common_pch.h"
 
+#include <QDesktopServices>
 #include <QSettings>
+#include <QUrl>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
@@ -119,6 +121,21 @@ Job::displayableStatus(Status status) {
        : Aborted       == status ? QY("aborted by user")
        : Disabled      == status ? QY("disabled")
        :                           QY("unknown");
+}
+
+QString
+Job::outputFolder()
+  const {
+  return {};
+}
+
+void
+Job::openOutputFolder()
+  const {
+  auto folder = outputFolder();
+
+  if (!folder.isEmpty())
+    QDesktopServices::openUrl(QUrl{Q("file:///%1").arg(folder)});
 }
 
 void
