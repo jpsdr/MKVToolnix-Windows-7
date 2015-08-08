@@ -1061,6 +1061,12 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
   auto srcFileName   = QFileInfo{ currentOutput.isEmpty() ? fileName : currentOutput };
   QDir outputDir;
 
+  // Don't override custom changes to the output file name.
+  if (   !currentOutput.isEmpty()
+      && !m_config.m_destinationAuto.isEmpty()
+      && (currentOutput != m_config.m_destinationAuto))
+    return;
+
   if (Util::Settings::ToPreviousDirectory == policy)
     outputDir = settings.m_lastOutputDir;
 
@@ -1085,8 +1091,11 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
     auto outputFileName  = QFileInfo{outputDir, currentBaseName};
 
     if (!settings.m_uniqueOutputFileNames || !outputFileName.exists()) {
-      ui->output->setText(outputFileName.absoluteFilePath());
-      setDestination(outputFileName.absoluteFilePath());
+      m_config.m_destinationAuto = outputFileName.absoluteFilePath();
+
+      ui->output->setText(m_config.m_destinationAuto);
+      setDestination(m_config.m_destinationAuto);
+
       break;
     }
 

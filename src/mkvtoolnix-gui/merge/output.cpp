@@ -169,6 +169,7 @@ void
 Tab::clearDestination() {
   ui->output->setText(Q(""));
   setDestination(Q(""));
+  m_config.m_destinationAuto.clear();
 }
 
 void

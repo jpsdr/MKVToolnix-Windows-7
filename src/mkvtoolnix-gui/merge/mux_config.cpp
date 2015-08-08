@@ -97,8 +97,10 @@ MuxConfig::operator =(MuxConfig const &other) {
     return *this;
 
   m_configFileName       = other.m_configFileName;
+  m_firstInputFileName   = other.m_firstInputFileName;
   m_title                = other.m_title;
   m_destination          = other.m_destination;
+  m_destinationAuto      = other.m_destinationAuto;
   m_globalTags           = other.m_globalTags;
   m_segmentInfo          = other.m_segmentInfo;
   m_splitOptions         = other.m_splitOptions;
@@ -218,6 +220,7 @@ MuxConfig::load(QSettings &settings) {
   settings.beginGroup("global");
   m_title                = settings.value("title").toString();
   m_destination          = settings.value("destination").toString();
+  m_destinationAuto      = settings.value("destinationAuto").toString();
   m_globalTags           = settings.value("globalTags").toString();
   m_segmentInfo          = settings.value("segmentInfo").toString();
   m_splitOptions         = settings.value("splitOptions").toString();
@@ -266,6 +269,7 @@ MuxConfig::save(QSettings &settings)
   settings.beginGroup("global");
   settings.setValue("title",                m_title);
   settings.setValue("destination",          m_destination);
+  settings.setValue("destinationAuto",      m_destinationAuto);
   settings.setValue("globalTags",           m_globalTags);
   settings.setValue("segmentInfo",          m_segmentInfo);
   settings.setValue("splitOptions",         m_splitOptions);
