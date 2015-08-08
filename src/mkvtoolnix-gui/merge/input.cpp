@@ -532,7 +532,7 @@ Tab::onTrackItemChanged(QStandardItem *item) {
   if ((1 == selected.count()) && selected.contains(track))
     Util::setComboBoxIndexIf(ui->muxThis, [newMuxThis](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == newMuxThis); });
 
-  setOutputFileNameMaybe(ui->output->text());
+  setOutputFileNameMaybe();
 }
 
 void
@@ -544,7 +544,7 @@ Tab::onMuxThisChanged(int selected) {
 
   withSelectedTracks([&](Track *track) { track->m_muxThis = muxThis; });
 
-  setOutputFileNameMaybe(ui->output->text());
+  setOutputFileNameMaybe();
 }
 
 void
@@ -807,7 +807,7 @@ Tab::addOrAppendFiles(bool append,
   reinitFilesTracksControls();
 
   setTitleMaybe(identifiedFiles);
-  setOutputFileNameMaybe(identifiedFiles[0]->m_fileName);
+  setOutputFileNameMaybe();
 }
 
 void
@@ -1050,15 +1050,14 @@ Tab::suggestOutputFileNameExtension()
 }
 
 void
-Tab::setOutputFileNameMaybe(QString const &fileName) {
+Tab::setOutputFileNameMaybe() {
   auto &settings = Util::Settings::get();
   auto policy    = settings.m_outputFileNamePolicy;
 
-  if (fileName.isEmpty() || (Util::Settings::DontSetOutputFileName == policy))
+  if ((Util::Settings::DontSetOutputFileName == policy) || m_config.m_firstInputFileName.isEmpty())
     return;
 
   auto currentOutput = ui->output->text();
-  auto srcFileName   = QFileInfo{ currentOutput.isEmpty() ? fileName : currentOutput };
   QDir outputDir;
 
   // Don't override custom changes to the output file name.
@@ -1082,7 +1081,7 @@ Tab::setOutputFileNameMaybe(QString const &fileName) {
   else
     Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested output file name policy");
 
-  auto baseName = srcFileName.completeBaseName().replace(QRegularExpression{" \\(\\d+\\)$"}, Q(""));
+  auto baseName = QFileInfo{ m_config.m_firstInputFileName }.completeBaseName();
   auto idx      = 0;
 
   while (true) {

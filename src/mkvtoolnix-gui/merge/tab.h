@@ -250,7 +250,7 @@ protected:
   virtual void setTitleMaybe(QList<SourceFilePtr> const &files);
   virtual void setTitleMaybe(QString const &title);
 
-  virtual void setOutputFileNameMaybe(QString const &fileName);
+  virtual void setOutputFileNameMaybe();
   virtual QString suggestOutputFileNameExtension() const;
 
   virtual void enableDisableAllTracks(bool enable);
