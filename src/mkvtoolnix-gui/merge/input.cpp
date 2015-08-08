@@ -112,7 +112,7 @@ Tab::setupInputControls() {
   // Stereoscopy
   ui->stereoscopy->addItem(Q(""), 0);
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
-    ui->stereoscopy->addItem(QString{"%1 (%2; %3)"}.arg(to_qs(stereo_mode_c::translate(idx))).arg(idx).arg(to_qs(stereo_mode_c::s_modes[idx])), idx + 1);
+    ui->stereoscopy->addItem(QString{}, idx + 1);
 
   // NALU size length
   for (auto idx = 0; idx < 3; ++idx)
@@ -970,6 +970,9 @@ Tab::retranslateInputUI() {
   m_selectAllVideoTracksAction->setText(QY("&Video"));
   m_selectAllAudioTracksAction->setText(QY("&Audio"));
   m_selectAllSubtitlesTracksAction->setText(QY("&Subtitles"));
+
+  for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
+    ui->stereoscopy->setItemText(idx + 1, QString{"%1 (%2; %3)"}.arg(to_qs(stereo_mode_c::translate(idx))).arg(idx).arg(to_qs(stereo_mode_c::s_modes[idx])));
 
   for (auto &comboBox : m_comboBoxControls)
     if (comboBox->count() && !comboBox->itemData(0).isValid())

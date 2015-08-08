@@ -16,11 +16,12 @@
 
 #include "common/common_pch.h"
 
-#include <string>
+#include "common/translation.h"
 
 class stereo_mode_c {
 public:
-  static std::vector<std::string> s_modes, s_translations;
+  static std::vector<std::string> s_modes;
+  static std::vector<translatable_string_c> s_translations;
 
   enum mode {
     invalid                        = -1,

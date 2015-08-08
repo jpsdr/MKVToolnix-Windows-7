@@ -19,7 +19,8 @@
 #include <string>
 #include <vector>
 
-std::vector<std::string> stereo_mode_c::s_modes, stereo_mode_c::s_translations;
+std::vector<std::string> stereo_mode_c::s_modes;
+std::vector<translatable_string_c> stereo_mode_c::s_translations;
 
 void
 stereo_mode_c::init() {
@@ -45,27 +46,27 @@ stereo_mode_c::init_translations() {
   if (!s_translations.empty())
     return;
 
-  s_translations.push_back(Y("mono"));
-  s_translations.push_back(Y("side by side (left first)"));
-  s_translations.push_back(Y("top bottom (right first)"));
-  s_translations.push_back(Y("top bottom (left first)"));
-  s_translations.push_back(Y("checkerboard (right first)"));
-  s_translations.push_back(Y("checkerboard (left first)"));
-  s_translations.push_back(Y("row interleaved (right first)"));
-  s_translations.push_back(Y("row interleaved (left first)"));
-  s_translations.push_back(Y("column interleaved (right first)"));
-  s_translations.push_back(Y("column interleaved (left first)"));
-  s_translations.push_back(Y("anaglyph (cyan/red)"));
-  s_translations.push_back(Y("side by side (right first)"));
-  s_translations.push_back(Y("anaglyph (green/magenta)"));
-  s_translations.push_back(Y("both eyes laced in one block (left first)"));
-  s_translations.push_back(Y("both eyes laced in one block (right first)"));
+  s_translations.push_back(YT("mono"));
+  s_translations.push_back(YT("side by side (left first)"));
+  s_translations.push_back(YT("top bottom (right first)"));
+  s_translations.push_back(YT("top bottom (left first)"));
+  s_translations.push_back(YT("checkerboard (right first)"));
+  s_translations.push_back(YT("checkerboard (left first)"));
+  s_translations.push_back(YT("row interleaved (right first)"));
+  s_translations.push_back(YT("row interleaved (left first)"));
+  s_translations.push_back(YT("column interleaved (right first)"));
+  s_translations.push_back(YT("column interleaved (left first)"));
+  s_translations.push_back(YT("anaglyph (cyan/red)"));
+  s_translations.push_back(YT("side by side (right first)"));
+  s_translations.push_back(YT("anaglyph (green/magenta)"));
+  s_translations.push_back(YT("both eyes laced in one block (left first)"));
+  s_translations.push_back(YT("both eyes laced in one block (right first)"));
 }
 
 const std::string
 stereo_mode_c::translate(unsigned int mode) {
   init_translations();
-  return mode < s_translations.size() ? s_translations[mode] : Y("unknown");
+  return mode < s_translations.size() ? s_translations[mode].get_translated() : Y("unknown");
 }
 
 stereo_mode_c::mode
