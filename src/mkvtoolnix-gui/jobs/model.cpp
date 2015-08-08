@@ -480,7 +480,6 @@ void
 Model::loadJobs(QSettings &settings) {
   QMutexLocker locked{&m_mutex};
 
-  auto watchTab      = MainWindow::watchCurrentJobTab();
   m_dontStartJobsNow = true;
 
   m_jobsById.clear();
@@ -498,8 +497,6 @@ Model::loadJobs(QSettings &settings) {
     try {
       auto job = Job::loadJob(settings);
       add(job);
-
-      watchTab->connectToJob(*job);
 
     } catch (Merge::InvalidSettingsX &) {
     }
