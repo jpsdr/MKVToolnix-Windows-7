@@ -38,12 +38,30 @@ Tab::Tab(QWidget *parent)
   // Setup UI controls.
   ui->setupUi(this);
 
-  ui->description->setText(QY("No job has been started yet."));
-
-  m_saveOutputAction->setEnabled(false);
+  setupUi();
 }
 
 Tab::~Tab() {
+}
+
+void
+Tab::setupUi() {
+  ui->description->setText(QY("No job has been started yet."));
+
+  m_saveOutputAction->setEnabled(false);
+
+  retranslateUi();
+
+  auto model = MainWindow::jobTool()->model();
+
+  connect(ui->abortButton,                        &QPushButton::clicked,            this, &Tab::onAbort);
+  connect(ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,            this, &Tab::acknowledgeWarningsAndErrors);
+  connect(ui->moreActionsButton,                  &QPushButton::clicked,            this, &Tab::showMoreActionsMenu);
+  connect(model,                                  &Jobs::Model::progressChanged,    this, &Tab::onQueueProgressChanged);
+  connect(model,                                  &Jobs::Model::queueStatusChanged, this, &Tab::updateRemainingTime);
+  connect(m_saveOutputAction,                     &QAction::triggered,              this, &Tab::onSaveOutput);
+  connect(m_clearOutputAction,                    &QAction::triggered,              this, &Tab::clearOutput);
+  connect(m_openFolderAction,                     &QAction::triggered,              this, &Tab::openFolder);
 }
 
 void
@@ -65,21 +83,10 @@ void
 Tab::connectToJob(Jobs::Job const &job) {
   m_currentlyConnectedJob = &job;
   auto connType           = static_cast<Qt::ConnectionType>(Qt::AutoConnection | Qt::UniqueConnection);
-  auto model              = MainWindow::jobTool()->model();
 
-  ui->abortButton->disconnect();
-
-  connect(&job,                                   &Jobs::Job::statusChanged,        this, &Tab::onStatusChanged,              connType);
-  connect(&job,                                   &Jobs::Job::progressChanged,      this, &Tab::onJobProgressChanged,         connType);
-  connect(&job,                                   &Jobs::Job::lineRead,             this, &Tab::onLineRead,                   connType);
-  connect(ui->abortButton,                        &QPushButton::clicked,            this, &Tab::onAbort,                      connType);
-  connect(ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,            this, &Tab::acknowledgeWarningsAndErrors, connType);
-  connect(ui->moreActionsButton,                  &QPushButton::clicked,            this, &Tab::showMoreActionsMenu,          connType);
-  connect(model,                                  &Jobs::Model::progressChanged,    this, &Tab::onQueueProgressChanged,       connType);
-  connect(model,                                  &Jobs::Model::queueStatusChanged, this, &Tab::updateRemainingTime,          connType);
-  connect(m_saveOutputAction,                     &QAction::triggered,              this, &Tab::onSaveOutput,                 connType);
-  connect(m_clearOutputAction,                    &QAction::triggered,              this, &Tab::clearOutput,                  connType);
-  connect(m_openFolderAction,                     &QAction::triggered,              this, &Tab::openFolder,                   connType);
+  connect(&job, &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged,      connType);
+  connect(&job, &Jobs::Job::progressChanged, this, &Tab::onJobProgressChanged, connType);
+  connect(&job, &Jobs::Job::lineRead,        this, &Tab::onLineRead,           connType);
 }
 
 void
