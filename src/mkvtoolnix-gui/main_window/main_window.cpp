@@ -28,6 +28,7 @@
 #include "mkvtoolnix-gui/util/moving_pixmap_overlay.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 #if defined(HAVE_CURL_EASY_H)
@@ -153,6 +154,8 @@ MainWindow::setupToolSelector() {
   ui->actionGUIInfoTool->setVisible(false);
   ui->actionGUITagEditor->setVisible(false);
 
+  auto currentJobTab = m_watchJobTool->currentJobTab();
+
   connect(ui->actionGUIMergeTool,      &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
   // connect(ui->actionGUIExtractionTool, &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
   // connect(ui->actionGUIInfoTool,       &QAction::triggered,                                    this,                &MainWindow::changeToolToSender);
@@ -166,6 +169,7 @@ MainWindow::setupToolSelector() {
   connect(m_toolJobs->model(),         &Jobs::Model::progressChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setProgress);
   connect(m_toolJobs->model(),         &Jobs::Model::jobStatsChanged,                          m_statusBarProgress, &StatusBarProgressWidget::setJobStats);
   connect(m_toolJobs->model(),         &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, m_statusBarProgress, &StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors);
+  connect(currentJobTab,               &WatchJobs::Tab::watchCurrentJobTabCleared,             m_statusBarProgress, &StatusBarProgressWidget::reset);
 }
 
 void

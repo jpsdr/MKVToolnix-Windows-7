@@ -38,6 +38,8 @@ public slots:
   void showWarningsContextMenu(QPoint const &pos);
   void showErrorsContextMenu(QPoint const &pos);
 
+  void reset();
+
 protected:
   void setLabelTexts();
 };

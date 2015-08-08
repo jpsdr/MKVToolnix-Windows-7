@@ -49,6 +49,7 @@ public:
 
 signals:
   void abortJob();
+  void watchCurrentJobTabCleared();
 
 public slots:
   void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status status);

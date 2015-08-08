@@ -297,6 +297,19 @@ Tab::clearOutput() {
   ui->output->clear();
   ui->warnings->clear();
   ui->errors->clear();
+
+  if (MainWindow::jobTool()->model()->isRunning())
+    return;
+
+  ui->progressBar->reset();
+  ui->status->setText(QY("no job started yet"));
+  ui->description->setText(QY("No job has been started yet."));
+  ui->startedAt->setText(QY("not started yet"));
+  ui->finishedAt->setText(QY("not finished yet"));
+  ui->remainingTimeCurrentJob->setText(Q("–"));
+  ui->remainingTimeQueue->setText(Q("–"));
+
+  emit watchCurrentJobTabCleared();
 }
 
 void
@@ -310,12 +323,14 @@ Tab::showMoreActionsMenu() {
 
   auto hasJob = std::numeric_limits<uint64_t>::max() != m_id;
   m_openFolderAction->setEnabled(hasJob);
-  m_clearOutputAction->setEnabled(!ui->output->toPlainText().isEmpty() || !ui->warnings->toPlainText().isEmpty() || !ui->errors->toPlainText().isEmpty());
+  m_clearOutputAction->setEnabled(hasJob);
 
   menu.addAction(m_openFolderAction);
   menu.addSeparator();
   menu.addAction(m_saveOutputAction);
-  menu.addAction(m_clearOutputAction);
+
+  if (isCurrentJobTab())
+    menu.addAction(m_clearOutputAction);
 
   menu.exec(QCursor::pos());
 }

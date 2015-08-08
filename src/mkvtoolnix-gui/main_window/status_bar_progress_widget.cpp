@@ -34,6 +34,11 @@ StatusBarProgressWidget::~StatusBarProgressWidget() {
 }
 
 void
+StatusBarProgressWidget::reset() {
+  setProgress(0, 0);
+}
+
+void
 StatusBarProgressWidget::setProgress(int progress,
                                      int totalProgress) {
   ui->progress->setValue(progress);
