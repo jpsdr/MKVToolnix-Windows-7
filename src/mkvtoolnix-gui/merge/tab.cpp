@@ -285,13 +285,14 @@ Tab::addToJobQueue(bool startNow) {
   if (!isReadyForMerging())
     return;
 
+  auto &cfg          = Util::Settings::get();
   auto newConfig     = std::make_shared<MuxConfig>(m_config);
   auto job           = std::make_shared<Jobs::MuxJob>(startNow ? Jobs::Job::PendingAuto : Jobs::Job::PendingManual, newConfig);
   job->m_dateAdded   = QDateTime::currentDateTime();
   job->m_description = job->displayableDescription();
 
   if (!startNow) {
-    if (!Util::Settings::get().m_useDefaultJobDescription) {
+    if (!cfg.m_useDefaultJobDescription) {
       auto newDescription = QString{};
 
       while (newDescription.isEmpty()) {
@@ -306,8 +307,12 @@ Tab::addToJobQueue(bool startNow) {
 
     MainWindow::get()->showIconMovingToTool(Q("task-delegate.png"), *MainWindow::jobTool());
 
-  } else
-    MainWindow::get()->showIconMovingToTool(Q("media-playback-start.png"), *MainWindow::watchJobTool());
+  } else {
+    if (cfg.m_switchToJobOutputAfterStarting)
+      MainWindow::get()->switchToTool(MainWindow::watchJobTool());
+    else
+      MainWindow::get()->showIconMovingToTool(Q("media-playback-start.png"), *MainWindow::watchJobTool());
+  }
 
   MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
 

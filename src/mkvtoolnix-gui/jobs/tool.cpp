@@ -154,6 +154,9 @@ Tool::onStartAutomatically() {
   m_model->withSelectedJobs(ui->jobs, [](Job &job) { job.setPendingAuto(); });
 
   m_model->startNextAutoJob();
+
+  if (Util::Settings::get().m_switchToJobOutputAfterStarting)
+    MainWindow::get()->switchToTool(MainWindow::watchJobTool());
 }
 
 void
@@ -163,12 +166,19 @@ Tool::onStartManually() {
 
 void
 Tool::onStartAllPending() {
-  m_model->withAllJobs([](Job &job) {
-    if (Job::PendingManual == job.m_status)
+  auto startedSomething = false;
+
+  m_model->withAllJobs([&startedSomething](Job &job) {
+    if (Job::PendingManual == job.m_status) {
       job.setPendingAuto();
+      startedSomething = true;
+    }
   });
 
   m_model->startNextAutoJob();
+
+  if (startedSomething && Util::Settings::get().m_switchToJobOutputAfterStarting)
+    MainWindow::get()->switchToTool(MainWindow::watchJobTool());
 }
 
 void

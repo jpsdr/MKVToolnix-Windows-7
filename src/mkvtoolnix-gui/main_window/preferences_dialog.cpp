@@ -40,6 +40,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 
   ui->cbGuiUseDefaultJobDescription->setChecked(m_cfg.m_useDefaultJobDescription);
   ui->cbGuiShowOutputOfAllJobs->setChecked(m_cfg.m_showOutputOfAllJobs);
+  ui->cbGuiSwitchToJobOutputAfterStarting->setChecked(m_cfg.m_switchToJobOutputAfterStarting);
   setupJobRemovalPolicy();
 
   setupCommonLanguages();
@@ -92,7 +93,6 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("No information is transmitted to the server.")));
 
   Util::setToolTip(ui->cbGuiDisableAnimations, QY("If checked several short animations used throughout the program as visual clues for the user will be disabled."));
-  Util::setToolTip(ui->cbGuiShowOutputOfAllJobs, QY("If unchecked the tool selector on the left side of the main window will be hidden."));
   Util::setToolTip(ui->cbGuiWarnBeforeClosingModifiedTabs,
                    Q("%1 %2")
                    .arg(QY("If checked the program will ask for confirmation before closing or reloading tabs that have been modified."))
@@ -112,6 +112,7 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled the GUI will let you enter a description for a job when adding it to the queue."));
   Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the »job output« tool will not be cleared when a new job starts."));
+  Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting, QY("If enabled the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing »start muxing«)."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
@@ -374,6 +375,7 @@ PreferencesDialog::save() {
   m_cfg.m_showMoveUpDownButtons              = ui->cbGuiShowMoveUpDownButtons->isChecked();
   m_cfg.m_useDefaultJobDescription           = ui->cbGuiUseDefaultJobDescription->isChecked();
   m_cfg.m_showOutputOfAllJobs                = ui->cbGuiShowOutputOfAllJobs->isChecked();
+  m_cfg.m_switchToJobOutputAfterStarting     = ui->cbGuiSwitchToJobOutputAfterStarting->isChecked();
   auto idx                                   = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy                   = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 
