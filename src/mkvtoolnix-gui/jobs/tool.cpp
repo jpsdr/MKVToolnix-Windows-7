@@ -141,6 +141,7 @@ Tool::onContextMenu(QPoint pos) {
   m_startManuallyAction->setEnabled(hasSelection);
   m_viewOutputAction->setEnabled(hasSelection);
   m_removeAction->setEnabled(hasSelection);
+  m_openFolderAction->setEnabled(hasSelection);
 
   m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
   m_acknowledgeSelectedErrorsAction->setEnabled(hasSelection);
