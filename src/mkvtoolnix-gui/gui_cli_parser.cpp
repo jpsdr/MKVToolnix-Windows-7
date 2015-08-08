@@ -6,6 +6,7 @@
 #include "common/command_line.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/gui_cli_parser.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 
 namespace mtx { namespace gui {
 
@@ -37,6 +38,7 @@ GuiCliParser::initParser() {
   OPT("merge",         setMergeMode,    (boost::format("%1% %2%") % YT("All following file names will be added as input files to the current merge job.") % YT("This is the default mode.")).str());
   OPT("edit-chapters", setChaptersMode, YT("All following file names will be opened in the chapter editor."));
   OPT("edit-headers",  setHeadersMode,  YT("All following file names will be opened in the header editor."));
+  OPT("activate",      raiseAndActivate, "");
 
   add_section_header(YT("Global options"));
 
@@ -47,6 +49,13 @@ GuiCliParser::initParser() {
 }
 
 #undef OPT
+
+void
+GuiCliParser::raiseAndActivate() {
+  auto mw = MainWindow::get();
+  if (mw)
+    mw->raiseAndActivate();
+}
 
 void
 GuiCliParser::handleFileNameArg() {

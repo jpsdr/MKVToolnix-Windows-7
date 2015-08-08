@@ -302,11 +302,20 @@ App::isOtherInstanceRunning()
 }
 
 void
-App::sendArgumentsToRunningInstance() {
+App::sendCommandLineArgumentsToRunningInstance() {
   auto args = m_cliParser->rebuildCommandLine();
-  if (args.isEmpty())
-    return;
+  if (!args.isEmpty())
+    sendArgumentsToRunningInstance(args);
+}
 
+void
+App::raiseAndActivateRunningInstance() {
+  if (isOtherInstanceRunning())
+    sendArgumentsToRunningInstance(QStringList{} << "--activate");
+}
+
+void
+App::sendArgumentsToRunningInstance(QStringList const &args) {
   auto size  = 0;
   auto block = QByteArray{};
   QDataStream out{&block, QIODevice::WriteOnly};
@@ -337,8 +346,10 @@ App::sendArgumentsToRunningInstance() {
 
 bool
 App::parseCommandLineArguments(QStringList const &args) {
-  if (args.isEmpty())
+  if (args.isEmpty()) {
+    raiseAndActivateRunningInstance();
     return true;
+  }
 
   m_cliParser.reset(new GuiCliParser{Util::toStdStringVector(args, 1)});
   m_cliParser->run();
@@ -349,7 +360,9 @@ App::parseCommandLineArguments(QStringList const &args) {
   if (!isOtherInstanceRunning())
     return true;
 
-  sendArgumentsToRunningInstance();
+  raiseAndActivateRunningInstance();
+  sendCommandLineArgumentsToRunningInstance();
+
   return false;
 }
 

@@ -63,6 +63,8 @@ cli_parser_c::option_t::option_t(std::string const &spec,
 std::string
 cli_parser_c::option_t::format_text() {
   auto description = m_description.get_translated();
+  if (description.empty())
+    return {};
 
   if ((cli_parser_c::option_t::ot_option == m_type) || (cli_parser_c::option_t::ot_informational_option == m_type))
     return format_paragraph(description, INDENT_DEFAULT == m_indent ? INDENT_COLUMN_OPTION_DESCRIPTION : m_indent, std::string(INDENT_COLUMN_OPTION_NAME, ' ') + m_name);

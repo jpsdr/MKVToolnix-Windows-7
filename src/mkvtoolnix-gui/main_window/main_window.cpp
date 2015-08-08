@@ -80,6 +80,12 @@ MainWindow::~MainWindow() {
 }
 
 void
+MainWindow::raiseAndActivate() {
+  raise();
+  activateWindow();
+}
+
+void
 MainWindow::setStatusBarMessage(QString const &message) {
   ui->statusBar->showMessage(message, 3000);
 }

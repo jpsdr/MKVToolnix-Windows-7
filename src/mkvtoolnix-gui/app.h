@@ -48,7 +48,9 @@ public:
   void handleCommandLineArgumentsLocally();
 
   bool isOtherInstanceRunning() const;
-  void sendArgumentsToRunningInstance();
+  void sendCommandLineArgumentsToRunningInstance();
+  void sendArgumentsToRunningInstance(QStringList const &args);
+  void raiseAndActivateRunningInstance();
 
 signals:
   void addingFilesToMergeRequested(QStringList const &fileNames);

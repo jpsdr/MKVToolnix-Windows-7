@@ -32,6 +32,7 @@ protected:
   void setChaptersMode();
   void setHeadersMode();
   void setMergeMode();
+  void raiseAndActivate();
 };
 
 }}
