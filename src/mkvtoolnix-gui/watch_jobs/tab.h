@@ -31,7 +31,7 @@ protected:
   // certain signals.
   QObject const *m_currentlyConnectedJob;
 
-  QAction *m_saveOutputAction;
+  QAction *m_saveOutputAction, *m_clearOutputAction;
 
 public:
   explicit Tab(QWidget *parent);
@@ -58,6 +58,7 @@ public slots:
   void onAbort();
 
   void onSaveOutput();
+  void clearOutput();
 
   void acknowledgeWarningsAndErrors();
 

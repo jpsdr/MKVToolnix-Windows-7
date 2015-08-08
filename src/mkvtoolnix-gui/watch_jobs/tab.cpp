@@ -31,6 +31,7 @@ Tab::Tab(QWidget *parent)
   , m_currentJobStatus{Jobs::Job::PendingManual}
   , m_currentlyConnectedJob{}
   , m_saveOutputAction{new QAction{this}}
+  , m_clearOutputAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -48,6 +49,7 @@ Tab::retranslateUi() {
   ui->retranslateUi(this);
 
   m_saveOutputAction->setText(QY("&Save output"));
+  m_clearOutputAction->setText(QY("&Clear output"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
   ui->output->setPlaceholderText(QY("no output yet"));
@@ -74,6 +76,7 @@ Tab::connectToJob(Jobs::Job const &job) {
   connect(model,                                  &Jobs::Model::progressChanged,    this, &Tab::onQueueProgressChanged,       connType);
   connect(model,                                  &Jobs::Model::queueStatusChanged, this, &Tab::updateRemainingTime,          connType);
   connect(m_saveOutputAction,                     &QAction::triggered,              this, &Tab::onSaveOutput,                 connType);
+  connect(m_clearOutputAction,                    &QAction::triggered,              this, &Tab::clearOutput,                  connType);
 }
 
 void
@@ -277,9 +280,17 @@ Tab::acknowledgeWarningsAndErrors() {
 }
 
 void
+Tab::clearOutput() {
+  ui->output->clear();
+  ui->warnings->clear();
+  ui->errors->clear();
+}
+
+void
 Tab::showMoreActionsMenu() {
   QMenu menu{this};
   menu.addAction(m_saveOutputAction);
+  menu.addAction(m_clearOutputAction);
 
   menu.exec(QCursor::pos());
 }
