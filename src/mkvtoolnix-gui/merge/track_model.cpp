@@ -263,6 +263,68 @@ TrackModel::dumpTracks(QString const &label)
   }
 }
 
+bool
+TrackModel::canDropMimeData(QMimeData const *data,
+                            Qt::DropAction action,
+                            int,
+                            int,
+                            QModelIndex const &parent)
+  const {
+  if (!data || (Qt::MoveAction != action))
+    return false;
+
+  // Reordering and therefore dragging non-regular tracks (chapters,
+  // tags etc.) is not possible. Neither is dropping on them.
+  if (m_nonRegularSelected)
+    return false;
+
+  // If both appended and non-appended tracks have been selected then
+  // those cannot be dragged & dropped at the same time.
+  if (m_nonAppendedSelected && m_appendedSelected)
+    return false;
+
+  // If multiple appended tracks have been selected that are appended
+  // to different parents then those cannot be dragged & dropped at
+  // the moment, as cannot multiple tracks of different types.
+  if (m_appendedMultiParentsSelected || m_appendedMultiTypeSelected)
+    return false;
+
+  // No dropping inside appended tracks.
+  if (parent.isValid() && parent.parent().isValid())
+    return false;
+
+  auto indexTrack = fromIndex(parent);
+  // Appended tracks can only be dropped onto tracks of the same kind.
+  if (m_appendedSelected && indexTrack && (m_selectedTrackType != indexTrack->m_type))
+    return false;
+
+  // Appended tracks can only be dropped onto non-appended tracks
+  // (meaning on model indexes that are valid) – but only on top level
+  // items (meaning the parent index is invalid).
+  if (m_appendedSelected && !parent.isValid())
+    return false;
+
+  // Non-appended tracks can only be dropped onto the root note (whose
+  // index isn't valid).
+  if (m_nonAppendedSelected && parent.isValid())
+    return false;
+
+  return true;
+}
+
+bool
+TrackModel::dropMimeData(QMimeData const *data,
+                         Qt::DropAction action,
+                         int row,
+                         int column,
+                         QModelIndex const &parent) {
+  if (!canDropMimeData(data, action, row, column, parent))
+    return false;
+
+  auto isInside = (-1 == row) && (-1 == column);
+  return QStandardItemModel::dropMimeData(data, action, isInside ? -1 : row, isInside ? -1 : 0, parent.isValid() ? parent.sibling(parent.row(), 0) : parent);
+}
+
 Qt::DropActions
 TrackModel::supportedDropActions()
   const {
