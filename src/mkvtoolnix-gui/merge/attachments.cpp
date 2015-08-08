@@ -51,16 +51,9 @@ Tab::withSelectedAttachments(std::function<void(Attachment *)> code) {
   if (m_currentlySettingInputControlValues)
     return;
 
-  for (auto &indexRange : ui->attachments->selectionModel()->selection()) {
-    auto idxs = indexRange.indexes();
-    if (idxs.isEmpty() || !idxs.at(0).isValid())
-      continue;
-
-    auto attachment = m_attachmentsModel->attachmentForRow(idxs.at(0).row());
-    if (attachment) {
-      code(attachment.get());
-      m_attachmentsModel->attachmentUpdated(*attachment);
-    }
+  for (auto const &attachment : selectedAttachments()) {
+    code(attachment);
+    m_attachmentsModel->attachmentUpdated(*attachment);
   }
 }
 
