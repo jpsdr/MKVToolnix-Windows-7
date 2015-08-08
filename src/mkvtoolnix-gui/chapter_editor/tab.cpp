@@ -72,9 +72,6 @@ void
 Tab::setupUi() {
   Util::Settings::get().handleSplitterSizes(ui->chapterEditorSplitter);
 
-  ui->elements->dropInFirstColumnOnly(false);
-  ui->tvChNames->dropInFirstColumnOnly(false);
-
   ui->elements->setModel(m_chapterModel);
   ui->tvChNames->setModel(m_nameModel);
 

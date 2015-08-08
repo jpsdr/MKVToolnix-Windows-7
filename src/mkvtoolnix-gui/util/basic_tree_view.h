@@ -17,14 +17,13 @@ class BasicTreeView : public QTreeView {
   Q_OBJECT;
 
 protected:
-  bool m_dropInFirstColumnOnly{true}, m_acceptDroppedFiles{}, m_enterActivatesAllSelected{};
+  bool m_acceptDroppedFiles{}, m_enterActivatesAllSelected{};
   FilesDragDropHandler m_filesDDHandler;
 
 public:
   BasicTreeView(QWidget *parent);
   virtual ~BasicTreeView();
 
-  BasicTreeView &dropInFirstColumnOnly(bool enable);
   BasicTreeView &acceptDroppedFiles(bool enable);
   BasicTreeView &enterActivatesAllSelected(bool enable);
 

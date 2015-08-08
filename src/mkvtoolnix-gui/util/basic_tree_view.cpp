@@ -26,12 +26,6 @@ BasicTreeView::acceptDroppedFiles(bool enable) {
 }
 
 BasicTreeView &
-BasicTreeView::dropInFirstColumnOnly(bool enable) {
-  m_dropInFirstColumnOnly = enable;
-  return *this;
-}
-
-BasicTreeView &
 BasicTreeView::enterActivatesAllSelected(bool enable) {
   m_enterActivatesAllSelected = enable;
   return *this;
@@ -50,21 +44,11 @@ BasicTreeView::dragMoveEvent(QDragMoveEvent *event) {
   if (m_acceptDroppedFiles && m_filesDDHandler.handle(event, false))
     return;
 
-  if (m_dropInFirstColumnOnly && (event->pos().x() > columnWidth(0))) {
-    event->ignore();
-    return;
-  }
-
   QTreeView::dragMoveEvent(event);
 }
 
 void
 BasicTreeView::dropEvent(QDropEvent *event) {
-  if (m_dropInFirstColumnOnly && (event->pos().x() > columnWidth(0))) {
-    event->ignore();
-    return;
-  }
-
   if (m_acceptDroppedFiles && m_filesDDHandler.handle(event, true)) {
     emit filesDropped(m_filesDDHandler.fileNames());
     return;

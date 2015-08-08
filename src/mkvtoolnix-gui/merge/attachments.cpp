@@ -17,7 +17,6 @@ using namespace mtx::gui;
 
 void
 Tab::setupAttachmentsControls() {
-  ui->attachments->dropInFirstColumnOnly(false);
   ui->attachments->setModel(m_attachmentsModel);
   ui->splitMaxFiles->setMaximum(std::numeric_limits<int>::max());
 
