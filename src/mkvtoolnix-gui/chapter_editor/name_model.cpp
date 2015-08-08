@@ -155,4 +155,30 @@ NameModel::registryIdFromItem(QStandardItem *item) {
   return item ? item->data(Util::ChapterEditorChapterDisplayRole).value<qulonglong>() : 0;
 }
 
+bool
+NameModel::canDropMimeData(QMimeData const *data,
+                           Qt::DropAction action,
+                           int,
+                           int,
+                           QModelIndex const &parent)
+  const {
+  if (!data || (Qt::MoveAction != action))
+    return false;
+
+  return !parent.isValid();
+}
+
+bool
+NameModel::dropMimeData(QMimeData const *data,
+                        Qt::DropAction action,
+                        int row,
+                        int column,
+                        QModelIndex const &parent) {
+  if (!canDropMimeData(data, action, row, column, parent))
+    return false;
+
+  auto isInside = (-1 == row) && (-1 == column);
+  return QStandardItemModel::dropMimeData(data, action, isInside ? -1 : row, isInside ? -1 : 0, parent.sibling(parent.row(), 0));
+}
+
 }}}

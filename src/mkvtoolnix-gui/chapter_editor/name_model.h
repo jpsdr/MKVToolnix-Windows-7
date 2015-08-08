@@ -43,6 +43,8 @@ public:
   virtual Qt::DropActions supportedDropActions() const override;
   virtual Qt::ItemFlags flags(QModelIndex const &index) const override;
 
+  virtual bool canDropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) const override;
+  virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
 
 protected:
   void setRowText(QList<QStandardItem *> const &rowItems);
