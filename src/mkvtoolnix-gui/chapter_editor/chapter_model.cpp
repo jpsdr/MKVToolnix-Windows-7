@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
+
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/qt.h"
@@ -315,11 +317,34 @@ ChapterModel::supportedDropActions()
 }
 
 bool
-ChapterModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) {
-  if ((0 > row) || (0 > column))
+ChapterModel::canDropMimeData(QMimeData const *,
+                              Qt::DropAction action,
+                              int row,
+                              int column,
+                              QModelIndex const &parent)
+  const {
+  auto selectedIsChapter = m_selectedIdx.isValid() && m_selectedIdx.parent().isValid();
+
+  auto ok = (Qt::MoveAction == action)
+         && (   ( selectedIsChapter &&  parent.isValid())
+             || (!selectedIsChapter && !parent.isValid()));
+
+  qDebug() << "mtx chapters canDropMimeData ok" << ok << "selectedIsChapter" << selectedIsChapter << "row" << row << "column" << column << "parent" << parent;
+
+  return ok;
+}
+
+bool
+ChapterModel::dropMimeData(QMimeData const *data,
+                           Qt::DropAction action,
+                           int row,
+                           int column,
+                           QModelIndex const &parent) {
+  if (!canDropMimeData(data, action, row, column, parent))
     return false;
 
-  return QStandardItemModel::dropMimeData(data, action, row, column, parent);
+  auto isInside = (-1 == row) && (-1 == column);
+  return QStandardItemModel::dropMimeData(data, action, isInside ? -1 : row, isInside ? -1 : 0, parent.sibling(parent.row(), 0));
 }
 
 Qt::ItemFlags
