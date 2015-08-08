@@ -1,6 +1,8 @@
 #include "common/common_pch.h"
 
+#include <QCursor>
 #include <QFileDialog>
+#include <QMenu>
 #include <QPushButton>
 #include <QtGlobal>
 
@@ -28,11 +30,14 @@ Tab::Tab(QWidget *parent)
   , m_queueProgress{}
   , m_currentJobStatus{Jobs::Job::PendingManual}
   , m_currentlyConnectedJob{}
+  , m_saveOutputAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
 
   ui->description->setText(QY("No job has been started yet."));
+
+  m_saveOutputAction->setEnabled(false);
 }
 
 Tab::~Tab() {
@@ -41,6 +46,8 @@ Tab::~Tab() {
 void
 Tab::retranslateUi() {
   ui->retranslateUi(this);
+
+  m_saveOutputAction->setText(QY("&Save output"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
   ui->output->setPlaceholderText(QY("no output yet"));
@@ -62,10 +69,11 @@ Tab::connectToJob(Jobs::Job const &job) {
   connect(&job,                                   &Jobs::Job::progressChanged,      this, &Tab::onJobProgressChanged,         connType);
   connect(&job,                                   &Jobs::Job::lineRead,             this, &Tab::onLineRead,                   connType);
   connect(ui->abortButton,                        &QPushButton::clicked,            this, &Tab::onAbort,                      connType);
-  connect(ui->saveOutputButton,                   &QPushButton::clicked,            this, &Tab::onSaveOutput,                 connType);
   connect(ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,            this, &Tab::acknowledgeWarningsAndErrors, connType);
+  connect(ui->moreActionsButton,                  &QPushButton::clicked,            this, &Tab::showMoreActionsMenu,          connType);
   connect(model,                                  &Jobs::Model::progressChanged,    this, &Tab::onQueueProgressChanged,       connType);
   connect(model,                                  &Jobs::Model::queueStatusChanged, this, &Tab::updateRemainingTime,          connType);
+  connect(m_saveOutputAction,                     &QAction::triggered,              this, &Tab::onSaveOutput,                 connType);
 }
 
 void
@@ -88,7 +96,7 @@ Tab::onStatusChanged(uint64_t id) {
   auto job = MainWindow::jobTool()->model()->fromId(id);
   if (!job) {
     ui->abortButton->setEnabled(false);
-    ui->saveOutputButton->setEnabled(false);
+    m_saveOutputAction->setEnabled(false);
     MainWindow::watchJobTool()->enableMenuActions();
 
     m_currentJobProgress = 0;
@@ -102,7 +110,7 @@ Tab::onStatusChanged(uint64_t id) {
   m_currentJobStatus = job->m_status;
 
   ui->abortButton->setEnabled(Jobs::Job::Running == m_currentJobStatus);
-  ui->saveOutputButton->setEnabled(true);
+  m_saveOutputAction->setEnabled(true);
   ui->status->setText(Jobs::Job::displayableStatus(m_currentJobStatus));
   MainWindow::watchJobTool()->enableMenuActions();
 
@@ -219,7 +227,7 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   ui->finishedAt->setText(job.m_dateFinished.isValid() ? Util::displayableDate(job.m_dateFinished) : QY("not finished yet"));
 
   ui->abortButton->setEnabled(Jobs::Job::Running == job.m_status);
-  ui->saveOutputButton->setEnabled(!mtx::included_in(job.m_status, Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
+  m_saveOutputAction->setEnabled(!mtx::included_in(job.m_status, Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
 
   ui->acknowledgeWarningsAndErrorsButton->setEnabled(job.numUnacknowledgedWarnings() || job.numUnacknowledgedErrors());
 
@@ -253,7 +261,7 @@ Tab::id()
 bool
 Tab::isSaveOutputEnabled()
   const {
-  return ui->saveOutputButton->isEnabled();
+  return m_saveOutputAction->isEnabled();
 }
 
 bool
@@ -266,6 +274,14 @@ void
 Tab::acknowledgeWarningsAndErrors() {
   MainWindow::jobTool()->acknowledgeWarningsAndErrors(m_id);
   ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
+}
+
+void
+Tab::showMoreActionsMenu() {
+  QMenu menu{this};
+  menu.addAction(m_saveOutputAction);
+
+  menu.exec(QCursor::pos());
 }
 
 }}}

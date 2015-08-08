@@ -248,22 +248,19 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="saveOutputButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>&amp;Save output</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="abortButton">
        <property name="enabled">
         <bool>false</bool>
        </property>
        <property name="text">
         <string>&amp;Abort</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="moreActionsButton">
+       <property name="text">
+        <string>M&amp;ore actions</string>
        </property>
       </widget>
      </item>
@@ -289,6 +286,7 @@
    <class>mtx::gui::Util::ElideLabel</class>
    <extends>QFrame</extends>
    <header>mkvtoolnix-gui/util/elide_label.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -296,8 +294,8 @@
   <tabstop>warnings</tabstop>
   <tabstop>errors</tabstop>
   <tabstop>acknowledgeWarningsAndErrorsButton</tabstop>
-  <tabstop>saveOutputButton</tabstop>
   <tabstop>abortButton</tabstop>
+  <tabstop>moreActionsButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

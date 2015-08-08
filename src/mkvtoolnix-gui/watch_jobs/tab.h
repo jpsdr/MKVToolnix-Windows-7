@@ -31,6 +31,8 @@ protected:
   // certain signals.
   QObject const *m_currentlyConnectedJob;
 
+  QAction *m_saveOutputAction;
+
 public:
   explicit Tab(QWidget *parent);
   ~Tab();
@@ -60,6 +62,8 @@ public slots:
   void acknowledgeWarningsAndErrors();
 
   void updateRemainingTime();
+
+  void showMoreActionsMenu();
 
 protected:
   void updateOneRemainingTimeLabel(QLabel *label, QDateTime const &startTime, uint64_t progress);
