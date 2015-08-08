@@ -95,7 +95,8 @@ Tab::onAbort() {
 }
 
 void
-Tab::onStatusChanged(uint64_t id) {
+Tab::onStatusChanged(uint64_t id,
+                     mtx::gui::Jobs::Job::Status status) {
   if (QObject::sender() != m_currentlyConnectedJob)
     return;
 
@@ -114,7 +115,7 @@ Tab::onStatusChanged(uint64_t id) {
   }
 
   QMutexLocker locker{&job->m_mutex};
-  m_currentJobStatus = job->m_status;
+  m_currentJobStatus = status;
   m_id               = job->m_id;
 
   ui->abortButton->setEnabled(Jobs::Job::Running == m_currentJobStatus);

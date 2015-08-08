@@ -56,7 +56,7 @@ Job::setStatus(Status status) {
   } else if ((DoneOk == status) || (DoneWarnings == status) || (Failed == status) || (Aborted == status))
     m_dateFinished = QDateTime::currentDateTime();
 
-  emit statusChanged(m_id);
+  emit statusChanged(m_id, status);
 }
 
 bool
