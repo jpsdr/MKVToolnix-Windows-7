@@ -526,32 +526,20 @@ Model::flags(QModelIndex const &index)
   return index.isValid() ? defaultFlags | Qt::ItemIsDragEnabled : defaultFlags | Qt::ItemIsDropEnabled;
 }
 
-static int rc = -1;
-
 bool
 Model::canDropMimeData(QMimeData const *data,
                        Qt::DropAction action,
                        int row,
-                       int column,
+                       int,
                        QModelIndex const &parent)
   const {
-  if (-1 == rc) {
-    rc = rowCount();
-    qDebug() << "mtx jobs canDropMimeData initital rowCount" << rc;
-  }
-
-  if (!QStandardItemModel::canDropMimeData(data, action, row, column, parent))
+  if (   !data
+      || (Qt::MoveAction != action)
+      || parent.isValid()
+      || (0 > row))
     return false;
 
-  if (rowCount() != rc)
-    qDebug() << "mtx jobs canDropMimeData ROW COUNT MISMATCH initial" << rc << "current" << rowCount() << "row" << row << "column" << column << "parent" << parent << "action" << action;
-
-  bool ok = (Qt::MoveAction == action)
-         && !parent.isValid()
-         && (   ((0  <= row) && ( 0 <= column))
-             || ((-1 == row) && (-1 == column)));
-
-  return ok;
+  return true;
 }
 
 bool
@@ -560,28 +548,10 @@ Model::dropMimeData(QMimeData const *data,
                     int row,
                     int column,
                     QModelIndex const &parent) {
-  if (-1 == rc) {
-    rc = rowCount();
-    qDebug() << "mtx jobs dropMimeData initital rowCount" << rc;
-  }
-
-  bool ok = (Qt::MoveAction == action)
-         && !parent.isValid()
-         && (   ((0  <= row) && ( 0 <= column))
-             || ((-1 == row) && (-1 == column)));
-
-  if (!ok) {
-    qDebug() << "mtx jobs DROP NOT OK; row" << row << "column" << column << "parent" << parent << "action" << action;
+  if (!canDropMimeData(data, action, row, column, parent))
     return false;
-  }
 
-  auto rcBefore = rowCount();
-  auto result   = QStandardItemModel::dropMimeData(data, action, row, 0, parent);
-  auto rcAfter  = rowCount();
-
-  qDebug() << "mtx jobs dropMimeData row count initial" << rc << "before" << rcBefore << "after" << rcAfter << "row" << row << "column" << column << "parent" << parent << "action" << action;
-
-  return result;
+  return QStandardItemModel::dropMimeData(data, action, row, 0, parent);
 }
 
 void
