@@ -27,6 +27,7 @@ protected:
   Model *m_model;
 
   QAction *m_startAutomaticallyAction, *m_startManuallyAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeSelectedWarningsErrorsAction;
+  QAction *m_openFolderAction;
   QMenu *m_jobQueueMenu, *m_jobsMenu;
 
 public:
@@ -50,6 +51,7 @@ public slots:
   void onRemoveDone();
   void onRemoveDoneOk();
   void onRemoveAll();
+  void onOpenFolder();
 
   void onJobQueueMenu();
   void onContextMenu(QPoint pos);

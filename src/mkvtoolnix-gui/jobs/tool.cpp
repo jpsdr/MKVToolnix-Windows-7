@@ -33,6 +33,7 @@ Tool::Tool(QWidget *parent,
   , m_acknowledgeSelectedWarningsAction{new QAction{this}}
   , m_acknowledgeSelectedErrorsAction{new QAction{this}}
   , m_acknowledgeSelectedWarningsErrorsAction{new QAction{this}}
+  , m_openFolderAction{new QAction{this}}
   , m_jobQueueMenu{jobQueueMenu}
   , m_jobsMenu{new QMenu{this}}
 {
@@ -68,6 +69,7 @@ Tool::setupUiControls() {
   ui->jobs->setModel(m_model);
 
   m_jobsMenu->addAction(m_viewOutputAction);
+  m_jobsMenu->addAction(m_openFolderAction);
   m_jobsMenu->addSeparator();
   m_jobsMenu->addAction(m_startAutomaticallyAction);
   m_jobsMenu->addAction(m_startManuallyAction);
@@ -102,6 +104,7 @@ Tool::setupUiControls() {
   connect(m_acknowledgeSelectedErrorsAction,                &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
   connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
   connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
+  connect(m_openFolderAction,                               &QAction::triggered,       this,    &Tool::onOpenFolder);
 
   connect(ui->jobs,                                         &QTreeView::doubleClicked, this,    &Tool::onViewOutput);
 }
@@ -251,6 +254,7 @@ Tool::retranslateUi() {
   m_startAutomaticallyAction->setText(QY("&Start jobs automatically"));
   m_startManuallyAction->setText(QY("Start jobs &manually"));
   m_removeAction->setText(QY("&Remove jobs"));
+  m_openFolderAction->setText(QY("&Open folder"));
 
   m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge warnings"));
   m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge errors"));
@@ -285,6 +289,11 @@ Tool::onViewOutput() {
   m_model->withSelectedJobs(ui->jobs, [tool](Job &job) { tool->viewOutput(job); });
 
   mtx::gui::MainWindow::get()->switchToTool(tool);
+}
+
+void
+Tool::onOpenFolder() {
+  m_model->withSelectedJobs(ui->jobs, [](Job const &job) { job.openOutputFolder(); });
 }
 
 void
