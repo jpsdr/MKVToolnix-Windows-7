@@ -50,7 +50,9 @@ public:
 
   virtual QStringList mimeTypes() const;
   virtual QMimeData *mimeData(QModelIndexList const &indexes) const;
-  virtual bool dropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
+
+  virtual bool canDropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) const override;
+  virtual bool dropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) override;
 
 public slots:
   void updateSelectionStatus();

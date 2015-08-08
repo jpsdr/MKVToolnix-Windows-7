@@ -493,12 +493,49 @@ SourceFileModel::mimeData(QModelIndexList const &indexes)
 }
 
 bool
+SourceFileModel::canDropMimeData(QMimeData const *data,
+                                 Qt::DropAction action,
+                                 int,
+                                 int,
+                                 QModelIndex const &parent)
+  const {
+  if (   !data
+      || !data->hasFormat(mtx::gui::MimeTypes::MergeSourceFileModelItem)
+      || (Qt::MoveAction != action))
+    return false;
+
+  // If both appended files/additional parts and non-appended files
+  // have been selected then those cannot be dragged & dropped at the
+  // same time.
+  if (m_nonAppendedSelected && (m_appendedSelected | m_additionalPartSelected))
+    return false;
+
+  // No drag & drop inside appended/additional parts, please.
+  if (parent.isValid() && parent.parent().isValid())
+    return false;
+
+  // Appended files/additional parts can only be dropped onto
+  // non-appended files (meaning on model indexes that are valid) –
+  // but only on top level items (meaning the parent index is
+  // invalid).
+  if ((m_appendedSelected | m_additionalPartSelected) && !parent.isValid())
+    return false;
+
+  // Non-appended files can only be dropped onto the root note (whose
+  // index isn't valid).
+  if (m_nonAppendedSelected && parent.isValid())
+    return false;
+
+  return true;
+}
+
+bool
 SourceFileModel::dropMimeData(QMimeData const *data,
                               Qt::DropAction action,
                               int row,
-                              int,
+                              int column,
                               QModelIndex const &parent) {
-  if (!data)
+  if (!canDropMimeData(data, action, row, column, parent))
     return false;
 
   if (row > rowCount(parent))
@@ -506,10 +543,7 @@ SourceFileModel::dropMimeData(QMimeData const *data,
   if (row == -1)
     row = rowCount(parent);
 
-  if (data->hasFormat(mtx::gui::MimeTypes::MergeSourceFileModelItem))
-    return dropSourceFiles(data, action, row, parent);
-
-  return false;
+  return dropSourceFiles(data, action, row, parent.isValid() ? parent.sibling(parent.row(), 0) : parent);
 }
 
 QString

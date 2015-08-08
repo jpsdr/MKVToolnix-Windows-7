@@ -91,6 +91,7 @@ Tab::setupInputControls() {
   setupControlLists();
   setupMoveUpDownButtons();
 
+  ui->files->dropInFirstColumnOnly(false);
   ui->tracks->dropInFirstColumnOnly(false);
 
   ui->files->setModel(m_filesModel);
