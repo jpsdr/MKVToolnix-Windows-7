@@ -270,7 +270,11 @@ Job::saveQueueFile() {
   if (m_uuid.isNull())
     m_uuid = QUuid::createUuid();
 
-  auto settings = Util::ConfigFile::create(queueFileName());
+  auto fileName = queueFileName();
+  if (!isModified() && QFileInfo{ fileName }.exists())
+    return;
+
+  auto settings = Util::ConfigFile::create(fileName);
   saveJob(*settings);
   settings->save();
 }
@@ -299,7 +303,7 @@ Job::saveJob(Util::ConfigFile &settings) {
 
 void
 Job::loadJobBasis(Util::ConfigFile &settings) {
-  m_modified             = true;
+  m_modified             = false;
   m_uuid                 = settings.value("uuid").toUuid();
   m_status               = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
   m_description          = settings.value("description").toString();
@@ -345,6 +349,9 @@ Job::loadJob(Util::ConfigFile &settings) {
 
 void
 Job::acknowledgeWarnings() {
+  if (m_warnings.count() == m_warningsAcknowledged)
+    return;
+
   m_warningsAcknowledged = m_warnings.count();
   m_modified             = true;
   updateUnacknowledgedWarningsAndErrors();
@@ -352,6 +359,9 @@ Job::acknowledgeWarnings() {
 
 void
 Job::acknowledgeErrors() {
+  if (m_errors.count() == m_errorsAcknowledged)
+    return;
+
   m_errorsAcknowledged = m_errors.count();
   m_modified           = true;
   updateUnacknowledgedWarningsAndErrors();
