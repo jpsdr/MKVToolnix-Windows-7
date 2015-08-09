@@ -1,5 +1,29 @@
 2015-08-09  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: enhancement: the format of the setting and queue
+        files has been changed from INI style to JSON documents. Reading
+        older setting files in INI style remains supported, but saving
+        will convert them to JSON.
+
+        Together with the other three changes mentioned below this results
+        in a noticeable reduction in the time needed for writing the queue
+        files, e.g. when pressing »start muxing« or when quitting the
+        application.
+
+        * MKVToolNix GUI: enhancement: the way the job queue is stored has
+        been changed. Earlier all jobs were stored in the same file (or
+        registry on Windows) as the preferences. Now they're stored in a
+        sub directory called »jobQueue« with one file per queue entry.
+
+        * MKVToolNix GUI: enhancement: on Windows the preferences are not
+        stored in the registry anymore, not even if the application has
+        been installed. Instead they're stored in an INI file in the
+        user's AppData\Local directory tree.
+
+        * MKVToolNix GUI: enhancement: the number of times the queue files
+        are saved has been reduced. The queue files are also loaded only
+        once on startup, not twice.
+
         * MKVToolNix GUI: bug fix: fixed various crashes when dragging &
         dropping in all of the tree views (merge tool: files view, tracks
         view, attachments view; chapter editor: edition/chapter tree,
