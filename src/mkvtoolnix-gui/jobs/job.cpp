@@ -165,6 +165,7 @@ Job::saveQueueFile() {
 
   auto settings = Util::ConfigFile::create(queueFileName());
   saveJob(*settings);
+  settings->save();
 }
 
 void

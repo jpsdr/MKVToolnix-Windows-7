@@ -298,6 +298,7 @@ MuxConfig::save(QString const &fileName) {
   QFile::remove(m_configFileName);
   auto settings = Util::ConfigFile::create(m_configFileName);
   save(*settings);
+  settings->save();
 }
 
 QString
