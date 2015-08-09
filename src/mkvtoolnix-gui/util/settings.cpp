@@ -47,9 +47,9 @@ Settings::iniFileName() {
   return Q("%1/mkvtoolnix-gui.ini").arg(iniFileLocation());
 }
 
-#if defined(SYS_WINDOWS)
 void
 Settings::migrateFromRegistry() {
+#if defined(SYS_WINDOWS)
   // Migration of settings from the Windows registry into an .ini file
   // due to performance issues.
 
@@ -74,8 +74,16 @@ Settings::migrateFromRegistry() {
   target.sync();
   source.clear();
   source.sync();
-}
+
+#else
+  // Rename file from .conf to .ini in order to be consistent.
+  auto target = QFileInfo{ iniFileName() };
+  auto source = QFileInfo{ Q("%1/%2.conf").arg(target.absolutePath()).arg(target.baseName()) };
+
+  if (source.exists())
+    QFile{ source.absoluteFilePath() }.rename(target.filePath());
 #endif
+}
 
 std::unique_ptr<QSettings>
 Settings::registry() {

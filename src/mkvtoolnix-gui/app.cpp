@@ -48,9 +48,9 @@ App::App(int &argc,
 
 #ifdef SYS_WINDOWS
   QApplication::setStyle(Q("windowsvista"));
-  Util::Settings::migrateFromRegistry();
 #endif
 
+  Util::Settings::migrateFromRegistry();
   Util::Settings::get().load();
 
   setupInstanceCommunicator();

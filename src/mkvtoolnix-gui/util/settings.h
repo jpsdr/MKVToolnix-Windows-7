@@ -111,9 +111,7 @@ public:
 
   static QString exeWithPath(QString const &exe);
 
-#if defined(SYS_WINDOWS)
   static void migrateFromRegistry();
-#endif
 
   static QString iniFileLocation();
   static QString iniFileName();
