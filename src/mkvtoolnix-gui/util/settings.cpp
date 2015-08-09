@@ -35,9 +35,11 @@ Settings::iniFileLocation() {
 #if defined(SYS_WINDOWS)
   if (!App::isInstalled())
     return App::applicationDirPath();
-#endif
 
   return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+#else
+  return Q("%1/%2/%3").arg(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)).arg(App::organizationName()).arg(App::applicationName());
+#endif
 }
 
 QString
