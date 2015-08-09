@@ -82,6 +82,7 @@ Tab::retranslateUi() {
 void
 Tab::connectToJob(Jobs::Job const &job) {
   m_currentlyConnectedJob = &job;
+  m_id                    = job.id();
   auto connType           = static_cast<Qt::ConnectionType>(Qt::AutoConnection | Qt::UniqueConnection);
 
   connect(&job, &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged,      connType);
