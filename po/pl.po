@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-07-24 14:54+0200\n"
+"POT-Creation-Date: 2015-08-09 19:58+0200\n"
 "PO-Revision-Date: 2015-07-21 17:45+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -893,7 +893,7 @@ msgstr ""
 msgid " done\n"
 msgstr "zrobione\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:862
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:827
 msgid " seconds"
 msgstr "sekundy"
 
@@ -926,7 +926,7 @@ msgstr "### Hack'i deweloperskie ###"
 msgid "### Global output control ###"
 msgstr "### Kontrola pliku wyjściowego ###"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:82
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:87
 msgid "%1 automatic, %2 manual"
 msgstr "%1 automatycznie, %2 ręcznie"
 
@@ -935,7 +935,7 @@ msgstr "%1 automatycznie, %2 ręcznie"
 msgid "%1 entries"
 msgstr "%1 pozycji"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:84
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
 msgid "%1 error"
 msgid_plural "%1 errors"
 msgstr[0] "%1 błąd"
@@ -949,7 +949,7 @@ msgstr[0] "%1 z %2 pliku został przetworzony"
 msgstr[1] "%1 z %2 plików zostały przetworzone"
 msgstr[2] "%1 z %2 plików zostało przetworzonych"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:83
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:88
 msgid "%1 warning"
 msgid_plural "%1 warnings"
 msgstr[0] "%1 ostrzeżenie"
@@ -1110,7 +1110,7 @@ msgstr ""
 "Źródła i najnowsze binarki zawsze dostępne pod adresem\n"
 "https://www.bunkus.org/videotools/mkvtoolnix/"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:295 src/mmg/jobs.cpp:98
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:293 src/mmg/jobs.cpp:98
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:45
 msgid "&Abort"
 msgstr "&Przerwij"
@@ -1127,11 +1127,7 @@ msgstr "&Informacje\tF1"
 msgid "&About mkvinfo"
 msgstr "&Informacje o mkvinfo"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:293
-msgid "A&cknowledge warnings/errors"
-msgstr "&Zatwierdź ostrzeżenia/błędy"
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:243
+#: src/mkvtoolnix-gui/merge/attachments.cpp:236
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:144
 #: src/mmg/tabs/additional_parts_dlg.cpp:47
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:90
@@ -1158,7 +1154,7 @@ msgstr "&Załączniki\tAlt-2"
 msgid "&Audio"
 msgstr "&Audio"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:846
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:811
 msgid "&Automatically set the output file name"
 msgstr "&Automatycznie ustal nazwę pliku wyjściowego"
 
@@ -1180,7 +1176,7 @@ msgstr "&Edytor rozdziałów"
 msgid "&Chapter editor\tAlt-4"
 msgstr "&Edytor rozdziałów\tAlt-4"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:872
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:837
 msgid "&Character sets"
 msgstr "&Zestawy znaków"
 
@@ -1188,7 +1184,12 @@ msgstr "&Zestawy znaków"
 msgid "&Check for updates"
 msgstr "&Sprawdź aktualizacje"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:838
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:71
+#, fuzzy
+msgid "&Clear output"
+msgstr "&Zapisz dziennik zdarzeń"
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:803
 msgid "&Clearing settings automatically:"
 msgstr "&Automatyczne czyszczenie ustawień:"
 
@@ -1309,7 +1310,7 @@ msgstr "&Plik"
 msgid "&Files:"
 msgstr "&Pliki:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:826
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:791
 msgid "&GUI"
 msgstr "&GUI"
 
@@ -1357,7 +1358,7 @@ msgstr "&Wejście"
 msgid "&Input\tAlt-1"
 msgstr "&Wejście\tAlt-1"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:800
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:764
 msgid "&Interface language:"
 msgstr "&Język interfejsu:"
 
@@ -1376,12 +1377,12 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:197
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:512
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:825
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:790
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1406
 msgid "&Language:"
 msgstr "&Język:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:870
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:835
 msgid "&Languages"
 msgstr "&Języki"
 
@@ -1409,7 +1410,7 @@ msgstr "&Tworzenie"
 msgid "&Merge tool"
 msgstr "&Narzędzie twórcy"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:869
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:834
 msgid "&Merging"
 msgstr "&Tworzenie"
 
@@ -1437,7 +1438,7 @@ msgstr "&Nowy\tCtrl-N"
 msgid "&New chapters"
 msgstr "&Nowe rozdziały"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:873
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:838
 msgid "&Often used selections"
 msgstr "&Najczęściej wybierane"
 
@@ -1462,6 +1463,12 @@ msgstr "&Otwórz plik Matroski"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:413
 msgid "&Open Matroska or chapter file"
 msgstr "&Otwórz plik Matroski lub plik rozdziału"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:269
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
+#, fuzzy
+msgid "&Open folder"
+msgstr "Otwórz folder"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:389
 #: src/mkvtoolnix-gui/forms/merge/tool.h:222
@@ -1501,7 +1508,7 @@ msgstr "&Przeładuj"
 msgid "&Reload\tCtrl-R"
 msgstr "&Przeładuj\tCtrl-R"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:244
+#: src/mkvtoolnix-gui/merge/attachments.cpp:237
 #: src/mmg/tabs/additional_parts_dlg.cpp:48
 msgid "&Remove"
 msgstr "&Usuń"
@@ -1510,11 +1517,11 @@ msgstr "&Usuń"
 msgid "&Remove files"
 msgstr "&Usuń pliki"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:813
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:778
 msgid "&Remove job from queue after completion"
 msgstr "&Usuń zadanie z kolejki po wykonaniu"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:253
+#: src/mkvtoolnix-gui/jobs/tool.cpp:268
 msgid "&Remove jobs"
 msgstr "&Usuń zadania"
 
@@ -1545,7 +1552,7 @@ msgstr "&Zapisz\tCtrl-S"
 msgid "&Save info as text\tCtrl-S"
 msgstr "&Zapisz info do pliku\tCtrl-S"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:294
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:70
 msgid "&Save output"
 msgstr "&Zapisz dziennik zdarzeń"
 
@@ -1586,7 +1593,7 @@ msgstr "&Początek && koniec:"
 msgid "&Start all pending jobs"
 msgstr "&Rozpocznij wszystkie oczekujące zadania"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:251
+#: src/mkvtoolnix-gui/jobs/tool.cpp:266
 msgid "&Start jobs automatically"
 msgstr "&Rozpocznij zadania automatycznie"
 
@@ -1639,7 +1646,7 @@ msgstr "&Wideo"
 msgid "&View log"
 msgstr "&Dziennik zdarzeń"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:250
+#: src/mkvtoolnix-gui/jobs/tool.cpp:265
 msgid "&View output"
 msgstr "&Widok postępu"
 
@@ -2161,7 +2168,7 @@ msgstr "--- POCZĄTEK zadania %d (%s, dodano %s)"
 msgid "--- END job %d"
 msgstr "--- KONIEC zadania %d"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:199
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr "--- Błędy emitowane przez zadanie: '%1', rozpoczęte o: %2 ---"
 
@@ -2169,11 +2176,11 @@ msgstr "--- Błędy emitowane przez zadanie: '%1', rozpoczęte o: %2 ---"
 msgid "--- No job output found.\n"
 msgstr "--- Nie znaleziono informacji o zadaniu.\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:194
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:224
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr "--- Postęp zadania: '%1', rozpoczętego o: %2 ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:228
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr "--- Ostrzeżenia emitowane przez zadanie: '%1', rozpoczęte o: %2 ---"
 
@@ -2284,9 +2291,9 @@ msgstr "<Simple> musi zawierać podrzędny element <String> lub <Binary>."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> nie zawiera podrzędnego elementu <Simple>."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:216
+#: src/mkvtoolnix-gui/merge/attachments.cpp:209
 #: src/mkvtoolnix-gui/merge/input.cpp:381
-#: src/mkvtoolnix-gui/merge/input.cpp:976
+#: src/mkvtoolnix-gui/merge/input.cpp:979
 msgid "<do not change>"
 msgstr "<bez zmiany>"
 
@@ -2294,7 +2301,7 @@ msgstr "<bez zmiany>"
 msgid "<no output file>"
 msgstr "<brak pliku wyjściowego>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:156
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:158
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
 msgid "<unnamed>"
 msgstr "<bez nazwy>"
@@ -2311,7 +2318,7 @@ msgid ""
 "where found for that track number. The block will be skipped.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:334 src/mmg/tabs/global.cpp:281
+#: src/mkvtoolnix-gui/merge/output.cpp:335 src/mmg/tabs/global.cpp:281
 msgid ""
 "A chapter starting at 0s is never considered for splitting and discarded "
 "silently."
@@ -2319,19 +2326,19 @@ msgstr ""
 "Rozdział, który rozpoczyna się w 0-wej sekundzie, nigdy nie jest punktem "
 "podziału i jest pomijany."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:300 src/mmg/tabs/global.cpp:249
+#: src/mkvtoolnix-gui/merge/output.cpp:301 src/mmg/tabs/global.cpp:249
 msgid "A comma-separated list of frame/field number ranges of content to keep."
 msgstr ""
 "Lista rozdzielonych przecinkiem numerów klatek/pól określających zakres "
 "dzielenia."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:317 src/mmg/tabs/global.cpp:265
+#: src/mkvtoolnix-gui/merge/output.cpp:318 src/mmg/tabs/global.cpp:265
 msgid "A comma-separated list of frame/field numbers after which to split."
 msgstr ""
 "Lista rozdzielonych przecinkiem numerów klatek/pól, po których nastąpi "
 "dzielenie."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:290 src/mmg/tabs/global.cpp:238
+#: src/mkvtoolnix-gui/merge/output.cpp:291 src/mmg/tabs/global.cpp:238
 msgid "A comma-separated list of timecode ranges of content to keep."
 msgstr ""
 "Lista rozdzielonych przecinkiem odcinków czasu, które zachowasz po dzieleniu "
@@ -2395,8 +2402,8 @@ msgstr ""
 "heksadecymalne numery z lub bez prefiksa \"0x\"; ze spacjami lub bez. "
 "Zawiera dokładnie 32 cyfry.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:308
-#: src/mkvtoolnix-gui/merge/output.cpp:324 src/mmg/tabs/global.cpp:255
+#: src/mkvtoolnix-gui/merge/output.cpp:309
+#: src/mkvtoolnix-gui/merge/output.cpp:325 src/mmg/tabs/global.cpp:255
 #: src/mmg/tabs/global.cpp:270
 msgid ""
 "A single Matroska block contains either a full frame (for progressive "
@@ -2467,6 +2474,10 @@ msgid "A unique ID to identify the previous chained segment (128 bits)."
 msgstr ""
 "Unikalne (128 bitowe) ID identyfikujące poprzedni,\n"
 "powiązany z obecnym segment."
+
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
+msgid "A&cknowledge warnings/errors"
+msgstr "&Zatwierdź ostrzeżenia/błędy"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:960
 msgid "A&ppend files"
@@ -2574,9 +2585,9 @@ msgstr "Przerwij obecne zadanie i zatrzymaj &natychmiast"
 msgid "Abort processing after the current job"
 msgstr "Przerwij pracę po zakończeniu obecnego zadania"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:301
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:77
+#: src/mkvtoolnix-gui/jobs/tool.cpp:341
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:310
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
 msgid "Abort running jobs"
 msgstr "Przerwij uruchomione zadania"
 
@@ -2598,24 +2609,24 @@ msgid "Acknowledge &all warnings and errors"
 msgstr "&Zatwierdź wszystkie ostrzeżenia i błędy"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:451
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:123
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:128
 msgid "Acknowledge all &errors"
 msgstr "&Zatwierdź wszystkie błędy"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:450
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:106
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:111
 msgid "Acknowledge all &warnings"
 msgstr "&Zatwierdź wszystkie ostrzeżenia"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:256
+#: src/mkvtoolnix-gui/jobs/tool.cpp:272
 msgid "Acknowledge errors"
 msgstr "Zatwierdź błędy"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:255
+#: src/mkvtoolnix-gui/jobs/tool.cpp:271
 msgid "Acknowledge warnings"
 msgstr "Zatwierdź ostrzeżenia"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:257
+#: src/mkvtoolnix-gui/jobs/tool.cpp:273
 msgid "Acknowledge warnings and errors"
 msgstr "Zatwierdź ostrzeżenia i błędy"
 
@@ -2655,7 +2666,7 @@ msgstr "&Dodaj jako kolejne części do istniejącego pliku wejściowego"
 msgid "Add as new input fi&les"
 msgstr "&Dodaj jako nowe pliki wejściowe"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:142
+#: src/mkvtoolnix-gui/merge/attachments.cpp:135
 msgid "Add attachments"
 msgstr "Dodaj załączniki"
 
@@ -2822,26 +2833,26 @@ msgstr "Wszystkie rozdziały są poprawne."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:452
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:168
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:138
-#: src/mkvtoolnix-gui/merge/attachments.cpp:139
+#: src/mkvtoolnix-gui/merge/attachments.cpp:132
 #: src/mkvtoolnix-gui/merge/tab.cpp:144 src/mkvtoolnix-gui/merge/tab.cpp:158
 #: src/mkvtoolnix-gui/merge/tab.cpp:191 src/mkvtoolnix-gui/merge/tab.cpp:215
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:233
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
 msgid "All files"
 msgstr "Wszystkie pliki"
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:37
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:38
 msgid ""
 "All following file names will be added as input files to the current merge "
 "job."
 msgstr ""
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:38
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:39
 msgid "All following file names will be opened in the chapter editor."
 msgstr ""
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:39
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:40
 msgid "All following file names will be opened in the header editor."
 msgstr ""
 
@@ -2886,7 +2897,7 @@ msgstr "Wszystkie obsługiwane pliki multimedialne"
 msgid "All supported media files|%s%s|%s"
 msgstr "Wszystkie obsługiwane pliki|%s%s|%s"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:250
+#: src/mkvtoolnix-gui/merge/output.cpp:251
 msgid "All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 msgstr ""
 
@@ -2959,17 +2970,17 @@ msgstr "Alt+8"
 msgid "Alwa&ys add as new input files and don't ask again"
 msgstr "&Zawsze dodawaj jako nowe pliki wejściowe i nie pytaj ponownie"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:831
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:796
 msgid "Always add files dropped from e&xternal applications"
 msgstr ""
 "&Pliki upuszczone z zewnętrznych aplikacji zawsze dodawaj jako nowe pliki "
 "wejściowe"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:857
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:822
 msgid "Always ask the user"
 msgstr "Zawsze pytaj użytkownika"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:865
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:830
 msgid ""
 "Always enable muxing for all tracks of the following types regardless of "
 "their language:"
@@ -2981,21 +2992,25 @@ msgstr ""
 msgid "Always on top"
 msgstr "Zawsze na wierzchu"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:818
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:783
 msgid "Always remove the job afterwards"
 msgstr "Zawsze usuwaj zadania po zakończeniu"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:858
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:823
 msgid "Always scan for other playlists"
 msgstr "Zawsze skanuj w poszukiwaniu innych list odtwarzania"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:832
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:797
 msgid "Always show the output file controls below tabs"
 msgstr ""
 "Pole o nazwie „Plik wyjściowy” zawsze pokazuj na samym dole pod trzema "
 "zakładkami („Wejście”, „Wyjście”, „Załączniki”) "
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:811
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:775
+msgid "Always switch to the job output tool after starting one immediately"
+msgstr ""
+
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:776
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "&Zawsze używaj domyślnego opisu podczas dodawania zadania do kolejki"
 
@@ -3090,7 +3105,7 @@ msgid ""
 "Any option given here will be added at the end of the mkvmerge command line."
 msgstr ""
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:31
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:32
 msgid ""
 "Any other file name is added as an input file for merging, opened in the "
 "chapter editor or in the header editor depending on the current mode."
@@ -3193,7 +3208,7 @@ msgstr "Załącz do:"
 msgid "Attachments"
 msgstr "Załączniki"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:867
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:832
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
 msgid "Audio"
 msgstr "Audio"
@@ -3252,11 +3267,11 @@ msgstr ""
 "Automatyczne włączanie zapisu w formacie WebM na podstawie rozszerzenia "
 "pliku wyjściowego.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:828
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:793
 msgid "Automatically set the file &title from source files"
 msgstr "Automatycznie ustaw &tytuł pliku z pliku źródłowego"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:829
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:794
 msgid "Automatically set track &delays from source file name"
 msgstr "Automatycznie ustaw &opóźnienie ścieżki takie, jak w pliku źródłowym"
 
@@ -3323,7 +3338,7 @@ msgstr ""
 msgid "Block virtual: %1%"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:131
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:132
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:79
 msgid ""
 "Blu-ray discs often contain a chapter entry very close to the end of the "
@@ -3381,7 +3396,7 @@ msgstr "&Ogranicz lub rozszerz czasy"
 msgid "C&opy to clipboard"
 msgstr "&Kopiuj do schowka"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:871
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:836
 msgid "C&ountries"
 msgstr "&Państwa"
 
@@ -3487,11 +3502,11 @@ msgstr ""
 "Powoduje, że mkvmerge dodaje komendę \"stop display\" do pakietów napisów "
 "VobSub, które nie zawierają pola z czasem trwania."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:137
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:138
 msgid "Certain file formats have 'title' property."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:167
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:168
 msgid "Certain file formats have a 'language' property for their tracks."
 msgstr ""
 
@@ -3542,7 +3557,7 @@ msgstr "Kanały: %1%"
 msgid "Chapter &number of first created entry:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:129
+#: src/mkvtoolnix-gui/util/settings.cpp:145
 msgid "Chapter <NUM:2>"
 msgstr "Rozdział <NUM:2>"
 
@@ -3579,7 +3594,7 @@ msgid ""
 "Chapter editions may only be dropped onto the root node or other editions."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:820
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:785
 msgid "Chapter editor"
 msgstr "Edytor rozdziałów"
 
@@ -3622,7 +3637,7 @@ msgstr "Masowa modyfikacja rozdziałów"
 msgid "Chapter names and languages"
 msgstr "Nazwy i język rozdziałów"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:328 src/mmg/tabs/global.cpp:276
+#: src/mkvtoolnix-gui/merge/output.cpp:329 src/mmg/tabs/global.cpp:276
 msgid "Chapter numbers:"
 msgstr "Numery rozdziałów:"
 
@@ -3693,7 +3708,7 @@ msgstr[2] "Rozdziały: %1% pozycji"
 msgid "Character set:"
 msgstr "Zestaw znaków:"
 
-#: src/common/cli_parser.cpp:178
+#: src/common/cli_parser.cpp:180
 msgid "Charset for strings on the command line"
 msgstr "Zestaw znaków dla linii komend"
 
@@ -3709,7 +3724,7 @@ msgstr "&Sprawdź aktualizacje"
 msgid "Check for available updates"
 msgstr "Sprawdź, czy jest dostępna aktualizacja"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:802
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:766
 msgid "Check online for available &updates"
 msgstr "&Sprawdzaj dostępność aktualizacji"
 
@@ -3717,7 +3732,7 @@ msgstr "&Sprawdzaj dostępność aktualizacji"
 msgid "Check online for the latest release"
 msgstr "Sprawdź, czy jest dostępna aktualizacja"
 
-#: src/common/cli_parser.cpp:185 src/merge/mkvmerge.cpp:286
+#: src/common/cli_parser.cpp:187 src/merge/mkvmerge.cpp:286
 msgid "Check online for the latest release."
 msgstr "Sprawdzaj, czy jest dostępna aktualizacja."
 
@@ -3735,7 +3750,7 @@ msgstr ""
 msgid "Checking for updates online; please wait"
 msgstr "Sprawdzanie aktualizacji online; proszę czekać"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:149
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:150
 msgid ""
 "Checking this option causes the GUI to set that compression to »none« by "
 "default for all track types when adding files."
@@ -4151,7 +4166,7 @@ msgstr "Nie można odczytać pakiety z nagłówka FLAC.\n"
 msgid "Could not write to the output file: %1% (%2%)\n"
 msgstr "Nie można zapisać do pliku wyjściowego: %1% (%2%)\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:824
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:789
 msgid "Countr&y:"
 msgstr "&Państwo:"
 
@@ -4470,15 +4485,15 @@ msgstr "Ścieżka wideo"
 msgid "Date (invalid, value: %1%)"
 msgstr "Data (nieprawidłowa, wartość: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:42
 msgid "Date added"
 msgstr "Data dodania"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:42
 msgid "Date finished"
 msgstr "Data zakończenia"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:42
 msgid "Date started"
 msgstr "Data rozpoczęcia"
 
@@ -4496,11 +4511,11 @@ msgstr "Debug> "
 msgid "Default"
 msgstr "Domyślnie"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:836
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:801
 msgid "Default &subtitle charset to set:"
 msgstr "&Ustaw domyślny zestaw znaków na:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:837
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:802
 msgid "Default add&itional command line options:"
 msgstr "&Domyślne i dodatkowe opcje linii komend:"
 
@@ -4530,7 +4545,7 @@ msgstr "Ścieżka domyślna: %1%"
 msgid "Default subtitle charset"
 msgstr "Domyślny zestaw znaków napisów"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:834
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:799
 msgid "Default track &language to set:"
 msgstr "&Ustaw domyślny język ściezki na:"
 
@@ -4538,7 +4553,7 @@ msgstr "&Ustaw domyślny język ściezki na:"
 msgid "Default track flag:"
 msgstr "Domyślna ścieżka:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:822
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:787
 #, fuzzy
 msgid "Defaults for new chapter entries:"
 msgstr "Domyślne właściwości nowych rozdziałów"
@@ -4579,7 +4594,7 @@ msgstr "Usuń zaznaczone zadania z kolejki"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:242
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:42
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:56 src/mmg/jobs.cpp:475
 msgid "Description"
 msgstr "Opis"
@@ -4617,7 +4632,7 @@ msgstr "Dirac"
 msgid "Directory"
 msgstr "Katalog"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:849
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:814
 #, fuzzy
 msgid "Directory &relative to first input file's directory:"
 msgstr "Ten sam folder, co pierwszy plik źródłowy"
@@ -4629,11 +4644,11 @@ msgstr "Ten sam folder, co pierwszy plik źródłowy"
 msgid "Directory:"
 msgstr "Katalog:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:803
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:767
 msgid "Disable &animations"
 msgstr "&Wyłącz animacje"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:830
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:795
 msgid "Disable additi&onal lossless compression for all track types"
 msgstr ""
 "&Wyłącz dodatkową, bezstratną kompresję dla wszystkich rodzajów ścieżek"
@@ -4711,15 +4726,15 @@ msgstr "nie dziel"
 msgid "Do not write meta seek elements at all."
 msgstr "Nie zapisuj żadnych elementów indeksu wyszukiwania."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
+#: src/mkvtoolnix-gui/jobs/tool.cpp:341
 msgid "Do you really want to abort the currently running job?"
 msgstr "Czy na pewno chcesz przerwać obecnie trwające zadanie?"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:77
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
 msgid "Do you really want to abort this job?"
 msgstr "Czy na pewno chcesz przerwać to zadanie?"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:301
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:310
 msgid "Do you want to abort that job and quit?"
 msgstr "Czy chcesz przerwać to zadanie i zamknąć program?"
 
@@ -4764,7 +4779,7 @@ msgstr "Adres pobierania:"
 msgid "Downloading release information"
 msgstr "Pobieranie informacji o wydaniu"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:821
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:786
 msgid "Drop last entry from imported &Blu-ray playlits if it's near the end"
 msgstr ""
 
@@ -4790,7 +4805,7 @@ msgid "Duration"
 msgstr "Czas trwania"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:244
-#: src/mkvtoolnix-gui/merge/output.cpp:262 src/mmg/tabs/global.cpp:212
+#: src/mkvtoolnix-gui/merge/output.cpp:263 src/mmg/tabs/global.cpp:212
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:78
 msgid "Duration:"
 msgstr "Czas trwania:"
@@ -4870,7 +4885,7 @@ msgid ""
 "Each file created contains one segment, and each segment has one segment UID."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:301 src/mmg/tabs/global.cpp:250
+#: src/mkvtoolnix-gui/merge/output.cpp:302 src/mmg/tabs/global.cpp:250
 msgid ""
 "Each range consists of a start and end frame/field number with a '-' in the "
 "middle, e.g. '157-238'."
@@ -4878,7 +4893,7 @@ msgstr ""
 "Każdy odcinek posiada klatkę/pole początkowe i końcowe z myślnikiem po "
 "środku, np. \"157-238\"."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:292 src/mmg/tabs/global.cpp:239
+#: src/mkvtoolnix-gui/merge/output.cpp:293 src/mmg/tabs/global.cpp:239
 msgid ""
 "Each range consists of a start and end timecode with a '-' in the middle, e."
 "g. '00:01:15-00:03:20'."
@@ -4903,13 +4918,13 @@ msgstr "Selektory dla edytowania właściwości"
 msgid "Edition"
 msgstr "Edycja"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:49
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:51
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:495
 #, fuzzy
 msgid "Edition entry"
 msgstr "Edycja"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:24
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
 msgid "Edition/Chapter"
 msgstr "Edycja/Rozdział"
 
@@ -4918,7 +4933,7 @@ msgstr "Edycja/Rozdział"
 msgid "EditionEntry %u"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:330 src/mmg/tabs/global.cpp:278
+#: src/mkvtoolnix-gui/merge/output.cpp:331 src/mmg/tabs/global.cpp:278
 msgid ""
 "Either the word 'all' which selects all chapters or a comma-separated list "
 "of chapter numbers before which to split."
@@ -4944,7 +4959,7 @@ msgstr "Elementy"
 msgid "Elements in the category '%1%' ('--edit %2%'):\n"
 msgstr "Elementy w kategorii \"%1%\" (\"-edit %2%\"):\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:863
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:828
 msgid "Enable muxing of tracks by their language"
 msgstr "Włącz muksowanie ścieżek ze względu na ich język"
 
@@ -4981,7 +4996,7 @@ msgstr "Algorytm szyfrowania: %1% (%2%)"
 msgid "Encryption key ID: %1%"
 msgstr ""
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:24
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
 msgid "End"
 msgstr "Koniec"
 
@@ -4993,11 +5008,11 @@ msgstr "Koniec:"
 msgid "English language name"
 msgstr "Angielska nazwa języka"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:852
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:817
 msgid "Ensure the file name is uni&que"
 msgstr "&Upewniaj się co do unikalnej nazwy pliku"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:299
+#: src/mkvtoolnix-gui/merge/tab.cpp:301
 msgid "Enter job description"
 msgstr "Wpisz opis zadania"
 
@@ -5091,8 +5106,8 @@ msgid "Error writing Matroska file"
 msgstr "Błąd podczas zapisu pliku Matroski"
 
 #: src/common/output.cpp:79 src/common/output.cpp:80 src/common/output.cpp:81
-#: src/mkvtoolnix-gui/jobs/job.cpp:102
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:182 src/mmg/jobs.cpp:278
+#: src/mkvtoolnix-gui/jobs/job.cpp:212
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:209 src/mmg/jobs.cpp:278
 #: src/mmg/mux_dialog.cpp:284
 msgid "Error:"
 msgstr "Błąd:"
@@ -5122,11 +5137,11 @@ msgstr ""
 "Błąd: vorbis_packetizer: Nie można wyodrębnić parametrów strumienia z "
 "pierwszych pakietów.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292 src/mmg/mux_dialog.cpp:71
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291 src/mmg/mux_dialog.cpp:71
 msgid "Errors:"
 msgstr "Błędy:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:817
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:782
 msgid "Even if there were warnings"
 msgstr "Nawet jeśli wystąpiły ostrzeżenia"
 
@@ -5142,11 +5157,11 @@ msgstr "Wszystko poszło w porządku."
 msgid "Example"
 msgstr "Przykład"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:268
+#: src/mkvtoolnix-gui/merge/output.cpp:269
 msgid "Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds)."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:286
+#: src/mkvtoolnix-gui/merge/output.cpp:287
 msgid ""
 "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty "
 "minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
@@ -5459,7 +5474,7 @@ msgstr ""
 "Plik nie może scalić się z samym sobą. Parametr dla \"--append-to\" jest "
 "nieprawidłowy.\n"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:287
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
 msgid "Finished at:"
 msgstr "Zakończono o:"
 
@@ -5536,7 +5551,7 @@ msgstr "Wymuś lacing w stylu EBML."
 msgid "Force Xiph style lacing."
 msgstr "Wymuś lacing w stylu Xiph."
 
-#: src/common/cli_parser.cpp:177
+#: src/common/cli_parser.cpp:179
 msgid "Force the translations for 'code' to be used."
 msgstr "Wymuś użycie tłumaczenia, którego państwo ma dany \"kod\" "
 
@@ -5664,7 +5679,7 @@ msgstr "Liczba klatek/s: %1%"
 msgid "Frame with size %1%%2%%3%"
 msgstr "Klatka o rozmiarze %1%%2%%3%"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:315 src/mmg/tabs/global.cpp:263
+#: src/mkvtoolnix-gui/merge/output.cpp:316 src/mmg/tabs/global.cpp:263
 msgid "Frames/fields:"
 msgstr "Klatki/pola:"
 
@@ -5707,8 +5722,8 @@ msgstr ""
 msgid "General"
 msgstr "Ogólne"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:799
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:827
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:763
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:792
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1403
 msgid "General options"
 msgstr "Opcje ogólne"
@@ -5731,7 +5746,7 @@ msgid "Global"
 msgstr "Globalne"
 
 #: src/extract/extract_cli_parser.cpp:60
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:41 src/mmg/tabs/global.cpp:301
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:43 src/mmg/tabs/global.cpp:301
 msgid "Global options"
 msgstr "Opcje globalne"
 
@@ -5938,13 +5953,13 @@ msgstr ""
 "powinien pokazywać tej pozycji dla oglądającego. Takie rozdziały lub edycje "
 "mogą być jednak wciąż wykorzystywane w systemie menu."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:171
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
 msgid ""
 "If a character set is selected here then the program will automatically set "
 "the character set input to this value for newly added text subtitle tracks."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:312 src/mmg/tabs/global.cpp:258
+#: src/mkvtoolnix-gui/merge/output.cpp:313 src/mmg/tabs/global.cpp:258
 msgid ""
 "If a range's start number is prefixed with '+' then its content will be "
 "written to the same file as the previous range. Otherwise a new file will be "
@@ -5954,7 +5969,7 @@ msgstr ""
 "poprzedzającym. W innym przypadku nowy odcinek czasu zapisany zostanie do "
 "nowego pliku."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:295 src/mmg/tabs/global.cpp:242
+#: src/mkvtoolnix-gui/merge/output.cpp:296 src/mmg/tabs/global.cpp:242
 msgid ""
 "If a range's start timecode is prefixed with '+' then its content will be "
 "written to the same file as the previous range. Otherwise a new file will be "
@@ -5964,7 +5979,7 @@ msgstr ""
 "scalony z poprzedzającym. W innym przypadku nowy odcinek czasu zapisany "
 "zostanie do nowego pliku."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:311 src/mmg/tabs/global.cpp:257
+#: src/mkvtoolnix-gui/merge/output.cpp:312 src/mmg/tabs/global.cpp:257
 msgid ""
 "If a start number is left out then the previous range's end number is used, "
 "or the start of the file if there was no previous range."
@@ -5973,7 +5988,7 @@ msgstr ""
 "odcinka poprzedzającego lub odcinek zacznie się od początku filmu, jeśli nie "
 "wpisaliśmy odcinka poprzedzającego."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:293 src/mmg/tabs/global.cpp:240
+#: src/mkvtoolnix-gui/merge/output.cpp:294 src/mmg/tabs/global.cpp:240
 msgid ""
 "If a start timecode is left out then the previous range's end timecode is "
 "used, or the start of the file if there was no previous range."
@@ -6045,13 +6060,13 @@ msgstr ""
 "nieprawidłowo. Te ostrzeżenia są pokazywane przynajmniej jeden raz, nawet "
 "jeśli tę opcję wyłączysz."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:94
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:95
 msgid ""
 "If checked several short animations used throughout the program as visual "
 "clues for the user will be disabled."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:191
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:192
 #, fuzzy
 msgid ""
 "If checked the program makes sure the suggested output file name is unique "
@@ -6073,7 +6088,7 @@ msgid ""
 "tabs that have been modified."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:152
 msgid ""
 "If disabled the GUI will ask whether you want to add the dropped files, "
 "append them or add them as additional parts."
@@ -6085,20 +6100,26 @@ msgid ""
 "it to the queue."
 msgstr ""
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:115
+msgid ""
+"If enabled the GUI will automatically switch to the job output tool whenever "
+"you start a job (e.g. by pressing »start muxing«)."
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:114
 msgid ""
 "If enabled the first tab in the »job output« tool will not be cleared when a "
 "new job starts."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:132
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:133
 msgid ""
 "If enabled the last entry will be skipped when loading chapters from such "
 "playlists in the chapter editor if it is located within five seconds of the "
 "end of the movie."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:154
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:155
 msgid ""
 "If enabled the output file name controls will always be visible no matter "
 "which tab is currently shown."
@@ -6110,15 +6131,15 @@ msgid ""
 "and jobs."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:90
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:91
 msgid ""
 "If enabled the program will check online whether or not a new release of "
 "MKVToolNix is available on the home page."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:200
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:201
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:202
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:203
 msgid ""
 "If enabled then tracks of this type will always be set to be muxed "
 "regardless of their language."
@@ -6130,11 +6151,11 @@ msgid ""
 "be created for them."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:267
+#: src/mkvtoolnix-gui/merge/output.cpp:268
 msgid "If given then you may use up to nine digits after the decimal point."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:144
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:145
 #, fuzzy
 msgid ""
 "If it contains the word 'DELAY' followed by a number then this number is "
@@ -6161,8 +6182,8 @@ msgid ""
 "surplus UIDs are ignored."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:305
-#: src/mkvtoolnix-gui/merge/output.cpp:321 src/mmg/tabs/global.cpp:253
+#: src/mkvtoolnix-gui/merge/output.cpp:306
+#: src/mkvtoolnix-gui/merge/output.cpp:322 src/mmg/tabs/global.cpp:253
 #: src/mmg/tabs/global.cpp:268
 msgid "If no video track is output no splitting will occur."
 msgstr "Dzielenie nie zostanie wykonane, jeśli nie będzie ścieżki wideo."
@@ -6232,27 +6253,21 @@ msgid ""
 "data into each cluster."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:186
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:187
 msgid ""
 "If this option is enabled and if there is currently no output file name set "
 "then the program will set one for you when you add an input file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:197
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:198
 msgid ""
 "If this option is enabled then only those tracks will be set to be muxed "
 "whose language is selected below."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:284
+#: src/mkvtoolnix-gui/merge/output.cpp:285
 msgid ""
 "If two or more timecodes are used then you have to separate them with commas."
-msgstr ""
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:95
-msgid ""
-"If unchecked the tool selector on the left side of the main window will be "
-"hidden."
 msgstr ""
 
 #: src/mmg/mmg_dialog.cpp:1985
@@ -6307,7 +6322,7 @@ msgstr "Niekompatybilna ścieżka"
 msgid "Inconsistent AAC audio packet (length: %1% != len_check %2%)\n"
 msgstr "Niespójny pakiet AAC (długość: %1% != len_check %2%)\n"
 
-#: src/common/cli_parser.cpp:175 src/merge/mkvmerge.cpp:79
+#: src/common/cli_parser.cpp:177 src/merge/mkvmerge.cpp:79
 msgid "Increase verbosity."
 msgstr "Zwiększ szczegółowość."
 
@@ -6928,7 +6943,7 @@ msgstr "Kolejka zadań"
 msgid "Job queue management"
 msgstr "Zarządzanie kolejkowaniem zadań"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:810
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:774
 msgid "Jobs and job output"
 msgstr "Zadania i postęp"
 
@@ -7088,7 +7103,7 @@ msgstr "Komendy shell Linux/Unix (bash, zsh itd.)"
 msgid "List all valid property names and exit"
 msgstr "Sporządź listę wszystkich nazw właściwości i wyjdź"
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:30
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:31
 msgid ""
 "Listing configuration file names with the extension .mtxcfg causes the GUI "
 "to load the those configuration files in the appropriate tool."
@@ -7110,6 +7125,10 @@ msgstr "Pliki dziennika zdarzeń (*.txt)|*.txt|%s"
 #: src/mmg/jobs.cpp:86
 msgid "Log output:"
 msgstr "Dziennik zdarzeń menedżera:"
+
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:294
+msgid "M&ore actions"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:751
 msgid "MD5"
@@ -7139,7 +7158,7 @@ msgstr "MKVToolNix &GUI"
 msgid "MKVToolNix &web site"
 msgstr "&MKVToolNix: strona internetowa"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:798
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:762
 msgid "MKVToolNix GUI preferences"
 msgstr "Ustawienia MKVToolNix GUI"
 
@@ -7274,7 +7293,7 @@ msgstr "Matroska - pliki audio/wideo"
 
 #: src/info/qt_ui.cpp:87 src/mkvtoolnix-gui/chapter_editor/tab.cpp:452
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:164
-#: src/mkvtoolnix-gui/merge/output.cpp:194
+#: src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "Matroska files"
 msgstr "Pliki Matroski"
 
@@ -7343,7 +7362,7 @@ msgstr "Błąd alokacji pamięci: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Pamięć dla klatki RealAudio/RealVideo nie może być przyporządkowana.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:861
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:826
 msgid "Mi&nimum playlist duration:"
 msgstr "&Minimalny czas trwania listy odtwarzania:"
 
@@ -7395,7 +7414,7 @@ msgstr "Brakuje wartości dla \"--output-charset\".\n"
 msgid "Missing argument for '--ui-language'.\n"
 msgstr "Brakuje wartości dla \"--ui-language\".\n"
 
-#: src/common/cli_parser.cpp:106
+#: src/common/cli_parser.cpp:108
 #, boost-format
 msgid "Missing argument to '%1%'.\n"
 msgstr "Brakuje wartości dla \"%1%\".\n"
@@ -7492,7 +7511,7 @@ msgstr ""
 msgid "More than one track with the track number %1% found.\n"
 msgstr "Więcej niż jedna ścieżka została wykryta z numerem ścieżki %1%.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:163
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:164
 msgid ""
 "Most of the other settings on the output tab will be kept intact, though."
 msgstr ""
@@ -7548,7 +7567,7 @@ msgstr "&Nazwa szablonu:"
 msgid "Name"
 msgstr "Nazwa"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:823
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:788
 msgid "Name &template:"
 msgstr "Nazwa &szablonu:"
 
@@ -7577,7 +7596,7 @@ msgstr "Nazwy"
 msgid "Negative values are allowed."
 msgstr "Wartości ujemne są dozwolone."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:859
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:824
 msgid "Never scan for other playlists"
 msgstr "Nigdy nie skanuj w poszukiwaniu innych list odtwarzania"
 
@@ -7726,7 +7745,7 @@ msgstr "Nie znaleziono nazwy pliku po \"@\""
 msgid "No help available."
 msgstr "Brak pliku pomocy."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:92
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:93
 msgid "No information is transmitted to the server."
 msgstr "Żadne informacje nie są przesyłane do serwera"
 
@@ -7734,7 +7753,8 @@ msgstr "Żadne informacje nie są przesyłane do serwera"
 msgid "No input files were given. No output will be created.\n"
 msgstr "Nie podano żadnych plików wejściowych. Nic nie zostanie zapisane.\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:35
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:69
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:314
 msgid "No job has been started yet."
 msgstr "Żadne zadanie nie zostało jeszcze rozpoczęte."
 
@@ -7799,11 +7819,11 @@ msgstr "Natrafiono na cyfry nie będące heksadecymalnymi."
 msgid "None of the header fields has been modified. Nothing has been saved."
 msgstr "Żadne pole nagłówka nie było modyfikowane. Nic nie zostało zapisane."
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:290
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:289
 msgid "Nor&mal output:"
 msgstr "Standardowe &komunikaty:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:118
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:119
 msgid ""
 "Normally completed jobs stay in the queue even over restarts until the user "
 "clears them out manually."
@@ -7849,7 +7869,7 @@ msgstr ""
 "podaje informacje do kontenera. Ta opcja powoduje, że mkvmerge usuwa "
 "informacje o proporcjach obrazu ze ścieżki wideo."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:149
 msgid ""
 "Normally mkvmerge will apply additional lossless compression for subtitle "
 "tracks for certain codecs."
@@ -7898,7 +7918,7 @@ msgid ""
 "parameters."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:139
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:140
 msgid ""
 "Note that even if the option is disabled mkvmerge will copy a source file's "
 "title property unless a title is manually set by the user."
@@ -7928,7 +7948,7 @@ msgstr ""
 "\". To ostrzeżenie będzie usunięte, jak tylko specyfikacja się "
 "ustandaryzuje, a mkvmerge zostanie odpowiednio zaktualizowane.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:199
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:200
 msgid ""
 "Note that the language »Undetermined (und)« is assumed for tracks for which "
 "no language is known (e.g. those read from SRT subtitle files)."
@@ -8012,11 +8032,11 @@ msgid "Only %1% chapters found in source files & chapter files."
 msgstr ""
 "Znaleziono tylko %1% rozdziałów w plikach źródłowych i plikach rozdziałów."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:864
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:829
 msgid "Only enable muxing of tracks with specific languages by default"
 msgstr "Włącz muksowanie ścieżek jedynie w określonych językach"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:816
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:781
 msgid "Only if the job completed successfully"
 msgstr "Tylko jeśli zadanie zostało zakończone powodzeniem"
 
@@ -8080,7 +8100,7 @@ msgstr ""
 "przypadku domyślne mapowanie ścieżek zostanie użyte), albo podaj mapowanie "
 "dla wszystkich ścieżek, które mają być skopiowane.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:182
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:183
 #: src/mmg/options/mmg.cpp:135
 msgid ""
 "Only playlists whose duration are at least this long are considered and "
@@ -8097,7 +8117,7 @@ msgstr "Pokaż podsumowanie tylko zawartości, a nie każdego elementu."
 msgid "Only to the first"
 msgstr "Tylko do pierwszego pliku"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:204
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:205
 msgid ""
 "Only tracks with a language in this list will be set to be muxed by default."
 msgstr ""
@@ -8183,7 +8203,7 @@ msgstr "Opcja"
 msgid "Option file created."
 msgstr "Stworzono plik z opcjami."
 
-#: src/info/info_cli_parser.cpp:35 src/mkvtoolnix-gui/gui_cli_parser.cpp:35
+#: src/info/info_cli_parser.cpp:35 src/mkvtoolnix-gui/gui_cli_parser.cpp:36
 #: src/mmg/options/dialog.cpp:37 src/propedit/propedit_cli_parser.cpp:191
 msgid "Options"
 msgstr "Ustawienia"
@@ -8223,7 +8243,7 @@ msgstr "Obecna wartość: "
 msgid "Other options"
 msgstr "Pozostałe opcje"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:155
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 msgid "Otherwise they're shown on the 'output' tab."
 msgstr ""
 
@@ -8235,7 +8255,7 @@ msgstr "Wyjście"
 msgid "Output file"
 msgstr "Plik wyjściowy"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:845
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:810
 msgid "Output file name"
 msgstr "Nazwa pliku wyjściowego"
 
@@ -8247,7 +8267,7 @@ msgstr "Plik wyjściowy:"
 msgid "Output filename"
 msgstr "Nazwa pliku wyjściowego"
 
-#: src/common/cli_parser.cpp:179
+#: src/common/cli_parser.cpp:181
 msgid "Output messages in this charset"
 msgstr "Wyjściowe wiadomości w tym zestawie znaków"
 
@@ -8312,8 +8332,8 @@ msgstr "Analizuj cały plik zamiast polegać na indeksie."
 msgid "Parsing file"
 msgstr "Analizowanie pliku"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:289
-#: src/mkvtoolnix-gui/merge/output.cpp:298 src/mmg/tabs/global.cpp:236
+#: src/mkvtoolnix-gui/merge/output.cpp:290
+#: src/mkvtoolnix-gui/merge/output.cpp:299 src/mmg/tabs/global.cpp:236
 #: src/mmg/tabs/global.cpp:247
 msgid "Parts:"
 msgstr "Fragmenty:"
@@ -8382,7 +8402,7 @@ msgstr "Proszę nie wybierać \"mmg\" jako plik wykonywalny \"mkvmerge\"."
 msgid "Please enter a description for the new job:"
 msgstr "Proszę wpisać opis dla nowego zadania:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:299
+#: src/mkvtoolnix-gui/merge/tab.cpp:301
 msgid "Please enter the new job's description."
 msgstr "Proszę wpisać opis dla nowego zadania:"
 
@@ -8430,7 +8450,7 @@ msgstr ""
 "Proszę wybrać czynności, które zostaną wykonane dla wszystkich zaznaczonych "
 "edycji lub rozdziałów i wszystkich ich podrzędnych pozycji."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:848
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:813
 msgid "Pre&viously used output directory"
 msgstr "&Poprzednio użyty katalog wyjściowy"
 
@@ -8466,7 +8486,7 @@ msgstr "Unikalny ID poprzedniego segmentu"
 msgid "Primary file name:"
 msgstr "Nazwa pierwszego pliku:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:835
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:800
 msgid "Process &priority:"
 msgstr "&Ustaw priorytet:"
 
@@ -8489,12 +8509,12 @@ msgid ""
 "may lead to imprecise or slow seeking."
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:42
 msgid "Progress"
 msgstr "Postęp"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:178
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:285
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:284
 msgid "Progress:"
 msgstr "Postęp:"
 
@@ -8799,7 +8819,7 @@ msgstr "Czytaj pełną listę zmian w internecie"
 msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "Zaszyfrowane pliki VOB nie są obsługiwane.\n"
 
-#: src/common/cli_parser.cpp:181
+#: src/common/cli_parser.cpp:183
 msgid ""
 "Reads additional command line options from the specified file (see man page)."
 msgstr ""
@@ -8843,7 +8863,7 @@ msgstr ""
 "jeśli faktycznie zawiera dane SBR. Jeśli tego nie zrobisz, plik zostanie "
 "NIEPOPRAWNIE zmuksowany. Dodatkowo przeczytaj dokumentację mkvmerge.\n"
 
-#: src/common/cli_parser.cpp:180
+#: src/common/cli_parser.cpp:182
 msgid "Redirects all messages into this file."
 msgstr "Przekierowywuje wszystkie wiadomości do tego pliku."
 
@@ -8879,11 +8899,11 @@ msgstr ""
 msgid "Reload the current file without saving"
 msgstr "Załaduj ponownie obecny plik bez zapisywania zmian"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:285
 msgid "Remaining time for current job:"
 msgstr "Pozostały czas dla obecnego zadania:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:289
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:288
 msgid "Remaining time for queue:"
 msgstr "Pozostały czas dla kolejki:"
 
@@ -8958,11 +8978,11 @@ msgstr "Resynchronizacja powiodła się pomyślnie w pozycji %1%.\n"
 msgid "Right-click for actions for all tracks"
 msgstr "Użyj PPM, aby zarządzać wszystkimi ścieżkami"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:264
+#: src/mkvtoolnix-gui/jobs/tool.cpp:280
 msgid "Right-click for actions for jobs"
 msgstr "Użyj PPM, aby zarządzać zadaniami"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:255
+#: src/mkvtoolnix-gui/merge/attachments.cpp:248
 msgid "Right-click to add and remove attachments"
 msgstr "Użyj PPM, aby dodać i usunąć załączniki"
 
@@ -8978,11 +8998,11 @@ msgstr "Uruchom mkvmerge i rozpocznij proces muksowania"
 msgid "Run the header field editor"
 msgstr "Uruchom edytor nagłówków"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:189 src/mkvtoolnix-gui/jobs/tool.cpp:220
+#: src/mkvtoolnix-gui/jobs/tool.cpp:203 src/mkvtoolnix-gui/jobs/tool.cpp:234
 msgid "Running jobs cannot be removed."
 msgstr "Uruchomione zadania nie mogą zostać usunięte."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:854
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:819
 msgid "S&can directory for other playlists:"
 msgstr "&Skanowanie folderu w poszukiwaniu innych list odtwarzania:"
 
@@ -9022,7 +9042,7 @@ msgstr "Napisy SSA/ASS"
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS - napisy tekstowe"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:847
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:812
 msgid "Sa&me directory as the first input file"
 msgstr "&Ten sam katalog, co pierwszy plik źródłowy"
 
@@ -9077,7 +9097,7 @@ msgstr "Zapisz rozdziały do pliku Matroski"
 msgid "Save information as"
 msgstr "Zapisz informacje jako"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:233
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
 msgid "Save job output"
 msgstr "Zapisz dziennik zdarzeń"
 
@@ -9180,7 +9200,7 @@ msgstr[2] "Skanowanie %1% plików w %2% listach odtwarzania.\n"
 msgid "Scanning directory"
 msgstr "Folder skanowania"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:853
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:818
 msgid "Scanning playlists"
 msgstr "Skanowanie list odtwarzania"
 
@@ -9309,7 +9329,7 @@ msgstr "Wybierz plik Matroski"
 msgid "Select all tracks of specific &type"
 msgstr "Zaznacz wszystkie ścieżki określonego &typu"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:386
+#: src/mkvtoolnix-gui/merge/output.cpp:387
 msgid "Select chapter file"
 msgstr "Wybierz plik rozdziałów"
 
@@ -9323,7 +9343,7 @@ msgstr "Wybierz plik do dodania"
 msgid "Select one of the ISO639-2 language codes."
 msgstr "Język tej ścieżki. Wybierz jeden z kodów językowych ISO639-2."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:436
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:438
 msgid "Select output directory"
 msgstr "Wybierz folder wyjściowy"
 
@@ -9331,16 +9351,16 @@ msgstr "Wybierz folder wyjściowy"
 msgid "Select output file"
 msgstr "Wybierz plik wyjściowy"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:195
+#: src/mkvtoolnix-gui/merge/output.cpp:196
 msgid "Select output file name"
 msgstr "Wybierz nazwę pliku wyjściowego"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:225
+#: src/mkvtoolnix-gui/merge/output.cpp:226
 msgid "Select segment info file"
 msgstr "Wybierz plik informacji o segmencie"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:660
-#: src/mkvtoolnix-gui/merge/output.cpp:213
+#: src/mkvtoolnix-gui/merge/output.cpp:214
 msgid "Select tags file"
 msgstr "Wybierz pliki tagów"
 
@@ -9680,7 +9700,7 @@ msgstr "Pokaż okno z informacjami"
 msgid "Show all bytes of each frame as a hex dump."
 msgstr "Pokaż wszystkie bajty każdej klatki jako zrzut heksadecymalny."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:805
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:769
 msgid "Show buttons for moving list view entries up and down"
 msgstr ""
 "Pokaż przyciski służące do przesuwania ścieżek, załączników i plików "
@@ -9694,7 +9714,7 @@ msgstr "&Pokaż rozmiary elementów\tCtrl-Z"
 msgid "Show mmg's debug window"
 msgstr "Pokaż okno debugowania mmg"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:812
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:777
 msgid "Show out&put of all jobs instead of current job only"
 msgstr ""
 "&Pokazuj postęp wszystkich zadań, zamiast tylko jednego (obecnego) zadania"
@@ -9727,15 +9747,15 @@ msgstr "Pokaż rozmiar każdego elementu łacznie z jego nagłówkiem"
 msgid "Show the size of each element including its header."
 msgstr "Pokaż rozmiar każdego elementu łacznie z jego nagłówkiem."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:804
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:768
 msgid "Show the tool selector"
 msgstr "Pokaż pasek narzędzi"
 
-#: src/common/cli_parser.cpp:182 src/mkvtoolnix-gui/gui_cli_parser.cpp:43
+#: src/common/cli_parser.cpp:184 src/mkvtoolnix-gui/gui_cli_parser.cpp:45
 msgid "Show this help."
 msgstr "Pokaż pomoc."
 
-#: src/common/cli_parser.cpp:183 src/mkvtoolnix-gui/gui_cli_parser.cpp:44
+#: src/common/cli_parser.cpp:185 src/mkvtoolnix-gui/gui_cli_parser.cpp:46
 msgid "Show version information."
 msgstr "Pokaż info o wersji."
 
@@ -9777,7 +9797,7 @@ msgid "Silent Track Number: %1%"
 msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:167
-#: src/mkvtoolnix-gui/merge/output.cpp:389
+#: src/mkvtoolnix-gui/merge/output.cpp:390
 #, fuzzy
 msgid "Simple OGM-style chapter files"
 msgstr "Wybierz plik rozdziału"
@@ -9815,7 +9835,7 @@ msgid "Size"
 msgstr "Rozmiar"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:246
-#: src/mkvtoolnix-gui/merge/output.cpp:247 src/mmg/tabs/global.cpp:195
+#: src/mkvtoolnix-gui/merge/output.cpp:248 src/mmg/tabs/global.cpp:195
 #: src/mmg/tabs/global.cpp:198 src/mmg/tabs/select_scanned_file_dlg.cpp:80
 msgid "Size:"
 msgstr "Rozmiar:"
@@ -9950,7 +9970,7 @@ msgstr ""
 "nowych plików wyjściowych \"%s%s*%s\" już istnieje. Czy chcesz nadpisać "
 "pliki?"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:332 src/mmg/tabs/global.cpp:280
+#: src/mkvtoolnix-gui/merge/output.cpp:333 src/mmg/tabs/global.cpp:280
 msgid ""
 "Splitting will occur right before the first key frame whose timecode is "
 "equal to or bigger than the start timecode for the chapters whose numbers "
@@ -9968,7 +9988,7 @@ msgstr "Rozpocznij &muksowanie"
 msgid "Sta&rt muxing (run mkvmerge)\tCtrl-R"
 msgstr "&Rozpocznij muksowanie (mkvmerge)\tCtrl-R"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:24
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
 msgid "Start"
 msgstr "Początek"
 
@@ -9976,7 +9996,7 @@ msgstr "Początek"
 msgid "Start &muxing"
 msgstr "Rozpocznij &muksowanie"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:252
+#: src/mkvtoolnix-gui/jobs/tool.cpp:267
 msgid "Start jobs &manually"
 msgstr "Rozpocznij zadania &ręcznie"
 
@@ -10000,7 +10020,7 @@ msgstr "Rozpocznij pracę z wyczyszczonymi opcjami"
 msgid "Start:"
 msgstr "Początek:"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:283
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:282
 msgid "Started at:"
 msgstr "Rozpoczęto o:"
 
@@ -10023,7 +10043,7 @@ msgstr ""
 "czas trwania w sekundach: %4%; przybliżona przepływność w bitach/sekunę: "
 "%5%\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:39 src/mmg/jobs.cpp:473
+#: src/mkvtoolnix-gui/jobs/model.cpp:42 src/mmg/jobs.cpp:473
 msgid "Status"
 msgstr "Status"
 
@@ -10033,7 +10053,7 @@ msgstr "Postęp i status"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:206
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:161
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:281
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:280
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:169
 #: src/mmg/header_editor/value_page.cpp:174 src/mmg/update_checker.cpp:61
 msgid "Status:"
@@ -10114,13 +10134,13 @@ msgstr "Ścieżka napisów %1, %2, %3"
 msgid "Subtitle track %u"
 msgstr "Ścieżka napisów %u"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:868
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:833
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
 msgid "Subtitles"
 msgstr "Napisy"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:163
-#: src/mkvtoolnix-gui/merge/output.cpp:387
+#: src/mkvtoolnix-gui/merge/output.cpp:388
 msgid "Supported file types"
 msgstr "Obsługiwane typy plików"
 
@@ -10128,7 +10148,7 @@ msgstr "Obsługiwane typy plików"
 msgid "Supported file types:\n"
 msgstr "Obsługiwane typy plików:\n"
 
-#: src/common/cli_parser.cpp:176 src/merge/mkvmerge.cpp:80
+#: src/common/cli_parser.cpp:178 src/merge/mkvmerge.cpp:80
 msgid "Suppress status output."
 msgstr "Wycisz komunikaty wyjścia."
 
@@ -10140,7 +10160,7 @@ msgstr "TTA"
 msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA (The lossless True Audio codec)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:801
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:765
 msgid "Tab position in tab widgets:"
 msgstr "Położenie zakładek w widżetach:"
 
@@ -10233,7 +10253,7 @@ msgstr ""
 "ze ścieżek."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:648
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:233
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
 msgid "Text files"
 msgstr "Pliki tekstowe"
 
@@ -10326,7 +10346,7 @@ msgstr ""
 "Kod FourCC dla ścieżki nr %s w pliku \"%s\" nie zawiera dokładnie czterech "
 "znaków."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:159
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:160
 msgid ""
 "The GUI can help you start your next merge settings after having started a "
 "job or having added a one to the job queue."
@@ -10594,8 +10614,8 @@ msgstr ""
 "Uwaga: To ostrzeżenie może być wyłączone w ustawieniach programu. Odznacz "
 "opcję \"Ostrzegaj o możliwym błędnym..\"."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:214
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:215
 msgid ""
 "The character sets selected here will be shown at the top of all the "
 "character set drop-down boxes in the program."
@@ -10642,8 +10662,8 @@ msgstr "Konfiguracja została zapisana."
 msgid "The correction file header was not read correctly.\n"
 msgstr "Nagłówek pliku korekcyjnego nie został prawidłowo wczytany.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:210
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:211
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:212
 msgid ""
 "The countries selected here will be shown at the top of all the country drop-"
 "down boxes in the program."
@@ -10675,11 +10695,11 @@ msgstr ""
 "z numerem %d - których ścieżki mają być scalone ze ścieżkami z tego pliku. "
 "Proszę usuń najpierw tamte pliki."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:161
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:162
 msgid "The current merge settings will be closed."
 msgstr ""
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:32
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:33
 msgid ""
 "The current mode can be changed with --merge, --edit-chapters or --edit-"
 "headers."
@@ -10720,7 +10740,7 @@ msgstr ""
 "Domyślny kod języka \"%1%\" nie jest prawidłowym kodem językowym ISO639-2 i "
 "zostanie pominięty.\n"
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:33
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:34
 msgid "The default mode is adding files for merging."
 msgstr ""
 
@@ -10799,7 +10819,7 @@ msgstr ""
 msgid "The drive may be full."
 msgstr "Dysk twardy może być zapełniony."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:263
+#: src/mkvtoolnix-gui/merge/output.cpp:264
 msgid "The duration after which a new output file is started."
 msgstr ""
 
@@ -11213,9 +11233,9 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:61
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:67
-#: src/mkvtoolnix-gui/merge/output.cpp:265
-#: src/mkvtoolnix-gui/merge/output.cpp:280
-#: src/mkvtoolnix-gui/merge/output.cpp:294
+#: src/mkvtoolnix-gui/merge/output.cpp:266
+#: src/mkvtoolnix-gui/merge/output.cpp:281
+#: src/mkvtoolnix-gui/merge/output.cpp:295
 #, fuzzy
 msgid ""
 "The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by "
@@ -11242,7 +11262,7 @@ msgstr ""
 "Format dzielenia pliku wg czasu trwania/po określonym czasie jest "
 "nieprawidłowy."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:285
+#: src/mkvtoolnix-gui/merge/output.cpp:286
 #, fuzzy
 msgid "The formats can be mixed, too."
 msgstr "Formaty nie pasują do siebie."
@@ -11261,7 +11281,7 @@ msgstr ""
 "wyjściowe są zapisywane do standardowego wyjścia. Wyjście może być użyte "
 "jako źródło dla mkvmerge."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:187
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:188
 msgid ""
 "The generated output file name has the same base name as the input file name "
 "but with an extension based on the track types present in the file."
@@ -11360,14 +11380,14 @@ msgid ""
 "selection and display for the user."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:169
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:170
 msgid ""
 "The language selected here is used for tracks for which their source file "
 "contains no such property."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:207
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:208
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:209
 #, fuzzy
 msgid ""
 "The languages selected here will be shown at the top of all the language "
@@ -11380,7 +11400,7 @@ msgstr ""
 msgid "The last timecode processed before the error was encountered was %1%.\n"
 msgstr "Ostatnim kodem czasowym, zanim napotkano błąd, był %1%.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:249
+#: src/mkvtoolnix-gui/merge/output.cpp:250
 #, fuzzy
 msgid ""
 "The letters 'G', 'M' and 'K' can be used to indicate giga/mega/kilo bytes "
@@ -11605,15 +11625,15 @@ msgstr "Liczba pikseli, które zostaną ucięte z prawej strony."
 msgid "The number of video pixels to remove on the top of the image."
 msgstr "Liczba pikseli, które zostaną ucięte od góry."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:302
-#: src/mkvtoolnix-gui/merge/output.cpp:318
-#: src/mkvtoolnix-gui/merge/output.cpp:331 src/mmg/tabs/global.cpp:251
+#: src/mkvtoolnix-gui/merge/output.cpp:303
+#: src/mkvtoolnix-gui/merge/output.cpp:319
+#: src/mkvtoolnix-gui/merge/output.cpp:332 src/mmg/tabs/global.cpp:251
 #: src/mmg/tabs/global.cpp:266 src/mmg/tabs/global.cpp:279
 msgid "The numbering starts at 1."
 msgstr "Numerowanie zaczyna się od cyfry 1."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:307
-#: src/mkvtoolnix-gui/merge/output.cpp:323 src/mmg/tabs/global.cpp:254
+#: src/mkvtoolnix-gui/merge/output.cpp:308
+#: src/mkvtoolnix-gui/merge/output.cpp:324 src/mmg/tabs/global.cpp:254
 #: src/mmg/tabs/global.cpp:269
 msgid ""
 "The numbers given with this argument are interpreted based on the number of "
@@ -11638,7 +11658,7 @@ msgstr ""
 msgid "The option file has been created."
 msgstr "Plik z opcjami muksowania został utworzony."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:173
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
 msgid "The options entered here are set for all new merge jobs by default."
 msgstr ""
 
@@ -11718,7 +11738,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:67
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:58
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:126
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:127
 msgid ""
 "The resulting number will be padded with leading zeroes if the number of "
 "places is less than specified."
@@ -11794,7 +11814,7 @@ msgstr ""
 "Szósty tryb odszukuje kody czasowe wszystkich bloków dla ścieżki i zapisuje "
 "plik z kodami czasowymi w wersji v2."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:248
+#: src/mkvtoolnix-gui/merge/output.cpp:249
 msgid "The size after which a new output file is started."
 msgstr ""
 
@@ -11845,7 +11865,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:65
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:56
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:124
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:125
 msgid "The string '<NUM>' will be replaced by the chapter number."
 msgstr ""
 
@@ -12011,7 +12031,7 @@ msgstr ""
 "formatu pliku kodów czasowych w wersji v4. Jest on identyczny do formatu v2, "
 "ale pozwala na nieuporządkowane kody czasowe.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:277
+#: src/mkvtoolnix-gui/merge/output.cpp:278
 msgid "The timecodes after which a new output file is started."
 msgstr ""
 
@@ -12055,7 +12075,7 @@ msgstr ""
 "Kody czasowe dla tej ścieżki zostały zresetowane w środku pliku. To nie jest "
 "obsługiwane. Obecny pakiet zostanie pominięty.\n"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:278
+#: src/mkvtoolnix-gui/merge/output.cpp:279
 msgid ""
 "The timecodes refer to the whole stream and not to each individual output "
 "file."
@@ -12125,7 +12145,7 @@ msgstr "Właściwości ścieżki nie są zgodne."
 msgid "The update information could not be retrieved from %1%.\n"
 msgstr "Informacja o aktualizacji nie mogła zostać pobrana z %1%.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:178
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:179
 msgid "The user can then select which playlist to actually add."
 msgstr ""
 
@@ -12166,7 +12186,7 @@ msgstr ""
 msgid "There is a new version available online."
 msgstr "Dostępna jest nowa wersja programu."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:301
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:310
 msgid "There is currently a job running."
 msgstr "Uruchomione zadanie wciąż trwa."
 
@@ -12426,7 +12446,7 @@ msgid ""
 "quitting the application."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:93
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:99
 msgid "This has not been implemented yet."
 msgstr "Ta funkcja nie została jeszcze zaimplementowana."
 
@@ -12448,27 +12468,27 @@ msgstr ""
 msgid "This is also done when quitting the application."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:91
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:92
 msgid "This is done at startup and at most once within 24 hours."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:192
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:193
 msgid ""
 "This is done only if there is already a file whose name matches the "
 "unmodified output file name."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:128
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:129
 msgid ""
 "This is the country that newly added chapter names get assigned "
 "automatically."
 msgstr ""
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:37
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:38
 msgid "This is the default mode."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:127
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:128
 msgid ""
 "This is the language that newly added chapter names get assigned "
 "automatically."
@@ -12496,7 +12516,7 @@ msgstr ""
 "Pozwala na użycie elementu CodecState. Służy to w ścieżkach obrazu np. "
 "MPEG-1/-2 dla zachowania nagłówków sekwencji."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:179
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:180
 msgid ""
 "This is useful for situations like Blu-ray discs on which a multitude of "
 "playlists exists in the same directory and where it is not obvious which "
@@ -12511,8 +12531,8 @@ msgstr "Ta lista służy tylko celom informacyjnym i nie może być zmieniona."
 msgid "This message will only shown to you once."
 msgstr "To okno pojawia się tylko raz."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:304
-#: src/mkvtoolnix-gui/merge/output.cpp:320 src/mmg/tabs/global.cpp:252
+#: src/mkvtoolnix-gui/merge/output.cpp:305
+#: src/mkvtoolnix-gui/merge/output.cpp:321 src/mmg/tabs/global.cpp:252
 #: src/mmg/tabs/global.cpp:267
 msgid "This mode considers only the first video track that is output."
 msgstr ""
@@ -12528,7 +12548,7 @@ msgid ""
 "This mode extracts cue information for some tracks to external text files."
 msgstr "Pierwszy tryb wyodrębnia niektóre ścieżki jako oddzielne pliki."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:335 src/mmg/tabs/global.cpp:282
+#: src/mkvtoolnix-gui/merge/output.cpp:336 src/mmg/tabs/global.cpp:282
 msgid ""
 "This mode only considers the top-most level of chapters across all edition "
 "entries."
@@ -12660,7 +12680,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:64
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:55
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:123
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:124
 msgid "This template will be used for new chapter entries."
 msgstr ""
 
@@ -12746,7 +12766,7 @@ msgstr "Skalowanie kodów czasowych: %1%"
 msgid "Timecodes and default duration"
 msgstr "Kody czasowe i domyślny czas trwania"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:275 src/mmg/tabs/global.cpp:223
+#: src/mkvtoolnix-gui/merge/output.cpp:276 src/mmg/tabs/global.cpp:223
 #: src/mmg/tabs/input_general.cpp:193
 msgid "Timecodes:"
 msgstr "Kody czasowe:"
@@ -12976,7 +12996,7 @@ msgstr ""
 msgid "Track type: %1%"
 msgstr "Rodzaj ścieżki: %1%"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:203
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:204
 msgid ""
 "Tracks with a language in this list will be set not to be muxed by default."
 msgstr ""
@@ -13022,7 +13042,7 @@ msgid ""
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:39
+#: src/mkvtoolnix-gui/jobs/model.cpp:42
 #: src/mkvtoolnix-gui/merge/track_model.cpp:43
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -13144,7 +13164,7 @@ msgstr "Nieznany nagłówek 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgid "Unknown mode '%1%'.\n"
 msgstr "Nieznany tryb \"%1%\".\n"
 
-#: src/common/cli_parser.cpp:113
+#: src/common/cli_parser.cpp:115
 #, boost-format
 msgid "Unknown option '%1%'.\n"
 msgstr "Nieznana opcja \"%1%\".\n"
@@ -13201,7 +13221,7 @@ msgid "Updating the '%1%' element failed. Reason:"
 msgstr "Aktualizowanie elementu \"%1%\" zakończone niepowodzeniem. Przyczyna:"
 
 #: src/extract/extract_cli_parser.cpp:44
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:23
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:24
 msgid "Usage"
 msgstr "Użycie"
 
@@ -13217,7 +13237,7 @@ msgstr ""
 "Użyj \"łączenia segmentów\" dla powiązania podzielonych plików. Dla "
 "głębszego wyjaśnienia tej funkcji zajrzyj do dokumentacji mkvmerge."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:850
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:815
 msgid "Use fi&xed directory:"
 msgstr "&Użyj tego katalogu:"
 
@@ -13333,7 +13353,7 @@ msgstr "Wersja %1 \"%2\""
 msgid "VfW compatible video"
 msgstr "Video kompatybilne z VFW"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:866
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:831
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:42
 msgid "Video"
 msgstr "Wideo"
@@ -13485,15 +13505,15 @@ msgstr "WAVPACK4"
 msgid "Warn about possible incorrect usage of mmg"
 msgstr "Ostrzegaj o możliwym błędnym użyciu mmg"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:807
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:771
 msgid "Warn before &closing modified tabs"
 msgstr "&Ostrzegaj przed zamknięciem zmodyfikowanych kart (plików)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:809
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:773
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Ostrzegaj przed &nadpisaniem (plików, zadań, itd.)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:808
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:772
 msgid "Warn before aborting running &jobs"
 msgstr "&Ostrzegaj przed przerwaniem uruchomionych zadań"
 
@@ -13507,17 +13527,17 @@ msgstr ""
 "poprzedniej linii. Wszystkie pozycje z tego pliku będą ustawione wg czasu "
 "rozpoczęcia.\n"
 
-#: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:101
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:181 src/mmg/jobs.cpp:275
+#: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:211
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:208 src/mmg/jobs.cpp:275
 #: src/mmg/mux_dialog.cpp:281
 msgid "Warning:"
 msgstr "Ostrzeżenie:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:806
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:770
 msgid "Warnings"
 msgstr "Ostrzeżenia"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291 src/mmg/mux_dialog.cpp:68
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:290 src/mmg/mux_dialog.cpp:68
 msgid "Warnings:"
 msgstr "Ostrzeżenia:"
 
@@ -13525,7 +13545,7 @@ msgstr "Ostrzeżenia:"
 msgid "WebM audio/video files"
 msgstr "WebM - pliki audio/wideo"
 
-#: src/info/qt_ui.cpp:88 src/mkvtoolnix-gui/merge/output.cpp:194
+#: src/info/qt_ui.cpp:88 src/mkvtoolnix-gui/merge/output.cpp:195
 msgid "WebM files"
 msgstr "Pliki WebM"
 
@@ -13549,7 +13569,7 @@ msgstr ""
 "nadpisują. Wszystkie parametry ze znacznikiem \"<TID>\" będą zastąpione "
 "przez ID ścieżki."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:143
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:144
 msgid "When a file is added its name is scanned."
 msgstr ""
 
@@ -13563,25 +13583,25 @@ msgstr ""
 "zawiera słowo \"DELAY\" wraz z liczbą, wtedy ta liczba jest automatycznie "
 "kopiowana do pola \"Opóźnienie\". Działa w przypadku każdej ścieżki audio."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:196
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:197
 msgid ""
 "When adding source files all tracks are normally set to be muxed into the "
 "output file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:138
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:139
 msgid ""
 "When the user adds a file containing such a title then the program will copy "
 "the title into the »file title« input box if this option is enabled."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:168
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:169
 msgid ""
 "When the user adds such a file the track's language input is set to the "
 "language property from the source file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:177
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:178
 msgid ""
 "Whenever the user adds a playlist the program can automatically scan the "
 "directory for other playlists and present the user with a detailed list of "
@@ -13614,11 +13634,11 @@ msgid ""
 "timing information."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:160
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:161
 msgid "With »create new settings« a new set of merge settings will be added."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:162
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:163
 msgid "With »remove input files« all input files will be removed."
 msgstr ""
 
@@ -13706,16 +13726,16 @@ msgstr "Błędna wartość identyfikująca: \"%|1$7s|\" != \"kate\\0\\0\\0\""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:415
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:166
-#: src/mkvtoolnix-gui/merge/output.cpp:388
+#: src/mkvtoolnix-gui/merge/output.cpp:389
 msgid "XML chapter files"
 msgstr "Pliki rozdziałów XML"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:225
+#: src/mkvtoolnix-gui/merge/output.cpp:226
 msgid "XML segment info files"
 msgstr "Pliki informacji o segmencie XML"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:660
-#: src/mkvtoolnix-gui/merge/output.cpp:213
+#: src/mkvtoolnix-gui/merge/output.cpp:214
 msgid "XML tag files"
 msgstr "Pliki tagów XML"
 
@@ -13728,7 +13748,7 @@ msgstr ""
 msgid "You can change this value in the preferences."
 msgstr "Możesz zmienić tę wartość w ustawieniach."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:198
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:199
 msgid ""
 "You can exempt certain track types from this restriction by checking the "
 "corresponding check box below, e.g. for video tracks."
@@ -13748,20 +13768,20 @@ msgstr ""
 "Ten element jest obecny w pliku.\n"
 "Za pomocą edytora nagłówków możesz usunąć ten element z pliku."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:119
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:120
 msgid ""
 "You can opt for having them removed automatically under certain conditions."
 msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:66
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:57
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:125
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:126
 msgid ""
 "You can specify a minimum number of places for the chapter number with '<NUM:"
 "places>', e.g. '<NUM:3>'."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:282
+#: src/mkvtoolnix-gui/merge/output.cpp:283
 msgid ""
 "You can specify up to nine digits for the number of nanoseconds 'nnnnnnnnn' "
 "or none at all."
@@ -13821,13 +13841,13 @@ msgstr ""
 "Musisz wprowadzić nazwę pliku wyjściowego, zanim rozpoczniesz muksowanie lub "
 "dodasz zadanie do kolejki."
 
-#: src/mkvtoolnix-gui/merge/output.cpp:266
+#: src/mkvtoolnix-gui/merge/output.cpp:267
 msgid ""
 "You may omit the number of hours 'HH' and the number of nanoseconds "
 "'nnnnnnnnn'."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/output.cpp:281
+#: src/mkvtoolnix-gui/merge/output.cpp:282
 msgid "You may omit the number of hours 'HH'."
 msgstr ""
 
@@ -13845,7 +13865,7 @@ msgstr "[%1% klatka ścieżki %2%, kod czasowy %3%]"
 msgid "aborted"
 msgstr "przerwane"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:119
+#: src/mkvtoolnix-gui/jobs/job.cpp:231
 msgid "aborted by user"
 msgstr "przerwane przez użytkownika"
 
@@ -13910,11 +13930,11 @@ msgstr "pytaj zawsze użytkownika"
 msgid "always scan for other playlists"
 msgstr "zawsze skanuj w poszukiwaniu innych list odtwarzania"
 
-#: src/common/stereo_mode.cpp:58
+#: src/common/stereo_mode.cpp:59
 msgid "anaglyph (cyan/red)"
 msgstr "anaglif (cyjan/czerwony)"
 
-#: src/common/stereo_mode.cpp:60
+#: src/common/stereo_mode.cpp:61
 msgid "anaglyph (green/magenta)"
 msgstr "anaglif (zielony/magenta)"
 
@@ -13922,12 +13942,12 @@ msgstr "anaglif (zielony/magenta)"
 msgid "append"
 msgstr "scal"
 
-#: src/mkvtoolnix-gui/merge/track.cpp:371
+#: src/mkvtoolnix-gui/merge/track.cpp:372
 msgid "attachment"
 msgstr "załącznik"
 
 #: src/info/mkvinfo.cpp:934 src/input/r_matroska.cpp:101
-#: src/mkvtoolnix-gui/merge/track.cpp:367 src/mmg/mmg.cpp:65
+#: src/mkvtoolnix-gui/merge/track.cpp:368 src/mmg/mmg.cpp:65
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "audio"
 msgstr "audio"
@@ -13942,20 +13962,20 @@ msgstr "dziel według rozdziałów"
 msgid "bits per sample: %1%"
 msgstr "głębia bitów: %1%"
 
-#: src/common/stereo_mode.cpp:61
+#: src/common/stereo_mode.cpp:62
 msgid "both eyes laced in one block (left first)"
 msgstr "obydwa widoki w jednym bloku (lewe pierwsze)"
 
-#: src/common/stereo_mode.cpp:62
+#: src/common/stereo_mode.cpp:63
 msgid "both eyes laced in one block (right first)"
 msgstr "obydwa widoki w jednym bloku (prawe pierwsze)"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:355
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:356
 msgid "bottom"
 msgstr "dół"
 
 #: src/info/mkvinfo.cpp:937 src/input/r_matroska.cpp:102
-#: src/mkvtoolnix-gui/merge/track.cpp:370
+#: src/mkvtoolnix-gui/merge/track.cpp:371
 msgid "buttons"
 msgstr "przyciski"
 
@@ -13974,31 +13994,31 @@ msgstr "dziel na fragmenty wg czasów "
 msgid "channels: %1%"
 msgstr "kanały: %1%"
 
-#: src/mkvtoolnix-gui/merge/track.cpp:372
+#: src/mkvtoolnix-gui/merge/track.cpp:373
 msgid "chapters"
 msgstr "rozdziały"
 
-#: src/common/stereo_mode.cpp:53
+#: src/common/stereo_mode.cpp:54
 msgid "checkerboard (left first)"
 msgstr "szachownica (lewe pierwsze)"
 
-#: src/common/stereo_mode.cpp:52
+#: src/common/stereo_mode.cpp:53
 msgid "checkerboard (right first)"
 msgstr "szachownica (prawe pierwsze)"
 
-#: src/common/stereo_mode.cpp:57
+#: src/common/stereo_mode.cpp:58
 msgid "column interleaved (left first)"
 msgstr "pionowy przeplot (lewe pierwsze)"
 
-#: src/common/stereo_mode.cpp:56
+#: src/common/stereo_mode.cpp:57
 msgid "column interleaved (right first)"
 msgstr "pionowy przeplot (prawe pierwsze)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:116 src/mmg/jobs.cpp:369
+#: src/mkvtoolnix-gui/jobs/job.cpp:228 src/mmg/jobs.cpp:369
 msgid "completed OK"
 msgstr "wykonano poprawnie"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:117 src/mmg/jobs.cpp:373
+#: src/mkvtoolnix-gui/jobs/job.cpp:229 src/mmg/jobs.cpp:373
 msgid "completed with warnings"
 msgstr "wykonano z "
 
@@ -14006,7 +14026,7 @@ msgstr "wykonano z "
 msgid "compression"
 msgstr "kompresja"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:842
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:807
 msgid "create new settings"
 msgstr "stwórz nowe ustawienia"
 
@@ -14032,10 +14052,10 @@ msgstr "domyślny czas trwania: %|1$.3f|ms (%|2$.3f| kl/s dla pliku wideo)"
 msgid "deflateInit() failed. Result: %1%\n"
 msgstr "deflateInit() zakończone niepowodzeniem. Wynik: %1%\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:980
-#: src/mkvtoolnix-gui/merge/input.cpp:982
 #: src/mkvtoolnix-gui/merge/input.cpp:983
-#: src/mkvtoolnix-gui/merge/input.cpp:984
+#: src/mkvtoolnix-gui/merge/input.cpp:985
+#: src/mkvtoolnix-gui/merge/input.cpp:986
+#: src/mkvtoolnix-gui/merge/input.cpp:987
 msgid "determine automatically"
 msgstr "ustal automatycznie"
 
@@ -14043,7 +14063,7 @@ msgstr "ustal automatycznie"
 msgid "disable all"
 msgstr "wyłącz wszystko"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:120
+#: src/mkvtoolnix-gui/jobs/job.cpp:232
 msgid "disabled"
 msgstr "wyłączone"
 
@@ -14061,7 +14081,7 @@ msgstr "wyświetlana wysokość: %1%"
 msgid "display width: %1%"
 msgstr "wyświetlana szerokość: %1%"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:979
+#: src/mkvtoolnix-gui/merge/input.cpp:982
 msgid "don't change"
 msgstr "bez zmiany"
 
@@ -14077,17 +14097,17 @@ msgstr "zrobione/ostrzeżenia"
 msgid "down"
 msgstr "w dół"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:137
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:278
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:143
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:287
 msgid "edit chapters"
 msgstr "edytuj rozdziały"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:136
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:278
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:287
 msgid "edit headers"
 msgstr "edytuj nagłówki"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:277
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:286
 msgid "edit tags"
 msgstr "edytuj tagi"
 
@@ -14107,11 +14127,11 @@ msgstr "szyfrowanie"
 msgid "even if there were warnings"
 msgstr "pomimo wystąpienia jakichkolwiek ostrzeżeń"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:277
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:286
 msgid "extract"
 msgstr "wyodrębnij"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:118 src/mmg/jobs.cpp:377
+#: src/mkvtoolnix-gui/jobs/job.cpp:230 src/mmg/jobs.cpp:377
 #: src/mmg/jobs.cpp:570
 msgid "failed"
 msgstr "niepowodzenie"
@@ -14173,7 +14193,7 @@ msgstr "flac_reader: Błąd analizowania pliku: %1%\n"
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: nie można zainicjować pakietowania FLAC.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:983 src/mmg/tabs/input_extra.cpp:83
+#: src/mkvtoolnix-gui/merge/input.cpp:986 src/mmg/tabs/input_extra.cpp:83
 msgid "for all frames"
 msgstr "dla wszystkich klatek"
 
@@ -14195,15 +14215,15 @@ msgstr ""
 "1. Dla plików z napisami, które nie mają znacznika BOM i nie są zakodowane z "
 "zestawem znaków obecnego systemu (%1%);"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:979
+#: src/mkvtoolnix-gui/merge/input.cpp:982
 msgid "force 2 bytes"
 msgstr "wymuś 2 bajty"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:979
+#: src/mkvtoolnix-gui/merge/input.cpp:982
 msgid "force 4 bytes"
 msgstr "wymuś 4 bajty"
 
-#: src/mkvtoolnix-gui/merge/track.cpp:374
+#: src/mkvtoolnix-gui/merge/track.cpp:375
 msgid "global tags"
 msgstr "tagi globalne"
 
@@ -14219,12 +14239,12 @@ msgstr "kompresja nagłówków"
 msgid "hidden"
 msgstr "ukryty"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:298
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:299
 #: src/mmg/options/mkvmerge.cpp:41
 msgid "higher"
 msgstr "wysoki"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:297
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:298
 #: src/mmg/options/mkvmerge.cpp:40
 msgid "highest"
 msgstr "najwyższy"
@@ -14234,7 +14254,7 @@ msgstr "najwyższy"
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() zakończone niepowodzeniem. Wynik: %1%\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:277
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:286
 msgid "info"
 msgstr ""
 
@@ -14243,13 +14263,13 @@ msgstr ""
 msgid "is being estimated"
 msgstr "w trakcie szacowania.."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:140
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:278
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:287
 msgid "job output"
 msgstr "postęp zadań"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:139
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:278
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:287
 msgid "job queue"
 msgstr "kolejka zadań"
 
@@ -14262,7 +14282,7 @@ msgstr ""
 msgid "language: %1%"
 msgstr "język: %1%"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:356
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:357
 msgid "left"
 msgstr "lewo"
 
@@ -14280,12 +14300,12 @@ msgstr "line %1%: Nie można wczytać znacznika czasu \"opóźnienie\".\n"
 msgid "link files"
 msgstr "łącz segmenty"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:301
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:302
 #: src/mmg/options/mkvmerge.cpp:44
 msgid "lower"
 msgstr "niski"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:302
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:303
 #: src/mmg/options/mkvmerge.cpp:45
 msgid "lowest"
 msgstr "najniższy"
@@ -14485,8 +14505,8 @@ msgstr ""
 "nullptr dla rozmiaru %3% bajtów.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:147
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:133
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:278
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:139
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:287
 msgid "merge"
 msgstr "twórz"
 
@@ -14665,8 +14685,8 @@ msgstr ""
 msgid "mkvmerge command line"
 msgstr "linia komend mkvmerge"
 
-#: src/mkvtoolnix-gui/merge/output.cpp:309
-#: src/mkvtoolnix-gui/merge/output.cpp:325 src/mmg/tabs/global.cpp:256
+#: src/mkvtoolnix-gui/merge/output.cpp:310
+#: src/mkvtoolnix-gui/merge/output.cpp:326 src/mmg/tabs/global.cpp:256
 #: src/mmg/tabs/global.cpp:271
 msgid ""
 "mkvmerge does not distinguish between those two and simply counts the number "
@@ -14794,15 +14814,15 @@ msgstr "ID ścieżki mkvmerge/mkvextract: %1%"
 msgid "mkvpropedit [options] <file> <actions>"
 msgstr "mkvpropedit [opcje] <plik> <działania>"
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:24
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:25
 msgid "mkvtoolnix-gui <configuration file names>"
 msgstr ""
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:25
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:26
 msgid "mkvtoolnix-gui [--merge|--edit-chapters|--edit-headers] <file names>"
 msgstr ""
 
-#: src/mkvtoolnix-gui/gui_cli_parser.cpp:21
+#: src/mkvtoolnix-gui/gui_cli_parser.cpp:22
 #, fuzzy
 msgid "mkvtoolnix-gui [options] [file names]"
 msgstr "mkvinfo [opcje] <nazwa pliku>"
@@ -14836,7 +14856,7 @@ msgstr "Opcje mmg"
 msgid "mmg will reset to the default list if no entry is selected."
 msgstr "Jeśli nie wybierzemy żadnego języka, mmg zresetuje listę na domyślną."
 
-#: src/common/stereo_mode.cpp:48
+#: src/common/stereo_mode.cpp:49
 msgid "mono"
 msgstr "mono"
 
@@ -14855,13 +14875,13 @@ msgstr "mpeg_ps_reader: To nie powinno było się zdarzyć #2. %1%"
 msgid "never scan for other playlists"
 msgstr "nigdy nie skanuj w poszukiwaniu innych list odtwarzania"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:841
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:806
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:28
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
-#: src/mkvtoolnix-gui/merge/input.cpp:978
-#: src/mkvtoolnix-gui/merge/input.cpp:980
 #: src/mkvtoolnix-gui/merge/input.cpp:981
+#: src/mkvtoolnix-gui/merge/input.cpp:983
 #: src/mkvtoolnix-gui/merge/input.cpp:984
+#: src/mkvtoolnix-gui/merge/input.cpp:987
 #: src/mkvtoolnix-gui/merge/track_model.cpp:91
 #: src/mkvtoolnix-gui/merge/track_model.cpp:251
 #: src/mmg/header_editor/bool_value_page.cpp:43
@@ -14869,7 +14889,7 @@ msgstr "nigdy nie skanuj w poszukiwaniu innych list odtwarzania"
 msgid "no"
 msgstr "nie"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:983
+#: src/mkvtoolnix-gui/merge/input.cpp:986
 msgid "no cues"
 msgstr "brak cue"
 
@@ -14881,11 +14901,11 @@ msgstr "brak szyfrowania"
 msgid "no error"
 msgstr "brak błędów"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:48
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:77
 msgid "no errors yet"
 msgstr "na razie brak błędów"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:982
+#: src/mkvtoolnix-gui/merge/input.cpp:985
 msgid "no extra compression"
 msgstr "bez dodatkowej kompresji"
 
@@ -14893,11 +14913,12 @@ msgstr "bez dodatkowej kompresji"
 msgid "no file loaded"
 msgstr "nie załadowano pliku"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:282
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:281
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:313
 msgid "no job started yet"
 msgstr "nie rozpoczęto jeszcze zadania"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:46
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:75
 msgid "no output yet"
 msgstr "na razie brak zdarzeń"
 
@@ -14913,7 +14934,7 @@ msgstr "brak algorytmu hasha sygnatury"
 msgid "no splitting"
 msgstr "nie dziel"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:47
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:76
 msgid "no warnings yet"
 msgstr "na razie brak ostrzeżeń"
 
@@ -14922,18 +14943,20 @@ msgstr "na razie brak ostrzeżeń"
 msgid "none"
 msgstr "wcale"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:300
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:301
 #: src/mmg/options/mkvmerge.cpp:43
 msgid "normal"
 msgstr "normalny"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:288
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:219
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:287
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:316
 msgid "not finished yet"
 msgstr "jeszcze nie zakończono"
 
-#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:284
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:218
+#: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:283
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:248
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:315
 msgid "not started yet"
 msgstr "jeszcze nie rozpoczęto"
 
@@ -14950,7 +14973,7 @@ msgstr ""
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer zakończono niepowodzeniem\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:983 src/mmg/tabs/input_extra.cpp:82
+#: src/mkvtoolnix-gui/merge/input.cpp:986 src/mmg/tabs/input_extra.cpp:82
 msgid "only for I frames"
 msgstr "tylko dla klatek typu I"
 
@@ -14984,11 +15007,11 @@ msgstr ""
 msgid "pending"
 msgstr "przygotowane"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:114
+#: src/mkvtoolnix-gui/jobs/job.cpp:226
 msgid "pending automatic start"
 msgstr "czeka na automatyczny start"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:113
+#: src/mkvtoolnix-gui/jobs/job.cpp:225
 msgid "pending manual start"
 msgstr "czeka na ręczny start"
 
@@ -15056,7 +15079,7 @@ msgstr "usuń"
 msgid "remove all"
 msgstr "usuń wszystko"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:843
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:808
 msgid "remove input files"
 msgstr "usuń pliki wejściowe"
 
@@ -15064,19 +15087,19 @@ msgstr "usuń pliki wejściowe"
 msgid "rest: unknown"
 msgstr "reszta: nieznana"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:357
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:358
 msgid "right"
 msgstr "prawo"
 
-#: src/common/stereo_mode.cpp:55
+#: src/common/stereo_mode.cpp:56
 msgid "row interleaved (left first)"
 msgstr "poziomy przeplot (lewe pierwsze)"
 
-#: src/common/stereo_mode.cpp:54
+#: src/common/stereo_mode.cpp:55
 msgid "row interleaved (right first)"
 msgstr "poziomy przeplot (prawe pierwsze)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:115
+#: src/mkvtoolnix-gui/jobs/job.cpp:227
 msgid "running"
 msgstr "w trakcie"
 
@@ -15085,11 +15108,11 @@ msgstr "w trakcie"
 msgid "sampling freq: %1%"
 msgstr "częstotliwość próbkowania: %1%"
 
-#: src/common/stereo_mode.cpp:49
+#: src/common/stereo_mode.cpp:50
 msgid "side by side (left first)"
 msgstr "obok siebie (lewe pierwsze)"
 
-#: src/common/stereo_mode.cpp:59
+#: src/common/stereo_mode.cpp:60
 msgid "side by side (right first)"
 msgstr "obok siebie (prawe pierwsze)"
 
@@ -15152,12 +15175,12 @@ msgstr ""
 msgid "subtitle"
 msgstr "napisy"
 
-#: src/info/mkvinfo.cpp:936 src/mkvtoolnix-gui/merge/track.cpp:369
+#: src/info/mkvinfo.cpp:936 src/mkvtoolnix-gui/merge/track.cpp:370
 #: src/mmg/mmg.cpp:67 src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "subtitles"
 msgstr "napisy"
 
-#: src/mkvtoolnix-gui/merge/track.cpp:373
+#: src/mkvtoolnix-gui/merge/track.cpp:374
 msgid "tags"
 msgstr "tagi"
 
@@ -15178,15 +15201,15 @@ msgstr "do wszystkich plików wyjściowych"
 msgid "toggle all"
 msgstr "odznacz/zaznacz wszystko"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:354
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:355
 msgid "top"
 msgstr "góra"
 
-#: src/common/stereo_mode.cpp:51
+#: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
 msgstr "góra dół (lewe pierwsze)"
 
-#: src/common/stereo_mode.cpp:50
+#: src/common/stereo_mode.cpp:51
 msgid "top bottom (right first)"
 msgstr "góra dół (prawe pierwsze)"
 
@@ -15204,12 +15227,12 @@ msgid "und (Undetermined)"
 msgstr "und (Nieokreślony)"
 
 #: src/common/file_types.cpp:103 src/common/mm_io_win.cpp:161
-#: src/common/stereo_mode.cpp:68 src/info/mkvinfo.cpp:683
+#: src/common/stereo_mode.cpp:69 src/info/mkvinfo.cpp:683
 #: src/info/mkvinfo.cpp:693 src/info/mkvinfo.cpp:708 src/info/mkvinfo.cpp:730
 #: src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752 src/info/mkvinfo.cpp:938
 #: src/input/r_matroska.cpp:100 src/input/r_matroska.cpp:2353
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:159
-#: src/mkvtoolnix-gui/jobs/job.cpp:121
+#: src/mkvtoolnix-gui/jobs/job.cpp:233
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57
 #: src/mmg/header_editor/value_page.cpp:150 src/mmg/mmg.cpp:68
 #: src/mmg/tabs/input.cpp:570 src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
@@ -15238,7 +15261,7 @@ msgstr ""
 "wartość: fałsz. To nie powinno się było zdarzyć. Proszę zgłosić błąd.\n"
 
 #: src/info/mkvinfo.cpp:935 src/input/r_matroska.cpp:103
-#: src/mkvtoolnix-gui/merge/track.cpp:368 src/mmg/mmg.cpp:66
+#: src/mkvtoolnix-gui/merge/track.cpp:369 src/mmg/mmg.cpp:66
 #: src/mmg/tabs/scanning_for_playlists_dlg.cpp:187
 msgid "video"
 msgstr "wideo"
@@ -15261,10 +15284,10 @@ msgstr "x"
 
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:29
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
-#: src/mkvtoolnix-gui/merge/input.cpp:978
-#: src/mkvtoolnix-gui/merge/input.cpp:980
 #: src/mkvtoolnix-gui/merge/input.cpp:981
+#: src/mkvtoolnix-gui/merge/input.cpp:983
 #: src/mkvtoolnix-gui/merge/input.cpp:984
+#: src/mkvtoolnix-gui/merge/input.cpp:987
 #: src/mkvtoolnix-gui/merge/track_model.cpp:91
 #: src/mkvtoolnix-gui/merge/track_model.cpp:251
 #: src/mmg/header_editor/bool_value_page.cpp:44
@@ -15280,8 +15303,8 @@ msgstr ""
 msgid "– first chapter name regardless of its language –"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:57
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:69
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:58
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:70
 msgid "– no selection by default –"
 msgstr "– domyślnie nie wybieraj –"
 
