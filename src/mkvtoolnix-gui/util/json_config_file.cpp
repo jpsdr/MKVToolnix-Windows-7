@@ -46,7 +46,7 @@ GroupConverter::groupToJson(JsonConfigFile::Group &group) {
 void
 GroupConverter::jsonToGroup(JsonConfigFile::Group &group) {
   for (auto const &key : m_objects.top().keys()) {
-    auto value = m_objects.top()[key];
+    auto value = m_objects.top().value(key);
 
     if (value.isObject()) {
       m_objects.push(value.toObject());
@@ -58,7 +58,7 @@ GroupConverter::jsonToGroup(JsonConfigFile::Group &group) {
       m_objects.pop();
 
     } else
-      group.m_data[key] = value.toVariant();
+      group.m_data.insert(key, value.toVariant());
   }
 }
 
@@ -148,7 +148,7 @@ JsonConfigFile::endGroup() {
 void
 JsonConfigFile::setValue(QString const &key,
                          QVariant const &value) {
-  m_currentGroup.top()->m_data[key] = value;
+  m_currentGroup.top()->m_data.insert(key, value);
 }
 
 QVariant
