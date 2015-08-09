@@ -121,23 +121,23 @@ Tab::onStatusChanged(uint64_t id,
     return;
   }
 
-  QMutexLocker locker{&job->m_mutex};
-  m_currentJobStatus = job->m_status;
-  m_id               = job->m_id;
+  job->action([&]() {
+    m_currentJobStatus = job->status();
 
-  ui->abortButton->setEnabled(Jobs::Job::Running == m_currentJobStatus);
-  m_saveOutputAction->setEnabled(true);
-  ui->status->setText(Jobs::Job::displayableStatus(m_currentJobStatus));
-  MainWindow::watchJobTool()->enableMenuActions();
+    ui->abortButton->setEnabled(Jobs::Job::Running == m_currentJobStatus);
+    m_saveOutputAction->setEnabled(true);
+    ui->status->setText(Jobs::Job::displayableStatus(m_currentJobStatus));
+    MainWindow::watchJobTool()->enableMenuActions();
 
-  // Check for the signalled status, not the current one, in order to
-  // detect a change from »not running« to »running« only once, no
-  // matter which order the signals arrive in.
-  if (Jobs::Job::Running == status)
-    setInitialDisplay(*job);
+    // Check for the signalled status, not the current one, in order to
+    // detect a change from »not running« to »running« only once, no
+    // matter which order the signals arrive in.
+    if (Jobs::Job::Running == status)
+      setInitialDisplay(*job);
 
-  else if (mtx::included_in(m_currentJobStatus, Jobs::Job::DoneOk, Jobs::Job::DoneWarnings, Jobs::Job::Failed, Jobs::Job::Aborted))
-    ui->finishedAt->setText(Util::displayableDate(job->m_dateFinished));
+    else if (mtx::included_in(m_currentJobStatus, Jobs::Job::DoneOk, Jobs::Job::DoneWarnings, Jobs::Job::Failed, Jobs::Job::Aborted))
+      ui->finishedAt->setText(Util::displayableDate(job->dateFinished()));
+  });
 
   updateRemainingTime();
 }
@@ -217,36 +217,39 @@ Tab::onLineRead(QString const &line,
 
 void
 Tab::setInitialDisplay(Jobs::Job const &job) {
+  auto dateStarted = Util::displayableDate(job.dateStarted());
+  auto description = job.description();
+
   if (isCurrentJobTab() && Util::Settings::get().m_showOutputOfAllJobs) {
-    auto outputOfJobLine = QY("--- Output of job '%1' started on %2 ---").arg(job.m_description).arg(Util::displayableDate(job.m_dateStarted));
-    m_fullOutput << outputOfJobLine << job.m_fullOutput;
+    auto outputOfJobLine = QY("--- Output of job '%1' started on %2 ---").arg(description).arg(dateStarted);
+    m_fullOutput << outputOfJobLine << job.fullOutput();
 
     ui->output  ->appendPlainText(outputOfJobLine);
-    ui->warnings->appendPlainText(QY("--- Warnings emitted by job '%1' started on %2 ---").arg(job.m_description).arg(Util::displayableDate(job.m_dateStarted)));
-    ui->errors  ->appendPlainText(QY("--- Errors emitted by job '%1' started on %2 ---").arg(job.m_description).arg(Util::displayableDate(job.m_dateStarted)));
+    ui->warnings->appendPlainText(QY("--- Warnings emitted by job '%1' started on %2 ---").arg(description).arg(dateStarted));
+    ui->errors  ->appendPlainText(QY("--- Errors emitted by job '%1' started on %2 ---").arg(description).arg(dateStarted));
 
   } else {
-    m_fullOutput = job.m_fullOutput;
+    m_fullOutput = job.fullOutput();
 
-    ui->output  ->setPlainText(!job.m_output.isEmpty()   ? Q("%1\n").arg(job.m_output.join("\n"))   : Q(""));
-    ui->warnings->setPlainText(!job.m_warnings.isEmpty() ? Q("%1\n").arg(job.m_warnings.join("\n")) : Q(""));
-    ui->errors  ->setPlainText(!job.m_errors.isEmpty()   ? Q("%1\n").arg(job.m_errors.join("\n"))   : Q(""));
+    ui->output  ->setPlainText(!job.output().isEmpty()   ? Q("%1\n").arg(job.output().join("\n"))   : Q(""));
+    ui->warnings->setPlainText(!job.warnings().isEmpty() ? Q("%1\n").arg(job.warnings().join("\n")) : Q(""));
+    ui->errors  ->setPlainText(!job.errors().isEmpty()   ? Q("%1\n").arg(job.errors().join("\n"))   : Q(""));
   }
 
-  m_currentJobStatus    = job.m_status;
-  m_currentJobProgress  = job.m_progress;
-  m_currentJobStartTime = job.m_dateStarted;
+  m_currentJobStatus    = job.status();
+  m_currentJobProgress  = job.progress();
+  m_currentJobStartTime = job.dateStarted();
   m_queueProgress       = MainWindow::watchCurrentJobTab()->m_queueProgress;
 
-  ui->description->setText(job.m_description);
-  ui->status->setText(Jobs::Job::displayableStatus(job.m_status));
-  ui->progressBar->setValue(job.m_progress);
+  ui->description->setText(description);
+  ui->status->setText(Jobs::Job::displayableStatus(job.status()));
+  ui->progressBar->setValue(job.progress());
 
-  ui->startedAt ->setText(job.m_dateStarted .isValid() ? Util::displayableDate(job.m_dateStarted)  : QY("not started yet"));
-  ui->finishedAt->setText(job.m_dateFinished.isValid() ? Util::displayableDate(job.m_dateFinished) : QY("not finished yet"));
+  ui->startedAt ->setText(job.dateStarted() .isValid() ? Util::displayableDate(job.dateStarted())  : QY("not started yet"));
+  ui->finishedAt->setText(job.dateFinished().isValid() ? Util::displayableDate(job.dateFinished()) : QY("not finished yet"));
 
-  ui->abortButton->setEnabled(Jobs::Job::Running == job.m_status);
-  m_saveOutputAction->setEnabled(!mtx::included_in(job.m_status, Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
+  ui->abortButton->setEnabled(Jobs::Job::Running == job.status());
+  m_saveOutputAction->setEnabled(!mtx::included_in(job.status(), Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
 
   ui->acknowledgeWarningsAndErrorsButton->setEnabled(job.numUnacknowledgedWarnings() || job.numUnacknowledgedErrors());
 

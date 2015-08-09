@@ -116,7 +116,7 @@ Tool::onJobQueueMenu() {
   auto hasPendingManual = false;
 
   m_model->withAllJobs([&hasPendingManual](Job &job) {
-    if (Job::PendingManual == job.m_status)
+    if (Job::PendingManual == job.status())
       hasPendingManual = true;
   });
 
@@ -170,7 +170,7 @@ Tool::onStartAllPending() {
   auto startedSomething = false;
 
   m_model->withAllJobs([&startedSomething](Job &job) {
-    if (Job::PendingManual == job.m_status) {
+    if (Job::PendingManual == job.status()) {
       job.setPendingAuto();
       startedSomething = true;
     }
@@ -187,12 +187,12 @@ Tool::onRemove() {
   auto idsToRemove        = QMap<uint64_t, bool>{};
   auto emitRunningWarning = false;
 
-  m_model->withSelectedJobs(ui->jobs, [&idsToRemove](Job &job) { idsToRemove[job.m_id] = true; });
+  m_model->withSelectedJobs(ui->jobs, [&idsToRemove](Job &job) { idsToRemove[job.id()] = true; });
 
   m_model->removeJobsIf([&idsToRemove, &emitRunningWarning](Job const &job) -> bool {
-    if (!idsToRemove[job.m_id])
+    if (!idsToRemove[job.id()])
       return false;
-    if (Job::Running != job.m_status)
+    if (Job::Running != job.status())
       return true;
 
     emitRunningWarning = true;
@@ -206,16 +206,16 @@ Tool::onRemove() {
 void
 Tool::onRemoveDone() {
   m_model->removeJobsIf([this](Job const &job) {
-      return (Job::DoneOk       == job.m_status)
-          || (Job::DoneWarnings == job.m_status)
-          || (Job::Failed       == job.m_status)
-          || (Job::Aborted      == job.m_status);
+      return (Job::DoneOk       == job.status())
+          || (Job::DoneWarnings == job.status())
+          || (Job::Failed       == job.status())
+          || (Job::Aborted      == job.status());
     });
 }
 
 void
 Tool::onRemoveDoneOk() {
-  m_model->removeJobsIf([this](Job const &job) { return Job::DoneOk == job.m_status; });
+  m_model->removeJobsIf([this](Job const &job) { return Job::DoneOk == job.status(); });
 }
 
 void
@@ -223,7 +223,7 @@ Tool::onRemoveAll() {
   auto emitRunningWarning = false;
 
   m_model->removeJobsIf([&emitRunningWarning](Job const &job) -> bool {
-    if (Job::Running != job.m_status)
+    if (Job::Running != job.status())
       return true;
 
     emitRunningWarning = true;
@@ -323,7 +323,7 @@ Tool::stopQueue(bool immediately) {
 
   m_model->withAllJobs([](Job &job) {
     job.action([&job]() {
-      if (job.m_status == Job::PendingAuto)
+      if (job.status() == Job::PendingAuto)
         job.setPendingManual();
     });
   });
@@ -333,7 +333,7 @@ Tool::stopQueue(bool immediately) {
 
   m_model->withAllJobs([this, askBeforeAborting, &askedBeforeAborting](Job &job) {
     job.action([this, &job, askBeforeAborting, &askedBeforeAborting]() {
-      if (job.m_status != Job::Running)
+      if (job.status() != Job::Running)
         return;
 
       if (   !askBeforeAborting

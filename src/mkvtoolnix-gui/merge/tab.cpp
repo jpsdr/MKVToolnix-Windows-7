@@ -285,11 +285,12 @@ Tab::addToJobQueue(bool startNow) {
   if (!isReadyForMerging())
     return;
 
-  auto &cfg          = Util::Settings::get();
-  auto newConfig     = std::make_shared<MuxConfig>(m_config);
-  auto job           = std::make_shared<Jobs::MuxJob>(startNow ? Jobs::Job::PendingAuto : Jobs::Job::PendingManual, newConfig);
-  job->m_dateAdded   = QDateTime::currentDateTime();
-  job->m_description = job->displayableDescription();
+  auto &cfg      = Util::Settings::get();
+  auto newConfig = std::make_shared<MuxConfig>(m_config);
+  auto job       = std::make_shared<Jobs::MuxJob>(startNow ? Jobs::Job::PendingAuto : Jobs::Job::PendingManual, newConfig);
+
+  job->setDateAdded(QDateTime::currentDateTime());
+  job->setDescription(job->displayableDescription());
 
   if (!startNow) {
     if (!cfg.m_useDefaultJobDescription) {
@@ -297,12 +298,12 @@ Tab::addToJobQueue(bool startNow) {
 
       while (newDescription.isEmpty()) {
         bool ok = false;
-        newDescription = QInputDialog::getText(this, QY("Enter job description"), QY("Please enter the new job's description."), QLineEdit::Normal, job->m_description, &ok);
+        newDescription = QInputDialog::getText(this, QY("Enter job description"), QY("Please enter the new job's description."), QLineEdit::Normal, job->description(), &ok);
         if (!ok)
           return;
       }
 
-      job->m_description = newDescription;
+      job->setDescription(newDescription);
     }
 
     MainWindow::get()->showIconMovingToTool(Q("task-delegate.png"), *MainWindow::jobTool());

@@ -80,7 +80,7 @@ Tool::toolShown() {
 
 void
 Tool::viewOutput(mtx::gui::Jobs::Job &job) {
-  auto idx = tabIndexForJobID(job.m_id);
+  auto idx = tabIndexForJobID(job.id());
   if (0 < idx) {
     ui->widgets->setCurrentIndex(idx);
     return;
@@ -90,7 +90,7 @@ Tool::viewOutput(mtx::gui::Jobs::Job &job) {
   tab->connectToJob(job);
   tab->setInitialDisplay(job);
 
-  ui->widgets->addTab(tab, job.m_description);
+  ui->widgets->addTab(tab, job.description());
   ui->widgets->setCurrentIndex(ui->widgets->count() - 1);
 }
 

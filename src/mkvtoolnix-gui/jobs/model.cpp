@@ -101,7 +101,7 @@ Model::hasRunningJobs() {
   QMutexLocker locked{&m_mutex};
 
   for (auto const &job : m_jobsById)
-    if (Job::Running == job->m_status)
+    if (Job::Running == job->status())
       return true;
 
   return false;
@@ -117,13 +117,13 @@ void
 Model::setRowText(QList<QStandardItem *> const &items,
                   Job const &job)
   const {
-  items.at(StatusColumn)      ->setText(Job::displayableStatus(job.m_status));
-  items.at(DescriptionColumn) ->setText(job.m_description);
+  items.at(StatusColumn)      ->setText(Job::displayableStatus(job.status()));
+  items.at(DescriptionColumn) ->setText(job.description());
   items.at(TypeColumn)        ->setText(job.displayableType());
-  items.at(ProgressColumn)    ->setText(to_qs(boost::format("%1%%%") % job.m_progress));
-  items.at(DateAddedColumn)   ->setText(Util::displayableDate(job.m_dateAdded));
-  items.at(DateStartedColumn) ->setText(Util::displayableDate(job.m_dateStarted));
-  items.at(DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
+  items.at(ProgressColumn)    ->setText(to_qs(boost::format("%1%%%") % job.progress()));
+  items.at(DateAddedColumn)   ->setText(Util::displayableDate(job.dateAdded()));
+  items.at(DateStartedColumn) ->setText(Util::displayableDate(job.dateStarted()));
+  items.at(DateFinishedColumn)->setText(Util::displayableDate(job.dateFinished()));
 
   items[DescriptionColumn ]->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
   items[ProgressColumn    ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -155,7 +155,7 @@ Model::createRow(Job const &job)
     items << new QStandardItem{};
   setRowText(items, job);
 
-  items[0]->setData(QVariant::fromValue(job.m_id), Util::JobIdRole);
+  items[0]->setData(QVariant::fromValue(job.id()), Util::JobIdRole);
 
   return items;
 }
@@ -198,7 +198,7 @@ Model::removeJobsIf(std::function<bool(Job const &)> predicate) {
 
     if (predicate(*job)) {
       job->removeQueueFile();
-      m_jobsById.remove(job->m_id);
+      m_jobsById.remove(job->id());
       toBeRemoved[job] = true;
       removeRow(row - 1);
     }
@@ -217,7 +217,7 @@ void
 Model::add(JobPtr const &job) {
   QMutexLocker locked{&m_mutex};
 
-  m_jobsById[job->m_id] = job;
+  m_jobsById[job->id()] = job;
 
   updateJobStats();
   updateNumUnacknowledgedWarningsOrErrors();
@@ -248,7 +248,7 @@ Model::onStatusChanged(uint64_t id) {
     return;
 
   auto &job       = *m_jobsById[id];
-  auto status     = job.m_status;
+  auto status     = job.status();
   auto numBefore  = m_toBeProcessed.count();
 
   if (job.isToBeProcessed())
@@ -258,11 +258,11 @@ Model::onStatusChanged(uint64_t id) {
     updateProgress();
 
   if (included_in(status, Job::PendingManual, Job::PendingAuto, Job::Running))
-    job.m_dateFinished = QDateTime{};
+    job.setDateFinished(QDateTime{});
 
-  item(row, StatusColumn)->setText(Job::displayableStatus(job.m_status));
-  item(row, DateStartedColumn)->setText(Util::displayableDate(job.m_dateStarted));
-  item(row, DateFinishedColumn)->setText(Util::displayableDate(job.m_dateFinished));
+  item(row, StatusColumn)->setText(Job::displayableStatus(job.status()));
+  item(row, DateStartedColumn)->setText(Util::displayableDate(job.dateStarted()));
+  item(row, DateFinishedColumn)->setText(Util::displayableDate(job.dateFinished()));
 
   if ((Job::Running == status) && !m_running) {
     m_running        = true;
@@ -280,7 +280,7 @@ void
 Model::removeScheduledJobs() {
   QMutexLocker locked{&m_mutex};
 
-  removeJobsIf([this](Job const &job) { return m_toBeRemoved[job.m_id]; });
+  removeJobsIf([this](Job const &job) { return m_toBeRemoved[job.id()]; });
   m_toBeRemoved.clear();
 }
 
@@ -363,9 +363,9 @@ Model::startNextAutoJob() {
   for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
     auto job = m_jobsById[idFromRow(row)].get();
 
-    if (Job::Running == job->m_status)
+    if (Job::Running == job->status())
       return;
-    if (!toStart && (Job::PendingAuto == job->m_status))
+    if (!toStart && (Job::PendingAuto == job->status()))
       toStart = job;
   }
 
@@ -416,9 +416,9 @@ Model::updateProgress() {
   auto runningProgress  = 0;
 
   for (auto const &job : m_toBeProcessed)
-    if (Job::Running == job->m_status) {
+    if (Job::Running == job->status()) {
       ++numRunning;
-      runningProgress += job->m_progress;
+      runningProgress += job->progress();
 
     } else if (!job->isToBeProcessed() && m_toBeProcessed.contains(job))
       ++numDone;
@@ -438,10 +438,10 @@ Model::updateJobStats() {
   auto numOther         = 0;
 
   for (auto const &job : m_jobsById)
-    if (mtx::included_in(job->m_status, Job::PendingAuto, Job::Running))
+    if (mtx::included_in(job->status(), Job::PendingAuto, Job::Running))
       ++numPendingAuto;
 
-    else if (Job::PendingManual == job->m_status)
+    else if (Job::PendingManual == job->status())
       ++numPendingManual;
 
     else
@@ -472,7 +472,7 @@ Model::convertJobQueueToSeparateIniFiles() {
         continue;
 
       job->saveQueueFile();
-      order << job->m_uuid.toString();
+      order << job->uuid().toString();
 
     } catch (Merge::InvalidSettingsX &) {
     }
@@ -499,7 +499,7 @@ Model::saveJobs() {
     auto &job = m_jobsById[idFromRow(row)];
 
     job->saveQueueFile();
-    order << job->m_uuid.toString();
+    order << job->uuid().toString();
   }
 
   auto reg = Util::Settings::registry();
@@ -537,7 +537,7 @@ Model::loadJobs() {
 
       loadedJobs << job;
 
-      auto uuid = job->m_uuid.toString();
+      auto uuid = job->uuid().toString();
       if (!orderByUuid.contains(uuid))
         orderByUuid[uuid] = orderIdx++;
 
@@ -545,7 +545,7 @@ Model::loadJobs() {
     }
   }
 
-  mtx::sort::by(loadedJobs.begin(), loadedJobs.end(), [&orderByUuid](JobPtr const &job) { return orderByUuid[ job->m_uuid.toString() ]; });
+  mtx::sort::by(loadedJobs.begin(), loadedJobs.end(), [&orderByUuid](JobPtr const &job) { return orderByUuid[ job->uuid().toString() ]; });
 
   for (auto const &job : loadedJobs)
     add(job);

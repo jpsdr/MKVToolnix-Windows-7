@@ -312,8 +312,8 @@ MainWindow::beforeCloseCheckRunningJobs() {
 
   model->stop();
   model->withAllJobs([](Jobs::Job &job) {
-    if (Jobs::Job::Running == job.m_status) {
-      job.m_quitAfterFinished = true;
+    if (Jobs::Job::Running == job.status()) {
+      job.setQuitAfterFinished(true);
       job.abort();
     }
   });

@@ -23,12 +23,115 @@ Job::Job(Status status)
   , m_warningsAcknowledged{}
   , m_errorsAcknowledged{}
   , m_quitAfterFinished{}
+  , m_modified{true}
   , m_mutex{QMutex::Recursive}
 {
   connect(this, &Job::lineRead, this, &Job::addLineToInternalLogs);
 }
 
 Job::~Job() {
+}
+
+uint64_t
+Job::id()
+  const {
+  return m_id;
+}
+
+QUuid
+Job::uuid()
+  const {
+  return m_uuid;
+}
+
+Job::Status
+Job::status()
+  const {
+  return m_status;
+}
+
+QString
+Job::description()
+  const {
+  return m_description;
+}
+
+unsigned int
+Job::progress()
+  const {
+  return m_progress;
+}
+
+QStringList const &
+Job::output()
+  const {
+  return m_output;
+}
+
+QStringList const &
+Job::warnings()
+  const {
+  return m_warnings;
+}
+
+QStringList const &
+Job::errors()
+  const {
+  return m_errors;
+}
+
+QStringList const &
+Job::fullOutput()
+  const {
+  return m_fullOutput;
+}
+
+QDateTime
+Job::dateAdded()
+  const {
+  return m_dateAdded;
+}
+
+QDateTime
+Job::dateStarted()
+  const {
+  return m_dateStarted;
+}
+
+QDateTime
+Job::dateFinished()
+  const {
+  return m_dateFinished;
+}
+
+bool
+Job::isModified()
+  const {
+  return m_modified;
+}
+
+void
+Job::setDescription(QString const &pDescription) {
+  m_description = pDescription;
+  m_modified    = true;
+}
+
+void
+Job::setDateAdded(QDateTime const &pDateAdded) {
+  m_dateAdded = pDateAdded;
+  m_modified  = true;
+}
+
+void
+Job::setDateFinished(QDateTime const &pDateFinished) {
+  m_dateFinished = pDateFinished;
+  m_modified     = true;
+}
+
+void
+Job::setQuitAfterFinished(bool pQuitAfterFinished) {
+  m_quitAfterFinished = pQuitAfterFinished;
+  m_modified          = true;
 }
 
 void
@@ -45,7 +148,8 @@ Job::setStatus(Status status) {
   if (status == m_status)
     return;
 
-  m_status = status;
+  m_status   = status;
+  m_modified = true;
 
   if (Running == status) {
     m_dateStarted = QDateTime::currentDateTime();
@@ -76,6 +180,7 @@ Job::setProgress(unsigned int progress) {
     return;
 
   m_progress = progress;
+  m_modified = true;
   emit progressChanged(m_id, m_progress);
 }
 
@@ -108,6 +213,8 @@ Job::addLineToInternalLogs(QString const &line,
 
   m_fullOutput << Q("%1%2").arg(prefix).arg(line);
   storage      << line;
+
+  m_modified    = true;
 
   if ((WarningLine == type) || (ErrorLine == type))
     updateUnacknowledgedWarningsAndErrors();
@@ -169,9 +276,7 @@ Job::saveQueueFile() {
 }
 
 void
-Job::saveJob(Util::ConfigFile &settings)
-  const {
-
+Job::saveJob(Util::ConfigFile &settings) {
   settings.setValue("uuid",                 m_uuid);
   settings.setValue("status",               static_cast<unsigned int>(m_status));
   settings.setValue("description",          m_description);
@@ -188,10 +293,13 @@ Job::saveJob(Util::ConfigFile &settings)
   settings.setValue("dateFinished",         m_dateFinished);
 
   saveJobInternal(settings);
+
+  m_modified = false;
 }
 
 void
 Job::loadJobBasis(Util::ConfigFile &settings) {
+  m_modified             = true;
   m_uuid                 = settings.value("uuid").toUuid();
   m_status               = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
   m_description          = settings.value("description").toString();
@@ -238,12 +346,14 @@ Job::loadJob(Util::ConfigFile &settings) {
 void
 Job::acknowledgeWarnings() {
   m_warningsAcknowledged = m_warnings.count();
+  m_modified             = true;
   updateUnacknowledgedWarningsAndErrors();
 }
 
 void
 Job::acknowledgeErrors() {
   m_errorsAcknowledged = m_errors.count();
+  m_modified           = true;
   updateUnacknowledgedWarningsAndErrors();
 }
 

@@ -46,7 +46,7 @@ public:
 private:
   static uint64_t ms_next_id;
 
-public:
+protected:
   QUuid m_uuid;
   uint64_t m_id;
   Status m_status;
@@ -54,13 +54,35 @@ public:
   QStringList m_output, m_warnings, m_errors, m_fullOutput;
   unsigned int m_progress, m_exitCode, m_warningsAcknowledged, m_errorsAcknowledged;
   QDateTime m_dateAdded, m_dateStarted, m_dateFinished;
-  bool m_quitAfterFinished;
+  bool m_quitAfterFinished, m_modified;
 
   QMutex m_mutex;
 
 public:
   Job(Status status = PendingManual);
   virtual ~Job();
+
+  bool isModified() const;
+
+  uint64_t id() const;
+  QUuid uuid() const;
+  Status status() const;
+  QString description() const;
+  unsigned int progress() const;
+
+  QStringList const &output() const;
+  QStringList const &warnings() const;
+  QStringList const &errors() const;
+  QStringList const &fullOutput() const;
+
+  QDateTime dateAdded() const;
+  QDateTime dateStarted() const;
+  QDateTime dateFinished() const;
+
+  void setDescription(QString const &pDescription);
+  void setDateAdded(QDateTime const &pDateAdded);
+  void setDateFinished(QDateTime const &pDateFinished);
+  void setQuitAfterFinished(bool pQuitAfterFinished);
 
   void action(std::function<void()> code);
   bool isToBeProcessed() const;
@@ -77,7 +99,7 @@ public:
   QString queueFileName() const;
   void removeQueueFile() const;
   void saveQueueFile();
-  void saveJob(Util::ConfigFile &settings) const;
+  void saveJob(Util::ConfigFile &settings);
 
   void acknowledgeWarnings();
   void acknowledgeErrors();
