@@ -17,6 +17,17 @@ ConfigFile::ConfigFile(QString const &fileName)
 ConfigFile::~ConfigFile() {
 }
 
+QString const &
+ConfigFile::fileName()
+  const {
+  return m_fileName;
+}
+
+void
+ConfigFile::setFileName(QString const &name) {
+  m_fileName = name;
+}
+
 ConfigFilePtr
 ConfigFile::open(QString const &fileName) {
   auto configFile = openInternal(fileName);

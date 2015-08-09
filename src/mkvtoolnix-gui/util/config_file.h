@@ -19,6 +19,9 @@ public:
   ConfigFile(QString const &fileName);
   virtual ~ConfigFile();
 
+  QString const &fileName() const;
+  void setFileName(QString const &name);
+
   virtual void load() = 0;
   virtual void save() = 0;
 
