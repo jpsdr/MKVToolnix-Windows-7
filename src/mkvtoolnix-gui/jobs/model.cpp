@@ -526,7 +526,7 @@ Model::loadJobs() {
     orderByUuid[uuid] = orderIdx++;
 
   auto queueLocation = Job::queueLocation();
-  auto jobQueueFiles = QDir{queueLocation}.entryList(QStringList{} << Q("*.ini"), QDir::Files);
+  auto jobQueueFiles = QDir{queueLocation}.entryList(QStringList{} << Q("*.mtxcfg"), QDir::Files);
   auto loadedJobs    = QList<JobPtr>{};
 
   for (auto const &fileName : jobQueueFiles) {

@@ -149,7 +149,7 @@ Job::queueLocation() {
 QString
 Job::queueFileName()
   const {
-  return Q("%1/%2.ini").arg(queueLocation()).arg(m_uuid.toString());
+  return Q("%1/%2.mtxcfg").arg(queueLocation()).arg(m_uuid.toString());
 }
 
 void
