@@ -133,7 +133,7 @@ SourceFile::container()
 }
 
 void
-SourceFile::saveSettings(QSettings &settings)
+SourceFile::saveSettings(Util::ConfigFile &settings)
   const {
   MuxConfig::saveProperties(settings, m_properties);
 

@@ -5,9 +5,10 @@
 
 #include <QHash>
 #include <QList>
-#include <QSettings>
 #include <QString>
 #include <QStringList>
+
+#include "mkvtoolnix-gui/util/config_file.h"
 
 #define MTXCFG_VERSION 1
 
@@ -35,11 +36,11 @@ using TrackPtr      = std::shared_ptr<Track>;
 class MuxConfig {
 public:
   struct Loader {
-    QSettings &settings;
+    Util::ConfigFile &settings;
     QHash<qulonglong, SourceFile *> &objectIDToSourceFile;
     QHash<qulonglong, Track *> &objectIDToTrack;
 
-    Loader(QSettings &p_settings,
+    Loader(Util::ConfigFile &p_settings,
            QHash<qulonglong, SourceFile *> &p_objectIDToSourceFile,
            QHash<qulonglong, Track *> &p_objectIDToTrack)
       : settings(p_settings)
@@ -80,9 +81,9 @@ public:
   virtual ~MuxConfig();
   MuxConfig &operator =(MuxConfig const &other);
 
-  virtual void load(QSettings &settings);
+  virtual void load(Util::ConfigFile &settings);
   virtual void load(QString const &fileName = QString{""});
-  virtual void save(QSettings &settings) const;
+  virtual void save(Util::ConfigFile &settings) const;
   virtual void save(QString const &fileName = QString{""});
   virtual void reset();
 
@@ -101,8 +102,8 @@ protected:
 
 public:
   static MuxConfigPtr loadSettings(QString const &fileName);
-  static void saveProperties(QSettings &settings, QHash<QString, QString> const &properties);
-  static void loadProperties(QSettings &settings, QHash<QString, QString> &properties);
+  static void saveProperties(Util::ConfigFile &settings, QHash<QString, QString> const &properties);
+  static void loadProperties(Util::ConfigFile &settings, QHash<QString, QString> &properties);
   static void debugDumpSpecificTrackList(QList<Track *> const &tracks);
   static QString settingsType();
 };
@@ -130,7 +131,7 @@ template<typename T>
 void
 saveSettingsGroup(char const *group,
                   QList<std::shared_ptr<T> > const &container,
-                  QSettings &settings) {
+                  Util::ConfigFile &settings) {
   settings.beginGroup(group);
 
   int numberOfEntries = container.size();

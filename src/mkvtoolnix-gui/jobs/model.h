@@ -70,9 +70,8 @@ public:
 
   void startNextAutoJob();
 
-  void saveJobs() const;
-  void saveJobs(QSettings &settings) const;
-  void loadJobs(QSettings &settings);
+  void saveJobs();
+  void loadJobs();
 
   virtual Qt::DropActions supportedDropActions() const;
   virtual Qt::ItemFlags flags(QModelIndex const &index) const;
@@ -112,6 +111,9 @@ protected:
   void scheduleJobForRemoval(uint64_t id);
 
   QList<Job *> selectedJobs(QAbstractItemView *view);
+
+public:
+  static void convertJobQueueToSeparateIniFiles();
 };
 
 }}}

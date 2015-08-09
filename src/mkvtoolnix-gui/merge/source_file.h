@@ -11,7 +11,6 @@
 #include <QFileInfo>
 #include <QHash>
 #include <QList>
-#include <QSettings>
 #include <QString>
 
 namespace mtx { namespace gui { namespace Merge {
@@ -48,7 +47,7 @@ public:
   virtual bool isPlaylist() const;
   virtual bool hasRegularTrack() const;
 
-  virtual void saveSettings(QSettings &settings) const;
+  virtual void saveSettings(Util::ConfigFile &settings) const;
   virtual void loadSettings(MuxConfig::Loader &l);
   virtual void fixAssociations(MuxConfig::Loader &l);
 

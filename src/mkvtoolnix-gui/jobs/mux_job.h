@@ -19,6 +19,10 @@ using MuxConfigPtr = std::shared_ptr<MuxConfig>;
 
 }
 
+namespace Util {
+class ConfigFile;
+}
+
 namespace Jobs {
 
 class MuxJob: public Job {
@@ -49,14 +53,14 @@ public slots:
 protected:
   void processBytesRead();
   void processLine(QString const &rawLine);
-  virtual void saveJobInternal(QSettings &settings) const;
+  virtual void saveJobInternal(Util::ConfigFile &settings) const;
 
 signals:
   void startedScanningPlaylists();
   void finishedScanningPlaylists();
 
 public:
-  static JobPtr loadMuxJob(QSettings &settings);
+  static JobPtr loadMuxJob(Util::ConfigFile &settings);
 };
 
 }}}

@@ -7,6 +7,7 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/track.h"
+#include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 #include <QVariant>
@@ -144,7 +145,7 @@ Track::extractAudioDelayFromFileName()
 }
 
 void
-Track::saveSettings(QSettings &settings)
+Track::saveSettings(Util::ConfigFile &settings)
   const {
   MuxConfig::saveProperties(settings, m_properties);
 

@@ -30,13 +30,22 @@ Settings::get() {
   return s_settings;
 }
 
-#if defined(SYS_WINDOWS)
 QString
 Settings::iniFileLocation() {
-  auto path = App::isInstalled() ? QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) : App::applicationDirPath();
-  return Q("%1/mkvtoolnix-gui.ini").arg(path);
+#if defined(SYS_WINDOWS)
+  if (!App::isInstalled())
+    return App::applicationDirPath();
+#endif
+
+  return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 }
 
+QString
+Settings::iniFileName() {
+  return Q("%1/mkvtoolnix-gui.ini").arg(iniFileLocation());
+}
+
+#if defined(SYS_WINDOWS)
 void
 Settings::migrateFromRegistry() {
   // Migration of settings from the Windows registry into an .ini file
@@ -47,7 +56,7 @@ Settings::migrateFromRegistry() {
     return;
 
   // Don't do anything if such a file exists already.
-  auto targetFileName = iniFileLocation();
+  auto targetFileName = iniFileName();
   if (QFileInfo{targetFileName}.exists())
     return;
 
@@ -68,11 +77,7 @@ Settings::migrateFromRegistry() {
 
 std::unique_ptr<QSettings>
 Settings::registry() {
-#if defined(SYS_WINDOWS)
-  return std::make_unique<QSettings>(iniFileLocation(), QSettings::IniFormat);
-#else
-  return std::make_unique<QSettings>();
-#endif
+  return std::make_unique<QSettings>(iniFileName(), QSettings::IniFormat);
 }
 
 void

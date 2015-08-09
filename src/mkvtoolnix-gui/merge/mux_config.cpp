@@ -147,7 +147,7 @@ MuxConfig::operator =(MuxConfig const &other) {
 }
 
 void
-MuxConfig::loadProperties(QSettings &settings,
+MuxConfig::loadProperties(Util::ConfigFile &settings,
                           QHash<QString, QString> &properties) {
   properties.clear();
 
@@ -162,14 +162,14 @@ MuxConfig::load(QString const &fileName) {
   if (fileName.isEmpty())
     throw InvalidSettingsX{};
 
-  QSettings settings{fileName, QSettings::IniFormat};
-  load(settings);
+  auto settings = Util::ConfigFile::open(fileName);
+  load(*settings);
 
   m_configFileName = fileName;
 }
 
 void
-MuxConfig::load(QSettings &settings) {
+MuxConfig::load(Util::ConfigFile &settings) {
   reset();
 
   // Check supported config file version
@@ -240,7 +240,7 @@ MuxConfig::load(QSettings &settings) {
 }
 
 void
-MuxConfig::saveProperties(QSettings &settings,
+MuxConfig::saveProperties(Util::ConfigFile &settings,
                           QHash<QString, QString> const &properties) {
   QStringList keys{ properties.keys() };
   keys.sort();
@@ -251,7 +251,7 @@ MuxConfig::saveProperties(QSettings &settings,
 }
 
 void
-MuxConfig::save(QSettings &settings)
+MuxConfig::save(Util::ConfigFile &settings)
   const {
   settings.beginGroup(App::settingsBaseGroupName());
   settings.setValue("version", MTXCFG_VERSION);
@@ -296,8 +296,8 @@ MuxConfig::save(QString const &fileName) {
     return;
 
   QFile::remove(m_configFileName);
-  QSettings settings{m_configFileName, QSettings::IniFormat};
-  save(settings);
+  auto settings = Util::ConfigFile::create(m_configFileName);
+  save(*settings);
 }
 
 QString
@@ -315,9 +315,9 @@ MuxConfig::toString()
     tempFileName = tempFile.fileName();
   }
 
-  QSettings settings{tempFileName, QSettings::IniFormat};
-  save(settings);
-  settings.sync();
+  auto settings = Util::ConfigFile::create(tempFileName);
+  save(*settings);
+  settings->save();
 
   QFile file{tempFileName};
   if (file.open(QIODevice::ReadOnly))

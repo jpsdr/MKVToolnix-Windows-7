@@ -1,12 +1,15 @@
 #include "common/common_pch.h"
 
 #include <QDesktopServices>
+#include <QFileInfo>
 #include <QSettings>
 #include <QUrl>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/util/config_file.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui { namespace Jobs {
 
@@ -138,10 +141,37 @@ Job::openOutputFolder()
     QDesktopServices::openUrl(QUrl{Q("file:///%1").arg(folder)});
 }
 
+QString
+Job::queueLocation() {
+  return Q("%1/%2").arg(Util::Settings::iniFileLocation()).arg("jobQueue");
+}
+
+QString
+Job::queueFileName()
+  const {
+  return Q("%1/%2.ini").arg(queueLocation()).arg(m_uuid.toString());
+}
+
 void
-Job::saveJob(QSettings &settings)
+Job::removeQueueFile()
+  const {
+  QFile{queueFileName()}.remove();
+}
+
+void
+Job::saveQueueFile() {
+  if (m_uuid.isNull())
+    m_uuid = QUuid::createUuid();
+
+  auto settings = Util::ConfigFile::create(queueFileName());
+  saveJob(*settings);
+}
+
+void
+Job::saveJob(Util::ConfigFile &settings)
   const {
 
+  settings.setValue("uuid",                 m_uuid);
   settings.setValue("status",               static_cast<unsigned int>(m_status));
   settings.setValue("description",          m_description);
   settings.setValue("output",               m_output);
@@ -160,7 +190,8 @@ Job::saveJob(QSettings &settings)
 }
 
 void
-Job::loadJobBasis(QSettings &settings) {
+Job::loadJobBasis(Util::ConfigFile &settings) {
+  m_uuid                 = settings.value("uuid").toUuid();
   m_status               = static_cast<Status>(settings.value("status", static_cast<unsigned int>(PendingManual)).toUInt());
   m_description          = settings.value("description").toString();
   m_output               = settings.value("output").toStringList();
@@ -175,12 +206,24 @@ Job::loadJobBasis(QSettings &settings) {
   m_dateStarted          = settings.value("dateStarted").toDateTime();
   m_dateFinished         = settings.value("dateFinished").toDateTime();
 
+  if (m_uuid.isNull())
+    m_uuid = QUuid::createUuid();
+
   if (Running == m_status)
     m_status = Aborted;
 }
 
 JobPtr
-Job::loadJob(QSettings &settings) {
+Job::loadJob(QString const &fileName) {
+  if (!QFileInfo{fileName}.exists())
+    return {};
+
+  auto settings = Util::ConfigFile::open(fileName);
+  return loadJob(*settings);
+}
+
+JobPtr
+Job::loadJob(Util::ConfigFile &settings) {
   auto jobType = settings.value("jobType");
 
   if (jobType == "MuxJob")

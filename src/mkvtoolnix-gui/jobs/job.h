@@ -8,10 +8,15 @@
 #include <QMutex>
 #include <QString>
 #include <QStringList>
+#include <QUuid>
 
-class QSettings;
+namespace mtx { namespace gui {
 
-namespace mtx { namespace gui { namespace Jobs {
+namespace Util {
+class ConfigFile;
+}
+
+namespace Jobs {
 
 class Job;
 using JobPtr = std::shared_ptr<Job>;
@@ -42,6 +47,7 @@ private:
   static uint64_t ms_next_id;
 
 public:
+  QUuid m_uuid;
   uint64_t m_id;
   Status m_status;
   QString m_description;
@@ -68,7 +74,10 @@ public:
   void setPendingAuto();
   void setPendingManual();
 
-  void saveJob(QSettings &settings) const;
+  QString queueFileName() const;
+  void removeQueueFile() const;
+  void saveQueueFile();
+  void saveJob(Util::ConfigFile &settings) const;
 
   void acknowledgeWarnings();
   void acknowledgeErrors();
@@ -77,8 +86,8 @@ public:
   int numUnacknowledgedErrors() const;
 
 protected:
-  virtual void saveJobInternal(QSettings &settings) const = 0;
-  virtual void loadJobBasis(QSettings &settings);
+  virtual void saveJobInternal(Util::ConfigFile &settings) const = 0;
+  virtual void loadJobBasis(Util::ConfigFile &settings);
 
 public slots:
   virtual void setStatus(Job::Status status);
@@ -97,7 +106,10 @@ signals:
 
 public:                         // static
   static QString displayableStatus(Status status);
-  static JobPtr loadJob(QSettings &settings);
+  static JobPtr loadJob(Util::ConfigFile &settings);
+  static JobPtr loadJob(QString const &fileName);
+
+  static QString queueLocation();
 };
 
 }}}
