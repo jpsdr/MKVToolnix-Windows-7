@@ -46,8 +46,6 @@ Tab::~Tab() {
 
 void
 Tab::setupUi() {
-  ui->description->setText(QY("No job has been started yet."));
-
   m_saveOutputAction->setEnabled(false);
 
   retranslateUi();
@@ -68,6 +66,7 @@ void
 Tab::retranslateUi() {
   ui->retranslateUi(this);
 
+  ui->description->setText(m_currentJobDescription.isEmpty() ? QY("No job has been started yet.") : m_currentJobDescription);
   m_saveOutputAction->setText(QY("&Save output"));
   m_clearOutputAction->setText(QY("&Clear output"));
   m_openFolderAction->setText(QY("&Open folder"));
@@ -218,16 +217,16 @@ Tab::onLineRead(QString const &line,
 
 void
 Tab::setInitialDisplay(Jobs::Job const &job) {
-  auto dateStarted = Util::displayableDate(job.dateStarted());
-  auto description = job.description();
+  auto dateStarted        = Util::displayableDate(job.dateStarted());
+  m_currentJobDescription = job.description();
 
   if (isCurrentJobTab() && Util::Settings::get().m_showOutputOfAllJobs) {
-    auto outputOfJobLine = QY("--- Output of job '%1' started on %2 ---").arg(description).arg(dateStarted);
+    auto outputOfJobLine = QY("--- Output of job '%1' started on %2 ---").arg(m_currentJobDescription).arg(dateStarted);
     m_fullOutput << outputOfJobLine << job.fullOutput();
 
     ui->output  ->appendPlainText(outputOfJobLine);
-    ui->warnings->appendPlainText(QY("--- Warnings emitted by job '%1' started on %2 ---").arg(description).arg(dateStarted));
-    ui->errors  ->appendPlainText(QY("--- Errors emitted by job '%1' started on %2 ---").arg(description).arg(dateStarted));
+    ui->warnings->appendPlainText(QY("--- Warnings emitted by job '%1' started on %2 ---").arg(m_currentJobDescription).arg(dateStarted));
+    ui->errors  ->appendPlainText(QY("--- Errors emitted by job '%1' started on %2 ---").arg(m_currentJobDescription).arg(dateStarted));
 
   } else {
     m_fullOutput = job.fullOutput();
@@ -242,7 +241,7 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   m_currentJobStartTime = job.dateStarted();
   m_queueProgress       = MainWindow::watchCurrentJobTab()->m_queueProgress;
 
-  ui->description->setText(description);
+  ui->description->setText(m_currentJobDescription);
   ui->status->setText(Jobs::Job::displayableStatus(job.status()));
   ui->progressBar->setValue(job.progress());
 
@@ -307,6 +306,8 @@ Tab::clearOutput() {
 
   if (MainWindow::jobTool()->model()->isRunning())
     return;
+
+  m_currentJobDescription.clear();
 
   ui->progressBar->reset();
   ui->status->setText(QY("no job started yet"));

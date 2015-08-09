@@ -26,6 +26,7 @@ protected:
   uint64_t m_id, m_currentJobProgress, m_queueProgress;
   Jobs::Job::Status m_currentJobStatus;
   QDateTime m_currentJobStartTime;
+  QString m_currentJobDescription;
 
   // Only use this variable for determining whether or not to ignore
   // certain signals.
