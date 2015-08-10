@@ -124,6 +124,7 @@ def setup_globals
   ldflags                  = ""
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
   ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:PROFILING_LIBS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
+  ldflags                 += " -Wl,--dynamicbase,--nxcompat" if c?(:MINGW)
 
   windres                  = c?(:USE_WXWIDGETS) ? c(:WXWIDGETS_INCLUDES) : "-DNOWXWIDGETS"
   windres                 += " -DMINGW_PROCESSOR_ARCH_AMD64=1" if c(:MINGW_PROCESSOR_ARCH) == 'amd64'
