@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-08-09 19:58+0200\n"
-"PO-Revision-Date: 2015-07-21 17:45+0100\n"
+"PO-Revision-Date: 2015-08-10 19:45+0200\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #: src/extract/xtr_tta.cpp:105
 #, boost-format
@@ -831,7 +831,7 @@ msgstr " (cale)"
 
 #: src/info/mkvinfo.cpp:645
 msgid " (keep aspect ratio)"
-msgstr "(utrzymanie proporcji)"
+msgstr "(utrzymanie proporcji obrazu)"
 
 #: src/info/mkvinfo.cpp:620
 msgid " (pixels)"
@@ -1117,7 +1117,7 @@ msgstr "&Przerwij"
 
 #: src/mmg/mmg_dialog.cpp:316
 msgid "&About"
-msgstr "&Informacje"
+msgstr "&Informacje o programie"
 
 #: src/info/wxwidgets_ui.cpp:126
 msgid "&About\tF1"
@@ -1185,9 +1185,8 @@ msgid "&Check for updates"
 msgstr "&Sprawdź aktualizacje"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:71
-#, fuzzy
 msgid "&Clear output"
-msgstr "&Zapisz dziennik zdarzeń"
+msgstr "&Wyczyść postęp zadań"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:803
 msgid "&Clearing settings automatically:"
@@ -1466,9 +1465,8 @@ msgstr "&Otwórz plik Matroski lub plik rozdziału"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:269
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
-#, fuzzy
 msgid "&Open folder"
-msgstr "Otwórz folder"
+msgstr "&Otwórz folder"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:389
 #: src/mkvtoolnix-gui/forms/merge/tool.h:222
@@ -1927,11 +1925,11 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:2151
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
-msgstr "\"--aspect-ratio\" brakuje proporcji.\n"
+msgstr "\"--aspect-ratio\" brakuje proporcji obrazu.\n"
 
 #: src/merge/mkvmerge.cpp:2158
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
-msgstr "\"--aspect-ratio-factor\" brakuje współczynnika proporcji.\n"
+msgstr "\"--aspect-ratio-factor\" brakuje współczynnika proporcji obrazu.\n"
 
 #: src/merge/mkvmerge.cpp:1976
 msgid "'--attachment-description' lacks the description.\n"
@@ -3143,7 +3141,7 @@ msgstr "Pytaj przed nadpisaniem (plików, zadań)"
 
 #: src/merge/mkvmerge.cpp:602
 msgid "Aspect ratio"
-msgstr "Proporcje"
+msgstr "Proporcje obrazu"
 
 #: src/merge/mkvmerge.cpp:602
 msgid "Aspect ratio factor"
@@ -3156,7 +3154,7 @@ msgstr "Typ proporcji obrazu: %1%%2%"
 
 #: src/mmg/tabs/input_format.cpp:234
 msgid "Aspect ratio:"
-msgstr "Proporcje:"
+msgstr "Proporcje obrazu:"
 
 #: src/common/xml/ebml_chapters_converter.cpp:104
 msgid "At least one <ChapterAtom> element is needed."
@@ -4527,7 +4525,7 @@ msgstr "Domyślny czas trwania"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1415
 msgid "Default duration/FPS:"
-msgstr "Czas klatki/Liczba klatek ns:"
+msgstr "Liczba klatek na sekundę (FPS):"
 
 #: src/info/mkvinfo.cpp:889
 #, boost-format
@@ -4705,7 +4703,7 @@ msgstr "Pokaż użyteczne informacje"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1425 src/mmg/tabs/input_format.cpp:237
 msgid "Display width/height:"
-msgstr "Wyświetlana szer./wys.:"
+msgstr "Wyświetlana szerokość/wysokość:"
 
 #: src/info/mkvinfo.cpp:586
 #, boost-format
@@ -5283,7 +5281,7 @@ msgstr "FLV (Flash Video)"
 
 #: src/mmg/tabs/input_format.cpp:246
 msgid "FPS:"
-msgstr "Liczba klatek/s:"
+msgstr "Liczba klatek na sekundę (FPS):"
 
 #: src/extract/xtr_vobsub.cpp:76
 #, boost-format
@@ -6328,7 +6326,7 @@ msgstr "Zwiększ szczegółowość."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1434
 msgid "Indexing (cues):"
-msgstr "Indeks (cue):"
+msgstr "Indeksowanie (cues):"
 
 #: src/mmg/mmg_dialog.cpp:328
 msgid "Input"
@@ -7128,7 +7126,7 @@ msgstr "Dziennik zdarzeń menedżera:"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:294
 msgid "M&ore actions"
-msgstr ""
+msgstr "&Więcej opcji"
 
 #: src/info/mkvinfo.cpp:751
 msgid "MD5"
@@ -8790,7 +8788,7 @@ msgstr "Zamknij mkvinfo"
 
 #: src/common/file_types.cpp:72
 msgid "RIFF CDXA"
-msgstr ""
+msgstr "RIFF CDXA"
 
 #: src/info/mkvinfo.cpp:741
 msgid "RSA"
@@ -9587,8 +9585,8 @@ msgid ""
 "in which case both numbers must be integer (e.g. 16/9) or just a single "
 "floating point number 'f' (e.g. 2.35)."
 msgstr ""
-"Ustawia proporcje wyświetlania ścieżki. Wpisać możemy zarówno format typu "
-"\"a/b\" jako ułamek zwykły (np. 16/9)  lub ułamek dziesiętny (np. 2.35)"
+"Ustawia proporcje wyświetlania obrazu ścieżki. Wpisać możemy zarówno format "
+"typu \"a/b\" jako ułamek zwykły (np. 16/9)  lub ułamek dziesiętny (np. 2.35)"
 
 #: src/mmg/tabs/input_format.cpp:239
 msgid ""
@@ -9717,7 +9715,7 @@ msgstr "Pokaż okno debugowania mmg"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:777
 msgid "Show out&put of all jobs instead of current job only"
 msgstr ""
-"&Pokazuj postęp wszystkich zadań, zamiast tylko jednego (obecnego) zadania"
+"&Prezentuj postęp wszystkich zadań, zamiast tylko jednego (obecnego) zadania"
 
 #: src/mmg/mmg_dialog.cpp:316
 msgid "Show program information"
@@ -15365,4 +15363,3 @@ msgstr "– ustaw żadne –"
 
 #~ msgid "set to \"yes\""
 #~ msgstr "ustaw na \"tak\""
-
