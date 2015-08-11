@@ -8,10 +8,23 @@
 #include <QJsonValue>
 #include <QSettings>
 #include <QStack>
+#include <QtGlobal>
+
+#include "common/qt.h"
 
 #include "mkvtoolnix-gui/util/json_config_file.h"
 
 namespace mtx { namespace gui { namespace Util {
+
+static QJsonDocument::JsonFormat
+jsonFormat() {
+  static boost::optional<QJsonDocument::JsonFormat> s_jsonFormat;
+
+  if (!s_jsonFormat)
+    s_jsonFormat.reset( QString::fromUtf8(qgetenv("MTX_JSON_FORMAT")).toLower() == Q("indented") ? QJsonDocument::Indented : QJsonDocument::Compact );
+
+  return s_jsonFormat.get();
+}
 
 class GroupConverter {
 protected:
@@ -123,7 +136,7 @@ JsonConfigFile::save() {
   QFile out{m_fileName};
   if (out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
     auto doc = GroupConverter::toJson(m_rootGroup);
-    out.write(doc.toJson(QJsonDocument::Compact));
+    out.write(doc.toJson(jsonFormat()));
     out.close();
   }
 }
