@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-09 19:58+0200\n"
+"POT-Creation-Date: 2015-08-11 22:14+0200\n"
 "PO-Revision-Date: 2015-06-21 13:12+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -1248,6 +1248,10 @@ msgstr "&Jeitsi"
 msgid "&Duration of each entry in seconds:"
 msgstr "Irakur-zerrendentzako gutxienezko iraupena segunduetan:"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:276
+msgid "&Edit in corresponding tool and remove from queue"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/input.cpp:967
 msgid "&Enable all tracks"
 msgstr "&Gaitu bide guztiak"
@@ -1449,7 +1453,7 @@ msgstr "&Ireki Matroska agiria"
 msgid "&Open Matroska or chapter file"
 msgstr "Ireki Matroska edo XML agiria"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:269
+#: src/mkvtoolnix-gui/jobs/tool.cpp:275
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
 #, fuzzy
 msgid "&Open folder"
@@ -1506,7 +1510,7 @@ msgstr "&Kendu agiriak"
 msgid "&Remove job from queue after completion"
 msgstr "&Kendu lana lan lerrotik osatu ondoren"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:268
+#: src/mkvtoolnix-gui/jobs/tool.cpp:274
 msgid "&Remove jobs"
 msgstr "Kendu &lan denak"
 
@@ -1578,7 +1582,7 @@ msgstr "&Hasi eta amaitu:"
 msgid "&Start all pending jobs"
 msgstr "&Hasi egiteke dauden lan guztiak"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:266
+#: src/mkvtoolnix-gui/jobs/tool.cpp:272
 msgid "&Start jobs automatically"
 msgstr "&Hasi hautaturiko lanak berezgaitasunez"
 
@@ -1633,7 +1637,7 @@ msgstr "Bideoa"
 msgid "&View log"
 msgstr "I&kusi oharra"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:265
+#: src/mkvtoolnix-gui/jobs/tool.cpp:271
 msgid "&View output"
 msgstr "&Ikusi irteera"
 
@@ -2559,7 +2563,7 @@ msgstr ""
 msgid "Abort processing after the current job"
 msgstr "Utzi garapena oraingo lanaren ondoren"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:341
+#: src/mkvtoolnix-gui/jobs/tool.cpp:375
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:310
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
 msgid "Abort running jobs"
@@ -2593,15 +2597,15 @@ msgstr "Ezagutu a&kats guztiak"
 msgid "Acknowledge all &warnings"
 msgstr "Ezagutu &kontuz ohar guztiak"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:272
+#: src/mkvtoolnix-gui/jobs/tool.cpp:279
 msgid "Acknowledge errors"
 msgstr "Ezagutu akatsak"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:271
+#: src/mkvtoolnix-gui/jobs/tool.cpp:278
 msgid "Acknowledge warnings"
 msgstr "Ezagutu kontuz oharrak"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:273
+#: src/mkvtoolnix-gui/jobs/tool.cpp:280
 #, fuzzy
 msgid "Acknowledge warnings and errors"
 msgstr "&Ezagutu kontuz oharrak/akatsak"
@@ -2810,8 +2814,8 @@ msgstr "Atal sarrera guztiek balio dute."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:168
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:138
 #: src/mkvtoolnix-gui/merge/attachments.cpp:132
-#: src/mkvtoolnix-gui/merge/tab.cpp:144 src/mkvtoolnix-gui/merge/tab.cpp:158
-#: src/mkvtoolnix-gui/merge/tab.cpp:191 src/mkvtoolnix-gui/merge/tab.cpp:215
+#: src/mkvtoolnix-gui/merge/tab.cpp:156 src/mkvtoolnix-gui/merge/tab.cpp:170
+#: src/mkvtoolnix-gui/merge/tab.cpp:203 src/mkvtoolnix-gui/merge/tab.cpp:227
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
@@ -3427,7 +3431,7 @@ msgstr ""
 "Ezin dira mota ezberdineko bideak agiri berean atera. Hau eskatu da %1% eta "
 "%2% bideentzako.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:269 src/mkvtoolnix-gui/merge/tab.cpp:274
+#: src/mkvtoolnix-gui/merge/tab.cpp:281 src/mkvtoolnix-gui/merge/tab.cpp:286
 msgid "Cannot start merging"
 msgstr "Ezin da batzea hasi"
 
@@ -4710,7 +4714,7 @@ msgstr "Ez banandu"
 msgid "Do not write meta seek elements at all."
 msgstr "Ez idatzi meta bilaketa gairik inon."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:341
+#: src/mkvtoolnix-gui/jobs/tool.cpp:375
 #, fuzzy
 msgid "Do you really want to abort the currently running job?"
 msgstr "Egitan nahi duzu lan hau uztea?"
@@ -4996,7 +5000,7 @@ msgstr "Hizkuntza izena ingeleraz"
 msgid "Ensure the file name is uni&que"
 msgstr "Zi&hurtatu agiri izena bakarra dela"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:301
+#: src/mkvtoolnix-gui/merge/tab.cpp:313
 msgid "Enter job description"
 msgstr "Sartu lanaren azalpena"
 
@@ -5360,7 +5364,7 @@ msgstr "Agiri azalpena: %1%"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:143
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:188
-#: src/mkvtoolnix-gui/merge/tool.cpp:164
+#: src/mkvtoolnix-gui/merge/tool.cpp:170
 msgid "File has been modified"
 msgstr "Agiria aldatu egin da"
 
@@ -7176,7 +7180,7 @@ msgstr "MKVToolNix GNU GPL v2 baimenpean dago"
 msgid "MKVToolNix option files"
 msgstr "MKVToolNix aukera agiriak"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:158 src/mkvtoolnix-gui/merge/tool.cpp:136
+#: src/mkvtoolnix-gui/merge/tab.cpp:170 src/mkvtoolnix-gui/merge/tool.cpp:136
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix EIG itxurapen agiriak"
 
@@ -8401,7 +8405,7 @@ msgstr "Mesedez ez hautatu 'mmg' bera 'mkvmerge' exekutagarri bezala."
 msgid "Please enter a description for the new job:"
 msgstr "Mesedez sartu lan berriarentzako azalpen bat:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:301
+#: src/mkvtoolnix-gui/merge/tab.cpp:313
 msgid "Please enter the new job's description."
 msgstr "Mesedez sartu lan berriaren azalpena."
 
@@ -8977,7 +8981,7 @@ msgstr "Berraldiberetzea ongi egin da kokapen honetan: %1%.\n"
 msgid "Right-click for actions for all tracks"
 msgstr "Eskuin-klikatu bide guztientzako ekintzetarako"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:280
+#: src/mkvtoolnix-gui/jobs/tool.cpp:287
 msgid "Right-click for actions for jobs"
 msgstr "Eskuin-klikatu lanetako ekintzetarako"
 
@@ -8997,7 +9001,7 @@ msgstr "Abiarazi mkvmerge eta hasi multiplexaketa garapena"
 msgid "Run the header field editor"
 msgstr "Abiarazi idazburu eremu editatzailea"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:203 src/mkvtoolnix-gui/jobs/tool.cpp:234
+#: src/mkvtoolnix-gui/jobs/tool.cpp:209 src/mkvtoolnix-gui/jobs/tool.cpp:240
 msgid "Running jobs cannot be removed."
 msgstr "Ekinean dauden lanak ezin dira kendu."
 
@@ -9109,11 +9113,11 @@ msgstr "Gorde oharra"
 msgid "Save muxing settings to a file"
 msgstr "Gorde multiplexaketa ezarpenak agiri batean"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:144
+#: src/mkvtoolnix-gui/merge/tab.cpp:156
 msgid "Save option file"
 msgstr "Gorde aukera agiria"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:158
+#: src/mkvtoolnix-gui/merge/tab.cpp:170
 msgid "Save settings file as"
 msgstr "Gorde ezarpenak agiria honela"
 
@@ -9979,7 +9983,7 @@ msgstr "Hasi"
 msgid "Start &muxing"
 msgstr "&Hasi multiplexaketa"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:267
+#: src/mkvtoolnix-gui/jobs/tool.cpp:273
 #, fuzzy
 msgid "Start jobs &manually"
 msgstr "&Hasi hautaturiko lanak berezgaitasunez"
@@ -10625,7 +10629,7 @@ msgstr ""
 msgid "The configuration has been loaded."
 msgstr "Itxurapena gertatu da."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:138 src/mkvtoolnix-gui/merge/tab.cpp:171
+#: src/mkvtoolnix-gui/merge/tab.cpp:150 src/mkvtoolnix-gui/merge/tab.cpp:183
 msgid "The configuration has been saved."
 msgstr "Itxurapena gorde da."
 
@@ -11141,7 +11145,7 @@ msgstr "Gehitu duzun agiria irakur-zerrenda bat da."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:229
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:188
-#: src/mkvtoolnix-gui/merge/tool.cpp:164
+#: src/mkvtoolnix-gui/merge/tool.cpp:170
 msgid ""
 "The file »%1« has been modified. Do you really want to close? All changes "
 "will be lost."
@@ -11618,7 +11622,7 @@ msgstr ""
 "mkvmergeren agiritza, bereziki MATROSKA AGIRI ANTOLAKUNTZA-ri buruzko "
 "atala.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:152
+#: src/mkvtoolnix-gui/merge/tab.cpp:164
 msgid "The option file has been created."
 msgstr "Aukera agiria sortu da."
 
@@ -13801,7 +13805,7 @@ msgstr ""
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "Ezin duzu zati gehigarririk gehitu biderik ez duten agirietan."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:269
+#: src/mkvtoolnix-gui/merge/tab.cpp:281
 msgid ""
 "You have to add at least one source file before you can start merging or add "
 "a job to the job queue."
@@ -13815,7 +13819,7 @@ msgid ""
 msgstr ""
 "1000 eta 10000000 arteko balio bat edo -1 balio magikoa sartu behar duzu."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:274
+#: src/mkvtoolnix-gui/merge/tab.cpp:286
 msgid ""
 "You have to set the output file name before you can start merging or add a "
 "job to the job queue."

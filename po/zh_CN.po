@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MkvToolnix zh_CN\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-09 19:58+0200\n"
+"POT-Creation-Date: 2015-08-11 22:14+0200\n"
 "PO-Revision-Date: 2015-07-19 15:59+0800\n"
 "Last-Translator: Qsion <frankwaiichou@126.com>\n"
 "Language-Team: Qsion <frankwaiichou@126.com>\n"
@@ -1163,6 +1163,10 @@ msgstr "下载(&D)"
 msgid "&Duration of each entry in seconds:"
 msgstr "播放清单的最短时间长度，单位为秒:"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:276
+msgid "&Edit in corresponding tool and remove from queue"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/input.cpp:967
 msgid "&Enable all tracks"
 msgstr "启用全部轨道(&E)"
@@ -1374,7 +1378,7 @@ msgstr "开启 Matroska 文件(&O)"
 msgid "&Open Matroska or chapter file"
 msgstr "开启 Matroska 文件(&O)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:269
+#: src/mkvtoolnix-gui/jobs/tool.cpp:275
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
 #, fuzzy
 msgid "&Open folder"
@@ -1433,7 +1437,7 @@ msgstr "移除文件(&R)"
 msgid "&Remove job from queue after completion"
 msgstr "完成后从任务序列中移除任务(&R)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:268
+#: src/mkvtoolnix-gui/jobs/tool.cpp:274
 #, fuzzy
 msgid "&Remove jobs"
 msgstr "移除所有任务(&L)"
@@ -1507,7 +1511,7 @@ msgstr "开始和结束(&S):"
 msgid "&Start all pending jobs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:266
+#: src/mkvtoolnix-gui/jobs/tool.cpp:272
 #, fuzzy
 msgid "&Start jobs automatically"
 msgstr "自动测定"
@@ -1564,7 +1568,7 @@ msgstr "视频"
 msgid "&View log"
 msgstr "检视日誌(&V)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:265
+#: src/mkvtoolnix-gui/jobs/tool.cpp:271
 #, fuzzy
 msgid "&View output"
 msgstr "储存输出(&S)"
@@ -2369,7 +2373,7 @@ msgstr ""
 msgid "Abort processing after the current job"
 msgstr "目前任务完成后中止处理"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:341
+#: src/mkvtoolnix-gui/jobs/tool.cpp:375
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:310
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
 #, fuzzy
@@ -2405,17 +2409,17 @@ msgstr ""
 msgid "Acknowledge all &warnings"
 msgstr "完成，有警告"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:272
+#: src/mkvtoolnix-gui/jobs/tool.cpp:279
 #, fuzzy
 msgid "Acknowledge errors"
 msgstr "无错误发生"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:271
+#: src/mkvtoolnix-gui/jobs/tool.cpp:278
 #, fuzzy
 msgid "Acknowledge warnings"
 msgstr "完成，有警告"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:273
+#: src/mkvtoolnix-gui/jobs/tool.cpp:280
 msgid "Acknowledge warnings and errors"
 msgstr ""
 
@@ -2614,10 +2618,10 @@ msgstr "所有章节项目皆正确。"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:168
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:138
 #: src/mkvtoolnix-gui/merge/attachments.cpp:132
-#: src/mkvtoolnix-gui/merge/tab.cpp:144
-#: src/mkvtoolnix-gui/merge/tab.cpp:158
-#: src/mkvtoolnix-gui/merge/tab.cpp:191
-#: src/mkvtoolnix-gui/merge/tab.cpp:215
+#: src/mkvtoolnix-gui/merge/tab.cpp:156
+#: src/mkvtoolnix-gui/merge/tab.cpp:170
+#: src/mkvtoolnix-gui/merge/tab.cpp:203
+#: src/mkvtoolnix-gui/merge/tab.cpp:227
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
@@ -3166,8 +3170,8 @@ msgstr "在来源容器不提供时间码或帧率值的情况下，无法将非
 msgid "Cannot extract tracks of different kinds to the same file. This was requested for the tracks %1% and %2%.\n"
 msgstr "无法将不同类型的轨道提取至同一文件。轨道 %1% 和 %2% 被要求这样提取。\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:269
-#: src/mkvtoolnix-gui/merge/tab.cpp:274
+#: src/mkvtoolnix-gui/merge/tab.cpp:281
+#: src/mkvtoolnix-gui/merge/tab.cpp:286
 msgid "Cannot start merging"
 msgstr "无法开始合并"
 
@@ -4358,7 +4362,7 @@ msgstr "不分割"
 msgid "Do not write meta seek elements at all."
 msgstr "不要写入任何变换定位元件。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:341
+#: src/mkvtoolnix-gui/jobs/tool.cpp:375
 msgid "Do you really want to abort the currently running job?"
 msgstr ""
 
@@ -4611,7 +4615,7 @@ msgstr "英文语言名称"
 msgid "Ensure the file name is uni&que"
 msgstr "确认文件名称没有重复"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:301
+#: src/mkvtoolnix-gui/merge/tab.cpp:313
 msgid "Enter job description"
 msgstr "输入任务描述"
 
@@ -4928,7 +4932,7 @@ msgstr "文件描述: %1%"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:143
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:188
-#: src/mkvtoolnix-gui/merge/tool.cpp:164
+#: src/mkvtoolnix-gui/merge/tool.cpp:170
 msgid "File has been modified"
 msgstr "文件已被修改过"
 
@@ -6332,7 +6336,7 @@ msgstr "MKVToolNix 授权为 GNU GPL 第二版"
 msgid "MKVToolNix option files"
 msgstr "MKVToolNix 选项文件"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:158
+#: src/mkvtoolnix-gui/merge/tab.cpp:170
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix 图形介面设定文件"
@@ -7405,7 +7409,7 @@ msgstr "请不要选择「mmg」自己作为「mkvmerge」可执行文件。"
 msgid "Please enter a description for the new job:"
 msgstr "请输入新任务的描述:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:301
+#: src/mkvtoolnix-gui/merge/tab.cpp:313
 msgid "Please enter the new job's description."
 msgstr "请输入新任务的描述。"
 
@@ -7866,7 +7870,7 @@ msgstr "位置 %1% 重新同步成功。\n"
 msgid "Right-click for actions for all tracks"
 msgstr "停用所有轨道的紧缩。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:280
+#: src/mkvtoolnix-gui/jobs/tool.cpp:287
 msgid "Right-click for actions for jobs"
 msgstr ""
 
@@ -7886,8 +7890,8 @@ msgstr "执行 mkvmerge 并开始合成处理程序"
 msgid "Run the header field editor"
 msgstr "执行表头栏位编辑器"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:203
-#: src/mkvtoolnix-gui/jobs/tool.cpp:234
+#: src/mkvtoolnix-gui/jobs/tool.cpp:209
+#: src/mkvtoolnix-gui/jobs/tool.cpp:240
 msgid "Running jobs cannot be removed."
 msgstr ""
 
@@ -8000,11 +8004,11 @@ msgstr "储存日誌"
 msgid "Save muxing settings to a file"
 msgstr "将合成设定值储存至文件"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:144
+#: src/mkvtoolnix-gui/merge/tab.cpp:156
 msgid "Save option file"
 msgstr "储存选项文件"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:158
+#: src/mkvtoolnix-gui/merge/tab.cpp:170
 msgid "Save settings file as"
 msgstr "设定值文件另存新文件"
 
@@ -8745,7 +8749,7 @@ msgstr "开始"
 msgid "Start &muxing"
 msgstr "开始合成(&M)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:267
+#: src/mkvtoolnix-gui/jobs/tool.cpp:273
 msgid "Start jobs &manually"
 msgstr ""
 
@@ -9252,8 +9256,8 @@ msgstr "编解码器专有资料不符。长度相同 (%1%) 但内容不同。"
 msgid "The configuration has been loaded."
 msgstr "已载入此设定文件。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:138
-#: src/mkvtoolnix-gui/merge/tab.cpp:171
+#: src/mkvtoolnix-gui/merge/tab.cpp:150
+#: src/mkvtoolnix-gui/merge/tab.cpp:183
 msgid "The configuration has been saved."
 msgstr "此设定文件已储存。"
 
@@ -9632,7 +9636,7 @@ msgstr "你加入的文件是播放清单。"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:229
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:188
-#: src/mkvtoolnix-gui/merge/tool.cpp:164
+#: src/mkvtoolnix-gui/merge/tool.cpp:170
 msgid "The file »%1« has been modified. Do you really want to close? All changes will be lost."
 msgstr "文件 »%1« 已被修改过。你确定要关闭吗？所有变更将会遗失。"
 
@@ -9980,7 +9984,7 @@ msgstr "这只允许编解码器 VP8/VP9 视频轨和 Vorbis/Opus audio 音轨�
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "选项「--meta-seek-size」不再受支援。请阅读 mkvmerge 的使用说明，尤其是关于 *Matroska 文件规划* 的段落。\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:152
+#: src/mkvtoolnix-gui/merge/tab.cpp:164
 msgid "The option file has been created."
 msgstr "选项文件已建立。"
 
@@ -11633,7 +11637,7 @@ msgstr ""
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "你不能加入不含轨道的附加部分到文件中。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:269
+#: src/mkvtoolnix-gui/merge/tab.cpp:281
 msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
 msgstr "你开始合并或加入任务到任务序列中之前，你必须至少加入一个来源文件。"
 
@@ -11641,7 +11645,7 @@ msgstr "你开始合并或加入任务到任务序列中之前，你必须至少
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "你必须输入范围从 1000 到 10000000 的一个数值或者是神奇数值 -1。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:274
+#: src/mkvtoolnix-gui/merge/tab.cpp:286
 msgid "You have to set the output file name before you can start merging or add a job to the job queue."
 msgstr "你开始合并或加入任务到任务序列中之前，你必须设定输出文件名称。"
 

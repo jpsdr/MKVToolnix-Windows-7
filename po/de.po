@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 7.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-09 19:58+0200\n"
-"PO-Revision-Date: 2015-08-09 20:00+0200\n"
+"POT-Creation-Date: 2015-08-11 22:14+0200\n"
+"PO-Revision-Date: 2015-08-11 22:15+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -1194,6 +1194,10 @@ msgstr "&Herunterladen"
 msgid "&Duration of each entry in seconds:"
 msgstr "&Dauer jedes Eintrags in Sekunden:"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:276
+msgid "&Edit in corresponding tool and remove from queue"
+msgstr "In dazugehörigem Werkzeug &bearbeiten und aus Warteschlange entfernen"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:967
 msgid "&Enable all tracks"
 msgstr "Alle Spuren &aktivieren"
@@ -1401,7 +1405,7 @@ msgstr "Matroska-Datei ö&ffnen"
 msgid "&Open Matroska or chapter file"
 msgstr "Matroska- oder Kapitel-Datei ö&ffnen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:269
+#: src/mkvtoolnix-gui/jobs/tool.cpp:275
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
 msgid "&Open folder"
 msgstr "&Ordner öffnen"
@@ -1459,7 +1463,7 @@ msgstr "Dateien &entfernen"
 msgid "&Remove job from queue after completion"
 msgstr "Job nach Ausführung aus Warteschlange &entfernen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:268
+#: src/mkvtoolnix-gui/jobs/tool.cpp:274
 msgid "&Remove jobs"
 msgstr "Jobs &entfernen"
 
@@ -1532,7 +1536,7 @@ msgstr "&Start && Ende:"
 msgid "&Start all pending jobs"
 msgstr "Alle wartenden Jobs &starten"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:266
+#: src/mkvtoolnix-gui/jobs/tool.cpp:272
 msgid "&Start jobs automatically"
 msgstr "Jobs automatisch &starten"
 
@@ -1586,7 +1590,7 @@ msgstr "&Video"
 msgid "&View log"
 msgstr "Protokoll &ansehen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:265
+#: src/mkvtoolnix-gui/jobs/tool.cpp:271
 msgid "&View output"
 msgstr "&Ausgabe anzeigen"
 
@@ -2397,7 +2401,7 @@ msgstr "Aktuellen Job abbrechen und &sofort anhalten"
 msgid "Abort processing after the current job"
 msgstr "Vorgang nach aktuellem Job abbrechen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:341
+#: src/mkvtoolnix-gui/jobs/tool.cpp:375
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:310
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
 msgid "Abort running jobs"
@@ -2431,15 +2435,15 @@ msgstr "Alle &Fehler bestätigen"
 msgid "Acknowledge all &warnings"
 msgstr "Alle &Warnungen bestätigen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:272
+#: src/mkvtoolnix-gui/jobs/tool.cpp:279
 msgid "Acknowledge errors"
 msgstr "&Fehler bestätigen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:271
+#: src/mkvtoolnix-gui/jobs/tool.cpp:278
 msgid "Acknowledge warnings"
 msgstr "&Warnungen bestätigen"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:273
+#: src/mkvtoolnix-gui/jobs/tool.cpp:280
 msgid "Acknowledge warnings and errors"
 msgstr "Warnungen und Fehler bestätigen"
 
@@ -2638,10 +2642,10 @@ msgstr "Alle Kapiteleinträge sind gültig."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:168
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:138
 #: src/mkvtoolnix-gui/merge/attachments.cpp:132
-#: src/mkvtoolnix-gui/merge/tab.cpp:144
-#: src/mkvtoolnix-gui/merge/tab.cpp:158
-#: src/mkvtoolnix-gui/merge/tab.cpp:191
-#: src/mkvtoolnix-gui/merge/tab.cpp:215
+#: src/mkvtoolnix-gui/merge/tab.cpp:156
+#: src/mkvtoolnix-gui/merge/tab.cpp:170
+#: src/mkvtoolnix-gui/merge/tab.cpp:203
+#: src/mkvtoolnix-gui/merge/tab.cpp:227
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
@@ -3190,8 +3194,8 @@ msgstr "Nicht-native MPEG4 Videospuren können nicht in native umgewandelt werde
 msgid "Cannot extract tracks of different kinds to the same file. This was requested for the tracks %1% and %2%.\n"
 msgstr "Zwei Spuren unterschiedlichen Typs können nicht in dieselbe Datei extrahiert werden. Dieses wurde für die Spuren %1% und %2% verlangt.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:269
-#: src/mkvtoolnix-gui/merge/tab.cpp:274
+#: src/mkvtoolnix-gui/merge/tab.cpp:281
+#: src/mkvtoolnix-gui/merge/tab.cpp:286
 msgid "Cannot start merging"
 msgstr "Marging kann nicht gestartet werden"
 
@@ -4375,7 +4379,7 @@ msgstr "nicht aufteilen"
 msgid "Do not write meta seek elements at all."
 msgstr "Keinen Meta-Index schreiben"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:341
+#: src/mkvtoolnix-gui/jobs/tool.cpp:375
 msgid "Do you really want to abort the currently running job?"
 msgstr "Wollen Sie den aktuellen Job wirklich abbrechen?"
 
@@ -4627,7 +4631,7 @@ msgstr "Englischer Name der Sprache"
 msgid "Ensure the file name is uni&que"
 msgstr "vorgeschlagene Ausgabedateinamen einde&utig machen"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:301
+#: src/mkvtoolnix-gui/merge/tab.cpp:313
 msgid "Enter job description"
 msgstr "Jobbeschreibung eingeben"
 
@@ -4944,7 +4948,7 @@ msgstr "Dateibeschreibung: %1%"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:143
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:162
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:188
-#: src/mkvtoolnix-gui/merge/tool.cpp:164
+#: src/mkvtoolnix-gui/merge/tool.cpp:170
 msgid "File has been modified"
 msgstr "Datei wurde verändert"
 
@@ -6344,7 +6348,7 @@ msgstr "MKVToolNix ist unter der GNU GPL v2 lizensiert."
 msgid "MKVToolNix option files"
 msgstr "MKVToolNix-Optionsdateien"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:158
+#: src/mkvtoolnix-gui/merge/tab.cpp:170
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolNix GUI Konfigurationsdatei"
@@ -7415,7 +7419,7 @@ msgstr "Bitte wählen Sie nicht »mmg« als Datei für »mkvmerge« aus, weil es
 msgid "Please enter a description for the new job:"
 msgstr "Bitte geben Sie eine Beschreibung für den neuen Job ein:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:301
+#: src/mkvtoolnix-gui/merge/tab.cpp:313
 msgid "Please enter the new job's description."
 msgstr "Bitte geben Sie eine Beschreibung für den neuen Job ein."
 
@@ -7873,7 +7877,7 @@ msgstr "Die Suche war an Position %1% erfolgreich.\n"
 msgid "Right-click for actions for all tracks"
 msgstr "rechts-klicken für Aktionen für alle Spuren"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:280
+#: src/mkvtoolnix-gui/jobs/tool.cpp:287
 msgid "Right-click for actions for jobs"
 msgstr "rechts-klicken für Job-Aktionen"
 
@@ -7893,8 +7897,8 @@ msgstr "Mkvmerge ausführen und den Muxprozess starten"
 msgid "Run the header field editor"
 msgstr "den Kopfdateneditor starten"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:203
-#: src/mkvtoolnix-gui/jobs/tool.cpp:234
+#: src/mkvtoolnix-gui/jobs/tool.cpp:209
+#: src/mkvtoolnix-gui/jobs/tool.cpp:240
 msgid "Running jobs cannot be removed."
 msgstr "Laufende Jobs können nicht entfernt werden."
 
@@ -8005,11 +8009,11 @@ msgstr "Protokoll speichern"
 msgid "Save muxing settings to a file"
 msgstr "Muxer-Einstellungen in eine Datei speichern"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:144
+#: src/mkvtoolnix-gui/merge/tab.cpp:156
 msgid "Save option file"
 msgstr "Optionsdatei erstellen"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:158
+#: src/mkvtoolnix-gui/merge/tab.cpp:170
 msgid "Save settings file as"
 msgstr "Einstellungen speichern unter"
 
@@ -8757,7 +8761,7 @@ msgstr "Starten"
 msgid "Start &muxing"
 msgstr "Muxen sta&rten"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:267
+#: src/mkvtoolnix-gui/jobs/tool.cpp:273
 msgid "Start jobs &manually"
 msgstr "Jobs &manuell starten"
 
@@ -9263,8 +9267,8 @@ msgstr "Die privaten Codec-Konfigurationsdaten stimmen nicht überein. Sie haben
 msgid "The configuration has been loaded."
 msgstr "Die Konfiguration wurde geladen."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:138
-#: src/mkvtoolnix-gui/merge/tab.cpp:171
+#: src/mkvtoolnix-gui/merge/tab.cpp:150
+#: src/mkvtoolnix-gui/merge/tab.cpp:183
 msgid "The configuration has been saved."
 msgstr "Die Konfiguration wurde gespeichert."
 
@@ -9647,7 +9651,7 @@ msgstr "Die von Ihnen hinzugefügte Datei ist eine Abspielliste."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:229
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:188
-#: src/mkvtoolnix-gui/merge/tool.cpp:164
+#: src/mkvtoolnix-gui/merge/tool.cpp:170
 msgid "The file »%1« has been modified. Do you really want to close? All changes will be lost."
 msgstr "Die Datei »%1« wurde verändert. Wollen Sie sie wirklich schließen? Alle Änderungen gehen dabei verloren."
 
@@ -10006,7 +10010,7 @@ msgstr "Die einzigen erlaubten Codecs sind VP8/VP9 für Video- und Vorbis/Opus f
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "Die Option »--meta-seek-size« wird nicht mehr länger unterstützt. Lesen Sie bitte die Dokumentation zu Mkvmerge, besonders den Abschnitt über die Struktur von Matroska-Dateien.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:152
+#: src/mkvtoolnix-gui/merge/tab.cpp:164
 msgid "The option file has been created."
 msgstr "Die Optionsdatei wurde erstellt."
 
@@ -11674,7 +11678,7 @@ msgstr ""
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "Sie können keine zusätzliche Teile an Dateien anhängen, die keine Spuren enthalten."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:269
+#: src/mkvtoolnix-gui/merge/tab.cpp:281
 msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
 msgstr "Sie müssen mindestens eine Quelldatei hinzufügen, bevor Sie mit dem Mergen anfangen oder einen Job zur Warteschlange hinzufügen können."
 
@@ -11682,7 +11686,7 @@ msgstr "Sie müssen mindestens eine Quelldatei hinzufügen, bevor Sie mit dem Me
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "Sie müssen entweder einen Wert zwischen 1000 und 10000000 oder den magischen Wert -1 angeben."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:274
+#: src/mkvtoolnix-gui/merge/tab.cpp:286
 msgid "You have to set the output file name before you can start merging or add a job to the job queue."
 msgstr "Sie müssen den Zieldateinamen setzen, bevor Sie mit dem Mergen anfangen oder einen Job zur Warteschlange hinzufügen können."
 
