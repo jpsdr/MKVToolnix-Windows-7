@@ -7,6 +7,7 @@ if test x"$ac_cv_compiler_is_clang" = xyes; then
   QUNUSED_ARGUMENTS="-Qunused-arguments"
   WNO_SELF_ASSIGN="-Wno-self-assign"
   WNO_MISMATCHED_TAGS="-Wno-mismatched-tags"
+  FSTACK_PROTECTOR=""
 
   ac_save_CXXFLAGS="$CXXFLAGS"
   AC_LANG_PUSH(C++)
@@ -22,12 +23,17 @@ if test x"$ac_cv_compiler_is_clang" = xyes; then
 
 else
   WNO_MAYBE_UNINITIALIZED="-Wno-maybe-uninitialized"
+  FSTACK_PROTECTOR="-fstack-protector"
 
-  if check_version 4.8.0 $ac_cv_gcc_version ; then
+  if check_version 4.9.0 $ac_cv_gcc_version ; then
+    FSTACK_PROTECTOR="-fstack-protector-strong"
+
+  elif check_version 4.8.0 $ac_cv_gcc_version ; then
     WLOGICAL_OP="-Wlogical-op"
   fi
 fi
 
+AC_SUBST(FSTACK_PROTECTOR)
 AC_SUBST(QUNUSED_ARGUMENTS)
 AC_SUBST(WNO_SELF_ASSIGN)
 AC_SUBST(WNO_MISMATCHED_TAGS)
