@@ -27,7 +27,7 @@ protected:
   Model *m_model;
 
   QAction *m_startAutomaticallyAction, *m_startManuallyAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeSelectedWarningsErrorsAction;
-  QAction *m_openFolderAction;
+  QAction *m_openFolderAction, *m_editAndRemoveAction;
   QMenu *m_jobQueueMenu, *m_jobsMenu;
 
 public:
@@ -52,6 +52,7 @@ public slots:
   void onRemoveDoneOk();
   void onRemoveAll();
   void onOpenFolder();
+  void onEditAndRemove();
 
   void onJobQueueMenu();
   void onContextMenu(QPoint pos);
@@ -69,6 +70,8 @@ protected:
   void setupToolTips();
 
   void stopQueue(bool immediately);
+
+  void openJobInTool(Job const &job) const;
 };
 
 }}}

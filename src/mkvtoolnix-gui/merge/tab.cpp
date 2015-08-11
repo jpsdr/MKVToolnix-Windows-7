@@ -124,6 +124,18 @@ Tab::load(QString const &fileName) {
 }
 
 void
+Tab::cloneConfig(MuxConfig const &config) {
+  m_config = config;
+
+  setControlValuesFromConfig();
+
+  m_config.m_configFileName.clear();
+  m_savedState.clear();
+
+  emit titleChanged();
+}
+
+void
 Tab::onSaveConfig() {
   if (m_config.m_configFileName.isEmpty()) {
     onSaveConfigAs();

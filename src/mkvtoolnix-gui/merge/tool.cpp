@@ -147,7 +147,13 @@ Tool::openConfigFile(QString const &fileName) {
   });
 
   appendTab(new Tab{this})
-   ->load(fileName);
+    ->load(fileName);
+}
+
+void
+Tool::openFromConfig(MuxConfig const &config) {
+  appendTab(new Tab{this})
+    ->cloneConfig(config);
 }
 
 bool

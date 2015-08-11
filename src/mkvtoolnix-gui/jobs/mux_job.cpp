@@ -187,4 +187,11 @@ MuxJob::loadMuxJob(Util::ConfigFile &settings) {
   return JobPtr{ job };
 }
 
+Merge::MuxConfig const &
+MuxJob::config()
+  const {
+  Q_ASSERT(!!m_config);
+  return *m_config;
+}
+
 }}}

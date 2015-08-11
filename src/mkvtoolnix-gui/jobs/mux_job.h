@@ -44,6 +44,8 @@ public:
   virtual QString displayableDescription() const override;
   virtual QString outputFolder() const override;
 
+  virtual Merge::MuxConfig const &config() const;
+
 public slots:
   virtual void readAvailable();
   virtual void processFinished(int exitCode, QProcess::ExitStatus exitStatus);

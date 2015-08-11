@@ -16,6 +16,7 @@ namespace Ui {
 class Tool;
 }
 
+class MuxConfig;
 class Tab;
 
 class Tool : public ToolBase {
@@ -33,6 +34,7 @@ public:
 
   virtual void retranslateUi() override;
   virtual void openConfigFile(QString const &fileName);
+  virtual void openFromConfig(MuxConfig const &config);
 
 public slots:
   virtual void newConfig();

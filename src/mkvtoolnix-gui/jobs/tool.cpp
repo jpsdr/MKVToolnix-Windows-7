@@ -7,6 +7,7 @@
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -34,6 +35,7 @@ Tool::Tool(QWidget *parent,
   , m_acknowledgeSelectedErrorsAction{new QAction{this}}
   , m_acknowledgeSelectedWarningsErrorsAction{new QAction{this}}
   , m_openFolderAction{new QAction{this}}
+  , m_editAndRemoveAction{new QAction{this}}
   , m_jobQueueMenu{jobQueueMenu}
   , m_jobsMenu{new QMenu{this}}
 {
@@ -74,6 +76,8 @@ Tool::setupUiControls() {
   m_jobsMenu->addAction(m_startAutomaticallyAction);
   m_jobsMenu->addAction(m_startManuallyAction);
   m_jobsMenu->addSeparator();
+  m_jobsMenu->addAction(m_editAndRemoveAction);
+  m_jobsMenu->addSeparator();
   m_jobsMenu->addAction(m_removeAction);
   m_jobsMenu->addSeparator();
   m_jobsMenu->addAction(m_acknowledgeSelectedWarningsAction);
@@ -105,6 +109,7 @@ Tool::setupUiControls() {
   connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
   connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
   connect(m_openFolderAction,                               &QAction::triggered,       this,    &Tool::onOpenFolder);
+  connect(m_editAndRemoveAction,                            &QAction::triggered,       this,    &Tool::onEditAndRemove);
 
   connect(ui->jobs,                                         &QTreeView::doubleClicked, this,    &Tool::onViewOutput);
 }
@@ -142,6 +147,7 @@ Tool::onContextMenu(QPoint pos) {
   m_viewOutputAction->setEnabled(hasSelection);
   m_removeAction->setEnabled(hasSelection);
   m_openFolderAction->setEnabled(hasSelection);
+  m_editAndRemoveAction->setEnabled(hasSelection);
 
   m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
   m_acknowledgeSelectedErrorsAction->setEnabled(hasSelection);
@@ -267,6 +273,7 @@ Tool::retranslateUi() {
   m_startManuallyAction->setText(QY("Start jobs &manually"));
   m_removeAction->setText(QY("&Remove jobs"));
   m_openFolderAction->setText(QY("&Open folder"));
+  m_editAndRemoveAction->setText(QY("&Edit in corresponding tool and remove from queue"));
 
   m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge warnings"));
   m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge errors"));
@@ -313,6 +320,33 @@ Tool::acknowledgeWarningsAndErrors(uint64_t id) {
   m_model->withJob(id, [](Job &job) {
     job.acknowledgeWarnings();
     job.acknowledgeErrors();
+  });
+}
+
+void
+Tool::openJobInTool(Job const &job)
+  const {
+  if (dynamic_cast<MuxJob const *>(&job)) {
+    auto tool = mtx::gui::MainWindow::mergeTool();
+    mtx::gui::MainWindow::get()->switchToTool(tool);
+
+    tool->openFromConfig(static_cast<MuxJob const &>(job).config());
+
+    return;
+  }
+
+  Q_ASSERT(false);
+}
+
+void
+Tool::onEditAndRemove() {
+  m_model->withSelectedJobs(ui->jobs, [this](Job &jobToEdit) {
+    if (Job::Running == jobToEdit.status())
+      return;
+
+    openJobInTool(jobToEdit);
+
+    m_model->removeJobsIf([&jobToEdit](Job const &jobToRemove) { return jobToEdit.id() == jobToRemove.id(); });
   });
 }
 
