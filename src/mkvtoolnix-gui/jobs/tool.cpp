@@ -340,14 +340,20 @@ Tool::openJobInTool(Job const &job)
 
 void
 Tool::onEditAndRemove() {
-  m_model->withSelectedJobs(ui->jobs, [this](Job &jobToEdit) {
+  auto emitRunningWarning = false;
+
+  m_model->withSelectedJobs(ui->jobs, [this, &emitRunningWarning](Job &jobToEdit) {
     if (Job::Running == jobToEdit.status())
-      return;
+      emitRunningWarning = true;
 
-    openJobInTool(jobToEdit);
-
-    m_model->removeJobsIf([&jobToEdit](Job const &jobToRemove) { return jobToEdit.id() == jobToRemove.id(); });
+    else {
+      openJobInTool(jobToEdit);
+      m_model->removeJobsIf([&jobToEdit](Job const &jobToRemove) { return jobToEdit.id() == jobToRemove.id(); });
+    }
   });
+
+  if (emitRunningWarning)
+    MainWindow::get()->setStatusBarMessage(QY("Running jobs cannot be edited."));
 }
 
 void
