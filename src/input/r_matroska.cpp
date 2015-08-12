@@ -1324,7 +1324,8 @@ kax_reader_c::read_headers_internal() {
     for (auto position : m_deferred_l1_positions[dl1t_tags])
       handle_tags(m_in.get(), l0, position);
 
-    discard_track_statistics_tags();
+    if (!hack_engaged(ENGAGE_KEEP_TRACK_STATISTICS_TAGS))
+      discard_track_statistics_tags();
 
     if (!m_ti.m_no_global_tags)
       process_global_tags();

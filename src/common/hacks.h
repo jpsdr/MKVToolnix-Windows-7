@@ -38,7 +38,8 @@
 #define ENGAGE_NO_CUE_RELATIVE_POSITION     17
 #define ENGAGE_NO_DELAY_FOR_GARBAGE_IN_AVI  18
 #define ENGAGE_KEEP_LAST_CHAPTER_IN_MPLS    19
-#define ENGAGE_MAX_IDX                      19
+#define ENGAGE_KEEP_TRACK_STATISTICS_TAGS   20
+#define ENGAGE_MAX_IDX                      20
 
 void engage_hacks(const std::string &hacks);
 void engage_hack(unsigned int id);
