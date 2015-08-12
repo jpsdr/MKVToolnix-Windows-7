@@ -155,7 +155,7 @@ Tab::setupOutputToolTips() {
 }
 
 void
-Tab::onTitleEdited(QString newValue) {
+Tab::onTitleChanged(QString newValue) {
   m_config.m_title = newValue;
 }
 
@@ -205,7 +205,7 @@ Tab::onBrowseOutput() {
 }
 
 void
-Tab::onGlobalTagsEdited(QString newValue) {
+Tab::onGlobalTagsChanged(QString newValue) {
   m_config.m_globalTags = newValue;
 }
 
@@ -217,7 +217,7 @@ Tab::onBrowseGlobalTags() {
 }
 
 void
-Tab::onSegmentInfoEdited(QString newValue) {
+Tab::onSegmentInfoChanged(QString newValue) {
   m_config.m_segmentInfo = newValue;
 }
 
@@ -348,7 +348,7 @@ Tab::onSplitModeChanged(int newMode) {
 }
 
 void
-Tab::onSplitOptionsEdited(QString newValue) {
+Tab::onSplitOptionsChanged(QString newValue) {
   m_config.m_splitOptions = newValue;
 }
 
@@ -363,22 +363,22 @@ Tab::onSplitMaxFilesChanged(int newValue) {
 }
 
 void
-Tab::onSegmentUIDsEdited(QString newValue) {
+Tab::onSegmentUIDsChanged(QString newValue) {
   m_config.m_segmentUIDs = newValue;
 }
 
 void
-Tab::onPreviousSegmentUIDEdited(QString newValue) {
+Tab::onPreviousSegmentUIDChanged(QString newValue) {
   m_config.m_previousSegmentUID = newValue;
 }
 
 void
-Tab::onNextSegmentUIDEdited(QString newValue) {
+Tab::onNextSegmentUIDChanged(QString newValue) {
   m_config.m_nextSegmentUID = newValue;
 }
 
 void
-Tab::onChaptersEdited(QString newValue) {
+Tab::onChaptersChanged(QString newValue) {
   m_config.m_chapters = newValue;
 }
 
@@ -418,7 +418,7 @@ Tab::onWebmClicked(bool newValue) {
 }
 
 void
-Tab::onAdditionalOptionsEdited(QString newValue) {
+Tab::onAdditionalOptionsChanged(QString newValue) {
   m_config.m_additionalOptions = newValue;
 }
 

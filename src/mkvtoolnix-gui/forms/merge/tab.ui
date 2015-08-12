@@ -396,7 +396,7 @@
                   <item row="6" column="1">
                    <layout class="QHBoxLayout" name="horizontalLayout_11">
                     <item>
-                     <widget class="QLineEdit" name="trackTags"/>
+                     <widget class="mtx::gui::Util::BasicLineEdit" name="trackTags"/>
                     </item>
                     <item>
                      <widget class="QPushButton" name="browseTrackTags">
@@ -526,7 +526,7 @@
                     <item row="3" column="1">
                      <layout class="QHBoxLayout" name="horizontalLayout_12">
                       <item>
-                       <widget class="QLineEdit" name="timecodes"/>
+                       <widget class="mtx::gui::Util::BasicLineEdit" name="timecodes"/>
                       </item>
                       <item>
                        <widget class="QPushButton" name="browseTimecodes">
@@ -834,7 +834,7 @@
               <item row="1" column="1">
                <layout class="QHBoxLayout" name="hlOutput">
                 <item>
-                 <widget class="QLineEdit" name="output"/>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="output"/>
                 </item>
                 <item>
                  <widget class="QPushButton" name="browseOutput">
@@ -859,7 +859,7 @@
               <item row="2" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
-                 <widget class="QLineEdit" name="globalTags"/>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="globalTags"/>
                 </item>
                 <item>
                  <widget class="QPushButton" name="browseGlobalTags">
@@ -884,7 +884,7 @@
               <item row="3" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_8">
                 <item>
-                 <widget class="QLineEdit" name="segmentInfo"/>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="segmentInfo"/>
                 </item>
                 <item>
                  <widget class="QPushButton" name="browseSegmentInfo">
@@ -1099,7 +1099,7 @@
               <item row="0" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_9">
                 <item>
-                 <widget class="QLineEdit" name="chapters"/>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="chapters"/>
                 </item>
                 <item>
                  <widget class="QPushButton" name="browseChapters">
@@ -1479,6 +1479,11 @@
    <header>mkvtoolnix-gui/util/files_drag_drop_widget.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::BasicLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>mkvtoolnix-gui/util/basic_line_edit.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>tabs</tabstop>
@@ -1587,9 +1592,9 @@
   </connection>
   <connection>
    <sender>trackName</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onTrackNameEdited(QString)</slot>
+   <slot>onTrackNameChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
@@ -1683,9 +1688,9 @@
   </connection>
   <connection>
    <sender>trackTags</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onTrackTagsEdited(QString)</slot>
+   <slot>onTrackTagsChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>802</x>
@@ -1701,7 +1706,7 @@
    <sender>delay</sender>
    <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onDelayEdited(QString)</slot>
+   <slot>onDelayChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
@@ -1717,7 +1722,7 @@
    <sender>stretchBy</sender>
    <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onStretchByEdited(QString)</slot>
+   <slot>onStretchByChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
@@ -1733,7 +1738,7 @@
    <sender>defaultDuration</sender>
    <signal>editTextChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onDefaultDurationEdited(QString)</slot>
+   <slot>onDefaultDurationChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
@@ -1747,9 +1752,9 @@
   </connection>
   <connection>
    <sender>timecodes</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onTimecodesEdited(QString)</slot>
+   <slot>onTimecodesChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>801</x>
@@ -1829,7 +1834,7 @@
    <sender>aspectRatio</sender>
    <signal>editTextChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onAspectRatioEdited(QString)</slot>
+   <slot>onAspectRatioChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
@@ -1845,7 +1850,7 @@
    <sender>aspectRatio</sender>
    <signal>currentIndexChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onAspectRatioEdited(QString)</slot>
+   <slot>onAspectRatioChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
@@ -1861,7 +1866,7 @@
    <sender>defaultDuration</sender>
    <signal>currentIndexChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onDefaultDurationEdited(QString)</slot>
+   <slot>onDefaultDurationChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
@@ -1875,9 +1880,9 @@
   </connection>
   <connection>
    <sender>displayWidth</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onDisplayWidthEdited(QString)</slot>
+   <slot>onDisplayWidthChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>697</x>
@@ -1891,9 +1896,9 @@
   </connection>
   <connection>
    <sender>displayHeight</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onDisplayHeightEdited(QString)</slot>
+   <slot>onDisplayHeightChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>844</x>
@@ -1923,9 +1928,9 @@
   </connection>
   <connection>
    <sender>cropping</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onCroppingEdited(QString)</slot>
+   <slot>onCroppingChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
@@ -1971,9 +1976,9 @@
   </connection>
   <connection>
    <sender>additionalTrackOptions</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onAdditionalTrackOptionsEdited(QString)</slot>
+   <slot>onAdditionalTrackOptionsChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>845</x>
@@ -2003,9 +2008,9 @@
   </connection>
   <connection>
    <sender>title</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onTitleEdited(QString)</slot>
+   <slot>onTitleChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>228</x>
@@ -2019,7 +2024,7 @@
   </connection>
   <connection>
    <sender>output</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
    <slot>setDestination(QString)</slot>
    <hints>
@@ -2035,9 +2040,9 @@
   </connection>
   <connection>
    <sender>globalTags</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onGlobalTagsEdited(QString)</slot>
+   <slot>onGlobalTagsChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>229</x>
@@ -2051,9 +2056,9 @@
   </connection>
   <connection>
    <sender>segmentInfo</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onSegmentInfoEdited(QString)</slot>
+   <slot>onSegmentInfoChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>333</x>
@@ -2147,9 +2152,9 @@
   </connection>
   <connection>
    <sender>segmentUIDs</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onSegmentUIDsEdited(QString)</slot>
+   <slot>onSegmentUIDsChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>740</x>
@@ -2163,9 +2168,9 @@
   </connection>
   <connection>
    <sender>previousSegmentUID</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onPreviousSegmentUIDEdited(QString)</slot>
+   <slot>onPreviousSegmentUIDChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>740</x>
@@ -2179,9 +2184,9 @@
   </connection>
   <connection>
    <sender>nextSegmentUID</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onNextSegmentUIDEdited(QString)</slot>
+   <slot>onNextSegmentUIDChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>740</x>
@@ -2195,9 +2200,9 @@
   </connection>
   <connection>
    <sender>chapters</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onChaptersEdited(QString)</slot>
+   <slot>onChaptersChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>829</x>
@@ -2259,7 +2264,7 @@
   </connection>
   <connection>
    <sender>chapterCueNameFormat</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
    <slot>onChapterCueNameFormatChanged(QString)</slot>
    <hints>
@@ -2291,9 +2296,9 @@
   </connection>
   <connection>
    <sender>additionalOptions</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onAdditionalOptionsEdited(QString)</slot>
+   <slot>onAdditionalOptionsChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>781</x>
@@ -2323,9 +2328,9 @@
   </connection>
   <connection>
    <sender>attachmentName</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onAttachmentNameEdited(QString)</slot>
+   <slot>onAttachmentNameChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>205</x>
@@ -2341,7 +2346,7 @@
    <sender>attachmentMIMEType</sender>
    <signal>editTextChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onAttachmentMIMETypeEdited(QString)</slot>
+   <slot>onAttachmentMIMETypeChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>186</x>
@@ -2357,7 +2362,7 @@
    <sender>attachmentMIMEType</sender>
    <signal>currentIndexChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onAttachmentMIMETypeEdited(QString)</slot>
+   <slot>onAttachmentMIMETypeChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>186</x>
@@ -2371,9 +2376,9 @@
   </connection>
   <connection>
    <sender>attachmentDescription</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>textChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onAttachmentDescriptionEdited(QString)</slot>
+   <slot>onAttachmentDescriptionChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>634</x>
@@ -2485,7 +2490,7 @@
    <sender>splitOptions</sender>
    <signal>editTextChanged(QString)</signal>
    <receiver>mtx::gui::Merge::Tab</receiver>
-   <slot>onSplitOptionsEdited(QString)</slot>
+   <slot>onSplitOptionsChanged(QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>451</x>
@@ -2551,10 +2556,10 @@
   <slot>onAddAttachment()</slot>
   <slot>onAddFiles()</slot>
   <slot>onAddToJobQueue()</slot>
-  <slot>onAspectRatioEdited(QString)</slot>
-  <slot>onAttachmentDescriptionEdited(QString)</slot>
-  <slot>onAttachmentMIMETypeEdited(QString)</slot>
-  <slot>onAttachmentNameEdited(QString)</slot>
+  <slot>onAspectRatioChanged(QString)</slot>
+  <slot>onAttachmentDescriptionChanged(QString)</slot>
+  <slot>onAttachmentMIMETypeChanged(QString)</slot>
+  <slot>onAttachmentNameChanged(QString)</slot>
   <slot>onAttachmentSelectionChanged()</slot>
   <slot>onAttachmentStyleChanged(int)</slot>
   <slot>onBrowseChapters()</slot>
@@ -2566,48 +2571,48 @@
   <slot>onChapterCharacterSetChanged(QString)</slot>
   <slot>onChapterCueNameFormatChanged(QString)</slot>
   <slot>onChapterLanguageChanged(int)</slot>
-  <slot>onChaptersEdited(QString)</slot>
+  <slot>onChaptersChanged(QString)</slot>
   <slot>onCompressionChanged(int)</slot>
-  <slot>onCroppingEdited(QString)</slot>
+  <slot>onCroppingChanged(QString)</slot>
   <slot>onCuesChanged(int)</slot>
-  <slot>onDefaultDurationEdited(QString)</slot>
+  <slot>onDefaultDurationChanged(QString)</slot>
   <slot>onDefaultTrackFlagChanged(int)</slot>
-  <slot>onDelayEdited(QString)</slot>
-  <slot>onDisplayHeightEdited(QString)</slot>
-  <slot>onDisplayWidthEdited(QString)</slot>
+  <slot>onDelayChanged(QString)</slot>
+  <slot>onDisplayHeightChanged(QString)</slot>
+  <slot>onDisplayWidthChanged(QString)</slot>
   <slot>onEditAdditionalOptions()</slot>
   <slot>onFilesContextMenu()</slot>
   <slot>onForcedTrackFlagChanged(int)</slot>
-  <slot>onGlobalTagsEdited(QString)</slot>
+  <slot>onGlobalTagsChanged(QString)</slot>
   <slot>onLinkFilesClicked(bool)</slot>
   <slot>onMuxThisChanged(int)</slot>
   <slot>onNew()</slot>
-  <slot>onNextSegmentUIDEdited(QString)</slot>
+  <slot>onNextSegmentUIDChanged(QString)</slot>
   <slot>onOpenConfig()</slot>
   <slot>setDestination(QString)</slot>
-  <slot>onPreviousSegmentUIDEdited(QString)</slot>
+  <slot>onPreviousSegmentUIDChanged(QString)</slot>
   <slot>onRemoveAttachments()</slot>
   <slot>onSaveConfig()</slot>
   <slot>onSaveConfigAs()</slot>
-  <slot>onSegmentUIDsEdited(QString)</slot>
-  <slot>onSegmentInfoEdited(QString)</slot>
+  <slot>onSegmentUIDsChanged(QString)</slot>
+  <slot>onSegmentInfoChanged(QString)</slot>
   <slot>onSetAspectRatio()</slot>
   <slot>onSetDisplayDimensions()</slot>
   <slot>onSplitMaxFilesChanged(int)</slot>
   <slot>onSplitModeChanged(int)</slot>
-  <slot>onSplitOptionsEdited(QString)</slot>
+  <slot>onSplitOptionsChanged(QString)</slot>
   <slot>onStartMuxing()</slot>
   <slot>onStereoscopyChanged(int)</slot>
-  <slot>onStretchByEdited(QString)</slot>
+  <slot>onStretchByChanged(QString)</slot>
   <slot>onSubtitleCharacterSetChanged(int)</slot>
-  <slot>onTimecodesEdited(QString)</slot>
-  <slot>onTitleEdited(QString)</slot>
+  <slot>onTimecodesChanged(QString)</slot>
+  <slot>onTitleChanged(QString)</slot>
   <slot>onTrackLanguageChanged(int)</slot>
-  <slot>onTrackNameEdited(QString)</slot>
-  <slot>onTrackTagsEdited(QString)</slot>
+  <slot>onTrackNameChanged(QString)</slot>
+  <slot>onTrackTagsChanged(QString)</slot>
   <slot>onTracksContextMenu()</slot>
-  <slot>onAdditionalOptionsEdited(QString)</slot>
-  <slot>onAdditionalTrackOptionsEdited(QString)</slot>
+  <slot>onAdditionalOptionsChanged(QString)</slot>
+  <slot>onAdditionalTrackOptionsChanged(QString)</slot>
   <slot>onWebmClicked(bool)</slot>
   <slot>resizeAttachmentsColumnsToContents()</slot>
   <slot>resizeFilesColumnsToContents()</slot>

@@ -504,7 +504,7 @@ Tab::withSelectedTracks(std::function<void(Track *)> code,
 }
 
 void
-Tab::onTrackNameEdited(QString newValue) {
+Tab::onTrackNameChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_name = newValue; }, true);
 }
 
@@ -619,27 +619,27 @@ Tab::onCompressionChanged(int newValue) {
 }
 
 void
-Tab::onTrackTagsEdited(QString newValue) {
+Tab::onTrackTagsChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_tags = newValue; }, true);
 }
 
 void
-Tab::onDelayEdited(QString newValue) {
+Tab::onDelayChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_delay = newValue; });
 }
 
 void
-Tab::onStretchByEdited(QString newValue) {
+Tab::onStretchByChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_stretchBy = newValue; });
 }
 
 void
-Tab::onDefaultDurationEdited(QString newValue) {
+Tab::onDefaultDurationChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_defaultDuration = newValue; }, true);
 }
 
 void
-Tab::onTimecodesEdited(QString newValue) {
+Tab::onTimecodesChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_timecodes = newValue; });
 }
 
@@ -673,17 +673,17 @@ Tab::onSetDisplayDimensions() {
 }
 
 void
-Tab::onAspectRatioEdited(QString newValue) {
+Tab::onAspectRatioChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_aspectRatio = newValue; }, true);
 }
 
 void
-Tab::onDisplayWidthEdited(QString newValue) {
+Tab::onDisplayWidthChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_displayWidth = newValue; }, true);
 }
 
 void
-Tab::onDisplayHeightEdited(QString newValue) {
+Tab::onDisplayHeightChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_displayHeight = newValue; }, true);
 }
 
@@ -708,7 +708,7 @@ Tab::onNaluSizeLengthChanged(int newValue) {
 }
 
 void
-Tab::onCroppingEdited(QString newValue) {
+Tab::onCroppingChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_cropping = newValue; }, true);
 }
 
@@ -747,7 +747,7 @@ Tab::onCuesChanged(int newValue) {
 }
 
 void
-Tab::onAdditionalTrackOptionsEdited(QString newValue) {
+Tab::onAdditionalTrackOptionsChanged(QString newValue) {
   withSelectedTracks([&](Track *track) { track->m_additionalOptions = newValue; }, true);
 }
 

@@ -83,17 +83,17 @@ Tab::selectAttachments(QList<Attachment *> const &attachments) {
 }
 
 void
-Tab::onAttachmentNameEdited(QString newValue) {
+Tab::onAttachmentNameChanged(QString newValue) {
   withSelectedAttachments([&](Attachment *attachment) { attachment->m_name = newValue; });
 }
 
 void
-Tab::onAttachmentDescriptionEdited(QString newValue) {
+Tab::onAttachmentDescriptionChanged(QString newValue) {
   withSelectedAttachments([&](Attachment *attachment) { attachment->m_description = newValue; });
 }
 
 void
-Tab::onAttachmentMIMETypeEdited(QString newValue) {
+Tab::onAttachmentMIMETypeChanged(QString newValue) {
   withSelectedAttachments([&](Attachment *attachment) { attachment->m_MIMEType = newValue; });
 }
 
