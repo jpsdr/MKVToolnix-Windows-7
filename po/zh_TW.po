@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-14 16:46+0200\n"
+"POT-Creation-Date: 2015-08-14 19:46+0200\n"
 "PO-Revision-Date: 2015-06-21 13:14+0200\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -835,8 +835,8 @@ msgstr "### 程式碼開發 ###"
 msgid "### Global output control ###"
 msgstr "### 總體輸出控制 ###"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:87
-msgid "%1 automatic, %2 manual"
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
+msgid "%1 automatic, %2 manual, %3 running"
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:89
@@ -844,7 +844,7 @@ msgstr ""
 msgid "%1 entries"
 msgstr "%1 項目"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:91
 #, fuzzy
 msgid "%1 error"
 msgid_plural "%1 errors"
@@ -857,7 +857,7 @@ msgid_plural "%1 of %2 files processed"
 msgstr[0] "總共 %2 個檔案，已處理 %1 個"
 msgstr[1] "總共 %2 個檔案，已處理 %1 個"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:88
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:90
 #, fuzzy
 msgid "%1 warning"
 msgid_plural "%1 warnings"
@@ -1164,7 +1164,7 @@ msgstr "下載(&D)"
 msgid "&Duration of each entry in seconds:"
 msgstr "播放清單的最短時間長度，單位為秒:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:276
+#: src/mkvtoolnix-gui/jobs/tool.cpp:293
 msgid "&Edit in corresponding tool and remove from queue"
 msgstr ""
 
@@ -1379,7 +1379,7 @@ msgstr "開啟 Matroska 檔案(&O)"
 msgid "&Open Matroska or chapter file"
 msgstr "開啟 Matroska 或 XML 檔案(&O)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:275
+#: src/mkvtoolnix-gui/jobs/tool.cpp:292
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
 #, fuzzy
 msgid "&Open folder"
@@ -1438,7 +1438,7 @@ msgstr "移除檔案(&R)"
 msgid "&Remove job from queue after completion"
 msgstr "完成後從任務佇列中移除任務(&R)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:274
+#: src/mkvtoolnix-gui/jobs/tool.cpp:291
 #, fuzzy
 msgid "&Remove jobs"
 msgstr "移除所有任務(&L)"
@@ -1512,7 +1512,7 @@ msgstr "開始和結束(&S):"
 msgid "&Start all pending jobs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:272
+#: src/mkvtoolnix-gui/jobs/tool.cpp:288
 #, fuzzy
 msgid "&Start jobs automatically"
 msgstr "自動開始選擇的任務(&S)"
@@ -1569,7 +1569,7 @@ msgstr "視訊"
 msgid "&View log"
 msgstr "檢視日誌(&V)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:271
+#: src/mkvtoolnix-gui/jobs/tool.cpp:287
 #, fuzzy
 msgid "&View output"
 msgstr "儲存輸出(&S)"
@@ -2038,7 +2038,7 @@ msgstr "--- 任務 %d 開始 (%s, 添加於 %s)"
 msgid "--- END job %d"
 msgstr "--- 任務 %d 終止"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:241
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr ""
 
@@ -2046,11 +2046,11 @@ msgstr ""
 msgid "--- No job output found.\n"
 msgstr "--- 無任務輸出。\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:224
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:236
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:228
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:240
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr ""
 
@@ -2375,9 +2375,9 @@ msgstr ""
 msgid "Abort processing after the current job"
 msgstr "目前任務完成後中止處理"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:398
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:310
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:110
 #, fuzzy
 msgid "Abort running jobs"
 msgstr "目前任務完成後中止"
@@ -2402,27 +2402,27 @@ msgid "Acknowledge &all warnings and errors"
 msgstr "完成，有警告"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:451
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:128
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:130
 msgid "Acknowledge all &errors"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:450
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:111
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:113
 #, fuzzy
 msgid "Acknowledge all &warnings"
 msgstr "完成，有警告"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:279
+#: src/mkvtoolnix-gui/jobs/tool.cpp:296
 #, fuzzy
 msgid "Acknowledge errors"
 msgstr "完成，有警告"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:278
+#: src/mkvtoolnix-gui/jobs/tool.cpp:295
 #, fuzzy
 msgid "Acknowledge warnings"
 msgstr "完成，有警告"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:280
+#: src/mkvtoolnix-gui/jobs/tool.cpp:297
 #, fuzzy
 msgid "Acknowledge warnings and errors"
 msgstr "完成，有警告"
@@ -2628,7 +2628,7 @@ msgstr "所有章節項目皆正確。"
 #: src/mkvtoolnix-gui/merge/tab.cpp:227
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "All files"
 msgstr "所有檔案"
 
@@ -4135,15 +4135,15 @@ msgstr "視訊軌"
 msgid "Date (invalid, value: %1%)"
 msgstr "日期 (無效, 值: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date added"
 msgstr "加入的日期"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date finished"
 msgstr "完成的日期"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date started"
 msgstr "開始的日期"
 
@@ -4239,7 +4239,7 @@ msgstr "從任務佇列中刪除選擇的任務"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:242
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:56
 #: src/mmg/jobs.cpp:475
 msgid "Description"
@@ -4372,11 +4372,11 @@ msgstr "不分割"
 msgid "Do not write meta seek elements at all."
 msgstr "不要寫入任何變換定位元件。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:398
 msgid "Do you really want to abort the currently running job?"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:110
 msgid "Do you really want to abort this job?"
 msgstr ""
 
@@ -4714,7 +4714,7 @@ msgstr "寫入 Matroska 檔時發生錯誤"
 #: src/common/output.cpp:80
 #: src/common/output.cpp:81
 #: src/mkvtoolnix-gui/jobs/job.cpp:212
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:209
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:221
 #: src/mmg/jobs.cpp:278
 #: src/mmg/mux_dialog.cpp:284
 msgid "Error:"
@@ -6883,7 +6883,7 @@ msgid "No input files were given. No output will be created.\n"
 msgstr "未給定任何輸入檔。將不建立輸出檔。\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:69
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:314
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:326
 msgid "No job has been started yet."
 msgstr "尚無任務開始。"
 
@@ -7519,7 +7519,7 @@ msgstr "正在處理任務 %d/%d"
 msgid "Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr "程式只能定位叢集，因此建立較大的叢集可能變得不精確或定位較慢。"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Progress"
 msgstr "進度"
 
@@ -7888,7 +7888,7 @@ msgstr "位置 %1% 重新同步成功。\n"
 msgid "Right-click for actions for all tracks"
 msgstr "停用所有軌道的緊縮。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:287
+#: src/mkvtoolnix-gui/jobs/tool.cpp:304
 msgid "Right-click for actions for jobs"
 msgstr ""
 
@@ -7908,12 +7908,12 @@ msgstr "執行 mkvmerge 並開始合成處理程序"
 msgid "Run the header field editor"
 msgstr "執行表頭欄位編輯器"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:356
+#: src/mkvtoolnix-gui/jobs/tool.cpp:373
 msgid "Running jobs cannot be edited."
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:209
-#: src/mkvtoolnix-gui/jobs/tool.cpp:240
+#: src/mkvtoolnix-gui/jobs/tool.cpp:225
+#: src/mkvtoolnix-gui/jobs/tool.cpp:256
 msgid "Running jobs cannot be removed."
 msgstr ""
 
@@ -8013,7 +8013,7 @@ msgstr "將章節另存為 Matroska 檔"
 msgid "Save information as"
 msgstr "另存資訊"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 #, fuzzy
 msgid "Save job output"
 msgstr "儲存輸出(&S)"
@@ -8771,7 +8771,12 @@ msgstr "開始"
 msgid "Start &muxing"
 msgstr "開始合成(&M)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:273
+#: src/mkvtoolnix-gui/jobs/tool.cpp:290
+#, fuzzy
+msgid "Start jobs &immediately"
+msgstr "自動開始選擇的任務(&S)"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:289
 #, fuzzy
 msgid "Start jobs &manually"
 msgstr "自動開始選擇的任務(&S)"
@@ -8814,7 +8819,7 @@ msgstr "正在啟動任務 ID %d (%s) 於 %s"
 msgid "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"
 msgstr "資料軌編號 %1% : 區塊編號: %2%的統計資料；大小: %3% 位元組；時間長度: %4% 秒；近似位元率: %5% 位元/秒\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mmg/jobs.cpp:473
 msgid "Status"
 msgstr "狀態"
@@ -8995,7 +9000,7 @@ msgstr "告訴 mkvmerge 將大部分的「n」資料區塊放到每個叢集中�
 
 #: src/info/qt_ui.cpp:98
 #: src/mkvtoolnix-gui/merge/input.cpp:648
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "Text files"
 msgstr "純文字檔"
 
@@ -10976,7 +10981,7 @@ msgid "Two files muxed with the same settings and this switch activated will be 
 msgstr "已用相同設定值合成兩個檔案且將會標示為已啟動。"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mkvtoolnix-gui/merge/track_model.cpp:43
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -11418,7 +11423,7 @@ msgstr "第 %1% 行處警告: 起始時間早於前一條的起始時間。此�
 
 #: src/common/output.cpp:84
 #: src/mkvtoolnix-gui/jobs/job.cpp:211
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:208
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:220
 #: src/mmg/jobs.cpp:275
 #: src/mmg/mux_dialog.cpp:281
 msgid "Warning:"
@@ -12625,7 +12630,7 @@ msgid "no file loaded"
 msgstr "未載入檔案"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:281
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:313
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:325
 msgid "no job started yet"
 msgstr "尚無任務開始"
 
@@ -12662,14 +12667,14 @@ msgid "normal"
 msgstr "一般"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:287
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:316
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:261
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:328
 msgid "not finished yet"
 msgstr "尚未完成"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:283
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:248
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:315
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:260
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:327
 msgid "not started yet"
 msgstr "尚未開始"
 

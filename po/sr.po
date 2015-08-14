@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-14 16:46+0200\n"
+"POT-Creation-Date: 2015-08-14 19:46+0200\n"
 "PO-Revision-Date: 2015-08-09 22:41+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -908,8 +908,9 @@ msgstr "### Development hacks ###"
 msgid "### Global output control ###"
 msgstr "### Global output control ##"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:87
-msgid "%1 automatic, %2 manual"
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
+#, fuzzy
+msgid "%1 automatic, %2 manual, %3 running"
 msgstr "%1 automatski, %2 ručno"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:89
@@ -917,7 +918,7 @@ msgstr "%1 automatski, %2 ručno"
 msgid "%1 entries"
 msgstr "%1 unosa"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:91
 msgid "%1 error"
 msgid_plural "%1 errors"
 msgstr[0] "%1 greška"
@@ -931,7 +932,7 @@ msgstr[0] "%1 od %2 fajl obrađen"
 msgstr[1] "%1 od %2 fajla obrađena"
 msgstr[2] "%1 od %2 fajlova obrađeno"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:88
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:90
 msgid "%1 warning"
 msgid_plural "%1 warnings"
 msgstr[0] "%1 upozorenje"
@@ -1242,7 +1243,7 @@ msgstr "&Skini"
 msgid "&Duration of each entry in seconds:"
 msgstr "&Trajanje svake stavke u sekundama:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:276
+#: src/mkvtoolnix-gui/jobs/tool.cpp:293
 msgid "&Edit in corresponding tool and remove from queue"
 msgstr ""
 
@@ -1445,7 +1446,7 @@ msgstr "&Otvori Matroska fajl"
 msgid "&Open Matroska or chapter file"
 msgstr "&Otvori MKV ili fajl sa poglavljima"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:275
+#: src/mkvtoolnix-gui/jobs/tool.cpp:292
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
 msgid "&Open folder"
 msgstr "&Otvori folder"
@@ -1501,7 +1502,7 @@ msgstr "&Ukloni fajlove"
 msgid "&Remove job from queue after completion"
 msgstr "&Ukloni zadatak sa liste posle obrade"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:274
+#: src/mkvtoolnix-gui/jobs/tool.cpp:291
 msgid "&Remove jobs"
 msgstr "&Ukloni zadatke"
 
@@ -1573,7 +1574,7 @@ msgstr "Početak && kraj:"
 msgid "&Start all pending jobs"
 msgstr "Z&apočni sve zadatke na čekanju"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:272
+#: src/mkvtoolnix-gui/jobs/tool.cpp:288
 msgid "&Start jobs automatically"
 msgstr "&Započni zadatke automatski"
 
@@ -1626,7 +1627,7 @@ msgstr "&Video"
 msgid "&View log"
 msgstr "Pogledaj &log"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:271
+#: src/mkvtoolnix-gui/jobs/tool.cpp:287
 msgid "&View output"
 msgstr "&Pogledaj izlaz"
 
@@ -2146,7 +2147,7 @@ msgstr "--- BEGIN job %d (%s, added on %s)"
 msgid "--- END job %d"
 msgstr "--- END job %d"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:241
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr "--- Greške emitovane od zadatka '%1' započele u %2 ---"
 
@@ -2154,11 +2155,11 @@ msgstr "--- Greške emitovane od zadatka '%1' započele u %2 ---"
 msgid "--- No job output found.\n"
 msgstr "--- Nije nađen rezultat zadatka.\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:224
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:236
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr "---  rezultat zadatka '%1' započet u %2 ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:228
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:240
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr "--- Upozorenja emitovana od zadatka '%1' započela u %2 ---"
 
@@ -2551,9 +2552,9 @@ msgstr "Prekini trenutni zadatak i zaustavi &odmah"
 msgid "Abort processing after the current job"
 msgstr "Prekini obradu nakon tekućeg zadatka"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:398
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:310
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:110
 msgid "Abort running jobs"
 msgstr "Prekini zadatke koji su u toku"
 
@@ -2575,24 +2576,24 @@ msgid "Acknowledge &all warnings and errors"
 msgstr "&Prihvati sva upozorenja i greške"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:451
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:128
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:130
 msgid "Acknowledge all &errors"
 msgstr "Prihvati sve &greške"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:450
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:111
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:113
 msgid "Acknowledge all &warnings"
 msgstr "Prihvati sva up&ozorenja"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:279
+#: src/mkvtoolnix-gui/jobs/tool.cpp:296
 msgid "Acknowledge errors"
 msgstr "Prihvati greške"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:278
+#: src/mkvtoolnix-gui/jobs/tool.cpp:295
 msgid "Acknowledge warnings"
 msgstr "Prihvati upozorenja"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:280
+#: src/mkvtoolnix-gui/jobs/tool.cpp:297
 msgid "Acknowledge warnings and errors"
 msgstr "Prihvati upozorenja i greške"
 
@@ -2802,7 +2803,7 @@ msgstr "Sve stavke poglavlja su važeće."
 #: src/mkvtoolnix-gui/merge/tab.cpp:203 src/mkvtoolnix-gui/merge/tab.cpp:227
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "All files"
 msgstr "Svi fajlovi"
 
@@ -4450,15 +4451,15 @@ msgstr "DV video format"
 msgid "Date (invalid, value: %1%)"
 msgstr "Datum (nevažeći, vrednost: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date added"
 msgstr "Dodato"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date finished"
 msgstr "Završeno"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date started"
 msgstr "Započeto"
 
@@ -4560,7 +4561,7 @@ msgstr "Obriši odabrane zadatke iz reda zadataka"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:242
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:56 src/mmg/jobs.cpp:475
 msgid "Description"
 msgstr "Opis"
@@ -4694,11 +4695,11 @@ msgstr "Ne deli"
 msgid "Do not write meta seek elements at all."
 msgstr "Uopšte ne zapisuj meta seek elemente."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:398
 msgid "Do you really want to abort the currently running job?"
 msgstr "Da li zaista želite da prekinete zadatak koji se trenutno izvršava?"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:110
 msgid "Do you really want to abort this job?"
 msgstr "Da li zaista želite da prekinete ovaj zadatak?"
 
@@ -5073,7 +5074,7 @@ msgstr "Greška prilikom pisanja Matroska fajla"
 
 #: src/common/output.cpp:79 src/common/output.cpp:80 src/common/output.cpp:81
 #: src/mkvtoolnix-gui/jobs/job.cpp:212
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:209 src/mmg/jobs.cpp:278
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:221 src/mmg/jobs.cpp:278
 #: src/mmg/mux_dialog.cpp:284
 msgid "Error:"
 msgstr "Greška:"
@@ -7736,7 +7737,7 @@ msgid "No input files were given. No output will be created.\n"
 msgstr "Nema ulaznih fajlova. Izlaznog rezultata neće biti.\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:69
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:314
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:326
 msgid "No job has been started yet."
 msgstr "Nijedan zadatak još nije započet."
 
@@ -8496,7 +8497,7 @@ msgstr ""
 "Programi će moći da pretražuju samo do klastera, tako da kreiranje većih "
 "klastera može dovesti do nepreciznog ili sporog pretraživanja."
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Progress"
 msgstr "Progres"
 
@@ -8955,7 +8956,7 @@ msgstr "Re-sinhronizacija uspešna na poziciji %1%.\n"
 msgid "Right-click for actions for all tracks"
 msgstr "Desni klik za radnje sa svim stazama"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:287
+#: src/mkvtoolnix-gui/jobs/tool.cpp:304
 msgid "Right-click for actions for jobs"
 msgstr "Desni klik za radnje sa zadacima"
 
@@ -8975,12 +8976,12 @@ msgstr "Pokreni mkvmerge i počni proces muksovanja"
 msgid "Run the header field editor"
 msgstr "Pokreni uređivač polja sa zaglavljem"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:356
+#: src/mkvtoolnix-gui/jobs/tool.cpp:373
 #, fuzzy
 msgid "Running jobs cannot be edited."
 msgstr "Zadaci koji se obrađuju se ne mogu ukloniti."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:209 src/mkvtoolnix-gui/jobs/tool.cpp:240
+#: src/mkvtoolnix-gui/jobs/tool.cpp:225 src/mkvtoolnix-gui/jobs/tool.cpp:256
 msgid "Running jobs cannot be removed."
 msgstr "Zadaci koji se obrađuju se ne mogu ukloniti."
 
@@ -9079,7 +9080,7 @@ msgstr "Sačuvaj poglavlja u Matroska fajl"
 msgid "Save information as"
 msgstr "Sačuvaj informaciju kao"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "Save job output"
 msgstr "Sačuvaj rezultat zadatka"
 
@@ -9963,7 +9964,12 @@ msgstr "Start"
 msgid "Start &muxing"
 msgstr "Počni &muksovanje"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:273
+#: src/mkvtoolnix-gui/jobs/tool.cpp:290
+#, fuzzy
+msgid "Start jobs &immediately"
+msgstr "Započni zadatke &ručno"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:289
 msgid "Start jobs &manually"
 msgstr "Započni zadatke &ručno"
 
@@ -10010,7 +10016,7 @@ msgstr ""
 "trajanje u sekundama: %4%; približan bitski protok u bitovima po sekundi: "
 "%5%\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42 src/mmg/jobs.cpp:473
+#: src/mkvtoolnix-gui/jobs/model.cpp:43 src/mmg/jobs.cpp:473
 msgid "Status"
 msgstr "Status"
 
@@ -10214,7 +10220,7 @@ msgstr ""
 "Govori mkvmerge da stavlja najviše 'n' blokova sa podacima u svaki klaster."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:648
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "Text files"
 msgstr "Tekstualni fajlovi"
 
@@ -12976,7 +12982,7 @@ msgstr ""
 "biti identična."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mkvtoolnix-gui/merge/track_model.cpp:43
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -13459,7 +13465,7 @@ msgstr ""
 "početnom vremenu.\n"
 
 #: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:211
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:208 src/mmg/jobs.cpp:275
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:220 src/mmg/jobs.cpp:275
 #: src/mmg/mux_dialog.cpp:281
 msgid "Warning:"
 msgstr "Upozorenje:"
@@ -14851,7 +14857,7 @@ msgid "no file loaded"
 msgstr "nije učitan fajl"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:281
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:313
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:325
 msgid "no job started yet"
 msgstr "nijedan zadatak još nije započet"
 
@@ -14886,14 +14892,14 @@ msgid "normal"
 msgstr "normalno"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:287
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:316
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:261
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:328
 msgid "not finished yet"
 msgstr "nije još završeno"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:283
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:248
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:315
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:260
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:327
 msgid "not started yet"
 msgstr "nije još započeto"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-14 16:46+0200\n"
+"POT-Creation-Date: 2015-08-14 19:46+0200\n"
 "PO-Revision-Date: 2015-07-23 20:22+0300\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -937,8 +937,8 @@ msgstr "### Опції для розробників ###"
 msgid "### Global output control ###"
 msgstr "### Глобальний вихідний контроль ###"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:87
-msgid "%1 automatic, %2 manual"
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
+msgid "%1 automatic, %2 manual, %3 running"
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:89
@@ -946,7 +946,7 @@ msgstr ""
 msgid "%1 entries"
 msgstr "%1 запис(и)(ів)"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:91
 #, fuzzy
 msgid "%1 error"
 msgid_plural "%1 errors"
@@ -962,7 +962,7 @@ msgstr[0] "%1% з %2% файла оброблено"
 msgstr[1] "%1% з %2% файлів оброблено"
 msgstr[2] "%1% з %2% файлів оброблено"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:88
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:90
 #, fuzzy
 msgid "%1 warning"
 msgid_plural "%1 warnings"
@@ -1279,7 +1279,7 @@ msgstr "&Завантаження"
 msgid "&Duration of each entry in seconds:"
 msgstr "Мінімальна тривалість для списків відтворення у секундах:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:276
+#: src/mkvtoolnix-gui/jobs/tool.cpp:293
 msgid "&Edit in corresponding tool and remove from queue"
 msgstr ""
 
@@ -1488,7 +1488,7 @@ msgstr "&Відкрити файл Matroska"
 msgid "&Open Matroska or chapter file"
 msgstr "&Відкрити Matroska або XML файл"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:275
+#: src/mkvtoolnix-gui/jobs/tool.cpp:292
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
 #, fuzzy
 msgid "&Open folder"
@@ -1548,7 +1548,7 @@ msgstr "&Видалити файли"
 msgid "&Remove job from queue after completion"
 msgstr "&Видалити завдання з черги після завершення:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:274
+#: src/mkvtoolnix-gui/jobs/tool.cpp:291
 #, fuzzy
 msgid "&Remove jobs"
 msgstr "Видалити всі"
@@ -1625,7 +1625,7 @@ msgstr "&Розпочати виконання"
 msgid "&Start all pending jobs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:272
+#: src/mkvtoolnix-gui/jobs/tool.cpp:288
 msgid "&Start jobs automatically"
 msgstr ""
 
@@ -1681,7 +1681,7 @@ msgstr "Відео"
 msgid "&View log"
 msgstr "&Переглянути журнал"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:271
+#: src/mkvtoolnix-gui/jobs/tool.cpp:287
 #, fuzzy
 msgid "&View output"
 msgstr "Вихідна інформація mkvmerge:"
@@ -2201,7 +2201,7 @@ msgstr "--- РОЗПОЧАТО завдання %d (%s, додано %s)"
 msgid "--- END job %d"
 msgstr "--- ЗАВЕРШЕНО завдання %d"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:241
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr ""
 
@@ -2209,11 +2209,11 @@ msgstr ""
 msgid "--- No job output found.\n"
 msgstr "--- Не знайдено вихідних даних завдання.\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:224
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:236
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:228
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:240
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr ""
 
@@ -2610,9 +2610,9 @@ msgstr ""
 msgid "Abort processing after the current job"
 msgstr "Перервати обробку після поточного завдання"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:398
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:310
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:110
 #, fuzzy
 msgid "Abort running jobs"
 msgstr "Перервати після поточного завдання"
@@ -2635,27 +2635,27 @@ msgid "Acknowledge &all warnings and errors"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:451
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:128
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:130
 msgid "Acknowledge all &errors"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:450
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:111
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:113
 #, fuzzy
 msgid "Acknowledge all &warnings"
 msgstr "Завершено з попередженнями"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:279
+#: src/mkvtoolnix-gui/jobs/tool.cpp:296
 #, fuzzy
 msgid "Acknowledge errors"
 msgstr "без помилок"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:278
+#: src/mkvtoolnix-gui/jobs/tool.cpp:295
 #, fuzzy
 msgid "Acknowledge warnings"
 msgstr "Завершено з попередженнями"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:280
+#: src/mkvtoolnix-gui/jobs/tool.cpp:297
 msgid "Acknowledge warnings and errors"
 msgstr ""
 
@@ -2875,7 +2875,7 @@ msgstr "Всі записи розділу є коректними."
 #: src/mkvtoolnix-gui/merge/tab.cpp:203 src/mkvtoolnix-gui/merge/tab.cpp:227
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "All files"
 msgstr "Усі файли"
 
@@ -4545,16 +4545,16 @@ msgstr "Відеодоріжка"
 msgid "Date (invalid, value: %1%)"
 msgstr "Дата (невірна, значення: %1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date added"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #, fuzzy
 msgid "Date finished"
 msgstr ", завершено %s"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date started"
 msgstr ""
 
@@ -4659,7 +4659,7 @@ msgstr "Видалити вибрані завдання з черги завд�
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:242
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:56 src/mmg/jobs.cpp:475
 msgid "Description"
 msgstr "Опис"
@@ -4795,11 +4795,11 @@ msgstr "Без розбиття"
 msgid "Do not write meta seek elements at all."
 msgstr "Не писати взагалі елементи мета-пошуку."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:398
 msgid "Do you really want to abort the currently running job?"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:110
 msgid "Do you really want to abort this job?"
 msgstr ""
 
@@ -5176,7 +5176,7 @@ msgstr "Помилка запису файла Matroska"
 
 #: src/common/output.cpp:79 src/common/output.cpp:80 src/common/output.cpp:81
 #: src/mkvtoolnix-gui/jobs/job.cpp:212
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:209 src/mmg/jobs.cpp:278
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:221 src/mmg/jobs.cpp:278
 #: src/mmg/mux_dialog.cpp:284
 msgid "Error:"
 msgstr "Помилка:"
@@ -7830,7 +7830,7 @@ msgid "No input files were given. No output will be created.\n"
 msgstr "Немає вхідних файлів. Тому, на виході нічого створено не буде.\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:69
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:314
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:326
 #, fuzzy
 msgid "No job has been started yet."
 msgstr ", розпочато %s"
@@ -8589,7 +8589,7 @@ msgid ""
 "may lead to imprecise or slow seeking."
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Progress"
 msgstr "Прогрес виконання"
 
@@ -9063,7 +9063,7 @@ msgstr "Повторна синхронізація завершена успі�
 msgid "Right-click for actions for all tracks"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:287
+#: src/mkvtoolnix-gui/jobs/tool.cpp:304
 msgid "Right-click for actions for jobs"
 msgstr ""
 
@@ -9083,11 +9083,11 @@ msgstr "Запустити mkvmerge і почати процес мультип�
 msgid "Run the header field editor"
 msgstr "Запустити редактор полів заголовків"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:356
+#: src/mkvtoolnix-gui/jobs/tool.cpp:373
 msgid "Running jobs cannot be edited."
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:209 src/mkvtoolnix-gui/jobs/tool.cpp:240
+#: src/mkvtoolnix-gui/jobs/tool.cpp:225 src/mkvtoolnix-gui/jobs/tool.cpp:256
 msgid "Running jobs cannot be removed."
 msgstr ""
 
@@ -9188,7 +9188,7 @@ msgstr "Зберегти розділи до файлу Matroska"
 msgid "Save information as"
 msgstr "Зберегти інформацію як"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 #, fuzzy
 msgid "Save job output"
 msgstr "Вихідна інформація mkvmerge:"
@@ -10106,7 +10106,11 @@ msgstr "Розпочати виконання"
 msgid "Start &muxing"
 msgstr "Почати &мультиплексування"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:273
+#: src/mkvtoolnix-gui/jobs/tool.cpp:290
+msgid "Start jobs &immediately"
+msgstr ""
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:289
 msgid "Start jobs &manually"
 msgstr ""
 
@@ -10152,7 +10156,7 @@ msgstr ""
 "Статистика для доріжки номер %1%: кількість блоків: %2%; розмір в байтах: "
 "%3%; тривалість в секундах: %4%; орієнтовний бітрейт в бітах/с: %5%\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42 src/mmg/jobs.cpp:473
+#: src/mkvtoolnix-gui/jobs/model.cpp:43 src/mmg/jobs.cpp:473
 msgid "Status"
 msgstr "Статус"
 
@@ -10358,7 +10362,7 @@ msgstr ""
 "Повідомляє mkvmerge не записувати теги зі статистикою для кожної доріжки."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:648
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "Text files"
 msgstr "Текстові файли"
 
@@ -13160,7 +13164,7 @@ msgid ""
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mkvtoolnix-gui/merge/track_model.cpp:43
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -13655,7 +13659,7 @@ msgstr ""
 "запису. Усі записи цього файлу будуть відсортовані за часом їх початку.\n"
 
 #: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:211
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:208 src/mmg/jobs.cpp:275
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:220 src/mmg/jobs.cpp:275
 #: src/mmg/mux_dialog.cpp:281
 msgid "Warning:"
 msgstr "Попередження:"
@@ -15076,7 +15080,7 @@ msgid "no file loaded"
 msgstr "жодного файлу не завантажено"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:281
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:313
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:325
 #, fuzzy
 msgid "no job started yet"
 msgstr ", розпочато %s"
@@ -15114,15 +15118,15 @@ msgid "normal"
 msgstr "стандартний"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:287
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:316
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:261
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:328
 #, fuzzy
 msgid "not finished yet"
 msgstr ", завершено %s"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:283
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:248
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:315
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:260
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:327
 #, fuzzy
 msgid "not started yet"
 msgstr ", розпочато %s"

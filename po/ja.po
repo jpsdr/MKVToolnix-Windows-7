@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-14 16:46+0200\n"
+"POT-Creation-Date: 2015-08-14 19:46+0200\n"
 "PO-Revision-Date: 2015-06-21 13:12+0200\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -854,8 +854,9 @@ msgstr "### 開発者向けハック ###"
 msgid "### Global output control ###"
 msgstr "### グローバル出力コントロール ###"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:87
-msgid "%1 automatic, %2 manual"
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
+#, fuzzy
+msgid "%1 automatic, %2 manual, %3 running"
 msgstr "自動%1個、手動%2個"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:89
@@ -863,7 +864,7 @@ msgstr "自動%1個、手動%2個"
 msgid "%1 entries"
 msgstr "%1個のエントリ"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:91
 msgid "%1 error"
 msgid_plural "%1 errors"
 msgstr[0] "%1個のエラー"
@@ -873,7 +874,7 @@ msgid "%1 of %2 file processed"
 msgid_plural "%1 of %2 files processed"
 msgstr[0] "%2個のファイル中%1個が処理されました"
 
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:88
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:90
 msgid "%1 warning"
 msgid_plural "%1 warnings"
 msgstr[0] "%1個の警告"
@@ -1174,7 +1175,7 @@ msgstr "ダウンロード(&D)"
 msgid "&Duration of each entry in seconds:"
 msgstr "プレイリストの最小の継続時間（秒単位）："
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:276
+#: src/mkvtoolnix-gui/jobs/tool.cpp:293
 msgid "&Edit in corresponding tool and remove from queue"
 msgstr ""
 
@@ -1387,7 +1388,7 @@ msgstr "Matroskaファイルを開く(&O)"
 msgid "&Open Matroska or chapter file"
 msgstr "MatroskaまたはXMLファイルを開く(&O)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:275
+#: src/mkvtoolnix-gui/jobs/tool.cpp:292
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
 #, fuzzy
 msgid "&Open folder"
@@ -1446,7 +1447,7 @@ msgstr "ファイルを削除(&R)"
 msgid "&Remove job from queue after completion"
 msgstr "次の場合に実行後にジョブキューからジョブを消去する(&R)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:274
+#: src/mkvtoolnix-gui/jobs/tool.cpp:291
 msgid "&Remove jobs"
 msgstr "ジョブを削除(&R)"
 
@@ -1519,7 +1520,7 @@ msgstr "開始と終了："
 msgid "&Start all pending jobs"
 msgstr "実行待ちのジョブを全て開始(&S)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:272
+#: src/mkvtoolnix-gui/jobs/tool.cpp:288
 msgid "&Start jobs automatically"
 msgstr "ジョブを自動的に開始(&S)"
 
@@ -1575,7 +1576,7 @@ msgstr "ビデオ"
 msgid "&View log"
 msgstr "ログを見る(&V)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:271
+#: src/mkvtoolnix-gui/jobs/tool.cpp:287
 msgid "&View output"
 msgstr "出力を表示(&V)"
 
@@ -2043,7 +2044,7 @@ msgstr "--- ジョブ%dの開始（%s, 追加日時 %s）"
 msgid "--- END job %d"
 msgstr "--- ジョブ%dの終了"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:241
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr ""
 
@@ -2051,11 +2052,11 @@ msgstr ""
 msgid "--- No job output found.\n"
 msgstr "--- ジョブ出力が見つかりませんでした。\n"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:224
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:236
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:228
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:240
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr ""
 
@@ -2378,9 +2379,9 @@ msgstr ""
 msgid "Abort processing after the current job"
 msgstr "現在のジョブ終了後に処理中断"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:398
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:310
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:110
 msgid "Abort running jobs"
 msgstr "実行中のジョブを中断"
 
@@ -2404,24 +2405,24 @@ msgid "Acknowledge &all warnings and errors"
 msgstr "警告とエラーを通知する(&A)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:451
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:128
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:130
 msgid "Acknowledge all &errors"
 msgstr "全てのエラーを通知する(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:450
-#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:111
+#: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:113
 msgid "Acknowledge all &warnings"
 msgstr "全ての警告を通知する(&W)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:279
+#: src/mkvtoolnix-gui/jobs/tool.cpp:296
 msgid "Acknowledge errors"
 msgstr "エラーを通知"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:278
+#: src/mkvtoolnix-gui/jobs/tool.cpp:295
 msgid "Acknowledge warnings"
 msgstr "警告を通知"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:280
+#: src/mkvtoolnix-gui/jobs/tool.cpp:297
 #, fuzzy
 msgid "Acknowledge warnings and errors"
 msgstr "警告とエラーを通知する(&A)"
@@ -2627,7 +2628,7 @@ msgstr "全てのチャプタエントリは有効です。"
 #: src/mkvtoolnix-gui/merge/tab.cpp:227
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "All files"
 msgstr "全てのファイル"
 
@@ -4131,15 +4132,15 @@ msgstr "ビデオトラック"
 msgid "Date (invalid, value: %1%)"
 msgstr "日付 (無効な値：%1%)"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date added"
 msgstr "追加日"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date finished"
 msgstr "完了日時"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Date started"
 msgstr "開始日"
 
@@ -4235,7 +4236,7 @@ msgstr "ジョブキューから選択したジョブを削除します"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:242
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:56
 #: src/mmg/jobs.cpp:475
 msgid "Description"
@@ -4369,12 +4370,12 @@ msgstr "分割しない"
 msgid "Do not write meta seek elements at all."
 msgstr "メタシーク要素を全く記録しません。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:398
 #, fuzzy
 msgid "Do you really want to abort the currently running job?"
 msgstr "本当にこのジョブを中断しますか？"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:98
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:110
 msgid "Do you really want to abort this job?"
 msgstr "本当にこのジョブを中断しますか？"
 
@@ -4711,7 +4712,7 @@ msgstr "Matroskaファイルの書き込み中にエラーが発生しました"
 #: src/common/output.cpp:80
 #: src/common/output.cpp:81
 #: src/mkvtoolnix-gui/jobs/job.cpp:212
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:209
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:221
 #: src/mmg/jobs.cpp:278
 #: src/mmg/mux_dialog.cpp:284
 msgid "Error:"
@@ -6879,7 +6880,7 @@ msgid "No input files were given. No output will be created.\n"
 msgstr "入力ファイルが指定されていません。出力ファイルは作成されません。\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:69
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:314
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:326
 msgid "No job has been started yet."
 msgstr "ジョブは開始されていません。"
 
@@ -7510,7 +7511,7 @@ msgstr "ジョブ%d/%dを処理中"
 msgid "Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr "プログラムはクラスタへシークすることしかできないため、大きなクラスタを作成するとシークが不正確になったり遅くなったりする可能性があります。"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 msgid "Progress"
 msgstr "進行状況"
 
@@ -7876,7 +7877,7 @@ msgstr "%1%の位置で再同期に成功しました。\n"
 msgid "Right-click for actions for all tracks"
 msgstr "全てのトラックへのアクションを行うには右クリックしてください"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:287
+#: src/mkvtoolnix-gui/jobs/tool.cpp:304
 msgid "Right-click for actions for jobs"
 msgstr "全てのジョブへのアクションを行う場合は右クリックしてください"
 
@@ -7896,13 +7897,13 @@ msgstr "mkvmergeを実行し、MUX処理を開始します"
 msgid "Run the header field editor"
 msgstr "ヘッダフィールドエディタを起動します"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:356
+#: src/mkvtoolnix-gui/jobs/tool.cpp:373
 #, fuzzy
 msgid "Running jobs cannot be edited."
 msgstr "実行中のジョブを削除することはできません。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:209
-#: src/mkvtoolnix-gui/jobs/tool.cpp:240
+#: src/mkvtoolnix-gui/jobs/tool.cpp:225
+#: src/mkvtoolnix-gui/jobs/tool.cpp:256
 msgid "Running jobs cannot be removed."
 msgstr "実行中のジョブを削除することはできません。"
 
@@ -8002,7 +8003,7 @@ msgstr "チャプタをMatroskaファイルとして保存"
 msgid "Save information as"
 msgstr "情報を名前をつけて保存します"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "Save job output"
 msgstr "ジョブの出力を保存"
 
@@ -8759,7 +8760,12 @@ msgstr "開始"
 msgid "Start &muxing"
 msgstr "MUX開始(&M)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:273
+#: src/mkvtoolnix-gui/jobs/tool.cpp:290
+#, fuzzy
+msgid "Start jobs &immediately"
+msgstr "ジョブを自動的に開始(&S)"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:289
 #, fuzzy
 msgid "Start jobs &manually"
 msgstr "ジョブを自動的に開始(&S)"
@@ -8802,7 +8808,7 @@ msgstr "ジョブID %d（%s）の処理を開始します　開始日時：%s"
 msgid "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"
 msgstr "トラック番号%1%の統計情報: ブロックの数: %2%；サイズ（バイト）: %3%; 持続時間（秒）: %4%; おおよそのビットレート（ビット/秒）: %5%\n"
 
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mmg/jobs.cpp:473
 msgid "Status"
 msgstr "ステータス"
@@ -8982,7 +8988,7 @@ msgstr "mkvemergeが最大でn個のデータブロックを各クラスタに�
 
 #: src/info/qt_ui.cpp:98
 #: src/mkvtoolnix-gui/merge/input.cpp:648
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:263
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
 msgid "Text files"
 msgstr "テキストファイル"
 
@@ -10960,7 +10966,7 @@ msgid "Two files muxed with the same settings and this switch activated will be 
 msgstr "同じ設定かつこのスイッチが有効な状態でMUXされた2つのファイルは全く同じものになります。"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
-#: src/mkvtoolnix-gui/jobs/model.cpp:42
+#: src/mkvtoolnix-gui/jobs/model.cpp:43
 #: src/mkvtoolnix-gui/merge/track_model.cpp:43
 #: src/mmg/tabs/select_scanned_file_dlg.cpp:99
 msgid "Type"
@@ -11400,7 +11406,7 @@ msgstr "%1%行目で警告：開始時間のタイムコードが前のエント
 
 #: src/common/output.cpp:84
 #: src/mkvtoolnix-gui/jobs/job.cpp:211
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:208
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:220
 #: src/mmg/jobs.cpp:275
 #: src/mmg/mux_dialog.cpp:281
 msgid "Warning:"
@@ -12606,7 +12612,7 @@ msgid "no file loaded"
 msgstr "ファイルが読み込まれていません"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:281
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:313
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:325
 msgid "no job started yet"
 msgstr "ジョブは開始されていません"
 
@@ -12643,14 +12649,14 @@ msgid "normal"
 msgstr "通常"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:287
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:316
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:261
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:328
 msgid "not finished yet"
 msgstr "まだ完了していません"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:283
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:248
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:315
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:260
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:327
 msgid "not started yet"
 msgstr "まだ開始していません"
 
