@@ -824,7 +824,10 @@ Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
       if (cfg.m_disableCompressionForAllTrackTypes)
         track->m_compression = Track::CompNone;
 
-      if (track->m_defaultTrackFlagWasSet && !defaultFlagSet[track->m_type]) {
+      if (cfg.m_disableDefaultTrackForSubtitles && track->isSubtitles())
+        track->m_defaultTrackFlag = 2;
+
+      else if (track->m_defaultTrackFlagWasSet && !defaultFlagSet[track->m_type]) {
         track->m_defaultTrackFlag     = 1;
         defaultFlagSet[track->m_type] = true;
       }

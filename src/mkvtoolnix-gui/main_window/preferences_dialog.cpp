@@ -51,6 +51,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMAutoSetFileTitle->setChecked(m_cfg.m_autoSetFileTitle);
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
   ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
+  ui->cbMDisableDefaultTrackForSubtitles->setChecked(m_cfg.m_disableDefaultTrackForSubtitles);
   ui->cbMAlwaysAddDroppedFiles->setChecked(m_cfg.m_mergeAlwaysAddDroppedFiles);
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
@@ -143,6 +144,8 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("When a file is added its name is scanned."))
                    .arg(QY("If it contains the word 'DELAY' followed by a number then this number is automatically put into the 'delay' input field for any audio track found in the file.")));
+
+  Util::setToolTip(ui->cbMDisableDefaultTrackForSubtitles, QY("If enabled all subtitle tracks will have their »default track« flag set to »no« when they're added."));
 
   Util::setToolTip(ui->cbMDisableCompressionForAllTrackTypes,
                    Q("%1 %2")
@@ -388,6 +391,7 @@ PreferencesDialog::save() {
   m_cfg.m_autoSetFileTitle                   = ui->cbMAutoSetFileTitle->isChecked();
   m_cfg.m_setAudioDelayFromFileName          = ui->cbMSetAudioDelayFromFileName->isChecked();
   m_cfg.m_disableCompressionForAllTrackTypes = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
+  m_cfg.m_disableDefaultTrackForSubtitles    = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
   m_cfg.m_mergeAlwaysAddDroppedFiles         = ui->cbMAlwaysAddDroppedFiles->isChecked();
   m_cfg.m_mergeAlwaysShowOutputFileControls  = ui->cbMAlwaysShowOutputFileControls->isChecked();
   m_cfg.m_clearMergeSettings                 = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());

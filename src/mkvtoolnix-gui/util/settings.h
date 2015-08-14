@@ -58,7 +58,7 @@ public:
   ProcessPriority m_priority;
   QTabWidget::TabPosition m_tabPosition;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
-  bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes, m_mergeAlwaysAddDroppedFiles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
+  bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysAddDroppedFiles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
   ClearMergeSettingsAction m_clearMergeSettings;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
