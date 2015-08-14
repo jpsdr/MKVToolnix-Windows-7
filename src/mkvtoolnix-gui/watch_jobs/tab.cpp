@@ -68,7 +68,7 @@ Tab::retranslateUi() {
 
   ui->description->setText(m_currentJobDescription.isEmpty() ? QY("No job has been started yet.") : m_currentJobDescription);
   m_saveOutputAction->setText(QY("&Save output"));
-  m_clearOutputAction->setText(QY("&Clear output"));
+  m_clearOutputAction->setText(QY("&Clear output and reset progress"));
   m_openFolderAction->setText(QY("&Open folder"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
@@ -343,7 +343,7 @@ Tab::showMoreActionsMenu() {
 
   auto hasJob = std::numeric_limits<uint64_t>::max() != m_id;
   m_openFolderAction->setEnabled(hasJob);
-  m_clearOutputAction->setEnabled(hasJob);
+  m_clearOutputAction->setEnabled(true);
 
   menu.addAction(m_openFolderAction);
   menu.addSeparator();
