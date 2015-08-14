@@ -41,6 +41,7 @@ public:
   virtual void retranslateUi();
 
   virtual void connectToJob(mtx::gui::Jobs::Job const &job);
+  virtual void disconnectFromJob(mtx::gui::Jobs::Job const &job);
   virtual void setInitialDisplay(mtx::gui::Jobs::Job const &job);
 
   uint64_t id() const;

@@ -69,6 +69,7 @@ public:
   void stop();
 
   void startNextAutoJob();
+  void startJobImmediately(Job &job);
 
   void saveJobs();
   void loadJobs();

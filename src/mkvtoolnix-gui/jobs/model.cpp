@@ -17,6 +17,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
+#include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 namespace mtx { namespace gui { namespace Jobs {
 
@@ -386,6 +387,17 @@ Model::startNextAutoJob() {
   m_running       = false;
   if (wasRunning)
     emit queueStatusChanged(QueueStatus::Stopped);
+}
+
+void
+Model::startJobImmediately(Job &job) {
+  QMutexLocker locked{&m_mutex};
+
+  MainWindow::watchCurrentJobTab()->disconnectFromJob(job);
+  MainWindow::watchJobTool()->viewOutput(job);
+
+  job.start();
+  updateJobStats();
 }
 
 void

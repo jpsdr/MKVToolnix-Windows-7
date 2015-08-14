@@ -36,6 +36,7 @@ Tool::Tool(QWidget *parent,
   , m_acknowledgeSelectedWarningsErrorsAction{new QAction{this}}
   , m_openFolderAction{new QAction{this}}
   , m_editAndRemoveAction{new QAction{this}}
+  , m_startImmediatelyAction{new QAction{this}}
   , m_jobQueueMenu{jobQueueMenu}
   , m_jobsMenu{new QMenu{this}}
 {
@@ -75,6 +76,7 @@ Tool::setupUiControls() {
   m_jobsMenu->addSeparator();
   m_jobsMenu->addAction(m_startAutomaticallyAction);
   m_jobsMenu->addAction(m_startManuallyAction);
+  m_jobsMenu->addAction(m_startImmediatelyAction);
   m_jobsMenu->addSeparator();
   m_jobsMenu->addAction(m_editAndRemoveAction);
   m_jobsMenu->addSeparator();
@@ -110,6 +112,7 @@ Tool::setupUiControls() {
   connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
   connect(m_openFolderAction,                               &QAction::triggered,       this,    &Tool::onOpenFolder);
   connect(m_editAndRemoveAction,                            &QAction::triggered,       this,    &Tool::onEditAndRemove);
+  connect(m_startImmediatelyAction,                               &QAction::triggered,       this,    &Tool::onStartImmediately);
 
   connect(ui->jobs,                                         &QTreeView::doubleClicked, this,    &Tool::onViewOutput);
 }
@@ -138,16 +141,21 @@ Tool::onJobQueueMenu() {
 
 void
 Tool::onContextMenu(QPoint pos) {
-  bool hasSelection = false;
+  auto hasSelection = false, hasNotRunning = false;
 
-  m_model->withSelectedJobs(ui->jobs, [&hasSelection](Job &) { hasSelection = true; });
+  m_model->withSelectedJobs(ui->jobs, [&hasSelection, &hasNotRunning](Job const &job) {
+    hasSelection = true;
+    if (Job::Running != job.status())
+      hasNotRunning = true;
+  });
 
-  m_startAutomaticallyAction->setEnabled(hasSelection);
-  m_startManuallyAction->setEnabled(hasSelection);
+  m_startAutomaticallyAction->setEnabled(hasNotRunning);
+  m_startManuallyAction->setEnabled(hasNotRunning);
   m_viewOutputAction->setEnabled(hasSelection);
   m_removeAction->setEnabled(hasSelection);
   m_openFolderAction->setEnabled(hasSelection);
   m_editAndRemoveAction->setEnabled(hasSelection);
+  m_startImmediatelyAction->setEnabled(hasNotRunning);
 
   m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
   m_acknowledgeSelectedErrorsAction->setEnabled(hasSelection);
@@ -185,6 +193,14 @@ Tool::onStartAllPending() {
   m_model->startNextAutoJob();
 
   if (startedSomething && Util::Settings::get().m_switchToJobOutputAfterStarting)
+    MainWindow::get()->switchToTool(MainWindow::watchJobTool());
+}
+
+void
+Tool::onStartImmediately() {
+  m_model->withSelectedJobs(ui->jobs, [this](Job &job) { m_model->startJobImmediately(job); });
+
+  if (Util::Settings::get().m_switchToJobOutputAfterStarting)
     MainWindow::get()->switchToTool(MainWindow::watchJobTool());
 }
 
@@ -271,6 +287,7 @@ Tool::retranslateUi() {
   m_viewOutputAction->setText(QY("&View output"));
   m_startAutomaticallyAction->setText(QY("&Start jobs automatically"));
   m_startManuallyAction->setText(QY("Start jobs &manually"));
+  m_startImmediatelyAction->setText(QY("Start jobs &immediately"));
   m_removeAction->setText(QY("&Remove jobs"));
   m_openFolderAction->setText(QY("&Open folder"));
   m_editAndRemoveAction->setText(QY("&Edit in corresponding tool and remove from queue"));

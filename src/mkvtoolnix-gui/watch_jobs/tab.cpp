@@ -90,6 +90,18 @@ Tab::connectToJob(Jobs::Job const &job) {
 }
 
 void
+Tab::disconnectFromJob(Jobs::Job const &job) {
+  if (m_currentlyConnectedJob == &job) {
+    m_currentlyConnectedJob = nullptr;
+    m_id                    = std::numeric_limits<uint64_t>::max();
+  }
+
+  disconnect(&job, &Jobs::Job::statusChanged,   this, &Tab::onStatusChanged);
+  disconnect(&job, &Jobs::Job::progressChanged, this, &Tab::onJobProgressChanged);
+  disconnect(&job, &Jobs::Job::lineRead,        this, &Tab::onLineRead);
+}
+
+void
 Tab::onAbort() {
   if (std::numeric_limits<uint64_t>::max() == m_id)
     return;

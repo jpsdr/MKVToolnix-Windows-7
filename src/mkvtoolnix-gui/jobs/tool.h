@@ -27,7 +27,7 @@ protected:
   Model *m_model;
 
   QAction *m_startAutomaticallyAction, *m_startManuallyAction, *m_viewOutputAction, *m_removeAction, *m_acknowledgeSelectedWarningsAction, *m_acknowledgeSelectedErrorsAction, *m_acknowledgeSelectedWarningsErrorsAction;
-  QAction *m_openFolderAction, *m_editAndRemoveAction;
+  QAction *m_openFolderAction, *m_editAndRemoveAction, *m_startImmediatelyAction;
   QMenu *m_jobQueueMenu, *m_jobsMenu;
 
 public:
@@ -43,6 +43,7 @@ public:
 public slots:
   void onStartAutomatically();
   void onStartManually();
+  void onStartImmediately();
   void onStartAllPending();
   void onStopQueueAfterCurrentJob();
   void onStopQueueImmediately();
