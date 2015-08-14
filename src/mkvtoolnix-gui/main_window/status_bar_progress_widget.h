@@ -19,7 +19,7 @@ class StatusBarProgressWidget : public QWidget {
 
 protected:
   std::unique_ptr<Ui::StatusBarProgressWidget> ui;
-  int m_numPendingAuto{}, m_numPendingManual{}, m_numWarnings{}, m_numErrors{}, m_timerStep{};
+  int m_numPendingAuto{}, m_numPendingManual{}, m_numRunning{}, m_numWarnings{}, m_numErrors{}, m_timerStep{};
   QTimer m_timer;
   QList<QPixmap> m_pixmaps;
 
@@ -31,7 +31,7 @@ public:
 
 public slots:
   void setProgress(int progress, int totalProgress);
-  void setJobStats(int numPendingAutomatic, int numPendingManual, int numOther);
+  void setJobStats(int numPendingAutomatic, int numPendingManual, int numRunning, int numOther);
   void setNumUnacknowledgedWarningsOrErrors(int numWarnings, int numErrors);
   void updateWarningsAndErrorsIcons();
 

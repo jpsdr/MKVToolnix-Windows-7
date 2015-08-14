@@ -48,9 +48,11 @@ StatusBarProgressWidget::setProgress(int progress,
 void
 StatusBarProgressWidget::setJobStats(int numPendingAuto,
                                      int numPendingManual,
+                                     int numRunning,
                                      int) {
   m_numPendingAuto   = numPendingAuto;
   m_numPendingManual = numPendingManual;
+  m_numRunning       = numRunning;
 
   setLabelTexts();
 }
@@ -84,7 +86,7 @@ StatusBarProgressWidget::retranslateUi() {
 
 void
 StatusBarProgressWidget::setLabelTexts() {
-  ui->numJobsLabel->setText(QY("%1 automatic, %2 manual").arg(m_numPendingAuto).arg(m_numPendingManual));
+  ui->numJobsLabel->setText(QY("%1 automatic, %2 manual, %3 running").arg(m_numPendingAuto).arg(m_numPendingManual).arg(m_numRunning));
   ui->warningsLabel->setText(QNY("%1 warning", "%1 warnings", m_numWarnings).arg(m_numWarnings));
   ui->errorsLabel  ->setText(QNY("%1 error",   "%1 errors",   m_numErrors)  .arg(m_numErrors));
 }

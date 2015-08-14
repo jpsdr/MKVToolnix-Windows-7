@@ -445,21 +445,14 @@ void
 Model::updateJobStats() {
   QMutexLocker locked{&m_mutex};
 
-  auto numPendingAuto   = 0;
-  auto numPendingManual = 0;
-  auto numOther         = 0;
+  auto numJobs = std::map<Job::Status, int>{ { Job::PendingAuto, 0 }, { Job::PendingManual, 0 }, { Job::Running, 0 }, { Job::Disabled, 0 } };
 
-  for (auto const &job : m_jobsById)
-    if (mtx::included_in(job->status(), Job::PendingAuto, Job::Running))
-      ++numPendingAuto;
+  for (auto const &job : m_jobsById) {
+    auto idx = mtx::included_in(job->status(), Job::PendingAuto, Job::PendingManual, Job::Running) ? job->status() : Job::Disabled;
+    ++numJobs[idx];
+  }
 
-    else if (Job::PendingManual == job->status())
-      ++numPendingManual;
-
-    else
-      ++numOther;
-
-  emit jobStatsChanged(numPendingAuto, numPendingManual, numOther);
+  emit jobStatsChanged(numJobs[ Job::PendingAuto ], numJobs[ Job::PendingManual ], numJobs[ Job::Running ], numJobs[ Job::Disabled ]);
 }
 
 void

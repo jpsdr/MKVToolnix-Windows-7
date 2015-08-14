@@ -83,7 +83,7 @@ public:
 
 signals:
   void progressChanged(int progress, int totalProgress);
-  void jobStatsChanged(int numPendingAutomatic, int numPendingManual, int numOther);
+  void jobStatsChanged(int numPendingAutomatic, int numPendingManual, int numRunning, int numOther);
   void numUnacknowledgedWarningsOrErrorsChanged(int numWarnings, int numErrors);
 
   void queueStatusChanged(QueueStatus status);
