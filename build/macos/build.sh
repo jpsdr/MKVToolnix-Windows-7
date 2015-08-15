@@ -129,7 +129,7 @@ function build_qtbase {
         -no-openssl -no-cups -no-feature-cups -no-feature-printer
         -no-feature-printpreviewwidget -no-feature-printdialog -no-feature-printpreviewdialog)
   args+=(-no-framework)
-  if [[ -z $SHARED ]] args+=(-static)
+  if [[ -z $SHARED_QT ]] args+=(-static)
 
   local package=qtbase-opensource-src-${QTVER}
   NO_MAKE=1 build_package ${package}.tar.xz $args
@@ -218,7 +218,7 @@ function build_configured_mkvtoolnix {
     # --with-qt-pkg-config-modules=Qt5PrintSupport
   )
 
-  if [[ -z $SHARED ]] args+=(--enable-static-qt)
+  if [[ -z $SHARED_QT ]] args+=(--enable-static-qt)
 
   ./configure \
     LDFLAGS="$LDFLAGS -framework CoreFoundation" \
@@ -253,6 +253,7 @@ function build_dmg {
 
   rm -rf $dmgbase
   ./drake install prefix=${dmgcnt}
+  test -f ${dmgmac}/mkvtoolnix-gui
 
   cp README.md $dmgbase/README.txt
   cp COPYING $dmgbase/COPYING.txt

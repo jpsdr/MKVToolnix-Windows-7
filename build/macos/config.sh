@@ -12,3 +12,4 @@ export CXXFLAGS="-std=c++11"
 export CXXFLAGS="-std=c++11 -fvisibility=hidden -fvisibility-inlines-hidden"
 export MAKEFLAGS="-j 4"
 export DRAKETHREADS=4
+export SHARED_QT=1
