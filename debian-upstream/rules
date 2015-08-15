@@ -9,36 +9,37 @@ LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 %:
 	dh $@ --parallel
 
-override_dh_auto_configure:
-	dh_auto_configure
-
-#	exit 1
-
-	./drake apps:mkvinfo apps:mkvtoolnix-gui
-
-	mv src/mkvinfo src/mkvinfo-gui
-	mv src/mkvtoolnix-gui/mkvtoolnix-gui src/mkvtoolnix-gui/mkvtoolnix-gui-tmp
-
-	./drake clean:dist
-
-	dh_auto_configure -- \
-	--disable-gui
-
 override_dh_clean:
 	[ ! -f build-config ] || ./drake clean:dist
 
-	dh_clean src/mkvinfo-gui src/mkvtoolnix-gui/mkvtoolnix-gui-tmp config.status config.log \
+	dh_clean src/mkvinfo-gui config.status config.log \
 	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
 
+override_dh_auto_configure:
+	dh_auto_configure -- --docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+
+override_dh_auto_build:
+	./drake
+
+	mv src/mkvinfo src/mkvinfo-gui
+	rm src/info/*.o
+
+	cp -a config.h config.h.ref
+	sed -i -e '/#define.*HAVE_QT/d' config.h
+	touch -r config.h.ref config.h
+	rm config.h.ref
+
+	./drake apps:mkvinfo USE_QT=no QT_LIBS=' ' QT_INCLUDES=' '
+
+	touch src/info/qt_ui.o
+	touch src/mkvinfo
+
 override_dh_install:
-	./drake                               DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
-	./drake install 'install:shared'      DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
-	./drake 'install:manpages' USE_QT=yes DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+	./drake install DESTDIR=$(CURDIR)/debian/tmp
 
 	dh_install --list-missing -Xmkvtoolnix.xml
 
 	mv debian/mkvtoolnix/usr/bin/mkvinfo debian/mkvtoolnix/usr/bin/mkvinfo-text
-	mv debian/mkvtoolnix-gui/usr/bin/mkvtoolnix-gui-tmp debian/mkvtoolnix-gui/usr/bin/mkvtoolnix-gui
 
 	dh_link -pmkvtoolnix usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-text.1.gz
 	dh_link -pmkvtoolnix-gui usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-gui.1.gz
@@ -48,5 +49,3 @@ override_dh_installchangelogs:
 
 override_dh_builddeb:
 	dh_builddeb -- -Zxz -z9
-
-override_dh_auto_build:
