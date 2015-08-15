@@ -43,7 +43,7 @@ require_relative "rake.d/tarball"
 require_relative 'rake.d/gtest' if $have_gtest
 
 def setup_globals
-  $build_mkvtoolnix_gui  ||=  c?(:USE_QT) && c?(:BUILD_MKVTOOLNIX_GUI)
+  $build_mkvtoolnix_gui  ||=  c?(:USE_QT)
   $build_tools           ||=  c?(:BUILD_TOOLS)
 
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}

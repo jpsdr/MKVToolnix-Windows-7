@@ -1,5 +1,12 @@
 2015-08-15  Moritz Bunkus  <moritz@bunkus.org>
 
+        * build system: removal: the switch »--without-mkvtoolnix-gui« has
+        been removed. There are only two GUIs left in the package: the
+        Qt-enabled mkvinfo and MKVToolNix GUI. Both are enabled by default
+        and can be disabled with the option »--disable-qt«. In that case
+        only the text-mode version of mkvinfo is built, and the MKVToolNix
+        GUI is not built at all.
+
         * Removal: all support for wxWidgets has been removed. This means
         that the mkvmerge GUI (mmg) has been removed and that mkvinfo now
         only supports a text-mode and a Qt-based interface.

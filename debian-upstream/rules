@@ -31,8 +31,8 @@ override_dh_clean:
 	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
 
 override_dh_install:
-	./drake install 'install:shared' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
-	./drake 'install:manpages' DESTDIR=$(CURDIR)/debian/tmp USE_QT=yes BUILD_MKVTOOLNIX_GUI=yes docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+	./drake install 'install:shared'      DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+	./drake 'install:manpages' USE_QT=yes DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
 
 	dh_install --list-missing -Xmkvtoolnix.xml
 

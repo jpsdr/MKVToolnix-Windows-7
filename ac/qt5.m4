@@ -229,13 +229,6 @@ return 0;
     fi
   fi
 
-  AC_ARG_WITH(mkvtoolnix-gui,[AS_HELP_STRING([--without-mkvtoolnix-gui],[do not build mkvtoolnix-gui])])
-  if test x"$with_mkvtoolnix_gui" = xyes -o x"$with_mkvtoolnix_gui" = x; then
-    BUILD_MKVTOOLNIX_GUI=yes
-  else
-    BUILD_MKVTOOLNIX_GUI=no
-  fi
-
   AC_PATH_PROG(LCONVERT, lconvert)
 
 else
@@ -248,8 +241,6 @@ if test x"$have_qt" != "xyes" ; then
   QT_LIBS=
   MOC=
   UIC=
-elif test x"$BUILD_MKVTOOLNIX_GUI" = "xyes" ; then
-  opt_features_yes="$opt_features_yes\n   * mkvtoolnix-gui"
 fi
 
 AC_SUBST(MOC)
@@ -257,4 +248,3 @@ AC_SUBST(UIC)
 AC_SUBST(QT_CFLAGS)
 AC_SUBST(QT_LIBS)
 AC_SUBST(USE_QT)
-AC_SUBST(BUILD_MKVTOOLNIX_GUI)
