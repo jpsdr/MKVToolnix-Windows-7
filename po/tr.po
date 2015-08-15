@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-08-14 21:04+0200\n"
-"PO-Revision-Date: 2015-07-18 21:27+0300\n"
+"PO-Revision-Date: 2015-08-14 22:58+0300\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
 "Language: tr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
-"X-Generator: Poedit 1.8.2\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #: src/extract/xtr_tta.cpp:105
 #, boost-format
@@ -269,7 +269,7 @@ msgid ""
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
 "  --default-track <TID[:bool]>\n"
-"                           Bu iz için 'varsayılan' işarete ayarlar veya\n"
+"                           Bu iz için 'varsayılan' işaretini ayarlar veya\n"
 "                           eğer bool 0 ise bulunmaması için zorlar.\n"
 
 #: src/merge/mkvmerge.cpp:112
@@ -318,7 +318,7 @@ msgid ""
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
 "  --forced-track <TID[:bool]>\n"
-"                           Bu iz için 'zorunlu' işarete ayarlar veya\n"
+"                           Bu iz için 'zorlanan' işaretini ayarlar veya\n"
 "                           eğer bool 0 ise bulunmaması için zorlar.\n"
 
 #: src/merge/mkvmerge.cpp:84
@@ -904,9 +904,8 @@ msgid "### Global output control ###"
 msgstr "### Genel çıktı denetimi ###"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:89
-#, fuzzy
 msgid "%1 automatic, %2 manual, %3 running"
-msgstr "%1 otomatik, %2 elle"
+msgstr "%1 otomatik, %2 elle, %3 çalışıyor"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:89
 #: src/mkvtoolnix-gui/merge/track_model.cpp:249
@@ -1155,9 +1154,8 @@ msgid "&Check for updates"
 msgstr "&Güncellemeleri kontrol et"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:71
-#, fuzzy
 msgid "&Clear output and reset progress"
-msgstr "Durum ve ilerleme"
+msgstr "Çıktıyı &temizle ve ilerlemeyi sıfırla"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:810
 msgid "&Clearing settings automatically:"
@@ -1235,7 +1233,7 @@ msgstr "Saniye olarak her girişin &süresi:"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:293
 msgid "&Edit in corresponding tool and remove from queue"
-msgstr ""
+msgstr "İlgili araç içinde &düzenle ve kuyruktan kaldır"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:970
 msgid "&Enable all tracks"
@@ -1438,9 +1436,8 @@ msgstr "Matroska veya bölüm dosyası &aç"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:292
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:72
-#, fuzzy
 msgid "&Open folder"
-msgstr "Klasörü aç"
+msgstr "Klasörü &aç"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:389
 #: src/mkvtoolnix-gui/forms/merge/tool.h:222
@@ -2943,7 +2940,7 @@ msgstr "Çıktı dosyası denetimlerini her zaman sekmelerin altında göster"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:781
 msgid "Always switch to the job output tool after starting one immediately"
-msgstr ""
+msgstr "Bir tane başladıktan hemen sonra her zaman iş çıktısı aracına geç"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:782
 msgid "Always use a &default description when adding a job to the queue"
@@ -3026,7 +3023,7 @@ msgid ""
 "flag for track %2% of '%3%' will not be set.\n"
 msgstr ""
 "%1% iz için başka bir varsayılan iz zaten ayarlandı. İz %2% / '%3%' için "
-"'varsayılan' işaret ayarlanmayacak.\n"
+"'varsayılan' işareti ayarlanmayacaktır.\n"
 
 #: src/mmg/mmg_dialog.cpp:602
 msgid ""
@@ -4466,7 +4463,7 @@ msgstr ""
 #: src/info/mkvinfo.cpp:901
 #, boost-format
 msgid "Default flag: %1%"
-msgstr "Varsayılan işaret: %1%"
+msgstr "Varsayılan işareti: %1%"
 
 #: src/mmg/options/mmg.cpp:121
 msgid "Default subtitle charset"
@@ -4586,9 +4583,8 @@ msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "Blok Gruplarının yerine Basit Blokların kullanımı etkisizleştirir."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:801
-#, fuzzy
 msgid "Disable »default track« flag for subtitle tracks"
-msgstr "Tüm izler için bağlamayı etkisizleştirir."
+msgstr "Altyazı izleri için »varsayılan iz« işaretini etkisizleştir"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Disables lacing for all tracks."
@@ -6011,12 +6007,16 @@ msgid ""
 "If enabled all subtitle tracks will have their »default track« flag set to "
 "»no« when they're added."
 msgstr ""
+"Eğer etkinleştirildiyse, tüm altyazı izleri eklendikleri zaman »hayır« "
+"olarak ayarlı kendi »varsayılan iz« işaretine sahip olacak."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:116
 msgid ""
 "If enabled the GUI will automatically switch to the job output tool whenever "
 "you start a job (e.g. by pressing »start muxing«)."
 msgstr ""
+"Eğer etkinleştirildiyse, GKA, bir iş başlattığınız zaman otomatik olarak iş "
+"çıktısı aracına geçecek (örn. »çoklamayı başlat« düğmesine basarak)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:115
 msgid ""
@@ -7038,7 +7038,7 @@ msgstr "Günlük çıktısı:"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:294
 msgid "M&ore actions"
-msgstr ""
+msgstr "Daha f&azla eylem"
 
 #: src/info/mkvinfo.cpp:751
 msgid "MD5"
@@ -7411,6 +7411,7 @@ msgstr "İz numarası %1% ile birden fazla iz bulundu.\n"
 msgid ""
 "Most of the other settings on the output tab will be kept intact, though."
 msgstr ""
+"Çıktı sekmesindeki diğer ayarların çoğu yine de bozulmadan tutulacaktır."
 
 #: src/mmg/jobs.cpp:508
 msgid "Move the selected jobs down"
@@ -8856,9 +8857,8 @@ msgid "Run the header field editor"
 msgstr "Başlık alanı düzenleyiciyi çalıştır"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:373
-#, fuzzy
 msgid "Running jobs cannot be edited."
-msgstr "Çalışan işler kaldırılamaz."
+msgstr "Çalışan işler düzenlenemez."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:225 src/mkvtoolnix-gui/jobs/tool.cpp:256
 msgid "Running jobs cannot be removed."
@@ -9309,7 +9309,7 @@ msgid ""
 msgstr ""
 "Eğer bu iz oynatma sırasında kullanılmak ZORUNDAYSA\n"
 "ayarlayın. Bir tür (ses, görüntü veya altyazılar) için\n"
-"pek çok zorlanmış iz olabilir. Oynatıcı, dili kullanıcı tercihiyle\n"
+"pek çok zorlanan iz olabilir. Oynatıcı, dili kullanıcı tercihiyle\n"
 "eşleşen ya da varsayılan + zorlanan izden birini seçmelidir."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:330
@@ -9319,7 +9319,7 @@ msgid ""
 "whose language matches the user preference or the default + forced track."
 msgstr ""
 "Eğer bu iz oynatma sırasında kullanılmak ZORUNDAYSA ayarlayın. Bir tür (ses, "
-"görüntü veya altyazılar) için pek çok zorlanmış iz olabilir. Oynatıcı, dili "
+"görüntü veya altyazılar) için pek çok zorlanan iz olabilir. Oynatıcı, dili "
 "kullanıcı tercihiyle eşleşen ya da varsayılan + zorlanan izden birini "
 "seçmelidir."
 
@@ -9838,9 +9838,8 @@ msgid "Start &muxing"
 msgstr "Çoklamayı &başlat"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:290
-#, fuzzy
 msgid "Start jobs &immediately"
-msgstr "İşleri el ile &başlat"
+msgstr "İşleri &hemen başlat"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:289
 msgid "Start jobs &manually"
@@ -13008,7 +13007,7 @@ msgstr "Görüntü görüntüleme genişliği"
 
 #: src/common/property_element.cpp:134
 msgid "Video interlaced flag"
-msgstr "Görüntü geçiş işareti"
+msgstr "Görüntü geçmeli işareti"
 
 #: src/input/r_real.cpp:605
 #, boost-format
@@ -14995,4 +14994,3 @@ msgstr "– hiçbiri olarak ayarla –"
 
 #~ msgid "utf8_strlen(): Invalid UTF-8 char. First byte: 0x%|1$02x|"
 #~ msgstr "utf8_strlen(): Geçersiz UTF-8 kar. İlk bayt: 0x%|1$02x|"
-
