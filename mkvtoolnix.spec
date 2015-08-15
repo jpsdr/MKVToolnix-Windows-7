@@ -4,7 +4,7 @@
 
 Name: mkvtoolnix
 URL: https://www.bunkus.org/videotools/mkvtoolnix/
-Version: 8.2.0
+Version: 8.3.0
 Release: 1
 Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
