@@ -69,10 +69,9 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 
 %files
 %defattr (-,root,root)
-%doc AUTHORS COPYING README.md ChangeLog TODO
+%doc AUTHORS COPYING README.md ChangeLog
 %{_bindir}/*
 %{_datadir}/applications/*.desktop
-%{_datadir}/doc/mkvtoolnix
 %{_datadir}/icons/hicolor/*/*/*.png
 %{_datadir}/mime/packages/*.xml
 %lang(ca) %{_datadir}/locale/ca/*/*.mo
@@ -104,6 +103,9 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 %{_datadir}/man/zh_CN
 
 %changelog -n mkvtoolnix
+* Sat Aug 15 2015 Moritz Bunkus <moritz@bunkus.org> 8.3.0-1
+- Removed support for wxWidgets-based GUIs
+
 * Sat May  9 2015 Moritz Bunkus <moritz@bunkus.org> 7.8.0-1
 - Add support for the Qt-based GUIs
 
