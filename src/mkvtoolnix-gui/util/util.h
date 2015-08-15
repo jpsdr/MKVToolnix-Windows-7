@@ -5,6 +5,7 @@
 
 #include <QDialogButtonBox>
 #include <QList>
+#include <QModelIndex>
 
 class QAbstractItemView;
 class QComboBox;
@@ -12,7 +13,6 @@ class QDateTime;
 class QIcon;
 class QItemSelection;
 class QItemSelectionModel;
-class QModelIndex;
 class QScrollArea;
 class QTabWidget;
 class QTableView;
@@ -65,10 +65,11 @@ enum MtxGuiRoles {
 void resizeViewColumnsToContents(QTableView *view);
 void resizeViewColumnsToContents(QTreeView *view);
 int numSelectedRows(QItemSelection &selection);
-QModelIndex SelectedRowIdx(QItemSelection const &selection);
+QModelIndex selectedRowIdx(QItemSelection const &selection);
 QModelIndex selectedRowIdx(QAbstractItemView *view);
 void withSelectedIndexes(QItemSelectionModel *selectionModel, std::function<void(QModelIndex const &)> worker);
 void withSelectedIndexes(QAbstractItemView *view, std::function<void(QModelIndex const &)> worker);
+void selectRow(QAbstractItemView *view, int row, QModelIndex const &parentIdx = QModelIndex{});
 QModelIndex toTopLevelIdx(QModelIndex const &idx);
 
 // String stuff

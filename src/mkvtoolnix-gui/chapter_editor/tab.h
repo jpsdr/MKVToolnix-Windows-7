@@ -100,6 +100,8 @@ public slots:
 
   virtual void showChapterContextMenu(QPoint const &pos);
 
+  virtual void focusNextChapterElement();
+
 protected:
   void setupUi();
   void resetData();
@@ -150,8 +152,11 @@ protected:
 protected:
   QString currentState() const;
   ChaptersPtr timecodesToChapters(std::vector<timecode_c> const &timecodes) const;
-  QString formatChapterName(QString const &nameTemplate, int chapterNumer) const;
+  QString formatChapterName(QString const &nameTemplate, int chapterNumber) const;
   void changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace);
+
+  bool focusNextChapterAtom();
+  bool focusNextChapterName();
 
   static QString formatEbmlBinary(EbmlBinary *binary);
 };

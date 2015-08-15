@@ -182,6 +182,16 @@ selectedRowIdx(QAbstractItemView *view) {
   return selectedRowIdx(view->selectionModel()->selection());
 }
 
+void
+selectRow(QAbstractItemView *view,
+          int row,
+          QModelIndex const &parentIdx) {
+  auto itemModel      = view->model();
+  auto selectionModel = view->selectionModel();
+  auto selection      = QItemSelection{itemModel->index(row, 0, parentIdx), itemModel->index(row, itemModel->columnCount() - 1, parentIdx)};
+  selectionModel->select(selection, QItemSelectionModel::ClearAndSelect);
+}
+
 QModelIndex
 toTopLevelIdx(QModelIndex const &idx) {
   if (!idx.isValid())

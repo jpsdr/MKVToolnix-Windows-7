@@ -112,6 +112,10 @@ Tab::setupUi() {
 
   connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameLanguage, &Util::ComboBoxBase::reInitialize);
   connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameCountry,  &Util::ComboBoxBase::reInitialize);
+
+  auto chapterLineEdits = QList<QLineEdit *>{} << ui->leChStart << ui->leChEnd << ui->leChUid << ui->leChSegmentUid << ui->leChSegmentEditionUid << ui->leChName;
+  for (auto const &lineEdit : chapterLineEdits)
+    connect(lineEdit, &QLineEdit::returnPressed, this, &Tab::focusNextChapterElement);
 }
 
 void
@@ -1389,6 +1393,88 @@ bool
 Tab::hasBeenModified()
   const {
   return currentState() != m_savedState;
+}
+
+bool
+Tab::focusNextChapterName() {
+  auto selectedRows = ui->tvChNames->selectionModel()->selectedRows();
+  if (selectedRows.isEmpty())
+    return false;
+
+  auto nextRow = selectedRows.at(0).row() + 1;
+  if (nextRow >= m_nameModel->rowCount())
+    return false;
+
+  Util::selectRow(ui->tvChNames, nextRow);
+
+  return true;
+}
+
+bool
+Tab::focusNextChapterAtom() {
+  auto doSelect = [this](QModelIndex const &idx) -> bool {
+    Util::selectRow(ui->elements, idx.row(), idx.parent());
+
+    ui->leChStart->selectAll();
+    ui->leChStart->setFocus();
+
+    return true;
+  };
+
+  auto selectedRows = ui->elements->selectionModel()->selectedRows();
+  if (selectedRows.isEmpty())
+    return false;
+
+  auto selectedIdx  = selectedRows.at(0);
+  selectedIdx       = selectedIdx.sibling(selectedIdx.row(), 0);
+  auto selectedItem = m_chapterModel->itemFromIndex(selectedIdx);
+
+  if (selectedItem->rowCount())
+    return doSelect(selectedIdx.child(0, 0));
+
+  auto parentIdx  = selectedIdx.parent();
+  auto parentItem = m_chapterModel->itemFromIndex(parentIdx);
+  auto nextRow    = selectedIdx.row() + 1;
+
+  if (nextRow < parentItem->rowCount())
+    return doSelect(parentIdx.child(nextRow, 0));
+
+  while (parentIdx.parent().isValid()) {
+    nextRow    = parentIdx.row() + 1;
+    parentIdx  = parentIdx.parent();
+    parentItem = m_chapterModel->itemFromIndex(parentIdx);
+
+    if (nextRow < parentItem->rowCount())
+      return doSelect(parentIdx.child(nextRow, 0));
+  }
+
+  auto editionIdx = parentIdx.sibling(parentIdx.row() + 1, 0);
+
+  while (editionIdx.isValid()) {
+    if (m_chapterModel->itemFromIndex(editionIdx)->rowCount())
+      return doSelect(editionIdx.child(0, 0));
+
+    editionIdx = editionIdx.sibling(editionIdx.row() + 1, 0);
+  }
+
+  return false;
+}
+
+void
+Tab::focusNextChapterElement() {
+  if (!copyControlsToStorage())
+    return;
+
+  if (QObject::sender() != ui->leChName) {
+    ui->leChName->selectAll();
+    ui->leChName->setFocus();
+    return;
+  }
+
+  if (focusNextChapterName())
+    return;
+
+  focusNextChapterAtom();
 }
 
 }}}
