@@ -192,27 +192,29 @@ return 0;
       ])
     AC_LANG_POP()
 
-    case "$host" in
-      *mingw*)  wanted_plugin=windows ;;
-      *apple*)  wanted_plugin=cocoa   ;;
-      *darwin*) wanted_plugin=cocoa   ;;
-      *)        wanted_plugin=        ;;
-    esac
+    if test x"$QT_PKG_CONFIG_STATIC" != x; then
+      case "$host" in
+        *mingw*)  wanted_plugin=windows ;;
+        *apple*)  wanted_plugin=cocoa   ;;
+        *darwin*) wanted_plugin=cocoa   ;;
+        *)        wanted_plugin=        ;;
+      esac
 
-    if test x"$wanted_plugin" != x; then
-      plugins_dir=
-      for dir in `echo " $QT_LIBS " | sed -e 's/ -l[^ ]*//g' -e 's/-L//g'` ; do
-        if test -f "$dir/../plugins/platforms/libq${wanted_plugin}.a"; then
-          plugins_dir="$dir/../plugins"
-          break
+      if test x"$wanted_plugin" != x; then
+        plugins_dir=
+        for dir in `echo " $QT_LIBS " | sed -e 's/ -l[^ ]*//g' -e 's/-L//g'` ; do
+          if test -f "$dir/../plugins/platforms/libq${wanted_plugin}.a"; then
+            plugins_dir="$dir/../plugins"
+            break
+          fi
+        done
+
+        if test x"$plugins_dir" = x; then
+          AC_MSG_RESULT(no: the platform plugins directory could not be found)
+          have_qt=no
+        else
+          QT_LIBS="-L$plugins_dir/platforms -lq$wanted_plugin $QT_LIBS"
         fi
-      done
-
-      if test x"$plugins_dir" = x; then
-        AC_MSG_RESULT(no: the platform plugins directory could not be found)
-        have_qt=no
-      else
-        QT_LIBS="-L$plugins_dir/platforms -lq$wanted_plugin $QT_LIBS"
       fi
     fi
 
