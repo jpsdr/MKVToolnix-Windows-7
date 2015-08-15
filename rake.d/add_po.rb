@@ -23,11 +23,16 @@ module AddPo
 
     target = "#{$po_dir}/#{language}.po"
 
-    File.open(target, "w") { |file| file.puts content.join("\n") }
+    File.open(target, "w") { |file| file.puts content.map(&:chomp).join("\n") }
     File.unlink file_name
     File.chmod 0644, target
 
     puts "#{file_name} → #{target}"
+  end
+
+  def self.unpack_rar file_name
+    system "unrar x #{Shellwords.escape(file_name)}"
+    fail "unrar failed for #{file_name}" unless $?.exitstatus == 0
   end
 
   def self.unpack_zip file_name
@@ -47,6 +52,7 @@ module AddPo
   end
 
   def self.add file_name
+    return handle_archive(file_name, :rar) if /\.rar$/.match file_name
     return handle_archive(file_name, :zip) if /\.zip$/.match file_name
     return handle_po(file_name)            if /\.po$/.match file_name
     fail "Don't know how to handle #{file_name}"
