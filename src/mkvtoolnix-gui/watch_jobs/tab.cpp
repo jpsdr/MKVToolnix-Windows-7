@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QCursor>
+#include <QDebug>
 #include <QFileDialog>
 #include <QMenu>
 #include <QPushButton>
@@ -209,7 +210,7 @@ Tab::onJobProgressChanged(uint64_t,
 void
 Tab::onLineRead(QString const &line,
                 Jobs::Job::LineType type) {
-  if (QObject::sender() != m_currentlyConnectedJob)
+  if ((QObject::sender() != m_currentlyConnectedJob) || line.isEmpty())
     return;
 
   auto &storage = Jobs::Job::InfoLine    == type ? ui->output
