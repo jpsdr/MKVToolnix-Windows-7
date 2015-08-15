@@ -90,7 +90,7 @@ one, and increase `JOBS` if you have more than one core):
     cd $HOME/mingw-cross-env
     make MXE_TARGETS=x86_64-w64-mingw32.static JOBS=2 \
       gettext libiconv zlib expat boost curl file flac lzo ogg pthreads \
-      vorbis wxwidgets qtbase qttranslations qtwinextras
+      vorbis qtbase qttranslations qtwinextras
 
 Append the installation directory to your `PATH` variable:
 

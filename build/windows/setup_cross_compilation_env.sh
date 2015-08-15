@@ -50,7 +50,7 @@ MXE_TARGETS=${HOST}
 JOBS=${PARALLEL}
 
 mkvtoolnix-deps:
-	+make gettext libiconv zlib expat boost curl file flac lzo ogg pthreads vorbis wxwidgets qtbase qttranslations qtwinextras
+	+make gettext libiconv zlib expat boost curl file flac lzo ogg pthreads vorbis qtbase qttranslations qtwinextras
 EOF
 }
 

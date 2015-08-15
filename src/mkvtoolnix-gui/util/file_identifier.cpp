@@ -34,7 +34,7 @@ FileIdentifier::identify() {
   auto &cfg = Settings::get();
 
   QStringList args;
-  args << "--output-charset" << "utf-8" << "--identify-for-mmg" << m_fileName;
+  args << "--output-charset" << "utf-8" << "--identify-for-gui" << m_fileName;
 
   if (cfg.m_defaultAdditionalMergeOptions.contains(Q("keep_last_chapter_in_mpls")))
     args << "--engage" << "keep_last_chapter_in_mpls";

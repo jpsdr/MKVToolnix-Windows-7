@@ -1,10 +1,5 @@
 mkvinfo ICON  "../../share/icons/windows/mkvinfo.ico"
 
-#define wxUSE_NO_MANIFEST 1
-#ifndef NOWXWIDGETS
-# include "wx/msw/wx.rc"
-#endif
-
 #if defined(MINGW_PROCESSOR_ARCH_AMD64)
 1 RT_MANIFEST "manifest-amd64.xml"
 #else

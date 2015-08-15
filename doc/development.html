@@ -37,7 +37,6 @@
 <ul>
 <li><code>ac</code>: Macro snippets used for the <code>configure</code> script.</li>
 <li><code>contrib</code>: Spec files for RPM creation and other contributed files.</li>
-<li><code>doc/guide</code>: mmg's guide.</li>
 <li><code>doc/man</code>: man pages. They're written as DocBook XML files and converted to HTML and man format automatically.</li>
 <li><code>examples</code>: Examples for the end user.</li>
 <li><code>installer</code>: Files for the Windows installer.</li>
@@ -49,7 +48,7 @@
 <li><code>src/info</code>: mkvinfo's main files including its GUI.</li>
 <li><code>src/input</code>: Readers (demux source files). Only used in mkvmerge.</li>
 <li><code>src/merge</code>: mkvmerge's main files, e.g. command line handling, output control, file creating etc.</li>
-<li><code>src/mmg</code>: mkvmerge's GUI.</li>
+<li><code>src/mkvtoolnix-gui</code>: the MKVToolNix GUI.</li>
 <li><code>src/output</code>: Packetizers (create the tracks in the output file). Only used in mkvmerge.</li>
 <li><code>src/propedit</code>: mkvpropedit's main files.</li>
 <li><code>src/scripts</code> and <code>src/tools</code>: Scripts and compiled tools that may or may not be useful during development.</li>
@@ -63,7 +62,7 @@
 <p>There are basically four functions that output stuff: <code>mxinfo()</code>, <code>mxverb()</code>, <code>mxwarn()</code> and <code>mxerror()</code>. Each takes either a string or an argument produced by <code>boost::format()</code> (see <a href="http://www.boost.org/doc/libs/1_47_0/libs/format/doc/format.html">the Boost::Format documentation</a> if you're not familiar with it), and <code>mxverb()</code> also takes a verbosity level argument.</p>
 <p><code>mxinfo()</code> is supposed to be used for messages that are always output. Its messages must be translatable by using the <code>_()</code> macro, Example:</p>
 <pre><code>mxinfo(boost::format(_(&quot;Hello, %1%\n&quot;)) % user_name);</code></pre>
-<p>The same applies to <code>mxwarn()</code> and <code>mxerror()</code>. However, both prefix their messages with &quot;Warning:&quot; and &quot;Error:&quot; respectively. Also they modify mkvmerge's exit code -- &quot;1&quot; if <code>mxwarn()</code> has been used at least once and &quot;2&quot; if <code>mxerror()</code> is used. <code>mxerror()</code> also instantly exits the program. mmg shows such warnings and errors in separate areas as to draw the user's attention to them. Therefore <code>mxwarn()</code> should be used for stuff the user really should know, and <code>mxerror()</code> for stuff that prevents further processing altogether.</p>
+<p>The same applies to <code>mxwarn()</code> and <code>mxerror()</code>. However, both prefix their messages with &quot;Warning:&quot; and &quot;Error:&quot; respectively. Also they modify mkvmerge's exit code -- &quot;1&quot; if <code>mxwarn()</code> has been used at least once and &quot;2&quot; if <code>mxerror()</code> is used. <code>mxerror()</code> also instantly exits the program. The GUI shows such warnings and errors in separate areas as to draw the user's attention to them. Therefore <code>mxwarn()</code> should be used for stuff the user really should know, and <code>mxerror()</code> for stuff that prevents further processing altogether.</p>
 <p><code>mxverb()</code> is a debugging facility. mkvmerge starts out at verbosity level 1. Therefore <code>mxverb(1, ...)</code> is equivalent to <code>mxinfo(...)</code>. You can raise the verbosity level by adding the &quot;-v&quot; or &quot;--verbose&quot; command line parameters multiple times. Messages output with <code>mxverb()</code> should not be translatable, meaning you shouldn't use the <code>_()</code> macro.</p>
 <h1><span class="header-section-number">5</span> Classes</h1>
 <h2><span class="header-section-number">5.1</span> General</h2>
@@ -129,7 +128,6 @@ show_packetizer_info(0, PTZR0);</code></pre>
 <ol>
 <li>The programs and their messages themselves. This is the most important part.</li>
 <li>The manual pages.</li>
-<li>mmg's guide.</li>
 </ol>
 <p>All three are translated by the <code>gettext</code> system. This system uses .po-files which map the original English version to the translated version. There are several (OpenSource) applications available that can be used to translate such files, e.g. <a href="http://www.poedit.net/">poedit</a> if you're using Windows.</p>
 <p>Please ask the author for an up-to-date template of the untranslated strings before you start doing anything else. He will attach the untranslated translation file (xyz.po) for the programs themselves (the first point of the three mentioned above). Take a look at it and at the poedit software. If you feel up to the task then simply start translating and send the translated .po file back to the author. The author can notify you whenever phrases change or are added.</p>
@@ -139,7 +137,7 @@ show_packetizer_info(0, PTZR0);</code></pre>
 <li>Translate the xyz.po file.</li>
 <li>Whenever you want to test something compile the xyz.po to a .mo file with your po editor application.</li>
 <li>Replace one of the installed translation files (e.g. <code>mkvtoolnix\locale\de\mkvtoolnix.mo</code>) with your compiled file.</li>
-<li>Start mmg, go to the preferences dialog and select 'German' as the language (the 'de' file you've replaced in step 4 is for German).</li>
+<li>Start the GUI, go to the preferences dialog and select 'German' as the language (the 'de' file you've replaced in step 4 is for German).</li>
 </ol>
 <p>Please note that a lot of strings must not be translated, especially command line options and their values. If a value to an option is a fixed string then it must not be translated, but if it is a placeholder e.g. for a file name then you can of course translate the <code>filename</code> part. Example:</p>
 <pre><code>--stereo-mode &lt;TID:[none|both]&gt;</code></pre>
@@ -166,7 +164,6 @@ show_packetizer_info(0, PTZR0);</code></pre>
 <li>Include translation's author in AUTHORS</li>
 <li>Include message in ChangeLog</li>
 <li>Either re-run configure or add the new translation in build-config to TRANSLATIONS; afterwards verify the format strings with »drake translations:verify-format-strings«</li>
-<li>Add a user interface language test case</li>
 </ul>
 </body>
 </html>

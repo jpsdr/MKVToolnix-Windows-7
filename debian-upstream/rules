@@ -14,10 +14,9 @@ override_dh_auto_configure:
 
 #	exit 1
 
-	./drake apps:mkvinfo apps:mmg apps:mkvtoolnix-gui
+	./drake apps:mkvinfo apps:mkvtoolnix-gui
 
 	mv src/mkvinfo src/mkvinfo-gui
-	mv src/mmg/mmg src/mmg/mmg-gui
 	mv src/mkvtoolnix-gui/mkvtoolnix-gui src/mkvtoolnix-gui/mkvtoolnix-gui-tmp
 
 	./drake clean:dist
@@ -25,22 +24,19 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 	--disable-gui
 
-	./drake default 'translations:guides'
-
 override_dh_clean:
 	[ ! -f build-config ] || ./drake clean:dist
 
-	dh_clean src/mkvinfo-gui src/mmg/mmg-gui src/mkvtoolnix-gui/mkvtoolnix-gui-tmp config.status config.log \
+	dh_clean src/mkvinfo-gui src/mkvtoolnix-gui/mkvtoolnix-gui-tmp config.status config.log \
 	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
 
 override_dh_install:
-	./drake install 'install:translations:guides' 'install:shared' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+	./drake install 'install:shared' DESTDIR=$(CURDIR)/debian/tmp docdir='$${datarootdir}/doc/mkvtoolnix-gui'
 	./drake 'install:manpages' DESTDIR=$(CURDIR)/debian/tmp USE_QT=yes BUILD_MKVTOOLNIX_GUI=yes docdir='$${datarootdir}/doc/mkvtoolnix-gui'
 
 	dh_install --list-missing -Xmkvtoolnix.xml
 
 	mv debian/mkvtoolnix/usr/bin/mkvinfo debian/mkvtoolnix/usr/bin/mkvinfo-text
-	mv debian/mkvtoolnix-gui/usr/bin/mmg-gui debian/mkvtoolnix-gui/usr/bin/mmg
 	mv debian/mkvtoolnix-gui/usr/bin/mkvtoolnix-gui-tmp debian/mkvtoolnix-gui/usr/bin/mkvtoolnix-gui
 
 	dh_link -pmkvtoolnix usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-text.1.gz

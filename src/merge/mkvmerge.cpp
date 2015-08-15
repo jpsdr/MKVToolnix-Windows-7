@@ -1789,13 +1789,14 @@ parse_args(std::vector<std::string> args) {
           || (args[0] == "--identify")
           || (args[0] == "--identify-verbose")
           || (args[0] == "-I")
-          || (args[0] == "--identify-for-mmg"))) {
+          || (args[0] == "--identify-for-mmg")
+          || (args[0] == "--identify-for-gui"))) {
     if ((args[0] == "--identify-verbose") || (args[0] == "-I"))
       g_identify_verbose = true;
 
-    if (args[0] == "--identify-for-mmg") {
+    if ((args[0] == "--identify-for-mmg") || (args[0] == "--identify-for-gui")) {
       g_identify_verbose = true;
-      g_identify_for_mmg = true;
+      g_identify_for_gui = true;
     }
 
     if (3 == args.size())
@@ -1819,7 +1820,7 @@ parse_args(std::vector<std::string> args) {
       list_iso639_languages();
       mxexit();
 
-    } else if ((this_arg == "-i") || (this_arg == "--identify") || (this_arg == "-I") || (this_arg == "--identify-verbose") || (this_arg == "--identify-for-mmg"))
+    } else if ((this_arg == "-i") || (this_arg == "--identify") || (this_arg == "-I") || (this_arg == "--identify-verbose") || (this_arg == "--identify-for-mmg") || (this_arg == "--identify-for-gui"))
       mxerror(boost::format(Y("'%1%' can only be used with a file name. No further options are allowed if this option is used.\n")) % this_arg);
 
     else if (this_arg == "--capabilities") {

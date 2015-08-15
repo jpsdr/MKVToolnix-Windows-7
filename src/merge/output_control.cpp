@@ -116,7 +116,7 @@ int g_default_tracks_priority[3]            = { 0, 0, 0, };
 
 bool g_identifying                          = false;
 bool g_identify_verbose                     = false;
-bool g_identify_for_mmg                     = false;
+bool g_identify_for_gui                     = false;
 
 std::unique_ptr<KaxSegment> g_kax_segment;
 std::unique_ptr<KaxTracks> g_kax_tracks;

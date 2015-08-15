@@ -183,24 +183,6 @@ function build_curl {
     --disable-smb --disable-smbs --disable-smtp --disable-smtps --disable-tftp
 }
 
-function build_sdl2 {
-  build_package SDL2-2.0.3.tar.gz --prefix=${TARGET} \
-    --disable-shared --enable-static --enable-video-x11=no --enable-joystick=no
-}
-
-function build_wxwidgets {
-  build_package wxWidgets-3.0.2.tar.bz2 \
-    --with-osx --disable-stl --with-macosx-version-min=10.8 \
-    --with-macosx-sdk=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk \
-    --disable-compat28 --prefix=${TARGET} \
-    --disable-shared --enable-static --enable-utf8 --with-opengl \
-    --with-libiconv=/usr/ --with-zlib --without-liblzma --with-sdl \
-    --without-gtk --without-motif --without-wine --without-pm \
-    --without-microwin --without-libxpm --without-libmspack \
-    --without-gnomeprint --without-gnomevfs --without-hildon \
-    --without-dmalloc --without-odbc
-}
-
 function build_configured_mkvtoolnix {
   if [[ -z ${MTX_VER} ]] fail Variable MTX_VER not set
 
@@ -213,7 +195,7 @@ function build_configured_mkvtoolnix {
     --prefix=$dmgmac --bindir=$dmgmac --datarootdir=$dmgmac \
     --with-extra-libs=${TARGET}/lib --with-extra-includes=${TARGET}/include \
     --with-boost-libdir=${TARGET}/lib \
-    --disable-debug --disable-wxwidgets \
+    --disable-debug \
     --enable-qt --enable-gui --with-mkvtoolnix-gui
     # --with-qt-pkg-config-modules=Qt5PrintSupport
   )
@@ -276,9 +258,7 @@ to /usr/local/bin
 
 EOF
 
-  mkdir -p $dmgmac/doc/guide $dmgcnt/Resources
-  cp -r doc/guide/* $dmgmac/doc/guide/
-  find $dmgmac/doc/guide -name Rakefile | xargs rm || true
+  mkdir -p $dmgcnt/Resources
   cp ${SRCDIR}/mmg.icns $dmgcnt/Resources/MKVToolNix.icns
 
   for file in ${TARGET}/translations/qtbase_*.qm; do
@@ -372,8 +352,6 @@ if [[ -z $@ ]]; then
   build_ruby
   build_boost
   build_curl
-  # build_sdl2
-  # build_wxwidgets
   build_qtbase
   build_qttools
   build_qttranslations

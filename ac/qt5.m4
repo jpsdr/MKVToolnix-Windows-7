@@ -222,7 +222,7 @@ return 0;
      AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
      have_qt=yes
      USE_QT=yes
-     opt_features_yes="$opt_features_yes\n   * GUIs (Qt version)"
+     opt_features_yes="$opt_features_yes\n   * GUIs"
      AC_MSG_RESULT(yes)
     else
       AC_MSG_RESULT(no: test program could not be compiled)
@@ -243,7 +243,7 @@ else
 fi
 
 if test x"$have_qt" != "xyes" ; then
-  opt_features_no="$opt_features_no\n   * GUIs (Qt version)"
+  opt_features_no="$opt_features_no\n   * GUIs"
   QT_CFLAGS=
   QT_LIBS=
   MOC=

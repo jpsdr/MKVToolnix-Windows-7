@@ -323,7 +323,7 @@ void
 generic_reader_c::display_identification_results() {
   std::string format_file, format_track, format_attachment, format_att_description, format_att_file_name;
 
-  if (g_identify_for_mmg) {
+  if (g_identify_for_gui) {
     format_file            =   "File '%1%': container: %2%";
     format_track           =   "Track ID %1%: %2% (%3%)";
     format_attachment      =   "Attachment ID %1%: type \"%2%\", size %3% bytes";
@@ -370,7 +370,7 @@ generic_reader_c::display_identification_results() {
   }
 
   for (auto &result : m_id_results_chapters) {
-    if (g_identify_for_mmg)
+    if (g_identify_for_gui)
       mxinfo(boost::format("Chapters: %1% entries") % result.size);
     else
       mxinfo(boost::format(NY("Chapters: %1% entry", "Chapters: %1% entries", result.size)) % result.size);
@@ -379,12 +379,12 @@ generic_reader_c::display_identification_results() {
 
   for (auto &result : m_id_results_tags) {
     if (ID_RESULT_GLOBAL_TAGS_ID == result.id) {
-      if (g_identify_for_mmg)
+      if (g_identify_for_gui)
         mxinfo(boost::format("Global tags: %1% entries") % result.size);
       else
         mxinfo(boost::format(NY("Global tags: %1% entry", "Global tags: %1% entries", result.size)) % result.size);
 
-    } else if (g_identify_for_mmg)
+    } else if (g_identify_for_gui)
       mxinfo(boost::format("Tags for track ID %1%: %2% entries") % result.id % result.size);
     else
       mxinfo(boost::format(NY("Tags for track ID %1%: %2% entry", "Tags for track ID %1%: %2% entries", result.size)) % result.id % result.size);
@@ -395,7 +395,7 @@ generic_reader_c::display_identification_results() {
 
 std::string
 generic_reader_c::id_escape_string(const std::string &s) {
-  return g_identify_for_mmg ? escape(s) : s;
+  return g_identify_for_gui ? escape(s) : s;
 }
 
 void

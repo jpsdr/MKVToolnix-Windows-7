@@ -34,7 +34,7 @@ info_cli_parser_c::init_parser() {
 
   add_section_header(YT("Options"));
 
-#if defined(HAVE_QT) || defined(HAVE_WXWIDGETS)
+#if defined(HAVE_QT)
   OPT("g|gui",          set_gui,          YT("Start the GUI (and open inname if it was given)."));
 #endif
   OPT("c|checksum",     set_checksum,     YT("Calculate and display checksums of frame contents."));

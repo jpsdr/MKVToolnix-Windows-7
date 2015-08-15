@@ -805,7 +805,7 @@ ogm_reader_c::handle_stream_comments() {
         if (g_identifying) {
           // OGM comments might be written in a charset other than
           // UTF-8. During identification we simply want to know how
-          // many chapter entries there are. As mmg's users have no
+          // many chapter entries there are. As the GUI's users have no
           // way to specify the chapter charset when adding a file
           // such charset issues may cause mkvmerge to abort or not to
           // show any chapters at all (if "parse_chapters()"

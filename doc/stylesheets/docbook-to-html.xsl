@@ -189,7 +189,7 @@
     <span class="productname"><xsl:value-of select="refentrytitle"/></span>
     <xsl:text>(</xsl:text><xsl:value-of select="manvolnum"/><xsl:text>)</xsl:text>
    </xsl:when>
-   <xsl:when test="matches(refentrytitle, '^(mmg|mkv)')">
+   <xsl:when test="matches(refentrytitle, '^mkv')">
     <a href="{refentrytitle}.html">
      <span class="productname"><xsl:value-of select="refentrytitle"/></span>
      <xsl:text>(</xsl:text><xsl:value-of select="manvolnum"/><xsl:text>)</xsl:text>

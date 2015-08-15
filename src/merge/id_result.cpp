@@ -19,7 +19,7 @@ void
 id_result_container_unsupported(std::string const &filename,
                                 translatable_string_c const &info) {
   if (g_identifying) {
-    if (g_identify_for_mmg)
+    if (g_identify_for_gui)
       mxinfo(boost::format("File '%1%': unsupported container: %2%\n") % filename % info);
     else
       mxinfo(boost::format(Y("File '%1%': unsupported container: %2%\n")) % filename % info);

@@ -35,7 +35,7 @@ console_show_error(const std::string &error) {
   mxexit(2);
 }
 
-#if !defined(HAVE_QT) && !defined(HAVE_WXWIDGETS)
+#if !defined(HAVE_QT)
 void
 ui_show_element(int level,
                 const std::string &text,
@@ -65,4 +65,4 @@ ui_graphical_available() {
   return false;
 }
 
-#endif  // !HAVE_QT && !HAVE_WXWIDGETS
+#endif  // !HAVE_QT

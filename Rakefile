@@ -47,13 +47,10 @@ def setup_globals
   $build_tools           ||=  c?(:BUILD_TOOLS)
 
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
-  $programs                << "mmg" if c?(:USE_WXWIDGETS)
   $programs                << "mkvtoolnix-gui" if $build_mkvtoolnix_gui
   $tools                   =  %w{ac3parser base64tool checksum diracparser ebml_validator hevc_dump mpls_dump vc1parser}
-  $mmg_bin                 =  c(:MMG_BIN)
-  $mmg_bin                 =  "mmg" if $mmg_bin.empty?
 
-  $application_subdirs     =  { "mmg" => "mmg/", "mkvtoolnix-gui" => "mkvtoolnix-gui/" }
+  $application_subdirs     =  { "mkvtoolnix-gui" => "mkvtoolnix-gui/" }
   $applications            =  $programs.collect { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
   $manpages                =  $programs.collect { |name| "doc/man/#{name}.1" }
   $manpages                << "doc/man/mkvtoolnix-gui.1" if $build_mkvtoolnix_gui
@@ -71,7 +68,7 @@ def setup_globals
   end
 
 
-  $source_directories      =  %w{lib/avilib-0.6.10 lib/librmff src/common src/extract src/info src/input src/merge src/mkvtoolnix-gui src/mmg src/mpegparser src/output src/propedit}
+  $source_directories      =  %w{lib/avilib-0.6.10 lib/librmff src/common src/extract src/info src/input src/merge src/mkvtoolnix-gui src/mpegparser src/output src/propedit}
   $all_sources             =  $source_directories.collect { |dir| FileList[ "#{dir}/**/*.c", "#{dir}/**/*.cpp" ].to_a }.flatten.sort
   $all_headers             =  $source_directories.collect { |dir| FileList[ "#{dir}/**/*.h",                   ].to_a }.flatten.sort
   $all_objects             =  $all_sources.collect { |file| file.ext('o') }
@@ -86,19 +83,16 @@ def setup_globals
   $languages               =  {
     :applications          => c(:TRANSLATIONS).split(/\s+/),
     :manpages              => c(:MANPAGES_TRANSLATIONS).split(/\s+/),
-    :guides                => c(:GUIDE_TRANSLATIONS).split(/\s+/),
   }
 
   $translations            =  {
     :applications          =>                         $languages[:applications].collect { |language| "po/#{language}.mo" },
-    :guides                =>                         $languages[:guides].collect       { |language| "doc/guide/#{language}/mkvmerge-gui.hhk" },
     :manpages              => !c?(:PO4A_WORKS) ? [] : $languages[:manpages].collect     { |language| $manpages.collect { |manpage| manpage.gsub(/man\//, "man/#{language}/") } }.flatten,
   }
 
   $available_languages     =  {
-    :applications          => FileList[ "#{$top_srcdir }/po/*.po"                       ].collect { |name| File.basename name, '.po'        },
-    :manpages              => FileList[ "#{$top_srcdir }/doc/man/po4a/po/*.po"          ].collect { |name| File.basename name, '.po'        },
-    :guides                => FileList[ "#{$top_srcdir }/doc/guide/*/mkvmerge-gui.html" ].collect { |name| File.basename File.dirname(name) },
+    :applications          => FileList[ "#{$top_srcdir }/po/*.po"              ].collect { |name| File.basename name, '.po'        },
+    :manpages              => FileList[ "#{$top_srcdir }/doc/man/po4a/po/*.po" ].collect { |name| File.basename name, '.po'        },
   }
 
   $unwrapped_po            = %{ca es eu it nl uk pl sr tr}
@@ -120,7 +114,7 @@ def setup_globals
 
   cxxflags                 = "#{cflags_common} #{c(:STD_CXX)}"
   cxxflags                += " -Wnon-virtual-dtor -Woverloaded-virtual -Wextra -Wno-missing-field-initializers #{c(:WNO_MAYBE_UNINITIALIZED)}"
-  cxxflags                += " #{c(:WXWIDGETS_CFLAGS)} #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:CURL_CFLAGS)} #{c(:USER_CXXFLAGS)}"
+  cxxflags                += " #{c(:QT_CFLAGS)} #{c(:BOOST_CPPFLAGS)} #{c(:CURL_CFLAGS)} #{c(:USER_CXXFLAGS)}"
 
   ldflags                  = ""
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
@@ -128,7 +122,7 @@ def setup_globals
   ldflags                 += " -Wl,--dynamicbase,--nxcompat" if c?(:MINGW)
   ldflags                 += " #{c(:FSTACK_PROTECTOR)}"
 
-  windres                  = c?(:USE_WXWIDGETS) ? c(:WXWIDGETS_INCLUDES) : "-DNOWXWIDGETS"
+  windres                  = ""
   windres                 += " -DMINGW_PROCESSOR_ARCH_AMD64=1" if c(:MINGW_PROCESSOR_ARCH) == 'amd64'
 
   mocflags                 = c?(:MINGW) ? "-DSYS_WINDOWS" : ""
@@ -145,7 +139,7 @@ def setup_globals
 end
 
 def setup_overrides
-  [ :applications, :manpages, :guides ].each do |type|
+  [ :applications, :manpages ].each do |type|
     value                      = c("AVAILABLE_LANGUAGES_#{type.to_s.upcase}")
     $available_languages[type] = value.split(/\s+/) unless value.empty?
   end
@@ -176,9 +170,6 @@ def define_default_task
 
   # Build translations for the programs
   targets << "translations:applications"
-
-  # The GUI help
-  targets << "translations:guides" if c?(:USE_WXWIDGETS)
 
   # The Qt translation files: only for Windows
   targets << "translations:qt" if c?(:MINGW) && !c(:LCONVERT).blank?
@@ -240,7 +231,7 @@ rule '.o' => '.c' do |t|
 end
 
 rule '.o' => '.rc' do |t|
-  runq " WINDRES #{t.source}", "#{c(:WINDRES)} #{$flags[:windres]} -Isrc/mmg -o #{t.name} #{t.sources.join(" ")}"
+  runq " WINDRES #{t.source}", "#{c(:WINDRES)} #{$flags[:windres]} -o #{t.name} #{t.sources.join(" ")}"
 end
 
 rule '.h' => '.png' do |t|
@@ -339,7 +330,6 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
 
   keywords  = %w{--keyword=Y --keyword=NY:1,2}   # singular & plural forms returning std::string
   keywords += %w{--keyword=YT}                   # singular form returning translatable_string_c
-  keywords += %w{--keyword=Z --keyword=TIP}      # singular form & tooltip formatting returning wxString
   keywords += %w{--keyword=QTR}                  # singular form returning QString, used by uic
   keywords += %w{--keyword=QY --keyword=QNY:1,2} # singular & plural forms returning QString
 
@@ -415,7 +405,7 @@ EOT
     exit 1 if !is_ok
   end
 
-  [ :applications, :manpages, :guides ].each { |type| task type => $translations[type] }
+  [ :applications, :manpages ].each { |type| task type => $translations[type] }
 
   task :qt => FileList[ "#{$top_srcdir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
 
@@ -581,14 +571,12 @@ end
 # Installation tasks
 desc "Install all applications and support files"
 targets  = [ "install:programs", "install:manpages", "install:translations:manpages", "install:translations:applications" ]
-targets += [ "install:translations:guides" ] if c?(:USE_WXWIDGETS)
-targets += [ "install:shared" ]              if c?(:USE_WXWIDGETS) || c?(:USE_QT)
+targets += [ "install:shared" ] if c?(:USE_QT)
 task :install => targets
 
 namespace :install do
   application_name_mapper = lambda do |name|
-    base = File.basename name
-    base == "mmg" ? $mmg_bin : base
+    File.basename name
   end
 
   task :programs => $applications do
@@ -600,7 +588,6 @@ namespace :install do
     install_dir :desktopdir, :mimepackagesdir
     install_data :mimepackagesdir, FileList[ "#{$top_srcdir}/share/mime/*.xml" ]
     install_data :desktopdir, "#{$top_srcdir}/share/desktop/mkvinfo.desktop"
-    install_data :desktopdir, "#{$top_srcdir}/share/desktop/mkvmergeGUI.desktop"    if c?(:USE_WXWIDGETS)
     install_data :desktopdir, "#{$top_srcdir}/share/desktop/mkvtoolnix-gui.desktop" if c?(:USE_QT)
 
     wanted_apps     = %w{mkvmerge mkvtoolnix-gui mkvinfo mkvextract mkvpropedit}.collect { |e| "#{e}.png" }.to_hash_by
@@ -615,8 +602,7 @@ namespace :install do
   end
 
   man_page_name_mapper = lambda do |name|
-    base = File.basename name
-    base == "mmg.1" ? "#{$mmg_bin}.1" : base
+    File.basename name
   end
 
   task :manpages => $manpages do
@@ -638,15 +624,6 @@ namespace :install do
         $manpages.each { |manpage| install_data "#{c(:mandir)}/#{language}/man1/#{man_page_name_mapper[manpage]}", manpage.sub(/man\//, "man/#{language}/") }
       end
     end
-
-    task :guides do
-      install_dir :docdir, $languages[:guides].collect { |language| "#{c(:docdir)}/guide/#{language}/images" }
-
-      $languages[:guides].each do |language|
-        install_data "#{c(:docdir)}/guide/#{language}/",        FileList[ "#{$top_srcdir}/doc/guide/#{language}/mkvmerge-gui.*" ]
-        install_data "#{c(:docdir)}/guide/#{language}/images/", FileList[ "#{$top_srcdir}/doc/guide/#{language}/images/*.{gif,png}" ]
-      end
-    end
   end
 end
 
@@ -661,7 +638,7 @@ task :clean do
     share/icons/*x*/*.h
     src/info/ui/*.h src/mkvtoolnix-gui/forms/**/*.h src/**/*.moc src/**/*.moco src/mkvtoolnix-gui/qt_resources.cpp
     tests/unit/**/*.o tests/unit/**/*.a tests/unit/all
-    po/*.mo po/qt/*.qm doc/guide/**/*.hhk
+    po/*.mo po/qt/*.qm
   }
   patterns += $applications + $tools.collect { |name| "src/tools/#{name}" }
 
@@ -729,19 +706,19 @@ end
 # src/output
 #
 
-[ { :name => 'avi',         :dir => 'lib/avilib-0.6.10'                                                                                      },
-  { :name => 'rmff',        :dir => 'lib/librmff'                                                                                            },
-  { :name => 'pugixml',     :dir => 'lib/pugixml/src'                                                                                        },
-  { :name => 'mpegparser',  :dir => 'src/mpegparser'                                                                                         },
+[ { :name => 'avi',         :dir => 'lib/avilib-0.6.10'                                                              },
+  { :name => 'rmff',        :dir => 'lib/librmff'                                                                    },
+  { :name => 'pugixml',     :dir => 'lib/pugixml/src'                                                                },
+  { :name => 'mpegparser',  :dir => 'src/mpegparser'                                                                 },
   { :name => 'mtxcommon',   :dir => [ 'src/common' ] + FileList['src/common/*'].select { |e| FileTest.directory? e } },
-  { :name => 'mtxinput',    :dir => 'src/input'                                                                                              },
-  { :name => 'mtxoutput',   :dir => 'src/output'                                                                                             },
-  { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                                           },
-  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp wxwidgets_ui.cpp mkvinfo.cpp                                     },                          },
-  { :name => 'mtxextract',  :dir => 'src/extract',  :except => [ 'mkvextract.cpp' ],                                                         },
-  { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'mkvpropedit.cpp' ],                                                        },
-  { :name => 'ebml',        :dir => 'lib/libebml/src'                                                                                        },
-  { :name => 'matroska',    :dir => 'lib/libmatroska/src'                                                                                    },
+  { :name => 'mtxinput',    :dir => 'src/input'                                                                      },
+  { :name => 'mtxoutput',   :dir => 'src/output'                                                                     },
+  { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                   },
+  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp  mkvinfo.cpp},                           },
+  { :name => 'mtxextract',  :dir => 'src/extract',  :except => [ 'mkvextract.cpp' ],                                 },
+  { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'mkvpropedit.cpp' ],                                },
+  { :name => 'ebml',        :dir => 'lib/libebml/src'                                                                },
+  { :name => 'matroska',    :dir => 'lib/libmatroska/src'                                                            },
 ].each do |lib|
   Library.
     new("#{[ lib[:dir] ].flatten.first}/lib#{lib[:name]}").
@@ -802,11 +779,6 @@ Application.new("src/mkvinfo").
   sources("src/info/qt_ui.cpp", "src/info/qt_ui.moc", "src/info/rightclick_tree_widget.moc", $mkvinfo_ui_files).
   libraries(:qt).
   end_if.
-  only_if(!c?(:USE_QT) && c?(:USE_WXWIDGETS)).
-  sources("src/info/wxwidgets_ui.cpp").
-  png_icon("share/icons/64x64/mkvinfo.png", "src/info/wxwidgets_ui.cpp").
-  libraries(:wxwidgets).
-  end_if.
   libraries($custom_libs).
   create
 
@@ -833,24 +805,6 @@ Application.new("src/mkvpropedit").
   sources("src/propedit/resources.o", :if => c?(:MINGW)).
   libraries(:mtxpropedit, $common_libs, $custom_libs).
   create
-
-#
-# mmg
-#
-
-if c?(:USE_WXWIDGETS)
-  Application.new("src/mmg/mmg").
-    description("Build the mmg executable").
-    aliases(:mmg).
-    sources("src/mmg", "src/mmg/header_editor", "src/mmg/options", "src/mmg/tabs", :type => :dir).
-    sources("src/mmg/resources.o", :if => c?(:MINGW)).
-    png_icon("share/icons/64x64/mkvtoolnix-gui.png", "src/mmg/mmg_dialog.cpp", "src/mmg/header_editor/frame.cpp").
-    png_icon("share/icons/16x16/sort_ascending.png", "src/mmg/tabs/select_scanned_file_dlg.cpp").
-    png_icon("share/icons/16x16/sort_descending.png", "src/mmg/tabs/select_scanned_file_dlg.cpp").
-    libraries($common_libs, :wxwidgets).
-    libraries(:ole32, :shell32, "-mwindows", :if => c?(:MINGW)).
-    create
-end
 
 #
 # mkvtoolnix-gui

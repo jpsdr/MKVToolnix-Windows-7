@@ -141,7 +141,6 @@ class Target
       when :boost_filesystem then c(:BOOST_FILESYSTEM_LIB)
       when :boost_system     then c(:BOOST_SYSTEM_LIB)
       when :qt               then c(:QT_LIBS)
-      when :wxwidgets        then c(:WXWIDGETS_LIBS)
       when :static           then c(:LINK_STATICALLY)
       when :mpegparser       then [ '-Lsrc/mpegparser', '-lmpegparser'  ]
       when :mtxinput         then [ '-Lsrc/input',      '-lmtxinput'    ]

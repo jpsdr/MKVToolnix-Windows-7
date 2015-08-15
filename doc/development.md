@@ -7,7 +7,6 @@ Directories in alphabetical order:
 
 * `ac`: Macro snippets used for the `configure` script.
 * `contrib`: Spec files for RPM creation and other contributed files.
-* `doc/guide`: mmg's guide.
 * `doc/man`: man pages. They're written as DocBook XML files and
   converted to HTML and man format automatically.
 * `examples`: Examples for the end user.
@@ -23,7 +22,7 @@ Directories in alphabetical order:
 * `src/input`: Readers (demux source files). Only used in mkvmerge.
 * `src/merge`: mkvmerge's main files, e.g. command line handling,
   output control, file creating etc.
-* `src/mmg`: mkvmerge's GUI.
+* `src/mkvtoolnix-gui`: the MKVToolNix GUI.
 * `src/output`: Packetizers (create the tracks in the output
   file). Only used in mkvmerge.
 * `src/propedit`: mkvpropedit's main files.
@@ -61,7 +60,7 @@ The same applies to `mxwarn()` and `mxerror()`. However, both prefix
 their messages with "Warning:" and "Error:" respectively. Also they
 modify mkvmerge's exit code -- "1" if `mxwarn()` has been used at
 least once and "2" if `mxerror()` is used. `mxerror()` also instantly
-exits the program. mmg shows such warnings and errors in separate
+exits the program. The GUI shows such warnings and errors in separate
 areas as to draw the user's attention to them. Therefore `mxwarn()`
 should be used for stuff the user really should know, and `mxerror()`
 for stuff that prevents further processing altogether.
@@ -231,7 +230,6 @@ MKVToolNix package:
 1. The programs and their messages themselves. This is the most
    important part.
 2. The manual pages.
-3. mmg's guide.
 
 All three are translated by the `gettext` system. This system uses
 .po-files which map the original English version to the translated
@@ -255,7 +253,7 @@ If you want to test your translations you can do that as well:
    with your po editor application.
 4. Replace one of the installed translation files
    (e.g. `mkvtoolnix\locale\de\mkvtoolnix.mo`) with your compiled file.
-5. Start mmg, go to the preferences dialog and select 'German' as the
+5. Start the GUI, go to the preferences dialog and select 'German' as the
    language (the 'de' file you've replaced in step 4 is for German).
 
 Please note that a lot of strings must not be translated, especially

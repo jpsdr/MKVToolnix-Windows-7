@@ -97,10 +97,6 @@ built. These include:
 - [Qt](http://www.qt.io/) -- a cross-platform GUI toolkit. You need
   this if you want to use the MKVToolNix GUI or mkvinfo's GUI.
 
-- [wxWidgets](http://www.wxwidgets.org/) -- a cross-platform GUI
-  toolkit. You need this if you want to use the deprecated `mmg` (the
-  mkvmerge GUI) or mkvinfo's deprecated, wxWidgets-based GUI.
-
 - [libFLAC](http://downloads.xiph.org/releases/flac/) for FLAC
   support (Free Lossless Audio Codec)
 

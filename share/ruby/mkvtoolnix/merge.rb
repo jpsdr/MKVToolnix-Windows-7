@@ -13,7 +13,7 @@ module MKVToolNix
     def self.identify file_name, opt = {}
       opt[:executable] ||= 'mkvmerge'
 
-      p = IO.popen([ opt[:executable], "--identify-for-mmg", "--output-charset", "UTF-8", file_name ])
+      p = IO.popen([ opt[:executable], "--identify-for-gui", "--output-charset", "UTF-8", file_name ])
       output = p.readlines
       p.close
 

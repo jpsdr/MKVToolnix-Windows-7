@@ -6,8 +6,6 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   Data for ComboBoxes in mmg and other occurences
-
    Written by Moritz Bunkus <moritz@bunkus.org>.
    Changes by Robert Millan <rmh@aybabtu.com>.
 */
