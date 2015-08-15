@@ -225,6 +225,8 @@ function build_configured_mkvtoolnix {
     CXXFLAGS="-fvisibility=hidden -fvisibility-inlines-hidden" \
     ${args}
 
+  grep -q 'USE_QT.*yes' build-config
+
   # sed -i '' -e 's/^\(QT_LIBS.*\)$/\1 -lcups/' build-config
 }
 
