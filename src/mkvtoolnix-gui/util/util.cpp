@@ -5,6 +5,7 @@
 #include <QIcon>
 #include <QList>
 #include <QPushButton>
+#include <QRegularExpression>
 #include <QScrollArea>
 #include <QSettings>
 #include <QString>
@@ -270,13 +271,22 @@ escape_shell_windows(QString const &source) {
   return copy;
 }
 
+static QString
+escape_shell_windows_program(QString const &source) {
+  if (source.contains(QRegularExpression{"[&<>[\\]{}^=;!'+,`~ ]"}))
+    return Q("\"%1\"").arg(source);
+
+  return source;
+}
+
 QString
 escape(QString const &source,
        EscapeMode mode) {
-  return EscapeMkvtoolnix   == mode ? escape_mkvtoolnix(source)
-       : EscapeShellUnix    == mode ? escape_shell_unix(source)
-       : EscapeShellWindows == mode ? escape_shell_windows(source)
-       :                              source;
+  return EscapeMkvtoolnix          == mode ? escape_mkvtoolnix(source)
+       : EscapeShellUnix           == mode ? escape_shell_unix(source)
+       : EscapeShellWindows        == mode ? escape_shell_windows(source)
+       : EscapeShellWindowsProgram == mode ? escape_shell_windows_program(source)
+       :                                     source;
 }
 
 QString
@@ -291,8 +301,12 @@ QStringList
 escape(QStringList const &source,
        EscapeMode mode) {
   auto escaped = QStringList{};
-  for (auto const &string : source)
-    escaped << escape(string, mode);
+  auto first   = true;
+
+  for (auto const &string : source) {
+    escaped << escape(string, first && (EscapeShellWindows == mode) ? EscapeShellWindowsProgram : mode);
+    first = false;
+  }
 
   return escaped;
 }

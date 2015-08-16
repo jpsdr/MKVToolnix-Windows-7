@@ -77,6 +77,7 @@ enum EscapeMode {
   EscapeMkvtoolnix,
   EscapeShellUnix,
   EscapeShellWindows,
+  EscapeShellWindowsProgram,
   DontEscape,
 #if defined(SYS_WINDOWS)
   EscapeShellNative = EscapeShellWindows,
