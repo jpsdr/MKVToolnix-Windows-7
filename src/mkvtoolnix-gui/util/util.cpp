@@ -203,21 +203,21 @@ toTopLevelIdx(QModelIndex const &idx) {
 }
 
 static QString
-escape_mkvtoolnix(QString const &source) {
+escapeMkvtoolnix(QString const &source) {
   if (source.isEmpty())
     return QString{"#EMPTY#"};
   return to_qs(::escape(to_utf8(source)));
 }
 
 static QString
-unescape_mkvtoolnix(QString const &source) {
+unescapeMkvtoolnix(QString const &source) {
   if (source == Q("#EMPTY#"))
     return Q("");
   return to_qs(::unescape(to_utf8(source)));
 }
 
 static QString
-escape_shell_unix(QString const &source) {
+escapeShellUnix(QString const &source) {
   if (source.isEmpty())
     return Q("\"\"");
 
@@ -236,7 +236,7 @@ escape_shell_unix(QString const &source) {
 }
 
 static QString
-escape_shell_windows(QString const &source) {
+escapeShellWindows(QString const &source) {
   if (source.isEmpty())
     return Q("^\"^\"");
 
@@ -272,7 +272,7 @@ escape_shell_windows(QString const &source) {
 }
 
 static QString
-escape_shell_windows_program(QString const &source) {
+escapeShellWindowsProgram(QString const &source) {
   if (source.contains(QRegularExpression{"[&<>[\\]{}^=;!'+,`~ ]"}))
     return Q("\"%1\"").arg(source);
 
@@ -282,10 +282,10 @@ escape_shell_windows_program(QString const &source) {
 QString
 escape(QString const &source,
        EscapeMode mode) {
-  return EscapeMkvtoolnix          == mode ? escape_mkvtoolnix(source)
-       : EscapeShellUnix           == mode ? escape_shell_unix(source)
-       : EscapeShellCmdExeArgument == mode ? escape_shell_windows(source)
-       : EscapeShellCmdExeProgram  == mode ? escape_shell_windows_program(source)
+  return EscapeMkvtoolnix          == mode ? escapeMkvtoolnix(source)
+       : EscapeShellUnix           == mode ? escapeShellUnix(source)
+       : EscapeShellCmdExeArgument == mode ? escapeShellWindows(source)
+       : EscapeShellCmdExeProgram  == mode ? escapeShellWindowsProgram(source)
        :                                     source;
 }
 
@@ -294,7 +294,7 @@ unescape(QString const &source,
          EscapeMode mode) {
   Q_ASSERT(EscapeMkvtoolnix == mode);
 
-  return unescape_mkvtoolnix(source);
+  return unescapeMkvtoolnix(source);
 }
 
 QStringList
