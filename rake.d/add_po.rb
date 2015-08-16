@@ -30,6 +30,11 @@ module AddPo
     puts "#{file_name} → #{target}"
   end
 
+  def self.unpack_p7z file_name
+    system "7z x #{Shellwords.escape(file_name)}"
+    fail "7z failed for #{file_name}" unless $?.exitstatus == 0
+  end
+
   def self.unpack_rar file_name
     system "unrar x #{Shellwords.escape(file_name)}"
     fail "unrar failed for #{file_name}" unless $?.exitstatus == 0
@@ -52,9 +57,10 @@ module AddPo
   end
 
   def self.add file_name
-    return handle_archive(file_name, :rar) if /\.rar$/.match file_name
-    return handle_archive(file_name, :zip) if /\.zip$/.match file_name
-    return handle_po(file_name)            if /\.po$/.match file_name
+    return handle_archive(file_name, :rar) if /\.rar$/i.match file_name
+    return handle_archive(file_name, :zip) if /\.zip$/i.match file_name
+    return handle_archive(file_name, :p7z) if /\.7z$/i.match  file_name
+    return handle_po(file_name)            if /\.po$/i.match  file_name
     fail "Don't know how to handle #{file_name}"
   end
 end
