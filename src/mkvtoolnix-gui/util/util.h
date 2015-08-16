@@ -76,11 +76,11 @@ QModelIndex toTopLevelIdx(QModelIndex const &idx);
 enum EscapeMode {
   EscapeMkvtoolnix,
   EscapeShellUnix,
-  EscapeShellWindows,
-  EscapeShellWindowsProgram,
+  EscapeShellCmdExeArgument,
+  EscapeShellCmdExeProgram,
   DontEscape,
 #if defined(SYS_WINDOWS)
-  EscapeShellNative = EscapeShellWindows,
+  EscapeShellNative = EscapeShellCmdExeArgument,
 #else
   EscapeShellNative = EscapeShellUnix,
 #endif

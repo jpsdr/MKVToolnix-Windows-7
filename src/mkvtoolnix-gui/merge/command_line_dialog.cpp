@@ -43,7 +43,7 @@ CommandLineDialog::~CommandLineDialog() {
 
 void
 CommandLineDialog::onEscapeModeChanged(int index) {
-  auto mode = 0 == index ? Util::EscapeShellWindows
+  auto mode = 0 == index ? Util::EscapeShellCmdExeArgument
             : 1 == index ? Util::EscapeShellUnix
             : 2 == index ? Util::EscapeMkvtoolnix
             :              Util::DontEscape;

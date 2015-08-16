@@ -284,8 +284,8 @@ escape(QString const &source,
        EscapeMode mode) {
   return EscapeMkvtoolnix          == mode ? escape_mkvtoolnix(source)
        : EscapeShellUnix           == mode ? escape_shell_unix(source)
-       : EscapeShellWindows        == mode ? escape_shell_windows(source)
-       : EscapeShellWindowsProgram == mode ? escape_shell_windows_program(source)
+       : EscapeShellCmdExeArgument == mode ? escape_shell_windows(source)
+       : EscapeShellCmdExeProgram  == mode ? escape_shell_windows_program(source)
        :                                     source;
 }
 
@@ -304,7 +304,7 @@ escape(QStringList const &source,
   auto first   = true;
 
   for (auto const &string : source) {
-    escaped << escape(string, first && (EscapeShellWindows == mode) ? EscapeShellWindowsProgram : mode);
+    escaped << escape(string, first && (EscapeShellCmdExeArgument == mode) ? EscapeShellCmdExeProgram : mode);
     first = false;
   }
 
