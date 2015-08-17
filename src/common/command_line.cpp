@@ -78,20 +78,21 @@ read_args_from_file(std::vector<std::string> &args,
 
 static std::vector<std::string>
 command_line_args_from_environment() {
-  std::vector<std::string> args;
+  std::vector<std::string> all_args;
 
-  char const *value = getenv("MKVTOOLNIX_OPTIONS");
-  if (value)
-    args = split(value, " ");
-  else {
-    value = getenv("MTX_OPTIONS");
-    if (value)
-      args = split(value, " ");
-  }
+  auto process = [&all_args](std::string const &variable) {
+    auto value = getenv((boost::format("%1%_OPTIONS") % variable).str().c_str());
+    if (value && value[0]) {
+      auto args = split(value, " ");
+      std::transform(args.begin(), args.end(), std::back_inserter(all_args), unescape);
+    }
+  };
 
-  std::transform(args.begin(), args.end(), args.begin(), unescape);
+  process("MKVTOOLNIX");
+  process("MTX");
+  process(balg::to_upper_copy(get_program_name()));
 
-  return args;
+  return all_args;
 }
 
 /** \brief Expand the command line parameters
