@@ -451,6 +451,12 @@ avi_reader_c::add_audio_demuxer(int aid) {
 
   m_ti.m_id                        = aid + 1;       // ID for this audio track.
 
+  auto stream_header               = &m_avi->stream_headers[aid];
+  auto dw_scale                    = static_cast<int64_t>(get_uint32_le(&stream_header->dw_scale));
+  auto dw_rate                     = static_cast<int64_t>(get_uint32_le(&stream_header->dw_rate));
+  auto dw_sample_size              = static_cast<int64_t>(get_uint32_le(&stream_header->dw_sample_size));
+  m_ti.m_avi_audio_data_rate       = dw_scale ? dw_rate * dw_sample_size / dw_scale : 0;
+
   if ((0xfffe == audio_format) && (get_uint16_le(&wfe->cb_size) >= (sizeof(alWAVEFORMATEXTENSION)))) {
     alWAVEFORMATEXTENSIBLE *ext = reinterpret_cast<alWAVEFORMATEXTENSIBLE *>(wfe);
     audio_format                = get_uint32_le(&ext->extension.guid.data1);

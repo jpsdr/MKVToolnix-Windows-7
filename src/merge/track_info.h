@@ -193,6 +193,7 @@ public:
   std::string m_chapter_charset, m_chapter_language;
 
   bool m_avi_audio_sync_enabled;
+  int64_t m_avi_audio_data_rate;
 
 public:
   track_info_c();

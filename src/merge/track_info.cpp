@@ -39,6 +39,7 @@ track_info_c::track_info_c()
   , m_no_chapters{}
   , m_no_global_tags{}
   , m_avi_audio_sync_enabled{}
+  , m_avi_audio_data_rate{}
 {
 }
 
@@ -127,6 +128,7 @@ track_info_c::operator =(const track_info_c &src) {
   m_chapter_language           = src.m_chapter_language;
 
   m_avi_audio_sync_enabled     = false;
+  m_avi_audio_data_rate        = src.m_avi_audio_data_rate;
   m_default_durations          = src.m_default_durations;
   m_max_blockadd_ids           = src.m_max_blockadd_ids;
 

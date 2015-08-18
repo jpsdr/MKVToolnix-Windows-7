@@ -1,5 +1,12 @@
 2015-08-18  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: The formula used for calculating the audio
+        delay for garbage data at the start of tracks in AVI files has
+        been fixed again. It now uses the values dwStart, dwScale and
+        dwSampleSize from the AVI stream header structure instead of
+        values derived from the audio packet headers. Fixes #1382 and
+        still works correctly for #1137.
+
         * MKVToolNix GUI: enhancement: scrolling over input elements like
         combo boxes, check boxes and radio buttons located within a scroll
         area will now scroll the scroll area instead of the element the
