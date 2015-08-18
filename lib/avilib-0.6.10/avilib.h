@@ -208,14 +208,13 @@ typedef struct PACKED_STRUCTURE
   uint32_t fcc_type; 
   uint32_t fcc_handler; 
   uint32_t dw_flags; 
-  uint32_t dw_caps; 
   uint16_t w_priority;
   uint16_t w_language;
+  uint32_t dw_initial_frames;
   uint32_t dw_scale;
   uint32_t dw_rate;
   uint32_t dw_start;
   uint32_t dw_length;
-  uint32_t dw_initial_frames;
   uint32_t dw_suggested_buffer_size;
   uint32_t dw_quality;
   uint32_t dw_sample_size;
