@@ -107,7 +107,7 @@ def setup_globals
   cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:DEBUG_CFLAGS)} #{c(:PROFILING_CFLAGS)} #{c(:USER_CPPFLAGS)}"
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0500 -D_WIN32_WINNT=0x0500 " if c?(:MINGW)
   cflags_common           += " -march=i686"                                              if c?(:MINGW) && /i686/.match(c(:host))
-  cflags_common           += " -fPIE "                                                   if c?(:USE_QT) && !c?(:MINGW)
+  cflags_common           += " -fPIC "                                                   if c?(:USE_QT) && !c?(:MINGW)
   cflags_common           += " -DQT_STATICPLUGIN"                                        if c?(:USE_QT) &&  c?(:MINGW)
 
   cflags                   = "#{cflags_common} #{c(:USER_CFLAGS)}"
