@@ -119,6 +119,7 @@ MainWindow::setupMenu() {
   connect(ui->actionHelpKnownProblems,         &QAction::triggered,             this, &MainWindow::visitHelpURL);
   connect(ui->actionHelpMkvmergeDocumentation, &QAction::triggered,             this, &MainWindow::visitHelpURL);
   connect(ui->actionHelpWebSite,               &QAction::triggered,             this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpReportBug,             &QAction::triggered,             this, &MainWindow::visitHelpURL);
 
   connect(this,                                &MainWindow::preferencesChanged, this, &MainWindow::setToolSelectorVisibility);
 
@@ -184,6 +185,7 @@ MainWindow::setupHelpURLs() {
   m_helpURLs[ui->actionHelpKnownProblems]         = "https://github.com/mbunkus/mkvtoolnix/wiki/Troubleshooting";
   m_helpURLs[ui->actionHelpMkvmergeDocumentation] = "https://www.bunkus.org/videotools/mkvtoolnix/doc/mkvmerge.html";
   m_helpURLs[ui->actionHelpWebSite]               = "https://www.bunkus.org/videotools/mkvtoolnix/";
+  m_helpURLs[ui->actionHelpReportBug]             = "https://github.com/mbunkus/mkvtoolnix/issues/";
 }
 
 void
