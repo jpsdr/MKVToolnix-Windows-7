@@ -195,9 +195,7 @@ function build_configured_mkvtoolnix {
     --prefix=$dmgmac --bindir=$dmgmac --datarootdir=$dmgmac \
     --with-extra-libs=${TARGET}/lib --with-extra-includes=${TARGET}/include \
     --with-boost-libdir=${TARGET}/lib \
-    --disable-debug \
-    --enable-qt --enable-gui --with-mkvtoolnix-gui
-    # --with-qt-pkg-config-modules=Qt5PrintSupport
+    --disable-debug
   )
 
   if [[ -z $SHARED_QT ]] args+=(--enable-static-qt)
