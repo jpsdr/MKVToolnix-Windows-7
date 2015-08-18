@@ -86,6 +86,7 @@ Tab::setupUi() {
                 << ui->lChNameCountry  << ui->cbChNameCountry;
 
   Util::fixScrollAreaBackground(ui->scrollArea);
+  Util::preventScrollingWithoutFocus(this);
 
   auto mw = MainWindow::get();
   connect(ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                 &Tab::showChapterContextMenu);

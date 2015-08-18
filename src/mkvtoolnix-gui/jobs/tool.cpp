@@ -71,6 +71,8 @@ Tool::setupUiControls() {
 
   ui->jobs->setModel(m_model);
 
+  Util::preventScrollingWithoutFocus(this);
+
   m_jobsMenu->addAction(m_viewOutputAction);
   m_jobsMenu->addAction(m_openFolderAction);
   m_jobsMenu->addSeparator();

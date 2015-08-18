@@ -49,6 +49,8 @@ void
 Tab::setupUi() {
   m_saveOutputAction->setEnabled(false);
 
+  Util::preventScrollingWithoutFocus(this);
+
   retranslateUi();
 
   auto model = MainWindow::jobTool()->model();

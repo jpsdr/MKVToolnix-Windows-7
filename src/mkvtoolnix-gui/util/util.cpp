@@ -1,12 +1,15 @@
 #include "common/common_pch.h"
 
+#include <QCheckBox>
 #include <QComboBox>
 #include <QDateTime>
 #include <QIcon>
 #include <QList>
 #include <QPushButton>
+#include <QRadioButton>
 #include <QRegularExpression>
 #include <QScrollArea>
+#include <QSpinBox>
 #include <QSettings>
 #include <QString>
 #include <QTableView>
@@ -16,6 +19,7 @@
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/app.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
 
@@ -388,6 +392,26 @@ tabWidgetCloseTabButton(QTabWidget &tabWidget,
 void
 fixScrollAreaBackground(QScrollArea *scrollArea) {
   scrollArea->setBackgroundRole(QPalette::Base);
+}
+
+void
+preventScrollingWithoutFocus(QObject *parent) {
+  auto install = [](QWidget *widget) {
+    widget->installEventFilter(MainWindow::get());
+    widget->setFocusPolicy(Qt::StrongFocus);
+  };
+
+  for (auto const &child : parent->findChildren<QCheckBox *>())
+    install(child);
+
+  for (auto const &child : parent->findChildren<QComboBox *>())
+    install(child);
+
+  for (auto const &child : parent->findChildren<QRadioButton *>())
+    install(child);
+
+  for (auto const &child : parent->findChildren<QSpinBox *>())
+    install(child);
 }
 
 }}}

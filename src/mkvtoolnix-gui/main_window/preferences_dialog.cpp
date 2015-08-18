@@ -72,6 +72,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 
   setupToolTips();
   setupConnections();
+
+  Util::preventScrollingWithoutFocus(this);
 }
 
 PreferencesDialog::~PreferencesDialog() {

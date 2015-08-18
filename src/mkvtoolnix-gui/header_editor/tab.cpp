@@ -25,6 +25,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 
@@ -177,6 +178,8 @@ Tab::setupUi() {
   ui->elements->setModel(m_model);
   ui->elements->addAction(m_expandAllAction);
   ui->elements->addAction(m_collapseAllAction);
+
+  Util::preventScrollingWithoutFocus(this);
 
   connect(ui->elements->selectionModel(), &QItemSelectionModel::currentChanged, this, &Tab::selectionChanged);
   connect(m_expandAllAction,              &QAction::triggered,                  this, &Tab::expandAll);

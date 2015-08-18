@@ -10,6 +10,7 @@
 #include <QAction>
 #include <QMainWindow>
 
+class QEvent;
 class QResizeEvent;
 class QShowEvent;
 
@@ -78,6 +79,8 @@ public:
 
   virtual void switchToTool(ToolBase *tool);
 
+  virtual bool eventFilter(QObject *watched, QEvent *event) override;
+
 signals:
   void windowShown();
   void preferencesChanged();
@@ -118,6 +121,8 @@ protected:
   virtual void showEvent(QShowEvent *event);
   virtual void closeEvent(QCloseEvent *event);
   virtual bool beforeCloseCheckRunningJobs();
+
+  virtual boost::optional<bool> filterWheelEventForStrongFocus(QObject *watched, QEvent *event);
 
 #if defined(HAVE_CURL_EASY_H)
   virtual void silentlyCheckForUpdates();

@@ -2,6 +2,7 @@
 
 #include <QCloseEvent>
 #include <QDesktopServices>
+#include <QEvent>
 #include <QIcon>
 #include <QLabel>
 #include <QMessageBox>
@@ -457,6 +458,33 @@ MainWindow::showEvent(QShowEvent *event) {
 void
 MainWindow::setToolSelectorVisibility() {
   ui->tool->tabBar()->setVisible(Util::Settings::get().m_showToolSelector);
+}
+
+boost::optional<bool>
+MainWindow::filterWheelEventForStrongFocus(QObject *watched,
+                                           QEvent *event) {
+  if (event->type() != QEvent::Wheel)
+    return {};
+
+  auto widget = qobject_cast<QWidget *>(watched);
+  if (   !widget
+      ||  widget->hasFocus()
+      || (widget->focusPolicy() != Qt::StrongFocus))
+    return {};
+
+  event->ignore();
+  return true;
+}
+
+bool
+MainWindow::eventFilter(QObject *watched,
+                        QEvent *event) {
+  auto result = filterWheelEventForStrongFocus(watched, event);
+
+  if (result)
+    return *result;
+
+  return QMainWindow::eventFilter(watched, event);
 }
 
 }}
