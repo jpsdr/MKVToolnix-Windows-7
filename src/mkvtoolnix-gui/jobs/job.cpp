@@ -148,8 +148,9 @@ Job::setStatus(Status status) {
   if (status == m_status)
     return;
 
-  m_status   = status;
-  m_modified = true;
+  auto oldStatus = m_status;
+  m_status       = status;
+  m_modified     = true;
 
   if (Running == status) {
     m_dateStarted = QDateTime::currentDateTime();
@@ -163,7 +164,7 @@ Job::setStatus(Status status) {
   } else if ((DoneOk == status) || (DoneWarnings == status) || (Failed == status) || (Aborted == status))
     m_dateFinished = QDateTime::currentDateTime();
 
-  emit statusChanged(m_id, status);
+  emit statusChanged(m_id, oldStatus, status);
 }
 
 bool

@@ -29,6 +29,7 @@ Model::Model(QObject *parent)
   , m_started{}
   , m_dontStartJobsNow{}
   , m_running{}
+  , m_queueNumDone{}
 {
   retranslateUi();
 }
@@ -241,8 +242,12 @@ Model::add(JobPtr const &job) {
 }
 
 void
-Model::onStatusChanged(uint64_t id) {
+Model::onStatusChanged(uint64_t id,
+                       mtx::gui::Jobs::Job::Status oldStatus,
+                       mtx::gui::Jobs::Job::Status newStatus) {
   QMutexLocker locked{&m_mutex};
+
+  qDebug() << "id" << id << "old" << oldStatus << "new" << newStatus;
 
   auto row = rowFromId(id);
   if (row == RowNotFound)
@@ -261,16 +266,21 @@ Model::onStatusChanged(uint64_t id) {
   if (included_in(status, Job::PendingManual, Job::PendingAuto, Job::Running))
     job.setDateFinished(QDateTime{});
 
-  item(row, StatusColumn)->setText(Job::displayableStatus(job.status()));
+  item(row, StatusColumn)->setText(Job::displayableStatus(status));
   item(row, DateStartedColumn)->setText(Util::displayableDate(job.dateStarted()));
   item(row, DateFinishedColumn)->setText(Util::displayableDate(job.dateFinished()));
 
   if ((Job::Running == status) && !m_running) {
     m_running        = true;
     m_queueStartTime = QDateTime::currentDateTime();
+    m_queueNumDone   = 0;
 
     emit queueStatusChanged(QueueStatus::Running);
+
   }
+
+  if ((Job::Running == oldStatus) && (Job::Running != newStatus))
+    ++m_queueNumDone;
 
   startNextAutoJob();
 
@@ -420,23 +430,20 @@ void
 Model::updateProgress() {
   QMutexLocker locked{&m_mutex};
 
-  if (!m_toBeProcessed.count())
+  if (!(m_toBeProcessed.count() + m_queueNumDone))
     return;
 
   auto numRunning       = 0;
-  auto numDone          = 0;
   auto runningProgress  = 0;
 
   for (auto const &job : m_toBeProcessed)
     if (Job::Running == job->status()) {
       ++numRunning;
       runningProgress += job->progress();
-
-    } else if (!job->isToBeProcessed() && m_toBeProcessed.contains(job))
-      ++numDone;
+    }
 
   auto progress      = numRunning ? runningProgress / numRunning : 0u;
-  auto totalProgress = (numDone * 100 + runningProgress) / m_toBeProcessed.count();
+  auto totalProgress = (m_queueNumDone * 100 + runningProgress) / (m_toBeProcessed.count() + m_queueNumDone);
 
   emit progressChanged(progress, totalProgress);
 }

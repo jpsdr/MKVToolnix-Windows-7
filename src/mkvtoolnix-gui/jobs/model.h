@@ -31,6 +31,7 @@ protected:
   bool m_started, m_dontStartJobsNow, m_running;
 
   QDateTime m_queueStartTime;
+  int m_queueNumDone;
 
 public:
   // labels << QY("Status") << QY("Description") << QY("Type") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished");
@@ -89,7 +90,7 @@ signals:
   void queueStatusChanged(QueueStatus status);
 
 public slots:
-  void onStatusChanged(uint64_t id);
+  void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status oldStatus, mtx::gui::Jobs::Job::Status newStatus);
   void onProgressChanged(uint64_t id, unsigned int progress);
   void onNumUnacknowledgedWarningsOrErrorsChanged(uint64_t id, int numWarnings, int numErrors);
   void removeScheduledJobs();

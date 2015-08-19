@@ -121,7 +121,7 @@ public slots:
   virtual void openOutputFolder() const;
 
 signals:
-  void statusChanged(uint64_t id, mtx::gui::Jobs::Job::Status status);
+  void statusChanged(uint64_t id, mtx::gui::Jobs::Job::Status oldStatus, mtx::gui::Jobs::Job::Status newStatus);
   void progressChanged(uint64_t id, unsigned int progress);
   void numUnacknowledgedWarningsOrErrorsChanged(uint64_t id, int numWarnings, int numErrors);
 

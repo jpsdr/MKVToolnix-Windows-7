@@ -54,7 +54,7 @@ signals:
   void watchCurrentJobTabCleared();
 
 public slots:
-  void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status status);
+  void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status oldStatus, mtx::gui::Jobs::Job::Status newStatus);
   void onJobProgressChanged(uint64_t id, unsigned int progress);
   void onQueueProgressChanged(int progress, int totalProgress);
   void onLineRead(QString const &line, mtx::gui::Jobs::Job::LineType type);

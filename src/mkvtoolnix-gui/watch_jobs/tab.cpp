@@ -118,7 +118,8 @@ Tab::onAbort() {
 
 void
 Tab::onStatusChanged(uint64_t id,
-                     mtx::gui::Jobs::Job::Status status) {
+                     mtx::gui::Jobs::Job::Status,
+                     mtx::gui::Jobs::Job::Status newStatus) {
   if (QObject::sender() != m_currentlyConnectedJob)
     return;
 
@@ -147,7 +148,7 @@ Tab::onStatusChanged(uint64_t id,
     // Check for the signalled status, not the current one, in order to
     // detect a change from »not running« to »running« only once, no
     // matter which order the signals arrive in.
-    if (Jobs::Job::Running == status)
+    if (Jobs::Job::Running == newStatus)
       setInitialDisplay(*job);
 
     else if (mtx::included_in(m_currentJobStatus, Jobs::Job::DoneOk, Jobs::Job::DoneWarnings, Jobs::Job::Failed, Jobs::Job::Aborted))
