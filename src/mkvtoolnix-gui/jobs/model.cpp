@@ -247,8 +247,6 @@ Model::onStatusChanged(uint64_t id,
                        mtx::gui::Jobs::Job::Status newStatus) {
   QMutexLocker locked{&m_mutex};
 
-  qDebug() << "id" << id << "old" << oldStatus << "new" << newStatus;
-
   auto row = rowFromId(id);
   if (row == RowNotFound)
     return;
