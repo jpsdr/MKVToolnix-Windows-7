@@ -1449,13 +1449,14 @@ Tab::focusNextChapterAtom() {
       return doSelect(parentIdx.child(nextRow, 0));
   }
 
-  auto editionIdx = parentIdx.sibling(parentIdx.row() + 1, 0);
+  auto numEditions = m_chapterModel->rowCount();
+  auto editionIdx  = parentIdx.sibling((parentIdx.row() + 1) % numEditions, 0);
 
-  while (editionIdx.isValid()) {
+  while (numEditions) {
     if (m_chapterModel->itemFromIndex(editionIdx)->rowCount())
       return doSelect(editionIdx.child(0, 0));
 
-    editionIdx = editionIdx.sibling(editionIdx.row() + 1, 0);
+    editionIdx = editionIdx.sibling((editionIdx.row() + 1) % numEditions, 0);
   }
 
   return false;
