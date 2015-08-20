@@ -114,9 +114,11 @@ Tab::setupUi() {
   connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameLanguage, &Util::ComboBoxBase::reInitialize);
   connect(mw,                              &MainWindow::preferencesChanged,                                        ui->cbChNameCountry,  &Util::ComboBoxBase::reInitialize);
 
-  auto chapterLineEdits = QList<QLineEdit *>{} << ui->leChStart << ui->leChEnd << ui->leChUid << ui->leChSegmentUid << ui->leChSegmentEditionUid << ui->leChName;
-  for (auto const &lineEdit : chapterLineEdits)
-    connect(lineEdit, &QLineEdit::returnPressed, this, &Tab::focusNextChapterElement);
+  for (auto &lineEdit : findChildren<Util::BasicLineEdit *>()) {
+    lineEdit->acceptDroppedFiles(false).setTextToDroppedFileName(false);
+    connect(lineEdit, &Util::BasicLineEdit::returnPressed,      this, &Tab::focusOtherControlInNextChapterElement);
+    connect(lineEdit, &Util::BasicLineEdit::shiftReturnPressed, this, &Tab::focusSameControlInNextChapterElement);
+  }
 }
 
 void
@@ -1412,12 +1414,13 @@ Tab::focusNextChapterName() {
 }
 
 bool
-Tab::focusNextChapterAtom() {
-  auto doSelect = [this](QModelIndex const &idx) -> bool {
+Tab::focusNextChapterAtom(FocusElementType toFocus) {
+  auto doSelect = [this, toFocus](QModelIndex const &idx) -> bool {
     Util::selectRow(ui->elements, idx.row(), idx.parent());
 
-    ui->leChStart->selectAll();
-    ui->leChStart->setFocus();
+    auto lineEdit = FocusChapterStartTime == toFocus ? ui->leChStart : ui->leChName;
+    lineEdit->selectAll();
+    lineEdit->setFocus();
 
     return true;
   };
@@ -1463,20 +1466,35 @@ Tab::focusNextChapterAtom() {
 }
 
 void
-Tab::focusNextChapterElement() {
+Tab::focusNextChapterElement(bool keepSameElement) {
   if (!copyControlsToStorage())
     return;
 
-  if (QObject::sender() != ui->leChName) {
+  if (QObject::sender() == ui->leChName) {
+    if (focusNextChapterName())
+      return;
+
+    focusNextChapterAtom(keepSameElement ? FocusChapterName : FocusChapterStartTime);
+    return;
+  }
+
+  if (!keepSameElement) {
     ui->leChName->selectAll();
     ui->leChName->setFocus();
     return;
   }
 
-  if (focusNextChapterName())
-    return;
+  focusNextChapterAtom(FocusChapterStartTime);
+}
 
-  focusNextChapterAtom();
+void
+Tab::focusOtherControlInNextChapterElement() {
+  focusNextChapterElement(false);
+}
+
+void
+Tab::focusSameControlInNextChapterElement() {
+  focusNextChapterElement(true);
 }
 
 }}}

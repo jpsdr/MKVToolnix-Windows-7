@@ -32,6 +32,11 @@ class Tab : public QWidget {
   Q_OBJECT;
 
 protected:
+  enum FocusElementType {
+    FocusChapterName,
+    FocusChapterStartTime,
+  };
+
   using ValidationResult = std::pair<bool, QString>;
   using LoadResult       = std::pair<ChaptersPtr, bool>;
 
@@ -100,7 +105,8 @@ public slots:
 
   virtual void showChapterContextMenu(QPoint const &pos);
 
-  virtual void focusNextChapterElement();
+  virtual void focusOtherControlInNextChapterElement();
+  virtual void focusSameControlInNextChapterElement();
 
 protected:
   void setupUi();
@@ -155,8 +161,9 @@ protected:
   QString formatChapterName(QString const &nameTemplate, int chapterNumber) const;
   void changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace);
 
-  bool focusNextChapterAtom();
+  bool focusNextChapterAtom(FocusElementType toFocus);
   bool focusNextChapterName();
+  void focusNextChapterElement(bool keepSameControl);
 
   static QString formatEbmlBinary(EbmlBinary *binary);
 };

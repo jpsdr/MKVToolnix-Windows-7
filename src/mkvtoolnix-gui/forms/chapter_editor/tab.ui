@@ -211,7 +211,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="leEdUid"/>
+           <widget class="mtx::gui::Util::BasicLineEdit" name="leEdUid"/>
           </item>
          </layout>
         </item>
@@ -285,10 +285,10 @@
               <item row="0" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_2">
                 <item>
-                 <widget class="QLineEdit" name="leChStart"/>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="leChStart"/>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="leChEnd"/>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="leChEnd"/>
                 </item>
                </layout>
               </item>
@@ -341,7 +341,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLineEdit" name="leChUid"/>
+               <widget class="mtx::gui::Util::BasicLineEdit" name="leChUid"/>
               </item>
               <item row="3" column="0">
                <widget class="QLabel" name="lChSegmentUid">
@@ -354,7 +354,7 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QLineEdit" name="leChSegmentUid"/>
+               <widget class="mtx::gui::Util::BasicLineEdit" name="leChSegmentUid"/>
               </item>
               <item row="4" column="0">
                <widget class="QLabel" name="lChSegmentEditionUid">
@@ -367,7 +367,7 @@
                </widget>
               </item>
               <item row="4" column="1">
-               <widget class="QLineEdit" name="leChSegmentEditionUid"/>
+               <widget class="mtx::gui::Util::BasicLineEdit" name="leChSegmentEditionUid"/>
               </item>
              </layout>
             </item>
@@ -446,7 +446,7 @@
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="leChName"/>
+                  <widget class="mtx::gui::Util::BasicLineEdit" name="leChName"/>
                  </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="lChNameLanguage">
@@ -504,6 +504,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>mtx::gui::Util::BasicLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>mkvtoolnix-gui/util/basic_line_edit.h</header>
+  </customwidget>
   <customwidget>
    <class>mtx::gui::Util::BasicTreeView</class>
    <extends>QTreeView</extends>
