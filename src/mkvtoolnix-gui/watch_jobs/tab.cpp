@@ -51,6 +51,10 @@ Tab::setupUi() {
 
   Util::preventScrollingWithoutFocus(this);
 
+  auto &cfg = Util::Settings::get();
+  for (auto const &splitter : findChildren<QSplitter *>())
+    cfg.handleSplitterSizes(splitter);
+
   retranslateUi();
 
   auto model = MainWindow::jobTool()->model();
