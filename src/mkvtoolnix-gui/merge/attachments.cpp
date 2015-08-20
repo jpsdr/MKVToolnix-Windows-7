@@ -26,7 +26,11 @@ Tab::setupAttachmentsControls() {
 
   // Context menu
   m_attachmentsMenu->addAction(m_addAttachmentsAction);
+  m_attachmentsMenu->addSeparator();
   m_attachmentsMenu->addAction(m_removeAttachmentsAction);
+  m_attachmentsMenu->addAction(m_removeAllAttachmentsAction);
+  m_attachmentsMenu->addSeparator();
+  m_attachmentsMenu->addAction(m_selectAllAttachmentsAction);
 
   ui->attachmentMIMEType->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   ui->attachmentStyle   ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -36,6 +40,8 @@ Tab::setupAttachmentsControls() {
   connect(ui->attachments->selectionModel(), &QItemSelectionModel::selectionChanged,           this, &Tab::onAttachmentSelectionChanged);
   connect(m_addAttachmentsAction,            &QAction::triggered,                              this, &Tab::onAddAttachments);
   connect(m_removeAttachmentsAction,         &QAction::triggered,                              this, &Tab::onRemoveAttachments);
+  connect(m_removeAllAttachmentsAction,      &QAction::triggered,                              this, &Tab::onRemoveAllAttachments);
+  connect(m_selectAllAttachmentsAction,      &QAction::triggered,                              this, &Tab::onSelectAllAttachments);
   connect(ui->moveAttachmentsUp,             &QPushButton::clicked,                            this, &Tab::onMoveAttachmentsUp);
   connect(ui->moveAttachmentsDown,           &QPushButton::clicked,                            this, &Tab::onMoveAttachmentsDown);
   connect(ui->attachments,                   &Util::BasicTreeView::ctrlUpPressed,              this, &Tab::onMoveAttachmentsUp);
@@ -150,6 +156,24 @@ Tab::onRemoveAttachments() {
 }
 
 void
+Tab::onRemoveAllAttachments() {
+  m_attachmentsModel->reset();
+  onAttachmentSelectionChanged();
+}
+
+void
+Tab::onSelectAllAttachments() {
+  auto numRows = m_attachmentsModel->rowCount();
+  if (!numRows)
+    return;
+
+  auto selection = QItemSelection{};
+  selection.select(m_attachmentsModel->index(0, 0), m_attachmentsModel->index(numRows - 1, m_attachmentsModel->columnCount() - 1));
+
+  ui->attachments->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+}
+
+void
 Tab::resizeAttachmentsColumnsToContents()
   const {
   Util::resizeViewColumnsToContents(ui->attachments);
@@ -197,8 +221,11 @@ Tab::enableAttachmentControls(bool enable) {
 void
 Tab::enableAttachmentsActions() {
   auto hasSelection = !ui->attachments->selectionModel()->selection().isEmpty();
+  auto hasEntries   = !!m_attachmentsModel->rowCount();
 
   m_removeAttachmentsAction->setEnabled(hasSelection);
+  m_removeAllAttachmentsAction->setEnabled(hasEntries);
+  m_selectAllAttachmentsAction->setEnabled(hasEntries);
 }
 
 void
@@ -235,6 +262,8 @@ Tab::retranslateAttachmentsUI() {
 
   m_addAttachmentsAction->setText(QY("&Add"));
   m_removeAttachmentsAction->setText(QY("&Remove"));
+  m_removeAllAttachmentsAction->setText(QY("Remove a&ll"));
+  m_selectAllAttachmentsAction->setText(QY("&Select all"));
 
   // Attachment style
   ui->attachmentStyle->setItemData(0, static_cast<int>(Attachment::ToAllFiles));

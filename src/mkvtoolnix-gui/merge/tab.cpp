@@ -53,6 +53,8 @@ Tab::Tab(QWidget *parent)
   , m_attachmentsModel{new AttachmentModel{this}}
   , m_addAttachmentsAction{new QAction{this}}
   , m_removeAttachmentsAction{new QAction{this}}
+  , m_removeAllAttachmentsAction{new QAction{this}}
+  , m_selectAllAttachmentsAction{new QAction{this}}
   , m_debugTrackModel{"track_model"}
 {
   // Setup UI controls.

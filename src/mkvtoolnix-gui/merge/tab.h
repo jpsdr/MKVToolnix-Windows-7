@@ -47,7 +47,7 @@ protected:
 
   // "Attachments" tab:
   AttachmentModel *m_attachmentsModel;
-  QAction *m_addAttachmentsAction, *m_removeAttachmentsAction;
+  QAction *m_addAttachmentsAction, *m_removeAttachmentsAction, *m_removeAllAttachmentsAction, *m_selectAllAttachmentsAction;
 
   QString m_savedState;
 
@@ -183,6 +183,8 @@ public slots:
   virtual void onAttachmentStyleChanged(int newValue);
   virtual void onAddAttachments();
   virtual void onRemoveAttachments();
+  virtual void onRemoveAllAttachments();
+  virtual void onSelectAllAttachments();
   virtual void addAttachments(QStringList const &fileNames);
 
   virtual void resizeAttachmentsColumnsToContents() const;
