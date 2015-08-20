@@ -29,11 +29,13 @@ public:
 
 signals:
   void filesDropped(QStringList const &fileNames);
+  void shiftReturnPressed();
 
 protected:
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dragMoveEvent(QDragMoveEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;
+  virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
 }}}

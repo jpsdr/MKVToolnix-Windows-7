@@ -80,4 +80,15 @@ BasicLineEdit::dropEvent(QDropEvent *event) {
   QLineEdit::dropEvent(event);
 }
 
+void
+BasicLineEdit::keyPressEvent(QKeyEvent *event) {
+  if (   (event->modifiers() == Qt::ShiftModifier)
+      && mtx::included_in(static_cast<Qt::Key>(event->key()), Qt::Key_Return, Qt::Key_Enter)) {
+    emit shiftReturnPressed();
+    event->accept();
+
+  } else
+    QLineEdit::keyPressEvent(event);
+}
+
 }}}
