@@ -274,7 +274,7 @@ Tab::retranslateAttachmentsUI() {
 
 void
 Tab::setupAttachmentsToolTips() {
-  Util::setToolTip(ui->attachments, QY("Right-click to add and remove attachments"));
+  Util::setToolTip(ui->attachments, QY("Right-click for attachment actions"));
 }
 
 void
