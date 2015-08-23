@@ -45,6 +45,11 @@ module AddPo
     fail "unzip failed for #{file_name}" unless $?.exitstatus == 0
   end
 
+  def self.unpack_tar file_name
+    system "bsdtar xvf #{Shellwords.escape(file_name)}"
+    fail "bsdtar failed for #{file_name}" unless $?.exitstatus == 0
+  end
+
   def self.handle_archive file_name, archive_type
     Dir.mktmpdir do |dir|
       Dir.chdir(dir) do
@@ -60,6 +65,7 @@ module AddPo
     return handle_archive(file_name, :rar) if /\.rar$/i.match file_name
     return handle_archive(file_name, :zip) if /\.zip$/i.match file_name
     return handle_archive(file_name, :p7z) if /\.7z$/i.match  file_name
+    return handle_archive(file_name, :tar) if /\.tar(?:\.(?:gz|bz2|xz))?$/i.match  file_name
     return handle_po(file_name)            if /\.po$/i.match  file_name
     fail "Don't know how to handle #{file_name}"
   end
