@@ -44,7 +44,7 @@ protected:
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
 
-  QString m_fileName;
+  QString m_fileName, m_originalFileName;
   std::unique_ptr<QtKaxAnalyzer> m_analyzer;
   QDateTime m_fileModificationTime;
 
@@ -68,6 +68,7 @@ public:
   virtual QString title() const;
   virtual bool hasChapters() const;
   virtual bool hasBeenModified() const;
+  virtual bool areWidgetsEnabled() const;
 
 signals:
   void removeThisTab();
@@ -77,6 +78,7 @@ signals:
 public slots:
   virtual void newFile();
   virtual void load();
+  virtual void reloadSimpleChaptersWithCharacterSet(QString const &characterSet);
   virtual void save();
   virtual void saveAsXml();
   virtual void saveToMatroska();
@@ -108,6 +110,8 @@ public slots:
   virtual void focusOtherControlInNextChapterElement();
   virtual void focusSameControlInNextChapterElement();
 
+  virtual void closeTab();
+
 protected:
   void setupUi();
   void resetData();
@@ -116,6 +120,7 @@ protected:
   LoadResult loadFromChapterFile();
   LoadResult loadFromMatroskaFile();
   LoadResult loadFromMplsFile();
+  LoadResult checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters);
 
   void resizeChapterColumnsToContents() const;
   void resizeNameColumnsToContents() const;
@@ -156,6 +161,8 @@ protected:
   void setCountries(QStandardItem *item, QString const &country);
 
 protected:
+  void chaptersLoaded(ChaptersPtr const &chapters, bool canBeWritten);
+
   QString currentState() const;
   ChaptersPtr timecodesToChapters(std::vector<timecode_c> const &timecodes) const;
   QString formatChapterName(QString const &nameTemplate, int chapterNumber) const;

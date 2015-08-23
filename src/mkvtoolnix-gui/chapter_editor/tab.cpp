@@ -29,6 +29,7 @@
 #include "mkvtoolnix-gui/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/util.h"
@@ -246,6 +247,26 @@ Tab::loadFromMatroskaFile() {
 }
 
 Tab::LoadResult
+Tab::checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters) {
+  auto result = Util::checkForBomAndNonAscii(m_fileName);
+  if ((BO_NONE != result.byteOrder) || !result.containsNonAscii)
+    return { chapters, false };
+
+  for (auto const &widget : findChildren<QWidget *>())
+    widget->setEnabled(false);
+
+  m_originalFileName = m_fileName;
+  auto dlg           = new SelectCharacterSetDialog{this, m_originalFileName};
+
+  connect(dlg, &SelectCharacterSetDialog::characterSetSelected, this, &Tab::reloadSimpleChaptersWithCharacterSet);
+  connect(dlg, &SelectCharacterSetDialog::rejected,             this, &Tab::closeTab);
+
+  dlg->show();
+
+  return {};
+}
+
+Tab::LoadResult
 Tab::loadFromChapterFile() {
   auto isSimpleFormat = false;
   auto chapters       = ChaptersPtr{};
@@ -270,11 +291,47 @@ Tab::loadFromChapterFile() {
     emit removeThisTab();
 
   } else if (isSimpleFormat) {
+    auto result = checkSimpleFormatForBomAndNonAscii(chapters);
+
     m_fileName.clear();
     emit titleChanged();
+
+    return result;
   }
 
   return { chapters, !isSimpleFormat };
+}
+
+void
+Tab::reloadSimpleChaptersWithCharacterSet(QString const &characterSet) {
+  auto error = QString{};
+
+  try {
+    auto chapters = parse_chapters(to_utf8(m_originalFileName), 0, -1, 0, "", to_utf8(characterSet), true);
+    chaptersLoaded(chapters, false);
+
+    for (auto const &widget : findChildren<QWidget *>())
+      widget->setEnabled(true);
+
+    MainWindow::chapterEditorTool()->enableMenuActions();
+
+    return;
+
+  } catch (mtx::mm_io::exception &ex) {
+    error = Q(ex.what());
+  } catch (mtx::chapter_parser_x &ex) {
+    error = Q(ex.what());
+  }
+
+  Util::MessageBox::critical(this, QY("File parsing failed"), QY("Error message from the parser: %1").arg(error));
+
+  emit removeThisTab();
+}
+
+bool
+Tab::areWidgetsEnabled()
+  const {
+  return ui->elements->isEnabled();
 }
 
 ChaptersPtr
@@ -347,17 +404,22 @@ Tab::load() {
                : m_fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile()
                :                                              loadFromChapterFile();
 
-  if (!result.first)
-    return;
+  if (result.first)
+    chaptersLoaded(result.first, result.second);
+}
 
+void
+Tab::chaptersLoaded(ChaptersPtr const &chapters,
+                    bool canBeWritten) {
   if (!m_fileName.isEmpty())
     m_fileModificationTime = QFileInfo{m_fileName}.lastModified();
 
   disconnect(m_chapterModel, &QStandardItemModel::rowsInserted, this, &Tab::expandInsertedElements);
 
-  m_chapterModel->populate(*result.first);
+  m_chapterModel->reset();
+  m_chapterModel->populate(*chapters);
 
-  if (result.second)
+  if (canBeWritten)
     m_savedState = currentState();
 
   expandAll();
@@ -1495,6 +1557,11 @@ Tab::focusOtherControlInNextChapterElement() {
 void
 Tab::focusSameControlInNextChapterElement() {
   focusNextChapterElement(true);
+}
+
+void
+Tab::closeTab() {
+  emit removeThisTab();
 }
 
 }}}

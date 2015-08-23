@@ -78,11 +78,12 @@ Tool::enableMenuActions() {
   auto tab         = currentTab();
   auto hasFileName = tab && !tab->fileName().isEmpty();
   auto hasElements = tab && tab->hasChapters();
+  auto tabEnabled  = tab && tab->areWidgetsEnabled();
 
-  mwUi->actionChapterEditorSave->setEnabled(hasFileName && hasElements);
-  mwUi->actionChapterEditorSaveAsXml->setEnabled(!!tab && hasElements);
-  mwUi->actionChapterEditorSaveToMatroska->setEnabled(!!tab && hasElements);
-  mwUi->actionChapterEditorReload->setEnabled(hasFileName);
+  mwUi->actionChapterEditorSave->setEnabled(hasFileName && hasElements && tabEnabled);
+  mwUi->actionChapterEditorSaveAsXml->setEnabled(!!tab && hasElements && tabEnabled);
+  mwUi->actionChapterEditorSaveToMatroska->setEnabled(!!tab && hasElements && tabEnabled);
+  mwUi->actionChapterEditorReload->setEnabled(hasFileName && tabEnabled);
   mwUi->actionChapterEditorClose->setEnabled(!!tab);
 }
 
