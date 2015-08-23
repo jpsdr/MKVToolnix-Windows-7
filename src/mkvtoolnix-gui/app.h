@@ -75,6 +75,7 @@ public:
   static QString const &descriptionFromIso639_2LanguageCode(QString const &code);
   static QString const &descriptionFromIso3166_1Alpha2CountryCode(QString const &code);
   static CharacterSetList const &characterSets();
+  static CharacterSetList const &commonCharacterSets();
 
   static void reinitializeLanguageLists();
   static void initializeLanguageLists();

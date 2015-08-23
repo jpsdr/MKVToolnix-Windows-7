@@ -24,7 +24,7 @@ namespace mtx { namespace gui {
 
 static Iso639LanguageList s_iso639Languages, s_commonIso639Languages;
 static Iso3166CountryList s_iso3166_1Alpha2Countries, s_commonIso3166_1Alpha2Countries;
-static CharacterSetList s_characterSets;
+static CharacterSetList s_characterSets, s_commonCharacterSets;
 static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_iso3166_1Alpha2CountryCodeToDescription;
 
 static boost::optional<bool> s_is_installed;
@@ -117,6 +117,7 @@ App::reinitializeLanguageLists() {
   s_iso639_2LanguageCodeToDescription.clear();
   s_iso3166_1Alpha2CountryCodeToDescription.clear();
   s_characterSets.clear();
+  s_commonCharacterSets.clear();
 
   initializeLanguageLists();
 }
@@ -179,24 +180,21 @@ App::initializeIso3166_1Alpha2Countries() {
 
 void
 App::initializeCharacterSets() {
-  using CharacterSetSorter = std::tuple<int, QString, QString>;
-  auto toSort              = std::vector<CharacterSetSorter>{};
-  auto &cfg                = Util::Settings::get();
+  auto &cfg = Util::Settings::get();
 
   s_characterSets.reserve(sub_charsets.size());
-  toSort.reserve(sub_charsets.size());
+  s_commonCharacterSets.reserve(cfg.m_oftenUsedCharacterSets.size());
 
   for (auto const &characterSet : sub_charsets) {
     auto qCharacterSet = Q(characterSet);
-    auto commonOrder   = cfg.m_oftenUsedCharacterSets.indexOf(qCharacterSet) != -1 ? 0 : 1;
 
-    toSort.emplace_back(commonOrder, qCharacterSet.toLower(), qCharacterSet);
+    s_characterSets.emplace_back(qCharacterSet);
+    if (cfg.m_oftenUsedCharacterSets.contains(qCharacterSet))
+      s_commonCharacterSets.emplace_back(qCharacterSet);
   }
 
-  brng::sort(toSort);
-
-  for (auto const &characterSetSorter : toSort)
-    s_characterSets.emplace_back(std::get<2>(characterSetSorter));
+  brng::sort(s_characterSets);
+  brng::sort(s_commonCharacterSets);
 }
 
 Iso639LanguageList const &
@@ -227,6 +225,12 @@ CharacterSetList const &
 App::characterSets() {
   initializeLanguageLists();
   return s_characterSets;
+}
+
+CharacterSetList const &
+App::commonCharacterSets() {
+  initializeLanguageLists();
+  return s_commonCharacterSets;
 }
 
 QString const &

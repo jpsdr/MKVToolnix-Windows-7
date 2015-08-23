@@ -28,12 +28,17 @@ CharacterSetComboBox::setup(bool withEmpty,
   if (m_withEmpty)
     addItem(m_emptyTitle, Q(""));
 
+  auto &commonCharacterSets = App::commonCharacterSets();
+  if (!commonCharacterSets.empty()) {
+    for (auto const &characterSet : commonCharacterSets)
+      addItem(characterSet, characterSet);
+
+    insertSeparator(commonCharacterSets.size() + (withEmpty ? 1 : 0));
+  }
+
   for (auto const &characterSet : App::characterSets())
     addItem(characterSet, characterSet);
 
-  auto &cfg = Settings::get();
-  if (!cfg.m_oftenUsedCharacterSets.isEmpty())
-    insertSeparator(cfg.m_oftenUsedCharacterSets.count() + (withEmpty ? 1 : 0));
 
   view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
