@@ -98,6 +98,15 @@ QString displayableDate(QDateTime const &date);
 
 QString itemFlagsToString(Qt::ItemFlags const &flags);
 
+// File stuff
+struct BomAsciiCheckResult {
+  byte_order_e byteOrder{BO_NONE};
+  unsigned int bomLength{};
+  bool containsNonAscii{};
+};
+
+BomAsciiCheckResult checkForBomAndNonAscii(QString const &fileName);
+
 }}}
 
 #endif  // MTX_MKVTOOLNIX_GUI_UTIL_UTIL_H
