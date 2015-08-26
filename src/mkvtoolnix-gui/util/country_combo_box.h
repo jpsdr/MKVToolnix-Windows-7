@@ -10,6 +10,9 @@ namespace mtx { namespace gui { namespace Util {
 class CountryComboBox: public ComboBoxBase {
   Q_OBJECT;
 
+protected:
+  explicit CountryComboBox(ComboBoxBasePrivate &d, QWidget *parent);
+
 public:
   explicit CountryComboBox(QWidget *parent = nullptr);
   virtual ~CountryComboBox();

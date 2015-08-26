@@ -18,16 +18,21 @@ LanguageComboBox::LanguageComboBox(QWidget *parent)
 LanguageComboBox::~LanguageComboBox() {
 }
 
+LanguageComboBox::LanguageComboBox(ComboBoxBasePrivate &d,
+                                   QWidget *parent)
+  : ComboBoxBase{d, parent}
+{
+}
+
 ComboBoxBase &
 LanguageComboBox::setup(bool withEmpty,
                         QString const &emptyTitle) {
-  m_withEmpty          = withEmpty;
-  m_emptyTitle         = emptyTitle;
+  ComboBoxBase::setup(withEmpty, emptyTitle);
 
   auto separatorOffset = 0;
 
-  if (m_withEmpty) {
-    addItem(m_emptyTitle, Q(""));
+  if (withEmpty) {
+    addItem(emptyTitle, Q(""));
     ++separatorOffset;
   }
 

@@ -7,12 +7,17 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+class ComboBoxBasePrivate;
 class ComboBoxBase: public QComboBox {
   Q_OBJECT;
 
 protected:
-  bool m_withEmpty{};
-  QString m_emptyTitle;
+  Q_DECLARE_PRIVATE(ComboBoxBase);
+
+protected:
+  QScopedPointer<ComboBoxBasePrivate> d_ptr;
+
+  explicit ComboBoxBase(ComboBoxBasePrivate &d, QWidget *parent);
 
 public:
   explicit ComboBoxBase(QWidget *parent = nullptr);

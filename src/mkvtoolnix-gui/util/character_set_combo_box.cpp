@@ -16,17 +16,22 @@ CharacterSetComboBox::CharacterSetComboBox(QWidget *parent)
 {
 }
 
+CharacterSetComboBox::CharacterSetComboBox(ComboBoxBasePrivate &d,
+                                           QWidget *parent)
+  : ComboBoxBase{d, parent}
+{
+}
+
 CharacterSetComboBox::~CharacterSetComboBox() {
 }
 
 ComboBoxBase &
 CharacterSetComboBox::setup(bool withEmpty,
-                        QString const &emptyTitle) {
-  m_withEmpty          = withEmpty;
-  m_emptyTitle         = emptyTitle;
+                            QString const &emptyTitle) {
+  ComboBoxBase::setup(withEmpty, emptyTitle);
 
-  if (m_withEmpty)
-    addItem(m_emptyTitle, Q(""));
+  if (withEmpty)
+    addItem(emptyTitle, Q(""));
 
   auto &commonCharacterSets = App::commonCharacterSets();
   if (!commonCharacterSets.empty()) {

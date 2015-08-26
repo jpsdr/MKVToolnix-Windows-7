@@ -15,17 +15,22 @@ CountryComboBox::CountryComboBox(QWidget *parent)
 {
 }
 
+CountryComboBox::CountryComboBox(ComboBoxBasePrivate &d,
+                                 QWidget *parent)
+  : ComboBoxBase{d, parent}
+{
+}
+
 CountryComboBox::~CountryComboBox() {
 }
 
 ComboBoxBase &
 CountryComboBox::setup(bool withEmpty,
-                        QString const &emptyTitle) {
-  m_withEmpty  = withEmpty;
-  m_emptyTitle = emptyTitle;
+                       QString const &emptyTitle) {
+  ComboBoxBase::setup(withEmpty, emptyTitle);
 
-  if (m_withEmpty)
-    addItem(m_emptyTitle, Q(""));
+  if (withEmpty)
+    addItem(emptyTitle, Q(""));
 
   auto &commonCountries = App::commonIso3166_1Alpha2Countries();
   if (!commonCountries.empty()) {
