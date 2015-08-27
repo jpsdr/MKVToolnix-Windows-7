@@ -16,12 +16,12 @@ class MassModificationDialog : public QDialog {
   Q_OBJECT;
 public:
   enum Action {
-    Shift,
-    Sort,
-    Constrict,
-    Expand,
-    SetLanguage,
-    SetCountry,
+    Shift       = 0x01,
+    Sort        = 0x02,
+    Constrict   = 0x04,
+    Expand      = 0x08,
+    SetLanguage = 0x10,
+    SetCountry  = 0x20,
   };
   Q_DECLARE_FLAGS(Actions, Action);
 
