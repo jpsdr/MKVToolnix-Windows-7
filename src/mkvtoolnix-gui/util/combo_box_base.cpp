@@ -8,6 +8,9 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+ComboBoxBasePrivate::~ComboBoxBasePrivate() {
+}
+
 ComboBoxBase::ComboBoxBase(QWidget *parent)
   : QComboBox{parent}
   , d_ptr{new ComboBoxBasePrivate}
