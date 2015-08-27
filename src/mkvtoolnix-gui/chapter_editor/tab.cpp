@@ -252,8 +252,7 @@ Tab::checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters) {
   if ((BO_NONE != result.byteOrder) || !result.containsNonAscii)
     return { chapters, false };
 
-  for (auto const &widget : findChildren<QWidget *>())
-    widget->setEnabled(false);
+  Util::enableChildren(this, false);
 
   m_originalFileName = m_fileName;
   auto dlg           = new SelectCharacterSetDialog{this, m_originalFileName};
@@ -310,8 +309,7 @@ Tab::reloadSimpleChaptersWithCharacterSet(QString const &characterSet) {
     auto chapters = parse_chapters(to_utf8(m_originalFileName), 0, -1, 0, "", to_utf8(characterSet), true);
     chaptersLoaded(chapters, false);
 
-    for (auto const &widget : findChildren<QWidget *>())
-      widget->setEnabled(true);
+    Util::enableChildren(this, true);
 
     MainWindow::chapterEditorTool()->enableMenuActions();
 
