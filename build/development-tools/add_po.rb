@@ -5,7 +5,7 @@ require "fileutils"
 require "shellwords"
 require "tmpdir"
 
-$po_dir = File.absolute_path(File.dirname(__FILE__) + "/../po")
+$po_dir = File.absolute_path(File.dirname(__FILE__) + "/../../po")
 
 module AddPo
   def self.handle_po file_name
