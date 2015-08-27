@@ -14,8 +14,9 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/ini_config_file.h"
+#include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 

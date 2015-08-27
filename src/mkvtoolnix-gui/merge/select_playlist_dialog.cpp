@@ -5,8 +5,10 @@
 #include "mkvtoolnix-gui/forms/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/track.h"
+#include "mkvtoolnix-gui/util/container.h"
+#include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 #include <QPushButton>
 

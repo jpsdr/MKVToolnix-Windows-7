@@ -8,8 +8,9 @@
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_widget.h"
+#include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Merge {
 

@@ -5,7 +5,7 @@
 #include <QMimeData>
 
 #include "mkvtoolnix-gui/merge/attachment_model.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx { namespace gui { namespace Merge {
 

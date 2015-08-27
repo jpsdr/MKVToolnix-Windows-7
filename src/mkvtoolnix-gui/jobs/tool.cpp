@@ -9,8 +9,9 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/message_box.h"
+#include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 

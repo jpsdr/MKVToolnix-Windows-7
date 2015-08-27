@@ -6,7 +6,6 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/language_combo_box.h"
-#include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace Util {
 

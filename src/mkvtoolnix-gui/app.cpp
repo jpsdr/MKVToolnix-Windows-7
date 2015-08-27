@@ -17,7 +17,7 @@
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui {

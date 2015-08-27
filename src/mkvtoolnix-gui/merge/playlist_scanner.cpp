@@ -5,7 +5,6 @@
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
 
 #include <QApplication>
 #include <QDir>

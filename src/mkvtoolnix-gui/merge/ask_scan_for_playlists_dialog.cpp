@@ -4,7 +4,8 @@
 #include "mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h"
 #include "mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/string.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 #include <QAbstractButton>
 #include <QPushButton>

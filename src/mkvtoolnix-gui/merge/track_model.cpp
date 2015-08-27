@@ -5,7 +5,7 @@
 #include <QItemSelectionModel>
 
 #include "mkvtoolnix-gui/merge/track_model.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx { namespace gui { namespace Merge {
 

@@ -1,0 +1,40 @@
+#ifndef MTX_MKVTOOLNIX_GUI_UTIL_WIDGET_H
+#define MTX_MKVTOOLNIX_GUI_UTIL_WIDGET_H
+
+#include "common/common_pch.h"
+
+#include <QDialogButtonBox>
+
+class QComboBox;
+class QIcon;
+class QPushButton;
+class QScrollArea;
+class QString;
+class QTabWidget;
+class QVariant;
+class QWidget;
+
+namespace mtx { namespace gui { namespace Util {
+
+void setToolTip(QWidget *widget, QString const &toolTip);
+
+QIcon loadIcon(QString const &name, QList<int> const &sizes);
+bool setComboBoxIndexIf(QComboBox *comboBox, std::function<bool(QString const &, QVariant const &)> test);
+bool setComboBoxTextByData(QComboBox *comboBox, QString const &data);
+void setComboBoxTexts(QComboBox *comboBox, QStringList const &texts);
+
+void enableWidgets(QList<QWidget *> const &widgets, bool enable);
+QPushButton *buttonForRole(QDialogButtonBox *box, QDialogButtonBox::ButtonRole role = QDialogButtonBox::AcceptRole);
+
+void saveWidgetGeometry(QWidget *widget);
+void restoreWidgetGeometry(QWidget *widget);
+
+QWidget *tabWidgetCloseTabButton(QTabWidget &tabWidget, int tabIdx);
+void fixScrollAreaBackground(QScrollArea *scrollArea);
+void preventScrollingWithoutFocus(QObject *parent);
+
+void enableChildren(QObject *parent, bool enable);
+
+}}}
+
+#endif // MTX_MKVTOOLNIX_GUI_UTIL_WIDGET_H

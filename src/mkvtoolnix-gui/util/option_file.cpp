@@ -8,7 +8,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/option_file.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx { namespace gui { namespace Util {
 

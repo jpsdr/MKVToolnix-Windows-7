@@ -2,7 +2,7 @@
 
 #include "mkvtoolnix-gui/header_editor/page_base.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 

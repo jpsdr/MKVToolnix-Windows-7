@@ -11,7 +11,7 @@
 #include "mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/mass_modification_dialog.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace ChapterEditor {
 

@@ -5,7 +5,6 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
-#include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace Merge {
 

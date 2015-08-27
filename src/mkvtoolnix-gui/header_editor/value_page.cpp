@@ -12,7 +12,7 @@
 #include "mkvtoolnix-gui/forms/header_editor/value_page.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/value_page.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 

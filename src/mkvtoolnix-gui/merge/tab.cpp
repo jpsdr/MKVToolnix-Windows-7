@@ -13,7 +13,7 @@
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 #include <QComboBox>

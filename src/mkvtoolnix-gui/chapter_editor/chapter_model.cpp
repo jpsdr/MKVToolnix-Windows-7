@@ -7,7 +7,7 @@
 #include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx { namespace gui { namespace ChapterEditor {
 

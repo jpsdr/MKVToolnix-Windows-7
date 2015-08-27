@@ -10,7 +10,7 @@
 #include "mkvtoolnix-gui/forms/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui {
 

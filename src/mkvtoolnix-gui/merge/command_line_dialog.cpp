@@ -6,7 +6,8 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/string.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Merge {
 

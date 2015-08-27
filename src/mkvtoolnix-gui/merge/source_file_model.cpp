@@ -12,7 +12,8 @@
 #include "mkvtoolnix-gui/mime_types.h"
 #include "mkvtoolnix-gui/merge/source_file_model.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/container.h"
+#include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx { namespace gui { namespace Merge {
 

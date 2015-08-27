@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QMenu>
+#include <QPushButton>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
@@ -9,7 +10,7 @@
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 

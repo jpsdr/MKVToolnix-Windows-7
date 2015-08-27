@@ -6,7 +6,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/util/side_by_side_multi_select.h"
 #include "mkvtoolnix-gui/util/side_by_side_multi_select.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Util {
 

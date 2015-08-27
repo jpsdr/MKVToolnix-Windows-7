@@ -4,7 +4,7 @@
 
 #include "mkvtoolnix-gui/util/combo_box_base.h"
 #include "mkvtoolnix-gui/util/combo_box_base_p.h"
-#include "mkvtoolnix-gui/util/util.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Util {
 

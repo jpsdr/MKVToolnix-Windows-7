@@ -7,7 +7,6 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/character_set_combo_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/util.h"
 
 namespace mtx { namespace gui { namespace Util {
 
