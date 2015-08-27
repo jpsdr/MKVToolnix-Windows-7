@@ -414,6 +414,16 @@ preventScrollingWithoutFocus(QObject *parent) {
     install(child);
 }
 
+void
+enableChildren(QObject *parent,
+               bool enable) {
+  for (auto const &child : parent->children()) {
+    auto widget = qobject_cast<QWidget *>(child);
+    if (widget)
+      widget->setEnabled(enable);
+  }
+}
+
 BomAsciiCheckResult
 checkForBomAndNonAscii(QString const &fileName) {
   QFile file{fileName};

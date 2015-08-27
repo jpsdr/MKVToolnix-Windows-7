@@ -52,6 +52,8 @@ QWidget *tabWidgetCloseTabButton(QTabWidget &tabWidget, int tabIdx);
 void fixScrollAreaBackground(QScrollArea *scrollArea);
 void preventScrollingWithoutFocus(QObject *parent);
 
+void enableChildren(QObject *parent, bool enable);
+
 // Model stuff
 enum MtxGuiRoles {
   SourceFileRole = Qt::UserRole + 1,
