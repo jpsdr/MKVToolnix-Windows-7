@@ -365,10 +365,12 @@ Tab::onTrackSelectionChanged() {
   else if (track->isVideo())
     Util::enableWidgets(m_videoControls, true);
 
-  else if (track->isSubtitles())
+  else if (track->isSubtitles()) {
     Util::enableWidgets(m_subtitleControls, true);
+    if (track->m_file->m_type == FILE_TYPE_MATROSKA)
+      Util::enableWidgets(QList<QWidget *>{} << ui->characterSetLabel << ui->subtitleCharacterSet, false);
 
-  else if (track->isChapters())
+  } else if (track->isChapters())
     Util::enableWidgets(m_chapterControls, true);
 
   if (track->isAppended())
@@ -734,7 +736,10 @@ Tab::onSubtitleCharacterSetChanged(int newValue) {
   if (characterSet.isEmpty())
     return;
 
-  withSelectedTracks([&](Track *track) { track->m_characterSet = characterSet; }, true);
+  withSelectedTracks([&](Track *track) {
+    if (track->m_file->m_type != FILE_TYPE_MATROSKA)
+      track->m_characterSet = characterSet;
+  }, true);
 }
 
 void
