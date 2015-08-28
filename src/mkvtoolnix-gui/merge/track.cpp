@@ -107,7 +107,7 @@ Track::setDefaults() {
   m_cropping               = m_properties[Q("cropping")];
   m_aacSbrWasDetected      = m_properties["aac_is_sbr"].contains(QRegExp{"1|true"});
   m_stereoscopy            = m_properties[Q("stereo_mode")].isEmpty() ? 0 : m_properties[Q("stereo_mode")].toUInt() + 1;
-  m_characterSet           = m_properties[Q("text_subtitles")] == Q("1") ? settings.m_defaultSubtitleCharset : Q("");
+  m_characterSet           = (m_properties[Q("text_subtitles")] == Q("1")) && m_file && (m_file->m_type != FILE_TYPE_MATROSKA) ? settings.m_defaultSubtitleCharset : Q("");
 
   auto language = m_properties[Q("language")];
   if (language.isEmpty())
