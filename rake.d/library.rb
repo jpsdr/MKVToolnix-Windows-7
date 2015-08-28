@@ -12,7 +12,7 @@ class Library < Target
   def create_specific
     file "#{@target}.a" => @objects do |t|
       FileUtils.rm_f t.name
-      runq "      AR #{t.name}", "#{c(:AR)} rcu #{t.name} #{@objects.join(" ")}"
+      runq "      AR #{t.name}", "#{c(:AR)} rc #{t.name} #{@objects.join(" ")}"
       runq "  RANLIB #{t.name}", "#{c(:RANLIB)} #{t.name}"
     end
 

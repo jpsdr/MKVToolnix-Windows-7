@@ -167,8 +167,10 @@ Tool::closeTab(int index) {
     MainWindow::get()->switchToTool(this);
     ui->merges->setCurrentIndex(index);
 
-    auto answer = Util::MessageBox::question(this, QY("File has been modified"), QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(tab->title()),
-                                             QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    auto answer = Util::MessageBox::question(this)
+      .title(QY("File has been modified"))
+      .text(QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(tab->title()))
+      .exec();
     if (answer != QMessageBox::Yes)
       return false;
   }

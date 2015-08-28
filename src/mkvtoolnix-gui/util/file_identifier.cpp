@@ -43,7 +43,7 @@ FileIdentifier::identify() {
   auto exitCode = process->process().exitCode();
 
   if (process->hasError()) {
-    Util::MessageBox::critical(m_parent, QY("Error executing mkvmerge"), QY("The mkvmerge executable was not found.").arg(exitCode));
+    Util::MessageBox::critical(m_parent).title(QY("Error executing mkvmerge")).text(QY("The mkvmerge executable was not found.").arg(exitCode)).exec();
     return false;
   }
 
@@ -56,12 +56,12 @@ FileIdentifier::identify() {
     auto pos       = m_output.isEmpty() ? -1            : m_output[0].indexOf("container:");
     auto container = -1 == pos          ? QY("unknown") : m_output[0].mid(pos + 11);
 
-    Util::MessageBox::critical(m_parent, QY("Unsupported file format"), QY("The file is an unsupported container format (%1).").arg(container));
+    Util::MessageBox::critical(m_parent).title(QY("Unsupported file format")).text(QY("The file is an unsupported container format (%1).").arg(container)).exec();
 
     return false;
   }
 
-  Util::MessageBox::critical(m_parent, QY("Unrecognized file format"), QY("The file was not recognized as a supported format (exit code: %1).").arg(exitCode));
+  Util::MessageBox::critical(m_parent).title(QY("Unrecognized file format")).text(QY("The file was not recognized as a supported format (exit code: %1).").arg(exitCode)).exec();
 
   return false;
 }

@@ -857,7 +857,7 @@ Tab::onAddAdditionalParts() {
   auto currentIdx = selectedSourceFile();
   auto sourceFile = m_filesModel->fromIndex(currentIdx);
   if (sourceFile && !sourceFile->m_tracks.size()) {
-    Util::MessageBox::critical(this, QY("Unable to append files"), QY("You cannot add additional parts to files that don't contain tracks."));
+    Util::MessageBox::critical(this).title(QY("Unable to append files")).text(QY("You cannot add additional parts to files that don't contain tracks.")).exec();
     return;
   }
 
