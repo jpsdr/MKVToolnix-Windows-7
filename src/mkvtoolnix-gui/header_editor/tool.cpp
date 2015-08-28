@@ -160,7 +160,7 @@ Tool::reload() {
 
   if (Util::Settings::get().m_warnBeforeClosingModifiedTabs && tab->hasBeenModified()) {
     auto answer = Util::MessageBox::question(this)
-      .title(QY("File has been modified"))
+      ->title(QY("File has been modified"))
       .text(QY("The file »%1« has been modified. Do you really want to reload it? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()))
       .exec();
     if (answer != QMessageBox::Yes)
@@ -188,7 +188,7 @@ Tool::closeTab(int index) {
     MainWindow::get()->switchToTool(this);
     ui->editors->setCurrentIndex(index);
     auto answer = Util::MessageBox::question(this)
-      .title(QY("File has been modified"))
+      ->title(QY("File has been modified"))
       .text(QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(QFileInfo{tab->fileName()}.fileName()))
       .exec();
     if (answer != QMessageBox::Yes)

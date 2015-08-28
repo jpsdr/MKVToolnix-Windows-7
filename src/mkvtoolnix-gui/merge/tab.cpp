@@ -120,7 +120,7 @@ Tab::load(QString const &fileName) {
   } catch (InvalidSettingsX &) {
     m_config.reset();
 
-    Util::MessageBox::critical(this).title(QY("Error loading settings file")).text(QY("The settings file '%1' contains invalid settings and was not loaded.").arg(fileName)).exec();
+    Util::MessageBox::critical(this)->title(QY("Error loading settings file")).text(QY("The settings file '%1' contains invalid settings and was not loaded.").arg(fileName)).exec();
 
     emit removeThisTab();
   }
@@ -281,12 +281,12 @@ Tab::retranslateUi() {
 bool
 Tab::isReadyForMerging() {
   if (m_config.m_files.isEmpty()) {
-    Util::MessageBox::critical(this).title(QY("Cannot start merging")).text(QY("You have to add at least one source file before you can start merging or add a job to the job queue.")).exec();
+    Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("You have to add at least one source file before you can start merging or add a job to the job queue.")).exec();
     return false;
   }
 
   if (m_config.m_destination.isEmpty()) {
-    Util::MessageBox::critical(this).title(QY("Cannot start merging")).text(QY("You have to set the output file name before you can start merging or add a job to the job queue.")).exec();
+    Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("You have to set the output file name before you can start merging or add a job to the job queue.")).exec();
     return false;
   }
 

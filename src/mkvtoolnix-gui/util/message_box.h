@@ -7,16 +7,15 @@
 
 namespace mtx { namespace gui { namespace Util {
 
-class MessageBox {
-protected:
-  QWidget *m_parent{};
-  QString m_title, m_text;
-  QMessageBox::Icon m_icon{QMessageBox::NoIcon};
-  QMessageBox::StandardButtons m_buttons{QMessageBox::Ok};
-  QMessageBox::StandardButton m_defaultButton{QMessageBox::Ok};
+class MessageBox;
+class MessageBoxPrivate;
 
+using MessageBoxPtr = std::shared_ptr<MessageBox>;
+
+class MessageBox {
 public:
   MessageBox(QWidget *parent);
+  virtual ~MessageBox();
 
   MessageBox &buttons(QMessageBox::StandardButtons pButtons);
   MessageBox &defaultButton(QMessageBox::StandardButton pDefaultButton);
@@ -27,10 +26,16 @@ public:
   QMessageBox::StandardButton exec(boost::optional<QMessageBox::StandardButton> pDefaultButton = boost::optional<QMessageBox::StandardButton>{});
 
 public:
-  static MessageBox question(QWidget *parent);
-  static MessageBox information(QWidget *parent);
-  static MessageBox warning(QWidget *parent);
-  static MessageBox critical(QWidget *parent);
+  static MessageBoxPtr question(QWidget *parent);
+  static MessageBoxPtr information(QWidget *parent);
+  static MessageBoxPtr warning(QWidget *parent);
+  static MessageBoxPtr critical(QWidget *parent);
+
+private:
+  Q_DISABLE_COPY(MessageBox);
+  Q_DECLARE_PRIVATE(MessageBox);
+
+  QScopedPointer<MessageBoxPrivate> const d_ptr;
 };
 
 }}}

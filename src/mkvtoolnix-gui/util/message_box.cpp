@@ -8,84 +8,118 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+class MessageBoxPrivate {
+  friend class MessageBox;
+
+  QWidget *m_parent{};
+  QString m_title, m_text;
+  QMessageBox::Icon m_icon{QMessageBox::NoIcon};
+  QMessageBox::StandardButtons m_buttons{QMessageBox::Ok};
+  QMessageBox::StandardButton m_defaultButton{QMessageBox::Ok};
+
+  explicit MessageBoxPrivate(QWidget *parent)
+    : m_parent{parent}
+  {
+  }
+};
+
 MessageBox::MessageBox(QWidget *parent)
-  : m_parent{parent}
+  : d_ptr{new MessageBoxPrivate{parent}}
 {
+}
+
+MessageBox::~MessageBox() {
 }
 
 MessageBox &
 MessageBox::buttons(QMessageBox::StandardButtons pButtons) {
-  m_buttons = pButtons;
+  Q_D(MessageBox);
+
+  d->m_buttons = pButtons;
   return *this;
 }
 
 MessageBox &
 MessageBox::defaultButton(QMessageBox::StandardButton pDefaultButton) {
-  m_defaultButton = pDefaultButton;
+  Q_D(MessageBox);
+
+  d->m_defaultButton = pDefaultButton;
   return *this;
 }
 
 MessageBox &
 MessageBox::icon(QMessageBox::Icon pIcon) {
-  m_icon = pIcon;
+  Q_D(MessageBox);
+
+  d->m_icon = pIcon;
   return *this;
 }
 
 MessageBox &
 MessageBox::text(QString const & pText) {
-  m_text = pText;
+  Q_D(MessageBox);
+
+  d->m_text = pText;
   return *this;
 }
 
 MessageBox &
 MessageBox::title(QString const & pTitle) {
-  m_title = pTitle;
+  Q_D(MessageBox);
+
+  d->m_title = pTitle;
   return *this;
 }
 
-MessageBox
+MessageBoxPtr
 MessageBox::question(QWidget *parent) {
-  return MessageBox{parent}
-    .buttons(QMessageBox::StandardButtons{ QMessageBox::Yes | QMessageBox::No })
+  auto box = std::make_shared<MessageBox>(parent);
+  box->buttons(QMessageBox::StandardButtons{ QMessageBox::Yes | QMessageBox::No })
     .defaultButton(QMessageBox::No)
     .icon(QMessageBox::Question);
+  return box;
 }
 
-MessageBox
+MessageBoxPtr
 MessageBox::information(QWidget *parent) {
-  return MessageBox{parent}
-    .buttons(QMessageBox::Ok)
+  auto box = std::make_shared<MessageBox>(parent);
+  box->buttons(QMessageBox::Ok)
     .defaultButton(QMessageBox::NoButton)
     .icon(QMessageBox::Information);
+  return box;
 }
 
-MessageBox
+MessageBoxPtr
 MessageBox::warning(QWidget *parent) {
-  return MessageBox{parent}
-    .buttons(QMessageBox::Ok)
+  auto box = std::make_shared<MessageBox>(parent);
+  box->buttons(QMessageBox::Ok)
     .defaultButton(QMessageBox::NoButton)
     .icon(QMessageBox::Warning);
+  return box;
 }
 
-MessageBox
+MessageBoxPtr
 MessageBox::critical(QWidget *parent) {
-  return MessageBox{parent}
-    .buttons(QMessageBox::Ok)
+  auto box = std::make_shared<MessageBox>(parent);
+  box->buttons(QMessageBox::Ok)
     .defaultButton(QMessageBox::NoButton)
     .icon(QMessageBox::Critical);
+  return box;
 }
 
 QMessageBox::StandardButton
 MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
-  if (pDefaultButton)
-    m_defaultButton = *pDefaultButton;
+  Q_D(MessageBox);
 
-  QMessageBox msgBox{m_icon, m_title, m_text, QMessageBox::NoButton, m_parent};
+  if (pDefaultButton)
+    d->m_defaultButton = *pDefaultButton;
+
+  QMessageBox msgBox{d->m_icon, d->m_title, d->m_text, QMessageBox::NoButton, d->m_parent};
   auto buttonBox = msgBox.findChild<QDialogButtonBox *>();
   auto mask      = static_cast<unsigned int>(QMessageBox::FirstButton);
 
   while (mask <= static_cast<unsigned int>(QMessageBox::LastButton)) {
-    auto sb = static_cast<unsigned int>(m_buttons & mask);
+    auto sb = static_cast<unsigned int>(d->m_buttons & mask);
     mask  <<= 1;
 
     if (!sb)
@@ -96,8 +130,8 @@ MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
     if (msgBox.defaultButton())
       continue;
 
-    if (   ((m_defaultButton == QMessageBox::NoButton) && (buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole))
-        || ((m_defaultButton != QMessageBox::NoButton) && (sb == static_cast<unsigned int>(m_defaultButton))))
+    if (   ((d->m_defaultButton == QMessageBox::NoButton) && (buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole))
+        || ((d->m_defaultButton != QMessageBox::NoButton) && (sb == static_cast<unsigned int>(d->m_defaultButton))))
       msgBox.setDefaultButton(button);
   }
 

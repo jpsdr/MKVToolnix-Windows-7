@@ -79,7 +79,7 @@ Tab::load() {
   resetData();
 
   if (!kax_analyzer_c::probe(to_utf8(m_fileName))) {
-    Util::MessageBox::critical(this).title(QY("File parsing failed")).text(QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(m_fileName)).exec();
+    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(m_fileName)).exec();
     emit removeThisTab();
     return;
   }
@@ -87,7 +87,7 @@ Tab::load() {
   m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
 
   if (!m_analyzer->process(kax_analyzer_c::parse_mode_fast)) {
-    Util::MessageBox::critical(this).title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName)).exec();
+    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName)).exec();
     emit removeThisTab();
     return;
   }
@@ -130,7 +130,7 @@ Tab::save() {
   }
 
   if (!segmentinfoModified && !tracksModified) {
-    Util::MessageBox::information(this).title(QY("File has not been modified")).text(QY("The header values have not been modified. There is nothing to save.")).exec();
+    Util::MessageBox::information(this)->title(QY("File has not been modified")).text(QY("The header values have not been modified. There is nothing to save.")).exec();
     return;
   }
 
@@ -142,7 +142,7 @@ Tab::save() {
 
   if (QFileInfo{m_fileName}.lastModified() != m_fileModificationTime) {
     Util::MessageBox::critical(this)
-      .title(QY("File has been modified"))
+      ->title(QY("File has been modified"))
       .text(QY("The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."))
       .exec();
     return;
@@ -422,7 +422,7 @@ Tab::validate() {
   auto pageIdx = m_model->validate();
 
   if (!pageIdx.isValid()) {
-    Util::MessageBox::information(this).title(QY("Header validation")).text(QY("All header values are OK.")).exec();
+    Util::MessageBox::information(this)->title(QY("Header validation")).text(QY("All header values are OK.")).exec();
     return;
   }
 
@@ -437,9 +437,9 @@ Tab::reportValidationFailure(bool isCritical,
   selectionChanged(pageIdx, QModelIndex{});
 
   if (isCritical)
-    Util::MessageBox::critical(this).title(QY("Header validation")).text(QY("There were errors in the header values preventing the headers from being saved. The first error has been selected.")).exec();
+    Util::MessageBox::critical(this)->title(QY("Header validation")).text(QY("There were errors in the header values preventing the headers from being saved. The first error has been selected.")).exec();
   else
-    Util::MessageBox::warning(this).title(QY("Header validation")).text(QY("There were errors in the header values preventing the headers from being saved. The first error has been selected.")).exec();
+    Util::MessageBox::warning(this)->title(QY("Header validation")).text(QY("There were errors in the header values preventing the headers from being saved. The first error has been selected.")).exec();
 }
 
 void
