@@ -2054,14 +2054,14 @@ es_parser_c::parse_slice(memory_cptr &buffer,
       if (pps.dependent_slice_segments_enabled_flag)
         dependent_slice_segment_flag = r.get_bits(1); // dependent_slice_segment_flag
 
-      bool Log2MinCbSizeY = sps.log2_min_luma_coding_block_size_minus3 + 3;
-      bool Log2CtbSizeY = Log2MinCbSizeY + sps.log2_diff_max_min_luma_coding_block_size;
-      bool CtbSizeY = 1 << Log2CtbSizeY;
-      bool PicWidthInCtbsY = ceil(sps.width / CtbSizeY);
-      bool PicHeightInCtbsY = ceil(sps.height / CtbSizeY);
-      bool PicSizeInCtbsY = PicWidthInCtbsY * PicHeightInCtbsY;
+      auto log2_min_cb_size_y   = sps.log2_min_luma_coding_block_size_minus3 + 3;
+      auto log2_ctb_size_y      = log2_min_cb_size_y + sps.log2_diff_max_min_luma_coding_block_size;
+      auto ctb_size_y           = 1 << log2_ctb_size_y;
+      auto pic_width_in_ctbs_y  = ceil(sps.width / ctb_size_y);
+      auto pic_height_in_ctbs_y = ceil(sps.height / ctb_size_y);
+      auto pic_size_in_ctbs_y   = pic_width_in_ctbs_y * pic_height_in_ctbs_y;
+      auto v                    = mtx::math::int_log2(pic_size_in_ctbs_y);
 
-      unsigned int v = ceil(mtx::math::int_log2(PicSizeInCtbsY));
       r.get_bits(v);  // slice_segment_address
     }
 
