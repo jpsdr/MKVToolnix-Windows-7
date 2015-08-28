@@ -22,6 +22,7 @@ public:
   MessageBox &icon(QMessageBox::Icon pIcon);
   MessageBox &text(QString const &pText);
   MessageBox &title(QString const &pTitle);
+  MessageBox &buttonLabel(QMessageBox::StandardButton button, QString const &label);
 
   QMessageBox::StandardButton exec(boost::optional<QMessageBox::StandardButton> pDefaultButton = boost::optional<QMessageBox::StandardButton>{});
 

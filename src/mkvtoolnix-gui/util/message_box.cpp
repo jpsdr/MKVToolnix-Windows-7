@@ -13,6 +13,7 @@ class MessageBoxPrivate {
 
   QWidget *m_parent{};
   QString m_title, m_text;
+  QHash<QMessageBox::StandardButton, QString> m_buttonLabels;
   QMessageBox::Icon m_icon{QMessageBox::NoIcon};
   QMessageBox::StandardButtons m_buttons{QMessageBox::Ok};
   QMessageBox::StandardButton m_defaultButton{QMessageBox::Ok};
@@ -68,6 +69,15 @@ MessageBox::title(QString const & pTitle) {
   Q_D(MessageBox);
 
   d->m_title = pTitle;
+  return *this;
+}
+
+MessageBox &
+MessageBox::buttonLabel(QMessageBox::StandardButton button,
+                        QString const &label) {
+  Q_D(MessageBox);
+
+  d->m_buttonLabels[button] = label;
   return *this;
 }
 
@@ -138,6 +148,13 @@ MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
   // Force labels the user can select no matter what the current style
   // sheet says.
   msgBox.setTextInteractionFlags(Qt::TextBrowserInteraction);
+
+  for (auto const &standardButton : d->m_buttonLabels.keys()) {
+    auto label      = d->m_buttonLabels[standardButton];
+    auto pushButton = buttonBox->button(static_cast<QDialogButtonBox::StandardButton>(standardButton));
+    if (pushButton && !label.isEmpty())
+      pushButton->setText(label);
+  }
 
   if (msgBox.exec() == -1)
     return QMessageBox::Cancel;

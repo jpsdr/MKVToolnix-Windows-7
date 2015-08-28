@@ -170,6 +170,8 @@ Tool::closeTab(int index) {
     auto answer = Util::MessageBox::question(this)
       ->title(QY("File has been modified"))
       .text(QY("The file »%1« has been modified. Do you really want to close? All changes will be lost.").arg(tab->title()))
+      .buttonLabel(QMessageBox::Yes, QY("&Close file"))
+      .buttonLabel(QMessageBox::No,  QY("Cancel"))
       .exec();
     if (answer != QMessageBox::Yes)
       return false;
