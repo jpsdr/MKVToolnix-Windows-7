@@ -8,19 +8,29 @@
 namespace mtx { namespace gui { namespace Util {
 
 class MessageBox {
+protected:
+  QWidget *m_parent{};
+  QString m_title, m_text;
+  QMessageBox::Icon m_icon{QMessageBox::NoIcon};
+  QMessageBox::StandardButtons m_buttons{QMessageBox::Ok};
+  QMessageBox::StandardButton m_defaultButton{QMessageBox::Ok};
+
 public:
-  static QMessageBox::StandardButton question(QWidget *parent, QString const &title, QString const &text,
-                                              QMessageBox::StandardButtons buttons = QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No),
-                                              QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
-  static QMessageBox::StandardButton information(QWidget *parent, QString const &title, QString const &text,
-                                                 QMessageBox::StandardButtons buttons = QMessageBox::Ok,
-                                                 QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
-  static QMessageBox::StandardButton warning(QWidget *parent, QString const &title, QString const &text,
-                                             QMessageBox::StandardButtons buttons = QMessageBox::Ok,
-                                             QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
-  static QMessageBox::StandardButton critical(QWidget *parent, QString const &title, QString const &text,
-                                              QMessageBox::StandardButtons buttons = QMessageBox::Ok,
-                                              QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
+  MessageBox(QWidget *parent);
+
+  MessageBox &buttons(QMessageBox::StandardButtons pButtons);
+  MessageBox &defaultButton(QMessageBox::StandardButton pDefaultButton);
+  MessageBox &icon(QMessageBox::Icon pIcon);
+  MessageBox &text(QString const &pText);
+  MessageBox &title(QString const &pTitle);
+
+  QMessageBox::StandardButton exec(boost::optional<QMessageBox::StandardButton> pDefaultButton = boost::optional<QMessageBox::StandardButton>{});
+
+public:
+  static MessageBox question(QWidget *parent);
+  static MessageBox information(QWidget *parent);
+  static MessageBox warning(QWidget *parent);
+  static MessageBox critical(QWidget *parent);
 };
 
 }}}

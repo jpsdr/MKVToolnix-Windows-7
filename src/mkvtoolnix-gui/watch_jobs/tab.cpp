@@ -115,7 +115,7 @@ Tab::onAbort() {
     return;
 
   if (   Util::Settings::get().m_warnBeforeAbortingJobs
-      && (Util::MessageBox::question(this, QY("Abort running jobs"), QY("Do you really want to abort this job?")) == QMessageBox::No))
+      && (Util::MessageBox::question(this).title(QY("Abort running jobs")).text(QY("Do you really want to abort this job?")).exec() == QMessageBox::No))
     return;
 
   MainWindow::jobTool()->model()->withJob(m_id, [](Jobs::Job &job) { job.abort(); });
