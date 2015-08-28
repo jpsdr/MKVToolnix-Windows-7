@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-28 19:26+0200\n"
+"POT-Creation-Date: 2015-08-28 21:28+0200\n"
 "PO-Revision-Date: 2015-06-21 13:13+0200\n"
 "Last-Translator: René Maassen <bmom43@gmail.com>\n"
 "Language-Team: Dutch <bmom43@gmail.com>\n"
@@ -1090,6 +1090,17 @@ msgstr "%p%"
 msgid "&Abort"
 msgstr "&Afbreken"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:404
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#, fuzzy
+msgid "&Abort job"
+msgstr "&Afbreken"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:121
+#, fuzzy
+msgid "&Abort jobs"
+msgstr "&Afbreken"
+
 #: src/info/ui/mainwindow.h:117
 msgid "&About mkvinfo"
 msgstr "&Over mkvinfo"
@@ -1152,6 +1163,13 @@ msgstr "automatisch te bepalen"
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:130
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:72
 msgid "&Close"
+msgstr "&Sluiten"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:195
+#: src/mkvtoolnix-gui/merge/tool.cpp:173
+#, fuzzy
+msgid "&Close file"
 msgstr "&Sluiten"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:148
@@ -1371,6 +1389,12 @@ msgstr "Voor&keuren"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:413
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:425
 msgid "&Reload"
+msgstr "&Opnieuw inladen"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:214
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:165
+#, fuzzy
+msgid "&Reload file"
 msgstr "&Opnieuw inladen"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:265
@@ -1963,15 +1987,15 @@ msgstr ", bestandsnaam '%1%'"
 msgid ", position %1%"
 msgstr ", positie %1%"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:255
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:245
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:254
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr ""
 
@@ -2284,9 +2308,9 @@ msgstr "AVI (Audio/Video Interleaved)"
 msgid "Abort current job and stop &immediately"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:402
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:314
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:119
 #, fuzzy
 msgid "Abort running jobs"
 msgstr "Breek af na huidige taak"
@@ -2468,7 +2492,7 @@ msgstr "Algoritme: %1% (%2%)"
 #: src/mkvtoolnix-gui/merge/tab.cpp:206 src/mkvtoolnix-gui/merge/tab.cpp:230
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "All files"
 msgstr "Alle bestanden"
 
@@ -2952,7 +2976,15 @@ msgid "Calculate and display checksums of frame contents."
 msgstr "Calculeert controle som van spoor inhoud."
 
 #: src/common/qt_kax_analyzer.cpp:37
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:215
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:166
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:196
+#: src/mkvtoolnix-gui/jobs/tool.cpp:405
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
+#: src/mkvtoolnix-gui/merge/tool.cpp:174
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:122
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -3178,6 +3210,13 @@ msgid ""
 "Checking this option causes the GUI to set that compression to »none« by "
 "default for all track types when adding files."
 msgstr ""
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:235
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:193
+#: src/mkvtoolnix-gui/merge/tool.cpp:171
+#, fuzzy
+msgid "Close modified file"
+msgstr "Selecteer tijdcode bestand"
 
 #: src/extract/timecodes_v2.cpp:284 src/extract/tracks.cpp:436
 #: src/info/mkvinfo.cpp:1595
@@ -3906,11 +3945,11 @@ msgstr "Niet splitsen"
 msgid "Do not write meta seek elements at all."
 msgstr "Schrijf helemaal geen meta zoek elementen."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:403
 msgid "Do you really want to abort the currently running job?"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:120
 msgid "Do you really want to abort this job?"
 msgstr ""
 
@@ -4218,7 +4257,7 @@ msgstr "Fout bij schrijven MATROSKA bestand"
 
 #: src/common/output.cpp:79 src/common/output.cpp:80 src/common/output.cpp:81
 #: src/mkvtoolnix-gui/jobs/job.cpp:213
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:230
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:235
 msgid "Error:"
 msgstr "Fout:"
 
@@ -4457,12 +4496,7 @@ msgstr "Bestand data, grootte: %1%"
 msgid "File description: %1%"
 msgstr "Bestand beschrijving: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:233
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:145
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:191
-#: src/mkvtoolnix-gui/merge/tool.cpp:171
 msgid "File has been modified"
 msgstr "Het bestand is veranderd."
 
@@ -6214,7 +6248,7 @@ msgid "No input files were given. No output will be created.\n"
 msgstr "Geen invoer bestand opgegeven. Er zal geen uitvoer worden gemaakt.\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:77
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:335
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:340
 msgid "No job has been started yet."
 msgstr "Er is nog geen taak gestart."
 
@@ -7174,6 +7208,12 @@ msgstr "Referentie prioriteit: %1%"
 msgid "Reference virtual: %1%"
 msgstr "Virtuele referentie: %1%"
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
+#, fuzzy
+msgid "Reload modified file"
+msgstr "Ve&rwijder bestanden"
+
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:290
 #, fuzzy
 msgid "Remaining time for current job:"
@@ -7338,7 +7378,7 @@ msgstr "Bewaar hoofdstukken naar Matroska bestand"
 msgid "Save information as"
 msgstr "Bewaar informatie als"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 #, fuzzy
 msgid "Save job output"
 msgstr "&Sla uitvoer op:"
@@ -8100,7 +8140,7 @@ msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr "Vertelt mkvmerge hooguit 'n' datablokken te zetten in elke cluster."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:649
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "Text files"
 msgstr "Tekst bestanden"
 
@@ -8798,8 +8838,8 @@ msgstr ""
 "Het bestand wat je probeerde te openen (%1) wordt niet herkend als geldig "
 "Matroska noch een geldig hoofdstuk bestand."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:234
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:192
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:194
 #: src/mkvtoolnix-gui/merge/tool.cpp:172
 msgid ""
 "The file »%1« has been modified. Do you really want to close? All changes "
@@ -10769,7 +10809,7 @@ msgstr ""
 "ingaven. Alle ingangen van dit bestand worden gesorteerd op hun start tijd.\n"
 
 #: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:212
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:234
 msgid "Warning:"
 msgstr "Waarschuwing:"
 
@@ -11890,7 +11930,7 @@ msgid "no file loaded"
 msgstr "geen bestand geladen"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:334
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:339
 msgid "no job started yet"
 msgstr "nog geen taak gestart"
 
@@ -11915,14 +11955,14 @@ msgid "normal"
 msgstr "normaal"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:270
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:337
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:342
 msgid "not finished yet"
 msgstr "nog niet voltooid"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:288
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:269
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:336
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:274
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:341
 msgid "not started yet"
 msgstr "nog niet gestart"
 
@@ -12189,4 +12229,8 @@ msgstr "– standaard geen selectie –"
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:38
 msgid "– set to none –"
 msgstr "– zet naar niets –"
+
+#, fuzzy
+#~ msgid "Close file"
+#~ msgstr "Bron bestand"
 

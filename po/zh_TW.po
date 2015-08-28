@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-28 19:26+0200\n"
+"POT-Creation-Date: 2015-08-28 21:28+0200\n"
 "PO-Revision-Date: 2015-06-21 13:14+0200\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -962,6 +962,17 @@ msgstr "%p%"
 msgid "&Abort"
 msgstr "中止(&A)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:404
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#, fuzzy
+msgid "&Abort job"
+msgstr "中止(&A)"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:121
+#, fuzzy
+msgid "&Abort jobs"
+msgstr "中止(&A)"
+
 #: src/info/ui/mainwindow.h:117
 msgid "&About mkvinfo"
 msgstr "關於 mkvinfo(&A)"
@@ -1024,6 +1035,13 @@ msgstr "自動測定"
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:130
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:72
 msgid "&Close"
+msgstr "關閉(&C)"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:195
+#: src/mkvtoolnix-gui/merge/tool.cpp:173
+#, fuzzy
+msgid "&Close file"
 msgstr "關閉(&C)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:148
@@ -1243,6 +1261,12 @@ msgstr "參考(&P)"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:413
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:425
 msgid "&Reload"
+msgstr "重新載入(&R)"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:214
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:165
+#, fuzzy
+msgid "&Reload file"
 msgstr "重新載入(&R)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:265
@@ -1770,15 +1794,15 @@ msgstr ", 檔名「%1%」"
 msgid ", position %1%"
 msgstr ", 位置 %1%"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:255
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:245
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:254
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr ""
 
@@ -2024,9 +2048,9 @@ msgstr "AVI (交錯的音訊/視訊)"
 msgid "Abort current job and stop &immediately"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:402
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:314
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:119
 #, fuzzy
 msgid "Abort running jobs"
 msgstr "目前任務完成後中止"
@@ -2202,7 +2226,7 @@ msgstr "演算法: %1% (%2%)"
 #: src/mkvtoolnix-gui/merge/tab.cpp:230
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "All files"
 msgstr "所有檔案"
 
@@ -2643,7 +2667,15 @@ msgid "Calculate and display checksums of frame contents."
 msgstr "僅顯示內容的摘要，而非所有元件。"
 
 #: src/common/qt_kax_analyzer.cpp:37
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:215
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:166
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:196
+#: src/mkvtoolnix-gui/jobs/tool.cpp:405
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
+#: src/mkvtoolnix-gui/merge/tool.cpp:174
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:122
 msgid "Cancel"
 msgstr "取消"
 
@@ -2835,6 +2867,13 @@ msgstr "線上檢查最新發佈的版本。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:155
 msgid "Checking this option causes the GUI to set that compression to »none« by default for all track types when adding files."
 msgstr ""
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:235
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:193
+#: src/mkvtoolnix-gui/merge/tool.cpp:171
+#, fuzzy
+msgid "Close modified file"
+msgstr "選擇時間碼檔案"
 
 #: src/extract/timecodes_v2.cpp:284
 #: src/extract/tracks.cpp:436
@@ -3504,11 +3543,11 @@ msgstr "不分割"
 msgid "Do not write meta seek elements at all."
 msgstr "不要寫入任何變換定位元件。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:403
 msgid "Do you really want to abort the currently running job?"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:120
 msgid "Do you really want to abort this job?"
 msgstr ""
 
@@ -3782,7 +3821,7 @@ msgstr "寫入 Matroska 檔時發生錯誤"
 #: src/common/output.cpp:80
 #: src/common/output.cpp:81
 #: src/mkvtoolnix-gui/jobs/job.cpp:213
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:230
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:235
 msgid "Error:"
 msgstr "發生錯誤:"
 
@@ -3975,12 +4014,7 @@ msgstr "檔案資料, 大小: %1%"
 msgid "File description: %1%"
 msgstr "檔案描述: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:233
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:145
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:191
-#: src/mkvtoolnix-gui/merge/tool.cpp:171
 msgid "File has been modified"
 msgstr "檔案已被修改過"
 
@@ -5415,7 +5449,7 @@ msgid "No input files were given. No output will be created.\n"
 msgstr "未給定任何輸入檔。將不建立輸出檔。\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:77
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:335
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:340
 msgid "No job has been started yet."
 msgstr "尚無任務開始。"
 
@@ -6173,6 +6207,12 @@ msgstr "參考優先順序: %1%"
 msgid "Reference virtual: %1%"
 msgstr "虛擬參考: %1%"
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
+#, fuzzy
+msgid "Reload modified file"
+msgstr "移除檔案(&R)"
+
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:290
 #, fuzzy
 msgid "Remaining time for current job:"
@@ -6337,7 +6377,7 @@ msgstr "將章節另存為 Matroska 檔"
 msgid "Save information as"
 msgstr "另存資訊"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 #, fuzzy
 msgid "Save job output"
 msgstr "儲存輸出(&S)"
@@ -7009,7 +7049,7 @@ msgstr "告訴 mkvmerge 將大部分的「n」資料區塊放到每個叢集中�
 
 #: src/info/qt_ui.cpp:98
 #: src/mkvtoolnix-gui/merge/input.cpp:649
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "Text files"
 msgstr "純文字檔"
 
@@ -7519,8 +7559,8 @@ msgstr "您試著開啟的檔案 (%1) 無法辨識為有效的 Matroska/WebM 檔
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
 msgstr "你試著開啟的檔案 (%1) 無法辨識為有效的 Matroska 檔或章節檔。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:234
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:192
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:194
 #: src/mkvtoolnix-gui/merge/tool.cpp:172
 msgid "The file »%1« has been modified. Do you really want to close? All changes will be lost."
 msgstr "檔案 »%1« 已被修改過。你確定要關閉嗎？所有變更將會遺失。"
@@ -8944,7 +8984,7 @@ msgstr "第 %1% 行處警告: 起始時間早於前一條的起始時間。此�
 
 #: src/common/output.cpp:84
 #: src/mkvtoolnix-gui/jobs/job.cpp:212
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:234
 msgid "Warning:"
 msgstr "警告:"
 
@@ -9894,7 +9934,7 @@ msgid "no file loaded"
 msgstr "未載入檔案"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:334
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:339
 msgid "no job started yet"
 msgstr "尚無任務開始"
 
@@ -9919,14 +9959,14 @@ msgid "normal"
 msgstr "一般"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:270
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:337
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:342
 msgid "not finished yet"
 msgstr "尚未完成"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:288
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:269
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:336
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:274
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:341
 msgid "not started yet"
 msgstr "尚未開始"
 
@@ -10180,4 +10220,8 @@ msgstr "- 預設無選項目 -"
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:38
 msgid "– set to none –"
 msgstr "- 設定為無 -"
+
+#, fuzzy
+#~ msgid "Close file"
+#~ msgstr "來源檔案"
 

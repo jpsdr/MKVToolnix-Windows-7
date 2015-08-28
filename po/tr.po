@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-28 19:26+0200\n"
+"POT-Creation-Date: 2015-08-28 21:28+0200\n"
 "PO-Revision-Date: 2015-08-14 22:58+0300\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
@@ -1038,6 +1038,17 @@ msgstr "%p%"
 msgid "&Abort"
 msgstr "&Durdur"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:404
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#, fuzzy
+msgid "&Abort job"
+msgstr "&Durdur"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:121
+#, fuzzy
+msgid "&Abort jobs"
+msgstr "&Durdur"
+
 #: src/info/ui/mainwindow.h:117
 msgid "&About mkvinfo"
 msgstr "mkvinfo &Hakkında"
@@ -1096,6 +1107,13 @@ msgstr "&Ayarlar otomatik olarak temizleniyor:"
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:130
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:72
 msgid "&Close"
+msgstr "&Kapat"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:195
+#: src/mkvtoolnix-gui/merge/tool.cpp:173
+#, fuzzy
+msgid "&Close file"
 msgstr "&Kapat"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:148
@@ -1309,6 +1327,12 @@ msgstr "&Tercihler"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:413
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:425
 msgid "&Reload"
+msgstr "&Yeniden yükle"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:214
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:165
+#, fuzzy
+msgid "&Reload file"
 msgstr "&Yeniden yükle"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:265
@@ -1880,15 +1904,15 @@ msgstr ", dosya adı '%1%'"
 msgid ", position %1%"
 msgstr ", konum %1%"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:255
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr "--- '%1' işi tarafından verilen %2 zamanındaki hatalar ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:245
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr "--- '%1' işinin çıktısı %2 zamanında başlatıldı ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:254
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr "--- '%1' işi tarafından verilen %2 zamanındaki uyarılar ---"
 
@@ -2181,9 +2205,9 @@ msgstr "AVI (Audio/Video Interleaved)"
 msgid "Abort current job and stop &immediately"
 msgstr "Şu anki işi iptal et ve &hemen durdur"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:402
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:314
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:119
 msgid "Abort running jobs"
 msgstr "Çalışan işleri iptal et"
 
@@ -2359,7 +2383,7 @@ msgstr "Algoritma: %1% (%2%)"
 #: src/mkvtoolnix-gui/merge/tab.cpp:206 src/mkvtoolnix-gui/merge/tab.cpp:230
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "All files"
 msgstr "Tüm dosyalar"
 
@@ -2842,7 +2866,15 @@ msgid "Calculate and display checksums of frame contents."
 msgstr "Kare içeriklerinin sağlamalarını hesapla ve görüntüle."
 
 #: src/common/qt_kax_analyzer.cpp:37
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:215
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:166
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:196
+#: src/mkvtoolnix-gui/jobs/tool.cpp:405
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
+#: src/mkvtoolnix-gui/merge/tool.cpp:174
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:122
 msgid "Cancel"
 msgstr "İptal"
 
@@ -3064,6 +3096,13 @@ msgid ""
 msgstr ""
 "Bu seçeneği işaretlemek, dosyaları eklerken tüm iz türleri için GKA'nın bu "
 "sıkıştırmayı varsayılan olarak »none« seçeneğine ayarlamasına neden olur."
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:235
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:193
+#: src/mkvtoolnix-gui/merge/tool.cpp:171
+#, fuzzy
+msgid "Close modified file"
+msgstr "Zaman kodu dosyası seç"
 
 #: src/extract/timecodes_v2.cpp:284 src/extract/tracks.cpp:436
 #: src/info/mkvinfo.cpp:1595
@@ -3775,11 +3814,11 @@ msgstr "Bölme yapma"
 msgid "Do not write meta seek elements at all."
 msgstr "Hiçbir şekilde meta arama öğesi yazar."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:403
 msgid "Do you really want to abort the currently running job?"
 msgstr "Şu anda çalışan işi gerçekten iptal etmek istiyor musunuz?"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:120
 msgid "Do you really want to abort this job?"
 msgstr "Bu işi gerçekten iptal etmek istiyor musunuz?"
 
@@ -4085,7 +4124,7 @@ msgstr "Matroska dosyası yazma hatası"
 
 #: src/common/output.cpp:79 src/common/output.cpp:80 src/common/output.cpp:81
 #: src/mkvtoolnix-gui/jobs/job.cpp:213
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:230
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:235
 msgid "Error:"
 msgstr "Hata:"
 
@@ -4309,12 +4348,7 @@ msgstr "Dosya verisi, boyutu: %1%"
 msgid "File description: %1%"
 msgstr "Dosya tanımlaması: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:233
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:145
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:191
-#: src/mkvtoolnix-gui/merge/tool.cpp:171
 msgid "File has been modified"
 msgstr "Dosya değiştirildi"
 
@@ -6052,7 +6086,7 @@ msgstr ""
 "Hiç verilen girdi dosyaları yok. Hiç çıktı dosyası oluşturulmayacaktır.\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:77
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:335
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:340
 msgid "No job has been started yet."
 msgstr "Henüz hiç başlatılmış iş yok."
 
@@ -6992,6 +7026,12 @@ msgstr "Referans önceliği: %1%"
 msgid "Reference virtual: %1%"
 msgstr "Referans sanalı: %1%"
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
+#, fuzzy
+msgid "Reload modified file"
+msgstr "Dosyaları &kaldır"
+
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:290
 msgid "Remaining time for current job:"
 msgstr "Şu anki iş için kalan süre:"
@@ -7151,7 +7191,7 @@ msgstr "Bölümleri Matroska dosyasına kaydet"
 msgid "Save information as"
 msgstr "Bilgiyi farklı kaydet"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "Save job output"
 msgstr "İş çıktısını kaydet"
 
@@ -7894,7 +7934,7 @@ msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr "mkvmerge'e her küme içine çoğu 'n' veri bloklarını koymasını söyler."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:649
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "Text files"
 msgstr "Metin dosyaları"
 
@@ -8523,8 +8563,8 @@ msgstr ""
 "Açmaya çalıştığınız dosya (%1) ne geçerli bir Matroska ne de geçerli bir "
 "bölüm dosyası olarak tanındı."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:234
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:192
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:194
 #: src/mkvtoolnix-gui/merge/tool.cpp:172
 msgid ""
 "The file »%1« has been modified. Do you really want to close? All changes "
@@ -10311,7 +10351,7 @@ msgstr ""
 "dosyadan tüm girişler başlama zamanlarına göre sıralanacaktır.\n"
 
 #: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:212
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:234
 msgid "Warning:"
 msgstr "Uyarı:"
 
@@ -11424,7 +11464,7 @@ msgid "no file loaded"
 msgstr "yüklenen dosya yok"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:334
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:339
 msgid "no job started yet"
 msgstr "henüz başlayan iş yok"
 
@@ -11449,14 +11489,14 @@ msgid "normal"
 msgstr "normal"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:270
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:337
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:342
 msgid "not finished yet"
 msgstr "henüz tamamlanmadı"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:288
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:269
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:336
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:274
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:341
 msgid "not started yet"
 msgstr "henüz başlatılmadı"
 
@@ -11722,6 +11762,10 @@ msgstr "– varsayılan olarak seçim yok –"
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:38
 msgid "– set to none –"
 msgstr "– hiçbiri olarak ayarla –"
+
+#, fuzzy
+#~ msgid "Close file"
+#~ msgstr "Kaynak dosya"
 
 #~ msgid "Right-click to add and remove attachments"
 #~ msgstr "Ekleri eklemek ve kaldırmak için sağ tuşa tıklayın"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-28 19:26+0200\n"
+"POT-Creation-Date: 2015-08-28 21:28+0200\n"
 "PO-Revision-Date: 2015-08-16 17:36+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -1050,6 +1050,17 @@ msgstr "%p%"
 msgid "&Abort"
 msgstr "&Utzi"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:404
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#, fuzzy
+msgid "&Abort job"
+msgstr "&Utzi"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:121
+#, fuzzy
+msgid "&Abort jobs"
+msgstr "&Utzi"
+
 #: src/info/ui/mainwindow.h:117
 msgid "&About mkvinfo"
 msgstr "&mkvinfo buruz"
@@ -1108,6 +1119,13 @@ msgstr "E&zarpenak berezgaitasunez garbitzea:"
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:130
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:72
 msgid "&Close"
+msgstr "It&xi"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:195
+#: src/mkvtoolnix-gui/merge/tool.cpp:173
+#, fuzzy
+msgid "&Close file"
 msgstr "It&xi"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:148
@@ -1321,6 +1339,12 @@ msgstr "&Hobespenak"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:413
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:425
 msgid "&Reload"
+msgstr "Bi&rgertatu"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:214
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:165
+#, fuzzy
+msgid "&Reload file"
 msgstr "Bi&rgertatu"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:265
@@ -1897,15 +1921,15 @@ msgstr ", agiri izena '%1%'"
 msgid ", position %1%"
 msgstr ", kokapena %1%"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:255
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr "--- '%1' lanak jaulkitako akatsask. Hasiera: %2 ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:245
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr "--- '%1' lanaren irteera. Hasiera: %2 ---"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:254
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr "--- '%1' lanak jaulkitako kontuz-oharrak. Hasiera: %2 ---"
 
@@ -2210,9 +2234,9 @@ msgstr "AVI (Audioa/Bideoa Elkartartekaturik)"
 msgid "Abort current job and stop &immediately"
 msgstr "&Utzi oraingo lana eta gelditu berehala"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:402
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:314
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:119
 msgid "Abort running jobs"
 msgstr "Utzi ekinean dauden lanak"
 
@@ -2388,7 +2412,7 @@ msgstr "Algoritmoa: %1% (%2%)"
 #: src/mkvtoolnix-gui/merge/tab.cpp:206 src/mkvtoolnix-gui/merge/tab.cpp:230
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "All files"
 msgstr "Agiri guztiak"
 
@@ -2877,7 +2901,15 @@ msgid "Calculate and display checksums of frame contents."
 msgstr "Kalkulatu eta erakutsi frame edukien egiazt.-laburp."
 
 #: src/common/qt_kax_analyzer.cpp:37
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:215
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:166
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:196
+#: src/mkvtoolnix-gui/jobs/tool.cpp:405
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
+#: src/mkvtoolnix-gui/merge/tool.cpp:174
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:122
 msgid "Cancel"
 msgstr "Ezeztatu"
 
@@ -3101,6 +3133,13 @@ msgid ""
 msgstr ""
 "Aukera hau gaitzeak EIG-k konpresioa berez »ezer ez« bezala ezartzea "
 "eragiten du bide mota guztientzat agiriak gehitzerakoan."
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:235
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:193
+#: src/mkvtoolnix-gui/merge/tool.cpp:171
+#, fuzzy
+msgid "Close modified file"
+msgstr "Agiria aldatuta"
 
 #: src/extract/timecodes_v2.cpp:284 src/extract/tracks.cpp:436
 #: src/info/mkvinfo.cpp:1595
@@ -3820,11 +3859,11 @@ msgstr "Ez banandu"
 msgid "Do not write meta seek elements at all."
 msgstr "Ez idatzi meta bilaketa gairik inon."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:403
 msgid "Do you really want to abort the currently running job?"
 msgstr "Egitan nahi duzu orain ekinean dagoen lana uztea?"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:120
 msgid "Do you really want to abort this job?"
 msgstr "Egitan nahi duzu lan hau uztea?"
 
@@ -4128,7 +4167,7 @@ msgstr "Akatsa Matroska agiria idazterakoan"
 
 #: src/common/output.cpp:79 src/common/output.cpp:80 src/common/output.cpp:81
 #: src/mkvtoolnix-gui/jobs/job.cpp:213
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:230
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:235
 msgid "Error:"
 msgstr "Akatsa:"
 
@@ -4368,12 +4407,7 @@ msgstr "Agiri datuak, neurria: %1%"
 msgid "File description: %1%"
 msgstr "Agiri azalpena: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:233
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:145
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:191
-#: src/mkvtoolnix-gui/merge/tool.cpp:171
 msgid "File has been modified"
 msgstr "Agiria aldatu egin da"
 
@@ -6144,7 +6178,7 @@ msgid "No input files were given. No output will be created.\n"
 msgstr "Ez dira sarrera agiriak eman. Ezin da irteerarik sortu.\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:77
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:335
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:340
 msgid "No job has been started yet."
 msgstr "Ez da lanik hasi oraindik."
 
@@ -7109,6 +7143,12 @@ msgstr "Xehetasun lehentasuna: %1%"
 msgid "Reference virtual: %1%"
 msgstr "Xehetasun birtuala: %1%"
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
+#, fuzzy
+msgid "Reload modified file"
+msgstr "Idazburuak aldatuta"
+
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:290
 msgid "Remaining time for current job:"
 msgstr "Gelditzen den denbora lan honentzat:"
@@ -7270,7 +7310,7 @@ msgstr "Gorde atalak Matroska agirian"
 msgid "Save information as"
 msgstr "Gorde argibideak honela"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "Save job output"
 msgstr "Gorde lan irteera"
 
@@ -8023,7 +8063,7 @@ msgstr ""
 "mkvmerge-ri kluster bakoitzean 'n' datu bloke gehiago jartzeko esaten dio."
 
 #: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:649
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "Text files"
 msgstr "Idazki agiriak"
 
@@ -8711,8 +8751,8 @@ msgstr ""
 "Irekitzen saiatzen ari zaren agiria (%1) ez da ezagutzen ez baliozko "
 "Matroska agiri bat bezala ez baliozkoa atal agiri bat bezala."
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:234
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:192
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:194
 #: src/mkvtoolnix-gui/merge/tool.cpp:172
 msgid ""
 "The file »%1« has been modified. Do you really want to close? All changes "
@@ -10652,7 +10692,7 @@ msgstr ""
 "antolatuko dira.\n"
 
 #: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:212
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:234
 msgid "Warning:"
 msgstr "Kontuz:"
 
@@ -11779,7 +11819,7 @@ msgid "no file loaded"
 msgstr "ez dago agiririk gertatuta"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:334
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:339
 msgid "no job started yet"
 msgstr "ez da lanik hasi oraindik"
 
@@ -11804,14 +11844,14 @@ msgid "normal"
 msgstr "arrunta"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:270
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:337
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:342
 msgid "not finished yet"
 msgstr "ez dago amaituta oraindik"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:288
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:269
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:336
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:274
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:341
 msgid "not started yet"
 msgstr "ez dago hasita oraindik"
 
@@ -12744,6 +12784,10 @@ msgstr "– ezarri ezer ezean –"
 #~ msgid "Clear inputs after adding a job to the job queue"
 #~ msgstr "Garbitu sarrerak lan bat lan lerrora gehitu ondoren"
 
+#, fuzzy
+#~ msgid "Close file"
+#~ msgstr "Iturburu agiria"
+
 #~ msgid "Close the current file without saving"
 #~ msgstr "Itxi oraingo agiria aldaketak gorde gabe"
 
@@ -12997,9 +13041,6 @@ msgstr "– ezarri ezer ezean –"
 #~ msgid "File is already processed"
 #~ msgstr "Agiria jadanik prozesaturik dago"
 
-#~ msgid "File modified"
-#~ msgstr "Agiria aldatuta"
-
 #~ msgid "File removal not possible"
 #~ msgstr "Ezin da agiria kendu"
 
@@ -13138,9 +13179,6 @@ msgstr "– ezarri ezer ezean –"
 
 #~ msgid "Header editor: %s"
 #~ msgstr "Idazburu editatzailea: %s"
-
-#~ msgid "Headers modified"
-#~ msgstr "Idazburuak aldatuta"
 
 #~ msgid ""
 #~ "Help is available in form of tool tips, from the\n"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-08-28 19:26+0200\n"
+"POT-Creation-Date: 2015-08-28 21:28+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: Louis Larsen\n"
 "Language-Team: Chinese Simplified <mkvtoolnix@lidian.info>\n"
@@ -962,6 +962,17 @@ msgstr ""
 msgid "&Abort"
 msgstr "中断(&A)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:404
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#, fuzzy
+msgid "&Abort job"
+msgstr "中断(&A)"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:121
+#, fuzzy
+msgid "&Abort jobs"
+msgstr "中断(&A)"
+
 #: src/info/ui/mainwindow.h:117
 #, fuzzy
 msgid "&About mkvinfo"
@@ -1029,6 +1040,13 @@ msgstr "将混流配置保存到文件"
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:130
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:72
 msgid "&Close"
+msgstr "关闭(&C)"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:237
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:195
+#: src/mkvtoolnix-gui/merge/tool.cpp:173
+#, fuzzy
+msgid "&Close file"
 msgstr "关闭(&C)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:148
@@ -1273,6 +1291,12 @@ msgstr "Cue 参考"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:425
 #, fuzzy
 msgid "&Reload"
+msgstr "重新加载(&R)\tCtrl-R"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:214
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:165
+#, fuzzy
+msgid "&Reload file"
 msgstr "重新加载(&R)\tCtrl-R"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:265
@@ -1811,15 +1835,15 @@ msgstr ", 文件名 '%1%'"
 msgid ", position %1%"
 msgstr ", 位置 %1%"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:255
 msgid "--- Errors emitted by job '%1' started on %2 ---"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:245
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
 msgid "--- Output of job '%1' started on %2 ---"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:249
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:254
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr ""
 
@@ -2080,9 +2104,9 @@ msgstr "AVI (音视频交错文件)"
 msgid "Abort current job and stop &immediately"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:402
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:314
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:119
 #, fuzzy
 msgid "Abort running jobs"
 msgstr "当前任务完成后中断"
@@ -2275,7 +2299,7 @@ msgstr "算法: %1% (%2%)"
 #: src/mkvtoolnix-gui/merge/tab.cpp:230
 #: src/mkvtoolnix-gui/merge/tool.cpp:136
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 #, fuzzy
 msgid "All files"
 msgstr "附加到所有的文件"
@@ -2739,7 +2763,15 @@ msgid "Calculate and display checksums of frame contents."
 msgstr "计算并显示帧内容的校验码。"
 
 #: src/common/qt_kax_analyzer.cpp:37
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:215
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:238
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:166
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:196
+#: src/mkvtoolnix-gui/jobs/tool.cpp:405
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
+#: src/mkvtoolnix-gui/merge/tool.cpp:174
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:122
 #, fuzzy
 msgid "Cancel"
 msgstr "取消(&C)"
@@ -2937,6 +2969,13 @@ msgstr "在联机检查最新版本。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:155
 msgid "Checking this option causes the GUI to set that compression to »none« by default for all track types when adding files."
 msgstr ""
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:235
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:193
+#: src/mkvtoolnix-gui/merge/tool.cpp:171
+#, fuzzy
+msgid "Close modified file"
+msgstr "文件已修改"
 
 #: src/extract/timecodes_v2.cpp:284
 #: src/extract/tracks.cpp:436
@@ -3620,11 +3659,11 @@ msgstr "不作切割"
 msgid "Do not write meta seek elements at all."
 msgstr "不要写入任何元定位元素。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:401
+#: src/mkvtoolnix-gui/jobs/tool.cpp:403
 msgid "Do you really want to abort the currently running job?"
 msgstr ""
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:118
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:120
 msgid "Do you really want to abort this job?"
 msgstr ""
 
@@ -3908,7 +3947,7 @@ msgstr "写入 Matroska 文件出错"
 #: src/common/output.cpp:80
 #: src/common/output.cpp:81
 #: src/mkvtoolnix-gui/jobs/job.cpp:213
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:230
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:235
 msgid "Error:"
 msgstr "出错:"
 
@@ -4103,12 +4142,7 @@ msgstr "文件数据, 尺寸: %1%"
 msgid "File description: %1%"
 msgstr "文件描述: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:233
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:145
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:191
-#: src/mkvtoolnix-gui/merge/tool.cpp:171
 #, fuzzy
 msgid "File has been modified"
 msgstr "文件未改动。"
@@ -5587,7 +5621,7 @@ msgid "No input files were given. No output will be created.\n"
 msgstr "未给定任何输入文件。将不创建输出文件。\n"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:77
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:335
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:340
 #, fuzzy
 msgid "No job has been started yet."
 msgstr ", 开始于 %s"
@@ -6363,6 +6397,12 @@ msgstr "参考优先级: %1%"
 msgid "Reference virtual: %1%"
 msgstr "参考实质: %1%"
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:212
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:163
+#, fuzzy
+msgid "Reload modified file"
+msgstr "头部已修改"
+
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:290
 #, fuzzy
 msgid "Remaining time for current job:"
@@ -6536,7 +6576,7 @@ msgstr "保存到 &Matroska 文件(&M)"
 msgid "Save information as"
 msgstr "另存信息为"
 
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 #, fuzzy
 msgid "Save job output"
 msgstr "mkvmerge 输出信息:"
@@ -7255,7 +7295,7 @@ msgstr "告诉 mkvmerge 不要为每条轨道创建统计信息标签。"
 
 #: src/info/qt_ui.cpp:98
 #: src/mkvtoolnix-gui/merge/input.cpp:649
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:284
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 #, fuzzy
 msgid "Text files"
 msgstr "下一文件名"
@@ -7781,8 +7821,8 @@ msgstr "您试图打开的文件不是 Matroska 文件。"
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
 msgstr "您试图打开的文件不是 Matroska 文件。"
 
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:234
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:192
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:236
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:194
 #: src/mkvtoolnix-gui/merge/tool.cpp:172
 #, fuzzy
 msgid "The file »%1« has been modified. Do you really want to close? All changes will be lost."
@@ -9262,7 +9302,7 @@ msgstr "行 %1% 处警告: 起始时间早于前一条的起始时间。此文�
 
 #: src/common/output.cpp:84
 #: src/mkvtoolnix-gui/jobs/job.cpp:212
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:229
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:234
 msgid "Warning:"
 msgstr "警告信息:"
 
@@ -10256,7 +10296,7 @@ msgid "no file loaded"
 msgstr "未载入文件"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:286
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:334
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:339
 #, fuzzy
 msgid "no job started yet"
 msgstr ", 开始于 %s"
@@ -10284,15 +10324,15 @@ msgid "normal"
 msgstr "普通"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:270
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:337
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:275
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:342
 #, fuzzy
 msgid "not finished yet"
 msgstr ", 完成于 %s"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:288
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:269
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:336
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:274
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:341
 #, fuzzy
 msgid "not started yet"
 msgstr ", 开始于 %s"
@@ -11265,6 +11305,10 @@ msgstr ""
 #~ msgid "Clear inputs after adding a job to the job queue"
 #~ msgstr "添加任务到任务列表后清空输入文件列表"
 
+#, fuzzy
+#~ msgid "Close file"
+#~ msgstr "已扫描文件"
+
 #~ msgid "Close the current file without saving"
 #~ msgstr "在不保存的情况下关闭当前文件"
 
@@ -11527,9 +11571,6 @@ msgstr ""
 #~ msgid "File is already processed"
 #~ msgstr "文件已在处理"
 
-#~ msgid "File modified"
-#~ msgstr "文件已修改"
-
 #~ msgid "File options:"
 #~ msgstr "文件选项:"
 
@@ -11607,9 +11648,6 @@ msgstr ""
 
 #~ msgid "Header editor: %s"
 #~ msgstr "头部编辑器: %s"
-
-#~ msgid "Headers modified"
-#~ msgstr "头部已修改"
 
 #~ msgid ""
 #~ "Help is available in form of tool tips, from the\n"
