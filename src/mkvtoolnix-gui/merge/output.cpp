@@ -162,6 +162,11 @@ Tab::onTitleChanged(QString newValue) {
 void
 Tab::setDestination(QString const &newValue) {
   m_config.m_destination = newValue;
+  if (!newValue.isEmpty()) {
+    auto &settings           = Util::Settings::get();
+    settings.m_lastOutputDir = QFileInfo{ newValue }.absoluteDir();
+  }
+
   emit titleChanged();
 }
 

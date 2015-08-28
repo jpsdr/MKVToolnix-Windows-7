@@ -1,8 +1,13 @@
 2015-08-28  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: bug fix: the »default subtitle charset« is not
-        applied to text subtitles from Matroska files as those are always
-        encoded in UTF-8. Fixes #1416.
+        * MKVToolNix GUI: merge tool bug fix: if the output file name
+        policy »last output directory« was used then manual changes to the
+        output file name weren't recognized as changes to the last output
+        directory. Fixes #1411.
+
+        * MKVToolNix GUI: merge tool bug fix: the »default subtitle
+        charset« is not applied to text subtitles from Matroska files as
+        those are always encoded in UTF-8. Fixes #1416.
 
         * MKVToolNix GUI: enhancement: the titles and button texts of
         dialogs asking questions have been improved to be easier
