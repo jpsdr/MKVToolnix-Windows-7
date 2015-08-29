@@ -95,7 +95,7 @@ def setup_globals
     :manpages              => FileList[ "#{$top_srcdir }/doc/man/po4a/po/*.po" ].collect { |name| File.basename name, '.po'        },
   }
 
-  $unwrapped_po            = %{ca es eu it nl uk pl sr tr}
+  $unwrapped_po            = %{ca es eu it nl uk pl sr_RS@latin tr}
   $po_multiple_sources     = %{sv}
 
   cflags_common            = "-Wall -Wno-comment -Wfatal-errors #{c(:WLOGICAL_OP)} #{c(:WNO_MISMATCHED_TAGS)} #{c(:WNO_SELF_ASSIGN)} #{c(:QUNUSED_ARGUMENTS)}"
