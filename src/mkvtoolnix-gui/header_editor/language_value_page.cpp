@@ -3,6 +3,7 @@
 #include <QAbstractItemView>
 #include <QComboBox>
 
+#include "common/iso639.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/header_editor/language_value_page.h"
@@ -28,13 +29,15 @@ LanguageValuePage::~LanguageValuePage() {
 
 QWidget *
 LanguageValuePage::createInputControl() {
-  m_originalValue = m_element ? static_cast<EbmlString *>(m_element)->GetValue() : "eng";
+  m_originalValue   = m_element ? static_cast<EbmlString *>(m_element)->GetValue() : "eng";
+  auto idx          = map_to_iso639_2_code(m_originalValue, true);
+  auto currentValue = 0 > idx ? m_originalValue : g_iso639_languages[idx].iso639_2_code;
 
   m_cbValue = new Util::LanguageComboBox{this};
   m_cbValue->setFrame(true);
   m_cbValue->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
 
-  m_cbValue->setup().setCurrentByData(QStringList{} << Q(m_originalValue) << Q("und"));
+  m_cbValue->setup().setCurrentByData(QStringList{} << Q(currentValue) << Q("und"));
   m_originalValueIdx = m_cbValue->currentIndex();
 
   connect(MainWindow::get(), &MainWindow::preferencesChanged, m_cbValue, &Util::ComboBoxBase::reInitialize);
