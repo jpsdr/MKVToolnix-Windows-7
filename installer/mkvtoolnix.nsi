@@ -1,6 +1,6 @@
 !define PRODUCT_NAME "MKVToolNix"
 !define PRODUCT_VERSION "8.3.0"
-!define PRODUCT_VERSION_BUILD ""  # Intentionally left empty for releases
+!define PRODUCT_VERSION_BUILD " [20150829-890]"
 !define PRODUCT_PUBLISHER "Moritz Bunkus"
 !define PRODUCT_WEB_SITE "https://www.bunkus.org/videotools/mkvtoolnix/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\mkvtoolnix-gui.exe"
@@ -84,6 +84,7 @@ Page custom showExternalLinks
 !insertmacro LANG_LOAD "Portuguese"
 !insertmacro LANG_LOAD "PortugueseBR"
 !insertmacro LANG_LOAD "Russian"
+!insertmacro LANG_LOAD "Serbian"
 !insertmacro LANG_LOAD "SerbianLatin"
 !insertmacro LANG_LOAD "Spanish"
 !insertmacro LANG_LOAD "SimpChinese"
@@ -246,8 +247,10 @@ Section "Program files" SEC01
   SetOutPath "$INSTDIR\locale\ru\LC_MESSAGES"
   File "/oname=mkvtoolnix.mo" "po\ru.mo"
   File "/oname=qtbase.qm" "qt-translations\qtbase_ru.qm"
-  SetOutPath "$INSTDIR\locale\sr\LC_MESSAGES"
-  File "/oname=mkvtoolnix.mo" "po\sr.mo"
+  SetOutPath "$INSTDIR\locale\sr_RS@latin\LC_MESSAGES"
+  File "/oname=mkvtoolnix.mo" "po\sr_RS@latin.mo"
+  SetOutPath "$INSTDIR\locale\sr_RS\LC_MESSAGES"
+  File "/oname=mkvtoolnix.mo" "po\sr_RS.mo"
   SetOutPath "$INSTDIR\locale\sv\LC_MESSAGES"
   File "/oname=mkvtoolnix.mo" "po\sv.mo"
   SetOutPath "$INSTDIR\locale\tr\LC_MESSAGES"
@@ -336,6 +339,10 @@ Section "Program files" SEC01
   Delete "$INSTDIR\locale\german\LC_MESSAGES\mkvtoolnix.mo"
   RMDir "$INSTDIR\locale\german\LC_MESSAGES"
   RMDir "$INSTDIR\locale\german"
+
+  Delete "$INSTDIR\locale\rs\LC_MESSAGES\mkvtoolnix.mo"
+  RMDir "$INSTDIR\locale\rs\LC_MESSAGES"
+  RMDir "$INSTDIR\locale\rs"
 
   Delete "$INSTDIR\locale\zh\LC_MESSAGES\mkvtoolnix.mo"
   RMDir "$INSTDIR\locale\zh\LC_MESSAGES"
@@ -665,9 +672,13 @@ Section Uninstall
   RMDir "$INSTDIR\locale\ru\LC_MESSAGES"
   RMDir "$INSTDIR\locale\ru"
 
-  Delete "$INSTDIR\locale\sr\LC_MESSAGES\*.*"
-  RMDir "$INSTDIR\locale\sr\LC_MESSAGES"
-  RMDir "$INSTDIR\locale\sr"
+  Delete "$INSTDIR\locale\sr_RS\LC_MESSAGES\*.*"
+  RMDir "$INSTDIR\locale\sr_RS\LC_MESSAGES"
+  RMDir "$INSTDIR\locale\sr_RS"
+
+  Delete "$INSTDIR\locale\sr_RS@latin\LC_MESSAGES\*.*"
+  RMDir "$INSTDIR\locale\sr_RS@latin\LC_MESSAGES"
+  RMDir "$INSTDIR\locale\sr_RS@latin"
 
   Delete "$INSTDIR\locale\sv\LC_MESSAGES\*.*"
   RMDir "$INSTDIR\locale\sv\LC_MESSAGES"
