@@ -79,6 +79,7 @@ translation_c::initialize_available_translations() {
   ms_available_translations.emplace_back("por", "pt_BR", "pt_BR", "portuguese", "Brazilian Portuguese", "Português do Brasil", false, 0x0016, 0x01);
   ms_available_translations.emplace_back("por", "pt_PT", "pt",    "portuguese", "Portuguese",           "Português",           false, 0x0016, 0x02);
   ms_available_translations.emplace_back("rus", "ru_RU", "ru",    "russian",    "Russian",              "Русский",             false, 0x0019, 0x00);
+  ms_available_translations.emplace_back("srp", "sr_RS",       "sr_RS",    "serbian",    "Serbian (Cyrillic)",              "Српски (Cyrillic)",              false, 0x001a, 0x03);
   ms_available_translations.emplace_back("srp", "sr_RS@latin", "sr_RS@latin", "serbian",    "Serbian (Latin)",      "Srpski (Latin)",      false, 0x001a, 0x02);
   ms_available_translations.emplace_back("swe", "sv_SE", "sv",    "swedish",    "Swedish",              "Svenska",             false, 0x001d, 0x01);
   ms_available_translations.emplace_back("tur", "tr_TR", "tr",    "turkish",    "Turkish",              "Türkçe",              false, 0x001f, 0x00);
