@@ -116,9 +116,9 @@ Tab::onAbort() {
 
   if (   Util::Settings::get().m_warnBeforeAbortingJobs
       && (Util::MessageBox::question(this)
-            ->title(QY("Abort running jobs"))
+            ->title(QY("Abort running job"))
             .text(QY("Do you really want to abort this job?"))
-            .buttonLabel(QMessageBox::Yes, QY("&Abort jobs"))
+            .buttonLabel(QMessageBox::Yes, QY("&Abort job"))
             .buttonLabel(QMessageBox::No,  QY("Cancel"))
             .exec() == QMessageBox::No))
     return;

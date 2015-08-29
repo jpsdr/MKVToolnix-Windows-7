@@ -311,7 +311,7 @@ MainWindow::beforeCloseCheckRunningJobs() {
 
   if (   Util::Settings::get().m_warnBeforeAbortingJobs
       && (Util::MessageBox::question(this)
-            ->title(QY("Abort running jobs"))
+            ->title(QY("Abort running job"))
             .text(Q("%1 %2").arg(QY("There is currently a job running.")).arg(QY("Do you want to abort that job and quit?")))
             .buttonLabel(QMessageBox::Yes, QY("&Abort job"))
             .buttonLabel(QMessageBox::No,  QY("Cancel"))
