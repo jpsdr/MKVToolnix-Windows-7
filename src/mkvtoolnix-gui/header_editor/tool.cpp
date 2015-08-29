@@ -33,14 +33,18 @@ Tool::Tool(QWidget *parent,
 {
   // Setup UI controls.
   ui->setupUi(this);
-
-  setupActions();
-  setupTabPositions();
-
-  showHeaderEditorsWidget();
 }
 
 Tool::~Tool() {
+}
+
+void
+Tool::setupUi() {
+  setupTabPositions();
+
+  showHeaderEditorsWidget();
+
+  retranslateUi();
 }
 
 void
@@ -57,6 +61,7 @@ Tool::setupActions() {
   connect(ui->openFileButton,               &QPushButton::clicked,           this, &Tool::selectFileToOpen);
 
   connect(mw,                               &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
+  connect(mw,                               &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 
   connect(App::instance(),                  &App::editingHeadersRequested,   this, &Tool::openFilesFromCommandLine);
 }

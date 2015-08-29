@@ -31,9 +31,11 @@ public:
   explicit Tool(QWidget *parent, QMenu *chapterEditorMenu);
   ~Tool();
 
-  virtual void retranslateUi() override;
+  virtual void setupUi() override;
+  virtual void setupActions() override;
 
 public slots:
+  virtual void retranslateUi();
   virtual void toolShown() override;
   virtual void tabTitleChanged();
   virtual void enableMenuActions();
@@ -55,7 +57,6 @@ protected:
   Tab * appendTab(Tab *tab);
 
   virtual void openFile(QString const &fileName);
-  virtual void setupActions();
   virtual void showChapterEditorsWidget();
   virtual Tab *currentTab();
 

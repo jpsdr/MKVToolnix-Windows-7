@@ -31,18 +31,19 @@ Tool::Tool(QWidget *parent,
 {
   // Setup UI controls.
   ui->setupUi(this);
+}
 
+Tool::~Tool() {
+}
+
+void
+Tool::setupUi() {
   setupTabPositions();
 
   appendTab(new Tab{this});
   showMergeWidget();
 
-  setupActions();
-
   retranslateUi();
-}
-
-Tool::~Tool() {
 }
 
 void
@@ -64,6 +65,7 @@ Tool::setupActions() {
   connect(ui->openFileButton,                       &QPushButton::clicked,             this, &Tool::openConfig);
 
   connect(mw,                                       &MainWindow::preferencesChanged,   this, &Tool::setupTabPositions);
+  connect(mw,                                       &MainWindow::preferencesChanged,   this, &Tool::retranslateUi);
 
   connect(App::instance(),                          &App::addingFilesToMergeRequested, this, &Tool::addMultipleFilesFromCommandLine);
   connect(App::instance(),                          &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);

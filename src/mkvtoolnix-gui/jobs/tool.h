@@ -34,13 +34,15 @@ public:
   explicit Tool(QWidget *parent, QMenu *jobQueueMenu);
   ~Tool();
 
+  virtual void setupUi() override;
+  virtual void setupActions() override;
+
   Model *model() const;
   void addJob(JobPtr const &job);
   void loadAndStart();
 
-  virtual void retranslateUi() override;
-
 public slots:
+  virtual void retranslateUi();
   void onStartAutomatically();
   void onStartManually();
   void onStartImmediately();
@@ -67,7 +69,6 @@ public slots:
   void acknowledgeWarningsAndErrors(uint64_t id);
 
 protected:
-  void setupUiControls();
   void setupToolTips();
 
   void stopQueue(bool immediately);

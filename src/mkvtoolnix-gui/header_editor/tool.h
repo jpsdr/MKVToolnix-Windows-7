@@ -31,12 +31,14 @@ public:
   explicit Tool(QWidget *parent, QMenu *headerEditorMenu);
   ~Tool();
 
-  virtual void retranslateUi() override;
+  virtual void setupUi() override;
+  virtual void setupActions() override;
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;
 
 public slots:
+  virtual void retranslateUi();
   virtual void toolShown() override;
   virtual void selectFileToOpen();
   virtual void save();
@@ -52,7 +54,6 @@ public slots:
 
 protected:
   virtual void openFile(QString const &fileName);
-  virtual void setupActions();
   virtual void showHeaderEditorsWidget();
   virtual Tab *currentTab();
 };

@@ -32,11 +32,14 @@ public:
   explicit Tool(QWidget *parent, QMenu *mergeMenu);
   ~Tool();
 
-  virtual void retranslateUi() override;
+  virtual void setupUi() override;
+  virtual void setupActions() override;
   virtual void openConfigFile(QString const &fileName);
   virtual void openFromConfig(MuxConfig const &config);
 
 public slots:
+  virtual void retranslateUi();
+
   virtual void newConfig();
   virtual void openConfig();
 
@@ -68,7 +71,6 @@ protected:
   Tab *appendTab(Tab *tab);
   virtual Tab *currentTab();
 
-  virtual void setupActions();
   virtual void enableMenuActions();
   virtual void showMergeWidget();
 

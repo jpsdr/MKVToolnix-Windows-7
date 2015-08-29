@@ -43,8 +43,6 @@ Tool::Tool(QWidget *parent,
 {
   // Setup UI controls.
   ui->setupUi(this);
-
-  setupUiControls();
 }
 
 Tool::~Tool() {
@@ -67,9 +65,7 @@ Tool::model()
 }
 
 void
-Tool::setupUiControls() {
-  auto mwUi = MainWindow::getUi();
-
+Tool::setupUi() {
   ui->jobs->setModel(m_model);
 
   Util::preventScrollingWithoutFocus(this);
@@ -89,35 +85,45 @@ Tool::setupUiControls() {
   m_jobsMenu->addAction(m_acknowledgeSelectedErrorsAction);
   m_jobsMenu->addAction(m_acknowledgeSelectedWarningsErrorsAction);
 
-  connect(m_jobQueueMenu,                                   &QMenu::aboutToShow,       this,    &Tool::onJobQueueMenu);
+  retranslateUi();
+}
 
-  connect(mwUi->actionJobQueueStartAllPending,              &QAction::triggered,       this,    &Tool::onStartAllPending);
+void
+Tool::setupActions() {
+  auto mw   = MainWindow::get();
+  auto mwUi = MainWindow::getUi();
 
-  connect(mwUi->actionJobQueueStopAfterCurrentJob,          &QAction::triggered,       this,    &Tool::onStopQueueAfterCurrentJob);
-  connect(mwUi->actionJobQueueStopImmediately,              &QAction::triggered,       this,    &Tool::onStopQueueImmediately);
+  connect(m_jobQueueMenu,                                   &QMenu::aboutToShow,             this,    &Tool::onJobQueueMenu);
 
-  connect(mwUi->actionJobQueueRemoveDone,                   &QAction::triggered,       this,    &Tool::onRemoveDone);
-  connect(mwUi->actionJobQueueRemoveDoneOk,                 &QAction::triggered,       this,    &Tool::onRemoveDoneOk);
-  connect(mwUi->actionJobQueueRemoveAll,                    &QAction::triggered,       this,    &Tool::onRemoveAll);
+  connect(mwUi->actionJobQueueStartAllPending,              &QAction::triggered,             this,    &Tool::onStartAllPending);
 
-  connect(mwUi->actionJobQueueAcknowledgeAllWarnings,       &QAction::triggered,       m_model, &Model::acknowledgeAllWarnings);
-  connect(mwUi->actionJobQueueAcknowledgeAllErrors,         &QAction::triggered,       m_model, &Model::acknowledgeAllErrors);
-  connect(mwUi->actionJobQueueAcknowledgeAllWarningsErrors, &QAction::triggered,       m_model, &Model::acknowledgeAllWarnings);
-  connect(mwUi->actionJobQueueAcknowledgeAllWarningsErrors, &QAction::triggered,       m_model, &Model::acknowledgeAllErrors);
+  connect(mwUi->actionJobQueueStopAfterCurrentJob,          &QAction::triggered,             this,    &Tool::onStopQueueAfterCurrentJob);
+  connect(mwUi->actionJobQueueStopImmediately,              &QAction::triggered,             this,    &Tool::onStopQueueImmediately);
 
-  connect(m_startAutomaticallyAction,                       &QAction::triggered,       this,    &Tool::onStartAutomatically);
-  connect(m_startManuallyAction,                            &QAction::triggered,       this,    &Tool::onStartManually);
-  connect(m_viewOutputAction,                               &QAction::triggered,       this,    &Tool::onViewOutput);
-  connect(m_removeAction,                                   &QAction::triggered,       this,    &Tool::onRemove);
-  connect(m_acknowledgeSelectedWarningsAction,              &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
-  connect(m_acknowledgeSelectedErrorsAction,                &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
-  connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedWarnings);
-  connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,       this,    &Tool::acknowledgeSelectedErrors);
-  connect(m_openFolderAction,                               &QAction::triggered,       this,    &Tool::onOpenFolder);
-  connect(m_editAndRemoveAction,                            &QAction::triggered,       this,    &Tool::onEditAndRemove);
-  connect(m_startImmediatelyAction,                               &QAction::triggered,       this,    &Tool::onStartImmediately);
+  connect(mwUi->actionJobQueueRemoveDone,                   &QAction::triggered,             this,    &Tool::onRemoveDone);
+  connect(mwUi->actionJobQueueRemoveDoneOk,                 &QAction::triggered,             this,    &Tool::onRemoveDoneOk);
+  connect(mwUi->actionJobQueueRemoveAll,                    &QAction::triggered,             this,    &Tool::onRemoveAll);
 
-  connect(ui->jobs,                                         &QTreeView::doubleClicked, this,    &Tool::onViewOutput);
+  connect(mwUi->actionJobQueueAcknowledgeAllWarnings,       &QAction::triggered,             m_model, &Model::acknowledgeAllWarnings);
+  connect(mwUi->actionJobQueueAcknowledgeAllErrors,         &QAction::triggered,             m_model, &Model::acknowledgeAllErrors);
+  connect(mwUi->actionJobQueueAcknowledgeAllWarningsErrors, &QAction::triggered,             m_model, &Model::acknowledgeAllWarnings);
+  connect(mwUi->actionJobQueueAcknowledgeAllWarningsErrors, &QAction::triggered,             m_model, &Model::acknowledgeAllErrors);
+
+  connect(m_startAutomaticallyAction,                       &QAction::triggered,             this,    &Tool::onStartAutomatically);
+  connect(m_startManuallyAction,                            &QAction::triggered,             this,    &Tool::onStartManually);
+  connect(m_viewOutputAction,                               &QAction::triggered,             this,    &Tool::onViewOutput);
+  connect(m_removeAction,                                   &QAction::triggered,             this,    &Tool::onRemove);
+  connect(m_acknowledgeSelectedWarningsAction,              &QAction::triggered,             this,    &Tool::acknowledgeSelectedWarnings);
+  connect(m_acknowledgeSelectedErrorsAction,                &QAction::triggered,             this,    &Tool::acknowledgeSelectedErrors);
+  connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,             this,    &Tool::acknowledgeSelectedWarnings);
+  connect(m_acknowledgeSelectedWarningsErrorsAction,        &QAction::triggered,             this,    &Tool::acknowledgeSelectedErrors);
+  connect(m_openFolderAction,                               &QAction::triggered,             this,    &Tool::onOpenFolder);
+  connect(m_editAndRemoveAction,                            &QAction::triggered,             this,    &Tool::onEditAndRemove);
+  connect(m_startImmediatelyAction,                         &QAction::triggered,             this,    &Tool::onStartImmediately);
+
+  connect(ui->jobs,                                         &QTreeView::doubleClicked,       this,    &Tool::onViewOutput);
+
+  connect(mw,                                               &MainWindow::preferencesChanged, this,    &Tool::retranslateUi);
 }
 
 void

@@ -34,14 +34,18 @@ Tool::Tool(QWidget *parent,
 {
   // Setup UI controls.
   ui->setupUi(this);
-
-  setupActions();
-  setupTabPositions();
-
-  showChapterEditorsWidget();
 }
 
 Tool::~Tool() {
+}
+
+void
+Tool::setupUi() {
+  setupTabPositions();
+
+  showChapterEditorsWidget();
+
+  retranslateUi();
 }
 
 void
@@ -62,6 +66,7 @@ Tool::setupActions() {
 
   connect(ui->editors,                             &QTabWidget::currentChanged,     this, &Tool::enableMenuActions);
   connect(mw,                                      &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
+  connect(mw,                                      &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 
   connect(App::instance(),                         &App::editingChaptersRequested,  this, &Tool::openFilesFromCommandLine);
 }

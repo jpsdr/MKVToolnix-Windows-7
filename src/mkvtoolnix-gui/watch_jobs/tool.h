@@ -41,7 +41,8 @@ public:
 
   int tabIndexForJobID(uint64_t id) const;
 
-  virtual void retranslateUi() override;
+  virtual void setupUi() override;
+  virtual void setupActions() override;
 
 public slots:
   virtual void toolShown() override;
@@ -50,6 +51,7 @@ public slots:
   virtual void saveCurrentTabOutput();
   virtual void enableMenuActions();
   virtual void setupTabPositions();
+  virtual void retranslateUi();
 };
 
 }}}

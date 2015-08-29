@@ -147,8 +147,13 @@ MainWindow::setupToolSelector() {
   ui->tool->appendTab(m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
   ui->tool->appendTab(m_watchJobTool,               QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
 
-  for (auto idx = 0, numTabs = ui->tool->count(); idx < numTabs; ++idx)
+  for (auto idx = 0, numTabs = ui->tool->count(); idx < numTabs; ++idx) {
+    qobject_cast<ToolBase *>(ui->tool->widget(idx))->setupUi();
     ui->tool->setTabEnabled(idx, true);
+  }
+
+  for (auto idx = 0, numTabs = ui->tool->count(); idx < numTabs; ++idx)
+    qobject_cast<ToolBase *>(ui->tool->widget(idx))->setupActions();
 
   ui->tool->setCurrentIndex(0);
   m_toolMerge->toolShown();
@@ -289,12 +294,8 @@ MainWindow::retranslateUi() {
   auto toolTitles = QStringList{} << QY("extract") << QY("info") << QY("edit tags");
   toolTitles      = QStringList{} << QY("merge") << QY("edit headers") << QY("edit chapters") << QY("job queue") << QY("job output");
 
-  for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx) {
+  for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx)
     ui->tool->setTabText(idx, toolTitles[idx]);
-    auto toolBase = dynamic_cast<ToolBase *>(ui->tool->widget(idx));
-    if (toolBase)
-      toolBase->retranslateUi();
-  }
 
   ui->tool->setUpdatesEnabled(true);
 }

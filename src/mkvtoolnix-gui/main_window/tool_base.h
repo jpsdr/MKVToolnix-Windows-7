@@ -14,7 +14,8 @@ public:
   explicit ToolBase(QWidget *parent) : QWidget{parent} {}
   virtual ~ToolBase() {};
 
-  virtual void retranslateUi() = 0;
+  virtual void setupUi() = 0;
+  virtual void setupActions() = 0;
 
 public slots:
   virtual void toolShown() = 0;
