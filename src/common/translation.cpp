@@ -63,29 +63,29 @@ translation_c::translation_c(std::string const &iso639_2_code,
 void
 translation_c::initialize_available_translations() {
   ms_available_translations.clear();
-  ms_available_translations.emplace_back("eng", "en_US", "en",    "english",    "English",              "English",             false, 0x0009, 0x00);
+  ms_available_translations.emplace_back("eng", "en_US",       "en",          "english",    "English",              "English",             false, 0x0009, 0x00);
 #if defined(HAVE_LIBINTL_H)
-  ms_available_translations.emplace_back("cat", "ca_ES", "ca",    "catalan",    "Catalan",              "Català",              false, 0x0003, 0x00);
-  ms_available_translations.emplace_back("cze", "cs_CZ", "cs",    "czech",      "Czech",                "Čeština",             false, 0x0005, 0x00);
-  ms_available_translations.emplace_back("ger", "de_DE", "de",    "german",     "German",               "Deutsch",             false, 0x0007, 0x00);
-  ms_available_translations.emplace_back("spa", "es_ES", "es",    "spanish",    "Spanish",              "Español",             false, 0x000a, 0x00);
-  ms_available_translations.emplace_back("baq", "eu_ES", "eu",    "basque",     "Basque",               "Euskara",             false, 0x002d, 0x00);
-  ms_available_translations.emplace_back("fre", "fr_FR", "fr",    "french",     "French",               "Français",            false, 0x000c, 0x00);
-  ms_available_translations.emplace_back("ita", "it_IT", "it",    "italian",    "Italian",              "Italiano",            false, 0x0010, 0x00);
-  ms_available_translations.emplace_back("jpn", "ja_JP", "ja",    "japanese",   "Japanese",             "日本語",              true,  0x0011, 0x00);
-  ms_available_translations.emplace_back("lit", "lt_LT", "lt",    "lithuanian", "Lithuanian",           "Lietuvių",            false, 0x0027, 0x00);
-  ms_available_translations.emplace_back("dut", "nl_NL", "nl",    "dutch",      "Dutch",                "Nederlands",          false, 0x0013, 0x00);
-  ms_available_translations.emplace_back("pol", "pl_PL", "pl",    "polish",     "Polish",               "Polski",              false, 0x0015, 0x00);
-  ms_available_translations.emplace_back("por", "pt_BR", "pt_BR", "portuguese", "Brazilian Portuguese", "Português do Brasil", false, 0x0016, 0x01);
-  ms_available_translations.emplace_back("por", "pt_PT", "pt",    "portuguese", "Portuguese",           "Português",           false, 0x0016, 0x02);
-  ms_available_translations.emplace_back("rus", "ru_RU", "ru",    "russian",    "Russian",              "Русский",             false, 0x0019, 0x00);
-  ms_available_translations.emplace_back("srp", "sr_RS",       "sr_RS",    "serbian",    "Serbian (Cyrillic)",              "Српски (Cyrillic)",              false, 0x001a, 0x03);
+  ms_available_translations.emplace_back("cat", "ca_ES",       "ca",          "catalan",    "Catalan",              "Català",              false, 0x0003, 0x00);
+  ms_available_translations.emplace_back("cze", "cs_CZ",       "cs",          "czech",      "Czech",                "Čeština",             false, 0x0005, 0x00);
+  ms_available_translations.emplace_back("ger", "de_DE",       "de",          "german",     "German",               "Deutsch",             false, 0x0007, 0x00);
+  ms_available_translations.emplace_back("spa", "es_ES",       "es",          "spanish",    "Spanish",              "Español",             false, 0x000a, 0x00);
+  ms_available_translations.emplace_back("baq", "eu_ES",       "eu",          "basque",     "Basque",               "Euskara",             false, 0x002d, 0x00);
+  ms_available_translations.emplace_back("fre", "fr_FR",       "fr",          "french",     "French",               "Français",            false, 0x000c, 0x00);
+  ms_available_translations.emplace_back("ita", "it_IT",       "it",          "italian",    "Italian",              "Italiano",            false, 0x0010, 0x00);
+  ms_available_translations.emplace_back("jpn", "ja_JP",       "ja",          "japanese",   "Japanese",             "日本語",              true,  0x0011, 0x00);
+  ms_available_translations.emplace_back("lit", "lt_LT",       "lt",          "lithuanian", "Lithuanian",           "Lietuvių",            false, 0x0027, 0x00);
+  ms_available_translations.emplace_back("dut", "nl_NL",       "nl",          "dutch",      "Dutch",                "Nederlands",          false, 0x0013, 0x00);
+  ms_available_translations.emplace_back("pol", "pl_PL",       "pl",          "polish",     "Polish",               "Polski",              false, 0x0015, 0x00);
+  ms_available_translations.emplace_back("por", "pt_BR",       "pt_BR",       "portuguese", "Brazilian Portuguese", "Português do Brasil", false, 0x0016, 0x01);
+  ms_available_translations.emplace_back("por", "pt_PT",       "pt",          "portuguese", "Portuguese",           "Português",           false, 0x0016, 0x02);
+  ms_available_translations.emplace_back("rus", "ru_RU",       "ru",          "russian",    "Russian",              "Русский",             false, 0x0019, 0x00);
+  ms_available_translations.emplace_back("srp", "sr_RS",       "sr_RS",       "serbian",    "Serbian (Cyrillic)",   "Српски (Cyrillic)",   false, 0x001a, 0x03);
   ms_available_translations.emplace_back("srp", "sr_RS@latin", "sr_RS@latin", "serbian",    "Serbian (Latin)",      "Srpski (Latin)",      false, 0x001a, 0x02);
-  ms_available_translations.emplace_back("swe", "sv_SE", "sv",    "swedish",    "Swedish",              "Svenska",             false, 0x001d, 0x01);
-  ms_available_translations.emplace_back("tur", "tr_TR", "tr",    "turkish",    "Turkish",              "Türkçe",              false, 0x001f, 0x00);
-  ms_available_translations.emplace_back("ukr", "uk_UA", "uk",    "ukrainian",  "Ukrainian",            "Український",         false, 0x0022, 0x00);
-  ms_available_translations.emplace_back("chi", "zh_CN", "zh_CN", "chinese",    "Chinese Simplified",   "简体中文",            true,  0x0004, 0x02);
-  ms_available_translations.emplace_back("chi", "zh_TW", "zh_TW", "chinese",    "Chinese Traditional",  "繁體中文",            true,  0x0004, 0x01);
+  ms_available_translations.emplace_back("swe", "sv_SE",       "sv",          "swedish",    "Swedish",              "Svenska",             false, 0x001d, 0x01);
+  ms_available_translations.emplace_back("tur", "tr_TR",       "tr",          "turkish",    "Turkish",              "Türkçe",              false, 0x001f, 0x00);
+  ms_available_translations.emplace_back("ukr", "uk_UA",       "uk",          "ukrainian",  "Ukrainian",            "Український",         false, 0x0022, 0x00);
+  ms_available_translations.emplace_back("chi", "zh_CN",       "zh_CN",       "chinese",    "Chinese Simplified",   "简体中文",            true,  0x0004, 0x02);
+  ms_available_translations.emplace_back("chi", "zh_TW",       "zh_TW",       "chinese",    "Chinese Traditional",  "繁體中文",            true,  0x0004, 0x01);
 #endif
 
   ms_active_translation_idx = 0;
