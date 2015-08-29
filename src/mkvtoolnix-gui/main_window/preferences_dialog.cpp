@@ -103,7 +103,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbGuiWarnBeforeAbortingJobs,
                    Q("%1 %2")
                    .arg(QY("If checked the program will ask for confirmation before aborting a running job."))
-                   .arg(QY("This happens when clicking the »abort« button in a »job output« tab and when quitting the application.")));
+                   .arg(QY("This happens when clicking the »abort job« button in a »job output« tab and when quitting the application.")));
 
   Util::setToolTip(ui->cbGuiShowMoveUpDownButtons,
                    Q("%1 %2")
