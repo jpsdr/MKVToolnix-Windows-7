@@ -94,19 +94,22 @@ translation_c::initialize_available_translations() {
 int
 translation_c::look_up_translation(const std::string &locale) {
   try {
-    std::string locale_country_lang        = locale_string_c(locale).str(locale_string_c::half);
-    std::vector<translation_c>::iterator i = ms_available_translations.begin();
-    int idx                                = 0;
+    auto hits = std::vector< std::pair<int, int> >{};
+    auto full = locale_string_c(locale).str(locale_string_c::full);
+    auto half = locale_string_c(locale).str(locale_string_c::half);
 
-    while (i != ms_available_translations.end()) {
-      if (   balg::iequals(locale_country_lang, i->get_locale())
-#if defined(SYS_WINDOWS)
-          || balg::iequals(locale_country_lang, i->m_windows_locale_sysname)
-#endif
-           )
-        return idx;
-      ++i;
-      ++idx;
+    for (auto beg = ms_available_translations.begin(), itr = ms_available_translations.begin(), end = ms_available_translations.end(); itr != end; ++itr) {
+      auto score = itr->matches(full) ? 2
+                 : itr->matches(half) ? 1
+                 :                      0;
+
+      if (score)
+        hits.emplace_back(std::make_pair(score, static_cast<int>(std::distance(beg, itr))));
+    }
+
+    if (!hits.empty()) {
+      brng::sort(hits);
+      return hits.back().second;
     }
 
   } catch (mtx::locale_string_format_x &) {
@@ -183,6 +186,20 @@ translation_c::get_locale()
 #endif
 }
 
+bool
+translation_c::matches(std::string const &locale)
+  const {
+  if (balg::iequals(locale, get_locale()))
+    return true;
+
+#if defined(SYS_WINDOWS)
+  if (balg::iequals(locale, m_windows_locale_sysname))
+    return true;
+#endif
+
+  return false;
+}
+
 translation_c &
 translation_c::get_active_translation() {
   return ms_available_translations[ms_active_translation_idx];
@@ -233,24 +250,23 @@ translatable_string_c::get_untranslated()
 
 void
 init_locales(std::string locale) {
+  auto debug = debugging_c::requested("locale");
+
   translation_c::initialize_available_translations();
 
-  if (debugging_c::requested("locale"))
-    mxinfo(boost::format("[init_locales start: locale %1%]\n") % locale);
+  mxdebug_if(debug, boost::format("[init_locales start: locale %1%]\n") % locale);
 
   std::string locale_dir;
   std::string default_locale = translation_c::get_default_ui_locale();
 
   if (-1 == translation_c::look_up_translation(locale)) {
-    if (debugging_c::requested("locale"))
-      mxinfo(boost::format("[init_locales lookup failed; clearing locale]\n"));
+    mxdebug_if(debug, boost::format("[init_locales lookup failed; clearing locale]\n"));
     locale = "";
   }
 
   if (locale.empty()) {
     locale = default_locale;
-    if (debugging_c::requested("locale"))
-      mxinfo(boost::format("[init_locales setting to default locale %1%]\n") % locale);
+    mxdebug_if(debug, boost::format("[init_locales setting to default locale %1%]\n") % locale);
   }
 
 # if defined(SYS_WINDOWS)
@@ -286,25 +302,26 @@ init_locales(std::string locale) {
     locale_string_c loc_default(default_locale);
     std::string loc_req_with_default_codeset(locale_string_c(locale).set_codeset_and_modifier(loc_default).str());
 
-    if (setlocale(LC_MESSAGES, loc_req_with_default_codeset.c_str()))
-      chosen_locale = loc_req_with_default_codeset;
+    mxdebug_if(debug, boost::format("[init_locales loc_default is %1%; trying locale %3% followed by loc_req_with_default_codeset %2%]\n") % loc_default.str() % loc_req_with_default_codeset % locale);
 
-    else if (setlocale(LC_MESSAGES, locale.c_str()))
+    if (setlocale(LC_MESSAGES, locale.c_str()))
       chosen_locale = locale;
+
+    else if (setlocale(LC_MESSAGES, loc_req_with_default_codeset.c_str()))
+      chosen_locale = loc_req_with_default_codeset;
 
     else {
       std::string loc_req_with_utf8 = locale_string_c(locale).set_codeset_and_modifier(locale_string_c("dummy.UTF-8")).str();
+      mxdebug_if(debug, boost::format("[init_locales both failed; also trying %1%]\n") % loc_req_with_utf8);
       if (setlocale(LC_MESSAGES, loc_req_with_utf8.c_str()))
         chosen_locale = loc_req_with_utf8;
     }
 
   } catch (mtx::locale_string_format_x &error) {
-    if (debugging_c::requested("locale"))
-      mxinfo(boost::format("[init_locales format error in %1%]\n") % error.error());
+    mxdebug_if(debug, boost::format("[init_locales format error in %1%]\n") % error.error());
   }
 
-  if (debugging_c::requested("locale"))
-    mxinfo(boost::format("[init_locales chosen locale %1%]\n") % chosen_locale);
+  mxdebug_if(debug, boost::format("[init_locales chosen locale %1%]\n") % chosen_locale);
 
   // Hard fallback to "C" locale if no suitable locale was
   // selected. This can happen if the system has no locales for
@@ -325,8 +342,7 @@ init_locales(std::string locale) {
 
 # if defined(SYS_APPLE)
   int result = setenv("LC_MESSAGES", chosen_locale.c_str(), 1);
-  if (debugging_c::requested("locale"))
-    mxinfo(boost::format("[init_locales setenv() return code: %1%]\n") % result);
+  mxdebug_if(debug, boost::format("[init_locales setenv() return code: %1%]\n") % result);
 # endif
 
   bindtextdomain("mkvtoolnix", locale_dir.c_str());
