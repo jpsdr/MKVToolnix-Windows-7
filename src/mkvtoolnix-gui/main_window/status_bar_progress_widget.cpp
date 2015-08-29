@@ -26,8 +26,8 @@ StatusBarProgressWidget::StatusBarProgressWidget(QWidget *parent)
 
   connect(&m_timer, &QTimer::timeout, this, &StatusBarProgressWidget::updateWarningsAndErrorsIcons);
 
-  connect(ui->warningsContainer, &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showWarningsContextMenu);
-  connect(ui->errorsContainer,   &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showErrorsContextMenu);
+  connect(ui->warningsContainer, &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showContextMenu);
+  connect(ui->errorsContainer,   &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showContextMenu);
 }
 
 StatusBarProgressWidget::~StatusBarProgressWidget() {
@@ -103,35 +103,23 @@ StatusBarProgressWidget::updateWarningsAndErrorsIcons() {
 }
 
 void
-StatusBarProgressWidget::showWarningsContextMenu(QPoint const &pos) {
-  if (!m_numWarnings)
-    return;
-
+StatusBarProgressWidget::showContextMenu(QPoint const &pos) {
   QMenu menu{this};
 
-  auto acknowledge = new QAction{&menu};
-  acknowledge->setText(QY("Acknowledge all &warnings"));
+  auto acknowledgeWarnings = new QAction{&menu};
+  auto acknowledgeErrors   = new QAction{&menu};
 
-  connect(acknowledge, &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllWarnings);
+  acknowledgeWarnings->setText(QY("Acknowledge all &warnings"));
+  acknowledgeErrors->setText(QY("Acknowledge all &errors"));
 
-  menu.addAction(acknowledge);
+  acknowledgeWarnings->setEnabled(!!m_numWarnings);
+  acknowledgeErrors->setEnabled(!!m_numErrors);
 
-  menu.exec(static_cast<QWidget *>(sender())->mapToGlobal(pos));
-}
+  connect(acknowledgeWarnings, &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllWarnings);
+  connect(acknowledgeErrors,   &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllErrors);
 
-void
-StatusBarProgressWidget::showErrorsContextMenu(QPoint const &pos) {
-  if (!m_numErrors)
-    return;
-
-  QMenu menu{this};
-
-  auto acknowledge = new QAction{&menu};
-  acknowledge->setText(QY("Acknowledge all &errors"));
-
-  connect(acknowledge, &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllErrors);
-
-  menu.addAction(acknowledge);
+  menu.addAction(acknowledgeWarnings);
+  menu.addAction(acknowledgeErrors);
 
   menu.exec(static_cast<QWidget *>(sender())->mapToGlobal(pos));
 }
