@@ -124,6 +124,7 @@ Tool::setupActions() {
   connect(ui->jobs,                                         &QTreeView::doubleClicked,                  this,    &Tool::onViewOutput);
 
   connect(mw,                                               &MainWindow::preferencesChanged,            this,    &Tool::retranslateUi);
+  connect(mw,                                               &MainWindow::aboutToClose,                  m_model, &Model::saveJobs);
 
   connect(MainWindow::watchCurrentJobTab(),                 &WatchJobs::Tab::watchCurrentJobTabCleared, m_model, &Model::resetTotalProgress);
 }

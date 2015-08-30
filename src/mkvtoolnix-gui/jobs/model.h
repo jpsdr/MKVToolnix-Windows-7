@@ -72,7 +72,6 @@ public:
   void startNextAutoJob();
   void startJobImmediately(Job &job);
 
-  void saveJobs();
   void loadJobs();
 
   virtual Qt::DropActions supportedDropActions() const;
@@ -101,6 +100,8 @@ public slots:
   void acknowledgeSelectedErrors(QAbstractItemView *view);
 
   void resetTotalProgress();
+
+  void saveJobs();
 
 protected:
   QList<QStandardItem *> createRow(Job const &job) const;

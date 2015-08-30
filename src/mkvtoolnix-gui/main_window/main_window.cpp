@@ -332,6 +332,8 @@ MainWindow::beforeCloseCheckRunningJobs() {
 
 void
 MainWindow::closeEvent(QCloseEvent *event) {
+  emit aboutToClose();
+
   auto ok =       mergeTool()->closeAllTabs();
   ok      = ok && headerEditorTool()->closeAllTabs();
   ok      = ok && chapterEditorTool()->closeAllTabs();
@@ -341,10 +343,6 @@ MainWindow::closeEvent(QCloseEvent *event) {
     event->ignore();
     return;
   }
-
-  auto tool = jobTool();
-  if (tool)
-    tool->model()->saveJobs();
 
   Util::saveWidgetGeometry(this);
 

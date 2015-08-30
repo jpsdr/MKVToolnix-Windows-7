@@ -84,6 +84,7 @@ public:
 signals:
   void windowShown();
   void preferencesChanged();
+  void aboutToClose();
 
 public slots:
   virtual void changeToolToSender();
