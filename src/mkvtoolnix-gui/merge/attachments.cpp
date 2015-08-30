@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_widget.h"
+#include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -50,6 +51,8 @@ Tab::setupAttachmentsControls() {
   connect(ui->attachments,                   &Util::BasicTreeView::customContextMenuRequested, this, &Tab::showAttachmentsContextMenu);
 
   onAttachmentSelectionChanged();
+
+  Util::HeaderViewManager::create(*ui->attachments->header(), "Merge::Attachments");
 }
 
 void

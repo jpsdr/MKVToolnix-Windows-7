@@ -31,6 +31,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/util/file.h"
+#include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -90,6 +91,8 @@ Tab::setupUi() {
 
   Util::fixScrollAreaBackground(ui->scrollArea);
   Util::preventScrollingWithoutFocus(this);
+  Util::HeaderViewManager::create(*ui->elements->header(),  "ChapterEditor::Elements");
+  Util::HeaderViewManager::create(*ui->tvChNames->header(), "ChapterEditor::ChapterNames");
 
   auto mw = MainWindow::get();
   connect(ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                 &Tab::showChapterContextMenu);

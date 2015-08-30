@@ -25,6 +25,7 @@
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/file_type_filter.h"
+#include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -205,6 +206,9 @@ Tab::setupInputControls() {
 
   enableMoveFilesButtons();
   onTrackSelectionChanged();
+
+  Util::HeaderViewManager::create(*ui->files->header(),  "Merge::Files");
+  Util::HeaderViewManager::create(*ui->tracks->header(), "Merge::Tracks");
 }
 
 void

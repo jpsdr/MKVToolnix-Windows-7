@@ -46,6 +46,7 @@ Model::retranslateUi() {
   setHorizontalHeaderLabels(labels);
 
   horizontalHeaderItem(StatusIconColumn)->setIcon(QIcon{Q(":/icons/16x16/dialog-warning-grayscale.png")});
+  horizontalHeaderItem(StatusIconColumn)->setData(QY("Warnings/Errors"), Util::HiddenDescriptionRole);
 
   horizontalHeaderItem(DescriptionColumn) ->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);
   horizontalHeaderItem(ProgressColumn)    ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

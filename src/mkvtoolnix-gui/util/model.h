@@ -20,6 +20,7 @@ enum MtxGuiRoles {
   ChapterEditorChapterOrEditionRole,
   ChapterEditorChapterDisplayRole,
   AttachmentRole,
+  HiddenDescriptionRole,
 };
 
 void resizeViewColumnsToContents(QTableView *view);

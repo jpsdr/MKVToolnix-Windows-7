@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/tool.h"
+#include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -69,6 +70,7 @@ Tool::setupUi() {
   ui->jobs->setModel(m_model);
 
   Util::preventScrollingWithoutFocus(this);
+  Util::HeaderViewManager::create(*ui->jobs->header(), "Jobs::Jobs");
 
   m_jobsMenu->addAction(m_viewOutputAction);
   m_jobsMenu->addAction(m_openFolderAction);
