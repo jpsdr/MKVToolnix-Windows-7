@@ -9,7 +9,6 @@
 #endif  // HAVE_CURL_EASY_H
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/job.h"
-#include "mkvtoolnix-gui/mkvtoolnix_gui.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/update_check_thread.h"
 
