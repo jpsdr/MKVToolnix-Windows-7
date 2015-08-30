@@ -426,6 +426,18 @@ Model::stop() {
 }
 
 void
+Model::resetTotalProgress() {
+  QMutexLocker locked{&m_mutex};
+
+  if (isRunning() || !m_queueNumDone)
+    return;
+
+  m_queueNumDone = 0;
+
+  emit progressChanged(0, 0);
+}
+
+void
 Model::updateProgress() {
   QMutexLocker locked{&m_mutex};
 

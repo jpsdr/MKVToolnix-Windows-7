@@ -100,6 +100,8 @@ public slots:
   void acknowledgeAllErrors();
   void acknowledgeSelectedErrors(QAbstractItemView *view);
 
+  void resetTotalProgress();
+
 protected:
   QList<QStandardItem *> createRow(Job const &job) const;
   void setRowText(QList<QStandardItem *> const &items, Job const &job) const;
