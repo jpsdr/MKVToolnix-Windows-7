@@ -35,6 +35,7 @@ public:
   QString nameTemplate() const;
   NameMatch nameMatchingMode() const;
   QString languageOfNamesToReplace() const;
+  bool skipHidden() const;
 
 protected:
   void setupUi(int firstChapterNumber, QStringList const &existingSubChapters);

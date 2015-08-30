@@ -104,4 +104,10 @@ RenumberSubChaptersParametersDialog::languageOfNamesToReplace()
   return m_ui->cbLanguageOfNamesToReplace->currentData().toString();
 }
 
+bool
+RenumberSubChaptersParametersDialog::skipHidden()
+  const {
+  return m_ui->cbSkipHidden->isChecked();
+}
+
 }}}

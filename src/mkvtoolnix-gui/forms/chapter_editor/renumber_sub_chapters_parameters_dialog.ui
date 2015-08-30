@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>453</width>
-    <height>270</height>
+    <width>536</width>
+    <height>283</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,6 +68,9 @@
        <property name="text">
         <string>First entry to &amp;renumber:</string>
        </property>
+       <property name="buddy">
+        <cstring>cbFirstEntryToRenumber</cstring>
+       </property>
       </widget>
      </item>
      <item row="3" column="0">
@@ -110,6 +113,16 @@
       <widget class="mtx::gui::Util::LanguageComboBox" name="cbLanguageOfNamesToReplace"/>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="cbSkipHidden">
+     <property name="text">
+      <string>&amp;Skip chapters flagged &quot;hidden&quot;</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">

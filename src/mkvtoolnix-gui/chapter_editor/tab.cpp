@@ -1274,19 +1274,26 @@ Tab::generateSubChapters() {
   emit numberOfEntriesChanged();
 }
 
-void
+bool
 Tab::changeChapterName(QModelIndex const &parentIdx,
                        int row,
                        int chapterNumber,
                        QString const &nameTemplate,
                        RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode,
-                       QString const &languageOfNamesToReplace) {
+                       QString const &languageOfNamesToReplace,
+                       bool skipHidden) {
   auto idx     = m_chapterModel->index(row, 0, parentIdx);
   auto item    = m_chapterModel->itemFromIndex(idx);
   auto chapter = m_chapterModel->chapterFromItem(item);
 
   if (!chapter)
-    return;
+    return false;
+
+  if (skipHidden) {
+    auto flagHidden = FindChild<KaxChapterFlagHidden>(*chapter);
+    if (flagHidden && flagHidden->GetValue())
+      return false;
+  }
 
   auto name = to_wide(formatChapterName(nameTemplate, chapterNumber));
 
@@ -1294,7 +1301,7 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
     GetChild<KaxChapterString>(GetChild<KaxChapterDisplay>(*chapter)).SetValue(name);
     m_chapterModel->updateRow(idx);
 
-    return;
+    return true;
   }
 
   for (auto const &element : *chapter) {
@@ -1309,6 +1316,8 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
   }
 
   m_chapterModel->updateRow(idx);
+
+  return true;
 }
 
 void
@@ -1357,11 +1366,13 @@ Tab::renumberSubChapters() {
   auto nameTemplate      = dlg.nameTemplate();
   auto nameMatchingMode  = dlg.nameMatchingMode();
   auto languageToReplace = dlg.languageOfNamesToReplace();
+  auto skipHidden        = dlg.skipHidden();
 
   while ((row < numRows) && (0 < toRenumber)) {
-    changeChapterName(selectedIdx, row, chapterNumber, nameTemplate, nameMatchingMode, languageToReplace);
+    auto renumbered = changeChapterName(selectedIdx, row, chapterNumber, nameTemplate, nameMatchingMode, languageToReplace, skipHidden);
 
-    ++chapterNumber;
+    if (renumbered)
+      ++chapterNumber;
     ++row;
   }
 
