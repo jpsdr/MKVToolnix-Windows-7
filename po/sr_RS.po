@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-09-01 20:44+0200\n"
+"POT-Creation-Date: 2015-09-01 23:15+0200\n"
 "PO-Revision-Date: 2015-08-30 02:09+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -1977,7 +1977,7 @@ msgstr "<не мењај>"
 msgid "<no output file>"
 msgstr "<без исходишне датотеке>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:158
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:196
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
 msgid "<unnamed>"
 msgstr "<без назива>"
@@ -3977,12 +3977,12 @@ msgstr "„EbmlVoid“ (величина: %1%)"
 msgid "Edit selectors for properties"
 msgstr "Уређивање изборника особина"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:51
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:77
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
 msgid "Edition entry"
 msgstr "Унос издања"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "Edition/Chapter"
 msgstr "Издање/Поглавље"
 
@@ -4039,7 +4039,7 @@ msgstr "Алгоритам шифровања: %1% (%2%)"
 msgid "Encryption key ID: %1%"
 msgstr "ИБ заштитног кључа: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "End"
 msgstr "Свршетак"
 
@@ -4434,6 +4434,11 @@ msgstr "Прва ставка код додељивања нових броје�
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1419
 msgid "Fix bitstream timing info"
 msgstr "Исправи временске податке бит.тока"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
+#, fuzzy
+msgid "Flags"
+msgstr "Белези:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:478
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:484
@@ -7822,7 +7827,7 @@ msgstr ""
 msgid "Sta&rt muxing"
 msgstr "С&једини"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "Start"
 msgstr "Почетак"
 
@@ -11028,6 +11033,10 @@ msgstr "створи нове поставке"
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "„create_track_number“: Није пронађен „file_num“. %1%\n"
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:75
+msgid "default"
+msgstr "подразумевано"
+
 #: src/info/mkvinfo.cpp:892
 #, boost-format
 msgid ""
@@ -11049,6 +11058,7 @@ msgstr "Није успело „deflateInit()“. Исход: %1%\n"
 msgid "determine automatically"
 msgstr "одлучи сам"
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:106
 #: src/mkvtoolnix-gui/jobs/job.cpp:233
 msgid "disabled"
 msgstr "онемогућен"
@@ -11195,6 +11205,11 @@ msgstr "поседује „xcptn“\n"
 #: src/info/mkvinfo.cpp:707
 msgid "header removal"
 msgstr "уклањање заглавља"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
+msgid "hidden"
+msgstr "скривено"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 msgid "higher"
@@ -11791,6 +11806,10 @@ msgstr "само за И-кадрове"
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:49
 msgid "only to the first output file"
 msgstr "само прву исходишну датотеку"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:71
+msgid "ordered"
+msgstr "поређано"
 
 #: src/info/mkvinfo.cpp:545
 #, boost-format
@@ -14292,9 +14311,6 @@ msgstr "— не постављај —"
 #~ msgid "append"
 #~ msgstr "придружи"
 
-#~ msgid "default"
-#~ msgstr "подразумевано"
-
 #~ msgid "disable all"
 #~ msgstr "онемогући све"
 
@@ -14315,9 +14331,6 @@ msgstr "— не постављај —"
 
 #~ msgid "even if there were warnings"
 #~ msgstr "чак и ако је било упозорења"
-
-#~ msgid "hidden"
-#~ msgstr "скривено"
 
 #~ msgid "is being estimated"
 #~ msgstr "се прорачунава"
@@ -14440,9 +14453,6 @@ msgstr "— не постављај —"
 
 #~ msgid "only if the run was successfull"
 #~ msgstr "само ако је пролаз био успешан"
-
-#~ msgid "ordered"
-#~ msgstr "поређано"
 
 #~ msgid "output options"
 #~ msgstr "излазне опције"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-09-01 20:44+0200\n"
+"POT-Creation-Date: 2015-09-01 23:15+0200\n"
 "PO-Revision-Date: 2015-05-07 21:16+0200\n"
 "Last-Translator: Louis Larsen\n"
 "Language-Team: Chinese Simplified <mkvtoolnix@lidian.info>\n"
@@ -1903,7 +1903,7 @@ msgstr ""
 msgid "<no output file>"
 msgstr "设置输出文件(&O)"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:158
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:196
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
 #, fuzzy
 msgid "<unnamed>"
@@ -3796,13 +3796,13 @@ msgstr "Ebml 空隙 (大小: %1%)"
 msgid "Edit selectors for properties"
 msgstr "编辑属性选择器"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:51
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:77
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
 #, fuzzy
 msgid "Edition entry"
 msgstr "版本 %u"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 #, fuzzy
 msgid "Edition/Chapter"
 msgstr "版本 %d"
@@ -3857,7 +3857,7 @@ msgstr "加密算法: %1% (%2%)"
 msgid "Encryption key ID: %1%"
 msgstr "加密密匙 ID: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 #, fuzzy
 msgid "End"
 msgstr "终止时间:"
@@ -4211,6 +4211,11 @@ msgstr ""
 #, fuzzy
 msgid "Fix bitstream timing info"
 msgstr "修正位流时间同步信息"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
+#, fuzzy
+msgid "Flags"
+msgstr "标记:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:478
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:484
@@ -7125,7 +7130,7 @@ msgstr "将在时间码等于或大于此处所列编号的章节的起始时间
 msgid "Sta&rt muxing"
 msgstr "开始混流(&R)"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 #, fuzzy
 msgid "Start"
 msgstr "启动(&S)"
@@ -9691,6 +9696,10 @@ msgstr "将混流配置保存到文件"
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num 未找到。 %1%\n"
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:75
+msgid "default"
+msgstr "默认"
+
 #: src/info/mkvinfo.cpp:892
 #, boost-format
 msgid "default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"
@@ -9708,6 +9717,7 @@ msgstr "deflateInit() 失败。结果: %1%\n"
 msgid "determine automatically"
 msgstr ""
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:106
 #: src/mkvtoolnix-gui/jobs/job.cpp:233
 #, fuzzy
 msgid "disabled"
@@ -9859,6 +9869,11 @@ msgstr "出现异常\n"
 #: src/info/mkvinfo.cpp:707
 msgid "header removal"
 msgstr "除头"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
+msgid "hidden"
+msgstr "隐藏"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 msgid "higher"
@@ -10361,6 +10376,10 @@ msgstr "仅 I 帧"
 #, fuzzy
 msgid "only to the first output file"
 msgstr "仅附加到首个文件"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:71
+msgid "ordered"
+msgstr "有序"
 
 #: src/info/mkvinfo.cpp:545
 #, boost-format
@@ -13477,9 +13496,6 @@ msgstr ""
 #~ msgid "cstrutf8_to_UTFstring: Invalid UTF-8 sequence encountered. Please contact moritz@bunkus.org and request that he implements a better UTF-8 parser."
 #~ msgstr "cstrutf8_to_UTFstring: 遇到了无效的 UTF-8 序列。请联系 moritz@bunkus.org 并要求他实现一套更好的 UTF-8 解析器。"
 
-#~ msgid "default"
-#~ msgstr "默认"
-
 #~ msgid "dirac_es_reader: Could not open the source file."
 #~ msgstr "dirac_es_reader: 无法打开源文件。"
 
@@ -13560,9 +13576,6 @@ msgstr ""
 
 #~ msgid "found_what == 0. Should not have happened. Please file a bug report.\n"
 #~ msgstr "found_what == 0。这不该发生。请提交错误报告。\n"
-
-#~ msgid "hidden"
-#~ msgstr "隐藏"
 
 #~ msgid "is being estimated"
 #~ msgstr "正在估算"
@@ -13732,9 +13745,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "only to the first file"
 #~ msgstr "仅附加到首个文件"
-
-#~ msgid "ordered"
-#~ msgstr "有序"
 
 #~ msgid "output options"
 #~ msgstr "输出选项"

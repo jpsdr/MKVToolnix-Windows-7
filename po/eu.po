@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-09-01 20:44+0200\n"
+"POT-Creation-Date: 2015-09-01 23:15+0200\n"
 "PO-Revision-Date: 2015-08-16 17:36+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -2005,7 +2005,7 @@ msgstr "<ez aldatu>"
 msgid "<no output file>"
 msgstr "<irteera agiririk ez>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:158
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:196
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
 msgid "<unnamed>"
 msgstr "<izengabea>"
@@ -4014,12 +4014,12 @@ msgstr "EbmlVoid (neurria: %1%)"
 msgid "Edit selectors for properties"
 msgstr "Editatu ezaugarri hautatzaileak"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:51
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:77
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
 msgid "Edition entry"
 msgstr "Edizio sarrera"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "Edition/Chapter"
 msgstr "Edizioa/Atala"
 
@@ -4076,7 +4076,7 @@ msgstr "Enkriptaketa algoritmoa: %1% (%2%)"
 msgid "Encryption key ID: %1%"
 msgstr "Enkriptaketa ID giltza: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "End"
 msgstr "Amaiera"
 
@@ -4474,6 +4474,11 @@ msgstr "&Berzenbakitzeko lehen sarrera:"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1419
 msgid "Fix bitstream timing info"
 msgstr "Zuzendu bitjario denborapen argibideak"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
+#, fuzzy
+msgid "Flags"
+msgstr "Ikurrak:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:478
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:484
@@ -7881,7 +7886,7 @@ msgstr ""
 msgid "Sta&rt muxing"
 msgstr "&Hasi multiplexaketa"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "Start"
 msgstr "Hasi"
 
@@ -11122,6 +11127,10 @@ msgstr "sortu ezarpen berriak"
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num ez da aurkitu. %1%\n"
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:75
+msgid "default"
+msgstr "berezkoa"
+
 #: src/info/mkvinfo.cpp:892
 #, boost-format
 msgid ""
@@ -11143,6 +11152,7 @@ msgstr "deflateInit() hutsegitea. Emaitza: %1%\n"
 msgid "determine automatically"
 msgstr "zehaztu berezgaitasunez"
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:106
 #: src/mkvtoolnix-gui/jobs/job.cpp:233
 msgid "disabled"
 msgstr "ezgaituta"
@@ -11290,6 +11300,11 @@ msgstr "izan xcptn bat\n"
 #: src/info/mkvinfo.cpp:707
 msgid "header removal"
 msgstr "Idazburu kentzea"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
+msgid "hidden"
+msgstr "ezkutaturik"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 msgid "higher"
@@ -11884,6 +11899,10 @@ msgstr "I framentzat bakarrik"
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:49
 msgid "only to the first output file"
 msgstr "lehen irteera agirira bakarrik"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:71
+msgid "ordered"
+msgstr "hurrenkeran"
 
 #: src/info/mkvinfo.cpp:545
 #, boost-format
@@ -14906,9 +14925,6 @@ msgstr "– ezarri ezer ezean –"
 #~ msgid "bzip2 compression failed. Result: %1%\n"
 #~ msgstr "bzip2 konpresioa hutsegitea. Emaitza: %1%\n"
 
-#~ msgid "default"
-#~ msgstr "berezkoa"
-
 #~ msgid "disable all"
 #~ msgstr "ezgaitu denak"
 
@@ -14929,9 +14945,6 @@ msgstr "– ezarri ezer ezean –"
 
 #~ msgid "even if there were warnings"
 #~ msgstr "baita kontuz oharrak egonda ere"
-
-#~ msgid "hidden"
-#~ msgstr "ezkutaturik"
 
 #~ msgid "is being estimated"
 #~ msgstr "estimatzen ari da"
@@ -15106,9 +15119,6 @@ msgstr "– ezarri ezer ezean –"
 #, fuzzy
 #~ msgid "only to the first file"
 #~ msgstr "Lehenean bakarrik"
-
-#~ msgid "ordered"
-#~ msgstr "hurrenkeran"
 
 #~ msgid "output options"
 #~ msgstr "irteera aukerak"

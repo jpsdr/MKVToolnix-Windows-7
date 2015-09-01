@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-09-01 20:44+0200\n"
+"POT-Creation-Date: 2015-09-01 23:15+0200\n"
 "PO-Revision-Date: 2015-08-28 19:32+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -2036,7 +2036,7 @@ msgstr "<не змінювати>"
 msgid "<no output file>"
 msgstr "<немає вхідного файлу>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:158
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:196
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
 msgid "<unnamed>"
 msgstr "<не названо>"
@@ -4053,12 +4053,12 @@ msgstr "EbmlVoid (розмір: %1%)"
 msgid "Edit selectors for properties"
 msgstr "Редагувати селектори для властивостей"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:51
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:77
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
 msgid "Edition entry"
 msgstr "Запис редакції"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "Edition/Chapter"
 msgstr "Редакція/Розділ"
 
@@ -4115,7 +4115,7 @@ msgstr "Алгоритм шифрування: %1% (%2%)"
 msgid "Encryption key ID: %1%"
 msgstr "ID ключа шифрування: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "End"
 msgstr "Кінець"
 
@@ -4512,6 +4512,11 @@ msgstr "Перший запис для &зміни нумерації:"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1419
 msgid "Fix bitstream timing info"
 msgstr "Виправити інформацію синхронізації потоку"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
+#, fuzzy
+msgid "Flags"
+msgstr "Прапорці:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:478
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:484
@@ -7899,7 +7904,7 @@ msgstr ""
 msgid "Sta&rt muxing"
 msgstr "&Почати мультиплексування"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:26
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "Start"
 msgstr "Розпочати виконання"
 
@@ -11117,6 +11122,10 @@ msgstr "створювати нові параметри"
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num не знайдений. %1%\n"
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:75
+msgid "default"
+msgstr "Типово"
+
 #: src/info/mkvinfo.cpp:892
 #, boost-format
 msgid ""
@@ -11138,6 +11147,7 @@ msgstr "deflateInit() завершено невдало. Результат: %1%
 msgid "determine automatically"
 msgstr "визначити автоматично"
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:106
 #: src/mkvtoolnix-gui/jobs/job.cpp:233
 msgid "disabled"
 msgstr "вимкнено"
@@ -11285,6 +11295,11 @@ msgstr "містить xcptn\n"
 #: src/info/mkvinfo.cpp:707
 msgid "header removal"
 msgstr "Видалення заголовка"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
+msgid "hidden"
+msgstr "Приховано"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 msgid "higher"
@@ -11883,6 +11898,10 @@ msgstr "тільки для I-кадрів"
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:49
 msgid "only to the first output file"
 msgstr "тільки для першого вихідного файлу"
+
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:71
+msgid "ordered"
+msgstr "Впорядковано"
 
 #: src/info/mkvinfo.cpp:545
 #, boost-format
@@ -14430,9 +14449,6 @@ msgstr "– нічого не обрано –"
 #~ msgid "append"
 #~ msgstr "Приєднати"
 
-#~ msgid "default"
-#~ msgstr "Типово"
-
 #~ msgid "disable all"
 #~ msgstr "Заборонити усі"
 
@@ -14453,9 +14469,6 @@ msgstr "– нічого не обрано –"
 
 #~ msgid "even if there were warnings"
 #~ msgstr "навіть, якщо там були попередження"
-
-#~ msgid "hidden"
-#~ msgstr "Приховано"
 
 #~ msgid "is being estimated"
 #~ msgstr "оцінка часу"
@@ -14579,9 +14592,6 @@ msgstr "– нічого не обрано –"
 
 #~ msgid "only if the run was successfull"
 #~ msgstr "тільки якщо запуск пройшов успішно"
-
-#~ msgid "ordered"
-#~ msgstr "Впорядковано"
 
 #~ msgid "output options"
 #~ msgstr "опції щодо файлів на виході"
