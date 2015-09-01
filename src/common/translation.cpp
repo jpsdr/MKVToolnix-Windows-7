@@ -133,9 +133,10 @@ translation_c::look_up_translation(int language_id, int sub_language_id) {
 std::string
 translation_c::get_default_ui_locale() {
   std::string locale;
-  bool debug = debugging_c::requested("locale");
 
 #if defined(HAVE_LIBINTL_H)
+  bool debug = debugging_c::requested("locale");
+
 # if defined(SYS_WINDOWS)
   std::string env_var = mtx::sys::get_environment_variable("LC_MESSAGES");
   if (!env_var.empty() && (-1 != look_up_translation(env_var)))
