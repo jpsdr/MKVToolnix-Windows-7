@@ -52,7 +52,7 @@ Tab::setupAttachmentsControls() {
 
   onAttachmentSelectionChanged();
 
-  Util::HeaderViewManager::create(*ui->attachments->header(), "Merge::Attachments");
+  Util::HeaderViewManager::create(*ui->attachments, "Merge::Attachments");
 }
 
 void

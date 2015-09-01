@@ -5,8 +5,8 @@
 
 #include <QObject>
 
-class QHeaderView;
 class QString;
+class QTreeView;
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -18,7 +18,7 @@ public:
   explicit HeaderViewManager(QObject *parent = nullptr);
   virtual ~HeaderViewManager();
 
-  void manage(QHeaderView &headerView, QString const &name);
+  void manage(QTreeView &treeView, QString const &name);
 
 public slots:
   void saveState();
@@ -29,7 +29,7 @@ public slots:
   void resetColumns();
 
 public:
-  static HeaderViewManager *create(QHeaderView &headerView, QString const &name);
+  static HeaderViewManager *create(QTreeView &treeView, QString const &name);
 
 protected:
   void restoreHidden(QStringList hiddenFlags);

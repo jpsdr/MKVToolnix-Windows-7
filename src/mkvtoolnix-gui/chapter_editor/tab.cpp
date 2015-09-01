@@ -91,8 +91,8 @@ Tab::setupUi() {
 
   Util::fixScrollAreaBackground(ui->scrollArea);
   Util::preventScrollingWithoutFocus(this);
-  Util::HeaderViewManager::create(*ui->elements->header(),  "ChapterEditor::Elements");
-  Util::HeaderViewManager::create(*ui->tvChNames->header(), "ChapterEditor::ChapterNames");
+  Util::HeaderViewManager::create(*ui->elements,  "ChapterEditor::Elements");
+  Util::HeaderViewManager::create(*ui->tvChNames, "ChapterEditor::ChapterNames");
 
   auto mw = MainWindow::get();
   connect(ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                 &Tab::showChapterContextMenu);

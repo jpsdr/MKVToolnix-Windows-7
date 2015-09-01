@@ -70,7 +70,7 @@ Tool::setupUi() {
   ui->jobs->setModel(m_model);
 
   Util::preventScrollingWithoutFocus(this);
-  Util::HeaderViewManager::create(*ui->jobs->header(), "Jobs::Jobs");
+  Util::HeaderViewManager::create(*ui->jobs, "Jobs::Jobs");
 
   m_jobsMenu->addAction(m_viewOutputAction);
   m_jobsMenu->addAction(m_openFolderAction);

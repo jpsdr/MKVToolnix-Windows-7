@@ -3,19 +3,11 @@
 #include <QAbstractItemView>
 #include <QItemSelection>
 #include <QItemSelectionModel>
-#include <QTableView>
 #include <QTreeView>
 
 #include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx { namespace gui { namespace Util {
-
-void
-resizeViewColumnsToContents(QTableView *view) {
-  auto columnCount = view->model()->columnCount(QModelIndex{});
-  for (auto column = 0; columnCount > column; ++column)
-    view->resizeColumnToContents(column);
-}
 
 void
 resizeViewColumnsToContents(QTreeView *view) {

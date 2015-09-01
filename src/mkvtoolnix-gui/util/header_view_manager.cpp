@@ -7,6 +7,7 @@
 #include <QString>
 #include <QStringList>
 #include <QTimer>
+#include <QTreeView>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -19,7 +20,7 @@ namespace mtx { namespace gui { namespace Util {
 class HeaderViewManagerPrivate {
   friend class HeaderViewManager;
 
-  QHeaderView *headerView{};
+  QTreeView *treeView{};
   QString name;
   bool restoringState{};
 };
@@ -34,17 +35,19 @@ HeaderViewManager::~HeaderViewManager() {
 }
 
 void
-HeaderViewManager::manage(QHeaderView &headerView,
+HeaderViewManager::manage(QTreeView &treeView,
                           QString const &name) {
   Q_D(HeaderViewManager);
 
-  d->name       = name;
-  d->headerView = &headerView;
+  d->name         = name;
+  d->treeView     = &treeView;
 
-  d->headerView->setContextMenuPolicy(Qt::CustomContextMenu);
+  auto headerView = d->treeView->header();
 
-  connect(d->headerView,     &QHeaderView::customContextMenuRequested, this, &HeaderViewManager::showContextMenu);
-  connect(d->headerView,     &QHeaderView::sectionMoved,               this, &HeaderViewManager::saveState);
+  headerView->setContextMenuPolicy(Qt::CustomContextMenu);
+
+  connect(headerView, &QHeaderView::customContextMenuRequested, this, &HeaderViewManager::showContextMenu);
+  connect(headerView, &QHeaderView::sectionMoved,               this, &HeaderViewManager::saveState);
 
   QTimer::singleShot(0, this, SLOT(restoreState()));
 }
@@ -57,10 +60,11 @@ HeaderViewManager::saveState() {
     return;
 
   QStringList hiddenFlags, visualIndexes;
+  auto headerView = d->treeView->header();
 
-  for (auto logicalIndex = 0, columnCount = d->headerView->count(); logicalIndex < columnCount; ++logicalIndex) {
-    hiddenFlags   << Q("%1").arg(d->headerView->isSectionHidden(logicalIndex));
-    visualIndexes << Q("%1").arg(d->headerView->visualIndex(logicalIndex));
+  for (auto logicalIndex = 0, columnCount = headerView->count(); logicalIndex < columnCount; ++logicalIndex) {
+    hiddenFlags   << Q("%1").arg(headerView->isSectionHidden(logicalIndex));
+    visualIndexes << Q("%1").arg(headerView->visualIndex(logicalIndex));
   }
 
   auto reg = Settings::registry();
@@ -99,21 +103,23 @@ void
 HeaderViewManager::restoreHidden(QStringList hiddenFlags) {
   Q_D(HeaderViewManager);
 
-  auto const columnCount = d->headerView->count();
+  auto headerView        = d->treeView->header();
+  auto const columnCount = headerView->count();
 
   while (hiddenFlags.count() < columnCount)
     hiddenFlags << Q("0");
 
   for (auto logicalIndex = 0; logicalIndex < columnCount; ++logicalIndex)
-    d->headerView->setSectionHidden(logicalIndex, !!hiddenFlags[logicalIndex].toInt());
+    headerView->setSectionHidden(logicalIndex, !!hiddenFlags[logicalIndex].toInt());
 }
 
 void
 HeaderViewManager::restoreVisualIndexes(QStringList visualIndexes) {
   Q_D(HeaderViewManager);
 
+  auto headerView        = d->treeView->header();
   auto visualToLogical   = QHash<int, int>{};
-  auto const columnCount = d->headerView->count();
+  auto const columnCount = headerView->count();
 
   while (visualIndexes.count() < columnCount)
     visualIndexes << Q("%1").arg(visualIndexes.count());
@@ -131,18 +137,18 @@ HeaderViewManager::restoreVisualIndexes(QStringList visualIndexes) {
     if ((0 > logicalIndex) || (columnCount <= logicalIndex))
       continue;
 
-    auto currentVisualIndex = d->headerView->visualIndex(logicalIndex);
+    auto currentVisualIndex = headerView->visualIndex(logicalIndex);
 
     if (currentVisualIndex != visualIndex)
-      d->headerView->moveSection(currentVisualIndex, visualIndex);
+      headerView->moveSection(currentVisualIndex, visualIndex);
   }
 }
 
 HeaderViewManager *
-HeaderViewManager::create(QHeaderView &headerView,
+HeaderViewManager::create(QTreeView &treeView,
                           QString const &name) {
-  auto manager = new HeaderViewManager{&headerView};
-  manager->manage(headerView, name);
+  auto manager = new HeaderViewManager{&treeView};
+  manager->manage(treeView, name);
 
   return manager;
 }
@@ -151,27 +157,52 @@ void
 HeaderViewManager::toggleColumn(int column) {
   Q_D(HeaderViewManager);
 
-  d->headerView->setSectionHidden(column, !d->headerView->isSectionHidden(column));
+  auto headerView = d->treeView->header();
+  headerView->setSectionHidden(column, !headerView->isSectionHidden(column));
 
   saveState();
+}
+
+void
+HeaderViewManager::resetColumns() {
+  Q_D(HeaderViewManager);
+
+  d->restoringState = true;
+
+  restoreVisualIndexes({});
+  restoreHidden({});
+
+  d->restoringState = false;
+
+  saveState();
+
+  resizeViewColumnsToContents(d->treeView);
 }
 
 void
 HeaderViewManager::showContextMenu(QPoint const &pos) {
   Q_D(HeaderViewManager);
 
-  auto menu = new QMenu{d->headerView};
+  auto headerView = d->treeView->header();
+  auto menu       = new QMenu{headerView};
+  auto action     = new QAction{menu};
 
-  for (int column = 1, columnCount = d->headerView->count(); column < columnCount; ++column) {
+  action->setText(QY("Reset all columns"));
+  menu->addAction(action);
+  menu->addSeparator();
+
+  connect(action, &QAction::triggered, this, &HeaderViewManager::resetColumns);
+
+  for (int column = 1, columnCount = headerView->count(); column < columnCount; ++column) {
     auto action = new QAction{menu};
-    auto text   = d->headerView->model()->headerData(column, Qt::Horizontal, Util::HiddenDescriptionRole).toString();
+    auto text   = headerView->model()->headerData(column, Qt::Horizontal, Util::HiddenDescriptionRole).toString();
 
     if (text.isEmpty())
-      text = d->headerView->model()->headerData(column, Qt::Horizontal, Qt::DisplayRole).toString();
+      text = headerView->model()->headerData(column, Qt::Horizontal, Qt::DisplayRole).toString();
 
     action->setText(text);
     action->setCheckable(true);
-    action->setChecked(!d->headerView->isSectionHidden(column));
+    action->setChecked(!headerView->isSectionHidden(column));
 
     menu->addAction(action);
 

@@ -6,7 +6,6 @@
 class QAbstractItemView;
 class QItemSelection;
 class QItemSelectionModel;
-class QTableView;
 class QTreeView;
 
 namespace mtx { namespace gui { namespace Util {
@@ -23,7 +22,6 @@ enum MtxGuiRoles {
   HiddenDescriptionRole,
 };
 
-void resizeViewColumnsToContents(QTableView *view);
 void resizeViewColumnsToContents(QTreeView *view);
 int numSelectedRows(QItemSelection &selection);
 QModelIndex selectedRowIdx(QItemSelection const &selection);

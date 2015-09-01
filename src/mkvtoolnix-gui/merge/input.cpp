@@ -207,8 +207,8 @@ Tab::setupInputControls() {
   enableMoveFilesButtons();
   onTrackSelectionChanged();
 
-  Util::HeaderViewManager::create(*ui->files->header(),  "Merge::Files");
-  Util::HeaderViewManager::create(*ui->tracks->header(), "Merge::Tracks");
+  Util::HeaderViewManager::create(*ui->files,  "Merge::Files");
+  Util::HeaderViewManager::create(*ui->tracks, "Merge::Tracks");
 }
 
 void
