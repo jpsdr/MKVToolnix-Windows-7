@@ -3,6 +3,7 @@
 
 #include "common/common_pch.h"
 
+#include <QIcon>
 #include <QList>
 #include <QStandardItemModel>
 
@@ -29,6 +30,7 @@ protected:
   qulonglong m_nextElementRegistryIdx{};
 
   QModelIndex m_selectedIdx;
+  QIcon m_yesIcon, m_noIcon;
 
 public:
   ChapterModel(QObject *parent);

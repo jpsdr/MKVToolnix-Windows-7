@@ -13,8 +13,12 @@ namespace mtx { namespace gui { namespace ChapterEditor {
 
 using namespace mtx::gui;
 
+static auto const s_numColumns = 4;
+
 ChapterModel::ChapterModel(QObject *parent)
   : QStandardItemModel{parent}
+  , m_yesIcon(":/icons/16x16/dialog-ok-apply.png")
+  , m_noIcon(":/icons/16x16/dialog-cancel.png")
 {
 }
 
@@ -23,24 +27,30 @@ ChapterModel::~ChapterModel() {
 
 void
 ChapterModel::retranslateUi() {
-  auto labels = QStringList{} << QY("Edition/Chapter") << QY("Start") << QY("End");
+  auto labels = QStringList{} << QY("Edition/Chapter") << QY("Start") << QY("End") << QY("Flags");
   setHorizontalHeaderLabels(labels);
 
   for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
-    setEditionRowText(itemsForRow(index(row, 0)));
+    walkTree(index(row, 0), [=](QModelIndex const &currentIdx) {
+      updateRow(currentIdx);
+    });
 }
 
 QList<QStandardItem *>
 ChapterModel::newRowItems() {
-  auto items = QList<QStandardItem *>{} << new QStandardItem{} << new QStandardItem{} << new QStandardItem{};
-  return items;
+  auto rowItems = QList<QStandardItem *>{};
+
+  for (auto column = 0; column < s_numColumns; ++column)
+    rowItems << new QStandardItem{};
+
+  return rowItems;
 }
 
 QList<QStandardItem *>
 ChapterModel::itemsForRow(QModelIndex const &idx) {
   auto rowItems = QList<QStandardItem *>{};
 
-  for (auto column = 0; 3 > column; ++column)
+  for (auto column = 0; column < s_numColumns; ++column)
     rowItems << itemFromIndex(idx.sibling(idx.row(), column));
 
   return rowItems;
@@ -48,7 +58,24 @@ ChapterModel::itemsForRow(QModelIndex const &idx) {
 
 void
 ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
+  auto edition = editionFromItem(rowItems[0]);
+  if (!edition)
+    return;
+
+  auto flags     = QStringList{};
+  auto isDefault = edition && FindChildValue<KaxEditionFlagDefault>(*edition);
+  auto isHidden  = edition && FindChildValue<KaxEditionFlagHidden>(*edition);
+  auto isOrdered = edition && FindChildValue<KaxEditionFlagOrdered>(*edition);
+
+  if (isOrdered)
+    flags << QY("ordered");
+  if (isHidden)
+    flags << QY("hidden");
+  if (isDefault)
+    flags << QY("default");
+
   rowItems[0]->setText(QY("Edition entry"));
+  rowItems[3]->setText(flags.join(Q(", ")));
 }
 
 ChapterPtr
@@ -67,14 +94,25 @@ ChapterModel::setChapterRowText(QList<QStandardItem *> const &rowItems) {
   if (!chapter)
     return;
 
-  auto kStart = FindChild<KaxChapterTimeStart>(*chapter);
-  auto kEnd   = FindChild<KaxChapterTimeEnd>(*chapter);
+  auto flags     = QStringList{};
+
+  auto isEnabled = FindChildValue<KaxChapterFlagEnabled>(*chapter, 1);
+  auto isHidden  = FindChildValue<KaxChapterFlagHidden>(*chapter);
+
+  auto kStart    = FindChild<KaxChapterTimeStart>(*chapter);
+  auto kEnd      = FindChild<KaxChapterTimeEnd>(*chapter);
+
+  if (!isEnabled)
+    flags << QY("disabled");
+  if (isHidden)
+    flags << QY("hidden");
 
   rowItems[1]->setData(static_cast<qulonglong>(kStart ? kStart->GetValue() : 0), QStandardItemModel::sortRole());
 
   rowItems[0]->setText(chapterDisplayName(*chapter));
   rowItems[1]->setText(kStart ? Q(format_timecode(kStart->GetValue(), 0)) : Q(""));
   rowItems[2]->setText(kEnd   ? Q(format_timecode(kEnd->GetValue(),   0)) : Q(""));
+  rowItems[3]->setText(flags.join(Q(", ")));
 }
 
 void
