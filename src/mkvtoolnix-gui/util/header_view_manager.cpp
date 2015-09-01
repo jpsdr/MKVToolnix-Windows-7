@@ -21,6 +21,7 @@ class HeaderViewManagerPrivate {
 
   QHeaderView *headerView{};
   QString name;
+  bool restoringState{};
 };
 
 HeaderViewManager::HeaderViewManager(QObject *parent)
@@ -52,10 +53,25 @@ void
 HeaderViewManager::saveState() {
   Q_D(HeaderViewManager);
 
+  if (d->restoringState)
+    return;
+
+  QStringList hiddenFlags, visualIndexes;
+
+  for (auto logicalIndex = 0, columnCount = d->headerView->count(); logicalIndex < columnCount; ++logicalIndex) {
+    hiddenFlags   << Q("%1").arg(d->headerView->isSectionHidden(logicalIndex));
+    visualIndexes << Q("%1").arg(d->headerView->visualIndex(logicalIndex));
+  }
+
   auto reg = Settings::registry();
 
   reg->beginGroup("headerViewManager");
-  reg->setValue(d->name, d->headerView->saveState());
+  reg->beginGroup(d->name);
+
+  reg->setValue("hidden",      hiddenFlags);
+  reg->setValue("visualIndex", visualIndexes);
+
+  reg->endGroup();
   reg->endGroup();
 }
 
@@ -63,15 +79,63 @@ void
 HeaderViewManager::restoreState() {
   Q_D(HeaderViewManager);
 
+  d->restoringState = true;
+
   auto reg = Settings::registry();
 
   reg->beginGroup("headerViewManager");
+  reg->beginGroup(d->name);
 
-  auto state = reg->value(d->name).toByteArray();
-  if (!state.isEmpty())
-    d->headerView->restoreState(state);
+  restoreVisualIndexes(reg->value("visualIndex").toStringList());
+  restoreHidden(reg->value("hidden").toStringList());
 
   reg->endGroup();
+  reg->endGroup();
+
+  d->restoringState = false;
+}
+
+void
+HeaderViewManager::restoreHidden(QStringList hiddenFlags) {
+  Q_D(HeaderViewManager);
+
+  auto const columnCount = d->headerView->count();
+
+  while (hiddenFlags.count() < columnCount)
+    hiddenFlags << Q("0");
+
+  for (auto logicalIndex = 0; logicalIndex < columnCount; ++logicalIndex)
+    d->headerView->setSectionHidden(logicalIndex, !!hiddenFlags[logicalIndex].toInt());
+}
+
+void
+HeaderViewManager::restoreVisualIndexes(QStringList visualIndexes) {
+  Q_D(HeaderViewManager);
+
+  auto visualToLogical   = QHash<int, int>{};
+  auto const columnCount = d->headerView->count();
+
+  while (visualIndexes.count() < columnCount)
+    visualIndexes << Q("%1").arg(visualIndexes.count());
+
+  for (int logicalIndex = columnCount - 1; logicalIndex >= 0; --logicalIndex) {
+    auto const visualIndex = visualIndexes.value(logicalIndex, Q("%1").arg(logicalIndex)).toInt();
+    visualToLogical[visualIndex] = logicalIndex;
+  }
+
+  for (int visualIndex = columnCount - 1; visualIndex > 0; --visualIndex) {
+    if (!visualToLogical.contains(visualIndex))
+      continue;
+
+    auto logicalIndex = visualToLogical[visualIndex];
+    if ((0 > logicalIndex) || (columnCount <= logicalIndex))
+      continue;
+
+    auto currentVisualIndex = d->headerView->visualIndex(logicalIndex);
+
+    if (currentVisualIndex != visualIndex)
+      d->headerView->moveSection(currentVisualIndex, visualIndex);
+  }
 }
 
 HeaderViewManager *

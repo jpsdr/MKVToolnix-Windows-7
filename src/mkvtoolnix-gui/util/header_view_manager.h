@@ -23,13 +23,18 @@ public:
 public slots:
   void saveState();
   void restoreState();
+
   void showContextMenu(QPoint const &pos);
   void toggleColumn(int column);
+  void resetColumns();
 
 public:
   static HeaderViewManager *create(QHeaderView &headerView, QString const &name);
 
 protected:
+  void restoreHidden(QStringList hiddenFlags);
+  void restoreVisualIndexes(QStringList visualIndexes);
+
   Q_DECLARE_PRIVATE(HeaderViewManager);
 
   QScopedPointer<HeaderViewManagerPrivate> const d_ptr;
