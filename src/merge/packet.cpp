@@ -32,3 +32,8 @@ packet_t::normalize_timecodes() {
   if (has_fref())
     fref                       = RND_TIMECODE_SCALE(fref);
 }
+
+void
+packet_t::add_extensions(std::vector<packet_extension_cptr> const &new_extensions) {
+  brng::copy(new_extensions, std::back_inserter(extensions));
+}

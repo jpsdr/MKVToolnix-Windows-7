@@ -24,6 +24,7 @@
 #include "merge/cues.h"
 #include "merge/libmatroska_extensions.h"
 #include "merge/output_control.h"
+#include "merge/packet_extensions.h"
 #include "merge/private/cluster_helper.h"
 #include "output/p_video.h"
 
@@ -479,6 +480,10 @@ cluster_helper_c::render() {
 
       added_to_cues = false;
     }
+
+    for (auto const &extension : pack->extensions)
+      if (packet_extension_c::BEFORE_ADDING_TO_CLUSTER_CB == extension->get_type())
+        static_cast<before_adding_to_cluster_cb_packet_extension_c *>(extension.get())->get_callback()(pack, timecode_offset);
 
     // Now put the packet into the cluster.
     render_group->m_more_data = new_block_group->add_frame_auto(track_entry, pack->assigned_timecode - timecode_offset, *data_buffer, lacing_type,

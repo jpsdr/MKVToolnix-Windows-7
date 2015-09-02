@@ -33,6 +33,7 @@ public:
   enum packet_extension_type_e {
     MULTIPLE_TIMECODES,
     SUBTITLE_NUMBER,
+    BEFORE_ADDING_TO_CLUSTER_CB,
   };
 
 public:
@@ -215,6 +216,8 @@ struct packet_t {
 
     return nullptr;
   }
+
+  void add_extensions(std::vector<packet_extension_cptr> const &new_extensions);
 
   void normalize_timecodes();
 };

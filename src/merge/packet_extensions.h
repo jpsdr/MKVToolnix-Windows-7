@@ -82,4 +82,28 @@ public:
 
 using subtitle_number_packet_extension_cptr = std::shared_ptr<subtitle_number_packet_extension_c>;
 
+class before_adding_to_cluster_cb_packet_extension_c: public packet_extension_c {
+public:
+  using callback_t = std::function<void(packet_cptr const &, int64_t)>;
+
+private:
+  callback_t m_callback;
+
+public:
+  before_adding_to_cluster_cb_packet_extension_c(callback_t const &callback)
+    : m_callback{callback}
+  {
+  }
+
+  virtual packet_extension_type_e get_type() const {
+    return BEFORE_ADDING_TO_CLUSTER_CB;
+  }
+
+  callback_t get_callback() const {
+    return m_callback;
+  }
+};
+
+using before_adding_to_cluster_cb_packet_extension_cptr = std::shared_ptr<before_adding_to_cluster_cb_packet_extension_c>;
+
 #endif  // MTX_PACKET_EXTENSIONS_H
