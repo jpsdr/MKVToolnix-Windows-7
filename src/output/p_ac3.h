@@ -28,6 +28,7 @@ protected:
   timecode_calculator_c m_timecode_calculator;
   int64_t m_samples_per_packet, m_packet_duration;
   bool m_framed, m_first_packet;
+  std::vector<packet_extension_cptr> m_packet_extensions;
 
 public:
   ac3_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int samples_per_sec, int channels, int bsid, bool framed = false);

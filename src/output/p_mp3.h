@@ -31,6 +31,7 @@ private:
   bool m_codec_id_set, m_valid_headers_found;
   timecode_calculator_c m_timecode_calculator;
   int64_t m_packet_duration;
+  std::vector<packet_extension_cptr> m_packet_extensions;
 
 public:
   mp3_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int samples_per_sec, int channels, bool source_is_good);

@@ -15,8 +15,10 @@
 
 #include "common/codec.h"
 #include "common/mp3.h"
+#include "common/strings/formatting.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
+#include "merge/packet_extensions.h"
 #include "output/p_mp3.h"
 
 using namespace libmatroska;
@@ -62,9 +64,12 @@ mp3_packetizer_c::handle_garbage(int64_t bytes) {
   }
 
   if (!warning_printed)
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id,
-               boost::format(Y("This MPEG audio track contains %1% bytes of non-MP3 data which were skipped. "
-                               "The audio/video synchronization may have been lost.\n")) % bytes);
+    m_packet_extensions.push_back(std::make_shared<before_adding_to_cluster_cb_packet_extension_c>([this, bytes](packet_cptr const &packet, int64_t timecode_offset) {
+      mxwarn_tid(m_ti.m_fname, m_ti.m_id,
+                 boost::format("%1% %2%\n")
+                 % (boost::format(Y("This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.")) % bytes % format_timecode(packet->assigned_timecode - timecode_offset))
+                 % Y("The audio/video synchronization may have been lost."));
+    }));
 }
 
 unsigned char *
@@ -182,9 +187,14 @@ mp3_packetizer_c::process(packet_cptr packet) {
 
   while ((mp3_packet = get_mp3_packet(&mp3header))) {
     auto new_timecode = m_timecode_calculator.get_next_timecode(m_samples_per_frame);
-    add_packet(std::make_shared<packet_t>(memory_c::clone(mp3_packet, mp3header.framesize), new_timecode.to_ns(), m_packet_duration));
+    auto packet       = std::make_shared<packet_t>(memory_c::clone(mp3_packet, mp3header.framesize), new_timecode.to_ns(), m_packet_duration);
+
+    packet->add_extensions(m_packet_extensions);
+
+    add_packet(packet);
 
     m_first_packet = false;
+    m_packet_extensions.clear();
   }
 
   return FILE_STATUS_MOREDATA;

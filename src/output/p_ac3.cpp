@@ -19,6 +19,7 @@
 #include "common/strings/formatting.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
+#include "merge/packet_extensions.h"
 #include "output/p_ac3.h"
 
 using namespace libmatroska;
@@ -70,10 +71,15 @@ ac3_packetizer_c::get_frame() {
     }
   }
 
-  if (!warning_printed)
-    mxwarn_tid(m_ti.m_fname, m_ti.m_id,
-               boost::format(Y("This AC3 track contains %1% bytes of non-AC3 data which were skipped. "
-                               "The audio/video synchronization may have been lost.\n")) % frame.m_garbage_size);
+  if (!warning_printed) {
+    auto bytes = frame.m_garbage_size;
+    m_packet_extensions.push_back(std::make_shared<before_adding_to_cluster_cb_packet_extension_c>([this, bytes](packet_cptr const &packet, int64_t timecode_offset) {
+      mxwarn_tid(m_ti.m_fname, m_ti.m_id,
+                 boost::format("%1% %2%\n")
+                 % (boost::format(Y("This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.")) % bytes % format_timecode(packet->assigned_timecode - timecode_offset))
+                 % Y("The audio/video synchronization may have been lost."));
+    }));
+  }
 
   return frame;
 }
@@ -161,7 +167,13 @@ ac3_packetizer_c::flush_packets() {
   while (m_parser.frame_available()) {
     auto frame = get_frame();
     adjust_header_values(frame);
-    set_timecode_and_add_packet(std::make_shared<packet_t>(frame.m_data));
+
+    auto packet = std::make_shared<packet_t>(frame.m_data);
+    packet->add_extensions(m_packet_extensions);
+
+    set_timecode_and_add_packet(packet);
+
+    m_packet_extensions.clear();
   }
 }
 
