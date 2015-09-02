@@ -30,10 +30,9 @@ ChapterModel::retranslateUi() {
   auto labels = QStringList{} << QY("Edition/Chapter") << QY("Start") << QY("End") << QY("Flags");
   setHorizontalHeaderLabels(labels);
 
-  for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
-    walkTree(index(row, 0), [=](QModelIndex const &currentIdx) {
-      updateRow(currentIdx);
-    });
+  Util::walkTree(*this, QModelIndex{}, [=](QModelIndex const &currentIdx) {
+    updateRow(currentIdx);
+  });
 }
 
 QList<QStandardItem *>
@@ -203,7 +202,7 @@ ChapterModel::removeTree(QModelIndex const &idx) {
   if (!idx.isValid())
     return;
 
-  walkTree(idx, [this](QModelIndex const &currIdx) {
+  Util::walkTree(*this, idx, [this](QModelIndex const &currIdx) {
     m_elementRegistry.remove(registryIdFromItem(itemFromIndex(currIdx)));
   });
 
@@ -308,7 +307,7 @@ ChapterModel::allChapters() {
 
 void
 ChapterModel::fixMandatoryElements(QModelIndex const &parentIdx) {
-  walkTree(parentIdx, [this](QModelIndex const &idx) {
+  Util::walkTree(*this, parentIdx, [this](QModelIndex const &idx) {
     auto element = m_elementRegistry[ registryIdFromItem(itemFromIndex(idx)) ];
     if (!element)
       return;
@@ -321,15 +320,6 @@ ChapterModel::fixMandatoryElements(QModelIndex const &parentIdx) {
 
     fix_mandatory_chapter_elements(element.get());
   });
-}
-
-void
-ChapterModel::walkTree(QModelIndex const &idx,
-                       std::function<void(QModelIndex const &)> const &worker) {
-  worker(idx);
-
-  for (auto row = 0, numRows = rowCount(idx); row < numRows; ++row)
-    walkTree(index(row, 0, idx), worker);
 }
 
 qulonglong

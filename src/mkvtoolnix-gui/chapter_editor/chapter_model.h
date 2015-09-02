@@ -74,8 +74,6 @@ protected:
   qulonglong registerElement(std::shared_ptr<EbmlMaster> const &element);
   qulonglong registryIdFromItem(QStandardItem *item);
 
-  void walkTree(QModelIndex const &idx, std::function<void(QModelIndex const &)> const &worker);
-
 protected:
   static QList<QStandardItem *> newRowItems();
 

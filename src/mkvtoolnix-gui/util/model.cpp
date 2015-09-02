@@ -87,4 +87,21 @@ toTopLevelIdx(QModelIndex const &idx) {
   return parent == QModelIndex{} ? idx : parent;
 }
 
+void
+walkTree(QAbstractItemModel &model,
+         QModelIndex const &idx,
+         std::function<void(QModelIndex const &)> const &worker) {
+  if (!idx.isValid()) {
+    for (auto row = 0, numRows = model.rowCount(); row < numRows; ++row)
+      walkTree(model, model.index(row, 0), worker);
+
+    return;
+  }
+
+  worker(idx);
+
+  for (auto row = 0, numRows = model.rowCount(idx); row < numRows; ++row)
+    walkTree(model, model.index(row, 0, idx), worker);
+}
+
 }}}

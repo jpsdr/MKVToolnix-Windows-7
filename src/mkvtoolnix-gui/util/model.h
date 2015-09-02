@@ -30,6 +30,7 @@ void withSelectedIndexes(QItemSelectionModel *selectionModel, std::function<void
 void withSelectedIndexes(QAbstractItemView *view, std::function<void(QModelIndex const &)> worker);
 void selectRow(QAbstractItemView *view, int row, QModelIndex const &parentIdx = QModelIndex{});
 QModelIndex toTopLevelIdx(QModelIndex const &idx);
+void walkTree(QAbstractItemModel &model, QModelIndex const &idx, std::function<void(QModelIndex const &)> const &worker);
 
 }}}
 
