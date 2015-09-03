@@ -3,6 +3,7 @@
 
 #include "common/common_pch.h"
 
+class QAbstractItemModel;
 class QAbstractItemView;
 class QItemSelection;
 class QItemSelectionModel;
@@ -20,9 +21,11 @@ enum MtxGuiRoles {
   ChapterEditorChapterDisplayRole,
   AttachmentRole,
   HiddenDescriptionRole,
+  SymbolicNameRole,
 };
 
 void resizeViewColumnsToContents(QTreeView *view);
+void setSymbolicColumnNames(QAbstractItemModel &model, QStringList const &names);
 int numSelectedRows(QItemSelection &selection);
 QModelIndex selectedRowIdx(QItemSelection const &selection);
 QModelIndex selectedRowIdx(QAbstractItemView *view);

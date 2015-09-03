@@ -32,8 +32,9 @@ public:
   static HeaderViewManager *create(QTreeView &treeView, QString const &name);
 
 protected:
-  void restoreHidden(QStringList hiddenFlags);
-  void restoreVisualIndexes(QStringList visualIndexes);
+  void restoreHidden(QStringList const &hiddenColumns);
+  void restoreVisualIndexes(QStringList const &columnOrder);
+  QString symbolicColumnName(int logicalIndex);
 
   Q_DECLARE_PRIVATE(HeaderViewManager);
 

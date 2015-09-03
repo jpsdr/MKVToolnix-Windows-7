@@ -35,8 +35,9 @@ SourceFileModel::~SourceFileModel() {
 
 void
 SourceFileModel::retranslateUi() {
-  auto labels = QStringList{} << QY("File name") << QY("Container") << QY("File size") << QY("Directory");
-  setHorizontalHeaderLabels(labels);
+  setHorizontalHeaderLabels(          QStringList{} << QY("File name") << QY("Container") << QY("File size") << QY("Directory"));
+  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("fileName")  <<  Q("container") <<  Q("fileSize")  <<  Q("directory"));
+
   horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   if (!m_sourceFiles)

@@ -27,8 +27,8 @@ ChapterModel::~ChapterModel() {
 
 void
 ChapterModel::retranslateUi() {
-  auto labels = QStringList{} << QY("Edition/Chapter") << QY("Start") << QY("End") << QY("Flags");
-  setHorizontalHeaderLabels(labels);
+  setHorizontalHeaderLabels(          QStringList{} << QY("Edition/Chapter") << QY("Start") << QY("End") << QY("Flags"));
+  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("editionChapter")  <<  Q("start") <<  Q("end") <<  Q("flags"));
 
   Util::walkTree(*this, QModelIndex{}, [=](QModelIndex const &currentIdx) {
     updateRow(currentIdx);

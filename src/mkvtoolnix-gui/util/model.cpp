@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QAbstractItemModel>
 #include <QAbstractItemView>
 #include <QItemSelection>
 #include <QItemSelectionModel>
@@ -14,6 +15,13 @@ resizeViewColumnsToContents(QTreeView *view) {
   auto columnCount = view->model()->columnCount(QModelIndex{});
   for (auto column = 0; columnCount > column; ++column)
     view->resizeColumnToContents(column);
+}
+
+void
+setSymbolicColumnNames(QAbstractItemModel &model,
+                       QStringList const &names) {
+  for (auto column = 0, numColumns = std::min(model.columnCount(), names.count()); column < numColumns; ++column)
+    model.setHeaderData(column, Qt::Horizontal, names[column], Util::SymbolicNameRole);
 }
 
 void

@@ -90,7 +90,6 @@ Tab::setupUi() {
                 << ui->lChNameCountry  << ui->cbChNameCountry;
 
   Util::fixScrollAreaBackground(ui->scrollArea);
-  Util::preventScrollingWithoutFocus(this);
   Util::HeaderViewManager::create(*ui->elements,  "ChapterEditor::Elements");
   Util::HeaderViewManager::create(*ui->tvChNames, "ChapterEditor::ChapterNames");
 

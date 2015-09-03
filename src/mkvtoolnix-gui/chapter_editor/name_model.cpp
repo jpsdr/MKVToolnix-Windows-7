@@ -21,8 +21,8 @@ NameModel::~NameModel() {
 
 void
 NameModel::retranslateUi() {
-  auto labels = QStringList{} << QY("Name") << QY("Language") << QY("Country");
-  setHorizontalHeaderLabels(labels);
+  setHorizontalHeaderLabels(          QStringList{} << QY("Name") << QY("Language") << QY("Country"));
+  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("name") <<  Q("language") <<  Q("country"));
 }
 
 QList<QStandardItem *>

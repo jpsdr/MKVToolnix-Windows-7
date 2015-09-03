@@ -10,6 +10,7 @@
 #include <QTreeView>
 
 #include "common/qt.h"
+#include "common/sorting.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/model.h"
@@ -59,21 +60,30 @@ HeaderViewManager::saveState() {
   if (d->restoringState)
     return;
 
-  QStringList hiddenFlags, visualIndexes;
+  QStringList hiddenColumns, columnOrder;
+  QHash<QString, int> visualIndexMap;
+
   auto headerView = d->treeView->header();
 
   for (auto logicalIndex = 0, columnCount = headerView->count(); logicalIndex < columnCount; ++logicalIndex) {
-    hiddenFlags   << Q("%1").arg(headerView->isSectionHidden(logicalIndex));
-    visualIndexes << Q("%1").arg(headerView->visualIndex(logicalIndex));
+    auto columnName = symbolicColumnName(logicalIndex);
+
+    columnOrder << columnName;
+    visualIndexMap[columnName] = headerView->visualIndex(logicalIndex);
+
+    if (headerView->isSectionHidden(logicalIndex))
+      hiddenColumns << columnName;
   }
+
+  mtx::sort::by(columnOrder.begin(), columnOrder.end(), [&visualIndexMap](QString const &columnName) { return visualIndexMap[columnName]; });
 
   auto reg = Settings::registry();
 
   reg->beginGroup("headerViewManager");
   reg->beginGroup(d->name);
 
-  reg->setValue("hidden",      hiddenFlags);
-  reg->setValue("visualIndex", visualIndexes);
+  reg->setValue("columnOrder",   columnOrder);
+  reg->setValue("hiddenColumns", hiddenColumns);
 
   reg->endGroup();
   reg->endGroup();
@@ -90,8 +100,8 @@ HeaderViewManager::restoreState() {
   reg->beginGroup("headerViewManager");
   reg->beginGroup(d->name);
 
-  restoreVisualIndexes(reg->value("visualIndex").toStringList());
-  restoreHidden(reg->value("hidden").toStringList());
+  restoreVisualIndexes(reg->value("columnOrder").toStringList());
+  restoreHidden(reg->value("hiddenColumns").toStringList());
 
   reg->endGroup();
   reg->endGroup();
@@ -100,32 +110,38 @@ HeaderViewManager::restoreState() {
 }
 
 void
-HeaderViewManager::restoreHidden(QStringList hiddenFlags) {
+HeaderViewManager::restoreHidden(QStringList const &hiddenColumns) {
   Q_D(HeaderViewManager);
 
   auto headerView        = d->treeView->header();
   auto const columnCount = headerView->count();
 
-  while (hiddenFlags.count() < columnCount)
-    hiddenFlags << Q("0");
-
   for (auto logicalIndex = 0; logicalIndex < columnCount; ++logicalIndex)
-    headerView->setSectionHidden(logicalIndex, !!hiddenFlags[logicalIndex].toInt());
+    headerView->setSectionHidden(logicalIndex, hiddenColumns.contains(symbolicColumnName(logicalIndex)));
 }
 
 void
-HeaderViewManager::restoreVisualIndexes(QStringList visualIndexes) {
+HeaderViewManager::restoreVisualIndexes(QStringList const &columnOrder) {
   Q_D(HeaderViewManager);
 
   auto headerView        = d->treeView->header();
+  auto visualIndexes     = QHash<QString, int>{};
   auto visualToLogical   = QHash<int, int>{};
   auto const columnCount = headerView->count();
+  auto visualIndex       = 0;
 
-  while (visualIndexes.count() < columnCount)
-    visualIndexes << Q("%1").arg(visualIndexes.count());
+  for (auto const &columnName : columnOrder)
+    visualIndexes[columnName] = visualIndex++;
 
-  for (int logicalIndex = columnCount - 1; logicalIndex >= 0; --logicalIndex) {
-    auto const visualIndex = visualIndexes.value(logicalIndex, Q("%1").arg(logicalIndex)).toInt();
+  for (auto logicalIndex = 0; logicalIndex < columnCount; ++logicalIndex) {
+    auto const columnName = symbolicColumnName(logicalIndex);
+    if (!visualIndexes.contains(columnName))
+      visualIndexes[columnName] = visualIndex++;
+  }
+
+  for (auto logicalIndex = 0; logicalIndex < columnCount; ++logicalIndex) {
+    auto const columnName        = symbolicColumnName(logicalIndex);
+    visualIndex                  = visualIndexes[columnName];
     visualToLogical[visualIndex] = logicalIndex;
   }
 
@@ -212,6 +228,13 @@ HeaderViewManager::showContextMenu(QPoint const &pos) {
   }
 
   menu->exec(static_cast<QWidget *>(sender())->mapToGlobal(pos));
+}
+
+QString
+HeaderViewManager::symbolicColumnName(int logicalIndex) {
+  Q_D(HeaderViewManager);
+
+  return d->treeView->model()->headerData(logicalIndex, Qt::Horizontal, Util::SymbolicNameRole).toString();
 }
 
 }}}
