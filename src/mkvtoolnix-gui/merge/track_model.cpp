@@ -653,7 +653,7 @@ TrackModel::updateEffectiveDefaultTrackFlags() {
       track->m_effectiveDefaultTrackFlag = false;
   }
 
-  for (auto &track : regularEnabledTracks)
+  for (auto &track : *m_tracks)
     trackUpdated(track);
 }
 

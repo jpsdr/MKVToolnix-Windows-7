@@ -540,6 +540,8 @@ Tab::onTrackItemChanged(QStandardItem *item) {
     Util::setComboBoxIndexIf(ui->muxThis, [newMuxThis](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == newMuxThis); });
 
   setOutputFileNameMaybe();
+
+  m_tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
@@ -552,6 +554,8 @@ Tab::onMuxThisChanged(int selected) {
   withSelectedTracks([&](Track *track) { track->m_muxThis = muxThis; });
 
   setOutputFileNameMaybe();
+
+  m_tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
@@ -566,14 +570,18 @@ Tab::toggleMuxThisForSelectedTracks() {
       allEnabled = false;
   }, false, ui->muxThis);
 
-  if (!tracksSelected)
+  if (!tracksSelected) {
+    m_tracksModel->updateEffectiveDefaultTrackFlags();
     return;
+  }
 
   auto newEnabled = !allEnabled;
 
   withSelectedTracks([newEnabled](Track *track) { track->m_muxThis = newEnabled; }, false, ui->muxThis);
 
   Util::setComboBoxIndexIf(ui->muxThis, [&](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == newEnabled); });
+
+  m_tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
