@@ -59,6 +59,7 @@ public:
 public slots:
   void updateTrackLists();
   void updateSelectionStatus();
+  void updateEffectiveDefaultTrackFlags();
 
 protected:
   QList<QStandardItem *> createRow(Track *track);

@@ -40,8 +40,8 @@ TrackModel::~TrackModel() {
 
 void
 TrackModel::retranslateUi() {
-  setHorizontalHeaderLabels(          QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID"));
-  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("codec") <<  Q("type") <<  Q("muxThis")  <<  Q("language") <<  Q("name") <<  Q("sourceFile")  <<  Q("id"));
+  setHorizontalHeaderLabels(          QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID") << QY("Default track"));
+  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("codec") <<  Q("type") <<  Q("muxThis")  <<  Q("language") <<  Q("name") <<  Q("sourceFile")  <<  Q("id") <<  Q("defaultTrackFlag"));
 
   horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
@@ -76,7 +76,7 @@ TrackModel::setTracks(QList<Track *> &tracks) {
 QList<QStandardItem *>
 TrackModel::createRow(Track *track) {
   auto items = QList<QStandardItem *>{};
-  for (int idx = 0; idx < 7; ++idx)
+  for (int idx = 0; idx < 8; ++idx)
     items << new QStandardItem{};
 
   setItemsFromTrack(items, track);
@@ -94,6 +94,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[4]->setText(track->isAppended() ? QString{} : track->m_name);
   items[5]->setText(QFileInfo{ track->m_file->m_fileName }.fileName());
   items[6]->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
+  items[7]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("yes") : QY("no"));
 
   items[0]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
   items[0]->setCheckable(true);
@@ -106,7 +107,8 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                     : track->isTags()       ? m_tagsIcon
                     : track->isGlobalTags() ? m_tagsIcon
                     :                         m_genericIcon);
-  items[2]->setIcon(track->m_muxThis ? m_yesIcon : m_noIcon);
+  items[2]->setIcon(track->m_muxThis          ? m_yesIcon : m_noIcon);
+  items[7]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? m_yesIcon : m_noIcon);
   items[6]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
@@ -445,6 +447,8 @@ TrackModel::updateTrackLists() {
     mxinfo(boost::format("### AFTER drag & drop ###\n"));
     MuxConfig::debugDumpSpecificTrackList(*m_tracks);
   }
+
+  updateEffectiveDefaultTrackFlags();
 }
 
 bool
@@ -594,6 +598,63 @@ TrackModel::moveTracksUpOrDown(QList<Track *> tracks,
   }
 
   updateTrackLists();
+}
+
+void
+TrackModel::updateEffectiveDefaultTrackFlags() {
+  if (!m_tracks)
+    return;
+
+  auto isSet                = QHash<Track::Type, bool>{};
+  auto regularEnabledTracks = QList<Track *>{};
+
+  std::copy_if(m_tracks->begin(), m_tracks->end(), std::back_inserter(regularEnabledTracks),
+               [](Track const *track) { return track->isRegular() && track->m_muxThis; });
+
+  // Step one: reset all flags to undefined. Do this for all tracks,
+  // not just for regular & enabled ones.
+  for (auto &track : *m_tracks)
+    track->m_effectiveDefaultTrackFlag = boost::none;
+
+  // Step two: check for explicitly set flags (set to yes/no). These
+  // take precedence over everything else.
+  for (auto &track : regularEnabledTracks) {
+    if (isSet[track->m_type] || (2 == track->m_defaultTrackFlag))
+      track->m_effectiveDefaultTrackFlag = false;
+
+    else if (1 == track->m_defaultTrackFlag) {
+      isSet[track->m_type]               = true;
+      track->m_effectiveDefaultTrackFlag = true;
+    }
+  }
+
+  // Step three: for tracks without explicit settings (determine
+  // automatically) see if there are tracks which have set their
+  // default track flag to yes in their source container.
+  for (auto &track : regularEnabledTracks) {
+    if (!track->m_effectiveDefaultTrackFlag && !isSet[track->m_type] && track->m_defaultTrackFlagWasSet) {
+      isSet[track->m_type]               = true;
+      track->m_effectiveDefaultTrackFlag = true;
+    }
+  }
+
+  // Step four: for track types for which no default track has been
+  // set yet the first track of its type will have it set. This has
+  // the lowest precedence.
+  for (auto &track : regularEnabledTracks) {
+    if (track->m_effectiveDefaultTrackFlag)
+      continue;
+
+    if (!isSet[track->m_type]) {
+      isSet[track->m_type]               = true;
+      track->m_effectiveDefaultTrackFlag = true;
+
+    } else
+      track->m_effectiveDefaultTrackFlag = false;
+  }
+
+  for (auto &track : regularEnabledTracks)
+    trackUpdated(track);
 }
 
 }}}

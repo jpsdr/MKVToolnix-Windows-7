@@ -597,6 +597,8 @@ Tab::onDefaultTrackFlagChanged(int newValue) {
     if (1 == newValue)
       ensureOneDefaultFlagOnly(track);
   }, true);
+
+  m_tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
@@ -1274,6 +1276,8 @@ Tab::ensureOneDefaultFlagOnly(Track *thisOneHasIt) {
       if ((selection.count() == 1) && (selection[0] == track))
         ui->defaultTrackFlag->setCurrentIndex(0);
     }
+
+  m_tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
