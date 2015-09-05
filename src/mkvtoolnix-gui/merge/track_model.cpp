@@ -614,7 +614,10 @@ TrackModel::updateEffectiveDefaultTrackFlags() {
   // Step one: reset all flags to undefined. Do this for all tracks,
   // not just for regular & enabled ones.
   for (auto &track : *m_tracks)
-    track->m_effectiveDefaultTrackFlag = boost::none;
+    if (track->m_muxThis)
+      track->m_effectiveDefaultTrackFlag = boost::none;
+    else
+      track->m_effectiveDefaultTrackFlag = false;
 
   // Step two: check for explicitly set flags (set to yes/no). These
   // take precedence over everything else.
