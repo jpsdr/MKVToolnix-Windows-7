@@ -40,7 +40,7 @@ TrackModel::~TrackModel() {
 
 void
 TrackModel::retranslateUi() {
-  setHorizontalHeaderLabels(          QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID") << QY("Default track"));
+  setHorizontalHeaderLabels(          QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID") << QY("Default track in output"));
   Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("codec") <<  Q("type") <<  Q("muxThis")  <<  Q("language") <<  Q("name") <<  Q("sourceFile")  <<  Q("id") <<  Q("defaultTrackFlag"));
 
   horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
