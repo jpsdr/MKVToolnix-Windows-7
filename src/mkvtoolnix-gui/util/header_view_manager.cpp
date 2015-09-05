@@ -177,6 +177,8 @@ HeaderViewManager::toggleColumn(int column) {
   headerView->setSectionHidden(column, !headerView->isSectionHidden(column));
 
   saveState();
+
+  resizeViewColumnsToContents(d->treeView);
 }
 
 void
