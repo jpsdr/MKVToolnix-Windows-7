@@ -35,6 +35,10 @@
 using namespace libebml;
 using namespace libmatroska;
 
+namespace mtx { namespace id {
+class info_c;
+}}
+
 struct kax_track_t {
   uint64_t tnum, track_number, track_uid;
 
@@ -157,7 +161,7 @@ struct kax_track_t {
   void handle_packetizer_pixel_dimensions();
   void handle_packetizer_default_duration();
   void fix_display_dimension_parameters();
-  void add_track_tags_to_identification(std::vector<std::string> &verbose_info);
+  void add_track_tags_to_identification(mtx::id::info_c &info);
   void discard_track_statistics_tags();
 };
 using kax_track_cptr = std::shared_ptr<kax_track_t>;

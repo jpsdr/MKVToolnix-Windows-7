@@ -25,6 +25,7 @@
 #include "common/dts.h"
 #include "common/endian.h"
 #include "common/error.h"
+#include "common/id_info.h"
 #include "common/strings/formatting.h"
 #include "input/r_wav.h"
 #include "merge/input_x.h"
@@ -670,11 +671,14 @@ wav_reader_c::identify() {
     return;
   }
 
-  std::vector<std::string> verbose_info;
-  verbose_info.push_back((boost::format("channels:%1%")        % get_uint16_le(&m_wheader.common.wChannels)).str());
-  verbose_info.push_back((boost::format("sample_rate:%1%")     % get_uint32_le(&m_wheader.common.dwSamplesPerSec)).str());
-  verbose_info.push_back((boost::format("bits_per_sample:%1%") % get_uint16_le(&m_wheader.common.wBitsPerSample)).str());
+  auto info = mtx::id::info_c{};
+  // info.add(mtx::id::audio_channels,           get_uint16_le(&m_wheader.common.wChannels));
+  // info.add(mtx::id::audio_sampling_frequency, get_uint32_le(&m_wheader.common.dwSamplesPerSec));
+  // info.add(mtx::id::audio_bits_per_sample,    get_uint16_le(&m_wheader.common.wBitsPerSample));
+  info.add("channels",        get_uint16_le(&m_wheader.common.wChannels));
+  info.add("sample_rate",     get_uint32_le(&m_wheader.common.dwSamplesPerSec));
+  info.add("bits_per_sample", get_uint16_le(&m_wheader.common.wBitsPerSample));
 
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_demuxer->m_codec.get_name(), verbose_info);
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_demuxer->m_codec.get_name(), info.get());
 }

@@ -16,6 +16,7 @@
 #include "common/base64.h"
 #include "common/codec.h"
 #include "common/extern_data.h"
+#include "common/id_info.h"
 #include "common/locale.h"
 #include "input/r_ssa.h"
 #include "merge/input_x.h"
@@ -92,8 +93,11 @@ ssa_reader_c::get_progress() {
 
 void
 ssa_reader_c::identify() {
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::text_subtitles, 1);
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_SSA_ASS, "SSA/ASS"), std::vector<std::string>{"text_subtitles:1"});
+  id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_SSA_ASS, "SSA/ASS"), info.get());
 
   size_t i;
   for (i = 0; i < g_attachments.size(); i++)

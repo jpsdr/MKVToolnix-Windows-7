@@ -27,6 +27,7 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/hacks.h"
+#include "common/id_info.h"
 #include "common/iso639.h"
 #include "common/mp3.h"
 #include "common/strings/formatting.h"
@@ -1742,32 +1743,30 @@ qtmp4_reader_c::get_progress() {
 
 void
 qtmp4_reader_c::identify() {
-  std::vector<std::string> verbose_info;
   unsigned int i;
 
   id_result_container();
 
   for (i = 0; i < m_demuxers.size(); ++i) {
     qtmp4_demuxer_cptr &dmx = m_demuxers[i];
-
-    verbose_info.clear();
+    auto info               = mtx::id::info_c{};
 
     if (dmx->codec.is(codec_c::type_e::V_MPEG4_P10))
-      verbose_info.push_back("packetizer:mpeg4_p10_video");
+      info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_video);
 
     else if (dmx->codec.is(codec_c::type_e::V_MPEGH_P2))
-      verbose_info.push_back("packetizer:mpegh_p2_video");
+      info.add(mtx::id::packetizer, mtx::id::mpegh_p2_video);
 
     if (!dmx->language.empty())
-      verbose_info.push_back((boost::format("language:%1%") % dmx->language).str());
+      info.add(mtx::id::language, dmx->language);
 
     if (dmx->is_video())
-      verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % dmx->v_width % dmx->v_height).str());
+      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % dmx->v_width % dmx->v_height);
 
     id_result_track(dmx->id,
                     dmx->is_video() ? ID_RESULT_TRACK_VIDEO : dmx->is_audio() ? ID_RESULT_TRACK_AUDIO : dmx->is_subtitles() ? ID_RESULT_TRACK_SUBTITLES : ID_RESULT_TRACK_UNKNOWN,
                     dmx->codec.get_name(dmx->fourcc.description()),
-                    verbose_info);
+                    info.get());
   }
 
   if (m_chapters)

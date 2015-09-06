@@ -23,6 +23,10 @@
 #include "input/subtitles.h"
 #include "output/p_avc.h"
 
+namespace mtx { namespace id {
+class info_c;
+}}
+
 struct avi_demuxer_t {
   int m_ptzr;
   int m_channels, m_bits_per_sample, m_samples_per_second, m_aid;
@@ -116,7 +120,7 @@ protected:
 
   virtual void set_avc_nal_size_size(mpeg4_p10_es_video_packetizer_c *ptzr);
 
-  void extended_identify_mpeg4_l2(std::vector<std::string> &extended_info);
+  void extended_identify_mpeg4_l2(mtx::id::info_c &info);
 
   void parse_subtitle_chunks();
   void verify_video_track();

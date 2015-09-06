@@ -15,6 +15,7 @@
 
 #include <sstream>
 
+#include "common/id_info.h"
 #include "common/mm_io_x.h"
 #include "common/mm_multi_file_io.h"
 #include "common/output.h"
@@ -144,10 +145,10 @@ mm_multi_file_io_c::get_file_names() {
 }
 
 void
-mm_multi_file_io_c::create_verbose_identification_info(std::vector<std::string> &verbose_info) {
+mm_multi_file_io_c::create_verbose_identification_info(mtx::id::info_c &info) {
   for (auto &file : m_files)
     if (file.m_file_name != m_files.front().m_file_name)
-      verbose_info.push_back((boost::format("other_file:%1%") % escape(file.m_file_name.string())).str());
+      info.add(mtx::id::other_file, file.m_file_name.string());
 }
 
 void

@@ -25,6 +25,7 @@
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/hacks.h"
+#include "common/id_info.h"
 #include "common/iso639.h"
 #include "common/ivf.h"
 #include "common/mpeg4_p2.h"
@@ -686,39 +687,39 @@ ogm_reader_c::read(generic_packetizer_c *,
 
 void
 ogm_reader_c::identify() {
-  std::vector<std::string> verbose_info;
+  auto info = mtx::id::info_c{};
   size_t i;
 
   // Check if a video track has a TITLE comment. If yes we use this as the
   // new segment title / global file title.
   for (i = 0; i < sdemuxers.size(); i++)
     if ((sdemuxers[i]->title != "") && sdemuxers[i]->ms_compat) {
-      verbose_info.push_back(std::string("title:") + escape(sdemuxers[i]->title));
+      info.add(mtx::id::title, sdemuxers[i]->title);
       break;
     }
 
-  id_result_container(join(" ", verbose_info));
+  id_result_container(info.get());
 
   for (i = 0; i < sdemuxers.size(); i++) {
-    verbose_info.clear();
+    info = mtx::id::info_c{};
 
-    if (sdemuxers[i]->language != "")
-      verbose_info.push_back(std::string("language:") + escape(sdemuxers[i]->language));
+    if (!sdemuxers[i]->language.empty())
+      info.add(mtx::id::language, sdemuxers[i]->language);
 
-    if ((sdemuxers[i]->title != "") && !sdemuxers[i]->ms_compat)
-      verbose_info.push_back(std::string("track_name:") + escape(sdemuxers[i]->title));
+    if (!sdemuxers[i]->title.empty() && !sdemuxers[i]->ms_compat)
+      info.add(mtx::id::track_name, sdemuxers[i]->title);
 
     if ((0 != sdemuxers[i]->display_width) && (0 != sdemuxers[i]->display_height))
-      verbose_info.push_back((boost::format("display_dimensions:%1%x%2%") % sdemuxers[i]->display_width % sdemuxers[i]->display_height).str());
+      info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % sdemuxers[i]->display_width % sdemuxers[i]->display_height);
 
     if (dynamic_cast<ogm_s_text_demuxer_c *>(sdemuxers[i].get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(sdemuxers[i].get()))
-      verbose_info.push_back("text_subtitles:1");
+      info.add(mtx::id::text_subtitles, 1);
 
     auto pixel_dimensions = sdemuxers[i]->get_pixel_dimensions();
     if (pixel_dimensions.first && pixel_dimensions.second)
-      verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % pixel_dimensions.first % pixel_dimensions.second).str());
+      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % pixel_dimensions.first % pixel_dimensions.second);
 
-    id_result_track(i, sdemuxers[i]->get_type(), sdemuxers[i]->get_codec(), verbose_info);
+    id_result_track(i, sdemuxers[i]->get_type(), sdemuxers[i]->get_codec(), info.get());
   }
 
   if (m_chapters.get())

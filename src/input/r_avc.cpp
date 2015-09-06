@@ -17,6 +17,7 @@
 #include "common/codec.h"
 #include "common/error.h"
 #include "common/memory.h"
+#include "common/id_info.h"
 #include "input/r_avc.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
@@ -138,6 +139,9 @@ avc_es_reader_c::read(generic_packetizer_c *,
 
 void
 avc_es_reader_c::identify() {
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_es_video);
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEG4_P10, "MPEG-4 part 10 ES"), "packetizer:mpeg4_p10_es_video");
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEG4_P10, "MPEG-4 part 10 ES"), info.get());
 }

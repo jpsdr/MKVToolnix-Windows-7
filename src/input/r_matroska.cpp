@@ -56,6 +56,7 @@
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
 #include "common/tags/tags.h"
+#include "common/id_info.h"
 #include "input/r_matroska.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
@@ -176,7 +177,7 @@ kax_track_t::fix_display_dimension_parameters() {
 }
 
 void
-kax_track_t::add_track_tags_to_identification(std::vector<std::string> &verbose_info) {
+kax_track_t::add_track_tags_to_identification(mtx::id::info_c &info) {
   if (!tags)
     return;
 
@@ -194,8 +195,8 @@ kax_track_t::add_track_tags_to_identification(std::vector<std::string> &verbose_
       auto value = mtx::tags::get_simple_value(*simple_tag);
 
       if (!name.empty())
-        verbose_info.emplace_back((boost::format("tag_%1%:%2%") % balg::to_lower_copy(name) % escape(value)).str());
-    }
+        info.add((boost::format("tag_%1%") % balg::to_lower_copy(name)).str(), value);
+}
   }
 }
 
@@ -2251,100 +2252,100 @@ kax_reader_c::set_headers() {
 
 void
 kax_reader_c::identify() {
-  std::vector<std::string> verbose_info;
+  auto info = mtx::id::info_c{};
 
   if (!m_title.empty())
-    verbose_info.push_back((boost::format("title:%1%") % escape(m_title)).str());
+    info.add(mtx::id::title, m_title);
   if (0 != m_segment_duration)
-    verbose_info.push_back((boost::format("duration:%1%") % m_segment_duration).str());
+    info.add(mtx::id::duration, m_segment_duration);
 
-  auto add_uid_info = [&](memory_cptr const &uid, std::string const &property) {
+  auto add_uid_info = [&info](memory_cptr const &uid, std::string const &property) {
     if (uid)
-      verbose_info.push_back((boost::format("%1%:%2%") % property % to_hex(uid, true)).str());
+      info.add(property, to_hex(uid, true));
   };
-  add_uid_info(m_segment_uid,          "segment_uid");
-  add_uid_info(m_next_segment_uid,     "next_segment_uid");
-  add_uid_info(m_previous_segment_uid, "previous_segment_uid");
+  add_uid_info(m_segment_uid,          mtx::id::segment_uid);
+  add_uid_info(m_next_segment_uid,     mtx::id::next_segment_uid);
+  add_uid_info(m_previous_segment_uid, mtx::id::previous_segment_uid);
 
-  id_result_container(verbose_info);
+  id_result_container(info.get());
 
   for (auto &track : m_tracks) {
     if (!track->ok)
       continue;
 
-    verbose_info.clear();
+    info = mtx::id::info_c{};
 
-    verbose_info.push_back((boost::format("number:%1%") % track->track_number).str());
+    info.add(mtx::id::number,               track->track_number);
     if (track->track_uid)
-      verbose_info.push_back((boost::format("uid:%1%") % track->track_uid).str());
-    verbose_info.push_back((boost::format("codec_id:%1%") % escape(track->codec_id)).str());
-    verbose_info.push_back((boost::format("codec_private_length:%1%") % track->private_size).str());
+      info.add(mtx::id::uid,                track->track_uid);
+    info.add(mtx::id::codec_id,             track->codec_id);
+    info.add(mtx::id::codec_private_length, track->private_size);
 
     if ((0 != track->private_size) && track->private_data)
-      verbose_info.push_back((boost::format("codec_private_data:%1%") % to_hex(static_cast<const unsigned char *>(track->private_data), track->private_size, true)).str());
+      info.add(mtx::id::codec_private_data, to_hex(static_cast<const unsigned char *>(track->private_data), track->private_size, true));
 
-    if (track->language != "")
-      verbose_info.push_back((boost::format("language:%1%") % escape(track->language)).str());
+    if (!track->language.empty())
+      info.add(mtx::id::language, track->language);
 
-    if (track->track_name != "")
-      verbose_info.push_back((boost::format("track_name:%1%") % escape(track->track_name)).str());
+    if (!track->track_name.empty())
+      info.add(mtx::id::track_name, track->track_name);
 
     if ((0 != track->v_width) && (0 != track->v_height))
-      verbose_info.push_back((boost::format("pixel_dimensions:%1%x%2%") % track->v_width % track->v_height).str());
+      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);
 
     if ((0 != track->v_dwidth) && (0 != track->v_dheight))
-      verbose_info.push_back((boost::format("display_dimensions:%1%x%2%") % track->v_dwidth % track->v_dheight).str());
+      info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % track->v_dwidth % track->v_dheight);
 
     if (stereo_mode_c::unspecified != track->v_stereo_mode)
-      verbose_info.push_back((boost::format("stereo_mode:%1%") % static_cast<int>(track->v_stereo_mode)).str());
+      info.add(mtx::id::stereo_mode, static_cast<int>(track->v_stereo_mode));
 
     if ((0 != track->v_pcleft) || (0 != track->v_pctop) || (0 != track->v_pcright) || (0 != track->v_pcbottom))
-      verbose_info.push_back((boost::format("cropping:%1%,%2%,%3%,%4%") % track->v_pcleft % track->v_pctop % track->v_pcright % track->v_pcbottom).str());
+      info.add(mtx::id::cropping, boost::format("cropping:%1%,%2%,%3%,%4%") % track->v_pcleft % track->v_pctop % track->v_pcright % track->v_pcbottom);
 
-    verbose_info.push_back((boost::format("default_track:%1%") % (track->default_track ? 1 : 0)).str());
-    verbose_info.push_back((boost::format("forced_track:%1%")  % (track->forced_track  ? 1 : 0)).str());
-    verbose_info.push_back((boost::format("enabled_track:%1%") % (track->enabled_track ? 1 : 0)).str());
+    info.add(mtx::id::default_track, track->default_track ? 1 : 0);
+    info.add(mtx::id::forced_track,  track->forced_track  ? 1 : 0);
+    info.add(mtx::id::enabled_track, track->enabled_track ? 1 : 0);
 
     if (track->codec.is(codec_c::type_e::V_MPEG4_P10))
-      verbose_info.push_back(track->ms_compat ? "packetizer:mpeg4_p10_es_video" : "packetizer:mpeg4_p10_video");
+      info.add(mtx::id::packetizer, track->ms_compat ? mtx::id::mpeg4_p10_es_video : mtx::id::mpeg4_p10_video);
     else if (track->codec.is(codec_c::type_e::V_MPEGH_P2))
-      verbose_info.push_back(track->ms_compat ? "packetizer:mpegh_p2_es_video"  : "packetizer:mpegh_p2_video");
+      info.add(mtx::id::packetizer, track->ms_compat ? mtx::id::mpegh_p2_es_video  : mtx::id::mpegh_p2_video);
 
     if (0 != track->default_duration)
-      verbose_info.push_back((boost::format("default_duration:%1%") % track->default_duration).str());
+      info.add(mtx::id::default_duration, track->default_duration);
 
     if ('a' == track->type) {
       if (0.0 != track->a_sfreq)
-        verbose_info.push_back((boost::format("audio_sampling_frequency:%1%") % track->a_sfreq).str());
+        info.add(mtx::id::audio_sampling_frequency, static_cast<int64_t>(track->a_sfreq));
       if (0 != track->a_channels)
-        verbose_info.push_back((boost::format("audio_channels:%1%") % track->a_channels).str());
+        info.add(mtx::id::audio_channels, track->a_channels);
 
     } else if ('s' == track->type) {
       if (track->codec.is(codec_c::type_e::S_SRT) || track->codec.is(codec_c::type_e::S_SSA_ASS) || track->codec.is(codec_c::type_e::S_KATE))
-        verbose_info.push_back("text_subtitles:1");
+        info.add(mtx::id::text_subtitles, 1);
     }
 
     if (track->content_decoder.has_encodings())
-      verbose_info.push_back((boost::format("content_encoding_algorithms:%1%") % escape(track->content_decoder.descriptive_algorithm_list())).str());
+      info.add(mtx::id::content_encoding_algorithms, track->content_decoder.descriptive_algorithm_list());
 
-    std::string info;
+    std::string codec_info;
     if (track->codec)
-      info = track->codec.get_name();
+      codec_info = track->codec.get_name();
 
     else if (track->ms_compat) {
       if (track->type == 'v') {
         // auto fourcc_str = fourcc_c{track->v_fourcc}.description();
-        // info            = track->codec.get_name(fourcc_str);
+        // codec_info            = track->codec.get_name(fourcc_str);
 
-        info = fourcc_c{track->v_fourcc}.description();
+        codec_info = fourcc_c{track->v_fourcc}.description();
 
       } else
-        info = (boost::format(Y("unknown, format tag 0x%|1$04x|")) % track->a_formattag).str();
+        codec_info = (boost::format(Y("unknown, format tag 0x%|1$04x|")) % track->a_formattag).str();
 
     } else
-      info = track->codec_id;
+      codec_info = track->codec_id;
 
-    track->add_track_tags_to_identification(verbose_info);
+    track->add_track_tags_to_identification(info);
 
     id_result_track(track->tnum,
                       track->type == 'v' ? ID_RESULT_TRACK_VIDEO
@@ -2352,7 +2353,7 @@ kax_reader_c::identify() {
                     : track->type == 'b' ? ID_RESULT_TRACK_BUTTONS
                     : track->type == 's' ? ID_RESULT_TRACK_SUBTITLES
                     :                      Y("unknown"),
-                    info, verbose_info);
+                    codec_info, info.get());
   }
 
   for (auto &attachment : g_attachments)

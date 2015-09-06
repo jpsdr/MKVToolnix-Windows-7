@@ -18,6 +18,7 @@
 #include "common/debugging.h"
 #include "common/endian.h"
 #include "common/error.h"
+#include "common/id_info.h"
 #include "common/math.h"
 #include "common/mp3.h"
 #include "common/mpeg1_2.h"
@@ -1359,36 +1360,40 @@ mpeg_ps_reader_c::finish() {
 
 void
 mpeg_ps_reader_c::identify() {
-  std::vector<std::string> verbose_info;
+  auto info = mtx::id::info_c{};
 
   auto multi_in = dynamic_cast<mm_multi_file_io_c *>(get_underlying_input());
   if (multi_in)
-    multi_in->create_verbose_identification_info(verbose_info);
+    multi_in->create_verbose_identification_info(info);
 
-  id_result_container(verbose_info);
+  id_result_container(info.get());
 
   size_t i;
   for (i = 0; i < tracks.size(); i++) {
     mpeg_ps_track_ptr &track = tracks[i];
 
-    verbose_info.clear();
+    info = mtx::id::info_c{};
 
     if (track->codec.is(codec_c::type_e::V_MPEG4_P10))
-      verbose_info.push_back("packetizer:mpeg4_p10_es_video");
+      info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_es_video);
 
-    verbose_info.push_back((boost::format("stream_id:%|1$02x| sub_stream_id:%|2$02x|") % track->id.id % track->id.sub_id).str());
+    info.add(mtx::id::stream_id,     boost::format("%|1$02x|") % track->id.id);
+    info.add(mtx::id::sub_stream_id, boost::format("%|1$02x|") % track->id.sub_id);
 
     if ((0 != track->v_dwidth) && (0 != track->v_dheight))
-      verbose_info.push_back((boost::format("display_dimensions:%1%x%2%") % track->v_dwidth % track->v_dheight).str());
+      info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % track->v_dwidth % track->v_dheight);
 
     if ('a' == track->type) {
-      verbose_info.push_back((boost::format("channels:%1%")        % track->a_channels).str());
-      verbose_info.push_back((boost::format("sample_rate:%1%")     % track->a_sample_rate).str());
-      verbose_info.push_back((boost::format("bits_per_sample:%1%") % track->a_bits_per_sample).str());
+      // info.add(mtx::id::audio_channels,           track->a_channels);
+      // info.add(mtx::id::audio_sampling_frequency, track->a_sample_rate);
+      // info.add(mtx::id::audio_bits_per_sample,    track->a_bits_per_sample);
+      info.add("channels",        track->a_channels);
+      info.add("sample_rate",     track->a_sample_rate);
+      info.add("bits_per_sample", track->a_bits_per_sample);
 
     } else if ('v' == track->type)
-      verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % track->v_width % track->v_height).str());
+      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);
 
-    id_result_track(i, 'a' == track->type ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO, track->codec.get_name(), verbose_info);
+    id_result_track(i, 'a' == track->type ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO, track->codec.get_name(), info.get());
   }
 }

@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 #include "common/debugging.h"
+#include "common/id_info.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/strings/formatting.h"
 
@@ -95,11 +96,11 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c *in) {
 }
 
 void
-mm_mpls_multi_file_io_c::create_verbose_identification_info(std::vector<std::string> &verbose_info) {
-  verbose_info.push_back("playlist:1");
-  verbose_info.push_back((boost::format("playlist_duration:%1%") % m_mpls_parser->get_playlist().duration.to_ns()).str());
-  verbose_info.push_back((boost::format("playlist_size:%1%")     % m_total_size)                                  .str());
-  verbose_info.push_back((boost::format("playlist_chapters:%1%") % m_mpls_parser->get_chapters().size())          .str());
+mm_mpls_multi_file_io_c::create_verbose_identification_info(mtx::id::info_c &info) {
+  info.add(mtx::id::playlist,          1);
+  info.add(mtx::id::playlist_duration, m_mpls_parser->get_playlist().duration.to_ns());
+  info.add(mtx::id::playlist_size,     m_total_size);
+  info.add(mtx::id::playlist_chapters, m_mpls_parser->get_chapters().size());
   for (auto &file : m_files)
-    verbose_info.push_back((boost::format("playlist_file:%1%") % escape(file.string())).str());
+    info.add(mtx::id::playlist_file, file.string());
 }

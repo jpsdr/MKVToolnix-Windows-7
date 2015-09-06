@@ -20,6 +20,7 @@
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/error.h"
+#include "common/id_info.h"
 #include "input/r_real.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
@@ -590,14 +591,14 @@ real_reader_c::identify() {
 
   size_t i;
   for (i = 0; i < demuxers.size(); i++) {
-    auto info    = std::vector<std::string>{};
+    auto info    = mtx::id::info_c{};
     auto demuxer = demuxers[i];
     auto type    = RMFF_TRACK_TYPE_AUDIO == demuxer->track->type ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO;
 
     if (RMFF_TRACK_TYPE_VIDEO == demuxer->track->type)
-      info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % demuxer->width % demuxer->height).str());
+      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % demuxer->width % demuxer->height);
 
-    id_result_track(demuxer->track->id, type, codec_c::get_name(demuxer->fourcc, demuxer->fourcc), info);
+    id_result_track(demuxer->track->id, type, codec_c::get_name(demuxer->fourcc, demuxer->fourcc), info.get());
   }
 }
 

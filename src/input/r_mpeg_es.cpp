@@ -20,6 +20,7 @@
 #include "common/error.h"
 #include "common/mm_io_x.h"
 #include "common/mpeg4_p2.h"
+#include "common/id_info.h"
 #include "input/r_mpeg_es.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
@@ -234,10 +235,10 @@ mpeg_es_reader_c::read_frame(M2VParser &parser,
 
 void
 mpeg_es_reader_c::identify() {
-  auto codec        = (boost::format("mpg%1%") % version).str();
-  auto verbose_info = std::vector<std::string>{};
-  verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % width % height).str());
+  auto codec = (boost::format("mpg%1%") % version).str();
+  auto info  = mtx::id::info_c{};
+  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % width % height);
 
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec, codec), verbose_info);
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec, codec), info.get());
 }

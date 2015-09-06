@@ -20,6 +20,7 @@
 #include "common/endian.h"
 #include "common/mm_io_x.h"
 #include "common/mpeg4_p10.h"
+#include "common/id_info.h"
 #include "input/r_flv.h"
 #include "merge/input_x.h"
 #include "output/p_aac.h"
@@ -327,12 +328,13 @@ flv_reader_c::identify() {
 
   size_t idx = 0;
   for (auto track : m_tracks) {
-    std::vector<std::string> verbose_info;
+    auto info = mtx::id::info_c{};
+
     if (track->m_fourcc.equiv("avc1"))
-      verbose_info.push_back("packetizer:mpeg4_p10_video");
+      info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_video);
 
     if (track->is_video())
-      verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % track->m_v_width % track->m_v_height).str());
+      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->m_v_width % track->m_v_height);
 
     id_result_track(idx, track->is_audio() ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO,
                       track->m_fourcc.equiv("AVC1") ? "AVC/h.264"
@@ -342,7 +344,7 @@ flv_reader_c::identify() {
                     : track->m_fourcc.equiv("AAC ") ? "AAC"
                     : track->m_fourcc.equiv("MP3 ") ? "MP3"
                     :                                 "Unknown",
-                    verbose_info);
+                    info.get());
     ++idx;
   }
 }

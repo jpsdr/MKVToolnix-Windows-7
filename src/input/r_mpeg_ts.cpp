@@ -24,6 +24,7 @@
 #include "common/mp3.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/ac3.h"
+#include "common/id_info.h"
 #include "common/iso639.h"
 #include "common/truehd.h"
 #include "common/mpeg1_2.h"
@@ -786,12 +787,12 @@ mpeg_ts_reader_c::calculate_crc(void const *buffer,
 
 void
 mpeg_ts_reader_c::identify() {
-  std::vector<std::string> verbose_info;
+  auto info    = mtx::id::info_c{};
   auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
   if (mpls_in)
-    mpls_in->create_verbose_identification_info(verbose_info);
+    mpls_in->create_verbose_identification_info(info);
 
-  id_result_container(verbose_info);
+  id_result_container(info.get());
 
   size_t i;
   for (i = 0; i < tracks.size(); i++) {
@@ -800,28 +801,31 @@ mpeg_ts_reader_c::identify() {
     if (!track->probed_ok || !track->codec)
       continue;
 
-    verbose_info.clear();
+    info = mtx::id::info_c{};
     if (!track->language.empty())
-      verbose_info.push_back((boost::format("language:%1%") % escape(track->language)).str());
+      info.add(mtx::id::language, track->language);
 
-    verbose_info.push_back((boost::format("ts_pid:%1%") % track->pid).str());
+    info.add(mtx::id::ts_pid, track->pid);
 
     if (ES_AUDIO_TYPE == track->type) {
-      verbose_info.push_back((boost::format("channels:%1%")        % track->a_channels).str());
-      verbose_info.push_back((boost::format("sample_rate:%1%")     % track->a_sample_rate).str());
-      verbose_info.push_back((boost::format("bits_per_sample:%1%") % track->a_bits_per_sample).str());
+      // info.add(mtx::id::audio_channels,           track->a_channels);
+      // info.add(mtx::id::audio_sampling_frequency, track->a_sample_rate);
+      // info.add(mtx::id::audio_bits_per_sample,    track->a_bits_per_sample);
+      info.add("channels",        track->a_channels);
+      info.add("sample_rate",     track->a_sample_rate);
+      info.add("bits_per_sample", track->a_bits_per_sample);
 
     } else if (ES_VIDEO_TYPE == track->type)
-      verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % track->v_width % track->v_height).str());
+      info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);
 
     if (ES_SUBT_TYPE == track->type)
-      verbose_info.push_back("text_subtitles:1");
+      info.add(mtx::id::text_subtitles, 1);
 
     std::string type = ES_AUDIO_TYPE == track->type ? ID_RESULT_TRACK_AUDIO
                      : ES_VIDEO_TYPE == track->type ? ID_RESULT_TRACK_VIDEO
                      :                                ID_RESULT_TRACK_SUBTITLES;
 
-    id_result_track(i, type, track->codec.get_name(), verbose_info);
+    id_result_track(i, type, track->codec.get_name(), info.get());
   }
 
   if (!m_chapter_timecodes.empty())

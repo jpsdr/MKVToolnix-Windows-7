@@ -15,6 +15,7 @@
 
 #include "common/codec.h"
 #include "common/hacks.h"
+#include "common/id_info.h"
 #include "common/iso639.h"
 #include "common/endian.h"
 #include "common/mm_io.h"
@@ -650,18 +651,17 @@ vobsub_reader_c::get_progress() {
 
 void
 vobsub_reader_c::identify() {
-  std::vector<std::string> verbose_info;
   size_t i;
 
   id_result_container();
 
   for (i = 0; i < tracks.size(); i++) {
-    verbose_info.clear();
+    auto info = mtx::id::info_c{};
 
     if (!tracks[i]->language.empty())
-      verbose_info.push_back(std::string("language:") + tracks[i]->language);
+      info.add(mtx::id::language, tracks[i]->language);
 
-    id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_VOBSUB, "VobSub"), verbose_info);
+    id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_VOBSUB, "VobSub"), info.get());
   }
 }
 

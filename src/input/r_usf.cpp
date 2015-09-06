@@ -16,6 +16,7 @@
 #include <sstream>
 
 #include "common/codec.h"
+#include "common/id_info.h"
 #include "common/iso639.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
@@ -211,19 +212,17 @@ usf_reader_c::try_to_parse_timecode(const char *s) {
 
 void
 usf_reader_c::identify() {
-  std::vector<std::string> verbose_info;
   size_t i;
 
   id_result_container();
 
   for (i = 0; m_tracks.size() > i; ++i) {
     auto track = m_tracks[i];
-
-    verbose_info.clear();
+    auto info  = mtx::id::info_c{};
 
     if (!track->m_language.empty())
-      verbose_info.push_back(std::string("language:") + escape(track->m_language));
+      info.add(mtx::id::language, track->m_language);
 
-    id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_USF, "USF"), verbose_info);
+    id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_USF, "USF"), info.get());
   }
 }

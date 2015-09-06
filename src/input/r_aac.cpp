@@ -18,6 +18,7 @@
 #include "common/codec.h"
 #include "common/error.h"
 #include "common/id3.h"
+#include "common/id_info.h"
 #include "input/r_aac.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
@@ -140,10 +141,11 @@ aac_reader_c::read(generic_packetizer_c *,
 
 void
 aac_reader_c::identify() {
-  std::string verbose_info = std::string("aac_is_sbr:") + std::string(AAC_PROFILE_SBR == m_aacheader.profile ? "true" : "unknown");
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::aac_is_sbr, AAC_PROFILE_SBR == m_aacheader.profile ? "true" : "unknown");
 
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AAC, "AAC"), verbose_info);
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AAC, "AAC"), info.get());
 }
 
 int

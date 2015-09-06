@@ -27,6 +27,7 @@
 #include "common/mpeg4_p2.h"
 #include "common/mpeg4_p10.h"
 #include "common/strings/formatting.h"
+#include "common/id_info.h"
 #include "input/r_avi.h"
 #include "input/subtitles.h"
 #include "merge/input_x.h"
@@ -812,7 +813,7 @@ avi_reader_c::get_progress() {
 }
 
 void
-avi_reader_c::extended_identify_mpeg4_l2(std::vector<std::string> &extended_info) {
+avi_reader_c::extended_identify_mpeg4_l2(mtx::id::info_c &info) {
   int size = AVI_frame_size(m_avi, 0);
   if (0 >= size)
     return;
@@ -839,7 +840,7 @@ avi_reader_c::extended_identify_mpeg4_l2(std::vector<std::string> &extended_info
       disp_height = std::llround(width / aspect_ratio);
     }
 
-    extended_info.push_back((boost::format("display_dimensions:%1%x%2%") % disp_width % disp_height).str());
+    info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % disp_width % disp_height);
   }
 }
 
@@ -857,20 +858,19 @@ avi_reader_c::identify_video() {
   if (!m_video_track_ok)
     return;
 
-  std::vector<std::string> extended_info;
-
+  auto info       = mtx::id::info_c{};
   auto codec      = codec_c::look_up(AVI_video_compressor(m_avi));
   auto fourcc_str = fourcc_c{AVI_video_compressor(m_avi)}.description();
 
   if (codec.is(codec_c::type_e::V_MPEG4_P2))
-    extended_identify_mpeg4_l2(extended_info);
+    extended_identify_mpeg4_l2(info);
 
   else if (codec.is(codec_c::type_e::V_MPEG4_P10))
-    extended_info.push_back("packetizer:mpeg4_p10_es_video");
+    info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_es_video);
 
-  extended_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % AVI_video_width(m_avi) % AVI_video_height(m_avi)).str());
+  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % AVI_video_width(m_avi) % AVI_video_height(m_avi));
 
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), join(" ", extended_info));
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), join(" ", info.get()));
 }
 
 void
@@ -894,16 +894,16 @@ void
 avi_reader_c::identify_subtitles() {
   size_t i;
   for (i = 0; m_subtitle_demuxers.size() > i; ++i) {
-    auto verbose_info = std::vector<std::string>{};
+    auto info = mtx::id::info_c{};
     if (   (avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type)
         || (avi_subs_demuxer_t::TYPE_SSA == m_subtitle_demuxers[i].m_type))
-      verbose_info.push_back("text_subtitles:1");
+      info.add(mtx::id::text_subtitles, 1);
 
     id_result_track(1 + AVI_audio_tracks(m_avi) + i, ID_RESULT_TRACK_SUBTITLES,
                       avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type ? codec_c::get_name(codec_c::type_e::S_SRT, "SRT")
                     : avi_subs_demuxer_t::TYPE_SSA == m_subtitle_demuxers[i].m_type ? codec_c::get_name(codec_c::type_e::S_SSA_ASS, "SSA/ASS")
                     :                                                                 "unknown",
-                    verbose_info);
+                    info.get());
   }
 }
 

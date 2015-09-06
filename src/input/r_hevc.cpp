@@ -16,6 +16,7 @@
 #include "common/codec.h"
 #include "common/error.h"
 #include "common/memory.h"
+#include "common/id_info.h"
 #include "input/r_hevc.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
@@ -133,10 +134,10 @@ hevc_es_reader_c::read(generic_packetizer_c *,
 
 void
 hevc_es_reader_c::identify() {
-  auto verbose_info = std::vector<std::string>{};
-  verbose_info.emplace_back("packetizer:mpegh_p2_es_video");
-  verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % m_width % m_height).str());
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::packetizer,       mtx::id::mpegh_p2_es_video);
+  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % m_width % m_height);
 
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEGH_P2, "HEVC"), verbose_info);
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEGH_P2, "HEVC"), info.get());
 }

@@ -17,6 +17,7 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/error.h"
+#include "common/id_info.h"
 #include "input/r_dirac.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
@@ -111,9 +112,9 @@ dirac_es_reader_c::read(generic_packetizer_c *,
 
 void
 dirac_es_reader_c::identify() {
-  auto verbose_info = std::vector<std::string>{};
-  verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % m_seqhdr.pixel_width % m_seqhdr.pixel_height).str());
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % m_seqhdr.pixel_width % m_seqhdr.pixel_height);
 
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_DIRAC, "Dirac"), verbose_info);
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_DIRAC, "Dirac"), info.get());
 }

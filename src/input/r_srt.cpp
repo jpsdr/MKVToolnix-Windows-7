@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/codec.h"
+#include "common/id_info.h"
 #include "input/r_srt.h"
 #include "input/subtitles.h"
 #include "merge/input_x.h"
@@ -81,6 +82,9 @@ srt_reader_c::get_progress() {
 
 void
 srt_reader_c::identify() {
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::text_subtitles, 1);
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_SRT, "SRT"), std::vector<std::string>{"text_subtitles:1"});
+  id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_SRT, "SRT"), info.get());
 }

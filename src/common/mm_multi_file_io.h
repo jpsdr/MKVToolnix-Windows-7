@@ -18,6 +18,10 @@
 
 #include "common/mm_io.h"
 
+namespace mtx { namespace id {
+class info_c;
+}}
+
 class mm_multi_file_io_c;
 using mm_multi_file_io_cptr = std::shared_ptr<mm_multi_file_io_c>;
 
@@ -50,7 +54,7 @@ public:
     return m_display_file_name;
   }
   virtual std::vector<bfs::path> get_file_names();
-  virtual void create_verbose_identification_info(std::vector<std::string> &verbose_info);
+  virtual void create_verbose_identification_info(mtx::id::info_c &info);
   virtual void display_other_file_info();
   virtual void enable_buffering(bool enable);
 

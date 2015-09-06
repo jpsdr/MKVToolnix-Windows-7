@@ -17,6 +17,7 @@
 
 #include "common/endian.h"
 #include "common/ivf.h"
+#include "common/id_info.h"
 #include "input/r_ivf.h"
 #include "output/p_vpx.h"
 #include "merge/input_x.h"
@@ -121,9 +122,9 @@ ivf_reader_c::read(generic_packetizer_c *,
 
 void
 ivf_reader_c::identify() {
-  auto verbose_info = std::vector<std::string>{};
-  verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % m_width % m_height).str());
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % m_width % m_height);
 
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, m_codec.get_name(), verbose_info);
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, m_codec.get_name(), info.get());
 }
