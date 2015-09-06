@@ -672,12 +672,9 @@ wav_reader_c::identify() {
   }
 
   auto info = mtx::id::info_c{};
-  // info.add(mtx::id::audio_channels,           get_uint16_le(&m_wheader.common.wChannels));
-  // info.add(mtx::id::audio_sampling_frequency, get_uint32_le(&m_wheader.common.dwSamplesPerSec));
-  // info.add(mtx::id::audio_bits_per_sample,    get_uint16_le(&m_wheader.common.wBitsPerSample));
-  info.add("channels",        get_uint16_le(&m_wheader.common.wChannels));
-  info.add("sample_rate",     get_uint32_le(&m_wheader.common.dwSamplesPerSec));
-  info.add("bits_per_sample", get_uint16_le(&m_wheader.common.wBitsPerSample));
+  info.add(mtx::id::audio_channels,           get_uint16_le(&m_wheader.common.wChannels));
+  info.add(mtx::id::audio_sampling_frequency, get_uint32_le(&m_wheader.common.dwSamplesPerSec));
+  info.add(mtx::id::audio_bits_per_sample,    get_uint16_le(&m_wheader.common.wBitsPerSample));
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_AUDIO, m_demuxer->m_codec.get_name(), info.get());

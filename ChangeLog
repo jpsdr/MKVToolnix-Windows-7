@@ -1,5 +1,12 @@
 2015-09-06  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: the verbose identification result for the MPEG program
+        stream, MPEG transport stream and WAV readers has been changed for
+        audio tracks in order to match the Matroska reader's result. The
+        old keys »channels«, »sample_rate« and »bits_per_sample« have been
+        replaced by »audio_channels«, »audio_sampling_frequency« and
+        »audio_bits_per_sample«.
+
         * mkvmerge: enhancement: the pixel width/height will be reported
         in verbose identification mode for all video tracks.
 

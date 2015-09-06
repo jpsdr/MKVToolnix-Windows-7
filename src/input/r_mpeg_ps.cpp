@@ -1384,12 +1384,9 @@ mpeg_ps_reader_c::identify() {
       info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % track->v_dwidth % track->v_dheight);
 
     if ('a' == track->type) {
-      // info.add(mtx::id::audio_channels,           track->a_channels);
-      // info.add(mtx::id::audio_sampling_frequency, track->a_sample_rate);
-      // info.add(mtx::id::audio_bits_per_sample,    track->a_bits_per_sample);
-      info.add("channels",        track->a_channels);
-      info.add("sample_rate",     track->a_sample_rate);
-      info.add("bits_per_sample", track->a_bits_per_sample);
+      info.add(mtx::id::audio_channels,           track->a_channels);
+      info.add(mtx::id::audio_sampling_frequency, track->a_sample_rate);
+      info.add(mtx::id::audio_bits_per_sample,    track->a_bits_per_sample);
 
     } else if ('v' == track->type)
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);
