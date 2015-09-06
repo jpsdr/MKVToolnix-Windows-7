@@ -1385,7 +1385,9 @@ mpeg_ps_reader_c::identify() {
       verbose_info.push_back((boost::format("channels:%1%")        % track->a_channels).str());
       verbose_info.push_back((boost::format("sample_rate:%1%")     % track->a_sample_rate).str());
       verbose_info.push_back((boost::format("bits_per_sample:%1%") % track->a_bits_per_sample).str());
-    }
+
+    } else if ('v' == track->type)
+      verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % track->v_width % track->v_height).str());
 
     id_result_track(i, 'a' == track->type ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO, track->codec.get_name(), verbose_info);
   }

@@ -590,10 +590,14 @@ real_reader_c::identify() {
 
   size_t i;
   for (i = 0; i < demuxers.size(); i++) {
+    auto info    = std::vector<std::string>{};
     auto demuxer = demuxers[i];
     auto type    = RMFF_TRACK_TYPE_AUDIO == demuxer->track->type ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO;
 
-    id_result_track(demuxer->track->id, type, codec_c::get_name(demuxer->fourcc, demuxer->fourcc));
+    if (RMFF_TRACK_TYPE_VIDEO == demuxer->track->type)
+      info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % demuxer->width % demuxer->height).str());
+
+    id_result_track(demuxer->track->id, type, codec_c::get_name(demuxer->fourcc, demuxer->fourcc), info);
   }
 }
 

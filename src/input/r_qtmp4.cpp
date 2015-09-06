@@ -1761,6 +1761,9 @@ qtmp4_reader_c::identify() {
     if (!dmx->language.empty())
       verbose_info.push_back((boost::format("language:%1%") % dmx->language).str());
 
+    if (dmx->is_video())
+      verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % dmx->v_width % dmx->v_height).str());
+
     id_result_track(dmx->id,
                     dmx->is_video() ? ID_RESULT_TRACK_VIDEO : dmx->is_audio() ? ID_RESULT_TRACK_AUDIO : dmx->is_subtitles() ? ID_RESULT_TRACK_SUBTITLES : ID_RESULT_TRACK_UNKNOWN,
                     dmx->codec.get_name(dmx->fourcc.description()),

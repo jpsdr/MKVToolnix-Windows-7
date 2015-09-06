@@ -133,6 +133,10 @@ hevc_es_reader_c::read(generic_packetizer_c *,
 
 void
 hevc_es_reader_c::identify() {
+  auto verbose_info = std::vector<std::string>{};
+  verbose_info.emplace_back("packetizer:mpegh_p2_es_video");
+  verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % m_width % m_height).str());
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEGH_P2, "HEVC"), "packetizer:mpegh_p2_es_video");
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEGH_P2, "HEVC"), verbose_info);
 }

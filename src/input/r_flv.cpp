@@ -331,6 +331,9 @@ flv_reader_c::identify() {
     if (track->m_fourcc.equiv("avc1"))
       verbose_info.push_back("packetizer:mpeg4_p10_video");
 
+    if (track->is_video())
+      verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % track->m_v_width % track->m_v_height).str());
+
     id_result_track(idx, track->is_audio() ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO,
                       track->m_fourcc.equiv("AVC1") ? "AVC/h.264"
                     : track->m_fourcc.equiv("FLV1") ? "Sorenson h.263 (Flash version)"

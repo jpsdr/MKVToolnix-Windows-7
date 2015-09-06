@@ -868,6 +868,8 @@ avi_reader_c::identify_video() {
   else if (codec.is(codec_c::type_e::V_MPEG4_P10))
     extended_info.push_back("packetizer:mpeg4_p10_es_video");
 
+  extended_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % AVI_video_width(m_avi) % AVI_video_height(m_avi)).str());
+
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), join(" ", extended_info));
 }
 

@@ -71,6 +71,8 @@ public:
   virtual bool is_header_packet(ogg_packet &op) {
     return op.packet[0] & 1;
   };
+
+  virtual std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
 };
 
 using ogm_demuxer_cptr = std::shared_ptr<ogm_demuxer_c>;

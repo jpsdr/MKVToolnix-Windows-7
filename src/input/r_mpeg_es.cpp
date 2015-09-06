@@ -234,7 +234,10 @@ mpeg_es_reader_c::read_frame(M2VParser &parser,
 
 void
 mpeg_es_reader_c::identify() {
-  auto codec = (boost::format("mpg%1%") % version).str();
+  auto codec        = (boost::format("mpg%1%") % version).str();
+  auto verbose_info = std::vector<std::string>{};
+  verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % width % height).str());
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec, codec));
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec, codec), verbose_info);
 }

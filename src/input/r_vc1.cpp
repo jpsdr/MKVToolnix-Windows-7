@@ -111,6 +111,9 @@ vc1_es_reader_c::read(generic_packetizer_c *,
 
 void
 vc1_es_reader_c::identify() {
+  auto verbose_info = std::vector<std::string>{};
+  verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % m_seqhdr.pixel_width % m_seqhdr.pixel_height).str());
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_VC1, "VC1"));
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_VC1, "VC1"), verbose_info);
 }

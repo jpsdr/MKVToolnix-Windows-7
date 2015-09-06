@@ -174,6 +174,7 @@ public:
   virtual void initialize();
   virtual generic_packetizer_c *create_packetizer();
   virtual void process_page(int64_t granulepos);
+  virtual std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
 };
 
 class ogm_v_avc_demuxer_c: public ogm_v_mscomp_demuxer_c {
@@ -183,6 +184,7 @@ public:
   ogm_v_avc_demuxer_c(ogm_reader_c *p_reader);
 
   virtual generic_packetizer_c *create_packetizer();
+  virtual std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
 };
 
 class ogm_v_theora_demuxer_c: public ogm_demuxer_c {
@@ -200,6 +202,7 @@ public:
   virtual generic_packetizer_c *create_packetizer();
   virtual void process_page(int64_t granulepos);
   virtual bool is_header_packet(ogg_packet &op);
+  virtual std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
 };
 
 class ogm_v_vp8_demuxer_c: public ogm_demuxer_c {
@@ -220,6 +223,7 @@ public:
   virtual void initialize();
   virtual generic_packetizer_c *create_packetizer();
   virtual void process_page(int64_t granulepos);
+  virtual std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
 };
 
 class ogm_s_kate_demuxer_c: public ogm_demuxer_c {
@@ -710,6 +714,10 @@ ogm_reader_c::identify() {
     if (dynamic_cast<ogm_s_text_demuxer_c *>(sdemuxers[i].get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(sdemuxers[i].get()))
       verbose_info.push_back("text_subtitles:1");
 
+    auto pixel_dimensions = sdemuxers[i]->get_pixel_dimensions();
+    if (pixel_dimensions.first && pixel_dimensions.second)
+      verbose_info.emplace_back((boost::format("pixel_dimensions:%1%x%2%") % pixel_dimensions.first % pixel_dimensions.second).str());
+
     id_result_track(i, sdemuxers[i]->get_type(), sdemuxers[i]->get_codec(), verbose_info);
   }
 
@@ -955,6 +963,12 @@ ogm_demuxer_c::process_header_page() {
     headers_read = true;
 }
 
+std::pair<unsigned int, unsigned int>
+ogm_demuxer_c::get_pixel_dimensions()
+  const {
+  return { 0, 0 };
+}
+
 // -----------------------------------------------------------
 
 ogm_a_aac_demuxer_c::ogm_a_aac_demuxer_c(ogm_reader_c *p_reader)
@@ -1193,6 +1207,13 @@ ogm_v_avc_demuxer_c::create_packetizer() {
   return vptzr;
 }
 
+std::pair<unsigned int, unsigned int>
+ogm_v_avc_demuxer_c::get_pixel_dimensions()
+  const {
+  auto sth = reinterpret_cast<stream_header *>(&packet_data[0]->get_buffer()[1]);
+  return { get_uint32_le(&sth->sh.video.width), get_uint32_le(&sth->sh.video.height) };
+}
+
 // -----------------------------------------------------------
 
 ogm_v_mscomp_demuxer_c::ogm_v_mscomp_demuxer_c(ogm_reader_c *p_reader)
@@ -1255,6 +1276,14 @@ ogm_v_mscomp_demuxer_c::create_packetizer() {
   show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
+}
+
+std::pair<unsigned int, unsigned int>
+ogm_v_mscomp_demuxer_c::get_pixel_dimensions()
+  const {
+  stream_header *sth = reinterpret_cast<stream_header *>(&packet_data[0]->get_buffer()[1]);
+
+  return { get_uint32_le(&sth->sh.video.width), get_uint32_le(&sth->sh.video.height) };
 }
 
 void
@@ -1373,6 +1402,12 @@ ogm_v_theora_demuxer_c::is_header_packet(ogg_packet &op) {
   return (0 != op.bytes) && (0x80 <= op.packet[0]) && (0x82 >= op.packet[0]);
 }
 
+std::pair<unsigned int, unsigned int>
+ogm_v_theora_demuxer_c::get_pixel_dimensions()
+  const {
+  return { theora.fmbw, theora.fmbh };
+}
+
 // -----------------------------------------------------------
 
 ogm_v_vp8_demuxer_c::ogm_v_vp8_demuxer_c(ogm_reader_c *p_reader,
@@ -1470,6 +1505,12 @@ ogm_v_vp8_demuxer_c::process_page(int64_t granulepos) {
            % pts % inv_count % distance
            % (is_keyframe ? " key" : "") % op.bytes % units_processed % frame_num);
   }
+}
+
+std::pair<unsigned int, unsigned int>
+ogm_v_vp8_demuxer_c::get_pixel_dimensions()
+  const {
+  return { pixel_width, pixel_height };
 }
 
 // -----------------------------------------------------------
