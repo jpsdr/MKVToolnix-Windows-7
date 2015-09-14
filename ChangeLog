@@ -5,6 +5,11 @@
         the sample rate and the bits per sample where applicable. Part of
         the implementation of #1295.
 
+2015-09-13  Moritz Bunkus  <moritz@bunkus.org>
+
+        * all: bug fix: parsing of strings containing negative values or
+        timecodes was broken on 32bit architectures. Fixes #1425.
+
 2015-09-06  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: the verbose identification result for the MPEG program

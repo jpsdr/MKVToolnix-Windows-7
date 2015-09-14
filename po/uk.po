@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-09-05 15:42+0200\n"
-"PO-Revision-Date: 2015-09-05 13:29+0200\n"
+"POT-Creation-Date: 2015-09-05 09:51+0200\n"
+"PO-Revision-Date: 2015-09-07 19:46+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
 "Language: uk\n"
@@ -2030,7 +2030,7 @@ msgstr "<не змінювати>"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:95
 msgid "<no output file>"
-msgstr "<немає вхідного файлу>"
+msgstr "<немає вихідного файлу>"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:195
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:80
@@ -2579,7 +2579,8 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:781
 msgid "Always switch to the job output tool after starting one immediately"
 msgstr ""
-"Завжди перемикатися в режим стеження прогресу відразу після запуску завдання"
+"Завжди переходити до розділу \"Вихідна інформація завдання\" відразу після "
+"запуску завдання"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:782
 msgid "Always use a &default description when adding a job to the queue"
@@ -2602,7 +2603,7 @@ msgstr "Вкладення з ID %1% не було знайдено.\n"
 
 #: src/merge/mkvmerge.cpp:1693
 msgid "An empty file name is not valid.\n"
-msgstr "Не заповнена назва файлу некоректно.\n"
+msgstr "Не дозволяється залишати назва файлу не вказаною.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:292
 msgid "An escaped file name corresponding to the next segment."
@@ -3758,14 +3759,13 @@ msgstr ""
 msgid "Default flag: %1%"
 msgstr "Прапорець типового використання: %1%"
 
+#: src/mkvtoolnix-gui/merge/track_model.cpp:43
+msgid "Default track"
+msgstr "Типова доріжка"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:806
 msgid "Default track &language to set:"
 msgstr "Прапорець типової доріжки:"
-
-#: src/mkvtoolnix-gui/merge/track_model.cpp:43
-#, fuzzy
-msgid "Default track in output"
-msgstr "Типова доріжка"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:793
 msgid "Defaults for new chapter entries:"
@@ -4828,6 +4828,8 @@ msgid ""
 "If checked several short animations used throughout the program as visual "
 "clues for the user will be disabled."
 msgstr ""
+"Якщо вибрано, то декілька коротких анімацій, що використовуються в роботі "
+"програми як візуальні підказки для користувача, будуть вимкнені. "
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:197
 msgid ""
@@ -4859,30 +4861,41 @@ msgid ""
 "If disabled the GUI will ask whether you want to add the dropped files, "
 "append them or add them as additional parts."
 msgstr ""
+"Якщо вимкнено, то GUI буде запитувати чи хочете ви додати перетягнуті на "
+"вікно програми файли, приєднати їх чи додати їх як додаткові частини."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:116
 msgid ""
 "If disabled the GUI will let you enter a description for a job when adding "
 "it to the queue."
 msgstr ""
+"Якщо вимкнено, то GUI буде давати можливість вам ввести опис для завдання "
+"при додаванні його до черги."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:150
 msgid ""
 "If enabled all subtitle tracks will have their »default track« flag set to "
 "»no« when they're added."
 msgstr ""
+"Якщо ввімкнено, то всі доріжки субтитрів будуть мати значення їхнього "
+"прапорця \"типова доріжка\" як »Ні« після додавання до списку."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:118
 msgid ""
 "If enabled the GUI will automatically switch to the job output tool whenever "
 "you start a job (e.g. by pressing »start muxing«)."
 msgstr ""
+"Якщо ввімкнено, то GUI буде автоматично перемикатися до розділу \"Вихідна "
+"інформація завдань\" при запуску завдання на виконання (наприклад, при "
+"натисненні \"Почати мультиплексування\")."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:117
 msgid ""
 "If enabled the first tab in the »job output« tool will not be cleared when a "
 "new job starts."
 msgstr ""
+"Якщо ввімкнено, то перша вкладка в розділі \"Вихідна інформація завдання\" "
+"не буде очищатись при запуску нового завдання на виконання."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:136
 msgid ""
@@ -4890,24 +4903,33 @@ msgid ""
 "playlists in the chapter editor if it is located within five seconds of the "
 "end of the movie."
 msgstr ""
+"Якщо ввімкнено, то останній запис буде пропущено при завантаженні розділів з "
+"таких списків відтворення до Редактору розділів, якщо запис знаходиться в "
+"межах п'яти секунд закінчення фільму."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:160
 msgid ""
 "If enabled the output file name controls will always be visible no matter "
 "which tab is currently shown."
 msgstr ""
+"Якщо ввімкнено, то поле \"Вихідний файл:\" буде завжди видиме незалежно від "
+"того, яка вкладка активна."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
 msgid ""
 "If enabled the program will ask for confirmation before overwriting files "
 "and jobs."
 msgstr ""
+"Якщо ввімкнено, то програма буде питати підтвердження перед перезаписом "
+"файлів і завдань."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:94
 msgid ""
 "If enabled the program will check online whether or not a new release of "
 "MKVToolNix is available on the home page."
 msgstr ""
+"Якщо ввімкнено, то програма буде перевіряти онлайн чи доступна нова версія "
+"MKVToolNix на домашній веб-сторінці."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:206
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:207
@@ -4916,6 +4938,8 @@ msgid ""
 "If enabled then tracks of this type will always be set to be muxed "
 "regardless of their language."
 msgstr ""
+"Якщо ввімкнено, то доріжки данного типу будуть завжди відмічатись для "
+"мультиплексування незалежно від значення їхнього поля мови."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:123
 msgid ""
@@ -5549,7 +5573,7 @@ msgstr "Ця програма була написана Moritz Bunkus <moritz@bu
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:438
 msgid "Job &output"
-msgstr "Вихідне &завдання"
+msgstr "&Вихідна інформація завдання"
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:80
 msgid "Job queue"
@@ -5557,7 +5581,7 @@ msgstr "Черга завдань"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:780
 msgid "Jobs and job output"
-msgstr "Завдання та вихідна інформація щодо виконання завдань"
+msgstr "Завдання та вихідна інформація завдань"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:175
 msgid "Jobs to execute:"
@@ -7328,7 +7352,7 @@ msgstr "Зберегти інформацію як"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "Save job output"
-msgstr "Зберегти вихідне завдання"
+msgstr "Зберегти вихідну інформацію завдання"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:159
 msgid "Save option file"
@@ -9823,7 +9847,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:102
 msgid "This is also done when quitting the application."
-msgstr ""
+msgstr "Це також виконується при виході з програми."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:95
 msgid "This is done at startup and at most once within 24 hours."
@@ -11342,7 +11366,7 @@ msgstr "Інфо"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:148
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 msgid "job output"
-msgstr "Вихідне завдання"
+msgstr "Вихідна інформація завдання"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:147
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
@@ -11690,7 +11714,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:148
 msgid ""
 "mkvmerge also turns this on if the output file name's extension is \"webm\"."
-msgstr ""
+msgstr "mkvmerge також вмикає це, якщо тип вихідного файла - \"webm\"."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:140
 msgid ""
