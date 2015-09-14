@@ -17,6 +17,7 @@
 #include "common/error.h"
 #include "common/hacks.h"
 #include "common/id3.h"
+#include "common/id_info.h"
 #include "common/mm_io_x.h"
 #include "input/r_mp3.h"
 #include "merge/input_x.h"
@@ -110,8 +111,12 @@ mp3_reader_c::read(generic_packetizer_c *,
 
 void
 mp3_reader_c::identify() {
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::audio_channels,           m_mp3header.channels);
+  info.add(mtx::id::audio_sampling_frequency, m_mp3header.sampling_frequency);
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_mp3header.get_codec().get_name());
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_mp3header.get_codec().get_name(), info.get());
 }
 
 int

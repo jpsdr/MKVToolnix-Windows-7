@@ -18,6 +18,7 @@
 
 #include "common/codec.h"
 #include "common/flac.h"
+#include "common/id_info.h"
 #include "input/r_flac.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
@@ -55,13 +56,13 @@ flac_reader_c::flac_reader_c(const track_info_c &ti,
 
 void
 flac_reader_c::read_headers() {
+  if (!parse_file(g_identifying))
+    throw mtx::input::header_parsing_x();
+
   if (g_identifying)
     return;
 
   show_demuxer_info();
-
-  if (!parse_file())
-    throw mtx::input::header_parsing_x();
 
   try {
     uint32_t block_size = 0;
@@ -97,7 +98,7 @@ flac_reader_c::create_packetizer(int64_t) {
 }
 
 bool
-flac_reader_c::parse_file() {
+flac_reader_c::parse_file(bool for_identification_only) {
   FLAC__StreamDecoderState state;
   flac_block_t block;
   uint64_t u, old_pos;
@@ -107,7 +108,8 @@ flac_reader_c::parse_file() {
   m_in->setFilePointer(0);
   metadata_parsed = false;
 
-  mxinfo(Y("+-> Parsing the FLAC file. This can take a LONG time.\n"));
+  if (!for_identification_only)
+    mxinfo(Y("+-> Parsing the FLAC file. This can take a LONG time.\n"));
 
   init_flac_decoder();
   result = FLAC__stream_decoder_process_until_end_of_metadata(m_flac_decoder.get());
@@ -116,6 +118,9 @@ flac_reader_c::parse_file() {
 
   if (!metadata_parsed)
     mxerror_fn(m_ti.m_fname, Y("No metadata block found. This file is broken.\n"));
+
+  if (for_identification_only)
+    return true;
 
   FLAC__stream_decoder_get_decode_position(m_flac_decoder.get(), &u);
 
@@ -209,6 +214,7 @@ flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
     case FLAC__METADATA_TYPE_STREAMINFO:
       memcpy(&stream_info, &metadata->data.stream_info, sizeof(FLAC__StreamMetadata_StreamInfo));
       sample_rate     = metadata->data.stream_info.sample_rate;
+      channels        = metadata->data.stream_info.channels;
       metadata_parsed = true;
 
       mxverb(2, boost::format("flac_reader: STREAMINFO block (%1% bytes):\n") % metadata->length);
@@ -263,8 +269,12 @@ flac_reader_c::flac_eof_cb() {
 
 void
 flac_reader_c::identify() {
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::audio_channels,           channels);
+  info.add(mtx::id::audio_sampling_frequency, sample_rate);
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, "FLAC");
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, "FLAC", info.get());
 }
 
 #else  // HAVE_FLAC_FORMAT_H

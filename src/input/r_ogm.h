@@ -46,6 +46,7 @@ public:
   bool in_use;
 
   int display_width, display_height;
+  int channels, sample_rate, bits_per_sample;
 
 public:
   ogm_demuxer_c(ogm_reader_c *p_reader);

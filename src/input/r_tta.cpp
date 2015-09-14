@@ -19,6 +19,7 @@
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/id3.h"
+#include "common/id_info.h"
 #include "input/r_tta.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
@@ -56,9 +57,6 @@ tta_reader_c::tta_reader_c(const track_info_c &ti,
 
 void
 tta_reader_c::read_headers() {
-  if (g_identifying)
-    return;
-
   try {
     int tag_size = skip_id3v2_tag(*m_in);
     if (0 > tag_size)
@@ -67,6 +65,9 @@ tta_reader_c::read_headers() {
 
     if (m_in->read(&header, sizeof(tta_file_header_t)) != sizeof(tta_file_header_t))
       mxerror_fn(m_ti.m_fname, Y("The file header is too short.\n"));
+
+    if (g_identifying)
+      return;
 
     uint64_t seek_sum  = m_in->getFilePointer() + 4 - tag_size;
     m_size            -= id3_tag_present_at_end(*m_in);
@@ -138,6 +139,13 @@ tta_reader_c::read(generic_packetizer_c *,
 
 void
 tta_reader_c::identify() {
+  auto info = mtx::id::info_c{};
+
+  info.add(mtx::id::audio_channels,           get_uint16_le(&header.channels));
+  info.add(mtx::id::audio_sampling_frequency, get_uint32_le(&header.sample_rate));
+  if (get_uint16_le(&header.bits_per_sample))
+    info.add(mtx::id::audio_bits_per_sample,  get_uint16_le(&header.bits_per_sample));
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_TTA, "TTA"));
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_TTA, "TTA"), info.get());
 }

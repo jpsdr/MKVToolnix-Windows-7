@@ -142,7 +142,11 @@ aac_reader_c::read(generic_packetizer_c *,
 void
 aac_reader_c::identify() {
   auto info = mtx::id::info_c{};
-  info.add(mtx::id::aac_is_sbr, AAC_PROFILE_SBR == m_aacheader.profile ? "true" : "unknown");
+  info.add(mtx::id::aac_is_sbr,               AAC_PROFILE_SBR == m_aacheader.profile ? "true" : "unknown");
+  info.add(mtx::id::audio_channels,           m_aacheader.channels);
+  info.add(mtx::id::audio_sampling_frequency, m_aacheader.sample_rate);
+  if (m_aacheader.output_sample_rate)
+    info.add(mtx::id::audio_output_sampling_frequency, m_aacheader.output_sample_rate);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AAC, "AAC"), info.get());

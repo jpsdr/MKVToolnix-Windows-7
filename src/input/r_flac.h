@@ -38,7 +38,7 @@ struct flac_block_t {
 class flac_reader_c: public generic_reader_c, public mtx::flac::decoder_c {
 private:
   memory_cptr m_header;
-  int sample_rate{};
+  int sample_rate{}, channels{};
   bool metadata_parsed{};
   uint64_t samples{};
   std::vector<flac_block_t> blocks;
@@ -72,7 +72,7 @@ public:
   virtual FLAC__bool flac_eof_cb();
 
 protected:
-  virtual bool parse_file();
+  virtual bool parse_file(bool for_identification_only);
 };
 
 #else  // HAVE_FLAC_FORMAT_H

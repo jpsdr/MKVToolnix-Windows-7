@@ -18,6 +18,7 @@
 #include "common/codec.h"
 #include "common/error.h"
 #include "common/id3.h"
+#include "common/id_info.h"
 #include "input/r_ac3.h"
 #include "merge/input_x.h"
 #include "output/p_ac3.h"
@@ -109,8 +110,12 @@ ac3_reader_c::read(generic_packetizer_c *,
 
 void
 ac3_reader_c::identify() {
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::audio_channels,           m_ac3header.m_channels);
+  info.add(mtx::id::audio_sampling_frequency, m_ac3header.m_sample_rate);
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AC3, "AC3"));
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AC3, "AC3"), info.get());
 }
 
 int

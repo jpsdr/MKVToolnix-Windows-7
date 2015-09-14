@@ -1763,6 +1763,13 @@ qtmp4_reader_c::identify() {
     if (dmx->is_video())
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % dmx->v_width % dmx->v_height);
 
+    else if (dmx->is_audio()) {
+      info.add(mtx::id::audio_channels,           dmx->a_channels);
+      info.add(mtx::id::audio_sampling_frequency, dmx->a_samplerate);
+      if (dmx->a_bitdepth)
+        info.add(mtx::id::audio_bits_per_sample,  dmx->a_bitdepth);
+    }
+
     id_result_track(dmx->id,
                     dmx->is_video() ? ID_RESULT_TRACK_VIDEO : dmx->is_audio() ? ID_RESULT_TRACK_AUDIO : dmx->is_subtitles() ? ID_RESULT_TRACK_SUBTITLES : ID_RESULT_TRACK_UNKNOWN,
                     dmx->codec.get_name(dmx->fourcc.description()),

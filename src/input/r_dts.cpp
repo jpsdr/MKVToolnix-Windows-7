@@ -22,6 +22,7 @@
 #include "common/debugging.h"
 #include "common/dts.h"
 #include "common/error.h"
+#include "common/id_info.h"
 #include "common/mm_io_x.h"
 #include "input/r_dts.h"
 #include "merge/input_x.h"
@@ -181,8 +182,12 @@ dts_reader_c::read(generic_packetizer_c *,
 
 void
 dts_reader_c::identify() {
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::audio_channels,           m_dtsheader.get_total_num_audio_channels());
+  info.add(mtx::id::audio_sampling_frequency, m_dtsheader.core_sampling_frequency);
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_codec.get_name());
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_codec.get_name(), info.get());
 }
 
 dts_reader_c::chunks_t

@@ -17,6 +17,7 @@
 
 #include "common/alac.h"
 #include "common/endian.h"
+#include "common/id_info.h"
 #include "common/mm_io_x.h"
 #include "common/strings/formatting.h"
 #include "input/r_coreaudio.h"
@@ -50,7 +51,7 @@ coreaudio_reader_c::coreaudio_reader_c(const track_info_c &ti,
   , m_bytes_per_packet{}
   , m_frames_per_packet{}
   , m_channels{}
-  , m_bites_per_sample{}
+  , m_bits_per_sample{}
   , m_debug_headers{"coreaudio_reader|coreaudio_reader_headers"}
   , m_debug_chunks{ "coreaudio_reader|coreaudio_reader_chunks"}
   , m_debug_packets{"coreaudio_reader|coreaudio_reader_packets"}
@@ -62,12 +63,19 @@ coreaudio_reader_c::~coreaudio_reader_c() {
 
 void
 coreaudio_reader_c::identify() {
-  if (m_supported) {
-    id_result_container();
-    id_result_track(0, ID_RESULT_TRACK_AUDIO, m_codec.get_name(m_codec_name));
-
-  } else
+  if (!m_supported) {
     id_result_container_unsupported(m_in->get_file_name(), (boost::format("CoreAudio (%1%)") % m_codec_name).str());
+    return;
+  }
+
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::audio_channels,           m_channels);
+  info.add(mtx::id::audio_sampling_frequency, static_cast<int64_t>(m_sample_rate));
+  if (m_bits_per_sample)
+    info.add(mtx::id::audio_bits_per_sample,  m_bits_per_sample);
+
+  id_result_container();
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_codec.get_name(m_codec_name), info.get());
 }
 
 void
@@ -105,7 +113,7 @@ coreaudio_reader_c::dump_headers()
                         "    magic cookie:      %10%\n"
                         )
           % m_ti.m_fname
-          % m_codec_name % m_supported % m_sample_rate % m_flags % m_bytes_per_packet % m_frames_per_packet % m_channels % m_bites_per_sample
+          % m_codec_name % m_supported % m_sample_rate % m_flags % m_bytes_per_packet % m_frames_per_packet % m_channels % m_bits_per_sample
           % (m_magic_cookie ? (boost::format("present, size %1%") % m_magic_cookie->get_size()).str() : std::string{"not present"})
           );
 
@@ -278,7 +286,7 @@ coreaudio_reader_c::parse_desc_chunk() {
     m_bytes_per_packet  = chunk.read_uint32_be();
     m_frames_per_packet = chunk.read_uint32_be();
     m_channels          = chunk.read_uint32_be();
-    m_bites_per_sample  = chunk.read_uint32_be();
+    m_bits_per_sample   = chunk.read_uint32_be();
 
     if (m_codec.is(codec_c::type_e::A_ALAC))
       m_supported = true;

@@ -195,9 +195,6 @@ ogm_a_flac_demuxer_c::ogm_a_flac_demuxer_c(ogm_reader_c *p_reader,
                                            oggflac_mode_e p_mode)
   : ogm_demuxer_c(p_reader)
   , flac_header_packets(0)
-  , sample_rate(0)
-  , channels(0)
-  , bits_per_sample(0)
   , mode(p_mode)
 {
   codec = codec_c::look_up(codec_c::type_e::A_FLAC);

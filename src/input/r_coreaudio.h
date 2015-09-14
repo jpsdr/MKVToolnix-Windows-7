@@ -48,7 +48,7 @@ private:
   bool m_supported;
 
   double m_sample_rate;
-  unsigned int m_flags, m_bytes_per_packet, m_frames_per_packet, m_channels, m_bites_per_sample;
+  unsigned int m_flags, m_bytes_per_packet, m_frames_per_packet, m_channels, m_bits_per_sample;
 
   samples_to_timecode_converter_c m_frames_to_timecode;
 

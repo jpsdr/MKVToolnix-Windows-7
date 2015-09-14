@@ -336,6 +336,13 @@ flv_reader_c::identify() {
     if (track->is_video())
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->m_v_width % track->m_v_height);
 
+    else if (track->is_audio()) {
+      info.add(mtx::id::audio_channels,           track->m_a_channels);
+      info.add(mtx::id::audio_sampling_frequency, track->m_a_sample_rate);
+      if (track->m_a_bits_per_sample)
+        info.add(mtx::id::audio_bits_per_sample,  track->m_a_bits_per_sample);
+    }
+
     id_result_track(idx, track->is_audio() ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO,
                       track->m_fourcc.equiv("AVC1") ? "AVC/h.264"
                     : track->m_fourcc.equiv("FLV1") ? "Sorenson h.263 (Flash version)"

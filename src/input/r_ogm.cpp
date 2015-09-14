@@ -59,6 +59,8 @@ struct ogm_frame_t {
 
 class ogm_a_aac_demuxer_c: public ogm_demuxer_c {
 public:
+  int profile{}, output_sample_rate{};
+  bool sbr{};
 
 public:
   ogm_a_aac_demuxer_c(ogm_reader_c *p_reader);
@@ -68,6 +70,8 @@ public:
   virtual const char *get_type() {
     return ID_RESULT_TRACK_AUDIO;
   };
+
+  virtual void initialize() override;
 };
 
 class ogm_a_ac3_demuxer_c: public ogm_demuxer_c {
@@ -81,6 +85,8 @@ public:
   virtual const char *get_type() {
     return ID_RESULT_TRACK_AUDIO;
   };
+
+  virtual void initialize() override;
 };
 
 class ogm_a_mp3_demuxer_c: public ogm_demuxer_c {
@@ -94,6 +100,8 @@ public:
   virtual const char *get_type() {
     return ID_RESULT_TRACK_AUDIO;
   };
+
+  virtual void initialize() override;
 };
 
 class ogm_a_pcm_demuxer_c: public ogm_demuxer_c {
@@ -107,6 +115,8 @@ public:
   virtual const char *get_type() {
     return ID_RESULT_TRACK_AUDIO;
   };
+
+  virtual void initialize() override;
 };
 
 class ogm_a_opus_demuxer_c: public ogm_demuxer_c {
@@ -125,6 +135,8 @@ public:
   virtual const char *get_type() {
     return ID_RESULT_TRACK_AUDIO;
   };
+
+  virtual void initialize() override;
 };
 
 debugging_option_c ogm_a_opus_demuxer_c::ms_debug{"opus"};
@@ -142,6 +154,8 @@ public:
   virtual const char *get_type() {
     return ID_RESULT_TRACK_AUDIO;
   };
+
+  virtual void initialize() override;
 };
 
 class ogm_s_text_demuxer_c: public ogm_demuxer_c {
@@ -719,6 +733,11 @@ ogm_reader_c::identify() {
     if (pixel_dimensions.first && pixel_dimensions.second)
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % pixel_dimensions.first % pixel_dimensions.second);
 
+    if (sdemuxers[i]->channels)
+      info.add(mtx::id::audio_channels,           sdemuxers[i]->channels);
+    if (sdemuxers[i]->sample_rate)
+      info.add(mtx::id::audio_sampling_frequency, sdemuxers[i]->sample_rate);
+
     id_result_track(i, sdemuxers[i]->get_type(), sdemuxers[i]->get_codec(), info.get());
   }
 
@@ -887,6 +906,9 @@ ogm_demuxer_c::ogm_demuxer_c(ogm_reader_c *p_reader)
   , in_use(false)
   , display_width(0)
   , display_height(0)
+  , channels{}
+  , sample_rate{}
+  , bits_per_sample{}
 {
   memset(&os, 0, sizeof(ogg_stream_state));
 }
@@ -978,12 +1000,8 @@ ogm_a_aac_demuxer_c::ogm_a_aac_demuxer_c(ogm_reader_c *p_reader)
   codec = codec_c::look_up(codec_c::type_e::A_AAC);
 }
 
-generic_packetizer_c *
-ogm_a_aac_demuxer_c::create_packetizer() {
-  int profile, channels, sample_rate, output_sample_rate;
-  stream_header *sth;
-  bool sbr = false;
-
+void
+ogm_a_aac_demuxer_c::initialize() {
   if ((packet_data[0]->get_size() >= (sizeof(stream_header) + 5)) &&
       (aac::parse_audio_specific_config(packet_data[0]->get_buffer() + sizeof(stream_header) + 5,
                       packet_data[0]->get_size()   - sizeof(stream_header) - 5,
@@ -992,7 +1010,7 @@ ogm_a_aac_demuxer_c::create_packetizer() {
       profile = AAC_PROFILE_SBR;
 
   } else {
-    sth         = (stream_header *)&packet_data[0]->get_buffer()[1];
+    auto sth    = reinterpret_cast<stream_header *>(&packet_data[0]->get_buffer()[1]);
     channels    = get_uint16_le(&sth->sh.audio.channels);
     sample_rate = get_uint64_le(&sth->samples_per_unit);
     profile     = AAC_PROFILE_LC;
@@ -1001,7 +1019,10 @@ ogm_a_aac_demuxer_c::create_packetizer() {
   mxverb(2,
          boost::format("ogm_reader: %1%/%2%: profile %3%, channels %4%, sample_rate %5%, sbr %6%, output_sample_rate %7%\n")
          % m_ti.m_id % m_ti.m_fname % profile % channels % sample_rate % sbr % output_sample_rate);
+}
 
+generic_packetizer_c *
+ogm_a_aac_demuxer_c::create_packetizer() {
   generic_packetizer_c *ptzr_obj = new aac_packetizer_c(reader, m_ti, profile, sample_rate, channels, true);
   if (sbr)
     ptzr_obj->set_audio_output_sampling_freq(output_sample_rate);
@@ -1019,10 +1040,16 @@ ogm_a_ac3_demuxer_c::ogm_a_ac3_demuxer_c(ogm_reader_c *p_reader)
   codec = codec_c::look_up(codec_c::type_e::A_AC3);
 }
 
+void
+ogm_a_ac3_demuxer_c::initialize() {
+  auto sth    = reinterpret_cast<stream_header *>(packet_data[0]->get_buffer() + 1);
+  channels    = get_uint16_le(&sth->sh.audio.channels);
+  sample_rate = get_uint64_le(&sth->samples_per_unit);
+}
+
 generic_packetizer_c *
 ogm_a_ac3_demuxer_c::create_packetizer() {
-  stream_header        *sth      = (stream_header *)(packet_data[0]->get_buffer() + 1);
-  generic_packetizer_c *ptzr_obj = new ac3_packetizer_c(reader, m_ti, get_uint64_le(&sth->samples_per_unit), get_uint16_le(&sth->sh.audio.channels), 0);
+  auto ptzr_obj = new ac3_packetizer_c(reader, m_ti, sample_rate, channels, 0);
 
   show_packetizer_info(m_ti.m_id, ptzr_obj);
 
@@ -1037,10 +1064,16 @@ ogm_a_mp3_demuxer_c::ogm_a_mp3_demuxer_c(ogm_reader_c *p_reader)
   codec = codec_c::look_up(codec_c::type_e::A_MP3);
 }
 
+void
+ogm_a_mp3_demuxer_c::initialize() {
+  auto sth    = reinterpret_cast<stream_header *>(packet_data[0]->get_buffer() + 1);
+  channels    = get_uint16_le(&sth->sh.audio.channels);
+  sample_rate = get_uint64_le(&sth->samples_per_unit);
+}
+
 generic_packetizer_c *
 ogm_a_mp3_demuxer_c::create_packetizer() {
-  stream_header        *sth      = (stream_header *)(packet_data[0]->get_buffer() + 1);
-  generic_packetizer_c *ptzr_obj = new mp3_packetizer_c(reader, m_ti, get_uint64_le(&sth->samples_per_unit), get_uint16_le(&sth->sh.audio.channels), true);
+  auto ptzr_obj = new mp3_packetizer_c(reader, m_ti, sample_rate, channels, true);
 
   show_packetizer_info(m_ti.m_id, ptzr_obj);
 
@@ -1055,10 +1088,17 @@ ogm_a_pcm_demuxer_c::ogm_a_pcm_demuxer_c(ogm_reader_c *p_reader)
   codec = codec_c::look_up(codec_c::type_e::A_PCM);
 }
 
+void
+ogm_a_pcm_demuxer_c::initialize() {
+  auto sth        = reinterpret_cast<stream_header *>(packet_data[0]->get_buffer() + 1);
+  channels        = get_uint16_le(&sth->sh.audio.channels);
+  sample_rate     = get_uint64_le(&sth->samples_per_unit);
+  bits_per_sample = get_uint16_le(&sth->bits_per_sample);
+}
+
 generic_packetizer_c *
 ogm_a_pcm_demuxer_c::create_packetizer() {
-  stream_header        *sth      = (stream_header *)(packet_data[0]->get_buffer() + 1);
-  generic_packetizer_c *ptzr_obj = new pcm_packetizer_c(reader, m_ti, get_uint64_le(&sth->samples_per_unit), get_uint16_le(&sth->sh.audio.channels), get_uint16_le(&sth->bits_per_sample));
+  auto ptzr_obj = new pcm_packetizer_c(reader, m_ti, sample_rate, channels, bits_per_sample);
 
   show_packetizer_info(m_ti.m_id, ptzr_obj);
 
@@ -1072,6 +1112,30 @@ ogm_a_vorbis_demuxer_c::ogm_a_vorbis_demuxer_c(ogm_reader_c *p_reader)
 {
   codec              = codec_c::look_up(codec_c::type_e::A_VORBIS);
   num_header_packets = 3;
+}
+
+void
+ogm_a_vorbis_demuxer_c::initialize() {
+  vorbis_info vi;
+  vorbis_comment vc;
+  ogg_packet packet;
+
+  memset(&packet, 0, sizeof(ogg_packet));
+
+  packet.packet = packet_data[0]->get_buffer();
+  packet.bytes  = packet_data[0]->get_size();
+  packet.b_o_s  = 1;
+
+  vorbis_info_init(&vi);
+  vorbis_comment_init(&vc);
+
+  vorbis_synthesis_headerin(&vi, &vc, &packet);
+
+  sample_rate = vi.rate;
+  channels    = vi.channels;
+
+  vorbis_info_clear(&vi);
+  vorbis_comment_clear(&vc);
 }
 
 generic_packetizer_c *
@@ -1145,6 +1209,13 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
 
     reader->m_reader_packetizers[ptzr]->process(packet);
   }
+}
+
+void
+ogm_a_opus_demuxer_c::initialize() {
+  auto id_header = mtx::opus::id_header_t::decode(packet_data[0]);
+  sample_rate    = id_header.input_sample_rate;
+  channels       = id_header.channels;
 }
 
 // -----------------------------------------------------------

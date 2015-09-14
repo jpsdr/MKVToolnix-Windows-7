@@ -16,6 +16,7 @@
 #include "common/codec.h"
 #include "common/error.h"
 #include "common/id3.h"
+#include "common/id_info.h"
 #include "common/mm_io_x.h"
 #include "input/r_truehd.h"
 #include "merge/input_x.h"
@@ -160,9 +161,21 @@ truehd_reader_c::read(generic_packetizer_c *,
 void
 truehd_reader_c::identify() {
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(m_header->is_truehd() ? codec_c::type_e::A_TRUEHD : codec_c::type_e::A_MLP, m_header->is_truehd() ? "TrueHD" : "MLP"));
-  if (m_ac3_header.m_valid)
-    id_result_track(1, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AC3, "AC3"));
+
+  auto info = mtx::id::info_c{};
+  info.add(mtx::id::audio_channels,           m_header->m_channels);
+  info.add(mtx::id::audio_sampling_frequency, m_header->m_sampling_rate);
+
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(m_header->is_truehd() ? codec_c::type_e::A_TRUEHD : codec_c::type_e::A_MLP, m_header->is_truehd() ? "TrueHD" : "MLP"), info.get());
+
+  if (!m_ac3_header.m_valid)
+    return;
+
+  info = mtx::id::info_c{};
+  info.add(mtx::id::audio_channels,           m_ac3_header.m_channels);
+  info.add(mtx::id::audio_sampling_frequency, m_ac3_header.m_sample_rate);
+
+  id_result_track(1, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_AC3, "AC3"), info.get());
 }
 
 bool

@@ -17,6 +17,7 @@
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/error.h"
+#include "common/id_info.h"
 #include "input/r_wavpack.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
@@ -228,6 +229,13 @@ wavpack_reader_c::read(generic_packetizer_c *,
 
 void
 wavpack_reader_c::identify() {
+  auto info = mtx::id::info_c{};
+
+  info.add(mtx::id::audio_channels,           meta.channel_count);
+  info.add(mtx::id::audio_sampling_frequency, meta.sample_rate);
+  if (meta.bits_per_sample)
+    info.add(mtx::id::audio_bits_per_sample,  meta.bits_per_sample);
+
   id_result_container();
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_WAVPACK4, "WAVPACK"));
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_WAVPACK4, "WAVPACK"), info.get());
 }
