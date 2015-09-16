@@ -141,6 +141,61 @@
     </message>
 </context>
 <context>
+    <name>QScrollBar</name>
+    <message>
+        <source>Top</source>
+        <translation>Góra</translation>
+    </message>
+    <message>
+        <source>Scroll down</source>
+        <translation>Przewiń w dół</translation>
+    </message>
+    <message>
+        <source>Scroll here</source>
+        <translation>Przewiń tutaj</translation>
+    </message>
+    <message>
+        <source>Scroll left</source>
+        <translation>Przewiń w lewo</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation>Dół</translation>
+    </message>
+    <message>
+        <source>Page up</source>
+        <translation>Strona w górę</translation>
+    </message>
+    <message>
+        <source>Page right</source>
+        <translation>Strona w prawo</translation>
+    </message>
+    <message>
+        <source>Scroll up</source>
+        <translation>Przewiń w górę</translation>
+    </message>
+    <message>
+        <source>Scroll right</source>
+        <translation>Przewiń w prawo</translation>
+    </message>
+    <message>
+        <source>Left edge</source>
+        <translation>Lewa krawędź</translation>
+    </message>
+    <message>
+        <source>Page down</source>
+        <translation>Strona w dół</translation>
+    </message>
+    <message>
+        <source>Page left</source>
+        <translation>Strona w lewo</translation>
+    </message>
+    <message>
+        <source>Right edge</source>
+        <translation>Prawa krawędź</translation>
+    </message>
+</context>
+<context>
     <name>QLineEdit</name>
     <message>
         <source>Cu&amp;t</source>
@@ -237,6 +292,16 @@
     <message>
         <source>Cancel</source>
         <translation>Anuluj</translation>
+    </message>
+</context>
+<context>
+    <name>QCupsJobWidget</name>
+    <message>
+        <source>Top Secret</source>
+        <translation>
+
+
+</translation>
     </message>
 </context>
 <context>

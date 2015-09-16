@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-09-05 15:42+0200\n"
-"PO-Revision-Date: 2015-09-06 05:23+0200\n"
+"PO-Revision-Date: 2015-09-15 17:02+0200\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -1170,9 +1170,8 @@ msgid "&Download"
 msgstr "&Pobierz"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:202
-#, fuzzy
 msgid "&Duration of each entry in seconds:"
-msgstr "Minimalny czas trwania dla listy odtwarzania w sekundach:"
+msgstr "&Czas trwania każdej pozycji w sekundach:"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:307
 msgid "&Edit in corresponding tool and remove from queue"
@@ -1221,7 +1220,7 @@ msgstr "&GUI"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:159
 msgid "&Generate sub-chapters"
-msgstr "&Generuj podrozdziały"
+msgstr "&Utwórz podrozdziały"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:432
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:465
@@ -1937,15 +1936,15 @@ msgstr ", pozycja %1%"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:255
 msgid "--- Errors emitted by job '%1' started on %2 ---"
-msgstr "--- Błędy emitowane przez zadanie: '%1', rozpoczęte o: %2 ---"
+msgstr "--- Błędy emitowane przez zadanie: \"%1\", rozpoczęte o: %2 ---"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:250
 msgid "--- Output of job '%1' started on %2 ---"
-msgstr "--- Postęp zadania: '%1', rozpoczętego o: %2 ---"
+msgstr "--- Postęp zadania: \"%1\", rozpoczętego o: %2 ---"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:254
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
-msgstr "--- Ostrzeżenia emitowane przez zadanie: '%1', rozpoczęte o: %2 ---"
+msgstr "--- Ostrzeżenia emitowane przez zadanie: \"%1\", rozpoczęte o: %2 ---"
 
 #: src/propedit/propedit_cli_parser.cpp:242
 msgid ""
@@ -3113,11 +3112,11 @@ msgstr ""
 "zostanie zapisany w pliku wyjściowym.\n"
 
 #: src/merge/generic_reader.cpp:376
-#, fuzzy, boost-format
+#, boost-format
 msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
-msgstr[0] "Rozdziały: %1% pozycji"
-msgstr[1] "Rozdziały: %1% pozycji"
+msgstr[0] "Rozdziały: %1% pozycja"
+msgstr[1] "Rozdziały: %1% pozycje"
 msgstr[2] "Rozdziały: %1% pozycji"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1433
@@ -3717,7 +3716,7 @@ msgstr "&Ustaw domyślny zestaw znaków na:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:809
 msgid "Default add&itional command line options:"
-msgstr "&Domyślne i dodatkowe opcje linii komend:"
+msgstr "&Dodatkowe opcje linii komend:"
 
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:350
@@ -4492,7 +4491,7 @@ msgstr "Zakończono o:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
 msgid "First entry to &renumber:"
-msgstr ""
+msgstr "Pierwsza pozycja do &przenumerowania:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1419
 msgid "Fix bitstream timing info"
@@ -4641,9 +4640,8 @@ msgid "General options"
 msgstr "Opcje ogólne"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
-#, fuzzy
 msgid "Generate sub-chapters"
-msgstr "dziel według rozdziałów"
+msgstr "Utwórz podrozdziały"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
 msgid "Generating a number of chapters spaced evenly apart"
@@ -4663,11 +4661,11 @@ msgid "Global tags:"
 msgstr "Tagi globalne:"
 
 #: src/merge/generic_reader.cpp:385
-#, fuzzy, boost-format
+#, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
-msgstr[0] "Tagi globalne: %1% pozycji"
-msgstr[1] "Tagi globalne: %1% pozycji"
+msgstr[0] "Tagi globalne: %1% pozycja"
+msgstr[1] "Tagi globalne: %1% pozycje"
 msgstr[2] "Tagi globalne: %1% pozycji"
 
 #: src/common/file_types.cpp:81
@@ -6159,7 +6157,7 @@ msgstr "Nie znaleziono numeru wersji.\n"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:196
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:182
 msgid "No file has been opened yet."
-msgstr "Żaden plik nie został otwarty."
+msgstr "Żaden plik nie został jeszcze otwarty."
 
 #: src/info/mkvinfo.cpp:1728 src/propedit/options.cpp:33
 msgid "No file name given.\n"
@@ -6188,7 +6186,7 @@ msgstr "Żadne zadanie nie zostało jeszcze rozpoczęte."
 
 #: src/mkvtoolnix-gui/forms/merge/tool.h:218
 msgid "No merge job has been opened yet."
-msgstr "Żadne zadanie nie zostało otwarte."
+msgstr "Żadne zadanie nie zostało jeszcze otwarte."
 
 #: src/input/r_flac.cpp:118
 msgid "No metadata block found. This file is broken.\n"
@@ -6361,18 +6359,16 @@ msgid "Nothing to do.\n"
 msgstr "Nie ma nic do zrobienia.\n"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:199
-#, fuzzy
 msgid "Nu&mber of entries to create:"
-msgstr "Ilość rozdziałów:"
+msgstr "&Ilość pozycji do utworzenia:"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:247
 msgid "Number of chapters:"
 msgstr "Ilość rozdziałów:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:178
-#, fuzzy
 msgid "Number of entries to &renumber:"
-msgstr "Ilość rozdziałów:"
+msgstr "Ilość pozycji do &przenumerowania:"
 
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:350
@@ -7908,7 +7904,7 @@ msgstr "Rozpocznij &muksowanie"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:304
 msgid "Start jobs &immediately"
-msgstr "&Rozpocznij zadania w trybie natychmiastowym"
+msgstr "&Rozpocznij zadania natychmiast"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:303
 msgid "Start jobs &manually"
@@ -11020,9 +11016,8 @@ msgid "after specific timecodes"
 msgstr "...po określonym czasie:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
-#, fuzzy
 msgid "all entries"
-msgstr "%1 pozycji"
+msgstr "wszystkie pozycje"
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:145
 msgid "always ask the user"
