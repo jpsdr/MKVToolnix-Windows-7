@@ -340,16 +340,20 @@ generic_reader_c::display_identification_results() {
 
   mxinfo(boost::format(format_file) % m_ti.m_fname % m_id_results_container.info);
 
-  if (g_identify_verbose && !m_id_results_container.verbose_info.empty())
+  if (g_identify_verbose && !m_id_results_container.verbose_info.empty()) {
+    brng::sort(m_id_results_container.verbose_info);
     mxinfo(boost::format(" [%1%]") % join(" ", m_id_results_container.verbose_info));
+  }
 
   mxinfo("\n");
 
   for (auto &result : m_id_results_tracks) {
     mxinfo(boost::format(format_track) % result.id % result.type % result.info);
 
-    if (g_identify_verbose && !result.verbose_info.empty())
+    if (g_identify_verbose && !result.verbose_info.empty()) {
+      brng::sort(result.verbose_info);
       mxinfo(boost::format(" [%1%]") % join(" ", result.verbose_info));
+    }
 
     mxinfo("\n");
   }
