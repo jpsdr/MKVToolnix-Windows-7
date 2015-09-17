@@ -290,6 +290,9 @@ mpeg_ts_track_c::new_stream_a_dts() {
     return FILE_STATUS_MOREDATA;
 
   m_apply_dts_timecode_fix = true;
+  a_channels               = a_dts_header.get_total_num_audio_channels();
+  a_sample_rate            = a_dts_header.core_sampling_frequency;
+
   codec.set_specialization(a_dts_header.get_codec_specialization());
 
   return 0;
