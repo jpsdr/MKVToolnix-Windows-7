@@ -40,8 +40,8 @@ TrackModel::~TrackModel() {
 
 void
 TrackModel::retranslateUi() {
-  setHorizontalHeaderLabels(          QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID") << QY("Default track in output"));
-  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("codec") <<  Q("type") <<  Q("muxThis")  <<  Q("language") <<  Q("name") <<  Q("sourceFile")  <<  Q("id") <<  Q("defaultTrackFlag"));
+  setHorizontalHeaderLabels(          QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID") << QY("Default track in output") << QY("Properties"));
+  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("codec") <<  Q("type") <<  Q("muxThis")  <<  Q("language") <<  Q("name") <<  Q("sourceFile")  <<  Q("id") <<  Q("defaultTrackFlag")        <<  Q("properties"));
 
   horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
@@ -76,7 +76,7 @@ TrackModel::setTracks(QList<Track *> &tracks) {
 QList<QStandardItem *>
 TrackModel::createRow(Track *track) {
   auto items = QList<QStandardItem *>{};
-  for (int idx = 0; idx < 8; ++idx)
+  for (int idx = 0; idx < 9; ++idx)
     items << new QStandardItem{};
 
   setItemsFromTrack(items, track);
@@ -95,6 +95,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[5]->setText(QFileInfo{ track->m_file->m_fileName }.fileName());
   items[6]->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
   items[7]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("yes") : QY("no"));
+  items[8]->setText(summarizeProperties(*track));
 
   items[0]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
   items[0]->setCheckable(true);
@@ -658,6 +659,32 @@ TrackModel::updateEffectiveDefaultTrackFlags() {
 
   for (auto &track : *m_tracks)
     trackUpdated(track);
+}
+
+QString
+TrackModel::summarizeProperties(Track const &track) {
+  auto properties = QStringList{};
+
+  if (track.isAudio()) {
+    if (track.isPropertySet("audio_sampling_frequency"))
+      properties << QY("%1 Hz").arg(track.m_properties.value(Q("audio_sampling_frequency")));
+
+    if (track.isPropertySet("audio_channels")) {
+      auto channels = track.m_properties.value(Q("audio_channels")).toInt();
+      properties << QNY("%1 channel", "%1 channels", channels).arg(channels);
+    }
+
+    if (track.isPropertySet("audio_bits_per_sample")) {
+      auto bitsPerSample = track.m_properties.value(Q("audio_bits_per_sample")).toInt();
+      properties << QNY("%1 bit per sample", "%1 bits per sample", bitsPerSample).arg(bitsPerSample);
+    }
+
+  } else if (track.isVideo()) {
+    if (track.isPropertySet("pixel_dimensions"))
+      properties << QY("%1 pixels").arg(track.m_properties.value(Q("pixel_dimensions")));
+  }
+
+  return properties.join(Q(", "));
 }
 
 }}}

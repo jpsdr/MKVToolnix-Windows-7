@@ -74,6 +74,8 @@ public:
   virtual bool isRegular() const;
   virtual bool isAppended() const;
 
+  virtual bool isPropertySet(QString const &property) const;
+
   virtual void setDefaults();
   virtual QString extractAudioDelayFromFileName() const;
 

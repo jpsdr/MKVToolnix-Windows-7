@@ -92,6 +92,12 @@ Track::isRegular()
   return isAudio() || isVideo() || isSubtitles() || isButtons();
 }
 
+bool
+Track::isPropertySet(QString const &property)
+  const {
+  return m_properties.contains(property) && !m_properties.value(property).isEmpty();
+}
+
 void
 Track::setDefaults() {
   auto &settings = Util::Settings::get();

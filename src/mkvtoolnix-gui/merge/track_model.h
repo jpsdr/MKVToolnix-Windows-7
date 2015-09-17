@@ -69,6 +69,8 @@ protected:
   bool hasUnsetTrackRole(QModelIndex const &idx = QModelIndex{});
 
   void sortTracks(QList<Track *> &tracks, bool reverse = false);
+
+  static QString summarizeProperties(Track const &track);
 };
 
 }}}
