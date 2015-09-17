@@ -219,7 +219,21 @@ mpeg_ts_track_c::new_stream_v_hevc() {
 
 int
 mpeg_ts_track_c::new_stream_v_vc1() {
-  return 0 == pes_payload->get_size() ? FILE_STATUS_MOREDATA : 0;
+  if (!m_vc1_parser)
+    m_vc1_parser = std::make_shared<vc1::es_parser_c>();
+
+  m_vc1_parser->add_bytes(pes_payload->get_buffer(), pes_payload->get_size());
+
+  if (!m_vc1_parser->is_sequence_header_available())
+    return FILE_STATUS_MOREDATA;
+
+  auto seqhdr = vc1::sequence_header_t{};
+  m_vc1_parser->get_sequence_header(seqhdr);
+
+  v_width  = seqhdr.pixel_width;
+  v_height = seqhdr.pixel_height;
+
+  return 0;
 }
 
 int

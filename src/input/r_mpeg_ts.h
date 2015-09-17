@@ -30,6 +30,10 @@
 #include "merge/generic_reader.h"
 #include "mpegparser/M2VParser.h"
 
+namespace vc1 {
+class es_parser_c;
+}
+
 enum mpeg_ts_pid_type_e {
   PAT_TYPE      = 0,
   PMT_TYPE      = 1,
@@ -307,6 +311,7 @@ public:
   mtx::hevc::es_parser_cptr m_hevc_parser;
   truehd_parser_cptr m_truehd_parser;
   std::shared_ptr<M2VParser> m_m2v_parser;
+  std::shared_ptr<vc1::es_parser_c> m_vc1_parser;
 
   unsigned int skip_packet_data_bytes;
 
