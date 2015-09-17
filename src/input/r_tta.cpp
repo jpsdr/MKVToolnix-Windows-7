@@ -143,8 +143,7 @@ tta_reader_c::identify() {
 
   info.add(mtx::id::audio_channels,           get_uint16_le(&header.channels));
   info.add(mtx::id::audio_sampling_frequency, get_uint32_le(&header.sample_rate));
-  if (get_uint16_le(&header.bits_per_sample))
-    info.add(mtx::id::audio_bits_per_sample,  get_uint16_le(&header.bits_per_sample));
+  info.add(mtx::id::audio_bits_per_sample,    get_uint16_le(&header.bits_per_sample));
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(codec_c::type_e::A_TTA, "TTA"), info.get());

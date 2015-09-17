@@ -1757,8 +1757,7 @@ qtmp4_reader_c::identify() {
     else if (dmx->codec.is(codec_c::type_e::V_MPEGH_P2))
       info.add(mtx::id::packetizer, mtx::id::mpegh_p2_video);
 
-    if (!dmx->language.empty())
-      info.add(mtx::id::language, dmx->language);
+    info.add(mtx::id::language, dmx->language);
 
     if (dmx->is_video())
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % dmx->v_width % dmx->v_height);
@@ -1766,8 +1765,7 @@ qtmp4_reader_c::identify() {
     else if (dmx->is_audio()) {
       info.add(mtx::id::audio_channels,           dmx->a_channels);
       info.add(mtx::id::audio_sampling_frequency, dmx->a_samplerate);
-      if (dmx->a_bitdepth)
-        info.add(mtx::id::audio_bits_per_sample,  dmx->a_bitdepth);
+      info.add(mtx::id::audio_bits_per_sample,    dmx->a_bitdepth);
     }
 
     id_result_track(dmx->id,

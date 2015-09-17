@@ -2276,19 +2276,19 @@ kax_reader_c::identify() {
     info = mtx::id::info_c{};
 
     info.add(mtx::id::number,               track->track_number);
-    if (track->track_uid)
-      info.add(mtx::id::uid,                track->track_uid);
+    info.add(mtx::id::uid,                  track->track_uid);
     info.add(mtx::id::codec_id,             track->codec_id);
-    info.add(mtx::id::codec_private_length, track->private_size);
+    info.set(mtx::id::codec_private_length, track->private_size);
+    info.add(mtx::id::language,             track->language);
+    info.add(mtx::id::track_name,           track->track_name);
+    info.add(mtx::id::stereo_mode,          static_cast<int>(track->v_stereo_mode), static_cast<int>(stereo_mode_c::unspecified));
+    info.add(mtx::id::default_duration,     track->default_duration);
+    info.set(mtx::id::default_track,        track->default_track ? 1 : 0);
+    info.set(mtx::id::forced_track,         track->forced_track  ? 1 : 0);
+    info.set(mtx::id::enabled_track,        track->enabled_track ? 1 : 0);
 
     if ((0 != track->private_size) && track->private_data)
       info.add(mtx::id::codec_private_data, to_hex(static_cast<const unsigned char *>(track->private_data), track->private_size, true));
-
-    if (!track->language.empty())
-      info.add(mtx::id::language, track->language);
-
-    if (!track->track_name.empty())
-      info.add(mtx::id::track_name, track->track_name);
 
     if ((0 != track->v_width) && (0 != track->v_height))
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);
@@ -2296,29 +2296,17 @@ kax_reader_c::identify() {
     if ((0 != track->v_dwidth) && (0 != track->v_dheight))
       info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % track->v_dwidth % track->v_dheight);
 
-    if (stereo_mode_c::unspecified != track->v_stereo_mode)
-      info.add(mtx::id::stereo_mode, static_cast<int>(track->v_stereo_mode));
-
     if ((0 != track->v_pcleft) || (0 != track->v_pctop) || (0 != track->v_pcright) || (0 != track->v_pcbottom))
       info.add(mtx::id::cropping, boost::format("cropping:%1%,%2%,%3%,%4%") % track->v_pcleft % track->v_pctop % track->v_pcright % track->v_pcbottom);
-
-    info.add(mtx::id::default_track, track->default_track ? 1 : 0);
-    info.add(mtx::id::forced_track,  track->forced_track  ? 1 : 0);
-    info.add(mtx::id::enabled_track, track->enabled_track ? 1 : 0);
 
     if (track->codec.is(codec_c::type_e::V_MPEG4_P10))
       info.add(mtx::id::packetizer, track->ms_compat ? mtx::id::mpeg4_p10_es_video : mtx::id::mpeg4_p10_video);
     else if (track->codec.is(codec_c::type_e::V_MPEGH_P2))
       info.add(mtx::id::packetizer, track->ms_compat ? mtx::id::mpegh_p2_es_video  : mtx::id::mpegh_p2_video);
 
-    if (0 != track->default_duration)
-      info.add(mtx::id::default_duration, track->default_duration);
-
     if ('a' == track->type) {
-      if (0.0 != track->a_sfreq)
-        info.add(mtx::id::audio_sampling_frequency, static_cast<int64_t>(track->a_sfreq));
-      if (0 != track->a_channels)
-        info.add(mtx::id::audio_channels, track->a_channels);
+      info.add(mtx::id::audio_sampling_frequency, static_cast<int64_t>(track->a_sfreq));
+      info.add(mtx::id::audio_channels,           track->a_channels);
 
     } else if ('s' == track->type) {
       if (track->codec.is(codec_c::type_e::S_SRT) || track->codec.is(codec_c::type_e::S_SSA_ASS) || track->codec.is(codec_c::type_e::S_KATE))

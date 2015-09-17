@@ -883,8 +883,7 @@ avi_reader_c::identify_audio() {
 
     info.add(mtx::id::audio_channels,           AVI_audio_channels(m_avi));
     info.add(mtx::id::audio_sampling_frequency, AVI_audio_rate(m_avi));
-    if (AVI_audio_bits(m_avi))
-      info.add(mtx::id::audio_bits_per_sample,  AVI_audio_bits(m_avi));
+    info.add(mtx::id::audio_bits_per_sample,    AVI_audio_bits(m_avi));
 
     unsigned int audio_format = AVI_audio_format(m_avi);
     alWAVEFORMATEX *wfe       = m_avi->wave_format_ex[i];

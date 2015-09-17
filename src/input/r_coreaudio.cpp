@@ -71,8 +71,7 @@ coreaudio_reader_c::identify() {
   auto info = mtx::id::info_c{};
   info.add(mtx::id::audio_channels,           m_channels);
   info.add(mtx::id::audio_sampling_frequency, static_cast<int64_t>(m_sample_rate));
-  if (m_bits_per_sample)
-    info.add(mtx::id::audio_bits_per_sample,  m_bits_per_sample);
+  info.add(mtx::id::audio_bits_per_sample,    m_bits_per_sample);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_AUDIO, m_codec.get_name(m_codec_name), info.get());

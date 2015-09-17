@@ -601,8 +601,7 @@ real_reader_c::identify() {
     else if (RMFF_TRACK_TYPE_AUDIO == demuxer->track->type) {
       info.add(mtx::id::audio_channels,           demuxer->channels);
       info.add(mtx::id::audio_sampling_frequency, demuxer->samples_per_second);
-      if (demuxer->bits_per_sample)
-        info.add(mtx::id::audio_bits_per_sample,  demuxer->bits_per_sample);
+      info.add(mtx::id::audio_bits_per_sample,    demuxer->bits_per_sample);
     }
 
     id_result_track(demuxer->track->id, type, codec_c::get_name(demuxer->fourcc, demuxer->fourcc), info.get());

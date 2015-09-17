@@ -65,9 +65,35 @@ protected:
   std::vector<std::string> m_info;
 
 public:
-  template<typename T> info_c &add(std::string const &key, T const &value) {
+  template<typename T> info_c &
+  set(std::string const &key,
+      T const &value) {
     m_info.emplace_back((boost::format("%1%:%2%") % escape(key) % escape((boost::format("%1%") % value).str())).str());
     return *this;
+  }
+
+  template<typename T> info_c &
+  add(std::string const &key,
+      T const &value,
+      T const &unset_value = T{}) {
+    if (value != unset_value)
+      set(key, value);
+    return *this;
+  }
+
+  info_c &
+  add(std::string const &key,
+      char const *value,
+      std::string const &unset_value = {}) {
+    if (std::string{value} != unset_value)
+      set(key, value);
+    return *this;
+  }
+
+  info_c &
+  add(std::string const &key,
+      boost::format const &value) {
+    return add(key, value.str());
   }
 
   std::vector<std::string> const &get() const {

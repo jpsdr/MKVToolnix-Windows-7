@@ -717,8 +717,7 @@ ogm_reader_c::identify() {
   for (i = 0; i < sdemuxers.size(); i++) {
     info = mtx::id::info_c{};
 
-    if (!sdemuxers[i]->language.empty())
-      info.add(mtx::id::language, sdemuxers[i]->language);
+    info.add(mtx::id::language, sdemuxers[i]->language);
 
     if (!sdemuxers[i]->title.empty() && !sdemuxers[i]->ms_compat)
       info.add(mtx::id::track_name, sdemuxers[i]->title);
@@ -733,10 +732,8 @@ ogm_reader_c::identify() {
     if (pixel_dimensions.first && pixel_dimensions.second)
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % pixel_dimensions.first % pixel_dimensions.second);
 
-    if (sdemuxers[i]->channels)
-      info.add(mtx::id::audio_channels,           sdemuxers[i]->channels);
-    if (sdemuxers[i]->sample_rate)
-      info.add(mtx::id::audio_sampling_frequency, sdemuxers[i]->sample_rate);
+    info.add(mtx::id::audio_channels,           sdemuxers[i]->channels);
+    info.add(mtx::id::audio_sampling_frequency, sdemuxers[i]->sample_rate);
 
     id_result_track(i, sdemuxers[i]->get_type(), sdemuxers[i]->get_codec(), info.get());
   }

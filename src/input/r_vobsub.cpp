@@ -658,8 +658,7 @@ vobsub_reader_c::identify() {
   for (i = 0; i < tracks.size(); i++) {
     auto info = mtx::id::info_c{};
 
-    if (!tracks[i]->language.empty())
-      info.add(mtx::id::language, tracks[i]->language);
+    info.add(mtx::id::language, tracks[i]->language);
 
     id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_VOBSUB, "VobSub"), info.get());
   }
