@@ -52,7 +52,6 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
   ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
   ui->cbMDisableDefaultTrackForSubtitles->setChecked(m_cfg.m_disableDefaultTrackForSubtitles);
-  ui->cbMAlwaysAddDroppedFiles->setChecked(m_cfg.m_mergeAlwaysAddDroppedFiles);
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
   ui->cbMDefaultTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultTrackLanguage);
@@ -63,6 +62,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   setupPlaylistScanningPolicy();
   setupOutputFileNamePolicy();
   setupEnableMuxingTracksByLanguage();
+  setupAddingAppendingFilesPolicy();
 
   // Chapter editor page
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
@@ -154,7 +154,6 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."))
                    .arg(QY("Checking this option causes the GUI to set that compression to »none« by default for all track types when adding files.")));
 
-  Util::setToolTip(ui->cbMAlwaysAddDroppedFiles, QY("If disabled the GUI will ask whether you want to add the dropped files, append them or add them as additional parts."));
   Util::setToolTip(ui->cbMAlwaysShowOutputFileControls,
                    Q("%1 %2")
                    .arg(QY("If enabled the output file name controls will always be visible no matter which tab is currently shown."))
@@ -167,6 +166,12 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("The current merge settings will be closed."))
                    .arg(QY("With »remove input files« all input files will be removed."))
                    .arg(QY("Most of the other settings on the output tab will be kept intact, though.")));
+
+  Util::setToolTip(ui->cbMAddingAppendingFilesPolicy,
+                   Q("%1 %2 %3")
+                   .arg(QY("When the user drags & drops files from an external application onto the merge tool the GUI can take different actions."))
+                   .arg(QY("The default is to always add all the files to the current merge settings."))
+                   .arg(QY("The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new merge settings and adding them to those.")));
 
   Util::setToolTip(ui->cbMDefaultTrackLanguage,
                    Q("<p>%1 %2</p><p>%3</p>")
@@ -357,6 +362,20 @@ PreferencesDialog::setupEnableMuxingTracksByLanguage() {
 }
 
 void
+PreferencesDialog::setupAddingAppendingFilesPolicy() {
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("ask the user"),                                               static_cast<int>(Util::Settings::AddingAppendingFilesPolicy::Ask));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("add all files to the current merge settings"),                static_cast<int>(Util::Settings::AddingAppendingFilesPolicy::Add));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("create one new merge settings tab and add all files there"),  static_cast<int>(Util::Settings::AddingAppendingFilesPolicy::AddToNew));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("create one new merge settings tab for each file"),            static_cast<int>(Util::Settings::AddingAppendingFilesPolicy::AddEachToNew));
+
+  Util::setComboBoxIndexIf(ui->cbMAddingAppendingFilesPolicy, [this](QString const &, QVariant const &data) {
+    return data.isValid() && (static_cast<Util::Settings::AddingAppendingFilesPolicy>(data.toInt()) == m_cfg.m_mergeAddingAppendingFilesPolicy);
+  });
+
+  Util::fixComboBoxViewWidth(*ui->cbMAddingAppendingFilesPolicy);
+}
+
+void
 PreferencesDialog::setupTabPositions() {
   ui->cbGuiTabPositions->clear();
   ui->cbGuiTabPositions->addItem(QY("top"),    static_cast<int>(QTabWidget::North));
@@ -396,7 +415,7 @@ PreferencesDialog::save() {
   m_cfg.m_setAudioDelayFromFileName          = ui->cbMSetAudioDelayFromFileName->isChecked();
   m_cfg.m_disableCompressionForAllTrackTypes = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
   m_cfg.m_disableDefaultTrackForSubtitles    = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
-  m_cfg.m_mergeAlwaysAddDroppedFiles         = ui->cbMAlwaysAddDroppedFiles->isChecked();
+  m_cfg.m_mergeAddingAppendingFilesPolicy    = static_cast<Util::Settings::AddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysShowOutputFileControls  = ui->cbMAlwaysShowOutputFileControls->isChecked();
   m_cfg.m_clearMergeSettings                 = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
   m_cfg.m_defaultTrackLanguage               = ui->cbMDefaultTrackLanguage->currentData().toString();

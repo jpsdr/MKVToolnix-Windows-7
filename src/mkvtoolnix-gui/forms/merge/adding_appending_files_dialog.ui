@@ -49,9 +49,16 @@
     </widget>
    </item>
    <item>
-    <widget class="QRadioButton" name="rbAlwaysAdd">
+    <widget class="QRadioButton" name="rbAddToNew">
      <property name="text">
-      <string>Alwa&amp;ys add as new input files and don't ask again</string>
+      <string>Create new &amp;merge settings and add to those</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="rbAddEachToNew">
+     <property name="text">
+      <string>Create new merge settings for &amp;each file</string>
      </property>
     </widget>
    </item>
@@ -70,20 +77,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QRadioButton" name="rbAddToNew">
-     <property name="text">
-      <string>Create new &amp;merge settings and add to those</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QRadioButton" name="rbAddEachToNew">
-     <property name="text">
-      <string>Create new merge settings for &amp;each file</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>If you want to append or add them as additional parts you have to select which input file to append or add them to:</string>
@@ -95,6 +88,13 @@
    </item>
    <item>
     <widget class="QComboBox" name="cbFileName"/>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="cbAlwaysUseThisDecision">
+     <property name="text">
+      <string>Alwa&amp;ys use the action selected above and don't ask again</string>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">
@@ -137,11 +137,12 @@
  </widget>
  <tabstops>
   <tabstop>rbAdd</tabstop>
-  <tabstop>rbAlwaysAdd</tabstop>
+  <tabstop>rbAddToNew</tabstop>
+  <tabstop>rbAddEachToNew</tabstop>
   <tabstop>rbAppend</tabstop>
   <tabstop>rbAddAdditionalParts</tabstop>
-  <tabstop>rbAddToNew</tabstop>
   <tabstop>cbFileName</tabstop>
+  <tabstop>cbAlwaysUseThisDecision</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -200,8 +201,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>261</x>
-     <y>283</y>
+     <x>544</x>
+     <y>307</y>
     </hint>
     <hint type="destinationlabel">
      <x>215</x>
@@ -232,8 +233,8 @@
    <slot>selectionChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>179</x>
-     <y>184</y>
+     <x>185</x>
+     <y>102</y>
     </hint>
     <hint type="destinationlabel">
      <x>147</x>
@@ -242,18 +243,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>rbAlwaysAdd</sender>
+   <sender>rbAddEachToNew</sender>
    <signal>clicked()</signal>
    <receiver>mtx::gui::Merge::AddingAppendingFilesDialog</receiver>
    <slot>selectionChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>203</x>
-     <y>93</y>
+     <x>87</x>
+     <y>122</y>
     </hint>
     <hint type="destinationlabel">
-     <x>173</x>
-     <y>285</y>
+     <x>80</x>
+     <y>299</y>
     </hint>
    </hints>
   </connection>

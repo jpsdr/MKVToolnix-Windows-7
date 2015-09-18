@@ -32,15 +32,14 @@ AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
 AddingAppendingFilesDialog::~AddingAppendingFilesDialog() {
 }
 
-AddingAppendingFilesDialog::Decision
+Util::Settings::AddingAppendingFilesPolicy
 AddingAppendingFilesDialog::decision()
   const {
-  return ui->rbAdd->isChecked()          ? Decision::Add
-       : ui->rbAlwaysAdd->isChecked()    ? Decision::AlwaysAdd
-       : ui->rbAppend->isChecked()       ? Decision::Append
-       : ui->rbAddToNew->isChecked()     ? Decision::AddToNew
-       : ui->rbAddEachToNew->isChecked() ? Decision::AddEachToNew
-       :                                   Decision::AddAdditionalParts;
+  return ui->rbAdd->isChecked()          ? Util::Settings::AddingAppendingFilesPolicy::Add
+       : ui->rbAppend->isChecked()       ? Util::Settings::AddingAppendingFilesPolicy::Append
+       : ui->rbAddToNew->isChecked()     ? Util::Settings::AddingAppendingFilesPolicy::AddToNew
+       : ui->rbAddEachToNew->isChecked() ? Util::Settings::AddingAppendingFilesPolicy::AddEachToNew
+       :                                   Util::Settings::AddingAppendingFilesPolicy::AddAdditionalParts;
 }
 
 int
@@ -52,6 +51,13 @@ AddingAppendingFilesDialog::fileIndex()
 void
 AddingAppendingFilesDialog::selectionChanged() {
   ui->cbFileName->setEnabled(ui->rbAppend->isChecked() || ui->rbAddAdditionalParts->isChecked());
+  ui->cbAlwaysUseThisDecision->setEnabled(ui->rbAdd->isChecked() || ui->rbAddToNew->isChecked() || ui->rbAddEachToNew->isChecked());
+}
+
+bool
+AddingAppendingFilesDialog::alwaysUseThisDecision()
+  const {
+  return ui->cbAlwaysUseThisDecision->isEnabled() && ui->cbAlwaysUseThisDecision->isChecked();
 }
 
 }}}

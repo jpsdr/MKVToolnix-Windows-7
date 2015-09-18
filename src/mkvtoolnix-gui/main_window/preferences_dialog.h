@@ -51,6 +51,7 @@ protected:
   void setupPlaylistScanningPolicy();
   void setupOutputFileNamePolicy();
   void setupEnableMuxingTracksByLanguage();
+  void setupAddingAppendingFilesPolicy();
 };
 
 }}

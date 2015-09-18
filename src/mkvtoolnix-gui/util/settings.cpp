@@ -91,7 +91,24 @@ Settings::registry() {
 }
 
 void
+Settings::convertOldSettings() {
+  auto reg = registry();
+
+  // mergeAlwaysAddDroppedFiles →
+  reg->beginGroup("settings");
+  auto mergeAlwaysAddDroppedFiles = reg->value("mergeAlwaysAddDroppedFiles");
+
+  if (mergeAlwaysAddDroppedFiles.isValid())
+    reg->setValue("mergeAddingAppendingFilesPolicy", static_cast<int>(AddingAppendingFilesPolicy::Add));
+
+  reg->remove("mergeAlwaysAddDroppedFiles");
+  reg->endGroup();
+}
+
+void
 Settings::load() {
+  convertOldSettings();
+
   auto regPtr = registry();
   auto &reg   = *regPtr;
 
@@ -118,8 +135,8 @@ Settings::load() {
   m_clearMergeSettings                 = static_cast<ClearMergeSettingsAction>(reg.value("clearMergeSettings", static_cast<int>(ClearMergeSettingsAction::None)).toInt());
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
   m_disableDefaultTrackForSubtitles    = reg.value("disableDefaultTrackForSubtitles",    false).toBool();
-  m_mergeAlwaysAddDroppedFiles         = reg.value("mergeAlwaysAddDroppedFiles", false).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls", true).toBool();
+  m_mergeAddingAppendingFilesPolicy    = static_cast<AddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(AddingAppendingFilesPolicy::Ask)).toInt());
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
   m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
@@ -229,8 +246,8 @@ Settings::save()
   reg.setValue("clearMergeSettings",                 static_cast<int>(m_clearMergeSettings));
   reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
   reg.setValue("disableDefaultTrackForSubtitles",    m_disableDefaultTrackForSubtitles);
-  reg.setValue("mergeAlwaysAddDroppedFiles",         m_mergeAlwaysAddDroppedFiles);
   reg.setValue("mergeAlwaysShowOutputFileControls",  m_mergeAlwaysShowOutputFileControls);
+  reg.setValue("mergeAddingAppendingFilesPolicy",    static_cast<int>(m_mergeAddingAppendingFilesPolicy));
 
   reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("relativeOutputDir",                  m_relativeOutputDir.path());

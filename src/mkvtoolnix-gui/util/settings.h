@@ -53,13 +53,23 @@ public:
     RemoveInputFiles,
   };
 
+  enum class AddingAppendingFilesPolicy {
+    Ask,
+    Add,
+    AddToNew,
+    AddEachToNew,
+    Append,
+    AddAdditionalParts,
+  };
+
   QString m_defaultTrackLanguage, m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   ProcessPriority m_priority;
   QTabWidget::TabPosition m_tabPosition;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
-  bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysAddDroppedFiles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
+  bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
   ClearMergeSettingsAction m_clearMergeSettings;
+  AddingAppendingFilesPolicy m_mergeAddingAppendingFilesPolicy;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
   QDir m_relativeOutputDir, m_fixedOutputDir;
@@ -112,6 +122,7 @@ public:
   static QString exeWithPath(QString const &exe);
 
   static void migrateFromRegistry();
+  static void convertOldSettings();
 
   static QString iniFileLocation();
   static QString iniFileName();
