@@ -329,7 +329,7 @@ Tool::addMultipleFilesToNewSettings(QStringList const &fileNames,
     auto tab = currentTab();
     Q_ASSERT(!!tab);
 
-    tab->addFilesToBeAddedOrAppendedDelayed(fileNamesToAdd);
+    tab->addFiles(fileNamesToAdd);
   }
 }
 

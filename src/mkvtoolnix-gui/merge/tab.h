@@ -63,6 +63,7 @@ public:
   virtual QString title() const;
   virtual void load(QString const &fileName);
   virtual void cloneConfig(MuxConfig const &config);
+  virtual void addFiles(QStringList const &fileNames);
 
 signals:
   void removeThisTab();

@@ -789,6 +789,11 @@ Tab::addOrAppendFiles(bool append) {
 }
 
 void
+Tab::addFiles(QStringList const &fileNames) {
+  addOrAppendFiles(false, fileNames, QModelIndex{});
+}
+
+void
 Tab::addOrAppendFiles(bool append,
                       QStringList const &fileNames,
                       QModelIndex const &sourceFileIdx) {
