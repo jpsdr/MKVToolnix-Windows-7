@@ -51,7 +51,7 @@ AddingAppendingFilesDialog::fileIndex()
 
 void
 AddingAppendingFilesDialog::selectionChanged() {
-  ui->cbFileName->setEnabled(!ui->rbAdd->isChecked() && !ui->rbAlwaysAdd->isChecked() && !ui->rbAddToNew->isChecked());
+  ui->cbFileName->setEnabled(ui->rbAppend->isChecked() || ui->rbAddAdditionalParts->isChecked());
 }
 
 }}}
