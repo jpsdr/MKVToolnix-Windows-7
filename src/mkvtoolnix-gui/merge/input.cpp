@@ -1129,8 +1129,8 @@ void
 Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
   auto &settings = Util::Settings::get();
 
-  auto decision = settings.m_mergeAddingAppendingFilesPolicy;
-  auto fileIdx  = QModelIndex{};
+  auto decision  = settings.m_mergeAddingAppendingFilesPolicy;
+  auto fileIdx   = QModelIndex{};
 
   if (Util::Settings::AddingAppendingFilesPolicy::Ask == decision) {
     AddingAppendingFilesDialog dlg{this, m_config.m_files};
