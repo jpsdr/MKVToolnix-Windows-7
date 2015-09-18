@@ -309,13 +309,28 @@ Tool::openMultipleConfigFilesFromCommandLine(QStringList const &fileNames) {
 }
 
 void
-Tool::addMultipleFilesToNewSettings(QStringList const &fileNames) {
-  newConfig();
+Tool::addMultipleFilesToNewSettings(QStringList const &fileNames,
+                                    bool newSettingsForEachFile) {
+  auto toProcess = fileNames;
 
-  auto tab = currentTab();
-  Q_ASSERT(!!tab);
+  while (!toProcess.isEmpty()) {
+    auto fileNamesToAdd = QStringList{};
 
-  tab->addFilesToBeAddedOrAppendedDelayed(fileNames);
+    if (newSettingsForEachFile)
+      fileNamesToAdd << toProcess.takeFirst();
+
+    else {
+      fileNamesToAdd = toProcess;
+      toProcess.clear();
+    }
+
+    newConfig();
+
+    auto tab = currentTab();
+    Q_ASSERT(!!tab);
+
+    tab->addFilesToBeAddedOrAppendedDelayed(fileNamesToAdd);
+  }
 }
 
 void

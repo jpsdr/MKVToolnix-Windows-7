@@ -35,11 +35,12 @@ AddingAppendingFilesDialog::~AddingAppendingFilesDialog() {
 AddingAppendingFilesDialog::Decision
 AddingAppendingFilesDialog::decision()
   const {
-  return ui->rbAdd->isChecked()       ? Decision::Add
-       : ui->rbAlwaysAdd->isChecked() ? Decision::AlwaysAdd
-       : ui->rbAppend->isChecked()    ? Decision::Append
-       : ui->rbAddToNew->isChecked()  ? Decision::AddToNew
-       :                                Decision::AddAdditionalParts;
+  return ui->rbAdd->isChecked()          ? Decision::Add
+       : ui->rbAlwaysAdd->isChecked()    ? Decision::AlwaysAdd
+       : ui->rbAppend->isChecked()       ? Decision::Append
+       : ui->rbAddToNew->isChecked()     ? Decision::AddToNew
+       : ui->rbAddEachToNew->isChecked() ? Decision::AddEachToNew
+       :                                   Decision::AddAdditionalParts;
 }
 
 int

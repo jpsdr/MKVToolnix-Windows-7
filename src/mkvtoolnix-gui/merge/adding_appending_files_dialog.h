@@ -22,6 +22,7 @@ public:
     Append,
     AddAdditionalParts,
     AddToNew,
+    AddEachToNew,
   };
 
 protected:

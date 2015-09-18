@@ -1145,7 +1145,10 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
     m_filesModel->addAdditionalParts(fileIdx, fileNames);
 
   else if (AddingAppendingFilesDialog::Decision::AddToNew == decision)
-    MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames);
+    MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames, false);
+
+  else if (AddingAppendingFilesDialog::Decision::AddEachToNew == decision)
+    MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames, true);
 
   else {
     if (AddingAppendingFilesDialog::Decision::AlwaysAdd == decision) {
