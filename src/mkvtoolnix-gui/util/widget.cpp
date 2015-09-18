@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QAbstractItemView>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QIcon>
@@ -150,6 +151,12 @@ preventScrollingWithoutFocus(QObject *parent) {
 
   for (auto const &child : parent->findChildren<QSpinBox *>())
     install(child);
+}
+
+void
+fixComboBoxViewWidth(QComboBox &comboBox) {
+  comboBox.setSizeAdjustPolicy(QComboBox::AdjustToContents);
+  comboBox.view()->setMinimumWidth(comboBox.sizeHint().width());
 }
 
 }}}

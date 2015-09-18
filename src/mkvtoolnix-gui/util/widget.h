@@ -22,6 +22,7 @@ QIcon loadIcon(QString const &name, QList<int> const &sizes);
 bool setComboBoxIndexIf(QComboBox *comboBox, std::function<bool(QString const &, QVariant const &)> test);
 bool setComboBoxTextByData(QComboBox *comboBox, QString const &data);
 void setComboBoxTexts(QComboBox *comboBox, QStringList const &texts);
+void fixComboBoxViewWidth(QComboBox &comboBox);
 
 void enableWidgets(QList<QWidget *> const &widgets, bool enable);
 QPushButton *buttonForRole(QDialogButtonBox *box, QDialogButtonBox::ButtonRole role = QDialogButtonBox::AcceptRole);
