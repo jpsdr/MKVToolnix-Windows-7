@@ -26,6 +26,12 @@ AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
     ui->cbFileName->addItem(Q("%1 (%2)").arg(info.fileName()).arg(info.path()));
   }
 
+  if (files.isEmpty()) {
+    ui->lAppendTo->setEnabled(false);
+    ui->rbAppend->setEnabled(false);
+    ui->rbAddAdditionalParts->setEnabled(false);
+  }
+
   adjustSize();
 }
 
