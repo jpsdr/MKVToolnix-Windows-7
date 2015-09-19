@@ -88,7 +88,8 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 %lang(pt) %{_datadir}/locale/pt/*/*.mo
 %lang(pt_BR) %{_datadir}/locale/pt_BR/*/*.mo
 %lang(ru) %{_datadir}/locale/ru/*/*.mo
-%lang(sr) %{_datadir}/locale/sr/*/*.mo
+%lang(sr_RS) %{_datadir}/locale/sr_RS/*/*.mo
+%lang(sr_RS@latin) %{_datadir}/locale/sr_RS@latin/*/*.mo
 %lang(sv) %{_datadir}/locale/sv/*/*.mo
 %lang(tr) %{_datadir}/locale/tr/*/*.mo
 %lang(uk) %{_datadir}/locale/uk/*/*.mo
