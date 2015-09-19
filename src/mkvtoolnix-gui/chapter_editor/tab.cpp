@@ -1082,7 +1082,7 @@ Tab::expandTimecodes(QStandardItem *item) {
   if (!item)
     return {};
 
-  auto chapter = m_chapterModel->chapterFromItem(item);
+  auto chapter = item->parent() ? m_chapterModel->chapterFromItem(item) : ChapterPtr{};
   if (!chapter) {
     for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
       expandTimecodes(item->child(row));
