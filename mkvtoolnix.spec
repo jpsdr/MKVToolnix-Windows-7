@@ -29,7 +29,7 @@ License: GPLv2
 BuildRequires: qt5-qtbase-devel, gettext-devel
 
 %if 0%{?fedora}
-BuildRequires: rubypick, ugixml-devel
+BuildRequires: rubypick, pugixml-devel
 %endif
 
 %endif
