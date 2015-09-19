@@ -64,7 +64,7 @@ Tool::setupActions() {
   connect(ui->newFileButton,                       &QPushButton::clicked,           this, &Tool::newFile);
   connect(ui->openFileButton,                      &QPushButton::clicked,           this, &Tool::selectFileToOpen);
 
-  connect(ui->editors,                             &QTabWidget::currentChanged,     this, &Tool::enableMenuActions);
+  connect(m_chapterEditorMenu,                     &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
   connect(mw,                                      &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
   connect(mw,                                      &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 
