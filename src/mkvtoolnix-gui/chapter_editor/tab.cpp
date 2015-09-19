@@ -1055,7 +1055,7 @@ Tab::constrictTimecodes(QStandardItem *item,
   if (!chapter) {
     for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
       constrictTimecodes(item->child(row), {}, {});
-  return;
+    return;
   }
 
   auto kStart   = &GetChild<KaxChapterTimeStart>(*chapter);
