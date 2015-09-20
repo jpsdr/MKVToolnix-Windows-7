@@ -8,8 +8,8 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX__COMMON_CLI_PARSER_H
-#define MTX__COMMON_CLI_PARSER_H
+#ifndef MTX_COMMON_LOGGER_H
+#define MTX_COMMON_LOGGER_H
 
 #include "common/common_pch.h"
 
@@ -25,17 +25,25 @@ private:
 
 public:
   logger_c(bfs::path const &file_name);
+  virtual ~logger_c();
 
-  void log(std::string const &message);
+  void log(std::string const &message) {
+    log_line(message);
+  }
   void log(boost::format const &message) {
-    log(message.str());
+    log_line(message.str());
   }
 
-private:
+protected:
+  virtual std::string format_line(std::string const &message);
+  virtual void log_line(std::string const &message);
+
   static logger_cptr s_default_logger;
+
 public:
   static logger_c &get_default_logger();
   static void set_default_logger(logger_cptr logger);
+  static int64_t runtime();
 };
 
 template<typename T>
@@ -49,4 +57,4 @@ operator <<(logger_c &logger,
 #define log_current_location() logger_c::get_default_logger() << (boost::format("Current file & line: %1%:%2%") % __FILE__ % __LINE__)
 #define log_it(arg)            logger_c::get_default_logger() << (arg)
 
-#endif // MTX__COMMON_CLI_PARSER_H
+#endif // MTX_COMMON_LOGGER_H
