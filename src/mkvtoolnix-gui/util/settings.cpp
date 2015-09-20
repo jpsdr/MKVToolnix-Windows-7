@@ -326,7 +326,7 @@ Settings::exeWithPath(QString const &exe) {
 
   for (auto const &potentialExe : potentialExes)
     if (bfs::exists(potentialExe))
-      return to_qs(bfs::canonical(potentialExe).string());
+      return to_qs(potentialExe.string());
 
   return exe;
 }
