@@ -395,8 +395,10 @@ MuxConfig::buildMkvmergeOptions()
   auto options = QStringList{};
 
   auto &settings = Util::Settings::get();
+  auto locale    = settings.localeToUse();
 
-  options << Q("--ui-language") << settings.m_uiLocale;
+  if (!locale.isEmpty())
+    options << Q("--ui-language") << locale;
 
   if (Util::Settings::NormalPriority != settings.m_priority)
     options << Q("--priority") << settings.priorityAsString();

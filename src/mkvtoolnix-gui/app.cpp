@@ -12,7 +12,6 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
-#include "common/translation.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
@@ -254,47 +253,31 @@ App::isInstalled() {
 
 void
 App::initializeLocale(QString const &requestedLocale) {
-  auto locale = to_utf8(requestedLocale);
+  auto locale = Util::Settings::get().localeToUse(requestedLocale);
 
 #if defined(HAVE_LIBINTL_H)
-  auto &cfg = Util::Settings::get();
+  if (!locale.isEmpty()) {
+    if (m_currentTranslator)
+      removeTranslator(m_currentTranslator.get());
+    m_currentTranslator.reset();
 
-  if (m_currentTranslator)
-    removeTranslator(m_currentTranslator.get());
-  m_currentTranslator.reset();
-
-  translation_c::initialize_available_translations();
-
-  if (locale.empty())
-    locale = to_utf8(cfg.m_uiLocale);
-
-  if (-1 == translation_c::look_up_translation(locale))
-    locale = "";
-
-  if (locale.empty()) {
-    locale = boost::regex_replace(translation_c::get_default_ui_locale(), boost::regex{"\\..*", boost::regex::perl}, "");
-    if (-1 == translation_c::look_up_translation(locale))
-      locale = "";
-  }
-
-  if (!locale.empty()) {
     auto translator = std::make_unique<QTranslator>();
-    auto paths      = QStringList{} << Q("%1/locale/%2/LC_MESSAGES").arg(applicationDirPath()).arg(Q(locale))
+    auto paths      = QStringList{} << Q("%1/locale/%2/LC_MESSAGES").arg(applicationDirPath()).arg(locale)
                                     << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 
     for (auto const &path : paths)
-      if (translator->load(Q("qtbase_%1").arg(Q(locale)), path))
+      if (translator->load(Q("qtbase_%1").arg(locale), path))
         break;
 
     installTranslator(translator.get());
 
-    m_currentTranslator = std::move(translator);
-    cfg.m_uiLocale      = Q(locale);
+    m_currentTranslator              = std::move(translator);
+    Util::Settings::get().m_uiLocale = locale;
   }
 
 #endif  // HAVE_LIBINTL_H
 
-  init_locales(locale);
+  init_locales(to_utf8(locale));
 
   retranslateUi();
 }

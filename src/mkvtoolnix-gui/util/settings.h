@@ -9,6 +9,8 @@
 #include <QTabWidget>
 #include <QVariant>
 
+#include "common/translation.h"
+
 class QSettings;
 class QSplitter;
 
@@ -105,6 +107,8 @@ public:
 
   void handleSplitterSizes(QSplitter *splitter);
   void restoreSplitterSizes(QSplitter *splitter);
+
+  QString localeToUse(QString const &requestedLocale = {});
 
 public slots:
   void storeSplitterSizes();

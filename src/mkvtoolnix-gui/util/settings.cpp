@@ -396,4 +396,27 @@ Settings::storeSplitterSizes() {
     qDebug() << "storeSplitterSize() signal from non-splitter" << sender() << sender()->objectName();
 }
 
+QString
+Settings::localeToUse(QString const &requestedLocale) {
+  auto locale = to_utf8(requestedLocale);
+
+#if defined(HAVE_LIBINTL_H)
+  translation_c::initialize_available_translations();
+
+  if (locale.empty())
+    locale = to_utf8(m_uiLocale);
+
+  if (-1 == translation_c::look_up_translation(locale))
+    locale = "";
+
+  if (locale.empty()) {
+    locale = boost::regex_replace(translation_c::get_default_ui_locale(), boost::regex{"\\..*", boost::regex::perl}, "");
+    if (-1 == translation_c::look_up_translation(locale))
+      locale = "";
+  }
+#endif
+
+  return to_qs(locale);
+}
+
 }}}
