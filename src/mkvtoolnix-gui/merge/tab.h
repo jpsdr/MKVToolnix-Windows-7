@@ -42,7 +42,7 @@ protected:
   bool m_currentlySettingInputControlValues;
 
   QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
-  QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction;
+  QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction, *m_openFilesInMediaInfoAction, *m_openTracksInMediaInfoAction;
   QMenu *m_filesMenu, *m_tracksMenu, *m_attachmentsMenu, *m_selectTracksOfTypeMenu;
 
   // "Attachments" tab:
@@ -91,6 +91,9 @@ public slots:
   virtual void disableAllTracks();
 
   virtual void toggleMuxThisForSelectedTracks();
+
+  virtual void onOpenFilesInMediaInfo();
+  virtual void onOpenTracksInMediaInfo();
 
   virtual void onTrackSelectionChanged();
 
@@ -262,6 +265,9 @@ protected:
   virtual void ensureOneDefaultFlagOnly(Track *thisOneHasIt);
 
   virtual QString currentState();
+
+  virtual QString mediaInfoLocation();
+  virtual void openFilesInMediaInfo(QStringList const &fileNames);
 };
 
 }}}

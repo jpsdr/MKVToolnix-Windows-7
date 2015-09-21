@@ -8,7 +8,9 @@
 #include <QList>
 #include <QMenu>
 #include <QMessageBox>
+#include <QProcess>
 #include <QRegularExpression>
+#include <QSettings>
 #include <QString>
 #include <QTimer>
 
@@ -20,6 +22,7 @@
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
+#include "mkvtoolnix-gui/merge/executable_location_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
@@ -149,12 +152,16 @@ Tab::setupInputControls() {
   m_filesMenu->addSeparator();
   m_filesMenu->addAction(m_removeFilesAction);
   m_filesMenu->addAction(m_removeAllFilesAction);
+  m_filesMenu->addSeparator();
+  m_filesMenu->addAction(m_openFilesInMediaInfoAction);
 
   // "tracks" context menu
   m_tracksMenu->addAction(m_selectAllTracksAction);
   m_tracksMenu->addMenu(m_selectTracksOfTypeMenu);
   m_tracksMenu->addAction(m_enableAllTracksAction);
   m_tracksMenu->addAction(m_disableAllTracksAction);
+  m_tracksMenu->addSeparator();
+  m_tracksMenu->addAction(m_openTracksInMediaInfoAction);
 
   m_selectTracksOfTypeMenu->addAction(m_selectAllVideoTracksAction);
   m_selectTracksOfTypeMenu->addAction(m_selectAllAudioTracksAction);
@@ -186,6 +193,8 @@ Tab::setupInputControls() {
   connect(m_addAdditionalPartsAction,       &QAction::triggered,                              this,                     &Tab::onAddAdditionalParts);
   connect(m_removeFilesAction,              &QAction::triggered,                              this,                     &Tab::onRemoveFiles);
   connect(m_removeAllFilesAction,           &QAction::triggered,                              this,                     &Tab::onRemoveAllFiles);
+  connect(m_openFilesInMediaInfoAction,     &QAction::triggered,                              this,                     &Tab::onOpenFilesInMediaInfo);
+  connect(m_openTracksInMediaInfoAction,    &QAction::triggered,                              this,                     &Tab::onOpenTracksInMediaInfo);
 
   connect(m_selectAllTracksAction,          &QAction::triggered,                              this,                     &Tab::selectAllTracks);
   connect(m_selectAllVideoTracksAction,     &QAction::triggered,                              this,                     &Tab::selectAllVideoTracks);
@@ -960,11 +969,13 @@ Tab::enableFilesActions() {
   m_addAdditionalPartsAction->setEnabled(1 == numSelected);
   m_removeFilesAction->setEnabled(0 < numSelected);
   m_removeAllFilesAction->setEnabled(!m_config.m_files.isEmpty());
+  m_openFilesInMediaInfoAction->setEnabled(0 < numSelected);
 }
 
 void
 Tab::enableTracksActions() {
-  bool hasTracks = !!m_tracksModel->rowCount();
+  int numSelected = ui->tracks->selectionModel()->selection().size();
+  bool hasTracks  = !!m_tracksModel->rowCount();
 
   m_selectAllTracksAction->setEnabled(hasTracks);
   m_selectTracksOfTypeMenu->setEnabled(hasTracks);
@@ -974,6 +985,8 @@ Tab::enableTracksActions() {
   m_selectAllVideoTracksAction->setEnabled(hasTracks);
   m_selectAllAudioTracksAction->setEnabled(hasTracks);
   m_selectAllSubtitlesTracksAction->setEnabled(hasTracks);
+
+  m_openTracksInMediaInfoAction->setEnabled(0 < numSelected);
 }
 
 void
@@ -989,11 +1002,13 @@ Tab::retranslateInputUI() {
   m_addAdditionalPartsAction->setText(QY("Add files as a&dditional parts"));
   m_removeFilesAction->setText(QY("&Remove files"));
   m_removeAllFilesAction->setText(QY("Remove a&ll files"));
+  m_openFilesInMediaInfoAction->setText(QY("Open in &MediaInfo"));
 
   m_selectAllTracksAction->setText(QY("&Select all tracks"));
   m_selectTracksOfTypeMenu->setTitle(QY("Select all tracks of specific &type"));
   m_enableAllTracksAction->setText(QY("&Enable all tracks"));
   m_disableAllTracksAction->setText(QY("&Disable all tracks"));
+  m_openTracksInMediaInfoAction->setText(QY("Open in &MediaInfo"));
 
   m_selectAllVideoTracksAction->setText(QY("&Video"));
   m_selectAllAudioTracksAction->setText(QY("&Audio"));
@@ -1351,6 +1366,77 @@ void
 Tab::showTracksContextMenu(QPoint const &pos) {
   enableTracksActions();
   m_tracksMenu->exec(ui->tracks->viewport()->mapToGlobal(pos));
+}
+
+void
+Tab::onOpenFilesInMediaInfo() {
+  auto fileNames = QStringList{};
+  for (auto const &sourceFile : selectedSourceFiles())
+    fileNames << sourceFile->m_fileName;
+
+  openFilesInMediaInfo(fileNames);
+}
+
+void
+Tab::onOpenTracksInMediaInfo() {
+  auto fileNames = QStringList{};
+  for (auto const &track : selectedTracks()) {
+    auto const &fileName = track->m_file->m_fileName;
+    if (!fileNames.contains(fileName))
+      fileNames << fileName;
+  }
+
+  openFilesInMediaInfo(fileNames);
+}
+
+QString
+Tab::mediaInfoLocation() {
+  auto &cfg = Util::Settings::get();
+  auto exe  = cfg.m_mediaInfoExe.isEmpty() ? Q("mediainfo-gui") : cfg.m_mediaInfoExe;
+  exe       = Util::Settings::exeWithPath(exe);
+
+  if (!exe.isEmpty() && QFileInfo{exe}.exists())
+    return exe;
+
+  exe = Util::Settings::exeWithPath(Q("mediainfo"));
+
+#if defined(SYS_WINDOWS)
+  exe = QSettings{Q("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\MediaInfo.exe"), QSettings::NativeFormat}.value("Default").toString();
+  if (!exe.isEmpty() && QFileInfo{exe}.exists())
+    return exe;
+#endif
+
+  ExecutableLocationDialog dlg{this};
+  auto result = dlg
+    .setInfo(QY("Executable not found"),
+             Q("<p>%1 %2 %3</p><p>%4</p>")
+             .arg(QY("This function requires the application %1.").arg("MediaInfo"))
+             .arg(QY("Its installation location could not be determined automatically."))
+             .arg(QY("Please select its location below."))
+             .arg(QY("You can download the application from the following URL:")))
+    .setURL(Q("https://mediaarea.net/en/MediaInfo"))
+    .exec();
+
+  if (QDialog::Rejected == result)
+    return {};
+
+  exe = dlg.executable();
+  if (exe.isEmpty() || !QFileInfo{exe}.exists())
+    return {};
+
+  cfg.m_mediaInfoExe = exe;
+
+  return exe;
+}
+
+void
+Tab::openFilesInMediaInfo(QStringList const &fileNames) {
+  if (fileNames.isEmpty())
+    return;
+
+  auto exe = mediaInfoLocation();
+  if (!exe.isEmpty())
+    QProcess::startDetached(exe, fileNames);
 }
 
 }}}

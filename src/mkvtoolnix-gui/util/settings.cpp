@@ -163,6 +163,8 @@ Settings::load() {
   m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM:2>")).toString();
   m_dropLastChapterFromBlurayPlaylist  = reg.value("dropLastChapterFromBlurayPlaylist", true).toBool();
 
+  m_mediaInfoExe                       = reg.value("mediaInfoExe", Q("mediainfo-gui")).toString();
+
 #if defined(HAVE_LIBINTL_H)
   m_uiLocale                           = reg.value("uiLocale").toString();
 #endif
@@ -276,6 +278,8 @@ Settings::save()
 
   reg.setValue("uiLocale",                           m_uiLocale);
 
+  reg.setValue("mediaInfoExe",                       m_mediaInfoExe);
+
   reg.beginGroup("updates");
   reg.setValue("checkForUpdates",                    m_checkForUpdates);
   reg.setValue("lastUpdateCheck",                    m_lastUpdateCheck);
@@ -312,21 +316,25 @@ Settings::priorityAsString()
 
 QString
 Settings::exeWithPath(QString const &exe) {
-  auto path = bfs::path{ to_utf8(exe) };
-  if (path.is_absolute())
-    return exe;
-
+  auto path          = bfs::path{ to_utf8(exe) };
+  auto program       = path.filename();
   auto installPath   = bfs::path{ to_utf8(App::applicationDirPath()) };
-  auto potentialExes = QList<bfs::path>{} << (installPath / path) << (installPath / ".." / path);
+  auto potentialExes = QList<bfs::path>{} << path << (installPath / path) << (installPath / ".." / path);
 
 #if defined(SYS_WINDOWS)
   for (auto &potentialExe : potentialExes)
     potentialExe.replace_extension(bfs::path{"exe"});
+
+  program.replace_extension(bfs::path{"exe"});
 #endif  // SYS_WINDOWS
 
   for (auto const &potentialExe : potentialExes)
     if (bfs::exists(potentialExe))
       return to_qs(potentialExe.string());
+
+  auto location = QStandardPaths::findExecutable(to_qs(program.string()));
+  if (!location.isEmpty())
+    return location;
 
   return exe;
 }

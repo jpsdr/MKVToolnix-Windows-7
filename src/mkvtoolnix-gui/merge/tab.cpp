@@ -46,6 +46,8 @@ Tab::Tab(QWidget *parent)
   , m_selectAllVideoTracksAction{new QAction{this}}
   , m_selectAllAudioTracksAction{new QAction{this}}
   , m_selectAllSubtitlesTracksAction{new QAction{this}}
+  , m_openFilesInMediaInfoAction{new QAction{this}}
+  , m_openTracksInMediaInfoAction{new QAction{this}}
   , m_filesMenu{new QMenu{this}}
   , m_tracksMenu{new QMenu{this}}
   , m_attachmentsMenu{new QMenu{this}}

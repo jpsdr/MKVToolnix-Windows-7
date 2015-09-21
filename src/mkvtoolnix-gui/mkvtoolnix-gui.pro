@@ -38,7 +38,8 @@ FORMS += \
     forms/merge/tool.ui \
     forms/util/side_by_side_multi_select.ui \
     forms/watch_jobs/tab.ui \
-    forms/watch_jobs/tool.ui
+    forms/watch_jobs/tool.ui \
+    forms/merge/executable_location_dialog.ui
 
 RESOURCES += \
     qt_resources.qrc

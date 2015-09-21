@@ -94,6 +94,8 @@ public:
 
   QHash<QString, QList<int> > m_splitterSizes;
 
+  QString m_mediaInfoExe;
+
 public:
   Settings();
   void load();
