@@ -28,7 +28,7 @@ end
   [ 'PGS',       'subtitles/pgs/x.sup'                  ],
   [ 'SRT',       'subtitles/srt/ven.srt'                ],
   [ 'USF',       'subtitles/usf/u.usf'                  ],
-  [ 'VC1',       'vc1/MC.track_4113.vc1'                ],
+  [ 'VC-1',      'vc1/MC.track_4113.vc1'                ],
   [ 'WavPack4',  'wavpack4/v.wv'                        ],
 ].each do |pair|
   test pair[1] do

@@ -34,7 +34,7 @@ public:
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
-    return YT("VC1");
+    return YT("VC-1");
   };
 
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);

@@ -52,7 +52,7 @@ file_type_t::get_supported() {
   s_supported_file_types.push_back(file_type_t(Y("SSA/ASS text subtitles"),              "ass ssa"));
   s_supported_file_types.push_back(file_type_t(Y("TTA (The lossless True Audio codec)"), "tta"));
   s_supported_file_types.push_back(file_type_t(Y("USF text subtitles"),                  "usf xml"));
-  s_supported_file_types.push_back(file_type_t(Y("VC1 elementary streams"),              "vc1"));
+  s_supported_file_types.push_back(file_type_t(Y("VC-1 elementary streams"),             "vc1"));
   s_supported_file_types.push_back(file_type_t(Y("VobButtons"),                          "btn"));
   s_supported_file_types.push_back(file_type_t(Y("VobSub subtitles"),                    "idx"));
   s_supported_file_types.push_back(file_type_t(Y("WAVE (uncompressed PCM audio)"),       "wav"));
@@ -95,7 +95,7 @@ file_type_t::get_name(file_type_e type) {
        : FILE_TYPE_TRUEHD    == type ? YT("TrueHD")
        : FILE_TYPE_TTA       == type ? YT("TTA")
        : FILE_TYPE_USF       == type ? YT("USF subtitles")
-       : FILE_TYPE_VC1       == type ? YT("VC1")
+       : FILE_TYPE_VC1       == type ? YT("VC-1")
        : FILE_TYPE_VOBBTN    == type ? YT("VobBtn")
        : FILE_TYPE_VOBSUB    == type ? YT("VobSub")
        : FILE_TYPE_WAV       == type ? YT("WAV")

@@ -2197,7 +2197,7 @@
         * mkvmerge: bug fix: improved resilience against MP4 files with
         obviously wrong entries in the 'sample size table' (STSZ) atom.
 
-        * mkvmerge: bug fix: improved VC1 frame type detection so that it
+        * mkvmerge: bug fix: improved VC-1 frame type detection so that it
         works even for streams without entry points.
 
 2013-11-14  Moritz Bunkus  <moritz@bunkus.org>
@@ -2837,7 +2837,7 @@
 
 2012-07-31  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mkvmerge: bug fix: VC1: mkvmerge will now only mark frames as I
+        * mkvmerge: bug fix: VC-1: mkvmerge will now only mark frames as I
         frames if a sequence header precedes them directly. Fixes #755.
 
 2012-07-30  Moritz Bunkus  <moritz@bunkus.org>
@@ -3170,7 +3170,7 @@
         correctly. Fix for bug 649. Patch by Nicholai Main (see AUTHORS).
 
         * mkvmerge: bug fix: Fixed file type recognition and frame drops
-        for VC1 elementary streams that do not start with a sequence
+        for VC-1 elementary streams that do not start with a sequence
         header but with frame or field packets instead.
 
         * mkvmerge: bug fix: Fixed mis-detection as unsupported DV files
@@ -3446,8 +3446,8 @@
         situations in which you have e.g. a live recording from a concert
         including chapters and want to create one audio file per song).
 
-        * mkvmerge: bug fix: Fixed reading VC1 video tracks from Matroska
-        files that don't use VC1 start markers (0x00 0x00 0x01 ...).
+        * mkvmerge: bug fix: Fixed reading VC-1 video tracks from Matroska
+        files that don't use VC-1 start markers (0x00 0x00 0x01 ...).
 
 2011-10-30  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -3461,7 +3461,7 @@
 
 2011-10-24  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mkvmerge: bug fix: mkvmerge will use DTS instead of PTS for VC1
+        * mkvmerge: bug fix: mkvmerge will use DTS instead of PTS for VC-1
         video tracks read from MPEG transport streams.
 
 2011-10-23  Moritz Bunkus  <moritz@bunkus.org>
@@ -3727,7 +3727,7 @@
 
 2011-05-25  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mkvmerge: Fixed remuxing certain VC1 video tracks from Matroska
+        * mkvmerge: Fixed remuxing certain VC-1 video tracks from Matroska
         files. Fix for bug 636.
 
 2011-05-23  Moritz Bunkus  <moritz@bunkus.org>
@@ -3763,7 +3763,7 @@
 2011-04-28  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: enhancement: mkvmerge will rederive frame types for
-        VC1 video tracks stored in Matroska files instead of relying on
+        VC-1 video tracks stored in Matroska files instead of relying on
         the container information. This fixes files created by
         e.g. MakeMKV that mark all frames as key frames even if they
         aren't.
@@ -4230,7 +4230,7 @@
         which do not contain more than one track did not respect the
         "--no-audio / --no-video / --no-subtitles" options. This applied
         to the following readers: AAC, AC3, AVC/h.264, CorePicture, Dirac,
-        DTS, FLAC, IVF, MP3, MPEG ES, PGS/SUP, SRT, SSA, TrueHD, TTA, VC1,
+        DTS, FLAC, IVF, MP3, MPEG ES, PGS/SUP, SRT, SSA, TrueHD, TTA, VC-1,
         WAV and WavPack.
 
 2010-07-05  Moritz Bunkus  <moritz@bunkus.org>
@@ -5806,11 +5806,11 @@
 2008-09-25  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: enhancement: mkvmerge will use the time codes provided
-        by the MPEG program stream source file for VC1 video tracks.
+        by the MPEG program stream source file for VC-1 video tracks.
 
 2008-09-24  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mkvmerge: bug fix: Reading EVOBs with multiple VC1 video tracks
+        * mkvmerge: bug fix: Reading EVOBs with multiple VC-1 video tracks
         was broken (all packets where put into a single video track).
 
 2008-09-22  Moritz Bunkus  <moritz@bunkus.org>
@@ -5840,8 +5840,8 @@
 
 2008-09-18  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mkvmerge: new feature: Added support for muxing VC1 video tracks
-        read from MPEG program streams (EVOBs) or raw VC1 elementary
+        * mkvmerge: new feature: Added support for muxing VC-1 video tracks
+        read from MPEG program streams (EVOBs) or raw VC-1 elementary
         streams (e.g. as produced by EVODemux).
 
 2008-09-17  Moritz Bunkus  <moritz@bunkus.org>

@@ -2,7 +2,7 @@
 
 class T_295vc1_rederiving_frame_types < Test
   def description
-    "mkvmerge / Rederiving frame types in VC1 video tracks"
+    "mkvmerge / Rederiving frame types in VC-1 video tracks"
   end
 
   def run
@@ -12,4 +12,3 @@ class T_295vc1_rederiving_frame_types < Test
     end.join('-')
   end
 end
-
