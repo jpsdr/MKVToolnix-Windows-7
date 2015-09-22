@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/header_editor/language_value_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/language_combo_box.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
 

@@ -142,8 +142,10 @@ Tab::setupInputControls() {
   for (auto idx = 0; idx < 3; ++idx)
     ui->aacIsSBR->addItem(QString{}, idx);
 
-  for (auto const &control : m_comboBoxControls)
+  for (auto const &control : m_comboBoxControls) {
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    Util::fixComboBoxViewWidth(*control);
+  }
 
   // "files" context menu
   m_filesMenu->addAction(m_addFilesAction);
@@ -1016,6 +1018,8 @@ Tab::retranslateInputUI() {
 
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
     ui->stereoscopy->setItemText(idx + 1, QString{"%1 (%2; %3)"}.arg(to_qs(stereo_mode_c::translate(idx))).arg(idx).arg(to_qs(stereo_mode_c::s_modes[idx])));
+
+  Util::fixComboBoxViewWidth(*ui->stereoscopy);
 
   for (auto &comboBox : m_comboBoxControls)
     if (comboBox->count() && !comboBox->itemData(0).isValid())

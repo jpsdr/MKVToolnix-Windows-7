@@ -37,6 +37,9 @@ Tab::setupAttachmentsControls() {
   ui->attachmentMIMEType->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   ui->attachmentStyle   ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
+  Util::fixComboBoxViewWidth(*ui->attachmentMIMEType);
+  Util::fixComboBoxViewWidth(*ui->attachmentStyle);
+
   // Signals & slots
   connect(ui->attachmentsTab,                &Util::FilesDragDropWidget::filesDropped,         this, &Tab::addAttachments);
   connect(ui->attachments->selectionModel(), &QItemSelectionModel::selectionChanged,           this, &Tab::onAttachmentSelectionChanged);

@@ -90,6 +90,8 @@ Tab::setupUi() {
                 << ui->lChNameCountry  << ui->cbChNameCountry;
 
   Util::fixScrollAreaBackground(ui->scrollArea);
+  Util::fixComboBoxViewWidth(*ui->cbChNameLanguage);
+  Util::fixComboBoxViewWidth(*ui->cbChNameCountry);
   Util::HeaderViewManager::create(*ui->elements,  "ChapterEditor::Elements");
   Util::HeaderViewManager::create(*ui->tvChNames, "ChapterEditor::ChapterNames");
 

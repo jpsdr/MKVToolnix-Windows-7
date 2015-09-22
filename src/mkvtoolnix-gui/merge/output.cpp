@@ -23,8 +23,10 @@ Tab::setupOutputControls() {
   m_splitControls << ui->splitOptions << ui->splitOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;
 
   auto comboBoxControls = QList<QComboBox *>{} << ui->splitMode << ui->chapterLanguage << ui->chapterCharacterSet;
-  for (auto const &control : comboBoxControls)
+  for (auto const &control : comboBoxControls) {
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    Util::fixComboBoxViewWidth(*control);
+  }
 
   onSplitModeChanged(MuxConfig::DoNotSplit);
 
