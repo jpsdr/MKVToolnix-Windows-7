@@ -1442,7 +1442,7 @@ qtmp4_reader_c::create_audio_packetizer_ac3(qtmp4_demuxer_cptr &dmx) {
   auto buf = dmx->read_first_bytes(64);
 
   if (!buf || (-1 == dmx->m_ac3_header.find_in(buf))) {
-    mxwarn_tid(m_ti.m_fname, dmx->id, Y("No AC3 header found in first frame; track will be skipped.\n"));
+    mxwarn_tid(m_ti.m_fname, dmx->id, Y("No AC-3 header found in first frame; track will be skipped.\n"));
     dmx->ok = false;
 
     return false;

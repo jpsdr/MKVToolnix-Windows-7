@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   AC3 output module
+   AC-3 output module
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -61,9 +61,9 @@ ac3_packetizer_c::get_frame() {
 
     if (0 < offset) {
       mxinfo_tid(m_ti.m_fname, m_ti.m_id,
-                 boost::format(Y("This AC3 track contains %1% bytes of non-AC3 data at the beginning. "
+                 boost::format(Y("This AC-3 track contains %1% bytes of non-AC-3 data at the beginning. "
                                  "This corresponds to a delay of %2%ms. "
-                                 "This delay will be used instead of the non-AC3 data.\n"))
+                                 "This delay will be used instead of the non-AC-3 data.\n"))
                  % frame.m_garbage_size % (offset / 1000000));
 
       warning_printed             = true;

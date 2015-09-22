@@ -2,7 +2,7 @@
 
 class T_231X_ac3_header_removal < Test
   def description
-    return "mkvextract / raw AC3 with header removal / out(AC3)"
+    return "mkvextract / raw AC-3 with header removal / out(AC-3)"
   end
 
   def run
@@ -10,4 +10,3 @@ class T_231X_ac3_header_removal < Test
     return hash_tmp
   end
 end
-

@@ -2,7 +2,7 @@
 
 class T_238ac3_in_wav_acm_mode < Test
   def description
-    return "mkvmerge / AC3 in WAV in ACM mode / in(WAV)"
+    return "mkvmerge / AC-3 in WAV in ACM mode / in(WAV)"
   end
 
   def run
@@ -10,4 +10,3 @@ class T_238ac3_in_wav_acm_mode < Test
     return hash_tmp
   end
 end
-

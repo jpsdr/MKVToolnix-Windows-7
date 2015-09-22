@@ -63,13 +63,13 @@ enum mpeg_ts_stream_type_e {
   ISO_14496_PART10_VIDEO    = 0x1b, // ISO/IEC 14496-10 Video (MPEG-4 part 10/AVC, aka H.264)
   ISO_23008_PART2_VIDEO     = 0x24, // ISO/IEC 14496-10 Video (MPEG-H part 2/HEVC, aka H.265)
   STREAM_AUDIO_PCM          = 0x80, // PCM
-  STREAM_AUDIO_AC3          = 0x81, // Audio AC3 (A52)
+  STREAM_AUDIO_AC3          = 0x81, // Audio AC-3 (A/52)
   STREAM_AUDIO_DTS          = 0x82, // Audio DTS
-  STREAM_AUDIO_AC3_LOSSLESS = 0x83, // Audio AC3 - Dolby lossless
-  STREAM_AUDIO_AC3_PLUS     = 0x84, // Audio AC3 - Dolby Digital Plus (EAC3)
+  STREAM_AUDIO_AC3_LOSSLESS = 0x83, // Audio AC-3 - Dolby lossless
+  STREAM_AUDIO_AC3_PLUS     = 0x84, // Audio AC-3 - Dolby Digital Plus (E-AC-3)
   STREAM_AUDIO_DTS_HD       = 0x85, // Audio DTS HD
   STREAM_AUDIO_DTS_HD_MA    = 0x86, // Audio DTS HD Master Audio
-  STREAM_AUDIO_AC3_PLUS2    = 0xa1, // Audio AC3 - Dolby Digital Plus (EAC3); secondary stream
+  STREAM_AUDIO_AC3_PLUS2    = 0xa1, // Audio AC-3 - Dolby Digital Plus (E-AC-3); secondary stream
   STREAM_AUDIO_DTS_HD2      = 0xa2, // Audio DTS HD Express; secondary stream
   STREAM_VIDEO_VC1          = 0xEA, // Video VC-1
   STREAM_SUBTITLES_HDMV_PGS = 0x90, // HDMV PGS subtitles

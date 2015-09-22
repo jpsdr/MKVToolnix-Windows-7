@@ -1022,7 +1022,7 @@ copies both the core and the extensions\&.
 Currently only
 DTS
 tracks are affected by this option\&. TrueHD tracks that contain an embedded
-AC3
+AC\-3
 core are instead presented as two separate tracks for which the user can select which track to copy\&. For
 DTS
 such a scheme would not work as the HD extensions cannot be decoded by themselves \(en unlike the TrueHD data\&.
@@ -1638,7 +1638,7 @@ AVIファイル: ビデオトラックのIDは0になります。オーディオ
 .sp -1
 .IP \(bu 2.3
 .\}
-AAC、AC3、MP3、SRT、及びWAVファイル: ファイル中の唯一のトラックがID 0 を割り当てられます。
+AAC、AC\-3、MP3、SRT、及びWAVファイル: ファイル中の唯一のトラックがID 0 を割り当てられます。
 .RE
 .sp
 .RS 4
@@ -2238,7 +2238,7 @@ file would look like this:
 音声のみのファイルはこのようになるでしょう。
 .SH "外部タイムコードファイル"
 .PP
-ユーザは、特定のトラックのタイムコードを自分で\fBmkvmerge\fR(1)に指定することができます。これは可変フレームレートビデオを含むファイルを作成するときや、オーディオに無音を挿入するときに使用できます。この場合、フレームはMatroska(TM)ブロックを作成する際の単位となります。ビデオでは、これはちょうど1フレームとなり、オーディオではこれは各オーディオタイプの1パケットとなります。例えば、AC3では、これは\fB1536\fRサンプルを含む1パケットとなります。
+ユーザは、特定のトラックのタイムコードを自分で\fBmkvmerge\fR(1)に指定することができます。これは可変フレームレートビデオを含むファイルを作成するときや、オーディオに無音を挿入するときに使用できます。この場合、フレームはMatroska(TM)ブロックを作成する際の単位となります。ビデオでは、これはちょうど1フレームとなり、オーディオではこれは各オーディオタイプの1パケットとなります。例えば、AC\-3では、これは\fB1536\fRサンプルを含む1パケットとなります。
 .PP
 結合されたトラックにタイムコードファイルを指定する場合は、各結合されるトラックチェインの最初の部分にのみ指定してください。例えばv1\&.avi、v2\&.aviの二つのファイルを結合し、タイムコードを使用したいときのコマンドラインは次のようになります。
 .sp

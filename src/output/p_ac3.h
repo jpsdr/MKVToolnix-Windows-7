@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definition for the AC3 output module
+   class definition for the AC-3 output module
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -39,7 +39,7 @@ public:
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
-    return YT("AC3");
+    return YT("AC-3");
   }
 
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);

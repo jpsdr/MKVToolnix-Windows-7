@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definitions for the AC3 demultiplexer module
+   class definitions for the AC-3 demultiplexer module
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */

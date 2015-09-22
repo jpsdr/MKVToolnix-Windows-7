@@ -2,7 +2,7 @@
 
 class T_328dts_detected_as_ac3 < Test
   def description
-    "mkvmerge / DTS detected as AC3"
+    "mkvmerge / DTS detected as AC-3"
   end
 
   def run
@@ -10,4 +10,3 @@ class T_328dts_detected_as_ac3 < Test
     hash_tmp
   end
 end
-

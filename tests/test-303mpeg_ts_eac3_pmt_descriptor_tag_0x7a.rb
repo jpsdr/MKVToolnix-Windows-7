@@ -2,7 +2,7 @@
 
 class T_303mpeg_ts_eac3_pmt_descriptor_tag_0x7a < Test
   def description
-    "mkvmerge / MPEG TS with EAC3 stored with PMT descriptor tag 0x7a"
+    "mkvmerge / MPEG TS with E-AC-3 stored with PMT descriptor tag 0x7a"
   end
 
   def run
@@ -10,4 +10,3 @@ class T_303mpeg_ts_eac3_pmt_descriptor_tag_0x7a < Test
     hash_tmp
   end
 end
-

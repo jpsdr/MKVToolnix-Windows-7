@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   Splitting TrueHD/AC3 into to packetizers
+   Splitting TrueHD/AC-3 into to packetizers
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */

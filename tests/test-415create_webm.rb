@@ -12,7 +12,7 @@ describe "mkvmerge / create WebM files from various formats"
 end
 
 [ [ 'AAC',       'aac/v.aac'                            ],
-  [ 'AC3',       'ac3/v.ac3'                            ],
+  [ 'AC-3',      'ac3/v.ac3'                            ],
   [ 'ALAC',      'alac/test-alacconvert.caf'            ],
   [ 'DivX',      'avi/divxFaac51.avi'                   ],
   [ 'h.264/AVC', 'h254/opengop.h264'                    ],

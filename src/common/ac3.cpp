@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   helper function for AC3 data
+   helper function for AC-3 data
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -210,16 +210,16 @@ std::string
 ac3::frame_c::to_string(bool verbose)
   const {
   if (!verbose)
-    return (boost::format("position %1% BS ID %2% size %3% EAC3 %4%") % m_stream_position % m_bs_id % m_bytes % is_eac3()).str();
+    return (boost::format("position %1% BS ID %2% size %3% E-AC-3 %4%") % m_stream_position % m_bs_id % m_bytes % is_eac3()).str();
 
   const std::string &frame_type = !is_eac3()                                  ? "---"
                                 : m_frame_type == EAC3_FRAME_TYPE_INDEPENDENT ? "independent"
                                 : m_frame_type == EAC3_FRAME_TYPE_DEPENDENT   ? "dependent"
-                                : m_frame_type == EAC3_FRAME_TYPE_AC3_CONVERT ? "AC3 convert"
+                                : m_frame_type == EAC3_FRAME_TYPE_AC3_CONVERT ? "AC-3 convert"
                                 : m_frame_type == EAC3_FRAME_TYPE_RESERVED    ? "reserved"
                                 :                                               "unknown";
 
-  std::string output = (boost::format("position %1% size %3% garbage %2% BS ID %4% EAC3 %15% sample rate %5% bit rate %6% channels %7% flags %8% samples %9% type %10% (%13%) "
+  std::string output = (boost::format("position %1% size %3% garbage %2% BS ID %4% E-AC-3 %15% sample rate %5% bit rate %6% channels %7% flags %8% samples %9% type %10% (%13%) "
                                       "sub stream ID %11% has dependent frames %12% total size %14%")
                         % m_stream_position
                         % m_garbage_size

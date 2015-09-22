@@ -356,7 +356,7 @@ mpeg_ts_track_c::new_stream_a_truehd() {
         auto &header       = frame->m_ac3_header;
 
         mxdebug_if(m_debug_headers,
-                   boost::format("mpeg_ts_track_c::new_stream_a_truehd: first AC3 header bsid %1% channels %2% sample_rate %3% bytes %4% samples %5%\n")
+                   boost::format("mpeg_ts_track_c::new_stream_a_truehd: first AC-3 header bsid %1% channels %2% sample_rate %3% bytes %4% samples %5%\n")
                    % header.m_bs_id % header.m_channels % header.m_sample_rate % header.m_bytes % header.m_samples);
 
         m_coupled_track->a_channels    = header.m_channels;
@@ -746,7 +746,7 @@ mpeg_ts_reader_c::read_headers() {
     if (track->m_coupled_track)
       track->m_coupled_track->language = track->language;
 
-    // For TrueHD tracks detection for embedded AC3 frames is
+    // For TrueHD tracks detection for embedded AC-3 frames is
     // done. However, »probed_ok« is only set on the TrueHD track if
     // both types have been found. If only TrueHD is found then
     // »probed_ok« must be set to true after detection has exhausted
@@ -1052,8 +1052,8 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
       }
 
       case STREAM_AUDIO_AC3:
-      case STREAM_AUDIO_AC3_PLUS: // EAC3
-      case STREAM_AUDIO_AC3_PLUS2: // EAC3 secondary stream
+      case STREAM_AUDIO_AC3_PLUS:  // E-AC-3
+      case STREAM_AUDIO_AC3_PLUS2: // E-AC-3 secondary stream
         track->type      = ES_AUDIO_TYPE;
         track->codec     = codec_c::look_up(codec_c::type_e::A_AC3);
         break;
@@ -1099,8 +1099,8 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
         case 0x59: // Subtitles descriptor
           track->parse_vobsub_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
-        case 0x6A: // AC3 descriptor
-        case 0x7A: // EAC3 descriptor
+        case 0x6A: // AC-3 descriptor
+        case 0x7A: // E-AC-3 descriptor
           track->parse_ac3_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
           break;
         case 0x7b: // DTS descriptor
@@ -1111,7 +1111,7 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
       pmt_descriptor = (mpeg_ts_pmt_descriptor_t *)((unsigned char *)pmt_descriptor + sizeof(mpeg_ts_pmt_descriptor_t) + pmt_descriptor->length);
     }
 
-    // Default to AC3 if it's a PES private stream type that's missing
+    // Default to AC-3 if it's a PES private stream type that's missing
     // a known/more concrete descriptor tag.
     if ((pmt_pid_info->stream_type == ISO_13818_PES_PRIVATE) && missing_tag) {
       track->type  = ES_AUDIO_TYPE;

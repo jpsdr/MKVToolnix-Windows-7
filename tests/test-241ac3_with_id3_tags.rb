@@ -2,7 +2,7 @@
 
 class T_241ac3_with_id3_tags < Test
   def description
-    return "mkvmerge / AC3 with ID3 tags / in(AC3)"
+    return "mkvmerge / AC-3 with ID3 tags / in(AC-3)"
   end
 
   def run
@@ -10,4 +10,3 @@ class T_241ac3_with_id3_tags < Test
     return hash_tmp
   end
 end
-

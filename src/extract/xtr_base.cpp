@@ -135,9 +135,9 @@ xtr_base_c::create_extractor(const std::string &new_codec_id,
 
   // Audio formats
   else if (new_codec_id == MKV_A_AC3)
-    return new xtr_base_c(new_codec_id, new_tid, tspec, "Dolby Digital (AC3)");
+    return new xtr_base_c(new_codec_id, new_tid, tspec, "Dolby Digital (AC-3)");
   else if (new_codec_id == MKV_A_EAC3)
-    return new xtr_base_c(new_codec_id, new_tid, tspec, "Dolby Digital Plus (EAC3)");
+    return new xtr_base_c(new_codec_id, new_tid, tspec, "Dolby Digital Plus (E-AC-3)");
   else if (balg::istarts_with(new_codec_id, "A_MPEG/L"))
     return new xtr_base_c(new_codec_id, new_tid, tspec, "MPEG-1 Audio Layer 2/3");
   else if (new_codec_id == MKV_A_DTS)

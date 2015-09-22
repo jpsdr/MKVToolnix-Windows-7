@@ -2,7 +2,7 @@
 
 class T_003ac3 < Test
   def description
-    return "mkvmerge / audio only / in(AC3)"
+    return "mkvmerge / audio only / in(AC-3)"
   end
 
   def run

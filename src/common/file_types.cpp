@@ -22,7 +22,7 @@ file_type_t::get_supported() {
   if (!s_supported_file_types.empty())
     return s_supported_file_types;
 
-  s_supported_file_types.push_back(file_type_t(Y("A/52 (aka AC3)"),                      "ac3 eac3"));
+  s_supported_file_types.push_back(file_type_t(Y("A/52 (aka AC-3)"),                     "ac3 eac3"));
   s_supported_file_types.push_back(file_type_t(Y("AAC (Advanced Audio Coding)"),         "aac m4a mp4"));
   s_supported_file_types.push_back(file_type_t(Y("AVC/h.264 elementary streams"),        "264 avc h264 x264"));
   s_supported_file_types.push_back(file_type_t(Y("AVI (Audio/Video Interleaved)"),       "avi"));
@@ -65,7 +65,7 @@ file_type_t::get_supported() {
 translatable_string_c
 file_type_t::get_name(file_type_e type) {
   return FILE_TYPE_AAC       == type ? YT("AAC")
-       : FILE_TYPE_AC3       == type ? YT("AC3")
+       : FILE_TYPE_AC3       == type ? YT("AC-3")
        : FILE_TYPE_ASF       == type ? YT("Windows Media (ASF/WMV)")
        : FILE_TYPE_AVC_ES    == type ? YT("AVC/h.264")
        : FILE_TYPE_AVI       == type ? YT("AVI")

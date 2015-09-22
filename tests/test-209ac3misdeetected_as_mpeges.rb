@@ -2,7 +2,7 @@
 
 class T_209ac3misdeetected_as_mpeges < Test
   def description
-    return "mkvmerge / AC3 misdetected as MPEG-ES / in(AC3)"
+    return "mkvmerge / AC-3 misdetected as MPEG-ES / in(AC-3)"
   end
 
   def run
@@ -10,4 +10,3 @@ class T_209ac3misdeetected_as_mpeges < Test
     return hash_tmp
   end
 end
-

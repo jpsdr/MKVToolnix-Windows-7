@@ -1317,7 +1317,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
       </para>
 
       <para>
-       Currently only <abbrev>DTS</abbrev> tracks are affected by this option. TrueHD tracks that contain an embedded <abbrev>AC3</abbrev>
+       Currently only <abbrev>DTS</abbrev> tracks are affected by this option. TrueHD tracks that contain an embedded <abbrev>AC-3</abbrev>
        core are instead presented as two separate tracks for which the user can select which track to copy. For <abbrev>DTS</abbrev> such a
        scheme would not work as the HD extensions cannot be decoded by themselves – unlike the TrueHD data.
       </para>
@@ -2014,7 +2014,7 @@ Track ID 1: audio (A_MPEG/L3)</screen>
 
    <listitem>
     <para>
-     <abbrev>AAC</abbrev>, <abbrev>AC3</abbrev>, <abbrev>MP3</abbrev>, <abbrev>SRT</abbrev> and <abbrev>WAV</abbrev> files: The one 'track'
+     <abbrev>AAC</abbrev>, <abbrev>AC-3</abbrev>, <abbrev>MP3</abbrev>, <abbrev>SRT</abbrev> and <abbrev>WAV</abbrev> files: The one 'track'
      in that file gets the ID 0.
     </para>
    </listitem>
@@ -2705,7 +2705,7 @@ CHAPTER03NAME=Baby rocks the house</screen>
   <para>
    &mkvmerge; allows the user to chose the timecodes for a specific track himself. This can be used in order to create files with variable
    frame rate video or include gaps in audio. A frame in this case is the unit that &mkvmerge; creates separately per &matroska; block. For
-   video this is exactly one frame, for audio this is one packet of the specific audio type. E.g. for <abbrev>AC3</abbrev> this would be a
+   video this is exactly one frame, for audio this is one packet of the specific audio type. E.g. for <abbrev>AC-3</abbrev> this would be a
    packet containing <constant>1536</constant> samples.
   </para>
 

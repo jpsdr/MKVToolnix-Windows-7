@@ -77,7 +77,7 @@ protected:
 #define AC3WAV_SYNC_WORD1 0xf872
 #define AC3WAV_SYNC_WORD2 0x4e1f
 
-// Structure of AC3-in-WAV:
+// Structure of AC-3-in-WAV:
 //
 // AA BB C D EE F..F 0..0
 //
@@ -86,9 +86,9 @@ protected:
 // A     | 2          | AC3WAV_SYNC_WORD1
 // B     | 2          | AC3WAV_SYNC_WORD2
 // C     | 1          | BSMOD
-// D     | 1          | data type; 0x01 = AC3
+// D     | 1          | data type; 0x01 = AC-3
 // E     | 2          | number of bits in payload
-// F     | E/8        | one AC3 packet
+// F     | E/8        | one AC-3 packet
 // 0     | 6144-E/8-8 | zero padding
 
 class wav_ac3wav_demuxer_c: public wav_ac3acm_demuxer_c {

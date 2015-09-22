@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   definitions and helper functions for AC3 data
+   definitions and helper functions for AC-3 data
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */

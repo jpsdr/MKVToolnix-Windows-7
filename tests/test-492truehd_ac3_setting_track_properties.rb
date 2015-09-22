@@ -1,7 +1,7 @@
 #!/usr/bin/ruby -w
 
 # T_492truehd_ac3_setting_track_properties
-describe "mkvmerge / setting track properties for AC3 cores embedded in TrueHD tracks"
+describe "mkvmerge / setting track properties for AC-3 cores embedded in TrueHD tracks"
 
 [
   "--language 0:fre --language 1:ger",

@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definitions for the TrueHD/AC3 splitting converter
+   class definitions for the TrueHD/AC-3 splitting converter
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */

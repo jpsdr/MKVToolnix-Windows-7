@@ -2,7 +2,7 @@
 
 class T_237ac3_in_wav_iec61937_mode < Test
   def description
-    return "mkvmerge / AC3 in WAV in IEC 61937 mode / in(WAV)"
+    return "mkvmerge / AC-3 in WAV in IEC 61937 mode / in(WAV)"
   end
 
   def run
@@ -10,4 +10,3 @@ class T_237ac3_in_wav_iec61937_mode < Test
     return hash_tmp
   end
 end
-
