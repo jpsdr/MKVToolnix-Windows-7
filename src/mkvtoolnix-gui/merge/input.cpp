@@ -291,7 +291,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(ui->stereoscopy,
                    Q("%1 %2")
                    .arg(QY("Sets the stereo mode of the video track to this value."))
-                   .arg("If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all."));
+                   .arg(QY("If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all.")));
   Util::setToolTip(ui->naluSizeLength,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QY("Forces the NALU size length to a certain number of bytes."))
