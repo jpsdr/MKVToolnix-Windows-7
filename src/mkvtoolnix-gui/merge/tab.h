@@ -22,6 +22,11 @@ namespace Ui {
 class Tab;
 }
 
+enum class InitialDirMode {
+    ContentLastOpenDir
+  , ContentFirstInputFileLastOpenDir
+};
+
 class Tab : public QWidget {
   Q_OBJECT;
 
@@ -229,8 +234,9 @@ protected:
   virtual void withSelectedTracks(std::function<void(Track *)> code, bool notIfAppending = false, QWidget *widget = nullptr);
   virtual void withSelectedAttachments(std::function<void(Attachment *)> code);
   virtual void addOrRemoveEmptyComboBoxItem(bool add);
-  virtual QString getOpenFileName(QString const &title, QString const &filter, QLineEdit *lineEdit);
+  virtual QString getOpenFileName(QString const &title, QString const &filter, QLineEdit *lineEdit, InitialDirMode intialDirMode = InitialDirMode::ContentLastOpenDir);
   virtual QString getSaveFileName(QString const &title, QString const &filter, QLineEdit *lineEdit);
+  virtual QString determineInitialDir(QLineEdit *lineEdit, InitialDirMode mode) const;
 
   virtual void moveSourceFilesUpOrDown(bool up);
   virtual void moveTracksUpOrDown(bool up);

@@ -199,16 +199,32 @@ Tab::onStartMuxing() {
 }
 
 QString
+Tab::determineInitialDir(QLineEdit *lineEdit,
+                         InitialDirMode mode)
+  const {
+  if (!lineEdit->text().isEmpty())
+    return QFileInfo{ lineEdit->text() }.path();
+
+  if (   (mode == InitialDirMode::ContentFirstInputFileLastOpenDir)
+      && !m_config.m_files.isEmpty()
+      && !m_config.m_files[0]->m_fileName.isEmpty())
+    return QFileInfo{ m_config.m_files[0]->m_fileName }.path();
+
+  return Util::Settings::get().m_lastOpenDir.path();
+}
+
+QString
 Tab::getOpenFileName(QString const &title,
                      QString const &filter,
-                     QLineEdit *lineEdit) {
+                     QLineEdit *lineEdit,
+                     InitialDirMode initialDirMode) {
   auto fullFilter = filter;
   if (!fullFilter.isEmpty())
     fullFilter += Q(";;");
   fullFilter += QY("All files") + Q(" (*)");
 
   auto &settings = Util::Settings::get();
-  auto dir       = lineEdit->text().isEmpty() ? settings.m_lastOpenDir.path() : QFileInfo{ lineEdit->text() }.path();
+  auto dir       = determineInitialDir(lineEdit, initialDirMode);
   auto fileName  = QFileDialog::getOpenFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
     return fileName;
