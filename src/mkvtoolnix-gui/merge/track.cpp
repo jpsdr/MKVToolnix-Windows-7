@@ -286,6 +286,10 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (m_reduceAudioToCore)
       opt.options << Q("--reduce-to-core") << sid;
 
+  } else if (isVideo()) {
+    if (!m_cropping.isEmpty())
+      opt.options << Q("--cropping") << Q("%1:%2").arg(sid).arg(m_cropping);
+
   } else if (isSubtitles()) {
     if (!m_characterSet.isEmpty())
       opt.options << Q("--sub-charset") << Q("%1:%2").arg(sid).arg(m_characterSet);
