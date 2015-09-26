@@ -113,6 +113,8 @@ Tab::load(QString const &fileName) {
     m_config.load(fileName);
     setControlValuesFromConfig();
 
+    m_tracksModel->updateEffectiveDefaultTrackFlags();
+
     m_savedState = currentState();
 
     MainWindow::get()->setStatusBarMessage(QY("The configuration has been loaded."));
