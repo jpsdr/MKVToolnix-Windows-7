@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include "common/at_scope_exit.h"
+#include "common/logger.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/merge/attachment.h"
@@ -478,17 +479,17 @@ void
 MuxConfig::debugDumpFileList()
   const {
   auto num = m_files.count();
-  mxinfo(boost::format("// Dumping file list with %1% entries\n") % num);
+  log_it(boost::format("// Dumping file list with %1% entries\n") % num);
 
   for (auto idx = 0; idx < num; ++idx) {
     auto const &file = *m_files[idx];
-    mxinfo(boost::format("%1%/%2% %3%\n") % idx % num % to_utf8(QFileInfo{file.m_fileName}.fileName()));
+    log_it(boost::format("%1%/%2% %3%\n") % idx % num % to_utf8(QFileInfo{file.m_fileName}.fileName()));
 
     for (auto addIdx = 0, addNum = file.m_additionalParts.count(); addIdx < addNum; ++addIdx)
-      mxinfo(boost::format("  = %1%/%2% %3%\n") % addIdx % addNum % to_utf8(QFileInfo{file.m_additionalParts[addIdx]->m_fileName}.fileName()));
+      log_it(boost::format("  = %1%/%2% %3%\n") % addIdx % addNum % to_utf8(QFileInfo{file.m_additionalParts[addIdx]->m_fileName}.fileName()));
 
     for (auto appIdx = 0, appNum = file.m_appendedFiles.count(); appIdx < appNum; ++appIdx)
-      mxinfo(boost::format("  + %1%/%2% %3%\n") % appIdx % appNum % to_utf8(QFileInfo{file.m_appendedFiles[appIdx]->m_fileName}.fileName()));
+      log_it(boost::format("  + %1%/%2% %3%\n") % appIdx % appNum % to_utf8(QFileInfo{file.m_appendedFiles[appIdx]->m_fileName}.fileName()));
   }
 }
 
@@ -501,15 +502,15 @@ MuxConfig::debugDumpTrackList()
 void
 MuxConfig::debugDumpSpecificTrackList(QList<Track *> const &tracks) {
   auto num = tracks.count();
-  mxinfo(boost::format("// Dumping track list with %1% entries\n") % num);
+  log_it(boost::format("// Dumping track list with %1% entries\n") % num);
 
   for (auto idx = 0; idx < num; ++idx) {
     auto const &track = *tracks[idx];
-    mxinfo(boost::format("%1%/%2% %3% %4% from %5%\n") % idx % num % track.nameForType() % track.m_codec % to_utf8(QFileInfo{track.m_file->m_fileName}.fileName()));
+    log_it(boost::format("%1%/%2% %3% %4% from %5%\n") % idx % num % track.nameForType() % track.m_codec % to_utf8(QFileInfo{track.m_file->m_fileName}.fileName()));
 
     for (auto appIdx = 0, appNum = track.m_appendedTracks.count(); appIdx < appNum; ++appIdx) {
       auto const &appTrack = *track.m_appendedTracks[appIdx];
-      mxinfo(boost::format("  %1%/%2% %3% %4% from %5%\n") % appIdx % appNum % appTrack.nameForType() % appTrack.m_codec % to_utf8(QFileInfo{appTrack.m_file->m_fileName}.fileName()));
+      log_it(boost::format("  %1%/%2% %3% %4% from %5%\n") % appIdx % appNum % appTrack.nameForType() % appTrack.m_codec % to_utf8(QFileInfo{appTrack.m_file->m_fileName}.fileName()));
     }
   }
 }

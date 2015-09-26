@@ -4,6 +4,7 @@
 #include <QFileInfo>
 #include <QItemSelectionModel>
 
+#include "common/logger.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
@@ -248,7 +249,7 @@ void
 TrackModel::dumpTracks(QString const &label)
   const {
   auto dumpIt = [](std::string const &prefix, Track const *track) {
-    mxinfo(boost::format("%1%%2% : %3% : %4% : %5% : %6% : %7%:\n")
+    log_it(boost::format("%1%%2% : %3% : %4% : %5% : %6% : %7%:\n")
            % prefix
            % (track->isChapters() || track->isGlobalTags() || track->isTags() ? QY("%1 entries").arg(track->m_size) : track->m_codec)
            % track->nameForType()
@@ -258,7 +259,7 @@ TrackModel::dumpTracks(QString const &label)
            % QFileInfo{ track->m_file->m_fileName }.fileName());
   };
 
-  mxinfo(boost::format("Dumping tracks %1%\n") % label);
+  log_it(boost::format("Dumping tracks %1%\n") % label);
 
   for (auto const &track : *m_tracks) {
     dumpIt("  ", track);
@@ -445,7 +446,7 @@ TrackModel::updateTrackLists() {
   }
 
   if (m_debug) {
-    mxinfo(boost::format("### AFTER drag & drop ###\n"));
+    log_it(boost::format("### AFTER drag & drop ###\n"));
     MuxConfig::debugDumpSpecificTrackList(*m_tracks);
   }
 
