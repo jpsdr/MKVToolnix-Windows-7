@@ -135,7 +135,8 @@ Settings::load() {
   m_clearMergeSettings                 = static_cast<ClearMergeSettingsAction>(reg.value("clearMergeSettings", static_cast<int>(ClearMergeSettingsAction::None)).toInt());
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
   m_disableDefaultTrackForSubtitles    = reg.value("disableDefaultTrackForSubtitles",    false).toBool();
-  m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls", true).toBool();
+  m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls",  true).toBool();
+  m_mergeUseVerticalInputLayout        = reg.value("mergeUseVerticalInputLayout",        false).toBool();
   m_mergeAddingAppendingFilesPolicy    = static_cast<AddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(AddingAppendingFilesPolicy::Ask)).toInt());
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
@@ -249,6 +250,7 @@ Settings::save()
   reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
   reg.setValue("disableDefaultTrackForSubtitles",    m_disableDefaultTrackForSubtitles);
   reg.setValue("mergeAlwaysShowOutputFileControls",  m_mergeAlwaysShowOutputFileControls);
+  reg.setValue("mergeUseVerticalInputLayout",        m_mergeUseVerticalInputLayout);
   reg.setValue("mergeAddingAppendingFilesPolicy",    static_cast<int>(m_mergeAddingAppendingFilesPolicy));
 
   reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));

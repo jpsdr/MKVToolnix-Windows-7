@@ -50,7 +50,7 @@ Tab::setupControlLists() {
   m_videoControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
                   << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
                   << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timecodesLabel << ui->timecodes << ui->browseTimecodes
-                  << ui->picturePropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
+                  << ui->videoPropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
                   << ui->stereoscopy << ui->naluSizeLengthLabel << ui->naluSizeLength << ui->croppingLabel << ui->cropping << ui->cuesLabel << ui->cues
                   << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo;
 
@@ -65,7 +65,7 @@ Tab::setupControlLists() {
   m_allInputControls << ui->muxThisLabel << ui->muxThis << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
                      << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
                      << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timecodesLabel << ui->timecodes << ui->browseTimecodes
-                     << ui->picturePropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
+                     << ui->videoPropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
                      << ui->stereoscopy << ui->croppingLabel << ui->cropping << ui->audioPropertiesBox << ui->aacIsSBR << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet
                      << ui->miscellaneousBox << ui->cuesLabel << ui->cues << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions
                      << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore << ui->naluSizeLengthLabel << ui->naluSizeLength;
@@ -90,11 +90,73 @@ Tab::setupMoveUpDownButtons() {
 }
 
 void
+Tab::setupInputLayout() {
+  if (Util::Settings::get().m_mergeUseVerticalInputLayout)
+    setupVerticalInputLayout();
+  else
+    setupHorizontalInputLayout();
+}
+
+void
+Tab::setupHorizontalInputLayout() {
+  if (ui->wProperties->isVisible())
+    return;
+
+  ui->twProperties->hide();
+  ui->wProperties->show();
+
+  auto layout  = qobject_cast<QBoxLayout *>(ui->scrollAreaWidgetContents->layout());
+
+  Q_ASSERT(!!layout);
+
+  ui->generalOptionsBox              ->setParent(ui->scrollAreaWidgetContents);
+  ui->timecodesAndDefaultDurationBox ->setParent(ui->scrollAreaWidgetContents);
+  ui->videoPropertiesBox             ->setParent(ui->scrollAreaWidgetContents);
+  ui->audioPropertiesBox             ->setParent(ui->scrollAreaWidgetContents);
+  ui->subtitleAndChapterPropertiesBox->setParent(ui->scrollAreaWidgetContents);
+  ui->miscellaneousBox               ->setParent(ui->scrollAreaWidgetContents);
+
+  layout->insertWidget(0, ui->generalOptionsBox);
+  layout->insertWidget(1, ui->timecodesAndDefaultDurationBox);
+  layout->insertWidget(2, ui->videoPropertiesBox);
+  layout->insertWidget(3, ui->audioPropertiesBox);
+  layout->insertWidget(4, ui->subtitleAndChapterPropertiesBox);
+  layout->insertWidget(5, ui->miscellaneousBox);
+}
+
+void
+Tab::setupVerticalInputLayout() {
+  if (ui->twProperties->isVisible())
+    return;
+
+  ui->twProperties->show();
+  ui->wProperties->hide();
+
+  auto moveTo = [this](QWidget *page, int position, QWidget *widget) {
+    auto layout = qobject_cast<QBoxLayout *>(page->layout());
+    Q_ASSERT(!!layout);
+
+    widget->setParent(page);
+    layout->insertWidget(position, widget);
+  };
+
+  moveTo(ui->generalOptionsPage,                 0, ui->generalOptionsBox);
+  moveTo(ui->timecodesAndDefaultDurationPage,    0, ui->timecodesAndDefaultDurationBox);
+  moveTo(ui->videoPropertiesPage,                0, ui->videoPropertiesBox);
+  moveTo(ui->audioSubtitleChapterPropertiesPage, 0, ui->audioPropertiesBox);
+  moveTo(ui->audioSubtitleChapterPropertiesPage, 1, ui->subtitleAndChapterPropertiesBox);
+  moveTo(ui->miscellaneousPage,                  0, ui->miscellaneousBox);
+}
+
+void
 Tab::setupInputControls() {
   auto &cfg = Util::Settings::get();
 
+  ui->twProperties->hide();
+
   setupControlLists();
   setupMoveUpDownButtons();
+  setupInputLayout();
 
   ui->files->setModel(m_filesModel);
   ui->tracks->setModel(m_tracksModel);
@@ -210,6 +272,7 @@ Tab::setupInputControls() {
   connect(m_tracksModel,                    &TrackModel::itemChanged,                         this,                     &Tab::onTrackItemChanged);
 
   connect(mw,                               &MainWindow::preferencesChanged,                  this,                     &Tab::setupMoveUpDownButtons);
+  connect(mw,                               &MainWindow::preferencesChanged,                  this,                     &Tab::setupInputLayout);
   connect(mw,                               &MainWindow::preferencesChanged,                  ui->trackLanguage,        &Util::ComboBoxBase::reInitialize);
   connect(mw,                               &MainWindow::preferencesChanged,                  ui->chapterLanguage,      &Util::ComboBoxBase::reInitialize);
   connect(mw,                               &MainWindow::preferencesChanged,                  ui->subtitleCharacterSet, &Util::ComboBoxBase::reInitialize);

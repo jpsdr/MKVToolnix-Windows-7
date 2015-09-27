@@ -111,6 +111,8 @@ public slots:
   virtual void setupMoveUpDownButtons();
   virtual void enableMoveFilesButtons();
 
+  virtual void setupInputLayout();
+
   virtual void onTrackNameChanged(QString newValue);
   virtual void onTrackItemChanged(QStandardItem *item);
   virtual void onMuxThisChanged(int selected);
@@ -241,6 +243,9 @@ protected:
   virtual void moveSourceFilesUpOrDown(bool up);
   virtual void moveTracksUpOrDown(bool up);
   virtual void moveAttachmentsUpOrDown(bool up);
+
+  virtual void setupHorizontalInputLayout();
+  virtual void setupVerticalInputLayout();
 
   virtual void moveOutputFileNameToGlobal();
   virtual void moveOutputFileNameToOutputTab();

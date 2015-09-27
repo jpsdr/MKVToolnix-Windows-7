@@ -53,6 +53,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
   ui->cbMDisableDefaultTrackForSubtitles->setChecked(m_cfg.m_disableDefaultTrackForSubtitles);
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
+  ui->cbMUseVerticalInputLayout->setChecked(m_cfg.m_mergeUseVerticalInputLayout);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
   ui->cbMDefaultTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultTrackLanguage);
   ui->cbMDefaultSubtitleCharset->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
@@ -158,6 +159,11 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("If enabled the output file name controls will always be visible no matter which tab is currently shown."))
                    .arg(QY("Otherwise they're shown on the 'output' tab.")));
+
+  Util::setToolTip(ui->cbMUseVerticalInputLayout,
+                   Q("%1 %2")
+                   .arg(QY("Normally the track property controls are shown on the right side in a scrollable widget."))
+                   .arg(QY("With this option enabled they're shown below the track list in a tab widget instead.")));
 
   Util::setToolTip(ui->cbMClearMergeSettings,
                    Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li></ol>")
@@ -417,6 +423,7 @@ PreferencesDialog::save() {
   m_cfg.m_disableDefaultTrackForSubtitles    = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
   m_cfg.m_mergeAddingAppendingFilesPolicy    = static_cast<Util::Settings::AddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysShowOutputFileControls  = ui->cbMAlwaysShowOutputFileControls->isChecked();
+  m_cfg.m_mergeUseVerticalInputLayout        = ui->cbMUseVerticalInputLayout->isChecked();
   m_cfg.m_clearMergeSettings                 = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
   m_cfg.m_defaultTrackLanguage               = ui->cbMDefaultTrackLanguage->currentData().toString();
   m_cfg.m_defaultSubtitleCharset             = ui->cbMDefaultSubtitleCharset->currentData().toString();
