@@ -15,17 +15,18 @@
 
 #include "common/strings/utf8.h"
 
-class logger_c;
-using logger_cptr = std::shared_ptr<logger_c>;
+namespace mtx { namespace log {
 
-class logger_c {
+class target_c;
+using target_cptr = std::shared_ptr<target_c>;
+
+class target_c {
 private:
-  bfs::path m_file_name;
   int64_t m_log_start;
 
 public:
-  logger_c(bfs::path const &file_name);
-  virtual ~logger_c();
+  target_c();
+  virtual ~target_c();
 
   void log(std::string const &message) {
     log_line(message);
@@ -36,25 +37,48 @@ public:
 
 protected:
   virtual std::string format_line(std::string const &message);
-  virtual void log_line(std::string const &message);
+  virtual void log_line(std::string const &message) = 0;
 
-  static logger_cptr s_default_logger;
+  static target_cptr s_default_logger;
 
 public:
-  static logger_c &get_default_logger();
-  static void set_default_logger(logger_cptr logger);
+  static target_c &get_default_logger();
+  static void set_default_logger(target_cptr const &logger);
   static int64_t runtime();
 };
 
+class file_target_c: public target_c {
+private:
+  bfs::path m_file_name;
+
+public:
+  file_target_c(bfs::path const &file_name);
+  virtual ~file_target_c();
+
+protected:
+  virtual void log_line(std::string const &message) override;
+};
+
+class stderr_target_c: public target_c {
+public:
+  stderr_target_c();
+  virtual ~stderr_target_c();
+
+protected:
+  virtual void log_line(std::string const &message) override;
+};
+
 template<typename T>
-logger_c &
-operator <<(logger_c &logger,
+target_c &
+operator <<(target_c &logger,
             T const &message) {
   logger.log(to_utf8(message));
   return logger;
 }
 
-#define log_current_location() logger_c::get_default_logger() << (boost::format("Current file & line: %1%:%2%") % __FILE__ % __LINE__)
-#define log_it(arg)            logger_c::get_default_logger() << (arg)
+}}
+
+#define log_current_location() mtx::log::target_c::get_default_logger() << (boost::format("Current file & line: %1%:%2%") % __FILE__ % __LINE__)
+#define log_it(arg)            mtx::log::target_c::get_default_logger() << (arg)
 
 #endif // MTX_COMMON_LOGGER_H

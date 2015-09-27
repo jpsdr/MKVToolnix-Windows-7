@@ -17,10 +17,12 @@
 
 #include "common/logger.h"
 
-class windows_debug_logger_c: public logger_c {
+namespace mtx { namespace log {
+
+class windows_debug_target_c: public target_c {
 public:
-  windows_debug_logger_c();
-  virtual ~windows_debug_logger_c();
+  windows_debug_target_c();
+  virtual ~windows_debug_target_c();
 
 protected:
   virtual void log_line(std::string const &message) override;
@@ -28,6 +30,8 @@ protected:
 public:
   static void activate();
 };
+
+}}
 
 #endif // SYS_WINDOWS
 
