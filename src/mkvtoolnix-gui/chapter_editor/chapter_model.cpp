@@ -4,6 +4,7 @@
 
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
+#include "common/logger.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
@@ -395,7 +396,7 @@ ChapterModel::flags(QModelIndex const &idx)
     effectiveFlags    = selectedIsChapter ? defaultFlags | Qt::ItemIsDropEnabled : defaultFlags;
   }
 
-  // mxinfo(boost::format("sele is %1%/%2% (%3%/%4%) seleIsChap %5% flags %|6$04x| %7%\n")
+  // log_it(boost::format("sele is %1%/%2% (%3%/%4%) seleIsChap %5% flags %|6$04x| %7%\n")
   //        % m_selectedIdx.row() % m_selectedIdx.column() % m_selectedIdx.parent().row() % m_selectedIdx.parent().column() % selectedIsChapter %
   //        effectiveFlags % Util::itemFlagsToString(effectiveFlags));
 

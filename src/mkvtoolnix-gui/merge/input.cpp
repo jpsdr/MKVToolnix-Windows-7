@@ -16,6 +16,7 @@
 
 #include "common/extern_data.h"
 #include "common/iso639.h"
+#include "common/logger.h"
 #include "common/qt.h"
 #include "common/stereo_mode.h"
 #include "mkvtoolnix-gui/app.h"
@@ -885,7 +886,7 @@ Tab::addOrAppendFiles(bool append,
     return;
 
   if (m_debugTrackModel) {
-    mxinfo(boost::format("### BEFORE adding/appending ###\n"));
+    log_it(boost::format("### BEFORE adding/appending ###\n"));
     m_config.debugDumpFileList();
     m_config.debugDumpTrackList();
   }
@@ -898,7 +899,7 @@ Tab::addOrAppendFiles(bool append,
   m_filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
 
   if (m_debugTrackModel) {
-    mxinfo(boost::format("### AFTER adding/appending ###\n"));
+    log_it(boost::format("### AFTER adding/appending ###\n"));
     m_config.debugDumpFileList();
     m_config.debugDumpTrackList();
   }
