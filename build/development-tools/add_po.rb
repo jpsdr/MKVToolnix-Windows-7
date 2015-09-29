@@ -16,7 +16,7 @@ module AddPo
       map(&:chomp)
 
     language = content.
-      map { |line| /^\" Language: \s+ ([a-z_]+)/ix.match(line) ? $1 : nil }.
+      map { |line| /^\" Language: \s+ ([a-z_.@]+)/ix.match(line) ? $1 : nil }.
       compact.
       first
 
