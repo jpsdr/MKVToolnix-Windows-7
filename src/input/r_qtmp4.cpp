@@ -2711,6 +2711,18 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
 }
 
 void
+qtmp4_demuxer_c::derive_track_params_from_ac3_audio_bitstream() {
+  auto buf    = read_first_bytes(64);
+  auto header = ac3::frame_c{};
+
+  if (!buf || (-1 == header.find_in(buf)))
+    return;
+
+  a_channels   = header.m_channels;
+  a_samplerate = header.m_sample_rate;
+}
+
+void
 qtmp4_demuxer_c::derive_track_params_from_mp3_audio_bitstream() {
   auto buf = read_first_bytes(64);
   if (!buf)
@@ -2728,10 +2740,11 @@ qtmp4_demuxer_c::derive_track_params_from_mp3_audio_bitstream() {
 
 bool
 qtmp4_demuxer_c::verify_audio_parameters() {
-  if ((0 == a_channels) || (0.0 == a_samplerate)) {
-    if (codec.is(codec_c::type_e::A_MP3))
-      derive_track_params_from_mp3_audio_bitstream();
-  }
+  if (codec.is(codec_c::type_e::A_MP3))
+    derive_track_params_from_mp3_audio_bitstream();
+
+  else if (codec.is(codec_c::type_e::A_AC3))
+    derive_track_params_from_ac3_audio_bitstream();
 
   if ((0 == a_channels) || (0.0 == a_samplerate)) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n")) % id);
