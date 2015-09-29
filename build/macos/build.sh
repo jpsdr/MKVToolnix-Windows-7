@@ -3,7 +3,8 @@
 set -e
 set -x
 
-source ${0:h}/config.sh
+export SCRIPT_PATH=${0:h}
+source ${SCRIPT_PATH}/config.sh
 
 function fail {
   echo $@
@@ -13,7 +14,7 @@ function fail {
 function build_tarball {
   local package=${PWD:t}
   if [[ -n $SHARED ]] package="${package}-shared"
-  $DEBUG ${0:h}/myinstall.sh build package $package $@
+  $DEBUG ${SCRIPT_PATH}/myinstall.sh build package $package $@
 }
 
 function build_package {
