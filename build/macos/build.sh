@@ -119,8 +119,6 @@ function build_boost {
   ./b2 ${args} install
 }
 
-QTVER=5.4.2
-
 function build_qtbase {
   local -a args
   args=(--prefix=${TARGET} -opensource -confirm-license -release
