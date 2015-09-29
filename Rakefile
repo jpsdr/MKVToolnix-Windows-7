@@ -367,25 +367,27 @@ namespace :translations do
 
     puts "  CREATE po/#{locale}.po"
     File.open "po/#{locale}.po", "w" do |out|
-      now = Time.now
-      out.puts <<EOT
+      now           = Time.now
+      email         = ENV['EMAIL']
+      email         = "YOUR NAME <#{email}>" unless /</.match(email)
+      header        = <<EOT
 # translation of mkvtoolnix.pot to #{ENV['LANGUAGE']}
 # Copyright (C) #{now.year} Moritz Bunkus
 # This file is distributed under the same license as the mkvtoolnix package.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: #{locale}\\n"
-"Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\\n"
-"POT-Creation-Date: #{now.strftime('%Y-%m-%d %H:%M%z')}\\n"
-"PO-Revision-Date: #{now.strftime('%Y-%m-%d %H:%M%z')}\\n"
-"Last-Translator: YOUR NAME <#{ENV['EMAIL']}>\\n"
-"Language-Team: #{ENV['LANGUAGE']} <moritz@bunkus.org>\\n"
-"Language: #{locale}\\n"
-"MIME-Version: 1.0\\n"
-
 EOT
-      out.puts IO.readlines("po/mkvtoolnix.pot")
+
+      content = IO.
+        readlines("po/mkvtoolnix.pot").
+        join("").
+        gsub(/\A.*?msgid ""\n/m, header).
+        gsub(/^"PO-Revision-Date:.*?$/m, %{"PO-Revision-Date: #{now.strftime('%Y-%m-%d %H:%M%z')}\\n"}).
+        gsub(/^"Last-Translator:.*?$/m,  %{"Last-Translator: #{email}\\n"}).
+        gsub(/^"Language-Team:.*?$/m,    %{"Language-Team: #{ENV['LANGUAGE']} <moritz@bunkus.org>\\n"}).
+        gsub(/^"Language: \\n"$/,        %{"Language: #{locale}\\n"})
+
+      out.puts content
     end
   end
 
