@@ -568,7 +568,7 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
   }
 
   if (len_check != length) {
-    mxwarn_tid(m_ti.m_fname, dmx->track->id, boost::format(Y("Inconsistent AAC audio packet (length: %1% != len_check %2%)\n")) % length % len_check);
+    mxwarn_tid(m_ti.m_fname, dmx->track->id, boost::format(Y("Inconsistent AAC audio packet (length: %1% != %2%)\n")) % length % len_check);
     return;
   }
 

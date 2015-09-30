@@ -408,7 +408,7 @@ parse_cue_chapters(mm_text_io_c *in,
       }
 
       if (!index_ok)
-        mxerror(boost::format(Y("Cue sheet parser: Invalid INDEX number (got %1%, expected %2%) in line %3%,\n")) % index % a.start_indices.size() % a.line_num);
+        mxerror(boost::format(Y("Cue sheet parser: Invalid INDEX number (got %1%, expected %2%) in line %3%.\n")) % index % a.start_indices.size() % a.line_num);
 
     } else if (balg::istarts_with(line, "track ")) {
       if ((line.length() < 5) || strcasecmp(&line[line.length() - 5], "audio"))

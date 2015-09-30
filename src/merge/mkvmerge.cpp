@@ -109,7 +109,7 @@ set_usage() {
                   "                           cluster.\n");
   usage_text += Y("  --no-cues                Do not write the cue data (the index).\n");
   usage_text += Y("  --clusters-in-meta-seek  Write meta seek data for clusters.\n");
-  usage_text += Y("  --disable-lacing         Do not Use lacing.\n");
+  usage_text += Y("  --disable-lacing         Do not use lacing.\n");
   usage_text += Y("  --enable-durations       Enable block durations for all blocks.\n");
   usage_text += Y("  --timecode-scale <n>     Force the timecode scale factor to n.\n");
   usage_text += Y("  --disable-track-statistics-tags\n"

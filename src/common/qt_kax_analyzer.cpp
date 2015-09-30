@@ -72,7 +72,7 @@ QtKaxAnalyzer::displayUpdateElementResult(QWidget *parent,
 
     case kax_analyzer_c::uer_error_meta_seek:
       QMessageBox::warning(parent, QY("File structure warning"),
-                           Q("%1 %2").arg(message).arg(QY("The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the this element. "
+                           Q("%1 %2").arg(message).arg(QY("The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. "
                                                           "Please use your favorite player to check this file.")));
       return;
 
