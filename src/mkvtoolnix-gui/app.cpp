@@ -262,11 +262,11 @@ App::initializeLocale(QString const &requestedLocale) {
     m_currentTranslator.reset();
 
     auto translator = std::make_unique<QTranslator>();
-    auto paths      = QStringList{} << Q("%1/locale/%2/LC_MESSAGES").arg(applicationDirPath()).arg(locale)
+    auto paths      = QStringList{} << Q("%1/locale/libqt").arg(applicationDirPath())
                                     << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 
     for (auto const &path : paths)
-      if (translator->load(Q("qtbase_%1").arg(locale), path))
+      if (translator->load(Q("qt_%1").arg(locale), path))
         break;
 
     installTranslator(translator.get());
