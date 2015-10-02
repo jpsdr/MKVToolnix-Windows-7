@@ -1,6 +1,6 @@
 !define PRODUCT_NAME "MKVToolNix"
 !define PRODUCT_VERSION "8.4.0"
-!define PRODUCT_VERSION_BUILD " [20151002-943]"
+!define PRODUCT_VERSION_BUILD ""  # Intentionally left empty for releases
 !define PRODUCT_PUBLISHER "Moritz Bunkus"
 !define PRODUCT_WEB_SITE "https://www.bunkus.org/videotools/mkvtoolnix/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\mkvtoolnix-gui.exe"
