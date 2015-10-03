@@ -1,5 +1,10 @@
 2015-10-03  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: merge tool bug fix: If there's currently no
+        source file present when the user drags & drops files onto the
+        merge tool then the GUI will no longer leave an empty, superfluous
+        tab for certain drop modes. Fixes #1446.
+
         * MKVToolNix GUI: merge tool enhancement: implemented the optional
         warning before overwriting existing files when starting to mux or
         adding a job to the queue. The pending jobs in the queue are

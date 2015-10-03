@@ -1291,6 +1291,16 @@ Tab::setOutputFileNameMaybe() {
 
 void
 Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
+  if (fileNames.isEmpty())
+    return;
+
+  auto noFilesAdded = m_config.m_files.isEmpty();
+
+  if ((fileNames.count() == 1) && noFilesAdded) {
+    addOrAppendFiles(false, fileNames, QModelIndex{});
+    return;
+  }
+
   auto &settings = Util::Settings::get();
 
   auto decision  = settings.m_mergeAddingAppendingFilesPolicy;
@@ -1316,10 +1326,16 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
   else if (Util::Settings::AddingAppendingFilesPolicy::AddToNew == decision)
     MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames, false);
 
-  else if (Util::Settings::AddingAppendingFilesPolicy::AddEachToNew == decision)
-    MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames, true);
+  else if (Util::Settings::AddingAppendingFilesPolicy::AddEachToNew == decision) {
+    auto toAdd = fileNames;
 
-  else
+    if (noFilesAdded)
+      addOrAppendFiles(false, QStringList{} << toAdd.takeFirst(), QModelIndex{});
+
+    if (!toAdd.isEmpty())
+      MainWindow::mergeTool()->addMultipleFilesToNewSettings(toAdd, true);
+
+  } else
     addOrAppendFiles(Util::Settings::AddingAppendingFilesPolicy::Append == decision, fileNames, fileIdx);
 }
 
