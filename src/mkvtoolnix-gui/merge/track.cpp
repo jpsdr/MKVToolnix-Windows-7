@@ -117,7 +117,11 @@ Track::setDefaults() {
 
   auto language = m_properties[Q("language")];
   if (language.isEmpty())
-    language = settings.m_defaultTrackLanguage;
+    language = isAudio()     ? settings.m_defaultAudioTrackLanguage
+             : isVideo()     ? settings.m_defaultVideoTrackLanguage
+             : isSubtitles() ? settings.m_defaultSubtitleTrackLanguage
+             :                 Q("");
+
   auto idx = map_to_iso639_2_code(to_utf8(language), true);
   if (0 <= idx)
     m_language = to_qs(g_iso639_languages[idx].iso639_2_code);

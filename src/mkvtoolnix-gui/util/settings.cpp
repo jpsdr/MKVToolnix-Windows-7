@@ -94,7 +94,7 @@ void
 Settings::convertOldSettings() {
   auto reg = registry();
 
-  // mergeAlwaysAddDroppedFiles →
+  // mergeAlwaysAddDroppedFiles → mergeAddingAppendingFilesPolicy
   reg->beginGroup("settings");
   auto mergeAlwaysAddDroppedFiles = reg->value("mergeAlwaysAddDroppedFiles");
 
@@ -102,6 +102,20 @@ Settings::convertOldSettings() {
     reg->setValue("mergeAddingAppendingFilesPolicy", static_cast<int>(AddingAppendingFilesPolicy::Add));
 
   reg->remove("mergeAlwaysAddDroppedFiles");
+  reg->endGroup();
+
+  // defaultTrackLanguage → defaultAudioTrackLanguage, defaultVideoTrackLanguage, defaultSubtitleTrackLanguage;
+  reg->beginGroup("settings");
+
+  auto defaultTrackLanguage = reg->value("defaultTrackLanguage");
+  reg->remove("defaultTrackLanguage");
+
+  if (defaultTrackLanguage.isValid()) {
+    reg->setValue("defaultAudioTrackLanguage",    defaultTrackLanguage.toString());
+    reg->setValue("defaultVideoTrackLanguage",    defaultTrackLanguage.toString());
+    reg->setValue("defaultSubtitleTrackLanguage", defaultTrackLanguage.toString());
+  }
+
   reg->endGroup();
 }
 
@@ -177,7 +191,9 @@ Settings::load() {
   reg.endGroup();               // settings
 
   reg.beginGroup("defaults");
-  m_defaultTrackLanguage               = reg.value("defaultTrackLanguage", Q("und")).toString();
+  m_defaultAudioTrackLanguage          = reg.value("defaultAudioTrackLanguage",    Q("und")).toString();
+  m_defaultVideoTrackLanguage          = reg.value("defaultVideoTrackLanguage",    Q("und")).toString();
+  m_defaultSubtitleTrackLanguage       = reg.value("defaultSubtitleTrackLanguage", Q("und")).toString();
   m_defaultChapterLanguage             = reg.value("defaultChapterLanguage", Q("und")).toString();
   m_defaultChapterCountry              = reg.value("defaultChapterCountry").toString();
   auto subtitleCharset                 = reg.value("defaultSubtitleCharset").toString();
@@ -289,7 +305,9 @@ Settings::save()
   reg.endGroup();               // settings
 
   reg.beginGroup("defaults");
-  reg.setValue("defaultTrackLanguage",               m_defaultTrackLanguage);
+  reg.setValue("defaultAudioTrackLanguage",          m_defaultAudioTrackLanguage);
+  reg.setValue("defaultVideoTrackLanguage",          m_defaultVideoTrackLanguage);
+  reg.setValue("defaultSubtitleTrackLanguage",       m_defaultSubtitleTrackLanguage);
   reg.setValue("defaultChapterLanguage",             m_defaultChapterLanguage);
   reg.setValue("defaultChapterCountry",              m_defaultChapterCountry);
   reg.setValue("defaultSubtitleCharset",             m_defaultSubtitleCharset);

@@ -55,7 +55,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMUseVerticalInputLayout->setChecked(m_cfg.m_mergeUseVerticalInputLayout);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
-  ui->cbMDefaultTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultTrackLanguage);
+  ui->cbMDefaultAudioTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultAudioTrackLanguage);
+  ui->cbMDefaultVideoTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultVideoTrackLanguage);
+  ui->cbMDefaultSubtitleTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultSubtitleTrackLanguage);
   ui->cbMDefaultSubtitleCharset->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
 
@@ -179,11 +181,21 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("The default is to always add all the files to the current merge settings."))
                    .arg(QY("The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new merge settings and adding them to those.")));
 
-  Util::setToolTip(ui->cbMDefaultTrackLanguage,
+  Util::setToolTip(ui->cbMDefaultAudioTrackLanguage,
                    Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QY("Certain file formats have a 'language' property for their tracks."))
                    .arg(QY("When the user adds such a file the track's language input is set to the language property from the source file."))
-                   .arg(QY("The language selected here is used for tracks for which their source file contains no such property.")));
+                   .arg(QY("The language selected here is used for audio tracks for which their source file contains no such property.")));
+  Util::setToolTip(ui->cbMDefaultVideoTrackLanguage,
+                   Q("<p>%1 %2</p><p>%3</p>")
+                   .arg(QY("Certain file formats have a 'language' property for their tracks."))
+                   .arg(QY("When the user adds such a file the track's language input is set to the language property from the source file."))
+                   .arg(QY("The language selected here is used for video tracks for which their source file contains no such property.")));
+  Util::setToolTip(ui->cbMDefaultSubtitleTrackLanguage,
+                   Q("<p>%1 %2</p><p>%3</p>")
+                   .arg(QY("Certain file formats have a 'language' property for their tracks."))
+                   .arg(QY("When the user adds such a file the track's language input is set to the language property from the source file."))
+                   .arg(QY("The language selected here is used for subtitle tracks for which their source file contains no such property.")));
 
   Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."));
 
@@ -426,7 +438,9 @@ PreferencesDialog::save() {
   m_cfg.m_mergeAlwaysShowOutputFileControls  = ui->cbMAlwaysShowOutputFileControls->isChecked();
   m_cfg.m_mergeUseVerticalInputLayout        = ui->cbMUseVerticalInputLayout->isChecked();
   m_cfg.m_clearMergeSettings                 = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
-  m_cfg.m_defaultTrackLanguage               = ui->cbMDefaultTrackLanguage->currentData().toString();
+  m_cfg.m_defaultAudioTrackLanguage          = ui->cbMDefaultAudioTrackLanguage->currentData().toString();
+  m_cfg.m_defaultVideoTrackLanguage          = ui->cbMDefaultVideoTrackLanguage->currentData().toString();
+  m_cfg.m_defaultSubtitleTrackLanguage       = ui->cbMDefaultSubtitleTrackLanguage->currentData().toString();
   m_cfg.m_defaultSubtitleCharset             = ui->cbMDefaultSubtitleCharset->currentData().toString();
   m_cfg.m_priority                           = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
   m_cfg.m_defaultAdditionalMergeOptions      = ui->leMDefaultAdditionalCommandLineOptions->text();

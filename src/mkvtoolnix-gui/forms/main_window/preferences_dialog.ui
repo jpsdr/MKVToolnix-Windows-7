@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
+    <width>901</width>
     <height>648</height>
    </rect>
   </property>
@@ -372,182 +372,225 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>860</width>
-            <height>679</height>
+            <width>861</width>
+            <height>786</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_14">
+          <layout class="QVBoxLayout" name="verticalLayout_9">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_9">
+              <layout class="QVBoxLayout" name="verticalLayout_6">
                <item>
-                <layout class="QVBoxLayout" name="verticalLayout_6">
-                 <item>
-                  <widget class="QGroupBox" name="groupBox_3">
-                   <property name="title">
-                    <string>General options</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_4">
-                    <item>
-                     <widget class="QCheckBox" name="cbMAutoSetFileTitle">
-                      <property name="text">
-                       <string>Automatically set the file &amp;title from source files</string>
-                      </property>
-                     </widget>
+                <widget class="QGroupBox" name="groupBox_3">
+                 <property name="title">
+                  <string>General options</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_4">
+                  <item>
+                   <widget class="QCheckBox" name="cbMAutoSetFileTitle">
+                    <property name="text">
+                     <string>Automatically set the file &amp;title from source files</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="cbMSetAudioDelayFromFileName">
+                    <property name="text">
+                     <string>Automatically set track &amp;delays from source file name</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="cbMDisableDefaultTrackForSubtitles">
+                    <property name="text">
+                     <string>Disable »default track« flag for subtitle tracks</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="cbMDisableCompressionForAllTrackTypes">
+                    <property name="text">
+                     <string>Disable additi&amp;onal lossless compression for all track types</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="cbMAlwaysShowOutputFileControls">
+                    <property name="text">
+                     <string>Always show the output file controls below tabs</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="cbMUseVerticalInputLayout">
+                    <property name="text">
+                     <string>Use a vertical layout for the &quot;input&quot; tab</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QGridLayout" name="gridLayout_2">
+                    <item row="2" column="1">
+                     <widget class="mtx::gui::Util::CharacterSetComboBox" name="cbMDefaultSubtitleCharset"/>
                     </item>
-                    <item>
-                     <widget class="QCheckBox" name="cbMSetAudioDelayFromFileName">
-                      <property name="text">
-                       <string>Automatically set track &amp;delays from source file name</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QCheckBox" name="cbMDisableDefaultTrackForSubtitles">
-                      <property name="text">
-                       <string>Disable »default track« flag for subtitle tracks</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QCheckBox" name="cbMDisableCompressionForAllTrackTypes">
-                      <property name="text">
-                       <string>Disable additi&amp;onal lossless compression for all track types</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QCheckBox" name="cbMAlwaysShowOutputFileControls">
-                      <property name="text">
-                       <string>Always show the output file controls below tabs</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QCheckBox" name="cbMUseVerticalInputLayout">
-                      <property name="text">
-                       <string>Use a vertical layout for the &quot;input&quot; tab</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QGridLayout" name="gridLayout_2">
-                      <item row="5" column="1">
-                       <layout class="QHBoxLayout" name="horizontalLayout_9">
-                        <item>
-                         <widget class="QLineEdit" name="leMDefaultAdditionalCommandLineOptions"/>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pbMEditDefaultAdditionalCommandLineOptions">
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="../../qt_resources.qrc">
-                            <normaloff>:/icons/16x16/view-choose.png</normaloff>:/icons/16x16/view-choose.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
+                    <item row="4" column="1">
+                     <layout class="QHBoxLayout" name="horizontalLayout_9">
+                      <item>
+                       <widget class="QLineEdit" name="leMDefaultAdditionalCommandLineOptions"/>
                       </item>
-                      <item row="4" column="1">
-                       <widget class="QComboBox" name="cbMProcessPriority"/>
-                      </item>
-                      <item row="2" column="0">
-                       <widget class="QLabel" name="label_12">
+                      <item>
+                       <widget class="QPushButton" name="pbMEditDefaultAdditionalCommandLineOptions">
                         <property name="text">
-                         <string>Default track &amp;language to set:</string>
+                         <string/>
                         </property>
-                        <property name="buddy">
-                         <cstring>cbMDefaultTrackLanguage</cstring>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="4" column="0">
-                       <widget class="QLabel" name="label_5">
-                        <property name="text">
-                         <string>Process &amp;priority:</string>
-                        </property>
-                        <property name="buddy">
-                         <cstring>cbMProcessPriority</cstring>
+                        <property name="icon">
+                         <iconset resource="../../qt_resources.qrc">
+                          <normaloff>:/icons/16x16/view-choose.png</normaloff>:/icons/16x16/view-choose.png</iconset>
                         </property>
                        </widget>
-                      </item>
-                      <item row="3" column="0">
-                       <widget class="QLabel" name="label_4">
-                        <property name="text">
-                         <string>Default &amp;subtitle charset to set:</string>
-                        </property>
-                        <property name="buddy">
-                         <cstring>cbMDefaultSubtitleCharset</cstring>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="5" column="0">
-                       <widget class="QLabel" name="label_15">
-                        <property name="text">
-                         <string>Default add&amp;itional command line options:</string>
-                        </property>
-                        <property name="wordWrap">
-                         <bool>true</bool>
-                        </property>
-                        <property name="buddy">
-                         <cstring>leMDefaultAdditionalCommandLineOptions</cstring>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="2" column="1">
-                       <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDefaultTrackLanguage"/>
-                      </item>
-                      <item row="0" column="1">
-                       <widget class="QComboBox" name="cbMClearMergeSettings">
-                        <item>
-                         <property name="text">
-                          <string>no</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>create new settings</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>remove input files</string>
-                         </property>
-                        </item>
-                       </widget>
-                      </item>
-                      <item row="3" column="1">
-                       <widget class="mtx::gui::Util::CharacterSetComboBox" name="cbMDefaultSubtitleCharset"/>
-                      </item>
-                      <item row="0" column="0">
-                       <widget class="QLabel" name="label_6">
-                        <property name="text">
-                         <string>&amp;Clearing settings automatically:</string>
-                        </property>
-                        <property name="buddy">
-                         <cstring>cbMClearMergeSettings</cstring>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="0">
-                       <widget class="QLabel" name="label_13">
-                        <property name="text">
-                         <string>When dropping files:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="1">
-                       <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy"/>
                       </item>
                      </layout>
                     </item>
+                    <item row="3" column="1">
+                     <widget class="QComboBox" name="cbMProcessPriority"/>
+                    </item>
+                    <item row="3" column="0">
+                     <widget class="QLabel" name="label_5">
+                      <property name="text">
+                       <string>Process &amp;priority:</string>
+                      </property>
+                      <property name="buddy">
+                       <cstring>cbMProcessPriority</cstring>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_4">
+                      <property name="text">
+                       <string>Default &amp;subtitle charset to set:</string>
+                      </property>
+                      <property name="buddy">
+                       <cstring>cbMDefaultSubtitleCharset</cstring>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="label_15">
+                      <property name="text">
+                       <string>Default add&amp;itional command line options:</string>
+                      </property>
+                      <property name="wordWrap">
+                       <bool>true</bool>
+                      </property>
+                      <property name="buddy">
+                       <cstring>leMDefaultAdditionalCommandLineOptions</cstring>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QComboBox" name="cbMClearMergeSettings">
+                      <item>
+                       <property name="text">
+                        <string>no</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>create new settings</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>remove input files</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy"/>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_6">
+                      <property name="text">
+                       <string>&amp;Clearing settings automatically:</string>
+                      </property>
+                      <property name="buddy">
+                       <cstring>cbMClearMergeSettings</cstring>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_13">
+                      <property name="text">
+                       <string>When dropping files:</string>
+                      </property>
+                     </widget>
+                    </item>
                    </layout>
-                  </widget>
-                 </item>
-                </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox_9">
+                 <property name="title">
+                  <string>Default track languages to set</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_5">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="lDefaultAudioTrackLanguage">
+                    <property name="text">
+                     <string>Audio tracks:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDefaultAudioTrackLanguage">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDefaultSubtitleTrackLanguage">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDefaultVideoTrackLanguage">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="lDefaultVIdeoTrackLanguage">
+                    <property name="text">
+                     <string>Video tracks:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="lDefaultSubtitleTrackLanguage">
+                    <property name="text">
+                     <string>Subtitle tracks:</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
                </item>
                <item>
                 <spacer name="verticalSpacer">
@@ -749,7 +792,7 @@
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>20</width>
-                   <height>13</height>
+                   <height>0</height>
                   </size>
                  </property>
                 </spacer>
@@ -945,11 +988,13 @@
   <tabstop>cbMUseVerticalInputLayout</tabstop>
   <tabstop>cbMClearMergeSettings</tabstop>
   <tabstop>cbMAddingAppendingFilesPolicy</tabstop>
-  <tabstop>cbMDefaultTrackLanguage</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
   <tabstop>cbMProcessPriority</tabstop>
   <tabstop>leMDefaultAdditionalCommandLineOptions</tabstop>
   <tabstop>pbMEditDefaultAdditionalCommandLineOptions</tabstop>
+  <tabstop>cbMDefaultAudioTrackLanguage</tabstop>
+  <tabstop>cbMDefaultVideoTrackLanguage</tabstop>
+  <tabstop>cbMDefaultSubtitleTrackLanguage</tabstop>
   <tabstop>cbMAutoSetOutputFileName</tabstop>
   <tabstop>rbMAutoSetSameDirectory</tabstop>
   <tabstop>rbMAutoSetPreviousDirectory</tabstop>
