@@ -6,6 +6,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/country_combo_box.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -43,6 +44,7 @@ CountryComboBox::setup(bool withEmpty,
     addItem(country.first, country.second);
 
   view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  Util::fixComboBoxViewWidth(*this);
 
   return *this;
 }

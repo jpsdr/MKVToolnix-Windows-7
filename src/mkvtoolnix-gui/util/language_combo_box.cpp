@@ -6,6 +6,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/language_combo_box.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -57,6 +58,7 @@ LanguageComboBox::setup(bool withEmpty,
     addItem(language.first, language.second);
 
   view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  Util::fixComboBoxViewWidth(*this);
 
   return *this;
 }

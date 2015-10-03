@@ -7,6 +7,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/character_set_combo_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -45,6 +46,7 @@ CharacterSetComboBox::setup(bool withEmpty,
 
 
   view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  Util::fixComboBoxViewWidth(*this);
 
   return *this;
 }

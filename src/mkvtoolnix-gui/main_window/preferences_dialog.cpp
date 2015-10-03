@@ -276,6 +276,7 @@ PreferencesDialog::setupInterfaceLanguage() {
     ui->cbGuiInterfaceLanguage->addItem(translation.first, translation.second);
 
   Util::setComboBoxTextByData(ui->cbGuiInterfaceLanguage, m_cfg.m_uiLocale);
+  Util::fixComboBoxViewWidth(*ui->cbGuiInterfaceLanguage);
 #endif  // HAVE_LIBINTL_H
 }
 
