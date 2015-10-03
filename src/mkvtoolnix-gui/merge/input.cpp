@@ -886,7 +886,7 @@ Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
                 .arg(QY("These aren't treated like other input files in MKVToolNix."))
                 .arg(QY("Instead such a file must be set via the 'chapter file' option on the 'output' tab."))
                 .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-          .onlyOnce(QY("mergeChaptersDropped"))
+          .onlyOnce(Q("mergeChaptersDropped"))
           .exec();
 
         m_config.m_chapters = fileName;
@@ -909,7 +909,7 @@ Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
                 .arg(QY("These aren't treated like other input files in MKVToolNix."))
                 .arg(QY("Instead such a file must be set via the 'global tags' option on the 'output' tab."))
                 .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-          .onlyOnce(QY("mergeTagsDropped"))
+          .onlyOnce(Q("mergeTagsDropped"))
           .exec();
 
         m_config.m_globalTags = fileName;
@@ -932,7 +932,7 @@ Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
                 .arg(QY("These aren't treated like other input files in MKVToolNix."))
                 .arg(QY("Instead such a file must be set via the 'segment info' option on the 'output' tab."))
                 .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-          .onlyOnce(QY("mergeSegmentInfoDropped"))
+          .onlyOnce(Q("mergeSegmentInfoDropped"))
           .exec();
 
         m_config.m_segmentInfo = fileName;
