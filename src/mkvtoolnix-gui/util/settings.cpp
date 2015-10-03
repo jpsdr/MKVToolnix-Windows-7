@@ -173,6 +173,7 @@ Settings::load() {
   m_showToolSelector                   = reg.value("showToolSelector", true).toBool();
   m_warnBeforeClosingModifiedTabs      = reg.value("warnBeforeClosingModifiedTabs", true).toBool();
   m_warnBeforeAbortingJobs             = reg.value("warnBeforeAbortingJobs", true).toBool();
+  m_warnBeforeOverwriting              = reg.value("warnBeforeOverwriting",  true).toBool();
   m_showMoveUpDownButtons              = reg.value("showMoveUpDownButtons", false).toBool();
 
   m_chapterNameTemplate                = reg.value("chapterNameTemplate", QY("Chapter <NUM:2>")).toString();
@@ -289,6 +290,7 @@ Settings::save()
   reg.setValue("showToolSelector",                   m_showToolSelector);
   reg.setValue("warnBeforeClosingModifiedTabs",      m_warnBeforeClosingModifiedTabs);
   reg.setValue("warnBeforeAbortingJobs",             m_warnBeforeAbortingJobs);
+  reg.setValue("warnBeforeOverwriting",              m_warnBeforeOverwriting);
   reg.setValue("showMoveUpDownButtons",              m_showMoveUpDownButtons);
 
   reg.setValue("chapterNameTemplate",                m_chapterNameTemplate);

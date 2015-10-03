@@ -33,6 +33,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbGuiShowToolSelector->setChecked(m_cfg.m_showToolSelector);
   ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
+  ui->cbGuiWarnBeforeOverwriting->setChecked(m_cfg.m_warnBeforeOverwriting);
   ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
   setupOnlineCheck();
   setupInterfaceLanguage();
@@ -114,7 +115,6 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If checked additional buttons for moving selected entries up and down will be shown next to several list views.")));
 
   Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
-  ui->cbGuiWarnBeforeOverwriting->setEnabled(false);
 
   Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled the GUI will let you enter a description for a job when adding it to the queue."));
   Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the »job output« tool will not be cleared when a new job starts."));
@@ -417,6 +417,7 @@ PreferencesDialog::save() {
   m_cfg.m_showToolSelector                   = ui->cbGuiShowToolSelector->isChecked();
   m_cfg.m_warnBeforeClosingModifiedTabs      = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
   m_cfg.m_warnBeforeAbortingJobs             = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
+  m_cfg.m_warnBeforeOverwriting              = ui->cbGuiWarnBeforeOverwriting->isChecked();
   m_cfg.m_showMoveUpDownButtons              = ui->cbGuiShowMoveUpDownButtons->isChecked();
   m_cfg.m_useDefaultJobDescription           = ui->cbGuiUseDefaultJobDescription->isChecked();
   m_cfg.m_showOutputOfAllJobs                = ui->cbGuiShowOutputOfAllJobs->isChecked();

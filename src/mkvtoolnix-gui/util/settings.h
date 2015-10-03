@@ -87,7 +87,7 @@ public:
   bool m_checkForUpdates;
   QDateTime m_lastUpdateCheck;
 
-  bool m_disableAnimations, m_showToolSelector, m_warnBeforeClosingModifiedTabs, m_warnBeforeAbortingJobs, m_showMoveUpDownButtons;
+  bool m_disableAnimations, m_showToolSelector, m_warnBeforeClosingModifiedTabs, m_warnBeforeAbortingJobs, m_warnBeforeOverwriting, m_showMoveUpDownButtons;
   QString m_uiLocale;
 
   bool m_enableMuxingTracksByLanguage, m_enableMuxingAllVideoTracks, m_enableMuxingAllAudioTracks, m_enableMuxingAllSubtitleTracks;

@@ -1,7 +1,9 @@
 #include "common/common_pch.h"
 
 #include "common/debugging.h"
+#include "common/list_utils.h"
 #include "common/qt.h"
+#include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -17,6 +19,7 @@
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 #include <QComboBox>
+#include <QDir>
 #include <QMenu>
 #include <QTreeView>
 #include <QFileDialog>
@@ -313,11 +316,58 @@ Tab::isReadyForMerging() {
   return true;
 }
 
+bool
+Tab::checkIfOverwritingIsOK() {
+  if (!Util::Settings::get().m_warnBeforeOverwriting)
+    return true;
+
+  if (QFileInfo{m_config.m_destination}.exists()) {
+    auto answer = Util::MessageBox::question(this)
+      ->title(QY("Overwrite existing file"))
+      .text(Q("%1 %2")
+            .arg(QY("The file '%1' exists already.").arg(m_config.m_destination))
+            .arg(QY("Do you want to overwrite the file?")))
+      .buttonLabel(QMessageBox::Yes, QY("&Overwrite file"))
+      .buttonLabel(QMessageBox::No,  QY("Cancel"))
+      .exec();
+    if (answer != QMessageBox::Yes)
+      return false;
+  }
+
+  auto nativeDestination            = QDir::toNativeSeparators(m_config.m_destination);
+  auto jobWithSameDestinationExists = false;
+
+  MainWindow::jobTool()->model()->withAllJobs([this, &jobWithSameDestinationExists, &nativeDestination](Jobs::Job &job) {
+    auto muxJob = qobject_cast<Jobs::MuxJob *>(&job);
+
+    if (   muxJob
+        && mtx::included_in(job.status(), Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Running)
+        && (QDir::toNativeSeparators(muxJob->config().m_destination) == nativeDestination))
+      jobWithSameDestinationExists = true;
+  });
+
+  if (jobWithSameDestinationExists) {
+    auto answer = Util::MessageBox::question(this)
+      ->title(QY("Overwrite existing file"))
+      .text(Q("%1 %2 %3")
+            .arg(QY("A job creating the file '%1' is already in the job queue.").arg(m_config.m_destination))
+            .arg(QY("If you add another job with the same destination file then file created before will be overwritten."))
+            .arg(QY("Do you want to overwrite the file?")))
+      .buttonLabel(QMessageBox::Yes, QY("&Overwrite file"))
+      .buttonLabel(QMessageBox::No,  QY("Cancel"))
+      .exec();
+    if (answer != QMessageBox::Yes)
+      return false;
+  }
+
+  return true;
+}
+
 void
 Tab::addToJobQueue(bool startNow) {
   updateConfigFromControlValues();
 
-  if (!isReadyForMerging())
+  if (!isReadyForMerging() || !checkIfOverwritingIsOK())
     return;
 
   auto &cfg      = Util::Settings::get();

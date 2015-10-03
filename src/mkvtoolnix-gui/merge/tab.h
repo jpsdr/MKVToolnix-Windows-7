@@ -265,6 +265,7 @@ protected:
   virtual void addToJobQueue(bool startNow);
 
   virtual bool isReadyForMerging();
+  virtual bool checkIfOverwritingIsOK();
 
   virtual void setTitleMaybe(QList<SourceFilePtr> const &files);
   virtual void setTitleMaybe(QString const &title);
