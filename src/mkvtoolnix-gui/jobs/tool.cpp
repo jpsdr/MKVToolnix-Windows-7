@@ -124,6 +124,7 @@ Tool::setupActions() {
   connect(m_startImmediatelyAction,                         &QAction::triggered,                        this,    &Tool::onStartImmediately);
 
   connect(ui->jobs,                                         &QTreeView::doubleClicked,                  this,    &Tool::onViewOutput);
+  connect(ui->jobs,                                         &Util::BasicTreeView::deletePressed,        this,    &Tool::onRemove);
 
   connect(mw,                                               &MainWindow::preferencesChanged,            this,    &Tool::retranslateUi);
   connect(mw,                                               &MainWindow::aboutToClose,                  m_model, &Model::saveJobs);
@@ -224,6 +225,9 @@ Tool::onRemove() {
   auto emitRunningWarning = false;
 
   m_model->withSelectedJobs(ui->jobs, [&idsToRemove](Job &job) { idsToRemove[job.id()] = true; });
+
+  if (idsToRemove.isEmpty())
+    return;
 
   m_model->removeJobsIf([&idsToRemove, &emitRunningWarning](Job const &job) -> bool {
     if (!idsToRemove[job.id()])
