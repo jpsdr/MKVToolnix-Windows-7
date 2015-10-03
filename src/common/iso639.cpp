@@ -520,7 +520,7 @@ static std::unordered_map<std::string, std::string> s_deprecated_1_and_2_codes{
   { "mol", "rum" },
 };
 
-std::vector<std::string> const g_popular_language_codes{ "chi", "dut", "eng", "fin", "fre", "ger", "ita", "jpn", "nor", "por", "rus", "spa", "swe", "und" };
+std::vector<std::string> const g_popular_language_codes{ "chi", "dut", "eng", "fin", "fre", "ger", "ita", "jpn", "mul", "nor", "por", "rus", "spa", "swe", "und", "zxx" };
 
 bool
 is_valid_iso639_2_code(std::string const &iso639_2_code) {
