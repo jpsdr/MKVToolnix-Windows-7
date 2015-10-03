@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-03 12:57+0200\n"
+"POT-Creation-Date: 2015-10-03 15:20+0200\n"
 "PO-Revision-Date: 2015-09-29 20:04+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -896,7 +896,7 @@ msgstr "Označi sa 'default':"
 msgid "\"Forced track\" flag:"
 msgstr "Označi sa 'forced':"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:385
+#: src/mkvtoolnix-gui/merge/input.cpp:388
 msgid "\"default\" is a good choice for almost all situations."
 msgstr "\"default\" je dobar izbor za skoro sve situacije."
 
@@ -1067,10 +1067,14 @@ msgid "%p%"
 msgstr "%p%"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:298
-#: src/mkvtoolnix-gui/jobs/tool.cpp:415
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:121
 msgid "&Abort job"
+msgstr "&Prekini zadatak"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:415
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
+#, fuzzy
+msgid "&Abort jobs"
 msgstr "&Prekini zadatak"
 
 #: src/info/ui/mainwindow.h:117
@@ -1082,7 +1086,7 @@ msgstr "&O mkvinfo"
 msgid "&Add"
 msgstr "&Dodaj"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1066
+#: src/mkvtoolnix-gui/merge/input.cpp:1150
 msgid "&Add files"
 msgstr "&Dodaj fajlove"
 
@@ -1090,7 +1094,7 @@ msgstr "&Dodaj fajlove"
 msgid "&Add source files"
 msgstr "Dodaj &fajlove"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1080
+#: src/mkvtoolnix-gui/merge/input.cpp:1164
 msgid "&Audio"
 msgstr "&Audio"
 
@@ -1159,7 +1163,7 @@ msgstr "&Default"
 msgid "&Description:"
 msgstr "&Opis:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1076
+#: src/mkvtoolnix-gui/merge/input.cpp:1160
 msgid "&Disable all tracks"
 msgstr "&Isključi sve staze"
 
@@ -1179,7 +1183,7 @@ msgstr "&Trajanje svake stavke u sekundama:"
 msgid "&Edit in corresponding tool and remove from queue"
 msgstr "&Uredi u odgovarajućem alatu i ukloni sa liste"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1075
+#: src/mkvtoolnix-gui/merge/input.cpp:1159
 msgid "&Enable all tracks"
 msgstr "&Uključi sve staze"
 
@@ -1360,7 +1364,7 @@ msgstr "&Učitaj fajl ponovo"
 msgid "&Remove"
 msgstr "&Ukloni"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1069
+#: src/mkvtoolnix-gui/merge/input.cpp:1153
 msgid "&Remove files"
 msgstr "&Ukloni fajlove"
 
@@ -1406,7 +1410,7 @@ msgstr "&Skeniraj za druge plejliste"
 msgid "&Select all"
 msgstr "&Izaberi sve"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1073
+#: src/mkvtoolnix-gui/merge/input.cpp:1157
 msgid "&Select all tracks"
 msgstr "&Izaberi sve staze"
 
@@ -1430,7 +1434,7 @@ msgstr "&Započni zadatke automatski"
 msgid "&Start timecode of first created entry:"
 msgstr "&Početni vremenski kod prve stavke:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1081
+#: src/mkvtoolnix-gui/merge/input.cpp:1165
 msgid "&Subtitles"
 msgstr "&Titlovi"
 
@@ -1451,7 +1455,7 @@ msgstr "&UID:"
 msgid "&Validate values"
 msgstr "&Potvrdi vrednosti"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1079
+#: src/mkvtoolnix-gui/merge/input.cpp:1163
 msgid "&Video"
 msgstr "&Video"
 
@@ -2013,8 +2017,8 @@ msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> nedostaje dečji element <Simple>."
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:243
-#: src/mkvtoolnix-gui/merge/input.cpp:463
-#: src/mkvtoolnix-gui/merge/input.cpp:1090
+#: src/mkvtoolnix-gui/merge/input.cpp:466
+#: src/mkvtoolnix-gui/merge/input.cpp:1174
 msgid "<do not change>"
 msgstr "<ne menjaj>"
 
@@ -2072,7 +2076,7 @@ msgstr "Ljudski čitljiv niz koji označava kodek."
 msgid "A human-readable track name."
 msgstr "Ljudski čitljivo ime staze."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:295
+#: src/mkvtoolnix-gui/merge/input.cpp:298
 msgid ""
 "A name for this track that players can display helping the user chose the "
 "right track to play, e.g. \"director's comments\"."
@@ -2164,7 +2168,7 @@ msgstr "Jedinstveni ID koji identifikuje prethodno vezani segment (128 bita)."
 msgid "A&cknowledge warnings/errors"
 msgstr "Primljena &upozorenja/greške"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1067
+#: src/mkvtoolnix-gui/merge/input.cpp:1151
 msgid "A&ppend files"
 msgstr "&Pripoji fajlove"
 
@@ -2242,13 +2246,18 @@ msgid "AVI (Audio/Video Interleaved)"
 msgstr "AVI (Audio/Video Interleaved)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:462
-msgid "Abort current job and stop &immediately"
+#, fuzzy
+msgid "Abort all running jobs and stop &immediately"
 msgstr "Prekini trenutni zadatak i zaustavi &odmah"
+
+#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:119
+msgid "Abort running job"
+msgstr "Prekini započet zadatak"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:413
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:315
-#: src/mkvtoolnix-gui/watch_jobs/tab.cpp:119
-msgid "Abort running job"
+#, fuzzy
+msgid "Abort running jobs"
 msgstr "Prekini započet zadatak"
 
 #: src/info/qt_ui.cpp:152
@@ -2313,15 +2322,15 @@ msgstr "Dodaj priloge"
 msgid "Add element"
 msgstr "Dodaj element"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1068
+#: src/mkvtoolnix-gui/merge/input.cpp:1152
 msgid "Add files as a&dditional parts"
 msgstr "Dodaj fajlove kao &dodatne delove"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:861
+#: src/mkvtoolnix-gui/merge/input.cpp:864
 msgid "Add media files"
 msgstr "Dodaj media fajlove"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:963
+#: src/mkvtoolnix-gui/merge/input.cpp:1047
 msgid "Add media files as additional parts"
 msgstr "Dodaj media fajlove kao dodatne delove"
 
@@ -2373,8 +2382,23 @@ msgstr "Dodaj na &listu zadataka"
 msgid "Add to job &queue"
 msgstr "&Dodaj na listu zadataka"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:883
+#, fuzzy
+msgid "Adding chapter files"
+msgstr "XML fajlovi sa poglavljima"
+
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:159
 msgid "Adding or appending files"
+msgstr "Dodavanje ili pripajanje fajlova"
+
+#: src/mkvtoolnix-gui/merge/input.cpp:929
+#, fuzzy
+msgid "Adding segment info files"
+msgstr "XML Segment info fajlovi"
+
+#: src/mkvtoolnix-gui/merge/input.cpp:906
+#, fuzzy
+msgid "Adding tag files"
 msgstr "Dodavanje ili pripajanje fajlova"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:160
@@ -2451,7 +2475,7 @@ msgstr "Sve vrednosti zaglavlja su OK."
 msgid "All known property names and their meaning\n"
 msgstr "Sva poznata imena svojstva i njihovo značenje\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:390
+#: src/mkvtoolnix-gui/merge/input.cpp:393
 msgid ""
 "All occurences of the string \"<TID>\" will be replaced by the track's track "
 "ID."
@@ -2650,7 +2674,7 @@ msgstr ""
 "Svaki drugi fajl je dodat kao ulazni fajl za sastavljanje, otvoren u "
 "uredniku poglavlja ili zaglavlja u zavisnosti od trenutnog režima."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:861
+#: src/mkvtoolnix-gui/merge/input.cpp:864
 msgid "Append media files"
 msgstr "Spoji media fajlove"
 
@@ -3641,7 +3665,7 @@ msgstr "Trenutna verzija:"
 msgid "Currently no newer version is available online."
 msgstr "Trenutno nema novije verzije dostupne na mreži."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:313
+#: src/mkvtoolnix-gui/merge/input.cpp:316
 msgid ""
 "Currently only certain subtitle formats are compressed with the zlib "
 "algorithm."
@@ -3754,7 +3778,7 @@ msgstr "Podrazumevano za nove stavke:"
 msgid "Delay (in ms):"
 msgstr "Kašnjenje (u ms):"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:316
+#: src/mkvtoolnix-gui/merge/input.cpp:319
 msgid "Delay this track's timestamps by a couple of ms."
 msgstr "Podesi kašnjenje vremenskih oznaka ove staze za nekoliko ms."
 
@@ -3878,16 +3902,14 @@ msgid "Do not write meta seek elements at all."
 msgstr "Uopšte ne zapisuj meta seek elemente."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:414
-msgid "Do you really want to abort the currently running job?"
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#, fuzzy
+msgid "Do you really want to abort all currently running jobs?"
 msgstr "Da li zaista želite da prekinete zadatak koji se trenutno izvršava?"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:120
 msgid "Do you really want to abort this job?"
 msgstr "Da li zaista želite da prekinete ovaj zadatak?"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
-msgid "Do you want to abort that job and quit?"
-msgstr "Da li želite da prekinete taj zadatak i odustanete?"
 
 #: src/info/mkvinfo.cpp:1553
 #, boost-format
@@ -3912,6 +3934,10 @@ msgstr "Dolby TrueHD"
 msgid "Don't escape"
 msgstr "Ne koristi"
 
+#: src/mkvtoolnix-gui/util/message_box.cpp:181
+msgid "Don't show this message again."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:2458
 msgid "Done scanning playlists.\n"
 msgstr "Završeno skeniranje plejlisti.\n"
@@ -3933,7 +3959,7 @@ msgid "Drop last entry from imported &Blu-ray playlists if it's near the end"
 msgstr ""
 "Ukloni poslednju stavku iz uvezenih &Blu-ray plejlisti ako je blizu kraja"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:374
+#: src/mkvtoolnix-gui/merge/input.cpp:377
 msgid ""
 "Drops the lossless extensions from an audio track and keeps only its lossy "
 "core."
@@ -4251,7 +4277,7 @@ msgstr "Detalji odstupanja:"
 msgid "Executable files"
 msgstr "Izvršni fajlovi"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1479
+#: src/mkvtoolnix-gui/merge/input.cpp:1563
 msgid "Executable not found"
 msgstr "Izvršni fajl nije nađen"
 
@@ -4537,7 +4563,7 @@ msgstr ""
 "mkvmerge će automatski izabrati množitelj vremenskog koda tako da svi "
 "vremenski kodovi i trajanja imaju preciznost od jednog uzorka."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:365
+#: src/mkvtoolnix-gui/merge/input.cpp:368
 msgid "For such files you can use this parameter and decrease the size to 2."
 msgstr ""
 "Za takve fajlove možete koristiti ovaj parametar i smanjiti veličinu na 2."
@@ -4567,11 +4593,11 @@ msgstr ""
 "Primorava Matrsoka čitač da koristi opšti prolazni paketizer čak i za "
 "poznate i podržane tipove staza."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:363
+#: src/mkvtoolnix-gui/merge/input.cpp:366
 msgid "Forces the NALU size length to a certain number of bytes."
 msgstr "Ograničava NALU veličinu na određen broj bajtova."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:326
+#: src/mkvtoolnix-gui/merge/input.cpp:329
 msgid "Forces the default duration or number of frames per second for a track."
 msgstr "Postavlja podrazumevano trajanje ili broj slika u sekundi za stazu."
 
@@ -4613,7 +4639,7 @@ msgstr "Slika sa veličinom %1%%2%%3%"
 msgid "Frames/fields:"
 msgstr "Slike/poluslike:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:388
+#: src/mkvtoolnix-gui/merge/input.cpp:391
 msgid "Free-form edit field for user defined options for this track."
 msgstr "Polje za unos korisnički definisanih opcija za ovu stazu."
 
@@ -4932,7 +4958,7 @@ msgstr ""
 "Ako sadrži reč 'DELAY' praćen brojem onda se ovaj broj automatski stavlja u "
 "polje za unos 'kašnjenje' za svaku audio stazu nađenu u fajlu."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:360
+#: src/mkvtoolnix-gui/merge/input.cpp:363
 msgid ""
 "If left empty then the track's original stereo mode will be kept or, if it "
 "didn't have one, none will be set at all."
@@ -4956,7 +4982,7 @@ msgstr "Ako se nijedna video staza ne zapisuje, do deljenja neće doći."
 msgid "If nothing is entered then '%p - %t' will be used."
 msgstr "Ako ništa nije uneto onda će '%p - %t' biti korišćeno."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:304
+#: src/mkvtoolnix-gui/merge/input.cpp:307
 msgid ""
 "If set to 'determine automatically' then mkvmerge will choose one track of "
 "each type to have this flag set based on the information in the source files "
@@ -4966,7 +4992,7 @@ msgstr ""
 "ovom zastavicom jednu stazu od svakog tipa zasnovano na informaciji iz "
 "izvornog fajla i redosledu staza."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:312
+#: src/mkvtoolnix-gui/merge/input.cpp:315
 msgid ""
 "If set to 'determine automatically' then mkvmerge will decide whether or not "
 "to compress and which algorithm to use based on the track type."
@@ -4974,7 +5000,7 @@ msgstr ""
 "Ako je postavljeno 'odredi automatski' onda će mkvmerge odlučiti da li da "
 "kompresuje ili ne i koji algoritam da koristi zasnovano na tipu staze."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:294
+#: src/mkvtoolnix-gui/merge/input.cpp:297
 msgid ""
 "If set to 'no' then the selected tracks will not be copied to the output "
 "file."
@@ -5077,6 +5103,24 @@ msgstr "Indeksiranje (cues):"
 #, boost-format
 msgid "Input too long: %1% > %2%"
 msgstr "Ulazni podaci su predugački: %1% > %2%"
+
+#: src/mkvtoolnix-gui/merge/input.cpp:887
+msgid ""
+"Instead such a file must be set via the 'chapter file' option on the "
+"'output' tab."
+msgstr ""
+
+#: src/mkvtoolnix-gui/merge/input.cpp:910
+msgid ""
+"Instead such a file must be set via the 'global tags' option on the 'output' "
+"tab."
+msgstr ""
+
+#: src/mkvtoolnix-gui/merge/input.cpp:933
+msgid ""
+"Instead such a file must be set via the 'segment info' option on the "
+"'output' tab."
+msgstr ""
 
 #: src/info/mkvinfo.cpp:630
 #, boost-format
@@ -5530,7 +5574,7 @@ msgstr "Nevažeći tip staze %1%."
 msgid "It cannot be removed because it is a mandatory header field."
 msgstr "Ne može biti uklonjen zato što je to obavezno polje zaglavlja."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:364
+#: src/mkvtoolnix-gui/merge/input.cpp:367
 msgid ""
 "It defaults to 4 bytes, but there are files which do not contain a frame or "
 "slice that is bigger than 65535 bytes."
@@ -5547,7 +5591,7 @@ msgstr "Ovo se ignoriše za fajlove poglavlja XML tipa."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Napisao ga je Moric Bunks <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1482
+#: src/mkvtoolnix-gui/merge/input.cpp:1566
 msgid "Its installation location could not be determined automatically."
 msgstr ""
 
@@ -5795,7 +5839,7 @@ msgstr "MPEG-4"
 msgid "MPLS Blu-ray playlist"
 msgstr "MPLS Blu-ray plejlista"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:302
+#: src/mkvtoolnix-gui/merge/input.cpp:305
 msgid ""
 "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Načini ovu stazu podrazumevanom za svoj tip (audio, video, titlovi)."
@@ -5815,7 +5859,7 @@ msgstr "Nepravilan codec ID '%1%'.\n"
 msgid "Malformed line? (%1%)\n"
 msgstr "Nepravilna linija? (%1%)\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:307
+#: src/mkvtoolnix-gui/merge/input.cpp:310
 msgid "Mark this track as 'forced'."
 msgstr "Označi ovu stazu sa zastavicom 'forced'."
 
@@ -6024,7 +6068,7 @@ msgstr "Ipak, većina ostalih podešavanja iz taba Izlaz će ostati netaknuta."
 msgid "Mu&x this track:"
 msgstr "Muk&suj ovu stazu:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:321
+#: src/mkvtoolnix-gui/merge/input.cpp:324
 msgid "Multiply this track's timestamps with a factor."
 msgstr "Pomnoži vremenske oznake ove staze sa činiocem."
 
@@ -6263,7 +6307,7 @@ msgstr ""
 "Završeni zadaci uobičajeno ostaju na listi zadataka čak i posle restarta sve "
 "dok ih korisnik ručno ne izbriše."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:330
+#: src/mkvtoolnix-gui/merge/input.cpp:333
 msgid ""
 "Normally mkvmerge does not change the timing information (frame/field rate) "
 "stored in the video bitstream."
@@ -6328,7 +6372,7 @@ msgstr "Nije važeći Matroska fajl (nije nađen segment/level 0 element)"
 msgid "Not a valid number or not positive."
 msgstr "Broj je pogrešan ili nije pozitivan."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:371
+#: src/mkvtoolnix-gui/merge/input.cpp:374
 msgid ""
 "Not needed for AAC tracks read from other container formats like MP4 or "
 "Matroska files."
@@ -6336,7 +6380,7 @@ msgstr ""
 "Nije potreban za AAC staze iščitane iz drugih kontejner formata poput MP4 "
 "ili Matroska fajlova."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:356
+#: src/mkvtoolnix-gui/merge/input.cpp:359
 msgid ""
 "Note also that there are not a lot of players that support the cropping "
 "parameters."
@@ -6352,9 +6396,9 @@ msgstr ""
 "Imajte na umu da čak i ako je opcija isključena mkvmerge će kopirati naslov "
 "izvornog fajla osim ako je on ručno postavljen od strane korisnika."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:338
-#: src/mkvtoolnix-gui/merge/input.cpp:344
-#: src/mkvtoolnix-gui/merge/input.cpp:349
+#: src/mkvtoolnix-gui/merge/input.cpp:341
+#: src/mkvtoolnix-gui/merge/input.cpp:347
+#: src/mkvtoolnix-gui/merge/input.cpp:352
 msgid ""
 "Note that many players don't use the display width/height values directly "
 "but only use the ratio given by these values when setting the initial window "
@@ -6387,7 +6431,7 @@ msgstr ""
 "Imajte na umu da je stavka jezika »Neodređen (und)« preuzeta za staze za "
 "koje jezik nije poznat (npr. one pročitane iz SRT titl fajlova)."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:354
+#: src/mkvtoolnix-gui/merge/input.cpp:357
 msgid "Note that the video content is not modified by this option."
 msgstr "Imajte na umu da sadržaj videa nije izmenjen sa ovom opcijom."
 
@@ -6455,7 +6499,7 @@ msgstr "Podrazumevano omogući muksovanje samo staza sa specifičnim jezicima"
 msgid "Only if the job completed successfully"
 msgstr "Samo ako je uspešno završen"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:370
+#: src/mkvtoolnix-gui/merge/input.cpp:373
 msgid ""
 "Only needed for AAC input files as SBR AAC cannot be detected automatically "
 "for these files."
@@ -6463,7 +6507,7 @@ msgstr ""
 "On je potreban samo za ulazne AAC fajlove, zato što SBR AAC ne može "
 "automatski biti otkriven za ove fajlove."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:379
+#: src/mkvtoolnix-gui/merge/input.cpp:382
 msgid "Only needed in certain situations:"
 msgstr "Potrebno samo u određenim situacijama:"
 
@@ -6565,8 +6609,8 @@ msgstr "Otvori fajlove u uredniku poglavlja"
 msgid "Open files in header editor"
 msgstr "Otvori fajlove u uredniku zaglavlja"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1071
-#: src/mkvtoolnix-gui/merge/input.cpp:1077
+#: src/mkvtoolnix-gui/merge/input.cpp:1155
+#: src/mkvtoolnix-gui/merge/input.cpp:1161
 msgid "Open in &MediaInfo"
 msgstr "Otvori u &MediaInfo"
 
@@ -6715,11 +6759,11 @@ msgstr "Visina u pikselima: %1%"
 msgid "Pixel width: %1%"
 msgstr "Širina u pikselima: %1%"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:308
+#: src/mkvtoolnix-gui/merge/input.cpp:311
 msgid "Players must play this track."
 msgstr "Plejeri moraju reprodukovati ovu stazu."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:303
+#: src/mkvtoolnix-gui/merge/input.cpp:306
 msgid "Players should prefer tracks with the default track flag set."
 msgstr ""
 "Plejeri bi trebalo da preferiraju staze koje su obeležene sa 'default'."
@@ -6749,7 +6793,7 @@ msgstr ""
 "Ona detaljno objašnjava više detalja koji nisu očigledni iz ovog\n"
 "listinga.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1483
+#: src/mkvtoolnix-gui/merge/input.cpp:1567
 msgid "Please select its location below."
 msgstr ""
 
@@ -7202,7 +7246,7 @@ msgstr "Ukloni &uspešno završene zadatke"
 msgid "Remove a&ll"
 msgstr "Ukloni sve"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1070
+#: src/mkvtoolnix-gui/merge/input.cpp:1154
 msgid "Remove a&ll files"
 msgstr "Ukloni s&ve fajlove"
 
@@ -7249,7 +7293,7 @@ msgstr ""
 msgid "Resyncing successful at position %1%.\n"
 msgstr "Re-sinhronizacija uspešna na poziciji %1%.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:292
+#: src/mkvtoolnix-gui/merge/input.cpp:295
 msgid "Right-click for actions for all tracks"
 msgstr "Desni klik za radnje sa svim stazama"
 
@@ -7261,7 +7305,7 @@ msgstr "Desni klik za radnje sa zadacima"
 msgid "Right-click for attachment actions"
 msgstr "Desni klik za radnje sa prilozima"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:291
+#: src/mkvtoolnix-gui/merge/input.cpp:294
 msgid "Right-click to add, append and remove files"
 msgstr "Desni klik za dodavanje, pripajanje i uklanjanje fajlova"
 
@@ -7497,7 +7541,7 @@ msgstr "Segment, veličina %1%"
 msgid "Segment, size unknown"
 msgstr "Segment, nepoznata veličina"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1074
+#: src/mkvtoolnix-gui/merge/input.cpp:1158
 msgid "Select all tracks of specific &type"
 msgstr "Izaberi sve staze određenog &tipa"
 
@@ -7518,7 +7562,7 @@ msgstr "Izaberi izvršni fajl"
 msgid "Select file to add"
 msgstr "Izaberite fajl za dodavanje"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:299
+#: src/mkvtoolnix-gui/merge/input.cpp:302
 msgid "Select one of the ISO639-2 language codes."
 msgstr "Odaberite jedan od jezičkih kodova ISO639-2."
 
@@ -7534,12 +7578,12 @@ msgstr "Izaberite ime izlaznog fajla"
 msgid "Select segment info file"
 msgstr "Izaberite segment info fajl:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:752
+#: src/mkvtoolnix-gui/merge/input.cpp:755
 #: src/mkvtoolnix-gui/merge/output.cpp:221
 msgid "Select tags file"
 msgstr "Izaberite fajl sa tagovima"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:740
+#: src/mkvtoolnix-gui/merge/input.cpp:743
 msgid "Select timecode file"
 msgstr "Izaberite fajl sa vremenskim kodovima"
 
@@ -7547,7 +7591,7 @@ msgstr "Izaberite fajl sa vremenskim kodovima"
 msgid "Selected:"
 msgstr "Odabrano:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:384
+#: src/mkvtoolnix-gui/merge/input.cpp:387
 msgid ""
 "Selects for which blocks mkvmerge will produce index entries ( = cue "
 "entries)."
@@ -7555,7 +7599,7 @@ msgstr ""
 "Selektuje za koje će blokove mkvmerge proizvesti indeks zapise ( = cue "
 "entries)."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:378
+#: src/mkvtoolnix-gui/merge/input.cpp:381
 msgid ""
 "Selects the character set a subtitle file or chapter information was written "
 "with."
@@ -7667,7 +7711,7 @@ msgstr ""
 msgid "Sets the Matroska parser mode to 'fast' (default) or 'full'"
 msgstr "Podešava Matroska režim raščlanjivanja u 'fast' (default) ili 'full'"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:352
+#: src/mkvtoolnix-gui/merge/input.cpp:355
 msgid ""
 "Sets the cropping parameters which tell a player to omit a certain number of "
 "pixels on the four sides during playback."
@@ -7675,7 +7719,7 @@ msgstr ""
 "Postavlja parametre za podrezivanje slike koji govore plejeru da izostavi "
 "određen broj piksela sa četiri strane prilikom reprodukcije."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:311
+#: src/mkvtoolnix-gui/merge/input.cpp:314
 msgid "Sets the lossless compression algorithm to be used for this track."
 msgstr "Podešava lossless algoritam kompresije koji se koristi za ovu stazu."
 
@@ -7683,7 +7727,7 @@ msgstr "Podešava lossless algoritam kompresije koji se koristi za ovu stazu."
 msgid "Sets the segment UIDs to use."
 msgstr "Podešava segment UID-e koji se koriste."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:359
+#: src/mkvtoolnix-gui/merge/input.cpp:362
 msgid "Sets the stereo mode of the video track to this value."
 msgstr "Podešava stereo režim video staze u ovu vrednost."
 
@@ -7987,7 +8031,8 @@ msgid "Stereoscopy:"
 msgstr "Stereoskopija:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:461
-msgid "Stop &after the current job finishes"
+#, fuzzy
+msgid "Stop &after all running jobs have finished"
 msgstr "Zaustavi &kad trenutni zadatak završi"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1432
@@ -8103,7 +8148,7 @@ msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr ""
 "Govori mkvmerge da stavlja najviše 'n' blokova sa podacima u svaki klaster."
 
-#: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:740
+#: src/info/qt_ui.cpp:98 src/mkvtoolnix-gui/merge/input.cpp:743
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:289
 msgid "Text files"
 msgstr "Tekstualni fajlovi"
@@ -8194,6 +8239,14 @@ msgstr ""
 "broj staza u svakoj pronađenoj plejlisti i ponudi vam da izaberete koju od "
 "njih da doda."
 
+#: src/mkvtoolnix-gui/merge/input.cpp:888
+#: src/mkvtoolnix-gui/merge/input.cpp:911
+#: src/mkvtoolnix-gui/merge/input.cpp:934
+msgid ""
+"The GUI will enter the dropped file's file name into that control replacing "
+"any file name which might have been set earlier."
+msgstr ""
+
 #: src/extract/extract_cli_parser.cpp:248
 #, boost-format
 msgid "The ID '%1%' has already been used for another output file.\n"
@@ -8215,9 +8268,9 @@ msgstr ""
 "slučaj ako poglavlja nisu kodovana sa UTF-8. Koristite  '--chapter-charset' "
 "opciju da bi bili u stanju da naznačite koji skup znakova da se koristi.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:336
-#: src/mkvtoolnix-gui/merge/input.cpp:342
-#: src/mkvtoolnix-gui/merge/input.cpp:347
+#: src/mkvtoolnix-gui/merge/input.cpp:339
+#: src/mkvtoolnix-gui/merge/input.cpp:345
+#: src/mkvtoolnix-gui/merge/input.cpp:350
 msgid ""
 "The Matroska container format can store the display width/height for a video "
 "track."
@@ -8646,6 +8699,21 @@ msgstr ""
 msgid "The file '%1%' is a non-supported file type (%2%).\n"
 msgstr "Fajl '%1%' nije podrzan tip fajla (%2%).\n"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:885
+#, fuzzy
+msgid "The file '%1' contains chapters."
+msgstr "XML tag fajl '%1%' sadrži grešku: %2%\n"
+
+#: src/mkvtoolnix-gui/merge/input.cpp:931
+#, fuzzy
+msgid "The file '%1' contains segment information."
+msgstr "Fajl '%1%' je otvoren za zapisivanje.\n"
+
+#: src/mkvtoolnix-gui/merge/input.cpp:908
+#, fuzzy
+msgid "The file '%1' contains tags."
+msgstr "XML tag fajl '%1%' sadrži grešku: %2%\n"
+
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:46
 msgid "The file '%1' you've added is a playlist."
 msgstr "Fajl '%1' koji ste dodali je plejlista."
@@ -8912,7 +8980,7 @@ msgid ""
 "ignored.\n"
 msgstr "Jezički kod '%1%' nije važeći ISO639-2 jezički kod i biće ignorisan.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:298
+#: src/mkvtoolnix-gui/merge/input.cpp:301
 msgid ""
 "The language for this track that players can use for automatic track "
 "selection and display for the user."
@@ -9323,7 +9391,7 @@ msgstr ""
 "Izvorni fajl '%1%' ne može biti uspešno otvoren, ili nije uspelo dobijanje "
 "njegove veličine dolazeći na sam kraj fajla.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:332
+#: src/mkvtoolnix-gui/merge/input.cpp:335
 msgid ""
 "The source for the container's timing information be various things: a value "
 "given on the command line with the '--default-duration' option, the source "
@@ -9585,9 +9653,9 @@ msgstr "Informacija o obnavljanju ne može biti dobijena od %1%.\n"
 msgid "The user can then select which playlist to actually add."
 msgstr "Korisnik tada može da izabere koju plejlistu da ustvari doda."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:322
-#: src/mkvtoolnix-gui/merge/input.cpp:327
-#: src/mkvtoolnix-gui/merge/input.cpp:339
+#: src/mkvtoolnix-gui/merge/input.cpp:325
+#: src/mkvtoolnix-gui/merge/input.cpp:330
+#: src/mkvtoolnix-gui/merge/input.cpp:342
 msgid ""
 "The value can be given either as a floating point number (e.g. 12.345) or a "
 "fraction of integer values (e.g. 123/456)."
@@ -9595,7 +9663,7 @@ msgstr ""
 "Vrednost može biti data bilo kao broj sa pokretnim zarezom (npr. 12.345) ili "
 "razlomak (npr. 123/456)."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:317
+#: src/mkvtoolnix-gui/merge/input.cpp:320
 msgid ""
 "The value can be negative, but keep in mind that any frame whose timestamp "
 "is negative after this calculation is dropped."
@@ -9603,7 +9671,7 @@ msgstr ""
 "Vrednost može biti negativna, ali imajte u vidu da je bilo koja slika čija "
 "je vremenska oznaka negativna, odbačena nakon ovog računanja."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:355
+#: src/mkvtoolnix-gui/merge/input.cpp:358
 msgid "The values are only stored in the track headers."
 msgstr "Vrednosti su sačuvane samo u zaglavljima staze."
 
@@ -9625,6 +9693,7 @@ msgid "There is a new version available online."
 msgstr "Dostupna je nova verzija."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#, fuzzy
 msgid "There is currently a job running."
 msgstr "Postoji trenutno zadatak koji se obrađuje."
 
@@ -9668,6 +9737,12 @@ msgid ""
 msgstr ""
 "Ove opcije su namenjene razvoju programa. One nisu zvanično podržane i mogu "
 "se menjati od izdanja do izdanja."
+
+#: src/mkvtoolnix-gui/merge/input.cpp:886
+#: src/mkvtoolnix-gui/merge/input.cpp:909
+#: src/mkvtoolnix-gui/merge/input.cpp:932
+msgid "These aren't treated like other input files in MKVToolNix."
+msgstr ""
 
 #: src/input/r_avi.cpp:539 src/input/r_real.cpp:293
 msgid ""
@@ -9824,7 +9899,7 @@ msgstr ""
 msgid "This file could not be opened or parsed.\n"
 msgstr "Ovaj fajl ne može biti otvoren ili raščlanjen.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1481
+#: src/mkvtoolnix-gui/merge/input.cpp:1565
 msgid "This function requires the application %1."
 msgstr "Ova funkcija zahteva aplikaciju %1."
 
@@ -9931,7 +10006,7 @@ msgid ""
 msgstr ""
 "Ovaj režim razmatra samo najviši nivo poglavlja u svim stavkama edicija."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:353
+#: src/mkvtoolnix-gui/merge/input.cpp:356
 msgid ""
 "This must be comma-separated list of four numbers for the cropping to be "
 "used at the left, top, right and bottom, e.g. '0,20,0,20'."
@@ -9939,7 +10014,7 @@ msgstr ""
 "Mora biti zarezom odvojena lista od četiri broja koji se upotrebljavaju za "
 "rezanje redosledom levo, gore, desno i dole, npr. '0,20,0,20'."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:378
 msgid "This only works with DTS audio tracks."
 msgstr "Ovo radi samo sa DTS tipom staza."
 
@@ -9970,7 +10045,7 @@ msgstr ""
 "Ova opcija određuje jezik koji se povezuje za poglavlja ako se koristi OGM "
 "format poglavlja."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:337
+#: src/mkvtoolnix-gui/merge/input.cpp:340
 msgid ""
 "This option tells mkvmerge the display aspect ratio to use when it "
 "calculates the display width/height."
@@ -9978,7 +10053,7 @@ msgstr ""
 "Ovaj parametar govori mkvmerge koji se format slike koristi kada izračuna "
 "širinu/visinu slike."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:366
+#: src/mkvtoolnix-gui/merge/input.cpp:369
 msgid ""
 "This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary "
 "streams read from AVC/h.264 ES or HEVC/h.265 ES files, AVIs or Matroska "
@@ -9988,11 +10063,11 @@ msgstr ""
 "koji se čitaju iz AVC/h.264 ES ili HEVC/h.265 ES fajlova, AVI ili Matroska "
 "fajlova napravljenih sa '--engage allow_avc_in_vfw_mode' parametrom."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:348
+#: src/mkvtoolnix-gui/merge/input.cpp:351
 msgid "This parameter is the display height in pixels."
 msgstr "Ovaj parametar je visina prikaza u pikselima."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:343
+#: src/mkvtoolnix-gui/merge/input.cpp:346
 msgid "This parameter is the display width in pixels."
 msgstr "Ovaj parametar je širina prikaza u pikselima."
 
@@ -10047,7 +10122,7 @@ msgstr ""
 msgid "This template will be used for new chapter entries."
 msgstr "Ovaj obrazac će biti korišćen za nove stavke poglavlja."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:369
+#: src/mkvtoolnix-gui/merge/input.cpp:372
 msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
 msgstr "Ova staza sadrži SBR AAC/HE-AAC/AAC+ podatak."
 
@@ -10071,7 +10146,7 @@ msgid ""
 "tracks."
 msgstr "Ovo će uvećati veličinu fajla, pogotovo ako ima puno audio staza."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:323
+#: src/mkvtoolnix-gui/merge/input.cpp:326
 msgid ""
 "This works well for video and subtitle tracks but should not be used with "
 "audio tracks."
@@ -10079,7 +10154,7 @@ msgstr ""
 "Ovo radi dobro za video i titl staze ali ne treba da se koristi za audio "
 "staze."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:318
+#: src/mkvtoolnix-gui/merge/input.cpp:321
 msgid "This works with all track types."
 msgstr "Ovo radi sa svim tipovima staza."
 
@@ -10402,7 +10477,7 @@ msgstr "USF titlovi"
 msgid "USF text subtitles"
 msgstr "USF tekstualni titlovi"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:959
+#: src/mkvtoolnix-gui/merge/input.cpp:1043
 msgid "Unable to append files"
 msgstr "Ne mogu da spojim fajlove"
 
@@ -10795,7 +10870,7 @@ msgstr "Šta želite da uradite sa fajlovima koje ste prevukli ovde?"
 msgid "What to do in the future:"
 msgstr "Šta da uradim ubuduće:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:389
+#: src/mkvtoolnix-gui/merge/input.cpp:392
 msgid ""
 "What you input here is added after all the other options the GUI adds so "
 "that you could overwrite any of the GUI's options for this track."
@@ -10881,7 +10956,7 @@ msgstr ""
 "Koristeći ovu opciju one su umesto toga prikazane ispod liste staza u panelu "
 "sa tabovima."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:331
+#: src/mkvtoolnix-gui/merge/input.cpp:334
 msgid ""
 "With this option that information is adjusted to match the container's "
 "timing information."
@@ -10959,7 +11034,7 @@ msgstr "XML fajlovi sa poglavljima"
 msgid "XML segment info files"
 msgstr "XML Segment info fajlovi"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:752
+#: src/mkvtoolnix-gui/merge/input.cpp:755
 #: src/mkvtoolnix-gui/merge/output.cpp:221
 msgid "XML tag files"
 msgstr "XML tag fajlovi"
@@ -10972,7 +11047,7 @@ msgstr "Možete takođe prevući media fajlove ovde."
 msgid "You can change this value in the preferences."
 msgstr "Možete da promenite ovu vrednost u opcijama."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1484
+#: src/mkvtoolnix-gui/merge/input.cpp:1568
 msgid "You can download the application from the following URL:"
 msgstr "Možete skinuti aplikaciju sa sledećeg URL-a:"
 
@@ -11023,7 +11098,7 @@ msgstr ""
 "Možete podeliti po vremenu koje je prošlo, po vremenskim oznakama, po "
 "brojevima slika/poluslika ili po brojevima poglavlja."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:959
+#: src/mkvtoolnix-gui/merge/input.cpp:1043
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "Ne možete da dodate dodatne delove fajlovima koji ne sadrže staze."
 
@@ -11244,10 +11319,10 @@ msgstr ""
 msgid "deflateInit() failed. Result: %1%\n"
 msgstr "deflateInit() failed. Result: %1%\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1094
-#: src/mkvtoolnix-gui/merge/input.cpp:1096
-#: src/mkvtoolnix-gui/merge/input.cpp:1097
-#: src/mkvtoolnix-gui/merge/input.cpp:1098
+#: src/mkvtoolnix-gui/merge/input.cpp:1178
+#: src/mkvtoolnix-gui/merge/input.cpp:1180
+#: src/mkvtoolnix-gui/merge/input.cpp:1181
+#: src/mkvtoolnix-gui/merge/input.cpp:1182
 msgid "determine automatically"
 msgstr "odredi automatski"
 
@@ -11270,7 +11345,7 @@ msgstr "visina prikaza: %1%"
 msgid "display width: %1%"
 msgstr "širina prikaza: %1%"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1093
+#: src/mkvtoolnix-gui/merge/input.cpp:1177
 msgid "don't change"
 msgstr "ne menjaj"
 
@@ -11359,11 +11434,11 @@ msgstr "flac_reader: Greška pri raščlanjivanju fajla: %1%\n"
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: ne mogu da inicijalizujem FLAC paketizer.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1097
+#: src/mkvtoolnix-gui/merge/input.cpp:1181
 msgid "for all frames"
 msgstr "za sve slike"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:381
+#: src/mkvtoolnix-gui/merge/input.cpp:384
 msgid ""
 "for files with chapter information (e.g. OGM, MP4) for which mkvmerge does "
 "not detect the encoding correctly"
@@ -11371,7 +11446,7 @@ msgstr ""
 "za fajlove sa informacijom o poglavlju (npr. OGM, MP4) za koje mkvmerge ne "
 "detektuje kodovanje ispravno."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:380
+#: src/mkvtoolnix-gui/merge/input.cpp:383
 msgid ""
 "for subtitle files that do not use a byte order marker (BOM) and that are "
 "not encoded in the system's current character set (%1)"
@@ -11379,11 +11454,11 @@ msgstr ""
 "za titlove koji ne koriste marker za redosled bajtova (BOM) i koji nisu "
 "kodovani sa trenutnim skupom znakova sistema (%1)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1093
+#: src/mkvtoolnix-gui/merge/input.cpp:1177
 msgid "force 2 bytes"
 msgstr "prinudi 2 bajta"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1093
+#: src/mkvtoolnix-gui/merge/input.cpp:1177
 msgid "force 4 bytes"
 msgstr "prinudi 4 bajta"
 
@@ -11897,17 +11972,17 @@ msgstr "nikad ne skeniraj za druge plejliste"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:905
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:28
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
-#: src/mkvtoolnix-gui/merge/input.cpp:1092
-#: src/mkvtoolnix-gui/merge/input.cpp:1094
-#: src/mkvtoolnix-gui/merge/input.cpp:1095
-#: src/mkvtoolnix-gui/merge/input.cpp:1098
+#: src/mkvtoolnix-gui/merge/input.cpp:1176
+#: src/mkvtoolnix-gui/merge/input.cpp:1178
+#: src/mkvtoolnix-gui/merge/input.cpp:1179
+#: src/mkvtoolnix-gui/merge/input.cpp:1182
 #: src/mkvtoolnix-gui/merge/track_model.cpp:93
 #: src/mkvtoolnix-gui/merge/track_model.cpp:98
 #: src/mkvtoolnix-gui/merge/track_model.cpp:256
 msgid "no"
 msgstr "ne"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1097
+#: src/mkvtoolnix-gui/merge/input.cpp:1181
 msgid "no cues"
 msgstr "bez cue-ova"
 
@@ -11923,7 +11998,7 @@ msgstr "bez greške"
 msgid "no errors yet"
 msgstr "još uvek bez grešaka"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1096
+#: src/mkvtoolnix-gui/merge/input.cpp:1180
 msgid "no extra compression"
 msgstr "bez dodatne kompresije"
 
@@ -11981,7 +12056,7 @@ msgstr ""
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer nije uspeo\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1097
+#: src/mkvtoolnix-gui/merge/input.cpp:1181
 msgid "only for I frames"
 msgstr "samo za I slike"
 
@@ -12208,10 +12283,10 @@ msgstr "x"
 
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:29
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
-#: src/mkvtoolnix-gui/merge/input.cpp:1092
-#: src/mkvtoolnix-gui/merge/input.cpp:1094
-#: src/mkvtoolnix-gui/merge/input.cpp:1095
-#: src/mkvtoolnix-gui/merge/input.cpp:1098
+#: src/mkvtoolnix-gui/merge/input.cpp:1176
+#: src/mkvtoolnix-gui/merge/input.cpp:1178
+#: src/mkvtoolnix-gui/merge/input.cpp:1179
+#: src/mkvtoolnix-gui/merge/input.cpp:1182
 #: src/mkvtoolnix-gui/merge/track_model.cpp:93
 #: src/mkvtoolnix-gui/merge/track_model.cpp:98
 #: src/mkvtoolnix-gui/merge/track_model.cpp:256
@@ -12235,4 +12310,7 @@ msgstr "– bez selekcije –"
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:38
 msgid "– set to none –"
 msgstr "– nijedna –"
+
+#~ msgid "Do you want to abort that job and quit?"
+#~ msgstr "Da li želite da prekinete taj zadatak i odustanete?"
 
