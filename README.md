@@ -94,8 +94,9 @@ Installing "drake" is simple. As root run the following command:
 Other libraries are optional and only limit the features that are
 built. These include:
 
-- [Qt](http://www.qt.io/) -- a cross-platform GUI toolkit. You need
-  this if you want to use the MKVToolNix GUI or mkvinfo's GUI.
+- [Qt](http://www.qt.io/) v5.2 or newer -- a cross-platform GUI
+  toolkit. You need this if you want to use the MKVToolNix GUI or
+  mkvinfo's GUI.
 
 - [libFLAC](http://downloads.xiph.org/releases/flac/) for FLAC
   support (Free Lossless Audio Codec)
