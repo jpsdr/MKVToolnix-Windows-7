@@ -223,6 +223,7 @@ protected:
   virtual void addOrAppendFiles(bool append);
   virtual void addOrAppendFiles(bool append, QStringList const &fileNames, QModelIndex const &sourceFileIdx);
   virtual void setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files);
+  virtual QStringList handleDroppedSpecialFiles(QStringList const &fileNames);
   virtual void enableFilesActions();
   virtual void enableTracksActions();
   virtual void enableAttachmentsActions();

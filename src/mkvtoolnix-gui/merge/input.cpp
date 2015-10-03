@@ -14,11 +14,14 @@
 #include <QString>
 #include <QTimer>
 
+#include "common/chapters/chapters.h"
 #include "common/extern_data.h"
 #include "common/iso639.h"
 #include "common/logger.h"
 #include "common/qt.h"
 #include "common/stereo_mode.h"
+#include "common/xml/ebml_segmentinfo_converter.h"
+#include "common/xml/ebml_tags_converter.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -868,12 +871,93 @@ Tab::addFiles(QStringList const &fileNames) {
   addOrAppendFiles(false, fileNames, QModelIndex{});
 }
 
+QStringList
+Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
+  auto toIdentify = QStringList{};
+
+  for (auto const &fileName : fileNames) {
+    try {
+      auto chapters = parse_chapters(to_utf8(fileName), 0, -1, 0, "", "", true);
+      if (chapters) {
+        Util::MessageBox::warning(this)
+          ->title(QY("Adding chapter files"))
+          .text(Q("%1 %2 %3 %4")
+                .arg(QY("The file '%1' contains chapters.").arg(fileName))
+                .arg(QY("These aren't treated like other input files in MKVToolNix."))
+                .arg(QY("Instead such a file must be set via the 'chapter file' option on the 'output' tab."))
+                .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
+          .onlyOnce(QY("mergeChaptersDropped"))
+          .exec();
+
+        m_config.m_chapters = fileName;
+        ui->chapters->setText(fileName);
+
+        continue;
+      }
+
+    } catch (...) {
+    }
+
+    try {
+      auto tags = mtx::xml::ebml_tags_converter_c::parse_file(to_utf8(fileName), true);
+
+      if (tags) {
+        Util::MessageBox::warning(this)
+          ->title(QY("Adding tag files"))
+          .text(Q("%1 %2 %3 %4")
+                .arg(QY("The file '%1' contains tags.").arg(fileName))
+                .arg(QY("These aren't treated like other input files in MKVToolNix."))
+                .arg(QY("Instead such a file must be set via the 'global tags' option on the 'output' tab."))
+                .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
+          .onlyOnce(QY("mergeTagsDropped"))
+          .exec();
+
+        m_config.m_globalTags = fileName;
+        ui->globalTags->setText(fileName);
+
+        continue;
+      }
+
+    } catch (...) {
+    }
+
+    try {
+      auto segmentinfo = mtx::xml::ebml_segmentinfo_converter_c::parse_file(to_utf8(fileName), true);
+
+      if (segmentinfo) {
+        Util::MessageBox::warning(this)
+          ->title(QY("Adding segment info files"))
+          .text(Q("%1 %2 %3 %4")
+                .arg(QY("The file '%1' contains segment information.").arg(fileName))
+                .arg(QY("These aren't treated like other input files in MKVToolNix."))
+                .arg(QY("Instead such a file must be set via the 'segment info' option on the 'output' tab."))
+                .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
+          .onlyOnce(QY("mergeSegmentInfoDropped"))
+          .exec();
+
+        m_config.m_segmentInfo = fileName;
+        ui->segmentInfo->setText(fileName);
+
+        continue;
+      }
+
+    } catch (...) {
+    }
+
+    toIdentify << fileName;
+  }
+
+  return toIdentify;
+}
+
 void
 Tab::addOrAppendFiles(bool append,
                       QStringList const &fileNames,
                       QModelIndex const &sourceFileIdx) {
+  auto toIdentify = handleDroppedSpecialFiles(fileNames);
+
   QList<SourceFilePtr> identifiedFiles;
-  for (auto &fileName : fileNames) {
+  for (auto &fileName : toIdentify) {
     Util::FileIdentifier identifier{ this, fileName };
     if (identifier.identify())
       identifiedFiles << identifier.file();
