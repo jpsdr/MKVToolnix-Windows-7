@@ -1,10 +1,14 @@
 #include "common/common_pch.h"
 
+#include <QCheckBox>
 #include <QDialogButtonBox>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QSettings>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/util/message_box.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -12,7 +16,7 @@ class MessageBoxPrivate {
   friend class MessageBox;
 
   QWidget *m_parent{};
-  QString m_title, m_text;
+  QString m_title, m_text, m_onlyOnceID;
   QHash<QMessageBox::StandardButton, QString> m_buttonLabels;
   QMessageBox::Icon m_icon{QMessageBox::NoIcon};
   QMessageBox::StandardButtons m_buttons{QMessageBox::Ok};
@@ -81,6 +85,14 @@ MessageBox::buttonLabel(QMessageBox::StandardButton button,
   return *this;
 }
 
+MessageBox &
+MessageBox::onlyOnce(QString const &id) {
+  Q_D(MessageBox);
+
+  d->m_onlyOnceID = id;
+  return *this;
+}
+
 MessageBoxPtr
 MessageBox::question(QWidget *parent) {
   auto box = std::make_shared<MessageBox>(parent);
@@ -124,6 +136,14 @@ MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
   if (pDefaultButton)
     d->m_defaultButton = *pDefaultButton;
 
+  if (!d->m_onlyOnceID.isEmpty()) {
+    auto reg          = Util::Settings::registry();
+    auto hasBeenShown = reg->value(Q("messageBox/showOnce/%1").arg(d->m_onlyOnceID), false).toBool();
+
+    if (hasBeenShown)
+      return d->m_defaultButton;
+  }
+
   QMessageBox msgBox{d->m_icon, d->m_title, d->m_text, QMessageBox::NoButton, d->m_parent};
   auto buttonBox = msgBox.findChild<QDialogButtonBox *>();
   auto mask      = static_cast<unsigned int>(QMessageBox::FirstButton);
@@ -156,8 +176,19 @@ MessageBox::exec(boost::optional<QMessageBox::StandardButton> pDefaultButton) {
       pushButton->setText(label);
   }
 
+  if (!d->m_onlyOnceID.isEmpty()) {
+    auto checkBox = new QCheckBox{&msgBox};
+    checkBox->setText(QY("Don't show this message again."));
+    msgBox.setCheckBox(checkBox);
+  }
+
   if (msgBox.exec() == -1)
     return QMessageBox::Cancel;
+
+  if (!d->m_onlyOnceID.isEmpty() && msgBox.checkBox()->isChecked()) {
+    auto reg = Util::Settings::registry();
+    reg->setValue(Q("messageBox/showOnce/%1").arg(d->m_onlyOnceID), true);
+  }
 
   return msgBox.standardButton(msgBox.clickedButton());
 }
