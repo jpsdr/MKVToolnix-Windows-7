@@ -884,7 +884,7 @@ Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
       continue;
     }
 
-    auto content = file.read(1024).toStdString();
+    auto content = std::string{ file.read(1024).data() };
     if (boost::regex_search(content, simpleChaptersRE) || boost::regex_search(content, xmlChaptersRE)) {
       Util::MessageBox::warning(this)
         ->title(QY("Adding chapter files"))
