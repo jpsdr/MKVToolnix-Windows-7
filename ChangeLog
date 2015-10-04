@@ -1,5 +1,9 @@
 2015-10-04  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: PCM tracks: if the number of samples per
+        packet varies then no default duration will be
+        written. Fixes #1426.
+
         * MKVToolNix GUI: merge tool enhancement: added buttons for
         previewing the character sets for text subtitles read from SRT and
         SSA/ASS files as well as for chapter files. They're located next

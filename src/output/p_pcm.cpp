@@ -31,11 +31,13 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
   , m_bits_per_sample(bits_per_sample)
-  , m_previous_timecode{-1}
+  , m_samples_per_packet{}
+  , m_samples_per_packet_packaged{}
   , m_packet_size(0)
   , m_min_packet_size{static_cast<size_t>(samples_to_size(samples_per_sec * 4) / 1000)} // Minimum: 4ms of samples if we should pass it through unmodified
   , m_samples_output(0)
   , m_num_durations_provided{}
+  , m_num_packets_with_different_sample_count{}
   , m_format{format}
   , m_s2tc(1000000000ll, m_samples_per_sec)
 {
@@ -102,29 +104,41 @@ pcm_packetizer_c::process(packet_cptr packet) {
 
 int
 pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
+  auto buffer_size = m_buffer.get_size();
+
+  if (buffer_size) {
+    auto data_size = packet->data->get_size();
+    packet->data->resize(data_size + buffer_size);
+
+    auto data = packet->data->get_buffer();
+
+    std::memmove(&data[buffer_size], &data[0],              data_size);
+    std::memmove(&data[0],           m_buffer.get_buffer(), buffer_size);
+
+    m_buffer.remove(buffer_size);
+
+    packet->timecode -= size_to_samples(buffer_size) * m_s2tc;
+  }
+
   auto samples_here = size_to_samples(packet->data->get_size());
   packet->duration  = samples_here * m_s2tc;
+  m_samples_output  = packet->timecode / m_s2tc + samples_here;
 
   ++m_num_durations_provided;
 
-  if (16 > m_num_durations_provided) {
-    ++m_duration_frequency[ packet->duration ];
-
-  } else if (16 == m_num_durations_provided) {
-    auto most_common = boost::accumulate(m_duration_frequency, m_duration_frequency.begin()->first,
-                                         [&](int64_t accu, std::pair<int64_t,int64_t> const &elt) {
-                                           return m_duration_frequency[accu] > elt.second ? accu : elt.first;
-                                         });
-
-    m_samples_per_packet = most_common / m_s2tc;
-    m_packet_size        = samples_to_size(m_samples_per_packet);
-
-    set_track_default_duration(most_common);
+  if (1 == m_num_durations_provided) {
+    m_samples_per_packet_packaged = samples_here;
+    set_track_default_duration(samples_here * m_s2tc);
     rerender_track_headers();
-  }
 
-  m_previous_timecode = packet->timecode;
-  m_samples_output     = packet->timecode / m_s2tc + samples_here;
+  } else if (m_htrack_default_duration && (samples_here != m_samples_per_packet_packaged)) {
+    ++m_num_packets_with_different_sample_count;
+
+    if (1 < m_num_packets_with_different_sample_count) {
+      set_track_default_duration(0);
+      rerender_track_headers();
+    }
+  }
 
   add_packet(packet);
 

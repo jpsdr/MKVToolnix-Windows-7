@@ -375,8 +375,12 @@ generic_packetizer_c::set_track_default_duration(int64_t def_dur) {
 
   m_htrack_default_duration = (int64_t)(def_dur * m_ti.m_tcsync.numerator / m_ti.m_tcsync.denominator);
 
-  if (m_track_entry)
-    GetChild<KaxTrackDefaultDuration>(m_track_entry).SetValue(m_htrack_default_duration);
+  if (m_track_entry) {
+    if (m_htrack_default_duration)
+      GetChild<KaxTrackDefaultDuration>(m_track_entry).SetValue(m_htrack_default_duration);
+    else
+      DeleteChildren<KaxTrackDefaultDuration>(m_track_entry);
+  }
 }
 
 void
