@@ -159,6 +159,10 @@
       </para>
 
       <para>
+       If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used.
+      </para>
+
+      <para>
        Each file created contains one segment, and each segment has one segment UID. If more segment UIDs are specified than segments are
        created then the surplus UIDs are ignored. If fewer UIDs are specified than segments are created then random UIDs will be created for
        them.
@@ -732,6 +736,10 @@
        Links the first output file to the segment with the segment UID given by the <parameter>segment-UID</parameter> parameter. See the
        section on <link linkend="mkvmerge.file_linking">file linking</link> below for details.
       </para>
+
+      <para>
+       If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used.
+      </para>
      </listitem>
     </varlistentry>
 
@@ -741,6 +749,10 @@
       <para>
        Links the last output file to the segment with the segment UID given by the <parameter>segment-UID</parameter> parameter. See the
        section on <link linkend="mkvmerge.file_linking">file linking</link> below for details.
+      </para>
+
+      <para>
+       If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used.
       </para>
      </listitem>
     </varlistentry>

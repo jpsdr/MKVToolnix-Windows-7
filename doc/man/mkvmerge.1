@@ -117,6 +117,8 @@ below for details\&.
 .RS 4
 Sets the segment UIDs to use\&. This is a comma\-separated list of 128bit segment UIDs in the usual UID form: hex numbers with or without the "0x" prefix, with or without spaces, exactly 32 digits\&.
 .sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+.sp
 Each file created contains one segment, and each segment has one segment UID\&. If more segment UIDs are specified than segments are created then the surplus UIDs are ignored\&. If fewer UIDs are specified than segments are created then random UIDs will be created for them\&.
 .RE
 .SS "Chapter and tag handling (global options)"
@@ -806,6 +808,8 @@ Links the first output file to the segment with the segment UID given by the
 parameter\&. See the section on
 file linking
 below for details\&.
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-link\-to\-next\fR \fIsegment\-UID\fR
@@ -815,6 +819,8 @@ Links the last output file to the segment with the segment UID given by the
 parameter\&. See the section on
 file linking
 below for details\&.
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-append\-mode\fR \fImode\fR

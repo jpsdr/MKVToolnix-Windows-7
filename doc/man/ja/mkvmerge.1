@@ -99,6 +99,8 @@ XMLファイルからセグメント情報を読み取ります。このファ�
 .RS 4
 使用するセグメントUIDを設定します。これはコンマで区切られた、通常のUID形式("0x"を前置する、またはしない、空白を含む、または含まない、ちょうど32桁の16進数)128ビットセグメントUIDのリストです。
 .sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+.sp
 作成される各ファイルは一つのセグメントを含み、そして各セグメントは一つのセグメントUIDを持ちます。もし、作成されたセグメントよりも多数のセグメントUIDが指定された場合、余ったセグメントUIDは無視されます。また、もし指定されたセグメントUIDよりも多数のセグメントが作成された場合は、ランダムなUIDが作成されて使用されます。
 .RE
 .SS "チャプタ及びタグの扱い (グローバルオプション)"
@@ -685,11 +687,15 @@ file format supports arbitrary deeply nested chapter structures called \*(Aqedit
 \fB\-\-link\-to\-previous\fR \fIsegment\-UID\fR
 .RS 4
 最初の出力ファイルを\fIsegment\-UID\fRで指定したセグメントUIDに紐付けします。詳細はファイル紐付けのセクションを参照してください。
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-link\-to\-next\fR \fIsegment\-UID\fR
 .RS 4
 最後の出力ファイルを\fIsegment\-UID\fRで指定したセグメントUIDに紐付けします。詳細はファイル紐付けのセクションを参照してください。
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-append\-mode\fR \fImode\fR

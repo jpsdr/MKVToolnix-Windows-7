@@ -118,6 +118,8 @@ para m\('as detalles\&.
 .RS 4
 Establece los UIDs del segmento que se usar\('an\&. Esto es una lista separada por comas con UIDs del segmento con una longitud de 128 bits en la forma t\('ipica del UID: n\('umeros hexadecimales con o sin el prefijo "0x" con o sin espacios y siendo 32 d\('igitos exactos\&.
 .sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+.sp
 Cada archivo creado contiene un segmento, y cada segmento tiene un SID (UID del segmento)\&. Si se especifican m\('as SIDs que segmentos entonces los UIDs que sobren son ignorados\&. Si se especifican menos UIDs que segmentos entonces se crear\('an de manera aleatoria los UIDs que faltan\&.
 .RE
 .SS "Manipulaci\('on de cap\('itulos y etiquetas (opciones generales)"
@@ -800,6 +802,8 @@ Vincula el primer archivo generado al segmento con el UID del segmento especific
 \fIsegmento\-UID\fR\&. Mire la siguiente secci\('on
 vinculaci\('on de archivos
 para m\('as detalles\&.
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-link\-to\-next\fR \fIsegmento\-UID\fR
@@ -808,6 +812,8 @@ Vincula el \('ultimo archivo generado al segmento con el UID del segmento especi
 \fIsegmento\-UID\fR\&. Mire la siguiente secci\('on
 vinculaci\('on de archivos
 para m\('as detalles\&.
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-append\-mode\fR \fImodo\fR

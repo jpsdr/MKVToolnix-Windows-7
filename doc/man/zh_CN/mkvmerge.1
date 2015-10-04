@@ -117,6 +117,8 @@ DTD
 .RS 4
 设定要使用的剪辑 UID。这是个逗号分割的 128 位 UID 列表，UID 为通常的格式: 十六进制数字，"0x" 前缀可选，空格可选，但必须恰好有 32 个数位。
 .sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+.sp
 创建的每个文件都包含一个剪辑，每个剪辑有一个剪辑 UID。如果指定的剪辑 UID 比创建的剪辑多，则多余的 UID 将被忽略。如果指定的 UID 比创建的剪辑少，则将随机创建 UID。
 .RE
 .SS "章节与标签处理 (全局选项)"
@@ -788,6 +790,8 @@ Matroska(TM)
 参数对应的剪辑。详情请参阅下文
 文件链接
 段落。
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-link\-to\-next\fR \fI剪辑\-UID\fR
@@ -797,6 +801,8 @@ Matroska(TM)
 参数对应的剪辑。详情请参阅下文
 文件链接
 段落。
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-append\-mode\fR \fI模式\fR

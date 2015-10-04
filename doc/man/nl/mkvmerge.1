@@ -118,6 +118,8 @@ zie hieronder voor details\&.
 .RS 4
 Stelt het te gebruiken segment UID\*(Aqs in\&. Dit is een komma gesepareerde lijst van 128bit segment UID\*(Aqs in het gebruikelijke UID formaat: hex nummers met of zonder de "0x" voorzetsel, met of zonder spaties, exact 32 cijfers\&.
 .sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+.sp
 Elk gecre\(:eerd bestand bevat \('e\('en segment, en elk segment heeft \('e\('en UID\&. Als er meer segment UID\*(Aqs zijn opgegeven dan er zijn gecre\(:eerd, dan zullen de extra UID\*(Aqs worden genegeerd\&. Zijn er minder UID\*(Aqs opgegeven dan er segmenten zijn gecre\(:eerd, dan worden er willekeurig UID\*(Aqs voor hen aangemaakt\&.
 .RE
 .SS "Hanteren hoofdstuk en markeringen (globale opties)"
@@ -808,6 +810,8 @@ Verbindt het laatste uitvoerbestand met het segment UID ingegeven door
 parameter\&. Zie de sectie over:
 Bestand linken
 onderstaand voor details\&.
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-link\-to\-next\fR \fIsegment\-UID\fR
@@ -817,6 +821,8 @@ Verbindt het laatste uitvoerbestand met het segment UID ingegeven door
 parameter\&. Zie de sectie over:
 Bestand linken
 onderstaand voor details\&.
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-append\-mode\fR \fImode\fR

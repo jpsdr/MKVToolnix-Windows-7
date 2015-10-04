@@ -111,6 +111,8 @@ Segmentinformations-XML-Dateien\&.
 .RS 4
 setzt die zu verwendenden UIDs\&. Dies ist eine durch Kommas getrennte Liste von 128\-Bit\-Sgement\-UIDs in der gew\(:ohnlichen UID\-Form: Hexadezimalzahlen mit oder ohne Pr\(:afix \(Fc0x\(Fo, mit oder ohne Leerzeichen, exakt 32 Ziffern lang\&.
 .sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+.sp
 Jede erstellte Datei enth\(:alt ein Segment und jedes Segment hat eine Segment\-UID\&. Falls mehr Segment\-UIDs angegeben als Segmente erstellt werden, werden die \(:ubersch\(:ussigen UIDs ignoriert\&. Falls weniger Segment\-UIDs angegeben als Segmente erstellt werden, dann werden f\(:ur diese Segmente zuf\(:allige UIDs erzeugt\&.
 .RE
 .SS "Handhabung von Kapiteln und Tags (globale Optionen)"
@@ -797,6 +799,8 @@ verkn\(:upft die erste Ausgabedatei an das Segment mit der durch den Parameter
 \fISegment\-UID\fR
 angegebenen Segment\-UID\&. Einzelheiten finden Sie im nachfolgenden Abschnitt \(:uber das
 Verkn\(:upfen von Dateien\&.
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-link\-to\-next\fR \fISegment\-UID\fR
@@ -805,6 +809,8 @@ verkn\(:upft die letzte Ausgabedatei an das Segment mit der durch den Parameter
 \fISegment\-UID\fR
 angegebenen Segment\-UID\&. Einzelheiten finden Sie im nachfolgenden Kapitel \(:uber das
 Verkn\(:upfen von Dateien\&.
+.sp
+If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
 .RE
 .PP
 \fB\-\-append\-mode\fR \fIModus\fR
