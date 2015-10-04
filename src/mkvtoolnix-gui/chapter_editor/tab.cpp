@@ -349,7 +349,7 @@ Tab::timecodesToChapters(std::vector<timecode_c> const &timecodes)
 
   for (auto const &timecode : timecodes) {
     auto nameTemplate = QString{ cfg.m_chapterNameTemplate };
-    auto name         = formatChapterName(nameTemplate, ++idx);
+    auto name         = formatChapterName(nameTemplate, ++idx, timecode);
     auto atom         = mtx::construct::cons<KaxChapterAtom>(new KaxChapterTimeStart, timecode.to_ns(),
                                                              mtx::construct::cons<KaxChapterDisplay>(new KaxChapterString,   name,
                                                                                                      new KaxChapterLanguage, to_utf8(cfg.m_defaultChapterLanguage)));
@@ -962,7 +962,7 @@ Tab::createEmptyChapter(int64_t startTime,
   auto &cfg     = Util::Settings::get();
   auto chapter  = std::make_shared<KaxChapterAtom>();
   auto &display = GetChild<KaxChapterDisplay>(*chapter);
-  auto name     = formatChapterName(nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate, chapterNumber);
+  auto name     = formatChapterName(nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate, chapterNumber, timecode_c::ns(startTime));
 
   GetChild<KaxChapterUID>(*chapter).SetValue(0);
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTime);
@@ -1212,13 +1212,15 @@ Tab::duplicateElement() {
 
 QString
 Tab::formatChapterName(QString const &nameTemplate,
-                       int chapterNumber)
+                       int chapterNumber,
+                       timecode_c const &startTimecode)
   const {
-  auto name = QString{ nameTemplate };
-  auto re   = QRegularExpression{Q("<NUM(?::(\\d+))?>")};
+  auto name       = QString{ nameTemplate };
+  auto numberRe   = QRegularExpression{Q("<NUM(?::(\\d+))?>")};
+  auto timecodeRe = QRegularExpression{Q("<START(?::([^>]+))?>")};
 
   while (true) {
-    auto matches = re.match(name);
+    auto matches = numberRe.match(name);
     if (!matches.hasMatch())
       break;
 
@@ -1226,6 +1228,15 @@ Tab::formatChapterName(QString const &nameTemplate,
     auto strNumber = Q("%1").arg(QString::number(chapterNumber), minWidth, '0');
 
     name.replace(matches.capturedStart(), matches.capturedLength(), strNumber);
+  }
+
+  while (true) {
+    auto matches = timecodeRe.match(name);
+    if (!matches.hasMatch())
+      break;
+
+    auto format = matches.capturedLength(1) ? matches.captured(1) : Q("%H:%M:%S");
+    name.replace(matches.capturedStart(), matches.capturedLength(), Q(format_timecode(startTimecode, to_utf8(format))));
   }
 
   return name;
@@ -1300,7 +1311,8 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
       return false;
   }
 
-  auto name = to_wide(formatChapterName(nameTemplate, chapterNumber));
+  auto startTimecode = FindChildValue<KaxChapterTimeStart>(*chapter);
+  auto name          = to_wide(formatChapterName(nameTemplate, chapterNumber, timecode_c::ns(startTimecode)));
 
   if (RenumberSubChaptersParametersDialog::NameMatch::First == nameMatchingMode) {
     GetChild<KaxChapterString>(GetChild<KaxChapterDisplay>(*chapter)).SetValue(name);

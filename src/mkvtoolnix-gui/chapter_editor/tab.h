@@ -165,7 +165,7 @@ protected:
 
   QString currentState() const;
   ChaptersPtr timecodesToChapters(std::vector<timecode_c> const &timecodes) const;
-  QString formatChapterName(QString const &nameTemplate, int chapterNumber) const;
+  QString formatChapterName(QString const &nameTemplate, int chapterNumber, timecode_c const &startTimecode) const;
   bool changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace,
                          bool skipHidden);
 

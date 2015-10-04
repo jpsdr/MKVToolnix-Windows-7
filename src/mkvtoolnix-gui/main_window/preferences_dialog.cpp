@@ -7,6 +7,7 @@
 #include "common/qt.h"
 #include "common/translation.h"
 #include "mkvtoolnix-gui/app.h"
+#include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
@@ -125,12 +126,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("Normally completed jobs stay in the queue even over restarts until the user clears them out manually."))
                    .arg(QY("You can opt for having them removed automatically under certain conditions.")));
 
-  Util::setToolTip(ui->leCENameTemplate,
-                   Q("<p>%1 %2</p><p>%3 %4</p>")
-                   .arg(QY("This template will be used for new chapter entries."))
-                   .arg(QY("The string '<NUM>' will be replaced by the chapter number.").toHtmlEscaped())
-                   .arg(QY("You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'.").toHtmlEscaped())
-                   .arg(QY("The resulting number will be padded with leading zeroes if the number of places is less than specified.")));
+  Util::setToolTip(ui->leCENameTemplate, ChapterEditor::Tool::chapterNameTemplateToolTip());
   Util::setToolTip(ui->cbCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDefaultCountry, QY("This is the country that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDropLastFromBlurayPlaylist,

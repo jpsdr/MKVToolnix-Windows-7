@@ -10,6 +10,7 @@
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.h"
+#include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -59,12 +60,7 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
 void
 GenerateSubChaptersParametersDialog::retranslateUi() {
   Util::setToolTip(m_ui->leStartTimecode, QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."));
-  Util::setToolTip(m_ui->leNameTemplate,
-                   Q("<p>%1 %2</p><p>%3 %4</p>")
-                   .arg(QY("This template will be used for new chapter entries."))
-                   .arg(QY("The string '<NUM>' will be replaced by the chapter number.").toHtmlEscaped())
-                   .arg(QY("You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'.").toHtmlEscaped())
-                   .arg(QY("The resulting number will be padded with leading zeroes if the number of places is less than specified.")));
+  Util::setToolTip(m_ui->leNameTemplate, Tool::chapterNameTemplateToolTip());
 }
 
 int

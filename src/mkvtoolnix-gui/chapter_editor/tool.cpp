@@ -293,4 +293,28 @@ Tool::setupTabPositions() {
   ui->editors->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
+QString
+Tool::chapterNameTemplateToolTip() {
+  return Q("<p>%1 %2 %3</p><p>%4 %5</p><p>%6 %7 %8</p><ul><li>%9</li><li>%10</li><li>%11</li><li>%12</li><li>%13</li><li>%14</li><li>%15</li><li>%16</li></ul>")
+    .arg(QY("This template will be used for new chapter entries."))
+    .arg(QY("The string '<NUM>' will be replaced by the chapter number.").toHtmlEscaped())
+    .arg(QY("The string '<START>' will be replaced by the chapter's start timestamp.").toHtmlEscaped())
+
+    .arg(QY("You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'.").toHtmlEscaped())
+    .arg(QY("The resulting number will be padded with leading zeroes if the number of places is less than specified."))
+
+    .arg(QY("You can control the format used by the start timestamp with <START:format>.").toHtmlEscaped())
+    .arg(QY("The format defaults to %H:%M:%S if none is given."))
+    .arg(QY("Valid format codes are:"))
+
+    .arg(QY("%h – hours"))
+    .arg(QY("%H – hours zero-padded to two places"))
+    .arg(QY("%m – minutes"))
+    .arg(QY("%M – minutes zero-padded to two places"))
+    .arg(QY("%s – seconds"))
+    .arg(QY("%S – seconds zero-padded to two places"))
+    .arg(QY("%n – nanoseconds with nine places"))
+    .arg(QY("%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)").toHtmlEscaped());
+}
+
 }}}

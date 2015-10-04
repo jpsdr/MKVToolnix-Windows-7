@@ -62,6 +62,9 @@ protected:
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;
+
+public:
+  static QString chapterNameTemplateToolTip();
 };
 
 }}}
