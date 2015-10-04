@@ -178,6 +178,9 @@ public slots:
   virtual void onPreviousSegmentUIDChanged(QString newValue);
   virtual void onNextSegmentUIDChanged(QString newValue);
   virtual void onChaptersChanged(QString newValue);
+  virtual void onBrowseSegmentUID();
+  virtual void onBrowsePreviousSegmentUID();
+  virtual void onBrowseNextSegmentUID();
   virtual void onBrowseChapters();
   virtual void onChapterLanguageChanged(int newValue);
   virtual void onChapterCharacterSetChanged(QString newValue);
@@ -281,6 +284,8 @@ protected:
 
   virtual QString mediaInfoLocation();
   virtual void openFilesInMediaInfo(QStringList const &fileNames);
+
+  virtual void addSegmentUIDFromFile(QLineEdit &lineEdit, bool append);
 };
 
 }}}

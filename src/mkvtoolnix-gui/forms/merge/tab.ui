@@ -1160,7 +1160,7 @@
              <property name="title">
               <string>File/Segment linking</string>
              </property>
-             <layout class="QGridLayout" name="gridLayout_3">
+             <layout class="QGridLayout" name="gridLayout">
               <item row="0" column="0">
                <widget class="QLabel" name="segmentUIDsLabel">
                 <property name="text">
@@ -1169,7 +1169,22 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLineEdit" name="segmentUIDs"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <item>
+                 <widget class="QLineEdit" name="segmentUIDs"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browseSegmentUID">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="1" column="0">
                <widget class="QLabel" name="previousSegmentUIDLabel">
@@ -1179,7 +1194,22 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLineEdit" name="previousSegmentUID"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item>
+                 <widget class="QLineEdit" name="previousSegmentUID"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browsePreviousSegmentUID">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="2" column="0">
                <widget class="QLabel" name="nextSegmentUIDLabel">
@@ -1189,7 +1219,22 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLineEdit" name="nextSegmentUID"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
+                <item>
+                 <widget class="QLineEdit" name="nextSegmentUID"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browseNextSegmentUID">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>
@@ -1602,6 +1647,79 @@
    <header>mkvtoolnix-gui/util/basic_line_edit.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabs</tabstop>
+  <tabstop>files</tabstop>
+  <tabstop>moveFilesUp</tabstop>
+  <tabstop>moveFilesDown</tabstop>
+  <tabstop>tracks</tabstop>
+  <tabstop>moveTracksUp</tabstop>
+  <tabstop>moveTracksDown</tabstop>
+  <tabstop>twProperties</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>muxThis</tabstop>
+  <tabstop>trackName</tabstop>
+  <tabstop>trackLanguage</tabstop>
+  <tabstop>defaultTrackFlag</tabstop>
+  <tabstop>forcedTrackFlag</tabstop>
+  <tabstop>compression</tabstop>
+  <tabstop>trackTags</tabstop>
+  <tabstop>browseTrackTags</tabstop>
+  <tabstop>delay</tabstop>
+  <tabstop>stretchBy</tabstop>
+  <tabstop>defaultDuration</tabstop>
+  <tabstop>timecodes</tabstop>
+  <tabstop>browseTimecodes</tabstop>
+  <tabstop>fixBitstreamTimingInfo</tabstop>
+  <tabstop>displayWidth</tabstop>
+  <tabstop>displayHeight</tabstop>
+  <tabstop>stereoscopy</tabstop>
+  <tabstop>setAspectRatio</tabstop>
+  <tabstop>aspectRatio</tabstop>
+  <tabstop>setDisplayWidthHeight</tabstop>
+  <tabstop>cropping</tabstop>
+  <tabstop>naluSizeLength</tabstop>
+  <tabstop>aacIsSBR</tabstop>
+  <tabstop>reduceToAudioCore</tabstop>
+  <tabstop>subtitleCharacterSet</tabstop>
+  <tabstop>cues</tabstop>
+  <tabstop>additionalTrackOptions</tabstop>
+  <tabstop>title</tabstop>
+  <tabstop>output</tabstop>
+  <tabstop>browseOutput</tabstop>
+  <tabstop>globalTags</tabstop>
+  <tabstop>browseGlobalTags</tabstop>
+  <tabstop>segmentInfo</tabstop>
+  <tabstop>browseSegmentInfo</tabstop>
+  <tabstop>splitMode</tabstop>
+  <tabstop>splitOptions</tabstop>
+  <tabstop>splitMaxFiles</tabstop>
+  <tabstop>linkFiles</tabstop>
+  <tabstop>segmentUIDs</tabstop>
+  <tabstop>browseSegmentUID</tabstop>
+  <tabstop>previousSegmentUID</tabstop>
+  <tabstop>browsePreviousSegmentUID</tabstop>
+  <tabstop>nextSegmentUID</tabstop>
+  <tabstop>browseNextSegmentUID</tabstop>
+  <tabstop>chapters</tabstop>
+  <tabstop>browseChapters</tabstop>
+  <tabstop>chapterLanguage</tabstop>
+  <tabstop>chapterCharacterSet</tabstop>
+  <tabstop>chapterCueNameFormat</tabstop>
+  <tabstop>webmMode</tabstop>
+  <tabstop>additionalOptions</tabstop>
+  <tabstop>editAdditionalOptions</tabstop>
+  <tabstop>attachments</tabstop>
+  <tabstop>moveAttachmentsUp</tabstop>
+  <tabstop>moveAttachmentsDown</tabstop>
+  <tabstop>attachmentName</tabstop>
+  <tabstop>attachmentDescription</tabstop>
+  <tabstop>attachmentMIMEType</tabstop>
+  <tabstop>attachmentStyle</tabstop>
+  <tabstop>addFiles</tabstop>
+  <tabstop>startMuxing</tabstop>
+  <tabstop>addToJobQueue</tabstop>
+ </tabstops>
  <resources>
   <include location="../../qt_resources.qrc"/>
  </resources>

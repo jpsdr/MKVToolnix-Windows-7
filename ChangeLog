@@ -1,5 +1,11 @@
 2015-10-04  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: merge tool enhancement: added buttons next to
+        the 'segment UID', 'previous segment UID' and 'next segment UID'
+        controls that enable the user to select a Matroska file. The GUI
+        reads that file's segment UID and enters its value into the
+        corresponding control. Part of the implementation of #1363.
+
         * mkvmerge: new feature: The three options that use segment UIDs
         (--segment-uid, --link-to-previous and --link-to-next) can now
         read the segment UID of an existing Matroska file. For this the

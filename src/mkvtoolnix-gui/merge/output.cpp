@@ -1,10 +1,13 @@
 #include "common/common_pch.h"
 
+#include "common/bitvalue.h"
+#include "common/kax_analyzer.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -30,7 +33,10 @@ Tab::setupOutputControls() {
 
   onSplitModeChanged(MuxConfig::DoNotSplit);
 
-  connect(MainWindow::get(), &MainWindow::preferencesChanged, this, &Tab::setupOutputFileControls);
+  connect(MainWindow::get(),            &MainWindow::preferencesChanged, this, &Tab::setupOutputFileControls);
+  connect(ui->browseSegmentUID,         &QPushButton::clicked,           this, &Tab::onBrowseSegmentUID);
+  connect(ui->browsePreviousSegmentUID, &QPushButton::clicked,           this, &Tab::onBrowsePreviousSegmentUID);
+  connect(ui->browseNextSegmentUID,     &QPushButton::clicked,           this, &Tab::onBrowseNextSegmentUID);
 }
 
 void
@@ -466,6 +472,50 @@ Tab::setOutputControlValues() {
 
   ui->chapterLanguage->setCurrentByData(m_config.m_chapterLanguage);
   ui->chapterCharacterSet->setCurrentByData(m_config.m_chapterCharacterSet);
+}
+
+void
+Tab::onBrowseSegmentUID() {
+  addSegmentUIDFromFile(*ui->segmentUIDs, true);
+}
+
+void
+Tab::onBrowsePreviousSegmentUID() {
+  addSegmentUIDFromFile(*ui->previousSegmentUID, false);
+}
+
+void
+Tab::onBrowseNextSegmentUID() {
+  addSegmentUIDFromFile(*ui->nextSegmentUID, false);
+}
+
+void
+Tab::addSegmentUIDFromFile(QLineEdit &lineEdit,
+                           bool append) {
+  auto fileName = getOpenFileName(QY("Select Matroska file to read segment UID from"), QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm)"), nullptr);
+  if (fileName.isEmpty())
+    return;
+
+  try {
+    auto segmentUID = kax_analyzer_c::read_segment_uid_from(to_utf8(fileName));
+    auto uidString  = QString{};
+    auto src        = segmentUID->data();
+
+    for (auto idx = 0u, numBytes = segmentUID->byte_size(); idx < numBytes; ++idx)
+      uidString += Q("%1").arg(QString::number(src[idx], 16), 2, '0').toUpper();
+
+    if (!append || lineEdit.text().isEmpty())
+      lineEdit.setText(uidString);
+
+    else
+      lineEdit.setText(Q("%1,%2").arg(lineEdit.text()).arg(uidString));
+
+  } catch (mtx::kax_analyzer_x &ex) {
+    Util::MessageBox::critical(this)
+      ->title(QY("Reading the segment UID failed"))
+      .text(Q(ex.what()))
+      .exec();
+  }
 }
 
 }}}

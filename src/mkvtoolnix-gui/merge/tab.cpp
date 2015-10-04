@@ -207,7 +207,7 @@ QString
 Tab::determineInitialDir(QLineEdit *lineEdit,
                          InitialDirMode mode)
   const {
-  if (!lineEdit->text().isEmpty())
+  if (lineEdit && !lineEdit->text().isEmpty())
     return QFileInfo{ lineEdit->text() }.path();
 
   if (   (mode == InitialDirMode::ContentFirstInputFileLastOpenDir)
@@ -237,7 +237,8 @@ Tab::getOpenFileName(QString const &title,
   settings.m_lastOpenDir = QFileInfo{fileName}.path();
   settings.save();
 
-  lineEdit->setText(fileName);
+  if (lineEdit)
+    lineEdit->setText(fileName);
 
   return fileName;
 }
