@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/mkvmerge_option_builder.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
@@ -130,6 +131,12 @@ QString
 SourceFile::container()
   const {
   return Q(file_type_t::get_name(m_type).get_translated());
+}
+
+bool
+SourceFile::isTextSubtitleContainer()
+  const {
+  return mtx::included_in(m_type, FILE_TYPE_SRT, FILE_TYPE_SSA);
 }
 
 void

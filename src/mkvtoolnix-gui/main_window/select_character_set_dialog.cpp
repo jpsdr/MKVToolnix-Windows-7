@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <QVariant>
+
 #include "common/locale.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h"
@@ -14,6 +16,7 @@ class SelectCharacterSetDialogPrivate {
 
   std::unique_ptr<Ui::SelectCharacterSetDialog> m_ui{new Ui::SelectCharacterSetDialog};
   QByteArray m_content;
+  QVariant m_userData;
 };
 
 SelectCharacterSetDialog::SelectCharacterSetDialog(QWidget *parent,
@@ -85,6 +88,21 @@ SelectCharacterSetDialog::selectedCharacterSet()
   Q_D(const SelectCharacterSetDialog);
 
   return d->m_ui->characterSet->currentData().toString();
+}
+
+void
+SelectCharacterSetDialog::setUserData(QVariant const &data) {
+  Q_D(SelectCharacterSetDialog);
+
+  d->m_userData = data;
+}
+
+QVariant const &
+SelectCharacterSetDialog::userData()
+  const {
+  Q_D(const SelectCharacterSetDialog);
+
+  return d->m_userData;
 }
 
 }}

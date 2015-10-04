@@ -5,6 +5,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/util/message_box.h"
@@ -23,6 +24,8 @@ Tab::setupOutputControls() {
 
   setupOutputFileControls();
 
+  ui->chapterCharacterSetPreview->setEnabled(false);
+
   m_splitControls << ui->splitOptions << ui->splitOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;
 
   auto comboBoxControls = QList<QComboBox *>{} << ui->splitMode << ui->chapterLanguage << ui->chapterCharacterSet;
@@ -33,10 +36,11 @@ Tab::setupOutputControls() {
 
   onSplitModeChanged(MuxConfig::DoNotSplit);
 
-  connect(MainWindow::get(),            &MainWindow::preferencesChanged, this, &Tab::setupOutputFileControls);
-  connect(ui->browseSegmentUID,         &QPushButton::clicked,           this, &Tab::onBrowseSegmentUID);
-  connect(ui->browsePreviousSegmentUID, &QPushButton::clicked,           this, &Tab::onBrowsePreviousSegmentUID);
-  connect(ui->browseNextSegmentUID,     &QPushButton::clicked,           this, &Tab::onBrowseNextSegmentUID);
+  connect(MainWindow::get(),              &MainWindow::preferencesChanged, this, &Tab::setupOutputFileControls);
+  connect(ui->browseSegmentUID,           &QPushButton::clicked,           this, &Tab::onBrowseSegmentUID);
+  connect(ui->browsePreviousSegmentUID,   &QPushButton::clicked,           this, &Tab::onBrowsePreviousSegmentUID);
+  connect(ui->browseNextSegmentUID,       &QPushButton::clicked,           this, &Tab::onBrowseNextSegmentUID);
+  connect(ui->chapterCharacterSetPreview, &QPushButton::clicked,           this, &Tab::onPreviewChapterCharacterSet);
 }
 
 void
@@ -393,6 +397,7 @@ Tab::onNextSegmentUIDChanged(QString newValue) {
 void
 Tab::onChaptersChanged(QString newValue) {
   m_config.m_chapters = newValue;
+  ui->chapterCharacterSetPreview->setEnabled(!newValue.isEmpty());
 }
 
 void
@@ -405,7 +410,7 @@ Tab::onBrowseChapters() {
                                   InitialDirMode::ContentFirstInputFileLastOpenDir);
 
   if (!fileName.isEmpty())
-    m_config.m_chapters = fileName;
+    onChaptersChanged(fileName);
 }
 
 void
@@ -516,6 +521,23 @@ Tab::addSegmentUIDFromFile(QLineEdit &lineEdit,
       .text(Q(ex.what()))
       .exec();
   }
+}
+
+void
+Tab::onPreviewChapterCharacterSet() {
+  if (m_config.m_chapters.isEmpty())
+    return;
+
+  auto dlg = new SelectCharacterSetDialog{this, m_config.m_chapters, ui->chapterCharacterSet->currentData().toString()};
+  connect(dlg, &SelectCharacterSetDialog::characterSetSelected, this, &Tab::setChapterCharacterSet);
+
+  dlg->show();
+}
+
+void
+Tab::setChapterCharacterSet(QString const &characterSet) {
+  Util::setComboBoxTextByData(ui->chapterCharacterSet, characterSet);
+  onChapterCharacterSetChanged(characterSet);
 }
 
 }}}

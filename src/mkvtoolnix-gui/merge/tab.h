@@ -141,6 +141,8 @@ public slots:
   virtual void onSubtitleCharacterSetChanged(int newValue);
   virtual void onCuesChanged(int newValue);
   virtual void onAdditionalTrackOptionsChanged(QString newValue);
+  virtual void onPreviewChapterCharacterSet();
+  virtual void setChapterCharacterSet(QString const &characterSet);
 
   virtual void resizeFilesColumnsToContents() const;
   virtual void resizeTracksColumnsToContents() const;
@@ -188,6 +190,8 @@ public slots:
   virtual void onWebmClicked(bool newValue);
   virtual void onAdditionalOptionsChanged(QString newValue);
   virtual void onEditAdditionalOptions();
+  virtual void onPreviewSubtitleCharacterSet();
+  virtual void setSubtitleCharacterSet(QString const &characterSet);
 
   // Attachments tab:
   virtual void onAttachmentSelectionChanged();

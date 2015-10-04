@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 
 class QListWidget;
+class QVariant;
 
 namespace mtx { namespace gui {
 
@@ -21,6 +22,9 @@ class SelectCharacterSetDialog : public QDialog {
 public:
   explicit SelectCharacterSetDialog(QWidget *parent, QString const &fileName, QString const &initialCharacterSet = QString{});
   virtual ~SelectCharacterSetDialog();
+
+  void setUserData(QVariant const &data);
+  QVariant const &userData() const;
 
 signals:
   void characterSetSelected(QString const &characterSet);

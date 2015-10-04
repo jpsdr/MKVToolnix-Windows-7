@@ -40,6 +40,7 @@ public:
   SourceFile &operator =(SourceFile const &other);
 
   virtual QString container() const;
+  virtual bool isTextSubtitleContainer() const;
   virtual bool isValid() const;
   virtual bool isRegular() const;
   virtual bool isAppended() const;

@@ -22,6 +22,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/executable_location_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
@@ -252,6 +253,7 @@ Tab::setupInputControls() {
   connect(ui->moveFilesDown,                &QPushButton::clicked,                            this,                     &Tab::onMoveFilesDown);
   connect(ui->moveTracksUp,                 &QPushButton::clicked,                            this,                     &Tab::onMoveTracksUp);
   connect(ui->moveTracksDown,               &QPushButton::clicked,                            this,                     &Tab::onMoveTracksDown);
+  connect(ui->subtitleCharacterSetPreview,  &QPushButton::clicked,                            this,                     &Tab::onPreviewSubtitleCharacterSet);
 
   connect(m_addFilesAction,                 &QAction::triggered,                              this,                     &Tab::onAddFiles);
   connect(m_appendFilesAction,              &QAction::triggered,                              this,                     &Tab::onAppendFiles);
@@ -411,6 +413,7 @@ Tab::onTrackSelectionChanged() {
   Util::enableWidgets(m_allInputControls, false);
   ui->moveTracksUp->setEnabled(false);
   ui->moveTracksDown->setEnabled(false);
+  ui->subtitleCharacterSetPreview->setEnabled(false);
 
   auto selection = ui->tracks->selectionModel()->selection();
   auto numRows   = Util::numSelectedRows(selection);
@@ -448,6 +451,9 @@ Tab::onTrackSelectionChanged() {
     Util::enableWidgets(m_subtitleControls, true);
     if (track->m_file->m_type == FILE_TYPE_MATROSKA)
       Util::enableWidgets(QList<QWidget *>{} << ui->characterSetLabel << ui->subtitleCharacterSet, false);
+
+    else if (track->m_file->isTextSubtitleContainer())
+      ui->subtitleCharacterSetPreview->setEnabled(true);
 
   } else if (track->isChapters())
     Util::enableWidgets(m_chapterControls, true);
@@ -1597,6 +1603,40 @@ Tab::openFilesInMediaInfo(QStringList const &fileNames) {
   auto exe = mediaInfoLocation();
   if (!exe.isEmpty())
     QProcess::startDetached(exe, fileNames);
+}
+
+void
+Tab::onPreviewSubtitleCharacterSet() {
+  auto selection = selectedTracks();
+  auto track     = selection.count() ? selection[0] : nullptr;
+
+  if ((selection.count() != 1) || !track->m_file->isTextSubtitleContainer())
+    return;
+
+  auto dlg = new SelectCharacterSetDialog{this, track->m_file->m_fileName, track->m_characterSet};
+  dlg->setUserData(reinterpret_cast<qulonglong>(track));
+
+  connect(dlg, &SelectCharacterSetDialog::characterSetSelected, this, &Tab::setSubtitleCharacterSet);
+
+  dlg->show();
+}
+
+void
+Tab::setSubtitleCharacterSet(QString const &characterSet) {
+  auto dlg = qobject_cast<SelectCharacterSetDialog *>(QObject::sender());
+  if (!dlg)
+    return;
+
+  auto track = reinterpret_cast<Track *>(dlg->userData().toULongLong());
+
+  if (!m_config.m_tracks.contains(track))
+    return;
+
+  track->m_characterSet = characterSet;
+  auto selection        = selectedTracks();
+
+  if ((selection.count() == 1) && (selection[0] == track))
+    Util::setComboBoxTextByData(ui->subtitleCharacterSet, characterSet);
 }
 
 }}}
