@@ -13,6 +13,9 @@
 
 #include "common/common_pch.h"
 
+#include <cctype>
+
+#include "common/list_utils.h"
 #include "common/strings/formatting.h"
 #include "common/strings/utf8.h"
 #include "common/terminal.h"
@@ -51,6 +54,54 @@ format_timecode(int64_t timecode,
       decimals.erase(precision + 1);
 
     result += decimals;
+  }
+
+  return result;
+}
+
+std::string
+format_timecode(int64_t timecode,
+                std::string const &format) {
+  auto result  = std::string{};
+  auto width   = 0u;
+  auto escaped = false;
+  auto fmt1    = boost::format("%1%");
+  auto fmt2    = boost::format("%|1$02d|");
+  auto fmt9    = boost::format("%|1$09d|");
+
+  for (auto const &c : format) {
+    if (escaped) {
+      if (std::isdigit(c))
+        width = width * 10 + (c - '0');
+
+      else if (mtx::included_in(c, 'h', 'm', 's', 'H', 'M', 'S', 'n')) {
+        auto lc    = std::tolower(c);
+        auto value = lc == 'h' ?  (timecode / 60 / 60 / 1000000000ll)
+                   : lc == 'm' ? ((timecode      / 60 / 1000000000ll) % 60)
+                   : lc == 's' ? ((timecode           / 1000000000ll) % 60)
+                   :              (timecode                           % 1000000000ll);
+
+        if (c == 'n') {
+          auto temp = (fmt9 % value).str();
+          if (width && (temp.length() > width))
+            temp.erase(width);
+
+          result += temp;
+
+        } else
+          result += ((std::isupper(c) ? fmt2 : fmt1) % value).str();
+
+      } else {
+        result  += c;
+        escaped  = false;
+      }
+
+    } else if (c == '%') {
+      escaped = true;
+      width   = 0;
+
+    } else
+      result += c;
   }
 
   return result;

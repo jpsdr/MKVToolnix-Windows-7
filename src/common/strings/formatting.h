@@ -39,12 +39,20 @@
 #define WRAP_AT_TERMINAL_WIDTH -1
 
 std::string format_timecode(int64_t timecode, unsigned int precision = 9);
+std::string format_timecode(int64_t timecode, std::string const &format);
 
 template<typename T>
 std::string
 format_timecode(basic_timecode_c<T> const &timecode,
                 unsigned int precision = 9) {
   return format_timecode(timecode.to_ns(), precision);
+}
+
+template<typename T>
+std::string
+format_timecode(basic_timecode_c<T> const &timecode,
+                std::string const &format) {
+  return format_timecode(timecode.to_ns(), format);
 }
 
 template<typename T>

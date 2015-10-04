@@ -38,4 +38,33 @@ TEST(StringsFormatting, FormatTimecodeWithPrecision) {
   EXPECT_EQ("01:02:35",           format_timecode(value, 0));
 }
 
+TEST(StringsFormatting, FormatTimecodeWithFormat) {
+  auto value = 567890000ll + 1000000000ll * (34 + 2 * 60 + 1 * 3600);
+
+  EXPECT_EQ("1",                  format_timecode(value, "%h"));
+  EXPECT_EQ("01",                 format_timecode(value, "%H"));
+  EXPECT_EQ("2",                  format_timecode(value, "%m"));
+  EXPECT_EQ("02",                 format_timecode(value, "%M"));
+  EXPECT_EQ("34",                 format_timecode(value, "%s"));
+  EXPECT_EQ("34",                 format_timecode(value, "%S"));
+  EXPECT_EQ("567890000",          format_timecode(value, "%n"));
+
+  EXPECT_EQ("567890000",          format_timecode(value, "%9n"));
+  EXPECT_EQ("56789000",           format_timecode(value, "%8n"));
+  EXPECT_EQ("5678900",            format_timecode(value, "%7n"));
+  EXPECT_EQ("567890",             format_timecode(value, "%6n"));
+  EXPECT_EQ("56789",              format_timecode(value, "%5n"));
+  EXPECT_EQ("5678",               format_timecode(value, "%4n"));
+  EXPECT_EQ("567",                format_timecode(value, "%3n"));
+  EXPECT_EQ("56",                 format_timecode(value, "%2n"));
+  EXPECT_EQ("5",                  format_timecode(value, "%1n"));
+  EXPECT_EQ("567890000",          format_timecode(value, "%0n"));
+
+  EXPECT_EQ("%",                  format_timecode(value, "%%"));
+  EXPECT_EQ("z",                  format_timecode(value, "z"));
+  EXPECT_EQ("q",                  format_timecode(value, "%q"));
+
+  EXPECT_EQ("01:02:34.567890000", format_timecode(value, "%H:%M:%S.%n"));
+}
+
 }
