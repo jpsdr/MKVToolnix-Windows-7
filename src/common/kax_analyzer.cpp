@@ -23,6 +23,7 @@
 #include <matroska/KaxSegment.h>
 #include <matroska/KaxTags.h>
 
+#include "common/bitvalue.h"
 #include "common/ebml.h"
 #include "common/error.h"
 #include "common/kax_analyzer.h"
@@ -1143,6 +1144,35 @@ kax_analyzer_c::get_segment_data_start_pos()
     return 0;
 
   return m_segment->GetElementPosition() + m_segment->HeadSize();
+}
+
+bitvalue_cptr
+kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
+  try {
+    auto analyzer = std::make_shared<kax_analyzer_c>(file_name);
+    auto ok       = analyzer->process(kax_analyzer_c::parse_mode_fast, MODE_READ, false);
+
+    if (ok) {
+      auto element      = analyzer->read_all(EBML_INFO(KaxInfo));
+      auto segment_info = dynamic_cast<KaxInfo *>(element.get());
+      auto segment_uid  = segment_info ? FindChild<KaxSegmentUID>(segment_info) : nullptr;
+
+      if (segment_uid)
+        return std::make_shared<bitvalue_c>(*segment_uid);
+    }
+
+  } catch (mtx::mm_io::exception &ex) {
+    throw mtx::kax_analyzer_x{boost::format(Y("The file '%1%' could not be opened for reading: %2%.")) % file_name % ex};
+
+  } catch (mtx::kax_analyzer_x &ex) {
+    throw mtx::kax_analyzer_x{boost::format(Y("The file '%1%' could not be opened for reading: %2%.")) % file_name % ex};
+
+  } catch (...) {
+    throw mtx::kax_analyzer_x{boost::format(Y("The file '%1%' could not be opened or parsed.")) % file_name};
+
+  }
+
+  throw mtx::kax_analyzer_x{boost::format(Y("No segment UID could be found in the file '%1%'.")) % file_name};
 }
 
 // ------------------------------------------------------------

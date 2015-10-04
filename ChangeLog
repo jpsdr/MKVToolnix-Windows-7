@@ -1,5 +1,11 @@
 2015-10-04  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: new feature: The three options that use segment UIDs
+        (--segment-uid, --link-to-previous and --link-to-next) can now
+        read the segment UID of an existing Matroska file. For this the
+        file's name must be given as an argument prefixed with =
+        (e.g. '--segment-uid =some_file.mkv'). Implements #1363.
+
         * MKVToolNix GUI: chapter editor enhancement: Added another
         variable to the chapter name templates called <START> which is
         replaced by the chapter's start timestamp. An optional format can

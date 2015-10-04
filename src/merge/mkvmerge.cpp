@@ -47,6 +47,7 @@
 #include "common/file_types.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
+#include "common/kax_analyzer.h"
 #include "common/mm_io.h"
 #include "common/segmentinfo.h"
 #include "common/split_arg_parsing.h"
@@ -1450,6 +1451,23 @@ parse_arg_priority(const std::string &arg) {
   mxerror(boost::format(Y("'%1%' is not a valid priority class.\n")) % arg);
 }
 
+static bitvalue_cptr
+parse_segment_uid_or_read_from_file(std::string const &arg) {
+  if ((arg.length() < 2) || (arg[0] != '='))
+    return std::make_shared<bitvalue_c>(arg, 128);
+
+  auto file_name = std::string{&arg[1], arg.length() - 1};
+
+  try {
+    return kax_analyzer_c::read_segment_uid_from(file_name);
+
+  } catch (mtx::kax_analyzer_x &ex) {
+    mxerror(boost::format("%1%\n") % ex);
+  }
+
+  return {};
+}
+
 static void
 parse_arg_previous_segment_uid(const std::string &param,
                                const std::string &arg) {
@@ -1457,7 +1475,7 @@ parse_arg_previous_segment_uid(const std::string &param,
     mxerror(boost::format(Y("The previous UID was already given in '%1% %2%'.\n")) % param % arg);
 
   try {
-    g_seguid_link_previous = bitvalue_cptr(new bitvalue_c(arg, 128));
+    g_seguid_link_previous = parse_segment_uid_or_read_from_file(arg);
   } catch (...) {
     mxerror(boost::format(Y("Unknown format for the previous UID in '%1% %2%'.\n")) % param % arg);
   }
@@ -1470,7 +1488,7 @@ parse_arg_next_segment_uid(const std::string &param,
     mxerror(boost::format(Y("The next UID was already given in '%1% %2%'.\n")) % param % arg);
 
   try {
-    g_seguid_link_next = bitvalue_cptr(new bitvalue_c(arg, 128));
+    g_seguid_link_next = parse_segment_uid_or_read_from_file(arg);
   } catch (...) {
     mxerror(boost::format(Y("Unknown format for the next UID in '%1% %2%'.\n")) % param % arg);
   }
@@ -1482,7 +1500,7 @@ parse_arg_segment_uid(const std::string &param,
   std::vector<std::string> parts = split(arg, ",");
   for (auto &part : parts) {
     try {
-      g_forced_seguids.push_back(bitvalue_cptr(new bitvalue_c(part, 128)));
+      g_forced_seguids.emplace_back(parse_segment_uid_or_read_from_file(part));
     } catch (...) {
       mxerror(boost::format(Y("Unknown format for the segment UID '%3%' in '%1% %2%'.\n")) % param % arg % part);
     }

@@ -24,6 +24,9 @@
 using namespace libebml;
 using namespace libmatroska;
 
+class bitvalue_c;
+using bitvalue_cptr = std::shared_ptr<bitvalue_c>;
+
 class kax_analyzer_data_c;
 using kax_analyzer_data_cptr = std::shared_ptr<kax_analyzer_data_c>;
 
@@ -165,6 +168,8 @@ public:
   static placement_strategy_e get_placement_strategy_for(ebml_element_cptr e) {
     return get_placement_strategy_for(e.get());
   }
+
+  static bitvalue_cptr read_segment_uid_from(std::string const &file_name);
 
 protected:
   virtual void _log_debug_message(const std::string &message);
