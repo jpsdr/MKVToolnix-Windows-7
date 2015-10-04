@@ -501,7 +501,7 @@ Tab::addSegmentUIDFromFile(QLineEdit &lineEdit,
     auto uidString  = QString{};
     auto src        = segmentUID->data();
 
-    for (auto idx = 0u, numBytes = segmentUID->byte_size(); idx < numBytes; ++idx)
+    for (unsigned int idx = 0u, numBytes = segmentUID->byte_size(); idx < numBytes; ++idx)
       uidString += Q("%1").arg(QString::number(src[idx], 16), 2, '0').toUpper();
 
     if (!append || lineEdit.text().isEmpty())
