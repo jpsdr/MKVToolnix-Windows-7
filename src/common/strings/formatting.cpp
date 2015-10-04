@@ -24,12 +24,11 @@ format_timecode(int64_t timecode,
   static boost::format s_bf_format("%4%%|1$02d|:%|2$02d|:%|3$02d|");
   static boost::format s_bf_decimals(".%|1$09d|");
 
-
   bool negative = 0 > timecode;
   if (negative)
     timecode *= -1;
 
-  if (precision && (9 > precision)) {
+  if (9 > precision) {
     auto shift = 5ll;
     for (int shift_idx = 9 - precision; shift_idx > 1; --shift_idx)
       shift *= 10;
