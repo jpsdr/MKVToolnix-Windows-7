@@ -249,7 +249,7 @@
     <message>
         <location line="+2"/>
         <source>Yes to All</source>
-        <translation></translation>
+        <translation>Tak dla wszystkich</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -259,7 +259,7 @@
     <message>
         <location line="+2"/>
         <source>No to All</source>
-        <translation></translation>
+        <translation>Nie dla wszystkich</translation>
     </message>
 </context>
 <context>
@@ -1847,7 +1847,7 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+2"/>
         <source>&amp;Save</source>
-        <translation>&amp;Zachowaj</translation>
+        <translation>&amp;Zapisz</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4169,12 +4169,12 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+2"/>
         <source>Save</source>
-        <translation>Zachowaj</translation>
+        <translation>Zapisz</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Save All</source>
-        <translation>Zachowaj wszystko</translation>
+        <translation>Zapisz wszystko</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4189,7 +4189,7 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+2"/>
         <source>Yes to &amp;All</source>
-        <translation>Ta&amp;k dla wszystkich</translation>
+        <translation>&amp;Tak dla wszystkich</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4199,7 +4199,7 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+2"/>
         <source>N&amp;o to All</source>
-        <translation>Ni&amp;e dla wszystkich</translation>
+        <translation>&amp;Nie dla wszystkich</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4209,17 +4209,17 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+2"/>
         <source>Retry</source>
-        <translation>Ponów</translation>
+        <translation>Spróbuj ponownie</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Ignore</source>
-        <translation>Zignoruj</translation>
+        <translation>Ignoruj</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Close</source>
-        <translation></translation>
+        <translation>Zamknij</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4239,7 +4239,7 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+2"/>
         <source>Apply</source>
-        <translation></translation>
+        <translation>Zastosuj</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4249,7 +4249,7 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+2"/>
         <source>Restore Defaults</source>
-        <translation>Przywróć ustawienia</translation>
+        <translation>Przywróć domyślne</translation>
     </message>
 </context>
 <context>
@@ -4796,7 +4796,7 @@ Please turn one of those options off.</source>
     <message>
         <location filename="../../qtbase/src/plugins/platforms/qnx/qqnxfiledialoghelper_bb10.cpp" line="+103"/>
         <source>All files (*.*)</source>
-        <translation></translation>
+        <translation>Wszystkie pliki (*.*)</translation>
     </message>
 </context>
 <context>
@@ -7953,17 +7953,17 @@ Role of an accessible object</extracomment>
     <message>
         <location line="+7"/>
         <source>Cu&amp;t</source>
-        <translation>W&amp;ytnij</translation>
+        <translation>&amp;Wytnij</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>&amp;Copy</source>
-        <translation>S&amp;kopiuj</translation>
+        <translation>&amp;Kopiuj</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Copy &amp;Link Location</source>
-        <translation>Skopiuj &amp;adres odsyłacza</translation>
+        <translation>&amp;Kopiuj adres odnośnika</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -7973,7 +7973,7 @@ Role of an accessible object</extracomment>
     <message>
         <location line="+5"/>
         <source>Delete</source>
-        <translation></translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <location line="+9"/>
