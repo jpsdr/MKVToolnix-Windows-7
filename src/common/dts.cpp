@@ -21,6 +21,7 @@
 #include "common/bit_cursor.h"
 #include "common/dts.h"
 #include "common/endian.h"
+#include "common/list_utils.h"
 #include "common/math.h"
 
 // ---------------------------------------------------------------------------
@@ -301,6 +302,7 @@ header_t::print()
                   : dts_type_e::high_resolution == dts_type ? "high resolution"
                   : dts_type_e::express         == dts_type ? "express"
                   : dts_type_e::es              == dts_type ? "extended surround"
+                  : dts_type_e::x96_24          == dts_type ? "96/24"
                   :                                           "unknown";
 
     mxinfo(boost::format("Extension substream    : %1%, size %2%\n\n") % type_str % exss_part_size);
@@ -366,6 +368,7 @@ header_t::get_codec_specialization()
        : dts_type_e::high_resolution == dts_type ? codec_c::specialization_e::dts_hd_high_resolution
        : dts_type_e::express         == dts_type ? codec_c::specialization_e::dts_express
        : dts_type_e::es              == dts_type ? codec_c::specialization_e::dts_es
+       : dts_type_e::x96_24          == dts_type ? codec_c::specialization_e::dts_96_24
        :                                           codec_c::specialization_e::none;
 }
 
@@ -503,11 +506,17 @@ header_t::decode_core_header(unsigned char const *buf,
 
     auto exss_offset = frame_byte_size;
 
+    if (extended_coding && mtx::included_in(extension_audio_descriptor, extension_audio_descriptor_e::x96k, extension_audio_descriptor_e::xch_x96k))
+      dts_type = dts_type_e::x96_24;
+
     if ((exss_offset + 9) > size)
       return allow_no_exss_search ? true : false;
 
     if (static_cast<sync_word_e>(get_uint32_be(buf + exss_offset)) == sync_word_e::exss)
       return decode_exss_header(&buf[exss_offset], size - exss_offset);
+
+    if (static_cast<sync_word_e>(get_uint32_be(buf + exss_offset)) == sync_word_e::x96)
+      return decode_x96_header(&buf[exss_offset], size - exss_offset);
 
     if ((dts_type_e::normal == dts_type) && source_surround_in_es)
       dts_type = dts_type_e::es;
@@ -777,6 +786,24 @@ header_t::decode_asset(bit_reader_c &bc,
 }
 
 #undef test_mask
+
+bool
+header_t::decode_x96_header(unsigned char const *buf,
+                             size_t size) {
+  try {
+    auto bc = bit_reader_c{buf, size};
+    bc.skip_bits(32);             // sync word
+
+    auto x96_size = bc.peek_bits(12) + 1;
+    mxinfo(boost::format("x96 size %1%\n") % x96_size);
+    bc.skip_bits((x96_size - 4) * 8);
+    dts_type = dts_type_e::x96_24;
+
+  } catch (mtx::mm_io::end_of_file_x &) {
+  }
+
+  return false;
+}
 
 bool
 header_t::decode_exss_header(unsigned char const *buf,
