@@ -73,11 +73,23 @@ function copy_files {
     cp ${mo} ${tgt_dir}/locale/${language}/LC_MESSAGES/mkvtoolnix.mo
   done
 
+  local -A customized_qt5_translations
+  local ts
+  for ts (po/qt/*.ts) {
+    lang=${${${ts:t}:r}#qt_}
+    customized_qt5_translations[$lang]=1
+
+    lrelease -qm ${tgt_dir}/locale/libqt/qt_${lang}.qm ${ts}
+  }
+
   qt5trdir=${mxe_usr_dir}/qt5/translations
   for qm (${qt5trdir}/qt_*.qm) {
     if [[ ${qm} == *qt_help* ]] continue
 
     lang=${${${qm:t}:r}#qt_}
+
+    if [[ -n ${customized_qt5_translations[${lang}]} ]] continue
+
     baseqm=${qt5trdir}/qtbase_${lang}.qm
     if [[ -f $baseqm ]] qm=$baseqm
     cp ${qm} ${tgt_dir}/locale/libqt/qt_${lang}.qm
