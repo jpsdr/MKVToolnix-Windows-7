@@ -236,6 +236,8 @@ function build_dmg {
   ./drake install prefix=${dmgcnt}
   test -f ${dmgmac}/mkvtoolnix-gui
 
+  strip ${dmgcnt}/MacOS/mkv{merge,info,extract,propedit,toolnix-gui}
+
   cp README.md $dmgbase/README.txt
   cp COPYING $dmgbase/COPYING.txt
   cp ChangeLog $dmgbase/ChangeLog.txt
