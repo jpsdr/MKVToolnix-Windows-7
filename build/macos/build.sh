@@ -332,10 +332,24 @@ EOF
     }
   }
 
-  rm -f ${CMPL}/MKVToolNix-${MTX_VER}.dmg
-  hdiutil create -srcfolder ${dmgbase} -volname MKVToolNix-${MTX_VER} \
+  volumename=MKVToolNix-${MTX_VER}
+  if [[ $DMG_PRE == 1 ]]; then
+    local build_number_file=$HOME/net/home/prog/video/mingw/src/uc/build-number
+    local build=$(< $build_number_file)
+    let build=$build+1
+    echo $build > $build_number_file
+
+    volumename=MKVToolnix-${MTX_VER}-build$(date '+%Y%m%d')-${build}-$(git rev-parse --short HEAD)
+  fi
+
+  dmgname=${CMPL}/MKVToolNix-${MTX_VER}.dmg
+  dmgbuildname=${CMPL}/${volumename}.dmg
+
+  rm -f ${dmgname} ${dmgbuildname}
+  hdiutil create -srcfolder ${dmgbase} -volname ${volumename} \
     -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDZO -imagekey zlib-level=9 \
     ${CMPL}/MKVToolNix-${MTX_VER}
+  if [[ ${dmgname} != ${dmgbuildname} ]] mv ${dmgname} ${dmgbuildname}
 }
 
 if [[ -z $@ ]]; then
