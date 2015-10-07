@@ -27,7 +27,7 @@ vpx_video_packetizer_c::vpx_video_packetizer_c(generic_reader_c *p_reader,
   , m_previous_timecode(-1)
   , m_codec{p_codec}
 {
-  m_timecode_factory_application_mode = TFA_SHORT_QUEUEING;
+  m_timestamp_factory_application_mode = TFA_SHORT_QUEUEING;
 
   set_track_type(track_video);
   set_codec_id(p_codec == codec_c::type_e::V_VP8 ? MKV_V_VP8 : MKV_V_VP9);

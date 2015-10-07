@@ -50,10 +50,10 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
   // packetizer because it takes care of handling the default
   // duration/FPS itself.
   if (m_ti.m_ext_timecodes.empty())
-    m_timecode_factory.reset();
+    m_timestamp_factory.reset();
 
   int64_t factory_default_duration;
-  if (m_timecode_factory && (-1 != (factory_default_duration = m_timecode_factory->get_default_duration(-1)))) {
+  if (m_timestamp_factory && (-1 != (factory_default_duration = m_timestamp_factory->get_default_duration(-1)))) {
     m_parser.force_default_duration(factory_default_duration);
     set_track_default_duration(factory_default_duration);
     m_default_duration_forced = true;

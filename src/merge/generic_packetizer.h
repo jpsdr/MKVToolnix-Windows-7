@@ -23,7 +23,7 @@
 #include "common/translation.h"
 #include "merge/file_status.h"
 #include "merge/packet.h"
-#include "merge/timecode_factory.h"
+#include "merge/timestamp_factory.h"
 #include "merge/track_info.h"
 #include "merge/webm.h"
 
@@ -76,8 +76,8 @@ protected:
   compression_method_e m_hcompression;
   compressor_ptr m_compressor;
 
-  timecode_factory_cptr m_timecode_factory;
-  timecode_factory_application_e m_timecode_factory_application_mode;
+  timestamp_factory_cptr m_timestamp_factory;
+  timestamp_factory_application_e m_timestamp_factory_application_mode;
 
   int64_t m_last_cue_timecode;
 
@@ -167,7 +167,7 @@ public:
   virtual uint64_t get_uid() const {
     return m_huid;
   }
-  virtual void set_track_type(int type, timecode_factory_application_e tfa_mode = TFA_AUTOMATIC);
+  virtual void set_track_type(int type, timestamp_factory_application_e tfa_mode = TFA_AUTOMATIC);
   virtual int get_track_type() const {
     return m_htrack_type;
   }

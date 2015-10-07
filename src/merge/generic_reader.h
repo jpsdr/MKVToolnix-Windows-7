@@ -24,7 +24,7 @@
 #include "merge/file_status.h"
 #include "merge/id_result.h"
 #include "merge/packet.h"
-#include "merge/timecode_factory.h"
+#include "merge/timestamp_factory.h"
 #include "merge/track_info.h"
 #include "merge/webm.h"
 

@@ -84,7 +84,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_hvideo_display_width{-1}
   , m_hvideo_display_height{-1}
   , m_hcompression{COMPRESSION_UNSPECIFIED}
-  , m_timecode_factory_application_mode{TFA_AUTOMATIC}
+  , m_timestamp_factory_application_mode{TFA_AUTOMATIC}
   , m_last_cue_timecode{-1}
   , m_has_been_flushed{}
   , m_prevent_lacing{}
@@ -244,13 +244,13 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     g_packetizers_by_track_num[m_hserialno] = this;
   }
 
-  m_timecode_factory = timecode_factory_c::create(m_ti.m_ext_timecodes, m_ti.m_fname, m_ti.m_id);
+  m_timestamp_factory = timestamp_factory_c::create(m_ti.m_ext_timecodes, m_ti.m_fname, m_ti.m_id);
 
   // If no external timecode file but a default duration has been
   // given then create a simple timecode factory that generates the
   // timecodes for the given FPS.
-  if (!m_timecode_factory && (-1 != m_htrack_default_duration))
-    m_timecode_factory = timecode_factory_c::create_fps_factory(m_htrack_default_duration, m_ti.m_tcsync);
+  if (!m_timestamp_factory && (-1 != m_htrack_default_duration))
+    m_timestamp_factory = timestamp_factory_c::create_fps_factory(m_htrack_default_duration, m_ti.m_tcsync);
 }
 
 generic_packetizer_c::~generic_packetizer_c() {
@@ -293,7 +293,7 @@ generic_packetizer_c::set_uid(uint64_t uid) {
 
 void
 generic_packetizer_c::set_track_type(int type,
-                                     timecode_factory_application_e tfa_mode) {
+                                     timestamp_factory_application_e tfa_mode) {
   m_htrack_type = type;
 
   if (CUE_STRATEGY_UNSPECIFIED == get_cue_creation())
@@ -314,18 +314,18 @@ generic_packetizer_c::set_track_type(int type,
     m_reader->m_num_subtitle_tracks++;
 
   if (   (TFA_AUTOMATIC == tfa_mode)
-      && (TFA_AUTOMATIC == m_timecode_factory_application_mode))
-    m_timecode_factory_application_mode
+      && (TFA_AUTOMATIC == m_timestamp_factory_application_mode))
+    m_timestamp_factory_application_mode
       = (track_video    == type) ? TFA_FULL_QUEUEING
       : (track_subtitle == type) ? TFA_IMMEDIATE
       : (track_buttons  == type) ? TFA_IMMEDIATE
       :                            TFA_FULL_QUEUEING;
 
   else if (TFA_AUTOMATIC != tfa_mode)
-    m_timecode_factory_application_mode = tfa_mode;
+    m_timestamp_factory_application_mode = tfa_mode;
 
-  if (m_timecode_factory && (track_video != type) && (track_audio != type))
-    m_timecode_factory->set_preserve_duration(true);
+  if (m_timestamp_factory && (track_video != type) && (track_audio != type))
+    m_timestamp_factory->set_preserve_duration(true);
 }
 
 void
@@ -648,8 +648,8 @@ generic_packetizer_c::set_headers() {
       GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_htrack_max_add_block_ids);
   }
 
-  if (m_timecode_factory)
-    m_htrack_default_duration = (int64_t)m_timecode_factory->get_default_duration(m_htrack_default_duration);
+  if (m_timestamp_factory)
+    m_htrack_default_duration = (int64_t)m_timestamp_factory->get_default_duration(m_htrack_default_duration);
   if (-1.0 != m_htrack_default_duration)
     GetChild<KaxTrackDefaultDuration>(m_track_entry).SetValue(m_htrack_default_duration);
 
@@ -895,7 +895,7 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
   pack->timecode_before_factory = pack->timecode;
 
   m_packet_queue.push_back(pack);
-  if (!m_timecode_factory || (TFA_IMMEDIATE == m_timecode_factory_application_mode))
+  if (!m_timestamp_factory || (TFA_IMMEDIATE == m_timestamp_factory_application_mode))
     apply_factory_once(pack);
   else
     apply_factory();
@@ -929,11 +929,11 @@ generic_packetizer_c::get_packet() {
 
 void
 generic_packetizer_c::apply_factory_once(packet_cptr &packet) {
-  if (!m_timecode_factory) {
+  if (!m_timestamp_factory) {
     packet->assigned_timecode = packet->timecode;
     packet->gap_following     = false;
   } else
-    packet->gap_following     = m_timecode_factory->get_next(packet);
+    packet->gap_following     = m_timestamp_factory->get_next(packet);
 
   packet->factory_applied     = true;
 
@@ -961,7 +961,7 @@ generic_packetizer_c::apply_factory() {
   if (m_packet_queue.end() == p_start)
     return;
 
-  if (TFA_SHORT_QUEUEING == m_timecode_factory_application_mode)
+  if (TFA_SHORT_QUEUEING == m_timestamp_factory_application_mode)
     apply_factory_short_queueing(p_start);
 
   else
@@ -1089,7 +1089,7 @@ generic_packetizer_c::connect(generic_packetizer_c *src,
   m_hcompression               = src->m_hcompression;
   m_compressor                 = compressor_c::create(m_hcompression);
   m_last_cue_timecode          = src->m_last_cue_timecode;
-  m_timecode_factory           = src->m_timecode_factory;
+  m_timestamp_factory           = src->m_timestamp_factory;
   m_correction_timecode_offset = 0;
 
   if (-1 == append_timecode_offset)
@@ -1112,7 +1112,7 @@ generic_packetizer_c::set_displacement_maybe(int64_t displacement) {
 
 bool
 generic_packetizer_c::contains_gap() {
-  return m_timecode_factory ? m_timecode_factory->contains_gap() : false;
+  return m_timestamp_factory ? m_timestamp_factory->contains_gap() : false;
 }
 
 void

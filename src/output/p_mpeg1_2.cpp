@@ -48,7 +48,7 @@ mpeg1_2_video_packetizer_c(generic_reader_c *p_reader,
       m_aspect_ratio_extracted = false;
   }
 
-  m_timecode_factory_application_mode = TFA_SHORT_QUEUEING;
+  m_timestamp_factory_application_mode = TFA_SHORT_QUEUEING;
 
   // m_parser.SeparateSequenceHeaders();
 }

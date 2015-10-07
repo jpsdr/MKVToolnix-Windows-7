@@ -42,7 +42,7 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
     set_codec_id(MKV_V_MSCOMP);
     check_fourcc();
 
-    m_timecode_factory_application_mode = TFA_SHORT_QUEUEING;
+    m_timestamp_factory_application_mode = TFA_SHORT_QUEUEING;
 
   } else {
     set_codec_id(MKV_V_MPEG4_ASP);
@@ -55,7 +55,7 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
     // packetizer because it takes care of handling the default
     // duration/FPS itself.
     if (m_ti.m_ext_timecodes.empty())
-      m_timecode_factory.reset();
+      m_timestamp_factory.reset();
 
     if (m_default_duration_forced)
       m_fps = 1000000000.0 / m_htrack_default_duration;
@@ -63,7 +63,7 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
     else if (0.0 != m_fps)
       m_htrack_default_duration = static_cast<int64_t>(1000000000ll / m_fps);
 
-    m_timecode_factory_application_mode = TFA_FULL_QUEUEING;
+    m_timestamp_factory_application_mode = TFA_FULL_QUEUEING;
   }
 }
 

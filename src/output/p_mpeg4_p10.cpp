@@ -51,8 +51,8 @@ mpeg4_p10_video_packetizer_c::set_headers() {
   if (m_ti.m_private_data && m_ti.m_private_data->get_size() && m_ti.m_fix_bitstream_frame_rate) {
     int64_t l_track_default_duration = -1;
 
-    if (m_timecode_factory)
-      l_track_default_duration = m_timecode_factory->get_default_duration(-1);
+    if (m_timestamp_factory)
+      l_track_default_duration = m_timestamp_factory->get_default_duration(-1);
 
     if ((-1 == l_track_default_duration) && m_default_duration_forced)
       l_track_default_duration = m_htrack_default_duration;
@@ -65,7 +65,7 @@ mpeg4_p10_video_packetizer_c::set_headers() {
 
     mxdebug_if(s_debug_fix_bistream_timing_info,
                boost::format("fix_bitstream_timing_info: factory default_duration %1% default_duration_forced? %2% htrack_default_duration %3% fps %4% l_track_default_duration %5%\n")
-               % (m_timecode_factory ? m_timecode_factory->get_default_duration(-1) : -2)
+               % (m_timestamp_factory ? m_timestamp_factory->get_default_duration(-1) : -2)
                % m_default_duration_forced % m_htrack_default_duration
                % m_fps % l_track_default_duration);
 

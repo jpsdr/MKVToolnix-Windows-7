@@ -11,15 +11,15 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_TIMECODE_FACTORY_H
-#define MTX_TIMECODE_FACTORY_H
+#ifndef MTX_TIMESTAMP_FACTORY_H
+#define MTX_TIMESTAMP_FACTORY_H
 
 #include "common/common_pch.h"
 
 #include "merge/packet.h"
 #include "merge/track_info.h"
 
-enum timecode_factory_application_e {
+enum timestamp_factory_application_e {
   TFA_AUTOMATIC,
   TFA_IMMEDIATE,
   TFA_SHORT_QUEUEING,
@@ -43,10 +43,10 @@ public:
   bool is_gap;
 };
 
-class timecode_factory_c;
-using timecode_factory_cptr = std::shared_ptr<timecode_factory_c>;
+class timestamp_factory_c;
+using timestamp_factory_cptr = std::shared_ptr<timestamp_factory_c>;
 
-class timecode_factory_c {
+class timestamp_factory_c {
 protected:
   std::string m_file_name, m_source_name;
   int64_t m_tid;
@@ -55,7 +55,7 @@ protected:
   debugging_option_c m_debug;
 
 public:
-  timecode_factory_c(const std::string &file_name,
+  timestamp_factory_c(const std::string &file_name,
                      const std::string &source_name,
                      int64_t tid,
                      int version)
@@ -64,10 +64,10 @@ public:
     , m_tid(tid)
     , m_version(version)
     , m_preserve_duration(false)
-    , m_debug{"timecode_factory"}
+    , m_debug{"timestamp_factory"}
   {
   }
-  virtual ~timecode_factory_c() {
+  virtual ~timestamp_factory_c() {
   }
 
   virtual void parse(mm_io_c &) {
@@ -89,11 +89,11 @@ public:
     m_preserve_duration = preserve_duration;
   }
 
-  static timecode_factory_cptr create(const std::string &file_name, const std::string &source_name, int64_t tid);
-  static timecode_factory_cptr create_fps_factory(int64_t default_duration, timecode_sync_t const &tcsync);
+  static timestamp_factory_cptr create(const std::string &file_name, const std::string &source_name, int64_t tid);
+  static timestamp_factory_cptr create_fps_factory(int64_t default_duration, timecode_sync_t const &tcsync);
 };
 
-class timecode_factory_v1_c: public timecode_factory_c {
+class timestamp_factory_v1_c: public timestamp_factory_c {
 protected:
   std::vector<timecode_range_c> m_ranges;
   uint32_t m_current_range;
@@ -101,16 +101,16 @@ protected:
   double m_default_fps;
 
 public:
-  timecode_factory_v1_c(const std::string &file_name,
+  timestamp_factory_v1_c(const std::string &file_name,
                         const std::string &source_name,
                         int64_t tid)
-    : timecode_factory_c(file_name, source_name, tid, 1)
+    : timestamp_factory_c(file_name, source_name, tid, 1)
     , m_current_range(0)
     , m_frameno(0)
     , m_default_fps(0.0)
   {
   }
-  virtual ~timecode_factory_v1_c() {
+  virtual ~timestamp_factory_v1_c() {
   }
 
   virtual void parse(mm_io_c &in);
@@ -123,7 +123,7 @@ protected:
   virtual int64_t get_at(uint64_t frame);
 };
 
-class timecode_factory_v2_c: public timecode_factory_c {
+class timestamp_factory_v2_c: public timestamp_factory_c {
 protected:
   std::vector<int64_t> m_timecodes, m_durations;
   int64_t m_frameno;
@@ -131,16 +131,16 @@ protected:
   bool m_warning_printed;
 
 public:
-  timecode_factory_v2_c(const std::string &file_name,
+  timestamp_factory_v2_c(const std::string &file_name,
                         const std::string &source_name,
                         int64_t tid, int version)
-    : timecode_factory_c(file_name, source_name, tid, version)
+    : timestamp_factory_c(file_name, source_name, tid, version)
     , m_frameno(0)
     , m_default_duration(0)
     , m_warning_printed(false)
   {
   }
-  virtual ~timecode_factory_v2_c() {
+  virtual ~timestamp_factory_v2_c() {
   }
 
   virtual void parse(mm_io_c &in);
@@ -150,7 +150,7 @@ public:
   }
 };
 
-class timecode_factory_v3_c: public timecode_factory_c {
+class timestamp_factory_v3_c: public timestamp_factory_c {
 protected:
   std::vector<timecode_duration_c> m_durations;
   size_t m_current_duration;
@@ -159,10 +159,10 @@ protected:
   double m_default_fps;
 
 public:
-  timecode_factory_v3_c(const std::string &file_name,
+  timestamp_factory_v3_c(const std::string &file_name,
                         const std::string &source_name,
                         int64_t tid)
-    : timecode_factory_c(file_name, source_name, tid, 3)
+    : timestamp_factory_c(file_name, source_name, tid, 3)
     , m_current_duration(0)
     , m_current_timecode(0)
     , m_current_offset(0)
@@ -176,23 +176,23 @@ public:
   }
 };
 
-class forced_default_duration_timecode_factory_c: public timecode_factory_c {
+class forced_default_duration_timestamp_factory_c: public timestamp_factory_c {
 protected:
   int64_t m_default_duration{}, m_frameno{};
   timecode_sync_t m_tcsync{};
 
 public:
-  forced_default_duration_timecode_factory_c(int64_t default_duration,
+  forced_default_duration_timestamp_factory_c(int64_t default_duration,
                                              timecode_sync_t const &tcsync,
                                              const std::string &source_name,
                                              int64_t tid)
-    : timecode_factory_c{"", source_name, tid, 1}
+    : timestamp_factory_c{"", source_name, tid, 1}
     , m_default_duration{std::llround(default_duration * tcsync.numerator / tcsync.denominator)}
     , m_tcsync{tcsync}
   {
   }
 
-  virtual ~forced_default_duration_timecode_factory_c() {
+  virtual ~forced_default_duration_timestamp_factory_c() {
   }
 
   virtual bool get_next(packet_cptr &packet);
@@ -201,4 +201,4 @@ public:
   }
 };
 
-#endif // MTX_TIMECODE_FACTORY_H
+#endif // MTX_TIMESTAMP_FACTORY_H

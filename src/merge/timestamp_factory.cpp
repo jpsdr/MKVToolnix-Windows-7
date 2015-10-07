@@ -17,14 +17,14 @@
 #include "common/mm_io.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
-#include "merge/timecode_factory.h"
+#include "merge/timestamp_factory.h"
 
-timecode_factory_cptr
-timecode_factory_c::create(const std::string &file_name,
+timestamp_factory_cptr
+timestamp_factory_c::create(const std::string &file_name,
                            const std::string &source_name,
                            int64_t tid) {
   if (file_name.empty())
-    return timecode_factory_cptr{};
+    return timestamp_factory_cptr{};
 
   mm_io_c *in = nullptr;           // avoid gcc warning
   try {
@@ -39,15 +39,15 @@ timecode_factory_c::create(const std::string &file_name,
     mxerror(boost::format(Y("The timecode file '%1%' contains an unsupported/unrecognized format line. The very first line must look like '# timecode format v1'.\n"))
             % file_name);
 
-  timecode_factory_c *factory = nullptr; // avoid gcc warning
+  timestamp_factory_c *factory = nullptr; // avoid gcc warning
   if (1 == version)
-    factory = new timecode_factory_v1_c(file_name, source_name, tid);
+    factory = new timestamp_factory_v1_c(file_name, source_name, tid);
 
   else if ((2 == version) || (4 == version))
-    factory = new timecode_factory_v2_c(file_name, source_name, tid, version);
+    factory = new timestamp_factory_v2_c(file_name, source_name, tid, version);
 
   else if (3 == version)
-    factory = new timecode_factory_v3_c(file_name, source_name, tid);
+    factory = new timestamp_factory_v3_c(file_name, source_name, tid);
 
   else
     mxerror(boost::format(Y("The timecode file '%1%' contains an unsupported/unrecognized format (version %2%).\n")) % file_name % version);
@@ -55,17 +55,17 @@ timecode_factory_c::create(const std::string &file_name,
   factory->parse(*in);
   delete in;
 
-  return timecode_factory_cptr(factory);
+  return timestamp_factory_cptr(factory);
 }
 
-timecode_factory_cptr
-timecode_factory_c::create_fps_factory(int64_t default_duration,
+timestamp_factory_cptr
+timestamp_factory_c::create_fps_factory(int64_t default_duration,
                                        timecode_sync_t const &tcsync) {
-  return timecode_factory_cptr{ new forced_default_duration_timecode_factory_c{default_duration, tcsync, "", 1} };
+  return timestamp_factory_cptr{ new forced_default_duration_timestamp_factory_c{default_duration, tcsync, "", 1} };
 }
 
 void
-timecode_factory_v1_c::parse(mm_io_c &in) {
+timestamp_factory_v1_c::parse(mm_io_c &in) {
   std::string line;
   timecode_range_c t;
   std::vector<timecode_range_c>::iterator iit;
@@ -160,7 +160,7 @@ timecode_factory_v1_c::parse(mm_io_c &in) {
 }
 
 bool
-timecode_factory_v1_c::get_next(packet_cptr &packet) {
+timestamp_factory_v1_c::get_next(packet_cptr &packet) {
   packet->assigned_timecode = get_at(m_frameno);
   if (!m_preserve_duration || (0 >= packet->duration))
     packet->duration = get_at(m_frameno + 1) - packet->assigned_timecode;
@@ -175,7 +175,7 @@ timecode_factory_v1_c::get_next(packet_cptr &packet) {
 }
 
 int64_t
-timecode_factory_v1_c::get_at(uint64_t frame) {
+timestamp_factory_v1_c::get_at(uint64_t frame) {
   timecode_range_c *t = &m_ranges[m_current_range];
   if ((frame > t->end_frame) && (m_current_range < (m_ranges.size() - 1)))
     t = &m_ranges[m_current_range + 1];
@@ -184,7 +184,7 @@ timecode_factory_v1_c::get_at(uint64_t frame) {
 }
 
 void
-timecode_factory_v2_c::parse(mm_io_c &in) {
+timestamp_factory_v2_c::parse(mm_io_c &in) {
   std::string line;
   std::map<int64_t, int64_t> dur_map;
 
@@ -253,7 +253,7 @@ timecode_factory_v2_c::parse(mm_io_c &in) {
 }
 
 bool
-timecode_factory_v2_c::get_next(packet_cptr &packet) {
+timestamp_factory_v2_c::get_next(packet_cptr &packet) {
   if ((static_cast<size_t>(m_frameno) >= m_timecodes.size()) && !m_warning_printed) {
     mxwarn_tid(m_source_name, m_tid,
                boost::format(Y("The number of external timecodes %1% is smaller than the number of frames in this track. "
@@ -284,7 +284,7 @@ timecode_factory_v2_c::get_next(packet_cptr &packet) {
 }
 
 void
-timecode_factory_v3_c::parse(mm_io_c &in) {
+timestamp_factory_v3_c::parse(mm_io_c &in) {
   std::string line;
   timecode_duration_c t;
   std::vector<timecode_duration_c>::iterator iit;
@@ -366,7 +366,7 @@ timecode_factory_v3_c::parse(mm_io_c &in) {
 }
 
 bool
-timecode_factory_v3_c::get_next(packet_cptr &packet) {
+timestamp_factory_v3_c::get_next(packet_cptr &packet) {
   bool result = false;
 
   if (m_durations[m_current_duration].is_gap) {
@@ -401,7 +401,7 @@ timecode_factory_v3_c::get_next(packet_cptr &packet) {
 }
 
 bool
-forced_default_duration_timecode_factory_c::get_next(packet_cptr &packet) {
+forced_default_duration_timestamp_factory_c::get_next(packet_cptr &packet) {
   packet->assigned_timecode = m_frameno * m_default_duration + m_tcsync.displacement;
   packet->duration          = m_default_duration;
   ++m_frameno;
