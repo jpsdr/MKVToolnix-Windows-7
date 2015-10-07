@@ -48,7 +48,7 @@ you'll find instructions for manual compilation in section 1.3.
 
 ### 1.2.1. Script configuration
 
-The script is called `build/windows/setup_cross_compilation_env.sh`. It
+The script is called `tools/windows/setup_cross_compilation_env.sh`. It
 contains the following variables that can be adjusted to fit your
 needs:
 
@@ -72,7 +72,7 @@ of cores available if left empty.
 
 From the MKVToolNix source directory run:
 
-    ./build/windows/setup_cross_compilation_env.sh
+    ./tools/windows/setup_cross_compilation_env.sh
 
 If everything works fine you'll end up with a configured MKVToolNix
 source tree. You just have to run `drake` afterwards.
