@@ -18,7 +18,7 @@
 
 #include "common/truehd.h"
 #include "merge/generic_packetizer.h"
-#include "merge/timecode_calculator.h"
+#include "merge/timestamp_calculator.h"
 
 class truehd_packetizer_c: public generic_packetizer_c {
 protected:
@@ -26,7 +26,7 @@ protected:
   truehd_frame_t m_first_truehd_header;
 
   int64_t m_current_samples_per_frame, m_ref_timecode;
-  timecode_calculator_c m_timecode_calculator;
+  timestamp_calculator_c m_timestamp_calculator;
   truehd_parser_c m_parser;
 
 public:

@@ -31,7 +31,7 @@ dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
   , m_previous_header(dtsheader)
   , m_skipping_is_normal(false)
   , m_reduce_to_core{get_option_for_track(m_ti.m_reduce_to_core, m_ti.m_id)}
-  , m_timecode_calculator{static_cast<int64_t>(m_first_header.core_sampling_frequency)}
+  , m_timestamp_calculator{static_cast<int64_t>(m_first_header.core_sampling_frequency)}
 {
   set_track_type(track_audio);
 }
@@ -116,7 +116,7 @@ dts_packetizer_c::set_headers() {
 
 int
 dts_packetizer_c::process(packet_cptr packet) {
-  m_timecode_calculator.add_timecode(packet);
+  m_timestamp_calculator.add_timecode(packet);
 
   m_packet_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
@@ -136,7 +136,7 @@ dts_packetizer_c::queue_available_packets(bool flushing) {
 
     if (!m_first_header.core_sampling_frequency && dtsheader.core_sampling_frequency) {
       m_first_header.core_sampling_frequency = dtsheader.core_sampling_frequency;
-      m_timecode_calculator                  = timecode_calculator_c{static_cast<int64_t>(m_first_header.core_sampling_frequency)};
+      m_timestamp_calculator                  = timestamp_calculator_c{static_cast<int64_t>(m_first_header.core_sampling_frequency)};
 
       set_audio_sampling_freq(m_first_header.core_sampling_frequency);
 
@@ -152,7 +152,7 @@ dts_packetizer_c::process_available_packets() {
 
   for (auto const &header_and_packet : m_queued_packets) {
     auto samples_in_packet = header_and_packet.first.get_packet_length_in_core_samples();
-    auto new_timecode      = m_timecode_calculator.get_next_timecode(samples_in_packet);
+    auto new_timecode      = m_timestamp_calculator.get_next_timecode(samples_in_packet);
 
     add_packet(std::make_shared<packet_t>(header_and_packet.second, new_timecode.to_ns(), header_and_packet.first.get_packet_length_in_nanoseconds().to_ns()));
   }

@@ -31,8 +31,8 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
   , m_channels(channels)
   , m_profile(profile)
   , m_headerless(headerless)
-  , m_timecode_calculator{static_cast<int64_t>(m_samples_per_sec)}
-  , m_packet_duration{m_timecode_calculator.get_duration(ms_samples_per_packet).to_ns()}
+  , m_timestamp_calculator{static_cast<int64_t>(m_samples_per_sec)}
+  , m_packet_duration{m_timestamp_calculator.get_duration(ms_samples_per_packet).to_ns()}
 {
   set_track_type(track_audio);
   set_track_default_duration(m_packet_duration);
@@ -65,7 +65,7 @@ aac_packetizer_c::set_headers() {
 
 int
 aac_packetizer_c::process_headerless(packet_cptr packet) {
-  packet->timecode = m_timecode_calculator.get_next_timecode(ms_samples_per_packet).to_ns();
+  packet->timecode = m_timestamp_calculator.get_next_timecode(ms_samples_per_packet).to_ns();
   packet->duration = m_packet_duration;
 
   add_packet(packet);
@@ -75,7 +75,7 @@ aac_packetizer_c::process_headerless(packet_cptr packet) {
 
 int
 aac_packetizer_c::process(packet_cptr packet) {
-  m_timecode_calculator.add_timecode(packet);
+  m_timestamp_calculator.add_timecode(packet);
 
   if (m_headerless)
     return process_headerless(packet);

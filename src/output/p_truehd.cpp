@@ -32,7 +32,7 @@ truehd_packetizer_c::truehd_packetizer_c(generic_reader_c *p_reader,
   , m_first_frame{true}
   , m_current_samples_per_frame{}
   , m_ref_timecode{}
-  , m_timecode_calculator{sampling_rate}
+  , m_timestamp_calculator{sampling_rate}
 {
   m_first_truehd_header.m_codec         = codec;
   m_first_truehd_header.m_sampling_rate = sampling_rate;
@@ -56,7 +56,7 @@ truehd_packetizer_c::set_headers() {
 void
 truehd_packetizer_c::process_framed(truehd_frame_cptr const &frame,
                                     int64_t provided_timecode) {
-  m_timecode_calculator.add_timecode(provided_timecode);
+  m_timestamp_calculator.add_timecode(provided_timecode);
 
   if (frame->is_ac3())
     return;
@@ -67,8 +67,8 @@ truehd_packetizer_c::process_framed(truehd_frame_cptr const &frame,
   }
 
   auto samples   = 0 == frame->m_samples_per_frame ? m_current_samples_per_frame : frame->m_samples_per_frame;
-  auto timecode  = m_timecode_calculator.get_next_timecode(samples).to_ns();
-  auto duration  = m_timecode_calculator.get_duration(samples).to_ns();
+  auto timecode  = m_timestamp_calculator.get_next_timecode(samples).to_ns();
+  auto duration  = m_timestamp_calculator.get_duration(samples).to_ns();
 
   add_packet(std::make_shared<packet_t>(frame->m_data, timecode, duration, frame->is_sync() ? -1 : m_ref_timecode));
 
@@ -77,7 +77,7 @@ truehd_packetizer_c::process_framed(truehd_frame_cptr const &frame,
 
 int
 truehd_packetizer_c::process(packet_cptr packet) {
-  m_timecode_calculator.add_timecode(packet);
+  m_timestamp_calculator.add_timecode(packet);
 
   m_parser.add_data(packet->data->get_buffer(), packet->data->get_size());
 
@@ -123,7 +123,7 @@ truehd_packetizer_c::adjust_header_values(truehd_frame_cptr const &frame) {
 
   m_first_frame = false;
 
-  m_timecode_calculator.set_samples_per_second(m_first_truehd_header.m_sampling_rate);
+  m_timestamp_calculator.set_samples_per_second(m_first_truehd_header.m_sampling_rate);
 }
 
 void

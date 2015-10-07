@@ -11,8 +11,8 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_MERGE_TIMECODE_CALCULATOR_H
-#define MTX_MERGE_TIMECODE_CALCULATOR_H
+#ifndef MTX_MERGE_TIMESTAMP_CALCULATOR_H
+#define MTX_MERGE_TIMESTAMP_CALCULATOR_H
 
 #include "common/common_pch.h"
 
@@ -23,7 +23,7 @@
 class packet_t;
 using packet_cptr = std::shared_ptr<packet_t>;
 
-class timecode_calculator_c {
+class timestamp_calculator_c {
 private:
   std::deque<timestamp_c> m_available_timecodes;
   timestamp_c m_reference_timecode, m_last_timecode_returned;
@@ -32,7 +32,7 @@ private:
   debugging_option_c m_debug;
 
 public:
-  timecode_calculator_c(int64_t samples_per_second);
+  timestamp_calculator_c(int64_t samples_per_second);
 
   void add_timecode(timestamp_c const &timecode);
   void add_timecode(int64_t timecode);
@@ -44,4 +44,4 @@ public:
   void set_samples_per_second(int64_t samples_per_second);
 };
 
-#endif  // MTX_MERGE_TIMECODE_CALCULATOR_H
+#endif  // MTX_MERGE_TIMESTAMP_CALCULATOR_H

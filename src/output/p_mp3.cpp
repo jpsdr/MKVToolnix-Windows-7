@@ -37,8 +37,8 @@ mp3_packetizer_c::mp3_packetizer_c(generic_reader_c *p_reader,
   , m_byte_buffer(128 * 1024)
   , m_codec_id_set(false)
   , m_valid_headers_found(source_is_good)
-  , m_timecode_calculator{static_cast<int64_t>(samples_per_sec)}
-  , m_packet_duration{m_timecode_calculator.get_duration(m_samples_per_frame).to_ns()}
+  , m_timestamp_calculator{static_cast<int64_t>(samples_per_sec)}
+  , m_packet_duration{m_timestamp_calculator.get_duration(m_samples_per_frame).to_ns()}
 {
   set_track_type(track_audio);
   set_track_default_duration(m_packet_duration);
@@ -141,12 +141,12 @@ mp3_packetizer_c::get_mp3_packet(mp3_header_t *mp3header) {
 
   if (m_first_packet) {
     m_samples_per_frame  = mp3header->samples_per_channel;
-    m_packet_duration    = m_timecode_calculator.get_duration(m_samples_per_frame).to_ns();
+    m_packet_duration    = m_timestamp_calculator.get_duration(m_samples_per_frame).to_ns();
     std::string codec_id = MKV_A_MP3;
     codec_id[codec_id.length() - 1] = (char)(mp3header->layer + '0');
     set_codec_id(codec_id.c_str());
 
-    m_timecode_calculator.set_samples_per_second(m_samples_per_sec);
+    m_timestamp_calculator.set_samples_per_second(m_samples_per_sec);
     set_track_default_duration(m_packet_duration);
 
     track_headers_changed = true;
@@ -179,7 +179,7 @@ mp3_packetizer_c::set_headers() {
 
 int
 mp3_packetizer_c::process(packet_cptr packet) {
-  m_timecode_calculator.add_timecode(packet);
+  m_timestamp_calculator.add_timecode(packet);
 
   unsigned char *mp3_packet;
   mp3_header_t mp3header;
@@ -187,7 +187,7 @@ mp3_packetizer_c::process(packet_cptr packet) {
   m_byte_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
   while ((mp3_packet = get_mp3_packet(&mp3header))) {
-    auto new_timecode = m_timecode_calculator.get_next_timecode(m_samples_per_frame);
+    auto new_timecode = m_timestamp_calculator.get_next_timecode(m_samples_per_frame);
     auto packet       = std::make_shared<packet_t>(memory_c::clone(mp3_packet, mp3header.framesize), new_timecode.to_ns(), m_packet_duration);
 
     packet->add_extensions(m_packet_extensions);

@@ -1,14 +1,14 @@
 #include "common/common_pch.h"
 
 #include "merge/packet.h"
-#include "merge/timecode_calculator.h"
+#include "merge/timestamp_calculator.h"
 
 #include "gtest/gtest.h"
 
 namespace {
 
 TEST(TimecodeCalculator, NoTimecodesProvided) {
-  auto calc = timecode_calculator_c{48000ll};
+  auto calc = timestamp_calculator_c{48000ll};
 
   ASSERT_EQ(timestamp_c::s(0), calc.get_next_timecode(0));
   ASSERT_EQ(timestamp_c::s(0), calc.get_next_timecode(48000));
@@ -20,7 +20,7 @@ TEST(TimecodeCalculator, NoTimecodesProvided) {
 }
 
 TEST(TimecodeCalculator, WithTimecodesProvidedByTimecodeC) {
-  auto calc = timecode_calculator_c{48000ll};
+  auto calc = timestamp_calculator_c{48000ll};
 
   calc.add_timecode(timestamp_c::s(10));
   ASSERT_EQ(timestamp_c::s(10), calc.get_next_timecode(0));
@@ -41,7 +41,7 @@ TEST(TimecodeCalculator, WithTimecodesProvidedByTimecodeC) {
 }
 
 TEST(TimecodeCalculator, WithTimecodesProvidedByUInt) {
-  auto calc = timecode_calculator_c{48000ll};
+  auto calc = timestamp_calculator_c{48000ll};
 
   calc.add_timecode(10000000000);
   ASSERT_EQ(timestamp_c::s(10), calc.get_next_timecode(0));
@@ -62,7 +62,7 @@ TEST(TimecodeCalculator, WithTimecodesProvidedByUInt) {
 }
 
 TEST(TimecodeCalculator, WithTimecodesProvidedByPacket) {
-  auto calc = timecode_calculator_c{48000ll};
+  auto calc = timestamp_calculator_c{48000ll};
 
   auto packet = std::make_shared<packet_t>();
   packet->timecode = 10000000000;
@@ -88,7 +88,7 @@ TEST(TimecodeCalculator, WithTimecodesProvidedByPacket) {
 }
 
 TEST(TimecodeCalculator, WithInvalidTimecodesProvided) {
-  auto calc = timecode_calculator_c{48000ll};
+  auto calc = timestamp_calculator_c{48000ll};
 
   auto packet = std::make_shared<packet_t>();
   packet->timecode = -1;
@@ -103,7 +103,7 @@ TEST(TimecodeCalculator, WithInvalidTimecodesProvided) {
 }
 
 TEST(TimecodeCalculator, GetDuration) {
-  auto calc = timecode_calculator_c{48000ll};
+  auto calc = timestamp_calculator_c{48000ll};
 
   EXPECT_EQ(timestamp_c::s(1),                 calc.get_duration(48000));
   EXPECT_EQ(timestamp_c::ns(2572016437500ll),  calc.get_duration(123456789));
@@ -111,13 +111,13 @@ TEST(TimecodeCalculator, GetDuration) {
 }
 
 TEST(TimecodeCalculator, InvalidSamplesPerSecond) {
-  auto calc = timecode_calculator_c{0ll};
+  auto calc = timestamp_calculator_c{0ll};
   ASSERT_THROW(calc.get_next_timecode(0), std::invalid_argument);
   ASSERT_THROW(calc.get_duration(0), std::invalid_argument);
 }
 
 TEST(TimecodeCalculator, SetSamplesPerSecond) {
-  auto calc = timecode_calculator_c{48000ll};
+  auto calc = timestamp_calculator_c{48000ll};
 
   calc.add_timecode(timestamp_c::s(1));
   ASSERT_EQ(timestamp_c::s(1), calc.get_next_timecode(12345));
@@ -130,7 +130,7 @@ TEST(TimecodeCalculator, SetSamplesPerSecond) {
 }
 
 TEST(TimecodeCalculator, AddingSameAndSmallerTimecodes) {
-  auto calc = timecode_calculator_c{48000ll};
+  auto calc = timestamp_calculator_c{48000ll};
 
   calc.add_timecode(timestamp_c::s(10));
   calc.add_timecode(timestamp_c::s(10));

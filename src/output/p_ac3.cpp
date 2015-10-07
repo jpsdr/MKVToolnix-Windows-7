@@ -31,9 +31,9 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
                                    int bsid,
                                    bool framed)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_timecode_calculator{samples_per_sec}
+  , m_timestamp_calculator{samples_per_sec}
   , m_samples_per_packet{1536}
-  , m_packet_duration{m_timecode_calculator.get_duration(m_samples_per_packet).to_ns()}
+  , m_packet_duration{m_timestamp_calculator.get_duration(m_samples_per_packet).to_ns()}
   , m_framed{framed}
   , m_first_packet{true}
 {
@@ -109,7 +109,7 @@ ac3_packetizer_c::process(packet_cptr packet) {
   //   mxinfo(boost::format("tc %1% %2% %3% %4%\n") % format_timecode(packet->timecode) % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
   //          % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 512)) % packet->data->get_size());
 
-  m_timecode_calculator.add_timecode(packet);
+  m_timestamp_calculator.add_timecode(packet);
 
   if (m_framed)
     return process_framed(packet);
@@ -140,7 +140,7 @@ ac3_packetizer_c::set_timecode_and_add_packet(packet_cptr const &packet) {
   // mxinfo(boost::format(" →                    %1% %2% %3%\n") % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
   //        % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 512)) % packet->data->get_size());
 
-  packet->timecode = m_timecode_calculator.get_next_timecode(m_samples_per_packet).to_ns();
+  packet->timecode = m_timestamp_calculator.get_next_timecode(m_samples_per_packet).to_ns();
   packet->duration = m_packet_duration;
 
   add_packet(packet);
@@ -194,12 +194,12 @@ ac3_packetizer_c::adjust_header_values(ac3::frame_c const &ac3_header) {
 
   if ((m_samples_per_packet != ac3_header.m_samples) || (m_first_ac3_header.m_sample_rate != ac3_header.m_sample_rate)) {
     if (ac3_header.m_sample_rate)
-      m_timecode_calculator.set_samples_per_second(ac3_header.m_sample_rate);
+      m_timestamp_calculator.set_samples_per_second(ac3_header.m_sample_rate);
 
     if (ac3_header.m_samples)
       m_samples_per_packet = ac3_header.m_samples;
 
-    m_packet_duration = m_timecode_calculator.get_duration(m_samples_per_packet).to_ns();
+    m_packet_duration = m_timestamp_calculator.get_duration(m_samples_per_packet).to_ns();
     set_track_default_duration(m_packet_duration);
   }
 

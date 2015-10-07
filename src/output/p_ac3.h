@@ -18,13 +18,13 @@
 
 #include "common/ac3.h"
 #include "merge/generic_packetizer.h"
-#include "merge/timecode_calculator.h"
+#include "merge/timestamp_calculator.h"
 
 class ac3_packetizer_c: public generic_packetizer_c {
 protected:
   ac3::frame_c m_first_ac3_header;
   ac3::parser_c m_parser;
-  timecode_calculator_c m_timecode_calculator;
+  timestamp_calculator_c m_timestamp_calculator;
   int64_t m_samples_per_packet, m_packet_duration;
   bool m_framed, m_first_packet;
   std::vector<packet_extension_cptr> m_packet_extensions;

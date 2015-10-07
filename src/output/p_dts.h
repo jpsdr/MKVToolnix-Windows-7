@@ -20,7 +20,7 @@
 #include "common/byte_buffer.h"
 #include "common/dts.h"
 #include "merge/generic_packetizer.h"
-#include "merge/timecode_calculator.h"
+#include "merge/timestamp_calculator.h"
 
 class dts_packetizer_c: public generic_packetizer_c {
 private:
@@ -30,7 +30,7 @@ private:
 
   mtx::dts::header_t m_first_header, m_previous_header;
   bool m_skipping_is_normal, m_reduce_to_core;
-  timecode_calculator_c m_timecode_calculator;
+  timestamp_calculator_c m_timestamp_calculator;
   std::deque<header_and_packet_t> m_queued_packets;
 
 public:

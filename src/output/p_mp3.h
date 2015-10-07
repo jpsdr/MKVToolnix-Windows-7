@@ -19,7 +19,7 @@
 #include "common/byte_buffer.h"
 #include "common/mp3.h"
 #include "merge/generic_packetizer.h"
-#include "merge/timecode_calculator.h"
+#include "merge/timestamp_calculator.h"
 
 class mp3_packetizer_c: public generic_packetizer_c {
 private:
@@ -28,7 +28,7 @@ private:
   int m_samples_per_sec, m_channels, m_samples_per_frame;
   byte_buffer_c m_byte_buffer;
   bool m_codec_id_set, m_valid_headers_found;
-  timecode_calculator_c m_timecode_calculator;
+  timestamp_calculator_c m_timestamp_calculator;
   int64_t m_packet_duration;
   std::vector<packet_extension_cptr> m_packet_extensions;
 

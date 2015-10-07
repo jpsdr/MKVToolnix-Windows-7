@@ -18,14 +18,14 @@
 
 #include "common/aac.h"
 #include "merge/generic_packetizer.h"
-#include "merge/timecode_calculator.h"
+#include "merge/timestamp_calculator.h"
 
 class aac_packetizer_c: public generic_packetizer_c {
 private:
   int m_samples_per_sec, m_channels, m_profile;
   bool m_headerless;
   aac::parser_c m_parser;
-  timecode_calculator_c m_timecode_calculator;
+  timestamp_calculator_c m_timestamp_calculator;
   int64_t m_packet_duration;
 
   static const int ms_samples_per_packet = 1024;
