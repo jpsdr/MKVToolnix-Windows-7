@@ -19,7 +19,7 @@
 #include "common/codec.h"
 #include "common/mm_io.h"
 #include "common/error.h"
-#include "common/samples_timecode_conv.h"
+#include "common/samples_to_timestamp_converter.h"
 
 #include "merge/generic_reader.h"
 
@@ -50,7 +50,7 @@ private:
   double m_sample_rate;
   unsigned int m_flags, m_bytes_per_packet, m_frames_per_packet, m_channels, m_bits_per_sample;
 
-  samples_to_timecode_converter_c m_frames_to_timecode;
+  samples_to_timestamp_converter_c m_frames_to_timecode;
 
   debugging_option_c m_debug_headers, m_debug_chunks, m_debug_packets;
 

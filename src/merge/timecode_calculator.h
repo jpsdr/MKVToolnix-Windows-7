@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/debugging.h"
-#include "common/samples_timecode_conv.h"
+#include "common/samples_to_timestamp_converter.h"
 #include "common/timestamp.h"
 
 class packet_t;
@@ -28,7 +28,7 @@ private:
   std::deque<timestamp_c> m_available_timecodes;
   timestamp_c m_reference_timecode, m_last_timecode_returned;
   int64_t m_samples_per_second, m_samples_since_reference_timecode;
-  samples_to_timecode_converter_c m_samples_to_timecode;
+  samples_to_timestamp_converter_c m_samples_to_timestamp;
   debugging_option_c m_debug;
 
 public:

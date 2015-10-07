@@ -21,7 +21,7 @@ timecode_calculator_c::timecode_calculator_c(int64_t samples_per_second)
   : m_reference_timecode{timestamp_c::ns(0)}
   , m_samples_per_second{samples_per_second}
   , m_samples_since_reference_timecode{}
-  , m_samples_to_timecode{1000000000, static_cast<int64_t>(samples_per_second)}
+  , m_samples_to_timestamp{1000000000, static_cast<int64_t>(samples_per_second)}
   , m_debug{"timecode_calculator"}
 {
 }
@@ -69,7 +69,7 @@ timecode_calculator_c::get_next_timecode(int64_t samples_in_frame) {
   if (!m_samples_per_second)
     throw std::invalid_argument{"samples per second must not be 0"};
 
-  m_last_timecode_returned           = m_reference_timecode + timestamp_c::ns(m_samples_to_timecode * m_samples_since_reference_timecode);
+  m_last_timecode_returned           = m_reference_timecode + timestamp_c::ns(m_samples_to_timestamp * m_samples_since_reference_timecode);
   m_samples_since_reference_timecode += samples_in_frame;
 
   mxdebug_if(m_debug, boost::format("timecode_calculator_c::get_next_timecode: returning calculated %1%\n") % format_timecode(m_last_timecode_returned));
@@ -82,7 +82,7 @@ timecode_calculator_c::get_duration(int64_t samples) {
   if (!m_samples_per_second)
     throw std::invalid_argument{"samples per second must not be 0"};
 
-  return timestamp_c::ns(m_samples_to_timecode * samples);
+  return timestamp_c::ns(m_samples_to_timestamp * samples);
 }
 
 void
@@ -92,5 +92,5 @@ timecode_calculator_c::set_samples_per_second(int64_t samples_per_second) {
 
   m_reference_timecode               += get_duration(m_samples_since_reference_timecode);
   m_samples_since_reference_timecode  = 0;
-  m_samples_to_timecode.set(1000000000, samples_per_second);
+  m_samples_to_timestamp.set(1000000000, samples_per_second);
 }

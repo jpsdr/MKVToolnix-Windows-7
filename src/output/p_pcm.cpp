@@ -39,7 +39,7 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   , m_num_durations_provided{}
   , m_num_packets_with_different_sample_count{}
   , m_format{format}
-  , m_s2tc(1000000000ll, m_samples_per_sec)
+  , m_s2ts(1000000000ll, m_samples_per_sec)
 {
 
   int i;
@@ -93,7 +93,7 @@ pcm_packetizer_c::process(packet_cptr packet) {
   m_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
   while (m_buffer.get_size() >= m_packet_size) {
-    add_packet(new packet_t(memory_c::clone(m_buffer.get_buffer(), m_packet_size), m_samples_output * m_s2tc, m_samples_per_packet * m_s2tc));
+    add_packet(new packet_t(memory_c::clone(m_buffer.get_buffer(), m_packet_size), m_samples_output * m_s2ts, m_samples_per_packet * m_s2ts));
 
     m_buffer.remove(m_packet_size);
     m_samples_output += m_samples_per_packet;
@@ -117,18 +117,18 @@ pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
 
     m_buffer.remove(buffer_size);
 
-    packet->timecode -= size_to_samples(buffer_size) * m_s2tc;
+    packet->timecode -= size_to_samples(buffer_size) * m_s2ts;
   }
 
   auto samples_here = size_to_samples(packet->data->get_size());
-  packet->duration  = samples_here * m_s2tc;
-  m_samples_output  = packet->timecode / m_s2tc + samples_here;
+  packet->duration  = samples_here * m_s2ts;
+  m_samples_output  = packet->timecode / m_s2ts + samples_here;
 
   ++m_num_durations_provided;
 
   if (1 == m_num_durations_provided) {
     m_samples_per_packet_packaged = samples_here;
-    set_track_default_duration(samples_here * m_s2tc);
+    set_track_default_duration(samples_here * m_s2ts);
     rerender_track_headers();
 
   } else if (m_htrack_default_duration && (samples_here != m_samples_per_packet_packaged)) {
@@ -152,7 +152,7 @@ pcm_packetizer_c::flush_impl() {
     return;
 
   int64_t samples_here = size_to_samples(size);
-  add_packet(new packet_t(memory_c::clone(m_buffer.get_buffer(), size), m_samples_output * m_s2tc, samples_here * m_s2tc));
+  add_packet(new packet_t(memory_c::clone(m_buffer.get_buffer(), size), m_samples_output * m_s2ts, samples_here * m_s2ts));
 
   m_samples_output += samples_here;
   m_buffer.remove(size);

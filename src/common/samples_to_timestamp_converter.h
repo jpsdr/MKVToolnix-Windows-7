@@ -6,27 +6,27 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definition for the samples-to-timecode converter
+   class definition for the samples-to-timestamp converter
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_SAMPLES_TIMECODE_CONV_H
-#define MTX_COMMON_SAMPLES_TIMECODE_CONV_H
+#ifndef MTX_COMMON_SAMPLES_TO_TIMESTAMP_CONVERTER_H
+#define MTX_COMMON_SAMPLES_TO_TIMESTAMP_CONVERTER_H
 
 #include "common/common_pch.h"
 
-class samples_to_timecode_converter_c {
+class samples_to_timestamp_converter_c {
 protected:
   int64_t m_numerator, m_denominator;
 
 public:
-  samples_to_timecode_converter_c()
+  samples_to_timestamp_converter_c()
     : m_numerator(0)
     , m_denominator(0)
   { }
 
-  samples_to_timecode_converter_c(int64_t numerator, int64_t denominator)
+  samples_to_timestamp_converter_c(int64_t numerator, int64_t denominator)
     : m_numerator(0)
     , m_denominator(0)
   {
@@ -51,20 +51,20 @@ public:
     return v1 / *this;
   }
 
-  friend int64_t operator *(int64_t v1, const samples_to_timecode_converter_c &v2);
-  friend int64_t operator /(int64_t v1, const samples_to_timecode_converter_c &v2);
+  friend int64_t operator *(int64_t v1, const samples_to_timestamp_converter_c &v2);
+  friend int64_t operator /(int64_t v1, const samples_to_timestamp_converter_c &v2);
 };
 
 inline int64_t
 operator *(int64_t v1,
-           const samples_to_timecode_converter_c &v2) {
+           const samples_to_timestamp_converter_c &v2) {
   return v2.m_denominator ? v1 * v2.m_numerator / v2.m_denominator : v1;
 }
 
 inline int64_t
 operator /(int64_t v1,
-           const samples_to_timecode_converter_c &v2) {
+           const samples_to_timestamp_converter_c &v2) {
   return v2.m_numerator ? v1 * v2.m_denominator / v2.m_numerator : v1;
 }
 
-#endif  // MTX_COMMON_SAMPLES_TIMECODE_CONV_H
+#endif  // MTX_COMMON_SAMPLES_TO_TIMESTAMP_CONVERTER_H
