@@ -9,7 +9,7 @@ src_dir=${${0:a}:h}/../..
 src_dir=${src_dir:a}
 no_strip=0
 
-if [[ -f ${src_dir}/build/windows/conf.sh ]] source ${src_dir}/build/windows/conf.sh
+if [[ -f ${src_dir}/tools/windows/conf.sh ]] source ${src_dir}/tools/windows/conf.sh
 
 function fail {
   print -- $@
