@@ -132,9 +132,9 @@ ebml_converter_c::format_int(pugi::xml_node &node,
 }
 
 void
-ebml_converter_c::format_timecode(pugi::xml_node &node,
+ebml_converter_c::format_timestamp(pugi::xml_node &node,
                                   EbmlElement &e) {
-  node.append_child(pugi::node_pcdata).set_value(::format_timecode(static_cast<EbmlUInteger &>(e).GetValue()).c_str());
+  node.append_child(pugi::node_pcdata).set_value(::format_timestamp(static_cast<EbmlUInteger &>(e).GetValue()).c_str());
 }
 
 void

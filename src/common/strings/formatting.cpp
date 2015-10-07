@@ -22,33 +22,33 @@
 #include "common/translation.h"
 
 std::string
-format_timecode(int64_t timecode,
+format_timestamp(int64_t timestamp,
                 unsigned int precision) {
   static boost::format s_bf_format("%4%%|1$02d|:%|2$02d|:%|3$02d|");
   static boost::format s_bf_decimals(".%|1$09d|");
 
-  bool negative = 0 > timecode;
+  bool negative = 0 > timestamp;
   if (negative)
-    timecode *= -1;
+    timestamp *= -1;
 
   if (9 > precision) {
     auto shift = 5ll;
     for (int shift_idx = 9 - precision; shift_idx > 1; --shift_idx)
       shift *= 10;
-    timecode += shift;
+    timestamp += shift;
   }
 
-  std::string result = (s_bf_format
-                        % static_cast<int>( timecode / 60 / 60 / 1000000000)
-                        % static_cast<int>((timecode      / 60 / 1000000000) % 60)
-                        % static_cast<int>((timecode           / 1000000000) % 60)
-                        % (negative ? "-" : "")).str();
+  auto result = (s_bf_format
+                 % ( timestamp / 60 / 60 / 1000000000)
+                 % ((timestamp      / 60 / 1000000000) % 60)
+                 % ((timestamp           / 1000000000) % 60)
+                 % (negative ? "-" : "")).str();
 
   if (9 < precision)
     precision = 9;
 
   if (precision) {
-    std::string decimals = (s_bf_decimals % (int)(timecode % 1000000000)).str();
+    auto decimals = (s_bf_decimals % (timestamp % 1000000000)).str();
 
     if (decimals.length() > (precision + 1))
       decimals.erase(precision + 1);
@@ -60,7 +60,7 @@ format_timecode(int64_t timecode,
 }
 
 std::string
-format_timecode(int64_t timecode,
+format_timestamp(int64_t timestamp,
                 std::string const &format) {
   auto result  = std::string{};
   auto width   = 0u;
@@ -76,10 +76,10 @@ format_timecode(int64_t timecode,
 
       else if (mtx::included_in(c, 'h', 'm', 's', 'H', 'M', 'S', 'n')) {
         auto lc    = std::tolower(c);
-        auto value = lc == 'h' ?  (timecode / 60 / 60 / 1000000000ll)
-                   : lc == 'm' ? ((timecode      / 60 / 1000000000ll) % 60)
-                   : lc == 's' ? ((timecode           / 1000000000ll) % 60)
-                   :              (timecode                           % 1000000000ll);
+        auto value = lc == 'h' ?  (timestamp / 60 / 60 / 1000000000ll)
+                   : lc == 'm' ? ((timestamp      / 60 / 1000000000ll) % 60)
+                   : lc == 's' ? ((timestamp           / 1000000000ll) % 60)
+                   :              (timestamp                           % 1000000000ll);
 
         if (c == 'n') {
           auto temp = (fmt9 % value).str();

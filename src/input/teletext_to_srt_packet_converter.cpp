@@ -265,13 +265,13 @@ teletext_to_srt_packet_converter_c::process_ttx_packet(packet_cptr const &packet
     auto current_content = page_to_string();
     mxdebug_if(m_debug,
                boost::format("  case !packet_id. page content before clearing it at timecode %2% (prev %3%): %1% PREV content: %4%\n")
-               % current_content % format_timecode(packet->timecode) % format_timecode(m_previous_timecode) % m_previous_content);
+               % current_content % format_timestamp(packet->timecode) % format_timestamp(m_previous_timecode) % m_previous_content);
 
     if (!m_previous_content.empty()) {
       m_previous_timecode = std::max<int64_t>(m_previous_timecode, 0);
       auto new_packet     = std::make_shared<packet_t>(memory_c::clone(m_previous_content), m_previous_timecode, std::abs(packet->timecode - m_previous_timecode));
 
-      mxdebug_if(m_debug, boost::format("  WILL DELIVER at %1% duration %2% content %3%\n") % format_timecode(m_previous_timecode) % format_timecode(new_packet->duration) % m_previous_content);
+      mxdebug_if(m_debug, boost::format("  WILL DELIVER at %1% duration %2% content %3%\n") % format_timestamp(m_previous_timecode) % format_timestamp(new_packet->duration) % m_previous_content);
 
       m_ptzr->process(new_packet);
 
@@ -340,7 +340,7 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
   if ((-1 == m_previous_timecode) && (-1 != packet->timecode) && !page_to_string().empty())
     m_previous_timecode = packet->timecode;
 
-  // mxdebug_if(m_debug, boost::format("At end of PES packet. Page content at timecode %2% (prev %3%): %1%\n") % page_to_string() % format_timecode(packet->timecode) % format_timecode(m_timecode));
+  // mxdebug_if(m_debug, boost::format("At end of PES packet. Page content at timecode %2% (prev %3%): %1%\n") % page_to_string() % format_timestamp(packet->timecode) % format_timestamp(m_timecode));
 
   return true;
 }

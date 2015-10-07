@@ -2012,7 +2012,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
   if (!block_track) {
     mxwarn_fn(m_ti.m_fname,
               boost::format(Y("A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. "
-                              "The block will be skipped.\n")) % format_timecode(block_simple->GlobalTimecode()) % block_simple->TrackNum());
+                              "The block will be skipped.\n")) % format_timestamp(block_simple->GlobalTimecode()) % block_simple->TrackNum());
     return;
   }
 
@@ -2108,7 +2108,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
   if (!block_track) {
     mxwarn_fn(m_ti.m_fname,
               boost::format(Y("A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. "
-                              "The block will be skipped.\n")) % format_timecode(block->GlobalTimecode()) % block->TrackNum());
+                              "The block will be skipped.\n")) % format_timestamp(block->GlobalTimecode()) % block->TrackNum());
     return;
   }
 

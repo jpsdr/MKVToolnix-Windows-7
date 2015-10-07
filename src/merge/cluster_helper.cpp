@@ -143,7 +143,7 @@ cluster_helper_c::render_before_adding_if_necessary(packet_cptr &packet) {
              boost::format("cluster_helper_c::add_packet(): new packet { source %1%/%2% "
                            "timecode: %3% duration: %4% bref: %5% fref: %6% assigned_timecode: %7% timecode_delay: %8% }\n")
              % packet->source->m_ti.m_id % packet->source->m_ti.m_fname % packet->timecode          % packet->duration
-             % packet->bref              % packet->fref                 % packet->assigned_timecode % format_timecode(timecode_delay));
+             % packet->bref              % packet->fref                 % packet->assigned_timecode % format_timestamp(timecode_delay));
 
   bool is_video_keyframe = (packet->source == g_video_packetizer) && packet->is_key_frame();
   bool do_render         = (std::numeric_limits<int16_t>::max() < timecode_delay)
@@ -240,7 +240,7 @@ cluster_helper_c::split(packet_cptr &packet) {
   bool create_new_file       = m->current_split_point->m_create_new_file;
   bool previously_discarding = m->discarding;
 
-  mxdebug_if(m->debug_splitting, boost::format("Splitting: splitpoint %1% reached before timecode %2%, create new? %3%.\n") % m->current_split_point->str() % format_timecode(packet->assigned_timecode) % create_new_file);
+  mxdebug_if(m->debug_splitting, boost::format("Splitting: splitpoint %1% reached before timecode %2%, create new? %3%.\n") % m->current_split_point->str() % format_timestamp(packet->assigned_timecode) % create_new_file);
 
   finish_file(false, create_new_file, previously_discarding);
 
@@ -641,7 +641,7 @@ cluster_helper_c::handle_discarded_duration(bool create_new_file,
   if (create_new_file) { // || (!previously_discarding && m->discarding)) {
     mxdebug_if(m->debug_splitting,
                boost::format("RESETTING discarded duration of %1%, create_new_file %2% previously_discarding %3% m->discarding %4%\n")
-               % format_timecode(m->discarded_duration) % create_new_file % previously_discarding % m->discarding);
+               % format_timestamp(m->discarded_duration) % create_new_file % previously_discarding % m->discarding);
     m->discarded_duration = 0;
 
   } else if (previously_discarding && !m->discarding) {
@@ -650,12 +650,12 @@ cluster_helper_c::handle_discarded_duration(bool create_new_file,
 
     mxdebug_if(m->debug_splitting,
                boost::format("ADDING to discarded duration TC at %1% / %2% diff %3% new total %4% create_new_file %5% previously_discarding %6% m->discarding %7%\n")
-               % format_timecode(m->first_discarded_timecode) % format_timecode(m->last_discarded_timecode_and_duration) % format_timecode(diff) % format_timecode(m->discarded_duration)
+               % format_timestamp(m->first_discarded_timecode) % format_timestamp(m->last_discarded_timecode_and_duration) % format_timestamp(diff) % format_timestamp(m->discarded_duration)
                % create_new_file % previously_discarding % m->discarding);
   } else
     mxdebug_if(m->debug_splitting,
                boost::format("KEEPING discarded duration at %1%, create_new_file %2% previously_discarding %3% m->discarding %4%\n")
-               % format_timecode(m->discarded_duration) % create_new_file % previously_discarding % m->discarding);
+               % format_timestamp(m->discarded_duration) % create_new_file % previously_discarding % m->discarding);
 
   m->first_discarded_timecode             = -1;
   m->last_discarded_timecode_and_duration =  0;
@@ -727,7 +727,7 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
     mtx::tags::set_target_type(*tag, mtx::tags::Movie, "MOVIE");
 
     mtx::tags::set_simple(*tag, "BPS",              to_string(bps ? *bps : 0));
-    mtx::tags::set_simple(*tag, "DURATION",         format_timecode(duration ? *duration : 0));
+    mtx::tags::set_simple(*tag, "DURATION",         format_timestamp(duration ? *duration : 0));
     mtx::tags::set_simple(*tag, "NUMBER_OF_FRAMES", to_string(stats.get_num_frames()));
     mtx::tags::set_simple(*tag, "NUMBER_OF_BYTES",  to_string(stats.get_num_bytes()));
 

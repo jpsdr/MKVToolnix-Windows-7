@@ -1722,12 +1722,12 @@ append_track(packetizer_t &ptzr,
   }
 
   if ((APPEND_MODE_FILE_BASED == g_append_mode) || (ptzr.packetizer->get_track_type() == track_subtitle)) {
-    mxdebug_if(s_debug_appending, boost::format("appending: new timecode_adjustment for append_mode == FILE_BASED or subtitle track: %1% for %2%\n") % format_timecode(timecode_adjustment) % ptzr.packetizer->m_ti.m_id);
+    mxdebug_if(s_debug_appending, boost::format("appending: new timecode_adjustment for append_mode == FILE_BASED or subtitle track: %1% for %2%\n") % format_timestamp(timecode_adjustment) % ptzr.packetizer->m_ti.m_id);
     // The actual connection.
     ptzr.packetizer->connect(old_packetizer, timecode_adjustment);
 
   } else {
-    mxdebug_if(s_debug_appending, boost::format("appending: new timecode_adjustment for append_mode == TRACK_BASED and NON subtitle track: %1% for %2%\n") % format_timecode(timecode_adjustment) % ptzr.packetizer->m_ti.m_id);
+    mxdebug_if(s_debug_appending, boost::format("appending: new timecode_adjustment for append_mode == TRACK_BASED and NON subtitle track: %1% for %2%\n") % format_timestamp(timecode_adjustment) % ptzr.packetizer->m_ti.m_id);
     // The actual connection.
     ptzr.packetizer->connect(old_packetizer);
   }

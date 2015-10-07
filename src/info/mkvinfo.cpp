@@ -481,7 +481,7 @@ handle_info(EbmlStream *&es,
       show_element(l2, 2,
                    boost::format(Y("Duration: %|1$.3f|s (%2%)"))
                    % (duration.GetValue() * s_tc_scale / 1000000000.0)
-                   % format_timecode(static_cast<uint64_t>(duration.GetValue()) * s_tc_scale, 3));
+                   % format_timestamp(static_cast<uint64_t>(duration.GetValue()) * s_tc_scale, 3));
 
     } else if (Is<KaxMuxingApp>(l2))
       show_element(l2, 2, boost::format(Y("Muxing application: %1%")) % static_cast<KaxMuxingApp *>(l2)->GetValueUTF8());
@@ -1031,7 +1031,7 @@ handle_cues(EbmlStream *&es,
               show_element(l4, 4, boost::format(Y("Cue relative position: %1%")) % static_cast<KaxCueRelativePosition *>(l4)->GetValue());
 
             else if (Is<KaxCueDuration>(l4))
-              show_element(l4, 4, boost::format(Y("Cue duration: %1%"))         % format_timecode(static_cast<KaxCueDuration *>(l4)->GetValue() * s_tc_scale));
+              show_element(l4, 4, boost::format(Y("Cue duration: %1%"))         % format_timestamp(static_cast<KaxCueDuration *>(l4)->GetValue() * s_tc_scale));
 
             else if (Is<KaxCueBlockNumber>(l4))
               show_element(l4, 4, boost::format(Y("Cue block number: %1%"))     % static_cast<KaxCueBlockNumber *>(l4)->GetValue());
@@ -1154,7 +1154,7 @@ handle_block_group(EbmlStream *&es,
                    % block.TrackNum()
                    % block.NumberFrames()
                    % (static_cast<double>(lf_timecode) / 1000000000.0)
-                   % format_timecode(lf_timecode, 3));
+                   % format_timestamp(lf_timecode, 3));
 
       for (size_t i = 0; i < block.NumberFrames(); ++i) {
         auto &data = block.GetBuffer(i);
@@ -1278,7 +1278,7 @@ handle_block_group(EbmlStream *&es,
                % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
                % std::llround(lf_timecode / 1000000.0)
-               % format_timecode(lf_timecode, 3)
+               % format_timestamp(lf_timecode, 3)
                % bduration
                % frame_sizes[fidx]
                % frame_adlers[fidx]
@@ -1289,7 +1289,7 @@ handle_block_group(EbmlStream *&es,
                % (num_references >= 2 ? 'B' : num_references == 1 ? 'P' : 'I')
                % lf_tnum
                % std::llround(lf_timecode / 1000000.0)
-               % format_timecode(lf_timecode, 3)
+               % format_timestamp(lf_timecode, 3)
                % frame_sizes[fidx]
                % frame_adlers[fidx]
                % frame_hexdumps[fidx]
@@ -1350,7 +1350,7 @@ handle_simple_block(EbmlStream *&es,
                % block.TrackNum()
                % block.NumberFrames()
                % (timecode_ns / 1000000000.0)
-               % format_timecode(timecode_ns, 3));
+               % format_timestamp(timecode_ns, 3));
 
   int i;
   for (i = 0; i < (int)block.NumberFrames(); i++) {
@@ -1386,7 +1386,7 @@ handle_simple_block(EbmlStream *&es,
              % (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P')
              % block.TrackNum()
              % timecode_ms
-             % format_timecode(timecode_ns, 3)
+             % format_timestamp(timecode_ns, 3)
              % frame_sizes[fidx]
              % frame_adlers[fidx]
              % position);
@@ -1464,7 +1464,7 @@ handle_elements_rec(EbmlStream *es,
 
   } else if (dynamic_cast<EbmlUInteger *>(e)) {
     if (brng::find(s_output_as_timecode, elt_name) != s_output_as_timecode.end())
-      show_element(e, level, s_bf_handle_elements_rec % elt_name % format_timecode(static_cast<EbmlUInteger *>(e)->GetValue()));
+      show_element(e, level, s_bf_handle_elements_rec % elt_name % format_timestamp(static_cast<EbmlUInteger *>(e)->GetValue()));
     else
       show_element(e, level, s_bf_handle_elements_rec % elt_name % static_cast<EbmlUInteger *>(e)->GetValue());
 

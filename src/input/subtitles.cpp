@@ -594,7 +594,7 @@ spu_extract_duration(unsigned char *data,
     next_off = get_uint16_be(data + start_off + 2);
     if (next_off < start_off) {
       mxwarn(boost::format(Y("spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. "
-                             "This packet might be displayed incorrectly or not at all.\n")) % format_timecode(timecode, 3));
+                             "This packet might be displayed incorrectly or not at all.\n")) % format_timestamp(timecode, 3));
       return -1;
     }
     mxverb(4, boost::format("spu_extraction_duration: date = %1%\n") % date);

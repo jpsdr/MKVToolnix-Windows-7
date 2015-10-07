@@ -924,8 +924,8 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
 
     mxdebug_if(m_debug_timecodes && packet.has_pts(),
                boost::format("Timecode for track %1%: %2% [%3%] (DTS: %4%)\n")
-               % id % format_timecode(packet.pts()) % (packet.pts() * 90 / 1000000ll)
-               % (packet.has_dts() ? (boost::format("%1% [%2%]") % format_timecode(packet.dts()) % (packet.dts() * 90 / 1000000ll)).str() : std::string{"none"}));
+               % id % format_timestamp(packet.pts()) % (packet.pts() * 90 / 1000000ll)
+               % (packet.has_dts() ? (boost::format("%1% [%2%]") % format_timestamp(packet.dts()) % (packet.dts() * 90 / 1000000ll)).str() : std::string{"none"}));
 
     if (mtx::includes(blacklisted_ids, id.idx()))
       return;

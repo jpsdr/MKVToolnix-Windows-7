@@ -22,45 +22,31 @@
 #include "common/strings/editing.h"
 #include "common/timestamp.h"
 
-#define FMT_TIMECODE "%02d:%02d:%02d.%03d"
-#define ARG_TIMECODEINT(t) (int32_t)( (t) / 60 /   60 / 1000),         \
-                           (int32_t)(((t) / 60        / 1000) %   60), \
-                           (int32_t)(((t)             / 1000) %   60), \
-                           (int32_t)( (t)                     % 1000)
-#define ARG_TIMECODE(t)    ARG_TIMECODEINT((int64_t)(t))
-#define ARG_TIMECODE_NS(t) ARG_TIMECODE((t) / 1000000)
-#define FMT_TIMECODEN "%02d:%02d:%02d.%09d"
-#define ARG_TIMECODENINT(t) (int32_t)( (t) / 60 / 60 / 1000000000),               \
-                            (int32_t)(((t) / 60      / 1000000000) %         60), \
-                            (int32_t)(((t)           / 1000000000) %         60), \
-                            (int32_t)( (t)                         % 1000000000)
-#define ARG_TIMECODEN(t) ARG_TIMECODENINT((int64_t)(t))
-
 #define WRAP_AT_TERMINAL_WIDTH -1
 
-std::string format_timecode(int64_t timecode, unsigned int precision = 9);
-std::string format_timecode(int64_t timecode, std::string const &format);
+std::string format_timestamp(int64_t timestamp, unsigned int precision = 9);
+std::string format_timestamp(int64_t timestamp, std::string const &format);
 
 template<typename T>
 std::string
-format_timecode(basic_timestamp_c<T> const &timecode,
+format_timestamp(basic_timestamp_c<T> const &timestamp,
                 unsigned int precision = 9) {
-  return format_timecode(timecode.to_ns(), precision);
+  return format_timestamp(timestamp.to_ns(), precision);
 }
 
 template<typename T>
 std::string
-format_timecode(basic_timestamp_c<T> const &timecode,
+format_timestamp(basic_timestamp_c<T> const &timestamp,
                 std::string const &format) {
-  return format_timecode(timecode.to_ns(), format);
+  return format_timestamp(timestamp.to_ns(), format);
 }
 
 template<typename T>
 std::ostream &
 operator <<(std::ostream &out,
-            basic_timestamp_c<T> const &timecode) {
-  if (timecode.valid())
-    out << format_timecode(timecode);
+            basic_timestamp_c<T> const &timestamp) {
+  if (timestamp.valid())
+    out << format_timestamp(timestamp);
   else
     out << "<InvTC>";
   return out;
@@ -95,7 +81,7 @@ std::string to_string(int64_t numerator, int64_t denominator, unsigned int preci
 template<typename T>
 std::string
 to_string(basic_timestamp_c<T> const &timecode) {
-  return format_timecode(timecode.to_ns());
+  return format_timestamp(timecode.to_ns());
 }
 
 

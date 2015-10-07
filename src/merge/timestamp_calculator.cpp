@@ -33,11 +33,11 @@ timestamp_calculator_c::add_timecode(timestamp_c const &timecode) {
 
   if (   (!m_last_timecode_returned.valid() || (timecode > m_last_timecode_returned))
       && (m_available_timecodes.empty()     || (timecode > m_available_timecodes.back()))) {
-    mxdebug_if(m_debug, boost::format("timestamp_calculator::add_timecode: adding %1%\n") % format_timecode(timecode));
+    mxdebug_if(m_debug, boost::format("timestamp_calculator::add_timecode: adding %1%\n") % format_timestamp(timecode));
     m_available_timecodes.push_back(timecode);
 
   } else
-    mxdebug_if(m_debug, boost::format("timestamp_calculator::add_timecode: dropping %1%\n") % format_timecode(timecode));
+    mxdebug_if(m_debug, boost::format("timestamp_calculator::add_timecode: dropping %1%\n") % format_timestamp(timecode));
 }
 
 void
@@ -61,7 +61,7 @@ timestamp_calculator_c::get_next_timecode(int64_t samples_in_frame) {
 
     m_available_timecodes.pop_front();
 
-    mxdebug_if(m_debug, boost::format("timestamp_calculator_c::get_next_timecode: returning available %1%\n") % format_timecode(m_last_timecode_returned));
+    mxdebug_if(m_debug, boost::format("timestamp_calculator_c::get_next_timecode: returning available %1%\n") % format_timestamp(m_last_timecode_returned));
 
     return m_last_timecode_returned;
   }
@@ -72,7 +72,7 @@ timestamp_calculator_c::get_next_timecode(int64_t samples_in_frame) {
   m_last_timecode_returned           = m_reference_timecode + timestamp_c::ns(m_samples_to_timestamp * m_samples_since_reference_timecode);
   m_samples_since_reference_timecode += samples_in_frame;
 
-  mxdebug_if(m_debug, boost::format("timestamp_calculator_c::get_next_timecode: returning calculated %1%\n") % format_timecode(m_last_timecode_returned));
+  mxdebug_if(m_debug, boost::format("timestamp_calculator_c::get_next_timecode: returning calculated %1%\n") % format_timestamp(m_last_timecode_returned));
 
   return m_last_timecode_returned;
 }

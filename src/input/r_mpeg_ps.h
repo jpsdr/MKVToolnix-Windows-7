@@ -96,8 +96,8 @@ operator <<(std::ostream &out,
             mpeg_ps_packet_c const &p) {
   out << (boost::format("[ID %1% PTS %2% DTS %3% length %4% full_length %5% valid? %6% read? %7%]")
           % p.m_id
-          % (p.has_pts() ? format_timecode(p.pts()) : std::string{"none"})
-          % (p.has_dts() ? format_timecode(p.dts()) : std::string{"none"})
+          % (p.has_pts() ? format_timestamp(p.pts()) : std::string{"none"})
+          % (p.has_dts() ? format_timestamp(p.dts()) : std::string{"none"})
           % p.m_length % p.m_full_length % p.m_valid
           % (p.has_been_read() ? "yes, fully" : p.m_buffer ? "only partially" : "no"));
 

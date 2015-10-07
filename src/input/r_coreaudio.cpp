@@ -328,7 +328,7 @@ coreaudio_reader_c::parse_pakt_chunk() {
       mxdebug_if(m_debug_packets,
                  boost::format("  %4%) position %1% size %2% raw duration %3% raw timecode %6% duration %7% timecode %8% position in 'pakt' %5%\n")
                  % packet.m_position % packet.m_size % packet.m_duration % packet_num % mem.getFilePointer() % packet.m_timecode
-                 % format_timecode(packet.m_duration * m_frames_to_timecode) % format_timecode(packet.m_timecode * m_frames_to_timecode));
+                 % format_timestamp(packet.m_duration * m_frames_to_timecode) % format_timestamp(packet.m_timecode * m_frames_to_timecode));
     }
 
     mxdebug_if(m_debug_headers, boost::format("Final value for 'position': %1% data chunk end: %2%\n") % position % (data_chunk->m_position + 12 + data_chunk->m_size));

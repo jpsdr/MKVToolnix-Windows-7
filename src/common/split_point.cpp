@@ -20,7 +20,7 @@ std::string
 split_point_c::str()
   const {
   return (boost::format("<%1% %2% once:%3% discard:%4% create_file:%5%>")
-          % format_timecode(m_point)
+          % format_timestamp(m_point)
           % (  duration          == m_type ? "duration"
              : size              == m_type ? "size"
              : timecode          == m_type ? "timecode"

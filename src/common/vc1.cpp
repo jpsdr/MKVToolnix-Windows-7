@@ -434,7 +434,7 @@ vc1::es_parser_c::handle_frame_packet(memory_cptr packet) {
   if (!m_timecodes.empty())
     mxverb(2,
            boost::format("vc1::es_parser_c::handle_frame_packet: next provided timecode %1% next calculated timecode %2%\n")
-           % format_timecode(m_timecodes.front()) % format_timecode(peek_next_calculated_timecode()));
+           % format_timestamp(m_timecodes.front()) % format_timestamp(peek_next_calculated_timecode()));
 
 }
 
@@ -553,7 +553,7 @@ vc1::es_parser_c::get_next_timecode() {
   if (is_timecode_available()) {
     mxverb(3,
            boost::format("\nvc1::es_parser_c::get_next_timecode(): provided timecode available; original next %1%, provided %2%\n")
-           % format_timecode(next_timecode) % format_timecode(m_timecodes.front()));
+           % format_timestamp(next_timecode) % format_timestamp(m_timecodes.front()));
 
     next_timecode         = m_timecodes.front();
     m_previous_timecode   = m_timecodes.front();

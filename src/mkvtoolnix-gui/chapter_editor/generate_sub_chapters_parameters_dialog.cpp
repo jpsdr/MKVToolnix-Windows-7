@@ -41,7 +41,7 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->setupUi(this);
 
   m_ui->sbFirstChapterNumber->setValue(firstChapterNumber);
-  m_ui->leStartTimecode->setText(Q(format_timecode(startTimecode)));
+  m_ui->leStartTimecode->setText(Q(format_timestamp(startTimecode)));
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
   m_ui->cbLanguage->setup().setCurrentByData(cfg.m_defaultChapterLanguage);

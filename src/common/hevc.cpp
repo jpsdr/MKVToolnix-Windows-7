@@ -2353,9 +2353,9 @@ es_parser_c::dump_info()
     mxinfo(boost::format("size %1% key %2% start %3% end %4% ref1 %5% adler32 0x%|6$08x|\n")
            % frame.m_data->get_size()
            % frame.m_keyframe
-           % format_timecode(frame.m_start)
-           % format_timecode(frame.m_end)
-           % format_timecode(frame.m_ref1)
+           % format_timestamp(frame.m_start)
+           % format_timestamp(frame.m_end)
+           % format_timestamp(frame.m_ref1)
            % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data));
   }
 }

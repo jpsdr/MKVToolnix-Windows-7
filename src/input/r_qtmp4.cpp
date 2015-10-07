@@ -984,7 +984,7 @@ qtmp4_reader_c::process_chapter_entries(int level,
   for (; entries.size() > i; ++i) {
     qtmp4_chapter_entry_t &chapter = entries[i];
 
-    mxdebug_if(m_debug_chapters, boost::format("%1%%2%: start %4% name %3%\n") % space((level + 1) * 2 + 1) % i % chapter.m_name % format_timecode(chapter.m_timecode));
+    mxdebug_if(m_debug_chapters, boost::format("%1%%2%: start %4% name %3%\n") % space((level + 1) * 2 + 1) % i % chapter.m_name % format_timestamp(chapter.m_timecode));
 
     out.puts(boost::format("CHAPTER%|1$02d|=%|2$02d|:%|3$02d|:%|4$02d|.%|5$03d|\n"
                            "CHAPTER%|1$02d|NAME=%6%\n")
@@ -2150,7 +2150,7 @@ qtmp4_demuxer_c::update_editlist_table() {
 
     mxdebug_if(m_debug_editlists,
                boost::format("Track ID %1%: Simple edit list type detected. Offset in %5%'s time scale: %2%; as a timecode: %3%; time scale %4%\n")
-               % id % raw_offset % format_timecode(constant_editlist_offset_ns) % (offset_in_global_time_scale ? global_time_scale : time_scale) % (offset_in_global_time_scale ? "file" : "track"));
+               % id % raw_offset % format_timestamp(constant_editlist_offset_ns) % (offset_in_global_time_scale ? global_time_scale : time_scale) % (offset_in_global_time_scale ? "file" : "track"));
 
     return;
   }

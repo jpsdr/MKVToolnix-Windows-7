@@ -184,7 +184,7 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   std::vector<std::string> fields = split(s, ",", 9);
   if (9 < fields.size()) {
     mxwarn(boost::format(Y("Invalid format for a SSA line ('%1%') at timecode %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"))
-           % s % format_timecode(f.timecode * 1000000, 3) % fields.size());
+           % s % format_timestamp(f.timecode * 1000000, 3) % fields.size());
     return;
   }
 
@@ -195,7 +195,7 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   int num;
   if (!parse_number(fields[0], num)) {
     mxwarn(boost::format(Y("Invalid format for a SSA line ('%1%') at timecode %2%: The first field is not an integer. This entry will be skipped.\n"))
-           % s % format_timecode(f.timecode * 1000000, 3));
+           % s % format_timestamp(f.timecode * 1000000, 3));
     return;
   }
 
@@ -373,13 +373,13 @@ xtr_usf_c::finish_track() {
     std::stringstream text_in(text);
     pugi::xml_document subtitle_doc;
     if (!subtitle_doc.load(text_in, pugi::parse_default | pugi::parse_declaration | pugi::parse_doctype | pugi::parse_pi | pugi::parse_comments)) {
-      mxwarn(boost::format(Y("Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n")) % m_tid % format_timecode(entry.m_start * 1000000, 3));
+      mxwarn(boost::format(Y("Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n")) % m_tid % format_timestamp(entry.m_start * 1000000, 3));
       continue;
     }
 
     auto subtitle = subtitles.append_child("subtitle");
-    subtitle.append_attribute("start").set_value(format_timecode(entry.m_start * 1000000, 3).c_str());
-    subtitle.append_attribute("stop"). set_value(format_timecode(entry.m_end   * 1000000, 3).c_str());
+    subtitle.append_attribute("start").set_value(format_timestamp(entry.m_start * 1000000, 3).c_str());
+    subtitle.append_attribute("stop"). set_value(format_timestamp(entry.m_end   * 1000000, 3).c_str());
 
     for (auto child : subtitle_doc.document_element())
       subtitle.append_copy(child);

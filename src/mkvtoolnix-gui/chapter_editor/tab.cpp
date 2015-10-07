@@ -734,8 +734,8 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
   auto segmentEditionUid = FindChild<KaxChapterSegmentEditionUID>(*chapter);
 
   ui->lChapter->setText(m_chapterModel->chapterDisplayName(*chapter));
-  ui->leChStart->setText(Q(format_timecode(FindChildValue<KaxChapterTimeStart>(*chapter))));
-  ui->leChEnd->setText(end ? Q(format_timecode(end->GetValue())) : Q(""));
+  ui->leChStart->setText(Q(format_timestamp(FindChildValue<KaxChapterTimeStart>(*chapter))));
+  ui->leChEnd->setText(end ? Q(format_timestamp(end->GetValue())) : Q(""));
   ui->cbChFlagEnabled->setChecked(!!FindChildValue<KaxChapterFlagEnabled>(*chapter, 1));
   ui->cbChFlagHidden->setChecked(!!FindChildValue<KaxChapterFlagHidden>(*chapter));
   ui->leChUid->setText(uid ? QString::number(uid) : Q(""));
@@ -1236,7 +1236,7 @@ Tab::formatChapterName(QString const &nameTemplate,
       break;
 
     auto format = matches.capturedLength(1) ? matches.captured(1) : Q("%H:%M:%S");
-    name.replace(matches.capturedStart(), matches.capturedLength(), Q(format_timecode(startTimecode, to_utf8(format))));
+    name.replace(matches.capturedStart(), matches.capturedLength(), Q(format_timestamp(startTimecode, to_utf8(format))));
   }
 
   return name;
@@ -1365,9 +1365,9 @@ Tab::renumberSubChapters() {
       firstName = name;
 
     if (end)
-      chapterTitles << Q("%1 (%2 – %3)").arg(name).arg(Q(format_timecode(start))).arg(Q(format_timecode(end->GetValue())));
+      chapterTitles << Q("%1 (%2 – %3)").arg(name).arg(Q(format_timestamp(start))).arg(Q(format_timestamp(end->GetValue())));
     else
-      chapterTitles << Q("%1 (%2)").arg(name).arg(Q(format_timecode(start)));
+      chapterTitles << Q("%1 (%2)").arg(name).arg(Q(format_timestamp(start)));
   }
 
   auto matches     = QRegularExpression{Q("(\\d+)$")}.match(firstName);

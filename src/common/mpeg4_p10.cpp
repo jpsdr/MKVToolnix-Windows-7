@@ -1686,7 +1686,7 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
   // mxinfo(boost::format("frame order calculation\n"));
 
   for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
-    // mxinfo(boost::format("  type %4% decode order %1% presentation order %2% timestamp %3%\n") % frame_itr->m_decode_order % frame_itr->m_presentation_order % format_timecode(frame_itr->m_start) % frame_itr->m_type);
+    // mxinfo(boost::format("  type %4% decode order %1% presentation order %2% timestamp %3%\n") % frame_itr->m_decode_order % frame_itr->m_presentation_order % format_timestamp(frame_itr->m_start) % frame_itr->m_type);
 
     if (!frame_itr->is_i_frame() && (frames_begin != frame_itr))
       frame_itr->m_ref1 = m_previous_frame_start_in_display_order - frame_itr->m_start;
@@ -1787,9 +1787,9 @@ mpeg4::p10::avc_es_parser_c::dump_info()
     mxinfo(boost::format("size %1% key %2% start %3% end %4% ref1 %5% adler32 0x%|6$08x|\n")
            % frame.m_data->get_size()
            % frame.m_keyframe
-           % format_timecode(frame.m_start)
-           % format_timecode(frame.m_end)
-           % format_timecode(frame.m_ref1)
+           % format_timestamp(frame.m_start)
+           % format_timestamp(frame.m_end)
+           % format_timestamp(frame.m_ref1)
            % mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data));
   }
 }

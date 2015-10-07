@@ -65,7 +65,7 @@ public:
   static void format_string(pugi::xml_node &node, EbmlElement &e);
   static void format_ustring(pugi::xml_node &node, EbmlElement &e);
   static void format_binary(pugi::xml_node &node, EbmlElement &e);
-  static void format_timecode(pugi::xml_node &node, EbmlElement &e);
+  static void format_timestamp(pugi::xml_node &node, EbmlElement &e);
 
   static void parse_uint(parser_context_t &ctx);
   static void parse_int(parser_context_t &ctx);

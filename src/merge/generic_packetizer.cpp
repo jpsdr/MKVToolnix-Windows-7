@@ -887,7 +887,7 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
     } else
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format("generic_packetizer_c::add_packet2: timecode < last_timecode (%1% < %2%). %3%\n")
-                 % format_timecode(pack->timecode) % format_timecode(m_safety_last_timecode) % BUGMSG);
+                 % format_timestamp(pack->timecode) % format_timestamp(m_safety_last_timecode) % BUGMSG);
   }
 
   m_safety_last_timecode        = pack->timecode;
@@ -1060,7 +1060,7 @@ generic_packetizer_c::force_duration_on_last_packet() {
   packet_cptr &packet        = m_packet_queue.back();
   packet->duration_mandatory = true;
   mxverb_tid(3, m_ti.m_fname, m_ti.m_id,
-             boost::format("force_duration_on_last_packet: forcing at %1% with %|2$.3f|ms\n") % format_timecode(packet->timecode) % (packet->duration / 1000.0));
+             boost::format("force_duration_on_last_packet: forcing at %1% with %|2$.3f|ms\n") % format_timestamp(packet->timecode) % (packet->duration / 1000.0));
 }
 
 int64_t

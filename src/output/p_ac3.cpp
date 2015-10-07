@@ -77,7 +77,7 @@ ac3_packetizer_c::get_frame() {
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format("%1% %2%\n")
                  % (boost::format(NY("This audio track contains %1% byte of invalid data which was skipped before timecode %2%.",
-                                     "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.", bytes)) % bytes % format_timecode(packet->assigned_timecode - timecode_offset))
+                                     "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.", bytes)) % bytes % format_timestamp(packet->assigned_timecode - timecode_offset))
                  % Y("The audio/video synchronization may have been lost."));
     }));
   }
@@ -106,7 +106,7 @@ ac3_packetizer_c::set_headers() {
 int
 ac3_packetizer_c::process(packet_cptr packet) {
   // if (packet->has_timecode())
-  //   mxinfo(boost::format("tc %1% %2% %3% %4%\n") % format_timecode(packet->timecode) % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
+  //   mxinfo(boost::format("tc %1% %2% %3% %4%\n") % format_timestamp(packet->timecode) % to_hex(packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 16))
   //          % mtx::checksum::calculate_as_uint(mtx::checksum::adler32, packet->data->get_buffer(), std::min<size_t>(packet->data->get_size(), 512)) % packet->data->get_size());
 
   m_timestamp_calculator.add_timecode(packet);

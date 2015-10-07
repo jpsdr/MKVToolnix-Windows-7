@@ -68,7 +68,7 @@ mp3_packetizer_c::handle_garbage(int64_t bytes) {
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
                  boost::format("%1% %2%\n")
                  % (boost::format(NY("This audio track contains %1% byte of invalid data which was skipped before timecode %2%.",
-                                     "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.", bytes)) % bytes % format_timecode(packet->assigned_timecode - timecode_offset))
+                                     "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%.", bytes)) % bytes % format_timestamp(packet->assigned_timecode - timecode_offset))
                  % Y("The audio/video synchronization may have been lost."));
     }));
 }

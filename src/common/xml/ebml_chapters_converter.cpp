@@ -34,8 +34,8 @@ ebml_chapters_converter_c::~ebml_chapters_converter_c() {
 
 void
 ebml_chapters_converter_c::setup_maps() {
-  m_formatter_map["ChapterTimeStart"]  = format_timecode;
-  m_formatter_map["ChapterTimeEnd"]    = format_timecode;
+  m_formatter_map["ChapterTimeStart"]  = format_timestamp;
+  m_formatter_map["ChapterTimeEnd"]    = format_timestamp;
 
   m_parser_map["ChapterTimeStart"]     = parse_timecode;
   m_parser_map["ChapterTimeEnd"]       = parse_timecode;
@@ -62,7 +62,7 @@ ebml_chapters_converter_c::fix_xml(document_cptr &doc)
   const {
   auto result = doc->select_nodes("//ChapterAtom[not(ChapterTimeStart)]");
   for (auto &atom : result)
-    atom.node().append_child("ChapterTimeStart").append_child(pugi::node_pcdata).set_value(::format_timecode(0).c_str());
+    atom.node().append_child("ChapterTimeStart").append_child(pugi::node_pcdata).set_value(::format_timestamp(0).c_str());
 
   result = doc->select_nodes("//ChapterDisplay[not(ChapterString)]");
   for (auto &atom : result)
