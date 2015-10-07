@@ -340,7 +340,7 @@ Tab::areWidgetsEnabled()
 }
 
 ChaptersPtr
-Tab::timecodesToChapters(std::vector<timecode_c> const &timecodes)
+Tab::timecodesToChapters(std::vector<timestamp_c> const &timecodes)
   const {
   auto &cfg     = Util::Settings::get();
   auto chapters = ChaptersPtr{ static_cast<KaxChapters *>(mtx::construct::cons<KaxChapters>(mtx::construct::cons<KaxEditionEntry>())) };
@@ -962,7 +962,7 @@ Tab::createEmptyChapter(int64_t startTime,
   auto &cfg     = Util::Settings::get();
   auto chapter  = std::make_shared<KaxChapterAtom>();
   auto &display = GetChild<KaxChapterDisplay>(*chapter);
-  auto name     = formatChapterName(nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate, chapterNumber, timecode_c::ns(startTime));
+  auto name     = formatChapterName(nameTemplate ? *nameTemplate : cfg.m_chapterNameTemplate, chapterNumber, timestamp_c::ns(startTime));
 
   GetChild<KaxChapterUID>(*chapter).SetValue(0);
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTime);
@@ -1213,7 +1213,7 @@ Tab::duplicateElement() {
 QString
 Tab::formatChapterName(QString const &nameTemplate,
                        int chapterNumber,
-                       timecode_c const &startTimecode)
+                       timestamp_c const &startTimecode)
   const {
   auto name       = QString{ nameTemplate };
   auto numberRe   = QRegularExpression{Q("<NUM(?::(\\d+))?>")};
@@ -1312,7 +1312,7 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
   }
 
   auto startTimecode = FindChildValue<KaxChapterTimeStart>(*chapter);
-  auto name          = to_wide(formatChapterName(nameTemplate, chapterNumber, timecode_c::ns(startTimecode)));
+  auto name          = to_wide(formatChapterName(nameTemplate, chapterNumber, timestamp_c::ns(startTimecode)));
 
   if (RenumberSubChaptersParametersDialog::NameMatch::First == nameMatchingMode) {
     GetChild<KaxChapterString>(GetChild<KaxChapterDisplay>(*chapter)).SetValue(name);

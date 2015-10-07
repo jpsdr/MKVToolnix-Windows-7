@@ -45,7 +45,7 @@ public:
     return *m_mpls_parser;
   }
 
-  std::vector<timecode_c> const &get_chapters() const;
+  std::vector<timestamp_c> const &get_chapters() const;
   virtual void create_verbose_identification_info(mtx::id::info_c &info);
 
   static mm_io_cptr open_multi(std::string const &display_file_name);

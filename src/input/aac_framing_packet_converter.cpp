@@ -25,7 +25,7 @@ aac_framing_packet_converter_c::aac_framing_packet_converter_c(generic_packetize
 bool
 aac_framing_packet_converter_c::convert(packet_cptr const &packet) {
   if (packet->has_timecode()) {
-    m_parser.add_timecode(timecode_c::ns(packet->timecode));
+    m_parser.add_timecode(timestamp_c::ns(packet->timecode));
   }
 
   m_parser.add_bytes(packet->data);

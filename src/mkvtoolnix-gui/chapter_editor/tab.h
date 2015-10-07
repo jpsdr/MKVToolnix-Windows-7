@@ -7,7 +7,7 @@
 #include <QModelIndex>
 
 #include "common/qt_kax_analyzer.h"
-#include "common/timecode.h"
+#include "common/timestamp.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
 #include "mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/types.h"
@@ -164,8 +164,8 @@ protected:
   void chaptersLoaded(ChaptersPtr const &chapters, bool canBeWritten);
 
   QString currentState() const;
-  ChaptersPtr timecodesToChapters(std::vector<timecode_c> const &timecodes) const;
-  QString formatChapterName(QString const &nameTemplate, int chapterNumber, timecode_c const &startTimecode) const;
+  ChaptersPtr timecodesToChapters(std::vector<timestamp_c> const &timecodes) const;
+  QString formatChapterName(QString const &nameTemplate, int chapterNumber, timestamp_c const &startTimecode) const;
   bool changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace,
                          bool skipHidden);
 

@@ -20,7 +20,7 @@
 
 #include "common/bit_cursor.h"
 #include "common/byte_buffer.h"
-#include "common/timecode.h"
+#include "common/timestamp.h"
 
 #define AAC_ID_MPEG4 0
 #define AAC_ID_MPEG2 1
@@ -122,7 +122,7 @@ public:
   header_c m_header;
   uint64_t m_stream_position;
   size_t m_garbage_size;
-  timecode_c m_timecode;
+  timestamp_c m_timecode;
   memory_cptr m_data;
 
 public:
@@ -150,7 +150,7 @@ protected:
 
 protected:
   std::deque<frame_c> m_frames;
-  std::deque<timecode_c> m_provided_timecodes;
+  std::deque<timestamp_c> m_provided_timecodes;
   byte_buffer_c m_buffer;
   unsigned char const *m_fixed_buffer;
   size_t m_fixed_buffer_size;
@@ -164,7 +164,7 @@ protected:
 
 public:
   parser_c();
-  void add_timecode(timecode_c const &timecode);
+  void add_timecode(timestamp_c const &timecode);
 
   void add_bytes(memory_cptr const &mem);
   void add_bytes(unsigned char const *buffer, size_t size);

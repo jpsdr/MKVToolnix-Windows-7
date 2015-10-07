@@ -357,7 +357,7 @@ xtr_oggopus_c::xtr_oggopus_c(const std::string &codec_id,
                              int64_t tid,
                              track_spec_t &tspec)
   : xtr_oggbase_c{codec_id, tid, tspec}
-  , m_position{timecode_c::ns(0)}
+  , m_position{timestamp_c::ns(0)}
 {
   m_debug = debugging_c::requested("opus|opus_extrator");
 }

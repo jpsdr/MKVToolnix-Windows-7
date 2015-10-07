@@ -411,7 +411,7 @@ generic_packetizer_c::set_track_enabled_flag(bool enabled_track) {
 }
 
 void
-generic_packetizer_c::set_track_seek_pre_roll(timecode_c const &seek_pre_roll) {
+generic_packetizer_c::set_track_seek_pre_roll(timestamp_c const &seek_pre_roll) {
   m_seek_pre_roll = seek_pre_roll;
   if (m_track_entry)
     GetChild<KaxSeekPreRoll>(m_track_entry).SetValue(seek_pre_roll.to_ns());
@@ -420,7 +420,7 @@ generic_packetizer_c::set_track_seek_pre_roll(timecode_c const &seek_pre_roll) {
 }
 
 void
-generic_packetizer_c::set_codec_delay(timecode_c const &codec_delay) {
+generic_packetizer_c::set_codec_delay(timestamp_c const &codec_delay) {
   m_codec_delay = codec_delay;
   if (m_track_entry)
     GetChild<KaxCodecDelay>(m_track_entry).SetValue(codec_delay.to_ns());
@@ -916,7 +916,7 @@ generic_packetizer_c::get_packet() {
   packet_cptr pack = m_packet_queue.front();
   m_packet_queue.pop_front();
 
-  pack->output_order_timecode = timecode_c::ns(pack->assigned_timecode - std::max(m_codec_delay.to_ns(0), m_seek_pre_roll.to_ns(0)));
+  pack->output_order_timecode = timestamp_c::ns(pack->assigned_timecode - std::max(m_codec_delay.to_ns(0), m_seek_pre_roll.to_ns(0)));
 
   m_enqueued_bytes -= pack->data->get_size();
 

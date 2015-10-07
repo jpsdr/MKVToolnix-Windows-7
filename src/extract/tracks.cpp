@@ -183,10 +183,10 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
       this_duration = duration / block->NumberFrames();
     }
 
-    auto discard_padding  = timecode_c::ns(0);
+    auto discard_padding  = timestamp_c::ns(0);
     auto kdiscard_padding = FindChild<KaxDiscardPadding>(blockgroup);
     if (kdiscard_padding)
-      discard_padding = timecode_c::ns(kdiscard_padding->GetValue());
+      discard_padding = timestamp_c::ns(kdiscard_padding->GetValue());
 
     auto &data = block->GetBuffer(i);
     auto frame = std::make_shared<memory_c>(data.Buffer(), data.Size(), false);
@@ -235,7 +235,7 @@ handle_simpleblock(KaxSimpleBlock &simpleblock,
 
     auto &data = simpleblock.GetBuffer(i);
     auto frame = std::make_shared<memory_c>(data.Buffer(), data.Size(), false);
-    auto f     = xtr_frame_t{frame, nullptr, this_timecode, this_duration, -1, -1, simpleblock.IsKeyframe(), simpleblock.IsDiscardable(), false, timecode_c::ns(0)};
+    auto f     = xtr_frame_t{frame, nullptr, this_timecode, this_duration, -1, -1, simpleblock.IsKeyframe(), simpleblock.IsDiscardable(), false, timestamp_c::ns(0)};
     extractor->decode_and_handle_frame(f);
 
     max_timecode = std::max(max_timecode, this_timecode);

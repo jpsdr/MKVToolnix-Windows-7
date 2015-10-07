@@ -399,7 +399,7 @@ parser_c::parser_c()
 }
 
 void
-parser_c::add_timecode(timecode_c const &timecode) {
+parser_c::add_timecode(timestamp_c const &timecode) {
   m_provided_timecodes.push_back(timecode);
 }
 

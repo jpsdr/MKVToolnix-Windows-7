@@ -19,7 +19,7 @@
 #include <deque>
 
 #include "common/option_with_source.h"
-#include "common/timecode.h"
+#include "common/timestamp.h"
 #include "common/translation.h"
 #include "merge/file_status.h"
 #include "merge/packet.h"
@@ -63,7 +63,7 @@ protected:
   bool m_default_track_warning_printed;
   uint64_t m_huid;
   int m_htrack_max_add_block_ids;
-  timecode_c m_seek_pre_roll, m_codec_delay;
+  timestamp_c m_seek_pre_roll, m_codec_delay;
 
   std::string m_hcodec_id;
   memory_cptr m_hcodec_private;
@@ -172,11 +172,11 @@ public:
     return m_htrack_type;
   }
 
-  virtual timecode_c const &get_track_seek_pre_roll() const {
+  virtual timestamp_c const &get_track_seek_pre_roll() const {
     return m_seek_pre_roll;
   }
 
-  virtual timecode_c const &get_codec_delay() const {
+  virtual timestamp_c const &get_codec_delay() const {
     return m_codec_delay;
   }
 
@@ -192,8 +192,8 @@ public:
   virtual int64_t get_track_default_duration() const;
   virtual void set_track_forced_flag(bool forced_track);
   virtual void set_track_enabled_flag(bool enabled_track);
-  virtual void set_track_seek_pre_roll(timecode_c const &seek_pre_roll);
-  virtual void set_codec_delay(timecode_c const &codec_delay);
+  virtual void set_track_seek_pre_roll(timestamp_c const &seek_pre_roll);
+  virtual void set_codec_delay(timestamp_c const &codec_delay);
 
   virtual void set_audio_sampling_freq(float freq);
   virtual float get_audio_sampling_freq() const {

@@ -19,7 +19,7 @@
 #include <matroska/KaxTracks.h>
 
 #include "common/content_decoder.h"
-#include "common/timecode.h"
+#include "common/timestamp.h"
 #include "extract/mkvextract.h"
 
 using namespace libmatroska;
@@ -29,7 +29,7 @@ struct xtr_frame_t {
   KaxBlockAdditions *additions;
   int64_t timecode, duration, bref, fref;
   bool keyframe, discardable, references_valid;
-  timecode_c discard_duration;
+  timestamp_c discard_duration;
 };
 
 class xtr_base_c {

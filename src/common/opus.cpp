@@ -40,16 +40,16 @@ id_header_t::decode(memory_cptr const &mem) {
 
 toc_t
 toc_t::decode(memory_cptr const &mem) {
-  static std::vector<timecode_c> s_frame_durations{
-      timecode_c::ms(10),   timecode_c::ms(20), timecode_c::ms(40), timecode_c::ms(60)
-    , timecode_c::ms(10),   timecode_c::ms(20), timecode_c::ms(40), timecode_c::ms(60)
-    , timecode_c::ms(10),   timecode_c::ms(20), timecode_c::ms(40), timecode_c::ms(60)
-    , timecode_c::ms(10),   timecode_c::ms(20)
-    , timecode_c::ms(10),   timecode_c::ms(20)
-    , timecode_c::us(2500), timecode_c::ms(5), timecode_c::ms(10), timecode_c::ms(20)
-    , timecode_c::us(2500), timecode_c::ms(5), timecode_c::ms(10), timecode_c::ms(20)
-    , timecode_c::us(2500), timecode_c::ms(5), timecode_c::ms(10), timecode_c::ms(20)
-    , timecode_c::us(2500), timecode_c::ms(5), timecode_c::ms(10), timecode_c::ms(20)
+  static std::vector<timestamp_c> s_frame_durations{
+      timestamp_c::ms(10),   timestamp_c::ms(20), timestamp_c::ms(40), timestamp_c::ms(60)
+    , timestamp_c::ms(10),   timestamp_c::ms(20), timestamp_c::ms(40), timestamp_c::ms(60)
+    , timestamp_c::ms(10),   timestamp_c::ms(20), timestamp_c::ms(40), timestamp_c::ms(60)
+    , timestamp_c::ms(10),   timestamp_c::ms(20)
+    , timestamp_c::ms(10),   timestamp_c::ms(20)
+    , timestamp_c::us(2500), timestamp_c::ms(5), timestamp_c::ms(10), timestamp_c::ms(20)
+    , timestamp_c::us(2500), timestamp_c::ms(5), timestamp_c::ms(10), timestamp_c::ms(20)
+    , timestamp_c::us(2500), timestamp_c::ms(5), timestamp_c::ms(10), timestamp_c::ms(20)
+    , timestamp_c::us(2500), timestamp_c::ms(5), timestamp_c::ms(10), timestamp_c::ms(20)
   };
 
   if (!mem || !mem->get_size())
@@ -75,7 +75,7 @@ toc_t::decode(memory_cptr const &mem) {
     toc.frame_count = buf[1] & 0x3f;
 
   toc.frame_duration  = s_frame_durations[toc.config];
-  toc.packet_duration = s_frame_durations[toc.config] * timecode_c::factor(toc.frame_count);
+  toc.packet_duration = s_frame_durations[toc.config] * timestamp_c::factor(toc.frame_count);
 
   return toc;
 }

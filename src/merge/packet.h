@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/timecode.h"
+#include "common/timestamp.h"
 
 namespace libmatroska {
   class KaxBlock;
@@ -59,7 +59,7 @@ struct packet_t {
   int64_t timecode, bref, fref, duration, assigned_timecode;
   int64_t timecode_before_factory;
   int64_t unmodified_assigned_timecode, unmodified_duration;
-  timecode_c discard_padding, output_order_timecode;
+  timestamp_c discard_padding, output_order_timecode;
   bool duration_mandatory, superseeded, gap_following, factory_applied;
   generic_packetizer_c *source;
 

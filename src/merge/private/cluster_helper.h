@@ -42,7 +42,7 @@ public:
   int64_t previous_cluster_tc, num_cue_elements, header_overhead;
   int64_t timecode_offset;
   int64_t bytes_in_file, first_timecode_in_file, first_timecode_in_part, first_discarded_timecode, last_discarded_timecode_and_duration, discarded_duration, previous_discarded_duration;
-  timecode_c min_timecode_in_file;
+  timestamp_c min_timecode_in_file;
   int64_t max_timecode_in_file, min_timecode_in_cluster, max_timecode_in_cluster, frame_field_number;
   bool first_video_keyframe_seen;
   mm_io_c *out;

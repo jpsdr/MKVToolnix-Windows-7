@@ -23,7 +23,7 @@ mm_mpls_multi_file_io_c::mm_mpls_multi_file_io_c(std::vector<bfs::path> const &f
 mm_mpls_multi_file_io_c::~mm_mpls_multi_file_io_c() {
 }
 
-std::vector<timecode_c> const &
+std::vector<timestamp_c> const &
 mm_mpls_multi_file_io_c::get_chapters()
   const {
   return m_mpls_parser->get_chapters();

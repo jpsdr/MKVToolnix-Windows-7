@@ -16,7 +16,7 @@
 #define MTX_COMMON_DTS_H
 
 #include "common/codec.h"
-#include "common/timecode.h"
+#include "common/timestamp.h"
 
 class bit_reader_c;
 
@@ -227,7 +227,7 @@ struct header_t {
 
 public:
   uint64_t get_packet_length_in_core_samples() const;
-  timecode_c get_packet_length_in_nanoseconds() const;
+  timestamp_c get_packet_length_in_nanoseconds() const;
 
   unsigned int get_total_num_audio_channels() const;
   codec_c::specialization_e get_codec_specialization() const;

@@ -1098,9 +1098,9 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     auto kax_codec_delay    = FindChild<KaxCodecDelay>(ktentry);
 
     if (kax_seek_pre_roll)
-      track->seek_pre_roll = timecode_c::ns(kax_seek_pre_roll->GetValue());
+      track->seek_pre_roll = timestamp_c::ns(kax_seek_pre_roll->GetValue());
     if (kax_codec_delay)
-      track->codec_delay   = timecode_c::ns(kax_codec_delay->GetValue());
+      track->codec_delay   = timestamp_c::ns(kax_codec_delay->GetValue());
 
     if (track->codec_id.empty())
       mxerror(Y("matroska_reader: The CodecID is missing.\n"));
@@ -2092,7 +2092,7 @@ kax_reader_c::process_block_group_common(KaxBlockGroup *block_group,
     packet->codec_state = memory_c::clone(codec_state->GetBuffer(), codec_state->GetSize());
 
   if (discard_padding)
-    packet->discard_padding = timecode_c::ns(discard_padding->GetValue());
+    packet->discard_padding = timestamp_c::ns(discard_padding->GetValue());
 }
 
 void

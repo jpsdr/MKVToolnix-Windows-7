@@ -24,7 +24,7 @@ opus_packetizer_c::opus_packetizer_c(generic_reader_c *reader,
                                      track_info_c &ti)
   : generic_packetizer_c(reader, ti)
   , m_debug{"opus|opus_packetizer"}
-  , m_next_calculated_timecode{timecode_c::ns(0)}
+  , m_next_calculated_timecode{timestamp_c::ns(0)}
   , m_id_header(mtx::opus::id_header_t::decode(ti.m_private_data))
 {
   mxdebug_if(m_debug, boost::format("ID header: %1%\n") % m_id_header);
@@ -40,8 +40,8 @@ void
 opus_packetizer_c::set_headers() {
   set_codec_id((boost::format("%1%") % MKV_A_OPUS).str());
 
-  set_codec_delay(timecode_c::samples(m_id_header.pre_skip, 48000));
-  set_track_seek_pre_roll(timecode_c::ms(80));
+  set_codec_delay(timestamp_c::samples(m_id_header.pre_skip, 48000));
+  set_track_seek_pre_roll(timestamp_c::ms(80));
 
   set_audio_sampling_freq(m_id_header.input_sample_rate);
   set_audio_channels(m_id_header.channels);
@@ -55,13 +55,13 @@ opus_packetizer_c::process(packet_cptr packet) {
     auto toc = mtx::opus::toc_t::decode(packet->data);
     mxdebug_if(m_debug, boost::format("TOC: %1%\n") % toc);
 
-    if (!packet->has_timecode() || (timecode_c::ns(packet->timecode) == m_previous_provided_timecode))
+    if (!packet->has_timecode() || (timestamp_c::ns(packet->timecode) == m_previous_provided_timecode))
       packet->timecode             = m_next_calculated_timecode.to_ns();
     else
-      m_previous_provided_timecode = timecode_c::ns(packet->timecode);
+      m_previous_provided_timecode = timestamp_c::ns(packet->timecode);
 
     packet->duration               = toc.packet_duration.to_ns();
-    m_next_calculated_timecode     = timecode_c::ns(packet->timecode + packet->duration);
+    m_next_calculated_timecode     = timestamp_c::ns(packet->timecode + packet->duration);
 
     add_packet(packet);
 

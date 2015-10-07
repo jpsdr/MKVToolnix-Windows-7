@@ -20,7 +20,7 @@
 
 #include "common/bit_cursor.h"
 #include "common/fourcc.h"
-#include "common/timecode.h"
+#include "common/timestamp.h"
 
 #define MPLS_FILE_MAGIC   fourcc_c("MPLS")
 #define MPLS_FILE_MAGIC2A fourcc_c("0100")
@@ -65,7 +65,7 @@ struct stn_t {
 struct play_item_t {
   std::string clip_id, codec_id;
   unsigned int connection_condition, stc_id;
-  timecode_c in_time, out_time, relative_in_time;
+  timestamp_c in_time, out_time, relative_in_time;
   bool is_multi_angle;
   stn_t stn;
 
@@ -75,7 +75,7 @@ struct play_item_t {
 struct playlist_t {
   unsigned int list_count, sub_count;
   std::vector<play_item_t> items;
-  timecode_c duration;
+  timestamp_c duration;
 
   void dump() const;
 };
@@ -87,7 +87,7 @@ protected:
 
   header_t m_header;
   playlist_t m_playlist;
-  std::vector<timecode_c> m_chapters;
+  std::vector<timestamp_c> m_chapters;
 
   bit_reader_cptr m_bc;
 
@@ -106,7 +106,7 @@ public:
     return m_playlist;
   }
 
-  std::vector<timecode_c> const &get_chapters() const {
+  std::vector<timestamp_c> const &get_chapters() const {
     return m_chapters;
   }
 

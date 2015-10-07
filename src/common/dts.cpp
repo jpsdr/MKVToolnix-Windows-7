@@ -330,22 +330,22 @@ header_t::get_packet_length_in_core_samples()
   return duration.to_samples(core_sampling_frequency);
 }
 
-timecode_c
+timestamp_c
 header_t::get_packet_length_in_nanoseconds()
   const {
   if (has_core) {
     // computes the length (in time, not size) of the packet in "samples".
     auto samples = get_packet_length_in_core_samples();
 
-    return timecode_c::samples(samples, core_sampling_frequency);
+    return timestamp_c::samples(samples, core_sampling_frequency);
   }
 
   static const unsigned int s_reference_clock_periods[3] = { 32000, 44100, 48000 };
 
   if (reference_clock_code < 3)
-    return timecode_c::samples(substream_frame_duration, s_reference_clock_periods[reference_clock_code]);
+    return timestamp_c::samples(substream_frame_duration, s_reference_clock_periods[reference_clock_code]);
 
-  return timecode_c{};
+  return timestamp_c{};
 }
 
 unsigned int

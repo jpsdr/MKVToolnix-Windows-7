@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/strings/formatting.h"
-#include "common/timecode.h"
+#include "common/timestamp.h"
 
 namespace mtx { namespace opus {
 
@@ -60,7 +60,7 @@ struct id_header_t {
 struct toc_t {
   unsigned int config, frame_count;
   bool stereo;
-  timecode_c frame_duration, packet_duration;
+  timestamp_c frame_duration, packet_duration;
 
   static toc_t decode(memory_cptr const &mem);
 };

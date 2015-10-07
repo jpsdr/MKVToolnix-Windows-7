@@ -24,7 +24,7 @@ private:
   static bool ms_experimental_warning_shown;
 
   debugging_option_c m_debug;
-  timecode_c m_next_calculated_timecode, m_previous_provided_timecode;
+  timestamp_c m_next_calculated_timecode, m_previous_provided_timecode;
   mtx::opus::id_header_t m_id_header;
 
 public:

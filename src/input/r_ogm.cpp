@@ -121,7 +121,7 @@ public:
 
 class ogm_a_opus_demuxer_c: public ogm_demuxer_c {
 protected:
-  timecode_c m_calculated_end_timecode;
+  timestamp_c m_calculated_end_timecode;
 
   static debugging_option_c ms_debug;
 
@@ -1165,7 +1165,7 @@ ogm_a_vorbis_demuxer_c::process_page(int64_t /* granulepos */) {
 
 ogm_a_opus_demuxer_c::ogm_a_opus_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
-  , m_calculated_end_timecode{timecode_c::ns(0)}
+  , m_calculated_end_timecode{timestamp_c::ns(0)}
 {
   codec              = codec_c::look_up(codec_c::type_e::A_OPUS);
   num_header_packets = 2;
@@ -1185,7 +1185,7 @@ void
 ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
   ogg_packet op;
 
-  auto ogg_timecode = timecode_c::ns(granulepos * 1000000000 / 48000);
+  auto ogg_timecode = timestamp_c::ns(granulepos * 1000000000 / 48000);
 
   while (ogg_stream_packetout(&os, &op) == 1) {
     eos |= op.e_o_s;

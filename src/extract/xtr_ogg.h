@@ -116,7 +116,7 @@ protected:
 
 class xtr_oggopus_c: public xtr_oggbase_c {
 private:
-  timecode_c m_position;
+  timestamp_c m_position;
 
 public:
   xtr_oggopus_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);

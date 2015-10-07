@@ -21,9 +21,9 @@
 
 namespace mtx { namespace mpls {
 
-static timecode_c
+static timestamp_c
 mpls_time_to_timecode(uint64_t value) {
-  return timecode_c::ns(value * 1000000ull / 45);
+  return timestamp_c::ns(value * 1000000ull / 45);
 }
 
 void
@@ -174,7 +174,7 @@ parser_c::parse_header() {
 
 void
 parser_c::parse_playlist() {
-  m_playlist.duration = timecode_c::ns(0);
+  m_playlist.duration = timestamp_c::ns(0);
 
   m_bc->set_bit_position(m_header.playlist_pos * 8);
   m_bc->skip_bits(32 + 16);     // playlist length, reserved bytes
@@ -343,7 +343,7 @@ parser_c::parse_chapters() {
   if (   !hack_engaged(ENGAGE_KEEP_LAST_CHAPTER_IN_MPLS)
       && m_drop_last_entry_if_at_end
       && (0 < num_chapters)
-      && (timecode_c::s(5) >= (m_playlist.duration - m_chapters.back())))
+      && (timestamp_c::s(5) >= (m_playlist.duration - m_chapters.back())))
     m_chapters.pop_back();
 }
 

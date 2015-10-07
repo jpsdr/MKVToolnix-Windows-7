@@ -502,7 +502,7 @@ cluster_helper_c::render() {
     if (-1 == m->first_timecode_in_part)
       m->first_timecode_in_part = pack->assigned_timecode;
 
-    m->min_timecode_in_file      = std::min(timecode_c::ns(pack->assigned_timecode),        m->min_timecode_in_file.value_or_max());
+    m->min_timecode_in_file      = std::min(timestamp_c::ns(pack->assigned_timecode),        m->min_timecode_in_file.value_or_max());
     m->max_timecode_in_file      = std::max(pack->assigned_timecode,                        m->max_timecode_in_file);
     m->max_timecode_and_duration = std::max(pack->assigned_timecode + pack->get_duration(), m->max_timecode_and_duration);
 

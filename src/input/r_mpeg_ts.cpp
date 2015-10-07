@@ -65,9 +65,9 @@ mpeg_ts_track_c::process(packet_cptr const &packet) {
 
 void
 mpeg_ts_track_c::send_to_packetizer() {
-  auto timecode_to_use = !m_timecode.valid()                                             ? timecode_c{}
-                       : reader.m_dont_use_audio_pts && (ES_AUDIO_TYPE == type)          ? timecode_c{}
-                       : m_apply_dts_timecode_fix && (m_previous_timecode == m_timecode) ? timecode_c{}
+  auto timecode_to_use = !m_timecode.valid()                                             ? timestamp_c{}
+                       : reader.m_dont_use_audio_pts && (ES_AUDIO_TYPE == type)          ? timestamp_c{}
+                       : m_apply_dts_timecode_fix && (m_previous_timecode == m_timecode) ? timestamp_c{}
                        :                                                                   std::max(m_timecode, reader.m_global_timecode_offset);
 
   auto timecode_to_check = timecode_to_use.valid() ? timecode_to_use : reader.m_stream_timecode;
@@ -81,7 +81,7 @@ mpeg_ts_track_c::send_to_packetizer() {
 
   if (timecode_to_use.valid()) {
     reader.m_stream_timecode  = timecode_to_use;
-    timecode_to_use          -= std::max(reader.m_global_timecode_offset, min.valid() ? min : timecode_c::ns(0));
+    timecode_to_use          -= std::max(reader.m_global_timecode_offset, min.valid() ? min : timestamp_c::ns(0));
   }
 
   mxdebug_if(m_debug_delivery, boost::format("mpeg_ts_track_c::send_to_packetizer: PID %1% expected %2% actual %3% timecode_to_use %4% m_previous_timecode %5%\n")
@@ -399,8 +399,8 @@ mpeg_ts_track_c::set_pid(uint16_t new_pid) {
 }
 
 bool
-mpeg_ts_track_c::detect_timecode_wrap(timecode_c &timecode) {
-  static auto const s_wrap_limit = timecode_c::mpeg(1 << 30);
+mpeg_ts_track_c::detect_timecode_wrap(timestamp_c &timecode) {
+  static auto const s_wrap_limit = timestamp_c::mpeg(1 << 30);
 
   if (!timecode.valid() || !m_previous_valid_timecode.valid() || ((timecode - m_previous_valid_timecode).abs() < s_wrap_limit))
     return false;
@@ -408,9 +408,9 @@ mpeg_ts_track_c::detect_timecode_wrap(timecode_c &timecode) {
 }
 
 void
-mpeg_ts_track_c::adjust_timecode_for_wrap(timecode_c &timecode) {
-  static auto const s_wrap_limit = timecode_c::mpeg(1ll << 30);
-  static auto const s_bad_limit  = timecode_c::m(5);
+mpeg_ts_track_c::adjust_timecode_for_wrap(timestamp_c &timecode) {
+  static auto const s_wrap_limit = timestamp_c::mpeg(1ll << 30);
+  static auto const s_bad_limit  = timestamp_c::m(5);
 
   if (!timecode.valid())
     return;
@@ -423,15 +423,15 @@ mpeg_ts_track_c::adjust_timecode_for_wrap(timecode_c &timecode) {
   // between the entries.
   if (   ((timecode < m_previous_valid_timecode) || (ES_SUBT_TYPE != type))
       && ((timecode - m_previous_valid_timecode).abs() >= s_bad_limit))
-    timecode = timecode_c{};
+    timecode = timestamp_c{};
 }
 
 void
-mpeg_ts_track_c::handle_timecode_wrap(timecode_c &pts,
-                                      timecode_c &dts) {
-  static auto const s_wrap_add    = timecode_c::mpeg(1ll << 33);
-  static auto const s_wrap_limit  = timecode_c::mpeg(1ll << 30);
-  static auto const s_reset_limit = timecode_c::h(1);
+mpeg_ts_track_c::handle_timecode_wrap(timestamp_c &pts,
+                                      timestamp_c &dts) {
+  static auto const s_wrap_add    = timestamp_c::mpeg(1ll << 33);
+  static auto const s_wrap_limit  = timestamp_c::mpeg(1ll << 30);
+  static auto const s_reset_limit = timestamp_c::h(1);
 
   if (!m_timecodes_wrapped) {
     m_timecodes_wrapped = detect_timecode_wrap(pts) || detect_timecode_wrap(dts);
@@ -641,7 +641,7 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
   , PMT_pid(-1)
   , es_to_process{}
   , m_global_timecode_offset{}
-  , m_stream_timecode{timecode_c::ns(0)}
+  , m_stream_timecode{timestamp_c::ns(0)}
   , m_probing{true}
   , track_buffer_ready(-1)
   , file_done{}
@@ -1143,13 +1143,13 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
   return 0;
 }
 
-timecode_c
+timestamp_c
 mpeg_ts_reader_c::read_timecode(unsigned char *p) {
   int64_t mpeg_timecode  =  static_cast<int64_t>(             ( p[0]   >> 1) & 0x07) << 30;
   mpeg_timecode         |= (static_cast<int64_t>(get_uint16_be(&p[1])) >> 1)         << 15;
   mpeg_timecode         |=  static_cast<int64_t>(get_uint16_be(&p[3]))               >>  1;
 
-  return std::move(timecode_c::mpeg(mpeg_timecode));
+  return std::move(timestamp_c::mpeg(mpeg_timecode));
 }
 
 bool
@@ -1372,7 +1372,7 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
 
     ts_payload_size = ((unsigned char *)ts_packet_header + TS_PACKET_SIZE) - (unsigned char *) ts_payload;
 
-    timecode_c pts, dts;
+    timestamp_c pts, dts;
     if ((pes_data->get_pts_dts_flags() & 0x02) == 0x02) { // 10 and 11 mean PTS is present
       pts = read_timecode(&pes_data->pts_dts);
       dts = pts;

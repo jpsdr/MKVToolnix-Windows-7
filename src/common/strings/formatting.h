@@ -20,7 +20,7 @@
 #include <sstream>
 
 #include "common/strings/editing.h"
-#include "common/timecode.h"
+#include "common/timestamp.h"
 
 #define FMT_TIMECODE "%02d:%02d:%02d.%03d"
 #define ARG_TIMECODEINT(t) (int32_t)( (t) / 60 /   60 / 1000),         \
@@ -43,14 +43,14 @@ std::string format_timecode(int64_t timecode, std::string const &format);
 
 template<typename T>
 std::string
-format_timecode(basic_timecode_c<T> const &timecode,
+format_timecode(basic_timestamp_c<T> const &timecode,
                 unsigned int precision = 9) {
   return format_timecode(timecode.to_ns(), precision);
 }
 
 template<typename T>
 std::string
-format_timecode(basic_timecode_c<T> const &timecode,
+format_timecode(basic_timestamp_c<T> const &timecode,
                 std::string const &format) {
   return format_timecode(timecode.to_ns(), format);
 }
@@ -58,7 +58,7 @@ format_timecode(basic_timecode_c<T> const &timecode,
 template<typename T>
 std::ostream &
 operator <<(std::ostream &out,
-            basic_timecode_c<T> const &timecode) {
+            basic_timestamp_c<T> const &timecode) {
   if (timecode.valid())
     out << format_timecode(timecode);
   else
@@ -94,7 +94,7 @@ std::string to_string(int64_t numerator, int64_t denominator, unsigned int preci
 
 template<typename T>
 std::string
-to_string(basic_timecode_c<T> const &timecode) {
+to_string(basic_timestamp_c<T> const &timecode) {
   return format_timecode(timecode.to_ns());
 }
 
