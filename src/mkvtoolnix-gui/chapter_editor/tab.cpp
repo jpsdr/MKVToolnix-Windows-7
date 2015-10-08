@@ -486,7 +486,7 @@ Tab::saveAsXmlImpl(bool requireNewFileName) {
   saveAsImpl(requireNewFileName, [this](bool doRequireNewFileName, QString &newFileName) -> bool {
     if (doRequireNewFileName) {
       auto defaultFilePath = !m_fileName.isEmpty() ? QFileInfo{m_fileName}.path() : Util::Settings::get().m_lastOpenDir.path();
-      newFileName          = QFileDialog::getSaveFileName(this, QY("Save chapters as XML"), defaultFilePath, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"));
+      newFileName          = QFileDialog::getSaveFileName(this, QY("Save chapters as XML"), defaultFilePath, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"), nullptr, QFileDialog::DontUseCustomDirectoryIcons);
 
       if (newFileName.isEmpty())
         return false;
@@ -523,7 +523,8 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
 
     if (doRequireNewFileName) {
       auto defaultFilePath = !m_fileName.isEmpty() ? QFileInfo{m_fileName}.path() : Util::Settings::get().m_lastOpenDir.path();
-      newFileName          = QFileDialog::getOpenFileName(this, QY("Save chapters to Matroska file"), defaultFilePath, QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d);;") + QY("All files") + Q(" (*)"));
+      newFileName          = QFileDialog::getOpenFileName(this, QY("Save chapters to Matroska file"), defaultFilePath, QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d);;") + QY("All files") + Q(" (*)"),
+                                                          nullptr, QFileDialog::DontUseCustomDirectoryIcons);
 
       if (newFileName.isEmpty())
         return false;

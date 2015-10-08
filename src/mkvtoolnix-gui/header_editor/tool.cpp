@@ -140,7 +140,8 @@ Tool::openFile(QString const &fileName) {
 void
 Tool::selectFileToOpen() {
   auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in header editor"), Util::Settings::get().m_lastOpenDir.path(),
-                                                QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
+                                                 QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"),
+                                                 nullptr, QFileDialog::DontUseCustomDirectoryIcons);
   if (fileNames.isEmpty())
     return;
 

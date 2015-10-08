@@ -286,7 +286,7 @@ void
 Tab::onSaveOutput() {
   auto &cfg = Util::Settings::get();
 
-  auto fileName = QFileDialog::getSaveFileName(this, QY("Save job output"), cfg.m_lastOpenDir.path(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"));
+  auto fileName = QFileDialog::getSaveFileName(this, QY("Save job output"), cfg.m_lastOpenDir.path(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"), nullptr, QFileDialog::DontUseCustomDirectoryIcons);
   if (fileName.isEmpty())
     return;
 

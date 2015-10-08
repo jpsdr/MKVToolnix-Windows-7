@@ -171,7 +171,8 @@ Tool::selectFileToOpen() {
                                                  QY("Blu-ray playlist files")         + Q(" (*.mpls);;") +
                                                  QY("XML chapter files")              + Q(" (*.xml);;") +
                                                  QY("Simple OGM-style chapter files") + Q(" (*.txt);;") +
-                                                 QY("All files")                      + Q(" (*)"));
+                                                 QY("All files")                      + Q(" (*)"),
+                                                 nullptr, QFileDialog::DontUseCustomDirectoryIcons);
   if (fileNames.isEmpty())
     return;
 

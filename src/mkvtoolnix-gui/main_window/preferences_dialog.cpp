@@ -481,7 +481,7 @@ PreferencesDialog::enableOutputFileNameControls() {
 
 void
 PreferencesDialog::browseFixedOutputDirectory() {
-  auto dir = QFileDialog::getExistingDirectory(this, QY("Select output directory"), ui->leMAutoSetFixedDirectory->text());
+  auto dir = QFileDialog::getExistingDirectory(this, QY("Select output directory"), ui->leMAutoSetFixedDirectory->text(), QFileDialog::ShowDirsOnly | QFileDialog::DontUseCustomDirectoryIcons);
   if (!dir.isEmpty())
     ui->leMAutoSetFixedDirectory->setText(dir);
 }

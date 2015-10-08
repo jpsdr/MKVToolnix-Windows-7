@@ -62,7 +62,7 @@ ExecutableLocationDialog::browse() {
 #endif
   filters << QY("All files") + Q(" (*)");
 
-  auto fileName = QFileDialog::getOpenFileName(this, QY("Select executable"), m_ui->leExecutable->text(), filters.join(Q(";;")));
+  auto fileName = QFileDialog::getOpenFileName(this, QY("Select executable"), m_ui->leExecutable->text(), filters.join(Q(";;")), nullptr, QFileDialog::DontUseCustomDirectoryIcons);
   if (!fileName.isEmpty())
     m_ui->leExecutable->setText(fileName);
 }

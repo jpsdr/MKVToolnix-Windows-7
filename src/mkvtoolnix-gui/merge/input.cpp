@@ -1023,7 +1023,7 @@ Tab::selectFilesToAdd(QString const &title) {
   dlg.setFileMode(QFileDialog::ExistingFiles);
   dlg.setDirectory(Util::Settings::get().m_lastOpenDir);
   dlg.setWindowTitle(title);
-  dlg.setOptions(QFileDialog::HideNameFilterDetails);
+  dlg.setOptions(QFileDialog::HideNameFilterDetails | QFileDialog::DontUseCustomDirectoryIcons);
 
   if (!dlg.exec())
     return QStringList{};

@@ -144,6 +144,7 @@ Tab::selectAttachmentsToAdd() {
   QFileDialog dlg{this};
   dlg.setNameFilter(QY("All files") + Q(" (*)"));
   dlg.setFileMode(QFileDialog::ExistingFiles);
+  dlg.setOptions(QFileDialog::DontUseCustomDirectoryIcons);
   dlg.setDirectory(Util::Settings::get().m_lastOpenDir);
   dlg.setWindowTitle(QY("Add attachments"));
 
