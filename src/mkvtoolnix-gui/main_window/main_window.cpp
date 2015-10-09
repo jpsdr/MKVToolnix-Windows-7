@@ -196,11 +196,11 @@ MainWindow::setupHelpURLs() {
 void
 MainWindow::showAndEnableMenu(QMenu &menu,
                               bool show) {
-  auto &action = *menu.menuAction();
-  action.setVisible(show);
-  action.setEnabled(show);
-  for (auto const &action : menu.actions())
-    action->setEnabled(show);
+
+  if (show)
+    ui->menuBar->insertMenu(ui->menuHelp->menuAction(), &menu);
+  else
+    ui->menuBar->removeAction(menu.menuAction());
 }
 
 void
