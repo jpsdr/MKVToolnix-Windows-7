@@ -32,6 +32,7 @@ class TabPrivate {
   std::unique_ptr<Ui::Tab> ui;
   QStringList m_fullOutput;
   uint64_t m_id, m_currentJobProgress, m_queueProgress;
+  QHash<Jobs::Job::LineType, bool> m_currentJobLineTypeSeen;
   Jobs::Job::Status m_currentJobStatus;
   QDateTime m_currentJobStartTime;
   QString m_currentJobDescription;
@@ -285,11 +286,22 @@ Tab::onLineRead(QString const &line,
                 : Jobs::Job::WarningLine == type ? Q("%1 ").arg(QY("Warning:"))
                 :                                  Q("%1 ").arg(QY("Error:"));
 
+  if (mtx::included_in(type, Jobs::Job::WarningLine, Jobs::Job::ErrorLine)) {
+    d->ui->acknowledgeWarningsAndErrorsButton->setEnabled(true);
+
+    if (isCurrentJobTab() && Util::Settings::get().m_showOutputOfAllJobs && !d->m_currentJobLineTypeSeen[type]) {
+      d->m_currentJobLineTypeSeen[type] = true;
+      auto dateStarted                  = Util::displayableDate(d->m_currentJobStartTime);
+      auto separator                    = Jobs::Job::WarningLine == type ? QY("--- Warnings emitted by job '%1' started on %2 ---").arg(d->m_currentJobDescription).arg(dateStarted)
+                                        :                                  QY("--- Errors emitted by job '%1' started on %2 ---"  ).arg(d->m_currentJobDescription).arg(dateStarted);
+
+      storage->appendPlainText(separator);
+    }
+  }
+
   d->m_fullOutput << Q("%1%2").arg(prefix).arg(line);
   storage->appendPlainText(line);
 
-  if (mtx::included_in(type, Jobs::Job::WarningLine, Jobs::Job::ErrorLine))
-    d->ui->acknowledgeWarningsAndErrorsButton->setEnabled(true);
 }
 
 void
@@ -303,9 +315,7 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
     auto outputOfJobLine = QY("--- Output of job '%1' started on %2 ---").arg(d->m_currentJobDescription).arg(dateStarted);
     d->m_fullOutput << outputOfJobLine << job.fullOutput();
 
-    d->ui->output  ->appendPlainText(outputOfJobLine);
-    d->ui->warnings->appendPlainText(QY("--- Warnings emitted by job '%1' started on %2 ---").arg(d->m_currentJobDescription).arg(dateStarted));
-    d->ui->errors  ->appendPlainText(QY("--- Errors emitted by job '%1' started on %2 ---").arg(d->m_currentJobDescription).arg(dateStarted));
+    d->ui->output->appendPlainText(outputOfJobLine);
 
   } else {
     d->m_fullOutput = job.fullOutput();
@@ -314,6 +324,8 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
     d->ui->warnings->setPlainText(!job.warnings().isEmpty() ? Q("%1\n").arg(job.warnings().join("\n")) : Q(""));
     d->ui->errors  ->setPlainText(!job.errors().isEmpty()   ? Q("%1\n").arg(job.errors().join("\n"))   : Q(""));
   }
+
+  d->m_currentJobLineTypeSeen.clear();
 
   d->m_currentJobStatus    = job.status();
   d->m_currentJobProgress  = job.progress();
