@@ -2,6 +2,7 @@
 
 #include <QAction>
 #include <QMenu>
+#include <QTimer>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h"
@@ -11,23 +12,39 @@
 
 namespace mtx { namespace gui {
 
+class StatusBarProgressWidgetPrivate {
+  friend class StatusBarProgressWidget;
+
+  std::unique_ptr<Ui::StatusBarProgressWidget> ui;
+  int m_numPendingAuto{}, m_numPendingManual{}, m_numRunning{}, m_numWarnings{}, m_numErrors{}, m_timerStep{};
+  QTimer m_timer;
+  QList<QPixmap> m_pixmaps;
+
+  explicit StatusBarProgressWidgetPrivate()
+    : ui{new Ui::StatusBarProgressWidget}
+  {
+  }
+};
+
 StatusBarProgressWidget::StatusBarProgressWidget(QWidget *parent)
   : QWidget{parent}
-  , ui{new Ui::StatusBarProgressWidget}
+  , d_ptr{new StatusBarProgressWidgetPrivate{}}
 {
-  ui->setupUi(this);
+  Q_D(StatusBarProgressWidget);
 
-  m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-warning.png")};
-  m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-warning-grayscale.png")};
-  m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-error.png")};
-  m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-error-grayscale.png")};
+  d->ui->setupUi(this);
 
-  m_timer.setInterval(1000);
+  d->m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-warning.png")};
+  d->m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-warning-grayscale.png")};
+  d->m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-error.png")};
+  d->m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-error-grayscale.png")};
 
-  connect(&m_timer, &QTimer::timeout, this, &StatusBarProgressWidget::updateWarningsAndErrorsIcons);
+  d->m_timer.setInterval(1000);
 
-  connect(ui->warningsContainer, &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showContextMenu);
-  connect(ui->errorsContainer,   &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showContextMenu);
+  connect(&d->m_timer, &QTimer::timeout, this, &StatusBarProgressWidget::updateWarningsAndErrorsIcons);
+
+  connect(d->ui->warningsContainer, &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showContextMenu);
+  connect(d->ui->errorsContainer,   &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showContextMenu);
 }
 
 StatusBarProgressWidget::~StatusBarProgressWidget() {
@@ -41,8 +58,10 @@ StatusBarProgressWidget::reset() {
 void
 StatusBarProgressWidget::setProgress(int progress,
                                      int totalProgress) {
-  ui->progress->setValue(progress);
-  ui->totalProgress->setValue(totalProgress);
+  Q_D(StatusBarProgressWidget);
+
+  d->ui->progress->setValue(progress);
+  d->ui->totalProgress->setValue(totalProgress);
 }
 
 void
@@ -50,9 +69,11 @@ StatusBarProgressWidget::setJobStats(int numPendingAuto,
                                      int numPendingManual,
                                      int numRunning,
                                      int) {
-  m_numPendingAuto   = numPendingAuto;
-  m_numPendingManual = numPendingManual;
-  m_numRunning       = numRunning;
+  Q_D(StatusBarProgressWidget);
+
+  d->m_numPendingAuto   = numPendingAuto;
+  d->m_numPendingManual = numPendingManual;
+  d->m_numRunning       = numRunning;
 
   setLabelTexts();
 }
@@ -60,17 +81,19 @@ StatusBarProgressWidget::setJobStats(int numPendingAuto,
 void
 StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors(int numWarnings,
                                                               int numErrors) {
-  m_numWarnings = numWarnings;
-  m_numErrors   = numErrors;
+  Q_D(StatusBarProgressWidget);
 
-  auto isActive = m_timer.isActive();
+  d->m_numWarnings = numWarnings;
+  d->m_numErrors   = numErrors;
 
-  if (!isActive && (m_numWarnings || m_numErrors)) {
-    m_timerStep = 0;
-    m_timer.start();
+  auto isActive = d->m_timer.isActive();
 
-  } else if (isActive && !m_numWarnings && !m_numErrors) {
-    m_timer.stop();
+  if (!isActive && (d->m_numWarnings || d->m_numErrors)) {
+    d->m_timerStep = 0;
+    d->m_timer.start();
+
+  } else if (isActive && !d->m_numWarnings && !d->m_numErrors) {
+    d->m_timer.stop();
     updateWarningsAndErrorsIcons();
   }
 
@@ -79,31 +102,39 @@ StatusBarProgressWidget::setNumUnacknowledgedWarningsOrErrors(int numWarnings,
 
 void
 StatusBarProgressWidget::retranslateUi() {
-  ui->retranslateUi(this);
+  Q_D(StatusBarProgressWidget);
+
+  d->ui->retranslateUi(this);
 
   setLabelTexts();
 }
 
 void
 StatusBarProgressWidget::setLabelTexts() {
-  ui->numJobsLabel->setText(QY("%1 automatic, %2 manual, %3 running").arg(m_numPendingAuto).arg(m_numPendingManual).arg(m_numRunning));
-  ui->warningsLabel->setText(QNY("%1 warning", "%1 warnings", m_numWarnings).arg(m_numWarnings));
-  ui->errorsLabel  ->setText(QNY("%1 error",   "%1 errors",   m_numErrors)  .arg(m_numErrors));
+  Q_D(StatusBarProgressWidget);
+
+  d->ui->numJobsLabel->setText(QY("%1 automatic, %2 manual, %3 running").arg(d->m_numPendingAuto).arg(d->m_numPendingManual).arg(d->m_numRunning));
+  d->ui->warningsLabel->setText(QNY("%1 warning", "%1 warnings", d->m_numWarnings).arg(d->m_numWarnings));
+  d->ui->errorsLabel  ->setText(QNY("%1 error",   "%1 errors",   d->m_numErrors)  .arg(d->m_numErrors));
 }
 
 void
 StatusBarProgressWidget::updateWarningsAndErrorsIcons() {
-  auto warningOffset = !m_numWarnings || !(m_timerStep % 2) ? 1 : 0;
-  auto errorOffset   = !m_numErrors   || !(m_timerStep % 2) ? 1 : 0;
+  Q_D(StatusBarProgressWidget);
 
-  ui->warningsIconLabel->setPixmap(m_pixmaps[0 + warningOffset]);
-  ui->errorsIconLabel  ->setPixmap(m_pixmaps[2 + errorOffset]);
+  auto warningOffset = !d->m_numWarnings || !(d->m_timerStep % 2) ? 1 : 0;
+  auto errorOffset   = !d->m_numErrors   || !(d->m_timerStep % 2) ? 1 : 0;
 
-  ++m_timerStep;
+  d->ui->warningsIconLabel->setPixmap(d->m_pixmaps[0 + warningOffset]);
+  d->ui->errorsIconLabel  ->setPixmap(d->m_pixmaps[2 + errorOffset]);
+
+  ++d->m_timerStep;
 }
 
 void
 StatusBarProgressWidget::showContextMenu(QPoint const &pos) {
+  Q_D(StatusBarProgressWidget);
+
   QMenu menu{this};
 
   auto acknowledgeWarnings = new QAction{&menu};
@@ -112,8 +143,8 @@ StatusBarProgressWidget::showContextMenu(QPoint const &pos) {
   acknowledgeWarnings->setText(QY("Acknowledge all &warnings"));
   acknowledgeErrors->setText(QY("Acknowledge all &errors"));
 
-  acknowledgeWarnings->setEnabled(!!m_numWarnings);
-  acknowledgeErrors->setEnabled(!!m_numErrors);
+  acknowledgeWarnings->setEnabled(!!d->m_numWarnings);
+  acknowledgeErrors->setEnabled(!!d->m_numErrors);
 
   connect(acknowledgeWarnings, &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllWarnings);
   connect(acknowledgeErrors,   &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllErrors);

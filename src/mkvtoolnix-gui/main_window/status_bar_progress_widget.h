@@ -3,10 +3,7 @@
 
 #include "common/common_pch.h"
 
-#include <QTimer>
 #include <QWidget>
-
-class QTreeView;
 
 namespace mtx { namespace gui {
 
@@ -14,18 +11,18 @@ namespace Ui {
 class StatusBarProgressWidget;
 }
 
+class StatusBarProgressWidgetPrivate;
 class StatusBarProgressWidget : public QWidget {
   Q_OBJECT;
 
 protected:
-  std::unique_ptr<Ui::StatusBarProgressWidget> ui;
-  int m_numPendingAuto{}, m_numPendingManual{}, m_numRunning{}, m_numWarnings{}, m_numErrors{}, m_timerStep{};
-  QTimer m_timer;
-  QList<QPixmap> m_pixmaps;
+  Q_DECLARE_PRIVATE(StatusBarProgressWidget);
+
+  QScopedPointer<StatusBarProgressWidgetPrivate> const d_ptr;
 
 public:
   explicit StatusBarProgressWidget(QWidget *parent = nullptr);
-  ~StatusBarProgressWidget();
+  virtual ~StatusBarProgressWidget();
 
   void retranslateUi();
 
