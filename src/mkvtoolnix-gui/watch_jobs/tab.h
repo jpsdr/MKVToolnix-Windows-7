@@ -16,23 +16,16 @@ namespace Ui {
 class Tab;
 }
 
+class TabPrivate;
+
 class Tab : public QWidget {
   Q_OBJECT;
 
-protected:
-  // UI stuff:
-  std::unique_ptr<Ui::Tab> ui;
-  QStringList m_fullOutput;
-  uint64_t m_id, m_currentJobProgress, m_queueProgress;
-  Jobs::Job::Status m_currentJobStatus;
-  QDateTime m_currentJobStartTime;
-  QString m_currentJobDescription;
+private:
+  Q_DISABLE_COPY(Tab);
+  Q_DECLARE_PRIVATE(Tab);
 
-  // Only use this variable for determining whether or not to ignore
-  // certain signals.
-  QObject const *m_currentlyConnectedJob;
-
-  QAction *m_saveOutputAction, *m_clearOutputAction, *m_openFolderAction;
+  QScopedPointer<TabPrivate> const d_ptr;
 
 public:
   explicit Tab(QWidget *parent);
@@ -43,6 +36,8 @@ public:
   virtual void connectToJob(mtx::gui::Jobs::Job const &job);
   virtual void disconnectFromJob(mtx::gui::Jobs::Job const &job);
   virtual void setInitialDisplay(mtx::gui::Jobs::Job const &job);
+
+  virtual uint64_t queueProgress() const;
 
   uint64_t id() const;
 
@@ -73,7 +68,7 @@ public slots:
 protected:
   void setupUi();
 
-  void updateOneRemainingTimeLabel(QLabel *label, QDateTime const &startTime, uint64_t progress);
+  static void updateOneRemainingTimeLabel(QLabel *label, QDateTime const &startTime, uint64_t progress);
 };
 
 }}}
