@@ -282,6 +282,8 @@ Job::saveQueueFile() {
 
 void
 Job::saveJob(Util::ConfigFile &settings) {
+  auto resetCounters = Util::Settings::get().m_resetJobWarningErrorCountersOnExit;
+
   settings.setValue("uuid",                 m_uuid);
   settings.setValue("status",               static_cast<unsigned int>(m_status));
   settings.setValue("description",          m_description);
@@ -291,8 +293,8 @@ Job::saveJob(Util::ConfigFile &settings) {
   settings.setValue("fullOutput",           m_fullOutput);
   settings.setValue("progress",             m_progress);
   settings.setValue("exitCode",             m_exitCode);
-  settings.setValue("warningsAcknowledged", m_warningsAcknowledged);
-  settings.setValue("errorsAcknowledged",   m_errorsAcknowledged);
+  settings.setValue("warningsAcknowledged", resetCounters ? m_warnings.count() : m_warningsAcknowledged);
+  settings.setValue("errorsAcknowledged",   resetCounters ? m_errors.count()   : m_errorsAcknowledged);
   settings.setValue("dateAdded",            m_dateAdded);
   settings.setValue("dateStarted",          m_dateStarted);
   settings.setValue("dateFinished",         m_dateFinished);
@@ -325,6 +327,11 @@ Job::loadJobBasis(Util::ConfigFile &settings) {
 
   if (Running == m_status)
     m_status = Aborted;
+
+  if (Util::Settings::get().m_resetJobWarningErrorCountersOnExit) {
+    m_warningsAcknowledged = m_warnings.count();
+    m_errorsAcknowledged   = m_errors.count();
+  }
 }
 
 JobPtr

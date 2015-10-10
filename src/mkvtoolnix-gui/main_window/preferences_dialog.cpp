@@ -43,6 +43,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbGuiUseDefaultJobDescription->setChecked(m_cfg.m_useDefaultJobDescription);
   ui->cbGuiShowOutputOfAllJobs->setChecked(m_cfg.m_showOutputOfAllJobs);
   ui->cbGuiSwitchToJobOutputAfterStarting->setChecked(m_cfg.m_switchToJobOutputAfterStarting);
+  ui->cbGuiResetJobWarningErrorCountersOnExit->setChecked(m_cfg.m_resetJobWarningErrorCountersOnExit);
   setupJobRemovalPolicy();
 
   setupCommonLanguages();
@@ -120,6 +121,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled the GUI will let you enter a description for a job when adding it to the queue."));
   Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the »job output« tool will not be cleared when a new job starts."));
   Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting, QY("If enabled the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing »start muxing«)."));
+  Util::setToolTip(ui->cbGuiResetJobWarningErrorCountersOnExit, QY("If enabled the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
@@ -418,6 +420,7 @@ PreferencesDialog::save() {
   m_cfg.m_useDefaultJobDescription           = ui->cbGuiUseDefaultJobDescription->isChecked();
   m_cfg.m_showOutputOfAllJobs                = ui->cbGuiShowOutputOfAllJobs->isChecked();
   m_cfg.m_switchToJobOutputAfterStarting     = ui->cbGuiSwitchToJobOutputAfterStarting->isChecked();
+  m_cfg.m_resetJobWarningErrorCountersOnExit = ui->cbGuiResetJobWarningErrorCountersOnExit->isChecked();
   auto idx                                   = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy                   = static_cast<Util::Settings::JobRemovalPolicy>(idx);
 
