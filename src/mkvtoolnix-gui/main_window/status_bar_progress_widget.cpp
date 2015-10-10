@@ -2,6 +2,7 @@
 
 #include <QAction>
 #include <QMenu>
+#include <QMouseEvent>
 #include <QTimer>
 
 #include "common/qt.h"
@@ -42,9 +43,6 @@ StatusBarProgressWidget::StatusBarProgressWidget(QWidget *parent)
   d->m_timer.setInterval(1000);
 
   connect(&d->m_timer, &QTimer::timeout, this, &StatusBarProgressWidget::updateWarningsAndErrorsIcons);
-
-  connect(d->ui->warningsContainer, &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showContextMenu);
-  connect(d->ui->errorsContainer,   &QWidget::customContextMenuRequested, this, &StatusBarProgressWidget::showContextMenu);
 }
 
 StatusBarProgressWidget::~StatusBarProgressWidget() {
@@ -132,8 +130,10 @@ StatusBarProgressWidget::updateWarningsAndErrorsIcons() {
 }
 
 void
-StatusBarProgressWidget::showContextMenu(QPoint const &pos) {
+StatusBarProgressWidget::mouseReleaseEvent(QMouseEvent *event) {
   Q_D(StatusBarProgressWidget);
+
+  event->accept();
 
   QMenu menu{this};
 
@@ -152,7 +152,7 @@ StatusBarProgressWidget::showContextMenu(QPoint const &pos) {
   menu.addAction(acknowledgeWarnings);
   menu.addAction(acknowledgeErrors);
 
-  menu.exec(static_cast<QWidget *>(sender())->mapToGlobal(pos));
+  menu.exec(mapToGlobal(event->pos()));
 }
 
 }}

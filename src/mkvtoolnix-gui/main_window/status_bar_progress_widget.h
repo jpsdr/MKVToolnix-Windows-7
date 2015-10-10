@@ -5,6 +5,8 @@
 
 #include <QWidget>
 
+class QMouseEvent;
+
 namespace mtx { namespace gui {
 
 namespace Ui {
@@ -32,12 +34,12 @@ public slots:
   void setNumUnacknowledgedWarningsOrErrors(int numWarnings, int numErrors);
   void updateWarningsAndErrorsIcons();
 
-  void showContextMenu(QPoint const &pos);
-
   void reset();
 
 protected:
   void setLabelTexts();
+
+  virtual void mouseReleaseEvent(QMouseEvent *event) override;
 };
 
 }}
