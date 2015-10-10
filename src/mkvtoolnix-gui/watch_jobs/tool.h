@@ -52,6 +52,7 @@ public slots:
   virtual void enableMenuActions();
   virtual void setupTabPositions();
   virtual void retranslateUi();
+  virtual void switchToCurrentJobTab();
 };
 
 }}}

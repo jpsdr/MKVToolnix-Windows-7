@@ -8,6 +8,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
+#include "mkvtoolnix-gui/watch_jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
 
@@ -139,18 +140,31 @@ StatusBarProgressWidget::mouseReleaseEvent(QMouseEvent *event) {
 
   auto acknowledgeWarnings = new QAction{&menu};
   auto acknowledgeErrors   = new QAction{&menu};
+  auto showJobQueue        = new QAction{&menu};
+  auto showJobOutput       = new QAction{&menu};
 
   acknowledgeWarnings->setText(QY("Acknowledge all &warnings"));
   acknowledgeErrors->setText(QY("Acknowledge all &errors"));
+  showJobQueue->setText(QY("Show job queue"));
+  showJobOutput->setText(QY("Show job output"));
 
   acknowledgeWarnings->setEnabled(!!d->m_numWarnings);
   acknowledgeErrors->setEnabled(!!d->m_numErrors);
 
   connect(acknowledgeWarnings, &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllWarnings);
   connect(acknowledgeErrors,   &QAction::triggered, MainWindow::jobTool()->model(), &mtx::gui::Jobs::Model::acknowledgeAllErrors);
+  connect(showJobQueue,        &QAction::triggered, []{ MainWindow::get()->switchToTool(MainWindow::jobTool()); });
+  connect(showJobOutput,       &QAction::triggered, []{
+    auto tool = MainWindow::watchJobTool();
+    tool->switchToCurrentJobTab();
+    MainWindow::get()->switchToTool(tool);
+  });
 
   menu.addAction(acknowledgeWarnings);
   menu.addAction(acknowledgeErrors);
+  menu.addSeparator();
+  menu.addAction(showJobQueue);
+  menu.addAction(showJobOutput);
 
   menu.exec(mapToGlobal(event->pos()));
 }

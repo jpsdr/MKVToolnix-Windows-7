@@ -147,4 +147,9 @@ Tool::setupTabPositions() {
   ui->widgets->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
+void
+Tool::switchToCurrentJobTab() {
+  ui->widgets->setCurrentIndex(0);
+}
+
 }}}
