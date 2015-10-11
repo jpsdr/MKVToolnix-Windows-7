@@ -52,7 +52,7 @@ def main
     elsif /^ (\d{3}) (?: - (\d{3}) )?$/x.match arg
       $1.to_i.upto(($2 || $1).to_i) { |idx| controller.add_test_case sprintf("%03d", idx) }
     elsif %r{^ / (.+) / $}ix.match arg
-      re    = Regexp.new "^T_(\\d+)#{$1}", Regexp::IGNORECASE
+      re    = Regexp.new "^T_(\\d+).*#{$1}", Regexp::IGNORECASE
       tests = controller.results.results.keys.collect { |e| re.match(e) ? $1 : nil }.compact
       error_and_exit "No tests matched RE #{re}" if tests.empty?
       tests.each { |e| controller.add_test_case e }
