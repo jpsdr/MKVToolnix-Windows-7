@@ -2,7 +2,6 @@
 
 #include <QDragEnterEvent>
 #include <QDropEvent>
-#include <QFileDialog>
 #include <QFileInfo>
 #include <QMenu>
 #include <QMessageBox>
@@ -17,6 +16,7 @@
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -165,14 +165,13 @@ Tool::openFilesFromCommandLine(QStringList const &fileNames) {
 
 void
 Tool::selectFileToOpen() {
-  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in chapter editor"), Util::Settings::get().m_lastOpenDir.path(),
-                                                 QY("Supported file types")           + Q(" (*.mpls *.mkv *.mka *.mks *.mk3d *.txt *.xml);;") +
-                                                 QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
-                                                 QY("Blu-ray playlist files")         + Q(" (*.mpls);;") +
-                                                 QY("XML chapter files")              + Q(" (*.xml);;") +
-                                                 QY("Simple OGM-style chapter files") + Q(" (*.txt);;") +
-                                                 QY("All files")                      + Q(" (*)"),
-                                                 nullptr, QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileNames = Util::getOpenFileNames(this, QY("Open files in chapter editor"), Util::Settings::get().m_lastOpenDir.path(),
+                                          QY("Supported file types")           + Q(" (*.mpls *.mkv *.mka *.mks *.mk3d *.txt *.xml);;") +
+                                          QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
+                                          QY("Blu-ray playlist files")         + Q(" (*.mpls);;") +
+                                          QY("XML chapter files")              + Q(" (*.xml);;") +
+                                          QY("Simple OGM-style chapter files") + Q(" (*.txt);;") +
+                                          QY("All files")                      + Q(" (*)"));
   if (fileNames.isEmpty())
     return;
 

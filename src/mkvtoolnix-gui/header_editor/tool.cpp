@@ -16,6 +16,7 @@
 #include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -139,9 +140,8 @@ Tool::openFile(QString const &fileName) {
 
 void
 Tool::selectFileToOpen() {
-  auto fileNames = QFileDialog::getOpenFileNames(this, QY("Open files in header editor"), Util::Settings::get().m_lastOpenDir.path(),
-                                                 QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"),
-                                                 nullptr, QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileNames = Util::getOpenFileNames(this, QY("Open files in header editor"), Util::Settings::get().m_lastOpenDir.path(),
+                                          QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") + QY("All files") + Q(" (*)"));
   if (fileNames.isEmpty())
     return;
 

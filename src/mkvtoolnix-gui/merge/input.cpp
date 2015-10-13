@@ -3,7 +3,6 @@
 #include <QDir>
 #include <QDragEnterEvent>
 #include <QDropEvent>
-#include <QFileDialog>
 #include <QFileInfo>
 #include <QList>
 #include <QMenu>
@@ -29,6 +28,7 @@
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/file_type_filter.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/message_box.h"
@@ -1018,19 +1018,12 @@ Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
 
 QStringList
 Tab::selectFilesToAdd(QString const &title) {
-  QFileDialog dlg{this};
-  dlg.setNameFilters(Util::FileTypeFilter::get());
-  dlg.setFileMode(QFileDialog::ExistingFiles);
-  dlg.setDirectory(Util::Settings::get().m_lastOpenDir);
-  dlg.setWindowTitle(title);
-  dlg.setOptions(QFileDialog::HideNameFilterDetails | QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileNames = Util::getOpenFileNames(this, title, Util::Settings::get().m_lastOpenDir.path(), Util::FileTypeFilter::get().join(Q(";;")), nullptr, QFileDialog::HideNameFilterDetails);
 
-  if (!dlg.exec())
-    return QStringList{};
+  if (!fileNames.isEmpty())
+    Util::Settings::get().m_lastOpenDir = QFileInfo{fileNames[0]}.path();
 
-  Util::Settings::get().m_lastOpenDir = dlg.directory();
-
-  return dlg.selectedFiles();
+  return fileNames;
 }
 
 void

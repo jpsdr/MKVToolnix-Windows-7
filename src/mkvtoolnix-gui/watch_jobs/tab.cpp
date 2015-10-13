@@ -14,6 +14,7 @@
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
@@ -352,7 +353,7 @@ Tab::onSaveOutput() {
   Q_D(Tab);
 
   auto &cfg     = Util::Settings::get();
-  auto fileName = QFileDialog::getSaveFileName(this, QY("Save job output"), cfg.m_lastOpenDir.path(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"), nullptr, QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.m_lastOpenDir.path(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"));
 
   if (fileName.isEmpty())
     return;

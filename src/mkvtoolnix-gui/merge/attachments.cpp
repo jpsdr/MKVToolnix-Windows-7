@@ -1,12 +1,12 @@
 #include "common/common_pch.h"
 
-#include <QFileDialog>
 #include <QMenu>
 
 #include "common/extern_data.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_widget.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/model.h"
@@ -141,19 +141,12 @@ Tab::onAddAttachments() {
 
 QStringList
 Tab::selectAttachmentsToAdd() {
-  QFileDialog dlg{this};
-  dlg.setNameFilter(QY("All files") + Q(" (*)"));
-  dlg.setFileMode(QFileDialog::ExistingFiles);
-  dlg.setOptions(QFileDialog::DontUseCustomDirectoryIcons);
-  dlg.setDirectory(Util::Settings::get().m_lastOpenDir);
-  dlg.setWindowTitle(QY("Add attachments"));
+  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), Util::Settings::get().m_lastOpenDir.path(), QY("All files") + Q(" (*)"));
 
-  if (!dlg.exec())
-    return QStringList{};
+  if (!fileNames.isEmpty())
+    Util::Settings::get().m_lastOpenDir = QFileInfo{fileNames[0]}.path();
 
-  Util::Settings::get().m_lastOpenDir = dlg.directory();
-
-  return dlg.selectedFiles();
+  return fileNames;
 }
 
 void

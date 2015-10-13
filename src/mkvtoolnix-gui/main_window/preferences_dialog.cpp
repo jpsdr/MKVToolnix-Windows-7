@@ -11,6 +11,7 @@
 #include "mkvtoolnix-gui/forms/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui {
@@ -484,7 +485,7 @@ PreferencesDialog::enableOutputFileNameControls() {
 
 void
 PreferencesDialog::browseFixedOutputDirectory() {
-  auto dir = QFileDialog::getExistingDirectory(this, QY("Select output directory"), ui->leMAutoSetFixedDirectory->text(), QFileDialog::ShowDirsOnly | QFileDialog::DontUseCustomDirectoryIcons);
+  auto dir = Util::getExistingDirectory(this, QY("Select output directory"), ui->leMAutoSetFixedDirectory->text());
   if (!dir.isEmpty())
     ui->leMAutoSetFixedDirectory->setText(dir);
 }

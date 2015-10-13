@@ -12,6 +12,7 @@
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -22,7 +23,6 @@
 #include <QDir>
 #include <QMenu>
 #include <QTreeView>
-#include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QString>
@@ -163,7 +163,7 @@ Tab::onSaveConfig() {
 void
 Tab::onSaveOptionFile() {
   auto &settings = Util::Settings::get();
-  auto fileName  = QFileDialog::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), QY("All files") + Q(" (*)"), nullptr, QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileName  = Util::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
@@ -177,8 +177,7 @@ Tab::onSaveOptionFile() {
 void
 Tab::onSaveConfigAs() {
   auto &settings = Util::Settings::get();
-  auto fileName  = QFileDialog::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), QY("MKVToolnix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"),
-                                                nullptr, QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), QY("MKVToolnix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
@@ -231,7 +230,7 @@ Tab::getOpenFileName(QString const &title,
 
   auto &settings = Util::Settings::get();
   auto dir       = determineInitialDir(lineEdit, initialDirMode);
-  auto fileName  = QFileDialog::getOpenFileName(this, title, dir, fullFilter, nullptr, QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileName  = Util::getOpenFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
     return fileName;
 
@@ -258,7 +257,7 @@ Tab::getSaveFileName(QString const &title,
   auto dir       = !lineEdit->text().isEmpty()                                                               ? lineEdit->text()
                  : !settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != Q(".")) ? settings.m_lastOutputDir.path()
                  :                                                                                             settings.m_lastOpenDir.path();
-  auto fileName  = QFileDialog::getSaveFileName(this, title, dir, fullFilter, nullptr, QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileName  = Util::getSaveFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
     return fileName;
 

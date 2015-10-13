@@ -1,12 +1,12 @@
 #include "common/common_pch.h"
 
 #include <QDialog>
-#include <QFileDialog>
 #include <QPushButton>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/executable_location_dialog.h"
 #include "mkvtoolnix-gui/merge/executable_location_dialog.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 
 namespace mtx { namespace gui { namespace Merge {
 
@@ -62,7 +62,7 @@ ExecutableLocationDialog::browse() {
 #endif
   filters << QY("All files") + Q(" (*)");
 
-  auto fileName = QFileDialog::getOpenFileName(this, QY("Select executable"), m_ui->leExecutable->text(), filters.join(Q(";;")), nullptr, QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileName = Util::getOpenFileName(this, QY("Select executable"), m_ui->leExecutable->text(), filters.join(Q(";;")));
   if (!fileName.isEmpty())
     m_ui->leExecutable->setText(fileName);
 }
