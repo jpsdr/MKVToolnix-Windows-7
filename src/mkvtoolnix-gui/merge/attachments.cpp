@@ -52,6 +52,7 @@ Tab::setupAttachmentsControls() {
   connect(ui->attachments,                   &Util::BasicTreeView::ctrlUpPressed,              this, &Tab::onMoveAttachmentsUp);
   connect(ui->attachments,                   &Util::BasicTreeView::ctrlDownPressed,            this, &Tab::onMoveAttachmentsDown);
   connect(ui->attachments,                   &Util::BasicTreeView::customContextMenuRequested, this, &Tab::showAttachmentsContextMenu);
+  connect(ui->attachments,                   &Util::BasicTreeView::deletePressed,              this, &Tab::onRemoveAttachments);
 
   onAttachmentSelectionChanged();
 
