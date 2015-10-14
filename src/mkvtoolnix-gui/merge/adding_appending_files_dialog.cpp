@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QFileInfo>
+#include <QPushButton>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h"
@@ -33,6 +34,14 @@ AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
   }
 
   adjustSize();
+
+  connect(ui->buttonBox,            &QDialogButtonBox::accepted, this, &AddingAppendingFilesDialog::accept);
+  connect(ui->buttonBox,            &QDialogButtonBox::rejected, this, &AddingAppendingFilesDialog::reject);
+  connect(ui->rbAdd,                &QPushButton::clicked,       this, &AddingAppendingFilesDialog::selectionChanged);
+  connect(ui->rbAddAdditionalParts, &QPushButton::clicked,       this, &AddingAppendingFilesDialog::selectionChanged);
+  connect(ui->rbAddEachToNew,       &QPushButton::clicked,       this, &AddingAppendingFilesDialog::selectionChanged);
+  connect(ui->rbAddToNew,           &QPushButton::clicked,       this, &AddingAppendingFilesDialog::selectionChanged);
+  connect(ui->rbAppend,             &QPushButton::clicked,       this, &AddingAppendingFilesDialog::selectionChanged);
 }
 
 AddingAppendingFilesDialog::~AddingAppendingFilesDialog() {

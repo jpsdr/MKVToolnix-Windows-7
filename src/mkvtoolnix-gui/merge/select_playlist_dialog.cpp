@@ -147,6 +147,10 @@ SelectPlaylistDialog::setupUi() {
   okButton->setDefault(true);
 
   Util::restoreWidgetGeometry(this);
+
+  connect(ui->buttonBox,    &QDialogButtonBox::accepted,      this, &SelectPlaylistDialog::accept);
+  connect(ui->buttonBox,    &QDialogButtonBox::rejected,      this, &SelectPlaylistDialog::reject);
+  connect(ui->scannedFiles, &QTreeWidget::currentItemChanged, this, &SelectPlaylistDialog::onScannedFileSelected);
 }
 
 void

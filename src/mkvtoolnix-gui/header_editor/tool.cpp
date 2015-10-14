@@ -46,6 +46,8 @@ Tool::setupUi() {
   showHeaderEditorsWidget();
 
   retranslateUi();
+
+  connect(ui->editors, &QTabWidget::tabCloseRequested, this, &Tool::closeTab);
 }
 
 void

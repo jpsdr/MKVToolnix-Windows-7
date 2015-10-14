@@ -270,24 +270,6 @@
  <resources>
   <include location="../../qt_resources.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>editors</sender>
-   <signal>tabCloseRequested(int)</signal>
-   <receiver>mtx::gui::ChapterEditor::Tool</receiver>
-   <slot>closeTab(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>79</x>
-     <y>105</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>64</x>
-     <y>487</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
  <slots>
   <slot>closeTab(int)</slot>
  </slots>

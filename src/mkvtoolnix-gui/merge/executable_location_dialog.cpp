@@ -23,7 +23,9 @@ ExecutableLocationDialog::ExecutableLocationDialog(QWidget *parent,
   m_ui->leExecutable->setText(executable);
   m_ui->lURL->setVisible(false);
 
-  connect(m_ui->pbBrowse, &QPushButton::clicked, this, &ExecutableLocationDialog::browse);
+  connect(m_ui->pbBrowse,  &QPushButton::clicked,       this, &ExecutableLocationDialog::browse);
+  connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &ExecutableLocationDialog::accept);
+  connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &ExecutableLocationDialog::reject);
 }
 
 ExecutableLocationDialog::~ExecutableLocationDialog() {

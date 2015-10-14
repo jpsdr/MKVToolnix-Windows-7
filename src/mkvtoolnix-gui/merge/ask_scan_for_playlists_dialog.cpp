@@ -34,6 +34,9 @@ AskScanForPlaylistsDialog::AskScanForPlaylistsDialog(QWidget *parent)
   Util::buttonForRole(ui->buttonBox, QDialogButtonBox::NoRole)->setText(QY("&Don't scan, just add the file"));
 
   adjustSize();
+
+  connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &AskScanForPlaylistsDialog::accept);
+  connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &AskScanForPlaylistsDialog::reject);
 }
 
 AskScanForPlaylistsDialog::~AskScanForPlaylistsDialog() {

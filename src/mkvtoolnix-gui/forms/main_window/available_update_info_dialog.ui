@@ -168,41 +168,4 @@ p, li { white-space: pre-wrap; }
   <tabstop>close</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>close</sender>
-   <signal>clicked()</signal>
-   <receiver>mtx::gui::AvailableUpdateInfoDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>581</x>
-     <y>455</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>581</x>
-     <y>474</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>download</sender>
-   <signal>clicked()</signal>
-   <receiver>mtx::gui::AvailableUpdateInfoDialog</receiver>
-   <slot>visitDownloadLocation()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>52</x>
-     <y>460</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>52</x>
-     <y>474</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
- <slots>
-  <slot>visitDownloadLocation()</slot>
- </slots>
 </ui>

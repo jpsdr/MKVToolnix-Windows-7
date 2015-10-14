@@ -61,6 +61,7 @@ Tool::setupActions() {
   connect(mwUi->actionMergeAddToJobQueue,           &QAction::triggered,               this, &Tool::addToJobQueue);
   connect(mwUi->actionMergeShowMkvmergeCommandLine, &QAction::triggered,               this, &Tool::showCommandLine);
 
+  connect(ui->merges,                               &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
   connect(ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::newConfig);
   connect(ui->openFileButton,                       &QPushButton::clicked,             this, &Tool::openConfig);
 

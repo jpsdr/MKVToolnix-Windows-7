@@ -41,18 +41,25 @@ Tab::setupAttachmentsControls() {
   Util::fixComboBoxViewWidth(*ui->attachmentStyle);
 
   // Signals & slots
-  connect(ui->attachmentsTab,                &Util::FilesDragDropWidget::filesDropped,         this, &Tab::addAttachments);
-  connect(ui->attachments->selectionModel(), &QItemSelectionModel::selectionChanged,           this, &Tab::onAttachmentSelectionChanged);
-  connect(m_addAttachmentsAction,            &QAction::triggered,                              this, &Tab::onAddAttachments);
-  connect(m_removeAttachmentsAction,         &QAction::triggered,                              this, &Tab::onRemoveAttachments);
-  connect(m_removeAllAttachmentsAction,      &QAction::triggered,                              this, &Tab::onRemoveAllAttachments);
-  connect(m_selectAllAttachmentsAction,      &QAction::triggered,                              this, &Tab::onSelectAllAttachments);
-  connect(ui->moveAttachmentsUp,             &QPushButton::clicked,                            this, &Tab::onMoveAttachmentsUp);
-  connect(ui->moveAttachmentsDown,           &QPushButton::clicked,                            this, &Tab::onMoveAttachmentsDown);
-  connect(ui->attachments,                   &Util::BasicTreeView::ctrlUpPressed,              this, &Tab::onMoveAttachmentsUp);
-  connect(ui->attachments,                   &Util::BasicTreeView::ctrlDownPressed,            this, &Tab::onMoveAttachmentsDown);
-  connect(ui->attachments,                   &Util::BasicTreeView::customContextMenuRequested, this, &Tab::showAttachmentsContextMenu);
-  connect(ui->attachments,                   &Util::BasicTreeView::deletePressed,              this, &Tab::onRemoveAttachments);
+  connect(m_addAttachmentsAction,            &QAction::triggered,                                                                this, &Tab::onAddAttachments);
+  connect(m_removeAttachmentsAction,         &QAction::triggered,                                                                this, &Tab::onRemoveAttachments);
+  connect(m_removeAllAttachmentsAction,      &QAction::triggered,                                                                this, &Tab::onRemoveAllAttachments);
+  connect(m_selectAllAttachmentsAction,      &QAction::triggered,                                                                this, &Tab::onSelectAllAttachments);
+
+  connect(ui->attachmentDescription,         &QLineEdit::textChanged,                                                            this, &Tab::onAttachmentDescriptionChanged);
+  connect(ui->attachmentMIMEType,            static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged), this, &Tab::onAttachmentMIMETypeChanged);
+  connect(ui->attachmentMIMEType,            &QComboBox::editTextChanged,                                                        this, &Tab::onAttachmentMIMETypeChanged);
+  connect(ui->attachmentName,                &QLineEdit::textChanged,                                                            this, &Tab::onAttachmentNameChanged);
+  connect(ui->attachmentStyle,               static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),             this, &Tab::onAttachmentStyleChanged);
+  connect(ui->attachments,                   &Util::BasicTreeView::ctrlDownPressed,                                              this, &Tab::onMoveAttachmentsDown);
+  connect(ui->attachments,                   &Util::BasicTreeView::ctrlUpPressed,                                                this, &Tab::onMoveAttachmentsUp);
+  connect(ui->attachments,                   &Util::BasicTreeView::customContextMenuRequested,                                   this, &Tab::showAttachmentsContextMenu);
+  connect(ui->attachments,                   &Util::BasicTreeView::deletePressed,                                                this, &Tab::onRemoveAttachments);
+  connect(ui->attachments,                   &Util::BasicTreeView::expanded,                                                     this, &Tab::resizeAttachmentsColumnsToContents);
+  connect(ui->attachments->selectionModel(), &QItemSelectionModel::selectionChanged,                                             this, &Tab::onAttachmentSelectionChanged);
+  connect(ui->attachmentsTab,                &Util::FilesDragDropWidget::filesDropped,                                           this, &Tab::addAttachments);
+  connect(ui->moveAttachmentsDown,           &QPushButton::clicked,                                                              this, &Tab::onMoveAttachmentsDown);
+  connect(ui->moveAttachmentsUp,             &QPushButton::clicked,                                                              this, &Tab::onMoveAttachmentsUp);
 
   onAttachmentSelectionChanged();
 

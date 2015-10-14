@@ -36,6 +36,10 @@ CommandLineDialog::CommandLineDialog(QWidget *parent,
   ui->commandLine->setFocus();
 
   Util::restoreWidgetGeometry(this);
+
+  connect(ui->escapeMode,        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CommandLineDialog::onEscapeModeChanged);
+  connect(ui->pbClose,           &QPushButton::clicked,                                                  this, &CommandLineDialog::accept);
+  connect(ui->pbCopyToClipboard, &QPushButton::clicked,                                                  this, &CommandLineDialog::copyToClipboard);
 }
 
 CommandLineDialog::~CommandLineDialog() {

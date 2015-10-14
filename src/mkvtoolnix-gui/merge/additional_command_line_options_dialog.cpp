@@ -87,6 +87,9 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   m_customOptions.replace(QRegularExpression{"^\\s+|\\s+$"}, Q(""));
 
   Util::restoreWidgetGeometry(this);
+
+  connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &AdditionalCommandLineOptionsDialog::accept);
+  connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &AdditionalCommandLineOptionsDialog::reject);
 }
 
 AdditionalCommandLineOptionsDialog::~AdditionalCommandLineOptionsDialog() {

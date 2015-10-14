@@ -36,11 +36,33 @@ Tab::setupOutputControls() {
 
   onSplitModeChanged(MuxConfig::DoNotSplit);
 
-  connect(MainWindow::get(),              &MainWindow::preferencesChanged, this, &Tab::setupOutputFileControls);
-  connect(ui->browseSegmentUID,           &QPushButton::clicked,           this, &Tab::onBrowseSegmentUID);
-  connect(ui->browsePreviousSegmentUID,   &QPushButton::clicked,           this, &Tab::onBrowsePreviousSegmentUID);
-  connect(ui->browseNextSegmentUID,       &QPushButton::clicked,           this, &Tab::onBrowseNextSegmentUID);
-  connect(ui->chapterCharacterSetPreview, &QPushButton::clicked,           this, &Tab::onPreviewChapterCharacterSet);
+  connect(MainWindow::get(),              &MainWindow::preferencesChanged,              this, &Tab::setupOutputFileControls);
+
+  connect(ui->additionalOptions,          &QLineEdit::textChanged,                                                                          this, &Tab::onAdditionalOptionsChanged);
+  connect(ui->browseChapters,             &QPushButton::clicked,                                                                            this, &Tab::onBrowseChapters);
+  connect(ui->browseGlobalTags,           &QPushButton::clicked,                                                                            this, &Tab::onBrowseGlobalTags);
+  connect(ui->browseNextSegmentUID,       &QPushButton::clicked,                                                                            this, &Tab::onBrowseNextSegmentUID);
+  connect(ui->browseOutput,               &QPushButton::clicked,                                                                            this, &Tab::onBrowseOutput);
+  connect(ui->browsePreviousSegmentUID,   &QPushButton::clicked,                                                                            this, &Tab::onBrowsePreviousSegmentUID);
+  connect(ui->browseSegmentInfo,          &QPushButton::clicked,                                                                            this, &Tab::onBrowseSegmentInfo);
+  connect(ui->browseSegmentUID,           &QPushButton::clicked,                                                                            this, &Tab::onBrowseSegmentUID);
+  connect(ui->chapterCharacterSet,        static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this, &Tab::onChapterCharacterSetChanged);
+  connect(ui->chapterCharacterSetPreview, &QPushButton::clicked,                                                                            this, &Tab::onPreviewChapterCharacterSet);
+  connect(ui->chapterCueNameFormat,       &QLineEdit::textChanged,                                                                          this, &Tab::onChapterCueNameFormatChanged);
+  connect(ui->chapterLanguage,            static_cast<void (Util::LanguageComboBox::*)(int)>(&Util::LanguageComboBox::currentIndexChanged), this, &Tab::onChapterLanguageChanged);
+  connect(ui->chapters,                   &QLineEdit::textChanged,                                                                          this, &Tab::onChaptersChanged);
+  connect(ui->globalTags,                 &QLineEdit::textChanged,                                                                          this, &Tab::onGlobalTagsChanged);
+  connect(ui->linkFiles,                  &QPushButton::clicked,                                                                            this, &Tab::onLinkFilesClicked);
+  connect(ui->nextSegmentUID,             &QLineEdit::textChanged,                                                                          this, &Tab::onNextSegmentUIDChanged);
+  connect(ui->output,                     &QLineEdit::textChanged,                                                                          this, &Tab::setDestination);
+  connect(ui->previousSegmentUID,         &QLineEdit::textChanged,                                                                          this, &Tab::onPreviousSegmentUIDChanged);
+  connect(ui->segmentInfo,                &QLineEdit::textChanged,                                                                          this, &Tab::onSegmentInfoChanged);
+  connect(ui->segmentUIDs,                &QLineEdit::textChanged,                                                                          this, &Tab::onSegmentUIDsChanged);
+  connect(ui->splitMaxFiles,              static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),                                    this, &Tab::onSplitMaxFilesChanged);
+  connect(ui->splitMode,                  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this, &Tab::onSplitModeChanged);
+  connect(ui->splitOptions,               &QComboBox::editTextChanged,                                                                      this, &Tab::onSplitOptionsChanged);
+  connect(ui->title,                      &QLineEdit::textChanged,                                                                          this, &Tab::onTitleChanged);
+  connect(ui->webmMode,                   &QPushButton::clicked,                                                                            this, &Tab::onWebmClicked);
 }
 
 void

@@ -56,6 +56,9 @@ RenumberSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->cbFirstEntryToRenumber->setFocus();
 
   adjustSize();
+
+  connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &RenumberSubChaptersParametersDialog::accept);
+  connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &RenumberSubChaptersParametersDialog::reject);
 }
 
 int

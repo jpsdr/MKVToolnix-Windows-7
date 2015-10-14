@@ -21,6 +21,9 @@ AvailableUpdateInfoDialog::AvailableUpdateInfoDialog(QWidget *parent)
   setChangeLogContent(Q(""));
   ui->status->setText(QY("Downloading release information"));
 
+  connect(ui->close,    &QPushButton::clicked, this, &AvailableUpdateInfoDialog::accept);
+  connect(ui->download, &QPushButton::clicked, this, &AvailableUpdateInfoDialog::visitDownloadLocation);
+
   auto thread = new UpdateCheckThread(parent);
 
   connect(thread, &UpdateCheckThread::checkFinished,               this, &AvailableUpdateInfoDialog::updateCheckFinished);
