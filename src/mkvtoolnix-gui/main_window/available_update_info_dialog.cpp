@@ -23,8 +23,8 @@ AvailableUpdateInfoDialog::AvailableUpdateInfoDialog(QWidget *parent)
 
   auto thread = new UpdateCheckThread(parent);
 
-  connect(thread, SIGNAL(checkFinished(mtx::gui::UpdateCheckStatus, mtx_release_version_t)), this, SLOT(updateCheckFinished(mtx::gui::UpdateCheckStatus, mtx_release_version_t)));
-  connect(thread, SIGNAL(releaseInformationRetrieved(std::shared_ptr<pugi::xml_document>)),  this, SLOT(setReleaseInformation(std::shared_ptr<pugi::xml_document>)));
+  connect(thread, &UpdateCheckThread::checkFinished,               this, &AvailableUpdateInfoDialog::updateCheckFinished);
+  connect(thread, &UpdateCheckThread::releaseInformationRetrieved, this, &AvailableUpdateInfoDialog::setReleaseInformation);
 
   thread->start();
 }

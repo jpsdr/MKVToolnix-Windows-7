@@ -31,9 +31,9 @@ TrackModel::TrackModel(QObject *parent)
   , m_selectedTrackType{}
   , m_debug{"track_model"}
 {
-  connect(this, SIGNAL(rowsInserted(const QModelIndex&,int,int)),                     this, SLOT(updateTrackLists()));
-  connect(this, SIGNAL(rowsRemoved(const QModelIndex&,int,int)),                      this, SLOT(updateTrackLists()));
-  connect(this, SIGNAL(rowsMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(updateTrackLists()));
+  connect(this, &TrackModel::rowsInserted, this, &TrackModel::updateTrackLists);
+  connect(this, &TrackModel::rowsRemoved,  this, &TrackModel::updateTrackLists);
+  connect(this, &TrackModel::rowsMoved,    this, &TrackModel::updateTrackLists);
 }
 
 TrackModel::~TrackModel() {

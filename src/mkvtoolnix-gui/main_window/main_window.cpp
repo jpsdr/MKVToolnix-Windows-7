@@ -385,7 +385,7 @@ MainWindow::silentlyCheckForUpdates() {
 
   auto thread = new UpdateCheckThread(this);
 
-  connect(thread, SIGNAL(checkFinished(mtx::gui::UpdateCheckStatus, mtx_release_version_t)), this, SLOT(updateCheckFinished(mtx::gui::UpdateCheckStatus, mtx_release_version_t)));
+  connect(thread, &UpdateCheckThread::checkFinished, this, &MainWindow::updateCheckFinished);
 
   thread->start();
 }

@@ -131,8 +131,8 @@ ValuePage::init() {
 
   // ----------------------------------------------------------------------
 
-  connect(m_cbAddOrRemove, SIGNAL(toggled(bool)), this, SLOT(onAddOrRemoveChecked()));
-  connect(m_bReset,        SIGNAL(clicked()),     this, SLOT(onResetClicked()));
+  connect(m_cbAddOrRemove, &QCheckBox::toggled,   this, &ValuePage::onAddOrRemoveChecked);
+  connect(m_bReset,        &QPushButton::clicked, this, &ValuePage::onResetClicked);
 
   // ----------------------------------------------------------------------
 
