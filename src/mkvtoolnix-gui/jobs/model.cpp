@@ -42,8 +42,16 @@ void
 Model::retranslateUi() {
   QMutexLocker locked{&m_mutex};
 
-  setHorizontalHeaderLabels(          QStringList{} << QY("Status") << Q("")               << QY("Description") << QY("Type") << QY("Progress") << QY("Date added") << QY("Date started") << QY("Date finished"));
-  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("status") << Q("warningsErrors") <<  Q("description") <<  Q("type") <<  Q("progress") <<  Q("dateAdded")  <<  Q("dateStarted")  <<  Q("dateFinished"));
+  Util::setDisplayableAndSymbolicColumnNames(*this, {
+    { QY("Status"),        Q("status")         },
+    { Q(""),               Q("warningsErrors") },
+    { QY("Description"),   Q("description")    },
+    { QY("Type"),          Q("type")           },
+    { QY("Progress"),      Q("progress")       },
+    { QY("Date added"),    Q("dateAdded")      },
+    { QY("Date started"),  Q("dateStarted")    },
+    { QY("Date finished"), Q("dateFinished")   },
+  });
 
   horizontalHeaderItem(StatusIconColumn)->setIcon(QIcon{Q(":/icons/16x16/dialog-warning-grayscale.png")});
   horizontalHeaderItem(StatusIconColumn)->setData(QY("Warnings/Errors"), Util::HiddenDescriptionRole);

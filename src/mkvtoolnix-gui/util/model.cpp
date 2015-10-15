@@ -4,6 +4,7 @@
 #include <QAbstractItemView>
 #include <QItemSelection>
 #include <QItemSelectionModel>
+#include <QStandardItemModel>
 #include <QTreeView>
 
 #include "mkvtoolnix-gui/util/model.h"
@@ -15,6 +16,21 @@ resizeViewColumnsToContents(QTreeView *view) {
   auto columnCount = view->model()->columnCount(QModelIndex{});
   for (auto column = 0; columnCount > column; ++column)
     view->resizeColumnToContents(column);
+}
+
+void
+setDisplayableAndSymbolicColumnNames(QStandardItemModel &model,
+                                     QList< std::pair<QString, QString> > const &columns) {
+  auto headerLabels  = QStringList{};
+  auto symbolicNames = QStringList{};
+
+  for (auto const &pair : columns) {
+    headerLabels  << pair.first;
+    symbolicNames << pair.second;
+  }
+
+  model.setHorizontalHeaderLabels(headerLabels);
+  Util::setSymbolicColumnNames(model, symbolicNames);
 }
 
 void

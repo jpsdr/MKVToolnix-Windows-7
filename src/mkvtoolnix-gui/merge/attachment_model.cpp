@@ -53,8 +53,14 @@ AttachmentModel::setRowData(QList<QStandardItem *> const &items,
 
 void
 AttachmentModel::retranslateUi() {
-  setHorizontalHeaderLabels(          QStringList{} << QY("Name") << QY("MIME type") << QY("Description") << QY("Attach to") << QY("Source file name") << QY("Directory"));
-  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("name") <<  Q("mimeType")  <<  Q("description") <<  Q("attachTo")  <<  Q("sourceFileName")   <<  Q("directory"));
+  Util::setDisplayableAndSymbolicColumnNames(*this, {
+    { QY("Name"),             Q("name")           },
+    { QY("MIME type"),        Q("mimeType")       },
+    { QY("Description"),      Q("description")    },
+    { QY("Attach to"),        Q("attachTo")       },
+    { QY("Source file name"), Q("sourceFileName") },
+    { QY("Directory"),        Q("directory")      },
+  });
 
   for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
     setRowData(itemsForRow(row), *attachmentForRow(row));

@@ -41,8 +41,18 @@ TrackModel::~TrackModel() {
 
 void
 TrackModel::retranslateUi() {
-  setHorizontalHeaderLabels(          QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID") << QY("Default track in output") << QY("Forced track")    << QY("Properties"));
-  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("codec") <<  Q("type") <<  Q("muxThis")  <<  Q("language") <<  Q("name") <<  Q("sourceFile")  <<  Q("id") <<  Q("defaultTrackFlag")        <<  Q("forcedTrackFlag") <<  Q("properties"));
+  Util::setDisplayableAndSymbolicColumnNames(*this, {
+    { QY("Codec"),                   Q("codec")            },
+    { QY("Type"),                    Q("type")             },
+    { QY("Mux this"),                Q("muxThis")          },
+    { QY("Language"),                Q("language")         },
+    { QY("Name"),                    Q("name")             },
+    { QY("Source file"),             Q("sourceFile")       },
+    { QY("ID"),                      Q("id")               },
+    { QY("Default track in output"), Q("defaultTrackFlag") },
+    { QY("Forced track"),            Q("forcedTrackFlag")  },
+    { QY("Properties"),              Q("properties")       },
+  });
 
   horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 

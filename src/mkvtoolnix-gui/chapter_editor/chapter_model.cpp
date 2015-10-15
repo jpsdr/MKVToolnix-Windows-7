@@ -28,8 +28,12 @@ ChapterModel::~ChapterModel() {
 
 void
 ChapterModel::retranslateUi() {
-  setHorizontalHeaderLabels(          QStringList{} << QY("Edition/Chapter") << QY("Start") << QY("End") << QY("Flags"));
-  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("editionChapter")  <<  Q("start") <<  Q("end") <<  Q("flags"));
+  Util::setDisplayableAndSymbolicColumnNames(*this, {
+    { QY("Edition/Chapter"), Q("editionChapter") },
+    { QY("Start"),           Q("start")          },
+    { QY("End"),             Q("end")            },
+    { QY("Flags"),           Q("flags")          },
+  });
 
   Util::walkTree(*this, QModelIndex{}, [=](QModelIndex const &currentIdx) {
     updateRow(currentIdx);

@@ -7,6 +7,7 @@ class QAbstractItemModel;
 class QAbstractItemView;
 class QItemSelection;
 class QItemSelectionModel;
+class QStandardItemModel;
 class QTreeView;
 
 namespace mtx { namespace gui { namespace Util {
@@ -26,6 +27,7 @@ enum MtxGuiRoles {
 
 void resizeViewColumnsToContents(QTreeView *view);
 void setSymbolicColumnNames(QAbstractItemModel &model, QStringList const &names);
+void setDisplayableAndSymbolicColumnNames(QStandardItemModel &model, QList< std::pair<QString, QString> > const &columns);
 int numSelectedRows(QItemSelection &selection);
 QModelIndex selectedRowIdx(QItemSelection const &selection);
 QModelIndex selectedRowIdx(QAbstractItemView *view);
