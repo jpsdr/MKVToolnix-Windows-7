@@ -58,8 +58,8 @@ them should be available pre-compiled for your distribution. The
 programs and libraries you absolutely need are:
 
 - A C++ compiler that supports several features of the C++11 standard:
-  initializer lists, range-based »for« loops, right angle brackets,
-  the 'auto' keyword, lambda functions, the »nullptr« key word, tuples
+  initializer lists, range-based "for" loops, right angle brackets,
+  the "auto" keyword, lambda functions, the "nullptr" key word, tuples
   and alias declarations. For GCC this means at least v4.7.0; for
   clang v3.3 or later.
 

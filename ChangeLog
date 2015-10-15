@@ -43,9 +43,9 @@
         * MKVToolNix GUI: bug fix: the menus that are currently not shown
         are disabled properly so that they don't react to keyboard
         shortcuts anymore. This affected e.g. Alt+J with the English
-        localization as there were three shortcuts active: the »add to job
-        queue« button (if the merge tool is active), the »job queue« menu
-        and the »job output« menu.
+        localization as there were three shortcuts active: the "add to job
+        queue" button (if the merge tool is active), the "job queue" menu
+        and the "job output" menu.
 
 2015-10-08  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -111,8 +111,8 @@
         file names to be added to the appropriate controls on the 'output'
         tab. Implements #1332 and 1345.
 
-        * MKVToolNix GUI: merge tool enhancement: the feature »default
-        track language« has been split into track languages by type. There
+        * MKVToolNix GUI: merge tool enhancement: the feature "default
+        track language" has been split into track languages by type. There
         are now three separate settings for audio, video and subtitle
         tracks. Implements #1338.
 
@@ -126,19 +126,19 @@
 2015-09-27  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: new merge tool feature: implemented an optional
-        vertical layout mode for the »input« tab in which the track
+        vertical layout mode for the "input" tab in which the track
         properties are shown below the track list. Implements #1304.
 
 2015-09-26  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: merge tool bug fix: the »default track flag in
-        output« column wasn't updated properly directly after loading
+        * MKVToolNix GUI: merge tool bug fix: the "default track flag in
+        output" column wasn't updated properly directly after loading
         settings.
 
 2015-09-25  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: merge tool enhancement: when browsing for
-        chapter files on the »output« tab the initial directory is the
+        chapter files on the "output" tab the initial directory is the
         first input file's directory instead of the directory accessed
         last.
 
@@ -148,8 +148,8 @@
 2015-09-22  Moritz Bunkus  <moritz@bunkus.org>
 
         * all: several ISO 639-2 codes of languages that are very old and
-        not spoken anymore have been removed (e.g. »English, Middle
-        (1100-1500)«).
+        not spoken anymore have been removed (e.g. "English, Middle
+        (1100-1500)").
 
         * MKVToolNix GUI: enhancement: on Windows the drop down boxes were
         elliding overlong text. This has been changed to making the open
@@ -181,8 +181,8 @@
         * Released v8.4.0.
 
         * MKVToolNix GUI: chapter editor bug fix: whenever the additional
-        modification of »expanding start/end timecodes to include the
-        minimum/maximum timecodes of their children« was run on an edition
+        modification of "expanding start/end timecodes to include the
+        minimum/maximum timecodes of their children" was run on an edition
         entry then ChapterTimeStart and sometimes ChapterTimeEnd nodes
         were inserted as direct children of the EditionEntry node when
         saving. This resulted in invalid chapters.
@@ -214,8 +214,8 @@
         * mkvmerge: container and track properties in verbose
         identification mode are now output sorted.
 
-        * MKVToolNix GUI: new merge tool feature: the »tracks« tree view
-        contains a new column titled »properties« which contains basic
+        * MKVToolNix GUI: new merge tool feature: the "tracks" tree view
+        contains a new column titled "properties" which contains basic
         track properties: the pixel dimensions for a video track and
         sampling frequency, number of channels and bits per sample for an
         audio track. Implements #1295.
@@ -237,9 +237,9 @@
         * mkvmerge: the verbose identification result for the MPEG program
         stream, MPEG transport stream and WAV readers has been changed for
         audio tracks in order to match the Matroska reader's result. The
-        old keys »channels«, »sample_rate« and »bits_per_sample« have been
-        replaced by »audio_channels«, »audio_sampling_frequency« and
-        »audio_bits_per_sample«.
+        old keys "channels", "sample_rate" and "bits_per_sample" have been
+        replaced by "audio_channels", "audio_sampling_frequency" and
+        "audio_bits_per_sample".
 
         * mkvmerge: enhancement: the pixel width/height will be reported
         in verbose identification mode for all video tracks.
@@ -247,7 +247,7 @@
 2015-09-05  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: new merge tool feature: added a column in the
-        track list showing the effective state of the »default track«
+        track list showing the effective state of the "default track"
         flag. It shows the state of the flag as it will be in the output
         file. Implements #1353.
 
@@ -291,23 +291,23 @@
 2015-08-28  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: merge tool bug fix: if the output file name
-        policy »last output directory« was used then manual changes to the
+        policy "last output directory" was used then manual changes to the
         output file name weren't recognized as changes to the last output
         directory. Fixes #1411.
 
-        * MKVToolNix GUI: merge tool bug fix: the »default subtitle
-        charset« is not applied to text subtitles from Matroska files as
+        * MKVToolNix GUI: merge tool bug fix: the "default subtitle
+        charset" is not applied to text subtitles from Matroska files as
         those are always encoded in UTF-8. Fixes #1416.
 
         * MKVToolNix GUI: enhancement: the titles and button texts of
         dialogs asking questions have been improved to be easier
-        understandable. For example, instead of using »yes/no« as the
-        answers to the question »Do you want to close the unmodified
-        file?« the choices are now »Close file/Cancel«. Implements #1417.
+        understandable. For example, instead of using "yes/no" as the
+        answers to the question "Do you want to close the unmodified
+        file?" the choices are now "Close file/Cancel". Implements #1417.
 
 2015-08-27  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: chapter editor bug fix: the »shift timecodes«
+        * MKVToolNix GUI: chapter editor bug fix: the "shift timecodes"
         action in the mass modification dialog wasn't working at all, and
         selecting multiple actions in the dialog would result in wrong
         actions being executed.
@@ -323,8 +323,8 @@
 
 2015-08-20  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: merge tool enhancement: added »remove all« and
-        »select all« entries to the attachments context menu. Implements
+        * MKVToolNix GUI: merge tool enhancement: added "remove all" and
+        "select all" entries to the attachments context menu. Implements
         #1386.
 
         * MKVToolNix GUI: job output enhancement: the output, warnings and
@@ -382,10 +382,10 @@
 
 2015-08-15  Moritz Bunkus  <moritz@bunkus.org>
 
-        * build system: removal: the switch »--without-mkvtoolnix-gui« has
+        * build system: removal: the switch "--without-mkvtoolnix-gui" has
         been removed. There are only two GUIs left in the package: the
         Qt-enabled mkvinfo and MKVToolNix GUI. Both are enabled by default
-        and can be disabled with the option »--disable-qt«. In that case
+        and can be disabled with the option "--disable-qt". In that case
         only the text-mode version of mkvinfo is built, and the MKVToolNix
         GUI is not built at all.
 
@@ -415,18 +415,18 @@
         one job at the same time. Implements #1395.
 
         * MKVToolNix GUI: new merge tool feature: added an option for
-        automatically setting the »default track« flag to »no« for all
+        automatically setting the "default track" flag to "no" for all
         subtitle tracks when they're added. Implements #1339.
 
 2015-08-12  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: new merge tool feature: dragging & dropping
         files onto line edit controls that expect file names (e.g. the
-        »chapter file« control) will set that line edit's text to the
+        "chapter file" control) will set that line edit's text to the
         dropped file name. Implements #1344.
 
         * mkvmerge: bug fix: track statistics tags can be kept with the
-        option »--engage keep_track_statistics_tags«. This allows
+        option "--engage keep_track_statistics_tags". This allows
         outputting them in verbose identification mode for easier
         parsing. Fixes #1351.
 
@@ -453,13 +453,13 @@
 
         Together with the other three changes mentioned below this results
         in a noticeable reduction in the time needed for writing the queue
-        files, e.g. when pressing »start muxing« or when quitting the
+        files, e.g. when pressing "start muxing" or when quitting the
         application.
 
         * MKVToolNix GUI: enhancement: the way the job queue is stored has
         been changed. Earlier all jobs were stored in the same file (or
         registry on Windows) as the preferences. Now they're stored in a
-        sub directory called »jobQueue« with one file per queue entry.
+        sub directory called "jobQueue" with one file per queue entry.
 
         * MKVToolNix GUI: enhancement: on Windows the preferences are not
         stored in the registry anymore, not even if the application has
@@ -484,7 +484,7 @@
 
         * MKVToolNix GUI: new feature: added an option in the preferences
         for automatically switching to the job output tool whenever the
-        user starts a job (e.g. by pressing »start muxing«). Implements
+        user starts a job (e.g. by pressing "start muxing"). Implements
         #1376.
 
         * MKVToolNix GUI: new job output and job queue feature: added a
@@ -501,14 +501,14 @@
         description for new jobs contained the file name twice, even in
         the directory portion. Fixes #1378.
 
-        * MKVToolNix GUI: merge tool bug fix: if »set output file name
-        automatically« is enabled then file names ending with a number in
-        parenthesis (e.g. »Berlin (1962).mkv«) will keep their number in
+        * MKVToolNix GUI: merge tool bug fix: if "set output file name
+        automatically" is enabled then file names ending with a number in
+        parenthesis (e.g. "Berlin (1962).mkv") will keep their number in
         the generated output file name. Fixes #1375.
 
         * MKVToolNix GUI: merge tool bug fix: the GUI will keep manual
-        changes to the output file name even if »set output file name
-        automatically« is enabled. Fixes #1372.
+        changes to the output file name even if "set output file name
+        automatically" is enabled. Fixes #1372.
 
         * MKVToolNix GUI: bug fix: fixed the stereoscopy drop down box not
         being re-translated when the GUI language is changed. Fixes #1224.
@@ -528,8 +528,8 @@
 
 2015-07-20  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: merge tool enhancement: added »Simple OGM-style
-        chapter files (*.txt)« to the file selection dialog when selecting
+        * MKVToolNix GUI: merge tool enhancement: added "Simple OGM-style
+        chapter files (*.txt)" to the file selection dialog when selecting
         a chapter file. Implements #1269.
 
 2015-07-18  Moritz Bunkus  <moritz@bunkus.org>
@@ -569,7 +569,7 @@
         finished. Implements #1303.
 
         * MKVToolNix GUI: new job queue feature: added a context menu
-        option for setting jobs to status »pending manual start«.
+        option for setting jobs to status "pending manual start".
 
 2015-07-11  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -608,8 +608,8 @@
 
         * MKVToolNix GUI: new merge tool feature: dragging files from
         external applications now allows you to create new mux settings
-        and add the dropped files to those if the »always add dropped
-        files« option is off. Implements #1297.
+        and add the dropped files to those if the "always add dropped
+        files" option is off. Implements #1297.
 
         * MKVToolNix GUI: new feature: added support for displaying the
         queue progress on the task bar button. Implements #1335.
@@ -623,7 +623,7 @@
 2015-07-03  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: bug fix: fixed the command line option used when
-        the »fix bitstream timing info« check box is checked. Fixes #1337.
+        the "fix bitstream timing info" check box is checked. Fixes #1337.
 
 2015-07-01  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -640,15 +640,15 @@
 2015-06-30  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: job queue bug fix: when re-starting a job the
-        »date finished« field wasn't reset. Fixes #1323.
+        "date finished" field wasn't reset. Fixes #1323.
 
-        * MKVToolNix GUI: merge tool bug fix: the option »set output file
-        name relative to first input file« caused the relative path to be
+        * MKVToolNix GUI: merge tool bug fix: the option "set output file
+        name relative to first input file" caused the relative path to be
         applied each time a file was added resulting in the wrong
         directory. Fixes #1321.
 
         * MKVToolNix GUI: merge tool bug fix: when adding a Blu-ray
-        playlist and aborting the »select playlist to add« dialog the
+        playlist and aborting the "select playlist to add" dialog the
         originally opened playlist was added even so.
 
         * mkvmerge: bug fix: the MPEG-1/2 video code was causing an
@@ -657,9 +657,9 @@
 
 2015-06-29  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: bug fix: the »default subtitle character set«
+        * MKVToolNix GUI: bug fix: the "default subtitle character set"
         combo box required a selection without an option for using the
-        system's default. An entry »– no selection by default –« has been
+        system's default. An entry "– no selection by default –" has been
         added at the top.
 
         * MKVToolNix GUI: bug fix: fixed parsing command line arguments to
@@ -682,7 +682,7 @@
         are saved and restored. Implements #1306.
 
         * MKVToolNix GUI: chapter editor bug fix: fixed the menu entries
-        »save to XML file« and »save to Matroska file« not being available
+        "save to XML file" and "save to Matroska file" not being available
         after loading chapters until the tool or tab was changed. Fixes
         #1312.
 
@@ -706,10 +706,10 @@
         * mmg: bug fix: fixed handling of the characters [ and ] in
         container and track properties.
 
-        * MKVToolNix GUI: merge tool enhancement: moved the »output file
-        name« controls below the three tabs so they're always
+        * MKVToolNix GUI: merge tool enhancement: moved the "output file
+        name" controls below the three tabs so they're always
         visible. Also added an option in the preferences to move them back
-        inside the »output« tab. Implements #1266.
+        inside the "output" tab. Implements #1266.
 
 2015-06-26  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -731,8 +731,8 @@
 
 2015-06-24  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: merge tool bug fix: if »automatically set the
-        file title« is enabled then the title field will be cleared after
+        * MKVToolNix GUI: merge tool bug fix: if "automatically set the
+        file title" is enabled then the title field will be cleared after
         all source files have been removed.
 
         * MKVToolNix GUI: new watch jobs tool feature: the first tab
@@ -751,21 +751,21 @@
         directory. Implements #1261.
 
         * MKVToolNix GUI: merge tool bug fix: it was possible to set the
-        »default track flag« to »yes« for multiple tracks of the same
+        "default track flag" to "yes" for multiple tracks of the same
         type. Fixes #1289.
 
-        * MKVToolNix GUI: enhancement: the »open file« dialogs for the
+        * MKVToolNix GUI: enhancement: the "open file" dialogs for the
         chapter and header editor tools will use the same directory that
         was last used in the merge tool. Fixes #1290.
 
 2015-06-23  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: bug fix: fixed reading the »default track« flag
+        * MKVToolNix GUI: bug fix: fixed reading the "default track" flag
         of tracks from added Matroska files. Fixes #1281.
 
         * MKVToolNix GUI: new feature: added a check box to the
         track/chapters/tags/attachments list. This offers an additional
-        way of toggling the »mux this« state of entries, same as the drop
+        way of toggling the "mux this" state of entries, same as the drop
         down box on the right and as double-clicking on the
         item already did. Implements #1277.
 
@@ -785,7 +785,7 @@
         job to the queue. Implements #1288.
 
         * MKVToolNix GUI: job queue enhancement: added the shortcut Ctrl+R
-        for the menu entry »start all pending jobs«. Implements #1287.
+        for the menu entry "start all pending jobs". Implements #1287.
 
         * MKVToolNix GUI: new feature: added an option to always treat
         files dragged & dropped external applications as being added
@@ -818,21 +818,21 @@
 2015-06-21  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: fixed recognition of (E)AC-3 audio tracks
-        using a FourCC of »ec-3«. Fixes #1272.
+        using a FourCC of "ec-3". Fixes #1272.
 
         * MKVToolNix GUI: merge tool bug fix: fixed attachments not being
         merged into the file in certain situations. Fixes #1260.
 
         * MKVToolNix GUI: merge tool bug fix: fixed showing existing
-        attachments present in source files in the »tracks, chapters, tags
-        and attachments« list. Fixes #1256.
+        attachments present in source files in the "tracks, chapters, tags
+        and attachments" list. Fixes #1256.
 
         * MKVToolNix GUI: merge tool bug fix: the jobs created when
         appending files were incorrect resulting in an error message from
         mkvmerge. Fixes #1271.
 
-        * mkvpropedit: bug fix: fixed a warning about »edit specifications
-        resolving to the same track« when changing the track properties
+        * mkvpropedit: bug fix: fixed a warning about "edit specifications
+        resolving to the same track" when changing the track properties
         and setting tags for the same track simultaneously. Fixes #1247.
 
         * MKVToolNix GUI: merge tool bug fix: the output/destination file
@@ -846,7 +846,7 @@
         #1264.
 
         * MKVToolNix GUI: bug fix: if the job removal policy is set to
-        »remove even if there were warnings« then jobs that were muxed
+        "remove even if there were warnings" then jobs that were muxed
         without warnings weren't removed. Fixes #1262.
 
 2015-06-20  Moritz Bunkus  <moritz@bunkus.org>
@@ -886,7 +886,7 @@
 2015-06-09  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: job output enhancement: when clicking the
-        »abort« button the GUI asks for confirmation before aborting. Both
+        "abort" button the GUI asks for confirmation before aborting. Both
         this check and the one when quitting the application can be turned
         off via an option in the preferences. Implements #1238.
 
@@ -914,7 +914,7 @@
 2015-06-06  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: bug fix: fixed the translation of the tool tip
-        for the »close tab« buttons after changing the interface
+        for the "close tab" buttons after changing the interface
         language. Fixes #1237.
 
         * MKVToolNix GUI: bug fix: appended tracks will be disabled
@@ -926,7 +926,7 @@
         types. Implements #1174.
 
         * mkvmerge, MKVToolNix GUI: new feature: added an option
-        (»--engage keep_last_chapter_in_mpls«) that will cause mkvmerge
+        ("--engage keep_last_chapter_in_mpls") that will cause mkvmerge
         not to remove the last chapter entry from a Blu-ray play list file
         which mkvmerge normally does if that entry's timecode is within
         five seconds of the movie's end. Implements #1226.
@@ -944,14 +944,14 @@
         whole queue.
 
         * MKVToolNix GUI: merge tool bug fix: the default settings for the
-        »output directory policy« was changed to »same directory as the
-        first input file«. Fixes #1234.
+        "output directory policy" was changed to "same directory as the
+        first input file". Fixes #1234.
 
 2015-06-04  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: enhancement: the following dialogs can now be
-        maximized: the »preferences« dialog; the »additional command line
-        options« dialog; the dialog showing the command line; the dialog
+        maximized: the "preferences" dialog; the "additional command line
+        options" dialog; the dialog showing the command line; the dialog
         where the user selects the play list to add. Implements #1231.
 
         * MKVToolNix GUI: merge tool enhancement: pressing delete when the
@@ -959,7 +959,7 @@
         to be removed. Implements #1225.
 
         * MKVToolNix GUI: merge tool enhancement: implemented toggling of
-        »mux this« for all selected tracks by either double-clicking on
+        "mux this" for all selected tracks by either double-clicking on
         the tracks or pressing enter/return when the tracks view is
         currently focused. Implements #1225.
 
@@ -1008,7 +1008,7 @@
         jobs removed in the GUI were not removed from the stored settings.
 
         * MKVToolNix GUI: bug fix: when viewing the job output of a job
-        that hasn't been run yet the »save output« button was enabled.
+        that hasn't been run yet the "save output" button was enabled.
 
         * mkvmerge, mkvpropedit: bug fix: fixed an invalid memory access
         leading to a crash in the Base 64 decoder. Fixes #1222.
@@ -1019,8 +1019,8 @@
         languages other than English.
 
         * mkvmerge: enhancement: if running in GUI mode (parameter
-        »--gui-mode«) then the progress will be output as the untranslated
-        »#GUI#progress …%« in order to facilitate parsing of progress by
+        "--gui-mode") then the progress will be output as the untranslated
+        "#GUI#progress …%" in order to facilitate parsing of progress by
         GUIs.
 
         * mkvmerge: bug fix: fixed key frame designation for video tracks
@@ -1034,7 +1034,7 @@
         track tags by mkvmerge's identification mode. This makes it easier
         for the user to create output files without track statistics tags
         as (s)he only has to use the option
-        »--disable-track-statistics-tags« and not disable all the track
+        "--disable-track-statistics-tags" and not disable all the track
         tags as well anymore. Fixes #1186.
 
         * mkvmerge, mkvinfo, mkvextract: bug fix: fixed a crash with
@@ -1050,19 +1050,19 @@
         * MKVToolNix GUI: bug fix: fix alignment of the tool contents with
         the tool selector at the bottom. Fixes #1194.
 
-        * MKVToolNix GUI: new feature: added a »help« menu with links to
+        * MKVToolNix GUI: new feature: added a "help" menu with links to
         several parts of the MKVToolNix documentation. Implements #1195.
 
         * MKVToolNix GUI: job output tool: added a button for acknowleding
         the warnings/errors produced for the job shown. Implements #1210
         and is the last part of the implementation of #1196.
 
-        * MKVToolNix GUI: merge tool: the »save« button has been removed
-        in favor of the »save…« menu entries. This also improves
+        * MKVToolNix GUI: merge tool: the "save" button has been removed
+        in favor of the "save…" menu entries. This also improves
         consistency with the other tools.
 
         * MKVToolNix GUI: enhancement: header editor: made the meaning of
-        the »Reset« button clearer with a better label and an additional
+        the "Reset" button clearer with a better label and an additional
         tool tip. Implements #1212.
 
         * MKVToolNix GUI: enhancement: the tabs for the tools that haven't
@@ -1089,7 +1089,7 @@
         boxes will contain the common languages/countries both at the top
         as well as in the full list. Part of the implementation of #1200.
 
-        * MKVToolNix GUI: enhancement: the entry »Undefined (und)« is
+        * MKVToolNix GUI: enhancement: the entry "Undefined (und)" is
         always shown at the top of the language drop-down boxes. Part of
         the implementation of #1200.
 
@@ -1140,8 +1140,8 @@
         * MKVToolNix GUI: chapter editor enhancements: when starting a new
         file a single edition and a single chapter are added automatically.
 
-        * MKVToolNix GUI: merge tool enhancement: the »add files« button
-        has been re-labeled »add source files« in order to make it clearer
+        * MKVToolNix GUI: merge tool enhancement: the "add files" button
+        has been re-labeled "add source files" in order to make it clearer
         that it cannot be used for adding attachments, even if the
         attachments tab is the currently selected tab.
 
@@ -1151,7 +1151,7 @@
         similar actions.
 
         * MKVToolNix GUI: new feature for the merge tool, the header and
-        chapter editors: if no file is open then »new« and »open file«
+        chapter editors: if no file is open then "new" and "open file"
         buttons are shown.
 
         * build system: desktop files and icons were only installed if
@@ -1192,7 +1192,7 @@
 2015-05-04  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: new feature: added context menu entries for
-        tracks: »select all«, »enable all« and »disable all«.
+        tracks: "select all", "enable all" and "disable all".
 
 2015-05-02  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -1210,14 +1210,14 @@
 
 2015-04-27  Moritz Bunkus  <moritz@bunkus.org>
 
-        * MKVToolNix GUI: new feature: implemented the »additional command
-        line options« dialog.
+        * MKVToolNix GUI: new feature: implemented the "additional command
+        line options" dialog.
 
 2015-04-25  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: new feature in the chapter editor: added
-        features »set the language/country of the selected chapter and its
-        sub-chapters«.
+        features "set the language/country of the selected chapter and its
+        sub-chapters".
 
 2015-04-24  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -1229,10 +1229,10 @@
 2015-04-23  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: new feature in the chapter editor: added
-        features »clamping time stamps of sub-chapters to their parent's
-        time stamps«, »expanding time stamps of chapters to encompass
-        their sub-chapters' time stamps« and »shifting start and end time
-        stamps by an offset«.
+        features "clamping time stamps of sub-chapters to their parent's
+        time stamps", "expanding time stamps of chapters to encompass
+        their sub-chapters' time stamps" and "shifting start and end time
+        stamps by an offset".
 
 2015-04-22  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -1257,7 +1257,7 @@
 2015-04-16  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: fixed aborting file identification with an
-        error message about »aac_error_protection_specific_config« that
+        error message about "aac_error_protection_specific_config" that
         happened for some files. Fixes #1166.
 
 2015-04-15  Moritz Bunkus  <moritz@bunkus.org>
@@ -1282,9 +1282,9 @@
 
         * mkvmerge: enhancement for MPEG program stream handling: mkvmerge
         will only look for additional files automatically if the source
-        file begins with »VTS_…« and just if it ends in a
-        number. E.g. when reading »video_1.mpg« another file called
-        »video_2.mpg« will no longer be read automatically. Implements
+        file begins with "VTS_…" and just if it ends in a
+        number. E.g. when reading "video_1.mpg" another file called
+        "video_2.mpg" will no longer be read automatically. Implements
         #1164.
 
 2015-04-12  Moritz Bunkus  <moritz@bunkus.org>
@@ -1300,10 +1300,10 @@
         names.
 
         * MKVToolNix GUI: merge tool enhancement: added controls for
-        mkvmerge's »reduce audio to its core« and »force NALU size length«
+        mkvmerge's "reduce audio to its core" and "force NALU size length"
         features.
 
-        * MKVToolNix GUI: new feature: implemented the »Preferences«
+        * MKVToolNix GUI: new feature: implemented the "Preferences"
         dialog (not all of the functionality the options refer to has been
         implemented yet, though).
 
@@ -1320,7 +1320,7 @@
         from external applications.
 
         * MKVToolNix GUI: merge tool bug fix: fixed the column headers on
-        the »attachments« tab.
+        the "attachments" tab.
 
 2015-04-10  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -1331,8 +1331,8 @@
         store its settings in a file in the same folder instead of the
         registry.
 
-        * MKVToolNix GUI: enhancement: Qt's »Windows Vista« style is now
-        used on Windows instead of the old, Windows 98-like »Windows«
+        * MKVToolNix GUI: enhancement: Qt's "Windows Vista" style is now
+        used on Windows instead of the old, Windows 98-like "Windows"
         style.
 
         * MKVToolNix GUI: merge tool enhancement: The merge tool has been
@@ -1395,16 +1395,16 @@
         for containers that actually provide a language tag. Implements
         #1108.
 
-        * source code: bug fix: Accidental uses of the »long double« type
-        have been converted to normal »double«s. This fixes compilation on
-        platforms which don't support the »long double« type in
+        * source code: bug fix: Accidental uses of the "long double" type
+        have been converted to normal "double"s. This fixes compilation on
+        platforms which don't support the "long double" type in
         combination with Boost::Math. Fixes #1150.
 
 2015-03-27  Moritz Bunkus  <moritz@bunkus.org>
 
         * Released v7.8.0.
 
-        * build system: Boost's »Math« library is now required.
+        * build system: Boost's "Math" library is now required.
 
         * mkvmerge: bug fix: HEVC tracks which did not have an aspect
         ratio present in their sequence parameter set were copied
@@ -1477,7 +1477,7 @@
         QuickTime files.
 
         * mkvmerge: bug fix: fixed detection of PCM audio tracks in
-        QuickTime files using the »raw « FourCC.
+        QuickTime files using the "raw " FourCC.
 
         * mkvmerge: bug fix: fixed detection of tracks in Flash Video
         files for which the headers do not signal a track.
@@ -1534,14 +1534,14 @@
 
 2015-02-25  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mmg: new feature: added a button »toggle all« that enables or
+        * mmg: new feature: added a button "toggle all" that enables or
         disables all tracks. It at least one track is currently disabled
         then all tracks are enabled when pressing that button. Otherwise
         (if all tracks are currently enabled) then they will all be
         disabled. Implements #1130.
 
-        * mmg: new feature: added a new checkbox »reduce to audio core« on
-        the »format-specific options« tab that passes the new
+        * mmg: new feature: added a new checkbox "reduce to audio core" on
+        the "format-specific options" tab that passes the new
         --reduce-to-core option to mkvmerge if enabled. Part of the
         implementation of #1107.
 
@@ -1559,7 +1559,7 @@
 2015-02-24  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvinfo (Qt interface): bug fix: added WebM extensions to the
-        known types in the »Open file« dialog.
+        known types in the "Open file" dialog.
 
 2015-02-23  Mats Peterson  <matsp888@yahoo.com>
 
@@ -1612,7 +1612,7 @@
 
 2015-02-12  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mkvmerge: new feature: Added an option »--reduce-to-core« that
+        * mkvmerge: new feature: Added an option "--reduce-to-core" that
         tells mkvmerge not to copy HD extensions for DTS tracks. Part of
         the implementation of #1107.
 
@@ -1664,7 +1664,7 @@
 2015-01-14  Moritz Bunkus  <moritz@bunkus.org>
 
         * mmg: bug fix: If a chapter track from a Matroska file is
-        selected then the »language« drop-down box is disabled. Fixes
+        selected then the "language" drop-down box is disabled. Fixes
         #1105.
 
 2015-01-05  Moritz Bunkus  <moritz@bunkus.org>
@@ -1675,7 +1675,7 @@
         transport streams when probing MPLS playlist files. Fixes #1100.
 
         * mmg: bug fix: When scanning for play lists the window presenting
-        the results listed some properties in an unescaped way (e.g. »\s«
+        the results listed some properties in an unescaped way (e.g. "\s"
         instead of spaces).
 
         * mmg: bug fix: When adding MPLS files mmg was only offering to
@@ -1706,7 +1706,7 @@
 2015-01-01  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: fixed handling of HE-AACv2 with object type
-        »parametric stereo«.
+        "parametric stereo".
 
         * mkvmerge: new feature: implemented support for MP4 DASH
         files. Implements #1038.
@@ -1789,7 +1789,7 @@
         set to a non-UTF locale (including C or POSIX) then no XML data
         was output at all even if the XML data contained ASCII characters
         only. Fixes #1086. This also fixes mkvextract writing two BOMs
-        when extracting tags with the »--redirect-output« option on
+        when extracting tags with the "--redirect-output" option on
         Windows.
 
 2014-11-19  Moritz Bunkus  <moritz@bunkus.org>
@@ -1839,7 +1839,7 @@
 2014-09-29  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge, mmg's chapter editor: fixed the default value for the
-        »language« element if it isn't present in a chapter XML file.
+        "language" element if it isn't present in a chapter XML file.
 
 2014-09-28  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -1926,7 +1926,7 @@
 2014-08-09  Moritz Bunkus  <moritz@bunkus.org>
 
         * source: Fixed compilation with Boost 1.56.0 which changed the
-        »indexed« range adaptor in an incompatible way.
+        "indexed" range adaptor in an incompatible way.
 
         * mkvpropedit, mmg's header editor: bug fix: when editing files
         with missing track UID elements such an element will be generated
@@ -1942,8 +1942,8 @@
 
         * Released v7.1.0.
 
-        * all: bug fix: Fixed file seeking code for »seek relative to end
-        of file« case. Fixes #1035.
+        * all: bug fix: Fixed file seeking code for "seek relative to end
+        of file" case. Fixes #1035.
 
         * mmg: bug fix: Selecting the root of the chapter editor tree will
         disable the language/country inputs properly as changing those
@@ -1984,21 +1984,21 @@
 2014-05-26  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: enhancement: In addition to the track statistics tags
-        »BPS«, »DURATION«, »NUMBER_OF_BYTES« and »NUMBER_OF_FRAMES«
+        "BPS", "DURATION", "NUMBER_OF_BYTES" and "NUMBER_OF_FRAMES"
         mkvmerge will write two more tags identifying which application
-        wrote the statistics (»_STATISTICS_WRITING_APP«) and when the file
-        in question was written: »_STATISTICS_WRITING_DATE_UTC«.
-        »_STATISTICS_WRITING_APP« will always contain the same string
-        contained in the segment info header element »WritingApp«.
-        »_STATISTICS_WRITING_DATE_UTC« will contain the same timestamp as
-        in the segment info header element »Date«, though
-        »_STATISTICS_WRITING_DATE_UTC« is actually a string representation
+        wrote the statistics ("_STATISTICS_WRITING_APP") and when the file
+        in question was written: "_STATISTICS_WRITING_DATE_UTC".
+        "_STATISTICS_WRITING_APP" will always contain the same string
+        contained in the segment info header element "WritingApp".
+        "_STATISTICS_WRITING_DATE_UTC" will contain the same timestamp as
+        in the segment info header element "Date", though
+        "_STATISTICS_WRITING_DATE_UTC" is actually a string representation
         instead of an integer value.
 
-        Additionally a tag named »_STATISTICS_TAGS« is written containing
+        Additionally a tag named "_STATISTICS_TAGS" is written containing
         the names of the tags that mkvmerge has set automatically. It
-        equals the following currently: »BPS DURATION NUMBER_OF_BYTES
-        NUMBER_OF_FRAMES«.
+        equals the following currently: "BPS DURATION NUMBER_OF_BYTES
+        NUMBER_OF_FRAMES".
 
         * build system: Boost's "date/time" library is now required.
 
@@ -2021,14 +2021,14 @@
 
         * mkvmerge: new feature: When identifying a Matroska file in
         verbose identification mode track-specific tags will be output as
-        well. The format is »tag_<tag name in lower case>:<tag value>»,
-        e.g. for a tag named »BPS« with the value »224000« the output
-        would be »tag_bps:224000«. Enhancement for #1021.
+        well. The format is "tag_<tag name in lower case>:<tag value>",
+        e.g. for a tag named "BPS" with the value "224000" the output
+        would be "tag_bps:224000". Enhancement for #1021.
 
         * mkvmerge: new feature: mkvmerge will write track-specific tags
-        with statistics (»BPS« for the average number of bits per second,
-        »DURATION« for the duration, »NUMBER_OF_BYTES« and
-        »NUMBER_OF_FRAMES« for the track's size in bytes and its number of
+        with statistics ("BPS" for the average number of bits per second,
+        "DURATION" for the duration, "NUMBER_OF_BYTES" and
+        "NUMBER_OF_FRAMES" for the track's size in bytes and its number of
         frames/packets). Implements #1021.
 
 2014-05-18  Moritz Bunkus  <moritz@bunkus.org>
@@ -2046,7 +2046,7 @@
 
         * all: bug fix: fixed invalid memory access in the cleanup
         procedures which only occurred if the output was redirected with
-        the »--redirect-output« command line parameter.
+        the "--redirect-output" command line parameter.
 
 2014-05-04  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -2060,7 +2060,7 @@
 2014-04-21  Moritz Bunkus  <moritz@bunkus.org>
 
         * mmg: bug fix: Selecting a subtitle track correctly sets the
-        »character set« drop-down box if no character set was set for this
+        "character set" drop-down box if no character set was set for this
         track. Fixes #1008.
 
         * mmg: enhancement: the subtitle character set cannot be set
@@ -2070,10 +2070,10 @@
 
 2014-04-20  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mmg: enhancement: mmg will look for the »mkvmerge« executable in
-        the same directory as the »mmg« executable is located it if the
+        * mmg: enhancement: mmg will look for the "mkvmerge" executable in
+        the same directory as the "mmg" executable is located it if the
         location hasn't been set by the user on all operating systems
-        (before: only on Windows). Improves detection if »mkvmerge« is not
+        (before: only on Windows). Improves detection if "mkvmerge" is not
         in the $PATH.
 
 2014-04-18  Moritz Bunkus  <moritz@bunkus.org>
@@ -2159,7 +2159,7 @@
 
         * mkvmerge: bug fix: When reading M2TS files belonging to an MPLS
         playlist mkvmerge will now only copy packets whose timestamps lie
-        between the »in time« and »out time« restrictions from the
+        between the "in time" and "out time" restrictions from the
         playlist's entry corresponding to that M2TS file. Fixes #985.
 
 2014-01-22  Moritz Bunkus  <moritz@bunkus.org>
@@ -2170,14 +2170,14 @@
 2014-01-21  Moritz Bunkus  <moritz@bunkus.org>
 
         * all: Windows: when redirecting the program's output with cmd.exe
-        (e.g. »mkvinfo file.mkv > info.txt«) the programs will no longer
+        (e.g. "mkvinfo file.mkv > info.txt") the programs will no longer
         write two line feed characters (\r) per carriage return character
         (\n). Fixes #970.
 
         * all: Windows: the default charset for the files created with
-        »--redirect-output« has been changed from the system's local
+        "--redirect-output" has been changed from the system's local
         charset to UTF-8. Just like before it can be changed with
-        »--output-charset«. See #970.
+        "--output-charset". See #970.
 
         * all: bug fix: Windows: messages written to the console (cmd.exe)
         are not re-encoded to the local charset and back to UTF-16 before
@@ -2188,7 +2188,7 @@
 2014-01-18  Moritz Bunkus  <moritz@bunkus.org>
 
         * extract: bug fix: using names of non-existing files in
-        »attachments«, »chapters«, »cuesheet« or »tags« mode caused
+        "attachments", "chapters", "cuesheet" or "tags" mode caused
         mkvextract to crash instead of emitting a proper error
         message. Fixes #964.
 
@@ -2226,8 +2226,8 @@
         mentioned in the interface.
 
         * installer: bug fix: the installation directory for 64bit builds
-        will default to the proper directory (»C:\Program Files« instead
-        of »C:\Program Files (x86)«). Fixes #956.
+        will default to the proper directory ("C:\Program Files" instead
+        of "C:\Program Files (x86)"). Fixes #956.
 
 2014-01-08  Moritz Bunkus  <moritz@bunkus.org>
 
@@ -2245,7 +2245,7 @@
         * build system: bug fix for 64bit builds on Windows
         (x86_64-w64-mingw32): use the correct processor architecture via
         separate Windows manifest files. Fixes mmg and mkvinfo not
-        starting due to »error 0x0000007b«.
+        starting due to "error 0x0000007b".
 
         * mkvmerge: bug fix: Fixed a potential endless loop due to an
         integer overflow in the code removing AVC/h.264 filler NALUs.
@@ -2255,12 +2255,12 @@
         * mkvmerge: bug fix: Fixed reading uncompressed PCM audio tracks
         from QuickTime/MP4 files in certain situations. Fixes #950.
 
-        * mmg: enhancement: Made the »scanned files« list box sortable by
+        * mmg: enhancement: Made the "scanned files" list box sortable by
         all columns. Fixes #954.
 
 2013-12-31  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mmg: enhancement: The »additional parts« dialog will now show
+        * mmg: enhancement: The "additional parts" dialog will now show
         the files that make up an MPLS playlist. This is for informational
         purposes only and doesn't allow changing the playlist itself.
 
@@ -2271,7 +2271,7 @@
         parts. Fixes #934.
 
         * mmg: enhancement: a couple of fixes to tooltips: 1. Content
-        correction for »splitting by chapters«; 2. no ugly re-formatting
+        correction for "splitting by chapters"; 2. no ugly re-formatting
         with wxWidgets 3.0.0 on Windows.
 
 2013-12-30  Moritz Bunkus  <moritz@bunkus.org>
@@ -2295,13 +2295,13 @@
         header editor) then mkvextract was writing files with a length 0
         bytes.
 
-        * mmg: bug fix: the »playlist items« list box in the »select
-        playlist file to add« dialog was showing the items in reversed
+        * mmg: bug fix: the "playlist items" list box in the "select
+        playlist file to add" dialog was showing the items in reversed
         order. Fixes #952.
 
 2013-12-28  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mmg: bug fix: the »select playlist file to add« dialog can now
+        * mmg: bug fix: the "select playlist file to add" dialog can now
         be resized, minimized and maximized. It also remembers its
         position and size during runs. Fixes #951.
 
@@ -2326,9 +2326,9 @@
 
         * mkvmerge: enhancement: allowed muxing Opus to WebM files.
 
-        * mkvmerge: bug fix: Fixed the mapping of the Opus element »seek
-        pre-roll« and »pre-skip« to the Matroska elements »track seek
-        pre-roll« and »codec delay«. Remuxing Matroska files with Opus
+        * mkvmerge: bug fix: Fixed the mapping of the Opus element "seek
+        pre-roll" and "pre-skip" to the Matroska elements "track seek
+        pre-roll" and "codec delay". Remuxing Matroska files with Opus
         created with earlier versions of MKVToolNix is enough to fix such
         a file.
 
