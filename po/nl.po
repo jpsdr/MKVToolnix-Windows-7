@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-15 12:52+0200\n"
+"POT-Creation-Date: 2015-10-15 13:29+0200\n"
 "PO-Revision-Date: 2015-06-21 13:13+0200\n"
 "Last-Translator: René Maassen <bmom43@gmail.com>\n"
 "Language-Team: Dutch <bmom43@gmail.com>\n"
@@ -3987,6 +3987,11 @@ msgstr "Zelfde map van waaruit bestand(en) is/wordt ingelezen"
 msgid "Directory:"
 msgstr "Map:"
 
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
+#, fuzzy
+msgid "Disable \"default track\" flag for subtitle tracks"
+msgstr "Zet aaneensluiten uit voor alle sporen."
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:873
 #, fuzzy
 msgid "Disable &animations"
@@ -3999,11 +4004,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "Zet gebruik van SimpelBlokken uit i.p.v. BlokGroepen."
-
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
-#, fuzzy
-msgid "Disable \"default track\" flag for subtitle tracks"
-msgstr "Zet aaneensluiten uit voor alle sporen."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Disables lacing for all tracks."
@@ -5056,8 +5056,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:123
 msgid ""
-"If enabled the first tab in the \"job output\" tool will not be cleared when a "
-"new job starts."
+"If enabled the first tab in the \"job output\" tool will not be cleared when "
+"a new job starts."
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:138
@@ -6607,8 +6607,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:227
 msgid ""
-"Note that the language \"Undetermined (und)\" is assumed for tracks for which "
-"no language is known (e.g. those read from SRT subtitle files)."
+"Note that the language \"Undetermined (und)\" is assumed for tracks for "
+"which no language is known (e.g. those read from SRT subtitle files)."
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:392
@@ -6768,8 +6768,8 @@ msgstr "Open bestand"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:196
 #, fuzzy
 msgid ""
-"Open a file via the \"chapter editor\" menu, the buttons below or drag & drop "
-"one here."
+"Open a file via the \"chapter editor\" menu, the buttons below or drag & "
+"drop one here."
 msgstr ""
 "Open een bestand via de »Hoofdstuk bewerken« menu of sleep en laat er één "
 "hier neervallen."
@@ -8877,6 +8877,25 @@ msgstr ""
 "het gebruik maken van een volg document(en) (cue) via mkvmerge's,-"
 "hoofdstukken, '--chapters' optie."
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
+msgid ""
+"The file \"%1\" has been modified. Do you really want to close? All changes "
+"will be lost."
+msgstr ""
+"Het bestand »%1« is veranderd. Wil je het echt sluiten? Alle veranderingen "
+"gaan verloren."
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
+msgid ""
+"The file \"%1\" has been modified. Do you really want to reload it? All "
+"changes will be lost."
+msgstr ""
+"Het bestand »%1« is veranderd. Wil je het echt opnieuw inladen? Alle "
+"veranderingen gaan verloren."
+
 #: src/merge/mkvmerge.cpp:1537
 #, boost-format
 msgid ""
@@ -9130,25 +9149,6 @@ msgid ""
 msgstr ""
 "Het bestand wat je probeerde te openen (%1) wordt niet herkend als geldig "
 "Matroska noch een geldig hoofdstuk bestand."
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
-#: src/mkvtoolnix-gui/merge/tool.cpp:175
-msgid ""
-"The file \"%1\" has been modified. Do you really want to close? All changes "
-"will be lost."
-msgstr ""
-"Het bestand »%1« is veranderd. Wil je het echt sluiten? Alle veranderingen "
-"gaan verloren."
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
-msgid ""
-"The file \"%1\" has been modified. Do you really want to reload it? All "
-"changes will be lost."
-msgstr ""
-"Het bestand »%1« is veranderd. Wil je het echt opnieuw inladen? Alle "
-"veranderingen gaan verloren."
 
 #: src/common/kax_file.cpp:53
 #, boost-format
@@ -10202,8 +10202,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
 msgid ""
-"This happens when clicking the \"abort job\" button in a \"job output\" tab and "
-"when quitting the application."
+"This happens when clicking the \"abort job\" button in a \"job output\" tab "
+"and when quitting the application."
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:100
@@ -11262,6 +11262,14 @@ msgstr "Windows (cmd.exe)"
 msgid "Windows Media (ASF/WMV)"
 msgstr ""
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
+msgid "With \"create new settings\" a new set of merge settings will be added."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
+msgid "With \"remove input files\" all input files will be removed."
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:167
 msgid ""
 "With this option enabled they're shown below the track list in a tab widget "
@@ -11275,14 +11283,6 @@ msgid ""
 msgstr ""
 "Met deze optie wordt tijdsinformatie van de houder aangepast om die te laten "
 "overeenkomen."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
-msgid "With \"create new settings\" a new set of merge settings will be added."
-msgstr ""
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
-msgid "With \"remove input files\" all input files will be removed."
-msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 msgid "Write durations for all blocks."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-15 12:52+0200\n"
+"POT-Creation-Date: 2015-10-15 13:29+0200\n"
 "PO-Revision-Date: 2015-09-28 13:34+0200\n"
 "Last-Translator: Israel Lucas Torrijos (Overdrive80) <lukillas.ole@gmail."
 "com>\n"
@@ -4008,6 +4008,11 @@ msgstr ""
 msgid "Directory:"
 msgstr "Directorio:"
 
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
+msgid "Disable \"default track\" flag for subtitle tracks"
+msgstr ""
+"Deshabilita el flag de »pista predefinida« para las pistas de subtítulos"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:873
 msgid "Disable &animations"
 msgstr "Deshabilitar &animaciones"
@@ -4021,11 +4026,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "Deshabilitar el uso de bloques simples en lugar de grupo de bloques."
-
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
-msgid "Disable \"default track\" flag for subtitle tracks"
-msgstr ""
-"Deshabilita el flag de »pista predefinida« para las pistas de subtítulos"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Disables lacing for all tracks."
@@ -5097,8 +5097,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:123
 msgid ""
-"If enabled the first tab in the \"job output\" tool will not be cleared when a "
-"new job starts."
+"If enabled the first tab in the \"job output\" tool will not be cleared when "
+"a new job starts."
 msgstr ""
 "Si se habilita, la primera pestaña en »resultado« no se borrará cuando una "
 "nueva tarea comience. "
@@ -6720,8 +6720,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:227
 msgid ""
-"Note that the language \"Undetermined (und)\" is assumed for tracks for which "
-"no language is known (e.g. those read from SRT subtitle files)."
+"Note that the language \"Undetermined (und)\" is assumed for tracks for "
+"which no language is known (e.g. those read from SRT subtitle files)."
 msgstr ""
 "Tenga en cuenta que el idioma »Indeterminado (und)« es el asumido para "
 "aquellas pistas que su idioma sea desconocido (p.e. los de archivos de "
@@ -6892,8 +6892,8 @@ msgstr "Abrir archivo"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:196
 msgid ""
-"Open a file via the \"chapter editor\" menu, the buttons below or drag & drop "
-"one here."
+"Open a file via the \"chapter editor\" menu, the buttons below or drag & "
+"drop one here."
 msgstr ""
 "Abre un archivo desde el menú »Editor de capítulo«, usando los botones de "
 "abajo o arrastra y suelta uno aquí."
@@ -9032,6 +9032,25 @@ msgstr ""
 "inverso de usar una hoja de distribución de pistas con la opción de mkvmerge "
 "'--chapters'."
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
+msgid ""
+"The file \"%1\" has been modified. Do you really want to close? All changes "
+"will be lost."
+msgstr ""
+"El archivo »%1« ha sido modificado. ¿De verdad quieres cerrar? Los cambios "
+"no se guardarán."
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
+msgid ""
+"The file \"%1\" has been modified. Do you really want to reload it? All "
+"changes will be lost."
+msgstr ""
+"El archivo »%1« ha sido modificado. ¿De verdad quieres recargar? Los cambios "
+"no se guardarán."
+
 #: src/merge/mkvmerge.cpp:1537
 #, boost-format
 msgid ""
@@ -9283,25 +9302,6 @@ msgid ""
 msgstr ""
 "El archivo que intentas abrir (%1) no se reconoció ni como un archivo valido "
 "Matroska ni de archivo de capítulos."
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
-#: src/mkvtoolnix-gui/merge/tool.cpp:175
-msgid ""
-"The file \"%1\" has been modified. Do you really want to close? All changes "
-"will be lost."
-msgstr ""
-"El archivo »%1« ha sido modificado. ¿De verdad quieres cerrar? Los cambios "
-"no se guardarán."
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
-msgid ""
-"The file \"%1\" has been modified. Do you really want to reload it? All "
-"changes will be lost."
-msgstr ""
-"El archivo »%1« ha sido modificado. ¿De verdad quieres recargar? Los cambios "
-"no se guardarán."
 
 #: src/common/kax_file.cpp:53
 #, boost-format
@@ -10370,8 +10370,8 @@ msgstr "Esta función requiere la aplicación %1."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
 msgid ""
-"This happens when clicking the \"abort job\" button in a \"job output\" tab and "
-"when quitting the application."
+"This happens when clicking the \"abort job\" button in a \"job output\" tab "
+"and when quitting the application."
 msgstr ""
 "Esto sucede cuando se hace clic en el botón »cancelar tarea« de la pestaña "
 "»resultado« y al salir de la aplicación."
@@ -11446,6 +11446,18 @@ msgstr "Windows (cmd.exe)"
 msgid "Windows Media (ASF/WMV)"
 msgstr "Windows Media (ASF/WMV)"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
+msgid "With \"create new settings\" a new set of merge settings will be added."
+msgstr ""
+"Con »crear nueva configuración«, se añadirán un nuevo conjunto de ajustes de "
+"multiplexado."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
+msgid "With \"remove input files\" all input files will be removed."
+msgstr ""
+"Con »eliminar archivos de entrada«, todos los archivos de entrada se "
+"eliminarán."
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:167
 msgid ""
 "With this option enabled they're shown below the track list in a tab widget "
@@ -11459,18 +11471,6 @@ msgid ""
 msgstr ""
 "Con esta opción, la información del timing se ajusta para que coincida con "
 "la del contenedor."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
-msgid "With \"create new settings\" a new set of merge settings will be added."
-msgstr ""
-"Con »crear nueva configuración«, se añadirán un nuevo conjunto de ajustes de "
-"multiplexado."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
-msgid "With \"remove input files\" all input files will be removed."
-msgstr ""
-"Con »eliminar archivos de entrada«, todos los archivos de entrada se "
-"eliminarán."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 msgid "Write durations for all blocks."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-15 12:52+0200\n"
+"POT-Creation-Date: 2015-10-15 13:29+0200\n"
 "PO-Revision-Date: 2015-10-15 12:52+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
@@ -3579,6 +3579,10 @@ msgstr "Verzeichnis &relativ zur ersten Quelldatei:"
 msgid "Directory:"
 msgstr "Verzeichnis:"
 
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
+msgid "Disable \"default track\" flag for subtitle tracks"
+msgstr "»Standardspurschalter« von Untertitelspuren deaktivieren"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:873
 msgid "Disable &animations"
 msgstr "&Animationen deaktivieren"
@@ -3590,10 +3594,6 @@ msgstr "Zusätzliche &verlustfreie Komprimierung für alle Spurtypen deaktiviere
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "Die Benutzung von vereinfachten Blockelementen anstelle der normalen Blockelemente verhindern"
-
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
-msgid "Disable \"default track\" flag for subtitle tracks"
-msgstr "»Standardspurschalter« von Untertitelspuren deaktivieren"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Disables lacing for all tracks."
@@ -7590,6 +7590,17 @@ msgstr "Die aus dem MPEG-4-Layer-2-Videodatenstrom extrahierten Werte für Höhe
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a CUE sheet. This is the reverse of using a CUE sheet with mkvmerge's '--chapters' option."
 msgstr "Im fünften Modus wird versucht, Kapitelinformationen und Tags zusammen als Cuesheet zu extrahieren. Dies ist umgekehrt, wie bei der Benutzung eines Cuesheets mit Mkvmerges Option »--chapters«."
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
+msgid "The file \"%1\" has been modified. Do you really want to close? All changes will be lost."
+msgstr "Die Datei »%1« wurde verändert. Wollen Sie sie wirklich schließen? Alle Änderungen gehen dabei verloren."
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
+msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
+msgstr "Die Datei »%1« wurde verändert. Wollen Sie sie wirklich neu laden? Alle Änderungen gehen dabei verloren."
+
 #: src/merge/mkvmerge.cpp:1537
 #, boost-format
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
@@ -7795,17 +7806,6 @@ msgstr "Die Datei, die Sie öffnen möchten (»%1«), wurde nicht als gültige M
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:388
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
 msgstr "Die Datei, die Sie öffnen möchten (»%1«), wurde weder als gütltige Matroska-Datei noch als gültige Kapiteldatei erkannt."
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
-#: src/mkvtoolnix-gui/merge/tool.cpp:175
-msgid "The file \"%1\" has been modified. Do you really want to close? All changes will be lost."
-msgstr "Die Datei »%1« wurde verändert. Wollen Sie sie wirklich schließen? Alle Änderungen gehen dabei verloren."
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
-msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
-msgstr "Die Datei »%1« wurde verändert. Wollen Sie sie wirklich neu laden? Alle Änderungen gehen dabei verloren."
 
 #: src/common/kax_file.cpp:53
 #, boost-format
@@ -9346,14 +9346,6 @@ msgstr "Windows (cmd.exe)"
 msgid "Windows Media (ASF/WMV)"
 msgstr "Windows Media (ASF/WMV)"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:167
-msgid "With this option enabled they're shown below the track list in a tab widget instead."
-msgstr "Durch das Aktivieren dieser Option werden sie statt dessen in einem Tabelement unterhalb der Spurliste angezeigt."
-
-#: src/mkvtoolnix-gui/merge/input.cpp:369
-msgid "With this option that information is adjusted to match the container's timing information."
-msgstr "Ist diese Option aktiviert, so wird die Zeitsteuerungsinformation im Bitstrom an die des Containers angepasst."
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
 msgid "With \"create new settings\" a new set of merge settings will be added."
 msgstr "Mit »neue Einstellungen erzeugen« werden neue Muxeinstellungen hinzugefügt werden."
@@ -9361,6 +9353,14 @@ msgstr "Mit »neue Einstellungen erzeugen« werden neue Muxeinstellungen hinzuge
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
 msgid "With \"remove input files\" all input files will be removed."
 msgstr "Mit »Quelldateien entfernen« werden alle Quelldateien entfernt werden."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:167
+msgid "With this option enabled they're shown below the track list in a tab widget instead."
+msgstr "Durch das Aktivieren dieser Option werden sie statt dessen in einem Tabelement unterhalb der Spurliste angezeigt."
+
+#: src/mkvtoolnix-gui/merge/input.cpp:369
+msgid "With this option that information is adjusted to match the container's timing information."
+msgstr "Ist diese Option aktiviert, so wird die Zeitsteuerungsinformation im Bitstrom an die des Containers angepasst."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 msgid "Write durations for all blocks."

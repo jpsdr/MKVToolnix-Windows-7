@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-15 12:52+0200\n"
+"POT-Creation-Date: 2015-10-15 13:29+0200\n"
 "PO-Revision-Date: 2015-10-03 21:31+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -3880,6 +3880,10 @@ msgstr "Zuzenbidea lehen &sarrera agiriaren zuzenbidearen araberakoa:"
 msgid "Directory:"
 msgstr "Zuzenbidea:"
 
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
+msgid "Disable \"default track\" flag for subtitle tracks"
+msgstr "Ezgaitu »berezko bideak« ikurra azpidatzi bideentzat"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:873
 msgid "Disable &animations"
 msgstr "Ezgaitu &animazioak"
@@ -3891,10 +3895,6 @@ msgstr "Ezgaitu galeragabeko &konpresio gehigarria bide mota guztientzat"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "Ezgaitu Bloke-Arruntak erabiltzea Bloke-Taldeak ordez."
-
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
-msgid "Disable \"default track\" flag for subtitle tracks"
-msgstr "Ezgaitu »berezko bideak« ikurra azpidatzi bideentzat"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Disables lacing for all tracks."
@@ -4942,8 +4942,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:123
 msgid ""
-"If enabled the first tab in the \"job output\" tool will not be cleared when a "
-"new job starts."
+"If enabled the first tab in the \"job output\" tool will not be cleared when "
+"a new job starts."
 msgstr ""
 "Gaituta badago »lan irteera« tresnako lehen hegatsa ez da garbituko lan "
 "berri bat hasten denean."
@@ -6520,8 +6520,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:227
 msgid ""
-"Note that the language \"Undetermined (und)\" is assumed for tracks for which "
-"no language is known (e.g. those read from SRT subtitle files)."
+"Note that the language \"Undetermined (und)\" is assumed for tracks for "
+"which no language is known (e.g. those read from SRT subtitle files)."
 msgstr ""
 "Ohartu »Zehaztugabea (und)« hizkuntza ezaguna ez den hizkuntza duten "
 "bideentzat hartzen dela (adib. SRT azpidatzi agirietatik irakurtzean)."
@@ -6684,8 +6684,8 @@ msgstr "Ireki Agiria"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:196
 msgid ""
-"Open a file via the \"chapter editor\" menu, the buttons below or drag & drop "
-"one here."
+"Open a file via the \"chapter editor\" menu, the buttons below or drag & "
+"drop one here."
 msgstr ""
 "Ireki agiri bat »atal editatzailea« menuaren bidez, azpiko botoien bidez edo "
 "arrastatu-eta-askatu bat hemen."
@@ -8772,6 +8772,25 @@ msgstr ""
 "ateratzen saiatzen da. Hau CUE orria mkvmergeren '--chapters' aukerarekin "
 "erabiltzearen alderantzizkoa da ."
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
+msgid ""
+"The file \"%1\" has been modified. Do you really want to close? All changes "
+"will be lost."
+msgstr ""
+"»%1« agiria aldatu egin da. Egitan nahi duzu istea? Aldaketa guztiak galdu "
+"egingo dira."
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
+msgid ""
+"The file \"%1\" has been modified. Do you really want to reload it? All "
+"changes will be lost."
+msgstr ""
+"»%1« agiria aldatu egin da. Egitan nahi duzu birgertatzea? Aldaketa guztiak "
+"galdu egingo dira."
+
 #: src/merge/mkvmerge.cpp:1537
 #, boost-format
 msgid ""
@@ -9017,25 +9036,6 @@ msgid ""
 msgstr ""
 "Irekitzen saiatzen ari zaren agiria (%1) ez da ezagutzen ez baliozko "
 "Matroska agiri bat bezala ez baliozkoa atal agiri bat bezala."
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
-#: src/mkvtoolnix-gui/merge/tool.cpp:175
-msgid ""
-"The file \"%1\" has been modified. Do you really want to close? All changes "
-"will be lost."
-msgstr ""
-"»%1« agiria aldatu egin da. Egitan nahi duzu istea? Aldaketa guztiak galdu "
-"egingo dira."
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
-msgid ""
-"The file \"%1\" has been modified. Do you really want to reload it? All "
-"changes will be lost."
-msgstr ""
-"»%1« agiria aldatu egin da. Egitan nahi duzu birgertatzea? Aldaketa guztiak "
-"galdu egingo dira."
 
 #: src/common/kax_file.cpp:53
 #, boost-format
@@ -10052,8 +10052,8 @@ msgstr "Eginkizunak %1 aplikazioa behar du."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
 msgid ""
-"This happens when clicking the \"abort job\" button in a \"job output\" tab and "
-"when quitting the application."
+"This happens when clicking the \"abort job\" button in a \"job output\" tab "
+"and when quitting the application."
 msgstr ""
 "Hau »lan irteera« hegatsean »utzi lana« botoia klikatzerakoan eta aplikazioa "
 "uzterakoan gertatzen da."
@@ -11111,6 +11111,15 @@ msgstr "Windows (cmd.exe)"
 msgid "Windows Media (ASF/WMV)"
 msgstr "Windows Media (ASF/WMV)"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
+msgid "With \"create new settings\" a new set of merge settings will be added."
+msgstr ""
+"»sortu ezarpen berriak«-rekin batze ezarpen agindu berri bat gehituko da."
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
+msgid "With \"remove input files\" all input files will be removed."
+msgstr "»kendu sarrera agiriak«-rekin sarrera agiri guztiak kenduko dira."
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:167
 msgid ""
 "With this option enabled they're shown below the track list in a tab widget "
@@ -11126,15 +11135,6 @@ msgid ""
 msgstr ""
 "Aukera honekin argibide hori edukiontziaren denbora-kode argibidearekin bat "
 "etortzeko zehazten da."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
-msgid "With \"create new settings\" a new set of merge settings will be added."
-msgstr ""
-"»sortu ezarpen berriak«-rekin batze ezarpen agindu berri bat gehituko da."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
-msgid "With \"remove input files\" all input files will be removed."
-msgstr "»kendu sarrera agiriak«-rekin sarrera agiri guztiak kenduko dira."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 msgid "Write durations for all blocks."

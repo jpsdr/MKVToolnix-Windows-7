@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-15 12:52+0200\n"
+"POT-Creation-Date: 2015-10-15 13:29+0200\n"
 "PO-Revision-Date: 2015-08-30 02:09+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -3870,6 +3870,10 @@ msgstr ""
 msgid "Directory:"
 msgstr "Директоријум:"
 
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
+msgid "Disable \"default track\" flag for subtitle tracks"
+msgstr "Онемогући белег „подразумева се“ за записе поднаписа."
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:873
 msgid "Disable &animations"
 msgstr "Искључи &анимације"
@@ -3882,10 +3886,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "Онемогући употребу „Простих_блокова“ уместо „Група_блокова“."
-
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
-msgid "Disable \"default track\" flag for subtitle tracks"
-msgstr "Онемогући белег „подразумева се“ за записе поднаписа."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Disables lacing for all tracks."
@@ -4937,8 +4937,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:123
 msgid ""
-"If enabled the first tab in the \"job output\" tool will not be cleared when a "
-"new job starts."
+"If enabled the first tab in the \"job output\" tool will not be cleared when "
+"a new job starts."
 msgstr ""
 "Ако је омогућено програм ће да омогући да унесете опис радње при њеном "
 "додавању у заказане радње"
@@ -6490,8 +6490,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:227
 msgid ""
-"Note that the language \"Undetermined (und)\" is assumed for tracks for which "
-"no language is known (e.g. those read from SRT subtitle files)."
+"Note that the language \"Undetermined (und)\" is assumed for tracks for "
+"which no language is known (e.g. those read from SRT subtitle files)."
 msgstr ""
 "Знајте да се поставка језика \"Undetermined (und)\" подразумева за записе са "
 "непознатом језичком поставком (нпр. записи учитани из Срт-датотека са "
@@ -6653,8 +6653,8 @@ msgstr "Отвори датотеку"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:196
 msgid ""
-"Open a file via the \"chapter editor\" menu, the buttons below or drag & drop "
-"one here."
+"Open a file via the \"chapter editor\" menu, the buttons below or drag & "
+"drop one here."
 msgstr ""
 "Отворите датотеку преко изборника »Уредник поглавља«, дугмади испод или "
 "превлачењем овде."
@@ -8737,6 +8737,25 @@ msgstr ""
 "се затим уписују као Кју-лист. Ово је обрнуто од употребе Кју-листа код "
 "опције Мкв-спојнице зване „--chapters“."
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
+msgid ""
+"The file \"%1\" has been modified. Do you really want to close? All changes "
+"will be lost."
+msgstr ""
+"Измењена је датотека »%1«. Уколико је сада затворите, изгубићете све учињене "
+"измене! Да ли то желите?"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
+msgid ""
+"The file \"%1\" has been modified. Do you really want to reload it? All "
+"changes will be lost."
+msgstr ""
+"Измењена је датотека »%1«. Уколико је учитате наново, изгубићете све учињене "
+"измене! Да ли то желите?"
+
 #: src/merge/mkvmerge.cpp:1537
 #, boost-format
 msgid ""
@@ -8986,25 +9005,6 @@ msgid ""
 msgstr ""
 "Датотека коју сте покушали да отворите (%1) није ваљана матрошкина или "
 "датотека поглавља."
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
-#: src/mkvtoolnix-gui/merge/tool.cpp:175
-msgid ""
-"The file \"%1\" has been modified. Do you really want to close? All changes "
-"will be lost."
-msgstr ""
-"Измењена је датотека »%1«. Уколико је сада затворите, изгубићете све учињене "
-"измене! Да ли то желите?"
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
-msgid ""
-"The file \"%1\" has been modified. Do you really want to reload it? All "
-"changes will be lost."
-msgstr ""
-"Измењена је датотека »%1«. Уколико је учитате наново, изгубићете све учињене "
-"измене! Да ли то желите?"
 
 #: src/common/kax_file.cpp:53
 #, boost-format
@@ -10021,8 +10021,8 @@ msgstr "Ово се догоди када се напушта програм, т
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:113
 msgid ""
-"This happens when clicking the \"abort job\" button in a \"job output\" tab and "
-"when quitting the application."
+"This happens when clicking the \"abort job\" button in a \"job output\" tab "
+"and when quitting the application."
 msgstr ""
 "Ово се дешава код притиска дугмета »Поништи« у језичку »Исход радње« и када "
 "се излази из програма."
@@ -11066,6 +11066,15 @@ msgstr "Виндоуз („cmd.exe“)"
 msgid "Windows Media (ASF/WMV)"
 msgstr "Виндоуз-медиј (Асф/Вмв)"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
+msgid "With \"create new settings\" a new set of merge settings will be added."
+msgstr ""
+"Опцијом „створи нове поставке“ додаће се нов скуп поставки за сједињавање"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
+msgid "With \"remove input files\" all input files will be removed."
+msgstr "Опцијом „уклони улазне датотеке“ уклониће се све улазне датотеке."
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:167
 msgid ""
 "With this option enabled they're shown below the track list in a tab widget "
@@ -11079,15 +11088,6 @@ msgid ""
 msgstr ""
 "Овом опцијом та информација је прилагођена тако да одговара временским "
 "ознакама сандука."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
-msgid "With \"create new settings\" a new set of merge settings will be added."
-msgstr ""
-"Опцијом „створи нове поставке“ додаће се нов скуп поставки за сједињавање"
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
-msgid "With \"remove input files\" all input files will be removed."
-msgstr "Опцијом „уклони улазне датотеке“ уклониће се све улазне датотеке."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 msgid "Write durations for all blocks."

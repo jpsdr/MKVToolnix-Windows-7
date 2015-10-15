@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-15 12:52+0200\n"
+"POT-Creation-Date: 2015-10-15 13:29+0200\n"
 "PO-Revision-Date: 2015-10-11 10:54+0800\n"
 "Last-Translator: Donghui Li <DonghuiLi.81@gmail.com>\n"
 "Language-Team: Chinese Simplified <mkvtoolnix@lidian.info>\n"
@@ -3495,6 +3495,10 @@ msgstr "首个输入文件所在目录的相对目录(&R)："
 msgid "Directory:"
 msgstr "目录："
 
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
+msgid "Disable \"default track\" flag for subtitle tracks"
+msgstr "禁用字幕轨道的“默认轨道”标记"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:873
 msgid "Disable &animations"
 msgstr "禁用动画效果(&A)"
@@ -3506,10 +3510,6 @@ msgstr "禁用所有轨道类型的额外无损压缩(&O)"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "禁止使用 SimpleBlock (简化区块) 代替 BlockGroup (块组)。"
-
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:902
-msgid "Disable \"default track\" flag for subtitle tracks"
-msgstr "禁用字幕轨道的“默认轨道”标记"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Disables lacing for all tracks."
@@ -7479,6 +7479,17 @@ msgstr "从 MPEG4 layer 2 视频数据码流中提取的视频宽度和高度数
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a CUE sheet. This is the reverse of using a CUE sheet with mkvmerge's '--chapters' option."
 msgstr "第五种模式用于尝试提取章节信息和标签，并将其输出为 CUE 表单。这是在 mkvmerge 的 '--chapters' 选项中使用 CUE 表单的逆操作。"
 
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
+#: src/mkvtoolnix-gui/merge/tool.cpp:175
+msgid "The file \"%1\" has been modified. Do you really want to close? All changes will be lost."
+msgstr "文件 '%1' 已被修改。确定要关闭吗？所有改动将会丢失。"
+
+#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
+#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
+msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
+msgstr "文件 '%1' 已被修改。确定要重新加载吗？所有改动将会丢失。"
+
 #: src/merge/mkvmerge.cpp:1537
 #, boost-format
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
@@ -7684,17 +7695,6 @@ msgstr "您试图打开的文件 (%1) 无法被识别为有效的 Matroska/WebM 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:388
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
 msgstr "您试图打开的文件 (%1) 既不是有效的 Matroska 文件，也不是有效的章节文件。"
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:243
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:202
-#: src/mkvtoolnix-gui/merge/tool.cpp:175
-msgid "The file \"%1\" has been modified. Do you really want to close? All changes will be lost."
-msgstr "文件 '%1' 已被修改。确定要关闭吗？所有改动将会丢失。"
-
-#: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
-#: src/mkvtoolnix-gui/header_editor/tool.cpp:172
-msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
-msgstr "文件 '%1' 已被修改。确定要重新加载吗？所有改动将会丢失。"
 
 #: src/common/kax_file.cpp:53
 #, boost-format
@@ -9220,14 +9220,6 @@ msgstr "Windows (cmd.exe)"
 msgid "Windows Media (ASF/WMV)"
 msgstr "Windows 媒体 (ASF/WMV)"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:167
-msgid "With this option enabled they're shown below the track list in a tab widget instead."
-msgstr "如果勾选该选项，它们将以标签部件形式在轨道列表下方显示。"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:369
-msgid "With this option that information is adjusted to match the container's timing information."
-msgstr "使用该选项后，以上信息将被调整以匹配容器中的时长信息。"
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:172
 msgid "With \"create new settings\" a new set of merge settings will be added."
 msgstr "若设为“创建新配置”，将会新建一组新的合并配置。"
@@ -9235,6 +9227,14 @@ msgstr "若设为“创建新配置”，将会新建一组新的合并配置。
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:174
 msgid "With \"remove input files\" all input files will be removed."
 msgstr "若设为“移除输入文件”，所有输入文件将会被移除。"
+
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:167
+msgid "With this option enabled they're shown below the track list in a tab widget instead."
+msgstr "如果勾选该选项，它们将以标签部件形式在轨道列表下方显示。"
+
+#: src/mkvtoolnix-gui/merge/input.cpp:369
+msgid "With this option that information is adjusted to match the container's timing information."
+msgstr "使用该选项后，以上信息将被调整以匹配容器中的时长信息。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 msgid "Write durations for all blocks."
