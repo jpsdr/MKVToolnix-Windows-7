@@ -41,8 +41,8 @@ TrackModel::~TrackModel() {
 
 void
 TrackModel::retranslateUi() {
-  setHorizontalHeaderLabels(          QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID") << QY("Default track in output") << QY("Properties"));
-  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("codec") <<  Q("type") <<  Q("muxThis")  <<  Q("language") <<  Q("name") <<  Q("sourceFile")  <<  Q("id") <<  Q("defaultTrackFlag")        <<  Q("properties"));
+  setHorizontalHeaderLabels(          QStringList{} << QY("Codec") << QY("Type") << QY("Mux this") << QY("Language") << QY("Name") << QY("Source file") << QY("ID") << QY("Default track in output") << QY("Forced track")    << QY("Properties"));
+  Util::setSymbolicColumnNames(*this, QStringList{} <<  Q("codec") <<  Q("type") <<  Q("muxThis")  <<  Q("language") <<  Q("name") <<  Q("sourceFile")  <<  Q("id") <<  Q("defaultTrackFlag")        <<  Q("forcedTrackFlag") <<  Q("properties"));
 
   horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
@@ -77,7 +77,7 @@ TrackModel::setTracks(QList<Track *> &tracks) {
 QList<QStandardItem *>
 TrackModel::createRow(Track *track) {
   auto items = QList<QStandardItem *>{};
-  for (int idx = 0; idx < 9; ++idx)
+  for (int idx = 0, numColumns = columnCount(); idx < numColumns; ++idx)
     items << new QStandardItem{};
 
   setItemsFromTrack(items, track);
@@ -96,7 +96,8 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[5]->setText(QFileInfo{ track->m_file->m_fileName }.fileName());
   items[6]->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
   items[7]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("yes") : QY("no"));
-  items[8]->setText(summarizeProperties(*track));
+  items[8]->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("yes") : QY("no"));
+  items[9]->setText(summarizeProperties(*track));
 
   items[0]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
   items[0]->setCheckable(true);
@@ -111,6 +112,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                     :                         m_genericIcon);
   items[2]->setIcon(track->m_muxThis          ? m_yesIcon : m_noIcon);
   items[7]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? m_yesIcon : m_noIcon);
+  items[8]->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? m_yesIcon : m_noIcon);
   items[6]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
