@@ -190,8 +190,8 @@ Tab::setupInputControls() {
   for (auto idx = 0; idx < 3; ++idx)
     ui->defaultTrackFlag->addItem(QString{}, idx);
 
-  // Originally the »forced track« flag's options where ordered »off,
-  // on«; now they're ordered »yes, no« for consistency with other
+  // Originally the "forced track" flag's options where ordered "off,
+  // on"; now they're ordered "yes, no" for consistency with other
   // flags, requiring the values to be reversed.
   ui->forcedTrackFlag->addItem(QString{}, 1);
   ui->forcedTrackFlag->addItem(QString{}, 0);

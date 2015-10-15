@@ -201,7 +201,7 @@ Tab::onStatusChanged(uint64_t id,
     MainWindow::watchJobTool()->enableMenuActions();
 
     // Check for the signalled status, not the current one, in order to
-    // detect a change from »not running« to »running« only once, no
+    // detect a change from "not running" to "running" only once, no
     // matter which order the signals arrive in.
     if (Jobs::Job::Running == newStatus)
       setInitialDisplay(*job);

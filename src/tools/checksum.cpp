@@ -53,7 +53,7 @@ show_help() {
          "  -c, --crc32-ieee       Use CRC-32 IEEE\n"
          "      --crc32-ieee-le    Use CRC-32 IEEE Little Endian\n"
          "  -m, --md5              Use MD5\n"
-         "  --chunk-size size      Calculate in chunks of »size« bytes; 0 means all\n"
+         "  --chunk-size size      Calculate in chunks of \"size\" bytes; 0 means all\n"
          "                         in one (default: 4096)\n"
          "  --initial-value value  Use this as the initial value for CRC algorithms\n"
          "                         (default: 0)\n"

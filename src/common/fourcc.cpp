@@ -134,7 +134,7 @@ fourcc_c::str()
 std::string
 fourcc_c::description()
   const {
-  static auto s_id_fmt   = boost::format("0x%|1$08x| »%2%%3%%4%%5%«");
+  static auto s_id_fmt   = boost::format("0x%|1$08x| \"%2%%3%%4%%5%\"");
   static auto s_name_fmt = boost::format(": %1%");
 
   unsigned char buffer[4];

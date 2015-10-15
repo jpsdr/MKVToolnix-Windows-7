@@ -110,7 +110,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbGuiWarnBeforeAbortingJobs,
                    Q("%1 %2")
                    .arg(QY("If checked the program will ask for confirmation before aborting a running job."))
-                   .arg(QY("This happens when clicking the »abort job« button in a »job output« tab and when quitting the application.")));
+                   .arg(QY("This happens when clicking the \"abort job\" button in a \"job output\" tab and when quitting the application.")));
 
   Util::setToolTip(ui->cbGuiShowMoveUpDownButtons,
                    Q("%1 %2")
@@ -120,8 +120,8 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled the program will ask for confirmation before overwriting files and jobs."));
 
   Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled the GUI will let you enter a description for a job when adding it to the queue."));
-  Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the »job output« tool will not be cleared when a new job starts."));
-  Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting, QY("If enabled the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing »start muxing«)."));
+  Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the \"job output\" tool will not be cleared when a new job starts."));
+  Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting, QY("If enabled the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start muxing\")."));
   Util::setToolTip(ui->cbGuiResetJobWarningErrorCountersOnExit, QY("If enabled the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
@@ -141,7 +141,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbMAutoSetFileTitle,
                    Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QY("Certain file formats have 'title' property."))
-                   .arg(QY("When the user adds a file containing such a title then the program will copy the title into the »file title« input box if this option is enabled."))
+                   .arg(QY("When the user adds a file containing such a title then the program will copy the title into the \"file title\" input box if this option is enabled."))
                    .arg(QY("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
 
   Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
@@ -149,12 +149,12 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("When a file is added its name is scanned."))
                    .arg(QY("If it contains the word 'DELAY' followed by a number then this number is automatically put into the 'delay' input field for any audio track found in the file.")));
 
-  Util::setToolTip(ui->cbMDisableDefaultTrackForSubtitles, QY("If enabled all subtitle tracks will have their »default track« flag set to »no« when they're added."));
+  Util::setToolTip(ui->cbMDisableDefaultTrackForSubtitles, QY("If enabled all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."));
 
   Util::setToolTip(ui->cbMDisableCompressionForAllTrackTypes,
                    Q("%1 %2")
                    .arg(QY("Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."))
-                   .arg(QY("Checking this option causes the GUI to set that compression to »none« by default for all track types when adding files.")));
+                   .arg(QY("Checking this option causes the GUI to set that compression to \"none\" by default for all track types when adding files.")));
 
   Util::setToolTip(ui->cbMAlwaysShowOutputFileControls,
                    Q("%1 %2")
@@ -169,9 +169,9 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbMClearMergeSettings,
                    Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li></ol>")
                    .arg(QY("The GUI can help you start your next merge settings after having started a job or having added a one to the job queue."))
-                   .arg(QY("With »create new settings« a new set of merge settings will be added."))
+                   .arg(QY("With \"create new settings\" a new set of merge settings will be added."))
                    .arg(QY("The current merge settings will be closed."))
-                   .arg(QY("With »remove input files« all input files will be removed."))
+                   .arg(QY("With \"remove input files\" all input files will be removed."))
                    .arg(QY("Most of the other settings on the output tab will be kept intact, though.")));
 
   Util::setToolTip(ui->cbMAddingAppendingFilesPolicy,
@@ -224,7 +224,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("When adding source files all tracks are normally set to be muxed into the output file."))
                    .arg(QY("If this option is enabled then only those tracks will be set to be muxed whose language is selected below."))
                    .arg(QY("You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."))
-                   .arg(QY("Note that the language »Undetermined (und)« is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files).")));
+                   .arg(QY("Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files).")));
   Util::setToolTip(ui->cbMEnableMuxingAllVideoTracks,    QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
   Util::setToolTip(ui->cbMEnableMuxingAllAudioTracks,    QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
   Util::setToolTip(ui->cbMEnableMuxingAllSubtitleTracks, QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));

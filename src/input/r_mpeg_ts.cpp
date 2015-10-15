@@ -747,9 +747,9 @@ mpeg_ts_reader_c::read_headers() {
       track->m_coupled_track->language = track->language;
 
     // For TrueHD tracks detection for embedded AC-3 frames is
-    // done. However, »probed_ok« is only set on the TrueHD track if
+    // done. However, "probed_ok" is only set on the TrueHD track if
     // both types have been found. If only TrueHD is found then
-    // »probed_ok« must be set to true after detection has exhausted
+    // "probed_ok" must be set to true after detection has exhausted
     // the search space; otherwise a TrueHD-only track would never be
     // considered OK.
     if (track->codec.is(codec_c::type_e::A_TRUEHD) && track->m_truehd_found_truehd)

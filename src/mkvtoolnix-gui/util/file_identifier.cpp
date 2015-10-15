@@ -126,7 +126,7 @@ FileIdentifier::parseOutput() {
 }
 
 // Attachment ID 1: type "cue", size 1844 bytes, description "dummy", file name "cuewithtags2.cue"
-// The »description« and »file name« parts are optional.
+// The "description" and "file name" parts are optional.
 void
 FileIdentifier::parseAttachmentLine(QString const &line) {
   static QRegularExpression s_re{"^Attachment ID (\\d+): type \"(.*)\", size (\\d+) bytes(?:, description \"(.*)\")?(?:, file name \"(.*)\")"};

@@ -26,7 +26,7 @@ private:
 
 public:
   unsupported_feature_x(char const *feature)
-    : m_error{(boost::format("unsupported feature »%1%«") % feature).str()}
+    : m_error{(boost::format("unsupported feature \"%1%\"") % feature).str()}
   {
   }
 
