@@ -95,7 +95,7 @@ function copy_files {
     cp ${qm} ${tgt_dir}/locale/libqt/qt_${lang}.qm
   }
 
-  for lang (. de es ja nl uk zh_CN) {
+  for lang (. ca de es ja nl uk zh_CN) {
     cd ${src_dir}/doc/man/${lang}
 
     if [[ $lang == . ]] lang=en

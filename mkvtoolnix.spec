@@ -96,6 +96,7 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 %lang(zh_CN) %{_datadir}/locale/zh_CN/*/*.mo
 %lang(zh_TW) %{_datadir}/locale/zh_TW/*/*.mo
 %{_datadir}/man/man1/*
+%{_datadir}/man/ca
 %{_datadir}/man/de
 %{_datadir}/man/es
 %{_datadir}/man/ja
