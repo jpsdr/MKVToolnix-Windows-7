@@ -6,7 +6,8 @@ require "pathname"
 require "shellwords"
 require "tmpdir"
 
-$po_dir = File.absolute_path(File.dirname(__FILE__) + "/../../po")
+$po_dir     = File.absolute_path(File.dirname(__FILE__) + "/../../po")
+$man_po_dir = File.absolute_path(File.dirname(__FILE__) + "/../../doc/man/po4a/po")
 
 module AddPo
   def self.handle_po file_name
@@ -22,7 +23,9 @@ module AddPo
 
     fail "Couldn't extract language from #{file_name}" unless language
 
-    target = "#{$po_dir}/#{language}.po"
+    is_man_po = content.detect { |line| /<manvolnum>/.match line }
+    dir       = is_man_po ? $man_po_dir : $po_dir
+    target    = "#{dir}/#{language}.po"
 
     File.open(target, "w") { |file| file.puts content.map(&:chomp).join("\n") }
     File.unlink file_name
