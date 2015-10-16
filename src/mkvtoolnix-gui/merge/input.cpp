@@ -988,6 +988,9 @@ void
 Tab::addOrAppendFiles(bool append,
                       QStringList const &fileNames,
                       QModelIndex const &sourceFileIdx) {
+  if (!fileNames.isEmpty())
+    Util::Settings::get().m_lastOpenDir = QFileInfo{fileNames.last()}.path();
+
   auto toIdentify = handleDroppedSpecialFiles(fileNames);
 
   QList<SourceFilePtr> identifiedFiles;
@@ -1054,12 +1057,7 @@ Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
 
 QStringList
 Tab::selectFilesToAdd(QString const &title) {
-  auto fileNames = Util::getOpenFileNames(this, title, Util::Settings::get().m_lastOpenDir.path(), Util::FileTypeFilter::get().join(Q(";;")), nullptr, QFileDialog::HideNameFilterDetails);
-
-  if (!fileNames.isEmpty())
-    Util::Settings::get().m_lastOpenDir = QFileInfo{fileNames[0]}.path();
-
-  return fileNames;
+  return Util::getOpenFileNames(this, title, Util::Settings::get().m_lastOpenDir.path(), Util::FileTypeFilter::get().join(Q(";;")), nullptr, QFileDialog::HideNameFilterDetails);
 }
 
 void
