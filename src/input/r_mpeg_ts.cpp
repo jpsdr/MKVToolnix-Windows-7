@@ -1149,7 +1149,7 @@ mpeg_ts_reader_c::read_timecode(unsigned char *p) {
   mpeg_timecode         |= (static_cast<int64_t>(get_uint16_be(&p[1])) >> 1)         << 15;
   mpeg_timecode         |=  static_cast<int64_t>(get_uint16_be(&p[3]))               >>  1;
 
-  return std::move(timestamp_c::mpeg(mpeg_timecode));
+  return timestamp_c::mpeg(mpeg_timecode);
 }
 
 bool
