@@ -78,7 +78,7 @@ operator <<(target_c &logger,
 
 }}
 
-#define log_current_location() mtx::log::target_c::get_default_logger() << (boost::format("Current file & line: %1%:%2%") % __FILE__ % __LINE__)
+#define log_current_location() mtx::log::target_c::get_default_logger() << (boost::format("Current file, line, function: %1%:%2% in %3%") % __FILE__ % __LINE__ % __PRETTY_FUNCTION__)
 #define log_it(arg)            mtx::log::target_c::get_default_logger() << (arg)
 
 #endif // MTX_COMMON_LOGGER_H
