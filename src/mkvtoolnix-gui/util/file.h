@@ -4,6 +4,7 @@
 #include "common/common_pch.h"
 
 class QString;
+class QUrl;
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -14,6 +15,8 @@ struct BomAsciiCheckResult {
 };
 
 BomAsciiCheckResult checkForBomAndNonAscii(QString const &fileName);
+
+QUrl pathToFileUrl(QString const &path);
 
 }}}
 

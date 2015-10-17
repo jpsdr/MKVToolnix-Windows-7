@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/util/config_file.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui { namespace Jobs {
@@ -246,7 +247,7 @@ Job::openOutputFolder()
   auto folder = outputFolder();
 
   if (!folder.isEmpty())
-    QDesktopServices::openUrl(QUrl{Q("file:///%1").arg(folder)});
+    QDesktopServices::openUrl(Util::pathToFileUrl(folder));
 }
 
 QString

@@ -1,5 +1,12 @@
 2015-10-17  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: bug fix (Linux): the function "open folder" was
+        inserting a superfluous leading slash in the directory name. This
+        causes some file managers (in this particular case Dolphin on
+        Linux) to interpret a directory name like "//home/mosu/…" as a
+        share called "mosu" on a Samba/Windows server called "home" and to
+        prepend the whole name with the "smb://" protocol. Fixes #1479.
+
         * Released v8.5.0.
 
 2015-10-16  Moritz Bunkus  <moritz@bunkus.org>

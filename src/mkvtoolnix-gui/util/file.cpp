@@ -3,7 +3,9 @@
 #include <QByteArray>
 #include <QFile>
 #include <QIODevice>
+#include <QUrl>
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/util/file.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -36,6 +38,14 @@ checkForBomAndNonAscii(QString const &fileName) {
   }
 
   return result;
+}
+
+QUrl
+pathToFileUrl(QString const &path) {
+  auto url = QUrl{};
+  url.setScheme(Q("file"));
+  url.setPath(path);
+  return url;
 }
 
 }}}
