@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/qt.h"
 #include "mkvtoolnix-gui/header_editor/page_base.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 #include "mkvtoolnix-gui/util/model.h"
