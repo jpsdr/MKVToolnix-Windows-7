@@ -53,6 +53,7 @@ public:
   void write(mm_io_c &out, KaxSeekHead &seek_head);
   void postprocess_cues(KaxCues &cues, KaxCluster &cluster);
   void set_duration_for_id_timecode(uint64_t id, uint64_t timecode, uint64_t duration);
+  void adjust_positions(uint64_t old_position, uint64_t delta);
 
 public:
   static cues_c &get();
