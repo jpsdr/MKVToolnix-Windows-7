@@ -5,9 +5,11 @@
 #include <QSettings>
 #include <QUrl>
 
+#include "common/logger.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -351,9 +353,8 @@ Job::loadJob(Util::ConfigFile &settings) {
   if (jobType == "MuxJob")
     return MuxJob::loadMuxJob(settings);
 
-  Q_ASSERT_X(false, "Job::loadJob", "Unknown job type encountered");
-
-  return JobPtr{};
+  log_it(boost::format("MTX Job::loadJob: Unknown job type encountered (%1%) in %2%") % to_utf8(jobType.toString()) % settings.fileName());
+  throw Merge::InvalidSettingsX{};
 }
 
 void
