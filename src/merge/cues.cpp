@@ -277,6 +277,27 @@ cues_c::calculate_point_size(cue_point_t const &point)
   return point_size;
 }
 
+void
+cues_c::adjust_positions(uint64_t old_position,
+                         uint64_t delta) {
+  auto s_debug_rerender_track_headers = debugging_option_c{"rerender|rerender_track_headers"};
+
+  if (!delta || (m_points.empty() && m_codec_state_position_map.empty()))
+    return;
+
+  mxdebug_if(s_debug_rerender_track_headers,
+             boost::format("[rerender] cues_c::adjust_positions: old_position %1% delta %2% num_points %3% first point's position %4%\n")
+             % old_position % delta % m_points.size() % (!m_points.empty() ? m_points[0].cluster_position : 0));
+
+  for (auto &point : m_points)
+    if (point.cluster_position >= old_position)
+      point.cluster_position += delta;
+
+  for (auto &element : m_codec_state_position_map)
+    if (element.second >= old_position)
+      element.second += delta;
+}
+
 cues_c &
 cues_c::get() {
   if (!s_cues)
