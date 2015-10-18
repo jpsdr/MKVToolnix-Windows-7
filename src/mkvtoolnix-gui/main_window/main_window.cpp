@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 
 #include "common/fs_sys_helpers.h"
+#include "common/locale_string.h"
 #include "common/qt.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
@@ -117,7 +118,7 @@ MainWindow::setupMenu() {
 
   connect(ui->actionHelpFAQ,                   &QAction::triggered,             this, &MainWindow::visitHelpURL);
   connect(ui->actionHelpKnownProblems,         &QAction::triggered,             this, &MainWindow::visitHelpURL);
-  connect(ui->actionHelpMkvmergeDocumentation, &QAction::triggered,             this, &MainWindow::visitHelpURL);
+  connect(ui->actionHelpMkvmergeDocumentation, &QAction::triggered,             this, &MainWindow::visitMkvmergeDocumentation);
   connect(ui->actionHelpWebSite,               &QAction::triggered,             this, &MainWindow::visitHelpURL);
   connect(ui->actionHelpReportBug,             &QAction::triggered,             this, &MainWindow::visitHelpURL);
 
@@ -453,6 +454,41 @@ void
 MainWindow::visitHelpURL() {
   if (m_helpURLs.contains(sender()))
     QDesktopServices::openUrl(m_helpURLs[sender()]);
+}
+
+void
+MainWindow::visitMkvmergeDocumentation() {
+  auto appDirPath     = App::applicationDirPath();
+  auto potentialPaths = QStringList{};
+
+  try {
+    auto localeStr = locale_string_c{to_utf8(Util::Settings::get().localeToUse())};
+
+    potentialPaths << Q("%1/doc/%2").arg(appDirPath).arg(Q(localeStr.str(locale_string_c::full)));
+    potentialPaths << Q("%1/doc/%2").arg(appDirPath).arg(Q(localeStr.str(static_cast<locale_string_c::eval_type_e>(locale_string_c::language | locale_string_c::territory))));
+    potentialPaths << Q("%1/doc/%2").arg(appDirPath).arg(Q(localeStr.str(locale_string_c::language)));
+
+  } catch (mtx::locale_string_format_x const &) {
+  }
+
+  potentialPaths << Q("%1/doc/en").arg(appDirPath);
+
+  auto url = QUrl{};
+
+  for (auto const &path : potentialPaths) {
+    auto fileName = Q("%1/mkvmerge.html").arg(path);
+
+    if (QFileInfo{fileName}.exists()) {
+      url.setScheme(Q("file"));
+      url.setPath(fileName);
+      break;
+    }
+  }
+
+  if (url.isEmpty())
+    url = m_helpURLs[ui->actionHelpMkvmergeDocumentation];
+
+  QDesktopServices::openUrl(url);
 }
 
 void

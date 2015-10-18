@@ -91,6 +91,7 @@ public slots:
   virtual void toolChanged(int index);
   virtual void editPreferences();
   virtual void visitHelpURL();
+  virtual void visitMkvmergeDocumentation();
   virtual void setToolSelectorVisibility();
   virtual void raiseAndActivate();
 
