@@ -635,6 +635,7 @@ mm_proxy_io_c::_read(void *buffer,
 size_t
 mm_proxy_io_c::_write(const void *buffer,
                       size_t size) {
+  m_cached_size = -1;
   return m_proxy_io->write(buffer, size);
 }
 
@@ -673,7 +674,8 @@ mm_null_io_c::_read(void *buffer,
 size_t
 mm_null_io_c::_write(const void *,
                      size_t size) {
-  m_pos += size;
+  m_pos         += size;
+  m_cached_size  = -1;
 
   return size;
 }

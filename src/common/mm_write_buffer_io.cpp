@@ -119,6 +119,8 @@ mm_write_buffer_io_c::_write(const void *buffer,
     m_fill += remain;
   }
 
+  m_cached_size = -1;
+
   return size;
 }
 
