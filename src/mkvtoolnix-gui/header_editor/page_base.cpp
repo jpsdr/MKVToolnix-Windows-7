@@ -71,4 +71,10 @@ PageBase::title()
   return Q(m_title.get_translated());
 }
 
+void
+PageBase::setItems(QList<QStandardItem *> const &items)
+  const {
+  items.at(0)->setText(title());
+}
+
 }}}

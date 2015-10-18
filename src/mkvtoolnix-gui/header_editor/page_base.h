@@ -38,6 +38,7 @@ public:
   virtual bool validateThis() const = 0;
   virtual void retranslateUi() = 0;
   virtual QString title() const;
+  virtual void setItems(QList<QStandardItem *> const &items) const;
 };
 
 }}}

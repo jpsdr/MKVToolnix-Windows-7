@@ -32,14 +32,17 @@ PageModel::appendPage(PageBase *page,
   page->retranslateUi();
 
   auto parentItem = parentIdx.isValid() ? itemFromIndex(parentIdx) : invisibleRootItem();
-  auto newItem    = new QStandardItem{};
+  auto newItems   = QList<QStandardItem *>{};
 
-  newItem->setData(static_cast<unsigned int>(m_pages.count()), Util::HeaderEditorPageIdRole);
-  newItem->setText(page->title());
+  for (auto idx = columnCount(); idx > 0; --idx)
+    newItems << new QStandardItem{};
 
-  parentItem->appendRow(newItem);
+  newItems[0]->setData(static_cast<unsigned int>(m_pages.count()), Util::HeaderEditorPageIdRole);
 
-  page->m_pageIdx = indexFromItem(newItem);
+  parentItem->appendRow(newItems);
+
+  page->m_pageIdx = indexFromItem(newItems[0]);
+  page->setItems(newItems);
 
   m_pages << page;
   if (!parentIdx.isValid())
@@ -81,6 +84,30 @@ PageModel::validate()
   }
 
   return QModelIndex{};
+}
+
+QList<QStandardItem *>
+PageModel::itemsForIndex(QModelIndex const &idx) {
+  auto items = QList<QStandardItem *>{};
+  for (auto column = 0, numColumns = columnCount(); column < numColumns; ++column)
+    items << itemFromIndex(idx.sibling(idx.row(), column));
+
+  return items;
+}
+
+void
+PageModel::retranslateUi() {
+  Util::setDisplayableAndSymbolicColumnNames(*this, {
+    { QY("Type"),                    Q("type")             },
+  });
+
+  // horizontalHeaderItem(4)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+  Util::walkTree(*this, QModelIndex{}, [=](QModelIndex const &currentIdx) {
+    auto page = selectedPage(currentIdx);
+    if (page)
+      page->setItems(itemsForIndex(currentIdx));
+  });
 }
 
 }}}

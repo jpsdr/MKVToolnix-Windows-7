@@ -212,6 +212,8 @@ Tab::retranslateUi() {
   auto &pages = m_model->pages();
   for (auto const &page : pages)
     page->retranslateUi();
+
+  m_model->retranslateUi();
 }
 
 void

@@ -31,6 +31,10 @@ public:
   void reset();
 
   QModelIndex validate() const;
+
+  void retranslateUi();
+
+  QList<QStandardItem *> itemsForIndex(QModelIndex const &idx);
 };
 
 }}}
