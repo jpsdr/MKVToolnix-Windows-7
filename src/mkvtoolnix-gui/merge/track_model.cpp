@@ -5,6 +5,7 @@
 #include <QItemSelectionModel>
 
 #include "common/logger.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
@@ -20,8 +21,6 @@ TrackModel::TrackModel(QObject *parent)
   , m_chaptersIcon(":/icons/16x16/clock.png")
   , m_tagsIcon(":/icons/16x16/mail-tagged.png")
   , m_genericIcon(":/icons/16x16/application-octet-stream.png")
-  , m_yesIcon(":/icons/16x16/dialog-ok-apply.png")
-  , m_noIcon(":/icons/16x16/dialog-cancel.png")
   , m_ignoreTrackRemovals{}
   , m_nonAppendedSelected{}
   , m_appendedSelected{}
@@ -120,9 +119,9 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                     : track->isTags()       ? m_tagsIcon
                     : track->isGlobalTags() ? m_tagsIcon
                     :                         m_genericIcon);
-  items[2]->setIcon(track->m_muxThis          ? m_yesIcon : m_noIcon);
-  items[7]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? m_yesIcon : m_noIcon);
-  items[8]->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? m_yesIcon : m_noIcon);
+  items[2]->setIcon(track->m_muxThis                                                                    ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[7]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[8]->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? MainWindow::yesIcon() : MainWindow::noIcon());
   items[6]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 

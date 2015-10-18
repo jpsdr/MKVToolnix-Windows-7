@@ -112,6 +112,8 @@ public:                         // static
   static QString versionStringForSettings(version_number_t const &version);
 #endif  // HAVE_CURL_EASY_H
 
+  static QIcon const & yesIcon();
+  static QIcon const & noIcon();
 
 protected:
   virtual void setupMenu();

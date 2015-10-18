@@ -18,8 +18,6 @@ static auto const s_numColumns = 4;
 
 ChapterModel::ChapterModel(QObject *parent)
   : QStandardItemModel{parent}
-  , m_yesIcon(":/icons/16x16/dialog-ok-apply.png")
-  , m_noIcon(":/icons/16x16/dialog-cancel.png")
 {
 }
 

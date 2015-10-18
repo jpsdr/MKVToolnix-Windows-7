@@ -493,4 +493,22 @@ MainWindow::eventFilter(QObject *watched,
   return QMainWindow::eventFilter(watched, event);
 }
 
+QIcon const &
+MainWindow::yesIcon() {
+  static auto s_yesIcon = std::unique_ptr<QIcon>{};
+  if (!s_yesIcon)
+    s_yesIcon.reset(new QIcon{":/icons/16x16/dialog-ok-apply.png"});
+
+  return *s_yesIcon;
+}
+
+QIcon const &
+MainWindow::noIcon() {
+  static auto s_noIcon = std::unique_ptr<QIcon>{};
+  if (!s_noIcon)
+    s_noIcon.reset(new QIcon{":/icons/16x16/dialog-cancel.png"});
+
+  return *s_noIcon;
+}
+
 }}
