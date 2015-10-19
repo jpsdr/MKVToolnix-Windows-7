@@ -67,7 +67,7 @@ TrackTypePage::retranslateUi() {
   ui->m_lUid->setText(Q("%1").arg(m_trackUid));
 
   ui->m_lLanguageLabel->setText(QY("Language:"));
-  ui->m_lLanguage->setText(m_language);
+  ui->m_lLanguage->setText(App::descriptionFromIso639_2LanguageCode(m_language));
 
   ui->m_lNameLabel->setText(QY("Name:"));
   ui->m_lName->setText(m_name);
