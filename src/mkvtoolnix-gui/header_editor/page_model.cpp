@@ -20,11 +20,11 @@ PageModel::~PageModel() {
 PageBase *
 PageModel::selectedPage(QModelIndex const &idx)
   const {
-  auto selectedItem = itemFromIndex(idx);
-  if (!selectedItem)
-    return nullptr;
+  auto selectedItem = itemFromIndex(idx.sibling(idx.row(), 0));
+  if (selectedItem)
+    return m_pages[ selectedItem->data(Util::HeaderEditorPageIdRole).value<unsigned int>() ];
 
-  return m_pages[ data(idx, Util::HeaderEditorPageIdRole).value<unsigned int>() ];
+  return nullptr;
 }
 
 void
@@ -32,7 +32,7 @@ PageModel::appendPage(PageBase *page,
                       QModelIndex const &parentIdx) {
   page->retranslateUi();
 
-  auto parentItem = parentIdx.isValid() ? itemFromIndex(parentIdx) : invisibleRootItem();
+  auto parentItem = parentIdx.isValid() ? itemFromIndex(parentIdx.sibling(parentIdx.row(), 0)) : invisibleRootItem();
   auto newItems   = QList<QStandardItem *>{};
 
   for (auto idx = columnCount(); idx > 0; --idx)
@@ -99,10 +99,17 @@ PageModel::itemsForIndex(QModelIndex const &idx) {
 void
 PageModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Type"),                    Q("type")             },
+    { QY("Type"),          Q("type")             },
+    { QY("Codec"),         Q("codec")            },
+    { QY("Language"),      Q("language")         },
+    { QY("Name"),          Q("name")             },
+    { QY("UID"),           Q("uid")              },
+    { QY("Default track"), Q("defaultTrackFlag") },
+    { QY("Forced track"),  Q("forcedTrackFlag")  },
+    { QY("Properties"),    Q("properties")       },
   });
 
-  // horizontalHeaderItem(4)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  horizontalHeaderItem(4)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   Util::walkTree(*this, QModelIndex{}, [=](QModelIndex const &currentIdx) {
     auto page = selectedPage(currentIdx);

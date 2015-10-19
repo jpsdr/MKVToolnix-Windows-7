@@ -21,12 +21,17 @@ protected:
 
 public:
   EbmlMaster &m_master;
-  uint64_t m_trackIdxMkvmerge, m_trackType, m_trackNumber;
-  QString m_codecId, m_language;
+  uint64_t m_trackIdxMkvmerge, m_trackType, m_trackNumber, m_trackUid;
+  QString m_codecId, m_language, m_name, m_properties;
+  bool m_defaultTrackFlag, m_forcedTrackFlag;
 
 public:
   TrackTypePage(Tab &parent, EbmlMaster &master, uint64_t trackIdxMkvmerge);
   virtual ~TrackTypePage();
+
+protected:
+  virtual void setItems(QList<QStandardItem *> const &items) const override;
+  virtual void summarizeProperties();
 
 public slots:
   virtual void retranslateUi() override;

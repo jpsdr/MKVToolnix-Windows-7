@@ -23,6 +23,7 @@
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -63,6 +64,7 @@ Tab::resetData() {
 void
 Tab::load() {
   auto selectedIdx         = ui->elements->selectionModel()->currentIndex();
+  selectedIdx              = selectedIdx.isValid()          ? selectedIdx.sibling(selectedIdx.row(), 0) : selectedIdx;
   auto selectedTopLevelRow = !selectedIdx.isValid()         ? -1
                            : selectedIdx.parent().isValid() ? selectedIdx.parent().row()
                            :                                  selectedIdx.row();
@@ -214,6 +216,10 @@ Tab::retranslateUi() {
     page->retranslateUi();
 
   m_model->retranslateUi();
+
+  auto header = ui->elements->header();
+  for (auto idx = 0, numColumns = m_model->columnCount(); idx < numColumns; ++idx)
+    header->setSectionResizeMode(idx, QHeaderView::ResizeToContents);
 }
 
 void
