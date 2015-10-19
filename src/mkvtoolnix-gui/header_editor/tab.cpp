@@ -23,6 +23,7 @@
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -183,6 +184,7 @@ Tab::setupUi() {
   ui->elements->addAction(m_expandAllAction);
   ui->elements->addAction(m_collapseAllAction);
 
+  Util::HeaderViewManager::create(*ui->elements, "HeaderEditor::Elements");
   Util::preventScrollingWithoutFocus(this);
 
   connect(ui->elements->selectionModel(), &QItemSelectionModel::currentChanged, this, &Tab::selectionChanged);
