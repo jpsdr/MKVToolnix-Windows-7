@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-18 10:24+0200\n"
+"POT-Creation-Date: 2015-10-19 18:48+0200\n"
 "PO-Revision-Date: 2015-10-03 21:31+0200\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -893,11 +893,15 @@ msgstr " neurria %1%"
 msgid " size is unknown"
 msgstr " neurria ezezaguna da"
 
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:283
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1500
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:75
 msgid "\"Default track\" flag:"
 msgstr "\"Berezko bidea\" ikurra:"
 
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:284
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1501
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:79
 msgid "\"Forced track\" flag:"
 msgstr "\"Behartutako\" bidea ikurra:"
 
@@ -905,7 +909,8 @@ msgstr "\"Behartutako\" bidea ikurra:"
 msgid "\"default\" is a good choice for almost all situations."
 msgstr "\"default\" aukera hona da egoera gehinetarako."
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:683
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:121
+#: src/mkvtoolnix-gui/merge/track_model.cpp:682
 msgid "%1 Hz"
 msgstr "%1 Hz"
 
@@ -913,20 +918,22 @@ msgstr "%1 Hz"
 msgid "%1 automatic, %2 manual, %3 running"
 msgstr "%1 berez, %2 eskuz, %3 ekinean"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:692
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:124
+#: src/mkvtoolnix-gui/merge/track_model.cpp:691
 msgid "%1 bit per sample"
 msgid_plural "%1 bits per sample"
 msgstr[0] "bit %1 lagineko"
 msgstr[1] "%1 bit lagineko"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:687
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:122
+#: src/mkvtoolnix-gui/merge/track_model.cpp:686
 msgid "%1 channel"
 msgid_plural "%1 channels"
 msgstr[0] "%1 kanala"
 msgstr[1] "%1 kanalak"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:101
-#: src/mkvtoolnix-gui/merge/track_model.cpp:266
+#: src/mkvtoolnix-gui/merge/track_model.cpp:100
+#: src/mkvtoolnix-gui/merge/track_model.cpp:265
 msgid "%1 entries"
 msgstr "%1 sarrera"
 
@@ -942,7 +949,8 @@ msgid_plural "%1 of %2 files processed"
 msgstr[0] "%1 -> %2 agiritik prozesatuta"
 msgstr[1] "%1 -> %2 agiritik prozesatuta"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:697
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:132
+#: src/mkvtoolnix-gui/merge/track_model.cpp:696
 msgid "%1 pixels"
 msgstr "%1 pixel"
 
@@ -1109,7 +1117,7 @@ msgid "&Abort job"
 msgstr "&Utzi lana"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:420
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:318
 msgid "&Abort jobs"
 msgstr "&Utzi lanak"
 
@@ -1179,7 +1187,7 @@ msgid "&Close file"
 msgstr "It&xi agiria"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:210
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:214
 msgid "&Collapse all"
 msgstr "&Bildu denak"
 
@@ -1232,7 +1240,7 @@ msgid "&Escape arguments for:"
 msgstr "&Irten argumentuak honentzat:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:209
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:213
 msgid "&Expand all"
 msgstr "&Hedatu denak"
 
@@ -1926,17 +1934,17 @@ msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "-S eta -s iturburu agiri berean erabilita.\n"
 
 #: src/common/property_element.cpp:115
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:328
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:338
 msgid "'Default track' flag"
 msgstr "'Berezko bidea' ikurra"
 
 #: src/common/property_element.cpp:118
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:334
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:344
 msgid "'Forced display' flag"
 msgstr "'Behartu erakuspena' ikurra"
 
 #: src/common/property_element.cpp:117
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:331
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:341
 msgid "'Track enabled' flag"
 msgstr "'Bidea gaituta' ikurra"
 
@@ -2063,7 +2071,7 @@ msgstr "<ez aldatu>"
 msgid "<no output file>"
 msgstr "<irteera agiririk ez>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:200
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
 msgid "<unnamed>"
 msgstr "<izengabea>"
@@ -2106,12 +2114,12 @@ msgstr ""
 "Kakotxaz banandutako heusteko edukiaren denbora-kode maila zerrenda bat."
 
 #: src/common/property_element.cpp:130
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:362
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:372
 msgid "A human-readable string specifying the codec."
 msgstr "Gizaki-irakurgarria den kate batek adierazten du kodeka."
 
 #: src/common/property_element.cpp:127
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:353
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:363
 msgid "A human-readable track name."
 msgstr "Bide izen gizakiak-irakurgarri bat."
 
@@ -2136,7 +2144,7 @@ msgstr ""
 "Zoriz sortutako ID bakarra oraingo zatia besteen artean bereizteko (128 "
 "bits)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:293
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:303
 msgid ""
 "A randomly generated unique ID to identify the current segment between many "
 "others (128 bits)."
@@ -2176,7 +2184,7 @@ msgstr ""
 "Hau Bidearen zuzeneko jario kopia bat beste\n"
 "agiri batera egitearen berdina izan behar da."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:324
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:334
 msgid ""
 "A unique ID to identify the Track. This should be kept the same when making "
 "a direct stream copy of the Track to another file."
@@ -2192,7 +2200,7 @@ msgstr ""
 "ID bakar bat kateaturiko hurrengo zatia\n"
 "ezagutarazteko (128 bits)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:295
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
 msgid "A unique ID to identify the next chained segment (128 bits)."
 msgstr "ID bakar bat kateaturiko hurrengo zatia ezagutarazteko (128 bits)."
 
@@ -2204,7 +2212,7 @@ msgstr ""
 "ID bakar bat kateaturiko aurreko zatia\n"
 "ezagutarazteko (128 bits)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:294
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
 msgid "A unique ID to identify the previous chained segment (128 bits)."
 msgstr "ID bakar bat kateaturiko aurreko zatia ezagutarazteko (128 bits)."
 
@@ -2298,7 +2306,7 @@ msgid "Abort running job"
 msgstr "Utzi ekinean dauden lanak"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:418
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:315
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
 msgid "Abort running jobs"
 msgstr "Utzi ekinean dauden lanak"
 
@@ -2504,7 +2512,7 @@ msgstr "Hurrengo agiri izen guztiak atal editatzailean irekiko dira."
 msgid "All following file names will be opened in the header editor."
 msgstr "Hurrengo agiri izen guztiak idazburu editatzailean irekiko dira."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:425
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:435
 msgid "All header values are OK."
 msgstr "Idazburu balio guztiak daude Ongi."
 
@@ -2633,7 +2641,7 @@ msgid "An <attachment-selector> can have three forms:"
 msgstr "<eranskin-hautatzaile> batek hiru forma izan ditzake:"
 
 #: src/common/property_element.cpp:129
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:359
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:369
 msgid "An ID corresponding to the codec."
 msgstr "Kodekari dagokion ID bat."
 
@@ -2646,11 +2654,11 @@ msgstr "%1% ID-a duen eranskin bat ez da aurkitu\n"
 msgid "An empty file name is not valid.\n"
 msgstr "Agiri izen hutsa ez da baliozkoa.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:292
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:302
 msgid "An escaped file name corresponding to the next segment."
 msgstr "Hurrengo zatiari dagokion saihesturiko agiri izen bat."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:291
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:301
 msgid "An escaped file name corresponding to the previous segment."
 msgstr "Aurreko zatiari dagkion saihesturiko agiri izen bat."
 
@@ -2724,7 +2732,7 @@ msgstr "Erantsi multimedia agiriak"
 msgid "Append to an e&xisting input file"
 msgstr "Erantsi &badagoen sarrera agiri bati"
 
-#: src/merge/output_control.cpp:1660
+#: src/merge/output_control.cpp:1686
 #, boost-format
 msgid ""
 "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% "
@@ -2788,22 +2796,22 @@ msgid "Attachments"
 msgstr "Eranskinak"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:944
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:47
 msgid "Audio"
 msgstr "Audioa"
 
 #: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:424
 msgid "Audio bit depth"
 msgstr "Audio bit sakonera"
 
 #: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:421
 msgid "Audio channels"
 msgstr "Audio bideak"
 
 #: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:408
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:418
 msgid "Audio output sampling frequency"
 msgstr "Audio irteera laginketa maiztasuna"
 
@@ -2812,13 +2820,14 @@ msgid "Audio properties"
 msgstr "Audio ezaugarriak"
 
 #: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:405
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:415
 msgid "Audio sampling frequency"
 msgstr "Audio laginketa maiztasuna"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:33
-msgid "Audio track %1, %2, %3"
-msgstr "Audio bidea %1, %2, %3"
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
+#, fuzzy
+msgid "Audio track %1"
+msgstr "Audio bidea %u"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:919
 msgid "Audio tracks:"
@@ -2871,7 +2880,7 @@ msgid "Bit depth: %1%"
 msgstr "Bit sakonera: %1%"
 
 #: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:424
 msgid "Bits per sample, mostly used for PCM."
 msgstr "Bit lagineko, PCM-rako erabilia gehienbat."
 
@@ -2935,11 +2944,12 @@ msgstr "Biak ikuspegi maila eta '--display-dimensions' eman dira.\n"
 msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
 msgstr "Biak ikuspegi maila ezaugarria eta '--display-dimensions' eman dira.\n"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:36
-msgid "Button track %1, %2"
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
+#, fuzzy
+msgid "Button track %1"
 msgstr "Botoi bidea %1, %2"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:44
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:50
 msgid "Buttons"
 msgstr "Botoiak"
 
@@ -2982,7 +2992,7 @@ msgstr "Kalkulatu eta erakutsi frame edukien egiazt.-laburp."
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:174
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:204
 #: src/mkvtoolnix-gui/jobs/tool.cpp:421
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:318
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:319
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
 #: src/mkvtoolnix-gui/merge/tab.cpp:332 src/mkvtoolnix-gui/merge/tab.cpp:358
 #: src/mkvtoolnix-gui/merge/tool.cpp:177
@@ -3108,7 +3118,7 @@ msgstr "Bideak: %1%"
 msgid "Chapter &number of first created entry:"
 msgstr "&Lehenik sortutako sarreraren atal zenbakia:"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:180
+#: src/mkvtoolnix-gui/util/settings.cpp:181
 msgid "Chapter <NUM:2>"
 msgstr "Atala <ZBK:2>"
 
@@ -3165,7 +3175,7 @@ msgstr ""
 msgid "Chapters"
 msgstr "Atalak"
 
-#: src/merge/output_control.cpp:1215
+#: src/merge/output_control.cpp:1241
 msgid ""
 "Chapters are not allowed in WebM compliant files. No chapters will be "
 "written into any output file.\n"
@@ -3251,17 +3261,18 @@ msgid "Cluster timecode: %|1$.3f|s"
 msgstr "Klusterraren denbora-kodea: %|1$.3f|s"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:250
-#: src/mkvtoolnix-gui/merge/track_model.cpp:45
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:103
+#: src/mkvtoolnix-gui/merge/track_model.cpp:44
 msgid "Codec"
 msgstr "Kodeka"
 
 #: src/common/property_element.cpp:129
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:359
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:369
 msgid "Codec ID"
 msgstr "Kodek ID-a"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:141
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:51
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:278
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:57
 msgid "Codec ID:"
 msgstr "Kodek ID-a:"
 
@@ -3291,7 +3302,7 @@ msgid "Codec info URL: %1%"
 msgstr "Kodekaren argibide URL-a: %1%"
 
 #: src/common/property_element.cpp:130
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:362
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:372
 msgid "Codec name"
 msgstr "Kodekaren izena"
 
@@ -3394,7 +3405,7 @@ msgstr ""
 "Ezin izan da aurkitu aurkibide bat %1% audio bidearentzat (avilib akats "
 "mezua: %2%). Bide jauzketa.\n"
 
-#: src/merge/output_control.cpp:1586
+#: src/merge/output_control.cpp:1612
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "Ezin izan da aurkitu gptzr erantsterakoan. %1%\n"
@@ -3784,7 +3795,7 @@ msgid "Default add&itional command line options:"
 msgstr "Berezko agindu lerr&o aukera gehigarriak:"
 
 #: src/common/property_element.cpp:126
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:350
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:360
 msgid "Default duration"
 msgstr "Berezko iraupena"
 
@@ -3806,7 +3817,12 @@ msgstr ""
 msgid "Default flag: %1%"
 msgstr "Berezko ikurra: %1%"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:52
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:107
+#, fuzzy
+msgid "Default track"
+msgstr "Berezko bide ikurra:"
+
+#: src/mkvtoolnix-gui/merge/track_model.cpp:51
 msgid "Default track in output"
 msgstr "Berezko bidea irteeran"
 
@@ -3875,8 +3891,8 @@ msgid "Directory &relative to first input file's directory:"
 msgstr "Zuzenbidea lehen &sarrera agiriaren zuzenbidearen araberakoa:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:476
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:207
+#: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:211
 msgid "Directory:"
 msgstr "Zuzenbidea:"
 
@@ -3946,7 +3962,7 @@ msgid "Do not write meta seek elements at all."
 msgstr "Ez idatzi meta bilaketa gairik inon."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:419
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 msgid "Do you really want to abort all currently running jobs?"
 msgstr "Egitan nahi duzu ekinean dauden lan guztiak uztea?"
 
@@ -4107,12 +4123,12 @@ msgstr "EbmlVoid (neurria: %1%)"
 msgid "Edit selectors for properties"
 msgstr "Editatu ezaugarri hautatzaileak"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:81
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
 msgid "Edition entry"
 msgstr "Edizio sarrera"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "Edition/Chapter"
 msgstr "Edizioa/Atala"
 
@@ -4169,7 +4185,7 @@ msgstr "Enkriptaketa algoritmoa: %1% (%2%)"
 msgid "Encryption key ID: %1%"
 msgstr "Enkriptaketa ID giltza: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:34
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
 msgid "End"
 msgstr "Amaiera"
 
@@ -4248,6 +4264,11 @@ msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr ""
 "Akatsa etiketak aztertzerakoan, '%1%': ez daude nahitaezko gai batzuk.\n"
 
+#: src/merge/output_control.cpp:741
+#, fuzzy, boost-format
+msgid "Error reading from the file '%1%'.\n"
+msgstr "Akats mezua aztertzailetik: %1"
+
 #: src/info/qt_ui.cpp:104
 msgid "Error saving the information"
 msgstr "Akatsa argibideak gordetzerakoan"
@@ -4257,7 +4278,7 @@ msgid "Error writing Matroska file"
 msgstr "Akatsa Matroska agiria idazterakoan"
 
 #: src/common/output.cpp:79 src/common/output.cpp:80 src/common/output.cpp:81
-#: src/mkvtoolnix-gui/jobs/job.cpp:214
+#: src/mkvtoolnix-gui/jobs/job.cpp:216
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:288
 msgid "Error:"
 msgstr "Akatsa:"
@@ -4506,11 +4527,11 @@ msgstr "Agiri datuak, neurria: %1%"
 msgid "File description: %1%"
 msgstr "Agiri azalpena: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:148
 msgid "File has been modified"
 msgstr "Agiria aldatu egin da"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:133
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:136
 msgid "File has not been modified"
 msgstr "Agiria ez da aldatu"
 
@@ -4521,9 +4542,9 @@ msgid "File name"
 msgstr "Agiri izena"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:475
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
+#: src/mkvtoolnix-gui/forms/header_editor/tab.h:143
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:206
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:210
 msgid "File name:"
 msgstr "Agiri izena:"
 
@@ -4539,8 +4560,8 @@ msgstr "Agiri izena: %1%"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:331
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:392
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:535
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:82
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:90
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:85
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:93
 msgid "File parsing failed"
 msgstr "Agiri azterketa hutsegitea"
 
@@ -4556,7 +4577,7 @@ msgstr "Agiri egitura matxura"
 msgid "File/Segment linking"
 msgstr "Agiri/Zati lotura"
 
-#: src/merge/output_control.cpp:869
+#: src/merge/output_control.cpp:895
 msgid ""
 "Files cannot be appended to themselves. The argument for '--append-to' was "
 "invalid.\n"
@@ -4576,7 +4597,7 @@ msgstr "&Berzenbakitzeko lehen sarrera:"
 msgid "Fix bitstream timing info"
 msgstr "Zuzendu bitjario denborapen argibideak"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:35
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 msgid "Flags"
 msgstr "Ikurrak"
 
@@ -4634,7 +4655,8 @@ msgstr "Behartu erabiltzeko 'kode' itzulpenak."
 msgid "Forced flag: %1%"
 msgstr "Ikur behartua: %1%"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:53
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:108
+#: src/mkvtoolnix-gui/merge/track_model.cpp:52
 #, fuzzy
 msgid "Forced track"
 msgstr "Behartutako bide ikurra:"
@@ -4791,19 +4813,19 @@ msgstr ""
 "Ezinezkoa idazburu konpresioa kentzea bufferra ez delako hasten kendu behar "
 "diren bytekin. Beharrezko byteak: %1%; aurkituta:%2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:425
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:442
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:435
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:450
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
 msgid "Header validation"
 msgstr "Idazburu balioztapena"
 
 #: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:371
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:381
 msgid "Height of the encoded video frames in pixels."
 msgstr "Kodeaturiko bideo framen garaiera pixeletan."
 
 #: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:387
 msgid "Height of the video frames to display."
 msgstr "Erakuspenerako bideo framen garaiera."
 
@@ -4812,7 +4834,7 @@ msgid "Hel&p"
 msgstr "Lag&untza"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
-#: src/mkvtoolnix-gui/merge/track_model.cpp:51
+#: src/mkvtoolnix-gui/merge/track_model.cpp:50
 msgid "ID"
 msgstr "ID"
 
@@ -5734,8 +5756,9 @@ msgstr "Lokarri ikurra: %1%"
 #: src/common/property_element.cpp:128
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:26
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:356
-#: src/mkvtoolnix-gui/merge/track_model.cpp:48
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:104
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:366
+#: src/mkvtoolnix-gui/merge/track_model.cpp:47
 msgid "Language"
 msgstr "Hizkuntza"
 
@@ -5743,7 +5766,9 @@ msgstr "Hizkuntza"
 msgid "Language is not NUL terminated"
 msgstr "Hizkuntza ez da NULO amaitu"
 
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1566
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:69
 msgid "Language:"
 msgstr "Hizkuntza:"
 
@@ -6002,7 +6027,7 @@ msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "Ahalbideturiko gehienezko balioa: %1%, oraingo balioa: %2%"
 
 #: src/common/property_element.cpp:124
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:345
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:355
 msgid "Maximum cache"
 msgstr "Gehienezko katxea"
 
@@ -6049,7 +6074,7 @@ msgid "Minimum allowed value: %1%, actual value: %2%"
 msgstr "Ahalbideturiko gutxienezko balioa: %1%, oraingo balioa: %2%"
 
 #: src/common/property_element.cpp:122
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:340
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:350
 msgid "Minimum cache"
 msgstr "Gutxieneko katxea"
 
@@ -6136,7 +6161,7 @@ msgstr ""
 "Agiri izen bat baino gehiago eman da eranspen bakar baterako. '%1%' baztertu "
 "egingo da eta '%2%' erabiliko da ordez.\n"
 
-#: src/merge/output_control.cpp:942
+#: src/merge/output_control.cpp:968
 #, boost-format
 msgid ""
 "More than one track is to be appended to the track %1% from file no. %2% "
@@ -6163,7 +6188,7 @@ msgstr "Multiplexatu bide hau:"
 msgid "Multiply this track's timestamps with a factor."
 msgstr "Biderkatu bide honen denbora-irarketa ezaugarri batekin."
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:47
+#: src/mkvtoolnix-gui/merge/track_model.cpp:46
 msgid "Mux this"
 msgstr "Multiplexatu hau"
 
@@ -6187,9 +6212,10 @@ msgstr "&Izen eredua:"
 
 #: src/common/property_element.cpp:127
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:25
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:353
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:105
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:363
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:57
-#: src/mkvtoolnix-gui/merge/track_model.cpp:49
+#: src/mkvtoolnix-gui/merge/track_model.cpp:48
 msgid "Name"
 msgstr "Izena"
 
@@ -6200,6 +6226,11 @@ msgstr "Izen eredua:"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:198
 msgid "Name tem&plate:"
 msgstr "Izen eredua:"
+
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:282
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:72
+msgid "Name:"
+msgstr "Izena:"
 
 #: src/info/mkvinfo.cpp:842
 #, boost-format
@@ -6223,7 +6254,7 @@ msgid "New value:"
 msgstr "Balio berria:"
 
 #: src/common/property_element.cpp:104
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:292
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:302
 msgid "Next filename"
 msgstr "Hurrengo agirizena"
 
@@ -6242,7 +6273,7 @@ msgid "Next segment UID: %1%"
 msgstr "Hurrengo zatiaren UID-a: %1%"
 
 #: src/common/property_element.cpp:108
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:295
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
 msgid "Next segment's unique ID"
 msgstr "Hurrengo zatiaren ID bakarra"
 
@@ -6272,7 +6303,7 @@ msgstr ""
 "Ez da MIME motarik ezarri '%1%' eranspenarentzat, eta badaiteke ez "
 "asmatzea.\n"
 
-#: src/merge/output_control.cpp:901
+#: src/merge/output_control.cpp:927
 #, boost-format
 msgid ""
 "No append mapping was given for the file no. %1% ('%2%'). A default mapping "
@@ -6549,12 +6580,12 @@ msgid "Number of entries to &renumber:"
 msgstr "&Ber-zenbakitzeko sarrera zenbatekoa:"
 
 #: src/common/property_element.cpp:126
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:350
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:360
 msgid "Number of nanoseconds (not scaled) per frame."
 msgstr "nanosegundu zenbatekoa (neurriratugabe) frame bakoitzeko."
 
 #: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:421
 msgid "Numbers of channels in the track."
 msgstr "Bideko kanal zenbatekoa"
 
@@ -6637,7 +6668,7 @@ msgstr "Irteera agiri bat bakarrik ahalbidetuta.\n"
 msgid "Only one segment info file allowed in '%1% %2%'.\n"
 msgstr "Zati argibide agiri bat bakarrik ahalbidetuta hemen: '%1% %2%'.\n"
 
-#: src/merge/output_control.cpp:882
+#: src/merge/output_control.cpp:908
 #, boost-format
 msgid ""
 "Only partial append mappings were given for the file no. %1% ('%2%'). Either "
@@ -6923,7 +6954,7 @@ msgstr "A&urreikuspena."
 msgid "Pre&viously used output directory"
 msgstr "Aurretik erabilitako irteer&a zuzenbidea"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:291
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:301
 msgid "Previous file name"
 msgstr "Aurreko agiri izena"
 
@@ -6946,7 +6977,7 @@ msgid "Previous segment UID: %1%"
 msgstr "Aurreko zatiaren UID-a: %1%"
 
 #: src/common/property_element.cpp:107
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:294
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
 msgid "Previous segment's unique ID"
 msgstr "Aurreko zatiaren ID bakarra"
 
@@ -6991,11 +7022,14 @@ msgstr "Garapena: 100%%%1%"
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Garapena: [%1%%2%] %3%%%"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:54
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:109
+#: src/mkvtoolnix-gui/merge/track_model.cpp:53
 msgid "Properties"
 msgstr "Ezaugarriak"
 
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:285
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1495
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 msgid "Properties:"
 msgstr "Ezaugarriak:"
 
@@ -7240,12 +7274,6 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "&Azpi-atalak berzenbakitzen"
 
-#: src/merge/output_control.cpp:772
-#, boost-format
-msgid "Re-rendering track headers: data_size != 0 not implemented yet. %1%\n"
-msgstr ""
-"Ber-aurkezpen bide idazburuak: datu_neurria != 0 oraindik ezarri gabe. %1%\n"
-
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr "Irakurri Aldaketa-oharra osoa online"
@@ -7271,7 +7299,7 @@ msgid "Ready"
 msgstr "Gertu"
 
 #: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:408
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:418
 msgid "Real output sampling frequency in Hz."
 msgstr "Egizko irteera lagin maiztasun Hz-tan."
 
@@ -7472,7 +7500,7 @@ msgid "Sa&ve settings as"
 msgstr "Go&rde ezarpenak honela"
 
 #: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:405
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:415
 msgid "Sampling frequency in Hz."
 msgstr "Laginketa maiztasuna Hz-tan."
 
@@ -7526,11 +7554,11 @@ msgstr "Gordetze hutsegitea"
 msgid "Saving the chapters failed."
 msgstr "Hutsegitea atalak gordetzerakoan."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:156
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:159
 msgid "Saving the modified segment information header failed."
 msgstr "Hutsegitea aldatutako zatiaren argibide idazburua gordetzerakoan."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:162
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:165
 msgid "Saving the modified track headers failed."
 msgstr "Hutsegitea aldatutako bide idazburuak gordetzerakoan."
 
@@ -7611,7 +7639,7 @@ msgstr "Zati UID-ak:"
 msgid "Segment e&dition UID:"
 msgstr "Zati edizio UID-a:"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:290
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:300
 msgid "Segment file name"
 msgstr "Zati agiri izena"
 
@@ -7629,7 +7657,7 @@ msgid "Segment info:"
 msgstr "Zati argibideak:"
 
 #: src/extract/timecodes_v2.cpp:242 src/info/mkvinfo.cpp:465
-#: src/info/qt_ui.cpp:205 src/mkvtoolnix-gui/header_editor/tab.cpp:286
+#: src/info/qt_ui.cpp:205 src/mkvtoolnix-gui/header_editor/tab.cpp:296
 #: src/propedit/options.cpp:172 src/propedit/propedit_cli_parser.cpp:140
 #: src/propedit/propedit_cli_parser.cpp:225
 msgid "Segment information"
@@ -7641,7 +7669,7 @@ msgid "Segment tracks"
 msgstr "Zati bideak"
 
 #: src/common/property_element.cpp:105
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:293
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:303
 msgid "Segment unique ID"
 msgstr "Zatiaren ID bakarra"
 
@@ -7739,7 +7767,7 @@ msgstr ""
 "BEHAR den erabiltzailearen hobespenetan aurkitutako\n"
 "hizkuntzarekin bat ez badator."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:328
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:338
 msgid ""
 "Set if that track (audio, video or subs) SHOULD be used if no language found "
 "matches the user preference."
@@ -7760,7 +7788,7 @@ msgstr ""
 "ugari egon daitezke. Irakurgailuak erabiltzaileak hobetsitakoarekin\n"
 "bat datorrena hautatu beharko luke edo berezkoa + behartutako bidea."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:335
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:345
 msgid ""
 "Set if that track MUST be used during playback. There can be many forced "
 "track for a kind (audio, video or subs). The player should select the one "
@@ -7772,7 +7800,7 @@ msgstr ""
 "berezkoa + behartutako bidea."
 
 #: src/common/property_element.cpp:117
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:331
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:341
 msgid "Set if the track is used."
 msgstr "Ezarri bidea erabilia den."
 
@@ -8017,7 +8045,7 @@ msgstr "Jauzita %1% byte hasieran (baliogabeko MP3 idazburua aurkitu da).\n"
 msgid "Slices"
 msgstr "Ebaketak"
 
-#: src/merge/output_control.cpp:1248
+#: src/merge/output_control.cpp:1274
 #, boost-format
 msgid ""
 "Some tag elements are missing (this error should not have occured - another "
@@ -8030,7 +8058,7 @@ msgstr ""
 msgid "Sort chapters by their start and end ti&mecodes"
 msgstr "&Antolatu atalak beren hasiera eta amaiera denbora-kodeen arabera"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:50
+#: src/mkvtoolnix-gui/merge/track_model.cpp:49
 msgid "Source file"
 msgstr "Iturburu agiria"
 
@@ -8046,7 +8074,7 @@ msgstr ""
 "Bidearen hizkuntza adierazten du\n"
 "Matroskaren hizkuntza galdekizunean."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:356
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:366
 msgid "Specifies the language of the track in the Matroska languages form."
 msgstr "Bidearen hizkuntza adierazten du Matroskaren hizkuntza galdekizunean."
 
@@ -8058,7 +8086,7 @@ msgstr ""
 "Adierazi ikuspegi mailaren ahalezko aldaketak\n"
 "(0: birneurriratze askea, 1: heutsi ikuspegi mailari, 2: zuzenduta)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:405
 msgid ""
 "Specify the possible modifications to the aspect ratio (0: free resizing, 1: "
 "keep aspect ratio, 2: fixed)."
@@ -8088,7 +8116,7 @@ msgstr ""
 msgid "Sta&rt muxing"
 msgstr "&Hasi multiplexaketa"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:31
 msgid "Start"
 msgstr "Hasi"
 
@@ -8150,7 +8178,7 @@ msgid "Stereo mode: %1% (%2%)"
 msgstr "Estereo modua: %1% (%2%)"
 
 #: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:399
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:409
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "Estereo-3D bideo modua (0 - 11, ikusi agiritza)."
 
@@ -8174,6 +8202,11 @@ msgstr "Katea"
 msgid "Subtitle and chapter properties"
 msgstr "Azpidatzi eta atal ezaugarriak"
 
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:42
+#, fuzzy
+msgid "Subtitle track %1"
+msgstr "Azpidatzi bidea %u"
+
 #: src/extract/xtr_textsubs.cpp:166
 #, boost-format
 msgid ""
@@ -8183,16 +8216,12 @@ msgstr ""
 "%1% azpidatzi bideak ez ditu iraupen osagai batzuk. Mesedez egiaztatu emaitz "
 "SSA/ASS agiriak hasiera eta amaiera sarrera berdinak dituela.\n"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:35
-msgid "Subtitle track %1, %2, %3"
-msgstr "Azpidatzi bidea %1, %2, %3"
-
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:921
 msgid "Subtitle tracks:"
 msgstr "Azpidatzi bideak:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:945
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:49
 msgid "Subtitles"
 msgstr "Azpidatziak"
 
@@ -8616,7 +8645,7 @@ msgstr ""
 "Hemen hautaturiko herrialdeak progamaren hedagarrietan herrialde guztien "
 "gainean erakutsiko dira."
 
-#: src/merge/output_control.cpp:1395
+#: src/merge/output_control.cpp:1421
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Cue sarrerak (aurkibidea) idazten ari dira...\n"
 
@@ -8826,7 +8855,7 @@ msgstr "%1% agiria ezin da irakurtzeko ireki: %2%.\n"
 #: src/extract/tracks.cpp:299 src/extract/xtr_avi.cpp:57
 #: src/extract/xtr_avi.cpp:61 src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74 src/extract/xtr_wav.cpp:116
-#: src/merge/output_control.cpp:1272
+#: src/merge/output_control.cpp:1298
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "%1% agiria ezin da idazteko ireki: %2%.\n"
@@ -8836,7 +8865,7 @@ msgstr "%1% agiria ezin da idazteko ireki: %2%.\n"
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "Agiri hau ezin da ireki edo aztertu."
 
-#: src/merge/output_control.cpp:1276
+#: src/merge/output_control.cpp:1302
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "%1% agiria idazteko ireki da.\n"
@@ -8901,7 +8930,7 @@ msgstr "Agiria ezin da idazteko ireki."
 msgid "The file does not contain track ID %1%.\n"
 msgstr "Agiriak ez du bide ID %1%.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:146
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:149
 msgid ""
 "The file has been changed by another program since it was read by the header "
 "editor. Therefore you have to re-load it. Unfortunately this means that all "
@@ -8912,7 +8941,7 @@ msgstr ""
 "aldaketa guztiak galduko direla."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:476
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:169
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:172
 msgid "The file has been saved successfully."
 msgstr "Agiria ongi gorde da."
 
@@ -8961,11 +8990,11 @@ msgid "The file is being fixed, part 4/4..."
 msgstr "Agiria zuzentzen ari da, zatia 4/4..."
 
 #: src/common/property_element.cpp:102
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:290
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:300
 msgid "The file name for this segment."
 msgstr "Agiri izena zati honentzat."
 
-#: src/merge/output_control.cpp:915
+#: src/merge/output_control.cpp:941
 #, boost-format
 msgid ""
 "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that "
@@ -8974,7 +9003,7 @@ msgstr ""
 "%1% ('%2%') zenbaki agiriak ez du %3% ID-a duen biderik, edo bide hori ez da "
 "kopiatu behar.  '--append-to'-rentzako argumentoa baliogabea da.\n"
 
-#: src/merge/output_control.cpp:921
+#: src/merge/output_control.cpp:947
 #, boost-format
 msgid ""
 "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that "
@@ -8985,7 +9014,7 @@ msgstr ""
 "kopiatu behar. Hortaz ezin da biderik erantsi. '--append-to'-rentzako "
 "argumentoa baliogabea da.\n"
 
-#: src/merge/output_control.cpp:861
+#: src/merge/output_control.cpp:887
 #, boost-format
 msgid ""
 "The file no. %1% ('%2%') is not being appended. The argument for '--append-"
@@ -9012,7 +9041,7 @@ msgstr "Agiria ez da gehiago prozesatuko."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:233
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:247
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:535
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:90
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:93
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Irekitzen saiatzen ari zaren agiria (%1) ezin izan da ongi irakurri."
 
@@ -9020,7 +9049,7 @@ msgstr "Irekitzen saiatzen ari zaren agiria (%1) ezin izan da ongi irakurri."
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "Irekitzen saiatzen ari zaren agiriak (%1) ez du atalalik."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:82
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:85
 msgid ""
 "The file you tried to open (%1) is not recognized as a valid Matroska/WebM "
 "file."
@@ -9082,7 +9111,7 @@ msgstr ""
 msgid "The formats can be mixed, too."
 msgstr "Heuskarriak ere nahastu daitezke."
 
-#: src/merge/output_control.cpp:971
+#: src/merge/output_control.cpp:997
 msgid "The formats do not match."
 msgstr "Heuskarriak ez datoz  bat."
 
@@ -9111,7 +9140,7 @@ msgstr ""
 "Denbora-kode neurri ezaugarria baliozko mailatik kanpo dago (1... 10000000 "
 "edo -1 'lagin zehaztasunerako baita bideo bidea badago').\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:133
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:136
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "Idazburu eremuetako bat ere ez da aldatu. Ez da ezer gordeko."
 
@@ -9226,7 +9255,7 @@ msgstr ""
 "0 ezartzen baduzu, xehetasunezko\n"
 "sasi-katxe sistema ez da erabiliko."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:346
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:356
 msgid ""
 "The maximum number of frames a player should be able to cache during "
 "playback. If set to 0, the reference pseudo-cache system is not used."
@@ -9256,7 +9285,7 @@ msgstr ""
 "0 ezartzen baduzu, xehetasunezko\n"
 "sasi-katxe sistema ez da erabiliko."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:341
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:351
 msgid ""
 "The minimum number of frames a player should be able to cache during "
 "playback. If set to 0, the reference pseudo-cache system is not used."
@@ -9348,19 +9377,19 @@ msgstr ""
 "Irudiaren goialdean kentzeko\n"
 "bideo pixel zenbatekoa."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:402
 msgid "The number of video pixels to remove on the bottom of the image."
 msgstr "Irudiaren behealdean kentzeko bideo pixel zenbatekoa."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:393
 msgid "The number of video pixels to remove on the left of the image."
 msgstr "Irudiaren ezkerraldean kentzeko bideo pixel zenbatekoa."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:399
 msgid "The number of video pixels to remove on the right of the image."
 msgstr "Irudiaren eskuinaldean kentzeko bideo pixel zenbatekoa."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:396
 msgid "The number of video pixels to remove on the top of the image."
 msgstr "Irudiaren goialdean kentzeko bideo pixel zenbatekoa."
 
@@ -9451,7 +9480,7 @@ msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr ""
 "Ezaugarri balioa ez da baliozko seinugabeko oso bat hemen: '%1%'. %2%\n"
 
-#: src/merge/output_control.cpp:973
+#: src/merge/output_control.cpp:999
 msgid "The reason is unknown."
 msgstr "Zergaitia ezezaguna da."
 
@@ -9741,11 +9770,11 @@ msgstr ""
 "bakoitzari."
 
 #: src/common/property_element.cpp:101
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:289
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:299
 msgid "The title for the whole movie."
 msgstr "Filma osoaren izenburua."
 
-#: src/merge/output_control.cpp:931
+#: src/merge/output_control.cpp:957
 #, boost-format
 msgid ""
 "The track %1% from file no. %2% ('%3%') is to be appended more than once. "
@@ -9764,7 +9793,7 @@ msgstr "%1% ID-ko bideak ez du baliozko Kodek ID bat.\n"
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "Bide idazburuak ezin dira zuzen aurkeztu. %1%\n"
 
-#: src/merge/output_control.cpp:963
+#: src/merge/output_control.cpp:989
 #, boost-format
 msgid ""
 "The track number %1% from the file '%2%' can probably not be appended "
@@ -9778,7 +9807,7 @@ msgstr ""
 "dela denbora guztian. Programa honen egileak zihurrenik ezingo du "
 "sostengurik eman emaitz agiriaren irakurketa arazoentzat.\n"
 
-#: src/merge/output_control.cpp:974
+#: src/merge/output_control.cpp:1000
 #, boost-format
 msgid ""
 "The track number %1% from the file '%2%' cannot be appended to the track "
@@ -9788,11 +9817,11 @@ msgstr ""
 "agiritik. %5%\n"
 
 #: src/common/property_element.cpp:112
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:321
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:331
 msgid "The track number as used in the Block Header."
 msgstr "Bide zenbakia Bloke Idazburuan erabili bezala."
 
-#: src/merge/output_control.cpp:972
+#: src/merge/output_control.cpp:998
 msgid "The track parameters do not match."
 msgstr "Bide parametroak ez datoz bat."
 
@@ -9844,11 +9873,11 @@ msgstr "Ez dago cue-ri ID %1% biderako.\n"
 msgid "There is a new version available online."
 msgstr "Bertsio berri bat dago eskuragarri online."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 msgid "There is currently a job running."
 msgstr "Lan bat dago ekinean."
 
-#: src/merge/output_control.cpp:855 src/merge/output_control.cpp:865
+#: src/merge/output_control.cpp:881 src/merge/output_control.cpp:891
 #, boost-format
 msgid ""
 "There is no file with the ID '%1%'. The argument for '--append-to' was "
@@ -9866,8 +9895,8 @@ msgstr "Ez dago itzulpen eskuragarririk '%1%'-rentzat.\n"
 msgid "There was an error querying the update status."
 msgstr "Akats bat egon da eguneraketa egoera galdetzerakoan."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:442
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:450
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
 msgid ""
 "There were errors in the header values preventing the headers from being "
 "saved. The first error has been selected."
@@ -10058,7 +10087,7 @@ msgstr ""
 "Hau »lan irteera« hegatsean »utzi lana« botoia klikatzerakoan eta aplikazioa "
 "uzterakoan gertatzen da."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:100
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:101
 msgid "This has not been implemented yet."
 msgstr "Hau oraindik ez da gaitu."
 
@@ -10247,7 +10276,7 @@ msgstr ""
 "Hau EGITAN ez litzake gertatu behar. Lehen meta bilaketa gaiarentzat "
 "gordetako tartea txikiegia da. %1%\n"
 
-#: src/merge/output_control.cpp:1506
+#: src/merge/output_control.cpp:1532
 #, boost-format
 msgid ""
 "This should REALLY not have happened. The space reserved for the first meta "
@@ -10337,7 +10366,7 @@ msgid "Timecodes:"
 msgstr "Denbora-kodeak:"
 
 #: src/common/property_element.cpp:101
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:289
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:299
 msgid "Title"
 msgstr "Izenburua"
 
@@ -10493,13 +10522,13 @@ msgstr "%1% ID-dun bideak AAC mota ezezaguna du.\n"
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "%1% ID-dun bidea: %1%: %2% (%3%)"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:142
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:54
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:279
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:60
 msgid "Track ID for mkvmerge & mkvextract:"
 msgstr "Bide ID-a mkvmerge eta mkvextract-entzat:"
 
 #: src/common/property_element.cpp:113
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:324
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:334
 msgid "Track UID"
 msgstr "Bide UID-a"
 
@@ -10518,7 +10547,7 @@ msgid "Track headers"
 msgstr "Bide idazburuak"
 
 #: src/common/property_element.cpp:112
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:321
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:331
 msgid "Track number"
 msgstr "Bide zenbakia"
 
@@ -10531,8 +10560,8 @@ msgstr ""
 "%1% zenbakiko bidea enkriptaketa eta desenkriptaketa oraindik ez dago "
 "gehituta.\n"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:143
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:57
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:276
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:63
 msgid "Track number for mkvpropedit:"
 msgstr "mkvpropedit-rako bide zenbakia:"
 
@@ -10592,8 +10621,9 @@ msgstr ""
 "berdinak izango dira."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:251
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:102
 #: src/mkvtoolnix-gui/jobs/model.cpp:49
-#: src/mkvtoolnix-gui/merge/track_model.cpp:46
+#: src/mkvtoolnix-gui/merge/track_model.cpp:45
 msgid "Type"
 msgstr "Mota"
 
@@ -10605,7 +10635,7 @@ msgstr ""
 "Bateko mota Zabalera/Garaiera Erakuspenerako\n"
 "(0: pixel, 1: metroehunen, 2: hatzbete, 3: ikuspegi maila)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:390
 msgid ""
 "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: "
 "inches, 3: aspect ratio)."
@@ -10613,9 +10643,9 @@ msgstr ""
 "Erakuspenerako Zabalera/Garaiera unitate mota (0: pixel, 1: metroehunen, 2: "
 "hatzbete, 3: ikuspegi maila)."
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:140
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:277
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:204
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:48
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:54
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:161
 msgid "Type:"
 msgstr "Mota:"
@@ -10624,6 +10654,16 @@ msgstr "Mota:"
 #, boost-format
 msgid "Type: %1% (%2%)"
 msgstr "Mota: %1% (%2%)"
+
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:106
+#, fuzzy
+msgid "UID"
+msgstr "UID-a:"
+
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:66
+msgid "UID:"
+msgstr "UID-a:"
 
 #: src/common/file_types.cpp:97
 msgid "USF subtitles"
@@ -10851,47 +10891,47 @@ msgid "VfW compatible video"
 msgstr "VfW bideo bateragarria"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:943
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:42
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:48
 msgid "Video"
 msgstr "Bideoa"
 
 #: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:405
 msgid "Video aspect ratio type"
 msgstr "Bideo ikuspegi maila mota"
 
 #: src/common/property_element.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:402
 msgid "Video crop bottom"
 msgstr "Bideo mozketa behea"
 
 #: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:393
 msgid "Video crop left"
 msgstr "Bideo mozketa ezkerra"
 
 #: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:399
 msgid "Video crop right"
 msgstr "Bideo mozketa eskuina"
 
 #: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:396
 msgid "Video crop top"
 msgstr "Bideo mozketa goia"
 
 #: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:387
 msgid "Video display height"
 msgstr "Bideo erakuspen garaiera"
 
 #: src/common/property_element.cpp:139
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:390
 msgid "Video display unit"
 msgstr "Bideo erakuspen batekoa"
 
 #: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:374
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:384
 msgid "Video display width"
 msgstr "Bideo erakuspen zabalera"
 
@@ -10905,12 +10945,12 @@ msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "Hutsegitea bideo paketatze osaketan. Akats kodea: %1% (%2%)\n"
 
 #: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:371
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:381
 msgid "Video pixel height"
 msgstr "Bideoaren pixel garaiera"
 
 #: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:368
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Video pixel width"
 msgstr "Bideoaren pixel zabalera"
 
@@ -10920,7 +10960,7 @@ msgid "Video properties"
 msgstr "Bideo ezaugarriak"
 
 #: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:399
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:409
 msgid "Video stereo mode"
 msgstr "Bideo estereo modua"
 
@@ -10928,9 +10968,10 @@ msgstr "Bideo estereo modua"
 msgid "Video track"
 msgstr "Bideo bidea"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:34
-msgid "Video track %1, %2"
-msgstr "Bideo bidea %1, %2"
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
+#, fuzzy
+msgid "Video track %1"
+msgstr "Bideo bidea %u"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:920
 msgid "Video tracks:"
@@ -10998,7 +11039,7 @@ msgstr ""
 "da. Agiri honetatiko sarrera guztiak beren hasiera denboraren arabera "
 "antolatuko dira.\n"
 
-#: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:213
+#: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:215
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:287
 msgid "Warning:"
 msgstr "Kontuz:"
@@ -11094,12 +11135,12 @@ msgstr ""
 "bat aurkeztu."
 
 #: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:368
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Width of the encoded video frames in pixels."
 msgstr "Kodeaturiko bideo framen zabalera pixeletan."
 
 #: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:374
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:384
 msgid "Width of the video frames to display."
 msgstr "Erakusteko bideo framen zabalera."
 
@@ -11313,7 +11354,7 @@ msgstr "Zlib deskonpresio hutsegitea. Emaitza: %1%\n"
 msgid "[%1% frame for track %2%, timecode %3%]"
 msgstr "[%1% frame %2% bidearentzat, denbora-kodea %3%]"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:233
+#: src/mkvtoolnix-gui/jobs/job.cpp:235
 msgid "aborted by user"
 msgstr "erabiltzaileak utzita"
 
@@ -11441,11 +11482,11 @@ msgstr "Elkartartekaturiko zutabea (ezkerra lehenik)"
 msgid "column interleaved (right first)"
 msgstr "Elkartartekaturiko zutabea (eskuina lehenik)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:230
+#: src/mkvtoolnix-gui/jobs/job.cpp:232
 msgid "completed OK"
 msgstr "Ongi osatuta"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:231
+#: src/mkvtoolnix-gui/jobs/job.cpp:233
 msgid "completed with warnings"
 msgstr "Kontuz-oharrekin osatuta"
 
@@ -11470,7 +11511,7 @@ msgstr "sortu batze ezarpen hegats berri bat agiri bakoitzeko"
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num ez da aurkitu. %1%\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:77
 msgid "default"
 msgstr "berezkoa"
 
@@ -11495,8 +11536,8 @@ msgstr "deflateInit() hutsegitea. Emaitza: %1%\n"
 msgid "determine automatically"
 msgstr "zehaztu berezgaitasunez"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:110
-#: src/mkvtoolnix-gui/jobs/job.cpp:234
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
+#: src/mkvtoolnix-gui/jobs/job.cpp:236
 msgid "disabled"
 msgstr "ezgaituta"
 
@@ -11518,17 +11559,17 @@ msgstr "erakuspen zabalera: %1%"
 msgid "don't change"
 msgstr "ez aldatu"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "edit chapters"
 msgstr "editatu atalak"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:144
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "edit headers"
 msgstr "editatu idazburuak"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:294
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 msgid "edit tags"
 msgstr "editatu etiketak"
 
@@ -11536,11 +11577,11 @@ msgstr "editatu etiketak"
 msgid "encryption"
 msgstr "enkriptaketa"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:294
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 msgid "extract"
 msgstr "atera"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:232
+#: src/mkvtoolnix-gui/jobs/job.cpp:234
 msgid "failed"
 msgstr "hutseginda"
 
@@ -11643,8 +11684,8 @@ msgstr "izan xcptn bat\n"
 msgid "header removal"
 msgstr "Idazburu kentzea"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:77
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:112
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:75
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:110
 msgid "hidden"
 msgstr "ezkutaturik"
 
@@ -11661,17 +11702,17 @@ msgstr "handiena"
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() hutsegitea. Emaitza: %1%\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:294
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 msgid "info"
 msgstr "argibideak"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "job output"
 msgstr "lan irteera"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:147
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "job queue"
 msgstr "lan lerroa"
 
@@ -11902,8 +11943,8 @@ msgstr ""
 "du nullptr %3% byteko neurri batentzat.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:147
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:141
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "batu"
 
@@ -12125,7 +12166,7 @@ msgstr "mkvtoolnix-gui [--merge|--edit-chapters|--edit-headers] <agiri izenak>"
 msgid "mkvtoolnix-gui [options] [file names]"
 msgstr "mkvtoolnix-gui [aukerak] [agiri izenak]"
 
-#: src/common/mm_io.cpp:1025
+#: src/common/mm_io.cpp:1027
 msgid "mm_text_io_c: UTF32_* is not supported at the moment.\n"
 msgstr "mm_text_io_c: UTF32_* ez dago sostengaturik oraingoz.\n"
 
@@ -12150,14 +12191,18 @@ msgstr "inoiz ez mihatu beste irakur-zerrendentzat"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:912
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:28
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:76
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:96
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
 #: src/mkvtoolnix-gui/merge/input.cpp:1201
 #: src/mkvtoolnix-gui/merge/input.cpp:1203
 #: src/mkvtoolnix-gui/merge/input.cpp:1204
 #: src/mkvtoolnix-gui/merge/input.cpp:1207
-#: src/mkvtoolnix-gui/merge/track_model.cpp:103
+#: src/mkvtoolnix-gui/merge/track_model.cpp:102
+#: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108
-#: src/mkvtoolnix-gui/merge/track_model.cpp:109
-#: src/mkvtoolnix-gui/merge/track_model.cpp:268
+#: src/mkvtoolnix-gui/merge/track_model.cpp:267
 msgid "no"
 msgstr "ez"
 
@@ -12244,7 +12289,7 @@ msgstr "I framentzat bakarrik"
 msgid "only to the first output file"
 msgstr "lehen irteera agirira bakarrik"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:75
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
 msgid "ordered"
 msgstr "hurrenkeran"
 
@@ -12257,11 +12302,11 @@ msgstr "irteera lagin maizt.: %1%"
 msgid "passthrough"
 msgstr "igaropena"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:228
+#: src/mkvtoolnix-gui/jobs/job.cpp:230
 msgid "pending automatic start"
 msgstr "berezgaitasunezko abiatzea egiteke"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:227
+#: src/mkvtoolnix-gui/jobs/job.cpp:229
 msgid "pending manual start"
 msgstr "eskuzko abiatzea egiteke"
 
@@ -12337,7 +12382,7 @@ msgstr "lerro elkartatekatua (ezkerra lehenik)"
 msgid "row interleaved (right first)"
 msgstr "lerro elkartatekatua (eskuina lehenik)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:229
+#: src/mkvtoolnix-gui/jobs/job.cpp:231
 msgid "running"
 msgstr "ekinean"
 
@@ -12425,7 +12470,7 @@ msgstr "tta_reader: neurria_etiketa < 0 c'tor. %1%\n"
 #: src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752 src/info/mkvinfo.cpp:938
 #: src/input/r_matroska.cpp:101 src/input/r_matroska.cpp:2343
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:159
-#: src/mkvtoolnix-gui/jobs/job.cpp:235
+#: src/mkvtoolnix-gui/jobs/job.cpp:237
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57
 msgid "unknown"
 msgstr "ezezaguna"
@@ -12462,14 +12507,18 @@ msgstr "x"
 
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:29
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:76
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:96
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
 #: src/mkvtoolnix-gui/merge/input.cpp:1201
 #: src/mkvtoolnix-gui/merge/input.cpp:1203
 #: src/mkvtoolnix-gui/merge/input.cpp:1204
 #: src/mkvtoolnix-gui/merge/input.cpp:1207
-#: src/mkvtoolnix-gui/merge/track_model.cpp:103
+#: src/mkvtoolnix-gui/merge/track_model.cpp:102
+#: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108
-#: src/mkvtoolnix-gui/merge/track_model.cpp:109
-#: src/mkvtoolnix-gui/merge/track_model.cpp:268
+#: src/mkvtoolnix-gui/merge/track_model.cpp:267
 msgid "yes"
 msgstr "bai"
 
@@ -13042,8 +13091,8 @@ msgstr "– ezarri ezer ezean –"
 #~ msgid "Attachment style:"
 #~ msgstr "Eranskinaren estiloa:"
 
-#~ msgid "Audio track %u"
-#~ msgstr "Audio bidea %u"
+#~ msgid "Audio track %1, %2, %3"
+#~ msgstr "Audio bidea %1, %2, %3"
 
 #~ msgid "Auto-set output filename"
 #~ msgstr "Berez-ezarri irteera agirizena"
@@ -13318,9 +13367,6 @@ msgstr "– ezarri ezer ezean –"
 
 #~ msgid "Default track &language to set:"
 #~ msgstr "Eza&rtzeko berezko bide hizkuntza:"
-
-#~ msgid "Default track flag:"
-#~ msgstr "Berezko bide ikurra:"
 
 #~ msgid "Defaults for new chapters"
 #~ msgstr "Berezkoak atal berrientzat"
@@ -13999,9 +14045,6 @@ msgstr "– ezarri ezer ezean –"
 #~ msgid "Name for this track, e.g. \"director's comments\"."
 #~ msgstr "Bide honentzako izena, adib. \"zuzendariaren aipamenak\"."
 
-#~ msgid "Name:"
-#~ msgstr "Izena:"
-
 #, fuzzy
 #~ msgid "Ne&xt segment UID:"
 #~ msgstr "Hurrengo zatiaren UID-a:"
@@ -14229,6 +14272,12 @@ msgstr "– ezarri ezer ezean –"
 
 #~ msgid "Re-enable the selected jobs"
 #~ msgstr "Ber-gaitu hautaturiko lanak"
+
+#~ msgid ""
+#~ "Re-rendering track headers: data_size != 0 not implemented yet. %1%\n"
+#~ msgstr ""
+#~ "Ber-aurkezpen bide idazburuak: datu_neurria != 0 oraindik ezarri gabe. "
+#~ "%1%\n"
 
 #~ msgid "Reduce to audio core"
 #~ msgstr "Murriztu audio nukleora"
@@ -14574,8 +14623,8 @@ msgstr "– ezarri ezer ezean –"
 #~ "ditzake. Zenbaki hamarren positibo bat, edo zatiki bat, adib.1200/1253 "
 #~ "bezalakoa. Hobeto lan egiten du bide eta azpidatzi bideetan."
 
-#~ msgid "Subtitle track %u"
-#~ msgstr "Azpidatzi bidea %u"
+#~ msgid "Subtitle track %1, %2, %3"
+#~ msgstr "Azpidatzi bidea %1, %2, %3"
 
 #~ msgid "Tag file:"
 #~ msgstr "Etiketa agiria:"
@@ -15215,9 +15264,6 @@ msgstr "– ezarri ezer ezean –"
 #~ "Ohiko erabilpenak dira VOB irakurketa DVD batetik (adib. VTS_01_1.VOB, "
 #~ "VTS_01_2.VOB, VTS_01_3.VOB)."
 
-#~ msgid "UID:"
-#~ msgstr "UID-a:"
-
 #~ msgid ""
 #~ "UTFstring_to_cstrutf8: Invalid wide character. Please contact "
 #~ "moritz@bunkus.org if you think that this is not true."
@@ -15291,8 +15337,8 @@ msgstr "– ezarri ezer ezean –"
 #~ "Badaiteke zuk MPEG2 bideo jarioa zuzendu nahi izatea multiplexatu "
 #~ "aurretik.\n"
 
-#~ msgid "Video track %u"
-#~ msgstr "Bideo bidea %u"
+#~ msgid "Video track %1, %2"
+#~ msgstr "Bideo bidea %1, %2"
 
 #~ msgid "View files in playlist"
 #~ msgstr "Ikusi agiriak irakur-zerrendan"

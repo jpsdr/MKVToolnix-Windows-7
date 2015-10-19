@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-18 10:24+0200\n"
+"POT-Creation-Date: 2015-10-19 18:48+0200\n"
 "PO-Revision-Date: 2015-06-21 13:13+0200\n"
 "Last-Translator: René Maassen <bmom43@gmail.com>\n"
 "Language-Team: Dutch <bmom43@gmail.com>\n"
@@ -932,11 +932,15 @@ msgstr "grootte %1%"
 msgid " size is unknown"
 msgstr "grootte is onbekend"
 
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:283
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1500
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:75
 msgid "\"Default track\" flag:"
 msgstr "\"Standaard spoor\" markering:"
 
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:284
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1501
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:79
 msgid "\"Forced track\" flag:"
 msgstr "\"Forceer spoor\" markering:"
 
@@ -944,7 +948,8 @@ msgstr "\"Forceer spoor\" markering:"
 msgid "\"default\" is a good choice for almost all situations."
 msgstr "\"standaard\" is een goede keuze voor bijna alle situaties."
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:683
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:121
+#: src/mkvtoolnix-gui/merge/track_model.cpp:682
 msgid "%1 Hz"
 msgstr ""
 
@@ -952,22 +957,24 @@ msgstr ""
 msgid "%1 automatic, %2 manual, %3 running"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:692
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:124
+#: src/mkvtoolnix-gui/merge/track_model.cpp:691
 #, fuzzy
 msgid "%1 bit per sample"
 msgid_plural "%1 bits per sample"
 msgstr[0] "bits per voorbeeld: %1%"
 msgstr[1] "bits per voorbeeld: %1%"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:687
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:122
+#: src/mkvtoolnix-gui/merge/track_model.cpp:686
 #, fuzzy
 msgid "%1 channel"
 msgid_plural "%1 channels"
 msgstr[0] "Audio kanalen"
 msgstr[1] "Audio kanalen"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:101
-#: src/mkvtoolnix-gui/merge/track_model.cpp:266
+#: src/mkvtoolnix-gui/merge/track_model.cpp:100
+#: src/mkvtoolnix-gui/merge/track_model.cpp:265
 msgid "%1 entries"
 msgstr "%1 ingangen"
 
@@ -984,7 +991,8 @@ msgid_plural "%1 of %2 files processed"
 msgstr[0] "%1 van %2 bestand uitgevoerd"
 msgstr[1] "%1 van %2 bestanden uitgevoerd"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:697
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:132
+#: src/mkvtoolnix-gui/merge/track_model.cpp:696
 #, fuzzy
 msgid "%1 pixels"
 msgstr " (pixels)"
@@ -1153,7 +1161,7 @@ msgid "&Abort job"
 msgstr "&Afbreken"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:420
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:318
 #, fuzzy
 msgid "&Abort jobs"
 msgstr "&Afbreken"
@@ -1230,7 +1238,7 @@ msgid "&Close file"
 msgstr "&Sluiten"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:210
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:214
 msgid "&Collapse all"
 msgstr "&Alles inklappen"
 
@@ -1284,7 +1292,7 @@ msgid "&Escape arguments for:"
 msgstr "&Escape argumenten voor:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:209
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:213
 msgid "&Expand all"
 msgstr "&All&es uitlappen"
 
@@ -2002,17 +2010,17 @@ msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S' en '-s' zijn gebruikt in hetzelfde bronbestand.\n"
 
 #: src/common/property_element.cpp:115
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:328
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:338
 msgid "'Default track' flag"
 msgstr "'default-track' standaard spoor, markering"
 
 #: src/common/property_element.cpp:118
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:334
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:344
 msgid "'Forced display' flag"
 msgstr "'forced display' geforceerde scherm, markering"
 
 #: src/common/property_element.cpp:117
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:331
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:341
 msgid "'Track enabled' flag"
 msgstr "'Track enabled' Spoor aan, markering"
 
@@ -2142,7 +2150,7 @@ msgstr "<niet veranderen>"
 msgid "<no output file>"
 msgstr "<geen uitvoer bestand>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:200
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
 msgid "<unnamed>"
 msgstr "<niet benoemd>"
@@ -2187,12 +2195,12 @@ msgstr ""
 "Een komma gescheiden lijst van tijd code bereiken van te behouden inhoud."
 
 #: src/common/property_element.cpp:130
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:362
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:372
 msgid "A human-readable string specifying the codec."
 msgstr "Een menselijk-leesbare reeks specificeert de codec."
 
 #: src/common/property_element.cpp:127
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:353
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:363
 msgid "A human-readable track name."
 msgstr "En menselijk-leesbaar spoor naam."
 
@@ -2217,7 +2225,7 @@ msgstr ""
 "Een willekeurig gegenereerd ID om het huidige segment\n"
 "te identificeren tussen vele anderen (128 bits)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:293
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:303
 msgid ""
 "A randomly generated unique ID to identify the current segment between many "
 "others (128 bits)."
@@ -2257,7 +2265,7 @@ msgstr ""
 "worden gehouden tijdens het maken van een directe stroom kopie\n"
 "van het spoor naar een ander bestand."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:324
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:334
 msgid ""
 "A unique ID to identify the Track. This should be kept the same when making "
 "a direct stream copy of the Track to another file."
@@ -2274,7 +2282,7 @@ msgstr ""
 "Een uniek ID om het volgende gekoppelde\n"
 "segment te identificeren (128 bits)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:295
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
 msgid "A unique ID to identify the next chained segment (128 bits)."
 msgstr ""
 "Een uniek ID om het volgende gekoppelde segment te identificeren (128 bits)."
@@ -2287,7 +2295,7 @@ msgstr ""
 "Een uniek ID om het vorige gekoppelde\n"
 "segment te identificeren (128 bits)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:294
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
 msgid "A unique ID to identify the previous chained segment (128 bits)."
 msgstr ""
 "Een uniek ID om het vorige gekoppelde segment te identificeren (128 bits)."
@@ -2386,7 +2394,7 @@ msgid "Abort running job"
 msgstr "Breek af na huidige taak"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:418
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:315
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
 #, fuzzy
 msgid "Abort running jobs"
 msgstr "Breek af na huidige taak"
@@ -2599,7 +2607,7 @@ msgstr ""
 msgid "All following file names will be opened in the header editor."
 msgstr ""
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:425
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:435
 msgid "All header values are OK."
 msgstr "Alle 'kopstukken' zijn OK."
 
@@ -2727,7 +2735,7 @@ msgid "An <attachment-selector> can have three forms:"
 msgstr "En <attachment-selector> kan drie vormen hebben:"
 
 #: src/common/property_element.cpp:129
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:359
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:369
 msgid "An ID corresponding to the codec."
 msgstr "Een ID corresponderend aan een codec."
 
@@ -2740,11 +2748,11 @@ msgstr "Een bijlage met het ID %1% is niet gevonden.\n"
 msgid "An empty file name is not valid.\n"
 msgstr "Een lege bestandsnaam is niet geldig.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:292
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:302
 msgid "An escaped file name corresponding to the next segment."
 msgstr "Een verlaten bestandsnaam behorende bij het volgende segment."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:291
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:301
 msgid "An escaped file name corresponding to the previous segment."
 msgstr "Een verlaten bestandsnaam behorende bij het vorige segment."
 
@@ -2817,7 +2825,7 @@ msgstr "Alle  media bestanden bijvoegen"
 msgid "Append to an e&xisting input file"
 msgstr "Bijvoegen aan een bestaand invoer bestand"
 
-#: src/merge/output_control.cpp:1660
+#: src/merge/output_control.cpp:1686
 #, boost-format
 msgid ""
 "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% "
@@ -2881,22 +2889,22 @@ msgid "Attachments"
 msgstr "Bijlagen"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:944
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:47
 msgid "Audio"
 msgstr "Audio"
 
 #: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:424
 msgid "Audio bit depth"
 msgstr "Audio bit diepte"
 
 #: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:421
 msgid "Audio channels"
 msgstr "Audio kanalen"
 
 #: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:408
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:418
 msgid "Audio output sampling frequency"
 msgstr "Audio uitvoer voorbeeld frequentie"
 
@@ -2905,13 +2913,14 @@ msgid "Audio properties"
 msgstr "Audio eigenschappen"
 
 #: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:405
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:415
 msgid "Audio sampling frequency"
 msgstr "Audio voorbeeld frequentie"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:33
-msgid "Audio track %1, %2, %3"
-msgstr "Audio spoor %1, %2, %3"
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
+#, fuzzy
+msgid "Audio track %1"
+msgstr "Een spoor"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:919
 #, fuzzy
@@ -2965,7 +2974,7 @@ msgid "Bit depth: %1%"
 msgstr "Bit diepte: %1%"
 
 #: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:424
 msgid "Bits per sample, mostly used for PCM."
 msgstr "Bits per voorbeeld, meestal gebruikt voor PCM."
 
@@ -3029,11 +3038,12 @@ msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
 msgstr ""
 "Zowel verwachtte verhouding factor en '--scherm-dimensies' werden gegeven.\n"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:36
-msgid "Button track %1, %2"
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
+#, fuzzy
+msgid "Button track %1"
 msgstr "Knop spoor: %1, %2"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:44
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:50
 msgid "Buttons"
 msgstr "Knoppen"
 
@@ -3076,7 +3086,7 @@ msgstr "Calculeert controle som van spoor inhoud."
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:174
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:204
 #: src/mkvtoolnix-gui/jobs/tool.cpp:421
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:318
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:319
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
 #: src/mkvtoolnix-gui/merge/tab.cpp:332 src/mkvtoolnix-gui/merge/tab.cpp:358
 #: src/mkvtoolnix-gui/merge/tool.cpp:177
@@ -3204,7 +3214,7 @@ msgstr "Sporen: %1%"
 msgid "Chapter &number of first created entry:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:180
+#: src/mkvtoolnix-gui/util/settings.cpp:181
 #, fuzzy
 msgid "Chapter <NUM:2>"
 msgstr "Hoofdstukken"
@@ -3263,7 +3273,7 @@ msgstr ""
 msgid "Chapters"
 msgstr "Hoofdstukken"
 
-#: src/merge/output_control.cpp:1215
+#: src/merge/output_control.cpp:1241
 msgid ""
 "Chapters are not allowed in WebM compliant files. No chapters will be "
 "written into any output file.\n"
@@ -3348,17 +3358,18 @@ msgid "Cluster timecode: %|1$.3f|s"
 msgstr "Cluster tijd code: %|1$.3f|s"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:250
-#: src/mkvtoolnix-gui/merge/track_model.cpp:45
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:103
+#: src/mkvtoolnix-gui/merge/track_model.cpp:44
 msgid "Codec"
 msgstr "Codec"
 
 #: src/common/property_element.cpp:129
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:359
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:369
 msgid "Codec ID"
 msgstr "Codec ID"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:141
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:51
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:278
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:57
 msgid "Codec ID:"
 msgstr "Codec ID:"
 
@@ -3388,7 +3399,7 @@ msgid "Codec info URL: %1%"
 msgstr "Codec info URL: %1%"
 
 #: src/common/property_element.cpp:130
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:362
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:372
 msgid "Codec name"
 msgstr "Codec naam"
 
@@ -3494,7 +3505,7 @@ msgstr ""
 "Kan geen index vinden voor audio spoor %1% (fout code: %2%). Sla spoor "
 "over.\n"
 
-#: src/merge/output_control.cpp:1586
+#: src/merge/output_control.cpp:1612
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "Kon gptzr niet vinden tijdens bijvoegen. %1%\n"
@@ -3887,7 +3898,7 @@ msgid "Default add&itional command line options:"
 msgstr "Standaard extra commando regel opties"
 
 #: src/common/property_element.cpp:126
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:350
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:360
 msgid "Default duration"
 msgstr "Standaard duur"
 
@@ -3909,7 +3920,12 @@ msgstr ""
 msgid "Default flag: %1%"
 msgstr "Standaard markering: %1%"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:52
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:107
+#, fuzzy
+msgid "Default track"
+msgstr "'default-track' standaard spoor, markering"
+
+#: src/mkvtoolnix-gui/merge/track_model.cpp:51
 #, fuzzy
 msgid "Default track in output"
 msgstr "'default-track' standaard spoor, markering"
@@ -3982,8 +3998,8 @@ msgid "Directory &relative to first input file's directory:"
 msgstr "Zelfde map van waaruit bestand(en) is/wordt ingelezen"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:476
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:207
+#: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:211
 msgid "Directory:"
 msgstr "Map:"
 
@@ -4055,7 +4071,7 @@ msgid "Do not write meta seek elements at all."
 msgstr "Schrijf helemaal geen meta zoek elementen."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:419
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 msgid "Do you really want to abort all currently running jobs?"
 msgstr ""
 
@@ -4215,12 +4231,12 @@ msgstr "EbmlVoid (grootte: %1%)"
 msgid "Edit selectors for properties"
 msgstr "Bewerk selectie mogelijkheden"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:81
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
 msgid "Edition entry"
 msgstr "Editie ingang"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:30
 msgid "Edition/Chapter"
 msgstr "Editie/Hoofdstuk"
 
@@ -4280,7 +4296,7 @@ msgstr "Encryptie algoritme: %1% (%2%)"
 msgid "Encryption key ID: %1%"
 msgstr "Encryptie sleutel ID: %1%"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:34
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
 msgid "End"
 msgstr "Einde"
 
@@ -4361,6 +4377,11 @@ msgstr ""
 "Fout bij ontleden van markeringen '%1%': sommige verplichte elementen "
 "ontbreken.\n"
 
+#: src/merge/output_control.cpp:741
+#, fuzzy, boost-format
+msgid "Error reading from the file '%1%'.\n"
+msgstr "Fout bericht van ontleder: %1"
+
 #: src/info/qt_ui.cpp:104
 msgid "Error saving the information"
 msgstr "Fout bij informatie opslaan"
@@ -4370,7 +4391,7 @@ msgid "Error writing Matroska file"
 msgstr "Fout bij schrijven MATROSKA bestand"
 
 #: src/common/output.cpp:79 src/common/output.cpp:80 src/common/output.cpp:81
-#: src/mkvtoolnix-gui/jobs/job.cpp:214
+#: src/mkvtoolnix-gui/jobs/job.cpp:216
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:288
 msgid "Error:"
 msgstr "Fout:"
@@ -4620,11 +4641,11 @@ msgstr "Bestand data, grootte: %1%"
 msgid "File description: %1%"
 msgstr "Bestand beschrijving: %1%"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:148
 msgid "File has been modified"
 msgstr "Het bestand is veranderd."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:133
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:136
 msgid "File has not been modified"
 msgstr "Het bestand is niet veranderd."
 
@@ -4635,9 +4656,9 @@ msgid "File name"
 msgstr "Bestand naam"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:475
-#: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
+#: src/mkvtoolnix-gui/forms/header_editor/tab.h:143
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:206
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:210
 msgid "File name:"
 msgstr "Bestandsnaam:"
 
@@ -4653,8 +4674,8 @@ msgstr "Bestand naam: %1%"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:331
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:392
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:535
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:82
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:90
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:85
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:93
 msgid "File parsing failed"
 msgstr "Bestand ontcijferen niet gelukt"
 
@@ -4670,7 +4691,7 @@ msgstr "Bestand structuur waarschuwing"
 msgid "File/Segment linking"
 msgstr "Bestand/Segment gelinkt"
 
-#: src/merge/output_control.cpp:869
+#: src/merge/output_control.cpp:895
 msgid ""
 "Files cannot be appended to themselves. The argument for '--append-to' was "
 "invalid.\n"
@@ -4690,7 +4711,7 @@ msgstr ""
 msgid "Fix bitstream timing info"
 msgstr "Repareer bit stroom timing informatie"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:35
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 #, fuzzy
 msgid "Flags"
 msgstr "Markeringen:"
@@ -4751,7 +4772,8 @@ msgstr "Forceer de vertaling voor 'code' om die te gebruiken."
 msgid "Forced flag: %1%"
 msgstr "Geforceerde markering: %1%"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:53
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:108
+#: src/mkvtoolnix-gui/merge/track_model.cpp:52
 #, fuzzy
 msgid "Forced track"
 msgstr "\"Forceer spoor\" markering:"
@@ -4911,19 +4933,19 @@ msgstr ""
 "Verwijderen kop compressie niet mogelijk omdat het buffer niet is gestart "
 "met de bytes die verwijderd moeten worden. Gezochte bytes:%1%; gevonden:%2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:425
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:442
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:435
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:450
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
 msgid "Header validation"
 msgstr "Koppen valideren"
 
 #: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:371
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:381
 msgid "Height of the encoded video frames in pixels."
 msgstr "Hoogte van de gedecodeerde video beelden in pixels."
 
 #: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:387
 msgid "Height of the video frames to display."
 msgstr "Te tonen hoogte van de video beelden."
 
@@ -4932,7 +4954,7 @@ msgid "Hel&p"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
-#: src/mkvtoolnix-gui/merge/track_model.cpp:51
+#: src/mkvtoolnix-gui/merge/track_model.cpp:50
 msgid "ID"
 msgstr "ID"
 
@@ -5822,8 +5844,9 @@ msgstr "Aaneenkoppel markering: %1%"
 #: src/common/property_element.cpp:128
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:26
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:356
-#: src/mkvtoolnix-gui/merge/track_model.cpp:48
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:104
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:366
+#: src/mkvtoolnix-gui/merge/track_model.cpp:47
 msgid "Language"
 msgstr "Taal"
 
@@ -5831,7 +5854,9 @@ msgstr "Taal"
 msgid "Language is not NUL terminated"
 msgstr "Taal is niet op NUL afgesloten"
 
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1566
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:69
 msgid "Language:"
 msgstr "Taal:"
 
@@ -6091,7 +6116,7 @@ msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "Maximum toegestane waarde: %1%, huidige waarde: %2%"
 
 #: src/common/property_element.cpp:124
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:345
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:355
 msgid "Maximum cache"
 msgstr "Maximum tijdelijk geheugen"
 
@@ -6139,7 +6164,7 @@ msgid "Minimum allowed value: %1%, actual value: %2%"
 msgstr "Minimum toegestane waarde: %1%, huidige waarde: %2%"
 
 #: src/common/property_element.cpp:122
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:340
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:350
 msgid "Minimum cache"
 msgstr "Minimum cache"
 
@@ -6226,7 +6251,7 @@ msgstr ""
 "Meer dan één naam is opgegeven voor een enkele bijlage. '%1%' wordt "
 "overgeslagen '%2%' daarvoor in de plaats gebruikt.\n"
 
-#: src/merge/output_control.cpp:942
+#: src/merge/output_control.cpp:968
 #, boost-format
 msgid ""
 "More than one track is to be appended to the track %1% from file no. %2% "
@@ -6253,7 +6278,7 @@ msgstr "Voe&g dit spoor samen"
 msgid "Multiply this track's timestamps with a factor."
 msgstr "Vermenigvuldigd tijdwaarden van dit spoor met een factor."
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:47
+#: src/mkvtoolnix-gui/merge/track_model.cpp:46
 msgid "Mux this"
 msgstr "Voeg dit samen"
 
@@ -6277,9 +6302,10 @@ msgstr ""
 
 #: src/common/property_element.cpp:127
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:25
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:353
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:105
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:363
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:57
-#: src/mkvtoolnix-gui/merge/track_model.cpp:49
+#: src/mkvtoolnix-gui/merge/track_model.cpp:48
 msgid "Name"
 msgstr "Naam"
 
@@ -6290,6 +6316,12 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:198
 msgid "Name tem&plate:"
 msgstr ""
+
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:282
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:72
+#, fuzzy
+msgid "Name:"
+msgstr "&Naam:"
 
 #: src/info/mkvinfo.cpp:842
 #, boost-format
@@ -6313,7 +6345,7 @@ msgid "New value:"
 msgstr "Nieuwe waarde:"
 
 #: src/common/property_element.cpp:104
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:292
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:302
 msgid "Next filename"
 msgstr "Volgende bestandsnaam"
 
@@ -6332,7 +6364,7 @@ msgid "Next segment UID: %1%"
 msgstr "Volgende segment UID: %1%"
 
 #: src/common/property_element.cpp:108
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:295
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
 msgid "Next segment's unique ID"
 msgstr "Volgende uniek segment ID"
 
@@ -6363,7 +6395,7 @@ msgstr ""
 "Geen MIME type is ingesteld voor de bijlage '%1%', en het kon niet gegokt "
 "worden.\n"
 
-#: src/merge/output_control.cpp:901
+#: src/merge/output_control.cpp:927
 #, boost-format
 msgid ""
 "No append mapping was given for the file no. %1% ('%2%'). A default mapping "
@@ -6636,12 +6668,12 @@ msgid "Number of entries to &renumber:"
 msgstr "Aantal hoofdstukken:"
 
 #: src/common/property_element.cpp:126
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:350
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:360
 msgid "Number of nanoseconds (not scaled) per frame."
 msgstr "Aantal nanoseconden (niet geschaald) per beeld."
 
 #: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:421
 msgid "Numbers of channels in the track."
 msgstr "Aantal kanalen in het spoor."
 
@@ -6722,7 +6754,7 @@ msgstr "Alleen één uitvoer bestand toegestaan.\n"
 msgid "Only one segment info file allowed in '%1% %2%'.\n"
 msgstr "Alleen één segment info bestand is toegestaan in '%1% %2%'.\n"
 
-#: src/merge/output_control.cpp:882
+#: src/merge/output_control.cpp:908
 #, boost-format
 msgid ""
 "Only partial append mappings were given for the file no. %1% ('%2%'). Either "
@@ -7010,7 +7042,7 @@ msgstr ""
 msgid "Pre&viously used output directory"
 msgstr "Voorgaande uitvoer map gebruiken"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:291
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:301
 msgid "Previous file name"
 msgstr "Vorige bestandsnaam"
 
@@ -7033,7 +7065,7 @@ msgid "Previous segment UID: %1%"
 msgstr "Vorige segment UID: %1%"
 
 #: src/common/property_element.cpp:107
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:294
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
 msgid "Previous segment's unique ID"
 msgstr "Vorige segments unieke ID"
 
@@ -7078,12 +7110,15 @@ msgstr "Voortgang: 100%%%1%"
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Voortgang: [%1%%2%] %3%%%"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:54
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:109
+#: src/mkvtoolnix-gui/merge/track_model.cpp:53
 #, fuzzy
 msgid "Properties"
 msgstr "Eigenschappen:"
 
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:285
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1495
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 msgid "Properties:"
 msgstr "Eigenschappen:"
 
@@ -7326,12 +7361,6 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "voor hoofdstukken"
 
-#: src/merge/output_control.cpp:772
-#, boost-format
-msgid "Re-rendering track headers: data_size != 0 not implemented yet. %1%\n"
-msgstr ""
-"Her opbouwen spoor koppen: data_size != 0 nog niet geïmplementeerd. %1%\n"
-
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr "Lees het volledige wijzigingslog online"
@@ -7356,7 +7385,7 @@ msgid "Ready"
 msgstr "Klaar"
 
 #: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:408
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:418
 msgid "Real output sampling frequency in Hz."
 msgstr "Real uitvoer voorbeeld frequentie in Hz."
 
@@ -7564,7 +7593,7 @@ msgid "Sa&ve settings as"
 msgstr "Bewaar instellingen als"
 
 #: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:405
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:415
 msgid "Sampling frequency in Hz."
 msgstr "Voorbeeld frequentie in Hz."
 
@@ -7619,11 +7648,11 @@ msgstr "Bewaren mislukt"
 msgid "Saving the chapters failed."
 msgstr "Opslaan hoofdstukken mislukt."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:156
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:159
 msgid "Saving the modified segment information header failed."
 msgstr "Opslaan van de gewijzigde informatie segmentkop mislukt."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:162
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:165
 msgid "Saving the modified track headers failed."
 msgstr "Opslaan van de gewijzigde informatie segmentkop mislukt."
 
@@ -7704,7 +7733,7 @@ msgstr "Segment UIDs:"
 msgid "Segment e&dition UID:"
 msgstr "Segment e&ditie UID:"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:290
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:300
 msgid "Segment file name"
 msgstr "Segment bestandsnaam"
 
@@ -7722,7 +7751,7 @@ msgid "Segment info:"
 msgstr "Segment info:"
 
 #: src/extract/timecodes_v2.cpp:242 src/info/mkvinfo.cpp:465
-#: src/info/qt_ui.cpp:205 src/mkvtoolnix-gui/header_editor/tab.cpp:286
+#: src/info/qt_ui.cpp:205 src/mkvtoolnix-gui/header_editor/tab.cpp:296
 #: src/propedit/options.cpp:172 src/propedit/propedit_cli_parser.cpp:140
 #: src/propedit/propedit_cli_parser.cpp:225
 msgid "Segment information"
@@ -7734,7 +7763,7 @@ msgid "Segment tracks"
 msgstr "Segment sporen"
 
 #: src/common/property_element.cpp:105
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:293
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:303
 msgid "Segment unique ID"
 msgstr "Segment unieke ID"
 
@@ -7834,7 +7863,7 @@ msgstr ""
 "ZOU WORDEN als er geen taal gevonden wordt\n"
 "die overeenkomt met de voorkeur van de gebruiker."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:328
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:338
 msgid ""
 "Set if that track (audio, video or subs) SHOULD be used if no language found "
 "matches the user preference."
@@ -7856,7 +7885,7 @@ msgstr ""
 "waarvan de taal overeenkomt met de gebruikersinstelling voor de\n"
 "standaard en het geforceerde spo(o)r(en)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:335
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:345
 msgid ""
 "Set if that track MUST be used during playback. There can be many forced "
 "track for a kind (audio, video or subs). The player should select the one "
@@ -7869,7 +7898,7 @@ msgstr ""
 "spo(o)r(en)."
 
 #: src/common/property_element.cpp:117
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:331
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:341
 msgid "Set if the track is used."
 msgstr "Stel in als spoor gebruikt wordt."
 
@@ -8117,7 +8146,7 @@ msgstr "Sla over %1% bytes aan het begin (geen geldige MP3 kop gevonden).\n"
 msgid "Slices"
 msgstr "Schuiven"
 
-#: src/merge/output_control.cpp:1248
+#: src/merge/output_control.cpp:1274
 #, boost-format
 msgid ""
 "Some tag elements are missing (this error should not have occured - another "
@@ -8130,7 +8159,7 @@ msgstr ""
 msgid "Sort chapters by their start and end ti&mecodes"
 msgstr "Sorteren hoofdstukken, gebaseerd op start en tij&d codes"
 
-#: src/mkvtoolnix-gui/merge/track_model.cpp:50
+#: src/mkvtoolnix-gui/merge/track_model.cpp:49
 msgid "Source file"
 msgstr "Bron bestand"
 
@@ -8146,7 +8175,7 @@ msgstr ""
 "Specificeert de taal van een spoor in het\n"
 "Matroska talen formulier."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:356
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:366
 msgid "Specifies the language of the track in the Matroska languages form."
 msgstr "Specificeert de taal van een spoor in het Matroska talen formulier."
 
@@ -8158,7 +8187,7 @@ msgstr ""
 "Geef de mogelijke veranderingen op voor de verwachtte verhouding\n"
 "(0: vrij vergroten/verkleinen, 1: houdt huidige verhouding, 2: vast)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:405
 msgid ""
 "Specify the possible modifications to the aspect ratio (0: free resizing, 1: "
 "keep aspect ratio, 2: fixed)."
@@ -8188,7 +8217,7 @@ msgstr ""
 msgid "Sta&rt muxing"
 msgstr "Sta&rt samenvoegen"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:31
 msgid "Start"
 msgstr "Start"
 
@@ -8251,7 +8280,7 @@ msgid "Stereo mode: %1% (%2%)"
 msgstr "Stereo mode: %1% (%2%)"
 
 #: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:399
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:409
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "Stereo-3D video mode (0 - 11, zie documentatie)."
 
@@ -8276,6 +8305,11 @@ msgstr "Reeks"
 msgid "Subtitle and chapter properties"
 msgstr "Ondertitel en audio eigenschappen"
 
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:42
+#, fuzzy
+msgid "Subtitle track %1"
+msgstr "Ondertitels"
+
 #: src/extract/xtr_textsubs.cpp:166
 #, boost-format
 msgid ""
@@ -8286,17 +8320,13 @@ msgstr ""
 "ASS resultaat bestand voor de ingangen welke dezelfde start en eindtijd "
 "hebben.\n"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:35
-msgid "Subtitle track %1, %2, %3"
-msgstr "Ondertitel spoor %1, %2, %3"
-
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:921
 #, fuzzy
 msgid "Subtitle tracks:"
 msgstr "Ondertitels"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:945
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:49
 msgid "Subtitles"
 msgstr "Ondertitels"
 
@@ -8719,7 +8749,7 @@ msgstr ""
 "De landen die hier wordt gekozen, zal bovenaan worden getoond in de landen "
 "uitklaplijst van het programma."
 
-#: src/merge/output_control.cpp:1395
+#: src/merge/output_control.cpp:1421
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Volg document(en) (cue) ingangen (de index) worden geschreven...\n"
 
@@ -8932,7 +8962,7 @@ msgstr "Het bestand '%1%' kon voor lezen niet geopend worden: (%2%).\n"
 #: src/extract/tracks.cpp:299 src/extract/xtr_avi.cpp:57
 #: src/extract/xtr_avi.cpp:61 src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74 src/extract/xtr_wav.cpp:116
-#: src/merge/output_control.cpp:1272
+#: src/merge/output_control.cpp:1298
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "Het bestand '%1%' kon voor schrijven niet geopend worden: (%2%).\n"
@@ -8942,7 +8972,7 @@ msgstr "Het bestand '%1%' kon voor schrijven niet geopend worden: (%2%).\n"
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "Dit bestand kon niet geopend of ontleed worden.\n"
 
-#: src/merge/output_control.cpp:1276
+#: src/merge/output_control.cpp:1302
 #, boost-format
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "Het bestand '%1%' is voor schrijven aangemaakt.\n"
@@ -9011,7 +9041,7 @@ msgstr "Het bestand kon voor schrijven niet geopend worden."
 msgid "The file does not contain track ID %1%.\n"
 msgstr "Het i bestand bevat geen spoor ID %1%.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:146
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:149
 msgid ""
 "The file has been changed by another program since it was read by the header "
 "editor. Therefore you have to re-load it. Unfortunately this means that all "
@@ -9022,7 +9052,7 @@ msgstr ""
 "betekent dit dat de veranderingen verloren zijn gegaan."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:476
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:169
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:172
 msgid "The file has been saved successfully."
 msgstr "Het bestand is succesvol opgeslagen."
 
@@ -9071,11 +9101,11 @@ msgid "The file is being fixed, part 4/4..."
 msgstr "Het bestand wordt gerepareerd, deel 4/4..."
 
 #: src/common/property_element.cpp:102
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:290
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:300
 msgid "The file name for this segment."
 msgstr "De bestandsnaam voor dit segment."
 
-#: src/merge/output_control.cpp:915
+#: src/merge/output_control.cpp:941
 #, boost-format
 msgid ""
 "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that "
@@ -9085,7 +9115,7 @@ msgstr ""
 "kan niet gekopieerd worden. Het argument, bijvoegen aan, '--append to' is "
 "ongeldig.\n"
 
-#: src/merge/output_control.cpp:921
+#: src/merge/output_control.cpp:947
 #, boost-format
 msgid ""
 "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that "
@@ -9096,7 +9126,7 @@ msgstr ""
 "kan niet gekopieerd worden. Daarom kan er geen spoor aan bijgevoegd worden. "
 "Het argument, bijvoegen aan, '--append to' was ongeldig.\n"
 
-#: src/merge/output_control.cpp:861
+#: src/merge/output_control.cpp:887
 #, boost-format
 msgid ""
 "The file no. %1% ('%2%') is not being appended. The argument for '--append-"
@@ -9123,7 +9153,7 @@ msgstr "Het bestand wordt verder niet uitgevoerd."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:233
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:247
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:535
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:90
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:93
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr ""
 "het bestand wat je probeerde te openen (%1) kon niet succesvol worden "
@@ -9133,7 +9163,7 @@ msgstr ""
 msgid "The file you tried to open (%1) does not contain any chapters."
 msgstr "Het bestand dat je probeerde te openen (%1) bevat geen hoofdstukken."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:82
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:85
 msgid ""
 "The file you tried to open (%1) is not recognized as a valid Matroska/WebM "
 "file."
@@ -9196,7 +9226,7 @@ msgstr ""
 msgid "The formats can be mixed, too."
 msgstr "De formaten kunnen ook gemixt worden."
 
-#: src/merge/output_control.cpp:971
+#: src/merge/output_control.cpp:997
 msgid "The formats do not match."
 msgstr "De formaten komen niet overeen."
 
@@ -9228,7 +9258,7 @@ msgstr ""
 "(1...10000000 of-1 voor 'voorbeeld precisie zelfs als een video spoor "
 "aanwezig is').\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:133
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:136
 msgid "The header values have not been modified. There is nothing to save."
 msgstr "Geen van de kop velden is veranderd. Er is niets om op te slaan."
 
@@ -9347,7 +9377,7 @@ msgstr ""
 "Indien ingesteld op 0, is het pseudo-voorschrijf systeem\n"
 "niet in gebruik."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:346
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:356
 msgid ""
 "The maximum number of frames a player should be able to cache during "
 "playback. If set to 0, the reference pseudo-cache system is not used."
@@ -9378,7 +9408,7 @@ msgstr ""
 "Indien ingesteld op 0, is het pseudo-voorschrijf systeem\n"
 "niet in gebruik."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:341
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:351
 msgid ""
 "The minimum number of frames a player should be able to cache during "
 "playback. If set to 0, the reference pseudo-cache system is not used."
@@ -9476,25 +9506,25 @@ msgstr ""
 "Het aantal te verwijderen video pixels\n"
 "aan de bovenkant van het plaatje/beeld."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:402
 msgid "The number of video pixels to remove on the bottom of the image."
 msgstr ""
 "Het aantal te verwijderen video pixels aan de onderkant van het plaatje/"
 "beeld."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:393
 msgid "The number of video pixels to remove on the left of the image."
 msgstr ""
 "Het aantal te verwijderen video pixels aan de linkerzijde van het plaatje/"
 "beeld."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:399
 msgid "The number of video pixels to remove on the right of the image."
 msgstr ""
 "Het aantal te verwijderen video pixels aan de rechterkant van het plaatje/"
 "beeld."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:396
 msgid "The number of video pixels to remove on the top of the image."
 msgstr ""
 "Het aantal te verwijderen video pixels aan de bovenkant van het plaatje/"
@@ -9585,7 +9615,7 @@ msgstr "De eigendomswaarde is geen geldig getekende geheel in '%1%'. %2%\n"
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
 msgstr "De eigendomswaarde is geen geldig ongetekend geheel in '%1%'. %2%\n"
 
-#: src/merge/output_control.cpp:973
+#: src/merge/output_control.cpp:999
 msgid "The reason is unknown."
 msgstr "De reden is onbekend."
 
@@ -9883,11 +9913,11 @@ msgstr ""
 "uitvoer bestand"
 
 #: src/common/property_element.cpp:101
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:289
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:299
 msgid "The title for the whole movie."
 msgstr "De titel voor de hele film."
 
-#: src/merge/output_control.cpp:931
+#: src/merge/output_control.cpp:957
 #, boost-format
 msgid ""
 "The track %1% from file no. %2% ('%3%') is to be appended more than once. "
@@ -9906,7 +9936,7 @@ msgstr "Het spoor ID %1% heeft geen geldige CodecID.\n"
 msgid "The track headers could not be rendered correctly. %1%\n"
 msgstr "De kop sporen konden niet juist teruggegeven worden. %1%\n"
 
-#: src/merge/output_control.cpp:963
+#: src/merge/output_control.cpp:989
 #, boost-format
 msgid ""
 "The track number %1% from the file '%2%' can probably not be appended "
@@ -9921,7 +9951,7 @@ msgstr ""
 "auteur van dit programma zal waarschijnlijk geen ondersteuning voor afspeel "
 "kwesties met het resulterende bestand geven.\n"
 
-#: src/merge/output_control.cpp:974
+#: src/merge/output_control.cpp:1000
 #, boost-format
 msgid ""
 "The track number %1% from the file '%2%' cannot be appended to the track "
@@ -9931,11 +9961,11 @@ msgstr ""
 "spoor nummer %3% van bestand '%4%'. %5%\n"
 
 #: src/common/property_element.cpp:112
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:321
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:331
 msgid "The track number as used in the Block Header."
 msgstr "Het spoornummer zoals gebruikt in de kop blok."
 
-#: src/merge/output_control.cpp:972
+#: src/merge/output_control.cpp:998
 msgid "The track parameters do not match."
 msgstr "De spoor parameters komen niet overeen."
 
@@ -9989,12 +10019,12 @@ msgstr "Er zijn géén cues voor spoor ID %1%.\n"
 msgid "There is a new version available online."
 msgstr "Er is online een nieuwere versie beschikbaar."
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:316
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:317
 #, fuzzy
 msgid "There is currently a job running."
 msgstr "Dit element is aanwezig in het huidige bestand."
 
-#: src/merge/output_control.cpp:855 src/merge/output_control.cpp:865
+#: src/merge/output_control.cpp:881 src/merge/output_control.cpp:891
 #, boost-format
 msgid ""
 "There is no file with the ID '%1%'. The argument for '--append-to' was "
@@ -10012,8 +10042,8 @@ msgstr "Geen vertaling beschikbaar voor '%1%'.\n"
 msgid "There was an error querying the update status."
 msgstr "Er was een fout bij opvragen van de opwaardeer status."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:442
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:450
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
 msgid ""
 "There were errors in the header values preventing the headers from being "
 "saved. The first error has been selected."
@@ -10206,7 +10236,7 @@ msgid ""
 "and when quitting the application."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:100
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:101
 msgid "This has not been implemented yet."
 msgstr "Dit is nog niet geïmplementeerd."
 
@@ -10399,7 +10429,7 @@ msgstr ""
 "Dit zou ECHT niet mogen gebeuren. De gereserveerde ruimte voor het eerste "
 "meta zoek element is te klein. %1%\n"
 
-#: src/merge/output_control.cpp:1506
+#: src/merge/output_control.cpp:1532
 #, boost-format
 msgid ""
 "This should REALLY not have happened. The space reserved for the first meta "
@@ -10488,7 +10518,7 @@ msgid "Timecodes:"
 msgstr "Tijd codes:"
 
 #: src/common/property_element.cpp:101
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:289
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:299
 msgid "Title"
 msgstr "Titel"
 
@@ -10643,13 +10673,13 @@ msgstr "Spoor ID %1% heeft een onbekend AAC type.\n"
 msgid "Track ID %1%: %2% (%3%)"
 msgstr "Spoor ID %1%: %2% (%3%)"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:142
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:54
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:279
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:60
 msgid "Track ID for mkvmerge & mkvextract:"
 msgstr "Spoor ID voor mkvmerge & mkvextract:"
 
 #: src/common/property_element.cpp:113
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:324
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:334
 msgid "Track UID"
 msgstr "Spoor UID"
 
@@ -10668,7 +10698,7 @@ msgid "Track headers"
 msgstr "Spoor koppen"
 
 #: src/common/property_element.cpp:112
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:321
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:331
 msgid "Track number"
 msgstr "Spoor nummer"
 
@@ -10679,8 +10709,8 @@ msgid ""
 "implemented.\n"
 msgstr "Spoor nummer %1% is versleuteld en de coderen is nog niet ingebouwd.\n"
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:143
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:57
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:276
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:63
 msgid "Track number for mkvpropedit:"
 msgstr "Spoornummer voor mkvpropedit:"
 
@@ -10739,8 +10769,9 @@ msgstr ""
 "geactiveerd zullen identiek zijn."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:251
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:102
 #: src/mkvtoolnix-gui/jobs/model.cpp:49
-#: src/mkvtoolnix-gui/merge/track_model.cpp:46
+#: src/mkvtoolnix-gui/merge/track_model.cpp:45
 msgid "Type"
 msgstr "Type"
 
@@ -10752,7 +10783,7 @@ msgstr ""
 "Type van de unit voor Scherm Breedte/Hoogte\n"
 "(0: pixels, 1: centimeters, 2: inches, 3: verwachtte verhouding)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:390
 msgid ""
 "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: "
 "inches, 3: aspect ratio)."
@@ -10760,9 +10791,9 @@ msgstr ""
 "Type van de unit voor Scherm Breedte/Hoogte (0: pixels, 1: centimeters, 2: "
 "inches, 3: verwachtte verhouding)."
 
-#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:140
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:277
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:204
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:48
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:54
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:161
 msgid "Type:"
 msgstr "Type:"
@@ -10771,6 +10802,17 @@ msgstr "Type:"
 #, boost-format
 msgid "Type: %1% (%2%)"
 msgstr "Type: %1% (%2%)"
+
+#: src/mkvtoolnix-gui/header_editor/page_model.cpp:106
+#, fuzzy
+msgid "UID"
+msgstr "ID"
+
+#: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:66
+#, fuzzy
+msgid "UID:"
+msgstr "U&ID:"
 
 #: src/common/file_types.cpp:97
 msgid "USF subtitles"
@@ -10999,47 +11041,47 @@ msgid "VfW compatible video"
 msgstr "Vfw compatible video"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:943
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:42
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:48
 msgid "Video"
 msgstr "Video"
 
 #: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:405
 msgid "Video aspect ratio type"
 msgstr "Verwachtte video verhouding type"
 
 #: src/common/property_element.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:402
 msgid "Video crop bottom"
 msgstr "Video onderkant uitsnijden"
 
 #: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:393
 msgid "Video crop left"
 msgstr "Video links uitsnijden"
 
 #: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:399
 msgid "Video crop right"
 msgstr "Video rechts uitsnijden"
 
 #: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:396
 msgid "Video crop top"
 msgstr "Video bovenkant uitsnijden"
 
 #: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:387
 msgid "Video display height"
 msgstr "Video scherm hoogte"
 
 #: src/common/property_element.cpp:139
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:390
 msgid "Video display unit"
 msgstr "Video scherm unit"
 
 #: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:374
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:384
 msgid "Video display width"
 msgstr "Video scherm breedte"
 
@@ -11053,12 +11095,12 @@ msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "Video pakket inpakken mislukt. Fout code: %1% (%2%)\n"
 
 #: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:371
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:381
 msgid "Video pixel height"
 msgstr "Video pixel hoogte"
 
 #: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:368
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Video pixel width"
 msgstr "Video pixel breedte"
 
@@ -11068,7 +11110,7 @@ msgid "Video properties"
 msgstr "Video eigenschappen"
 
 #: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:399
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:409
 msgid "Video stereo mode"
 msgstr "Video stereo mode"
 
@@ -11076,9 +11118,10 @@ msgstr "Video stereo mode"
 msgid "Video track"
 msgstr "Video spoor"
 
-#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:34
-msgid "Video track %1, %2"
-msgstr "Video spoor %1, %2"
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
+#, fuzzy
+msgid "Video track %1"
+msgstr "Video spoor"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:920
 #, fuzzy
@@ -11149,7 +11192,7 @@ msgstr ""
 "Waarschuwing in regel %1%: De start tijd code is kleiner dan de vorige "
 "ingaven. Alle ingangen van dit bestand worden gesorteerd op hun start tijd.\n"
 
-#: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:213
+#: src/common/output.cpp:84 src/mkvtoolnix-gui/jobs/job.cpp:215
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:287
 msgid "Warning:"
 msgstr "Waarschuwing:"
@@ -11245,12 +11288,12 @@ msgstr ""
 "presenteren met een gedetailleerde lijst van de gevonden afspeellijsten."
 
 #: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:368
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 msgid "Width of the encoded video frames in pixels."
 msgstr "Breedte van de te coderen video beelden in pixels."
 
 #: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:374
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:384
 msgid "Width of the video frames to display."
 msgstr "Breedte van de video te tonen beelden."
 
@@ -11458,7 +11501,7 @@ msgstr "Zlib decompressie mislukt. Resultaat: %1%\n"
 msgid "[%1% frame for track %2%, timecode %3%]"
 msgstr "[%1% beeld voor spoor %2%, tijd code %3%]"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:233
+#: src/mkvtoolnix-gui/jobs/job.cpp:235
 msgid "aborted by user"
 msgstr "afgebroken door gebruiker"
 
@@ -11588,11 +11631,11 @@ msgstr "kolom volgorde (links eerst)"
 msgid "column interleaved (right first)"
 msgstr "kolom volgorde (rechts eerst)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:230
+#: src/mkvtoolnix-gui/jobs/job.cpp:232
 msgid "completed OK"
 msgstr "voltooid OK"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:231
+#: src/mkvtoolnix-gui/jobs/job.cpp:233
 msgid "completed with warnings"
 msgstr "voltooid met waarschuwingen"
 
@@ -11620,7 +11663,7 @@ msgstr "&open instellingen"
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num niet gevonden. %1%\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:77
 #, fuzzy
 msgid "default"
 msgstr "&Standaard"
@@ -11646,8 +11689,8 @@ msgstr "deflateInit() mislukt. Resultaat: %1%\n"
 msgid "determine automatically"
 msgstr "automatisch te bepalen"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:110
-#: src/mkvtoolnix-gui/jobs/job.cpp:234
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
+#: src/mkvtoolnix-gui/jobs/job.cpp:236
 msgid "disabled"
 msgstr "uitgezet"
 
@@ -11669,17 +11712,17 @@ msgstr "scherm breedte: %1%"
 msgid "don't change"
 msgstr "niet veranderen"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "edit chapters"
 msgstr "bewerk hoofdstukken"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:144
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "edit headers"
 msgstr "bewerk koppen"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:294
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 msgid "edit tags"
 msgstr "bewerk markeringen"
 
@@ -11687,11 +11730,11 @@ msgstr "bewerk markeringen"
 msgid "encryption"
 msgstr "versleuteling"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:294
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 msgid "extract"
 msgstr "splitsen"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:232
+#: src/mkvtoolnix-gui/jobs/job.cpp:234
 msgid "failed"
 msgstr "mislukt"
 
@@ -11794,8 +11837,8 @@ msgstr "heb een xcptn\n"
 msgid "header removal"
 msgstr "kop verwijdering"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:77
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:112
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:75
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:110
 #, fuzzy
 msgid "hidden"
 msgstr "&Verborgen"
@@ -11813,17 +11856,17 @@ msgstr "hoogst"
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() mislukt. Resultaat: %1%\n"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:294
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 msgid "info"
 msgstr "info"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "job output"
 msgstr "taak uitvoer"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:147
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "job queue"
 msgstr "taak wachtrij"
 
@@ -12054,8 +12097,8 @@ msgstr ""
 "retourneerde nullptr voor de grootte van %3% bytes.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:147
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:141
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "samenvoegen"
 
@@ -12274,7 +12317,7 @@ msgstr ""
 msgid "mkvtoolnix-gui [options] [file names]"
 msgstr "mkvinfo [opties] <inname>"
 
-#: src/common/mm_io.cpp:1025
+#: src/common/mm_io.cpp:1027
 msgid "mm_text_io_c: UTF32_* is not supported at the moment.\n"
 msgstr "mm_text_io_c: UTF32_* wordt op het moment niet ondersteund.\n"
 
@@ -12299,14 +12342,18 @@ msgstr "Nooit naar andere afspeellijsten scannen"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:912
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:28
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:76
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:96
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
 #: src/mkvtoolnix-gui/merge/input.cpp:1201
 #: src/mkvtoolnix-gui/merge/input.cpp:1203
 #: src/mkvtoolnix-gui/merge/input.cpp:1204
 #: src/mkvtoolnix-gui/merge/input.cpp:1207
-#: src/mkvtoolnix-gui/merge/track_model.cpp:103
+#: src/mkvtoolnix-gui/merge/track_model.cpp:102
+#: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108
-#: src/mkvtoolnix-gui/merge/track_model.cpp:109
-#: src/mkvtoolnix-gui/merge/track_model.cpp:268
+#: src/mkvtoolnix-gui/merge/track_model.cpp:267
 msgid "no"
 msgstr "nee"
 
@@ -12393,7 +12440,7 @@ msgstr "alleen voor I beelden"
 msgid "only to the first output file"
 msgstr "alleen de eerste uitvoerbestand"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:75
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
 #, fuzzy
 msgid "ordered"
 msgstr "&Gesorteerd"
@@ -12407,11 +12454,11 @@ msgstr "uitvoer voorbeeld frequentie: %1%"
 msgid "passthrough"
 msgstr "doorvoer"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:228
+#: src/mkvtoolnix-gui/jobs/job.cpp:230
 msgid "pending automatic start"
 msgstr "in afwachting van een automatische start"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:227
+#: src/mkvtoolnix-gui/jobs/job.cpp:229
 msgid "pending manual start"
 msgstr "in afwachting van een handmatige start"
 
@@ -12488,7 +12535,7 @@ msgstr "rij volgorde (links eerst)"
 msgid "row interleaved (right first)"
 msgstr "rij volgorde (rechts eerst)"
 
-#: src/mkvtoolnix-gui/jobs/job.cpp:229
+#: src/mkvtoolnix-gui/jobs/job.cpp:231
 msgid "running"
 msgstr "werkend"
 
@@ -12576,7 +12623,7 @@ msgstr "tta_reader: markeer_grootte < 0 in de c'tor. %1%\n"
 #: src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752 src/info/mkvinfo.cpp:938
 #: src/input/r_matroska.cpp:101 src/input/r_matroska.cpp:2343
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:159
-#: src/mkvtoolnix-gui/jobs/job.cpp:235
+#: src/mkvtoolnix-gui/jobs/job.cpp:237
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57
 msgid "unknown"
 msgstr "onbekend"
@@ -12613,14 +12660,18 @@ msgstr "x"
 
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:29
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:42
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:76
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:96
+#: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
 #: src/mkvtoolnix-gui/merge/input.cpp:1201
 #: src/mkvtoolnix-gui/merge/input.cpp:1203
 #: src/mkvtoolnix-gui/merge/input.cpp:1204
 #: src/mkvtoolnix-gui/merge/input.cpp:1207
-#: src/mkvtoolnix-gui/merge/track_model.cpp:103
+#: src/mkvtoolnix-gui/merge/track_model.cpp:102
+#: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108
-#: src/mkvtoolnix-gui/merge/track_model.cpp:109
-#: src/mkvtoolnix-gui/merge/track_model.cpp:268
+#: src/mkvtoolnix-gui/merge/track_model.cpp:267
 msgid "yes"
 msgstr "ja"
 
@@ -12644,4 +12695,18 @@ msgstr "– zet naar niets –"
 
 #~ msgid "Add to &job queue"
 #~ msgstr "Voeg toe aan &taak wachtrij"
+
+#~ msgid "Audio track %1, %2, %3"
+#~ msgstr "Audio spoor %1, %2, %3"
+
+#~ msgid ""
+#~ "Re-rendering track headers: data_size != 0 not implemented yet. %1%\n"
+#~ msgstr ""
+#~ "Her opbouwen spoor koppen: data_size != 0 nog niet geïmplementeerd. %1%\n"
+
+#~ msgid "Subtitle track %1, %2, %3"
+#~ msgstr "Ondertitel spoor %1, %2, %3"
+
+#~ msgid "Video track %1, %2"
+#~ msgstr "Video spoor %1, %2"
 
