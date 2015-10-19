@@ -65,11 +65,6 @@ function build_pkgconfig {
      --enable-static --enable-shared=no
 }
 
-function build_expat {
-  build_package expat-2.1.0.tar.gz CPPFLAGS=-DXML_LARGE_SIZE \
-    --prefix=${TARGET} --enable-static --enable-shared=no
-}
-
 function build_ogg {
   build_package libogg-1.3.2.tar.gz --prefix=${TARGET} \
     --disable-shared --enable-static
@@ -356,7 +351,6 @@ if [[ -z $@ ]]; then
   build_autoconf
   build_automake
   build_pkgconfig
-  build_expat
   build_ogg
   build_vorbis
   build_flac
@@ -370,7 +364,7 @@ if [[ -z $@ ]]; then
   build_qttranslations
   build_configured_mkvtoolnix
 
-  # autoconf automake pkgconfig expat ogg vorbis flac gettext ruby boost curl qtbase qttools qttranslations configured_mkvtoolnix1
+  # autoconf automake pkgconfig ogg vorbis flac gettext ruby boost curl qtbase qttools qttranslations configured_mkvtoolnix1
 
 else
   while [[ -n $1 ]]; do
