@@ -129,7 +129,7 @@ TrackTypePage::summarizeProperties() {
     if (!trackVideo)
       return;
 
-    properties << QY("%1 pixels").arg(Q("%1x%1").arg(FindChildValue<KaxVideoPixelWidth>(trackVideo, 0u)).arg(FindChildValue<KaxVideoPixelHeight>(trackVideo, 0u)));
+    properties << QY("%1 pixels").arg(Q("%1x%2").arg(FindChildValue<KaxVideoPixelWidth>(trackVideo, 0u)).arg(FindChildValue<KaxVideoPixelHeight>(trackVideo, 0u)));
   }
 
   m_properties = properties.join(Q(", "));
