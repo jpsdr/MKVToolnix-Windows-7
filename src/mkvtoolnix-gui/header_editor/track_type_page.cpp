@@ -62,6 +62,26 @@ TrackTypePage::retranslateUi() {
 
   ui->m_lTrackNumberMkvpropeditLabel->setText(QY("Track number for mkvpropedit:"));
   ui->m_lTrackNumberMkvpropedit->setText(Q("track:@%1").arg(m_trackNumber));
+
+  ui->m_lUidLabel->setText(QY("UID:"));
+  ui->m_lUid->setText(Q("%1").arg(m_trackUid));
+
+  ui->m_lLanguageLabel->setText(QY("Language:"));
+  ui->m_lLanguage->setText(m_language);
+
+  ui->m_lNameLabel->setText(QY("Name:"));
+  ui->m_lName->setText(m_name);
+
+  ui->m_lDefaultTrackFlagLabel->setText(QY("\"Default track\" flag:"));
+  ui->m_lDefaultTrackFlag->setText(   m_defaultTrackFlag ? QY("yes")             : QY("no"));
+  ui->m_iDefaultTrackFlag->setPixmap((m_defaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon()).pixmap({ 16, 16 }));
+
+  ui->m_lForcedTrackFlagLabel->setText(QY("\"Forced track\" flag:"));
+  ui->m_lForcedTrackFlag->setText(   m_forcedTrackFlag ? QY("yes")             : QY("no"));
+  ui->m_iForcedTrackFlag->setPixmap((m_forcedTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon()).pixmap({ 16, 16 }));
+
+  ui->m_lPropertiesLabel->setText(QY("Properties:"));
+  ui->m_lProperties->setText(m_properties);
 }
 
 void
