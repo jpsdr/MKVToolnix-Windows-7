@@ -485,7 +485,7 @@ void
 Tab::saveAsXmlImpl(bool requireNewFileName) {
   saveAsImpl(requireNewFileName, [this](bool doRequireNewFileName, QString &newFileName) -> bool {
     if (doRequireNewFileName) {
-      auto defaultFilePath = !m_fileName.isEmpty() ? QFileInfo{m_fileName}.path() : Util::Settings::get().m_lastOpenDir.path();
+      auto defaultFilePath = !m_fileName.isEmpty() ? Util::dirPath(QFileInfo{m_fileName}.path()) : Util::Settings::get().lastOpenDirPath();
       newFileName          = Util::getSaveFileName(this, QY("Save chapters as XML"), defaultFilePath, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"));
 
       if (newFileName.isEmpty())
@@ -522,7 +522,7 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
       doRequireNewFileName = true;
 
     if (doRequireNewFileName) {
-      auto defaultFilePath = !m_fileName.isEmpty() ? QFileInfo{m_fileName}.path() : Util::Settings::get().m_lastOpenDir.path();
+      auto defaultFilePath = !m_fileName.isEmpty() ? QFileInfo{m_fileName}.path() : Util::Settings::get().lastOpenDirPath();
       newFileName          = Util::getOpenFileName(this, QY("Save chapters to Matroska file"), defaultFilePath, QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d);;") + QY("All files") + Q(" (*)"));
 
       if (newFileName.isEmpty())

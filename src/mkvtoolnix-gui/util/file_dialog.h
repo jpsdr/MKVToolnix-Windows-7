@@ -9,7 +9,10 @@ class QString;
 
 namespace mtx { namespace gui { namespace Util {
 
-QString sanitizeDirectory(QString const &directory);
+QString dirPath(QDir const &dir);
+QString dirPath(QString const &dir);
+
+QString sanitizeDirectory(QString const &directory, bool withFileName);
 QString getOpenFileName(QWidget *parent = nullptr, QString const &caption = QString{}, QString const &dir = QString{}, QString const &filter = QString{},
                         QString *selectedFilter = nullptr, QFileDialog::Options options = QFileDialog::Options{});
 QStringList getOpenFileNames(QWidget *parent = nullptr, QString const &caption = QString{}, QString const &dir = QString{}, QString const &filter = QString{},

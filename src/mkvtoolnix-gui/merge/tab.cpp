@@ -208,14 +208,14 @@ Tab::determineInitialDir(QLineEdit *lineEdit,
                          InitialDirMode mode)
   const {
   if (lineEdit && !lineEdit->text().isEmpty())
-    return QFileInfo{ lineEdit->text() }.path();
+    return Util::dirPath(QFileInfo{ lineEdit->text() }.path());
 
   if (   (mode == InitialDirMode::ContentFirstInputFileLastOpenDir)
       && !m_config.m_files.isEmpty()
       && !m_config.m_files[0]->m_fileName.isEmpty())
-    return QFileInfo{ m_config.m_files[0]->m_fileName }.path();
+    return Util::dirPath(QFileInfo{ m_config.m_files[0]->m_fileName }.path());
 
-  return Util::Settings::get().m_lastOpenDir.path();
+  return Util::Settings::get().lastOpenDirPath();
 }
 
 QString
@@ -255,8 +255,8 @@ Tab::getSaveFileName(QString const &title,
 
   auto &settings = Util::Settings::get();
   auto dir       = !lineEdit->text().isEmpty()                                                               ? lineEdit->text()
-                 : !settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != Q(".")) ? settings.m_lastOutputDir.path()
-                 :                                                                                             settings.m_lastOpenDir.path();
+                 : !settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != Q(".")) ? Util::dirPath(settings.m_lastOutputDir.path())
+                 :                                                                                             Util::dirPath(settings.m_lastOpenDir.path());
   auto fileName  = Util::getSaveFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
     return fileName;

@@ -10,6 +10,7 @@
 #include "common/qt.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -429,7 +430,8 @@ Settings::storeSplitterSizes() {
 }
 
 QString
-Settings::localeToUse(QString const &requestedLocale) {
+Settings::localeToUse(QString const &requestedLocale)
+  const {
   auto locale = to_utf8(requestedLocale);
 
 #if defined(HAVE_LIBINTL_H)
@@ -449,6 +451,18 @@ Settings::localeToUse(QString const &requestedLocale) {
 #endif
 
   return to_qs(locale);
+}
+
+QString
+Settings::lastConfigDirPath()
+  const {
+  return Util::dirPath(m_lastConfigDir);
+}
+
+QString
+Settings::lastOpenDirPath()
+  const {
+  return Util::dirPath(m_lastOpenDir);
 }
 
 }}}

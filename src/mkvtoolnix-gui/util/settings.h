@@ -111,7 +111,10 @@ public:
   void handleSplitterSizes(QSplitter *splitter);
   void restoreSplitterSizes(QSplitter *splitter);
 
-  QString localeToUse(QString const &requestedLocale = {});
+  QString localeToUse(QString const &requestedLocale = {}) const;
+
+  QString lastOpenDirPath() const;
+  QString lastConfigDirPath() const;
 
 public slots:
   void storeSplitterSizes();

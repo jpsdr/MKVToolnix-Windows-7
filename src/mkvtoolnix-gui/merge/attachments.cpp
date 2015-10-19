@@ -149,7 +149,7 @@ Tab::onAddAttachments() {
 
 QStringList
 Tab::selectAttachmentsToAdd() {
-  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), Util::Settings::get().m_lastOpenDir.path(), QY("All files") + Q(" (*)"));
+  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), Util::Settings::get().lastOpenDirPath(), QY("All files") + Q(" (*)"));
 
   if (!fileNames.isEmpty())
     Util::Settings::get().m_lastOpenDir = QFileInfo{fileNames[0]}.path();

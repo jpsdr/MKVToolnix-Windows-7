@@ -1057,7 +1057,7 @@ Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
 
 QStringList
 Tab::selectFilesToAdd(QString const &title) {
-  return Util::getOpenFileNames(this, title, Util::Settings::get().m_lastOpenDir.path(), Util::FileTypeFilter::get().join(Q(";;")), nullptr, QFileDialog::HideNameFilterDetails);
+  return Util::getOpenFileNames(this, title, Util::Settings::get().lastOpenDirPath(), Util::FileTypeFilter::get().join(Q(";;")), nullptr, QFileDialog::HideNameFilterDetails);
 }
 
 void

@@ -136,7 +136,7 @@ Tool::newConfig() {
 void
 Tool::openConfig() {
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getOpenFileName(this, QY("Open settings file"), settings.m_lastConfigDir.path(), QY("MKVToolnix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
+  auto fileName  = Util::getOpenFileName(this, QY("Open settings file"), settings.lastConfigDirPath(), QY("MKVToolnix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
