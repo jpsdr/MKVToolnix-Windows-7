@@ -63,8 +63,8 @@ programs and libraries you absolutely need are:
   and alias declarations. For GCC this means at least v4.7.0; for
   clang v3.3 or later.
 
-- [libEBML v1.3.1](http://dl.matroska.org/downloads/libebml/) or later
-  and [libMatroska v1.4.2](http://dl.matroska.org/downloads/libmatroska/)
+- [libEBML v1.3.3](http://dl.matroska.org/downloads/libebml/) or later
+  and [libMatroska v1.4.4](http://dl.matroska.org/downloads/libmatroska/)
   or later for low-level access to Matroska files. Instructions on how to
   compile them are a bit further down in this file.
 
@@ -118,8 +118,8 @@ This is optional as MKVToolNix comes with its own set of the
 libraries. It will use them if no version is found on the system.
 
 Start with the two libraries. Either download releases of
-[libEBML 1.3.1](http://dl.matroska.org/downloads/libebml/) and
-[libMatroska 1.4.2](http://dl.matroska.org/downloads/libmatroska/) or
+[libEBML 1.3.3](http://dl.matroska.org/downloads/libebml/) and
+[libMatroska 1.4.4](http://dl.matroska.org/downloads/libmatroska/) or
 get a fresh copy from the git repository:
 
     git clone https://github.com/Matroska-Org/libebml.git
