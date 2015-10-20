@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the mkvtoolnix package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MKVToolNix 8.4.0\n"
+"Project-Id-Version: MKVToolNix 8.5.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-10-19 18:48+0200\n"
-"PO-Revision-Date: 2015-10-04 20:19+0200\n"
+"PO-Revision-Date: 2015-10-20 21:24+0300\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
 "Language: tr\n"
@@ -2793,9 +2793,8 @@ msgid "Audio sampling frequency"
 msgstr "Ses örnekleme sıklığı"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
-#, fuzzy
 msgid "Audio track %1"
-msgstr "Ses izleri:"
+msgstr "Ses izi %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:919
 msgid "Audio tracks:"
@@ -2912,9 +2911,8 @@ msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
 msgstr "En boy oranı etkeni ve '--display-dimensions' ikisi birden verildi.\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
-#, fuzzy
 msgid "Button track %1"
-msgstr "Button izi %1, %2"
+msgstr "Button izi %1"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:50
 msgid "Buttons"
@@ -3774,9 +3772,8 @@ msgid "Default flag: %1%"
 msgstr "Varsayılan işareti: %1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:107
-#, fuzzy
 msgid "Default track"
-msgstr "'Varsayılan iz' işareti"
+msgstr "Varsayılan iz"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:51
 msgid "Default track in output"
@@ -4223,9 +4220,9 @@ msgstr ""
 "'%1%' içindeki etiketleri ayrıştırma hatası: bazı zorunlu öğeler eksik.\n"
 
 #: src/merge/output_control.cpp:741
-#, fuzzy, boost-format
+#, boost-format
 msgid "Error reading from the file '%1%'.\n"
-msgstr "Ayrıştırıcıdan gelen hata iletisi: %1"
+msgstr "'%1%' dosyasından okunurken hata oldu.\n"
 
 #: src/info/qt_ui.cpp:104
 msgid "Error saving the information"
@@ -4598,9 +4595,8 @@ msgstr "Zorlanan işareti: %1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:108
 #: src/mkvtoolnix-gui/merge/track_model.cpp:52
-#, fuzzy
 msgid "Forced track"
-msgstr "\"Zorlanan iz\" işareti:"
+msgstr "Zorlanan iz"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:64
 msgid ""
@@ -4942,6 +4938,8 @@ msgid ""
 "If enabled the warning and error counters of all jobs and the global "
 "counters in the status bar will be reset to 0 when the program exits."
 msgstr ""
+"Eğer etkinleştirildiyse, tüm işlerin uyarı ve hata sayaçları ve durum "
+"çubuğundaki genel sayaçlar programdan çıkıldığında 0'a sıfırlanacaktır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:228
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:229
@@ -6145,9 +6143,8 @@ msgstr "İsim şabl&onu:"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:282
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:72
-#, fuzzy
 msgid "Name:"
-msgstr "&Adı:"
+msgstr "Adı:"
 
 #: src/info/mkvinfo.cpp:842
 #, boost-format
@@ -7302,7 +7299,7 @@ msgstr "Tüm sütunları sıfırla"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:884
 msgid "Reset the warning and error counters on exit"
-msgstr ""
+msgstr "Uyarı ve hata sayaçlarını çıkışta sıfırla"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:191
 msgid "Resets the header value on this page to how it's saved in the file."
@@ -7798,14 +7795,12 @@ msgstr ""
 "göster"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:149
-#, fuzzy
 msgid "Show job output"
-msgstr "İş çıktısını kaydet"
+msgstr "İş çıktısını göster"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:148
-#, fuzzy
 msgid "Show job queue"
-msgstr "İş kuyruğunu &durdur"
+msgstr "İş kuyruğunu göster"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:883
 msgid "Show out&put of all jobs instead of current job only"
@@ -8077,9 +8072,8 @@ msgid "Subtitle and chapter properties"
 msgstr "Altyazı ve bölüm özellikleri"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:42
-#, fuzzy
 msgid "Subtitle track %1"
-msgstr "Altyazı izleri:"
+msgstr "Altyazı izi %1"
 
 #: src/extract/xtr_textsubs.cpp:166
 #, boost-format
@@ -10329,15 +10323,13 @@ msgid "Type: %1% (%2%)"
 msgstr "Türü: %1% (%2%)"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:106
-#, fuzzy
 msgid "UID"
-msgstr "ID"
+msgstr "UID"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:66
-#, fuzzy
 msgid "UID:"
-msgstr "&UID:"
+msgstr "UID:"
 
 #: src/common/file_types.cpp:97
 msgid "USF subtitles"
@@ -10633,9 +10625,8 @@ msgid "Video track"
 msgstr "Görüntü izi"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
-#, fuzzy
 msgid "Video track %1"
-msgstr "Görüntü izi"
+msgstr "Görüntü izi %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:920
 msgid "Video tracks:"
@@ -12210,4 +12201,3 @@ msgstr "– hiçbiri olarak ayarla –"
 
 #~ msgid "Video track %1, %2"
 #~ msgstr "Görüntü izi %1, %2"
-
