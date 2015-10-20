@@ -348,12 +348,17 @@ Job::loadJob(QString const &fileName) {
 
 JobPtr
 Job::loadJob(Util::ConfigFile &settings) {
-  auto jobType = settings.value("jobType");
+  auto jobType = settings.value("jobType").toString();
+
+  if (jobType.isEmpty())
+    // Older versions didn't write a jobType attribute and only
+    // supported MuxJobs.
+    jobType = "MuxJob";
 
   if (jobType == "MuxJob")
     return MuxJob::loadMuxJob(settings);
 
-  log_it(boost::format("MTX Job::loadJob: Unknown job type encountered (%1%) in %2%") % to_utf8(jobType.toString()) % settings.fileName());
+  log_it(boost::format("MTX Job::loadJob: Unknown job type encountered (%1%) in %2%") % jobType % settings.fileName());
   throw Merge::InvalidSettingsX{};
 }
 
