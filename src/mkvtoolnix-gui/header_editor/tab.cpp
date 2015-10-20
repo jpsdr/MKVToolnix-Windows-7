@@ -106,6 +106,8 @@ Tab::load() {
     ui->elements->setExpanded(page->m_pageIdx, expansionStatus[key]);
   }
 
+  Util::resizeViewColumnsToContents(ui->elements);
+
   if (!selectedIdx.isValid() || (-1 == selectedTopLevelRow))
     return;
 
