@@ -25,7 +25,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Vanishing Act"
+#define VERSIONNAME "Where you lead I will follow"
 
 version_number_t::version_number_t()
   : valid(false)
