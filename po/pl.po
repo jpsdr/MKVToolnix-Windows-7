@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-10-19 18:48+0200\n"
-"PO-Revision-Date: 2015-10-07 17:01+0200\n"
+"PO-Revision-Date: 2015-10-21 14:42+0200\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -2857,9 +2857,8 @@ msgid "Audio sampling frequency"
 msgstr "Częstotliwość próbkowania dźwięku"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
-#, fuzzy
 msgid "Audio track %1"
-msgstr "Ścieżki audio:"
+msgstr "Ścieżka audio %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:919
 msgid "Audio tracks:"
@@ -2977,9 +2976,8 @@ msgstr ""
 "\".\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
-#, fuzzy
 msgid "Button track %1"
-msgstr "Ścieżka przycisków %1, %2"
+msgstr "Ścieżka przycisków %1"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:50
 msgid "Buttons"
@@ -3848,9 +3846,8 @@ msgid "Default flag: %1%"
 msgstr "Ścieżka domyślna: %1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:107
-#, fuzzy
 msgid "Default track"
-msgstr "Flaga \"Domyślna ścieżka\""
+msgstr "Domyślna ścieżka"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:51
 msgid "Default track in output"
@@ -4264,17 +4261,14 @@ msgid "Error in line %1%: expected subtitle number and found some text.\n"
 msgstr "Błąd w linii %1%: powinien być numer napisów, a jest tylko tekst.\n"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:130
-#, fuzzy
 msgid "Error loading settings file"
-msgstr "Błąd wczytywania ustawień"
+msgstr "Błąd podczas wczytywania pliku ustawień"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:294
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:331
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:390
-#, fuzzy
 msgid "Error message from the parser: %1"
-msgstr ""
-"Ten plik nie zawiera prawidłowych rozdziałów. Wiadomość błędu z analizy: %1%"
+msgstr "Komunikat o błędzie: %1"
 
 #: src/input/r_mpeg_ps.cpp:1059
 msgid ""
@@ -4300,10 +4294,9 @@ msgstr ""
 "elementów.\n"
 
 #: src/merge/output_control.cpp:741
-#, fuzzy, boost-format
+#, boost-format
 msgid "Error reading from the file '%1%'.\n"
-msgstr ""
-"Ten plik nie zawiera prawidłowych rozdziałów. Wiadomość błędu z analizy: %1%"
+msgstr "Błąd odczytu z pliku '%1%'.\n"
 
 #: src/info/qt_ui.cpp:104
 msgid "Error saving the information"
@@ -5671,11 +5664,8 @@ msgid "Invalid track type %1%."
 msgstr "Nieprawidłowy typ ścieżki %1%."
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:173
-#, fuzzy
 msgid "It cannot be removed because it is a mandatory header field."
-msgstr ""
-"Ten element jest obecny w pliku.\n"
-"Nie może być usunięty, gdyż jest on wymagany w nagłówku pliku."
+msgstr "Nie może zostać usunięty, ponieważ jest wymagany w nagłówku pliku."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:402
 msgid ""
@@ -6227,9 +6217,8 @@ msgstr "&Nazwa szablonu:"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:282
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:72
-#, fuzzy
 msgid "Name:"
-msgstr "&Nazwa:"
+msgstr "Nazwa:"
 
 #: src/info/mkvinfo.cpp:842
 #, boost-format
@@ -6572,7 +6561,7 @@ msgstr "Ilość pozycji do &przenumerowania:"
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:360
 msgid "Number of nanoseconds (not scaled) per frame."
-msgstr "Ilość nanosekund na klatkę (nie skalowanych)."
+msgstr "Ilość nanosekund na klatkę (nieskalowanych)."
 
 #: src/common/property_element.cpp:152
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:421
@@ -8222,9 +8211,8 @@ msgid "Subtitle and chapter properties"
 msgstr "Właściwości rozdziałów i napisów"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:42
-#, fuzzy
 msgid "Subtitle track %1"
-msgstr "Ścieżki napisów:"
+msgstr "Ścieżka napisów %1"
 
 #: src/extract/xtr_textsubs.cpp:166
 #, boost-format
@@ -8910,9 +8898,8 @@ msgid "The file '%1%' is a non-supported file type (%2%).\n"
 msgstr "Plik \"%1%\" nie jest obsługiwanym typem plików (%2%).\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:934
-#, fuzzy
 msgid "The file '%1' contains chapters."
-msgstr "Plik tagów XML \"%1%\" zawiera błąd: %2%\n"
+msgstr "Plik '%1' zawiera rozdziały."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:968
 #, fuzzy
@@ -8920,14 +8907,12 @@ msgid "The file '%1' contains segment information."
 msgstr "Plik \"%1%\" został otworzony w celu zapisania.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:951
-#, fuzzy
 msgid "The file '%1' contains tags."
-msgstr "Plik tagów XML \"%1%\" zawiera błąd: %2%\n"
+msgstr "Plik '%1' zawiera tagi."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:329
-#, fuzzy
 msgid "The file '%1' exists already."
-msgstr "Plik tagów XML \"%1%\" zawiera błąd: %2%\n"
+msgstr "Plik '%1' już istnieje."
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:49
 msgid "The file '%1' you've added is a playlist."
@@ -9088,11 +9073,12 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:292
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:388
-#, fuzzy
 msgid ""
 "The file you tried to open (%1) is recognized as neither a valid Matroska "
 "nor a valid chapter file."
-msgstr "Plik, który próbujesz otworzyć, nie jest plikiem Matroski"
+msgstr ""
+"Plik, który próbujesz otworzyć (%1), nie jest rozpoznawany ani jako plik "
+"Matroski, ani jako plik rozdziału."
 
 #: src/common/kax_file.cpp:53
 #, boost-format
@@ -10673,15 +10659,13 @@ msgid "Type: %1% (%2%)"
 msgstr "Typ: %1% (%2%)"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:106
-#, fuzzy
 msgid "UID"
-msgstr "ID"
+msgstr "UID"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:66
-#, fuzzy
 msgid "UID:"
-msgstr "&UID:"
+msgstr "UID:"
 
 #: src/common/file_types.cpp:97
 msgid "USF subtitles"
@@ -10720,7 +10704,7 @@ msgid ""
 "Unknown chapter file format in '%1%'. It does not contain a supported "
 "chapter format.\n"
 msgstr ""
-"Nieznany format rozdziału w \"%1%\". Plik nie zawiera wspierany format "
+"Nieznany format rozdziału w \"%1%\". Plik nie zawiera wspieranego formatu "
 "rozdziału.\n"
 
 #: src/common/content_decoder.cpp:89
@@ -10990,9 +10974,8 @@ msgid "Video track"
 msgstr "Ścieżka wideo"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
-#, fuzzy
 msgid "Video track %1"
-msgstr "Ścieżka wideo"
+msgstr "Ścieżka wideo %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:920
 msgid "Video tracks:"
@@ -12549,4 +12532,3 @@ msgstr "– ustaw żadne –"
 
 #~ msgid "Video track %1, %2"
 #~ msgstr "Ścieżka obrazu %1, %2"
-
