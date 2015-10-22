@@ -16,7 +16,10 @@
 #include <matroska/KaxTracks.h>
 
 #include "common/codec.h"
+#include "common/strings/editing.h"
+#include "common/strings/parsing.h"
 #include "merge/connection_checks.h"
+#include "merge/output_control.h"
 #include "merge/packet_extensions.h"
 #include "output/p_textsubs.h"
 
@@ -32,7 +35,7 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
                                              bool recode,
                                              bool is_utf8)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_packetno(0)
+  , m_packetno{}
   , m_codec_id(codec_id)
   , m_recode(recode)
 {
@@ -42,6 +45,21 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
   set_track_type(track_subtitle);
   if (m_codec_id == MKV_S_TEXTUSF)
     set_default_compression_method(COMPRESSION_ZLIB);
+
+  auto arg = std::string{};
+  if (!debugging_c::requested("textsubs_force_rerender", &arg))
+    return;
+
+  auto tid_and_packetno = split(arg, ":");
+  auto tid              = int64_t{};
+  if (!parse_number(tid_and_packetno[0], tid) || (tid != m_ti.m_id))
+    return;
+
+  unsigned int packetno{};
+  parse_number(tid_and_packetno[1], packetno);
+  m_force_rerender_track_headers_on_packetno.reset(packetno);
+
+  mxdebug(boost::format("textsubs_packetizer_c: track %1%: forcing rerendering of track headers after packet %2%\n") % tid % packetno);
 }
 
 textsubs_packetizer_c::~textsubs_packetizer_c() {
@@ -81,6 +99,13 @@ textsubs_packetizer_c::process(packet_cptr packet) {
   packet->data = memory_cptr(new memory_c((unsigned char *)subs.c_str(), subs.length(), false));
 
   add_packet(packet);
+
+  if (m_force_rerender_track_headers_on_packetno && (*m_force_rerender_track_headers_on_packetno == m_packetno)) {
+    auto codec_private = memory_c::alloc(20000);
+    std::memset(codec_private->get_buffer(), 0, codec_private->get_size());
+    set_codec_private(codec_private);
+    rerender_track_headers();
+  }
 
   return FILE_STATUS_MOREDATA;
 }
