@@ -374,6 +374,9 @@ Tab::handleTracks(kax_analyzer_data_c &data) {
     (new StringValuePage{*this, *page, *kTrackEntry, KaxCodecName::ClassInfos, YT("Codec name"), YT("A human-readable string specifying the codec.")})
       ->init();
 
+    (new UnsignedIntegerValuePage{*this, *page, *kTrackEntry, KaxCodecDelay::ClassInfos, YT("Codec-inherent delay"), YT("Delay built into the codec during decoding in ns.")})
+      ->init();
+
     if (track_video == trackType) {
       auto &kTrackVideo = GetChild<KaxTrackVideo>(kTrackEntry);
 

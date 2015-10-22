@@ -128,6 +128,7 @@ property_element_c::init_tables() {
   ELE("language",             KaxTrackLanguage::ClassInfos,        Y("Language"),              Y("Specifies the language of the track in the\nMatroska languages form."));
   ELE("codec-id",             KaxCodecID::ClassInfos,              Y("Codec ID"),              Y("An ID corresponding to the codec."));
   ELE("codec-name",           KaxCodecName::ClassInfos,            Y("Codec name"),            Y("A human-readable string specifying the codec."));
+  ELE("codec-delay",          KaxCodecDelay::ClassInfos,           Y("Codec-inherent delay"),  Y("Delay built into the codec during decoding in ns."));
 
   sub_master_callbacks = &KaxTrackVideo::ClassInfos;
 
