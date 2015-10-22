@@ -100,15 +100,14 @@ Actions that deal with tags and chapters:
 .PP
 \fB\-t\fR, \fB\-\-tags\fR \fIselector\fR:\fInom_fitxer\fR
 .RS 4
-Add or replace tags in the file with the ones from
-filename
-or remove them if
-filename
-is empty\&.
+Afegeix o substitueix les etiquetes al fitxer amb el
+nom_fitxer
+o l\*(Aqelimina si el
+nom_fitxer
+est\(`a buit\&. El
 \fBmkvpropedit\fR(1)
-reads the same XML tag format that
-\fBmkvmerge\fR(1)
-reads as well\&.
+llegir\(`a els mateixos formats d\*(Aqetiquetes en XML que pugui llegir el
+\fBmkvmerge\fR(1)\&.
 .sp
 The
 \fIselector\fR
@@ -209,29 +208,26 @@ Options for attachment actions:
 .PP
 \fB\-\-attachment\-name\fR \fInom\fR
 .RS 4
-Sets the name to use for the following
+Estableix el nom a usar per a les opcions
 \fB\-\-add\-attachment\fR
-or
-\fB\-\-replace\-attachment\fR
-operation\&.
+o
+\fB\-\-replace\-attachment\fR\&.
 .RE
 .PP
 \fB\-\-attachment\-mime\-type\fR \fItipus_MIME\fR
 .RS 4
-Sets the MIME type to use for the following
+Estableix el tipus MIME a usar per a les opcions
 \fB\-\-add\-attachment\fR
-or
-\fB\-\-replace\-attachment\fR
-operation\&.
+o
+\fB\-\-replace\-attachment\fR\&.
 .RE
 .PP
 \fB\-\-attachment\-description\fR \fIdescripci\('o\fR
 .RS 4
-Sets the description to use for the following
+Estableix la descripci\('o a usar per a les opcions
 \fB\-\-add\-attachment\fR
-or
-\fB\-\-replace\-attachment\fR
-operation\&.
+o
+\fB\-\-replace\-attachment\fR\&.
 .RE
 .PP
 Altres opcions:
@@ -299,7 +295,7 @@ Mostra la informaci\('o d\*(Aq\('us i surt\&.
 .PP
 \fB\-V\fR, \fB\-\-version\fR
 .RS 4
-Mostra la informaci\('o sobre la versi\('o i surt\&.\&.
+Mostra la informaci\('o sobre la versi\('o i surt\&.
 .RE
 .PP
 \fB\-\-check\-for\-updates\fR
@@ -323,7 +319,7 @@ Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del fitxer
 \fIfitxer_opcions\fR\&. Les l\('inies que tinguin com a primer car\(`acter un coixinet (#) seran tractades com a comentaris i ignorades\&. Els espais en blanc al comen\(,cament i final de la l\('inia seran descartats\&. Cada l\('inia haur\(`a de contenir exactament una opci\('o\&.
 .sp
 Es poden interpretar diversos car\(`acters com d\*(Aqescapament, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
-la secci\('o sobre text d'escapament\&.
+la secci\('o sobre escapar en el text\&.
 .sp
 La l\('inia d\*(Aqordres \(Fo\fBmkvpropedit origen\&.mkv \-\-edit track:a2 \-\-set name=Comentaris\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions:
 .sp
@@ -500,7 +496,7 @@ option anyway\&.
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-edit info \-\-set "title=The movie" \-\-edit track:a1 \-\-set language=fre \-\-edit track:a2 \-\-set language=ita
+$ mkvpropedit peli\&.mkv \-\-edit info \-\-set "title=La pel\(mdl\('icula" \-\-edit track:a1 \-\-set language=cat \-\-edit track:a2 \-\-set language=ita
 .fi
 .if n \{\
 .RE
@@ -514,115 +510,115 @@ The second example removes the \*(Aqdefault track flag\*(Aq from the first subti
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-edit track:s1 \-\-set flag\-default=0 \-\-edit track:s2 \-\-set flag\-default=1
+$ mkvpropedit peli\&.mkv \-\-edit track:s1 \-\-set flag\-default=0 \-\-edit track:s2 \-\-set flag\-default=1
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Replacing the tags for the second subtitle track in a file looks like this:
+Substituir les etiquetes per a la segona pista de subt\('itols en un arxiu es veu aix\('i:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-tags track:s2:new\-subtitle\-tags\&.xml
+$ mkvpropedit peli\&.mkv \-\-tags track:s2:etiquetes_subt\('itols_noves\&.xml
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Removing all tags requires leaving out the file name:
+Eliminar totes les etiquetes requereix ometre el nom del fitxer:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-tags all:
+$ mkvpropedit peli\&.mkv \-\-tags all:
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Replacing the chapters in a file looks like this:
+Substituir els cap\('itols en un fitxer es veu aix\('i:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-chapters new\-chapters\&.xml
+$ mkvpropedit peli\&.mkv \-\-chapters cap\('itols_nous\&.xml
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Removing all chapters requires leaving out the file name:
+Eliminar tots els cap\('itols requereix ometre el nom del fitxer:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-chapters \*(Aq\*(Aq
+$ mkvpropedit peli\&.mkv \-\-chapters \*(Aq\*(Aq
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Adding a font file (Arial\&.ttf) as an attachment:
+Afegir un fitxer de tipus de lletra (Arial\&.ttf) com un adjunt:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-add\-attachment Arial\&.ttf
+$ mkvpropedit peli\&.mkv \-\-add\-attachment Arial\&.ttf
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Adding a font file (89719823\&.ttf) as an attachment and providing some information as it really is just Arial:
+Afegir un fitxer de tipus de lletra (89719823\&.ttf) com un adjunt i proporcionar alguna informaci\('o de com \('es el tipus de lletra Arial:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-attachment\-name Arial\&.ttf \-\-attachment\-description \*(AqThe Arial font as a TrueType font\*(Aq \-\-attachment\-mime\-type application/x\-truetype\-font \-\-add\-attachment 89719823\&.ttf
+$ mkvpropedit peli\&.mkv \-\-attachment\-name Arial\&.ttf \-\-attachment\-description \*(AqEl tipus de lletra Arial com a tipus de lletra TrueType\*(Aq \-\-attachment\-mime\-type application/x\-truetype\-font \-\-add\-attachment 89719823\&.ttf
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Replacing one attached font (Comit\&.ttf) file with another one (Arial\&.ttf):
+Substituir un fitxer adjunt de tipus de lletra (Comic\&.ttf) per un altre (Arial\&.ttf):
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-attachment\-name Arial\&.ttf \-\-attachment\-description \*(AqThe Arial font as a TrueType font\*(Aq \-\-replace\-attachment name:Comic\&.ttf:Arial\&.ttf
+$ mkvpropedit peli\&.mkv \-\-attachment\-name Arial\&.ttf \-\-attachment\-description \*(AqEl tipus de lletra Arial com a tipus de lletra TrueType\*(Aq \-\-replace\-attachment name:Comic\&.ttf:Arial\&.ttf
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Deleting the second attached file, whatever it may be:
+Eliminar el segon fitxer adjunt, sigui el que sigui:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-delete\-attachment 2
+$ mkvpropedit peli\&.mkv \-\-delete\-attachment 2
 .fi
 .if n \{\
 .RE
 .\}
 .PP
-Deleting all attached fonts by MIME type:
+Eliminar tots els tipus de lletra adjuntats segons el tipus MIME:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvpropedit movie\&.mkv \-\-delete\-attachment mime\-type:application/x\-truetype\-font
+$ mkvpropedit peli\&.mkv \-\-delete\-attachment mime\-type:application/x\-truetype\-font
 .fi
 .if n \{\
 .RE
@@ -642,7 +638,7 @@ sortir\(`a amb un d\*(Aqaquests tres codis de sortida:
 .IP \(bu 2.3
 .\}
 \fB0\fR
-\-\- This exit codes means that the modification has completed successfully\&.
+\-\- Aquest codi de sortida significa que la modificaci\('o s\*(Aqha realitzat correctament\&.
 .RE
 .sp
 .RS 4
@@ -654,9 +650,9 @@ sortir\(`a amb un d\*(Aqaquests tres codis de sortida:
 .IP \(bu 2.3
 .\}
 \fB1\fR
-\-\- In this case
+\-\- En aquest cas, el
 \fBmkvpropedit\fR(1)
-has output at least one warning, but the modification did continue\&. A warning is prefixed with the text \*(AqWarning:\*(Aq\&. Depending on the issues involved the resulting files might be ok or not\&. The user is urged to check both the warning and the resulting files\&.
+ha generat una sortida amb almenys un av\('is, per\(`o la modificaci\('o ha continuat\&. Un av\('is \('es prefixat amb el text \(FoAv\('is:\(Fc\&. Depenent de les q\(:uestions involucrades, els fitxers resultants seran o no correctes\&. L\*(Aqusuari ser\(`a instat a revisar tant els avisos com els fitxers\&.
 .RE
 .sp
 .RS 4
@@ -668,46 +664,44 @@ has output at least one warning, but the modification did continue\&. A warning 
 .IP \(bu 2.3
 .\}
 \fB2\fR
-\-\- This exit code is used after an error occurred\&.
+\-\- Aquest codi de sortida s\*(Aqempra despr\('es de produir\-se un error\&. El
 \fBmkvpropedit\fR(1)
-aborts right after outputting the error message\&. Error messages range from wrong command line arguments over read/write errors to broken files\&.
+interrompr\(`a el proc\('es just despr\('es de mostrar el missatge d\*(Aqerror\&. L\*(Aqinterval dels missatges d\*(Aqerror va des d\*(Aqarguments incorrectes a la l\('inia d\*(Aqordres fins a errors de lectura/escriptura als fitxers malmesos\&.
 .RE
 .SH "CONVERSI\('O PER A FITXERS DE TEXT I JOCS DE CAR\(`ACTERS"
 .PP
 Per a un debat en profunditat sobre com manipula la suite MKVToolNix les conversions dels jocs de car\(`acters, codifica l\*(Aqentrada/sortida i codifica la l\('inia d\*(Aqordres i codifica a la consola, si us plau, vegeu la secci\('o anomenada de la mateixa manera a la p\(`agina man del
 \fBmkvmerge\fR(1)\&.
-.SH "CAR\(`ACTERS ESPECIALS D'ESCAPADA EN EL TEXT"
+.SH "CAR\(`ACTERS ESPECIALS D'ESCAPAMENT EN EL TEXT"
 .PP
-Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o hagin de ser escapats\&. Les regles de l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
+Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o s\*(Aqhagin d\*(Aqescapar\&. Les regles de l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
 .PP
 Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
 .SH "VARIABLES D'ENTORN"
 .PP
+El
 \fBmkvpropedit\fR(1)
-uses the default variables that determine the system\*(Aqs locale (e\&.g\&.
+usa les variables per omissi\('o que es determinen a la configuraci\('o regional del sistema (p\&. ex\&.,
 \fILANG\fR
-and the
-\fILC_*\fR
-family)\&. Additional variables:
+i la fam\('ilia
+\fILC_*\fR)\&. Variables addicionals:
 .PP
-\fIMKVPROPEDIT_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR and its short form \fIMTX_DEBUG\fR
+\fIMKVPROPEDIT_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR i la seva forma abreujada \fIMTX_DEBUG\fR
 .RS 4
-The content is treated as if it had been passed via the
-\fB\-\-debug\fR
-option\&.
+El contingut es tractar\(`a com si s\*(Aqhagu\('es passat l\*(Aqopci\('o
+\fB\-\-debug\fR\&.
 .RE
 .PP
-\fIMKVPROPEDIT_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR and its short form \fIMTX_ENGAGE\fR
+\fIMKVPROPEDIT_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR i la seva forma abreujada \fIMTX_ENGAGE\fR
 .RS 4
-The content is treated as if it had been passed via the
-\fB\-\-engage\fR
-option\&.
+El contingut es tractar\(`a com si s\*(Aqhagu\('es passat l\*(Aqopci\('o
+\fB\-\-engage\fR\&.
 .RE
 .PP
-\fIMKVPROPEDIT_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR and its short form \fIMTX_OPTIONS\fR
+\fIMKVPROPEDIT_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR i la seva forma abreujada \fIMTX_OPTIONS\fR
 .RS 4
-The content is split on white space\&. The resulting partial strings are treated as if it had been passed as command line options\&. If you need to pass special characters (e\&.g\&. spaces) then you have to escape them (see
-the section about escaping special characters in text)\&.
+El contingut ser\(`a dividit en espais en blanc\&. Les cadenes parcials resultants seran tractades com si haguessin estat passades com a opcions a la l\('inia d\*(Aqordres\&. Si necessiteu passar car\(`acters especials (p\&. ex\&., espais) llavors els haureu d\*(Aqescapar (vegeu
+la secci\('o car\(`acters especials d'escapament en el text)\&.
 .RE
 .SH "VEGEU TAMB\('E"
 .PP

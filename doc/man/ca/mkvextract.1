@@ -48,14 +48,14 @@ fulls de muntatge (CUE sheets),
 codis de temps (timecodes)
 i
 \('indexs (cues)\&. El segon argument \('es el nom del fitxer d\*(Aqorigen\&. Aquest haur\(`a de ser un fitxer
-Matroska(TM)\&. La resta d\*(Aqarguments s\('on opcions i especificacions per a l\*(Aqextracci\('o \-ambb\('os depenen del mode seleccionat\-\&.
+Matroska(TM)\&. La resta d\*(Aqarguments s\('on opcions i especificacions per a l\*(Aqextracci\('o \-ambd\('os depenen del mode seleccionat\-\&.
 .SS "Opcions comunes"
 .PP
 Les seg\(:uents opcions estan disponibles en tots els modes i nom\('es es descriuran en aquesta secci\('o\&.
 .PP
 \fB\-f\fR, \fB\-\-parse\-fully\fR
 .RS 4
-Estableix el mode d\*(Aqan\(`alisi a \(Focompleta\(Fc\&. El mode per omissi\('o no analitza tot el fitxer ja que empra la cerca dels elements de metadades per a localitzar els elements requerits d\*(Aqun fitxer d\*(Aqorigen\&. En el 99% dels casos n\*(Aqhi ha prou\&. Per\(`o per a fitxers que no contenen elements de metadades o que estan malmesos, l\*(Aqusuari hauria d\*(Aqusar aquest mode\&. L\*(Aqan\(`alisi completa d\*(Aqun fitxer pot requerir for\(,ca temps, mentre que una an\(`alisi r\(`apida nom\('es porta uns segons\&.
+Estableix el mode d\*(Aqan\(`alisi a \(Focompleta\(Fc\&. El mode per omissi\('o no analitza tot el fitxer ja que empra la cerca dels elements de metadades per a localitzar els elements requerits d\*(Aqun fitxer d\*(Aqorigen\&. En el 99% dels casos n\*(Aqhi ha prou\&. Per\(`o per a fitxers que no contenen elements de metadades o que estan malmesos, l\*(Aqusuari hauria d\*(Aqusar aquest mode\&. L\*(Aqan\(`alisi completa d\*(Aqun fitxer pot requerir for\(,ca temps, mentre que una an\(`alisi r\(`apida nom\('es porta uns pocs segons\&.
 .RE
 .PP
 \fB\-\-command\-line\-charset\fR \fIjoc_de_car\(`acters\fR
@@ -121,7 +121,7 @@ Mostra la informaci\('o d\*(Aq\('us i surt\&.
 .PP
 \fB\-V\fR, \fB\-\-version\fR
 .RS 4
-Mostra la informaci\('o sobre la versi\('o i surt\&.\&.
+Mostra la informaci\('o sobre la versi\('o i surt\&.
 .RE
 .PP
 \fB\-\-check\-for\-updates\fR
@@ -145,7 +145,7 @@ Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del fitxer
 \fIfitxer_opcions\fR\&. Les l\('inies que tinguin com a primer car\(`acter un coixinet (#) seran tractades com a comentaris i ignorades\&. Els espais en blanc al comen\(,cament i final de la l\('inia seran descartats\&. Cada l\('inia haur\(`a de contenir exactament una opci\('o\&.
 .sp
 Es poden interpretar diversos car\(`acters com d\*(Aqescapament, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
-la secci\('o sobre text d'escapament\&.
+la secci\('o sobre escapar en el text\&.
 .sp
 La l\('inia d\*(Aqordres \(Fo\fBmkvextract tracks origen\&.mkv \-\-raw 1:destinaci\('o\&.raw\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions:
 .sp
@@ -483,7 +483,7 @@ $ mkvextract tags origen\&.mkv \-\-redirect\-output etiquetes\&.xml
 En Windows possiblement necessitareu utilitzar l\*(Aqopci\('o
 \fB\-\-redirect\-output\fR, perqu\(`e
 \fBcmd\&.exe\fR
-a vegades interpreta els car\(`acters especials abans de que s\*(Aqescriguin al fitxer de sortida resultant en una sortida malmesa\&.
+a vegades interpreta els car\(`acters especials abans que s\*(Aqescriguin al fitxer de sortida, resultant en una sortida malmesa\&.
 .sp .5v
 .RE
 .SH "CONVERSI\('O PER A FITXERS DE TEXT I JOCS DE CAR\(`ACTERS"
@@ -763,9 +763,9 @@ ha generat una sortida amb almenys un av\('is, per\(`o l\*(Aqextracci\('o ha con
 \fBmkvextract\fR(1)
 interrompr\(`a el proc\('es just despr\('es de mostrar el missatge d\*(Aqerror\&. L\*(Aqinterval dels missatges d\*(Aqerror va des d\*(Aqarguments incorrectes a la l\('inia d\*(Aqordres fins a errors de lectura/escriptura en fitxers malmesos\&.
 .RE
-.SH "CAR\(`ACTERS ESPECIALS D'ESCAPADA EN EL TEXT"
+.SH "CAR\(`ACTERS ESPECIALS D'ESCAPAMENT EN EL TEXT"
 .PP
-Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o hagin de ser escapats\&. Les regles de l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
+Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o s\*(Aqhagin d\*(Aqescapar\&. Les regles de l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
 .PP
 Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
 .SH "VARIABLES D'ENTORN"

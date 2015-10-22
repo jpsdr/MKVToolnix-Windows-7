@@ -40,7 +40,7 @@ Matroska(TM)\&. La sortida es pot limitar a una llista de pistes en el fitxer in
 \fB\-g\fR, \fB\-\-gui\fR
 .RS 4
 Inicia la
-IGU\&. Aquesta opci\('o nom\('es estar\(`a disponible si el mkvinfo va ser compilat amb la implementaci\('o per a la
+IGU\&. Aquesta opci\('o nom\('es estar\(`a disponible si el \(Fomkvinfo\(Fc va ser compilat amb la implementaci\('o per a la
 IGU\&.
 .RE
 .PP
@@ -143,7 +143,7 @@ Mostra la informaci\('o d\*(Aq\('us i surt\&.
 .PP
 \fB\-V\fR, \fB\-\-version\fR
 .RS 4
-Mostra la informaci\('o sobre la versi\('o i surt\&.\&.
+Mostra la informaci\('o sobre la versi\('o i surt\&.
 .RE
 .PP
 \fB\-\-check\-for\-updates\fR
@@ -167,7 +167,7 @@ Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del fitxer
 \fIfitxer_opcions\fR\&. Les l\('inies que tinguin com a primer car\(`acter un coixinet (#) seran tractades com a comentaris i ignorades\&. Els espais en blanc al comen\(,cament i final de la l\('inia seran descartats\&. Cada l\('inia haur\(`a de contenir exactament una opci\('o\&.
 .sp
 Es poden interpretar diversos car\(`acters com d\*(Aqescapament, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
-la secci\('o sobre text d'escapament\&.
+la secci\('o sobre escapar en el text\&.
 .sp
 La l\('inia d\*(Aqordres \(Fo\fBmkvinfo \-v \-v entrada\&.mkv \-\-redirect\-output info\&.txt\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions:
 .sp
@@ -268,9 +268,9 @@ genera una sortida amb almenys un av\('is, per\(`o continua executant\-se\&. Un 
 \fBmkvinfo\fR(1)
 interrompr\(`a el proc\('es just despr\('es de mostrar el missatge d\*(Aqerror\&. L\*(Aqinterval dels missatges d\*(Aqerror va des d\*(Aqarguments incorrectes a la l\('inia d\*(Aqordres fins a errors de lectura/escriptura en fitxers malmesos\&.
 .RE
-.SH "CAR\(`ACTERS ESPECIALS D'ESCAPADA EN EL TEXT"
+.SH "CAR\(`ACTERS ESPECIALS D'ESCAPAMENT EN EL TEXT"
 .PP
-Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o hagin de ser escapats\&. Les regles de l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
+Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o s\*(Aqhagin d\*(Aqescapar\&. Les regles de l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
 .PP
 Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
 .SH "VARIABLES D'ENTORN"
@@ -296,7 +296,7 @@ El contingut es tractar\(`a com si s\*(Aqhagu\('es passat l\*(Aqopci\('o
 .PP
 \fIMKVINFO_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR i la seva forma abreujada \fIMTX_OPTIONS\fR
 .RS 4
-El contingut ser\(`a dividit en espais en blancinfo\&. Les cadenes parcials resultants seran tractades com si haguessin estat passades com a opcions a la l\('inia d\*(Aqordres\&. Si necessiteu passar car\(`acters especials (p\&. ex\&., espais) llavors els haureu d\*(Aqescapar (vegeu
+El contingut ser\(`a dividit en espais en blanc\&. Les cadenes parcials resultants seran tractades com si haguessin estat passades com a opcions a la l\('inia d\*(Aqordres\&. Si necessiteu passar car\(`acters especials (p\&. ex\&., espais) llavors els haureu d\*(Aqescapar (vegeu
 la secci\('o car\(`acters especials d'escapament en el text)\&.
 .RE
 .SH "VEGEU TAMB\('E"
