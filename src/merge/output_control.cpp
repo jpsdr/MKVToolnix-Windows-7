@@ -778,12 +778,12 @@ shrink_void_and_rerender_track_headers(int64_t new_void_size) {
   auto old_void_pos           = s_void_after_track_headers->GetElementPosition();
   auto projected_new_void_pos = g_kax_tracks->GetElementPosition() + g_kax_tracks->ElementSize();
 
-  s_out->save_pos(g_kax_tracks->GetElementPosition());
+  s_out->setFilePointer(g_kax_tracks->GetElementPosition());
 
   g_kax_tracks->Render(*s_out, false);
   render_void(new_void_size);
 
-  s_out->restore_pos();
+  s_out->setFilePointer(0, seek_end);
 
   mxdebug_if(s_debug_rerender_track_headers,
              boost::format("[rerender] Normal case, only shrinking void down to %1%, new position %2% projected %9% new full size %3% new end %4% s_out size %5% old void start pos %6% tracks pos %7% tracks size %8%\n")
@@ -810,15 +810,17 @@ rerender_track_headers() {
   auto new_tracks_end_pos = g_kax_tracks->GetElementPosition() + g_kax_tracks->ElementSize();
   auto data_start_pos     = s_void_after_track_headers->GetElementPosition() + s_void_after_track_headers->ElementSize(true);
   auto data_size          = s_out->get_size() - data_start_pos;
+  auto new_void_size      = data_start_pos >= (new_tracks_end_pos + 4) ? data_start_pos - new_tracks_end_pos : 1024;
 
-  if (data_size && (new_tracks_end_pos >= (data_start_pos - 3))) {
+  if (data_size  && (new_tracks_end_pos >= (data_start_pos - 3))) {
     auto delta      = 1024 + new_tracks_end_pos - data_start_pos;
     data_start_pos += delta;
+    new_void_size   = 1024;
 
     relocate_written_data(data_start_pos - delta, delta);
   }
 
-  shrink_void_and_rerender_track_headers(data_start_pos - new_tracks_end_pos);
+  shrink_void_and_rerender_track_headers(new_void_size);
 }
 
 /** \brief Render all attachments into the output file at the current position
