@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-22 17:21+0200\n"
+"POT-Creation-Date: 2015-10-22 20:18+0200\n"
 "PO-Revision-Date: 2015-09-30 21:47+0200\n"
 "Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: Denis Baron, TMTisFree <tmtisfree@free.fr>\n"
@@ -2334,7 +2334,7 @@ msgstr "Tous les noms de fichier suivant seront ouverts dans l'éditeur de chapi
 msgid "All following file names will be opened in the header editor."
 msgstr "Tous les noms de fichier suivant seront ouverts dans l'éditeur d'entêtes."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:437
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
 msgid "All header values are OK."
 msgstr "Toutes les valeurs d'entête sont correctes."
 
@@ -2586,18 +2586,18 @@ msgstr "Pièces jointes"
 msgid "Audio"
 msgstr "Audio"
 
-#: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
+#: src/common/property_element.cpp:154
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Audio bit depth"
 msgstr "Profondeur de bits audio"
 
-#: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
+#: src/common/property_element.cpp:153
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
 msgid "Audio channels"
 msgstr "Canaux audio"
 
-#: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
+#: src/common/property_element.cpp:152
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
 msgid "Audio output sampling frequency"
 msgstr "Fréquence d'échantillonnage audio en sortie"
 
@@ -2605,8 +2605,8 @@ msgstr "Fréquence d'échantillonnage audio en sortie"
 msgid "Audio properties"
 msgstr "Propriétés audio"
 
-#: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:417
+#: src/common/property_element.cpp:151
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
 msgid "Audio sampling frequency"
 msgstr "Fréquence d'échantillonnage audio"
 
@@ -2663,8 +2663,8 @@ msgstr "Valeur binaire (affichée comme un nombre hexadécimal)"
 msgid "Bit depth: %1%"
 msgstr "Profondeur de bits : %1%"
 
-#: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
+#: src/common/property_element.cpp:154
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Bits per sample, mostly used for PCM."
 msgstr "Bits par échantillon, surtout utilisé pour PCM."
 
@@ -3069,6 +3069,11 @@ msgstr "Réglages du codec : %1%"
 #, boost-format
 msgid "Codec state: %1%"
 msgstr "État du codec : %1%"
+
+#: src/common/property_element.cpp:131
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+msgid "Codec-inherent delay"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:858
 #, boost-format
@@ -3530,6 +3535,11 @@ msgstr "Par défaut pour les nouvelles entrées de chapitre :"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1506
 msgid "Delay (in ms):"
 msgstr "Décalage (en ms) :"
+
+#: src/common/property_element.cpp:131
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+msgid "Delay built into the codec during decoding in ns."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:354
 msgid "Delay this track's timestamps by a couple of ms."
@@ -4399,19 +4409,19 @@ msgstr "Compression par retrait des entêtes impossible car le tampon contient %
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "Compression par retrait des entêtes impossible car le tampon ne démarre pas avec les octets qui doivent être retirés. Octets attendus : %1% ; trouvés : %2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:437
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:454
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:455
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:457
 msgid "Header validation"
 msgstr "Validation des entêtes"
 
-#: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/common/property_element.cpp:137
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 msgid "Height of the encoded video frames in pixels."
 msgstr "Hauteur des trames vidéo encodées en pixels."
 
-#: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/common/property_element.cpp:139
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
 msgid "Height of the video frames to display."
 msgstr "Hauteur des trames vidéo à l'écran."
 
@@ -5789,8 +5799,8 @@ msgstr "Nombre d'entrées à &renuméroter :"
 msgid "Number of nanoseconds (not scaled) per frame."
 msgstr "Nombre de nanosecondes (non graduées) par trame."
 
-#: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
+#: src/common/property_element.cpp:153
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
 msgid "Numbers of channels in the track."
 msgstr "Nombre de canaux dans la piste."
 
@@ -6356,8 +6366,8 @@ msgstr "Lire les options de ligne de commande supplémentaires dans le fichier s
 msgid "Ready"
 msgstr "Prêt"
 
-#: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
+#: src/common/property_element.cpp:152
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
 msgid "Real output sampling frequency in Hz."
 msgstr "Fréquence cible réelle en Hz."
 
@@ -6545,8 +6555,8 @@ msgstr "&Même dossier que le premier fichier source"
 msgid "Sa&ve settings as"
 msgstr "Enre&gistrer la configuration sous..."
 
-#: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:417
+#: src/common/property_element.cpp:151
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
 msgid "Sampling frequency in Hz."
 msgstr "Fréquence d'échantillonnage en Hz."
 
@@ -6845,7 +6855,7 @@ msgstr ""
 msgid "Set if the track is used."
 msgstr "Établi quand la piste est utilisée."
 
-#: src/common/property_element.cpp:134
+#: src/common/property_element.cpp:135
 msgid "Set if the video is interlaced."
 msgstr "Établi quand la vidéo est entrelacée."
 
@@ -7081,7 +7091,7 @@ msgstr ""
 msgid "Specifies the language of the track in the Matroska languages form."
 msgstr "Spécifie la langue de la piste dans le formulaire des langues Matroska."
 
-#: src/common/property_element.cpp:144
+#: src/common/property_element.cpp:145
 msgid ""
 "Specify the possible modifications to the aspect ratio\n"
 "(0: free resizing, 1: keep aspect ratio, 2: fixed)."
@@ -7089,7 +7099,7 @@ msgstr ""
 "Spécifier les modifications possibles du format d'image\n"
 "(0 : libre, 1 : conserver, 2 : fixe)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
 msgstr "Spécifier les modifications possibles du format d'image (0 : redimensionnement libre, 1 : conserver le format d'image, 2 : fixe)."
 
@@ -7159,8 +7169,8 @@ msgstr "Paramètre de mode stéréo : non donné dans le format <TID>:<n|keyword
 msgid "Stereo mode: %1% (%2%)"
 msgstr "Mode stéréo : %1% (%2%)"
 
-#: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/common/property_element.cpp:147
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "Mode vidéo stéréo 3D (0 - 11, consulter la documentation)."
 
@@ -8033,7 +8043,7 @@ msgstr "Les nombres de canaux des deux pistes audio sont différents : %1% et %2
 msgid "The number of external timecodes %1% is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
 msgstr "Le nombre de codes temporels externes %1% est plus petit que le nombre de trames de cette piste. Les trames restantes pourraient ne pas être horodatées comme attendu. mkvmerge pourrait même planter.\n"
 
-#: src/common/property_element.cpp:143
+#: src/common/property_element.cpp:144
 msgid ""
 "The number of video pixels to remove\n"
 "on the bottom of the image."
@@ -8041,7 +8051,7 @@ msgstr ""
 "Le nombre de pixels vidéo à supprimer\n"
 "en bas de l'image."
 
-#: src/common/property_element.cpp:140
+#: src/common/property_element.cpp:141
 msgid ""
 "The number of video pixels to remove\n"
 "on the left of the image."
@@ -8049,7 +8059,7 @@ msgstr ""
 "Le nombre de pixels vidéo à supprimer\n"
 "à gauche de l'image."
 
-#: src/common/property_element.cpp:142
+#: src/common/property_element.cpp:143
 msgid ""
 "The number of video pixels to remove\n"
 "on the right of the image."
@@ -8057,7 +8067,7 @@ msgstr ""
 "Le nombre de pixels vidéo à supprimer\n"
 "à droite de l'image."
 
-#: src/common/property_element.cpp:141
+#: src/common/property_element.cpp:142
 msgid ""
 "The number of video pixels to remove\n"
 "on the top of the image."
@@ -8065,19 +8075,19 @@ msgstr ""
 "Le nombre de pixels vidéo à supprimer\n"
 "en haut de l'image."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
 msgid "The number of video pixels to remove on the bottom of the image."
 msgstr "Le nombre de pixels vidéo à supprimer en bas de l'image."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
 msgid "The number of video pixels to remove on the left of the image."
 msgstr "Le nombre de pixels vidéo à supprimer à gauche de l'image."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
 msgid "The number of video pixels to remove on the right of the image."
 msgstr "Le nombre de pixels vidéo à supprimer à droite de l'image."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
 msgid "The number of video pixels to remove on the top of the image."
 msgstr "Le nombre de pixels vidéo à supprimer en haut de l'image."
 
@@ -8434,8 +8444,8 @@ msgstr "Aucune traduction n'est disponible pour '%1%'.\n"
 msgid "There was an error querying the update status."
 msgstr "Une erreur s'est produite lors de la recherche d'une mise à jour."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:454
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:455
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:457
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "Les entêtes sont erronés de sorte qu'il n'ont pas pu être enregistrés. La première erreur a été sélectionnée."
 
@@ -8938,7 +8948,7 @@ msgstr "Deux fichiers multiplexés avec les mêmes paramètres et ce commutateur
 msgid "Type"
 msgstr "Type"
 
-#: src/common/property_element.cpp:139
+#: src/common/property_element.cpp:140
 msgid ""
 "Type of the unit for DisplayWidth/Height\n"
 "(0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
@@ -8946,7 +8956,7 @@ msgstr ""
 "Unité pour largeur/hauteur à l'écran\n"
 "(0 : pixel, 1 : centimètre, 2 : pouce, 3 : format d'image)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
 msgstr "Type d'unité pour largeur/hauteur à l'écran (0 : pixel, 1 : centimètre, 2 : pouce, 3 : format d'image)."
 
@@ -9183,47 +9193,47 @@ msgstr "Vidéo compatible VfW"
 msgid "Video"
 msgstr "Vidéo"
 
-#: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
+#: src/common/property_element.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 msgid "Video aspect ratio type"
 msgstr "Type de format d'image vidéo"
 
-#: src/common/property_element.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
+#: src/common/property_element.cpp:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
 msgid "Video crop bottom"
 msgstr "Recadrage vidéo en bas"
 
-#: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/common/property_element.cpp:141
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
 msgid "Video crop left"
 msgstr "Recadrage vidéo à gauche"
 
-#: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
+#: src/common/property_element.cpp:143
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
 msgid "Video crop right"
 msgstr "Recadrage vidéo à droite"
 
-#: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
+#: src/common/property_element.cpp:142
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
 msgid "Video crop top"
 msgstr "Recadrage vidéo en haut"
 
-#: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/common/property_element.cpp:139
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
 msgid "Video display height"
 msgstr "Hauteur d'affichage vidéo"
 
-#: src/common/property_element.cpp:139
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/common/property_element.cpp:140
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
 msgid "Video display unit"
 msgstr "Unité d'affichage vidéo"
 
-#: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/common/property_element.cpp:138
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
 msgid "Video display width"
 msgstr "Largeur d'affichage vidéo"
 
-#: src/common/property_element.cpp:134
+#: src/common/property_element.cpp:135
 msgid "Video interlaced flag"
 msgstr "Signal d'entrelacement vidéo"
 
@@ -9232,13 +9242,13 @@ msgstr "Signal d'entrelacement vidéo"
 msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "L'assemblage du paquet vidéo a échoué. Code d'erreur : %1% (%2%).\n"
 
-#: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/common/property_element.cpp:137
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 msgid "Video pixel height"
 msgstr "Hauteur vidéo en pixels"
 
-#: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/common/property_element.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
 msgid "Video pixel width"
 msgstr "Largeur vidéo en pixels"
 
@@ -9247,8 +9257,8 @@ msgstr "Largeur vidéo en pixels"
 msgid "Video properties"
 msgstr "Propriétés vidéo"
 
-#: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/common/property_element.cpp:147
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
 msgid "Video stereo mode"
 msgstr "Mode stéréo vidéo"
 
@@ -9394,13 +9404,13 @@ msgstr "Lorqu'un utilisateur glisse-dépose des fichiers issus d'une application
 msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
 msgstr "Quand l'utilisateur ajoute une liste de lecture, le programme peut automatiquement en rechercher d'autres dans le dossier et présenter une liste détaillée de celles qu'il a trouvées."
 
-#: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/common/property_element.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
 msgid "Width of the encoded video frames in pixels."
 msgstr "Largeur des trames vidéo encodées en pixels."
 
-#: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/common/property_element.cpp:138
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
 msgid "Width of the video frames to display."
 msgstr "Largeur des trames encodées à l'écran."
 

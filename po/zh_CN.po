@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-22 17:21+0200\n"
+"POT-Creation-Date: 2015-10-22 20:18+0200\n"
 "PO-Revision-Date: 2015-10-20 10:49+0200\n"
 "Last-Translator: Donghui Li <DonghuiLi.81@gmail.com>\n"
 "Language-Team: Chinese Simplified <DonghuiLi.81@gmail.com>\n"
@@ -2262,7 +2262,7 @@ msgstr "其后所有文件名将在章节编辑器中打开。"
 msgid "All following file names will be opened in the header editor."
 msgstr "其后所有文件名将在头部编辑器中打开。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:437
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
 msgid "All header values are OK."
 msgstr "所有头部数值均有效。"
 
@@ -2511,18 +2511,18 @@ msgstr "附件"
 msgid "Audio"
 msgstr "音频"
 
-#: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
+#: src/common/property_element.cpp:154
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Audio bit depth"
 msgstr "音频位深"
 
-#: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
+#: src/common/property_element.cpp:153
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
 msgid "Audio channels"
 msgstr "音频声道数"
 
-#: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
+#: src/common/property_element.cpp:152
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
 msgid "Audio output sampling frequency"
 msgstr "音频输出采样率"
 
@@ -2530,8 +2530,8 @@ msgstr "音频输出采样率"
 msgid "Audio properties"
 msgstr "音频属性"
 
-#: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:417
+#: src/common/property_element.cpp:151
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
 msgid "Audio sampling frequency"
 msgstr "音频采样率"
 
@@ -2586,8 +2586,8 @@ msgstr "二进制数据 (显示为十六进制数字)"
 msgid "Bit depth: %1%"
 msgstr "位深：%1%"
 
-#: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
+#: src/common/property_element.cpp:154
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Bits per sample, mostly used for PCM."
 msgstr "采样深度，主要用于 PCM。"
 
@@ -2991,6 +2991,11 @@ msgstr "编码设置：%1%"
 #, boost-format
 msgid "Codec state: %1%"
 msgstr "编码格式状态：%1%"
+
+#: src/common/property_element.cpp:131
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+msgid "Codec-inherent delay"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:858
 #, boost-format
@@ -3451,6 +3456,11 @@ msgstr "新建章节条目的默认值："
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1506
 msgid "Delay (in ms):"
 msgstr "延迟 (毫秒)："
+
+#: src/common/property_element.cpp:131
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+msgid "Delay built into the codec during decoding in ns."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:354
 msgid "Delay this track's timestamps by a couple of ms."
@@ -4314,19 +4324,19 @@ msgstr "无法执行除头压缩，因为缓冲区仅包含 %1% 字节，小于�
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "无法执行除头压缩，因为缓冲区未以待移除的字节起始。需要的字节：%1%；找到的是：%2%。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:437
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:454
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:455
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:457
 msgid "Header validation"
 msgstr "头部验证"
 
-#: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/common/property_element.cpp:137
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 msgid "Height of the encoded video frames in pixels."
 msgstr "视频帧的编码高度，单位为像素。"
 
-#: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/common/property_element.cpp:139
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
 msgid "Height of the video frames to display."
 msgstr "视频帧的显示高度。"
 
@@ -5704,8 +5714,8 @@ msgstr "需要以重新编号命名的条目数量(&R)："
 msgid "Number of nanoseconds (not scaled) per frame."
 msgstr "每帧的纳秒数 (未缩放前的)。"
 
-#: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
+#: src/common/property_element.cpp:153
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
 msgid "Numbers of channels in the track."
 msgstr "此轨道的声道数。"
 
@@ -6266,8 +6276,8 @@ msgstr "从指定文件读取额外的命令行选项 (参见帮助文档)。"
 msgid "Ready"
 msgstr "就绪"
 
-#: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
+#: src/common/property_element.cpp:152
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
 msgid "Real output sampling frequency in Hz."
 msgstr "实际输出的采样率，单位 Hz。"
 
@@ -6455,8 +6465,8 @@ msgstr "与第一个输入文件同目录(&M)"
 msgid "Sa&ve settings as"
 msgstr "配置另存为(&V)"
 
-#: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:417
+#: src/common/property_element.cpp:151
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
 msgid "Sampling frequency in Hz."
 msgstr "采样率，单位 Hz。"
 
@@ -6737,7 +6747,7 @@ msgstr "设置播放时是否 *必须* 使用该轨道。每类轨道 (音频、
 msgid "Set if the track is used."
 msgstr "设置轨道是否可用。"
 
-#: src/common/property_element.cpp:134
+#: src/common/property_element.cpp:135
 msgid "Set if the video is interlaced."
 msgstr "设置轨道是否隔行扫描。"
 
@@ -6969,13 +6979,13 @@ msgstr "以 Matroska 的语言形式指定轨道的语言。"
 msgid "Specifies the language of the track in the Matroska languages form."
 msgstr "以 Matroska 的语言形式指定轨道的语言。"
 
-#: src/common/property_element.cpp:144
+#: src/common/property_element.cpp:145
 msgid ""
 "Specify the possible modifications to the aspect ratio\n"
 "(0: free resizing, 1: keep aspect ratio, 2: fixed)."
 msgstr "指定对宽高比允许的调整方式 (0：自由缩放，1：保持宽高比，2：固定尺寸)。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
 msgstr "指定对宽高比允许的调整方式 (0：自由缩放，1：保持宽高比，2：固定尺寸)。"
 
@@ -7045,8 +7055,8 @@ msgstr "立体模式参数：格式不符合 <TID>:<n|keyword>，其中 n 为介
 msgid "Stereo mode: %1% (%2%)"
 msgstr "立体模式：%1% (%2%)"
 
-#: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/common/property_element.cpp:147
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "立体 3D 视频模式 (0 - 11，参见文档)。"
 
@@ -7902,43 +7912,43 @@ msgstr "两条音频轨道的声道数不同：%1% 与 %2%"
 msgid "The number of external timecodes %1% is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
 msgstr "外部时间码数量 %1% 小于此轨道的帧数。轨道中其余的帧将可能不按您期望的方式标记时间戳。mkvmerge 甚至可能崩溃。\n"
 
-#: src/common/property_element.cpp:143
+#: src/common/property_element.cpp:144
 msgid ""
 "The number of video pixels to remove\n"
 "on the bottom of the image."
 msgstr "视频画面下边要移除的像素数。"
 
-#: src/common/property_element.cpp:140
+#: src/common/property_element.cpp:141
 msgid ""
 "The number of video pixels to remove\n"
 "on the left of the image."
 msgstr "视频画面左边要移除的像素数。"
 
-#: src/common/property_element.cpp:142
+#: src/common/property_element.cpp:143
 msgid ""
 "The number of video pixels to remove\n"
 "on the right of the image."
 msgstr "视频画面右边要移除的像素数。"
 
-#: src/common/property_element.cpp:141
+#: src/common/property_element.cpp:142
 msgid ""
 "The number of video pixels to remove\n"
 "on the top of the image."
 msgstr "视频画面上边要移除的像素数。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
 msgid "The number of video pixels to remove on the bottom of the image."
 msgstr "视频画面下边要移除的像素数。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
 msgid "The number of video pixels to remove on the left of the image."
 msgstr "视频画面左边要移除的像素数。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
 msgid "The number of video pixels to remove on the right of the image."
 msgstr "视频画面右边要移除的像素数。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
 msgid "The number of video pixels to remove on the top of the image."
 msgstr "视频画面上边要移除的像素数。"
 
@@ -8293,8 +8303,8 @@ msgstr "尚无 '%1%' 的翻译。\n"
 msgid "There was an error querying the update status."
 msgstr "查询更新信息时出错。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:454
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:455
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:457
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "某些头部值出现错误导致无法保存头部。第一处错误已被选中。"
 
@@ -8795,13 +8805,13 @@ msgstr "开启该选项后，使用相同设置合成的两个文件将完全一
 msgid "Type"
 msgstr "类型"
 
-#: src/common/property_element.cpp:139
+#: src/common/property_element.cpp:140
 msgid ""
 "Type of the unit for DisplayWidth/Height\n"
 "(0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
 msgstr "显示宽度/高度的单位类型 (0：像素，1：厘米，2：英寸，3：宽高比)。"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
 msgstr "显示宽度/高度的单位类型 (0：像素，1：厘米，2：英寸，3：宽高比)。"
 
@@ -9036,47 +9046,47 @@ msgstr "VfW 兼容视频"
 msgid "Video"
 msgstr "视频"
 
-#: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
+#: src/common/property_element.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 msgid "Video aspect ratio type"
 msgstr "视频宽高比类型"
 
-#: src/common/property_element.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
+#: src/common/property_element.cpp:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
 msgid "Video crop bottom"
 msgstr "视频下边裁剪"
 
-#: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/common/property_element.cpp:141
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
 msgid "Video crop left"
 msgstr "视频左边裁剪"
 
-#: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
+#: src/common/property_element.cpp:143
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
 msgid "Video crop right"
 msgstr "视频右边裁剪"
 
-#: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
+#: src/common/property_element.cpp:142
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
 msgid "Video crop top"
 msgstr "视频上边裁剪"
 
-#: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/common/property_element.cpp:139
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
 msgid "Video display height"
 msgstr "视频显示高度"
 
-#: src/common/property_element.cpp:139
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/common/property_element.cpp:140
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
 msgid "Video display unit"
 msgstr "视频显示单位"
 
-#: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/common/property_element.cpp:138
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
 msgid "Video display width"
 msgstr "视频显示宽度"
 
-#: src/common/property_element.cpp:134
+#: src/common/property_element.cpp:135
 msgid "Video interlaced flag"
 msgstr "视频隔行扫描标记"
 
@@ -9085,13 +9095,13 @@ msgstr "视频隔行扫描标记"
 msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "视频封包组装失败。错误代码：%1% (%2%)\n"
 
-#: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/common/property_element.cpp:137
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 msgid "Video pixel height"
 msgstr "视频像素高度"
 
-#: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/common/property_element.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
 msgid "Video pixel width"
 msgstr "视频像素宽度"
 
@@ -9100,8 +9110,8 @@ msgstr "视频像素宽度"
 msgid "Video properties"
 msgstr "视频属性"
 
-#: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/common/property_element.cpp:147
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
 msgid "Video stereo mode"
 msgstr "视频立体模式"
 
@@ -9246,13 +9256,13 @@ msgstr "当用户从外部程序中拖放文件到合并工具时，程序可以
 msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
 msgstr "当用户添加播放列表时，程序可以在文件所在目录扫描其他播放列表，并显示扫描到的播放列表的详细信息。"
 
-#: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/common/property_element.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
 msgid "Width of the encoded video frames in pixels."
 msgstr "编码后的视频帧的宽度，以像素为单位。"
 
-#: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/common/property_element.cpp:138
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
 msgid "Width of the video frames to display."
 msgstr "视频帧的显示宽度。"
 

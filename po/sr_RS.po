@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-10-22 17:21+0200\n"
+"POT-Creation-Date: 2015-10-22 20:18+0200\n"
 "PO-Revision-Date: 2015-08-30 02:09+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -2500,7 +2500,7 @@ msgstr "Сваки наредни назив датотеке отвориће �
 msgid "All following file names will be opened in the header editor."
 msgstr "Сваки наредни назив датотеке отвориће се уредником заглавља."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:437
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
 msgid "All header values are OK."
 msgstr "Ваљане су све вредности заглавља"
 
@@ -2783,18 +2783,18 @@ msgstr "Прилози"
 msgid "Audio"
 msgstr "Звук"
 
-#: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
+#: src/common/property_element.cpp:154
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Audio bit depth"
 msgstr "Битска дубина звука"
 
-#: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
+#: src/common/property_element.cpp:153
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
 msgid "Audio channels"
 msgstr "Зв. канали"
 
-#: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
+#: src/common/property_element.cpp:152
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
 msgid "Audio output sampling frequency"
 msgstr "Учестаност узорковања исходишног звука"
 
@@ -2802,8 +2802,8 @@ msgstr "Учестаност узорковања исходишног звук�
 msgid "Audio properties"
 msgstr "Особине звука"
 
-#: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:417
+#: src/common/property_element.cpp:151
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
 msgid "Audio sampling frequency"
 msgstr "Учестаност узорковања звука"
 
@@ -2864,8 +2864,8 @@ msgstr "Бинарна (приказана као хексадекадни бр�
 msgid "Bit depth: %1%"
 msgstr "Битска дубина: %1%"
 
-#: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
+#: src/common/property_element.cpp:154
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Bits per sample, mostly used for PCM."
 msgstr "Бита по узорку. Употребљава се углавном за ИКМ (енг. „PCM“)."
 
@@ -3306,6 +3306,11 @@ msgstr "Поставке кодека: %1%"
 #, boost-format
 msgid "Codec state: %1%"
 msgstr "Стање кодека: %1%"
+
+#: src/common/property_element.cpp:131
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+msgid "Codec-inherent delay"
+msgstr ""
 
 #: src/info/mkvinfo.cpp:858
 #, boost-format
@@ -3826,6 +3831,11 @@ msgstr "Подразумевано за уносе новог поглавља:"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1506
 msgid "Delay (in ms):"
 msgstr "Кашњење (у милисекундама):"
+
+#: src/common/property_element.cpp:131
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+msgid "Delay built into the codec during decoding in ns."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:354
 msgid "Delay this track's timestamps by a couple of ms."
@@ -4805,19 +4815,19 @@ msgstr ""
 "Сажимање засновано на уклањању заглавља није могуће јер бафер није започињао "
 "са бајтовима које је требало уклонити. Пожељни бајтови: %1%; нађено:%2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:437
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:454
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:455
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:457
 msgid "Header validation"
 msgstr "Провера заглавља"
 
-#: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/common/property_element.cpp:137
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 msgid "Height of the encoded video frames in pixels."
 msgstr "Висина кодираних видео-кадрова (у пикселима)."
 
-#: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/common/property_element.cpp:139
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
 msgid "Height of the video frames to display."
 msgstr "Висина приказа видео-кадрова."
 
@@ -6556,8 +6566,8 @@ msgstr "Број ставки за доделу нових бројева:"
 msgid "Number of nanoseconds (not scaled) per frame."
 msgstr "Број наносекунди (нескалирано) по кадру."
 
-#: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
+#: src/common/property_element.cpp:153
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
 msgid "Numbers of channels in the track."
 msgstr "Број канала у запису."
 
@@ -7268,8 +7278,8 @@ msgstr ""
 msgid "Ready"
 msgstr "Приправан"
 
-#: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
+#: src/common/property_element.cpp:152
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
 msgid "Real output sampling frequency in Hz."
 msgstr "Стварна излазна учестаност узорковања (у херцима)."
 
@@ -7470,8 +7480,8 @@ msgstr "Употреби &исти директоријум као и прва �
 msgid "Sa&ve settings as"
 msgstr "Са&чувај поставке као"
 
-#: src/common/property_element.cpp:150
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:417
+#: src/common/property_element.cpp:151
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
 msgid "Sampling frequency in Hz."
 msgstr "Учестаност узорковања (у херцима)."
 
@@ -7777,7 +7787,7 @@ msgstr ""
 msgid "Set if the track is used."
 msgstr "Поставља се ако се запис употребљава."
 
-#: src/common/property_element.cpp:134
+#: src/common/property_element.cpp:135
 msgid "Set if the video is interlaced."
 msgstr "Поставља се ако је видео испреплитан."
 
@@ -8051,7 +8061,7 @@ msgstr ""
 msgid "Specifies the language of the track in the Matroska languages form."
 msgstr "Одређује језик за дати запис у Матрошка-језичком облику."
 
-#: src/common/property_element.cpp:144
+#: src/common/property_element.cpp:145
 msgid ""
 "Specify the possible modifications to the aspect ratio\n"
 "(0: free resizing, 1: keep aspect ratio, 2: fixed)."
@@ -8059,7 +8069,7 @@ msgstr ""
 "Одређује могуће измене пропорције слике\n"
 "(0: произвољно , 1: задржи пропорцију слике, 2: неизмењиво)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 msgid ""
 "Specify the possible modifications to the aspect ratio (0: free resizing, 1: "
 "keep aspect ratio, 2: fixed)."
@@ -8149,8 +8159,8 @@ msgstr ""
 msgid "Stereo mode: %1% (%2%)"
 msgstr "Стерео-режим: %1% (%2%)"
 
-#: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/common/property_element.cpp:147
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "3д-стерео-режим видеа (0–11, видите документацију)."
 
@@ -9313,7 +9323,7 @@ msgstr ""
 "Преостали кадрови овог записа можда неће бити временски означени онако како "
 "сте и наумили. Мкв-спојница ће се можда чак и срушитиi.\n"
 
-#: src/common/property_element.cpp:143
+#: src/common/property_element.cpp:144
 msgid ""
 "The number of video pixels to remove\n"
 "on the bottom of the image."
@@ -9321,7 +9331,7 @@ msgstr ""
 "Висина простора за уклањање са\n"
 "дна слике (у пикселима)."
 
-#: src/common/property_element.cpp:140
+#: src/common/property_element.cpp:141
 msgid ""
 "The number of video pixels to remove\n"
 "on the left of the image."
@@ -9329,7 +9339,7 @@ msgstr ""
 "Ширина простора за уклањање са\n"
 "леве стране слике (у пикселима)."
 
-#: src/common/property_element.cpp:142
+#: src/common/property_element.cpp:143
 msgid ""
 "The number of video pixels to remove\n"
 "on the right of the image."
@@ -9337,7 +9347,7 @@ msgstr ""
 "Ширина простора за уклањање са\n"
 "десне стране слике (у пикселима)."
 
-#: src/common/property_element.cpp:141
+#: src/common/property_element.cpp:142
 msgid ""
 "The number of video pixels to remove\n"
 "on the top of the image."
@@ -9345,19 +9355,19 @@ msgstr ""
 "Висина простора за уклањање са\n"
 "врха слике (у пикселима)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
 msgid "The number of video pixels to remove on the bottom of the image."
 msgstr "Висина простора за уклањање са дна слике (у пикселима)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
 msgid "The number of video pixels to remove on the left of the image."
 msgstr "Ширина простора за уклањање са леве стране слике (у пикселима)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
 msgid "The number of video pixels to remove on the right of the image."
 msgstr "Ширина простора за уклањање са десне стране слике (у пикселима)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
 msgid "The number of video pixels to remove on the top of the image."
 msgstr "Висина простора за уклањање са врха слике (у пикселима)."
 
@@ -9859,8 +9869,8 @@ msgstr "Нема доступног превода за „%1%“.\n"
 msgid "There was an error querying the update status."
 msgstr "Дошло је до грешке приликом провере стања надградњи."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:452
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:454
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:455
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:457
 msgid ""
 "There were errors in the header values preventing the headers from being "
 "saved. The first error has been selected."
@@ -10586,7 +10596,7 @@ msgstr ""
 msgid "Type"
 msgstr "Врста"
 
-#: src/common/property_element.cpp:139
+#: src/common/property_element.cpp:140
 msgid ""
 "Type of the unit for DisplayWidth/Height\n"
 "(0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
@@ -10594,7 +10604,7 @@ msgstr ""
 "Мерна јединица за величину приказа (Ш×В)\n"
 "(0: пиксел, 1: центиметар, 2: инч, 3: пропорција слике)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
 msgid ""
 "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: "
 "inches, 3: aspect ratio)."
@@ -10852,47 +10862,47 @@ msgstr "Вфв сагласан видео"
 msgid "Video"
 msgstr "Видео"
 
-#: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
+#: src/common/property_element.cpp:145
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 msgid "Video aspect ratio type"
 msgstr "Модел пропорције слике за видео"
 
-#: src/common/property_element.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
+#: src/common/property_element.cpp:144
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
 msgid "Video crop bottom"
 msgstr "Орезивање слике одоздо"
 
-#: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/common/property_element.cpp:141
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
 msgid "Video crop left"
 msgstr "Орезивање слике слева"
 
-#: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
+#: src/common/property_element.cpp:143
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
 msgid "Video crop right"
 msgstr "Орезивање слике здесна"
 
-#: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
+#: src/common/property_element.cpp:142
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
 msgid "Video crop top"
 msgstr "Орезивање слике одозго"
 
-#: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/common/property_element.cpp:139
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
 msgid "Video display height"
 msgstr "Висина приказа"
 
-#: src/common/property_element.cpp:139
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/common/property_element.cpp:140
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
 msgid "Video display unit"
 msgstr "Приказ — Јединица мере"
 
-#: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/common/property_element.cpp:138
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
 msgid "Video display width"
 msgstr "Ширина приказа"
 
-#: src/common/property_element.cpp:134
+#: src/common/property_element.cpp:135
 msgid "Video interlaced flag"
 msgstr "Белег „испреплитан видео“"
 
@@ -10901,13 +10911,13 @@ msgstr "Белег „испреплитан видео“"
 msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "Sastavljanje video paketa nije uspelo. Kod greške: %1% (%2%)\n"
 
-#: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/common/property_element.cpp:137
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 msgid "Video pixel height"
 msgstr "Висина"
 
-#: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/common/property_element.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
 msgid "Video pixel width"
 msgstr "Ширина"
 
@@ -10916,8 +10926,8 @@ msgstr "Ширина"
 msgid "Video properties"
 msgstr "Видео-особине"
 
-#: src/common/property_element.cpp:146
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:411
+#: src/common/property_element.cpp:147
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
 msgid "Video stereo mode"
 msgstr "Стерео режим"
 
@@ -11090,13 +11100,13 @@ msgstr ""
 "плеј-листе у датом директоријуму, те да Вам прикаже детаљан списак "
 "пронађених плеј-листа."
 
-#: src/common/property_element.cpp:135
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:380
+#: src/common/property_element.cpp:136
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
 msgid "Width of the encoded video frames in pixels."
 msgstr "Ширина кодираних видео-кадрова (у пикселима)."
 
-#: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/common/property_element.cpp:138
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
 msgid "Width of the video frames to display."
 msgstr "Ширина приказа видео-кадрова."
 
