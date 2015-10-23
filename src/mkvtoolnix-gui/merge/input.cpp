@@ -420,7 +420,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(ui->cues,
                    Q("%1 %2")
                    .arg(QY("Selects for which blocks mkvmerge will produce index entries ( = cue entries)."))
-                   .arg(QY("\"default\" is a good choice for almost all situations.")));
+                   .arg(QY("\"Determine automatically\" is a good choice for almost all situations.")));
   Util::setToolTip(ui->additionalTrackOptions,
                    Q("%1 %2 %3")
                    .arg(QY("Free-form edit field for user defined options for this track."))
