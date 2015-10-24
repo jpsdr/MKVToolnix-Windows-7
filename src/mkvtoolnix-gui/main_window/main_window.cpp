@@ -298,6 +298,17 @@ MainWindow::retranslateUi() {
   for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx)
     ui->tool->setTabText(idx, toolTitles[idx]);
 
+  // Intentionally setting the menu titles here instead of the
+  // designer as the designer doesn't allow the same hotkey in the
+  // same form.
+  ui->menuGUI          ->setTitle(QY("MKVToolNix &GUI"));
+  ui->menuMerge        ->setTitle(QY("&Merge"));
+  ui->menuHeaderEditor ->setTitle(QY("Header &editor"));
+  ui->menuChapterEditor->setTitle(QY("&Chapter editor"));
+  ui->menuJobQueue     ->setTitle(QY("&Job queue"));
+  ui->menuJobOutput    ->setTitle(QY("&Job output"));
+  ui->menuHelp         ->setTitle(QY("&Help"));
+
   ui->tool->setUpdatesEnabled(true);
 }
 
