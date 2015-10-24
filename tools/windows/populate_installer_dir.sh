@@ -95,7 +95,10 @@ function copy_files {
     cp ${qm} ${tgt_dir}/locale/libqt/qt_${lang}.qm
   }
 
-  for lang (. ca de es ja nl uk zh_CN) {
+  typeset -a translations
+  translations=($(awk '/^MANPAGES_TRANSLATIONS/ { gsub(".*= *", "", $0); gsub(" *$", "", $0); print $0 }' build-config))
+
+  for lang (. $translations) {
     cd ${src_dir}/doc/man/${lang}
 
     if [[ $lang == . ]] lang=en
