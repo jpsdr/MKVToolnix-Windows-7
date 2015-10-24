@@ -119,7 +119,7 @@ function copy_files {
 while [[ ! -z $1 ]]; do
   case $1 in
     -t|--target-dir) tgt_dir=$2;   shift; ;;
-    -m|--mxe-dir)    mxd_dir=$2;   shift; ;;
+    -m|--mxe-dir)    mxe_dir=$2;   shift; ;;
     -s|--saxon-dir)  saxon_dir=$2; shift; ;;
     *)               fail "Unknown option $1" ;;
   esac
