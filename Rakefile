@@ -489,14 +489,19 @@ end
 namespace :man2html do
   ([ 'en' ] + $languages[:manpages]).collect do |language|
     namespace language do
-      dir = language == 'en' ? '' : "/#{language}"
-      FileList[ "doc/man#{dir}/*.xml" ].each do |name|
+      dir  = language == 'en' ? '' : "/#{language}"
+      xml  = FileList[ "doc/man#{dir}/*.xml" ].to_a
+      html = xml.map { |name| name.ext(".html") }
+
+      xml.each do |name|
         file name.ext('html') => %w{manpages translations:manpages} do
           runq "SAXON-HE #{name}", "java -classpath lib/saxon-he/saxon9he.jar net.sf.saxon.Transform -o:#{name.ext('html')} -xsl:doc/stylesheets/docbook-to-html.xsl #{name}"
         end
 
         task File.basename(name, '.xml') => name.ext('html')
       end
+
+      task :all => html
     end
   end
 end
