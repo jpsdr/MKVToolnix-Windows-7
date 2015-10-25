@@ -105,7 +105,7 @@ Finally, configure MKVToolNix (the `host=…` spec must match the
     qtbin=$HOME/mingw-cross-env/usr/${host}/qt5/bin
     ./configure \
       --host=${host} \
-      --enable-qt --enable-static-qt --with-mkvtoolnix-gui \
+      --enable-static-qt \
       --with-moc=${qtbin}/moc --with-uic=${qtbin}/uic --with-rcc=${qtbin}/rcc \
       --with-boost=$HOME/mingw-cross-env/usr/${host}
 

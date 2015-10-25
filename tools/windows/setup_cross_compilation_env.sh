@@ -68,7 +68,7 @@ hash -r
 ./configure \\
   --host=${HOST} \\
   --with-boost="${INSTALL_DIR}/usr/${HOST}" \\
-  --enable-qt --enable-static-qt --with-mkvtoolnix-gui \\
+  --enable-static-qt \\
   --with-moc=${qtbin}/moc --with-uic=${qtbin}/uic --with-rcc=${qtbin}/rcc \\
   "\$@"
 
