@@ -497,6 +497,9 @@ rerender_ebml_head() {
 
 static void
 generate_segment_uids() {
+  if (g_cluster_helper->discarding())
+    return;
+
   // Generate the segment UIDs.
   if (hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
     s_seguid_current.zero_content();
