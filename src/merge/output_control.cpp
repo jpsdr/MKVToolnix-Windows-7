@@ -1450,7 +1450,7 @@ finish_file(bool last_file,
     GetChild<KaxNextUID>(*s_kax_infos).CopyBuffer(g_seguid_link_next->data(), 128 / 8);
     changed = 1;
 
-  } else if (!last_file && g_no_linking) {
+  } else if (last_file || g_no_linking) {
     size_t i;
     for (i = 0; s_kax_infos->ListSize() > i; ++i)
       if (Is<KaxNextUID>((*s_kax_infos)[i])) {
