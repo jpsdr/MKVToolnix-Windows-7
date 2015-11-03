@@ -117,3 +117,7 @@ bitvalue_c::generate_random() {
   random_c::generate_bytes(m_value->get_buffer(), m_value->get_size());
 }
 
+void
+bitvalue_c::zero_content() {
+  std::memset(m_value->get_buffer(), 0, m_value->get_size());
+}

@@ -62,6 +62,7 @@ public:
   unsigned char *data() const {
     return m_value->get_buffer();
   }
+  void zero_content();
 };
 using bitvalue_cptr = std::shared_ptr<bitvalue_c>;
 
