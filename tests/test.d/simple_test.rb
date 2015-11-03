@@ -126,7 +126,7 @@ class SimpleTest
         sys "../src/mkvmerge #{full_command_line} > #{tmp}", :exit_code => options[:exit_code]
         if options[:filter]
           text = options[:filter].call(IO.readlines(tmp).join(''))
-          File.open(tmp, 'w') { |file| file.puts text }
+          File.open(tmp, 'w') { |tmp_file| tmp_file.puts text }
         end
         options[:keep_tmp] ? hash_file(tmp) : hash_tmp
       },
@@ -163,7 +163,6 @@ class SimpleTest
   def test_ui_locale locale, *args
     describe "mkvmerge / UI locale: #{locale}"
 
-    options = args.extract_options!
     @blocks[:tests] << {
       :name  => "mkvmerge UI locale #{locale}",
       :block => lambda {
@@ -189,7 +188,7 @@ class SimpleTest
   end
 
   def run_test
-    @blocks[:setup].each &:call
+    @blocks[:setup].each(&:call)
 
     results = @blocks[:tests].collect do |test|
       result = nil
@@ -201,7 +200,7 @@ class SimpleTest
       result
     end
 
-    @blocks[:cleanup].each &:call
+    @blocks[:cleanup].each(&:call)
 
     unlink_tmp_files
 
