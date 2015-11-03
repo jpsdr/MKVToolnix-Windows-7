@@ -258,7 +258,6 @@ Tab::setupInputControls() {
   connect(ui->files,                        &Util::BasicTreeView::ctrlUpPressed,                                                              this,                     &Tab::onMoveFilesUp);
   connect(ui->files,                        &Util::BasicTreeView::customContextMenuRequested,                                                 this,                     &Tab::showFilesContextMenu);
   connect(ui->files,                        &Util::BasicTreeView::deletePressed,                                                              this,                     &Tab::onRemoveFiles);
-  connect(ui->files,                        &Util::BasicTreeView::expanded,                                                                   this,                     &Tab::resizeFilesColumnsToContents);
   connect(ui->files,                        &Util::BasicTreeView::filesDropped,                                                               this,                     &Tab::addOrAppendDroppedFiles);
   connect(ui->files->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           m_filesModel,             &SourceFileModel::updateSelectionStatus);
   connect(ui->files->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           this,                     &Tab::enableMoveFilesButtons);
@@ -287,7 +286,6 @@ Tab::setupInputControls() {
   connect(ui->tracks,                       &Util::BasicTreeView::ctrlDownPressed,                                                            this,                     &Tab::onMoveTracksDown);
   connect(ui->tracks,                       &Util::BasicTreeView::ctrlUpPressed,                                                              this,                     &Tab::onMoveTracksUp);
   connect(ui->tracks,                       &Util::BasicTreeView::customContextMenuRequested,                                                 this,                     &Tab::showTracksContextMenu);
-  connect(ui->tracks,                       &Util::BasicTreeView::expanded,                                                                   this,                     &Tab::resizeTracksColumnsToContents);
   connect(ui->tracks->selectionModel(),     &QItemSelectionModel::selectionChanged,                                                           m_tracksModel,            &TrackModel::updateSelectionStatus);
   connect(ui->tracks->selectionModel(),     &QItemSelectionModel::selectionChanged,                                                           this,                     &Tab::onTrackSelectionChanged);
 

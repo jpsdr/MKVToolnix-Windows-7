@@ -55,7 +55,6 @@ Tab::setupAttachmentsControls() {
   connect(ui->attachments,                   &Util::BasicTreeView::ctrlUpPressed,                                                this, &Tab::onMoveAttachmentsUp);
   connect(ui->attachments,                   &Util::BasicTreeView::customContextMenuRequested,                                   this, &Tab::showAttachmentsContextMenu);
   connect(ui->attachments,                   &Util::BasicTreeView::deletePressed,                                                this, &Tab::onRemoveAttachments);
-  connect(ui->attachments,                   &Util::BasicTreeView::expanded,                                                     this, &Tab::resizeAttachmentsColumnsToContents);
   connect(ui->attachments->selectionModel(), &QItemSelectionModel::selectionChanged,                                             this, &Tab::onAttachmentSelectionChanged);
   connect(ui->attachmentsTab,                &Util::FilesDragDropWidget::filesDropped,                                           this, &Tab::addAttachments);
   connect(ui->moveAttachmentsDown,           &QPushButton::clicked,                                                              this, &Tab::onMoveAttachmentsDown);
