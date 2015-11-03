@@ -495,6 +495,39 @@ rerender_ebml_head() {
   out->restore_pos();
 }
 
+static void
+generate_segment_uids() {
+  // Generate the segment UIDs.
+  if (hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
+    s_seguid_current.zero_content();
+    s_seguid_next.zero_content();
+    s_seguid_prev.zero_content();
+
+    return;
+  }
+
+  if (1 == g_file_num) {
+    if (g_forced_seguids.empty())
+      s_seguid_current.generate_random();
+    else {
+      s_seguid_current = *g_forced_seguids.front();
+      g_forced_seguids.pop_front();
+    }
+    s_seguid_next.generate_random();
+
+    return;
+  }
+
+  s_seguid_prev = s_seguid_current;
+  if (g_forced_seguids.empty())
+    s_seguid_current = s_seguid_next;
+  else {
+    s_seguid_current = *g_forced_seguids.front();
+    g_forced_seguids.pop_front();
+  }
+  s_seguid_next.generate_random();
+}
+
 /** \brief Render the basic EBML and Matroska headers
 
    Renders the segment information and track headers. Also reserves
@@ -534,33 +567,7 @@ render_headers(mm_io_c *out) {
 
     bool first_file = (1 == g_file_num);
 
-    // Generate the segment UIDs.
-    if (!hack_engaged(ENGAGE_NO_VARIABLE_DATA)) {
-      if (first_file) {
-        if (g_forced_seguids.empty())
-          s_seguid_current.generate_random();
-        else {
-          s_seguid_current = *g_forced_seguids.front();
-          g_forced_seguids.pop_front();
-        }
-        s_seguid_next.generate_random();
-
-      } else {                  // first_file?
-        s_seguid_prev = s_seguid_current;
-        if (g_forced_seguids.empty())
-          s_seguid_current = s_seguid_next;
-        else {
-          s_seguid_current = *g_forced_seguids.front();
-          g_forced_seguids.pop_front();
-        }
-        s_seguid_next.generate_random();
-      }
-
-    } else {
-      memset(s_seguid_current.data(), 0, 128 / 8);
-      memset(s_seguid_prev.data(),    0, 128 / 8);
-      memset(s_seguid_next.data(),    0, 128 / 8);
-    }
+    generate_segment_uids();
 
     if (!outputting_webm()) {
       // Set the segment UIDs.
