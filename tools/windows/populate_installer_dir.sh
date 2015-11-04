@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 set -e
-set -x
+# set -x
 
 setopt nullglob
 
@@ -30,13 +30,6 @@ function strip_files {
   ${host}-strip *.exe
 
   print -- " done"
-}
-
-function saxon_process {
-  java -classpath ${saxon_dir}/saxon9he.jar net.sf.saxon.Transform $@ |& \
-    perl -pe '
-      s{^Error\s+(at.*?)?\s*on\s+line\s+(\d+)\s+column\s+(\d+)\s+of\s+(.+?):}{\4:\2:\3: error: \1};
-      s{(.+?)\s+on\s+line\s+(\d+)\s+of\s+(.+)}{\3:\2: warning: \1};'
 }
 
 function create_directories {
@@ -98,8 +91,17 @@ function copy_files {
   typeset -a translations
   translations=($(awk '/^MANPAGES_TRANSLATIONS/ { gsub(".*= *", "", $0); gsub(" *$", "", $0); print $0 }' build-config))
 
+  typeset -a xml_files expected_files
+  typeset src_file dst_file commands saxon_process
+
+  cd ${src_dir}/doc/man
+  xml_files=(*.xml)
+
+  commands=$(mktemp)
+
   for lang (. $translations) {
-    cd ${src_dir}/doc/man/${lang}
+    typeset lang_dir=${src_dir}/doc/man/${lang}
+    cd ${lang_dir}
 
     if [[ $lang == . ]] lang=en
 
@@ -107,13 +109,20 @@ function copy_files {
     mkdir -p ${man_dest}
     cp ${src_dir}/doc/stylesheets/mkvtoolnix-doc.css ${man_dest}/
 
-    for i (*.xml) {
-      tmpi=$(mktemp)
-      perl -pe 's/PUBLIC.*OASIS.*dtd"//' < $i > ${tmpi}
-      saxon_process -o:${man_dest}/$(basename $i .xml).html -xsl:${src_dir}/doc/stylesheets/docbook-to-html.xsl $tmpi
-      rm -f $tmpi
-      if [[ ! -f ${man_dest}/$(basename $i .xml).html ]] exit 1
+    for src_file (${xml_files}) {
+      dst_file=${man_dest}/$(basename ${src_file} .xml).html
+      expected_files+=(${dst_file})
+
+      echo ${src_dir}/tools/windows/saxon_process.sh ${lang_dir}/${src_file} ${dst_file} ${src_dir}/doc/stylesheets/docbook-to-html.xsl >> ${commands}
     }
+  }
+
+  xargs -n 1 -P $(nproc) -d '\n' -i zsh -c '{}' < ${commands}
+
+  rm -f ${commands}
+
+  for dst_file (${expected_files}) {
+    if [[ ! -f ${dst_file} ]] exit 1
   }
 
   echo " done"
