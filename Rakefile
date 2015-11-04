@@ -642,12 +642,28 @@ task :clean do
   puts "   CLEAN"
 
   patterns = %w{
-    src/**/*.o lib/**/*.o src/**/*.a lib/**/*.a src/**/*.gch
-    src/**/*.exe src/**/*.dll src/**/*.dll.a
-    share/icons/*x*/*.h
-    src/info/ui/*.h src/mkvtoolnix-gui/forms/**/*.h src/**/*.moc src/**/*.moco src/mkvtoolnix-gui/qt_resources.cpp
-    tests/unit/**/*.o tests/unit/**/*.a tests/unit/all
-    po/*.mo po/qt/*.qm
+    **/*.a
+    **/*.autosave
+    **/*.deps
+    **/*.dll
+    **/*.exe
+    **/*.exe
+    **/*.gch
+    **/*.mo
+    **/*.moc
+    **/*.moco
+    **/*.o
+    **/*.pot
+    **/*.qm
+    doc/man/*.html
+    doc/man/*/*.html
+    doc/man/*/*.xml
+    src/info/ui/*.h
+    src/mkvtoolnix-gui/forms/**/*.h
+    src/mkvtoolnix-gui/qt_resources.cpp
+    tests/unit/all
+    tests/unit/merge/merge
+    tests/unit/propedit/propedit
   }
   patterns += $applications + $tools.collect { |name| "src/tools/#{name}" }
 
@@ -662,30 +678,12 @@ end
 namespace :clean do
   desc "Remove all compiled and generated files ('tarball' clean)"
   task :dist => :clean do
-    run "rm -f config.h config.log config.cache build-config Makefile */Makefile */*/Makefile TAGS", :allow_failure => true
+    run "rm -f config.h config.log config.cache build-config TAGS", :allow_failure => true
   end
 
   desc "Remove all compiled and generated files ('git' clean)"
   task :maintainer => "clean:dist" do
     run "rm -f configure config.h.in", :allow_failure => true
-  end
-
-  desc "Remove all compiled libraries"
-  task :libs do
-    run "rm -f */lib*.a */*/lib*.a */*/*.dll */*/*.dll.a", :allow_failure => true
-  end
-
-  [:apps, :applications, :exe].each_with_index do |name, idx|
-    desc "Remove all compiled applications" if 0 == idx
-    task name do
-      run "rm -f #{$applications.join(" ")} */*.exe */*/*.exe", :allow_failure => true
-    end
-  end
-
-  %w{manpages-html man2html}.each do |name|
-    task name do
-      run "rm -f doc/man/*.html doc/man/*/*.html"
-    end
   end
 
   desc "Remove compiled objects and programs in the unit test suite"
