@@ -149,11 +149,6 @@ Section "Program files" SEC01
 
   # Delete files that might be present from older installation
   # if this is just an upgrade.
-  Delete "$INSTDIR\base64tool.exe"
-  Delete "$INSTDIR\*.dll"
-  Delete "$INSTDIR\data\magic"
-  Delete "$INSTDIR\doc\base64tool.html"
-  Delete "$INSTDIR\matroskalogo_big.ico"
   Delete "$INSTDIR\mmg.exe"
   Delete "$INSTDIR\doc\command_line_references_and_guide.html"
   Delete "$INSTDIR\doc\en\mmg.html"
@@ -190,9 +185,7 @@ Section "Program files" SEC01
   Delete "$INSTDIR\locale\zh_TW\LC_MESSAGES\wxstd.mo"
   RMDir /r "$INSTDIR\doc\guide"
   RMDir /r "$INSTDIR\doc\images"
-  RMDir /r "$INSTDIR\locale\german"
   RMDir /r "$INSTDIR\locale\rs"
-  RMDir /r "$INSTDIR\locale\zh"
 
   # The docs have been moved to locale specific subfolders.
   Delete "$INSTDIR\doc\mkvextract.html"
