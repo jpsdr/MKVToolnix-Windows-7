@@ -1,4 +1,4 @@
-Building MKVToolNix 8.5.1 for Windows
+Building MKVToolNix 8.5.2 for Windows
 =====================================
 
 There is currently only one supported way to build MKVToolNix for
