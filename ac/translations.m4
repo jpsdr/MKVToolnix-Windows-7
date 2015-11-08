@@ -5,13 +5,13 @@ AC_ARG_WITH([gettext], AC_HELP_STRING([--without-gettext], [do not build with ge
             [ with_gettext=${withval} ], [ with_gettext=yes ])
 if test "x$with_gettext" != "xno"; then
   AC_CHECK_FUNCS(gettext, gettext_found=yes, gettext_found=no)
-fi
-if test x"$gettext_found" != xyes ; then
-  AC_CHECK_LIB(intl, gettext,
-               [ LIBINTL_LIBS="-lintl";
-                 gettext_found=yes ],
-               [ gettext_found=no ],
-               [ -liconv ])
+  if test x"$gettext_found" != xyes ; then
+    AC_CHECK_LIB(intl, gettext,
+                 [ LIBINTL_LIBS="-lintl";
+                   gettext_found=yes ],
+                 [ gettext_found=no ],
+                 [ -liconv ])
+  fi
 fi
 
 if test x"$gettext_found" = xyes ; then
