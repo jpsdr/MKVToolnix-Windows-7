@@ -259,6 +259,9 @@ protected:
   virtual void flush_frame();
 
   virtual bool is_timecode_available() const;
+
+protected:
+  static void add_extra_data_if_not_present(std::deque<memory_cptr> &extra_data, memory_cptr const &packet);
 };
 
 };

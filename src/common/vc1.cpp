@@ -581,12 +581,22 @@ vc1::es_parser_c::peek_next_calculated_timecode()
 
 void
 vc1::es_parser_c::add_pre_frame_extra_data(memory_cptr packet) {
-  m_pre_frame_extra_data.push_back(memory_cptr(packet->clone()));
+  add_extra_data_if_not_present(m_pre_frame_extra_data, packet);
 }
 
 void
 vc1::es_parser_c::add_post_frame_extra_data(memory_cptr packet) {
-  m_post_frame_extra_data.push_back(memory_cptr(packet->clone()));
+  add_extra_data_if_not_present(m_post_frame_extra_data, packet);
+}
+
+void
+vc1::es_parser_c::add_extra_data_if_not_present(std::deque<memory_cptr> &extra_data,
+                                                memory_cptr const &packet) {
+  for (auto const &existing_packet : extra_data)
+    if (*existing_packet == *packet)
+      return;
+
+  extra_data.push_back(packet->clone());
 }
 
 void
