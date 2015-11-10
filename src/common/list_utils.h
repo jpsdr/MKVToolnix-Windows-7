@@ -18,18 +18,20 @@
 
 namespace mtx {
 
-template<typename T>
+template<typename Tneedle,
+         typename Tvalue>
 bool
-included_in(T const &needle,
-         T const &val) {
+included_in(Tneedle const &needle,
+            Tvalue const &val) {
   return needle == val;
 }
 
-template<typename T,
+template<typename Tneedle,
+         typename Tvalue,
          typename... Trest>
 bool
-included_in(T const &needle,
-            T const &val,
+included_in(Tneedle const &needle,
+            Tvalue const &val,
             Trest... rest) {
   return (needle == val) || included_in(needle, rest...);
 }
