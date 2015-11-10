@@ -48,6 +48,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/kax_analyzer.h"
+#include "common/list_utils.h"
 #include "common/mm_io.h"
 #include "common/segmentinfo.h"
 #include "common/split_arg_parsing.h"
@@ -61,6 +62,7 @@
 #include "merge/cluster_helper.h"
 #include "merge/filelist.h"
 #include "merge/generic_reader.h"
+#include "merge/id_result.h"
 #include "merge/output_control.h"
 #include "merge/reader_detection_and_creation.h"
 #include "merge/track_info.h"
@@ -266,6 +268,9 @@ set_usage() {
   usage_text +=   "\n\n";
   usage_text += Y(" Other options:\n");
   usage_text += Y("  -i, --identify <file>    Print information about the source file.\n");
+  usage_text += Y("  -F, --identification-format <format>\n"
+                  "                           Set the identification results format\n"
+                  "                           ('text', 'verbose-text', 'json').\n");
   usage_text += Y("  -l, --list-types         Lists supported input file types.\n");
   usage_text += Y("  --list-languages         Lists all ISO639 languages and their\n"
                   "                           ISO639-2 codes.\n");
@@ -361,6 +366,32 @@ list_file_types() {
     mxinfo(boost::format("  %1% [%2%]\n") % file_type.title % file_type.extensions);
 }
 
+static void
+display_unsupported_file_type_json(filelist_t const &file) {
+  auto json = nlohmann::json{
+    { "identification_format_version", 1         },
+    { "file_name",                     file.name },
+    { "container", {
+        { "recognized", false },
+        { "supported",  false },
+      } },
+  };
+
+  mxinfo(boost::format("%1%\n") % json.dump(2));
+
+  mxexit(0);
+}
+
+static void
+display_unsupported_file_type(filelist_t const &file) {
+  if (identification_output_format_e::json == g_identification_output_format)
+    display_unsupported_file_type_json(file);
+
+  mxerror(boost::format(Y("File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and "
+                          "contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"))
+          % file.name);
+}
+
 /** \brief Identify a file type and its contents
 
    This function called for \c --identify. It sets up dummy track info
@@ -388,9 +419,7 @@ identify(std::string &filename) {
   get_file_type(file);
 
   if (FILE_TYPE_IS_UNKNOWN == file.type)
-    mxerror(boost::format(Y("File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and "
-                            "contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"))
-            % file.name);
+    display_unsupported_file_type(file);
 
   create_readers();
 
@@ -1798,31 +1827,78 @@ parse_common_args(std::vector<std::string> args) {
 }
 
 static void
-parse_args(std::vector<std::string> args) {
-  // Check if only information about the file is wanted. In this mode only
-  // two parameters are allowed: the --identify switch and the file.
-  if ((   (2 == args.size())
-       || (3 == args.size()))
-      && (   (args[0] == "-i")
-          || (args[0] == "--identify")
-          || (args[0] == "--identify-verbose")
-          || (args[0] == "-I")
-          || (args[0] == "--identify-for-mmg")
-          || (args[0] == "--identify-for-gui"))) {
-    if ((args[0] == "--identify-verbose") || (args[0] == "-I"))
-      g_identify_verbose = true;
+parse_arg_identification_format(std::vector<std::string>::const_iterator &sit,
+                                std::vector<std::string>::const_iterator const &sit_end) {
+  if ((sit + 1) == sit_end)
+    mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % *sit);
 
-    if ((args[0] == "--identify-for-mmg") || (args[0] == "--identify-for-gui")) {
-      g_identify_verbose = true;
-      g_identify_for_gui = true;
-    }
+  auto next_arg = balg::to_lower_copy(*(sit + 1));
 
-    if (3 == args.size())
-      verbose = 3;
+  if (next_arg == "text")
+    g_identification_output_format = identification_output_format_e::text;
 
-    identify(args[1]);
-    mxexit();
+  else if (next_arg == "verbose-text")
+    g_identification_output_format = identification_output_format_e::verbose_text;
+
+  else if (next_arg == "gui")
+    g_identification_output_format = identification_output_format_e::gui;
+
+  else if (next_arg == "json")
+    g_identification_output_format = identification_output_format_e::json;
+
+  else
+    mxerror(boost::format(Y("Invalid output format in '%1% %2%'.\n")) % *sit % *(sit + 1));
+
+  ++sit;
+}
+
+static void
+handle_identification_args(std::vector<std::string> const &args) {
+  auto identification_command = boost::optional<std::string>{};
+  auto file_to_identify       = boost::optional<std::string>{};
+
+  for (auto const &this_arg : args) {
+    if (!mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui"))
+      continue;
+
+    identification_command = this_arg;
+
+    if (mtx::included_in(this_arg, "-I", "--identify-verbose"))
+      g_identification_output_format = identification_output_format_e::verbose_text;
+
+    else if (mtx::included_in(this_arg, "--identify-for-mmg", "--identify-for-gui"))
+      g_identification_output_format = identification_output_format_e::gui;
   }
+
+  if (!identification_command)
+    return;
+
+  for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
+    auto const &this_arg = *sit;
+
+    if (mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui"))
+      continue;
+
+    if (mtx::included_in(this_arg, "-F", "--identification-format"))
+      parse_arg_identification_format(sit, sit_end);
+
+    else if (file_to_identify)
+      mxerror(boost::format(Y("The argument '%1%' is not allowed in identification mode.\n")) % this_arg);
+
+    else
+      file_to_identify = this_arg;
+  }
+
+  if (!file_to_identify)
+    mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % *identification_command);
+
+  identify(*file_to_identify);
+  mxexit();
+}
+
+static void
+parse_args(std::vector<std::string> args) {
+  handle_identification_args(args);
 
   // First parse options that either just print some infos and then exit.
   for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {

@@ -13,11 +13,13 @@
 
 #include "common/common_pch.h"
 
+#include "common/list_utils.h"
 #include "common/strings/formatting.h"
 #include "merge/generic_packetizer.h"
 #include "merge/generic_reader.h"
 #include "merge/input_x.h"
 #include "merge/output_control.h"
+#include "nlohmann-json/src/json.hpp"
 
 template<typename T>
 void
@@ -256,38 +258,19 @@ generic_reader_c::get_format_name()
 }
 
 void
-generic_reader_c::id_result_container(const std::string &verbose_info) {
-  std::vector<std::string> verbose_info_list;
-  if (!verbose_info.empty())
-    verbose_info_list.push_back(verbose_info);
-  id_result_container(verbose_info_list);
-}
-
-void
-generic_reader_c::id_result_container(const std::vector<std::string> &verbose_info) {
+generic_reader_c::id_result_container(mtx::id::verbose_info_t const &verbose_info) {
   auto type                           = get_format_type();
   m_id_results_container.info         = file_type_t::get_name(type).get_translated();
   m_id_results_container.verbose_info = verbose_info;
-  m_id_results_container.verbose_info.emplace_back((boost::format("container_type:%1%") % static_cast<int>(type)).str());
-  m_id_results_container.verbose_info.emplace_back((boost::format("is_providing_timecodes:%1%") % (is_providing_timecodes() ? 1 : 0)).str());
+  m_id_results_container.verbose_info.emplace_back("container_type",         static_cast<int>(type));
+  m_id_results_container.verbose_info.emplace_back("is_providing_timecodes", is_providing_timecodes());
 }
 
 void
 generic_reader_c::id_result_track(int64_t track_id,
-                                  const std::string &type,
-                                  const std::string &info,
-                                  const std::string &verbose_info) {
-  id_result_t result(track_id, type, info, empty_string, 0);
-  if (!verbose_info.empty())
-    result.verbose_info.push_back(verbose_info);
-  m_id_results_tracks.push_back(result);
-}
-
-void
-generic_reader_c::id_result_track(int64_t track_id,
-                                  const std::string &type,
-                                  const std::string &info,
-                                  const std::vector<std::string> &verbose_info) {
+                                  std::string const &type,
+                                  std::string const &info,
+                                  mtx::id::verbose_info_t const &verbose_info) {
   id_result_t result(track_id, type, info, empty_string, 0);
   result.verbose_info = verbose_info;
   m_id_results_tracks.push_back(result);
@@ -302,7 +285,7 @@ generic_reader_c::id_result_attachment(int64_t attachment_id,
                                        boost::optional<uint64_t> id) {
   id_result_t result(attachment_id, type, file_name, description, size);
   if (id)
-    result.verbose_info.push_back((boost::format("uid:%1%") % *id).str());
+    result.verbose_info.emplace_back("uid", *id);
   m_id_results_attachments.push_back(result);
 }
 
@@ -321,9 +304,37 @@ generic_reader_c::id_result_tags(int64_t track_id,
 
 void
 generic_reader_c::display_identification_results() {
+  if (identification_output_format_e::json == g_identification_output_format)
+    display_identification_results_as_json();
+  else
+    display_identification_results_as_text();
+}
+
+void
+generic_reader_c::display_identification_results_as_text() {
+  auto identify_verbose    = mtx::included_in(g_identification_output_format, identification_output_format_e::verbose_text, identification_output_format_e::gui);
+  auto identify_for_gui    = identification_output_format_e::gui == g_identification_output_format;
+
+  auto format_verbose_info = [this](mtx::id::verbose_info_t const &info) -> std::string {
+    auto formatted = std::vector<std::string>{};
+    auto formatter = boost::format{"%1%:%2%"};
+
+    for (auto const &pair : info) {
+      auto value = pair.second.is_number()  ? to_string(pair.second.get<int64_t>())
+                 : pair.second.is_boolean() ? std::string{pair.second.get<bool>() ? "1" : "0"}
+                 :                            pair.second.get<std::string>();
+
+      formatted.emplace_back((formatter % escape(pair.first) % escape(value)).str());
+    }
+
+    brng::sort(formatted);
+
+    return join(" ", formatted);
+  };
+
   std::string format_file, format_track, format_attachment, format_att_description, format_att_file_name;
 
-  if (g_identify_for_gui) {
+  if (identify_for_gui) {
     format_file            =   "File '%1%': container: %2%";
     format_track           =   "Track ID %1%: %2% (%3%)";
     format_attachment      =   "Attachment ID %1%: type \"%2%\", size %3% bytes";
@@ -340,20 +351,16 @@ generic_reader_c::display_identification_results() {
 
   mxinfo(boost::format(format_file) % m_ti.m_fname % m_id_results_container.info);
 
-  if (g_identify_verbose && !m_id_results_container.verbose_info.empty()) {
-    brng::sort(m_id_results_container.verbose_info);
-    mxinfo(boost::format(" [%1%]") % join(" ", m_id_results_container.verbose_info));
-  }
+  if (identify_verbose && !m_id_results_container.verbose_info.empty())
+    mxinfo(boost::format(" [%1%]") % format_verbose_info(m_id_results_container.verbose_info));
 
   mxinfo("\n");
 
   for (auto &result : m_id_results_tracks) {
     mxinfo(boost::format(format_track) % result.id % result.type % result.info);
 
-    if (g_identify_verbose && !result.verbose_info.empty()) {
-      brng::sort(result.verbose_info);
-      mxinfo(boost::format(" [%1%]") % join(" ", result.verbose_info));
-    }
+    if (identify_verbose && !result.verbose_info.empty())
+      mxinfo(boost::format(" [%1%]") % format_verbose_info(result.verbose_info));
 
     mxinfo("\n");
   }
@@ -367,14 +374,14 @@ generic_reader_c::display_identification_results() {
     if (!result.info.empty())
       mxinfo(boost::format(format_att_file_name) % id_escape_string(result.info));
 
-    if (g_identify_verbose && !result.verbose_info.empty())
-      mxinfo(boost::format(" [%1%]") % join(" ", result.verbose_info));
+    if (identify_verbose && !result.verbose_info.empty())
+      mxinfo(boost::format(" [%1%]") % format_verbose_info(result.verbose_info));
 
     mxinfo("\n");
   }
 
   for (auto &result : m_id_results_chapters) {
-    if (g_identify_for_gui)
+    if (identify_for_gui)
       mxinfo(boost::format("Chapters: %1% entries") % result.size);
     else
       mxinfo(boost::format(NY("Chapters: %1% entry", "Chapters: %1% entries", result.size)) % result.size);
@@ -383,12 +390,12 @@ generic_reader_c::display_identification_results() {
 
   for (auto &result : m_id_results_tags) {
     if (ID_RESULT_GLOBAL_TAGS_ID == result.id) {
-      if (g_identify_for_gui)
+      if (identify_for_gui)
         mxinfo(boost::format("Global tags: %1% entries") % result.size);
       else
         mxinfo(boost::format(NY("Global tags: %1% entry", "Global tags: %1% entries", result.size)) % result.size);
 
-    } else if (g_identify_for_gui)
+    } else if (identify_for_gui)
       mxinfo(boost::format("Tags for track ID %1%: %2% entries") % result.id % result.size);
     else
       mxinfo(boost::format(NY("Tags for track ID %1%: %2% entry", "Tags for track ID %1%: %2% entries", result.size)) % result.id % result.size);
@@ -397,9 +404,73 @@ generic_reader_c::display_identification_results() {
   }
 }
 
+void
+generic_reader_c::display_identification_results_as_json() {
+  auto verbose_info_to_object = [](mtx::id::verbose_info_t const &verbose_info) -> nlohmann::json {
+    auto object = nlohmann::json{};
+    for (auto const &property : verbose_info)
+      object[property.first] = property.second;
+
+    return object;
+  };
+
+  auto json = nlohmann::json{
+    { "identification_format_version", 1                       },
+    { "file_name",                     m_ti.m_fname            },
+    { "tracks",                        nlohmann::json::array() },
+    { "attachments",                   nlohmann::json::array() },
+    { "chapters",                      nlohmann::json::array() },
+    { "global_tags",                   nlohmann::json::array() },
+    { "track_tags",                    nlohmann::json::array() },
+    { "container", {
+        { "recognized", true                                                        },
+        { "supported",  true                                                        },
+        { "type",       m_id_results_container.info                                 },
+        { "properties", verbose_info_to_object(m_id_results_container.verbose_info) },
+      } },
+  };
+
+  for (auto const &result : m_id_results_tracks)
+    json["tracks"] += nlohmann::json{
+      { "id",         result.id                                   },
+      { "type",       result.type                                 },
+      { "codec",      result.info                                 },
+      { "properties", verbose_info_to_object(result.verbose_info) },
+    };
+
+  for (auto const &result : m_id_results_attachments)
+    json["attachments"] += nlohmann::json{
+      { "id",           result.id                                   },
+      { "content_type", result.type                                 },
+      { "size",         result.size                                 },
+      { "description",  result.description                          },
+      { "file_name",    result.info                                 },
+      { "properties",   verbose_info_to_object(result.verbose_info) },
+    };
+
+  for (auto const &result : m_id_results_chapters)
+    json["chapters"] += nlohmann::json{
+      { "num_entries", result.size },
+    };
+
+  for (auto const &result : m_id_results_chapters) {
+    if (ID_RESULT_GLOBAL_TAGS_ID == result.id)
+      json["global_tags"] += nlohmann::json{
+        { "num_entries", result.size },
+      };
+    else
+      json["track_tags"] += nlohmann::json{
+        { "track_id",    result.id   },
+        { "num_entries", result.size },
+      };
+  }
+
+  mxinfo(boost::format("%1%\n") % json.dump(2));
+}
+
 std::string
 generic_reader_c::id_escape_string(const std::string &s) {
-  return g_identify_for_gui ? escape(s) : s;
+  return identification_output_format_e::gui == g_identification_output_format ? escape(s) : s;
 }
 
 void

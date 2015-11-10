@@ -130,6 +130,13 @@ enum append_mode_e {
   APPEND_MODE_FILE_BASED,
 };
 
+enum class identification_output_format_e {
+  text,
+  verbose_text,
+  gui,
+  json,
+};
+
 class family_uids_c: public std::vector<bitvalue_c> {
 public:
   bool add_family_uid(const KaxSegmentFamily &family);
@@ -181,7 +188,8 @@ extern generic_packetizer_c *g_video_packetizer;
 extern bool g_write_cues, g_cue_writing_requested;
 extern bool g_no_lacing, g_no_linking, g_use_durations, g_no_track_statistics_tags;
 
-extern bool g_identifying, g_identify_verbose, g_identify_for_gui;
+extern bool g_identifying;
+extern identification_output_format_e g_identification_output_format;
 
 extern int g_file_num;
 extern int64_t g_file_sizes;

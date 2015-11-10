@@ -15,6 +15,7 @@
 #include "common/common_pch.h"
 
 #include "common/strings/editing.h"
+#include "nlohmann-json/src/json.hpp"
 
 namespace mtx { namespace id {
 
@@ -60,15 +61,17 @@ char const * const track_name                      = "track_name";
 char const * const ts_pid                          = "ts_pid";
 char const * const uid                             = "uid";
 
+using verbose_info_t = std::vector<std::pair<std::string, nlohmann::json>>;
+
 class info_c {
 protected:
-  std::vector<std::string> m_info;
+  verbose_info_t m_info;
 
 public:
   template<typename T> info_c &
   set(std::string const &key,
       T const &value) {
-    m_info.emplace_back((boost::format("%1%:%2%") % escape(key) % escape((boost::format("%1%") % value).str())).str());
+    m_info.emplace_back(key, value);
     return *this;
   }
 
@@ -96,7 +99,7 @@ public:
     return add(key, value.str());
   }
 
-  std::vector<std::string> const &get() const {
+  verbose_info_t const &get() const {
     return m_info;
   }
 };

@@ -2283,9 +2283,9 @@ kax_reader_c::identify() {
     info.add(mtx::id::track_name,           track->track_name);
     info.add(mtx::id::stereo_mode,          static_cast<int>(track->v_stereo_mode), static_cast<int>(stereo_mode_c::unspecified));
     info.add(mtx::id::default_duration,     track->default_duration);
-    info.set(mtx::id::default_track,        track->default_track ? 1 : 0);
-    info.set(mtx::id::forced_track,         track->forced_track  ? 1 : 0);
-    info.set(mtx::id::enabled_track,        track->enabled_track ? 1 : 0);
+    info.set(mtx::id::default_track,        track->default_track ? true : false);
+    info.set(mtx::id::forced_track,         track->forced_track  ? true : false);
+    info.set(mtx::id::enabled_track,        track->enabled_track ? true : false);
 
     if ((0 != track->private_size) && track->private_data)
       info.add(mtx::id::codec_private_data, to_hex(static_cast<const unsigned char *>(track->private_data), track->private_size, true));
@@ -2310,7 +2310,7 @@ kax_reader_c::identify() {
 
     } else if ('s' == track->type) {
       if (track->codec.is(codec_c::type_e::S_SRT) || track->codec.is(codec_c::type_e::S_SSA_ASS) || track->codec.is(codec_c::type_e::S_KATE))
-        info.add(mtx::id::text_subtitles, 1);
+        info.add(mtx::id::text_subtitles, true);
     }
 
     if (track->content_decoder.has_encodings())

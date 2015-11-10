@@ -15,11 +15,11 @@
 #include "merge/id_result.h"
 #include "merge/output_control.h"
 
-void
-id_result_container_unsupported(std::string const &filename,
-                                translatable_string_c const &info) {
+static void
+output_container_unsupported_text(std::string const &filename,
+                                  translatable_string_c const &info) {
   if (g_identifying) {
-    if (g_identify_for_gui)
+    if (identification_output_format_e::gui == g_identification_output_format)
       mxinfo(boost::format("File '%1%': unsupported container: %2%\n") % filename % info);
     else
       mxinfo(boost::format(Y("File '%1%': unsupported container: %2%\n")) % filename % info);
@@ -27,4 +27,31 @@ id_result_container_unsupported(std::string const &filename,
 
   } else
     mxerror(boost::format(Y("The file '%1%' is a non-supported file type (%2%).\n")) % filename % info);
+}
+
+static void
+output_container_unsupported_json(std::string const &filename,
+                                  translatable_string_c const &info) {
+  auto json = nlohmann::json{
+    { "identification_format_version", 1                       },
+    { "file_name",                     filename                },
+    { "container", {
+        { "recognized", true                  },
+        { "supported",  false                 },
+        { "type",       info.get_translated() },
+      } },
+  };
+
+  mxinfo(boost::format("%1%\n") % json.dump(2));
+
+  mxexit(0);
+}
+
+void
+id_result_container_unsupported(std::string const &filename,
+                                translatable_string_c const &info) {
+  if (identification_output_format_e::json == g_identification_output_format)
+    output_container_unsupported_json(filename, info);
+  else
+    output_container_unsupported_text(filename, info);
 }

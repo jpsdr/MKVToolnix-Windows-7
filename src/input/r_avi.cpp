@@ -870,7 +870,7 @@ avi_reader_c::identify_video() {
 
   info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % AVI_video_width(m_avi) % AVI_video_height(m_avi));
 
-  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), join(" ", info.get()));
+  id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), info.get());
 }
 
 void
@@ -904,7 +904,7 @@ avi_reader_c::identify_subtitles() {
     auto info = mtx::id::info_c{};
     if (   (avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type)
         || (avi_subs_demuxer_t::TYPE_SSA == m_subtitle_demuxers[i].m_type))
-      info.add(mtx::id::text_subtitles, 1);
+      info.add(mtx::id::text_subtitles, true);
 
     id_result_track(1 + AVI_audio_tracks(m_avi) + i, ID_RESULT_TRACK_SUBTITLES,
                       avi_subs_demuxer_t::TYPE_SRT == m_subtitle_demuxers[i].m_type ? codec_c::get_name(codec_c::type_e::S_SRT, "SRT")

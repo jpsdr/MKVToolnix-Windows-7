@@ -97,7 +97,7 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c *in) {
 
 void
 mm_mpls_multi_file_io_c::create_verbose_identification_info(mtx::id::info_c &info) {
-  info.add(mtx::id::playlist,          1);
+  info.add(mtx::id::playlist,          true);
   info.add(mtx::id::playlist_duration, m_mpls_parser->get_playlist().duration.to_ns());
   info.add(mtx::id::playlist_size,     m_total_size);
   info.add(mtx::id::playlist_chapters, m_mpls_parser->get_chapters().size());

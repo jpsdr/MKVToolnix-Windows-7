@@ -726,7 +726,7 @@ ogm_reader_c::identify() {
       info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % sdemuxers[i]->display_width % sdemuxers[i]->display_height);
 
     if (dynamic_cast<ogm_s_text_demuxer_c *>(sdemuxers[i].get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(sdemuxers[i].get()))
-      info.add(mtx::id::text_subtitles, 1);
+      info.add(mtx::id::text_subtitles, true);
 
     auto pixel_dimensions = sdemuxers[i]->get_pixel_dimensions();
     if (pixel_dimensions.first && pixel_dimensions.second)

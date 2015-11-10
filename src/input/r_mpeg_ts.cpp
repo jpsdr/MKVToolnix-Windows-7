@@ -831,7 +831,7 @@ mpeg_ts_reader_c::identify() {
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);
 
     if (ES_SUBT_TYPE == track->type)
-      info.add(mtx::id::text_subtitles, 1);
+      info.add(mtx::id::text_subtitles, true);
 
     std::string type = ES_AUDIO_TYPE == track->type ? ID_RESULT_TRACK_AUDIO
                      : ES_VIDEO_TYPE == track->type ? ID_RESULT_TRACK_VIDEO

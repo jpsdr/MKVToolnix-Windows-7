@@ -114,9 +114,8 @@ float g_video_fps                           = -1.0;
 int g_default_tracks[3]                     = { 0, 0, 0, };
 int g_default_tracks_priority[3]            = { 0, 0, 0, };
 
-bool g_identifying                          = false;
-bool g_identify_verbose                     = false;
-bool g_identify_for_gui                     = false;
+bool g_identifying                                            = false;
+identification_output_format_e g_identification_output_format = identification_output_format_e::text;
 
 std::unique_ptr<KaxSegment> g_kax_segment;
 std::unique_ptr<KaxTracks> g_kax_tracks;

@@ -127,10 +127,8 @@ public:
 protected:
   virtual bool demuxing_requested(char type, int64_t id, std::string const &language = "");
 
-  virtual void id_result_container(const std::string &verbose_info = empty_string);
-  virtual void id_result_container(const std::vector<std::string> &verbose_info);
-  virtual void id_result_track(int64_t track_id, const std::string &type, const std::string &info, const std::string &verbose_info = empty_string);
-  virtual void id_result_track(int64_t track_id, const std::string &type, const std::string &info, const std::vector<std::string> &verbose_info);
+  virtual void id_result_container(mtx::id::verbose_info_t const &verbose_info = mtx::id::verbose_info_t{});
+  virtual void id_result_track(int64_t track_id, const std::string &type, const std::string &info, mtx::id::verbose_info_t const &verbose_info = mtx::id::verbose_info_t{});
   virtual void id_result_attachment(int64_t attachment_id, const std::string &type, int size, const std::string &file_name = empty_string, const std::string &description = empty_string,
                                     boost::optional<uint64_t> id = boost::optional<uint64_t>{});
   virtual void id_result_chapters(int num_entries);
@@ -139,6 +137,9 @@ protected:
   virtual std::string id_escape_string(const std::string &s);
 
   virtual mm_io_c *get_underlying_input() const;
+
+  virtual void display_identification_results_as_json();
+  virtual void display_identification_results_as_text();
 };
 
 #endif  // MTX_MERGE_GENERIC_READER_H

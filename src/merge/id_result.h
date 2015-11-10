@@ -16,6 +16,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/id_info.h"
+
 #define ID_RESULT_TRACK_AUDIO     "audio"
 #define ID_RESULT_TRACK_VIDEO     "video"
 #define ID_RESULT_TRACK_SUBTITLES "subtitles"
@@ -28,7 +30,7 @@
 struct id_result_t {
   int64_t id;
   std::string type, info, description;
-  std::vector<std::string> verbose_info;
+  mtx::id::verbose_info_t verbose_info;
   int64_t size;
 
   id_result_t() {
