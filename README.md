@@ -12,6 +12,15 @@ MKVToolNix 8.5.2
   5. Notes for compilation on (Open)Solaris
   6. Unit tests
 3. Reporting bugs
+4. Included libraries and their licenses
+  1. avilib
+  2. Boost's utf8_codecvt_facet
+  3. libEBML
+  4. libMatroska
+  5. librmff
+  6. nlohmann's JSON
+  7. pugixml
+  8. utf8-cpp
 
 -----------------
 
@@ -236,3 +245,70 @@ reproduce the issue. If they are larger than 1M then please upload
 them somewhere and post a link in the issue. You can also upload them
 to my FTP server. Details on how to connect can be found in the
 [MKVToolNix FAQ](https://github.com/mbunkus/mkvtoolnix/wiki/FTP-server).
+
+# 4. Included libraries and their licenses
+
+MKVToolNix includes and uses the following libraries:
+
+## 4.1. avilib
+
+Reading and writing avi files.
+
+Copyright (C) 1999 Rainer Johanni <Rainer@Johanni.de>, originally part
+of the transcode package.
+
+License: GNU General Public License v2
+URL: http://www.transcoding.org/
+
+## 4.2. Boost's utf8_codecvt_facet
+
+A class utf8_codecvt_facet, derived from std::codecvt<wchar_t, char>,
+which can be used to convert utf8 data in files into wchar_t strings
+in the application.
+
+License: Boost Software License - Version 1.0
+URL: http://www.boost.org
+
+## 4.3. libEBML
+
+a C++ libary to parse EBML files
+
+License: GNU Lesser General Public License v2.1
+URL: http://www.matroska.org/
+
+## 4.4. libMatroska
+
+a C++ libary to parse Matroska files
+
+License: GNU Lesser General Public License v2.1
+URL: http://www.matroska.org/
+
+## 4.5. librmff
+
+librmff is short for 'RealMedia file format access library'. It aims
+at providing the programmer an easy way to read and write RealMedia
+files.
+
+License: GNU Lesser General Public License v2.1
+URL: https://www.bunkus.org/videotools/librmff/index.html
+
+## 4.6. nlohmann's JSON
+
+JSON for Modern C++
+
+License: MIT
+URL: https://github.com/nlohmann/json
+
+## 4.7. pugixml
+
+an XML processing library
+
+License: MIT
+URL: http://pugixml.org/
+
+## 4.8. utf8-cpp
+
+UTF-8 with C++ in a Portable Way
+
+License: custom (see lib/utf8-cpp/source/utf8.hpp)
+URL: http://utfcpp.sourceforge.net/
