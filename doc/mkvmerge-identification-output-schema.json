@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json",
+  "title": "mkvmerge identification output",
+  "description": "The JSON output produced by mkvmerge's file identification mode",
+  "type": "object",
+  "required": [ "identification_format_version", "file_name", "container" ],
+  "properties": {
+    "identification_format_version": {
+      "description": "The output format's version",
+      "type": "integer",
+      "minimum": 1
+    },
+    "file_name": {
+      "description": "the identified file's name",
+      "type": "string"
+    },
+    "container": {
+      "description": "information about the identified container",
+      "type": "object",
+      "required": [ "recognized", "supported" ],
+      "properties": {
+        "recognized": {
+          "description": "States whether or not mkvmerge knows about the format",
+          "type": "boolean"
+        },
+        "supported": {
+          "description": "States whether or not mkvmerge can read the format",
+          "type": "boolean"
+        },
+        "type": {
+          "description": "A human-readable description/name for the container format",
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "description": "additional properties for the container varying by container format",
+          "type": "object",
+          "properties": {
+            "container_type": {
+              "description": "A unique number identifying the container type that's supposed to stay constant over all future releases of MKVToolNix",
+              "type": "integer",
+              "minimum": 0
+            },
+            "duration": {
+              "description": "The file's/segment's duration in nanoseconds",
+              "type": "integer",
+              "minimum": 0
+            },
+            "is_providing_timecodes": {
+              "description": "States whether or not the container has timestamps for the packets (e.g. Matroska, MP4) or not (e.g. SRT, MP3)",
+              "type": "boolean"
+            },
+            "segment_uid": {
+              "description": "A hexadecimal string of the segment's UID (only for Matroska files)",
+              "type": "string"
+            },
+            "next_segment_uid": {
+              "description": "A hexadecimal string of the next segment's UID (only for Matroska files)",
+              "type": "string"
+            },
+            "previous_segment_uid": {
+              "description": "A hexadecimal string of the previous segment's UID (only for Matroska files)",
+              "type": "string"
+            },
+            "playlist": {
+              "description": "States whether or not the identified file is a playlist (e.g. MPLS) referring to several other files",
+              "type": "boolean"
+            },
+            "playlist_chapters": {
+              "description": "The number of chapters in a playlist if it is a one",
+              "type": "integer"
+            },
+            "playlist_duration": {
+              "description": "The total duration in nanoseconds of all files referenced by the playlist if it is a one",
+              "type": "integer"
+            },
+            "playlist_size": {
+              "description": "The total size in bytes of all files referenced by the playlist if it is a one",
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  }
+}
