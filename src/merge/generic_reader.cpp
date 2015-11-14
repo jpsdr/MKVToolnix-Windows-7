@@ -320,7 +320,7 @@ generic_reader_c::display_identification_results_as_text() {
     auto formatter = boost::format{"%1%:%2%"};
 
     for (auto const &pair : info) {
-      auto value = pair.second.is_number()  ? to_string(pair.second.get<int64_t>())
+      auto value = pair.second.is_number()  ? to_string(pair.second.get<uint64_t>())
                  : pair.second.is_boolean() ? std::string{pair.second.get<bool>() ? "1" : "0"}
                  :                            pair.second.get<std::string>();
 
