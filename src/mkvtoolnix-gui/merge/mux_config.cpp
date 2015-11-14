@@ -439,15 +439,15 @@ MuxConfig::buildMkvmergeOptions()
       options << arg << value;
   };
 
-  add(Q("--title"), m_title, !m_title.isEmpty() || hasSourceFileWithTitle());
-  add(Q("--segment-uid"), m_segmentUIDs);
+  add(Q("--title"),            m_title, !m_title.isEmpty() || hasSourceFileWithTitle());
+  add(Q("--segment-uid"),      m_segmentUIDs);
   add(Q("--link-to-previous"), m_previousSegmentUID);
   add(Q("--link-to-next"),     m_nextSegmentUID);
-  add(Q("--segmentinfo"), m_segmentInfo);
+  add(Q("--segmentinfo"),      m_segmentInfo);
 
   if (!m_chapters.isEmpty()) {
-    add(Q("--chapter-language"), m_chapterLanguage);
-    add(Q("--chapter-charset"), m_chapterCharacterSet);
+    add(Q("--chapter-language"),        m_chapterLanguage);
+    add(Q("--chapter-charset"),         m_chapterCharacterSet);
     add(Q("--cue-chapter-name-format"), m_chapterCueNameFormat);
     options << Q("--chapters") << m_chapters;
   }
