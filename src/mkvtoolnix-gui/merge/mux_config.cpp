@@ -441,8 +441,8 @@ MuxConfig::buildMkvmergeOptions()
 
   add(Q("--title"), m_title, !m_title.isEmpty() || hasSourceFileWithTitle());
   add(Q("--segment-uid"), m_segmentUIDs);
-  add(Q("--previous-segment-uid"), m_previousSegmentUID);
-  add(Q("--next-segment-uid"), m_nextSegmentUID);
+  add(Q("--link-to-previous"), m_previousSegmentUID);
+  add(Q("--link-to-next"),     m_nextSegmentUID);
   add(Q("--segmentinfo"), m_segmentInfo);
 
   if (!m_chapters.isEmpty()) {
