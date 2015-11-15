@@ -816,10 +816,16 @@ void
 rerender_track_headers() {
   g_kax_tracks->UpdateSize(false);
 
+  auto position_before    = s_out->getFilePointer();
+  auto file_size_before   = s_out->get_size();
   auto new_tracks_end_pos = g_kax_tracks->GetElementPosition() + g_kax_tracks->ElementSize();
   auto data_start_pos     = s_void_after_track_headers->GetElementPosition() + s_void_after_track_headers->ElementSize(true);
-  auto data_size          = s_out->get_size() - data_start_pos;
+  auto data_size          = file_size_before - data_start_pos;
   auto new_void_size      = data_start_pos >= (new_tracks_end_pos + 4) ? data_start_pos - new_tracks_end_pos : 1024;
+
+  mxdebug_if(s_debug_rerender_track_headers,
+             boost::format("[rerender] track_headers: new_tracks_end_pos %1% data_start_pos %2% data_size %3% old void at %4% size %5% new_void_size %6%\n")
+             % new_tracks_end_pos % data_start_pos % data_size % s_void_after_track_headers->GetElementPosition() % s_void_after_track_headers->ElementSize(true) % new_void_size);
 
   if (data_size  && (new_tracks_end_pos >= (data_start_pos - 3))) {
     auto delta      = 1024 + new_tracks_end_pos - data_start_pos;
@@ -830,6 +836,11 @@ rerender_track_headers() {
   }
 
   shrink_void_and_rerender_track_headers(new_void_size);
+
+  mxdebug_if(s_debug_rerender_track_headers,
+             boost::format("[rerender] track_headers:   position_before %1% file_size_before %2% (diff %3%) position_after %4% file_size_after %5% (diff %6%) void now at %7% size %8%\n")
+             % position_before % file_size_before % (file_size_before - position_before) % s_out->getFilePointer() % s_out->get_size() % (s_out->get_size() - s_out->getFilePointer())
+             % s_void_after_track_headers->GetElementPosition() % s_void_after_track_headers->ElementSize(true));
 }
 
 /** \brief Render all attachments into the output file at the current position
