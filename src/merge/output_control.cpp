@@ -730,7 +730,7 @@ relocate_written_data(uint64_t data_start_pos,
   // end and starting to write from there won't work with most of the
   // mm_io_c-derived classes.
   s_out->save_pos(s_out->get_size());
-  auto dummy_data = std::make_unique<std::string>(to_relocate, '\0');
+  auto dummy_data = std::make_unique<std::string>(delta, '\0');
   s_out->write(dummy_data->c_str(), dummy_data->length());
   s_out->restore_pos();
 
