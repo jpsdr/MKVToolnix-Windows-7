@@ -56,11 +56,10 @@ export CXX=/opt/centos/devtoolset-1.1/root/usr/bin/g++
 export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 %endif
 
-%configure --prefix=%{_prefix} $EXTRA_CONFIGURE_ARGS
+%configure --enable-debug --enable-optimization $EXTRA_CONFIGURE_ARGS
 
 %build
 ./drake
-./drake apps:strip
 
 %install
 ./drake DESTDIR=$RPM_BUILD_ROOT install
