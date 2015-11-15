@@ -714,8 +714,7 @@ adjust_cue_and_seekhead_positions(uint64_t data_start_pos,
 static void
 relocate_written_data(uint64_t data_start_pos,
                       uint64_t delta) {
-  s_out->save_pos();
-
+  auto rel_pos_from_end = s_out->get_size() - s_out->getFilePointer();
   auto const block_size = 1024llu * 1024;
   auto to_relocate      = s_out->get_size() - data_start_pos;
   auto relocated        = 0llu;
@@ -723,8 +722,8 @@ relocate_written_data(uint64_t data_start_pos,
   auto buffer           = af_buffer->get_buffer();
 
   mxdebug_if(s_debug_rerender_track_headers,
-             boost::format("[rerender] relocate_written_data: void pos %1% void size %2% = data_start_pos %3% s_out size %4% delta %5% to_relocate %6%\n")
-             % s_void_after_track_headers->GetElementPosition() % s_void_after_track_headers->ElementSize(true) % data_start_pos % s_out->get_size() % delta % to_relocate);
+             boost::format("[rerender] relocate_written_data: void pos %1% void size %2% = data_start_pos %3% s_out size %4% delta %5% to_relocate %6% rel_pos_from_end %7%\n")
+             % s_void_after_track_headers->GetElementPosition() % s_void_after_track_headers->ElementSize(true) % data_start_pos % s_out->get_size() % delta % to_relocate % rel_pos_from_end);
 
   // Extend the file's size. Setting the file pointer to beyond the
   // end and starting to write from there won't work with most of the
@@ -755,10 +754,19 @@ relocate_written_data(uint64_t data_start_pos,
     relocated += to_copy;
   }
 
-  s_out->restore_pos();
+  if (s_kax_as) {
+    mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]  re-writing attachments; old position %1% new %2%\n") % s_kax_as->GetElementPosition() % (s_kax_as->GetElementPosition() + delta));
+    s_out->setFilePointer(s_kax_as->GetElementPosition() + delta);
+    s_kax_as->Render(*s_out);
+  }
 
-  if (s_out->getFilePointer() >= data_start_pos)
-    s_out->setFilePointer(delta, seek_current);
+  if (s_kax_chapters_void) {
+    mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]  re-writing chapter placeholder; old position %1% new %2%\n") % s_kax_chapters_void->GetElementPosition() % (s_kax_chapters_void->GetElementPosition() + delta));
+    s_out->setFilePointer(s_kax_chapters_void->GetElementPosition() + delta);
+    s_kax_chapters_void->Render(*s_out);
+  }
+
+  s_out->setFilePointer(rel_pos_from_end, seek_end);
 
   adjust_cue_and_seekhead_positions(data_start_pos, delta);
 }
