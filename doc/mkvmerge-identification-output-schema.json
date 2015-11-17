@@ -4,7 +4,11 @@
   "title": "mkvmerge identification output",
   "description": "The JSON output produced by mkvmerge's file identification mode",
   "type": "object",
-  "required": [ "identification_format_version", "file_name", "container" ],
+  "required": [
+    "identification_format_version",
+    "file_name",
+    "container"
+  ],
   "properties": {
     "identification_format_version": {
       "description": "The output format's version",
@@ -18,7 +22,10 @@
     "container": {
       "description": "information about the identified container",
       "type": "object",
-      "required": [ "recognized", "supported" ],
+      "required": [
+        "recognized",
+        "supported"
+      ],
       "properties": {
         "recognized": {
           "description": "States whether or not mkvmerge knows about the format",
@@ -78,6 +85,57 @@
             "playlist_size": {
               "description": "The total size in bytes of all files referenced by the playlist if it is a one",
               "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "attachments": {
+      "description": "an array describing the attachments found if any",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "file_name",
+          "properties",
+          "size"
+        ],
+        "properties": {
+          "content_type": {
+            "description": "The MIME type describing the content",
+            "type": "string"
+          },
+          "description": {
+            "description": "A human-readable description for easier differentiation",
+            "type": "string"
+          },
+          "file_name": {
+            "description": "A file name without a path component that other content like subtitles may use for referring to the attachment",
+            "type": "string"
+          },
+          "id": {
+            "description": "The ID this attachment is known by in mkvmerge and mkvextract",
+            "type": "integer",
+            "minimum": 0
+          },
+          "size": {
+            "description": "The content size in bytes",
+            "type": "integer",
+            "minimum": 0
+          },
+          "properties": {
+            "description": "additional properties for the attachment",
+            "type": "object",
+            "required": [
+              "uid"
+            ],
+            "properties": {
+              "uid": {
+                "description": "Unique ID representing the file, as random as possible",
+                "type": "integer",
+                "minimum": 0
+              }
             }
           }
         }
