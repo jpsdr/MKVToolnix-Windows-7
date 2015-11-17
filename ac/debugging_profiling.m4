@@ -39,7 +39,7 @@ if test x"$enable_optimization" = xyes; then
     opt_features_yes="$opt_features_yes\n   * compiler optimizations (-O1)"
     OPTIMIZATION_CFLAGS="-O1"
 
-  elif test "x$ac_cv_mingw32" = "xyes" -a "x$MINGW_PROCESSOR_ARCH" = "xx86"; then
+  elif test "x$ac_cv_mingw32" = "xyes" -a "x$MINGW_PROCESSOR_ARCH" = "xx86" && check_version 5.1.0 $ac_cv_gcc_version; then
     OPTIMIZATION_CFLAGS="-O2"
     opt_features_no="$opt_features_no\n   * full optimization: due to an issue in mingw g++ only -O2 will be used for optimization"
     opt_features_yes="$opt_features_yes\n   * compiler optimizations (-O2)"
