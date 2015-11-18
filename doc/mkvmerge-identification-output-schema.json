@@ -4,142 +4,210 @@
   "title": "mkvmerge identification output",
   "description": "The JSON output produced by mkvmerge's file identification mode",
   "type": "object",
-  "required": [
-    "identification_format_version",
-    "file_name",
-    "container"
-  ],
   "properties": {
-    "identification_format_version": {
-      "description": "The output format's version",
-      "type": "integer",
-      "minimum": 1
-    },
-    "file_name": {
-      "description": "the identified file's name",
-      "type": "string"
-    },
-    "container": {
-      "description": "information about the identified container",
-      "type": "object",
-      "required": [
-        "recognized",
-        "supported"
-      ],
-      "properties": {
-        "recognized": {
-          "description": "States whether or not mkvmerge knows about the format",
-          "type": "boolean"
-        },
-        "supported": {
-          "description": "States whether or not mkvmerge can read the format",
-          "type": "boolean"
-        },
-        "type": {
-          "description": "A human-readable description/name for the container format",
-          "type": "string",
-          "minLength": 1
-        },
-        "properties": {
-          "description": "additional properties for the container varying by container format",
-          "type": "object",
-          "properties": {
-            "container_type": {
-              "description": "A unique number identifying the container type that's supposed to stay constant over all future releases of MKVToolNix",
-              "type": "integer",
-              "minimum": 0
-            },
-            "duration": {
-              "description": "The file's/segment's duration in nanoseconds",
-              "type": "integer",
-              "minimum": 0
-            },
-            "is_providing_timecodes": {
-              "description": "States whether or not the container has timestamps for the packets (e.g. Matroska, MP4) or not (e.g. SRT, MP3)",
-              "type": "boolean"
-            },
-            "segment_uid": {
-              "description": "A hexadecimal string of the segment's UID (only for Matroska files)",
-              "type": "string"
-            },
-            "next_segment_uid": {
-              "description": "A hexadecimal string of the next segment's UID (only for Matroska files)",
-              "type": "string"
-            },
-            "previous_segment_uid": {
-              "description": "A hexadecimal string of the previous segment's UID (only for Matroska files)",
-              "type": "string"
-            },
-            "playlist": {
-              "description": "States whether or not the identified file is a playlist (e.g. MPLS) referring to several other files",
-              "type": "boolean"
-            },
-            "playlist_chapters": {
-              "description": "The number of chapters in a playlist if it is a one",
-              "type": "integer"
-            },
-            "playlist_duration": {
-              "description": "The total duration in nanoseconds of all files referenced by the playlist if it is a one",
-              "type": "integer"
-            },
-            "playlist_size": {
-              "description": "The total size in bytes of all files referenced by the playlist if it is a one",
-              "type": "integer"
-            }
-          }
-        }
-      }
-    },
     "attachments": {
       "description": "an array describing the attachments found if any",
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "id",
-          "file_name",
-          "properties",
-          "size"
-        ],
         "properties": {
-          "content_type": {
-            "description": "The MIME type describing the content",
-            "type": "string"
-          },
-          "description": {
-            "description": "A human-readable description for easier differentiation",
-            "type": "string"
-          },
-          "file_name": {
-            "description": "A file name without a path component that other content like subtitles may use for referring to the attachment",
-            "type": "string"
-          },
-          "id": {
-            "description": "The ID this attachment is known by in mkvmerge and mkvextract",
-            "type": "integer",
-            "minimum": 0
-          },
-          "size": {
-            "description": "The content size in bytes",
-            "type": "integer",
-            "minimum": 0
-          },
+          "type": "object",
           "properties": {
-            "description": "additional properties for the attachment",
-            "type": "object",
-            "required": [
-              "uid"
-            ],
-            "properties": {
-              "uid": {
-                "description": "Unique ID representing the file, as random as possible",
-                "type": "integer",
-                "minimum": 0
-              }
+            "uid": {
+              "type": "integer",
+              "minimum": 0
             }
-          }
+          },
+          "additionalProperties": false
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 0
         }
-      }
+      },
+      "additionalProperties": false,
+      "required": [
+        "file_name",
+        "id",
+        "properties",
+        "size"
+      ]
     }
+  },
+  "chapters": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "num_entries": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "num_entries"
+      ]
+    }
+  },
+  "container": {
+    "description": "information about the identified container",
+    "type": "object",
+    "properties": {
+      "properties": {
+        "description": "additional properties for the container varying by container format",
+        "type": "object",
+        "properties": {
+          "container_type": {
+            "description": "A unique number identifying the container type that's supposed to stay constant over all future releases of MKVToolNix",
+            "type": "integer",
+            "minLength": 1
+          },
+          "duration": {
+            "description": "The file's/segment's duration in nanoseconds",
+            "type": "integer",
+            "minimum": 0
+          },
+          "is_providing_timecodes": {
+            "description": "States whether or not the container has timestamps for the packets (e.g. Matroska, MP4) or not (e.g. SRT, MP3)",
+            "type": "boolean"
+          },
+          "segment_uid": {
+            "description": "A hexadecimal string of the segment's UID (only for Matroska files)",
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 32
+          },
+          "next_segment_uid": {
+            "description": "A hexadecimal string of the next segment's UID (only for Matroska files)",
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 32
+          },
+          "previous_segment_uid": {
+            "description": "A hexadecimal string of the previous segment's UID (only for Matroska files)",
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 32
+          },
+          "playlist": {
+            "description": "States whether or not the identified file is a playlist (e.g. MPLS) referring to several other files",
+            "type": "boolean"
+          },
+          "playlist_chapters": {
+            "description": "The number of chapters in a playlist if it is a one",
+            "type": "integer",
+            "minimum": 0
+          },
+          "playlist_duration": {
+            "description": "The total duration in nanoseconds of all files referenced by the playlist if it is a one",
+            "type": "integer",
+            "minimum": 0
+          },
+          "playlist_size": {
+            "description": "The total size in bytes of all files referenced by the playlist if it is a one",
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      },
+      "recognized": {
+        "description": "States whether or not mkvmerge knows about the format",
+        "type": "boolean"
+      },
+      "supported": {
+        "description": "States whether or not mkvmerge can read the format",
+        "type": "boolean"
+      },
+      "type": {
+        "description": "A human-readable description/name for the container format",
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "recognized",
+      "supported"
+    ]
+  },
+  "file_name": {
+    "description": "the identified file's name",
+    "type": "string",
+    "minLength": 1
+  },
+  "global_tags": {
+    "type": "array",
+    "items": {
+    }
+  },
+  "identification_format_version": {
+    "description": "The output format's version",
+    "type": "integer",
+    "minimum": 1
+  },
+  "track_tags": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "num_entries": {
+          "type": "integer"
+        },
+        "track_id": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "num_entries",
+        "track_id"
+      ]
+    }
+  },
+  "tracks": {
+    "type": "array",
+    "items": {
+      "type": {
+        "type": "string"
+      },
+      "properties": {
+        "type": "object",
+        "properties": {
+          "codec_id": {
+            "type": "string"
+          },
+          "codec_private_data": {
+            "type": "string"
+          },
+          "codec_private_length": {
+            "type": "integer"
+          },
+          "default_track": {
+            "type": "boolean"
+          },
+          "enabled_track": {
+            "type": "boolean"
+          },
+          "forced_track": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "text_subtitles": {
+            "type": "boolean"
+          },
+          "uid": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "additionalProperties": false
   }
 }
