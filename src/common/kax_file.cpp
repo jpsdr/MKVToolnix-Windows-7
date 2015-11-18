@@ -18,7 +18,6 @@
 #include <ebml/EbmlCrc32.h>
 #include <ebml/EbmlStream.h>
 #include <ebml/EbmlVoid.h>
-#include <ebml/StdIOCallback.h>
 
 #include "common/ebml.h"
 #include "common/fs_sys_helpers.h"
@@ -154,8 +153,8 @@ kax_file_c::read_one_element() {
   try {
     l1->Read(*m_es.get(), EBML_INFO_CONTEXT(*callbacks), upper_lvl_el, l2, true);
 
-  } catch (libebml::CRTError &e) {
-    mxdebug_if(m_debug_resync, boost::format("exception reading element data: %1% (%2%)\n") % e.what() % e.getError());
+  } catch (std::runtime_error &e) {
+    mxdebug_if(m_debug_resync, boost::format("exception reading element data: %1%\n") % e.what());
     m_in->setFilePointer(l1->GetElementPosition() + 1);
     delete l1;
     return nullptr;
