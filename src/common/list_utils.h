@@ -80,7 +80,7 @@ none_of(std::function<bool(T const &)> pred,
 template<typename T>
 boost::optional<T>
 first_of(std::function<bool(T const &)> pred,
-       T const &val) {
+         T const &val) {
   return pred(val) ? val : boost::optional<T>{};
 }
 
@@ -88,8 +88,8 @@ template<typename T,
          typename... Trest>
 boost::optional<T>
 first_of(std::function<bool(T const &)> pred,
-       T const &val,
-       Trest... rest) {
+         T const &val,
+         Trest... rest) {
   return pred(val) ? val : first_of(pred, rest...);
 }
 
