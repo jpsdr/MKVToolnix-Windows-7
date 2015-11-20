@@ -856,24 +856,12 @@ kax_analyzer_c::write_element(EbmlElement *e,
   adjust_segment_size();
 }
 
-/** \brief Adds an element to one of the meta seek entries
 
-    This function iterates over all meta seek elements and looks
-    for one that has enough space (via following EbmlVoid elements or
-    because it is located at the end of the m_file) for indexing
-    the element \c e.
+std::pair<bool, int>
+kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
+  auto first_seek_head_idx = -1;
 
-    If no such element is found then a new meta seek element is
-    created at an appropriate place, and that element is indexed.
-
-    \param e Pointer to the element to index.
- */
-void
-kax_analyzer_c::add_to_meta_seek(EbmlElement *e) {
-  size_t data_idx;
-  int first_seek_head_idx = -1;
-
-  for (data_idx = 0; m_data.size() > data_idx; ++data_idx) {
+  for (auto data_idx = 0u; m_data.size() > data_idx; ++data_idx) {
     // We only have to do work on SeekHead elements. Skip the others.
     if (!Is<KaxSeekHead>(m_data[data_idx]->m_id))
       continue;
@@ -920,60 +908,59 @@ kax_analyzer_c::add_to_meta_seek(EbmlElement *e) {
       handle_void_elements(data_idx);
 
     // We're done.
-    return;
+    return { true, first_seek_head_idx };
   }
 
-  // No suitable meta seek head found -- we have to write a new one.
+  return { false, first_seek_head_idx };
+}
 
-  // If we have found a prior seek head then we copy that one to the end
-  // of the m_file including the newly indexed element and write a one-element
-  // seek head at the first meta seek's position pointing to the one at the
-  // end.
-  if (-1 != first_seek_head_idx) {
-    // Read the first seek head...
-    ebml_element_cptr element = read_element(first_seek_head_idx);
-    KaxSeekHead *seek_head    = dynamic_cast<KaxSeekHead *>(element.get());
-    if (!seek_head)
-      throw uer_error_unknown;
+void
+kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e,
+                                                                  int first_seek_head_idx) {
+  // Read the first seek head...
+  ebml_element_cptr element = read_element(first_seek_head_idx);
+  KaxSeekHead *seek_head    = dynamic_cast<KaxSeekHead *>(element.get());
+  if (!seek_head)
+    throw uer_error_unknown;
 
-    // ...index our element...
-    seek_head->IndexThis(*e, *m_segment.get());
-    seek_head->UpdateSize(true);
+  // ...index our element...
+  seek_head->IndexThis(*e, *m_segment.get());
+  seek_head->UpdateSize(true);
 
-    // ...write the seek head at the end of the m_file...
-    m_file->setFilePointer(0, seek_end);
-    seek_head->Render(*m_file, true);
+  // ...write the seek head at the end of the m_file...
+  m_file->setFilePointer(0, seek_end);
+  seek_head->Render(*m_file, true);
 
-    // ...and update the internal records.
-    m_data.push_back(kax_analyzer_data_c::create(EBML_ID(KaxSeekHead), seek_head->GetElementPosition(), seek_head->ElementSize(true)));
+  // ...and update the internal records.
+  m_data.push_back(kax_analyzer_data_c::create(EBML_ID(KaxSeekHead), seek_head->GetElementPosition(), seek_head->ElementSize(true)));
 
-    // Update the m_segment size.
-    adjust_segment_size();
+  // Update the m_segment size.
+  adjust_segment_size();
 
-    // Create a new seek head and write it to the m_file.
-    std::shared_ptr<KaxSeekHead> forward_seek_head(new KaxSeekHead);
-    forward_seek_head->IndexThis(*seek_head, *m_segment.get());
-    forward_seek_head->UpdateSize(true);
+  // Create a new seek head and write it to the m_file.
+  std::shared_ptr<KaxSeekHead> forward_seek_head(new KaxSeekHead);
+  forward_seek_head->IndexThis(*seek_head, *m_segment.get());
+  forward_seek_head->UpdateSize(true);
 
-    m_file->setFilePointer(m_data[first_seek_head_idx]->m_pos);
-    forward_seek_head->Render(*m_file, true);
+  m_file->setFilePointer(m_data[first_seek_head_idx]->m_pos);
+  forward_seek_head->Render(*m_file, true);
 
-    // Update the internal record to reflect that there's a new seek head.
-    m_data[first_seek_head_idx]->m_size = forward_seek_head->ElementSize(true);
+  // Update the internal record to reflect that there's a new seek head.
+  m_data[first_seek_head_idx]->m_size = forward_seek_head->ElementSize(true);
 
-    // Create a void element behind the small new first seek head.
-    handle_void_elements(first_seek_head_idx);
+  // Create a void element behind the small new first seek head.
+  handle_void_elements(first_seek_head_idx);
 
-    // We're done.
-    return;
-  }
+  // We're done.
+}
 
-  // We don't have a seek head to copy. Create one before the first chapter if possible.
-  std::shared_ptr<KaxSeekHead> new_seek_head(new KaxSeekHead);
+bool
+kax_analyzer_c::create_new_meta_seek_at_start(EbmlElement *e) {
+  auto new_seek_head = std::make_shared<KaxSeekHead>();
   new_seek_head->IndexThis(*e, *m_segment.get());
   new_seek_head->UpdateSize(true);
 
-  for (data_idx = 0; m_data.size() > data_idx; ++data_idx) {
+  for (auto data_idx = 0u; m_data.size() > data_idx; ++data_idx) {
     // We can only overwrite void elements. Skip the others.
     if (!Is<EbmlVoid>(m_data[data_idx]->m_id))
       continue;
@@ -995,8 +982,46 @@ kax_analyzer_c::add_to_meta_seek(EbmlElement *e) {
     handle_void_elements(data_idx);
 
     // We're done.
+    return true;
+  }
+
+  return false;
+}
+
+/** \brief Adds an element to one of the meta seek entries
+
+    This function iterates over all meta seek elements and looks
+    for one that has enough space (via following EbmlVoid elements or
+    because it is located at the end of the m_file) for indexing
+    the element \c e.
+
+    If no such element is found then a new meta seek element is
+    created at an appropriate place, and that element is indexed.
+
+    \param e Pointer to the element to index.
+ */
+void
+kax_analyzer_c::add_to_meta_seek(EbmlElement *e) {
+  auto result = try_adding_to_existing_meta_seek(e);
+
+  if (result.first)
+    return;
+
+  // No suitable meta seek head found -- we have to write a new one.
+
+  // If we have found a prior seek head then we copy that one to the end
+  // of the m_file including the newly indexed element and write a one-element
+  // seek head at the first meta seek's position pointing to the one at the
+  // end.
+
+  if (-1 != result.second) {
+    move_seek_head_to_end_and_create_new_one_at_start(e, result.second);
     return;
   }
+
+  // We don't have a seek head to copy. Create one before the first chapter if possible.
+  if (create_new_meta_seek_at_start(e))
+    return;
 
   // We cannot write a seek head before the first cluster. This is not supported at the moment.
   throw uer_error_not_indexable;

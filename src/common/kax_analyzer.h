@@ -179,6 +179,9 @@ protected:
   virtual void merge_void_elements();
   virtual void write_element(EbmlElement *e, bool write_defaults, placement_strategy_e strategy);
   virtual void add_to_meta_seek(EbmlElement *e);
+  virtual std::pair<bool, int> try_adding_to_existing_meta_seek(EbmlElement *e);
+  virtual void move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e, int first_seek_head_idx);
+  virtual bool create_new_meta_seek_at_start(EbmlElement *e);
 
   virtual void adjust_segment_size();
   virtual bool handle_void_elements(size_t data_idx);
