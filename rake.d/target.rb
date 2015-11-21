@@ -150,8 +150,8 @@ class Target
       when :mtxextract       then [ '-Lsrc/extract',    '-lmtxextract'  ]
       when :mtxpropedit      then [ '-Lsrc/propedit',   '-lmtxpropedit' ]
       when :mtxunittest      then [ '-Ltests/unit',     '-lmtxunittest' ]
-      when :ebml             then '-lebml'
-      when :matroska         then '-lmatroska'
+      when :ebml             then c(:EBML_LIBS,     '-lebml')
+      when :matroska         then c(:MATROSKA_LIBS, '-lmatroska')
       when String            then entry
       else                        "-l#{entry}"
       end

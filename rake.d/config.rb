@@ -8,10 +8,12 @@ def read_config
   $config.default = ''
 end
 
-def c(idx)
+def c(idx, default = '')
   idx_s = idx.to_s
   var   = (ENV[idx_s].nil? ? $config[idx.to_sym] : ENV[idx_s]).to_s
-  var.gsub(/\$[\({](.*?)[\)}]/) { c($1) }.gsub(/^\s+/, '').gsub(/\s+$/, '')
+  var   = var.gsub(/\$[\({](.*?)[\)}]/) { c($1) }.gsub(/^\s+/, '').gsub(/\s+$/, '')
+
+  var.empty? ? default : var
 end
 
 def c?(idx)
