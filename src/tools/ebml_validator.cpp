@@ -288,7 +288,11 @@ parse_content(int level,
 
       if (size.is_unknown()) {
         mxinfo(boost::format(Y("%1%  Warning: size is coded as 'unknown' (all bits are set)\n")) % level_string(level));
-        g_warnings_found = true;
+
+        // In Matroska segments often have an unknown size – so don't
+        // warn about it.
+        if (element_name != "Segment")
+          g_warnings_found = true;
       }
 
       int64_t content_end_pos = size.is_unknown() ? end_pos : g_in->getFilePointer() + size.value;
