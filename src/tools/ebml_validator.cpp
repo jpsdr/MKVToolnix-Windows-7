@@ -291,7 +291,7 @@ parse_content(int level,
         g_warnings_found = true;
       }
 
-      int64_t content_end_pos = g_in->getFilePointer() + size.value;
+      int64_t content_end_pos = size.is_unknown() ? end_pos : g_in->getFilePointer() + size.value;
 
       if (content_end_pos > end_pos) {
         mxinfo(boost::format(Y("%1%  Error: Element ends after scope\n")) % level_string(level));
