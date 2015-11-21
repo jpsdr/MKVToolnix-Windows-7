@@ -92,10 +92,6 @@ ValuePage::init() {
 
   // ----------------------------------------------------------------------
 
-  auto statusLayout = new QVBoxLayout{};
-  statusLayout->addWidget(m_lStatus);
-  statusLayout->addWidget(m_cbAddOrRemove);
-
   auto row        = 0;
   auto gridLayout = new QGridLayout{};
   gridLayout->addWidget(m_lTypeLabel,            row,   0, 1, 1);
@@ -107,7 +103,9 @@ ValuePage::init() {
   }
 
   gridLayout->addWidget(m_lStatusLabel,          row,   0, 1, 1, Qt::AlignTop);
-  gridLayout->addLayout(statusLayout,            row++, 1, 1, 1, Qt::AlignTop);
+  gridLayout->addWidget(m_lStatus,               row++, 1, 1, 1, Qt::AlignTop);
+
+  gridLayout->addWidget(m_cbAddOrRemove,         row++, 1, 1, 1, Qt::AlignTop);
 
   if (m_present) {
     gridLayout->addWidget(m_lOriginalValueLabel, row,   0, 1, 1);
