@@ -26,6 +26,7 @@
 #include "common/bitvalue.h"
 #include "common/ebml.h"
 #include "common/error.h"
+#include "common/list_utils.h"
 #include "common/kax_analyzer.h"
 #include "common/mm_io_x.h"
 #include "common/strings/editing.h"
@@ -988,6 +989,70 @@ kax_analyzer_c::create_new_meta_seek_at_start(EbmlElement *e) {
   return false;
 }
 
+bool
+kax_analyzer_c::move_level1_element_before_cluster_to_end_of_file() {
+  auto candidates_for_moving = std::vector<std::pair<int, unsigned int> >{};
+
+  for (auto data_idx = 0u; m_data.size() > data_idx; ++data_idx) {
+    auto const &id = m_data[data_idx]->m_id;
+
+    if (Is<KaxCluster>(id))
+      break;
+
+    if (mtx::included_in(id, EBML_ID(KaxAttachments)))
+      candidates_for_moving.emplace_back(10, data_idx);
+
+    else if (id == EBML_ID(KaxTracks))
+      candidates_for_moving.emplace_back(20, data_idx);
+
+    else if (id == EBML_ID(KaxInfo))
+      candidates_for_moving.emplace_back(30, data_idx);
+  }
+
+  // Have we found at least one suitable element before the first
+  // cluster? If not bail out.
+  if (candidates_for_moving.empty())
+    return false;
+
+  // Sort by their importance first and position second. Lower
+  // importance means the element is more likely to be moved.
+  brng::sort(candidates_for_moving);
+
+  auto const to_move_idx = candidates_for_moving.front().second;
+  auto const &to_move    = *m_data[to_move_idx];
+
+  mxdebug_if(m_debugging_requested, boost::format("Moving level 1 at index %1% to the end (%2%)\n") % to_move_idx % to_move.to_string());
+
+  // We read the element and write it again at the end of the file.
+  m_file->setFilePointer(to_move.m_pos);
+  auto buf = m_file->read(to_move.m_size);
+
+  m_file->setFilePointer(0, seek_end);
+  auto position = m_file->getFilePointer();
+
+  m_file->write(buf);
+
+  // Update the internal records.
+  m_data.push_back(kax_analyzer_data_c::create(to_move.m_id, position, to_move.m_size));
+
+  // Overwrite with a void element.
+  m_data[to_move_idx]->m_size = 0;
+  handle_void_elements(to_move_idx);
+
+  debug_dump_elements_maybe("move_level1_element_before_cluster_to_end_of_file");
+
+  verify_data_structures_against_file("move_level1_element_before_cluster_to_end_of_file");
+
+  // And add it to a meta seek element.
+  auto e = read_element(m_data.size() - 1);
+  if (!e)
+    throw uer_error_unknown;
+
+  add_to_meta_seek(e.get());
+
+  return true;
+}
+
 /** \brief Adds an element to one of the meta seek entries
 
     This function iterates over all meta seek elements and looks
@@ -1023,7 +1088,15 @@ kax_analyzer_c::add_to_meta_seek(EbmlElement *e) {
   if (create_new_meta_seek_at_start(e))
     return;
 
-  // We cannot write a seek head before the first cluster. This is not supported at the moment.
+  // We haven't found a place for the new seek head before the first
+  // cluster. Therefore we must try to move an existing level 1
+  // element to the end of the file first.
+  if (move_level1_element_before_cluster_to_end_of_file()) {
+    add_to_meta_seek(e);
+    return;
+  }
+
+  // This is not supported at the moment.
   throw uer_error_not_indexable;
 }
 
