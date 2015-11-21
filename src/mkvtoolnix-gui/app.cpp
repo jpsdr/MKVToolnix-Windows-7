@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QLibraryInfo>
 #include <QLocalServer>
 #include <QLocalSocket>
@@ -48,6 +49,8 @@ App::App(int &argc,
 #ifdef SYS_WINDOWS
   QApplication::setStyle(Q("windowsvista"));
 #endif
+
+  QDir::setCurrent(QDir::homePath());
 
   Util::Settings::migrateFromRegistry();
   Util::Settings::get().load();

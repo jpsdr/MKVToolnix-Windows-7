@@ -1,5 +1,10 @@
 2015-11-21  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: bug fix: the program changes its working
+        directory to the user's profile/home directory on startup allowing
+        the removal of its installation folder even if a program started
+        by the GUI (e.g. a web browser) is still running. Fixes #1518.
+
         * ebml_validator: bug fix: elements with an unknown size weren't
         handled correctly.
 
