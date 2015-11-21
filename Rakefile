@@ -176,6 +176,10 @@ def define_default_task
   # The Qt translation files: only for Windows
   targets << "translations:qt" if c?(:MINGW) && !c(:LCONVERT).blank?
 
+  # Build ebml_validator by default when not cross-compiling as it is
+  # needed for running the tests.
+  targets << "apps:tools:ebml_validator" if c(:host) == c(:build)
+
   task :default => targets do
     puts "Done. Enjoy :)"
   end
