@@ -125,6 +125,7 @@ public:
     return read_element(m_data[pos]);
   }
 
+  virtual void with_elements(const EbmlId &id, std::function<void(kax_analyzer_data_c const &)> worker) const;
   virtual int find(const EbmlId &id) {
     unsigned int i;
 

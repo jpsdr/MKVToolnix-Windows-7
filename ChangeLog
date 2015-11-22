@@ -1,3 +1,11 @@
+2015-11-22  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: enhancement: if no seek head is found before the first
+        cluster when reading Matroska files then mkvmerge will attempt a
+        deeper scan of all elements in the file in order to find track
+        headers, attachments, chapters and tags located at the end of the
+        file. See #1513 for the rationale.
+
 2015-11-21  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: header editor bug fix: the "status" description

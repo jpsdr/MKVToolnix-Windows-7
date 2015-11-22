@@ -46,11 +46,13 @@
 #include "common/at_scope_exit.h"
 #include "common/chapters/chapters.h"
 #include "common/codec.h"
+#include "common/debugging.h"
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/hacks.h"
 #include "common/iso639.h"
 #include "common/ivf.h"
+#include "common/kax_analyzer.h"
 #include "common/mm_io.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -1202,6 +1204,25 @@ kax_reader_c::read_headers() {
 }
 
 void
+kax_reader_c::find_level1_elements_via_analyzer() {
+  try {
+    auto analyzer = std::make_shared<kax_analyzer_c>(m_in.get());
+    auto ok       = analyzer->process(kax_analyzer_c::parse_mode_fast, MODE_READ, true);
+
+    if (!ok)
+      return;
+
+    analyzer->with_elements(EBML_ID(KaxInfo),        [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_info       ].push_back(data.m_pos); });
+    analyzer->with_elements(EBML_ID(KaxTracks),      [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_tracks     ].push_back(data.m_pos); });
+    analyzer->with_elements(EBML_ID(KaxAttachments), [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_attachments].push_back(data.m_pos); });
+    analyzer->with_elements(EBML_ID(KaxChapters),    [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_chapters   ].push_back(data.m_pos); });
+    analyzer->with_elements(EBML_ID(KaxTags),        [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_tags       ].push_back(data.m_pos); });
+
+  } catch (...) {
+  }
+}
+
+void
 kax_reader_c::read_deferred_level1_elements(KaxSegment &segment) {
   for (auto position : m_deferred_l1_positions[dl1t_info])
     read_headers_info(m_in.get(), &segment, position);
@@ -1332,6 +1353,8 @@ kax_reader_c::read_headers_internal() {
 
     } // while (l1)
 
+    if (m_handled_l1_positions[dl1t_seek_head].empty() || debugging_c::requested("kax_reader_use_analyzer"))
+      find_level1_elements_via_analyzer();
 
     read_deferred_level1_elements(static_cast<KaxSegment &>(*l0));
 

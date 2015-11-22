@@ -292,6 +292,7 @@ protected:
   virtual void read_headers_tracks(mm_io_c *io, EbmlElement *l0, int64_t position);
   virtual bool read_headers_internal();
   virtual void read_deferred_level1_elements(KaxSegment &segment);
+  virtual void find_level1_elements_via_analyzer();
 
   virtual void process_simple_block(KaxCluster *cluster, KaxSimpleBlock *block_simple);
   virtual void process_block_group(KaxCluster *cluster, KaxBlockGroup *block_group);

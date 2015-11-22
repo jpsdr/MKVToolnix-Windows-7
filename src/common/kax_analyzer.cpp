@@ -208,9 +208,14 @@ kax_analyzer_c::process(kax_analyzer_c::parse_mode_e parse_mode,
                         const open_mode mode,
                         bool throw_on_error) {
   try {
-    return process_internal(parse_mode, mode);
+    auto result = process_internal(parse_mode, mode);
+    mxdebug_if(m_debug, boost::format("kax_analyzer: parsing file '%1%' result %2%\n") % m_file->get_file_name() % result);
+
+    return result;
 
   } catch (...) {
+    mxdebug_if(m_debug, boost::format("kax_analyzer: parsing file '%1%' failed with an exception\n") % m_file->get_file_name());
+
     if (throw_on_error)
       throw;
     return false;
@@ -1271,6 +1276,15 @@ kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
   }
 
   throw mtx::kax_analyzer_x{boost::format(Y("No segment UID could be found in the file '%1%'.")) % file_name};
+}
+
+void
+kax_analyzer_c::with_elements(const EbmlId &id,
+                              std::function<void(kax_analyzer_data_c const &)> worker)
+  const {
+  for (auto const &data : m_data)
+    if (data->m_id == id)
+      worker(*data);
 }
 
 // ------------------------------------------------------------
