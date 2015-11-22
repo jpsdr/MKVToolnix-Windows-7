@@ -100,7 +100,7 @@ private:
   std::shared_ptr<KaxSegment> m_segment;
   std::map<int64_t, bool> m_meta_seeks_by_position;
   EbmlStream *m_stream;
-  debugging_option_c m_debugging_requested;
+  debugging_option_c m_debug;
 
 public:                         // Static functions
   static bool probe(std::string file_name);

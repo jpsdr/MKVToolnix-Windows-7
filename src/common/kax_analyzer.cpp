@@ -68,7 +68,7 @@ kax_analyzer_c::kax_analyzer_c(std::string file_name)
   , m_file(nullptr)
   , m_close_file(true)
   , m_stream(nullptr)
-  , m_debugging_requested{"kax_analyzer"}
+  , m_debug{"kax_analyzer"}
 {
 }
 
@@ -77,7 +77,7 @@ kax_analyzer_c::kax_analyzer_c(mm_io_c *file)
   , m_file(file)
   , m_close_file(false)
   , m_stream(nullptr)
-  , m_debugging_requested{"kax_analyzer"}
+  , m_debug{"kax_analyzer"}
 {
 }
 
@@ -112,7 +112,7 @@ kax_analyzer_c::_log_debug_message(const std::string &message) {
 
 bool
 kax_analyzer_c::analyzer_debugging_requested(const std::string &section) {
-  return m_debugging_requested || debugging_c::requested(std::string("kax_analyzer_") + section);
+  return m_debug || debugging_c::requested(std::string("kax_analyzer_") + section);
 }
 
 void
@@ -365,7 +365,7 @@ kax_analyzer_c::update_element(EbmlElement *e,
     return result;
 
   } catch (mtx::mm_io::exception &ex) {
-    mxdebug_if(m_debugging_requested, boost::format("I/O exception: %1%\n") % ex.what());
+    mxdebug_if(m_debug, boost::format("I/O exception: %1%\n") % ex.what());
     return uer_error_unknown;
   }
 
@@ -1021,7 +1021,7 @@ kax_analyzer_c::move_level1_element_before_cluster_to_end_of_file() {
   auto const to_move_idx = candidates_for_moving.front().second;
   auto const &to_move    = *m_data[to_move_idx];
 
-  mxdebug_if(m_debugging_requested, boost::format("Moving level 1 at index %1% to the end (%2%)\n") % to_move_idx % to_move.to_string());
+  mxdebug_if(m_debug, boost::format("Moving level 1 at index %1% to the end (%2%)\n") % to_move_idx % to_move.to_string());
 
   // We read the element and write it again at the end of the file.
   m_file->setFilePointer(to_move.m_pos);
