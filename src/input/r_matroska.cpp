@@ -2334,6 +2334,7 @@ kax_reader_c::identify() {
     if ('a' == track->type) {
       info.add(mtx::id::audio_sampling_frequency, static_cast<int64_t>(track->a_sfreq));
       info.add(mtx::id::audio_channels,           track->a_channels);
+      info.add(mtx::id::audio_bits_per_sample,    track->a_bps);
 
     } else if ('s' == track->type) {
       if (track->codec.is(codec_c::type_e::S_SRT) || track->codec.is(codec_c::type_e::S_SSA_ASS) || track->codec.is(codec_c::type_e::S_KATE))

@@ -1,5 +1,9 @@
 2015-11-22  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: a track's number of bits per audio sample
+        wasn't output in verbose identification mode even if it was
+        present in the file.
+
         * mkvmerge: enhancement: if no seek head is found before the first
         cluster when reading Matroska files then mkvmerge will attempt a
         deeper scan of all elements in the file in order to find track
