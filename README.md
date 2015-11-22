@@ -46,7 +46,7 @@ Eduard Geier. They're licensed under the terms of the
 [Creative Commons Attribution 3.0 Unported license](http://creativecommons.org/licenses/by/3.0/).
 
 The newest version can always be found at
-https://www.bunkus.org/videotools/mkvtoolnix/
+https://mkvtoolnix.download/
 
 Moritz Bunkus <moritz@bunkus.org>
 
@@ -143,7 +143,7 @@ user and lastly `make install` as root.
 ## 2.4. Building MKVtoolNix
 
 Either download the current release from
-[the MKVToolNix home page](https://www.bunkus.org/videotools/mkvtoolnix/)
+[the MKVToolNix home page](https://mkvtoolnix.download/)
 and unpack it or get a development snapshot from my Git repository.
 
 ### 2.4.1. Getting and building a development snapshot

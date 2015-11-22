@@ -18,10 +18,10 @@
 
 #include "common/xml/xml.h"
 
-#define MTX_VERSION_CHECK_URL "http://mkvtoolnix-releases.bunkus.org/latest-release.xml"
-#define MTX_RELEASES_INFO_URL "http://mkvtoolnix-releases.bunkus.org/releases.xml"
-#define MTX_DOWNLOAD_URL      "https://www.bunkus.org/videotools/mkvtoolnix/downloads.html"
-#define MTX_CHANGELOG_URL     "http://mkvtoolnix-releases.bunkus.org/doc/ChangeLog"
+#define MTX_VERSION_CHECK_URL "https://mkvtoolnix.download/latest-release.xml"
+#define MTX_RELEASES_INFO_URL "https://mkvtoolnix.download/releases.xml"
+#define MTX_DOWNLOAD_URL      "https://mkvtoolnix.download/downloads.html"
+#define MTX_CHANGELOG_URL     "https://mkvtoolnix.download/doc/ChangeLog"
 
 struct version_number_t {
   unsigned int parts[5];

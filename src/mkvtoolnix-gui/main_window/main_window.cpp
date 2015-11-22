@@ -189,8 +189,8 @@ void
 MainWindow::setupHelpURLs() {
   m_helpURLs[ui->actionHelpFAQ]                   = "https://github.com/mbunkus/mkvtoolnix/wiki";
   m_helpURLs[ui->actionHelpKnownProblems]         = "https://github.com/mbunkus/mkvtoolnix/wiki/Troubleshooting";
-  m_helpURLs[ui->actionHelpMkvmergeDocumentation] = "https://www.bunkus.org/videotools/mkvtoolnix/doc/mkvmerge.html";
-  m_helpURLs[ui->actionHelpWebSite]               = "https://www.bunkus.org/videotools/mkvtoolnix/";
+  m_helpURLs[ui->actionHelpMkvmergeDocumentation] = "https://mkvtoolnix.download/doc/mkvmerge.html";
+  m_helpURLs[ui->actionHelpWebSite]               = "https://mkvtoolnix.download/";
   m_helpURLs[ui->actionHelpReportBug]             = "https://github.com/mbunkus/mkvtoolnix/issues/";
 }
 
