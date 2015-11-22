@@ -116,7 +116,7 @@ in @ref array_t)
 default; will be used in @ref string_t)
 @tparam BooleanType type for JSON booleans (@c `bool` by default; will be used
 in @ref boolean_t)
-@tparam NumberIntegerType type for JSON integer numbers (@c `int64_t` by
+@tparam NumberIntegerType type for JSON integer numbers (@c `uint64_t` by
 default; will be used in @ref number_integer_t)
 @tparam NumberFloatType type for JSON floating-point numbers (@c `double` by
 default; will be used in @ref number_float_t)
@@ -174,7 +174,7 @@ template <
     template<typename U, typename... Args> class ArrayType = std::vector,
     class StringType = std::string,
     class BooleanType = bool,
-    class NumberIntegerType = int64_t,
+    class NumberIntegerType = uint64_t,
     class NumberFloatType = double,
     template<typename U> class AllocatorType = std::allocator
     >
@@ -454,11 +454,11 @@ class basic_json
 
     #### Default type
 
-    With the default values for @a NumberIntegerType (`int64_t`), the default
+    With the default values for @a NumberIntegerType (`uint64_t`), the default
     value for @a number_integer_t is:
 
     @code {.cpp}
-    int64_t
+    uint64_t
     @endcode
 
     #### Default behavior
