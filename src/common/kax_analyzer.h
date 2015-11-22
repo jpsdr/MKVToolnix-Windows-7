@@ -95,7 +95,7 @@ public:
 
 private:
   std::string m_file_name;
-  mm_file_io_c *m_file;
+  mm_io_c *m_file;
   bool m_close_file;
   std::shared_ptr<KaxSegment> m_segment;
   std::map<int64_t, bool> m_meta_seeks_by_position;
@@ -107,7 +107,7 @@ public:                         // Static functions
 
 public:
   kax_analyzer_c(std::string file_name);
-  kax_analyzer_c(mm_file_io_c *file);
+  kax_analyzer_c(mm_io_c *file);
   virtual ~kax_analyzer_c();
 
   virtual update_element_result_e update_element(EbmlElement *e, bool write_defaults = false);
@@ -160,7 +160,7 @@ public:
 
   virtual void close_file();
   virtual void reopen_file(const open_mode = MODE_WRITE);
-  virtual mm_file_io_c &get_file() {
+  virtual mm_io_c &get_file() {
     return *m_file;
   }
 

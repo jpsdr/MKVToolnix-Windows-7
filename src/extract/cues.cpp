@@ -151,7 +151,7 @@ parse_cue_points(kax_analyzer_c &analyzer) {
 }
 
 static void
-determine_cluster_data_start_positions(mm_file_io_c &file,
+determine_cluster_data_start_positions(mm_io_c &file,
                                        uint64_t segment_data_start_pos,
                                        std::unordered_map<int64_t, std::vector<cue_point_t> > &cue_points) {
   auto es           = std::make_shared<EbmlStream>(file);

@@ -72,7 +72,7 @@ kax_analyzer_c::kax_analyzer_c(std::string file_name)
 {
 }
 
-kax_analyzer_c::kax_analyzer_c(mm_file_io_c *file)
+kax_analyzer_c::kax_analyzer_c(mm_io_c *file)
   : m_file_name(file->get_file_name())
   , m_file(file)
   , m_close_file(false)
