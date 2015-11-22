@@ -1201,6 +1201,32 @@ kax_reader_c::read_headers() {
   show_demuxer_info();
 }
 
+void
+kax_reader_c::read_deferred_level1_elements(KaxSegment &segment) {
+  for (auto position : m_deferred_l1_positions[dl1t_info])
+    read_headers_info(m_in.get(), &segment, position);
+
+  for (auto position : m_deferred_l1_positions[dl1t_tracks])
+    read_headers_tracks(m_in.get(), &segment, position);
+
+  if (!m_ti.m_attach_mode_list.none())
+    for (auto position : m_deferred_l1_positions[dl1t_attachments])
+      handle_attachments(m_in.get(), &segment, position);
+
+  if (!m_ti.m_no_chapters)
+    for (auto position : m_deferred_l1_positions[dl1t_chapters])
+      handle_chapters(m_in.get(), &segment, position);
+
+  for (auto position : m_deferred_l1_positions[dl1t_tags])
+    handle_tags(m_in.get(), &segment, position);
+
+  if (!hack_engaged(ENGAGE_KEEP_TRACK_STATISTICS_TAGS))
+    discard_track_statistics_tags();
+
+  if (!m_ti.m_no_global_tags)
+    process_global_tags();
+}
+
 bool
 kax_reader_c::read_headers_internal() {
   // Elements for different levels
@@ -1306,30 +1332,8 @@ kax_reader_c::read_headers_internal() {
 
     } // while (l1)
 
-    for (auto position : m_deferred_l1_positions[dl1t_info])
-      read_headers_info(m_in.get(), l0, position);
 
-    for (auto position : m_deferred_l1_positions[dl1t_tracks])
-      read_headers_tracks(m_in.get(), l0, position);
-
-    if (!m_ti.m_attach_mode_list.none()) {
-      for (auto position : m_deferred_l1_positions[dl1t_attachments])
-        handle_attachments(m_in.get(), l0, position);
-    }
-
-    if (!m_ti.m_no_chapters) {
-      for (auto position : m_deferred_l1_positions[dl1t_chapters])
-        handle_chapters(m_in.get(), l0, position);
-    }
-
-    for (auto position : m_deferred_l1_positions[dl1t_tags])
-      handle_tags(m_in.get(), l0, position);
-
-    if (!hack_engaged(ENGAGE_KEEP_TRACK_STATISTICS_TAGS))
-      discard_track_statistics_tags();
-
-    if (!m_ti.m_no_global_tags)
-      process_global_tags();
+    read_deferred_level1_elements(static_cast<KaxSegment &>(*l0));
 
   } catch (...) {
     mxwarn(boost::format("%1% %2% %3%\n")

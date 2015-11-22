@@ -291,6 +291,7 @@ protected:
   virtual void read_headers_track_video(kax_track_t *track, KaxTrackVideo *ktvideo);
   virtual void read_headers_tracks(mm_io_c *io, EbmlElement *l0, int64_t position);
   virtual bool read_headers_internal();
+  virtual void read_deferred_level1_elements(KaxSegment &segment);
 
   virtual void process_simple_block(KaxCluster *cluster, KaxSimpleBlock *block_simple);
   virtual void process_block_group(KaxCluster *cluster, KaxBlockGroup *block_group);
