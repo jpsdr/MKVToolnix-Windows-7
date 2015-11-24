@@ -59,7 +59,7 @@ mm_file_io_c::mm_file_io_c(const std::string &path,
       disposition = OPEN_ALWAYS;
       break;
     case MODE_CREATE:
-      access_mode = GENERIC_WRITE;
+      access_mode = GENERIC_WRITE | GENERIC_READ;
       share_mode  = FILE_SHARE_READ;
       disposition = CREATE_ALWAYS;
       break;
