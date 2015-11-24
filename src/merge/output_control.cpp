@@ -745,11 +745,16 @@ relocate_written_data(uint64_t data_start_pos,
     s_out->setFilePointer(src_pos);
     auto num_read = s_out->read(buffer, to_copy);
 
-    if (num_read != to_copy)
+    if (num_read != to_copy) {
       mxinfo(boost::format(Y("Error reading from the file '%1%'.\n")) % s_out->get_file_name());
+      mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]   relocation failed; read only %1% bytes\n") % num_read);
+    }
 
     s_out->setFilePointer(dst_pos);
-    s_out->write(buffer, num_read);
+    auto num_written = s_out->write(buffer, num_read);
+
+    if (num_written != num_read)
+      mxdebug_if(s_debug_rerender_track_headers, boost::format("[rerender]   relocation failed; wrote only %1% of %2% bytes\n") % num_written % num_read);
 
     relocated += to_copy;
   }
