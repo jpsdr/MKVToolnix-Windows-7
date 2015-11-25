@@ -87,6 +87,8 @@ public:
 
   static QString communicatorSocketName();
   static QString settingsBaseGroupName();
+
+  static void fixLockFileHostName(QString const &lockFilePath);
 };
 
 }}

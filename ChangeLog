@@ -1,3 +1,11 @@
+2015-11-25  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: bug fix: implemented a workaround for a bug in
+        Qt which caused the GUI not to start anymore due to failing to
+        detect a stale lock file if the GUI had crashed before on a
+        computer with a host name that included non-ASCII characters. See
+        https://bugreports.qt.io/browse/QTBUG-49640
+
 2015-11-22  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: a track's number of bits per audio sample

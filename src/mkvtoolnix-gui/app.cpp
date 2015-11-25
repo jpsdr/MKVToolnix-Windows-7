@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QDir>
+#include <QFile>
 #include <QLibraryInfo>
 #include <QLocalServer>
 #include <QLocalSocket>
@@ -65,6 +66,41 @@ App::App(int &argc,
 App::~App() {
 }
 
+void
+App::fixLockFileHostName(QString const &lockFilePath) {
+  // Due to a bug in Qt up to and including v5.5.1 the lock file
+  // contains the host name in the wrong encoding. If the host name
+  // contains non-ASCII characters stale lock file detection will
+  // fail. See https://bugreports.qt.io/browse/QTBUG-49640
+
+  if (!QFileInfo{lockFilePath}.exists())
+    return;
+
+  QFile lockFile{lockFilePath};
+  if (!lockFile.open(QIODevice::ReadWrite))
+    return;
+
+  auto const alreadyFixed = Q("alreadyFixedByMKVToolNix");
+  auto lines              = QList<QByteArray>{};
+
+  for (int idx = 0; idx < 4; ++idx)
+    lines << lockFile.readLine();
+
+  if (QString::fromLocal8Bit(lines[3]) == alreadyFixed)
+    return;
+
+  lines[2].chop(1);
+  lines[2] = Q("%1\n").arg(QString::fromLocal8Bit(lines[2])).toUtf8();
+  lines[3] = alreadyFixed.toLocal8Bit();
+
+  lockFile.seek(0);
+
+  for (auto const &line : lines)
+    lockFile.write(line);
+
+  lockFile.resize(lockFile.pos());
+}
+
 QString
 App::communicatorSocketName() {
   return Q("MKVToolNix-GUI-Instance-Communicator");
@@ -74,7 +110,10 @@ void
 App::setupInstanceCommunicator() {
   auto socketName   = communicatorSocketName();
   auto lockFilePath = QDir{QDir::tempPath()}.filePath(Q("%1.lock").arg(socketName));
-  m_instanceLock    = std::make_unique<QLockFile>(lockFilePath);
+
+  fixLockFileHostName(lockFilePath);
+
+  m_instanceLock = std::make_unique<QLockFile>(lockFilePath);
 
   m_instanceLock->setStaleLockTime(0);
   if (!m_instanceLock->tryLock(0)) {
