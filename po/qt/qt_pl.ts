@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pl">
+<TS version="2.0" language="pl">
 <context>
     <name>CloseButton</name>
     <message>
@@ -108,12 +108,12 @@
     <message>
         <location line="+6"/>
         <source>&amp;Step up</source>
-        <translation>Krok do &amp;góry</translation>
+        <translation>&amp;Zwiększ</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Step &amp;down</source>
-        <translation>Krok w &amp;dół</translation>
+        <translation>&amp;Zmniejsz</translation>
     </message>
 </context>
 <context>
@@ -330,7 +330,7 @@
     <message>
         <location line="+2"/>
         <source>Copy</source>
-        <translation>Skopiuj</translation>
+        <translation>Kopiuj</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1209,7 +1209,7 @@ Press ESC to cancel</source>
     <message>
         <location line="+1"/>
         <source>&amp;Delete</source>
-        <translation>&amp;Skasuj</translation>
+        <translation>&amp;Usuń</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2463,7 +2463,7 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+7"/>
         <source>&amp;Copy</source>
-        <translation>S&amp;kopiuj</translation>
+        <translation>&amp;Kopiuj</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -2473,7 +2473,7 @@ Czy na pewno chcesz go skasować?</translation>
     <message>
         <location line="+8"/>
         <source>Delete</source>
-        <translation>Skasuj</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -5426,7 +5426,7 @@ Please turn one of those options off.</source>
     <message>
         <location line="+0"/>
         <source>Top</source>
-        <translation>Do góry</translation>
+        <translation>Góra</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5436,7 +5436,7 @@ Please turn one of those options off.</source>
     <message>
         <location line="+0"/>
         <source>Bottom</source>
-        <translation>W dół</translation>
+        <translation>Dół</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -5446,7 +5446,7 @@ Please turn one of those options off.</source>
     <message>
         <location line="+0"/>
         <source>Page up</source>
-        <translation>Strona do góry</translation>
+        <translation>Strona w górę</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5466,7 +5466,7 @@ Please turn one of those options off.</source>
     <message>
         <location line="+0"/>
         <source>Scroll up</source>
-        <translation>Przewiń do góry</translation>
+        <translation>Przewiń w górę</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6074,7 +6074,7 @@ Please turn one of those options off.</source>
     <message>
         <location line="+1"/>
         <source>Copy</source>
-        <translation>Skopiuj</translation>
+        <translation>Kopiuj</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6204,7 +6204,7 @@ Please turn one of those options off.</source>
     <message>
         <location line="+1"/>
         <source>Save</source>
-        <translation>Zachowaj</translation>
+        <translation>Zapisz</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6504,7 +6504,7 @@ Please turn one of those options off.</source>
     <message>
         <location line="+1"/>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <location line="+1"/>
