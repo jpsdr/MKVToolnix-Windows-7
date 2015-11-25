@@ -72,22 +72,24 @@ module AddPo
       readlines(file_name).
       map(&:chomp)
 
+    base     = nil
     language = content.
       map { |line| /<TS [^>]* language="([a-z_@]+)"/ix.match(line) ? $1 : nil }.
       compact.
       first
 
     if !language
-      language = ENV['TS'] if ENV['TS'] && !ENV['TS'].empty?
-      language = $1        if !language && /qtbase_([a-zA-Z_@]+)/.match(file_name)
+      language       = ENV['TS'] if ENV['TS'] && !ENV['TS'].empty?
+      base, language = $1, $2    if !language && /qt(base)?_([a-zA-Z_@]+)/.match(file_name)
     end
 
     fail "Unknown language for Qt TS file #{file_name} (set TS)" if !language
 
-    target = "#{$po_dir}/qt/qtbase_#{language}.ts"
+    base ||= ''
+    target = "#{$po_dir}/qt/qt#{base}_#{language}.ts"
 
     if !FileTest.exists?(target) && /^([a-z]+)_[a-z]+/i.match(language)
-      target = "#{$po_dir}/qt/qtbase_#{$1}.ts"
+      target = "#{$po_dir}/qt/qt#{base}_#{$1}.ts"
     end
 
     fail "target file does not exist yet: #{target} (wrong language?)" if !FileTest.exists?(target)
