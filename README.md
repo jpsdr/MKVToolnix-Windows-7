@@ -271,14 +271,14 @@ URL: http://www.boost.org
 
 ## 4.3. libEBML
 
-a C++ libary to parse EBML files
+a C++ library to parse EBML files
 
 License: GNU Lesser General Public License v2.1
 URL: http://www.matroska.org/
 
 ## 4.4. libMatroska
 
-a C++ libary to parse Matroska files
+a C++ library to parse Matroska files
 
 License: GNU Lesser General Public License v2.1
 URL: http://www.matroska.org/
