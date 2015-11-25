@@ -1470,14 +1470,10 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
     set_track_packetizer(t, new mpeg1_2_video_packetizer_c(this, nti, version, t->v_frate, t->v_width, t->v_height, t->v_dwidth, t->v_dheight, true));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
 
-  } else if (t->codec.is(codec_c::type_e::V_MPEGH_P2)) {
-    if (t->ms_compat)
-      create_hevc_es_video_packetizer(t, nti);
-    else
-      create_hevc_video_packetizer(t, nti);
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+  } else if (t->codec.is(codec_c::type_e::V_MPEGH_P2))
+    create_hevc_video_packetizer(t, nti);
 
-  } else if (t->codec.is(codec_c::type_e::V_MPEG4_P2)) {
+  else if (t->codec.is(codec_c::type_e::V_MPEG4_P2)) {
     bool is_native = IS_MPEG4_L2_CODECID(t->codec_id);
     set_track_packetizer(t, new mpeg4_p2_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height, is_native));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
@@ -1614,8 +1610,7 @@ kax_reader_c::create_hevc_es_video_packetizer(kax_track_t *t,
 void
 kax_reader_c::create_hevc_video_packetizer(kax_track_t *t,
                                            track_info_c &nti) {
-  if (!nti.m_private_data || !nti.m_private_data->get_size()) {
-    // avc_es_parser_cptr parser = parse_first_hevc_frame(t, nti);
+  if (t->ms_compat || !nti.m_private_data || !nti.m_private_data->get_size()) {
     create_hevc_es_video_packetizer(t, nti);
     return;
   }

@@ -1,5 +1,9 @@
 2015-11-25  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: Matroska reader bug fix: the info about which
+        packetizer is used was output twice for each HEVC track. Fixes
+        #1522.
+
         * MKVToolNix GUI: bug fix: implemented a workaround for a bug in
         Qt which caused the GUI not to start anymore due to failing to
         detect a stale lock file if the GUI had crashed before on a
