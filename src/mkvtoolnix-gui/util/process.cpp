@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QtGlobal>
 #include <QRegExp>
 #include <QTemporaryFile>
 
@@ -83,6 +84,17 @@ Process::execute(QString const &command,
   QStringList argsToUse;
   argsToUse << QString{"@%1"}.arg(optFile.fileName());
   return runner(command, argsToUse);
+}
+
+// ----------------------------------------------------------------------
+
+QString
+currentUserName() {
+  auto userName = QString::fromLocal8Bit(qgetenv("USERNAME"));
+  if (userName.isEmpty())
+    userName = QString::fromLocal8Bit(qgetenv("USER"));
+
+  return userName;
 }
 
 }}}

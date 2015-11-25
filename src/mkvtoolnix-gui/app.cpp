@@ -19,6 +19,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/container.h"
+#include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui {
@@ -103,7 +104,7 @@ App::fixLockFileHostName(QString const &lockFilePath) {
 
 QString
 App::communicatorSocketName() {
-  return Q("MKVToolNix-GUI-Instance-Communicator");
+  return Q("MKVToolNix-GUI-Instance-Communicator-%1").arg(Util::currentUserName());
 }
 
 void

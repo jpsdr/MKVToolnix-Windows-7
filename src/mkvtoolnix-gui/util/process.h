@@ -49,6 +49,8 @@ public:
   static ProcessPtr execute(QString const &command, QStringList const &args, bool useTempFile = true);
 };
 
+QString currentUserName();
+
 }}}
 
 #endif  // MTX_MKVTOOLNIX_GUI_UTIL_PROCESS_H
