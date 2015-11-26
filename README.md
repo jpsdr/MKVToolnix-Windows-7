@@ -8,7 +8,7 @@ MKVToolNix 8.5.2
   1. Requirements
   2. Optional components
   3. Building libEBML and libMatroska
-  4. Building MKVtoolNix
+  4. Building MKVToolNix
   5. Notes for compilation on (Open)Solaris
   6. Unit tests
 3. Reporting bugs
@@ -140,7 +140,7 @@ First change to libEBML's directory and run `./configure` followed by
 the same steps: first `./configure` followed by `make` as a normal
 user and lastly `make install` as root.
 
-## 2.4. Building MKVtoolNix
+## 2.4. Building MKVToolNix
 
 Either download the current release from
 [the MKVToolNix home page](https://mkvtoolnix.download/)
@@ -159,7 +159,7 @@ First clone my Git repository with this command:
 
     git clone https://github.com/mbunkus/mkvtoolnix.git
 
-Now change to the MKVtoolNix directory with `cd mkvtoolnix` and run
+Now change to the MKVToolNix directory with `cd mkvtoolnix` and run
 `./autogen.sh` which will generate the "configure" script. You need
 the GNU "autoconf" utility for this step.
 
