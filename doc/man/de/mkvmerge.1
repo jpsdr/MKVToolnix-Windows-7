@@ -1478,25 +1478,26 @@ wird
 \fBmkvmerge\fR(1)
 veranlassen, die einzelne Datei eingehend zu untersuchen und ihren Typ, die in der Datei enthaltenen Spuren und ihre Spur\-IDs zu melden\&. Falls diese Option benutzt wird, ist der Dateiname die einzige weitere erlaubte Option\&.
 .sp
-The output format used for the result can be changed with the option
---identification-format\&.
+Das f\(:ur die Ergebnisse benutze Ausgabeformat kann mit der Option
+--identification-format
+ge\(:andert werden\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fIDateiname\fR
 .RS 4
-This option is deprecated\&. Use
-\-\-identification\-format verbose\-text \-\-identify \&...
-instead\&.
+Diese Option ist veraltet\&. Benutzen Sie statt dessen
+\-\-identification\-format verbose \-\-identify \&...\&.
 .RE
 .PP
-\fB\-F\fR, \fB\-\-identification\-format\fR \fIformat\fR
+\fB\-F\fR, \fB\-\-identification\-format\fR \fIFormat\fR
 .RS 4
-Determines the output format used by the
-\-\-identify option\&. The following formats are supported:
+Legt das Format f\(:ur die Ausgabe der Option
+\-\-identify
+fest\&. Die folgenden Formate werden unterst\(:utzt:
 text
-(the default if this option isn\*(Aqt used),
+(das Standardformat, wenn diese Option nicht genutzt wird),
 verbose\-text
-and
+und
 json\&.
 .sp
 .RS 4
@@ -1507,13 +1508,13 @@ json\&.
 .sp -1
 .IP "  1." 4.2
 .\}
-The
+Das Format
 text
-format is short and human\-readable\&. It consists of one line per item found (container, tracks, attachments etc\&.)\&.
+ist kurz und menschenlesbar\&. Es aus einer Zeile pro gefundenem Element (Container, Spuren, Anh\(:ange etc\&.)\&.
 .sp
-This format is not meant to be parsed\&. The output will be translated into the language
+Dieses Format wurde nicht daf\(:ur entworfen, geparset zu werden\&. Die Ausgabe wird in die von
 \fBmkvmerge\fR(1)
-uses (see also
+benutzte Sprache \(:ubersetzt (siehe auch
 --ui-language)\&.
 .RE
 .sp
@@ -1525,19 +1526,19 @@ uses (see also
 .sp -1
 .IP "  2." 4.2
 .\}
-The
+Das Format
 verbose\-text
-format extends the
+erweitert das Format
 text
-format with additional properties for each item\&. The extra information is surronded by square brackets\&. It consists of space\-saparated key/value pairs where keys and values are separated by a colon\&.
+um zus\(:atzliche Eigeschaften zu jedem Element\&. Die zus\(:atzlichen Informationen werden in eckige Klammern eingeschlossen\&. Sie bestehen aus durch Leerzeichen getrennten Schl\(:ussel/Wert\-Paaren, bei denen Schl\(:ussel und Werte durch einen Doppelpunkt getrennt werden\&.
 .sp
 Jeder Wert wird entsprechend den im
 Abschnitt \(:uber Maskieren von Sonderzeichen in Text
 beschriebenen Regeln maskiert\&.
 .sp
-This format is not meant to be parsed\&. The output will be translated into the language
+Dieses Format wurde nicht daf\(:ur entworfen, geparset zu werden\&. Die Ausgabe wird in die von
 \fBmkvmerge\fR(1)
-uses (see also
+benutzte Sprache \(:ubersetzt (siehe auch
 --ui-language)\&.
 .RE
 .sp
@@ -1549,10 +1550,11 @@ uses (see also
 .sp -1
 .IP "  3." 4.2
 .\}
-The
+Das Format
 json
-format outputs a machine\-readable JSON representation\&. This format follows the JSON schema described in the file
-\m[blue]\fBmkvmerge\-identification\-output\-schema\&.json\fR\m[]\&\s-2\u[3]\d\s+2\&.
+ist eine maschinenlesbares JSON\-Repr\(:asentation\&. Dieses Format folgt dem JSON\-Schema, das in der Datei
+\m[blue]\fBmkvmerge\-identification\-output\-schema\&.json\fR\m[]\&\s-2\u[3]\d\s+2
+beschrieben wird\&.
 .RE
 .RE
 .PP
