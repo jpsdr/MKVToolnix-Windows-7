@@ -1847,7 +1847,7 @@ parse_arg_identification_format(std::vector<std::string>::const_iterator &sit,
     g_identification_output_format = identification_output_format_e::json;
 
   else
-    mxerror(boost::format(Y("Invalid output format in '%1% %2%'.\n")) % *sit % *(sit + 1));
+    mxerror(boost::format(Y("Invalid identification format in '%1% %2%'.\n")) % *sit % *(sit + 1));
 
   ++sit;
 }
