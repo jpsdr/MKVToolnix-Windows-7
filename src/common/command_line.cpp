@@ -232,11 +232,8 @@ handle_common_cli_args(std::vector<std::string> &args,
       if ((i + 1) == args.size())
         mxerror(boost::format(Y("'%1%' is missing the file name.\n")) % args[i]);
       try {
-        if (!stdio_redirected()) {
-          mm_io_cptr file = mm_write_buffer_io_c::open(args[i + 1], 128 * 1024);
-          file->write_bom(g_stdio_charset);
-          redirect_stdio(file);
-        }
+        if (!stdio_redirected())
+          redirect_stdio(mm_write_buffer_io_c::open(args[i + 1], 128 * 1024));
         args.erase(args.begin() + i, args.begin() + i + 2);
       } catch(mtx::mm_io::exception &) {
         mxerror(boost::format(Y("Could not open the file '%1%' for directing the output.\n")) % args[i + 1]);

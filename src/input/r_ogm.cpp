@@ -843,7 +843,6 @@ ogm_reader_c::handle_stream_comments() {
           }
 
         } else {
-          out->write_bom("UTF-8");
           for (auto &chapter_string : chapter_strings)
             out->puts(cch->utf8(chapter_string) + std::string{"\n"});
         }

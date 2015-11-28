@@ -768,7 +768,6 @@ mpeg_ts_reader_c::process_chapter_entries() {
 
   mm_mem_io_c out{nullptr, 0, 1000};
   out.set_file_name(m_ti.m_fname);
-  out.write_bom("UTF-8");
 
   size_t idx = 0;
   for (auto &timecode : m_chapter_timecodes) {
