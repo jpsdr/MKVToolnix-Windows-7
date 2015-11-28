@@ -411,7 +411,7 @@ generic_reader_c::display_identification_results_as_json() {
     for (auto const &property : verbose_info)
       object[property.first] = property.second;
 
-    return object;
+    return object.is_null() ? nlohmann::json::object() : object;
   };
 
   auto json = nlohmann::json{
