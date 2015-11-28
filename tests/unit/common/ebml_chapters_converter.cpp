@@ -18,7 +18,7 @@ TEST(EbmlChaptersConverter, ToXmlAndEbmlVoid) {
 
   ASSERT_NO_THROW(mtx::xml::ebml_chapters_converter_c::write_xml(chapters, mem_io));
 
-  std::string const expected_output("\xEF\xBB\xBF<?xml version=\"1.0\"?>\n<!-- <!DOCTYPE Chapters SYSTEM \"matroskachapters.dtd\"> -->\n<Chapters />\n");
+  std::string const expected_output("<?xml version=\"1.0\"?>\n<!-- <!DOCTYPE Chapters SYSTEM \"matroskachapters.dtd\"> -->\n<Chapters />\n");
   auto actual_output = mem_io.get_content();
 
   ASSERT_EQ(actual_output, expected_output);
