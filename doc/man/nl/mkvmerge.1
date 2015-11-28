@@ -1509,20 +1509,82 @@ Deze optie kan meerdere keren worden gebruikt voor een invoer bestand, is van to
 Zal
 \fBmkvmerge\fR(1)
 (met een sonde) een enkel bestand aftasten en het type rapporteren, de sporen in het bestand en hun spoor ID\*(Aqs\&. Als deze optie wordt gebruikt dan is de enige andere toegestane optie de bestandsnaam\&.
+.sp
+The output format used for the result can be changed with the option
+--identification-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fIfile\-name\fR
 .RS 4
-Zal
-\fBmkvmerge\fR(1)
-(met een sonde) een enkel bestand aftasten en het type rapporteren, de sporen in het bestand en hun spoor ID\*(Aqs\&. Als deze optie wordt gebruikt dan is de enige andere toegestane optie de bestandsnaam\&.
+This option is deprecated\&. Use
+\-\-identification\-format verbose\-text \-\-identify \&...
+instead\&.
+.RE
+.PP
+\fB\-F\fR, \fB\-\-identification\-format\fR \fIformat\fR
+.RS 4
+Determines the output format used by the
+\-\-identify option\&. The following formats are supported:
+text
+(the default if this option isn\*(Aqt used),
+verbose\-text
+and
+json\&.
 .sp
-Deze optie maakt dat
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  1." 4.2
+.\}
+The
+text
+format is short and human\-readable\&. It consists of one line per item found (container, tracks, attachments etc\&.)\&.
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
-extra informatie uitvoert over de inhoud en elk spoor\&. De extra informatie staat tussen haken ( [] )\&. Het bevat een spatie gescheiden sleutel/waarde paar, waar de sleutel en waardes zijn gescheiden door een dubbel punt (:)\&.
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  2." 4.2
+.\}
+The
+verbose\-text
+format extends the
+text
+format with additional properties for each item\&. The extra information is surronded by square brackets\&. It consists of space\-saparated key/value pairs where keys and values are separated by a colon\&.
 .sp
 Elke waarde wordt overgeslagen conform de regels beschreven in de sectie over:
 Overslaan van speciale karakter(s) in tekst\&.
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
+\fBmkvmerge\fR(1)
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 3.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  3." 4.2
+.\}
+The
+json
+format outputs a machine\-readable JSON representation\&. This format follows the JSON schema described in the file
+\m[blue]\fBmkvmerge\-identification\-output\-schema\&.json\fR\m[]\&\s-2\u[3]\d\s+2\&.
+.RE
 .RE
 .PP
 \fB\-l\fR, \fB\-\-list\-types\fR
@@ -2731,7 +2793,7 @@ toont hoe dit nieuwe systeem te gebruiken\&.
 .PP
 Matroska(TM)
 markeringen worden niet automatisch toegekend aan het hele bestand\&. Dat kunnen zij, maar zij kunnen ook op verschillende delen van het bestand van toepassing zijn: aan \('e\('en of meerdere sporen, aan \('e\('en of meerdere hoofdstukken, of zelfs een combinatie van beide\&.
-\m[blue]\fBDe Matroska(TM) specificaties\fR\m[]\&\s-2\u[3]\d\s+2
+\m[blue]\fBDe Matroska(TM) specificaties\fR\m[]\&\s-2\u[4]\d\s+2
 geeft meer informatie over dit feit\&.
 .PP
 E\('en belangrijk feit is, dat markeringen gelinkt zijn naar sporen of hoofdstukken met de
@@ -2792,7 +2854,7 @@ $ mkvmerge \-o file\&.mkv \-\-tags 0:tags\&.xml file\&.avi
 ondersteunt een
 XML
 gebaseerde markeer bestand format\&. Het format is rijkelijk gedocumenteerd op de
-\m[blue]\fBMatroska(TM)\fR\m[]\&\s-2\u[3]\d\s+2
+\m[blue]\fBMatroska(TM)\fR\m[]\&\s-2\u[4]\d\s+2
 specificaties\&. Beide, zowel het binaire evenals de bron distributies van MKVToolNix komen met een voorbeeld bestand genaamd
 example\-tags\-2\&.xml
 welke simpelweg alle bekende markeringen opsomt, welke gebruikt kunnen worden als basis voor \*(Aqechte leven\*(Aq markeringsbestanden\&.
@@ -3153,7 +3215,7 @@ Overslaan van speciale karakter(s) in tekst)\&.
 .SH "WWW"
 .PP
 De laatste versie kan altijd gevonden worden op de
-\m[blue]\fBMKVToolNix\fR\m[]\&\s-2\u[4]\d\s+2
+\m[blue]\fBMKVToolNix\fR\m[]\&\s-2\u[5]\d\s+2
 thuis basis\&.
 .SH "AUTEUR"
 .PP
@@ -3173,12 +3235,17 @@ IANA
 \%http://www.iana.org/assignments/media-types/
 .RE
 .IP " 3." 4
+mkvmerge-identification-output-schema.json
+.RS 4
+\%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
+.RE
+.IP " 4." 4
 De Matroska(TM)
 specificaties
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 4." 4
+.IP " 5." 4
 MKVToolNix
 .RS 4
 \%https://mkvtoolnix.download/

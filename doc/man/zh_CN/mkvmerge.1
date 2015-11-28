@@ -1489,21 +1489,83 @@ Matroska(TM)
 将使
 \fBmkvmerge\fR(1)
 探查单个文件并报告其类型、文件中包含的轨道及其轨道 ID。如果使用了本选项，唯一可用的其他选项就是文件名。
+.sp
+The output format used for the result can be changed with the option
+--identification-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fI文件名\fR
 .RS 4
-将使
-\fBmkvmerge\fR(1)
-探查单个文件并报告其类型、文件中包含的轨道及其轨道 ID。如果使用了本选项，唯一可用的其他选项就是文件名。
+This option is deprecated\&. Use
+\-\-identification\-format verbose\-text \-\-identify \&...
+instead\&.
+.RE
+.PP
+\fB\-F\fR, \fB\-\-identification\-format\fR \fIformat\fR
+.RS 4
+Determines the output format used by the
+\-\-identify option\&. The following formats are supported:
+text
+(the default if this option isn\*(Aqt used),
+verbose\-text
+and
+json\&.
 .sp
-此选项可让
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  1." 4.2
+.\}
+The
+text
+format is short and human\-readable\&. It consists of one line per item found (container, tracks, attachments etc\&.)\&.
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
-输出关于容器及其中的轨道的额外信息。额外信息由方括号围绕。它包含空格分隔的键/值对，其中键与值由冒号分隔。
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  2." 4.2
+.\}
+The
+verbose\-text
+format extends the
+text
+format with additional properties for each item\&. The extra information is surronded by square brackets\&. It consists of space\-saparated key/value pairs where keys and values are separated by a colon\&.
 .sp
 各值按
 关于文本中特殊字符的转义的段落
 中描述的规则转义。
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
+\fBmkvmerge\fR(1)
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 3.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  3." 4.2
+.\}
+The
+json
+format outputs a machine\-readable JSON representation\&. This format follows the JSON schema described in the file
+\m[blue]\fBmkvmerge\-identification\-output\-schema\&.json\fR\m[]\&\s-2\u[3]\d\s+2\&.
+.RE
 .RE
 .PP
 \fB\-l\fR, \fB\-\-list\-types\fR
@@ -2703,7 +2765,7 @@ example\-tags\-2\&.xml
 .SS "标签细述"
 .PP
 Matroska(TM)
-标签不会自动应用到整个文件上。它们可以应用到整个文件，还可以应用到文件的不同部分: 一个或多个轨道, 一个或多个章节, 甚至是两者的组合。\m[blue]\fBMatroska(TM) 规范\fR\m[]\&\s-2\u[3]\d\s+2
+标签不会自动应用到整个文件上。它们可以应用到整个文件，还可以应用到文件的不同部分: 一个或多个轨道, 一个或多个章节, 甚至是两者的组合。\m[blue]\fBMatroska(TM) 规范\fR\m[]\&\s-2\u[4]\d\s+2
 有这方面的更多详情。
 .PP
 重要的一点是标签通过
@@ -2761,7 +2823,7 @@ $ mkvmerge \-o 文件\&.mkv \-\-tags 0:标签\&.xml 文件\&.avi
 支持基于
 XML
 的标签文件格式。此格式是以
-\m[blue]\fBMatroska(TM) 规范\fR\m[]\&\s-2\u[3]\d\s+2
+\m[blue]\fBMatroska(TM) 规范\fR\m[]\&\s-2\u[4]\d\s+2
 为依据严格制定的。MKVToolNix 的程序以及源码分发包都含有名为
 example\-tags\-2\&.xml
 的示例文件，该文件已简明地列出了所有已知的可用作实际处理的基本标签。
@@ -3116,7 +3178,7 @@ gap, 10\&.050
 .SH "网络"
 .PP
 最新版本总可以在
-\m[blue]\fBMKVToolNix 主页\fR\m[]\&\s-2\u[4]\d\s+2
+\m[blue]\fBMKVToolNix 主页\fR\m[]\&\s-2\u[5]\d\s+2
 找到。
 .SH "作者"
 .PP
@@ -3136,11 +3198,16 @@ IANA 主页
 \%http://www.iana.org/assignments/media-types/
 .RE
 .IP " 3." 4
+mkvmerge-identification-output-schema.json
+.RS 4
+\%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
+.RE
+.IP " 4." 4
 Matroska(TM) 规范
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 4." 4
+.IP " 5." 4
 MKVToolNix 主页
 .RS 4
 \%https://mkvtoolnix.download/

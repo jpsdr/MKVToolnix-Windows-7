@@ -1477,20 +1477,82 @@ Esta opci\('on se puede utilizar varias veces para un archivo de entrada aplic\(
 Le permitir\('a a
 \fBmkvmerge\fR(1)
 analizar el archivo e informar de qu\('e tipo es, las pistas que contiene y los IDs de pista\&. Si se usa esta opci\('on entonces la unica opci\('on permitida es el nombre\-archivo\&.
+.sp
+The output format used for the result can be changed with the option
+--identification-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fInombre\-archivo\fR
 .RS 4
-Le permitir\('a a
-\fBmkvmerge\fR(1)
-analizar el archivo e informar de qu\('e tipo es, las pistas que contiene y los IDs de pista\&. Si se usa esta opci\('on entonces la unica opci\('on permitida es el nombre\-archivo\&.
+This option is deprecated\&. Use
+\-\-identification\-format verbose\-text \-\-identify \&...
+instead\&.
+.RE
+.PP
+\fB\-F\fR, \fB\-\-identification\-format\fR \fIformat\fR
+.RS 4
+Determines the output format used by the
+\-\-identify option\&. The following formats are supported:
+text
+(the default if this option isn\*(Aqt used),
+verbose\-text
+and
+json\&.
 .sp
-Le permitir\('a a
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  1." 4.2
+.\}
+The
+text
+format is short and human\-readable\&. It consists of one line per item found (container, tracks, attachments etc\&.)\&.
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
-analizar el archivo e informar de qu\('e tipo es, las pistas que contiene y los IDs de pista\&. Si se usa esta opci\('on entonces la \('unica opci\('on permitida es el nombre\-archivo\&.
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  2." 4.2
+.\}
+The
+verbose\-text
+format extends the
+text
+format with additional properties for each item\&. The extra information is surronded by square brackets\&. It consists of space\-saparated key/value pairs where keys and values are separated by a colon\&.
 .sp
 Cada valor es escapado conforme a las reglas descritas en
 la secci\('on acerca de caracteres especiales de escape en el texto\&.
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
+\fBmkvmerge\fR(1)
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 3.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  3." 4.2
+.\}
+The
+json
+format outputs a machine\-readable JSON representation\&. This format follows the JSON schema described in the file
+\m[blue]\fBmkvmerge\-identification\-output\-schema\&.json\fR\m[]\&\s-2\u[3]\d\s+2\&.
+.RE
 .RE
 .PP
 \fB\-l\fR, \fB\-\-list\-types\fR
@@ -2670,7 +2732,7 @@ muestra c\('omo usar este nuevo sistema\&.
 Las etiquetas
 Matroska(TM)
 no se aplican autom\('aticamente al archivo entero\&. Es posible hacerlo, y tambi\('en a partes diferentes del archivo: a una o m\('as pistas, a una o m\('as cap\('itulos, o incluso a una combinaci\('on de ambas\&.
-\m[blue]\fBLa especificaci\('on de Matroska\fR\m[]\&\s-2\u[3]\d\s+2
+\m[blue]\fBLa especificaci\('on de Matroska\fR\m[]\&\s-2\u[4]\d\s+2
 proporciona m\('as detalles sobre esto\&.
 .PP
 Una cosa importante es que las etiquetas est\('an vinculadas a pistas o cap\('itulos con el elemento de etiquetas
@@ -2727,7 +2789,7 @@ mkvmerge \-o archivo\&.mkv \-\-tags 0:etiquetas\&.xml archivo\&.avi
 \fBmkvmerge\fR(1)
 admite el formato de archivos de etiquetas basadas en
 XML\&. El formato es muy similar al modelo de
-\m[blue]\fBla especificaci\('on Matroska\fR\m[]\&\s-2\u[3]\d\s+2\&. Tanto la distribuci\('on binaria como la fuente de MKVToolNix vienen acompa\(~nadas de un archivo de ejemplo llamado
+\m[blue]\fBla especificaci\('on Matroska\fR\m[]\&\s-2\u[4]\d\s+2\&. Tanto la distribuci\('on binaria como la fuente de MKVToolNix vienen acompa\(~nadas de un archivo de ejemplo llamado
 example\-tags\-2\&.xml
 que enumera simplemente todas las etiquetas conocidas y que se puede usar como base para las etiquetas de la vida real\&.
 .PP
@@ -3072,7 +3134,7 @@ la secci\('on caracteres especiales de escape en el texto)\&.
 .SH "WWW"
 .PP
 La \('ultima versi\('on se puede encontrar siempre en
-\m[blue]\fBla p\('agina de MKVToolNix\fR\m[]\&\s-2\u[4]\d\s+2\&.
+\m[blue]\fBla p\('agina de MKVToolNix\fR\m[]\&\s-2\u[5]\d\s+2\&.
 .SH "AUTOR"
 .PP
 \fBMoritz Bunkus\fR <\&moritz@bunkus\&.org\&>
@@ -3091,11 +3153,16 @@ IANA
 \%http://www.iana.org/assignments/media-types/
 .RE
 .IP " 3." 4
+mkvmerge-identification-output-schema.json
+.RS 4
+\%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
+.RE
+.IP " 4." 4
 La especificaci\('on de Matroska
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 4." 4
+.IP " 5." 4
 la p\('agina de MKVToolNix
 .RS 4
 \%https://mkvtoolnix.download/

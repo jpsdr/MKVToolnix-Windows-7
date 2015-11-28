@@ -1477,20 +1477,83 @@ Diese Option kann mehrfach f\(:ur eine Eingabedatei benutzt werden und gilt f\(:
 wird
 \fBmkvmerge\fR(1)
 veranlassen, die einzelne Datei eingehend zu untersuchen und ihren Typ, die in der Datei enthaltenen Spuren und ihre Spur\-IDs zu melden\&. Falls diese Option benutzt wird, ist der Dateiname die einzige weitere erlaubte Option\&.
+.sp
+The output format used for the result can be changed with the option
+--identification-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fIDateiname\fR
 .RS 4
-wird
-\fBmkvmerge\fR(1)
-veranlassen, die einzelne Datei eingehend zu untersuchen und ihren Typ, die in der Datei enthaltenen Spuren und ihre Spur\-IDs zu melden\&. Falls diese Option benutzt wird, ist der Dateiname die einzige weitere erlaubte Option\&.
+This option is deprecated\&. Use
+\-\-identification\-format verbose\-text \-\-identify \&...
+instead\&.
+.RE
+.PP
+\fB\-F\fR, \fB\-\-identification\-format\fR \fIformat\fR
+.RS 4
+Determines the output format used by the
+\-\-identify option\&. The following formats are supported:
+text
+(the default if this option isn\*(Aqt used),
+verbose\-text
+and
+json\&.
 .sp
-Diese Option veranlasst
-\fBmkvmerge\fR(1), zus\(:atzliche Informationen \(:uber den Container und jede darin enthaltene Spur auszugeben\&. Die zus\(:atzlichen Informationen werden in eckige Klammern eingeschlossen\&. Sie bestehen aus durch Leerzeichen getrennten Schl\(:ussel/Wert\-Paaren, bei denen Schl\(:ussel und Werte durch einen Doppelpunkt getrennt werden\&.
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  1." 4.2
+.\}
+The
+text
+format is short and human\-readable\&. It consists of one line per item found (container, tracks, attachments etc\&.)\&.
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
+\fBmkvmerge\fR(1)
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  2." 4.2
+.\}
+The
+verbose\-text
+format extends the
+text
+format with additional properties for each item\&. The extra information is surronded by square brackets\&. It consists of space\-saparated key/value pairs where keys and values are separated by a colon\&.
 .sp
 Jeder Wert wird entsprechend den im
 Abschnitt \(:uber Maskieren von Sonderzeichen in Text
 beschriebenen Regeln maskiert\&.
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
+\fBmkvmerge\fR(1)
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 3.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  3." 4.2
+.\}
+The
+json
+format outputs a machine\-readable JSON representation\&. This format follows the JSON schema described in the file
+\m[blue]\fBmkvmerge\-identification\-output\-schema\&.json\fR\m[]\&\s-2\u[3]\d\s+2\&.
+.RE
 .RE
 .PP
 \fB\-l\fR, \fB\-\-list\-types\fR
@@ -2678,7 +2741,7 @@ zeigt, wie dieses neue System benutzt wird\&.
 .SS "Geltungsbereich der Tags"
 .PP
 Matroska(TM)\-Tags gelten nicht automatisch f\(:ur die gesamte Datei\&. Sie k\(:onnen, aber sie k\(:onnen auch f\(:ur unterschiedliche Teile der Datei gelten: f\(:ur eine oder mehrere Spuren, f\(:ur ein oder mehrere Kapitel oder sogar f\(:ur eine Kombination von beiden\&.
-\m[blue]\fBDie Matroska(TM)\-Spezifikation\fR\m[]\&\s-2\u[3]\d\s+2
+\m[blue]\fBDie Matroska(TM)\-Spezifikation\fR\m[]\&\s-2\u[4]\d\s+2
 liefert weitere Einzelheiten zu diesem Umstand\&.
 .PP
 Eine wichtige Tatsache ist, dass Tags mit Spuren oder Kapiteln anhand des Tag\-Elements
@@ -2735,7 +2798,7 @@ $ mkvmerge \-o Datei\&.mkv \-\-tags 0:Tags\&.xml Datei\&.avi
 \fBmkvmerge\fR(1)
 unterst\(:utzt ein
 XML\-basiertes Tag\-Dateifomat\&. Das Format ist sehr eng an
-\m[blue]\fBdie Matroska(TM)\-Spezifikation\fR\m[]\&\s-2\u[3]\d\s+2
+\m[blue]\fBdie Matroska(TM)\-Spezifikation\fR\m[]\&\s-2\u[4]\d\s+2
 angelehnt\&. Sowohl die Bin\(:ar\- als auch die Quelldistribution von MKVToolNix bringen eine Musterdatei namens
 example\-tags\-2\&.xml
 mit, die einfach alle bekannten Tags auff\(:uhrt und als Basis f\(:ur Tag\-Dateien in der Praxis benutzt werden kann\&.
@@ -3083,7 +3146,7 @@ den Abschnitt \(:uber Maskieren von Sonderzeichen in Text)\&.
 .SH "WWW"
 .PP
 Die neuste Version kann immer auf
-\m[blue]\fBder MKVToolNix\-Homepage\fR\m[]\&\s-2\u[4]\d\s+2
+\m[blue]\fBder MKVToolNix\-Homepage\fR\m[]\&\s-2\u[5]\d\s+2
 gefunden werden\&.
 .SH "AUTOR"
 .PP
@@ -3104,12 +3167,17 @@ IANA-Homepage
 \%http://www.iana.org/assignments/media-types/
 .RE
 .IP " 3." 4
+mkvmerge-identification-output-schema.json
+.RS 4
+\%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
+.RE
+.IP " 4." 4
 Die
 Matroska(TM)-Spezifikation
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 4." 4
+.IP " 5." 4
 der MKVToolNix-Homepage
 .RS 4
 \%https://mkvtoolnix.download/

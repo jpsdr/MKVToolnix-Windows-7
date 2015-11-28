@@ -1559,6 +1559,8 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
        Will let &mkvmerge; probe the single file and report its type, the tracks contained in the file and their track IDs. If this option is
        used then the only other option allowed is the filename.
       </para>
+
+      <para>The output format used for the result can be changed with the option <link linkend="mkvmerge.description.identification_format">--identification-format</link>.</para>
      </listitem>
     </varlistentry>
 
@@ -1566,19 +1568,52 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <term><option>-I</option>, <option>--identify-verbose</option> <parameter>file-name</parameter></term>
      <listitem>
       <para>
-       Will let &mkvmerge; probe the single file and report its type, the tracks contained in the file and their track IDs. If this option is
-       used then the only other option allowed is the filename.
+       This option is deprecated. Use <link linkend="mkvmerge.description.identification_format"><literal>--identification-format verbose-text --identify …</literal></link> instead.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry id="mkvmerge.description.identification_format">
+     <term><option>-F</option>, <option>--identification-format</option> <parameter>format</parameter></term>
+     <listitem>
+      <para>
+       Determines the output format used by the <link linkend="mkvmerge.description.identify"><literal>--identify</literal>
+       option</link>. The following formats are supported: <literal>text</literal> (the default if this option isn't used),
+       <literal>verbose-text</literal> and <literal>json</literal>.
       </para>
 
-      <para>
-       This option causes &mkvmerge; to output additional information about the container and each track within. The extra information is
-       surronded by square brackets. It consists of space-saparated key/value pairs where keys and values are separated by a colon.
-      </para>
+      <orderedlist>
+       <listitem>
+        <para>The <literal>text</literal> format is short and human-readable. It consists of one line per item found (container, tracks, attachments etc.).</para>
 
-      <para>
-       Each value is escaped according to the rules described in <link linkend="mkvmerge.escaping">the section about escaping special
-       characters in text</link>.
-      </para>
+        <para>This format is not meant to be parsed. The output will be translated into the language &mkvmerge; uses (see also <link
+        linkend="mkvmerge.description.ui_language">--ui-language</link>).</para>
+       </listitem>
+
+       <listitem>
+        <para>
+         The <literal>verbose-text</literal> format extends the <literal>text</literal> format with additional properties for each item. The
+         extra information is surronded by square brackets. It consists of space-saparated key/value pairs where keys and values are separated
+         by a colon.
+        </para>
+
+        <para>
+         Each value is escaped according to the rules described in <link linkend="mkvmerge.escaping">the section about escaping special
+         characters in text</link>.
+        </para>
+
+        <para>This format is not meant to be parsed. The output will be translated into the language &mkvmerge; uses (see also <link
+        linkend="mkvmerge.description.ui_language">--ui-language</link>).</para>
+       </listitem>
+
+       <listitem>
+        <para>
+         The <literal>json</literal> format outputs a machine-readable JSON representation. This format follows the JSON schema described in
+         the file <ulink
+         url="https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json"><literal>mkvmerge-identification-output-schema.json</literal></ulink>.
+        </para>
+       </listitem>
+      </orderedlist>
      </listitem>
     </varlistentry>
 

@@ -1478,20 +1478,82 @@ This option can be used multiple times for an input file applying to several tra
 Will let
 \fBmkvmerge\fR(1)
 probe the single file and report its type, the tracks contained in the file and their track IDs\&. If this option is used then the only other option allowed is the filename\&.
+.sp
+The output format used for the result can be changed with the option
+--identification-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fInom_fitxer\fR
 .RS 4
-Will let
-\fBmkvmerge\fR(1)
-probe the single file and report its type, the tracks contained in the file and their track IDs\&. If this option is used then the only other option allowed is the filename\&.
+This option is deprecated\&. Use
+\-\-identification\-format verbose\-text \-\-identify \&...
+instead\&.
+.RE
+.PP
+\fB\-F\fR, \fB\-\-identification\-format\fR \fIformat\fR
+.RS 4
+Determines the output format used by the
+\-\-identify option\&. The following formats are supported:
+text
+(the default if this option isn\*(Aqt used),
+verbose\-text
+and
+json\&.
 .sp
-This option causes
+.RS 4
+.ie n \{\
+\h'-04' 1.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  1." 4.2
+.\}
+The
+text
+format is short and human\-readable\&. It consists of one line per item found (container, tracks, attachments etc\&.)\&.
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
-to output additional information about the container and each track within\&. The extra information is surronded by square brackets\&. It consists of space\-saparated key/value pairs where keys and values are separated by a colon\&.
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 2.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  2." 4.2
+.\}
+The
+verbose\-text
+format extends the
+text
+format with additional properties for each item\&. The extra information is surronded by square brackets\&. It consists of space\-saparated key/value pairs where keys and values are separated by a colon\&.
 .sp
 Cada valor \('es escapat d\*(Aqacord amb les regles descrites a
 la secci\('o sobre escapar car\(`acters especials en el text\&.
+.sp
+This format is not meant to be parsed\&. The output will be translated into the language
+\fBmkvmerge\fR(1)
+uses (see also
+--ui-language)\&.
+.RE
+.sp
+.RS 4
+.ie n \{\
+\h'-04' 3.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  3." 4.2
+.\}
+The
+json
+format outputs a machine\-readable JSON representation\&. This format follows the JSON schema described in the file
+\m[blue]\fBmkvmerge\-identification\-output\-schema\&.json\fR\m[]\&\s-2\u[3]\d\s+2\&.
+.RE
 .RE
 .PP
 \fB\-l\fR, \fB\-\-list\-types\fR
@@ -2694,7 +2756,7 @@ shows how to use this new system\&.
 .PP
 Matroska(TM)
 tags do not automatically apply to the complete file\&. They can, but they also may apply to different parts of the file: to one or more tracks, to one or more chapters, or even to a combination of both\&. The
-\m[blue]\fBthe Matroska(TM) specification\fR\m[]\&\s-2\u[3]\d\s+2
+\m[blue]\fBthe Matroska(TM) specification\fR\m[]\&\s-2\u[4]\d\s+2
 gives more details about this fact\&.
 .PP
 One important fact is that tags are linked to tracks or chapters with the
@@ -2754,7 +2816,7 @@ $ mkvmerge \-o fitxer\&.mkv \-\-tags 0:etiquetes\&.xml fitxer\&.avi
 supports a
 XML
 based tag file format\&. The format is very closely modeled after
-\m[blue]\fBthe Matroska(TM) specification\fR\m[]\&\s-2\u[3]\d\s+2\&. Both the binary and the source distributions of MKVToolNix come with a sample file called
+\m[blue]\fBthe Matroska(TM) specification\fR\m[]\&\s-2\u[4]\d\s+2\&. Both the binary and the source distributions of MKVToolNix come with a sample file called
 example\-tags\-2\&.xml
 which simply lists all known tags and which can be used as a basis for real life tag files\&.
 .PP
@@ -3114,7 +3176,7 @@ la secci\('o car\(`acters especials d'escapament en el text)\&.
 .SH "WWW"
 .PP
 The latest version can always be found at
-\m[blue]\fBthe MKVToolNix homepage\fR\m[]\&\s-2\u[4]\d\s+2\&.
+\m[blue]\fBthe MKVToolNix homepage\fR\m[]\&\s-2\u[5]\d\s+2\&.
 .SH "AUTOR"
 .PP
 \fBBunkus, Moritz\fR <\&moritz@bunkus\&.org\&>
@@ -3134,12 +3196,17 @@ la p\(`agina web de la IANA
 \%http://www.iana.org/assignments/media-types/
 .RE
 .IP " 3." 4
+mkvmerge-identification-output-schema.json
+.RS 4
+\%https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema.json
+.RE
+.IP " 4." 4
 the Matroska(TM)
 specification
 .RS 4
 \%http://matroska.org/technical/specs/index.html
 .RE
-.IP " 4." 4
+.IP " 5." 4
 the MKVToolNix homepage
 .RS 4
 \%https://mkvtoolnix.download/
