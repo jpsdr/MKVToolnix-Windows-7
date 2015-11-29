@@ -64,21 +64,16 @@ kax_analyzer_data_c::to_string() const {
 }
 
 kax_analyzer_c::kax_analyzer_c(std::string file_name)
-  : m_file_name(file_name)
-  , m_file(nullptr)
-  , m_close_file(true)
-  , m_stream(nullptr)
-  , m_debug{"kax_analyzer"}
 {
+  m_file_name  = file_name;
+  m_close_file = true;
 }
 
 kax_analyzer_c::kax_analyzer_c(mm_io_c *file)
-  : m_file_name(file->get_file_name())
-  , m_file(file)
-  , m_close_file(false)
-  , m_stream(nullptr)
-  , m_debug{"kax_analyzer"}
 {
+  m_file_name  = file->get_file_name();
+  m_file       = file;
+  m_close_file = false;
 }
 
 kax_analyzer_c::~kax_analyzer_c() {
@@ -97,11 +92,11 @@ kax_analyzer_c::close_file() {
 }
 
 void
-kax_analyzer_c::reopen_file(const open_mode mode) {
+kax_analyzer_c::reopen_file() {
   if (m_file)
     return;
 
-  m_file   = new mm_file_io_c(m_file_name, mode);
+  m_file   = new mm_file_io_c(m_file_name, m_open_mode);
   m_stream = new EbmlStream(*m_file);
 }
 
@@ -203,12 +198,28 @@ kax_analyzer_c::probe(std::string file_name) {
   }
 }
 
+kax_analyzer_c &
+kax_analyzer_c::set_parse_mode(parse_mode_e parse_mode) {
+  m_parse_mode = parse_mode;
+  return *this;
+}
+
+kax_analyzer_c &
+kax_analyzer_c::set_open_mode(open_mode mode) {
+  m_open_mode = mode;
+  return *this;
+}
+
+kax_analyzer_c &
+kax_analyzer_c::set_throw_on_error(bool throw_on_error) {
+  m_throw_on_error = throw_on_error;
+  return *this;
+}
+
 bool
-kax_analyzer_c::process(kax_analyzer_c::parse_mode_e parse_mode,
-                        const open_mode mode,
-                        bool throw_on_error) {
+kax_analyzer_c::process() {
   try {
-    auto result = process_internal(parse_mode, mode);
+    auto result = process_internal();
     mxdebug_if(m_debug, boost::format("kax_analyzer: parsing file '%1%' result %2%\n") % m_file->get_file_name() % result);
 
     return result;
@@ -216,18 +227,17 @@ kax_analyzer_c::process(kax_analyzer_c::parse_mode_e parse_mode,
   } catch (...) {
     mxdebug_if(m_debug, boost::format("kax_analyzer: parsing file '%1%' failed with an exception\n") % m_file->get_file_name());
 
-    if (throw_on_error)
+    if (m_throw_on_error)
       throw;
     return false;
   }
 }
 
 bool
-kax_analyzer_c::process_internal(kax_analyzer_c::parse_mode_e parse_mode,
-                                 const open_mode mode) {
-  bool parse_fully = parse_mode_full == parse_mode;
+kax_analyzer_c::process_internal() {
+  bool parse_fully = parse_mode_full == m_parse_mode;
 
-  reopen_file(mode);
+  reopen_file();
 
   int64_t file_size = m_file->get_size();
   show_progress_start(file_size);
@@ -301,7 +311,7 @@ kax_analyzer_c::process_internal(kax_analyzer_c::parse_mode_e parse_mode,
   show_progress_done();
 
   if (!aborted) {
-    if (parse_mode_full != parse_mode)
+    if (parse_mode_full != m_parse_mode)
       fix_element_sizes(file_size);
 
     return true;
@@ -1269,7 +1279,10 @@ bitvalue_cptr
 kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
   try {
     auto analyzer = std::make_shared<kax_analyzer_c>(file_name);
-    auto ok       = analyzer->process(kax_analyzer_c::parse_mode_fast, MODE_READ, false);
+    auto ok       = analyzer
+      ->set_parse_mode(kax_analyzer_c::parse_mode_fast)
+      .set_open_mode(MODE_READ)
+      .process();
 
     if (ok) {
       auto element      = analyzer->read_all(EBML_INFO(KaxInfo));

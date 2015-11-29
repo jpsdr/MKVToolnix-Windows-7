@@ -45,7 +45,11 @@ open_and_analyze(std::string const &file_name,
   // open input file
   try {
     auto analyzer = std::make_shared<kax_analyzer_c>(file_name);
-    auto ok       = analyzer->process(parse_mode, MODE_READ, exit_on_error);
+    auto ok       = analyzer
+      ->set_parse_mode(parse_mode)
+      .set_open_mode(MODE_READ)
+      .set_throw_on_error(exit_on_error)
+      .process();
 
     return ok ? analyzer : kax_analyzer_cptr{};
 

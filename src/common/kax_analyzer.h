@@ -93,12 +93,15 @@ public:
 private:
   std::vector<kax_analyzer_data_cptr> m_data;
   std::string m_file_name;
-  mm_io_c *m_file;
-  bool m_close_file;
+  mm_io_c *m_file{};
+  bool m_close_file{true};
   std::shared_ptr<KaxSegment> m_segment;
   std::map<int64_t, bool> m_meta_seeks_by_position;
-  EbmlStream *m_stream;
-  debugging_option_c m_debug;
+  EbmlStream *m_stream{};
+  debugging_option_c m_debug{"kax_analyzer"};
+  parse_mode_e m_parse_mode{parse_mode_full};
+  open_mode m_open_mode{MODE_WRITE};
+  bool m_throw_on_error{};
 
 public:                         // Static functions
   static bool probe(std::string file_name);
@@ -124,7 +127,11 @@ public:
   virtual uint64_t get_segment_pos() const;
   virtual uint64_t get_segment_data_start_pos() const;
 
-  virtual bool process(parse_mode_e parse_mode = parse_mode_full, const open_mode mode = MODE_WRITE, bool throw_on_error = false);
+  virtual kax_analyzer_c &set_parse_mode(parse_mode_e parse_mode);
+  virtual kax_analyzer_c &set_open_mode(open_mode mode);
+  virtual kax_analyzer_c &set_throw_on_error(bool throw_on_error);
+
+  virtual bool process();
 
   virtual void show_progress_start(int64_t /* size */) {
   }
@@ -145,7 +152,7 @@ public:
   }
 
   virtual void close_file();
-  virtual void reopen_file(const open_mode = MODE_WRITE);
+  virtual void reopen_file();
   virtual mm_io_c &get_file() {
     return *m_file;
   }
@@ -184,7 +191,7 @@ protected:
   virtual void fix_element_sizes(uint64_t file_size);
 
 protected:
-  virtual bool process_internal(parse_mode_e parse_mode, const open_mode mode);
+  virtual bool process_internal();
 };
 using kax_analyzer_cptr = std::shared_ptr<kax_analyzer_c>;
 

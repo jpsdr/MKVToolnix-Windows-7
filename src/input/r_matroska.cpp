@@ -1210,7 +1210,11 @@ kax_reader_c::find_level1_elements_via_analyzer() {
 
   try {
     auto analyzer = std::make_shared<kax_analyzer_c>(m_in.get());
-    auto ok       = analyzer->process(kax_analyzer_c::parse_mode_fast, MODE_READ, true);
+    auto ok       = analyzer
+      ->set_parse_mode(kax_analyzer_c::parse_mode_fast)
+      .set_open_mode(MODE_READ)
+      .set_throw_on_error(true)
+      .process();
 
     if (!ok)
       return;

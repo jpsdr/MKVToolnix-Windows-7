@@ -89,7 +89,7 @@ Tab::load() {
 
   m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
 
-  if (!m_analyzer->process(kax_analyzer_c::parse_mode_fast)) {
+  if (!m_analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).process()) {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName)).exec();
     emit removeThisTab();
     return;

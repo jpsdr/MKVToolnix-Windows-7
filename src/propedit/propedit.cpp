@@ -97,7 +97,11 @@ run(options_cptr &options) {
 
   bool ok = false;
   try {
-    ok = analyzer->process(options->m_parse_mode, MODE_WRITE, true);
+    ok = analyzer
+      ->set_parse_mode(options->m_parse_mode)
+      .set_open_mode(MODE_WRITE)
+      .set_throw_on_error(true)
+      .process();
   } catch (mtx::mm_io::exception &ex) {
     mxerror(boost::format(Y("The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n")) % options->m_file_name % ex);
   } catch (...) {
