@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-11-28 18:52+0100\n"
+"POT-Creation-Date: 2015-11-29 14:30+0100\n"
 "PO-Revision-Date: 2015-11-24 17:28+0300\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
@@ -680,7 +680,7 @@ msgstr " Прочие настройки:\n"
 msgid " Segment info handling:\n"
 msgstr " Обработка информации о сегментах:\n"
 
-#: src/extract/mkvextract.cpp:84
+#: src/extract/mkvextract.cpp:88
 #: src/info/mkvinfo.cpp:207
 #, boost-format
 msgid " at %1%"
@@ -848,8 +848,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr ""
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1363
-#: src/input/r_matroska.cpp:2015
+#: src/input/r_matroska.cpp:1368
+#: src/input/r_matroska.cpp:2020
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr ""
@@ -1554,7 +1554,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Также будут обработаны файлы: %2%\n"
 
-#: src/input/r_matroska.cpp:1636
+#: src/input/r_matroska.cpp:1641
 #, boost-format
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr ""
@@ -1700,17 +1700,17 @@ msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S' и '-s' использованы на одном и том же исходном файле.\n"
 
 #: src/common/property_element.cpp:115
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:340
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:336
 msgid "'Default track' flag"
 msgstr "Флаг 'Дорожка по умолчанию'"
 
 #: src/common/property_element.cpp:118
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:346
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:342
 msgid "'Forced display' flag"
 msgstr "Флаг 'Показывать принудительно'"
 
 #: src/common/property_element.cpp:117
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:343
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:339
 msgid "'Track enabled' flag"
 msgstr "Флаг 'Дорожка включена'"
 
@@ -1831,8 +1831,8 @@ msgstr "<безымянный>"
 msgid "<unsaved file>"
 msgstr "<несохраненный файл>"
 
-#: src/input/r_matroska.cpp:2036
-#: src/input/r_matroska.cpp:2132
+#: src/input/r_matroska.cpp:2041
+#: src/input/r_matroska.cpp:2137
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "Блок был найден на временной метке %1% для дорожки номер %2%. Однако заголовков для дорожки с этим номером не найдено. Блок будет пропущен.\n"
@@ -1854,12 +1854,12 @@ msgid "A comma-separated list of timecode ranges of content to keep."
 msgstr "Разделяемый запятыми список временных диапазонов содержания, которые нужно сохранить."
 
 #: src/common/property_element.cpp:130
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:374
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:370
 msgid "A human-readable string specifying the codec."
 msgstr "Удобная для чтения человеком строка, определяющая кодек."
 
 #: src/common/property_element.cpp:127
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:365
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:361
 msgid "A human-readable track name."
 msgstr "Удобное для чтения человеком название дорожки."
 
@@ -1880,7 +1880,7 @@ msgstr ""
 "Сгенерированный случайным образом уникальный ID, предназначенный\n"
 "для определения данного сегмента среди прочих (128 бит)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:301
 #, fuzzy
 msgid "A randomly generated unique ID to identify the current segment between many others (128 bits)."
 msgstr ""
@@ -1911,7 +1911,7 @@ msgstr ""
 "изменяться при прямом потоковом копировании\n"
 "дорожки в другой файл."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:336
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:332
 #, fuzzy
 msgid "A unique ID to identify the Track. This should be kept the same when making a direct stream copy of the Track to another file."
 msgstr ""
@@ -1927,7 +1927,7 @@ msgstr ""
 "Уникальный ID для определения следующего\n"
 "связанного сегмента (128 бит)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:307
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:303
 #, fuzzy
 msgid "A unique ID to identify the next chained segment (128 bits)."
 msgstr ""
@@ -1942,7 +1942,7 @@ msgstr ""
 "Уникальный ID для определения предыдущего\n"
 "связанного сегмента (128 бит)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:306
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:302
 #, fuzzy
 msgid "A unique ID to identify the previous chained segment (128 bits)."
 msgstr ""
@@ -2239,7 +2239,7 @@ msgstr "Все следующие имена файлов будут откры�
 msgid "All following file names will be opened in the header editor."
 msgstr "Все следующие имена файлов будут открыты в редакторе заголовков."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:436
 msgid "All header values are OK."
 msgstr "Все значения заголовков в порядке."
 
@@ -2351,7 +2351,7 @@ msgid "An <attachment-selector> can have three forms:"
 msgstr "<attachment-selector> может быть трех видов:"
 
 #: src/common/property_element.cpp:129
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:371
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:367
 msgid "An ID corresponding to the codec."
 msgstr "ID, соответствующий кодеку."
 
@@ -2364,11 +2364,11 @@ msgstr "Вложение с ID %1% не найдено.\n"
 msgid "An empty file name is not valid.\n"
 msgstr "Пустое имя файла недопустимо.\n"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:300
 msgid "An escaped file name corresponding to the next segment."
 msgstr "Экранированное имя файла, соответствующего следующему сегменту."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:303
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:299
 msgid "An escaped file name corresponding to the previous segment."
 msgstr "Экранированное имя файла, соответствующего предыдущему сегменту."
 
@@ -2493,17 +2493,17 @@ msgid "Audio"
 msgstr "Аудио"
 
 #: src/common/property_element.cpp:154
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:429
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:425
 msgid "Audio bit depth"
 msgstr "Разрядность звука"
 
 #: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:422
 msgid "Audio channels"
 msgstr "Аудиоканалы"
 
 #: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:419
 msgid "Audio output sampling frequency"
 msgstr "Выходная частота дискретизации звука"
 
@@ -2512,7 +2512,7 @@ msgid "Audio properties"
 msgstr "Свойства аудио дорожек"
 
 #: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:416
 msgid "Audio sampling frequency"
 msgstr "Частота дискретизации звука"
 
@@ -2569,7 +2569,7 @@ msgid "Bit depth: %1%"
 msgstr "Глубина цвета (бит): %1%"
 
 #: src/common/property_element.cpp:154
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:429
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:425
 msgid "Bits per sample, mostly used for PCM."
 msgstr "Бит на сэмпл, в основном используется для PCM."
 
@@ -2922,7 +2922,7 @@ msgid "Codec"
 msgstr "Кодек"
 
 #: src/common/property_element.cpp:129
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:371
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:367
 msgid "Codec ID"
 msgstr "ID кодека"
 
@@ -2957,7 +2957,7 @@ msgid "Codec info URL: %1%"
 msgstr "Ссылка на информацию о кодеке: %1%"
 
 #: src/common/property_element.cpp:130
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:374
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:370
 msgid "Codec name"
 msgstr "Название кодека"
 
@@ -2977,7 +2977,7 @@ msgid "Codec state: %1%"
 msgstr "Состояние кодека: %1%"
 
 #: src/common/property_element.cpp:131
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:373
 msgid "Codec-inherent delay"
 msgstr ""
 
@@ -3403,7 +3403,7 @@ msgid "Default add&itional command line options:"
 msgstr "Дополнительные параметры командной строки по умолчанию:"
 
 #: src/common/property_element.cpp:126
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:362
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:358
 msgid "Default duration"
 msgstr "Продолжительность по умолчанию"
 
@@ -3444,7 +3444,7 @@ msgid "Delay (in ms):"
 msgstr "Задержка (в мс):"
 
 #: src/common/property_element.cpp:131
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:377
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:373
 msgid "Delay built into the codec during decoding in ns."
 msgstr ""
 
@@ -3616,7 +3616,7 @@ msgstr ""
 msgid "Done scanning playlists.\n"
 msgstr "Проверка наличия плейлистов завершена.\n"
 
-#: src/propedit/propedit.cpp:123
+#: src/propedit/propedit.cpp:127
 msgid "Done.\n"
 msgstr "Готово.\n"
 
@@ -4322,19 +4322,19 @@ msgstr "Сжатие удалением заголовка невозможно,
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
 msgstr "Сжатие удалением заголовка невозможно, так как буфер не начинаются с байт, которые должны быть удалены. Требуются байты:%1%; найдено:%2%."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:440
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:455
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:457
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:436
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:451
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:453
 msgid "Header validation"
 msgstr "Проверка заголовков"
 
 #: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:382
 msgid "Height of the encoded video frames in pixels."
 msgstr "Высота закодированных кадров видео в пикселях."
 
 #: src/common/property_element.cpp:139
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:388
 msgid "Height of the video frames to display."
 msgstr "Высота отображаемых кадров видео."
 
@@ -5015,7 +5015,7 @@ msgstr "Флаг сшивания: %1%"
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:26
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:104
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:368
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:364
 #: src/mkvtoolnix-gui/merge/track_model.cpp:47
 msgid "Language"
 msgstr "Язык"
@@ -5181,12 +5181,12 @@ msgstr ""
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Сделать эту дорожку дорожкой по умолчанию для ее типа данных (аудио, видео, субтитры)."
 
-#: src/input/r_matroska.cpp:1526
-#: src/input/r_matroska.cpp:1541
+#: src/input/r_matroska.cpp:1531
+#: src/input/r_matroska.cpp:1546
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Обнаружены неправильные данные инициализации кодека AAC.\n"
 
-#: src/input/r_matroska.cpp:1534
+#: src/input/r_matroska.cpp:1539
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Неправильный ID кодека '%1%'.\n"
@@ -5251,7 +5251,7 @@ msgid "Maximum allowed value: %1%, actual value: %2%"
 msgstr "Максимально допустимое значение: %1%, фактическое значение: %2%"
 
 #: src/common/property_element.cpp:124
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:357
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:353
 msgid "Maximum cache"
 msgstr "Максимальный кэш"
 
@@ -5299,7 +5299,7 @@ msgid "Minimum allowed value: %1%, actual value: %2%"
 msgstr "Минимальное допустимое значение: %1%, фактическое значение: %2%"
 
 #: src/common/property_element.cpp:122
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:352
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:348
 msgid "Minimum cache"
 msgstr "Минимальный кэш"
 
@@ -5415,7 +5415,7 @@ msgstr "Имя шаблона:"
 #: src/common/property_element.cpp:127
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:25
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:105
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:365
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:361
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:57
 #: src/mkvtoolnix-gui/merge/track_model.cpp:48
 msgid "Name"
@@ -5458,7 +5458,7 @@ msgid "New value:"
 msgstr "Новое значение:"
 
 #: src/common/property_element.cpp:104
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:304
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:300
 msgid "Next filename"
 msgstr "Следующее имя файла"
 
@@ -5477,7 +5477,7 @@ msgid "Next segment UID: %1%"
 msgstr "UID следующего сегмента: %1%"
 
 #: src/common/property_element.cpp:108
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:307
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:303
 msgid "Next segment's unique ID"
 msgstr "Уникальный ID следующего сегмента"
 
@@ -5577,7 +5577,7 @@ msgstr "Не указано имя конечного файла, будет и�
 msgid "No permission to read from, to write to or to create"
 msgstr "Нет прав для чтения, записи или создания"
 
-#: src/common/kax_analyzer.cpp:1278
+#: src/common/kax_analyzer.cpp:1321
 #, fuzzy, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "Идентификационный заголовок Kate не может быть обработан (%1%).\n"
@@ -5656,11 +5656,11 @@ msgstr ""
 msgid "Not a hex digit at position %1%"
 msgstr "В позиции %1% находится не шестнадцатеричная цифра"
 
-#: src/common/kax_analyzer.cpp:244
+#: src/common/kax_analyzer.cpp:260
 msgid "Not a valid Matroska file (no EBML head found)"
 msgstr "Неправильный файл Matroska (не найден заголовок EBML)"
 
-#: src/common/kax_analyzer.cpp:254
+#: src/common/kax_analyzer.cpp:270
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "Неправильный файл Matroska (не найдено сегмента/элемента нулевого уровня)"
 
@@ -5723,12 +5723,12 @@ msgid "Number of entries to &renumber:"
 msgstr "&Новые главы"
 
 #: src/common/property_element.cpp:126
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:362
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:358
 msgid "Number of nanoseconds (not scaled) per frame."
 msgstr "Количество наносекунд (не масштабированное) на кадр."
 
 #: src/common/property_element.cpp:153
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:426
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:422
 msgid "Numbers of channels in the track."
 msgstr "Число каналов в дорожке."
 
@@ -6053,7 +6053,7 @@ msgstr ""
 msgid "Pre&viously used output directory"
 msgstr "Использовать предыдущию директорию вывода"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:303
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:299
 #, fuzzy
 msgid "Previous file name"
 msgstr "Предыдущее имя файла"
@@ -6077,7 +6077,7 @@ msgid "Previous segment UID: %1%"
 msgstr "UID предыдущего сегмента: %1%"
 
 #: src/common/property_element.cpp:107
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:306
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:302
 msgid "Previous segment's unique ID"
 msgstr "Уникальный ID предыдущего сегмента"
 
@@ -6107,7 +6107,7 @@ msgstr "Выполнено:"
 msgid "Progress: %1%%%%2%"
 msgstr "Обработано: %1%%%%2%"
 
-#: src/extract/mkvextract.cpp:114
+#: src/extract/mkvextract.cpp:118
 #: src/extract/timecodes_v2.cpp:379
 msgid "Progress: 100%\n"
 msgstr "Обработано: 100%\n"
@@ -6117,7 +6117,7 @@ msgstr "Обработано: 100%\n"
 msgid "Progress: 100%%%1%"
 msgstr "Обработано: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1328
+#: src/common/kax_analyzer.cpp:1380
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Обработано: [%1%%2%] %3%%%"
@@ -6306,7 +6306,7 @@ msgid "Ready"
 msgstr "Готов"
 
 #: src/common/property_element.cpp:152
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:423
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:419
 msgid "Real output sampling frequency in Hz."
 msgstr "Реальная частота дискретизации на выходе (Гц)."
 
@@ -6500,7 +6500,7 @@ msgid "Sa&ve settings as"
 msgstr "Сохранить настройки обработки в файл"
 
 #: src/common/property_element.cpp:151
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:420
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:416
 msgid "Sampling frequency in Hz."
 msgstr "Частота дискретизации (Гц)."
 
@@ -6650,7 +6650,7 @@ msgstr "UIDы сегмента:"
 msgid "Segment e&dition UID:"
 msgstr "UID редакции сегмента:"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:302
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:298
 #, fuzzy
 msgid "Segment file name"
 msgstr "Имя файла сегментов"
@@ -6671,7 +6671,7 @@ msgstr "Файл информации о сегментах:"
 #: src/extract/timecodes_v2.cpp:242
 #: src/info/mkvinfo.cpp:465
 #: src/info/qt_ui.cpp:205
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:298
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:294
 #: src/propedit/options.cpp:172
 #: src/propedit/propedit_cli_parser.cpp:140
 #: src/propedit/propedit_cli_parser.cpp:225
@@ -6685,7 +6685,7 @@ msgid "Segment tracks"
 msgstr "Дорожки сегмента"
 
 #: src/common/property_element.cpp:105
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:305
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:301
 msgid "Segment unique ID"
 msgstr "Уникальный ID сегмента"
 
@@ -6781,7 +6781,7 @@ msgstr ""
 "использоваться в случае, когда не найден язык,\n"
 "соответствующий предпочтениям пользователя."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:340
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:336
 #, fuzzy
 msgid "Set if that track (audio, video or subs) SHOULD be used if no language found matches the user preference."
 msgstr ""
@@ -6803,7 +6803,7 @@ msgstr ""
 "язык которого соответствует предпочтениям пользователя или\n"
 "по умолчанию + принудительно воспроизводимая дорожка."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:347
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:343
 #, fuzzy
 msgid "Set if that track MUST be used during playback. There can be many forced track for a kind (audio, video or subs). The player should select the one whose language matches the user preference or the default + forced track."
 msgstr ""
@@ -6814,7 +6814,7 @@ msgstr ""
 "по умолчанию + принудительно воспроизводимая дорожка."
 
 #: src/common/property_element.cpp:117
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:343
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:339
 msgid "Set if the track is used."
 msgstr "Используется ли дорожка."
 
@@ -7054,7 +7054,7 @@ msgstr ""
 "Определяет язык дорожки в\n"
 "форме языков Matroska."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:368
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:364
 #, fuzzy
 msgid "Specifies the language of the track in the Matroska languages form."
 msgstr ""
@@ -7069,7 +7069,7 @@ msgstr ""
 "Укажите возможные изменения отношения сторон\n"
 "(0: свободное масштабирование, 1: сохранять пропорции, 2: фиксированный)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:406
 #, fuzzy
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
 msgstr ""
@@ -7144,7 +7144,7 @@ msgid "Stereo mode: %1% (%2%)"
 msgstr "Стереорежим: %1% (%2%)"
 
 #: src/common/property_element.cpp:147
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "Режим Стерео-3D видео (0–11, см. документацию)."
 
@@ -7462,7 +7462,7 @@ msgstr "Вложение '%1%' не может быть прочитано.\n"
 msgid "The audio/video synchronization may have been lost."
 msgstr "Возможна рассинхронизация аудио и видео потоков"
 
-#: src/propedit/propedit.cpp:119
+#: src/propedit/propedit.cpp:123
 msgid "The changes are written to the file.\n"
 msgstr "Изменения записаны в файл.\n"
 
@@ -7642,20 +7642,20 @@ msgstr "Некоторые значения заголовка были изме
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "Файл '%1%' не может быть присоединен — он не существует или не может быть прочитан.\n"
 
-#: src/propedit/propedit.cpp:102
+#: src/propedit/propedit.cpp:106
 #, boost-format
 msgid "The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n"
 msgstr "Файл '%1%' не может быть открыт для чтения и записи, или операция чтения/записи в него прошла неудачно: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1268
-#: src/common/kax_analyzer.cpp:1271
+#: src/common/kax_analyzer.cpp:1311
+#: src/common/kax_analyzer.cpp:1314
 #, fuzzy, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "Файл '%1%' не может быть открыт для чтения: %2%.\n"
 
 #: src/common/command_line.cpp:50
-#: src/extract/mkvextract.cpp:53
 #: src/extract/mkvextract.cpp:57
+#: src/extract/mkvextract.cpp:61
 #: src/extract/timecodes_v2.cpp:193
 #: src/extract/tracks.cpp:358
 #: src/merge/reader_detection_and_creation.cpp:80
@@ -7678,7 +7678,7 @@ msgstr "Файл '%1%' не может быть открыт для чтения
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "Файл '%1%' не может быть открыт для записи: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1274
+#: src/common/kax_analyzer.cpp:1317
 #, fuzzy, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "Этот файл не может быть открыт или проанализирован.\n"
@@ -7796,7 +7796,7 @@ msgid "The file is being fixed, part 4/4..."
 msgstr "Производится исправление файла, часть 4/4..."
 
 #: src/common/property_element.cpp:102
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:302
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:298
 msgid "The file name for this segment."
 msgstr "Имя файла для данного сегмента."
 
@@ -7827,8 +7827,8 @@ msgstr "Файл имеет неподдерживаемый формат кон
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1364
-#: src/input/r_matroska.cpp:2016
+#: src/input/r_matroska.cpp:1369
+#: src/input/r_matroska.cpp:2021
 #, fuzzy
 msgid "The file will not be processed further."
 msgstr "Этот файл не может быть открыт для записи."
@@ -7979,7 +7979,7 @@ msgstr ""
 "Если установить 0, система псевдо-кэширования\n"
 "не используется."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:358
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:354
 #, fuzzy
 msgid "The maximum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
 msgstr ""
@@ -8005,7 +8005,7 @@ msgstr ""
 "Если установить 0, система псевдо-кэширования\n"
 "не используется."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:353
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:349
 #, fuzzy
 msgid "The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
 msgstr ""
@@ -8079,25 +8079,25 @@ msgstr ""
 "Число пикселей, которые будут удалены\n"
 "в верхней части изображения."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:403
 msgid "The number of video pixels to remove on the bottom of the image."
 msgstr ""
 "Число пикселей, которые будут удалены\n"
 "в нижней части изображения."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:394
 msgid "The number of video pixels to remove on the left of the image."
 msgstr ""
 "Число пикселей, которые будут удалены\n"
 "в левой части изображения."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:400
 msgid "The number of video pixels to remove on the right of the image."
 msgstr ""
 "Число пикселей, которые будут удалены\n"
 "в правой части изображения."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:397
 msgid "The number of video pixels to remove on the top of the image."
 msgstr ""
 "Число пикселей, которые будут удалены\n"
@@ -8361,7 +8361,7 @@ msgid "The timecodes refer to the whole stream and not to each individual output
 msgstr "Таймкоды относятся ко всему потоку, а не к каждому выходному файлу."
 
 #: src/common/property_element.cpp:101
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:301
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:297
 msgid "The title for the whole movie."
 msgstr "Заголовок для всего фильма."
 
@@ -8391,7 +8391,7 @@ msgid "The track number %1% from the file '%2%' cannot be appended to the track 
 msgstr "Дорожка номер %1% файла '%2%' не может быть присоединена к дорожке номер %3% файла '%4%'. %5%\n"
 
 #: src/common/property_element.cpp:112
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:333
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:329
 msgid "The track number as used in the Block Header."
 msgstr "Номер дорожки, как он указан в заголовке блока."
 
@@ -8459,8 +8459,8 @@ msgstr "Для '%1%' нет подходящего перевода.\n"
 msgid "There was an error querying the update status."
 msgstr "Произошла ошибка при запросе наличия обновлений."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:455
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:457
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:451
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:453
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "В значениях заголовка были ошибки, препятствующие сохранению заголовков. Выбрана первая ошибка."
 
@@ -8560,8 +8560,8 @@ msgstr ""
 msgid "This file contains coordinates in the timecode lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
 msgstr "Этот файл содержит координаты в строках таймкодов. Такие координаты не поддерживаются в формате субтитров Matroska SRT. Они будут удалены автоматически.\n"
 
-#: src/extract/mkvextract.cpp:61
-#: src/propedit/propedit.cpp:107
+#: src/extract/mkvextract.cpp:65
+#: src/propedit/propedit.cpp:111
 msgid "This file could not be opened or parsed.\n"
 msgstr "Этот файл не может быть открыт или проанализирован.\n"
 
@@ -8721,8 +8721,8 @@ msgstr "Эта дорожка содержит данные SBR AAC/HE-AAC/AAC+.
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1364
-#: src/input/r_matroska.cpp:2016
+#: src/input/r_matroska.cpp:1369
+#: src/input/r_matroska.cpp:2021
 msgid "This usually indicates a damaged file structure."
 msgstr ""
 
@@ -8773,7 +8773,7 @@ msgid "Timecodes:"
 msgstr "Таймкоды:"
 
 #: src/common/property_element.cpp:101
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:301
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:297
 msgid "Title"
 msgstr "Название"
 
@@ -8896,7 +8896,7 @@ msgid "Track ID for mkvmerge & mkvextract:"
 msgstr "Номер дорожки для mkvmerge и mkvextract:"
 
 #: src/common/property_element.cpp:113
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:336
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:332
 msgid "Track UID"
 msgstr "UID дорожки"
 
@@ -8916,7 +8916,7 @@ msgid "Track headers"
 msgstr "Заголовки дорожки"
 
 #: src/common/property_element.cpp:112
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:333
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:329
 msgid "Track number"
 msgstr "Номер дорожки"
 
@@ -8987,7 +8987,7 @@ msgstr ""
 "Единица измерения для ширины/высоты изображения\n"
 "(0: пиксели, 1: сантиметры, 2: дюймы)."
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:391
 #, fuzzy
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
 msgstr ""
@@ -9119,7 +9119,7 @@ msgstr "Неподдерживаемая MPEG mpeg_version: 0x%|1$02x| в пак
 msgid "Unsupported file format"
 msgstr "Неподдерживаемый формат файла"
 
-#: src/input/r_matroska.cpp:1824
+#: src/input/r_matroska.cpp:1829
 msgid "Unsupported track type for this track.\n"
 msgstr "Неподдерживаемый тип дорожки для этой дорожки.\n"
 
@@ -9169,7 +9169,7 @@ msgstr "Использование длины размера NALU, равног�
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Применяется разделение для формата '%1%'.\n"
 
-#: src/input/r_matroska.cpp:1393
+#: src/input/r_matroska.cpp:1398
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Применяется стандартный модуль вывода для дорожки типа '%1%'.\n"
@@ -9227,42 +9227,42 @@ msgid "Video"
 msgstr "Видео"
 
 #: src/common/property_element.cpp:145
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:406
 msgid "Video aspect ratio type"
 msgstr "Тип отношения сторон видео"
 
 #: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:407
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:403
 msgid "Video crop bottom"
 msgstr "Обрезка видео снизу"
 
 #: src/common/property_element.cpp:141
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:398
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:394
 msgid "Video crop left"
 msgstr "Обрезка видео слева"
 
 #: src/common/property_element.cpp:143
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:404
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:400
 msgid "Video crop right"
 msgstr "Обрезка видео справа"
 
 #: src/common/property_element.cpp:142
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:401
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:397
 msgid "Video crop top"
 msgstr "Обрезка видео сверху"
 
 #: src/common/property_element.cpp:139
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:392
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:388
 msgid "Video display height"
 msgstr "Высота изображения"
 
 #: src/common/property_element.cpp:140
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:395
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:391
 msgid "Video display unit"
 msgstr "Единица измерения"
 
 #: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:385
 msgid "Video display width"
 msgstr "Ширина изображения"
 
@@ -9276,12 +9276,12 @@ msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
 msgstr "Пакет видео собрать не удалось. Код ошибки: %1% (%2%)\n"
 
 #: src/common/property_element.cpp:137
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:386
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:382
 msgid "Video pixel height"
 msgstr "Высота изображения в пикселях"
 
 #: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:379
 msgid "Video pixel width"
 msgstr "Ширина изображения в пикселях"
 
@@ -9291,7 +9291,7 @@ msgid "Video properties"
 msgstr "Видео свойства"
 
 #: src/common/property_element.cpp:147
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:414
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 msgid "Video stereo mode"
 msgstr "Режим стереоизображения"
 
@@ -9439,12 +9439,12 @@ msgid "Whenever the user adds a playlist the program can automatically scan the 
 msgstr ""
 
 #: src/common/property_element.cpp:136
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:383
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:379
 msgid "Width of the encoded video frames in pixels."
 msgstr "Ширина закодированных кадров видео в пикселях."
 
 #: src/common/property_element.cpp:138
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:389
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:385
 msgid "Width of the video frames to display."
 msgstr "Отображаемая ширина кадров видео."
 
@@ -10040,13 +10040,13 @@ msgstr "matroska_reader: (режим совместимости MS для дор
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: У дорожки отсутствует номер.\n"
 
-#: src/input/r_matroska.cpp:1459
+#: src/input/r_matroska.cpp:1464
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: Не удалось сохранить UID дорожки %1%, поскольку он уже назначен новому файлу.\n"
 
-#: src/input/r_matroska.cpp:1276
 #: src/input/r_matroska.cpp:1281
+#: src/input/r_matroska.cpp:1286
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Сегментов не найдено.\n"
 
@@ -10119,7 +10119,7 @@ msgstr "matroska_reader: Тип дорожки не найден.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: mkvmerge не была скомпилирована с поддержкой FLAC. Дорожка %1% будет проигнорирована.\n"
 
-#: src/input/r_matroska.cpp:1263
+#: src/input/r_matroska.cpp:1268
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: не найдено заголовка EBML.\n"
 
@@ -10234,7 +10234,7 @@ msgstr "mkvextract tracks \"фильм.mkv\" 2:аудио.ogg -c ISO8859-1 3:с�
 msgid "mkvextract tracks <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract tracks <inname> [параметры] [TID1:out1 [TID2:out2 ...]]"
 
-#: src/extract/mkvextract.cpp:72
+#: src/extract/mkvextract.cpp:76
 #, boost-format
 msgid "mkvextract.cpp/show_element(): level > 9: %1%"
 msgstr "mkvextract.cpp/show_element(): уровень > 9: %1%"
@@ -10618,14 +10618,14 @@ msgstr "tta_reader: tag_size < 0 в конструкторе. %1%\n"
 #: src/info/mkvinfo.cpp:752
 #: src/info/mkvinfo.cpp:938
 #: src/input/r_matroska.cpp:103
-#: src/input/r_matroska.cpp:2366
+#: src/input/r_matroska.cpp:2371
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:157
 #: src/mkvtoolnix-gui/jobs/job.cpp:237
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57
 msgid "unknown"
 msgstr "неизвестно"
 
-#: src/input/r_matroska.cpp:2354
+#: src/input/r_matroska.cpp:2359
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "неизвестно, тег формата 0x%|1$04x|"
