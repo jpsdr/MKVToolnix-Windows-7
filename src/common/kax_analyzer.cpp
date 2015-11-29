@@ -916,7 +916,6 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
   mxdebug_if(m_debug, boost::format("ensure_front_seek_head_links_to start\n"));
 
   boost::optional<unsigned int> first_seek_head_idx;
-  int first_cluster_idx{-1};
 
   for (unsigned int data_idx = 0, end = m_data.size(); end > data_idx; ++data_idx) {
     auto const &data = *m_data[data_idx];
@@ -927,10 +926,8 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
 
       first_seek_head_idx.reset(data_idx);
 
-    } else if (Is<KaxCluster>(data.m_id)) {
-      first_cluster_idx = data_idx;
+    } else if (Is<KaxCluster>(data.m_id))
       break;
-    }
   }
 
   // This seek head is not located at the start. If there is another
