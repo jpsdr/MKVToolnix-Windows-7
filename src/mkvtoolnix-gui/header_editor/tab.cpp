@@ -228,17 +228,13 @@ Tab::retranslateUi() {
 
 void
 Tab::populateTree() {
-  for (auto &data : m_analyzer->m_data)
-    if (data->m_id == KaxInfo::ClassInfos.GlobalId) {
-      handleSegmentInfo(*data);
-      break;
-    }
+  m_analyzer->with_elements(KaxInfo::ClassInfos.GlobalId, [this](kax_analyzer_data_c const &data) {
+    handleSegmentInfo(data);
+  });
 
-  for (auto &data : m_analyzer->m_data)
-    if (data->m_id == KaxTracks::ClassInfos.GlobalId) {
-      handleTracks(*data);
-      break;
-    }
+  m_analyzer->with_elements(KaxTracks::ClassInfos.GlobalId, [this](kax_analyzer_data_c const &data) {
+    handleTracks(data);
+  });
 }
 
 void
@@ -289,8 +285,8 @@ Tab::doModifications() {
 }
 
 void
-Tab::handleSegmentInfo(kax_analyzer_data_c &data) {
-  m_eSegmentInfo = m_analyzer->read_element(&data);
+Tab::handleSegmentInfo(kax_analyzer_data_c const &data) {
+  m_eSegmentInfo = m_analyzer->read_element(data);
   if (!m_eSegmentInfo)
     return;
 
@@ -310,8 +306,8 @@ Tab::handleSegmentInfo(kax_analyzer_data_c &data) {
 }
 
 void
-Tab::handleTracks(kax_analyzer_data_c &data) {
-  m_eTracks = m_analyzer->read_element(&data);
+Tab::handleTracks(kax_analyzer_data_c const &data) {
+  m_eTracks = m_analyzer->read_element(data);
   if (!m_eTracks)
     return;
 

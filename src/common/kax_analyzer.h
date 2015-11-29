@@ -90,10 +90,8 @@ public:
     ps_end,
   };
 
-public:
-  std::vector<kax_analyzer_data_cptr> m_data;
-
 private:
+  std::vector<kax_analyzer_data_cptr> m_data;
   std::string m_file_name;
   mm_io_c *m_file;
   bool m_close_file;
@@ -111,30 +109,17 @@ public:
   virtual ~kax_analyzer_c();
 
   virtual update_element_result_e update_element(EbmlElement *e, bool write_defaults = false);
-  virtual update_element_result_e update_element(ebml_element_cptr e, bool write_defaults = false) {
-    return update_element(e.get(), write_defaults);
-  }
-  virtual update_element_result_e remove_elements(EbmlId id);
-  virtual ebml_master_cptr read_all(const EbmlCallbacks &callbacks);
+  virtual update_element_result_e update_element(ebml_element_cptr const &e, bool write_defaults = false);
 
-  virtual ebml_element_cptr read_element(kax_analyzer_data_c *element_data);
-  virtual ebml_element_cptr read_element(kax_analyzer_data_cptr element_data) {
-    return read_element(element_data.get());
-  }
-  virtual ebml_element_cptr read_element(unsigned int pos) {
-    return read_element(m_data[pos]);
-  }
+  virtual update_element_result_e remove_elements(EbmlId const &id);
+
+  virtual ebml_master_cptr read_all(const EbmlCallbacks &callbacks);
+  virtual ebml_element_cptr read_element(kax_analyzer_data_c const &element_data);
+  virtual ebml_element_cptr read_element(kax_analyzer_data_cptr const &element_data);
+  virtual ebml_element_cptr read_element(unsigned int pos);
 
   virtual void with_elements(const EbmlId &id, std::function<void(kax_analyzer_data_c const &)> worker) const;
-  virtual int find(const EbmlId &id) {
-    unsigned int i;
-
-    for (i = 0; m_data.size() > i; i++)
-      if (id == m_data[i]->m_id)
-        return i;
-
-    return -1;
-  }
+  virtual int find(EbmlId const &id);
 
   virtual uint64_t get_segment_pos() const;
   virtual uint64_t get_segment_data_start_pos() const;

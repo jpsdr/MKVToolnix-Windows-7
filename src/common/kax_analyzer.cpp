@@ -314,15 +314,25 @@ kax_analyzer_c::process_internal(kax_analyzer_c::parse_mode_e parse_mode,
 }
 
 ebml_element_cptr
-kax_analyzer_c::read_element(kax_analyzer_data_c *element_data) {
+kax_analyzer_c::read_element(kax_analyzer_data_cptr const &element_data) {
+  return read_element(*element_data);
+}
+
+ebml_element_cptr
+kax_analyzer_c::read_element(unsigned int pos) {
+  return read_element(*m_data[pos]);
+}
+
+ebml_element_cptr
+kax_analyzer_c::read_element(kax_analyzer_data_c const &element_data) {
   reopen_file();
 
   EbmlStream es(*m_file);
-  m_file->setFilePointer(element_data->m_pos);
+  m_file->setFilePointer(element_data.m_pos);
 
   int upper_lvl_el_found         = 0;
   ebml_element_cptr e            = ebml_element_cptr(es.FindNextElement(EBML_CONTEXT(m_segment), upper_lvl_el_found, 0xFFFFFFFFL, true, 1));
-  const EbmlCallbacks *callbacks = find_ebml_callbacks(EBML_INFO(KaxSegment), element_data->m_id);
+  const EbmlCallbacks *callbacks = find_ebml_callbacks(EBML_INFO(KaxSegment), element_data.m_id);
 
   if (!e || !callbacks || (EbmlId(*e) != EBML_INFO_ID(*callbacks))) {
     e.reset();
@@ -344,6 +354,12 @@ kax_analyzer_c::read_element(kax_analyzer_data_c *element_data) {
     verify_data_structures_against_file(hook_name);               \
   if (debugging_c::requested("kax_analyzer_" hook_name "_break")) \
     return uer_success;
+
+kax_analyzer_c::update_element_result_e
+kax_analyzer_c::update_element(ebml_element_cptr const &e,
+                               bool write_defaults) {
+  return update_element(e.get(), write_defaults);
+}
 
 kax_analyzer_c::update_element_result_e
 kax_analyzer_c::update_element(EbmlElement *e,
@@ -378,7 +394,7 @@ kax_analyzer_c::update_element(EbmlElement *e,
 }
 
 kax_analyzer_c::update_element_result_e
-kax_analyzer_c::remove_elements(EbmlId id) {
+kax_analyzer_c::remove_elements(EbmlId const &id) {
   reopen_file();
 
   try {
@@ -1276,6 +1292,15 @@ kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
   }
 
   throw mtx::kax_analyzer_x{boost::format(Y("No segment UID could be found in the file '%1%'.")) % file_name};
+}
+
+int
+kax_analyzer_c::find(EbmlId const &id) {
+  for (auto const &element : m_data | badap::indexed())
+    if (id == element.value()->m_id)
+      return element.index();
+
+  return -1;
 }
 
 void

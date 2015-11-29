@@ -59,8 +59,8 @@ public slots:
 
 protected:
   void setupUi();
-  void handleSegmentInfo(kax_analyzer_data_c &data);
-  void handleTracks(kax_analyzer_data_c &data);
+  void handleSegmentInfo(kax_analyzer_data_c const &data);
+  void handleTracks(kax_analyzer_data_c const &data);
   void populateTree();
   void resetData();
   void doModifications();
