@@ -1205,6 +1205,9 @@ kax_reader_c::read_headers() {
 
 void
 kax_reader_c::find_level1_elements_via_analyzer() {
+  if (!debugging_c::requested("kax_reader_deep_scan"))
+    return;
+
   try {
     auto analyzer = std::make_shared<kax_analyzer_c>(m_in.get());
     auto ok       = analyzer->process(kax_analyzer_c::parse_mode_fast, MODE_READ, true);
