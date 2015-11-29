@@ -1427,9 +1427,9 @@ kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
 
 int
 kax_analyzer_c::find(EbmlId const &id) {
-  for (auto const &element : m_data | badap::indexed())
-    if (id == element.value()->m_id)
-      return element.index();
+  for (int idx = 0, end = m_data.size(); idx < end; idx++)
+    if (id == m_data[idx]->m_id)
+      return idx;
 
   return -1;
 }
