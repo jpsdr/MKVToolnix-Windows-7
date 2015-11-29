@@ -436,7 +436,7 @@ kax_analyzer_c::remove_elements(EbmlId const &id) {
   return uer_success;
 }
 
-/** \brief Sets the m_segment size to the length of the m_file
+/** \brief Sets the m_segment size to the length of the file
  */
 void
 kax_analyzer_c::adjust_segment_size() {
@@ -497,7 +497,7 @@ kax_analyzer_c::adjust_segment_size() {
 bool
 kax_analyzer_c::handle_void_elements(size_t data_idx) {
   // Is the element at the end of the file? If so truncate the file
-  // and remove the element from the m_data structure if that was
+  // and remove the element from the data structure if that was
   // requested. Then we're done.
   if (m_data.size() == (data_idx + 1)) {
     m_file->truncate(m_data[data_idx]->m_pos + m_data[data_idx]->m_size);
@@ -666,7 +666,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
   // Now check if we should overwrite the current element with the
   // EbmlVoid element. That is the case if the current element's size
-  // is 0. In that case simply remove the element from the m_data
+  // is 0. In that case simply remove the element from the data
   // vector.
   if (0 == m_data[data_idx]->m_size)
     m_data.erase(m_data.begin() + data_idx);
@@ -676,7 +676,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
 /** \brief Removes all seek entries for a specific element
 
-    Iterates over the level 1 elements in the m_file and reads each seek
+    Iterates over the level 1 elements in the file and reads each seek
     head it finds. All entries for the given \c id are removed from
     the seek head. If the seek head has been changed then it is
     rewritten to its original position. The space freed up is filled
@@ -693,7 +693,7 @@ kax_analyzer_c::remove_from_meta_seeks(EbmlId id) {
     if (!Is<KaxSeekHead>(m_data[data_idx]->m_id))
       continue;
 
-    // Read the element from the m_file. Remember its size so that a new
+    // Read the element from the file. Remember its size so that a new
     // EbmlVoid element can be constructed afterwards.
     ebml_element_cptr element = read_element(data_idx);
     KaxSeekHead *seek_head    = dynamic_cast<KaxSeekHead *>(element.get());
@@ -724,7 +724,7 @@ kax_analyzer_c::remove_from_meta_seeks(EbmlId id) {
       modified = true;
     }
 
-    // Only rewrite the element to the m_file if it has been modified.
+    // Only rewrite the element to the file if it has been modified.
     if (!modified)
       continue;
 
@@ -757,7 +757,7 @@ kax_analyzer_c::remove_from_meta_seeks(EbmlId id) {
 
 /** \brief Overwrites all instances of a specific level 1 element
 
-    Iterates over the level 1 elements in the m_file and overwrites
+    Iterates over the level 1 elements in the file and overwrites
     each instance of a specific level 1 element given by \c id.
     It is replaced with a new EbmlVoid element.
 
@@ -780,11 +780,11 @@ kax_analyzer_c::overwrite_all_instances(EbmlId id) {
 
 /** \brief Merges consecutive EbmlVoid elements into a single one
 
-    Iterates over the level 1 elements in the m_file and merges
+    Iterates over the level 1 elements in the file and merges
     consecutive EbmlVoid elements into a single one which covers
     the same space as the smaller ones combined.
 
-    Void elements at the end of the m_file are removed as well.
+    Void elements at the end of the file are removed as well.
  */
 void
 kax_analyzer_c::merge_void_elements() {
@@ -812,7 +812,7 @@ kax_analyzer_c::merge_void_elements() {
       continue;
     }
 
-    // Write the new EbmlVoid element to the m_file.
+    // Write the new EbmlVoid element to the file.
     m_file->setFilePointer(m_data[start_idx]->m_pos);
 
     EbmlVoid evoid;
@@ -828,7 +828,7 @@ kax_analyzer_c::merge_void_elements() {
     start_idx += 2;
   }
 
-  // See how many void elements there are at the end of the m_file.
+  // See how many void elements there are at the end of the file.
   start_idx = m_data.size();
 
   while ((0 < start_idx) && Is<EbmlVoid>(m_data[start_idx - 1]->m_id))
@@ -838,15 +838,15 @@ kax_analyzer_c::merge_void_elements() {
   if (m_data.size() <= start_idx)
     return;
 
-  // Truncate the m_file after the last non-void element and update the m_segment size.
+  // Truncate the file after the last non-void element and update the segment size.
   m_file->truncate(m_data[start_idx]->m_pos);
   adjust_segment_size();
 }
 
-/** \brief Finds a suitable spot for an element and writes it to the m_file
+/** \brief Finds a suitable spot for an element and writes it to the file
 
     First, a suitable spot for the element is determined by looking at
-    EbmlVoid elements. If none is found in the middle of the m_file then
+    EbmlVoid elements. If none is found in the middle of the file then
     the element will be appended at the end.
 
     Second, the element is written at the location determined in the
@@ -858,7 +858,7 @@ kax_analyzer_c::merge_void_elements() {
 
     \param e Pointer to the element to write.
     \param write_defaults Boolean that decides whether or not elements
-      which contain their default value are written to the m_file.
+      which contain their default value are written to the file.
  */
 void
 kax_analyzer_c::write_element(EbmlElement *e,
@@ -892,13 +892,13 @@ kax_analyzer_c::write_element(EbmlElement *e,
     return;
   }
 
-  // We haven't found a suitable place. So store the element at the end of the m_file
+  // We haven't found a suitable place. So store the element at the end of the file
   // and update the internal records.
   m_file->setFilePointer(0, seek_end);
   e->Render(*m_file, write_defaults, false, true);
   m_data.push_back(kax_analyzer_data_c::create(EbmlId(*e), m_file->getFilePointer() - e->ElementSize(write_defaults), e->ElementSize(write_defaults)));
 
-  // Adjust the m_segment's size.
+  // Adjust the segment's size.
   adjust_segment_size();
 }
 
@@ -914,7 +914,7 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
 
     // Calculate how much free space there is behind the seek head.
     // merge_void_elemens() guarantees that there is no EbmlVoid element
-    // at the end of the m_file and that all consecutive EbmlVoid elements
+    // at the end of the file and that all consecutive EbmlVoid elements
     // have been merged into a single element.
     size_t available_space = m_data[data_idx]->m_size;
     if (((data_idx + 1) < m_data.size()) && Is<EbmlVoid>(m_data[data_idx + 1]->m_id))
@@ -932,7 +932,7 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
     seek_head->IndexThis(*e, *m_segment.get());
     seek_head->UpdateSize(true);
 
-    // We can use this seek head if it is at the end of the m_file, or if there
+    // We can use this seek head if it is at the end of the file, or if there
     // is enough space behind it in form of void elements.
     if ((m_data.size() != (data_idx + 1)) && (seek_head->ElementSize(true) > available_space))
       continue;
@@ -944,8 +944,8 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
     // Update the internal record.
     m_data[data_idx]->m_size = seek_head->ElementSize(true);
 
-    // If this seek head is located at the end of the m_file then we have
-    // to adjust the m_segment size.
+    // If this seek head is located at the end of the file then we have
+    // to adjust the segment size.
     if (m_data.size() == (data_idx + 1))
       adjust_segment_size();
 
@@ -963,27 +963,27 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
 void
 kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e,
                                                                   int first_seek_head_idx) {
-  // Read the first seek head...
+  // Read the first seek head…
   ebml_element_cptr element = read_element(first_seek_head_idx);
   KaxSeekHead *seek_head    = dynamic_cast<KaxSeekHead *>(element.get());
   if (!seek_head)
     throw uer_error_unknown;
 
-  // ...index our element...
+  // …index our element…
   seek_head->IndexThis(*e, *m_segment.get());
   seek_head->UpdateSize(true);
 
-  // ...write the seek head at the end of the m_file...
+  // …write the seek head at the end of the file…
   m_file->setFilePointer(0, seek_end);
   seek_head->Render(*m_file, true);
 
-  // ...and update the internal records.
+  // …and update the internal records.
   m_data.push_back(kax_analyzer_data_c::create(EBML_ID(KaxSeekHead), seek_head->GetElementPosition(), seek_head->ElementSize(true)));
 
-  // Update the m_segment size.
+  // Update the segment size.
   adjust_segment_size();
 
-  // Create a new seek head and write it to the m_file.
+  // Create a new seek head and write it to the file.
   std::shared_ptr<KaxSeekHead> forward_seek_head(new KaxSeekHead);
   forward_seek_head->IndexThis(*seek_head, *m_segment.get());
   forward_seek_head->UpdateSize(true);
@@ -1102,7 +1102,7 @@ kax_analyzer_c::move_level1_element_before_cluster_to_end_of_file() {
 
     This function iterates over all meta seek elements and looks
     for one that has enough space (via following EbmlVoid elements or
-    because it is located at the end of the m_file) for indexing
+    because it is located at the end of the file) for indexing
     the element \c e.
 
     If no such element is found then a new meta seek element is
@@ -1120,7 +1120,7 @@ kax_analyzer_c::add_to_meta_seek(EbmlElement *e) {
   // No suitable meta seek head found -- we have to write a new one.
 
   // If we have found a prior seek head then we copy that one to the end
-  // of the m_file including the newly indexed element and write a one-element
+  // of the file including the newly indexed element and write a one-element
   // seek head at the first meta seek's position pointing to the one at the
   // end.
 
