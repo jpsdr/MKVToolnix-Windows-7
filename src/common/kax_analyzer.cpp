@@ -24,7 +24,9 @@
 #include <matroska/KaxTags.h>
 
 #include "common/bitvalue.h"
+#include "common/construct.h"
 #include "common/ebml.h"
+#include "common/endian.h"
 #include "common/error.h"
 #include "common/list_utils.h"
 #include "common/kax_analyzer.h"
@@ -902,6 +904,104 @@ kax_analyzer_c::write_element(EbmlElement *e,
   adjust_segment_size();
 }
 
+int
+kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
+  // It is possible that the seek head at the front has been removed
+  // due to moving the seek head at the back one byte to the front
+  // which calls remove_from_meta_seeks() with that second seek head.
+
+  // If this seek head is located at the front then we've got nothing
+  // to do. At the same time look for a seek head at the start.
+
+  mxdebug_if(m_debug, boost::format("ensure_front_seek_head_links_to start\n"));
+
+  boost::optional<unsigned int> first_seek_head_idx;
+  int first_cluster_idx{-1};
+
+  for (unsigned int data_idx = 0, end = m_data.size(); end > data_idx; ++data_idx) {
+    auto const &data = *m_data[data_idx];
+
+    if (Is<KaxSeekHead>(data.m_id)) {
+      if (data_idx == seek_head_idx)
+        return seek_head_idx;
+
+      first_seek_head_idx.reset(data_idx);
+
+    } else if (Is<KaxCluster>(data.m_id)) {
+      first_cluster_idx = data_idx;
+      break;
+    }
+  }
+
+  // This seek head is not located at the start. If there is another
+  // seek head present then the rest of the code has already taken
+  // care of everything.
+  if (first_seek_head_idx)
+    return *first_seek_head_idx;
+
+  // Our seek head is at the end and there's no seek head at the
+  // start.
+  mxdebug_if(m_debug, boost::format("  no seek head at start but one at the end\n"));
+
+  auto seek_head_position = m_segment->GetRelativePosition(m_data[seek_head_idx]->m_pos);
+  auto seek_head_id       = memory_c::alloc(4);
+
+  put_uint32_be(seek_head_id->get_buffer(), EBML_ID(KaxSeekHead).GetValue());
+
+  auto new_seek_head = ebml_master_cptr{
+    mtx::construct::cons<KaxSeekHead>(mtx::construct::cons<KaxSeek>(new KaxSeekID,       seek_head_id,
+                                                                    new KaxSeekPosition, seek_head_position))
+  };
+
+  new_seek_head->UpdateSize();
+  auto needed_size = static_cast<int64_t>(new_seek_head->ElementSize(true));
+  auto first_time  = true;
+
+  while (first_time) {
+    mxdebug_if(m_debug, boost::format("  looking for place for the new seek head at the start…\n"));
+    // Find a place at the front with enough space.
+    for (unsigned int data_idx = 0u, end = m_data.size(); data_idx < end; ++data_idx) {
+      auto &data = *m_data[data_idx];
+
+      if (Is<KaxCluster>(data.m_id))
+        break;
+
+      if (!Is<EbmlVoid>(data.m_id))
+        continue;
+
+      // Avoid the case with the space being only one byte larger than
+      // what we need. That would require moving the next element one
+      // byte to the front triggering seek head adjustments.
+      if ((data.m_size != needed_size) && (data.m_size < (needed_size + 2)))
+        continue;
+
+      mxdebug_if(m_debug, boost::format("  got one! writing at file position %1%\n") % data.m_pos);
+      // Got a place. Write the seek head, update the internal record &
+      // write a new void element.
+      m_file->setFilePointer(data.m_pos);
+      new_seek_head->Render(*m_file, true);
+
+      data.m_size = needed_size;
+      data.m_id   = EBML_ID(KaxSeekHead);
+
+      handle_void_elements(data_idx);
+
+      return data_idx;
+    }
+
+    mxdebug_if(m_debug, boost::format("  no place, moving level 1 elements and trying again\n"));
+    // We haven't found a spot. Move an existing level 1 element to the
+    // end if we haven't done that yet and try again. Otherwise fail.
+    if (first_time && !move_level1_element_before_cluster_to_end_of_file())
+      break;
+
+    first_time = false;
+  }
+
+  throw uer_error_unknown;
+
+  return -1;
+}
 
 std::pair<bool, int>
 kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
@@ -952,6 +1052,13 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
     else
       // Otherwise create an EbmlVoid to fill the gap (if any).
       handle_void_elements(data_idx);
+
+    // Now ensure that the seek head is either at the front of the
+    // file itself or that it is referenced from one at the front. It
+    // is possible that the seek head at the front has been removed
+    // due to moving the seek head at the back one byte to the front
+    // which calls remove_from_meta_seeks() with that second seek head.
+    first_seek_head_idx = ensure_front_seek_head_links_to(data_idx);
 
     // We're done.
     return { true, first_seek_head_idx };

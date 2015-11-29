@@ -1,5 +1,11 @@
 2015-11-29  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvpropedit, GUI's chapter & header editors bug fix: in certain
+        situations the modified file would not contain a seek head before
+        the first cluster anymore resulting in most players not finding
+        elements such as attachments or the index located at the end of
+        the file anymore. Fixes #1513.
+
         * mkvmerge: bug fix: the change to do a deeper file analysis if no
         seek head was found was causing huge increases in file type
         detection time as popular tools like x264 don't write seek
