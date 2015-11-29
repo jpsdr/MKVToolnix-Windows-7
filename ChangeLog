@@ -1,3 +1,12 @@
+2015-11-29  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: the change to do a deeper file analysis if no
+        seek head was found was causing huge increases in file type
+        detection time as popular tools like x264 don't write seek
+        heads. The way elements at the end are searched has been changed
+        to only scan the last 5 MB of the file instead of iterating over
+        every level 1 element from the beginning of the file.
+
 2015-11-28  Moritz Bunkus  <moritz@bunkus.org>
 
         * Released v8.6.0.

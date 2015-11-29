@@ -216,6 +216,12 @@ kax_analyzer_c::set_throw_on_error(bool throw_on_error) {
   return *this;
 }
 
+kax_analyzer_c &
+kax_analyzer_c::set_parser_start_position(uint64_t position) {
+  m_parser_start_position.reset(position);
+  return *this;
+}
+
 bool
 kax_analyzer_c::process() {
   try {
@@ -277,6 +283,14 @@ kax_analyzer_c::process_internal() {
   bool meta_seek_found = false;
   auto segment_end     = m_segment->IsFiniteSize() ? m_segment->GetElementPosition() + m_segment->HeadSize() + m_segment->GetSize() : m_file->get_size();
   EbmlElement *l1      = nullptr;
+
+  // In certain situations the caller doesn't way to have to pay the
+  // price for full analysis. Then it can configure the parser to
+  // start parsing at a certain offset. EbmlStream::FindNextElement()
+  // should take care of re-syncing to a known level 1 element. But
+  // take care not to start before the segment's data start position.
+  if (m_parser_start_position)
+    m_file->setFilePointer(std::max<uint64_t>(*m_parser_start_position, m_segment->GetElementPosition() + m_segment->HeadSize()));
 
   // We've got our segment, so let's find all level 1 elements.
   while (m_file->getFilePointer() < segment_end) {

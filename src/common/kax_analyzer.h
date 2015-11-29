@@ -102,6 +102,7 @@ private:
   parse_mode_e m_parse_mode{parse_mode_full};
   open_mode m_open_mode{MODE_WRITE};
   bool m_throw_on_error{};
+  boost::optional<uint64_t> m_parser_start_position;
 
 public:                         // Static functions
   static bool probe(std::string file_name);
@@ -130,6 +131,7 @@ public:
   virtual kax_analyzer_c &set_parse_mode(parse_mode_e parse_mode);
   virtual kax_analyzer_c &set_open_mode(open_mode mode);
   virtual kax_analyzer_c &set_throw_on_error(bool throw_on_error);
+  virtual kax_analyzer_c &set_parser_start_position(uint64_t position);
 
   virtual bool process();
 
