@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/util/settings.h"
 
 class QListWidget;
+class QModelIndex;
 
 namespace mtx { namespace gui {
 
@@ -35,8 +36,10 @@ public slots:
   void editDefaultAdditionalCommandLineOptions();
   void enableOutputFileNameControls();
   void browseFixedOutputDirectory();
+  void pageSelectionChanged(QModelIndex const &current);
 
 protected:
+  void setupPageSelector();
   void setupToolTips();
   void setupConnections();
 

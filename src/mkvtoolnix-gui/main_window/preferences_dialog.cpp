@@ -1,6 +1,10 @@
 #include "common/common_pch.h"
 
 #include <QFileDialog>
+#include <QIcon>
+#include <QItemSelectionModel>
+#include <QModelIndex>
+#include <QStandardItem>
 #include <QVector>
 
 #include "common/extern_data.h"
@@ -24,11 +28,11 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 {
   ui->setupUi(this);
 
-  ui->tabs->setTabPosition(m_cfg.m_tabPosition);
+  setupPageSelector();
+
   ui->tbOftenUsedXYZ->setTabPosition(m_cfg.m_tabPosition);
 
   Util::restoreWidgetGeometry(this);
-  Util::fixScrollAreaBackground(ui->mergeScrollArea);
 
   // GUI page
   ui->cbGuiDisableAnimations->setChecked(m_cfg.m_disableAnimations);
@@ -91,6 +95,62 @@ bool
 PreferencesDialog::uiLocaleChanged()
   const {
   return m_previousUiLocale != m_cfg.m_uiLocale;
+}
+
+void
+PreferencesDialog::pageSelectionChanged(QModelIndex const &current) {
+  if (!current.isValid())
+    return;
+
+  auto page = qobject_cast<QStandardItemModel *>(ui->pageSelector->model())
+    ->itemFromIndex(current.sibling(current.row(), 0))
+    ->data()
+    .value<int>();
+  ui->pages->setCurrentIndex(page);
+}
+
+void
+PreferencesDialog::setupPageSelector() {
+  m_cfg.handleSplitterSizes(ui->pagesSplitter);
+
+  auto model = new QStandardItemModel{};
+  ui->pageSelector->setModel(model);
+
+  auto addItem = [model](int page, QStandardItem *parent, QString const &text, QString const &icon = QString{}) -> QStandardItem * {
+    auto item = new QStandardItem{text};
+
+    item->setData(page);
+    if (!icon.isEmpty())
+      item->setIcon(QIcon{Q(":/icons/16x16/%1.png").arg(icon)});
+
+    if (parent)
+      parent->appendRow(item);
+    else
+      model->appendRow(item);
+
+    return item;
+  };
+
+  auto page      = 0;
+  auto pGui      = addItem(page++, nullptr, QY("GUI"),               "mkvtoolnix-gui");
+                   addItem(page++, pGui,    QY("Often used selections"));
+  auto pMerge    = addItem(page++, nullptr, QY("Merge"),             "merge");
+                   addItem(page++, pMerge,  QY("Default values"));
+                   addItem(page++, pMerge,  QY("Enabling tracks"));
+                   addItem(page++, pMerge,  QY("Output"));
+                   addItem(page++, pMerge,  QY("Playlists"));
+                   addItem(page++, nullptr, QY("Chapter editor"),    "story-editor");
+                   addItem(page++, nullptr, QY("Jobs & job queue"),  "view-task");
+
+  for (auto row = 0, numRows = model->rowCount(); row < numRows; ++row)
+    ui->pageSelector->setExpanded(model->index(row, 0), true);
+
+  ui->pageSelector->setMinimumSize(ui->pageSelector->minimumSizeHint());
+
+  auto selection = QItemSelection{model->index(0, 0), model->index(0, 0)};
+  ui->pageSelector->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+
+  connect(ui->pageSelector->selectionModel(), &QItemSelectionModel::currentChanged, this, &PreferencesDialog::pageSelectionChanged);
 }
 
 void
