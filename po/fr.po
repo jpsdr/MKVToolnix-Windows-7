@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-12-01 19:09+0100\n"
-"PO-Revision-Date: 2015-11-22 10:46+0100\n"
+"PO-Revision-Date: 2015-11-30 23:37+0100\n"
 "Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: Denis Baron, TMTisFree <tmtisfree@free.fr>\n"
 "Language: fr\n"
@@ -527,15 +527,14 @@ msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           Ne copie aucune piste vidéo de ce fichier.\n"
 
 #: src/merge/mkvmerge.cpp:271
-#, fuzzy
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
 "                           ('text', 'verbose-text', 'json').\n"
 msgstr ""
 "  --cue-chapter-name-format <format>\n"
-"                           Modèle de conversion des entrées de la feuille\n"
-"                           de montage CUE en noms de chapitres.\n"
+"                           Définit le format des résultats d'identification\n"
+"                           ('text', 'verbose-text', 'json').\n"
 
 #: src/merge/mkvmerge.cpp:195
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
@@ -855,9 +854,8 @@ msgid "\"Default track\" flag:"
 msgstr "Signal « Piste par défaut » :"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:421
-#, fuzzy
 msgid "\"Determine automatically\" is a good choice for almost all situations."
-msgstr "« Piste par défaut » est un bon choix dans la plupart des situations."
+msgstr "« Déterminer automatiquement » est un bon choix dans la plupart des situations."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:284
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1503
@@ -1271,7 +1269,7 @@ msgstr "&Type MIME :"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:305
 msgid "&Merge"
-msgstr "&Fusion"
+msgstr "&Outil de fusion"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:433
 msgid "&Merge tool"
@@ -1678,7 +1676,7 @@ msgstr "« %1% » : %2%"
 #: src/common/mm_multi_file_io.cpp:166
 #, boost-format
 msgid "'%1%': Processing the following files as well: %2%\n"
-msgstr "« %1% » : traitement aussi des fichiers suivants : %2%\n"
+msgstr "« %1% » : traitement des fichiers suivants en plus : %2%\n"
 
 #: src/input/r_matroska.cpp:1641
 #, boost-format
@@ -2613,9 +2611,8 @@ msgid "Audio sampling frequency"
 msgstr "Fréquence d'échantillonnage audio"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
-#, fuzzy
 msgid "Audio track %1"
-msgstr "Pistes audio :"
+msgstr "Pistes audio %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:919
 msgid "Audio tracks:"
@@ -2726,9 +2723,8 @@ msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
 msgstr "Le facteur de format d'image et les dimensions à l'écran (« --display-dimensions ») ont été donnés tous les deux.\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
-#, fuzzy
 msgid "Button track %1"
-msgstr "Piste de boutons %1, %2"
+msgstr "Piste de bouton %1"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:50
 msgid "Buttons"
@@ -3073,7 +3069,7 @@ msgstr "État du codec : %1%"
 #: src/common/property_element.cpp:131
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:373
 msgid "Codec-inherent delay"
-msgstr ""
+msgstr "Délai de codex incohérent"
 
 #: src/info/mkvinfo.cpp:858
 #, boost-format
@@ -3515,9 +3511,8 @@ msgid "Default flag: %1%"
 msgstr "Signal par défaut : %1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:107
-#, fuzzy
 msgid "Default track"
-msgstr "Signal « Piste par défaut »"
+msgstr "Piste par défaut"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:51
 msgid "Default track in output"
@@ -3538,7 +3533,7 @@ msgstr "Décalage (en ms) :"
 #: src/common/property_element.cpp:131
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:373
 msgid "Delay built into the codec during decoding in ns."
-msgstr ""
+msgstr "Délai inclu dans le codec lors du décodage en ns."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:352
 msgid "Delay this track's timestamps by a couple of ms."
@@ -3716,7 +3711,7 @@ msgstr "URL de téléchargement :"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:22
 msgid "Downloading release information"
-msgstr "Téléchargement des informations de version"
+msgstr "téléchargement des informations de version…"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:893
 msgid "Drop last entry from imported &Blu-ray playlists if it's near the end"
@@ -3932,9 +3927,9 @@ msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "Erreur à l'analyse des étiquettes dans « %1% » : des éléments obligatoires manquent.\n"
 
 #: src/merge/output_control.cpp:749
-#, fuzzy, boost-format
+#, boost-format
 msgid "Error reading from the file '%1%'.\n"
-msgstr "Message d'erreur de l'analyseur syntaxique : %1"
+msgstr "Erreur lors de la lecture du fichier « %1% ».\n"
 
 #: src/info/qt_ui.cpp:104
 msgid "Error saving the information"
@@ -4393,7 +4388,6 @@ msgid "HEVC/h.265 elementary streams"
 msgstr "Flux élémentaires HEVC/H.265"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:306
-#, fuzzy
 msgid "Header &editor"
 msgstr "&Éditeur d'entêtes"
 
@@ -4844,9 +4838,9 @@ msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr "Longueur d'entête incorrecte : %1% (longueur totale : %2%, index : %3%, index de données : %4%)\n"
 
 #: src/merge/mkvmerge.cpp:1850
-#, fuzzy, boost-format
+#, boost-format
 msgid "Invalid identification format in '%1% %2%'.\n"
-msgstr "Sélecteur incorrect dans « %1% %2% ».\n"
+msgstr "Format d'identification incorrect dans « %1% %2% ».\n"
 
 #: src/common/xml/ebml_converter.cpp:268
 msgid "Invalid length of hexadecimal content: must be divisable by 2."
@@ -5512,9 +5506,8 @@ msgstr "Mo&dèle de nom :"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:282
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:72
-#, fuzzy
 msgid "Name:"
-msgstr "&Nom :"
+msgstr "Nom :"
 
 #: src/info/mkvinfo.cpp:842
 #, boost-format
@@ -5527,7 +5520,7 @@ msgstr "Noms"
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:68
 msgid "Negative values are allowed."
-msgstr "Les valeurs négatives sont autorisées."
+msgstr "Des valeurs négatives sont autorisées."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:936
 msgid "Never scan for other playlists"
@@ -7192,9 +7185,8 @@ msgid "Subtitle and chapter properties"
 msgstr "Propriétés des sous-titres et des chapitres"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:42
-#, fuzzy
 msgid "Subtitle track %1"
-msgstr "Pistes de sous-titres :"
+msgstr "Piste de sous-titres %1"
 
 #: src/extract/xtr_textsubs.cpp:164
 #, boost-format
@@ -7443,7 +7435,7 @@ msgstr "Le fichier XML d'étiquettes « %1% » est illisible.\n"
 #: src/merge/mkvmerge.cpp:1886
 #, boost-format
 msgid "The argument '%1%' is not allowed in identification mode.\n"
-msgstr ""
+msgstr "L'argument « %1% » n'est pas permis en mode d'identification.\n"
 
 #: src/merge/mkvmerge.cpp:1698
 #, boost-format
@@ -8964,15 +8956,13 @@ msgid "Type: %1% (%2%)"
 msgstr "Type : %1% (%2%)"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:106
-#, fuzzy
 msgid "UID"
-msgstr "ID"
+msgstr "UID"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:66
-#, fuzzy
 msgid "UID:"
-msgstr "&UID :"
+msgstr "UID :"
 
 #: src/common/file_types.cpp:97
 msgid "USF subtitles"
@@ -9256,13 +9246,12 @@ msgid "Video track"
 msgstr "Piste vidéo"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
-#, fuzzy
 msgid "Video track %1"
-msgstr "Piste vidéo"
+msgstr "Piste vidéo %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:920
 msgid "Video tracks:"
-msgstr "Pistes vidéo"
+msgstr "Pistes vidéo :"
 
 #: src/common/file_types.cpp:99
 #: src/output/p_vobbtn.h:36
