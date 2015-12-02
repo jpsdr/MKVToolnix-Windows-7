@@ -44,3 +44,37 @@ Description: Set of tools to work with Matroska files - GUI frontend
  .
  This package also contains a graphical version of the mkvinfo tool, which
  allows one to get information about a Matroska file.
+
+Package: mkvtoolnix-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: mkvtoolnix (= ${binary:Version}), ${misc:Depends}
+Description: debugging symbols for mkvtoolnix
+ Matroska is a new multimedia container format, based on EBML (Extensible
+ Binary Meta Language), which is a kind of binary XML.
+ These tools allow one to manipulate Matroska files.
+  * mkvmerge is a tool to create Matroska files from other formats
+  * mkvinfo allows one to get information about the tracks in a Matroska file
+  * mkvextract can extract tracks from Matroska files to other formats
+  * mkvpropedit can edit header and chapter information without remuxing
+ .
+ This package contains the debugging symbols for the command-line tools
+ of mkvtoolnix.
+
+Package: mkvtoolnix-gui-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: mkvtoolnix-gui (= ${binary:Version}), ${misc:Depends}
+Description: debugging symbols for mkvtoolnix-gui
+ Matroska is a new multimedia container format, based on EBML (Extensible
+ Binary Meta Language), which is a kind of binary XML.
+ These tools allow one to manipulate Matroska files.
+  * mkvmerge is a tool to create Matroska files from other formats
+  * mkvinfo allows one to get information about the tracks in a Matroska file
+  * mkvextract can extract tracks from Matroska files to other formats
+  * mkvpropedit can edit header and chapter information without remuxing
+ .
+ This package contains the debugging symbols for the GUIs of
+ mkvtoolnix-gui.

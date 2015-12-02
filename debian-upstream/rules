@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+.PHONY: override_dh_clean override_dh_auto_configure override_dh_auto_build override_dh_install override_dh_strip override_dh_installchangelogs override_dh_builddeb
+
 LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 
 # uncomment line to turn verbose mode on
@@ -16,7 +18,8 @@ override_dh_clean:
 	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
 
 override_dh_auto_configure:
-	dh_auto_configure -- --docdir='$${datarootdir}/doc/mkvtoolnix-gui'
+	dh_auto_configure -- --docdir='$${datarootdir}/doc/mkvtoolnix-gui' \
+	  --enable-debug --enable-optimization
 
 override_dh_auto_build:
 	./drake
@@ -43,6 +46,10 @@ override_dh_install:
 
 	dh_link -pmkvtoolnix usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-text.1.gz
 	dh_link -pmkvtoolnix-gui usr/share/man/man1/mkvinfo.1.gz usr/share/man/man1/mkvinfo-gui.1.gz
+
+override_dh_strip:
+	dh_strip -pmkvtoolnix     --dbg-package=mkvtoolnix-dbg
+	dh_strip -pmkvtoolnix-gui --dbg-package=mkvtoolnix-gui-dbg
 
 override_dh_installchangelogs:
 	dh_installchangelogs ChangeLog
