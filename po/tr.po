@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the mkvtoolnix package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MKVToolNix 8.5.0\n"
+"Project-Id-Version: MKVToolNix 8.6.1\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-12-02 23:01+0100\n"
-"PO-Revision-Date: 2015-11-22 10:47+0100\n"
+"PO-Revision-Date: 2015-12-04 21:29+0200\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
 "Language: tr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #: src/extract/xtr_tta.cpp:105
 #, boost-format
@@ -110,7 +110,7 @@ msgid ""
 "  --attach-file <file>     Creates a file attachment inside the\n"
 "                           Matroska file.\n"
 msgstr ""
-"  --attach-file <file>     Matroska dosyası içinde dosya eki\n"
+"  --attach-file <dosya>     Matroska dosyası içinde dosya eki\n"
 "                           oluşturur.\n"
 
 #: src/merge/mkvmerge.cpp:170
@@ -119,7 +119,7 @@ msgid ""
 "                           Creates a file attachment inside the\n"
 "                           first Matroska file written.\n"
 msgstr ""
-"  --attach-file-once <file>\n"
+"  --attach-file-once <dosya>\n"
 "                           İlk yazılmış Matroska dosyası içinde\n"
 "                           dosya eki oluşturur.\n"
 
@@ -128,7 +128,7 @@ msgid ""
 "  --attachment-description <desc>\n"
 "                           Description for the following attachment.\n"
 msgstr ""
-"  --attachment-description <desc>\n"
+"  --attachment-description <açıklama>\n"
 "                          Aşağıdaki ek için açıklama.\n"
 
 #: src/merge/mkvmerge.cpp:164
@@ -168,11 +168,11 @@ msgstr "  --chapter-charset <cset> Basit bölüm dosyası için karakter kümesi
 #: src/merge/mkvmerge.cpp:91
 msgid ""
 "  --chapter-language <lng> Set the 'language' element in chapter entries.\n"
-msgstr "  --chapter-language <lng> Bölüm girişlerinde 'dil' öğesini ayarla.\n"
+msgstr "  --chapter-language <dil> Bölüm girişlerinde 'dil' öğesini ayarla.\n"
 
 #: src/merge/mkvmerge.cpp:90
 msgid "  --chapters <file>        Read chapter information from the file.\n"
-msgstr "  --chapters <file>        Dosyadan bölüm bilgisini oku.\n"
+msgstr "  --chapters <dosya>        Dosyadan bölüm bilgisini oku.\n"
 
 #: src/merge/mkvmerge.cpp:109
 msgid ""
@@ -225,7 +225,7 @@ msgid ""
 "                           Pattern for the conversion from CUE sheet\n"
 "                           entries to chapter names.\n"
 msgstr ""
-"  --cue-chapter-name-format <format>\n"
+"  --cue-chapter-name-format <biçim>\n"
 "                           CUE sheet girişlerinden bölüm adlarına\n"
 "                           dönüştürme için örnek.\n"
 
@@ -259,7 +259,7 @@ msgid ""
 "  --default-language <lng> Use this language for all tracks unless\n"
 "                           overridden with the --language option.\n"
 msgstr ""
-"  --default-language <lng>  Bu dili, --language seçeneğiyle geçersiz\n"
+"  --default-language <dil>  Bu dili, --language seçeneğiyle geçersiz\n"
 "                           kılmadıkça tüm izler için kullanın.\n"
 
 #: src/merge/mkvmerge.cpp:209
@@ -289,13 +289,13 @@ msgid ""
 "  --display-dimensions <TID:width>x<height>\n"
 "                           Explicitly set the display dimensions.\n"
 msgstr ""
-"  --display-dimensions <TID:width>x<height>\n"
+"  --display-dimensions <TID:genişlik>x<yükseklik>\n"
 "                           Açıkça görüntü boyutlarını ayarla.\n"
 
 #: src/merge/mkvmerge.cpp:116
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr ""
-"  --enable-durations       Tüm bloklar için blok süreleri etkinleştir.\n"
+"  --enable-durations       Tüm bloklar için blok sürelerini etkinleştir.\n"
 
 #: src/merge/mkvmerge.cpp:286
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
@@ -384,8 +384,7 @@ msgstr "  --output-charset <cset>  Bu karakter kümesindeki çıktı iletileri\n
 #: src/merge/mkvmerge.cpp:278
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr ""
-"  --priority <priority>    mkvmerge'ün birlikte çalışacağı önceliği "
-"ayarlar.\n"
+"  --priority <öncelik>    mkvmerge'ün birlikte çalışacağı önceliği ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:225
 msgid ""
@@ -408,7 +407,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:100
 msgid "  --segmentinfo <file>     Read segment information from the file.\n"
-msgstr "  --segmentinfo <file>     Parça bilgisini dosyadan oku.\n"
+msgstr "  --segmentinfo <dosya>     Parça bilgisini dosyadan oku.\n"
 
 #: src/merge/mkvmerge.cpp:122
 msgid ""
@@ -511,11 +510,11 @@ msgstr "  --timecode-scale <n>     Zaman kodu ölçeğini n değerine zorlar.\n"
 #: src/merge/mkvmerge.cpp:228
 msgid "  --timecodes <TID:file>   Read the timecodes to be used from a file.\n"
 msgstr ""
-"  --timecodes <TID:file>   Dosyadan kullanılması için zaman kodlarını oku.\n"
+"  --timecodes <TID:dosya>   Dosyadan kullanılması için zaman kodlarını oku.\n"
 
 #: src/merge/mkvmerge.cpp:86
 msgid "  --title <title>          Title for this output file.\n"
-msgstr "  --title <title>          Bu çıktı dosyası için başlık.\n"
+msgstr "  --title <başlık>          Bu çıktı dosyası için başlık.\n"
 
 #: src/merge/mkvmerge.cpp:217
 msgid "  --track-name <TID:name>  Sets the name for a track.\n"
@@ -566,15 +565,14 @@ msgstr ""
 "kopyalama.\n"
 
 #: src/merge/mkvmerge.cpp:271
-#, fuzzy
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
 "                           ('text', 'verbose-text', 'json').\n"
 msgstr ""
-"  --cue-chapter-name-format <format>\n"
-"                           CUE sheet girişlerinden bölüm adlarına\n"
-"                           dönüştürme için örnek.\n"
+"  -F, --identification-format <biçim>\n"
+"                           Tanımlama sonuçları biçimini\n"
+"                           ('text', 'verbose-text', 'json') ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:195
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
@@ -669,7 +667,7 @@ msgid ""
 "  -r, --redirect-output <file>\n"
 "                           Redirects all messages into this file.\n"
 msgstr ""
-"  -r, --redirect-output <file>\n"
+"  -r, --redirect-output <dosya>\n"
 "                           Tüm iletileri bu dosya içine yeniden "
 "yönlendirir.\n"
 
@@ -686,7 +684,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:196
 msgid "  -t, --tags <TID:file>    Read tags for the track from a XML file.\n"
 msgstr ""
-"  -t, --tags <TID:file>    XML dosyasından izler için etiketleri oku.\n"
+"  -t, --tags <TID:dosya>    XML dosyasından izler için etiketleri oku.\n"
 
 #: src/merge/mkvmerge.cpp:85
 msgid "  -w, --webm               Create WebM compliant file.\n"
@@ -901,9 +899,8 @@ msgid "\"Default track\" flag:"
 msgstr "\"Varsayılan iz\" işareti:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:421
-#, fuzzy
 msgid "\"Determine automatically\" is a good choice for almost all situations."
-msgstr "\"varsayılan\" neredeyse tüm durumlar için iyi seçimdir."
+msgstr "\"Otomatik olarak belirle\" neredeyse tüm durumlar için iyi seçimdir."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:284
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1503
@@ -1144,9 +1141,8 @@ msgid "&Audio"
 msgstr "&Ses"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1009
-#, fuzzy
 msgid "&Audio tracks:"
-msgstr "Ses izleri:"
+msgstr "&Ses izleri:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1013
 msgid "&Automatically set the output file name"
@@ -1329,7 +1325,6 @@ msgid "&Merge tool"
 msgstr "&Birleştirme aracı"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1034
-#, fuzzy
 msgid "&Minimum playlist duration:"
 msgstr "E&n az oynatma listesi süresi:"
 
@@ -1346,10 +1341,10 @@ msgid "&New"
 msgstr "&Yeni"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1021
-#, fuzzy
 msgid "&Only enable muxing of tracks with specific languages by default"
 msgstr ""
-"Varsayılan olarak sadece belirli dilleri olan izlerin çoklamasını etkinleştir"
+"Varsayılan olarak &sadece belirli dilleri olan izlerin çoklamasını "
+"etkinleştir"
 
 #: src/info/ui/mainwindow.h:107
 msgid "&Open"
@@ -1448,7 +1443,6 @@ msgid "&Save to text file"
 msgstr "Metin dosyasına &kaydet"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1027
-#, fuzzy
 msgid "&Scan directory for other playlists:"
 msgstr "Diğer oynatma listeleri için dizini &tara:"
 
@@ -1466,7 +1460,7 @@ msgstr "Tüm izleri &seç"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
-msgstr "\"gizlendi\" olarak işaretlenmiş bölümleri &atla"
+msgstr "\"Gizlendi\" olarak işaretlenmiş bölümleri &atla"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
 msgid "&Start && end:"
@@ -1485,9 +1479,8 @@ msgid "&Start timecode of first created entry:"
 msgstr "İlk oluşturulan girişin &başlama zaman damgası:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1011
-#, fuzzy
 msgid "&Subtitle tracks:"
-msgstr "Altyazı izleri:"
+msgstr "&Altyazı izleri:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1025
 #: src/mkvtoolnix-gui/merge/input.cpp:1188
@@ -1517,9 +1510,8 @@ msgid "&Video"
 msgstr "&Görüntü"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1010
-#, fuzzy
 msgid "&Video tracks:"
-msgstr "Görüntü izleri:"
+msgstr "&Görüntü izleri:"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:306
 msgid "&View output"
@@ -2602,9 +2594,8 @@ msgid "Alwa&ys use the action selected above and don't ask again"
 msgstr "Her &zaman yukarıda seçilen eylemi kullan ve bir daha sorma"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1043
-#, fuzzy
 msgid "Always &switch to the job output tool after starting one immediately"
-msgstr "Bir tane başladıktan hemen sonra her zaman iş çıktısı aracına geç"
+msgstr "Bir tane başladıktan hemen sonra her zaman iş çıktı aracına &geç"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1030
 msgid "Always ask the user"
@@ -2627,9 +2618,8 @@ msgid "Always scan for other playlists"
 msgstr "Her zaman diğer oynatma listeleri için tara"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:997
-#, fuzzy
 msgid "Always show the output file controls &below tabs"
-msgstr "Çıktı dosyası denetimlerini her zaman sekmelerin altında göster"
+msgstr "Çıktı dosyası denetimlerini her zaman sekmelerin &altında göster"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1044
 msgid "Always use a &default description when adding a job to the queue"
@@ -3212,9 +3202,8 @@ msgstr ""
 "sıkıştırmayı varsayılan olarak \"none\" seçeneğine ayarlamasına neden olur."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:987
-#, fuzzy
 msgid "Clearing settings auto&matically:"
-msgstr "&Ayarlar otomatik olarak temizleniyor:"
+msgstr "Ayarları oto&matik olarak temizleme işlemi:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:242
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:201
@@ -3317,7 +3306,7 @@ msgstr "Kodek durumu: %1%"
 #: src/common/property_element.cpp:131
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:373
 msgid "Codec-inherent delay"
-msgstr ""
+msgstr "Kodek'e özgü kendinden gecikme"
 
 #: src/info/mkvinfo.cpp:858
 #, boost-format
@@ -3773,7 +3762,6 @@ msgid "Debug> "
 msgstr "Hata Ayıklama>"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1000
-#, fuzzy
 msgid "Default additional co&mmand line options:"
 msgstr "Varsayılan &ilave komut satırı seçenekleri:"
 
@@ -3801,7 +3789,6 @@ msgid "Default flag: %1%"
 msgstr "Varsayılan işareti: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1007
-#, fuzzy
 msgid "Default subtitle &charset to set:"
 msgstr "Varsayılan &altyazı karakter kümesini şuna ayarla:"
 
@@ -3818,24 +3805,20 @@ msgid "Default track languages to set"
 msgstr "Ayarlamak için varsayılan iz dilleri"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:138
-#, fuzzy
 msgid "Default values"
-msgstr "&Varsayılan"
+msgstr "Varsayılan değerler"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1038
-#, fuzzy
 msgid "Defaults for new chapter entries"
-msgstr "Yeni bölüm girişleri için varsayılanlar:"
+msgstr "Yeni bölüm girişleri için varsayılanlar"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:999
-#, fuzzy
 msgid "Defaults for new mux settings"
-msgstr "Yeni bölüm girişleri için varsayılanlar:"
+msgstr "Yeni çoklama ayarları için varsayılanlar"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1002
-#, fuzzy
 msgid "Defaults for newly added tracks"
-msgstr "Yeni bölüm girişleri için varsayılanlar:"
+msgstr "Yeni olarak eklenen izler için varsayılanlar"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1508
 msgid "Delay (in ms):"
@@ -3844,7 +3827,7 @@ msgstr "Gecikme (ms olarak):"
 #: src/common/property_element.cpp:131
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:373
 msgid "Delay built into the codec during decoding in ns."
-msgstr ""
+msgstr "Çözme sırasında kodek içinde oluşmuş ns olarak gecikme."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:352
 msgid "Delay this track's timestamps by a couple of ms."
@@ -3905,17 +3888,14 @@ msgid "Directory:"
 msgstr "Dizin:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1005
-#, fuzzy
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
-msgstr "Altyazı izleri için »varsayılan iz« işaretini etkisizleştir"
+msgstr "Altyazı izleri için »&varsayılan iz« işaretini etkisizleştir"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1006
-#, fuzzy
 msgid "Disable additional lossless c&ompression for all track types"
 msgstr "Tüm iz türleri için ilav&e kayıpsız sıkıştırmayı etkisizleştir"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:976
-#, fuzzy
 msgid "Disable ani&mations"
 msgstr "C&anlandırmaları etkisizleştir"
 
@@ -4189,9 +4169,8 @@ msgstr ""
 "Bu seçeneği etkinleştirmek mkvmerge'ün bu son girişi tutmasına neden olur."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:139
-#, fuzzy
 msgid "Enabling tracks"
-msgstr "Tüm izleri etki&nleştir"
+msgstr "İzleri etkinleştiriliyor"
 
 #: src/info/mkvinfo.cpp:722
 #, boost-format
@@ -4212,7 +4191,6 @@ msgid "English language name"
 msgstr "İngilizce dil adı"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1019
-#, fuzzy
 msgid "Ensure the file name is &unique"
 msgstr "Dosya adının ben&zersiz olduğundan emin ol"
 
@@ -4722,9 +4700,8 @@ msgstr ""
 "Bu iz için kullanıcı tanımlı seçenekler için serbest-form düzenleme alanı."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:135
-#, fuzzy
 msgid "GUI"
-msgstr "&GKA"
+msgstr "GKA"
 
 #: src/info/mkvinfo.cpp:627
 #, boost-format
@@ -4797,9 +4774,8 @@ msgid "HEVC/h.265 elementary streams"
 msgstr "HEVC/h.265 temel akışları"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:306
-#, fuzzy
 msgid "Header &editor"
-msgstr "&Başlık düzenleyici"
+msgstr "Başlık &düzenleyici"
 
 #: src/common/compression/header_removal.cpp:47
 #, boost-format
@@ -5220,9 +5196,8 @@ msgstr ""
 "aracılığıyla ayarlanmak zorundadır."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:973
-#, fuzzy
 msgid "Interface &language:"
-msgstr "&Arayüz dili:"
+msgstr "Arayüz &dili:"
 
 #: src/info/mkvinfo.cpp:630
 #, boost-format
@@ -5457,9 +5432,9 @@ msgstr ""
 "Geçersiz başlık uzunluğu: %1% (toplam uzunluk: %2%, idx: %3%, dataidx: %4%)\n"
 
 #: src/merge/mkvmerge.cpp:1850
-#, fuzzy, boost-format
+#, boost-format
 msgid "Invalid identification format in '%1% %2%'.\n"
-msgstr "'%1% %2%' içinde geçersiz seçici.\n"
+msgstr "'%1% %2%' içinde geçersiz tanımlama biçimi.\n"
 
 #: src/common/xml/ebml_converter.cpp:268
 msgid "Invalid length of hexadecimal content: must be divisable by 2."
@@ -5714,9 +5689,8 @@ msgid "Job queue"
 msgstr "İş kuyruğu"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:143
-#, fuzzy
 msgid "Jobs & job queue"
-msgstr "İş kuyruğunu göster"
+msgstr "İşler ve iş kuyruğu"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1042
 msgid "Jobs and job output"
@@ -5781,7 +5755,7 @@ msgstr "Dil: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:996
 msgid "Layout"
-msgstr ""
+msgstr "Düzen"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:55
 msgid ""
@@ -6050,9 +6024,8 @@ msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "RealAudio/RealVideo karesi için bellek ayrılamadı.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:137
-#, fuzzy
 msgid "Merge"
-msgstr "&Birleştir"
+msgstr "Birleştir"
 
 #: src/common/file_types.cpp:84
 msgid "MicroDVD"
@@ -6580,9 +6553,8 @@ msgid "Numbers of channels in the track."
 msgstr "İzdeki kanal sayısı."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:136
-#, fuzzy
 msgid "Often used selections"
-msgstr "&Sık kullanılan seçimler"
+msgstr "Sık kullanılan seçimler"
 
 #: src/common/file_types.cpp:89
 msgid "Ogg/OGM"
@@ -6769,7 +6741,7 @@ msgstr "Sıra: %1%"
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:207
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:178
 msgid "Original value:"
-msgstr "Özgün değer:"
+msgstr "Orijinal değer:"
 
 #: src/propedit/propedit_cli_parser.cpp:218
 msgid "Other options"
@@ -6780,9 +6752,8 @@ msgid "Otherwise they're shown on the 'output' tab."
 msgstr "Aksi halde 'çıktı' sekmesinde gösterilirler."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:140
-#, fuzzy
 msgid "Output"
-msgstr "Çı&ktı"
+msgstr "Çıktı"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1591
 msgid "Output file"
@@ -6888,9 +6859,8 @@ msgid "Playlist items:"
 msgstr "Oynatma listesi öğeleri:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:141
-#, fuzzy
 msgid "Playlists"
-msgstr "Oynatma listesi öğeleri:"
+msgstr "Oynatma listeleri"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:58
 msgid "Playlists shorter than %1 second will be ignored."
@@ -7395,9 +7365,8 @@ msgid "Reset all columns"
 msgstr "Tüm sütunları sıfırla"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1046
-#, fuzzy
 msgid "Reset the warning and error &counters on exit"
-msgstr "Uyarı ve hata sayaçlarını çıkışta sıfırla"
+msgstr "Uyarı ve hata &sayaçlarını çıkışta sıfırla"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:189
 msgid "Resets the header value on this page to how it's saved in the file."
@@ -7879,14 +7848,12 @@ msgid "Show &all elements"
 msgstr "&Tüm öğeleri göster"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:978
-#, fuzzy
 msgid "Show &buttons for moving list view entries up and down"
 msgstr ""
-"Liste görünümü girişlerini yukarı ve aşağı hareket ettirmek için düğmeleri "
+"Liste görünümü girişlerini yukarı ve aşağı hareket ettirmek için &düğmeleri "
 "göster"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1045
-#, fuzzy
 msgid "Show &output of all jobs instead of current job only"
 msgstr "Sadece şu anki iş yerine tüm işlerin çık&tısını göster"
 
@@ -7915,9 +7882,8 @@ msgid "Show the size of each element including its header."
 msgstr "Başlıklarını içeren her bir öğenin boyutunu göster."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:977
-#, fuzzy
 msgid "Show the tool &selector"
-msgstr "Araç seçiciyi göster"
+msgstr "Araç &seçiciyi göster"
 
 #: src/common/cli_parser.cpp:184 src/mkvtoolnix-gui/gui_cli_parser.cpp:45
 msgid "Show this help."
@@ -8146,7 +8112,7 @@ msgstr "Stereo kipi: %1% (%2%)"
 #: src/common/property_element.cpp:147
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:410
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
-msgstr "Stereo-3D video kipi (0 - 11, belgeye bakın)."
+msgstr "Stereo-3D görüntü kipi (0 - 11, belgelere bakın)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1522
 msgid "Stereoscopy:"
@@ -8208,9 +8174,8 @@ msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA (Kayıpsız Gerçek Ses kodeki)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:974
-#, fuzzy
 msgid "Tab &position in tab widgets:"
-msgstr "Sekme parçacıklarındaki sekme konumu:"
+msgstr "Sekme parçacıklarındaki sekme &konumu:"
 
 #: src/extract/extract_cli_parser.cpp:79
 msgid "Tag extraction"
@@ -9145,12 +9110,18 @@ msgid ""
 "If set to 0, the reference pseudo-cache system\n"
 "is not used."
 msgstr ""
+"Oynatıcının oynatma sırasında önbelleğe\n"
+"alabilmesi gereken en fazla kare sayısı.\n"
+"Eğer 0'a ayarlanırsa, kaynak sözde önbellek\n"
+"sistemi kullanılmaz."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:354
 msgid ""
 "The maximum number of frames a player should be able to cache during "
 "playback. If set to 0, the reference pseudo-cache system is not used."
 msgstr ""
+"Oynatıcının oynatma sırasında önbelleğe alabilmesi gereken en fazla kare "
+"sayısı. Eğer 0'a ayarlanırsa, kaynak sözde önbellek sistemi kullanılmaz."
 
 #: src/common/qt_kax_analyzer.cpp:69 src/propedit/propedit.cpp:36
 msgid ""
@@ -9166,12 +9137,18 @@ msgid ""
 "If set to 0, the reference pseudo-cache system\n"
 "is not used."
 msgstr ""
+"Oynatıcının oynatma sırasında önbelleğe\n"
+"alabilmesi gereken en az kare sayısı.\n"
+"Eğer 0'a ayarlanırsa, kaynak sözde önbellek\n"
+"sistemi kullanılmaz."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:349
 msgid ""
 "The minimum number of frames a player should be able to cache during "
 "playback. If set to 0, the reference pseudo-cache system is not used."
 msgstr ""
+"Oynatıcının oynatma sırasında önbelleğe alabilmesi gereken en az kare "
+"sayısı. Eğer 0'a ayarlanırsa, kaynak sözde önbellek sistemi kullanılmaz."
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:139
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:46
@@ -9749,7 +9726,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:950
 #: src/mkvtoolnix-gui/merge/input.cpp:967
 msgid "These aren't treated like other input files in MKVToolNix."
-msgstr ""
+msgstr "Bunlar MKVToolNix içindeki diğer girdi dosyaları gibi işlem görmezler."
 
 #: src/input/r_avi.cpp:539 src/input/r_real.cpp:293
 msgid ""
@@ -10527,7 +10504,7 @@ msgstr "Tanınmayan dosya biçimi"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:153
 msgid "Unsigned integer"
-msgstr ""
+msgstr "İşaretsiz tamsayı"
 
 #: src/input/r_vobsub.cpp:482
 #, boost-format
@@ -10559,9 +10536,8 @@ msgid "Use 'segment linking' for the resulting files."
 msgstr "Sonuçta oluşan dosyalar için 'parça bağlama' kullanın."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:998
-#, fuzzy
 msgid "Use a &vertical layout for the \"input\" tab"
-msgstr "\"Girdi\" sekmesi için dikey bir düzen kullan"
+msgstr "\"Girdi\" sekmesi için &dikey bir düzen kullan"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1017
 msgid "Use fi&xed directory:"
@@ -10767,7 +10743,6 @@ msgid "WAVPACK4"
 msgstr "WAVPACK4"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:981
-#, fuzzy
 msgid "Warn before &aborting running jobs"
 msgstr "Çalışan iş&leri iptal etmeden önce uyar"
 
@@ -10831,9 +10806,8 @@ msgstr ""
 "yazabilirsiniz."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:994
-#, fuzzy
 msgid "When &dropping files:"
-msgstr "Dosyalar bırakılırken:"
+msgstr "Dosyalar &bırakılırken:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:209
 msgid "When a file is added its name is scanned."
@@ -12288,4 +12262,3 @@ msgstr "– hiçbiri olarak ayarla –"
 
 #~ msgid "Name &template:"
 #~ msgstr "İsim şa&blonu:"
-
