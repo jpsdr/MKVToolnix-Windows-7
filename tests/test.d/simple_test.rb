@@ -1,4 +1,6 @@
 class SimpleTest
+  @@json_schema_identification = nil
+
   EXIT_CODE_ALIASES = {
     :success => 0,
     :warning => 1,
@@ -220,9 +222,11 @@ class SimpleTest
     options = args.extract_options!
     fail ArgumentError if args.empty?
 
-    verbose = options[:verbose].nil? ? true : options[:verbose]
-    verbose = verbose ? "-verbose" : ""
-    command = "../src/mkvmerge --identify#{verbose} --engage no_variable_data #{args.first}"
+    verbose = !options[:verbose].nil? ? options[:verbose]                             : true
+    format  = options[:format]        ? options[:format].to_s.downcase.gsub(/_/, '-') : verbose ? 'verbose-text' : 'text'
+
+    command = "../src/mkvmerge --identify --identification-format #{format} --engage no_variable_data #{args.first}"
+
     self.sys command, :exit_code => options[:exit_code]
   end
 
@@ -288,5 +292,21 @@ class SimpleTest
   def error reason
     show_message "  Failed. Reason: #{reason}"
     raise "test failed"
+  end
+
+  def json_schema_identification
+    return @@json_schema_identification if @@json_schema_identification
+
+    require "json_schema"
+
+    json_store = JsonSchema::DocumentStore.new
+    parser     = JsonSchema::Parser.new
+    expander   = JsonSchema::ReferenceExpander.new
+    schema     = parser.parse JSON.load(File.read("../doc/mkvmerge-identification-output-schema.json"))
+
+    expander.expand(schema, store: json_store)
+    json_store.add_schema schema
+
+    @@json_schema_identification = schema
   end
 end
