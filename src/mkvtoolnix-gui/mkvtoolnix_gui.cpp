@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QApplication>
+#include <QDir>
 #include <QProcess>
 
 #include "common/fs_sys_helpers.h"
@@ -45,6 +46,10 @@ main(int argc,
   auto app = std::make_unique<App>(argc, argv);
 
   if (app->parseCommandLineArguments(App::arguments())) {
+    // Change directory after processing the command line arguments so
+    // that relative file names are resolved correctly.
+    QDir::setCurrent(QDir::homePath());
+
     auto mainWindow = std::make_unique<MainWindow>();
     mainWindow->show();
     app->handleCommandLineArgumentsLocally();
