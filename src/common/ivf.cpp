@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bit_cursor.h"
 #include "common/fourcc.h"
 #include "common/ivf.h"
 
@@ -37,6 +38,24 @@ frame_header_t::frame_header_t()
   memset(this, 0, sizeof(*this));
 }
 
+static bool
+is_keyframe_vp9(memory_c const &buffer) {
+  bit_reader_c bc{buffer.get_buffer(), buffer.get_size()};
+
+  // frame marker
+  if (bc.get_bits(2) != 0x02)
+    return false;
+
+  auto profile = bc.get_bit() + (bc.get_bit() * 2);
+  if (3 == profile)
+    profile += bc.get_bit();
+
+  if (bc.get_bit())             // show_existing_frame
+    return false;
+
+  return !bc.get_bit();
+}
+
 bool
 is_keyframe(memory_cptr const &buffer,
             codec_c::type_e codec) {
@@ -51,14 +70,11 @@ is_keyframe(memory_cptr const &buffer,
   if (codec == codec_c::type_e::V_VP8)
     return (data[0] & 0x01) == 0x00;
 
-  // VP9
-  // Bits 0, 1: frame marker, supposed to be 0x02
-  // Bit 2:     version
-  // Bit 3:     show existing frame directly flag
-  // Bit 4:     frame type (0 means key frame)
-  if ((data[0] & 0x04) == 0x04)
+  try {
+    return is_keyframe_vp9(*buffer);
+  } catch (...) {
     return false;
-  return (data[0] & 0x10) == 0x00;
+  }
 }
 
 };
