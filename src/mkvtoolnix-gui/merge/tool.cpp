@@ -40,7 +40,6 @@ void
 Tool::setupUi() {
   setupTabPositions();
 
-  appendTab(new Tab{this});
   showMergeWidget();
 
   retranslateUi();
@@ -337,6 +336,12 @@ Tool::addMultipleFilesToNewSettings(QStringList const &fileNames,
 void
 Tool::setupTabPositions() {
   ui->merges->setTabPosition(Util::Settings::get().m_tabPosition);
+}
+
+void
+Tool::addMergeTabIfNoneOpen() {
+  if (!ui->merges->count())
+    appendTab(new Tab{this});
 }
 
 }}}

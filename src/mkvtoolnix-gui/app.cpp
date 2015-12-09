@@ -472,6 +472,8 @@ App::run() {
 
   handleCommandLineArgumentsLocally();
 
+  MainWindow::mergeTool()->addMergeTabIfNoneOpen();
+
   exec();
 }
 

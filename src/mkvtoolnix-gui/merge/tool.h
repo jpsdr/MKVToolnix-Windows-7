@@ -37,6 +37,8 @@ public:
   virtual void openConfigFile(QString const &fileName);
   virtual void openFromConfig(MuxConfig const &config);
 
+  virtual void addMergeTabIfNoneOpen();
+
 public slots:
   virtual void retranslateUi();
 
