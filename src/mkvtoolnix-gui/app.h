@@ -52,6 +52,8 @@ public:
   void sendArgumentsToRunningInstance(QStringList const &args);
   void raiseAndActivateRunningInstance();
 
+  void run();
+
 signals:
   void addingFilesToMergeRequested(QStringList const &fileNames);
   void editingChaptersRequested(QStringList const &fileNames);

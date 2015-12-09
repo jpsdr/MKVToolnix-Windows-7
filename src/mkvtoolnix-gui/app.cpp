@@ -17,6 +17,7 @@
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -455,6 +456,23 @@ App::receiveInstanceCommunication() {
 QString
 App::settingsBaseGroupName() {
   return Q("MKVToolNix GUI Settings");
+}
+
+void
+App::run() {
+  if (!parseCommandLineArguments(App::arguments()))
+    return;
+
+  // Change directory after processing the command line arguments so
+  // that relative file names are resolved correctly.
+  QDir::setCurrent(QDir::homePath());
+
+  auto mainWindow = std::make_unique<MainWindow>();
+  mainWindow->show();
+
+  handleCommandLineArgumentsLocally();
+
+  exec();
 }
 
 }}

@@ -10,7 +10,6 @@
 #endif  // HAVE_CURL_EASY_H
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/job.h"
-#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/update_check_thread.h"
 
 #if defined(HAVE_STATIC_QT)
@@ -45,16 +44,7 @@ main(int argc,
 
   auto app = std::make_unique<App>(argc, argv);
 
-  if (app->parseCommandLineArguments(App::arguments())) {
-    // Change directory after processing the command line arguments so
-    // that relative file names are resolved correctly.
-    QDir::setCurrent(QDir::homePath());
-
-    auto mainWindow = std::make_unique<MainWindow>();
-    mainWindow->show();
-    app->handleCommandLineArgumentsLocally();
-    app->exec();
-  }
+  app->run();
 
   app.reset();
 
