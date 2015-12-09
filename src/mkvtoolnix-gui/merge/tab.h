@@ -37,6 +37,7 @@ protected:
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
   QStringList m_filesToAddDelayed;
+  Qt::MouseButtons m_mouseButtonsForFilesToAddDelayed;
 
   // "Input" tab:
   SourceFileModel *m_filesModel;
@@ -150,9 +151,9 @@ public slots:
 
   virtual void onFileRowsInserted(QModelIndex const &parentIdx, int first, int last);
   virtual void onTrackRowsInserted(QModelIndex const &parentIdx, int first, int last);
-  virtual void addOrAppendDroppedFiles(QStringList const &fileNames);
+  virtual void addOrAppendDroppedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
   virtual void addOrAppendDroppedFilesDelayed();
-  virtual void addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames);
+  virtual void addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
 
   virtual void showFilesContextMenu(QPoint const &pos);
   virtual void showTracksContextMenu(QPoint const &pos);

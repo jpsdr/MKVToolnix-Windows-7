@@ -60,9 +60,9 @@ public slots:
   virtual void toolShown() override;
   virtual void tabTitleChanged();
 
-  virtual void filesDropped(QStringList const &fileNames);
+  virtual void filesDropped(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
 
-  virtual void addMultipleFiles(QStringList const &fileNames);
+  virtual void addMultipleFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
   virtual void addMultipleFilesFromCommandLine(QStringList const &fileNames);
   virtual void openMultipleConfigFilesFromCommandLine(QStringList const &fileNames);
   virtual void addMultipleFilesToNewSettings(QStringList const &fileNames, bool newSettingsForEachFile);

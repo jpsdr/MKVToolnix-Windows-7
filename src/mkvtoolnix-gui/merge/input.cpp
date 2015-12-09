@@ -1321,7 +1321,8 @@ Tab::setOutputFileNameMaybe() {
 }
 
 void
-Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
+Tab::addOrAppendDroppedFiles(QStringList const &fileNames,
+                             Qt::MouseButtons mouseButtons) {
   if (fileNames.isEmpty())
     return;
 
@@ -1337,7 +1338,8 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
   auto decision  = settings.m_mergeAddingAppendingFilesPolicy;
   auto fileIdx   = QModelIndex{};
 
-  if (Util::Settings::AddingAppendingFilesPolicy::Ask == decision) {
+  if (   (Util::Settings::AddingAppendingFilesPolicy::Ask == decision)
+      || ((mouseButtons & Qt::RightButton)                == Qt::RightButton)) {
     AddingAppendingFilesDialog dlg{this, m_config.m_files};
     if (!dlg.exec())
       return;
@@ -1372,13 +1374,17 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames) {
 
 void
 Tab::addOrAppendDroppedFilesDelayed() {
-  addOrAppendDroppedFiles(m_filesToAddDelayed);
+  addOrAppendDroppedFiles(m_filesToAddDelayed, m_mouseButtonsForFilesToAddDelayed);
   m_filesToAddDelayed.clear();
+  m_mouseButtonsForFilesToAddDelayed = Qt::NoButton;
 }
 
 void
-Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames) {
-  m_filesToAddDelayed += fileNames;
+Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames,
+                                        Qt::MouseButtons mouseButtons) {
+  m_filesToAddDelayed                += fileNames;
+  m_mouseButtonsForFilesToAddDelayed  = mouseButtons;
+
   QTimer::singleShot(0, this, SLOT(addOrAppendDroppedFilesDelayed()));
 }
 

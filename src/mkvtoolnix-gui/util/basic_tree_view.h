@@ -3,6 +3,7 @@
 
 #include "common/common_pch.h"
 
+#include <Qt>
 #include <QTreeView>
 
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
@@ -28,7 +29,7 @@ public:
   BasicTreeView &enterActivatesAllSelected(bool enable);
 
 signals:
-  void filesDropped(QStringList const &fileNames);
+  void filesDropped(QStringList const &fileNames, Qt::MouseButtons mouseButtons, Qt::KeyboardModifiers keyboardModifiers);
   void allSelectedActivated();
   void deletePressed();
   void ctrlUpPressed();

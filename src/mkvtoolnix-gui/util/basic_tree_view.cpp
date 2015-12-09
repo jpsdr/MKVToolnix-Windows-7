@@ -50,7 +50,7 @@ BasicTreeView::dragMoveEvent(QDragMoveEvent *event) {
 void
 BasicTreeView::dropEvent(QDropEvent *event) {
   if (m_acceptDroppedFiles && m_filesDDHandler.handle(event, true)) {
-    emit filesDropped(m_filesDDHandler.fileNames());
+    emit filesDropped(m_filesDDHandler.fileNames(), event->mouseButtons(), event->keyboardModifiers());
     return;
   }
 

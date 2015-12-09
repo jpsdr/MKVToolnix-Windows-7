@@ -266,11 +266,12 @@ Tool::dragEnterEvent(QDragEnterEvent *event) {
 void
 Tool::dropEvent(QDropEvent *event) {
   if (m_filesDDHandler.handle(event, true))
-    filesDropped(m_filesDDHandler.fileNames());
+    filesDropped(m_filesDDHandler.fileNames(), event->mouseButtons());
 }
 
 void
-Tool::filesDropped(QStringList const &fileNames) {
+Tool::filesDropped(QStringList const &fileNames,
+                   Qt::MouseButtons mouseButtons) {
   auto configExt  = Q(".mtxcfg");
   auto mediaFiles = QStringList{};
 
@@ -281,24 +282,25 @@ Tool::filesDropped(QStringList const &fileNames) {
       mediaFiles << fileName;
 
   if (!mediaFiles.isEmpty())
-    addMultipleFiles(mediaFiles);
+    addMultipleFiles(mediaFiles, mouseButtons);
 }
 
 void
-Tool::addMultipleFiles(QStringList const &fileNames) {
+Tool::addMultipleFiles(QStringList const &fileNames,
+                       Qt::MouseButtons mouseButtons) {
   if (!ui->merges->count())
     newConfig();
 
   auto tab = currentTab();
   Q_ASSERT(!!tab);
 
-  tab->addFilesToBeAddedOrAppendedDelayed(fileNames);
+  tab->addFilesToBeAddedOrAppendedDelayed(fileNames, mouseButtons);
 }
 
 void
 Tool::addMultipleFilesFromCommandLine(QStringList const &fileNames) {
   MainWindow::get()->switchToTool(this);
-  addMultipleFiles(fileNames);
+  addMultipleFiles(fileNames, Qt::NoButton);
 }
 
 void
