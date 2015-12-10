@@ -24,6 +24,11 @@
 #define QNY(singular, plural, count) to_qs(NY(singular, plural, count))
 #define QTR(s, dummy) to_qs(Y(s))
 
+inline QChar
+to_qs(char const source) {
+  return QChar{source};
+}
+
 inline QString
 to_qs(char const *source) {
   return QString{source};
