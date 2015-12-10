@@ -18,7 +18,18 @@ namespace mtx { namespace gui { namespace Util {
 
 class Settings: public QObject {
   Q_OBJECT;
+  Q_ENUMS(RunProgramForEvent);
+
 public:
+  enum RunProgramForEvent {
+    RunNever                         = 0x00,
+    RunAfterJobQueueFinishes         = 0x01,
+    RunAfterJobCompletesSuccessfully = 0x02,
+    RunAfterJobCompletesWithErrors   = 0x04,
+  };
+
+  Q_DECLARE_FLAGS(RunProgramForEvents, RunProgramForEvent);
+
   enum ProcessPriority {
     LowestPriority = 0,
     LowPriority,
@@ -64,6 +75,16 @@ public:
     AddAdditionalParts,
   };
 
+  class RunProgramConfig {
+  public:
+    QStringList m_commandLine;
+    RunProgramForEvents m_forEvents{};
+
+    bool isValid() const;
+  };
+
+  using RunProgramConfigPtr = std::shared_ptr<RunProgramConfig>;
+
   QString m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage;
   QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
@@ -97,6 +118,8 @@ public:
 
   QString m_mediaInfoExe;
 
+  QList<RunProgramConfigPtr> m_runProgramConfigurations;
+
 public:
   Settings();
   void load();
@@ -120,6 +143,15 @@ public slots:
   void storeSplitterSizes();
 
 protected:
+  void loadDefaults(QSettings &reg, QString const &guiVersion);
+  void loadSplitterSizes(QSettings &reg);
+  void loadRunProgramConfigurations(QSettings &reg);
+
+  void saveDefaults(QSettings &reg) const;
+  void saveSplitterSizes(QSettings &reg) const;
+  void saveRunProgramConfigurations(QSettings &reg) const;
+
+protected:
   static Settings s_settings;
 
   static void withGroup(QString const &group, std::function<void(QSettings &)> worker);
@@ -141,5 +173,7 @@ public:
 // extern Settings g_settings;
 
 }}}
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(mtx::gui::Util::Settings::RunProgramForEvents);
 
 #endif  // MTX_MKVTOOLNIX_GUI_UTIL_SETTINGS_H

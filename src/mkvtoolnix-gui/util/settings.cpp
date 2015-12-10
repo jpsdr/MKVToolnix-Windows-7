@@ -15,6 +15,12 @@
 
 namespace mtx { namespace gui { namespace Util {
 
+bool
+Settings::RunProgramConfig::isValid()
+  const {
+  return !m_commandLine.value(0).isEmpty();
+}
+
 Settings Settings::s_settings;
 
 Settings::Settings() {
@@ -193,6 +199,14 @@ Settings::load() {
   reg.endGroup();               // settings.updates
   reg.endGroup();               // settings
 
+  loadDefaults(reg, guiVersion);
+  loadSplitterSizes(reg);
+  loadRunProgramConfigurations(reg);
+}
+
+void
+Settings::loadDefaults(QSettings &reg,
+                       QString const &guiVersion) {
   reg.beginGroup("defaults");
   m_defaultAudioTrackLanguage          = reg.value("defaultAudioTrackLanguage",    Q("und")).toString();
   m_defaultVideoTrackLanguage          = reg.value("defaultVideoTrackLanguage",    Q("und")).toString();
@@ -203,7 +217,10 @@ Settings::load() {
   m_defaultSubtitleCharset             = guiVersion.isEmpty() && (subtitleCharset == Q("ISO-8859-15")) ? Q("") : subtitleCharset; // Fix for a bug in versions prior to 8.2.0.
   m_defaultAdditionalMergeOptions      = reg.value("defaultAdditionalMergeOptions").toString();
   reg.endGroup();               // defaults
+}
 
+void
+Settings::loadSplitterSizes(QSettings &reg) {
   reg.beginGroup("splitterSizes");
 
   m_splitterSizes.clear();
@@ -231,6 +248,30 @@ Settings::load() {
     m_outputFileNamePolicy = ToRelativeOfFirstInputFile;
     m_relativeOutputDir    = Q("..");
   }
+}
+
+void
+Settings::loadRunProgramConfigurations(QSettings &reg) {
+  m_runProgramConfigurations.clear();
+
+  reg.beginGroup("runProgramConfigurations");
+
+  auto groups = reg.childGroups();
+  groups.sort();
+
+  for (auto const &group : groups) {
+    auto cfg = std::make_shared<RunProgramConfig>();
+
+    reg.beginGroup(group);
+    cfg->m_commandLine = reg.value("commandLine").toStringList();
+    cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value("forEvents").value<int>());
+    reg.endGroup();
+
+    if (cfg->isValid())
+      m_runProgramConfigurations << cfg;
+  }
+
+  reg.endGroup();               // runProgramConfigurations
 }
 
 QString
@@ -309,6 +350,14 @@ Settings::save()
   reg.endGroup();               // settings.updates
   reg.endGroup();               // settings
 
+  saveDefaults(reg);
+  saveSplitterSizes(reg);
+  saveRunProgramConfigurations(reg);
+}
+
+void
+Settings::saveDefaults(QSettings &reg)
+  const {
   reg.beginGroup("defaults");
   reg.setValue("defaultAudioTrackLanguage",          m_defaultAudioTrackLanguage);
   reg.setValue("defaultVideoTrackLanguage",          m_defaultVideoTrackLanguage);
@@ -318,7 +367,11 @@ Settings::save()
   reg.setValue("defaultSubtitleCharset",             m_defaultSubtitleCharset);
   reg.setValue("defaultAdditionalMergeOptions",      m_defaultAdditionalMergeOptions);
   reg.endGroup();               // defaults
+}
 
+void
+Settings::saveSplitterSizes(QSettings &reg)
+  const {
   reg.beginGroup("splitterSizes");
   for (auto const &name : m_splitterSizes.keys()) {
     auto sizes = QVariantList{};
@@ -327,6 +380,24 @@ Settings::save()
     reg.setValue(name, sizes);
   }
   reg.endGroup();               // splitterSizes
+
+  saveRunProgramConfigurations(reg);
+}
+
+void
+Settings::saveRunProgramConfigurations(QSettings &reg)
+  const {
+  reg.remove("runProgramConfigurations");
+  reg.beginGroup("runProgramConfigurations");
+  auto idx = 0;
+  for (auto const &cfg : m_runProgramConfigurations) {
+    reg.beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
+    reg.setValue("commandLine", cfg->m_commandLine);
+    reg.setValue("forEvents",   static_cast<int>(cfg->m_forEvents));
+    reg.endGroup();
+  }
+
+  reg.endGroup();               // runProgramConfigurations
 }
 
 QString

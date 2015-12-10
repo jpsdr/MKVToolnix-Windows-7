@@ -44,6 +44,59 @@ escapeShellUnix(QString const &source) {
   return copy;
 }
 
+static QStringList
+unescapeSplitShellUnix(QString const &source) {
+  QStringList arguments;
+
+  auto *currentArgument = static_cast<QString *>(nullptr);
+  auto escapeNext       = false;
+  auto singleQuoted     = false;
+  auto doubleQuoted     = false;
+  auto appendChar       = [&](QChar const &c) {
+    if (!currentArgument) {
+      arguments << Q("");
+      currentArgument = &arguments.last();
+    }
+
+    *currentArgument += c;
+  };
+
+  for (auto const &c : source) {
+    if (escapeNext) {
+      escapeNext = false;
+      appendChar(c);
+
+    } else if (singleQuoted) {
+      if (c == Q('\''))
+        singleQuoted = false;
+      else
+        appendChar(c);
+
+    } else if (c == Q('\\'))
+      escapeNext = true;
+
+    else if (doubleQuoted) {
+      if (c == Q('"'))
+        doubleQuoted = false;
+      else
+        appendChar(c);
+
+    } else if (c == Q('\''))
+      singleQuoted = true;
+
+    else if (c == Q('"'))
+      doubleQuoted = true;
+
+    else if (c == Q(' '))
+      currentArgument = nullptr;
+
+    else
+      appendChar(c);
+  }
+
+  return arguments;
+}
+
 static QString
 escapeShellWindows(QString const &source) {
   if (source.isEmpty())
@@ -128,6 +181,14 @@ unescape(QStringList const &source,
     unescaped << unescape(string, mode);
 
   return unescaped;
+}
+
+QStringList
+unescapeSplit(QString const &source,
+              EscapeMode mode) {
+  Q_ASSERT(EscapeShellUnix == mode);
+
+  return unescapeSplitShellUnix(source);
 }
 
 QString

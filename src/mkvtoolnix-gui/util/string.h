@@ -25,6 +25,7 @@ QString escape(QString const &source, EscapeMode mode);
 QStringList escape(QStringList const &source, EscapeMode mode);
 QString unescape(QString const &source, EscapeMode mode);
 QStringList unescape(QStringList const &source, EscapeMode mode);
+QStringList unescapeSplit(QString const &source, EscapeMode mode);
 
 QString joinSentences(QStringList const &sentences);
 

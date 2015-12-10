@@ -5,6 +5,7 @@
 #include <QItemSelectionModel>
 #include <QModelIndex>
 #include <QStandardItem>
+#include <QTabWidget>
 #include <QVector>
 
 #include "common/extern_data.h"
@@ -14,6 +15,7 @@
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
+#include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -81,6 +83,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbCEDefaultLanguage->setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
   ui->cbCEDefaultCountry->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
+  setupJobsRunPrograms();
+
   setupToolTips();
   setupConnections();
 
@@ -140,7 +144,8 @@ PreferencesDialog::setupPageSelector() {
                    addItem(page++, pMerge,  QY("Enabling tracks"));
                    addItem(page++, pMerge,  QY("Playlists"));
                    addItem(page++, nullptr, QY("Chapter editor"),    "story-editor");
-                   addItem(page++, nullptr, QY("Jobs & job queue"),  "view-task");
+  auto pJobs     = addItem(page++, nullptr, QY("Jobs & job queue"),  "view-task");
+                   addItem(page++, pJobs,   QY("Executing programs"));
 
   for (auto row = 0, numRows = model->rowCount(); row < numRows; ++row)
     ui->pageSelector->setExpanded(model->index(row, 0), true);
@@ -467,6 +472,26 @@ PreferencesDialog::setupTabPositions() {
 }
 
 void
+PreferencesDialog::setupJobsRunPrograms() {
+  ui->twJobsPrograms->setTabPosition(m_cfg.m_tabPosition);
+
+  for (auto const &runProgramConfig : m_cfg.m_runProgramConfigurations) {
+    auto widget = new PrefsRunProgramWidget{ui->twJobsPrograms, *runProgramConfig};
+    ui->twJobsPrograms->addTab(widget, {});
+
+    setTabTitleForRunProgramExecutable(ui->twJobsPrograms->count() - 1, runProgramConfig->m_commandLine.value(0));
+
+    connect(widget, &PrefsRunProgramWidget::executableChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramExecutable);
+  }
+
+  if (!m_cfg.m_runProgramConfigurations.isEmpty())
+    ui->swJobsPrograms->setCurrentIndex(1);
+
+  connect(ui->pbJobsAddProgram, &QPushButton::clicked,          this, &PreferencesDialog::addProgramToExecute);
+  connect(ui->twJobsPrograms,   &QTabWidget::tabCloseRequested, this, &PreferencesDialog::removeProgramToExecute);
+}
+
+void
 PreferencesDialog::save() {
   // GUI page:
   m_cfg.m_uiLocale                           = ui->cbGuiInterfaceLanguage->currentData().toString();
@@ -529,6 +554,16 @@ PreferencesDialog::save() {
   m_cfg.m_oftenUsedCountries                 = ui->tbOftenUsedCountries->selectedItemValues();
   m_cfg.m_oftenUsedCharacterSets             = ui->tbOftenUsedCharacterSets->selectedItemValues();
 
+  // Run programs page:
+  m_cfg.m_runProgramConfigurations.clear();
+  for (auto idx = 0, numTabs = ui->twJobsPrograms->count(); idx < numTabs; ++idx) {
+    auto widget = static_cast<PrefsRunProgramWidget *>(ui->twJobsPrograms->widget(idx));
+    auto cfg    = widget->config();
+
+    if (cfg->isValid())
+      m_cfg.m_runProgramConfigurations << cfg;
+  }
+
   m_cfg.save();
 }
 
@@ -556,6 +591,47 @@ PreferencesDialog::editDefaultAdditionalCommandLineOptions() {
   dlg.hideSaveAsDefaultCheckbox();
   if (dlg.exec())
     ui->leMDefaultAdditionalCommandLineOptions->setText(dlg.additionalOptions());
+}
+
+void
+PreferencesDialog::addProgramToExecute() {
+  auto programWidget = new PrefsRunProgramWidget{this, {}};
+  ui->twJobsPrograms->addTab(programWidget, QY("<no program selected yet>"));
+
+  ui->swJobsPrograms->setCurrentIndex(1);
+
+  connect(programWidget, &PrefsRunProgramWidget::executableChanged, this, &PreferencesDialog::setSendersTabTitleForRunProgramExecutable);
+}
+
+void
+PreferencesDialog::removeProgramToExecute(int index) {
+  if ((0  > index) || (ui->twJobsPrograms->count() <= index))
+    return;
+
+  auto tab = qobject_cast<QWidget *>(ui->twJobsPrograms->widget(index));
+  if (!tab)
+    return;
+
+  ui->twJobsPrograms->removeTab(index);
+  delete tab;
+
+  if (!ui->twJobsPrograms->count())
+    ui->swJobsPrograms->setCurrentIndex(0);
+}
+
+void
+PreferencesDialog::setSendersTabTitleForRunProgramExecutable(QString const &executable) {
+  setTabTitleForRunProgramExecutable(ui->twJobsPrograms->indexOf(qobject_cast<PrefsRunProgramWidget *>(sender())), executable);
+}
+
+void
+PreferencesDialog::setTabTitleForRunProgramExecutable(int tabIdx,
+                                                      QString const &executable) {
+  if ((tabIdx < 0) || (tabIdx >= ui->twJobsPrograms->count()))
+    return;
+
+  auto name = executable.isEmpty() ? QY("<no program selected yet>") : QFileInfo{executable}.fileName();
+  ui->twJobsPrograms->setTabText(tabIdx, name);
 }
 
 }}

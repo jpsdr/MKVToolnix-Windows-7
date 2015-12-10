@@ -37,6 +37,9 @@ public slots:
   void enableOutputFileNameControls();
   void browseFixedOutputDirectory();
   void pageSelectionChanged(QModelIndex const &current);
+  void addProgramToExecute();
+  void removeProgramToExecute(int index);
+  void setSendersTabTitleForRunProgramExecutable(QString const &executable);
 
 protected:
   void setupPageSelector();
@@ -55,6 +58,9 @@ protected:
   void setupOutputFileNamePolicy();
   void setupEnableMuxingTracksByLanguage();
   void setupAddingAppendingFilesPolicy();
+  void setupJobsRunPrograms();
+
+  void setTabTitleForRunProgramExecutable(int tabIdx, QString const &executable);
 };
 
 }}
