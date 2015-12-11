@@ -11,6 +11,7 @@
 #include "mkvtoolnix-gui/jobs/mux_job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -121,6 +122,7 @@ MuxJob::processFinished(int exitCode,
   if (!m_bytesRead.isEmpty())
     processLine(QString::fromUtf8(m_bytesRead));
 
+  m_exitCode  = exitCode;
   auto status = m_aborted                          ? Job::Aborted
               : QProcess::NormalExit != exitStatus ? Job::Failed
               : 0 == exitCode                      ? Job::DoneOk
@@ -192,6 +194,17 @@ MuxJob::config()
   const {
   Q_ASSERT(!!m_config);
   return *m_config;
+}
+
+void
+MuxJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables) {
+  Job::runProgramSetupVariables(variables);
+
+  variables[Q("OUTPUT_FILE_NAME")]      << config().m_destination;
+  variables[Q("OUTPUT_FILE_DIRECTORY")] << QFileInfo{ config().m_destination }.path();
+
+  for (auto const &sourceFile : config().m_files)
+    variables[Q("SOURCE_FILE_NAMES")] << sourceFile->m_fileName;
 }
 
 }}}

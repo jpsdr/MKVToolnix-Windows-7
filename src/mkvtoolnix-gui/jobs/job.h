@@ -10,6 +10,8 @@
 #include <QStringList>
 #include <QUuid>
 
+#include "mkvtoolnix-gui/jobs/program_runner.h"
+
 namespace mtx { namespace gui {
 
 namespace Util {
@@ -111,6 +113,8 @@ public:
 protected:
   virtual void saveJobInternal(Util::ConfigFile &settings) const = 0;
   virtual void loadJobBasis(Util::ConfigFile &settings);
+  virtual void runProgramsAfterCompletion();
+  virtual void runProgramSetupVariables(ProgramRunner::VariableMap &variables);
 
 public slots:
   virtual void setStatus(Job::Status status);

@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QUrl>
 
+#include "common/list_utils.h"
 #include "common/logger.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
@@ -166,6 +167,9 @@ Job::setStatus(Status status) {
 
   } else if ((DoneOk == status) || (DoneWarnings == status) || (Failed == status) || (Aborted == status))
     m_dateFinished = QDateTime::currentDateTime();
+
+  if (oldStatus == Running)
+    runProgramsAfterCompletion();
 
   emit statusChanged(m_id, oldStatus, status);
 }
@@ -397,6 +401,26 @@ int
 Job::numUnacknowledgedErrors()
   const {
   return m_errors.count() - m_errorsAcknowledged;
+}
+
+void
+Job::runProgramsAfterCompletion() {
+  if (!mtx::included_in(m_status, DoneOk, DoneWarnings, Failed))
+    return;
+
+  auto event = m_status == Failed ? Util::Settings::RunAfterJobCompletesWithErrors : Util::Settings::RunAfterJobCompletesSuccessfully;
+
+  ProgramRunner::run(event, [this](ProgramRunner::VariableMap &variables) {
+    runProgramSetupVariables(variables);
+  });
+}
+
+void
+Job::runProgramSetupVariables(ProgramRunner::VariableMap &variables) {
+  variables[Q("JOB_START_TIME")]  << m_dateStarted.toString(Qt::ISODate);
+  variables[Q("JOB_END_TIME")]    << m_dateFinished.toString(Qt::ISODate);
+  variables[Q("JOB_DESCRIPTION")] << m_description;
+  variables[Q("JOB_EXIT_CODE")]   << QString::number(m_exitCode);
 }
 
 }}}

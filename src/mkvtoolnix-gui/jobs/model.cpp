@@ -11,6 +11,7 @@
 #include "common/sorting.h"
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
+#include "mkvtoolnix-gui/jobs/program_runner.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/util/ini_config_file.h"
@@ -33,6 +34,8 @@ Model::Model(QObject *parent)
   , m_queueNumDone{}
 {
   retranslateUi();
+
+  connect(this, &Model::queueStatusChanged, this, &Model::runProgramOnQueueStop);
 }
 
 Model::~Model() {
@@ -658,6 +661,16 @@ QDateTime
 Model::queueStartTime()
   const {
   return m_queueStartTime;
+}
+
+void
+Model::runProgramOnQueueStop(QueueStatus status) {
+  if (QueueStatus::Stopped != status)
+    return;
+
+  ProgramRunner::run(Util::Settings::RunAfterJobQueueFinishes, [](ProgramRunner::VariableMap &) {
+    // Nothing to do in this case.
+  });
 }
 
 }}}

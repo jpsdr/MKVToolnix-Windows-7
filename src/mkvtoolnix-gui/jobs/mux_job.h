@@ -56,6 +56,7 @@ protected:
   void processBytesRead();
   void processLine(QString const &rawLine);
   virtual void saveJobInternal(Util::ConfigFile &settings) const;
+  virtual void runProgramSetupVariables(ProgramRunner::VariableMap &variables) override;
 
 signals:
   void startedScanningPlaylists();

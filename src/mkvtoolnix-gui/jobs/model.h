@@ -103,6 +103,8 @@ public slots:
 
   void saveJobs();
 
+  void runProgramOnQueueStop(QueueStatus status);
+
 protected:
   QList<QStandardItem *> createRow(Job const &job) const;
   void setRowText(QList<QStandardItem *> const &items, Job const &job) const;
