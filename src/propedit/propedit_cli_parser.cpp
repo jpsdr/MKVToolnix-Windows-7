@@ -110,7 +110,7 @@ propedit_cli_parser_c::delete_attachment() {
 void
 propedit_cli_parser_c::replace_attachment() {
   try {
-    m_options->add_attachment_command(attachment_target_c::ac_replace, m_next_arg, m_attachment);
+    m_options->add_attachment_command(m_current_arg == "--update-attachment" ? attachment_target_c::ac_update : attachment_target_c::ac_replace, m_next_arg, m_attachment);
     m_attachment = attachment_target_c::options_t();
   } catch (...) {
     mxerror(boost::format(Y("Invalid selector in '%1% %2%'.\n")) % m_current_arg % m_next_arg);
@@ -210,10 +210,11 @@ propedit_cli_parser_c::init_parser() {
   add_section_header(YT("Actions for handling attachments"));
   OPT("add-attachment=<filename>",                         add_attachment,             YT("Add the file 'filename' as a new attachment"));
   OPT("replace-attachment=<attachment-selector:filename>", replace_attachment,         YT("Replace an attachment with the file 'filename'"));
+  OPT("update-attachment=<attachment-selector>",           replace_attachment,         YT("Update an attachment's properties"));
   OPT("delete-attachment=<attachment-selector>",           delete_attachment,          YT("Delete one or more attachments"));
-  OPT("attachment-name=<name>",                            set_attachment_name,        YT("Set the name to use for the following '--add-attachment' or '--replace-attachment' option"));
-  OPT("attachment-description=<description>",              set_attachment_description, YT("Set the description to use for the following '--add-attachment' or '--replace-attachment' option"));
-  OPT("attachment-mime-type=<mime-type>",                  set_attachment_mime_type,   YT("Set the MIME type to use for the following '--add-attachment' or '--replace-attachment' option"));
+  OPT("attachment-name=<name>",                            set_attachment_name,        YT("Set the name to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
+  OPT("attachment-description=<description>",              set_attachment_description, YT("Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
+  OPT("attachment-mime-type=<mime-type>",                  set_attachment_mime_type,   YT("Set the MIME type to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
 
   add_section_header(YT("Other options"));
   add_common_options();
@@ -251,7 +252,7 @@ propedit_cli_parser_c::init_parser() {
 void
 propedit_cli_parser_c::validate() {
   if (m_attachment.m_name || m_attachment.m_description || m_attachment.m_mime_type)
-    mxerror(Y("One of the options '--attachment-name', '--attachment-description' or '--attachment-mime-type' has been used without a following '--add-attachment' or '--replace-attachment' option.\n"));
+    mxerror(Y("One of the options '--attachment-name', '--attachment-description' or '--attachment-mime-type' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"));
 }
 
 options_cptr

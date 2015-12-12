@@ -54,6 +54,7 @@ public:
     ac_add,
     ac_delete,
     ac_replace,
+    ac_update,
   };
 
   enum selector_type_e {

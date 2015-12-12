@@ -33,6 +33,9 @@ commands = [
   "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --replace-attachment mime-type:text/plain:data/text/tags-binary.xml",
 
   "--attachment-description 'Alice and Bob see Charlie' --replace-attachment mime-type:text/plain:data/text/tags-binary.xml",
+
+  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --update-attachment 3",
+  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --replace-attachment 3:data/text/tags-binary.xml",
 ]
 
 test "several" do

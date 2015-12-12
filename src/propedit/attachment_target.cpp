@@ -14,6 +14,7 @@
 
 #include "common/construct.h"
 #include "common/extern_data.h"
+#include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
@@ -54,7 +55,7 @@ attachment_target_c::operator ==(target_c const &cmp)
 
 void
 attachment_target_c::validate() {
-  if ((ac_add != m_command) && (ac_replace != m_command))
+  if (!mtx::included_in(m_command, ac_add, ac_replace))
     return;
 
   try {
@@ -79,6 +80,7 @@ attachment_target_c::dump_info()
          % (  ac_add     == m_command ? "add"
             : ac_delete  == m_command ? "delete"
             : ac_replace == m_command ? "replace"
+            : ac_update  == m_command ? "update"
             :                           "unknown")
          % m_options
          % m_selector_type
@@ -120,7 +122,7 @@ attachment_target_c::parse_spec(command_e command,
     s_spec_re = boost::regex{"^ (?: (=)? (\\d+) : (.+) ) | (?: (name | mime-type) : ([^:]+) : (.+) ) $", boost::regex::perl | boost::regex::icase | boost::regex::mod_x};
     offset    = 1;
 
-  } else if (ac_delete == m_command)
+  } else if (mtx::included_in(m_command, ac_delete, ac_update))
     // captures:                    1    2                     3                    4
     s_spec_re = boost::regex{"^ (?: (=)? (\\d+)        ) | (?: (name | mime-type) : (.+) ) $",           boost::regex::perl | boost::regex::icase | boost::regex::mod_x};
 
@@ -161,7 +163,7 @@ attachment_target_c::execute() {
   else if (ac_delete == m_command)
     execute_delete();
 
-  else if (ac_replace == m_command)
+  else if (mtx::included_in(m_command, ac_replace, ac_update))
     execute_replace();
 
   else
@@ -309,7 +311,8 @@ attachment_target_c::replace_attachment_values(KaxAttached &att) {
       DeleteChildren<KaxFileDescription>(att);
     else
       GetChild<KaxFileDescription>(att).SetValueUTF8(*m_options.m_description);
-}
+  }
 
-  GetChild<KaxFileData>(att).CopyBuffer(m_file_content->get_buffer(), m_file_content->get_size());
+  if (m_file_content)
+    GetChild<KaxFileData>(att).CopyBuffer(m_file_content->get_buffer(), m_file_content->get_size());
 }
