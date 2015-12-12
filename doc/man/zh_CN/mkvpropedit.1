@@ -165,6 +165,10 @@ Matroska(TM)
 若本选项之前使用了
 \fB\-\-attachment\-description\fR
 选项，则其值将用作新附件的描述。否则将不设置描述信息。
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is used as the new attachment\*(Aqs UID\&. Otherwise a random UID will be generated automatically\&.
 .RE
 .PP
 \fB\-\-replace\-attachment\fR \fI选择器\fR:\fI文件名\fR
@@ -184,17 +188,50 @@ Matroska(TM)
 附件选择器
 段落。
 .sp
-若本选项之前使用了
+If the option
 \fB\-\-attachment\-name\fR
-选项，则其值将用作新附件的替代名称。否则名称将不会变化。
+has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
 .sp
-若本选项之前使用了
+If the option
 \fB\-\-attachment\-mime\-type\fR
-选项，则其值将替代附件的 MIME 类型。否则 MIME 类型将不会变化。
+has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
 .sp
-若本选项之前使用了
+If the option
 \fB\-\-attachment\-description\fR
-选项，则其值将替代附件的描述。否则描述将不会变化。
+has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
+.RE
+.PP
+\fB\-\-update\-attachment\fR \fIselector\fR
+.RS 4
+Sets the properties of one or more attachments that match
+\fIselector\fR\&. If more than one existing attachment matches
+\fIselector\fR
+then all of their properties will be updated\&.
+.sp
+\fI选择器\fR
+可以有四种格式。各格式说明位于下文
+附件选择器
+段落。
+.sp
+If the option
+\fB\-\-attachment\-name\fR
+has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-mime\-type\fR
+has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-description\fR
+has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
 .RE
 .PP
 \fB\-\-delete\-attachment\fR \fI选择器\fR

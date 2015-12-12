@@ -212,6 +212,11 @@
       If the option <option>--attachment-description</option> has been used prior to this option then its value is used as the new
       attachment's description. Otherwise no description will be set.
      </para>
+
+     <para>
+      If the option <option>--attachment-uid</option> has been used prior to this option then its value is used as the new attachment's
+      UID. Otherwise a random UID will be generated automatically.
+     </para>
     </listitem>
    </varlistentry>
 
@@ -230,18 +235,58 @@
      </para>
 
      <para>
-      If the option <option>--attachment-name</option> has been used prior to this option then its value is used as the replaced
-      attachment's name. Otherwise the name is not changed.
+      If the option <option>--attachment-name</option> has been used prior to this option then its value is set as the new name for each
+      modified attachment. Otherwise the names aren't changed.
      </para>
 
      <para>
-      If the option <option>--attachment-mime-type</option> has been used prior to this option then its value is used as the replaced
-      attachment's MIME type. Otherwise the MIME type is not changed.
+      If the option <option>--attachment-mime-type</option> has been used prior to this option then its value is set as the new MIME type
+      for each modified attachment. Otherwise the MIME types aren't changed.
      </para>
 
      <para>
-      If the option <option>--attachment-description</option> has been used prior to this option then its value is used as the replaced
-      attachment's description. Otherwise no description is not changed.
+      If the option <option>--attachment-description</option> has been used prior to this option then its value is set as the new
+      description for each modified attachment. Otherwise the descriptions aren't changed.
+     </para>
+
+     <para>
+      If the option <option>--attachment-uid</option> has been used prior to this option then its value is set as the new UID for each
+      modified attachment. Otherwise the UIDs aren't changed.
+     </para>
+    </listitem>
+   </varlistentry>
+
+   <varlistentry id="mkvpropedit.description.update_attachment">
+    <term><option>--update-attachment</option> <parameter>selector</parameter></term>
+    <listitem>
+     <para>
+      Sets the properties of one or more attachments that match <parameter>selector</parameter>. If more than one existing attachment
+      matches <parameter>selector</parameter> then all of their properties will be updated.
+     </para>
+
+     <para>
+      The <parameter>selector</parameter> can have one of four forms. They're exlained below in the section <link
+      linkend="mkvpropedit.attachment_selectors">attachment selectors</link>.
+     </para>
+
+     <para>
+      If the option <option>--attachment-name</option> has been used prior to this option then its value is set as the new name for each
+      modified attachment. Otherwise the names aren't changed.
+     </para>
+
+     <para>
+      If the option <option>--attachment-mime-type</option> has been used prior to this option then its value is set as the new MIME type
+      for each modified attachment. Otherwise the MIME types aren't changed.
+     </para>
+
+     <para>
+      If the option <option>--attachment-description</option> has been used prior to this option then its value is set as the new
+      description for each modified attachment. Otherwise the descriptions aren't changed.
+     </para>
+
+     <para>
+      If the option <option>--attachment-uid</option> has been used prior to this option then its value is set as the new UID for each
+      modified attachment. Otherwise the UIDs aren't changed.
      </para>
     </listitem>
    </varlistentry>

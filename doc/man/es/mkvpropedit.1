@@ -167,6 +167,10 @@ es usada antes de esta opci\('on entonces su valor es usado como el nuevo tipo M
 Si la opci\('on
 \fB\-\-attachment\-description\fR
 es usada antes de esta opci\('on entonces su valor es usado como la nueva descripci\('on del adjunto\&. Por el contrario, ninguna descripci\('on ser\('a establecida\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is used as the new attachment\*(Aqs UID\&. Otherwise a random UID will be generated automatically\&.
 .RE
 .PP
 \fB\-\-replace\-attachment\fR \fIselector\fR:\fInombrearchivo\fR
@@ -184,17 +188,50 @@ El
 puede tener una de estas cuatro formas: ID, UID, Name y MIME type\&. Est\('an explicadas m\('as abajo en la secci\('on
 selectores de adjuntos\&.
 .sp
-Si la opci\('on
+If the option
 \fB\-\-attachment\-name\fR
-es usada antes de esta opci\('on entonces su valor es usado como el nombre del adjunto reemplazado\&. Por el contrario, el nombre no cambia\&.
+has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
 .sp
-Si la opci\('on
+If the option
 \fB\-\-attachment\-mime\-type\fR
-es usada antes de esta opci\('on entonces su valor es usado como el tipo MIME del adjunto reemplazado\&. Por el contrario, el tipo MIME no cambia\&.
+has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
 .sp
-Si la opci\('on
+If the option
 \fB\-\-attachment\-description\fR
-es usada antes de esta opci\('on entonces su valor es usado como la descripci\('on del adjunto reemplazado\&. Por el contrario, ninguna descripci\('on cambia\&.
+has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
+.RE
+.PP
+\fB\-\-update\-attachment\fR \fIselector\fR
+.RS 4
+Sets the properties of one or more attachments that match
+\fIselector\fR\&. If more than one existing attachment matches
+\fIselector\fR
+then all of their properties will be updated\&.
+.sp
+El
+\fIselector\fR
+puede tener una de estas cuatro formas: ID, UID, Name y MIME type\&. Est\('an explicadas m\('as abajo en la secci\('on
+selectores de adjuntos\&.
+.sp
+If the option
+\fB\-\-attachment\-name\fR
+has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-mime\-type\fR
+has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-description\fR
+has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
 .RE
 .PP
 \fB\-\-delete\-attachment\fR \fIselector\fR

@@ -165,6 +165,10 @@ has been used prior to this option then its value is used as the new attachment\
 If the option
 \fB\-\-attachment\-description\fR
 has been used prior to this option then its value is used as the new attachment\*(Aqs description\&. Otherwise no description will be set\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is used as the new attachment\*(Aqs UID\&. Otherwise a random UID will be generated automatically\&.
 .RE
 .PP
 \fB\-\-replace\-attachment\fR \fIselector\fR:\fIfilename\fR
@@ -184,15 +188,48 @@ attachment selectors\&.
 .sp
 If the option
 \fB\-\-attachment\-name\fR
-has been used prior to this option then its value is used as the replaced attachment\*(Aqs name\&. Otherwise the name is not changed\&.
+has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
 .sp
 If the option
 \fB\-\-attachment\-mime\-type\fR
-has been used prior to this option then its value is used as the replaced attachment\*(Aqs MIME type\&. Otherwise the MIME type is not changed\&.
+has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
 .sp
 If the option
 \fB\-\-attachment\-description\fR
-has been used prior to this option then its value is used as the replaced attachment\*(Aqs description\&. Otherwise no description is not changed\&.
+has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
+.RE
+.PP
+\fB\-\-update\-attachment\fR \fIselector\fR
+.RS 4
+Sets the properties of one or more attachments that match
+\fIselector\fR\&. If more than one existing attachment matches
+\fIselector\fR
+then all of their properties will be updated\&.
+.sp
+The
+\fIselector\fR
+can have one of four forms\&. They\*(Aqre exlained below in the section
+attachment selectors\&.
+.sp
+If the option
+\fB\-\-attachment\-name\fR
+has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-mime\-type\fR
+has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-description\fR
+has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
 .RE
 .PP
 \fB\-\-delete\-attachment\fR \fIselector\fR

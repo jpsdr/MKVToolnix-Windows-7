@@ -170,6 +170,10 @@ is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging
 Als de optie
 \fB\-\-attachment\-description\fR
 is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van de bijlage beschrijving\&. Anders wordt er g\('e\('en beschrijving gezet\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is used as the new attachment\*(Aqs UID\&. Otherwise a random UID will be generated automatically\&.
 .RE
 .PP
 \fB\-\-replace\-attachment\fR \fIselector\fR:\fIfilename\fR
@@ -187,17 +191,50 @@ De
 kan vier vormen hebben\&. Ze worden in de sectie hieronder uitgelegd
 bijlage keuze\&.
 .sp
-Als de optie
+If the option
 \fB\-\-attachment\-name\fR
-is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van de bijlage naam\&. Anders wordt de naam niet gewijzigd\&.
+has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
 .sp
-Als de optie
+If the option
 \fB\-\-attachment\-mime\-type\fR
-is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van de bijlage MIME type\&. Anders wordt het MIME type niet gewijzigd\&.
+has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
 .sp
-Als de optie
+If the option
 \fB\-\-attachment\-description\fR
-is gebruikt voorafgaand tot deze optie, wordt die waarde gebruikt als vervanging van de bijlage beschrijving\&. Anders wordt de beschrijving niet gewijzigd\&.
+has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
+.RE
+.PP
+\fB\-\-update\-attachment\fR \fIselector\fR
+.RS 4
+Sets the properties of one or more attachments that match
+\fIselector\fR\&. If more than one existing attachment matches
+\fIselector\fR
+then all of their properties will be updated\&.
+.sp
+De
+\fIkeuze\fR
+kan vier vormen hebben\&. Ze worden in de sectie hieronder uitgelegd
+bijlage keuze\&.
+.sp
+If the option
+\fB\-\-attachment\-name\fR
+has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-mime\-type\fR
+has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-description\fR
+has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+.sp
+If the option
+\fB\-\-attachment\-uid\fR
+has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
 .RE
 .PP
 \fB\-\-delete\-attachment\fR \fIselector\fR
