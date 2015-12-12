@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the mkvtoolnix package.
 msgid ""
 msgstr ""
-"Project-Id-Version: MKVToolNix 8.6.1\n"
+"Project-Id-Version: MKVToolNix 8.6.2\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-12-11 14:29+0100\n"
-"PO-Revision-Date: 2015-12-04 21:29+0200\n"
+"PO-Revision-Date: 2015-12-12 10:54+0200\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
 "Language: tr\n"
@@ -1133,7 +1133,7 @@ msgstr "Dosyaları &ekle"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1151
 msgid "&Add program"
-msgstr ""
+msgstr "Program &ekle"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1592
 msgid "&Add source files"
@@ -2072,9 +2072,8 @@ msgstr "<çıktı dosyası yok>"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:599
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:633
-#, fuzzy
 msgid "<no program selected yet>"
-msgstr "henüz başlayan iş yok"
+msgstr "<henüz seçilen program yok>"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
@@ -2479,16 +2478,15 @@ msgstr "Böyle bir özellik zaten olsa bile değerle birlikte bir özellik ekler
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:145
 msgid "After a job aborts with an error"
-msgstr ""
+msgstr "İş bir hata ile iptal edildikten sonra"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:144
-#, fuzzy
 msgid "After a job completes successfully or with warnings"
-msgstr "Sadece eğer iş başarılı olarak tamamlandıysa"
+msgstr "İş başarılı olarak ya da uyarılar ile tamamlandıktan sonra"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:146
 msgid "After the job queue has stopped"
-msgstr ""
+msgstr "İş kuyruğu durduktan sonra"
 
 #: src/info/mkvinfo.cpp:702
 #, boost-format
@@ -2734,6 +2732,9 @@ msgid ""
 "Any other file name is added as an input file for merging, opened in the "
 "chapter editor or in the header editor depending on the current mode."
 msgstr ""
+"Herhangi bir diğer dosya adı birleştirme için bir girdi dosyası olarak "
+"eklendi, şu anki kipe bağlı bölüm düzenleyicide ya da başlık düzenleyicide "
+"açıldı."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:901
 msgid "Append media files"
@@ -3343,9 +3344,8 @@ msgid "Colour space: %1%"
 msgstr "Renk alanı: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:142
-#, fuzzy
 msgid "Command line:"
-msgstr "Şu anki komut satırı"
+msgstr "Komut satırı:"
 
 #: src/info/qt_ui.cpp:148
 msgid "Compiled with libebml %1 + libmatroska %2."
@@ -3710,7 +3710,7 @@ msgstr "Şu anki komut satırı"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
 msgid "Current date & time in ISO 8601 format"
-msgstr ""
+msgstr "ISO 8601 biçiminde şu anki tarih ve saat"
 
 #: src/mkvtoolnix-gui/watch_jobs/tool.cpp:64
 msgid "Current job"
@@ -4381,15 +4381,16 @@ msgstr "Çalıştırılabilir dosya bulunamadı"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "Executing programs"
-msgstr ""
+msgstr "Yürütülen programlar"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1150
 msgid "Executing programs after certain events"
-msgstr ""
+msgstr "Belli olaylardan sonra yürütülen programlar"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:71
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr ""
+"Çıkış kodu (0: tamam, 1: uyarılar meydana geldi, 2: hatalar meydana geldi)"
 
 #: src/common/xml/ebml_converter.cpp:204
 #, boost-format
@@ -4772,9 +4773,8 @@ msgid "General options"
 msgstr "Genel seçenekler"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:78
-#, fuzzy
 msgid "General variables"
-msgstr "Genel seçenekler"
+msgstr "Genel değişkenler"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:193
 msgid "Generate sub-chapters"
@@ -5736,13 +5736,12 @@ msgid "Job &output"
 msgstr "İş çı&ktısı"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:68
-#, fuzzy
 msgid "Job description"
-msgstr "İş tanımını gir"
+msgstr "İş tanımı"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:70
 msgid "Job end date & time in ISO 8601 format"
-msgstr ""
+msgstr "ISO 8601 biçiminde iş bitiş tarihi ve saati"
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
 msgid "Job queue"
@@ -5750,7 +5749,7 @@ msgstr "İş kuyruğu"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:69
 msgid "Job start date & time in ISO 8601 format"
-msgstr ""
+msgstr "ISO 8601 biçiminde iş başlangıç tarihi ve saati"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:147
 msgid "Jobs & job queue"
@@ -6415,9 +6414,8 @@ msgid "No permission to read from, to write to or to create"
 msgstr "Şundan okumaya, şuna yazmaya veya oluşturmak için izin yok"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1152
-#, fuzzy
 msgid "No programs have been added yet."
-msgstr "Henüz hiç başlatılmış iş yok."
+msgstr "Henüz hiç eklenmiş program yok."
 
 #: src/common/kax_analyzer.cpp:1425
 #, boost-format
@@ -6833,14 +6831,12 @@ msgid "Output file name"
 msgstr "Çıktı dosya adı"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:75
-#, fuzzy
 msgid "Output file's directory"
-msgstr "Çıktı dosya adı"
+msgstr "Çıktı dosyasının dizini"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:74
-#, fuzzy
 msgid "Output file's name"
-msgstr "Çıktı dosya adı"
+msgstr "Çıktı dosyasının adı"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1535
 msgid "Output file:"
@@ -8088,9 +8084,8 @@ msgid "Source file name"
 msgstr "Kaynak dosya adı"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:76
-#, fuzzy
 msgid "Source file names"
-msgstr "Kaynak dosya adı"
+msgstr "Kaynak dosya adları"
 
 #: src/common/property_element.cpp:128
 msgid ""
@@ -10696,12 +10691,11 @@ msgstr "Değer"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:67
 msgid "Variables for all job types"
-msgstr ""
+msgstr "Tüm iş türleri için değişkenler"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:73
-#, fuzzy
 msgid "Variables for merge jobs"
-msgstr "Yeni birleştirme işleri için varsayılan olarak kaydedin"
+msgstr "Birleştirme işleri için değişkenler"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:103
 msgid "Version %1"
@@ -10943,9 +10937,8 @@ msgstr ""
 "sürükleyip ve bıraktığı zaman GKA farklı eylemler gerçekleştirebilir."
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:143
-#, fuzzy
 msgid "When to execute:"
-msgstr "Yürütülen işler:"
+msgstr "Yürütüldüğünde:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
 msgid ""
