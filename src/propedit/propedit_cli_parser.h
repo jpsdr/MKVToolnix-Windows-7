@@ -42,6 +42,7 @@ protected:
   void set_attachment_name();
   void set_attachment_description();
   void set_attachment_mime_type();
+  void set_attachment_uid();
   void add_attachment();
   void delete_attachment();
   void replace_attachment();

@@ -36,6 +36,10 @@ commands = [
 
   "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --update-attachment 3",
   "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --replace-attachment 3:data/text/tags-binary.xml",
+
+  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --attachment-uid 47110815 --update-attachment 3",
+  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --attachment-uid 47110815 --replace-attachment 3:data/text/tags-binary.xml",
+  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --attachment-uid 47110815 --add-attachment data/text/tags-binary.xml",
 ]
 
 test "several" do

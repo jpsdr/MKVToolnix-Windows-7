@@ -175,11 +175,12 @@ attachment_target_c::execute_add() {
   auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : guess_mime_type(m_file_name, true);
   auto file_name   = m_options.m_name && !m_options.m_name->empty() ? *m_options.m_name        : to_utf8(bfs::path{m_file_name}.filename().string());
   auto description = m_options.m_description                        ? *m_options.m_description : std::string{""};
+  auto uid         = m_options.m_uid                                ? *m_options.m_uid         : create_unique_number(UNIQUE_ATTACHMENT_IDS);
 
   auto att          = mtx::construct::cons<KaxAttached>(new KaxFileName,                                         to_wide(file_name),
                                                         !description.empty() ? new KaxFileDescription : nullptr, to_wide(description),
                                                         new KaxMimeType,                                         mime_type,
-                                                        new KaxFileUID,                                          create_unique_number(UNIQUE_ATTACHMENT_IDS),
+                                                        new KaxFileUID,                                          uid,
                                                         new KaxFileData,                                         m_file_content);
 
   m_level1_element->PushElement(*att);
@@ -312,6 +313,9 @@ attachment_target_c::replace_attachment_values(KaxAttached &att) {
     else
       GetChild<KaxFileDescription>(att).SetValueUTF8(*m_options.m_description);
   }
+
+  if (m_options.m_uid)
+    GetChild<KaxFileUID>(att).SetValue(*m_options.m_uid);
 
   if (m_file_content)
     GetChild<KaxFileData>(att).CopyBuffer(m_file_content->get_buffer(), m_file_content->get_size());

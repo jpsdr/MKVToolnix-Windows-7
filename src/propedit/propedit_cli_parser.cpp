@@ -15,6 +15,7 @@
 
 #include "common/ebml.h"
 #include "common/strings/formatting.h"
+#include "common/strings/parsing.h"
 #include "common/translation.h"
 #include "propedit/propedit_cli_parser.h"
 
@@ -86,6 +87,15 @@ propedit_cli_parser_c::set_attachment_description() {
 void
 propedit_cli_parser_c::set_attachment_mime_type() {
   m_attachment.m_mime_type.reset(m_next_arg);
+}
+
+void
+propedit_cli_parser_c::set_attachment_uid() {
+  auto uid = uint64_t{};
+  if (!parse_number(m_next_arg, uid))
+    mxerror(boost::format(Y("The value '%1%' is not a number.\n")) % m_next_arg);
+
+  m_attachment.m_uid.reset(uid);
 }
 
 void
@@ -215,6 +225,7 @@ propedit_cli_parser_c::init_parser() {
   OPT("attachment-name=<name>",                            set_attachment_name,        YT("Set the name to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
   OPT("attachment-description=<description>",              set_attachment_description, YT("Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
   OPT("attachment-mime-type=<mime-type>",                  set_attachment_mime_type,   YT("Set the MIME type to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
+  OPT("attachment-uid=<uid>",                              set_attachment_uid,         YT("Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
 
   add_section_header(YT("Other options"));
   add_common_options();
@@ -251,8 +262,9 @@ propedit_cli_parser_c::init_parser() {
 
 void
 propedit_cli_parser_c::validate() {
-  if (m_attachment.m_name || m_attachment.m_description || m_attachment.m_mime_type)
-    mxerror(Y("One of the options '--attachment-name', '--attachment-description' or '--attachment-mime-type' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"));
+  if (m_attachment.m_name || m_attachment.m_description || m_attachment.m_mime_type || m_attachment.m_uid)
+    mxerror(Y("One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used "
+              "without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"));
 }
 
 options_cptr

@@ -30,6 +30,7 @@ class attachment_target_c: public target_c {
 public:
   struct options_t {
     boost::optional<std::string> m_name, m_description, m_mime_type;
+    boost::optional<uint64_t> m_uid;
 
     options_t &
     name(std::string const &p_name) {
@@ -46,6 +47,12 @@ public:
     options_t &
     mime_type(std::string const &p_mime_type) {
       m_mime_type.reset(p_mime_type);
+      return *this;
+    }
+
+    options_t &
+    uid(uint64_t p_uid) {
+      m_uid.reset(p_uid);
       return *this;
     }
   };
