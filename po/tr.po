@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.6.2\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-12-12 15:19+0100\n"
-"PO-Revision-Date: 2015-12-12 10:54+0200\n"
+"PO-Revision-Date: 2015-12-12 21:59+0200\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
 "Language: tr\n"
@@ -168,7 +168,7 @@ msgstr "  --chapter-charset <cset> Basit bölüm dosyası için karakter kümesi
 #: src/merge/mkvmerge.cpp:91
 msgid ""
 "  --chapter-language <lng> Set the 'language' element in chapter entries.\n"
-msgstr "  --chapter-language <dil> Bölüm girişlerinde 'dil' öğesini ayarla.\n"
+msgstr "  --chapter-language <dil> Bölüm girişlerinde 'dil' öğesini ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:90
 msgid "  --chapters <file>        Read chapter information from the file.\n"
@@ -290,7 +290,7 @@ msgid ""
 "                           Explicitly set the display dimensions.\n"
 msgstr ""
 "  --display-dimensions <TID:genişlik>x<yükseklik>\n"
-"                           Açıkça görüntü boyutlarını ayarla.\n"
+"                           Açıkça görüntü boyutlarını ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:116
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
@@ -1194,9 +1194,8 @@ msgid "&Collapse all"
 msgstr "Tümünü &daralt"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:141
-#, fuzzy
 msgid "&Command line:"
-msgstr "Komut satırı:"
+msgstr "&Komut satırı:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:409
 msgid "&Copy command line to clipboard"
@@ -2358,9 +2357,8 @@ msgid "Actions for handling tags and chapters"
 msgstr "Kullanılan etiketler ve bölümler için eylemler"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:142
-#, fuzzy
 msgid "Add &variable"
-msgstr "Mevcut:"
+msgstr "&Değişken ekle"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:230
 msgid "Add additional command line options for mkvmerge"
@@ -2487,19 +2485,16 @@ msgid "Adds a property with the value even if such a property already exists"
 msgstr "Böyle bir özellik zaten olsa bile değerle birlikte bir özellik ekler"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:145
-#, fuzzy
 msgid "After a job aborts with an &error"
-msgstr "İş bir hata ile iptal edildikten sonra"
+msgstr "İş bir &hata ile iptal edildikten sonra"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:144
-#, fuzzy
 msgid "After a job completes &successfully or with warnings"
-msgstr "İş başarılı olarak ya da uyarılar ile tamamlandıktan sonra"
+msgstr "İş &başarılı olarak ya da uyarılar ile tamamlandıktan sonra"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:146
-#, fuzzy
 msgid "After the job &queue has stopped"
-msgstr "İş kuyruğu durduktan sonra"
+msgstr "İş &kuyruğu durduktan sonra"
 
 #: src/info/mkvinfo.cpp:702
 #, boost-format
@@ -6647,6 +6642,10 @@ msgid ""
 "following '--add-attachment', '--replace-attachment' or '--update-"
 "attachment' option.\n"
 msgstr ""
+"'--attachment-name', '--attachment-description', '--attachment-mime-type' "
+"veya '--attachment-uid' seçeneklerinden biri şurada belirtilen '--add-"
+"attachment', '--replace-attachment' veya '--update-attachment' seçeneği "
+"olmadan kullanıldı.\n"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:20
 msgid "Online check for updates"
@@ -7837,22 +7836,20 @@ msgid "Set if the video is interlaced."
 msgstr "Eğer görüntü geçişli ise ayarlayın."
 
 #: src/propedit/propedit_cli_parser.cpp:227
-#, fuzzy
 msgid ""
 "Set the MIME type to use for the following '--add-attachment', '--replace-"
 "attachment' or '--update-attachment' option"
 msgstr ""
-"Aşağıdaki '--add-attachment' veya '--replace-attachment' seçeneği için "
-"kullanmaya MIME türünü ayarla"
+"Şurada belirtilen '--add-attachment', '--replace-attachment' veya '--update-"
+"attachment' seçeneğini kullanmak için MIME türünü ayarlar"
 
 #: src/propedit/propedit_cli_parser.cpp:228
-#, fuzzy
 msgid ""
 "Set the UID to use for the following '--add-attachment', '--replace-"
 "attachment' or '--update-attachment' option"
 msgstr ""
-"Aşağıdaki '--add-attachment' veya '--replace-attachment' seçeneği için "
-"kullanmaya adı ayarla"
+"Şurada belirtilen '--add-attachment', '--replace-attachment' veya '--update-"
+"attachment' seçeneğini kullanmak için UID'yi ayarlar"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:184
 msgid "Set the chapter names's &languages:"
@@ -7863,22 +7860,20 @@ msgid "Set the chapter names's co&untries"
 msgstr "Bölüm adlarının ü&lkelerini şuna ayarla:"
 
 #: src/propedit/propedit_cli_parser.cpp:226
-#, fuzzy
 msgid ""
 "Set the description to use for the following '--add-attachment', '--replace-"
 "attachment' or '--update-attachment' option"
 msgstr ""
-"Aşağıdaki '--add-attachment' veya '--replace-attachment' seçeneği için "
-"kullanmaya açıklama ayarla"
+"Şurada belirtilen '--add-attachment', '--replace-attachment' veya '--update-"
+"attachment' seçeneğini kullanmak için açıklama ayarlar"
 
 #: src/propedit/propedit_cli_parser.cpp:225
-#, fuzzy
 msgid ""
 "Set the name to use for the following '--add-attachment', '--replace-"
 "attachment' or '--update-attachment' option"
 msgstr ""
-"Aşağıdaki '--add-attachment' veya '--replace-attachment' seçeneği için "
-"kullanmaya adı ayarla"
+"Şurada belirtilen '--add-attachment', '--replace-attachment' veya '--update-"
+"attachment' seçeneğini kullanmak için adı ayarlar"
 
 #: src/propedit/propedit_cli_parser.cpp:210
 msgid "Sets a property to the value if it exists and add it otherwise"
@@ -9739,9 +9734,9 @@ msgstr ""
 "Kullanıcı ondan sonra aslında eklemek için oynatma listesini seçebilir."
 
 #: src/propedit/propedit_cli_parser.cpp:96
-#, fuzzy, boost-format
+#, boost-format
 msgid "The value '%1%' is not a number.\n"
-msgstr "XMl etiket dosyası '%1%' okunamadı.\n"
+msgstr "'%1%' değeri bir sayı değildir.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:358
 #: src/mkvtoolnix-gui/merge/input.cpp:363
@@ -10629,9 +10624,8 @@ msgid "Unsupported track type for this track.\n"
 msgstr "Bu iz için desteklenmeyen biçim.\n"
 
 #: src/propedit/propedit_cli_parser.cpp:223
-#, fuzzy
 msgid "Update an attachment's properties"
-msgstr "Altyazı ve bölüm özellikleri"
+msgstr "Ekin özelliklerini güncelle"
 
 #: src/propedit/propedit.cpp:27
 #, boost-format
