@@ -40,6 +40,7 @@ namespace mtx { namespace tags {
 void fix_mandatory_elements(EbmlElement *e);
 void remove_track_uid_targets(EbmlMaster *tag);
 void remove_elements_unsupported_by_webm(EbmlMaster &master);
+bool remove_track_statistics(KaxTags *tags, boost::optional<uint64_t> track_uid);
 
 KaxTags *select_for_chapters(KaxTags &tags, KaxChapters &chapters);
 
@@ -102,10 +103,11 @@ find_tag_for(KaxTags &tags,
 }
 
 template<typename T>
-void
+bool
 remove_simple_tags_for(KaxTags &tags,
-                       uint64_t id,
+                       boost::optional<uint64_t> id,
                        std::string const &name_to_remove) {
+  auto removed_something = false;
   auto tag_idx = 0u;
   while (tag_idx < tags.ListSize()) {
     auto tag = dynamic_cast<KaxTag *>(tags[tag_idx]);
@@ -114,11 +116,14 @@ remove_simple_tags_for(KaxTags &tags,
       continue;
     }
 
-    auto targets   = FindChild<KaxTagTargets>(*tag);
-    auto actual_id = targets ? FindChildValue<T>(*targets, 0llu) : 0;
-    if (!targets || (actual_id != id)) {
-      ++tag_idx;
-      continue;
+    if (id) {
+      auto targets   = FindChild<KaxTagTargets>(*tag);
+      auto actual_id = targets ? boost::optional<uint64_t>{ FindChildValue<T>(*targets, 0llu) } : boost::optional<uint64_t>{ boost::none };
+
+      if (!targets || !actual_id || (*actual_id != *id)) {
+        ++tag_idx;
+        continue;
+      }
     }
 
     auto simple_idx = 0u;
@@ -130,6 +135,7 @@ remove_simple_tags_for(KaxTags &tags,
       else {
         tag->Remove(simple_idx);
         delete simple;
+        removed_something = true;
       }
     }
 
@@ -139,8 +145,11 @@ remove_simple_tags_for(KaxTags &tags,
     else {
       tags.Remove(tag_idx);
       delete tag;
+      removed_something = true;
     }
   }
+
+  return removed_something;
 }
 
 }}

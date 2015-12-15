@@ -207,40 +207,7 @@ kax_track_t::discard_track_statistics_tags() {
   if (!tags)
     return;
 
-  auto tags_to_discard = std::set<std::string>{
-    "_STATISTICS_TAGS",
-    "_STATISTICS_WRITING_APP",
-    "_STATISTICS_WRITING_DATE_UTC",
-  };
-
-  auto const wanted_target_type = static_cast<unsigned int>(mtx::tags::Movie);
-
-  for (auto const &tag_elt : *tags) {
-    auto tag = dynamic_cast<KaxTag *>(tag_elt);
-    if (!tag)
-      continue;
-
-    auto targets = FindChild<KaxTagTargets>(tag);
-    if (!targets || (FindChildValue<KaxTagTargetTypeValue>(targets, wanted_target_type) != wanted_target_type))
-      continue;
-
-    for (auto const &simple_tag_elt : *tag) {
-      auto simple_tag = dynamic_cast<KaxTagSimple *>(simple_tag_elt);
-      if (!simple_tag)
-        continue;
-
-      auto simple_tag_name = mtx::tags::get_simple_name(*simple_tag);
-      if (simple_tag_name != "_STATISTICS_TAGS")
-        continue;
-
-      auto all_to_discard = split(mtx::tags::get_simple_value(*simple_tag), boost::regex{"\\s+", boost::regex::perl});
-      for (auto const &to_discard : all_to_discard)
-        tags_to_discard.insert(to_discard);
-    }
-  }
-
-  for (auto const &tag_name : tags_to_discard)
-    mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(*tags, track_uid, tag_name);
+  mtx::tags::remove_track_statistics(tags, track_uid);
 
   if (!tags->ListSize()) {
     delete tags;
