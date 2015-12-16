@@ -415,7 +415,7 @@ generic_reader_c::display_identification_results_as_json() {
   };
 
   auto json = nlohmann::json{
-    { "identification_format_version", 1                       },
+    { "identification_format_version", 2                       },
     { "file_name",                     m_ti.m_fname            },
     { "tracks",                        nlohmann::json::array() },
     { "attachments",                   nlohmann::json::array() },
@@ -465,7 +465,7 @@ generic_reader_c::display_identification_results_as_json() {
       };
   }
 
-  mxinfo(boost::format("%1%\n") % json.dump(2));
+  display_json_output(json);
 }
 
 std::string

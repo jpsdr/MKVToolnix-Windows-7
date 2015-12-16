@@ -22,6 +22,7 @@
 
 #include "common/locale.h"
 #include "common/mm_io.h"
+#include "nlohmann-json/src/json.hpp"
 
 using namespace libebml;
 
@@ -35,6 +36,9 @@ extern std::shared_ptr<mm_io_c> g_mm_stdio;
 
 void redirect_stdio(const mm_io_cptr &new_stdio);
 bool stdio_redirected();
+
+void redirect_warnings_and_errors_to_json();
+void display_json_output(nlohmann::json json);
 
 void init_common_output(bool no_charset_detection);
 void set_cc_stdio(const std::string &charset);

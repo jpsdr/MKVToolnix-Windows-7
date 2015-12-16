@@ -1,5 +1,10 @@
 2015-12-16  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: enhancement: if JSON identification mode is active
+        then warnings and errors will be output as JSON as well. They're
+        output as arrays of strings as the keys "warnings" and "errors" of
+        the main JSON object. Implements #1537.
+
         * all: reversion of a change: several ISO 639-2 codes of languages
         that are very old and not spoken anymore have been re-added
         (e.g. "English, Middle (1100-1500)") due to feedback from users

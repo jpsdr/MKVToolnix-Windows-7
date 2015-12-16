@@ -369,7 +369,7 @@ list_file_types() {
 static void
 display_unsupported_file_type_json(filelist_t const &file) {
   auto json = nlohmann::json{
-    { "identification_format_version", 1         },
+    { "identification_format_version", 2         },
     { "file_name",                     file.name },
     { "container", {
         { "recognized", false },
@@ -377,7 +377,7 @@ display_unsupported_file_type_json(filelist_t const &file) {
       } },
   };
 
-  mxinfo(boost::format("%1%\n") % json.dump(2));
+  display_json_output(json);
 
   mxexit(0);
 }
@@ -1843,10 +1843,11 @@ parse_arg_identification_format(std::vector<std::string>::const_iterator &sit,
   else if (next_arg == "gui")
     g_identification_output_format = identification_output_format_e::gui;
 
-  else if (next_arg == "json")
+  else if (next_arg == "json") {
     g_identification_output_format = identification_output_format_e::json;
+    redirect_warnings_and_errors_to_json();
 
-  else
+  } else
     mxerror(boost::format(Y("Invalid identification format in '%1% %2%'.\n")) % *sit % *(sit + 1));
 
   ++sit;

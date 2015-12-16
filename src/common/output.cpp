@@ -33,6 +33,44 @@ charset_converter_cptr g_cc_stdio = charset_converter_cptr(new charset_converter
 std::shared_ptr<mm_io_c> g_mm_stdio   = std::shared_ptr<mm_io_c>(new mm_stdio_c);
 
 static mxmsg_handler_t s_mxmsg_info_handler, s_mxmsg_warning_handler, s_mxmsg_error_handler;
+static std::vector<std::string> s_warnings_emitted, s_errors_emitted;
+
+static nlohmann::json
+to_json_array(std::vector<std::string> const &messages) {
+  auto result = nlohmann::json::array();
+
+  for (auto const &message : messages)
+    result.push_back(message);
+
+  return result;
+}
+
+void
+display_json_output(nlohmann::json json) {
+  json["warnings"] = to_json_array(s_warnings_emitted);
+  json["errors"]   = to_json_array(s_errors_emitted);
+
+  mxinfo(boost::format("%1%\n") % json.dump(2));
+}
+
+static void
+json_warning_error_handler(unsigned int level,
+                           std::string const &message) {
+  if (MXMSG_WARNING == level)
+    s_warnings_emitted.push_back(message);
+
+  else {
+    s_errors_emitted.push_back(message);
+    display_json_output(nlohmann::json{});
+    mxexit(2);
+  }
+}
+
+void
+redirect_warnings_and_errors_to_json() {
+  set_mxmsg_handler(MXMSG_WARNING, json_warning_error_handler);
+  set_mxmsg_handler(MXMSG_ERROR,   json_warning_error_handler);
+}
 
 void
 redirect_stdio(const mm_io_cptr &stdio) {
