@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-12-16 09:28+0100\n"
-"PO-Revision-Date: 2015-12-15 17:17+0300\n"
+"POT-Creation-Date: 2015-12-16 09:44+0100\n"
+"PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
 "Language: ru\n"
@@ -488,7 +488,7 @@ msgstr "  -l, --list-types - Показать поддерживаемые фо�
 #: src/merge/mkvmerge.cpp:191
 msgid ""
 "  -m, --attachments <n[:all|first],m[:all|first],...>\n"
-"                           Copy the attachments with the IDs n, m etc to\n"
+"                           Copy the attachments with the IDs n, m etc. to\n"
 "                           all or only the first output file. Default: copy\n"
 "                           all attachments to all output files.\n"
 msgstr "  -m, --attachments <n[:all|first],m[:all|first],...> - Копировать вложения с ID n, m и т.д. во все или только в первый выходной файл. По умолчанию: копировать все вложения во всех выходной файлах.\n"
@@ -1997,7 +1997,7 @@ msgid "ALAC private data size mismatch\n"
 msgstr "Размер частных данных ALAC не совпадает\n"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:151
-msgid "ASCII string (no special chars like Umlaute etc)"
+msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr ""
 "Строка ASCII (без специальных символов, таких как\n"
 "Умляут и т.д.)"
@@ -2560,7 +2560,7 @@ msgid "Available:"
 msgstr "Доступно:"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:155
-msgid "Binary (displayed as hex numbers)"
+msgid "Binary (displayed as hexadecimal numbers)"
 msgstr "Двоичный код (отображается в шестнадцатеричном виде)"
 
 #: src/info/mkvinfo.cpp:560
@@ -2619,7 +2619,7 @@ msgid "Bogus aid %1%\n"
 msgstr "Ошибочный aid %1%\n"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:156
-msgid "Boolean (yes/no, on/off etc)"
+msgid "Boolean (yes/no, on/off etc.)"
 msgstr "Логический (да/нет, вкл/выкл и т.д.)"
 
 #: src/merge/generic_packetizer.cpp:198
@@ -2703,7 +2703,7 @@ msgstr "Невозможно запустить объединение"
 
 #: src/extract/xtr_textsubs.cpp:302
 #, boost-format
-msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because track %4% with the CodecID '%5%' is already being written to the same file, and their CodecPrivate data (the USF styles etc) do not match.\n"
+msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because track %4% with the CodecID '%5%' is already being written to the same file, and their CodecPrivate data (the USF styles etc.) do not match.\n"
 msgstr "Невозможно записать дорожку %1% с CodecID '%2%' в файл '%3%' потому что дорожка %4% с CodecID '%5%' уже записана в тот же файл и их частные данные кодека (USF стили и т.д.) не совпадают.\n"
 
 #: src/extract/xtr_avi.cpp:49
@@ -8365,7 +8365,7 @@ msgstr "Файл таймкодов '%1%' не содержит ни одной 
 #: src/merge/timestamp_factory.cpp:206
 #, boost-format
 msgid ""
-"The timecode v2 file '%1%' contains timecodes that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timecode file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timecodes in the timecode file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timecode file with the first timecodes being '0', '40', '80', '120' etc and not '0', '120', '40', '80' etc.\n"
+"The timecode v2 file '%1%' contains timecodes that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timecode file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timecodes in the timecode file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timecode file with the first timecodes being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n"
 "\n"
 "If you really have to specify non-sorted timecodes then use the timecode format v4. It is identical to format v2 but allows non-sorted timecodes.\n"
 msgstr ""

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-12-16 09:28+0100\n"
-"PO-Revision-Date: 2015-11-22 10:46+0100\n"
+"POT-Creation-Date: 2015-12-16 09:44+0100\n"
+"PO-Revision-Date: 2015-12-16 09:53+0100\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
 "Language: ja\n"
@@ -608,7 +608,7 @@ msgstr "  -l, --list-types         サポートされている入力ファイル
 #: src/merge/mkvmerge.cpp:191
 msgid ""
 "  -m, --attachments <n[:all|first],m[:all|first],...>\n"
-"                           Copy the attachments with the IDs n, m etc to\n"
+"                           Copy the attachments with the IDs n, m etc. to\n"
 "                           all or only the first output file. Default: copy\n"
 "                           all attachments to all output files.\n"
 msgstr ""
@@ -2145,7 +2145,7 @@ msgid "ALAC private data size mismatch\n"
 msgstr "ALACのプライベートデータが一致しません\n"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:151
-msgid "ASCII string (no special chars like Umlaute etc)"
+msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "ASCII文字列（日本語やウムラウトなどの特殊な文字は不可です）"
 
 #: src/common/file_types.cpp:70
@@ -2714,7 +2714,7 @@ msgid "Available:"
 msgstr "利用可能："
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:155
-msgid "Binary (displayed as hex numbers)"
+msgid "Binary (displayed as hexadecimal numbers)"
 msgstr "バイナリ（16進数で表示されます）"
 
 #: src/info/mkvinfo.cpp:560
@@ -2774,7 +2774,7 @@ msgid "Bogus aid %1%\n"
 msgstr "不審なオーディオID %1%\n"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:156
-msgid "Boolean (yes/no, on/off etc)"
+msgid "Boolean (yes/no, on/off etc.)"
 msgstr "ブール型（はい/いいえ、オン/オフ等）"
 
 #: src/merge/generic_packetizer.cpp:198
@@ -2859,7 +2859,7 @@ msgstr "マージを開始できません"
 
 #: src/extract/xtr_textsubs.cpp:302
 #, boost-format
-msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because track %4% with the CodecID '%5%' is already being written to the same file, and their CodecPrivate data (the USF styles etc) do not match.\n"
+msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because track %4% with the CodecID '%5%' is already being written to the same file, and their CodecPrivate data (the USF styles etc.) do not match.\n"
 msgstr "CodecID '%5%'のトラック%4%が既に同じファイルに記録中で、そのCodecPrivateデータ（USFスタイル等）が一致しないため、CodecID '%2%'のトラック%1%をファイル%3%に記録することはできません。\n"
 
 #: src/extract/xtr_avi.cpp:49
@@ -8511,7 +8511,7 @@ msgstr "タイムコードファイル'%1%'には有効なエントリが1つも
 #: src/merge/timestamp_factory.cpp:206
 #, boost-format
 msgid ""
-"The timecode v2 file '%1%' contains timecodes that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timecode file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timecodes in the timecode file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timecode file with the first timecodes being '0', '40', '80', '120' etc and not '0', '120', '40', '80' etc.\n"
+"The timecode v2 file '%1%' contains timecodes that are not ordered. Due to a bug in mkvmerge versions up to and including v1.5.0 this was necessary if the track to which the timecode file was applied contained B frames. Starting with v1.5.1 mkvmerge now handles this correctly, and the timecodes in the timecode file must be ordered normally. For example, the frame sequence 'IPBBP...' at 25 FPS requires a timecode file with the first timecodes being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n"
 "\n"
 "If you really have to specify non-sorted timecodes then use the timecode format v4. It is identical to format v2 but allows non-sorted timecodes.\n"
 msgstr ""
