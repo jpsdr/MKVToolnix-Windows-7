@@ -66,8 +66,8 @@ PrefsRunProgramWidget::setupMenu() {
   QList<std::pair<QString, QString> > entries{
     { QY("Variables for all job types"),                                 Q("")                      },
     { QY("Job description"),                                             Q("JOB_DESCRIPTION")       },
-    { QY("Job start date & time in ISO 8601 format"),                    Q("JOB_START_TIME")        },
-    { QY("Job end date & time in ISO 8601 format"),                      Q("JOB_END_TIME")          },
+    { QY("Job start date && time in ISO 8601 format"),                   Q("JOB_START_TIME")        },
+    { QY("Job end date && time in ISO 8601 format"),                     Q("JOB_END_TIME")          },
     { QY("Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"), Q("JOB_EXIT_CODE")         },
 
     { QY("Variables for merge jobs"),                                    Q("")                      },
@@ -76,7 +76,7 @@ PrefsRunProgramWidget::setupMenu() {
     { QY("Source file names"),                                           Q("SOURCE_FILE_NAMES")     },
 
     { QY("General variables"),                                           Q("")                      },
-    { QY("Current date & time in ISO 8601 format"),                      Q("CURRENT_TIME")          },
+    { QY("Current date && time in ISO 8601 format"),                     Q("CURRENT_TIME")          },
   };
 
   d->variableMenu.reset(new QMenu{this});
