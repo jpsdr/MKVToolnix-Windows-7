@@ -300,7 +300,7 @@ xtr_usf_c::create_file(xtr_base_c *master,
 
     if (m_codec_private != usf_master->m_codec_private)
       mxerror(boost::format(Y("Cannot write track %1% with the CodecID '%2%' to the file '%3%' because track %4% with the CodecID '%5%' is already "
-                              "being written to the same file, and their CodecPrivate data (the USF styles etc) do not match.\n"))
+                              "being written to the same file, and their CodecPrivate data (the USF styles etc.) do not match.\n"))
               % m_tid % m_codec_id % m_file_name % master->m_tid % master->m_codec_id);
 
     m_doc    = usf_master->m_doc;

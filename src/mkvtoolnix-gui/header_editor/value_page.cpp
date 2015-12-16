@@ -148,12 +148,12 @@ ValuePage::retranslateUi() {
 
   m_lTitle->setText(Q(m_title.get_translated()));
 
-  auto type = ValueType::AsciiString     == m_valueType ? QY("ASCII string (no special chars like Umlaute etc)")
+  auto type = ValueType::AsciiString     == m_valueType ? QY("ASCII string (no special chars like Umlaute etc.)")
             : ValueType::String          == m_valueType ? QY("String")
             : ValueType::UnsignedInteger == m_valueType ? QY("Unsigned integer")
             : ValueType::Float           == m_valueType ? QY("Floating point number")
-            : ValueType::Binary          == m_valueType ? QY("Binary (displayed as hex numbers)")
-            : ValueType::Bool            == m_valueType ? QY("Boolean (yes/no, on/off etc)")
+            : ValueType::Binary          == m_valueType ? QY("Binary (displayed as hexadecimal numbers)")
+            : ValueType::Bool            == m_valueType ? QY("Boolean (yes/no, on/off etc.)")
             :                                             QY("unknown");
 
   m_lTypeLabel->setText(QY("Type:"));

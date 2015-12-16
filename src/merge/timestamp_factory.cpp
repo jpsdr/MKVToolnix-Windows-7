@@ -208,7 +208,7 @@ timestamp_factory_v2_c::parse(mm_io_c &in) {
                               "if the track to which the timecode file was applied contained B frames. "
                               "Starting with v1.5.1 mkvmerge now handles this correctly, and the timecodes in the timecode file must be ordered normally. "
                               "For example, the frame sequence 'IPBBP...' at 25 FPS requires a timecode file with "
-                              "the first timecodes being '0', '40', '80', '120' etc and not '0', '120', '40', '80' etc.\n\n"
+                              "the first timecodes being '0', '40', '80', '120' etc and. not '0', '120', '40', '80' etc.\n\n"
                               "If you really have to specify non-sorted timecodes then use the timecode format v4. "
                               "It is identical to format v2 but allows non-sorted timecodes.\n"))
               % in.get_file_name());

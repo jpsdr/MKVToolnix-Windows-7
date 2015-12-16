@@ -189,7 +189,7 @@ set_usage() {
                   "                           all buttons tracks.\n");
   usage_text += Y("  -B, --no-buttons         Don't copy any buttons track from this file.\n");
   usage_text += Y("  -m, --attachments <n[:all|first],m[:all|first],...>\n"
-                  "                           Copy the attachments with the IDs n, m etc to\n"
+                  "                           Copy the attachments with the IDs n, m etc. to\n"
                   "                           all or only the first output file. Default: copy\n"
                   "                           all attachments to all output files.\n");
   usage_text += Y("  -M, --no-attachments     Don't copy attachments from a source file.\n");
