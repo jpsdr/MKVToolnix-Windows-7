@@ -138,7 +138,7 @@ vorbis_packetizer_c::can_connect_to(generic_packetizer_c *src,
   connect_check_a_channels(m_vi.channels, vsrc->m_vi.channels);
 
   if ((m_headers[2]->get_size() != vsrc->m_headers[2]->get_size()) || memcmp(m_headers[2]->get_buffer(), vsrc->m_headers[2]->get_buffer(), m_headers[2]->get_size())) {
-    error_message = Y("The Vorbis codebooks are different; such tracks cannot be concatenated without reencoding");
+    error_message = Y("The Vorbis codebooks are different. Such tracks cannot be concatenated without re-encoding.");
     return CAN_CONNECT_NO_FORMAT;
   }
 

@@ -69,8 +69,8 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
       { QY("Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."),
         QY("This option causes mkvmerge to remove the aspect ratio information from the bitstream.") });
   add(Q("--engage vobsub_subpic_stop_cmds"),      false, hacks, { QY("Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field.") });
-  add(Q("--engage no_cue_duration"),              false, hacks, { QY("Causes mkvmerge not to write 'CueDuration' elemenets in the cues.") });
-  add(Q("--engage no_cue_relative_position"),     false, hacks, { QY("Causes mkvmerge not to write 'CueRelativePosition' elemenets in the cues.") });
+  add(Q("--engage no_cue_duration"),              false, hacks, { QY("Causes mkvmerge not to write 'CueDuration' elements in the cues.") });
+  add(Q("--engage no_cue_relative_position"),     false, hacks, { QY("Causes mkvmerge not to write 'CueRelativePosition' elements in the cues.") });
   add(Q("--engage no_delay_for_garbage_in_avi"),  false, hacks,
       { QY("Garbage at the start of audio tracks in AVI files is normally used for delaying that track."),
         QY("mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timecodes by it."),
