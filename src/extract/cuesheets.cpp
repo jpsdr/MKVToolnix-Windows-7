@@ -142,6 +142,8 @@ write_cuesheet(std::string file_name,
   if (hack_engaged(ENGAGE_NO_VARIABLE_DATA))
     file_name = "no-variable-data";
 
+  out.write_bom("UTF-8");
+
   print_if_global("CATALOG",        "CATALOG %1%\n"); // until 0.9.6
   print_if_global("CATALOG_NUMBER", "CATALOG %1%\n"); // 0.9.7 and newer
   print_if_global("ARTIST",         "PERFORMER \"%1%\"\n");

@@ -542,6 +542,54 @@ mm_io_c::restore_pos() {
   return true;
 }
 
+bool
+mm_io_c::write_bom(const std::string &charset_) {
+  static const unsigned char utf8_bom[3]    = {0xef, 0xbb, 0xbf};
+  static const unsigned char utf16le_bom[2] = {0xff, 0xfe};
+  static const unsigned char utf16be_bom[2] = {0xfe, 0xff};
+  static const unsigned char utf32le_bom[4] = {0xff, 0xfe, 0x00, 0x00};
+  static const unsigned char utf32be_bom[4] = {0x00, 0x00, 0xff, 0xfe};
+  const unsigned char *bom;
+  unsigned int bom_len;
+
+  if (m_bom_written || charset_.empty())
+    return false;
+
+  if (m_string_output_converter && !charset_converter_c::is_utf8_charset_name(m_string_output_converter->get_charset()))
+    return false;
+
+  auto charset = boost::regex_replace(balg::to_lower_copy(charset_), boost::regex("[^a-z0-9]+", boost::regex::perl), "");
+  if (charset == "utf8") {
+    bom_len = 3;
+    bom     = utf8_bom;
+  } else if ((charset == "utf16") || (charset =="utf16LE")) {
+    bom_len = 2;
+    bom     = utf16le_bom;
+  } else if (charset == "utF16be") {
+    bom_len = 2;
+    bom     = utf16be_bom;
+  } else if ((charset == "utf32") || (charset == "utf32le")) {
+    bom_len = 4;
+    bom     = utf32le_bom;
+  } else if (charset == "utf32be") {
+    bom_len = 4;
+    bom     = utf32be_bom;
+  } else
+    return false;
+
+  setFilePointer(0, seek_beginning);
+
+  m_bom_written = write(bom, bom_len) == bom_len;
+
+  return m_bom_written;
+}
+
+bool
+mm_io_c::bom_written()
+  const {
+  return m_bom_written;
+}
+
 int64_t
 mm_io_c::get_size() {
   if (-1 == m_cached_size) {

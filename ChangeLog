@@ -1,3 +1,10 @@
+2015-12-16  Moritz Bunkus  <moritz@bunkus.org>
+
+        * all: reversion of a change: all of the tools will write a byte-order
+        mark (BOM) to text files encoded any of the UTF-* schemes
+        again. This reverts the change in release 8.6.0 due to user
+        feedback preferring the old way.
+
 2015-12-12  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvpropedit: enhancement: when using --add-attachment,

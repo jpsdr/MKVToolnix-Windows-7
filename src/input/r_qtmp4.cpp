@@ -978,6 +978,7 @@ qtmp4_reader_c::process_chapter_entries(int level,
 
   mm_mem_io_c out(nullptr, 0, 1000);
   out.set_file_name(m_ti.m_fname);
+  out.write_bom("UTF-8");
 
   unsigned int i = 0;
   for (; entries.size() > i; ++i) {

@@ -36,6 +36,7 @@ void
 xtr_srt_c::create_file(xtr_base_c *master,
                        KaxTrackEntry &track) {
   xtr_base_c::create_file(master, track);
+  m_out->write_bom(m_sub_charset);
 }
 
 void
@@ -94,6 +95,7 @@ xtr_ssa_c::create_file(xtr_base_c *master,
     mxerror(boost::format(Y("Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n")) % m_tid % m_codec_id);
 
   xtr_base_c::create_file(master, track);
+  m_out->write_bom(m_sub_charset);
 
   memory_cptr mpriv       = decode_codec_private(priv);
 
@@ -393,5 +395,6 @@ xtr_usf_c::finish_file() {
   m_doc->save(out, "  ");
 
   m_out->set_string_output_converter(charset_converter_c::init(m_sub_charset));
+  m_out->write_bom(m_sub_charset);
   m_out->puts(out.str());
 }
