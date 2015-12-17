@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2015-12-16 22:24+0100\n"
-"PO-Revision-Date: 2015-12-16 10:26+0100\n"
+"PO-Revision-Date: 2015-12-17 19:21+0800\n"
 "Last-Translator: Donghui Li <DonghuiLi.81@gmail.com>\n"
 "Language-Team: Chinese Simplified <DonghuiLi.81@gmail.com>\n"
 "Language: zh\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #: src/extract/xtr_tta.cpp:105
 #, boost-format
@@ -497,14 +497,14 @@ msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           不复制此文件中的任何视频轨道。\n"
 
 #: src/merge/mkvmerge.cpp:271
-#, fuzzy
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
 "                           ('text', 'verbose-text', 'json').\n"
 msgstr ""
-"  --cue-chapter-name-format <format>\n"
-"                           CUE 表单条目转换为章节名称所用的格式。\n"
+"  -F, --identification-format <format>\n"
+"                           设置识别结果输出格式\n"
+"                           ('text'、'verbose-text'、'json').\n"
 
 #: src/merge/mkvmerge.cpp:195
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
@@ -805,9 +805,8 @@ msgid "\"Default track\" flag:"
 msgstr "“默认轨道”标记："
 
 #: src/mkvtoolnix-gui/merge/input.cpp:421
-#, fuzzy
 msgid "\"Determine automatically\" is a good choice for almost all situations."
-msgstr "在几乎所有情况下，“默认”是个合适的选择。"
+msgstr "在几乎所有情况下，“自动决定”是个合适的选择。"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:284
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1503
@@ -1022,7 +1021,7 @@ msgstr "添加文件(&A)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1151
 msgid "&Add program"
-msgstr ""
+msgstr "添加程序(&A)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1581
 msgid "&Add source files"
@@ -1034,9 +1033,8 @@ msgid "&Audio"
 msgstr "音频(&A)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1105
-#, fuzzy
 msgid "&Audio tracks:"
-msgstr "音频轨道："
+msgstr "音频轨道(&A)："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1109
 msgid "&Automatically set the output file name"
@@ -1084,9 +1082,8 @@ msgid "&Collapse all"
 msgstr "全部收起(&C)"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:144
-#, fuzzy
 msgid "&Command line:"
-msgstr "当前命令行"
+msgstr "命令行(&C)："
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:409
 msgid "&Copy command line to clipboard"
@@ -1224,9 +1221,8 @@ msgid "&Merge tool"
 msgstr "合成工具(&M)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1130
-#, fuzzy
 msgid "&Minimum playlist duration:"
-msgstr "播放列表最短时长(&N)："
+msgstr "播放列表最短时长(&M)："
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:493
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1570
@@ -1241,9 +1237,8 @@ msgid "&New"
 msgstr "新建(&N)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1117
-#, fuzzy
 msgid "&Only enable muxing of tracks with specific languages by default"
-msgstr "默认只将特定语言的轨道用于合成"
+msgstr "默认只将特定语言的轨道用于合成(&O)"
 
 #: src/info/ui/mainwindow.h:107
 msgid "&Open"
@@ -1343,9 +1338,8 @@ msgid "&Save to text file"
 msgstr "保存为文本文件(&S)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1123
-#, fuzzy
 msgid "&Scan directory for other playlists:"
-msgstr "扫描目录中的其他播放列表(&C)："
+msgstr "扫描目录中的其他播放列表(&S)："
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:31
 msgid "&Scan for other playlists"
@@ -1380,9 +1374,8 @@ msgid "&Start timecode of first created entry:"
 msgstr "生成的首个条目的起始时间码(&S)："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1107
-#, fuzzy
 msgid "&Subtitle tracks:"
-msgstr "字幕轨道："
+msgstr "字幕轨道(&S)："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1121
 #: src/mkvtoolnix-gui/merge/input.cpp:1188
@@ -1412,9 +1405,8 @@ msgid "&Video"
 msgstr "视频(&V)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1106
-#, fuzzy
 msgid "&Video tracks:"
-msgstr "视频轨道："
+msgstr "视频轨道(&V)："
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:306
 msgid "&View output"
@@ -1914,9 +1906,8 @@ msgstr "<无输出文件>"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:599
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:633
-#, fuzzy
 msgid "<no program selected yet>"
-msgstr "尚无任务开始"
+msgstr "<尚未选择程序>"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
@@ -2154,9 +2145,8 @@ msgid "Actions for handling tags and chapters"
 msgstr "处理标签与章节的操作"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:145
-#, fuzzy
 msgid "Add &variable"
-msgstr "可用列表："
+msgstr "添加变量(&V)"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:230
 msgid "Add additional command line options for mkvmerge"
@@ -2274,17 +2264,16 @@ msgid "Adds a property with the value even if such a property already exists"
 msgstr "以指定值添加属性，即使该属性已存在"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:147
-#, fuzzy
 msgid "After a job completes &successfully or with warnings"
-msgstr "仅在成功完成后移除"
+msgstr "在任务成功完成后，或完成但有警告后执行(&S)"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:148
 msgid "After a job exits with an &error or the user aborts the job"
-msgstr ""
+msgstr "在任务出错退出后，或用户中止任务后执行(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:149
 msgid "After the job &queue has stopped"
-msgstr ""
+msgstr "在任务队列停止后执行(&Q)"
 
 #: src/info/mkvinfo.cpp:702
 #, boost-format
@@ -2401,9 +2390,8 @@ msgid "Alwa&ys use the action selected above and don't ask again"
 msgstr "总是使用所选操作并不再询问(&Y)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1139
-#, fuzzy
 msgid "Always &switch to the job output tool after starting one immediately"
-msgstr "在开始任务后立刻切换到“任务输出”工具"
+msgstr "在开始任务后立刻切换到“任务输出”工具(&S)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1126
 msgid "Always ask the user"
@@ -2422,9 +2410,8 @@ msgid "Always scan for other playlists"
 msgstr "总是扫描其他播放列表"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1093
-#, fuzzy
 msgid "Always show the output file controls &below tabs"
-msgstr "总是在标签页下方显示“输出文件”控件"
+msgstr "总是在标签页下方显示“输出文件”控件(&B)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1140
 msgid "Always use a &default description when adding a job to the queue"
@@ -2597,9 +2584,8 @@ msgid "Audio sampling frequency"
 msgstr "音频采样率"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:40
-#, fuzzy
 msgid "Audio track %1"
-msgstr "音频轨道："
+msgstr "音频轨道 %1"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1495
 msgid "Audio, subtitle, chapter properties"
@@ -2706,9 +2692,8 @@ msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
 msgstr "不能同时使用宽高比系数和 '--display-dimensions'。\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
-#, fuzzy
 msgid "Button track %1"
-msgstr "按钮轨道 %1，%2"
+msgstr "按钮轨道 %1"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:50
 msgid "Buttons"
@@ -2800,12 +2785,10 @@ msgid "Caught exception"
 msgstr "捕获异常"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
-#, fuzzy
 msgid "Causes mkvmerge not to write 'CueDuration' elements in the cues."
 msgstr "使 mkvmerge 不在索引部分写入 'CueDuration' 元素。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:73
-#, fuzzy
 msgid "Causes mkvmerge not to write 'CueRelativePosition' elements in the cues."
 msgstr "使 mkvmerge 不在索引部分写入 'CueRelativePosition' 元素。"
 
@@ -2954,9 +2937,8 @@ msgid "Checking this option causes the GUI to set that compression to \"none\" b
 msgstr "选择该选项后，添加文件时程序会默认将所有轨道的压缩方式设为 none (不做额外压缩)。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1083
-#, fuzzy
 msgid "Clearing settings auto&matically:"
-msgstr "自动清理配置(&C)："
+msgstr "自动清理配置(&M)："
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:242
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:201
@@ -3061,7 +3043,7 @@ msgstr "编码格式状态：%1%"
 #: src/common/property_element.cpp:131
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:373
 msgid "Codec-inherent delay"
-msgstr ""
+msgstr "编码格式固有延迟"
 
 #: src/info/mkvinfo.cpp:858
 #, boost-format
@@ -3393,7 +3375,7 @@ msgstr "当前命令行"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
 msgid "Current date && time in ISO 8601 format"
-msgstr ""
+msgstr "当前日期与时间 (ISO 8601 格式)"
 
 #: src/mkvtoolnix-gui/watch_jobs/tool.cpp:64
 msgid "Current job"
@@ -3452,7 +3434,7 @@ msgstr "DV 视频格式"
 #: src/info/mkvinfo.cpp:500
 #, boost-format
 msgid "Date (invalid, value: %1%)"
-msgstr "日期 (无效, 值：%1%)"
+msgstr "日期 (无效，值：%1%)"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:54
 msgid "Date added"
@@ -3476,9 +3458,8 @@ msgid "Debug> "
 msgstr "调试> "
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1096
-#, fuzzy
 msgid "Default additional co&mmand line options:"
-msgstr "默认额外命令行选项(&I)："
+msgstr "默认额外命令行选项(&M)："
 
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:358
@@ -3500,14 +3481,12 @@ msgid "Default flag: %1%"
 msgstr "“默认”标记：%1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1103
-#, fuzzy
 msgid "Default subtitle &charset to set:"
-msgstr "字幕默认字符集(&S)："
+msgstr "字幕默认字符集(&C)："
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:107
-#, fuzzy
 msgid "Default track"
-msgstr "“默认轨道”标记"
+msgstr "默认轨道"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:51
 msgid "Default track in output"
@@ -3518,24 +3497,20 @@ msgid "Default track languages to set"
 msgstr "轨道默认语言"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:142
-#, fuzzy
 msgid "Default values"
-msgstr "默认(&D)"
+msgstr "默认值"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1134
-#, fuzzy
 msgid "Defaults for new chapter entries"
-msgstr "新建章节条目的默认值："
+msgstr "新建章节条目的默认值"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1095
-#, fuzzy
 msgid "Defaults for new mux settings"
-msgstr "新建章节条目的默认值："
+msgstr "新建合成配置的默认值"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1098
-#, fuzzy
 msgid "Defaults for newly added tracks"
-msgstr "新建章节条目的默认值："
+msgstr "新增轨道的默认值"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1508
 msgid "Delay (in ms):"
@@ -3544,7 +3519,7 @@ msgstr "延迟 (毫秒)："
 #: src/common/property_element.cpp:131
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:373
 msgid "Delay built into the codec during decoding in ns."
-msgstr ""
+msgstr "编码格式解码时固有的延迟，以纳秒为单位。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:352
 msgid "Delay this track's timestamps by a couple of ms."
@@ -3606,19 +3581,16 @@ msgid "Directory:"
 msgstr "目录："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1101
-#, fuzzy
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
-msgstr "禁用字幕轨道的“默认轨道”标记"
+msgstr "禁用字幕轨道的“默认轨道”标记(&F)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1102
-#, fuzzy
 msgid "Disable additional lossless c&ompression for all track types"
 msgstr "禁用所有轨道类型的额外无损压缩(&O)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1072
-#, fuzzy
 msgid "Disable ani&mations"
-msgstr "禁用动画效果(&A)"
+msgstr "禁用动画效果(&M)"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
@@ -3637,7 +3609,7 @@ msgstr "丢弃填充：%|1$.3f|毫秒 (%2%纳秒)"
 #: src/merge/mkvmerge.cpp:690
 #, boost-format
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '%1%').\n"
-msgstr "显示尺寸：格式不符合 <TID>:<width>x<height>, 例如 1:640x480 (目前使用的参数为 '%1%')。\n"
+msgstr "显示尺寸：格式不符合 <TID>:<width>x<height>，例如 1:640x480 (目前使用的参数为 '%1%')。\n"
 
 #: src/info/mkvinfo.cpp:591
 #, boost-format
@@ -3862,9 +3834,8 @@ msgid "Enabling this option causes mkvmerge to keep that last entry."
 msgstr "启用该选项使 mkvmerge 保留此条目。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:144
-#, fuzzy
 msgid "Enabling tracks"
-msgstr "启用所有轨道(&E)"
+msgstr "启用轨道"
 
 #: src/info/mkvinfo.cpp:722
 #, boost-format
@@ -3885,9 +3856,8 @@ msgid "English language name"
 msgstr "语言名称 (以英语表示)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1115
-#, fuzzy
 msgid "Ensure the file name is &unique"
-msgstr "确保文件名唯一(&Q)"
+msgstr "确保文件名唯一(&U)"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:388
 msgid "Enter job description"
@@ -3947,9 +3917,9 @@ msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "解析 '%1%' 中的标签出错：缺少一些必要元素。\n"
 
 #: src/merge/output_control.cpp:749
-#, fuzzy, boost-format
+#, boost-format
 msgid "Error reading from the file '%1%'.\n"
-msgstr "解析器错误消息：%1"
+msgstr "读取文件 '%1%' 出错。\n"
 
 #: src/info/qt_ui.cpp:104
 msgid "Error saving the information"
@@ -4031,20 +4001,20 @@ msgstr "找不到可执行文件"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "Executing programs"
-msgstr ""
+msgstr "执行程序"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1150
 msgid "Executing programs after certain events"
-msgstr ""
+msgstr "在特定事件后执行程序"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:71
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
-msgstr ""
+msgstr "退出代码 (0：正常，1：发生警告，2：发生错误)"
 
 #: src/common/xml/ebml_converter.cpp:204
 #, boost-format
 msgid "Expected a time in the following format: HH:MM:SS.nnn (HH = hour, MM = minute, SS = second, nnn = millisecond up to nanosecond. You may use up to nine digits for 'n' which would mean nanosecond precision). You may omit the hour as well. Found '%1%' instead. Additional error message: %2%"
-msgstr "时间应为如下格式：HH:MM:SS.nnn (HH = 时, MM = 分, SS = 秒, nnn = 毫秒到纳秒。您可以使用多达九位的 'n' 以精确到纳秒)。小时可以省略。但目前使用的为 '%1%'。附加错误消息：%2%"
+msgstr "时间应为如下格式：HH:MM:SS.nnn (HH = 时，MM = 分，SS = 秒，nnn = 毫秒到纳秒。您可以使用多达九位的 'n' 以精确到纳秒)。小时可以省略。但目前使用的为 '%1%'。附加错误消息：%2%"
 
 #: src/extract/extract_cli_parser.cpp:97
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
@@ -4294,9 +4264,8 @@ msgstr "“强制”标记：%1%"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:108
 #: src/mkvtoolnix-gui/merge/track_model.cpp:52
-#, fuzzy
 msgid "Forced track"
-msgstr "“强制轨道”标记："
+msgstr "强制轨道"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:64
 msgid "Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types."
@@ -4353,9 +4322,8 @@ msgid "Free-form edit field for user defined options for this track."
 msgstr "可在此处指定该轨道的自定义参数。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:139
-#, fuzzy
 msgid "GUI"
-msgstr "图形界面(&G)"
+msgstr "图形界面"
 
 #: src/info/mkvinfo.cpp:627
 #, boost-format
@@ -4378,9 +4346,8 @@ msgid "General options"
 msgstr "通用选项"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:78
-#, fuzzy
 msgid "General variables"
-msgstr "通用选项"
+msgstr "通用变量"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:193
 msgid "Generate sub-chapters"
@@ -4431,9 +4398,8 @@ msgid "HEVC/h.265 elementary streams"
 msgstr "HEVC/h.265 基本流"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:306
-#, fuzzy
 msgid "Header &editor"
-msgstr "头部编辑器(&H)"
+msgstr "头部编辑器(&E)"
 
 #: src/common/compression/header_removal.cpp:47
 #, boost-format
@@ -4689,9 +4655,8 @@ msgid "Instead such a file must be set via the 'segment info' option on the 'out
 msgstr "必须通过 '输出' 选项卡中的 '片段信息文件' 选项来设置。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1069
-#, fuzzy
 msgid "Interface &language:"
-msgstr "界面语言(&I)："
+msgstr "界面语言(&L)："
 
 #: src/info/mkvinfo.cpp:630
 #, boost-format
@@ -4887,9 +4852,9 @@ msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr "头长度无效：%1% (总长度：%2%，idx：%3%，dataidx：%4%)\n"
 
 #: src/merge/mkvmerge.cpp:1851
-#, fuzzy, boost-format
+#, boost-format
 msgid "Invalid identification format in '%1% %2%'.\n"
-msgstr "'%1% %2%' 中的选择器无效。\n"
+msgstr "'%1% %2%' 中的识别结果输出格式无效。\n"
 
 #: src/common/xml/ebml_converter.cpp:268
 msgid "Invalid length of hexadecimal content: must be divisable by 2."
@@ -5097,13 +5062,12 @@ msgid "Job &output"
 msgstr "任务输出消息(&O)"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:68
-#, fuzzy
 msgid "Job description"
-msgstr "输入任务描述"
+msgstr "任务描述"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:70
 msgid "Job end date && time in ISO 8601 format"
-msgstr ""
+msgstr "任务完成日期与时间 (ISO 8601 格式)"
 
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
 msgid "Job queue"
@@ -5111,12 +5075,11 @@ msgstr "任务队列"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:69
 msgid "Job start date && time in ISO 8601 format"
-msgstr ""
+msgstr "任务开始日期与时间 (ISO 8601 格式)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:147
-#, fuzzy
 msgid "Jobs & job queue"
-msgstr "显示任务队列"
+msgstr "任务和任务队列"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1138
 msgid "Jobs and job output"
@@ -5178,7 +5141,7 @@ msgstr "语言：%1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1092
 msgid "Layout"
-msgstr ""
+msgstr "布局"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:55
 msgid "Leave additional space (EbmlVoid) in the output file after the chapters."
@@ -5384,14 +5347,14 @@ msgstr "最大缓存：%1%"
 #: src/common/xml/ebml_converter.cpp:227
 #, boost-format
 msgid "Maximum allowed length: %1%, actual length: %2%"
-msgstr "允许的最大长度：%1%, 实际长度：%2%"
+msgstr "允许的最大长度：%1%，实际长度：%2%"
 
 #: src/common/xml/ebml_converter.cpp:171
 #: src/common/xml/ebml_converter.cpp:185
 #: src/common/xml/ebml_converter.cpp:216
 #, boost-format
 msgid "Maximum allowed value: %1%, actual value: %2%"
-msgstr "允许的最大值：%1%, 实际值：%2%"
+msgstr "允许的最大值：%1%，实际值：%2%"
 
 #: src/common/property_element.cpp:124
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:353
@@ -5412,9 +5375,8 @@ msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "无法为一个 RealAudio/RealVideo 帧分配内存。\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:141
-#, fuzzy
 msgid "Merge"
-msgstr "合成(&M)"
+msgstr "合成"
 
 #: src/common/file_types.cpp:84
 msgid "MicroDVD"
@@ -5433,14 +5395,14 @@ msgstr "最小缓存：%1%"
 #: src/common/xml/ebml_converter.cpp:225
 #, boost-format
 msgid "Minimum allowed length: %1%, actual length: %2%"
-msgstr "允许的最小长度：%1%, 实际长度：%2%"
+msgstr "允许的最小长度：%1%，实际长度：%2%"
 
 #: src/common/xml/ebml_converter.cpp:169
 #: src/common/xml/ebml_converter.cpp:183
 #: src/common/xml/ebml_converter.cpp:214
 #, boost-format
 msgid "Minimum allowed value: %1%, actual value: %2%"
-msgstr "允许的最小值：%1%, 实际值：%2%"
+msgstr "允许的最小值：%1%，实际值：%2%"
 
 #: src/common/property_element.cpp:122
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:348
@@ -5550,7 +5512,7 @@ msgstr "合成耗时 %1%。\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1516
 msgid "NALU size length:"
-msgstr "NALU 大小的数值长度:"
+msgstr "NALU 大小的数值长度："
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:173
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1135
@@ -5572,9 +5534,8 @@ msgstr "名称模板(&P)："
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:282
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:72
-#, fuzzy
 msgid "Name:"
-msgstr "名称(&N)："
+msgstr "名称："
 
 #: src/info/mkvinfo.cpp:842
 #, boost-format
@@ -5716,9 +5677,8 @@ msgid "No permission to read from, to write to or to create"
 msgstr "无读取、写入或创建权限"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1152
-#, fuzzy
 msgid "No programs have been added yet."
-msgstr "尚无任务开始。"
+msgstr "尚未添加程序。"
 
 #: src/common/kax_analyzer.cpp:1425
 #, boost-format
@@ -5872,9 +5832,8 @@ msgid "Numbers of channels in the track."
 msgstr "此轨道的声道数。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:140
-#, fuzzy
 msgid "Often used selections"
-msgstr "常用选择项(&O)"
+msgstr "常用选择项"
 
 #: src/common/file_types.cpp:89
 msgid "Ogg/OGM"
@@ -5885,9 +5844,8 @@ msgid "Ogg/OGM audio/video files"
 msgstr "Ogg/OGM 音频/视频文件"
 
 #: src/propedit/propedit_cli_parser.cpp:266
-#, fuzzy
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
-msgstr "'--attachment-name'、'--attachment-description' 或 '--attachment-mime-type' 选项后缺少 '--add-attachment' 或 '--replace-attachment' 选项。\n"
+msgstr "'--attachment-name'、'--attachment-description'、'--attachment-mime-type' 或 '--attachment-uid' 选项后缺少 '--add-attachment'、'--replace-attachment' 或 '--update-attachment' 选项。\n"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:20
 msgid "Online check for updates"
@@ -6027,7 +5985,7 @@ msgstr "顺序：%1%"
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:207
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:178
 msgid "Original value:"
-msgstr "原始数值："
+msgstr "原始值："
 
 #: src/propedit/propedit_cli_parser.cpp:230
 msgid "Other options"
@@ -6038,9 +5996,8 @@ msgid "Otherwise they're shown on the 'output' tab."
 msgstr "否则它们会在“输出”选项卡中显示。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:143
-#, fuzzy
 msgid "Output"
-msgstr "输出(&O)"
+msgstr "输出"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1580
 msgid "Output file"
@@ -6051,12 +6008,10 @@ msgid "Output file name"
 msgstr "输出文件名"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:75
-#, fuzzy
 msgid "Output file's directory"
-msgstr "输出文件名"
+msgstr "输出文件所在目录"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:74
-#, fuzzy
 msgid "Output file's name"
 msgstr "输出文件名"
 
@@ -6156,9 +6111,8 @@ msgid "Playlist items:"
 msgstr "播放列表所含项目："
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:145
-#, fuzzy
 msgid "Playlists"
-msgstr "播放列表所含项目："
+msgstr "播放列表"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:58
 msgid "Playlists shorter than %1 second will be ignored."
@@ -6558,9 +6512,8 @@ msgid "Reset all columns"
 msgstr "重置所有列"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1142
-#, fuzzy
 msgid "Reset the warning and error &counters on exit"
-msgstr "退出时清零警告与错误计数器"
+msgstr "退出时清零警告与错误计数器(&C)"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:189
 msgid "Resets the header value on this page to how it's saved in the file."
@@ -6924,14 +6877,12 @@ msgid "Set if the video is interlaced."
 msgstr "设置轨道是否隔行扫描。"
 
 #: src/propedit/propedit_cli_parser.cpp:227
-#, fuzzy
 msgid "Set the MIME type to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "用于 '--add-attachment' 或 '--replace-attachment' 之前，设置它们所指定文件的 MIME 类型"
+msgstr "用于 '--add-attachment'、'--replace-attachment' 或 '--update-attachment' 之前，设置它们所指定文件的 MIME 类型"
 
 #: src/propedit/propedit_cli_parser.cpp:228
-#, fuzzy
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "用于 '--add-attachment' 或 '--replace-attachment' 之前，设置它们所指定文件的名称"
+msgstr "用于 '--add-attachment'、'--replace-attachment' 或 '--update-attachment' 之前，设置它们所指定文件的名称"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:184
 msgid "Set the chapter names's &languages:"
@@ -6942,14 +6893,12 @@ msgid "Set the chapter names's co&untries"
 msgstr "设置章节名称的国家(&U)："
 
 #: src/propedit/propedit_cli_parser.cpp:226
-#, fuzzy
 msgid "Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "用于 '--add-attachment' 或 '--replace-attachment' 之前，设置它们所指定文件的描述"
+msgstr "用于 '--add-attachment'、'--replace-attachment' 或 '--update-attachment' 之前，设置它们所指定文件的描述"
 
 #: src/propedit/propedit_cli_parser.cpp:225
-#, fuzzy
 msgid "Set the name to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "用于 '--add-attachment' 或 '--replace-attachment' 之前，设置它们所指定文件的名称"
+msgstr "用于 '--add-attachment'、'--replace-attachment' 或 '--update-attachment' 之前，设置它们所指定文件的名称"
 
 #: src/propedit/propedit_cli_parser.cpp:210
 msgid "Sets a property to the value if it exists and add it otherwise"
@@ -7007,14 +6956,12 @@ msgid "Show &all elements"
 msgstr "显示所有元素(&A)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1074
-#, fuzzy
 msgid "Show &buttons for moving list view entries up and down"
-msgstr "显示用于上下移动列表条目的按钮"
+msgstr "显示用于上下移动列表条目的按钮(&B)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1141
-#, fuzzy
 msgid "Show &output of all jobs instead of current job only"
-msgstr "显示所有任务的输出消息，而不是仅显示当前任务的(&P)"
+msgstr "显示所有任务的输出消息，而不是仅显示当前任务的(&O)"
 
 #: src/info/info_cli_parser.cpp:45
 msgid "Show all bytes of each frame as a hex dump."
@@ -7041,9 +6988,8 @@ msgid "Show the size of each element including its header."
 msgstr "显示各元素包括头部在内的大小。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1073
-#, fuzzy
 msgid "Show the tool &selector"
-msgstr "显示工具选择侧边栏"
+msgstr "显示工具选择侧边栏(&S)"
 
 #: src/common/cli_parser.cpp:184
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:45
@@ -7153,7 +7099,6 @@ msgid "Source file name"
 msgstr "源文件名称"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:76
-#, fuzzy
 msgid "Source file names"
 msgstr "源文件名称"
 
@@ -7269,9 +7214,8 @@ msgid "Subtitle and chapter properties"
 msgstr "字幕和章节属性"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:42
-#, fuzzy
 msgid "Subtitle track %1"
-msgstr "字幕轨道："
+msgstr "字幕轨道 %1"
 
 #: src/extract/xtr_textsubs.cpp:166
 #, boost-format
@@ -7306,9 +7250,8 @@ msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA (The True Audio 无损音频编码)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1070
-#, fuzzy
 msgid "Tab &position in tab widgets:"
-msgstr "页面标签显示位置："
+msgstr "页面标签显示位置(&P)："
 
 #: src/extract/extract_cli_parser.cpp:79
 msgid "Tag extraction"
@@ -7457,9 +7400,8 @@ msgid "The Theora identification header could not be parsed (%1%).\n"
 msgstr "无法解析 Theora 识别头 (%1%)。\n"
 
 #: src/output/p_vorbis.cpp:141
-#, fuzzy
 msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated without re-encoding."
-msgstr "Vorbis 码表不同；此类轨道无法在不重编码的前提下连接。"
+msgstr "Vorbis 码表不同。此类轨道无法在不重编码的前提下连接。"
 
 #: src/common/chapters/chapters.cpp:375
 #: src/common/xml/ebml_chapters_converter.cpp:213
@@ -7516,7 +7458,7 @@ msgstr "XML 标签文件 '%1%' 无法读取。\n"
 #: src/merge/mkvmerge.cpp:1887
 #, boost-format
 msgid "The argument '%1%' is not allowed in identification mode.\n"
-msgstr ""
+msgstr "识别模式中不允许使用参数 '%1%'。\n"
 
 #: src/merge/mkvmerge.cpp:1698
 #, boost-format
@@ -8044,7 +7986,7 @@ msgid ""
 "is not used."
 msgstr ""
 "播放过程中播放器应缓存的最大帧数。\n"
-"如果设为 0, 将不使用参考伪缓存系统。"
+"如果设为 0，将不使用参考伪缓存系统。"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:354
 msgid "The maximum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
@@ -8063,7 +8005,7 @@ msgid ""
 "is not used."
 msgstr ""
 "播放过程中播放器应缓存的最小帧数。\n"
-"如果设为 0, 将不使用参考伪缓存系统。"
+"如果设为 0，将不使用参考伪缓存系统。"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:349
 msgid "The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
@@ -8444,9 +8386,9 @@ msgid "The user can then select which playlist to actually add."
 msgstr "之后用户可以选择添加哪个播放列表。"
 
 #: src/propedit/propedit_cli_parser.cpp:96
-#, fuzzy, boost-format
+#, boost-format
 msgid "The value '%1%' is not a number.\n"
-msgstr "XML 标签文件 '%1%' 无法读取。\n"
+msgstr "值 '%1%' 不是数字。\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:358
 #: src/mkvtoolnix-gui/merge/input.cpp:363
@@ -9023,15 +8965,13 @@ msgid "Type: %1% (%2%)"
 msgstr "类型：%1% (%2%)"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:106
-#, fuzzy
 msgid "UID"
-msgstr "ID"
+msgstr "UID"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:66
-#, fuzzy
 msgid "UID:"
-msgstr "&UID："
+msgstr "UID："
 
 #: src/common/file_types.cpp:97
 msgid "USF subtitles"
@@ -9140,9 +9080,8 @@ msgid "Unsupported track type for this track.\n"
 msgstr "不支持此轨道的轨道类型。\n"
 
 #: src/propedit/propedit_cli_parser.cpp:223
-#, fuzzy
 msgid "Update an attachment's properties"
-msgstr "字幕和章节属性"
+msgstr "更新附件属性"
 
 #: src/propedit/propedit.cpp:27
 #, boost-format
@@ -9159,9 +9098,8 @@ msgid "Use 'segment linking' for the resulting files."
 msgstr "对生成的文件启用“片段链接”。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1094
-#, fuzzy
 msgid "Use a &vertical layout for the \"input\" tab"
-msgstr "“输入”选项卡使用垂直布局"
+msgstr "“输入”选项卡使用垂直布局(&V)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1113
 msgid "Use fi&xed directory:"
@@ -9232,12 +9170,11 @@ msgstr "值"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:67
 msgid "Variables for all job types"
-msgstr ""
+msgstr "用于所有任务类型的变量"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:73
-#, fuzzy
 msgid "Variables for merge jobs"
-msgstr "保存为新合成任务的默认参数(&D)"
+msgstr "用于合成任务的变量"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:103
 msgid "Version %1"
@@ -9329,9 +9266,8 @@ msgid "Video track"
 msgstr "视频轨道"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
-#, fuzzy
 msgid "Video track %1"
-msgstr "视频轨道"
+msgstr "视频轨道 %1"
 
 #: src/common/file_types.cpp:99
 #: src/output/p_vobbtn.h:36
@@ -9376,9 +9312,8 @@ msgid "WAVPACK4"
 msgstr "WAVPACK4"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1077
-#, fuzzy
 msgid "Warn before &aborting running jobs"
-msgstr "中止正在运行的任务前警告(&J)"
+msgstr "中止正在运行的任务前警告(&A)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1076
 msgid "Warn before &closing modified tabs"
@@ -9433,9 +9368,8 @@ msgid "What you input here is added after all the other options the GUI adds so 
 msgstr "此处输入的所有内容将被添加到图形界面程序添加的所有其他选项之后，这样您可以覆盖程序为该轨道生成的任何选项。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1090
-#, fuzzy
 msgid "When &dropping files:"
-msgstr "当拖放文件时："
+msgstr "当拖放文件时(&D)："
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:214
 msgid "When a file is added its name is scanned."
@@ -9460,9 +9394,8 @@ msgid "When the user drags & drops files from an external application onto the m
 msgstr "当用户从外部程序中拖放文件到合并工具时，程序可以进行不同的操作。"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:146
-#, fuzzy
 msgid "When to execute:"
-msgstr "待执行的任务："
+msgstr "执行条件："
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
 msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
