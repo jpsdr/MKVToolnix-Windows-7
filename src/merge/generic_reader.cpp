@@ -453,7 +453,7 @@ generic_reader_c::display_identification_results_as_json() {
       { "num_entries", result.size },
     };
 
-  for (auto const &result : m_id_results_chapters) {
+  for (auto const &result : m_id_results_tags) {
     if (ID_RESULT_GLOBAL_TAGS_ID == result.id)
       json["global_tags"] += nlohmann::json{
         { "num_entries", result.size },

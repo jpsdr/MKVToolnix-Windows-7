@@ -34,7 +34,7 @@ test "identification and validation" do
       puts errors.join("\n")
     end
 
-    hashes += [ output.md5, valid ? "ok" : "invalid" ]
+    hashes << "#{output.md5}+#{valid ? "ok" : "invalid"}"
   end
 
   hashes.join '-'
