@@ -1380,6 +1380,7 @@ mpeg_ps_reader_c::identify() {
     if (track->codec.is(codec_c::type_e::V_MPEG4_P10))
       info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_es_video);
 
+    info.set(mtx::id::number,        (static_cast<uint64_t>(track->id.sub_id) << 32) | static_cast<uint64_t>(track->id.id));
     info.add(mtx::id::stream_id,     boost::format("%|1$02x|") % track->id.id);
     info.add(mtx::id::sub_stream_id, boost::format("%|1$02x|") % track->id.sub_id);
 

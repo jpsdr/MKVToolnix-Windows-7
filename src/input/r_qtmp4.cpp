@@ -1751,6 +1751,8 @@ qtmp4_reader_c::identify() {
     qtmp4_demuxer_cptr &dmx = m_demuxers[i];
     auto info               = mtx::id::info_c{};
 
+    info.set(mtx::id::number, dmx->container_id);
+
     if (dmx->codec.is(codec_c::type_e::V_MPEG4_P10))
       info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_video);
 

@@ -717,6 +717,7 @@ ogm_reader_c::identify() {
   for (i = 0; i < sdemuxers.size(); i++) {
     info = mtx::id::info_c{};
 
+    info.set(mtx::id::number,   sdemuxers[i]->serialno);
     info.add(mtx::id::language, sdemuxers[i]->language);
 
     if (!sdemuxers[i]->title.empty() && !sdemuxers[i]->ms_compat)

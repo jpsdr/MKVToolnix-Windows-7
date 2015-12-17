@@ -595,6 +595,8 @@ real_reader_c::identify() {
     auto demuxer = demuxers[i];
     auto type    = RMFF_TRACK_TYPE_AUDIO == demuxer->track->type ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO;
 
+    info.set(mtx::id::number, demuxer->track->id);
+
     if (RMFF_TRACK_TYPE_VIDEO == demuxer->track->type)
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % demuxer->width % demuxer->height);
 

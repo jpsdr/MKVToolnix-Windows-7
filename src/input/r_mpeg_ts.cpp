@@ -820,7 +820,8 @@ mpeg_ts_reader_c::identify() {
 
     info = mtx::id::info_c{};
     info.add(mtx::id::language, track->language);
-    info.add(mtx::id::ts_pid,   track->pid);
+    info.set(mtx::id::ts_pid,   track->pid);
+    info.set(mtx::id::number,   track->pid);
 
     if (ES_AUDIO_TYPE == track->type) {
       info.add(mtx::id::audio_channels,           track->a_channels);
