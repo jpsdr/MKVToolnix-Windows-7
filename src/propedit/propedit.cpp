@@ -16,6 +16,7 @@
 #include <matroska/KaxTracks.h>
 
 #include "common/command_line.h"
+#include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
@@ -45,17 +46,6 @@ display_update_element_result(const EbmlCallbacks &callbacks,
   }
 
   mxerror(message + "\n");
-}
-
-namespace mtx {
-
-template<typename Trange,
-         typename Tpredicate> bool
-any(Trange range,
-    Tpredicate predicate) {
-  return boost::range::find_if(range, predicate) != boost::end(range);
-}
-
 }
 
 bool

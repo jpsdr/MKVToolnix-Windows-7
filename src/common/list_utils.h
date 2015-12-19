@@ -84,6 +84,8 @@ first_of(std::function<bool(T const &)> pred,
   return pred(val) ? val : boost::optional<T>{};
 }
 
+// Versions for containers
+
 template<typename T,
          typename... Trest>
 boost::optional<T>
@@ -91,6 +93,27 @@ first_of(std::function<bool(T const &)> pred,
          T const &val,
          Trest... rest) {
   return pred(val) ? val : first_of(pred, rest...);
+}
+
+template<typename Tcontainer,
+         typename Tpredicate> bool
+any(Tcontainer container,
+    Tpredicate predicate) {
+  return std::find_if(std::begin(container), std::end(container), predicate) != std::end(container);
+}
+
+template<typename Tcontainer,
+         typename Tpredicate> bool
+none(Tcontainer container,
+     Tpredicate predicate) {
+  return !any(container, predicate);
+}
+
+template<typename Tcontainer,
+         typename Tpredicate> bool
+all(Tcontainer container,
+    Tpredicate predicate) {
+  return std::find_if_not(std::begin(container), std::end(container), predicate) == std::end(container);
 }
 
 }
