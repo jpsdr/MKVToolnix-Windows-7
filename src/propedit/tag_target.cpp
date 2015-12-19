@@ -130,10 +130,11 @@ tag_target_c::requires_sub_master()
 
 void
 tag_target_c::execute() {
-  if (tom_all == m_operation_mode)
+  if (tom_all == m_operation_mode) {
     add_or_replace_all_master_elements(m_new_tags.get());
+    m_tags_modified = true;
 
-  else if (tom_global == m_operation_mode)
+  } else if (tom_global == m_operation_mode)
     add_or_replace_global_tags(m_new_tags.get());
 
   else if (tom_track == m_operation_mode)
@@ -162,9 +163,8 @@ tag_target_c::add_or_replace_global_tags(KaxTags *tags) {
     else {
       delete tag;
       m_level1_element->Remove(idx);
+      m_tags_modified = true;
     }
-
-    m_tags_modified = true;
   }
 
   if (tags) {
@@ -176,9 +176,8 @@ tag_target_c::add_or_replace_global_tags(KaxTags *tags) {
       else {
         m_level1_element->PushElement(*tag);
         tags->Remove(idx);
+        m_tags_modified = true;
       }
-
-      m_tags_modified = true;
     }
   }
 }
@@ -195,9 +194,8 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
     else {
       delete tag;
       m_level1_element->Remove(idx);
+      m_tags_modified = true;
     }
-
-    m_tags_modified = true;
   }
 
   if (tags) {
@@ -212,9 +210,8 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
         GetChild<KaxTagTrackUID>(GetChild<KaxTagTargets>(tag)).SetValue(track_uid);
         m_level1_element->PushElement(*tag);
         tags->Remove(idx);
+        m_tags_modified = true;
       }
-
-      m_tags_modified = true;
     }
   }
 }
