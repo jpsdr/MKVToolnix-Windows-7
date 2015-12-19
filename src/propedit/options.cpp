@@ -96,6 +96,11 @@ options_c::add_attachment_command(attachment_target_c::command_e command,
 }
 
 void
+options_c::add_delete_track_statistics_tags(tag_target_c::tag_operation_mode_e operation_mode) {
+  m_targets.push_back(std::make_shared<tag_target_c>(operation_mode));
+}
+
+void
 options_c::set_file_name(const std::string &file_name) {
   if (!m_file_name.empty())
     mxerror(boost::format(Y("More than one file name has been given ('%1%' and '%2%').\n")) % m_file_name % file_name);

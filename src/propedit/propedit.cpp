@@ -47,6 +47,22 @@ display_update_element_result(const EbmlCallbacks &callbacks,
   mxerror(message + "\n");
 }
 
+namespace mtx {
+
+template<typename Trange,
+         typename Tpredicate> bool
+any(Trange range,
+    Tpredicate predicate) {
+  return boost::range::find_if(range, predicate) != boost::end(range);
+}
+
+}
+
+bool
+has_content_been_modified(options_cptr const &options) {
+  return mtx::any(options->m_targets, [](target_cptr const &t) { return t->has_content_been_modified(); });
+}
+
 static void
 write_changes(options_cptr &options,
               kax_analyzer_c *analyzer) {
@@ -120,11 +136,15 @@ run(options_cptr &options) {
 
   options->execute();
 
-  mxinfo(Y("The changes are written to the file.\n"));
+  if (has_content_been_modified(options)) {
+    mxinfo(Y("The changes are written to the file.\n"));
 
-  write_changes(options, analyzer.get());
+    write_changes(options, analyzer.get());
 
-  mxinfo(Y("Done.\n"));
+    mxinfo(Y("Done.\n"));
+
+  } else
+    mxinfo(Y("No changes were made.\n"));
 
   mxexit();
 }
@@ -135,7 +155,6 @@ void setup(char **argv) {
   clear_list_of_unique_numbers(UNIQUE_ALL_IDS);
   version_info = get_version_info("mkvpropedit", vif_full);
 }
-
 
 /** \brief Setup and high level program control
 

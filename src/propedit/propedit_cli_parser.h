@@ -50,6 +50,8 @@ protected:
   void list_property_names();
   void list_property_names_for_table(const std::vector<property_element_c> &table, const std::string &title, const std::string &edit_spec);
 
+  void handle_track_statistics_tags();
+
   std::map<property_element_c::ebml_type_e, const char *> &get_ebml_type_abbrev_map();
 };
 

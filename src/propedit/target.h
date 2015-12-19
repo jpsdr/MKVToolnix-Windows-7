@@ -49,6 +49,7 @@ public:
   virtual void set_level1_element(ebml_element_cptr level1_element, ebml_element_cptr track_headers = ebml_element_cptr{});
 
   virtual bool has_changes() const = 0;
+  virtual bool has_content_been_modified() const;
 
   virtual void execute() = 0;
 

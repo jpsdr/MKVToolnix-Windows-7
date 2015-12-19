@@ -90,3 +90,9 @@ target_c::get_level1_element()
   const {
   return m_level1_element;
 }
+
+bool
+target_c::has_content_been_modified()
+  const {
+  return true;
+}

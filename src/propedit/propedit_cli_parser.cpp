@@ -127,6 +127,11 @@ propedit_cli_parser_c::replace_attachment() {
   }
 }
 
+void
+propedit_cli_parser_c::handle_track_statistics_tags() {
+  m_options->add_delete_track_statistics_tags(m_current_arg == "--add-track-statistics-tags" ? tag_target_c::tom_add_track_statistics : tag_target_c::tom_delete_track_statistics);
+}
+
 std::map<property_element_c::ebml_type_e, const char *> &
 propedit_cli_parser_c::get_ebml_type_abbrev_map() {
   static std::map<property_element_c::ebml_type_e, const char *> s_ebml_type_abbrevs;
@@ -216,6 +221,8 @@ propedit_cli_parser_c::init_parser() {
                                                             "(see below and man page for syntax)"));
   OPT("c|chapters=<filename>",      add_chapters,        YT("Add or replace chapters in the file with the ones from 'filename' "
                                                             "or remove them if 'filename' is empty"));
+  // OPT("add-track-statistics-tags",    handle_track_statistics_tags, YT("Calculate statistics for all tracks and add new/update existing tags for them"));
+  OPT("delete-track-statistics-tags", handle_track_statistics_tags, YT("Delete all existing track statistics tags"));
 
   add_section_header(YT("Actions for handling attachments"));
   OPT("add-attachment=<filename>",                         add_attachment,             YT("Add the file 'filename' as a new attachment"));

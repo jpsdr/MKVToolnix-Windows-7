@@ -13,6 +13,7 @@
 #include <matroska/KaxTag.h>
 #include <matroska/KaxTags.h>
 
+#include "common/list_utils.h"
 #include "common/output.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
@@ -25,6 +26,12 @@ using namespace libmatroska;
 tag_target_c::tag_target_c()
   : track_target_c{""}
   , m_operation_mode{tom_undefined}
+{
+}
+
+tag_target_c::tag_target_c(tag_operation_mode_e operation_mode)
+  : track_target_c{""}
+  , m_operation_mode{operation_mode}
 {
 }
 
@@ -45,6 +52,9 @@ tag_target_c::operator ==(target_c const &cmp)
 
 void
 tag_target_c::validate() {
+  if (mtx::included_in(m_operation_mode, tom_add_track_statistics, tom_delete_track_statistics))
+    return;
+
   if (!m_file_name.empty() && !m_new_tags)
     m_new_tags = mtx::xml::ebml_tags_converter_c::parse_file(m_file_name, false);
 }
@@ -103,8 +113,7 @@ tag_target_c::has_changes()
 bool
 tag_target_c::non_track_target()
   const {
-  return (tom_all    == m_operation_mode)
-      || (tom_global == m_operation_mode);
+  return mtx::included_in(m_operation_mode, tom_all, tom_global, tom_add_track_statistics, tom_delete_track_statistics);
 }
 
 bool
@@ -130,6 +139,9 @@ tag_target_c::execute() {
   else if (tom_track == m_operation_mode)
     add_or_replace_track_tags(m_new_tags.get());
 
+  else if (tom_delete_track_statistics == m_operation_mode)
+    delete_track_statistics_tags();
+
   else
     assert(false);
 
@@ -151,6 +163,8 @@ tag_target_c::add_or_replace_global_tags(KaxTags *tags) {
       delete tag;
       m_level1_element->Remove(idx);
     }
+
+    m_tags_modified = true;
   }
 
   if (tags) {
@@ -163,6 +177,8 @@ tag_target_c::add_or_replace_global_tags(KaxTags *tags) {
         m_level1_element->PushElement(*tag);
         tags->Remove(idx);
       }
+
+      m_tags_modified = true;
     }
   }
 }
@@ -180,6 +196,8 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
       delete tag;
       m_level1_element->Remove(idx);
     }
+
+    m_tags_modified = true;
   }
 
   if (tags) {
@@ -195,6 +213,19 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
         m_level1_element->PushElement(*tag);
         tags->Remove(idx);
       }
+
+      m_tags_modified = true;
     }
   }
+}
+
+void
+tag_target_c::delete_track_statistics_tags() {
+  m_tags_modified = mtx::tags::remove_track_statistics(static_cast<KaxTags *>(m_level1_element), boost::none);
+}
+
+bool
+tag_target_c::has_content_been_modified()
+  const {
+  return m_tags_modified;
 }

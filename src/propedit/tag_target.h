@@ -26,13 +26,17 @@ public:
     tom_all,
     tom_global,
     tom_track,
+    tom_add_track_statistics,
+    tom_delete_track_statistics,
   };
 
   tag_operation_mode_e m_operation_mode;
   std::shared_ptr<KaxTags> m_new_tags;
+  bool m_tags_modified{};
 
 public:
   tag_target_c();
+  tag_target_c(tag_operation_mode_e operation_mode);
   virtual ~tag_target_c();
 
   virtual void validate();
@@ -42,12 +46,14 @@ public:
   virtual void dump_info() const;
 
   virtual bool has_changes() const;
+  virtual bool has_content_been_modified() const override;
 
   virtual void execute();
 
 protected:
   virtual void add_or_replace_global_tags(KaxTags *tags);
   virtual void add_or_replace_track_tags(KaxTags *tags);
+  virtual void delete_track_statistics_tags();
 
   virtual bool non_track_target() const;
   virtual bool sub_master_is_track() const;

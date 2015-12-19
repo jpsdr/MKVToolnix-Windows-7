@@ -17,7 +17,7 @@
 
 #include "common/kax_analyzer.h"
 #include "propedit/attachment_target.h"
-#include "propedit/target.h"
+#include "propedit/tag_target.h"
 
 class options_c {
 public:
@@ -36,6 +36,7 @@ public:
   void add_tags(const std::string &spec);
   void add_chapters(const std::string &spec);
   void add_attachment_command(attachment_target_c::command_e command, std::string const &spec, attachment_target_c::options_t const &options);
+  void add_delete_track_statistics_tags(tag_target_c::tag_operation_mode_e operation_mode);
   void set_file_name(const std::string &file_name);
   void set_parse_mode(const std::string &parse_mode);
   void dump_info() const;
