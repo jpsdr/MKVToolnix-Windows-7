@@ -1012,7 +1012,7 @@ header_c::parse_audio_specific_config(bit_reader_c &bc,
 
     is_valid = true;
 
-    if (sample_rate <= 24000) {
+    if ((sample_rate >= 22050) && (sample_rate <= 24000)) {
       output_sample_rate = 2 * sample_rate;
       is_sbr             = true;
     }
