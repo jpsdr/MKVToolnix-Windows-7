@@ -1,5 +1,11 @@
 2015-12-19  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: the progress calculation was sometimes
+        outputting negative numbers when appending Matroska files whose
+        timestamps don't start at 0 (e.g. if they were created by
+        splitting with linking enabled). In the the GUI this resulted in
+        lines like "#GUI#progress -2%" in the job's output.
+
         * mkvpropedit: new feature: added an option for removing all
         existing track statistics tags from a file. Part of the
         implementation of #1507.
