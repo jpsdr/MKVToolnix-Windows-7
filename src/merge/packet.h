@@ -27,6 +27,7 @@ namespace libmatroska {
 using namespace libmatroska;
 
 class generic_packetizer_c;
+class track_statistics_c;
 
 class packet_extension_c {
 public:
@@ -220,6 +221,8 @@ struct packet_t {
   void add_extensions(std::vector<packet_extension_cptr> const &new_extensions);
 
   void normalize_timecodes();
+
+  void account(track_statistics_c &statistics) const;
 };
 using packet_cptr = std::shared_ptr<packet_t>;
 

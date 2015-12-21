@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/math.h"
+#include "common/track_statistics.h"
 #include "merge/cluster_helper.h"
 #include "merge/output_control.h"
 #include "merge/packet.h"
@@ -36,4 +37,10 @@ packet_t::normalize_timecodes() {
 void
 packet_t::add_extensions(std::vector<packet_extension_cptr> const &new_extensions) {
   brng::copy(new_extensions, std::back_inserter(extensions));
+}
+
+void
+packet_t::account(track_statistics_c &statistics)
+  const {
+  statistics.account(assigned_timecode, get_duration(), data->get_size());
 }

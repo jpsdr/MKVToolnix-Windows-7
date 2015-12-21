@@ -15,7 +15,7 @@
 #ifndef MTX_MERGE_PRIVATE_CLUSTER_HELPER_H
 #define MTX_MERGE_PRIVATE_CLUSTER_HELPER_H
 
-#include "merge/track_statistics.h"
+#include "common/track_statistics.h"
 
 class render_groups_c {
 public:
