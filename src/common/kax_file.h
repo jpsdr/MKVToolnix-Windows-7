@@ -26,7 +26,7 @@ using namespace libmatroska;
 
 class kax_file_c {
 protected:
-  mm_io_cptr m_in;
+  mm_io_c &m_in;
   bool m_resynced;
   uint64_t m_resync_start_pos, m_file_size, m_segment_end;
   int64_t m_timecode_scale, m_last_timecode;
@@ -35,7 +35,7 @@ protected:
   debugging_option_c m_debug_read_next, m_debug_resync;
 
 public:
-  kax_file_c(mm_io_cptr &in);
+  kax_file_c(mm_io_c &in);
   virtual ~kax_file_c();
 
   virtual bool was_resynced() const;

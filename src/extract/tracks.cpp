@@ -353,7 +353,7 @@ extract_tracks(const std::string &file_name,
   kax_file_cptr file;
   try {
     in   = mm_file_io_c::open(file_name);
-    file = kax_file_cptr(new kax_file_c(in));
+    file = std::make_shared<kax_file_c>(*in);
   } catch (mtx::mm_io::exception &ex) {
     show_error(boost::format(Y("The file '%1%' could not be opened for reading: %2%.\n")) % file_name % ex);
     return false;

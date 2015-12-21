@@ -1567,7 +1567,7 @@ handle_segment(EbmlElement *l0,
   auto file_size         = in->get_size();
   auto l1                = static_cast<EbmlElement *>(nullptr);
   auto upper_lvl_el      = 0;
-  kax_file_cptr kax_file = kax_file_cptr(new kax_file_c(in));
+  auto kax_file          = std::make_shared<kax_file_c>(*in);
 
   kax_file->set_segment_end(*l0);
 

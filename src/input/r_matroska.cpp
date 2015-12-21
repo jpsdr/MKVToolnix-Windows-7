@@ -1226,8 +1226,8 @@ kax_reader_c::read_headers_internal() {
 
   auto cluster = std::unique_ptr<KaxCluster>{};
   try {
-    m_es        = std::shared_ptr<EbmlStream>(new EbmlStream(*m_in));
-    m_in_file   = kax_file_cptr(new kax_file_c(m_in));
+    m_es      = std::shared_ptr<EbmlStream>(new EbmlStream(*m_in));
+    m_in_file = std::make_shared<kax_file_c>(*m_in);
 
     // Find the EbmlHead element. Must be the first one.
     EbmlElement *l0 = m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFFFFFFFFFLL);
