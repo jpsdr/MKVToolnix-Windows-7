@@ -17,17 +17,17 @@
 #include "common/vint.h"
 
 vint_c::vint_c()
-  : m_value(0)
-  , m_coded_size(-1)
-  , m_is_set(false)
+  : m_value{}
+  , m_coded_size{-1}
+  , m_is_set{}
 {
 }
 
 vint_c::vint_c(int64_t value,
                int coded_size)
-  : m_value(value)
-  , m_coded_size(coded_size)
-  , m_is_set(true)
+  : m_value{value}
+  , m_coded_size{coded_size}
+  , m_is_set{true}
 {
 }
 
@@ -50,17 +50,17 @@ vint_c::is_valid() {
 }
 
 vint_c
-vint_c::read(mm_io_c *in,
+vint_c::read(mm_io_c &in,
              vint_c::read_mode_e read_mode) {
-  int64_t pos       = in->getFilePointer();
-  int64_t file_size = in->get_size();
-  int mask          = 0x80;
-  int value_len      = 1;
+  auto pos       = static_cast<int64_t>(in.getFilePointer());
+  auto file_size = in.get_size();
+  auto mask      = 0x80;
+  auto value_len = 1;
 
   if (pos >= file_size)
-    return vint_c();
+    return {};
 
-  unsigned char first_byte = in->read_uint8();
+  auto first_byte = in.read_uint8();
 
   while (0 != mask) {
     if (0 != (first_byte & mask))
@@ -71,44 +71,43 @@ vint_c::read(mm_io_c *in,
   }
 
   if ((pos + value_len) > file_size)
-    return vint_c();
+    return {};
 
   if (   (rm_ebml_id == read_mode)
       && (   (0 == mask)
           || (4 <  value_len)))
-    return vint_c();
+    return {};
 
-  int64_t value = first_byte;
+  auto value = static_cast<int64_t>(first_byte);
   if (rm_normal == read_mode)
     value &= ~mask;
 
   int i;
   for (i = 1; i < value_len; ++i) {
     value <<= 8;
-    value  |= in->read_uint8();
+    value  |= in.read_uint8();
   }
 
-  return vint_c(value, value_len);
+  return { value, value_len };
 }
 
 vint_c
-vint_c::read_ebml_id(mm_io_c *in) {
+vint_c::read_ebml_id(mm_io_c &in) {
   return read(in, rm_ebml_id);
 }
 
 vint_c
-vint_c::read(mm_io_cptr &in,
+vint_c::read(mm_io_cptr const &in,
              vint_c::read_mode_e read_mode) {
-  return read(in.get(), read_mode);
+  return read(*in, read_mode);
 }
 
 vint_c
-vint_c::read_ebml_id(mm_io_cptr &in) {
-  return read(in.get(), rm_ebml_id);
+vint_c::read_ebml_id(mm_io_cptr const &in) {
+  return read(*in, rm_ebml_id);
 }
 
 vint_c::operator EbmlId()
   const {
-  return EbmlId(m_value, m_coded_size);
+  return { static_cast<uint32>(m_value), static_cast<unsigned int>(m_coded_size) };
 }
-

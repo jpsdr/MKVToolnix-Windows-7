@@ -40,11 +40,11 @@ public:
   operator EbmlId() const;
 
 public:                         // static functions
-  static vint_c read(mm_io_c *in, read_mode_e read_mode = rm_normal);
-  static vint_c read(mm_io_cptr &in, read_mode_e read_mode = rm_normal);
+  static vint_c read(mm_io_c &in, read_mode_e read_mode = rm_normal);
+  static vint_c read(mm_io_cptr const &in, read_mode_e read_mode = rm_normal);
 
-  static vint_c read_ebml_id(mm_io_c *in);
-  static vint_c read_ebml_id(mm_io_cptr &in);
+  static vint_c read_ebml_id(mm_io_c &in);
+  static vint_c read_ebml_id(mm_io_cptr const &in);
 };
 
 #endif  // MTX_COMMON_VINT_H
