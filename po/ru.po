@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-12-19 18:27+0100\n"
-"PO-Revision-Date: 2015-12-16 10:24+0100\n"
+"POT-Creation-Date: 2015-12-21 12:16+0100\n"
+"PO-Revision-Date: 2015-12-21 13:33+0300\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
 "Language: ru\n"
@@ -1277,7 +1277,7 @@ msgstr "&Выбрать все дорожки"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
-msgstr ""
+msgstr "&Пропускать главы отмеченные как \"скрытые\""
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
 msgid "&Start && end:"
@@ -2160,14 +2160,12 @@ msgid "Adding or appending files"
 msgstr "Добавление или присоединение файлов"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:964
-#, fuzzy
 msgid "Adding segment info files"
-msgstr "XML файлы информации о сегментах"
+msgstr "Добавление файлов информации о сегментах"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:947
-#, fuzzy
 msgid "Adding tag files"
-msgstr "Ошибка при добавлении файла"
+msgstr "Добавление файлов тегов"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:153
 msgid "Adding, appending or adding as additional parts"
@@ -2204,9 +2202,8 @@ msgid "After a job completes &successfully or with warnings"
 msgstr "После успешного выполнения задания или завершения с предупреждениями"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:148
-#, fuzzy
 msgid "After a job exits with an &error or the user aborts the job"
-msgstr "После прерывания задания с ошибкой"
+msgstr "После завершения задания с ошибкой или после прерывания задания пользователем"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:149
 msgid "After the job &queue has stopped"
@@ -3319,7 +3316,6 @@ msgid "Current command line"
 msgstr "Текущая командная строка"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
-#, fuzzy
 msgid "Current date && time in ISO 8601 format"
 msgstr "Текущее время и дата в формате ISO 8601"
 
@@ -4298,13 +4294,12 @@ msgid "General options"
 msgstr "Общие параметры"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:78
-#, fuzzy
 msgid "General variables"
-msgstr "Общие параметры"
+msgstr "Общие переменные"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:193
 msgid "Generate sub-chapters"
-msgstr ""
+msgstr "Создать подглавы"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:194
 msgid "Generating a number of chapters spaced evenly apart"
@@ -4807,9 +4802,9 @@ msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr "Недопустимая длина заголовка: %1% (полная длина: %2%, idx: %3%, idx данных: %4%)\n"
 
 #: src/merge/mkvmerge.cpp:1851
-#, fuzzy, boost-format
+#, boost-format
 msgid "Invalid identification format in '%1% %2%'.\n"
-msgstr "Недопустимый селектор в '%1% %2%'.\n"
+msgstr "Недопустимый формат идентификации в '%1% %2%'.\n"
 
 #: src/common/xml/ebml_converter.cpp:268
 msgid "Invalid length of hexadecimal content: must be divisable by 2."
@@ -5023,7 +5018,6 @@ msgid "Job description"
 msgstr "Описание задания"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:70
-#, fuzzy
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Дата и время окончания задания в формате ISO 8601"
 
@@ -5032,7 +5026,6 @@ msgid "Job queue"
 msgstr "Очередь заданий"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:69
-#, fuzzy
 msgid "Job start date && time in ISO 8601 format"
 msgstr "Дата и время запуска задания в формате ISO 8601"
 
@@ -5648,9 +5641,9 @@ msgid "No programs have been added yet."
 msgstr "Программы еще не добавлены."
 
 #: src/common/kax_analyzer.cpp:1425
-#, fuzzy, boost-format
+#, boost-format
 msgid "No segment UID could be found in the file '%1%'."
-msgstr "Идентификационный заголовок Kate не может быть обработан (%1%).\n"
+msgstr "UID сегмента не найден в файле '%1%'."
 
 #: src/extract/timecodes_v2.cpp:218
 #: src/extract/tracks.cpp:407
@@ -5701,13 +5694,12 @@ msgid "Normally mkvmerge does not change the timing information (frame/field rat
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
-#, fuzzy
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
-msgstr "Обычно mkvmerge сохраняет информацию о соотношении сторон в двоичных потоках видео MPEG4 и помещает информацию в контейнер. Этот параметр заставит mkvmerge удалить из потока информацию о соотношении сторон."
+msgstr "Обычно mkvmerge сохраняет информацию о соотношении сторон в двоичных потоках видео MPEG4 и помещает информацию в контейнер."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:221
 msgid "Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."
-msgstr "Обчычно mkvmerge будет применять дополнительное сжатие без потерь для субтиров для определенных кодеков."
+msgstr "Обычно mkvmerge будет применять дополнительное сжатие без потерь для субтиров для определенных кодеков."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:48
 msgid "Normally mkvmerge will use a value of 1000000 which means that timecodes and durations will have a precision of 1ms."
@@ -5783,9 +5775,8 @@ msgid "Nu&mber of entries to create:"
 msgstr "&Новые главы"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:244
-#, fuzzy
 msgid "Number of chapters:"
-msgstr "&Новые главы"
+msgstr "Количество глав:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
 #, fuzzy
@@ -5917,20 +5908,18 @@ msgid "Open settings file"
 msgstr "Открыть файл настроек"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:180
-#, fuzzy
 msgid "Opening %1 file in the chapter editor…"
 msgid_plural "Opening %1 files in the chapter editor…"
-msgstr[0] "Закрыть редактор заголовков"
-msgstr[1] "Закрыть редактор заголовков"
-msgstr[2] "Закрыть редактор заголовков"
+msgstr[0] "Открытие %1 файла в редакторе глав…"
+msgstr[1] "Открытие %1 файлов в редакторе глав…"
+msgstr[2] "Открытие %1 файлов в редакторе глав…"
 
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:150
-#, fuzzy
 msgid "Opening %1 file in the header editor…"
 msgid_plural "Opening %1 files in the header editor…"
-msgstr[0] "Закрыть редактор заголовков"
-msgstr[1] "Закрыть редактор заголовков"
-msgstr[2] "Закрыть редактор заголовков"
+msgstr[0] "Открытие %1 файла в редакторе заголовков…"
+msgstr[1] "Открытие %1 файлов в редакторе заголовков…"
+msgstr[2] "Открытие %1 файлов в редакторе заголовков…"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:233
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:238
@@ -6131,7 +6120,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:153
 msgid "Pre&view:"
-msgstr ""
+msgstr "Предпросмотр:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1111
 msgid "Pre&viously used output directory"
@@ -6286,9 +6275,9 @@ msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decode
 msgstr "Считыватель Quicktime/MP4: Дорожка MPEG4 %1% не имеет атома esds/конфигурации декодера. Пропускаю эту дорожку.\n"
 
 #: src/input/r_qtmp4.cpp:2840
-#, fuzzy, boost-format
+#, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
-msgstr "Считыватель Quicktime/MP4: дорожка MPEG4 part 10/AVC %1% не имеет конфигурации декодера. Пропускаю эту дорожку.\n"
+msgstr "Считыватель Quicktime/MP4: дорожка MPEGH part 2/HEVC %1% не имеет конфигурации декодера. Пропускаю эту дорожку.\n"
 
 #: src/input/r_qtmp4.cpp:520
 #, boost-format
@@ -6349,9 +6338,9 @@ msgstr "Считыватель Quicktime/MP4: В дорожке %1% не хва�
 
 #: src/input/r_qtmp4.cpp:2357
 #: src/input/r_qtmp4.cpp:2431
-#, fuzzy, boost-format
+#, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
-msgstr "Считыватель Quicktime/MP4: Дорожка ID %1% имеет более одного FourCC. Использую только первый (%|2$.4s|), а не этот (%|3$.4s|).\n"
+msgstr "Считыватель Quicktime/MP4: Дорожка ID %1% имеет более одного FourCC. Использую только первый (%2%), а не этот (%3%).\n"
 
 #: src/common/file_types.cpp:72
 msgid "RIFF CDXA"
@@ -6374,9 +6363,8 @@ msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "Чтение зашифрованных VOB не поддерживается.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:549
-#, fuzzy
 msgid "Reading the segment UID failed"
-msgstr "XML файлы информации о сегментах"
+msgstr "Прочитать UID сегмента не удалось"
 
 #: src/common/cli_parser.cpp:183
 msgid "Reads additional command line options from the specified file (see man page)."
@@ -6438,9 +6426,8 @@ msgstr "Опорный виртуал: %1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:219
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:171
-#, fuzzy
 msgid "Reload modified file"
-msgstr "&Удалить файлы"
+msgstr "Перезагрузить измененный файл"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:290
 msgid "Remaining time for current job:"
@@ -6480,11 +6467,11 @@ msgstr "Удалить элемент"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:169
 msgid "Renumbering existing sub-chapters"
-msgstr ""
+msgstr "Перенумерация имеющихся подглав"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:168
 msgid "Renumbering sub-chapters"
-msgstr ""
+msgstr "Перенумерация подглав"
 
 #: src/propedit/propedit_cli_parser.cpp:229
 msgid "Replace an attachment with the file 'filename'"
@@ -6625,14 +6612,12 @@ msgstr "&Сохранить в файл Matroska"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:501
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:505
-#, fuzzy
 msgid "Saving failed"
-msgstr "Анализ файла"
+msgstr "Сохранить не удалось."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:545
-#, fuzzy
 msgid "Saving the chapters failed."
-msgstr "Выберите файл глав"
+msgstr "Сохранить главы не удалось."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:161
 #, fuzzy
@@ -6641,7 +6626,7 @@ msgstr "  --segmentinfo <file>    Читать информацию о сегм�
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:167
 msgid "Saving the modified track headers failed."
-msgstr ""
+msgstr "Сохранить измененные заголовки дорожек не удалось."
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:139
 msgid "Scan directory for other playlists"
@@ -6656,9 +6641,9 @@ msgstr "Файлы-вложения"
 #, boost-format
 msgid "Scanning %1% files in %2% playlist.\n"
 msgid_plural "Scanning %1% files in %2% playlists.\n"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Сканирование %1% файлов в %2% плейлисте.\n"
+msgstr[1] "Сканирование %1% файлов в %2% плейлистах.\n"
+msgstr[2] "Сканирование %1% файлов в %2% плейлистах.\n"
 
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
 msgid "Scanning directory"
@@ -6784,9 +6769,8 @@ msgstr "Выберите файл глав"
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:148
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
-#, fuzzy
 msgid "Select character set"
-msgstr "Выберите файл Matroska"
+msgstr "Выберите кодировку"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:139
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
@@ -6795,9 +6779,8 @@ msgid "Select executable"
 msgstr "Выберите файл Matroska"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:234
-#, fuzzy
 msgid "Select file to add"
-msgstr "Выберите применяемые значения"
+msgstr "Выберите файл, чтобы добавить"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:335
 msgid "Select one of the ISO639-2 language codes."
@@ -6812,9 +6795,8 @@ msgid "Select output file name"
 msgstr "Выберите имя выходного файла"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:272
-#, fuzzy
 msgid "Select segment info file"
-msgstr "Файл информации о сегментах:"
+msgstr "Выберите файл информации о сегментах"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:792
 #: src/mkvtoolnix-gui/merge/output.cpp:260
@@ -6822,9 +6804,8 @@ msgid "Select tags file"
 msgstr "Выберите файл с тегами"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:780
-#, fuzzy
 msgid "Select timecode file"
-msgstr "Выберите файл Matroska"
+msgstr "Выберите файл таймкодов"
 
 #: src/mkvtoolnix-gui/forms/util/side_by_side_multi_select.h:129
 msgid "Selected:"
@@ -6885,33 +6866,28 @@ msgid "Set if the video is interlaced."
 msgstr "Это видео с чересстрочной разверткой."
 
 #: src/propedit/propedit_cli_parser.cpp:234
-#, fuzzy
 msgid "Set the MIME type to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "Задать тип MIME для использования с последующей командой '--add-attachment' или '--replace-attachment'"
+msgstr "Задать тип MIME для использования с последующей командой '--add-attachment', '--replace-attachment' или '--update-attachment'"
 
 #: src/propedit/propedit_cli_parser.cpp:235
-#, fuzzy
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "Задать имя для использования с последующей командой '--add-attachment' или '--replace-attachment'"
+msgstr "Задать UID для использования с последующей командой '--add-attachment', '--replace-attachment' или '--update-attachment'"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:184
-#, fuzzy
 msgid "Set the chapter names's &languages:"
-msgstr "Названия и языки глав"
+msgstr "Задать названиям глав язык:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:185
 msgid "Set the chapter names's co&untries"
-msgstr ""
+msgstr "Задать названиям глав страну"
 
 #: src/propedit/propedit_cli_parser.cpp:233
-#, fuzzy
 msgid "Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "Задать описание для использования с последующей командой '--add-attachment' или '--replace-attachment'"
+msgstr "Задать описание для использования с последующей командой '--add-attachment', '--replace-attachment' или '--update-attachment'"
 
 #: src/propedit/propedit_cli_parser.cpp:232
-#, fuzzy
 msgid "Set the name to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
-msgstr "Задать имя для использования с последующей командой '--add-attachment' или '--replace-attachment'"
+msgstr "Задать имя для использования с последующей командой '--add-attachment', '--replace-attachment' или '--update-attachment'"
 
 #: src/propedit/propedit_cli_parser.cpp:215
 msgid "Sets a property to the value if it exists and add it otherwise"
@@ -7041,9 +7017,8 @@ msgstr "Номер скрытой дорожки: %1%"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:175
 #: src/mkvtoolnix-gui/merge/output.cpp:437
-#, fuzzy
 msgid "Simple OGM-style chapter files"
-msgstr "Выберите файл глав"
+msgstr "Формат OGM для файлов глав"
 
 #: src/extract/timecodes_v2.cpp:309
 msgid "Simple block"
@@ -7306,11 +7281,11 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 msgid "Tells mkvmerge not to write tags with statistics for each track."
-msgstr ""
+msgstr "Указывает mkvmerge не создавать теги со статистикой для каждой дорожки."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
-msgstr "Приказывает mkvmerge создать метаэлемент поиска в конце файла, содержащего все кластеры."
+msgstr "Указывает mkvmerge создать метаэлемент поиска в конце файла, содержащего все кластеры."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:31
 msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
@@ -7556,15 +7531,13 @@ msgid "The codec's private data does not match. Both have the same length (%1%) 
 msgstr "Внутренние данные кодека не совпадают. Они имеют одинаковую длину (%1%), но различное содержимое."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:124
-#, fuzzy
 msgid "The configuration has been loaded."
 msgstr "Конфигурация загружена."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:161
 #: src/mkvtoolnix-gui/merge/tab.cpp:194
-#, fuzzy
 msgid "The configuration has been saved."
-msgstr "Настройки сохранены."
+msgstr "Конфигурация сохранена."
 
 #: src/input/r_wavpack.cpp:74
 msgid "The correction file header was not read correctly.\n"
@@ -7731,9 +7704,9 @@ msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "Файл '%1%' не может быть открыт для записи: %2%.\n"
 
 #: src/common/kax_analyzer.cpp:1421
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file '%1%' could not be opened or parsed."
-msgstr "Этот файл не может быть открыт или проанализирован.\n"
+msgstr "Этот файл '%1%' не может быть открыт или проанализирован."
 
 #: src/merge/output_control.cpp:1337
 #, boost-format
@@ -7756,9 +7729,8 @@ msgid "The file '%1' contains chapters."
 msgstr "Файл '%1' содержит главы."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:966
-#, fuzzy
 msgid "The file '%1' contains segment information."
-msgstr "Файл '%1%' открыт для записи.\n"
+msgstr "Файл '%1' содержит информацию о сегментах."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:949
 msgid "The file '%1' contains tags."
@@ -7784,14 +7756,13 @@ msgid "The file could not be opened for reading, or there was not enough data to
 msgstr "Файл не может быть открыт для чтения, или не хватает данных для анализа его заголовков."
 
 #: src/info/qt_ui.cpp:104
-#, fuzzy
 msgid "The file could not be opened for writing."
-msgstr "Файл '%1%' не может быть открыт для записи: %2%.\n"
+msgstr "Файл не может быть открыт для записи."
 
 #: src/extract/cues.cpp:49
-#, fuzzy, boost-format
+#, boost-format
 msgid "The file does not contain track ID %1%.\n"
-msgstr "Входной файл '%s' не содержит дорожек."
+msgstr "Файл не содержит ID дорожки %1%.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:151
 msgid "The file has been changed by another program since it was read by the header editor. Therefore you have to re-load it. Unfortunately this means that all of your changes will be lost."
@@ -7819,15 +7790,13 @@ msgid "The file headers could not be parsed, e.g. because they're incomplete, in
 msgstr "Заголовки файла не могут быть проанализированы — они неполны, неправильны или повреждены."
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:59
-#, fuzzy
 msgid "The file is an unsupported container format (%1)."
-msgstr "Файл имеет неподдерживаемый формат контейнера (%s)."
+msgstr "Файл имеет неподдерживаемый формат контейнера (%1)."
 
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/propedit/propedit.cpp:100
-#, fuzzy
 msgid "The file is being analyzed."
-msgstr "Файл проанализирован.\n"
+msgstr "Файл анализируется."
 
 #: src/merge/output_control.cpp:232
 msgid "The file is being fixed, part 1/4..."
@@ -7870,9 +7839,8 @@ msgid "The file or directory was not found"
 msgstr "Файл или директория не найдены"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:64
-#, fuzzy
 msgid "The file was not recognized as a supported format (exit code: %1)."
-msgstr "Файл имеет неподдерживаемый формат контейнера (%s)."
+msgstr "Файл имеет не поддерживаемый программой формат (exit code: %1)."
 
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
@@ -7887,25 +7855,21 @@ msgstr "Этот файл не может быть открыт для запи�
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:247
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:535
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:93
-#, fuzzy
 msgid "The file you tried to open (%1) could not be read successfully."
-msgstr "Файл, который вы попытались открыть, не является файлом Matroska."
+msgstr "Файл, который вы пытались открыть (%1), программа не может корректно прочитать."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:240
-#, fuzzy
 msgid "The file you tried to open (%1) does not contain any chapters."
-msgstr "Файл, который вы пытались открыть, не содержит глав."
+msgstr "Файл, который вы пытались открыть (%1), не содержит глав."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:85
-#, fuzzy
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
-msgstr "Файл, который вы попытались открыть, не является файлом Matroska."
+msgstr "Файл, который вы пытались открыть (%1), не распознается программой как файл Matroska/WebM."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:292
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:388
-#, fuzzy
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
-msgstr "Файл, который вы попытались открыть, не является файлом Matroska."
+msgstr "Файл, который вы пытались открыть (%1), не распознается программой ни как файл Matroska, ни как файл глав."
 
 #: src/common/kax_file.cpp:52
 #, boost-format
@@ -8003,7 +7967,7 @@ msgstr "Символы 'G', 'M' и 'K' могут использоваться, 
 #: src/merge/timestamp_factory.cpp:203
 #, boost-format
 msgid "The line %1% of the timecode file '%2%' does not contain a valid floating point number.\n"
-msgstr "Строка %1% таймкода файла '%2%' не содержит правильное число с плавающей запятой.\n"
+msgstr "Строка %1% файла таймкода '%2%' не содержит правильное число с плавающей запятой.\n"
 
 #: src/common/translation.cpp:334
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
@@ -8253,7 +8217,7 @@ msgstr "Последовательность '%p' заменяется на ИС
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:131
 msgid "The settings file '%1' contains invalid settings and was not loaded."
-msgstr ""
+msgstr "Файл настроек '%1' содержит некорректные настройки и не будет загружен."
 
 #: src/extract/extract_cli_parser.cpp:114
 msgid "The sixth mode finds the timecodes of all blocks for a track and outputs a timecode v2 file with these timecodes."
@@ -8717,9 +8681,8 @@ msgid "This parameter is the display width in pixels."
 msgstr "Этот параметр определяет ширину изображения в пикселях."
 
 #: src/info/qt_ui.cpp:149
-#, fuzzy
 msgid "This program is licensed under the GPL v2 (see COPYING)."
-msgstr "MKVToolNix распространяется под лицензией GNU GPL v2"
+msgstr "MKVToolNix распространяется под лицензией GNU GPL v2 (см. COPYING.txt)."
 
 #: src/propedit/change.cpp:252
 #, boost-format
@@ -9436,7 +9399,7 @@ msgstr "Что вы хотите сделать с файлами, которы�
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 msgid "What to do in the future:"
-msgstr ""
+msgstr "Что делать в будущем:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:425
 msgid "What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."
@@ -9635,7 +9598,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:314
 msgid "You have to set the output file name before you can start merging or add a job to the job queue."
-msgstr ""
+msgstr "Вы должны ввести имя выходного файла, перед тем как вы сможете начать объединение или добавить задание в очередь."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:313
 msgid "You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."
@@ -9686,9 +9649,8 @@ msgid "after specific timecodes"
 msgstr "после таймкодов:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
-#, fuzzy
 msgid "all entries"
-msgstr "Главы: %1% записи"
+msgstr "все записи"
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 msgid "always ask the user"
@@ -9889,19 +9851,16 @@ msgid "filelist_t not found for generic_packetizer_c. %1%\n"
 msgstr "filelist_t не найден для generic_packetizer_c. %1%\n"
 
 #: src/common/flac.cpp:145
-#, fuzzy
 msgid "flac_decoder: Could not initialize the FLAC decoder.\n"
-msgstr "flac_reader: Не удалось инициализировать декодер FLAC.\n"
+msgstr "flac_decoder: Не удалось инициализировать декодер FLAC.\n"
 
 #: src/common/flac.cpp:141
-#, fuzzy
 msgid "flac_decoder: Could not set metadata_respond_all.\n"
-msgstr "flac_reader: Не удалось установить metadata_respond_all.\n"
+msgstr "flac_decoder: Не удалось установить metadata_respond_all.\n"
 
 #: src/common/flac.cpp:138
-#, fuzzy
 msgid "flac_decoder: FLAC__stream_decoder_new() failed.\n"
-msgstr "flac_reader: FLAC__stream_decoder_new() окончился неудачно.\n"
+msgstr "flac_decoder: FLAC__stream_decoder_new() окончился неудачно.\n"
 
 #: src/input/r_ogm_flac.cpp:132
 msgid "flac_header_extraction: Could not initialize the FLAC decoder.\n"
@@ -10349,9 +10308,8 @@ msgid "mkvtoolnix-gui [--merge|--edit-chapters|--edit-headers] <file names>"
 msgstr ""
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:22
-#, fuzzy
 msgid "mkvtoolnix-gui [options] [file names]"
-msgstr "mkvinfo [параметры] inname"
+msgstr "mkvtoolnix-gui [параметры] [имена файлов]"
 
 #: src/common/mm_io.cpp:1027
 msgid "mm_text_io_c: UTF32_* is not supported at the moment.\n"
