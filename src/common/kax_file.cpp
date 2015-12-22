@@ -26,7 +26,7 @@
 #include "common/strings/formatting.h"
 
 kax_file_c::kax_file_c(mm_io_c &in)
-  : m_in{in}
+  : m_in(in)
   , m_resynced{}
   , m_resync_start_pos{}
   , m_file_size{static_cast<uint64_t>(m_in.get_size())}
