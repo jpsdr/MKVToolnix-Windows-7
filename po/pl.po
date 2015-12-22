@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-12-19 18:27+0100\n"
+"POT-Creation-Date: 2015-12-22 19:44+0100\n"
 "PO-Revision-Date: 2015-12-19 16:59+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -3063,6 +3063,11 @@ msgstr "Oblicz i wyświetl sumy kontrolne oraz użyj poziomu 4 szczegółowości
 msgid "Calculate and display checksums of frame contents."
 msgstr "Oblicz i wyświetl sumy kontrolne zawartości klatki."
 
+#: src/propedit/propedit_cli_parser.cpp:224
+msgid ""
+"Calculate statistics for all tracks and add new/update existing tags for them"
+msgstr ""
+
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:222
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:245
@@ -4372,7 +4377,7 @@ msgstr ""
 "Błąd podczas analizowania składni rozdziałów w '%1%': brakuje niektórych "
 "wymaganych elementów.\n"
 
-#: src/merge/mkvmerge.cpp:521 src/propedit/tag_target.cpp:152
+#: src/merge/mkvmerge.cpp:521 src/propedit/tag_target.cpp:164
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr ""
@@ -6550,6 +6555,10 @@ msgstr ""
 "Nie znaleziono żadnej ścieżki odnoszącej się do specyfikacji edytowania \"%1%"
 "\". %2%\n"
 
+#: src/propedit/tag_target.cpp:256
+msgid "No track headers were found for which statistics could be calculated.\n"
+msgstr ""
+
 #: src/extract/tracks.cpp:329
 #, boost-format
 msgid "No track with the ID %1% was found in the source file.\n"
@@ -7158,6 +7167,8 @@ msgstr "Postęp:"
 
 #: src/extract/timecodes_v2.cpp:289 src/extract/tracks.cpp:440
 #: src/merge/mkvmerge.cpp:2456 src/merge/output_control.cpp:328
+#: src/propedit/tag_target.cpp:328 src/propedit/tag_target.cpp:341
+#: src/propedit/tag_target.cpp:346
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "Postęp: %1%%%%2%"
@@ -7578,13 +7589,13 @@ msgstr "Wyzeruj li&czniki ostrzeżeń i błędów przy wyjściu z programu"
 msgid "Resets the header value on this page to how it's saved in the file."
 msgstr ""
 
-#: src/common/kax_file.cpp:286
+#: src/common/kax_file.cpp:285
 msgid "Resync failed: no valid Matroska level 1 element found.\n"
 msgstr ""
 "Resynchronizacja zakończona niepowodzeniem: nie znaleziono prawidłowych "
 "elementów Matroski poziomu 1.\n"
 
-#: src/common/kax_file.cpp:278
+#: src/common/kax_file.cpp:277
 #, boost-format
 msgid "Resyncing successful at position %1%.\n"
 msgstr "Resynchronizacja powiodła się pomyślnie w pozycji %1%.\n"
@@ -9178,6 +9189,10 @@ msgstr "Plik jest w trakcie naprawy, część 3/4..."
 #: src/merge/output_control.cpp:255
 msgid "The file is being fixed, part 4/4..."
 msgstr "Plik jest w trakcie naprawy, część 4/4..."
+
+#: src/propedit/tag_target.cpp:327
+msgid "The file is read in order to create track statistics.\n"
+msgstr ""
 
 #: src/common/property_element.cpp:102
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:298

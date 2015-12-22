@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-12-19 18:27+0100\n"
-"PO-Revision-Date: 2015-12-19 15:16+0100\n"
+"POT-Creation-Date: 2015-12-22 19:44+0100\n"
+"PO-Revision-Date: 2015-12-22 19:46+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -2815,6 +2815,10 @@ msgstr "Prüfsummen für Bilder berechnen und ausgeben und Detailgrad auf Stufe 
 msgid "Calculate and display checksums of frame contents."
 msgstr "Prüfsummen für Bilder berechnen und ausgeben"
 
+#: src/propedit/propedit_cli_parser.cpp:224
+msgid "Calculate statistics for all tracks and add new/update existing tags for them"
+msgstr "Statistiken für alle Spuren berechnen und neue Tags dafür hinzufügen/existierende Tags aktualisieren"
+
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:222
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:245
@@ -3999,7 +4003,7 @@ msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.
 msgstr "Fehler beim Auswerten der Kapitel in »%1%«: Einige notwendige Elemente fehlen.\n"
 
 #: src/merge/mkvmerge.cpp:521
-#: src/propedit/tag_target.cpp:152
+#: src/propedit/tag_target.cpp:164
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "Fehler beim Auswerten der Tags in »%1%«: Einige notwendige Elemente fehlen.\n"
@@ -5801,6 +5805,10 @@ msgstr "In »--%1% %2%« wurde keine Spur-ID angegeben.\n"
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr "Es wurde keine Spur gefunden, der zum Bearbeitungsziel »%1%« passt. %2%\n"
 
+#: src/propedit/tag_target.cpp:256
+msgid "No track headers were found for which statistics could be calculated.\n"
+msgstr "Es wurden keine Spurkopfdaten gefunden, für die Statistiken berechnet werden könnten.\n"
+
 #: src/extract/tracks.cpp:329
 #, boost-format
 msgid "No track with the ID %1% was found in the source file.\n"
@@ -6301,6 +6309,9 @@ msgstr "Fortschritt:"
 #: src/extract/tracks.cpp:440
 #: src/merge/mkvmerge.cpp:2456
 #: src/merge/output_control.cpp:328
+#: src/propedit/tag_target.cpp:328
+#: src/propedit/tag_target.cpp:341
+#: src/propedit/tag_target.cpp:346
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "Fortschritt: %1%%%%2%"
@@ -6616,11 +6627,11 @@ msgstr "Warnungs- und Fehler&zähler beim Beenden zurücksetzen"
 msgid "Resets the header value on this page to how it's saved in the file."
 msgstr "Setzt den Kopfdatenwert auf dieser Seite auf den Stand zurück, wie er in der Datei gespeichert ist."
 
-#: src/common/kax_file.cpp:286
+#: src/common/kax_file.cpp:285
 msgid "Resync failed: no valid Matroska level 1 element found.\n"
 msgstr "Die Suche schlug fehl: Es wurde kein gültiges Matroska-Stufe-1-Element gefunden.\n"
 
-#: src/common/kax_file.cpp:278
+#: src/common/kax_file.cpp:277
 #, boost-format
 msgid "Resyncing successful at position %1%.\n"
 msgstr "Die Suche war an Position %1% erfolgreich.\n"
@@ -7932,6 +7943,10 @@ msgstr "Die Datei wird korrigiert, Teil 3/4 …"
 #: src/merge/output_control.cpp:255
 msgid "The file is being fixed, part 4/4..."
 msgstr "Die Datei wird korrigiert, Teil 4/4 …"
+
+#: src/propedit/tag_target.cpp:327
+msgid "The file is read in order to create track statistics.\n"
+msgstr "Die Datei wird gelesen, um Spur-Statistiken zu erstellen.\n"
 
 #: src/common/property_element.cpp:102
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:298

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-12-19 18:27+0100\n"
+"POT-Creation-Date: 2015-12-22 19:44+0100\n"
 "PO-Revision-Date: 2015-12-16 09:52+0100\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -3045,6 +3045,11 @@ msgstr ""
 msgid "Calculate and display checksums of frame contents."
 msgstr "Kalkulatu eta erakutsi frame edukien egiazt.-laburp."
 
+#: src/propedit/propedit_cli_parser.cpp:224
+msgid ""
+"Calculate statistics for all tracks and add new/update existing tags for them"
+msgstr ""
+
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:222
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:245
@@ -4366,7 +4371,7 @@ msgid ""
 "Error parsing the chapters in '%1%': some mandatory elements are missing.\n"
 msgstr "Akatsa atalak aztertzerakoan, '%1%': ez daude nahitaezko gai batzuk.\n"
 
-#: src/merge/mkvmerge.cpp:521 src/propedit/tag_target.cpp:152
+#: src/merge/mkvmerge.cpp:521 src/propedit/tag_target.cpp:164
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr ""
@@ -6581,6 +6586,10 @@ msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr ""
 "Ez da biderik aurkitu '%1%' edizio adierazpenarekin bat datorrenik. %2%\n"
 
+#: src/propedit/tag_target.cpp:256
+msgid "No track headers were found for which statistics could be calculated.\n"
+msgstr ""
+
 #: src/extract/tracks.cpp:329
 #, boost-format
 msgid "No track with the ID %1% was found in the source file.\n"
@@ -7198,6 +7207,8 @@ msgstr "Garapena:"
 
 #: src/extract/timecodes_v2.cpp:289 src/extract/tracks.cpp:440
 #: src/merge/mkvmerge.cpp:2456 src/merge/output_control.cpp:328
+#: src/propedit/tag_target.cpp:328 src/propedit/tag_target.cpp:341
+#: src/propedit/tag_target.cpp:346
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "Garapena: %1%%%%2%"
@@ -7618,13 +7629,13 @@ msgstr ""
 "Idazburu balioa berrezartzen du orrialde honetan agirian gordeta dagoen "
 "bezala."
 
-#: src/common/kax_file.cpp:286
+#: src/common/kax_file.cpp:285
 msgid "Resync failed: no valid Matroska level 1 element found.\n"
 msgstr ""
 "Berraldiberetze hutsegitea: 1 mailako Matroska gai baliogabe bat aurkitu "
 "da.\n"
 
-#: src/common/kax_file.cpp:278
+#: src/common/kax_file.cpp:277
 #, boost-format
 msgid "Resyncing successful at position %1%.\n"
 msgstr "Berraldiberetzea ongi egin da kokapen honetan: %1%.\n"
@@ -9201,6 +9212,10 @@ msgstr "Agiria zuzentzen ari da, zatia 3/4..."
 #: src/merge/output_control.cpp:255
 msgid "The file is being fixed, part 4/4..."
 msgstr "Agiria zuzentzen ari da, zatia 4/4..."
+
+#: src/propedit/tag_target.cpp:327
+msgid "The file is read in order to create track statistics.\n"
+msgstr ""
 
 #: src/common/property_element.cpp:102
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:298

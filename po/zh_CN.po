@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-12-19 18:27+0100\n"
+"POT-Creation-Date: 2015-12-22 19:44+0100\n"
 "PO-Revision-Date: 2015-12-17 19:21+0800\n"
 "Last-Translator: Donghui Li <DonghuiLi.81@gmail.com>\n"
 "Language-Team: Chinese Simplified <DonghuiLi.81@gmail.com>\n"
@@ -2732,6 +2732,10 @@ msgstr "计算并显示校验码，同时将详细等级设为 4。"
 msgid "Calculate and display checksums of frame contents."
 msgstr "计算并显示帧内容的校验码。"
 
+#: src/propedit/propedit_cli_parser.cpp:224
+msgid "Calculate statistics for all tracks and add new/update existing tags for them"
+msgstr ""
+
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:222
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:245
@@ -3915,7 +3919,7 @@ msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.
 msgstr "解析 '%1%' 中的章节出错：缺少一些必要元素。\n"
 
 #: src/merge/mkvmerge.cpp:521
-#: src/propedit/tag_target.cpp:152
+#: src/propedit/tag_target.cpp:164
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
 msgstr "解析 '%1%' 中的标签出错：缺少一些必要元素。\n"
@@ -5717,6 +5721,10 @@ msgstr "未在 '--%1% %2%' 中指定轨道 ID。\n"
 msgid "No track corresponding to the edit specification '%1%' was found. %2%\n"
 msgstr "没有找到编辑选项 '%1%' 对应的轨道。%2%\n"
 
+#: src/propedit/tag_target.cpp:256
+msgid "No track headers were found for which statistics could be calculated.\n"
+msgstr ""
+
 #: src/extract/tracks.cpp:329
 #, boost-format
 msgid "No track with the ID %1% was found in the source file.\n"
@@ -6213,6 +6221,9 @@ msgstr "进度："
 #: src/extract/tracks.cpp:440
 #: src/merge/mkvmerge.cpp:2456
 #: src/merge/output_control.cpp:328
+#: src/propedit/tag_target.cpp:328
+#: src/propedit/tag_target.cpp:341
+#: src/propedit/tag_target.cpp:346
 #, boost-format
 msgid "Progress: %1%%%%2%"
 msgstr "进度：%1%%%%2%"
@@ -6528,11 +6539,11 @@ msgstr "退出时清零警告与错误计数器(&C)"
 msgid "Resets the header value on this page to how it's saved in the file."
 msgstr "将本页显示的头部信息重置为文件中储存的数值。"
 
-#: src/common/kax_file.cpp:286
+#: src/common/kax_file.cpp:285
 msgid "Resync failed: no valid Matroska level 1 element found.\n"
 msgstr "重新同步失败：未发现有效的 Matroska 1 层级元素。\n"
 
-#: src/common/kax_file.cpp:278
+#: src/common/kax_file.cpp:277
 #, boost-format
 msgid "Resyncing successful at position %1%.\n"
 msgstr "成功重新同步于 %1%。\n"
@@ -7821,6 +7832,10 @@ msgstr "正在修复文件，第 3/4 步..."
 #: src/merge/output_control.cpp:255
 msgid "The file is being fixed, part 4/4..."
 msgstr "正在修复文件，第 4/4 步..."
+
+#: src/propedit/tag_target.cpp:327
+msgid "The file is read in order to create track statistics.\n"
+msgstr ""
 
 #: src/common/property_element.cpp:102
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:298
