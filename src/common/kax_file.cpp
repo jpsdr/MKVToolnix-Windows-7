@@ -316,7 +316,7 @@ kax_file_c::get_element_size(EbmlElement *e) {
 
   auto max_end_pos = e->GetElementPosition() + EBML_ID_LENGTH(static_cast<const EbmlId &>(*e));
   for (size_t idx = 0, end = m->ListSize(); end > idx; ++idx)
-    max_end_pos = std::max(max_end_pos, static_cast<unsigned long>((*m)[idx]->GetElementPosition() + get_element_size((*m)[idx])));
+    max_end_pos = std::max(max_end_pos, (*m)[idx]->GetElementPosition() + get_element_size((*m)[idx]));
 
   return max_end_pos - e->GetElementPosition();
 }
