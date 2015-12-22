@@ -21,6 +21,8 @@
 
 using namespace libebml;
 
+class kax_analyzer_c;
+
 class target_c {
 protected:
   std::string m_spec;
@@ -32,6 +34,7 @@ protected:
   track_type m_track_type;
 
   std::string m_file_name;
+  kax_analyzer_c *m_analyzer;
 
 public:
   target_c();
@@ -52,6 +55,7 @@ public:
   virtual bool has_content_been_modified() const;
 
   virtual void execute() = 0;
+  virtual void execute_change(kax_analyzer_c &analyzer);
 
   virtual std::string const &get_spec() const;
   virtual uint64_t get_track_uid() const;

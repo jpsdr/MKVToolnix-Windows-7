@@ -17,6 +17,7 @@
 #include <matroska/KaxTrackEntryData.h>
 #include <matroska/KaxTrackVideo.h>
 
+#include "common/kax_analyzer.h"
 #include "common/output.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
@@ -30,7 +31,8 @@ target_c::target_c()
   , m_master{}
   , m_sub_master{}
   , m_track_uid{}
-  , m_track_type(INVALID_TRACK_TYPE)
+  , m_track_type{INVALID_TRACK_TYPE}
+  , m_analyzer{}
 {
 }
 
@@ -95,4 +97,10 @@ bool
 target_c::has_content_been_modified()
   const {
   return true;
+}
+
+void
+target_c::execute_change(kax_analyzer_c &analyzer) {
+  m_analyzer = &analyzer;
+  execute();
 }

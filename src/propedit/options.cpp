@@ -40,9 +40,9 @@ options_c::validate() {
 }
 
 void
-options_c::execute() {
+options_c::execute(kax_analyzer_c &analyzer) {
   for (auto &target : m_targets)
-    target->execute();
+    target->execute_change(analyzer);
 }
 
 target_cptr

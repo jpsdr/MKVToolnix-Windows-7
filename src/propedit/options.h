@@ -44,7 +44,7 @@ public:
 
   void find_elements(kax_analyzer_c *analyzer);
 
-  void execute();
+  void execute(kax_analyzer_c &analzyer);
 
 protected:
   void remove_empty_targets();

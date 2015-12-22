@@ -221,7 +221,7 @@ propedit_cli_parser_c::init_parser() {
                                                             "(see below and man page for syntax)"));
   OPT("c|chapters=<filename>",      add_chapters,        YT("Add or replace chapters in the file with the ones from 'filename' "
                                                             "or remove them if 'filename' is empty"));
-  // OPT("add-track-statistics-tags",    handle_track_statistics_tags, YT("Calculate statistics for all tracks and add new/update existing tags for them"));
+  OPT("add-track-statistics-tags",    handle_track_statistics_tags, YT("Calculate statistics for all tracks and add new/update existing tags for them"));
   OPT("delete-track-statistics-tags", handle_track_statistics_tags, YT("Delete all existing track statistics tags"));
 
   add_section_header(YT("Actions for handling attachments"));

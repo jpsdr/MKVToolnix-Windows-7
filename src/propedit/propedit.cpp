@@ -124,7 +124,7 @@ run(options_cptr &options) {
     options->dump_info();
   }
 
-  options->execute();
+  options->execute(*analyzer);
 
   if (has_content_been_modified(options)) {
     mxinfo(Y("The changes are written to the file.\n"));

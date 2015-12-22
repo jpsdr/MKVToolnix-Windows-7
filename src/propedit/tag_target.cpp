@@ -10,13 +10,22 @@
 
 #include "common/common_pch.h"
 
+#include <boost/date_time/posix_time/posix_time.hpp>
+
+#include <matroska/KaxCluster.h>
+#include <matroska/KaxInfo.h>
 #include <matroska/KaxTag.h>
 #include <matroska/KaxTags.h>
+#include <matroska/KaxTracks.h>
 
+#include "common/hacks.h"
+#include "common/kax_analyzer.h"
+#include "common/kax_file.h"
 #include "common/list_utils.h"
 #include "common/output.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
+#include "common/version.h"
 #include "common/xml/ebml_tags_converter.h"
 #include "propedit/propedit.h"
 #include "propedit/tag_target.h"
@@ -140,6 +149,9 @@ tag_target_c::execute() {
   else if (tom_track == m_operation_mode)
     add_or_replace_track_tags(m_new_tags.get());
 
+  else if (tom_add_track_statistics == m_operation_mode)
+    add_or_replace_track_statistics_tags();
+
   else if (tom_delete_track_statistics == m_operation_mode)
     delete_track_statistics_tags();
 
@@ -214,6 +226,155 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
       }
     }
   }
+}
+
+bool
+tag_target_c::read_segment_info_and_tracks() {
+  auto tracks       = m_analyzer->read_all(KaxTracks::ClassInfos);
+  auto segment_info = m_analyzer->read_all(KaxInfo::ClassInfos);
+  m_timecode_scale  = segment_info ? FindChildValue<KaxTimecodeScale>(*segment_info, 1000000ull) : 1000000ull;
+
+  if (tracks && dynamic_cast<KaxTracks *>(tracks.get())) {
+    for (size_t idx = 0, num_children = tracks->ListSize(); idx < num_children; ++idx) {
+      auto track = dynamic_cast<KaxTrackEntry *>((*tracks)[idx]);
+
+      if (!track)
+        continue;
+
+      auto track_number     = FindChildValue<KaxTrackNumber>(*track);
+      auto track_uid        = FindChildValue<KaxTrackUID>(*track);
+      auto default_duration = FindChildValue<KaxTrackDefaultDuration>(*track);
+
+      m_default_durations_by_number[track_number] = default_duration;
+      m_track_statistics_by_number.emplace(track_number, track_statistics_c{track_uid});
+    }
+  }
+
+  if (!m_track_statistics_by_number.empty())
+    return true;
+
+  mxwarn(Y("No track headers were found for which statistics could be calculated.\n"));
+  return false;
+}
+
+void
+tag_target_c::account_block_group(KaxBlockGroup &block_group,
+                                  KaxCluster &cluster) {
+  auto block = FindChild<KaxBlock>(block_group);
+  if (!block)
+    return;
+
+  auto num_frames = block->NumberFrames();
+  auto stats_itr  = m_track_statistics_by_number.find(block->TrackNum());
+
+  if (!num_frames || (stats_itr == m_track_statistics_by_number.end()))
+    return;
+
+  block->SetParent(cluster);
+
+  auto block_duration = FindChild<KaxBlockDuration>(block_group);
+  auto frame_duration = block_duration ? static_cast<uint64_t>(block_duration->GetValue() * m_timecode_scale / num_frames) : m_default_durations_by_number[block->TrackNum()];
+  auto first_timecode = block->GlobalTimecode();
+
+  for (size_t idx = 0; idx < num_frames; ++idx) {
+    auto &data_buffer = block->GetBuffer(idx);
+    stats_itr->second.account(first_timecode + idx * frame_duration, frame_duration, data_buffer.Size());
+  }
+}
+
+void
+tag_target_c::account_simple_block(KaxSimpleBlock &simple_block,
+                                   KaxCluster &cluster) {
+  auto num_frames = simple_block.NumberFrames();
+  auto stats_itr  = m_track_statistics_by_number.find(simple_block.TrackNum());
+
+  if (!num_frames || (stats_itr == m_track_statistics_by_number.end()))
+    return;
+
+  simple_block.SetParent(cluster);
+
+  auto frame_duration = m_default_durations_by_number[simple_block.TrackNum()];
+  auto first_timecode = simple_block.GlobalTimecode();
+
+  for (size_t idx = 0; idx < num_frames; ++idx) {
+    auto &data_buffer = simple_block.GetBuffer(idx);
+    stats_itr->second.account(first_timecode + idx * frame_duration, frame_duration, data_buffer.Size());
+  }
+}
+
+void
+tag_target_c::account_one_cluster(KaxCluster &cluster) {
+  for (size_t idx = 0, num_children = cluster.ListSize(); idx < num_children; ++idx) {
+    auto child = cluster[idx];
+
+    if (Is<KaxBlockGroup>(child))
+      account_block_group(*static_cast<KaxBlockGroup *>(child), cluster);
+
+    else if (Is<KaxSimpleBlock>(child))
+      account_simple_block(*static_cast<KaxSimpleBlock *>(child), cluster);
+  }
+}
+
+void
+tag_target_c::account_all_clusters() {
+  auto &file             = m_analyzer->get_file();
+  auto kax_file          = std::make_shared<kax_file_c>(file);
+  auto file_size         = file.get_size();
+  auto previous_progress = 0;
+
+  file.setFilePointer(m_analyzer->get_segment_data_start_pos());
+
+  mxinfo(Y("The file is read in order to create track statistics.\n"));
+  mxinfo(boost::format(Y("Progress: %1%%%%2%")) % 0 % "\r");
+
+  while (true) {
+    auto cluster = std::unique_ptr<KaxCluster>{kax_file->read_next_cluster()};
+    if (!cluster)
+      break;
+
+    cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(*cluster), m_timecode_scale);
+
+    account_one_cluster(*cluster);
+
+    auto current_progress = std::lround(file.getFilePointer() * 100ull / static_cast<double>(file_size));
+    if (current_progress != previous_progress) {
+      mxinfo(boost::format(Y("Progress: %1%%%%2%")) % current_progress % "\r");
+      previous_progress = current_progress;
+    }
+  }
+
+  mxinfo(boost::format(Y("Progress: %1%%%%2%")) % 100 % "\n");
+}
+
+void
+tag_target_c::create_track_statistics_tags() {
+  auto no_variable_data = hack_engaged(ENGAGE_NO_VARIABLE_DATA);
+  auto writing_app      = no_variable_data ? "no_variable_data"         : get_version_info("mkvpropedit", static_cast<version_info_flags_e>(vif_full | vif_untranslated));
+  auto writing_date     = no_variable_data ? boost::posix_time::ptime{} : boost::posix_time::second_clock::universal_time();
+
+  auto track_numbers    = std::vector<uint64_t>{};
+
+  for (auto const &elt : m_track_statistics_by_number)
+    track_numbers.push_back(elt.first);
+
+  brng::sort(track_numbers);
+
+  for (auto const &track_number : track_numbers)
+    m_track_statistics_by_number[track_number].create_tags(*static_cast<KaxTags *>(m_level1_element), writing_app, writing_date);
+}
+
+void
+tag_target_c::add_or_replace_track_statistics_tags() {
+  if (!read_segment_info_and_tracks())
+    return;
+
+  delete_track_statistics_tags();
+
+  account_all_clusters();
+
+  create_track_statistics_tags();
+
+  m_tags_modified = true;
 }
 
 void
