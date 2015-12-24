@@ -338,6 +338,7 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
   keywords += %w{--keyword=YT}                   # singular form returning translatable_string_c
   keywords += %w{--keyword=QTR}                  # singular form returning QString, used by uic
   keywords += %w{--keyword=QY --keyword=QNY:1,2} # singular & plural forms returning QString
+  keywords += %w{--keyword=QYH}                  # singular form returning HTML-escaped QString
 
   options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --sort-output --boost}
   options  += ["'--msgid-bugs-address=Moritz Bunkus <moritz@bunkus.org>'"]

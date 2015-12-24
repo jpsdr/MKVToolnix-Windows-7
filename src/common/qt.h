@@ -21,6 +21,7 @@
 
 #define Q(s)  to_qs(s)
 #define QY(s) to_qs(Y(s))
+#define QYH(s) to_qs(Y(s)).toHtmlEscaped()
 #define QNY(singular, plural, count) to_qs(NY(singular, plural, count))
 #define QTR(s, dummy) to_qs(Y(s))
 

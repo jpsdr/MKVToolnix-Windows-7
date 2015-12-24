@@ -354,9 +354,9 @@ Tab::setupInputToolTips() {
                    .arg(QY("This works with all track types.")));
   Util::setToolTip(ui->stretchBy,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("Multiply this track's timestamps with a factor."))
-                   .arg(QY("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."))
-                   .arg(QY("This works well for video and subtitle tracks but should not be used with audio tracks.")));
+                   .arg(QYH("Multiply this track's timestamps with a factor."))
+                   .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."))
+                   .arg(QYH("This works well for video and subtitle tracks but should not be used with audio tracks.")));
   Util::setToolTip(ui->defaultDuration,
                    Q("%1 %2")
                    .arg(QY("Forces the default duration or number of frames per second for a track."))
@@ -369,37 +369,37 @@ Tab::setupInputToolTips() {
                            "the source container or the video bitstream.")));
   Util::setToolTip(ui->aspectRatio,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
-                   .arg(QY("The Matroska container format can store the display width/height for a video track."))
-                   .arg(QY("This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."))
-                   .arg(QY("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."))
-                   .arg(QY("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456).")));
+                   .arg(QYH("The Matroska container format can store the display width/height for a video track."))
+                   .arg(QYH("This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."))
+                   .arg(QYH("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."))
+                   .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456).")));
   Util::setToolTip(ui->displayWidth,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("The Matroska container format can store the display width/height for a video track."))
-                   .arg(QY("This parameter is the display width in pixels."))
-                   .arg(QY("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
+                   .arg(QYH("The Matroska container format can store the display width/height for a video track."))
+                   .arg(QYH("This parameter is the display width in pixels."))
+                   .arg(QYH("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
   Util::setToolTip(ui->displayHeight,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("The Matroska container format can store the display width/height for a video track."))
-                   .arg(QY("This parameter is the display height in pixels."))
-                   .arg(QY("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
+                   .arg(QYH("The Matroska container format can store the display width/height for a video track."))
+                   .arg(QYH("This parameter is the display height in pixels."))
+                   .arg(QYH("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
   Util::setToolTip(ui->cropping,
                    Q("<p>%1 %2</p><p>%3 %4</p><p>%5</p>")
-                   .arg(QY("Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."))
-                   .arg(QY("This must be comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."))
-                   .arg(QY("Note that the video content is not modified by this option."))
-                   .arg(QY("The values are only stored in the track headers."))
-                   .arg(QY("Note also that there are not a lot of players that support the cropping parameters.")));
+                   .arg(QYH("Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."))
+                   .arg(QYH("This must be comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."))
+                   .arg(QYH("Note that the video content is not modified by this option."))
+                   .arg(QYH("The values are only stored in the track headers."))
+                   .arg(QYH("Note also that there are not a lot of players that support the cropping parameters.")));
   Util::setToolTip(ui->stereoscopy,
                    Q("%1 %2")
                    .arg(QY("Sets the stereo mode of the video track to this value."))
                    .arg(QY("If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all.")));
   Util::setToolTip(ui->naluSizeLength,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
-                   .arg(QY("Forces the NALU size length to a certain number of bytes."))
-                   .arg(QY("It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."))
-                   .arg(QY("For such files you can use this parameter and decrease the size to 2."))
-                   .arg(QY("This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary streams read from AVC/h.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'.")));
+                   .arg(QYH("Forces the NALU size length to a certain number of bytes."))
+                   .arg(QYH("It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."))
+                   .arg(QYH("For such files you can use this parameter and decrease the size to 2."))
+                   .arg(QYH("This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary streams read from AVC/h.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'.")));
   Util::setToolTip(ui->aacIsSBR,
                    Q("%1 %2 %3")
                    .arg(QY("This track contains SBR AAC/HE-AAC/AAC+ data."))
@@ -411,10 +411,10 @@ Tab::setupInputToolTips() {
                    .arg(QY("This only works with DTS audio tracks.")));
   Util::setToolTip(ui->subtitleCharacterSet,
                    Q("<p>%1 %2</p><p><ol><li>%3</li><li>%4</li></p>")
-                   .arg(QY("Selects the character set a subtitle file or chapter information was written with."))
-                   .arg(QY("Only needed in certain situations:"))
-                   .arg(QY("for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)").arg(Q(g_cc_local_utf8->get_charset())))
-                   .arg(QY("for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly")));
+                   .arg(QYH("Selects the character set a subtitle file or chapter information was written with."))
+                   .arg(QYH("Only needed in certain situations:"))
+                   .arg(QYH("for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)").arg(Q(g_cc_local_utf8->get_charset())))
+                   .arg(QYH("for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly")));
   Util::setToolTip(ui->cues,
                    Q("%1 %2")
                    .arg(QY("Selects for which blocks mkvmerge will produce index entries ( = cue entries)."))
@@ -1607,10 +1607,10 @@ Tab::mediaInfoLocation() {
   auto result = dlg
     .setInfo(QY("Executable not found"),
              Q("<p>%1 %2 %3</p><p>%4</p>")
-             .arg(QY("This function requires the application %1.").arg("MediaInfo"))
-             .arg(QY("Its installation location could not be determined automatically."))
-             .arg(QY("Please select its location below."))
-             .arg(QY("You can download the application from the following URL:")))
+             .arg(QYH("This function requires the application %1.").arg("MediaInfo"))
+             .arg(QYH("Its installation location could not be determined automatically."))
+             .arg(QYH("Please select its location below."))
+             .arg(QYH("You can download the application from the following URL:")))
     .setURL(Q("https://mediaarea.net/en/MediaInfo"))
     .exec();
 

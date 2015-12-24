@@ -148,20 +148,20 @@ Tab::setupOutputToolTips() {
                    .arg(QY("You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers.")));
   Util::setToolTip(ui->splitMaxFiles,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("The maximum number of files that will be created even if the last file might contain more bytes/time than wanted."))
-                   .arg(QY("Useful e.g. when you want exactly two files."))
-                   .arg(QY("If you leave this empty then there is no limit for the number of files mkvmerge might create.")));
+                   .arg(QYH("The maximum number of files that will be created even if the last file might contain more bytes/time than wanted."))
+                   .arg(QYH("Useful e.g. when you want exactly two files."))
+                   .arg(QYH("If you leave this empty then there is no limit for the number of files mkvmerge might create.")));
   Util::setToolTip(ui->linkFiles,
                    Q("%1 %2")
                    .arg(QY("Use 'segment linking' for the resulting files."))
                    .arg(QY("For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation.")));
   Util::setToolTip(ui->segmentUIDs,
                    Q("<p>%1 %2</p><p>%3 %4 %5</p>")
-                   .arg(QY("Sets the segment UIDs to use."))
-                   .arg(QY("This is a comma-separated list of 128bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."))
-                   .arg(QY("Each file created contains one segment, and each segment has one segment UID."))
-                   .arg(QY("If more segment UIDs are specified than segments are created then the surplus UIDs are ignored."))
-                   .arg(QY("If fewer UIDs are specified than segments are created then random UIDs will be created for them.")));
+                   .arg(QYH("Sets the segment UIDs to use."))
+                   .arg(QYH("This is a comma-separated list of 128bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."))
+                   .arg(QYH("Each file created contains one segment, and each segment has one segment UID."))
+                   .arg(QYH("If more segment UIDs are specified than segments are created then the surplus UIDs are ignored."))
+                   .arg(QYH("If fewer UIDs are specified than segments are created then random UIDs will be created for them.")));
   Util::setToolTip(ui->previousSegmentUID, QY("For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation."));
   Util::setToolTip(ui->nextSegmentUID,     QY("For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation."));
   Util::setToolTip(ui->chapters,           QY("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."));
@@ -178,19 +178,19 @@ Tab::setupOutputToolTips() {
                    .arg(QY("It is ignored for XML chapter files.")));
   Util::setToolTip(ui->chapterCueNameFormat,
                    Q("<p>%1 %2 %3 %4</p><p>%5</p>")
-                   .arg(QY("mkvmerge can read CUE sheets for audio CDs and automatically convert them to chapters."))
-                   .arg(QY("This option controls how the chapter names are created."))
-                   .arg(QY("The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."))
-                   .arg(QY("The rest is copied as is."))
-                   .arg(QY("If nothing is entered then '%p - %t' will be used.")));
+                   .arg(QYH("mkvmerge can read CUE sheets for audio CDs and automatically convert them to chapters."))
+                   .arg(QYH("This option controls how the chapter names are created."))
+                   .arg(QYH("The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."))
+                   .arg(QYH("The rest is copied as is."))
+                   .arg(QYH("If nothing is entered then '%p - %t' will be used.")));
   Util::setToolTip(ui->webmMode,
                    Q("<p>%1 %2</p><p>%3 %4 %5</p><p>%6<p>")
-                   .arg(QY("Create a WebM compliant file."))
-                   .arg(QY("mkvmerge also turns this on if the output file name's extension is \"webm\"."))
-                   .arg(QY("This mode enforces several restrictions."))
-                   .arg(QY("The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."))
-                   .arg(QY("Tags are allowed, but chapters are not."))
-                   .arg(QY("The DocType header item is changed to \"webm\".")));
+                   .arg(QYH("Create a WebM compliant file."))
+                   .arg(QYH("mkvmerge also turns this on if the output file name's extension is \"webm\"."))
+                   .arg(QYH("This mode enforces several restrictions."))
+                   .arg(QYH("The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."))
+                   .arg(QYH("Tags are allowed, but chapters are not."))
+                   .arg(QYH("The DocType header item is changed to \"webm\".")));
   Util::setToolTip(ui->additionalOptions,     QY("Any option given here will be added at the end of the mkvmerge command line."));
   Util::setToolTip(ui->editAdditionalOptions, QY("Any option given here will be added at the end of the mkvmerge command line."));
 }
@@ -389,6 +389,9 @@ Tab::onSplitModeChanged(int newMode) {
   ui->splitOptions->clear();
   ui->splitOptions->addItems(entries);
   ui->splitOptions->setCurrentText(options);
+
+  for (auto &oneTooltip : tooltip)
+    oneTooltip = oneTooltip.toHtmlEscaped();
 
   Util::setToolTip(ui->splitOptions, Q("<p>%1</p>").arg(tooltip.join(Q("</p><p>"))));
 }

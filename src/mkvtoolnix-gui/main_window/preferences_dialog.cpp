@@ -205,9 +205,9 @@ PreferencesDialog::setupToolTips() {
   // Merge page
   Util::setToolTip(ui->cbMAutoSetFileTitle,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("Certain file formats have 'title' property."))
-                   .arg(QY("When the user adds a file containing such a title then the program will copy the title into the \"file title\" input box if this option is enabled."))
-                   .arg(QY("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
+                   .arg(QYH("Certain file formats have 'title' property."))
+                   .arg(QYH("When the user adds a file containing such a title then the program will copy the title into the \"file title\" input box if this option is enabled."))
+                   .arg(QYH("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
 
   Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
                    Q("%1 %2")
@@ -233,11 +233,11 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMClearMergeSettings,
                    Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li></ol>")
-                   .arg(QY("The GUI can help you start your next merge settings after having started a job or having added a one to the job queue."))
-                   .arg(QY("With \"create new settings\" a new set of merge settings will be added."))
-                   .arg(QY("The current merge settings will be closed."))
-                   .arg(QY("With \"remove input files\" all input files will be removed."))
-                   .arg(QY("Most of the other settings on the output tab will be kept intact, though.")));
+                   .arg(QYH("The GUI can help you start your next merge settings after having started a job or having added a one to the job queue."))
+                   .arg(QYH("With \"create new settings\" a new set of merge settings will be added."))
+                   .arg(QYH("The current merge settings will be closed."))
+                   .arg(QYH("With \"remove input files\" all input files will be removed."))
+                   .arg(QYH("Most of the other settings on the output tab will be kept intact, though.")));
 
   Util::setToolTip(ui->cbMAddingAppendingFilesPolicy,
                    Q("%1 %2 %3")
@@ -247,19 +247,19 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMDefaultAudioTrackLanguage,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("Certain file formats have a 'language' property for their tracks."))
-                   .arg(QY("When the user adds such a file the track's language input is set to the language property from the source file."))
-                   .arg(QY("The language selected here is used for audio tracks for which their source file contains no such property.")));
+                   .arg(QYH("Certain file formats have a 'language' property for their tracks."))
+                   .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
+                   .arg(QYH("The language selected here is used for audio tracks for which their source file contains no such property.")));
   Util::setToolTip(ui->cbMDefaultVideoTrackLanguage,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("Certain file formats have a 'language' property for their tracks."))
-                   .arg(QY("When the user adds such a file the track's language input is set to the language property from the source file."))
-                   .arg(QY("The language selected here is used for video tracks for which their source file contains no such property.")));
+                   .arg(QYH("Certain file formats have a 'language' property for their tracks."))
+                   .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
+                   .arg(QYH("The language selected here is used for video tracks for which their source file contains no such property.")));
   Util::setToolTip(ui->cbMDefaultSubtitleTrackLanguage,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("Certain file formats have a 'language' property for their tracks."))
-                   .arg(QY("When the user adds such a file the track's language input is set to the language property from the source file."))
-                   .arg(QY("The language selected here is used for subtitle tracks for which their source file contains no such property.")));
+                   .arg(QYH("Certain file formats have a 'language' property for their tracks."))
+                   .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
+                   .arg(QYH("The language selected here is used for subtitle tracks for which their source file contains no such property.")));
 
   Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."));
 
@@ -267,10 +267,10 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMScanPlaylistsPolicy,
                    Q("<p>%1 %2</p><p>%3</p>")
-                   .arg(QY("Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."))
-                   .arg(QY("The user can then select which playlist to actually add."))
-                   .arg(QY("This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) "
-                           "a playlist belongs to.")));
+                   .arg(QYH("Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."))
+                   .arg(QYH("The user can then select which playlist to actually add."))
+                   .arg(QYH("This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) "
+                            "a playlist belongs to.")));
 
   Util::setToolTip(ui->sbMMinPlaylistDuration, QY("Only playlists whose duration are at least this long are considered and offered to the user for selection."));
 
@@ -286,10 +286,10 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
-                   .arg(QY("When adding source files all tracks are normally set to be muxed into the output file."))
-                   .arg(QY("If this option is enabled then only those tracks will be set to be muxed whose language is selected below."))
-                   .arg(QY("You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."))
-                   .arg(QY("Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files).")));
+                   .arg(QYH("When adding source files all tracks are normally set to be muxed into the output file."))
+                   .arg(QYH("If this option is enabled then only those tracks will be set to be muxed whose language is selected below."))
+                   .arg(QYH("You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."))
+                   .arg(QYH("Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files).")));
   Util::setToolTip(ui->cbMEnableMuxingAllVideoTracks,    QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
   Util::setToolTip(ui->cbMEnableMuxingAllAudioTracks,    QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
   Util::setToolTip(ui->cbMEnableMuxingAllSubtitleTracks, QY("If enabled then tracks of this type will always be set to be muxed regardless of their language."));
