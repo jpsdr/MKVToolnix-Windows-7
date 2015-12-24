@@ -221,9 +221,7 @@ Tab::retranslateUi() {
 
   m_model->retranslateUi();
 
-  auto header = ui->elements->header();
-  for (auto idx = 0, numColumns = m_model->columnCount(); idx < numColumns; ++idx)
-    header->setSectionResizeMode(idx, QHeaderView::ResizeToContents);
+  Util::resizeViewColumnsToContents(ui->elements);
 }
 
 void
