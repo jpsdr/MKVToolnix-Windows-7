@@ -572,4 +572,22 @@ Tab::setChapterCharacterSet(QString const &characterSet) {
   onChapterCharacterSetChanged(characterSet);
 }
 
+void
+Tab::onCopyFirstFileNameToTitle() {
+  if (hasSourceFiles())
+    ui->title->setText(QFileInfo{ m_config.m_files[0]->m_fileName }.completeBaseName());
+}
+
+void
+Tab::onCopyOutputFileNameToTitle() {
+  if (hasDestinationFileName())
+    ui->title->setText(QFileInfo{ m_config.m_destination }.completeBaseName());
+}
+
+bool
+Tab::hasDestinationFileName()
+  const {
+  return !m_config.m_destination.isEmpty();
+}
+
 }}}

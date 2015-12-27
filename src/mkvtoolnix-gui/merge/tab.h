@@ -64,6 +64,8 @@ public:
   ~Tab();
 
   virtual bool hasBeenModified();
+  virtual bool hasSourceFiles() const;
+  virtual bool hasDestinationFileName() const;
 
   virtual QString const &fileName() const;
   virtual QString title() const;
@@ -144,6 +146,8 @@ public slots:
   virtual void onAdditionalTrackOptionsChanged(QString newValue);
   virtual void onPreviewChapterCharacterSet();
   virtual void setChapterCharacterSet(QString const &characterSet);
+  virtual void onCopyFirstFileNameToTitle();
+  virtual void onCopyOutputFileNameToTitle();
 
   virtual void resizeFilesColumnsToContents() const;
   virtual void resizeTracksColumnsToContents() const;

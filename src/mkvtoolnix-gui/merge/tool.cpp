@@ -50,6 +50,9 @@ Tool::setupActions() {
   auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
 
+  connect(m_mergeMenu,                              &QMenu::aboutToShow,               this, &Tool::enableMenuActions);
+  connect(m_mergeMenu,                              &QMenu::aboutToHide,               this, &Tool::enableCopyMenuActions);
+
   connect(mwUi->actionMergeNew,                     &QAction::triggered,               this, &Tool::newConfig);
   connect(mwUi->actionMergeOpen,                    &QAction::triggered,               this, &Tool::openConfig);
   connect(mwUi->actionMergeClose,                   &QAction::triggered,               this, &Tool::closeCurrentTab);
@@ -59,6 +62,8 @@ Tool::setupActions() {
   connect(mwUi->actionMergeStartMuxing,             &QAction::triggered,               this, &Tool::startMuxing);
   connect(mwUi->actionMergeAddToJobQueue,           &QAction::triggered,               this, &Tool::addToJobQueue);
   connect(mwUi->actionMergeShowMkvmergeCommandLine, &QAction::triggered,               this, &Tool::showCommandLine);
+  connect(mwUi->actionMergeCopyFirstFileNameToTitle,  &QAction::triggered,               this, &Tool::copyFirstFileNameToTitle);
+  connect(mwUi->actionMergeCopyOutputFileNameToTitle, &QAction::triggered,               this, &Tool::copyOutputFileNameToTitle);
 
   connect(ui->merges,                               &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
   connect(ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::newConfig);
@@ -74,7 +79,8 @@ Tool::setupActions() {
 void
 Tool::enableMenuActions() {
   auto mwUi   = MainWindow::getUi();
-  auto hasTab = !!currentTab();
+  auto tab    = currentTab();
+  auto hasTab = !!tab;
 
   mwUi->actionMergeSave->setEnabled(hasTab);
   mwUi->actionMergeSaveAs->setEnabled(hasTab);
@@ -83,12 +89,23 @@ Tool::enableMenuActions() {
   mwUi->actionMergeStartMuxing->setEnabled(hasTab);
   mwUi->actionMergeAddToJobQueue->setEnabled(hasTab);
   mwUi->actionMergeShowMkvmergeCommandLine->setEnabled(hasTab);
+  mwUi->actionMergeCopyFirstFileNameToTitle->setEnabled(tab && tab->hasSourceFiles());
+  mwUi->actionMergeCopyOutputFileNameToTitle->setEnabled(tab && tab->hasDestinationFileName());
+}
+
+void
+Tool::enableCopyMenuActions() {
+  auto mwUi = MainWindow::getUi();
+
+  mwUi->actionMergeCopyFirstFileNameToTitle->setEnabled(true);
+  mwUi->actionMergeCopyOutputFileNameToTitle->setEnabled(true);
 }
 
 void
 Tool::showMergeWidget() {
   ui->stack->setCurrentWidget(ui->merges->count() ? ui->mergesPage : ui->noMergesPage);
   enableMenuActions();
+  enableCopyMenuActions();
 }
 
 void
@@ -248,6 +265,20 @@ Tool::showCommandLine() {
   auto tab = currentTab();
   if (tab)
     tab->onShowCommandLine();
+}
+
+void
+Tool::copyFirstFileNameToTitle() {
+  auto tab = currentTab();
+  if (tab)
+    tab->onCopyFirstFileNameToTitle();
+}
+
+void
+Tool::copyOutputFileNameToTitle() {
+  auto tab = currentTab();
+  if (tab)
+    tab->onCopyOutputFileNameToTitle();
 }
 
 void

@@ -56,6 +56,8 @@ public slots:
   virtual void startMuxing();
   virtual void addToJobQueue();
   virtual void showCommandLine();
+  virtual void copyFirstFileNameToTitle();
+  virtual void copyOutputFileNameToTitle();
 
   virtual void toolShown() override;
   virtual void tabTitleChanged();
@@ -74,6 +76,7 @@ protected:
   virtual Tab *currentTab();
 
   virtual void enableMenuActions();
+  virtual void enableCopyMenuActions();
   virtual void showMergeWidget();
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;

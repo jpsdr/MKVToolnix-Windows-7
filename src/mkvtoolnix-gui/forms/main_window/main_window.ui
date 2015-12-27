@@ -78,6 +78,9 @@
     <addaction name="actionMergeAddToJobQueue"/>
     <addaction name="separator"/>
     <addaction name="actionMergeShowMkvmergeCommandLine"/>
+    <addaction name="separator"/>
+    <addaction name="actionMergeCopyFirstFileNameToTitle"/>
+    <addaction name="actionMergeCopyOutputFileNameToTitle"/>
    </widget>
    <widget class="QMenu" name="menuHeaderEditor">
     <property name="title">
@@ -601,6 +604,22 @@
   <action name="actionJobQueueStopImmediately">
    <property name="text">
     <string>Abort all running jobs and stop &amp;immediately</string>
+   </property>
+  </action>
+  <action name="actionMergeCopyFirstFileNameToTitle">
+   <property name="text">
+    <string>Copy first source file's name to file &amp;title</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionMergeCopyOutputFileNameToTitle">
+   <property name="text">
+    <string>Copy o&amp;utput file's name to file title</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
    </property>
   </action>
  </widget>

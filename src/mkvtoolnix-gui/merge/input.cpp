@@ -1670,4 +1670,10 @@ Tab::setSubtitleCharacterSet(QString const &characterSet) {
     Util::setComboBoxTextByData(ui->subtitleCharacterSet, characterSet);
 }
 
+bool
+Tab::hasSourceFiles()
+  const {
+  return !m_config.m_files.isEmpty();
+}
+
 }}}
