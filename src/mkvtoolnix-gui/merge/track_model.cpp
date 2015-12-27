@@ -43,6 +43,7 @@ TrackModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
     { QY("Codec"),                   Q("codec")            },
     { QY("Type"),                    Q("type")             },
+    { QY("Mux this"),                Q("muxThis")          },
     { QY("Language"),                Q("language")         },
     { QY("Name"),                    Q("name")             },
     { QY("Source file"),             Q("sourceFile")       },
@@ -52,7 +53,7 @@ TrackModel::retranslateUi() {
     { QY("Properties"),              Q("properties")       },
   });
 
-  horizontalHeaderItem(5)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   for (auto const &track : *m_tracks) {
     trackUpdated(track);
@@ -98,13 +99,14 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                               Track *track) {
   items[0]->setText(track->isChapters() || track->isGlobalTags() || track->isTags() ? QY("%1 entries").arg(track->m_size) : track->m_codec);
   items[1]->setText(track->nameForType());
-  items[2]->setText(track->isAppended() ? QString{} : track->m_language);
-  items[3]->setText(track->isAppended() ? QString{} : track->m_name);
-  items[4]->setText(QFileInfo{ track->m_file->m_fileName }.fileName());
-  items[5]->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
-  items[6]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("yes") : QY("no"));
-  items[7]->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("yes") : QY("no"));
-  items[8]->setText(summarizeProperties(*track));
+  items[2]->setText(track->m_muxThis ? QY("yes") : QY("no"));
+  items[3]->setText(track->isAppended() ? QString{} : track->m_language);
+  items[4]->setText(track->isAppended() ? QString{} : track->m_name);
+  items[5]->setText(QFileInfo{ track->m_file->m_fileName }.fileName());
+  items[6]->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
+  items[7]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("yes") : QY("no"));
+  items[8]->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("yes") : QY("no"));
+  items[9]->setText(summarizeProperties(*track));
 
   items[0]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
   items[0]->setCheckable(true);
@@ -117,9 +119,10 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                     : track->isTags()       ? m_tagsIcon
                     : track->isGlobalTags() ? m_tagsIcon
                     :                         m_genericIcon);
-  items[6]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
-  items[7]->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? MainWindow::yesIcon() : MainWindow::noIcon());
-  items[5]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  items[2]->setIcon(track->m_muxThis                                                                    ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[7]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[8]->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[6]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
 Track *
