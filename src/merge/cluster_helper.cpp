@@ -453,7 +453,7 @@ cluster_helper_c::render() {
     kax_block_blob_c *previous_block_group = !render_group->m_groups.empty() ? render_group->m_groups.back().get() : nullptr;
     kax_block_blob_c *new_block_group      = previous_block_group;
 
-    auto require_new_render_group          = ! render_group->m_more_data
+    auto require_new_render_group          = !render_group->m_more_data
                                           || !pack->is_key_frame()
                                           || has_codec_state
                                           || pack->has_discard_padding()
@@ -501,7 +501,7 @@ cluster_helper_c::render() {
     if (-1 == m->first_timecode_in_part)
       m->first_timecode_in_part = pack->assigned_timecode;
 
-    m->min_timecode_in_file      = std::min(timestamp_c::ns(pack->assigned_timecode),        m->min_timecode_in_file.value_or_max());
+    m->min_timecode_in_file      = std::min(timestamp_c::ns(pack->assigned_timecode),       m->min_timecode_in_file.value_or_max());
     m->max_timecode_in_file      = std::max(pack->assigned_timecode,                        m->max_timecode_in_file);
     m->max_timecode_and_duration = std::max(pack->assigned_timecode + pack->get_duration(), m->max_timecode_and_duration);
 
