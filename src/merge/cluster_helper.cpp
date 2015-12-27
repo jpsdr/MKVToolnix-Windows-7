@@ -346,7 +346,7 @@ cluster_helper_c::set_duration(render_groups_c *rg) {
   if (rg->m_duration_mandatory) {
     if (   (0 == block_duration)
         || (   (0 < block_duration)
-            && (block_duration != (static_cast<int64_t>(rg->m_durations.size()) * def_duration))))
+            && (RND_TIMECODE_SCALE(block_duration) != RND_TIMECODE_SCALE(static_cast<int64_t>(rg->m_durations.size()) * def_duration))))
       group->set_block_duration(RND_TIMECODE_SCALE(block_duration));
 
   } else if (   (   g_use_durations
@@ -361,23 +361,35 @@ cluster_helper_c::must_duration_be_set(render_groups_c *rg,
                                        packet_cptr &new_packet) {
   size_t i;
   int64_t block_duration = 0;
-  int64_t def_duration   = rg->m_source->get_track_default_duration();
+  int64_t def_duration   = new_packet->source->get_track_default_duration();
+  int64_t group_size     = rg ? rg->m_durations.size() : 0;
 
-  for (i = 0; rg->m_durations.size() > i; ++i)
-    block_duration += rg->m_durations[i];
+  if (rg)
+    for (i = 0; rg->m_durations.size() > i; ++i)
+      block_duration += rg->m_durations[i];
+
   block_duration += new_packet->get_duration();
 
-  if (rg->m_duration_mandatory || new_packet->duration_mandatory) {
-    if (   (0 == block_duration)
+  if ((rg && rg->m_duration_mandatory) || new_packet->duration_mandatory) {
+    if (   (   (0 == block_duration)
+            && (0 != group_size))
         || (   (0 < block_duration)
-            && (block_duration != ((static_cast<int64_t>(rg->m_durations.size()) + 1) * def_duration))))
+            && (RND_TIMECODE_SCALE(block_duration) != RND_TIMECODE_SCALE((group_size + 1) * def_duration)))) {
+      // if (!rg)
+      //   mxinfo(boost::format("YOYO 1 np mand %1% blodu %2% defdur %3% bloduRND %4% defdurRND %5% groupsize %6% ts %7%\n") % new_packet->duration_mandatory % block_duration % ((group_size + 1) * def_duration)
+      //          % RND_TIMECODE_SCALE(block_duration) % RND_TIMECODE_SCALE((group_size + 1) * def_duration) % group_size % format_timestamp(new_packet->assigned_timecode));
       return true;
+    }
 
   } else if (   (   g_use_durations
                  || (0 < def_duration))
              && (0 < block_duration)
-             && (RND_TIMECODE_SCALE(block_duration) != RND_TIMECODE_SCALE((rg->m_durations.size() + 1) * def_duration)))
+             && (RND_TIMECODE_SCALE(block_duration) != RND_TIMECODE_SCALE((group_size + 1) * def_duration))) {
+    // if (!rg)
+    //   mxinfo(boost::format("YOYO 1 np blodu %1% defdur %2% bloduRND %3% defdurRND %4% ts %5%\n") % block_duration % def_duration % RND_TIMECODE_SCALE(block_duration) % RND_TIMECODE_SCALE((group_size + 1) * def_duration)
+    //          % format_timestamp(new_packet->assigned_timecode));
     return true;
+  }
 
   return false;
 }
@@ -457,6 +469,7 @@ cluster_helper_c::render() {
                                           || !pack->is_key_frame()
                                           || has_codec_state
                                           || pack->has_discard_padding()
+                                          || must_duration_be_set(nullptr, pack)
                                           || source->is_lacing_prevented();
 
     if (require_new_render_group) {

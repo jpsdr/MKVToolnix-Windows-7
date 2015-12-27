@@ -1,5 +1,10 @@
 2015-12-27  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: fixed the decisions whether or not to write
+        the last frame of a track as a BlockGroup or a SimpleBlock and
+        whether or not to write a block duration for that frame. Fixes
+        #1545.
+
         * MKVToolNix GUI: new merge tool feature: added menu options in
         the "Merge" menu for copying either the first source file's name
         or the current output file's name into the "file title" control.
