@@ -1647,7 +1647,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
   }
 
   slice_info_t si;
-  if (!parse_slice(nalu, si))
+  if (!parse_slice(mpeg::nalu_to_rbsp(nalu), si))
     return;
 
   if (m_have_incomplete_frame && si.first_slice_segment_in_pic_flag)
