@@ -471,22 +471,22 @@ hevcc_c::unpack(memory_cptr const &mem) {
     // now skip over initial data and read in parameter sets, use byte reader
     byte_reader.skip(23);
 
-    if(num_parameter_sets) {
+    if (num_parameter_sets) {
       read_list(hevcc.m_vps_list, HEVC_NALU_TYPE_VIDEO_PARAM);
       num_parameter_sets -= hevcc.m_vps_list.size();
     }
 
-    if(num_parameter_sets) {
+    if (num_parameter_sets) {
       read_list(hevcc.m_sps_list, HEVC_NALU_TYPE_SEQ_PARAM);
       num_parameter_sets -= hevcc.m_sps_list.size();
     }
 
-    if(num_parameter_sets) {
+    if (num_parameter_sets) {
       read_list(hevcc.m_pps_list, HEVC_NALU_TYPE_PIC_PARAM);
       num_parameter_sets -= hevcc.m_pps_list.size();
     }
 
-    if(num_parameter_sets) {
+    if (num_parameter_sets) {
       read_list(hevcc.m_sei_list, HEVC_NALU_TYPE_PREFIX_SEI);
       num_parameter_sets -= hevcc.m_sei_list.size();
     }
@@ -1245,85 +1245,12 @@ handle_sei_payload(mm_mem_io_c &byte_reader,
                    unsigned int sei_payload_type,
                    unsigned int sei_payload_size,
                    user_data_t &user_data) {
-/*
-  switch(sei_payload_type) {
-    case HEVC_SEI_BUFFERING_PERIOD:
-      mxinfo("  HEVC_SEI_BUFFERING_PERIOD\n");
-    break;
-    case HEVC_SEI_PICTURE_TIMING:
-      mxinfo("  HEVC_SEI_PICTURE_TIMING\n");
-    break;
-    case HEVC_SEI_PAN_SCAN_RECT:
-      mxinfo("  HEVC_SEI_PAN_SCAN_RECT\n");
-    break;
-    case HEVC_SEI_FILLER_PAYLOAD:
-      mxinfo("  HEVC_SEI_FILLER_PAYLOAD\n");
-    break;
-    case HEVC_SEI_USER_DATA_REGISTERED_ITU_T_T35:
-      mxinfo("  HEVC_SEI_USER_DATA_REGISTERED_ITU_T_T35\n");
-    break;
-    case HEVC_SEI_USER_DATA_UNREGISTERED:
-      mxinfo("  HEVC_SEI_USER_DATA_UNREGISTERED\n");
-    break;
-    case HEVC_SEI_RECOVERY_POINT:
-      mxinfo("  HEVC_SEI_RECOVERY_POINT\n");
-    break;
-    case HEVC_SEI_SCENE_INFO:
-      mxinfo("  HEVC_SEI_SCENE_INFO\n");
-    break;
-    case HEVC_SEI_FULL_FRAME_SNAPSHOT:
-      mxinfo("  HEVC_SEI_FULL_FRAME_SNAPSHOT\n");
-    break;
-    case HEVC_SEI_PROGRESSIVE_REFINEMENT_SEGMENT_START:
-      mxinfo("  HEVC_SEI_PROGRESSIVE_REFINEMENT_SEGMENT_START\n");
-    break;
-    case HEVC_SEI_PROGRESSIVE_REFINEMENT_SEGMENT_END:
-      mxinfo("  HEVC_SEI_PROGRESSIVE_REFINEMENT_SEGMENT_END\n");
-    break;
-    case HEVC_SEI_FILM_GRAIN_CHARACTERISTICS:
-      mxinfo("  HEVC_SEI_FILM_GRAIN_CHARACTERISTICS\n");
-    break;
-    case HEVC_SEI_POST_FILTER_HINT:
-      mxinfo("  HEVC_SEI_POST_FILTER_HINT\n");
-    break;
-    case HEVC_SEI_TONE_MAPPING_INFO:
-      mxinfo("  HEVC_SEI_TONE_MAPPING_INFO\n");
-    break;
-    case HEVC_SEI_FRAME_PACKING:
-      mxinfo("  HEVC_SEI_FRAME_PACKING\n");
-    break;
-    case HEVC_SEI_DISPLAY_ORIENTATION:
-      mxinfo("  HEVC_SEI_DISPLAY_ORIENTATION\n");
-    break;
-    case HEVC_SEI_SOP_DESCRIPTION:
-      mxinfo("  HEVC_SEI_SOP_DESCRIPTION\n");
-    break;
-    case HEVC_SEI_ACTIVE_PARAMETER_SETS:
-      mxinfo("  HEVC_SEI_ACTIVE_PARAMETER_SETS\n");
-    break;
-    case HEVC_SEI_DECODING_UNIT_INFO:
-      mxinfo("  HEVC_SEI_DECODING_UNIT_INFO\n");
-    break;
-    case HEVC_SEI_TEMPORAL_LEVEL0_INDEX:
-      mxinfo("  HEVC_SEI_TEMPORAL_LEVEL0_INDEX\n");
-    break;
-    case HEVC_SEI_DECODED_PICTURE_HASH:
-      mxinfo("  HEVC_SEI_DECODED_PICTURE_HASH\n");
-    break;
-    case HEVC_SEI_SCALABLE_NESTING:
-      mxinfo("  HEVC_SEI_SCALABLE_NESTING\n");
-    break;
-    case HEVC_SEI_REGION_REFRESH_INFO:
-      mxinfo("  HEVC_SEI_REGION_REFRESH_INFO\n");
-    break;
-  }
-*/
   std::vector<unsigned char> uuid;
   uint64 file_pos = byte_reader.getFilePointer();
 
   uuid.resize(16);
-  if(sei_payload_type == HEVC_SEI_USER_DATA_UNREGISTERED) {
-    if(sei_payload_size >= 16) {
+  if (sei_payload_type == HEVC_SEI_USER_DATA_UNREGISTERED) {
+    if (sei_payload_size >= 16) {
       byte_reader.read(&uuid[0], 16); // uuid
 
       if (user_data.find(uuid) == user_data.end()) {
@@ -1719,7 +1646,7 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
     m_hevcc_changed    = true;
 
     // Update codec private if needed
-    if(m_codec_private.vps_data_id == (int) vps_info.id) {
+    if (m_codec_private.vps_data_id == (int) vps_info.id) {
       m_codec_private.profile_space              = vps_info.profile_space;
       m_codec_private.tier_flag                  = vps_info.tier_flag;
       m_codec_private.profile_idc                = vps_info.profile_idc;
@@ -1734,7 +1661,7 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
   }
 
   // Update codec private if needed
-  if(-1 == m_codec_private.vps_data_id) {
+  if (-1 == m_codec_private.vps_data_id) {
     m_codec_private.profile_space              = vps_info.profile_space;
     m_codec_private.tier_flag                  = vps_info.tier_flag;
     m_codec_private.profile_idc                = vps_info.profile_idc;
@@ -1779,7 +1706,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
     m_hevcc_changed    = true;
 
     // Update codec private if needed
-    if(m_codec_private.sps_data_id == (int) sps_info.id) {
+    if (m_codec_private.sps_data_id == (int) sps_info.id) {
       m_codec_private.min_spatial_segmentation_idc = sps_info.min_spatial_segmentation_idc;
       m_codec_private.chroma_format_idc = sps_info.chroma_format_idc;
       m_codec_private.bit_depth_luma_minus8 = sps_info.bit_depth_luma_minus8;
@@ -1793,7 +1720,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   m_extra_data.push_back(create_nalu_with_size(parsed_nalu));
 
   // Update codec private if needed
-  if(-1 == m_codec_private.sps_data_id) {
+  if (-1 == m_codec_private.sps_data_id) {
     m_codec_private.min_spatial_segmentation_idc = sps_info.min_spatial_segmentation_idc;
     m_codec_private.chroma_format_idc = sps_info.chroma_format_idc;
     m_codec_private.bit_depth_luma_minus8 = sps_info.bit_depth_luma_minus8;
@@ -1866,32 +1793,23 @@ es_parser_c::handle_nalu(memory_cptr const &nalu) {
 
   mxdebug_if(m_debug_nalu_types, boost::format("NALU type 0x%|1$02x| (%2%) size %3%\n") % type % get_nalu_type_name(type) % nalu->get_size());
 
-  //static unsigned int nalu_num = 0;
-  //char szTemp[64];
-  //sprintf(szTemp, "NALU %d\n", ++nalu_num);
-  //mxinfo(szTemp);
-
   switch (type) {
     case HEVC_NALU_TYPE_VIDEO_PARAM:
-      //mxinfo("HEVC_NALU_TYPE_VIDEO_PARAM\n");
       flush_incomplete_frame();
       handle_vps_nalu(nalu);
       break;
 
     case HEVC_NALU_TYPE_SEQ_PARAM:
-      //mxinfo("HEVC_NALU_TYPE_SEQ_PARAM\n");
       flush_incomplete_frame();
       handle_sps_nalu(nalu);
       break;
 
     case HEVC_NALU_TYPE_PIC_PARAM:
-      //mxinfo("HEVC_NALU_TYPE_PIC_PARAM\n");
       flush_incomplete_frame();
       handle_pps_nalu(nalu);
       break;
 
     case HEVC_NALU_TYPE_PREFIX_SEI:
-      //mxinfo("HEVC_NALU_TYPE_PREFIX_SEI\n");
       flush_incomplete_frame();
       handle_sei_nalu(nalu);
       break;
@@ -1899,7 +1817,6 @@ es_parser_c::handle_nalu(memory_cptr const &nalu) {
     case HEVC_NALU_TYPE_END_OF_SEQ:
     case HEVC_NALU_TYPE_END_OF_STREAM:
     case HEVC_NALU_TYPE_ACCESS_UNIT:
-      //mxinfo("HEVC_NALU_TYPE_SEQ_STREAM_AU\n");
       flush_incomplete_frame();
       break;
 
@@ -1923,7 +1840,6 @@ es_parser_c::handle_nalu(memory_cptr const &nalu) {
     case HEVC_NALU_TYPE_IDR_W_RADL:
     case HEVC_NALU_TYPE_IDR_N_LP:
     case HEVC_NALU_TYPE_CRA_NUT:
-      //mxinfo("HEVC_NALU_TYPE_SLICE\n");
       if (!m_hevcc_ready && !m_vps_info_list.empty() && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
         m_hevcc_ready = true;
         flush_unhandled_nalus();
