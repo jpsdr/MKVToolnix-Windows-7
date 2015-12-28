@@ -1,5 +1,9 @@
 2015-12-28  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: the h.264 code wasn't converting slice NALUs
+        to RBSP form before parsing it resulting in wrongly timestamped
+        frames under certain conditions. Fixes #918 and #1548.
+
         * mkvmerge: bug fix: the MP4 reader can now understand the 'random
         access point' sample grouping information for marking open GOP
         random access points as key frames. Fixes #1543.

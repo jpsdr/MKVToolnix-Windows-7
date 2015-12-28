@@ -1188,7 +1188,7 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
   }
 
   slice_info_t si;
-  if (!parse_slice(nalu, si))
+  if (!parse_slice(nalu_to_rbsp(nalu), si))
     return;
 
   if (m_have_incomplete_frame && flush_decision(si, m_incomplete_frame.m_si))
