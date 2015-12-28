@@ -15,6 +15,11 @@
 
 2015-12-28  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: MP4 edit lists of certain types (two entries,
+        first entry's media_time is -1, second entry's segment_duration is
+        != 0) weren't handled properly resulting in key frame flags being
+        assigned to the wrong frames. Fixes #1547.
+
         * mkvmerge: bug fix: the h.265/HEVC code was writing SEI NALUs
         twice. This had already been mentioned in #1076 but never
         fixed. Patch by Vladimír Pilný.

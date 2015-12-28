@@ -2207,8 +2207,8 @@ qtmp4_demuxer_c::update_editlist_table() {
     raw_offset                  = editlist_table[0].media_time;
     constant_editlist_offset_ns = (-editlist_table[0].media_time + (frame_offset_table.empty() ? 0 : frame_offset_table[0])) * 1000000000ll / time_scale;
 
-  } else if ((editlist_table.size() == 2) && (-1 == editlist_table[0].media_time) && (0 == editlist_table[1].media_time)) {
-    mxdebug_if(m_debug_editlists, boost::format("Track ID %1%: Edit list analysis: type 3: two entries; first with time == -1, second zero time\n") % id);
+  } else if ((editlist_table.size() == 2) && (-1 == editlist_table[0].media_time)) {
+    mxdebug_if(m_debug_editlists, boost::format("Track ID %1%: Edit list analysis: type 3: two entries; first with time == -1\n") % id);
     simple_editlist_type        = 3;
     raw_offset                  = editlist_table[0].segment_duration;
     constant_editlist_offset_ns = (editlist_table[0].segment_duration * 1000000000ll / global_time_scale)  - ((frame_offset_table.empty() ? 0 : frame_offset_table[0]) * 1000000000ll / time_scale);
