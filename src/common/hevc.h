@@ -336,9 +336,6 @@ struct par_extraction_t {
   bool is_valid() const;
 };
 
-void nalu_to_rbsp(memory_cptr &buffer);
-void rbsp_to_nalu(memory_cptr &buffer);
-
 bool parse_vps(memory_cptr &buffer, vps_info_t &vps);
 bool parse_sps(memory_cptr &buffer, sps_info_t &sps, std::vector<vps_info_t> &m_vps_info_list, bool keep_ar_info = false);
 bool parse_pps(memory_cptr &buffer, pps_info_t &pps);

@@ -144,9 +144,6 @@ struct par_extraction_t {
   bool is_valid() const;
 };
 
-memory_cptr nalu_to_rbsp(memory_cptr const &buffer);
-memory_cptr rbsp_to_nalu(memory_cptr const &buffer);
-
 memory_cptr parse_sps(memory_cptr const &buffer, sps_info_t &sps, bool keep_ar_info = false, bool fix_bitstream_frame_rate = false, int64_t duration = -1);
 bool parse_pps(memory_cptr const &buffer, pps_info_t &pps);
 

@@ -22,6 +22,7 @@
 #include "common/endian.h"
 #include "common/hacks.h"
 #include "common/mm_io.h"
+#include "common/mpeg.h"
 #include "common/hevc.h"
 #include "common/strings/formatting.h"
 
@@ -102,10 +103,9 @@ hevcc_c::parse_vps_list(bool ignore_errors) {
     return true;
 
   m_vps_info_list.clear();
-  for (auto &vps: m_vps_list) {
+  for (auto const &vps: m_vps_list) {
     vps_info_t vps_info;
-    auto vps_as_rbsp = vps->clone();
-    nalu_to_rbsp(vps_as_rbsp);
+    auto vps_as_rbsp = mpeg::nalu_to_rbsp(vps);
 
     if (ignore_errors) {
       try {
@@ -127,10 +127,9 @@ hevcc_c::parse_sps_list(bool ignore_errors) {
     return true;
 
   m_sps_info_list.clear();
-  for (auto &sps: m_sps_list) {
+  for (auto const &sps: m_sps_list) {
     sps_info_t sps_info;
-    auto sps_as_rbsp = sps->clone();
-    nalu_to_rbsp(sps_as_rbsp);
+    auto sps_as_rbsp = mpeg::nalu_to_rbsp(sps);
 
     if (ignore_errors) {
       try {
@@ -152,10 +151,9 @@ hevcc_c::parse_pps_list(bool ignore_errors) {
     return true;
 
   m_pps_info_list.clear();
-  for (auto &pps: m_pps_list) {
+  for (auto const &pps: m_pps_list) {
     pps_info_t pps_info;
-    auto pps_as_rbsp = pps->clone();
-    nalu_to_rbsp(pps_as_rbsp);
+    auto pps_as_rbsp = mpeg::nalu_to_rbsp(pps);
 
     if (ignore_errors) {
       try {
@@ -217,9 +215,7 @@ hevcc_c::parse_sei_list() {
 
   mcptr_newsei->set_size(w.get_bit_position() / 8);
 
-  rbsp_to_nalu(mcptr_newsei);
-
-  m_sei_list.push_back(mcptr_newsei);
+  m_sei_list.push_back(mpeg::rbsp_to_nalu(mcptr_newsei));
 
   return true;
 }
@@ -941,51 +937,6 @@ slice_info_t::dump()
          % pps);
 }
 
-void
-nalu_to_rbsp(memory_cptr &buffer) {
-  int pos, size = buffer->get_size();
-  mm_mem_io_c d(nullptr, size, 100);
-  unsigned char *b = buffer->get_buffer();
-
-  for (pos = 0; pos < size; ++pos) {
-    if (   ((pos + 2) < size)
-        && (0 == b[pos])
-        && (0 == b[pos + 1])
-        && (3 == b[pos + 2])) {
-      d.write_uint8(0);
-      d.write_uint8(0);
-      pos += 2;
-
-    } else
-      d.write_uint8(b[pos]);
-  }
-
-  buffer = memory_cptr(new memory_c(d.get_and_lock_buffer(), d.getFilePointer(), true));
-}
-
-void
-rbsp_to_nalu(memory_cptr &buffer) {
-  int pos, size = buffer->get_size();
-  mm_mem_io_c d(nullptr, size, 100);
-  unsigned char *b = buffer->get_buffer();
-
-  for (pos = 0; pos < size; ++pos) {
-    if (   ((pos + 2) < size)
-        && (0 == b[pos])
-        && (0 == b[pos + 1])
-        && (3 >= b[pos + 2])) {
-      d.write_uint8(0);
-      d.write_uint8(0);
-      d.write_uint8(3);
-      ++pos;
-
-    } else
-      d.write_uint8(b[pos]);
-  }
-
-  buffer = memory_cptr(new memory_c(d.get_and_lock_buffer(), d.getFilePointer(), true));
-}
-
 bool
 parse_vps(memory_cptr &buffer,
           vps_info_t &vps) {
@@ -1421,7 +1372,7 @@ extract_par(memory_cptr const &buffer) {
 
     for (auto &nalu : hevcc.m_sps_list) {
       if (!ar_found) {
-        nalu_to_rbsp(nalu);
+        nalu = mpeg::nalu_to_rbsp(nalu);
 
         try {
           sps_info_t sps_info;
@@ -1438,7 +1389,7 @@ extract_par(memory_cptr const &buffer) {
         } catch (mtx::mm_io::end_of_file_x &) {
         }
 
-        rbsp_to_nalu(nalu);
+        nalu = mpeg::rbsp_to_nalu(nalu);
       }
 
       new_hevcc.m_sps_list.push_back(nalu);
@@ -1748,10 +1699,10 @@ void
 es_parser_c::handle_vps_nalu(memory_cptr &nalu) {
   vps_info_t vps_info;
 
-  nalu_to_rbsp(nalu);
+  nalu = mpeg::nalu_to_rbsp(nalu);
   if (!parse_vps(nalu, vps_info))
     return;
-  rbsp_to_nalu(nalu);
+  nalu = mpeg::rbsp_to_nalu(nalu);
 
   size_t i;
   for (i = 0; m_vps_info_list.size() > i; ++i)
@@ -1806,10 +1757,10 @@ void
 es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
   sps_info_t sps_info;
 
-  nalu_to_rbsp(nalu);
+  nalu = mpeg::nalu_to_rbsp(nalu);
   if (!parse_sps(nalu, sps_info, m_vps_info_list, m_keep_ar_info))
     return;
-  rbsp_to_nalu(nalu);
+  nalu = mpeg::rbsp_to_nalu(nalu);
 
   size_t i;
   for (i = 0; m_sps_info_list.size() > i; ++i)
@@ -1878,10 +1829,10 @@ void
 es_parser_c::handle_pps_nalu(memory_cptr &nalu) {
   pps_info_t pps_info;
 
-  nalu_to_rbsp(nalu);
+  nalu = mpeg::nalu_to_rbsp(nalu);
   if (!parse_pps(nalu, pps_info))
     return;
-  rbsp_to_nalu(nalu);
+  nalu = mpeg::rbsp_to_nalu(nalu);
 
   size_t i;
   for (i = 0; m_pps_info_list.size() > i; ++i)
@@ -1906,10 +1857,10 @@ es_parser_c::handle_pps_nalu(memory_cptr &nalu) {
 
 void
 es_parser_c::handle_sei_nalu(memory_cptr &nalu) {
-  nalu_to_rbsp(nalu);
+  nalu = mpeg::nalu_to_rbsp(nalu);
   if (!parse_sei(nalu, m_user_data))
-      return;
-  rbsp_to_nalu(nalu);
+    return;
+  nalu = mpeg::rbsp_to_nalu(nalu);
 
   m_extra_data.push_back(create_nalu_with_size(nalu));
 }
