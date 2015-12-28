@@ -98,24 +98,9 @@ struct qt_chunkmap_t {
 };
 
 struct qt_editlist_t {
-  int64_t  duration;
-  int64_t  pos;
-  uint32_t speed;
-  uint32_t frames;
-  int64_t  start_sample;
-  int64_t  start_frame;
-  int64_t  pts_offset;
-
-  qt_editlist_t()
-    : duration{}
-    , pos{}
-    , speed{}
-    , frames{}
-    , start_sample{}
-    , start_frame{}
-    , pts_offset{}
-  {
-  }
+  int64_t  segment_duration{}, media_time{};
+  uint16_t media_rate_integer{}, media_rate_fraction{};
+  int64_t  frames{}, start_sample{}, start_frame{}, pts_offset{};
 };
 
 struct qt_sample_t {

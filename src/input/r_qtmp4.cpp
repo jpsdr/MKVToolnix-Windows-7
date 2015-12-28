@@ -1334,29 +1334,27 @@ qtmp4_reader_c::handle_elst_atom(qtmp4_demuxer_cptr &new_dmx,
 
   size_t i;
   for (i = 0; i < count; ++i) {
-    qt_editlist_t &editlist = new_dmx->editlist_table[i];
+    auto &editlist = new_dmx->editlist_table[i];
 
     if (1 == version) {
-      editlist.duration = m_in->read_uint64_be();
-      editlist.pos      = static_cast<int64_t>(m_in->read_uint64_be());
+      editlist.segment_duration = m_in->read_uint64_be();
+      editlist.media_time       = static_cast<int64_t>(m_in->read_uint64_be());
     } else {
-      editlist.duration = m_in->read_uint32_be();
-      editlist.pos      = static_cast<int32_t>(m_in->read_uint32_be());
+      editlist.segment_duration = m_in->read_uint32_be();
+      editlist.media_time       = static_cast<int32_t>(m_in->read_uint32_be());
     }
-    editlist.speed    = m_in->read_uint32_be();
+    editlist.media_rate_integer  = m_in->read_uint16_be();
+    editlist.media_rate_fraction = m_in->read_uint16_be();
   }
 
   mxdebug_if(m_debug_headers, boost::format("%1%Edit list table: %2% entries\n") % space(level * 2 + 1) % count);
-  if (m_debug_tables) {
-    i = 0;
-    for (auto const &editlist : new_dmx->editlist_table)
-      mxdebug_if(m_debug_tables, boost::format("%1%%2%: duration %3% pos %4% speed %5%\n")
-                 % space((level + 1) * 2 + 1)
-                 % i++
-                 % editlist.duration
-                 % editlist.pos
-                 % editlist.speed);
-  }
+  if (!m_debug_tables)
+    return;
+
+  i = 0;
+  for (auto const &editlist : new_dmx->editlist_table)
+    mxdebug_if(m_debug_tables, boost::format("%1%%2%: segment duration %3% media time %4% media rate %5%.%6%\n")
+               % space((level + 1) * 2 + 1) % i++ % editlist.segment_duration % editlist.media_time % editlist.media_rate_integer % editlist.media_rate_fraction);
 }
 
 void
@@ -2197,30 +2195,30 @@ qtmp4_demuxer_c::update_editlist_table() {
   int64_t raw_offset               = 0;
   auto offset_in_global_time_scale = false;
 
-  if ((editlist_table.size() == 1) && (0 == editlist_table[0].pos)) {
+  if ((editlist_table.size() == 1) && (0 == editlist_table[0].media_time)) {
     mxdebug_if(m_debug_editlists, boost::format("Track ID %1%: Edit list analysis: type 1: one entry, zero time\n") % id);
     simple_editlist_type = 1;
 
-  } else if ((editlist_table.size() == 1) && (0 < editlist_table[0].pos)) {
+  } else if ((editlist_table.size() == 1) && (0 < editlist_table[0].media_time)) {
     mxdebug_if(m_debug_editlists,
                boost::format("Track ID %1%: Edit list analysis: type 2: one entry, positive time, %2%\n")
-               % id % (frame_offset_table.empty() ? "no frame offset table" : frame_offset_table[0] == editlist_table[0].pos ? "same as first frame offset" : "different from first frame offset"));
+               % id % (frame_offset_table.empty() ? "no frame offset table" : frame_offset_table[0] == editlist_table[0].media_time ? "same as first frame offset" : "different from first frame offset"));
     simple_editlist_type        = 2;
-    raw_offset                  = editlist_table[0].pos;
-    constant_editlist_offset_ns = (-editlist_table[0].pos + (frame_offset_table.empty() ? 0 : frame_offset_table[0])) * 1000000000ll / time_scale;
+    raw_offset                  = editlist_table[0].media_time;
+    constant_editlist_offset_ns = (-editlist_table[0].media_time + (frame_offset_table.empty() ? 0 : frame_offset_table[0])) * 1000000000ll / time_scale;
 
-  } else if ((editlist_table.size() == 2) && (-1 == editlist_table[0].pos) && (0 == editlist_table[1].pos)) {
+  } else if ((editlist_table.size() == 2) && (-1 == editlist_table[0].media_time) && (0 == editlist_table[1].media_time)) {
     mxdebug_if(m_debug_editlists, boost::format("Track ID %1%: Edit list analysis: type 3: two entries; first with time == -1, second zero time\n") % id);
     simple_editlist_type        = 3;
-    raw_offset                  = editlist_table[0].duration;
-    constant_editlist_offset_ns = (editlist_table[0].duration * 1000000000ll / global_time_scale)  - ((frame_offset_table.empty() ? 0 : frame_offset_table[0]) * 1000000000ll / time_scale);
+    raw_offset                  = editlist_table[0].segment_duration;
+    constant_editlist_offset_ns = (editlist_table[0].segment_duration * 1000000000ll / global_time_scale)  - ((frame_offset_table.empty() ? 0 : frame_offset_table[0]) * 1000000000ll / time_scale);
     offset_in_global_time_scale = true;
 
   } else if (m_debug_editlists) {
-    std::stringstream output;
+    std::string output;
     for (auto &edit : editlist_table)
-      output << " <d:" << edit.duration << " t:" << edit.pos << ">";
-    mxdebug(boost::format("Track ID %1%: Edit list analysis: type 0; %2% entries:%3%\n") % id % editlist_table.size() % output.str());
+      output += (boost::format(" <d:%1% t:%2% r:%3%.%4%>") % edit.segment_duration % edit.media_time % edit.media_rate_integer % edit.media_rate_fraction).str();
+    mxdebug(boost::format("Track ID %1%: Edit list analysis: type 0; %2% entries:%3%\n") % id % editlist_table.size() % output);
   }
 
   if (simple_editlist_type) {
@@ -2244,10 +2242,10 @@ qtmp4_demuxer_c::update_editlist_table() {
   mxdebug_if(m_debug_tables, boost::format("Updating edit list table for track %1%\n") % id);
 
   for (i = 0; editlist_table.size() > i; ++i) {
-    qt_editlist_t &el = editlist_table[i];
-    int64_t pts       = el.pos - (i < num_frame_offsets ? frame_offset_table[i] : 0);
-    auto sample       = 0u;
-    el.start_frame    = frame;
+    auto &el       = editlist_table[i];
+    int64_t pts    = el.media_time - (i < num_frame_offsets ? frame_offset_table[i] : 0);
+    auto sample    = 0u;
+    el.start_frame = frame;
 
     // find start sample
     for (; sample_table.size() > sample; ++sample)
@@ -2255,9 +2253,9 @@ qtmp4_demuxer_c::update_editlist_table() {
         break;
 
     el.start_sample  = sample;
-    el.pts_offset    = (e_pts       * time_scale) / global_time_scale - sample_table[sample].pts;
-    pts             += (el.duration * time_scale) / global_time_scale;
-    e_pts           += el.duration;
+    el.pts_offset    = (e_pts               * time_scale) / global_time_scale - sample_table[sample].pts;
+    pts             += (el.segment_duration * time_scale) / global_time_scale;
+    e_pts           += el.segment_duration;
 
     // find end sample
     for (; sample_table.size() > sample; ++sample)
@@ -2267,7 +2265,9 @@ qtmp4_demuxer_c::update_editlist_table() {
     el.frames  = sample - el.start_sample;
     frame     += el.frames;
 
-    mxdebug_if(m_debug_tables, boost::format("  %1%: pts: %2%  1st_sample: %3%  frames: %4% (%|5$5.3f|s)  pts_offset: %6%\n") % i % el.pos % el.start_sample % el.frames % (static_cast<double>(el.duration) / time_scale) % el.pts_offset);
+    mxdebug_if(m_debug_tables,
+               boost::format("  %1%: pts: %2%  1st_sample: %3%  frames: %4% (%|5$5.3f|s)  pts_offset: %6%\n")
+               % i % el.media_time % el.start_sample % el.frames % (static_cast<double>(el.segment_duration) / time_scale) % el.pts_offset);
   }
 }
 
