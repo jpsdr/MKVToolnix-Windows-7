@@ -207,6 +207,27 @@ struct qt_fragment_t {
   {}
 };
 
+struct qt_random_access_point_t {
+  bool num_leading_samples_known{};
+  unsigned int num_leading_samples{};
+
+  qt_random_access_point_t(bool p_num_leading_samples_known, unsigned int p_num_leading_samples)
+    : num_leading_samples_known{p_num_leading_samples_known}
+    , num_leading_samples{p_num_leading_samples}
+  {
+  }
+};
+
+struct qt_sample_to_group_t {
+  uint32_t sample_count{}, group_description_index{};
+
+  qt_sample_to_group_t(uint32_t p_sample_count, uint32_t p_group_description_index)
+    : sample_count{p_sample_count}
+    , group_description_index{p_group_description_index}
+  {
+  }
+};
+
 class qtmp4_reader_c;
 
 struct qtmp4_demuxer_c {
@@ -233,6 +254,8 @@ struct qtmp4_demuxer_c {
   std::vector<qt_editlist_t> editlist_table;
   std::vector<qt_frame_offset_t> raw_frame_offset_table;
   std::vector<int32_t> frame_offset_table;
+  std::vector<qt_random_access_point_t> random_access_point_table;
+  std::unordered_map<uint32_t, std::vector<qt_sample_to_group_t> > sample_to_group_tables;
 
   std::vector<int64_t> timecodes, durations, frame_indices;
 
@@ -354,6 +377,7 @@ struct qtmp4_demuxer_c {
 private:
   void build_index_chunk_mode();
   void build_index_constant_sample_size_mode();
+  void mark_open_gop_random_access_points_as_key_frames();
 
   void calculate_timecodes_constant_sample_size();
   void calculate_timecodes_variable_sample_size();
@@ -466,6 +490,8 @@ protected:
   virtual void handle_cmov_atom(qt_atom_t parent, int level);
   virtual void handle_cmvd_atom(qt_atom_t parent, int level);
   virtual void handle_ctts_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_sgpd_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
+  virtual void handle_sbgp_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
   virtual void handle_dcom_atom(qt_atom_t parent, int level);
   virtual void handle_hdlr_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);
   virtual void handle_mdhd_atom(qtmp4_demuxer_cptr &new_dmx, qt_atom_t parent, int level);

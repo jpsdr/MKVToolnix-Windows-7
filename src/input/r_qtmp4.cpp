@@ -452,6 +452,76 @@ qtmp4_reader_c::handle_ctts_atom(qtmp4_demuxer_cptr &new_dmx,
 }
 
 void
+qtmp4_reader_c::handle_sgpd_atom(qtmp4_demuxer_cptr &new_dmx,
+                                 qt_atom_t,
+                                 int level) {
+  auto version = m_in->read_uint8();
+  m_in->skip(3);                // flags
+
+  auto grouping_type              = fourcc_c{m_in};
+  auto default_description_length = version == 1 ? m_in->read_uint32_be() : uint32_t{};
+
+  if (version >= 2)
+    m_in->skip(4);              // default_sample_description_index
+
+  auto count = m_in->read_uint32_be();
+
+  mxdebug_if(m_debug_headers, boost::format("%1%Sample group description table: version %2%, type '%3%', %4% raw entries\n") % space(level * 2 + 2) % static_cast<unsigned int>(version) % grouping_type % count);
+
+  if (grouping_type != "rap ")
+    return;
+
+  for (auto idx = 0u; idx < count; ++idx) {
+    if ((version == 1) && (default_description_length == 0))
+      m_in->skip(4);            // description_length
+
+    auto byte                      = m_in->read_uint8();
+    auto num_leading_samples_known = (byte & 0x80) == 0x80;
+    auto num_leading_samples       = static_cast<unsigned int>(byte & 0x7f);
+
+    new_dmx->random_access_point_table.emplace_back(num_leading_samples_known, num_leading_samples);
+  }
+
+  if (m_debug_tables) {
+    auto idx = 0;
+    for (auto const &rap : new_dmx->random_access_point_table)
+      mxdebug(boost::format("%1%%2%: leading samples known %3% num %4%\n") % space((level + 1) * 2 + 2) % idx++ % rap.num_leading_samples_known % rap.num_leading_samples);
+  }
+}
+
+void
+qtmp4_reader_c::handle_sbgp_atom(qtmp4_demuxer_cptr &new_dmx,
+                                 qt_atom_t,
+                                 int level) {
+  auto version = m_in->read_uint8();
+  m_in->skip(3);                // flags
+
+  auto grouping_type = fourcc_c{m_in};
+
+  if (version == 1)
+    m_in->skip(4);              // grouping_type_parameter
+
+  auto count = m_in->read_uint32_be();
+
+  mxdebug_if(m_debug_headers, boost::format("%1%Sample to group table: version %2%, type '%3%', %4% raw entries\n") % space(level * 2 + 2) % static_cast<unsigned int>(version) % grouping_type % count);
+
+  auto &table = new_dmx->sample_to_group_tables[grouping_type.value()];
+
+  for (auto idx = 0u; idx < count; ++idx) {
+    auto sample_count            = m_in->read_uint32_be();
+    auto group_description_index = m_in->read_uint32_be();
+
+    table.emplace_back(sample_count, group_description_index);
+  }
+
+  if (m_debug_tables) {
+    auto idx = 0;
+    for (auto const &s2g : table)
+      mxdebug(boost::format("%1%%2%: sample count %3% group description %4%\n") % space((level + 1) * 2 + 2) % idx++ % s2g.sample_count % s2g.group_description_index);
+  }
+}
+
+void
 qtmp4_reader_c::handle_dcom_atom(qt_atom_t,
                                  int level) {
   m_compression_algorithm = fourcc_c{m_in->read_uint32_be()};
@@ -1036,6 +1106,12 @@ qtmp4_reader_c::handle_stbl_atom(qtmp4_demuxer_cptr &new_dmx,
 
     else if (atom.fourcc == "ctts")
       handle_ctts_atom(new_dmx, atom.to_parent(), level + 1);
+
+    else if (atom.fourcc == "sgpd")
+      handle_sgpd_atom(new_dmx, atom.to_parent(), level + 1);
+
+    else if (atom.fourcc == "sbgp")
+      handle_sbgp_atom(new_dmx, atom.to_parent(), level + 1);
 
     skip_atom();
     parent.size -= atom.size;
@@ -2201,6 +2277,8 @@ qtmp4_demuxer_c::build_index() {
     build_index_constant_sample_size_mode();
   else
     build_index_chunk_mode();
+
+  mark_open_gop_random_access_points_as_key_frames();
 }
 
 void
@@ -2258,6 +2336,31 @@ qtmp4_demuxer_c::build_index_chunk_mode() {
     }
 
     m_index.push_back(qt_index_t(sample_table[act_frame_idx].pos, sample_table[act_frame_idx].size, timecodes[frame_idx], durations[frame_idx], is_keyframe));
+  }
+}
+
+void
+qtmp4_demuxer_c::mark_open_gop_random_access_points_as_key_frames() {
+  // Mark samples indicated by the 'rap ' sample group to be key
+  // frames, too.
+  auto table_itr = sample_to_group_tables.find(fourcc_c{"rap "}.value());
+  if (table_itr == sample_to_group_tables.end())
+    return;
+
+  auto const num_index_entries        = m_index.size();
+  auto const num_random_access_points = random_access_point_table.size();
+  auto current_sample                 = 0u;
+
+  for (auto const &s2g : table_itr->second) {
+    if (s2g.group_description_index && ((s2g.group_description_index - 1) < num_random_access_points)) {
+      for (auto end = std::min<size_t>(current_sample + s2g.sample_count, num_index_entries); current_sample < end; ++current_sample)
+        m_index[current_sample].is_keyframe = true;
+
+    } else
+      current_sample += s2g.sample_count;
+
+    if (current_sample >= num_index_entries)
+      return;
   }
 }
 
