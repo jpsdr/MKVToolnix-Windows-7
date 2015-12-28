@@ -144,11 +144,11 @@ struct par_extraction_t {
   bool is_valid() const;
 };
 
-void nalu_to_rbsp(memory_cptr &buffer);
-void rbsp_to_nalu(memory_cptr &buffer);
+memory_cptr nalu_to_rbsp(memory_cptr const &buffer);
+memory_cptr rbsp_to_nalu(memory_cptr const &buffer);
 
 bool parse_sps(memory_cptr &buffer, sps_info_t &sps, bool keep_ar_info = false, bool fix_bitstream_frame_rate = false, int64_t duration = -1);
-bool parse_pps(memory_cptr &buffer, pps_info_t &pps);
+bool parse_pps(memory_cptr const &buffer, pps_info_t &pps);
 
 par_extraction_t extract_par(memory_cptr const &buffer);
 memory_cptr fix_sps_fps(memory_cptr const &buffer, int64_t duration);
@@ -420,11 +420,11 @@ public:
   std::pair<int64_t, int64_t> const get_display_dimensions(int width = -1, int height = -1) const;
 
 protected:
-  bool parse_slice(memory_cptr &buffer, slice_info_t &si);
+  bool parse_slice(memory_cptr const &buffer, slice_info_t &si);
   void handle_sps_nalu(memory_cptr &nalu);
-  void handle_pps_nalu(memory_cptr &nalu);
-  void handle_sei_nalu(memory_cptr &nalu);
-  void handle_slice_nalu(memory_cptr &nalu);
+  void handle_pps_nalu(memory_cptr const &nalu);
+  void handle_sei_nalu(memory_cptr const &nalu);
+  void handle_slice_nalu(memory_cptr const &nalu);
   void cleanup();
   bool flush_decision(slice_info_t &si, slice_info_t &ref);
   void flush_incomplete_frame();

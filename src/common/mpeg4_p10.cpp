@@ -74,8 +74,7 @@ avcc_c::parse_sps_list(bool ignore_errors) {
   m_sps_info_list.clear();
   for (auto &sps: m_sps_list) {
     sps_info_t sps_info;
-    auto sps_as_rbsp = sps->clone();
-    nalu_to_rbsp(sps_as_rbsp);
+    auto sps_as_rbsp = nalu_to_rbsp(sps);
 
     if (ignore_errors) {
       try {
@@ -99,8 +98,7 @@ avcc_c::parse_pps_list(bool ignore_errors) {
   m_pps_info_list.clear();
   for (auto &pps: m_pps_list) {
     pps_info_t pps_info;
-    auto pps_as_rbsp = pps->clone();
-    nalu_to_rbsp(pps_as_rbsp);
+    auto pps_as_rbsp = nalu_to_rbsp(pps);
 
     if (ignore_errors) {
       try {
@@ -427,8 +425,8 @@ mpeg4::p10::slice_info_t::dump()
          % pps);
 }
 
-void
-mpeg4::p10::nalu_to_rbsp(memory_cptr &buffer) {
+memory_cptr
+mpeg4::p10::nalu_to_rbsp(memory_cptr const &buffer) {
   int pos, size = buffer->get_size();
   mm_mem_io_c d(nullptr, size, 100);
   unsigned char *b = buffer->get_buffer();
@@ -446,11 +444,11 @@ mpeg4::p10::nalu_to_rbsp(memory_cptr &buffer) {
       d.write_uint8(b[pos]);
   }
 
-  buffer = memory_cptr(new memory_c(d.get_and_lock_buffer(), d.getFilePointer(), true));
+  return memory_c::clone(d.get_and_lock_buffer(), d.getFilePointer());
 }
 
-void
-mpeg4::p10::rbsp_to_nalu(memory_cptr &buffer) {
+memory_cptr
+mpeg4::p10::rbsp_to_nalu(memory_cptr const &buffer) {
   int pos, size = buffer->get_size();
   mm_mem_io_c d(nullptr, size, 100);
   unsigned char *b = buffer->get_buffer();
@@ -469,7 +467,7 @@ mpeg4::p10::rbsp_to_nalu(memory_cptr &buffer) {
       d.write_uint8(b[pos]);
   }
 
-  buffer = memory_cptr(new memory_c(d.get_and_lock_buffer(), d.getFilePointer(), true));
+  return memory_c::clone(d.get_and_lock_buffer(), d.getFilePointer());
 }
 
 bool
@@ -740,7 +738,7 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
 }
 
 bool
-mpeg4::p10::parse_pps(memory_cptr &buffer,
+mpeg4::p10::parse_pps(memory_cptr const &buffer,
                       pps_info_t &pps) {
   try {
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
@@ -791,11 +789,11 @@ mpeg4::p10::extract_par(memory_cptr const &buffer) {
 
     for (auto &nalu : avcc.m_sps_list) {
       if (!ar_found) {
-        nalu_to_rbsp(nalu);
+        auto nalu_as_rbsp = nalu_to_rbsp(nalu);
 
         try {
           sps_info_t sps_info;
-          if (mpeg4::p10::parse_sps(nalu, sps_info)) {
+          if (mpeg4::p10::parse_sps(nalu_as_rbsp, sps_info)) {
             if (s_debug_ar)
               sps_info.dump();
 
@@ -804,11 +802,11 @@ mpeg4::p10::extract_par(memory_cptr const &buffer) {
               par_num = sps_info.par_num;
               par_den = sps_info.par_den;
             }
+
+            nalu = rbsp_to_nalu(nalu_as_rbsp);
           }
         } catch (mtx::mm_io::end_of_file_x &) {
         }
-
-        rbsp_to_nalu(nalu);
       }
 
       new_avcc.m_sps_list.push_back(nalu);
@@ -849,10 +847,10 @@ mpeg4::p10::fix_sps_fps(memory_cptr const &buffer,
       avcc.read(nalu, length);
 
       if ((0 < length) && ((nalu->get_buffer()[0] & 0x1f) == NALU_TYPE_SEQ_PARAM)) {
-        nalu_to_rbsp(nalu);
+        nalu = nalu_to_rbsp(nalu);
         sps_info_t sps_info;
         parse_sps(nalu, sps_info, true, true, duration);
-        rbsp_to_nalu(nalu);
+        nalu = rbsp_to_nalu(nalu);
       }
 
       new_avcc.write_uint16_be(nalu->get_size());
@@ -1183,7 +1181,7 @@ mpeg4::p10::avc_es_parser_c::flush_unhandled_nalus() {
 }
 
 void
-mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr &nalu) {
+mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
   if (!m_avcc_ready) {
     m_unhandled_nalus.push_back(nalu);
     return;
@@ -1248,12 +1246,12 @@ void
 mpeg4::p10::avc_es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
   sps_info_t sps_info;
 
-  nalu_to_rbsp(nalu);
+  nalu = nalu_to_rbsp(nalu);
 
   if (!parse_sps(nalu, sps_info, m_keep_ar_info, m_fix_bitstream_frame_rate, duration_for(0, true)))
     return;
 
-  rbsp_to_nalu(nalu);
+  nalu = rbsp_to_nalu(nalu);
 
   size_t i;
   for (i = 0; m_sps_info_list.size() > i; ++i)
@@ -1299,13 +1297,11 @@ mpeg4::p10::avc_es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
 }
 
 void
-mpeg4::p10::avc_es_parser_c::handle_pps_nalu(memory_cptr &nalu) {
+mpeg4::p10::avc_es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
   pps_info_t pps_info;
 
-  nalu_to_rbsp(nalu);
-  if (!parse_pps(nalu, pps_info))
+  if (!parse_pps(nalu_to_rbsp(nalu), pps_info))
     return;
-  rbsp_to_nalu(nalu);
 
   size_t i;
   for (i = 0; m_pps_info_list.size() > i; ++i)
@@ -1329,11 +1325,11 @@ mpeg4::p10::avc_es_parser_c::handle_pps_nalu(memory_cptr &nalu) {
 }
 
 void
-mpeg4::p10::avc_es_parser_c::handle_sei_nalu(memory_cptr &nalu) {
+mpeg4::p10::avc_es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
   try {
-    nalu_to_rbsp(nalu);
+    auto nalu_as_rbsp = nalu_to_rbsp(nalu);
 
-    bit_reader_c r(nalu->get_buffer(), nalu->get_size());
+    bit_reader_c r(nalu_as_rbsp->get_buffer(), nalu_as_rbsp->get_size());
 
     r.skip_bits(8);
 
@@ -1419,7 +1415,7 @@ mpeg4::p10::avc_es_parser_c::handle_nalu(memory_cptr nalu) {
 }
 
 bool
-mpeg4::p10::avc_es_parser_c::parse_slice(memory_cptr &buffer,
+mpeg4::p10::avc_es_parser_c::parse_slice(memory_cptr const &buffer,
                                          slice_info_t &si) {
   try {
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
