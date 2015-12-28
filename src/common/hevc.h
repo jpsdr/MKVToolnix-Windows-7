@@ -336,10 +336,10 @@ struct par_extraction_t {
   bool is_valid() const;
 };
 
-bool parse_vps(memory_cptr &buffer, vps_info_t &vps);
-bool parse_sps(memory_cptr &buffer, sps_info_t &sps, std::vector<vps_info_t> &m_vps_info_list, bool keep_ar_info = false);
-bool parse_pps(memory_cptr &buffer, pps_info_t &pps);
-bool parse_sei(memory_cptr &buffer, user_data_t &user_data);
+bool parse_vps(memory_cptr const &buffer, vps_info_t &vps);
+memory_cptr parse_sps(memory_cptr const &buffer, sps_info_t &sps, std::vector<vps_info_t> &m_vps_info_list, bool keep_ar_info = false);
+bool parse_pps(memory_cptr const &buffer, pps_info_t &pps);
+bool parse_sei(memory_cptr const &buffer, user_data_t &user_data);
 bool handle_sei_payload(mm_mem_io_c &byte_reader, unsigned int sei_payload_type, unsigned int sei_payload_size, user_data_t &user_data);
 
 par_extraction_t extract_par(memory_cptr const &buffer);
@@ -558,7 +558,7 @@ public:
     return m_sps_info_list.begin()->height;
   }
 
-  void handle_nalu(memory_cptr nalu);
+  void handle_nalu(memory_cptr const &nalu);
 
   void add_timecode(int64_t timecode);
 
@@ -607,12 +607,12 @@ public:
   static std::string get_nalu_type_name(int type);
 
 protected:
-  bool parse_slice(memory_cptr &buffer, slice_info_t &si);
-  void handle_vps_nalu(memory_cptr &nalu);
-  void handle_sps_nalu(memory_cptr &nalu);
-  void handle_pps_nalu(memory_cptr &nalu);
-  void handle_sei_nalu(memory_cptr &nalu);
-  void handle_slice_nalu(memory_cptr &nalu);
+  bool parse_slice(memory_cptr const &buffer, slice_info_t &si);
+  void handle_vps_nalu(memory_cptr const &nalu);
+  void handle_sps_nalu(memory_cptr const &nalu);
+  void handle_pps_nalu(memory_cptr const &nalu);
+  void handle_sei_nalu(memory_cptr const &nalu);
+  void handle_slice_nalu(memory_cptr const &nalu);
   void cleanup();
   void flush_incomplete_frame();
   void flush_unhandled_nalus();

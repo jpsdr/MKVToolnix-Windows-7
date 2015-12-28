@@ -938,7 +938,7 @@ slice_info_t::dump()
 }
 
 bool
-parse_vps(memory_cptr &buffer,
+parse_vps(memory_cptr const &buffer,
           vps_info_t &vps) {
   int size              = buffer->get_size();
   unsigned char *newvps = (unsigned char *)safemalloc(size + 100);
@@ -1012,8 +1012,8 @@ parse_vps(memory_cptr &buffer,
   return true;
 }
 
-bool
-parse_sps(memory_cptr &buffer,
+memory_cptr
+parse_sps(memory_cptr const &buffer,
           sps_info_t &sps,
           std::vector<vps_info_t> &m_vps_info_list,
           bool keep_ar_info) {
@@ -1034,7 +1034,7 @@ parse_sps(memory_cptr &buffer,
 
   w.copy_bits(1, r);            // forbidden_zero_bit
   if (w.copy_bits(6, r) != HEVC_NALU_TYPE_SEQ_PARAM)  // nal_unit_type
-    return false;
+    return {};
   w.copy_bits(6, r);            // nuh_reserved_zero_6bits
   w.copy_bits(3, r);            // nuh_temporal_id_plus1
 
@@ -1047,7 +1047,7 @@ parse_sps(memory_cptr &buffer,
     if (m_vps_info_list[vps_idx].id == sps.vps_id)
       break;
   if (m_vps_info_list.size() == vps_idx)
-    return false;
+    return {};
 
   sps.vps = vps_idx;
 
@@ -1134,10 +1134,9 @@ parse_sps(memory_cptr &buffer,
 
   // We potentially changed the NALU data with regards to the handling of keep_ar_info.
   // Therefore, we replace buffer with the changed NALU that exists in w.
-  buffer = mcptr_newsps;
-  buffer->set_size(w.get_bit_position() / 8);
+  mcptr_newsps->resize(w.get_bit_position() / 8);
 
-  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffer);
+  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *mcptr_newsps);
 
   // See ITU-T H.265 section 7.4.3.2 for the width/height calculation
   // formula.
@@ -1149,11 +1148,11 @@ parse_sps(memory_cptr &buffer,
     sps.height       -= std::min<unsigned int>((sub_height_c * sps.conf_win_bottom_offset) + (sub_height_c * sps.conf_win_top_offset),  sps.height);
   }
 
-  return true;
+  return mcptr_newsps;
 }
 
 bool
-parse_pps(memory_cptr &buffer,
+parse_pps(memory_cptr const &buffer,
           pps_info_t &pps) {
   try {
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
@@ -1182,7 +1181,7 @@ parse_pps(memory_cptr &buffer,
 
 // HEVC spec, 7.3.2.4
 bool
-parse_sei(memory_cptr &buffer,
+parse_sei(memory_cptr const &buffer,
           user_data_t &user_data) {
   try {
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
@@ -1372,11 +1371,11 @@ extract_par(memory_cptr const &buffer) {
 
     for (auto &nalu : hevcc.m_sps_list) {
       if (!ar_found) {
-        nalu = mpeg::nalu_to_rbsp(nalu);
-
         try {
           sps_info_t sps_info;
-          if (parse_sps(nalu, sps_info, new_hevcc.m_vps_info_list)) {
+          auto parsed_nalu = parse_sps(mpeg::nalu_to_rbsp(nalu), sps_info, new_hevcc.m_vps_info_list);
+
+          if (parsed_nalu) {
             if (s_debug_ar)
               sps_info.dump();
 
@@ -1385,11 +1384,11 @@ extract_par(memory_cptr const &buffer) {
               par_num = sps_info.par_num;
               par_den = sps_info.par_den;
             }
+
+            nalu = mpeg::rbsp_to_nalu(parsed_nalu);
           }
         } catch (mtx::mm_io::end_of_file_x &) {
         }
-
-        nalu = mpeg::rbsp_to_nalu(nalu);
       }
 
       new_hevcc.m_sps_list.push_back(nalu);
@@ -1641,7 +1640,7 @@ es_parser_c::flush_unhandled_nalus() {
 }
 
 void
-es_parser_c::handle_slice_nalu(memory_cptr &nalu) {
+es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
   if (!m_hevcc_ready) {
     m_unhandled_nalus.push_back(nalu);
     return;
@@ -1696,13 +1695,11 @@ es_parser_c::handle_slice_nalu(memory_cptr &nalu) {
 }
 
 void
-es_parser_c::handle_vps_nalu(memory_cptr &nalu) {
+es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
   vps_info_t vps_info;
 
-  nalu = mpeg::nalu_to_rbsp(nalu);
-  if (!parse_vps(nalu, vps_info))
+  if (!parse_vps(mpeg::nalu_to_rbsp(nalu), vps_info))
     return;
-  nalu = mpeg::rbsp_to_nalu(nalu);
 
   size_t i;
   for (i = 0; m_vps_info_list.size() > i; ++i)
@@ -1754,13 +1751,14 @@ es_parser_c::handle_vps_nalu(memory_cptr &nalu) {
 }
 
 void
-es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
+es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   sps_info_t sps_info;
 
-  nalu = mpeg::nalu_to_rbsp(nalu);
-  if (!parse_sps(nalu, sps_info, m_vps_info_list, m_keep_ar_info))
+  auto parsed_nalu = parse_sps(mpeg::nalu_to_rbsp(nalu), sps_info, m_vps_info_list, m_keep_ar_info);
+  if (!parsed_nalu)
     return;
-  nalu = mpeg::rbsp_to_nalu(nalu);
+
+  parsed_nalu = mpeg::rbsp_to_nalu(parsed_nalu);
 
   size_t i;
   for (i = 0; m_sps_info_list.size() > i; ++i)
@@ -1769,7 +1767,7 @@ es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
 
   bool use_sps_info = true;
   if (m_sps_info_list.size() == i) {
-    m_sps_list.push_back(nalu);
+    m_sps_list.push_back(parsed_nalu);
     m_sps_info_list.push_back(sps_info);
     m_hevcc_changed = true;
 
@@ -1777,7 +1775,7 @@ es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
     mxverb(2, boost::format("hevc: SPS ID %|1$04x| changed; checksum old %|2$04x| new %|3$04x|\n") % sps_info.id % m_sps_info_list[i].checksum % sps_info.checksum);
 
     m_sps_info_list[i] = sps_info;
-    m_sps_list[i]      = nalu;
+    m_sps_list[i]      = parsed_nalu;
     m_hevcc_changed    = true;
 
     // Update codec private if needed
@@ -1792,7 +1790,7 @@ es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
   } else
     use_sps_info = false;
 
-  m_extra_data.push_back(create_nalu_with_size(nalu));
+  m_extra_data.push_back(create_nalu_with_size(parsed_nalu));
 
   // Update codec private if needed
   if(-1 == m_codec_private.sps_data_id) {
@@ -1826,13 +1824,11 @@ es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
 }
 
 void
-es_parser_c::handle_pps_nalu(memory_cptr &nalu) {
+es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
   pps_info_t pps_info;
 
-  nalu = mpeg::nalu_to_rbsp(nalu);
-  if (!parse_pps(nalu, pps_info))
+  if (!parse_pps(mpeg::nalu_to_rbsp(nalu), pps_info))
     return;
-  nalu = mpeg::rbsp_to_nalu(nalu);
 
   size_t i;
   for (i = 0; m_pps_info_list.size() > i; ++i)
@@ -1856,17 +1852,13 @@ es_parser_c::handle_pps_nalu(memory_cptr &nalu) {
 }
 
 void
-es_parser_c::handle_sei_nalu(memory_cptr &nalu) {
-  nalu = mpeg::nalu_to_rbsp(nalu);
-  if (!parse_sei(nalu, m_user_data))
-    return;
-  nalu = mpeg::rbsp_to_nalu(nalu);
-
-  m_extra_data.push_back(create_nalu_with_size(nalu));
+es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
+  if (parse_sei(mpeg::nalu_to_rbsp(nalu), m_user_data))
+    m_extra_data.push_back(create_nalu_with_size(nalu));
 }
 
 void
-es_parser_c::handle_nalu(memory_cptr nalu) {
+es_parser_c::handle_nalu(memory_cptr const &nalu) {
   if (1 > nalu->get_size())
     return;
 
@@ -1952,7 +1944,7 @@ es_parser_c::handle_nalu(memory_cptr nalu) {
 }
 
 bool
-es_parser_c::parse_slice(memory_cptr &buffer,
+es_parser_c::parse_slice(memory_cptr const &buffer,
                          slice_info_t &si) {
   try {
     bit_reader_c r(buffer->get_buffer(), buffer->get_size());
