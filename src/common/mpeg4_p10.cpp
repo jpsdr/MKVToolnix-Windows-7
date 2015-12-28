@@ -7,11 +7,6 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   Part of this code (the functions \c decode_rbsp_trailing() ) were
-   taken or inspired and modified from the ffmpeg project (
-   http://ffmpeg.sourceforge.net/index.php ). These functions were
-   licensed under the LGPL.
-
    \file
 
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
