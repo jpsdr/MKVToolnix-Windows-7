@@ -1780,8 +1780,7 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
 
 void
 es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
-  if (parse_sei(mpeg::nalu_to_rbsp(nalu), m_user_data))
-    m_extra_data.push_back(create_nalu_with_size(nalu));
+  parse_sei(mpeg::nalu_to_rbsp(nalu), m_user_data);
 }
 
 void
