@@ -470,8 +470,8 @@ mpeg4::p10::rbsp_to_nalu(memory_cptr const &buffer) {
   return memory_c::clone(d.get_and_lock_buffer(), d.getFilePointer());
 }
 
-bool
-mpeg4::p10::parse_sps(memory_cptr &buffer,
+memory_cptr
+mpeg4::p10::parse_sps(memory_cptr const &buffer,
                       sps_info_t &sps,
                       bool keep_ar_info,
                       bool fix_bitstream_frame_rate,
@@ -511,7 +511,7 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
 
   w.copy_bits(3, r);            // forbidden_zero_bit, nal_ref_idc
   if (w.copy_bits(5, r) != 7)   // nal_unit_type
-    return false;
+    return {};
   sps.profile_idc    = w.copy_bits(8, r); // profile_idc
   sps.profile_compat = w.copy_bits(8, r); // constraints
   sps.level_idc      = w.copy_bits(8, r); // level_idc
@@ -550,7 +550,7 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
       break;
 
     default:
-      return false;
+      return {};
   }
 
   w.copy_unsigned_golomb(r);                 // num_ref_frames
@@ -729,12 +729,11 @@ mpeg4::p10::parse_sps(memory_cptr &buffer,
   w.put_bit(1);
   w.byte_align();
 
-  buffer = mcptr_newsps;
-  buffer->set_size(w.get_bit_position() / 8);
+  mcptr_newsps->resize(w.get_bit_position() / 8);
 
-  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffer);
+  sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *mcptr_newsps);
 
-  return true;
+  return mcptr_newsps;
 }
 
 bool
@@ -789,11 +788,11 @@ mpeg4::p10::extract_par(memory_cptr const &buffer) {
 
     for (auto &nalu : avcc.m_sps_list) {
       if (!ar_found) {
-        auto nalu_as_rbsp = nalu_to_rbsp(nalu);
-
         try {
           sps_info_t sps_info;
-          if (mpeg4::p10::parse_sps(nalu_as_rbsp, sps_info)) {
+          auto nalu_as_rbsp = mpeg4::p10::parse_sps(nalu_to_rbsp(nalu), sps_info);
+
+          if (nalu_as_rbsp) {
             if (s_debug_ar)
               sps_info.dump();
 
@@ -847,10 +846,11 @@ mpeg4::p10::fix_sps_fps(memory_cptr const &buffer,
       avcc.read(nalu, length);
 
       if ((0 < length) && ((nalu->get_buffer()[0] & 0x1f) == NALU_TYPE_SEQ_PARAM)) {
-        nalu = nalu_to_rbsp(nalu);
         sps_info_t sps_info;
-        parse_sps(nalu, sps_info, true, true, duration);
-        nalu = rbsp_to_nalu(nalu);
+        auto parsed_nalu = parse_sps(nalu_to_rbsp(nalu), sps_info, true, true, duration);
+
+        if (parsed_nalu)
+          nalu = rbsp_to_nalu(parsed_nalu);
       }
 
       new_avcc.write_uint16_be(nalu->get_size());
@@ -1243,15 +1243,14 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
 }
 
 void
-mpeg4::p10::avc_es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
+mpeg4::p10::avc_es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   sps_info_t sps_info;
 
-  nalu = nalu_to_rbsp(nalu);
-
-  if (!parse_sps(nalu, sps_info, m_keep_ar_info, m_fix_bitstream_frame_rate, duration_for(0, true)))
+  auto parsed_nalu = parse_sps(nalu_to_rbsp(nalu), sps_info, m_keep_ar_info, m_fix_bitstream_frame_rate, duration_for(0, true));
+  if (!parsed_nalu)
     return;
 
-  nalu = rbsp_to_nalu(nalu);
+  parsed_nalu = rbsp_to_nalu(parsed_nalu);
 
   size_t i;
   for (i = 0; m_sps_info_list.size() > i; ++i)
@@ -1260,7 +1259,7 @@ mpeg4::p10::avc_es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
 
   bool use_sps_info = true;
   if (m_sps_info_list.size() == i) {
-    m_sps_list.push_back(nalu);
+    m_sps_list.push_back(parsed_nalu);
     m_sps_info_list.push_back(sps_info);
     m_avcc_changed = true;
 
@@ -1268,13 +1267,13 @@ mpeg4::p10::avc_es_parser_c::handle_sps_nalu(memory_cptr &nalu) {
     mxverb(2, boost::format("mpeg4::p10: SPS ID %|1$04x| changed; checksum old %|2$04x| new %|3$04x|\n") % sps_info.id % m_sps_info_list[i].checksum % sps_info.checksum);
 
     m_sps_info_list[i] = sps_info;
-    m_sps_list[i]      = nalu;
+    m_sps_list[i]      = parsed_nalu;
     m_avcc_changed     = true;
 
   } else
     use_sps_info = false;
 
-  m_extra_data.push_back(create_nalu_with_size(nalu));
+  m_extra_data.push_back(create_nalu_with_size(parsed_nalu));
 
   if (use_sps_info && m_debug_sps_info)
     sps_info.dump();
@@ -1358,7 +1357,7 @@ mpeg4::p10::avc_es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
 }
 
 void
-mpeg4::p10::avc_es_parser_c::handle_nalu(memory_cptr nalu) {
+mpeg4::p10::avc_es_parser_c::handle_nalu(memory_cptr const &nalu) {
   if (1 > nalu->get_size())
     return;
 

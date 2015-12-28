@@ -147,7 +147,7 @@ struct par_extraction_t {
 memory_cptr nalu_to_rbsp(memory_cptr const &buffer);
 memory_cptr rbsp_to_nalu(memory_cptr const &buffer);
 
-bool parse_sps(memory_cptr &buffer, sps_info_t &sps, bool keep_ar_info = false, bool fix_bitstream_frame_rate = false, int64_t duration = -1);
+memory_cptr parse_sps(memory_cptr const &buffer, sps_info_t &sps, bool keep_ar_info = false, bool fix_bitstream_frame_rate = false, int64_t duration = -1);
 bool parse_pps(memory_cptr const &buffer, pps_info_t &pps);
 
 par_extraction_t extract_par(memory_cptr const &buffer);
@@ -368,7 +368,7 @@ public:
     return m_sps_info_list.begin()->height;
   }
 
-  void handle_nalu(memory_cptr nalu);
+  void handle_nalu(memory_cptr const &nalu);
 
   void add_timecode(int64_t timecode);
 
@@ -421,7 +421,7 @@ public:
 
 protected:
   bool parse_slice(memory_cptr const &buffer, slice_info_t &si);
-  void handle_sps_nalu(memory_cptr &nalu);
+  void handle_sps_nalu(memory_cptr const &nalu);
   void handle_pps_nalu(memory_cptr const &nalu);
   void handle_sei_nalu(memory_cptr const &nalu);
   void handle_slice_nalu(memory_cptr const &nalu);
