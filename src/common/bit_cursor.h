@@ -186,6 +186,13 @@ public:
   void skip_bit() {
     set_bit_position(get_bit_position() + 1);
   }
+
+  uint64_t skip_get_bits(std::size_t to_skip,
+                         std::size_t to_get) {
+    skip_bits(to_skip);
+    return get_bits(to_get);
+  }
+
 protected:
   void get_bytes_byte_aligned(unsigned char *buf, std::size_t n) {
     auto bytes_to_copy = std::min<std::size_t>(n, m_end_of_data - m_byte_position);
