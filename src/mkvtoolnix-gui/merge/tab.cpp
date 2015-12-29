@@ -42,6 +42,9 @@ Tab::Tab(QWidget *parent)
   , m_addFilesAction{new QAction{this}}
   , m_appendFilesAction{new QAction{this}}
   , m_addAdditionalPartsAction{new QAction{this}}
+  , m_addFilesAction2{new QAction{this}}
+  , m_appendFilesAction2{new QAction{this}}
+  , m_addAdditionalPartsAction2{new QAction{this}}
   , m_removeFilesAction{new QAction{this}}
   , m_removeAllFilesAction{new QAction{this}}
   , m_selectAllTracksAction{new QAction{this}}
@@ -56,6 +59,7 @@ Tab::Tab(QWidget *parent)
   , m_tracksMenu{new QMenu{this}}
   , m_attachmentsMenu{new QMenu{this}}
   , m_selectTracksOfTypeMenu{new QMenu{this}}
+  , m_addFilesMenu{new QMenu{this}}
   , m_attachmentsModel{new AttachmentModel{this}}
   , m_addAttachmentsAction{new QAction{this}}
   , m_removeAttachmentsAction{new QAction{this}}

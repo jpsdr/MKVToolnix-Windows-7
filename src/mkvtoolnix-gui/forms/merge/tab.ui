@@ -1572,13 +1572,22 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="addFiles">
+      <widget class="QToolButton" name="addFiles">
        <property name="text">
         <string>&amp;Add source files</string>
        </property>
        <property name="icon">
         <iconset resource="../../qt_resources.qrc">
          <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+       <property name="arrowType">
+        <enum>Qt::NoArrow</enum>
        </property>
       </widget>
      </item>

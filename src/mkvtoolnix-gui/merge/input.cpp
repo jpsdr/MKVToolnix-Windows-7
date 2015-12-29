@@ -233,11 +233,17 @@ Tab::setupInputControls() {
   m_selectTracksOfTypeMenu->addAction(m_selectAllAudioTracksAction);
   m_selectTracksOfTypeMenu->addAction(m_selectAllSubtitlesTracksAction);
 
+  // "add source files" menu
+  m_addFilesMenu->addAction(m_addFilesAction2);
+  m_addFilesMenu->addAction(m_appendFilesAction2);
+  m_addFilesMenu->addAction(m_addAdditionalPartsAction2);
+  ui->addFiles->setMenu(m_addFilesMenu);
+
   // Connect signals & slots.
   auto mw = MainWindow::get();
 
   connect(ui->aacIsSBR,                     static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onAacIsSBRChanged);
-  connect(ui->addFiles,                     &QPushButton::clicked,                                                                            this,                     &Tab::onAddFiles);
+  connect(ui->addFiles,                     &QToolButton::clicked,                                                                            this,                     &Tab::onAddFiles);
   connect(ui->addToJobQueue,                &QPushButton::clicked,                                                                            this,                     &Tab::onAddToJobQueue);
   connect(ui->additionalTrackOptions,       &QLineEdit::textChanged,                                                                          this,                     &Tab::onAdditionalTrackOptionsChanged);
   connect(ui->aspectRatio,                  static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this,                     &Tab::onAspectRatioChanged);
@@ -290,8 +296,11 @@ Tab::setupInputControls() {
   connect(ui->tracks->selectionModel(),     &QItemSelectionModel::selectionChanged,                                                           this,                     &Tab::onTrackSelectionChanged);
 
   connect(m_addFilesAction,                 &QAction::triggered,                                                                              this,                     &Tab::onAddFiles);
+  connect(m_addFilesAction2,                &QAction::triggered,                                                                              this,                     &Tab::onAddFiles);
   connect(m_appendFilesAction,              &QAction::triggered,                                                                              this,                     &Tab::onAppendFiles);
+  connect(m_appendFilesAction2,             &QAction::triggered,                                                                              this,                     &Tab::onAppendFiles);
   connect(m_addAdditionalPartsAction,       &QAction::triggered,                                                                              this,                     &Tab::onAddAdditionalParts);
+  connect(m_addAdditionalPartsAction2,      &QAction::triggered,                                                                              this,                     &Tab::onAddAdditionalParts);
   connect(m_removeFilesAction,              &QAction::triggered,                                                                              this,                     &Tab::onRemoveFiles);
   connect(m_removeAllFilesAction,           &QAction::triggered,                                                                              this,                     &Tab::onRemoveAllFiles);
   connect(m_openFilesInMediaInfoAction,     &QAction::triggered,                                                                              this,                     &Tab::onOpenFilesInMediaInfo);
@@ -303,6 +312,8 @@ Tab::setupInputControls() {
   connect(m_selectAllSubtitlesTracksAction, &QAction::triggered,                                                                              this,                     &Tab::selectAllSubtitlesTracks);
   connect(m_enableAllTracksAction,          &QAction::triggered,                                                                              this,                     &Tab::enableAllTracks);
   connect(m_disableAllTracksAction,         &QAction::triggered,                                                                              this,                     &Tab::disableAllTracks);
+
+  connect(m_addFilesMenu,                   &QMenu::aboutToShow,                                                                              this,                     &Tab::enableFilesActions);
 
   connect(m_filesModel,                     &SourceFileModel::rowsInserted,                                                                   this,                     &Tab::onFileRowsInserted);
   connect(m_tracksModel,                    &TrackModel::rowsInserted,                                                                        this,                     &Tab::onTrackRowsInserted);
@@ -1138,8 +1149,11 @@ Tab::enableFilesActions() {
     hasRegularTrack = m_config.m_files.end() != brng::find_if(m_config.m_files, [](SourceFilePtr const &file) { return file->hasRegularTrack(); });
 
   m_addFilesAction->setEnabled(true);
+  m_addFilesAction2->setEnabled(true);
   m_appendFilesAction->setEnabled((1 == numSelected) && hasRegularTrack);
+  m_appendFilesAction2->setEnabled((1 == numSelected) && hasRegularTrack);
   m_addAdditionalPartsAction->setEnabled(1 == numSelected);
+  m_addAdditionalPartsAction2->setEnabled(1 == numSelected);
   m_removeFilesAction->setEnabled(0 < numSelected);
   m_removeAllFilesAction->setEnabled(!m_config.m_files.isEmpty());
   m_openFilesInMediaInfoAction->setEnabled(0 < numSelected);
@@ -1170,9 +1184,13 @@ Tab::retranslateInputUI() {
   resizeFilesColumnsToContents();
   resizeTracksColumnsToContents();
 
-  m_addFilesAction->setText(QY("&Add files"));
-  m_appendFilesAction->setText(QY("A&ppend files"));
-  m_addAdditionalPartsAction->setText(QY("Add files as a&dditional parts"));
+  m_addFilesAction ->setText(QY("&Add files"));
+  m_addFilesAction2->setText(QY("&Add files"));
+  m_appendFilesAction ->setText(QY("A&ppend files"));
+  m_appendFilesAction2->setText(QY("A&ppend files"));
+  m_addAdditionalPartsAction ->setText(QY("Add files as a&dditional parts"));
+  m_addAdditionalPartsAction2->setText(QY("Add files as a&dditional parts"));
+
   m_removeFilesAction->setText(QY("&Remove files"));
   m_removeAllFilesAction->setText(QY("Remove a&ll files"));
   m_openFilesInMediaInfoAction->setText(QY("Open in &MediaInfo"));
