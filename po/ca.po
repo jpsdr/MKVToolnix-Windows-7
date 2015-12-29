@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix 8.6.1\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2015-12-29 09:21+0100\n"
+"POT-Creation-Date: 2015-12-29 17:45+0100\n"
 "PO-Revision-Date: 2015-12-23 12:07+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1090,8 +1090,8 @@ msgstr ""
 msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: s'ha produït una excepció (missatge: %2%; tipus: %3%)."
 
-#: src/common/kax_file.cpp:69 src/input/r_matroska.cpp:1335
-#: src/input/r_matroska.cpp:1987
+#: src/common/kax_file.cpp:69 src/input/r_matroska.cpp:1364
+#: src/input/r_matroska.cpp:2027
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: s'ha produït una excepció desconeguda."
@@ -1830,7 +1830,7 @@ msgstr "«%1%»: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "«%1%»: està processant els següents fitxers com a bons: %2%\n"
 
-#: src/input/r_matroska.cpp:1608
+#: src/input/r_matroska.cpp:1637
 #, boost-format
 msgid ""
 "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. "
@@ -2155,7 +2155,7 @@ msgstr "<Sense nom>"
 msgid "<unsaved file>"
 msgstr "<Fitxer sense desar>"
 
-#: src/input/r_matroska.cpp:2008 src/input/r_matroska.cpp:2104
+#: src/input/r_matroska.cpp:2048 src/input/r_matroska.cpp:2144
 #, boost-format
 msgid ""
 "A block was found at timestamp %1% for track number %2%. However, no headers "
@@ -4441,7 +4441,7 @@ msgstr "Error en carregar el fitxer d'ajustaments"
 msgid "Error message from the parser: %1"
 msgstr "Missatge d'error des de l'analitzador: %1"
 
-#: src/input/r_mpeg_ps.cpp:1059
+#: src/input/r_mpeg_ps.cpp:1060
 msgid ""
 "Error parsing a MPEG PS packet during the header reading phase. This stream "
 "seems to be badly damaged.\n"
@@ -6240,11 +6240,11 @@ msgstr ""
 "Converteix aquesta pista en la predefinida per a cadascun dels seus tipus "
 "(àudio, vídeo, subtítols)."
 
-#: src/input/r_matroska.cpp:1498 src/input/r_matroska.cpp:1513
+#: src/input/r_matroska.cpp:1527 src/input/r_matroska.cpp:1542
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "S'han trobat dades d'inicialització del còdec AAC mal formades.\n"
 
-#: src/input/r_matroska.cpp:1506
+#: src/input/r_matroska.cpp:1535
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "ID del còdec amb format incorrecte «%1%».\n"
@@ -9410,8 +9410,8 @@ msgstr ""
 "El fitxer no ha estat reconegut com un format admès (codi de sortida: %1)."
 
 #: src/common/kax_file.cpp:60 src/common/kax_file.cpp:65
-#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1336
-#: src/input/r_matroska.cpp:1988
+#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1365
+#: src/input/r_matroska.cpp:2028
 msgid "The file will not be processed further."
 msgstr "Aquest fitxer no es processarà més."
 
@@ -10719,8 +10719,8 @@ msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
 msgstr "Aquesta pista conté dades AAC/HE-AAC/AAC+ en SBR."
 
 #: src/common/kax_file.cpp:60 src/common/kax_file.cpp:65
-#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1336
-#: src/input/r_matroska.cpp:1988
+#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1365
+#: src/input/r_matroska.cpp:2028
 msgid "This usually indicates a damaged file structure."
 msgstr "Això normalment significa una estructura de fitxers malmesa."
 
@@ -10807,7 +10807,7 @@ msgstr ""
 "La pista %1% ha estat comprimida amb un algorisme de compressió desconegut/"
 "no admès (%2%).\n"
 
-#: src/input/r_matroska.cpp:1024
+#: src/input/r_matroska.cpp:1053
 #, boost-format
 msgid ""
 "Track %1% is missing its track UID element which is required to be present "
@@ -11197,7 +11197,7 @@ msgstr ""
 msgid "Unsupported file format"
 msgstr "Format de fitxer no implementat"
 
-#: src/input/r_matroska.cpp:1796
+#: src/input/r_matroska.cpp:1836
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipus de pista no admès per aquesta pista.\n"
 
@@ -11259,7 +11259,7 @@ msgstr ""
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Emprant el demultiplexador per al format «%1%».\n"
 
-#: src/input/r_matroska.cpp:1365
+#: src/input/r_matroska.cpp:1394
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Emprant el mòdul de sortida genèric pel tipus de pista «%1%».\n"
@@ -11847,7 +11847,7 @@ msgstr "Demana a l'usuari"
 msgid "attachment"
 msgstr "Adjunt"
 
-#: src/info/mkvinfo.cpp:934 src/input/r_matroska.cpp:104
+#: src/info/mkvinfo.cpp:934 src/input/r_matroska.cpp:105
 #: src/mkvtoolnix-gui/merge/track.cpp:382
 msgid "audio"
 msgstr "Àudio"
@@ -11873,7 +11873,7 @@ msgstr "Ambdós ulls lligats en un bloc (primer el dret)"
 msgid "bottom"
 msgstr "A baix"
 
-#: src/info/mkvinfo.cpp:937 src/input/r_matroska.cpp:105
+#: src/info/mkvinfo.cpp:937 src/input/r_matroska.cpp:106
 #: src/mkvtoolnix-gui/merge/track.cpp:385
 msgid "buttons"
 msgstr "Botons"
@@ -12179,7 +12179,7 @@ msgstr "Baixa"
 msgid "lowest"
 msgstr "Molt baixa"
 
-#: src/input/r_matroska.cpp:358
+#: src/input/r_matroska.cpp:359
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -12189,7 +12189,7 @@ msgstr ""
 "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu "
 "que hi ha %2% bits per mostra, però el WAVEFORMATEX diu que n'hi ha %3%.\n"
 
-#: src/input/r_matroska.cpp:349
+#: src/input/r_matroska.cpp:350
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -12198,7 +12198,7 @@ msgstr ""
 "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu "
 "que hi ha %2% canals, però el WAVEFORMATEX diu que n'hi ha %3%.\n"
 
-#: src/input/r_matroska.cpp:340
+#: src/input/r_matroska.cpp:341
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -12207,7 +12207,7 @@ msgstr ""
 "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu "
 "que hi ha %2% mostres per segon, però el WAVEFORMATEX diu que n'hi ha %3%.\n"
 
-#: src/input/r_matroska.cpp:508
+#: src/input/r_matroska.cpp:537
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode, track %1%) Matroska says video "
@@ -12216,7 +12216,7 @@ msgstr ""
 "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu "
 "que l'alçada és de %2%, però el BITMAPINFOHEADER diu que és de %3%.\n"
 
-#: src/input/r_matroska.cpp:499
+#: src/input/r_matroska.cpp:528
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode, track %1%) Matroska says video "
@@ -12225,11 +12225,11 @@ msgstr ""
 "matroska_reader: (mode de compatibilitat MS per a la pista %1%) Matroska diu "
 "que l'amplada és de %2%, però el BITMAPINFOHEADER diu que és de %3%.\n"
 
-#: src/input/r_matroska.cpp:1013
+#: src/input/r_matroska.cpp:1042
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: A una pista li manca el seu número de pista.\n"
 
-#: src/input/r_matroska.cpp:1431
+#: src/input/r_matroska.cpp:1460
 #, boost-format
 msgid ""
 "matroska_reader: Could not keep the track UID %1% because it is already "
@@ -12238,26 +12238,26 @@ msgstr ""
 "matroska_reader: No ha pogut mantenir l'UID de la pista %1% perquè ja està "
 "assignat al fitxer nou.\n"
 
-#: src/input/r_matroska.cpp:1248 src/input/r_matroska.cpp:1253
+#: src/input/r_matroska.cpp:1277 src/input/r_matroska.cpp:1282
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: No s'ha trobat cap segment.\n"
 
-#: src/input/r_matroska.cpp:976
+#: src/input/r_matroska.cpp:1005
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Manca l'alçada en píxels.\n"
 
-#: src/input/r_matroska.cpp:974
+#: src/input/r_matroska.cpp:1003
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Manca l'amplada en píxels.\n"
 
-#: src/input/r_matroska.cpp:609
+#: src/input/r_matroska.cpp:638
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr ""
 "matroska_reader: L'ID del còdec «%1%» per a la pista «%2%» és desconegut.\n"
 
-#: src/input/r_matroska.cpp:373 src/input/r_matroska.cpp:418
-#: src/input/r_matroska.cpp:439
+#: src/input/r_matroska.cpp:374 src/input/r_matroska.cpp:419
+#: src/input/r_matroska.cpp:440
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but the private codec "
@@ -12266,7 +12266,7 @@ msgstr ""
 "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però les dades "
 "privades del còdec no contenen capçaleres vàlides.\n"
 
-#: src/input/r_matroska.cpp:487
+#: src/input/r_matroska.cpp:516
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -12277,7 +12277,7 @@ msgstr ""
 "present l'estructura BITMAPINFOHEADER. Pel que no tenim un FourCC per "
 "identificar el còdec de vídeo emprat.\n"
 
-#: src/input/r_matroska.cpp:318
+#: src/input/r_matroska.cpp:319
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -12288,7 +12288,7 @@ msgstr ""
 "present l'estructura WAVEFORMATEX. Pel que no tenim un FourCC per "
 "identificar el còdec d'àudio emprat.\n"
 
-#: src/input/r_matroska.cpp:527
+#: src/input/r_matroska.cpp:556
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec "
@@ -12297,7 +12297,7 @@ msgstr ""
 "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no hi "
 "havia capçaleres privades del còdec.\n"
 
-#: src/input/r_matroska.cpp:573 src/input/r_matroska.cpp:584
+#: src/input/r_matroska.cpp:602 src/input/r_matroska.cpp:613
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -12306,30 +12306,30 @@ msgstr ""
 "matroska_reader: L'ID del còdec per a la pista %1% és «%2%», però no s'han "
 "trobat dades privades del còdec.\n"
 
-#: src/input/r_matroska.cpp:1075
+#: src/input/r_matroska.cpp:1104
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: Manca l'ID del còdec.\n"
 
-#: src/input/r_matroska.cpp:559
+#: src/input/r_matroska.cpp:588
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_reader: No s'ha establert l'alçada per a la pista %1%.\n"
 
-#: src/input/r_matroska.cpp:553
+#: src/input/r_matroska.cpp:582
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_reader: No s'ha establert l'amplada per a la pista %1%.\n"
 
-#: src/input/r_matroska.cpp:651
+#: src/input/r_matroska.cpp:680
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader: La pista %1% sembla estar bé.\n"
 
-#: src/input/r_matroska.cpp:1031
+#: src/input/r_matroska.cpp:1060
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader: No s'ha trobat el tipus de la pista.\n"
 
-#: src/input/r_matroska.cpp:409
+#: src/input/r_matroska.cpp:410
 #, boost-format
 msgid ""
 "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track "
@@ -12338,11 +12338,11 @@ msgstr ""
 "matroska_reader: El «mkvmerge» no ha estat compilat amb la implementació per "
 "a fitxers FLAC. La pista %1% serà ignorada.\n"
 
-#: src/input/r_matroska.cpp:1235
+#: src/input/r_matroska.cpp:1264
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: No s'ha trobat la capçalera EBML.\n"
 
-#: src/input/r_matroska.cpp:646
+#: src/input/r_matroska.cpp:675
 #, boost-format
 msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
 msgstr ""
@@ -12616,12 +12616,12 @@ msgstr "mm_text_io_c: UTF32_* de moment no és admès.\n"
 msgid "mono"
 msgstr "Mono"
 
-#: src/input/r_mpeg_ps.cpp:1208
+#: src/input/r_mpeg_ps.cpp:1209
 #, boost-format
 msgid "mpeg_ps_reader: Should not have happened #1. %1%"
 msgstr "mpeg_ps_reader: no hauria d'haver succeït #1. %1%"
 
-#: src/input/r_mpeg_ps.cpp:1231
+#: src/input/r_mpeg_ps.cpp:1232
 #, boost-format
 msgid "mpeg_ps_reader: Should not have happened #2. %1%"
 msgstr "mpeg_ps_reader: no hauria d'haver succeït #2. %1%"
@@ -12860,7 +12860,7 @@ msgstr ""
 "ssa_reader: Format no vàlid. No es troba la línia «Format» a la secció "
 "«[Events]»."
 
-#: src/input/r_matroska.cpp:107
+#: src/input/r_matroska.cpp:108
 msgid "subtitle"
 msgstr "Subtítol"
 
@@ -12910,14 +12910,14 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. %1%\n"
 #: src/common/stereo_mode.cpp:69 src/info/mkvinfo.cpp:683
 #: src/info/mkvinfo.cpp:693 src/info/mkvinfo.cpp:708 src/info/mkvinfo.cpp:730
 #: src/info/mkvinfo.cpp:742 src/info/mkvinfo.cpp:752 src/info/mkvinfo.cpp:938
-#: src/input/r_matroska.cpp:103 src/input/r_matroska.cpp:2338
+#: src/input/r_matroska.cpp:104 src/input/r_matroska.cpp:2378
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:157
 #: src/mkvtoolnix-gui/jobs/job.cpp:241
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57
 msgid "unknown"
 msgstr "Desconegut"
 
-#: src/input/r_matroska.cpp:2326
+#: src/input/r_matroska.cpp:2366
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "Desconegut, format de l'etiqueta 0x%|1$04x|"
@@ -12926,7 +12926,7 @@ msgstr "Desconegut, format de l'etiqueta 0x%|1$04x|"
 msgid "unlimited"
 msgstr "Sense límit"
 
-#: src/info/mkvinfo.cpp:935 src/input/r_matroska.cpp:106
+#: src/info/mkvinfo.cpp:935 src/input/r_matroska.cpp:107
 #: src/mkvtoolnix-gui/merge/track.cpp:383
 msgid "video"
 msgstr "Vídeo"
