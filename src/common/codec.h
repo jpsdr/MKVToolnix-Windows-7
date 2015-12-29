@@ -147,10 +147,13 @@ public:
     , dts_express
     , dts_es
     , dts_96_24
+    , dts_x
 
     , mpeg_1_2_layer_1
     , mpeg_1_2_layer_2
     , mpeg_1_2_layer_3
+
+    , truehd_atmos
   };
 
 private:
