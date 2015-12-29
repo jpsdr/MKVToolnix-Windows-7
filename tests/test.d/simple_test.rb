@@ -75,6 +75,11 @@ class SimpleTest
     @tmp ||= tmp_name
   end
 
+  def clean_tmp
+    File.unlink(@tmp) if File.exists?(@tmp) && (ENV["KEEP_TMPFILES"] != "1")
+    @tmp = nil
+  end
+
   def hash_file name
     md5 name
   end
@@ -82,10 +87,7 @@ class SimpleTest
   def hash_tmp erase = true
     output = hash_file @tmp
 
-    if erase
-      File.unlink(@tmp) if File.exists?(@tmp) && (ENV["KEEP_TMPFILES"] != "1")
-      @tmp = nil
-    end
+    clean_tmp if erase
 
     output
   end
@@ -112,7 +114,11 @@ class SimpleTest
       :block => lambda {
         output = options[:output] || tmp
         merge full_command_line, :exit_code => options[:exit_code], :output => output
-        options[:exit_code] == :error ? 'error' : options[:keep_tmp] ? hash_file(output) : hash_tmp
+        result = options[:exit_code] == :error ? 'error' : hash_file(output)
+
+        clean_tmp unless options[:keep_tmp]
+
+        result
       },
     }
   end
