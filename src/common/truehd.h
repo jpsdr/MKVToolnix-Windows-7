@@ -29,45 +29,35 @@ struct truehd_frame_t {
     truehd,
     mlp,
     ac3,
-  } m_codec;
+  };
 
   enum frame_type_e {
     invalid,
     normal,
     sync,
-  } m_type;
+  };
 
-  int m_size;
-  int m_sampling_rate;
-  int m_channels;
-  int m_samples_per_frame;
+  codec_e m_codec{truehd};
+  frame_type_e m_type{invalid};
+  int m_size{}, m_sampling_rate{}, m_channels{}, m_samples_per_frame{};
 
   ac3::frame_c m_ac3_header;
 
   memory_cptr m_data;
 
-  truehd_frame_t()
-    : m_codec(truehd)
-    , m_type(invalid)
-    , m_size(0)
-    , m_sampling_rate(0)
-    , m_channels(0)
-    , m_samples_per_frame(0)
-  { };
-
-  bool is_truehd() {
+  bool is_truehd() const {
     return truehd == m_codec;
   }
 
-  bool is_sync() {
+  bool is_sync() const {
     return sync == m_type;
   }
 
-  bool is_normal() {
+  bool is_normal() const {
     return sync == m_type;
   }
 
-  bool is_ac3() {
+  bool is_ac3() const {
     return ac3 == m_codec;
   }
 };
