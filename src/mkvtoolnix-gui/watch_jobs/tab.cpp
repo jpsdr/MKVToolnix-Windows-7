@@ -38,6 +38,7 @@ class TabPrivate {
   QDateTime m_currentJobStartTime;
   QString m_currentJobDescription;
   QMenu *m_moreActions;
+  bool m_forCurrentJob;
 
   // Only use this variable for determining whether or not to ignore
   // certain signals.
@@ -45,13 +46,14 @@ class TabPrivate {
 
   QAction *m_saveOutputAction, *m_clearOutputAction, *m_openFolderAction;
 
-  explicit TabPrivate(Tab *tab)
+  explicit TabPrivate(Tab *tab, bool forCurrentJob)
     : ui{new Ui::Tab}
     , m_id{std::numeric_limits<uint64_t>::max()}
     , m_currentJobProgress{}
     , m_queueProgress{}
     , m_currentJobStatus{Jobs::Job::PendingManual}
     , m_moreActions{new QMenu{tab}}
+    , m_forCurrentJob{forCurrentJob}
     , m_currentlyConnectedJob{}
     , m_saveOutputAction{new QAction{tab}}
     , m_clearOutputAction{new QAction{tab}}
@@ -60,9 +62,10 @@ class TabPrivate {
   }
 };
 
-Tab::Tab(QWidget *parent)
+Tab::Tab(QWidget *parent,
+         bool forCurrentJob)
   : QWidget{parent}
-  , d_ptr{new TabPrivate{this}}
+  , d_ptr{new TabPrivate{this, forCurrentJob}}
 {
   setupUi();
 }
@@ -406,7 +409,9 @@ Tab::isSaveOutputEnabled()
 bool
 Tab::isCurrentJobTab()
   const {
-  return this == MainWindow::get()->watchCurrentJobTab();
+  Q_D(const Tab);
+
+  return d->m_forCurrentJob;
 }
 
 void

@@ -28,7 +28,7 @@ private:
   QScopedPointer<TabPrivate> const d_ptr;
 
 public:
-  explicit Tab(QWidget *parent);
+  explicit Tab(QWidget *parent, bool forCurrentJob = false);
   ~Tab();
 
   virtual void retranslateUi();

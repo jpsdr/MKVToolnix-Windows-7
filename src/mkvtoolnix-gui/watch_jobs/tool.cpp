@@ -33,7 +33,7 @@ void
 Tool::setupUi() {
   setupTabPositions();
 
-  m_currentJobTab = new Tab{ui->widgets};
+  m_currentJobTab = new Tab{ui->widgets, true};
   ui->widgets->insertTab(0, m_currentJobTab, Q(""));
 
   auto button = Util::tabWidgetCloseTabButton(*ui->widgets, 0);
