@@ -35,7 +35,7 @@ nalu_to_rbsp(memory_cptr const &buffer) {
       d.write_uint8(b[pos]);
   }
 
-  return memory_c::clone(d.get_and_lock_buffer(), d.getFilePointer());
+  return std::make_shared<memory_c>(d.get_and_lock_buffer(), d.getFilePointer(), true);
 }
 
 memory_cptr
@@ -58,7 +58,7 @@ rbsp_to_nalu(memory_cptr const &buffer) {
       d.write_uint8(b[pos]);
   }
 
-  return memory_c::clone(d.get_and_lock_buffer(), d.getFilePointer());
+  return std::make_shared<memory_c>(d.get_and_lock_buffer(), d.getFilePointer(), true);
 }
 
 }
