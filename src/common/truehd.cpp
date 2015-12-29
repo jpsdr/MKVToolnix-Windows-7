@@ -13,9 +13,102 @@
 
 #include "common/common_pch.h"
 
+#include "common/bit_cursor.h"
 #include "common/endian.h"
+#include "common/list_utils.h"
 #include "common/memory.h"
 #include "common/truehd.h"
+
+int const truehd_frame_t::ms_sampling_rates[16]   = { 48000, 96000, 192000, 0, 0, 0, 0, 0, 44100, 88200, 176400, 0, 0, 0, 0, 0 };
+uint8_t const truehd_frame_t::ms_mlp_channels[32] = {     1,     2,      3, 4, 3, 4, 5, 3,     4,     5,      4, 5, 6, 4, 5, 4,
+                                                          5,     6,      5, 5, 6, 0, 0, 0,     0,     0,      0, 0, 0, 0, 0, 0 };
+
+constexpr std::size_t PARSER_MIN_HEADER_SIZE = 12;
+
+bool
+truehd_frame_t::parse_header(unsigned char const *data,
+                             std::size_t size) {
+  if (size < PARSER_MIN_HEADER_SIZE)
+    return false;
+
+  auto const first_word = get_uint16_be(&data[0]);
+  auto const sync_word  = get_uint32_be(&data[4]);
+
+  if (!mtx::included_in(sync_word, TRUEHD_SYNC_WORD, MLP_SYNC_WORD) && (AC3_SYNC_WORD == first_word))
+    return parse_ac3_header(data, size);
+
+  m_codec = !mtx::included_in(sync_word, TRUEHD_SYNC_WORD, MLP_SYNC_WORD) ? truehd : TRUEHD_SYNC_WORD == sync_word ? truehd : mlp;
+  m_type  =  mtx::included_in(sync_word, TRUEHD_SYNC_WORD, MLP_SYNC_WORD) ? sync   : normal;
+  m_size  = (first_word & 0xfff) * 2;
+
+  if (normal == m_type)
+    return true;
+
+  return m_codec == truehd ? parse_truehd_header(data, size) : parse_mlp_header(data, size);
+}
+
+bool
+truehd_frame_t::parse_ac3_header(unsigned char const *data,
+                                 std::size_t size) {
+  if (!m_ac3_header.decode_header(data, size))
+    return false;
+
+  m_codec = truehd_frame_t::ac3;
+  m_type  = truehd_frame_t::sync;
+  m_size  = m_ac3_header.m_bytes;
+
+  return size >= m_ac3_header.m_bytes;
+}
+
+bool
+truehd_frame_t::parse_mlp_header(unsigned char const *data,
+                                 std::size_t) {
+  m_sampling_rate     = ms_sampling_rates[data[9] >> 4];
+  m_samples_per_frame = 40 << ((data[9] >> 4) & 0x07);
+  m_channels          = ms_mlp_channels[data[11] & 0x1f];
+
+  return true;
+}
+
+bool
+truehd_frame_t::parse_truehd_header(unsigned char const *data,
+                                    std::size_t size) {
+  try {
+    bit_reader_c r{&data[8], size - 8};
+
+    m_samples_per_frame      = 40 << (r.get_bits(4) & 0x07);
+    m_sampling_rate          = ms_sampling_rates[r.get_bits(4)];
+
+    auto chanmap_substream_1 = r.skip_get_bits(4, 5);
+    auto chanmap_substream_2 = r.skip_get_bits(2, 13);
+    m_channels               = decode_channel_map(chanmap_substream_2 ? chanmap_substream_2 : chanmap_substream_1);
+
+    return true;
+
+  } catch (...) {
+  }
+
+  return false;
+}
+
+// Code for truehd_parser_c::decode_channel_map was taken from
+// the ffmpeg project, source file "libavcodec/mlp_parser.c".
+int
+truehd_frame_t::decode_channel_map(int channel_map) {
+  static const int s_channel_count[13] = {
+    //  LR    C   LFE  LRs LRvh  LRc LRrs  Cs   Ts  LRsd  LRw  Cvh  LFE2
+         2,   1,   1,   2,   2,   2,   2,   1,   1,   2,   2,   1,   1
+  };
+
+  int channels = 0, i;
+
+  for (i = 0; 13 > i; ++i)
+    channels += s_channel_count[i] * ((channel_map >> i) & 1);
+
+  return channels;
+}
+
+// ----------------------------------------------------------------------
 
 truehd_parser_c::truehd_parser_c()
   : m_sync_state(state_unsynced)
@@ -24,23 +117,6 @@ truehd_parser_c::truehd_parser_c()
 
 truehd_parser_c::~truehd_parser_c()
 {
-}
-
-// Code for truehd_parser_c::decode_channel_map was taken from
-// the ffmpeg project, source file "libavcodec/mlp_parser.c".
-int
-truehd_parser_c::decode_channel_map(int channel_map) {
-  static const int channel_count[13] = {
-    //  LR    C   LFE  LRs LRvh  LRc LRrs  Cs   Ts  LRsd  LRw  Cvh  LFE2
-         2,   1,   1,   2,   2,   2,   2,   1,   1,   2,   2,   1,   1
-  };
-
-  int channels = 0, i;
-
-  for (i = 0; 13 > i; ++i)
-    channels += channel_count[i] * ((channel_map >> i) & 1);
-
-  return channels;
 }
 
 void
@@ -60,7 +136,7 @@ truehd_parser_c::parse(bool end_of_stream) {
   unsigned int size   = m_buffer.get_size();
   unsigned int offset = 0;
 
-  if (10 > size)
+  if (PARSER_MIN_HEADER_SIZE > size)
     return;
 
   if (state_unsynced == m_sync_state) {
@@ -69,49 +145,14 @@ truehd_parser_c::parse(bool end_of_stream) {
       return;
   }
 
-  static const int sampling_rates[]     = { 48000, 96000, 192000, 0, 0, 0, 0, 0, 44100, 88200, 176400, 0, 0, 0, 0, 0 };
-  static const uint8_t mlp_channels[32] = {     1,     2,      3, 4, 3, 4, 5, 3,     4,     5,      4, 5, 6, 4, 5, 4,
-                                                5,     6,      5, 5, 6, 0, 0, 0,     0,     0,      0, 0, 0, 0, 0, 0 };
+  while ((size - offset) >= PARSER_MIN_HEADER_SIZE) {
+    auto frame  = std::make_shared<truehd_frame_t>();
+    auto result = frame->parse_header(&data[offset], size - offset);
 
-  while ((size - offset) >= 10) {
-    truehd_frame_cptr frame(new truehd_frame_t);
-
-    uint32_t sync_word = get_uint32_be(&data[offset + 4]);
-    if ((TRUEHD_SYNC_WORD == sync_word) || (MLP_SYNC_WORD == sync_word)) {
-      frame->m_codec = TRUEHD_SYNC_WORD == sync_word ? truehd_frame_t::truehd : truehd_frame_t::mlp;
-      frame->m_type  = truehd_frame_t::sync;
-      frame->m_size  = (((data[offset] << 8) | data[offset + 1]) & 0xfff) * 2;
-
-      if (frame->is_truehd()) {
-        frame->m_sampling_rate     = sampling_rates[data[offset + 8] >> 4];
-        frame->m_samples_per_frame = 40 << ((data[offset + 8] >> 4) & 0x07);
-        int chanmap_substream_1    = ((data[offset +  9] & 0x0f) << 1) | (data[offset + 10] >> 7);
-        int chanmap_substream_2    = ((data[offset + 10] & 0x1f) << 8) |  data[offset + 11];
-        frame->m_channels          = decode_channel_map(chanmap_substream_2 ? chanmap_substream_2 : chanmap_substream_1);
-
-      } else {
-        frame->m_sampling_rate     = sampling_rates[data[offset + 9] >> 4];
-        frame->m_samples_per_frame = 40 << ((data[offset + 9] >> 4) & 0x07);
-        frame->m_channels          = mlp_channels[data[offset + 11] & 0x1f];
-      }
-
-    } else if (get_uint16_be(&data[offset]) == AC3_SYNC_WORD) {
-      if (frame->m_ac3_header.decode_header(&data[offset], size - offset)) {
-        if (((size - offset) < frame->m_ac3_header.m_bytes) && !end_of_stream)
-          break;
-
-        if (((size - offset) >= frame->m_ac3_header.m_bytes) && verify_ac3_checksum(&data[offset], size - offset)) {
-          frame->m_codec = truehd_frame_t::ac3;
-          frame->m_type  = truehd_frame_t::sync;
-          frame->m_size  = frame->m_ac3_header.m_bytes;
-        }
-      }
-    }
-
-    if (truehd_frame_t::invalid == frame->m_type) {
-      frame->m_type = truehd_frame_t::normal;
-      frame->m_size = (((data[offset] << 8) | data[offset + 1]) & 0xfff) * 2;
-    }
+    if (   !result
+        && (   !frame->is_ac3()
+            || (frame->is_ac3() && !end_of_stream)))
+      break;
 
     if (8 > frame->m_size) {
       unsigned int synced_at = resync(offset + 1);

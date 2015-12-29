@@ -26,6 +26,9 @@
 #define MLP_SYNC_WORD    0xf8726fbb
 
 struct truehd_frame_t {
+  static int const ms_sampling_rates[16];
+  static uint8_t const ms_mlp_channels[32];
+
   enum codec_e {
     truehd,
     mlp,
@@ -71,6 +74,16 @@ struct truehd_frame_t {
          : is_mlp()         ? codec_c::look_up(codec_c::type_e::A_MLP)
          :                    codec_c::look_up(codec_c::type_e::A_TRUEHD);
   }
+
+  bool parse_header(unsigned char const *data, std::size_t size);
+
+protected:
+  bool parse_ac3_header(unsigned char const *data, std::size_t size);
+  bool parse_mlp_header(unsigned char const *data, std::size_t size);
+  bool parse_truehd_header(unsigned char const *data, std::size_t size);
+
+public:
+  static int decode_channel_map(int channel_map);
 };
 using truehd_frame_cptr = std::shared_ptr<truehd_frame_t>;
 
@@ -95,7 +108,6 @@ public:
 
 protected:
   virtual unsigned int resync(unsigned int offset);
-  virtual int decode_channel_map(int channel_map);
 };
 using truehd_parser_cptr = std::shared_ptr<truehd_parser_c>;
 
