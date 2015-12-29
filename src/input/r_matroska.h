@@ -239,6 +239,7 @@ protected:
   virtual bool verify_dts_audio_track(kax_track_t *t);
   virtual bool verify_flac_audio_track(kax_track_t *t);
   virtual bool verify_opus_audio_track(kax_track_t *t);
+  virtual bool verify_truehd_audio_track(kax_track_t *t);
   virtual bool verify_vorbis_audio_track(kax_track_t *t);
   virtual void verify_audio_track(kax_track_t *t);
   virtual bool verify_mscomp_video_track(kax_track_t *t);
@@ -277,6 +278,7 @@ protected:
   virtual void create_mp3_audio_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void create_opus_audio_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void create_pcm_audio_packetizer(kax_track_t *t, track_info_c &nti);
+  virtual void create_truehd_audio_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void create_tta_audio_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void create_vorbis_audio_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void create_wavpack_audio_packetizer(kax_track_t *t, track_info_c &nti);

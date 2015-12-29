@@ -85,6 +85,7 @@
 #include "output/p_pcm.h"
 #include "output/p_textsubs.h"
 #include "output/p_theora.h"
+#include "output/p_truehd.h"
 #include "output/p_tta.h"
 #include "output/p_video.h"
 #include "output/p_vobbtn.h"
@@ -443,6 +444,32 @@ kax_reader_c::verify_opus_audio_track(kax_track_t *t) {
   return true;
 }
 
+bool
+kax_reader_c::verify_truehd_audio_track(kax_track_t *t) {
+  try {
+    read_first_frames(t, 5);
+
+    truehd_parser_c parser;
+    for (auto &frame : t->first_frames_data)
+      parser.add_data(frame->get_buffer(), frame->get_size());
+
+    while (parser.frame_available()) {
+      auto frame = parser.get_next_frame();
+
+      if (frame->is_ac3() || !frame->is_sync())
+        continue;
+
+      t->codec = frame->codec();
+
+      return true;
+    }
+
+  } catch (...) {
+  }
+
+  return false;
+}
+
 void
 kax_reader_c::verify_audio_track(kax_track_t *t) {
   if (t->codec_id.empty())
@@ -465,6 +492,8 @@ kax_reader_c::verify_audio_track(kax_track_t *t) {
       is_ok = verify_opus_audio_track(t);
     else if (t->codec.is(codec_c::type_e::A_DTS))
       is_ok = verify_dts_audio_track(t);
+    else if (t->codec.is(codec_c::type_e::A_TRUEHD))
+      is_ok = verify_truehd_audio_track(t);
   }
 
   if (!is_ok)
@@ -1625,6 +1654,14 @@ kax_reader_c::create_pcm_audio_packetizer(kax_track_t *t,
 }
 
 void
+kax_reader_c::create_truehd_audio_packetizer(kax_track_t *t,
+                                             track_info_c &nti) {
+  nti.m_private_data.reset();
+  set_track_packetizer(t, new truehd_packetizer_c(this, nti, t->codec.is(codec_c::type_e::A_TRUEHD) ? truehd_frame_t::truehd : truehd_frame_t::mlp, t->a_sfreq, t->a_channels));
+  show_packetizer_info(t->tnum, t->ptzr_ptr);
+}
+
+void
 kax_reader_c::create_tta_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   nti.m_private_data.reset();
@@ -1689,6 +1726,9 @@ kax_reader_c::create_audio_packetizer(kax_track_t *t,
 
   else if (t->codec.is(codec_c::type_e::A_OPUS))
     create_opus_audio_packetizer(t, nti);
+
+  else if (t->codec.is(codec_c::type_e::A_TRUEHD))
+    create_truehd_audio_packetizer(t, nti);
 
   else if (t->codec.is(codec_c::type_e::A_TTA))
     create_tta_audio_packetizer(t, nti);
