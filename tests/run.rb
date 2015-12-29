@@ -12,6 +12,7 @@ rescue NoMethodError
 rescue Exception
 end
 
+require "json"
 require "pp"
 require "tempfile"
 

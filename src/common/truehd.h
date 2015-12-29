@@ -44,6 +44,7 @@ struct truehd_frame_t {
   codec_e m_codec{truehd};
   frame_type_e m_type{invalid};
   int m_size{}, m_sampling_rate{}, m_channels{}, m_samples_per_frame{};
+  bool m_contains_atmos{};
 
   ac3::frame_c m_ac3_header;
 
@@ -69,9 +70,14 @@ struct truehd_frame_t {
     return ac3 == m_codec;
   }
 
+  bool contains_atmos() const {
+    return is_truehd() && m_contains_atmos;
+  }
+
   codec_c codec() const {
     return is_ac3()         ? codec_c::look_up(codec_c::type_e::A_AC3)
          : is_mlp()         ? codec_c::look_up(codec_c::type_e::A_MLP)
+         : contains_atmos() ? codec_c::look_up(codec_c::type_e::A_TRUEHD).specialize(codec_c::specialization_e::truehd_atmos)
          :                    codec_c::look_up(codec_c::type_e::A_TRUEHD);
   }
 

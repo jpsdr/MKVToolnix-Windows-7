@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/bit_cursor.h"
+#include "common/debugging.h"
 #include "common/endian.h"
 #include "common/list_utils.h"
 #include "common/memory.h"
@@ -73,6 +74,8 @@ truehd_frame_t::parse_mlp_header(unsigned char const *data,
 bool
 truehd_frame_t::parse_truehd_header(unsigned char const *data,
                                     std::size_t size) {
+  static debugging_option_c s_debug{"truehd_atmos"};
+
   try {
     bit_reader_c r{&data[8], size - 8};
 
@@ -82,6 +85,28 @@ truehd_frame_t::parse_truehd_header(unsigned char const *data,
     auto chanmap_substream_1 = r.skip_get_bits(4, 5);
     auto chanmap_substream_2 = r.skip_get_bits(2, 13);
     m_channels               = decode_channel_map(chanmap_substream_2 ? chanmap_substream_2 : chanmap_substream_1);
+
+    // The rest is only for Atmos detection.
+    auto is_vbr          = r.skip_get_bits(6 * 8, 1);
+    auto maximum_bitrate = r.get_bits(15);
+    auto num_substreams  = r.get_bits(4);
+    auto has_extensions  = r.skip_get_bits(4 + 8 * 8 + 7, 1);
+    auto num_extensions  = (r.get_bits(4) * 2) + 1;
+    auto has_content     = !!r.get_bits(4);
+
+    mxdebug_if(s_debug,
+               boost::format("is_vbr %1% maximum_bitrate %2% num_substreams %3% has_extensions %4% num_extensions %5% has_content %6%\n")
+               % is_vbr % maximum_bitrate % num_substreams % has_extensions % num_substreams % has_content);
+
+    if (!has_extensions)
+      return true;
+
+    for (auto idx = 0u; idx < num_extensions; ++idx)
+      if (r.get_bits(8))
+        has_content = true;
+
+    if (has_content)
+      m_contains_atmos = true;
 
     return true;
 
