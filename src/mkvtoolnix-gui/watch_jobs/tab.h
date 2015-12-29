@@ -63,10 +63,11 @@ public slots:
 
   void updateRemainingTime();
 
-  void showMoreActionsMenu();
+  void enableMoreActionsActions();
 
 protected:
   void setupUi();
+  void setupMoreActionsMenu();
 
   static void updateOneRemainingTimeLabel(QLabel *label, QDateTime const &startTime, uint64_t progress);
 };

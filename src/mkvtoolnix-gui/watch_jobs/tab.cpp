@@ -37,6 +37,7 @@ class TabPrivate {
   Jobs::Job::Status m_currentJobStatus;
   QDateTime m_currentJobStartTime;
   QString m_currentJobDescription;
+  QMenu *m_moreActions;
 
   // Only use this variable for determining whether or not to ignore
   // certain signals.
@@ -50,6 +51,7 @@ class TabPrivate {
     , m_currentJobProgress{}
     , m_queueProgress{}
     , m_currentJobStatus{Jobs::Job::PendingManual}
+    , m_moreActions{new QMenu{tab}}
     , m_currentlyConnectedJob{}
     , m_saveOutputAction{new QAction{tab}}
     , m_clearOutputAction{new QAction{tab}}
@@ -83,18 +85,35 @@ Tab::setupUi() {
   for (auto const &splitter : findChildren<QSplitter *>())
     cfg.handleSplitterSizes(splitter);
 
+  setupMoreActionsMenu();
+
   retranslateUi();
 
   auto model = MainWindow::jobTool()->model();
 
   connect(d->ui->abortButton,                        &QPushButton::clicked,            this, &Tab::onAbort);
   connect(d->ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,            this, &Tab::acknowledgeWarningsAndErrors);
-  connect(d->ui->moreActionsButton,                  &QPushButton::clicked,            this, &Tab::showMoreActionsMenu);
   connect(model,                                     &Jobs::Model::progressChanged,    this, &Tab::onQueueProgressChanged);
   connect(model,                                     &Jobs::Model::queueStatusChanged, this, &Tab::updateRemainingTime);
+  connect(d->m_moreActions,                          &QMenu::aboutToShow,              this, &Tab::enableMoreActionsActions);
   connect(d->m_saveOutputAction,                     &QAction::triggered,              this, &Tab::onSaveOutput);
   connect(d->m_clearOutputAction,                    &QAction::triggered,              this, &Tab::clearOutput);
   connect(d->m_openFolderAction,                     &QAction::triggered,              this, &Tab::openFolder);
+}
+
+void
+Tab::setupMoreActionsMenu() {
+  Q_D(Tab);
+
+  // Setup the "more actions" menu.
+  d->m_moreActions->addAction(d->m_openFolderAction);
+  d->m_moreActions->addSeparator();
+  d->m_moreActions->addAction(d->m_saveOutputAction);
+
+  if (isCurrentJobTab())
+    d->m_moreActions->addAction(d->m_clearOutputAction);
+
+  d->ui->moreActionsButton->setMenu(d->m_moreActions);
 }
 
 void
@@ -430,23 +449,11 @@ Tab::openFolder() {
 }
 
 void
-Tab::showMoreActionsMenu() {
+Tab::enableMoreActionsActions() {
   Q_D(Tab);
-
-  QMenu menu{this};
 
   auto hasJob = std::numeric_limits<uint64_t>::max() != d->m_id;
   d->m_openFolderAction->setEnabled(hasJob);
-  d->m_clearOutputAction->setEnabled(true);
-
-  menu.addAction(d->m_openFolderAction);
-  menu.addSeparator();
-  menu.addAction(d->m_saveOutputAction);
-
-  if (isCurrentJobTab())
-    menu.addAction(d->m_clearOutputAction);
-
-  menu.exec(QCursor::pos());
 }
 
 }}}
