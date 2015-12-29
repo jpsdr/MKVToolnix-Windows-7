@@ -20,6 +20,7 @@
 
 #include "common/ac3.h"
 #include "common/byte_buffer.h"
+#include "common/codec.h"
 
 #define TRUEHD_SYNC_WORD 0xf8726fba
 #define MLP_SYNC_WORD    0xf8726fbb
@@ -49,6 +50,10 @@ struct truehd_frame_t {
     return truehd == m_codec;
   }
 
+  bool is_mlp() const {
+    return mlp == m_codec;
+  }
+
   bool is_sync() const {
     return sync == m_type;
   }
@@ -59,6 +64,12 @@ struct truehd_frame_t {
 
   bool is_ac3() const {
     return ac3 == m_codec;
+  }
+
+  codec_c codec() const {
+    return is_ac3()         ? codec_c::look_up(codec_c::type_e::A_AC3)
+         : is_mlp()         ? codec_c::look_up(codec_c::type_e::A_MLP)
+         :                    codec_c::look_up(codec_c::type_e::A_TRUEHD);
   }
 };
 using truehd_frame_cptr = std::shared_ptr<truehd_frame_t>;

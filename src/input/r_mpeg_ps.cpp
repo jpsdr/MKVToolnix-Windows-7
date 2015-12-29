@@ -839,6 +839,7 @@ mpeg_ps_reader_c::new_stream_a_truehd(mpeg_ps_id_t id,
              boost::format("first TrueHD header channels %1% sampling_rate %2% samples_per_frame %3%\n")
              % frame->m_channels % frame->m_sampling_rate % frame->m_samples_per_frame);
 
+      track->codec         = frame->codec();
       track->a_channels    = frame->m_channels;
       track->a_sample_rate = frame->m_sampling_rate;
 

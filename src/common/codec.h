@@ -246,6 +246,12 @@ public:
     return *this;
   }
 
+  codec_c specialize(specialization_e specialization) const {
+    auto new_codec = *this;
+    new_codec.m_specialization = specialization;
+    return new_codec;
+  }
+
 private:
   static void initialize();
 

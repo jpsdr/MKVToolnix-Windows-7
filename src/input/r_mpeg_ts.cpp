@@ -26,7 +26,6 @@
 #include "common/ac3.h"
 #include "common/id_info.h"
 #include "common/iso639.h"
-#include "common/truehd.h"
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
 #include "common/strings/formatting.h"
@@ -376,6 +375,7 @@ mpeg_ts_track_c::new_stream_a_truehd() {
                boost::format("mpeg_ts_track_c::new_stream_a_truehd: first TrueHD header channels %1% sampling_rate %2% samples_per_frame %3%\n")
                % frame->m_channels % frame->m_sampling_rate % frame->m_samples_per_frame);
 
+    codec                 = frame->codec();
     a_channels            = frame->m_channels;
     a_sample_rate         = frame->m_sampling_rate;
     m_truehd_found_truehd = true;

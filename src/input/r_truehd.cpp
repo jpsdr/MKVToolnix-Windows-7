@@ -166,7 +166,7 @@ truehd_reader_c::identify() {
   info.add(mtx::id::audio_channels,           m_header->m_channels);
   info.add(mtx::id::audio_sampling_frequency, m_header->m_sampling_rate);
 
-  id_result_track(0, ID_RESULT_TRACK_AUDIO, codec_c::get_name(m_header->is_truehd() ? codec_c::type_e::A_TRUEHD : codec_c::type_e::A_MLP, m_header->is_truehd() ? "TrueHD" : "MLP"), info.get());
+  id_result_track(0, ID_RESULT_TRACK_AUDIO, m_header->codec().get_name(), info.get());
 
   if (!m_ac3_header.m_valid)
     return;
