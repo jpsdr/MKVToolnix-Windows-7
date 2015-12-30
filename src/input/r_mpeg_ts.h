@@ -396,7 +396,6 @@ protected:
   timestamp_c m_global_timecode_offset, m_stream_timecode;
 
   bool m_probing;
-  int track_buffer_ready;
 
   bool file_done, m_packet_sent_to_packetizer;
 

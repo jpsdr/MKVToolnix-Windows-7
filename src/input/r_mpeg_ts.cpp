@@ -643,7 +643,6 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
   , m_global_timecode_offset{}
   , m_stream_timecode{timestamp_c::ns(0)}
   , m_probing{true}
-  , track_buffer_ready(-1)
   , file_done{}
   , m_packet_sent_to_packetizer{}
   , m_dont_use_audio_pts{     "mpeg_ts|mpeg_ts_dont_use_audio_pts"}
@@ -1239,8 +1238,7 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
     probe_packet_complete(track);
 
   else
-    // PES completed, set track to quicly send it to the rightpacketizer
-    track_buffer_ready = tidx;
+    track->send_to_packetizer();
 
   return true;
 }
@@ -1611,8 +1609,6 @@ mpeg_ts_reader_c::read(generic_packetizer_c *requested_ptzr,
 
   unsigned char buf[TS_MAX_PACKET_SIZE + 1];
 
-  track_buffer_ready = -1;
-
   if (file_done)
     return flush_packetizers();
 
@@ -1627,11 +1623,6 @@ mpeg_ts_reader_c::read(generic_packetizer_c *requested_ptzr,
     }
 
     parse_packet(buf);
-
-    if (track_buffer_ready != -1) { // ES buffer ready
-      tracks[track_buffer_ready]->send_to_packetizer();
-      track_buffer_ready = -1;
-    }
 
     if (m_packet_sent_to_packetizer)
       return FILE_STATUS_MOREDATA;
