@@ -254,7 +254,7 @@ struct qtmp4_demuxer_c {
 
   memory_cptr stsd;
   unsigned int stsd_non_priv_struct_size;
-  uint32_t v_width, v_height, v_bitdepth;
+  uint32_t v_width, v_height, v_bitdepth, v_display_width_flt{}, v_display_height_flt{};
   std::deque<int64_t> references;
   uint32_t a_channels, a_bitdepth;
   float a_samplerate;
@@ -354,6 +354,8 @@ struct qtmp4_demuxer_c {
 
   void derive_track_params_from_ac3_audio_bitstream();
   void derive_track_params_from_mp3_audio_bitstream();
+
+  void set_packetizer_display_dimensions();
 
   int64_t min_timecode() const;
 

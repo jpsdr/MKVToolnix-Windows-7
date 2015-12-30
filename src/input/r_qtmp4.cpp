@@ -1369,11 +1369,15 @@ qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_cptr &new_dmx,
   if (m_in->read(&tkhd, sizeof(tkhd_atom_t)) != sizeof(tkhd_atom_t))
     throw mtx::input::header_parsing_x();
 
-  new_dmx->container_id = get_uint32_be(&tkhd.track_id);
-  new_dmx->v_width      = get_uint32_be(&tkhd.track_width)  >> 16;
-  new_dmx->v_height     = get_uint32_be(&tkhd.track_height) >> 16;
+  new_dmx->container_id         = get_uint32_be(&tkhd.track_id);
+  new_dmx->v_display_width_flt  = get_uint32_be(&tkhd.track_width);
+  new_dmx->v_display_height_flt = get_uint32_be(&tkhd.track_height);
+  new_dmx->v_width              = new_dmx->v_display_width_flt  >> 16;
+  new_dmx->v_height             = new_dmx->v_display_height_flt >> 16;
 
-  mxdebug_if(m_debug_headers, boost::format("%1%Track ID: %2%\n") % space(level * 2 + 1) % new_dmx->container_id);
+  mxdebug_if(m_debug_headers,
+             boost::format("%1%Track ID: %2% display width × height %3%.%4% × %5%.%6%\n")
+             % space(level * 2 + 1) % new_dmx->container_id % (new_dmx->v_display_width_flt >> 16) % (new_dmx->v_display_width_flt & 0xffff) % (new_dmx->v_display_height_flt >> 16) % (new_dmx->v_display_height_flt & 0xffff));
 }
 
 void
@@ -1760,6 +1764,7 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
     else
       create_video_packetizer_standard(dmx);
 
+    dmx->set_packetizer_display_dimensions();
 
   } else if (dmx->is_audio()) {
     if (dmx->codec.is(codec_c::type_e::A_AAC))
@@ -2419,6 +2424,22 @@ bool
 qtmp4_demuxer_c::is_unknown()
   const {
   return !is_audio() && !is_video() && !is_subtitles() && !is_chapters();
+}
+
+void
+qtmp4_demuxer_c::set_packetizer_display_dimensions() {
+  // Set the display width/height from the track header atom ('tkhd')
+  // if they're set and differ from the pixel dimensions. They're
+  // stored as a 32bit fix-point number. First round them to the
+  // nearest integer.
+  auto display_width  = (v_display_width_flt  + 0x8000) >> 16;
+  auto display_height = (v_display_height_flt + 0x8000) >> 16;
+
+  if (   (display_width  != 0)
+      && (display_height != 0)
+      && (   (v_width  != display_width)
+          || (v_height != display_height)))
+    m_reader.m_reader_packetizers[ptzr]->set_video_display_dimensions(display_width, display_height, OPTION_SOURCE_CONTAINER);
 }
 
 void
