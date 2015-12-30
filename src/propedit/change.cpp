@@ -20,6 +20,8 @@
 
 #include "common/common_pch.h"
 #include "common/ebml.h"
+#include "common/iso639.h"
+#include "common/list_utils.h"
 #include "common/output.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
@@ -275,6 +277,11 @@ change_c::parse_spec(change_c::change_type_e type,
 
   if (name.empty())
     throw std::runtime_error(Y("missing property name"));
+
+  if (   mtx::included_in(type, ct_add, ct_set)
+      && (name == "language")
+      && !is_valid_iso639_2_code(value))
+    throw std::runtime_error{(boost::format(("invalid ISO 639-2 language code '%1%'")) % value).str()};
 
   return std::make_shared<change_c>(type, name, value);
 }

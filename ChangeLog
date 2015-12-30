@@ -1,5 +1,9 @@
 2015-12-30  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvpropedit: bug fix: when changing the track language it is now
+        verified to be a valid ISO 639-2 language code before writing it
+        to the file. Fixes #1550.
+
         * mkvmerge: enhancement: the MP4 reader will keep the display
         dimensions from the track header atom ("tkhd") and use them as the
         display width & height. See also #1547.
