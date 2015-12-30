@@ -1,5 +1,10 @@
 2015-12-30  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: fixed the handling of a PES size of 0 ( =
+        unknown). Tracks whose PES packets had such a size were sometimes
+        not detected at all, and even if they were their content was
+        incomplete. Fixes #1553.
+
         * mkvmerge: bug fix: made the MPEG 1/2 video elementary stream
         file type recognition more resilient and more flexible dropping
         the requirement for a file to start with an MPEG start code (0x00
