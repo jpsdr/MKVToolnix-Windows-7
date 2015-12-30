@@ -1,5 +1,10 @@
 2015-12-30  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: made the MPEG 1/2 video elementary stream
+        file type recognition more resilient and more flexible dropping
+        the requirement for a file to start with an MPEG start code (0x00
+        00 01). Fixes #1462.
+
         * mkvpropedit: bug fix: when changing the track language it is now
         verified to be a valid ISO 639-2 language code before writing it
         to the file. Fixes #1550.

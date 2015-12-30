@@ -33,6 +33,8 @@
 int
 mpeg_es_reader_c::probe_file(mm_io_c *in,
                              uint64_t size) {
+  auto debug = debugging_option_c{"mpeg_es_detection|mpeg_es_probe"};
+
   if (PROBESIZE > size)
     return 0;
 
@@ -56,41 +58,42 @@ mpeg_es_reader_c::probe_file(mm_io_c *in,
     if (MPEGVIDEO_PACKET_START_CODE == value)
       return 0;
 
-    // Due to type detection woes mkvmerge requires
-    // the stream to start with a MPEG start code.
-    if (!mpeg_is_start_code(value))
-      return 0;
+    auto num_slice_start_codes_found = 0u;
+    auto start_code_at_beginning     = mpeg_is_start_code(value);
+    auto gop_start_code_found        = false;
+    auto sequence_start_code_found   = false;
+    auto ext_start_code_found        = false;
+    auto picture_start_code_found    = false;
 
-    bool gop_start_code_found      = false;
-    bool sequence_start_code_found = false;
-    bool ext_start_code_found      = false;
-    bool picture_start_code_found  = false;
-    bool slice_start_code_found    = false;
-
-    bool ok                        = false;
+    auto ok                          = false;
 
     // Let's look for a MPEG ES start code inside the first 1 MB.
     int i;
     for (i = 4; i < num_read - 1; i++) {
       if (mpeg_is_start_code(value)) {
-        mxverb(3, boost::format("mpeg_es_detection: start code found; fourth byte: 0x%|1$02x|\n") % (value & 0xff));
+        mxdebug_if(debug, boost::format("mpeg_es_detection: start code found; fourth byte: 0x%|1$02x|\n") % (value & 0xff));
 
         if (MPEGVIDEO_SEQUENCE_HEADER_START_CODE == value)
           sequence_start_code_found = true;
 
         else if (MPEGVIDEO_PICTURE_START_CODE == value)
-          picture_start_code_found  = true;
+          picture_start_code_found = true;
 
-        else if (MPEGVIDEO_GROUP_OF_PICTURES_START_CODE   == value)
-          gop_start_code_found      = true;
+        else if (MPEGVIDEO_GROUP_OF_PICTURES_START_CODE == value)
+          gop_start_code_found = true;
 
-        else if (MPEGVIDEO_EXT_START_CODE     == value)
-          gop_start_code_found      = true;
+        else if (MPEGVIDEO_EXT_START_CODE == value)
+          gop_start_code_found = true;
 
         else if ((MPEGVIDEO_FIRST_SLICE_START_CODE <= value) && (MPEGVIDEO_LAST_SLICE_START_CODE >= value))
-          slice_start_code_found    = true;
+          ++num_slice_start_codes_found;
 
-        ok = sequence_start_code_found && picture_start_code_found && (gop_start_code_found || ext_start_code_found || slice_start_code_found);
+        ok = sequence_start_code_found
+          && picture_start_code_found
+          && (   ((num_slice_start_codes_found > 0) && start_code_at_beginning)
+              || ((num_slice_start_codes_found > 0) && gop_start_code_found && ext_start_code_found)
+              || (num_slice_start_codes_found >= 25));
+
         if (ok)
           break;
       }
@@ -99,9 +102,9 @@ mpeg_es_reader_c::probe_file(mm_io_c *in,
       value  |= buf[i];
     }
 
-    mxverb(3,
-           boost::format("mpeg_es_detection: sequence %1% picture %2% gop %3% ext %4% slice %5%\n")
-           % sequence_start_code_found % picture_start_code_found % gop_start_code_found % ext_start_code_found % slice_start_code_found);
+    mxdebug_if(debug,
+               boost::format("mpeg_es_detection: sequence %1% picture %2% gop %3% ext %4% #slice %5% start code at beginning %6%; examined %7% bytes\n")
+               % sequence_start_code_found % picture_start_code_found % gop_start_code_found % ext_start_code_found % num_slice_start_codes_found % start_code_at_beginning % i);
 
     if (!ok)
       return 0;

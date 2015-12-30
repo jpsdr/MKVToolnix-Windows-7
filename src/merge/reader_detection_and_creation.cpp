@@ -204,8 +204,6 @@ get_file_type_internal(filelist_t &file) {
     type = FILE_TYPE_MPEG_TS;
   else if (mpeg_ps_reader_c::probe_file(io, size))
     type = FILE_TYPE_MPEG_PS;
-  else if (mpeg_es_reader_c::probe_file(io, size))
-    type = FILE_TYPE_MPEG_ES;
   else {
     // File types which are the same in raw format and in other container formats.
     // Detection requires 20 or more consecutive packets.
@@ -231,8 +229,9 @@ get_file_type_internal(filelist_t &file) {
   else if (vobbtn_reader_c::probe_file(io, size))
     type = FILE_TYPE_VOBBTN;
 
-  // Try some more of the raw audio formats before trying h.264 (which
-  // often enough simply works). However, require that the first frame
+  // Try some more of the raw audio formats before trying elementary
+  // stream video formats (MPEG 1/2, AVC/h.264, HEVC/h.265; those
+  // often enough simply work). However, require that the first frame
   // starts at the beginning of the file.
   else if (mp3_reader_c::probe_file(io, size, 32 * 1024, 1, true))
     type = FILE_TYPE_MP3;
@@ -241,6 +240,8 @@ get_file_type_internal(filelist_t &file) {
   else if (aac_reader_c::probe_file(io, size, 32 * 1024, 1, true))
     type = FILE_TYPE_AAC;
 
+  else if (mpeg_es_reader_c::probe_file(io, size))
+    type = FILE_TYPE_MPEG_ES;
   else if (avc_es_reader_c::probe_file(io, size))
     type = FILE_TYPE_AVC_ES;
   else if (hevc_es_reader_c::probe_file(io, size))
