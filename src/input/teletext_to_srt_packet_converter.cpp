@@ -294,7 +294,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet(packet_cptr const &packet
 std::string
 teletext_to_srt_packet_converter_c::page_to_string()
   const {
-  auto content = join("\n", m_ttx_page_data.page_buffer);
+  auto content = boost::join(m_ttx_page_data.page_buffer, "\n");
   for (auto &c : content)
     if ((c < ' ') && (c != '\n'))
       c = ' ';

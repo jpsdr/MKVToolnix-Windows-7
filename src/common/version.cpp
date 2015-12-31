@@ -140,7 +140,7 @@ get_version_info(const std::string &program,
     info.push_back("32bit");
 #endif
 
-  return join(" ", info);
+  return boost::join(info, " ");
 }
 
 int

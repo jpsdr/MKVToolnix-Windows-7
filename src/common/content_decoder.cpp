@@ -140,5 +140,5 @@ content_decoder_c::descriptive_algorithm_list() {
 
   boost::for_each(encodings, [&](const kax_content_encoding_t &enc) { algorithms.push_back(to_string(enc.comp_algo)); });
 
-  return join(",", algorithms);
+  return boost::join(algorithms, ",");
 }

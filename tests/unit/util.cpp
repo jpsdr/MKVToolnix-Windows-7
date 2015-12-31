@@ -102,7 +102,7 @@ ebml_equals_c::set_error(std::string const &error,
   if (cmp)
     full_path.push_back(EBML_NAME(cmp));
 
-  m_error = (boost::format("%1% path: %2%") % error % join(" -> ", full_path)).str();
+  m_error = (boost::format("%1% path: %2%") % error % boost::join(full_path, " -> ")).str();
   return false;
 }
 

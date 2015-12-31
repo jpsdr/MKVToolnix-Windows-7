@@ -681,7 +681,7 @@ handle_content_encodings(EbmlStream *&es,
             scope.push_back(Y("rest: unknown"));
           if (scope.empty())
             scope.push_back(Y("unknown"));
-          show_element(l5, 5, boost::format(Y("Scope: %1% (%2%)")) % ce_scope % join(", ", scope));
+          show_element(l5, 5, boost::format(Y("Scope: %1% (%2%)")) % ce_scope % boost::join(scope, ", "));
 
         } else if (Is<KaxContentEncodingType>(l5)) {
           auto ce_type = static_cast<KaxContentEncodingType *>(l5)->GetValue();
@@ -939,7 +939,7 @@ handle_tracks(EbmlStream *&es,
                % kax_codec_id
                % fourcc_buffer
                % (summary.empty() ? "" : ", ")
-               % join(", ", summary));
+               % boost::join(summary, ", "));
 
     } else if (!is_global(es, l2, 2))
       show_unknown_element(l2, 2);

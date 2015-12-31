@@ -25,8 +25,6 @@ split(std::string const &text,
   return split(text, boost::regex(std::string("\\Q") + pattern, boost::regex::perl), max);
 }
 
-std::string join(const char *pattern, const std::vector<std::string> &strings);
-
 void strip(std::string &s, bool newlines = false);
 std::string strip_copy(std::string const &s, bool newlines = false);
 void strip(std::vector<std::string> &v, bool newlines = false);

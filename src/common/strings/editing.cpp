@@ -43,22 +43,6 @@ split(std::string const &text,
   return results;
 }
 
-std::string
-join(const char *pattern,
-     const std::vector<std::string> &strings) {
-  if (strings.empty())
-    return "";
-
-  std::string dst = strings[0];
-  size_t i;
-  for (i = 1; i < strings.size(); i++) {
-    dst += pattern;
-    dst += strings[i];
-  }
-
-  return dst;
-}
-
 void
 strip_back(std::string &s,
            bool newlines) {

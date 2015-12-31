@@ -329,7 +329,7 @@ generic_reader_c::display_identification_results_as_text() {
 
     brng::sort(formatted);
 
-    return join(" ", formatted);
+    return boost::join(formatted, " ");
   };
 
   std::string format_file, format_track, format_attachment, format_att_description, format_att_file_name;
