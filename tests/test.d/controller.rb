@@ -1,3 +1,4 @@
+# coding: utf-8
 class Controller
   attr_accessor :test_failed, :test_new, :test_date_after, :teset_date_before, :update_failed, :num_failed, :record_duration
   attr_reader   :num_threads, :results
@@ -69,7 +70,8 @@ class Controller
 
     duration = Time.now - start
 
-    show_message "#{@num_failed}/#{num_tests} failed (" + (num_tests > 0 ? (@num_failed * 100 / num_tests).to_s : "0") + "%). " + "Tests took #{duration}s."
+    show_message "#{@num_failed}/#{num_tests} failed (" + (num_tests > 0 ? (@num_failed * 100 / num_tests).to_s : "0") + "%). " +
+      "Tests took #{duration}s (#{start.strftime("%Y-%m-%m %H:%M:%S")} – #{duration.strftime("%Y-%m-%m %H:%M:%S")})"
   end
 
   def run_threads
