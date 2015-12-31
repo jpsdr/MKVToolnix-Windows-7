@@ -1182,7 +1182,7 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
       return false;
   }
 
-  unsigned char ts_payload_size = TS_PACKET_SIZE - (ts_payload - (unsigned char *)hdr);
+  unsigned char ts_payload_size = buf + TS_PACKET_SIZE - ts_payload;
 
   // Copy the std::shared_ptr instead of referencing it because functions
   // called from this one will modify tracks.
@@ -1211,13 +1211,11 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
     } else
       track->continuity_counter = hdr->get_continuity_counter();
 
+    // If PES payload size known, prevent to copy more TS payload than actually needed
     if (   (track->pes_payload_size != 0)
         && (track->pes_payload_size <  static_cast<int>(ts_payload_size + track->pes_payload->get_size())))
       ts_payload_size = track->pes_payload_size - track->pes_payload->get_size();
   }
-
-  if ((buf + TS_PACKET_SIZE) < (ts_payload + ts_payload_size))
-    ts_payload_size = buf + TS_PACKET_SIZE - ts_payload;
 
   if (0 == ts_payload_size)
     return false;
@@ -1360,7 +1358,7 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
     //   mxinfo(boost::format("pid %|1$04x| prev ES payload size %4% new ES payload size %2% accumulated pes_payload size %3%\n") % track->pid % static_cast<unsigned int>(track->pes_payload_size) % static_cast<unsigned int>(track->pes_payload->get_size()) % static_cast<unsigned int>(previous_pes_payload_size));
 
     if (m_debug_packet) {
-      mxdebug(boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PES info:"));
+      mxdebug(boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PES info:\n"));
       mxdebug(boost::format("   stream_id = %1%\n") % static_cast<unsigned int>(pes_data->stream_id));
       mxdebug(boost::format("   PES_packet_length = %1%\n") % track->pes_payload_size);
       mxdebug(boost::format("   PTS_DTS = %1% ESCR = %2% ES_rate = %3%\n") % static_cast<unsigned int>(pes_data->pts_dts) % static_cast<unsigned int>(pes_data->get_escr()) % static_cast<unsigned int>(pes_data->get_es_rate()));
