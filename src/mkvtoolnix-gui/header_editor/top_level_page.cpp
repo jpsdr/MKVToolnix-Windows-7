@@ -21,4 +21,15 @@ TopLevelPage::init() {
   m_parent.appendPage(this);
 }
 
+QString
+TopLevelPage::internalIdentifier()
+  const {
+  return m_internalIdentifier;
+}
+
+void
+TopLevelPage::setInternalIdentifier(QString const &identifier) {
+  m_internalIdentifier = identifier;
+}
+
 }}}

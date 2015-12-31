@@ -135,4 +135,10 @@ TrackTypePage::summarizeProperties() {
   m_properties = properties.join(Q(", "));
 }
 
+QString
+TrackTypePage::internalIdentifier()
+  const {
+  return Q("track %1").arg(m_trackIdxMkvmerge);
+}
+
 }}}

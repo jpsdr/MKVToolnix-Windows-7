@@ -35,6 +35,7 @@ public:
   void retranslateUi();
 
   QList<QStandardItem *> itemsForIndex(QModelIndex const &idx);
+  QModelIndex indexFromPage(PageBase *page) const;
 };
 
 }}}

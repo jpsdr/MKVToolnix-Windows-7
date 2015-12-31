@@ -29,6 +29,8 @@ public:
   TrackTypePage(Tab &parent, EbmlMaster &master, uint64_t trackIdxMkvmerge);
   virtual ~TrackTypePage();
 
+  virtual QString internalIdentifier() const override;
+
 protected:
   virtual void setItems(QList<QStandardItem *> const &items) const override;
   virtual void summarizeProperties();

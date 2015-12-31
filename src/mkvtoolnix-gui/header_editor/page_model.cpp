@@ -96,17 +96,25 @@ PageModel::itemsForIndex(QModelIndex const &idx) {
   return items;
 }
 
+QModelIndex
+PageModel::indexFromPage(PageBase *page)
+  const {
+  return Util::findIndex(*this, [this, page](QModelIndex const &idx) -> bool {
+    return selectedPage(idx) == page;
+  });
+}
+
 void
 PageModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Type"),          Q("type")             },
-    { QY("Codec"),         Q("codec")            },
-    { QY("Language"),      Q("language")         },
-    { QY("Name"),          Q("name")             },
-    { QY("UID"),           Q("uid")              },
-    { QY("Default track"), Q("defaultTrackFlag") },
-    { QY("Forced track"),  Q("forcedTrackFlag")  },
-    { QY("Properties"),    Q("properties")       },
+    { QY("Type"),             Q("type")             },
+    { QY("Codec/MIME type"),  Q("codec")            },
+    { QY("Language"),         Q("language")         },
+    { QY("Name/Description"), Q("name")             },
+    { QY("UID"),              Q("uid")              },
+    { QY("Default track"),    Q("defaultTrackFlag") },
+    { QY("Forced track"),     Q("forcedTrackFlag")  },
+    { QY("Properties"),       Q("properties")       },
   });
 
   horizontalHeaderItem(4)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

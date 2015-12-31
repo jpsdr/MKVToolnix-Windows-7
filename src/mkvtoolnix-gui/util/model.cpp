@@ -128,4 +128,20 @@ walkTree(QAbstractItemModel &model,
     walkTree(model, model.index(row, 0, idx), worker);
 }
 
+QModelIndex
+findIndex(QAbstractItemModel const &model,
+          std::function<bool(QModelIndex const &)> const &predicate,
+          QModelIndex const &idx) {
+  if (idx.isValid() && predicate(idx))
+    return idx;
+
+  for (auto row = 0, numRows = model.rowCount(idx); row < numRows; ++row) {
+    auto result = findIndex(model, predicate, model.index(row, 0, idx));
+    if (result.isValid())
+      return result;
+  }
+
+  return {};
+}
+
 }}}

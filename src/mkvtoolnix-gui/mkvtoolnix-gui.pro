@@ -40,7 +40,9 @@ FORMS += \
     forms/watch_jobs/tab.ui \
     forms/watch_jobs/tool.ui \
     forms/merge/executable_location_dialog.ui \
-    forms/main_window/prefs_run_program_widget.ui
+    forms/main_window/prefs_run_program_widget.ui \
+    forms/header_editor/attachments_page.ui \
+    forms/header_editor/attached_file_page.ui
 
 RESOURCES += \
     qt_resources.qrc

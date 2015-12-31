@@ -1,17 +1,25 @@
 #include "common/common_pch.h"
 
 #include <QFileInfo>
+#include <QMenu>
 #include <QMessageBox>
 
+#include <matroska/KaxAttached.h>
+#include <matroska/KaxAttachments.h>
 #include <matroska/KaxInfoData.h>
 #include <matroska/KaxSemantic.h>
 
+#include "common/construct.h"
 #include "common/ebml.h"
+#include "common/extern_data.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"
 #include "common/segment_tracks.h"
+#include "common/unique_numbers.h"
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/ascii_string_value_page.h"
+#include "mkvtoolnix-gui/header_editor/attached_file_page.h"
+#include "mkvtoolnix-gui/header_editor/attachments_page.h"
 #include "mkvtoolnix-gui/header_editor/bit_value_page.h"
 #include "mkvtoolnix-gui/header_editor/bool_value_page.h"
 #include "mkvtoolnix-gui/header_editor/float_value_page.h"
@@ -23,6 +31,8 @@
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/basic_tree_view.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/message_box.h"
@@ -39,8 +49,14 @@ Tab::Tab(QWidget *parent,
   , ui{new Ui::Tab}
   , m_fileName{fileName}
   , m_model{new PageModel{this}}
+  , m_treeContextMenu{new QMenu{this}}
   , m_expandAllAction{new QAction{this}}
   , m_collapseAllAction{new QAction{this}}
+  , m_addAttachmentsAction{new QAction{this}}
+  , m_removeAttachmentAction{new QAction{this}}
+  , m_saveAttachmentContentAction{new QAction{this}}
+  , m_replaceAttachmentContentAction{new QAction{this}}
+  , m_replaceAttachmentContentSetValuesAction{new QAction{this}}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -75,7 +91,7 @@ Tab::load() {
   auto expansionStatus     = QHash<QString, bool>{};
 
   for (auto const &page : m_model->topLevelPages()) {
-    auto key             = page == m_segmentinfoPage ? Q("segmentinfo") : QString::number(static_cast<TrackTypePage &>(*page).m_trackNumber);
+    auto key = dynamic_cast<TopLevelPage &>(*page).internalIdentifier();
     expansionStatus[key] = ui->elements->isExpanded(page->m_pageIdx);
   }
 
@@ -102,7 +118,7 @@ Tab::load() {
   m_analyzer->close_file();
 
   for (auto const &page : m_model->topLevelPages()) {
-    auto key = page == m_segmentinfoPage ? Q("segmentinfo") : QString::number(static_cast<TrackTypePage &>(*page).m_trackNumber);
+    auto key = dynamic_cast<TopLevelPage &>(*page).internalIdentifier();
     ui->elements->setExpanded(page->m_pageIdx, expansionStatus[key]);
   }
 
@@ -115,7 +131,8 @@ Tab::load() {
   if (-1 != selected2ndLevelRow)
     selectedIdx = m_model->index(selected2ndLevelRow, 0, selectedIdx);
 
-  ui->elements->selectionModel()->select(selectedIdx, QItemSelectionModel::ClearAndSelect);
+  auto selection = QItemSelection{selectedIdx, selectedIdx.sibling(selectedIdx.row(), m_model->columnCount() - 1)};
+  ui->elements->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
   selectionChanged(selectedIdx, QModelIndex{});
 }
 
@@ -123,6 +140,7 @@ void
 Tab::save() {
   auto segmentinfoModified = false;
   auto tracksModified      = false;
+  auto attachmentsModified = false;
 
   for (auto const &page : m_model->topLevelPages()) {
     if (!page->hasBeenModified())
@@ -130,11 +148,15 @@ Tab::save() {
 
     if (page == m_segmentinfoPage)
       segmentinfoModified = true;
+
+    else if (page == m_attachmentsPage)
+      attachmentsModified = true;
+
     else
       tracksModified      = true;
   }
 
-  if (!segmentinfoModified && !tracksModified) {
+  if (!segmentinfoModified && !tracksModified && !attachmentsModified) {
     Util::MessageBox::information(this)->title(QY("File has not been modified")).text(QY("The header values have not been modified. There is nothing to save.")).exec();
     return;
   }
@@ -167,6 +189,21 @@ Tab::save() {
       QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified track headers failed."));
   }
 
+  if (attachmentsModified) {
+    auto attachments = std::make_shared<KaxAttachments>();
+
+    for (auto const &attachedFilePage : m_attachmentsPage->m_children)
+      attachments->PushElement(*dynamic_cast<AttachedFilePage &>(*attachedFilePage).m_attachment.get());
+
+    auto result = attachments->ListSize() ? m_analyzer->update_element(attachments.get(), true)
+                :                           m_analyzer->remove_elements(KaxAttachments::ClassInfos.GlobalId);
+
+    attachments->RemoveAll();
+
+    if (kax_analyzer_c::uer_success != result)
+      QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified attachments failed."));
+  }
+
   m_analyzer->close_file();
 
   load();
@@ -183,15 +220,21 @@ Tab::setupUi() {
   ui->directory->setText(info.path());
 
   ui->elements->setModel(m_model);
-  ui->elements->addAction(m_expandAllAction);
-  ui->elements->addAction(m_collapseAllAction);
+  ui->elements->acceptDroppedFiles(true);
 
   Util::HeaderViewManager::create(*ui->elements, "HeaderEditor::Elements");
   Util::preventScrollingWithoutFocus(this);
 
-  connect(ui->elements->selectionModel(), &QItemSelectionModel::currentChanged, this, &Tab::selectionChanged);
-  connect(m_expandAllAction,              &QAction::triggered,                  this, &Tab::expandAll);
-  connect(m_collapseAllAction,            &QAction::triggered,                  this, &Tab::collapseAll);
+  connect(ui->elements,                              &Util::BasicTreeView::customContextMenuRequested, this, &Tab::showTreeContextMenu);
+  connect(ui->elements,                              &Util::BasicTreeView::filesDropped,               this, &Tab::addAttachments);
+  connect(ui->elements->selectionModel(),            &QItemSelectionModel::currentChanged,             this, &Tab::selectionChanged);
+  connect(m_expandAllAction,                         &QAction::triggered,                              this, &Tab::expandAll);
+  connect(m_collapseAllAction,                       &QAction::triggered,                              this, &Tab::collapseAll);
+  connect(m_addAttachmentsAction,                    &QAction::triggered,                              this, &Tab::selectAttachmentsAndAdd);
+  connect(m_removeAttachmentAction,                  &QAction::triggered,                              this, &Tab::removeSelectedAttachment);
+  connect(m_saveAttachmentContentAction,             &QAction::triggered,                              this, &Tab::saveAttachmentContent);
+  connect(m_replaceAttachmentContentAction,          &QAction::triggered,                              [this]() { replaceAttachmentContent(false); });
+  connect(m_replaceAttachmentContentSetValuesAction, &QAction::triggered,                              [this]() { replaceAttachmentContent(true); });
 }
 
 void
@@ -207,6 +250,12 @@ Tab::model()
   return m_model;
 }
 
+PageBase *
+Tab::currentlySelectedPage()
+  const {
+  return m_model->selectedPage(ui->elements->selectionModel()->currentIndex());
+}
+
 void
 Tab::retranslateUi() {
   ui->fileNameLabel->setText(QY("File name:"));
@@ -214,6 +263,11 @@ Tab::retranslateUi() {
 
   m_expandAllAction->setText(QY("&Expand all"));
   m_collapseAllAction->setText(QY("&Collapse all"));
+  m_addAttachmentsAction->setText(QY("&Add attachments"));
+  m_removeAttachmentAction->setText(QY("&Remove selected attachment"));
+  m_saveAttachmentContentAction->setText(QY("Save attachment content to a &file"));
+  m_replaceAttachmentContentAction->setText(QY("Replace attachment with a new &file"));
+  m_replaceAttachmentContentSetValuesAction->setText(QY("Replace attachment with new a file and &derive name && MIME type from it"));
 
   auto &pages = m_model->pages();
   for (auto const &page : pages)
@@ -233,6 +287,8 @@ Tab::populateTree() {
   m_analyzer->with_elements(KaxTracks::ClassInfos.GlobalId, [this](kax_analyzer_data_c const &data) {
     handleTracks(data);
   });
+
+  handleAttachments();
 }
 
 void
@@ -288,8 +344,9 @@ Tab::handleSegmentInfo(kax_analyzer_data_c const &data) {
   if (!m_eSegmentInfo)
     return;
 
-  auto &info = static_cast<KaxInfo &>(*m_eSegmentInfo.get());
+  auto &info = dynamic_cast<KaxInfo &>(*m_eSegmentInfo.get());
   auto page  = new TopLevelPage{*this, YT("Segment information")};
+  page->setInternalIdentifier("segmentInfo");
   page->init();
 
   (new StringValuePage{*this, *page, info, KaxTitle::ClassInfos,           YT("Title"),                        YT("The title for the whole movie.")})->init();
@@ -311,7 +368,7 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
 
   auto trackIdxMkvmerge = 0u;
 
-  for (auto const &element : static_cast<EbmlMaster &>(*m_eTracks)) {
+  for (auto const &element : dynamic_cast<EbmlMaster &>(*m_eTracks)) {
     auto kTrackEntry = dynamic_cast<KaxTrackEntry *>(element);
     if (!kTrackEntry)
       continue;
@@ -427,8 +484,33 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
 }
 
 void
+Tab::handleAttachments() {
+  auto attachments = KaxAttachedList{};
+
+  m_analyzer->with_elements(KaxAttachments::ClassInfos.GlobalId, [this, &attachments](kax_analyzer_data_c const &data) {
+    auto master = std::dynamic_pointer_cast<KaxAttachments>(m_analyzer->read_element(data));
+    if (!master)
+      return;
+
+    auto idx = 0u;
+    while (idx < master->ListSize()) {
+      auto attached = dynamic_cast<KaxAttached *>((*master)[idx]);
+      if (attached) {
+        attachments << KaxAttachedPtr{attached};
+        master->Remove(idx);
+      } else
+        ++idx;
+    }
+  });
+
+  m_attachmentsPage = new AttachmentsPage{*this, attachments};
+  m_attachmentsPage->init();
+}
+
+void
 Tab::validate() {
   auto pageIdx = m_model->validate();
+  // TODO: Tab::validate: handle attachments
 
   if (!pageIdx.isValid()) {
     Util::MessageBox::information(this)->title(QY("Header validation")).text(QY("All header values are OK.")).exec();
@@ -465,6 +547,123 @@ void
 Tab::expandCollapseAll(bool expand) {
   for (auto const &page : m_model->topLevelPages())
     ui->elements->setExpanded(page->m_pageIdx, expand);
+}
+
+void
+Tab::showTreeContextMenu(QPoint const &pos) {
+  auto selectedPage       = currentlySelectedPage();
+  auto isAttachmentsPage  = !!dynamic_cast<AttachmentsPage *>(selectedPage);
+  auto isAttachedFilePage = !!dynamic_cast<AttachedFilePage *>(selectedPage);
+  auto isAttachments      = isAttachmentsPage || isAttachedFilePage;
+  auto actions            = m_treeContextMenu->actions();
+
+  for (auto const &action : actions)
+    if (!action->isSeparator())
+      m_treeContextMenu->removeAction(action);
+
+  m_treeContextMenu->clear();
+
+  m_treeContextMenu->addAction(m_expandAllAction);
+  m_treeContextMenu->addAction(m_collapseAllAction);
+  m_treeContextMenu->addSeparator();
+  m_treeContextMenu->addAction(m_addAttachmentsAction);
+
+  if (isAttachments) {
+    m_treeContextMenu->addAction(m_removeAttachmentAction);
+    m_treeContextMenu->addSeparator();
+    m_treeContextMenu->addAction(m_saveAttachmentContentAction);
+    m_treeContextMenu->addAction(m_replaceAttachmentContentAction);
+    m_treeContextMenu->addAction(m_replaceAttachmentContentSetValuesAction);
+
+    m_removeAttachmentAction->setEnabled(isAttachedFilePage);
+    m_saveAttachmentContentAction->setEnabled(isAttachedFilePage);
+    m_replaceAttachmentContentAction->setEnabled(isAttachedFilePage);
+    m_replaceAttachmentContentSetValuesAction->setEnabled(isAttachedFilePage);
+  }
+
+  m_treeContextMenu->exec(ui->elements->viewport()->mapToGlobal(pos));
+}
+
+void
+Tab::selectAttachmentsAndAdd() {
+  auto &settings = Util::Settings::get();
+  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), Util::dirPath(settings.lastOpenDirPath()), QY("All files") + Q(" (*)"));
+
+  if (fileNames.isEmpty())
+    return;
+
+  settings.m_lastOpenDir = QFileInfo{fileNames[0]}.path();
+  settings.save();
+
+  addAttachments(fileNames);
+}
+
+void
+Tab::addAttachment(KaxAttachedPtr const &attachment) {
+  if (!attachment)
+    return;
+
+  auto page = new AttachedFilePage{*this, *m_attachmentsPage, attachment};
+  page->init();
+}
+
+void
+Tab::addAttachments(QStringList const &fileNames) {
+  for (auto const &fileName : fileNames)
+    addAttachment(createAttachmentFromFile(fileName));
+
+  ui->elements->setExpanded(m_attachmentsPage->m_pageIdx, true);
+}
+
+void
+Tab::removeSelectedAttachment() {
+  auto selectedPage = currentlySelectedPage();
+  if (!selectedPage)
+    return;
+
+  auto idx = m_model->indexFromPage(selectedPage);
+  if (idx.isValid())
+    m_model->removeRow(idx.row(), idx.parent());
+
+  m_attachmentsPage->m_children.removeAll(selectedPage);
+
+  delete selectedPage;
+}
+
+KaxAttachedPtr
+Tab::createAttachmentFromFile(QString const &fileName) {
+  QByteArray content;
+  QFile file{fileName};
+
+  if (!file.open(QIODevice::ReadOnly)) {
+    Util::MessageBox::critical(this)->title(QY("Reading failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();
+    return {};
+  }
+
+  auto mimeType     = guess_mime_type(to_utf8(fileName), true);
+  auto contentAsMem = std::make_shared<memory_c>(content.data(), content.count(), false);
+  auto uid          = create_unique_number(UNIQUE_ATTACHMENT_IDS);
+
+  return KaxAttachedPtr{
+    mtx::construct::cons<KaxAttached>(new KaxFileName, to_wide(QFileInfo{fileName}.fileName()),
+                                      new KaxMimeType, mimeType,
+                                      new KaxFileUID,  uid,
+                                      new KaxFileData, contentAsMem)
+  };
+}
+
+void
+Tab::saveAttachmentContent() {
+  auto page = dynamic_cast<AttachedFilePage *>(currentlySelectedPage());
+  if (page)
+    page->saveContent();
+}
+
+void
+Tab::replaceAttachmentContent(bool deriveNameAndMimeType) {
+  auto page = dynamic_cast<AttachedFilePage *>(currentlySelectedPage());
+  if (page)
+    page->replaceContent(deriveNameAndMimeType);
 }
 
 }}}

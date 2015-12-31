@@ -36,6 +36,7 @@ void withSelectedIndexes(QAbstractItemView *view, std::function<void(QModelIndex
 void selectRow(QAbstractItemView *view, int row, QModelIndex const &parentIdx = QModelIndex{});
 QModelIndex toTopLevelIdx(QModelIndex const &idx);
 void walkTree(QAbstractItemModel &model, QModelIndex const &idx, std::function<void(QModelIndex const &)> const &worker);
+QModelIndex findIndex(QAbstractItemModel const &model, std::function<bool(QModelIndex const &)> const &predicate, QModelIndex const &idx = QModelIndex{});
 
 }}}
 
