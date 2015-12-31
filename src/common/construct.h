@@ -139,9 +139,9 @@ cons_impl(EbmlMaster *master,
 }
 
 template<typename T>
-EbmlMaster *
-master() {
-  T *master = new T;
+auto
+master() -> T * {
+  auto *master = new T;
   for (auto element : *master)
     delete element;
   master->RemoveAll();
@@ -149,15 +149,15 @@ master() {
 }
 
 template<typename Tmaster>
-inline EbmlMaster *
-cons() {
+inline auto
+cons() -> Tmaster * {
   return master<Tmaster>();
 }
 
 template<typename Tmaster,
          typename... Targs>
-inline EbmlMaster *
-cons(Targs... args) {
+inline auto
+cons(Targs... args) -> Tmaster * {
   auto master = cons<Tmaster>();
   cons_impl(master, args...);
 
