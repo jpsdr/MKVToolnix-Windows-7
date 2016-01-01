@@ -1431,7 +1431,7 @@ Tab::selectAllTracksOfType(boost::optional<Track::Type> type) {
   if (!numRows)
     return;
 
-  auto numColumns = m_tracksModel->columnCount() - 1;
+  auto lastColumn = m_tracksModel->columnCount() - 1;
   auto selection  = QItemSelection{};
 
   for (auto row = 0; row < numRows; ++row) {
@@ -1439,7 +1439,7 @@ Tab::selectAllTracksOfType(boost::optional<Track::Type> type) {
     auto numAppended = track.m_appendedTracks.count();
 
     if (!type || (track.m_type == *type))
-      selection.select(m_tracksModel->index(row, 0), m_tracksModel->index(row, numColumns - 1));
+      selection.select(m_tracksModel->index(row, 0), m_tracksModel->index(row, lastColumn));
 
     if (!numAppended)
       continue;
@@ -1449,7 +1449,7 @@ Tab::selectAllTracksOfType(boost::optional<Track::Type> type) {
     for (auto appendedRow = 0; appendedRow < numAppended; ++appendedRow) {
       auto &appendedTrack = *track.m_appendedTracks[appendedRow];
       if (!type || (appendedTrack.m_type == *type))
-        selection.select(m_tracksModel->index(appendedRow, 0, rowIdx), m_tracksModel->index(appendedRow, numColumns - 1, rowIdx));
+        selection.select(m_tracksModel->index(appendedRow, 0, rowIdx), m_tracksModel->index(appendedRow, lastColumn, rowIdx));
     }
   }
 
