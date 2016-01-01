@@ -269,6 +269,11 @@ Tab::retranslateUi() {
   m_replaceAttachmentContentAction->setText(QY("Replace attachment with a new &file"));
   m_replaceAttachmentContentSetValuesAction->setText(QY("Replace attachment with new a file and &derive name && MIME type from it"));
 
+  m_addAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
+  m_removeAttachmentAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
+  m_saveAttachmentContentAction->setIcon(QIcon{Q(":/icons/16x16/document-save.png")});
+  m_replaceAttachmentContentAction->setIcon(QIcon{Q(":/icons/16x16/document-open.png")});
+
   auto &pages = m_model->pages();
   for (auto const &page : pages)
     page->retranslateUi();

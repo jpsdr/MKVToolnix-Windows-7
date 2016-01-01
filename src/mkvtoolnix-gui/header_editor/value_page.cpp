@@ -89,6 +89,7 @@ ValuePage::init() {
   m_input->setEnabled(m_present);
 
   m_bReset = new QPushButton{this};
+  m_bReset->setIcon(QIcon{Q(":/icons/16x16/edit-undo.png")});
 
   // ----------------------------------------------------------------------
 

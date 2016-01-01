@@ -95,6 +95,17 @@ Tab::setupUi() {
   Util::HeaderViewManager::create(*ui->elements,  "ChapterEditor::Elements");
   Util::HeaderViewManager::create(*ui->tvChNames, "ChapterEditor::ChapterNames");
 
+  m_addEditionBeforeAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-above.png")});
+  m_addEditionAfterAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-below.png")});
+  m_addChapterBeforeAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-above.png")});
+  m_addChapterAfterAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-below.png")});
+  m_addSubChapterAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-under.png")});
+  m_generateSubChaptersAction->setIcon(QIcon{Q(":/icons/16x16/.png")});
+  m_duplicateAction->setIcon(QIcon{Q(":/icons/16x16/tab-duplicate.png")});
+  m_removeElementAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
+  m_renumberSubChaptersAction->setIcon(QIcon{Q(":/icons/16x16/format-list-ordered.png")});
+  m_massModificationAction->setIcon(QIcon{Q(":/icons/16x16/tools-wizard.png")});
+
   auto mw = MainWindow::get();
   connect(ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                 &Tab::showChapterContextMenu);
   connect(ui->elements,                    &Util::BasicTreeView::deletePressed,                                    this,                 &Tab::removeElement);

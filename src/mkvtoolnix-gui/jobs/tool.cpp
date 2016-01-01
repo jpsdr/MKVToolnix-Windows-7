@@ -87,6 +87,14 @@ Tool::setupUi() {
   m_jobsMenu->addAction(m_acknowledgeSelectedErrorsAction);
   m_jobsMenu->addAction(m_acknowledgeSelectedWarningsErrorsAction);
 
+  m_viewOutputAction->setIcon(QIcon{Q(":/icons/16x16/layer-visible-on.png")});
+  m_openFolderAction->setIcon(QIcon{Q(":/icons/16x16/document-open-folder.png")});
+  m_startAutomaticallyAction->setIcon(QIcon{Q(":/icons/16x16/media-playback-start.png")});
+  m_startImmediatelyAction->setIcon(QIcon{Q(":/icons/16x16/media-seek-forward.png")});
+  m_editAndRemoveAction->setIcon(QIcon{Q(":/icons/16x16/edit-entry.png")});
+  m_removeAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
+  m_acknowledgeSelectedWarningsErrorsAction->setIcon(QIcon{Q(":/icons/16x16/dialog-ok-apply.png")});
+
   retranslateUi();
 }
 

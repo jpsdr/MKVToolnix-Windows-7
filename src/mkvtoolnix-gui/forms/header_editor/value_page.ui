@@ -221,6 +221,10 @@
        <property name="text">
         <string notr="true">PushButton</string>
        </property>
+       <property name="icon">
+        <iconset resource="../../qt_resources.qrc">
+         <normaloff>:/icons/16x16/edit-undo.png</normaloff>:/icons/16x16/edit-undo.png</iconset>
+       </property>
       </widget>
      </item>
     </layout>
@@ -232,8 +236,11 @@
    <class>mtx::gui::Util::ElideLabel</class>
    <extends>QFrame</extends>
    <header>mkvtoolnix-gui/util/elide_label.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../qt_resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
