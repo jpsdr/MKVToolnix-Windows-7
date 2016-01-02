@@ -1,5 +1,9 @@
 2016-01-02  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: fixed a mis-detection of an MPEG-2 video
+        elementary stream as a TrueHD file which then caused a
+        segmentation fault. Fixes #1559.
+
         * mkvmerge: bug fix: Matroska attachments with the same name, size
         and MIME type were not output during file identification.
 

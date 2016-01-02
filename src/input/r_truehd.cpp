@@ -195,7 +195,13 @@ truehd_reader_c::find_valid_headers(mm_io_c &in,
 
     int num_sync_frames = 0;
     while (parser.frame_available()) {
-      truehd_frame_cptr frame = parser.get_next_frame();
+      auto frame = parser.get_next_frame();
+      if (!frame)
+        break;
+
+      if (frame->is_ac3())
+        continue;
+
       if (frame->is_sync())
         ++num_sync_frames;
     }
