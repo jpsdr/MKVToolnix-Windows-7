@@ -167,7 +167,8 @@ AttachedFilePage::validateThis()
 void
 AttachedFilePage::saveContent() {
   auto content = FindChild<KaxFileData>(*m_attachment);
-  if (!content)
+
+  if (!m_newFileContent && !content)
     return;
 
   auto &settings = Util::Settings::get();
@@ -183,8 +184,12 @@ AttachedFilePage::saveContent() {
   auto ok = true;
 
   if (file.open(QIODevice::WriteOnly)) {
-    file.write(reinterpret_cast<char *>(content->GetBuffer()), content->GetSize());
+    if (m_newFileContent)
+      file.write(reinterpret_cast<char *>(m_newFileContent->get_buffer()), m_newFileContent->get_size());
+    else
+      file.write(reinterpret_cast<char *>(content->GetBuffer()), content->GetSize());
     ok = file.commit();
+
   } else
     ok = false;
 
