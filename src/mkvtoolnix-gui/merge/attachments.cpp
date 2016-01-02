@@ -20,7 +20,6 @@ using namespace mtx::gui;
 void
 Tab::setupAttachmentsControls() {
   ui->attachments->setModel(m_attachmentsModel);
-  ui->splitMaxFiles->setMaximum(std::numeric_limits<int>::max());
 
   // MIME type
   for (auto &mime_type : mime_types)

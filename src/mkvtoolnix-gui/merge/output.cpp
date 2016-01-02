@@ -37,9 +37,11 @@ Tab::setupOutputControls() {
     Util::fixComboBoxViewWidth(*control);
   }
 
+  ui->splitMaxFiles->setMaximum(std::numeric_limits<int>::max());
+
   onSplitModeChanged(MuxConfig::DoNotSplit);
 
-  connect(MainWindow::get(),              &MainWindow::preferencesChanged,              this, &Tab::setupOutputFileControls);
+  connect(MainWindow::get(),              &MainWindow::preferencesChanged,                                                                  this, &Tab::setupOutputFileControls);
 
   connect(ui->additionalOptions,          &QLineEdit::textChanged,                                                                          this, &Tab::onAdditionalOptionsChanged);
   connect(ui->browseChapters,             &QPushButton::clicked,                                                                            this, &Tab::onBrowseChapters);
