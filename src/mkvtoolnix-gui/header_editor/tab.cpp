@@ -269,7 +269,7 @@ Tab::retranslateUi() {
   m_removeAttachmentAction->setText(QY("&Remove selected attachment"));
   m_saveAttachmentContentAction->setText(QY("Save attachment content to a &file"));
   m_replaceAttachmentContentAction->setText(QY("Replace attachment with a new &file"));
-  m_replaceAttachmentContentSetValuesAction->setText(QY("Replace attachment with new a file and &derive name && MIME type from it"));
+  m_replaceAttachmentContentSetValuesAction->setText(QY("Replace attachment with a new file and &derive name && MIME type from it"));
 
   m_addAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
   m_removeAttachmentAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
