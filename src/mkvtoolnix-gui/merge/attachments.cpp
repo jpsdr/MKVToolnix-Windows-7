@@ -4,11 +4,13 @@
 
 #include "common/extern_data.h"
 #include "common/qt.h"
+#include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_widget.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -131,6 +133,17 @@ void
 Tab::addAttachments(QStringList const &fileNames) {
   QList<AttachmentPtr> attachmentsToAdd;
   for (auto &fileName : fileNames) {
+    auto info = QFileInfo{fileName};
+    if (info.size() > 0x7fffffff) {
+      Util::MessageBox::critical(this)
+        ->title(QY("Reading failed"))
+        .text(Q("%1 %2")
+              .arg(QY("The file (%1) is too big (%2).").arg(fileName).arg(Q(format_file_size(info.size()))))
+              .arg(QY("Only files smaller than 2 GiB are supported.")))
+        .exec();
+      continue;
+    }
+
     attachmentsToAdd << std::make_shared<Attachment>(fileName);
     attachmentsToAdd.back()->guessMIMEType();
   }

@@ -644,7 +644,9 @@ Tab::readFileData(QWidget *parent,
   if (info.size() > 0x7fffffff) {
     Util::MessageBox::critical(parent)
       ->title(QY("Reading failed"))
-      .text(QY("The file you tried to open (%1) is too big (%2). Only files smaller than 2 GiB are supported.").arg(fileName).arg(Q(format_file_size(info.size()))))
+      .text(Q("%1 %2")
+            .arg(QY("The file (%1) is too big (%2).").arg(fileName).arg(Q(format_file_size(info.size()))))
+            .arg(QY("Only files smaller than 2 GiB are supported.")))
       .exec();
     return {};
   }
