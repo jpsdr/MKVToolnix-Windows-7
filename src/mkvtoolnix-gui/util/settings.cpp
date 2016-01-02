@@ -123,6 +123,13 @@ Settings::convertOldSettings() {
     reg->setValue("defaultSubtitleTrackLanguage", defaultTrackLanguage.toString());
   }
 
+  // mergeUseVerticalInputLayout → mergeTrackPropertiesLayout
+  auto mergeUseVerticalInputLayout = reg->value("mergeUseVerticalInputLayout");
+  reg->remove("mergeUseVerticalInputLayout");
+
+  if (mergeUseVerticalInputLayout.isValid())
+    reg->setValue("mergeTrackPropertiesLayout", static_cast<int>(mergeUseVerticalInputLayout.toBool() ? TrackPropertiesLayout::VerticalTabWidget : TrackPropertiesLayout::HorizontalScrollArea));
+
   reg->endGroup();
 }
 
@@ -157,7 +164,7 @@ Settings::load() {
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
   m_disableDefaultTrackForSubtitles    = reg.value("disableDefaultTrackForSubtitles",    false).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls",  true).toBool();
-  m_mergeUseVerticalInputLayout        = reg.value("mergeUseVerticalInputLayout",        false).toBool();
+  m_mergeTrackPropertiesLayout         = static_cast<TrackPropertiesLayout>(reg.value("mergeTrackPropertiesLayout", static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
   m_mergeAddingAppendingFilesPolicy    = static_cast<AddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(AddingAppendingFilesPolicy::Ask)).toInt());
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
@@ -310,7 +317,7 @@ Settings::save()
   reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
   reg.setValue("disableDefaultTrackForSubtitles",    m_disableDefaultTrackForSubtitles);
   reg.setValue("mergeAlwaysShowOutputFileControls",  m_mergeAlwaysShowOutputFileControls);
-  reg.setValue("mergeUseVerticalInputLayout",        m_mergeUseVerticalInputLayout);
+  reg.setValue("mergeTrackPropertiesLayout",         static_cast<int>(m_mergeTrackPropertiesLayout));
   reg.setValue("mergeAddingAppendingFilesPolicy",    static_cast<int>(m_mergeAddingAppendingFilesPolicy));
 
   reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>898</width>
-    <height>574</height>
+    <height>584</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -357,20 +357,17 @@
          </widget>
          <widget class="QWidget" name="wProperties" native="true">
           <layout class="QVBoxLayout" name="verticalLayout_4">
-           <property name="spacing">
-            <number>6</number>
-           </property>
            <property name="leftMargin">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="topMargin">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="rightMargin">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="bottomMargin">
-            <number>1</number>
+            <number>0</number>
            </property>
            <item>
             <widget class="QLabel" name="propertiesLabel">
@@ -380,543 +377,644 @@
             </widget>
            </item>
            <item>
-            <widget class="QScrollArea" name="scrollArea">
-             <property name="minimumSize">
-              <size>
-               <width>370</width>
-               <height>0</height>
-              </size>
+            <widget class="QStackedWidget" name="propertiesStack">
+             <property name="currentIndex">
+              <number>0</number>
              </property>
-             <property name="frameShape">
-              <enum>QFrame::Box</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="verticalScrollBarPolicy">
-              <enum>Qt::ScrollBarAsNeeded</enum>
-             </property>
-             <property name="widgetResizable">
-              <bool>true</bool>
-             </property>
-             <widget class="QWidget" name="scrollAreaWidgetContents">
-              <property name="geometry">
-               <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>425</width>
-                <height>1064</height>
-               </rect>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_9">
+             <widget class="QWidget" name="propertiesScrollAreaPage">
+              <layout class="QVBoxLayout" name="verticalLayout_20">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item>
-                <widget class="QGroupBox" name="generalOptionsBox">
-                 <property name="title">
-                  <string>General options</string>
+                <widget class="QScrollArea" name="propertiesScrollArea">
+                 <property name="minimumSize">
+                  <size>
+                   <width>370</width>
+                   <height>0</height>
+                  </size>
                  </property>
-                 <layout class="QGridLayout" name="gridLayout_5">
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="muxThisLabel">
-                    <property name="text">
-                     <string>Mu&amp;x this track:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>muxThis</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QComboBox" name="muxThis"/>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="trackNameLabel">
-                    <property name="text">
-                     <string>Trac&amp;k name:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>trackName</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="QLineEdit" name="trackName"/>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="trackLanguageLabel">
-                    <property name="text">
-                     <string>&amp;Language:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>trackLanguage</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="1">
-                   <widget class="mtx::gui::Util::LanguageComboBox" name="trackLanguage">
-                    <property name="sizeAdjustPolicy">
-                     <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="defaultTrackFlagLabel">
-                    <property name="text">
-                     <string>&quot;Default track&quot; flag:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="1">
-                   <widget class="QComboBox" name="defaultTrackFlag"/>
-                  </item>
-                  <item row="4" column="0">
-                   <widget class="QLabel" name="forcedTrackFlagLabel">
-                    <property name="text">
-                     <string>&quot;Forced track&quot; flag:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>forcedTrackFlag</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="1">
-                   <widget class="QComboBox" name="forcedTrackFlag"/>
-                  </item>
-                  <item row="5" column="0">
-                   <widget class="QLabel" name="compressionLabel">
-                    <property name="text">
-                     <string>Compression:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="1">
-                   <widget class="QComboBox" name="compression"/>
-                  </item>
-                  <item row="6" column="0">
-                   <widget class="QLabel" name="trackTagsLabel">
-                    <property name="text">
-                     <string>Tags:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="6" column="1">
-                   <layout class="QHBoxLayout" name="horizontalLayout_11">
-                    <item>
-                     <widget class="mtx::gui::Util::BasicLineEdit" name="trackTags"/>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="browseTrackTags">
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="../../qt_resources.qrc">
-                        <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
-                <widget class="QGroupBox" name="timecodesAndDefaultDurationBox">
-                 <property name="title">
-                  <string>Timecodes and default duration</string>
+                 <property name="frameShape">
+                  <enum>QFrame::Box</enum>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_11">
-                  <item>
-                   <layout class="QGridLayout" name="gridLayout_6">
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="delayLabel">
-                      <property name="text">
-                       <string>Delay (in ms):</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="1">
-                     <widget class="QLineEdit" name="delay"/>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="stretchByLabel">
-                      <property name="text">
-                       <string>Stretch by:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="1">
-                     <widget class="QLineEdit" name="stretchBy"/>
-                    </item>
-                    <item row="2" column="0">
-                     <widget class="QLabel" name="defaultDurationLabel">
-                      <property name="text">
-                       <string>Default duration/FPS:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="1">
-                     <widget class="QComboBox" name="defaultDuration">
-                      <property name="editable">
-                       <bool>true</bool>
-                      </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                 <property name="verticalScrollBarPolicy">
+                  <enum>Qt::ScrollBarAsNeeded</enum>
+                 </property>
+                 <property name="widgetResizable">
+                  <bool>true</bool>
+                 </property>
+                 <widget class="QWidget" name="scrollAreaWidgetContents">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>430</width>
+                    <height>998</height>
+                   </rect>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_9">
+                   <item>
+                    <widget class="QGroupBox" name="generalOptionsBox">
+                     <property name="title">
+                      <string>General options</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_5">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="muxThisLabel">
+                        <property name="text">
+                         <string>Mu&amp;x this track:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>muxThis</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QComboBox" name="muxThis"/>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="trackNameLabel">
+                        <property name="text">
+                         <string>Trac&amp;k name:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>trackName</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QLineEdit" name="trackName"/>
+                      </item>
+                      <item row="2" column="0">
+                       <widget class="QLabel" name="trackLanguageLabel">
+                        <property name="text">
+                         <string>&amp;Language:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>trackLanguage</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="1">
+                       <widget class="mtx::gui::Util::LanguageComboBox" name="trackLanguage">
+                        <property name="sizeAdjustPolicy">
+                         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="defaultTrackFlagLabel">
+                        <property name="text">
+                         <string>&quot;Default track&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QComboBox" name="defaultTrackFlag"/>
+                      </item>
+                      <item row="4" column="0">
+                       <widget class="QLabel" name="forcedTrackFlagLabel">
+                        <property name="text">
+                         <string>&quot;Forced track&quot; flag:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>forcedTrackFlag</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="4" column="1">
+                       <widget class="QComboBox" name="forcedTrackFlag"/>
+                      </item>
+                      <item row="5" column="0">
+                       <widget class="QLabel" name="compressionLabel">
+                        <property name="text">
+                         <string>Compression:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="5" column="1">
+                       <widget class="QComboBox" name="compression"/>
+                      </item>
+                      <item row="6" column="0">
+                       <widget class="QLabel" name="trackTagsLabel">
+                        <property name="text">
+                         <string>Tags:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="6" column="1">
+                       <layout class="QHBoxLayout" name="horizontalLayout_11">
+                        <item>
+                         <widget class="mtx::gui::Util::BasicLineEdit" name="trackTags"/>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="browseTrackTags">
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="../../qt_resources.qrc">
+                            <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QGroupBox" name="timecodesAndDefaultDurationBox">
+                     <property name="title">
+                      <string>Timecodes and default duration</string>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_11">
                       <item>
-                       <property name="text">
-                        <string notr="true"/>
-                       </property>
+                       <layout class="QGridLayout" name="gridLayout_6">
+                        <item row="0" column="0">
+                         <widget class="QLabel" name="delayLabel">
+                          <property name="text">
+                           <string>Delay (in ms):</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="1">
+                         <widget class="QLineEdit" name="delay"/>
+                        </item>
+                        <item row="1" column="0">
+                         <widget class="QLabel" name="stretchByLabel">
+                          <property name="text">
+                           <string>Stretch by:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="1">
+                         <widget class="QLineEdit" name="stretchBy"/>
+                        </item>
+                        <item row="2" column="0">
+                         <widget class="QLabel" name="defaultDurationLabel">
+                          <property name="text">
+                           <string>Default duration/FPS:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="1">
+                         <widget class="QComboBox" name="defaultDuration">
+                          <property name="editable">
+                           <bool>true</bool>
+                          </property>
+                          <item>
+                           <property name="text">
+                            <string notr="true"/>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">24p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">25p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">30p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">48p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">50i</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">50p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">60i</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">60p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">24000/1001p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">30000/1001p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">48000/1001p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">60000/1001i</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">60000/1001p</string>
+                           </property>
+                          </item>
+                         </widget>
+                        </item>
+                        <item row="3" column="0">
+                         <widget class="QLabel" name="timecodesLabel">
+                          <property name="text">
+                           <string>Timecode file:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="3" column="1">
+                         <layout class="QHBoxLayout" name="horizontalLayout_12">
+                          <item>
+                           <widget class="mtx::gui::Util::BasicLineEdit" name="timecodes"/>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="browseTimecodes">
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="../../qt_resources.qrc">
+                              <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
                       </item>
                       <item>
-                       <property name="text">
-                        <string notr="true">24p</string>
-                       </property>
+                       <widget class="QCheckBox" name="fixBitstreamTimingInfo">
+                        <property name="text">
+                         <string>Fix bitstream timing info</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QGroupBox" name="videoPropertiesBox">
+                     <property name="title">
+                      <string>Video properties</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_7">
+                      <item row="1" column="1">
+                       <layout class="QHBoxLayout" name="horizontalLayout_14">
+                        <item>
+                         <widget class="QLineEdit" name="displayWidth"/>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="displayDimensionsXLabel">
+                          <property name="text">
+                           <string>x</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="displayHeight"/>
+                        </item>
+                       </layout>
+                      </item>
+                      <item row="5" column="1">
+                       <widget class="QComboBox" name="stereoscopy"/>
+                      </item>
+                      <item row="7" column="0">
+                       <widget class="QLabel" name="naluSizeLengthLabel">
+                        <property name="mouseTracking">
+                         <bool>false</bool>
+                        </property>
+                        <property name="text">
+                         <string>NALU size length:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QRadioButton" name="setAspectRatio">
+                        <property name="text">
+                         <string>Set aspect ratio:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QComboBox" name="aspectRatio">
+                        <property name="editable">
+                         <bool>true</bool>
+                        </property>
+                        <item>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">4/3</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">1.66</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">16/9</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">1.85</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">2.00</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">2.21</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">2.35</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">2.40</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QRadioButton" name="setDisplayWidthHeight">
+                        <property name="text">
+                         <string>Display width/height:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QLineEdit" name="cropping"/>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="croppingLabel">
+                        <property name="text">
+                         <string>Cropping:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="5" column="0">
+                       <widget class="QLabel" name="stereoscopyLabel">
+                        <property name="text">
+                         <string>Stereoscopy:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="7" column="1">
+                       <widget class="QComboBox" name="naluSizeLength"/>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QGroupBox" name="audioPropertiesBox">
+                     <property name="title">
+                      <string>Audio properties</string>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_12">
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_3">
+                        <item>
+                         <widget class="QLabel" name="aacIsSBRLabel">
+                          <property name="text">
+                           <string>AAC is SBR/HE-AAC/AAC+:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="aacIsSBR">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </item>
                       <item>
-                       <property name="text">
-                        <string notr="true">25p</string>
-                       </property>
+                       <widget class="QCheckBox" name="reduceToAudioCore">
+                        <property name="text">
+                         <string>Reduce to core</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QGroupBox" name="subtitleAndChapterPropertiesBox">
+                     <property name="title">
+                      <string>Subtitle and chapter properties</string>
+                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_16">
+                      <item>
+                       <widget class="QLabel" name="characterSetLabel">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string>Character set:</string>
+                        </property>
+                       </widget>
                       </item>
                       <item>
-                       <property name="text">
-                        <string notr="true">30p</string>
-                       </property>
+                       <widget class="mtx::gui::Util::CharacterSetComboBox" name="subtitleCharacterSet">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="sizeAdjustPolicy">
+                         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                        </property>
+                       </widget>
                       </item>
                       <item>
-                       <property name="text">
-                        <string notr="true">48p</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string notr="true">50i</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string notr="true">50p</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string notr="true">60i</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string notr="true">60p</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string notr="true">24000/1001p</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string notr="true">30000/1001p</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string notr="true">48000/1001p</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string notr="true">60000/1001i</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string notr="true">60000/1001p</string>
-                       </property>
-                      </item>
-                     </widget>
-                    </item>
-                    <item row="3" column="0">
-                     <widget class="QLabel" name="timecodesLabel">
-                      <property name="text">
-                       <string>Timecode file:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="3" column="1">
-                     <layout class="QHBoxLayout" name="horizontalLayout_12">
-                      <item>
-                       <widget class="mtx::gui::Util::BasicLineEdit" name="timecodes"/>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="browseTimecodes">
+                       <widget class="QPushButton" name="subtitleCharacterSetPreview">
                         <property name="text">
                          <string/>
                         </property>
                         <property name="icon">
                          <iconset resource="../../qt_resources.qrc">
-                          <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                          <normaloff>:/icons/16x16/character-set.png</normaloff>:/icons/16x16/character-set.png</iconset>
                         </property>
                        </widget>
                       </item>
                      </layout>
-                    </item>
-                   </layout>
-                  </item>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QGroupBox" name="miscellaneousBox">
+                     <property name="title">
+                      <string>Miscellaneous</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_9">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="cuesLabel">
+                        <property name="text">
+                         <string>Indexing (cues):</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QComboBox" name="cues"/>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="additionalTrackOptionsLabel">
+                        <property name="text">
+                         <string>Additional options:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QLineEdit" name="additionalTrackOptions"/>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_5">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>19</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="propertiesTwoColumnsPage">
+              <layout class="QHBoxLayout" name="horizontalLayout_17">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QWidget" name="propertiesColumn1" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_21">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
                   <item>
-                   <widget class="QCheckBox" name="fixBitstreamTimingInfo">
-                    <property name="text">
-                     <string>Fix bitstream timing info</string>
+                   <spacer name="verticalSpacer_11">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
                     </property>
-                   </widget>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>410</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                  </layout>
                 </widget>
                </item>
                <item>
-                <widget class="QGroupBox" name="videoPropertiesBox">
-                 <property name="title">
-                  <string>Video properties</string>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_7">
-                  <item row="1" column="1">
-                   <layout class="QHBoxLayout" name="horizontalLayout_14">
-                    <item>
-                     <widget class="QLineEdit" name="displayWidth"/>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="displayDimensionsXLabel">
-                      <property name="text">
-                       <string>x</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="displayHeight"/>
-                    </item>
-                   </layout>
-                  </item>
-                  <item row="5" column="1">
-                   <widget class="QComboBox" name="stereoscopy"/>
-                  </item>
-                  <item row="7" column="0">
-                   <widget class="QLabel" name="naluSizeLengthLabel">
-                    <property name="mouseTracking">
-                     <bool>false</bool>
+                <widget class="QWidget" name="propertiesColumn2" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_22">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <spacer name="verticalSpacer_12">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
                     </property>
-                    <property name="text">
-                     <string>NALU size length:</string>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>410</height>
+                     </size>
                     </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QRadioButton" name="setAspectRatio">
-                    <property name="text">
-                     <string>Set aspect ratio:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QComboBox" name="aspectRatio">
-                    <property name="editable">
-                     <bool>true</bool>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">4/3</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">1.66</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">16/9</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">1.85</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">2.00</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">2.21</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">2.35</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string notr="true">2.40</string>
-                     </property>
-                    </item>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QRadioButton" name="setDisplayWidthHeight">
-                    <property name="text">
-                     <string>Display width/height:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="1">
-                   <widget class="QLineEdit" name="cropping"/>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="croppingLabel">
-                    <property name="text">
-                     <string>Cropping:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="0">
-                   <widget class="QLabel" name="stereoscopyLabel">
-                    <property name="text">
-                     <string>Stereoscopy:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="7" column="1">
-                   <widget class="QComboBox" name="naluSizeLength"/>
+                   </spacer>
                   </item>
                  </layout>
                 </widget>
-               </item>
-               <item>
-                <widget class="QGroupBox" name="audioPropertiesBox">
-                 <property name="title">
-                  <string>Audio properties</string>
-                 </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_12">
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_3">
-                    <item>
-                     <widget class="QLabel" name="aacIsSBRLabel">
-                      <property name="text">
-                       <string>AAC is SBR/HE-AAC/AAC+:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QComboBox" name="aacIsSBR">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="reduceToAudioCore">
-                    <property name="text">
-                     <string>Reduce to core</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
-                <widget class="QGroupBox" name="subtitleAndChapterPropertiesBox">
-                 <property name="title">
-                  <string>Subtitle and chapter properties</string>
-                 </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_16">
-                  <item>
-                   <widget class="QLabel" name="characterSetLabel">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="text">
-                     <string>Character set:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="mtx::gui::Util::CharacterSetComboBox" name="subtitleCharacterSet">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="sizeAdjustPolicy">
-                     <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="subtitleCharacterSetPreview">
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="../../qt_resources.qrc">
-                      <normaloff>:/icons/16x16/character-set.png</normaloff>:/icons/16x16/character-set.png</iconset>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
-                <widget class="QGroupBox" name="miscellaneousBox">
-                 <property name="title">
-                  <string>Miscellaneous</string>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_9">
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="cuesLabel">
-                    <property name="text">
-                     <string>Indexing (cues):</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QComboBox" name="cues"/>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="additionalTrackOptionsLabel">
-                    <property name="text">
-                     <string>Additional options:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="QLineEdit" name="additionalTrackOptions"/>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>19</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
               </layout>
              </widget>
@@ -1633,6 +1731,11 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>mtx::gui::Util::BasicTreeView</class>
+   <extends>QTreeView</extends>
+   <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
+  </customwidget>
+  <customwidget>
    <class>mtx::gui::Util::LanguageComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/language_combo_box.h</header>
@@ -1641,11 +1744,6 @@
    <class>mtx::gui::Util::CharacterSetComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
-  </customwidget>
-  <customwidget>
-   <class>mtx::gui::Util::BasicTreeView</class>
-   <extends>QTreeView</extends>
-   <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
   </customwidget>
   <customwidget>
    <class>mtx::gui::Util::FilesDragDropWidget</class>
@@ -1668,7 +1766,7 @@
   <tabstop>moveTracksUp</tabstop>
   <tabstop>moveTracksDown</tabstop>
   <tabstop>twProperties</tabstop>
-  <tabstop>scrollArea</tabstop>
+  <tabstop>propertiesScrollArea</tabstop>
   <tabstop>muxThis</tabstop>
   <tabstop>trackName</tabstop>
   <tabstop>trackLanguage</tabstop>
@@ -1736,5 +1834,4 @@
   <include location="../../qt_resources.qrc"/>
  </resources>
  <connections/>
- <slots/>
 </ui>

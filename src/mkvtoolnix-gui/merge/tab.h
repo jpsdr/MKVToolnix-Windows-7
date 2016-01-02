@@ -258,8 +258,9 @@ protected:
   virtual void moveTracksUpOrDown(bool up);
   virtual void moveAttachmentsUpOrDown(bool up);
 
-  virtual void setupHorizontalInputLayout();
-  virtual void setupVerticalInputLayout();
+  virtual void setupHorizontalScrollAreaInputLayout();
+  virtual void setupHorizontalTwoColumnsInputLayout();
+  virtual void setupVerticalTabWidgetInputLayout();
 
   virtual void moveOutputFileNameToGlobal();
   virtual void moveOutputFileNameToOutputTab();

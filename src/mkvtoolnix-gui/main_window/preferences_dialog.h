@@ -56,6 +56,7 @@ protected:
   void setupProcessPriority();
   void setupPlaylistScanningPolicy();
   void setupOutputFileNamePolicy();
+  void setupTrackPropertiesLayout();
   void setupEnableMuxingTracksByLanguage();
   void setupAddingAppendingFilesPolicy();
   void setupJobsRunPrograms();

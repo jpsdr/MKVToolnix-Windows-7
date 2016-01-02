@@ -93,30 +93,34 @@ Tab::setupMoveUpDownButtons() {
 
 void
 Tab::setupInputLayout() {
-  if (Util::Settings::get().m_mergeUseVerticalInputLayout)
-    setupVerticalInputLayout();
+  auto const layout = Util::Settings::get().m_mergeTrackPropertiesLayout;
+
+  if (layout == Util::Settings::TrackPropertiesLayout::HorizontalScrollArea)
+    setupHorizontalScrollAreaInputLayout();
+
+  else if (layout == Util::Settings::TrackPropertiesLayout::HorizontalTwoColumns)
+    setupHorizontalTwoColumnsInputLayout();
+
   else
-    setupHorizontalInputLayout();
+    setupVerticalTabWidgetInputLayout();
 }
 
 void
-Tab::setupHorizontalInputLayout() {
-  if (ui->wProperties->isVisible())
+Tab::setupHorizontalScrollAreaInputLayout() {
+  if (ui->wProperties->isVisible() && (0 == ui->propertiesStack->currentIndex()))
     return;
 
   ui->twProperties->hide();
   ui->wProperties->show();
+  ui->propertiesStack->setCurrentIndex(0);
 
-  auto layout  = qobject_cast<QBoxLayout *>(ui->scrollAreaWidgetContents->layout());
+  auto layout = qobject_cast<QBoxLayout *>(ui->scrollAreaWidgetContents->layout());
 
   Q_ASSERT(!!layout);
 
-  ui->generalOptionsBox              ->setParent(ui->scrollAreaWidgetContents);
-  ui->timecodesAndDefaultDurationBox ->setParent(ui->scrollAreaWidgetContents);
-  ui->videoPropertiesBox             ->setParent(ui->scrollAreaWidgetContents);
-  ui->audioPropertiesBox             ->setParent(ui->scrollAreaWidgetContents);
-  ui->subtitleAndChapterPropertiesBox->setParent(ui->scrollAreaWidgetContents);
-  ui->miscellaneousBox               ->setParent(ui->scrollAreaWidgetContents);
+  auto widgets = QWidgetList{} << ui->generalOptionsBox << ui->timecodesAndDefaultDurationBox << ui->videoPropertiesBox << ui->audioPropertiesBox << ui->subtitleAndChapterPropertiesBox << ui->miscellaneousBox;
+  for (auto const &widget : widgets)
+    widget->setParent(ui->scrollAreaWidgetContents);
 
   layout->insertWidget(0, ui->generalOptionsBox);
   layout->insertWidget(1, ui->timecodesAndDefaultDurationBox);
@@ -127,7 +131,32 @@ Tab::setupHorizontalInputLayout() {
 }
 
 void
-Tab::setupVerticalInputLayout() {
+Tab::setupHorizontalTwoColumnsInputLayout() {
+  if (ui->wProperties->isVisible() && (1 == ui->propertiesStack->currentIndex()))
+    return;
+
+  ui->twProperties->hide();
+  ui->wProperties->show();
+  ui->propertiesStack->setCurrentIndex(1);
+
+  auto moveTo = [this](QWidget *column, int position, QWidget *widget) {
+    auto layout = qobject_cast<QBoxLayout *>(column->layout());
+    Q_ASSERT(!!layout);
+
+    widget->setParent(column);
+    layout->insertWidget(position, widget);
+  };
+
+  moveTo(ui->propertiesColumn1, 0, ui->generalOptionsBox);
+  moveTo(ui->propertiesColumn1, 1, ui->timecodesAndDefaultDurationBox);
+  moveTo(ui->propertiesColumn2, 0, ui->videoPropertiesBox);
+  moveTo(ui->propertiesColumn2, 1, ui->audioPropertiesBox);
+  moveTo(ui->propertiesColumn2, 2, ui->subtitleAndChapterPropertiesBox);
+  moveTo(ui->propertiesColumn2, 3, ui->miscellaneousBox);
+}
+
+void
+Tab::setupVerticalTabWidgetInputLayout() {
   if (ui->twProperties->isVisible())
     return;
 

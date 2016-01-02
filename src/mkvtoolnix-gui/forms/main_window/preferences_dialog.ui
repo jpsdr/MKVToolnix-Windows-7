@@ -53,7 +53,7 @@
      </widget>
      <widget class="QStackedWidget" name="pages">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="pGuiGeneral">
        <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -249,146 +249,184 @@
        </layout>
       </widget>
       <widget class="QWidget" name="pMergeGeneral">
-       <layout class="QVBoxLayout" name="verticalLayout_12">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
+       <layout class="QVBoxLayout" name="verticalLayout_22">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_22">
-          <item>
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="title">
-             <string>General options</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>General options</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Clearing settings auto&amp;matically:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbMClearMergeSettings</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cbMClearMergeSettings">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <item>
+                <property name="text">
+                 <string>no</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>create new settings</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>remove input files</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>When &amp;dropping files:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbMAddingAppendingFilesPolicy</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Process &amp;priority:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbMProcessPriority</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="cbMProcessPriority">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_12">
+          <property name="title">
+           <string>Layout</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_20">
+           <item>
+            <widget class="QCheckBox" name="cbMAlwaysShowOutputFileControls">
+             <property name="text">
+              <string>Always show the output file controls &amp;below tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="cbMTrackPropertiesLayoutLabel">
+             <property name="text">
+              <string>Position for the track properties on the &quot;input&quot; tab:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
-              <layout class="QGridLayout" name="gridLayout_2">
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_6">
+              <spacer name="horizontalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_12">
+               <item>
+                <widget class="QRadioButton" name="rbMTrackPropertiesLayoutHorizontalScrollArea">
                  <property name="text">
-                  <string>Clearing settings auto&amp;matically:</string>
+                  <string>in a scrollable column on the right of the files and tracks</string>
                  </property>
-                 <property name="buddy">
-                  <cstring>cbMClearMergeSettings</cstring>
-                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">bgMTrackPropertiesLayout</string>
+                 </attribute>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QComboBox" name="cbMClearMergeSettings">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>no</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>create new settings</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>remove input files</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_13">
+               <item>
+                <widget class="QRadioButton" name="rbMTrackPropertiesLayoutHorizontalTwoColumns">
                  <property name="text">
-                  <string>When &amp;dropping files:</string>
+                  <string>in two fixed columns on the right of the files and tracks</string>
                  </property>
-                 <property name="buddy">
-                  <cstring>cbMAddingAppendingFilesPolicy</cstring>
-                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">bgMTrackPropertiesLayout</string>
+                 </attribute>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_5">
+               <item>
+                <widget class="QRadioButton" name="rbMTrackPropertiesLayoutVerticalTabWidget">
                  <property name="text">
-                  <string>Process &amp;priority:</string>
+                  <string>in a tab widget below the files and tracks</string>
                  </property>
-                 <property name="buddy">
-                  <cstring>cbMProcessPriority</cstring>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="cbMProcessPriority">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">bgMTrackPropertiesLayout</string>
+                 </attribute>
                 </widget>
                </item>
               </layout>
              </item>
             </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_12">
-            <property name="title">
-             <string>Layout</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_20">
-             <item>
-              <widget class="QCheckBox" name="cbMAlwaysShowOutputFileControls">
-               <property name="text">
-                <string>Always show the output file controls &amp;below tabs</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="cbMUseVerticalInputLayout">
-               <property name="text">
-                <string>Use a &amp;vertical layout for the &quot;input&quot; tab</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_7">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>82</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -1383,7 +1421,6 @@
   <tabstop>cbMAddingAppendingFilesPolicy</tabstop>
   <tabstop>cbMProcessPriority</tabstop>
   <tabstop>cbMAlwaysShowOutputFileControls</tabstop>
-  <tabstop>cbMUseVerticalInputLayout</tabstop>
   <tabstop>leMDefaultAdditionalCommandLineOptions</tabstop>
   <tabstop>pbMEditDefaultAdditionalCommandLineOptions</tabstop>
   <tabstop>cbMAutoSetFileTitle</tabstop>
@@ -1431,4 +1468,7 @@
   <slot>removeCommonCountries()</slot>
   <slot>enableOutputFileNameControls()</slot>
  </slots>
+ <buttongroups>
+  <buttongroup name="bgMTrackPropertiesLayout"/>
+ </buttongroups>
 </ui>

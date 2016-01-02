@@ -75,6 +75,12 @@ public:
     AddAdditionalParts,
   };
 
+  enum class TrackPropertiesLayout {
+    HorizontalScrollArea,
+    HorizontalTwoColumns,
+    VerticalTabWidget,
+  };
+
   class RunProgramConfig {
   public:
     QStringList m_commandLine;
@@ -91,9 +97,10 @@ public:
   ProcessPriority m_priority;
   QTabWidget::TabPosition m_tabPosition;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
-  bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysShowOutputFileControls, m_mergeUseVerticalInputLayout, m_dropLastChapterFromBlurayPlaylist;
+  bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
   ClearMergeSettingsAction m_clearMergeSettings;
   AddingAppendingFilesPolicy m_mergeAddingAppendingFilesPolicy;
+  TrackPropertiesLayout m_mergeTrackPropertiesLayout;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
   QDir m_relativeOutputDir, m_fixedOutputDir;

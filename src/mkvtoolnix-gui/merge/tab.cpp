@@ -84,7 +84,7 @@ Tab::Tab(QWidget *parent)
 
   retranslateUi();
 
-  Util::fixScrollAreaBackground(ui->scrollArea);
+  Util::fixScrollAreaBackground(ui->propertiesScrollArea);
   Util::preventScrollingWithoutFocus(this);
 
   m_savedState = currentState();

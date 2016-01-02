@@ -63,7 +63,6 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
   ui->cbMDisableDefaultTrackForSubtitles->setChecked(m_cfg.m_disableDefaultTrackForSubtitles);
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
-  ui->cbMUseVerticalInputLayout->setChecked(m_cfg.m_mergeUseVerticalInputLayout);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
   ui->cbMDefaultAudioTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultAudioTrackLanguage);
   ui->cbMDefaultVideoTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultVideoTrackLanguage);
@@ -76,6 +75,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   setupOutputFileNamePolicy();
   setupEnableMuxingTracksByLanguage();
   setupAddingAppendingFilesPolicy();
+  setupTrackPropertiesLayout();
 
   // Chapter editor page
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
@@ -226,10 +226,14 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If enabled the output file name controls will always be visible no matter which tab is currently shown."))
                    .arg(QY("Otherwise they're shown on the 'output' tab.")));
 
-  Util::setToolTip(ui->cbMUseVerticalInputLayout,
-                   Q("%1 %2")
-                   .arg(QY("Normally the track property controls are shown on the right side in a scrollable widget."))
-                   .arg(QY("With this option enabled they're shown below the track list in a tab widget instead.")));
+  auto controls = QWidgetList{} << ui->rbMTrackPropertiesLayoutHorizontalScrollArea << ui->rbMTrackPropertiesLayoutHorizontalTwoColumns << ui->rbMTrackPropertiesLayoutVerticalTabWidget;
+  for (auto const &control : controls)
+    Util::setToolTip(control,
+                     Q("<p>%1 %2</p><p>%3 %4</p>")
+                     .arg(QYH("The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."))
+                     .arg(QYH("In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."))
+                     .arg(QYH("The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."))
+                     .arg(QYH("The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window.")));
 
   Util::setToolTip(ui->cbMClearMergeSettings,
                    Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li></ol>")
@@ -459,6 +463,15 @@ PreferencesDialog::setupAddingAppendingFilesPolicy() {
 }
 
 void
+PreferencesDialog::setupTrackPropertiesLayout() {
+  auto rbToCheck = Util::Settings::TrackPropertiesLayout::HorizontalScrollArea == m_cfg.m_mergeTrackPropertiesLayout ? ui->rbMTrackPropertiesLayoutHorizontalScrollArea
+                 : Util::Settings::TrackPropertiesLayout::HorizontalTwoColumns == m_cfg.m_mergeTrackPropertiesLayout ? ui->rbMTrackPropertiesLayoutHorizontalTwoColumns
+                 :                                                                                                     ui->rbMTrackPropertiesLayoutVerticalTabWidget;
+
+  rbToCheck->setChecked(true);
+}
+
+void
 PreferencesDialog::setupTabPositions() {
   ui->cbGuiTabPositions->clear();
   ui->cbGuiTabPositions->addItem(QY("top"),    static_cast<int>(QTabWidget::North));
@@ -522,7 +535,9 @@ PreferencesDialog::save() {
   m_cfg.m_disableDefaultTrackForSubtitles    = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
   m_cfg.m_mergeAddingAppendingFilesPolicy    = static_cast<Util::Settings::AddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysShowOutputFileControls  = ui->cbMAlwaysShowOutputFileControls->isChecked();
-  m_cfg.m_mergeUseVerticalInputLayout        = ui->cbMUseVerticalInputLayout->isChecked();
+  m_cfg.m_mergeTrackPropertiesLayout         = ui->rbMTrackPropertiesLayoutHorizontalScrollArea->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalScrollArea
+                                             : ui->rbMTrackPropertiesLayoutHorizontalTwoColumns->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalTwoColumns
+                                             :                                                                 Util::Settings::TrackPropertiesLayout::VerticalTabWidget;
   m_cfg.m_clearMergeSettings                 = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
   m_cfg.m_defaultAudioTrackLanguage          = ui->cbMDefaultAudioTrackLanguage->currentData().toString();
   m_cfg.m_defaultVideoTrackLanguage          = ui->cbMDefaultVideoTrackLanguage->currentData().toString();
