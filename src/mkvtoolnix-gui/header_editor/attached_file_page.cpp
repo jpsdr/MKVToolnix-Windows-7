@@ -13,6 +13,7 @@
 #include "mkvtoolnix-gui/forms/header_editor/attached_file_page.h"
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/attached_file_page.h"
+#include "mkvtoolnix-gui/header_editor/tab.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -209,15 +210,11 @@ AttachedFilePage::replaceContent(bool deriveNameAndMimeType) {
   settings.m_lastOpenDir = fileInfo.absoluteDir();
   settings.save();
 
-  QFile file{fileName};
-
-  if (!file.open(QIODevice::ReadOnly)) {
-    Util::MessageBox::critical(this)->title(QY("Reading failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();
+  auto newContent = Tab::readFileData(this, fileName);
+  if (!newContent)
     return;
-  }
 
-  auto newContent  = file.readAll();
-  m_newFileContent = memory_c::clone(newContent.data(), newContent.count());
+  m_newFileContent = newContent;
 
   ui->size->setText(formatSize());
 

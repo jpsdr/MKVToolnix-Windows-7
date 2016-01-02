@@ -85,6 +85,9 @@ protected:
   PageBase *currentlySelectedPage() const;
 
   KaxAttachedPtr createAttachmentFromFile(QString const &fileName);
+
+public:
+  static memory_cptr readFileData(QWidget *parent, QString const &fileName);
 };
 
 }}}

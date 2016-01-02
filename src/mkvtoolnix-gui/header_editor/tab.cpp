@@ -12,9 +12,11 @@
 #include "common/construct.h"
 #include "common/ebml.h"
 #include "common/extern_data.h"
+#include "common/mm_io_x.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"
 #include "common/segment_tracks.h"
+#include "common/strings/formatting.h"
 #include "common/unique_numbers.h"
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/ascii_string_value_page.h"
@@ -635,26 +637,48 @@ Tab::removeSelectedAttachment() {
   m_model->deletePage(selectedPage);
 }
 
-KaxAttachedPtr
-Tab::createAttachmentFromFile(QString const &fileName) {
-  QFile file{fileName};
-
-  if (!file.open(QIODevice::ReadOnly)) {
-    Util::MessageBox::critical(this)->title(QY("Reading failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();
+memory_cptr
+Tab::readFileData(QWidget *parent,
+                  QString const &fileName) {
+  auto info = QFileInfo{fileName};
+  if (info.size() > 0x7fffffff) {
+    Util::MessageBox::critical(parent)
+      ->title(QY("Reading failed"))
+      .text(QY("The file you tried to open (%1) is too big (%2). Only files smaller than 2 GiB are supported.").arg(fileName).arg(Q(format_file_size(info.size()))))
+      .exec();
     return {};
   }
 
-  auto content      = file.readAll();
-  auto mimeType     = guess_mime_type(to_utf8(fileName), true);
-  auto contentAsMem = std::make_shared<memory_c>(content.data(), content.count(), false);
-  auto uid          = create_unique_number(UNIQUE_ATTACHMENT_IDS);
+  try {
+    return mm_file_io_c::slurp(to_utf8(fileName));
 
-  return KaxAttachedPtr{
+  } catch (mtx::mm_io::end_of_file_x &) {
+    Util::MessageBox::critical(parent)->title(QY("Reading failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();
+  }
+
+  return {};
+}
+
+KaxAttachedPtr
+Tab::createAttachmentFromFile(QString const &fileName) {
+  auto content = readFileData(this, fileName);
+  if (!content)
+    return {};
+
+  auto mimeType   = guess_mime_type(to_utf8(fileName), true);
+  auto uid        = create_unique_number(UNIQUE_ATTACHMENT_IDS);
+  auto fileData   = new KaxFileData;
+  auto attachment = KaxAttachedPtr{
     mtx::construct::cons<KaxAttached>(new KaxFileName, to_wide(QFileInfo{fileName}.fileName()),
                                       new KaxMimeType, mimeType,
-                                      new KaxFileUID,  uid,
-                                      new KaxFileData, contentAsMem)
+                                      new KaxFileUID,  uid)
   };
+
+  fileData->SetBuffer(content->get_buffer(), content->get_size());
+  content->lock();
+  attachment->PushElement(*fileData);
+
+  return attachment;
 }
 
 void
