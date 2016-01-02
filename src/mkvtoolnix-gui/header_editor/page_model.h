@@ -15,7 +15,9 @@ class PageBase;
 class PageModel: public QStandardItemModel {
   Q_OBJECT;
 protected:
-  QList<PageBase *> m_pages, m_topLevelPages;
+  QHash<int, PageBase *> m_pages;
+  QList<PageBase *> m_topLevelPages;
+  int m_pageId{};
 
 public:
   PageModel(QObject *parent);
@@ -26,8 +28,8 @@ public:
   void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
   bool deletePage(PageBase *page);
 
-  QList<PageBase *> &pages();
-  QList<PageBase *> &topLevelPages();
+  QList<PageBase *> pages() const;
+  QList<PageBase *> const &topLevelPages() const;
 
   void reset();
 

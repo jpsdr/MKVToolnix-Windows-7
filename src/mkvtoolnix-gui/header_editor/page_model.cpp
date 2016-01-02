@@ -21,10 +21,11 @@ PageBase *
 PageModel::selectedPage(QModelIndex const &idx)
   const {
   auto selectedItem = itemFromIndex(idx.sibling(idx.row(), 0));
-  if (selectedItem)
-    return m_pages[ selectedItem->data(Util::HeaderEditorPageIdRole).value<unsigned int>() ];
+  if (!selectedItem)
+    return {};
 
-  return nullptr;
+  auto pageId = selectedItem->data(Util::HeaderEditorPageIdRole).value<int>();
+  return m_pages.value(pageId, nullptr);
 }
 
 void
@@ -32,43 +33,54 @@ PageModel::appendPage(PageBase *page,
                       QModelIndex const &parentIdx) {
   page->retranslateUi();
 
+  auto pageId     = ++m_pageId;
   auto parentItem = parentIdx.isValid() ? itemFromIndex(parentIdx.sibling(parentIdx.row(), 0)) : invisibleRootItem();
   auto newItems   = QList<QStandardItem *>{};
 
   for (auto idx = columnCount(); idx > 0; --idx)
     newItems << new QStandardItem{};
 
-  newItems[0]->setData(static_cast<unsigned int>(m_pages.count()), Util::HeaderEditorPageIdRole);
+  newItems[0]->setData(pageId, Util::HeaderEditorPageIdRole);
 
   parentItem->appendRow(newItems);
 
   page->m_pageIdx = indexFromItem(newItems[0]);
   page->setItems(newItems);
 
-  m_pages << page;
+  m_pages[pageId] = page;
   if (!parentIdx.isValid())
     m_topLevelPages << page;
 }
 
 bool
 PageModel::deletePage(PageBase *page) {
-  auto idx = m_pages.indexOf(page);
-  if (idx == -1)
+  auto pageId = m_pages.key(page);
+  if (!pageId)
     return false;
 
-  m_pages.removeAt(idx);
+  m_pages.remove(pageId);
   delete page;
+
+  auto idx = m_topLevelPages.indexOf(page);
+  if (-1 != idx)
+    m_topLevelPages.removeAt(idx);
 
   return true;
 }
 
-QList<PageBase *> &
-PageModel::pages() {
-  return m_pages;
+QList<PageBase *>
+PageModel::pages()
+  const {
+  auto pages = QList<PageBase *>{};
+  for (auto const &page : m_pages)
+    pages << page;
+
+  return pages;
 }
 
-QList<PageBase *> &
-PageModel::topLevelPages() {
+QList<PageBase *> const &
+PageModel::topLevelPages()
+  const {
   return m_topLevelPages;
 }
 

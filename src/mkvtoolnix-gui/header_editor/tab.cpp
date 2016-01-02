@@ -276,8 +276,7 @@ Tab::retranslateUi() {
   m_saveAttachmentContentAction->setIcon(QIcon{Q(":/icons/16x16/document-save.png")});
   m_replaceAttachmentContentAction->setIcon(QIcon{Q(":/icons/16x16/document-open.png")});
 
-  auto &pages = m_model->pages();
-  for (auto const &page : pages)
+  for (auto const &page : m_model->pages())
     page->retranslateUi();
 
   m_model->retranslateUi();
@@ -320,7 +319,7 @@ Tab::title()
 
 bool
 Tab::hasBeenModified() {
-  auto pages = m_model->topLevelPages();
+  auto &pages = m_model->topLevelPages();
   for (auto const &page : pages)
     if (page->hasBeenModified())
       return true;
@@ -330,7 +329,7 @@ Tab::hasBeenModified() {
 
 void
 Tab::doModifications() {
-  auto pages = m_model->topLevelPages();
+  auto &pages = m_model->topLevelPages();
   for (auto const &page : pages)
     page->doModifications();
 
