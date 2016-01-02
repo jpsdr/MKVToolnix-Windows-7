@@ -931,8 +931,8 @@ avi_reader_c::identify_attachments() {
     }
   }
 
-  for (i = 0; i < g_attachments.size(); i++)
-    id_result_attachment(g_attachments[i].ui_id, g_attachments[i].mime_type, g_attachments[i].data->get_size(), g_attachments[i].name, g_attachments[i].description);
+  for (auto const &attachment : g_attachments)
+    id_result_attachment(attachment->ui_id, attachment->mime_type, attachment->data->get_size(), attachment->name, attachment->description);
 }
 
 void

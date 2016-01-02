@@ -93,26 +93,13 @@ struct packetizer_t {
 };
 
 struct attachment_t {
-  std::string name, stored_name, mime_type, description;
-  uint64_t id;
-  bool to_all_files;
+  std::string name, stored_name, mime_type, description, source_file;
+  uint64_t id{};
+  bool to_all_files{};
   memory_cptr data;
-  int64_t ui_id;
-
-  attachment_t() {
-    clear();
-  }
-  void clear() {
-    name         = "";
-    stored_name  = "";
-    mime_type    = "";
-    description  = "";
-    id           = 0;
-    ui_id        = 0;
-    to_all_files = false;
-    data.reset();
-  }
+  int64_t ui_id{};
 };
+using attachment_cptr = std::shared_ptr<attachment_t>;
 
 struct track_order_t {
   int64_t file_id;
@@ -143,7 +130,7 @@ public:
 };
 
 extern std::vector<packetizer_t> g_packetizers;
-extern std::vector<attachment_t> g_attachments;
+extern std::vector<attachment_cptr> g_attachments;
 extern std::vector<track_order_t> g_track_order;
 extern std::vector<append_spec_t> g_append_mapping;
 extern std::unordered_map<int64_t, generic_packetizer_c *> g_packetizers_by_track_num;
@@ -225,7 +212,7 @@ std::string create_output_name();
 bool set_required_matroska_version(unsigned int required_version);
 bool set_required_matroska_read_version(unsigned int required_version);
 
-int64_t add_attachment(attachment_t attachment);
+int64_t add_attachment(attachment_cptr const &attachment);
 
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
 void sighandler(int signum);

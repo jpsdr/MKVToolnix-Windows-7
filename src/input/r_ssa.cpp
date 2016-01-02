@@ -99,7 +99,6 @@ ssa_reader_c::identify() {
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_SSA_ASS, "SSA/ASS"), info.get());
 
-  size_t i;
-  for (i = 0; i < g_attachments.size(); i++)
-    id_result_attachment(g_attachments[i].ui_id, g_attachments[i].mime_type, g_attachments[i].data->get_size(), g_attachments[i].name, g_attachments[i].description);
+  for (auto const &attachment : g_attachments)
+    id_result_attachment(attachment->ui_id, attachment->mime_type, attachment->data->get_size(), attachment->name, attachment->description);
 }

@@ -82,7 +82,7 @@ namespace libmatroska {
 
 std::vector<packetizer_t> g_packetizers;
 std::vector<filelist_cptr> g_files;
-std::vector<attachment_t> g_attachments;
+std::vector<attachment_cptr> g_attachments;
 std::vector<track_order_t> g_track_order;
 std::vector<append_spec_t> g_append_mapping;
 std::unordered_map<int64_t, generic_packetizer_c *> g_packetizers_by_track_num;
@@ -350,29 +350,31 @@ add_tags(KaxTag *tags) {
    \return The attachment UID created for this attachment.
 */
 int64_t
-add_attachment(attachment_t attachment) {
+add_attachment(attachment_cptr const &attachment) {
   // If the attachment is coming from an existing file then we should
   // check if we already have another attachment stored. This can happen
   // if we're concatenating files.
-  if (0 != attachment.id) {
+  if (0 != attachment->id) {
     for (auto &ex_attachment : g_attachments)
-      if ((   (ex_attachment.id == attachment.id)
+      if ((   (ex_attachment->id == attachment->id)
            && !hack_engaged(ENGAGE_NO_VARIABLE_DATA))
           ||
-          (   (ex_attachment.name             == attachment.name)
-           && (ex_attachment.description      == attachment.description)
-           && (ex_attachment.data->get_size() == attachment.data->get_size())))
-        return attachment.id;
+          (   (ex_attachment->name             == attachment->name)
+           && (ex_attachment->description      == attachment->description)
+           && (ex_attachment->data->get_size() == attachment->data->get_size())
+           && (ex_attachment->source_file      != attachment->source_file)
+           && !attachment->source_file.empty()))
+        return attachment->id;
 
-    add_unique_number(attachment.id, UNIQUE_ATTACHMENT_IDS);
+    add_unique_number(attachment->id, UNIQUE_ATTACHMENT_IDS);
 
   } else
     // No ID yet. Let's assign one.
-    attachment.id = create_unique_number(UNIQUE_ATTACHMENT_IDS);
+    attachment->id = create_unique_number(UNIQUE_ATTACHMENT_IDS);
 
   g_attachments.push_back(attachment);
 
-  return attachment.id;
+  return attachment->id;
 }
 
 /** \brief Add a packetizer to the list of packetizers
@@ -866,7 +868,9 @@ render_attachments(IOCallback *out) {
   s_kax_as   = std::make_unique<KaxAttachments>();
   auto kax_a = static_cast<KaxAttached *>(nullptr);
 
-  for (auto &attch : g_attachments) {
+  for (auto &attachment_p : g_attachments) {
+    auto attch = *attachment_p;
+
     if ((1 == g_file_num) || attch.to_all_files) {
       kax_a = !kax_a ? &GetChild<KaxAttached>(*s_kax_as) : &GetNextChild<KaxAttached>(*s_kax_as, *kax_a);
 
@@ -1124,9 +1128,9 @@ void
 calc_attachment_sizes() {
   // Calculate the size of all attachments for split control.
   for (auto &att : g_attachments) {
-    g_attachment_sizes_first += att.data->get_size();
-    if (att.to_all_files)
-      g_attachment_sizes_others += att.data->get_size();
+    g_attachment_sizes_first += att->data->get_size();
+    if (att->to_all_files)
+      g_attachment_sizes_others += att->data->get_size();
   }
 }
 

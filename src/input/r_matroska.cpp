@@ -720,26 +720,30 @@ kax_reader_c::handle_attachments(mm_io_c *io,
     if (!att)
       continue;
 
-    attachment_t matt;
-    matt.name        = to_utf8(FindChildValue<KaxFileName>(att));
-    matt.description = to_utf8(FindChildValue<KaxFileDescription>(att));
-    matt.mime_type   = FindChildValue<KaxMimeType>(att);
-    matt.id          = FindChildValue<KaxFileUID>(att);
-
-    auto fdata       = FindChild<KaxFileData>(att);
-    if (fdata)
-      matt.data = memory_c::clone(static_cast<unsigned char *>(fdata->GetBuffer()), fdata->GetSize());
-
     ++m_attachment_id;
-    attach_mode_e attach_mode;
-    if (   !matt.data->get_size()
-        || matt.mime_type.empty()
-        || matt.name.empty()
-        || ((attach_mode = attachment_requested(m_attachment_id)) == ATTACH_MODE_SKIP))
+
+    auto fdata = FindChild<KaxFileData>(att);
+    if (!fdata)
       continue;
 
-    matt.ui_id          = m_attachment_id;
-    matt.to_all_files   = ATTACH_MODE_TO_ALL_FILES == attach_mode;
+    auto matt         = std::make_shared<attachment_t>();
+    matt->name        = to_utf8(FindChildValue<KaxFileName>(att));
+    matt->description = to_utf8(FindChildValue<KaxFileDescription>(att));
+    matt->mime_type   = FindChildValue<KaxMimeType>(att);
+    matt->id          = FindChildValue<KaxFileUID>(att);
+    matt->data        = memory_c::clone(static_cast<unsigned char *>(fdata->GetBuffer()), fdata->GetSize());
+
+    auto attach_mode  = attachment_requested(m_attachment_id);
+
+    if (   !matt->data->get_size()
+        || matt->mime_type.empty()
+        || matt->name.empty()
+        || (ATTACH_MODE_SKIP == attach_mode))
+      continue;
+
+    matt->ui_id          = m_attachment_id;
+    matt->to_all_files   = ATTACH_MODE_TO_ALL_FILES == attach_mode;
+    matt->source_file    = m_ti.m_fname;
 
     add_attachment(matt);
   }
@@ -2380,7 +2384,7 @@ kax_reader_c::identify() {
   }
 
   for (auto &attachment : g_attachments)
-    id_result_attachment(attachment.ui_id, attachment.mime_type, attachment.data->get_size(), attachment.name, attachment.description, attachment.id);
+    id_result_attachment(attachment->ui_id, attachment->mime_type, attachment->data->get_size(), attachment->name, attachment->description, attachment->id);
 
   if (m_chapters)
     id_result_chapters(count_chapter_atoms(*m_chapters));

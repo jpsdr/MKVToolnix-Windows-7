@@ -1557,7 +1557,7 @@ parse_arg_cluster_length(std::string arg) {
 }
 
 static void
-parse_arg_attach_file(attachment_t &attachment,
+parse_arg_attach_file(attachment_cptr const &attachment,
                       const std::string &arg,
                       bool attach_once) {
   try {
@@ -1566,27 +1566,26 @@ parse_arg_attach_file(attachment_t &attachment,
     mxerror(boost::format(Y("The file '%1%' cannot be attached because it does not exist or cannot be read.\n")) % arg);
   }
 
-  attachment.name         = arg;
-  attachment.to_all_files = !attach_once;
+  attachment->name         = arg;
+  attachment->to_all_files = !attach_once;
 
-  if (attachment.mime_type.empty())
-    attachment.mime_type  = guess_mime_type_and_report(arg);
+  if (attachment->mime_type.empty())
+    attachment->mime_type  = guess_mime_type_and_report(arg);
 
   try {
-    mm_io_cptr io = mm_file_io_c::open(attachment.name);
+    mm_io_cptr io = mm_file_io_c::open(attachment->name);
 
     if (0 == io->get_size())
-      mxerror(boost::format(Y("The size of attachment '%1%' is 0.\n")) % attachment.name);
+      mxerror(boost::format(Y("The size of attachment '%1%' is 0.\n")) % attachment->name);
 
-    attachment.data = memory_c::alloc(io->get_size());
-    io->read(attachment.data->get_buffer(), attachment.data->get_size());
+    attachment->data = memory_c::alloc(io->get_size());
+    io->read(attachment->data->get_buffer(), attachment->data->get_size());
 
   } catch (...) {
-    mxerror(boost::format(Y("The attachment '%1%' could not be read.\n")) % attachment.name);
+    mxerror(boost::format(Y("The attachment '%1%' could not be read.\n")) % attachment->name);
   }
 
   add_attachment(attachment);
-  attachment.clear();
 }
 
 static void
@@ -1962,7 +1961,7 @@ parse_args(std::vector<std::string> args) {
   auto ti               = std::make_unique<track_info_c>();
   bool inputs_found     = false;
   bool append_next_file = false;
-  attachment_t attachment;
+  auto attachment       = std::make_shared<attachment_t>();
 
   for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
     auto const &this_arg = *sit;
@@ -2071,29 +2070,29 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(Y("'--attachment-description' lacks the description.\n"));
 
-      if (attachment.description != "")
+      if (attachment->description != "")
         mxwarn(Y("More than one description was given for a single attachment.\n"));
-      attachment.description = next_arg;
+      attachment->description = next_arg;
       sit++;
 
     } else if (this_arg == "--attachment-mime-type") {
       if (no_next_arg)
         mxerror(Y("'--attachment-mime-type' lacks the MIME type.\n"));
 
-      if (attachment.mime_type != "")
+      if (attachment->mime_type != "")
         mxwarn(boost::format(Y("More than one MIME type was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"))
-               % attachment.mime_type % next_arg);
-      attachment.mime_type = next_arg;
+               % attachment->mime_type % next_arg);
+      attachment->mime_type = next_arg;
       sit++;
 
     } else if (this_arg == "--attachment-name") {
       if (no_next_arg)
         mxerror(Y("'--attachment-name' lacks the name.\n"));
 
-      if (attachment.stored_name != "")
+      if (attachment->stored_name != "")
         mxwarn(boost::format(Y("More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"))
-               % attachment.stored_name % next_arg);
-      attachment.stored_name = next_arg;
+               % attachment->stored_name % next_arg);
+      attachment->stored_name = next_arg;
       sit++;
 
     } else if ((this_arg == "--attach-file") || (this_arg == "--attach-file-once")) {
@@ -2101,6 +2100,7 @@ parse_args(std::vector<std::string> args) {
         mxerror(boost::format(Y("'%1%' lacks the file name.\n")) % this_arg);
 
       parse_arg_attach_file(attachment, next_arg, this_arg == "--attach-file-once");
+      attachment = std::make_shared<attachment_t>();
       sit++;
 
       inputs_found = true;

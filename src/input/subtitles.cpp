@@ -516,7 +516,8 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
     return;
   }
 
-  attachment_t attachment;
+  auto attachment_p = std::make_shared<attachment_t>();
+  auto &attachment  = *attachment_p;
 
   std::string short_name = m_file_name;
   size_t pos             = short_name.rfind('/');
@@ -531,6 +532,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
   attachment.name         = m_cc_utf8->utf8(name);
   attachment.description  = (boost::format(SSA_SECTION_FONTS == section ? Y("Imported font from %1%") : Y("Imported picture from %1%")) % short_name).str();
   attachment.to_all_files = true;
+  attachment.source_file  = m_file_name;
 
   size_t data_size        = data_uu.length() % 4;
   data_size               = 3 == data_size ? 2 : 2 == data_size ? 1 : 0;
@@ -549,7 +551,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
   if (attachment.mime_type == "")
     attachment.mime_type = "application/octet-stream";
 
-  add_attachment(attachment);
+  add_attachment(attachment_p);
 
   name    = "";
   data_uu = "";
