@@ -227,6 +227,8 @@ Tab::setupUi() {
 
   connect(ui->elements,                              &Util::BasicTreeView::customContextMenuRequested, this, &Tab::showTreeContextMenu);
   connect(ui->elements,                              &Util::BasicTreeView::filesDropped,               this, &Tab::addAttachments);
+  connect(ui->elements,                              &Util::BasicTreeView::deletePressed,              this, &Tab::removeSelectedAttachment);
+  connect(ui->elements,                              &Util::BasicTreeView::insertPressed,              this, &Tab::selectAttachmentsAndAdd);
   connect(ui->elements->selectionModel(),            &QItemSelectionModel::currentChanged,             this, &Tab::selectionChanged);
   connect(m_expandAllAction,                         &QAction::triggered,                              this, &Tab::expandAll);
   connect(m_collapseAllAction,                       &QAction::triggered,                              this, &Tab::collapseAll);
@@ -622,7 +624,7 @@ Tab::addAttachments(QStringList const &fileNames) {
 
 void
 Tab::removeSelectedAttachment() {
-  auto selectedPage = currentlySelectedPage();
+  auto selectedPage = dynamic_cast<AttachedFilePage *>(currentlySelectedPage());
   if (!selectedPage)
     return;
 
