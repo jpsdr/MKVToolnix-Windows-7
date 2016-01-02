@@ -77,9 +77,9 @@ AttachedFilePage::setControlsFromAttachment() {
 
   Util::setComboBoxTextByData(ui->mimeType, mimeType);
 
-  ui->size->setText(formatSize());
-
   m_newFileContent.reset();
+
+  ui->size->setText(formatSize());
 }
 
 void
