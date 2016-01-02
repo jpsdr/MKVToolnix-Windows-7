@@ -592,7 +592,7 @@ Tab::showTreeContextMenu(QPoint const &pos) {
 void
 Tab::selectAttachmentsAndAdd() {
   auto &settings = Util::Settings::get();
-  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), Util::dirPath(settings.lastOpenDirPath()), QY("All files") + Q(" (*)"));
+  auto fileNames = Util::getOpenFileNames(this, QY("Add attachments"), settings.lastOpenDirPath(), QY("All files") + Q(" (*)"));
 
   if (fileNames.isEmpty())
     return;
