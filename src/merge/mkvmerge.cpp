@@ -1562,6 +1562,13 @@ parse_arg_attach_file(attachment_cptr const &attachment,
                       bool attach_once) {
   try {
     mm_file_io_c test(arg);
+    auto size = test.get_size();
+
+    if (size > 0x7fffffff)
+      mxerror(boost::format("%1% %2%\n")
+              % (boost::format(Y("The attachment (%1%) is too big (%2%).")) % arg % format_file_size(size))
+              % Y("Only files smaller than 2 GiB are supported."));
+
   } catch (...) {
     mxerror(boost::format(Y("The file '%1%' cannot be attached because it does not exist or cannot be read.\n")) % arg);
   }
