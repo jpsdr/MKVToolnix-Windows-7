@@ -27,7 +27,8 @@ protected:
   static int const StyleColumn       = 3;
   static int const SourceFileColumn  = 4;
   static int const SourceDirColumn   = 5;
-  static int const NumberOfColumns   = 6;
+  static int const SizeColumn        = 6;
+  static int const NumberOfColumns   = 7;
 
 public:
   AttachmentModel(QObject *parent);

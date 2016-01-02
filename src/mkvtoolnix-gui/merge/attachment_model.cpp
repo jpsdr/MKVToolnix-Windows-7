@@ -4,6 +4,7 @@
 #include <QFileInfo>
 #include <QMimeData>
 
+#include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/merge/attachment_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
@@ -42,6 +43,7 @@ void
 AttachmentModel::setRowData(QList<QStandardItem *> const &items,
                             Attachment const &attachment) {
   auto info = QFileInfo{attachment.m_fileName};
+  auto size = QNY("%1 byte (%2)", "%1 bytes (%2)", info.size()).arg(info.size()).arg(Q(format_file_size(info.size())));
 
   items[NameColumn       ]->setText(attachment.m_name);
   items[MIMETypeColumn   ]->setText(attachment.m_MIMEType);
@@ -49,6 +51,7 @@ AttachmentModel::setRowData(QList<QStandardItem *> const &items,
   items[StyleColumn      ]->setText(attachment.m_style == Attachment::ToAllFiles ? QY("to all output files") : QY("only to the first output file"));
   items[SourceFileColumn ]->setText(info.fileName());
   items[SourceDirColumn  ]->setText(info.path());
+  items[SizeColumn       ]->setText(size);
 }
 
 void
@@ -60,6 +63,7 @@ AttachmentModel::retranslateUi() {
     { QY("Attach to"),        Q("attachTo")       },
     { QY("Source file name"), Q("sourceFileName") },
     { QY("Directory"),        Q("directory")      },
+    { QY("Size"),             Q("size")           },
   });
 
   for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
