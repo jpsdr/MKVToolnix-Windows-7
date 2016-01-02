@@ -32,6 +32,7 @@ signals:
   void filesDropped(QStringList const &fileNames, Qt::MouseButtons mouseButtons, Qt::KeyboardModifiers keyboardModifiers);
   void allSelectedActivated();
   void deletePressed();
+  void insertPressed();
   void ctrlUpPressed();
   void ctrlDownPressed();
 

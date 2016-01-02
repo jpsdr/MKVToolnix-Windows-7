@@ -283,6 +283,7 @@ Tab::setupInputControls() {
   connect(ui->files,                        &Util::BasicTreeView::ctrlUpPressed,                                                              this,                     &Tab::onMoveFilesUp);
   connect(ui->files,                        &Util::BasicTreeView::customContextMenuRequested,                                                 this,                     &Tab::showFilesContextMenu);
   connect(ui->files,                        &Util::BasicTreeView::deletePressed,                                                              this,                     &Tab::onRemoveFiles);
+  connect(ui->files,                        &Util::BasicTreeView::insertPressed,                                                              this,                     &Tab::onAddFiles);
   connect(ui->files,                        &Util::BasicTreeView::filesDropped,                                                               this,                     &Tab::addOrAppendDroppedFiles);
   connect(ui->files->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           m_filesModel,             &SourceFileModel::updateSelectionStatus);
   connect(ui->files->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           this,                     &Tab::enableMoveFilesButtons);
