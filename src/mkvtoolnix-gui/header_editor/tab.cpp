@@ -637,7 +637,6 @@ Tab::removeSelectedAttachment() {
 
 KaxAttachedPtr
 Tab::createAttachmentFromFile(QString const &fileName) {
-  QByteArray content;
   QFile file{fileName};
 
   if (!file.open(QIODevice::ReadOnly)) {
@@ -645,6 +644,7 @@ Tab::createAttachmentFromFile(QString const &fileName) {
     return {};
   }
 
+  auto content      = file.readAll();
   auto mimeType     = guess_mime_type(to_utf8(fileName), true);
   auto contentAsMem = std::make_shared<memory_c>(content.data(), content.count(), false);
   auto uid          = create_unique_number(UNIQUE_ATTACHMENT_IDS);
