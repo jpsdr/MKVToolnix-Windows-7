@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-02 19:17+0100\n"
+"POT-Creation-Date: 2016-01-02 20:45+0100\n"
 "PO-Revision-Date: 2015-12-16 09:53+0100\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -1072,7 +1072,7 @@ msgstr "中断(&A)"
 msgid "&About mkvinfo"
 msgstr "mkvinfoについて(&A)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:271
+#: src/mkvtoolnix-gui/merge/attachments.cpp:284
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "追加(&A)"
@@ -1376,7 +1376,7 @@ msgstr "再読み込み(&R)"
 msgid "&Reload file"
 msgstr "再読み込み(&R)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:272
+#: src/mkvtoolnix-gui/merge/attachments.cpp:285
 msgid "&Remove"
 msgstr "削除(&R)"
 
@@ -1432,7 +1432,7 @@ msgstr "他のプレイリストがないかディレクトリをスキャン(&C
 msgid "&Scan for other playlists"
 msgstr "他のプレイリストがないかスキャンします(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:274
+#: src/mkvtoolnix-gui/merge/attachments.cpp:287
 #, fuzzy
 msgid "&Select all"
 msgstr "全てのトラックを選択(&S)"
@@ -1987,7 +1987,7 @@ msgstr "<Simple> は<String>か<Binary>のどちらかの子要素を含んで�
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag>に<Simple子要素がありません。"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:244
+#: src/mkvtoolnix-gui/merge/attachments.cpp:257
 #: src/mkvtoolnix-gui/merge/input.cpp:534
 #: src/mkvtoolnix-gui/merge/input.cpp:1235
 msgid "<do not change>"
@@ -2272,7 +2272,7 @@ msgid "Add as new input fi&les"
 msgstr "新しい入力ファイルとして追加(&L)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
-#: src/mkvtoolnix-gui/merge/attachments.cpp:151
+#: src/mkvtoolnix-gui/merge/attachments.cpp:164
 msgid "Add attachments"
 msgstr "添付ファイルを追加"
 
@@ -2407,7 +2407,7 @@ msgstr "アルゴリズム：%1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
-#: src/mkvtoolnix-gui/merge/attachments.cpp:151
+#: src/mkvtoolnix-gui/merge/attachments.cpp:164
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171
 #: src/mkvtoolnix-gui/merge/tab.cpp:185
@@ -6090,6 +6090,12 @@ msgstr "オンラインでのアップデートチェック"
 msgid "Only %1% chapters found in source files & chapter files."
 msgstr "ソースファイル中とチャプタファイルから%1%個のチャプタしか見つかりませんでした。"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:649
+#: src/mkvtoolnix-gui/merge/attachments.cpp:142
+#, fuzzy
+msgid "Only files smaller than 2 GiB are supported."
+msgstr "開こうとしたファイル（%1）は有効なMatroska・WebMファイルであるとは認識されませんでした。"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1146
 msgid "Only if the job completed successfully"
 msgstr "ジョブの実行が成功した場合のみ"
@@ -6642,7 +6648,8 @@ msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "暗号化されたVOBの読み込みはサポートされていません。\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:646
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:656
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:658
+#: src/mkvtoolnix-gui/merge/attachments.cpp:139
 #, fuzzy
 msgid "Reading failed"
 msgstr "保存に失敗しました"
@@ -6732,7 +6739,7 @@ msgstr "完了したジョブを削除する(&C)"
 msgid "Remove &successfully completed jobs"
 msgstr "正常に完了したジョブを削除する(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:273
+#: src/mkvtoolnix-gui/merge/attachments.cpp:286
 #, fuzzy
 msgid "Remove a&ll"
 msgstr "全てのジョブを削除する(&L)"
@@ -6816,7 +6823,7 @@ msgstr "全てのトラックへのアクションを行うには右クリック
 msgid "Right-click for actions for jobs"
 msgstr "全てのジョブへのアクションを行う場合は右クリックしてください"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:285
+#: src/mkvtoolnix-gui/merge/attachments.cpp:298
 #, fuzzy
 msgid "Right-click for attachment actions"
 msgstr "全てのジョブへのアクションを行う場合は右クリックしてください"
@@ -8095,6 +8102,12 @@ msgstr "XMLタグァイル'%1%'はエラーを含んでいます：%2%\n"
 msgid "The file '%1' you've added is a playlist."
 msgstr "追加したファイル「%1」はプレイリストです。"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:648
+#: src/mkvtoolnix-gui/merge/attachments.cpp:141
+#, fuzzy
+msgid "The file (%1) is too big (%2)."
+msgstr "XMLタグァイル'%1%'はエラーを含んでいます：%2%\n"
+
 #: src/merge/reader_detection_and_creation.cpp:408
 msgid "The file content does not match its format type and was not recognized."
 msgstr "ファイルの内容がフォーマットタイプに一致しないため、認識できませんでした。"
@@ -8207,7 +8220,7 @@ msgstr "ファイルはこれ以上処理されません。"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:259
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:547
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:111
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:656
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:658
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "開こうとしたファイル（%1）の読み込みに問題が発生しました。"
 
@@ -8223,11 +8236,6 @@ msgstr "開こうとしたファイル（%1）は有効なMatroska・WebMファ�
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:400
 msgid "The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file."
 msgstr "開こうとしたファイル（%1）は有効なMatroskaファイルでもなく、有効なチャプタファイルでもないと認識されました。"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:647
-#, fuzzy
-msgid "The file you tried to open (%1) is too big (%2). Only files smaller than 2 GiB are supported."
-msgstr "開こうとしたファイル（%1）は有効なMatroska・WebMファイルであるとは認識されませんでした。"
 
 #: src/common/kax_file.cpp:52
 #, boost-format

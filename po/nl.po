@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-02 20:02+0100\n"
+"POT-Creation-Date: 2016-01-02 20:45+0100\n"
 "PO-Revision-Date: 2016-01-02 20:03+0100\n"
 "Last-Translator: René Maassen <bmom43@hotmail.com>\n"
 "Language-Team: \n"
@@ -1186,7 +1186,7 @@ msgstr "Taken &afbreken"
 msgid "&About mkvinfo"
 msgstr "&Over mkvinfo"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:271
+#: src/mkvtoolnix-gui/merge/attachments.cpp:284
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "&Toevoegen"
@@ -1474,7 +1474,7 @@ msgstr "&Opnieuw inladen"
 msgid "&Reload file"
 msgstr "&Bestand opnieuw inladen"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:272
+#: src/mkvtoolnix-gui/merge/attachments.cpp:285
 msgid "&Remove"
 msgstr "Ve&rwijder"
 
@@ -1528,7 +1528,7 @@ msgstr "&Scan map op andere afspeellijst(en):"
 msgid "&Scan for other playlists"
 msgstr "&Scan voor andere afspeellijsten"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:274
+#: src/mkvtoolnix-gui/merge/attachments.cpp:287
 msgid "&Select all"
 msgstr "&Selecteer alles"
 
@@ -2162,7 +2162,7 @@ msgstr ""
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> mist de <Simple> bijbehorende deel."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:244
+#: src/mkvtoolnix-gui/merge/attachments.cpp:257
 #: src/mkvtoolnix-gui/merge/input.cpp:534
 #: src/mkvtoolnix-gui/merge/input.cpp:1235
 msgid "<do not change>"
@@ -2490,7 +2490,7 @@ msgid "Add as new input fi&les"
 msgstr "Voeg als een nieuw invoer bestand toe"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
-#: src/mkvtoolnix-gui/merge/attachments.cpp:151
+#: src/mkvtoolnix-gui/merge/attachments.cpp:164
 msgid "Add attachments"
 msgstr "Bijlagen toevoegen"
 
@@ -2631,7 +2631,7 @@ msgstr "Algoritme: %1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
-#: src/mkvtoolnix-gui/merge/attachments.cpp:151
+#: src/mkvtoolnix-gui/merge/attachments.cpp:164
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171 src/mkvtoolnix-gui/merge/tab.cpp:185
 #: src/mkvtoolnix-gui/merge/tab.cpp:234 src/mkvtoolnix-gui/merge/tab.cpp:259
@@ -6931,6 +6931,14 @@ msgstr "Online controleren op opwaarderingen"
 msgid "Only %1% chapters found in source files & chapter files."
 msgstr "Slechts %1% hoofdstukken gevonden in bron en hoofdstuk bestanden."
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:649
+#: src/mkvtoolnix-gui/merge/attachments.cpp:142
+#, fuzzy
+msgid "Only files smaller than 2 GiB are supported."
+msgstr ""
+"Het bestand wat je probeerde te openen (%1) is te groot (%2). Alléén "
+"bestanden kleiner dan 2 GiB zijn ondersteund."
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1146
 msgid "Only if the job completed successfully"
 msgstr "Alleen als de taak succesvol voltooid is"
@@ -7616,7 +7624,8 @@ msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "Lezen van versleutelde VOB's niet ondersteunt.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:646
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:656
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:658
+#: src/mkvtoolnix-gui/merge/attachments.cpp:139
 msgid "Reading failed"
 msgstr "Inlezen mislukt"
 
@@ -7715,7 +7724,7 @@ msgstr "Verwijder &voltooide taken"
 msgid "Remove &successfully completed jobs"
 msgstr "Verwijder &succesvol voltooide taken."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:273
+#: src/mkvtoolnix-gui/merge/attachments.cpp:286
 msgid "Remove a&ll"
 msgstr "Verwijder a&lle taken"
 
@@ -7798,7 +7807,7 @@ msgstr "Rechts klikken voor acties voor alle sporen."
 msgid "Right-click for actions for jobs"
 msgstr "Rechts klikken voor taak acties"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:285
+#: src/mkvtoolnix-gui/merge/attachments.cpp:298
 msgid "Right-click for attachment actions"
 msgstr "Rechts klikken voor bijlage acties."
 
@@ -9324,6 +9333,12 @@ msgstr "Het bestand '%1' bestaat al."
 msgid "The file '%1' you've added is a playlist."
 msgstr "Het bestand '%1' dat je hebt toegevoegd is een afspeellijst."
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:648
+#: src/mkvtoolnix-gui/merge/attachments.cpp:141
+#, fuzzy
+msgid "The file (%1) is too big (%2)."
+msgstr "Het  bestand '%1' bevat markeringen."
+
 #: src/merge/reader_detection_and_creation.cpp:408
 msgid "The file content does not match its format type and was not recognized."
 msgstr "De bestandsinhoud komt niet met het type overeen en is niet herkend."
@@ -9463,7 +9478,7 @@ msgstr "Het bestand wordt verder niet uitgevoerd."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:259
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:547
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:111
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:656
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:658
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr ""
 "het bestand wat je probeerde te openen (%1) kon niet succesvol worden "
@@ -9489,14 +9504,6 @@ msgid ""
 msgstr ""
 "Het bestand wat je probeerde te openen (%1) wordt niet herkend als geldig "
 "Matroska noch een geldig hoofdstuk bestand."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:647
-msgid ""
-"The file you tried to open (%1) is too big (%2). Only files smaller than 2 "
-"GiB are supported."
-msgstr ""
-"Het bestand wat je probeerde te openen (%1) is te groot (%2). Alléén "
-"bestanden kleiner dan 2 GiB zijn ondersteund."
 
 #: src/common/kax_file.cpp:52
 #, boost-format

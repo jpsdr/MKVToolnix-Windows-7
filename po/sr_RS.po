@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-02 19:17+0100\n"
+"POT-Creation-Date: 2016-01-02 20:45+0100\n"
 "PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -1136,7 +1136,7 @@ msgstr "&Прекини радњу"
 msgid "&About mkvinfo"
 msgstr "&О програму"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:271
+#: src/mkvtoolnix-gui/merge/attachments.cpp:284
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "&Додај"
@@ -1432,7 +1432,7 @@ msgstr "&Учитај наново"
 msgid "&Reload file"
 msgstr "&Учитај датотеку наново"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:272
+#: src/mkvtoolnix-gui/merge/attachments.cpp:285
 msgid "&Remove"
 msgstr "&Уклони"
 
@@ -1488,7 +1488,7 @@ msgstr "Тра&жи у директоријуму и друге плеј-лис�
 msgid "&Scan for other playlists"
 msgstr "Тражи и друге плеј-&листе"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:274
+#: src/mkvtoolnix-gui/merge/attachments.cpp:287
 msgid "&Select all"
 msgstr "&Одабери све"
 
@@ -2104,7 +2104,7 @@ msgstr "<Simple> мора да садржи или <String> или <Binary> по
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> не садржи под-елеменат <Simple>."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:244
+#: src/mkvtoolnix-gui/merge/attachments.cpp:257
 #: src/mkvtoolnix-gui/merge/input.cpp:534
 #: src/mkvtoolnix-gui/merge/input.cpp:1235
 msgid "<do not change>"
@@ -2428,7 +2428,7 @@ msgid "Add as new input fi&les"
 msgstr "Додај као ново&улазне датотеке"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
-#: src/mkvtoolnix-gui/merge/attachments.cpp:151
+#: src/mkvtoolnix-gui/merge/attachments.cpp:164
 msgid "Add attachments"
 msgstr "Додај прилоге"
 
@@ -2570,7 +2570,7 @@ msgstr "Алгоритам: %1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
-#: src/mkvtoolnix-gui/merge/attachments.cpp:151
+#: src/mkvtoolnix-gui/merge/attachments.cpp:164
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171 src/mkvtoolnix-gui/merge/tab.cpp:185
 #: src/mkvtoolnix-gui/merge/tab.cpp:234 src/mkvtoolnix-gui/merge/tab.cpp:259
@@ -6855,6 +6855,14 @@ msgstr "Подаци о доступним надградњама"
 msgid "Only %1% chapters found in source files & chapter files."
 msgstr "У изворним и датотекама поглавља нађено је само %1% поглавље(а)"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:649
+#: src/mkvtoolnix-gui/merge/attachments.cpp:142
+#, fuzzy
+msgid "Only files smaller than 2 GiB are supported."
+msgstr ""
+"Датотека коју сте покушали да отворите (%1) није ваљана Матрошка или ВебМ-"
+"датотека."
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1146
 msgid "Only if the job completed successfully"
 msgstr "само уколико је успешно завршена"
@@ -7542,7 +7550,8 @@ msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "Није подржано читање шифрованих Воб-датотека.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:646
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:656
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:658
+#: src/mkvtoolnix-gui/merge/attachments.cpp:139
 #, fuzzy
 msgid "Reading failed"
 msgstr "Није успело чување"
@@ -7644,7 +7653,7 @@ msgstr "Уклони свр&шене радње"
 msgid "Remove &successfully completed jobs"
 msgstr "Уклони успешно &свршене радње"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:273
+#: src/mkvtoolnix-gui/merge/attachments.cpp:286
 msgid "Remove a&ll"
 msgstr "Уклони с&ве"
 
@@ -7732,7 +7741,7 @@ msgstr "Доступне радње за све записе — притиса�
 msgid "Right-click for actions for jobs"
 msgstr "Приказ доступних опција за радњу — притисак десног тастера миша"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:285
+#: src/mkvtoolnix-gui/merge/attachments.cpp:298
 msgid "Right-click for attachment actions"
 msgstr "Радње са прилозима — притисак десног тастера миша"
 
@@ -9254,6 +9263,12 @@ msgstr "У ИксМЛ-датотеци ознака „%1%“ постоји г�
 msgid "The file '%1' you've added is a playlist."
 msgstr "Додата датотека „%1“ је плеј-листа."
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:648
+#: src/mkvtoolnix-gui/merge/attachments.cpp:141
+#, fuzzy
+msgid "The file (%1) is too big (%2)."
+msgstr "У ИксМЛ-датотеци ознака „%1%“ постоји грешка: %2%\n"
+
 #: src/merge/reader_detection_and_creation.cpp:408
 msgid "The file content does not match its format type and was not recognized."
 msgstr "Није препознат садржај датотеке јер се не слаже са њ. врстом формата."
@@ -9391,7 +9406,7 @@ msgstr "Надаље, нећу обрађивати ову датотеку."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:259
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:547
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:111
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:656
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:658
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Неуспешно читање датотеке коју сте покушали да отворите (%1)."
 
@@ -9415,15 +9430,6 @@ msgid ""
 msgstr ""
 "Датотека коју сте покушали да отворите (%1) није ваљана матрошкина или "
 "датотека поглавља."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:647
-#, fuzzy
-msgid ""
-"The file you tried to open (%1) is too big (%2). Only files smaller than 2 "
-"GiB are supported."
-msgstr ""
-"Датотека коју сте покушали да отворите (%1) није ваљана Матрошка или ВебМ-"
-"датотека."
 
 #: src/common/kax_file.cpp:52
 #, boost-format

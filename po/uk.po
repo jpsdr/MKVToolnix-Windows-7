@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-02 19:17+0100\n"
+"POT-Creation-Date: 2016-01-02 20:45+0100\n"
 "PO-Revision-Date: 2015-12-16 10:26+0100\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -1176,7 +1176,7 @@ msgstr "&Перервати виконання завдання"
 msgid "&About mkvinfo"
 msgstr "&Про mkvinfo"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:271
+#: src/mkvtoolnix-gui/merge/attachments.cpp:284
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "&Додати"
@@ -1469,7 +1469,7 @@ msgstr "&Перезавантажити"
 msgid "&Reload file"
 msgstr "&Перезавантажити файл"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:272
+#: src/mkvtoolnix-gui/merge/attachments.cpp:285
 msgid "&Remove"
 msgstr "&Видалити"
 
@@ -1525,7 +1525,7 @@ msgstr "&Сканувати теку на наявність інших спис
 msgid "&Scan for other playlists"
 msgstr "&Сканувати інші списки відтворення"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:274
+#: src/mkvtoolnix-gui/merge/attachments.cpp:287
 msgid "&Select all"
 msgstr "&Вибрати все"
 
@@ -2152,7 +2152,7 @@ msgstr "<Simple> має містити або <String>, або дочірній 
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> пропускає складову <Simple>."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:244
+#: src/mkvtoolnix-gui/merge/attachments.cpp:257
 #: src/mkvtoolnix-gui/merge/input.cpp:534
 #: src/mkvtoolnix-gui/merge/input.cpp:1235
 msgid "<do not change>"
@@ -2477,7 +2477,7 @@ msgid "Add as new input fi&les"
 msgstr "Додати як нові вхідні фа&йли"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
-#: src/mkvtoolnix-gui/merge/attachments.cpp:151
+#: src/mkvtoolnix-gui/merge/attachments.cpp:164
 msgid "Add attachments"
 msgstr "Додати вкладення"
 
@@ -2617,7 +2617,7 @@ msgstr "Алгоритм: %1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
-#: src/mkvtoolnix-gui/merge/attachments.cpp:151
+#: src/mkvtoolnix-gui/merge/attachments.cpp:164
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171 src/mkvtoolnix-gui/merge/tab.cpp:185
 #: src/mkvtoolnix-gui/merge/tab.cpp:234 src/mkvtoolnix-gui/merge/tab.cpp:259
@@ -6925,6 +6925,12 @@ msgstr "Перевірка наявності оновлень онлайн"
 msgid "Only %1% chapters found in source files & chapter files."
 msgstr "Знайдено лише %1% розділів у вхідних файлах і файлах розділів."
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:649
+#: src/mkvtoolnix-gui/merge/attachments.cpp:142
+#, fuzzy
+msgid "Only files smaller than 2 GiB are supported."
+msgstr "Файл, який ви спробували відкрити (%1), не є файлом Matroska/WebM."
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1146
 msgid "Only if the job completed successfully"
 msgstr "Тльки якщо запуск пройшов успішно"
@@ -7624,7 +7630,8 @@ msgid "Reading encrypted VOBs is not supported.\n"
 msgstr "Читання зашифрованих VOBів не підтримується.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:646
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:656
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:658
+#: src/mkvtoolnix-gui/merge/attachments.cpp:139
 #, fuzzy
 msgid "Reading failed"
 msgstr "Помилка під час збереження"
@@ -7725,7 +7732,7 @@ msgstr "Видалити &завершені завдання"
 msgid "Remove &successfully completed jobs"
 msgstr "Видалити &успішно завершені завдання"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:273
+#: src/mkvtoolnix-gui/merge/attachments.cpp:286
 msgid "Remove a&ll"
 msgstr "Видалити вс&е"
 
@@ -7816,7 +7823,7 @@ msgid "Right-click for actions for jobs"
 msgstr ""
 "Клацніть правою кнопкою миші, щоб побачити наявні дії над всіма завданнями"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:285
+#: src/mkvtoolnix-gui/merge/attachments.cpp:298
 msgid "Right-click for attachment actions"
 msgstr ""
 "Клацніть правою кнопкою миші, щоб побачити наявні дії над всіма вкладеннями"
@@ -9351,6 +9358,12 @@ msgstr "Файл '%1' вже існує."
 msgid "The file '%1' you've added is a playlist."
 msgstr "Файл '%1', що ви додали, є списком відтворення."
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:648
+#: src/mkvtoolnix-gui/merge/attachments.cpp:141
+#, fuzzy
+msgid "The file (%1) is too big (%2)."
+msgstr "Файл '%1' містить теги."
+
 #: src/merge/reader_detection_and_creation.cpp:408
 msgid "The file content does not match its format type and was not recognized."
 msgstr "Вмістиме файлу не співпадає з типом його формату і не було розпізнане."
@@ -9488,7 +9501,7 @@ msgstr "Файл не буде оброблений далі."
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:259
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:547
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:111
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:656
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:658
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Файл, який ви намагалися відкрити (%1) не можна прочитати."
 
@@ -9508,13 +9521,6 @@ msgid ""
 "The file you tried to open (%1) is recognized as neither a valid Matroska "
 "nor a valid chapter file."
 msgstr "Файл, який ви спробували відкрити (%1), не є файлом Matroska."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:647
-#, fuzzy
-msgid ""
-"The file you tried to open (%1) is too big (%2). Only files smaller than 2 "
-"GiB are supported."
-msgstr "Файл, який ви спробували відкрити (%1), не є файлом Matroska/WebM."
 
 #: src/common/kax_file.cpp:52
 #, boost-format
