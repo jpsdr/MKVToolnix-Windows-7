@@ -633,8 +633,7 @@ Tab::removeSelectedAttachment() {
     m_model->removeRow(idx.row(), idx.parent());
 
   m_attachmentsPage->m_children.removeAll(selectedPage);
-
-  delete selectedPage;
+  m_model->deletePage(selectedPage);
 }
 
 KaxAttachedPtr

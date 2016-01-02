@@ -24,6 +24,7 @@ public:
   PageBase *selectedPage(QModelIndex const &idx) const;
 
   void appendPage(PageBase *page, QModelIndex const &parentIdx = {});
+  bool deletePage(PageBase *page);
 
   QList<PageBase *> &pages();
   QList<PageBase *> &topLevelPages();

@@ -50,6 +50,18 @@ PageModel::appendPage(PageBase *page,
     m_topLevelPages << page;
 }
 
+bool
+PageModel::deletePage(PageBase *page) {
+  auto idx = m_pages.indexOf(page);
+  if (idx == -1)
+    return false;
+
+  m_pages.removeAt(idx);
+  delete page;
+
+  return true;
+}
+
 QList<PageBase *> &
 PageModel::pages() {
   return m_pages;
