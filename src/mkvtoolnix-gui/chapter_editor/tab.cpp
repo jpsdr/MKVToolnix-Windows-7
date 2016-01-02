@@ -109,6 +109,7 @@ Tab::setupUi() {
   auto mw = MainWindow::get();
   connect(ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                 &Tab::showChapterContextMenu);
   connect(ui->elements,                    &Util::BasicTreeView::deletePressed,                                    this,                 &Tab::removeElement);
+  connect(ui->elements,                    &Util::BasicTreeView::insertPressed,                                    this,                 &Tab::addEditionOrChapterAfter);
   connect(ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this,                 &Tab::chapterSelectionChanged);
   connect(ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this,                 &Tab::nameSelectionChanged);
   connect(ui->leChName,                    &QLineEdit::textEdited,                                                 this,                 &Tab::chapterNameEdited);
@@ -566,7 +567,7 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
 void
 Tab::selectChapterRow(QModelIndex const &idx,
                       bool ignoreSelectionChanges) {
-  auto selection = QItemSelection{idx.sibling(idx.row(), 0), idx.sibling(idx.row(), 2)};
+  auto selection = QItemSelection{idx.sibling(idx.row(), 0), idx.sibling(idx.row(), m_chapterModel->columnCount() - 1)};
 
   m_ignoreChapterSelectionChanges = ignoreSelectionChanges;
   ui->elements->selectionModel()->setCurrentIndex(idx.sibling(idx.row(), 0), QItemSelectionModel::ClearAndSelect);
@@ -944,7 +945,7 @@ Tab::addEditionAfter() {
   addEdition(false);
 }
 
-void
+QModelIndex
 Tab::addEdition(bool before) {
   auto edition     = std::make_shared<KaxEditionEntry>();
   auto selectedIdx = Util::selectedRowIdx(ui->elements);
@@ -962,6 +963,21 @@ Tab::addEdition(bool before) {
   m_chapterModel->insertEdition(row, edition);
 
   emit numberOfEntriesChanged();
+
+  return m_chapterModel->index(row, 0);
+}
+
+void
+Tab::addEditionOrChapterAfter() {
+  auto selectedIdx     = Util::selectedRowIdx(ui->elements);
+  auto hasSelection    = selectedIdx.isValid();
+  auto chapterSelected = hasSelection && selectedIdx.parent().isValid();
+
+  if (!hasSelection)
+    return;
+
+  auto newEntryIdx = chapterSelected ? addChapter(false) : addEdition(false);
+  selectChapterRow(newEntryIdx, false);
 }
 
 ChapterPtr
@@ -995,11 +1011,11 @@ Tab::addChapterAfter() {
   addChapter(false);
 }
 
-void
+QModelIndex
 Tab::addChapter(bool before) {
   auto selectedIdx = Util::selectedRowIdx(ui->elements);
   if (!selectedIdx.isValid() || !selectedIdx.parent().isValid())
-    return;
+    return {};
 
   // TODO: Tab::addChapter: start time
   auto row     = selectedIdx.row() + (before ? 0 : 1);
@@ -1008,6 +1024,8 @@ Tab::addChapter(bool before) {
   m_chapterModel->insertChapter(row, chapter, selectedIdx.parent());
 
   emit numberOfEntriesChanged();
+
+  return m_chapterModel->index(row, 0, selectedIdx.parent());
 }
 
 void

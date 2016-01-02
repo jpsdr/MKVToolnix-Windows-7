@@ -89,6 +89,7 @@ public slots:
   virtual void addChapterBefore();
   virtual void addChapterAfter();
   virtual void addSubChapter();
+  virtual void addEditionOrChapterAfter();
   virtual void removeElement();
   virtual void duplicateElement();
   virtual void massModify();
@@ -144,8 +145,8 @@ protected:
   void selectChapterRow(QModelIndex const &idx, bool ignoreSelectionChanges);
   bool handleChapterDeselection(QItemSelection const &deselected);
 
-  void addEdition(bool before);
-  void addChapter(bool before);
+  QModelIndex addEdition(bool before);
+  QModelIndex addChapter(bool before);
 
   ChapterPtr createEmptyChapter(int64_t startTime, int chapterNumber, OptQString const &nameTemplate = OptQString{}, OptQString const &language = OptQString{}, OptQString const &country = OptQString{});
 
