@@ -112,7 +112,6 @@ Tab::setupHorizontalScrollAreaInputLayout() {
 
   ui->twProperties->hide();
   ui->wProperties->show();
-  ui->propertiesStack->setCurrentIndex(0);
 
   auto layout = qobject_cast<QBoxLayout *>(ui->scrollAreaWidgetContents->layout());
 
@@ -128,6 +127,11 @@ Tab::setupHorizontalScrollAreaInputLayout() {
   layout->insertWidget(3, ui->audioPropertiesBox);
   layout->insertWidget(4, ui->subtitleAndChapterPropertiesBox);
   layout->insertWidget(5, ui->miscellaneousBox);
+
+  ui->propertiesColumn1->updateGeometry();
+  ui->propertiesColumn2->updateGeometry();
+
+  ui->propertiesStack->setCurrentIndex(0);
 }
 
 void
@@ -177,6 +181,9 @@ Tab::setupVerticalTabWidgetInputLayout() {
   moveTo(ui->audioSubtitleChapterPropertiesPage, 0, ui->audioPropertiesBox);
   moveTo(ui->audioSubtitleChapterPropertiesPage, 1, ui->subtitleAndChapterPropertiesBox);
   moveTo(ui->miscellaneousPage,                  0, ui->miscellaneousBox);
+
+  ui->propertiesColumn1->updateGeometry();
+  ui->propertiesColumn2->updateGeometry();
 }
 
 void
