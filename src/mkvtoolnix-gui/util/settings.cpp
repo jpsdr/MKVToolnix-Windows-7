@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QDebug>
+#include <QScreen>
 #include <QSettings>
 #include <QSplitter>
 #include <QStandardPaths>
@@ -14,6 +15,24 @@
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui { namespace Util {
+
+namespace {
+
+Settings::TrackPropertiesLayout
+defaultTrackPropertiesLayout() {
+  auto screen     = App::primaryScreen();
+  auto geometry   = screen->geometry();
+  auto logicalDPI = screen->logicalDotsPerInch();
+  auto minWidth   = 1280 * logicalDPI / 96;
+  auto minHeight  = 720  * logicalDPI / 96;
+
+  auto layout     = (geometry.width() < minWidth) || (geometry.height() < minHeight) ? Settings::TrackPropertiesLayout::HorizontalScrollArea
+                  :                                                                    Settings::TrackPropertiesLayout::HorizontalTwoColumns;
+
+  return layout;
+}
+
+}
 
 bool
 Settings::RunProgramConfig::isValid()
@@ -127,8 +146,10 @@ Settings::convertOldSettings() {
   auto mergeUseVerticalInputLayout = reg->value("mergeUseVerticalInputLayout");
   reg->remove("mergeUseVerticalInputLayout");
 
-  if (mergeUseVerticalInputLayout.isValid())
-    reg->setValue("mergeTrackPropertiesLayout", static_cast<int>(mergeUseVerticalInputLayout.toBool() ? TrackPropertiesLayout::VerticalTabWidget : TrackPropertiesLayout::HorizontalScrollArea));
+  if (mergeUseVerticalInputLayout.isValid()) {
+    auto layout = mergeUseVerticalInputLayout.toBool() ? TrackPropertiesLayout::VerticalTabWidget : defaultTrackPropertiesLayout();
+    reg->setValue("mergeTrackPropertiesLayout", static_cast<int>(layout));
+  }
 
   reg->endGroup();
 }
@@ -164,7 +185,7 @@ Settings::load() {
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
   m_disableDefaultTrackForSubtitles    = reg.value("disableDefaultTrackForSubtitles",    false).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls",  true).toBool();
-  m_mergeTrackPropertiesLayout         = static_cast<TrackPropertiesLayout>(reg.value("mergeTrackPropertiesLayout", static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
+  m_mergeTrackPropertiesLayout         = static_cast<TrackPropertiesLayout>(reg.value("mergeTrackPropertiesLayout", static_cast<int>(defaultTrackPropertiesLayout())).toInt());
   m_mergeAddingAppendingFilesPolicy    = static_cast<AddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(AddingAppendingFilesPolicy::Ask)).toInt());
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
