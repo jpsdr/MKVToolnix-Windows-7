@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-02 20:53+0100\n"
-"PO-Revision-Date: 2016-01-02 17:45+0100\n"
+"POT-Creation-Date: 2016-01-03 10:06+0100\n"
+"PO-Revision-Date: 2016-01-02 23:38+0100\n"
 "Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: Denis Baron, TMTisFree <tmtisfree@free.fr>\n"
 "Language: fr\n"
@@ -43,7 +43,7 @@ msgid ""
 "  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
 "                           or not. The value ':1' can be omitted.\n"
 msgstr ""
-"  --aac-is-sbr <TID[:0|1]> La piste est de type HE-AAC/AAC+/SBR-AAC\n"
+"  --aac-is-sbr <TID[:0|1]> La piste avec l'ID est de type HE-AAC/AAC+/SBR-AAC\n"
 "                           ou pas. La valeur « :1 » peut être omise.\n"
 
 #: src/merge/mkvmerge.cpp:150
@@ -96,7 +96,9 @@ msgstr ""
 msgid ""
 "  --attach-file <file>     Creates a file attachment inside the\n"
 "                           Matroska file.\n"
-msgstr "  --attach-file <fichier>  Crée une pièce jointe dans le fichier Matroska.\n"
+msgstr ""
+"  --attach-file <fichier>  Crée une pièce jointe dans le \n"
+"                           fichier Matroska.\n"
 
 #: src/merge/mkvmerge.cpp:170
 msgid ""
@@ -1077,7 +1079,7 @@ msgstr "&À propos de mkvinfo"
 #: src/mkvtoolnix-gui/merge/attachments.cpp:284
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
-msgstr "&Ajouter"
+msgstr "&Ajouter…"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:270
@@ -2149,7 +2151,7 @@ msgstr "Non correspondance de la taille des données privées ALAC\n"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:152
 msgid "ASCII string (no special chars like Umlaute etc.)"
-msgstr "Chaîne ASCII (sans caract. spéciaux comme des trémas, etc)"
+msgstr "Chaîne ASCII (sans caractères spéciaux comme des trémas, etc)"
 
 #: src/common/file_types.cpp:70
 #: src/output/p_mpeg4_p10.h:34
@@ -2328,7 +2330,7 @@ msgstr "&Modifications supplémentaires…"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 msgid "Additional command line options"
-msgstr "Autres options pour la ligne de commande"
+msgstr "Options supplémentaires pour la ligne de commande"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1535
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1567
@@ -5218,7 +5220,7 @@ msgstr "Tâches et file d'attente"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1138
 msgid "Jobs and job output"
-msgstr "Tâches et rapports de tâche"
+msgstr "Tâches et rapport de tâche"
 
 #: src/mkvtoolnix-gui/forms/main_window/status_bar_progress_widget.h:175
 msgid "Jobs to execute:"
@@ -5477,7 +5479,7 @@ msgstr "Identifiant « BlockAddition » maximum : %1%"
 #: src/info/mkvinfo.cpp:884
 #, boost-format
 msgid "MaxCache: %1%"
-msgstr "Cache maximum : %1%"
+msgstr "Cache maximal : %1%"
 
 #: src/common/xml/ebml_converter.cpp:227
 #, boost-format
@@ -5494,7 +5496,7 @@ msgstr "Valeur maximale autorisée : %1%, valeur réelle : %2%"
 #: src/common/property_element.cpp:124
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:416
 msgid "Maximum cache"
-msgstr "Cache maximum"
+msgstr "Cache maximal"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1547
 msgid "Maximum number of files:"
@@ -5525,7 +5527,7 @@ msgstr "Type MIME : %1%"
 #: src/info/mkvinfo.cpp:881
 #, boost-format
 msgid "MinCache: %1%"
-msgstr "Cache minimum : %1%"
+msgstr "Cache minimal : %1%"
 
 #: src/common/xml/ebml_converter.cpp:225
 #, boost-format
@@ -5542,7 +5544,7 @@ msgstr "Valeur minimale autorisée : %1%, valeur réelle : %2%"
 #: src/common/property_element.cpp:122
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:411
 msgid "Minimum cache"
-msgstr "Cache minimum"
+msgstr "Cache minimal"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1500
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1533
@@ -6008,9 +6010,8 @@ msgstr "Seulement %1% chapitres trouvés dans les fichiers sources et les fichie
 #: src/merge/mkvmerge.cpp:1570
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:649
 #: src/mkvtoolnix-gui/merge/attachments.cpp:142
-#, fuzzy
 msgid "Only files smaller than 2 GiB are supported."
-msgstr "Le fichier d'ouverture (%1) n'est pas reconnu comme un fichier Matroska/WebM valable."
+msgstr "Seuls les fichiers de taille inférieure à 2 Gio sont gérés."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1146
 msgid "Only if the job completed successfully"
@@ -6684,9 +6685,8 @@ msgid "Replace attachment with a new &file"
 msgstr "Remplacer la pièce jointe avec un nouveau &fichier"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:274
-#, fuzzy
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
-msgstr "Remplacer la pièce jointe avec un nouveau &fichier en déduisant nom et type MIME"
+msgstr "Remplacer la pièce jointe avec un nouveau fichier en &déduisant nom et type MIME"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:487
 msgid "Report a &bug"
@@ -7530,7 +7530,7 @@ msgstr "Demande à mkvmerge de mettre au plus « n » blocs de données dans cha
 #: src/mkvtoolnix-gui/merge/input.cpp:811
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:384
 msgid "Text files"
-msgstr "Fichiersde  texte"
+msgstr "Fichiers texte"
 
 #: src/input/r_vobsub.cpp:240
 msgid "The .idx file does not contain an 'id: ...' line to indicate the language.\n"
@@ -7732,9 +7732,9 @@ msgid "The attachment '%1%' could not be read.\n"
 msgstr "La pièce jointe « %1% » ne peut pas être lue.\n"
 
 #: src/merge/mkvmerge.cpp:1569
-#, fuzzy, boost-format
+#, boost-format
 msgid "The attachment (%1%) is too big (%2%)."
-msgstr "Le fichier « %1 » contient des étiquettes."
+msgstr "La pièce jointe « %1% » a une taille trop grosse (%2%)."
 
 #: src/output/p_ac3.cpp:81
 #: src/output/p_mp3.cpp:72
@@ -7916,7 +7916,10 @@ msgstr ""
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:220
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:172
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
-msgstr "Le fichier « %1 » a été modifié. Faut-il vraiment le recharger ? Tous les changements seront perdus."
+msgstr ""
+"Le fichier « %1 » a été modifié.\n"
+"Faut-il vraiment le recharger ?\n"
+"(Toutes les modifications seront perdues.)"
 
 #: src/merge/mkvmerge.cpp:1573
 #, boost-format
@@ -8002,9 +8005,8 @@ msgstr "Le fichier « %1 » ajouté est une liste de lecture."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:648
 #: src/mkvtoolnix-gui/merge/attachments.cpp:141
-#, fuzzy
 msgid "The file (%1) is too big (%2)."
-msgstr "Le fichier « %1 » contient des étiquettes."
+msgstr "Le fichier « %1 » a une taille trop grosse (%2)."
 
 #: src/merge/reader_detection_and_creation.cpp:408
 msgid "The file content does not match its format type and was not recognized."
@@ -8086,17 +8088,17 @@ msgstr "Le nom du fichier pour ce segment."
 #: src/merge/output_control.cpp:980
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
-msgstr "Le fichier n° %1% (« %2% ») ne contient pas de piste d'identifiant %3% ou cette piste ne doit pas être copiée. L'argument de « --append-to » est incorrect.\n"
+msgstr "Le fichier n° %1% (« %2% ») ne contient pas de piste d'identifiant %3% ou cette piste ne doit pas être copiée. L'argument de « --append-to » était incorrect.\n"
 
 #: src/merge/output_control.cpp:986
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
-msgstr "Le fichier n° %1% (« %2% ») ne contient pas de piste d'identifiant %3% ou cette piste ne doit pas être copiée. Aucune piste ne peut donc lui être ajoutée. L'argument de « --append-to » est incorrect.\n"
+msgstr "Le fichier n° %1% (« %2% ») ne contient pas de piste d'identifiant %3% ou cette piste ne doit pas être copiée. Aucune piste ne peut donc lui être ajoutée. L'argument de « --append-to » était incorrect.\n"
 
 #: src/merge/output_control.cpp:926
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
-msgstr "Le fichier n° %1% (« %2% ») ne sera pas concaténé.  L'argument de « --append-to » est incorrect.\n"
+msgstr "Le fichier n° %1% (« %2% ») ne sera pas concaténé. L'argument de « --append-to » était incorrect.\n"
 
 #: src/common/mm_io_x.cpp:38
 msgid "The file or directory was not found"
@@ -8627,7 +8629,7 @@ msgstr "Le titre pour le film entier."
 #: src/merge/output_control.cpp:996
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
-msgstr "La piste %1% du fichier n° %2% (« %3% ») doit être concaténée à une autre plus d'une fois. L'argument pour « --append-to » est incorrect.\n"
+msgstr "La piste %1% du fichier n° %2% (« %3% ») doit être concaténée à une autre plus d'une fois. L'argument pour « --append-to » était incorrect.\n"
 
 #: src/extract/tracks.cpp:92
 #, boost-format
@@ -8711,7 +8713,7 @@ msgstr "Une tâche est actuellement active."
 #: src/merge/output_control.cpp:930
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
-msgstr "Il n'y a aucun fichier d'identifiant « %1% ». L'argument pour « --append-to » est incorrect.\n"
+msgstr "Il n'y a aucun fichier d'identifiant « %1% ». L'argument pour « --append-to » était incorrect.\n"
 
 #: src/common/command_line.cpp:266
 #, boost-format
@@ -9031,7 +9033,7 @@ msgstr "Titre : %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1504
 msgid "Trac&k name:"
-msgstr "Nom de l&a piste :"
+msgstr "Nom de la &piste :"
 
 #: src/extract/xtr_avc.cpp:66
 #: src/extract/xtr_hevc.cpp:30
@@ -9140,7 +9142,7 @@ msgstr "Piste d'identifiant %1% : %2% (%3%)"
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:279
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:60
 msgid "Track ID for mkvmerge & mkvextract:"
-msgstr "Identifiant de piste pour mkvmerge & mkvextract"
+msgstr "Identifiant de piste pour mkvmerge & mkvextract :"
 
 #: src/common/property_element.cpp:113
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:395
