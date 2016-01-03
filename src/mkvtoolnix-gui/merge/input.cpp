@@ -1583,6 +1583,7 @@ Tab::ensureOneDefaultFlagOnly(Track *thisOneHasIt) {
 
 void
 Tab::moveSourceFilesUpOrDown(bool up) {
+  auto focus = App::instance()->focusWidget();
   auto files = selectedSourceFiles();
 
   m_filesModel->moveSourceFilesUpOrDown(files, up);
@@ -1593,7 +1594,8 @@ Tab::moveSourceFilesUpOrDown(bool up) {
 
   selectSourceFiles(files);
 
-  (up ? ui->moveFilesUp : ui->moveFilesDown)->setFocus();
+  if (focus)
+    focus->setFocus();
 }
 
 void
@@ -1608,6 +1610,7 @@ Tab::onMoveFilesDown() {
 
 void
 Tab::moveTracksUpOrDown(bool up) {
+  auto focus  = App::instance()->focusWidget();
   auto tracks = selectedTracks();
 
   m_tracksModel->moveTracksUpOrDown(tracks, up);
@@ -1618,7 +1621,8 @@ Tab::moveTracksUpOrDown(bool up) {
 
   selectTracks(tracks);
 
-  (up ? ui->moveTracksUp : ui->moveTracksDown)->setFocus();
+  if (focus)
+    focus->setFocus();
 }
 
 void
