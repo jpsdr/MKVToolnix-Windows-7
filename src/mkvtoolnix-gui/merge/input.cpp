@@ -1592,6 +1592,8 @@ Tab::moveSourceFilesUpOrDown(bool up) {
       ui->files->setExpanded(m_filesModel->indexFromSourceFile(file), true);
 
   selectSourceFiles(files);
+
+  (up ? ui->moveFilesUp : ui->moveFilesDown)->setFocus();
 }
 
 void
@@ -1615,6 +1617,8 @@ Tab::moveTracksUpOrDown(bool up) {
       ui->tracks->setExpanded(m_tracksModel->indexFromTrack(track), true);
 
   selectTracks(tracks);
+
+  (up ? ui->moveTracksUp : ui->moveTracksDown)->setFocus();
 }
 
 void
