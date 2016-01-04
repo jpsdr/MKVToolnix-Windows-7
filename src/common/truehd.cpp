@@ -58,7 +58,7 @@ truehd_frame_t::parse_ac3_header(unsigned char const *data,
   m_type  = truehd_frame_t::sync;
   m_size  = m_ac3_header.m_bytes;
 
-  return size >= m_ac3_header.m_bytes;
+  return size >= m_ac3_header.m_bytes ? verify_ac3_checksum(data, size) : false;
 }
 
 bool
@@ -235,7 +235,7 @@ truehd_parser_c::resync(unsigned int offset) {
 
   for (offset = offset + 4; (offset + 4) < size; ++offset) {
     uint32_t sync_word = get_uint32_be(&data[offset]);
-    if ((TRUEHD_SYNC_WORD == sync_word) || (MLP_SYNC_WORD == sync_word) || (AC3_SYNC_WORD == get_uint16_be(&data[offset - 4]))) {
+    if (mtx::included_in(sync_word, TRUEHD_SYNC_WORD, MLP_SYNC_WORD)) {
       m_sync_state  = state_synced;
       return offset - 4;
     }
