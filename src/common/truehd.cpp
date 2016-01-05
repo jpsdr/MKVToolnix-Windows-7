@@ -232,10 +232,13 @@ truehd_parser_c::resync(unsigned int offset) {
   unsigned int size         = m_buffer.get_size();
 
   m_sync_state              = state_unsynced;
+  auto frame                = truehd_frame_t{};
 
   for (offset = offset + 4; (offset + 4) < size; ++offset) {
     uint32_t sync_word = get_uint32_be(&data[offset]);
-    if (mtx::included_in(sync_word, TRUEHD_SYNC_WORD, MLP_SYNC_WORD)) {
+    if (   (   mtx::included_in(sync_word, TRUEHD_SYNC_WORD, MLP_SYNC_WORD)
+            || (AC3_SYNC_WORD == get_uint16_be(&data[offset - 4])))
+        && frame.parse_header(&data[offset - 4], size - 4)) {
       m_sync_state  = state_synced;
       return offset - 4;
     }
