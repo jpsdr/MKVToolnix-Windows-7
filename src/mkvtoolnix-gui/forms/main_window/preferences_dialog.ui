@@ -53,7 +53,7 @@
      </widget>
      <widget class="QStackedWidget" name="pages">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="pGuiGeneral">
        <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -77,16 +77,6 @@
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="1">
-              <widget class="QComboBox" name="cbGuiInterfaceLanguage">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_3">
                <property name="text">
@@ -94,6 +84,16 @@
                </property>
                <property name="buddy">
                 <cstring>cbGuiInterfaceLanguage</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cbGuiInterfaceLanguage">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
               </widget>
              </item>
@@ -116,6 +116,37 @@
                 </sizepolicy>
                </property>
               </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>&amp;Font &amp;&amp; size:</string>
+               </property>
+               <property name="buddy">
+                <cstring>fcbGuiFontFamily</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
+                <widget class="QFontComboBox" name="fcbGuiFontFamily">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="sbGuiFontPointSize">
+                 <property name="minimum">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -1409,6 +1440,8 @@
   <tabstop>pageSelector</tabstop>
   <tabstop>cbGuiInterfaceLanguage</tabstop>
   <tabstop>cbGuiTabPositions</tabstop>
+  <tabstop>fcbGuiFontFamily</tabstop>
+  <tabstop>sbGuiFontPointSize</tabstop>
   <tabstop>cbGuiCheckForUpdates</tabstop>
   <tabstop>cbGuiDisableAnimations</tabstop>
   <tabstop>cbGuiShowToolSelector</tabstop>

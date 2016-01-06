@@ -60,9 +60,21 @@ App::App(int &argc,
   QObject::connect(this, &App::aboutToQuit, this, &App::saveSettings);
 
   initializeLocale();
+  App::setupUiFont();
 }
 
 App::~App() {
+}
+
+void
+App::setupUiFont() {
+  auto &cfg    = Util::Settings::get();
+  auto newFont = App::font();
+
+  newFont.setFamily(cfg.m_uiFontFamily);
+  newFont.setPointSize(std::max(cfg.m_uiFontPointSize, 5));
+
+  App::setFont(newFont);
 }
 
 void

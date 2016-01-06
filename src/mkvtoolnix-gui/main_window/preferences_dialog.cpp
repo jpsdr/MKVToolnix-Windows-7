@@ -43,6 +43,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
   ui->cbGuiWarnBeforeOverwriting->setChecked(m_cfg.m_warnBeforeOverwriting);
   ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
+  setupFont();
   setupOnlineCheck();
   setupInterfaceLanguage();
   setupTabPositions();
@@ -505,10 +506,19 @@ PreferencesDialog::setupJobsRunPrograms() {
 }
 
 void
+PreferencesDialog::setupFont() {
+  auto font = App::font();
+  ui->fcbGuiFontFamily->setCurrentFont(font);
+  ui->sbGuiFontPointSize->setValue(font.pointSize());
+}
+
+void
 PreferencesDialog::save() {
   // GUI page:
   m_cfg.m_uiLocale                           = ui->cbGuiInterfaceLanguage->currentData().toString();
   m_cfg.m_tabPosition                        = static_cast<QTabWidget::TabPosition>(ui->cbGuiTabPositions->currentData().toInt());
+  m_cfg.m_uiFontFamily                       = ui->fcbGuiFontFamily->currentFont().family();
+  m_cfg.m_uiFontPointSize                    = ui->sbGuiFontPointSize->value();
   m_cfg.m_checkForUpdates                    = ui->cbGuiCheckForUpdates->isChecked();
   m_cfg.m_disableAnimations                  = ui->cbGuiDisableAnimations->isChecked();
   m_cfg.m_showToolSelector                   = ui->cbGuiShowToolSelector->isChecked();

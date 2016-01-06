@@ -373,6 +373,7 @@ MainWindow::editPreferences() {
     App::instance()->initializeLocale();
 
   App::instance()->reinitializeLanguageLists();
+  App::setupUiFont();
 
   emit preferencesChanged();
 }

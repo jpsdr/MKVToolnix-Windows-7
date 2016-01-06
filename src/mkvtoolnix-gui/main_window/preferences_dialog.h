@@ -60,6 +60,7 @@ protected:
   void setupEnableMuxingTracksByLanguage();
   void setupAddingAppendingFilesPolicy();
   void setupJobsRunPrograms();
+  void setupFont();
 
   void setTabTitleForRunProgramExecutable(int tabIdx, QString const &executable);
 };

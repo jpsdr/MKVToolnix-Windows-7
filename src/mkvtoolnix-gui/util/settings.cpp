@@ -137,8 +137,9 @@ void
 Settings::load() {
   convertOldSettings();
 
-  auto regPtr = registry();
-  auto &reg   = *regPtr;
+  auto regPtr      = registry();
+  auto &reg        = *regPtr;
+  auto defaultFont = App::font();
 
   reg.beginGroup("info");
   auto guiVersion                      = reg.value("guiVersion").toString();
@@ -199,6 +200,8 @@ Settings::load() {
 #if defined(HAVE_LIBINTL_H)
   m_uiLocale                           = reg.value("uiLocale").toString();
 #endif
+  m_uiFontFamily                       = reg.value("uiFontFamily",    defaultFont.family()).toString();
+  m_uiFontPointSize                    = reg.value("uiFontPointSize", defaultFont.pointSize()).toInt();
 
   reg.beginGroup("updates");
   m_checkForUpdates                    = reg.value("checkForUpdates", true).toBool();
@@ -348,6 +351,8 @@ Settings::save()
   reg.setValue("dropLastChapterFromBlurayPlaylist",  m_dropLastChapterFromBlurayPlaylist);
 
   reg.setValue("uiLocale",                           m_uiLocale);
+  reg.setValue("uiFontFamily",                       m_uiFontFamily);
+  reg.setValue("uiFontPointSize",                    m_uiFontPointSize);
 
   reg.setValue("mediaInfoExe",                       m_mediaInfoExe);
 
