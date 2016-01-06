@@ -50,9 +50,8 @@ Matroska(TM); vegeu
 .ps -1
 .br
 .PP
-L\*(Aqordre de les opcions a la l\('inia d\*(Aqordres \('es important\&. Si us plau, llegiu la secci\('o
-\(FoL'ordre de les opcions\(Fc
-si sou novell emprant aquest programa\&.
+L\*(Aqordre de les opcions a la l\('inia d\*(Aqordres \('es important\&. Si us plau, si sou novell emprant aquest programa, llegiu la secci\('o
+\(FoL'ordre de les opcions\(Fc\&.
 .sp .5v
 .RE
 .SS "Opcions globals"
@@ -64,19 +63,19 @@ Incrementa la loquacitat\&.
 .PP
 \fB\-q\fR, \fB\-\-quiet\fR
 .RS 4
-Suprimeix la sortida de l\*(Aqestat\&.
+Suprimeix la sortida sobre l\*(Aqestat\&.
 .RE
 .PP
 \fB\-o\fR, \fB\-\-output\fR \fInom_fitxer\fR
 .RS 4
 Escriu al fitxer
-\fInom_fitxer\fR\&. Si s\*(Aqusa la divisi\('o, llavors aquest par\(`ametre es tractar\(`a de manera diferent\&. Per a m\('es detalls vegeu l\*(Aqexplicaci\('o sobre l\*(Aqopci\('o
+\fInom_fitxer\fR\&. Si s\*(Aqusa la divisi\('o, llavors aquest par\(`ametre es tractar\(`a de manera un xic diferent\&. Per a m\('es detalls, vegeu l\*(Aqexplicaci\('o sobre l\*(Aqopci\('o
 \fB\-\-split\fR\&.
 .RE
 .PP
 \fB\-w\fR, \fB\-\-webm\fR
 .RS 4
-Crea un fitxer conforme amb WebM\&. Tamb\('e s\*(Aqhabilita si el nom de l\*(Aqextensi\('o del fitxer de sortida \('es \(Fowebm\(Fc\&. Aquest mode obliga a complir certes restriccions\&. Els \('unics c\(`odecs permesos s\('on VP8, VP9 per a v\('ideo i Opus, Vorbis per a pistes d\*(Aq\(`audio\&. No estan permeses ni els cap\('itols ni les etiquetes\&. L\*(Aqelement de cap\(,calera DocType \('es canviat a \(Fowebm\(Fc\&.
+Crea un fitxer conforme amb WebM\&. Tamb\('e s\*(Aqhabilita si el nom de l\*(Aqextensi\('o del fitxer de sortida \('es \(Fowebm\(Fc\&. Aquest mode obliga a complir certes restriccions\&. Els \('unics c\(`odecs permesos s\('on VP8, VP9 per a v\('ideo i Opus, Vorbis per a pistes d\*(Aq\(`audio\&. No estan permeses ni els cap\('itols ni les etiquetes\&. L\*(Aqelement de cap\(,calera DocType ser\(`a canviat a \(Fowebm\(Fc\&.
 .RE
 .PP
 \fB\-\-title\fR \fIt\('itol\fR
@@ -113,15 +112,15 @@ els fitxers XML d'informaci\('o del segment\&.
 .RS 4
 Estableix els UID del segment a usar\&. Aquest \('es un UID del segment de 128 bits en la forma usual de l\*(AqUID: nombres hexadecimals, amb o sense el \(Fo0x\(Fc com a prefix, amb o sense espais, exactament 32 d\('igits\&.
 .sp
-If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+Si el SID comen\(,ca amb el signe =, llavors la resta s\*(Aqinterpretar\(`a com el nom d\*(Aqun fitxer Matroska, es llegir\(`a i emprar\(`a l\*(AqUID del segment\&.
 .sp
 Cada fitxer creat cont\('e un segment, i cada segment t\('e un UID del segment\&. Si s\*(Aqespecifiquen m\('es UID que segments, llavors els UID que sobrin seran ignorats\&. Si s\*(Aqespecifiquen menys UID que segments, llavors es crearan de manera aleat\(`oria els UID que faltin\&.
 .RE
-.SS "Manipulaci\('o dels cap\('itols i etiquetes (opcions globals)"
+.SS "Manipulaci\('o dels cap\('itols i les etiquetes (opcions globals)"
 .PP
 \fB\-\-chapter\-language\fR \fIcodi_idioma\fR
 .RS 4
-Estableix el codi d\*(Aqidioma ISO639\-2 que s\*(Aqescriur\(`a en cada entrada de cap\('itol\&. Per omissi\('o s\*(Aqestableix a \(Foeng\(Fc\&. Per a m\('es detalls vegeu m\('es endavant la secci\('o sobre
+Estableix el codi d\*(Aqidioma ISO639\-2 que s\*(Aqescriur\(`a en cada entrada de cap\('itol\&. Per omissi\('o s\*(Aqestableix a \(Foeng\(Fc\&. Per a m\('es detalls, vegeu m\('es endavant la secci\('o sobre
 els cap\('itols\&.
 .sp
 Aquesta opci\('o es pot usar tant per a simples fitxers de cap\('itols com per a fitxers d\*(Aqorigen que continguin cap\('itols sense informaci\('o sobre l\*(Aqidioma, p\&. ex\&., fitxers MP4 i OGM\&.
@@ -135,7 +134,7 @@ per a veure una explicaci\('o sobre com realitza el
 \fBmkvmerge\fR(1)
 la conversi\('o entre diferents jocs de car\(`acters\&.
 .sp
-Aquest ajustament tamb\('e s\*(Aqaplica als cap\('itols que es copien des de certs tipus de contenidors, p\&. ex\&., fitxers Ogg/OGM i MP4\&. Per a m\('es detalls vegeu m\('es endavant la secci\('o sobre els cap\('itols\&.
+Aquest ajustament tamb\('e s\*(Aqaplica als cap\('itols que es copien des de certs tipus de contenidors, p\&. ex\&., fitxers Ogg/OGM i MP4\&. Per a m\('es detalls, vegeu m\('es endavant la secci\('o sobre els cap\('itols\&.
 .RE
 .PP
 \fB\-\-cue\-chapter\-name\-format\fR \fIformat\fR
@@ -153,7 +152,7 @@ usa aquestes dues cadenes per tal de construir el nom del cap\('itol\&. Amb aque
 .sp
 Si no s\*(Aqindica aquesta opci\('o, llavors el
 \fBmkvmerge\fR(1)
-usar\(`a per omissi\('o el format \(Fo%p \- %t\(Fc (l\*(Aqartista, seguit per un espai, una barra, un altre espai i el t\('itol)\&.
+usar\(`a per omissi\('o el format \(Fo%p \- %t\(Fc (l\*(Aqartista, seguit per un espai, un gui\('o, un altre espai i el t\('itol)\&.
 .sp
 Si s\*(Aqindica el format, llavors es copiar\(`a tot tal com est\(`a excepte els seg\(:uents meta car\(`acters que seran substitu\(:its aix\('i:
 .sp
@@ -166,8 +165,9 @@ Si s\*(Aqindica el format, llavors es copiar\(`a tot tal com est\(`a excepte els
 .IP \(bu 2.3
 .\}
 \fI%p\fR
-ser\(`a substitu\(:it per la cadena a l\*(Aqentrada
-\fIPERFORMER\fR,
+ser\(`a substitu\(:it per la cadena
+\fIPERFORMER\fR
+a l\*(Aqentrada,
 .RE
 .sp
 .RS 4
@@ -179,8 +179,9 @@ ser\(`a substitu\(:it per la cadena a l\*(Aqentrada
 .IP \(bu 2.3
 .\}
 \fI%t\fR
-ser\(`a substitu\(:it per la cadena a l\*(Aqentrada
-\fITITLE\fR,
+ser\(`a substitu\(:it per la cadena
+\fITITLE\fR
+a l\*(Aqentrada,
 .RE
 .sp
 .RS 4
@@ -211,21 +212,21 @@ ser\(`a substitu\(:it pel n\('umero de la pista actual afegint\-li un zero a l\*
 \fB\-\-chapters\fR \fInom_fitxer\fR
 .RS 4
 Llegeix la informaci\('o dels cap\('itol des del fitxer
-\fInom_fitxer\fR\&. Per a m\('es detalls vegeu m\('es endavant la secci\('o sobre
+\fInom_fitxer\fR\&. Per a m\('es detalls, vegeu m\('es endavant la secci\('o sobre
 els cap\('itols\&.
 .RE
 .PP
 \fB\-\-global\-tags\fR \fInom_fitxer\fR
 .RS 4
 Llegeix les etiquetes globals des del fitxer
-\fInom_fitxer\fR\&. Per a m\('es detalls vegeu m\('es endavant la secci\('o sobre
+\fInom_fitxer\fR\&. Per a m\('es detalls, vegeu m\('es endavant la secci\('o sobre
 les etiquetes\&.
 .RE
 .SS "Control general de la sortida (opcions globals avan\(,cades)"
 .PP
 \fB\-\-track\-order\fR \fIFID1:TID1,FID2:TID2\&.\&.\&.\fR
 .RS 4
-Aquesta opci\('o canvia l\*(Aqordre en el qual es creen les pistes d\*(Aqun fitxer d\*(Aqentrada\&. L\*(Aqargument \('es una llista separada per comes de parells d\*(AqID\&. Cada parell cont\('e primer l\*(AqID del fitxer (\fIFID1\fR), el qual nom\('es \('es el n\('umero del fitxer a la l\('inia d\*(Aqordres partint de 0\&. El segon \('es un ID de pista (\fITID1\fR) d\*(Aqaquest fitxer\&. Si s\*(Aqometen alguns ID de pista, llavors aquestes pistes seran creades despr\('es de les establertes amb aquesta opci\('o\&.
+Aquesta opci\('o canvia l\*(Aqordre en el qual es creen les pistes a partir d\*(Aqun fitxer d\*(Aqentrada\&. L\*(Aqargument \('es una llista separada per comes de parells d\*(AqID\&. Cada parell cont\('e primer l\*(AqID del fitxer (\fIFID1\fR), el qual nom\('es \('es el n\('umero del fitxer a la l\('inia d\*(Aqordres partint de 0\&. El segon \('es un ID de pista (\fITID1\fR) d\*(Aqaquest fitxer\&. Si s\*(Aqometen alguns ID de pista, llavors aquestes pistes seran creades despr\('es de les establertes amb aquesta opci\('o\&.
 .RE
 .PP
 \fB\-\-cluster\-length\fR \fIespecificaci\('o\fR
@@ -256,7 +257,7 @@ mil\(mdlisegons d\*(Aqinformaci\('o de dades en cada cl\('uster\&. El valor m\('
 .sp
 Per omissi\('o, el
 \fBmkvmerge\fR(1)
-posa com a m\(`axim 65535 blocs de dades i 5000ms d\*(Aqinformaci\('o de dades a cada cl\('uster\&.
+posar\(`a com a m\(`axim 65535 blocs de dades i 5000ms d\*(Aqinformaci\('o de dades a cada cl\('uster\&.
 .sp
 Els programes que intenten trobar un cert fotograma nom\('es poden cercar directament a un cl\('uster i posteriorment llegir tot el cl\('uster\&. Per tant, el crear cl\('usters molt grans podria comportar una cerca lenta i poc precisa\&.
 .RE
@@ -282,7 +283,7 @@ disposici\('o dels fitxers Matroska(TM)\&.
 .PP
 \fB\-\-disable\-lacing\fR
 .RS 4
-Deshabilita l\*(Aqenlla\(,cat per a les pistes\&. Aix\(`o incrementar\(`a la mida del fitxer, especialment si hi ha moltes pistes d\*(Aq\(`audio\&. Aquesta opci\('o no ha estat dissenyada per a l\*(Aq\('us freq\(:uent\&.
+Deshabilita l\*(Aqenlla\(,cat per a les pistes\&. Aix\(`o incrementar\(`a la mida del fitxer, especialment si hi ha moltes pistes d\*(Aq\(`audio\&. Aquesta opci\('o no ha estat dissenyada per a un \('us freq\(:uent\&.
 .RE
 .PP
 \fB\-\-enable\-durations\fR
@@ -358,7 +359,7 @@ o
 .sp
 El par\(`ametre
 \fId\fR
-pot acabar amb \(Fok\(Fc, \(Fom\(Fc o \(Fog\(Fc per indicar que la mida \('es en KB, MB o GB respectivament\&. D\*(Aqaltra manera, s\*(Aqassumeix que la mida \('es en bytes\&. Despr\('es que el fitxer de sortida actual abasti la mida l\('imit, comen\(,car\(`a la creaci\('o d\*(Aqun altre fitxer\&.
+pot acabar amb \(Fok\(Fc, \(Fom\(Fc o \(Fog\(Fc per indicar que la mida \('es en KB, MB o GB respectivament\&. D\*(Aqaltra manera, s\*(Aqassumir\(`a que la mida \('es en bytes\&. Una vagada el fitxer de sortida actual abasti la mida l\('imit, comen\(,car\(`a la creaci\('o d\*(Aqun altre fitxer\&.
 .sp
 El prefix \(Fosize:\(Fc es pot ometre per motius de compatibilitat\&.
 .RE
@@ -393,7 +394,7 @@ seguit per la lletra \(Fos\(Fc per a una durada en segons\&.
 \fISS\fR
 \('es el dels segons i
 \fInnnnnnnnn\fR
-\('es el dels nanosegons\&. Tant el n\('umero de les hores com el dels nanosegons es poden ometre\&. Hi ha fins a nou d\('igits despr\('es del punt decimal\&. Despr\('es que el fitxer de sortida actual abasti la durada l\('imit, comen\(,car\(`a la creaci\('o d\*(Aqun altre fitxer\&.
+\('es el dels nanosegons\&. Tant el n\('umero de les hores com el dels nanosegons es poden ometre\&. Hi ha fins a nou d\('igits despr\('es del punt decimal\&. Una vagada el fitxer de sortida actual abasti la durada l\('imit, comen\(,car\(`a la creaci\('o d\*(Aqun altre fitxer\&.
 .sp
 El prefix \(Foduration:\(Fc es pot ometre per motius de compatibilitat\&.
 .RE
@@ -417,7 +418,7 @@ Exemple:
 Els par\(`ametres
 \fIA\fR,
 \fIB\fR,
-\fIC\fR, etc\&. poden tenir el mateix format que l\*(Aqusat per a la divisi\('o per durada (vegeu m\('es amunt )\&. La llista dels codis de temps est\(`a separada per comes\&. Despr\('es que el flux d\*(Aqentrada abasti el punt de divisi\('o pel codi de temps actual, es crear\(`a un fitxer nou\&. Llavors s\*(Aqusar\(`a el seg\(:uent punt de divisi\('o especificat a la llista\&.
+\fIC\fR, etc\&. poden tenir el mateix format que l\*(Aqusat per a la durada (vegeu m\('es amunt)\&. La llista dels codis de temps est\(`a separada per comes\&. Una vagada el flux d\*(Aqentrada abasti el punt de divisi\('o pel codi de temps actual, es crear\(`a un fitxer nou\&. Llavors s\*(Aqusar\(`a el seg\(:uent punt de divisi\('o especificat a la llista\&.
 .sp
 El prefix \(Fotimecodes:\(Fc no es pot ometre\&.
 .RE
@@ -430,7 +431,7 @@ El prefix \(Fotimecodes:\(Fc no es pot ometre\&.
 .sp -1
 .IP "  4." 4.2
 .\}
-Mant\('e les parts especificades pels intervals de codis de temps especificats mentre que les altres seran descartades\&.
+Mant\('e les parts especifiques pels intervals de codis de temps especificats mentre que les altres seran descartades\&.
 .sp
 Sintaxi:
 \fB\-\-split\fRparts:\fIinici_1\fR\-\fIfinal_1\fR[,[+]\fIinici_2\fR\-\fIfinal_2\fR[,[+]\fIinici_3\fR\-\fIfinal_3\fR\&.\&.\&.]]
@@ -470,7 +471,9 @@ Exemples:
 \-\-split parts:\-00:02:45,00:05:50\-
 .RE
 .sp
-El mode \(Foparts\(Fc li indica al
+El mode
+parts
+li indica al
 \fBmkvmerge\fR(1)
 que mantingui certs intervals de codis de temps mentre es descarten altres\&. Els intervals a mantenir s\*(Aqhan de llistar despr\('es de la paraula clau
 parts:
@@ -492,7 +495,7 @@ Normalment, cada interval ser\(`a escrit a un fitxer nou\&. Aix\(`o es pot canvi
 +
 al codi de temps d\*(Aqinici\&. Aix\(`o li indicar\(`a al
 \fBmkvmerge\fR(1)
-que no cre\(:i un fitxer nou i en comptes d\*(Aqaix\(`o, que annexi l\*(Aqinterval despr\('es de l\*(Aq\('ultim interval escrit al fitxer\&. Els codis de temps seran ajustats de manera que no hi hagi discontinu\(:itats en el fitxer de sortida, fins i tot si hi havia una entre dos intervals al fitxer d\*(Aqentrada\&.
+que no cre\(:i un fitxer nou i en comptes d\*(Aqaix\(`o, que annexi l\*(Aqinterval despr\('es de l\*(Aq\('ultim interval escrit al fitxer\&. Els codis de temps seran ajustats de manera que no hi hagi discontinu\(:itats en el fitxer de sortida, fins i tot si n\*(Aqhi havia una entre dos intervals al fitxer d\*(Aqentrada\&.
 .sp
 En l\*(Aqexemple 1, el
 \fBmkvmerge\fR(1)
@@ -550,7 +553,7 @@ continuar\(`a amb la sortida dels fotogrames fins al final per\(`o excloent el s
 .sp -1
 .IP "  5." 4.2
 .\}
-Mant\('e les parts especificades pels intervals de n\('umero de fotograma/camp especificats mentre que les altres seran descartades\&.
+Mant\('e les parts especificades pels intervals del n\('umero de fotograma/camp especificats mentre que les altres seran descartades\&.
 .sp
 Sintaxi:
 \fB\-\-split\fRparts\-frames:\fIinici_1\fR\-\fIfinal_1\fR[,[+]\fIinici_2\fR\-\fIfinal_2\fR[,[+]\fIinici_3\fR\-\fIfinal_3\fR\&.\&.\&.]]
@@ -590,13 +593,15 @@ Exemples:
 \-\-split parts\-frames:\-430,2512\-
 .RE
 .sp
-El mode \(Foparts\-frames:\(Fc li indica al
+El mode
+parts\-frames
+li indica al
 \fBmkvmerge\fR(1)
 que mantingui certs intervals num\(`erics de fotogrames/camps, mentre es descarten altres\&. Els intervals a mantenir s\*(Aqhan d\*(Aqespecificar despr\('es de la paraula clau
 parts\-frames:
-i separar amb comes\&. Un interval consisteix en un n\('umero de fotograma/camp d\*(Aqinici i final\&. La numeraci\('o comen\(,ca per l\*(Aq1\&.
+i separar\-los amb comes\&. Un interval consisteix en un n\('umero de fotograma/camp d\*(Aqinici i final\&. La numeraci\('o comen\(,ca per l\*(Aq1\&.
 .sp
-Si s\*(Aqomet un n\('umero d\*(Aqinici, llavors per omissi\('o s\*(Aqemprar\(`a el n\('umero final de l\*(Aqinterval anterior Si no hi ha un interval anterior, llavors per omissi\('o s\*(Aqemprar\(`a el d\*(Aqinici del fitxer (vegeu l\*(Aqexemple 3)\&.
+Si s\*(Aqomet un n\('umero d\*(Aqinici, llavors per omissi\('o s\*(Aqemprar\(`a el n\('umero final de l\*(Aqinterval anterior\&. Si no hi ha un interval anterior, llavors per omissi\('o s\*(Aqemprar\(`a el d\*(Aqinici del fitxer (vegeu l\*(Aqexemple 3)\&.
 .sp
 Si s\*(Aqomet el n\('umero final, llavors per omissi\('o es prendr\(`a el valor final dels fitxers d\*(Aqentrada\&. El qual b\(`asicament li indicar\(`a al
 \fBmkvmerge\fR(1)
@@ -606,7 +611,7 @@ Normalment, cada interval ser\(`a escrit a un fitxer nou\&. Aix\(`o es pot canvi
 +
 al n\('umero d\*(Aqinici\&. Aix\(`o li indicar\(`a al
 \fBmkvmerge\fR(1)
-que no cre\(:i un fitxer nou i en comptes d\*(Aqaix\(`o, que annexi l\*(Aqinterval despr\('es de l\*(Aq\('ultim interval escrit al fitxer\&. Els codis de temps seran ajustats de manera que no hi hagi discontinu\(:itats en el fitxer de sortida, fins i tot si hi havia una entre dos intervals al fitxer d\*(Aqentrada\&.
+que no cre\(:i un fitxer nou i en comptes d\*(Aqaix\(`o, que annexi l\*(Aqinterval despr\('es de l\*(Aq\('ultim interval escrit al fitxer\&. Els codis de temps seran ajustats de manera que no hi hagi discontinu\(:itats en el fitxer de sortida, fins i tot si n\*(Aqhi havia una entre dos intervals al fitxer d\*(Aqentrada\&.
 .if n \{\
 .sp
 .\}
@@ -654,7 +659,7 @@ crear\(`a dos fitxers\&. El primer abastar\(`a el contingut des del comen\(,came
 2512
 fins al final dels fitxers d\*(Aqorigen\&.
 .sp
-Aquest mode nom\('es considera la primera pista de v\('ideo que es genera\&. Si no hi ha cap pista de v\('ideo a la sortida, no es produir\(`a cap divisi\('o\&.
+Aquest mode nom\('es considerar\(`a la primera pista de v\('ideo que es genera\&. Si no hi ha cap pista de v\('ideo a la sortida, no es produir\(`a cap divisi\('o\&.
 .if n \{\
 .sp
 .\}
@@ -667,7 +672,7 @@ Aquest mode nom\('es considera la primera pista de v\('ideo que es genera\&. Si 
 \fBNota\fR
 .ps -1
 .br
-Els n\('umeros donats amb aquest argument s\('on interpretats en base al nombre de blocs
+Els n\('umeros indicats amb aquest argument s\('on interpretats en base al nombre de blocs
 Matroska(TM)
 que es generen\&. Un \('unic bloc
 Matroska(TM)
@@ -699,11 +704,11 @@ Exemple:
 Els par\(`ametres
 \fIA\fR,
 \fIB\fR,
-\fIC\fR, etc\&. hauran de ser tots sencers positius\&. La numeraci\('o comen\(,ca per 1\&. La llista de n\('umeros de fotograma/camp estar\(`a separada per comes\&. Despr\('es que el flux d\*(Aqentrada hagi abastat el n\('umero de fotograma/camp del punt de tall actual, es crear\(`a un fitxer nou\&. Despr\('es s\*(Aqusar\(`a el seg\(:uent punt de tall indicat a la llista\&.
+\fIC\fR, etc\&. hauran de ser tots sencers positius\&. La numeraci\('o comen\(,ca per l\*(Aq1\&. La llista de n\('umeros de fotograma/camp estar\(`a separada per comes\&. Una vegada el flux d\*(Aqentrada hagi abastat el n\('umero de fotograma/camp del punt de tall actual, es crear\(`a un fitxer nou\&. Despr\('es s\*(Aqusar\(`a el seg\(:uent punt de tall indicat a la llista\&.
 .sp
 El prefix \(Foframes:\(Fc no es pot ometre\&.
 .sp
-Aquest mode nom\('es considera la primera pista de v\('ideo que es genera\&. Si no hi ha cap pista de v\('ideo a la sortida, no es produir\(`a cap divisi\('o\&.
+Aquest mode nom\('es considerar\(`a la primera pista de v\('ideo que es genera\&. Si no hi ha cap pista de v\('ideo a la sortida, no es produir\(`a cap divisi\('o\&.
 .if n \{\
 .sp
 .\}
@@ -716,7 +721,7 @@ Aquest mode nom\('es considera la primera pista de v\('ideo que es genera\&. Si 
 \fBNota\fR
 .ps -1
 .br
-Els n\('umeros donats amb aquest argument s\('on interpretats en base al nombre de blocs
+Els n\('umeros indicats amb aquest argument s\('on interpretats en base al nombre de blocs
 Matroska(TM)
 que es generen\&. Un \('unic bloc
 Matroska(TM)
@@ -750,7 +755,7 @@ Exemple:
 Els par\(`ametres
 \fIA\fR,
 \fIB\fR,
-\fIC\fR, etc\&. hauran de ser tots sencers positius\&. La numeraci\('o comen\(,ca per 1\&. La llista de cap\('itols estar\(`a separada per comes\&. La divisi\('o succeir\(`a just abans del primer fotograma clau on el codi de temps sigui igual o major que el codi de temps d\*(Aqinici per als cap\('itols dels n\('umeros llistats\&. Un cap\('itol que comen\(,ca als 0s mai es tindr\(`a en compte per a la divisi\('o i ser\(`a om\(`es silenciosament\&.
+\fIC\fR, etc\&. hauran de ser tots sencers positius\&. La numeraci\('o comen\(,ca per l\*(Aq1\&. La llista de cap\('itols estar\(`a separada per comes\&. La divisi\('o succeir\(`a just abans del primer fotograma clau on el codi de temps sigui igual o major que el codi de temps d\*(Aqinici per als cap\('itols dels n\('umeros llistats\&. Un cap\('itol que comen\(,ca als 0s mai es tindr\(`a en compte per a la divisi\('o i ser\(`a om\(`es silenciosament\&.
 .sp
 La paraula clau
 all
@@ -778,7 +783,7 @@ admet estructures de cap\('itols arbitr\(`aries i aniuades profundament anomenad
 .sp
 En aquest mode de divisi\('o, el nom del fitxer de sortida ser\(`a tractat de manera diferent que amb el funcionament normal\&. Pot contenir un
 \fBprintf\fR
-com l\*(Aqexpressi\('o \(Fo%d\(Fc, incloent una amplada de camp opcional, p\&. ex\&., \(Fo%02d\(Fc\&. Si es fa llavors el n\('umero del fitxer actual ser\(`a formatat adequadament i inserit en aquest punt del nom del fitxer\&. Si no hi ha aquest patr\('o, llavors s\*(Aqassumir\(`a \(Fo\-%03d\(Fc com a patr\('o just abans de l\*(Aqextensi\('o del fitxer: \(Fo\-o sortida\&.mkv\(Fc resultaria en \(Fosortida\-001\&.mkv\(Fc i aix\('i en endavant\&. Si no hi ha extensi\('o, llavors s\*(Aqafegir\(`a \(Fo\-%03d\(Fc al nom\&.
+com l\*(Aqexpressi\('o \(Fo%d\(Fc, incloent un amplada de camp opcional, p\&. ex\&., \(Fo%02d\(Fc\&. Si es fa despr\('es el n\('umero del fitxer actual ser\(`a formatat adequadament i inserit en aquest punt del nom del fitxer\&. Si no hi ha aquest patr\('o, llavors s\*(Aqassumir\(`a \(Fo\-%03d\(Fc com a patr\('o just abans de l\*(Aqextensi\('o del fitxer: \(Fo\-o sortida\&.mkv\(Fc resultaria en \(Fosortida\-001\&.mkv\(Fc i aix\('i en endavant\&. Si no hi ha extensi\('o, llavors s\*(Aqafegir\(`a \(Fo\-%03d\(Fc al nom\&.
 .RE
 .PP
 \fB\-\-link\fR
@@ -790,19 +795,19 @@ vincular els fitxers\&.
 \fB\-\-link\-to\-previous\fR \fIUID_segment\fR
 .RS 4
 Vincula el primer fitxer de sortida al segment amb l\*(AqUID del segment indicat mitjan\(,cant el par\(`ametre
-\fIUID_segment\fR\&. Per a m\('es detalls, vegeu la seg\(:uent secci\('o
+\fIUID_segment\fR\&. Per a m\('es detalls, vegeu la seg\(:uent secci\('o,
 vincular els fitxers\&.
 .sp
-If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+Si el SID comen\(,ca amb el signe =, llavors la resta s\*(Aqinterpretar\(`a com el nom d\*(Aqun fitxer Matroska, es llegir\(`a i emprar\(`a l\*(AqUID del segment\&.
 .RE
 .PP
 \fB\-\-link\-to\-next\fR \fIUID_segment\fR
 .RS 4
 Vincula l\*(Aq\('ultim fitxer de sortida al segment amb l\*(AqUID del segment indicat mitjan\(,cant el par\(`ametre
-\fIUID_segment\fR\&. Per a m\('es detalls, vegeu la seg\(:uent secci\('o
+\fIUID_segment\fR\&. Per a m\('es detalls, vegeu la seg\(:uent secci\('o,
 vincular els fitxers\&.
 .sp
-If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+Si el SID comen\(,ca amb el signe =, llavors la resta s\*(Aqinterpretar\(`a com el nom d\*(Aqun fitxer Matroska, es llegir\(`a i emprar\(`a l\*(AqUID del segment\&.
 .RE
 .PP
 \fB\-\-append\-mode\fR \fImode\fR
@@ -811,9 +816,7 @@ Determina com es calcularan els codis de temps en annexar els fitxers\&. El par\
 \fImode\fR
 pot tenir dos valors: \(Fofile\(Fc que \('es l\*(Aqopci\('o per omissi\('o i \(Fotrack\(Fc\&.
 .sp
-Quan el
-\fBmkvmerge\fR(1)
-annexa una pista (anomenada \(Fopista2_1\(Fc d\*(Aqara en endavant) des d\*(Aqun segon fitxer (anomenat \(Fofitxer2\(Fc) a una pista (anomenada \(Fopista1_1\(Fc) des del primer fitxer (anomenat \(Fofitxer1\(Fc) llavors compensar\(`a una quantitat en tots els codis de temps per a la \(Fopista2_1\(Fc\&. En el mode \(Fofile\(Fc aquesta quantitat ser\(`a el major codi de temps trobat en el \(Fofitxer1\(Fc, fins i tot si aquest codi de temps provingu\('es d\*(Aquna pista diferent de \(Fopista1_1\(Fc\&. En el mode \(Fotrack\(Fc, la compensaci\('o ser\(`a el major codi de temps de la \(Fopista1_1\(Fc\&.
+Quan el mkvmerge annexa una pista (anomenada \(Fopista2_1\(Fc d\*(Aqara en endavant) des d\*(Aqun segon fitxer (anomenat \(Fofitxer_2\(Fc) a una pista (anomenada \(Fopista1_1\(Fc) des del primer fitxer (anomenat \(Fofitxer_1\(Fc) llavors compensar\(`a una quantitat en tots els codis de temps per a la \(Fopista2_1\(Fc\&. En el mode \(Fofile\(Fc aquesta quantitat ser\(`a el major codi de temps trobat en el \(Fofitxer_1\(Fc, fins i tot si aquest codi de temps provingu\('es d\*(Aquna pista diferent de \(Fopista1_1\(Fc\&. En el mode \(Fotrack\(Fc, la compensaci\('o ser\(`a el major codi de temps de la \(Fopista1_1\(Fc\&.
 .sp
 Malauradament, el
 \fBmkvmerge\fR(1)
@@ -854,9 +857,9 @@ $ mkvmerge \-o complet\&.mkv fitxer_1\&.mkv +fitxer_2\&.mkv
 .PP
 \fB=\fR
 .RS 4
-Normally
+En general, el
 \fBmkvmerge\fR(1)
-looks for files in the same directory as an input file that have the same base name and only differ in their running number (e\&.g\&. \*(AqVTS_01_1\&.VOB\*(Aq, \*(AqVTS_01_2\&.VOB\*(Aq, \*(AqVTS_01_3\&.VOB\*(Aq etc) and treats all of those files as if they were concatenated into a single big file\&. This option, a single \*(Aq=\*(Aq, causes mkvmerge not to look for those additional files\&.
+cerca els fitxers en el mateix directori com a fitxer d\*(Aqentrada que tenen el mateix nom base i que nom\('es es diferencien en el seu n\('umero d\*(Aqordre d\*(Aqexecuci\('o (p\&. ex\&., \(FoVTS_01_1\&.VOB\(Fc, \(FoVTS_01_2\&.VOB\(Fc, \(FoVTS_01_3\&.VOB\(Fc, etc\&.) i els tractar\(`a tots com si estiguessin units en un \('unic gran fitxer\&. Aquesta opci\('o, un \('unic \(Fo=\(Fc, fa que el mkvmerge no cerqui aquests fitxers addicionals\&.
 .sp
 El signe \(Fo=\(Fc tamb\('e es pot posar davant del nom de fitxer seg\(:uent\&. Per tant, les dues ordres seg\(:uents s\('on equivalents:
 .sp
@@ -874,14 +877,13 @@ $ mkvmerge \-o complet\&.mkv =fitxer_1\&.mkv
 .PP
 \fB(\fR \fIfitxer_1\fR \fIfitxer_2\fR \fB)\fR
 .RS 4
-If multiple file names are contained in a pair of parenthesis then those files will be treated as if they were concatenated into a single big file consisting of the content of each of the files one after the other\&.
+Si hi ha entre par\(`entesis m\('ultiples noms de fitxers, llavors aquests seran tractats com si estiguessin units en un \('unic gran fitxer, el qual consistir\(`a en el contingut de cadascun dels fitxers, l\*(Aqun darrere l\*(Aqaltre\&.
 .sp
-This can be used for e\&.g\&. VOB files coming from a DVD or MPEG transport streams\&. It cannot be used if each file contains its own set of headers which is usually the case with stand\-alone files like AVI or MP4\&.
+Per exemple, aix\(`o es pot emprar amb fitxers VOB procedents d\*(Aqun DVD o fluxos de transport MPEG\&. No es pot emprar si cada fitxer cont\('e el seu propi conjunt de cap\(,caleres, el qual sol ser el cas amb fitxers com AVI o MP4\&.
 .sp
-Putting a file name into parenthesis also prevents
+Posar el nom del fitxer entre par\(`entesis, tamb\('e evita que el
 \fBmkvmerge\fR(1)
-from looking for additional files with the same base name as described in
-option \fB=\fR\&. Therefore these two command lines are equivalent:
+cerqui fitxers addicionals amb el mateix nom base tal com s\*(Aqha descrit en l\*(Aqopci\('o \fB=\fR\&. Per tant, aquestes dues l\('inies d\*(Aqordres s\('on equivalents:
 .sp
 .if n \{\
 .RS 4
@@ -904,7 +906,7 @@ Hi ha diverses coses que s\*(Aqhan de tenir en compte:
 .sp -1
 .IP "  1." 4.2
 .\}
-Hi ha d\*(Aqhaver espais abans i despr\('es dels signes de par\(`entesi\&.
+Hi ha d\*(Aqhaver un espai despr\('es d\*(Aqobrir i abans de tancar els signes de par\(`entesi\&.
 .RE
 .sp
 .RS 4
@@ -926,14 +928,14 @@ Cada par\(`ametre entre par\(`entesis s\*(Aqinterpretar\(`a com un nom de fitxer
 .sp -1
 .IP "  3." 4.2
 .\}
-Alguns int\(`erprets d\*(Aqordres tracten els par\(`entesis com a car\(`acters especials\&. Per tant, s\*(Aqhauran d\*(Aqescapar o posar entre cometes tal com es mostra en l\*(Aqexemple anterior\&.
+Alguns int\(`erprets d\*(Aqordres tracten els par\(`entesis com a car\(`acters especials\&. Per tant, s\*(Aqhauran d\*(Aqescapar o posar entre cometes simples tal com es mostra en l\*(Aqexemple anterior\&.
 .RE
 .RE
 .SS "Implementaci\('o per a adjunts (m\('es opcions globals)"
 .PP
 \fB\-\-attachment\-description\fR \fIdescripci\('o\fR
 .RS 4
-Descripci\('o en text pla del seg\(:uent adjunt\&. S\*(Aqaplica a l\*(Aqopci\('o
+Descripci\('o en text pla del seg\(:uent adjunt\&. S\*(Aqaplica a la seg\(:uent opci\('o
 \fB\-\-attach\-file\fR
 o
 \fB\-\-attach\-file\-once\fR\&.
@@ -941,9 +943,9 @@ o
 .PP
 \fB\-\-attachment\-mime\-type\fR \fItipus_MIME\fR
 .RS 4
-Tipus
+El tipus
 MIME
-del seg\(:uent adjunt\&. S\*(Aqaplica a l\*(Aqopci\('o
+del seg\(:uent adjunt\&. S\*(Aqaplica a la seg\(:uent opci\('o
 \fB\-\-attach\-file\fR
 o
 \fB\-\-attach\-file\-once\fR\&. Es pot trobar una llista oficial de tipus
@@ -965,9 +967,8 @@ o
 \fB\-\-attach\-file\fR \fInom_fitxer\fR, \fB\-\-attach\-file\-once\fR \fInom_fitxer\fR
 .RS 4
 Crea un fitxer adjunt dins del fitxer
-Matroska(TM)\&. El tipus
-MIME
-s\*(Aqha d\*(Aqestablir abans que aquesta opci\('o es pugui usar\&. La difer\(`encia entre les dues formes \('es que durant la divisi\('o, els fitxers adjunts amb
+Matroska(TM)\&. Abans que es pugui usar aquesta opci\('o, s\*(Aqhaur\(`a d\*(Aqestablir el tipus
+MIME\&. La difer\(`encia entre les dues formes \('es que durant la divisi\('o, els fitxers adjunts amb
 \fB\-\-attach\-file\fR
 seran adjuntats a tots els fitxers de sortida mentre que amb
 \fB\-\-attach\-file\-once\fR
@@ -1004,8 +1005,8 @@ then the meaning is reversed: copy all tracks of this kind but the ones listed a
 .RS 4
 Copia les pistes de v\('ideo
 \fIn\fR,
-\fIm\fR, etc\&. Els n\('umeros s\('on els ID de pista que es poden obtenir amb l\*(Aqopci\('o
-\fB\-\-identify\fR\&. No s\('on els n\('umeros de la pista (vegeu la secci\('o
+\fIm\fR, etc\&. Els n\('umeros s\('on els ID de la pista que es poden obtenir amb l\*(Aqopci\('o
+\fB\-\-identify\fR\&. No s\('on simplement els n\('umeros de la pista (vegeu la secci\('o
 Els ID de la pista)\&. Per omissi\('o: copia totes les pistes de v\('ideo\&.
 .sp
 Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
@@ -1020,8 +1021,8 @@ then the meaning is reversed: copy all tracks of this kind but the ones listed a
 .RS 4
 Copia les pistes de subt\('itols
 \fIn\fR,
-\fIm\fR, etc\&. Els n\('umeros s\('on els ID de pista que es poden obtenir amb l\*(Aqopci\('o
-\fB\-\-identify\fR\&. No s\('on els n\('umeros de la pista (vegeu la secci\('o
+\fIm\fR, etc\&. Els n\('umeros s\('on els ID de la pista que es poden obtenir amb l\*(Aqopci\('o
+\fB\-\-identify\fR\&. No s\('on simplement els n\('umeros de la pista (vegeu la secci\('o
 Els ID de la pista)\&. Per omissi\('o: copia totes les pistes de subt\('itols\&.
 .sp
 Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
@@ -1036,8 +1037,8 @@ then the meaning is reversed: copy all tracks of this kind but the ones listed a
 .RS 4
 Copia les pistes de botons
 \fIn\fR,
-\fIm\fR, etc\&. Els n\('umeros s\('on els ID de pista que es poden obtenir amb l\*(Aqopci\('o
-\fB\-\-identify\fR\&. No s\('on els n\('umeros de la pista (vegeu la secci\('o
+\fIm\fR, etc\&. Els n\('umeros s\('on els ID de la pista que es poden obtenir amb l\*(Aqopci\('o
+\fB\-\-identify\fR\&. No s\('on simplement els n\('umeros de la pista (vegeu la secci\('o
 Els ID de la pista)\&. Per omissi\('o: copia totes les pistes de botons\&.
 .sp
 Instead of track IDs you can also provide ISO 639\-2 language codes\&. This will only work for source files that provide language tags for their tracks\&.
@@ -1052,9 +1053,9 @@ then the meaning is reversed: copy all tracks of this kind but the ones listed a
 .RS 4
 Copia les etiquetes per a les pistes
 \fIn\fR,
-\fIm\fR, etc\&. Els n\('umeros s\('on els ID de pista que es poden obtenir amb l\*(Aqopci\('o
-\fB\-\-identify\fR\&. No s\('on els n\('umeros de la pista (vegeu la secci\('o
-Els ID de la pista)\&. Per omissi\('o: copia totes les pistes de v\('ideo\&.
+\fIm\fR, etc\&. Els n\('umeros s\('on els ID de la pista que es poden obtenir amb l\*(Aqopci\('o
+\fB\-\-identify\fR\&. No s\('on simplement els n\('umeros de la pista (vegeu la secci\('o
+Els ID de la pista)\&. Per omissi\('o: copia les etiquetes per a totes les pistes\&.
 .sp
 If the IDs are prefixed with
 !
@@ -1231,12 +1232,12 @@ option\&.
 This option can be used multiple times for an input file applying to several tracks by selecting different track IDs each time\&.
 .RE
 .PP
-\fB\-t\fR, \fB\-\-tags\fR \fITID:nom_fitxer\fR\fITID\fR\fITID\fR
+\fB\-t\fR, \fB\-\-tags\fR \fITID:nom_fitxer\fR
 .RS 4
 Llegeix les etiquetes per a la pista amb el n\('umero
 \fITID\fR
 des del fitxer
-\fInom_fitxer\fR\&. Per a m\('es detalls vegeu m\('es endavant la secci\('o sobre
+\fInom_fitxer\fR\&. Per a m\('es detalls, vegeu m\('es endavant la secci\('o sobre
 les etiquetes\&.
 .RE
 .PP
@@ -1355,7 +1356,7 @@ does not change the timing information (frame/field rate) stored in the video bi
 \fBNota\fR
 .ps -1
 .br
-Per ara, nom\('es s\*(Aqha implementat per a pistes AVC/h\&.264\&.
+Per ara, nom\('es s\*(Aqha implementat per a pistes de v\('ideo AVC/h\&.264\&.
 .sp .5v
 .RE
 .RE
@@ -1394,7 +1395,7 @@ The default for some subtitle tracks is \*(Aqzlib\*(Aq compression\&. This compr
 For\(,ca el
 FourCC
 al valor especificat\&. Nom\('es funciona per a les pistes de v\('ideo en el
-mode compatibilitat de MS\&.
+mode compatibilitat amb MS\&.
 .RE
 .PP
 \fB\-\-display\-dimensions\fR \fITID:amplada_x_al\(,cada\fR
@@ -1439,12 +1440,12 @@ or
 options (see above)\&. These options are mutually exclusive\&.
 .RE
 .PP
-\fB\-\-cropping\fR \fITID:Esquerra,A_dalt,Dreta,A_baix\fR
+\fB\-\-cropping\fR \fITID:esquerra,a_dalt,dreta,a_baix\fR
 .RS 4
 Sets the pixel cropping parameters of a video track to the given values\&.
 .RE
 .PP
-\fB\-\-stereo\-mode\fR \fITID:n|Paraula_clau\fR
+\fB\-\-stereo\-mode\fR \fITID:n|paraula_clau\fR
 .RS 4
 Sets the stereo mode for the video track with the track ID
 \fITID\fR\&. The mode can either be a number
@@ -1455,9 +1456,9 @@ and
 \fB14\fR
 or one of these keywords:
 .sp
-\*(Aqmono\*(Aq, \*(Aqside_by_side_left_first\*(Aq, \*(Aqtop_bottom_right_first\*(Aq, \*(Aqtop_bottom_left_first\*(Aq, \*(Aqcheckerboard_right_first\*(Aq, \*(Aqcheckerboard_left_first\*(Aq, \*(Aqrow_interleaved_right_first\*(Aq, \*(Aqrow_interleaved_left_first\*(Aq, \*(Aqcolumn_interleaved_right_first\*(Aq, \*(Aqcolumn_interleaved_left_first\*(Aq, \*(Aqanaglyph_cyan_red\*(Aq, \*(Aqside_by_side_right_first\*(Aq, \*(Aqanaglyph_green_magenta\*(Aq, \*(Aqboth_eyes_laced_left_first\*(Aq, \*(Aqboth_eyes_laced_right_first\*(Aq\&.
+\(Fomono\(Fc, \(Foside_by_side_left_first\(Fc, \(Fotop_bottom_right_first\(Fc, \(Fotop_bottom_left_first\(Fc, \(Focheckerboard_right_first\(Fc, \(Focheckerboard_left_first\(Fc, \(Forow_interleaved_right_first\(Fc, \(Forow_interleaved_left_first\(Fc, \(Focolumn_interleaved_right_first\(Fc, \(Focolumn_interleaved_left_first\(Fc, \(Foanaglyph_cyan_red\(Fc, \(Foside_by_side_right_first\(Fc, \(Foanaglyph_green_magenta\(Fc, \(Foboth_eyes_laced_left_first\(Fc, \(Foboth_eyes_laced_right_first\(Fc\&.
 .RE
-.SS "Opcions que nom\('es s\*(Aqapliquen a pistes de subt\('itols de text"
+.SS "Opcions que nom\('es s\*(Aqapliquen a les pistes de subt\('itols de text"
 .PP
 \fB\-\-sub\-charset\fR \fITID:joc_de_car\(`acters\fR
 .RS 4
@@ -1558,7 +1559,7 @@ format outputs a machine\-readable JSON representation\&. This format follows th
 .PP
 \fB\-l\fR, \fB\-\-list\-types\fR
 .RS 4
-Llista els tipus de fitxers d\*(Aqentrada admesos\&.
+Llista els tipus de fitxer d\*(Aqentrada admesos\&.
 .RE
 .PP
 \fB\-\-list\-languages\fR
@@ -1594,14 +1595,14 @@ i
 .PP
 \fB\-\-output\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters al qual convertir les cadenes donades per la sortida\&. Per omissi\('o ser\(`a el joc de car\(`acters establert a la configuraci\('o regional actual del sistema\&.
+Estableix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. Per omissi\('o ser\(`a el joc de car\(`acters establert a la configuraci\('o regional actual del sistema\&.
 .RE
 .PP
 \fB\-r\fR, \fB\-\-redirect\-output\fR \fInom_fitxer\fR
 .RS 4
 Escriu tots els missatges al fitxer
 \fInom_fitxer\fR
-en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redirecci\('o de la sortida, hi ha casos en qu\(`e cal aquesta opci\('o: quan el terminal reinterpreta la sortida abans d\*(Aqescriure\-la a un fitxer\&. Es respecta el joc de car\(`acters establert amb
+en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redirecci\('o de la sortida, hi ha casos en qu\(`e cal aquesta opci\('o: quan el terminal torna interpretar la sortida abans d\*(Aqescriure\-la a un fitxer\&. Es respectar\(`a el joc de car\(`acters establert amb
 \fB\-\-output\-charset\fR\&.
 .RE
 .PP
@@ -1614,15 +1615,14 @@ d\*(Aqidioma (p\&. ex\&., \(Fode_DE\(Fc per a les traduccions en alemany)\&. Tot
 \fILC_MESSAGES\fR
 i
 \fILC_ALL\fR\&. Introduint \(Folist\(Fc com a
-\fIcodi\fR
-far\(`a que el
+\fIcodi\fR, far\(`a que el
 \fBmkvmerge\fR(1)
-ofereixi a la sortida, una llista de les traduccions disponibles\&.
+ofereixi a la sortida una llista de les traduccions disponibles\&.
 .RE
 .PP
 \fB\-\-debug\fR \fItema\fR
 .RS 4
-Activa la depuraci\('o per a una caracter\('istica espec\('ifica\&. Aquesta opci\('o nom\('es \('es \('util per als desenvolupadors\&.
+Activa la depuraci\('o per a una caracter\('istica espec\('ifica\&. Aquesta opci\('o nom\('es \('es \('util pels desenvolupadors\&.
 .RE
 .PP
 \fB\-\-engage\fR \fIcaracter\('istica\fR
@@ -1633,7 +1633,7 @@ Activa les caracter\('istiques experimentals\&. Es pot sol\(mdlicitar una llista
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especial que pot explicar\-vos el que est\(`a succeint per tal de controlar la IGU\&. Aquests missatges segueixen el format \(Fo#GUI#message\(Fc\&. El missatge pot estar seguit per parells clau/valor com a \(Fo#GUI#message#key1=value1#key2=value2\&...\(Fc\&. Ni els missatges ni les claus seran tradu\(:its, sempre sortiran en angl\(`es\&.
+Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especial que pot explicar\-vos el que est\(`a succeint per tal de controlar la IGU\&. Aquests missatges segueixen el format \(Fo#IGU#missatge\(Fc\&. El missatge pot estar seguit per parells clau/valor com a \(Fo#IGU#missatge#clau1=valor1#clau2=valor2\&...\(Fc\&. Ni els missatges ni les claus seran tradu\(:ides, sempre sortiran en angl\(`es\&.
 .RE
 .PP
 \fB@\fR\fIfitxer_opcions\fR
@@ -1711,7 +1711,7 @@ Mostra la informaci\('o sobre la versi\('o i surt\&.
 .RS 4
 Comprova en l\('inia si hi ha nous llan\(,caments per baixar\-los des de l\*(AqURL
 \m[blue]\fBhttp://mkvtoolnix\-releases\&.bunkus\&.org/latest\-release\&.xml\fR\m[]\&. Es generaran quatre l\('inies amb l\*(Aqestil
-key=valor: l\*(AqURL des d\*(Aqon s\*(Aqha obtingut la informaci\('o (clau
+clau=valor: l\*(AqURL des d\*(Aqon s\*(Aqha obtingut la informaci\('o (clau
 version_check_url), la versi\('o actualment en execuci\('o (clau
 running_version), la versi\('o de l\*(Aq\('ultim llan\(,cament (clau
 available_version) i l\*(AqURL per a la baixada (clau
@@ -1742,9 +1742,8 @@ option\&.
 .ps -1
 .br
 .PP
-L\*(Aqordre de les opcions a la l\('inia d\*(Aqordres \('es important\&. Si us plau, llegiu la secci\('o
-\(FoL'ordre de les opcions\(Fc
-si sou novell emprant aquest programa\&.
+L\*(Aqordre de les opcions a la l\('inia d\*(Aqordres \('es important\&. Si us plau, si sou novell emprant aquest programa, llegiu la secci\('o
+\(FoL'ordre de les opcions\(Fc\&.
 .sp .5v
 .RE
 .SH "L'ORDRE DE LES OPCIONS"
@@ -1789,7 +1788,7 @@ The options are processed from left to right\&. If an option appears multiple ti
 .RS 4
 .\}
 .nf
-$ mkvmerge \-o sortida\&.mkv \-\-title \*(AqAix\(`o i all\(`o\*(Aq entrada\&.avi \-\-title \*(AqQualsevulla cosa\*(Aq
+$ mkvmerge \-o sortida\&.mkv \-\-title \*(AqAix\(`o i all\(`o\*(Aq entrada\&.avi \-\-title \*(AqQualsevulla\*(Aq
 .fi
 .if n \{\
 .RE
@@ -1803,7 +1802,7 @@ option twice is OK because they\*(Aqre used in different scopes\&. Even though t
 .RS 4
 .\}
 .nf
-$ mkvmerge \-o sortida\&.mkv \-\-language 0:fre frances\&.ogg \-\-language 0:deu holandes\&.ogg
+$ mkvmerge \-o sortida\&.mkv \-\-language 0:fre franc\(`es\&.ogg \-\-language 0:deu holand\(`es\&.ogg
 .fi
 .if n \{\
 .RE
@@ -1888,7 +1887,7 @@ If you need an audio track synchronized you can do that easily\&. First find out
 .RS 4
 .\}
 .nf
-$ mkvmerge \-\-identify desincronitzat\&.ogg
+$ mkvmerge \-\-identify sense_sincronitzar\&.ogg
 .fi
 .if n \{\
 .RE
@@ -2086,7 +2085,7 @@ If you do not see the language or default track flags that you\*(Aqve specified 
 \fBmkvinfo\fR(1)\*(Aqs output then please read the section about
 default values\&.
 .PP
-Deshabilita la compressi\('o per a un fitxer d\*(Aqentrada\&.
+Desactiva la compressi\('o per a un fitxer d\*(Aqentrada\&.
 .sp
 .if n \{\
 .RS 4
@@ -2124,7 +2123,7 @@ Do not confuse the track IDs that are assigned to the tracks that are placed in 
 .PP
 Also note that each input file has its own set of track IDs\&. Therefore the track IDs for file \*(Aqfile1\&.ext\*(Aq as reported by \*(Aqmkvmerge \-\-identify\*(Aq do not change no matter how many other input files are there or in which position \*(Aqfile1\&.ext\*(Aq is used\&.
 .PP
-Els ID de pista s\('on assignats aix\('i:
+Els ID de la pista s\('on assignats aix\('i:
 .sp
 .RS 4
 .ie n \{\
@@ -2213,7 +2212,7 @@ byte order marker
 BOM) or the system\*(Aqs current locale\&. How the character set is inferred from the locale depends on the operating system that
 \fBmkvmerge\fR(1)
 is run on\&.
-.SS "Byte order markers (BOM)"
+.SS "Marcadors d\*(Aqordre de byte (BOM \-byte order markers\-)"
 .PP
 Text files that start with a BOM are already encoded in one representation of UTF\&.
 \fBmkvmerge\fR(1)
@@ -2336,7 +2335,7 @@ Hi ha diverses regles relatives als fitxers d\*(Aqopcions\&. Les l\('inies que t
 .PP
 A line not containing anything is also ignored\&. An empty argument is represented by the line \*(Aq#EMPTY#\*(Aq\&.
 .PP
-Es poden interpretar diversos car\(`acters com d\*(Aqescapament, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
+Es poden escapar diversos car\(`acters, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
 la secci\('o sobre escapar en el text\&.
 .PP
 Note that backslashes must always be escaped\&. Hash marks (\*(Aq#\*(Aq) must be escaped if they should not start a comment\&.
@@ -2350,7 +2349,7 @@ La l\('inia d\*(Aqordres \(Fo\fBmkvmerge \-o "meu_fitxer\&.mkv" \-A "una_peli\&.
 # Escriu al fitxer \(FoC:\eMatroska\emeu_fitxer\&.mkv\(Fc, sota Windows\&.
 \-o
 C:\e\eMatroska\e\emeu_fitxer\&.mkv
-# Estableix el t\('itol a \(Fo#65\(Fc\&.
+# Estableix el t\('itol a \(Fon\('umero 65\(Fc\&.
 \-\-title
 \eh65
 # Nom\('es pren el v\('ideo de \(Founa_peli\&.avi\(Fc\&.
@@ -2361,9 +2360,9 @@ so\&.ogg
 .if n \{\
 .RE
 .\}
-.SH "CAR\(`ACTERS ESPECIALS D'ESCAPAMENT EN EL TEXT"
+.SH "ESCAPAR CAR\(`ACTERS ESPECIALS EN EL TEXT"
 .PP
-Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o s\*(Aqhagin d\*(Aqescapar\&. Les regles de l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
+Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o s\*(Aqhagin d\*(Aqescapar\&. Les regles per a l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
 .PP
 Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc, \(Fo[\(Fc ser\(`a \(Fo\eb\(Fc, \(Fo]\(Fc ser\(`a \(Fo\eB\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
 .SH "SUBT\('ITOLS"
@@ -2533,13 +2532,13 @@ font to the output file:
 .RS 4
 .\}
 .nf
-$ mkvmerge \-o output\&.mkv \-A video\&.avi sound\&.ogg \e
-  \-\-attachment\-description "Me and the band behind the stage in a small get\-together" \e
+$ mkvmerge \-o sortida\&.mkv \-A v\('ideo\&.avi so\&.ogg \e
+  \-\-attachment\-description "Jo i la banda darrere de l\*(Aqescenari en una petita reuni\('o" \e
   \-\-attachment\-mime\-type image/jpeg \e
-  \-\-attach\-file me_and_the_band\&.jpg \e
-  \-\-attachment\-description "The real rare and unbelievably good looking font" \e
+  \-\-attach\-file jo_i_la_banda\&.jpg \e
+  \-\-attachment\-description "Un tipus de lletra veritablement rar i amb un aspecte incre\(:iblement bo" \e
   \-\-attachment\-type application/octet\-stream \e
-  \-\-attach\-file really_cool_font\&.ttf
+  \-\-attach\-file tipus_de_lletra_molt_fresc\&.ttf
 .fi
 .if n \{\
 .RE
@@ -3125,7 +3124,7 @@ sortir\(`a amb un d\*(Aqaquests tres codis de sortida:
 \fB1\fR
 \-\- En aquest cas, el
 \fBmkvmerge\fR(1)
-ha generat una sortida amb almenys un av\('is, per\(`o el multiplexat ha continuat\&. Un av\('is \('es prefixat amb el text \(FoWarning:\(Fc\&. Depenent de les q\(:uestions involucrades, el fitxer resultant ser\(`a o no correcte\&. L\*(Aqusuari ser\(`a instat a revisar tant els avisos com el fitxer\&.
+ha generat una sortida amb almenys un av\('is, per\(`o el multiplexat ha continuat\&. Un av\('is \('es prefixat amb el text \(FoAv\('is:\(Fc\&. Depenent de les q\(:uestions involucrades, el fitxer resultant ser\(`a o no correcte\&. L\*(Aqusuari ser\(`a instat a revisar tant els avisos com el fitxer\&.
 .RE
 .sp
 .RS 4
@@ -3165,7 +3164,7 @@ El contingut es tractar\(`a com si s\*(Aqhagu\('es passat l\*(Aqopci\('o
 \fIMKVMERGE_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR i la seva forma abreujada \fIMTX_OPTIONS\fR
 .RS 4
 El contingut ser\(`a dividit en espais en blanc\&. Les cadenes parcials resultants seran tractades com si haguessin estat passades com a opcions a la l\('inia d\*(Aqordres\&. Si necessiteu passar car\(`acters especials (p\&. ex\&., espais) llavors els haureu d\*(Aqescapar (vegeu
-la secci\('o car\(`acters especials d'escapament en el text)\&.
+la secci\('o sobre escapar car\(`acters especials en el text)\&.
 .RE
 .SH "VEGEU TAMB\('E"
 .PP
@@ -3175,8 +3174,8 @@ la secci\('o car\(`acters especials d'escapament en el text)\&.
 \fBmkvtoolnix-gui\fR(1)
 .SH "WWW"
 .PP
-The latest version can always be found at
-\m[blue]\fBthe MKVToolNix homepage\fR\m[]\&\s-2\u[5]\d\s+2\&.
+Sempre trobareu l\*(Aq\('ultima versi\('o a
+\m[blue]\fBla p\(`agina del MKVToolNix\fR\m[]\&\s-2\u[5]\d\s+2\&.
 .SH "AUTOR"
 .PP
 \fBBunkus, Moritz\fR <\&moritz@bunkus\&.org\&>
@@ -3207,7 +3206,7 @@ specification
 \%http://matroska.org/technical/specs/index.html
 .RE
 .IP " 5." 4
-the MKVToolNix homepage
+la p\(`agina del MKVToolNix
 .RS 4
 \%https://mkvtoolnix.download/
 .RE
