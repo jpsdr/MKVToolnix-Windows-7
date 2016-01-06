@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QDebug>
+#include <QScreen>
 #include <QSettings>
 #include <QSplitter>
 #include <QStandardPaths>
@@ -14,6 +15,25 @@
 #include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx { namespace gui { namespace Util {
+
+namespace {
+
+QFont
+defaultUiFont() {
+  auto font         = App::font();
+  auto logicalDPI   = App::primaryScreen()->logicalDotsPerInch();
+  auto minPointSize = static_cast<int>(9 + (std::max(logicalDPI, 95.) - 95 + 5) * 3 / 25);
+
+  font.setPointSize(std::max(font.pointSize(), minPointSize));
+
+#if defined(SYS_WINDOWS)
+  font.setFamily(Q("Segoe UI"));
+#endif
+
+  return font;
+}
+
+}
 
 bool
 Settings::RunProgramConfig::isValid()
@@ -139,7 +159,7 @@ Settings::load() {
 
   auto regPtr      = registry();
   auto &reg        = *regPtr;
-  auto defaultFont = App::font();
+  auto defaultFont = defaultUiFont();
 
   reg.beginGroup("info");
   auto guiVersion                      = reg.value("guiVersion").toString();
