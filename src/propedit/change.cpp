@@ -279,9 +279,13 @@ change_c::parse_spec(change_c::change_type_e type,
     throw std::runtime_error(Y("missing property name"));
 
   if (   mtx::included_in(type, ct_add, ct_set)
-      && (name == "language")
-      && !is_valid_iso639_2_code(value))
-    throw std::runtime_error{(boost::format(("invalid ISO 639-2 language code '%1%'")) % value).str()};
+      && (name == "language")) {
+    auto idx = map_to_iso639_2_code(value);
+    if (-1 == idx)
+      throw std::runtime_error{(boost::format(("invalid ISO 639-2 language code '%1%'")) % value).str()};
+
+    value = g_iso639_languages[idx].iso639_2_code;
+  }
 
   return std::make_shared<change_c>(type, name, value);
 }
