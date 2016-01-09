@@ -20,6 +20,7 @@
 #include <ebml/EbmlUnicodeString.h>
 
 #define Q(s)  to_qs(s)
+#define QH(s)  to_qs(s).toHtmlEscaped()
 #define QY(s) to_qs(Y(s))
 #define QYH(s) to_qs(Y(s)).toHtmlEscaped()
 #define QNY(singular, plural, count) to_qs(NY(singular, plural, count))

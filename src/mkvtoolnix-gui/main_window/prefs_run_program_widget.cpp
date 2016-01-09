@@ -57,8 +57,98 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
   for (auto const &checkBox : d->flagsByCheckbox.keys())
     if (cfg.m_forEvents & d->flagsByCheckbox[checkBox])
       checkBox->setChecked(true);
-}
 
+  auto html = QStringList{};
+  html << Q("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">"
+            "<html><head><meta name=\"qrichtext\" content=\"1\" />"
+            "<style type=\"text/css\">"
+            "p, li { white-space: pre-wrap; }\n"
+            "</style>"
+            "</head><body>"
+            "<h3>")
+       << QYH("Usage and examples")
+       << Q("</h3><ul><li>")
+       << QYH("The command line here uses Unix-style shell escaping via the backslash character even on Windows.")
+       << QYH("This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes.")
+#if defined(SYS_WINDOWS)
+       << QYH("Note that on Windows forward slashes can be used instead of backslashes in path names, too.")
+#endif
+       << QYH("See below for examples.")
+       << Q("</li>")
+       << Q("<li>")
+       << QYH("Always use full path names even if the application is located in the same directory as the GUI.")
+       << Q("</li>")
+#if !defined(SYS_APPLE)
+       << Q("<li>")
+# if defined(SYS_WINDOWS)
+       << QYH("Start file types other than executable files via cmd.exe.")
+# else
+       << QYH("Start file types other than executable files via xdg-open.")
+# endif
+       << QYH("See below for examples.")
+       << Q("</li>")
+#endif
+       << Q("</ul><h3>")
+       << QYH("Examples")
+       << Q("</h3><ul><li>")
+       << QYH("Play a WAV file with the default application:")
+#if defined(SYS_WINDOWS)
+       << Q("<code>")
+       << QH("C:\\\\windows\\\\system32\\\\cmd.exe /c C:\\\\temp\\\\signal.wav")
+       << Q("</code>")
+       << QYH("or")
+       << Q("<code>")
+       << QH("C:/windows/system32/cmd.exe /c C:/temp/signal.wav")
+       << Q("</code>")
+       << QYH("or")
+       << Q("<code>")
+       << QH("'C:\\windows\\system32\\cmd.exe' /c 'C:\\temp\\signal.wav'")
+       << Q("</code>")
+#elif defined(SYS_APPLE)
+       << Q("<code>")
+       << QH("/usr/bin/afplay /Users/janedoe/Audio/signal.wav")
+       << Q("</code>")
+#else
+       << Q("<code>")
+       << QH("/usr/bin/xdg-open /home/janedoe/Audio/signal.wav")
+       << Q("</code>")
+#endif
+       << Q("</li><li>")
+       << QYH("Shut down the system in one minute:")
+#if defined(SYS_WINDOWS)
+       << Q("<code>")
+       << QH("'c:\\windows\\system32\\shutdown.exe' /s /t 60")
+       << Q("</code>")
+#elif defined(SYS_APPLE)
+       << Q("<code>")
+       << QH("/usr/bin/sudo /sbin/shutdown -h +1")
+       << Q("</code>")
+#else
+       << Q("<code>")
+       << QH("/usr/bin/sudo /sbin/shutdown --poweroff +1")
+       << Q("</code>")
+#endif
+       << Q("</li>")
+       << Q("</li><li>")
+       << QYH("Open the merged file with a player:")
+       << Q("</li>")
+#if defined(SYS_WINDOWS)
+       << Q("<code>")
+       << QH("'C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe' '<MTX_OUTPUT_FILE_NAME>'")
+       << Q("</code>")
+#elif defined(SYS_APPLE)
+       << Q("<code>")
+       << QH("/usr/bin/vlc '<MTX_OUTPUT_FILE_NAME>'")
+       << Q("</code>")
+#else
+       << Q("<code>")
+       << QH("/usr/bin/vlc '<MTX_OUTPUT_FILE_NAME>'")
+       << Q("</code>")
+#endif
+       << Q("</ul></body></html>");
+
+  d->ui->tbUsageNotes->setHtml(html.join(Q(" ")));
+}
 
 void
 PrefsRunProgramWidget::setupMenu() {
