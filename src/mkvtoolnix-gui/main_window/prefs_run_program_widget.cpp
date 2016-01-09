@@ -7,9 +7,11 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h"
+#include "mkvtoolnix-gui/jobs/program_runner.h"
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/string.h"
+#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui {
 
@@ -33,6 +35,7 @@ PrefsRunProgramWidget::PrefsRunProgramWidget(QWidget *parent,
   , d_ptr{new PrefsRunProgramWidgetPrivate{}}
 {
   setupUi(cfg);
+  setupToolTips();
   setupMenu();
   setupConnections();
 }
@@ -57,6 +60,8 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
   for (auto const &checkBox : d->flagsByCheckbox.keys())
     if (cfg.m_forEvents & d->flagsByCheckbox[checkBox])
       checkBox->setChecked(true);
+
+  d->ui->pbExecuteNow->setEnabled(isValid());
 
   auto html = QStringList{};
   html << Q("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">"
@@ -151,6 +156,13 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
 }
 
 void
+PrefsRunProgramWidget::setupToolTips() {
+  Q_D(PrefsRunProgramWidget);
+
+  Util::setToolTip(d->ui->pbExecuteNow, Q("%1 %2").arg(QY("Executes the program now as a test run.")).arg(QY("Note that most <MTX_…> variables are empty and will be removed for this test run.")));
+}
+
+void
 PrefsRunProgramWidget::setupMenu() {
   Q_D(PrefsRunProgramWidget);
 
@@ -191,6 +203,7 @@ PrefsRunProgramWidget::setupConnections() {
   connect(d->ui->leCommandLine,      &QLineEdit::textEdited, this, &PrefsRunProgramWidget::commandLineEdited);
   connect(d->ui->pbBrowseExecutable, &QPushButton::clicked,  this, &PrefsRunProgramWidget::changeExecutable);
   connect(d->ui->pbAddVariable,      &QPushButton::clicked,  this, &PrefsRunProgramWidget::selectVariableToAdd);
+  connect(d->ui->pbExecuteNow,       &QPushButton::clicked,  this, &PrefsRunProgramWidget::executeNow);
 }
 
 void
@@ -214,6 +227,12 @@ PrefsRunProgramWidget::isValid()
 
   auto arguments = Util::unescapeSplit(d->ui->leCommandLine->text(), Util::EscapeShellUnix);
   return !arguments.value(0).isEmpty();
+}
+
+void
+PrefsRunProgramWidget::executeNow() {
+  if (isValid())
+    Jobs::ProgramRunner::run(Util::Settings::RunNever, [](Jobs::ProgramRunner::VariableMap &) {}, config());
 }
 
 void
@@ -247,6 +266,8 @@ PrefsRunProgramWidget::changeExecutable() {
 void
 PrefsRunProgramWidget::commandLineEdited(QString const &commandLine) {
   Q_D(PrefsRunProgramWidget);
+
+  d->ui->pbExecuteNow->setEnabled(isValid());
 
   auto arguments     = Util::unescapeSplit(commandLine, Util::EscapeShellUnix);
   auto newExecutable = arguments.value(0);

@@ -89,7 +89,8 @@ public:
     bool isValid() const;
   };
 
-  using RunProgramConfigPtr = std::shared_ptr<RunProgramConfig>;
+  using RunProgramConfigPtr  = std::shared_ptr<RunProgramConfig>;
+  using RunProgramConfigList = QList<RunProgramConfigPtr>;
 
   QString m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage;
   QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
@@ -126,7 +127,7 @@ public:
 
   QString m_mediaInfoExe;
 
-  QList<RunProgramConfigPtr> m_runProgramConfigurations;
+  RunProgramConfigList m_runProgramConfigurations;
 
 public:
   Settings();

@@ -34,12 +34,14 @@ protected slots:
   void selectVariableToAdd();
   void changeExecutable();
   void commandLineEdited(QString const &commandLine);
+  void executeNow();
 
 protected:
   void changeArguments(std::function<void(QStringList &)> const &worker);
   void addVariable(QString const &variable);
 
   void setupUi(Util::Settings::RunProgramConfig const &cfg);
+  void setupToolTips();
   void setupMenu();
   void setupConnections();
 };

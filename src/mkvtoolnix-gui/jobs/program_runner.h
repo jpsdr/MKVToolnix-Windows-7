@@ -13,7 +13,7 @@ class ProgramRunner {
 public:
   using VariableMap = QMap<QString, QStringList>;
 
-  static void run(Util::Settings::RunProgramForEvent forEvent, std::function<void(VariableMap &)> const &setupVariables);
+  static void run(Util::Settings::RunProgramForEvent forEvent, std::function<void(VariableMap &)> const &setupVariables, Util::Settings::RunProgramConfigPtr const &forceRunThis = Util::Settings::RunProgramConfigPtr{});
 
 protected:
   static void setupGeneralVariables(VariableMap &variables);

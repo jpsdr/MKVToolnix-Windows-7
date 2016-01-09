@@ -12,14 +12,17 @@ namespace mtx { namespace gui { namespace Jobs {
 
 void
 ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,
-                   std::function<void(VariableMap &)> const &setupVariables) {
+                   std::function<void(VariableMap &)> const &setupVariables,
+                   Util::Settings::RunProgramConfigPtr const &forceRunThis) {
   auto &cfg             = Util::Settings::get();
   auto generalVariables = VariableMap{};
+  auto configsToRun     = forceRunThis ? Util::Settings::RunProgramConfigList{forceRunThis}
+                        :                cfg.m_runProgramConfigurations;
 
   setupGeneralVariables(generalVariables);
 
-  for (auto const &runConfig : cfg.m_runProgramConfigurations) {
-    if (!(runConfig->m_forEvents & forEvent))
+  for (auto const &runConfig : configsToRun) {
+    if (!(runConfig->m_forEvents & forEvent) && !forceRunThis)
       continue;
 
     auto commandLine = runConfig->m_commandLine;
