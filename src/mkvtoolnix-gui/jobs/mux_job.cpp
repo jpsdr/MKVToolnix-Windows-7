@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include <QDir>
 #include <QRegularExpression>
 #include <QStringList>
 #include <QTemporaryFile>
@@ -200,11 +201,11 @@ void
 MuxJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables) {
   Job::runProgramSetupVariables(variables);
 
-  variables[Q("OUTPUT_FILE_NAME")]      << config().m_destination;
-  variables[Q("OUTPUT_FILE_DIRECTORY")] << QFileInfo{ config().m_destination }.path();
+  variables[Q("OUTPUT_FILE_NAME")]      << QDir::toNativeSeparators(config().m_destination);
+  variables[Q("OUTPUT_FILE_DIRECTORY")] << QDir::toNativeSeparators(QFileInfo{ config().m_destination }.path());
 
   for (auto const &sourceFile : config().m_files)
-    variables[Q("SOURCE_FILE_NAMES")] << sourceFile->m_fileName;
+    variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(sourceFile->m_fileName);
 }
 
 }}}
