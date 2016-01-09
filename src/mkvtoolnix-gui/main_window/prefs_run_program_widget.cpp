@@ -260,6 +260,8 @@ PrefsRunProgramWidget::changeExecutable() {
 
   d->executable = newExecutable;
 
+  d->ui->pbExecuteNow->setEnabled(isValid());
+
   emit executableChanged(newExecutable);
 }
 
