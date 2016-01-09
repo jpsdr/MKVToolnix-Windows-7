@@ -4,7 +4,9 @@
 #include <QRegularExpression>
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 
 namespace mtx { namespace gui { namespace Jobs {
 
@@ -33,7 +35,15 @@ ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,
 
     commandLine.removeFirst();
 
-    QProcess::startDetached(exe, commandLine);
+    if (QProcess::startDetached(exe, commandLine))
+      continue;
+
+    Util::MessageBox::critical(MainWindow::get())
+      ->title(QY("Program execution failed"))
+      .text(Q("%1\n%2")
+            .arg(QY("The following program could not be executed: %1").arg(exe))
+            .arg(QY("Possible causes are that the program does not exist or that you're not allowed to access it or its directory.")))
+      .exec();
   }
 }
 
