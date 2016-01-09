@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-06 21:01+0100\n"
+"POT-Creation-Date: 2016-01-09 20:28+0100\n"
 "PO-Revision-Date: 2015-12-16 10:26+0100\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -1145,7 +1145,7 @@ msgstr "關閉(&C)"
 msgid "&Collapse all"
 msgstr "收起全部項目(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:144
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:182
 #, fuzzy
 msgid "&Command line:"
 msgstr "目前命令列"
@@ -2254,7 +2254,7 @@ msgstr "處理屬性的動作"
 msgid "Actions for handling tags and chapters"
 msgstr "處理標籤和章節的動作"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:145
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:183
 #, fuzzy
 msgid "Add &variable"
 msgstr "可用的選項:"
@@ -2379,16 +2379,16 @@ msgstr "附加"
 msgid "Adds a property with the value even if such a property already exists"
 msgstr "以此數值加入屬性，即使這個屬性已經存在"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:147
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:186
 #, fuzzy
 msgid "After a job completes &successfully or with warnings"
 msgstr "只有任務成功完成時"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:148
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:187
 msgid "After a job exits with an &error or the user aborts the job"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:149
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:188
 msgid "After the job &queue has stopped"
 msgstr ""
 
@@ -2406,7 +2406,7 @@ msgstr "演算法: %1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
 #: src/mkvtoolnix-gui/merge/attachments.cpp:164
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171
@@ -2538,6 +2538,10 @@ msgstr ""
 #, fuzzy
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "任務加入到任務佇列後清空輸入檔清單"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:84
+msgid "Always use full path names even if the application is located in the same directory as the GUI."
+msgstr ""
 
 #: src/propedit/propedit_cli_parser.cpp:260
 msgid "An <attachment-selector> can have three forms:"
@@ -2984,7 +2988,7 @@ msgstr "聲道數: %1%"
 msgid "Chapter &number of first created entry:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/settings.cpp:195
+#: src/mkvtoolnix-gui/util/settings.cpp:215
 #, fuzzy
 msgid "Chapter <NUM:2>"
 msgstr "章節"
@@ -3547,7 +3551,7 @@ msgstr "Cue 表單 (子項目將被跳過)"
 msgid "Current command line"
 msgstr "目前命令列"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:182
 msgid "Current date && time in ISO 8601 format"
 msgstr ""
 
@@ -3917,6 +3921,11 @@ msgstr "時間長度: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "時間長度: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:184
+#, fuzzy
+msgid "E&xecute now"
+msgstr "mkvmerge 可執行檔"
+
 #: src/info/ui/mainwindow.h:111
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:432
 msgid "E&xit"
@@ -4172,6 +4181,11 @@ msgstr "即使出現警告資訊"
 msgid "Example"
 msgstr "範例"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:97
+#, fuzzy
+msgid "Examples"
+msgstr "範例"
+
 #: src/mkvtoolnix-gui/merge/output.cpp:317
 msgid "Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds)."
 msgstr "例如: 01:00:00 (一小時之後) 或 1800s (1800 秒之後)。"
@@ -4184,7 +4198,7 @@ msgstr "例如: 01:00:00,01:30:00 (一小時之後和一小時三十分之後) �
 msgid "Exception details:"
 msgstr "異常狀況詳細資訊:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:135
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, fuzzy
 msgid "Executable files"
@@ -4195,6 +4209,10 @@ msgstr "純文字檔"
 msgid "Executable not found"
 msgstr "mkvmerge 可執行檔"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:162
+msgid "Executes the program now as a test run."
+msgstr ""
+
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:149
 msgid "Executing programs"
 msgstr ""
@@ -4203,7 +4221,7 @@ msgstr ""
 msgid "Executing programs after certain events"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:71
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:174
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr ""
 
@@ -4549,7 +4567,7 @@ msgstr "一般"
 msgid "General options"
 msgstr "一般選項"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:78
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:181
 #, fuzzy
 msgid "General variables"
 msgstr "一般選項"
@@ -5277,12 +5295,12 @@ msgstr ""
 msgid "Job &output"
 msgstr "任務輸出(&O)"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:68
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:171
 #, fuzzy
 msgid "Job description"
 msgstr "輸入任務描述"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:70
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:173
 msgid "Job end date && time in ISO 8601 format"
 msgstr ""
 
@@ -5290,7 +5308,7 @@ msgstr ""
 msgid "Job queue"
 msgstr "任務佇列"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:69
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:172
 msgid "Job start date && time in ISO 8601 format"
 msgstr ""
 
@@ -6019,6 +6037,14 @@ msgstr "即使停用此選項 mkvmerge 仍然會複製來源檔案的標題屬�
 msgid "Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."
 msgstr "注意想多播放程式不直接使用顯示寬度/高度數值，但使用根據設定初始視窗大小時給定的比例。"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:162
+msgid "Note that most <MTX_…> variables are empty and will be removed for this test run."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
+msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
+msgstr ""
+
 #: src/merge/generic_packetizer.cpp:1154
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
@@ -6188,6 +6214,10 @@ msgstr ""
 msgid "Open settings file"
 msgstr "開啟設定檔"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:138
+msgid "Open the merged file with a player:"
+msgstr ""
+
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:180
 msgid "Opening %1 file in the chapter editor…"
 msgid_plural "Opening %1 files in the chapter editor…"
@@ -6259,12 +6289,12 @@ msgstr "輸出檔案:"
 msgid "Output file name"
 msgstr "輸出檔名"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:75
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:178
 #, fuzzy
 msgid "Output file's directory"
 msgstr "輸出檔名"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:74
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:177
 #, fuzzy
 msgid "Output file's name"
 msgstr "輸出檔名"
@@ -6353,6 +6383,10 @@ msgstr "像素高度: %1%"
 msgid "Pixel width: %1%"
 msgstr "像素寬度: %1%"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
+msgid "Play a WAV file with the default application:"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/input.cpp:411
 msgid "Players must play this track."
 msgstr "播放器必須播放此軌道。"
@@ -6409,6 +6443,10 @@ msgstr ""
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr ""
 
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:48
+msgid "Possible causes are that the program does not exist or that you're not allowed to access it or its directory."
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:153
 msgid "Pre&view:"
 msgstr ""
@@ -6447,6 +6485,10 @@ msgstr "上一個剪輯的唯一 ID"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1156
 msgid "Process &priority:"
 msgstr "處理程優先權(&P):"
+
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:45
+msgid "Program execution failed"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:34
 msgid "Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
@@ -6998,6 +7040,11 @@ msgstr "掃描播放清單"
 msgid "Scope: %1% (%2%)"
 msgstr "範圍: %1% (%2%)"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:81
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:93
+msgid "See below for examples."
+msgstr ""
+
 #: src/info/mkvinfo.cpp:974
 #, boost-format
 msgid "Seek ID: %1% (%2%)"
@@ -7114,7 +7161,7 @@ msgstr "選擇章節檔案"
 msgid "Select character set"
 msgstr "選擇章節檔案"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:139
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, fuzzy
 msgid "Select executable"
@@ -7336,6 +7383,10 @@ msgstr "顯示這項說明。"
 msgid "Show version information."
 msgstr "顯示版本資訊。"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
+msgid "Shut down the system in one minute:"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:738
 #, boost-format
 msgid "Signature algorithm: %1% (%2%)"
@@ -7440,7 +7491,7 @@ msgstr "來源檔案"
 msgid "Source file name"
 msgstr "來源檔案名稱"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:76
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:179
 #, fuzzy
 msgid "Source file names"
 msgstr "來源檔案名稱"
@@ -7490,6 +7541,14 @@ msgstr "開始"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:434
 msgid "Start &muxing"
 msgstr "開始合成(&M)"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:89
+msgid "Start file types other than executable files via cmd.exe."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:91
+msgid "Start file types other than executable files via xdg-open."
+msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:317
 #, fuzzy
@@ -7902,6 +7961,10 @@ msgstr "編解碼器專有資料不符 (長度: %1% 與 %2%)。"
 msgid "The codec's private data does not match. Both have the same length (%1%) but different content."
 msgstr "編解碼器專有資料不符。長度相同 (%1%) 但內容不同。"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:76
+msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:128
 msgid "The configuration has been loaded."
 msgstr "已載入此設定檔。"
@@ -8274,6 +8337,11 @@ msgstr "第一種模式會提取一些軌道到外部檔案。"
 msgid "The first word tells mkvextract what to extract. The second must be the source file. There are few global options that can be used with all modes. All other options depend on the mode."
 msgstr "第一個單字可告訴 mkvextract 提取什麼。第二個必須是來源檔。有一些總體選項可以在所有模式中使用。全部其他選項取決於使用的模式。"
 
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:47
+#, fuzzy
+msgid "The following program could not be executed: %1"
+msgstr "無法解析末端時間: %1"
+
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:309
 msgid "The format defaults to %H:%M:%S if none is given."
 msgstr ""
@@ -8406,7 +8474,7 @@ msgstr ""
 msgid "The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
 msgstr "播放器播放過程中應該快取的最小畫格數。若設為 0, 將不使用參考假快取系統。"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:141
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:142
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:46
 #, fuzzy
 msgid "The mkvmerge executable was not found."
@@ -9000,6 +9068,10 @@ msgstr "這被用於 MPEG-1/-2 視訊軌的序列表頭存儲。"
 msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr "這項在某些情況很有用，例如藍光光碟目錄有多份播放清單且清單所屬的目錄不明顯 (即主體影片、幕後花絮等等)。"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:77
+msgid "This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:353
 #: src/mkvtoolnix-gui/merge/output.cpp:369
 msgid "This mode considers only the first video track that is output."
@@ -9512,6 +9584,10 @@ msgstr "更新「%1%」元件失敗。原因:"
 msgid "Usage"
 msgstr "用法"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:74
+msgid "Usage and examples"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:158
 msgid "Use 'segment linking' for the resulting files."
 msgstr "結果檔案使用「剪輯連結」。"
@@ -9584,11 +9660,11 @@ msgstr "驗證失敗"
 msgid "Value"
 msgstr "數值"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:67
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:170
 msgid "Variables for all job types"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:73
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:176
 #, fuzzy
 msgid "Variables for merge jobs"
 msgstr "儲存成新合併任務的預設值(&D)"
@@ -9815,7 +9891,7 @@ msgstr "當使用者加入檔案時軌道語言會設定成來源檔案的語言
 msgid "When the user drags & drops files from an external application onto the merge tool the GUI can take different actions."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:146
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:185
 #, fuzzy
 msgid "When to execute:"
 msgstr "選擇標籤檔案"
@@ -10529,13 +10605,13 @@ msgstr "從檔案 %1%, 第 %2% 行呼叫 memory.cpp/safememdup(): malloc() 回�
 msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned nullptr for a size of %3% bytes.\n"
 msgstr "從檔案 %1%, 第 %2% 行呼叫 memory.cpp/saferealloc(): realloc() 回傳 %3% 位元組的 nullptr。\n"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:149
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "合併"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:156
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
 msgid "merging to file \"%1\" in directory \"%2\""
 msgstr "合併到在目錄 »%2« 中的檔案 »%1«"
 
@@ -10832,6 +10908,12 @@ msgstr "僅 I 畫格"
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 msgid "only to the first output file"
 msgstr "僅到第一個輸出檔"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:104
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:108
+#, fuzzy
+msgid "or"
+msgstr "更多"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
 #, fuzzy

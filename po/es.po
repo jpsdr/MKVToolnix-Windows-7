@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-06 21:01+0100\n"
+"POT-Creation-Date: 2016-01-09 20:28+0100\n"
 "PO-Revision-Date: 2016-01-05 18:17+0100\n"
 "Last-Translator: Israel Lucas Torrijos <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish <moritz@bunkus.org>\n"
@@ -1283,7 +1283,7 @@ msgstr "&Cerrar archivo"
 msgid "&Collapse all"
 msgstr "&Agrupar todo"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:144
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:182
 msgid "&Command line:"
 msgstr "&Línea de comandos:"
 
@@ -2492,7 +2492,7 @@ msgstr "Acciones para el manejo de las propiedades"
 msgid "Actions for handling tags and chapters"
 msgstr "Acciones para el manejo de etiquetas y capítulos"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:145
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:183
 msgid "Add &variable"
 msgstr "Añadir &opción"
 
@@ -2623,15 +2623,15 @@ msgid "Adds a property with the value even if such a property already exists"
 msgstr ""
 "Agrega una propiedad con el valor, incluso si dicha propiedad ya existe"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:147
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:186
 msgid "After a job completes &successfully or with warnings"
 msgstr "Al finalizar una tarea &correctamente o con advertencias"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:148
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:187
 msgid "After a job exits with an &error or the user aborts the job"
 msgstr "Al finalizar una tarea con &error o cuando el usuario la cancele"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:149
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:188
 msgid "After the job &queue has stopped"
 msgstr "Al finalizar la &lista de tareas"
 
@@ -2648,7 +2648,7 @@ msgstr "Algoritmo: %1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
 #: src/mkvtoolnix-gui/merge/attachments.cpp:164
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171 src/mkvtoolnix-gui/merge/tab.cpp:185
@@ -2806,6 +2806,12 @@ msgstr ""
 msgid "Always use a &default description when adding a job to the queue"
 msgstr ""
 "Usar siempre una descripción &predefinida cuando añade una tarea a la lista"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:84
+msgid ""
+"Always use full path names even if the application is located in the same "
+"directory as the GUI."
+msgstr ""
 
 #: src/propedit/propedit_cli_parser.cpp:260
 msgid "An <attachment-selector> can have three forms:"
@@ -3317,7 +3323,7 @@ msgstr "Canales: %1%"
 msgid "Chapter &number of first created entry:"
 msgstr "El &número del capítulo del primer registro creado:"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:195
+#: src/mkvtoolnix-gui/util/settings.cpp:215
 msgid "Chapter <NUM:2>"
 msgstr "Capítulo <NUM:2>"
 
@@ -3939,7 +3945,7 @@ msgstr "Cues (los subregistros serán omitidos)"
 msgid "Current command line"
 msgstr "línea de comandos actual"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:182
 msgid "Current date && time in ISO 8601 format"
 msgstr "Fecha && hora actual en formato ISO 8601"
 
@@ -4317,6 +4323,11 @@ msgstr "Duración: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Duración: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:184
+#, fuzzy
+msgid "E&xecute now"
+msgstr "Ejecutable no encontrado"
+
 #: src/info/ui/mainwindow.h:111
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:432
 msgid "E&xit"
@@ -4601,6 +4612,11 @@ msgstr "Incluso si hubieran advertencias "
 msgid "Example"
 msgstr "Ejemplo"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:97
+#, fuzzy
+msgid "Examples"
+msgstr "Ejemplo"
+
 #: src/mkvtoolnix-gui/merge/output.cpp:317
 msgid "Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds)."
 msgstr ""
@@ -4619,7 +4635,7 @@ msgstr ""
 msgid "Exception details:"
 msgstr "Detalles de la excepción:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:135
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 msgid "Executable files"
 msgstr "Archivos ejecutables"
@@ -4627,6 +4643,10 @@ msgstr "Archivos ejecutables"
 #: src/mkvtoolnix-gui/merge/input.cpp:1690
 msgid "Executable not found"
 msgstr "Ejecutable no encontrado"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:162
+msgid "Executes the program now as a test run."
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:149
 msgid "Executing programs"
@@ -4636,7 +4656,7 @@ msgstr "Ejecución de programas"
 msgid "Executing programs after certain events"
 msgstr "Ejecución de programas después de ciertos eventos"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:71
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:174
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr "Código de salida (0: correcto, 1: advertencias, 2: errores)"
 
@@ -5054,7 +5074,7 @@ msgstr "General"
 msgid "General options"
 msgstr "Opciones generales"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:78
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:181
 msgid "General variables"
 msgstr "Opciones generales "
 
@@ -6072,11 +6092,11 @@ msgstr "Su lugar de instalación no se pudo determinar automáticamente."
 msgid "Job &output"
 msgstr "&Resultado"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:68
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:171
 msgid "Job description"
 msgstr "Descripción de la tarea"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:70
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:173
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Fecha && hora de finalización de la tarea en formato ISO 8601"
 
@@ -6084,7 +6104,7 @@ msgstr "Fecha && hora de finalización de la tarea en formato ISO 8601"
 msgid "Job queue"
 msgstr "Lista de tareas"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:69
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:172
 msgid "Job start date && time in ISO 8601 format"
 msgstr "Fecha && hora de inicio de la tarea en formato ISO 8601"
 
@@ -6951,6 +6971,18 @@ msgstr ""
 "visualización del ancho/alto sino que sólo usan la relación de aspecto "
 "generada por esos valores al establecer el tamaño inicial de la ventana."
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:162
+msgid ""
+"Note that most <MTX_…> variables are empty and will be removed for this test "
+"run."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
+msgid ""
+"Note that on Windows forward slashes can be used instead of backslashes in "
+"path names, too."
+msgstr ""
+
 #: src/merge/generic_packetizer.cpp:1154
 #, boost-format
 msgid ""
@@ -7176,6 +7208,10 @@ msgstr "Abrir en &MediaInfo"
 msgid "Open settings file"
 msgstr "Abrir archivo de configuración"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:138
+msgid "Open the merged file with a player:"
+msgstr ""
+
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:180
 msgid "Opening %1 file in the chapter editor…"
 msgid_plural "Opening %1 files in the chapter editor…"
@@ -7248,11 +7284,11 @@ msgstr "Archivo de salida"
 msgid "Output file name"
 msgstr "Destino del archivo creado"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:75
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:178
 msgid "Output file's directory"
 msgstr "Directorio del archivo de salida"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:74
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:177
 msgid "Output file's name"
 msgstr "Nombre del archivo creado"
 
@@ -7341,6 +7377,10 @@ msgstr "Altura en píxeles: %1%"
 msgid "Pixel width: %1%"
 msgstr "Anchura en píxeles: %1%"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
+msgid "Play a WAV file with the default application:"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/input.cpp:411
 msgid "Players must play this track."
 msgstr "Los reproductores deberían usar esta pista."
@@ -7409,6 +7449,12 @@ msgstr ""
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "Posición de las propiedades de la pista en la pestaña \"Entrada\":"
 
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:48
+msgid ""
+"Possible causes are that the program does not exist or that you're not "
+"allowed to access it or its directory."
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:153
 msgid "Pre&view:"
 msgstr "Pre&vio:"
@@ -7447,6 +7493,10 @@ msgstr "UID del anterior segmento"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1156
 msgid "Process &priority:"
 msgstr "&Prioridad del proceso:"
+
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:45
+msgid "Program execution failed"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:34
 msgid ""
@@ -8097,6 +8147,11 @@ msgstr "Analizando playlists"
 msgid "Scope: %1% (%2%)"
 msgstr "Alcance: %1% (%2%)"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:81
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:93
+msgid "See below for examples."
+msgstr ""
+
 #: src/info/mkvinfo.cpp:974
 #, boost-format
 msgid "Seek ID: %1% (%2%)"
@@ -8206,7 +8261,7 @@ msgstr "Seleccionar el archivo de capítulos"
 msgid "Select character set"
 msgstr "Seleccionar conjunto de caracteres"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:139
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 msgid "Select executable"
 msgstr "Seleccionar ejecutable"
@@ -8472,6 +8527,10 @@ msgstr "Mostrar esta ayuda."
 msgid "Show version information."
 msgstr "Mostrar la información de la versión."
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
+msgid "Shut down the system in one minute:"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:738
 #, boost-format
 msgid "Signature algorithm: %1% (%2%)"
@@ -8595,7 +8654,7 @@ msgstr "Archivo origen"
 msgid "Source file name"
 msgstr "Nombre del archivo origen"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:76
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:179
 msgid "Source file names"
 msgstr "Nombre del archivo origen "
 
@@ -8657,6 +8716,14 @@ msgstr "Inicio"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:434
 msgid "Start &muxing"
 msgstr "Inicia&r multiplexado "
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:89
+msgid "Start file types other than executable files via cmd.exe."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:91
+msgid "Start file types other than executable files via xdg-open."
+msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:317
 msgid "Start jobs &immediately"
@@ -9199,6 +9266,12 @@ msgstr ""
 "Los datos particulares del códec no coinciden. Ambos tienen la misma "
 "extensión (%1%), pero el contenido es diferente."
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:76
+msgid ""
+"The command line here uses Unix-style shell escaping via the backslash "
+"character even on Windows."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:128
 msgid "The configuration has been loaded."
 msgstr "Configuración cargada. "
@@ -9693,6 +9766,11 @@ msgstr ""
 "debe ser el archivo de origen. Hay pocas opciones generales que se puedan "
 "usar con todos los modos. Todas las demás opciones dependen del modo usado."
 
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:47
+#, fuzzy
+msgid "The following program could not be executed: %1"
+msgstr "El tiempo final no se puede analizar: %1"
+
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:309
 msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "El formato predefinido es %H:%M:%S si no se especifica."
@@ -9913,7 +9991,7 @@ msgstr ""
 "almacenar en la memoria caché durante la reproducción. Si lo estableces a 0, "
 "el sistema de referencia pseudo-caché no es utilizada."
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:141
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:142
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:46
 msgid "The mkvmerge executable was not found."
 msgstr "No se encontró el ejecutable de mkvmerge."
@@ -10847,6 +10925,12 @@ msgstr ""
 "característica (p.e. película principal, extras, etc...) pertenece a cada "
 "playlist."
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:77
+msgid ""
+"This means that either backslashes must be doubled or the whole argument "
+"must be enclosed in single quotes."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:353
 #: src/mkvtoolnix-gui/merge/output.cpp:369
 msgid "This mode considers only the first video track that is output."
@@ -11493,6 +11577,10 @@ msgstr "Actualizando el '%1%' elemento que ha fallado. Razón:"
 msgid "Usage"
 msgstr "Uso"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:74
+msgid "Usage and examples"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:158
 msgid "Use 'segment linking' for the resulting files."
 msgstr "Usar 'segmentos vinculados' para los archivos resultantes."
@@ -11571,11 +11659,11 @@ msgstr "La validación ha fallado"
 msgid "Value"
 msgstr "Valor"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:67
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:170
 msgid "Variables for all job types"
 msgstr "Opciones para todos los tipos de tareas"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:73
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:176
 msgid "Variables for merge jobs"
 msgstr "Opciones para trabajos de multiplexación"
 
@@ -11824,7 +11912,7 @@ msgstr ""
 "sobre la herramienta de combinación de la interfaz gráfica de usuario puede "
 "tomar diferentes acciones."
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:146
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:185
 msgid "When to execute:"
 msgstr "Cuando se ejecute:"
 
@@ -12679,13 +12767,13 @@ msgstr ""
 "memory.cpp/saferealloc() llamada desde el archivo %1%, línea %2%: realloc() "
 "returned nullptr por un tamaño de %3% bytes.\n"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:149
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "Multiplexar"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:156
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
 msgid "merging to file \"%1\" in directory \"%2\""
 msgstr "Multiplexando el archivo »%1« en el directorio »%2«"
 
@@ -13027,6 +13115,12 @@ msgstr "Sólo para fotogramas I"
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 msgid "only to the first output file"
 msgstr "Sólo al primer archivo de salida"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:104
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:108
+#, fuzzy
+msgid "or"
+msgstr "Más"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
 msgid "ordered"

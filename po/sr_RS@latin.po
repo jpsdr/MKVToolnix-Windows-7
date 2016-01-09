@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-06 21:01+0100\n"
+"POT-Creation-Date: 2016-01-09 20:28+0100\n"
 "PO-Revision-Date: 2016-01-03 21:55+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -1218,7 +1218,7 @@ msgstr "&Zatvori fajl"
 msgid "&Collapse all"
 msgstr "&Skupi sve"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:144
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:182
 msgid "&Command line:"
 msgstr "&Komandna linija:"
 
@@ -2412,7 +2412,7 @@ msgstr "Radnje za rukovanje svojstvima"
 msgid "Actions for handling tags and chapters"
 msgstr "Radnje za rukovanje tagovima i poglavljima"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:145
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:183
 msgid "Add &variable"
 msgstr "Dodaj &promenljivu"
 
@@ -2541,15 +2541,15 @@ msgstr "Dodaci"
 msgid "Adds a property with the value even if such a property already exists"
 msgstr "Dodaje svojstvo sa vrednošću čak iako takvo svojstvo već postoji"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:147
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:186
 msgid "After a job completes &successfully or with warnings"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:148
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:187
 msgid "After a job exits with an &error or the user aborts the job"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:149
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:188
 msgid "After the job &queue has stopped"
 msgstr ""
 
@@ -2566,7 +2566,7 @@ msgstr "Algoritam: %1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
 #: src/mkvtoolnix-gui/merge/attachments.cpp:164
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171 src/mkvtoolnix-gui/merge/tab.cpp:185
@@ -2712,6 +2712,12 @@ msgstr "&Uvek prikaži polje sa imenom izlaznog fajla ispod tabova"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1208
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "U&vek koristi podrazumevani opis pri dodavanju zadatka na listu"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:84
+msgid ""
+"Always use full path names even if the application is located in the same "
+"directory as the GUI."
+msgstr ""
 
 #: src/propedit/propedit_cli_parser.cpp:260
 msgid "An <attachment-selector> can have three forms:"
@@ -3203,7 +3209,7 @@ msgstr "Kanali: %1%"
 msgid "Chapter &number of first created entry:"
 msgstr "B&roj prve napravljene stavke:"
 
-#: src/mkvtoolnix-gui/util/settings.cpp:195
+#: src/mkvtoolnix-gui/util/settings.cpp:215
 msgid "Chapter <NUM:2>"
 msgstr "Chapter <NUM:2>"
 
@@ -3816,7 +3822,7 @@ msgstr "Cues (pod-unosi će biti preskočeni)"
 msgid "Current command line"
 msgstr "Trenutna komandna linija"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:182
 msgid "Current date && time in ISO 8601 format"
 msgstr ""
 
@@ -4185,6 +4191,11 @@ msgstr "Trajanje: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Trajanje: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:184
+#, fuzzy
+msgid "E&xecute now"
+msgstr "Izvršni fajl nije nađen"
+
 #: src/info/ui/mainwindow.h:111
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:432
 msgid "E&xit"
@@ -4465,6 +4476,11 @@ msgstr "čak i ako je bilo upozorenja"
 msgid "Example"
 msgstr "Primer"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:97
+#, fuzzy
+msgid "Examples"
+msgstr "Primer"
+
 #: src/mkvtoolnix-gui/merge/output.cpp:317
 msgid "Examples: 01:00:00 (after one hour) or 1800s (after 1800 seconds)."
 msgstr "Primeri: 01:00:00 (posle jednog sata) ili 1800s (posle 1800 sekundi)."
@@ -4481,7 +4497,7 @@ msgstr ""
 msgid "Exception details:"
 msgstr "Detalji odstupanja:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:135
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 msgid "Executable files"
 msgstr "Izvršni fajlovi"
@@ -4489,6 +4505,10 @@ msgstr "Izvršni fajlovi"
 #: src/mkvtoolnix-gui/merge/input.cpp:1690
 msgid "Executable not found"
 msgstr "Izvršni fajl nije nađen"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:162
+msgid "Executes the program now as a test run."
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:149
 msgid "Executing programs"
@@ -4498,7 +4518,7 @@ msgstr "Izvršavanje programa"
 msgid "Executing programs after certain events"
 msgstr "Izvršavanje programa posle određenih radnji"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:71
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:174
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr "Exit code (0: ok, 1: ima upozorenja, 2: ima grešaka)"
 
@@ -4901,7 +4921,7 @@ msgstr "General"
 msgid "General options"
 msgstr "Opšte opcije"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:78
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:181
 msgid "General variables"
 msgstr "Opšte promenljive"
 
@@ -5876,11 +5896,11 @@ msgstr "Njegova lokacija nije mogla biti utvrđena automatski."
 msgid "Job &output"
 msgstr "&Rezultat zadatka"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:68
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:171
 msgid "Job description"
 msgstr "Opis zadatka"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:70
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:173
 msgid "Job end date && time in ISO 8601 format"
 msgstr ""
 
@@ -5888,7 +5908,7 @@ msgstr ""
 msgid "Job queue"
 msgstr "Lista zadataka"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:69
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:172
 msgid "Job start date && time in ISO 8601 format"
 msgstr ""
 
@@ -6725,6 +6745,18 @@ msgstr ""
 "direktno već koriste odnos od tih vrednosti kada podešavaju početnu veličinu "
 "prozora."
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:162
+msgid ""
+"Note that most <MTX_…> variables are empty and will be removed for this test "
+"run."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
+msgid ""
+"Note that on Windows forward slashes can be used instead of backslashes in "
+"path names, too."
+msgstr ""
+
 #: src/merge/generic_packetizer.cpp:1154
 #, boost-format
 msgid ""
@@ -6941,6 +6973,10 @@ msgstr "Otvori u &MediaInfo"
 msgid "Open settings file"
 msgstr "Otvori fajl sa podešavanjima"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:138
+msgid "Open the merged file with a player:"
+msgstr ""
+
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:180
 msgid "Opening %1 file in the chapter editor…"
 msgid_plural "Opening %1 files in the chapter editor…"
@@ -7015,11 +7051,11 @@ msgstr "Izlazni fajl"
 msgid "Output file name"
 msgstr "Ime izlaznog fajla"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:75
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:178
 msgid "Output file's directory"
 msgstr "Direktorijum izlaznog fajla"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:74
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:177
 msgid "Output file's name"
 msgstr "Ime izlaznog fajla"
 
@@ -7106,6 +7142,10 @@ msgstr "Visina u pikselima: %1%"
 msgid "Pixel width: %1%"
 msgstr "Širina u pikselima: %1%"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
+msgid "Play a WAV file with the default application:"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/input.cpp:411
 msgid "Players must play this track."
 msgstr "Plejeri moraju reprodukovati ovu stazu."
@@ -7172,6 +7212,12 @@ msgstr ""
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "Položaj svojstava staza u tabu \"ulaz\":"
 
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:48
+msgid ""
+"Possible causes are that the program does not exist or that you're not "
+"allowed to access it or its directory."
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:153
 msgid "Pre&view:"
 msgstr "Prikaz:"
@@ -7210,6 +7256,10 @@ msgstr "Jedinstveni ID prethodnog segmenta"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1156
 msgid "Process &priority:"
 msgstr "Prioritet &procesa:"
+
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:45
+msgid "Program execution failed"
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:34
 msgid ""
@@ -7846,6 +7896,11 @@ msgstr "Skeniranje plejlisti"
 msgid "Scope: %1% (%2%)"
 msgstr "Scope: %1% (%2%)"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:81
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:93
+msgid "See below for examples."
+msgstr ""
+
 #: src/info/mkvinfo.cpp:974
 #, boost-format
 msgid "Seek ID: %1% (%2%)"
@@ -7955,7 +8010,7 @@ msgstr "Izaberite fajl sa poglavljima"
 msgid "Select character set"
 msgstr "Izaberi skup znakova"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:139
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 msgid "Select executable"
 msgstr "Izaberi izvršni fajl"
@@ -8212,6 +8267,10 @@ msgstr "Pokaži ovu pomoć."
 msgid "Show version information."
 msgstr "Pokaži informaciju o verziji."
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
+msgid "Shut down the system in one minute:"
+msgstr ""
+
 #: src/info/mkvinfo.cpp:738
 #, boost-format
 msgid "Signature algorithm: %1% (%2%)"
@@ -8334,7 +8393,7 @@ msgstr "Izvorni fajl"
 msgid "Source file name"
 msgstr "Ime izvornog fajla"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:76
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:179
 msgid "Source file names"
 msgstr "Imena izvornih fajlova"
 
@@ -8395,6 +8454,14 @@ msgstr "Start"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:434
 msgid "Start &muxing"
 msgstr "Počni &muksovanje"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:89
+msgid "Start file types other than executable files via cmd.exe."
+msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:91
+msgid "Start file types other than executable files via xdg-open."
+msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:317
 msgid "Start jobs &immediately"
@@ -8907,6 +8974,12 @@ msgstr ""
 "Lični podaci kodeka se ne slažu. Oba imaju istu dužinu (%1%) ali različit "
 "sadržaj."
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:76
+msgid ""
+"The command line here uses Unix-style shell escaping via the backslash "
+"character even on Windows."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:128
 msgid "The configuration has been loaded."
 msgstr "Konfiguracija je učitana."
@@ -9393,6 +9466,11 @@ msgstr ""
 "Postoji nekoliko globalnih parametara koji mogu da se koriste sa svim "
 "režimima. Svi ostali parametri zavise od izabranog režima"
 
+#: src/mkvtoolnix-gui/jobs/program_runner.cpp:47
+#, fuzzy
+msgid "The following program could not be executed: %1"
+msgstr "Krajnje vreme ne može biti raščlanjeno: %1"
+
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:309
 msgid "The format defaults to %H:%M:%S if none is given."
 msgstr "Ako ništa nije naznačeno, podrazumevani format je %H:%M:%S."
@@ -9602,7 +9680,7 @@ msgstr ""
 "reprodukcije. Ako je postavljeno 0, referentni pseudo-keš sistem se ne "
 "koristi."
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:141
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:142
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:46
 msgid "The mkvmerge executable was not found."
 msgstr "mkvmerge izvršni fajl nije pronađen."
@@ -10490,6 +10568,12 @@ msgstr ""
 "plejlisti u istom direktorijumu i gde nije očigledno čijem snimku (npr. "
 "glavni film, dodatni materijal itd) plejlista pripada."
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:77
+msgid ""
+"This means that either backslashes must be doubled or the whole argument "
+"must be enclosed in single quotes."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:353
 #: src/mkvtoolnix-gui/merge/output.cpp:369
 msgid "This mode considers only the first video track that is output."
@@ -11116,6 +11200,10 @@ msgstr "Obnavljanje elementa '%1%' nije uspelo. Razlog:"
 msgid "Usage"
 msgstr "Upotreba"
 
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:74
+msgid "Usage and examples"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:158
 msgid "Use 'segment linking' for the resulting files."
 msgstr "Koristi 'povezivanje segmenata' za izlazne fajlove."
@@ -11194,11 +11282,11 @@ msgstr "Validacija neuspešna"
 msgid "Value"
 msgstr "Vrednost"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:67
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:170
 msgid "Variables for all job types"
 msgstr "Promenljive za zadatke svih tipova"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:73
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:176
 msgid "Variables for merge jobs"
 msgstr "Promenljive za zadatke sastavljanja"
 
@@ -11441,7 +11529,7 @@ msgstr ""
 "Kada korisnik prevlači fajlove iz spoljnih aplikacija radi sastavljanja, GUI "
 "može da preduzme različite radnje."
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:146
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:185
 msgid "When to execute:"
 msgstr "Kada izvršiti:"
 
@@ -12273,13 +12361,13 @@ msgstr ""
 "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() returned "
 "nullptr for a size of %3% bytes.\n"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:149
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "sastavi"
 
-#: src/mkvtoolnix-gui/jobs/mux_job.cpp:156
+#: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
 msgid "merging to file \"%1\" in directory \"%2\""
 msgstr "sastavljam u fajl »%1« u direktorijumu »%2«"
 
@@ -12611,6 +12699,12 @@ msgstr "samo za I slike"
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 msgid "only to the first output file"
 msgstr "Samo za prvi izlazni fajl"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:104
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:108
+#, fuzzy
+msgid "or"
+msgstr "Još"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:73
 msgid "ordered"
