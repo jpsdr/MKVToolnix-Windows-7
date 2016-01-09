@@ -186,7 +186,8 @@ PrefsRunProgramWidget::config()
   Q_D(const PrefsRunProgramWidget);
 
   auto cfg           = std::make_shared<Util::Settings::RunProgramConfig>();
-  cfg->m_commandLine = Util::unescapeSplit(d->ui->leCommandLine->text(), Util::EscapeShellUnix);
+  auto cmdLine       = d->ui->leCommandLine->text().replace(QRegularExpression{"^\\s+"}, Q(""));
+  cfg->m_commandLine = Util::unescapeSplit(cmdLine, Util::EscapeShellUnix);
 
   for (auto const &checkBox : d->flagsByCheckbox.keys())
     if (checkBox->isChecked())
