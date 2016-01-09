@@ -2,6 +2,7 @@
 
 #include <QAction>
 #include <QCursor>
+#include <QDir>
 #include <QMenu>
 
 #include "common/qt.h"
@@ -137,6 +138,7 @@ PrefsRunProgramWidget::changeExecutable() {
   filters << QY("All files") + Q(" (*)");
 
   auto newExecutable = Util::getOpenFileName(this, QY("Select executable"), d->executable, filters.join(Q(";;")));
+  newExecutable      = QDir::toNativeSeparators(newExecutable);
   if (newExecutable.isEmpty() || (newExecutable == d->executable))
     return;
 
