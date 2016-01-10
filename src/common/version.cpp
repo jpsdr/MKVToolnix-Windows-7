@@ -25,7 +25,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "All of the above"
+#define VERSIONNAME "Wind at my back"
 
 version_number_t::version_number_t()
   : valid(false)
