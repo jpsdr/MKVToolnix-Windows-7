@@ -80,7 +80,7 @@ Mostra la mida de cada element incloent la seva cap\(,calera\&.
 .PP
 \fB\-\-command\-line\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters al qual convertir les cadenes donades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
+Estableix el joc de car\(`acters al qual convertir les cadenes indicades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
 .RE
 .PP
 \fB\-\-output\-charset\fR \fIjoc_de_car\(`acters\fR
@@ -90,9 +90,9 @@ Estableix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. 
 .PP
 \fB\-r\fR, \fB\-\-redirect\-output\fR \fInom_fitxer\fR
 .RS 4
-Escriu tots els missatges al fitxer
+Escriu tots els missatges al
 \fInom_fitxer\fR
-en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redirecci\('o de la sortida, hi ha casos en qu\(`e cal aquesta opci\('o: quan el terminal torna interpretar la sortida abans d\*(Aqescriure\-la a un fitxer\&. Es respectar\(`a el joc de car\(`acters establert amb
+en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redirecci\('o de la sortida, hi ha casos en que cal aquesta opci\('o: quan el terminal torna interpretar la sortida abans d\*(Aqescriure\-la a un fitxer\&. Es respectar\(`a el joc de car\(`acters establert amb
 \fB\-\-output\-charset\fR\&.
 .RE
 .PP
@@ -100,7 +100,7 @@ en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redir
 .RS 4
 For\(,ca l\*(Aq\('us de les traduccions pel
 \fIcodi\fR
-d\*(Aqidioma (p\&. ex\&., \(Fode_DE\(Fc per a les traduccions en alemany)\&. Tot i que \('es preferible usar les variables d\*(Aqentorn
+d\*(Aqidioma (p\&. ex\&., \(Fode_DE\(Fc per a les traduccions en alemany)\&. Tot i que \('es preferible emprar les variables d\*(Aqentorn
 \fILANG\fR,
 \fILC_MESSAGES\fR
 i
@@ -123,7 +123,7 @@ Activa les caracter\('istiques experimentals\&. Es pot sol\(mdlicitar una llista
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especial que pot explicar\-vos el que est\(`a succeint per tal de controlar la IGU\&. Aquests missatges segueixen el format \(Fo#IGU#missatge\(Fc\&. El missatge pot estar seguit per parells clau/valor com a \(Fo#IGU#missatge#clau1=valor1#clau2=valor2\&...\(Fc\&. Ni els missatges ni les claus seran tradu\(:ides, sempre sortiran en angl\(`es\&.
+Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especial que pot explicar\-vos el que est\(`a succeint per tal de controlar la IGU\&. Aquests missatges segueixen el format \(Fo#IGU#missatge\(Fc\&. El missatge pot estar seguit per parells clau/valor com \(Fo#IGU#missatge#clau1=valor1#clau2=valor2\&...\(Fc\&. Ni els missatges ni les claus seran tradu\(:ides, sempre sortiran en angl\(`es\&.
 .sp
 Aquest ajustament no t\('e res a veure amb el par\(`ametre
 \fB\-\-gui\fR
@@ -133,7 +133,7 @@ el qual causa que el mkvinfo mostri la seva pr\(`opia IGU\&.
 \fB\-v\fR, \fB\-\-verbose\fR
 .RS 4
 Ser m\('es loqua\(,c\&. Vegeu la secci\('o sobre
-nivells de loquacitat
+els nivells de loquacitat
 per a una descripci\('o de quina informaci\('o sortir\(`a en cada nivell\&.
 .RE
 .PP
@@ -157,20 +157,20 @@ running_version), la versi\('o de l\*(Aq\('ultim llan\(,cament (clau
 available_version) i l\*(AqURL per a la baixada (clau
 download_url)\&.
 .sp
-Despr\('es el programa sortir\(`a amb un codi de sortida de 0 si no hi ha cap llan\(,cament m\('es recent disponible, amb 1 si hi ha disponible una nova versi\('o i amb 2 si s\*(Aqha produ\(:it un error (p\&. ex\&., si no s\*(Aqha pogut recuperar la informaci\('o sobre l\*(Aqactualitzaci\('o)\&.
+Despr\('es el programa sortir\(`a amb un codi de sortida de 0 si no hi ha cap llan\(,cament m\('es recent disponible, amb 1 si hi ha disponible una nova versi\('o i amb 2 si s\*(Aqha produ\(:it algun error (p\&. ex\&., si no s\*(Aqha pogut recuperar la informaci\('o sobre l\*(Aqactualitzaci\('o)\&.
 .sp
 Aquesta opci\('o nom\('es estar\(`a disponible si el programa va ser constru\(:it amb la implementaci\('o per a \(Folibcurl\(Fc\&.
 .RE
 .PP
 \fB@\fR\fIfitxer_opcions\fR
 .RS 4
-Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del fitxer
+Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del
 \fIfitxer_opcions\fR\&. Les l\('inies que tinguin com a primer car\(`acter un coixinet (#) seran tractades com a comentaris i ignorades\&. Els espais en blanc al comen\(,cament i final de la l\('inia seran descartats\&. Cada l\('inia haur\(`a de contenir exactament una opci\('o\&.
 .sp
 Es poden escapar diversos car\(`acters, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
 la secci\('o sobre escapar en el text\&.
 .sp
-La l\('inia d\*(Aqordres \(Fo\fBmkvinfo \-v \-v entrada\&.mkv \-\-redirect\-output info\&.txt\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions:
+La l\('inia d\*(Aqordres \(Fo\fBmkvinfo \-v \-v entrada\&.mkv \-\-redirect\-output informaci\('o\&.txt\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions:
 .sp
 .if n \{\
 .RS 4
@@ -181,9 +181,9 @@ La l\('inia d\*(Aqordres \(Fo\fBmkvinfo \-v \-v entrada\&.mkv \-\-redirect\-outp
 \-v
 # Analitza entrada\&.mkv
 entrada\&.mkv
-# i escriu la sortida a info\&.txt
+# i escriu la sortida a informaci\('o\&.txt
 \-\-redirect\-output
-info\&.txt
+informaci\('o\&.txt
 .fi
 .if n \{\
 .RE
@@ -193,7 +193,7 @@ info\&.txt
 .PP
 L\*(Aqopci\('o
 \fB\-v\fR
-es pot usar per incrementar el nivell de loquacitat del
+es pot emprar per incrementar el nivell de loquacitat del
 \fBmkvinfo\fR(1)
 i imprimir m\('es informaci\('o sobre el fitxer actual\&.
 .PP
@@ -253,7 +253,7 @@ sortir\(`a amb un d\*(Aqaquests tres codis de sortida:
 \fB1\fR
 \-\- En aquest cas, el
 \fBmkvinfo\fR(1)
-genera una sortida amb almenys un av\('is, per\(`o continua executant\-se\&. Un av\('is \('es prefixat amb el text \(FoAv\('is:\(Fc\&.
+ha generat una sortida amb almenys un av\('is, per\(`o continua executant\-se\&. Un av\('is \('es prefixat amb el text \(FoAv\('is:\(Fc\&.
 .RE
 .sp
 .RS 4
@@ -273,12 +273,12 @@ interrompr\(`a el proc\('es just despr\('es de mostrar el missatge d\*(Aqerror\&
 .PP
 Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o s\*(Aqhagin d\*(Aqescapar\&. Les regles per a l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
 .PP
-Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
+Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes dobles) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
 .SH "VARIABLES D\*(AQENTORN"
 .PP
 El
 \fBmkvinfo\fR(1)
-usa les variables per omissi\('o que es determinen a la configuraci\('o regional del sistema (p\&. ex\&.,
+empra les variables per omissi\('o que es determinen a la configuraci\('o regional del sistema (p\&. ex\&.,
 \fILANG\fR
 i la fam\('ilia
 \fILC_*\fR)\&. Variables addicionals:

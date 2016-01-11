@@ -28,7 +28,7 @@
 .\" * MAIN CONTENT STARTS HERE *
 .\" -----------------------------------------------------------------
 .SH "NOM"
-mkvpropedit \- Modifica les propietats dels fitxers Matroska(TM) existents que no han completat el multiplexat
+mkvpropedit \- Modifica les propietats dels fitxers Matroska(TM) existents sense un multiplexat complet
 .SH "SINOPSIS"
 .HP \w'\fBmkvpropedit\fR\ 'u
 \fBmkvpropedit\fR [opcions] {nom_fitxer_origen} {accions}
@@ -36,7 +36,7 @@ mkvpropedit \- Modifica les propietats dels fitxers Matroska(TM) existents que n
 .PP
 Aquest programa analitza un fitxer
 Matroska(TM)
-i modifica algunes de les seves propietats\&. Despr\('es escriu aquestes modificacions en el fitxer existent\&. Entre les propietats que es poden modificar estan els elements sobre la informaci\('o del segment (p\&. ex\&., el t\('itol) i les cap\(,caleres de les pistes (p\&. ex\&., el codi de l\*(Aqidioma, l\*(Aqetiqueta \(Fopista per omissi\('o\(Fc o el nom)\&.
+i modifica algunes de les seves propietats\&. Despr\('es escriu aquestes modificacions en el fitxer existent\&. Entre les propietats que es poden modificar es troben els elements sobre la informaci\('o del segment (p\&. ex\&., el t\('itol), les cap\(,caleres de les pistes (p\&. ex\&., el codi de l\*(Aqidioma, l\*(Aqetiqueta \(Fopista per omissi\('o\(Fc o el nom)\&.
 .PP
 Opcions:
 .PP
@@ -44,13 +44,12 @@ Opcions:
 .RS 4
 Llista tots els noms de propietat coneguts i editables, el seu tipus (cadena, enter, boole\(`a, etc\&.) i una petita descripci\('o\&. El programa despr\('es sortir\(`a\&. Per tant, el par\(`ametre
 \fInom_fitxer_origen\fR
-no t\('e per qu\(`e subministrar\-se\&.
+no t\('e perqu\(`e subministrar\-se\&.
 .RE
 .PP
 \fB\-p\fR, \fB\-\-parse\-mode\fR \fImode\fR
 .RS 4
-Estableix el mode d\*(Aqan\(`alisi\&. El par\(`ametre \(Fo\fImode\fR\(Fc pot ser \(Fofast\(Fc (R\(`apida) (el qual \('es el predeterminat) o \(Fofull\(Fc (Completa)\&. El mode \(Fofast
-no analitzar\(`a tot el fitxer per\(`o usar\(`a els elements meta de cerca per a localitzar els elements requerits d\*(Aqun fitxer d\*(Aqorigen\&. En el 99% dels casos n\*(Aqhi haur\(`a prou\&. No obstant aix\(`o, pels fitxers que no contenen elements meta de cerca o que estan malmesos, l\*(Aqusuari hauria d\*(Aqemprar el mode d\*(Aqan\(`alisi \(Fofull\(Fc\&. L\*(Aqan\(`alisi completa d\*(Aqun fitxer pot portar molts minuts, mentre que una an\(`alisi r\(`apida nom\('es portar\(`a uns pocs segons\&.
+Estableix el mode d\*(Aqan\(`alisi\&. El par\(`ametre \(Fo\fImode\fR\(Fc pot ser \(Fofast\(Fc (R\(`apida) (el qual \('es el predeterminat) o \(Fofull\(Fc (Completa)\&. El mode \(Fofast\(Fc no analitzar\(`a tot el fitxer per\(`o usar\(`a els elements meta de cerca per a localitzar els elements requerits d\*(Aqun fitxer d\*(Aqorigen\&. En el 99% dels casos n\*(Aqhi haur\(`a prou\&. No obstant aix\(`o, pels fitxers que no contenen elements meta de cerca o que estan malmesos, l\*(Aqusuari hauria d\*(Aqemprar el mode d\*(Aqan\(`alisi \(Fofull\(Fc\&. L\*(Aqan\(`alisi completa d\*(Aqun fitxer pot portar molts minuts, mentre que una an\(`alisi r\(`apida nom\('es portar\(`a uns pocs segons\&.
 .RE
 .PP
 Accions que tenen a veure amb les propietats d\*(Aqinformaci\('o de la pista i del segment:
@@ -59,19 +58,20 @@ Accions que tenen a veure amb les propietats d\*(Aqinformaci\('o de la pista i d
 .RS 4
 Estableix la secci\('o del fitxer
 Matroska(TM)
-(informaci\('o del segment o certes cap\(,caleres d\*(Aquna pista) sobre la qual se centraran les seg\(:uents accions:
-add,
+(informaci\('o del segment o una certa cap\(,calera d\*(Aquna pista) sobre la qual se centraran les seg\(:uents accions:
+add
+(afegir),
 set
-i
-delete\&. Aquesta opci\('o es pot emprar m\('ultiples vegades de manera que es poden modificar m\('es d\*(Aqun element alhora\&.
+(establir) i
+delete
+(suprimir)\&. Aquesta opci\('o es pot emprar m\('ultiples vegades de manera que es pot modificar m\('es d\*(Aqun element alhora\&.
 .sp
 Per omissi\('o, el
 \fBmkvpropedit\fR(1)
 editar\(`a la secci\('o d\*(Aqinformaci\('o del segment\&.
 .sp
-Vegeu la secci\('o sobre els
-selectors per a l\*(Aqedici\('o
-per a una completa descripci\('o de la sintaxi\&.
+Vegeu la secci\('o sobre
+els selectors per a l\*(Aqedici\('o, per a una completa descripci\('o de la sintaxi\&.
 .RE
 .PP
 \fB\-a\fR, \fB\-\-add\fR \fInom\fR=\fIvalor\fR
@@ -100,11 +100,9 @@ Accions que tenen a veure amb etiquetes i cap\('itols:
 .PP
 \fB\-t\fR, \fB\-\-tags\fR \fIselector\fR:\fInom_fitxer\fR
 .RS 4
-Afegeix o substitueix les etiquetes al fitxer amb el
+Afegeix o substitueix les etiquetes al
 nom_fitxer
-o l\*(Aqelimina si el
-nom_fitxer
-est\(`a buit\&. El
+o l\*(Aqelimina si est\(`a buit\&. El
 \fBmkvpropedit\fR(1)
 llegir\(`a els mateixos formats d\*(Aqetiquetes en XML que pugui llegir el
 \fBmkvmerge\fR(1)\&.
@@ -125,7 +123,7 @@ nom\('es se substituiran o eliminaran les etiquetes globals\&.
 Amb
 \fBtrack\fR, el
 \fBmkvpropedit\fR(1)
-substituir\(`a les etiquetes d\*(Aquna pista especificada\&. A m\('es, les etiquetes llegides des de
+substituir\(`a les etiquetes d\*(Aquna pista espec\('ifica\&. A m\('es, les etiquetes llegides des de
 nom_fitxer
 seran assignades a la mateixa pista\&. La pista s\*(Aqespecifica de la mateixa manera que amb els
 selectors per a l\*(Aqedici\('o
@@ -135,7 +133,7 @@ selectors per a l\*(Aqedici\('o
 .PP
 \fB\-\-add\-track\-statistics\-tags\fR
 .RS 4
-Calcula les estad\('istiques per a totes les pistes en un fitxer i els hi afegeix etiquetes d\*(Aqestad\('istiques noves\&. Si el fitxer ja cont\('e dites etiquetes, llavors seran actualitzats\&.
+Calcula les estad\('istiques per a totes les pistes en un fitxer i hi afegeix etiquetes d\*(Aqestad\('istiques noves\&. Si el fitxer ja cont\('e dites etiquetes, llavors seran actualitzades\&.
 .RE
 .PP
 \fB\-\-delete\-track\-statistics\-tags\fR
@@ -145,11 +143,9 @@ Suprimeix totes les etiquetes d\*(Aqestad\('istiques existents a la pista d\*(Aq
 .PP
 \fB\-c\fR, \fB\-\-chapters\fR \fInom_fitxer\fR
 .RS 4
-Afegeix o substitueix els cap\('itols al fitxer amb el
+Afegeix o substitueix els cap\('itols al
 nom_fitxer
-o elimina\*(Aql si el
-nom_fitxer
-est\(`a buit\&. El
+o els elimina si est\(`a buit\&. El
 \fBmkvpropedit\fR(1)
 llegir\(`a els mateixos formats de cap\('itols simple i en XML que pugui llegir el
 \fBmkvmerge\fR(1)\&.
@@ -181,14 +177,14 @@ Si s\*(Aqha emprat abans l\*(Aqopci\('o
 .RS 4
 Substitueix un o m\('es adjunts que coincideixin amb el
 \fIselector\fR
-del fitxer
+del
 \fInom_fitxer\fR\&. Si coincideix m\('es d\*(Aqun adjunt, llavors tot el seu contingut ser\(`a substitu\(:it pel contingut del
 \fInom_fitxer\fR\&.
 .sp
 El
 \fIselector\fR
-pot tenir una d\*(Aqaquestes quatre formes: Estan explicades a continuaci\('o, a la secci\('o
-selectors per a l\*(Aqadjunt\&.
+pot tenir una d\*(Aqentre quatre formes\&. Estan explicades a continuaci\('o, a la secci\('o
+els selectors per a l\*(Aqadjunt\&.
 .sp
 Si s\*(Aqha emprat abans l\*(Aqopci\('o
 \fB\-\-attachment\-name\fR, llavors s\*(Aqemprar\(`a el seu valor com a nom per a cada adjunt modificat\&. D\*(Aqaltra manera, no es canviar\(`a cap nom\&.
@@ -210,8 +206,8 @@ Estableix les propietats d\*(Aqun o m\('es adjunts que coincideixen amb el
 .sp
 El
 \fIselector\fR
-pot tenir una d\*(Aqaquestes quatre formes: Estan explicades a continuaci\('o, a la secci\('o
-selectors per a l\*(Aqadjunt\&.
+pot tenir una d\*(Aqentre quatre formes\&. Estan explicades a continuaci\('o, a la secci\('o
+els selectors per a l\*(Aqadjunt\&.
 .sp
 Si s\*(Aqha emprat abans l\*(Aqopci\('o
 \fB\-\-attachment\-name\fR, llavors s\*(Aqemprar\(`a el seu valor com a nom per a cada adjunt modificat\&. D\*(Aqaltra manera, no es canviar\(`a cap nom\&.
@@ -233,8 +229,8 @@ Suprimeix un o m\('es adjunts que coincideixin amb el
 .sp
 El
 \fIselector\fR
-pot tenir una d\*(Aqaquestes quatre formes: Estan explicades a continuaci\('o, a la secci\('o
-selectors per a l\*(Aqadjunt\&.
+pot tenir una d\*(Aqentre quatre formes\&. Estan explicades a continuaci\('o, a la secci\('o
+els selectors per a l\*(Aqadjunt\&.
 .RE
 .PP
 Opcions per a les accions en els adjunts:
@@ -267,7 +263,7 @@ Altres opcions:
 .PP
 \fB\-\-command\-line\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters al qual convertir les cadenes donades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
+Estableix el joc de car\(`acters al qual convertir les cadenes indicades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
 .RE
 .PP
 \fB\-\-output\-charset\fR \fIjoc_de_car\(`acters\fR
@@ -277,7 +273,7 @@ Estableix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. 
 .PP
 \fB\-r\fR, \fB\-\-redirect\-output\fR \fInom_fitxer\fR
 .RS 4
-Escriu tots els missatges al fitxer
+Escriu tots els missatges al
 \fInom_fitxer\fR
 en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redirecci\('o de la sortida, hi ha casos en qu\(`e cal aquesta opci\('o: quan el terminal torna interpretar la sortida abans d\*(Aqescriure\-la a un fitxer\&. Es respectar\(`a el joc de car\(`acters establert amb
 \fB\-\-output\-charset\fR\&.
@@ -287,12 +283,12 @@ en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redir
 .RS 4
 For\(,ca l\*(Aq\('us de les traduccions pel
 \fIcodi\fR
-d\*(Aqidioma (p\&. ex\&., \(Fode_DE\(Fc per a les traduccions en alemany)\&. Tot i que \('es preferible usar les variables d\*(Aqentorn
+d\*(Aqidioma (p\&. ex\&., \(Fode_DE\(Fc per a les traduccions en alemany)\&. Tot i que \('es preferible emprar les variables d\*(Aqentorn
 \fILANG\fR,
 \fILC_MESSAGES\fR
 i
 \fILC_ALL\fR\&. Introduint \(Folist\(Fc com a
-\fIcodi\fR, far\(`a que el
+\fIcodi\fR, es far\(`a que el
 \fBmkvextract\fR(1)
 ofereixi a la sortida una llista de les traduccions disponibles\&.
 .RE
@@ -310,7 +306,7 @@ Activa les caracter\('istiques experimentals\&. Es pot sol\(mdlicitar una llista
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especial que pot explicar\-vos el que est\(`a succeint per tal de controlar la IGU\&. Aquests missatges segueixen el format \(Fo#IGU#missatge\(Fc\&. El missatge pot estar seguit per parells clau/valor com a \(Fo#IGU#missatge#clau1=valor1#clau2=valor2\&...\(Fc\&. Ni els missatges ni les claus seran tradu\(:ides, sempre sortiran en angl\(`es\&.
+Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especial que pot explicar\-vos el que est\(`a succeint per tal de controlar la IGU\&. Aquests missatges segueixen el format \(Fo#IGU#missatge\(Fc\&. El missatge pot estar seguit per parells clau/valor com \(Fo#IGU#missatge#clau1=valor1#clau2=valor2\&...\(Fc\&. Ni els missatges ni les claus seran tradu\(:ides, sempre sortiran en angl\(`es\&.
 .RE
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
@@ -340,17 +336,17 @@ running_version), la versi\('o de l\*(Aq\('ultim llan\(,cament (clau
 available_version) i l\*(AqURL per a la baixada (clau
 download_url)\&.
 .sp
-Despr\('es el programa sortir\(`a amb un codi de sortida de 0 si no hi ha cap llan\(,cament m\('es recent disponible, amb 1 si hi ha disponible una nova versi\('o i amb 2 si s\*(Aqha produ\(:it un error (p\&. ex\&., si no s\*(Aqha pogut recuperar la informaci\('o sobre l\*(Aqactualitzaci\('o)\&.
+Despr\('es el programa sortir\(`a amb un codi de sortida de 0 si no hi ha cap llan\(,cament m\('es recent disponible, amb 1 si hi ha disponible una nova versi\('o i amb 2 si s\*(Aqha produ\(:it algun error (p\&. ex\&., si no s\*(Aqha pogut recuperar la informaci\('o sobre l\*(Aqactualitzaci\('o)\&.
 .sp
 Aquesta opci\('o nom\('es estar\(`a disponible si el programa va ser constru\(:it amb la implementaci\('o per a \(Folibcurl\(Fc\&.
 .RE
 .PP
 \fB@\fR\fIfitxer_opcions\fR
 .RS 4
-Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del fitxer
+Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del
 \fIfitxer_opcions\fR\&. Les l\('inies que tinguin com a primer car\(`acter un coixinet (#) seran tractades com a comentaris i ignorades\&. Els espais en blanc al comen\(,cament i final de la l\('inia seran descartats\&. Cada l\('inia haur\(`a de contenir exactament una opci\('o\&.
 .sp
-Es poden interpretar diversos car\(`acters com d\*(Aqescapament, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
+Es poden escapar diversos car\(`acters, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
 la secci\('o sobre escapar en el text\&.
 .sp
 La l\('inia d\*(Aqordres \(Fo\fBmkvpropedit origen\&.mkv \-\-edit track:a2 \-\-set name=Comentaris\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions:
@@ -473,7 +469,7 @@ Selecci\('o mitjan\(,cant l\*(AqID de l\*(Aqadjunt\&. D\*(Aqaquesta forma, el se
 .sp -1
 .IP "  2." 4.2
 .\}
-Selecci\('o mitjan\(,cant l\*(AqID de l\*(Aqadjunt (ID \('unic)\&. D\*(Aqaquesta forma, el selector \('es el signe
+Selecci\('o mitjan\(,cant l\*(AqUID de l\*(Aqadjunt (ID \('unic)\&. D\*(Aqaquesta forma, el selector \('es el signe
 =
 seguit per un n\('umero, l\*(AqID \('unic de l\*(Aqadjunt tal com surt amb l\*(Aqordre d\*(Aqidentificaci\('o del
 \fBmkvmerge\fR(1)\&.
@@ -538,7 +534,7 @@ $ mkvpropedit peli\&.mkv \-\-edit track:s1 \-\-set flag\-default=0 \-\-edit trac
 .RE
 .\}
 .PP
-Substituir les etiquetes per a la segona pista de subt\('itols en un arxiu es veu aix\('i:
+Substituir les etiquetes per a la segona pista de subt\('itols en un fitxer es veu aix\('i:
 .sp
 .if n \{\
 .RS 4
@@ -550,7 +546,7 @@ $ mkvpropedit peli\&.mkv \-\-tags track:s2:etiquetes_subt\('itols_noves\&.xml
 .RE
 .\}
 .PP
-Eliminar totes les etiquetes requereix ometre el nom del fitxer:
+Eliminar totes les etiquetes requereix ometre el nom del fitxer d\*(Aqetiquetes:
 .sp
 .if n \{\
 .RS 4
@@ -598,7 +594,7 @@ $ mkvpropedit peli\&.mkv \-\-add\-attachment Arial\&.ttf
 .RE
 .\}
 .PP
-Afegir un fitxer de tipus de lletra (89719823\&.ttf) com un adjunt i proporcionar alguna informaci\('o de com \('es el tipus de lletra Arial:
+Afegir un fitxer de tipus de lletra (89719823\&.ttf) com un adjunt i proporcionar alguna informaci\('o de com \('es aquest tipus de lletra:
 .sp
 .if n \{\
 .RS 4
@@ -622,7 +618,7 @@ $ mkvpropedit peli\&.mkv \-\-attachment\-name Arial\&.ttf \-\-attachment\-descri
 .RE
 .\}
 .PP
-Suprimeix el segon fitxer adjunt, sigui el que sigui:
+Suprimir el segon fitxer adjunt, sigui el que sigui:
 .sp
 .if n \{\
 .RS 4
@@ -634,7 +630,7 @@ $ mkvpropedit peli\&.mkv \-\-delete\-attachment 2
 .RE
 .\}
 .PP
-Suprimeix tots els tipus de lletra adjuntats segons el tipus MIME:
+Suprimir tots els tipus de lletra adjuntats segons el tipus MIME:
 .sp
 .if n \{\
 .RS 4
@@ -688,7 +684,7 @@ ha generat una sortida amb almenys un av\('is, per\(`o la modificaci\('o ha cont
 \fB2\fR
 \-\- Aquest codi de sortida s\*(Aqempra despr\('es de produir\-se un error\&. El
 \fBmkvpropedit\fR(1)
-interrompr\(`a el proc\('es just despr\('es de mostrar el missatge d\*(Aqerror\&. L\*(Aqinterval dels missatges d\*(Aqerror va des d\*(Aqarguments incorrectes a la l\('inia d\*(Aqordres fins a errors de lectura/escriptura als fitxers malmesos\&.
+interrompr\(`a el proc\('es just despr\('es de mostrar el missatge d\*(Aqerror\&. L\*(Aqinterval dels missatges d\*(Aqerror va des d\*(Aqarguments incorrectes a la l\('inia d\*(Aqordres fins a errors de lectura/escriptura en fitxers malmesos\&.
 .RE
 .SH "CONVERSI\('O PER A FITXERS DE TEXT I JOCS DE CAR\(`ACTERS"
 .PP
@@ -698,12 +694,12 @@ Per a un debat en profunditat sobre com manipula la suite MKVToolNix les convers
 .PP
 Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o s\*(Aqhagin d\*(Aqescapar\&. Les regles per a l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
 .PP
-Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
+Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes dobles) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
 .SH "VARIABLES D\*(AQENTORN"
 .PP
 El
 \fBmkvpropedit\fR(1)
-usa les variables per omissi\('o que es determinen a la configuraci\('o regional del sistema (p\&. ex\&.,
+empra les variables per omissi\('o que es determinen a la configuraci\('o regional del sistema (p\&. ex\&.,
 \fILANG\fR
 i la fam\('ilia
 \fILC_*\fR)\&. Variables addicionals:

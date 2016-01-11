@@ -48,7 +48,7 @@ fulls de muntatge (CUE sheets),
 codis de temps (timecodes)
 i
 \('indexs (cues)\&. El segon argument \('es el nom del fitxer d\*(Aqorigen\&. Aquest haur\(`a de ser un fitxer
-Matroska(TM)\&. La resta d\*(Aqarguments s\('on opcions i especificacions per a l\*(Aqextracci\('o \-ambd\('os depenen del mode seleccionat\-\&.
+Matroska(TM)\&. La resta d\*(Aqarguments s\('on opcions i especificacions per a l\*(Aqextracci\('o \-ambdues depenen del mode seleccionat\-\&.
 .SS "Opcions comunes"
 .PP
 Les seg\(:uents opcions estan disponibles en tots els modes i nom\('es es descriuran en aquesta secci\('o\&.
@@ -60,7 +60,7 @@ Estableix el mode d\*(Aqan\(`alisi a \(Fofull\(Fc (Completa)\&. El mode per omis
 .PP
 \fB\-\-command\-line\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters al qual convertir les cadenes donades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
+Estableix el joc de car\(`acters al qual convertir les cadenes indicades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
 .RE
 .PP
 \fB\-\-output\-charset\fR \fIjoc_de_car\(`acters\fR
@@ -70,9 +70,9 @@ Estableix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. 
 .PP
 \fB\-r\fR, \fB\-\-redirect\-output\fR \fInom_fitxer\fR
 .RS 4
-Escriu tots els missatges al fitxer
+Escriu tots els missatges al
 \fInom_fitxer\fR
-en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redirecci\('o de la sortida, hi ha casos en qu\(`e cal aquesta opci\('o: quan el terminal torna interpretar la sortida abans d\*(Aqescriure\-la a un fitxer\&. Es respectar\(`a el joc de car\(`acters establert amb
+en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redirecci\('o de la sortida, hi ha casos en que cal aquesta opci\('o: quan el terminal torna interpretar la sortida abans d\*(Aqescriure\-la a un fitxer\&. Es respectar\(`a el joc de car\(`acters establert amb
 \fB\-\-output\-charset\fR\&.
 .RE
 .PP
@@ -80,12 +80,12 @@ en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redir
 .RS 4
 For\(,ca l\*(Aq\('us de les traduccions pel
 \fIcodi\fR
-d\*(Aqidioma (p\&. ex\&., \(Fode_DE\(Fc per a les traduccions en alemany)\&. Tot i que \('es preferible usar les variables d\*(Aqentorn
+d\*(Aqidioma (p\&. ex\&., \(Fode_DE\(Fc per a les traduccions en alemany)\&. Tot i que \('es preferible emprar les variables d\*(Aqentorn
 \fILANG\fR,
 \fILC_MESSAGES\fR
 i
 \fILC_ALL\fR\&. Introduint \(Folist\(Fc com a
-\fIcodi\fR, far\(`a que el
+\fIcodi\fR, es far\(`a que el
 \fBmkvextract\fR(1)
 ofereixi a la sortida una llista de les traduccions disponibles\&.
 .RE
@@ -103,7 +103,7 @@ Activa les caracter\('istiques experimentals\&. Es pot sol\(mdlicitar una llista
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especial que pot explicar\-vos el que est\(`a succeint per tal de controlar la IGU\&. Aquests missatges segueixen el format \(Fo#IGU#missatge\(Fc\&. El missatge pot estar seguit per parells clau/valor com a \(Fo#IGU#missatge#clau1=valor1#clau2=valor2\&...\(Fc\&. Ni els missatges ni les claus seran tradu\(:ides, sempre sortiran en angl\(`es\&.
+Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especial que pot explicar\-vos el que est\(`a succeint per tal de controlar la IGU\&. Aquests missatges segueixen el format \(Fo#IGU#missatge\(Fc\&. El missatge pot estar seguit per parells clau/valor com \(Fo#IGU#missatge#clau1=valor1#clau2=valor2\&...\(Fc\&. Ni els missatges ni les claus seran tradu\(:ides, sempre sortiran en angl\(`es\&.
 .RE
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
@@ -133,17 +133,17 @@ running_version), la versi\('o de l\*(Aq\('ultim llan\(,cament (clau
 available_version) i l\*(AqURL per a la baixada (clau
 download_url)\&.
 .sp
-Despr\('es el programa sortir\(`a amb un codi de sortida de 0 si no hi ha cap llan\(,cament m\('es recent disponible, amb 1 si hi ha disponible una nova versi\('o i amb 2 si s\*(Aqha produ\(:it un error (p\&. ex\&., si no s\*(Aqha pogut recuperar la informaci\('o sobre l\*(Aqactualitzaci\('o)\&.
+Despr\('es el programa sortir\(`a amb un codi de sortida de 0 si no hi ha cap llan\(,cament m\('es recent disponible, amb 1 si hi ha disponible una nova versi\('o i amb 2 si s\*(Aqha produ\(:it algun error (p\&. ex\&., si no s\*(Aqha pogut recuperar la informaci\('o sobre l\*(Aqactualitzaci\('o)\&.
 .sp
 Aquesta opci\('o nom\('es estar\(`a disponible si el programa va ser constru\(:it amb la implementaci\('o per a \(Folibcurl\(Fc\&.
 .RE
 .PP
 \fB@\fR\fIfitxer_opcions\fR
 .RS 4
-Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del fitxer
+Llegeix arguments addicionals per a la l\('inia d\*(Aqordres des del
 \fIfitxer_opcions\fR\&. Les l\('inies que tinguin com a primer car\(`acter un coixinet (#) seran tractades com a comentaris i ignorades\&. Els espais en blanc al comen\(,cament i final de la l\('inia seran descartats\&. Cada l\('inia haur\(`a de contenir exactament una opci\('o\&.
 .sp
-Es poden interpretar diversos car\(`acters com d\*(Aqescapament, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
+Es poden escapar diversos car\(`acters, p\&. ex\&., si necessiteu que una l\('inia que comen\(,ca amb un coixinet \(Fo#\(Fc, no sigui interpretada com un comentari\&. Les regles es descriuen a
 la secci\('o sobre escapar en el text\&.
 .sp
 La l\('inia d\*(Aqordres \(Fo\fBmkvextract tracks origen\&.mkv \-\-raw 1:destinaci\('o\&.raw\fR\(Fc es pot convertir en el seg\(:uent fitxer d\*(Aqopcions:
@@ -166,13 +166,13 @@ origen\&.mkv
 .SS "Mode extracci\('o de la pista"
 .PP
 Sintaxi:
-\fBmkvextract \fR\fB\fBtracks\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR\fB \fR\fB\fITID1:nom_fitxer_destinaci\('o_1\fR\fR\fB \fR\fB[\fITID2:nom_fitxer_destinaci\('o_2\fR \&.\&.\&.]\fR
+\fBmkvextract \fR\fB\fBtracks\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR\fB \fR\fB\fITID1:nom_fitxer_destinaci\('o_1\fR\fR\fB \fR\fB[\fITID2:nom_fitxer_destinaci\('o_2\fR \(Fo\&.\&.\&.\(Fc]\fR
 .PP
 Hi ha disponibles les seg\(:uents opcions de l\('inia d\*(Aqordres per a cada pista en el mode d\*(Aqextracci\('o \(Fotracks\(Fc (pistes)\&. Hauran d\*(Aqapar\(`eixer al davant de l\*(Aqespecificaci\('o de la pista on s\*(Aqhagin d\*(Aqaplicar (veure a sota)\&.
 .PP
 \fB\-c\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters per a convertir el text de la seg\(:uent pista de subt\('itols\&. Nom\('es ser\(`a v\(`alida si l\*(Aqobjectiu de l\*(AqID de la seg\(:uent pista es correspon amb una pista de subt\('itols de text\&. Per omissi\('o s\*(Aqusa UTF\-8\&.
+Estableix el joc de car\(`acters per a convertir el text de la seg\(:uent pista de subt\('itols\&. Nom\('es ser\(`a v\(`alida si l\*(Aqobjectiu de l\*(AqID es correspon amb una pista de subt\('itols de text\&. Per omissi\('o s\*(Aqusa UTF\-8\&.
 .RE
 .PP
 \fB\-\-blockadd\fR \fInivell\fR
@@ -194,7 +194,7 @@ Extreu les dades en RAW a un fitxer sense contenidor\&. A difer\(`encia de l\*(A
 \fB\-\-fullraw\fR, aquesta etiqueta no causa que el contingut de l\*(Aqelement
 CodecPrivate
 s\*(Aqescrigui al fitxer\&. Aquest mode funciona amb tots els
-CodecIDs, fins i tot amb els que el
+CodecID, fins i tot amb els que el
 \fBmkvextract\fR(1)
 no permet, per\(`o els fitxers resultants podrien no ser usables\&.
 .RE
@@ -204,7 +204,7 @@ no permet, per\(`o els fitxers resultants podrien no ser usables\&.
 Extreu les dades en RAW a un fitxer sense contenidor\&. El contingut de l\*(Aqelement
 CodecPrivate
 s\*(Aqescriur\(`a en el primer fitxer si la pista cont\('e aquest element a la cap\(,calera\&. Aquest mode funciona amb tots els
-CodecIDs, fins i tot amb els que el
+CodecID, fins i tot amb els que el
 \fBmkvextract\fR(1)
 no permet, per\(`o els fitxers resultants podrien no ser usables\&.
 .RE
@@ -214,13 +214,12 @@ no permet, per\(`o els fitxers resultants podrien no ser usables\&.
 Causa l\*(Aqextracci\('o de la pista amb l\*(AqID
 \fITID\fR
 al fitxer
-\fInom_sortida\fR
-si aquesta pista existeix al fitxer d\*(Aqorigen\&. Aquesta opci\('o pot ser usada m\('ultiples vegades\&. Els ID de les pistes s\('on els mateixos que mostra el
+\fInom_sortida\fR, si aquesta pista existeix al fitxer d\*(Aqorigen\&. Aquesta opci\('o es pot emprar m\('ultiples vegades\&. Els ID de les pistes s\('on els mateixos que mostra el
 \fBmkvmerge\fR(1)
 amb l\*(Aqopci\('o
 \fB\-\-identify\fR\&.
 .sp
-Cada nom de sortida nom\('es s\*(Aqha d\*(Aqusar una vegada\&. L\*(Aq\('unica excepci\('o s\('on les pistes RealAudio i RealVideo\&. Si utilitzeu el mateix nom per a pistes diferents, llavors aquestes seran emmagatzemades en el mateix fitxer\&. Exemple:
+Cada nom de sortida nom\('es s\*(Aqha d\*(Aqemprar una vegada\&. L\*(Aq\('unica excepci\('o s\('on les pistes RealAudio i RealVideo\&. Si empreu el mateix nom per a pistes diferents, llavors aquestes seran emmagatzemades en el mateix fitxer\&. Exemple:
 .sp
 .if n \{\
 .RS 4
@@ -237,23 +236,22 @@ $ mkvextract tracks entrada\&.mkv 1:sortida_dos_pistes\&.rm 2:sortida_dos_pistes
 Sintaxi:
 \fBmkvextract \fR\fB\fBtags\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR
 .PP
-Les etiquetes extretes s\*(Aqescriuran a la consola a menys que la sortida sigui redirigida (per a m\('es detalls vegeu la secci\('o sobre
-redirecci\('o de la sortida)\&.
+Les etiquetes extretes s\*(Aqescriuran a la consola a menys que la sortida sigui redirigida (per a m\('es detalls, vegeu la secci\('o sobre
+la redirecci\('o de la sortida)\&.
 .SS "Mode extracci\('o dels adjunts"
 .PP
 Sintaxi:
-\fBmkvextract \fR\fB\fBattachments\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR\fB \fR\fB\fIAID1:nom_sortida_1\fR\fR\fB \fR\fB[\fIAID2:nom_sortida_2\fR \&.\&.\&.]\fR
+\fBmkvextract \fR\fB\fBattachments\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR\fB \fR\fB\fIAID1:nom_sortida_1\fR\fR\fB \fR\fB[\fIAID2:nom_sortida_2\fR \(Fo\&.\&.\&.\(Fc]\fR
 .PP
 \fIAID\fR:\fInom_sortida\fR
 .RS 4
 Causa l\*(Aqextracci\('o de l\*(Aqadjunt amb l\*(AqID
 \fIAID\fR
 al fitxer
-\fInom_sortida\fR, si aquest adjunt existeix al fitxer d\*(Aqorigen\&. Si
-\fInom_sortida\fR
-es deixa buit, llavors s\*(Aqusar\(`a el nom de l\*(Aqadjunt al fitxer
+\fInom_sortida\fR, si aquest adjunt existeix al fitxer d\*(Aqorigen\&. Si es deixa buit el
+\fInom_sortida\fR, llavors s\*(Aqemprar\(`a el nom de l\*(Aqadjunt al fitxer
 Matroska(TM)
-d\*(Aqorigen\&. Aquesta opci\('o es pot usar m\('ultiples vegades\&. Els ID dels adjunts s\('on els mateixos que mostra el
+d\*(Aqorigen\&. Aquesta opci\('o es pot emprar m\('ultiples vegades\&. Els ID dels adjunts s\('on els mateixos que mostra el
 \fBmkvmerge\fR(1)
 amb l\*(Aqopci\('o
 \fB\-\-identify\fR\&.
@@ -265,36 +263,35 @@ Sintaxi:
 .PP
 \fB\-s\fR, \fB\-\-simple\fR
 .RS 4
-Exporta la informaci\('o dels cap\('itols en un format simple, usat en les eines
+Exporta la informaci\('o dels cap\('itols en un format simple, emprat en les eines
 OGM
 (CHAPTER01=\(Fo\&.\&.\&.\(Fc, CHAPTER01NAME=\(Fo\&.\&.\&.\(Fc)\&. En aquest mode es descartar\(`a alguna informaci\('o\&. Per omissi\('o la sortida dels cap\('itols ser\(`a en el format
 XML\&.
 .RE
 .PP
-Els cap\('itols extrets s\*(Aqescriuran a la consola a menys que la sortida sigui redirigida (per a m\('es detalls vegeu la secci\('o sobre
-redirecci\('o de la sortida)\&.
+Els cap\('itols extrets s\*(Aqescriuran a la consola a menys que la sortida sigui redirigida (per a m\('es detalls, vegeu la secci\('o sobre
+la redirecci\('o de la sortida)\&.
 .SS "Mode extracci\('o del full de muntatge"
 .PP
 Sintaxi:
 \fBmkvextract \fR\fB\fBcuesheet\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR
 .PP
-Els fulls de muntatge extrets s\*(Aqescriuran a la consola a menys que la sortida sigui redirigida (per a m\('es detalls vegeu la secci\('o sobre
-redirecci\('o de la sortida)\&.
+Els fulls de muntatge extrets s\*(Aqescriuran a la consola a menys que la sortida sigui redirigida (per a m\('es detalls, vegeu la secci\('o sobre
+la redirecci\('o de la sortida)\&.
 .SS "Mode extracci\('o del codi de temps"
 .PP
 Sintaxi:
-\fBmkvextract \fR\fB\fBtimecodes_v2\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR\fB \fR\fB\fITID1:nom_fitxer_destinaci\('o_1\fR\fR\fB \fR\fB[\fITID2:nom_fitxer_destinaci\('o_2\fR \&.\&.\&.]\fR
+\fBmkvextract \fR\fB\fBtimecodes_v2\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR\fB \fR\fB\fITID1:nom_fitxer_destinaci\('o_1\fR\fR\fB \fR\fB[\fITID2:nom_fitxer_destinaci\('o_2\fR \(Fo\&.\&.\&.\(Fc]\fR
 .PP
-Els codis de temps extrets s\*(Aqescriuran a la consola a menys que la sortida sigui redirigida (per a m\('es detalls vegeu la secci\('o sobre
-redirecci\('o de la sortida)\&.
+Els codis de temps extrets s\*(Aqescriuran a la consola a menys que la sortida sigui redirigida (per a m\('es detalls, vegeu la secci\('o sobre
+la redirecci\('o de la sortida)\&.
 .PP
 \fITID:nom_sortida\fR
 .RS 4
 Causa l\*(Aqextracci\('o dels codis de temps per a la pista amb l\*(AqID
 \fITID\fR
 al fitxer
-\fInom_sortida\fR
-si aquesta pista existeix al fitxer d\*(Aqorigen\&. Aquesta opci\('o pot ser usada m\('ultiples vegades\&. Els ID de les pistes s\('on els mateixos que mostra el
+\fInom_sortida\fR, si aquesta pista existeix al fitxer d\*(Aqorigen\&. Aquesta opci\('o es pot emprar m\('ultiples vegades\&. Els ID de les pistes s\('on els mateixos que mostra el
 \fBmkvmerge\fR(1)
 amb l\*(Aqopci\('o
 \fB\-\-identify\fR\&.
@@ -314,15 +311,14 @@ $ mkvextract timecodes_v2 entrada\&.mkv 1:ct_pista_1\&.txt 2:ct_pista_2\&.txt
 .SS "Mode extracci\('o dels \('indexs"
 .PP
 Sintaxi:
-\fBmkvextract \fR\fB\fBcues\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR\fB \fR\fB\fITID1:nom_fitxer_destinaci\('o_1\fR\fR\fB \fR\fB[\fITID2:nom_fitxer_destinaci\('o_2\fR \&.\&.\&.]\fR
+\fBmkvextract \fR\fB\fBcues\fR\fR\fB \fR\fB\fInom_fitxer_origen\fR\fR\fB \fR\fB[\fIopcions\fR]\fR\fB \fR\fB\fITID1:nom_fitxer_destinaci\('o_1\fR\fR\fB \fR\fB[\fITID2:nom_fitxer_destinaci\('o_2\fR \(Fo\&.\&.\&.\(Fc]\fR
 .PP
 \fITID:nom_fitxer_destinaci\('o\fR
 .RS 4
 Causa l\*(Aqextracci\('o dels \('indexs per a la pista amb l\*(AqID
 \fITID\fR
 al fitxer
-\fInom_sortida\fR
-si aquesta pista existeix al fitxer d\*(Aqorigen\&. Aquesta opci\('o pot ser usada m\('ultiples vegades\&. Els ID de les pistes s\('on els mateixos que mostra el
+\fInom_sortida\fR, si aquesta pista existeix al fitxer d\*(Aqorigen\&. Aquesta opci\('o es pot emprar m\('ultiples vegades\&. Els ID de les pistes s\('on els mateixos que mostra el
 \fBmkvmerge\fR(1)
 amb l\*(Aqopci\('o
 \fB\-\-identify\fR
@@ -355,7 +351,7 @@ Les claus possibles s\('on:
 timecode
 .RS 4
 El codi de temps del punt de l\*(Aq\('index amb una precisi\('o de nanosegons\&. El format \('es
-HH:MM:SS\&.nnnnnnnnn\&. Aquest element sempre s\*(Aqestablir\(`a\&.
+HH:MM:SS\&.nnnnnnnnn\&. Aquest element s\*(Aqestablir\(`a sempre\&.
 .RE
 .PP
 duration
@@ -367,8 +363,7 @@ HH:MM:SS\&.nnnnnnnnn\&.
 cluster_position
 .RS 4
 La posici\('o absoluta en bytes dins del fitxer
-Matroska(TM)
-on comen\(,ca el cl\('uster que cont\('e l\*(Aqelement de refer\(`encia\&.
+Matroska(TM), on comen\(,ca el cl\('uster que cont\('e l\*(Aqelement de refer\(`encia\&.
 .if n \{\
 .sp
 .\}
@@ -384,7 +379,7 @@ on comen\(,ca el cl\('uster que cont\('e l\*(Aqelement de refer\(`encia\&.
 Dins el fitxer
 Matroska(TM), el
 CueClusterPosition
-es refereix a la compensaci\('o de les dades a l\*(Aqinici del segment\&. El valor de la sortida \('es donat pel mode d\*(Aqextracci\('o de l\*(Aq\('index del
+es refereix a la compensaci\('o a l\*(Aqinici de les dades del segment\&. El valor de la sortida \('es donat pel mode d\*(Aqextracci\('o de l\*(Aq\('index del
 \fBmkvextract\fR(1), per\(`o ja cont\('e aquesta compensaci\('o, la qual \('es absoluta a partir del comen\(,cament del fitxer\&.
 .sp .5v
 .RE
@@ -412,7 +407,7 @@ SimpleBlock
 Dins del fitxer
 Matroska(TM), el
 CueRelativePosition
-es refereix a la compensaci\('o de les dades a l\*(Aqinici del cl\('uster\&. El valor de sortida ser\(`a donat pel mode d\*(Aqextracci\('o de l\*(Aq\('index del
+es refereix a la compensaci\('o a l\*(Aqinici de les dades del cl\('uster\&. El valor de sortida ser\(`a donat pel mode d\*(Aqextracci\('o de l\*(Aq\('index del
 \fBmkvextract\fR(1), per\(`o \('es relatiu a l\*(AqID del cl\('uster\&. La posici\('o absoluta dins del fitxer es pot calcular afegint
 cluster_position
 i
@@ -439,7 +434,7 @@ Diversos modes d\*(Aqextracci\('o provoquen que el
 escrigui la informaci\('o extreta a la consola\&. En general, hi ha dos modes d\*(Aqescriure aquesta informaci\('o a un fitxer: un proporcionat per l\*(Aqinterpret d\*(Aqordres i un altre pel
 \fBmkvextract\fR(1)\&.
 .PP
-El mecanisme de redirecci\('o intern de l\*(Aqinterpret d\*(Aqordres \('es emprat amb \(Fo> nom_fitxer_sortida\&.ext\(Fc a la L\('inia d\*(Aqordres\&. Exemple:
+El mecanisme de redirecci\('o intern de l\*(Aqinterpret d\*(Aqordres \('es emprat amb \(Fo> nom_fitxer_sortida\&.ext\(Fc a la l\('inia d\*(Aqordres\&. Exemple:
 .sp
 .if n \{\
 .RS 4
@@ -478,7 +473,7 @@ $ mkvextract tags origen\&.mkv \-\-redirect\-output etiquetes\&.xml
 .ps -1
 .br
 .PP
-En Windows possiblement necessitareu utilitzar l\*(Aqopci\('o
+En Windows possiblement necessitareu emprar l\*(Aqopci\('o
 \fB\-\-redirect\-output\fR, perqu\(`e
 \fBcmd\&.exe\fR
 a vegades interpreta els car\(`acters especials abans que s\*(Aqescriguin al fitxer de sortida, resultant en una sortida malmesa\&.
@@ -576,7 +571,7 @@ amb cap\(,caleres
 ADTS
 abans de cada paquet\&. Les cap\(,caleres
 ADTS
-no contindran l\*(Aqobsolet camp d\*(Aq\(Fo\(`emfasi\(Fc\&.
+no contindran l\*(Aqobsolet camp d\*(Aq\(`emfasi\&.
 .RE
 .PP
 A_VORBIS
@@ -765,12 +760,12 @@ interrompr\(`a el proc\('es just despr\('es de mostrar el missatge d\*(Aqerror\&
 .PP
 Hi ha pocs llocs en els quals els car\(`acters especials en el text puguin o s\*(Aqhagin d\*(Aqescapar\&. Les regles per a l\*(Aqescapament s\('on simples: cada car\(`acter que necessiti ser escapat ser\(`a substitu\(:it amb una barra invertida seguida d\*(Aqun altre car\(`acter\&.
 .PP
-Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
+Les regles s\('on: \(Fo \(Fc (un espai) ser\(`a \(Fo\es\(Fc, \(Fo"\(Fc (cometes dobles) ser\(`a \(Fo\e2\(Fc, \(Fo:\(Fc ser\(`a \(Fo\ec\(Fc, \(Fo#\(Fc ser\(`a \(Fo\eh\(Fc i \(Fo\e\(Fc (una \('unica barra invertida) ser\(`a \(Fo\e\e\(Fc\&.
 .SH "VARIABLES D\*(AQENTORN"
 .PP
 El
 \fBmkvextract\fR(1)
-usa les variables per omissi\('o que es determinen a la configuraci\('o regional del sistema (p\&. ex\&.,
+empra les variables per omissi\('o que es determinen a la configuraci\('o regional del sistema (p\&. ex\&.,
 \fILANG\fR
 i la fam\('ilia
 \fILC_*\fR)\&. Variables addicionals:
