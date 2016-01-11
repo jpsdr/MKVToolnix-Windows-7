@@ -1,7 +1,7 @@
 '\" t
 .\"     Title: mkvmerge
 .\"    Author: Moritz Bunkus <moritz@bunkus.org>
-.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2016-01-10
 .\"    Manual: 用户命令
 .\"    Source: MKVToolNix 8.8.0
@@ -351,7 +351,8 @@ from writing those tags and from touching any existing tags with same names\&.
 按尺寸切割。
 .sp
 语法:
-\fB\-\-split\fR[size:]\fId\fR[k|m|g]
+\fB\-\-split\fR
+[size:]\fId\fR[k|m|g]
 .sp
 示例:
 \-\-split size:700m
@@ -376,7 +377,8 @@ from writing those tags and from touching any existing tags with same names\&.
 在一定时长后切割。
 .sp
 语法:
-\fB\-\-split\fR[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
+\fB\-\-split\fR
+[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
 .sp
 示例:
 \-\-split duration:00:60:00\&.000
@@ -406,7 +408,8 @@ from writing those tags and from touching any existing tags with same names\&.
 在指定时间码后切割。
 .sp
 语法:
-\fB\-\-split\fRtimecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+timecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 示例:
 \-\-split timecodes:00:45:00\&.000,01:20:00\&.250,6300s
@@ -429,7 +432,8 @@ from writing those tags and from touching any existing tags with same names\&.
 通过指定时间码范围，保留特定部分，并丢弃其余部分。
 .sp
 语法:
-\fB\-\-split\fRparts:\fI起点1\fR\-\fI终点1\fR[,[+]\fI起点3\fR\-\fI终点2\fR[,[+]\fI起点3\fR\-\fI终点3\fR\&.\&.\&.]]
+\fB\-\-split\fR
+parts:\fI起点1\fR\-\fI终点1\fR[,[+]\fI起点3\fR\-\fI终点2\fR[,[+]\fI起点3\fR\-\fI终点3\fR\&.\&.\&.]]
 .sp
 示例:
 .sp
@@ -552,7 +556,8 @@ parts:
 通过指定帧/场序号范围，保留特定部分，并丢弃其余部分。
 .sp
 语法:
-\fB\-\-split\fRparts\-frames:\fI起点1\fR\-\fI终点1\fR[,[+]\fI起点2\fR\-\fI终点2\fR[,[+]\fI起点3\fR\-\fI终点3\fR\&.\&.\&.]]
+\fB\-\-split\fR
+parts\-frames:\fI起点1\fR\-\fI终点1\fR[,[+]\fI起点2\fR\-\fI终点2\fR[,[+]\fI起点3\fR\-\fI终点3\fR\&.\&.\&.]]
 .sp
 示例:
 .sp
@@ -691,7 +696,8 @@ Matroska(TM)
 在指定帧/场后切割。
 .sp
 语法:
-\fB\-\-split\fRframes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+frames:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 示例:
 \-\-split frames:120,237,891
@@ -737,9 +743,11 @@ Matroska(TM)
 在指定章节之前切割。
 .sp
 语法:
-\fB\-\-split\fRchapters:all
+\fB\-\-split\fR
+chapters:all
 or
-\fB\-\-split\fRchapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+chapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 示例:
 \-\-split chapters:5,8
@@ -1266,7 +1274,8 @@ HE\-AAC
 或
 AAC+)。下述情况下需要此选项：a) 源文件是
 AAC
-文件 (\fI不是\fRMatroska(TM)
+文件 (\fI不是\fR
+Matroska(TM)
 文件) 且 b) 该
 AAC
 文件含有
@@ -1491,7 +1500,7 @@ Matroska(TM)
 探查单个文件并报告其类型、文件中包含的轨道及其轨道 ID。如果使用了本选项，唯一可用的其他选项就是文件名。
 .sp
 The output format used for the result can be changed with the option
---identification-format\&.
+\-\-identification\-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fI文件名\fR
@@ -1526,7 +1535,7 @@ format is short and human\-readable\&. It consists of one line per item found (c
 This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
 uses (see also
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -1550,7 +1559,7 @@ format with additional properties for each item\&. The extra information is surr
 This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
 uses (see also
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -2604,7 +2613,8 @@ CHAPTER03NAME=宝宝摇屋子
 .PP
 \fBmkvmerge\fR(1)
 将转换每两行为一个
-Matroska(TM)章节单位（ChapterAtom）。这种情况不会设定任何
+Matroska(TM)
+章节单位（ChapterAtom）。这种情况不会设定任何
 章节轨道号（ChapterTrackNumber），也就是说所有章节被应用到文件的所有轨道。
 .PP
 由于是文本文件，可能需要进行字符集转换。关于
@@ -2769,9 +2779,11 @@ Matroska(TM)
 有这方面的更多详情。
 .PP
 重要的一点是标签通过
-TargetsMatroska(TM)
+Targets
+Matroska(TM)
 标签元素与轨道或章节相连，而用于此链接的 UID
-\fI并非\fR\fBmkvmerge\fR(1)
+\fI并非\fR
+\fBmkvmerge\fR(1)
 常用的轨道 ID。而是
 \fBmkvmerge\fR(1)
 自动计算而来 (当轨道来自非
@@ -2851,7 +2863,8 @@ example\-tags\-2\&.xml
 .IP \(bu 2.3
 .\}
 实际意义上的标签放在
-<Tag>XML
+<Tag>
+XML
 标签对中。
 .RE
 .sp
@@ -2933,9 +2946,9 @@ Matroska(TM)
 文件 "剪辑信息" 头部字段的特定值。所有这些值都无法通过其他命令行选项设置。
 .PP
 还有一些 "剪辑信息" 头部字段可以通过命令行选项设置，而非通过 XML 文件。包括如
-\fB--title\fR
+\fB\-\-title\fR
 及
-\fB--timecode-scale\fR
+\fB\-\-timecode\-scale\fR
 选项。
 .PP
 还有其他元素既不能通过命令行选项，也不能通过 XML 文件设置。这些包括下述元素:

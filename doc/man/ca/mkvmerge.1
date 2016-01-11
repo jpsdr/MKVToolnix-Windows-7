@@ -1,7 +1,7 @@
 '\" t
 .\"     Title: mkvmerge
 .\"    Author: Bunkus, Moritz <moritz@bunkus.org>
-.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2016-01-10
 .\"    Manual: Ordres d\*(Aqusuari
 .\"    Source: MKVToolNix 8.8.0
@@ -51,7 +51,7 @@ Matroska(TM); vegeu
 .br
 .PP
 L\*(Aqordre de les opcions a la l\('inia d\*(Aqordres \('es important\&. Si us plau, si sou novell emprant aquest programa, llegiu la secci\('o
-\(FoL'ordre de les opcions\(Fc\&.
+\(FoL\*(Aqordre de les opcions\(Fc\&.
 .sp .5v
 .RE
 .SS "Opcions globals"
@@ -105,7 +105,7 @@ DTD
 d\*(Aqexemple estan inclosos en la distribuci\('o de les MKVToolNix\&.
 .sp
 Per a m\('es detalls, vegeu m\('es endavant la secci\('o sobre
-els fitxers XML d'informaci\('o del segment\&.
+els fitxers XML d\*(Aqinformaci\('o del segment\&.
 .RE
 .PP
 \fB\-\-segment\-uid\fR \fISID1,SID2\&.\&.\&.\fR
@@ -350,7 +350,8 @@ admet quatre modes diferents\&.
 Divisi\('o per la mida\&.
 .sp
 Sintaxi:
-\fB\-\-split\fR[size:]\fId\fR[k|m|g]
+\fB\-\-split\fR
+[size:]\fId\fR[k|m|g]
 .sp
 Exemples:
 \-\-split size:700m
@@ -375,7 +376,8 @@ El prefix \(Fosize:\(Fc es pot ometre per motius de compatibilitat\&.
 Divisi\('o despr\('es d\*(Aquna durada\&.
 .sp
 Sintaxi:
-\fB\-\-split\fR[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
+\fB\-\-split\fR
+[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
 .sp
 Exemples:
 \-\-split duration:00:60:00\&.000
@@ -410,7 +412,8 @@ El prefix \(Foduration:\(Fc es pot ometre per motius de compatibilitat\&.
 Divisi\('o despr\('es d\*(Aquns codis de temps espec\('ifics\&.
 .sp
 Sintaxi:
-\fB\-\-split\fRtimecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+timecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Exemple:
 \-\-split timecodes:00:45:00\&.000,01:20:00\&.250,6300s
@@ -434,7 +437,8 @@ El prefix \(Fotimecodes:\(Fc no es pot ometre\&.
 Mant\('e les parts especifiques pels intervals de codis de temps especificats mentre que les altres seran descartades\&.
 .sp
 Sintaxi:
-\fB\-\-split\fRparts:\fIinici_1\fR\-\fIfinal_1\fR[,[+]\fIinici_2\fR\-\fIfinal_2\fR[,[+]\fIinici_3\fR\-\fIfinal_3\fR\&.\&.\&.]]
+\fB\-\-split\fR
+parts:\fIinici_1\fR\-\fIfinal_1\fR[,[+]\fIinici_2\fR\-\fIfinal_2\fR[,[+]\fIinici_3\fR\-\fIfinal_3\fR\&.\&.\&.]]
 .sp
 Exemples:
 .sp
@@ -556,7 +560,8 @@ continuar\(`a amb la sortida dels fotogrames fins al final per\(`o excloent el s
 Mant\('e les parts especificades pels intervals del n\('umero de fotograma/camp especificats mentre que les altres seran descartades\&.
 .sp
 Sintaxi:
-\fB\-\-split\fRparts\-frames:\fIinici_1\fR\-\fIfinal_1\fR[,[+]\fIinici_2\fR\-\fIfinal_2\fR[,[+]\fIinici_3\fR\-\fIfinal_3\fR\&.\&.\&.]]
+\fB\-\-split\fR
+parts\-frames:\fIinici_1\fR\-\fIfinal_1\fR[,[+]\fIinici_2\fR\-\fIfinal_2\fR[,[+]\fIinici_3\fR\-\fIfinal_3\fR\&.\&.\&.]]
 .sp
 Exemples:
 .sp
@@ -696,7 +701,8 @@ no fa distincions entre els dos i nom\('es compta el nombre de blocs\&. Per exem
 Divisi\('o despr\('es d\*(Aquns fotogrames/camps espec\('ifics\&.
 .sp
 Sintaxi:
-\fB\-\-split\fRframes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+frames:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Exemple:
 \-\-split frames:120,237,891
@@ -745,9 +751,11 @@ no fa distincions entre els dos i nom\('es compta el nombre de blocs\&. Per exem
 Dividir abans de cap\('itols espec\('ifics\&.
 .sp
 Sintaxi:
-\fB\-\-split\fRchapters:all
+\fB\-\-split\fR
+chapters:all
 o
-\fB\-\-split\fRchapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+chapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Exemple:
 \-\-split chapters:5,8
@@ -1460,7 +1468,7 @@ Li permetr\(`a al
 sondejar el fitxer i informar el seu tipus, les pistes que cont\('e i els ID de les pistes\&. Si s\*(Aqusa aquesta opci\('o, llavors l\*(Aq\('unica opci\('o permesa ser\(`a el nom_fitxer\&.
 .sp
 El format emprat a la sortida es pot canviar amb l\*(Aqopci\('o
---identification-format\&.
+\-\-identification\-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fInom_fitxer\fR
@@ -1495,7 +1503,7 @@ text
 Aquest format no est\(`a destinat a ser analitzat\&. La sortida ser\(`a tradu\(:ida a l\*(Aqidioma que empra el
 \fBmkvmerge\fR(1)
 (vegeu tamb\('e
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -1518,7 +1526,7 @@ la secci\('o sobre escapar car\(`acters especials en el text\&.
 Aquest format no est\(`a destinat a ser analitzat\&. La sortida ser\(`a tradu\(:ida a l\*(Aqidioma que empra el
 \fBmkvmerge\fR(1)
 (vegeu tamb\('e
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -1616,7 +1624,7 @@ Activa el mode IGU\&. En aquest mode, les l\('inies surten amb un format especia
 .RS 4
 Llegeix els arguments addicionals per a la l\('inia d\*(Aqordres des del fitxer
 \fIfitxer_d_opcions\fR\&. Per a m\('es informaci\('o, vegeu la secci\('o sobre
-Fitxers d'opcions\&.
+Fitxers d\*(Aqopcions\&.
 .RE
 .PP
 \fB\-\-capabilities\fR
@@ -1713,10 +1721,10 @@ s\*(Aqobtindr\(`a una llista dels formats coneguts (i implementats)\&.
 .br
 .PP
 L\*(Aqordre de les opcions a la l\('inia d\*(Aqordres \('es important\&. Si us plau, si sou novell emprant aquest programa, llegiu la secci\('o
-\(FoL'ordre de les opcions\(Fc\&.
+\(FoL\*(Aqordre de les opcions\(Fc\&.
 .sp .5v
 .RE
-.SH "L'ORDRE DE LES OPCIONS"
+.SH "L\*(AQORDRE DE LES OPCIONS"
 .PP
 L\*(Aqordre en el que s\*(Aqespecifiquen les opcions \('es important per a algunes opcions\&. Les opcions es divideixen en dues categories:
 .sp
@@ -1883,7 +1891,8 @@ Algunes pel\(mdl\('icules comencen sincronitzades correctament per\(`o a poc a p
 segons de desincronitzaci\('o al final de la pel\(mdl\('icula, la longitud \('es de
 \fB77340\fR
 fotogrames\&. A
-\fB29\&.97fps\fR\fB0\&.2\fR
+\fB29\&.97fps\fR
+\fB0\&.2\fR
 segons corresponen aproximadament
 \fB6\fR
 fotogrames\&. De manera que podeu fer:
@@ -2289,7 +2298,7 @@ com amb
 \fBcmd\&.exe\fR, p\&. ex\&.,
 mkvinfo fitxer\&.mkv > informaci\('o\&.txt\&.
 .RE
-.SH "FITXERS D'OPCIONS"
+.SH "FITXERS D\*(AQOPCIONS"
 .PP
 Un fitxer d\*(Aqopcions \('es un fitxer des d\*(Aqon el
 \fBmkvmerge\fR(1)
@@ -2866,15 +2875,15 @@ Tags (master)
 .if n \{\
 .RE
 .\}
-.SH "ELS FITXERS XML D'INFORMACI\('O DEL SEGMENT"
+.SH "ELS FITXERS XML D\*(AQINFORMACI\('O DEL SEGMENT"
 .PP
 Amb un fitxer en XML amb informaci\('o dels segments \('es possible establir certs valors en el camp de la cap\(,calera "segment information" d\*(Aqun fitxer
 Matroska(TM)\&. Tots aquests valors no es poden establir a trav\('es d\*(Aqaltres opcions de la l\('inia d\*(Aqordres\&.
 .PP
 Es poden establir altres camps de la cap\(,calera "segment information" a trav\('es de les opcions de la l\('inia d\*(Aqordres per\(`o no mitjan\(,cant el fitxer XML\&. Aix\(`o inclou, p\&. ex\&., les opcions
-\fB--title\fR
+\fB\-\-title\fR
 i
-\fB--timecode-scale\fR\&.
+\fB\-\-timecode\-scale\fR\&.
 .PP
 Hi ha altres elements que no es poden establir a trav\('es de la l\('inia d\*(Aqordres ni mitjan\(,cant els fitxers XML\&. Aix\(`o inclou els seg\(:uents elements:
 \fIDateUTC\fR
@@ -3084,7 +3093,7 @@ ha generat una sortida amb almenys un av\('is, per\(`o el multiplexat ha continu
 \fBmkvmerge\fR(1)
 interrompr\(`a el proc\('es just despr\('es de mostrar el missatge d\*(Aqerror\&. L\*(Aqinterval dels missatges d\*(Aqerror va des d\*(Aqarguments incorrectes a la l\('inia d\*(Aqordres fins a errors de lectura/escriptura en fitxers malmesos\&.
 .RE
-.SH "VARIABLES D'ENTORN"
+.SH "VARIABLES D\*(AQENTORN"
 .PP
 El
 \fBmkvmerge\fR(1)

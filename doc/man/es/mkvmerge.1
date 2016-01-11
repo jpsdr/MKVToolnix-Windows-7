@@ -1,7 +1,7 @@
 '\" t
 .\"     Title: mkvmerge
 .\"    Author: Moritz Bunkus <moritz@bunkus.org>
-.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2016-01-10
 .\"    Manual: Comandos de usuario
 .\"    Source: MKVToolNix 8.8.0
@@ -360,7 +360,8 @@ admite cuatro modos diferentes\&.
 Divisi\('on por tama\(~no\&.
 .sp
 Sintaxis:
-\fB\-\-split\fR[size:]\fId\fR[k|m|g]
+\fB\-\-split\fR
+[size:]\fId\fR[k|m|g]
 .sp
 Ejemplos:
 \-\-split size:700m
@@ -383,7 +384,8 @@ El prefijo \*(Aqsize:\*(Aq se puede omitir por motivos de compatibilidad\&.
 Divisi\('on por duraci\('on\&.
 .sp
 Sintaxis:
-\fB\-\-split\fR[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
+\fB\-\-split\fR
+[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
 .sp
 Ejemplos:
 \-\-split duration:00:60:00\&.000
@@ -418,7 +420,8 @@ El prefijo \*(Aqduration:\*(Aq puede ser omitido por motivos de compatibilidad\&
 Divisi\('on por c\('odigos de tiempo\&.
 .sp
 Sintaxis:
-\fB\-\-split\fRtimecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+timecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Ejemplo:
 \-\-split timecodes:00:45:00\&.000,01:20:00\&.250,6300s
@@ -442,7 +445,8 @@ El prefijo \*(Aqtimecodes:\*(Aq no puede ser omitido\&.
 Conservar las partes especificadas por los rangos de c\('odigos de tiempo especificados mientras que las otras que son descartadas\&.
 .sp
 Sintaxis:
-\fB\-\-split\fRparts:\fIinicio1\fR\-\fIfin1\fR[,[+]\fIinicio2\fR\-\fIfin2\fR[,[+]\fIinicio3\fR\-\fIfin3\fR\&.\&.\&.]]
+\fB\-\-split\fR
+parts:\fIinicio1\fR\-\fIfin1\fR[,[+]\fIinicio2\fR\-\fIfin2\fR[,[+]\fIinicio3\fR\-\fIfin3\fR\&.\&.\&.]]
 .sp
 Ejemplos:
 .sp
@@ -563,7 +567,8 @@ continuar\('a el procesamiento de los fotogramas hasta el final pero excluir\('a
 Conservar partes concretas especificando rangos num\('ericos de fotogramas/campos mientras se descartan otros\&.
 .sp
 Sintaxis:
-\fB\-\-split\fRparts\-frames:\fIinicio1\fR\-\fIfin1\fR[,[+]\fIinicio2\fR\-\fIfin2\fR[,[+]\fIinicio3\fR\-\fIfin3\fR\&.\&.\&.]]
+\fB\-\-split\fR
+parts\-frames:\fIinicio1\fR\-\fIfin1\fR[,[+]\fIinicio2\fR\-\fIfin2\fR[,[+]\fIinicio3\fR\-\fIfin3\fR\&.\&.\&.]]
 .sp
 Ejemplos:
 .sp
@@ -701,7 +706,8 @@ contiene un fotograma completo (material progresivo) o s\('olo un campo(material
 Divisi\('on despu\('es fotogramas/campos espec\('ificos\&.
 .sp
 Sintaxis:
-\fB\-\-split\fRframes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+frames:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Ejemplo:
 \-\-split frames:120,237,891
@@ -748,9 +754,11 @@ contiene un fotograma completo (material progresivo) o s\('olo un campo(material
 Divisi\('on antes de cap\('itulos espec\('ificos\&.
 .sp
 Sintaxis:
-\fB\-\-split\fRchapters:all
+\fB\-\-split\fR
+chapters:all
 o
-\fB\-\-split\fRchapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+chapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Ejemplo:
 \-\-split chapters:5,8
@@ -1479,7 +1487,7 @@ Le permitir\('a a
 analizar el archivo e informar de qu\('e tipo es, las pistas que contiene y los IDs de pista\&. Si se usa esta opci\('on entonces la unica opci\('on permitida es el nombre\-archivo\&.
 .sp
 The output format used for the result can be changed with the option
---identification-format\&.
+\-\-identification\-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fInombre\-archivo\fR
@@ -1514,7 +1522,7 @@ format is short and human\-readable\&. It consists of one line per item found (c
 This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
 uses (see also
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -1537,7 +1545,7 @@ la secci\('on acerca de caracteres especiales de escape en el texto\&.
 This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
 uses (see also
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -2893,9 +2901,9 @@ Con archivos XML de informaci\('on del segmento es posible establecer ciertos va
 Matroska(TM)\&. Todos estos valores no se pueden establecer a trav\('es de otras opciones de la l\('inea de comandos\&.
 .PP
 Otros campos del encabezado de "informaci\('on del segmento" se pueden establecer a trav\('es de las opciones de la l\('inea de comandos pero no mediante archivos XML\&. Eso afecta p\&.e\&. las opciones
-\fB--title\fR
+\fB\-\-title\fR
 y
-\fB--timecode-scale\fR\&.
+\fB\-\-timecode\-scale\fR\&.
 .PP
 Hay otros elementos que no pueden establecerse a trav\('es de la l\('inea de comandos ni mediante archivos XML\&. Eso afecta a los siguientes elementos:
 \fIDateUTC\fR

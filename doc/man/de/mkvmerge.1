@@ -1,7 +1,7 @@
 '\" t
 .\"     Title: mkvmerge
 .\"    Author: Moritz Bunkus <moritz@bunkus.org>
-.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2016-01-10
 .\"    Manual: Benutzerbefehle
 .\"    Source: MKVToolNix 8.8.0
@@ -104,7 +104,7 @@ DTD
 sind in dem ver\(:offentlichten MKVToolNix enthalten\&.
 .sp
 Einzelheiten finden Sie im Abschnitt weiter unten \(:uber
-Segmentinformations-XML-Dateien\&.
+Segmentinformations\-XML\-Dateien\&.
 .RE
 .PP
 \fB\-\-segment\-uid\fR \fISID1,SID2,\&...\fR
@@ -272,7 +272,7 @@ Matroska(TM)\-Dateien k\(:onnen ohne die Indexdaten abgespielt werden, aber das 
 .RS 4
 sagt
 \fBmkvmerge\fR(1), dass es ein Metasuchelement am Ende der Datei erstellen soll, das alle Cluster enth\(:alt\&. Siehe auch den Abschnitt \(:uber das
-Matroska(TM)-Datei-Layout\&.
+Matroska(TM)\-Datei\-Layout\&.
 .RE
 .PP
 \fB\-\-disable\-lacing\fR
@@ -347,7 +347,8 @@ vier verschiedene Modi\&.
 Aufteilen anhand der Gr\(:o\(sse
 .sp
 Syntax:
-\fB\-\-split\fR[size:]\fId\fR[k|m|g]
+\fB\-\-split\fR
+[size:]\fId\fR[k|m|g]
 .sp
 Beispiele:
 \-\-split size:700m
@@ -372,7 +373,8 @@ Das Pr\(:afix \(Fcsize:\(Fo kann aus Kompatibilit\(:atsgr\(:unden weggelassen we
 Aufteilen nach einer Laufzeit
 .sp
 Syntax:
-\fB\-\-split\fR[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
+\fB\-\-split\fR
+[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
 .sp
 Beispiele:
 \-\-split duration:00:60:00\&.000
@@ -407,7 +409,8 @@ Das Pr\(:afix \(Fcduration:\(Fo darf aus Kompatibilit\(:atsgr\(:unden weggelasse
 Aufteilen nach bestimmten Zeitstempeln
 .sp
 Syntax:
-\fB\-\-split\fRtimecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&...]]
+\fB\-\-split\fR
+timecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&...]]
 .sp
 Beispiel:
 \-\-split timecodes:00:45:00\&.000,01:20:00\&.250,6300s
@@ -432,7 +435,8 @@ Das Pr\(:afix \(Fctimecodes:\(Fo darf nicht weggelassen werden\&.
 Aufbewahren bestimmter Teile durch die Angabe von Zeitstempelbereichen, w\(:ahrend andere verworfen werden
 .sp
 Syntax:
-\fB\-\-split\fRparts:\fIStart1\fR\-\fIEnde1\fR[,[+]\fIStart2\fR\-\fIEnde2\fR[,[+]\fIStart3\fR\-\fIEnde3\fR\&...]]
+\fB\-\-split\fR
+parts:\fIStart1\fR\-\fIEnde1\fR[,[+]\fIStart2\fR\-\fIEnde2\fR[,[+]\fIStart3\fR\-\fIEnde3\fR\&...]]
 .sp
 Beispiele:
 .sp
@@ -558,7 +562,8 @@ sogar dann mit der Ausgabe der Bilder bis vor das n\(:achste Bild fortfahren, we
 Aufbewahren bestimmter Teile durch Angabe von Bild\-/Feldnummerbereichen w\(:ahrend andere verworfen werden
 .sp
 Syntax:
-\fB\-\-split\fRparts\-frames:\fIStart1\fR\-\fIEnde1\fR[,[+]\fIStart2\fR\-\fIEnde2\fR[,[+]\fIStart3\fR\-\fIEnde3\fR\&...]]
+\fB\-\-split\fR
+parts\-frames:\fIStart1\fR\-\fIEnde1\fR[,[+]\fIStart2\fR\-\fIEnde2\fR[,[+]\fIStart3\fR\-\fIEnde3\fR\&...]]
 .sp
 Beispiele:
 .sp
@@ -700,7 +705,8 @@ als Aufteilungspunkt benutzen (zwei Felder pro komplettem Bild)\&.
 Aufteilen nach bestimmten Bildern/Feldern
 .sp
 Syntax:
-\fB\-\-split\fRframes:\fIA\fR[,\fIB\fR[,\fIC\fR\&...]]
+\fB\-\-split\fR
+frames:\fIA\fR[,\fIB\fR[,\fIC\fR\&...]]
 .sp
 Beispiel:
 \-\-split frames:120,237,891
@@ -748,9 +754,11 @@ als Aufteilungspunkt benutzen (zwei Felder pro komplettem Bild)\&.
 Aufteilen vor bestimmten Kapiteln
 .sp
 Syntax:
-\fB\-\-split\fRchapters:all
+\fB\-\-split\fR
+chapters:all
 oder
-\fB\-\-split\fRchapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&...]]
+\fB\-\-split\fR
+chapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&...]]
 .sp
 Beispiel:
 \-\-split chapters:5,8
@@ -992,7 +1000,7 @@ kopiert die Tonspuren
 etc\&. Die Zahlen sind Spur\-IDs, die \(:uber den Schalter
 \fB\-\-identify\fR
 abgefragt werden k\(:onnen\&. Sie sind nicht nur einfach die Spurnummern (siehe den Abschnitt
-Spur-IDs)\&. Voreinstellung: alle Tonspuren kopieren\&.
+Spur\-IDs)\&. Voreinstellung: alle Tonspuren kopieren\&.
 .sp
 Anstelle von Spur\-IDs k\(:onnen auch ISO 639\-2\-Sprachcodes verwendet werden\&. Dies funktioniert nur bei Quelldateien, die Sprachcodes f\(:ur ihre Spuren bereithalten\&.
 .sp
@@ -1013,7 +1021,7 @@ kopiert die Videospuren
 etc\&. Die Zahlen sind Spur\-IDs, die \(:uber den Schalter
 \fB\-\-identify\fR
 abgefragt werden k\(:onnen\&. Sie sind nicht nur einfach die Spurnummern (siehe den Abschnitt
-Spur-IDs)\&. Voreinstellung: alle Videospuren kopieren\&.
+Spur\-IDs)\&. Voreinstellung: alle Videospuren kopieren\&.
 .sp
 Anstelle von Spur\-IDs k\(:onnen auch ISO 639\-2\-Sprachcodes verwendet werden\&. Dies funktioniert nur bei Quelldateien, die Sprachcodes f\(:ur ihre Spuren bereithalten\&.
 .sp
@@ -1032,7 +1040,7 @@ kopiert die Untertitelspuren
 etc\&. Die Zahlen sind Spur\-IDs, die \(:uber den Schalter
 \fB\-\-identify\fR
 abgefragt werden k\(:onnen\&. Sie sind nicht nur einfach die Spurnummern (siehe den Abschnitt
-Spur-IDs)\&. Voreinstellung: alle Untertitelspuren kopieren\&.
+Spur\-IDs)\&. Voreinstellung: alle Untertitelspuren kopieren\&.
 .sp
 Anstelle von Spur\-IDs k\(:onnen auch ISO 639\-2\-Sprachcodes verwendet werden\&. Dies funktioniert nur bei Quelldateien, die Sprachcodes f\(:ur ihre Spuren bereithalten\&.
 .sp
@@ -1051,7 +1059,7 @@ kopiert die Button\-Spuren
 etc\&. Die Zahlen sind Spur\-IDs, die \(:uber den Schalter
 \fB\-\-identify\fR
 abgefragt werden k\(:onnen\&. Sie sind nicht nur einfach die Spurnummern (siehe den Abschnitt
-Spur-IDs)\&. Voreinstellung: alle Button\-Spuren kopieren\&.
+Spur\-IDs)\&. Voreinstellung: alle Button\-Spuren kopieren\&.
 .sp
 Anstelle von Spur\-IDs k\(:onnen auch ISO 639\-2\-Sprachcodes verwendet werden\&. Dies funktioniert nur bei Quelldateien, die Sprachcodes f\(:ur ihre Spuren bereithalten\&.
 .sp
@@ -1070,7 +1078,7 @@ kopiert die Tags f\(:ur Spuren
 etc\&. Die Zahlen sind Spur\-IDs, die \(:uber den Schalter
 \fB\-\-identify\fR
 abgefragt werden k\(:onnen\&. Sie sind nicht nur einfach die Spurnummern (siehe den Abschnitt
-Spur-IDs)\&. Voreinstellung: Tags f\(:ur alle Spuren kopieren\&.
+Spur\-IDs)\&. Voreinstellung: Tags f\(:ur alle Spuren kopieren\&.
 .sp
 Falls den IDs ein
 !
@@ -1157,7 +1165,7 @@ um
 ms an\&. Die Spur\-IDs sind dieselben, wie die mit
 \fB\-\-identify\fR
 angegebenen (siehe den Abschnitt
-Spur-IDs)\&.
+Spur\-IDs)\&.
 .sp
 \fIo\fR/\fIp\fR: passen die Zeitstempel um
 \fIo\fR/\fIp\fR
@@ -1184,7 +1192,7 @@ Diese Option kann mehrfach f\(:ur eine Eingabedatei benutzt werden und gilt f\(:
 \fB\-\-cues\fR \fITID:none|iframes|all\fR
 .RS 4
 steuert, f\(:ur welchen Spurenindex Eintr\(:age f\(:ur die angegebene Spur erstellt werden (siehe den Abschnitt
-Spur-IDs)\&. \(Fcnone\(Fo verhindert das Erstellen von Indexeintr\(:agen\&. F\(:ur \(Fciframes\(Fo werden nur Bl\(:ocke ohne Vorw\(:arts\- oder R\(:uckw\(:artsbez\(:uge (= IFrames in Videospuren) in das Cuesheet abgelegt\&. \(Fcall\(Fo veranlasst
+Spur\-IDs)\&. \(Fcnone\(Fo verhindert das Erstellen von Indexeintr\(:agen\&. F\(:ur \(Fciframes\(Fo werden nur Bl\(:ocke ohne Vorw\(:arts\- oder R\(:uckw\(:artsbez\(:uge (= IFrames in Videospuren) in das Cuesheet abgelegt\&. \(Fcall\(Fo veranlasst
 \fBmkvmerge\fR(1), Indexeintr\(:age f\(:ur alle Bl\(:ocke zu erstellen, wodurch die Datei sehr gro\(ss wird\&.
 .sp
 F\(:ur Videospuren ist die Voreinstellung \(Fciframes\(Fo und f\(:ur alle anderen \(Fcnone\(Fo\&. Siehe auch die Option
@@ -1197,7 +1205,7 @@ Diese Option kann mehrfach f\(:ur eine Eingabedatei benutzt werden und gilt f\(:
 \fB\-\-default\-track\fR \fITID\fR\fI[:bool]\fR
 .RS 4
 setzt den Standardschalter f\(:ur die angegebene Spur (siehe den Abschnitt
-Spur-IDs), falls das optionale Argument
+Spur\-IDs), falls das optionale Argument
 \fIbool\fR
 nicht vorhanden ist\&. Falls der Anwender nicht explizit selbst eine Spur ausw\(:ahlt, dann sollte das Abspielprogramm die Spur bevorzugen, f\(:ur die der Standardschalter gesetzt ist\&. Nur eine Spur jeder Art (Ton, Video, Untertitel, Buttons) kann einen gesetzten \(FcStandard\(Fo\-Schalter haben\&. Falls der Anwender nicht m\(:ochte, dass der Standardspurschalter gesetzt ist, muss er
 \fIbool\fR
@@ -1211,7 +1219,7 @@ Diese Option kann mehrfach f\(:ur eine Eingabedatei benutzt werden und gilt f\(:
 \fB\-\-forced\-track\fR \fITID\fR\fI[:bool]\fR
 .RS 4
 setzt den Schalter \(FcAbspielen erzwingen\(Fo f\(:ur die angegebene Spur (siehe den Abschnitt
-Spur-IDs), falls das optionale Argument
+Spur\-IDs), falls das optionale Argument
 \fIbool\fR
 nicht vorhanden ist\&. Ein Abspielprogramm muss alle Spuren abspielen, f\(:ur die der Schalter auf
 \fB1\fR
@@ -1231,14 +1239,14 @@ bis hinauf zur Stufe
 \fB\-\-track\-name\fR \fITID:Name\fR
 .RS 4
 setzt den Spurnamen f\(:ur die angegebene Spur (siehe den Abschnitt
-Spur-IDs) auf
+Spur\-IDs) auf
 \fIName\fR\&.
 .RE
 .PP
 \fB\-\-language\fR \fITID:Sprache\fR
 .RS 4
 setzt die Sprache der angegebenen Spur (siehe den Abschnitt
-Spur-IDs)\&. Es sind sowohl ISO 639\-2\-Sprachcodes als auch ISO 639\-1\-L\(:andercodes erlaubt\&. Die L\(:andercodes werden automatisch in die Sprachcodes umgewandelt\&. Alle Sprachcodes einschlie\(sslich ihrer ISO 639\-2\-Codes k\(:onnen mit der Option
+Spur\-IDs)\&. Es sind sowohl ISO 639\-2\-Sprachcodes als auch ISO 639\-1\-L\(:andercodes erlaubt\&. Die L\(:andercodes werden automatisch in die Sprachcodes umgewandelt\&. Alle Sprachcodes einschlie\(sslich ihrer ISO 639\-2\-Codes k\(:onnen mit der Option
 \fB\-\-list\-languages\fR
 aufgef\(:uhrt werden\&.
 .sp
@@ -1292,7 +1300,8 @@ jedoch falsch ist, kann der Schalter benutzt werden, um dies zu korrigieren\&.
 Falls
 \fBmkvmerge\fR(1)
 f\(:alschlicherweise feststellt, dass eine
-AACSBR
+AAC
+SBR
 ist, k\(:onnen Sie \(Fc:0\(Fo zur Spur\-ID hinzuf\(:ugen\&.
 .RE
 .PP
@@ -1313,7 +1322,8 @@ w\(:urde das nicht funktionen, da HD\-Erweiterungen nicht alleinstehend decodier
 Falls
 \fBmkvmerge\fR(1)
 f\(:alschlicherweise feststellt, dass eine
-AACSBR
+AAC
+SBR
 ist, k\(:onnen Sie \(Fc:0\(Fo zur Spur\-ID hinzuf\(:ugen\&.
 .RE
 .PP
@@ -1479,7 +1489,7 @@ wird
 veranlassen, die einzelne Datei eingehend zu untersuchen und ihren Typ, die in der Datei enthaltenen Spuren und ihre Spur\-IDs zu melden\&. Falls diese Option benutzt wird, ist der Dateiname die einzige weitere erlaubte Option\&.
 .sp
 Das f\(:ur die Ergebnisse benutze Ausgabeformat kann mit der Option
---identification-format
+\-\-identification\-format
 ge\(:andert werden\&.
 .RE
 .PP
@@ -1515,7 +1525,7 @@ ist kurz und menschenlesbar\&. Es aus einer Zeile pro gefundenem Element (Contai
 Dieses Format wurde nicht daf\(:ur entworfen, geparset zu werden\&. Die Ausgabe wird in die von
 \fBmkvmerge\fR(1)
 benutzte Sprache \(:ubersetzt (siehe auch
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -1539,7 +1549,7 @@ beschriebenen Regeln maskiert\&.
 Dieses Format wurde nicht daf\(:ur entworfen, geparset zu werden\&. Die Ausgabe wird in die von
 \fBmkvmerge\fR(1)
 benutzte Sprache \(:ubersetzt (siehe auch
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -2104,7 +2114,7 @@ $ mkvmerge \-o Unkomprimiert\&.mkv \-\-compression \-1:none MeinFilm\&.avi \-\-c
 .if n \{\
 .RE
 .\}
-.SH "SPUR-IDS"
+.SH "SPUR\-IDS"
 .PP
 Einige der Optionen f\(:ur
 \fBmkvmerge\fR(1)
@@ -2898,15 +2908,15 @@ Tags (master)
 .if n \{\
 .RE
 .\}
-.SH "DIE SEGMENTINFORMATIONS-XML-DATEIEN"
+.SH "DIE SEGMENTINFORMATIONS\-XML\-DATEIEN"
 .PP
 Mit einer Segmentinformations\-XML\-Datei ist es m\(:oglich, bestimmte Werte im Kopffeld \(Fcsegment information\(Fo einer
 Matroska(TM)\-Datei zu setzen\&. Alle diese Werte k\(:onnen nicht \(:uber andere Befehlszeilenoptionen gesetzt werden\&.
 .PP
 Andere \(Fcsegment information\(Fos\-Kopffelder k\(:onnen \(:uber Befehlszeilenoptionen gesetzt werden, jedoch nicht \(:uber die XML\-Datei\&. Dies umfasst z\&.B\&. die Optionen
-\fB--title\fR
+\fB\-\-title\fR
 und
-\fB--timecode-scale\fR\&.
+\fB\-\-timecode\-scale\fR\&.
 .PP
 Es gibt andere Elemente, die weder \(:uber Befehlszeilenoptionen noch \(:uber die XML\-Dateien gesetzt werden k\(:onnen\&. Dies beinhaltet die folgenden Elemente:
 \fIDateUTC\fR
@@ -2940,7 +2950,7 @@ Info (master)
 .if n \{\
 .RE
 .\}
-.SH "MATROSKA(TM)-DATEILAYOUT"
+.SH "MATROSKA(TM)\-DATEILAYOUT"
 .PP
 Das
 Matroska(TM)\-Dateilayout ist ziemlich flexibel\&.

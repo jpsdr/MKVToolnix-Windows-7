@@ -1,7 +1,7 @@
 '\" t
 .\"     Title: mkvmerge
 .\"    Author: Moritz Bunkus <moritz@bunkus.org>
-.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
 .\"      Date: 2016-01-10
 .\"    Manual: Користувацькі команди
 .\"    Source: MKVToolNix 8.8.0
@@ -361,7 +361,8 @@ supports four different modes\&.
 Splitting by size\&.
 .sp
 Синтаксис:
-\fB\-\-split\fR[size:]\fId\fR[k|m|g]
+\fB\-\-split\fR
+[size:]\fId\fR[k|m|g]
 .sp
 Examples:
 \-\-split size:700m
@@ -386,7 +387,8 @@ The \*(Aqsize:\*(Aq prefix may be omitted for compatibility reasons\&.
 Splitting after a duration\&.
 .sp
 Syntax:
-\fB\-\-split\fR[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
+\fB\-\-split\fR
+[duration:]\fIHH:MM:SS\&.nnnnnnnnn\fR|\fId\fRs
 .sp
 Examples:
 \-\-split duration:00:60:00\&.000
@@ -421,7 +423,8 @@ The \*(Aqduration:\*(Aq prefix may be omitted for compatibility reasons\&.
 Splitting after specific timecodes\&.
 .sp
 Синтаксис:
-\fB\-\-split\fRtimecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+timecodes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Example:
 \-\-split timecodes:00:45:00\&.000,01:20:00\&.250,6300s
@@ -446,7 +449,8 @@ The \*(Aqtimecodes:\*(Aq prefix must not be omitted\&.
 Keeping specific parts by specifying timecode ranges while discarding others\&.
 .sp
 Синтаксис:
-\fB\-\-split\fRparts:\fIstart1\fR\-\fIend1\fR[,[+]\fIstart2\fR\-\fIend2\fR[,[+]\fIstart3\fR\-\fIend3\fR\&.\&.\&.]]
+\fB\-\-split\fR
+parts:\fIstart1\fR\-\fIend1\fR[,[+]\fIstart2\fR\-\fIend2\fR[,[+]\fIstart3\fR\-\fIend3\fR\&.\&.\&.]]
 .sp
 Examples:
 .sp
@@ -567,7 +571,8 @@ will continue outputting the frames up to but excluding the following key frame\
 Keeping specific parts by specifying frame/field number ranges while discarding others\&.
 .sp
 Синтаксис:
-\fB\-\-split\fRparts\-frames:\fIstart1\fR\-\fIend1\fR[,[+]\fIstart2\fR\-\fIend2\fR[,[+]\fIstart3\fR\-\fIend3\fR\&.\&.\&.]]
+\fB\-\-split\fR
+parts\-frames:\fIstart1\fR\-\fIend1\fR[,[+]\fIstart2\fR\-\fIend2\fR[,[+]\fIstart3\fR\-\fIend3\fR\&.\&.\&.]]
 .sp
 Examples:
 .sp
@@ -704,7 +709,8 @@ block contains either a full frame (for progressive content) or a single field (
 Splitting after specific frames/fields\&.
 .sp
 Синтаксис:
-\fB\-\-split\fRframes:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+frames:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Example:
 \-\-split frames:120,237,891
@@ -752,9 +758,11 @@ block contains either a full frame (for progressive content) or a single field (
 Splitting before specific chapters\&.
 .sp
 Синтаксис:
-\fB\-\-split\fRchapters:all
+\fB\-\-split\fR
+chapters:all
 or
-\fB\-\-split\fRchapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
+\fB\-\-split\fR
+chapters:\fIA\fR[,\fIB\fR[,\fIC\fR\&.\&.\&.]]
 .sp
 Example:
 \-\-split chapters:5,8
@@ -1507,7 +1515,7 @@ Will let
 probe the single file and report its type, the tracks contained in the file and their track IDs\&. If this option is used then the only other option allowed is the filename\&.
 .sp
 The output format used for the result can be changed with the option
---identification-format\&.
+\-\-identification\-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fIfile\-name\fR
@@ -1542,7 +1550,7 @@ format is short and human\-readable\&. It consists of one line per item found (c
 This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
 uses (see also
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -1565,7 +1573,7 @@ the section about escaping special characters in text\&.
 This format is not meant to be parsed\&. The output will be translated into the language
 \fBmkvmerge\fR(1)
 uses (see also
---ui-language)\&.
+\-\-ui\-language)\&.
 .RE
 .sp
 .RS 4
@@ -1945,7 +1953,8 @@ Some movies start synced correctly but slowly drift out of sync\&. For these kin
 seconds out of sync at the end of the movie which was
 \fB77340\fR
 frames long\&. At
-\fB29\&.97fps\fR\fB0\&.2\fR
+\fB29\&.97fps\fR
+\fB0\&.2\fR
 seconds correspond to approx\&.
 \fB6\fR
 frames\&. So I did
@@ -2619,7 +2628,8 @@ CHAPTER03NAME=Baby rocks the house
 .PP
 \fBmkvmerge\fR(1)
 will transform every pair or lines into one
-Matroska(TM)ChapterAtom\&. It does not set any
+Matroska(TM)
+ChapterAtom\&. It does not set any
 ChapterTrackNumber
 which means that the chapters all apply to all tracks in the file\&.
 .PP
@@ -2789,7 +2799,8 @@ tags do not automatically apply to the complete file\&. They can, but they also 
 gives more details about this fact\&.
 .PP
 One important fact is that tags are linked to tracks or chapters with the
-TargetsMatroska(TM)
+Targets
+Matroska(TM)
 tag element, and that the UIDs used for this linking are
 \fInot\fR
 the track IDs
@@ -2872,7 +2883,8 @@ The outermost element must be
 .IP \(bu 2.3
 .\}
 One logical tag is contained inside one pair of
-<Tag>XML
+<Tag>
+XML
 tags\&.
 .RE
 .sp
@@ -2956,9 +2968,9 @@ Matroska(TM)
 file\&. All of these values cannot be set via other command line options\&.
 .PP
 Other "segment information" header fields can be set via command line options but not via the XML file\&. This includes e\&.g\&. the
-\fB--title\fR
+\fB\-\-title\fR
 and the
-\fB--timecode-scale\fR
+\fB\-\-timecode\-scale\fR
 options\&.
 .PP
 There are other elements that can be set neither via command line options nor via the XML files\&. These include the following elements:
