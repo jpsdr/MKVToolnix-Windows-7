@@ -34,7 +34,7 @@ mkvextract \- Extreu les pistes des de fitxers Matroska(TM) a altres fitxers
 \fBmkvextract\fR {mode} {nom_fitxer_origen} [opcions] [especificacions_extracci\('o]
 .SH "DESCRIPCI\('O"
 .PP
-Aquest programa extreu certes parts d\*(Aqun fitxer
+Aquest programa extreu parts espec\('ifiques d\*(Aqun fitxer
 Matroska(TM)
 a altres formats d\*(Aqutilitat\&. El primer argument,
 \fBmode\fR, li indica al
@@ -55,7 +55,7 @@ Les seg\(:uents opcions estan disponibles en tots els modes i nom\('es es descri
 .PP
 \fB\-f\fR, \fB\-\-parse\-fully\fR
 .RS 4
-Estableix el mode d\*(Aqan\(`alisi a \(Fofull\(Fc (Completa)\&. El mode per omissi\('o no analitza tot el fitxer ja que empra la meta de cerca dels elements per a localitzar els elements requerits d\*(Aqun fitxer d\*(Aqorigen\&. En el 99% dels casos n\*(Aqhi ha prou\&. Per\(`o per a fitxers que no contenen elements meta de cerca o que estan malmesos, l\*(Aqusuari hauria d\*(Aqusar aquest mode\&. L\*(Aqan\(`alisi completa d\*(Aqun fitxer pot requerir for\(,ca temps, mentre que una an\(`alisi r\(`apida nom\('es porta uns pocs segons\&.
+Estableix el mode d\*(Aqan\(`alisi a \(Fofull\(Fc (Completa)\&. El mode per omissi\('o no analitzar\(`a tot el fitxer ja que empra la meta de cerca dels elements per a localitzar els elements requerits d\*(Aqun fitxer d\*(Aqorigen\&. En el 99% dels casos n\*(Aqhi ha prou\&. Per\(`o per a fitxers que no contenen elements meta de cerca o que estan malmesos, l\*(Aqusuari hauria d\*(Aqemprar aquest mode\&. L\*(Aqan\(`alisi completa d\*(Aqun fitxer pot requerir for\(,ca temps, mentre que una an\(`alisi r\(`apida nom\('es porta uns pocs segons\&.
 .RE
 .PP
 \fB\-\-command\-line\-charset\fR \fIjoc_de_car\(`acters\fR
@@ -65,7 +65,7 @@ Estableix el joc de car\(`acters al qual convertir les cadenes indicades des de 
 .PP
 \fB\-\-output\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. Per omissi\('o ser\(`a el joc de car\(`acters establert a la configuraci\('o regional actual del sistema\&.
+Estableix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
 .RE
 .PP
 \fB\-r\fR, \fB\-\-redirect\-output\fR \fInom_fitxer\fR
@@ -172,12 +172,12 @@ Hi ha disponibles les seg\(:uents opcions de l\('inia d\*(Aqordres per a cada pi
 .PP
 \fB\-c\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters per a convertir el text de la seg\(:uent pista de subt\('itols\&. Nom\('es ser\(`a v\(`alida si l\*(Aqobjectiu de l\*(AqID es correspon amb una pista de subt\('itols de text\&. Per omissi\('o s\*(Aqusa UTF\-8\&.
+Estableix el joc de car\(`acters per a convertir el text de la seg\(:uent pista de subt\('itols\&. Nom\('es ser\(`a v\(`alida si l\*(Aqobjectiu de l\*(AqID es correspon amb una pista de subt\('itols de text\&. Per omissi\('o s\*(Aqempra UTF\-8\&.
 .RE
 .PP
 \fB\-\-blockadd\fR \fInivell\fR
 .RS 4
-Nom\('es mant\('e \(FoBlockAdditions\(Fc fins aquest nivell\&. Per omissi\('o ho mant\('e en tots els nivells\&. Aquesta opci\('o nom\('es afecta certs tipus de c\(`odecs com WAVPACK4\&.
+Nom\('es mant\('e \(FoBlockAdditions\(Fc fins aquest nivell\&. Per omissi\('o ho mant\('e en tots els nivells\&. Aquesta opci\('o nom\('es afectar\(`a certs tipus de c\(`odecs com WAVPACK4\&.
 .RE
 .PP
 \fB\-\-cuesheet\fR
@@ -376,7 +376,7 @@ Matroska(TM), on comen\(,ca el cl\('uster que cont\('e l\*(Aqelement de refer\(`
 \fBNota\fR
 .ps -1
 .br
-Dins el fitxer
+Dins del fitxer
 Matroska(TM), el
 CueClusterPosition
 es refereix a la compensaci\('o a l\*(Aqinici de les dades del segment\&. El valor de la sortida \('es donat pel mode d\*(Aqextracci\('o de l\*(Aq\('index del
