@@ -455,6 +455,9 @@ handle_chaptertranslate(EbmlStream *&es,
 
     else if (Is<KaxChapterTranslateID>(l3))
       show_element(l3, 3, boost::format(Y("Chapter Translate ID: %1%"))          % format_binary(static_cast<EbmlBinary *>(l3)));
+
+    else if (!is_global(es, l3, 3))
+      show_unknown_element(l3, 3);
 }
 
 void
@@ -525,6 +528,9 @@ handle_info(EbmlStream *&es,
 
     else if (Is<KaxTitle>(l2))
       show_element(l2, 2, boost::format(Y("Title: %1%"))                   % static_cast<KaxTitle *>(l2)->GetValueUTF8());
+
+    else if (!is_global(es, l2, 2))
+      show_unknown_element(l2, 2);
 }
 
 void
