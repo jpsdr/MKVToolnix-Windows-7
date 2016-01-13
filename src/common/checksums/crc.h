@@ -45,6 +45,7 @@ protected:
   table_t &m_table;
   uint32_t m_crc;
   uint64_t m_xor_result;
+  bool m_result_in_le;
 
 protected:
   crc_base_c(type_e type, table_t &table, uint32_t crc);
@@ -58,6 +59,7 @@ public:
   virtual uint64_t get_result_as_uint() const;
 
   virtual void set_xor_result(uint64_t xor_result);
+  virtual void set_result_in_le(bool result_in_le);
 
 protected:
   virtual void add_impl(unsigned char const *buffer, size_t size);

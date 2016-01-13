@@ -20,17 +20,10 @@
 class cli_options_c {
 public:
   std::string m_file_name;
-  mtx::checksum::algorithm_e m_algorithm;
-  size_t m_chunk_size;
-  uint64_t m_initial_value, m_xor_result;
-
-  cli_options_c()
-    : m_algorithm{mtx::checksum::algorithm_e::adler32}
-    , m_chunk_size{4096}
-    , m_initial_value{}
-    , m_xor_result{}
-  {
-  }
+  mtx::checksum::algorithm_e m_algorithm{mtx::checksum::algorithm_e::adler32};
+  size_t m_chunk_size{4096};
+  uint64_t m_initial_value{}, m_xor_result{};
+  bool m_result_in_le{};
 };
 
 static void
@@ -52,6 +45,9 @@ show_help() {
          "      --crc16-ccitt      Use CRC-16 CCITT\n"
          "  -c, --crc32-ieee       Use CRC-32 IEEE\n"
          "      --crc32-ieee-le    Use CRC-32 IEEE Little Endian\n"
+         "  -t, --matroska         Use Matroska's CRC (CRC-32 IEEE Little Endian,\n"
+         "                         initial value 0xffffffff, XOR with 0xffffffff,\n"
+         "                         result is Little Endian)\n"
          "  -m, --md5              Use MD5\n"
          "  --chunk-size size      Calculate in chunks of \"size\" bytes; 0 means all\n"
          "                         in one (default: 4096)\n"
@@ -59,6 +55,8 @@ show_help() {
          "                         (default: 0)\n"
          "  --xor-result value     XOR the result with this value for CRC algorithms\n"
          "                         (default: 0)\n"
+         "  --result-in-le         Output the result in Little Endian (default:\n"
+         "                         Big Endian)\n"
          "\n"
          "General options:\n"
          "\n"
@@ -106,7 +104,13 @@ parse_args(std::vector<std::string> &args) {
     else if (arg == "--crc32-ieee-le")
       options.m_algorithm = mtx::checksum::algorithm_e::crc32_ieee_le;
 
-    else if ((arg == "-m") || (arg == "--md5"))
+    else if ((arg == "-t") || (arg == "--matroska")) {
+      options.m_algorithm     = mtx::checksum::algorithm_e::crc32_ieee_le;
+      options.m_initial_value = 0xffffffffu;
+      options.m_xor_result    = 0xffffffffu;
+      options.m_result_in_le  = true;
+
+    } else if ((arg == "-m") || (arg == "--md5"))
       options.m_algorithm = mtx::checksum::algorithm_e::md5;
 
     else if (arg == "--chunk-size") {
@@ -136,7 +140,10 @@ parse_args(std::vector<std::string> &args) {
 
       ++current;
 
-    } else if (!options.m_file_name.empty())
+    } else if (arg == "--result-in-le")
+      options.m_result_in_le = true;
+
+    else if (!options.m_file_name.empty())
       mxerror("More than one input file given\n");
 
     else
@@ -162,6 +169,7 @@ parse_file(cli_options_c const &options) {
   if (crc_worker) {
     crc_worker->set_initial_value(options.m_initial_value);
     crc_worker->set_xor_result(options.m_xor_result);
+    crc_worker->set_result_in_le(options.m_result_in_le);
   }
 
   while (total_read < file_size) {

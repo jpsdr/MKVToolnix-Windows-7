@@ -37,6 +37,7 @@ crc_base_c::crc_base_c(type_e type,
   , m_table(table)              // No initializer-list syntax here due to gcc bug 50025.
   , m_crc{crc}
   , m_xor_result{}
+  , m_result_in_le{}
 {
   if (m_table.empty())
     init_table();
@@ -82,9 +83,16 @@ memory_cptr
 crc_base_c::get_result()
   const {
   auto result_length = ms_table_parameters[m_type].bits / 8;
+  auto result        = m_crc ^ m_xor_result;
+
+  if (m_result_in_le)
+    result = result_length == 4 ? mtx::bswap_32(result)
+           : result_length == 2 ? mtx::bswap_16(result)
+           :                      result;
+
   unsigned char buffer[result_length];
 
-  put_uint_be(buffer, m_crc ^ m_xor_result, result_length);
+  put_uint_be(buffer, result, result_length);
 
   return memory_c::clone(buffer, result_length);
 }
@@ -109,6 +117,11 @@ crc_base_c::set_initial_value_impl(unsigned char const *buffer,
 void
 crc_base_c::set_xor_result(uint64_t xor_result) {
   m_xor_result = xor_result;
+}
+
+void
+crc_base_c::set_result_in_le(bool result_in_le) {
+  m_result_in_le = result_in_le;
 }
 
 void
