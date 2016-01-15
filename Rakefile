@@ -396,12 +396,8 @@ EOT
     end
   end
 
-  desc "Verify format strings in translations"
-  task "verify-format-strings" do
+  def verify_format_strings languages
     is_ok = true
-
-    languages = (ENV['LANGUAGES'] || '').split(/ +/)
-    languages = $available_languages[:applications] if languages.empty?
 
     languages.
       collect { |language| "po/#{language}.po" }.
@@ -411,7 +407,31 @@ EOT
       is_ok &&= FormatStringVerifier.new.verify file_name
     end
 
-    exit 1 if !is_ok
+    is_ok
+  end
+
+  desc "Verify format strings in translations"
+  task "verify-format-strings" do
+    languages = (ENV['LANGUAGES'] || '').split(/ +/)
+    languages = $available_languages[:applications] if languages.empty?
+
+    exit 1 if !verify_format_strings(languages)
+  end
+
+  desc "Verify format strings in staged translations"
+  task "verify-format-strings-staged" do
+    languages = `git --no-pager diff --cached --name-only`.
+      split(/\n/).
+      select { |file| /po\/.*\.po$/.match(file) }.
+      map    { |file| file.gsub(/.*\//, '').gsub(/\.po/, '') }
+
+    if languages.empty?
+      puts "Error: Nothing staged"
+      exit 2
+    end
+
+
+    exit 1 if !verify_format_strings(languages)
   end
 
   [ :applications, :manpages ].each { |type| task type => $translations[type] }
