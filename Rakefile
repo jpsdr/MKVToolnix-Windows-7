@@ -851,17 +851,19 @@ if $build_mkvtoolnix_gui
 
   qobject_h_files = h_files.select { |h| h_content[h].any? { |line| /\bQ_OBJECT\b/.match line } }
 
-  ui_h_res = ui_h_files.collect do |ui_h|
-    ui_h_include = Regexp.escape ui_h.gsub(/src\//, '')
-    [ ui_h, /\#\s*include \s+ \"#{ui_h_include}/x ]
-  end
+  form_include_re = %r{^\s* \# \s* include \s+ \" (mkvtoolnix-gui/forms/[^\"]+) }x
+  dependencies    = {}
 
   cpp_files.each do |cpp|
-    ui_h_res.
-      select { |ui_h_re| cpp_content[cpp].any? { |line| ui_h_re[1].match line } }.
-      collect(&:first).
-      each { |ui_h| file cpp.gsub(/cpp$/, 'o') => ui_h }
+    cpp_content[cpp].each do |line|
+      next unless form_include_re.match line
+
+      dependencies[cpp] ||= []
+      dependencies[cpp]  << "src/#{$1}"
+    end
   end
+
+  dependencies.each { |cpp, ui_hs| file cpp.ext('o') => ui_hs }
 
   Application.new("src/mkvtoolnix-gui/mkvtoolnix-gui").
     description("Build the mkvtoolnix-gui executable").
