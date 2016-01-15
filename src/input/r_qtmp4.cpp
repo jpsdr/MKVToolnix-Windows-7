@@ -2291,6 +2291,13 @@ qtmp4_demuxer_c::build_index_constant_sample_size_mode() {
   size_t keyframe_table_idx  = 0;
   size_t keyframe_table_size = keyframe_table.size();
 
+  auto is_audio              = 'a' == type;
+  auto sound_stsd_atom       = reinterpret_cast<sound_v1_stsd_atom_t *>(is_audio && stsd ? stsd->get_buffer() : nullptr);
+  auto v0_sample_size        = sound_stsd_atom       ? get_uint16_be(&sound_stsd_atom->v0.sample_size)        : 0;
+  auto v0_audio_version      = sound_stsd_atom       ? get_uint16_be(&sound_stsd_atom->v0.version)            : 0;
+  auto v1_bytes_per_frame    = 1 == v0_audio_version ? get_uint32_be(&sound_stsd_atom->v1.bytes_per_frame)    : 0;
+  auto v1_samples_per_packet = 1 == v0_audio_version ? get_uint32_be(&sound_stsd_atom->v1.samples_per_packet) : 0;
+
   size_t frame_idx;
   for (frame_idx = 0; frame_idx < chunk_table.size(); ++frame_idx) {
     uint64_t frame_size;
@@ -2301,13 +2308,12 @@ qtmp4_demuxer_c::build_index_constant_sample_size_mode() {
     } else {
       frame_size = chunk_table[frame_idx].size;
 
-      if ('a' == type) {
-        auto sound_stsd_atom = reinterpret_cast<sound_v1_stsd_atom_t *>(stsd->get_buffer());
-        if (get_uint16_be(&sound_stsd_atom->v0.version) == 1) {
-          frame_size *= get_uint32_be(&sound_stsd_atom->v1.bytes_per_frame);
-          frame_size /= get_uint32_be(&sound_stsd_atom->v1.samples_per_packet);
+      if (is_audio) {
+        if ((0 != v1_bytes_per_frame) && (0 != v1_samples_per_packet)) {
+          frame_size *= v1_bytes_per_frame;
+          frame_size /= v1_samples_per_packet;
         } else
-          frame_size  = frame_size * a_channels * get_uint16_be(&sound_stsd_atom->v0.sample_size) / 8;
+          frame_size  = frame_size * a_channels * v0_sample_size / 8;
       }
     }
 

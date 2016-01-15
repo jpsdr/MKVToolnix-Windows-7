@@ -1,3 +1,9 @@
+2016-01-15  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: QuickTime/MP4 reader: fix a division by zero in the
+        index generation for certain old audio codecs that have certain
+        header fields (bytes_per_frame, samples_per_packet) set to 0.
+
 2016-01-13  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvinfo: bug fix: global elements (EBML void and CRC-32
