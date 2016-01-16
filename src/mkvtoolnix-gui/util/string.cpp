@@ -102,7 +102,7 @@ escapeShellWindows(QString const &source) {
   if (source.isEmpty())
     return Q("^\"^\"");
 
-  if (!source.contains(QRegExp{"[\\w+,\\-./:=@]"}))
+  if (!source.contains(QRegularExpression{"[^\\w+,\\-./:=@]"}))
     return source;
 
   auto copy = QString{'"'};
