@@ -32,6 +32,31 @@ function strip_files {
   print -- " done"
 }
 
+function strip_files {
+  if [[ $no_strip == 1 ]] return
+
+  print -n -- "Stripping files…"
+
+  cd ${tgt_dir}
+  ${host}-strip *.exe
+
+  print -- " done"
+}
+
+function sign_exes {
+  if [[ -z $exe_signer ]] return
+
+  print -n -- "Signing executables…"
+
+  cd ${tgt_dir}
+  for exe (*.exe) {
+    ${exe_signer} ${exe} ${exe}.signed
+    mv ${exe}.signed ${exe}
+  }
+
+  print -- " done"
+}
+
 function create_directories {
   print -- "Creating directories…"
 
@@ -130,9 +155,10 @@ function copy_files {
 
 while [[ ! -z $1 ]]; do
   case $1 in
-    -t|--target-dir) tgt_dir=$2;   shift; ;;
-    -m|--mxe-dir)    mxe_dir=$2;   shift; ;;
-    -s|--saxon-dir)  saxon_dir=$2; shift; ;;
+    -t|--target-dir) tgt_dir=$2;    shift; ;;
+    -m|--mxe-dir)    mxe_dir=$2;    shift; ;;
+    -s|--saxon-dir)  saxon_dir=$2;  shift; ;;
+    --exe-signer)    exe_signer=$2; shift; ;;
     *)               fail "Unknown option $1" ;;
   esac
 
@@ -145,10 +171,12 @@ if [[   -z ${mxe_dir}   ]] fail "The MXE base directory has not been set"
 if [[ ! -d ${mxe_dir}   ]] fail "The MXE base directory does not exist"
 if [[   -z ${saxon_dir} ]] fail "The Saxon-HE base directory has not been set"
 if [[ ! -d ${saxon_dir} ]] fail "The Saxon-HE base directory does not exist"
+if [[ ( -n ${exe_signer} ) && ( ! -x ${exe_signer} ) ]] fail "The EXE signer cannot be run"
 
 setup_variables
 create_directories
 copy_files
 strip_files
+sign_exes
 
 exit 0
