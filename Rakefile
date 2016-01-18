@@ -240,11 +240,6 @@ rule '.o' => '.rc' do |t|
   runq " WINDRES #{t.source}", "#{c(:WINDRES)} #{$flags[:windres]} -o #{t.name} #{t.sources.join(" ")}"
 end
 
-rule '.h' => '.png' do |t|
-  puts "   BIN2H #{t.source}" if !ENV['V'].to_bool
-  bin2h t.source, t.name
-end
-
 # Resources depend on the manifest.xml file for Windows builds.
 if c?(:MINGW)
   $programs.each do |program|
@@ -873,7 +868,6 @@ if $build_mkvtoolnix_gui
     sources("src/mkvtoolnix-gui/resources.o", :if => c?(:MINGW)).
     libraries($common_libs, :qt).
     libraries("-mwindows", :if => c?(:MINGW)).
-    png_icon("share/icons/64x64/mkvtoolnix-gui.png").
     libraries($custom_libs).
     create
 end
