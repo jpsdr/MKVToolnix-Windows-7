@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# coding: utf-8
 
 if Signal.list.key?('ALRM')
   Signal.trap('ALRM') { |signo| }
@@ -291,7 +292,23 @@ end
 
 # Qt files
 rule '.h' => '.ui' do |t|
-  runq "     UIC #{t.source}", "#{c(:UIC)} -tr QTR #{t.sources.join(" ")} > #{t.name}"
+  temp = Tempfile.new("mkvtoolnix-uic")
+  begin
+    temp.close
+
+    runq "     UIC #{t.source}", "#{c(:UIC)} -tr QPTR #{t.sources.join(" ")} > #{temp.path}"
+
+    # Convert calls to QPTR(…, 0) to QT(…)
+    output = IO.
+      readlines(temp.path).
+      map { |line| line.force_encoding("UTF-8").gsub(/QPTR\((.+?\"), 0\)/, 'QTR(\1)') }.
+      join("")
+
+    IO.write(t.name, output, encoding: "UTF-8", mode: "w")
+
+  ensure
+    temp.unlink
+  end
 end
 
 rule '.cpp' => '.qrc' do |t|
@@ -330,9 +347,14 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
   sources   = (t.prerequisites.dup - %w{Rakefile}).sort.uniq
 
   keywords  = %w{--keyword=Y --keyword=NY:1,2}   # singular & plural forms returning std::string
+  keywords += %w{--keyword=PY:1c,2}              # singular form with context returning std::string
+  keywords += %w{--keyword=PNY:1c,2,3}           # plural form with context returning std::string
   keywords += %w{--keyword=YT}                   # singular form returning translatable_string_c
   keywords += %w{--keyword=QTR}                  # singular form returning QString, used by uic
+  keywords += %w{--keyword=QPTR:2c,1}            # singular form with context returning QString, used by uic
   keywords += %w{--keyword=QY --keyword=QNY:1,2} # singular & plural forms returning QString
+  keywords += %w{--keyword=QPY:1c,2}             # singular form with context returning QString
+  keywords += %w{--keyword=QPNY:1c,2,3}          # plural form with context returning QString
   keywords += %w{--keyword=QYH}                  # singular form returning HTML-escaped QString
 
   options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --sort-output --boost}
