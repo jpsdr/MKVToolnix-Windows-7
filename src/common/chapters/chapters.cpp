@@ -1086,3 +1086,27 @@ align_chapter_edition_uids(KaxChapters &reference,
     ++modify_idx;
   }
 }
+
+void
+regenerate_edition_and_chapter_uids(EbmlMaster &master) {
+  for (size_t idx = 0, end = master.ListSize(); end > idx; ++idx) {
+    auto element     = master[idx];
+    auto edition_uid = dynamic_cast<KaxEditionUID *>(element);
+
+    if (edition_uid) {
+      edition_uid->SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+      continue;
+    }
+
+    auto chapter_uid = dynamic_cast<KaxChapterUID *>(element);
+
+    if (chapter_uid) {
+      chapter_uid->SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
+      continue;
+    }
+
+    auto sub_master = dynamic_cast<EbmlMaster *>(master[idx]);
+    if (sub_master)
+      regenerate_edition_and_chapter_uids(*sub_master);
+  }
+}

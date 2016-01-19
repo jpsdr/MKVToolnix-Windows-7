@@ -1,5 +1,15 @@
 2016-01-19  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: enhancement: when reading Matroska files created by
+        HandBrake that contain chapters the existing edition UIDs and
+        chapter UIDs are removed and random ones created. This is
+        necessary as HandBrake assigns sequential numbers starting at 1
+        for each file. Therefore there are two chapter entries with the
+        UID 1, two with the UID 2 etc. and those should, strictly
+        speaking, be treated as if they were a single chapter whereas the
+        user expects those entries to stay separate entries. Implements an
+        improvement for issues such as #1561.
+
         * MKVToolNix GUI: merge tool bug fix: the GUI no longer requires
         at least one source file to be present before muxing can start in
         order to allow creation of track-less files. Fixes #1576.

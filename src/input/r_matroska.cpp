@@ -250,6 +250,7 @@ kax_reader_c::kax_reader_c(const track_info_c &ti,
   , m_attachment_id(0)
   , m_file_status(FILE_STATUS_MOREDATA)
   , m_opus_experimental_warning_shown{}
+  , m_regenerate_chapter_uids{}
 {
   init_l1_position_storage(m_deferred_l1_positions);
   init_l1_position_storage(m_handled_l1_positions);
@@ -771,6 +772,9 @@ kax_reader_c::handle_chapters(mm_io_c *io,
 
   tmp_chapters->Read(*m_es, EBML_CLASS_CONTEXT(KaxChapters), upper_lvl_el, l2, true);
 
+  if (m_regenerate_chapter_uids)
+    regenerate_edition_and_chapter_uids(*tmp_chapters);
+
   if (!m_chapters)
     m_chapters = kax_chapters_cptr{new KaxChapters};
 
@@ -895,6 +899,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   // mkvmerge v0.9.6 ('Every Little Kiss') built on Oct  7 2004 18:37:49
   // VirtualDubMod 1.5.4.1 (build 2178/release)
   // AVI-Mux GUI 1.16.8 MPEG test build 1, Aug 24 2004  12:42:57
+  // HandBrake 0.10.2 2015060900
   //
   // The idea is to first replace known application names that contain
   // spaces with one that doesn't. Then split the whole std::string up on
@@ -902,8 +907,18 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   // long then try to parse the version number from the second and
   // store a lower case version of the first as the application's name.
   auto km_writing_app = FindChild<KaxWritingApp>(info);
-  if (km_writing_app)
+  if (km_writing_app) {
     read_headers_info_writing_app(km_writing_app);
+
+    // HandBrake workaround: HandBrake always assigns sequential
+    // numbers starting at 1 to UID attributes. This is a problem when
+    // appending two files created by HandBrake that contain chapters
+    // as both files contain chapters with the same UIDs and mkvmerge
+    // thinks those should be merged. So ignore the chapter UIDs for
+    // files created by HandBrake.
+    if (balg::starts_with(m_writing_app, "handbrake"))
+      m_regenerate_chapter_uids = true;
+  }
 
   auto km_muxing_app = FindChild<KaxMuxingApp>(info);
   if (km_muxing_app) {

@@ -86,6 +86,7 @@ void move_chapters_by_edition(KaxChapters &dst, KaxChapters &src);
 void adjust_chapter_timecodes(EbmlMaster &master, int64_t offset);
 void merge_chapter_entries(EbmlMaster &master);
 int count_chapter_atoms(EbmlMaster &master);
+void regenerate_edition_and_chapter_uids(EbmlMaster &master);
 
 void align_chapter_edition_uids(KaxChapters *chapters);
 void align_chapter_edition_uids(KaxChapters &reference, KaxChapters &modify);
