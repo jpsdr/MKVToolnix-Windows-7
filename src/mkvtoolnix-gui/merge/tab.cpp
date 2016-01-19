@@ -309,11 +309,6 @@ Tab::retranslateUi() {
 
 bool
 Tab::isReadyForMerging() {
-  if (m_config.m_files.isEmpty()) {
-    Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("You have to add at least one source file before you can start merging or add a job to the job queue.")).exec();
-    return false;
-  }
-
   if (m_config.m_destination.isEmpty()) {
     Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("You have to set the output file name before you can start merging or add a job to the job queue.")).exec();
     return false;
