@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-19 13:25+0100\n"
+"POT-Creation-Date: 2016-01-24 12:12+0100\n"
 "PO-Revision-Date: 2016-01-15 21:04+0200\n"
 "Last-Translator: Burak Yavuz <bourock(at)live.com>\n"
 "Language-Team: BouRock <BouRock(at)live.com>\n"
@@ -1043,8 +1043,8 @@ msgstr ""
 msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: beklenmedik bir olay meydana geldi (ileti: %2%; türü: %3%)."
 
-#: src/common/kax_file.cpp:69 src/input/r_matroska.cpp:1368
-#: src/input/r_matroska.cpp:2031
+#: src/common/kax_file.cpp:69 src/input/r_matroska.cpp:1383
+#: src/input/r_matroska.cpp:2046
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: bilinmeyen bir istisna meydana geldi."
@@ -1799,7 +1799,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Aşağıdaki dosyalar dahi işleniyor: %2%\n"
 
-#: src/input/r_matroska.cpp:1641
+#: src/input/r_matroska.cpp:1656
 #, boost-format
 msgid ""
 "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. "
@@ -2111,7 +2111,7 @@ msgstr "(adlandırılmamış)"
 msgid "<unsaved file>"
 msgstr "<kaydedilmemiş dosya>"
 
-#: src/input/r_matroska.cpp:2052 src/input/r_matroska.cpp:2148
+#: src/input/r_matroska.cpp:2067 src/input/r_matroska.cpp:2163
 #, boost-format
 msgid ""
 "A block was found at timestamp %1% for track number %2%. However, no headers "
@@ -6119,11 +6119,11 @@ msgid ""
 "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Türleri (ses, görüntü, altyazılar) için bu izi varsayılan iz yapın."
 
-#: src/input/r_matroska.cpp:1531 src/input/r_matroska.cpp:1546
+#: src/input/r_matroska.cpp:1546 src/input/r_matroska.cpp:1561
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Arızalanmış AAC kodek başlatma verisi bulundu.\n"
 
-#: src/input/r_matroska.cpp:1539
+#: src/input/r_matroska.cpp:1554
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Arızalanmış kodek id '%1%'.\n"
@@ -9278,8 +9278,8 @@ msgid "The file was not recognized as a supported format (exit code: %1)."
 msgstr "Dosya desteklenmeyen bir biçim olarak tanınmadı (çıkış kodu: %1)."
 
 #: src/common/kax_file.cpp:60 src/common/kax_file.cpp:65
-#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1369
-#: src/input/r_matroska.cpp:2032
+#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1384
+#: src/input/r_matroska.cpp:2047
 msgid "The file will not be processed further."
 msgstr "Dosya daha fazla işlenmeyecektir."
 
@@ -10481,8 +10481,8 @@ msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
 msgstr "Bu iz SBR AAC/HE-AAC/AAC+ verisi içeriyor."
 
 #: src/common/kax_file.cpp:60 src/common/kax_file.cpp:65
-#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1369
-#: src/input/r_matroska.cpp:2032
+#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1384
+#: src/input/r_matroska.cpp:2047
 msgid "This usually indicates a damaged file structure."
 msgstr "Bu genellikle hasarlı bir dosya yapısını gösterir."
 
@@ -10567,7 +10567,7 @@ msgstr ""
 "İz %1% bilinmeyen/desteklenmeyen bir sıkıştırma algoritması ile "
 "sıkıştırılmış (%2%).\n"
 
-#: src/input/r_matroska.cpp:1057
+#: src/input/r_matroska.cpp:1072
 #, boost-format
 msgid ""
 "Track %1% is missing its track UID element which is required to be present "
@@ -10937,7 +10937,7 @@ msgstr ""
 msgid "Unsupported file format"
 msgstr "Desteklenmeyen dosya biçimi"
 
-#: src/input/r_matroska.cpp:1840
+#: src/input/r_matroska.cpp:1855
 msgid "Unsupported track type for this track.\n"
 msgstr "Bu iz için desteklenmeyen biçim.\n"
 
@@ -10995,7 +10995,7 @@ msgstr ""
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "'%1%' biçimi için demultiplexer kullanılıyor.\n"
 
-#: src/input/r_matroska.cpp:1398
+#: src/input/r_matroska.cpp:1413
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "'%1%' iz türü için genel çıktı modülü kullanılıyor.\n"
@@ -11545,6 +11545,11 @@ msgstr "belirli zaman kodundan sonra böl"
 msgid "all entries"
 msgstr "tüm girişler"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1644
+#, fuzzy
+msgid "all output files"
+msgstr "tüm çıktı dosyalarına"
+
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 msgid "always ask the user"
 msgstr "her zaman kullanıcıya sor"
@@ -11911,7 +11916,7 @@ msgstr "düşük"
 msgid "lowest"
 msgstr "en düşük"
 
-#: src/input/r_matroska.cpp:359
+#: src/input/r_matroska.cpp:360
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -11921,7 +11926,7 @@ msgstr ""
 "matroska_okuyucusu: (İz %1% için MS uyumluluk kipi) Matroska örnek başına "
 "%2% bit var diyor, ama WAVEFORMATEX %3% var diyor.\n"
 
-#: src/input/r_matroska.cpp:350
+#: src/input/r_matroska.cpp:351
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -11930,7 +11935,7 @@ msgstr ""
 "matroska_okuyucusu: (İz %1% için MS uyumluluk kipi) Matroska %2% kanal var "
 "diyor, ama WAVEFORMATEX %3% var diyor.\n"
 
-#: src/input/r_matroska.cpp:341
+#: src/input/r_matroska.cpp:342
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -11939,7 +11944,7 @@ msgstr ""
 "matroska_okuyucusu: (İz %1% için MS uyumluluk kipi) Matroska saniye başına "
 "%2% örnek var diyor, ama WAVEFORMATEX %3% var diyor.\n"
 
-#: src/input/r_matroska.cpp:537
+#: src/input/r_matroska.cpp:538
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode, track %1%) Matroska says video "
@@ -11948,7 +11953,7 @@ msgstr ""
 "matroska_okuyucusu: (MS uyumluluk kipi, iz %1%) Matroska görüntü yüksekliği "
 "%2% diyor, ama BITMAPINFOHEADER %3% diyor.\n"
 
-#: src/input/r_matroska.cpp:528
+#: src/input/r_matroska.cpp:529
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode, track %1%) Matroska says video "
@@ -11957,11 +11962,11 @@ msgstr ""
 "matroska_okuyucusu: (MS uyumluluk kipi, iz %1%) Matroska görüntü genişliği "
 "%2% diyor, ama BITMAPINFOHEADER %3% diyor.\n"
 
-#: src/input/r_matroska.cpp:1046
+#: src/input/r_matroska.cpp:1061
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_okuyucusu: İz eksik olan iz numarası.\n"
 
-#: src/input/r_matroska.cpp:1464
+#: src/input/r_matroska.cpp:1479
 #, boost-format
 msgid ""
 "matroska_reader: Could not keep the track UID %1% because it is already "
@@ -11970,25 +11975,25 @@ msgstr ""
 "matroska_okuyucusu: İz UID %1% tutulmadı çünkü zaten yeni dosya için "
 "ayrıldı.\n"
 
-#: src/input/r_matroska.cpp:1281 src/input/r_matroska.cpp:1286
+#: src/input/r_matroska.cpp:1296 src/input/r_matroska.cpp:1301
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_okuyucusu: Bulunan parça yok.\n"
 
-#: src/input/r_matroska.cpp:1009
+#: src/input/r_matroska.cpp:1024
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_okuyucusu: Piksel yüksekliği eksik.\n"
 
-#: src/input/r_matroska.cpp:1007
+#: src/input/r_matroska.cpp:1022
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_okuyucusu: Piksel genişliği eksik.\n"
 
-#: src/input/r_matroska.cpp:638
+#: src/input/r_matroska.cpp:639
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_okuyucusu: İz %2% için KodekID '%1%' bilinmiyor.\n"
 
-#: src/input/r_matroska.cpp:374 src/input/r_matroska.cpp:419
-#: src/input/r_matroska.cpp:440
+#: src/input/r_matroska.cpp:375 src/input/r_matroska.cpp:420
+#: src/input/r_matroska.cpp:441
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but the private codec "
@@ -11997,7 +12002,7 @@ msgstr ""
 "matroska_okuyucusu: İz '%1%' için KodekID %2%, ama özel kodek verisi geçerli "
 "başlıkları içermiyor.\n"
 
-#: src/input/r_matroska.cpp:516
+#: src/input/r_matroska.cpp:517
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -12008,7 +12013,7 @@ msgstr ""
 "sunumu yoktur. Bu nedenle kullanılan görüntü kodekini tanımlamak için "
 "FourCC'ye sahip değiliz.\n"
 
-#: src/input/r_matroska.cpp:319
+#: src/input/r_matroska.cpp:320
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -12019,7 +12024,7 @@ msgstr ""
 "yoktur. Bu nedenle kullanılan ses kodekini tanımlamak için biçim ID'sine "
 "sahip değiliz.\n"
 
-#: src/input/r_matroska.cpp:556
+#: src/input/r_matroska.cpp:557
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec "
@@ -12028,7 +12033,7 @@ msgstr ""
 "matroska_okuyucusu: İz '%1%' için KodekID %2%, ama kodek özel başlıkları "
 "yoktur.\n"
 
-#: src/input/r_matroska.cpp:602 src/input/r_matroska.cpp:613
+#: src/input/r_matroska.cpp:603 src/input/r_matroska.cpp:614
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -12037,30 +12042,30 @@ msgstr ""
 "matroska_okuyucusu: İz '%1%' için KodekID %2%, ama bulunan özel veri "
 "yoktur.\n"
 
-#: src/input/r_matroska.cpp:1108
+#: src/input/r_matroska.cpp:1123
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_okuyucusu: Kodek ID eksik.\n"
 
-#: src/input/r_matroska.cpp:588
+#: src/input/r_matroska.cpp:589
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_okuyucusu: İz '%1%' için yükseklik ayarlı değildi.\n"
 
-#: src/input/r_matroska.cpp:582
+#: src/input/r_matroska.cpp:583
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_okuyucusu: İz '%1%' için genişlik ayarlı değildi.\n"
 
-#: src/input/r_matroska.cpp:680
+#: src/input/r_matroska.cpp:681
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_okuyucusu: İz %1% tamam görünüyor.\n"
 
-#: src/input/r_matroska.cpp:1064
+#: src/input/r_matroska.cpp:1079
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_okuyucusu: İz türü bulunmadı.\n"
 
-#: src/input/r_matroska.cpp:410
+#: src/input/r_matroska.cpp:411
 #, boost-format
 msgid ""
 "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track "
@@ -12069,11 +12074,11 @@ msgstr ""
 "matroska_okuyucusu: mkvmerge FLAC desteği ile derlenmedi. İz %1% "
 "yoksayılıyor.\n"
 
-#: src/input/r_matroska.cpp:1268
+#: src/input/r_matroska.cpp:1283
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_okuyucusu: Bulunan EBML başı yok.\n"
 
-#: src/input/r_matroska.cpp:675
+#: src/input/r_matroska.cpp:676
 #, boost-format
 msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
 msgstr "matroska_okuyucusu: iz %1% için bilinmeyen ayıklayacı türü: '%2%'\n"
@@ -12437,7 +12442,6 @@ msgstr "ogg_sync_buffer başarısız\n"
 msgid "only for I frames"
 msgstr "sadece 1 kare için"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1645
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 msgid "only to the first output file"
 msgstr "sadece ilk çıktı dosyasına"
@@ -12592,11 +12596,15 @@ msgstr "etiketler"
 msgid "text subtitles"
 msgstr "metin altyazıları"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1645
+#, fuzzy
+msgid "the first output file only"
+msgstr "sadece ilk çıktı dosyasına"
+
 #: src/merge/mkvmerge.cpp:2375
 msgid "timecodes"
 msgstr "zaman kodları"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1644
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 msgid "to all output files"
 msgstr "tüm çıktı dosyalarına"
@@ -12626,14 +12634,14 @@ msgstr "tta_reader: c'tor içinde tag_size < 0. %1%\n"
 #: src/common/stereo_mode.cpp:69 src/info/mkvinfo.cpp:689
 #: src/info/mkvinfo.cpp:699 src/info/mkvinfo.cpp:714 src/info/mkvinfo.cpp:736
 #: src/info/mkvinfo.cpp:748 src/info/mkvinfo.cpp:758 src/info/mkvinfo.cpp:944
-#: src/input/r_matroska.cpp:104 src/input/r_matroska.cpp:2382
+#: src/input/r_matroska.cpp:104 src/input/r_matroska.cpp:2397
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:241
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57
 msgid "unknown"
 msgstr "bilinmiyor"
 
-#: src/input/r_matroska.cpp:2370
+#: src/input/r_matroska.cpp:2385
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "bilinmiyor, biçim etiketi: 0x%|1$04x|"

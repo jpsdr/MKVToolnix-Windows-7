@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-19 13:25+0100\n"
+"POT-Creation-Date: 2016-01-24 12:12+0100\n"
 "PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -1048,8 +1048,8 @@ msgstr ""
 msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: десио се изузетак (порука: %2%; врста: %3%)."
 
-#: src/common/kax_file.cpp:69 src/input/r_matroska.cpp:1368
-#: src/input/r_matroska.cpp:2031
+#: src/common/kax_file.cpp:69 src/input/r_matroska.cpp:1383
+#: src/input/r_matroska.cpp:2046
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: десио се непознат изузетак."
@@ -1811,7 +1811,7 @@ msgstr "„%1%“: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "„%1%“: Обрађујем и наредне датотеке: %2%\n"
 
-#: src/input/r_matroska.cpp:1641
+#: src/input/r_matroska.cpp:1656
 #, boost-format
 msgid ""
 "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. "
@@ -2135,7 +2135,7 @@ msgstr "<без назива>"
 msgid "<unsaved file>"
 msgstr "<несачувана датотека>"
 
-#: src/input/r_matroska.cpp:2052 src/input/r_matroska.cpp:2148
+#: src/input/r_matroska.cpp:2067 src/input/r_matroska.cpp:2163
 #, boost-format
 msgid ""
 "A block was found at timestamp %1% for track number %2%. However, no headers "
@@ -6203,11 +6203,11 @@ msgid ""
 "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Учини овај запис подразумеваним за ову врсту (звук, видео, поднаписи)."
 
-#: src/input/r_matroska.cpp:1531 src/input/r_matroska.cpp:1546
+#: src/input/r_matroska.cpp:1546 src/input/r_matroska.cpp:1561
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Пронађени су неправилни подаци за отварање Аак-кодека.\n"
 
-#: src/input/r_matroska.cpp:1539
+#: src/input/r_matroska.cpp:1554
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Неправилан ИБ-кодека „%1%“.\n"
@@ -9483,8 +9483,8 @@ msgid "The file was not recognized as a supported format (exit code: %1)."
 msgstr "Ова датотека није на списку подржаних врста (излазни кôд: %1)."
 
 #: src/common/kax_file.cpp:60 src/common/kax_file.cpp:65
-#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1369
-#: src/input/r_matroska.cpp:2032
+#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1384
+#: src/input/r_matroska.cpp:2047
 msgid "The file will not be processed further."
 msgstr "Надаље, нећу обрађивати ову датотеку."
 
@@ -10790,8 +10790,8 @@ msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
 msgstr "Овај запис садржи Сбр Аак/Хе-Аак/Аак+ податке."
 
 #: src/common/kax_file.cpp:60 src/common/kax_file.cpp:65
-#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1369
-#: src/input/r_matroska.cpp:2032
+#: src/common/kax_file.cpp:70 src/input/r_matroska.cpp:1384
+#: src/input/r_matroska.cpp:2047
 msgid "This usually indicates a damaged file structure."
 msgstr "Ово обично указује на оштећење устројства датотеке."
 
@@ -10875,7 +10875,7 @@ msgid ""
 msgstr ""
 "За запис %1% је употребљен непознат/неподржан алгоритам сажимања (%2%).\n"
 
-#: src/input/r_matroska.cpp:1057
+#: src/input/r_matroska.cpp:1072
 #, boost-format
 msgid ""
 "Track %1% is missing its track UID element which is required to be present "
@@ -11259,7 +11259,7 @@ msgstr ""
 msgid "Unsupported file format"
 msgstr "Неподржана врста датотеке"
 
-#: src/input/r_matroska.cpp:1840
+#: src/input/r_matroska.cpp:1855
 msgid "Unsupported track type for this track.\n"
 msgstr "Неподржана врста за овај запис.\n"
 
@@ -11322,7 +11322,7 @@ msgstr ""
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Употребљавам демултиплексер за формат „%1%“.\n"
 
-#: src/input/r_matroska.cpp:1398
+#: src/input/r_matroska.cpp:1413
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Употребљавам општи изл. модул за врсту записа „%1%“.\n"
@@ -11873,6 +11873,11 @@ msgstr "по задатој временској ознаци"
 msgid "all entries"
 msgstr "све ставке"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1644
+#, fuzzy
+msgid "all output files"
+msgstr "све исходишне датотеке"
+
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 msgid "always ask the user"
 msgstr "увек ме питај"
@@ -12241,7 +12246,7 @@ msgstr "мањи"
 msgid "lowest"
 msgstr "најмањи"
 
-#: src/input/r_matroska.cpp:359
+#: src/input/r_matroska.cpp:360
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -12251,7 +12256,7 @@ msgstr ""
 "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, постоји %2% "
 "бита по узорку, а по „WAVEFORMATEX“, њих је %3%.\n"
 
-#: src/input/r_matroska.cpp:350
+#: src/input/r_matroska.cpp:351
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -12260,7 +12265,7 @@ msgstr ""
 "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, постоји %2% "
 "канала, а по „WAVEFORMATEX“, њих је %3%.\n"
 
-#: src/input/r_matroska.cpp:341
+#: src/input/r_matroska.cpp:342
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode for track %1%) Matroska says that "
@@ -12269,7 +12274,7 @@ msgstr ""
 "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, постоји %2% "
 "узорака по секунди, а по „WAVEFORMATEX“, њих је %3%.\n"
 
-#: src/input/r_matroska.cpp:537
+#: src/input/r_matroska.cpp:538
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode, track %1%) Matroska says video "
@@ -12278,7 +12283,7 @@ msgstr ""
 "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, висина видеа "
 "је %2%, а по „BITMAPINFOHEADER“, она је %3%.\n"
 
-#: src/input/r_matroska.cpp:528
+#: src/input/r_matroska.cpp:529
 #, boost-format
 msgid ""
 "matroska_reader: (MS compatibility mode, track %1%) Matroska says video "
@@ -12287,11 +12292,11 @@ msgstr ""
 "„matroska_reader“: (МС-сагласан режим, запис %1%) По Матрошки, ширина видеа "
 "је %2%, а по „BITMAPINFOHEADER“, она је %3%.\n"
 
-#: src/input/r_matroska.cpp:1046
+#: src/input/r_matroska.cpp:1061
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "„matroska_reader“: Запис нема сопствени број.\n"
 
-#: src/input/r_matroska.cpp:1464
+#: src/input/r_matroska.cpp:1479
 #, boost-format
 msgid ""
 "matroska_reader: Could not keep the track UID %1% because it is already "
@@ -12300,25 +12305,25 @@ msgstr ""
 "„matroska_reader“: Задршка ЈИБ-записа %1% није могућа јер је он намењен за "
 "употребу у новој датотеци.\n"
 
-#: src/input/r_matroska.cpp:1281 src/input/r_matroska.cpp:1286
+#: src/input/r_matroska.cpp:1296 src/input/r_matroska.cpp:1301
 msgid "matroska_reader: No segment found.\n"
 msgstr "„matroska_reader“: Нема пронађеног одељка.\n"
 
-#: src/input/r_matroska.cpp:1009
+#: src/input/r_matroska.cpp:1024
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "„matroska_reader“: Недостаје висина (у пикселима).\n"
 
-#: src/input/r_matroska.cpp:1007
+#: src/input/r_matroska.cpp:1022
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "„matroska_reader“: Недостаје ширина (у пикселима).\n"
 
-#: src/input/r_matroska.cpp:638
+#: src/input/r_matroska.cpp:639
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "„matroska_reader“: Није познат ИБ-кодека „%1%“ (запис %2%).\n"
 
-#: src/input/r_matroska.cpp:374 src/input/r_matroska.cpp:419
-#: src/input/r_matroska.cpp:440
+#: src/input/r_matroska.cpp:375 src/input/r_matroska.cpp:420
+#: src/input/r_matroska.cpp:441
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but the private codec "
@@ -12327,7 +12332,7 @@ msgstr ""
 "„matroska_reader“: За запис %1%, ИБ-кодека је „%2%“, али у овим приватним "
 "подацима нема ваљаног заглавља.\n"
 
-#: src/input/r_matroska.cpp:516
+#: src/input/r_matroska.cpp:517
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -12338,7 +12343,7 @@ msgstr ""
 "„BITMAPINFOHEADER“-устројство. Зато нема Фоур-ЦЦ за одређивање употребљеног "
 "видео-кодера.\n"
 
-#: src/input/r_matroska.cpp:319
+#: src/input/r_matroska.cpp:320
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -12349,7 +12354,7 @@ msgstr ""
 "„WAVEFORMATEX“-устројство. Зато нема ИБ-формата за одређивање употребљеног "
 "звучног-кодера.\n"
 
-#: src/input/r_matroska.cpp:556
+#: src/input/r_matroska.cpp:557
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec "
@@ -12358,7 +12363,7 @@ msgstr ""
 "„matroska_reader“: За запис %1%, ИБ-кодека је „%2%“, али нема приватних "
 "заглавља кодека.\n"
 
-#: src/input/r_matroska.cpp:602 src/input/r_matroska.cpp:613
+#: src/input/r_matroska.cpp:603 src/input/r_matroska.cpp:614
 #, boost-format
 msgid ""
 "matroska_reader: The CodecID for track %1% is '%2%', but there was no "
@@ -12367,30 +12372,30 @@ msgstr ""
 "„matroska_reader“: За запис %1%, ИБ-кодека је „%2%“, али нема приватних "
 "података.\n"
 
-#: src/input/r_matroska.cpp:1108
+#: src/input/r_matroska.cpp:1123
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "„matroska_reader“: Недостаје ИБ-кодека.\n"
 
-#: src/input/r_matroska.cpp:588
+#: src/input/r_matroska.cpp:589
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "„matroska_reader“: За запис %1% није постављена висина.\n"
 
-#: src/input/r_matroska.cpp:582
+#: src/input/r_matroska.cpp:583
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "„matroska_reader“: За запис %1% није постављена ширина.\n"
 
-#: src/input/r_matroska.cpp:680
+#: src/input/r_matroska.cpp:681
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "„matroska_reader“: Изгледа да је запис %1% ваљан.\n"
 
-#: src/input/r_matroska.cpp:1064
+#: src/input/r_matroska.cpp:1079
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "„matroska_reader“: Није нађена врста записа.\n"
 
-#: src/input/r_matroska.cpp:410
+#: src/input/r_matroska.cpp:411
 #, boost-format
 msgid ""
 "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track "
@@ -12399,11 +12404,11 @@ msgstr ""
 "„matroska_reader“: Код превођења програмског кода Мкв-спојнице није укључена "
 "подршка за Флак-кодек. Занемарићу запис %1%.\n"
 
-#: src/input/r_matroska.cpp:1268
+#: src/input/r_matroska.cpp:1283
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "„matroska_reader“: нема ЕБМЛ-заглавља.\n"
 
-#: src/input/r_matroska.cpp:675
+#: src/input/r_matroska.cpp:676
 #, boost-format
 msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
 msgstr "„matroska_reader“: непозната врста демуксера за запис %1%: „%2%“\n"
@@ -12780,7 +12785,6 @@ msgstr "Није успео „ogg_sync_buffer“\n"
 msgid "only for I frames"
 msgstr "само за И-кадрове"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1645
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 msgid "only to the first output file"
 msgstr "само прву исходишну датотеку"
@@ -12936,11 +12940,15 @@ msgstr "ознаке"
 msgid "text subtitles"
 msgstr "текст-поднаписи"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1645
+#, fuzzy
+msgid "the first output file only"
+msgstr "само прву исходишну датотеку"
+
 #: src/merge/mkvmerge.cpp:2375
 msgid "timecodes"
 msgstr "времена"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1644
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 msgid "to all output files"
 msgstr "све исходишне датотеке"
@@ -12970,14 +12978,14 @@ msgstr "„tta_reader“: „tag_size“ < 0 у овом „c'tor.“ %1%\n"
 #: src/common/stereo_mode.cpp:69 src/info/mkvinfo.cpp:689
 #: src/info/mkvinfo.cpp:699 src/info/mkvinfo.cpp:714 src/info/mkvinfo.cpp:736
 #: src/info/mkvinfo.cpp:748 src/info/mkvinfo.cpp:758 src/info/mkvinfo.cpp:944
-#: src/input/r_matroska.cpp:104 src/input/r_matroska.cpp:2382
+#: src/input/r_matroska.cpp:104 src/input/r_matroska.cpp:2397
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:241
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:57
 msgid "unknown"
 msgstr "непознато"
 
-#: src/input/r_matroska.cpp:2370
+#: src/input/r_matroska.cpp:2385
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "непознато, облик ознаке 0x%|1$04x|"
