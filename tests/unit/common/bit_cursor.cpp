@@ -241,7 +241,8 @@ TEST(BitReader, SetBitPosition) {
   EXPECT_NO_THROW(b.set_bit_position(31));
   EXPECT_EQ(31, b.get_bit_position());
 
-  EXPECT_THROW(b.set_bit_position(32), mtx::mm_io::end_of_file_x);
+  EXPECT_NO_THROW(b.set_bit_position(32));
+  EXPECT_THROW(b.set_bit_position(33), mtx::mm_io::end_of_file_x);
 }
 
 TEST(BitReader, ExceptionOnReadingBeyondEOF) {

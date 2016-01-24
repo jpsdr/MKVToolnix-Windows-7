@@ -160,7 +160,7 @@ public:
   }
 
   void set_bit_position(std::size_t pos) {
-    if (pos >= (static_cast<std::size_t>(m_end_of_data - m_start_of_data) * 8)) {
+    if (pos > (static_cast<std::size_t>(m_end_of_data - m_start_of_data) * 8)) {
       m_byte_position = m_end_of_data;
       m_out_of_data   = true;
 
