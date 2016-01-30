@@ -622,6 +622,7 @@ void
 PreferencesDialog::addProgramToExecute() {
   auto programWidget = new PrefsRunProgramWidget{this, {}};
   ui->twJobsPrograms->addTab(programWidget, QY("<no program selected yet>"));
+  ui->twJobsPrograms->setCurrentIndex(ui->twJobsPrograms->count() - 1);
 
   ui->swJobsPrograms->setCurrentIndex(1);
 
