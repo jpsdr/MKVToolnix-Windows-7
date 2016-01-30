@@ -22,7 +22,7 @@ ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,
   setupGeneralVariables(generalVariables);
 
   for (auto const &runConfig : configsToRun) {
-    if (!(runConfig->m_forEvents & forEvent) && !forceRunThis)
+    if (!(runConfig->m_active && (runConfig->m_forEvents & forEvent)) && !forceRunThis)
       continue;
 
     auto commandLine = runConfig->m_commandLine;

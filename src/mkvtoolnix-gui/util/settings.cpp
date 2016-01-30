@@ -293,6 +293,7 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
     auto cfg = std::make_shared<RunProgramConfig>();
 
     reg.beginGroup(group);
+    cfg->m_active      = reg.value("active", true).toBool();
     cfg->m_commandLine = reg.value("commandLine").toStringList();
     cfg->m_forEvents   = static_cast<RunProgramForEvents>(reg.value("forEvents").value<int>());
     reg.endGroup();
@@ -424,6 +425,7 @@ Settings::saveRunProgramConfigurations(QSettings &reg)
   auto idx = 0;
   for (auto const &cfg : m_runProgramConfigurations) {
     reg.beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
+    reg.setValue("active",      cfg->m_active);
     reg.setValue("commandLine", cfg->m_commandLine);
     reg.setValue("forEvents",   static_cast<int>(cfg->m_forEvents));
     reg.endGroup();

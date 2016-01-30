@@ -83,6 +83,7 @@ public:
 
   class RunProgramConfig {
   public:
+    bool m_active{true};
     QStringList m_commandLine;
     RunProgramForEvents m_forEvents{};
 

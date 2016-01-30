@@ -44,6 +44,21 @@ PrefsRunProgramWidget::~PrefsRunProgramWidget() {
 }
 
 void
+PrefsRunProgramWidget::enableControls() {
+  Q_D(PrefsRunProgramWidget);
+
+  auto active   = d->ui->cbConfigurationActive->isChecked();
+  auto controls = findChildren<QWidget *>();
+
+  for (auto const &control : controls)
+    if (control == d->ui->pbExecuteNow)
+      d->ui->pbExecuteNow->setEnabled(active && isValid());
+
+    else if (control != d->ui->cbConfigurationActive)
+      control->setEnabled(active);
+}
+
+void
 PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
   Q_D(PrefsRunProgramWidget);
 
@@ -54,14 +69,14 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
   d->flagsByCheckbox[d->ui->cbAfterJobSuccessful]   = Util::Settings::RunAfterJobCompletesSuccessfully;
   d->flagsByCheckbox[d->ui->cbAfterJobError]        = Util::Settings::RunAfterJobCompletesWithErrors;
 
+  d->ui->cbConfigurationActive->setChecked(cfg.m_active);
+
   d->executable = cfg.m_commandLine.value(0);
   d->ui->leCommandLine->setText(Util::escape(cfg.m_commandLine, Util::EscapeShellUnix).join(" "));
 
   for (auto const &checkBox : d->flagsByCheckbox.keys())
     if (cfg.m_forEvents & d->flagsByCheckbox[checkBox])
       checkBox->setChecked(true);
-
-  d->ui->pbExecuteNow->setEnabled(isValid());
 
   auto html = QStringList{};
   html << Q("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">"
@@ -153,12 +168,15 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
        << Q("</ul></body></html>");
 
   d->ui->tbUsageNotes->setHtml(html.join(Q(" ")));
+
+  enableControls();
 }
 
 void
 PrefsRunProgramWidget::setupToolTips() {
   Q_D(PrefsRunProgramWidget);
 
+  Util::setToolTip(d->ui->cbConfigurationActive, QY("Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."));
   Util::setToolTip(d->ui->pbExecuteNow, Q("%1 %2").arg(QY("Executes the program now as a test run.")).arg(QY("Note that most <MTX_…> variables are empty and will be removed for this test run.")));
 }
 
@@ -200,10 +218,11 @@ void
 PrefsRunProgramWidget::setupConnections() {
   Q_D(PrefsRunProgramWidget);
 
-  connect(d->ui->leCommandLine,      &QLineEdit::textEdited, this, &PrefsRunProgramWidget::commandLineEdited);
-  connect(d->ui->pbBrowseExecutable, &QPushButton::clicked,  this, &PrefsRunProgramWidget::changeExecutable);
-  connect(d->ui->pbAddVariable,      &QPushButton::clicked,  this, &PrefsRunProgramWidget::selectVariableToAdd);
-  connect(d->ui->pbExecuteNow,       &QPushButton::clicked,  this, &PrefsRunProgramWidget::executeNow);
+  connect(d->ui->leCommandLine,         &QLineEdit::textEdited, this, &PrefsRunProgramWidget::commandLineEdited);
+  connect(d->ui->pbBrowseExecutable,    &QPushButton::clicked,  this, &PrefsRunProgramWidget::changeExecutable);
+  connect(d->ui->pbAddVariable,         &QPushButton::clicked,  this, &PrefsRunProgramWidget::selectVariableToAdd);
+  connect(d->ui->pbExecuteNow,          &QPushButton::clicked,  this, &PrefsRunProgramWidget::executeNow);
+  connect(d->ui->cbConfigurationActive, &QCheckBox::toggled,    this, &PrefsRunProgramWidget::enableControls);
 }
 
 void
@@ -260,7 +279,7 @@ PrefsRunProgramWidget::changeExecutable() {
 
   d->executable = newExecutable;
 
-  d->ui->pbExecuteNow->setEnabled(isValid());
+  enableControls();
 
   emit executableChanged(newExecutable);
 }
@@ -269,7 +288,7 @@ void
 PrefsRunProgramWidget::commandLineEdited(QString const &commandLine) {
   Q_D(PrefsRunProgramWidget);
 
-  d->ui->pbExecuteNow->setEnabled(isValid());
+  enableControls();
 
   auto arguments     = Util::unescapeSplit(commandLine, Util::EscapeShellUnix);
   auto newExecutable = arguments.value(0);
@@ -301,6 +320,7 @@ PrefsRunProgramWidget::config()
   auto cfg           = std::make_shared<Util::Settings::RunProgramConfig>();
   auto cmdLine       = d->ui->leCommandLine->text().replace(QRegularExpression{"^\\s+"}, Q(""));
   cfg->m_commandLine = Util::unescapeSplit(cmdLine, Util::EscapeShellUnix);
+  cfg->m_active      = d->ui->cbConfigurationActive->isChecked();
 
   for (auto const &checkBox : d->flagsByCheckbox.keys())
     if (checkBox->isChecked())

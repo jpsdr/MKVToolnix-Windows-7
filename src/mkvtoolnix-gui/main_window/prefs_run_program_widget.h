@@ -35,6 +35,7 @@ protected slots:
   void changeExecutable();
   void commandLineEdited(QString const &commandLine);
   void executeNow();
+  void enableControls();
 
 protected:
   void changeArguments(std::function<void(QStringList &)> const &worker);
