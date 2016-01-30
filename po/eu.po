@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-01-24 12:12+0100\n"
+"POT-Creation-Date: 2016-01-30 13:20+0100\n"
 "PO-Revision-Date: 2016-01-29 19:45+0100\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -1221,7 +1221,7 @@ msgstr "It&xi agiria"
 msgid "&Collapse all"
 msgstr "&Bildu denak"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:182
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:190
 msgid "&Command line:"
 msgstr "&Agindu lerroa:"
 
@@ -2121,7 +2121,7 @@ msgid "<no output file>"
 msgstr "<irteera agiririk ez>"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:624
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:658
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:659
 msgid "<no program selected yet>"
 msgstr "<ez da programarik hautatu oraindik>"
 
@@ -2415,7 +2415,7 @@ msgstr "Ezaugarriak kudeatzeko ekintzak"
 msgid "Actions for handling tags and chapters"
 msgstr "Etiketak eta atalak kudeatzeko ekintzak"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:183
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:191
 msgid "Add &variable"
 msgstr "Gehitu &aldagaia"
 
@@ -2545,15 +2545,15 @@ msgid "Adds a property with the value even if such a property already exists"
 msgstr ""
 "Ezaugarri bat gehitzen du balioarekin baita ezaugarri hau jadanik badago ere"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:186
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:194
 msgid "After a job completes &successfully or with warnings"
 msgstr "Lan bat ongi edo oharrekin osatu ondoren"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:187
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:195
 msgid "After a job exits with an &error or the user aborts the job"
 msgstr "Lan bat akatsekin dagoenean edo erabiltzaileak lana utzi ondoren"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:188
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:196
 msgid "After the job &queue has stopped"
 msgstr "Lan &lerroa gelditu ondoren"
 
@@ -2570,7 +2570,7 @@ msgstr "Algoritmoa: %1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:204
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
 #: src/mkvtoolnix-gui/merge/attachments.cpp:164
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171 src/mkvtoolnix-gui/merge/tab.cpp:185
@@ -2721,7 +2721,7 @@ msgstr "Betik erakutsi irteera agiri aginteak &hegatsen azpian"
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "B&etik erabili berezko azalpen bat lan bat lerrora gehitzerakoan"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:84
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
 msgid ""
 "Always use full path names even if the application is located in the same "
 "directory as the GUI."
@@ -3461,6 +3461,11 @@ msgstr "Konpresio hutsegitea: %1%\n"
 msgid "Compression:"
 msgstr "Konpresioa:"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
+#, fuzzy
+msgid "Configuration &active"
+msgstr "Itxurapena gordeta."
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:188
 msgid ""
 "Constrict start and end ti&mecodes of sub-chapters to their parent's start "
@@ -3833,7 +3838,7 @@ msgstr "Cues (azpisarrerak jauzi egingo dira)"
 msgid "Current command line"
 msgstr "Oraingo agindu lerroa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:182
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:200
 msgid "Current date && time in ISO 8601 format"
 msgstr "Uneko eguna eta ordua ISO 8601 heuskarrian"
 
@@ -3915,6 +3920,12 @@ msgstr "Hasiera eguna"
 #, boost-format
 msgid "Date: %1% UTC"
 msgstr "Eguna: %1% UTC"
+
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:179
+msgid ""
+"Deactivating this checkbox is a way to disable a configuration temporarily "
+"without having to change its parameters."
+msgstr ""
 
 #: src/common/output.cpp:125
 msgid "Debug> "
@@ -4204,7 +4215,7 @@ msgstr "Iraupena: %|1$.3f|sm"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Iraupena: %|1$.3f|s (%2%)"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:184
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:192
 msgid "E&xecute now"
 msgstr "E&xekutatu orain"
 
@@ -4486,7 +4497,7 @@ msgstr "Baita kontuz-oharrak egonda ere"
 msgid "Example"
 msgstr "Adibidea"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:97
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:112
 msgid "Examples"
 msgstr "Adibideak"
 
@@ -4508,7 +4519,7 @@ msgstr ""
 msgid "Exception details:"
 msgstr "Salbuespen xehetasunak:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:264
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 msgid "Executable files"
 msgstr "Agiri exekutagarriak"
@@ -4517,7 +4528,7 @@ msgstr "Agiri exekutagarriak"
 msgid "Executable not found"
 msgstr "Exekutagarria ez da aurkitu"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:162
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:180
 msgid "Executes the program now as a test run."
 msgstr "Programa exekutatzen du orain azterketa ekintza bezala."
 
@@ -4529,7 +4540,7 @@ msgstr "Programak exekutatzen"
 msgid "Executing programs after certain events"
 msgstr "Programen exekutatzea zenbait gertakariren ondoren"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:174
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:192
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr ""
 "Irteera kodea (0: ongi, 1: kontuz-oharra gertatu dira, 2: akats gertatu dira)"
@@ -4938,7 +4949,7 @@ msgstr "Orokorra"
 msgid "General options"
 msgstr "Aukera orokorrak"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:181
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
 msgid "General variables"
 msgstr "Aldagai orokorrak"
 
@@ -5927,11 +5938,11 @@ msgstr "Ezarpen kokalekua ezin bada berezgaitasunez zehaztu."
 msgid "Job &output"
 msgstr "La&n irteera"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:171
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:189
 msgid "Job description"
 msgstr "Lanaren azalpena"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:173
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:191
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Lanaren amaiera eguna eta ordua ISO 8601 heuskarrian"
 
@@ -5939,7 +5950,7 @@ msgstr "Lanaren amaiera eguna eta ordua ISO 8601 heuskarrian"
 msgid "Job queue"
 msgstr "Lan lerroa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:172
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:190
 msgid "Job start date && time in ISO 8601 format"
 msgstr "Lanaren hasiera eguna eta ordua ISO 8601 heuskarrian"
 
@@ -6774,7 +6785,7 @@ msgstr ""
 "erabiltzen zuzenean baina balio hauek emandako maila bakarrik erabiltzen "
 "dutela hasierako leiho neurria ezartzerakoan."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:162
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:180
 msgid ""
 "Note that most <MTX_…> variables are empty and will be removed for this test "
 "run."
@@ -6782,7 +6793,7 @@ msgstr ""
 "Ohartu <MTX_…> aldagai gehienak hutsik daudela eta azterketa ekintza "
 "honetatik kenduko direla."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:79
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:94
 msgid ""
 "Note that on Windows forward slashes can be used instead of backslashes in "
 "path names, too."
@@ -7007,7 +7018,7 @@ msgstr "Ireki &MediaInfon"
 msgid "Open settings file"
 msgstr "Ireki ezarpen agiria"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:138
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:153
 msgid "Open the merged file with a player:"
 msgstr "Ireki batutako agiria irakurgailu batekin:"
 
@@ -7083,11 +7094,11 @@ msgstr "Irteera agiria"
 msgid "Output file name"
 msgstr "Irteera agiri izena"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:178
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
 msgid "Output file's directory"
 msgstr "Irteera agiriaren zuzenbidea"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:177
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
 msgid "Output file's name"
 msgstr "Irteera agiriaren izena"
 
@@ -7175,7 +7186,7 @@ msgstr "Pixel garaiera: %1%"
 msgid "Pixel width: %1%"
 msgstr "Pixel zabalera: %1%"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:114
 msgid "Play a WAV file with the default application:"
 msgstr "Irakurri WAV agiri bat berezko aplikazioarekin:"
 
@@ -7936,8 +7947,8 @@ msgstr "Irakur-zerrendak mihatzen"
 msgid "Scope: %1% (%2%)"
 msgstr "Irismena: %1% (%2%)"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:81
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:93
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:96
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:108
 msgid "See below for examples."
 msgstr "Ikusi azpian adibideak."
 
@@ -8050,7 +8061,7 @@ msgstr "Hautatu atal agiria"
 msgid "Select character set"
 msgstr "Hautatu hizkikodea"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:268
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 msgid "Select executable"
 msgstr "Hautatu exekutagarria"
@@ -8306,7 +8317,7 @@ msgstr "Erakutsi laguntza hau."
 msgid "Show version information."
 msgstr "Erakutsi bertsio argibideak."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:137
 msgid "Shut down the system in one minute:"
 msgstr "Itzali sistema minutu batean:"
 
@@ -8432,7 +8443,7 @@ msgstr "Iturburu agiria"
 msgid "Source file name"
 msgstr "Iturburu agiri izena"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:179
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
 msgid "Source file names"
 msgstr "Iturburu agiri izenak"
 
@@ -8494,11 +8505,11 @@ msgstr "Hasi"
 msgid "Start &muxing"
 msgstr "&Hasi multiplexaketa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:89
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:104
 msgid "Start file types other than executable files via cmd.exe."
 msgstr "Abiarazi exekutagarriak ez diren beste agiri motak cmd.exe bidez."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:91
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:106
 msgid "Start file types other than executable files via xdg-open."
 msgstr "Abiarazi exekutagarriak ez diren beste agiri motak xdg-open bidez."
 
@@ -9020,7 +9031,7 @@ msgstr ""
 "Kodekaren datu pribatuak ez datoz bat. Biek luzera berdina dute (%1%), baina "
 "eduki ezberdina."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:76
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:91
 msgid ""
 "The command line here uses Unix-style shell escaping via the backslash "
 "character even on Windows."
@@ -10615,7 +10626,7 @@ msgstr ""
 "ugari dauden zuzenbide berean eta argi ez dagoen zein ezaugarri duen irakur-"
 "zerrenda bakoitzak (adib. filma nagusia, gehigarriak, etab)."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:77
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:92
 msgid ""
 "This means that either backslashes must be doubled or the whole argument "
 "must be enclosed in single quotes."
@@ -11260,7 +11271,7 @@ msgstr "Eguneratzen huts egin duen '%1%' gaia. Zergaitika:"
 msgid "Usage"
 msgstr "Erabilera"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:74
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:89
 msgid "Usage and examples"
 msgstr "Erabilpena eta adibideak"
 
@@ -11342,11 +11353,11 @@ msgstr "Balioztapen hutsegitea"
 msgid "Value"
 msgstr "Balioa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:170
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:188
 msgid "Variables for all job types"
 msgstr "Lan mota guztientzako aldagaiak"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:176
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:194
 msgid "Variables for merge jobs"
 msgstr "Batze lanentzako aldagaiak"
 
@@ -11589,7 +11600,7 @@ msgstr ""
 "Erabiltzaileak agiriak kanpoko aplikazio batetik batze tresnara arrastatu "
 "eta askatzen dituenean EIG-k ekintza ezberdinak egin ditzake."
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:185
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:193
 msgid "When to execute:"
 msgstr "Exekutatutakoan:"
 
@@ -12770,8 +12781,8 @@ msgstr "I framentzat bakarrik"
 msgid "only to the first output file"
 msgstr "lehen irteera agirira bakarrik"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:104
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:108
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:119
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:123
 msgid "or"
 msgstr "edo"
 
@@ -13846,9 +13857,6 @@ msgstr "– ezarri ezer ezean –"
 
 #~ msgid "Configuration loaded."
 #~ msgstr "Itxurapena gertatuta."
-
-#~ msgid "Configuration saved."
-#~ msgstr "Itxurapena gordeta."
 
 #~ msgid "Copy the command line to the clipboard"
 #~ msgstr "Kopiatu agindu lerroa gakora"
