@@ -100,6 +100,7 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 %{_datadir}/man/es
 %{_datadir}/man/ja
 %{_datadir}/man/nl
+%{_datadir}/man/pl
 %{_datadir}/man/uk
 %{_datadir}/man/zh_CN
 
