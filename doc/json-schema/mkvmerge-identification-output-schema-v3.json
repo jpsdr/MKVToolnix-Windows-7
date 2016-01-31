@@ -180,6 +180,16 @@
     "global_tags": {
       "type": "array",
       "items": {
+        "type": "object",
+        "properties": {
+          "num_entries": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "num_entries"
+        ]
       }
     },
     "identification_format_version": {
