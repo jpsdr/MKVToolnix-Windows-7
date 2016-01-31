@@ -1291,7 +1291,7 @@ Tab::selectedSourceFile()
 void
 Tab::setTitleMaybe(QList<SourceFilePtr> const &files) {
   for (auto const &file : files) {
-    setTitleMaybe(file->m_properties["title"]);
+    setTitleMaybe(file->m_properties.value("title").toString());
 
     if (FILE_TYPE_OGM != file->m_type)
       continue;

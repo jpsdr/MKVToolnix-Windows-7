@@ -3,8 +3,8 @@
 
 #include "common/common_pch.h"
 
-#include <QHash>
 #include <QString>
+#include <QVariant>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
@@ -40,7 +40,7 @@ public:
     CompMax = CompZlib
   };
 
-  QHash<QString, QString> m_properties;
+  QVariantMap m_properties;
 
   SourceFile *m_file{};
   Track *m_appendedTo{};

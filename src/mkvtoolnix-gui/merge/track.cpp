@@ -95,7 +95,16 @@ Track::isRegular()
 bool
 Track::isPropertySet(QString const &property)
   const {
-  return m_properties.contains(property) && !m_properties.value(property).isEmpty();
+  if (!m_properties.contains(property))
+    return false;
+
+  auto var = m_properties.value(property);
+
+  return var.isNull()                            ? false
+       : !var.isValid()                          ? false
+       : var.canConvert(QMetaType::QVariantList) ? !var.toList().isEmpty()
+       : var.canConvert(QMetaType::QString)      ? !var.toString().isEmpty()
+       :                                           true;
 }
 
 void
@@ -105,17 +114,17 @@ Track::setDefaults() {
   if (isAudio() && settings.m_setAudioDelayFromFileName)
     m_delay = extractAudioDelayFromFileName();
 
-  m_forcedTrackFlag        = m_properties["forced_track"]  == Q("1") ? 1 : 0;
+  m_forcedTrackFlag        = m_properties.value("forced_track").toBool() ? 1 : 0;
   m_forcedTrackFlagWasSet  = m_forcedTrackFlag == 1;
-  m_defaultTrackFlagWasSet = m_properties[Q("default_track")] == "1";
-  m_name                   = m_properties[Q("track_name")];
+  m_defaultTrackFlagWasSet = m_properties.value("default_track").toBool();
+  m_name                   = m_properties.value("track_name").toString();
   m_nameWasPresent         = !m_name.isEmpty();
-  m_cropping               = m_properties[Q("cropping")];
-  m_aacSbrWasDetected      = m_properties["aac_is_sbr"].contains(QRegExp{"1|true"});
-  m_stereoscopy            = m_properties[Q("stereo_mode")].isEmpty() ? 0 : m_properties[Q("stereo_mode")].toUInt() + 1;
-  m_characterSet           = (m_properties[Q("text_subtitles")] == Q("1")) && m_file && (m_file->m_type != FILE_TYPE_MATROSKA) ? settings.m_defaultSubtitleCharset : Q("");
+  m_cropping               = m_properties.value("cropping").toString();
+  m_aacSbrWasDetected      = m_properties.value("aac_is_sbr").toString().contains(QRegExp{"1|true"});
+  m_stereoscopy            = m_properties.contains("stereo_mode") ? m_properties.value("stereo_mode").toUInt() + 1 : 0;
+  m_characterSet           = m_properties.value("text_subtitles").toBool() && m_file && (m_file->m_type != FILE_TYPE_MATROSKA) ? settings.m_defaultSubtitleCharset : Q("");
 
-  auto language = m_properties[Q("language")];
+  auto language = m_properties.value("language").toString();
   if (language.isEmpty())
     language = isAudio()     ? settings.m_defaultAudioTrackLanguage
              : isVideo()     ? settings.m_defaultVideoTrackLanguage
@@ -127,7 +136,7 @@ Track::setDefaults() {
     m_language = to_qs(g_iso639_languages[idx].iso639_2_code);
 
   QRegExp re_displayDimensions{"^(\\d+)x(\\d+)$"};
-  if (-1 != re_displayDimensions.indexIn(m_properties[Q("display_dimensions")])) {
+  if (-1 != re_displayDimensions.indexIn(m_properties.value("display_dimensions").toString())) {
     m_displayWidth  = re_displayDimensions.cap(1);
     m_displayHeight = re_displayDimensions.cap(2);
   }

@@ -9,9 +9,9 @@
 #include "mkvtoolnix-gui/merge/track.h"
 
 #include <QFileInfo>
-#include <QHash>
 #include <QList>
 #include <QString>
+#include <QVariant>
 
 namespace mtx { namespace gui { namespace Merge {
 
@@ -20,7 +20,7 @@ using SourceFilePtr = std::shared_ptr<SourceFile>;
 
 class SourceFile {
 public:
-  QHash<QString, QString> m_properties;
+  QVariantMap m_properties;
   QString m_fileName;
   QList<TrackPtr> m_tracks;
   QList<SourceFilePtr> m_additionalParts, m_appendedFiles;

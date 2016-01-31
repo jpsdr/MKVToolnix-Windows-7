@@ -149,7 +149,7 @@ MuxConfig::operator =(MuxConfig const &other) {
 
 void
 MuxConfig::loadProperties(Util::ConfigFile &settings,
-                          QHash<QString, QString> &properties) {
+                          QVariantMap &properties) {
   properties.clear();
 
   settings.beginGroup("properties");
@@ -242,7 +242,7 @@ MuxConfig::load(Util::ConfigFile &settings) {
 
 void
 MuxConfig::saveProperties(Util::ConfigFile &settings,
-                          QHash<QString, QString> const &properties) {
+                          QVariantMap const &properties) {
   QStringList keys{ properties.keys() };
   keys.sort();
   settings.beginGroup("properties");
@@ -469,7 +469,7 @@ bool
 MuxConfig::hasSourceFileWithTitle()
   const {
   for (auto const &sourceFile : m_files)
-    if (sourceFile->m_properties.contains(Q("title")) && !sourceFile->m_properties[Q("title")].isEmpty())
+    if (!sourceFile->m_properties.value("title").toString().isEmpty())
       return true;
 
   return false;

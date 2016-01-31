@@ -679,21 +679,21 @@ TrackModel::summarizeProperties(Track const &track) {
 
   if (track.isAudio()) {
     if (track.isPropertySet("audio_sampling_frequency"))
-      properties << QY("%1 Hz").arg(track.m_properties.value(Q("audio_sampling_frequency")));
+      properties << QY("%1 Hz").arg(track.m_properties.value("audio_sampling_frequency").toUInt());
 
     if (track.isPropertySet("audio_channels")) {
-      auto channels = track.m_properties.value(Q("audio_channels")).toInt();
+      auto channels = track.m_properties.value("audio_channels").toUInt();
       properties << QNY("%1 channel", "%1 channels", channels).arg(channels);
     }
 
     if (track.isPropertySet("audio_bits_per_sample")) {
-      auto bitsPerSample = track.m_properties.value(Q("audio_bits_per_sample")).toInt();
+      auto bitsPerSample = track.m_properties.value("audio_bits_per_sample").toUInt();
       properties << QNY("%1 bit per sample", "%1 bits per sample", bitsPerSample).arg(bitsPerSample);
     }
 
   } else if (track.isVideo()) {
     if (track.isPropertySet("pixel_dimensions"))
-      properties << QY("%1 pixels").arg(track.m_properties.value(Q("pixel_dimensions")));
+      properties << QY("%1 pixels").arg(track.m_properties.value("pixel_dimensions").toString());
   }
 
   return properties.join(Q(", "));

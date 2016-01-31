@@ -1,5 +1,11 @@
 2016-01-31  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: re-write, merge tool bug fix: the file
+        identification is now based on mkvmerge's JSON output instead of
+        its verbose output. This also fixes the merge tool not showing
+        names of attachments inside Matroska files properly if those names
+        contain spaces (#1583).
+
         * MKVToolNix GUI: merge tool bug fix: the "mux this" combo box
         was disabled if a single attachment was selected.
 

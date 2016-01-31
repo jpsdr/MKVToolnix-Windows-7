@@ -3,10 +3,10 @@
 
 #include "common/common_pch.h"
 
-#include <QHash>
 #include <QList>
 #include <QString>
 #include <QStringList>
+#include <QVariant>
 
 #include "mkvtoolnix-gui/util/config_file.h"
 
@@ -102,8 +102,8 @@ protected:
 
 public:
   static MuxConfigPtr loadSettings(QString const &fileName);
-  static void saveProperties(Util::ConfigFile &settings, QHash<QString, QString> const &properties);
-  static void loadProperties(Util::ConfigFile &settings, QHash<QString, QString> &properties);
+  static void saveProperties(Util::ConfigFile &settings, QVariantMap const &properties);
+  static void loadProperties(Util::ConfigFile &settings, QVariantMap &properties);
   static void debugDumpSpecificTrackList(QList<Track *> const &tracks);
   static QString settingsType();
 };

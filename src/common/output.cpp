@@ -18,6 +18,7 @@
 #include "common/command_line.h"
 #include "common/ebml.h"
 #include "common/endian.h"
+#include "common/json.h"
 #include "common/locale.h"
 #include "common/logger.h"
 #include "common/mm_io.h"
@@ -50,7 +51,7 @@ display_json_output(nlohmann::json json) {
   json["warnings"] = to_json_array(s_warnings_emitted);
   json["errors"]   = to_json_array(s_errors_emitted);
 
-  mxinfo(boost::format("%1%\n") % json.dump(2));
+  mxinfo(boost::format("%1%\n") % mtx::json::dump(json, 2));
 }
 
 static void

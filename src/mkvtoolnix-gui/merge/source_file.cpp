@@ -31,8 +31,7 @@ fixAssociationsFor(char const *group,
 }
 
 SourceFile::SourceFile(QString const &fileName)
-  : m_properties{}
-  , m_fileName{fileName}
+  : m_fileName{fileName}
   , m_tracks{}
   , m_additionalParts{}
   , m_appendedFiles{}
