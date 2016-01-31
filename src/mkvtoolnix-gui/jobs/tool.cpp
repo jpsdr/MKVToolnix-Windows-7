@@ -391,8 +391,10 @@ Tool::onEditAndRemove() {
       emitRunningWarning = true;
 
     else {
+      auto idToEdit = jobToEdit.id();
+
       openJobInTool(jobToEdit);
-      m_model->removeJobsIf([&jobToEdit](Job const &jobToRemove) { return jobToEdit.id() == jobToRemove.id(); });
+      m_model->removeJobsIf([idToEdit](Job const &jobToRemove) { return idToEdit == jobToRemove.id(); });
     }
   });
 
