@@ -42,7 +42,7 @@ using namespace mtx::gui;
 
 void
 Tab::setupControlLists() {
-  m_typeIndependantControls << ui->generalOptionsBox << ui->muxThisLabel << ui->muxThis << ui->miscellaneousBox << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions;
+  m_typeIndependentControls << ui->generalOptionsBox << ui->muxThisLabel << ui->muxThis << ui->miscellaneousBox << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions;
 
   m_audioControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag << ui->forcedTrackFlagLabel << ui->forcedTrackFlag
                   << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timecodesAndDefaultDurationBox
@@ -530,7 +530,7 @@ Tab::onTrackSelectionChanged() {
     return;
   }
 
-  Util::enableWidgets(m_typeIndependantControls, true);
+  Util::enableWidgets(m_typeIndependentControls, true);
 
   auto idxs = selection[0].indexes();
   if (idxs.isEmpty() || !idxs[0].isValid())
@@ -675,7 +675,7 @@ Tab::withSelectedTracks(std::function<void(Track *)> code,
   bool withVideo     = m_videoControls.contains(widget);
   bool withSubtitles = m_subtitleControls.contains(widget);
   bool withChapters  = m_chapterControls.contains(widget);
-  bool withAll       = m_typeIndependantControls.contains(widget);
+  bool withAll       = m_typeIndependentControls.contains(widget);
 
   for (auto &track : tracks) {
     if (track->m_appendedTo && notIfAppending)
