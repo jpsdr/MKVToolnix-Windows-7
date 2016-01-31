@@ -146,9 +146,12 @@ mm_multi_file_io_c::get_file_names() {
 
 void
 mm_multi_file_io_c::create_verbose_identification_info(mtx::id::info_c &info) {
+  auto file_names = nlohmann::json::array();
   for (auto &file : m_files)
     if (file.m_file_name != m_files.front().m_file_name)
-      info.add(mtx::id::other_file, file.m_file_name.string());
+    file_names.push_back(file.m_file_name.string());
+
+  info.add(mtx::id::other_file, file_names);
 }
 
 void

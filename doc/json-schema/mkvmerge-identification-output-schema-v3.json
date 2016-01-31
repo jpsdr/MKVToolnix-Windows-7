@@ -108,9 +108,11 @@
               "maxLength": 32
             },
             "other_file": {
-              "description": "The file name of an additional file processed as well",
-              "type": "string",
-              "minLength": 1
+              "description": "An array of names of additional files processed as well",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "playlist": {
               "description": "States whether or not the identified file is a playlist (e.g. MPLS) referring to several other files",
