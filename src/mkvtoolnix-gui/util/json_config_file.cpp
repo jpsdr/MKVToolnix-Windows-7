@@ -1,132 +1,106 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonValue>
 #include <QSettings>
-#include <QStack>
 #include <QtGlobal>
 
 #include "common/qt.h"
-
+#include "common/json.h"
+#include "mkvtoolnix-gui/util/json.h"
 #include "mkvtoolnix-gui/util/json_config_file.h"
 
 namespace mtx { namespace gui { namespace Util {
 
-static QJsonDocument::JsonFormat
-jsonFormat() {
-  static boost::optional<QJsonDocument::JsonFormat> s_jsonFormat;
+namespace {
 
-  if (!s_jsonFormat)
-    s_jsonFormat.reset( QString::fromUtf8(qgetenv("MTX_JSON_FORMAT")).toLower() == Q("indented") ? QJsonDocument::Indented : QJsonDocument::Compact );
+int
+jsonIndentation() {
+  static boost::optional<int> s_jsonIndentation;
 
-  return s_jsonFormat.get();
+  if (!s_jsonIndentation)
+    s_jsonIndentation.reset( QString::fromUtf8(qgetenv("MTX_JSON_FORMAT")).toLower() == Q("indented") ? 2 : -1 );
+
+  return s_jsonIndentation.get();
 }
 
-class GroupConverter {
-protected:
-  QStack<QJsonObject> m_objects;
+nlohmann::json
+groupToJson(JsonConfigFile::Group const &group) {
+  auto json = nlohmann::json::object();
 
-protected:
-  void groupToJson(JsonConfigFile::Group &group);
-  void jsonToGroup(JsonConfigFile::Group &group);
-
-public:
-  static QJsonDocument toJson(JsonConfigFile::Group &rootGroup);
-  static JsonConfigFile::Group fromJson(QJsonDocument const &json);
-};
-
-void
-GroupConverter::groupToJson(JsonConfigFile::Group &group) {
   for (auto kv = group.m_data.cbegin(), end = group.m_data.cend(); kv != end; ++kv)
-    m_objects.top().insert(kv.key(), QJsonValue::fromVariant(kv.value()));
+    json[ to_utf8(kv.key()) ] = variantToNlohmannJson(kv.value());
 
-  for (auto kv = group.m_groups.cbegin(), end = group.m_groups.cend(); kv != end; ++kv) {
-    m_objects.push({});
+  for (auto kv = group.m_groups.cbegin(), end = group.m_groups.cend(); kv != end; ++kv)
+    json[ to_utf8(kv.key()) ] = groupToJson(*kv.value());
 
-    groupToJson(*kv.value());
+  return json;
+}
 
-    auto newObject = m_objects.top();
-    m_objects.pop();
+JsonConfigFile::GroupPtr
+jsonToGroup(nlohmann::json const &json) {
+  auto group = std::make_shared<JsonConfigFile::Group>();
 
-    m_objects.top().insert(kv.key(), newObject);
+  if (!json.is_object())
+    return group;
+
+  for (auto kv = json.cbegin(), end = json.cend(); kv != end; ++kv) {
+    auto const key   = Q(kv.key());
+    auto const value = kv.value();
+
+    if (value.is_object())
+      group->m_groups.insert(key, jsonToGroup(value));
+
+    else
+      group->m_data.insert(key, nlohmannJsonToVariant(value));
   }
+
+  return group;
 }
 
-void
-GroupConverter::jsonToGroup(JsonConfigFile::Group &group) {
-  for (auto const &key : m_objects.top().keys()) {
-    auto value = m_objects.top().value(key);
-
-    if (value.isObject()) {
-      m_objects.push(value.toObject());
-
-      auto subGroup = std::make_shared<JsonConfigFile::Group>();
-      group.m_groups.insert(key, subGroup);
-      jsonToGroup(*subGroup);
-
-      m_objects.pop();
-
-    } else
-      group.m_data.insert(key, value.toVariant());
-  }
-}
-
-QJsonDocument
-GroupConverter::toJson(JsonConfigFile::Group &rootGroup) {
-  auto converter = GroupConverter{};
-
-  converter.m_objects.push({});
-  converter.groupToJson(rootGroup);
-
-  auto doc = QJsonDocument{};
-  doc.setObject(converter.m_objects.top());
-
-  return doc;
-}
-
-JsonConfigFile::Group
-GroupConverter::fromJson(QJsonDocument const &doc) {
-  auto converter = GroupConverter{};
-  auto rootGroup = JsonConfigFile::Group{};
-
-  converter.m_objects.push(doc.object());
-  converter.jsonToGroup(rootGroup);
-
-  return rootGroup;
-}
+} // anonymous namespace
 
 // ----------------------------------------------------------------------
 
 JsonConfigFile::JsonConfigFile(QString const &fileName)
   : ConfigFile{fileName}
 {
-  clear();
+  reset();
 }
 
 JsonConfigFile::~JsonConfigFile() {
 }
 
 void
-JsonConfigFile::clear() {
-  m_rootGroup = Group{};
+JsonConfigFile::reset(JsonConfigFile::GroupPtr const &newGroup) {
+  m_rootGroup = newGroup ? newGroup : std::make_shared<Group>();
 
   m_currentGroup.clear();
-  m_currentGroup.push(&m_rootGroup);
+  m_currentGroup.push(m_rootGroup.get());
 }
 
 void
 JsonConfigFile::load() {
-  clear();
+  reset();
 
   QFile in{m_fileName};
-  if (in.open(QIODevice::ReadOnly)) {
-    auto data   = in.readAll();
-    auto doc    = QJsonDocument::fromJson(data);
-    m_rootGroup = GroupConverter::fromJson(doc);
+  if (!in.open(QIODevice::ReadOnly))
+    return;
+
+  auto data = in.readAll().toStdString();
+  in.close();
+
+  try {
+    reset(jsonToGroup(mtx::json::parse(data)));
+
+  } catch (std::invalid_argument const &ex) {
+    qDebug() << m_fileName << "std::invalid_argument" << ex.what();
+  } catch (std::exception const &ex) {
+    qDebug() << m_fileName << "std::exception" << ex.what();
+  } catch (...) {
+    qDebug() << m_fileName << "other exception";
   }
 }
 
@@ -134,11 +108,13 @@ void
 JsonConfigFile::save() {
   QFileInfo{m_fileName}.dir().mkpath(".");
   QFile out{m_fileName};
-  if (out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-    auto doc = GroupConverter::toJson(m_rootGroup);
-    out.write(doc.toJson(jsonFormat()));
-    out.close();
-  }
+
+  if (!out.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    return;
+
+  auto json = groupToJson(*m_rootGroup);
+  out.write(QByteArray::fromStdString(mtx::json::dump(json, jsonIndentation())));
+  out.close();
 }
 
 void

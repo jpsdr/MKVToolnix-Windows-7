@@ -25,7 +25,7 @@ public:
 
 protected:
   QStack<Group *> m_currentGroup;
-  Group m_rootGroup;
+  GroupPtr m_rootGroup;
 
 public:
   JsonConfigFile(QString const &fileName);
@@ -44,7 +44,7 @@ public:
   virtual QStringList childKeys() override;
 
 protected:
-  void clear();
+  void reset(GroupPtr const &newGroup = GroupPtr{});
 };
 
 }}}
