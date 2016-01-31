@@ -59,11 +59,7 @@ hevc_es_reader_c::probe_file(mm_io_c *in,
         return 1;
     }
 
-  } catch (mtx::exception &e) {
-    mxinfo(boost::format(Y("Error %1%\n")) % e.error());
-
   } catch (...) {
-    mxinfo(Y("have an xcptn\n"));
   }
 
   return 0;
