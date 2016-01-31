@@ -33,8 +33,8 @@ static void
 output_container_unsupported_json(std::string const &filename,
                                   translatable_string_c const &info) {
   auto json = nlohmann::json{
-    { "identification_format_version", 2                       },
-    { "file_name",                     filename                },
+    { "identification_format_version", 2        },
+    { "file_name",                     filename },
     { "container", {
         { "recognized", true                  },
         { "supported",  false                 },
