@@ -26,15 +26,19 @@ test "identification and validation" do
   files.each do |file|
     output, _     = identify file, :format => :json
     output        = output.join ''
+    json          = JSON.load(output)
 
-    valid, errors = json_schema_identification.validate(JSON.load(output))
+    valid, errors = json_schema_identification.validate(json)
 
     if !valid
       puts " JSON validation errors in #{file}:"
       puts errors.join("\n")
     end
 
-    hashes << "#{output.md5}+#{valid ? "ok" : "invalid"}"
+    json.delete("identification_format_version")
+    json_md5 = JSON.dump(json).md5
+
+    hashes << "#{json_md5}+#{valid ? "ok" : "invalid"}"
   end
 
   hashes.join '-'

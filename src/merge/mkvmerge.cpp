@@ -369,8 +369,8 @@ list_file_types() {
 static void
 display_unsupported_file_type_json(filelist_t const &file) {
   auto json = nlohmann::json{
-    { "identification_format_version", 2         },
-    { "file_name",                     file.name },
+    { "identification_format_version", ID_JSON_FORMAT_VERSION },
+    { "file_name",                     file.name              },
     { "container", {
         { "recognized", false },
         { "supported",  false },

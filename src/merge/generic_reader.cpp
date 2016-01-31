@@ -320,6 +320,13 @@ generic_reader_c::display_identification_results_as_text() {
     auto formatter = boost::format{"%1%:%2%"};
 
     for (auto const &pair : info) {
+      if (pair.second.is_array()) {
+        for (auto it = pair.second.begin(), end = pair.second.end(); it != end; ++it)
+          formatted.emplace_back((formatter % escape(pair.first) % escape(it->get<std::string>())).str());
+
+        continue;
+      }
+
       auto value = pair.second.is_number()  ? to_string(pair.second.get<uint64_t>())
                  : pair.second.is_boolean() ? std::string{pair.second.get<bool>() ? "1" : "0"}
                  :                            pair.second.get<std::string>();
@@ -415,7 +422,7 @@ generic_reader_c::display_identification_results_as_json() {
   };
 
   auto json = nlohmann::json{
-    { "identification_format_version", 2                       },
+    { "identification_format_version", ID_JSON_FORMAT_VERSION  },
     { "file_name",                     m_ti.m_fname            },
     { "tracks",                        nlohmann::json::array() },
     { "attachments",                   nlohmann::json::array() },

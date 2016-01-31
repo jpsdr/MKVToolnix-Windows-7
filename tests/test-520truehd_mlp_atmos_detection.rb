@@ -22,7 +22,8 @@ def verify520 file, track, codec
 
     end
 
-    "#{output.md5}+#{ok}"
+    json.delete("identification_format_version")
+    JSON.dump(json).md5 + "+#{ok}"
   end
 end
 

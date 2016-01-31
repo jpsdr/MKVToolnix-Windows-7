@@ -27,6 +27,8 @@
 #define ID_RESULT_TAGS            "tags"
 #define ID_RESULT_GLOBAL_TAGS_ID  -1
 
+#define ID_JSON_FORMAT_VERSION    3
+
 struct id_result_t {
   int64_t id;
   std::string type, info, description;
