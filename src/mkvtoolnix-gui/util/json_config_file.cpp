@@ -89,11 +89,11 @@ JsonConfigFile::load() {
   if (!in.open(QIODevice::ReadOnly))
     return;
 
-  auto data = in.readAll().toStdString();
+  auto data = in.readAll();
   in.close();
 
   try {
-    reset(jsonToGroup(mtx::json::parse(data)));
+    reset(jsonToGroup(mtx::json::parse(std::string{data.data(), static_cast<std::string::size_type>(data.count())})));
 
   } catch (std::invalid_argument const &ex) {
     qDebug() << m_fileName << "std::invalid_argument" << ex.what();
@@ -113,7 +113,8 @@ JsonConfigFile::save() {
     return;
 
   auto json = groupToJson(*m_rootGroup);
-  out.write(QByteArray::fromStdString(mtx::json::dump(json, jsonIndentation())));
+  auto dump = mtx::json::dump(json, jsonIndentation());
+  out.write(QByteArray::fromRawData(dump.data(), dump.size()));
   out.close();
 }
 
