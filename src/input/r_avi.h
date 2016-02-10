@@ -28,20 +28,10 @@ class info_c;
 }}
 
 struct avi_demuxer_t {
-  int m_ptzr;
-  int m_channels, m_bits_per_sample, m_samples_per_second, m_aid;
-  int64_t m_bytes_processed;
+  int m_ptzr{-1};
+  int m_channels{}, m_bits_per_sample{}, m_samples_per_second{}, m_aid{};
+  int64_t m_bytes_processed{};
   codec_c m_codec;
-
-  avi_demuxer_t()
-    : m_ptzr(-1)
-    , m_channels(0)
-    , m_bits_per_sample(0)
-    , m_samples_per_second(0)
-    , m_aid(0)
-    , m_bytes_processed(0)
-  {
-  }
 };
 
 struct avi_subs_demuxer_t {
@@ -51,15 +41,13 @@ struct avi_subs_demuxer_t {
     TYPE_SSA,
   } m_type;
 
-  int m_ptzr;
+  int m_ptzr{-1};
 
   std::string m_sub_language;
   memory_cptr m_subtitles;
 
   mm_text_io_cptr m_text_io;
   subtitles_cptr m_subs;
-
-  avi_subs_demuxer_t();
 };
 
 class avi_reader_c: public generic_reader_c {
@@ -68,18 +56,19 @@ private:
     DIVX_TYPE_NONE,
     DIVX_TYPE_V3,
     DIVX_TYPE_MPEG4
-  } m_divx_type;
+  };
 
-  avi_t *m_avi;
-  int m_vptzr;
+  divx_type_e m_divx_type{DIVX_TYPE_NONE};
+  avi_t *m_avi{};
+  int m_vptzr{-1};
   std::vector<avi_demuxer_t> m_audio_demuxers;
   std::vector<avi_subs_demuxer_t> m_subtitle_demuxers;
-  double m_fps;
-  unsigned int m_video_frames_read, m_max_video_frames, m_dropped_video_frames;
-  int m_avc_nal_size_size;
+  double m_fps{1.0};
+  unsigned int m_video_frames_read{}, m_max_video_frames{}, m_dropped_video_frames{};
+  int m_avc_nal_size_size{-1};
 
-  uint64_t m_bytes_to_process, m_bytes_processed;
-  bool m_video_track_ok;
+  uint64_t m_bytes_to_process{}, m_bytes_processed{};
+  bool m_video_track_ok{};
 
 public:
   avi_reader_c(const track_info_c &ti, const mm_io_cptr &in);

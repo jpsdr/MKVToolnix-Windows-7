@@ -51,11 +51,6 @@
 #define GAB2_ID_LANGUAGE_UNICODE 0x0002
 #define GAB2_ID_SUBTITLES        0x0004
 
-avi_subs_demuxer_t::avi_subs_demuxer_t()
-  : m_ptzr(-1)
-{
-}
-
 bool
 avi_reader_c::probe_file(mm_io_c *in,
                          uint64_t size) {
@@ -79,17 +74,6 @@ avi_reader_c::probe_file(mm_io_c *in,
 avi_reader_c::avi_reader_c(const track_info_c &ti,
                            const mm_io_cptr &in)
   : generic_reader_c(ti, in)
-  , m_divx_type(DIVX_TYPE_NONE)
-  , m_avi(nullptr)
-  , m_vptzr(-1)
-  , m_fps(1.0)
-  , m_video_frames_read(0)
-  , m_max_video_frames(0)
-  , m_dropped_video_frames(0)
-  , m_avc_nal_size_size(-1)
-  , m_bytes_to_process(0)
-  , m_bytes_processed(0)
-  , m_video_track_ok(false)
 {
 }
 
