@@ -65,6 +65,7 @@ private:
   std::vector<avi_subs_demuxer_t> m_subtitle_demuxers;
   double m_fps{1.0};
   unsigned int m_video_frames_read{}, m_max_video_frames{}, m_dropped_video_frames{};
+  unsigned int m_video_width{}, m_video_height{};
   int m_avc_nal_size_size{-1};
 
   uint64_t m_bytes_to_process{}, m_bytes_processed{};

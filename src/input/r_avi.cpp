@@ -94,6 +94,8 @@ avi_reader_c::read_headers() {
 
   m_fps              = AVI_frame_rate(m_avi);
   m_max_video_frames = AVI_video_frames(m_avi);
+  m_video_width      = std::abs(AVI_video_width(m_avi));
+  m_video_height     = std::abs(AVI_video_height(m_avi));
 
   verify_video_track();
   parse_subtitle_chunks();
@@ -112,7 +114,7 @@ avi_reader_c::~avi_reader_c() {
 void
 avi_reader_c::verify_video_track() {
   auto size        = get_uint32_le(&m_avi->bitmap_info_header->bi_size);
-  m_video_track_ok = (sizeof(alBITMAPINFOHEADER) <= size) && (0 != AVI_video_width(m_avi)) && (0 != AVI_video_height(m_avi));
+  m_video_track_ok = (sizeof(alBITMAPINFOHEADER) <= size) && (0 != m_video_width) && (0 != m_video_height);
 }
 
 void
@@ -291,7 +293,7 @@ avi_reader_c::create_mpeg1_2_packetizer() {
 
 void
 avi_reader_c::create_mpeg4_p2_packetizer() {
-  m_vptzr = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, m_fps, AVI_video_width(m_avi), AVI_video_height(m_avi), false));
+  m_vptzr = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, m_fps, m_video_width, m_video_height, false));
 
   show_packetizer_info(0, PTZR(m_vptzr));
 }
@@ -302,7 +304,7 @@ avi_reader_c::create_mpeg4_p10_packetizer() {
     mpeg4_p10_es_video_packetizer_c *ptzr = new mpeg4_p10_es_video_packetizer_c(this, m_ti);
     m_vptzr                               = add_packetizer(ptzr);
 
-    ptzr->set_video_pixel_dimensions(AVI_video_width(m_avi), AVI_video_height(m_avi));
+    ptzr->set_video_pixel_dimensions(m_video_width, m_video_height);
 
     if (0 != m_fps)
       ptzr->set_container_default_field_duration(1000000000ll / m_fps / 2);
@@ -328,15 +330,15 @@ avi_reader_c::create_vp8_packetizer() {
   m_vptzr = add_packetizer(new vpx_video_packetizer_c(this, m_ti, codec_c::type_e::V_VP8));
 
   PTZR(m_vptzr)->set_track_default_duration(1000000000ll / m_fps);
-  PTZR(m_vptzr)->set_video_pixel_width(AVI_video_width(m_avi));
-  PTZR(m_vptzr)->set_video_pixel_height(AVI_video_height(m_avi));
+  PTZR(m_vptzr)->set_video_pixel_width(m_video_width);
+  PTZR(m_vptzr)->set_video_pixel_height(m_video_height);
 
   show_packetizer_info(0, PTZR(m_vptzr));
 }
 
 void
 avi_reader_c::create_standard_video_packetizer() {
-  m_vptzr = add_packetizer(new video_packetizer_c(this, m_ti, nullptr, m_fps, AVI_video_width(m_avi), AVI_video_height(m_avi)));
+  m_vptzr = add_packetizer(new video_packetizer_c(this, m_ti, nullptr, m_fps, m_video_width, m_video_height));
 
   show_packetizer_info(0, PTZR(m_vptzr));
 }
@@ -810,18 +812,16 @@ avi_reader_c::extended_identify_mpeg4_l2(mtx::id::info_c &info) {
 
   uint32_t par_num, par_den;
   if (mpeg4::p2::extract_par(buffer, size, par_num, par_den)) {
-    int width          = AVI_video_width(m_avi);
-    int height         = AVI_video_height(m_avi);
-    float aspect_ratio = static_cast<float>(width) * par_num / height / par_den;
+    auto aspect_ratio = static_cast<double>(m_video_width) * par_num / m_video_height / par_den;
 
     int disp_width, disp_height;
-    if (aspect_ratio > (static_cast<float>(width) / height)) {
-      disp_width  = std::llround(height * aspect_ratio);
-      disp_height = height;
+    if (aspect_ratio > (static_cast<double>(m_video_width) / m_video_height)) {
+      disp_width  = std::llround(m_video_height * aspect_ratio);
+      disp_height = m_video_height;
 
     } else {
-      disp_width  = width;
-      disp_height = std::llround(width / aspect_ratio);
+      disp_width  = m_video_width;
+      disp_height = std::llround(m_video_width / aspect_ratio);
     }
 
     info.add(mtx::id::display_dimensions, boost::format("%1%x%2%") % disp_width % disp_height);
@@ -852,7 +852,7 @@ avi_reader_c::identify_video() {
   else if (codec.is(codec_c::type_e::V_MPEG4_P10))
     info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_es_video);
 
-  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % AVI_video_width(m_avi) % AVI_video_height(m_avi));
+  info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % m_video_width % m_video_height);
 
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), info.get());
 }
