@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-02-11 09:27+0100\n"
-"PO-Revision-Date: 2016-01-23 23:14+0100\n"
+"PO-Revision-Date: 2016-02-10 23:54+0100\n"
 "Last-Translator: TMTisFree <tmtisfree@free.fr>\n"
 "Language-Team: Denis Baron, TMTisFree <tmtisfree@free.fr>\n"
 "Language: fr\n"
@@ -77,7 +77,7 @@ msgid ""
 msgstr ""
 "  --aspect-ratio <TID:f|a/b>\n"
 "                           Définit les dimensions à l'écran (largeur et\n"
-"                           hauteur) relatives au format d'image indiqué.\n"
+"                           hauteur) relatives au ratio d'aspect indiqué.\n"
 
 #: src/merge/mkvmerge.cpp:245
 msgid ""
@@ -315,7 +315,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:142
 msgid "  --link                   Link splitted files.\n"
-msgstr "  --link                   Lie les fichiers fractionnés.\n"
+msgstr "  --link                   Lie les fichiers scindés.\n"
 
 #: src/merge/mkvmerge.cpp:144
 msgid "  --link-to-next <SID>     Link the last file to the given SID.\n"
@@ -395,7 +395,7 @@ msgid ""
 msgstr ""
 "  --split <d[K,M,G]|HH:MM:SS|s>\n"
 "                           Crée un nouveau fichier au bout de d octets\n"
-"                           (ko, Mo, Go) ou d'un certain temps.\n"
+"                           (Ko, Mo, Go) ou d'un certain temps.\n"
 
 #: src/merge/mkvmerge.cpp:138
 msgid ""
@@ -604,7 +604,7 @@ msgstr "  -i, --identify <fichier> Affiche les informations sur le fichier sourc
 
 #: src/merge/mkvmerge.cpp:274
 msgid "  -l, --list-types         Lists supported input file types.\n"
-msgstr "  -l, --list-types         Liste les types de fichier source supportés.\n"
+msgstr "  -l, --list-types         Liste les types de fichier source gérés.\n"
 
 #: src/merge/mkvmerge.cpp:191
 msgid ""
@@ -711,11 +711,11 @@ msgstr "  S :  chaîne\n"
 
 #: src/propedit/propedit_cli_parser.cpp:160
 msgid "  SI: signed integer\n"
-msgstr "  SI : nombre entier avec signe\n"
+msgstr "  SI : nombre entier signé\n"
 
 #: src/propedit/propedit_cli_parser.cpp:161
 msgid "  UI: unsigned integer\n"
-msgstr "  UI : nombre entier sans signe\n"
+msgstr "  UI : nombre entier non signé\n"
 
 #: src/propedit/propedit_cli_parser.cpp:164
 msgid "  US: Unicode string\n"
@@ -723,7 +723,7 @@ msgstr "  US : chaîne Unicode\n"
 
 #: src/propedit/propedit_cli_parser.cpp:165
 msgid "  X:  binary in hex\n"
-msgstr "  X :  valeur binaire en hexadécimal\n"
+msgstr "  X :  binaire en hexadécimal\n"
 
 #: src/info/mkvinfo.cpp:322
 #, boost-format
@@ -789,7 +789,7 @@ msgstr " Gestion des chapitres :\n"
 
 #: src/merge/mkvmerge.cpp:121
 msgid " File splitting, linking, appending and concatenating (more global options):\n"
-msgstr " Fractionnement, liage et concaténation des fichiers (options globales étendues) :\n"
+msgstr " Scission, liage et concaténation des fichiers (options globales étendues) :\n"
 
 #: src/merge/mkvmerge.cpp:104
 msgid " General output control (advanced global options):\n"
@@ -834,7 +834,7 @@ msgstr " à %1%"
 #: src/merge/output_control.cpp:253
 #: src/merge/output_control.cpp:260
 msgid " done\n"
-msgstr " effectué\n"
+msgstr "effectué\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1199
 msgid " seconds"
@@ -981,7 +981,7 @@ msgstr "%1% : impossible d'ouvrir le fichier sub"
 #: src/common/kax_file.cpp:211
 #, boost-format
 msgid "%1%: Error in the Matroska file structure at position %2%. Resyncing to the next level 1 element.\n"
-msgstr "%1% : erreur dans la structure du fichier Matroska à la position %2% ; resynchronisation au prochain élément de niveau 1.\n"
+msgstr "%1% : erreur dans la structure du fichier Matroska à la position %2%. Resynchronisation au prochain élément de niveau 1.\n"
 
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:64
@@ -1494,7 +1494,7 @@ msgstr "&Basculer vers le rapport de tâche"
 #: src/merge/mkvmerge.cpp:1925
 #, boost-format
 msgid "'%1%' can only be used with a file name. No further options are allowed if this option is used.\n"
-msgstr "« %1% » ne peut être utilisé qu'avec un nom de fichier ; aucune autre option n'est permise si celle-ci est utilisée.\n"
+msgstr "« %1% » ne peut être utilisé qu'avec un nom de fichier. Aucune autre option n'est permise si celle-ci est utilisée.\n"
 
 #: src/merge/mkvmerge.cpp:499
 #, boost-format
@@ -1514,7 +1514,7 @@ msgstr "« %1% » n'est pas un argument acceptable pour « --cues ».\n"
 #: src/common/command_line.cpp:233
 #, boost-format
 msgid "'%1%' is missing the file name.\n"
-msgstr "« %1% » n'a pas le nom du fichier.\n"
+msgstr "« %1% » n'a pas de nom de fichier.\n"
 
 #: src/merge/mkvmerge.cpp:1609
 #, boost-format
@@ -1669,22 +1669,22 @@ msgstr "« %1% » n'a pas son argument.\n"
 #: src/merge/mkvmerge.cpp:2247
 #, boost-format
 msgid "'%1%' lacks the FourCC.\n"
-msgstr "« %1% » n'a pas le FourCC.\n"
+msgstr "« %1% » n'a pas de FourCC.\n"
 
 #: src/merge/mkvmerge.cpp:2289
 #, boost-format
 msgid "'%1%' lacks the delay.\n"
-msgstr "« %1% » n'a pas le décalage.\n"
+msgstr "« %1% » n'a pas de délai.\n"
 
 #: src/merge/mkvmerge.cpp:2107
 #, boost-format
 msgid "'%1%' lacks the file name.\n"
-msgstr "« %1% » n'a pas le nom du fichier.\n"
+msgstr "« %1% » n'a pas de nom de fichier.\n"
 
 #: src/merge/mkvmerge.cpp:2345
 #, boost-format
 msgid "'%1%' lacks the track ID.\n"
-msgstr "« %1% » n'a pas l'identifiant de piste.\n"
+msgstr "« %1% » n'a pas d'identifiant de piste.\n"
 
 #: src/merge/mkvmerge.cpp:2212
 #: src/merge/mkvmerge.cpp:2219
@@ -1723,11 +1723,11 @@ msgstr "« %1% » : remultiplexage d'une piste Opus multiplexée en mode expéri
 
 #: src/merge/mkvmerge.cpp:2254
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
-msgstr "Le format d'image manque à « --aspect-ratio ».\n"
+msgstr "Le ratio d'aspect manque à « --aspect-ratio ».\n"
 
 #: src/merge/mkvmerge.cpp:2261
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
-msgstr "Le facteur du format d'image manque à « --aspect-ratio-factor ».\n"
+msgstr "Le facteur du ratio d'aspect manque à « --aspect-ratio-factor ».\n"
 
 #: src/merge/mkvmerge.cpp:2078
 msgid "'--attachment-description' lacks the description.\n"
@@ -1879,7 +1879,7 @@ msgstr "Signal « Piste activée »"
 #: src/info/mkvinfo.cpp:176
 #, boost-format
 msgid "(Unknown element: %1%; ID: 0x%2% size: %3%)"
-msgstr "(élément inconnu : %1% ; ID : 0x%2% taille : %3%)"
+msgstr "(Élément inconnu : %1% ; ID : 0x%2% taille : %3%)"
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:126
 msgid "(additional part)"
@@ -2007,7 +2007,7 @@ msgstr "Un bloc a été trouvé au code temporel %1% pour le numéro de piste %2
 
 #: src/mkvtoolnix-gui/merge/output.cpp:383
 msgid "A chapter starting at 0s is never considered for splitting and discarded silently."
-msgstr "Un chapitre commençant à 0 s n'est jamais retenu pour le fractionnement et est écarté silencieusement."
+msgstr "Un chapitre commençant à 0 s n'est jamais retenu pour la scission et est écarté silencieusement."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:349
 msgid "A comma-separated list of frame/field number ranges of content to keep."
@@ -2015,7 +2015,7 @@ msgstr "Une liste d'intervalles de numéros de trame/champ séparés par une vir
 
 #: src/mkvtoolnix-gui/merge/output.cpp:366
 msgid "A comma-separated list of frame/field numbers after which to split."
-msgstr "Une liste de numéros de trame/champ séparés par une virgule après lesquels fractionner."
+msgstr "Une liste de numéros de trame/champ séparés par une virgule après lesquels scinder."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:339
 msgid "A comma-separated list of timecode ranges of content to keep."
@@ -2424,7 +2424,7 @@ msgstr "Toutes les autres chaînes fonctionnent comme les sélecteurs d'entête 
 #: src/info/qt_ui.cpp:86
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:47
 msgid "All supported media files"
-msgstr "Tous les fichiers multimédia supportés"
+msgstr "Tous les fichiers multimédia gérés"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:299
 msgid "All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024)."
@@ -2632,11 +2632,11 @@ msgstr "Piè&ces jointes :"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1641
 msgid "Attach &to:"
-msgstr "&Joindre :"
+msgstr "&Joindre à :"
 
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:63
 msgid "Attach to"
-msgstr "Joindre"
+msgstr "Joindre à"
 
 #: src/info/mkvinfo.cpp:1093
 msgid "Attached"
@@ -2796,11 +2796,11 @@ msgstr "Valeur booléenne (oui/non, marche/arrêt, etc)"
 
 #: src/merge/generic_packetizer.cpp:198
 msgid "Both the aspect ratio and '--display-dimensions' were given.\n"
-msgstr "Le format d'image et les dimensions à l'écran (« --display-dimensions ») ont été donnés tous les deux.\n"
+msgstr "Le ratio d'aspect et les dimensions à l'écran (« --display-dimensions ») ont été donnés tous les deux.\n"
 
 #: src/merge/generic_packetizer.cpp:196
 msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
-msgstr "Le facteur de format d'image et les dimensions à l'écran (« --display-dimensions ») ont été donnés tous les deux.\n"
+msgstr "Le facteur de ratio d'aspect et les dimensions à l'écran (« --display-dimensions ») ont été donnés tous les deux.\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:43
 msgid "Button track %1"
@@ -3188,7 +3188,7 @@ msgstr "Compression :"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
 msgid "Configuration &active"
-msgstr ""
+msgstr "Configuration &active"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:188
 msgid "Constrict start and end ti&mecodes of sub-chapters to their parent's start and end timecodes"
@@ -3594,7 +3594,7 @@ msgstr "Date : %1% UTC"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:179
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
-msgstr ""
+msgstr "Décocher cette option permet de désactiver une configuration de manière temporaire sans modifier ses paramètres."
 
 #: src/common/output.cpp:126
 msgid "Debug> "
@@ -3783,7 +3783,7 @@ msgstr "N'ajoute pas une entrée pour les chapitres dans le méta-index de reche
 
 #: src/mkvtoolnix-gui/merge/output.cpp:138
 msgid "Do not split"
-msgstr "Ne pas fractionner"
+msgstr "Ne pas scinder"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 msgid "Do not write meta seek elements at all."
@@ -3947,7 +3947,7 @@ msgstr "Édition/Chapitre"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:379
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
-msgstr "Soit le mot « all » pour sélectionner tous les chapitres, soit une liste de numéros de chapitres séparés par une virgule avant lesquels fractionner."
+msgstr "Soit le mot « all » pour sélectionner tous les chapitres, soit une liste de numéros de chapitres séparés par une virgule avant lesquels scinder."
 
 #: src/propedit/propedit.cpp:76
 #, boost-format
@@ -3978,7 +3978,7 @@ msgstr "Activé : %1%"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:149
 msgid "Enables splitting of the output into more than one file."
-msgstr "Active le fractionnement de la cible en plusieurs fichiers."
+msgstr "Active la scission de la cible en plusieurs fichiers."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:81
 msgid "Enabling this option causes mkvmerge to keep that last entry."
@@ -4191,23 +4191,23 @@ msgstr "Extraire les données dans un fichier brut."
 #: src/output/p_hevc_es.cpp:135
 #, boost-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to %1%/%2%.\n"
-msgstr "Format d'image extrait des données vidéo HEVC et dimensions à l'écran réglées sur %1%/%2%.\n"
+msgstr "Ratio d'aspect extrait des données vidéo HEVC et dimensions à l'écran réglées sur %1%/%2%.\n"
 
 #: src/output/p_avc.cpp:150
 #: src/output/p_mpeg4_p10.cpp:94
 #, boost-format
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to %1%/%2%.\n"
-msgstr "Format d'image extrait des données vidéo MPEG-4 couche 10 (AVC) et dimensions à l'écran réglées sur %1%/%2%.\n"
+msgstr "Ratio d'aspect extrait des données vidéo MPEG-4 couche 10 (AVC) et dimensions à l'écran réglées sur %1%/%2%.\n"
 
 #: src/output/p_mpeg4_p2.cpp:330
 #, boost-format
 msgid "Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to %1%/%2%.\n"
-msgstr "Format d'image extrait des données vidéo MPEG-4 couche 2 (AVC) extraite et dimensions à l'écran réglées sur %1%/%2%.\n"
+msgstr "Ratio d'aspect extrait des données vidéo MPEG-4 couche 2 (AVC) extraite et dimensions à l'écran réglées sur %1%/%2%.\n"
 
 #: src/output/p_theora.cpp:73
 #, boost-format
 msgid "Extracted the aspect ratio information from the Theora video headers and set the display dimensions to %1%/%2%.\n"
-msgstr "Format d'image extrait des entêtes vidéoTheora extraite et dimensions à l'écran réglées sur %1%/%2%.\n"
+msgstr "Ratio d'aspect extrait des entêtes vidéoTheora extraite et dimensions à l'écran réglées sur %1%/%2%.\n"
 
 #: src/extract/tracks.cpp:114
 #, boost-format
@@ -4278,7 +4278,7 @@ msgstr "Tit&re du fichier :"
 #: src/merge/mkvmerge.cpp:390
 #, boost-format
 msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
-msgstr "Le fichier %1% a un type inconnu. Consulter la liste des types de fichier supportés (« mkvmerge --list-types ») et contacter l'auteur Moritz Bunkus <moritz@bunkus.org> si de type de fichier est pris en charge mais pas reconnu correctement.\n"
+msgstr "Le fichier %1% a un type inconnu. Consulter la liste des types de fichier gérés (« mkvmerge --list-types ») et contacter l'auteur Moritz Bunkus <moritz@bunkus.org> si le type de fichier est pris en charge mais pas reconnu correctement.\n"
 
 #: src/merge/generic_reader.cpp:352
 #, boost-format
@@ -4288,7 +4288,7 @@ msgstr "Fichier « %1% » : conteneur : %2%"
 #: src/merge/id_result.cpp:25
 #, boost-format
 msgid "File '%1%': unsupported container: %2%\n"
-msgstr "Fichier « %1% » : conteneur non supporté : %2%\n"
+msgstr "Fichier « %1% » : conteneur non géré : %2%\n"
 
 #: src/info/mkvinfo.cpp:1109
 #, boost-format
@@ -4563,17 +4563,17 @@ msgstr "Flux élémentaires HEVC/H.265"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:306
 msgid "Header &editor"
-msgstr "&Éditeur d'entêtes"
+msgstr "Éditeur d'&entêtes"
 
 #: src/common/compression/header_removal.cpp:47
 #, boost-format
 msgid "Header removal compression not possible because the buffer contained %1% bytes which is less than the size of the headers that should be removed, %2%."
-msgstr "Compression par retrait des entêtes impossible car le tampon contient %1% octets, ce qui est moins que la taille des entêtes qui doivent être retirés, %2%."
+msgstr "Compression par retrait des entêtes impossible car le tampon contenait %1% octets, ce qui est moins que la taille des entêtes qui doivent être retirés, %2%."
 
 #: src/common/compression/header_removal.cpp:61
 #, boost-format
 msgid "Header removal compression not possible because the buffer did not start with the bytes that should be removed. Wanted bytes:%1%; found:%2%."
-msgstr "Compression par retrait des entêtes impossible car le tampon ne démarre pas avec les octets qui doivent être retirés. Octets attendus : %1% ; trouvés : %2%."
+msgstr "Compression par retrait des entêtes impossible car le tampon ne démarrait pas avec les octets qui doivent être retirés. Octets attendus : %1% ; trouvés : %2%."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:524
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:539
@@ -4614,7 +4614,7 @@ msgstr "Fichiers vidéo IVF avec VP8"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 msgid "If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."
-msgstr "Si un jeu de caractères est sélectionné ici, le programme le définira automatiquement  pour les pistes de sous-titres en texte nouvellement ajoutées."
+msgstr "Si un jeu de caractères est sélectionné ici, le programme le définira automatiquement  pour les pistes de sous-titres texte nouvellement ajoutées."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:361
 msgid "If a range's start number is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
@@ -4717,7 +4717,7 @@ msgstr "Si plus d'UID de segment sont spécifiés que de segments créés, l'exc
 #: src/mkvtoolnix-gui/merge/output.cpp:354
 #: src/mkvtoolnix-gui/merge/output.cpp:370
 msgid "If no video track is output no splitting will occur."
-msgstr "Si aucune piste vidéo n'est produite, aucun fractionnement n'aura lieu."
+msgstr "Si aucune piste vidéo n'est produite, aucune scission n'aura lieu."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:187
 #, boost-format
@@ -4726,15 +4726,15 @@ msgstr "Si rien n'est saisi, « %p - %t » sera utilisé."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:407
 msgid "If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks."
-msgstr "Si réglé sur « Déterminer automatiquement », mkvmerge choisira une piste de chaque type pour que ce signal soit déterminé à partir des informations contenues dans les fichiers sources et l'ordre des pistes."
+msgstr "Si défini sur « Déterminer automatiquement », mkvmerge choisira une piste de chaque type pour que ce signal soit déterminé à partir des informations contenues dans les fichiers sources et l'ordre des pistes."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:415
 msgid "If set to 'determine automatically' then mkvmerge will decide whether or not to compress and which algorithm to use based on the track type."
-msgstr "Si l'option « Déterminer automatiquement » est sélectionnée, mkvmerge décidera s'il faut ou non compresser et l'algorithme à utiliser selon le type de la piste."
+msgstr "Si défini sur « Déterminer automatiquement », mkvmerge décidera s'il faut ou non compresser et l'algorithme à utiliser selon le type de la piste."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:397
 msgid "If set to 'no' then the selected tracks will not be copied to the output file."
-msgstr "Si réglé sur « Non », les pistes sélectionnées ne seront pas copiées dans le fichier cible."
+msgstr "Si défini à « Non », les pistes sélectionnées ne seront pas copiées dans le fichier cible."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:179
 msgid "If the OGM format is used and the file's character set is not recognized correctly then this option can be used to correct that."
@@ -4876,7 +4876,7 @@ msgstr "Spécification de nom de fichier ou d'identifiant de pièce jointe incor
 
 #: src/common/xml/xml.h:54
 msgid "Invalid attribute '%1%' in node '%2%' at position %3%"
-msgstr "Attribut « %1% » non valide dans le nœud « %2% » à la position %3%"
+msgstr "Attribut « %1% » incorrect dans le nœud « %2% » à la position %3%"
 
 #: src/merge/mkvmerge.cpp:1037
 #, boost-format
@@ -4917,7 +4917,7 @@ msgstr "Option de compression incorrecte spécifiée dans « --compression %1% �
 #: src/merge/mkvmerge.cpp:1111
 #, boost-format
 msgid "Invalid compression option. No track ID specified in '--compression %1%'.\n"
-msgstr "Option de compression incorrecte. Aucun identifiant de piste spécifié dans « --compression %1% ».\n"
+msgstr "Si défini sur Option de compression incorrecte. Aucun identifiant de piste spécifié dans « --compression %1% ».\n"
 
 #: src/merge/mkvmerge.cpp:1088
 #, boost-format
@@ -4951,7 +4951,7 @@ msgstr "Temps de fin incorrect pour « --split » dans « --split %1% » (partie
 #: src/common/split_arg_parsing.cpp:72
 #, boost-format
 msgid "Invalid end time for '--split' in '--split %1%' (current part: %2%). The end time must be bigger than the start time.\n"
-msgstr "Temps de fin non valide pour « --split » dans « --split %1% » (partie actuelle : %2%). Le temps de fin doit être plus grand que celui de début.\n"
+msgstr "Temps de fin incorrect pour « --split » dans « --split %1% » (partie actuelle : %2%). Le temps de fin doit être plus grand que celui de début.\n"
 
 #: src/merge/mkvmerge.cpp:966
 #, boost-format
@@ -5061,7 +5061,7 @@ msgstr "Sélecteur incorrect dans « %1% %2% ».\n"
 #: src/merge/mkvmerge.cpp:920
 #, boost-format
 msgid "Invalid split size in '--split %1%'.\n"
-msgstr "Taille de fractionnement incorrecte dans « --split %1% ».\n"
+msgstr "Taille de scission incorrecte dans « --split %1% ».\n"
 
 #: src/common/split_arg_parsing.cpp:56
 #, boost-format
@@ -5801,7 +5801,7 @@ msgstr "Aucun numéro de chapitre listé après « --split %1% ».\n"
 #: src/merge/mkvmerge.cpp:859
 #: src/merge/mkvmerge.cpp:885
 msgid "No chapters in source files or chapter files found to split by.\n"
-msgstr "Aucun chapitre dans les fichiers sources ou les fichiers de chapitrage trouvés pour le fractionnement.\n"
+msgstr "Aucun chapitre dans les fichiers sources ou les fichiers de chapitrage trouvés pour la scission.\n"
 
 #: src/extract/cues.cpp:116
 msgid "No cues were found.\n"
@@ -5917,7 +5917,7 @@ msgstr "mkvmerge ne modifie pas normalement l'information de temps (fréquence d
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
-msgstr "mkvmerge conserve normalement l'information de format d'image des flux vidéo MPEG-4 et la place dans le conteneur."
+msgstr "mkvmerge conserve normalement l'information de ratio d'aspect des flux vidéo MPEG-4 et la place dans le conteneur."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:222
 msgid "Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."
@@ -5954,7 +5954,7 @@ msgstr "Pas nécessaire pour les pistes AAC lues dans les autres formats contene
 
 #: src/mkvtoolnix-gui/merge/input.cpp:459
 msgid "Note also that there are not a lot of players that support the cropping parameters."
-msgstr "Noter également qu'il n'existe pas beaucoup de lecteurs supportant les paramètres de recadrage."
+msgstr "Noter également qu'il n'existe pas beaucoup de lecteurs gérant les paramètres de recadrage."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:211
 msgid "Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user."
@@ -5968,7 +5968,7 @@ msgstr "Noter que beaucoup de lecteurs n'utilisent pas directement la hauteur et
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:180
 msgid "Note that most <MTX_…> variables are empty and will be removed for this test run."
-msgstr "NB : la plupart des variables <MTX_…> sont vides et seront supprimées dans ce mode test."
+msgstr "NB : la plupart des variables <MTX_…> sont vides et seront retirées dans ce mode test."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:94
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
@@ -6105,7 +6105,7 @@ msgstr "Seules les pistes avec une langue dans cette liste seront marquées pour
 
 #: src/input/r_vobsub.cpp:107
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
-msgstr "Seuls les fichiers VobSub version 7 ou plus récente sont pris en charge. Avec une version plus ancienne, utiliser l'utilitaire VSConv ( http://sourceforge.net/projects/guliverkli/) pour convertir ces fichiers en version 7.\n"
+msgstr "Seuls les fichiers VobSub version 7 ou plus récente sont pris en charge. Avec une version plus ancienne, utiliser l'utilitaire VSConv (http://sourceforge.net/projects/guliverkli/) pour convertir ces fichiers en version 7.\n"
 
 #: src/info/qt_ui.cpp:91
 msgid "Open File"
@@ -6273,22 +6273,22 @@ msgstr "Parties :"
 #: src/info/mkvinfo.cpp:617
 #, boost-format
 msgid "Pixel crop bottom: %1%"
-msgstr "Recadrement en bas (pixels) : %1%"
+msgstr "Rognage en bas (pixels) : %1%"
 
 #: src/info/mkvinfo.cpp:602
 #, boost-format
 msgid "Pixel crop left: %1%"
-msgstr "Recadrement à gauche (pixels) : %1%"
+msgstr "Rognage à gauche (pixels) : %1%"
 
 #: src/info/mkvinfo.cpp:612
 #, boost-format
 msgid "Pixel crop right: %1%"
-msgstr "Recadrement à droite (pixels) : %1%"
+msgstr "Rognage à droite (pixels) : %1%"
 
 #: src/info/mkvinfo.cpp:607
 #, boost-format
 msgid "Pixel crop top: %1%"
-msgstr "Recadrement en haut (pixels) : %1%"
+msgstr "Rognage en haut (pixels) : %1%"
 
 #: src/info/mkvinfo.cpp:587
 #, boost-format
@@ -6529,12 +6529,12 @@ msgstr "Lecteur Quicktime/MP4 : la piste MPEG4 %1% n'a pas d'atome esds/configur
 #: src/input/r_qtmp4.cpp:2970
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
-msgstr "Lecteur Quicktime/MP4 : la piste MPEGH part 2/HEVC %1% n'a pas sa configuration du décodeur. Cette piste sera ignorée.\n"
+msgstr "Lecteur Quicktime/MP4 : la piste MPEGH part 2/HEVC %1% n'a pas sa configuration du décodeur. Piste ignorée.\n"
 
 #: src/input/r_qtmp4.cpp:590
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version %1%.\n"
-msgstr "Lecteur Quicktime/MP4 : l'atome d'entête multimédia (« mdhd ») utilise la version %1% non supportée.\n"
+msgstr "Lecteur Quicktime/MP4 : l'atome d'entête multimédia (« mdhd ») utilise la version %1% non gérée.\n"
 
 #: src/input/r_qtmp4.cpp:1192
 #, boost-format
@@ -6543,7 +6543,7 @@ msgstr "Lecteur Quicktime/MP4 : le champ taille est trop petit dans l'atome de d
 
 #: src/input/r_qtmp4.cpp:595
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
-msgstr "Lecteur Quicktime/MP4 : le paramètre de coefficient temporel est 0, ce qui n'est pas supporté.\n"
+msgstr "Lecteur Quicktime/MP4 : le paramètre de coefficient temporel était 0, ce qui n'est pas géré.\n"
 
 #: src/input/r_qtmp4.cpp:2931
 #, boost-format
@@ -6553,17 +6553,17 @@ msgstr "Lecteur Quicktime/MP4 : la piste AAC %1% n'a pas d'atome esds/configurat
 #: src/input/r_qtmp4.cpp:2926
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
-msgstr "Lecteur Quicktime/MP4 : la piste audio %1% utilise l'identifiant de type d'objet %2% non supporté dans l'atome « esds ». Piste ignorée.\n"
+msgstr "Lecteur Quicktime/MP4 : la piste audio %1% utilise l'identifiant de type d'objet %2% non géré dans l'atome « esds ». Piste ignorée.\n"
 
 #: src/input/r_qtmp4.cpp:2980
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
-msgstr "Lecteur Quicktime/MP4 : la piste vidéo %1% n'a pas d'atome esds. Piste ignorée.\n"
+msgstr "Lecteur Quicktime/MP4 : la piste vidéo %1% n'a pas l'atome ESDS. Piste ignorée.\n"
 
 #: src/input/r_qtmp4.cpp:379
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '%1%'. Aborting.\n"
-msgstr "Lecteur Quicktime/MP4 : ce fichier utilise des entêtes compressés avec l'algorithme inconnu ou non supporté « %1% ». Abandon.\n"
+msgstr "Lecteur Quicktime/MP4 : ce fichier utilise des entêtes compressés avec l'algorithme inconnu ou non géré « %1% ». Abandon.\n"
 
 #: src/input/r_qtmp4.cpp:412
 #, boost-format
@@ -6573,7 +6573,7 @@ msgstr "Lecteur Quicktime/MP4 : ce fichier utilise des entêtes compressés mais
 #: src/input/r_qtmp4.cpp:403
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: %1%. Aborting.\n"
-msgstr "Lecteur Quicktime/MP4 : ce fichier utilise des entêtes compressés mais ma bibliothèque zlib ne peut pas être initialisée, code d'erreur zlib : %1%. Abandon.\n"
+msgstr "Lecteur Quicktime/MP4 : ce fichier utilise des entêtes compressés mais la bibliothèque zlib ne peut pas être initialisée, code d'erreur zlib : %1%. Abandon.\n"
 
 #: src/input/r_qtmp4.cpp:408
 #, boost-format
@@ -6635,7 +6635,7 @@ msgstr "Prêt"
 #: src/common/property_element.cpp:152
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:482
 msgid "Real output sampling frequency in Hz."
-msgstr "Fréquence cible réelle en Hz."
+msgstr "Fréquence d'échantillonnage cible réelle en Hz."
 
 #: src/output/p_realaudio.h:34
 msgid "RealAudio"
@@ -7104,7 +7104,7 @@ msgstr "Sélectionne le jeu de caractères avec lequel le fichier de sous-titres
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1585
 msgid "Set aspect ratio:"
-msgstr "Format d'image :"
+msgstr "Ratio d'aspect  :"
 
 #: src/common/property_element.cpp:115
 msgid ""
@@ -7408,24 +7408,24 @@ msgid ""
 "Specify the possible modifications to the aspect ratio\n"
 "(0: free resizing, 1: keep aspect ratio, 2: fixed)."
 msgstr ""
-"Spécifier les modifications possibles du format d'image\n"
-"(0 : libre, 1 : conserver, 2 : fixe)."
+"Spécifier les modifications possibles du ratio d'aspect\n"
+"(0 : libre, 1 : conservé, 2 : fixe)."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:469
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
-msgstr "Spécifier les modifications possibles du format d'image (0 : redimensionnement libre, 1 : conserver le format d'image, 2 : fixe)."
+msgstr "Spécifier les modifications possibles du ratio d'aspect (0 : redimensionnement libre, 1 : ratio d'aspect conservé, 2 : fixe)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1610
 msgid "Split mode:"
-msgstr "Mode de fractionnement :"
+msgstr "Mode de scission :"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1609
 msgid "Splitting"
-msgstr "Fractionnement"
+msgstr "Scission"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:381
 msgid "Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed."
-msgstr "Le fractionnement aura lieu juste avant la première trame-clé de code temporel égal ou supérieur à celui de départ pour les chapitres dont les numéros sont listés."
+msgstr "La scission aura lieu juste avant la première trame-clé de code temporel égal ou supérieur à celui de départ pour les chapitres dont les numéros sont listés."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1650
 msgid "Sta&rt muxing"
@@ -8056,12 +8056,12 @@ msgstr "Le fichier « %1% » est ouvert en écriture.\n"
 #: src/merge/mkvmerge.cpp:2486
 #, boost-format
 msgid "The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
-msgstr "Le fichier « %1% » est d'un type inconnu. Consulter la liste des types de fichier supportés (« mkvmerge --list-types ») et contacter l'auteur Moritz Bunkus <moritz@bunkus.org> si le type de ce fichier est supporté mais pas reconnu correctement.\n"
+msgstr "Le fichier « %1% » est d'un type inconnu. Consulter la liste des types de fichier gérés (« mkvmerge --list-types ») et contacter l'auteur Moritz Bunkus <moritz@bunkus.org> si le type de ce fichier est pris en charge mais pas reconnu correctement.\n"
 
 #: src/merge/id_result.cpp:29
 #, boost-format
 msgid "The file '%1%' is a non-supported file type (%2%).\n"
-msgstr "Le fichier « %1% » est d'un type non supporté (%2%).\n"
+msgstr "Le fichier « %1% » est d'un type non géré (%2%).\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:999
 msgid "The file '%1' contains chapters."
@@ -8133,7 +8133,7 @@ msgstr "Les entêtes de fichier ne peuvent pas être analysés, ils sont peut-ê
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:136
 msgid "The file is an unsupported container format (%1)."
-msgstr "Le fichier est d'un format conteneur non supporté (%1)."
+msgstr "Le fichier est d'un format conteneur non géré (%1)."
 
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/propedit/propedit.cpp:100
@@ -8186,7 +8186,7 @@ msgstr "Le fichier ou dossier est introuvable"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:131
 msgid "The file was not recognized as a supported format (exit code: %1)."
-msgstr "Le fichier n'a pas été reconnu comme étant d'un format supporté (code de fermeture : %1)."
+msgstr "Le fichier n'a pas été reconnu comme étant d'un format géré (code de fermeture : %1)."
 
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
@@ -8379,7 +8379,7 @@ msgstr "L'exécutable de mkvmerge n'a pas été trouvé."
 #: src/propedit/change.cpp:63
 #, boost-format
 msgid "The name '%1%' is not a valid property name for the current edit specification in '%2%'.\n"
-msgstr "« %1% » n'est pas un nom de propriété correct pour la spécification d'édition actuelle dans « %2% ».\n"
+msgstr "Le nom « %1% » n'est pas un nom de propriété correct pour la spécification d'édition actuelle dans « %2% ».\n"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:49
 msgid "The name must not be left empty."
@@ -8413,7 +8413,7 @@ msgid ""
 "The number of video pixels to remove\n"
 "on the bottom of the image."
 msgstr ""
-"Le nombre de pixels vidéo à supprimer\n"
+"Le nombre de pixels vidéo à retirer\n"
 "en bas de l'image."
 
 #: src/common/property_element.cpp:141
@@ -8421,7 +8421,7 @@ msgid ""
 "The number of video pixels to remove\n"
 "on the left of the image."
 msgstr ""
-"Le nombre de pixels vidéo à supprimer\n"
+"Le nombre de pixels vidéo à retirer\n"
 "à gauche de l'image."
 
 #: src/common/property_element.cpp:143
@@ -8429,7 +8429,7 @@ msgid ""
 "The number of video pixels to remove\n"
 "on the right of the image."
 msgstr ""
-"Le nombre de pixels vidéo à supprimer\n"
+"Le nombre de pixels vidéo à retirer\n"
 "à droite de l'image."
 
 #: src/common/property_element.cpp:142
@@ -8437,24 +8437,24 @@ msgid ""
 "The number of video pixels to remove\n"
 "on the top of the image."
 msgstr ""
-"Le nombre de pixels vidéo à supprimer\n"
+"Le nombre de pixels vidéo à retirer\n"
 "en haut de l'image."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:466
 msgid "The number of video pixels to remove on the bottom of the image."
-msgstr "Le nombre de pixels vidéo à supprimer en bas de l'image."
+msgstr "Le nombre de pixels vidéo à retirer en bas de l'image."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:457
 msgid "The number of video pixels to remove on the left of the image."
-msgstr "Le nombre de pixels vidéo à supprimer à gauche de l'image."
+msgstr "Le nombre de pixels vidéo à retirer à gauche de l'image."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:463
 msgid "The number of video pixels to remove on the right of the image."
-msgstr "Le nombre de pixels vidéo à supprimer à droite de l'image."
+msgstr "Le nombre de pixels vidéo à retirer à droite de l'image."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:460
 msgid "The number of video pixels to remove on the top of the image."
-msgstr "Le nombre de pixels vidéo à supprimer en haut de l'image."
+msgstr "Le nombre de pixels vidéo à retirer en haut de l'image."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:351
 #: src/mkvtoolnix-gui/merge/output.cpp:367
@@ -8659,12 +8659,12 @@ msgstr "Le troisième mode extrait les pièces jointes du fichier source."
 #: src/merge/timestamp_factory.cpp:53
 #, boost-format
 msgid "The timecode file '%1%' contains an unsupported/unrecognized format (version %2%).\n"
-msgstr "Le fichier de codes temporels « %1% » contient un format non reconnu ou non supporté (version %2%).\n"
+msgstr "Le fichier de codes temporels « %1% » contient un format non reconnu ou non géré (version %2%).\n"
 
 #: src/merge/timestamp_factory.cpp:39
 #, boost-format
 msgid "The timecode file '%1%' contains an unsupported/unrecognized format line. The very first line must look like '# timecode format v1'.\n"
-msgstr "Le fichier de codes temporels « %1% » contient une ligne d'un format non reconnu ou non supporté. La toute première ligne doit être de la forme « # timecode format v1 ».\n"
+msgstr "Le fichier de codes temporels « %1% » contient une ligne d'un format non reconnu ou non géré. La toute première ligne doit être de la forme « # timecode format v1 ».\n"
 
 #: src/merge/timestamp_factory.cpp:33
 #, boost-format
@@ -8831,7 +8831,7 @@ msgstr "Ce sont des options moins fréquemment utilisées qui contrôlent la str
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
-msgstr "Ce sont des options prévues pour le développement. Elles ne sont pas officiellement supportées et peuvent changer d'une version à l'autre."
+msgstr "Ce sont des options prévues pour le développement. Elles ne sont pas officiellement gérées et peuvent changer d'une version à l'autre."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1000
 #: src/mkvtoolnix-gui/merge/input.cpp:1017
@@ -8909,7 +8909,7 @@ msgstr "Cet élément n'est actuellement pas présent dans le fichier."
 
 #: src/input/subtitles.cpp:167
 msgid "This file contains coordinates in the timecode lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
-msgstr "Ce fichier contient des lignes de codes temporels avec des coordonnées non supportées par le format de sous-titres Matroska SRT. Ces coordonnées seront supprimées automatiquement.\n"
+msgstr "Ce fichier contient des lignes de codes temporels avec des coordonnées non gérées par le format de sous-titres Matroska SRT. Ces coordonnées seront retirées automatiquement.\n"
 
 #: src/extract/mkvextract.cpp:65
 #: src/propedit/propedit.cpp:117
@@ -8999,7 +8999,7 @@ msgstr "Cela ne fonctionne qu'avec les pistes audio DTS."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
-msgstr "Cette option conduit mkvmerge à supprimer l'information de ratio d'aspect du flux de données."
+msgstr "Cette option conduit mkvmerge à retirer l'information de ratio d'aspect du flux de données."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:184
 msgid "This option controls how the chapter names are created."
@@ -9019,7 +9019,7 @@ msgstr "Cette option précise la langue à associer aux chapitres si le format O
 
 #: src/mkvtoolnix-gui/merge/input.cpp:440
 msgid "This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."
-msgstr "Cette option indique à mkvmerge le format d'image à utiliser pour calculer la hauteur et la largeur à l'écran."
+msgstr "Cette option indique à mkvmerge le ratio d'aspect à utiliser pour calculer la hauteur et la largeur à l'écran."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:469
 msgid "This parameter is only effective for AVC/h.264 and HEVC/h.265 elementary streams read from AVC/h.264 ES or HEVC/h.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'."
@@ -9139,12 +9139,12 @@ msgstr "Nom de la &piste :"
 #: src/extract/xtr_hevc.cpp:30
 #, boost-format
 msgid "Track %1% CodecPrivate is too small.\n"
-msgstr "Les données de codec privées de la piste %1% sont trop petites.\n"
+msgstr "Le CodecPrivate de la piste %1% est trop petit.\n"
 
 #: src/common/content_decoder.cpp:112
 #, boost-format
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
-msgstr "La piste %1% a été compressée avec un algorithme inconnu/non supporté (%2%).\n"
+msgstr "La piste %1% a été compressée avec un algorithme inconnu/non géré (%2%).\n"
 
 #: src/input/r_matroska.cpp:1072
 #, boost-format
@@ -9232,12 +9232,12 @@ msgstr "Piste %1% : les informations AAC ne peuvent pas être analysées.\n"
 #: src/extract/xtr_aac.cpp:74
 #, boost-format
 msgid "Track ID %1% has an unknown AAC type.\n"
-msgstr "La piste d'identifiant %1% a un type AAC inconnu.\n"
+msgstr "L'identifiant de piste %1% a un type AAC inconnu.\n"
 
 #: src/merge/generic_reader.cpp:353
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
-msgstr "Piste d'identifiant %1% : %2% (%3%)"
+msgstr "Identifiant de piste %1% : %2% (%3%)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:279
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:60
@@ -9300,7 +9300,7 @@ msgstr "Les pistes avec langue de cette liste seront marquées pour ne pas être
 
 #: src/extract/xtr_base.cpp:121
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
-msgstr "Les pistes avec schémas d'encodage des données non supportés (compression ou chiffrement) ne peuvent pas être extraites.\n"
+msgstr "Les pistes avec schémas d'encodage de données non gérés (compression ou chiffrement) ne peuvent pas être extraites.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:247
 msgid "Tracks:"
@@ -9332,12 +9332,12 @@ msgid ""
 "Type of the unit for DisplayWidth/Height\n"
 "(0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
 msgstr ""
-"Unité pour largeur/hauteur à l'écran\n"
-"(0 : pixel, 1 : centimètre, 2 : pouce, 3 : format d'image)."
+"Type d'unité pour largeur/hauteur à l'écran\n"
+"(0 : pixel, 1 : centimètre, 2 : pouce, 3 : ratio d'aspect)."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:454
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
-msgstr "Type d'unité pour largeur/hauteur à l'écran (0 : pixel, 1 : centimètre, 2 : pouce, 3 : format d'image)."
+msgstr "Type d'unité pour largeur/hauteur à l'écran (0 : pixel, 1 : centimètre, 2 : pouce, 3 : ratio d'aspect)."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:277
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:207
@@ -9374,7 +9374,7 @@ msgstr "Impossible de concaténer les fichiers"
 
 #: src/mpegparser/M2VParser.cpp:254
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
-msgstr "Trame image inattendue après une trame champ unique. Corriger le flux vidéo MPEG-2 avant d'essayer de le multiplexer.\n"
+msgstr "Trame d'image inattendue après une trame champ unique. Corriger le flux vidéo MPEG-2 avant d'essayer de le multiplexer.\n"
 
 #: src/info/mkvinfo.cpp:345
 #: src/info/mkvinfo.cpp:354
@@ -9389,7 +9389,7 @@ msgstr "Type de flux audio 0x%|1$04x| inconnu. L'identifiant de flux %2% sera ig
 #: src/common/chapters/chapters.cpp:369
 #, boost-format
 msgid "Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n"
-msgstr "Format de fichier de chapitrage inconnu dans « %1% ». Ce fichier ne contient pas de format de chapitrage supporté.\n"
+msgstr "Format de fichier de chapitrage inconnu dans « %1% ». Ce fichier ne contient pas de format de chapitrage géré.\n"
 
 #: src/common/content_decoder.cpp:89
 #, boost-format
@@ -9438,7 +9438,7 @@ msgstr "Mode d'analyse inconnu dans « %1% %2% ».\n"
 #: src/input/r_avi.cpp:478
 #, boost-format
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
-msgstr "Format audio 0x%|1$04x| inconnu/non supporté dans cette piste audio.\n"
+msgstr "Format audio 0x%|1$04x| inconnu/non géré dans cette piste audio.\n"
 
 #: src/extract/extract_cli_parser.cpp:231
 #, boost-format
@@ -9460,7 +9460,7 @@ msgstr "Version MPEG non prise en charge : 0x%|1$02x| dans le paquet %2% pour le
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:136
 msgid "Unsupported file format"
-msgstr "Format de fichier non supporté"
+msgstr "Format de fichier non géré"
 
 #: src/input/r_matroska.cpp:1855
 msgid "Unsupported track type for this track.\n"
@@ -9582,7 +9582,7 @@ msgstr "Vidéo"
 #: src/common/property_element.cpp:145
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:469
 msgid "Video aspect ratio type"
-msgstr "Type de format d'image vidéo"
+msgstr "Type de ratio d'aspect vidéo"
 
 #: src/common/property_element.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:466
@@ -9931,7 +9931,7 @@ msgstr "Il est possible de spécifier jusqu'à neuf chiffres pour le nombre de n
 
 #: src/mkvtoolnix-gui/merge/output.cpp:150
 msgid "You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers."
-msgstr "Il est possible d'effectuer un fractionnement basé sur le temps écoulé, sur l'horodatage, sur le numéro des trames/champs ou sur celui des chapitres."
+msgstr "Il est possible d'effectuer une scission basée sur le temps écoulé, sur l'horodatage, sur le numéro des trames/champs ou sur celui des chapitres."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1133
 msgid "You cannot add additional parts to files that don't contain tracks."
@@ -9998,9 +9998,8 @@ msgid "all entries"
 msgstr "toutes les entrées"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1644
-#, fuzzy
 msgid "all output files"
-msgstr "À tous les fichiers cible"
+msgstr "tous les fichiers cible"
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 msgid "always ask the user"
@@ -10634,7 +10633,7 @@ msgstr "En temps normal, mkvmerge calcule le décalage sugreconnu et compense d'
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:80
 msgid "mkvmerge normally removes that last entry if it's timecode is within five seconds of the total duration."
-msgstr "mkvmerge supprime habituellement cette dernière entrée si elle se situe dans les 5 dernière secondes."
+msgstr "mkvmerge retire habituellement cette dernière entrée si elle se situe dans les 5 dernière secondes."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:169
 #: src/mkvtoolnix-gui/merge/output.cpp:170
@@ -10803,7 +10802,7 @@ msgstr "fréquence en sortie : %1%"
 
 #: src/output/p_passthrough.h:29
 msgid "passthrough"
-msgstr "passe"
+msgstr "laisser-passer"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:234
 msgid "pending automatic start"
@@ -10816,22 +10815,22 @@ msgstr "démarrage manuel en attente"
 #: src/info/mkvinfo.cpp:618
 #, boost-format
 msgid "pixel crop bottom: %1%"
-msgstr "recadrage en bas (pixels) : %1%"
+msgstr "rognage en bas (pixels) : %1%"
 
 #: src/info/mkvinfo.cpp:603
 #, boost-format
 msgid "pixel crop left: %1%"
-msgstr "recadrage à gauche (pixels) : %1%"
+msgstr "rognage à gauche (pixels) : %1%"
 
 #: src/info/mkvinfo.cpp:613
 #, boost-format
 msgid "pixel crop right: %1%"
-msgstr "recadrage à droite (pixels) : %1%"
+msgstr "rognage à droite (pixels) : %1%"
 
 #: src/info/mkvinfo.cpp:608
 #, boost-format
 msgid "pixel crop top: %1%"
-msgstr "recadrage en haut (pixels) : %1%"
+msgstr "rognage en haut (pixels) : %1%"
 
 #: src/info/mkvinfo.cpp:588
 #, boost-format
@@ -10921,9 +10920,8 @@ msgid "text subtitles"
 msgstr "sous-titres texte"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1645
-#, fuzzy
 msgid "the first output file only"
-msgstr "Seulement au 1er fichier cible"
+msgstr "le premier fichier cible seulement"
 
 #: src/merge/mkvmerge.cpp:2375
 msgid "timecodes"
