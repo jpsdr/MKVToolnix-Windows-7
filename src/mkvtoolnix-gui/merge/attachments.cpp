@@ -281,10 +281,10 @@ Tab::retranslateAttachmentsUI() {
   m_attachmentsModel->retranslateUi();
   resizeAttachmentsColumnsToContents();
 
-  m_addAttachmentsAction->setText(QY("&Add"));
-  m_removeAttachmentsAction->setText(QY("&Remove"));
-  m_removeAllAttachmentsAction->setText(QY("Remove a&ll"));
-  m_selectAllAttachmentsAction->setText(QY("&Select all"));
+  m_addAttachmentsAction->setText(QY("&Add attachments"));
+  m_removeAttachmentsAction->setText(QY("&Remove attachments"));
+  m_removeAllAttachmentsAction->setText(QY("Remove a&ll attachments"));
+  m_selectAllAttachmentsAction->setText(QY("&Select all attachments"));
 
   // Attachment style
   ui->attachmentStyle->setItemData(0, static_cast<int>(Attachment::ToAllFiles));
