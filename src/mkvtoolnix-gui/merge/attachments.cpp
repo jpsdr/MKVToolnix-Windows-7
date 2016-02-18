@@ -41,6 +41,10 @@ Tab::setupAttachmentsControls() {
   Util::fixComboBoxViewWidth(*ui->attachmentMIMEType);
   Util::fixComboBoxViewWidth(*ui->attachmentStyle);
 
+  m_addAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
+  m_removeAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
+  m_selectAllAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/edit-select-all.png")});
+
   // Signals & slots
   connect(m_addAttachmentsAction,            &QAction::triggered,                                                                this, &Tab::onAddAttachments);
   connect(m_removeAttachmentsAction,         &QAction::triggered,                                                                this, &Tab::onRemoveAttachments);
