@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-11 09:27+0100\n"
+"POT-Creation-Date: 2016-02-18 12:38+0100\n"
 "PO-Revision-Date: 2015-12-17 19:21+0800\n"
 "Last-Translator: Donghui Li <DonghuiLi.81@gmail.com>\n"
 "Language-Team: Chinese Simplified <DonghuiLi.81@gmail.com>\n"
@@ -1018,13 +1018,13 @@ msgstr "中止任务(&A)"
 msgid "&About mkvinfo"
 msgstr "关于 mkvinfo(&A)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:284
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "添加(&A)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:270
+#: src/mkvtoolnix-gui/merge/attachments.cpp:288
 #, fuzzy
 msgid "&Add attachments"
 msgstr "添加附件"
@@ -1312,9 +1312,10 @@ msgstr "重新加载(&R)"
 msgid "&Reload file"
 msgstr "重新加载(&R)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:285
-msgid "&Remove"
-msgstr "移除(&R)"
+#: src/mkvtoolnix-gui/merge/attachments.cpp:289
+#, fuzzy
+msgid "&Remove attachments"
+msgstr "移除元素"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1250
 msgid "&Remove files"
@@ -1367,9 +1368,10 @@ msgstr "扫描目录中的其他播放列表(&S)："
 msgid "&Scan for other playlists"
 msgstr "扫描其他播放列表(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:287
-msgid "&Select all"
-msgstr "全选(&S)"
+#: src/mkvtoolnix-gui/merge/attachments.cpp:291
+#, fuzzy
+msgid "&Select all attachments"
+msgstr "选择所有轨道(&S)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1254
 msgid "&Select all tracks"
@@ -1383,7 +1385,7 @@ msgstr "跳过标记为“隐藏”的章节(&S)"
 msgid "&Start && end:"
 msgstr "起止时间(&S)："
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:495
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:497
 msgid "&Start all pending jobs"
 msgstr "开始所有待处理的任务(&S)"
 
@@ -1917,7 +1919,7 @@ msgstr "<Simple> 必须包含 <String> 或 <Binary> 子元素。"
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> 缺少 <Simple> 子元素。"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:257
+#: src/mkvtoolnix-gui/merge/attachments.cpp:261
 #: src/mkvtoolnix-gui/merge/input.cpp:570
 #: src/mkvtoolnix-gui/merge/input.cpp:1271
 msgid "<do not change>"
@@ -2118,7 +2120,7 @@ msgstr "AVI"
 msgid "AVI (Audio/Video Interleaved)"
 msgstr "AVI (音视频交错文件)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:500
 msgid "Abort all running jobs and stop &immediately"
 msgstr "中止所有正在运行的任务并立即停止队列(&I)"
 
@@ -2135,16 +2137,16 @@ msgstr "中止正在运行的任务"
 msgid "About mkvinfo"
 msgstr "关于 mkvinfo"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:493
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:494
 msgid "Acknowledge &all warnings and errors"
 msgstr "确认所有警告和错误(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:492
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:493
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
 msgstr "确认所有错误(&E)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:491
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:492
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 msgid "Acknowledge all &warnings"
 msgstr "确认所有警告(&W)"
@@ -2190,7 +2192,7 @@ msgid "Add as new input fi&les"
 msgstr "添加为新的输入文件(&L)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
-#: src/mkvtoolnix-gui/merge/attachments.cpp:164
+#: src/mkvtoolnix-gui/merge/attachments.cpp:168
 msgid "Add attachments"
 msgstr "添加附件"
 
@@ -2321,7 +2323,7 @@ msgstr "算法：%1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:164
+#: src/mkvtoolnix-gui/merge/attachments.cpp:168
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171
 #: src/mkvtoolnix-gui/merge/tab.cpp:185
@@ -3160,11 +3162,11 @@ msgstr "将文本字幕转换为指定字符集 (默认：UTF-8)。"
 msgid "Converting the chapters to XML failed: %1"
 msgstr "将章节转换为 XML 失败：%1"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:499
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:501
 msgid "Copy first source file's name to file &title"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:501
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:503
 #, fuzzy
 msgid "Copy o&utput file's name to file title"
 msgstr "输出文件名"
@@ -3304,6 +3306,11 @@ msgstr "Ctrl+A"
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:490
+#, fuzzy
+msgid "Ctrl+L"
+msgstr "Ctrl+A"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:426
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:452
 msgid "Ctrl+N"
@@ -3326,7 +3333,7 @@ msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:435
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:496
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 msgid "Ctrl+R"
 msgstr "Ctrl+R"
 
@@ -3338,12 +3345,17 @@ msgstr "Ctrl+R"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:500
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:496
+#, fuzzy
+msgid "Ctrl+Shift+L"
+msgstr "Ctrl+S"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
 #, fuzzy
 msgid "Ctrl+T"
 msgstr "Ctrl+A"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:504
 #, fuzzy
 msgid "Ctrl+U"
 msgstr "Ctrl+A"
@@ -5986,7 +5998,7 @@ msgstr "源文件与章节文件中只有 %1% 个章节。"
 
 #: src/merge/mkvmerge.cpp:1570
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:649
-#: src/mkvtoolnix-gui/merge/attachments.cpp:142
+#: src/mkvtoolnix-gui/merge/attachments.cpp:146
 #, fuzzy
 msgid "Only files smaller than 2 GiB are supported."
 msgstr "您试图打开的文件 (%1) 无法被识别为有效的 Matroska/WebM 文件。"
@@ -6556,7 +6568,7 @@ msgstr "不支持读取已加密的 VOB。\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:646
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:658
-#: src/mkvtoolnix-gui/merge/attachments.cpp:139
+#: src/mkvtoolnix-gui/merge/attachments.cpp:143
 #, fuzzy
 msgid "Reading failed"
 msgstr "保存失败"
@@ -6636,7 +6648,7 @@ msgstr "当前任务剩余时间："
 msgid "Remaining time for queue:"
 msgstr "任务队列剩余时间："
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:494
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:495
 msgid "Remove &completed jobs"
 msgstr "移除已完成的任务(&C)"
 
@@ -6644,15 +6656,16 @@ msgstr "移除已完成的任务(&C)"
 msgid "Remove &successfully completed jobs"
 msgstr "移除成功完成的任务(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:286
-msgid "Remove a&ll"
-msgstr "全部移除(&L)"
+#: src/mkvtoolnix-gui/merge/attachments.cpp:290
+#, fuzzy
+msgid "Remove a&ll attachments"
+msgstr "移除元素"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1251
 msgid "Remove a&ll files"
 msgstr "移除所有文件(&L)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:490
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:491
 msgid "Remove a&ll jobs"
 msgstr "移除所有任务(&L)"
 
@@ -6725,7 +6738,7 @@ msgstr "右键单击打开所有轨道的操作选项"
 msgid "Right-click for actions for jobs"
 msgstr "右键单击打开任务操作选项"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:298
+#: src/mkvtoolnix-gui/merge/attachments.cpp:302
 msgid "Right-click for attachment actions"
 msgstr "右键单击打开附件操作选项"
 
@@ -6746,7 +6759,7 @@ msgstr "无法移除正在运行的任务。"
 msgid "S&how command line"
 msgstr "显示命令行(&H)"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:503
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:505
 msgid "S&top job queue"
 msgstr "停止任务队列(&T)"
 
@@ -7425,7 +7438,7 @@ msgstr "立体 3D 视频模式 (0 - 11，参见文档)。"
 msgid "Stereoscopy:"
 msgstr "立体模式："
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:497
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:499
 msgid "Stop &after all running jobs have finished"
 msgstr "所有正在运行的任务结束后停止(&A)"
 
@@ -8003,7 +8016,7 @@ msgid "The file '%1' you've added is a playlist."
 msgstr "您添加的 '%1' 文件是一个播放列表。"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:648
-#: src/mkvtoolnix-gui/merge/attachments.cpp:141
+#: src/mkvtoolnix-gui/merge/attachments.cpp:145
 #, fuzzy
 msgid "The file (%1) is too big (%2)."
 msgstr "文件 '%1' 包含标签。"
@@ -10951,6 +10964,12 @@ msgstr "– 设为空 –"
 #~ msgid "&Merging"
 #~ msgstr "合成(&M)"
 
+#~ msgid "&Remove"
+#~ msgstr "移除(&R)"
+
+#~ msgid "&Select all"
+#~ msgstr "全选(&S)"
+
 #~ msgid "Countr&y:"
 #~ msgstr "国家(&Y)："
 
@@ -10959,6 +10978,9 @@ msgstr "– 设为空 –"
 
 #~ msgid "Normally the track property controls are shown on the right side in a scrollable widget."
 #~ msgstr "通常，轨道属性控件以滚动部件形式在右侧显示。"
+
+#~ msgid "Remove a&ll"
+#~ msgstr "全部移除(&L)"
 
 #~ msgid "Use a &vertical layout for the \"input\" tab"
 #~ msgstr "“输入”选项卡使用垂直布局(&V)"

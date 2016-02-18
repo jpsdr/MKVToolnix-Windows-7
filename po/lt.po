@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-4.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-11 09:27+0100\n"
+"POT-Creation-Date: 2016-02-18 12:38+0100\n"
 "PO-Revision-Date: 2015-11-22 10:46+0100\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <embar@users.berlios.de>\n"
@@ -942,13 +942,13 @@ msgstr "&Nutraukti"
 msgid "&About mkvinfo"
 msgstr "Apie mkvinfo"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:284
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "Pri&dėti"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:270
+#: src/mkvtoolnix-gui/merge/attachments.cpp:288
 #, fuzzy
 msgid "&Add attachments"
 msgstr "Nauji priedai"
@@ -1275,9 +1275,10 @@ msgstr "Į&kelti iš naujo\tCtrl-R"
 msgid "&Reload file"
 msgstr "Į&kelti iš naujo\tCtrl-R"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:285
-msgid "&Remove"
-msgstr "&Pašalinti"
+#: src/mkvtoolnix-gui/merge/attachments.cpp:289
+#, fuzzy
+msgid "&Remove attachments"
+msgstr "Pašalinti elementą"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1250
 #, fuzzy
@@ -1335,9 +1336,9 @@ msgstr ""
 msgid "&Scan for other playlists"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:287
+#: src/mkvtoolnix-gui/merge/attachments.cpp:291
 #, fuzzy
-msgid "&Select all"
+msgid "&Select all attachments"
 msgstr "Segmento takeliai"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1254
@@ -1354,7 +1355,7 @@ msgstr ""
 msgid "&Start && end:"
 msgstr "&Pradėti"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:495
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:497
 msgid "&Start all pending jobs"
 msgstr ""
 
@@ -1897,7 +1898,7 @@ msgstr ""
 msgid "<Tag> is missing the <Simple> child."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:257
+#: src/mkvtoolnix-gui/merge/attachments.cpp:261
 #: src/mkvtoolnix-gui/merge/input.cpp:570
 #: src/mkvtoolnix-gui/merge/input.cpp:1271
 msgid "<do not change>"
@@ -2104,7 +2105,7 @@ msgstr "AVI"
 msgid "AVI (Audio/Video Interleaved)"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:500
 msgid "Abort all running jobs and stop &immediately"
 msgstr ""
 
@@ -2123,17 +2124,17 @@ msgstr "Nutraukti po šio darbo"
 msgid "About mkvinfo"
 msgstr "Apie mkvinfo"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:493
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:494
 #, fuzzy
 msgid "Acknowledge &all warnings and errors"
 msgstr "užbaigta, bet buvo įspėjimų"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:492
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:493
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:491
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:492
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 #, fuzzy
 msgid "Acknowledge all &warnings"
@@ -2186,7 +2187,7 @@ msgid "Add as new input fi&les"
 msgstr "Pasirinkite įvedimo rinkmeną"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
-#: src/mkvtoolnix-gui/merge/attachments.cpp:164
+#: src/mkvtoolnix-gui/merge/attachments.cpp:168
 #, fuzzy
 msgid "Add attachments"
 msgstr "Nauji priedai"
@@ -2330,7 +2331,7 @@ msgstr "Algoritmas: %1% (%2%)"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:598
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:146
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:164
+#: src/mkvtoolnix-gui/merge/attachments.cpp:168
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:171
 #: src/mkvtoolnix-gui/merge/tab.cpp:185
@@ -3203,11 +3204,11 @@ msgstr ""
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Dabartinius skyrius įrašyti į XML rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:499
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:501
 msgid "Copy first source file's name to file &title"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:501
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:503
 #, fuzzy
 msgid "Copy o&utput file's name to file title"
 msgstr "Išvestinos rinkmenos pavadinimas"
@@ -3350,6 +3351,10 @@ msgstr ""
 msgid "Ctrl+E"
 msgstr ""
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:490
+msgid "Ctrl+L"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:426
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:452
 msgid "Ctrl+N"
@@ -3372,7 +3377,7 @@ msgid "Ctrl+Q"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:435
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:496
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 msgid "Ctrl+R"
 msgstr ""
 
@@ -3384,11 +3389,15 @@ msgstr ""
 msgid "Ctrl+S"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:500
-msgid "Ctrl+T"
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:496
+msgid "Ctrl+Shift+L"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+msgid "Ctrl+T"
+msgstr ""
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:504
 msgid "Ctrl+U"
 msgstr ""
 
@@ -6109,7 +6118,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:1570
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:649
-#: src/mkvtoolnix-gui/merge/attachments.cpp:142
+#: src/mkvtoolnix-gui/merge/attachments.cpp:146
 msgid "Only files smaller than 2 GiB are supported."
 msgstr ""
 
@@ -6703,7 +6712,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:646
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:658
-#: src/mkvtoolnix-gui/merge/attachments.cpp:139
+#: src/mkvtoolnix-gui/merge/attachments.cpp:143
 #, fuzzy
 msgid "Reading failed"
 msgstr "Analizuojama rinkmena"
@@ -6787,7 +6796,7 @@ msgstr "Likęs laikas:"
 msgid "Remaining time for queue:"
 msgstr "Likęs laikas:"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:494
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:495
 #, fuzzy
 msgid "Remove &completed jobs"
 msgstr "Pašalinti skyrių"
@@ -6796,17 +6805,17 @@ msgstr "Pašalinti skyrių"
 msgid "Remove &successfully completed jobs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:286
+#: src/mkvtoolnix-gui/merge/attachments.cpp:290
 #, fuzzy
-msgid "Remove a&ll"
-msgstr "pašalinti visas"
+msgid "Remove a&ll attachments"
+msgstr "Pašalinti elementą"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1251
 #, fuzzy
 msgid "Remove a&ll files"
 msgstr "prie visų rinkmenų"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:490
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:491
 #, fuzzy
 msgid "Remove a&ll jobs"
 msgstr "pašalinti visas"
@@ -6879,7 +6888,7 @@ msgstr ""
 msgid "Right-click for actions for jobs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:298
+#: src/mkvtoolnix-gui/merge/attachments.cpp:302
 msgid "Right-click for attachment actions"
 msgstr ""
 
@@ -6901,7 +6910,7 @@ msgstr ""
 msgid "S&how command line"
 msgstr "Ro&dyti komandinę eilutę"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:503
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:505
 #, fuzzy
 msgid "S&top job queue"
 msgstr "Įtraukti į &darbų eilę"
@@ -7625,7 +7634,7 @@ msgstr ""
 msgid "Stereoscopy:"
 msgstr "Stereoskopija:"
 
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:497
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:499
 #, fuzzy
 msgid "Stop &after all running jobs have finished"
 msgstr "Apdorojimą nutraukti po šio darbo"
@@ -8217,7 +8226,7 @@ msgid "The file '%1' you've added is a playlist."
 msgstr "Rinkmenos antraštė per trumpa. \n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:648
-#: src/mkvtoolnix-gui/merge/attachments.cpp:141
+#: src/mkvtoolnix-gui/merge/attachments.cpp:145
 #, fuzzy
 msgid "The file (%1) is too big (%2)."
 msgstr "Rinkmenos antraštė per trumpa. \n"
@@ -11232,7 +11241,18 @@ msgstr ""
 #~ msgid "&Files:"
 #~ msgstr "&Rinkmena"
 
+#~ msgid "&Remove"
+#~ msgstr "&Pašalinti"
+
+#, fuzzy
+#~ msgid "&Select all"
+#~ msgstr "Segmento takeliai"
+
 #, fuzzy
 #~ msgid "Countr&y:"
 #~ msgstr "Šalis:"
+
+#, fuzzy
+#~ msgid "Remove a&ll"
+#~ msgstr "pašalinti visas"
 
