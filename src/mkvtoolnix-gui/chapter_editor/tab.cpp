@@ -550,7 +550,13 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
     }
 
     auto chapters = m_chapterModel->allChapters();
-    auto result   = m_analyzer->update_element(chapters, true);
+    auto result   = kax_analyzer_c::uer_success;
+
+    if (chapters && (0 != chapters->ListSize()))
+      result = m_analyzer->update_element(chapters, true);
+    else
+      result = m_analyzer->remove_elements(EBML_ID(KaxChapters));
+
     m_analyzer->close_file();
 
     if (kax_analyzer_c::uer_success != result) {
@@ -1493,6 +1499,12 @@ Tab::showChapterContextMenu(QPoint const &pos) {
   menu.addAction(m_collapseAllAction);
 
   menu.exec(ui->elements->viewport()->mapToGlobal(pos));
+}
+
+bool
+Tab::isSourceMatroska()
+  const {
+  return !!m_analyzer;
 }
 
 bool

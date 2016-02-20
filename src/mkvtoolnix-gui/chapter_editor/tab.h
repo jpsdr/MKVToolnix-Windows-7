@@ -69,6 +69,7 @@ public:
   virtual bool hasChapters() const;
   virtual bool hasBeenModified() const;
   virtual bool areWidgetsEnabled() const;
+  virtual bool isSourceMatroska() const;
 
 signals:
   void removeThisTab();
