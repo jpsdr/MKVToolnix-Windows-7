@@ -23,7 +23,7 @@ public:
   explicit AddingAppendingFilesDialog(QWidget *parent, QList<SourceFilePtr> const &files);
   ~AddingAppendingFilesDialog();
 
-  Util::Settings::AddingAppendingFilesPolicy decision() const;
+  Util::Settings::MergeAddingAppendingFilesPolicy decision() const;
   int fileIndex() const;
   bool alwaysUseThisDecision() const;
 

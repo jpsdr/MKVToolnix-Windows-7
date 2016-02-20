@@ -47,14 +47,14 @@ AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
 AddingAppendingFilesDialog::~AddingAppendingFilesDialog() {
 }
 
-Util::Settings::AddingAppendingFilesPolicy
+Util::Settings::MergeAddingAppendingFilesPolicy
 AddingAppendingFilesDialog::decision()
   const {
-  return ui->rbAdd->isChecked()          ? Util::Settings::AddingAppendingFilesPolicy::Add
-       : ui->rbAppend->isChecked()       ? Util::Settings::AddingAppendingFilesPolicy::Append
-       : ui->rbAddToNew->isChecked()     ? Util::Settings::AddingAppendingFilesPolicy::AddToNew
-       : ui->rbAddEachToNew->isChecked() ? Util::Settings::AddingAppendingFilesPolicy::AddEachToNew
-       :                                   Util::Settings::AddingAppendingFilesPolicy::AddAdditionalParts;
+  return ui->rbAdd->isChecked()          ? Util::Settings::MergeAddingAppendingFilesPolicy::Add
+       : ui->rbAppend->isChecked()       ? Util::Settings::MergeAddingAppendingFilesPolicy::Append
+       : ui->rbAddToNew->isChecked()     ? Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew
+       : ui->rbAddEachToNew->isChecked() ? Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew
+       :                                   Util::Settings::MergeAddingAppendingFilesPolicy::AddAdditionalParts;
 }
 
 int

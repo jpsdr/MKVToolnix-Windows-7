@@ -19,6 +19,7 @@
 #include "common/strings/formatting.h"
 #include "common/unique_numbers.h"
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"
+#include "mkvtoolnix-gui/header_editor/action_for_dropped_files_dialog.h"
 #include "mkvtoolnix-gui/header_editor/ascii_string_value_page.h"
 #include "mkvtoolnix-gui/header_editor/attached_file_page.h"
 #include "mkvtoolnix-gui/header_editor/attachments_page.h"
@@ -29,6 +30,7 @@
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 #include "mkvtoolnix-gui/header_editor/string_value_page.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
+#include "mkvtoolnix-gui/header_editor/tool.h"
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
@@ -234,7 +236,7 @@ Tab::setupUi() {
   Util::preventScrollingWithoutFocus(this);
 
   connect(ui->elements,                              &Util::BasicTreeView::customContextMenuRequested, this, &Tab::showTreeContextMenu);
-  connect(ui->elements,                              &Util::BasicTreeView::filesDropped,               this, &Tab::addAttachments);
+  connect(ui->elements,                              &Util::BasicTreeView::filesDropped,               this, &Tab::handleDroppedFiles);
   connect(ui->elements,                              &Util::BasicTreeView::deletePressed,              this, &Tab::removeSelectedAttachment);
   connect(ui->elements,                              &Util::BasicTreeView::insertPressed,              this, &Tab::selectAttachmentsAndAdd);
   connect(ui->elements->selectionModel(),            &QItemSelectionModel::currentChanged,             this, &Tab::selectionChanged);
@@ -701,6 +703,36 @@ Tab::replaceAttachmentContent(bool deriveNameAndMimeType) {
   auto page = dynamic_cast<AttachedFilePage *>(currentlySelectedPage());
   if (page)
     page->replaceContent(deriveNameAndMimeType);
+}
+
+void
+Tab::handleDroppedFiles(QStringList const &fileNames,
+                        Qt::MouseButtons mouseButtons) {
+  if (fileNames.isEmpty())
+    return;
+
+  auto &settings = Util::Settings::get();
+  auto decision  = settings.m_headerEditorDroppedFilesPolicy;
+
+  if (   (Util::Settings::HeaderEditorDroppedFilesPolicy::Ask == decision)
+      || ((mouseButtons & Qt::RightButton)                    == Qt::RightButton)) {
+    ActionForDroppedFilesDialog dlg{this};
+    if (!dlg.exec())
+      return;
+
+    decision = dlg.decision();
+
+    if (dlg.alwaysUseThisDecision()) {
+      settings.m_headerEditorDroppedFilesPolicy = decision;
+      settings.save();
+    }
+  }
+
+  if (Util::Settings::HeaderEditorDroppedFilesPolicy::Open == decision)
+    MainWindow::get()->headerEditorTool()->openFiles(fileNames);
+
+  else
+    addAttachments(fileNames);
 }
 
 }}}

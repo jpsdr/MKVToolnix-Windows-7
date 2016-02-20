@@ -58,7 +58,8 @@ protected:
   void setupOutputFileNamePolicy();
   void setupTrackPropertiesLayout();
   void setupEnableMuxingTracksByLanguage();
-  void setupAddingAppendingFilesPolicy();
+  void setupMergeAddingAppendingFilesPolicy();
+  void setupHeaderEditorDroppedFilesPolicy();
   void setupJobsRunPrograms();
   void setupFont();
 

@@ -66,13 +66,19 @@ public:
     RemoveInputFiles,
   };
 
-  enum class AddingAppendingFilesPolicy {
+  enum class MergeAddingAppendingFilesPolicy {
     Ask,
     Add,
     AddToNew,
     AddEachToNew,
     Append,
     AddAdditionalParts,
+  };
+
+  enum class HeaderEditorDroppedFilesPolicy {
+    Ask,
+    Open,
+    AddAttachments,
   };
 
   enum class TrackPropertiesLayout {
@@ -101,7 +107,8 @@ public:
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
   bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
   ClearMergeSettingsAction m_clearMergeSettings;
-  AddingAppendingFilesPolicy m_mergeAddingAppendingFilesPolicy;
+  MergeAddingAppendingFilesPolicy m_mergeAddingAppendingFilesPolicy;
+  HeaderEditorDroppedFilesPolicy m_headerEditorDroppedFilesPolicy;
   TrackPropertiesLayout m_mergeTrackPropertiesLayout;
 
   OutputFileNamePolicy m_outputFileNamePolicy;

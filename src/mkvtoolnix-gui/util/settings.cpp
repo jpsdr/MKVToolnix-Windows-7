@@ -126,7 +126,7 @@ Settings::convertOldSettings() {
   auto mergeAlwaysAddDroppedFiles = reg->value("mergeAlwaysAddDroppedFiles");
 
   if (mergeAlwaysAddDroppedFiles.isValid())
-    reg->setValue("mergeAddingAppendingFilesPolicy", static_cast<int>(AddingAppendingFilesPolicy::Add));
+    reg->setValue("mergeAddingAppendingFilesPolicy", static_cast<int>(MergeAddingAppendingFilesPolicy::Add));
 
   reg->remove("mergeAlwaysAddDroppedFiles");
   reg->endGroup();
@@ -186,7 +186,8 @@ Settings::load() {
   m_disableDefaultTrackForSubtitles    = reg.value("disableDefaultTrackForSubtitles",    false).toBool();
   m_mergeAlwaysShowOutputFileControls  = reg.value("mergeAlwaysShowOutputFileControls",  true).toBool();
   m_mergeTrackPropertiesLayout         = static_cast<TrackPropertiesLayout>(reg.value("mergeTrackPropertiesLayout", static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
-  m_mergeAddingAppendingFilesPolicy    = static_cast<AddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(AddingAppendingFilesPolicy::Ask)).toInt());
+  m_mergeAddingAppendingFilesPolicy    = static_cast<MergeAddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
+  m_headerEditorDroppedFilesPolicy     = static_cast<HeaderEditorDroppedFilesPolicy>(reg.value("headerEditorDroppedFilesPolicy", static_cast<int>(HeaderEditorDroppedFilesPolicy::Ask)).toInt());
 
   m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
   m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
@@ -343,6 +344,7 @@ Settings::save()
   reg.setValue("mergeAlwaysShowOutputFileControls",  m_mergeAlwaysShowOutputFileControls);
   reg.setValue("mergeTrackPropertiesLayout",         static_cast<int>(m_mergeTrackPropertiesLayout));
   reg.setValue("mergeAddingAppendingFilesPolicy",    static_cast<int>(m_mergeAddingAppendingFilesPolicy));
+  reg.setValue("headerEditorDroppedFilesPolicy",     static_cast<int>(m_headerEditorDroppedFilesPolicy));
 
   reg.setValue("outputFileNamePolicy",               static_cast<int>(m_outputFileNamePolicy));
   reg.setValue("relativeOutputDir",                  m_relativeOutputDir.path());

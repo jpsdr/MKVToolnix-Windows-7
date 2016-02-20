@@ -70,6 +70,7 @@ public slots:
   virtual void removeSelectedAttachment();
   virtual void saveAttachmentContent();
   virtual void replaceAttachmentContent(bool deriveNameAndMimeType);
+  virtual void handleDroppedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
 
 protected:
   void setupUi();

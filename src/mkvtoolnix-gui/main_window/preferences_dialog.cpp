@@ -75,7 +75,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   setupPlaylistScanningPolicy();
   setupOutputFileNamePolicy();
   setupEnableMuxingTracksByLanguage();
-  setupAddingAppendingFilesPolicy();
+  setupMergeAddingAppendingFilesPolicy();
   setupTrackPropertiesLayout();
 
   // Chapter editor page
@@ -83,6 +83,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
   ui->cbCEDefaultLanguage->setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
   ui->cbCEDefaultCountry->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
+
+  // Header editor page
+  setupHeaderEditorDroppedFilesPolicy();
 
   setupJobsRunPrograms();
 
@@ -145,6 +148,7 @@ PreferencesDialog::setupPageSelector() {
                    addItem(page++, pMerge,  QY("Enabling tracks"));
                    addItem(page++, pMerge,  QY("Playlists"));
                    addItem(page++, nullptr, QY("Chapter editor"),    "story-editor");
+                   addItem(page++, nullptr, QY("Header editor"),     "document-edit");
   auto pJobs     = addItem(page++, nullptr, QY("Jobs & job queue"),  "view-task");
                    addItem(page++, pJobs,   QY("Executing programs"));
 
@@ -310,6 +314,13 @@ PreferencesDialog::setupToolTips() {
 
   ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."),
                                             QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
+
+  // Header editor  page
+  Util::setToolTip(ui->cbHEDroppedFilesPolicy,
+                   Q("%1 %2 %3")
+                   .arg(QY("When the user drags & drops files from an external application onto a header editor tab the GUI can take different actions."))
+                   .arg(QY("The default is to ask the user what to do with the dropped files."))
+                   .arg(QY("Apart from asking the GUI can always open the dropped files as new tabs or it can always add them as new attachments to the current tab.")));
 }
 
 void
@@ -450,17 +461,30 @@ PreferencesDialog::setupEnableMuxingTracksByLanguage() {
 }
 
 void
-PreferencesDialog::setupAddingAppendingFilesPolicy() {
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("ask the user"),                                               static_cast<int>(Util::Settings::AddingAppendingFilesPolicy::Ask));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("add all files to the current merge settings"),                static_cast<int>(Util::Settings::AddingAppendingFilesPolicy::Add));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("create one new merge settings tab and add all files there"),  static_cast<int>(Util::Settings::AddingAppendingFilesPolicy::AddToNew));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("create one new merge settings tab for each file"),            static_cast<int>(Util::Settings::AddingAppendingFilesPolicy::AddEachToNew));
+PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("ask the user"),                                               static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Ask));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("add all files to the current merge settings"),                static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Add));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("create one new merge settings tab and add all files there"),  static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("create one new merge settings tab for each file"),            static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew));
 
   Util::setComboBoxIndexIf(ui->cbMAddingAppendingFilesPolicy, [this](QString const &, QVariant const &data) {
-    return data.isValid() && (static_cast<Util::Settings::AddingAppendingFilesPolicy>(data.toInt()) == m_cfg.m_mergeAddingAppendingFilesPolicy);
+    return data.isValid() && (static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(data.toInt()) == m_cfg.m_mergeAddingAppendingFilesPolicy);
   });
 
   Util::fixComboBoxViewWidth(*ui->cbMAddingAppendingFilesPolicy);
+}
+
+void
+PreferencesDialog::setupHeaderEditorDroppedFilesPolicy() {
+  ui->cbHEDroppedFilesPolicy->addItem(QY("ask the user"),                                        static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Ask));
+  ui->cbHEDroppedFilesPolicy->addItem(QY("open all files as tabs in the header editor"),         static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Open));
+  ui->cbHEDroppedFilesPolicy->addItem(QY("add all files as new attachments to the current tab"), static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::AddAttachments));
+
+  Util::setComboBoxIndexIf(ui->cbHEDroppedFilesPolicy, [this](QString const &, QVariant const &data) {
+    return data.isValid() && (static_cast<Util::Settings::HeaderEditorDroppedFilesPolicy>(data.toInt()) == m_cfg.m_headerEditorDroppedFilesPolicy);
+  });
+
+  Util::fixComboBoxViewWidth(*ui->cbHEDroppedFilesPolicy);
 }
 
 void
@@ -543,7 +567,7 @@ PreferencesDialog::save() {
   m_cfg.m_setAudioDelayFromFileName          = ui->cbMSetAudioDelayFromFileName->isChecked();
   m_cfg.m_disableCompressionForAllTrackTypes = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
   m_cfg.m_disableDefaultTrackForSubtitles    = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
-  m_cfg.m_mergeAddingAppendingFilesPolicy    = static_cast<Util::Settings::AddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
+  m_cfg.m_mergeAddingAppendingFilesPolicy    = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysShowOutputFileControls  = ui->cbMAlwaysShowOutputFileControls->isChecked();
   m_cfg.m_mergeTrackPropertiesLayout         = ui->rbMTrackPropertiesLayoutHorizontalScrollArea->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalScrollArea
                                              : ui->rbMTrackPropertiesLayoutHorizontalTwoColumns->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalTwoColumns
@@ -578,6 +602,9 @@ PreferencesDialog::save() {
   m_cfg.m_oftenUsedLanguages                 = ui->tbOftenUsedLanguages->selectedItemValues();
   m_cfg.m_oftenUsedCountries                 = ui->tbOftenUsedCountries->selectedItemValues();
   m_cfg.m_oftenUsedCharacterSets             = ui->tbOftenUsedCharacterSets->selectedItemValues();
+
+  // Header editor page
+  m_cfg.m_headerEditorDroppedFilesPolicy     = static_cast<Util::Settings::HeaderEditorDroppedFilesPolicy>(ui->cbHEDroppedFilesPolicy->currentData().toInt());
 
   // Run programs page:
   m_cfg.m_runProgramConfigurations.clear();

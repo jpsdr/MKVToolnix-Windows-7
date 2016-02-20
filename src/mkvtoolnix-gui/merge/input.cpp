@@ -1412,8 +1412,8 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames,
   auto decision  = settings.m_mergeAddingAppendingFilesPolicy;
   auto fileIdx   = QModelIndex{};
 
-  if (   (Util::Settings::AddingAppendingFilesPolicy::Ask == decision)
-      || ((mouseButtons & Qt::RightButton)                == Qt::RightButton)) {
+  if (   (Util::Settings::MergeAddingAppendingFilesPolicy::Ask == decision)
+      || ((mouseButtons & Qt::RightButton)                     == Qt::RightButton)) {
     AddingAppendingFilesDialog dlg{this, m_config.m_files};
     if (!dlg.exec())
       return;
@@ -1427,13 +1427,13 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames,
     }
   }
 
-  if (Util::Settings::AddingAppendingFilesPolicy::AddAdditionalParts == decision)
+  if (Util::Settings::MergeAddingAppendingFilesPolicy::AddAdditionalParts == decision)
     m_filesModel->addAdditionalParts(fileIdx, fileNames);
 
-  else if (Util::Settings::AddingAppendingFilesPolicy::AddToNew == decision)
+  else if (Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew == decision)
     MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames, false);
 
-  else if (Util::Settings::AddingAppendingFilesPolicy::AddEachToNew == decision) {
+  else if (Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew == decision) {
     auto toAdd = fileNames;
 
     if (noFilesAdded)
@@ -1443,7 +1443,7 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNames,
       MainWindow::mergeTool()->addMultipleFilesToNewSettings(toAdd, true);
 
   } else
-    addOrAppendFiles(Util::Settings::AddingAppendingFilesPolicy::Append == decision, fileNames, fileIdx);
+    addOrAppendFiles(Util::Settings::MergeAddingAppendingFilesPolicy::Append == decision, fileNames, fileIdx);
 }
 
 void
