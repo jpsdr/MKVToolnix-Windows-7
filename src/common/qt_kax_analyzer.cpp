@@ -80,6 +80,22 @@ QtKaxAnalyzer::displayUpdateElementResult(QWidget *parent,
                                                           "Please use your favorite player to check this file.")));
       return;
 
+    case kax_analyzer_c::uer_error_opening_for_reading:
+      QMessageBox::critical(parent, QY("Error reading Matroska file"),
+                            Q("%1 %2 %3")
+                            .arg(message)
+                            .arg(QY("The file could not be opened for reading."))
+                            .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file.")));
+      return;
+
+    case kax_analyzer_c::uer_error_opening_for_writing:
+      QMessageBox::critical(parent, QY("Error writing Matroska file"),
+                            Q("%1 %2 %3")
+                            .arg(message)
+                            .arg(QY("The file could not be opened for writing."))
+                            .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file.")));
+      return;
+
     default:
       QMessageBox::critical(parent, QY("Internal program error"), Q("%1 %2").arg(message).arg(QY("An unknown error occured. The file has been modified.")));
   }

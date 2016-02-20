@@ -77,6 +77,8 @@ public:
     uer_error_segment_size_for_meta_seek,
     uer_error_meta_seek,
     uer_error_not_indexable,
+    uer_error_opening_for_reading,
+    uer_error_opening_for_writing,
     uer_error_unknown,
   };
 
@@ -155,6 +157,7 @@ public:
 
   virtual void close_file();
   virtual void reopen_file();
+  virtual void reopen_file_for_writing();
   virtual mm_io_c &get_file() {
     return *m_file;
   }

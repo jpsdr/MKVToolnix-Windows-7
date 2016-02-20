@@ -241,7 +241,7 @@ Tab::LoadResult
 Tab::loadFromMatroskaFile() {
   m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
 
-  if (!m_analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).process()) {
+  if (!m_analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).set_open_mode(MODE_READ).process()) {
     auto text = Q("%1 %2")
       .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName))
       .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));

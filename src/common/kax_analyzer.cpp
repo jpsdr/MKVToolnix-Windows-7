@@ -98,8 +98,29 @@ kax_analyzer_c::reopen_file() {
   if (m_file)
     return;
 
-  m_file   = new mm_file_io_c(m_file_name, m_open_mode);
+  try {
+    m_file = new mm_file_io_c(m_file_name, m_open_mode);
+
+  } catch (mtx::mm_io::exception &) {
+    delete m_file;
+    m_file = nullptr;
+
+    throw MODE_READ == m_open_mode ? uer_error_opening_for_reading : uer_error_opening_for_writing;
+  }
+
   m_stream = new EbmlStream(*m_file);
+}
+
+void
+kax_analyzer_c::reopen_file_for_writing() {
+  if (m_file && (MODE_WRITE == m_open_mode))
+    return;
+
+  delete m_file;
+  m_file      = nullptr;
+  m_open_mode = MODE_WRITE;
+
+  reopen_file();
 }
 
 void
@@ -392,14 +413,14 @@ kax_analyzer_c::update_element(ebml_element_cptr const &e,
 kax_analyzer_c::update_element_result_e
 kax_analyzer_c::update_element(EbmlElement *e,
                                bool write_defaults) {
-  reopen_file();
-
-  fix_mandatory_elements(e);
-  remove_voids_from_master(e);
-
-  placement_strategy_e strategy = get_placement_strategy_for(e);
-
   try {
+    reopen_file_for_writing();
+
+    fix_mandatory_elements(e);
+    remove_voids_from_master(e);
+
+    placement_strategy_e strategy = get_placement_strategy_for(e);
+
     call_and_validate({},                                         "update_element_0");
     call_and_validate(overwrite_all_instances(EbmlId(*e)),        "update_element_1");
     call_and_validate(merge_void_elements(),                      "update_element_2");
@@ -423,9 +444,9 @@ kax_analyzer_c::update_element(EbmlElement *e,
 
 kax_analyzer_c::update_element_result_e
 kax_analyzer_c::remove_elements(EbmlId const &id) {
-  reopen_file();
-
   try {
+    reopen_file_for_writing();
+
     call_and_validate({},                          "remove_elements_0");
     call_and_validate(overwrite_all_instances(id), "remove_elements_1");
     call_and_validate(merge_void_elements(),       "remove_elements_2");
