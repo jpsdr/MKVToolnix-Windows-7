@@ -235,6 +235,8 @@ kax_analyzer_c::process() {
   } catch (...) {
     mxdebug_if(m_debug, boost::format("kax_analyzer: parsing file '%1%' failed with an exception\n") % m_file->get_file_name());
 
+    show_progress_done();
+
     if (m_throw_on_error)
       throw;
     return false;

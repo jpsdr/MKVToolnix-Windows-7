@@ -40,13 +40,17 @@ QtKaxAnalyzer::show_progress_start(int64_t size) {
 
 bool
 QtKaxAnalyzer::show_progress_running(int percentage) {
+  if (!m_progressDialog)
+    return false;
+
   m_progressDialog->setValue(percentage);
   return !m_progressDialog->wasCanceled();
 }
 
 void
 QtKaxAnalyzer::show_progress_done() {
-  m_progressDialog->setValue(100);
+  if (m_progressDialog)
+    m_progressDialog->setValue(100);
   m_progressDialog.reset();
 }
 
