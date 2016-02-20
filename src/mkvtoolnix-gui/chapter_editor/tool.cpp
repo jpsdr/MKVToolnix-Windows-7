@@ -62,6 +62,7 @@ Tool::setupActions() {
   connect(mwUi->actionChapterEditorSaveToMatroska, &QAction::triggered,             this, &Tool::saveToMatroska);
   connect(mwUi->actionChapterEditorReload,         &QAction::triggered,             this, &Tool::reload);
   connect(mwUi->actionChapterEditorClose,          &QAction::triggered,             this, &Tool::closeCurrentTab);
+  connect(mwUi->actionChapterEditorRemoveFromMatroska, &QAction::triggered,             this, &Tool::removeChaptersFromExistingMatroskaFile);
 
   connect(ui->newFileButton,                       &QPushButton::clicked,           this, &Tool::newFile);
   connect(ui->openFileButton,                      &QPushButton::clicked,           this, &Tool::selectFileToOpen);
@@ -318,6 +319,39 @@ Tool::chapterNameTemplateToolTip() {
     .arg(QYH("%S – seconds zero-padded to two places"))
     .arg(QYH("%n – nanoseconds with nine places"))
     .arg(QYH("%<1-9>n – nanoseconds with up to nine places (e.g. three places with %3n)"));
+}
+
+void
+Tool::removeChaptersFromExistingMatroskaFile() {
+  auto fileName = Util::getOpenFileName(this, QY("Removing chapters from existing Matroska file"), Util::Settings::get().lastOpenDirPath(),
+                                        QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
+                                        QY("All files")      + Q(" (*)"));
+  if (fileName.isEmpty())
+    return;
+
+  auto analyzer = std::make_unique<QtKaxAnalyzer>(this, fileName);
+
+  if (!analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).process()) {
+    auto text = Q("%1 %2")
+      .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName))
+      .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
+    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
+    return;
+  }
+
+  auto idx = analyzer->find(KaxChapters::ClassInfos.GlobalId);
+  if (-1 == idx) {
+    Util::MessageBox::information(this)->title(QY("Removing chapters from existing Matroska file")).text(QY("The file you tried to open (%1) does not contain any chapters.").arg(fileName)).exec();
+    return;
+  }
+
+  auto result = analyzer->remove_elements(EBML_ID(KaxChapters));
+
+  if (kax_analyzer_c::uer_success != result) {
+    QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Removing the chapters failed."));
+
+  } else
+    Util::MessageBox::information(this)->title(QY("Removing chapters from existing Matroska file")).text(QY("All chapters have been removed from the file '%1'.").arg(fileName)).exec();
 }
 
 }}}

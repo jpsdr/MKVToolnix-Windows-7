@@ -53,6 +53,8 @@ public slots:
   virtual void openFilesFromCommandLine(QStringList const &fileNames);
   virtual void setupTabPositions();
 
+  virtual void removeChaptersFromExistingMatroskaFile();
+
 protected:
   Tab * appendTab(Tab *tab);
 
