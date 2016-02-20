@@ -100,7 +100,10 @@ Tab::load() {
   resetData();
 
   if (!kax_analyzer_c::probe(to_utf8(m_fileName))) {
-    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(m_fileName)).exec();
+    auto text = Q("%1 %2")
+      .arg(QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(m_fileName))
+      .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
+    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
     emit removeThisTab();
     return;
   }
@@ -108,7 +111,10 @@ Tab::load() {
   m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
 
   if (!m_analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).process()) {
-    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName)).exec();
+    auto text = Q("%1 %2")
+      .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName))
+      .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
+    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
     emit removeThisTab();
     return;
   }
