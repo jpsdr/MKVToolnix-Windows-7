@@ -16,6 +16,7 @@
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace Merge {
@@ -136,7 +137,7 @@ Tool::appendTab(Tab *tab) {
   connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
   connect(tab, &Tab::titleChanged,  this, &Tool::tabTitleChanged);
 
-  ui->merges->addTab(tab, tab->title());
+  ui->merges->addTab(tab, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
   ui->merges->setCurrentIndex(ui->merges->count() - 1);
 
   showMergeWidget();
@@ -286,7 +287,7 @@ Tool::tabTitleChanged() {
   auto tab = dynamic_cast<Tab *>(sender());
   auto idx = ui->merges->indexOf(tab);
   if (tab && (-1 != idx))
-    ui->merges->setTabText(idx, tab->title());
+    ui->merges->setTabText(idx, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
 }
 
 void

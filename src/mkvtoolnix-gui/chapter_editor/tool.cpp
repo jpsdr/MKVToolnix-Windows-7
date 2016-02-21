@@ -19,6 +19,7 @@
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace ChapterEditor {
@@ -119,7 +120,7 @@ Tool::appendTab(Tab *tab) {
   connect(tab, &Tab::titleChanged,           this, &Tool::tabTitleChanged);
   connect(tab, &Tab::numberOfEntriesChanged, this, &Tool::enableMenuActions);
 
-  ui->editors->addTab(tab, tab->title());
+  ui->editors->addTab(tab, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
 
   showChapterEditorsWidget();
 
@@ -289,7 +290,7 @@ Tool::tabTitleChanged() {
   auto tab = dynamic_cast<Tab *>(sender());
   auto idx = ui->editors->indexOf(tab);
   if (tab && (-1 != idx))
-    ui->editors->setTabText(idx, tab->title());
+    ui->editors->setTabText(idx, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
 }
 
 void

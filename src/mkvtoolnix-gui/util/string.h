@@ -13,6 +13,7 @@ enum EscapeMode {
   EscapeShellUnix,
   EscapeShellCmdExeArgument,
   EscapeShellCmdExeProgram,
+  EscapeKeyboardShortcuts,
   DontEscape,
 #if defined(SYS_WINDOWS)
   EscapeShellNative = EscapeShellCmdExeArgument,

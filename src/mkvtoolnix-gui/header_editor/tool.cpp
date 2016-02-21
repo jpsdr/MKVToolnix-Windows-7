@@ -19,6 +19,7 @@
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui { namespace HeaderEditor {
@@ -131,7 +132,7 @@ Tool::openFile(QString const &fileName) {
   auto tab = new Tab{this, fileName};
 
   connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
-  ui->editors->addTab(tab, tab->title());
+  ui->editors->addTab(tab, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
 
   showHeaderEditorsWidget();
 

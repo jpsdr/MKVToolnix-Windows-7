@@ -5,6 +5,7 @@
 #include <QString>
 #include <QStringList>
 
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/util/string.h"
@@ -141,6 +142,18 @@ escapeShellWindowsProgram(QString const &source) {
   return source;
 }
 
+static QString
+escapeKeyboardShortcuts(QString const &text) {
+  auto copy = text;
+  return copy.replace(Q("&"), Q("&&"));
+}
+
+static QString
+unescapeKeyboardShortcuts(QString const &text) {
+  auto copy = text;
+  return copy.replace(Q("&&"), Q("&"));
+}
+
 QString
 escape(QString const &source,
        EscapeMode mode) {
@@ -148,15 +161,17 @@ escape(QString const &source,
        : EscapeShellUnix           == mode ? escapeShellUnix(source)
        : EscapeShellCmdExeArgument == mode ? escapeShellWindows(source)
        : EscapeShellCmdExeProgram  == mode ? escapeShellWindowsProgram(source)
+       : EscapeKeyboardShortcuts   == mode ? escapeKeyboardShortcuts(source)
        :                                     source;
 }
 
 QString
 unescape(QString const &source,
          EscapeMode mode) {
-  Q_ASSERT(EscapeMkvtoolnix == mode);
+  Q_ASSERT(mtx::included_in(mode, EscapeMkvtoolnix, EscapeKeyboardShortcuts));
 
-  return unescapeMkvtoolnix(source);
+  return EscapeKeyboardShortcuts == mode ? unescapeKeyboardShortcuts(source)
+       :                                   unescapeMkvtoolnix(source);
 }
 
 QStringList

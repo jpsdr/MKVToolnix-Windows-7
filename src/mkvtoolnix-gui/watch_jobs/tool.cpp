@@ -10,6 +10,7 @@
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
@@ -100,7 +101,7 @@ Tool::viewOutput(mtx::gui::Jobs::Job &job) {
   tab->connectToJob(job);
   tab->setInitialDisplay(job);
 
-  ui->widgets->addTab(tab, job.description());
+  ui->widgets->addTab(tab, Util::escape(job.description(), Util::EscapeKeyboardShortcuts));
   ui->widgets->setCurrentIndex(ui->widgets->count() - 1);
 }
 
