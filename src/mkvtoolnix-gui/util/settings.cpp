@@ -21,10 +21,10 @@ namespace {
 QFont
 defaultUiFont() {
   auto font         = App::font();
-  auto logicalDPI   = App::primaryScreen()->logicalDotsPerInch();
-  auto minPointSize = static_cast<int>(9 + (std::max(logicalDPI, 95.) - 95 + 5) * 3 / 25);
+  // auto logicalDPI   = App::primaryScreen()->logicalDotsPerInch();
+  // auto minPointSize = static_cast<int>(9 + (std::max(logicalDPI, 95.) - 95 + 5) * 3 / 25);
 
-  font.setPointSize(std::max(font.pointSize(), minPointSize));
+  // font.setPointSize(std::max(font.pointSize(), minPointSize));
 
 #if defined(SYS_WINDOWS)
   font.setFamily(Q("Segoe UI"));
