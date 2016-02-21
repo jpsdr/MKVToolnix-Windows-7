@@ -70,11 +70,13 @@ def runq(msg, cmdline, options = {})
   run cmdline, options.clone.merge(:dont_echo => !verbose)
 end
 
+def ensure_dir dir
+  File.unlink(dir) if  FileTest.exist?(dir) && !FileTest.directory?(dir)
+  Dir.mkdir(dir)   if !FileTest.exist?(dir)
+end
+
 def create_dependency_dirs
-  [ $dependency_dir, $dependency_tmp_dir ].each do |dir|
-    File.unlink(dir) if  FileTest.exist?(dir) && !FileTest.directory?(dir)
-    Dir.mkdir(dir)   if !FileTest.exist?(dir)
-  end
+  [ $dependency_dir, $dependency_tmp_dir ].each { |dir| ensure_dir dir }
 end
 
 def dependency_output_name_for file_name

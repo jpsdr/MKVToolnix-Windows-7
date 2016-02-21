@@ -500,6 +500,26 @@ EOT
         adjust_to_poedit_style "#{name}.tmp", name, language
       end
     end
+
+    desc "Fetch program translations from Transifex and create comparison diffs"
+    task "transifex-apps" => $available_languages[:applications].map { |language| "translations:update:transifex-apps-#{language}" }
+
+    $available_languages[:applications].each do |language|
+      task "transifex-apps-#{language}" do
+        comparison_dir = "po/comparison"
+        ensure_dir comparison_dir
+
+        runq "GIT SHOW #{language}", "git show HEAD:po/#{language}.po > #{comparison_dir}/#{language}.po.tmp"
+        runq "MSGATTRIB #{language}", "msgattrib -o #{comparison_dir}/#{language}.po.mkvtoolnix --no-fuzzy --no-obsolete --translated #{comparison_dir}/#{language}.po.tmp"
+
+        runq " TX_PULL #{language}", "tx pull -f -r mkvtoolnix.programs -l #{language} > /dev/null"
+
+        runq "MSGATTRIB #{language}", "msgattrib -o #{comparison_dir}/#{language}.po.transifex --no-fuzzy --no-obsolete --translated po/#{language}.po"
+        runq "    DIFF #{language}", "diff -u #{comparison_dir}/#{language}.po.mkvtoolnix #{comparison_dir}/#{language}.po.transifex > #{comparison_dir}/#{language}.po.diff", :allow_failure => true
+
+        FileUtils.rm FileList[ "#{comparison_dir}/#{language}.po.{tmp,mkvtoolnix,transifex}" ].to_a
+      end
+    end
   end
 
   [ :stats, :statistics ].each_with_index do |task_name, idx|
