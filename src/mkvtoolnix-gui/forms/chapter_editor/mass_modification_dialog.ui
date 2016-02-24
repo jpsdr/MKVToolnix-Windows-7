@@ -39,10 +39,27 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="3" column="0">
+      <widget class="QCheckBox" name="cbSetCountry">
+       <property name="text">
+        <string>Set the chapter names' co&amp;untries</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="0">
       <widget class="QCheckBox" name="cbShift">
        <property name="text">
-        <string>Shift start and end ti&amp;mecodes by the following amount:</string>
+        <string>S&amp;hift start and end timecodes by the following amount:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="mtx::gui::Util::CountryComboBox" name="cbCountry"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="cbSetLanguage">
+       <property name="text">
+        <string>Set the chapter names' &amp;languages:</string>
        </property>
       </widget>
      </item>
@@ -53,32 +70,38 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="1">
+      <widget class="mtx::gui::Util::LanguageComboBox" name="cbLanguage"/>
+     </item>
      <item row="1" column="0">
-      <widget class="QCheckBox" name="cbSetLanguage">
+      <widget class="QCheckBox" name="cbMultiply">
        <property name="text">
-        <string>Set the chapter names' &amp;languages:</string>
+        <string>&amp;Multiply start and end timecodes by the following factor:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="mtx::gui::Util::LanguageComboBox" name="cbLanguage"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QCheckBox" name="cbSetCountry">
-       <property name="text">
-        <string>Set the chapter names' co&amp;untries</string>
+      <widget class="QDoubleSpinBox" name="dsbMultiplyBy">
+       <property name="decimals">
+        <number>9</number>
+       </property>
+       <property name="maximum">
+        <double>9999.999998999999661</double>
+       </property>
+       <property name="singleStep">
+        <double>0.100000000000000</double>
+       </property>
+       <property name="value">
+        <double>1.000000000000000</double>
        </property>
       </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="mtx::gui::Util::CountryComboBox" name="cbCountry"/>
      </item>
     </layout>
    </item>
    <item>
     <widget class="QCheckBox" name="cbSort">
      <property name="text">
-      <string>Sort chapters by their start and end ti&amp;mecodes</string>
+      <string>&amp;Sort chapters by their start and end timecodes</string>
      </property>
     </widget>
    </item>
@@ -112,7 +135,7 @@
        <item>
         <widget class="QRadioButton" name="rbConstrict">
          <property name="text">
-          <string>Constrict start and end ti&amp;mecodes of sub-chapters to their parent's start and end timecodes</string>
+          <string>&amp;Constrict start and end timecodes of sub-chapters to their parent's start and end timecodes</string>
          </property>
         </widget>
        </item>
@@ -167,6 +190,8 @@
  <tabstops>
   <tabstop>cbShift</tabstop>
   <tabstop>leShiftBy</tabstop>
+  <tabstop>cbMultiply</tabstop>
+  <tabstop>dsbMultiplyBy</tabstop>
   <tabstop>cbSetLanguage</tabstop>
   <tabstop>cbLanguage</tabstop>
   <tabstop>cbSetCountry</tabstop>

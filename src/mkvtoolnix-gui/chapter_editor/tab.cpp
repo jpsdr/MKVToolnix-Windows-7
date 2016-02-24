@@ -1065,8 +1065,8 @@ Tab::removeElement() {
 }
 
 void
-Tab::shiftTimecodes(QStandardItem *item,
-                    int64_t delta) {
+Tab::applyModificationToTimecodes(QStandardItem *item,
+                                  std::function<int64_t(int64_t)> const &unaryOp) {
   if (!item)
     return;
 
@@ -1077,9 +1077,9 @@ Tab::shiftTimecodes(QStandardItem *item,
       auto kEnd   = FindChild<KaxChapterTimeEnd>(*chapter);
 
       if (kStart)
-        kStart->SetValue(std::max<int64_t>(static_cast<int64_t>(kStart->GetValue()) + delta, 0));
+        kStart->SetValue(std::max<int64_t>(unaryOp(static_cast<int64_t>(kStart->GetValue())), 0));
       if (kEnd)
-        kEnd->SetValue(std::max<int64_t>(static_cast<int64_t>(kEnd->GetValue()) + delta, 0));
+        kEnd->SetValue(std::max<int64_t>(unaryOp(static_cast<int64_t>(kEnd->GetValue())), 0));
 
       if (kStart || kEnd)
         m_chapterModel->updateRow(item->index());
@@ -1087,7 +1087,19 @@ Tab::shiftTimecodes(QStandardItem *item,
   }
 
   for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
-    shiftTimecodes(item->child(row), delta);
+    applyModificationToTimecodes(item->child(row), unaryOp);
+}
+
+void
+Tab::multiplyTimecodes(QStandardItem *item,
+                       double factor) {
+  applyModificationToTimecodes(item, [=](int64_t timecode) { return static_cast<int64_t>((timecode * factor) * 10.0 + 5) / 10ll; });
+}
+
+void
+Tab::shiftTimecodes(QStandardItem *item,
+                    int64_t delta) {
+  applyModificationToTimecodes(item, [=](int64_t timecode) { return timecode + delta; });
 }
 
 void
@@ -1223,6 +1235,9 @@ Tab::massModify() {
 
   if (actions & MassModificationDialog::Shift)
     shiftTimecodes(item, dlg.shiftBy());
+
+  if (actions & MassModificationDialog::Multiply)
+    multiplyTimecodes(item, dlg.multiplyBy());
 
   if (actions & MassModificationDialog::Constrict)
     constrictTimecodes(item, {}, {});

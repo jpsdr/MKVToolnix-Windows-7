@@ -22,6 +22,7 @@ public:
     Expand      = 0x08,
     SetLanguage = 0x10,
     SetCountry  = 0x20,
+    Multiply    = 0x40,
   };
   Q_DECLARE_FLAGS(Actions, Action);
 
@@ -35,6 +36,7 @@ public:
 
   Actions actions() const;
   int64_t shiftBy() const;
+  double multiplyBy() const;
   QString language() const;
   QString country() const;
 
@@ -42,7 +44,11 @@ public:
   void retranslateUi();
 
 public slots:
-  void shiftByStateChanged();
+  void verifyOptions();
+
+protected:
+  bool isShiftByValid() const;
+  bool isMultiplyByValid() const;
 };
 
 }}}

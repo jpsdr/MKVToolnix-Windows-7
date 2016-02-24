@@ -2,6 +2,7 @@
 
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDoubleSpinBox>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
@@ -38,19 +39,22 @@ MassModificationDialog::setupUi() {
   m_ui->cbCountry->setup(true, QY("– set to none –"));
 
   auto mw = MainWindow::get();
-  connect(m_ui->cbShift,           &QCheckBox::toggled,             m_ui->leShiftBy,   &QLineEdit::setEnabled);
-  connect(m_ui->leShiftBy,         &QLineEdit::textChanged,         this,              &MassModificationDialog::shiftByStateChanged);
-  connect(m_ui->cbSetLanguage,     &QCheckBox::toggled,             m_ui->cbLanguage,  &QComboBox::setEnabled);
-  connect(m_ui->cbSetCountry,      &QCheckBox::toggled,             m_ui->cbCountry,   &QComboBox::setEnabled);
-  connect(m_ui->cbConstrictExpand, &QCheckBox::toggled,             m_ui->rbConstrict, &QRadioButton::setEnabled);
-  connect(m_ui->cbConstrictExpand, &QCheckBox::toggled,             m_ui->rbExpand,    &QRadioButton::setEnabled);
-  connect(m_ui->buttonBox,         &QDialogButtonBox::accepted,     this,              &MassModificationDialog::accept);
-  connect(m_ui->buttonBox,         &QDialogButtonBox::rejected,     this,              &MassModificationDialog::reject);
+  connect(m_ui->cbShift,           &QCheckBox::toggled,                                                          this,              &MassModificationDialog::verifyOptions);
+  connect(m_ui->leShiftBy,         &QLineEdit::textChanged,                                                      this,              &MassModificationDialog::verifyOptions);
+  connect(m_ui->cbMultiply,        &QCheckBox::toggled,                                                          this,              &MassModificationDialog::verifyOptions);
+  connect(m_ui->dsbMultiplyBy,     static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this,              &MassModificationDialog::verifyOptions);
+  connect(m_ui->cbSetLanguage,     &QCheckBox::toggled,                                                          m_ui->cbLanguage,  &QComboBox::setEnabled);
+  connect(m_ui->cbSetCountry,      &QCheckBox::toggled,                                                          m_ui->cbCountry,   &QComboBox::setEnabled);
+  connect(m_ui->cbConstrictExpand, &QCheckBox::toggled,                                                          m_ui->rbConstrict, &QRadioButton::setEnabled);
+  connect(m_ui->cbConstrictExpand, &QCheckBox::toggled,                                                          m_ui->rbExpand,    &QRadioButton::setEnabled);
+  connect(m_ui->buttonBox,         &QDialogButtonBox::accepted,                                                  this,              &MassModificationDialog::accept);
+  connect(m_ui->buttonBox,         &QDialogButtonBox::rejected,                                                  this,              &MassModificationDialog::reject);
 
-  connect(mw,                      &MainWindow::preferencesChanged, m_ui->cbLanguage,  &Util::ComboBoxBase::reInitialize);
-  connect(mw,                      &MainWindow::preferencesChanged, m_ui->cbCountry,   &Util::ComboBoxBase::reInitialize);
+  connect(mw,                      &MainWindow::preferencesChanged,                                              m_ui->cbLanguage,  &Util::ComboBoxBase::reInitialize);
+  connect(mw,                      &MainWindow::preferencesChanged,                                              m_ui->cbCountry,   &Util::ComboBoxBase::reInitialize);
 
   m_ui->leShiftBy->setEnabled(false);
+  m_ui->dsbMultiplyBy->setEnabled(false);
   m_ui->cbLanguage->setEnabled(false);
   m_ui->cbCountry->setEnabled(false);
   m_ui->rbConstrict->setEnabled(false);
@@ -63,9 +67,12 @@ MassModificationDialog::setupUi() {
 void
 MassModificationDialog::retranslateUi() {
   Util::setToolTip(m_ui->leShiftBy,
-                   Q("%1 %2")
+                   Q("%1 %2 %3")
                    .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
-                   .arg(QY("Negative values are allowed.")));
+                   .arg(QY("Negative values are allowed."))
+                   .arg(QY("If both shifting and multiplication are enabled then the shift will be performed before the multiplication.")));
+
+  Util::setToolTip(m_ui->dsbMultiplyBy, QY("If both shifting and multiplication are enabled then the shift will be performed before the multiplication."));
 
   if (m_editionOrChapterSelected)
     m_ui->lTitle->setText(QY("Please select the actions to apply to the selected edition or chapter and all of its children."));
@@ -84,8 +91,15 @@ MassModificationDialog::actions()
   if (m_ui->cbConstrictExpand->isChecked() && m_ui->rbExpand->isChecked())    result |= Action::Expand;
   if (m_ui->cbSetLanguage->isChecked())                                       result |= Action::SetLanguage;
   if (m_ui->cbSetCountry->isChecked())                                        result |= Action::SetCountry;
+  if (m_ui->cbMultiply->isChecked())                                          result |= Action::Multiply;
 
   return result;
+}
+
+double
+MassModificationDialog::multiplyBy()
+  const {
+  return m_ui->dsbMultiplyBy->value();
 }
 
 int64_t
@@ -108,14 +122,31 @@ MassModificationDialog::country()
   return m_ui->cbCountry->currentData().toString();
 }
 
-void
-MassModificationDialog::shiftByStateChanged() {
-  auto shifting      = m_ui->cbShift->isChecked();
-  auto timecode      = int64_t{};
-  auto timecodeValid = parse_timecode(to_utf8(m_ui->leShiftBy->text()), timecode, true);
+bool
+MassModificationDialog::isMultiplyByValid()
+  const {
+  if (!m_ui->cbMultiply->isChecked())
+    return true;
 
-  m_ui->leShiftBy->setEnabled(shifting);
-  Util::buttonForRole(m_ui->buttonBox)->setEnabled(!shifting || timecodeValid);
+  return m_ui->dsbMultiplyBy->value() != 0;
+}
+
+bool
+MassModificationDialog::isShiftByValid()
+  const {
+  if (!m_ui->cbShift->isChecked())
+    return true;
+
+  auto timecode = int64_t{};
+  return parse_timecode(to_utf8(m_ui->leShiftBy->text()), timecode, true);
+}
+
+void
+MassModificationDialog::verifyOptions() {
+  m_ui->leShiftBy->setEnabled(m_ui->cbShift->isChecked());
+  m_ui->dsbMultiplyBy->setEnabled(m_ui->cbMultiply->isChecked());
+
+  Util::buttonForRole(m_ui->buttonBox)->setEnabled(isMultiplyByValid() && isShiftByValid());
 }
 
 }}}
