@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-24 20:24+0100\n"
+"POT-Creation-Date: 2016-02-25 22:43+0100\n"
 "PO-Revision-Date: 2015-12-17 19:21+0800\n"
 "Last-Translator: Donghui Li <DonghuiLi.81@gmail.com>\n"
 "Language-Team: Chinese Simplified <DonghuiLi.81@gmail.com>\n"
@@ -1486,6 +1486,7 @@ msgstr "'--chapter-language %1%' 中的 '%1%' 既不是有效的 ISO639-2 代码
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--default-language %1%'. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'--default-language %1%' 中的 '%1%' 既不是有效的 ISO639-2 代码，也不是有效的 ISO639-1 代码。参见 'mkvmerge --list-languages' 提供的语言列表及各语言的 ISO639-2 代码。\n"
 
+#: src/extract/extract_cli_parser.cpp:193
 #: src/merge/mkvmerge.cpp:1178
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
@@ -1583,12 +1584,12 @@ msgstr "'--default-duration %2%' 中的 '%1%' 不是有效的轨道 ID。\n"
 msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'--nalu-size-length %2%' 中的 '%1%' 不是有效的轨道 ID。\n"
 
-#: src/extract/extract_cli_parser.cpp:140
+#: src/extract/extract_cli_parser.cpp:142
 #, boost-format
 msgid "'%1%' is only allowed when extracting chapters.\n"
 msgstr "'%1%' 仅允许在提取章节时使用。\n"
 
-#: src/extract/extract_cli_parser.cpp:137
+#: src/extract/extract_cli_parser.cpp:139
 #, boost-format
 msgid "'%1%' is only allowed when extracting tracks.\n"
 msgstr "'%1%' 仅允许在提取轨道时使用。\n"
@@ -2403,7 +2404,7 @@ msgstr "允许以 Video-for-Windows 兼容模式存储 AVC/h.264 视频，例如
 msgid "Allows the use of the CodecState element."
 msgstr "允许使用 CodecState 元素。"
 
-#: src/extract/extract_cli_parser.cpp:68
+#: src/extract/extract_cli_parser.cpp:69
 msgid "Also try to extract the CUE sheet from the chapter information and tags for this track."
 msgstr "同时尝试从此轨道的章节信息和标签提取 CUE 表单。"
 
@@ -2617,7 +2618,7 @@ msgstr "附件"
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "附件 ID %1%：类型 '%2%'，大小 %3% 字节"
 
-#: src/extract/extract_cli_parser.cpp:86
+#: src/extract/extract_cli_parser.cpp:87
 msgid "Attachment extraction"
 msgstr "附件提取"
 
@@ -2798,7 +2799,7 @@ msgstr "国家(&O)："
 msgid "C&reate option file"
 msgstr "创建选项文件(&R)"
 
-#: src/extract/extract_cli_parser.cpp:103
+#: src/extract/extract_cli_parser.cpp:105
 msgid "CUE sheet extraction"
 msgstr "CUE 表单提取"
 
@@ -2950,7 +2951,7 @@ msgstr "章节翻译 ID：%1%"
 msgid "Chapter editor"
 msgstr "章节编辑器"
 
-#: src/extract/extract_cli_parser.cpp:95
+#: src/extract/extract_cli_parser.cpp:96
 msgid "Chapter extraction"
 msgstr "章节提取"
 
@@ -3176,7 +3177,7 @@ msgstr "内容编码"
 msgid "Content encryption"
 msgstr "内容加密"
 
-#: src/extract/extract_cli_parser.cpp:67
+#: src/extract/extract_cli_parser.cpp:68
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr "将文本字幕转换为指定字符集 (默认：UTF-8)。"
 
@@ -3404,7 +3405,7 @@ msgstr "编码格式状态索引：%1%"
 msgid "Cue duration: %1%"
 msgstr "区块时长索引：%1%"
 
-#: src/extract/extract_cli_parser.cpp:120
+#: src/extract/extract_cli_parser.cpp:122
 msgid "Cue extraction"
 msgstr "索引提取"
 
@@ -4094,13 +4095,13 @@ msgstr "错误消息："
 msgid "Even if there were warnings"
 msgstr "即使存在警告也移除"
 
-#: src/extract/extract_cli_parser.cpp:74
-#: src/extract/extract_cli_parser.cpp:82
-#: src/extract/extract_cli_parser.cpp:91
-#: src/extract/extract_cli_parser.cpp:99
-#: src/extract/extract_cli_parser.cpp:108
-#: src/extract/extract_cli_parser.cpp:116
-#: src/extract/extract_cli_parser.cpp:123
+#: src/extract/extract_cli_parser.cpp:75
+#: src/extract/extract_cli_parser.cpp:83
+#: src/extract/extract_cli_parser.cpp:92
+#: src/extract/extract_cli_parser.cpp:101
+#: src/extract/extract_cli_parser.cpp:110
+#: src/extract/extract_cli_parser.cpp:118
+#: src/extract/extract_cli_parser.cpp:125
 msgid "Example"
 msgstr "示例"
 
@@ -4150,15 +4151,15 @@ msgstr "退出代码 (0：正常，1：发生警告，2：发生错误)"
 msgid "Expected a time in the following format: HH:MM:SS.nnn (HH = hour, MM = minute, SS = second, nnn = millisecond up to nanosecond. You may use up to nine digits for 'n' which would mean nanosecond precision). You may omit the hour as well. Found '%1%' instead. Additional error message: %2%"
 msgstr "时间应为如下格式：HH:MM:SS.nnn (HH = 时，MM = 分，SS = 秒，nnn = 毫秒到纳秒。您可以使用多达九位的 'n' 以精确到纳秒)。小时可以省略。但目前使用的为 '%1%'。附加错误消息：%2%"
 
-#: src/extract/extract_cli_parser.cpp:97
+#: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "以 OGM tools 所用的简易格式导出章节信息 (内容类似 CHAPTER01=... CHAPTER01NAME=...)。"
 
-#: src/extract/extract_cli_parser.cpp:71
+#: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
 msgstr "将数据提取为原始文件，并以 CodecPrivate 编码格式私有数据作为文件头。"
 
-#: src/extract/extract_cli_parser.cpp:70
+#: src/extract/extract_cli_parser.cpp:71
 msgid "Extract the data to a raw file."
 msgstr "将数据提取为原始文件。"
 
@@ -4496,7 +4497,7 @@ msgstr "生成子章节"
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr "生成一定数量间隔均匀的子菜单"
 
-#: src/extract/extract_cli_parser.cpp:60
+#: src/extract/extract_cli_parser.cpp:61
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
 msgid "Global options"
 msgstr "全局选项"
@@ -4839,7 +4840,7 @@ msgstr "'%1%' 是无效的 'format' 属性。"
 msgid "Invalid Base64 character encountered"
 msgstr "遇到无效的 Base64 字符"
 
-#: src/extract/extract_cli_parser.cpp:164
+#: src/extract/extract_cli_parser.cpp:166
 #, boost-format
 msgid "Invalid BlockAddition level in argument '%1%'.\n"
 msgstr "参数 '%1%' 中的附加区块层级无效。\n"
@@ -4854,7 +4855,7 @@ msgstr "无效的 UTF-8 字符。首个字节：0x%|1$02x|"
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "AVI 音频轨道中存在无效的 Vorbis 头。"
 
-#: src/extract/extract_cli_parser.cpp:238
+#: src/extract/extract_cli_parser.cpp:251
 #, boost-format
 msgid "Invalid attachment ID/file name specification in argument '%1%'.\n"
 msgstr "参数 '%1%' 中的附件 ID 或文件名无效。\n"
@@ -5179,7 +5180,7 @@ msgstr "'--forced-track %1%' 中指定的轨道 ID 无效。\n"
 msgid "Invalid track ID specified in '--sub-charset %1%'.\n"
 msgstr "'--sub-charset %1%' 中指定的轨道 ID 无效。\n"
 
-#: src/extract/extract_cli_parser.cpp:240
+#: src/extract/extract_cli_parser.cpp:253
 #, boost-format
 msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "参数 '%1%' 中指定的轨道 ID 或文件名无效。\n"
@@ -5250,7 +5251,7 @@ msgstr "Kate"
 msgid "Kate packet is too small and is being skipped.\n"
 msgstr "Kate 包过小，跳过。\n"
 
-#: src/extract/extract_cli_parser.cpp:69
+#: src/extract/extract_cli_parser.cpp:70
 msgid "Keep only the BlockAdditions up to this level (default: keep all levels)"
 msgstr "仅保留此层级及以上的附加区块 (默认：保留所有层级)"
 
@@ -5590,7 +5591,7 @@ msgstr "缺少流的头部/注释包。文件已损坏但应该可以正确合�
 msgid "Missing one hex digit"
 msgstr "缺少一个十六进制数字"
 
-#: src/extract/extract_cli_parser.cpp:259
+#: src/extract/extract_cli_parser.cpp:272
 #, boost-format
 msgid "Missing output file name in argument '%1%'.\n"
 msgstr "参数 '%1%' 中缺少输出文件名。\n"
@@ -5829,7 +5830,7 @@ msgstr "尚未打开合成任务。"
 msgid "No metadata block found. This file is broken.\n"
 msgstr "未发现元数据区块。文件已损坏。\n"
 
-#: src/extract/extract_cli_parser.cpp:257
+#: src/extract/extract_cli_parser.cpp:270
 msgid "No output file name specified, will use attachment name.\n"
 msgstr "未指定输出文件名，将使用附件名。\n"
 
@@ -6243,7 +6244,7 @@ msgstr "PTS 错误：0x%|1$02x| %|2$02x|%|3$02x| %|4$02x|%|5$02x|\n"
 msgid "Packet number %1% contained an invalid FLAC header and is being skipped.\n"
 msgstr "封包编号 %1% 包含无效的 FLAC 头，将被跳过。\n"
 
-#: src/extract/extract_cli_parser.cpp:61
+#: src/extract/extract_cli_parser.cpp:62
 msgid "Parse the whole file instead of relying on the index."
 msgstr "解析整个文件，而不是仅依照索引。"
 
@@ -7539,7 +7540,7 @@ msgstr "TTA (The True Audio 无损音频编码)"
 msgid "Tab &position in tab widgets:"
 msgstr "页面标签显示位置(&P)："
 
-#: src/extract/extract_cli_parser.cpp:79
+#: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
 msgstr "标签提取"
 
@@ -7646,7 +7647,7 @@ msgstr "程序可以扫描这些文件，扫描结果包括每个播放列表的
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "程序会将此文件的文件名填入相应控件中，该处此前指定的文件名将会被替换。"
 
-#: src/extract/extract_cli_parser.cpp:248
+#: src/extract/extract_cli_parser.cpp:261
 #, boost-format
 msgid "The ID '%1%' has already been used for another output file.\n"
 msgstr "ID '%1%' 已被另一个输出文件使用。\n"
@@ -7967,7 +7968,7 @@ msgstr "终止时间必须大于起始时间。"
 msgid "The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values in the source container. The ones from the video data bitstream (%1%x%2%) will be used.\n"
 msgstr "从 MPEG4 layer 2 视频数据码流中提取的视频宽度和高度数值与源容器中的不同。将使用视频数据码流中的数值 (%1%x%2%)。\n"
 
-#: src/extract/extract_cli_parser.cpp:105
+#: src/extract/extract_cli_parser.cpp:107
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a CUE sheet. This is the reverse of using a CUE sheet with mkvmerge's '--chapters' option."
 msgstr "第五种模式用于尝试提取章节信息和标签，并将其输出为 CUE 表单。这是在 mkvmerge 的 '--chapters' 选项中使用 CUE 表单的逆操作。"
 
@@ -8214,11 +8215,11 @@ msgstr "重新同步后的首个簇时间码为 %1%。\n"
 msgid "The first file cannot be appended because there are no files to append to.\n"
 msgstr "首个文件不能作为追加文件，因为没有文件供其追加。\n"
 
-#: src/extract/extract_cli_parser.cpp:66
+#: src/extract/extract_cli_parser.cpp:67
 msgid "The first mode extracts some tracks to external files."
 msgstr "第一种模式用于将指定轨道提取到外部文件。"
 
-#: src/extract/extract_cli_parser.cpp:56
+#: src/extract/extract_cli_parser.cpp:57
 msgid "The first word tells mkvextract what to extract. The second must be the source file. There are few global options that can be used with all modes. All other options depend on the mode."
 msgstr "第一个参数指定 mkvextract 的提取模式。第二个参数指定源文件。全局选项可以在所有模式下使用，其余选项取决于模式。"
 
@@ -8246,7 +8247,7 @@ msgstr "各种格式可以混用。"
 msgid "The formats do not match."
 msgstr "格式不匹配。"
 
-#: src/extract/extract_cli_parser.cpp:96
+#: src/extract/extract_cli_parser.cpp:97
 msgid "The fourth mode extracts the chapters and converts them to XML. The output is written to the standard output. The output can be used as a source for mkvmerge."
 msgstr "第四种模式用于提取章节，并将其转换为 XML。输出内容将被写入到标准输出。输出内容可以被用作 mkvmerge 的源文件。"
 
@@ -8523,7 +8524,7 @@ msgstr "根元素必须为 <%1%>。"
 msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr "两条音频轨道的采样率不同：%1% 与 %2%"
 
-#: src/extract/extract_cli_parser.cpp:80
+#: src/extract/extract_cli_parser.cpp:81
 msgid "The second mode extracts the tags and converts them to XML. The output is written to the standard output. The output can be used as a source for mkvmerge."
 msgstr "第二种模式用于提取标签，并将其转换为 XML。输出内容将被写入到标准输出。输出内容可以被用作 mkvmerge 的源文件。"
 
@@ -8547,7 +8548,7 @@ msgstr "'%p' 将被替换为轨道的 PERFORMER (表演者)，'%t' 将被替换�
 msgid "The settings file '%1' contains invalid settings and was not loaded."
 msgstr "配置文件 '%1' 包含无效的设置，未被加载。"
 
-#: src/extract/extract_cli_parser.cpp:114
+#: src/extract/extract_cli_parser.cpp:116
 msgid "The sixth mode finds the timecodes of all blocks for a track and outputs a timecode v2 file with these timecodes."
 msgstr "第六种模式用于查找指定轨道所有区块的时间码，并将其输出为时间码 v2 文件。"
 
@@ -8628,7 +8629,7 @@ msgstr "无法解析 '%1%' 中的标签：缺少一些必要元素。\n"
 msgid "The temporary file '%1%' could not be opened for reading: %2%.\n"
 msgstr "临时文件 '%1%' 无法以读取模式打开：%2%。\n"
 
-#: src/extract/extract_cli_parser.cpp:88
+#: src/extract/extract_cli_parser.cpp:89
 msgid "The third mode extracts attachments from the source file."
 msgstr "第三种模式用于从源文件中提取附件。"
 
@@ -8956,7 +8957,7 @@ msgstr "该模式仅以输出的第一条视频轨道为考虑对象。"
 msgid "This mode enforces several restrictions."
 msgstr "该模式强制执行一些限制条件。"
 
-#: src/extract/extract_cli_parser.cpp:121
+#: src/extract/extract_cli_parser.cpp:123
 msgid "This mode extracts cue information for some tracks to external text files."
 msgstr "该模式用于将某些轨道的索引信息抽取到外部文本文件中。"
 
@@ -9072,7 +9073,7 @@ msgstr "该选项在所有轨道类型上均有效。"
 msgid "Time slice"
 msgstr "切片时间"
 
-#: src/extract/extract_cli_parser.cpp:112
+#: src/extract/extract_cli_parser.cpp:114
 msgid "Timecode extraction"
 msgstr "时间码提取"
 
@@ -9229,7 +9230,7 @@ msgstr "轨道 UID"
 msgid "Track UID: %1%"
 msgstr "轨道 UID：%1%"
 
-#: src/extract/extract_cli_parser.cpp:65
+#: src/extract/extract_cli_parser.cpp:66
 msgid "Track extraction"
 msgstr "轨道提取"
 
@@ -9393,7 +9394,7 @@ msgstr "'%1% %2%' 中的片段 UID '%3%' 格式未知。\n"
 msgid "Unknown header 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgstr "未知头部字段 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 
-#: src/extract/extract_cli_parser.cpp:222
+#: src/extract/extract_cli_parser.cpp:235
 #, boost-format
 msgid "Unknown mode '%1%'.\n"
 msgstr "未知模式 '%1%'。\n"
@@ -9413,7 +9414,7 @@ msgstr "'%1% %2%' 中解析模式未知。\n"
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "此音频轨道的格式 0x%|1$04x| 未知或不支持。\n"
 
-#: src/extract/extract_cli_parser.cpp:231
+#: src/extract/extract_cli_parser.cpp:244
 #, boost-format
 msgid "Unrecognized command line option '%1%'.\n"
 msgstr "无法识别的命令行选项 '%1%'。\n"
@@ -9448,7 +9449,7 @@ msgstr "更新附件属性"
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "更新元素 '%1%' 失败。原因："
 
-#: src/extract/extract_cli_parser.cpp:44
+#: src/extract/extract_cli_parser.cpp:45
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:24
 msgid "Usage"
 msgstr "用法"
@@ -9480,6 +9481,10 @@ msgstr "仅作测试用途。"
 #: src/mkvtoolnix-gui/merge/output.cpp:154
 msgid "Useful e.g. when you want exactly two files."
 msgstr "例如，当需要正好两个文件时使用该选项。"
+
+#: src/extract/extract_cli_parser.cpp:99
+msgid "Uses the chapter names of the specified language for extraction instead of the first chapter name found."
+msgstr ""
 
 #: src/merge/mkvmerge.cpp:1382
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
@@ -9801,11 +9806,11 @@ msgstr "使用该选项后，以上信息将被调整以匹配容器中的时长
 msgid "Write durations for all blocks."
 msgstr "为所有区块写入时长。"
 
-#: src/extract/extract_cli_parser.cpp:89
+#: src/extract/extract_cli_parser.cpp:90
 msgid "Write the attachment with the ID 'AID' to 'outname'."
 msgstr "将 ID 为 'AID' 的附件写入到 'outname'。"
 
-#: src/extract/extract_cli_parser.cpp:72
+#: src/extract/extract_cli_parser.cpp:73
 msgid "Write track with the ID TID to the file 'out'."
 msgstr "将 ID 为 TID 的轨道写入到文件 'out'。"
 
@@ -10495,67 +10500,67 @@ msgstr "mkvmerge 文档(&M)"
 msgid "mkvInfo"
 msgstr "mkvInfo"
 
-#: src/extract/extract_cli_parser.cpp:52
+#: src/extract/extract_cli_parser.cpp:53
 msgid "mkvextract <-h|-V>"
 msgstr "mkvextract <-h|-V>"
 
-#: src/extract/extract_cli_parser.cpp:42
+#: src/extract/extract_cli_parser.cpp:43
 msgid "mkvextract <mode> <source-filename> [options] <extraction-spec>"
 msgstr "mkvextract <模式> <源文件名> [选项] <选择轨道与输出文件>"
 
-#: src/extract/extract_cli_parser.cpp:93
+#: src/extract/extract_cli_parser.cpp:94
 msgid "mkvextract attachments \"a movie.mkv\" 4:cover.jpg"
 msgstr "mkvextract attachments \"一部影片.mkv\" 4:封面.jpg"
 
-#: src/extract/extract_cli_parser.cpp:47
+#: src/extract/extract_cli_parser.cpp:48
 msgid "mkvextract attachments <inname> [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "mkvextract attachments <源文件名> [选项] [AID1:输出1 [AID2:输出2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:101
+#: src/extract/extract_cli_parser.cpp:103
 msgid "mkvextract chapters \"a movie.mkv\" > movie_chapters.xml"
 msgstr "mkvextract chapters \"一部影片.mkv\" > 影片章节.xml"
 
-#: src/extract/extract_cli_parser.cpp:48
+#: src/extract/extract_cli_parser.cpp:49
 msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <源文件名> [选项]"
 
-#: src/extract/extract_cli_parser.cpp:125
+#: src/extract/extract_cli_parser.cpp:127
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
 msgstr "mkvextract cues \"一部影片.mkv\" 0:索引_轨道0.txt"
 
-#: src/extract/extract_cli_parser.cpp:51
+#: src/extract/extract_cli_parser.cpp:52
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract cues <源文件名> [选项] [TID1:输出1 [TID2:输出2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:110
+#: src/extract/extract_cli_parser.cpp:112
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
 msgstr "mkvextract cuesheet \"音频文件.mka\" > 音频文件.cue"
 
-#: src/extract/extract_cli_parser.cpp:49
+#: src/extract/extract_cli_parser.cpp:50
 msgid "mkvextract cuesheet <inname> [options]"
 msgstr "mkvextract cuesheet <源文件名> [选项]"
 
-#: src/extract/extract_cli_parser.cpp:84
+#: src/extract/extract_cli_parser.cpp:85
 msgid "mkvextract tags \"a movie.mkv\" > movie_tags.xml"
 msgstr "mkvextract tags \"一部影片.mkv\" > 影片标签.xml"
 
-#: src/extract/extract_cli_parser.cpp:46
+#: src/extract/extract_cli_parser.cpp:47
 msgid "mkvextract tags <inname> [options]"
 msgstr "mkvextract tags <源文件名> [选项]"
 
-#: src/extract/extract_cli_parser.cpp:118
+#: src/extract/extract_cli_parser.cpp:120
 msgid "mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_track1.txt"
 msgstr "mkvextract timecodes_v2 \"一部影片.mkv\" 1:时间码_轨道1.txt"
 
-#: src/extract/extract_cli_parser.cpp:50
+#: src/extract/extract_cli_parser.cpp:51
 msgid "mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract timecodes_v2 <源文件名> [TID1:输出1 [TID2:输入2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:76
+#: src/extract/extract_cli_parser.cpp:77
 msgid "mkvextract tracks \"a movie.mkv\" 2:audio.ogg -c ISO8859-1 3:subs.srt"
 msgstr "mkvextract tracks \"一部影片.mkv\" 2:音频.ogg -c ISO8859-1 3:字幕.srt"
 
-#: src/extract/extract_cli_parser.cpp:45
+#: src/extract/extract_cli_parser.cpp:46
 msgid "mkvextract tracks <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract tracks <源文件名> [选项] [TID1:输出1 [TID2:输出2 ...]]"
 

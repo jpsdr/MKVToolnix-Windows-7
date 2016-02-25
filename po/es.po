@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-24 20:24+0100\n"
+"POT-Creation-Date: 2016-02-25 22:43+0100\n"
 "PO-Revision-Date: 2016-02-10 00:57+0100\n"
 "Last-Translator: Israel Lucas Torrijos <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish <moritz@bunkus.org>\n"
@@ -1707,7 +1707,7 @@ msgstr ""
 "%1%'. Ver 'mkvmerge --list-languages' para una lista de todos los idiomas y "
 "sus respectivos códigos ISO639-2.\n"
 
-#: src/merge/mkvmerge.cpp:1178
+#: src/extract/extract_cli_parser.cpp:193 src/merge/mkvmerge.cpp:1178
 #, boost-format
 msgid ""
 "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --"
@@ -1826,12 +1826,12 @@ msgstr "'%1%' no es un ID de pista válido en '--default-duration %2%'.\n"
 msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'%1%' no es un ID de pista válido en '--nalu-size-length %2%'.\n"
 
-#: src/extract/extract_cli_parser.cpp:140
+#: src/extract/extract_cli_parser.cpp:142
 #, boost-format
 msgid "'%1%' is only allowed when extracting chapters.\n"
 msgstr "'%1%' solo está permitido cuando se extraen capítulos.\n"
 
-#: src/extract/extract_cli_parser.cpp:137
+#: src/extract/extract_cli_parser.cpp:139
 #, boost-format
 msgid "'%1%' is only allowed when extracting tracks.\n"
 msgstr "'%1%' solo está permitido cuando se extraen pistas.\n"
@@ -2756,7 +2756,7 @@ msgstr ""
 msgid "Allows the use of the CodecState element."
 msgstr "Permite usar el elemento CodecState"
 
-#: src/extract/extract_cli_parser.cpp:68
+#: src/extract/extract_cli_parser.cpp:69
 msgid ""
 "Also try to extract the CUE sheet from the chapter information and tags for "
 "this track."
@@ -3014,7 +3014,7 @@ msgstr "Adjuntos "
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID del archivo adjunto %1%: tipo '%2%', tamaño %3% bytes"
 
-#: src/extract/extract_cli_parser.cpp:86
+#: src/extract/extract_cli_parser.cpp:87
 msgid "Attachment extraction"
 msgstr "Extracción del adjunto"
 
@@ -3209,7 +3209,7 @@ msgstr "P&aís:"
 msgid "C&reate option file"
 msgstr "C&rear archivo de opciones"
 
-#: src/extract/extract_cli_parser.cpp:103
+#: src/extract/extract_cli_parser.cpp:105
 msgid "CUE sheet extraction"
 msgstr "Extracción de hojas de distribución de pistas (CUE Sheet)"
 
@@ -3395,7 +3395,7 @@ msgstr "ID de traducción de capítulo: %1%"
 msgid "Chapter editor"
 msgstr "Editor de capítulos"
 
-#: src/extract/extract_cli_parser.cpp:95
+#: src/extract/extract_cli_parser.cpp:96
 msgid "Chapter extraction"
 msgstr "Extracción del capítulo"
 
@@ -3630,7 +3630,7 @@ msgstr "Codificaciones del contenido"
 msgid "Content encryption"
 msgstr "Contenido cifrado"
 
-#: src/extract/extract_cli_parser.cpp:67
+#: src/extract/extract_cli_parser.cpp:68
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr ""
 "Convertir subtítulos de texto a esta codificación de caracteres (charset). "
@@ -3905,7 +3905,7 @@ msgstr "Estado del codec del cue: %1%"
 msgid "Cue duration: %1%"
 msgstr "Duración del cue: %1%"
 
-#: src/extract/extract_cli_parser.cpp:120
+#: src/extract/extract_cli_parser.cpp:122
 msgid "Cue extraction"
 msgstr "Extracción del índice (cue)"
 
@@ -4666,11 +4666,11 @@ msgstr "Errores:"
 msgid "Even if there were warnings"
 msgstr "Incluso si hubieran advertencias "
 
-#: src/extract/extract_cli_parser.cpp:74 src/extract/extract_cli_parser.cpp:82
-#: src/extract/extract_cli_parser.cpp:91 src/extract/extract_cli_parser.cpp:99
-#: src/extract/extract_cli_parser.cpp:108
-#: src/extract/extract_cli_parser.cpp:116
-#: src/extract/extract_cli_parser.cpp:123
+#: src/extract/extract_cli_parser.cpp:75 src/extract/extract_cli_parser.cpp:83
+#: src/extract/extract_cli_parser.cpp:92 src/extract/extract_cli_parser.cpp:101
+#: src/extract/extract_cli_parser.cpp:110
+#: src/extract/extract_cli_parser.cpp:118
+#: src/extract/extract_cli_parser.cpp:125
 msgid "Example"
 msgstr "Ejemplo"
 
@@ -4735,7 +4735,7 @@ msgstr ""
 "nanosegundos). Se puede omitir la hora de esa manera. Se ha encontrado '%1%' "
 "en su lugar. Mensaje de error adicional: %2%"
 
-#: src/extract/extract_cli_parser.cpp:97
+#: src/extract/extract_cli_parser.cpp:98
 msgid ""
 "Exports the chapter information in the simple format used in OGM tools "
 "(CHAPTER01=... CHAPTER01NAME=...)."
@@ -4743,13 +4743,13 @@ msgstr ""
 "Exporta la información del capítulo en un formato simple usado en las "
 "herramientas ODM (CHAPTER01=... CHAPTER01NAME=...)."
 
-#: src/extract/extract_cli_parser.cpp:71
+#: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
 msgstr ""
 "Extraer los datos a un archivo en bruto (no editado) incluido el códec "
 "particular (CodecPrivate) como una cabecera."
 
-#: src/extract/extract_cli_parser.cpp:70
+#: src/extract/extract_cli_parser.cpp:71
 msgid "Extract the data to a raw file."
 msgstr "Extraer los datos a un archivo en bruto (no editado)."
 
@@ -5148,7 +5148,7 @@ msgstr "Generar sub-capítulos"
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr "Generar un número de capítulos uniformemente espaciados"
 
-#: src/extract/extract_cli_parser.cpp:60
+#: src/extract/extract_cli_parser.cpp:61
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
 msgid "Global options"
 msgstr "Opciones generales"
@@ -5683,7 +5683,7 @@ msgstr "'Formato' incorrecto del atributo '%1%'"
 msgid "Invalid Base64 character encountered"
 msgstr "No es válido el carácter en Base64 encontrado"
 
-#: src/extract/extract_cli_parser.cpp:164
+#: src/extract/extract_cli_parser.cpp:166
 #, boost-format
 msgid "Invalid BlockAddition level in argument '%1%'.\n"
 msgstr "No es válido el nivel del BlockAddition en el argumento '%1%'.\n"
@@ -5696,7 +5696,7 @@ msgstr "Codificación de caracteres UTF-8 no válida. Primer byte: 0x%|1$02x|"
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "No es válida la cabecera Vorbis en la pista de audio AVI."
 
-#: src/extract/extract_cli_parser.cpp:238
+#: src/extract/extract_cli_parser.cpp:251
 #, boost-format
 msgid "Invalid attachment ID/file name specification in argument '%1%'.\n"
 msgstr ""
@@ -6126,7 +6126,7 @@ msgstr "ID de pista especificado en  '--forced-track %1%'.\n"
 msgid "Invalid track ID specified in '--sub-charset %1%'.\n"
 msgstr "ID de pista especificado en '--sub-charset %1%'.\n"
 
-#: src/extract/extract_cli_parser.cpp:240
+#: src/extract/extract_cli_parser.cpp:253
 #, boost-format
 msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr ""
@@ -6205,7 +6205,7 @@ msgstr ""
 "El paquete Kate (KDE Advanced Text Editor) es demasiado pequeño y está "
 "siendo omitido.\n"
 
-#: src/extract/extract_cli_parser.cpp:69
+#: src/extract/extract_cli_parser.cpp:70
 msgid ""
 "Keep only the BlockAdditions up to this level (default: keep all levels)"
 msgstr ""
@@ -6598,7 +6598,7 @@ msgstr ""
 msgid "Missing one hex digit"
 msgstr "Falta un dígito hexadecimal"
 
-#: src/extract/extract_cli_parser.cpp:259
+#: src/extract/extract_cli_parser.cpp:272
 #, boost-format
 msgid "Missing output file name in argument '%1%'.\n"
 msgstr "Nombre de archivo creado ausente en el argumento '%1%'.\n"
@@ -6875,7 +6875,7 @@ msgstr "Aún no ha sido abierta ninguna tarea de multiplexado."
 msgid "No metadata block found. This file is broken.\n"
 msgstr "No se encontró ningún bloque de metadatos. Este archivo está roto.\n"
 
-#: src/extract/extract_cli_parser.cpp:257
+#: src/extract/extract_cli_parser.cpp:270
 msgid "No output file name specified, will use attachment name.\n"
 msgstr ""
 "No se especificó ningún nombre para el archivo creado, por lo que será usado "
@@ -7420,7 +7420,7 @@ msgstr ""
 "El número de paquete %1% contenido en la cabecera FLAC no es válido y está "
 "siendo omitido.\n"
 
-#: src/extract/extract_cli_parser.cpp:61
+#: src/extract/extract_cli_parser.cpp:62
 msgid "Parse the whole file instead of relying on the index."
 msgstr "Analizar el archivo completo en lugar de confiar en el índice."
 
@@ -8962,7 +8962,7 @@ msgstr "TTA (The lossless True Audio codec)"
 msgid "Tab &position in tab widgets:"
 msgstr "&Posición de la pestaña en los widgets:"
 
-#: src/extract/extract_cli_parser.cpp:79
+#: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
 msgstr "Extracción de etiqueta"
 
@@ -9127,7 +9127,7 @@ msgstr ""
 "sustituyendo cualquier nombre de archivo que se pudiera haber establecido "
 "con anterioridad."
 
-#: src/extract/extract_cli_parser.cpp:248
+#: src/extract/extract_cli_parser.cpp:261
 #, boost-format
 msgid "The ID '%1%' has already been used for another output file.\n"
 msgstr "El ID %1% ya se está usando para otro archivo de salida.\n"
@@ -9579,7 +9579,7 @@ msgstr ""
 "fuente del contenedor. Los datos del paquete de bits del video (%1%x%2%) "
 "serán usados.\n"
 
-#: src/extract/extract_cli_parser.cpp:105
+#: src/extract/extract_cli_parser.cpp:107
 msgid ""
 "The fifth mode tries to extract chapter information and tags and outputs "
 "them as a CUE sheet. This is the reverse of using a CUE sheet with "
@@ -9886,11 +9886,11 @@ msgid ""
 msgstr ""
 "El primer archivo no puede ser unido porque no hay archivos con que unirlo.\n"
 
-#: src/extract/extract_cli_parser.cpp:66
+#: src/extract/extract_cli_parser.cpp:67
 msgid "The first mode extracts some tracks to external files."
 msgstr "El primer modo extrae algunas pistas a archivos externos."
 
-#: src/extract/extract_cli_parser.cpp:56
+#: src/extract/extract_cli_parser.cpp:57
 msgid ""
 "The first word tells mkvextract what to extract. The second must be the "
 "source file. There are few global options that can be used with all modes. "
@@ -9928,7 +9928,7 @@ msgstr "Los formatos también se pueden combinar."
 msgid "The formats do not match."
 msgstr "Los formatos no coinciden."
 
-#: src/extract/extract_cli_parser.cpp:96
+#: src/extract/extract_cli_parser.cpp:97
 msgid ""
 "The fourth mode extracts the chapters and converts them to XML. The output "
 "is written to the standard output. The output can be used as a source for "
@@ -10360,7 +10360,7 @@ msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr ""
 "La frecuencia de muestreo de dos pistas de audio es diferente: %1% y %2%"
 
-#: src/extract/extract_cli_parser.cpp:80
+#: src/extract/extract_cli_parser.cpp:81
 msgid ""
 "The second mode extracts the tags and converts them to XML. The output is "
 "written to the standard output. The output can be used as a source for "
@@ -10401,7 +10401,7 @@ msgstr ""
 "Los ajustes del archivo '%1' contienen ajustes incorrectos y no se pudieron "
 "cargar. "
 
-#: src/extract/extract_cli_parser.cpp:114
+#: src/extract/extract_cli_parser.cpp:116
 msgid ""
 "The sixth mode finds the timecodes of all blocks for a track and outputs a "
 "timecode v2 file with these timecodes."
@@ -10535,7 +10535,7 @@ msgstr ""
 msgid "The temporary file '%1%' could not be opened for reading: %2%.\n"
 msgstr "El archivo temporal '%1%' no se pudo abrir para su lectura: %2%.\n"
 
-#: src/extract/extract_cli_parser.cpp:88
+#: src/extract/extract_cli_parser.cpp:89
 msgid "The third mode extracts attachments from the source file."
 msgstr "El tercer modo extrae los adjuntos desde el archivo de origen."
 
@@ -11077,7 +11077,7 @@ msgstr ""
 msgid "This mode enforces several restrictions."
 msgstr "Este modo impone varias restricciones."
 
-#: src/extract/extract_cli_parser.cpp:121
+#: src/extract/extract_cli_parser.cpp:123
 msgid ""
 "This mode extracts cue information for some tracks to external text files."
 msgstr ""
@@ -11252,7 +11252,7 @@ msgstr "Esto funciona con todo tipo de pistas."
 msgid "Time slice"
 msgstr "Tiempo de corte"
 
-#: src/extract/extract_cli_parser.cpp:112
+#: src/extract/extract_cli_parser.cpp:114
 msgid "Timecode extraction"
 msgstr "Código de tiempo de extracción"
 
@@ -11448,7 +11448,7 @@ msgstr "Pista UID"
 msgid "Track UID: %1%"
 msgstr "Pista UID: %1%"
 
-#: src/extract/extract_cli_parser.cpp:65
+#: src/extract/extract_cli_parser.cpp:66
 msgid "Track extraction"
 msgstr "Extracción de pista"
 
@@ -11645,7 +11645,7 @@ msgstr "Formato desconocido para el segmento UID '%3%' in '%1% %2%'.\n"
 msgid "Unknown header 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgstr "Cabecera desconocida 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 
-#: src/extract/extract_cli_parser.cpp:222
+#: src/extract/extract_cli_parser.cpp:235
 #, boost-format
 msgid "Unknown mode '%1%'.\n"
 msgstr "Modo desconocido '%1%'.\n"
@@ -11667,7 +11667,7 @@ msgstr ""
 "Formato de audio desconocido/incompatible 0x%|1$04x| para esta pista de "
 "audio.\n"
 
-#: src/extract/extract_cli_parser.cpp:231
+#: src/extract/extract_cli_parser.cpp:244
 #, boost-format
 msgid "Unrecognized command line option '%1%'.\n"
 msgstr "Opción de línea de comandos no reconocida '%1%'.\n"
@@ -11707,7 +11707,7 @@ msgstr "Actualizar propiedades de un adjunto"
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "Actualizando el '%1%' elemento que ha fallado. Razón:"
 
-#: src/extract/extract_cli_parser.cpp:44
+#: src/extract/extract_cli_parser.cpp:45
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:24
 msgid "Usage"
 msgstr "Uso"
@@ -11743,6 +11743,12 @@ msgstr "Úsalo únicamente con fines de testeo."
 #: src/mkvtoolnix-gui/merge/output.cpp:154
 msgid "Useful e.g. when you want exactly two files."
 msgstr "Útil por ejemplo cuando quiere exactamente dos archivos."
+
+#: src/extract/extract_cli_parser.cpp:99
+msgid ""
+"Uses the chapter names of the specified language for extraction instead of "
+"the first chapter name found."
+msgstr ""
 
 #: src/merge/mkvmerge.cpp:1382
 msgid ""
@@ -12115,11 +12121,11 @@ msgstr ""
 msgid "Write durations for all blocks."
 msgstr "Escribir duraciones para todos los bloques."
 
-#: src/extract/extract_cli_parser.cpp:89
+#: src/extract/extract_cli_parser.cpp:90
 msgid "Write the attachment with the ID 'AID' to 'outname'."
 msgstr "Escribir el archivo adjunto con el ID 'AID' a 'nombre-salida'."
 
-#: src/extract/extract_cli_parser.cpp:72
+#: src/extract/extract_cli_parser.cpp:73
 msgid "Write track with the ID TID to the file 'out'."
 msgstr "Escribir la pista con el ID 'TID', al archivo 'salida'."
 
@@ -12942,69 +12948,69 @@ msgstr "Documentación de mkv&merge"
 msgid "mkvInfo"
 msgstr "mkvinfo"
 
-#: src/extract/extract_cli_parser.cpp:52
+#: src/extract/extract_cli_parser.cpp:53
 msgid "mkvextract <-h|-V>"
 msgstr "mkvextract <-h|-V>"
 
-#: src/extract/extract_cli_parser.cpp:42
+#: src/extract/extract_cli_parser.cpp:43
 msgid "mkvextract <mode> <source-filename> [options] <extraction-spec>"
 msgstr "mkvextract <modo> <archivo> [opciones] <especificaciones-extracción>"
 
-#: src/extract/extract_cli_parser.cpp:93
+#: src/extract/extract_cli_parser.cpp:94
 msgid "mkvextract attachments \"a movie.mkv\" 4:cover.jpg"
 msgstr "mkvextract attachments \"película.mkv\" 4:carátula.jpg"
 
-#: src/extract/extract_cli_parser.cpp:47
+#: src/extract/extract_cli_parser.cpp:48
 msgid "mkvextract attachments <inname> [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr ""
 "mkvextract attachments <archivo> [opciones] [AID1:salida1 [AID2:salida2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:101
+#: src/extract/extract_cli_parser.cpp:103
 msgid "mkvextract chapters \"a movie.mkv\" > movie_chapters.xml"
 msgstr "mkvextract chapters \"película.mkv\" > capítulos_película.xml"
 
-#: src/extract/extract_cli_parser.cpp:48
+#: src/extract/extract_cli_parser.cpp:49
 msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <archivo> [opciones]"
 
-#: src/extract/extract_cli_parser.cpp:125
+#: src/extract/extract_cli_parser.cpp:127
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
 msgstr "mkvextract cues \"película.mkv\" 0:cues_pista0.txt"
 
-#: src/extract/extract_cli_parser.cpp:51
+#: src/extract/extract_cli_parser.cpp:52
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract cues <archivo> [opciones] [TID1:salida1 [TID2:salida2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:110
+#: src/extract/extract_cli_parser.cpp:112
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
 msgstr "mkvextract cuesheet \"archivo-de-audio.mka\" > archivo-de-audio.cue"
 
-#: src/extract/extract_cli_parser.cpp:49
+#: src/extract/extract_cli_parser.cpp:50
 msgid "mkvextract cuesheet <inname> [options]"
 msgstr "mkvextract cuesheet <archivo> [opciones]"
 
-#: src/extract/extract_cli_parser.cpp:84
+#: src/extract/extract_cli_parser.cpp:85
 msgid "mkvextract tags \"a movie.mkv\" > movie_tags.xml"
 msgstr "mkvextract tags \"película.mkv\" > etiquetas_película.xml"
 
-#: src/extract/extract_cli_parser.cpp:46
+#: src/extract/extract_cli_parser.cpp:47
 msgid "mkvextract tags <inname> [options]"
 msgstr "mkvextract tags <archivo> [opciones]"
 
-#: src/extract/extract_cli_parser.cpp:118
+#: src/extract/extract_cli_parser.cpp:120
 msgid "mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_track1.txt"
 msgstr "mkvextract timecodes_v2 \"película.mkv\" 1:timecodes_pista1.txt"
 
-#: src/extract/extract_cli_parser.cpp:50
+#: src/extract/extract_cli_parser.cpp:51
 msgid "mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract timecodes_v2 <archivo> [TID1:salida1 [TID2:salida2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:76
+#: src/extract/extract_cli_parser.cpp:77
 msgid "mkvextract tracks \"a movie.mkv\" 2:audio.ogg -c ISO8859-1 3:subs.srt"
 msgstr ""
 "mkvextract tracks \"película.mkv\" 2:audio.ogg -c ISO8859-1 3:subtítulos.srt"
 
-#: src/extract/extract_cli_parser.cpp:45
+#: src/extract/extract_cli_parser.cpp:46
 msgid "mkvextract tracks <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr ""
 "mkvextract tracks <archivo> [opciones] [TID1:salida1 [TID2:salida2 ...]]"

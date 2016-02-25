@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-24 20:24+0100\n"
+"POT-Creation-Date: 2016-02-25 22:43+0100\n"
 "PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -1647,7 +1647,7 @@ msgstr ""
 "Погледајте  „mkvmerge --list-languages“ за списак свих језика и њихових "
 "краћих назива према ИСО639-2 стандарду.\n"
 
-#: src/merge/mkvmerge.cpp:1178
+#: src/extract/extract_cli_parser.cpp:193 src/merge/mkvmerge.cpp:1178
 #, boost-format
 msgid ""
 "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --"
@@ -1762,12 +1762,12 @@ msgstr "„%1%“ није ваљан ИБ-записа у „--default-duration
 msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "„%1%“ није ваљан ИБ-записа у „--nalu-size-length %2%“.\n"
 
-#: src/extract/extract_cli_parser.cpp:140
+#: src/extract/extract_cli_parser.cpp:142
 #, boost-format
 msgid "'%1%' is only allowed when extracting chapters.\n"
 msgstr "„%1%“ је дозвољено само при издвајању поглавља.\n"
 
-#: src/extract/extract_cli_parser.cpp:137
+#: src/extract/extract_cli_parser.cpp:139
 #, boost-format
 msgid "'%1%' is only allowed when extracting tracks.\n"
 msgstr "„%1%“ је дозвољено само при издвајању записа.\n"
@@ -2677,7 +2677,7 @@ msgstr ""
 msgid "Allows the use of the CodecState element."
 msgstr "Дозвољава употребу „CodecState“ елемента."
 
-#: src/extract/extract_cli_parser.cpp:68
+#: src/extract/extract_cli_parser.cpp:69
 msgid ""
 "Also try to extract the CUE sheet from the chapter information and tags for "
 "this track."
@@ -2926,7 +2926,7 @@ msgstr "Прилози"
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "Прилог ИБ %1%: врста '%2%', величине %3% битова"
 
-#: src/extract/extract_cli_parser.cpp:86
+#: src/extract/extract_cli_parser.cpp:87
 msgid "Attachment extraction"
 msgstr "Издвајање прилога"
 
@@ -3115,7 +3115,7 @@ msgstr "&Земља:"
 msgid "C&reate option file"
 msgstr "С&твори датотеку поставки"
 
-#: src/extract/extract_cli_parser.cpp:103
+#: src/extract/extract_cli_parser.cpp:105
 msgid "CUE sheet extraction"
 msgstr "Издвајање кју-листа"
 
@@ -3296,7 +3296,7 @@ msgstr "ИБ-превода поглавља: %1%"
 msgid "Chapter editor"
 msgstr "Уредник поглавља"
 
-#: src/extract/extract_cli_parser.cpp:95
+#: src/extract/extract_cli_parser.cpp:96
 msgid "Chapter extraction"
 msgstr "Издвајање поглавља"
 
@@ -3534,7 +3534,7 @@ msgstr "Кодирање садржаја"
 msgid "Content encryption"
 msgstr "Шифровање садржаја"
 
-#: src/extract/extract_cli_parser.cpp:67
+#: src/extract/extract_cli_parser.cpp:68
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr "Измени кодну страну текст. поднаписа (подразумевано: UTF-8)."
 
@@ -3807,7 +3807,7 @@ msgstr "Кју-стање kodeka: %1%"
 msgid "Cue duration: %1%"
 msgstr "Кју-трајање: %1%"
 
-#: src/extract/extract_cli_parser.cpp:120
+#: src/extract/extract_cli_parser.cpp:122
 msgid "Cue extraction"
 msgstr "Кју-издвајање"
 
@@ -4567,11 +4567,11 @@ msgstr "Грешке:"
 msgid "Even if there were warnings"
 msgstr "чак и ако је било упозорења"
 
-#: src/extract/extract_cli_parser.cpp:74 src/extract/extract_cli_parser.cpp:82
-#: src/extract/extract_cli_parser.cpp:91 src/extract/extract_cli_parser.cpp:99
-#: src/extract/extract_cli_parser.cpp:108
-#: src/extract/extract_cli_parser.cpp:116
-#: src/extract/extract_cli_parser.cpp:123
+#: src/extract/extract_cli_parser.cpp:75 src/extract/extract_cli_parser.cpp:83
+#: src/extract/extract_cli_parser.cpp:92 src/extract/extract_cli_parser.cpp:101
+#: src/extract/extract_cli_parser.cpp:110
+#: src/extract/extract_cli_parser.cpp:118
+#: src/extract/extract_cli_parser.cpp:125
 msgid "Example"
 msgstr "Пример"
 
@@ -4637,7 +4637,7 @@ msgstr ""
 "да изоставите). Овде нађох облик „%1%“, а доступан је и извештај о овој "
 "грешки: %2%"
 
-#: src/extract/extract_cli_parser.cpp:97
+#: src/extract/extract_cli_parser.cpp:98
 msgid ""
 "Exports the chapter information in the simple format used in OGM tools "
 "(CHAPTER01=... CHAPTER01NAME=...)."
@@ -4645,12 +4645,12 @@ msgstr ""
 "Издваја податке поглавља у простом облику који употребљавају Огм-алати (енг. "
 "„OGM tools“), нпр. CHAPTER01=... CHAPTER01NAME=...."
 
-#: src/extract/extract_cli_parser.cpp:71
+#: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
 msgstr ""
 "Издвој податке у основну датотеку укључујући „Кодек_приватно“ као заглавље"
 
-#: src/extract/extract_cli_parser.cpp:70
+#: src/extract/extract_cli_parser.cpp:71
 msgid "Extract the data to a raw file."
 msgstr "Издвој податке у основну датотеку (енг. „raw“)."
 
@@ -5043,7 +5043,7 @@ msgstr "Створи потпоглавља"
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr "Стварање одређеног броја равномерно распоређених поглавља"
 
-#: src/extract/extract_cli_parser.cpp:60
+#: src/extract/extract_cli_parser.cpp:61
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
 msgid "Global options"
 msgstr "Опште поставке"
@@ -5560,7 +5560,7 @@ msgstr "Неважећа особина „format“  „%1%“."
 msgid "Invalid Base64 character encountered"
 msgstr "Наиђох на неважећи знак („Base64“)"
 
-#: src/extract/extract_cli_parser.cpp:164
+#: src/extract/extract_cli_parser.cpp:166
 #, boost-format
 msgid "Invalid BlockAddition level in argument '%1%'.\n"
 msgstr "Неважећи ниво Додатог_блока у аргументу „%1%“.\n"
@@ -5573,7 +5573,7 @@ msgstr "Није ваљан УТФ-8 знак. Први бајт: 0x%|1$02x|"
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Неважећа ворбис-заглавља у Ави-звучном запису."
 
-#: src/extract/extract_cli_parser.cpp:238
+#: src/extract/extract_cli_parser.cpp:251
 #, boost-format
 msgid "Invalid attachment ID/file name specification in argument '%1%'.\n"
 msgstr "Неважећа ИБ-прилога/назив датотеке одредница у аргументу „%1%“.\n"
@@ -5971,7 +5971,7 @@ msgstr "Дат је неважећи ИБ-записа у „--forced-track %1%�
 msgid "Invalid track ID specified in '--sub-charset %1%'.\n"
 msgstr "Дат је неважећи ИБ-записа у „--sub-charset %1%“.\n"
 
-#: src/extract/extract_cli_parser.cpp:240
+#: src/extract/extract_cli_parser.cpp:253
 #, boost-format
 msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "Неважећа одредница ИБ-записа/назив датотеке у аргументу „%1%“.\n"
@@ -6048,7 +6048,7 @@ msgstr "Кејт"
 msgid "Kate packet is too small and is being skipped.\n"
 msgstr "Занемарићу сувише мален Кејт-пакет.\n"
 
-#: src/extract/extract_cli_parser.cpp:69
+#: src/extract/extract_cli_parser.cpp:70
 msgid ""
 "Keep only the BlockAdditions up to this level (default: keep all levels)"
 msgstr ""
@@ -6433,7 +6433,7 @@ msgstr ""
 msgid "Missing one hex digit"
 msgstr "Недостаје једна хекса. цифра"
 
-#: src/extract/extract_cli_parser.cpp:259
+#: src/extract/extract_cli_parser.cpp:272
 #, boost-format
 msgid "Missing output file name in argument '%1%'.\n"
 msgstr "Недостаје назив исходишне датотеке за аргумент „%1%“.\n"
@@ -6703,7 +6703,7 @@ msgstr "Још увек нема отворене радње сједињава�
 msgid "No metadata block found. This file is broken.\n"
 msgstr "Није нађен блок описних података. Ова датотека је оштећена.\n"
 
-#: src/extract/extract_cli_parser.cpp:257
+#: src/extract/extract_cli_parser.cpp:270
 msgid "No output file name specified, will use attachment name.\n"
 msgstr "Није названа излазна датотека, па ћу да употребим назив прилога.\n"
 
@@ -7233,7 +7233,7 @@ msgid ""
 msgstr ""
 "Изоставио сам пакет број %1% јер није садржавао ваљано Флак-заглавље.\n"
 
-#: src/extract/extract_cli_parser.cpp:61
+#: src/extract/extract_cli_parser.cpp:62
 msgid "Parse the whole file instead of relying on the index."
 msgstr "Не ослањај се на индекс већ рашчлани целу датотеку."
 
@@ -8771,7 +8771,7 @@ msgstr "Тта (The lossless True Audio codec)"
 msgid "Tab &position in tab widgets:"
 msgstr "Положај језичака у сучељу:"
 
-#: src/extract/extract_cli_parser.cpp:79
+#: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
 msgstr "Издвајање ознака"
 
@@ -8922,7 +8922,7 @@ msgid ""
 "any file name which might have been set earlier."
 msgstr ""
 
-#: src/extract/extract_cli_parser.cpp:248
+#: src/extract/extract_cli_parser.cpp:261
 #, boost-format
 msgid "The ID '%1%' has already been used for another output file.\n"
 msgstr "Овај ИБ „%1%“ је употребљаван раније за другу исходишну датотеку.\n"
@@ -9347,7 +9347,7 @@ msgstr ""
 "тока, разликују се од вредности које се налазе у изворном сандуку. Вредности "
 "из видео-података битског тока (%1%x%2%) биће употребљене.\n"
 
-#: src/extract/extract_cli_parser.cpp:105
+#: src/extract/extract_cli_parser.cpp:107
 msgid ""
 "The fifth mode tries to extract chapter information and tags and outputs "
 "them as a CUE sheet. This is the reverse of using a CUE sheet with "
@@ -9654,11 +9654,11 @@ msgid ""
 "The first file cannot be appended because there are no files to append to.\n"
 msgstr "Нема датотека које би могле да се придруже првој датотеци.\n"
 
-#: src/extract/extract_cli_parser.cpp:66
+#: src/extract/extract_cli_parser.cpp:67
 msgid "The first mode extracts some tracks to external files."
 msgstr "У првом режиму, издвајају се неки записи у спољне датотеке."
 
-#: src/extract/extract_cli_parser.cpp:56
+#: src/extract/extract_cli_parser.cpp:57
 msgid ""
 "The first word tells mkvextract what to extract. The second must be the "
 "source file. There are few global options that can be used with all modes. "
@@ -9697,7 +9697,7 @@ msgstr "Дозвољено је и мешање ових облика."
 msgid "The formats do not match."
 msgstr "Ови облици се не подударају."
 
-#: src/extract/extract_cli_parser.cpp:96
+#: src/extract/extract_cli_parser.cpp:97
 msgid ""
 "The fourth mode extracts the chapters and converts them to XML. The output "
 "is written to the standard output. The output can be used as a source for "
@@ -10100,7 +10100,7 @@ msgstr "Корени елеменат мора да буде <%1%>."
 msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr "Различита учестаност узорковања ова два записа: %1% спрам %2%"
 
-#: src/extract/extract_cli_parser.cpp:80
+#: src/extract/extract_cli_parser.cpp:81
 msgid ""
 "The second mode extracts the tags and converts them to XML. The output is "
 "written to the standard output. The output can be used as a source for "
@@ -10135,7 +10135,7 @@ msgstr ""
 msgid "The settings file '%1' contains invalid settings and was not loaded."
 msgstr "Датотека поставки „%1“ није учитана јер садржи неваљале поставке."
 
-#: src/extract/extract_cli_parser.cpp:114
+#: src/extract/extract_cli_parser.cpp:116
 msgid ""
 "The sixth mode finds the timecodes of all blocks for a track and outputs a "
 "timecode v2 file with these timecodes."
@@ -10266,7 +10266,7 @@ msgstr ""
 msgid "The temporary file '%1%' could not be opened for reading: %2%.\n"
 msgstr "Не може да се отвори привремена датотека „%1%“ ради читања: %2%.\n"
 
-#: src/extract/extract_cli_parser.cpp:88
+#: src/extract/extract_cli_parser.cpp:89
 msgid "The third mode extracts attachments from the source file."
 msgstr "У трећем режиму, издвајају се прилози из изворне датотеке."
 
@@ -10785,7 +10785,7 @@ msgstr "У овом режиму разматра се само први зап�
 msgid "This mode enforces several restrictions."
 msgstr "У овом режиму намећу се неколика ограничења."
 
-#: src/extract/extract_cli_parser.cpp:121
+#: src/extract/extract_cli_parser.cpp:123
 msgid ""
 "This mode extracts cue information for some tracks to external text files."
 msgstr ""
@@ -10952,7 +10952,7 @@ msgstr "Ово је примењиво за све врсте записа."
 msgid "Time slice"
 msgstr "Тренутак"
 
-#: src/extract/extract_cli_parser.cpp:112
+#: src/extract/extract_cli_parser.cpp:114
 msgid "Timecode extraction"
 msgstr "Издвајање временске ознаке"
 
@@ -11143,7 +11143,7 @@ msgstr "ЈИБ записа"
 msgid "Track UID: %1%"
 msgstr "ЈИБ записа: %1%"
 
-#: src/extract/extract_cli_parser.cpp:65
+#: src/extract/extract_cli_parser.cpp:66
 msgid "Track extraction"
 msgstr "Издвајање записа"
 
@@ -11340,7 +11340,7 @@ msgstr "Непозната врста за ЈИБ-одељка „%3%“ у „%
 msgid "Unknown header 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgstr "Непознато заглавље 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 
-#: src/extract/extract_cli_parser.cpp:222
+#: src/extract/extract_cli_parser.cpp:235
 #, boost-format
 msgid "Unknown mode '%1%'.\n"
 msgstr "Непознат режим „%1%“.\n"
@@ -11360,7 +11360,7 @@ msgstr "Непознат режим рашчлањавања у „%1% %2%“.\n
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "Непозната/неподржана врста звука 0x%|1$04x| за дати звучни запис.\n"
 
-#: src/extract/extract_cli_parser.cpp:231
+#: src/extract/extract_cli_parser.cpp:244
 #, boost-format
 msgid "Unrecognized command line option '%1%'.\n"
 msgstr "Опција линије наредбе „%1%“ није подржана.\n"
@@ -11400,7 +11400,7 @@ msgstr "Особине поднаписа и поглавља"
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "Није успело занављање елемента „%1%“. Узрок:"
 
-#: src/extract/extract_cli_parser.cpp:44
+#: src/extract/extract_cli_parser.cpp:45
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:24
 msgid "Usage"
 msgstr "Начини примене"
@@ -11436,6 +11436,12 @@ msgstr "Употребите ово само у сврхе тестирања"
 #: src/mkvtoolnix-gui/merge/output.cpp:154
 msgid "Useful e.g. when you want exactly two files."
 msgstr "На пример, ово је корисно ако желите тачно две датотеке."
+
+#: src/extract/extract_cli_parser.cpp:99
+msgid ""
+"Uses the chapter names of the specified language for extraction instead of "
+"the first chapter name found."
+msgstr ""
 
 #: src/merge/mkvmerge.cpp:1382
 msgid ""
@@ -11799,11 +11805,11 @@ msgstr ""
 msgid "Write durations for all blocks."
 msgstr "Упиши трајања за све блокове."
 
-#: src/extract/extract_cli_parser.cpp:89
+#: src/extract/extract_cli_parser.cpp:90
 msgid "Write the attachment with the ID 'AID' to 'outname'."
 msgstr "Уписује прилог ИБ ПИБ у датуотеку названу „outname“."
 
-#: src/extract/extract_cli_parser.cpp:72
+#: src/extract/extract_cli_parser.cpp:73
 msgid "Write track with the ID TID to the file 'out'."
 msgstr "Уписује запис ИБ ЗИБ у датуотеку названу „out“."
 
@@ -12606,69 +12612,69 @@ msgstr "Упутства за рад са Мкв-спојницом"
 msgid "mkvInfo"
 msgstr "Мкв-обавештајац"
 
-#: src/extract/extract_cli_parser.cpp:52
+#: src/extract/extract_cli_parser.cpp:53
 msgid "mkvextract <-h|-V>"
 msgstr "mkvextract <-h|-V>"
 
-#: src/extract/extract_cli_parser.cpp:42
+#: src/extract/extract_cli_parser.cpp:43
 msgid "mkvextract <mode> <source-filename> [options] <extraction-spec>"
 msgstr ""
 "Употреба:\n"
 " mkvextract <режим> <назив-улазне-датотека> [опције] <правила-издвајања>"
 
-#: src/extract/extract_cli_parser.cpp:93
+#: src/extract/extract_cli_parser.cpp:94
 msgid "mkvextract attachments \"a movie.mkv\" 4:cover.jpg"
 msgstr "mkvextract attachments \"филм.mkv\" 4:НАСЛОВНА.jpg"
 
-#: src/extract/extract_cli_parser.cpp:47
+#: src/extract/extract_cli_parser.cpp:48
 msgid "mkvextract attachments <inname> [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "mkvextract attachments <ул_назив> [опције] [ПИБ1:изл1 [ПИБ2:изл2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:101
+#: src/extract/extract_cli_parser.cpp:103
 msgid "mkvextract chapters \"a movie.mkv\" > movie_chapters.xml"
 msgstr "mkvextract chapters \"филм.mkv\" > ПОГЛАВЉА_филма.xml"
 
-#: src/extract/extract_cli_parser.cpp:48
+#: src/extract/extract_cli_parser.cpp:49
 msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <ул_назив> [опције]"
 
-#: src/extract/extract_cli_parser.cpp:125
+#: src/extract/extract_cli_parser.cpp:127
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
 msgstr "mkvextract cues \"филм.mkv\" 0:кју_уноси_записа0.txt"
 
-#: src/extract/extract_cli_parser.cpp:51
+#: src/extract/extract_cli_parser.cpp:52
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract cues <ул_назив> [опције] [ЗИБ1:изл1 [ЗИБ2:изл2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:110
+#: src/extract/extract_cli_parser.cpp:112
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
 msgstr "mkvextract cuesheet \"звук.mka\" > ЗВУК.cue"
 
-#: src/extract/extract_cli_parser.cpp:49
+#: src/extract/extract_cli_parser.cpp:50
 msgid "mkvextract cuesheet <inname> [options]"
 msgstr "mkvextract cuesheet <ул_назив> [опције]"
 
-#: src/extract/extract_cli_parser.cpp:84
+#: src/extract/extract_cli_parser.cpp:85
 msgid "mkvextract tags \"a movie.mkv\" > movie_tags.xml"
 msgstr "mkvextract tags \"филм.mkv\" > ВИДЕО_ОЗНАКЕ.xml"
 
-#: src/extract/extract_cli_parser.cpp:46
+#: src/extract/extract_cli_parser.cpp:47
 msgid "mkvextract tags <inname> [options]"
 msgstr "mkvextract tags <ул_назив> [опције]"
 
-#: src/extract/extract_cli_parser.cpp:118
+#: src/extract/extract_cli_parser.cpp:120
 msgid "mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_track1.txt"
 msgstr "mkvextract timecodes_v2 \"филм.mkv\" 1:ВРЕМ_ОЗНАКЕ_запис1.txt"
 
-#: src/extract/extract_cli_parser.cpp:50
+#: src/extract/extract_cli_parser.cpp:51
 msgid "mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract timecodes_v2 <ул_назив> [ЗИБ1:изл1 [ЗИБ2:изл2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:76
+#: src/extract/extract_cli_parser.cpp:77
 msgid "mkvextract tracks \"a movie.mkv\" 2:audio.ogg -c ISO8859-1 3:subs.srt"
 msgstr "mkvextract tracks \"филм.mkv\" 2:звук.ogg -c UTF-8 3:поднапис.srt"
 
-#: src/extract/extract_cli_parser.cpp:45
+#: src/extract/extract_cli_parser.cpp:46
 msgid "mkvextract tracks <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract tracks <ул_назив> [опције] [ЗИБ1:изл1 [ЗИБ2:изл2 ...]]"
 

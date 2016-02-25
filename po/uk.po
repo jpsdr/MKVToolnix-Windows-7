@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-24 20:24+0100\n"
+"POT-Creation-Date: 2016-02-25 22:43+0100\n"
 "PO-Revision-Date: 2016-01-10 15:02+0100\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -1672,7 +1672,7 @@ msgstr ""
 "%1%'. Продивіться 'mkvmerge --list-languages' для отримання списку всіх мов "
 "і їх ISO639-2 кодів.\n"
 
-#: src/merge/mkvmerge.cpp:1178
+#: src/extract/extract_cli_parser.cpp:193 src/merge/mkvmerge.cpp:1178
 #, boost-format
 msgid ""
 "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --"
@@ -1787,12 +1787,12 @@ msgstr "'%1%' не є допустимим ID доріжки в '--default-durat
 msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'%1%' не є допустимим ID доріжки в '--nalu-size-length %2%'.\n"
 
-#: src/extract/extract_cli_parser.cpp:140
+#: src/extract/extract_cli_parser.cpp:142
 #, boost-format
 msgid "'%1%' is only allowed when extracting chapters.\n"
 msgstr "'%1%' допускається тільки при витяганні розділів.\n"
 
-#: src/extract/extract_cli_parser.cpp:137
+#: src/extract/extract_cli_parser.cpp:139
 #, boost-format
 msgid "'%1%' is only allowed when extracting tracks.\n"
 msgstr "'%1%' допускається тільки при витяганні доріжок.\n"
@@ -2711,7 +2711,7 @@ msgstr ""
 msgid "Allows the use of the CodecState element."
 msgstr "Дозволяє використовувати елемент CodecState."
 
-#: src/extract/extract_cli_parser.cpp:68
+#: src/extract/extract_cli_parser.cpp:69
 msgid ""
 "Also try to extract the CUE sheet from the chapter information and tags for "
 "this track."
@@ -2971,7 +2971,7 @@ msgstr "Вкладення"
 msgid "Attachment ID %1%: type '%2%', size %3% bytes"
 msgstr "ID вкладення %1%: тип '%2%', розмір %3% байт"
 
-#: src/extract/extract_cli_parser.cpp:86
+#: src/extract/extract_cli_parser.cpp:87
 msgid "Attachment extraction"
 msgstr "Витягнення вкладень"
 
@@ -3161,7 +3161,7 @@ msgstr "&Країна:"
 msgid "C&reate option file"
 msgstr "С&творити файл конфігурації"
 
-#: src/extract/extract_cli_parser.cpp:103
+#: src/extract/extract_cli_parser.cpp:105
 msgid "CUE sheet extraction"
 msgstr "Витягнення CUE-списку"
 
@@ -3345,7 +3345,7 @@ msgstr "ID перекладу розділів: %1%"
 msgid "Chapter editor"
 msgstr "Редактор розділів"
 
-#: src/extract/extract_cli_parser.cpp:95
+#: src/extract/extract_cli_parser.cpp:96
 msgid "Chapter extraction"
 msgstr "Витягнення розділів"
 
@@ -3581,7 +3581,7 @@ msgstr "Набір символів вмісту"
 msgid "Content encryption"
 msgstr "Шифрування вмісту"
 
-#: src/extract/extract_cli_parser.cpp:67
+#: src/extract/extract_cli_parser.cpp:68
 msgid "Convert text subtitles to this charset (default: UTF-8)."
 msgstr ""
 "Конвертувати текстові субтитри до цього набору символів (типово: UTF-8)."
@@ -3852,7 +3852,7 @@ msgstr "Стан кодека Cue: %1%"
 msgid "Cue duration: %1%"
 msgstr "Тривалість Cue: %1%"
 
-#: src/extract/extract_cli_parser.cpp:120
+#: src/extract/extract_cli_parser.cpp:122
 msgid "Cue extraction"
 msgstr "Витягнення записів cue"
 
@@ -4600,11 +4600,11 @@ msgstr "Помилки:"
 msgid "Even if there were warnings"
 msgstr "Навіть, якщо там були попередження"
 
-#: src/extract/extract_cli_parser.cpp:74 src/extract/extract_cli_parser.cpp:82
-#: src/extract/extract_cli_parser.cpp:91 src/extract/extract_cli_parser.cpp:99
-#: src/extract/extract_cli_parser.cpp:108
-#: src/extract/extract_cli_parser.cpp:116
-#: src/extract/extract_cli_parser.cpp:123
+#: src/extract/extract_cli_parser.cpp:75 src/extract/extract_cli_parser.cpp:83
+#: src/extract/extract_cli_parser.cpp:92 src/extract/extract_cli_parser.cpp:101
+#: src/extract/extract_cli_parser.cpp:110
+#: src/extract/extract_cli_parser.cpp:118
+#: src/extract/extract_cli_parser.cpp:125
 msgid "Example"
 msgstr "Приклад"
 
@@ -4667,7 +4667,7 @@ msgstr ""
 "точність). Ви можете пропускати години. Замість того знайдено '%1%'. "
 "Додаткове повідомлення про помилку: %2%"
 
-#: src/extract/extract_cli_parser.cpp:97
+#: src/extract/extract_cli_parser.cpp:98
 msgid ""
 "Exports the chapter information in the simple format used in OGM tools "
 "(CHAPTER01=... CHAPTER01NAME=...)."
@@ -4675,13 +4675,13 @@ msgstr ""
 "Експортувати інформацію розділів в простий формат, що використовується в "
 "утилітах OGM (CHAPTER01=... CHAPTER01NAME=...)."
 
-#: src/extract/extract_cli_parser.cpp:71
+#: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
 msgstr ""
 "Витягувати дані у необроблений (сирий) файл у тому числі CodecPrivate як "
 "заголовок."
 
-#: src/extract/extract_cli_parser.cpp:70
+#: src/extract/extract_cli_parser.cpp:71
 msgid "Extract the data to a raw file."
 msgstr "Витягувати дані у необроблений (сирий) файл."
 
@@ -5072,7 +5072,7 @@ msgstr "Створення  підгрозділів"
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr "Створення низки розділіа, розподілених рівномірно крім"
 
-#: src/extract/extract_cli_parser.cpp:60
+#: src/extract/extract_cli_parser.cpp:61
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
 msgid "Global options"
 msgstr "Глобальні опції"
@@ -5586,7 +5586,7 @@ msgstr "Некорректний атрибут 'format' '%1%'."
 msgid "Invalid Base64 character encountered"
 msgstr "Зафіксовано некоректний символ Base64"
 
-#: src/extract/extract_cli_parser.cpp:164
+#: src/extract/extract_cli_parser.cpp:166
 #, boost-format
 msgid "Invalid BlockAddition level in argument '%1%'.\n"
 msgstr "Недопустимий рівень BlockAddition в параметрі '%1%'.\n"
@@ -5599,7 +5599,7 @@ msgstr "Невірний UTF-8 символ. Перший байт: 0x%|1$02x|"
 msgid "Invalid Vorbis headers in AVI audio track."
 msgstr "Невірні Vorbis заголовки звукової доріжки файлу AVI ."
 
-#: src/extract/extract_cli_parser.cpp:238
+#: src/extract/extract_cli_parser.cpp:251
 #, boost-format
 msgid "Invalid attachment ID/file name specification in argument '%1%'.\n"
 msgstr ""
@@ -6004,7 +6004,7 @@ msgstr "Невірний ID доріжки заданий в '--forced-track %1%
 msgid "Invalid track ID specified in '--sub-charset %1%'.\n"
 msgstr "Невірний ID доріжки заданий в '--sub-charset %1%'.\n"
 
-#: src/extract/extract_cli_parser.cpp:240
+#: src/extract/extract_cli_parser.cpp:253
 #, boost-format
 msgid "Invalid track ID/file name specification in argument '%1%'.\n"
 msgstr "Невірна специфікація ID/назви файлу доріжки для аргументу '%1%'.\n"
@@ -6082,7 +6082,7 @@ msgstr "Kate"
 msgid "Kate packet is too small and is being skipped.\n"
 msgstr "Пакет Kate занадто маленький і тому буде пропущений.\n"
 
-#: src/extract/extract_cli_parser.cpp:69
+#: src/extract/extract_cli_parser.cpp:70
 msgid ""
 "Keep only the BlockAdditions up to this level (default: keep all levels)"
 msgstr ""
@@ -6468,7 +6468,7 @@ msgstr ""
 msgid "Missing one hex digit"
 msgstr "Відсутнє одне шістнадцяткове число"
 
-#: src/extract/extract_cli_parser.cpp:259
+#: src/extract/extract_cli_parser.cpp:272
 #, boost-format
 msgid "Missing output file name in argument '%1%'.\n"
 msgstr "Відсутня назва вихідного файлу для аргументу '%1%'.\n"
@@ -6736,7 +6736,7 @@ msgstr "Жодне завдання не було ще розпочате."
 msgid "No metadata block found. This file is broken.\n"
 msgstr "Не знайдено блоку метаданих. Цей файл пошкоджений.\n"
 
-#: src/extract/extract_cli_parser.cpp:257
+#: src/extract/extract_cli_parser.cpp:270
 msgid "No output file name specified, will use attachment name.\n"
 msgstr ""
 "Не вказано назву результуючого файлу, тому буде використовуватися назва "
@@ -7262,7 +7262,7 @@ msgid ""
 msgstr ""
 "Пакет номер %1% містив неприпустимий заголовок FLAC і тому пропускається.\n"
 
-#: src/extract/extract_cli_parser.cpp:61
+#: src/extract/extract_cli_parser.cpp:62
 msgid "Parse the whole file instead of relying on the index."
 msgstr "Аналізувати цілий файл замість того, щоб покладатися на індекс."
 
@@ -8799,7 +8799,7 @@ msgstr "TTA (The lossless True Audio codec)"
 msgid "Tab &position in tab widgets:"
 msgstr "&Розташування вкладок у віджетах вкладок:"
 
-#: src/extract/extract_cli_parser.cpp:79
+#: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
 msgstr "Витягнення тега"
 
@@ -8953,7 +8953,7 @@ msgid ""
 "any file name which might have been set earlier."
 msgstr ""
 
-#: src/extract/extract_cli_parser.cpp:248
+#: src/extract/extract_cli_parser.cpp:261
 #, boost-format
 msgid "The ID '%1%' has already been used for another output file.\n"
 msgstr "ID '%1%' вже був використаний для іншого файла на виході.\n"
@@ -9385,7 +9385,7 @@ msgstr ""
 "відрізняються від таких для вхідного контейнера. Будуть використовуватися "
 "значення з бітового потоку відео (%1%x%2%).\n"
 
-#: src/extract/extract_cli_parser.cpp:105
+#: src/extract/extract_cli_parser.cpp:107
 msgid ""
 "The fifth mode tries to extract chapter information and tags and outputs "
 "them as a CUE sheet. This is the reverse of using a CUE sheet with "
@@ -9684,11 +9684,11 @@ msgid ""
 msgstr ""
 "Перший файл не може бути приєднаний, оскільки немає файлів для приєднання.\n"
 
-#: src/extract/extract_cli_parser.cpp:66
+#: src/extract/extract_cli_parser.cpp:67
 msgid "The first mode extracts some tracks to external files."
 msgstr "Перший режим витягує деякі доріжки до зовнішніх файлів."
 
-#: src/extract/extract_cli_parser.cpp:56
+#: src/extract/extract_cli_parser.cpp:57
 msgid ""
 "The first word tells mkvextract what to extract. The second must be the "
 "source file. There are few global options that can be used with all modes. "
@@ -9727,7 +9727,7 @@ msgstr "Формати також можуть бути змішані."
 msgid "The formats do not match."
 msgstr "Формати не збігаються."
 
-#: src/extract/extract_cli_parser.cpp:96
+#: src/extract/extract_cli_parser.cpp:97
 msgid ""
 "The fourth mode extracts the chapters and converts them to XML. The output "
 "is written to the standard output. The output can be used as a source for "
@@ -10145,7 +10145,7 @@ msgstr "Кореневий елемент повинен бути <%1%>."
 msgid "The sample rate of the two audio tracks is different: %1% and %2%"
 msgstr "Частота дискретизації двох звукових доріжок є різною: %1% i %2%"
 
-#: src/extract/extract_cli_parser.cpp:80
+#: src/extract/extract_cli_parser.cpp:81
 msgid ""
 "The second mode extracts the tags and converts them to XML. The output is "
 "written to the standard output. The output can be used as a source for "
@@ -10186,7 +10186,7 @@ msgstr ""
 "Файл налаштувань \"%1\" містить неприпустимі налаштування і не був "
 "завантажений."
 
-#: src/extract/extract_cli_parser.cpp:114
+#: src/extract/extract_cli_parser.cpp:116
 msgid ""
 "The sixth mode finds the timecodes of all blocks for a track and outputs a "
 "timecode v2 file with these timecodes."
@@ -10315,7 +10315,7 @@ msgstr ""
 msgid "The temporary file '%1%' could not be opened for reading: %2%.\n"
 msgstr "Тимчасовий файл '%1%' не можливо відкрити для зчитування: %2%.\n"
 
-#: src/extract/extract_cli_parser.cpp:88
+#: src/extract/extract_cli_parser.cpp:89
 msgid "The third mode extracts attachments from the source file."
 msgstr "Третій режим дозволяє витягувати вкладення з вхідного файлу."
 
@@ -10831,7 +10831,7 @@ msgstr "Даний режим враховує лише першу доріжк�
 msgid "This mode enforces several restrictions."
 msgstr "Цей режим накладає деякі обмеження."
 
-#: src/extract/extract_cli_parser.cpp:121
+#: src/extract/extract_cli_parser.cpp:123
 msgid ""
 "This mode extracts cue information for some tracks to external text files."
 msgstr "Даний режим витягує деякі доріжки до зовнішніх файлів."
@@ -11003,7 +11003,7 @@ msgstr "Працює зі всіма типами доріжки."
 msgid "Time slice"
 msgstr "Інтервал часу"
 
-#: src/extract/extract_cli_parser.cpp:112
+#: src/extract/extract_cli_parser.cpp:114
 msgid "Timecode extraction"
 msgstr "Витягування тайм-кодів"
 
@@ -11198,7 +11198,7 @@ msgstr "UID доріжки"
 msgid "Track UID: %1%"
 msgstr "UID доріжки: %1%"
 
-#: src/extract/extract_cli_parser.cpp:65
+#: src/extract/extract_cli_parser.cpp:66
 msgid "Track extraction"
 msgstr "Витягнення доріжки"
 
@@ -11392,7 +11392,7 @@ msgstr "Невідомий формат UID сегмента '%3%' в '%1% %2%'.
 msgid "Unknown header 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 msgstr "Невідомий заголовок 0x%|1$02x|%|2$02x|%|3$02x|%|4$02x|\n"
 
-#: src/extract/extract_cli_parser.cpp:222
+#: src/extract/extract_cli_parser.cpp:235
 #, boost-format
 msgid "Unknown mode '%1%'.\n"
 msgstr "Невідомий режим '%1%'.\n"
@@ -11414,7 +11414,7 @@ msgstr ""
 "Невідомий/непідтримуваний формат аудіо 0x%|1$04x| для цієї звукової "
 "доріжки.\n"
 
-#: src/extract/extract_cli_parser.cpp:231
+#: src/extract/extract_cli_parser.cpp:244
 #, boost-format
 msgid "Unrecognized command line option '%1%'.\n"
 msgstr "Нерозпізнані опції командного рядка '%1%'.\n"
@@ -11454,7 +11454,7 @@ msgstr "Оновити параметри вкладення"
 msgid "Updating the '%1%' element failed. Reason:"
 msgstr "Оновлення елемента '%1%' завершилось невдало. Причина:"
 
-#: src/extract/extract_cli_parser.cpp:44
+#: src/extract/extract_cli_parser.cpp:45
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:24
 msgid "Usage"
 msgstr "Використання"
@@ -11492,6 +11492,12 @@ msgstr "Використовувати це тільки для тестуван
 #: src/mkvtoolnix-gui/merge/output.cpp:154
 msgid "Useful e.g. when you want exactly two files."
 msgstr "Корисно, наприклад, якщо ви хочете точно два файли."
+
+#: src/extract/extract_cli_parser.cpp:99
+msgid ""
+"Uses the chapter names of the specified language for extraction instead of "
+"the first chapter name found."
+msgstr ""
 
 #: src/merge/mkvmerge.cpp:1382
 msgid ""
@@ -11847,11 +11853,11 @@ msgstr ""
 msgid "Write durations for all blocks."
 msgstr "Записувати тривалість для всіх блоків."
 
-#: src/extract/extract_cli_parser.cpp:89
+#: src/extract/extract_cli_parser.cpp:90
 msgid "Write the attachment with the ID 'AID' to 'outname'."
 msgstr "Записати вкладення з ID 'AID' до 'outname'."
 
-#: src/extract/extract_cli_parser.cpp:72
+#: src/extract/extract_cli_parser.cpp:73
 msgid "Write track with the ID TID to the file 'out'."
 msgstr "Записати доріжку з ID TID в файл 'out'."
 
@@ -12667,68 +12673,68 @@ msgstr "Документація mkv&merge"
 msgid "mkvInfo"
 msgstr "mkvInfo"
 
-#: src/extract/extract_cli_parser.cpp:52
+#: src/extract/extract_cli_parser.cpp:53
 msgid "mkvextract <-h|-V>"
 msgstr "mkvextract <-h|-V>"
 
-#: src/extract/extract_cli_parser.cpp:42
+#: src/extract/extract_cli_parser.cpp:43
 msgid "mkvextract <mode> <source-filename> [options] <extraction-spec>"
 msgstr "mkvextract <режим> <назва вхідного файлу> [опції] <опції витягнення>"
 
-#: src/extract/extract_cli_parser.cpp:93
+#: src/extract/extract_cli_parser.cpp:94
 msgid "mkvextract attachments \"a movie.mkv\" 4:cover.jpg"
 msgstr "mkvextract attachments \"фільм.mkv\" 4:обкладинка.jpg"
 
-#: src/extract/extract_cli_parser.cpp:47
+#: src/extract/extract_cli_parser.cpp:48
 msgid "mkvextract attachments <inname> [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "mkvextract attachments <inname> [опції] [AID1:out1 [AID2:out2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:101
+#: src/extract/extract_cli_parser.cpp:103
 msgid "mkvextract chapters \"a movie.mkv\" > movie_chapters.xml"
 msgstr "mkvextract chapters \"фільм.mkv\" > розділи_фільму.xml"
 
-#: src/extract/extract_cli_parser.cpp:48
+#: src/extract/extract_cli_parser.cpp:49
 msgid "mkvextract chapters <inname> [options]"
 msgstr "mkvextract chapters <inname> [опції]"
 
-#: src/extract/extract_cli_parser.cpp:125
+#: src/extract/extract_cli_parser.cpp:127
 msgid "mkvextract cues \"a movie.mkv\" 0:cues_track0.txt"
 msgstr "mkvextract cues \"фільм.mkv\" 0:доріжка_cue0.txt"
 
-#: src/extract/extract_cli_parser.cpp:51
+#: src/extract/extract_cli_parser.cpp:52
 msgid "mkvextract cues <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract cues <inname> [опції] [TID1:out1 [TID2:out2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:110
+#: src/extract/extract_cli_parser.cpp:112
 msgid "mkvextract cuesheet \"audiofile.mka\" > audiofile.cue"
 msgstr "mkvextract cuesheet \"аудіофайл.mka\" > аудіофайл.cue"
 
-#: src/extract/extract_cli_parser.cpp:49
+#: src/extract/extract_cli_parser.cpp:50
 msgid "mkvextract cuesheet <inname> [options]"
 msgstr "mkvextract cuesheet <inname> [опції]"
 
-#: src/extract/extract_cli_parser.cpp:84
+#: src/extract/extract_cli_parser.cpp:85
 msgid "mkvextract tags \"a movie.mkv\" > movie_tags.xml"
 msgstr "mkvextract tags \"фільм.mkv\" > теги_фільма.xml"
 
-#: src/extract/extract_cli_parser.cpp:46
+#: src/extract/extract_cli_parser.cpp:47
 msgid "mkvextract tags <inname> [options]"
 msgstr "mkvextract tags <inname> [опції]"
 
-#: src/extract/extract_cli_parser.cpp:118
+#: src/extract/extract_cli_parser.cpp:120
 msgid "mkvextract timecodes_v2 \"a movie.mkv\" 1:timecodes_track1.txt"
 msgstr "mkvextract timecodes_v2 \"фільм.mkv\" 1:тайм-коди_доріжка1.txt"
 
-#: src/extract/extract_cli_parser.cpp:50
+#: src/extract/extract_cli_parser.cpp:51
 msgid "mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract timecodes_v2 <inname> [TID1:out1 [TID2:out2 ...]]"
 
-#: src/extract/extract_cli_parser.cpp:76
+#: src/extract/extract_cli_parser.cpp:77
 msgid "mkvextract tracks \"a movie.mkv\" 2:audio.ogg -c ISO8859-1 3:subs.srt"
 msgstr ""
 "mkvextract tracks \"фільм.mkv\" 2:аудіо.ogg -c ISO8859-1 3:субтитри.srt"
 
-#: src/extract/extract_cli_parser.cpp:45
+#: src/extract/extract_cli_parser.cpp:46
 msgid "mkvextract tracks <inname> [options] [TID1:out1 [TID2:out2 ...]]"
 msgstr "mkvextract tracks <inname> [опції] [TID1:out1 [TID2:out2 ...]]"
 
