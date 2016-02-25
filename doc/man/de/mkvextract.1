@@ -276,17 +276,16 @@ OGM\-Werkzeugen benutzte Format (CHAPTER01=\&..., CHAPTER01NAME=\&...)\&. In die
 XML\-Format ausgegeben\&.
 .RE
 .PP
-\fB\-\-simple\-language\fR \fIlanguage\fR
+\fB\-\-simple\-language\fR \fISprache\fR
 .RS 4
-If the simple format is enabled then
+Falls das einfache Kapitelformat aktiviert ist, gibt
 \fBmkvextract\fR(1)
-will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name\&. By default
+pro gefundenem Kapitel genau einen Eintrag ausgeben, auch wenn das Kapitel mehrere Kapitelnamen besitzt\&. Standardm\(:a\(ssig gibt
 \fBmkvextract\fR(1)
-will use the first chapter name found for each atom regardless of its language\&.
+f\(:ur jedes Kapitel den jeweils als erstes gefundenen Namen unabh\(:angig von seiner Sprache aus\&.
 .sp
-Using this option allows the user to determine which chapter names are output if atoms contain more than one chapter name\&. The
-\fIlanguage\fR
-parameter must be an ISO 639\-1 or ISO 639\-2 code\&.
+Das Benutzen dieser Option erlaubt es der BenutzerIn festzulegen, welche Kapitelnamen ausgegeben werden, falls die Kapitel mehr als einen Namen besitzen\&. Der
+\fISprache\fR\-Parameter muss ein ISO\-639\-1\- oder ISO\-639\-2\-Code sein\&.
 .RE
 .PP
 Die extrahierten Kapitel werden auf die Konsole geschrieben, falls die Ausgabe nicht umgeleitet ist (Einzelheiten finden Sie im Abschnitt \(:uber
