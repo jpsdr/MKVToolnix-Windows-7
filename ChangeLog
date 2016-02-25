@@ -1,3 +1,17 @@
+2016-02-25  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvextract: several issues regarding the extraction of chapters
+        in the simple format have been fixed: if multiple names with
+        different languages were present then an entry had been written
+        for each name; the total number of entries written was wrong; the
+        wrong entries were written.
+
+        The new code only writes the first name found from the top-most
+        chapter atoms of all editions. Chapters flagged as hidden or as
+        not enabled are not extracted at all.
+
+        Fixes the bug part of #1610.
+
 2016-02-24  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: new chapter editor feature: added an option to

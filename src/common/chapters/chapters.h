@@ -67,7 +67,7 @@ extern std::string g_cue_to_chapter_name_format;
 bool probe_cue_chapters(mm_text_io_c *in);
 kax_chapters_cptr parse_cue_chapters(mm_text_io_c *in, int64_t min_tc, int64_t max_tc, int64_t offset, const std::string &language, const std::string &charset, std::unique_ptr<KaxTags> *tags = nullptr);
 
-void write_chapters_simple(int &chapter_num, KaxChapters *chapters, mm_io_c *out);
+std::size_t write_chapters_simple(KaxChapters &chapters, mm_io_c &out, boost::optional<std::string> const &language_to_extract);
 
 bool select_chapters_in_timeframe(KaxChapters *chapters, int64_t min_tc, int64_t max_tc, int64_t offset);
 

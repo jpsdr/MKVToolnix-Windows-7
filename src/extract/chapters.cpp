@@ -48,8 +48,6 @@ extract_chapters(const std::string &file_name,
   if (!chapter_format_simple)
     mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, *g_mm_stdio);
 
-  else {
-    int dummy = 1;
-    write_chapters_simple(dummy, chapters, g_mm_stdio.get());
-  }
+  else
+    write_chapters_simple(*chapters, *g_mm_stdio.get(), boost::none);
 }

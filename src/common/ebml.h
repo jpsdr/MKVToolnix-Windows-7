@@ -328,7 +328,7 @@ FixMandatoryElement(EbmlMaster *master) {
 template<typename Telement,
          typename Tvalue = decltype(Telement().GetValue())>
 Tvalue
-FindChildValue(EbmlMaster &master,
+FindChildValue(EbmlMaster const &master,
                Tvalue const &default_value = Tvalue{}) {
   auto child = FindChild<Telement>(master);
   return child ? static_cast<Tvalue>(child->GetValue()) : default_value;
@@ -337,14 +337,14 @@ FindChildValue(EbmlMaster &master,
 template<typename Telement,
          typename Tvalue = decltype(Telement().GetValue())>
 Tvalue
-FindChildValue(EbmlMaster *master,
+FindChildValue(EbmlMaster const *master,
                Tvalue const &default_value = Tvalue{}) {
   return FindChildValue<Telement>(*master, default_value);
 }
 
 template<typename T>
 memory_cptr
-FindChildValue(EbmlMaster &master,
+FindChildValue(EbmlMaster const &master,
                bool clone = true,
                typename std::enable_if< std::is_base_of<EbmlBinary, T>::value >::type * = nullptr) {
   auto child = FindChild<T>(master);
@@ -355,7 +355,7 @@ FindChildValue(EbmlMaster &master,
 
 template<typename T>
 memory_cptr
-FindChildValue(EbmlMaster *master,
+FindChildValue(EbmlMaster const *master,
                bool clone = true,
                typename std::enable_if< std::is_base_of<EbmlBinary, T>::value >::type * = nullptr) {
   return FindChildValue<T>(*master, clone);
