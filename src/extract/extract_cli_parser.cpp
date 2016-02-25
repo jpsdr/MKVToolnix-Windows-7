@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/ebml.h"
+#include "common/iso639.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
@@ -95,6 +96,7 @@ extract_cli_parser_c::init_parser() {
   add_section_header(YT("Chapter extraction"));
   add_information(YT("The fourth mode extracts the chapters and converts them to XML. The output is written to the standard output. The output can be used as a source for mkvmerge."));
   OPT("s|simple", set_simple, YT("Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."));
+  OPT("simple-language=language", set_simple_language, YT("Uses the chapter names of the specified language for extraction instead of the first chapter name found."));
 
   add_section_header(YT("Example"));
 
@@ -180,6 +182,17 @@ void
 extract_cli_parser_c::set_simple() {
   assert_mode(options_c::em_chapters);
   m_options.m_simple_chapter_format = true;
+}
+
+void
+extract_cli_parser_c::set_simple_language() {
+  assert_mode(options_c::em_chapters);
+
+  auto language_idx = map_to_iso639_2_code(m_next_arg);
+  if (0 > language_idx)
+    mxerror(boost::format(Y("'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n")) % m_next_arg);
+
+  m_options.m_simple_chapter_language.reset(g_iso639_languages[language_idx].iso639_2_code);
 }
 
 void

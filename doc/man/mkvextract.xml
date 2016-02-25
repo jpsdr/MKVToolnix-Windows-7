@@ -383,6 +383,21 @@ source.mkv
       </para>
      </listitem>
     </varlistentry>
+
+    <varlistentry>
+     <term><option>--simple-language</option> <parameter>language</parameter></term>
+     <listitem>
+      <para>
+       If the simple format is enabled then &mkvextract; will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name.
+       By default &mkvextract; will use the first chapter name found for each atom regardless of its language.
+      </para>
+
+      <para>
+       Using this option allows the user to determine which chapter names are output if atoms contain more than one chapter name.
+       The <parameter>language</parameter> parameter must be an ISO 639-1 or ISO 639-2 code.
+      </para>
+     </listitem>
+    </varlistentry>
    </variablelist>
 
    <para>

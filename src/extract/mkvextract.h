@@ -51,7 +51,7 @@ void find_and_verify_track_uids(KaxTracks &tracks, std::vector<track_spec_t> &ts
 
 bool extract_tracks(const std::string &file_name, std::vector<track_spec_t> &tspecs, kax_analyzer_c::parse_mode_e parse_mode);
 void extract_tags(const std::string &file_name, kax_analyzer_c::parse_mode_e parse_mode);
-void extract_chapters(const std::string &file_name, bool chapter_format_simple, kax_analyzer_c::parse_mode_e parse_mode);
+void extract_chapters(const std::string &file_name, bool chapter_format_simple, kax_analyzer_c::parse_mode_e parse_mode, boost::optional<std::string> const &language_to_extract);
 void extract_attachments(const std::string &file_name, std::vector<track_spec_t> &tracks, kax_analyzer_c::parse_mode_e parse_mode);
 void extract_cuesheet(const std::string &file_name, kax_analyzer_c::parse_mode_e parse_mode);
 void write_cuesheet(std::string file_name, KaxChapters &chapters, KaxTags &tags, int64_t tuid, mm_io_c &out);

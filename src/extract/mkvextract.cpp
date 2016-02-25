@@ -124,7 +124,7 @@ main(int argc,
     extract_attachments(options.m_file_name, options.m_tracks, options.m_parse_mode);
 
   else if (options_c::em_chapters == options.m_extraction_mode)
-    extract_chapters(options.m_file_name, options.m_simple_chapter_format, options.m_parse_mode);
+    extract_chapters(options.m_file_name, options.m_simple_chapter_format, options.m_parse_mode, options.m_simple_chapter_language);
 
   else if (options_c::em_cues == options.m_extraction_mode)
     extract_cues(options.m_file_name, options.m_tracks, options.m_parse_mode);

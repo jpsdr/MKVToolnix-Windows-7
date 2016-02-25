@@ -275,6 +275,19 @@ OGM
 (CAPITULO01=\&.\&.\&., CAPITULO01NOMBRE=\&.\&.\&.)\&. En este modo alguna informaci\('on ser\('a descartada\&. Por defecto la salida de los cap\('itulos est\('an en formato XML\&.
 .RE
 .PP
+\fB\-\-simple\-language\fR \fIlanguage\fR
+.RS 4
+If the simple format is enabled then
+\fBmkvextract\fR(1)
+will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name\&. By default
+\fBmkvextract\fR(1)
+will use the first chapter name found for each atom regardless of its language\&.
+.sp
+Using this option allows the user to determine which chapter names are output if atoms contain more than one chapter name\&. The
+\fIlanguage\fR
+parameter must be an ISO 639\-1 or ISO 639\-2 code\&.
+.RE
+.PP
 Los cap\('itulos extra\('idos se escriben en la consola a menos que la salida sea redirigida (vea la secci\('on sobre
 redirecci\('on de salida
 para m\('as detalles)\&.

@@ -36,7 +36,8 @@ using namespace libmatroska;
 void
 extract_chapters(const std::string &file_name,
                  bool chapter_format_simple,
-                 kax_analyzer_c::parse_mode_e parse_mode) {
+                 kax_analyzer_c::parse_mode_e parse_mode,
+                 boost::optional<std::string> const &language_to_extract) {
   auto analyzer           = open_and_analyze(file_name, parse_mode);
   ebml_master_cptr master = analyzer->read_all(EBML_INFO(KaxChapters));
   if (!master)
@@ -49,5 +50,5 @@ extract_chapters(const std::string &file_name,
     mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, *g_mm_stdio);
 
   else
-    write_chapters_simple(*chapters, *g_mm_stdio.get(), boost::none);
+    write_chapters_simple(*chapters, *g_mm_stdio.get(), language_to_extract);
 }

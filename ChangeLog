@@ -1,5 +1,14 @@
 2016-02-25  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvextract: enhancement: when extracting chapters in the simple
+        format the user can use the new option »--simple-language …« for
+        selecting the chapter names that are output. Normally the first
+        chapter name found in each atom is used. With this option
+        mkvextract looks for a chapter name whose language matches the
+        specified one.
+
+        Implements the feature enhancement part of #1610.
+
         * mkvextract: several issues regarding the extraction of chapters
         in the simple format have been fixed: if multiple names with
         different languages were present then an entry had been written

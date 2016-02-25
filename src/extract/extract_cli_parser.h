@@ -49,6 +49,7 @@ protected:
   void set_raw();
   void set_fullraw();
   void set_simple();
+  void set_simple_language();
   void set_mode_or_extraction_spec();
   void set_extraction_mode();
   void add_extraction_spec();
