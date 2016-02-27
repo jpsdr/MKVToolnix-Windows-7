@@ -53,6 +53,15 @@ display_update_element_result(const EbmlCallbacks &callbacks,
                   % Y("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file.")).str();
       break;
 
+    case kax_analyzer_c::uer_error_fixing_last_element_unknown_size_failed:
+      message += (boost::format("%1% %2% %3% %4% %5%")
+                  % Y("The Matroska file's last element is set to an unknown size.")
+                  % Y("Due to the particular structure of the file this situation cannot be fixed automatically.")
+                  % Y("The file can be fixed by re-muxing the file with mkvmerge.")
+                  % Y("The process will be aborted.")
+                  % Y("The file has not been modified.")).str();
+      break;
+
     default:
       message += Y("An unknown error occured. The file has been modified.");
   }

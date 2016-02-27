@@ -1,3 +1,11 @@
+2016-02-27  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvpropedit, MKVToolNix GUI's header editor: bug fix: fixed the
+        handling of files where the last level 1 element has an unknown
+        size. The programs will now either fix this element to have a
+        known size or abort the process with an appropriate error message
+        but without modifying the file. Fixes #1601.
+
 2016-02-25  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvextract: enhancement: when extracting chapters in the simple

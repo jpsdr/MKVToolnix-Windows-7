@@ -35,17 +35,19 @@ public:
   EbmlId m_id;
   uint64_t m_pos;
   int64_t m_size;
+  bool m_size_known;
 
 public:                         // Static functions
-  static kax_analyzer_data_cptr create(const EbmlId id, uint64_t pos, int64_t size) {
-    return kax_analyzer_data_cptr(new kax_analyzer_data_c(id, pos, size));
+  static kax_analyzer_data_cptr create(const EbmlId id, uint64_t pos, int64_t size, bool size_known = true) {
+    return std::make_shared<kax_analyzer_data_c>(id, pos, size, size_known);
   }
 
 public:
-  kax_analyzer_data_c(const EbmlId id, uint64_t pos, int64_t size)
-    : m_id(id)
-    , m_pos(pos)
-    , m_size(size)
+  kax_analyzer_data_c(const EbmlId id, uint64_t pos, int64_t size, bool size_known)
+    : m_id{id}
+    , m_pos{pos}
+    , m_size{size}
+    , m_size_known{size_known}
   {
   }
 
@@ -79,6 +81,7 @@ public:
     uer_error_not_indexable,
     uer_error_opening_for_reading,
     uer_error_opening_for_writing,
+    uer_error_fixing_last_element_unknown_size_failed,
     uer_error_unknown,
   };
 
@@ -98,6 +101,7 @@ private:
   mm_io_c *m_file{};
   bool m_close_file{true};
   std::shared_ptr<KaxSegment> m_segment;
+  uint64_t m_segment_end{};
   std::map<int64_t, bool> m_meta_seeks_by_position;
   EbmlStream *m_stream{};
   debugging_option_c m_debug{"kax_analyzer"};
@@ -195,6 +199,7 @@ protected:
   virtual void read_all_meta_seeks();
   virtual void read_meta_seek(uint64_t pos, std::map<int64_t, bool> &positions_found);
   virtual void fix_element_sizes(uint64_t file_size);
+  virtual void fix_unknown_size_for_last_level1_element();
 
 protected:
   virtual bool process_internal();

@@ -62,7 +62,7 @@ kax_analyzer_data_c::to_string() const {
     name               = (boost::format(format)        %  EBML_ID_VALUE(m_id)).str();
   }
 
-  return (boost::format("%1% size %2% at %3%") % name % m_size % m_pos).str();
+  return (boost::format("%1% size %2%%4% at %3%") % name % m_size % m_pos % (m_size_known ? "" : " (unknown)")).str();
 }
 
 kax_analyzer_c::kax_analyzer_c(std::string file_name)
@@ -306,7 +306,7 @@ kax_analyzer_c::process_internal() {
   bool aborted         = false;
   bool cluster_found   = false;
   bool meta_seek_found = false;
-  auto segment_end     = m_segment->IsFiniteSize() ? m_segment->GetElementPosition() + m_segment->HeadSize() + m_segment->GetSize() : m_file->get_size();
+  m_segment_end        = m_segment->IsFiniteSize() ? m_segment->GetElementPosition() + m_segment->HeadSize() + m_segment->GetSize() : m_file->get_size();
   EbmlElement *l1      = nullptr;
 
   // In certain situations the caller doesn't way to have to pay the
@@ -318,14 +318,14 @@ kax_analyzer_c::process_internal() {
     m_file->setFilePointer(std::max<uint64_t>(*m_parser_start_position, m_segment->GetElementPosition() + m_segment->HeadSize()));
 
   // We've got our segment, so let's find all level 1 elements.
-  while (m_file->getFilePointer() < segment_end) {
+  while (m_file->getFilePointer() < m_segment_end) {
     if (!l1)
       l1 = m_stream->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true, 1);
 
     if (!l1 || (0 < upper_lvl_el))
       break;
 
-    m_data.push_back(kax_analyzer_data_c::create(EbmlId(*l1), l1->GetElementPosition(), l1->ElementSize(true)));
+    m_data.push_back(kax_analyzer_data_c::create(EbmlId(*l1), l1->GetElementPosition(), l1->ElementSize(true), l1->IsFiniteSize()));
 
     cluster_found   |= Is<KaxCluster>(l1);
     meta_seek_found |= Is<KaxSeekHead>(l1);
@@ -422,6 +422,7 @@ kax_analyzer_c::update_element(EbmlElement *e,
     placement_strategy_e strategy = get_placement_strategy_for(e);
 
     call_and_validate({},                                         "update_element_0");
+    call_and_validate(fix_unknown_size_for_last_level1_element(), "update_element_0_1");
     call_and_validate(overwrite_all_instances(EbmlId(*e)),        "update_element_1");
     call_and_validate(merge_void_elements(),                      "update_element_2");
     call_and_validate(write_element(e, write_defaults, strategy), "update_element_3");
@@ -447,11 +448,12 @@ kax_analyzer_c::remove_elements(EbmlId const &id) {
   try {
     reopen_file_for_writing();
 
-    call_and_validate({},                          "remove_elements_0");
-    call_and_validate(overwrite_all_instances(id), "remove_elements_1");
-    call_and_validate(merge_void_elements(),       "remove_elements_2");
-    call_and_validate(remove_from_meta_seeks(id),  "remove_elements_3");
-    call_and_validate(merge_void_elements(),       "remove_elements_4");
+    call_and_validate({},                                         "remove_elements_0");
+    call_and_validate(fix_unknown_size_for_last_level1_element(), "remove_elements_1");
+    call_and_validate(overwrite_all_instances(id),                "remove_elements_2");
+    call_and_validate(merge_void_elements(),                      "remove_elements_3");
+    call_and_validate(remove_from_meta_seeks(id),                 "remove_elements_4");
+    call_and_validate(merge_void_elements(),                      "remove_elements_5");
 
   } catch (kax_analyzer_c::update_element_result_e result) {
     debug_dump_elements_maybe("update_element_exception");
@@ -1391,6 +1393,37 @@ kax_analyzer_c::fix_element_sizes(uint64_t file_size) {
   for (i = 0; m_data.size() > i; ++i)
     if (-1 == m_data[i]->m_size)
       m_data[i]->m_size = ((i + 1) < m_data.size() ? m_data[i + 1]->m_pos : file_size) - m_data[i]->m_pos;
+}
+
+void
+kax_analyzer_c::fix_unknown_size_for_last_level1_element() {
+  if (!m_data.size())
+    return;
+
+  auto &data = *m_data.back();
+  if (data.m_size_known)
+    return;
+
+  mxinfo(boost::format("chunky bacon! data %1% seg end %2%\n") % data.to_string() % m_segment_end);
+
+  auto elt = read_element(m_data.size() - 1);
+  if (!elt)
+    throw uer_error_fixing_last_element_unknown_size_failed;
+
+  auto head_size       = static_cast<unsigned int>(elt->HeadSize());
+  auto actual_size     = m_segment_end - (elt->GetElementPosition() + head_size);
+  auto required_bytes  = CodedSizeLength(actual_size, 0);
+  auto available_bytes = elt->GetSizeLength();
+
+  if ((available_bytes < required_bytes) || !elt->ForceSize(actual_size))
+    throw uer_error_fixing_last_element_unknown_size_failed;
+
+  elt->OverwriteHead(*m_stream, true);
+
+  data.m_size       = actual_size + head_size;
+  data.m_size_known = true;
+
+  log_debug_message(boost::format("fix_unknown_size_for_last_level1_element: element fixed to new payload size %1% head size %2% segment end %3%\n") % actual_size % head_size % m_segment_end);
 }
 
 kax_analyzer_c::placement_strategy_e

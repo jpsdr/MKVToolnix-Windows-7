@@ -96,6 +96,17 @@ QtKaxAnalyzer::displayUpdateElementResult(QWidget *parent,
                             .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file.")));
       return;
 
+    case kax_analyzer_c::uer_error_fixing_last_element_unknown_size_failed:
+      QMessageBox::critical(parent, QY("Error writing Matroska file"),
+                            Q("%1 %2 %3 %4 %5 %6")
+                            .arg(message)
+                            .arg(QY("The Matroska file's last element is set to an unknown size."))
+                            .arg(QY("Due to the particular structure of the file this situation cannot be fixed automatically."))
+                            .arg(QY("The file can be fixed by re-muxing the file with mkvmerge."))
+                            .arg(QY("The process will be aborted."))
+                            .arg(QY("The file has not been modified.")));
+      return;
+
     default:
       QMessageBox::critical(parent, QY("Internal program error"), Q("%1 %2").arg(message).arg(QY("An unknown error occured. The file has been modified.")));
   }
