@@ -317,11 +317,11 @@ Tool::retranslateUi() {
   m_startImmediatelyAction->setText(QY("Start jobs &immediately"));
   m_removeAction->setText(QY("&Remove jobs"));
   m_openFolderAction->setText(QY("&Open folder"));
-  m_editAndRemoveAction->setText(QY("&Edit in corresponding tool and remove from queue"));
+  m_editAndRemoveAction->setText(QY("E&dit in corresponding tool and remove from queue"));
 
-  m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge warnings"));
-  m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge errors"));
-  m_acknowledgeSelectedWarningsErrorsAction->setText(QY("Acknowledge warnings and errors"));
+  m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge &warnings"));
+  m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge &errors"));
+  m_acknowledgeSelectedWarningsErrorsAction->setText(QY("&Acknowledge warnings and errors"));
 
   setupToolTips();
 }
