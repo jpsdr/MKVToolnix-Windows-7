@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-25 22:43+0100\n"
+"POT-Creation-Date: 2016-02-27 15:48+0100\n"
 "PO-Revision-Date: 2015-12-16 10:26+0100\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -2622,8 +2622,8 @@ msgstr "轉義的檔名，對應上一剪輯。"
 msgid "An exception occurred when writing the output file."
 msgstr "寫入輸出檔案時發生異常狀況。"
 
-#: src/common/qt_kax_analyzer.cpp:100
-#: src/propedit/propedit.cpp:45
+#: src/common/qt_kax_analyzer.cpp:111
+#: src/propedit/propedit.cpp:66
 msgid "An unknown error occured. The file has been modified."
 msgstr "發生未知錯誤。檔案已修改。"
 
@@ -3932,7 +3932,7 @@ msgstr ""
 msgid "Done scanning playlists.\n"
 msgstr "掃描播放清單完成。\n"
 
-#: src/propedit/propedit.cpp:134
+#: src/propedit/propedit.cpp:155
 msgid "Done.\n"
 msgstr "完成。\n"
 
@@ -3951,6 +3951,11 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:477
 msgid "Drops the lossless extensions from an audio track and keeps only its lossy core."
 msgstr "放棄音軌的無損擴充且保留本身的有損核心。"
+
+#: src/common/qt_kax_analyzer.cpp:104
+#: src/propedit/propedit.cpp:59
+msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
 msgid "Duration"
@@ -4048,7 +4053,7 @@ msgstr "版本/章節"
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
 msgstr "用逗號區隔開要在「所有」選擇章節之後分割的章節編號清單"
 
-#: src/propedit/propedit.cpp:76
+#: src/propedit/propedit.cpp:97
 #, boost-format
 msgid "Element %1% is written.\n"
 msgstr "元件 %1% 已寫入。\n"
@@ -4186,6 +4191,7 @@ msgstr "儲存資訊發生錯誤"
 #: src/common/qt_kax_analyzer.cpp:66
 #: src/common/qt_kax_analyzer.cpp:72
 #: src/common/qt_kax_analyzer.cpp:92
+#: src/common/qt_kax_analyzer.cpp:100
 msgid "Error writing Matroska file"
 msgstr "寫入 Matroska 檔時發生錯誤"
 
@@ -4970,7 +4976,7 @@ msgstr "交錯的: %1%"
 msgid "Internal bug: tracks.cpp SSA #1. %1%"
 msgstr "內部錯誤: tracks.cpp SSA #1。 %1%"
 
-#: src/common/qt_kax_analyzer.cpp:100
+#: src/common/qt_kax_analyzer.cpp:111
 msgid "Internal program error"
 msgstr "內部程式錯誤"
 
@@ -5927,7 +5933,7 @@ msgstr "沒有為檔案 %1% (「%2%」) 指定添加對應。將使用預設對�
 msgid "No attachment matched the spec '%1%'.\n"
 msgstr "沒有符合形式「%1%」的附件。\n"
 
-#: src/propedit/propedit.cpp:137
+#: src/propedit/propedit.cpp:158
 #, fuzzy
 msgid "No changes were made.\n"
 msgstr "未找到 cue。\n"
@@ -5998,7 +6004,7 @@ msgstr "沒有權限讀取、寫入或建立"
 msgid "No programs have been added yet."
 msgstr "尚無任務開始。"
 
-#: src/common/kax_analyzer.cpp:1448
+#: src/common/kax_analyzer.cpp:1481
 #, fuzzy, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "無法解析剪輯 UID: %1"
@@ -6529,6 +6535,8 @@ msgstr ""
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:107
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:118
+#: src/propedit/propedit.cpp:47
+#: src/propedit/propedit.cpp:53
 msgid "Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."
 msgstr ""
 
@@ -6609,7 +6617,7 @@ msgstr "進度: 100%\n"
 msgid "Progress: 100%%%1%"
 msgstr "進度: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1507
+#: src/common/kax_analyzer.cpp:1540
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "進度: [%1%%2%] %3%%%"
@@ -7909,6 +7917,11 @@ msgstr "Matroska 檔案已被修改過，但無法更新變換定位項目。這
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 msgstr "Matroska 檔已經修改過，但變換定位項目無法更新。這表示播放器可能很難找到該元件。請使用您喜歡的播放器檢查此檔案。"
 
+#: src/common/qt_kax_analyzer.cpp:103
+#: src/propedit/propedit.cpp:58
+msgid "The Matroska file's last element is set to an unknown size."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:1378
 #, boost-format
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length %1%'.\n"
@@ -8024,7 +8037,7 @@ msgstr "此 XML 標籤檔案「%1%」含有一個錯誤: %2%\n"
 msgid "The audio/video synchronization may have been lost."
 msgstr ""
 
-#: src/propedit/propedit.cpp:130
+#: src/propedit/propedit.cpp:151
 msgid "The changes are written to the file.\n"
 msgstr "將變更寫入檔案。\n"
 
@@ -8211,13 +8224,13 @@ msgstr "檔案 »%1« 已被修改過。你確定要重新載入嗎？所有變�
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "無法附加檔案「%1%」，因為它不存在或無法讀取。\n"
 
-#: src/propedit/propedit.cpp:112
+#: src/propedit/propedit.cpp:133
 #, boost-format
 msgid "The file '%1%' could not be opened for reading and writing, or a read/write operation on it failed: %2%.\n"
 msgstr "無法開啟檔案「%1%」進行讀取和寫入，或是讀取/寫入的操作失敗: %2%。\n"
 
-#: src/common/kax_analyzer.cpp:1438
-#: src/common/kax_analyzer.cpp:1441
+#: src/common/kax_analyzer.cpp:1471
+#: src/common/kax_analyzer.cpp:1474
 #, fuzzy, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "無法開啟檔案「%1%」進行讀取: %2%。\n"
@@ -8247,7 +8260,7 @@ msgstr "無法開啟檔案「%1%」進行讀取: %2%。\n"
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "無法開啟檔案「%1%」進行寫入: %2%。\n"
 
-#: src/common/kax_analyzer.cpp:1444
+#: src/common/kax_analyzer.cpp:1477
 #, fuzzy, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "這個檔案無法開啟或解析。\n"
@@ -8298,6 +8311,11 @@ msgstr "你加入的檔案「%1」是播放清單。"
 msgid "The file (%1) is too big (%2)."
 msgstr "此 XML 標籤檔案「%1%」含有一個錯誤: %2%\n"
 
+#: src/common/qt_kax_analyzer.cpp:105
+#: src/propedit/propedit.cpp:60
+msgid "The file can be fixed by re-muxing the file with mkvmerge."
+msgstr ""
+
 #: src/merge/reader_detection_and_creation.cpp:408
 msgid "The file content does not match its format type and was not recognized."
 msgstr "檔案內容不符合本身的格式類型而無法辨認。"
@@ -8308,12 +8326,14 @@ msgid "The file could not be opened for reading, or there was not enough data to
 msgstr "無法開啟此檔案進行讀取，或者沒有足夠的資料進行分析該檔案的表頭。"
 
 #: src/common/qt_kax_analyzer.cpp:87
+#: src/propedit/propedit.cpp:46
 #, fuzzy
 msgid "The file could not be opened for reading."
 msgstr "無法開啟此檔案進行寫入。"
 
 #: src/common/qt_kax_analyzer.cpp:95
 #: src/info/qt_ui.cpp:104
+#: src/propedit/propedit.cpp:52
 msgid "The file could not be opened for writing."
 msgstr "無法開啟此檔案進行寫入。"
 
@@ -8331,6 +8351,8 @@ msgstr "在表頭編輯器讀取此檔案後，檔案已被其它程式更改。
 msgid "The file has been saved successfully."
 msgstr "儲存此檔案成功。"
 
+#: src/common/qt_kax_analyzer.cpp:107
+#: src/propedit/propedit.cpp:62
 #: src/propedit/propedit.h:18
 msgid "The file has not been modified."
 msgstr "此檔案並沒有被修改過。"
@@ -8352,7 +8374,7 @@ msgid "The file is an unsupported container format (%1)."
 msgstr "此檔案為不支援的容器格式 (%1)。"
 
 #: src/common/qt_kax_analyzer.cpp:37
-#: src/propedit/propedit.cpp:100
+#: src/propedit/propedit.cpp:121
 msgid "The file is being analyzed."
 msgstr "正在分析檔案。"
 
@@ -8707,6 +8729,11 @@ msgstr ""
 #, boost-format
 msgid "The previous UID was already given in '%1% %2%'.\n"
 msgstr "上一個 UID 已在「%1% %2%」給出。\n"
+
+#: src/common/qt_kax_analyzer.cpp:106
+#: src/propedit/propedit.cpp:61
+msgid "The process will be aborted."
+msgstr ""
 
 #: src/propedit/change.cpp:115
 #, boost-format
@@ -9127,7 +9154,7 @@ msgid "This file contains coordinates in the timecode lines. Such coordinates ar
 msgstr "此檔案時間軸中含有坐標。此類坐標不受 Matroska SRT 字幕格式的支援。坐標將被自動移除。\n"
 
 #: src/extract/mkvextract.cpp:65
-#: src/propedit/propedit.cpp:117
+#: src/propedit/propedit.cpp:138
 msgid "This file could not be opened or parsed.\n"
 msgstr "這個檔案無法開啟或解析。\n"
 

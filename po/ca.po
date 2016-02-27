@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.7.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-25 22:43+0100\n"
+"POT-Creation-Date: 2016-02-27 15:48+0100\n"
 "PO-Revision-Date: 2016-01-08 22:18+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2870,7 +2870,7 @@ msgstr ""
 msgid "An exception occurred when writing the output file."
 msgstr "S'ha produït una excepció en escriure el fitxer de sortida."
 
-#: src/common/qt_kax_analyzer.cpp:100 src/propedit/propedit.cpp:45
+#: src/common/qt_kax_analyzer.cpp:111 src/propedit/propedit.cpp:66
 msgid "An unknown error occured. The file has been modified."
 msgstr "S'ha produït un error desconegut. El fitxer ha estat modificat."
 
@@ -4308,7 +4308,7 @@ msgstr "No tornis a mostrar aquest missatge."
 msgid "Done scanning playlists.\n"
 msgstr "S'han escanejat les llistes de reproducció.\n"
 
-#: src/propedit/propedit.cpp:134
+#: src/propedit/propedit.cpp:155
 msgid "Done.\n"
 msgstr "Fet.\n"
 
@@ -4333,6 +4333,12 @@ msgid ""
 msgstr ""
 "Descarta les extensions sense pèrdua d'una pista d'àudio i només manté el "
 "seu nucli amb pèrdua."
+
+#: src/common/qt_kax_analyzer.cpp:104 src/propedit/propedit.cpp:59
+msgid ""
+"Due to the particular structure of the file this situation cannot be fixed "
+"automatically."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
 msgid "Duration"
@@ -4450,7 +4456,7 @@ msgstr ""
 "O bé la paraula «all» la qual selecciona tots els capítols o una llista "
 "separada per comes dels números dels capítols abans de realitzar la divisió."
 
-#: src/propedit/propedit.cpp:76
+#: src/propedit/propedit.cpp:97
 #, boost-format
 msgid "Element %1% is written.\n"
 msgstr "S'ha escrit l'element %1%.\n"
@@ -4599,7 +4605,7 @@ msgid "Error saving the information"
 msgstr "Error en desar la informació"
 
 #: src/common/qt_kax_analyzer.cpp:66 src/common/qt_kax_analyzer.cpp:72
-#: src/common/qt_kax_analyzer.cpp:92
+#: src/common/qt_kax_analyzer.cpp:92 src/common/qt_kax_analyzer.cpp:100
 msgid "Error writing Matroska file"
 msgstr "Error en escriure el fitxer Matroska"
 
@@ -5635,7 +5641,7 @@ msgstr "Entrellaçat: %1%"
 msgid "Internal bug: tracks.cpp SSA #1. %1%"
 msgstr "Error intern: tracks.cpp SSA núm. 1. %1%"
 
-#: src/common/qt_kax_analyzer.cpp:100
+#: src/common/qt_kax_analyzer.cpp:111
 msgid "Internal program error"
 msgstr "Error intern del programa"
 
@@ -6771,7 +6777,7 @@ msgstr ""
 msgid "No attachment matched the spec '%1%'.\n"
 msgstr "Cap adjunt coincideix amb l'especificació «%1%».\n"
 
-#: src/propedit/propedit.cpp:137
+#: src/propedit/propedit.cpp:158
 msgid "No changes were made.\n"
 msgstr "No s'ha realitzat cap canvi.\n"
 
@@ -6842,7 +6848,7 @@ msgstr "Sense permisos de lectura, escriptura o creació"
 msgid "No programs have been added yet."
 msgstr "Encara no s'ha afegit cap programa."
 
-#: src/common/kax_analyzer.cpp:1448
+#: src/common/kax_analyzer.cpp:1481
 #, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "No s'ha trobat l'UID del segment en el fitxer «%1%»."
@@ -7490,7 +7496,8 @@ msgstr ""
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:552
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:107
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:118 src/propedit/propedit.cpp:47
+#: src/propedit/propedit.cpp:53
 msgid ""
 "Possible reasons are: the file is not a Matroska file; the file is write-"
 "protected; the file is locked by another process; you do not have permission "
@@ -7574,7 +7581,7 @@ msgstr "Progrés: 100%\n"
 msgid "Progress: 100%%%1%"
 msgstr "Progrés: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1507
+#: src/common/kax_analyzer.cpp:1540
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Progrés: [%1%%2%] %3%%%"
@@ -9130,6 +9137,10 @@ msgstr ""
 "dificultats en trobar aquest element. Si us plau, useu el vostre reproductor "
 "preferit per a comprovar aquest fitxer."
 
+#: src/common/qt_kax_analyzer.cpp:103 src/propedit/propedit.cpp:58
+msgid "The Matroska file's last element is set to an unknown size."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:1378
 #, boost-format
 msgid ""
@@ -9264,7 +9275,7 @@ msgstr "L'adjunt (%1%) és massa gran (%2%)."
 msgid "The audio/video synchronization may have been lost."
 msgstr "La sincronització de l'àudio/vídeo es pot haver perdut."
 
-#: src/propedit/propedit.cpp:130
+#: src/propedit/propedit.cpp:151
 msgid "The changes are written to the file.\n"
 msgstr "Els canvis són escrits al fitxer.\n"
 
@@ -9532,7 +9543,7 @@ msgid ""
 msgstr ""
 "El fitxer «%1%» no es pot adjuntar perquè no existeix o no es pot llegir.\n"
 
-#: src/propedit/propedit.cpp:112
+#: src/propedit/propedit.cpp:133
 #, boost-format
 msgid ""
 "The file '%1%' could not be opened for reading and writing, or a read/write "
@@ -9541,7 +9552,7 @@ msgstr ""
 "El fitxer «%1%» no s'ha pogut obrir per a lectura i escriptura, o una de les "
 "operacions ha fallat: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1438 src/common/kax_analyzer.cpp:1441
+#: src/common/kax_analyzer.cpp:1471 src/common/kax_analyzer.cpp:1474
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura: %2%."
@@ -9564,7 +9575,7 @@ msgstr "El fitxer «%1%» no s'ha pogut obrir per a lectura: %2%.\n"
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "El fitxer «%1%» no s'ha pogut obrir per a escriptura: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1444
+#: src/common/kax_analyzer.cpp:1477
 #, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "El fitxer «%1%» no s'ha pogut obrir o analitzar."
@@ -9617,6 +9628,10 @@ msgstr "El fitxer «%1» que heu afegit és una llista de reproducció."
 msgid "The file (%1) is too big (%2)."
 msgstr "El fitxer (%1) és massa gran (%2)."
 
+#: src/common/qt_kax_analyzer.cpp:105 src/propedit/propedit.cpp:60
+msgid "The file can be fixed by re-muxing the file with mkvmerge."
+msgstr ""
+
 #: src/merge/reader_detection_and_creation.cpp:408
 msgid "The file content does not match its format type and was not recognized."
 msgstr ""
@@ -9632,12 +9647,13 @@ msgstr ""
 "El fitxer no s'ha pogut obrir per a lectura, o no hi ha prou dades per "
 "analitzar les seves capçaleres."
 
-#: src/common/qt_kax_analyzer.cpp:87
+#: src/common/qt_kax_analyzer.cpp:87 src/propedit/propedit.cpp:46
 #, fuzzy
 msgid "The file could not be opened for reading."
 msgstr "El fitxer no s'ha pogut obrir per a escriptura."
 
 #: src/common/qt_kax_analyzer.cpp:95 src/info/qt_ui.cpp:104
+#: src/propedit/propedit.cpp:52
 msgid "The file could not be opened for writing."
 msgstr "El fitxer no s'ha pogut obrir per a escriptura."
 
@@ -9661,6 +9677,7 @@ msgstr ""
 msgid "The file has been saved successfully."
 msgstr "El fitxer ha estat desat amb èxit."
 
+#: src/common/qt_kax_analyzer.cpp:107 src/propedit/propedit.cpp:62
 #: src/propedit/propedit.h:18
 msgid "The file has not been modified."
 msgstr "El fitxer no ha estat modificat."
@@ -9685,7 +9702,7 @@ msgstr ""
 msgid "The file is an unsupported container format (%1)."
 msgstr "El fitxer està en un format de contenidor no admès (%1)."
 
-#: src/common/qt_kax_analyzer.cpp:37 src/propedit/propedit.cpp:100
+#: src/common/qt_kax_analyzer.cpp:37 src/propedit/propedit.cpp:121
 msgid "The file is being analyzed."
 msgstr "S'està analitzant el fitxer."
 
@@ -10204,6 +10221,11 @@ msgstr ""
 #, boost-format
 msgid "The previous UID was already given in '%1% %2%'.\n"
 msgstr "L'UID anterior ja es va assignar a «%1% %2%».\n"
+
+#: src/common/qt_kax_analyzer.cpp:106 src/propedit/propedit.cpp:61
+#, fuzzy
+msgid "The process will be aborted."
+msgstr "Es tancaran els ajustaments del fusionat actuals."
 
 #: src/propedit/change.cpp:115
 #, boost-format
@@ -10865,7 +10887,7 @@ msgstr ""
 "coordenades no són admeses pel format de subtítols SRT al Matroska. Les "
 "coordenades seran suprimides automàticament.\n"
 
-#: src/extract/mkvextract.cpp:65 src/propedit/propedit.cpp:117
+#: src/extract/mkvextract.cpp:65 src/propedit/propedit.cpp:138
 msgid "This file could not be opened or parsed.\n"
 msgstr "Aquest fitxer no s'ha pogut obrir o analitzar.\n"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-25 22:43+0100\n"
+"POT-Creation-Date: 2016-02-27 15:48+0100\n"
 "PO-Revision-Date: 2016-01-10 15:02+0100\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -2859,7 +2859,7 @@ msgstr ""
 msgid "An exception occurred when writing the output file."
 msgstr "Сталася виняткова ситуація під час запису вихідного файлу."
 
-#: src/common/qt_kax_analyzer.cpp:100 src/propedit/propedit.cpp:45
+#: src/common/qt_kax_analyzer.cpp:111 src/propedit/propedit.cpp:66
 msgid "An unknown error occured. The file has been modified."
 msgstr "Сталася невідома помилка. Файл було змінено."
 
@@ -4272,7 +4272,7 @@ msgstr "Не відображати дане повідомлення знову
 msgid "Done scanning playlists.\n"
 msgstr "Сканування списків відтворення закінчено.\n"
 
-#: src/propedit/propedit.cpp:134
+#: src/propedit/propedit.cpp:155
 msgid "Done.\n"
 msgstr "Зроблено.\n"
 
@@ -4297,6 +4297,12 @@ msgid ""
 msgstr ""
 "Вилучає дані з інформацією стиснення без втрат, залишаючи лише ядро "
 "(стиснення з втратами). Застосовується лише до доріжок DTS."
+
+#: src/common/qt_kax_analyzer.cpp:104 src/propedit/propedit.cpp:59
+msgid ""
+"Due to the particular structure of the file this situation cannot be fixed "
+"automatically."
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
 msgid "Duration"
@@ -4412,7 +4418,7 @@ msgstr ""
 "Або слово 'all', при вказанні якого обираються всі розділи або список "
 "розділених комою номерів розділів, перед якими здійснювати розбиття."
 
-#: src/propedit/propedit.cpp:76
+#: src/propedit/propedit.cpp:97
 #, boost-format
 msgid "Element %1% is written.\n"
 msgstr "Елемент %1% записано.\n"
@@ -4557,7 +4563,7 @@ msgid "Error saving the information"
 msgstr "Помилка при збереженні інформації"
 
 #: src/common/qt_kax_analyzer.cpp:66 src/common/qt_kax_analyzer.cpp:72
-#: src/common/qt_kax_analyzer.cpp:92
+#: src/common/qt_kax_analyzer.cpp:92 src/common/qt_kax_analyzer.cpp:100
 msgid "Error writing Matroska file"
 msgstr "Помилка запису файла Matroska"
 
@@ -5568,7 +5574,7 @@ msgstr "Черезрядкова: %1%"
 msgid "Internal bug: tracks.cpp SSA #1. %1%"
 msgstr "Внутрішня помилка: tracks.cpp SSA #1. %1%"
 
-#: src/common/qt_kax_analyzer.cpp:100
+#: src/common/qt_kax_analyzer.cpp:111
 msgid "Internal program error"
 msgstr "Внутрішня помилка програми"
 
@@ -6679,7 +6685,7 @@ msgstr ""
 msgid "No attachment matched the spec '%1%'.\n"
 msgstr "Жодних вкладень, що відповідають специфікації '%1%'.\n"
 
-#: src/propedit/propedit.cpp:137
+#: src/propedit/propedit.cpp:158
 msgid "No changes were made.\n"
 msgstr "Жодних змін не було зроблено.\n"
 
@@ -6750,7 +6756,7 @@ msgstr "Немає прав на зчитування, запис чи ство�
 msgid "No programs have been added yet."
 msgstr "Жодне завдання не було ще розпочате"
 
-#: src/common/kax_analyzer.cpp:1448
+#: src/common/kax_analyzer.cpp:1481
 #, boost-format
 msgid "No segment UID could be found in the file '%1%'."
 msgstr "Жодного UID сегмента не може бути знайдено у файлі '%1%'."
@@ -7388,7 +7394,8 @@ msgstr ""
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:552
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:338
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:107
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:118
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:118 src/propedit/propedit.cpp:47
+#: src/propedit/propedit.cpp:53
 msgid ""
 "Possible reasons are: the file is not a Matroska file; the file is write-"
 "protected; the file is locked by another process; you do not have permission "
@@ -7473,7 +7480,7 @@ msgstr "Прогрес виконання: 100%\n"
 msgid "Progress: 100%%%1%"
 msgstr "Прогрес виконання: 100%%%1%"
 
-#: src/common/kax_analyzer.cpp:1507
+#: src/common/kax_analyzer.cpp:1540
 #, boost-format
 msgid "Progress: [%1%%2%] %3%%%"
 msgstr "Прогрес виконання: [%1%%2%] %3%%%"
@@ -9021,6 +9028,10 @@ msgstr ""
 "оновлений. Це означає, що плеєру, можливо, важко буде знайти цей елемент. "
 "Будь ласка, використовуйте ваш улюблений плеєр для перевірки даного файлу."
 
+#: src/common/qt_kax_analyzer.cpp:103 src/propedit/propedit.cpp:58
+msgid "The Matroska file's last element is set to an unknown size."
+msgstr ""
+
 #: src/merge/mkvmerge.cpp:1378
 #, boost-format
 msgid ""
@@ -9154,7 +9165,7 @@ msgstr "Вкладення (%1%) завелике (%2%)."
 msgid "The audio/video synchronization may have been lost."
 msgstr "Аудіо/відео синхронізація могла бути втрачена."
 
-#: src/propedit/propedit.cpp:130
+#: src/propedit/propedit.cpp:151
 msgid "The changes are written to the file.\n"
 msgstr "Зміни записуються до файлу.\n"
 
@@ -9423,7 +9434,7 @@ msgstr ""
 "Файл '%1%' не може бути приєднаний, тому що він не існує, або не може бути "
 "прочитаний.\n"
 
-#: src/propedit/propedit.cpp:112
+#: src/propedit/propedit.cpp:133
 #, boost-format
 msgid ""
 "The file '%1%' could not be opened for reading and writing, or a read/write "
@@ -9432,7 +9443,7 @@ msgstr ""
 "Файл '%1%' не може бути відкритий для зчитування і запису, або операція "
 "зчитування/запису для нього завершилась невдало: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1438 src/common/kax_analyzer.cpp:1441
+#: src/common/kax_analyzer.cpp:1471 src/common/kax_analyzer.cpp:1474
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%."
 msgstr "Файл '%1%' не може бути відкритий для зчитування: %2%."
@@ -9455,7 +9466,7 @@ msgstr "Файл '%1%' не може бути відкритий для зчит
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
 msgstr "Файл '%1%' не може бути відкритий для запису: %2%.\n"
 
-#: src/common/kax_analyzer.cpp:1444
+#: src/common/kax_analyzer.cpp:1477
 #, boost-format
 msgid "The file '%1%' could not be opened or parsed."
 msgstr "Файл '%1%' не може бути відкритий або проаналізований."
@@ -9508,6 +9519,10 @@ msgstr "Файл '%1', що ви додали, є списком відтвор�
 msgid "The file (%1) is too big (%2)."
 msgstr "Файл (%1) завеликий (%2)."
 
+#: src/common/qt_kax_analyzer.cpp:105 src/propedit/propedit.cpp:60
+msgid "The file can be fixed by re-muxing the file with mkvmerge."
+msgstr ""
+
 #: src/merge/reader_detection_and_creation.cpp:408
 msgid "The file content does not match its format type and was not recognized."
 msgstr "Вмістиме файлу не співпадає з типом його формату і не було розпізнане."
@@ -9521,12 +9536,13 @@ msgstr ""
 "Файл не може бути відкритий для зчитування, або було недостатньо даних для "
 "аналізу його заголовків."
 
-#: src/common/qt_kax_analyzer.cpp:87
+#: src/common/qt_kax_analyzer.cpp:87 src/propedit/propedit.cpp:46
 #, fuzzy
 msgid "The file could not be opened for reading."
 msgstr "Файл не можна відкрити для запису."
 
 #: src/common/qt_kax_analyzer.cpp:95 src/info/qt_ui.cpp:104
+#: src/propedit/propedit.cpp:52
 msgid "The file could not be opened for writing."
 msgstr "Файл не можна відкрити для запису."
 
@@ -9550,6 +9566,7 @@ msgstr ""
 msgid "The file has been saved successfully."
 msgstr "Файл був успішно збережений."
 
+#: src/common/qt_kax_analyzer.cpp:107 src/propedit/propedit.cpp:62
 #: src/propedit/propedit.h:18
 msgid "The file has not been modified."
 msgstr "Файл не був змінений."
@@ -9574,7 +9591,7 @@ msgstr ""
 msgid "The file is an unsupported container format (%1)."
 msgstr "Файл є непідтримуваним форматом контейнера (%1)."
 
-#: src/common/qt_kax_analyzer.cpp:37 src/propedit/propedit.cpp:100
+#: src/common/qt_kax_analyzer.cpp:37 src/propedit/propedit.cpp:121
 msgid "The file is being analyzed."
 msgstr "Файл аналізується."
 
@@ -10076,6 +10093,11 @@ msgstr ""
 #, boost-format
 msgid "The previous UID was already given in '%1% %2%'.\n"
 msgstr "Попередній UID вже заданий в '%1% %2%'.\n"
+
+#: src/common/qt_kax_analyzer.cpp:106 src/propedit/propedit.cpp:61
+#, fuzzy
+msgid "The process will be aborted."
+msgstr "Поточні налаштування мультиплексування будуть закриті."
 
 #: src/propedit/change.cpp:115
 #, boost-format
@@ -10731,7 +10753,7 @@ msgstr ""
 "підтримуються Matroska SRT форматом субтитрів. Координати будуть автоматично "
 "видалені.\n"
 
-#: src/extract/mkvextract.cpp:65 src/propedit/propedit.cpp:117
+#: src/extract/mkvextract.cpp:65 src/propedit/propedit.cpp:138
 msgid "This file could not be opened or parsed.\n"
 msgstr "Цей файл не може бути відкритий або проаналізований.\n"
 
