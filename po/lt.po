@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-4.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-27 15:48+0100\n"
+"POT-Creation-Date: 2016-02-27 16:16+0100\n"
 "PO-Revision-Date: 2015-11-22 10:46+0100\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <embar@users.berlios.de>\n"
@@ -942,6 +942,11 @@ msgstr "&Nutraukti"
 msgid "&About mkvinfo"
 msgstr "Apie mkvinfo"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:324
+#, fuzzy
+msgid "&Acknowledge warnings and errors"
+msgstr "užbaigta, bet buvo įspėjimų"
+
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "Pri&dėti"
@@ -993,6 +998,10 @@ msgstr ""
 #, fuzzy
 msgid "&Chapter editor"
 msgstr "&Skyriai"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
+msgid "&Chapter number of first created entry:"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 #, fuzzy
@@ -1078,10 +1087,6 @@ msgstr "Par&sisiųsti:"
 msgid "&Duration of each entry in seconds:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
-msgid "&Edit in corresponding tool and remove from queue"
-msgstr ""
-
 #: src/mkvtoolnix-gui/merge/input.cpp:1256
 #, fuzzy
 msgid "&Enable all tracks"
@@ -1118,6 +1123,11 @@ msgstr ""
 #: src/info/ui/mainwindow.h:121
 msgid "&File"
 msgstr "&Rinkmena"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
+#, fuzzy
+msgid "&First entry to renumber:"
+msgstr "&Naujas skyrius"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1172
 msgid "&Font && size:"
@@ -1216,6 +1226,11 @@ msgstr "Pavadinimas:"
 #: src/mkvtoolnix-gui/forms/merge/tool.h:220
 msgid "&New"
 msgstr ""
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#, fuzzy
+msgid "&Number of entries to renumber:"
+msgstr "&Naujas skyrius"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1222
 msgid "&Only enable muxing of tracks with specific languages by default"
@@ -1327,6 +1342,11 @@ msgstr ""
 msgid "&Save"
 msgstr "Į&rašyti"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#, fuzzy
+msgid "&Save attachment content to a file"
+msgstr "Sukurti &nuostatų rinkmeną"
+
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
 #, fuzzy
 msgid "&Save output"
@@ -1373,10 +1393,6 @@ msgstr "Derinti skyriaus laiko kodus"
 #, fuzzy
 msgid "&Start && end:"
 msgstr "&Pradėti"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
-msgid "&Start all pending jobs"
-msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:315
 msgid "&Start jobs automatically"
@@ -2149,6 +2165,16 @@ msgstr "Apie mkvinfo"
 msgid "Acknowledge &all warnings and errors"
 msgstr "užbaigta, bet buvo įspėjimų"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:323
+#, fuzzy
+msgid "Acknowledge &errors"
+msgstr "užbaigta, bet buvo įspėjimų"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:322
+#, fuzzy
+msgid "Acknowledge &warnings"
+msgstr "užbaigta, bet buvo įspėjimų"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
@@ -2158,21 +2184,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 #, fuzzy
 msgid "Acknowledge all &warnings"
-msgstr "užbaigta, bet buvo įspėjimų"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:323
-#, fuzzy
-msgid "Acknowledge errors"
-msgstr "užbaigta, bet buvo įspėjimų"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:322
-#, fuzzy
-msgid "Acknowledge warnings"
-msgstr "užbaigta, bet buvo įspėjimų"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:324
-#, fuzzy
-msgid "Acknowledge warnings and errors"
 msgstr "užbaigta, bet buvo įspėjimų"
 
 #: src/propedit/propedit_cli_parser.cpp:227
@@ -2807,6 +2818,10 @@ msgstr "%u garso takelis"
 msgid "Buttons"
 msgstr "mygtukai"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
+msgid "C&onfiguration active"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "C&onstrict or expand timecodes"
 msgstr ""
@@ -2952,7 +2967,6 @@ msgid "Channels: %1%"
 msgstr "Kanalai: %1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "Chapter &number of first created entry:"
 msgstr ""
 
@@ -3199,10 +3213,6 @@ msgstr "Nepavyko suglaudinti: %1%\n"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1572
 msgid "Compression:"
 msgstr "Glaudinimas:"
-
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
-msgid "Configuration &active"
-msgstr ""
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
 msgid "Container"
@@ -3922,6 +3932,10 @@ msgstr "Trukmė: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Trukmė: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:320
+msgid "E&dit in corresponding tool and remove from queue"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:192
 #, fuzzy
 msgid "E&xecute now"
@@ -4442,10 +4456,6 @@ msgstr ""
 #, fuzzy
 msgid "Finished at:"
 msgstr "Baigta:"
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
-msgid "First entry to &renumber:"
-msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1581
 #, fuzzy
@@ -6130,11 +6140,6 @@ msgstr "&Naujas skyrius"
 msgid "Number of chapters:"
 msgstr "&Naujas skyrius"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
-#, fuzzy
-msgid "Number of entries to &renumber:"
-msgstr "&Naujas skyrius"
-
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -6773,6 +6778,11 @@ msgstr ""
 msgid "Re&number sub-chapters"
 msgstr "skaidyti prieš skyrius"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#, fuzzy
+msgid "Re&place attachment with a new file"
+msgstr "Nauji priedai"
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr ""
@@ -6931,10 +6941,6 @@ msgstr ""
 msgid "Replace attachment"
 msgstr "Nauji priedai"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
-msgid "Replace attachment with a new &file"
-msgstr ""
-
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
 msgstr ""
@@ -7060,10 +7066,6 @@ msgstr "skaidyti prieš skyrius"
 #, fuzzy
 msgid "Save attachment"
 msgstr "Nauji priedai"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-msgid "Save attachment content to a &file"
-msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:504
 #, fuzzy
@@ -7641,6 +7643,10 @@ msgstr "Skaidymas"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:381
 msgid "Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed."
+msgstr ""
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+msgid "Sta&rt all pending jobs"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1650

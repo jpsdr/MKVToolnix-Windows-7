@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-27 15:48+0100\n"
+"POT-Creation-Date: 2016-02-27 16:16+0100\n"
 "PO-Revision-Date: 2016-01-29 19:45+0100\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -1144,6 +1144,11 @@ msgstr "&Utzi lanak"
 msgid "&About mkvinfo"
 msgstr "&mkvinfo buruz"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:324
+#, fuzzy
+msgid "&Acknowledge warnings and errors"
+msgstr "Ezagutu kontuz-oharrak eta akatsak"
+
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "&Gehitu"
@@ -1188,6 +1193,11 @@ msgstr "E&zeztatu"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:307
 msgid "&Chapter editor"
 msgstr "&Atal editatzailea"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
+#, fuzzy
+msgid "&Chapter number of first created entry:"
+msgstr "&Lehenik sortutako sarreraren atal zenbakia:"
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 msgid "&Character set:"
@@ -1267,10 +1277,6 @@ msgstr "&Jeitsi"
 msgid "&Duration of each entry in seconds:"
 msgstr "&Sarrera bakoitzaren iraupena segundutan:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
-msgid "&Edit in corresponding tool and remove from queue"
-msgstr "&Editatu dagokion tresnan eta kendu lerrotik"
-
 #: src/mkvtoolnix-gui/merge/input.cpp:1256
 msgid "&Enable all tracks"
 msgstr "&Gaitu bide guztiak"
@@ -1303,6 +1309,11 @@ msgstr "&SEG"
 #: src/info/ui/mainwindow.h:121
 msgid "&File"
 msgstr "&Agiria"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
+#, fuzzy
+msgid "&First entry to renumber:"
+msgstr "&Berzenbakitzeko lehen sarrera:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1172
 msgid "&Font && size:"
@@ -1391,6 +1402,11 @@ msgstr "&Izena:"
 #: src/mkvtoolnix-gui/forms/merge/tool.h:220
 msgid "&New"
 msgstr "&Berria"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#, fuzzy
+msgid "&Number of entries to renumber:"
+msgstr "&Ber-zenbakitzeko sarrera zenbatekoa:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1222
 msgid "&Only enable muxing of tracks with specific languages by default"
@@ -1491,6 +1507,11 @@ msgstr "&Berrezarri balio hau"
 msgid "&Save"
 msgstr "G&orde"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#, fuzzy
+msgid "&Save attachment content to a file"
+msgstr "Gorde eranskinaren e&dukia agiri batean"
+
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
 msgid "&Save output"
 msgstr "&Gorde irteera"
@@ -1532,10 +1553,6 @@ msgstr "&Antolatu atalak beren hasiera eta amaiera denbora-kodeen arabera"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
 msgid "&Start && end:"
 msgstr "&Hasiera eta amaiera:"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
-msgid "&Start all pending jobs"
-msgstr "&Hasi egiteke dauden lan guztiak"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:315
 msgid "&Start jobs automatically"
@@ -2407,6 +2424,16 @@ msgstr "mkvinfo buruz"
 msgid "Acknowledge &all warnings and errors"
 msgstr "Ezagutu kontuz-o&har eta akats guztiak"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:323
+#, fuzzy
+msgid "Acknowledge &errors"
+msgstr "Ezagutu akatsak"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:322
+#, fuzzy
+msgid "Acknowledge &warnings"
+msgstr "Ezagutu kontuz-oharrak"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
@@ -2416,18 +2443,6 @@ msgstr "Ezagutu &akats guztiak"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 msgid "Acknowledge all &warnings"
 msgstr "Ezagutu &kontuz-ohar guztiak"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:323
-msgid "Acknowledge errors"
-msgstr "Ezagutu akatsak"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:322
-msgid "Acknowledge warnings"
-msgstr "Ezagutu kontuz-oharrak"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:324
-msgid "Acknowledge warnings and errors"
-msgstr "Ezagutu kontuz-oharrak eta akatsak"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Actions for handling attachments"
@@ -3093,6 +3108,11 @@ msgstr "Beheko bidea %1"
 msgid "Buttons"
 msgstr "Botoiak"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
+#, fuzzy
+msgid "C&onfiguration active"
+msgstr "Itxurapena gordeta."
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "C&onstrict or expand timecodes"
 msgstr "&Estutu edo hedatu denbora-kodeak"
@@ -3262,7 +3282,6 @@ msgid "Channels: %1%"
 msgstr "Bideak: %1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "Chapter &number of first created entry:"
 msgstr "&Lehenik sortutako sarreraren atal zenbakia:"
 
@@ -3504,11 +3523,6 @@ msgstr "Konpresio hutsegitea: %1%\n"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1572
 msgid "Compression:"
 msgstr "Konpresioa:"
-
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
-#, fuzzy
-msgid "Configuration &active"
-msgstr "Itxurapena gordeta."
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
 msgid "Container"
@@ -4267,6 +4281,11 @@ msgstr "Iraupena: %|1$.3f|sm"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Iraupena: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:320
+#, fuzzy
+msgid "E&dit in corresponding tool and remove from queue"
+msgstr "&Editatu dagokion tresnan eta kendu lerrotik"
+
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:192
 msgid "E&xecute now"
 msgstr "E&xekutatu orain"
@@ -4847,10 +4866,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 msgid "Finished at:"
 msgstr "Amaituta:"
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
-msgid "First entry to &renumber:"
-msgstr "&Berzenbakitzeko lehen sarrera:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1581
 msgid "Fix bitstream timing info"
@@ -6914,10 +6929,6 @@ msgstr "Sortzeko sarrera zenbatekoa:"
 msgid "Number of chapters:"
 msgstr "Atal zenbatekoa:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
-msgid "Number of entries to &renumber:"
-msgstr "&Ber-zenbakitzeko sarrera zenbatekoa:"
-
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -7692,6 +7703,11 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "&Azpi-atalak berzenbakitzen"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#, fuzzy
+msgid "Re&place attachment with a new file"
+msgstr "Ordeztu era&nskina agiri berri batekin"
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr "Irakurri Aldaketa-oharra osoa online"
@@ -7851,10 +7867,6 @@ msgstr "Ordeztu eranskin bat agiriaren 'agirizena'-rekin."
 msgid "Replace attachment"
 msgstr "Ordeztu eranskina"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
-msgid "Replace attachment with a new &file"
-msgstr "Ordeztu era&nskina agiri berri batekin"
-
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 msgid ""
 "Replace attachment with a new file and &derive name && MIME type from it"
@@ -7983,10 +7995,6 @@ msgstr "Gorde &berezko bezala batze lan berrientzat"
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 msgid "Save attachment"
 msgstr "Gorde eranskina"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-msgid "Save attachment content to a &file"
-msgstr "Gorde eranskinaren e&dukia agiri batean"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:504
 msgid "Save chapters as XML"
@@ -8603,6 +8611,11 @@ msgstr ""
 "Bananketa zerrendatzen diren atal zenbakien hasiera denbora-kodearen berdina "
 "edo handiagoa den denbora kodea duen lehen giltza framearen aurretik egingo "
 "da."
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+#, fuzzy
+msgid "Sta&rt all pending jobs"
+msgstr "&Hasi egiteke dauden lan guztiak"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1650
 msgid "Sta&rt muxing"

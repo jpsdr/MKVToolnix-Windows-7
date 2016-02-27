@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-27 15:48+0100\n"
+"POT-Creation-Date: 2016-02-27 16:16+0100\n"
 "PO-Revision-Date: 2016-02-24 20:56+0100\n"
 "Last-Translator: Daniel Kluz <sir.daniel.k@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -1163,6 +1163,11 @@ msgstr "Przerwij zadania (&A)"
 msgid "&About mkvinfo"
 msgstr "Informacje o mkvinfo (&A)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:324
+#, fuzzy
+msgid "&Acknowledge warnings and errors"
+msgstr "Zatwierdź ostrzeżenia i błędy"
+
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "Dodaj (&A)"
@@ -1207,6 +1212,11 @@ msgstr "Anuluj (&C)"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:307
 msgid "&Chapter editor"
 msgstr "Edytor rozdziałów (&C)"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
+#, fuzzy
+msgid "&Chapter number of first created entry:"
+msgstr "(&N) Numer pierwszego (pod)rozdziału:"
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 msgid "&Character set:"
@@ -1285,10 +1295,6 @@ msgstr "Pobierz (&D)"
 msgid "&Duration of each entry in seconds:"
 msgstr "(&D) Czas trwania każdego (pod)rozdziału w sekundach:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
-msgid "&Edit in corresponding tool and remove from queue"
-msgstr "Edytuj za pomocą odpowiedniego narzędzia i usuń z kolejki (&E)"
-
 #: src/mkvtoolnix-gui/merge/input.cpp:1256
 msgid "&Enable all tracks"
 msgstr "Włącz wszystkie ścieżki (&E)"
@@ -1321,6 +1327,11 @@ msgstr "FAQ — Najczęściej zadawane pytania (&F)"
 #: src/info/ui/mainwindow.h:121
 msgid "&File"
 msgstr "Plik (&F)"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
+#, fuzzy
+msgid "&First entry to renumber:"
+msgstr "(&R) Pierwszy (pod)rozdział do przenumerowania:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1172
 msgid "&Font && size:"
@@ -1409,6 +1420,11 @@ msgstr "(&N) Nazwa:"
 #: src/mkvtoolnix-gui/forms/merge/tool.h:220
 msgid "&New"
 msgstr "Nowa karta (&N)"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#, fuzzy
+msgid "&Number of entries to renumber:"
+msgstr "(&R) Ilość (pod)rozdziałów do przenumerowania:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1222
 msgid "&Only enable muxing of tracks with specific languages by default"
@@ -1508,6 +1524,11 @@ msgstr "Zresetuj tę wartość (&R)"
 msgid "&Save"
 msgstr "Zapisz (&S)"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#, fuzzy
+msgid "&Save attachment content to a file"
+msgstr "Zapisz zawartość załącznika do pliku (&F)"
+
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
 msgid "&Save output"
 msgstr "Zapisz dziennik zdarzeń (&S)"
@@ -1547,10 +1568,6 @@ msgstr "Uporządkuj rozdziały wg czasów (&S)"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
 msgid "&Start && end:"
 msgstr "(&S) Początek i koniec:"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
-msgid "&Start all pending jobs"
-msgstr "Rozpocznij wszystkie oczekujące zadania (&S)"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:315
 msgid "&Start jobs automatically"
@@ -2434,6 +2451,16 @@ msgstr "Informacje o mkvinfo"
 msgid "Acknowledge &all warnings and errors"
 msgstr "Zatwierdź wszystkie ostrzeżenia i błędy (&A)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:323
+#, fuzzy
+msgid "Acknowledge &errors"
+msgstr "Zatwierdź błędy"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:322
+#, fuzzy
+msgid "Acknowledge &warnings"
+msgstr "Zatwierdź ostrzeżenia"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
@@ -2443,18 +2470,6 @@ msgstr "Zatwierdź wszystkie błędy (&E)"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 msgid "Acknowledge all &warnings"
 msgstr "Zatwierdź wszystkie ostrzeżenia (&W)"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:323
-msgid "Acknowledge errors"
-msgstr "Zatwierdź błędy"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:322
-msgid "Acknowledge warnings"
-msgstr "Zatwierdź ostrzeżenia"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:324
-msgid "Acknowledge warnings and errors"
-msgstr "Zatwierdź ostrzeżenia i błędy"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Actions for handling attachments"
@@ -3125,6 +3140,11 @@ msgstr "Ścieżka przycisków %1"
 msgid "Buttons"
 msgstr "Przyciski"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
+#, fuzzy
+msgid "C&onfiguration active"
+msgstr "Konfiguracja aktywna (&A)"
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "C&onstrict or expand timecodes"
 msgstr "Ogranicz lub rozszerz czasy (&O)"
@@ -3295,7 +3315,6 @@ msgid "Channels: %1%"
 msgstr "Kanały: %1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "Chapter &number of first created entry:"
 msgstr "(&N) Numer pierwszego (pod)rozdziału:"
 
@@ -3538,10 +3557,6 @@ msgstr "Kompresja zakończona niepomyślnie: %1%\n"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1572
 msgid "Compression:"
 msgstr "Kompresja ścieżki:"
-
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
-msgid "Configuration &active"
-msgstr "Konfiguracja aktywna (&A)"
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
 msgid "Container"
@@ -4304,6 +4319,11 @@ msgstr "Czas trwania: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Czas trwania: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:320
+#, fuzzy
+msgid "E&dit in corresponding tool and remove from queue"
+msgstr "Edytuj za pomocą odpowiedniego narzędzia i usuń z kolejki (&E)"
+
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:192
 msgid "E&xecute now"
 msgstr "Uruchom teraz (&X)"
@@ -4881,10 +4901,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 msgid "Finished at:"
 msgstr "Zakończono o:"
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
-msgid "First entry to &renumber:"
-msgstr "(&R) Pierwszy (pod)rozdział do przenumerowania:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1581
 msgid "Fix bitstream timing info"
@@ -6951,10 +6967,6 @@ msgstr "(&M) Ilość (pod)rozdziałów do utworzenia:"
 msgid "Number of chapters:"
 msgstr "Ilość rozdziałów:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
-msgid "Number of entries to &renumber:"
-msgstr "(&R) Ilość (pod)rozdziałów do przenumerowania:"
-
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -7735,6 +7747,11 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "Przenumeruj podrozdziały (&N)"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#, fuzzy
+msgid "Re&place attachment with a new file"
+msgstr "Zamień załącznik na nowy plik (&F)"
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr "Przeczytaj pełną listę zmian w internecie"
@@ -7891,10 +7908,6 @@ msgstr "Zamień załącznik na plik o nazwie \"nazwapliku\""
 msgid "Replace attachment"
 msgstr "Zamień załącznik"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
-msgid "Replace attachment with a new &file"
-msgstr "Zamień załącznik na nowy plik (&F)"
-
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 msgid ""
 "Replace attachment with a new file and &derive name && MIME type from it"
@@ -8023,10 +8036,6 @@ msgstr "Zapisz jako domyślne dla nowych zadań (&D)"
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 msgid "Save attachment"
 msgstr "Zapisz załącznik"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-msgid "Save attachment content to a &file"
-msgstr "Zapisz zawartość załącznika do pliku (&F)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:504
 msgid "Save chapters as XML"
@@ -8656,6 +8665,11 @@ msgstr ""
 "Dzielenie nastąpi tuż przed klatką kluczową, której czas jest taki sam lub "
 "większy niż czas rozpoczęcia rozdziału, którego to numer znajduje się na "
 "liście."
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+#, fuzzy
+msgid "Sta&rt all pending jobs"
+msgstr "Rozpocznij wszystkie oczekujące zadania (&S)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1650
 msgid "Sta&rt muxing"

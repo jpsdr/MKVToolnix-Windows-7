@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-27 15:48+0100\n"
+"POT-Creation-Date: 2016-02-27 16:16+0100\n"
 "PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -1136,6 +1136,11 @@ msgstr "&Прекини радњу"
 msgid "&About mkvinfo"
 msgstr "&О програму"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:324
+#, fuzzy
+msgid "&Acknowledge warnings and errors"
+msgstr "Примљена упозорења и грешке"
+
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "&Додај"
@@ -1182,6 +1187,11 @@ msgstr "&Поништи"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:307
 msgid "&Chapter editor"
 msgstr "Уредник &поглавља"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
+#, fuzzy
+msgid "&Chapter number of first created entry:"
+msgstr "&Број поглавља првоствореног уноса:"
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 msgid "&Character set:"
@@ -1262,10 +1272,6 @@ msgstr "&Преузимања"
 msgid "&Duration of each entry in seconds:"
 msgstr "Трајање сваког уноса (у секундама):"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
-msgid "&Edit in corresponding tool and remove from queue"
-msgstr "&Уреди у одговарајућем алату и уклони из заказаног"
-
 #: src/mkvtoolnix-gui/merge/input.cpp:1256
 msgid "&Enable all tracks"
 msgstr "О&могући све записе"
@@ -1298,6 +1304,11 @@ msgstr "&ЧПП"
 #: src/info/ui/mainwindow.h:121
 msgid "&File"
 msgstr "&Датотека"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
+#, fuzzy
+msgid "&First entry to renumber:"
+msgstr "Прва ставка код додељивања нових бројева:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1172
 msgid "&Font && size:"
@@ -1387,6 +1398,11 @@ msgstr "&Назив:"
 #: src/mkvtoolnix-gui/forms/merge/tool.h:220
 msgid "&New"
 msgstr "&Ново"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#, fuzzy
+msgid "&Number of entries to renumber:"
+msgstr "Број ставки за доделу нових бројева:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1222
 #, fuzzy
@@ -1491,6 +1507,11 @@ msgstr "Поништи ову в&редност"
 msgid "&Save"
 msgstr "&Сачувај"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#, fuzzy
+msgid "&Save attachment content to a file"
+msgstr "Замењује прилог датотеком „filename“"
+
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
 msgid "&Save output"
 msgstr "&Сачувај излаз"
@@ -1533,10 +1554,6 @@ msgstr "Сложи поглавља по њиховим врем.ознакам�
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
 msgid "&Start && end:"
 msgstr "&Почетак и свршетак:"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
-msgid "&Start all pending jobs"
-msgstr "Започни &све недовршене радње"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:315
 msgid "&Start jobs automatically"
@@ -2406,6 +2423,16 @@ msgstr "О програму"
 msgid "Acknowledge &all warnings and errors"
 msgstr "Примљена св&а упозорења и грешке"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:323
+#, fuzzy
+msgid "Acknowledge &errors"
+msgstr "Примљене грешке"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:322
+#, fuzzy
+msgid "Acknowledge &warnings"
+msgstr "Примљена упозорења"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
@@ -2415,18 +2442,6 @@ msgstr "Примљ&ене све погрешке"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 msgid "Acknowledge all &warnings"
 msgstr "Примљена сва упозоре&ња"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:323
-msgid "Acknowledge errors"
-msgstr "Примљене грешке"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:322
-msgid "Acknowledge warnings"
-msgstr "Примљена упозорења"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:324
-msgid "Acknowledge warnings and errors"
-msgstr "Примљена упозорења и грешке"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Actions for handling attachments"
@@ -3094,6 +3109,10 @@ msgstr "Запис дугмета %1, %2"
 msgid "Buttons"
 msgstr "Дугмад"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
+msgid "C&onfiguration active"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "C&onstrict or expand timecodes"
 msgstr "С&купи или рашири временске ознаке"
@@ -3263,7 +3282,6 @@ msgid "Channels: %1%"
 msgstr "Канали: %1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "Chapter &number of first created entry:"
 msgstr "&Број поглавља првоствореног уноса:"
 
@@ -3509,10 +3527,6 @@ msgstr "Није успело сажимање: %1%\n"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1572
 msgid "Compression:"
 msgstr "Сажимање:"
-
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
-msgid "Configuration &active"
-msgstr ""
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
 msgid "Container"
@@ -4290,6 +4304,11 @@ msgstr "Трајање: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Трајање: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:320
+#, fuzzy
+msgid "E&dit in corresponding tool and remove from queue"
+msgstr "&Уреди у одговарајућем алату и уклони из заказаног"
+
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:192
 #, fuzzy
 msgid "E&xecute now"
@@ -4873,10 +4892,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 msgid "Finished at:"
 msgstr "Завршено у:"
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
-msgid "First entry to &renumber:"
-msgstr "Прва ставка код додељивања нових бројева:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1581
 msgid "Fix bitstream timing info"
@@ -6926,10 +6941,6 @@ msgstr "Коли&чина (број) новостворених уноса:"
 msgid "Number of chapters:"
 msgstr "Број поглавља:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
-msgid "Number of entries to &renumber:"
-msgstr "Број ставки за доделу нових бројева:"
-
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -7701,6 +7712,11 @@ msgstr "РСА"
 msgid "Re&number sub-chapters"
 msgstr "Додели нове бројеве потпоглављима"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#, fuzzy
+msgid "Re&place attachment with a new file"
+msgstr "Замењује прилог датотеком „filename“"
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr "Прикажи целу „ChangeLog“-датотеку са мреже"
@@ -7864,11 +7880,6 @@ msgstr "Замењује прилог датотеком „filename“"
 msgid "Replace attachment"
 msgstr "прилог"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
-#, fuzzy
-msgid "Replace attachment with a new &file"
-msgstr "Замењује прилог датотеком „filename“"
-
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 #, fuzzy
 msgid ""
@@ -7999,10 +8010,6 @@ msgstr "Сачувај као &подразумевано за нова сјед
 #, fuzzy
 msgid "Save attachment"
 msgstr "прилог"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-msgid "Save attachment content to a &file"
-msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:504
 msgid "Save chapters as XML"
@@ -8635,6 +8642,11 @@ msgstr ""
 "До дељења ће доћи непосредно пре првог кључног кадра чија је временска "
 "ознака једнака или већа од почетне временске ознаке за поглавља чији су "
 "бројеви наведени."
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+#, fuzzy
+msgid "Sta&rt all pending jobs"
+msgstr "Започни &све недовршене радње"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1650
 msgid "Sta&rt muxing"

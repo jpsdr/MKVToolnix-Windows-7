@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-27 15:48+0100\n"
+"POT-Creation-Date: 2016-02-27 16:16+0100\n"
 "PO-Revision-Date: 2016-01-10 15:02+0100\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -1175,6 +1175,11 @@ msgstr "&Перервати виконання завдання"
 msgid "&About mkvinfo"
 msgstr "&Про mkvinfo"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:324
+#, fuzzy
+msgid "&Acknowledge warnings and errors"
+msgstr "Підтвердити передження і помилки"
+
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "&Додати"
@@ -1219,6 +1224,11 @@ msgstr "&Відмінити"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:307
 msgid "&Chapter editor"
 msgstr "&Редактор розділів"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
+#, fuzzy
+msgid "&Chapter number of first created entry:"
+msgstr "Розділ &номер першого створеного запису:"
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 msgid "&Character set:"
@@ -1296,10 +1306,6 @@ msgstr "&Завантажити"
 msgid "&Duration of each entry in seconds:"
 msgstr "&Тривалість кожного запису в секундах:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
-msgid "&Edit in corresponding tool and remove from queue"
-msgstr "&Редагувати у відповідному інструменті й видалити з черги"
-
 #: src/mkvtoolnix-gui/merge/input.cpp:1256
 msgid "&Enable all tracks"
 msgstr "&Дозволити усі доріжки"
@@ -1332,6 +1338,11 @@ msgstr "&Запитання та відповіді"
 #: src/info/ui/mainwindow.h:121
 msgid "&File"
 msgstr "&Файл"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
+#, fuzzy
+msgid "&First entry to renumber:"
+msgstr "Перший запис для &зміни нумерації:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1172
 msgid "&Font && size:"
@@ -1420,6 +1431,11 @@ msgstr "&Назва:"
 #: src/mkvtoolnix-gui/forms/merge/tool.h:220
 msgid "&New"
 msgstr "&Новий"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#, fuzzy
+msgid "&Number of entries to renumber:"
+msgstr "Кількість записів для &зміни нумерації:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1222
 msgid "&Only enable muxing of tracks with specific languages by default"
@@ -1519,6 +1535,11 @@ msgstr "&Скинути це значення"
 msgid "&Save"
 msgstr "&Зберегти"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#, fuzzy
+msgid "&Save attachment content to a file"
+msgstr "Зберегти вкладення до &файлу"
+
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
 msgid "&Save output"
 msgstr "&Зберегти вихідне завдання"
@@ -1560,10 +1581,6 @@ msgstr "Сортувати розділи за початком і кінцем 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
 msgid "&Start && end:"
 msgstr "&Початок && кінець:"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
-msgid "&Start all pending jobs"
-msgstr "&Почати всі заплановані завдання"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:315
 msgid "&Start jobs automatically"
@@ -2442,6 +2459,16 @@ msgstr "Про mkvinfo"
 msgid "Acknowledge &all warnings and errors"
 msgstr "Підтвердити &всі попередження і помилки"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:323
+#, fuzzy
+msgid "Acknowledge &errors"
+msgstr "Підтвердження помилок"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:322
+#, fuzzy
+msgid "Acknowledge &warnings"
+msgstr "Підтвердження попередження"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
@@ -2451,18 +2478,6 @@ msgstr "Підтвердити всі &помилки"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 msgid "Acknowledge all &warnings"
 msgstr "Підтвердити всі &попередження"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:323
-msgid "Acknowledge errors"
-msgstr "Підтвердження помилок"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:322
-msgid "Acknowledge warnings"
-msgstr "Підтвердження попередження"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:324
-msgid "Acknowledge warnings and errors"
-msgstr "Підтвердити передження і помилки"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Actions for handling attachments"
@@ -3140,6 +3155,10 @@ msgstr "Кнопка доріжка %1"
 msgid "Buttons"
 msgstr "Кнопки"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
+msgid "C&onfiguration active"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "C&onstrict or expand timecodes"
 msgstr "Зв&узити або розширити таймкоди"
@@ -3313,7 +3332,6 @@ msgid "Channels: %1%"
 msgstr "Канали: %1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "Chapter &number of first created entry:"
 msgstr "Розділ &номер першого створеного запису:"
 
@@ -3556,10 +3574,6 @@ msgstr "Стиснення перервано: %1%\n"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1572
 msgid "Compression:"
 msgstr "Стиснення:"
-
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
-msgid "Configuration &active"
-msgstr ""
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
 msgid "Container"
@@ -4323,6 +4337,11 @@ msgstr "Тривалість: %|1$.3f|мс"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Тривалість: %|1$.3f|с (%2%)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:320
+#, fuzzy
+msgid "E&dit in corresponding tool and remove from queue"
+msgstr "&Редагувати у відповідному інструменті й видалити з черги"
+
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:192
 msgid "E&xecute now"
 msgstr "З&апустити зараз"
@@ -4902,10 +4921,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 msgid "Finished at:"
 msgstr "Завершено:"
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
-msgid "First entry to &renumber:"
-msgstr "Перший запис для &зміни нумерації:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1581
 msgid "Fix bitstream timing info"
@@ -6959,10 +6974,6 @@ msgstr "Кільк&ість записів для створення:"
 msgid "Number of chapters:"
 msgstr "Кількість розділів:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
-msgid "Number of entries to &renumber:"
-msgstr "Кількість записів для &зміни нумерації:"
-
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -7736,6 +7747,11 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "Зм&іна нумерації існуючих підрозділів"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#, fuzzy
+msgid "Re&place attachment with a new file"
+msgstr "Замінити вкладення &новим файлом"
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr "Читати онлайн повний текст змін"
@@ -7896,10 +7912,6 @@ msgstr "Замінити вкладення файлом 'назва файла'
 msgid "Replace attachment"
 msgstr "Замінити вкладення"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
-msgid "Replace attachment with a new &file"
-msgstr "Замінити вкладення &новим файлом"
-
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 msgid ""
 "Replace attachment with a new file and &derive name && MIME type from it"
@@ -8029,10 +8041,6 @@ msgstr "Зберегти як &типовий варіант для нових �
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 msgid "Save attachment"
 msgstr "Зберегти вкладення"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-msgid "Save attachment content to a &file"
-msgstr "Зберегти вкладення до &файлу"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:504
 msgid "Save chapters as XML"
@@ -8666,6 +8674,11 @@ msgid ""
 msgstr ""
 "Розбиття буде відбуватись зразу перед першим ключовим кадром, тайм-код якого "
 "рівний або більший за початковий тайм-код розділів, чиї номери вказані."
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+#, fuzzy
+msgid "Sta&rt all pending jobs"
+msgstr "&Почати всі заплановані завдання"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1650
 msgid "Sta&rt muxing"

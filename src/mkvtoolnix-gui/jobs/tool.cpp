@@ -321,7 +321,7 @@ Tool::retranslateUi() {
 
   m_acknowledgeSelectedWarningsAction->setText(QY("Acknowledge &warnings"));
   m_acknowledgeSelectedErrorsAction->setText(QY("Acknowledge &errors"));
-  m_acknowledgeSelectedWarningsErrorsAction->setText(QY("&Acknowledge warnings and errors"));
+  m_acknowledgeSelectedWarningsErrorsAction->setText(QY("&Acknowledge warnings and errors")); // b
 
   setupToolTips();
 }

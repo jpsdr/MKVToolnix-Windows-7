@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-27 15:48+0100\n"
+"POT-Creation-Date: 2016-02-27 16:16+0100\n"
 "PO-Revision-Date: 2015-12-16 09:53+0100\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -1072,6 +1072,11 @@ msgstr "中断(&A)"
 msgid "&About mkvinfo"
 msgstr "mkvinfoについて(&A)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:324
+#, fuzzy
+msgid "&Acknowledge warnings and errors"
+msgstr "警告とエラーを通知する(&A)"
+
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "追加(&A)"
@@ -1119,6 +1124,10 @@ msgstr "キャンセル(&C)"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:307
 msgid "&Chapter editor"
 msgstr "チャプタエディタ(&C)"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
+msgid "&Chapter number of first created entry:"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 #, fuzzy
@@ -1199,10 +1208,6 @@ msgstr "ダウンロード(&D)"
 msgid "&Duration of each entry in seconds:"
 msgstr "プレイリストの最小の継続時間（秒単位）："
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
-msgid "&Edit in corresponding tool and remove from queue"
-msgstr ""
-
 #: src/mkvtoolnix-gui/merge/input.cpp:1256
 msgid "&Enable all tracks"
 msgstr "全てのトラックを有効化(&E)"
@@ -1235,6 +1240,11 @@ msgstr "FAQ(&F)"
 #: src/info/ui/mainwindow.h:121
 msgid "&File"
 msgstr "ファイル(&F)"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
+#, fuzzy
+msgid "&First entry to renumber:"
+msgstr "チャプタの数："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1172
 msgid "&Font && size:"
@@ -1325,6 +1335,11 @@ msgstr "名前：(&N)"
 #: src/mkvtoolnix-gui/forms/merge/tool.h:220
 msgid "&New"
 msgstr "新規作成(&N)"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#, fuzzy
+msgid "&Number of entries to renumber:"
+msgstr "チャプタの数："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1222
 #, fuzzy
@@ -1431,6 +1446,11 @@ msgstr "この値をリセット(&R)"
 msgid "&Save"
 msgstr "保存(&S)"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#, fuzzy
+msgid "&Save attachment content to a file"
+msgstr "'filename'のファイルで添付ファイルを置き換えます"
+
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
 msgid "&Save output"
 msgstr "出力を保存(&S)"
@@ -1473,10 +1493,6 @@ msgstr "チャプタを開始及び終了のタイムコードでソート(&M)"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
 msgid "&Start && end:"
 msgstr "開始と終了："
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
-msgid "&Start all pending jobs"
-msgstr "実行待ちのジョブを全て開始(&S)"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:315
 msgid "&Start jobs automatically"
@@ -2245,6 +2261,16 @@ msgstr "mkvinfoについて"
 msgid "Acknowledge &all warnings and errors"
 msgstr "警告とエラーを通知する(&A)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:323
+#, fuzzy
+msgid "Acknowledge &errors"
+msgstr "エラーを通知"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:322
+#, fuzzy
+msgid "Acknowledge &warnings"
+msgstr "警告を通知"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
@@ -2254,19 +2280,6 @@ msgstr "全てのエラーを通知する(&E)"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 msgid "Acknowledge all &warnings"
 msgstr "全ての警告を通知する(&W)"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:323
-msgid "Acknowledge errors"
-msgstr "エラーを通知"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:322
-msgid "Acknowledge warnings"
-msgstr "警告を通知"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:324
-#, fuzzy
-msgid "Acknowledge warnings and errors"
-msgstr "警告とエラーを通知する(&A)"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Actions for handling attachments"
@@ -2880,6 +2893,10 @@ msgstr "ボタントラック%1、%2"
 msgid "Buttons"
 msgstr "ボタン"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
+msgid "C&onfiguration active"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "C&onstrict or expand timecodes"
 msgstr "タイムコードの拡張または収縮(&O)"
@@ -3024,7 +3041,6 @@ msgid "Channels: %1%"
 msgstr "チャンネル数：%1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "Chapter &number of first created entry:"
 msgstr ""
 
@@ -3262,10 +3278,6 @@ msgstr "圧縮に失敗しました：%1%\n"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1572
 msgid "Compression:"
 msgstr "圧縮："
-
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
-msgid "Configuration &active"
-msgstr ""
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
 msgid "Container"
@@ -3982,6 +3994,10 @@ msgstr "長さ: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "長さ: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:320
+msgid "E&dit in corresponding tool and remove from queue"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:192
 #, fuzzy
 msgid "E&xecute now"
@@ -4491,10 +4507,6 @@ msgstr "ファイルをそのファイル自身に追加結合することはで
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 msgid "Finished at:"
 msgstr "完了日時："
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
-msgid "First entry to &renumber:"
-msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1581
 msgid "Fix bitstream timing info"
@@ -6151,11 +6163,6 @@ msgstr "チャプタの数："
 msgid "Number of chapters:"
 msgstr "チャプタの数："
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
-#, fuzzy
-msgid "Number of entries to &renumber:"
-msgstr "チャプタの数："
-
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -6781,6 +6788,11 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "チャプタの前で分割"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#, fuzzy
+msgid "Re&place attachment with a new file"
+msgstr "'filename'のファイルで添付ファイルを置き換えます"
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr "全てのチェンジログをオンラインで読む"
@@ -6934,11 +6946,6 @@ msgstr "'filename'のファイルで添付ファイルを置き換えます"
 msgid "Replace attachment"
 msgstr "添付ファイル"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
-#, fuzzy
-msgid "Replace attachment with a new &file"
-msgstr "'filename'のファイルで添付ファイルを置き換えます"
-
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 #, fuzzy
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
@@ -7065,10 +7072,6 @@ msgstr "新規のマージジョブのデフォルトとして保存する(&D)"
 #, fuzzy
 msgid "Save attachment"
 msgstr "添付ファイル"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-msgid "Save attachment content to a &file"
-msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:504
 msgid "Save chapters as XML"
@@ -7630,6 +7633,11 @@ msgstr "ファイル分割"
 #: src/mkvtoolnix-gui/merge/output.cpp:381
 msgid "Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed."
 msgstr "番号が列挙されているチャプタの開始点のタイムコードと等しいか、それより大きいタイムコードの最初のキーフレーム直前で分割が行われます。"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+#, fuzzy
+msgid "Sta&rt all pending jobs"
+msgstr "実行待ちのジョブを全て開始(&S)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1650
 msgid "Sta&rt muxing"

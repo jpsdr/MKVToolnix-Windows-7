@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-27 15:48+0100\n"
+"POT-Creation-Date: 2016-02-27 16:16+0100\n"
 "PO-Revision-Date: 2016-01-02 12:37+0100\n"
 "Last-Translator: Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>\n"
 "Language-Team: Swedish <moritz@bunkus.org>\n"
@@ -932,6 +932,11 @@ msgstr "&Avbryt jobben"
 msgid "&About mkvinfo"
 msgstr "&Om mkvinfo"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:324
+#, fuzzy
+msgid "&Acknowledge warnings and errors"
+msgstr "Bekräfta varningar och fel"
+
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "&Lägg till"
@@ -980,6 +985,10 @@ msgstr "&Avbryt"
 #, fuzzy
 msgid "&Chapter editor"
 msgstr "&Kapitelredigerare"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
+msgid "&Chapter number of first created entry:"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 #, fuzzy
@@ -1058,10 +1067,6 @@ msgstr "&Ladda ner"
 msgid "&Duration of each entry in seconds:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
-msgid "&Edit in corresponding tool and remove from queue"
-msgstr "&Redigera i motsvarande verktyg och ta bort från kön"
-
 #: src/mkvtoolnix-gui/merge/input.cpp:1256
 msgid "&Enable all tracks"
 msgstr "&Aktivera alla spår"
@@ -1095,6 +1100,11 @@ msgstr "&FAQ"
 #: src/info/ui/mainwindow.h:121
 msgid "&File"
 msgstr "&Fil"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
+#, fuzzy
+msgid "&First entry to renumber:"
+msgstr "Antalet kapitel:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1172
 msgid "&Font && size:"
@@ -1183,6 +1193,11 @@ msgstr "&Namn:"
 #: src/mkvtoolnix-gui/forms/merge/tool.h:220
 msgid "&New"
 msgstr "&Ny"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#, fuzzy
+msgid "&Number of entries to renumber:"
+msgstr "Antalet kapitel:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1222
 msgid "&Only enable muxing of tracks with specific languages by default"
@@ -1282,6 +1297,11 @@ msgstr "&Återställ det här värdet"
 msgid "&Save"
 msgstr "&Spara"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#, fuzzy
+msgid "&Save attachment content to a file"
+msgstr "Ersätt en bilaga med filen 'filename'"
+
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
 msgid "&Save output"
 msgstr "&Spara utmatning"
@@ -1323,10 +1343,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
 msgid "&Start && end:"
 msgstr "&Början && slut:"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
-msgid "&Start all pending jobs"
-msgstr "&Starta alla pågående jobb"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:315
 msgid "&Start jobs automatically"
@@ -2058,6 +2074,16 @@ msgstr "Om mkvinfo"
 msgid "Acknowledge &all warnings and errors"
 msgstr "Bekräfta &alla varningar och fel"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:323
+#, fuzzy
+msgid "Acknowledge &errors"
+msgstr "Bekräfta fel"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:322
+#, fuzzy
+msgid "Acknowledge &warnings"
+msgstr "Bekräfta varningar"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
@@ -2067,18 +2093,6 @@ msgstr "Bekräfta alla &fel"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 msgid "Acknowledge all &warnings"
 msgstr "Bekräfta alla &varningar"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:323
-msgid "Acknowledge errors"
-msgstr "Bekräfta fel"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:322
-msgid "Acknowledge warnings"
-msgstr "Bekräfta varningar"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:324
-msgid "Acknowledge warnings and errors"
-msgstr "Bekräfta varningar och fel"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Actions for handling attachments"
@@ -2710,6 +2724,10 @@ msgstr "Spår för undertexten %u"
 msgid "Buttons"
 msgstr "knappar"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
+msgid "C&onfiguration active"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 #, fuzzy
 msgid "C&onstrict or expand timecodes"
@@ -2853,7 +2871,6 @@ msgid "Channels: %1%"
 msgstr "Kanaler: %1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "Chapter &number of first created entry:"
 msgstr ""
 
@@ -3093,10 +3110,6 @@ msgstr "Komprimeringen misslyckades: %1%\n"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1572
 msgid "Compression:"
 msgstr "Komprimering:"
-
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
-msgid "Configuration &active"
-msgstr ""
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
 msgid "Container"
@@ -3806,6 +3819,11 @@ msgstr "Varaktighet: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Varaktighet: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:320
+#, fuzzy
+msgid "E&dit in corresponding tool and remove from queue"
+msgstr "&Redigera i motsvarande verktyg och ta bort från kön"
+
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:192
 #, fuzzy
 msgid "E&xecute now"
@@ -4318,10 +4336,6 @@ msgstr ""
 #, fuzzy
 msgid "Finished at:"
 msgstr "Avslutade på"
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
-msgid "First entry to &renumber:"
-msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1581
 msgid "Fix bitstream timing info"
@@ -5979,11 +5993,6 @@ msgstr "Antalet kapitel:"
 msgid "Number of chapters:"
 msgstr "Antalet kapitel:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
-#, fuzzy
-msgid "Number of entries to &renumber:"
-msgstr "Antalet kapitel:"
-
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -6607,6 +6616,11 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "Ta bort kapitel"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#, fuzzy
+msgid "Re&place attachment with a new file"
+msgstr "Ersätt en bilaga med filen 'filename'"
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr ""
@@ -6766,11 +6780,6 @@ msgstr "Ersätt en bilaga med filen 'filename'"
 msgid "Replace attachment"
 msgstr "Bifogad"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
-#, fuzzy
-msgid "Replace attachment with a new &file"
-msgstr "Ersätt en bilaga med filen 'filename'"
-
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 #, fuzzy
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
@@ -6896,10 +6905,6 @@ msgstr "Spara som standard för nya jobb"
 #, fuzzy
 msgid "Save attachment"
 msgstr "Bifogad"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-msgid "Save attachment content to a &file"
-msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:504
 #, fuzzy
@@ -7471,6 +7476,11 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:381
 msgid "Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed."
 msgstr ""
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+#, fuzzy
+msgid "Sta&rt all pending jobs"
+msgstr "&Starta alla pågående jobb"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1650
 msgid "Sta&rt muxing"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-02-27 15:48+0100\n"
+"POT-Creation-Date: 2016-02-27 16:16+0100\n"
 "PO-Revision-Date: 2015-12-16 10:26+0100\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -1061,6 +1061,11 @@ msgstr "中止(&A)"
 msgid "&About mkvinfo"
 msgstr "關於 mkvinfo(&A)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:324
+#, fuzzy
+msgid "&Acknowledge warnings and errors"
+msgstr "完成，有警告"
+
 #: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
 msgid "&Add"
 msgstr "加入(&A)"
@@ -1109,6 +1114,10 @@ msgstr "取消(&C)"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:307
 msgid "&Chapter editor"
 msgstr "章節編輯器(&C)"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
+msgid "&Chapter number of first created entry:"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:152
 #, fuzzy
@@ -1189,10 +1198,6 @@ msgstr "下載(&D)"
 msgid "&Duration of each entry in seconds:"
 msgstr "播放清單的最短時間長度，單位為秒:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:320
-msgid "&Edit in corresponding tool and remove from queue"
-msgstr ""
-
 #: src/mkvtoolnix-gui/merge/input.cpp:1256
 msgid "&Enable all tracks"
 msgstr "啟用全部軌道(&E)"
@@ -1225,6 +1230,11 @@ msgstr ""
 #: src/info/ui/mainwindow.h:121
 msgid "&File"
 msgstr "檔案(&F)"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
+#, fuzzy
+msgid "&First entry to renumber:"
+msgstr "章節數:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1172
 msgid "&Font && size:"
@@ -1316,6 +1326,11 @@ msgstr "名稱(&N):"
 #: src/mkvtoolnix-gui/forms/merge/tool.h:220
 msgid "&New"
 msgstr "新增(&N)"
+
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#, fuzzy
+msgid "&Number of entries to renumber:"
+msgstr "章節數:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1222
 msgid "&Only enable muxing of tracks with specific languages by default"
@@ -1422,6 +1437,11 @@ msgstr ""
 msgid "&Save"
 msgstr "儲存(&S)"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#, fuzzy
+msgid "&Save attachment content to a file"
+msgstr "用此檔案的「檔名」取代附件"
+
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:135
 msgid "&Save output"
 msgstr "儲存輸出(&S)"
@@ -1464,10 +1484,6 @@ msgstr "根據時間碼起訖排序章節"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:483
 msgid "&Start && end:"
 msgstr "開始和結束(&S):"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
-msgid "&Start all pending jobs"
-msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:315
 #, fuzzy
@@ -2238,6 +2254,16 @@ msgstr "關於 mkvinfo"
 msgid "Acknowledge &all warnings and errors"
 msgstr "完成，有警告"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:323
+#, fuzzy
+msgid "Acknowledge &errors"
+msgstr "完成，有警告"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:322
+#, fuzzy
+msgid "Acknowledge &warnings"
+msgstr "完成，有警告"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:498
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:147
 msgid "Acknowledge all &errors"
@@ -2247,21 +2273,6 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:146
 #, fuzzy
 msgid "Acknowledge all &warnings"
-msgstr "完成，有警告"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:323
-#, fuzzy
-msgid "Acknowledge errors"
-msgstr "完成，有警告"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:322
-#, fuzzy
-msgid "Acknowledge warnings"
-msgstr "完成，有警告"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:324
-#, fuzzy
-msgid "Acknowledge warnings and errors"
 msgstr "完成，有警告"
 
 #: src/propedit/propedit_cli_parser.cpp:227
@@ -2876,6 +2887,10 @@ msgstr "按鈕軌道: %1, %2"
 msgid "Buttons"
 msgstr "按鈕"
 
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
+msgid "C&onfiguration active"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 msgid "C&onstrict or expand timecodes"
 msgstr "縮短或延長時間碼(&O)"
@@ -3020,7 +3035,6 @@ msgid "Channels: %1%"
 msgstr "聲道數: %1%"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:196
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:171
 msgid "Chapter &number of first created entry:"
 msgstr ""
 
@@ -3259,10 +3273,6 @@ msgstr "壓縮失敗: %1%\n"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1572
 msgid "Compression:"
 msgstr "壓縮方式:"
-
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:189
-msgid "Configuration &active"
-msgstr ""
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
 msgid "Container"
@@ -3976,6 +3986,10 @@ msgstr "時間長度: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "時間長度: %|1$.3f|s (%2%)"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:320
+msgid "E&dit in corresponding tool and remove from queue"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:192
 #, fuzzy
 msgid "E&xecute now"
@@ -4487,10 +4501,6 @@ msgstr "檔案不能被添加至自己上。「--append-to」的參數無效。\
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 msgid "Finished at:"
 msgstr "完成時間:"
-
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
-msgid "First entry to &renumber:"
-msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1581
 msgid "Fix bitstream timing info"
@@ -6150,11 +6160,6 @@ msgstr "章節數:"
 msgid "Number of chapters:"
 msgstr "章節數:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
-#, fuzzy
-msgid "Number of entries to &renumber:"
-msgstr "章節數:"
-
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:429
 msgid "Number of nanoseconds (not scaled) per frame."
@@ -6785,6 +6790,11 @@ msgstr "RSA"
 msgid "Re&number sub-chapters"
 msgstr "章節之前"
 
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
+#, fuzzy
+msgid "Re&place attachment with a new file"
+msgstr "用此檔案的「檔名」取代附件"
+
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:124
 msgid "Read full ChangeLog online"
 msgstr "閱讀完整的線上變更日誌"
@@ -6940,11 +6950,6 @@ msgstr "用此檔案的「檔名」取代附件"
 msgid "Replace attachment"
 msgstr "附件"
 
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:281
-#, fuzzy
-msgid "Replace attachment with a new &file"
-msgstr "用此檔案的「檔名」取代附件"
-
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:282
 #, fuzzy
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
@@ -7070,10 +7075,6 @@ msgstr "儲存成新合併任務的預設值(&D)"
 #, fuzzy
 msgid "Save attachment"
 msgstr "附件"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-msgid "Save attachment content to a &file"
-msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:504
 msgid "Save chapters as XML"
@@ -7636,6 +7637,10 @@ msgstr "分割"
 #: src/mkvtoolnix-gui/merge/output.cpp:381
 msgid "Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed."
 msgstr "在時間碼等於或大於列出編號的章節起始時間碼的第一個關鍵影格之前進行分割。"
+
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:502
+msgid "Sta&rt all pending jobs"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1650
 msgid "Sta&rt muxing"
