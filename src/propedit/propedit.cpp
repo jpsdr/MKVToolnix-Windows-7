@@ -41,6 +41,18 @@ display_update_element_result(const EbmlCallbacks &callbacks,
       message += Y("The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file.");
       break;
 
+    case kax_analyzer_c::uer_error_opening_for_reading:
+      message += (boost::format("%1% %2%")
+                  % Y("The file could not be opened for reading.")
+                  % Y("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file.")).str();
+      break;
+
+    case kax_analyzer_c::uer_error_opening_for_writing:
+      message += (boost::format("%1% %2%")
+                  % Y("The file could not be opened for writing.")
+                  % Y("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file.")).str();
+      break;
+
     default:
       message += Y("An unknown error occured. The file has been modified.");
   }
