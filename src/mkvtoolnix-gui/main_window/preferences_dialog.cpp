@@ -435,6 +435,8 @@ PreferencesDialog::setupPlaylistScanningPolicy() {
   ui->cbMScanPlaylistsPolicy->setCurrentIndex(selected);
   ui->sbMMinPlaylistDuration->setValue(m_cfg.m_minimumPlaylistDuration);
 
+  adjustPlaylistControls();
+
   Util::fixComboBoxViewWidth(*ui->cbMScanPlaylistsPolicy);
 }
 
