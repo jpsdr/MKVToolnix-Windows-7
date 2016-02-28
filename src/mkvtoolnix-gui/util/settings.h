@@ -119,6 +119,8 @@ public:
   unsigned int m_minimumPlaylistDuration;
 
   JobRemovalPolicy m_jobRemovalPolicy;
+  bool m_removeOldJobs;
+  int m_removeOldJobsDays;
   bool m_useDefaultJobDescription, m_showOutputOfAllJobs, m_switchToJobOutputAfterStarting, m_resetJobWarningErrorCountersOnExit;
 
   bool m_checkForUpdates;

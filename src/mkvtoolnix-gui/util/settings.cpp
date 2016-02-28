@@ -205,6 +205,8 @@ Settings::load() {
   m_switchToJobOutputAfterStarting     = reg.value("switchToJobOutputAfterStarting", false).toBool();
   m_resetJobWarningErrorCountersOnExit = reg.value("resetJobWarningErrorCountersOnExit", false).toBool();
   m_jobRemovalPolicy                   = static_cast<JobRemovalPolicy>(reg.value("jobRemovalPolicy", static_cast<int>(JobRemovalPolicy::Never)).toInt());
+  m_removeOldJobs                      = reg.value("removeOldJobs",                                  true).toBool();
+  m_removeOldJobsDays                  = reg.value("removeOldJobsDays",                              14).toInt();
 
   m_disableAnimations                  = reg.value("disableAnimations", false).toBool();
   m_showToolSelector                   = reg.value("showToolSelector", true).toBool();
@@ -362,6 +364,8 @@ Settings::save()
   reg.setValue("switchToJobOutputAfterStarting",     m_switchToJobOutputAfterStarting);
   reg.setValue("resetJobWarningErrorCountersOnExit", m_resetJobWarningErrorCountersOnExit);
   reg.setValue("jobRemovalPolicy",                   static_cast<int>(m_jobRemovalPolicy));
+  reg.setValue("removeOldJobs",                      m_removeOldJobs);
+  reg.setValue("removeOldJobsDays",                  m_removeOldJobsDays);
 
   reg.setValue("disableAnimations",                  m_disableAnimations);
   reg.setValue("showToolSelector",                   m_showToolSelector);

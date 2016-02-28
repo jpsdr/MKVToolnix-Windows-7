@@ -52,6 +52,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbGuiShowOutputOfAllJobs->setChecked(m_cfg.m_showOutputOfAllJobs);
   ui->cbGuiSwitchToJobOutputAfterStarting->setChecked(m_cfg.m_switchToJobOutputAfterStarting);
   ui->cbGuiResetJobWarningErrorCountersOnExit->setChecked(m_cfg.m_resetJobWarningErrorCountersOnExit);
+  ui->cbGuiRemoveOldJobs->setChecked(m_cfg.m_removeOldJobs);
+  ui->sbGuiRemoveOldJobsDays->setValue(m_cfg.m_removeOldJobsDays);
+  adjustRemoveOldJobsControls();
   setupJobRemovalPolicy();
 
   setupCommonLanguages();
@@ -193,6 +196,8 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the \"job output\" tool will not be cleared when a new job starts."));
   Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting, QY("If enabled the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start muxing\")."));
   Util::setToolTip(ui->cbGuiResetJobWarningErrorCountersOnExit, QY("If enabled the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."));
+  Util::setToolTip(ui->cbGuiRemoveOldJobs,                      QY("If enabled the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
+  Util::setToolTip(ui->sbGuiRemoveOldJobsDays,                  QY("If enabled the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
 
   Util::setToolTip(ui->cbGuiRemoveJobs,
                    Q("%1 %2")
@@ -325,24 +330,27 @@ PreferencesDialog::setupToolTips() {
 
 void
 PreferencesDialog::setupConnections() {
-  connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,       this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
+  connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
-  connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,         ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
-  connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,         this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetRelativeDirectory,                &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetPreviousDirectory,                &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetFixedDirectory,                   &QRadioButton::toggled,      this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->pbMBrowseAutoSetFixedDirectory,             &QPushButton::clicked,       this,                                 &PreferencesDialog::browseFixedOutputDirectory);
+  connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
+  connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetRelativeDirectory,                &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetPreviousDirectory,                &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetFixedDirectory,                   &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->pbMBrowseAutoSetFixedDirectory,             &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseFixedOutputDirectory);
 
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->lMEnableMuxingAllTracksOfType,    &QLabel::setEnabled);
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->cbMEnableMuxingAllVideoTracks,    &QLabel::setEnabled);
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->cbMEnableMuxingAllAudioTracks,    &QLabel::setEnabled);
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,         ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->lMEnableMuxingAllTracksOfType,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllVideoTracks,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllAudioTracks,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
 
-  connect(ui->buttons,                                    &QDialogButtonBox::accepted, this,                                 &PreferencesDialog::accept);
-  connect(ui->buttons,                                    &QDialogButtonBox::rejected, this,                                 &PreferencesDialog::reject);
+  connect(ui->cbGuiRemoveOldJobs,                         &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
+  connect(ui->sbGuiRemoveOldJobsDays,                     static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
+
+  connect(ui->buttons,                                    &QDialogButtonBox::accepted,                                   this,                                 &PreferencesDialog::accept);
+  connect(ui->buttons,                                    &QDialogButtonBox::rejected,                                   this,                                 &PreferencesDialog::reject);
 }
 
 void
@@ -556,6 +564,8 @@ PreferencesDialog::save() {
   m_cfg.m_resetJobWarningErrorCountersOnExit = ui->cbGuiResetJobWarningErrorCountersOnExit->isChecked();
   auto idx                                   = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy                   = static_cast<Util::Settings::JobRemovalPolicy>(idx);
+  m_cfg.m_removeOldJobs                      = ui->cbGuiRemoveOldJobs->isChecked();
+  m_cfg.m_removeOldJobsDays                  = ui->sbGuiRemoveOldJobsDays->value();
 
   m_cfg.m_chapterNameTemplate                = ui->leCENameTemplate->text();
   m_cfg.m_defaultChapterLanguage             = ui->cbCEDefaultLanguage->currentData().toString();
@@ -685,6 +695,12 @@ PreferencesDialog::setTabTitleForRunProgramExecutable(int tabIdx,
 
   auto name = executable.isEmpty() ? QY("<no program selected yet>") : QFileInfo{executable}.fileName();
   ui->twJobsPrograms->setTabText(tabIdx, name);
+}
+
+void
+PreferencesDialog::adjustRemoveOldJobsControls() {
+  ui->sbGuiRemoveOldJobsDays->setEnabled(ui->cbGuiRemoveOldJobs->isChecked());
+  ui->sbGuiRemoveOldJobsDays->setSuffix(QNY(" day", " days", ui->sbGuiRemoveOldJobsDays->value()));
 }
 
 }}

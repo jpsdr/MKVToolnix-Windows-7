@@ -40,6 +40,7 @@ public slots:
   void addProgramToExecute();
   void removeProgramToExecute(int index);
   void setSendersTabTitleForRunProgramExecutable(QString const &executable);
+  void adjustRemoveOldJobsControls();
 
 protected:
   void setupPageSelector();

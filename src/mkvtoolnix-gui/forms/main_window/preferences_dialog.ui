@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>802</width>
+    <width>813</width>
     <height>489</height>
    </rect>
   </property>
@@ -1238,31 +1238,15 @@
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="cbGuiRemoveJobs">
-             <property name="text">
-              <string>&amp;Remove job from queue after completion</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="cbGuiRemoveJobs">
+               <property name="text">
+                <string>&amp;Remove job from queue after completion:</string>
                </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
+              </widget>
              </item>
-             <item>
+             <item row="0" column="1">
               <widget class="QComboBox" name="cbGuiJobRemovalPolicy">
                <item>
                 <property name="text">
@@ -1279,6 +1263,26 @@
                  <string>Always remove the job afterwards</string>
                 </property>
                </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="cbGuiRemoveOldJobs">
+               <property name="text">
+                <string>Remove com&amp;pleted jobs older than x days:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="sbGuiRemoveOldJobsDays">
+               <property name="suffix">
+                <string notr="true"> days</string>
+               </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>365</number>
+               </property>
               </widget>
              </item>
             </layout>
@@ -1512,6 +1516,9 @@
   <tabstop>cbMAddingAppendingFilesPolicy</tabstop>
   <tabstop>cbMProcessPriority</tabstop>
   <tabstop>cbMAlwaysShowOutputFileControls</tabstop>
+  <tabstop>rbMTrackPropertiesLayoutHorizontalScrollArea</tabstop>
+  <tabstop>rbMTrackPropertiesLayoutHorizontalTwoColumns</tabstop>
+  <tabstop>rbMTrackPropertiesLayoutVerticalTabWidget</tabstop>
   <tabstop>leMDefaultAdditionalCommandLineOptions</tabstop>
   <tabstop>pbMEditDefaultAdditionalCommandLineOptions</tabstop>
   <tabstop>cbMAutoSetFileTitle</tabstop>
@@ -1541,12 +1548,17 @@
   <tabstop>leCENameTemplate</tabstop>
   <tabstop>cbCEDefaultLanguage</tabstop>
   <tabstop>cbCEDefaultCountry</tabstop>
+  <tabstop>cbHEDroppedFilesPolicy</tabstop>
   <tabstop>cbGuiSwitchToJobOutputAfterStarting</tabstop>
   <tabstop>cbGuiUseDefaultJobDescription</tabstop>
   <tabstop>cbGuiShowOutputOfAllJobs</tabstop>
   <tabstop>cbGuiResetJobWarningErrorCountersOnExit</tabstop>
   <tabstop>cbGuiRemoveJobs</tabstop>
   <tabstop>cbGuiJobRemovalPolicy</tabstop>
+  <tabstop>cbGuiRemoveOldJobs</tabstop>
+  <tabstop>sbGuiRemoveOldJobsDays</tabstop>
+  <tabstop>pbJobsAddProgram</tabstop>
+  <tabstop>twJobsPrograms</tabstop>
  </tabstops>
  <resources>
   <include location="../../qt_resources.qrc"/>

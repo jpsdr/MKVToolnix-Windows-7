@@ -528,6 +528,21 @@ void
 Model::saveJobs() {
   QMutexLocker locked{&m_mutex};
 
+  // If removal of old jobs is activated then don't save a job
+  // that's been run and whose "added" date is more than the
+  // configured number of days in the past.
+  auto &cfg = Util::Settings::get();
+
+  if (cfg.m_removeOldJobs) {
+    auto now              = QDateTime::currentDateTime();
+    auto autoRemovalMsecs = static_cast<qint64>(cfg.m_removeOldJobsDays) * 1000 * 60 * 60 * 24;
+
+    removeJobsIf([now, autoRemovalMsecs](Job const &job) {
+      return mtx::included_in(job.status(), Job::DoneOk, Job::DoneWarnings, Job::Failed, Job::Aborted)
+          && (job.dateAdded().msecsTo(now) >= autoRemovalMsecs);
+    });
+  }
+
   auto order = QStringList{};
 
   for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
