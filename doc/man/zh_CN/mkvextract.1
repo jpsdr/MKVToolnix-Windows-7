@@ -34,22 +34,17 @@ mkvextract \- 将 Matroska(TM) 文件中的轨道提取为另外的文件
 \fBmkvextract\fR {模式} {源文件名} [选项] [提取指令]
 .SH "说明"
 .PP
-This program extracts specific parts from a
+本程序可将
 Matroska(TM)
-file to other useful formats\&. The first argument,
-\fBmode\fR, tells
+文件的指定部分提取为其他有用的格式。第一个参数，\fB模式\fR，告知
 \fBmkvextract\fR(1)
-what to extract\&. Currently supported is the extraction of
-tracks,
-tags,
-attachments,
-chapters,
-CUE sheets,
-timecodes
-and
-cues\&. The second argument is the name of the source file\&. It must be a
+要提取什么内容。目前支持提取
+轨道、标签、
+附件、章节、cue 表单、时间码
+及
+cue。第二个参数为源文件名称。必须为
 Matroska(TM)
-file\&. All following arguments are options and extraction specifications; both of which depend on the selected mode\&.
+文件。其余参数为选项以及提取指令；根据所选模式的不同，两种参数均有所区别。
 .SS "通用选项"
 .PP
 以下选项在所有模式下可用，本段落只讲一遍，不赘述。
@@ -107,7 +102,7 @@ file\&. All following arguments are options and extraction specifications; both 
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Turns on GUI mode\&. In this mode specially\-formatted lines may be output that can tell a controlling GUI what\*(Aqs happening\&. These messages follow the format \*(Aq#GUI#message\*(Aq\&. The message may be followed by key/value pairs as in \*(Aq#GUI#message#key1=value1#key2=value2\&...\*(Aq\&. Neither the messages nor the keys are ever translated and always output in English\&.
+打开 GUI 模式。该模式下，将输出特殊格式的行，告知目前受控的 GUI 的行为。这些消息遵从格式「#GUI#消息」。消息可能包括键值对，如「#GUI#消息#键1=值1#键2=值2\&...」。消息内容及键的内容不作翻译，总是以英语输出。
 .RE
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
@@ -171,8 +166,8 @@ tracks
 .RE
 .SS "轨道提取模式"
 .PP
-Syntax:
-\fBmkvextract \fR\fB\fBtracks\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR\fB \fR\fB\fITID1:dest\-filename1\fR\fR\fB \fR\fB[\fITID2:dest\-filename2\fR \&.\&.\&.]\fR
+语法:
+\fBmkvextract \fR\fB\fBtracks\fR\fR\fB \fR\fB\fI源文件名\fR\fR\fB \fR\fB[\fI选项\fR]\fR\fB \fR\fB\fI轨道ID1:目标文件名1\fR\fR\fB \fR\fB[\fI轨道ID2:目标文件名2\fR \&.\&.\&.]\fR
 .PP
 以下命令行在 \*(Aqtracks\*(Aq 轨道提取模式下对各轨道可用。它们应当在所应用到的轨道指令（参阅下文）之前出现。
 .PP
@@ -244,16 +239,16 @@ $ mkvextract tracks 输入\&.mkv 1:输出两条轨道\&.rm 2:输出两条轨道\
 .RE
 .SS "标签提取模式"
 .PP
-Syntax:
-\fBmkvextract \fR\fB\fBtags\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR
+语法:
+\fBmkvextract \fR\fB\fBtags\fR\fR\fB \fR\fB\fI源文件名\fR\fR\fB \fR\fB[\fI选项\fR]\fR
 .PP
 提取出的标签将被输出到命令行，除非输出被重定向（详情参见关于
 输出重定向
 的章节）。
 .SS "附件提取模式"
 .PP
-Syntax:
-\fBmkvextract \fR\fB\fBattachments\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR\fB \fR\fB\fIAID1:outname1\fR\fR\fB \fR\fB[\fIAID2:outname2\fR \&.\&.\&.]\fR
+语法:
+\fBmkvextract \fR\fB\fBattachments\fR\fR\fB \fR\fB\fI源文件名\fR\fR\fB \fR\fB[\fI选项\fR]\fR\fB \fR\fB\fI附件ID1:输出文件名1\fR\fR\fB \fR\fB[\fI附件ID2:输出文件名2\fR \&.\&.\&.]\fR
 .PP
 \fIAID\fR:\fI输出文件名\fR
 .RS 4
@@ -272,8 +267,8 @@ Matroska(TM)
 .RE
 .SS "章节提取模式"
 .PP
-Syntax:
-\fBmkvextract \fR\fB\fBchapters\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR
+语法:
+\fBmkvextract \fR\fB\fBchapters\fR\fR\fB \fR\fB\fI源文件名\fR\fR\fB \fR\fB[\fI选项\fR]\fR
 .PP
 \fB\-s\fR, \fB\-\-simple\fR
 .RS 4
@@ -284,17 +279,14 @@ XML
 格式输出章节。
 .RE
 .PP
-\fB\-\-simple\-language\fR \fIlanguage\fR
+\fB\-\-simple\-language\fR \fI语言\fR
 .RS 4
-If the simple format is enabled then
-\fBmkvextract\fR(1)
-will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name\&. By default
-\fBmkvextract\fR(1)
-will use the first chapter name found for each atom regardless of its language\&.
+若启用简化格式，\fBmkvextract\fR(1)
+对于发现的每个章节单位，均只输出单个条目，即使该章节单位包含多个章节名称。\fBmkvextract\fR(1)
+默认对每个章节单位使用发现的第一个章节名称，而不考察其语言。
 .sp
-Using this option allows the user to determine which chapter names are output if atoms contain more than one chapter name\&. The
-\fIlanguage\fR
-parameter must be an ISO 639\-1 or ISO 639\-2 code\&.
+本选项允许用户决定，在章节单位包含多个章节名称时，应该输出哪些章节名称。\fI语言\fR
+参数必须为 ISO 639\-1 或 ISO 639\-2 代码。
 .RE
 .PP
 提取出的章节将被输出到命令行，除非输出被重定向（详情参见关于
@@ -302,16 +294,16 @@ parameter must be an ISO 639\-1 or ISO 639\-2 code\&.
 的章节）。
 .SS "Cue 表单提取模式"
 .PP
-Syntax:
-\fBmkvextract \fR\fB\fBcuesheet\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR
+语法:
+\fBmkvextract \fR\fB\fBcuesheet\fR\fR\fB \fR\fB\fI源文件名\fR\fR\fB \fR\fB[\fI选项\fR]\fR
 .PP
 提取出的 cue 表单将被输出到命令行，除非输出被重定向（详情参见关于
 输出重定向
 的章节）。
 .SS "时间码提取模式"
 .PP
-Syntax:
-\fBmkvextract \fR\fB\fBtimecodes_v2\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR\fB \fR\fB\fITID1:dest\-filename1\fR\fR\fB \fR\fB[\fITID2:dest\-filename2\fR \&.\&.\&.]\fR
+语法:
+\fBmkvextract \fR\fB\fBtimecodes_v2\fR\fR\fB \fR\fB\fI源文件名\fR\fR\fB \fR\fB[\fI选项\fR]\fR\fB \fR\fB\fI轨道ID1:目标文件名1\fR\fR\fB \fR\fB[\fI轨道ID2:目标文件名2\fR \&.\&.\&.]\fR
 .PP
 提取出的时间码将被输出到命令行，除非输出被重定向（详情参见关于
 输出重定向
@@ -340,33 +332,34 @@ $ mkvextract timecodes_v2 输入\&.mkv 1:轨道1的时间码\&.txt 2:轨道2的�
 .RE
 .\}
 .RE
-.SS "Cues extraction mode"
+.SS "cue 提取模式"
 .PP
-Syntax:
-\fBmkvextract \fR\fB\fBcues\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR\fB \fR\fB\fITID1:dest\-filename1\fR\fR\fB \fR\fB[\fITID2:dest\-filename2\fR \&.\&.\&.]\fR
+语法:
+\fBmkvextract \fR\fB\fBcues\fR\fR\fB \fR\fB\fI源文件名\fR\fR\fB \fR\fB[\fI选项\fR]\fR\fB \fR\fB\fI轨道ID1:目标文件名1\fR\fR\fB \fR\fB[\fI轨道ID2:目标文件名2\fR \&.\&.\&.]\fR
 .PP
-\fITID:dest\-filename\fR
+\fI轨道ID:目标文件名\fR
 .RS 4
-Causes extraction of the cues for the track with the ID
+若源文件中存在，则提取 ID 为
 \fITID\fR
-into the file
-\fIoutname\fR
-if such a track exists in the source file\&. This option can be given multiple times\&. The track IDs are the same as the ones output by
-\fBmkvmerge\fR(1)\*(Aqs
+的轨道的 cue 并保存到
+\fI输出文件名\fR
+中。本选项可多次给出。轨道 ID 与
+\fBmkvmerge\fR(1)
+的
 \fB\-\-identify\fR
-option and not the numbers contained in the
+选项所输出的一致，而非
 CueTrack
-element\&.
+元素中所包含的数字。
 .RE
 .PP
-The format output is a simple text format: one line per
+输出的格式为简单文本格式: 每个
 CuePoint
-element with
-key=value
-pairs\&. If an optional element is not present in a
+及
+键=值
+对占一行。如果
 CuePoint
-(e\&.g\&.
-CueDuration) then a dash will be output as the value\&.
+中未出现某个可选元素 (如
+CueDuration) 则将输出短横作为其数值。
 .PP
 示例:
 .sp
@@ -380,25 +373,23 @@ timecode=00:00:13\&.305000000 duration=\- cluster_position=757741 relative_posit
 .RE
 .\}
 .PP
-The possible keys are:
+可用的关键词包括：
 .PP
 timecode
 .RS 4
-The cue point\*(Aqs timecode with nanosecond precision\&. The format is
-HH:MM:SS\&.nnnnnnnnn\&. This element is always set\&.
+cue point 的时间码，精确到纳秒。格式为
+HH:MM:SS\&.nnnnnnnnn。该元素必有值。
 .RE
 .PP
 duration
 .RS 4
-The cue point\*(Aqs duration with nanosecond precision\&. The format is
-HH:MM:SS\&.nnnnnnnnn\&.
+cue point 的时长，精确到纳秒。
 .RE
 .PP
 cluster_position
 .RS 4
-The absolute position in bytes inside the
 Matroska(TM)
-file where the cluster containing the referenced element starts\&.
+文件中指向相关元素的簇的起始点的绝对位置，单位为字节。
 .if n \{\
 .sp
 .\}
@@ -411,23 +402,22 @@ file where the cluster containing the referenced element starts\&.
 \fB注意\fR
 .ps -1
 .br
-Inside the
 Matroska(TM)
-file the
-CueClusterPosition
-is relative to the segment\*(Aqs data start offset\&. The value output by
-\fBmkvextract\fR(1)\*(Aqs cue extraction mode, however, contains that offset already and is an absolute offset from the beginning of the file\&.
+文件中，CueClusterPosition
+相对于剪辑数据的起始偏移。而
+\fBmkvextract\fR(1)
+的 cue 提取模式所输出的值，已经计入该偏移，因此是从文件开头起的绝对偏移。
 .sp .5v
 .RE
 .RE
 .PP
 relative_position
 .RS 4
-The relative position in bytes inside the cluster where the
+cue point 所指向的
 BlockGroup
-or
+或
 SimpleBlock
-element the cue point refers to starts\&.
+元素的起始点在簇内的绝对位置，单位为字节。
 .if n \{\
 .sp
 .\}
@@ -440,15 +430,15 @@ element the cue point refers to starts\&.
 \fB注意\fR
 .ps -1
 .br
-Inside the
 Matroska(TM)
-file the
-CueRelativePosition
-is relative to the cluster\*(Aqs data start offset\&. The value output by
-\fBmkvextract\fR(1)\*(Aqs cue extraction mode, however, is relative to the cluster\*(Aqs ID\&. The absolute position inside the file can be calculated by adding
+文件中，CueRelativePosition
+相对于簇数据的起始偏移。而
+\fBmkvextract\fR(1)
+的 cue 提取模式所输出的值，相对于簇的 ID。在文件内的绝对位置可以通过将
 cluster_position
-and
-relative_position\&.
+与
+relative_position
+相加得出。
 .sp .5v
 .RE
 .RE
@@ -459,7 +449,7 @@ relative_position\&.
 .RS 4
 .\}
 .nf
-$ mkvextract cues input\&.mkv 1:cues\-track1\&.txt 2:cues\-track2\&.txt
+$ mkvextract cues 输入\&.mkv 1:cues\-轨1\&.txt 2:cues\-轨2\&.txt
 .fi
 .if n \{\
 .RE
@@ -520,9 +510,9 @@ $ mkvextract tags 源\&.mkv \-\-redirect\-output 标签\&.xml
 .RE
 .SH "文本文件与字符集转换"
 .PP
-For an in\-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically\-named section in the
+关于 MKVToolNix 套件中所有工具如何处理字符集转换、输入/输出编码、命令行编码及控制台编码的深入讨论，请参见
 \fBmkvmerge\fR(1)
-man page\&.
+手册中相对应名称的段落。
 .SH "输出文件格式"
 .PP
 输出文件的格式取决于轨道的类型，而不是输出文件名的扩展名。目前支持以下轨道类型：
@@ -573,9 +563,9 @@ V_VP8, V_VP9
 VP8
 /
 VP9
-tracks are written to
+轨道将输出为
 IVF
-files\&.
+文件。
 .RE
 .PP
 A_MPEG/L2
@@ -669,9 +659,9 @@ WV
 A_OPUS
 .RS 4
 Opus(TM)
-tracks are written to
+轨道将输出为
 OggOpus(TM)
-files\&.
+文件。
 .RE
 .PP
 S_TEXT/UTF8
@@ -812,21 +802,21 @@ OGM
 \fILC_*\fR
 族)。其他变量包括:
 .PP
-\fIMKVEXTRACT_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR and its short form \fIMTX_DEBUG\fR
+\fIMKVEXTRACT_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR 及其缩略形式 \fIMTX_DEBUG\fR
 .RS 4
 内容将被当作通过
 \fB\-\-debug\fR
 选项传递的参数对待。
 .RE
 .PP
-\fIMKVEXTRACT_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR and its short form \fIMTX_ENGAGE\fR
+\fIMKVEXTRACT_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR 及其缩略形式 \fIMTX_ENGAGE\fR
 .RS 4
 内容将被当作通过
 \fB\-\-engage\fR
 选项传递的参数对待。
 .RE
 .PP
-\fIMKVEXTRACT_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR and its short form \fIMTX_OPTIONS\fR
+\fIMKVEXTRACT_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR 及其缩略形式 \fIMTX_OPTIONS\fR
 .RS 4
 内容将在空白处切割。最终得到的字符串部分将按命令行选项的格式处理。如果您需要传递特殊字符 (如空白) 则需要转义 (参见关于转义文本中特殊字符的段落)。
 .RE

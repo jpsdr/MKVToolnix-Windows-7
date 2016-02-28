@@ -125,11 +125,11 @@ GUI
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Turns on GUI mode\&. In this mode specially\-formatted lines may be output that can tell a controlling GUI what\*(Aqs happening\&. These messages follow the format \*(Aq#GUI#message\*(Aq\&. The message may be followed by key/value pairs as in \*(Aq#GUI#message#key1=value1#key2=value2\&...\*(Aq\&. Neither the messages nor the keys are ever translated and always output in English\&.
+打开 GUI 模式。该模式下，将输出特殊格式的行，告知目前受控的 GUI 的行为。这些消息遵从格式「#GUI#消息」。消息可能包括键值对，如「#GUI#消息#键1=值1#键2=值2\&...」。消息内容及键的内容不作翻译，总是以英语输出。
 .sp
-This switch has nothing to do with the
+此开关与
 \fB\-\-gui\fR
-parameter which causes mkvinfo to display its own GUI\&.
+参数无关，后者可让 mkvinfo 显示其自身的 GUI。
 .RE
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
@@ -225,9 +225,9 @@ Matroska(TM)
 元素不直接相连的信息。对于其他元素，将只输出发现的基本信息。Level 3 增加了元信息以便调试（换句话说：它是为开发人员设计的）。Level 3 输出的所有行都以方括号嵌套以便过滤。
 .SH "文本文件与字符集转换"
 .PP
-For an in\-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically\-named section in the
+关于 MKVToolNix 套件中所有工具如何处理字符集转换、输入/输出编码、命令行编码及控制台编码的深入讨论，请参见
 \fBmkvmerge\fR(1)
-man page\&.
+手册中相对应名称的段落。
 .SH "退出代码"
 .PP
 \fBmkvinfo\fR(1)
@@ -286,21 +286,21 @@ man page\&.
 \fILC_*\fR
 族)。其他变量包括:
 .PP
-\fIMKVINFO_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR and its short form \fIMTX_DEBUG\fR
+\fIMKVINFO_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR 及其缩略形式 \fIMTX_DEBUG\fR
 .RS 4
 内容将被当作通过
 \fB\-\-debug\fR
 选项传递的参数对待。
 .RE
 .PP
-\fIMKVINFO_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR and its short form \fIMTX_ENGAGE\fR
+\fIMKVINFO_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR 及其缩略形式 \fIMTX_ENGAGE\fR
 .RS 4
 内容将被当作通过
 \fB\-\-engage\fR
 选项传递的参数对待。
 .RE
 .PP
-\fIMKVINFO_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR and its short form \fIMTX_OPTIONS\fR
+\fIMKVINFO_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR 及其缩略形式 \fIMTX_OPTIONS\fR
 .RS 4
 内容将在空白处切割。最终得到的字符串部分将按命令行选项的格式处理。如果您需要传递特殊字符 (如空白) 则需要转义 (参见关于转义文本中特殊字符的段落)。
 .RE

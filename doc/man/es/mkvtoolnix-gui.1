@@ -31,46 +31,43 @@
 mkvtoolnix-gui \- una GUI para \fBmkvmerge\fR(1) incluyendo un cap\('itulo y editor de encabezado
 .SH "SINOPSIS"
 .HP \w'\fBmkvtoolnix\-gui\fR\ 'u
-\fBmkvtoolnix\-gui\fR [[configuration\-file\-name\&.mtxcfg] | [source\-file\&.ext] | [\-\-edit\-chapters\ [chapter\-file\&.ext]] | [\-\-edit\-headers\ [matroska\-file\&.mkv]]]
+\fBmkvtoolnix\-gui\fR [[archivo\-configuraci\('on\&.mtxcfg] | [archivo\-origen\&.ext] | [\-\-edit\-chapters\ [archivo\-cap\('itulos\&.ext]] | [\-\-edit\-headers\ [archivo\-matroska\&.mkv]]]
 .SH "DESCRIPCI\('ON"
 .PP
 \fBmkvtoolnix-gui\fR(1)
-is a
-Qt(TM)
-based
-GUI
-for
+es una
+GUI, basada en
+Qt(TM), para
 \fBmkvmerge\fR(1)
-(and will evolve to cover
+(y evolucionar\('a para abarcar
 \fBmkvinfo\fR(1)
-and
-\fBmkvextract\fR(1)
-as well)\&. It offers easy access to most of
-\fBmkvmerge\fR(1)\*(Aqs options\&. All settings (e\&.g\&. source files, track options etc) can be saved and restored\&.
+y
+\fBmkvextract\fR(1))\&. Ofrece un f\('acil acceso a la mayor\('ia de opciones de
+\fBmkvmerge\fR(1)\&. Todos los ajustes (p\&.e\&. archivos origen, opciones de pista, etc\&.\&.\&.) pueden ser guardados y cargados\&.
 .PP
-Listing configuration file names with the extension
+Los archivos de configuraci\('on con la extensi\('on
 \&.mtxcfg
-causes the GUI to load the those configuration files in the appropriate tool\&. Any other file name is added as an input file for merging, opened in the chapter editor or in the header editor depending on the current mode\&. The current mode can be changed with
+provocan que la GUI los cargue mediante una herramienta adecuada\&. Cualquier archivo de configuraci\('on, se a\(~nade como un archivo para el multiplexado, o se abre en el editor de cap\('itulos o de cabeceras, dependiendo del modo actual\&. El modo actual se puede cambiar con
 \fB\-\-merge\fR,
 \fB\-\-edit\-chapters\fR
-or
-\fB\-\-edit\-headers\fR\&. The default mode is adding files for merging\&.
+o
+\fB\-\-edit\-headers\fR\&. El modo por defecto es a\(~nadir archivos para multiplexar\&.
 .PP
-Note that if an instance of the application is already running when the application is started a second time all file names given on the command line are handled by the already\-running instance\&.
+Tenga en cuenta que si una instancia de la aplicaci\('on ya se est\('a ejecutando cuando la aplicaci\('on se inicia por segunda vez, todos los nombres de los archivos dados en la l\('inea de comandos ser\('an gestionados por la instancia que se encuentra en ejecuci\('on\&.
 .PP
 \fB\-\-merge\fR
 .RS 4
-All following file names will be added as input files to the current merge job\&. This is the default mode\&.
+Los posteriores archivos de configuraci\('on se a\(~nadir\('an como archivos de entrada a la tarea de multiplexado actual\&. Este es el modo por defecto\&.
 .RE
 .PP
 \fB\-\-edit\-chapters\fR
 .RS 4
-All following file names will be opened in the chapter editor\&.
+Los posteriores archivos de configuraci\('on ser\('an abiertos en el editor de cap\('itulos\&.
 .RE
 .PP
 \fB\-\-edit\-headers\fR
 .RS 4
-All following file names will be opened in the header editor\&.
+Los posteriores archivos de configuraci\('on ser\('an abiertos en el editor de cabeceras\&.
 .RE
 .PP
 \fB\-h\fR, \fB\-\-help\fR

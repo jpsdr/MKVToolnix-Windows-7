@@ -137,12 +137,12 @@ mkvpropedit "nombre\-archivo\&.mkv" \-\-tags track:a1:nuevas\-etiquetas\-audio\&
 .PP
 \fB\-\-add\-track\-statistics\-tags\fR
 .RS 4
-Calculates statistics for all tracks in a file and adds new statistics tags for them\&. If the file already contains such tags then they\*(Aqll be updated\&.
+Calcula las estad\('isticas de todas las pistas en un archivo y a\(~nade nuevas etiquetas de estad\('istica para ellas\&. Si el archivo ya contiene dichas etiquetas entonces ser\('an actualizadas\&.
 .RE
 .PP
 \fB\-\-delete\-track\-statistics\-tags\fR
 .RS 4
-Deletes all existing track statistics tags from a file\&. If the file doesn\*(Aqt contain track statistics tags then it won\*(Aqt be modified\&.
+Elimina las etiquetas de estad\('istica de todas las pistas de un archivo\&. Si el archivo no contiene etiquetas de estad\('istica, entonces no habr\('a ninguna modificaci\('on\&.
 .RE
 .PP
 \fB\-c\fR, \fB\-\-chapters\fR \fInombre\fR
@@ -179,9 +179,9 @@ Si la opci\('on
 \fB\-\-attachment\-description\fR
 es usada antes de esta opci\('on entonces su valor es usado como la nueva descripci\('on del adjunto\&. Por el contrario, ninguna descripci\('on ser\('a establecida\&.
 .sp
-If the option
+Si la opci\('on
 \fB\-\-attachment\-uid\fR
-has been used prior to this option then its value is used as the new attachment\*(Aqs UID\&. Otherwise a random UID will be generated automatically\&.
+se usa delante de esta opci\('on entonces su valor se usar\('a como el nuevo UID del adjunto\&. De lo contrario, un UID aleatorio se generar\('a autom\('aticamente\&.
 .RE
 .PP
 \fB\-\-replace\-attachment\fR \fIselector\fR:\fInombrearchivo\fR
@@ -199,50 +199,49 @@ El
 puede tener una de estas cuatro formas: ID, UID, Name y MIME type\&. Est\('an explicadas m\('as abajo en la secci\('on
 selectores de adjuntos\&.
 .sp
-If the option
+Si la opci\('on
 \fB\-\-attachment\-name\fR
-has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
+se usa delante de esta opci\('on entonces su valor se establece como el nuevo nombre para cada adjunto modificado\&. De lo contrario, los nombres no se modificar\('an\&.
 .sp
-If the option
+Si la opci\('on
 \fB\-\-attachment\-mime\-type\fR
-has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
+se usa delante de esta opci\('on entonces su valor se establece como el nuevo tipo MIME para cada adjunto modificado\&. De lo contrario, los tipo MIMES no se modificar\('an\&.
 .sp
-If the option
+Si la opci\('on
 \fB\-\-attachment\-description\fR
-has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+se usa delante de esta opci\('on entonces su valor se establece como la nueva descripci\('on de cada adjunto modificado\&. De lo contrario, las descripciones no se modificar\('an\&.
 .sp
-If the option
+Si la opci\('on
 \fB\-\-attachment\-uid\fR
-has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
+se usa delante de esta opci\('on entonces su valor se establece como el nuevo UID para cada adjunto modificado\&. De lo contrario, los UIDs no se modificar\('an\&.
 .RE
 .PP
 \fB\-\-update\-attachment\fR \fIselector\fR
 .RS 4
-Sets the properties of one or more attachments that match
-\fIselector\fR\&. If more than one existing attachment matches
-\fIselector\fR
-then all of their properties will be updated\&.
+Establece las propiedades de uno o m\('as adjuntos que coincidan con el
+\fIselector\fR\&. Si m\('as de un adjunto coincide con el
+\fIselector\fR, entonces todas sus propiedades ser\('an actualizadas\&.
 .sp
 El
 \fIselector\fR
 puede tener una de estas cuatro formas: ID, UID, Name y MIME type\&. Est\('an explicadas m\('as abajo en la secci\('on
 selectores de adjuntos\&.
 .sp
-If the option
+Si la opci\('on
 \fB\-\-attachment\-name\fR
-has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
+se usa delante de esta opci\('on entonces su valor se establece como el nuevo nombre para cada adjunto modificado\&. De lo contrario, los nombres no se modificar\('an\&.
 .sp
-If the option
+Si la opci\('on
 \fB\-\-attachment\-mime\-type\fR
-has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
+se usa delante de esta opci\('on entonces su valor se establece como el nuevo tipo MIME para cada adjunto modificado\&. De lo contrario, los tipo MIMES no se modificar\('an\&.
 .sp
-If the option
+Si la opci\('on
 \fB\-\-attachment\-description\fR
-has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+se usa delante de esta opci\('on entonces su valor se establece como la nueva descripci\('on de cada adjunto modificado\&. De lo contrario, las descripciones no se modificar\('an\&.
 .sp
-If the option
+Si la opci\('on
 \fB\-\-attachment\-uid\fR
-has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
+se usa delante de esta opci\('on entonces su valor se establece como el nuevo UID para cada adjunto modificado\&. De lo contrario, los UIDs no se modificar\('an\&.
 .RE
 .PP
 \fB\-\-delete\-attachment\fR \fIselector\fR
@@ -738,19 +737,19 @@ usa las variables predefinidas que se determinan en la configuraci\('on local de
 y la familia
 \fILC_*\fR)\&. Variables adicionales:
 .PP
-\fIMKVPROPEDIT_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR and its short form \fIMTX_DEBUG\fR
+\fIMKVPROPEDIT_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR y su forma abreviada \fIMTX_DEBUG\fR
 .RS 4
 El contenido se trata como si se hubiese pasado a trav\('es de la opci\('on
 \fB\-\-debug\fR\&.
 .RE
 .PP
-\fIMKVPROPEDIT_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR and its short form \fIMTX_ENGAGE\fR
+\fIMKVPROPEDIT_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR y su forma abreviada \fIMTX_ENGAGE\fR
 .RS 4
 El contenido se trata como si se hubiese pasado a trav\('es de la opci\('on
 \fB\-\-engage\fR\&.
 .RE
 .PP
-\fIMKVPROPEDIT_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR and its short form \fIMTX_OPTIONS\fR
+\fIMKVPROPEDIT_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR y su forma abreviada \fIMTX_OPTIONS\fR
 .RS 4
 El contenido es dividido en espacios en blanco\&. Las cadenas de texto parciales resultantes son tratadas como si hubiesen sido pasadas como opciones a la l\('inea de comandos\&. Si necesitas pasar caracteres especiales (p\&.e\&. espacios) entonces tienes que escaparlos (vea
 la secci\('on caracteres especiales de escape en el texto)\&.

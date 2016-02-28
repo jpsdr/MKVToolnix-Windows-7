@@ -118,7 +118,7 @@ para m\('as detalles\&.
 .RS 4
 Establece los UIDs del segmento que se usar\('an\&. Esto es una lista separada por comas con UIDs del segmento con una longitud de 128 bits en la forma t\('ipica del UID: n\('umeros hexadecimales con o sin el prefijo "0x" con o sin espacios y siendo 32 d\('igitos exactos\&.
 .sp
-If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+Si el SID comienza con = entonces el resto se interpreta como el nombre de un archivo Matroska cuyo UID del segmento es le\('ido y usado\&.
 .sp
 Cada archivo creado contiene un segmento, y cada segmento tiene un SID (UID del segmento)\&. Si se especifican m\('as SIDs que segmentos entonces los UIDs que sobren son ignorados\&. Si se especifican menos UIDs que segmentos entonces se crear\('an de manera aleatoria los UIDs que faltan\&.
 .RE
@@ -811,7 +811,7 @@ Vincula el primer archivo generado al segmento con el UID del segmento especific
 vinculaci\('on de archivos
 para m\('as detalles\&.
 .sp
-If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+Si el SID comienza con = entonces el resto se interpreta como el nombre de un archivo Matroska cuyo UID del segmento es le\('ido y usado\&.
 .RE
 .PP
 \fB\-\-link\-to\-next\fR \fIsegmento\-UID\fR
@@ -821,7 +821,7 @@ Vincula el \('ultimo archivo generado al segmento con el UID del segmento especi
 vinculaci\('on de archivos
 para m\('as detalles\&.
 .sp
-If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used\&.
+Si el SID comienza con = entonces el resto se interpreta como el nombre de un archivo Matroska cuyo UID del segmento es le\('ido y usado\&.
 .RE
 .PP
 \fB\-\-append\-mode\fR \fImodo\fR
@@ -1486,25 +1486,24 @@ Le permitir\('a a
 \fBmkvmerge\fR(1)
 analizar el archivo e informar de qu\('e tipo es, las pistas que contiene y los IDs de pista\&. Si se usa esta opci\('on entonces la unica opci\('on permitida es el nombre\-archivo\&.
 .sp
-The output format used for the result can be changed with the option
+El formato de salida usado para el resultado se puede cambiar con la opci\('on
 \-\-identification\-format\&.
 .RE
 .PP
 \fB\-I\fR, \fB\-\-identify\-verbose\fR \fInombre\-archivo\fR
 .RS 4
-This option is deprecated\&. Use
-\-\-identification\-format verbose\-text \-\-identify \&...
-instead\&.
+Esta opci\('on est\('a en desuso\&. Utiliza, en su lugar,
+\-\-identification\-format verbose\-text \-\-identify \&...\&.
 .RE
 .PP
-\fB\-F\fR, \fB\-\-identification\-format\fR \fIformat\fR
+\fB\-F\fR, \fB\-\-identification\-format\fR \fIformato\fR
 .RS 4
-Determines the output format used by the
-\-\-identify option\&. The following formats are supported:
+Determina el formato de salida usado por la
+\-\-identify opci\('on\&. Los siguientes formatos son v\('alidos:
 text
-(the default if this option isn\*(Aqt used),
+(el valor por defecto si esta opci\('on no se usa),
 verbose\-text
-and
+y
 json\&.
 .sp
 .RS 4
@@ -1515,13 +1514,13 @@ json\&.
 .sp -1
 .IP "  1." 4.2
 .\}
-The
+El formato de
 text
-format is short and human\-readable\&. It consists of one line per item found (container, tracks, attachments etc\&.)\&.
+es corto y leg\('ible\&. Se compone de una l\('inea por cada elemento encontrado (contenedor, pistas, adjuntos, etc\&.\&.\&.)\&.
 .sp
-This format is not meant to be parsed\&. The output will be translated into the language
+Este formato no est\('a pensado para ser analizado\&. La salida se traducir\('a en el idioma que
 \fBmkvmerge\fR(1)
-uses (see also
+utiliza (mire tambi\('en
 \-\-ui\-language)\&.
 .RE
 .sp
@@ -1533,18 +1532,18 @@ uses (see also
 .sp -1
 .IP "  2." 4.2
 .\}
-The
+El formato
 verbose\-text
-format extends the
+ampl\('ia el formato
 text
-format with additional properties for each item\&. The extra information is surronded by square brackets\&. It consists of space\-saparated key/value pairs where keys and values are separated by a colon\&.
+con propiedades adicionales por cada elemento\&. La informaci\('on extra se especifica entre corchetes\&. Se compone de pares de clave/valor separados por espacios, en donde las claves y valores est\('an separadas por dos puntos\&.
 .sp
 Cada valor es escapado conforme a las reglas descritas en
 la secci\('on acerca de caracteres especiales de escape en el texto\&.
 .sp
-This format is not meant to be parsed\&. The output will be translated into the language
+Este formato no est\('a pensado para ser analizado\&. La salida se traducir\('a en el idioma que
 \fBmkvmerge\fR(1)
-uses (see also
+utiliza (mire tambi\('en
 \-\-ui\-language)\&.
 .RE
 .sp
@@ -1556,9 +1555,9 @@ uses (see also
 .sp -1
 .IP "  3." 4.2
 .\}
-The
+El formato
 json
-format outputs a machine\-readable JSON representation\&. This format follows the JSON schema described in the file
+genera una representaci\('on JSON en c\('odigo m\('aquina\&. Este formato sigue el esquema JSON descrito en el archivo
 \m[blue]\fBmkvmerge\-identification\-output\-schema\&.json\fR\m[]\&\s-2\u[3]\d\s+2\&.
 .RE
 .RE
@@ -2519,13 +2518,13 @@ al archivo generado:
 .RS 4
 .\}
 .nf
-$ mkvmerge \-o output\&.mkv \-A video\&.avi sound\&.ogg \e
-  \-\-attachment\-description "Me and the band behind the stage in a small get\-together" \e
+$ mkvmerge \-o salida\&.mkv \-A video\&.avi audio\&.ogg \e
+  \-\-attachment\-description "Yo y la banda detr\('as del escenario en una reuni\('on" \e
   \-\-attachment\-mime\-type image/jpeg \e
-  \-\-attach\-file me_and_the_band\&.jpg \e
-  \-\-attachment\-description "The real rare and unbelievably good looking font" \e
+  \-\-attach\-file yo_y_la_banda\&.jpg \e
+  \-\-attachment\-description "La rara e increible fuente de la belleza" \e
   \-\-attachment\-mime\-type application/octet\-stream \e
-  \-\-attach\-file really_cool_font\&.ttf
+  \-\-attach\-file fuente_guay\&.ttf
 .fi
 .if n \{\
 .RE
@@ -3116,19 +3115,19 @@ usa las variables predefinidas que se determinan en la configuraci\('on local de
 y la familia
 \fILC_*\fR)\&. Variables adicionales:
 .PP
-\fIMKVMERGE_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR and its short form \fIMTX_DEBUG\fR
+\fIMKVMERGE_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR y su forma abreviada \fIMTX_DEBUG\fR
 .RS 4
 El contenido se trata como si se hubiese pasado a trav\('es de la opci\('on
 \fB\-\-debug\fR\&.
 .RE
 .PP
-\fIMKVMERGE_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR and its short form \fIMTX_ENGAGE\fR
+\fIMKVMERGE_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR y su forma abreviada \fIMTX_ENGAGE\fR
 .RS 4
 El contenido se trata como si se hubiese pasado a trav\('es de la opci\('on
 \fB\-\-engage\fR\&.
 .RE
 .PP
-\fIMKVMERGE_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR and its short form \fIMTX_OPTIONS\fR
+\fIMKVMERGE_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR y su forma abreviada \fIMTX_OPTIONS\fR
 .RS 4
 El contenido es dividido en espacios en blanco\&. Las cadenas de texto parciales resultantes son tratadas como si hubiesen sido pasadas como opciones a la l\('inea de comandos\&. Si necesitas pasar caracteres especiales (p\&.e\&. espacios) entonces tienes que escaparlos (vea
 la secci\('on caracteres especiales de escape en el texto)\&.

@@ -132,12 +132,12 @@ Matroska(TM)
 .PP
 \fB\-\-add\-track\-statistics\-tags\fR
 .RS 4
-Calculates statistics for all tracks in a file and adds new statistics tags for them\&. If the file already contains such tags then they\*(Aqll be updated\&.
+计算文件所有轨道的统计信息，并为每个轨道新增一个统计信息标签。若文件中已经存在此类标签，则将更新这些标签。
 .RE
 .PP
 \fB\-\-delete\-track\-statistics\-tags\fR
 .RS 4
-Deletes all existing track statistics tags from a file\&. If the file doesn\*(Aqt contain track statistics tags then it won\*(Aqt be modified\&.
+从文件中删除现有的全部轨道统计标签。若文件不包括轨道统计标签，则不会被修改。
 .RE
 .PP
 \fB\-c\fR, \fB\-\-chapters\fR \fI文件名\fR
@@ -176,9 +176,9 @@ Deletes all existing track statistics tags from a file\&. If the file doesn\*(Aq
 \fB\-\-attachment\-description\fR
 选项，则其值将用作新附件的描述。否则将不设置描述信息。
 .sp
-If the option
+若本选项之前使用了
 \fB\-\-attachment\-uid\fR
-has been used prior to this option then its value is used as the new attachment\*(Aqs UID\&. Otherwise a random UID will be generated automatically\&.
+选项，则其值将用作新附件的 UID。否则将自动生成随机的 UID。
 .RE
 .PP
 \fB\-\-replace\-attachment\fR \fI选择器\fR:\fI文件名\fR
@@ -198,50 +198,51 @@ has been used prior to this option then its value is used as the new attachment\
 附件选择器
 段落。
 .sp
-If the option
+若本选项之前使用了
 \fB\-\-attachment\-name\fR
-has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
+选项，则其值将设为每个被修改的附件的新名称。否则不修改名称。
 .sp
-If the option
+若本选项之前使用了
 \fB\-\-attachment\-mime\-type\fR
-has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
+选项，则其值将设为每个被修改的附件的新 MIME 类型。否则不修改 MIME 类型。
 .sp
-If the option
+若本选项之前使用了
 \fB\-\-attachment\-description\fR
-has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+选项，则其值将设为每个被修改的附件的新描述。否则不修改描述。
 .sp
-If the option
+若本选项之前使用了
 \fB\-\-attachment\-uid\fR
-has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
+选项，则其值将设为每个被修改的附件的新 UID。否则不修改 UID。
 .RE
 .PP
-\fB\-\-update\-attachment\fR \fIselector\fR
+\fB\-\-update\-attachment\fR \fI选择器\fR
 .RS 4
-Sets the properties of one or more attachments that match
-\fIselector\fR\&. If more than one existing attachment matches
-\fIselector\fR
-then all of their properties will be updated\&.
+设置
+\fI选择器\fR
+所匹配的一或多个附件的属性。如果匹配
+\fI选择器\fR
+的现有附件超过一个，则每个附件的属性都将被更新。
 .sp
 \fI选择器\fR
 可以有四种格式。各格式说明位于下文
 附件选择器
 段落。
 .sp
-If the option
+若本选项之前使用了
 \fB\-\-attachment\-name\fR
-has been used prior to this option then its value is set as the new name for each modified attachment\&. Otherwise the names aren\*(Aqt changed\&.
+选项，则其值将设为每个被修改的附件的新名称。否则不修改名称。
 .sp
-If the option
+若本选项之前使用了
 \fB\-\-attachment\-mime\-type\fR
-has been used prior to this option then its value is set as the new MIME type for each modified attachment\&. Otherwise the MIME types aren\*(Aqt changed\&.
+选项，则其值将设为每个被修改的附件的新 MIME 类型。否则不修改 MIME 类型。
 .sp
-If the option
+若本选项之前使用了
 \fB\-\-attachment\-description\fR
-has been used prior to this option then its value is set as the new description for each modified attachment\&. Otherwise the descriptions aren\*(Aqt changed\&.
+选项，则其值将设为每个被修改的附件的新描述。否则不修改描述。
 .sp
-If the option
+若本选项之前使用了
 \fB\-\-attachment\-uid\fR
-has been used prior to this option then its value is set as the new UID for each modified attachment\&. Otherwise the UIDs aren\*(Aqt changed\&.
+选项，则其值将设为每个被修改的附件的新 UID。否则不修改 UID。
 .RE
 .PP
 \fB\-\-delete\-attachment\fR \fI选择器\fR
@@ -335,7 +336,7 @@ has been used prior to this option then its value is set as the new UID for each
 .PP
 \fB\-\-gui\-mode\fR
 .RS 4
-Turns on GUI mode\&. In this mode specially\-formatted lines may be output that can tell a controlling GUI what\*(Aqs happening\&. These messages follow the format \*(Aq#GUI#message\*(Aq\&. The message may be followed by key/value pairs as in \*(Aq#GUI#message#key1=value1#key2=value2\&...\*(Aq\&. Neither the messages nor the keys are ever translated and always output in English\&.
+打开 GUI 模式。该模式下，将输出特殊格式的行，告知目前受控的 GUI 的行为。这些消息遵从格式「#GUI#消息」。消息可能包括键值对，如「#GUI#消息#键1=值1#键2=值2\&...」。消息内容及键的内容不作翻译，总是以英语输出。
 .RE
 .PP
 \fB\-v\fR, \fB\-\-verbose\fR
@@ -740,9 +741,9 @@ $ mkvpropedit 影片\&.mkv \-\-delete\-attachment mime\-type:application/x\-true
 .RE
 .SH "文本文件与字符集转换"
 .PP
-For an in\-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically\-named section in the
+关于 MKVToolNix 套件中所有工具如何处理字符集转换、输入/输出编码、命令行编码及控制台编码的深入讨论，请参见
 \fBmkvmerge\fR(1)
-man page\&.
+手册中相对应名称的段落。
 .SH "文本中特殊字符的转义"
 .PP
 有时文本中的特殊字符必须或应该转义。转义规则很简单: 用反斜杠后接一字符替换需要转义的各字符。
@@ -757,21 +758,21 @@ man page\&.
 \fILC_*\fR
 族)。其他变量包括:
 .PP
-\fIMKVPROPEDIT_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR and its short form \fIMTX_DEBUG\fR
+\fIMKVPROPEDIT_DEBUG\fR, \fIMKVTOOLNIX_DEBUG\fR 及其缩略形式 \fIMTX_DEBUG\fR
 .RS 4
 内容将被当作通过
 \fB\-\-debug\fR
 选项传递的参数对待。
 .RE
 .PP
-\fIMKVPROPEDIT_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR and its short form \fIMTX_ENGAGE\fR
+\fIMKVPROPEDIT_ENGAGE\fR, \fIMKVTOOLNIX_ENGAGE\fR 及其缩略形式 \fIMTX_ENGAGE\fR
 .RS 4
 内容将被当作通过
 \fB\-\-engage\fR
 选项传递的参数对待。
 .RE
 .PP
-\fIMKVPROPEDIT_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR and its short form \fIMTX_OPTIONS\fR
+\fIMKVPROPEDIT_OPTIONS\fR, \fIMKVTOOLNIX_OPTIONS\fR 及其缩略形式 \fIMTX_OPTIONS\fR
 .RS 4
 内容将在空白处切割。最终得到的字符串部分将按命令行选项的格式处理。如果您需要传递特殊字符 (如空白) 则需要转义 (参见关于转义文本中特殊字符的段落)。
 .RE
