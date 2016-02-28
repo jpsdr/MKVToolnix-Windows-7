@@ -3,6 +3,7 @@ $use_tempfile_for_run = defined?(RUBY_PLATFORM) && /mingw/i.match(RUBY_PLATFORM)
 require "tempfile"
 require "fileutils"
 
+$git_mutex     = Mutex.new
 $message_mutex = Mutex.new
 
 def puts(message)
@@ -68,6 +69,14 @@ def runq(msg, cmdline, options = {})
   verbose = ENV['V'].to_bool
   puts msg if !verbose
   run cmdline, options.clone.merge(:dont_echo => !verbose)
+end
+
+def runq_git(msg, cmdline, options = {})
+  verbose = ENV['V'].to_bool
+  sub_cmd = cmdline.split(/\s+/)[0]
+  msg     = "     GIT #{sub_cmd.upcase} #{msg}"
+  puts msg if !verbose
+  $git_mutex.synchronize { run "git #{cmdline}", options.clone.merge(:dont_echo => !verbose) }
 end
 
 def ensure_dir dir

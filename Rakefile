@@ -514,25 +514,31 @@ EOT
       end
     end
 
-    desc "Fetch program translations from Transifex and create comparison diffs"
-    task "transifex-apps" => $available_languages[:applications].map { |language| "translations:update:transifex-apps-#{language}" }
+    transifex_pull_targets = {
+      "man-pages" => [],
+      "programs"  => [],
+    }
 
-    $available_languages[:applications].each do |language|
-      task "transifex-apps-#{language}" do
-        comparison_dir = "po/comparison"
-        ensure_dir comparison_dir
+    $all_po_files.each do |po_file|
+      language = /\/([^\/]+)\.po$/.match(po_file)[1]
+      resource = /doc\/man/.match(po_file) ? "man-pages" : "programs"
+      target   = "transifex-pull-#{resource}-#{language}"
 
-        runq "GIT SHOW #{language}", "git show HEAD:po/#{language}.po > #{comparison_dir}/#{language}.po.tmp"
-        runq "MSGATTRIB #{language}", "msgattrib -o #{comparison_dir}/#{language}.po.mkvtoolnix --no-fuzzy --no-obsolete --translated #{comparison_dir}/#{language}.po.tmp"
+      transifex_pull_targets[resource] << "translations:update:#{target}"
 
-        runq " TX_PULL #{language}", "tx pull -f -r mkvtoolnix.programs -l #{language} > /dev/null"
-
-        runq "MSGATTRIB #{language}", "msgattrib -o #{comparison_dir}/#{language}.po.transifex --no-fuzzy --no-obsolete --translated po/#{language}.po"
-        runq "    DIFF #{language}", "diff -u #{comparison_dir}/#{language}.po.mkvtoolnix #{comparison_dir}/#{language}.po.transifex > #{comparison_dir}/#{language}.po.diff", :allow_failure => true
-
-        FileUtils.rm FileList[ "#{comparison_dir}/#{language}.po.{tmp,mkvtoolnix,transifex}" ].to_a
+      task target do
+        transifex_pull_and_merge resource, language
       end
     end
+
+    desc "Fetch and merge program translations from Transifex"
+    task "transifex-programs" => transifex_pull_targets["programs"]
+
+    desc "Fetch and merge man page translations from Transifex"
+    task "transifex-man-pages" => transifex_pull_targets["man-pages"]
+
+    desc "Fetch and merge all translations from Transifex"
+    task "transifex" => transifex_pull_targets.values.flatten
   end
 
   [ :stats, :statistics ].each_with_index do |task_name, idx|

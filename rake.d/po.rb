@@ -81,23 +81,23 @@ def write_po file_name, items
         next
       end
 
-      if item[:comments]
+      if item[:comments] && !item[:comments].empty?
         file.puts(item[:comments].join("\n"))
       end
 
-      if item[:instructions]
+      if item[:instructions] && !item[:instructions].empty?
         file.puts(item[:instructions].join("\n"))
       end
 
-      if item[:sources]
+      if item[:sources] && !item[:sources].empty?
         file.puts(item[:sources].map { |source| "#: #{source}" }.join("\n").gsub(/,$/, ''))
       end
 
-      if item[:flags]
+      if item[:flags] && !item[:flags].empty?
         file.puts("#, " + item[:flags].join(", "))
       end
 
-      if item[:other]
+      if item[:other] && !item[:other].empty?
         file.puts(item[:other].join("\n"))
       end
 
@@ -127,4 +127,49 @@ end
 def normalize_po file
   puts "NORMALIZE-PO #{file}"
   write_po file, read_po(file)
+end
+
+def transifex_merge orig_items, transifex_items
+  translated = Hash[ *transifex_items.
+    select { |item| item[:msgid] && item[:msgid].first && !item[:msgid].first.empty? && item[:msgstr] && !item[:msgstr].empty? && !item[:msgstr].first.empty? }.
+    map    { |item| [ item[:msgid].first, item ] }.
+    flatten(1)
+  ]
+
+  orig_items.each do |orig_item|
+    next if !orig_item[:msgid] || orig_item[:msgid].empty? || orig_item[:msgid].first.empty?
+
+    transifex_item = translated[ orig_item[:msgid].first ]
+
+    next if !transifex_item || (orig_item[:msgstr] == transifex_item[:msgstr])
+
+    # puts "UPDATE of msgid " + orig_item[:msgid].first
+    # puts "  old " + orig_item[:msgstr].first
+    # puts "  new " + transifex_item[:msgstr].first
+
+    orig_item[:msgstr] = transifex_item[:msgstr]
+
+    if orig_item[:flags]
+      orig_item[:flags].reject! { |flag| flag == "fuzzy" }
+    end
+  end
+
+  orig_items
+end
+
+def transifex_pull_and_merge resource, language
+  po_file = resource == "programs" ? "po/#{language}.po" : "doc/man/po4a/po/#{language}.po"
+
+  runq_git po_file, "checkout HEAD -- #{po_file}"
+
+  orig_items = read_po(po_file)
+
+  runq " TX_PULL #{po_file}", "tx pull -f -r mkvtoolnix.#{resource} -l #{language} > /dev/null"
+
+  puts "   MERGE #{po_file}"
+
+  transifex_items = read_po(po_file)
+  merged_items    = transifex_merge orig_items, transifex_items
+
+  write_po po_file, merged_items
 end
