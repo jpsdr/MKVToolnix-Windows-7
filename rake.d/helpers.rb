@@ -3,14 +3,13 @@ $use_tempfile_for_run = defined?(RUBY_PLATFORM) && /mingw/i.match(RUBY_PLATFORM)
 require "tempfile"
 require "fileutils"
 
-if defined? Mutex
-  $message_mutex = Mutex.new
-  def puts(message)
-    $message_mutex.lock
+$message_mutex = Mutex.new
+
+def puts(message)
+  $message_mutex.synchronize {
     $stdout.puts message
     $stdout.flush
-    $message_mutex.unlock
-  end
+  }
 end
 
 def error(message)
