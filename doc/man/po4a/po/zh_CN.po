@@ -81,7 +81,6 @@ msgstr "<citerefentry><refentrytitle>mkvpropedit</refentrytitle><manvolnum>1</ma
 #: doc/man/mkvmerge.xml:13
 #: doc/man/mkvpropedit.xml:13
 #: doc/man/mkvtoolnix-gui.xml:13
-#| msgid "<citerefentry><refentrytitle>mkvinfo</refentrytitle><manvolnum>1</manvolnum></citerefentry>"
 msgid "<citerefentry><refentrytitle>mkvtoolnix-gui</refentrytitle><manvolnum>1</manvolnum></citerefentry>"
 msgstr "<citerefentry><refentrytitle>mkvtoolnix-gui</refentrytitle><manvolnum>1</manvolnum></citerefentry>"
 
@@ -255,7 +254,6 @@ msgstr "说明"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:62
-#| msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument, <option>mode</option>, tells &mkvextract; what to extract. Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link> and <link linkend=\"mkvextract.description.timecodes_v2\">timecodes</link>.  The second argument is the name of the source file. It must be a &matroska; file. All following arguments are options and extraction specifications; both of which depend on the selected mode."
 msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument, <option>mode</option>, tells &mkvextract; what to extract. Currently supported is the extraction of <link linkend=\"mkvextract.description.tracks\">tracks</link>, <link linkend=\"mkvextract.description.tags\">tags</link>, <link linkend=\"mkvextract.description.attachments\">attachments</link>, <link linkend=\"mkvextract.description.chapters\">chapters</link>, <link linkend=\"mkvextract.description.cuesheets\">CUE sheets</link>, <link linkend=\"mkvextract.description.timecodes_v2\">timecodes</link> and <link linkend=\"mkvextract.description.cues\">cues</link>.  The second argument is the name of the source file. It must be a &matroska; file. All following arguments are options and extraction specifications; both of which depend on the selected mode."
 msgstr "本程序可将 &matroska; 文件的指定部分提取为其他有用的格式。第一个参数，<option>模式</option>，告知 &mkvextract; 要提取什么内容。目前支持提取 <link linkend=\"mkvextract.description.tracks\">轨道</link>、<link linkend=\"mkvextract.description.tags\">标签</link>、 <link linkend=\"mkvextract.description.attachments\">附件</link>、<link linkend=\"mkvextract.description.chapters\">章节</link>、<link linkend=\"mkvextract.description.cuesheets\">cue 表单</link>、<link linkend=\"mkvextract.description.timecodes_v2\">时间码</link> 及 <link linkend=\"mkvextract.description.cues\">cue</link>。第二个参数为源文件名称。必须为 &matroska; 文件。其余参数为选项以及提取指令；根据所选模式的不同，两种参数均有所区别。"
 
@@ -371,7 +369,6 @@ msgstr "开启实验性功能。可用功能列表可通过 <command>mkvextract 
 #: doc/man/mkvinfo.xml:192
 #: doc/man/mkvmerge.xml:1721
 #: doc/man/mkvpropedit.xml:429
-#| msgid "<option>--no-ogg</option>"
 msgid "<option>--gui-mode</option>"
 msgstr "<option>--gui-mode</option>"
 
@@ -515,7 +512,6 @@ msgstr "轨道提取模式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:249
-#| msgid "Syntax: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
 msgstr "语法: <command>mkvextract <option>tracks</option> <parameter>源文件名</parameter> <optional><parameter>选项</parameter></optional> <parameter>轨道ID1:目标文件名1</parameter> <optional><parameter>轨道ID2:目标文件名2</parameter> ...</optional></command>"
 
@@ -603,7 +599,6 @@ msgstr "标签提取模式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:337
-#| msgid "Syntax: <command>mkvextract</command> <option>tags</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional>"
 msgid "Syntax: <command>mkvextract <option>tags</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional></command>"
 msgstr "语法: <command>mkvextract <option>tags</option> <parameter>源文件名</parameter> <optional><parameter>选项</parameter></optional></command>"
 
@@ -619,7 +614,6 @@ msgstr "附件提取模式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:350
-#| msgid "Syntax: <command>mkvextract</command> <option>attachments</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <option>attachments</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional></command>"
 msgstr "语法: <command>mkvextract <option>attachments</option> <parameter>源文件名</parameter> <optional><parameter>选项</parameter></optional> <parameter>附件ID1:输出文件名1</parameter> <optional><parameter>附件ID2:输出文件名2</parameter> ...</optional></command>"
 
@@ -640,7 +634,6 @@ msgstr "章节提取模式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:372
-#| msgid "Syntax: <command>mkvextract</command> <option>chapters</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional>"
 msgid "Syntax: <command>mkvextract <option>chapters</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional></command>"
 msgstr "语法: <command>mkvextract <option>chapters</option> <parameter>源文件名</parameter> <optional><parameter>选项</parameter></optional></command>"
 
@@ -656,7 +649,6 @@ msgstr "将章节信息以 <abbrev>OGM</abbrev> tools 所用的简单格式 (CHA
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:388
-#| msgid "<option>--language</option> <parameter>TID:language</parameter>"
 msgid "<option>--simple-language</option> <parameter>language</parameter>"
 msgstr "<option>--simple-language</option> <parameter>语言</parameter>"
 
@@ -682,7 +674,6 @@ msgstr "Cue 表单提取模式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:413
-#| msgid "Syntax: <command>mkvextract</command> <option>cuesheet</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional>"
 msgid "Syntax: <command>mkvextract <option>cuesheet</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional></command>"
 msgstr "语法: <command>mkvextract <option>cuesheet</option> <parameter>源文件名</parameter> <optional><parameter>选项</parameter></optional></command>"
 
@@ -698,7 +689,6 @@ msgstr "时间码提取模式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:426
-#| msgid "Syntax: <command>mkvextract</command> <option>timecodes_v2</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <option>timecodes_v2</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
 msgstr "语法: <command>mkvextract <option>timecodes_v2</option> <parameter>源文件名</parameter> <optional><parameter>选项</parameter></optional> <parameter>轨道ID1:目标文件名1</parameter> <optional><parameter>轨道ID2:目标文件名2</parameter> ...</optional></command>"
 
@@ -727,25 +717,21 @@ msgstr "$ mkvextract timecodes_v2 输入.mkv 1:轨道1的时间码.txt 2:轨道2
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:455
-#| msgid "Cue sheet extraction mode"
 msgid "Cues extraction mode"
 msgstr "cue 提取模式"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:458
-#| msgid "Syntax: <command>mkvextract</command> <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional>"
 msgid "Syntax: <command>mkvextract <option>cues</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
 msgstr "语法: <command>mkvextract <option>cues</option> <parameter>源文件名</parameter> <optional><parameter>选项</parameter></optional> <parameter>轨道ID1:目标文件名1</parameter> <optional><parameter>轨道ID2:目标文件名2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:463
-#| msgid "<parameter>TID:outname</parameter>"
 msgid "<parameter>TID:dest-filename</parameter>"
 msgstr "<parameter>轨道ID:目标文件名</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:466
-#| msgid "Causes extraction of the timecodes for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
 msgid "Causes extraction of the cues for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option and not the numbers contained in the <classname>CueTrack</classname> element."
 msgstr "若源文件中存在，则提取 ID 为 <parameter>TID</parameter> 的轨道的 cue 并保存到 <parameter>输出文件名</parameter> 中。本选项可多次给出。轨道 ID 与 &mkvmerge; 的 <option>--identify</option> 选项所输出的一致，而非 <classname>CueTrack</classname> 元素中所包含的数字。"
 
@@ -762,13 +748,11 @@ msgstr "timecode=00:00:13.305000000 duration=- cluster_position=757741 relative_
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:486
-#| msgid "The basics are:"
 msgid "The possible keys are:"
 msgstr "可用的关键词包括："
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:490
-#| msgid "Timecodes"
 msgid "timecode"
 msgstr "timecode"
 
@@ -779,7 +763,6 @@ msgstr "cue point 的时间码，精确到纳秒。格式为 <literal>HH:MM:SS.n
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:497
-#| msgid "--default-duration"
 msgid "duration"
 msgstr "duration"
 
@@ -821,7 +804,6 @@ msgstr "&matroska; 文件中，<classname>CueRelativePosition</classname> 相对
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvextract.xml:536
 #, no-wrap
-#| msgid "$ mkvextract timecodes_v2 input.mkv 1:tc-track1.txt 2:tc-track2.txt"
 msgid "$ mkvextract cues input.mkv 1:cues-track1.txt 2:cues-track2.txt"
 msgstr "$ mkvextract cues 输入.mkv 1:cues-轨1.txt 2:cues-轨2.txt"
 
@@ -934,7 +916,6 @@ msgstr "V_VP8, V_VP9"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:631
-#| msgid "<abbrev>VP8</abbrev> tracks are written to <abbrev>IVF</abbrev> files."
 msgid "<abbrev>VP8</abbrev> / <abbrev>VP9</abbrev> tracks are written to <abbrev>IVF</abbrev> files."
 msgstr "<abbrev>VP8</abbrev> / <abbrev>VP9</abbrev> 轨道将输出为 <abbrev>IVF</abbrev> 文件。"
 
@@ -950,7 +931,6 @@ msgstr "MPEG-1 Audio Layer II 流将提取为原始的 <abbrev>MP2</abbrev> 文�
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:646
-#| msgid "A_MPEG/L3, A_AC-3"
 msgid "A_MPEG/L3, A_AC3"
 msgstr "A_MPEG/L3, A_AC3"
 
@@ -1046,7 +1026,6 @@ msgstr "A_OPUS"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:733
-#| msgid "<productname>RealAudio</productname> tracks are written to <productname>RealMedia</productname> files."
 msgid "<productname>Opus</productname> tracks are written to <productname>OggOpus</productname> files."
 msgstr "<productname>Opus</productname> 轨道将输出为 <productname>OggOpus</productname> 文件。"
 
@@ -1219,7 +1198,6 @@ msgstr "&mkvextract; 使用决定系统区域设置的默认变量 (如 <varname
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:887
-#| msgid "<varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgid "<varname>MKVEXTRACT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgstr "<varname>MKVEXTRACT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> 及其缩略形式 <varname>MTX_DEBUG</varname>"
 
@@ -1230,7 +1208,6 @@ msgstr "内容将被当作通过 <link linkend=\"mkvextract.description.debug\">
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:895
-#| msgid "<varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgid "<varname>MKVEXTRACT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgstr "<varname>MKVEXTRACT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> 及其缩略形式 <varname>MTX_ENGAGE</varname>"
 
@@ -1241,7 +1218,6 @@ msgstr "内容将被当作通过 <link linkend=\"mkvextract.description.engage\"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:903
-#| msgid "<varname>MKVTOOLNIX_OPTIONS</varname> and its short form <varname>MTX_OPTIONS</varname>"
 msgid "<varname>MKVEXTRACT_OPTIONS</varname>, <varname>MKVTOOLNIX_OPTIONS</varname> and its short form <varname>MTX_OPTIONS</varname>"
 msgstr "<varname>MKVEXTRACT_OPTIONS</varname>, <varname>MKVTOOLNIX_OPTIONS</varname> 及其缩略形式 <varname>MTX_OPTIONS</varname>"
 
@@ -1486,7 +1462,6 @@ msgstr "&mkvinfo; 会使用决定系统区域设置的默认变量 (如 <varname
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:379
-#| msgid "<varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgid "<varname>MKVINFO_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgstr "<varname>MKVINFO_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> 及其缩略形式 <varname>MTX_DEBUG</varname>"
 
@@ -1497,7 +1472,6 @@ msgstr "内容将被当作通过 <link linkend=\"mkvinfo.description.debug\"><op
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:387
-#| msgid "<varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgid "<varname>MKVINFO_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgstr "<varname>MKVINFO_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> 及其缩略形式 <varname>MTX_ENGAGE</varname>"
 
@@ -1508,7 +1482,6 @@ msgstr "内容将被当作通过 <link linkend=\"mkvinfo.description.engage\"><o
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:395
-#| msgid "<varname>MKVTOOLNIX_OPTIONS</varname> and its short form <varname>MTX_OPTIONS</varname>"
 msgid "<varname>MKVINFO_OPTIONS</varname>, <varname>MKVTOOLNIX_OPTIONS</varname> and its short form <varname>MTX_OPTIONS</varname>"
 msgstr "<varname>MKVINFO_OPTIONS</varname>, <varname>MKVTOOLNIX_OPTIONS</varname> 及其缩略形式 <varname>MTX_OPTIONS</varname>"
 
@@ -1585,7 +1558,6 @@ msgstr "<option>-w</option>, <option>--webm</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:107
-#| msgid "Create a WebM compliant file. This is also turned on if the output file name's extension is &quot;webm&quot;. This mode enforces several restrictions. The only allowed codecs are VP8 video and Vorbis audio tracks. Neither chapters nor tags are allowed. The DocType header item is changed to &quot;webm&quot;."
 msgid "Create a WebM compliant file. This is also turned on if the output file name's extension is &quot;webm&quot;. This mode enforces several restrictions. The only allowed codecs are VP8, VP9 video and Opus, Vorbis audio tracks. Neither chapters nor tags are allowed. The DocType header item is changed to &quot;webm&quot;."
 msgstr "创建 WebM 兼容文件。若输出文件的扩展名为 &quot;webm&quot; 则将自动打开本选项。此模式将实施一些限制。只允许使用编解码器为 VP8、VP9 的视频轨道及 Opus、Vorbis 的音频轨道。不允许出现章节或标签。DocType 头部项目将改为 &quot;webm&quot;。"
 
@@ -1606,7 +1578,6 @@ msgstr "<option>--default-language</option> <parameter>语言代码</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:124
-#| msgid "Sets the default language code that will be used for all tracks unless overwritten with the <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> option. The default language code is '<literal>und</literal>' for 'undefined'."
 msgid "Sets the default language code that will be used for tracks for which no language is set with the <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> option and for which the source container doesn't provide a language."
 msgstr "设置默认语言代码，用于没有使用 <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> 选项设置语言的轨道以及源容器未提供语言值的轨道。"
 
@@ -1841,7 +1812,6 @@ msgstr "为所有块写入时长。这将增大文件尺寸，而且目前对播
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:357
-#| msgid "<option>--disable-lacing</option>"
 msgid "<option>--disable-track-statistics-tags</option>"
 msgstr "<option>--disable-track-statistics-tags</option>"
 
@@ -2425,7 +2395,6 @@ msgstr "除轨道 ID 以外，您还可以提供 ISO 639-2 语言代码。仅当
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:969
-#| msgid "Don't copy global tags from this file."
 msgid "Default: copy all tracks of this kind."
 msgstr "默认: 复制该类的所有轨道。"
 
@@ -2434,7 +2403,6 @@ msgstr "默认: 复制该类的所有轨道。"
 #: doc/man/mkvmerge.xml:994
 #: doc/man/mkvmerge.xml:1015
 #: doc/man/mkvmerge.xml:1036
-#| msgid "If the IDs are prefixed with <literal>!</literal> then the meaning is reversed: copy everything but the IDs listed after the <literal>!</literal>."
 msgid "If the IDs are prefixed with <literal>!</literal> then the meaning is reversed: copy all tracks of this kind but the ones listed after the <literal>!</literal>."
 msgstr "若 ID 以 <literal>!</literal> 开头，则其意义相反: 复制该类的所有轨道，除了 <literal>!</literal> 后面所列出的轨道。"
 
@@ -2717,7 +2685,6 @@ msgstr "如果 mkvmerge 错将 <abbrev>AAC</abbrev> 文件侦测为 <abbrev>SBR<
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1324
-#| msgid "<option>--compression</option> <parameter>TID:n</parameter>"
 msgid "<option>--reduce-to-core</option> <parameter>TID</parameter>"
 msgstr "<option>--reduce-to-core</option> <parameter>轨道ID</parameter>"
 
@@ -2923,7 +2890,6 @@ msgstr "将使 &mkvmerge; 探查单个文件并报告其类型、文件中包含
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1563
-#| msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> option."
 msgid "The output format used for the result can be changed with the option <link linkend=\"mkvmerge.description.identification_format\">--identification-format</link>."
 msgstr "结果的输出格式可以通过 <link linkend=\"mkvmerge.description.identification_format\">--identification-format</link> 选项修改。"
 
@@ -2939,7 +2905,6 @@ msgstr "该选项已废弃。请使用 <link linkend=\"mkvmerge.description.iden
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1577
-#| msgid "<option>-i</option>, <option>--identify</option> <parameter>file-name</parameter>"
 msgid "<option>-F</option>, <option>--identification-format</option> <parameter>format</parameter>"
 msgstr "<option>-F</option>, <option>--identification-format</option> <parameter>格式</parameter>"
 
@@ -2961,7 +2926,6 @@ msgstr "该格式不应该用来解析。输出内容会翻译为 &mkvmerge; 所
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:1595
-#| msgid "This option causes &mkvmerge; to output additional information about the container and each track within. The extra information is surronded by square brackets. It consists of space-saparated key/value pairs where keys and values are separated by a colon."
 msgid "The <literal>verbose-text</literal> format extends the <literal>text</literal> format with additional properties for each item. The extra information is surronded by square brackets. It consists of space-saparated key/value pairs where keys and values are separated by a colon."
 msgstr "<literal>verbose-text</literal> 格式是对 <literal>text</literal> 格式的扩展，为每项提供额外的属性信息。额外信息由方括号围绕。它包含空格分隔的键/值对，其中键与值由冒号分隔。"
 
@@ -3357,11 +3321,6 @@ msgstr "&mkvmerge; 的一些选项要求提供轨道 ID 以指定应应用到的
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:2035
 #, no-wrap
-#| msgid ""
-#| "$ mkvmerge -i v.mkv\n"
-#| "File 'v.mkv': container: &matroska;\n"
-#| "Track ID 1: video (V_MS/VFW/FOURCC, DIV3)\n"
-#| "Track ID 2: audio (A_MPEG/L3)"
 msgid ""
 "$ mkvmerge -i v.mkv\n"
 "File 'v.mkv': container: &matroska;\n"
@@ -3476,7 +3435,6 @@ msgstr "输出到控制台分为三种情况:"
 
 #. type: Content of: <refentry><refsect1><refsect2><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2154
-#| msgid "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> for all strings written to the console or to a file if the output has been redirected with the <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> option."
 msgid "If the output is redirected with the option <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> then the default charset is UTF-8. This can be changed with <link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link>."
 msgstr "若使用 <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> 选项重定向输出，则默认字符集为 UTF-8。可以通过 <link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> 修改。"
 
@@ -3492,7 +3450,6 @@ msgstr "否则 (直接写入控制台) 将使用 Windows 函数 <function>WriteC
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2175
-#| msgid "Common options"
 msgid "Command line options"
 msgstr "命令行选项"
 
@@ -3518,7 +3475,6 @@ msgstr "<link linkend=\"mkvmerge.description.command_line_charset\"><option>--co
 
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2206
-#| msgid "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> for all strings written to the console or to a file if the output has been redirected with the <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> option."
 msgid "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> for all strings written to the console or to a file if the output has been redirected with the <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> option. On non-Windows systems the default for the output charset is the system's current charset. On Windows it defaults to UTF-8 both for redirecting with <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> and with <command>cmd.exe</command> itself, e.g. <literal>mkvinfo file.mkv &gt; info.txt</literal>."
 msgstr "<link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> 所有写入控制台的或通过 <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> 选项重定向到文件的字符串的输出字符集。非 Windows 系统下，默认的输出字符集为系统的当前字符集。在 Windows 平台，默认为 UTF-8，包括通过 <link linkend=\"mkvmerge.description.redirect_output\"><option>--redirect-output</option></link> 的重定向以及 <command>cmd.exe</command> 自身的重定向，如 <literal>mkvinfo file.mkv &gt; info.txt</literal>。"
 
@@ -3585,7 +3541,6 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2271
-#| msgid "The rules are: ' ' (a space) becomes '\\s', '&quot;' (double quotes) becomes '\\2', ':' becomes '\\c', '#' becomes '\\h' and '\\' (a single backslash) itself becomes '\\\\'."
 msgid "The rules are: ' ' (a space) becomes '\\s', '&quot;' (double quotes) becomes '\\2', ':' becomes '\\c', '#' becomes '\\h', '[' becomes '\\b', ']' becomes '\\B' and '\\' (a single backslash) itself becomes '\\\\'."
 msgstr "规则为: ' ' (空格) 变为 '\\s'，'&quot;' (双引号) 变为 '\\2'，':' 变为 '\\c'，'#' 变为 '\\h'，'[' 变为 '\\b'，']' 变为 '\\B'，'\\' (单个反引号) 自身变为 '\\\\'。"
 
@@ -3687,14 +3642,6 @@ msgstr "这是关于如何在输出文件中附加照片和 <productname>TrueTyp
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:2390
 #, no-wrap
-#| msgid ""
-#| "$ mkvmerge -o output.mkv -A video.avi sound.ogg \\\n"
-#| "  --attachment-description \"Me and the band behind the stage in a small get-together\" \\\n"
-#| "  --attachment-mime-type image/jpeg \\\n"
-#| "  --attach-file me_and_the_band.jpg \\\n"
-#| "  --attachment-description \"The real rare and unbelievably good looking font\" \\\n"
-#| "  --attachment-type application/octet-stream \\\n"
-#| "  --attach-file really_cool_font.ttf"
 msgid ""
 "$ mkvmerge -o output.mkv -A video.avi sound.ogg \\\n"
 "  --attachment-description \"Me and the band behind the stage in a small get-together\" \\\n"
@@ -4307,7 +4254,6 @@ msgstr "&mkvmerge; 会使用决定系统区域设置的默认变量 (如 <varnam
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2868
-#| msgid "<varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgid "<varname>MKVMERGE_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgstr "<varname>MKVMERGE_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> 及其缩略形式 <varname>MTX_DEBUG</varname>"
 
@@ -4318,7 +4264,6 @@ msgstr "内容将被当作通过 <link linkend=\"mkvmerge.description.debug\"><o
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2876
-#| msgid "<varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgid "<varname>MKVMERGE_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgstr "<varname>MKVMERGE_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> 及其缩略形式 <varname>MTX_ENGAGE</varname>"
 
@@ -4329,7 +4274,6 @@ msgstr "内容将被当作通过 <link linkend=\"mkvmerge.description.engage\"><
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2884
-#| msgid "<varname>MKVTOOLNIX_OPTIONS</varname> and its short form <varname>MTX_OPTIONS</varname>"
 msgid "<varname>MKVMERGE_OPTIONS</varname>, <varname>MKVTOOLNIX_OPTIONS</varname> and its short form <varname>MTX_OPTIONS</varname>"
 msgstr "<varname>MKVMERGE_OPTIONS</varname>, <varname>MKVTOOLNIX_OPTIONS</varname> 及其缩略形式 <varname>MTX_OPTIONS</varname>"
 
@@ -4471,7 +4415,6 @@ msgstr "对于 <constant>track</constant> 选择器，&mkvpropedit; 将替换特
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:179
-#| msgid "<option>--disable-lacing</option>"
 msgid "<option>--add-track-statistics-tags</option>"
 msgstr "<option>--add-track-statistics-tags</option>"
 
@@ -4482,7 +4425,6 @@ msgstr "计算文件所有轨道的统计信息，并为每个轨道新增一个
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:188
-#| msgid "<option>--disable-lacing</option>"
 msgid "<option>--delete-track-statistics-tags</option>"
 msgstr "<option>--delete-track-statistics-tags</option>"
 
@@ -4533,7 +4475,6 @@ msgstr "若本选项之前使用了 <option>--attachment-description</option> �
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:235
-#| msgid "If the option <option>--attachment-description</option> has been used prior to this option then its value is used as the new attachment's description. Otherwise no description will be set."
 msgid "If the option <option>--attachment-uid</option> has been used prior to this option then its value is used as the new attachment's UID. Otherwise a random UID will be generated automatically."
 msgstr "若本选项之前使用了 <option>--attachment-uid</option> 选项，则其值将用作新附件的 UID。否则将自动生成随机的 UID。"
 
@@ -4557,40 +4498,34 @@ msgstr "<parameter>选择器</parameter> 可以有四种格式。各格式说明
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:256
 #: doc/man/mkvpropedit.xml:291
-#| msgid "If the option <option>--attachment-name</option> has been used prior to this option then its value is used as the replaced attachment's name. Otherwise the name is not changed."
 msgid "If the option <option>--attachment-name</option> has been used prior to this option then its value is set as the new name for each modified attachment. Otherwise the names aren't changed."
 msgstr "若本选项之前使用了 <option>--attachment-name</option> 选项，则其值将设为每个被修改的附件的新名称。否则不修改名称。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:261
 #: doc/man/mkvpropedit.xml:296
-#| msgid "If the option <option>--attachment-mime-type</option> has been used prior to this option then its value is used as the replaced attachment's MIME type. Otherwise the MIME type is not changed."
 msgid "If the option <option>--attachment-mime-type</option> has been used prior to this option then its value is set as the new MIME type for each modified attachment. Otherwise the MIME types aren't changed."
 msgstr "若本选项之前使用了 <option>--attachment-mime-type</option> 选项，则其值将设为每个被修改的附件的新 MIME 类型。否则不修改 MIME 类型。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:266
 #: doc/man/mkvpropedit.xml:301
-#| msgid "If the option <option>--attachment-description</option> has been used prior to this option then its value is used as the replaced attachment's description. Otherwise no description is not changed."
 msgid "If the option <option>--attachment-description</option> has been used prior to this option then its value is set as the new description for each modified attachment. Otherwise the descriptions aren't changed."
 msgstr "若本选项之前使用了 <option>--attachment-description</option> 选项，则其值将设为每个被修改的附件的新描述。否则不修改描述。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:271
 #: doc/man/mkvpropedit.xml:306
-#| msgid "If the option <option>--attachment-name</option> has been used prior to this option then its value is used as the replaced attachment's name. Otherwise the name is not changed."
 msgid "If the option <option>--attachment-uid</option> has been used prior to this option then its value is set as the new UID for each modified attachment. Otherwise the UIDs aren't changed."
 msgstr "若本选项之前使用了 <option>--attachment-uid</option> 选项，则其值将设为每个被修改的附件的新 UID。否则不修改 UID。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:278
-#| msgid "<option>--delete-attachment</option> <parameter>selector</parameter>"
 msgid "<option>--update-attachment</option> <parameter>selector</parameter>"
 msgstr "<option>--update-attachment</option> <parameter>选择器</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:281
-#| msgid "Replaces one or more attachments that match <parameter>selector</parameter> with the file <parameter>filename</parameter>. If more than one existing attachment matches <parameter>selector</parameter> then all of their contents will be replaced by the content of <parameter>filename</parameter>."
 msgid "Sets the properties of one or more attachments that match <parameter>selector</parameter>. If more than one existing attachment matches <parameter>selector</parameter> then all of their properties will be updated."
 msgstr "设置 <parameter>选择器</parameter> 所匹配的一或多个附件的属性。如果匹配 <parameter>选择器</parameter> 的现有附件超过一个，则每个附件的属性都将被更新。"
 
@@ -4940,7 +4875,6 @@ msgstr "&mkvpropedit; 会使用决定系统区域设置的默认变量 (如 <var
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:792
-#| msgid "<varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgid "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
 msgstr "<varname>MKVPROPEDIT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> 及其缩略形式 <varname>MTX_DEBUG</varname>"
 
@@ -4951,7 +4885,6 @@ msgstr "内容将被当作通过 <link linkend=\"mkvpropedit.description.debug\"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:800
-#| msgid "<varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgid "<varname>MKVPROPEDIT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
 msgstr "<varname>MKVPROPEDIT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> 及其缩略形式 <varname>MTX_ENGAGE</varname>"
 
@@ -4962,7 +4895,6 @@ msgstr "内容将被当作通过 <link linkend=\"mkvpropedit.description.engage\
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:808
-#| msgid "<varname>MKVTOOLNIX_OPTIONS</varname> and its short form <varname>MTX_OPTIONS</varname>"
 msgid "<varname>MKVPROPEDIT_OPTIONS</varname>, <varname>MKVTOOLNIX_OPTIONS</varname> and its short form <varname>MTX_OPTIONS</varname>"
 msgstr "<varname>MKVPROPEDIT_OPTIONS</varname>, <varname>MKVTOOLNIX_OPTIONS</varname> 及其缩略形式 <varname>MTX_OPTIONS</varname>"
 
@@ -5008,7 +4940,6 @@ msgstr "注意，若再次启动应用程序时，已经有一个该应用程序
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:83
-#| msgid "<option>--raw</option>"
 msgid "<option>--merge</option>"
 msgstr "<option>--merge</option>"
 
@@ -5019,7 +4950,6 @@ msgstr "后面的所有文件名都将作为输入文件添加到当前合并任
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:90
-#| msgid "<option>--no-chapters</option>"
 msgid "<option>--edit-chapters</option>"
 msgstr "<option>--edit-chapters</option>"
 
@@ -5030,7 +4960,6 @@ msgstr "后面的所有文件名都将在章节编辑器中打开。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:97
-#| msgid "<option>--no-chapters</option>"
 msgid "<option>--edit-headers</option>"
 msgstr "<option>--edit-headers</option>"
 

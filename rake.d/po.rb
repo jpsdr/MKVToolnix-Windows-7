@@ -45,7 +45,7 @@ def read_po file_name
       add_line.call :obsolete, line
 
     elsif /^#\|/.match(line)
-      add_line.call :other, line
+      add_line.call :suggestions, line
 
     elsif /^#\s/.match(line)
       add_line.call :comments, line
@@ -97,8 +97,8 @@ def write_po file_name, items
         file.puts("#, " + item[:flags].join(", "))
       end
 
-      if item[:other] && !item[:other].empty?
-        file.puts(item[:other].join("\n"))
+      if item[:suggestions] && !item[:suggestions].empty?
+        file.puts(item[:suggestions].join("\n"))
       end
 
       if item[:msgid]
@@ -149,9 +149,8 @@ def transifex_merge orig_items, transifex_items
 
     orig_item[:msgstr] = transifex_item[:msgstr]
 
-    if orig_item[:flags]
-      orig_item[:flags].reject! { |flag| flag == "fuzzy" }
-    end
+    orig_item[:flags].reject! { |flag| flag == "fuzzy" } if orig_item[:flags]
+    orig_item.delete(:suggestions)
   end
 
   orig_items
