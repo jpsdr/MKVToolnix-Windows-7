@@ -332,7 +332,6 @@ void
 PreferencesDialog::setupConnections() {
   connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
-  connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
   connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableOutputFileNameControls);
   connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
   connect(ui->rbMAutoSetRelativeDirectory,                &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
@@ -346,8 +345,11 @@ PreferencesDialog::setupConnections() {
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
 
+  connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
   connect(ui->cbGuiRemoveOldJobs,                         &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
   connect(ui->sbGuiRemoveOldJobsDays,                     static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
+
+  connect(ui->sbMMinPlaylistDuration,                     static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,                                 &PreferencesDialog::adjustPlaylistControls);
 
   connect(ui->buttons,                                    &QDialogButtonBox::accepted,                                   this,                                 &PreferencesDialog::accept);
   connect(ui->buttons,                                    &QDialogButtonBox::rejected,                                   this,                                 &PreferencesDialog::reject);
@@ -695,6 +697,11 @@ PreferencesDialog::setTabTitleForRunProgramExecutable(int tabIdx,
 
   auto name = executable.isEmpty() ? QY("<no program selected yet>") : QFileInfo{executable}.fileName();
   ui->twJobsPrograms->setTabText(tabIdx, name);
+}
+
+void
+PreferencesDialog::adjustPlaylistControls() {
+  ui->sbMMinPlaylistDuration->setSuffix(QNY(" second", " seconds", ui->sbMMinPlaylistDuration->value()));
 }
 
 void
