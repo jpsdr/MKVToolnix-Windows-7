@@ -40,6 +40,7 @@ require_relative "rake.d/target"
 require_relative "rake.d/application"
 require_relative "rake.d/library"
 require_relative "rake.d/format_string_verifier"
+require_relative "rake.d/po"
 require_relative "rake.d/tarball"
 require_relative 'rake.d/gtest' if $have_gtest
 
@@ -73,6 +74,9 @@ def setup_globals
   $all_sources             =  $source_directories.collect { |dir| FileList[ "#{dir}/**/*.c", "#{dir}/**/*.cpp" ].to_a }.flatten.sort
   $all_headers             =  $source_directories.collect { |dir| FileList[ "#{dir}/**/*.h",                   ].to_a }.flatten.sort
   $all_objects             =  $all_sources.collect { |file| file.ext('o') }
+  $all_app_po_files        =  FileList["po/*.po"].to_a.sort
+  $all_man_po_files        =  FileList["doc/man/po4a/po/*.po"].to_a.sort
+  $all_po_files            =  $all_app_po_files + $all_man_po_files
 
   $gui_ui_files            = FileList["src/mkvtoolnix-gui/forms/**/*.ui"].to_a
   $gui_ui_h_files          = $gui_ui_files.collect { |file| file.ext 'h' }
@@ -451,6 +455,15 @@ EOT
     exit 1 if !verify_format_strings(languages)
   end
 
+  $all_po_files.each do |po_file|
+    task "normalize-po-#{po_file}" do
+      normalize_po po_file
+    end
+  end
+
+  desc "Normalize all .po files to a standard format"
+  task "normalize-po" => $all_po_files.map { |e| "translations:normalize-po-#{e}" }
+
   [ :applications, :manpages ].each { |type| task type => $translations[type] }
 
   task :qt => FileList[ "#{$top_srcdir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
@@ -486,7 +499,9 @@ EOT
             exit exit_code
           end
 
-          adjust_to_poedit_style tmp_file, po, language
+          FileUtils.move tmp_file, po
+
+          normalize_po po
         end
       end
     end
@@ -494,10 +509,8 @@ EOT
     desc "Update the man pages' translation files"
     task :manpages do
       runq "    PO4A doc/man/po4a/po4a.cfg", "#{c(:PO4A)} #{c(:PO4A_FLAGS)} --msgmerge-opt=--no-wrap doc/man/po4a/po4a.cfg"
-      %w{nl uk zh_CN}.each do |language|
-        name = "doc/man/po4a/po/#{language}.po"
-        FileUtils.cp name, "#{name}.tmp"
-        adjust_to_poedit_style "#{name}.tmp", name, language
+      $all_man_po_files.each do |po_file|
+        normalize_po po_file
       end
     end
 

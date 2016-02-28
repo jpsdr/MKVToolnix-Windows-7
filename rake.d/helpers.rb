@@ -1,3 +1,4 @@
+# coding: utf-8
 $use_tempfile_for_run = defined?(RUBY_PLATFORM) && /mingw/i.match(RUBY_PLATFORM)
 require "tempfile"
 require "fileutils"
@@ -146,62 +147,6 @@ def install_data(destination, *files)
   arrayify(*files).each do |file|
     run "#{c(:INSTALL_DATA)} #{file} #{c(:DESTDIR)}#{destination}"
   end
-end
-
-def adjust_to_poedit_style(in_name, out_name, language)
-  File.open(out_name, "w") do |out|
-    lines          = IO.readlines(in_name).collect { |line| line.chomp.gsub(/\r/, '') }.reject { |line| /^\s*$/.match(line) }
-    state          = :initial
-    previous_state = :initial
-    sources        = []
-    one_source     = !$unwrapped_po.include?(language) && !$po_multiple_sources.include?(language)
-
-    lines.each do |line|
-      previous_state = state
-
-      if /^#~/.match(line)
-        state = :removed
-      elsif /^\"/.match(line)
-        state = :string
-      elsif /^msgstr/.match(line)
-        state = :msgstr
-      elsif /^#[^:]/.match(line)
-        state = :comment
-      else
-        state = :other
-      end
-
-      if /^(?:#,|msgid)/.match(line)
-        if one_source
-          sources.each { |source| out.puts "#: #{source}" }
-        else
-          while !sources.empty?
-            new_line      = "#:"
-            first_in_line = true
-            while !sources.empty? && (first_in_line || ((new_line.length + sources[0].length + 1) < 80))
-              new_line      += " " + sources.shift
-              first_in_line  = false
-            end
-            out.puts new_line
-          end
-        end
-
-        sources = []
-      end
-
-      out.puts if /^#(?:,|:|\.|\s|~\s+msgid)/.match(line) && [:removed, :string, :msgstr].include?(previous_state)
-
-      if /^#:/.match(line)
-        sources += line.gsub(/^#:\s*/, '').split(/\s+/)
-      else
-        out.puts line
-      end
-    end
-
-    out.puts unless %w{es it}.include?(language)
-  end
-
-  File.unlink in_name
 end
 
 def remove_files_by_patters patterns
