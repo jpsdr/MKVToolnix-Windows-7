@@ -129,12 +129,23 @@ def normalize_po file
   write_po file, read_po(file)
 end
 
+def replace_po_meta_info orig_metas, transifex_meta, key
+  new_value = /"#{key}: \s+ (.+?) \\n"/x.match(transifex_meta)[1]
+  # puts "looking for #{key} in #{transifex_meta}"
+  # puts "  new val #{new_value}"
+  return unless new_value
+
+  orig_metas.each { |meta| meta.gsub!(/"#{key}: \s+ .+? \\n"/x, "\"#{key}: #{new_value}\\n\"") }
+end
+
 def transifex_merge orig_items, transifex_items
   translated = Hash[ *transifex_items.
     select { |item| item[:msgid] && item[:msgid].first && !item[:msgid].first.empty? && item[:msgstr] && !item[:msgstr].empty? && !item[:msgstr].first.empty? }.
     map    { |item| [ item[:msgid].first, item ] }.
     flatten(1)
   ]
+
+  update_meta_info = false
 
   orig_items.each do |orig_item|
     next if !orig_item[:msgid] || orig_item[:msgid].empty? || orig_item[:msgid].first.empty?
@@ -147,10 +158,20 @@ def transifex_merge orig_items, transifex_items
     # puts "  old " + orig_item[:msgstr].first
     # puts "  new " + transifex_item[:msgstr].first
 
+    update_meta_info   = true
     orig_item[:msgstr] = transifex_item[:msgstr]
 
     orig_item[:flags].reject! { |flag| flag == "fuzzy" } if orig_item[:flags]
     orig_item.delete(:suggestions)
+  end
+
+  # update_meta_info = true
+
+  if update_meta_info
+    orig_meta      = orig_items.first[:comments]
+    transifex_meta = transifex_items.first[:comments].join("")
+
+    %w{PO-Revision-Date Last-Translator Language-Team}.each { |key| replace_po_meta_info orig_meta, transifex_meta, key }
   end
 
   orig_items
