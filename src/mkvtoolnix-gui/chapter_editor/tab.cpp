@@ -1273,31 +1273,7 @@ Tab::formatChapterName(QString const &nameTemplate,
                        int chapterNumber,
                        timestamp_c const &startTimecode)
   const {
-  auto name       = QString{ nameTemplate };
-  auto numberRe   = QRegularExpression{Q("<NUM(?::(\\d+))?>")};
-  auto timecodeRe = QRegularExpression{Q("<START(?::([^>]+))?>")};
-
-  while (true) {
-    auto matches = numberRe.match(name);
-    if (!matches.hasMatch())
-      break;
-
-    auto minWidth  = matches.capturedLength(1) ? matches.captured(1).toInt() : 1;
-    auto strNumber = Q("%1").arg(QString::number(chapterNumber), minWidth, '0');
-
-    name.replace(matches.capturedStart(), matches.capturedLength(), strNumber);
-  }
-
-  while (true) {
-    auto matches = timecodeRe.match(name);
-    if (!matches.hasMatch())
-      break;
-
-    auto format = matches.capturedLength(1) ? matches.captured(1) : Q("%H:%M:%S");
-    name.replace(matches.capturedStart(), matches.capturedLength(), Q(format_timestamp(startTimecode, to_utf8(format))));
-  }
-
-  return name;
+  return Q(format_chapter_name_template(to_utf8(nameTemplate), chapterNumber, startTimecode));
 }
 
 void

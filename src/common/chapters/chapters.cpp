@@ -26,6 +26,7 @@
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
 #include "common/strings/editing.h"
+#include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_chapters_converter.h"
@@ -1109,4 +1110,33 @@ regenerate_edition_and_chapter_uids(EbmlMaster &master) {
     if (sub_master)
       regenerate_edition_and_chapter_uids(*sub_master);
   }
+}
+
+std::string
+format_chapter_name_template(std::string const &name_template,
+                             int chapter_number,
+                             timestamp_c const &start_timestamp) {
+  auto name         = name_template;
+  auto number_re    = boost::regex{"<NUM(?::(\\d+))?>"};
+  auto timestamp_re = boost::regex{"<START(?::([^>]+))?>"};
+
+  name = boost::regex_replace(name, number_re, [=](boost::smatch const &match) {
+    auto number_str    = (boost::format("%1%") % chapter_number).str();
+    auto wanted_length = 1u;
+
+    if (match[1].length() && !parse_number(match[1].str(), wanted_length))
+      wanted_length = 1;
+
+    if (number_str.length() < wanted_length)
+      number_str = std::string(wanted_length - number_str.length(), '0') + number_str;
+
+    return number_str;
+  });
+
+  name = boost::regex_replace(name, timestamp_re, [=](boost::smatch const &match) {
+    auto format = match[1].length() ? match[1] : std::string{"%H:%M:%S"};
+    return format_timestamp(start_timestamp.to_ns(), format);
+  });
+
+  return name;
 }

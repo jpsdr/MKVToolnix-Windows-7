@@ -18,6 +18,8 @@
 
 #include <ebml/EbmlElement.h>
 
+#include "common/timestamp.h"
+
 namespace libebml {
   class EbmlMaster;
 };
@@ -90,5 +92,7 @@ void regenerate_edition_and_chapter_uids(EbmlMaster &master);
 
 void align_chapter_edition_uids(KaxChapters *chapters);
 void align_chapter_edition_uids(KaxChapters &reference, KaxChapters &modify);
+
+std::string format_chapter_name_template(std::string const &name_template, int chapter_number, timestamp_c const &start_timestamp);
 
 #endif // MTX_COMMON_CHAPTERS_H
