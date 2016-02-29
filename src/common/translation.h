@@ -52,6 +52,7 @@ public:
 class translatable_string_c {
 protected:
   std::string m_untranslated_string;
+  boost::optional<std::string> m_overridden_by;
 
 public:
   translatable_string_c();
@@ -60,6 +61,8 @@ public:
 
   std::string get_translated() const;
   std::string get_untranslated() const;
+
+  void override(std::string const &by);
 };
 
 #define YT(s) translatable_string_c(s)

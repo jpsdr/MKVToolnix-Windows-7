@@ -235,6 +235,9 @@ std::string
 translatable_string_c::get_translated()
   const
 {
+  if (m_overridden_by)
+    return *m_overridden_by;
+
   return m_untranslated_string.empty() ? "" : Y(m_untranslated_string.c_str());
 }
 
@@ -243,6 +246,11 @@ translatable_string_c::get_untranslated()
   const
 {
   return m_untranslated_string;
+}
+
+void
+translatable_string_c::override(std::string const &by) {
+  m_overridden_by.reset(by);
 }
 
 // ------------------------------------------------------------
