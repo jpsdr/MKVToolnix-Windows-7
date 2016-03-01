@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-03-01 23:37+0100\n"
-"PO-Revision-Date: 2016-02-28 20:15+0000\n"
-"Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
+"PO-Revision-Date: 2016-02-29 19:39+0000\n"
+"Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -153,7 +153,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:91
 msgid "  --chapter-language <lng> Set the 'language' element in chapter entries.\n"
-msgstr "  --chapter-language <lan> Définit la langue dans les entrées de chapitre.\n"
+msgstr "  --chapter-language <langue> Définit la langue dans les entrées de chapitre.\n"
 
 #: src/merge/mkvmerge.cpp:90
 msgid "  --chapters <file>        Read chapter information from the file.\n"
@@ -231,7 +231,7 @@ msgid ""
 "                           Force the default duration of a track to X.\n"
 "                           X can be a floating point number or a fraction.\n"
 msgstr ""
-"  --default-duration <TID:Xs|ms|us|ns|fps>\n"
+"  --default-duration <TID:Xs|ms|us|ns|tps>\n"
 "                           Remplace la durée par défaut d'une piste par X.\n"
 "                           X peut être un nombre décimal ou une fraction.\n"
 
@@ -240,7 +240,7 @@ msgid ""
 "  --default-language <lng> Use this language for all tracks unless\n"
 "                           overridden with the --language option.\n"
 msgstr ""
-"  --default-language <lan> Utilise cette langue pour toutes les pistes\n"
+"  --default-language <langue> Utilise cette langue pour toutes les pistes\n"
 "                           sauf si supplantée par l'option --language.\n"
 
 #: src/merge/mkvmerge.cpp:215
@@ -288,7 +288,7 @@ msgid ""
 "                           bitstream to match the track's default duration.\n"
 msgstr ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
-"                           Ajuste la fréquence d'image ou de champ stockée\n"
+"                           Ajuste la fréquence de trame ou de champ stockée\n"
 "                           dans le flux vidéo sur la durée par défaut de la piste.\n"
 
 #: src/merge/mkvmerge.cpp:218
@@ -381,7 +381,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:288
 msgid "  --output-charset <cset>  Output messages in this charset\n"
-msgstr "  --output-charset <jeu>   Présente le rapport dans ce jeu de caractères.\n"
+msgstr "  --output-charset <jeu>   Présente les messages dans ce jeu de caractères.\n"
 
 #: src/merge/mkvmerge.cpp:284
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
@@ -854,8 +854,8 @@ msgstr " à %1%"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:712
 msgid " day"
 msgid_plural " days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "jour"
+msgstr[1] "jours"
 
 #: src/merge/output_control.cpp:240
 #: src/merge/output_control.cpp:249
@@ -865,11 +865,10 @@ msgid " done\n"
 msgstr "effectué\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:706
-#, fuzzy
 msgid " second"
 msgid_plural " seconds"
-msgstr[0] " secondes"
-msgstr[1] " secondes"
+msgstr[0] "seconde"
+msgstr[1] "secondes"
 
 #: src/info/mkvinfo.cpp:208
 #, boost-format
@@ -1311,7 +1310,7 @@ msgstr "&File d'attente"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:170
 msgid "&Language of chapter names to replace:"
-msgstr "&Langue des noms de chapitre à remplacer"
+msgstr "&Langue des noms de chapitre à remplacer "
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:494
@@ -1433,9 +1432,8 @@ msgid "&Remove files"
 msgstr "&Retirer les fichiers"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1268
-#, fuzzy
 msgid "&Remove job from queue after completion:"
-msgstr "&Retirer la tâche de la liste après exécution :"
+msgstr "&Retirer la tâche de la file d'attente une fois effectuée :"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:318
 msgid "&Remove jobs"
@@ -1493,7 +1491,7 @@ msgstr "&Sélectionner toutes les pistes"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
-msgstr "&Sauter les chapitres signalés « Caché »"
+msgstr "&Ignorer les chapitres signalés « Caché »"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 msgid "&Sort chapters by their start and end timecodes"
@@ -4779,7 +4777,7 @@ msgstr "Si activé, l'interface basculera automatiquement vers l'outil « Rappor
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:199
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:200
 msgid "If enabled the GUI will remove completed jobs older than the configured number of days no matter their status on exit."
-msgstr ""
+msgstr "Si activé, l'interface utilisateur retirera les tâches effectuées plus anciennes que le nombre de jours configurés, quelque soit leur état à la fermeture."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:196
 msgid "If enabled the first tab in the \"job output\" tool will not be cleared when a new job starts."
@@ -4787,7 +4785,7 @@ msgstr "Si activé, le premier onglet de l'outil « Rapport de tâche » ne sera
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
 msgid "If enabled the last entry will be skipped when loading chapters from such playlists in the chapter editor if it is located within five seconds of the end of the movie."
-msgstr "Si activé, la dernière entrée sera sautée au chargement des chapitres d'une telle liste de lecture dans l'éditeur de chapitre, si elle est située à moins de 5 secondes de la fin du film."
+msgstr "Si activé, la dernière entrée sera ignorée au chargement des chapitres d'une telle liste de lecture dans l'éditeur de chapitre, si elle est située à moins de 5 secondes de la fin du film."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:236
 msgid "If enabled the output file name controls will always be visible no matter which tab is currently shown."
@@ -6873,9 +6871,8 @@ msgid "Remove a&ll jobs"
 msgstr "Retirer toutes &les tâches"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1275
-#, fuzzy
 msgid "Remove com&pleted jobs older than x days:"
-msgstr "Retirer les tâches effe&ctuées"
+msgstr "Retirer les tâches effectuées &plus anciennes que x jours :"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
 msgid "Remove element"
@@ -7125,7 +7122,7 @@ msgstr "Entête de recherche"
 
 #: src/info/mkvinfo.cpp:959
 msgid "Seek head (subentries will be skipped)"
-msgstr "Entête de recherche (sous-entrées ignorées)"
+msgstr "Tête de recherche (sous-entrées ignorées)"
 
 #: src/info/mkvinfo.cpp:993
 #, boost-format
@@ -7514,12 +7511,12 @@ msgstr "Taille :"
 #: src/output/p_aac.cpp:94
 #, boost-format
 msgid "Skipping %1% bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
-msgstr "%1% octets ignorés (pas d'entête AAC valable trouvé). Cela peut provoquer une désynchronisation audio/vidéo.\n"
+msgstr "%1% octets ignorés (pas d'entête AAC valable trouvé). Cela pourrait provoquer une désynchronisation audio/vidéo.\n"
 
 #: src/output/p_dts.cpp:86
 #, boost-format
 msgid "Skipping %1% bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
-msgstr "%1% octets ignorés (pas d'entête DTS valable trouvé). Cela peut provoquer une désynchronisation audio/vidéo.\n"
+msgstr "%1% octets ignorés (pas d'entête DTS valable trouvé). Cela pourrait provoquer une désynchronisation audio/vidéo.\n"
 
 #: src/input/r_mp3.cpp:79
 #, boost-format
@@ -8693,7 +8690,7 @@ msgstr "L'ordre des diverses options n'a pas d'importance."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:245
 msgid "The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."
-msgstr "Les 2 autres dipositions disponibles sont : dans 2 colonnes fixes à droite, ou dans un contrôle d'onglet sous les listes de fichiers et pistes."
+msgstr "Les 2 autres dispositions disponibles sont : dans 2 colonnes fixes à droite, ou dans un contrôle d'onglet sous les listes de fichiers et pistes."
 
 #: src/merge/mkvmerge.cpp:1505
 #, boost-format
@@ -8728,12 +8725,12 @@ msgstr "La valeur de la propriété n'est pas un nombre décimal correct dans «
 #: src/propedit/change.cpp:134
 #, boost-format
 msgid "The property value is not a valid signed integer in '%1%'. %2%\n"
-msgstr "La valeur de la propriété n'est pas un nombre entier avec signe dans « %1% ». %2%\n"
+msgstr "La valeur de la propriété n'est pas un nombre entier signé dans « %1% ». %2%\n"
 
 #: src/propedit/change.cpp:128
 #, boost-format
 msgid "The property value is not a valid unsigned integer in '%1%'. %2%\n"
-msgstr "La valeur de la propriété n'est pas un nombre entier sans signe dans « %1% ». %2%\n"
+msgstr "La valeur de la propriété n'est pas un nombre entier non signé dans « %1% ». %2%\n"
 
 #: src/merge/output_control.cpp:1042
 msgid "The reason is unknown."
@@ -8805,7 +8802,7 @@ msgstr "La source pour l'information de temps du conteneur est diverse : une va
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:655
 msgid "The start time could not be parsed: %1"
-msgstr "Le temps initial ne peut pas être analysé : %1"
+msgstr "Le temps de début ne peut pas être analysé : %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:305
 msgid "The string '<NUM>' will be replaced by the chapter number."
@@ -9066,7 +9063,7 @@ msgstr "Cette piste AVC/H.264 contient des trames trop grandes pour la taille de
 #: src/output/p_avc.cpp:119
 #, boost-format
 msgid "This AVC/h.264 track does not start with a key frame. The first %1% frames have been skipped.\n"
-msgstr "Cette piste AVC/H.264 ne débute pas par une trame clé. Les %1% premières trames ont été ignorées.\n"
+msgstr "Cette piste AVC/H.264 ne débute pas par une trame-clé. Les %1% premières trames ont été ignorées.\n"
 
 #: src/output/p_avc.cpp:129
 msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timecode file has been provided for it, nor does the source container provide timecodes. The resulting timecodes may not be useful.\n"
@@ -11099,7 +11096,7 @@ msgstr "données brutes"
 #: src/input/r_real.cpp:217
 #, boost-format
 msgid "real_reader: Couldn't find RealAudio FourCC for id %1% (description length: %2%) Skipping track.\n"
-msgstr "real_reader : FourCC RealAudio pour identifiant %1% introuvable (longueur de description : %2%), piste ignorée.\n"
+msgstr "real_reader : FourCC RealAudio pour identifiant %1% introuvable (longueur de description : %2%). Piste ignorée.\n"
 
 #: src/input/r_real.cpp:241
 #, boost-format
