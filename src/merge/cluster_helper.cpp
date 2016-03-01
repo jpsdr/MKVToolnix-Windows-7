@@ -32,41 +32,7 @@
 #include <matroska/KaxCuesData.h>
 #include <matroska/KaxSeekHead.h>
 
-cluster_helper_c::impl_t::impl_t()
-  : cluster{}
-  , cluster_content_size{}
-  , max_timecode_and_duration{}
-  , max_video_timecode_rendered{}
-  , previous_cluster_tc{-1}
-  , num_cue_elements{}
-  , header_overhead{-1}
-  , timecode_offset{}
-  , bytes_in_file{}
-  , first_timecode_in_file{-1}
-  , first_timecode_in_part{-1}
-  , first_discarded_timecode{-1}
-  , last_discarded_timecode_and_duration{}
-  , discarded_duration{}
-  , previous_discarded_duration{}
-  , min_timecode_in_file{}
-  , max_timecode_in_file{-1}
-  , min_timecode_in_cluster{-1}
-  , max_timecode_in_cluster{-1}
-  , frame_field_number{1}
-  , first_video_keyframe_seen{}
-  , out{}
-  , current_split_point(split_points.begin())
-  , discarding{}
-  , splitting_and_processed_fully{}
-  , debug_splitting{"cluster_helper|splitting"}
-  , debug_packets{  "cluster_helper|cluster_helper_packets"}
-  , debug_duration{ "cluster_helper|cluster_helper_duration"}
-  , debug_rendering{"cluster_helper|cluster_helper_rendering"}
-{
-}
-
 cluster_helper_c::impl_t::~impl_t() {
-  delete cluster;
 }
 
 cluster_helper_c::cluster_helper_c()
@@ -84,7 +50,7 @@ cluster_helper_c::get_output() {
 
 KaxCluster *
 cluster_helper_c::get_cluster() {
-  return m->cluster;
+  return m->cluster.get();
 }
 
 int64_t
@@ -307,9 +273,7 @@ cluster_helper_c::get_timecode() {
 
 void
 cluster_helper_c::prepare_new_cluster() {
-  delete m->cluster;
-
-  m->cluster              = new kax_cluster_c;
+  m->cluster.reset(new kax_cluster_c);
   m->cluster_content_size = 0;
   m->packets.clear();
 
