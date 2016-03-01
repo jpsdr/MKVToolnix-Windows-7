@@ -31,6 +31,7 @@
 #include "common/strings/formatting.h"
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_tags_converter.h"
+#include "merge/cluster_helper.h"
 #include "merge/filelist.h"
 #include "merge/generic_packetizer.h"
 #include "merge/generic_reader.h"
@@ -305,13 +306,13 @@ generic_packetizer_c::set_track_type(int type,
   if (track_audio == type)
     m_reader->m_num_audio_tracks++;
 
-  else if (track_video == type) {
+  else if (track_video == type)
     m_reader->m_num_video_tracks++;
-    if (!g_video_packetizer)
-      g_video_packetizer = this;
 
-  } else
+  else
     m_reader->m_num_subtitle_tracks++;
+
+  g_cluster_helper->register_new_packetizer(*this);
 
   if (   (TFA_AUTOMATIC == tfa_mode)
       && (TFA_AUTOMATIC == m_timestamp_factory_application_mode))
@@ -1089,7 +1090,7 @@ generic_packetizer_c::connect(generic_packetizer_c *src,
   m_hcompression               = src->m_hcompression;
   m_compressor                 = compressor_c::create(m_hcompression);
   m_last_cue_timecode          = src->m_last_cue_timecode;
-  m_timestamp_factory           = src->m_timestamp_factory;
+  m_timestamp_factory          = src->m_timestamp_factory;
   m_correction_timecode_offset = 0;
 
   if (-1 == append_timecode_offset)
@@ -1223,4 +1224,10 @@ generic_packetizer_c::before_file_finished() {
 
 void
 generic_packetizer_c::after_file_created() {
+}
+
+generic_packetizer_c *
+generic_packetizer_c::get_connected_successor()
+  const {
+  return m_connected_successor;
 }

@@ -253,6 +253,8 @@ public:
   virtual void prevent_lacing();
   virtual bool is_lacing_prevented() const;
 
+  virtual generic_packetizer_c *get_connected_successor() const;
+
   // Callbacks
   virtual void after_packet_rendered(packet_t const &packet);
   virtual void before_file_finished();

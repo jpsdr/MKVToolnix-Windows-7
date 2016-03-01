@@ -19,6 +19,7 @@
 #include "common/math.h"
 #include "common/strings/formatting.h"
 #include "common/tags/tags.h"
+#include "common/translation.h"
 #include "merge/cluster_helper.h"
 #include "merge/cues.h"
 #include "merge/libmatroska_extensions.h"
@@ -264,6 +265,8 @@ cluster_helper_c::add_packet(packet_cptr packet) {
 
   if (g_video_packetizer == packet->source)
     ++m->frame_field_number;
+
+  generate_chapters_if_necessary(packet);
 }
 
 int64_t
@@ -692,6 +695,105 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
   }
 
   m->track_statistics.clear();
+}
+
+void
+cluster_helper_c::enable_chapter_generation(chapter_generation_mode_e mode,
+                                            std::string const &language) {
+  m->chapter_generation_mode     = mode;
+  m->chapter_generation_language = !language.empty() ? language : "eng";
+}
+
+chapter_generation_mode_e
+cluster_helper_c::get_chapter_generation_mode()
+  const {
+  return m->chapter_generation_mode;
+}
+
+void
+cluster_helper_c::set_chapter_generation_interval(timestamp_c const &interval) {
+  m->chapter_generation_interval = interval;
+}
+
+void
+cluster_helper_c::set_chapter_generation_name_template(std::string const &name_template) {
+  m->chapter_generation_name_template.override(name_template);
+}
+
+void
+cluster_helper_c::verify_and_report_chapter_generation_parameters()
+  const {
+  if (chapter_generation_mode_e::none == m->chapter_generation_mode)
+    return;
+
+  if (!m->chapter_generation_reference_track)
+    mxerror(boost::format("Chapter generation is only possible if at least one video or audio track muxed.\n"));
+
+  mxinfo(boost::format("Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n")
+         % m->chapter_generation_reference_track->m_ti.m_id % m->chapter_generation_reference_track->m_ti.m_fname);
+}
+
+void
+cluster_helper_c::register_new_packetizer(generic_packetizer_c &ptzr) {
+  auto new_track_type = ptzr.get_track_type();
+
+  if (!g_video_packetizer && (track_video == new_track_type))
+    g_video_packetizer = &ptzr;
+
+  auto current_ptzr_prio = !m->chapter_generation_reference_track                                 ?   0
+                         : m->chapter_generation_reference_track->get_track_type() == track_video ? 100
+                         : m->chapter_generation_reference_track->get_track_type() == track_audio ?  80
+                         :                                                                            0;
+
+  auto new_ptzr_prio     = new_track_type                                          == track_video ? 100
+                         : new_track_type                                          == track_audio ?  80
+                         :                                                                            0;
+
+  if (new_ptzr_prio > current_ptzr_prio)
+    m->chapter_generation_reference_track = &ptzr;
+}
+
+void
+cluster_helper_c::generate_chapters_if_necessary(packet_cptr const &packet) {
+  if ((chapter_generation_mode_e::none == m->chapter_generation_mode) || !m->chapter_generation_reference_track)
+    return;
+
+  auto successor = m->chapter_generation_reference_track->get_connected_successor();
+  if (successor) {
+    if (chapter_generation_mode_e::when_appending == m->chapter_generation_mode)
+      m->chapter_generation_last_generated.reset();
+
+    while ((successor = m->chapter_generation_reference_track->get_connected_successor()))
+      m->chapter_generation_reference_track = successor;
+  }
+
+  auto ptzr = packet->source;
+  if (ptzr != m->chapter_generation_reference_track)
+    return;
+
+  if (chapter_generation_mode_e::when_appending == m->chapter_generation_mode) {
+    if (packet->is_key_frame() && !m->chapter_generation_last_generated.valid())
+      generate_one_chapter(timestamp_c::ns(packet->assigned_timecode));
+
+    return;
+  }
+
+  if (chapter_generation_mode_e::interval != m->chapter_generation_mode)
+    return;
+
+  auto now = timestamp_c::ns(packet->assigned_timecode);
+
+  while (!m->chapter_generation_last_generated.valid() || (m->chapter_generation_last_generated <= now))
+    generate_one_chapter(!m->chapter_generation_last_generated.valid() ? timestamp_c::ns(0) : m->chapter_generation_last_generated + m->chapter_generation_interval);
+}
+
+void
+cluster_helper_c::generate_one_chapter(timestamp_c const &timestamp) {
+  m->chapter_generation_number         += 1;
+  m->chapter_generation_last_generated  = timestamp;
+  auto name                             = format_chapter_name_template(m->chapter_generation_name_template.get_translated(), m->chapter_generation_number, timestamp);
+
+  add_chapter_atom(timestamp, name, m->chapter_generation_language);
 }
 
 std::unique_ptr<cluster_helper_c> g_cluster_helper;

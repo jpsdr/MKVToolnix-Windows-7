@@ -48,6 +48,7 @@
 
 #include "common/chapters/chapters.h"
 #include "common/command_line.h"
+#include "common/construct.h"
 #include "common/container.h"
 #include "common/date_time.h"
 #include "common/debugging.h"
@@ -69,6 +70,7 @@
 #include "merge/webm.h"
 
 using namespace libmatroska;
+using namespace mtx::construct;
 
 namespace libmatroska {
 
@@ -167,6 +169,8 @@ static std::unique_ptr<EbmlVoid> s_kax_sh_void;
 static std::unique_ptr<EbmlVoid> s_kax_chapters_void;
 static int64_t s_max_chapter_size           = 0;
 static std::unique_ptr<EbmlVoid> s_void_after_track_headers;
+
+static std::vector<std::tuple<timestamp_c, std::string, std::string>> s_additional_chapter_atoms;
 
 static mm_io_cptr s_out;
 
@@ -1273,7 +1277,7 @@ add_tags_from_cue_chapters() {
  */
 static void
 render_chapter_void_placeholder() {
-  if (0 >= s_max_chapter_size)
+  if ((0 >= s_max_chapter_size) && (chapter_generation_mode_e::none == g_cluster_helper->get_chapter_generation_mode()))
     return;
 
   if (outputting_webm()) {
@@ -1281,12 +1285,14 @@ render_chapter_void_placeholder() {
 
     g_kax_chapters.reset();
     s_max_chapter_size = 0;
+    g_cluster_helper->enable_chapter_generation(chapter_generation_mode_e::none);
 
     return;
   }
 
+  auto size           = s_max_chapter_size + (chapter_generation_mode_e::none == g_cluster_helper->get_chapter_generation_mode() ? 100 : 1000);
   s_kax_chapters_void = std::make_unique<EbmlVoid>();
-  s_kax_chapters_void->SetSize(s_max_chapter_size + 100);
+  s_kax_chapters_void->SetSize(size);
   s_kax_chapters_void->Render(*s_out);
 }
 
@@ -1392,6 +1398,38 @@ add_chapters_for_current_part() {
   sort_ebml_master(s_chapters_in_this_file.get());
 }
 
+void
+add_chapter_atom(timestamp_c const &start_timestamp,
+                 std::string const &name,
+                 std::string const &language) {
+  s_additional_chapter_atoms.emplace_back(start_timestamp, name, language);
+}
+
+static void
+prepare_additional_chapter_atoms_for_rendering() {
+  if (s_additional_chapter_atoms.empty())
+    return;
+
+  if (!s_chapters_in_this_file)
+    s_chapters_in_this_file = std::make_shared<KaxChapters>();
+
+  auto offset   = timestamp_c::ns(g_no_linking ? g_cluster_helper->get_first_timecode_in_file() + g_cluster_helper->get_discarded_duration() : 0);
+  auto &edition = GetChild<KaxEditionEntry>(*s_chapters_in_this_file);
+
+  if (!FindChild<KaxEditionUID>(edition))
+    GetChild<KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+
+  for (auto const &additional_chapter : s_additional_chapter_atoms) {
+    auto atom = cons<KaxChapterAtom>(new KaxChapterUID,       create_unique_number(UNIQUE_CHAPTER_IDS),
+                                     new KaxChapterTimeStart, (std::get<0>(additional_chapter) - offset).to_ns(),
+                                     cons<KaxChapterDisplay>(new KaxChapterString,   std::get<1>(additional_chapter),
+                                                             new KaxChapterLanguage, std::get<2>(additional_chapter)));
+    edition.PushElement(*atom);
+  }
+
+  s_additional_chapter_atoms.clear();
+}
+
 static void
 render_chapters() {
   auto s_debug = debugging_option_c{"splitting_chapters"};
@@ -1401,11 +1439,22 @@ render_chapters() {
              % !!s_kax_chapters_void     % (s_kax_chapters_void     ? s_kax_chapters_void    ->ElementSize() : 0)
              % !!s_chapters_in_this_file % (s_chapters_in_this_file ? s_chapters_in_this_file->ElementSize() : 0));
 
-  if (!s_kax_chapters_void)
-    return;
+  prepare_additional_chapter_atoms_for_rendering();
 
-  if (s_chapters_in_this_file)
+  if (!s_chapters_in_this_file) {
+    s_kax_chapters_void.reset();
+    return;
+  }
+
+  fix_mandatory_elements(s_chapters_in_this_file.get());
+
+  if (s_kax_chapters_void && (s_kax_chapters_void->ElementSize() >= s_chapters_in_this_file->ElementSize()))
     s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, true);
+
+  else {
+    s_out->setFilePointer(0, seek_end);
+    s_chapters_in_this_file->Render(*s_out);
+  }
 
   s_kax_chapters_void.reset();
 }

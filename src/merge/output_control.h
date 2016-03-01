@@ -201,6 +201,7 @@ void main_loop();
 
 void add_packetizer_globally(generic_packetizer_c *packetizer);
 void add_tags(KaxTag *tags);
+void add_chapter_atom(timestamp_c const &start_timestamp, std::string const &name, std::string const &language);
 
 void create_next_output_file();
 void finish_file(bool last_file, bool create_new_file = false, bool previously_discarding = false);

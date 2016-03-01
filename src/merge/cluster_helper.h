@@ -23,13 +23,21 @@
 #include <matroska/KaxCluster.h>
 
 #include "common/split_point.h"
+#include "common/timestamp.h"
 #include "merge/libmatroska_extensions.h"
 
 #define RND_TIMECODE_SCALE(a) (std::llround(static_cast<double>(a) / static_cast<double>(g_timecode_scale)) * static_cast<int64_t>(g_timecode_scale))
 
+class generic_packetizer_c;
 class render_groups_c;
 class packet_t;
 using packet_cptr = std::shared_ptr<packet_t>;
+
+enum class chapter_generation_mode_e {
+  none,
+  when_appending,
+  interval,
+};
 
 class cluster_helper_c {
 private:
@@ -69,6 +77,14 @@ public:
 
   void create_tags_for_track_statistics(KaxTags &tags, std::string const &writing_app, boost::posix_time::ptime const &writing_date);
 
+  void register_new_packetizer(generic_packetizer_c &ptzr);
+
+  void enable_chapter_generation(chapter_generation_mode_e mode, std::string const &language = "");
+  chapter_generation_mode_e get_chapter_generation_mode() const;
+  void set_chapter_generation_interval(timestamp_c const &interval);
+  void set_chapter_generation_name_template(std::string const &name_template);
+  void verify_and_report_chapter_generation_parameters() const;
+
 private:
   void set_duration(render_groups_c *rg);
   bool must_duration_be_set(render_groups_c *rg, packet_cptr &new_packet);
@@ -76,6 +92,8 @@ private:
   void render_before_adding_if_necessary(packet_cptr &packet);
   void render_after_adding_if_necessary(packet_cptr &packet);
   void split_if_necessary(packet_cptr &packet);
+  void generate_chapters_if_necessary(packet_cptr const &packet);
+  void generate_one_chapter(timestamp_c const &timestamp);
   void split(packet_cptr &packet);
 
   bool add_to_cues_maybe(packet_cptr &pack);

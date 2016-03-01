@@ -95,6 +95,12 @@ set_usage() {
                   "                           entries to chapter names.\n");
   usage_text += Y("  --default-language <lng> Use this language for all tracks unless\n"
                   "                           overridden with the --language option.\n");
+  usage_text += Y("  --generate-chapters <mode>\n"
+                  "                           Automatically generate chapters according to\n"
+                  "                           the mode ('when-appending' or 'interval:<duration>').\n");
+  usage_text += Y("  --generate-chapters-name-template <template>\n"
+                  "                           Template for newly generated chapter names\n"
+                  "                           (default: 'Chapter <NUM:2>').\n");
   usage_text +=   "\n";
   usage_text += Y(" Segment info handling:\n");
   usage_text += Y("  --segmentinfo <file>     Read segment information from the file.\n");
@@ -439,11 +445,9 @@ identify(std::string &filename) {
 
    It returns a number of nanoseconds.
 */
-int64_t
+static int64_t
 parse_number_with_unit(const std::string &s,
-                       const std::string &subject,
-                       const std::string &argument,
-                       std::string display_s = "") {
+                       const std::string &argument) {
   boost::regex re1("(-?\\d+\\.?\\d*)(s|ms|us|ns|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
   boost::regex re2("(-?\\d+)/(-?\\d+)(s|ms|us|ns|fps|p|i)?", boost::regex::perl | boost::regex::icase);
 
@@ -451,9 +455,6 @@ parse_number_with_unit(const std::string &s,
   int64_t n = 0, d = 0;
   double d_value = 0.0;
   bool is_fraction = false;
-
-  if (display_s.empty())
-    display_s = s;
 
   boost::smatch matches;
   if (boost::regex_match(s, matches, re1)) {
@@ -470,7 +471,7 @@ parse_number_with_unit(const std::string &s,
     is_fraction = true;
 
   } else
-    mxerror(boost::format(Y("'%1%' is not a valid %2% in '%3% %4%'.\n")) % s % subject % argument % display_s);
+    mxerror(boost::format(Y("'%1%' is not recognized as a valid number format in '%2%'.\n")) % s % argument);
 
   int64_t multiplier = 1000000000;
   balg::to_lower(unit);
@@ -496,7 +497,7 @@ parse_number_with_unit(const std::string &s,
       return (int64_t)(1000000000.0 / d_value);
 
   } else if (unit != "s")
-    mxerror(boost::format(Y("'%1%' does not contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2% %3%'.\n")) % s % argument % display_s);
+    mxerror(boost::format(Y("'%1%' does not contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n")) % s % argument);
 
   if (is_fraction)
     return multiplier * n / d;
@@ -1351,7 +1352,7 @@ parse_arg_default_duration(const std::string &s,
   if (!parse_number(parts[0], id))
     mxerror(boost::format(Y("'%1%' is not a valid track ID in '--default-duration %2%'.\n")) % parts[0] % s);
 
-  ti.m_default_durations[id] = parse_number_with_unit(parts[1], "default duration", "--default-duration");
+  ti.m_default_durations[id] = parse_number_with_unit(parts[1], (boost::format("--default-duration %1%") % s).str());
 }
 
 /** \brief Parse the argument for \c --nalu-size-length
@@ -1634,6 +1635,31 @@ parse_arg_chapters(const std::string &param,
 
   g_chapter_file_name = arg;
   g_kax_chapters      = parse_chapters(g_chapter_file_name, 0, -1, 0, g_chapter_language.c_str(), g_chapter_charset.c_str(), false, nullptr, &g_tags_from_cue_chapters);
+}
+
+static void
+parse_arg_generate_chapters(std::string const &arg) {
+  auto parts = split(arg, ":", 2);
+
+  if (parts[0] == "when-appending") {
+    g_cluster_helper->enable_chapter_generation(chapter_generation_mode_e::when_appending, g_chapter_language);
+    g_chapter_language.clear();
+    return;
+  }
+
+  if (parts[0] != "interval")
+    mxerror(boost::format("Invalid chapter generation mode in '--generate-chapters %1%'.\n") % arg);
+
+  if (parts.size() < 2)
+    parts.emplace_back("");
+
+  auto interval = int64_t{};
+  if (!parse_timecode(parts[1], interval) || (interval < 0))
+    mxerror(boost::format("The chapter generation interval must be a positive number in '--generate-chapters %1%'.\n") % arg);
+
+  g_cluster_helper->enable_chapter_generation(chapter_generation_mode_e::interval, g_chapter_language);
+  g_cluster_helper->set_chapter_generation_interval(timestamp_c::ns(interval));
+  g_chapter_language.clear();
 }
 
 static void
@@ -2154,6 +2180,20 @@ parse_args(std::vector<std::string> args) {
 
       inputs_found = true;
 
+    } else if (this_arg == "--generate-chapters") {
+      if (no_next_arg)
+        mxerror(Y("'--generate-chapters' lacks the mode.\n"));
+
+      parse_arg_generate_chapters(next_arg);
+      sit++;
+
+    } else if (this_arg == "--generate-chapters-name-template") {
+      if (no_next_arg)
+        mxerror(Y("'--generate-chapters-name-template' lacks the name template.\n"));
+
+      g_cluster_helper->set_chapter_generation_name_template(next_arg);
+      sit++;
+
     } else if (this_arg == "--segmentinfo") {
       if (no_next_arg)
         mxerror(Y("'--segmentinfo' lacks the file name.\n"));
@@ -2632,6 +2672,7 @@ main(int argc,
     check_track_id_validity();
     create_append_mappings_for_playlists();
     check_append_mapping();
+    g_cluster_helper->verify_and_report_chapter_generation_parameters();
     calc_attachment_sizes();
     calc_max_chapter_size();
   }
