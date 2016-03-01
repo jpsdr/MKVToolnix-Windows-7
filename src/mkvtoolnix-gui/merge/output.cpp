@@ -4,6 +4,7 @@
 #include "common/kax_analyzer.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
@@ -31,7 +32,7 @@ Tab::setupOutputControls() {
 
   m_splitControls << ui->splitOptions << ui->splitOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;
 
-  auto comboBoxControls = QList<QComboBox *>{} << ui->splitMode << ui->chapterLanguage << ui->chapterCharacterSet;
+  auto comboBoxControls = QList<QComboBox *>{} << ui->splitMode << ui->chapterLanguage << ui->chapterCharacterSet << ui->chapterGenerationMode;
   for (auto const &control : comboBoxControls) {
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     Util::fixComboBoxViewWidth(*control);
@@ -40,34 +41,38 @@ Tab::setupOutputControls() {
   ui->splitMaxFiles->setMaximum(std::numeric_limits<int>::max());
 
   onSplitModeChanged(MuxConfig::DoNotSplit);
+  onChapterGenerationModeChanged();
 
-  connect(MainWindow::get(),              &MainWindow::preferencesChanged,                                                                  this, &Tab::setupOutputFileControls);
+  connect(MainWindow::get(),                 &MainWindow::preferencesChanged,                                                                  this, &Tab::setupOutputFileControls);
 
-  connect(ui->additionalOptions,          &QLineEdit::textChanged,                                                                          this, &Tab::onAdditionalOptionsChanged);
-  connect(ui->browseChapters,             &QPushButton::clicked,                                                                            this, &Tab::onBrowseChapters);
-  connect(ui->browseGlobalTags,           &QPushButton::clicked,                                                                            this, &Tab::onBrowseGlobalTags);
-  connect(ui->browseNextSegmentUID,       &QPushButton::clicked,                                                                            this, &Tab::onBrowseNextSegmentUID);
-  connect(ui->browseOutput,               &QPushButton::clicked,                                                                            this, &Tab::onBrowseOutput);
-  connect(ui->browsePreviousSegmentUID,   &QPushButton::clicked,                                                                            this, &Tab::onBrowsePreviousSegmentUID);
-  connect(ui->browseSegmentInfo,          &QPushButton::clicked,                                                                            this, &Tab::onBrowseSegmentInfo);
-  connect(ui->browseSegmentUID,           &QPushButton::clicked,                                                                            this, &Tab::onBrowseSegmentUID);
-  connect(ui->chapterCharacterSet,        static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this, &Tab::onChapterCharacterSetChanged);
-  connect(ui->chapterCharacterSetPreview, &QPushButton::clicked,                                                                            this, &Tab::onPreviewChapterCharacterSet);
-  connect(ui->chapterCueNameFormat,       &QLineEdit::textChanged,                                                                          this, &Tab::onChapterCueNameFormatChanged);
-  connect(ui->chapterLanguage,            static_cast<void (Util::LanguageComboBox::*)(int)>(&Util::LanguageComboBox::currentIndexChanged), this, &Tab::onChapterLanguageChanged);
-  connect(ui->chapters,                   &QLineEdit::textChanged,                                                                          this, &Tab::onChaptersChanged);
-  connect(ui->globalTags,                 &QLineEdit::textChanged,                                                                          this, &Tab::onGlobalTagsChanged);
-  connect(ui->linkFiles,                  &QPushButton::clicked,                                                                            this, &Tab::onLinkFilesClicked);
-  connect(ui->nextSegmentUID,             &QLineEdit::textChanged,                                                                          this, &Tab::onNextSegmentUIDChanged);
-  connect(ui->output,                     &QLineEdit::textChanged,                                                                          this, &Tab::setDestination);
-  connect(ui->previousSegmentUID,         &QLineEdit::textChanged,                                                                          this, &Tab::onPreviousSegmentUIDChanged);
-  connect(ui->segmentInfo,                &QLineEdit::textChanged,                                                                          this, &Tab::onSegmentInfoChanged);
-  connect(ui->segmentUIDs,                &QLineEdit::textChanged,                                                                          this, &Tab::onSegmentUIDsChanged);
-  connect(ui->splitMaxFiles,              static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),                                    this, &Tab::onSplitMaxFilesChanged);
-  connect(ui->splitMode,                  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this, &Tab::onSplitModeChanged);
-  connect(ui->splitOptions,               &QComboBox::editTextChanged,                                                                      this, &Tab::onSplitOptionsChanged);
-  connect(ui->title,                      &QLineEdit::textChanged,                                                                          this, &Tab::onTitleChanged);
-  connect(ui->webmMode,                   &QPushButton::clicked,                                                                            this, &Tab::onWebmClicked);
+  connect(ui->additionalOptions,             &QLineEdit::textChanged,                                                                          this, &Tab::onAdditionalOptionsChanged);
+  connect(ui->browseChapters,                &QPushButton::clicked,                                                                            this, &Tab::onBrowseChapters);
+  connect(ui->browseGlobalTags,              &QPushButton::clicked,                                                                            this, &Tab::onBrowseGlobalTags);
+  connect(ui->browseNextSegmentUID,          &QPushButton::clicked,                                                                            this, &Tab::onBrowseNextSegmentUID);
+  connect(ui->browseOutput,                  &QPushButton::clicked,                                                                            this, &Tab::onBrowseOutput);
+  connect(ui->browsePreviousSegmentUID,      &QPushButton::clicked,                                                                            this, &Tab::onBrowsePreviousSegmentUID);
+  connect(ui->browseSegmentInfo,             &QPushButton::clicked,                                                                            this, &Tab::onBrowseSegmentInfo);
+  connect(ui->browseSegmentUID,              &QPushButton::clicked,                                                                            this, &Tab::onBrowseSegmentUID);
+  connect(ui->chapterCharacterSet,           static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this, &Tab::onChapterCharacterSetChanged);
+  connect(ui->chapterCharacterSetPreview,    &QPushButton::clicked,                                                                            this, &Tab::onPreviewChapterCharacterSet);
+  connect(ui->chapterCueNameFormat,          &QLineEdit::textChanged,                                                                          this, &Tab::onChapterCueNameFormatChanged);
+  connect(ui->chapterLanguage,               static_cast<void (Util::LanguageComboBox::*)(int)>(&Util::LanguageComboBox::currentIndexChanged), this, &Tab::onChapterLanguageChanged);
+  connect(ui->chapters,                      &QLineEdit::textChanged,                                                                          this, &Tab::onChaptersChanged);
+  connect(ui->globalTags,                    &QLineEdit::textChanged,                                                                          this, &Tab::onGlobalTagsChanged);
+  connect(ui->linkFiles,                     &QPushButton::clicked,                                                                            this, &Tab::onLinkFilesClicked);
+  connect(ui->nextSegmentUID,                &QLineEdit::textChanged,                                                                          this, &Tab::onNextSegmentUIDChanged);
+  connect(ui->output,                        &QLineEdit::textChanged,                                                                          this, &Tab::setDestination);
+  connect(ui->previousSegmentUID,            &QLineEdit::textChanged,                                                                          this, &Tab::onPreviousSegmentUIDChanged);
+  connect(ui->segmentInfo,                   &QLineEdit::textChanged,                                                                          this, &Tab::onSegmentInfoChanged);
+  connect(ui->segmentUIDs,                   &QLineEdit::textChanged,                                                                          this, &Tab::onSegmentUIDsChanged);
+  connect(ui->splitMaxFiles,                 static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),                                    this, &Tab::onSplitMaxFilesChanged);
+  connect(ui->splitMode,                     static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this, &Tab::onSplitModeChanged);
+  connect(ui->splitOptions,                  &QComboBox::editTextChanged,                                                                      this, &Tab::onSplitOptionsChanged);
+  connect(ui->title,                         &QLineEdit::textChanged,                                                                          this, &Tab::onTitleChanged);
+  connect(ui->webmMode,                      &QPushButton::clicked,                                                                            this, &Tab::onWebmClicked);
+  connect(ui->chapterGenerationMode,         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this, &Tab::onChapterGenerationModeChanged);
+  connect(ui->chapterGenerationNameTemplate, &QLineEdit::textChanged,                                                                          this, &Tab::onChapterGenerationNameTemplateChanged);
+  connect(ui->chapterGenerationInterval,     &QLineEdit::textChanged,                                                                          this, &Tab::onChapterGenerationIntervalChanged);
 }
 
 void
@@ -169,10 +174,11 @@ Tab::setupOutputToolTips() {
   Util::setToolTip(ui->chapters,           QY("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."));
   Util::setToolTip(ui->browseChapters,     QY("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."));
   Util::setToolTip(ui->chapterLanguage,
-                   Q("%1 %2 %3")
-                   .arg(QY("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."))
-                   .arg(QY("This option specifies the language to be associated with chapters if the OGM chapter format is used."))
-                   .arg(QY("It is ignored for XML chapter files.")));
+                   Q("<p>%1 %2 %3</p><p>%4</p>")
+                   .arg(QYH("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."))
+                   .arg(QYH("This option specifies the language to be associated with chapters if the OGM chapter format is used."))
+                   .arg(QYH("It is ignored for XML chapter files."))
+                   .arg(QYH("The language set here is also used when chapters are generated.")));
   Util::setToolTip(ui->chapterCharacterSet,
                    Q("%1 %2 %3")
                    .arg(QY("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."))
@@ -185,6 +191,18 @@ Tab::setupOutputToolTips() {
                    .arg(QYH("The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."))
                    .arg(QYH("The rest is copied as is."))
                    .arg(QYH("If nothing is entered then '%p - %t' will be used.")));
+  Util::setToolTip(ui->chapterGenerationMode,
+                   Q("<p>%1 %2</p><ol><li>%3</li><li>%4</li></ol><p>%5</p>")
+                   .arg(QYH("mkvmerge can generate chapters automatically."))
+                   .arg(QYH("The following modes are supported:"))
+                   .arg(QYH("When appending: one chapter is created at the start and one whenever a file is appended."))
+                   .arg(QYH("In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."))
+                   .arg(QYH("The language for the newly created chapters is set via the chapter language control above.")));
+  Util::setToolTip(ui->chapterGenerationNameTemplate,
+                   Q("%1<p>%2</p>")
+                   .arg(ChapterEditor::Tool::chapterNameTemplateToolTip())
+                   .arg(QYH("If nothing is entered the default 'Chapter <NUM:2>' will be used.")));
+  Util::setToolTip(ui->chapterGenerationInterval, QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."));
   Util::setToolTip(ui->webmMode,
                    Q("<p>%1 %2</p><p>%3 %4 %5</p><p>%6<p>")
                    .arg(QYH("Create a WebM compliant file."))
@@ -511,6 +529,9 @@ Tab::setOutputControlValues() {
 
   ui->chapterLanguage->setCurrentByData(m_config.m_chapterLanguage);
   ui->chapterCharacterSet->setCurrentByData(m_config.m_chapterCharacterSet);
+  ui->chapterGenerationMode->setCurrentIndex(static_cast<int>(m_config.m_chapterGenerationMode));
+  ui->chapterGenerationNameTemplate->setText(m_config.m_chapterGenerationNameTemplate);
+  ui->chapterGenerationInterval->setText(m_config.m_chapterGenerationInterval);
 }
 
 void
@@ -590,6 +611,28 @@ bool
 Tab::hasDestinationFileName()
   const {
   return !m_config.m_destination.isEmpty();
+}
+
+void
+Tab::onChapterGenerationModeChanged() {
+  m_config.m_chapterGenerationMode = static_cast<MuxConfig::ChapterGenerationMode>(ui->chapterGenerationMode->currentIndex());
+  auto isEnabled                   = MuxConfig::ChapterGenerationMode::None      != m_config.m_chapterGenerationMode;
+  auto isInterval                  = MuxConfig::ChapterGenerationMode::Intervals == m_config.m_chapterGenerationMode;
+
+  ui->chapterGenerationNameTemplate->setEnabled(isEnabled);
+  ui->chapterGenerationNameTemplateLabel->setEnabled(isEnabled);
+  ui->chapterGenerationInterval->setEnabled(isInterval);
+  ui->chapterGenerationIntervalLabel->setEnabled(isInterval);
+}
+
+void
+Tab::onChapterGenerationNameTemplateChanged() {
+  m_config.m_chapterGenerationNameTemplate = ui->chapterGenerationNameTemplate->text();
+}
+
+void
+Tab::onChapterGenerationIntervalChanged() {
+  m_config.m_chapterGenerationInterval = ui->chapterGenerationInterval->text();
 }
 
 }}}

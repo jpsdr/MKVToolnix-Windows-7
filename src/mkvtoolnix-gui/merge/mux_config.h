@@ -61,6 +61,12 @@ public:
     SplitAfterChapters,
   };
 
+  enum class ChapterGenerationMode {
+    None = 0,
+    WhenAppending,
+    Intervals,
+  };
+
 public:
   QString m_configFileName;
 
@@ -74,6 +80,9 @@ public:
   SplitMode m_splitMode;
   unsigned int m_splitMaxFiles;
   bool m_linkFiles, m_webmMode;
+
+  ChapterGenerationMode m_chapterGenerationMode;
+  QString m_chapterGenerationNameTemplate, m_chapterGenerationInterval;
 
 public:
   MuxConfig(QString const &fileName = QString{""});

@@ -1218,6 +1218,47 @@
             </widget>
            </item>
            <item>
+            <widget class="QGroupBox" name="outputMischellaneousBox">
+             <property name="title">
+              <string>Miscellaneous</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QCheckBox" name="webmMode">
+                <property name="text">
+                 <string>Create WebM compliant file</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <item>
+                 <widget class="QLabel" name="additionalOptionsLabel">
+                  <property name="text">
+                   <string>Additional options:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="additionalOptions"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="editAdditionalOptions">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/view-choose.png</normaloff>:/icons/16x16/view-choose.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
             <spacer name="verticalSpacer_3">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1225,7 +1266,7 @@
              <property name="sizeHint" stdset="0">
               <size>
                <width>384</width>
-               <height>13</height>
+               <height>0</height>
               </size>
              </property>
             </spacer>
@@ -1330,6 +1371,13 @@
               <string>Chapters</string>
              </property>
              <layout class="QGridLayout" name="gridLayout">
+              <item row="5" column="0">
+               <widget class="QLabel" name="chapterGenerationNameTemplateLabel">
+                <property name="text">
+                 <string>Name template:</string>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="chaptersLabel">
                 <property name="text">
@@ -1355,6 +1403,9 @@
                 </item>
                </layout>
               </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="chapterGenerationNameTemplate"/>
+              </item>
               <item row="1" column="0">
                <widget class="QLabel" name="chapterLanguageLabel">
                 <property name="text">
@@ -1369,6 +1420,13 @@
                <widget class="QLabel" name="chapterCharacterSetLabel">
                 <property name="text">
                  <string>Character set:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="chapterGenerationLabel">
+                <property name="text">
+                 <string>Generating chapters:</string>
                 </property>
                </widget>
               </item>
@@ -1407,46 +1465,34 @@
               <item row="3" column="1">
                <widget class="QLineEdit" name="chapterCueNameFormat"/>
               </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="outputMischellaneousBox">
-             <property name="title">
-              <string>Miscellaneous</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_6">
-              <item>
-               <widget class="QCheckBox" name="webmMode">
+              <item row="4" column="1">
+               <widget class="QComboBox" name="chapterGenerationMode">
+                <item>
+                 <property name="text">
+                  <string>don't generate chapters</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>one chapter for each appended file</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>chapters in fixed intervals</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="chapterGenerationIntervalLabel">
                 <property name="text">
-                 <string>Create WebM compliant file</string>
+                 <string>Interval:</string>
                 </property>
                </widget>
               </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_10">
-                <item>
-                 <widget class="QLabel" name="additionalOptionsLabel">
-                  <property name="text">
-                   <string>Additional options:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="additionalOptions"/>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="editAdditionalOptions">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../../qt_resources.qrc">
-                    <normaloff>:/icons/16x16/view-choose.png</normaloff>:/icons/16x16/view-choose.png</iconset>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="chapterGenerationInterval"/>
               </item>
              </layout>
             </widget>
@@ -1459,7 +1505,7 @@
              <property name="sizeHint" stdset="0">
               <size>
                <width>20</width>
-               <height>40</height>
+               <height>0</height>
               </size>
              </property>
             </spacer>
@@ -1731,11 +1777,6 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>mtx::gui::Util::BasicTreeView</class>
-   <extends>QTreeView</extends>
-   <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
-  </customwidget>
-  <customwidget>
    <class>mtx::gui::Util::LanguageComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/language_combo_box.h</header>
@@ -1744,6 +1785,11 @@
    <class>mtx::gui::Util::CharacterSetComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::BasicTreeView</class>
+   <extends>QTreeView</extends>
+   <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
   </customwidget>
   <customwidget>
    <class>mtx::gui::Util::FilesDragDropWidget</class>
@@ -1806,6 +1852,9 @@
   <tabstop>splitOptions</tabstop>
   <tabstop>splitMaxFiles</tabstop>
   <tabstop>linkFiles</tabstop>
+  <tabstop>webmMode</tabstop>
+  <tabstop>additionalOptions</tabstop>
+  <tabstop>editAdditionalOptions</tabstop>
   <tabstop>segmentUIDs</tabstop>
   <tabstop>browseSegmentUID</tabstop>
   <tabstop>previousSegmentUID</tabstop>
@@ -1818,9 +1867,9 @@
   <tabstop>chapterCharacterSet</tabstop>
   <tabstop>chapterCharacterSetPreview</tabstop>
   <tabstop>chapterCueNameFormat</tabstop>
-  <tabstop>webmMode</tabstop>
-  <tabstop>additionalOptions</tabstop>
-  <tabstop>editAdditionalOptions</tabstop>
+  <tabstop>chapterGenerationMode</tabstop>
+  <tabstop>chapterGenerationNameTemplate</tabstop>
+  <tabstop>chapterGenerationInterval</tabstop>
   <tabstop>attachments</tabstop>
   <tabstop>moveAttachmentsUp</tabstop>
   <tabstop>moveAttachmentsDown</tabstop>

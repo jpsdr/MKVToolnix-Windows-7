@@ -198,6 +198,9 @@ public slots:
   virtual void onEditAdditionalOptions();
   virtual void onPreviewSubtitleCharacterSet();
   virtual void setSubtitleCharacterSet(QString const &characterSet);
+  virtual void onChapterGenerationModeChanged();
+  virtual void onChapterGenerationNameTemplateChanged();
+  virtual void onChapterGenerationIntervalChanged();
 
   // Attachments tab:
   virtual void onAttachmentSelectionChanged();

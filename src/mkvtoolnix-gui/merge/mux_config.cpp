@@ -97,26 +97,29 @@ MuxConfig::operator =(MuxConfig const &other) {
   if (&other == this)
     return *this;
 
-  m_configFileName       = other.m_configFileName;
-  m_firstInputFileName   = other.m_firstInputFileName;
-  m_title                = other.m_title;
-  m_destination          = other.m_destination;
-  m_destinationAuto      = other.m_destinationAuto;
-  m_globalTags           = other.m_globalTags;
-  m_segmentInfo          = other.m_segmentInfo;
-  m_splitOptions         = other.m_splitOptions;
-  m_segmentUIDs          = other.m_segmentUIDs;
-  m_previousSegmentUID   = other.m_previousSegmentUID;
-  m_nextSegmentUID       = other.m_nextSegmentUID;
-  m_chapters             = other.m_chapters;
-  m_chapterLanguage      = other.m_chapterLanguage;
-  m_chapterCharacterSet  = other.m_chapterCharacterSet;
-  m_chapterCueNameFormat = other.m_chapterCueNameFormat;
-  m_additionalOptions    = other.m_additionalOptions;
-  m_splitMode            = other.m_splitMode;
-  m_splitMaxFiles        = other.m_splitMaxFiles;
-  m_linkFiles            = other.m_linkFiles;
-  m_webmMode             = other.m_webmMode;
+  m_configFileName                = other.m_configFileName;
+  m_firstInputFileName            = other.m_firstInputFileName;
+  m_title                         = other.m_title;
+  m_destination                   = other.m_destination;
+  m_destinationAuto               = other.m_destinationAuto;
+  m_globalTags                    = other.m_globalTags;
+  m_segmentInfo                   = other.m_segmentInfo;
+  m_splitOptions                  = other.m_splitOptions;
+  m_segmentUIDs                   = other.m_segmentUIDs;
+  m_previousSegmentUID            = other.m_previousSegmentUID;
+  m_nextSegmentUID                = other.m_nextSegmentUID;
+  m_chapters                      = other.m_chapters;
+  m_chapterLanguage               = other.m_chapterLanguage;
+  m_chapterCharacterSet           = other.m_chapterCharacterSet;
+  m_chapterCueNameFormat          = other.m_chapterCueNameFormat;
+  m_additionalOptions             = other.m_additionalOptions;
+  m_splitMode                     = other.m_splitMode;
+  m_splitMaxFiles                 = other.m_splitMaxFiles;
+  m_linkFiles                     = other.m_linkFiles;
+  m_webmMode                      = other.m_webmMode;
+  m_chapterGenerationMode         = other.m_chapterGenerationMode;
+  m_chapterGenerationNameTemplate = other.m_chapterGenerationNameTemplate;
+  m_chapterGenerationInterval     = other.m_chapterGenerationInterval;
 
   m_files.clear();
   m_tracks.clear();
@@ -219,24 +222,27 @@ MuxConfig::load(Util::ConfigFile &settings) {
 
   // Load global settings
   settings.beginGroup("global");
-  m_title                = settings.value("title").toString();
-  m_destination          = settings.value("destination").toString();
-  m_destinationAuto      = settings.value("destinationAuto").toString();
-  m_globalTags           = settings.value("globalTags").toString();
-  m_segmentInfo          = settings.value("segmentInfo").toString();
-  m_splitOptions         = settings.value("splitOptions").toString();
-  m_segmentUIDs          = settings.value("segmentUIDs").toString();
-  m_previousSegmentUID   = settings.value("previousSegmentUID").toString();
-  m_nextSegmentUID       = settings.value("nextSegmentUID").toString();
-  m_chapters             = settings.value("chapters").toString();
-  m_chapterLanguage      = settings.value("chapterLanguage").toString();
-  m_chapterCharacterSet  = settings.value("chapterCharacterSet").toString();
-  m_chapterCueNameFormat = settings.value("chapterCueNameFormat").toString();
-  m_additionalOptions    = settings.value("additionalOptions").toString();
-  m_splitMode            = static_cast<SplitMode>(settings.value("splitMode").toInt());
-  m_splitMaxFiles        = settings.value("splitMaxFiles").toInt();
-  m_linkFiles            = settings.value("linkFiles").toBool();
-  m_webmMode             = settings.value("webmMode").toBool();
+  m_title                         = settings.value("title").toString();
+  m_destination                   = settings.value("destination").toString();
+  m_destinationAuto               = settings.value("destinationAuto").toString();
+  m_globalTags                    = settings.value("globalTags").toString();
+  m_segmentInfo                   = settings.value("segmentInfo").toString();
+  m_splitOptions                  = settings.value("splitOptions").toString();
+  m_segmentUIDs                   = settings.value("segmentUIDs").toString();
+  m_previousSegmentUID            = settings.value("previousSegmentUID").toString();
+  m_nextSegmentUID                = settings.value("nextSegmentUID").toString();
+  m_chapters                      = settings.value("chapters").toString();
+  m_chapterLanguage               = settings.value("chapterLanguage").toString();
+  m_chapterCharacterSet           = settings.value("chapterCharacterSet").toString();
+  m_chapterCueNameFormat          = settings.value("chapterCueNameFormat").toString();
+  m_additionalOptions             = settings.value("additionalOptions").toString();
+  m_splitMode                     = static_cast<SplitMode>(settings.value("splitMode").toInt());
+  m_splitMaxFiles                 = settings.value("splitMaxFiles").toInt();
+  m_linkFiles                     = settings.value("linkFiles").toBool();
+  m_webmMode                      = settings.value("webmMode").toBool();
+  m_chapterGenerationMode         = static_cast<ChapterGenerationMode>(settings.value("chapterGenerationMode").toInt());
+  m_chapterGenerationNameTemplate = settings.value("chapterGenerationNameTemplate").toString();
+  m_chapterGenerationInterval     = settings.value("chapterGenerationInterval").toString();
   settings.endGroup();
 }
 
@@ -268,24 +274,27 @@ MuxConfig::save(Util::ConfigFile &settings)
   settings.endGroup();
 
   settings.beginGroup("global");
-  settings.setValue("title",                m_title);
-  settings.setValue("destination",          m_destination);
-  settings.setValue("destinationAuto",      m_destinationAuto);
-  settings.setValue("globalTags",           m_globalTags);
-  settings.setValue("segmentInfo",          m_segmentInfo);
-  settings.setValue("splitOptions",         m_splitOptions);
-  settings.setValue("segmentUIDs",          m_segmentUIDs);
-  settings.setValue("previousSegmentUID",   m_previousSegmentUID);
-  settings.setValue("nextSegmentUID",       m_nextSegmentUID);
-  settings.setValue("chapters",             m_chapters);
-  settings.setValue("chapterLanguage",      m_chapterLanguage);
-  settings.setValue("chapterCharacterSet",  m_chapterCharacterSet);
-  settings.setValue("chapterCueNameFormat", m_chapterCueNameFormat);
-  settings.setValue("additionalOptions",    m_additionalOptions);
-  settings.setValue("splitMode",            m_splitMode);
-  settings.setValue("splitMaxFiles",        m_splitMaxFiles);
-  settings.setValue("linkFiles",            m_linkFiles);
-  settings.setValue("webmMode",             m_webmMode);
+  settings.setValue("title",                         m_title);
+  settings.setValue("destination",                   m_destination);
+  settings.setValue("destinationAuto",               m_destinationAuto);
+  settings.setValue("globalTags",                    m_globalTags);
+  settings.setValue("segmentInfo",                   m_segmentInfo);
+  settings.setValue("splitOptions",                  m_splitOptions);
+  settings.setValue("segmentUIDs",                   m_segmentUIDs);
+  settings.setValue("previousSegmentUID",            m_previousSegmentUID);
+  settings.setValue("nextSegmentUID",                m_nextSegmentUID);
+  settings.setValue("chapters",                      m_chapters);
+  settings.setValue("chapterLanguage",               m_chapterLanguage);
+  settings.setValue("chapterCharacterSet",           m_chapterCharacterSet);
+  settings.setValue("chapterCueNameFormat",          m_chapterCueNameFormat);
+  settings.setValue("additionalOptions",             m_additionalOptions);
+  settings.setValue("splitMode",                     m_splitMode);
+  settings.setValue("splitMaxFiles",                 m_splitMaxFiles);
+  settings.setValue("linkFiles",                     m_linkFiles);
+  settings.setValue("webmMode",                      m_webmMode);
+  settings.setValue("chapterGenerationMode",         static_cast<int>(m_chapterGenerationMode));
+  settings.setValue("chapterGenerationNameTemplate", m_chapterGenerationNameTemplate);
+  settings.setValue("chapterGenerationInterval",     m_chapterGenerationInterval);
   settings.endGroup();
 }
 
@@ -450,6 +459,19 @@ MuxConfig::buildMkvmergeOptions()
     add(Q("--chapter-charset"),         m_chapterCharacterSet);
     add(Q("--cue-chapter-name-format"), m_chapterCueNameFormat);
     options << Q("--chapters") << m_chapters;
+  }
+
+  if (ChapterGenerationMode::None != m_chapterGenerationMode) {
+    add(Q("--chapter-language"),                m_chapterLanguage);
+    add(Q("--generate-chapters-name-template"), m_chapterGenerationNameTemplate);
+
+    options << Q("--generate-chapters");
+
+    if (ChapterGenerationMode::WhenAppending == m_chapterGenerationMode)
+      options << Q("when-appending");
+
+    else
+      options << Q("interval:%1").arg(m_chapterGenerationInterval);
   }
 
   add(Q("--global-tags"), m_globalTags);
