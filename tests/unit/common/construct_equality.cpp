@@ -83,6 +83,7 @@ TEST(ConstructAndEquality, NoMaster) {
 
 TEST(ConstructAndEquality, AllTypes) {
   auto a = ebml_master_cptr{ cons<KaxTracks>(cons<KaxTrackEntry>(new KaxCodecID,     "Stuff",
+                                                                 new KaxCodecID,     std::string{"Stuff"},
                                                                  new KaxCodecName,   L"UniStuffAsWcharString",
                                                                  new KaxCodecName,   std::wstring{L"UniStuffAsStdWString"},
                                                                  new KaxCodecName,   std::string{"UniStuffAsStdString"},
@@ -102,6 +103,7 @@ TEST(ConstructAndEquality, AllTypes) {
   b->PushElement(*m1);
 
   m1->PushElement(*new KaxCodecID);
+  m1->PushElement(*new KaxCodecID);
   m1->PushElement(*new KaxCodecName);
   m1->PushElement(*new KaxCodecName);
   m1->PushElement(*new KaxCodecName);
@@ -116,14 +118,15 @@ TEST(ConstructAndEquality, AllTypes) {
   m2->PushElement(*new KaxVideoPixelHeight);
 
   *dynamic_cast<EbmlString *>((*m1)[0])        = "Stuff";
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[1]) = L"UniStuffAsWcharString";
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[2]) = L"UniStuffAsStdWString";
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[3]) = L"UniStuffAsStdString";
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[4]) = L"UniStuffAsCharString";
-  *dynamic_cast<EbmlUInteger *>((*m1)[5])      = 4254;
-  *dynamic_cast<EbmlSInteger *>((*m1)[6])      = -22;
-   dynamic_cast<EbmlDate *>((*m1)[7])->SetEpochDate(98273);
-  *dynamic_cast<EbmlFloat *>((*m1)[8])          = 47.11;
+  *dynamic_cast<EbmlString *>((*m1)[1])        = "Stuff";
+  *dynamic_cast<EbmlUnicodeString *>((*m1)[2]) = L"UniStuffAsWcharString";
+  *dynamic_cast<EbmlUnicodeString *>((*m1)[3]) = L"UniStuffAsStdWString";
+  *dynamic_cast<EbmlUnicodeString *>((*m1)[4]) = L"UniStuffAsStdString";
+  *dynamic_cast<EbmlUnicodeString *>((*m1)[5]) = L"UniStuffAsCharString";
+  *dynamic_cast<EbmlUInteger *>((*m1)[6])      = 4254;
+  *dynamic_cast<EbmlSInteger *>((*m1)[7])      = -22;
+   dynamic_cast<EbmlDate *>((*m1)[8])->SetEpochDate(98273);
+  *dynamic_cast<EbmlFloat *>((*m1)[9])          = 47.11;
 
   *dynamic_cast<EbmlUInteger *>((*m2)[0])      = 123;
   *dynamic_cast<EbmlUInteger *>((*m2)[1])      = 456;
