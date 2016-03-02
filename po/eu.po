@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-01 23:37+0100\n"
+"POT-Creation-Date: 2016-03-02 09:09+0100\n"
 "PO-Revision-Date: 2016-01-29 19:45+0100\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -3086,6 +3086,10 @@ msgstr "Atal aterapena"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1667
 msgid "Chapter file:"
 msgstr "Atal agiria:"
+
+#: src/merge/cluster_helper.cpp:730
+msgid "Chapter generation is only possible if at least one video or audio track is muxed.\n"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:201
 msgid "Chapter mass modification"
@@ -9735,6 +9739,11 @@ msgstr "Irteera modulo generikoa erabiltzen '%1%' bide motarako.\n"
 #: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Irteera moduloa erabiltzen '%1%' heuskarrirako.\n"
+
+#: src/merge/cluster_helper.cpp:732
+#, boost-format
+msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
+msgstr ""
 
 #: src/common/file_types.cpp:98
 #: src/output/p_vc1.h:37

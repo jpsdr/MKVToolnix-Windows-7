@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-01 23:37+0100\n"
+"POT-Creation-Date: 2016-03-02 09:09+0100\n"
 "PO-Revision-Date: 2016-02-28 12:16+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -3095,6 +3095,10 @@ msgstr "Витягнення розділів"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1667
 msgid "Chapter file:"
 msgstr "Файл розділу:"
+
+#: src/merge/cluster_helper.cpp:730
+msgid "Chapter generation is only possible if at least one video or audio track is muxed.\n"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:201
 msgid "Chapter mass modification"
@@ -9773,6 +9777,11 @@ msgstr "Використання вихідного модуля для дорі
 #: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Використання вихідного модуля для формату '%1%'.\n"
+
+#: src/merge/cluster_helper.cpp:732
+#, boost-format
+msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
+msgstr ""
 
 #: src/common/file_types.cpp:98
 #: src/output/p_vc1.h:37

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-01 23:37+0100\n"
+"POT-Creation-Date: 2016-03-02 09:09+0100\n"
 "PO-Revision-Date: 2015-12-16 09:50+0100\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech <trottel09@gmail.com>\n"
@@ -3115,6 +3115,10 @@ msgstr "Extrahování kapitoly"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1667
 msgid "Chapter file:"
 msgstr "Soubor kapitol:"
+
+#: src/merge/cluster_helper.cpp:730
+msgid "Chapter generation is only possible if at least one video or audio track is muxed.\n"
+msgstr ""
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:201
 msgid "Chapter mass modification"
@@ -9798,6 +9802,11 @@ msgstr "Použit všeobecný výstupní modul pro stopu typu '%1%'.\n"
 #: src/merge/generic_reader.h:47
 msgid "Using the output module for the format '%1%'.\n"
 msgstr "Použit výstupní modul pro formát '%1%'.\n"
+
+#: src/merge/cluster_helper.cpp:732
+#, boost-format
+msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
+msgstr ""
 
 #: src/common/file_types.cpp:98
 #: src/output/p_vc1.h:37
