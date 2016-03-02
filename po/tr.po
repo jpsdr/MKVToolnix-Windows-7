@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-03-01 23:37+0100\n"
-"PO-Revision-Date: 2016-02-29 05:37+0000\n"
+"PO-Revision-Date: 2016-03-02 06:34+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -1550,9 +1550,9 @@ msgid "'%1%' can only be used with a file name. No further options are allowed i
 msgstr "'%1%' sadece dosya adıyla kullanılabilir. Eğer bu seçenek kullanılırsa, daha fazla seçeneklere izin verilmez.\n"
 
 #: src/merge/mkvmerge.cpp:500
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' does not contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n"
-msgstr "'%1%', '%2% %3%' içinde geçerli bir birim ('s', 'ms', 'us', 'ns', 'fps', 'p' veya 'i') içermez.\n"
+msgstr "'%1%', '%2%' içinde geçerli bir birim ('s', 'ms', 'us', 'ns', 'fps', 'p' veya 'i') içermez.\n"
 
 #: src/merge/mkvmerge.cpp:1143
 #, boost-format
@@ -1673,9 +1673,9 @@ msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'%1%', '--nalu-size-length %2%' içindeki geçerli bir iz ID'si değil.\n"
 
 #: src/merge/mkvmerge.cpp:474
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
-msgstr "'%1%', '%3% %4%' içinde geçerli %2% değil.\n"
+msgstr "'%1%', '%2%' içinde geçerli bir sayı biçimi olarak tanınmadı.\n"
 
 #: src/extract/extract_cli_parser.cpp:142
 #, boost-format
@@ -1856,14 +1856,12 @@ msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' bağımsız değişkenine ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2185
-#, fuzzy
 msgid "'--generate-chapters' lacks the mode.\n"
-msgstr "'--chapters' dosya adına ihtiyacı olur.\n"
+msgstr "'--generate-chapters' kipe ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2192
-#, fuzzy
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
-msgstr "'--cue-chapter-name-format' biçime ihtiyacı olur.\n"
+msgstr "'--generate-chapters-name-template' isim şablonuna ihtiyacı olur.\n"
 
 #: src/merge/mkvmerge.cpp:2143
 msgid "'--global-tags' lacks the file name.\n"
@@ -4618,9 +4616,8 @@ msgid "Generating a number of chapters spaced evenly apart"
 msgstr "Birtakım bölümü ayrı eşit miktarda aralıklı oluşturma"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
-#, fuzzy
 msgid "Generating chapters:"
-msgstr "Alt bölümleri oluşturma"
+msgstr "Oluşturulan alt bölümler:"
 
 #: src/extract/extract_cli_parser.cpp:61
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
@@ -4968,7 +4965,7 @@ msgstr "Dahili program hatası"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "Interval:"
-msgstr ""
+msgstr "Aralık:"
 
 #: src/merge/mkvmerge.cpp:1175
 #, boost-format
@@ -5831,9 +5828,8 @@ msgid "Name tem&plate:"
 msgstr "İsim şabl&onu:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1666
-#, fuzzy
 msgid "Name template:"
-msgstr "İsi&m şablonu:"
+msgstr "İsim şablonu:"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:137
 msgid "Name/Description"
@@ -8403,9 +8399,8 @@ msgid "The first word tells mkvextract what to extract. The second must be the s
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:197
-#, fuzzy
 msgid "The following modes are supported:"
-msgstr "Şurada belirtilen program çalıştırılamadı: %1"
+msgstr "Şurada belirtilen kipler desteklenir:"
 
 #: src/mkvtoolnix-gui/jobs/program_runner.cpp:47
 msgid "The following program could not be executed: %1"
@@ -8434,7 +8429,7 @@ msgstr "Biçimler uyuşmuyor."
 
 #: src/extract/extract_cli_parser.cpp:97
 msgid "The fourth mode extracts the chapters and converts them to XML. The output is written to the standard output. The output can be used as a source for mkvmerge."
-msgstr ""
+msgstr "Dördüncü kip bölümleri çıkartır ve bunları XML'e dönüştürür. Çıktı standart çıktıya yazılır. Çıktı mkvmerge için bir kaynak olarak kullanılabilir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:294
 msgid "The generated output file name has the same base name as the input file name but with an extension based on the track types present in the file."
@@ -8482,9 +8477,8 @@ msgid "The language selected here is used for video tracks for which their sourc
 msgstr "Burada seçilen dil, kaynak dosyası böyle bir özellik içermeyen görüntü izleri için kullanılır."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:181
-#, fuzzy
 msgid "The language set here is also used when chapters are generated."
-msgstr "Etiketlere izin verilir ancak bölümlere verilmez."
+msgstr "Burada ayarlanan dil aynı zamanda bölümler oluşturulduğunda kullanılır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:314
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:315
@@ -9959,7 +9953,7 @@ msgstr "Kaynak dosyalar eklenirken, tüm izler normalde çıktı dosyası içine
 
 #: src/mkvtoolnix-gui/merge/output.cpp:198
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
-msgstr ""
+msgstr "İlave edildiğinde: başlangıçta bir bölüm oluşturulur ve bir tane de dosya ilave edildiğinde."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:219
 msgid "When the user adds a file containing such a title then the program will copy the title into the \"file title\" input box if this option is enabled."
