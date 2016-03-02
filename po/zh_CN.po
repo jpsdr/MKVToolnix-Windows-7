@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-03-01 23:37+0100\n"
-"PO-Revision-Date: 2016-02-29 13:19+0000\n"
+"PO-Revision-Date: 2016-03-02 02:27+0000\n"
 "Last-Translator: Dean Lee <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -286,24 +286,24 @@ msgstr ""
 "                           如果布尔值为 0 则强制不设置该标记。\n"
 
 #: src/merge/mkvmerge.cpp:98
-#, fuzzy
 msgid ""
 "  --generate-chapters <mode>\n"
 "                           Automatically generate chapters according to\n"
 "                           the mode ('when-appending' or 'interval:<duration>').\n"
 msgstr ""
-"  --cue-chapter-name-format <format>\n"
-"                           CUE 表单条目转换为章节名称所用的格式。\n"
+"  --generate-chapters <模式>\n"
+"                           根据模式（追加/固定间距）自动生成章节\n"
+"                           ('when-appending' 或 'interval:<时长>')。\n"
 
 #: src/merge/mkvmerge.cpp:101
-#, fuzzy
 msgid ""
 "  --generate-chapters-name-template <template>\n"
 "                           Template for newly generated chapter names\n"
 "                           (default: 'Chapter <NUM:2>').\n"
 msgstr ""
-"  --cue-chapter-name-format <format>\n"
-"                           CUE 表单条目转换为章节名称所用的格式。\n"
+"  --generate-chapters-name-template <模板>\n"
+"                           新生成章节名称的模板\n"
+"                           (默认: '第 <NUM:2> 章')。\n"
 
 #: src/merge/mkvmerge.cpp:87
 msgid "  --global-tags <file>     Read global tags from a XML file.\n"
@@ -1493,9 +1493,9 @@ msgid "'%1%' can only be used with a file name. No further options are allowed i
 msgstr "'%1%' 后只能接一个文件名。只要使用本选项，就不允许使用其他选项。\n"
 
 #: src/merge/mkvmerge.cpp:500
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' does not contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n"
-msgstr "'%2% %3%' 中的 '%1%' 不包含有效单位 (s、ms、us、ns、fps、p 或 i)。\n"
+msgstr "'%2%' 中的 '%1%' 不含有效的单位 ('s', 'ms', 'us', 'ns', 'fps', 'p' 或 'i')。\n"
 
 #: src/merge/mkvmerge.cpp:1143
 #, boost-format
@@ -1616,9 +1616,9 @@ msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'--nalu-size-length %2%' 中的 '%1%' 不是有效的轨道 ID。\n"
 
 #: src/merge/mkvmerge.cpp:474
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
-msgstr "'%3% %4%' 中的 '%1%' 不是有效的 %2%。\n"
+msgstr "'%2%' 中的 '%1%' 未被识别为有效的数字格式。\n"
 
 #: src/extract/extract_cli_parser.cpp:142
 #, boost-format
@@ -1799,14 +1799,12 @@ msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' 缺少参数。\n"
 
 #: src/merge/mkvmerge.cpp:2185
-#, fuzzy
 msgid "'--generate-chapters' lacks the mode.\n"
-msgstr "'--chapters' 缺少文件名。\n"
+msgstr "'--generate-chapters' 缺“模式”参数。\n"
 
 #: src/merge/mkvmerge.cpp:2192
-#, fuzzy
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
-msgstr "'--cue-chapter-name-format' 缺少格式。\n"
+msgstr "'--generate-chapters-name-template' 缺名称模板。\n"
 
 #: src/merge/mkvmerge.cpp:2143
 msgid "'--global-tags' lacks the file name.\n"
@@ -4546,9 +4544,8 @@ msgid "Generating a number of chapters spaced evenly apart"
 msgstr "生成一定数量间隔均匀的子菜单"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
-#, fuzzy
 msgid "Generating chapters:"
-msgstr "生成子章节"
+msgstr "生成章节:"
 
 #: src/extract/extract_cli_parser.cpp:61
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
@@ -4764,9 +4761,8 @@ msgid "If no video track is output no splitting will occur."
 msgstr "若没有输出视频轨道，则将不进行分割操作。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:204
-#, fuzzy
 msgid "If nothing is entered the default 'Chapter <NUM:2>' will be used."
-msgstr "若此处留空，则使用 '%p - %t'。"
+msgstr "若留空，则使用默认模板 '第 <NUM:2> 章'。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:193
 #, boost-format
@@ -4838,7 +4834,7 @@ msgstr "从 %1% 导入的图片"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:199
 msgid "In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."
-msgstr ""
+msgstr "按固定间距: 章节按固定间距生成，如每 30 秒为一章。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:244
 msgid "In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."
@@ -4895,7 +4891,7 @@ msgstr "程序内部错误"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "Interval:"
-msgstr ""
+msgstr "间距:"
 
 #: src/merge/mkvmerge.cpp:1175
 #, boost-format
@@ -5758,9 +5754,8 @@ msgid "Name tem&plate:"
 msgstr "名称模板(&P)："
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1666
-#, fuzzy
 msgid "Name template:"
-msgstr "名称模板(&M)："
+msgstr "名称模板:"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:137
 msgid "Name/Description"
@@ -8315,9 +8310,8 @@ msgid "The first word tells mkvextract what to extract. The second must be the s
 msgstr "第一个参数指定 mkvextract 的提取模式。第二个参数指定源文件。全局选项可以在所有模式下使用，其余选项取决于模式。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:197
-#, fuzzy
 msgid "The following modes are supported:"
-msgstr "无法执行该程序: %1"
+msgstr "支持以下模式:"
 
 #: src/mkvtoolnix-gui/jobs/program_runner.cpp:47
 msgid "The following program could not be executed: %1"
@@ -8375,7 +8369,7 @@ msgstr "语言代码 '%1%' 不是有效的 ISO639-2 语言代码，将被忽略�
 
 #: src/mkvtoolnix-gui/merge/output.cpp:200
 msgid "The language for the newly created chapters is set via the chapter language control above."
-msgstr ""
+msgstr "新创建章节的语言可通过上方的章节语言控件设置。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:401
 msgid "The language for this track that players can use for automatic track selection and display for the user."
@@ -8394,9 +8388,8 @@ msgid "The language selected here is used for video tracks for which their sourc
 msgstr "此处选择的语言用于源文件不包含该属性的视频轨道。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:181
-#, fuzzy
 msgid "The language set here is also used when chapters are generated."
-msgstr "允许使用标签，但不允许使用章节。"
+msgstr "这里设置的语言也将在生成章节时使用。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:314
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:315
@@ -9859,7 +9852,7 @@ msgstr "添加文件时通常所有轨道都会被设置为用于合并到输出
 
 #: src/mkvtoolnix-gui/merge/output.cpp:198
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
-msgstr ""
+msgstr "在追加文件时: 文件开头为第一章，随后每追加一个文件便创建一个章节。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:219
 msgid "When the user adds a file containing such a title then the program will copy the title into the \"file title\" input box if this option is enabled."
@@ -10181,7 +10174,7 @@ msgstr "章节"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1678
 msgid "chapters in fixed intervals"
-msgstr ""
+msgstr "按固定间距创建章节"
 
 #: src/common/stereo_mode.cpp:54
 msgid "checkerboard (left first)"
@@ -10273,9 +10266,8 @@ msgid "don't change"
 msgstr "不更改"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1676
-#, fuzzy
 msgid "don't generate chapters"
-msgstr "生成子章节"
+msgstr "不要生成章节"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:146
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
@@ -10707,7 +10699,7 @@ msgstr "若输出文件的扩展名为 \"webm\"，mkvmerge 会自动启用该选
 
 #: src/mkvtoolnix-gui/merge/output.cpp:196
 msgid "mkvmerge can generate chapters automatically."
-msgstr ""
+msgstr "mkvmerge 可以自动生成章节。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:189
 msgid "mkvmerge can read CUE sheets for audio CDs and automatically convert them to chapters."
@@ -10896,9 +10888,8 @@ msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer 失败\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1677
-#, fuzzy
 msgid "one chapter for each appended file"
-msgstr "无法追加文件"
+msgstr "每个追加的文件为一个章节"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1278
 msgid "only for I frames"
