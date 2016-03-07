@@ -84,9 +84,9 @@ namespace brng  = boost::range;
 #else /* HAVE_LIBINTL_H */
 # if !defined Y
 #  define Y(s) (s)
-#  define NY(s_singular, s_plural, count) (s_singular)
+#  define NY(s_singular, s_plural, count) ((count) != 1 ? (s_plural) : (s_singular))
 #  define PY(context, s) (s)
-#  define PNY(context, s_singular, s_plural, count) (s_singular)
+#  define PNY(context, s_singular, s_plural, count) ((count) != 1 ? (s_plural) : (s_singular))
 # endif
 #endif
 
