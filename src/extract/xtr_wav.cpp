@@ -16,8 +16,11 @@
 #include <matroska/KaxBlock.h>
 
 #include "avilib.h"
+#include "common/bswap.h"
+#include "common/codec.h"
 #include "common/ebml.h"
 #include "common/endian.h"
+#include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/mm_write_buffer_io.h"
 #include "extract/xtr_wav.h"
@@ -60,6 +63,11 @@ xtr_wav_c::create_file(xtr_base_c *master,
   put_uint16_le(&m_wh.common.wBitsPerSample,   bps);
 
   m_out->write(&m_wh, sizeof(wave_header));
+
+  if ((m_codec_id == MKV_A_PCM_BE) && mtx::included_in(bps, 16, 32, 64))
+    m_byte_swapper = bps == 16 ? mtx::bswap_buffer_16
+                   : bps == 32 ? mtx::bswap_buffer_32
+                   :             mtx::bswap_buffer_64;
 }
 
 void
@@ -70,6 +78,15 @@ xtr_wav_c::finish_file() {
   put_uint32_le(&m_wh.data.len, m_bytes_written);
 
   m_out->write(&m_wh, sizeof(wave_header));
+}
+
+void
+xtr_wav_c::handle_frame(xtr_frame_t &f) {
+  if (m_byte_swapper)
+    m_byte_swapper(f.frame->get_buffer(), f.frame->get_buffer(), f.frame->get_size());
+
+  m_out->write(f.frame);
+  m_bytes_written += f.frame->get_size();
 }
 
 // ------------------------------------------------------------------------

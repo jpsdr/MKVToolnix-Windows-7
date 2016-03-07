@@ -20,12 +20,14 @@
 class xtr_wav_c: public xtr_base_c {
 private:
   wave_header m_wh;
+  std::function<void(unsigned char const *, unsigned char *, std::size_t)> m_byte_swapper;
 
 public:
   xtr_wav_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
 
   virtual void create_file(xtr_base_c *master, KaxTrackEntry &track) override;
   virtual void finish_file() override;
+  virtual void handle_frame(xtr_frame_t &f) override;
 
   virtual const char *get_container_name() override {
     return "WAV";

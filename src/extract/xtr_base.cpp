@@ -19,6 +19,7 @@
 
 #include "common/codec.h"
 #include "common/ebml.h"
+#include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/mm_write_buffer_io.h"
 #include "common/strings/editing.h"
@@ -142,7 +143,7 @@ xtr_base_c::create_extractor(const std::string &new_codec_id,
     return new xtr_base_c(new_codec_id, new_tid, tspec, "MPEG-1 Audio Layer 2/3");
   else if (new_codec_id == MKV_A_DTS)
     return new xtr_base_c(new_codec_id, new_tid, tspec, "Digital Theater System (DTS)");
-  else if (new_codec_id == MKV_A_PCM)
+  else if (mtx::included_in(new_codec_id, MKV_A_PCM, MKV_A_PCM_BE))
     return new xtr_wav_c(new_codec_id, new_tid, tspec);
   else if (new_codec_id == MKV_A_FLAC)
     return new xtr_flac_c(new_codec_id, new_tid, tspec);
