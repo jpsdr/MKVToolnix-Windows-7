@@ -8,7 +8,8 @@
 
    byte swapping functions
 
-   This code was taken from the ffmpeg project, files "libavutil/bswap.h".
+   This code for bswap_16/32/64 was taken from the ffmpeg project,
+   files "libavutil/bswap.h".
 */
 
 #ifndef MTX_COMMON_BSWAP_H
@@ -44,6 +45,10 @@ bswap_64(uint64_t x) {
 
   return r.ll;
 }
+
+void bswap_buffer_16(unsigned char const *src, unsigned char *dst, std::size_t num_bytes);
+void bswap_buffer_32(unsigned char const *src, unsigned char *dst, std::size_t num_bytes);
+void bswap_buffer_64(unsigned char const *src, unsigned char *dst, std::size_t num_bytes);
 
 }
 
