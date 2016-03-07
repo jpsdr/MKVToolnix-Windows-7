@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 16:42+0100\n"
+"POT-Creation-Date: 2016-03-07 19:03+0100\n"
 "PO-Revision-Date: 2015-12-16 09:53+0100\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -3012,7 +3012,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr "CodecID '%5%'のトラック%4%が既に同じファイルに記録中で、そのCodecPrivateデータ（USFスタイル等）が一致しないため、CodecID '%2%'のトラック%1%をファイル%3%に記録することはできません。\n"
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:69
+#: src/extract/xtr_base.cpp:70
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -4432,7 +4432,7 @@ msgstr "Vobsubデータファイル'%1%'の作成に失敗しました：%2%\n"
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "ファイル'%1%'の作成に失敗しました：%2%\n"
 
-#: src/extract/xtr_base.cpp:77
+#: src/extract/xtr_base.cpp:78
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr "ファイル'%1%'の作成に失敗しました：%2% (%3%)\n"
@@ -6479,7 +6479,7 @@ msgstr "出力サンプル周波数：%1%"
 msgid "Overwrite existing file"
 msgstr "設定ファイルを開く"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "PCM"
 
@@ -8335,7 +8335,7 @@ msgstr "ファイル'%1%'を開いて読み込むことができませんでし�
 #: src/extract/xtr_avi.cpp:61
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:133
 #: src/merge/output_control.cpp:1343
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
@@ -8736,6 +8736,13 @@ msgstr "'%1% %2%'で既に次のUIDは指定されています。\n"
 #: src/merge/connection_checks.h:29
 msgid "The number of bits per sample of the two audio tracks is different: %1% and %2%"
 msgstr "2つのオーディオトラック間でサンプル当たりのビット数が異なります：%1%と%2%"
+
+#: src/common/bswap.cpp:26
+#: src/common/bswap.cpp:37
+#: src/common/bswap.cpp:48
+#, boost-format
+msgid "The number of bytes to swap isn't divisible by %1%."
+msgstr ""
 
 #: src/merge/connection_checks.h:24
 msgid "The number of channels of the two audio tracks is different: %1% and %2%"
@@ -9511,7 +9518,7 @@ msgstr "コーデックID '%2%'のトラック%1%はAACとしては無効な\"co
 msgid "Track %1% with the CodecID '%2%' does not contain valid headers.\n"
 msgstr "コーデックID '%2%'のトラック%1%には有効なヘッダがありません。\n"
 
-#: src/extract/xtr_wav.cpp:45
+#: src/extract/xtr_wav.cpp:48
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr "コーデックID '%2%'のトラック%1%は\"bits per second (bps)\"要素がなく、抽出することができません。\n"
@@ -9527,7 +9534,7 @@ msgstr "コーデックID '%2%'のトラック%1%は\"bits per second (bps)\"要
 #: src/extract/xtr_textsubs.cpp:95
 #: src/extract/xtr_textsubs.cpp:283
 #: src/extract/xtr_vobsub.cpp:62
-#: src/extract/xtr_wav.cpp:98
+#: src/extract/xtr_wav.cpp:115
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n"
 msgstr "コーデックID '%2%'のトラック%1%は\"codec private\"要素がなく、抽出することができません。\n"
@@ -9638,7 +9645,7 @@ msgstr "トラックタイプ：%1%"
 msgid "Tracks with a language in this list will be set not to be muxed by default."
 msgstr "このリストにある言語のトラックはデフォルトでMUXされないように設定されます。"
 
-#: src/extract/xtr_base.cpp:121
+#: src/extract/xtr_base.cpp:122
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "サポートされていない方式（圧縮や暗号化）でエンコードされた内容を抽出することはできません。\n"
 
@@ -11252,7 +11259,7 @@ msgstr "切り捨てピクセル：%1%"
 msgid "pixel width: %1%"
 msgstr "ピクセル幅：%1%"
 
-#: src/extract/xtr_base.cpp:49
+#: src/extract/xtr_base.cpp:50
 msgid "raw data"
 msgstr "生データ"
 

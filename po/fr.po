@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 16:42+0100\n"
+"POT-Creation-Date: 2016-03-07 19:03+0100\n"
 "PO-Revision-Date: 2016-03-04 10:01+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
@@ -2965,7 +2965,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr "Impossible d'écrire la piste %1% avec l'identifiant de codec « %2% » dans le fichier « %3% » parce que la piste %4% avec l'identifiant de codec « %5% » est déjà dans ce fichier avec des données de codec privées (les styles TSF par exemple) qui ne correspondent pas.\n"
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:69
+#: src/extract/xtr_base.cpp:70
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -4350,7 +4350,7 @@ msgstr "La création du fichier de données VobSub « %1% » a échoué : %2%\n"
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "La création du fichier « %1% » a échoué : %2%\n"
 
-#: src/extract/xtr_base.cpp:77
+#: src/extract/xtr_base.cpp:78
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr "La création du fichier « %1% » a échoué : %2% (%3%)\n"
@@ -6374,7 +6374,7 @@ msgstr "Fréquence d'échantillonnage en sortie : %1%"
 msgid "Overwrite existing file"
 msgstr "Confirmation d'écrasement du fichier existant"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "PCM"
 
@@ -8210,7 +8210,7 @@ msgstr "Le fichier « %1% » ne peut pas être ouvert en lecture : %2%.\n"
 #: src/extract/xtr_avi.cpp:61
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:133
 #: src/merge/output_control.cpp:1343
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
@@ -8601,6 +8601,13 @@ msgstr "L'UID suivant a déjà été fourni dans « %1% %2% ».\n"
 #: src/merge/connection_checks.h:29
 msgid "The number of bits per sample of the two audio tracks is different: %1% and %2%"
 msgstr "Les nombres de bits par échantillon des deux pistes audio sont différents : %1% et %2%."
+
+#: src/common/bswap.cpp:26
+#: src/common/bswap.cpp:37
+#: src/common/bswap.cpp:48
+#, boost-format
+msgid "The number of bytes to swap isn't divisible by %1%."
+msgstr ""
 
 #: src/merge/connection_checks.h:24
 msgid "The number of channels of the two audio tracks is different: %1% and %2%"
@@ -9379,7 +9386,7 @@ msgstr "La piste %1% dont l'identifiant de codec est « %2% » contient des donn
 msgid "Track %1% with the CodecID '%2%' does not contain valid headers.\n"
 msgstr "La piste %1% dont l'identifiant de codec est « %2% » ne contient pas des entêtes corrects.\n"
 
-#: src/extract/xtr_wav.cpp:45
+#: src/extract/xtr_wav.cpp:48
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr "Il manque l'élément « bits per second (bps) » à la piste %1% dont l'identifiant de codec est « %2% », et elle ne peut pas être extraite.\n"
@@ -9395,7 +9402,7 @@ msgstr "Il manque l'élément « bits per second (bps) » à la piste %1% dont l
 #: src/extract/xtr_textsubs.cpp:95
 #: src/extract/xtr_textsubs.cpp:283
 #: src/extract/xtr_vobsub.cpp:62
-#: src/extract/xtr_wav.cpp:98
+#: src/extract/xtr_wav.cpp:115
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n"
 msgstr "Il manque l'élément « codec private » à la piste %1% dont l'identifiant de codec est « %2% », et elle ne peut pas être extraite.\n"
@@ -9506,7 +9513,7 @@ msgstr "Type de piste : %1%"
 msgid "Tracks with a language in this list will be set not to be muxed by default."
 msgstr "Les pistes avec langue de cette liste seront marquées pour ne pas être multiplexées par défaut."
 
-#: src/extract/xtr_base.cpp:121
+#: src/extract/xtr_base.cpp:122
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "Les pistes avec schémas d'encodage de données non gérés (compression ou chiffrement) ne peuvent pas être extraites.\n"
 
@@ -11094,7 +11101,7 @@ msgstr "hauteur (pixels) : %1%"
 msgid "pixel width: %1%"
 msgstr "largeur (pixels) : %1%"
 
-#: src/extract/xtr_base.cpp:49
+#: src/extract/xtr_base.cpp:50
 msgid "raw data"
 msgstr "données brutes"
 

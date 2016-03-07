@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 16:42+0100\n"
+"POT-Creation-Date: 2016-03-07 19:03+0100\n"
 "PO-Revision-Date: 2016-03-07 16:50+0000\n"
 "Last-Translator: Israel Lucas Torrijos <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3044,7 +3044,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr "No se puede escribir la pista %1% con la ID de códec '%2%' en el archivo '%3%' porque la pista %4% con ID del códec '%5%' ya está siendo escrita en el mismo archivo, y sus datos particulares del códec (los estilos USF, etc.) no coinciden.\n"
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:69
+#: src/extract/xtr_base.cpp:70
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -4429,7 +4429,7 @@ msgstr "Fallo al crear el archivo de datos VobSub '%1%': %2%\n"
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Fallo al crear el archivo '%1%': %2%\n"
 
-#: src/extract/xtr_base.cpp:77
+#: src/extract/xtr_base.cpp:78
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr "Fallo al crear el archivo '%1%': %2% (%3%)\n"
@@ -6450,7 +6450,7 @@ msgstr "Frecuencia de muestreo creado: %1%"
 msgid "Overwrite existing file"
 msgstr "Sobrescribir el archivo actual"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "PCM"
 
@@ -8273,7 +8273,7 @@ msgstr "El archivo '%1%' no se pudo abrir para su lectura: %2%.\n"
 #: src/extract/xtr_avi.cpp:61
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:133
 #: src/merge/output_control.cpp:1343
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
@@ -8666,6 +8666,13 @@ msgstr "El próximo UID ya fue asignado en '%1% %2%'.\n"
 #: src/merge/connection_checks.h:29
 msgid "The number of bits per sample of the two audio tracks is different: %1% and %2%"
 msgstr "El número de bits por muestra de las dos pistas de audio es diferente: %1% y %2%"
+
+#: src/common/bswap.cpp:26
+#: src/common/bswap.cpp:37
+#: src/common/bswap.cpp:48
+#, boost-format
+msgid "The number of bytes to swap isn't divisible by %1%."
+msgstr ""
 
 #: src/merge/connection_checks.h:24
 msgid "The number of channels of the two audio tracks is different: %1% and %2%"
@@ -9444,7 +9451,7 @@ msgstr "La pista %1% con el CodecID '%2%' no contiene \"codec private\" válidos
 msgid "Track %1% with the CodecID '%2%' does not contain valid headers.\n"
 msgstr "La pista %1% con el CodecID '%2%' no contiene cabeceras válidas.\n"
 
-#: src/extract/xtr_wav.cpp:45
+#: src/extract/xtr_wav.cpp:48
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr "La pista %1% con el CodecID '%2%' no encuentra el elemento \"bits per second (bps)\" y no puede ser extraído.\n"
@@ -9460,7 +9467,7 @@ msgstr "La pista %1% con el CodecID '%2%' no encuentra el elemento \"bits per se
 #: src/extract/xtr_textsubs.cpp:95
 #: src/extract/xtr_textsubs.cpp:283
 #: src/extract/xtr_vobsub.cpp:62
-#: src/extract/xtr_wav.cpp:98
+#: src/extract/xtr_wav.cpp:115
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n"
 msgstr "La pista %1% con el CodecID '%2%' no encuentra el elemento \"codec private\" y no puede ser extraído.\n"
@@ -9571,7 +9578,7 @@ msgstr "Tipo de pista: %1%"
 msgid "Tracks with a language in this list will be set not to be muxed by default."
 msgstr "Por defecto, las pistas con un idioma en la lista serán configuradas para no ser multiplexadas."
 
-#: src/extract/xtr_base.cpp:121
+#: src/extract/xtr_base.cpp:122
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "Las pistas con contenido codificado de forma esquematica no compatible (compresión o cifrado) no pueden ser extraídas.\n"
 
@@ -11159,7 +11166,7 @@ msgstr "altura de píxeles: %1%"
 msgid "pixel width: %1%"
 msgstr "anchura en píxeles: %1%"
 
-#: src/extract/xtr_base.cpp:49
+#: src/extract/xtr_base.cpp:50
 msgid "raw data"
 msgstr "Información en bruto (datos no editados)"
 

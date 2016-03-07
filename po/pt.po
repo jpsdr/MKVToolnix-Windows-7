@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 16:42+0100\n"
+"POT-Creation-Date: 2016-03-07 19:03+0100\n"
 "PO-Revision-Date: 2016-01-04 22:36+0100\n"
 "Last-Translator: Ricardo Perdigão <ricardofonseca1977@gmail.com>\n"
 "Language-Team: Portuguese <ricardofonseca1977@gmail.com>\n"
@@ -2889,7 +2889,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr ""
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:69
+#: src/extract/xtr_base.cpp:70
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -4306,7 +4306,7 @@ msgstr "Falha ao criar um ficheiro temporário '%1%': %2% (%3%)\n"
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Falha ao criar o ficheiro '%1%': %2% \n"
 
-#: src/extract/xtr_base.cpp:77
+#: src/extract/xtr_base.cpp:78
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr ""
@@ -6357,7 +6357,7 @@ msgstr ""
 msgid "Overwrite existing file"
 msgstr "Sobrepor o ficheiro existente."
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "PCM"
 
@@ -8205,7 +8205,7 @@ msgstr "O ficheiro '%1% ' não pôde ser aberto para leitura: %2%.\n"
 #: src/extract/xtr_avi.cpp:61
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:133
 #: src/merge/output_control.cpp:1343
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
@@ -8609,6 +8609,13 @@ msgstr ""
 
 #: src/merge/connection_checks.h:29
 msgid "The number of bits per sample of the two audio tracks is different: %1% and %2%"
+msgstr ""
+
+#: src/common/bswap.cpp:26
+#: src/common/bswap.cpp:37
+#: src/common/bswap.cpp:48
+#, boost-format
+msgid "The number of bytes to swap isn't divisible by %1%."
 msgstr ""
 
 #: src/merge/connection_checks.h:24
@@ -9385,7 +9392,7 @@ msgstr ""
 msgid "Track %1% with the CodecID '%2%' does not contain valid headers.\n"
 msgstr ""
 
-#: src/extract/xtr_wav.cpp:45
+#: src/extract/xtr_wav.cpp:48
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr ""
@@ -9401,7 +9408,7 @@ msgstr ""
 #: src/extract/xtr_textsubs.cpp:95
 #: src/extract/xtr_textsubs.cpp:283
 #: src/extract/xtr_vobsub.cpp:62
-#: src/extract/xtr_wav.cpp:98
+#: src/extract/xtr_wav.cpp:115
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n"
 msgstr ""
@@ -9512,7 +9519,7 @@ msgstr "Tipo de pista: %1%"
 msgid "Tracks with a language in this list will be set not to be muxed by default."
 msgstr ""
 
-#: src/extract/xtr_base.cpp:121
+#: src/extract/xtr_base.cpp:122
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr ""
 
@@ -11106,7 +11113,7 @@ msgstr ""
 msgid "pixel width: %1%"
 msgstr ""
 
-#: src/extract/xtr_base.cpp:49
+#: src/extract/xtr_base.cpp:50
 msgid "raw data"
 msgstr ""
 

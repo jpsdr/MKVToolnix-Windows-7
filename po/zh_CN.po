@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 16:42+0100\n"
+"POT-Creation-Date: 2016-03-07 19:03+0100\n"
 "PO-Revision-Date: 2016-03-07 16:22+0000\n"
 "Last-Translator: Dean Lee <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -2896,7 +2896,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr "无法将 CodecID 为 '%2%' 的轨道 %1% 写入文件 '%3%'，因为 CodecID 为 '%5%' 的轨道 %4% 已被写入同一个文件，且它们的 CodecPrivate 数据 (如 USF 样式等) 不匹配。\n"
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:69
+#: src/extract/xtr_base.cpp:70
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -4280,7 +4280,7 @@ msgstr "创建 VobSub 数据文件 '%1%' 失败：%2%\n"
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "创建文件 '%1%' 失败：%2%\n"
 
-#: src/extract/xtr_base.cpp:77
+#: src/extract/xtr_base.cpp:78
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr "创建文件失败 '%1%'：%2% (%3%)\n"
@@ -6297,7 +6297,7 @@ msgstr "输出采样率：%1%"
 msgid "Overwrite existing file"
 msgstr "覆盖已有文件"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "PCM"
 
@@ -8103,7 +8103,7 @@ msgstr "文件 '%1%' 无法以读取模式打开：%2%。\n"
 #: src/extract/xtr_avi.cpp:61
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:133
 #: src/merge/output_control.cpp:1343
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
@@ -8490,6 +8490,13 @@ msgstr "'%1% %2%' 中已经指定了下一个 UID。\n"
 #: src/merge/connection_checks.h:29
 msgid "The number of bits per sample of the two audio tracks is different: %1% and %2%"
 msgstr "两条轨道的采样深度不同：%1% 与 %2%"
+
+#: src/common/bswap.cpp:26
+#: src/common/bswap.cpp:37
+#: src/common/bswap.cpp:48
+#, boost-format
+msgid "The number of bytes to swap isn't divisible by %1%."
+msgstr ""
 
 #: src/merge/connection_checks.h:24
 msgid "The number of channels of the two audio tracks is different: %1% and %2%"
@@ -9259,7 +9266,7 @@ msgstr "CodecID 为 '%2%' 的轨道 %1% 包含无效的 AAC 编码格式私有�
 msgid "Track %1% with the CodecID '%2%' does not contain valid headers.\n"
 msgstr "CodecID 为 '%2%' 的轨道 %1% 不含有效的头。\n"
 
-#: src/extract/xtr_wav.cpp:45
+#: src/extract/xtr_wav.cpp:48
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr "CodecID 为 '%2%' 的轨道 %1% 缺少 \"比特每秒 (bps)\" 元素，无法提取。\n"
@@ -9275,7 +9282,7 @@ msgstr "CodecID 为 '%2%' 的轨道 %1% 缺少 \"比特每秒 (bps)\" 元素，�
 #: src/extract/xtr_textsubs.cpp:95
 #: src/extract/xtr_textsubs.cpp:283
 #: src/extract/xtr_vobsub.cpp:62
-#: src/extract/xtr_wav.cpp:98
+#: src/extract/xtr_wav.cpp:115
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n"
 msgstr "CodecID 为 '%2%' 的轨道 %1% 缺少 \"codec private\" 编码格式私有元素，无法提取。\n"
@@ -9386,7 +9393,7 @@ msgstr "轨道类型：%1%"
 msgid "Tracks with a language in this list will be set not to be muxed by default."
 msgstr "语言在此列表中的轨道默认不用于合成。"
 
-#: src/extract/xtr_base.cpp:121
+#: src/extract/xtr_base.cpp:122
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "无法提取使用不支持的内容编码方案 (压缩或加密) 的轨道。\n"
 
@@ -10972,7 +10979,7 @@ msgstr "像素高度：%1%"
 msgid "pixel width: %1%"
 msgstr "像素宽度：%1%"
 
-#: src/extract/xtr_base.cpp:49
+#: src/extract/xtr_base.cpp:50
 msgid "raw data"
 msgstr "原始数据"
 

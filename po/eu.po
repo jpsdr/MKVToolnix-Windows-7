@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 16:42+0100\n"
+"POT-Creation-Date: 2016-03-07 19:03+0100\n"
 "PO-Revision-Date: 2016-01-29 19:45+0100\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -2982,7 +2982,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr "Ezin da %1% bidea idatzi CodecID '%2%'-rekin '%3%' agirira %4% bidea CodecID '%5%'-rekin jadanik idazten ari delako agiri berean eta bere CodecPrivate datuak (USF estiloak etab.) ez datoz bat.\n"
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:69
+#: src/extract/xtr_base.cpp:70
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -4368,7 +4368,7 @@ msgstr "Hutsegitea '%1%': %2% VobSub datu agiria sortzerakoan\n"
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Hutsegitea '%1%': %2% agiria sortzerakoan\n"
 
-#: src/extract/xtr_base.cpp:77
+#: src/extract/xtr_base.cpp:78
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr "Hutsegitea '%1%': %2% (%3%) agiria sortzerakoan\n"
@@ -6392,7 +6392,7 @@ msgstr "Irteera laginketa maiztasuna: %1%"
 msgid "Overwrite existing file"
 msgstr "Gainidatzi dagoen agiria"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "PCM"
 
@@ -8218,7 +8218,7 @@ msgstr "%1% agiria ezin da irakurtzeko ireki: %2%.\n"
 #: src/extract/xtr_avi.cpp:61
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:133
 #: src/merge/output_control.cpp:1343
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
@@ -8611,6 +8611,13 @@ msgstr "Hurrengo UID-a jadanik eman da hemen: '%1% %2%'.\n"
 #: src/merge/connection_checks.h:29
 msgid "The number of bits per sample of the two audio tracks is different: %1% and %2%"
 msgstr "Bi audio bideen lagineko/bit zenbatekoa ezberdina da: %1% eta %2%"
+
+#: src/common/bswap.cpp:26
+#: src/common/bswap.cpp:37
+#: src/common/bswap.cpp:48
+#, boost-format
+msgid "The number of bytes to swap isn't divisible by %1%."
+msgstr ""
 
 #: src/merge/connection_checks.h:24
 msgid "The number of channels of the two audio tracks is different: %1% and %2%"
@@ -9389,7 +9396,7 @@ msgstr "'%2%' Kodek ID-dun %1% bideak \"codec private\" datu baliogabeak ditu AA
 msgid "Track %1% with the CodecID '%2%' does not contain valid headers.\n"
 msgstr "'%2%' Kodek ID-dun %1% bideak ez ditu baliozko idazburuak.\n"
 
-#: src/extract/xtr_wav.cpp:45
+#: src/extract/xtr_wav.cpp:48
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr "'%2%' Kodek ID-dun %1% bideak ez du \"bits per second (bps)\" gaia eta ezn da atera.\n"
@@ -9405,7 +9412,7 @@ msgstr "'%2%' Kodek ID-dun %1% bideak ez du \"bits per second (bps)\" gaia eta e
 #: src/extract/xtr_textsubs.cpp:95
 #: src/extract/xtr_textsubs.cpp:283
 #: src/extract/xtr_vobsub.cpp:62
-#: src/extract/xtr_wav.cpp:98
+#: src/extract/xtr_wav.cpp:115
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n"
 msgstr "'%2%' Kodek ID-dun %1% bideak ez du \"codec private\" gaia eta ezn da atera.\n"
@@ -9516,7 +9523,7 @@ msgstr "Bide mota: %1%"
 msgid "Tracks with a language in this list will be set not to be muxed by default."
 msgstr "Zerrenda honetako hizkuntza bat duten bideak berez ez multiplexatzeko ezarriko dira."
 
-#: src/extract/xtr_base.cpp:121
+#: src/extract/xtr_base.cpp:122
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "Eduki kodeaketa eskema sostengatu gabeko bideak (konpresioa edo enkriptaketa) ezin dira atera.\n"
 
@@ -11107,7 +11114,7 @@ msgstr "pixel garaiera: %1%"
 msgid "pixel width: %1%"
 msgstr "pixel zabalera: %1%"
 
-#: src/extract/xtr_base.cpp:49
+#: src/extract/xtr_base.cpp:50
 msgid "raw data"
 msgstr "raw datuak"
 

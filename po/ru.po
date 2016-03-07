@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 16:42+0100\n"
+"POT-Creation-Date: 2016-03-07 19:03+0100\n"
 "PO-Revision-Date: 2016-01-19 17:07+0300\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
@@ -2856,7 +2856,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr "Невозможно записать дорожку %1% с CodecID '%2%' в файл '%3%' потому что дорожка %4% с CodecID '%5%' уже записана в тот же файл и их частные данные кодека (USF стили и т.д.) не совпадают.\n"
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:69
+#: src/extract/xtr_base.cpp:70
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -4251,7 +4251,7 @@ msgstr "Не удалось создать файл данных VobSub '%1%': %
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Не удалось создать файл '%1%': %2%\n"
 
-#: src/extract/xtr_base.cpp:77
+#: src/extract/xtr_base.cpp:78
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr "Не удалось создать файл '%1%': %2% (%3%)\n"
@@ -6288,7 +6288,7 @@ msgstr "Выходная частота дискретизации: %1%"
 msgid "Overwrite existing file"
 msgstr "Сохранить настройки обработки в файл"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "PCM"
 
@@ -8129,7 +8129,7 @@ msgstr "Файл '%1%' не может быть открыт для чтения
 #: src/extract/xtr_avi.cpp:61
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:133
 #: src/merge/output_control.cpp:1343
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
@@ -8528,6 +8528,13 @@ msgstr "Следующий UID уже указан в '%1% %2%'.\n"
 #: src/merge/connection_checks.h:29
 msgid "The number of bits per sample of the two audio tracks is different: %1% and %2%"
 msgstr "Количество бит на сэмпл двух звуковых дорожек не совпадает: %1% и %2%"
+
+#: src/common/bswap.cpp:26
+#: src/common/bswap.cpp:37
+#: src/common/bswap.cpp:48
+#, boost-format
+msgid "The number of bytes to swap isn't divisible by %1%."
+msgstr ""
 
 #: src/merge/connection_checks.h:24
 msgid "The number of channels of the two audio tracks is different: %1% and %2%"
@@ -9323,7 +9330,7 @@ msgstr "Дорожка %1% с CodecID '%2%' содержит неправиль�
 msgid "Track %1% with the CodecID '%2%' does not contain valid headers.\n"
 msgstr "Дорожка %1% с CodecID '%2%' не содержит правильных заголовков.\n"
 
-#: src/extract/xtr_wav.cpp:45
+#: src/extract/xtr_wav.cpp:48
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr "Дорожка %1% с CodecID '%2%' не имеет элемента \"bits per second (bps)\" и не может быть извлечена.\n"
@@ -9339,7 +9346,7 @@ msgstr "Дорожка %1% с CodecID '%2%' не имеет элемента \"b
 #: src/extract/xtr_textsubs.cpp:95
 #: src/extract/xtr_textsubs.cpp:283
 #: src/extract/xtr_vobsub.cpp:62
-#: src/extract/xtr_wav.cpp:98
+#: src/extract/xtr_wav.cpp:115
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n"
 msgstr "Дорожка %1% с CodecID '%2%' не имеет элемента \"codec private \", и не может быть извлечена.\n"
@@ -9450,7 +9457,7 @@ msgstr "Тип дорожки: %1%"
 msgid "Tracks with a language in this list will be set not to be muxed by default."
 msgstr "Дорожки с выбранным в этом списке языком не будут установливаться для объединения по умолчанию."
 
-#: src/extract/xtr_base.cpp:121
+#: src/extract/xtr_base.cpp:122
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "Дорожки с неподдерживаемыми схемами кодирования данных (сжатие или шифрование) не могут быть извлечены.\n"
 
@@ -11050,7 +11057,7 @@ msgstr "высота в пикселях: %1%"
 msgid "pixel width: %1%"
 msgstr "ширина в пикселях: %1%"
 
-#: src/extract/xtr_base.cpp:49
+#: src/extract/xtr_base.cpp:50
 msgid "raw data"
 msgstr "бесконтейнерные данные"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 16:42+0100\n"
+"POT-Creation-Date: 2016-03-07 19:03+0100\n"
 "PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -3054,7 +3054,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr "Не могу да упишем запис %1% (ИБ-кодека=%2%) у датотеку „%3%“ јер се у њу управо уписује запис %4% (ИБ-кодека=%5%), а њихови  „Кодек_приватно“- подаци (УСФ стилови, итд.) се не подударају.\n"
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:69
+#: src/extract/xtr_base.cpp:70
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -4475,7 +4475,7 @@ msgstr "Није успео покушај стварања датотек Во�
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Није успео покушај стварања датотеке „%1%“: %2%\n"
 
-#: src/extract/xtr_base.cpp:77
+#: src/extract/xtr_base.cpp:78
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr "Није успео покушај стварања датотеке „%1%“: %2% (%3%)\n"
@@ -6528,7 +6528,7 @@ msgstr "Излазна учестаност узорковања: %1%"
 msgid "Overwrite existing file"
 msgstr "Отвори датотеку поставки"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:47
 msgid "PCM"
 msgstr "ИКМ (енг. „PCM“)"
 
@@ -8391,7 +8391,7 @@ msgstr "Неуспело отварање датотеке „%1%“ за чит
 #: src/extract/xtr_avi.cpp:61
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:74
-#: src/extract/xtr_wav.cpp:116
+#: src/extract/xtr_wav.cpp:133
 #: src/merge/output_control.cpp:1343
 #, boost-format
 msgid "The file '%1%' could not be opened for writing: %2%.\n"
@@ -8795,6 +8795,13 @@ msgstr "Наредни ЈИБ је већ задат у „%1% %2%“.\n"
 #: src/merge/connection_checks.h:29
 msgid "The number of bits per sample of the two audio tracks is different: %1% and %2%"
 msgstr "Број битова по узорку за ова два записа су различити: %1% спрам %2%"
+
+#: src/common/bswap.cpp:26
+#: src/common/bswap.cpp:37
+#: src/common/bswap.cpp:48
+#, boost-format
+msgid "The number of bytes to swap isn't divisible by %1%."
+msgstr ""
 
 #: src/merge/connection_checks.h:24
 msgid "The number of channels of the two audio tracks is different: %1% and %2%"
@@ -9578,7 +9585,7 @@ msgstr "Запис „%1%“ (Кодек-ИБ=%2%) не садржи ваљан 
 msgid "Track %1% with the CodecID '%2%' does not contain valid headers.\n"
 msgstr "Запис „%1%“ (Кодек-ИБ=%2%) не садржи ваљана заглавља.\n"
 
-#: src/extract/xtr_wav.cpp:45
+#: src/extract/xtr_wav.cpp:48
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"
 msgstr "Запис „%1%“ (Кодек-ИБ=%2%) не садржи елеменат „bits per second (bps)“, па не може да се издвоји.\n"
@@ -9594,7 +9601,7 @@ msgstr "Запис „%1%“ (Кодек-ИБ=%2%) не садржи елеме�
 #: src/extract/xtr_textsubs.cpp:95
 #: src/extract/xtr_textsubs.cpp:283
 #: src/extract/xtr_vobsub.cpp:62
-#: src/extract/xtr_wav.cpp:98
+#: src/extract/xtr_wav.cpp:115
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n"
 msgstr "Запис „%1%“ (Кодек-ИБ=%2%) не садржи елеменат „codec private“, па не може да се издвоји.\n"
@@ -9705,7 +9712,7 @@ msgstr "Врста записа: %1%"
 msgid "Tracks with a language in this list will be set not to be muxed by default."
 msgstr "Записи са поставком за језик из овог списка неће бити, подразумевано, одабрани за сједињавање."
 
-#: src/extract/xtr_base.cpp:121
+#: src/extract/xtr_base.cpp:122
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "Записи неподржаних шема кодирања садржаја (сажимање или шифровање) не могу да се издвајају.\n"
 
@@ -11322,7 +11329,7 @@ msgstr "висина пиксела: %1%"
 msgid "pixel width: %1%"
 msgstr "ширина пиксела: %1%"
 
-#: src/extract/xtr_base.cpp:49
+#: src/extract/xtr_base.cpp:50
 msgid "raw data"
 msgstr "сирови подаци"
 
