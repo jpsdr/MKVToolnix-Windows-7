@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
 "POT-Creation-Date: 2016-03-01 23:18+0100\n"
-"PO-Revision-Date: 2015-08-15 19:27+0200\n"
-"Last-Translator: Israel Lucas Torrijos (Overdrive80) <lukillas.ole@gmail.com>\n"
-"Language-Team: Israel Lucas Torrijos (Overdrive80) <lukillas.ole@gmail.com>\n"
+"PO-Revision-Date: 2016-03-05 16:22+0000\n"
+"Last-Translator: Israel Lucas Torrijos <lukillas.ole@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr "mkvextract"
 #: doc/man/mkvpropedit.xml:6
 #: doc/man/mkvtoolnix-gui.xml:6
 msgid "8.9.0"
-msgstr ""
+msgstr "8.9.0"
 
 #. type: Content of the date entity
 #: doc/man/mkvextract.xml:7
@@ -38,7 +38,7 @@ msgstr ""
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2016-02-21"
-msgstr ""
+msgstr "2016-02-21"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -653,20 +653,18 @@ msgstr "Exporta la información de capítulos en un formato simple usado en las 
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:388
-#, fuzzy
-#| msgid "<option>--language</option> <parameter>TID:language</parameter>"
 msgid "<option>--simple-language</option> <parameter>language</parameter>"
-msgstr "<option>--language</option> <parameter>TID:idioma</parameter>"
+msgstr "<option>--simple-language</option> <parameter>idioma</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:391
 msgid "If the simple format is enabled then &mkvextract; will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name.  By default &mkvextract; will use the first chapter name found for each atom regardless of its language."
-msgstr ""
+msgstr "Si se habilita el formato simple entonces &mkvextract; sólo generará una única entrada de cada capítulo atom encontrado incluso si un capítulo atom contiene más de un nombre de capítulos. Por defecto &mkvextract; usará el primer nombre de capítulos que encuentre para cada atom, independientemente de su idioma. "
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:396
 msgid "Using this option allows the user to determine which chapter names are output if atoms contain more than one chapter name.  The <parameter>language</parameter> parameter must be an ISO 639-1 or ISO 639-2 code."
-msgstr ""
+msgstr "Usar esta opción permite al usuario determinar que nombres de capítulos se generan si los atoms contienen más de un nombre de capítulos. El parámetro <parameter>language</parameter> debe ser un código ISO 639-1 o ISO 639-2."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:404
@@ -1660,10 +1658,8 @@ msgstr "Esta opción puede ser usada tanto para archivos simples de capítulos c
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:193
-#, fuzzy
-#| msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> option."
 msgid "The language set with this option is also used when chapters are generated with the <link linkend=\"mkvmerge.description.generate_chapters\"><option>--generate-chapters</option> option</link>."
-msgstr "El contenido se trata como si se hubiese pasado a través de la opción <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link>."
+msgstr "El idioma establecido con esta opción se usa también cuando los capítulos se generan con la <link linkend=\"mkvmerge.description.generate_chapters\"><option>--generate-chapters</option> opción</link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:200
@@ -1683,107 +1679,103 @@ msgstr "Este ajuste también se aplica a los capítulos que se copian desde cier
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:216
-#, fuzzy
-#| msgid "<option>--chapters</option> <parameter>file-name</parameter>"
 msgid "<option>--generate-chapters</option> <parameter>mode</parameter>"
-msgstr "<option>--chapters</option> <parameter>nombre-archivo</parameter>"
+msgstr "<option>--generate-chapters</option> <parameter>modo</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:219
 msgid "&mkvmerge; can create chapters automatically.  The following two modes are currently supported:"
-msgstr ""
+msgstr "&mkvmerge; puede crear capítulos automáticamente. Actualmente, se admiten los siguientes dos modos:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:225
 msgid "'<literal>when-appending</literal>' – This mode creates one chapter at the start and one chapter whenever a file is appended."
-msgstr ""
+msgstr "'<literal>when-appending</literal>' – Este modo crea un capítulo al inicio y cada vez que se une un archivo. "
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:230
 msgid "&mkvmerge; requires a video or an audio track to be present in order to be able to determine when a new file is appended.  If one or more video tracks are muxed the first one is used.  Otherwise the first audio track is used."
-msgstr ""
+msgstr "&mkvmerge; requiere una pista de video o audio a fin de poder determinar cuando se añade un nuevo archivo. Si una o más pistas de vídeo se multiplexan, se utiliza la primera. Por el contrario, se utiliza la primera pista de audio."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:238
 msgid "'<literal>interval:</literal><parameter>time-spec</parameter>' – This mode creates one chapter at fixed intervals given by <parameter>time-spec</parameter>.  The format is either the form <parameter>HH:MM:SS.nnnnnnnnn</parameter> or a number followed by one of the units '<literal>s</literal>', '<literal>ms</literal>' or '<literal>us</literal>'."
-msgstr ""
+msgstr "'<literal>interval:</literal><parameter>time-spec</parameter>' – Este modo crea un capítulo conforme a un intervalo establecido mediante <parameter>time-spec</parameter>.  El formato es <parameter>HH:MM:SS.nnnnnnnnn</parameter> o un número seguido por una unidad '<literal>s</literal>', '<literal>ms</literal>' o '<literal>us</literal>'."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:244
 msgid "Example: <literal>--generate-chapters interval:45s</literal>"
-msgstr ""
+msgstr "Ejemplo: <literal>--generate-chapters interval:45s</literal>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:250
 msgid "The names for the new chapters are controlled by the option <link linkend=\"mkvmerge.description.generate_chapters_name_template\">--generate-chapters-name-template</link>.  The language is set with <link linkend=\"mkvmerge.description.chapter_language\">--chapter-language</link> which must occur before <option>--generate-chapters</option>."
-msgstr ""
+msgstr "Los nombres para los nuevos capítulos se controlan con la opción <link linkend=\"mkvmerge.description.generate_chapters_name_template\">--generate-chapters-name-template</link>.  El idioma se establece con <link linkend=\"mkvmerge.description.chapter_language\">--chapter-language</link> que se debe establecer antes de <option>--generate-chapters</option>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:259
-#, fuzzy
-#| msgid "<option>--cue-chapter-name-format</option> <parameter>format</parameter>"
 msgid "<option>--generate-chapters-name-template</option> <parameter>template</parameter>"
-msgstr "<option>--cue-chapter-name-format</option> <parameter>formato</parameter>"
+msgstr "<option>--generate-chapters-name-template</option> <parameter>plantilla</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:262
 msgid "This sets the name template for chapter names generated by the option <link linkend=\"mkvmerge.description.generate_chapters\">--generate-chapters</link>. If the option is not used then default '<literal>Chapter &lt;NUM:2&gt;</literal>' will be used."
-msgstr ""
+msgstr "Esto establece el nombre de la plantilla para los nombres de los capítulos creados con la opción <link linkend=\"mkvmerge.description.generate_chapters\">--generate-chapters</link>. Si no se usa la opción entonces se usa por defecto '<literal>Chapter &lt;NUM:2&gt;</literal>'."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:268
 msgid "There are several variables that can be used in the template that are replaced by their actual values when a chapter is generated.  The string '<literal>&lt;NUM&gt;</literal>' will be replaced by the chapter number. The string '<literal>&lt;START&gt;</literal>' will be replaced by the chapter's start timestamp."
-msgstr ""
+msgstr "Hay diversas variables que se pueden usar en la plantilla que son reemplazadas por sus valores correspondientes cuando se genera un capítulo. La cadena de texto '<literal>&lt;NUM&gt;</literal>' será reemplazada por el número de capítulo. La cadena de texto '<literal>&lt;START&gt;</literal>' será reemplazada por la marca de tiempo inicial del capítulo."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:274
 msgid "You can specify a minimum number of places for the chapter number with '<literal>&lt;NUM:places&gt;</literal>', e.g. '<literal>&lt;NUM:3&gt;</literal>'.  The resulting number will be padded with leading zeroes if the number of places is less than specified."
-msgstr ""
+msgstr "Puede especificar el número mínimo de dígitos del número del capítulo con '<literal>&lt;NUM:places&gt;</literal>', p.e. '<literal>&lt;NUM:3&gt;</literal>'.  Se le añadirán ceros a la izquierda si el número resultante tiene menos dígitos de los especificados."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:279
 msgid "You can control the format used by the start timestamp with <literal>&lt;START:format&gt;</literal>.  The format defaults to '<literal>%H:%M:%S</literal>' if none is given.  Valid format codes are:"
-msgstr ""
+msgstr "Puede controlar el formato a usar según la marca de tiempo inicial con <literal>&lt;START:format&gt;</literal>. Por defecto, se usará '<literal>%H:%M:%S</literal>'. Los códigos válidos de formato son:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:285
 msgid "<literal>%h</literal> – hours"
-msgstr ""
+msgstr "<literal>%h</literal> – horas"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:288
 msgid "<literal>%H</literal> – hours zero-padded to two places"
-msgstr ""
+msgstr "<literal>%H</literal> – horas con dos dígitos que admiten ceros a la izquierda"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:291
 msgid "<literal>%m</literal> – minutes"
-msgstr ""
+msgstr "<literal>%m</literal> – minutos"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:294
 msgid "<literal>%M</literal> – minutes zero-padded to two places"
-msgstr ""
+msgstr "<literal>%M</literal> – minutos con dos dígitos que admiten ceros a la izquierda"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:297
 msgid "<literal>%s</literal> – seconds"
-msgstr ""
+msgstr "<literal>%s</literal> – segundos"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:300
 msgid "<literal>%S</literal> – seconds zero-padded to two places"
-msgstr ""
+msgstr "<literal>%S</literal> – segundos con dos dígitos que admiten ceros a la izquierda"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:303
 msgid "<literal>%n</literal> – nanoseconds with nine places"
-msgstr ""
+msgstr "<literal>%n</literal> – nanosegundos con nueve digitos"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:306
 msgid "<literal>%&lt;1-9&gt;n</literal> – nanoseconds with up to nine places (e.g. three places with <literal>%3n</literal>)"
-msgstr ""
+msgstr "<literal>%&lt;1-9&gt;n</literal> – nanosegundos con hasta nueve dígitos (p.e. tres dígitos con <literal>%3n</literal>)"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:313
