@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-03-02 09:09+0100\n"
-"PO-Revision-Date: 2016-03-02 06:34+0000\n"
+"PO-Revision-Date: 2016-03-02 19:32+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -304,26 +304,24 @@ msgstr ""
 "                           eğer bool 0 ise bulunmaması için zorlar.\n"
 
 #: src/merge/mkvmerge.cpp:98
-#, fuzzy
 msgid ""
 "  --generate-chapters <mode>\n"
 "                           Automatically generate chapters according to\n"
 "                           the mode ('when-appending' or 'interval:<duration>').\n"
 msgstr ""
-"  --cue-chapter-name-format <biçim>\n"
-"                           CUE sheet girişlerinden bölüm adlarına\n"
-"                           dönüştürme için örnek.\n"
+"  --generate-chapters <kip>\n"
+"                           Bölümleri kipe göre otomatik olarak\n"
+"                           oluşturur ('when-appending' veya 'interval:<süre>').\n"
 
 #: src/merge/mkvmerge.cpp:101
-#, fuzzy
 msgid ""
 "  --generate-chapters-name-template <template>\n"
 "                           Template for newly generated chapter names\n"
 "                           (default: 'Chapter <NUM:2>').\n"
 msgstr ""
-"  --cue-chapter-name-format <biçim>\n"
-"                           CUE sheet girişlerinden bölüm adlarına\n"
-"                           dönüştürme için örnek.\n"
+"  --generate-chapters-name-template <şablon>\n"
+"                           Yeni olarak oluşturulan bölüm adları için şablon\n"
+"                           (varsayılan: 'Bölüm <NUM:2>').\n"
 
 #: src/merge/mkvmerge.cpp:87
 msgid "  --global-tags <file>     Read global tags from a XML file.\n"
@@ -3075,7 +3073,7 @@ msgstr "Bölüm dosyası:"
 
 #: src/merge/cluster_helper.cpp:730
 msgid "Chapter generation is only possible if at least one video or audio track is muxed.\n"
-msgstr ""
+msgstr "Bölüm oluşturma sadece en az bir görüntü ve ses izi çoklanırsa mümkündür.\n"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:201
 msgid "Chapter mass modification"
@@ -4621,7 +4619,7 @@ msgstr "Birtakım bölümü ayrı eşit miktarda aralıklı oluşturma"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 msgid "Generating chapters:"
-msgstr "Oluşturulan alt bölümler:"
+msgstr "Alt bölümlerin oluşturulması:"
 
 #: src/extract/extract_cli_parser.cpp:61
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
@@ -4722,7 +4720,7 @@ msgstr "VP8 görüntü dosyalarıyla IVF"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:278
 msgid "If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."
-msgstr "Eğer burada bir karakter kümesi seçilirse, o zaman program karakter kümesi girdisini otomatik olarak yeni eklenen metin altyazı izleri için bu değere ayarlar."
+msgstr "Eğer burada bir karakter kümesi seçilirse, o zaman program karakter kümesi girdisini otomatik olarak yeni olarak eklenen metin altyazı izleri için bu değere ayarlar."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:379
 msgid "If a range's start number is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
@@ -4838,9 +4836,8 @@ msgid "If no video track is output no splitting will occur."
 msgstr "Eğer çıktı olan görüntü izi yoksa bölme meydana gelmeyecek."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:204
-#, fuzzy
 msgid "If nothing is entered the default 'Chapter <NUM:2>' will be used."
-msgstr "Eğer hiçbir şey girilmezse o zaman '%p - %t' kullanılacaktır."
+msgstr "Eğer hiçbir şey girilmezse varsayılan 'Bölüm <NUM:2>' kullanılacaktır."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:193
 #, boost-format
@@ -4912,7 +4909,7 @@ msgstr "%1% dosyasından içe aktarılmış resim"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:199
 msgid "In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."
-msgstr ""
+msgstr "Sabitlenmiş aralıklar içinde: bölümler sabitlenmiş aralıklar içinde oluşturulur, örn. her 30 saniye."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:244
 msgid "In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."
@@ -8404,7 +8401,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:197
 msgid "The following modes are supported:"
-msgstr "Şurada belirtilen kipler desteklenir:"
+msgstr "Aşağıdaki kipler desteklenir:"
 
 #: src/mkvtoolnix-gui/jobs/program_runner.cpp:47
 msgid "The following program could not be executed: %1"
@@ -8462,7 +8459,7 @@ msgstr "Dil kodu '%1%' geçerli bir ISO639-2 dil kodu değil ve yoksayılacaktı
 
 #: src/mkvtoolnix-gui/merge/output.cpp:200
 msgid "The language for the newly created chapters is set via the chapter language control above."
-msgstr ""
+msgstr "Yeni olarak oluşturulan bölümler için dil, yukarıdaki bölüm dili denetimi aracılığıyla ayarlanır."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:401
 msgid "The language for this track that players can use for automatic track selection and display for the user."
@@ -9677,7 +9674,7 @@ msgstr "Sa&bitlenmiş dizin kullan:"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:62
 msgid "Use fixed values for the elements that change with each file otherwise (muxing date, segment UID, track UIDs etc.)."
-msgstr ""
+msgstr "Her dosya ile değiştirmenin aksine öğeler için sabitlenmiş değerler kullanın (çoklama tarihi, parça UID, iz UID'leri vb.)."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Use only for testing."
@@ -10284,7 +10281,7 @@ msgstr "bölümler"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1678
 msgid "chapters in fixed intervals"
-msgstr ""
+msgstr "sabitlenmiş aralıklardaki bölümler"
 
 #: src/common/stereo_mode.cpp:54
 msgid "checkerboard (left first)"
@@ -10376,9 +10373,8 @@ msgid "don't change"
 msgstr "değiştirme"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1676
-#, fuzzy
 msgid "don't generate chapters"
-msgstr "Alt bölümleri oluşturma"
+msgstr "bölümleri oluşturma"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:146
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
@@ -10810,7 +10806,7 @@ msgstr "mkvmerge ayrıca çıktı dosyası adının uzantısı \"webm\" ise bunu
 
 #: src/mkvtoolnix-gui/merge/output.cpp:196
 msgid "mkvmerge can generate chapters automatically."
-msgstr ""
+msgstr "mkvmerge bölümleri otomatik olarak oluşturabilir."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:189
 msgid "mkvmerge can read CUE sheets for audio CDs and automatically convert them to chapters."
@@ -10999,9 +10995,8 @@ msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer başarısız\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1677
-#, fuzzy
 msgid "one chapter for each appended file"
-msgstr "Dosyalar ilave edilemiyor"
+msgstr "her ilave edilen dosya için bir bölüm"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1278
 msgid "only for I frames"
