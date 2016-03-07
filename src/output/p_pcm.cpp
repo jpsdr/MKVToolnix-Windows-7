@@ -14,7 +14,9 @@
 
 #include "common/common_pch.h"
 
+#include "common/bswap.h"
 #include "common/codec.h"
+#include "common/list_utils.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
 #include "output/p_pcm.h"
@@ -55,6 +57,11 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
 
   set_track_type(track_audio);
   set_track_default_duration((int64_t)(1000000000.0 * m_samples_per_packet / m_samples_per_sec));
+
+  if ((m_format == big_endian_integer) && mtx::included_in(m_bits_per_sample, 16, 32, 64))
+    m_byte_swapper = m_bits_per_sample == 16 ? mtx::bswap_buffer_16
+                   : m_bits_per_sample == 32 ? mtx::bswap_buffer_32
+                   :                           mtx::bswap_buffer_64;
 }
 
 pcm_packetizer_c::~pcm_packetizer_c() {
@@ -62,9 +69,7 @@ pcm_packetizer_c::~pcm_packetizer_c() {
 
 void
 pcm_packetizer_c::set_headers() {
-  auto codec_id = ieee_float         == m_format ? MKV_A_PCM_FLOAT
-                : big_endian_integer == m_format ? MKV_A_PCM_BE
-                :                                  MKV_A_PCM;
+  auto codec_id = ieee_float == m_format ? MKV_A_PCM_FLOAT : MKV_A_PCM;
   set_codec_id(codec_id);
   set_audio_sampling_freq(static_cast<double>(m_samples_per_sec));
   set_audio_channels(m_channels);
@@ -93,7 +98,12 @@ pcm_packetizer_c::process(packet_cptr packet) {
   m_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
   while (m_buffer.get_size() >= m_packet_size) {
-    add_packet(new packet_t(memory_c::clone(m_buffer.get_buffer(), m_packet_size), m_samples_output * m_s2ts, m_samples_per_packet * m_s2ts));
+    auto packet = std::make_shared<packet_t>(memory_c::clone(m_buffer.get_buffer(), m_packet_size), m_samples_output * m_s2ts, m_samples_per_packet * m_s2ts);
+
+    if (m_byte_swapper)
+      m_byte_swapper(packet->data->get_buffer(), packet->data->get_buffer(), packet->data->get_size());
+
+    add_packet(packet);
 
     m_buffer.remove(m_packet_size);
     m_samples_output += m_samples_per_packet;
@@ -140,6 +150,9 @@ pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
     }
   }
 
+  if (m_byte_swapper)
+    m_byte_swapper(packet->data->get_buffer(), packet->data->get_buffer(), packet->data->get_size());
+
   add_packet(packet);
 
   return FILE_STATUS_MOREDATA;
@@ -152,7 +165,12 @@ pcm_packetizer_c::flush_impl() {
     return;
 
   int64_t samples_here = size_to_samples(size);
-  add_packet(new packet_t(memory_c::clone(m_buffer.get_buffer(), size), m_samples_output * m_s2ts, samples_here * m_s2ts));
+  auto packet          = std::make_shared<packet_t>(memory_c::clone(m_buffer.get_buffer(), size), m_samples_output * m_s2ts, samples_here * m_s2ts);
+
+  if (m_byte_swapper)
+    m_byte_swapper(packet->data->get_buffer(), packet->data->get_buffer(), packet->data->get_size());
+
+  add_packet(packet);
 
   m_samples_output += samples_here;
   m_buffer.remove(size);

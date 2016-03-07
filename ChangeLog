@@ -1,3 +1,10 @@
+2016-03-07  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: enhancement: Big Endian PCM tracks will now be
+        byte-swapped into Little Endian PCM, and the codec ID
+        A_PCM/INT/LIT will be used. This was done due to a lot of players
+        not supporting Big Endian PCM inside Matroska.
+
 2016-03-01  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge, MKVToolNix GUI: new feature: added switches

@@ -34,6 +34,7 @@ private:
   pcm_format_e m_format;
   byte_buffer_c m_buffer;
   samples_to_timestamp_converter_c m_s2ts;
+  std::function<void(unsigned char const *, unsigned char *, std::size_t)> m_byte_swapper;
 
 public:
   pcm_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int p_samples_per_sec, int channels, int bits_per_sample, pcm_format_e format = little_endian_integer);
