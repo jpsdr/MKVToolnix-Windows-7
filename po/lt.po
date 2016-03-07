@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix-4.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-03-02 09:09+0100\n"
-"PO-Revision-Date: 2016-03-02 11:51+0000\n"
+"PO-Revision-Date: 2016-03-03 19:09+0000\n"
 "Last-Translator: Martynas Kybartas <maky@super.lt>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/lt/)\n"
 "Language: lt\n"
@@ -24,24 +24,32 @@ msgid ""
 "\n"
 "The temporary TTA file for track ID %1% is being copied into the final TTA file. This may take some time.\n"
 msgstr ""
+"\n"
+"Laikina TTA rinkmena takeliui ID %1% kopijuojama į galutinę TTA rinkmeną. Tai šiek tiek užtruks.\n"
 
 #: src/merge/output_control.cpp:232
 msgid ""
 "\n"
 "mkvmerge received a SIGINT (probably because the user pressed Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during this process you'll have to kill it manually.\n"
 msgstr ""
+"\n"
+"mkvmerge gavo SIGINT (greičiausiai todėl, kad naudotojas paspaudė Ctrl+C). Mėginama išvalyti rinkmeną. Jei mkvmerge proceso metu nustos veikti, reikės ją išjungti rankiniu būdu.\n"
 
 #: src/merge/mkvmerge.cpp:164
 msgid ""
 "  ( <file1> <file2> )      Treat file1 and file2 as if they were concatenated\n"
 "                           into a single big file.\n"
 msgstr ""
+"  ( <rinkmena1> <rinkmena2> )      Traktuoti rinkmena1 ir rinkmena2 tarsi jos būtų sudurtos\n"
+"                           į vieną didelę rinkmeną.\n"
 
 #: src/merge/mkvmerge.cpp:229
 msgid ""
 "  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
 "                           or not. The value ':1' can be omitted.\n"
 msgstr ""
+"  --aac-yra-sbr <TID[:0|1]> Takelis su ID is HE-AAC/AAC+/SBR-AAC\n"
+"                           arba ne. Reikšmės ':1' galima nepaisyti.\n"
 
 #: src/merge/mkvmerge.cpp:156
 msgid ""
@@ -49,6 +57,9 @@ msgid ""
 "                           Selects how mkvmerge calculates timecodes when\n"
 "                           appending files.\n"
 msgstr ""
+"  --prijungimo-veiksena <rinkm.takelis>\n"
+"                           Parenka mkvmerge laiko kodų apskaičiavimo būdą\n"
+"                           prijungiant rinkmenas.\n"
 
 #: src/merge/mkvmerge.cpp:151
 msgid ""
@@ -58,6 +69,11 @@ msgid ""
 "                           appended to another track of the preceding\n"
 "                           file.\n"
 msgstr ""
+"  --prijungti-prie <SFID1:STID1:DFID1:DTID1,SFID2:STID2:DFID2:DTID2,...>\n"
+"                           Kableliu skiriamas rinkmenos ir takelio ID sąrašas,\n"
+"                           nustatantis, kurį rinkmenos takelį prijungti\n"
+"                           prie kito pirmesnės rinkmenos\n"
+"                           takelio.\n"
 
 #: src/merge/mkvmerge.cpp:248
 msgid ""
@@ -65,6 +81,9 @@ msgid ""
 "                           Sets the display dimensions by calculating\n"
 "                           width and height for this aspect ratio.\n"
 msgstr ""
+"  --kraštinių-santykis <TID:f|a/b>\n"
+"                           Nustato ekrano dydį apskaičiuojant\n"
+"                           plotį ir aukštį šiam kraštinių santykiui.\n"
 
 #: src/merge/mkvmerge.cpp:251
 msgid ""
@@ -74,12 +93,19 @@ msgid ""
 "                           with this factor and calculates the display\n"
 "                           dimensions from this factor.\n"
 msgstr ""
+"  --kraštinių-santykio-veiksnys <TID:f|a/b>\n"
+"                           Pirmiausia apskaičiuoja kraštinių santykį,\n"
+"                           dauginant pradinį vaizdo kraštinių santykį\n"
+"                           su šiuo veiksniu ir apskaičiuoja ekrano dydį\n"
+"                           iš šio veiksnio.\n"
 
 #: src/merge/mkvmerge.cpp:174
 msgid ""
 "  --attach-file <file>     Creates a file attachment inside the\n"
 "                           Matroska file.\n"
 msgstr ""
+"  --pridėti-rinkmeną <rinkmena>     Sukuria rinkmenos priedą\n"
+"                           Matroska rinkmenos viduje.\n"
 
 #: src/merge/mkvmerge.cpp:176
 msgid ""
@@ -87,30 +113,41 @@ msgid ""
 "                           Creates a file attachment inside the\n"
 "                           first Matroska file written.\n"
 msgstr ""
+"  --pridėti-rinkmeną-kartą <rinkmena>\n"
+"                           Sukuria rinkmenos priedą pirmos\n"
+"                           parašytos Matroska rinkmenos viduje.\n"
 
 #: src/merge/mkvmerge.cpp:168
 msgid ""
 "  --attachment-description <desc>\n"
 "                           Description for the following attachment.\n"
 msgstr ""
+"  --priedo-aprašas <desc>\n"
+"                           Šio priedo aprašas.\n"
 
 #: src/merge/mkvmerge.cpp:170
 msgid ""
 "  --attachment-mime-type <mime type>\n"
 "                           Mime type for the following attachment.\n"
 msgstr ""
+"  --priedo-mime-rūšis <„mime“ rūšis>\n"
+"                           Šio priedo „mime“ rūšis.\n"
 
 #: src/merge/mkvmerge.cpp:172
 msgid ""
 "  --attachment-name <name> The name should be stored for the \n"
 "                           following attachment.\n"
 msgstr ""
+"  --priedo-pavadinimas <pavadinimas> Pavadinimas turi būti išsaugotas \n"
+"                           šiam priedui.\n"
 
 #: src/merge/mkvmerge.cpp:221
 msgid ""
 "  --blockadd <TID:x>       Sets the max number of block additional\n"
 "                           levels for this track.\n"
 msgstr ""
+"  --blokpap <TID:x>       Nustato didžiausią papildomų bloko\n"
+"                           lygių šiam takeliui skaičių.\n"
 
 #: src/merge/mkvmerge.cpp:283
 msgid "  --capabilities           Lists optional features mkvmerge was compiled with.\n"
@@ -6885,7 +6922,7 @@ msgstr "RealAudio"
 
 #: src/common/file_types.cpp:92
 msgid "RealMedia"
-msgstr ""
+msgstr "RealMedia"
 
 #: src/common/file_types.cpp:50
 msgid "RealMedia audio/video files"
@@ -7091,7 +7128,7 @@ msgstr "SRT subtitrai"
 
 #: src/common/file_types.cpp:51
 msgid "SRT text subtitles"
-msgstr ""
+msgstr "SRT tekstiniai subtitrai"
 
 #: src/common/file_types.cpp:94
 msgid "SSA/ASS subtitles"
@@ -7099,7 +7136,7 @@ msgstr "SSA/ASS subtitrai"
 
 #: src/common/file_types.cpp:52
 msgid "SSA/ASS text subtitles"
-msgstr ""
+msgstr "SSA/ASS tekstiniai subtitrai"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1234
 msgid "Sa&me directory as the first input file"
@@ -7166,19 +7203,17 @@ msgstr "Tankinimo nuostatas įrašyti į rinkmeną"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:465
 msgid "Save to &Matroska file"
-msgstr "Įrašyti į &Matroska rinkmeną"
+msgstr "Išsaugoti &Matroska rinkmenoje"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:516
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:520
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:198
-#, fuzzy
 msgid "Saving failed"
-msgstr "Analizuojama rinkmena"
+msgstr "Išsaugojimas nepavyko"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:571
-#, fuzzy
 msgid "Saving the chapters failed."
-msgstr "Pasirinkite skyriaus rinkmeną"
+msgstr "Skyrių išsaugojimas nepavyko."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:214
 #, fuzzy
@@ -7198,9 +7233,8 @@ msgid "Scan directory for other playlists"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:235
-#, fuzzy
 msgid "Scanned Files"
-msgstr "Esami priedai"
+msgstr "Nuskaitytos rinkmenos"
 
 #: src/merge/mkvmerge.cpp:2560
 #, boost-format
@@ -8794,7 +8828,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:385
 #: src/mkvtoolnix-gui/merge/output.cpp:398
 msgid "The numbering starts at 1."
-msgstr "Numeruojama nuo ."
+msgstr "Numeruojama nuo 1."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:374
 #: src/mkvtoolnix-gui/merge/output.cpp:390
@@ -9053,7 +9087,7 @@ msgstr ""
 #: src/common/property_element.cpp:101
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:368
 msgid "The title for the whole movie."
-msgstr ""
+msgstr "Pavadinimas visam filmui."
 
 #: src/merge/output_control.cpp:1000
 #, boost-format
@@ -9087,7 +9121,7 @@ msgstr ""
 
 #: src/merge/output_control.cpp:1041
 msgid "The track parameters do not match."
-msgstr ""
+msgstr "Takelio savybės nesutampa."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:243
 msgid "The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."
@@ -9577,7 +9611,7 @@ msgstr ""
 #: src/merge/generic_reader.cpp:353
 #, boost-format
 msgid "Track ID %1%: %2% (%3%)"
-msgstr "Takelio ID %1%: %2% (%3%)"
+msgstr "Takelis ID %1%: %2% (%3%)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:279
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:60
@@ -9592,7 +9626,7 @@ msgstr "Takelio UID"
 #: src/info/mkvinfo.cpp:825
 #, boost-format
 msgid "Track UID: %1%"
-msgstr "Takelio UID: %1%"
+msgstr "Takelis UID: %1%"
 
 #: src/extract/extract_cli_parser.cpp:66
 msgid "Track extraction"
@@ -9767,7 +9801,7 @@ msgstr "Nežinoma veiksena „%1%“.\n"
 #: src/common/cli_parser.cpp:115
 #, boost-format
 msgid "Unknown option '%1%'.\n"
-msgstr "Nežinomas parametras „%1%“.\n"
+msgstr "Nežinoma parinktis „%1%“.\n"
 
 #: src/propedit/propedit_cli_parser.cpp:34
 #, boost-format
@@ -9914,14 +9948,12 @@ msgid "Variables for merge jobs"
 msgstr "skaidyti prieš skyrius"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:103
-#, fuzzy
 msgid "Version %1"
-msgstr "EBML versija: %1%"
+msgstr "Versija %1"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:103
-#, fuzzy
 msgid "Version %1 \"%2\""
-msgstr "EBML versija: %1%"
+msgstr "Versija %1 \"%2\""
 
 #: src/output/p_video.h:45
 msgid "VfW compatible video"
@@ -9934,27 +9966,27 @@ msgstr "Vaizdas"
 #: src/common/property_element.cpp:145
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:477
 msgid "Video aspect ratio type"
-msgstr ""
+msgstr "Vaizdo kraštinių santykio rūšis"
 
 #: src/common/property_element.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:474
 msgid "Video crop bottom"
-msgstr ""
+msgstr "Vaizdo kirpimas apačioje"
 
 #: src/common/property_element.cpp:141
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:465
 msgid "Video crop left"
-msgstr ""
+msgstr "Vaizdo kirpimas kairėje"
 
 #: src/common/property_element.cpp:143
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:471
 msgid "Video crop right"
-msgstr ""
+msgstr "Vaizdo kirpimas dešinėje"
 
 #: src/common/property_element.cpp:142
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:468
 msgid "Video crop top"
-msgstr ""
+msgstr "Vaizdo kirpimas viršuje"
 
 #: src/common/property_element.cpp:139
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:459
@@ -9964,7 +9996,7 @@ msgstr "Vaizdo aukštis"
 #: src/common/property_element.cpp:140
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:462
 msgid "Video display unit"
-msgstr ""
+msgstr "Vaizdo rodymo vienetas"
 
 #: src/common/property_element.cpp:138
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:456
@@ -9973,50 +10005,49 @@ msgstr "Vaizdo plotis"
 
 #: src/common/property_element.cpp:135
 msgid "Video interlaced flag"
-msgstr ""
+msgstr "Vaizdo maišos žyma"
 
 #: src/input/r_real.cpp:618
 #, boost-format
 msgid "Video packet assembly failed. Error code: %1% (%2%)\n"
-msgstr ""
+msgstr "Vaizdo paketų surinkimas nepavyko. Klaidos kodas: %1% (%2%)\n"
 
 #: src/common/property_element.cpp:137
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:453
 msgid "Video pixel height"
-msgstr ""
+msgstr "Vaizdo taškų aukštis"
 
 #: src/common/property_element.cpp:136
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:450
 msgid "Video pixel width"
-msgstr ""
+msgstr "Vaizdo taškų plotis"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1601
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1621
 msgid "Video properties"
-msgstr ""
+msgstr "Vaizdo nustatymai"
 
 #: src/common/property_element.cpp:147
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:481
 msgid "Video stereo mode"
-msgstr ""
+msgstr "Vaizdo stereo režimas"
 
 #: src/info/mkvinfo.cpp:577
 msgid "Video track"
 msgstr "Vaizdo takelis"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:41
-#, fuzzy
 msgid "Video track %1"
-msgstr "Vaizdo takelis"
+msgstr "Vaizdo takelis %1"
 
 #: src/common/file_types.cpp:99
 #: src/output/p_vobbtn.h:36
 msgid "VobBtn"
-msgstr ""
+msgstr "VobMyg"
 
 #: src/common/file_types.cpp:56
 msgid "VobButtons"
-msgstr ""
+msgstr "VobMygtukai"
 
 #: src/common/file_types.cpp:100
 #: src/output/p_vobsub.h:31
@@ -10025,7 +10056,7 @@ msgstr "VobSub"
 
 #: src/common/file_types.cpp:57
 msgid "VobSub subtitles"
-msgstr ""
+msgstr "VobSub subtitrai"
 
 #: src/output/p_vorbis.h:60
 msgid "Vorbis"
@@ -10037,7 +10068,7 @@ msgstr "WAV"
 
 #: src/common/file_types.cpp:58
 msgid "WAVE (uncompressed PCM audio)"
-msgstr ""
+msgstr "WAVE (nesuspaustas PCM garsas)"
 
 #: src/common/file_types.cpp:102
 msgid "WAVPACK"
@@ -10076,14 +10107,12 @@ msgid "Warning:"
 msgstr "Įspėjimas:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1196
-#, fuzzy
 msgid "Warnings"
-msgstr "Įspėjimai:"
+msgstr "Įspėjimai"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:60
-#, fuzzy
 msgid "Warnings/Errors"
-msgstr "Įspėjimai:"
+msgstr "Įspėjimai/Klaidos"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:295
 msgid "Warnings:"
@@ -10095,9 +10124,8 @@ msgstr "WebM garso/vaizdo rinkmenos"
 
 #: src/info/qt_ui.cpp:88
 #: src/mkvtoolnix-gui/merge/output.cpp:261
-#, fuzzy
 msgid "WebM files"
-msgstr "WebM garso/vaizdo rinkmenos"
+msgstr "WebM rinkmenos"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:118
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:154
@@ -10169,11 +10197,11 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:121
 msgid "Windows (cmd.exe)"
-msgstr ""
+msgstr "Windows (cmd.exe)"
 
 #: src/common/file_types.cpp:69
 msgid "Windows Media (ASF/WMV)"
-msgstr ""
+msgstr "Windows Media (ASF/WMV)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:251
 msgid "With \"create new settings\" a new set of merge settings will be added."
@@ -10402,12 +10430,11 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:477
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:491
 msgid "ask the user"
-msgstr ""
+msgstr "klausti naudotojo"
 
 #: src/mkvtoolnix-gui/merge/track.cpp:395
-#, fuzzy
 msgid "attachment"
-msgstr "Nauji priedai"
+msgstr "priskyrimas"
 
 #: src/info/mkvinfo.cpp:940
 #: src/input/r_matroska.cpp:105
@@ -10416,14 +10443,13 @@ msgid "audio"
 msgstr "garsas"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:144
-#, fuzzy
 msgid "before chapters"
-msgstr "skaidyti prieš skyrius"
+msgstr "prieš skyrius"
 
 #: src/info/mkvinfo.cpp:567
 #, boost-format
 msgid "bits per sample: %1%"
-msgstr ""
+msgstr "bitai vienai atrinkčiai: %1%"
 
 #: src/common/stereo_mode.cpp:62
 msgid "both eyes laced in one block (left first)"
