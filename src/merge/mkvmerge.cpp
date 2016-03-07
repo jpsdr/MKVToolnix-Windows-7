@@ -889,7 +889,7 @@ parse_arg_split_chapters(std::string const &arg) {
     if (number.first > current_number)
       mxerror(boost::format(Y("Invalid chapter number '%1%' for '--split' in '--split %2%': %3%\n"))
               % number.first % arg
-              % (boost::format(Y("Only %1% chapters found in source files & chapter files.")) % current_number));
+              % (boost::format(NY("Only %1% chapter found in source files & chapter files.", "Only %1% chapters found in source files & chapter files.", current_number)) % current_number));
 
   brng::sort(new_split_points);
 

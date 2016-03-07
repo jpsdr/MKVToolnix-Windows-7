@@ -97,7 +97,7 @@ TrackModel::createRow(Track *track) {
 void
 TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                               Track *track) {
-  items[0]->setText(track->isChapters() || track->isGlobalTags() || track->isTags() ? QY("%1 entries").arg(track->m_size) : track->m_codec);
+  items[0]->setText(track->isChapters() || track->isGlobalTags() || track->isTags() ? QNY("%1 entry", "%1 entries", track->m_size).arg(track->m_size) : track->m_codec);
   items[1]->setText(track->nameForType());
   items[2]->setText(track->m_muxThis ? QY("yes") : QY("no"));
   items[3]->setText(track->isAppended() ? QString{} : track->m_language);
@@ -262,7 +262,7 @@ TrackModel::dumpTracks(QString const &label)
   auto dumpIt = [](std::string const &prefix, Track const *track) {
     log_it(boost::format("%1%%2% : %3% : %4% : %5% : %6% : %7%:\n")
            % prefix
-           % (track->isChapters() || track->isGlobalTags() || track->isTags() ? QY("%1 entries").arg(track->m_size) : track->m_codec)
+           % (track->isChapters() || track->isGlobalTags() || track->isTags() ? QNY("%1 entry", "%1 entries", track->m_size).arg(track->m_size) : track->m_codec)
            % track->nameForType()
            % (track->m_muxThis ? QY("yes") : QY("no"))
            % track->m_language
