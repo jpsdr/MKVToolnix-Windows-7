@@ -24,7 +24,6 @@ private:
   boost::optional<unsigned int> m_force_rerender_track_headers_on_packetno;
   charset_converter_cptr m_cc_utf8;
   std::string m_codec_id;
-  bool m_recode;
 
 public:
   textsubs_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, const char *codec_id, bool recode, bool is_utf8);

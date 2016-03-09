@@ -1,3 +1,9 @@
+2016-03-09  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: the --sub-charset option is now ignored for
+        text subtitle files that start with a byte-order mark (BOM)
+        bringing the behavior in line with the documentation. Fixes #1620.
+
 2016-03-07  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvextract: new feature: implemented the extraction of Big
