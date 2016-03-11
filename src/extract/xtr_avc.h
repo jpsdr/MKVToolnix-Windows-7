@@ -17,6 +17,8 @@
 
 #include "extract/xtr_base.h"
 
+using nal_unit_list_t = std::vector< std::pair<memory_cptr, unsigned char> >;
+
 class xtr_avc_c: public xtr_base_c {
 protected:
   int m_nal_size_size;
@@ -33,6 +35,8 @@ public:
   virtual const char *get_container_name() override {
     return "AVC/h.264 elementary stream";
   };
+
+  virtual nal_unit_list_t find_nal_units(binary *buf, std::size_t frame_size) const;
 };
 
 #endif

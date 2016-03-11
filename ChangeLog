@@ -1,5 +1,8 @@
 2016-03-11  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvextract: bug fix: fixed the duplication of VPS, SPS, PPS and
+        SEI NALUs when extracting h.265/HEVC tracks. See #1076 and #1621.
+
         * mkvmerge: bug fix: reverted the patch by Vladimír Pilný that
         made the h.265/HEVC not store SEI NALUs with the frames during
         muxing. It was supposed to prevent having the SEI NALUs present

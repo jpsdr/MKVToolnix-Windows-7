@@ -13,6 +13,7 @@
 #include "common/common_pch.h"
 
 #include "common/ebml.h"
+#include "common/endian.h"
 #include "extract/xtr_avc.h"
 
 binary const xtr_avc_c::ms_start_code[4] = { 0x00, 0x00, 0x00, 0x01 };
@@ -82,6 +83,25 @@ xtr_avc_c::create_file(xtr_base_c *master,
 
   for (i = 0; (i < numpps) && (mpriv->get_size() > pos); ++i)
     write_nal(buf, pos, mpriv->get_size(), 2);
+}
+
+nal_unit_list_t
+xtr_avc_c::find_nal_units(binary *buf,
+                          std::size_t frame_size)
+  const {
+  auto list = nal_unit_list_t{};
+  auto pos = 0u;
+
+  while (frame_size >= (pos + m_nal_size_size + 1)) {
+    auto nal_size              = get_uint_be(&buf[pos], m_nal_size_size);
+    auto actual_nal_unit_type  = (buf[pos + m_nal_size_size] >> 1) & 0x3f;
+
+    list.emplace_back(std::make_shared<memory_c>(&buf[pos], m_nal_size_size + nal_size, false), actual_nal_unit_type);
+
+    pos += m_nal_size_size + nal_size;
+  }
+
+  return list;
 }
 
 void
