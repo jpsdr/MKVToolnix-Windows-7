@@ -1,3 +1,12 @@
+2016-03-11  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: reverted the patch by Vladimír Pilný that
+        made the h.265/HEVC not store SEI NALUs with the frames during
+        muxing. It was supposed to prevent having the SEI NALUs present
+        twice when extracting HEVC due to some SEI information also being
+        stored in the codec private data, but it dropped a lot of other
+        SEI NALUs irrevocably. Fixes #1621.
+
 2016-03-09  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: the --sub-charset option is now ignored for
