@@ -24,13 +24,12 @@ protected:
 public:
   xtr_hevc_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec) : xtr_avc_c(codec_id, tid, tspec) { }
 
-  virtual const char *get_container_name() {
+  virtual const char *get_container_name() override {
     return "HEVC/h.265 elementary stream";
   };
 
-  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track);
-
-  virtual bool write_nal(const binary *data, size_t &pos, size_t data_size, size_t write_nal_size_size);
+  virtual void create_file(xtr_base_c *master, KaxTrackEntry &track) override;
+  virtual void handle_frame(xtr_frame_t &f) override;
 
 };
 
