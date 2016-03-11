@@ -9,9 +9,6 @@
 
 */
 
-#ifndef MTX_XTR_HEVC_CPP
-#define MTX_XTR_HEVC_CPP
-
 #include "common/endian.h"
 #include "common/hevc.h"
 #include "extract/xtr_hevc.h"
@@ -78,4 +75,3 @@ xtr_hevc_c::write_nal(binary const *data,
   return true;
 }
 
-#endif
