@@ -85,7 +85,7 @@ xtr_hevc_c::write_nal(binary const *data,
   }
 
   auto nal_unit_type   = (data[pos] >> 1) & 0x3f;
-  auto start_code_size = m_first_nalu || (HEVC_NALU_TYPE_VIDEO_PARAM == nal_unit_type) || (HEVC_NALU_TYPE_SEQ_PARAM == nal_unit_type) || (HEVC_NALU_TYPE_PIC_PARAM == nal_unit_type) ? 4 : 3;
+  auto start_code_size = m_first_nalu || mtx::included_in(nal_unit_type, HEVC_NALU_TYPE_VIDEO_PARAM, HEVC_NALU_TYPE_SEQ_PARAM, HEVC_NALU_TYPE_PIC_PARAM) ? 4 : 3;
   m_first_nalu         = false;
 
   m_out->write(ms_start_code + (4 - start_code_size), start_code_size);
