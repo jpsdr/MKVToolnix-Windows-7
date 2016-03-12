@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-03-07 19:03+0100\n"
-"PO-Revision-Date: 2016-03-07 23:23+0000\n"
+"PO-Revision-Date: 2016-03-12 11:22+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -218,7 +218,7 @@ msgid ""
 "                           None at all, only for I frames, for all.\n"
 msgstr ""
 "  --cues <TID:none|iframes|all>\n"
-"                           Crée les métadonnées (index) pour cette piste :\n"
+"                           Crée les entrées (index) CUE pour cette piste :\n"
 "                           aucune, pour les trames I seules, pour toutes.\n"
 
 #: src/merge/mkvmerge.cpp:291
@@ -369,7 +369,7 @@ msgstr "  --no-chapters            Ne conserve pas les chapitres du fichier sour
 
 #: src/merge/mkvmerge.cpp:119
 msgid "  --no-cues                Do not write the cue data (the index).\n"
-msgstr "  --no-cues                N'écrit pas les métadonnées (l'index).\n"
+msgstr "  --no-cues                N'écrit pas les données (l'index) CUE.\n"
 
 #: src/merge/mkvmerge.cpp:206
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
@@ -2514,7 +2514,7 @@ msgstr "Autorise l'utilisation de l'élément d'état du codec."
 
 #: src/extract/extract_cli_parser.cpp:69
 msgid "Also try to extract the CUE sheet from the chapter information and tags for this track."
-msgstr "Essayer également d'extraire la feuille de métadonnées CUE des informations de chapitrage et des étiquettes pour cette piste."
+msgstr "Essayer également d'extraire la feuille de montage CUE des informations de chapitrage et des étiquettes pour cette piste."
 
 #: src/input/r_wavpack.cpp:89
 #, boost-format
@@ -2916,7 +2916,7 @@ msgstr "C&réer un fichier d'options…"
 
 #: src/extract/extract_cli_parser.cpp:105
 msgid "CUE sheet extraction"
-msgstr "Extraction de la feuille de métadonnées CUE"
+msgstr "Extraction de la feuille de montage CUE"
 
 #: src/info/info_cli_parser.cpp:41
 msgid "Calculate and display checksums and use verbosity level 4."
@@ -2983,11 +2983,11 @@ msgstr "Une exception a été interceptée."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
 msgid "Causes mkvmerge not to write 'CueDuration' elements in the cues."
-msgstr "Conduit mkvmerge à ne pas écrire les éléments « CueDuration » dans les métadonnées."
+msgstr "Conduit mkvmerge à ne pas écrire les éléments « CueDuration » dans les données CUE."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:73
 msgid "Causes mkvmerge not to write 'CueRelativePosition' elements in the cues."
-msgstr "Conduit mkvmerge à ne pas écrire les éléments « CueRelativePosition » dans les métadonnées."
+msgstr "Conduit mkvmerge à ne pas écrire les éléments « CueRelativePosition » dans les données CUE."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:71
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
@@ -3504,96 +3504,96 @@ msgstr "Ctrl+W"
 #: src/info/mkvinfo.cpp:1043
 #, boost-format
 msgid "Cue block number: %1%"
-msgstr "Numéro de bloc des métadonnées : %1%"
+msgstr "Numéro de bloc CUE : %1%"
 
 #: src/info/mkvinfo.cpp:1034
 #, boost-format
 msgid "Cue cluster position: %1%"
-msgstr "Position de la grappe des métadonnées : %1%"
+msgstr "Position de la grappe CUE : %1%"
 
 #: src/info/mkvinfo.cpp:1047
 #, boost-format
 msgid "Cue codec state: %1%"
-msgstr "État du codec des métadonnées : %1%"
+msgstr "État du codec CUE : %1%"
 
 #: src/info/mkvinfo.cpp:1040
 #, boost-format
 msgid "Cue duration: %1%"
-msgstr "Durée des métadonnées : %1%"
+msgstr "Durée CUE : %1%"
 
 #: src/extract/extract_cli_parser.cpp:122
 msgid "Cue extraction"
-msgstr "Extraction des métadonnées"
+msgstr "Extraction CUE"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1673
 msgid "Cue name format:"
-msgstr "Format de nom des métadonnées :"
+msgstr "Format de nom CUE :"
 
 #: src/info/mkvinfo.cpp:1020
 msgid "Cue point"
-msgstr "Repère des métadonnées"
+msgstr "Repère CUE"
 
 #: src/info/mkvinfo.cpp:1057
 #, boost-format
 msgid "Cue ref cluster: %1%"
-msgstr "Grappe de référence des métadonnées : %1%"
+msgstr "Grappe de référence CUE : %1%"
 
 #: src/info/mkvinfo.cpp:1063
 #, boost-format
 msgid "Cue ref codec state: %1%"
-msgstr "État du codec de référence des métadonnées : %1%"
+msgstr "État du codec de référence CUE : %1%"
 
 #: src/info/mkvinfo.cpp:1060
 #, boost-format
 msgid "Cue ref number: %1%"
-msgstr "Numéro de référence des métadonnées : %1%"
+msgstr "Numéro de référence CUE : %1%"
 
 #: src/info/mkvinfo.cpp:1054
 #, boost-format
 msgid "Cue ref time: %|1$.3f|s"
-msgstr "Temps de référence des métadonnées : %|1$.3f| s"
+msgstr "Temps de référence CUE : %|1$.3f| s"
 
 #: src/info/mkvinfo.cpp:1050
 msgid "Cue reference"
-msgstr "Référence des métadonnées"
+msgstr "Référence CUE"
 
 #: src/info/mkvinfo.cpp:1037
 #, boost-format
 msgid "Cue relative position: %1%"
-msgstr "Position relative des métadonnées : %1%"
+msgstr "Position relative CUE : %1%"
 
 #: src/common/chapters/cue_parser.cpp:392
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX entry in line %1%.\n"
-msgstr "Analyseur de feuille de métadonnées CUE : entrée INDEX incorrecte à la ligne %1%.\n"
+msgstr "Analyseur de feuille de montage CUE : entrée INDEX incorrecte à la ligne %1%.\n"
 
 #: src/common/chapters/cue_parser.cpp:411
 #, boost-format
 msgid "Cue sheet parser: Invalid INDEX number (got %1%, expected %2%) in line %3%.\n"
-msgstr "Analyseur de feuille de métadonnées CUE : numéro INDEX incorrect (%1% obtenu, %2% attendu) à la ligne %3%,\n"
+msgstr "Analyseur de feuille de montage CUE : numéro INDEX incorrect (%1% obtenu, %2% attendu) à la ligne %3%,\n"
 
 #: src/common/chapters/cue_parser.cpp:273
 #, boost-format
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n"
-msgstr "Analyseur de feuille de métadonnées  : aucune entrée INDEX trouvée pour l'entrée TRACK précédente (ligne actuelle : %1%)\n"
+msgstr "Analyseur de feuille de montage CUE : aucune entrée INDEX trouvée pour l'entrée TRACK précédente (ligne actuelle : %1%)\n"
 
 #: src/info/mkvinfo.cpp:1024
 #, boost-format
 msgid "Cue time: %|1$.3f|s"
-msgstr "Temps des métadonnées : %|1$.3f| s"
+msgstr "Temps CUE : %|1$.3f| s"
 
 #: src/info/mkvinfo.cpp:1027
 msgid "Cue track positions"
-msgstr "Position des pistes des métadonnées"
+msgstr "Positions de pistes CUE"
 
 #: src/info/mkvinfo.cpp:1031
 #, boost-format
 msgid "Cue track: %1%"
-msgstr "Piste des métadonnées : %1%"
+msgstr "Piste CUE : %1%"
 
 #: src/info/mkvinfo.cpp:1007
 msgid "Cues (subentries will be skipped)"
-msgstr "Métadonnées (les sous-entrées seront ignorées)"
+msgstr "Données CUE (les sous-entrées seront ignorées)"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:117
 msgid "Current command line"
@@ -4929,7 +4929,7 @@ msgstr "Augmenter la verbosité."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1637
 msgid "Indexing (cues):"
-msgstr "Indexage (métadonnées) :"
+msgstr "Indexage (données CUE) :"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -5052,12 +5052,12 @@ msgstr "Si défini sur Option de compression incorrecte. Aucun identifiant de pi
 #: src/merge/mkvmerge.cpp:1089
 #, boost-format
 msgid "Invalid cues option specified in '--cues %1%'.\n"
-msgstr "Option de métadonnées incorrecte spécifiée dans « --cues %1% ».\n"
+msgstr "Option de données CUE incorrecte spécifiée dans « --cues %1% ».\n"
 
 #: src/merge/mkvmerge.cpp:1082
 #, boost-format
 msgid "Invalid cues option. No track ID specified in '--cues %1%'.\n"
-msgstr "Option de métadonnées incorrecte. Aucun identifiant de piste spécifié dans « --cues %1% ».\n"
+msgstr "Option de données CUE incorrecte. Aucun identifiant de piste spécifié dans « --cues %1% ».\n"
 
 #: src/common/xml/ebml_converter.cpp:281
 msgid "Invalid data for Base64 encoding found."
@@ -5631,7 +5631,7 @@ msgstr "Fichiers Matroska"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:38
 msgid "Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."
-msgstr "Les fichiers Matroska peuvent être lus sans les métadonnées, mais une recherche y sera probablement plus lente et imprécise."
+msgstr "Les fichiers Matroska peuvent être lus sans les données CUE, mais une recherche y sera probablement plus lente et imprécise."
 
 #: src/info/mkvinfo.cpp:921
 #, boost-format
@@ -5940,7 +5940,7 @@ msgstr "Aucun chapitre dans les fichiers sources ou les fichiers de chapitrage t
 
 #: src/extract/cues.cpp:116
 msgid "No cues were found.\n"
-msgstr "Aucune métadonnée n'a été trouvée.\n"
+msgstr "Aucune donnée CUE n'a été trouvée.\n"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:195
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:181
@@ -7264,7 +7264,7 @@ msgstr "Sélection :"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:487
 msgid "Selects for which blocks mkvmerge will produce index entries ( = cue entries)."
-msgstr "Sélectionne les blocs pour lesquels mkvmerge produira des entrées d'index (= entrées de métadonnées)."
+msgstr "Sélectionne les blocs pour lesquels mkvmerge produira des entrées d'index (= entrées de données CUE)."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:481
 msgid "Selects the character set a subtitle file or chapter information was written with."
@@ -7748,7 +7748,7 @@ msgstr "Étiquettes :"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
 msgid "Tells mkvmerge not to create and write the cue data which can be compared to an index in an AVI."
-msgstr "Demande à mkvmerge de ne pas créer et écrire les métadonnées qui ne peuvent pas être comparées à un index dans un AVI."
+msgstr "Demande à mkvmerge de ne pas créer et écrire les données CUE qui ne peuvent pas être comparées à un index dans un AVI."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 msgid "Tells mkvmerge not to write tags with statistics for each track."
@@ -7784,7 +7784,7 @@ msgstr "La piste vidéo AVC ne comprend pas l'atome « CTTS » pour les décalag
 #: src/extract/tracks.cpp:295
 #, boost-format
 msgid "The CUE sheet for track %1% will be written to '%2%'.\n"
-msgstr "La feuille de métadonnées CUE pour la piste %1% sera écrite dans le fichier « %2% ».\n"
+msgstr "La feuille de montage CUE pour la piste %1% sera écrite dans le fichier « %2% ».\n"
 
 #: src/merge/connection_checks.h:54
 msgid "The CodecID of the two tracks is different: %1% and %2%"
@@ -8050,12 +8050,12 @@ msgstr "Les pays sélectionnés ici figureront en haut des listes déroulantes d
 
 #: src/merge/output_control.cpp:1509
 msgid "The cue entries (the index) are being written...\n"
-msgstr "Les entrées de métadonnées sont en cours d'écriture…\n"
+msgstr "Les entrées CUE (l'index) sont en cours d'écriture…\n"
 
 #: src/extract/cues.cpp:58
 #, boost-format
 msgid "The cues for track %1% are written to '%2%'.\n"
-msgstr "Les métadonnées pour la piste %1% sont écrits dans « %2% ».\n"
+msgstr "Les données CUE pour la piste %1% sont écrites dans « %2% ».\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:252
 msgid "The current merge settings will be closed."
@@ -8155,7 +8155,7 @@ msgstr "La largeur et la hauteur vidéo extraites du flux de données vidéo MPE
 
 #: src/extract/extract_cli_parser.cpp:107
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a CUE sheet. This is the reverse of using a CUE sheet with mkvmerge's '--chapters' option."
-msgstr "Le cinquième mode tente d'extraire les informations de chapitrage et les étiquettes, et de les convertir en feuille de métadonnées CUE. C'est l'opposé de l'utilisation d'une feuille de métadonnées CUE avec l'option mkvmerge « --chapters »."
+msgstr "Le cinquième mode tente d'extraire les informations de chapitrage et les étiquettes, et de les convertir en feuille de montage CUE. C'est l'opposé de l'utilisation d'une feuille de montage CUE avec l'option mkvmerge « --chapters »."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:246
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:203
@@ -9009,7 +9009,7 @@ msgstr "Theora"
 #: src/extract/cues.cpp:53
 #, boost-format
 msgid "There are no cues for track ID %1%.\n"
-msgstr "Il n'y a aucune métadonnée pour la piste d'identifiant %1%.\n"
+msgstr "Il n'y a aucune donnée CUE pour la piste d'identifiant %1%.\n"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:66
 msgid "There is a new version available online."
@@ -9197,7 +9197,7 @@ msgstr "Ce mode applique plusieurs restrictions."
 
 #: src/extract/extract_cli_parser.cpp:123
 msgid "This mode extracts cue information for some tracks to external text files."
-msgstr "Ce mode extrait les informations des métadonnées pour certaines pistes vers des fichiers textes externes."
+msgstr "Ce mode extrait les informations CUE pour certaines pistes vers des fichiers texte externes."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:402
 msgid "This mode only considers the top-most level of chapters across all edition entries."
@@ -10844,7 +10844,7 @@ msgstr "mkvmerge peut générer des chapitres automatiquement."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:189
 msgid "mkvmerge can read CUE sheets for audio CDs and automatically convert them to chapters."
-msgstr "mkvmerge peut lire les feuilles de métadonnées CUE pour CD audio et les convertir automatiquement en chapitres."
+msgstr "mkvmerge peut lire les feuilles de montage CUE pour CD audio et les convertir automatiquement en chapitres."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:115
 msgid "mkvmerge command line"
@@ -10960,7 +10960,7 @@ msgstr "Non"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1278
 msgid "no cues"
-msgstr "Aucune métadonnée"
+msgstr "Aucune donnée CUE"
 
 #: src/info/mkvinfo.cpp:730
 msgid "no encryption"
