@@ -38,7 +38,7 @@ struct flac_block_t {
 class flac_reader_c: public generic_reader_c, public mtx::flac::decoder_c {
 private:
   memory_cptr m_header;
-  int sample_rate{}, channels{};
+  int sample_rate{}, channels{}, bits_per_sample{};
   bool metadata_parsed{};
   uint64_t samples{};
   std::vector<flac_block_t> blocks;

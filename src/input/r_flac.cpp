@@ -215,6 +215,7 @@ flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
       memcpy(&stream_info, &metadata->data.stream_info, sizeof(FLAC__StreamMetadata_StreamInfo));
       sample_rate     = metadata->data.stream_info.sample_rate;
       channels        = metadata->data.stream_info.channels;
+      bits_per_sample = metadata->data.stream_info.bits_per_sample;
       metadata_parsed = true;
 
       mxverb(2, boost::format("flac_reader: STREAMINFO block (%1% bytes):\n") % metadata->length);
@@ -270,6 +271,7 @@ flac_reader_c::flac_eof_cb() {
 void
 flac_reader_c::identify() {
   auto info = mtx::id::info_c{};
+  info.add(mtx::id::audio_bits_per_sample,    bits_per_sample);
   info.add(mtx::id::audio_channels,           channels);
   info.add(mtx::id::audio_sampling_frequency, sample_rate);
 
