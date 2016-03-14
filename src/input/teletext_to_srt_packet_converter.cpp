@@ -220,7 +220,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet(packet_cptr const &packet
 
   if ((0x03 != data_unit_id) || (0xe4 != start_byte)) {
     if ((0xff != data_unit_id) && (0x02 != data_unit_id))
-      mxdebug_if(m_debug, boost::format("m_pos %1% data_unit_id 0x%|2$02x| start_byte 0x%|3$02x|\n") % m_pos % static_cast<unsigned int>(data_unit_id) % static_cast<unsigned int>(start_byte));
+      mxdebug_if(m_debug, boost::format("unsupported data_unit_id/start_byte; m_pos %1% data_unit_id 0x%|2$02x| start_byte 0x%|3$02x|\n") % m_pos % static_cast<unsigned int>(data_unit_id) % static_cast<unsigned int>(start_byte));
 
     return;
   }
@@ -236,7 +236,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet(packet_cptr const &packet
   if (!ttx_header_magazine)
     ttx_header_magazine = 8;
 
-  mxdebug_if(m_debug, boost::format("m_pos %1% packet_id %2%\n") % m_pos % static_cast<unsigned int>(row_number));
+  mxdebug_if(m_debug, boost::format(" m_pos %1% packet_id/row_number %2%\n") % m_pos % static_cast<unsigned int>(row_number));
 
   if (!row_number) {
     unsigned char ttx_packet_0_header[4];
@@ -308,7 +308,7 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
   m_buf      = packet->data->get_buffer();
   m_pos      = 1;                // skip sub ID
 
-  // m_ttx_page_data.reset();
+  mxdebug_if(m_debug, boost::format("Starting conversion on packet with length %1% timestamp %2%\n") % m_in_size % format_timestamp(packet->timecode));
 
   //
   // PES teletext payload (payload_index) packet length = 44 + 2 = 46
@@ -339,8 +339,6 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
 
   if ((-1 == m_previous_timecode) && (-1 != packet->timecode) && !page_to_string().empty())
     m_previous_timecode = packet->timecode;
-
-  // mxdebug_if(m_debug, boost::format("At end of PES packet. Page content at timecode %2% (prev %3%): %1%\n") % page_to_string() % format_timestamp(packet->timecode) % format_timestamp(m_timecode));
 
   return true;
 }
