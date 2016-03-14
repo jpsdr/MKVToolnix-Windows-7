@@ -35,8 +35,6 @@ protected slots:
 
 protected:
   void setupUi();
-
-  static QTreeWidgetItem *createPlaylistItemItem(QFileInfo const &fileInfo);
 };
 
 }}}

@@ -109,6 +109,51 @@ TrackItem::create(Track const &track) {
 
 // ------------------------------------------------------------
 
+class PlaylistItem: public QTreeWidgetItem {
+public:
+  unsigned int m_order{};
+  QString const m_fileName, m_path;
+
+public:
+  PlaylistItem(unsigned int order, QFileInfo const &fileInfo);
+  virtual bool operator <(QTreeWidgetItem const &cmp) const;
+
+public:
+  static PlaylistItem *create(unsigned int order, QFileInfo const &fileInfo);
+};
+
+PlaylistItem::PlaylistItem(unsigned int order,
+                           QFileInfo const &fileInfo)
+  : QTreeWidgetItem{ QStringList{} << QString::number(order) << fileInfo.fileName() << fileInfo.path() }
+  , m_order{order}
+  , m_fileName{fileInfo.fileName()}
+  , m_path{fileInfo.path()}
+{
+}
+
+bool
+PlaylistItem::operator <(QTreeWidgetItem const &cmp)
+  const {
+  auto otherItem = static_cast<PlaylistItem const &>(cmp);
+  auto column    = treeWidget()->sortColumn();
+
+  return 0 == column ? m_order    < otherItem.m_order
+       : 1 == column ? m_fileName < otherItem.m_fileName
+       :               m_path     < otherItem.m_path;
+}
+
+PlaylistItem *
+PlaylistItem::create(unsigned int order,
+                     QFileInfo const &fileInfo) {
+  auto item = new PlaylistItem{order, fileInfo};
+
+  item->setTextAlignment(0, Qt::AlignRight | Qt::AlignVCenter);
+
+  return item;
+}
+
+// ------------------------------------------------------------
+
 SelectPlaylistDialog::SelectPlaylistDialog(QWidget *parent,
                                            QList<SourceFilePtr> const &scannedFiles)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
@@ -180,8 +225,9 @@ SelectPlaylistDialog::onScannedFileSelected(QTreeWidgetItem *current,
   ui->tracks->insertTopLevelItems(0, newItems);
 
   newItems.clear();
+  unsigned int order{};
   for (auto const &playlistFile : file.m_playlistFiles)
-    newItems << createPlaylistItemItem(playlistFile);
+    newItems << PlaylistItem::create(++order, playlistFile);
 
   ui->playlistItems->insertTopLevelItems(0, newItems);
 
@@ -193,16 +239,6 @@ SelectPlaylistDialog::onScannedFileSelected(QTreeWidgetItem *current,
 
   Util::resizeViewColumnsToContents(ui->tracks);
   Util::resizeViewColumnsToContents(ui->playlistItems);
-}
-
-QTreeWidgetItem *
-SelectPlaylistDialog::createPlaylistItemItem(QFileInfo const &fileInfo) {
-  auto item = new QTreeWidgetItem{ QStringList{
-      fileInfo.fileName(),
-      fileInfo.path(),
-    }};
-
-  return item;
 }
 
 SourceFilePtr
