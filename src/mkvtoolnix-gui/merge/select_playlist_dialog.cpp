@@ -151,6 +151,7 @@ SelectPlaylistDialog::setupUi() {
   connect(ui->buttonBox,    &QDialogButtonBox::accepted,      this, &SelectPlaylistDialog::accept);
   connect(ui->buttonBox,    &QDialogButtonBox::rejected,      this, &SelectPlaylistDialog::reject);
   connect(ui->scannedFiles, &QTreeWidget::currentItemChanged, this, &SelectPlaylistDialog::onScannedFileSelected);
+  connect(ui->scannedFiles, &QTreeWidget::itemDoubleClicked,  this, &SelectPlaylistDialog::accept);
 }
 
 void
