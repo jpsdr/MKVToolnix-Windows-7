@@ -1,12 +1,12 @@
 # translation of mkvtoolnix.pot to German
-# Copyright (C) 2008-2014 Moritz Bunkus <moritz@bunkus.org>
+# Copyright (C) 2008-2016 Moritz Bunkus <moritz@bunkus.org>
 # Copyright (C) 2013 Chris Leick <c.leick@vollbio.de>
 # This file is distributed under the same license as the mkvtoolnix package.
 msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 19:03+0100\n"
+"POT-Creation-Date: 2016-03-14 13:17+0100\n"
 "PO-Revision-Date: 2016-03-07 19:20+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
@@ -1125,7 +1125,7 @@ msgstr "Ü&ber mkvinfo"
 msgid "&Acknowledge warnings and errors"
 msgstr "Warnungen und Fehler &bestätigen"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:191
 msgid "&Add"
 msgstr "&Hinzufügen"
 
@@ -4913,7 +4913,7 @@ msgstr "Falls Sie hier nichts eintragen, gibt es für die Anzahl Dateien, die mk
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr "Falls Sie sie anhängen oder als zusätzliche Teile hinzufügen wollen, müssen Sie auswählen, an welche Datei sie angehängt bzw. welcher sie hinzugefügt werden sollen:"
 
-#: src/output/p_textsubs.cpp:84
+#: src/output/p_textsubs.cpp:83
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr "Ein Eintrag, dessen Endzeitstempel vor dem Startzeitstempel liegt, wird ignoriert (%1%).\n"
@@ -6328,6 +6328,10 @@ msgstr "Opus"
 #: src/common/file_types.cpp:49
 msgid "Opus (in Ogg) audio files"
 msgstr "Opus-Audiodateien (in Ogg)"
+
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
+msgid "Order"
+msgstr "Reihenfolge"
 
 #: src/info/mkvinfo.cpp:676
 #, boost-format
@@ -9360,8 +9364,8 @@ msgstr "Titel: %1%"
 msgid "Trac&k name:"
 msgstr "Spur&name:"
 
-#: src/extract/xtr_avc.cpp:66
-#: src/extract/xtr_hevc.cpp:30
+#: src/extract/xtr_avc.cpp:67
+#: src/extract/xtr_hevc.cpp:28
 #, boost-format
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "Spur %1% CodecPrivate ist zu klein.\n"
@@ -9403,9 +9407,9 @@ msgstr "Der Spur %1% mit der CodecID »%2%« fehlt das Element »Bits pro Sekund
 
 #: src/extract/xtr_aac.cpp:42
 #: src/extract/xtr_alac.cpp:47
-#: src/extract/xtr_avc.cpp:61
+#: src/extract/xtr_avc.cpp:62
 #: src/extract/xtr_avi.cpp:40
-#: src/extract/xtr_hevc.cpp:26
+#: src/extract/xtr_hevc.cpp:24
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
@@ -9437,8 +9441,8 @@ msgstr "Spur %1%: AAC-Audiospur gefunden, aber die privaten Codec-Konfigurations
 msgid "Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n"
 msgstr "Spur %1%: Ein USF-Untertiteleintrag, der an Zeitstempel %2% anfängt, enthält ungültig formatiertes XML und wird ausgelassen.\n"
 
-#: src/extract/xtr_avc.cpp:42
-#: src/extract/xtr_hevc.cpp:65
+#: src/extract/xtr_avc.cpp:43
+#: src/extract/xtr_hevc.cpp:83
 #, boost-format
 msgid "Track %1%: NAL too big. Size according to header field: %2%, available bytes in packet: %3%. This NAL is defect and will be skipped.\n"
 msgstr "Spur %1%: NAL zu groß. Größe laut Kopffeld: %2%, verfügbare Byte im Paket: %3%. Diese NAL ist defekt und wird übersprungen.\n"
@@ -10493,7 +10497,7 @@ msgstr "flac_reader: Ein Kopfpaket konnte nicht gelesen werden.\n"
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: Es konnten nicht alle Kopfpakete gelesen werden.\n"
 
-#: src/input/r_flac.cpp:242
+#: src/input/r_flac.cpp:243
 #, boost-format
 msgid "flac_reader: Error parsing the file: %1%\n"
 msgstr "flac_reader: Fehler beim Auswerten der Datei: %1%\n"
@@ -11184,7 +11188,7 @@ msgstr "Untertitel"
 msgid "tags"
 msgstr "Tags"
 
-#: src/output/p_textsubs.h:37
+#: src/output/p_textsubs.h:36
 msgid "text subtitles"
 msgstr "Textuntertitel"
 
@@ -11315,4 +11319,3 @@ msgstr "– leer setzen –"
 
 #~ msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
 #~ msgstr "Sie müssen mindestens eine Quelldatei hinzufügen, bevor Sie mit dem Mergen anfangen oder einen Job zur Warteschlange hinzufügen können."
-

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 19:03+0100\n"
+"POT-Creation-Date: 2016-03-14 13:17+0100\n"
 "PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -1150,7 +1150,7 @@ msgstr "&О програму"
 msgid "&Acknowledge warnings and errors"
 msgstr "Примљена упозорења и грешке"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:191
 msgid "&Add"
 msgstr "&Додај"
 
@@ -5032,7 +5032,7 @@ msgstr "Уколико је ово поље празно, неће се огра
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr "Да бисте их придружили или додали као прилепке, одаберите којој улазној датотеци желите да их придружите или прилепите:"
 
-#: src/output/p_textsubs.cpp:84
+#: src/output/p_textsubs.cpp:83
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr "Занемарујем унос чији је почетак после њ. краја (%1%).\n"
@@ -6463,6 +6463,11 @@ msgstr "Опус"
 #: src/common/file_types.cpp:49
 msgid "Opus (in Ogg) audio files"
 msgstr "Опус зв. датотеке (Огг контејнер)"
+
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
+#, fuzzy
+msgid "Order"
+msgstr "&Поређано"
 
 #: src/info/mkvinfo.cpp:676
 #, boost-format
@@ -9549,8 +9554,8 @@ msgstr "Наслов: %1%"
 msgid "Trac&k name:"
 msgstr "Назив &записа:"
 
-#: src/extract/xtr_avc.cpp:66
-#: src/extract/xtr_hevc.cpp:30
+#: src/extract/xtr_avc.cpp:67
+#: src/extract/xtr_hevc.cpp:28
 #, boost-format
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "„Кодек_приватно“ у запису %1% је премали.\n"
@@ -9592,9 +9597,9 @@ msgstr "Запис „%1%“ (Кодек-ИБ=%2%) не садржи елеме�
 
 #: src/extract/xtr_aac.cpp:42
 #: src/extract/xtr_alac.cpp:47
-#: src/extract/xtr_avc.cpp:61
+#: src/extract/xtr_avc.cpp:62
 #: src/extract/xtr_avi.cpp:40
-#: src/extract/xtr_hevc.cpp:26
+#: src/extract/xtr_hevc.cpp:24
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
@@ -9626,8 +9631,8 @@ msgstr "Запис %1%: Нађен Аак, али поставка декоде�
 msgid "Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n"
 msgstr "Запис %1%: Унос УСФ-поднаписа који почиње врем. ознаком %2% није у ваљаном ИксМЛ-облику па ћу га прескочити.\n"
 
-#: src/extract/xtr_avc.cpp:42
-#: src/extract/xtr_hevc.cpp:65
+#: src/extract/xtr_avc.cpp:43
+#: src/extract/xtr_hevc.cpp:83
 #, boost-format
 msgid "Track %1%: NAL too big. Size according to header field: %2%, available bytes in packet: %3%. This NAL is defect and will be skipped.\n"
 msgstr "Запис %1%: Превелик „НАЛ“. Величина у пољу заглавља је: %2%, доступно бајтова у пакету: %3%. Овај „НАЛ“ је оштећен па ћу га прескочити.\n"
@@ -10698,7 +10703,7 @@ msgstr "„flac_reader“: Не могу да читам пакет заглав
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "„flac_reader“: Не могу да читам све пакете заглавља.\n"
 
-#: src/input/r_flac.cpp:242
+#: src/input/r_flac.cpp:243
 #, boost-format
 msgid "flac_reader: Error parsing the file: %1%\n"
 msgstr "„flac_reader“: Дошло је до грешке при рашчлањавању датотеке: %1%\n"
@@ -11402,7 +11407,7 @@ msgstr "поднаписи"
 msgid "tags"
 msgstr "ознаке"
 
-#: src/output/p_textsubs.h:37
+#: src/output/p_textsubs.h:36
 msgid "text subtitles"
 msgstr "текст-поднаписи"
 

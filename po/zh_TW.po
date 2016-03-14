@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 19:03+0100\n"
+"POT-Creation-Date: 2016-03-14 13:17+0100\n"
 "PO-Revision-Date: 2015-12-16 10:26+0100\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -1100,7 +1100,7 @@ msgstr "關於 mkvinfo(&A)"
 msgid "&Acknowledge warnings and errors"
 msgstr "完成，有警告"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:191
 msgid "&Add"
 msgstr "加入(&A)"
 
@@ -4986,7 +4986,7 @@ msgstr "若留空白那麼 mkvmerge 建立的檔案數量不會有任何限制�
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr "若你要添加或加入作為附加部分那麼你必須選擇要加入的輸入檔案:"
 
-#: src/output/p_textsubs.cpp:84
+#: src/output/p_textsubs.cpp:83
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr "忽略起始時間在結束時間之後的項目。(%1%)\n"
@@ -6417,6 +6417,11 @@ msgstr "Opus"
 #: src/common/file_types.cpp:49
 msgid "Opus (in Ogg) audio files"
 msgstr "Opus (在 Ogg 中) 音訊檔"
+
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
+#, fuzzy
+msgid "Order"
+msgstr "排序(&O)"
 
 #: src/info/mkvinfo.cpp:676
 #, boost-format
@@ -9488,8 +9493,8 @@ msgstr "標題: %1%"
 msgid "Trac&k name:"
 msgstr "軌道名稱(&K):"
 
-#: src/extract/xtr_avc.cpp:66
-#: src/extract/xtr_hevc.cpp:30
+#: src/extract/xtr_avc.cpp:67
+#: src/extract/xtr_hevc.cpp:28
 #, boost-format
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "軌道 %1% CodecPrivate 過小。\n"
@@ -9531,9 +9536,9 @@ msgstr "軌道 %1%（CodecID 為「%2%」）缺少 \"每秒多少位元 (bps)\" 
 
 #: src/extract/xtr_aac.cpp:42
 #: src/extract/xtr_alac.cpp:47
-#: src/extract/xtr_avc.cpp:61
+#: src/extract/xtr_avc.cpp:62
 #: src/extract/xtr_avi.cpp:40
-#: src/extract/xtr_hevc.cpp:26
+#: src/extract/xtr_hevc.cpp:24
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
@@ -9565,8 +9570,8 @@ msgstr "軌道 %1%: 已發現 AAC, 但解碼器設定資料長度為 %2%。\n"
 msgid "Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n"
 msgstr "軌道 %1%: USF 字幕項目從時間碼 %2% 開始不是正常格式的 XML，因此會被略過。\n"
 
-#: src/extract/xtr_avc.cpp:42
-#: src/extract/xtr_hevc.cpp:65
+#: src/extract/xtr_avc.cpp:43
+#: src/extract/xtr_hevc.cpp:83
 #, boost-format
 msgid "Track %1%: NAL too big. Size according to header field: %2%, available bytes in packet: %3%. This NAL is defect and will be skipped.\n"
 msgstr "軌道 %1%: NAL 太大。根據檔頭字段的大小: %2%，封包可用的位元組: %3%。此 NAL 有缺陷因此會被略過。\n"
@@ -10641,7 +10646,7 @@ msgstr "flac_reader: 無法讀取表頭套件。\n"
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: 無法讀取全部表頭套件。\n"
 
-#: src/input/r_flac.cpp:242
+#: src/input/r_flac.cpp:243
 #, boost-format
 msgid "flac_reader: Error parsing the file: %1%\n"
 msgstr "flac_reader: 解析檔案發生錯誤: %1%\n"
@@ -11340,7 +11345,7 @@ msgstr "字幕"
 msgid "tags"
 msgstr "標籤"
 
-#: src/output/p_textsubs.h:37
+#: src/output/p_textsubs.h:36
 msgid "text subtitles"
 msgstr "文字字幕"
 

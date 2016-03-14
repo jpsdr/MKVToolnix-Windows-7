@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 19:03+0100\n"
+"POT-Creation-Date: 2016-03-14 13:17+0100\n"
 "PO-Revision-Date: 2016-01-19 17:07+0300\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
@@ -979,7 +979,7 @@ msgstr "О mkvinfo"
 msgid "&Acknowledge warnings and errors"
 msgstr "Подтвердить предупреждения и ошибки"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:191
 msgid "&Add"
 msgstr "&Добавить"
 
@@ -4800,7 +4800,7 @@ msgstr "Если оставить поле пустым, ограничений 
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr "Если вы хотите добавить или присоединить файлы в качестве дополнительных частей, то вы должны выбрать входной файл, к которому они будут добавлены или присоединены:"
 
-#: src/output/p_textsubs.cpp:84
+#: src/output/p_textsubs.cpp:83
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr "Игнорирую запись, начало которой лежит после ее окончания (%1%).\n"
@@ -6226,6 +6226,11 @@ msgstr "Opus"
 #: src/common/file_types.cpp:49
 msgid "Opus (in Ogg) audio files"
 msgstr "Аудиофайлы Opus (в Ogg)"
+
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
+#, fuzzy
+msgid "Order"
+msgstr "&Упорядоченный"
 
 #: src/info/mkvinfo.cpp:676
 #, boost-format
@@ -9294,8 +9299,8 @@ msgstr "Название: %1%"
 msgid "Trac&k name:"
 msgstr "Имя дорожки:"
 
-#: src/extract/xtr_avc.cpp:66
-#: src/extract/xtr_hevc.cpp:30
+#: src/extract/xtr_avc.cpp:67
+#: src/extract/xtr_hevc.cpp:28
 #, boost-format
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "CodecPrivate дорожки %1% слишком мал.\n"
@@ -9337,9 +9342,9 @@ msgstr "Дорожка %1% с CodecID '%2%' не имеет элемента \"b
 
 #: src/extract/xtr_aac.cpp:42
 #: src/extract/xtr_alac.cpp:47
-#: src/extract/xtr_avc.cpp:61
+#: src/extract/xtr_avc.cpp:62
 #: src/extract/xtr_avi.cpp:40
-#: src/extract/xtr_hevc.cpp:26
+#: src/extract/xtr_hevc.cpp:24
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
@@ -9371,8 +9376,8 @@ msgstr "Дорожка %1%: обнаружен AAC, но данные конфи
 msgid "Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n"
 msgstr "Дорожка %1%: элемент USF субтитров, начинающийся с времени, %2% не является правильно отформатированным XML и будет пропущен.\n"
 
-#: src/extract/xtr_avc.cpp:42
-#: src/extract/xtr_hevc.cpp:65
+#: src/extract/xtr_avc.cpp:43
+#: src/extract/xtr_hevc.cpp:83
 #, boost-format
 msgid "Track %1%: NAL too big. Size according to header field: %2%, available bytes in packet: %3%. This NAL is defect and will be skipped.\n"
 msgstr "Дорожка %1%: NAL слишком велик. Размер согласно заголовку: %2%, байтов в пакете: %3%. Этот NAL поврежден и будет пропущен.\n"
@@ -10432,7 +10437,7 @@ msgstr "flac_reader: Не удалось прочитать пакет заго�
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: Не удалось прочитать все пакеты заголовка.\n"
 
-#: src/input/r_flac.cpp:242
+#: src/input/r_flac.cpp:243
 #, boost-format
 msgid "flac_reader: Error parsing the file: %1%\n"
 msgstr "flac_reader: Ошибка при разборе файла: %1%\n"
@@ -11131,7 +11136,7 @@ msgstr "субтитры"
 msgid "tags"
 msgstr "теги"
 
-#: src/output/p_textsubs.h:37
+#: src/output/p_textsubs.h:36
 msgid "text subtitles"
 msgstr "текстовые субтитры"
 

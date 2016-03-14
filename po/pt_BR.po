@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 19:03+0100\n"
+"POT-Creation-Date: 2016-03-14 13:17+0100\n"
 "PO-Revision-Date: 2015-12-16 09:55+0100\n"
 "Last-Translator: Thiago Kühn <thiago_khar@hotmail.com>\n"
 "Language-Team: Thiago Kühn <thiago_khar@hotmail.com>\n"
@@ -1123,7 +1123,7 @@ msgstr "Sobre o mkvinfo"
 msgid "&Acknowledge warnings and errors"
 msgstr "completo com avisos"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:191
 msgid "&Add"
 msgstr "&Adicionar"
 
@@ -5150,7 +5150,7 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr ""
 
-#: src/output/p_textsubs.cpp:84
+#: src/output/p_textsubs.cpp:83
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr "Ignorando um registro que começa depois de terminar (%1%).\n"
@@ -6615,6 +6615,11 @@ msgstr "Opus"
 #: src/common/file_types.cpp:49
 msgid "Opus (in Ogg) audio files"
 msgstr "Arquivos de áudio Opus (em Ogg)"
+
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
+#, fuzzy
+msgid "Order"
+msgstr "ordenado"
 
 #: src/info/mkvinfo.cpp:676
 #, boost-format
@@ -9836,8 +9841,8 @@ msgstr "Título: %1%"
 msgid "Trac&k name:"
 msgstr "Nome da faixa:"
 
-#: src/extract/xtr_avc.cpp:66
-#: src/extract/xtr_hevc.cpp:30
+#: src/extract/xtr_avc.cpp:67
+#: src/extract/xtr_hevc.cpp:28
 #, boost-format
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "Os dados privados da faixa %1% são pequenos demais.\n"
@@ -9879,9 +9884,9 @@ msgstr "A faixa %1% com o ID de codec '%2%' está sem o elemento \"bits per seco
 
 #: src/extract/xtr_aac.cpp:42
 #: src/extract/xtr_alac.cpp:47
-#: src/extract/xtr_avc.cpp:61
+#: src/extract/xtr_avc.cpp:62
 #: src/extract/xtr_avi.cpp:40
-#: src/extract/xtr_hevc.cpp:26
+#: src/extract/xtr_hevc.cpp:24
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
@@ -9913,8 +9918,8 @@ msgstr "Faixa %1%: AAC encontrada, mas os dados de configuração do decodificad
 msgid "Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n"
 msgstr "Faixa %1%: Um registro de legenda USF, que se inicia no código de tempo %2%, não é um arquivo XML correto e será pulado.\n"
 
-#: src/extract/xtr_avc.cpp:42
-#: src/extract/xtr_hevc.cpp:65
+#: src/extract/xtr_avc.cpp:43
+#: src/extract/xtr_hevc.cpp:83
 #, boost-format
 msgid "Track %1%: NAL too big. Size according to header field: %2%, available bytes in packet: %3%. This NAL is defect and will be skipped.\n"
 msgstr "Faixa %1%: NAL grande demais. Tamanho de acordo com o campo do cabeçalho: %2%. Bytes disponíveis no pacote: %3%. Este NAL é defeituoso e será pulado.\n"
@@ -11032,7 +11037,7 @@ msgstr "flac_reader: Não foi possível ler um pacote do cabeçalho.\n"
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: Não foi possível ler todos os pacotes do cabeçalho.\n"
 
-#: src/input/r_flac.cpp:242
+#: src/input/r_flac.cpp:243
 #, boost-format
 msgid "flac_reader: Error parsing the file: %1%\n"
 msgstr "flac_reader: Erro ao analisar o arquivo: %1%\n"
@@ -11751,7 +11756,7 @@ msgstr "legendas"
 msgid "tags"
 msgstr ""
 
-#: src/output/p_textsubs.h:37
+#: src/output/p_textsubs.h:36
 msgid "text subtitles"
 msgstr "legendas em formato de texto"
 

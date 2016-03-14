@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 19:03+0100\n"
+"POT-Creation-Date: 2016-03-14 13:17+0100\n"
 "PO-Revision-Date: 2016-03-07 18:44+0000\n"
 "Last-Translator: Dean Lee <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -1051,7 +1051,7 @@ msgstr "关于 mkvinfo(&A)"
 msgid "&Acknowledge warnings and errors"
 msgstr "确认警告和错误(&A)"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:191
 msgid "&Add"
 msgstr "添加(&A)"
 
@@ -4824,7 +4824,7 @@ msgstr "如果该项留空，则 mkvmerge 生成的文件数量不受限制。"
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr "如果想要追加或以其余部分添加，请选择追加或添加到哪个输入文件："
 
-#: src/output/p_textsubs.cpp:84
+#: src/output/p_textsubs.cpp:83
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr "忽略了一个起始时间在终止时间之后的条目 (%1%)。\n"
@@ -6236,6 +6236,11 @@ msgstr "Opus"
 #: src/common/file_types.cpp:49
 msgid "Opus (in Ogg) audio files"
 msgstr "Opus (Ogg 容器中) 音频文件"
+
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
+#, fuzzy
+msgid "Order"
+msgstr "有序(&O)"
 
 #: src/info/mkvinfo.cpp:676
 #, boost-format
@@ -9230,8 +9235,8 @@ msgstr "标题：%1%"
 msgid "Trac&k name:"
 msgstr "轨道名称(&K)："
 
-#: src/extract/xtr_avc.cpp:66
-#: src/extract/xtr_hevc.cpp:30
+#: src/extract/xtr_avc.cpp:67
+#: src/extract/xtr_hevc.cpp:28
 #, boost-format
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "轨道 %1% CodecPrivate 过小。\n"
@@ -9273,9 +9278,9 @@ msgstr "CodecID 为 '%2%' 的轨道 %1% 缺少 \"比特每秒 (bps)\" 元素，�
 
 #: src/extract/xtr_aac.cpp:42
 #: src/extract/xtr_alac.cpp:47
-#: src/extract/xtr_avc.cpp:61
+#: src/extract/xtr_avc.cpp:62
 #: src/extract/xtr_avi.cpp:40
-#: src/extract/xtr_hevc.cpp:26
+#: src/extract/xtr_hevc.cpp:24
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
@@ -9307,8 +9312,8 @@ msgstr "轨道 %1%：找到 AAC，但解码器配置数据长度为 %2%。\n"
 msgid "Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n"
 msgstr "轨道 %1%：开始于时间码 %2% 的 USF 字幕条目不是规范的 XML 格式，将被跳过。\n"
 
-#: src/extract/xtr_avc.cpp:42
-#: src/extract/xtr_hevc.cpp:65
+#: src/extract/xtr_avc.cpp:43
+#: src/extract/xtr_hevc.cpp:83
 #, boost-format
 msgid "Track %1%: NAL too big. Size according to header field: %2%, available bytes in packet: %3%. This NAL is defect and will be skipped.\n"
 msgstr "轨道 %1%：NAL 过大。头部字段给出的大小：%2%，封包中可用字节数：%3%。该 NAL 已损坏，将被跳过。\n"
@@ -10361,7 +10366,7 @@ msgstr "flac_reader：无法读取头部封包。\n"
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader：无法读取全部头部封包。\n"
 
-#: src/input/r_flac.cpp:242
+#: src/input/r_flac.cpp:243
 #, boost-format
 msgid "flac_reader: Error parsing the file: %1%\n"
 msgstr "flac_reader：解析文件出错：%1%\n"
@@ -11052,7 +11057,7 @@ msgstr "字幕"
 msgid "tags"
 msgstr "标签"
 
-#: src/output/p_textsubs.h:37
+#: src/output/p_textsubs.h:36
 msgid "text subtitles"
 msgstr "文本字幕"
 

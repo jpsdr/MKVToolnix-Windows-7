@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-07 19:03+0100\n"
+"POT-Creation-Date: 2016-03-14 13:17+0100\n"
 "PO-Revision-Date: 2016-03-09 19:34+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -14,7 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7\n"
 
 #: src/extract/xtr_tta.cpp:105
@@ -1105,7 +1106,7 @@ msgstr "Informacje o mkvinfo (&A)"
 msgid "&Acknowledge warnings and errors"
 msgstr "Zatwierdź ostrzeżenia i błędy (&A)"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:146
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:191
 msgid "&Add"
 msgstr "Dodaj (&A)"
 
@@ -4890,7 +4891,7 @@ msgstr "Jeśli to pole zostawisz puste, wtedy nie będzie limitu dla ilości pli
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
 msgstr "Jeśli chcesz scalić lub dodać je jako kolejne części, musisz wybrać odpowiedni plik wejściowy, z którym tego dokonasz:"
 
-#: src/output/p_textsubs.cpp:84
+#: src/output/p_textsubs.cpp:83
 #, boost-format
 msgid "Ignoring an entry which starts after it ends (%1%).\n"
 msgstr "Ignorowanie linii, która ma czas początkowy po swoim czasie końca (%1%).\n"
@@ -6308,6 +6309,11 @@ msgstr "Opus"
 #: src/common/file_types.cpp:49
 msgid "Opus (in Ogg) audio files"
 msgstr "Opus - pliki audio (w kontenerze OGG)"
+
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
+#, fuzzy
+msgid "Order"
+msgstr "Uporządkowane (&O)"
 
 #: src/info/mkvinfo.cpp:676
 #, boost-format
@@ -9330,8 +9336,8 @@ msgstr "Tytuł: %1%"
 msgid "Trac&k name:"
 msgstr "(&K) Nazwa ścieżki:"
 
-#: src/extract/xtr_avc.cpp:66
-#: src/extract/xtr_hevc.cpp:30
+#: src/extract/xtr_avc.cpp:67
+#: src/extract/xtr_hevc.cpp:28
 #, boost-format
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "CodecPrivate ścieżki %1% jest za mały.\n"
@@ -9373,9 +9379,9 @@ msgstr "Ścieżka %1% z CodecID \"%2%\" nie posiada elementu \"bity na sekundę\
 
 #: src/extract/xtr_aac.cpp:42
 #: src/extract/xtr_alac.cpp:47
-#: src/extract/xtr_avc.cpp:61
+#: src/extract/xtr_avc.cpp:62
 #: src/extract/xtr_avi.cpp:40
-#: src/extract/xtr_hevc.cpp:26
+#: src/extract/xtr_hevc.cpp:24
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
@@ -9407,8 +9413,8 @@ msgstr "Ścieżka %1%: Znaleziono AAC, dane konfiguracyjne dekodera mają długo
 msgid "Track %1%: An USF subtitle entry starting at timecode %2% is not well-formed XML and will be skipped.\n"
 msgstr "Ścieżka %1%: Linia napisów USF zaczynająca się od %2% nie jest poprawna wg formatu XML i zostanie pominięta.\n"
 
-#: src/extract/xtr_avc.cpp:42
-#: src/extract/xtr_hevc.cpp:65
+#: src/extract/xtr_avc.cpp:43
+#: src/extract/xtr_hevc.cpp:83
 #, boost-format
 msgid "Track %1%: NAL too big. Size according to header field: %2%, available bytes in packet: %3%. This NAL is defect and will be skipped.\n"
 msgstr "Ścieżka %1%: Wartość NAL za duża. Rozmiar wg nagłówka: %2%, dostępne bajty w pakiecie: %3%. Ta wartość NAL jest uszkodzona i zostanie pominięta.\n"
@@ -10463,7 +10469,7 @@ msgstr "flac_reader: Nie można odczytać pakietu nagłówka.\n"
 msgid "flac_reader: Could not read all header packets.\n"
 msgstr "flac_reader: Nie można odczytać wszystkich pakietów nagłówka.\n"
 
-#: src/input/r_flac.cpp:242
+#: src/input/r_flac.cpp:243
 #, boost-format
 msgid "flac_reader: Error parsing the file: %1%\n"
 msgstr "flac_reader: Błąd analizowania pliku: %1%\n"
@@ -11154,7 +11160,7 @@ msgstr "napisy"
 msgid "tags"
 msgstr "tagi"
 
-#: src/output/p_textsubs.h:37
+#: src/output/p_textsubs.h:36
 msgid "text subtitles"
 msgstr "napisy tekstowe"
 
@@ -11298,6 +11304,10 @@ msgstr "– ustaw żadne –"
 #~ msgid "Use a &vertical layout for the \"input\" tab"
 #~ msgstr "Użyj &wertykalnego układu okienek w zakładce \"Wejście\""
 
-#~ msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
-#~ msgstr "Musisz dodać przynajmniej jeden plik źródłowy, zanim rozpoczniesz muksowanie lub dodasz zadanie do kolejki."
+#~ msgid ""
+#~ "You have to add at least one source file before you can start merging or "
+#~ "add a job to the job queue."
+#~ msgstr ""
+#~ "Musisz dodać przynajmniej jeden plik źródłowy, zanim rozpoczniesz "
+#~ "muksowanie lub dodasz zadanie do kolejki."
 
