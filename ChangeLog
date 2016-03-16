@@ -1,3 +1,11 @@
+2016-03-16  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: fixed two issues in the conversion of
+        teletext subtitles to SRT subtitles: 1. the handling of streams in
+        which consecutive teletext packets contain the same content and
+        2. the calculation of a packet's duration for certain
+        situations. Fixes #1623.
+
 2016-03-14  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: merge tool (playlist selection dialog)

@@ -17,6 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/debugging.h"
+#include "common/timestamp.h"
 #include "input/packet_converter.h"
 
 #define TTX_PAGE_ROW_SIZE 24
@@ -39,8 +40,10 @@ public:
 protected:
   size_t m_in_size, m_pos, m_data_length;
   unsigned char *m_buf;
-  int64_t m_previous_timecode;
-  std::string m_previous_content;
+  timestamp_c m_queued_timestamp, m_current_timestamp;
+  std::string m_queued_content, m_current_content;
+  boost::optional<std::pair<int, int>> m_wanted_page;
+  bool m_page_changed{};
 
   ttx_page_data_t m_ttx_page_data;
 
@@ -58,6 +61,9 @@ protected:
   void process_ttx_packet(packet_cptr const &packet);
   std::string page_to_string() const;
   void decode_line(unsigned char const *buffer, unsigned int row);
+  void process_single_row(int row_number, timestamp_c const &packet_timestamp);
+  void decode_page_data(unsigned char ttx_header_magazine);
+  void deliver_queued_content(timestamp_c const &packet_timestamp);
 
 protected:
   static int ttx_to_page(int ttx);
