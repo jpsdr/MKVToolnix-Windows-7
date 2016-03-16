@@ -31,6 +31,8 @@ template<typename T>
 std::string
 format_timestamp(basic_timestamp_c<T> const &timestamp,
                 unsigned int precision = 9) {
+  if (!timestamp.valid())
+    return "<InvTC>";
   return format_timestamp(timestamp.to_ns(), precision);
 }
 
@@ -38,6 +40,8 @@ template<typename T>
 std::string
 format_timestamp(basic_timestamp_c<T> const &timestamp,
                 std::string const &format) {
+  if (!timestamp.valid())
+    return "<InvTC>";
   return format_timestamp(timestamp.to_ns(), format);
 }
 
