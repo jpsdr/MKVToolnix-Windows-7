@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
-"PO-Revision-Date: 2016-03-07 19:20+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
+"PO-Revision-Date: 2016-03-17 13:01+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -4047,9 +4047,23 @@ msgstr "Jeder Zeitbereich besteht aus einem Start- und einem Endzeitstempel mit 
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (Größe: %1%)"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+msgid "Edit chapters"
+msgstr "Kapitel bearbeiten"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+msgid "Edit headers"
+msgstr "Kopfdaten bearbeiten"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Selektoren für Eigenschaften"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+msgid "Edit tags"
+msgstr "Tags bearbeiten"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4299,6 +4313,10 @@ msgstr "Es wurde ein Zeitstempel im folgenden Format erwartet: HH:MM:SS.nnn (HH 
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "extrahiert Kapitelinformationen im einfachen Format, das auch in verschiedenen OGM-Werkzeugen verwendet wird (CHAPTER01=… CHAPTER01NAME=…)."
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+msgid "Extract"
+msgstr "Extraktion"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4950,6 +4968,10 @@ msgstr "Detailgrad erhöhen"
 msgid "Indexing (cues):"
 msgstr "Indizierung (cues):"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+msgid "Info"
+msgstr "Info"
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5386,7 +5408,14 @@ msgstr "Jobbeschreibung"
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Enddatum und -uhrzeit des Jobs im ISO-8601-Format"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+msgid "Job output"
+msgstr "Jobausgabe"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "Job queue"
 msgstr "Jobwarteschlange"
 
@@ -5692,6 +5721,8 @@ msgstr "Speicherreservierungsfehler: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Es konnte nicht genug Speicher für ein RealAudio-/RealVideo-Bild reserviert werden.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "Merge"
 msgstr "Mergen"
@@ -10425,27 +10456,9 @@ msgstr "nicht ändern"
 msgid "don't generate chapters"
 msgstr "keine Kapitel erzeugen"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit chapters"
-msgstr "Kapitel bearbeiten"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr "Kopfdaten bearbeiten"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "edit tags"
-msgstr "Tags bearbeiten"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "Verschlüsselung"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "extract"
-msgstr "Extraktion"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10568,20 +10581,6 @@ msgstr "in zwei festen Spalten rechts der Dateien und Spuren"
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "»inflateInit()« schlug fehl. Fehlercode: %1%\n"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr "Info"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job output"
-msgstr "Jobausgabe"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job queue"
-msgstr "Jobwarteschlange"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10747,8 +10746,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr "memory.cpp/saferealloc() aus Datei %1%, Zeile %2% aufgerufen: realloc() hat für eine Größe von %3% Byte »nullptr« zurückgegeben.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "mergen"
 
@@ -11319,4 +11316,13 @@ msgstr "– leer setzen –"
 
 #~ msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
 #~ msgstr "Sie müssen mindestens eine Quelldatei hinzufügen, bevor Sie mit dem Mergen anfangen oder einen Job zur Warteschlange hinzufügen können."
+
+#~ msgid "info"
+#~ msgstr "Info"
+
+#~ msgid "job output"
+#~ msgstr "Jobausgabe"
+
+#~ msgid "job queue"
+#~ msgstr "Jobwarteschlange"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
 "PO-Revision-Date: 2016-01-19 17:07+0300\n"
 "Last-Translator: EuGENIUS <Eugenius_V@mail.ru>\n"
 "Language-Team: Russian <moritz@bunkus.org>\n"
@@ -3929,9 +3929,26 @@ msgstr "Каждый диапазон состоит из времени нач�
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (размер: %1%)"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit chapters"
+msgstr "Редактировать главы"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit headers"
+msgstr "Редактировать заголовки"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Редактировать селекторы свойств"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Edit tags"
+msgstr "редактировать теги"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4182,6 +4199,11 @@ msgstr "Ожидалось время в следующем формате: HH:M
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Экспорт главы информации в простой формат, используемый в OGM tools (Глава01=... Глава01Имя=...)."
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Extract"
+msgstr "извлечь"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4837,6 +4859,11 @@ msgstr "- Увеличить количество выводимой инфор�
 msgid "Indexing (cues):"
 msgstr "Индексация (cues):"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Info"
+msgstr "mkvInfo"
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5275,7 +5302,15 @@ msgstr "Описание задания"
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Дата и время окончания задания в формате ISO 8601"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Job output"
+msgstr "&Вывод задания"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "Job queue"
 msgstr "Очередь заданий"
 
@@ -5582,6 +5617,8 @@ msgstr "Ошибка выделения памяти: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Память для кадра RealAudio/RealVideo не может быть выделена.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "Merge"
 msgstr "Объединение"
@@ -10365,27 +10402,9 @@ msgstr "не менять"
 msgid "don't generate chapters"
 msgstr "Создать подглавы"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit chapters"
-msgstr "Редактировать главы"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr "Редактировать заголовки"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "edit tags"
-msgstr "редактировать теги"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "шифрование"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "extract"
-msgstr "извлечь"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10510,20 +10529,6 @@ msgstr "в двух фиксированных колонках справа о�
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() окончился неудачно. Результат: %1%\n"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr "информация"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job output"
-msgstr "Вывод задания"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job queue"
-msgstr "Очередь заданий"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10689,8 +10694,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr "memory.cpp/saferealloc() вызван из файла %1%, строка %2%: realloc() вернул nullptr для размера %3% байт.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "Объединить"
 
@@ -11307,4 +11310,13 @@ msgstr ""
 
 #~ msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
 #~ msgstr "Вы должны добавить, по крайней мере, один исходный файл, прежде чем вы сможете начать объединение или добавить задание в очередь заданий."
+
+#~ msgid "info"
+#~ msgstr "информация"
+
+#~ msgid "job output"
+#~ msgstr "Вывод задания"
+
+#~ msgid "job queue"
+#~ msgstr "Очередь заданий"
 

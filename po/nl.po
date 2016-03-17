@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
 "PO-Revision-Date: 2016-02-22 10:26+0100\n"
 "Last-Translator: René Maassen <bmom43@hotmail.com>\n"
 "Language-Team: \n"
@@ -4045,9 +4045,26 @@ msgstr "Elk bereik bestaat uit een start en eind tijd code met een '-' in het mi
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (grootte: %1%)"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit chapters"
+msgstr "bewerk hoofdstukken"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit headers"
+msgstr "bewerk koppen"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Bewerk selectie mogelijkheden"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Edit tags"
+msgstr "bewerk markeringen"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4297,6 +4314,11 @@ msgstr "Verwacht een tijd in het volgende formaat: HH:MM:SS.nnn (HH = uren, MM =
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Exporteert de hoofdstuk informatie in simpel format gebruikt in OGM hulpmiddel (HOOFDSTUK01=... HOOFDSTUK01NAAM=...)."
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Extract"
+msgstr "splitsen"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4950,6 +4972,11 @@ msgstr "Verhoog uitgebreide info voor mkvmerge."
 msgid "Indexing (cues):"
 msgstr "Indexering (cues):"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Info"
+msgstr "mkvInfo"
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5386,7 +5413,15 @@ msgstr "Taak beschrijving"
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Taak eind datum && tijd in ISO 8601 format"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Job output"
+msgstr "&Taak uitvoer"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "Job queue"
 msgstr "Taak wachtrij"
 
@@ -5692,6 +5727,8 @@ msgstr "Geheugen toewijs fout: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Geheugen voor een RealAudio/RealVideo beeld kon niet worden toegewezen.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "Merge"
 msgstr "Samenvoegen"
@@ -10429,27 +10466,9 @@ msgstr "niet veranderen"
 msgid "don't generate chapters"
 msgstr "Genereren sub-hoofdstukken"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit chapters"
-msgstr "bewerk hoofdstukken"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr "bewerk koppen"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "edit tags"
-msgstr "bewerk markeringen"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "versleuteling"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "extract"
-msgstr "splitsen"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10572,20 +10591,6 @@ msgstr "in twee vaste kolommen aan de rechter zijde van de bestanden en sporen"
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() mislukt. Resultaat: %1%\n"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr "info"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job output"
-msgstr "taak uitvoer"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job queue"
-msgstr "taak wachtrij"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10751,8 +10756,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr "memory.cpp/saferealloc() opgeroepen van bestand %1%, regel %2%: realloc() retourneerde nullptr voor de grootte van %3% bytes.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "samenvoegen"
 
@@ -11345,4 +11348,13 @@ msgstr "– zet naar niets –"
 #~ msgstr ""
 #~ "Je moet ten minste één bronbestand toevoegen voordat je kunt samenvoegen "
 #~ "of een taak kunt toevoegen aan de taak wachtrij."
+
+#~ msgid "info"
+#~ msgstr "info"
+
+#~ msgid "job output"
+#~ msgstr "taak uitvoer"
+
+#~ msgid "job queue"
+#~ msgstr "taak wachtrij"
 

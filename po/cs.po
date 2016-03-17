@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
 "PO-Revision-Date: 2015-12-16 09:50+0100\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech <trottel09@gmail.com>\n"
@@ -4096,9 +4096,26 @@ msgstr "Každý rozsah se skládá z počátečního a koncového časového kó
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (velikost: %1%)"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit chapters"
+msgstr "upravit kapitoly"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit headers"
+msgstr "upravit hlavičky"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Upravit přepínače pro vlastnosti"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Edit tags"
+msgstr "upravit štítky"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4352,6 +4369,11 @@ msgstr "Očekáván čas v následujícím formátu: HH:MM:SS.nnn (HH = hodiny, 
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Exportuje informace o kapitole v jednoduchém formátu použitém v nástrojích OGM (CHAPTER01=... CHAPTER01NAME=...)."
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Extract"
+msgstr "extrahovat"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -5011,6 +5033,11 @@ msgstr "Zvýšit úroveň podrobnosti."
 msgid "Indexing (cues):"
 msgstr "Indexování (indexy):"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Info"
+msgstr "mkvInfo"
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5449,7 +5476,15 @@ msgstr "Zadejte popis úlohy"
 msgid "Job end date && time in ISO 8601 format"
 msgstr ""
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Job output"
+msgstr "&Výstup úlohy"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "Job queue"
 msgstr "Fronta úloh"
 
@@ -5756,6 +5791,8 @@ msgstr "Chyba přidělění paměti: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Paměť pro snímek RealAudio nebo RealVideo nemohla být přidělena.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 #, fuzzy
 msgid "Merge"
@@ -10499,27 +10536,9 @@ msgstr "neměnit"
 msgid "don't generate chapters"
 msgstr "Generovat podkapitoly"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit chapters"
-msgstr "upravit kapitoly"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr "upravit hlavičky"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "edit tags"
-msgstr "upravit štítky"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "šifrování"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "extract"
-msgstr "extrahovat"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10642,20 +10661,6 @@ msgstr ""
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() selhalo. Výsledek: %1%\n"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr "informace"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job output"
-msgstr "výstup úlohy"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job queue"
-msgstr "fronta úloh"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10821,8 +10826,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr "memory.cpp/saferealloc() volané z řádku %1%, řádek %2%: malloc() vrátilo nullptr pro velikost %3% bajtů.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "sloučit"
 
@@ -11402,4 +11405,13 @@ msgstr "– nastavit na žádný –"
 
 #~ msgid "Remove a&ll"
 #~ msgstr "Odebrat &vše"
+
+#~ msgid "info"
+#~ msgstr "informace"
+
+#~ msgid "job output"
+#~ msgstr "výstup úlohy"
+
+#~ msgid "job queue"
+#~ msgstr "fronta úloh"
 

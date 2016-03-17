@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
 "PO-Revision-Date: 2016-01-02 12:37+0100\n"
 "Last-Translator: Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>\n"
 "Language-Team: Swedish <moritz@bunkus.org>\n"
@@ -3980,9 +3980,26 @@ msgstr ""
 msgid "EbmlVoid (size: %1%)"
 msgstr ""
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit chapters"
+msgstr "&Nya kapitel"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit headers"
+msgstr "&Nya kapitel"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Edit tags"
+msgstr "&Nya kapitel"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4246,6 +4263,11 @@ msgstr ""
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Extract"
+msgstr "Extrahering av taggar"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4917,6 +4939,10 @@ msgstr "Öka detaljnivå."
 msgid "Indexing (cues):"
 msgstr ""
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+msgid "Info"
+msgstr ""
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5358,7 +5384,15 @@ msgstr "Beskrivning av jobb"
 msgid "Job end date && time in ISO 8601 format"
 msgstr ""
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Job output"
+msgstr "&Utmatning för jobb"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #, fuzzy
 msgid "Job queue"
 msgstr "&Lägg till i jobbkön"
@@ -5675,6 +5709,8 @@ msgstr "Fel vid minnesallokering: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Minnet för en RealAudio/RealVideo-ruta kunde inte allokeras.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 #, fuzzy
 msgid "Merge"
@@ -10538,30 +10574,9 @@ msgstr "Ljudkanaler"
 msgid "don't generate chapters"
 msgstr "Ta bort kapitel"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy
-msgid "edit chapters"
-msgstr "&Nya kapitel"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr ""
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy
-msgid "edit tags"
-msgstr "&Nya kapitel"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "kryptering"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy
-msgid "extract"
-msgstr "Extrahering av taggar"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10688,22 +10703,6 @@ msgstr ""
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr ""
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr ""
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy
-msgid "job output"
-msgstr "Jobb-utmatning"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy
-msgid "job queue"
-msgstr "&Lägg till i jobbkön"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10869,8 +10868,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #, fuzzy
 msgid "merge"
 msgstr "mkvmerge"
@@ -11459,4 +11456,10 @@ msgstr ""
 
 #~ msgid "Remove a&ll"
 #~ msgstr "ta bort allt"
+
+#~ msgid "job output"
+#~ msgstr "Jobb-utmatning"
+
+#~ msgid "job queue"
+#~ msgstr "&Lägg till i jobbkön"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
 "PO-Revision-Date: 2016-02-28 12:16+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -4059,9 +4059,26 @@ msgstr "Кожен діапазон складається з тайм-коді�
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (розмір: %1%)"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit chapters"
+msgstr "Редактор розділів"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit headers"
+msgstr "Редактор заголовків"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Редагувати селектори для властивостей"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Edit tags"
+msgstr "Редактор тегів"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4311,6 +4328,11 @@ msgstr "Час має бути заданий в такому форматі: HH
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Експортувати інформацію розділів в простий формат, що використовується в утилітах OGM (CHAPTER01=... CHAPTER01NAME=...)."
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Extract"
+msgstr "витягнення"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4965,6 +4987,11 @@ msgstr "Збільшено докладність виводу інформац�
 msgid "Indexing (cues):"
 msgstr "Індексація (cues):"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Info"
+msgstr "mkvInfo"
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5404,7 +5431,15 @@ msgstr "Опис завдання"
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Час && дата закінчення завдання у форматі ISO 8601"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Job output"
+msgstr "&Вихідна інформація завдання"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "Job queue"
 msgstr "Черга завдань"
 
@@ -5710,6 +5745,8 @@ msgstr "Помилка розподілу пам'яті: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Неможливо виділити об'єм пам'яті для кадрів RealAudio/RealVideo.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "Merge"
 msgstr "Мультиплексування"
@@ -10468,27 +10505,9 @@ msgstr "не змінювати"
 msgid "don't generate chapters"
 msgstr "Створення  підгрозділів"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit chapters"
-msgstr "Редактор розділів"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr "Редактор заголовків"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "edit tags"
-msgstr "Редактор тегів"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "Шифрування"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "extract"
-msgstr "витягнення"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10611,20 +10630,6 @@ msgstr ""
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "збій inflateInit(). Результат: %1%\n"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr "Інфо"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job output"
-msgstr "Вихідна інформація завдання"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job queue"
-msgstr "Черга завдань"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10790,8 +10795,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr "memory.cpp/saferealloc() викликано з файлу %1%, рядок %2%: realloc() повернуто nullptr для розміру %3% байт.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "Мультиплексування"
 
@@ -11400,4 +11403,13 @@ msgstr "– нічого не обрано –"
 #~ msgstr ""
 #~ "Ви повинні додати принаймні, один вхідний файл, перш ніж ви можете почати "
 #~ "мультиплексування чи додати завдання в чергу завдань."
+
+#~ msgid "info"
+#~ msgstr "Інфо"
+
+#~ msgid "job output"
+#~ msgstr "Вихідна інформація завдання"
+
+#~ msgid "job queue"
+#~ msgstr "Черга завдань"
 

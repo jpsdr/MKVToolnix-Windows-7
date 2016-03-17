@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
 "PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -4147,9 +4147,26 @@ msgstr "Сваки опсег је одређен почетном и крајњ
 msgid "EbmlVoid (size: %1%)"
 msgstr "„EbmlVoid“ (величина: %1%)"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit chapters"
+msgstr "Уреди поглавља"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit headers"
+msgstr "Уреди заглавља"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Уређивање изборника особина"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Edit tags"
+msgstr "Уреди ознаке"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4405,6 +4422,11 @@ msgstr "Очекивана је поставка времена у облику 
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Издваја податке поглавља у простом облику који употребљавају Огм-алати (енг. „OGM tools“), нпр. CHAPTER01=... CHAPTER01NAME=...."
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Extract"
+msgstr "Издвоји"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -5069,6 +5091,11 @@ msgstr "Детаљно извештава у току рада."
 msgid "Indexing (cues):"
 msgstr "Индексирање (кју-уноси):"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Info"
+msgstr "Мкв-обавештајац"
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5507,7 +5534,15 @@ msgstr "Унесите опис радње"
 msgid "Job end date && time in ISO 8601 format"
 msgstr ""
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Job output"
+msgstr "Ис&ход радње"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "Job queue"
 msgstr "Заказане радње"
 
@@ -5814,6 +5849,8 @@ msgstr "Грешка при додели меморије: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Не може да се додели меморија за рил-аудио/рил-видео кадар.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 #, fuzzy
 msgid "Merge"
@@ -10631,27 +10668,9 @@ msgstr "не мењај"
 msgid "don't generate chapters"
 msgstr "Створи потпоглавља"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit chapters"
-msgstr "Уреди поглавља"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr "Уреди заглавља"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "edit tags"
-msgstr "Уреди ознаке"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "заштита"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "extract"
-msgstr "Издвоји"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10774,20 +10793,6 @@ msgstr ""
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "„inflateInit()“ није  успело. Исход: %1%\n"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr "Подаци"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job output"
-msgstr "Исход радње"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job queue"
-msgstr "Заказане радње"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10953,8 +10958,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr "Позван „memory.cpp/saferealloc()“ из датотеке %1% (ред %2%): „realloc()“ је вратио „nullptr“ за величину од %3% бајтова.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "Сједини"
 
@@ -11555,4 +11558,13 @@ msgstr "— не постављај —"
 #~ msgstr ""
 #~ "Да би могли да започнете сједињавање записа или додавање радње у "
 #~ "„заказане радње“, најпре додајте бар једну изворну датотеку."
+
+#~ msgid "info"
+#~ msgstr "Подаци"
+
+#~ msgid "job output"
+#~ msgstr "Исход радње"
+
+#~ msgid "job queue"
+#~ msgstr "Заказане радње"
 

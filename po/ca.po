@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.7.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
 "PO-Revision-Date: 2016-01-08 22:18+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -4124,9 +4124,26 @@ msgstr "Cada interval consisteix d'un temps inicial i final amb un «-» al mig,
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (mida: %1%)"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit chapters"
+msgstr "Edita els capítols"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit headers"
+msgstr "Edita les capçaleres"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Selectors per a l'edició de les propietats"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Edit tags"
+msgstr "Edita les etiquetes"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4377,6 +4394,11 @@ msgstr "S'esperava un temps en el següent format: HH:MM:SS.nnn (HH = hores, MM 
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Exporta la informació dels capítols en un format simple emprat en les eines OGM (CHAPTER01=«...» CHAPTER01NAME=«...»)."
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Extract"
+msgstr "Extreu"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -5031,6 +5053,11 @@ msgstr "Incrementa la loquacitat."
 msgid "Indexing (cues):"
 msgstr "Indexació (CUE):"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Info"
+msgstr "mkvInfo"
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5467,7 +5494,15 @@ msgstr "Descripció de la tasca"
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Data i hora de finalització de la tasca en format ISO 8601"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Job output"
+msgstr "Sortida de la &tasca"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "Job queue"
 msgstr "Cua de treball"
 
@@ -5773,6 +5808,8 @@ msgstr "Error en l'assignació de la memòria: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "No s'ha pogut assignar espai a la memòria per a un fotograma de RealAudio/RealVideo.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "Merge"
 msgstr "Fusiona"
@@ -10522,27 +10559,9 @@ msgstr "No la canviïs"
 msgid "don't generate chapters"
 msgstr "Genera els subcapítols"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit chapters"
-msgstr "Edita els capítols"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr "Edita les capçaleres"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "edit tags"
-msgstr "Edita les etiquetes"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "Encriptatge"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "extract"
-msgstr "Extreu"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10665,20 +10684,6 @@ msgstr "En dues columnes fixes a la dreta dels fitxers i pistes"
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() ha fallat. Resultat: %1%\n"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr "Informació"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job output"
-msgstr "Sortida de la tasca"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job queue"
-msgstr "Cua de treball"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10844,8 +10849,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr "memory.cpp/saferealloc() crida des del fitxer %1%, línia %2%: realloc() ha retornat «nullptr» per a una mida de %3% bytes.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "Fusiona"
 
@@ -11424,4 +11427,13 @@ msgstr "– Establert a «no» –"
 #~ msgstr ""
 #~ "Almenys haureu d'afegir un fitxer d'origen abans que pugueu iniciar un "
 #~ "multiplexat o afegir una tasca a la cua de treball."
+
+#~ msgid "info"
+#~ msgstr "Informació"
+
+#~ msgid "job output"
+#~ msgstr "Sortida de la tasca"
+
+#~ msgid "job queue"
+#~ msgstr "Cua de treball"
 

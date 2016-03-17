@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 10.03.2016\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
 "PO-Revision-Date: 2016-03-10 09:30+0100\n"
 "Last-Translator: Roberto Boriotti <Roberto.Boriotti@canon-europe.com>\n"
 "Language-Team: Italian <moritz@bunkus.org>\n"
@@ -4031,9 +4031,26 @@ msgstr "Ogni intervallo consiste in un timecode di inizio e uno di fine con un '
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (dimensione: %1%)"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit chapters"
+msgstr "modifica capitoli"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit headers"
+msgstr "modifica intestazioni"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Modifica selettori per le proprietà"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Edit tags"
+msgstr "modifica tag"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4283,6 +4300,11 @@ msgstr "Atteso un tempo nel formato seguente: OO:MM:SS.mmm (OO = Ore, MM = minut
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Esporta le informazioni capitolo in un formato semplice usato negli strumenti OGM (CAPITOLO01=... NOMECAPITOLO=...)."
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Extract"
+msgstr "estrai"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4934,6 +4956,11 @@ msgstr "Aumenta dettaglio messaggi"
 msgid "Indexing (cues):"
 msgstr "Indicizzazione (tagli):"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Info"
+msgstr "mkvInfo"
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5370,7 +5397,15 @@ msgstr "Descrizione attività"
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Data && ora fine attività in formato ISO 8601"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Job output"
+msgstr "&Attività destinazione"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "Job queue"
 msgstr "Coda attività"
 
@@ -5676,6 +5711,8 @@ msgstr "Errore allocazione memoria: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "Memoria non allocabile per un frame RealAudio/RealVideo.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "Merge"
 msgstr "Unisci"
@@ -10402,27 +10439,9 @@ msgstr "non modificare"
 msgid "don't generate chapters"
 msgstr "non generare i capitoli"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit chapters"
-msgstr "modifica capitoli"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr "modifica intestazioni"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "edit tags"
-msgstr "modifica tag"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "crittografia"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "extract"
-msgstr "estrai"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10547,20 +10566,6 @@ msgstr "in due colonne fisse sulla destra dei file e delle tracce"
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() fallita. Risultato: %1%\n"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr "info"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job output"
-msgstr "attività destinazione"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job queue"
-msgstr "coda attività"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10726,8 +10731,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr "memory.cpp/saferealloc() chiamato dal file %1%, linea %2%: realloc() ha ritornato nullptr per una dimensione di %3% byte.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "unisci"
 
@@ -11331,4 +11334,13 @@ msgstr "- imposta a nessuno -"
 #~ msgstr ""
 #~ "È necessario aggiungere almeno un file sorgente prima di poter iniziare "
 #~ "l'unione o aggiungere un a attività alla coda attività."
+
+#~ msgid "info"
+#~ msgstr "info"
+
+#~ msgid "job output"
+#~ msgstr "attività destinazione"
+
+#~ msgid "job queue"
+#~ msgstr "coda attività"
 

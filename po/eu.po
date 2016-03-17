@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-17 12:39+0100\n"
+"POT-Creation-Date: 2016-03-17 12:56+0100\n"
 "PO-Revision-Date: 2016-01-29 19:45+0100\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: (EUS_Xabier Aramendi) <azpidatziak@gmail.com>\n"
@@ -4047,9 +4047,26 @@ msgstr "Maila bakoitza hasiera eta amaiera denbora-kode batean datza, '-' batez 
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (neurria: %1%)"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit chapters"
+msgstr "editatu atalak"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+#, fuzzy
+msgid "Edit headers"
+msgstr "editatu idazburuak"
+
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Editatu ezaugarri hautatzaileak"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Edit tags"
+msgstr "editatu etiketak"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:477
@@ -4299,6 +4316,11 @@ msgstr "Heuskarri honetako denbora itxaroten zen: HH:MM:SS.nnn (HH = orduak, MM 
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Atal argibideak esportatzen ditu OGM tresnatan erabilitako heuskarri arrunt batean (CHAPTER01=... CHAPTER01NAME=...)."
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Extract"
+msgstr "atera"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4952,6 +4974,11 @@ msgstr "Handitu berritsukeria."
 msgid "Indexing (cues):"
 msgstr "Aurkibidetzen (cue-ak):"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy
+msgid "Info"
+msgstr "mkvInfo"
+
 #: src/common/bitvalue.cpp:67
 #, boost-format
 msgid "Input too long: %1% > %2%"
@@ -5388,7 +5415,14 @@ msgstr "Lanaren azalpena"
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Lanaren amaiera eguna eta ordua ISO 8601 heuskarrian"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
+msgid "Job output"
+msgstr "Lanaren irteera"
+
 #: src/mkvtoolnix-gui/forms/jobs/tool.h:79
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "Job queue"
 msgstr "Lan lerroa"
 
@@ -5694,6 +5728,8 @@ msgstr "Oroimen esleipen akatsa: %1% (%2%).\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "RealAudio/RealVideo frame oroimena ezin da esleitu.\n"
 
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:148
 msgid "Merge"
 msgstr "Batu"
@@ -10428,27 +10464,9 @@ msgstr "ez aldatu"
 msgid "don't generate chapters"
 msgstr "Sortu azpi-atalak"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit chapters"
-msgstr "editatu atalak"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "edit headers"
-msgstr "editatu idazburuak"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "edit tags"
-msgstr "editatu etiketak"
-
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
 msgstr "enkriptaketa"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "extract"
-msgstr "atera"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:238
 msgid "failed"
@@ -10571,20 +10589,6 @@ msgstr "bi zutabetan agirien eta bideen eskuinean"
 #, boost-format
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() hutsegitea. Emaitza: %1%\n"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-msgid "info"
-msgstr "argibideak"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:149
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job output"
-msgstr "lan irteera"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:148
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-msgid "job queue"
-msgstr "lan lerroa"
 
 #: src/info/mkvinfo.cpp:1349
 msgid "key, "
@@ -10750,8 +10754,6 @@ msgid "memory.cpp/saferealloc() called from file %1%, line %2%: realloc() return
 msgstr "memory.cpp/saferealloc() deitua %1% agiritik, %2% lerroa: realloc() itzuli du nullptr %3% byteko neurri batentzat.\n"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:150
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:142
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 msgid "merge"
 msgstr "batu"
 
@@ -12826,9 +12828,6 @@ msgstr "– ezarri ezer ezean –"
 #~ msgid "Job added to job queue"
 #~ msgstr "Lana gehituta lan lerrora"
 
-#~ msgid "Job output"
-#~ msgstr "Lanaren irteera"
-
 #~ msgid "Job queue management"
 #~ msgstr "Lan lerro kudeaketa"
 
@@ -14543,8 +14542,17 @@ msgstr "– ezarri ezer ezean –"
 #~ msgid "even if there were warnings"
 #~ msgstr "baita kontuz oharrak egonda ere"
 
+#~ msgid "info"
+#~ msgstr "argibideak"
+
 #~ msgid "is being estimated"
 #~ msgstr "estimatzen ari da"
+
+#~ msgid "job output"
+#~ msgstr "lan irteera"
+
+#~ msgid "job queue"
+#~ msgstr "lan lerroa"
 
 #~ msgid "link files"
 #~ msgstr "loturatu agiriak"
