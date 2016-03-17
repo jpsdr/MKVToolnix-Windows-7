@@ -139,14 +139,14 @@ MainWindow::setupToolSelector() {
   m_toolJobs          = new Jobs::Tool{ui->tool,          ui->menuJobQueue};
   m_watchJobTool      = new WatchJobs::Tool{ui->tool,     ui->menuJobOutput};
 
-  ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("merge"));
-  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("extract"));
-  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("info"));
-  ui->tool->appendTab(m_toolHeaderEditor,           QIcon{":/icons/48x48/document-edit.png"},              QY("edit headers"));
-  ui->tool->appendTab(m_toolChapterEditor,          QIcon{":/icons/48x48/story-editor.png"},               QY("edit chapters"));
-  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("edit tags"));
-  ui->tool->appendTab(m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("job queue"));
-  ui->tool->appendTab(m_watchJobTool,               QIcon{":/icons/48x48/system-run.png"},                 QY("job output"));
+  ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("Merge"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("Extract"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("Info"));
+  ui->tool->appendTab(m_toolHeaderEditor,           QIcon{":/icons/48x48/document-edit.png"},              QY("Edit headers"));
+  ui->tool->appendTab(m_toolChapterEditor,          QIcon{":/icons/48x48/story-editor.png"},               QY("Edit chapters"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("Edit tags"));
+  ui->tool->appendTab(m_toolJobs,                   QIcon{":/icons/48x48/view-task.png"},                  QY("Job queue"));
+  ui->tool->appendTab(m_watchJobTool,               QIcon{":/icons/48x48/system-run.png"},                 QY("Job output"));
 
   for (auto idx = 0, numTabs = ui->tool->count(); idx < numTabs; ++idx) {
     qobject_cast<ToolBase *>(ui->tool->widget(idx))->setupUi();
@@ -292,8 +292,8 @@ MainWindow::retranslateUi() {
   // Intentionally replacing the list right away again in order not to
   // lose the translations for the three currently unimplemented
   // tools.
-  auto toolTitles = QStringList{} << QY("extract") << QY("info") << QY("edit tags");
-  toolTitles      = QStringList{} << QY("merge") << QY("edit headers") << QY("edit chapters") << QY("job queue") << QY("job output");
+  auto toolTitles = QStringList{} << QY("Extract") << QY("Info") << QY("Edit tags");
+  toolTitles      = QStringList{} << QY("Merge") << QY("Edit headers") << QY("Edit chapters") << QY("Job queue") << QY("Job output");
 
   for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx)
     ui->tool->setTabText(idx, toolTitles[idx]);
