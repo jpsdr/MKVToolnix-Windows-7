@@ -35,6 +35,9 @@ info_cli_parser_c::init_parser() {
   add_section_header(YT("Options"));
 
 #if defined(HAVE_QT)
+# if defined(SYS_WINDOWS) || defined(SYS_APPLE)
+  OPT("G|no-gui",       set_no_gui,       YT("Do not start the GUI."));
+# endif  // SYS_WINDOWS || SYS_APPLE
   OPT("g|gui",          set_gui,          YT("Start the GUI (and open inname if it was given)."));
 #endif
   OPT("c|checksum",     set_checksum,     YT("Calculate and display checksums of frame contents."));
@@ -58,6 +61,14 @@ info_cli_parser_c::set_gui() {
     mxerror("mkvinfo was compiled without GUI support.\n");
 
   m_options.m_use_gui = true;
+}
+
+void
+info_cli_parser_c::set_no_gui() {
+  if (!ui_graphical_available())
+    mxerror("mkvinfo was compiled without GUI support.\n");
+
+  m_options.m_use_gui = false;
 }
 
 void

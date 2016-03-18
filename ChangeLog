@@ -1,3 +1,13 @@
+2016-03-18  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvinfo: change: on Windows and Mac OS mkvinfo will now launch
+        the GUI by default unless the option »--no-gui« (or »-G«) has been
+        given. This is due to the fact that on both OS users often use
+        portable versions respectively disk images and launch the
+        executable directly and not via start menu entries. In those
+        situations adding command line options for launching the GUI is
+        unnecessarily difficult.
+
 2016-03-16  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: fixed two issues in the conversion of

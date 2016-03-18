@@ -30,6 +30,7 @@ protected:
   void init_parser();
 
   void set_gui();
+  void set_no_gui();
   void set_checksum();
   void set_check_mode();
   void set_summary();
