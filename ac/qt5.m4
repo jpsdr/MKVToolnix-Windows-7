@@ -9,6 +9,9 @@ AC_ARG_ENABLE([static_qt],
   AC_HELP_STRING([--enable-static-qt],[link to static versions of the Qt library (no)]))
 AC_ARG_WITH([qt_pkg_config_modules],
   AC_HELP_STRING([--with-qt-pkg-config-modules=modules],[gather include/link flags for additional Qt modules from pkg-config]))
+AC_ARG_WITH([qt_pkg_config],
+  AC_HELP_STRING([--without-qt-pkg-config], [do not use pkg-config for detecting Qt; instead rely on QT_CFLAGS/QT_LIBS being set correctly already]),
+  [ with_qt_pkg_config=${withval} ], [ with_qt_pkg_config=yes ])
 
 qt_min_ver=5.2.0
 
@@ -123,7 +126,7 @@ if test x"$enable_qt" = "xyes" -a \
     ok=1
   fi
 
-  if test $ok = 1; then
+  if test $ok = 1 -a "x$with_qt_pkg_config" = xyes; then
     with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/ /,/g'`"
     if test x"$with_qt_pkg_config_modules" != x ; then
       with_qt_pkg_config_modules="$with_qt_pkg_config_modules,"
@@ -141,13 +144,14 @@ if test x"$enable_qt" = "xyes" -a \
     if test $ok = 0; then
       AC_MSG_RESULT(no: not found by pkg-config)
     fi
+
+    with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/,/ /g'`"
+    QT_CFLAGS="`$PKG_CONFIG --cflags $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
+    QT_LIBS="`$PKG_CONFIG --libs $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
   fi
 
   if test $ok = 1; then
     dnl Try compiling and linking an application.
-    with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/,/ /g'`"
-    QT_CFLAGS="`$PKG_CONFIG --cflags $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
-    QT_LIBS="`$PKG_CONFIG --libs $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
 
     AC_LANG_PUSH(C++)
     AC_CACHE_VAL(am_cv_qt_compilation, [

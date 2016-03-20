@@ -1,3 +1,13 @@
+2016-03-20  Moritz Bunkus  <moritz@bunkus.org>
+
+        * build system: added an option to configure
+        »--without-qt-pkg-config«. Normally configure uses pkg-config for
+        detecting Qt and setting QT_CFLAGS and QT_LIBS. With this option
+        configure won't use pkg-config and rely on the user having set
+        both variables before running configure. This enables using Qt on
+        systems where no pkg-config files are generated (e.g. Qt 5.6.0 on
+        MacOS with frameworks enabled).
+
 2016-03-18  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvinfo: change: on Windows and Mac OS mkvinfo will now launch
