@@ -218,8 +218,9 @@ cxx_compiler = lambda do |t|
   # t.sources is empty for a 'file' task (common_pch.h.o).
   sources = t.sources.empty? ? [ t.prerequisites.first ] : t.sources
   dep     = dependency_output_name_for t.name
+  lang    = t.name.end_with?(".gch") ? "c++-header" : "c++"
 
-  runq "     CXX #{sources.first}", "#{c(:CXX)} #{$flags[:cxxflags]} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} -x c++ #{sources.join(" ")}", :allow_failure => true
+  runq "     CXX #{sources.first}", "#{c(:CXX)} #{$flags[:cxxflags]} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} -x #{lang} #{sources.join(" ")}", :allow_failure => true
   handle_deps t.name, last_exit_code, true
 end
 
