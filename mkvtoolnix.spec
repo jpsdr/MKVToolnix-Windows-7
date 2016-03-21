@@ -81,6 +81,7 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 %lang(fr) %{_datadir}/locale/fr/*/*.mo
 %lang(it) %{_datadir}/locale/it/*/*.mo
 %lang(ja) %{_datadir}/locale/ja/*/*.mo
+%lang(ko) %{_datadir}/locale/ko/*/*.mo
 %lang(lt) %{_datadir}/locale/lt/*/*.mo
 %lang(nl) %{_datadir}/locale/nl/*/*.mo
 %lang(pl) %{_datadir}/locale/pl/*/*.mo

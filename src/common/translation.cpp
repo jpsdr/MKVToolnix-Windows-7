@@ -73,6 +73,7 @@ translation_c::initialize_available_translations() {
   ms_available_translations.emplace_back("fre", "fr_FR",       "fr",          "french",     "French",               "Français",            false, 0x000c, 0x00);
   ms_available_translations.emplace_back("ita", "it_IT",       "it",          "italian",    "Italian",              "Italiano",            false, 0x0010, 0x00);
   ms_available_translations.emplace_back("jpn", "ja_JP",       "ja",          "japanese",   "Japanese",             "日本語",              true,  0x0011, 0x00);
+  ms_available_translations.emplace_back("kor", "ko_KR",       "ko",          "korean",     "Korean",               "한국어/조선말",       true,  0x0012, 0x01);
   ms_available_translations.emplace_back("lit", "lt_LT",       "lt",          "lithuanian", "Lithuanian",           "Lietuvių",            false, 0x0027, 0x00);
   ms_available_translations.emplace_back("dut", "nl_NL",       "nl",          "dutch",      "Dutch",                "Nederlands",          false, 0x0013, 0x00);
   ms_available_translations.emplace_back("pol", "pl_PL",       "pl",          "polish",     "Polish",               "Polski",              false, 0x0015, 0x00);
