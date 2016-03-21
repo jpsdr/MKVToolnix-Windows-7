@@ -117,6 +117,7 @@ Tab::setupUi() {
   connect(ui->cbChNameCountry,             static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                 &Tab::chapterNameCountryChanged);
   connect(ui->pbChAddName,                 &QPushButton::clicked,                                                  this,                 &Tab::addChapterName);
   connect(ui->pbChRemoveName,              &QPushButton::clicked,                                                  this,                 &Tab::removeChapterName);
+  connect(ui->pbBrowseSegmentUID,          &QPushButton::clicked,                                                  this,                 &Tab::addSegmentUIDFromFile);
 
   connect(m_expandAllAction,               &QAction::triggered,                                                    this,                 &Tab::expandAll);
   connect(m_collapseAllAction,             &QAction::triggered,                                                    this,                 &Tab::collapseAll);
@@ -173,6 +174,8 @@ Tab::retranslateUi() {
   m_massModificationAction->setText(QY("Additional &modifications"));
   m_generateSubChaptersAction->setText(QY("&Generate sub-chapters"));
   m_renumberSubChaptersAction->setText(QY("Re&number sub-chapters"));
+
+  Util::setToolTip(ui->pbBrowseSegmentUID, QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
 
   m_chapterModel->retranslateUi();
   m_nameModel->retranslateUi();
@@ -1630,6 +1633,11 @@ Tab::focusSameControlInNextChapterElement() {
 void
 Tab::closeTab() {
   emit removeThisTab();
+}
+
+void
+Tab::addSegmentUIDFromFile() {
+  Util::addSegmentUIDFromFileToLineEdit(*this, *ui->leChSegmentUid, false);
 }
 
 }}}

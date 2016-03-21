@@ -96,6 +96,7 @@ public slots:
   virtual void massModify();
   virtual void generateSubChapters();
   virtual void renumberSubChapters();
+  virtual void addSegmentUIDFromFile();
 
   virtual void chapterSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void expandInsertedElements(QModelIndex const &parentIdx, int start, int end);

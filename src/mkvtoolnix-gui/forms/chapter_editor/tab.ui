@@ -265,11 +265,11 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>315</width>
-             <height>433</height>
+             <width>456</width>
+             <height>440</height>
             </rect>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_6">
+           <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <layout class="QGridLayout" name="gridLayout_3">
               <item row="0" column="0">
@@ -353,9 +353,6 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
-               <widget class="mtx::gui::Util::BasicLineEdit" name="leChSegmentUid"/>
-              </item>
               <item row="4" column="0">
                <widget class="QLabel" name="lChSegmentEditionUid">
                 <property name="text">
@@ -368,6 +365,24 @@
               </item>
               <item row="4" column="1">
                <widget class="mtx::gui::Util::BasicLineEdit" name="leChSegmentEditionUid"/>
+              </item>
+              <item row="3" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_5">
+                <item>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="leChSegmentUid"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pbBrowseSegmentUID">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
@@ -530,6 +545,28 @@
    <header>mkvtoolnix-gui/util/country_combo_box.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>elements</tabstop>
+  <tabstop>cbEdFlagDefault</tabstop>
+  <tabstop>cbEdFlagHidden</tabstop>
+  <tabstop>cbEdFlagOrdered</tabstop>
+  <tabstop>leEdUid</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>leChStart</tabstop>
+  <tabstop>leChEnd</tabstop>
+  <tabstop>cbChFlagEnabled</tabstop>
+  <tabstop>cbChFlagHidden</tabstop>
+  <tabstop>leChUid</tabstop>
+  <tabstop>leChSegmentUid</tabstop>
+  <tabstop>pbBrowseSegmentUID</tabstop>
+  <tabstop>leChSegmentEditionUid</tabstop>
+  <tabstop>tvChNames</tabstop>
+  <tabstop>pbChAddName</tabstop>
+  <tabstop>pbChRemoveName</tabstop>
+  <tabstop>leChName</tabstop>
+  <tabstop>cbChNameLanguage</tabstop>
+  <tabstop>cbChNameCountry</tabstop>
+ </tabstops>
  <resources>
   <include location="../../qt_resources.qrc"/>
  </resources>

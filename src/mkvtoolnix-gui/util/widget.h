@@ -36,6 +36,8 @@ void preventScrollingWithoutFocus(QObject *parent);
 
 void enableChildren(QObject *parent, bool enable);
 
+void addSegmentUIDFromFileToLineEdit(QWidget &parent, QLineEdit &lineEdit, bool append);
+
 }}}
 
 #endif // MTX_MKVTOOLNIX_GUI_UTIL_WIDGET_H

@@ -4,6 +4,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QIcon>
+#include <QLineEdit>
 #include <QList>
 #include <QPushButton>
 #include <QRadioButton>
@@ -12,9 +13,13 @@
 #include <QSpinBox>
 #include <QString>
 
+#include "common/bitvalue.h"
+#include "common/kax_analyzer.h"
 #include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -157,6 +162,44 @@ void
 fixComboBoxViewWidth(QComboBox &comboBox) {
   comboBox.setSizeAdjustPolicy(QComboBox::AdjustToContents);
   comboBox.view()->setMinimumWidth(comboBox.sizeHint().width());
+}
+
+void
+addSegmentUIDFromFileToLineEdit(QWidget &parent,
+                                QLineEdit &lineEdit,
+                                bool append) {
+  auto &settings = Util::Settings::get();
+  auto dir       = settings.lastOpenDirPath();
+  auto filter    = QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;")
+                 + QY("All files")               + Q(" (*)");
+  auto fileName  = Util::getOpenFileName(&parent, QY("Select Matroska file to read segment UID from"), dir, filter);
+
+  if (fileName.isEmpty())
+    return;
+
+  settings.m_lastOpenDir = QFileInfo{fileName}.path();
+  settings.save();
+
+  try {
+    auto segmentUID = kax_analyzer_c::read_segment_uid_from(to_utf8(fileName));
+    auto uidString  = QString{};
+    auto src        = segmentUID->data();
+
+    for (unsigned int idx = 0u, numBytes = segmentUID->byte_size(); idx < numBytes; ++idx)
+      uidString += Q("%1").arg(QString::number(src[idx], 16), 2, '0').toUpper();
+
+    if (!append || lineEdit.text().isEmpty())
+      lineEdit.setText(uidString);
+
+    else
+      lineEdit.setText(Q("%1,%2").arg(lineEdit.text()).arg(uidString));
+
+  } catch (mtx::kax_analyzer_x &ex) {
+    Util::MessageBox::critical(&parent)
+      ->title(QY("Reading the segment UID failed"))
+      .text(Q(ex.what()))
+      .exec();
+  }
 }
 
 }}}

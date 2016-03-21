@@ -1,7 +1,6 @@
 #include "common/common_pch.h"
 
 #include "common/bitvalue.h"
-#include "common/kax_analyzer.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
@@ -173,6 +172,9 @@ Tab::setupOutputToolTips() {
   Util::setToolTip(ui->nextSegmentUID,     QY("For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation."));
   Util::setToolTip(ui->chapters,           QY("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."));
   Util::setToolTip(ui->browseChapters,     QY("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."));
+  Util::setToolTip(ui->browseSegmentUID,         QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
+  Util::setToolTip(ui->browseNextSegmentUID,     QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
+  Util::setToolTip(ui->browsePreviousSegmentUID, QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
   Util::setToolTip(ui->chapterLanguage,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QYH("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."))
@@ -552,30 +554,7 @@ Tab::onBrowseNextSegmentUID() {
 void
 Tab::addSegmentUIDFromFile(QLineEdit &lineEdit,
                            bool append) {
-  auto fileName = getOpenFileName(QY("Select Matroska file to read segment UID from"), QY("Matroska and WebM files") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm)"), nullptr);
-  if (fileName.isEmpty())
-    return;
-
-  try {
-    auto segmentUID = kax_analyzer_c::read_segment_uid_from(to_utf8(fileName));
-    auto uidString  = QString{};
-    auto src        = segmentUID->data();
-
-    for (unsigned int idx = 0u, numBytes = segmentUID->byte_size(); idx < numBytes; ++idx)
-      uidString += Q("%1").arg(QString::number(src[idx], 16), 2, '0').toUpper();
-
-    if (!append || lineEdit.text().isEmpty())
-      lineEdit.setText(uidString);
-
-    else
-      lineEdit.setText(Q("%1,%2").arg(lineEdit.text()).arg(uidString));
-
-  } catch (mtx::kax_analyzer_x &ex) {
-    Util::MessageBox::critical(this)
-      ->title(QY("Reading the segment UID failed"))
-      .text(Q(ex.what()))
-      .exec();
-  }
+  Util::addSegmentUIDFromFileToLineEdit(*this, lineEdit, append);
 }
 
 void
