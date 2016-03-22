@@ -2490,14 +2490,18 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
     fourcc = fourcc_c{sv1_stsd.v0.base.fourcc};
 
   auto version = get_uint16_be(&sv1_stsd.v0.version);
+  a_channels   = get_uint16_be(&sv1_stsd.v0.channels);
+  a_bitdepth   = get_uint16_be(&sv1_stsd.v0.sample_size);
+  auto tmp     = get_uint32_be(&sv1_stsd.v0.sample_rate);
+  a_samplerate = ((tmp & 0xffff0000) >> 16) + (tmp & 0x0000ffff) / 65536.0;
 
-  mxdebug_if(m_debug_headers, boost::format("%1%FourCC: %2%, channels: %3%, sample size: %4%, compression id: %5%, sample rate: 0x%|6$08x|, version: %7%")
+  mxdebug_if(m_debug_headers, boost::format("%1%[v0] FourCC: %2% channels: %3% sample size: %4% compression id: %5% sample rate: %6% version: %7%")
              % space(level * 2 + 1)
              % fourcc_c{reinterpret_cast<const unsigned char *>(sv1_stsd.v0.base.fourcc)}.description()
-             % get_uint16_be(&sv1_stsd.v0.channels)
-             % get_uint16_be(&sv1_stsd.v0.sample_size)
+             % a_channels
+             % a_bitdepth
              % get_uint16_be(&sv1_stsd.v0.compression_id)
-             % get_uint32_be(&sv1_stsd.v0.sample_rate)
+             % a_samplerate
              % get_uint16_be(&sv1_stsd.v0.version));
 
   if (0 == version)
@@ -2511,7 +2515,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
     memcpy(&sv1_stsd, priv, stsd_non_priv_struct_size);
 
     if (m_debug_headers)
-      mxinfo(boost::format(" samples per packet: %1% bytes per packet: %2% bytes per frame: %3% bytes_per_sample: %4%")
+      mxinfo(boost::format(" [v1] samples per packet: %1% bytes per packet: %2% bytes per frame: %3% bytes_per_sample: %4%")
              % get_uint32_be(&sv1_stsd.v1.samples_per_packet)
              % get_uint32_be(&sv1_stsd.v1.bytes_per_packet)
              % get_uint32_be(&sv1_stsd.v1.bytes_per_frame)
@@ -2525,9 +2529,9 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
     memcpy(&sv2_stsd, priv, stsd_non_priv_struct_size);
 
     if (m_debug_headers)
-      mxinfo(boost::format(" struct size: %1% sample rate: %|2$016x| channels: %3% const1: 0x%|4$08x| bits per channel: %5% flags: %6% bytes per frame: %7% samples per frame: %8%")
+      mxinfo(boost::format(" [v2] struct size: %1% sample rate: %2% channels: %3% const1: 0x%|4$08x| bits per channel: %5% flags: %6% bytes per frame: %7% samples per frame: %8%")
              % get_uint32_be(&sv2_stsd.v2.v2_struct_size)
-             % get_uint64_be(&sv2_stsd.v2.sample_rate)
+             % mtx::math::int_to_double(get_uint64_be(&sv2_stsd.v2.sample_rate))
              % get_uint32_be(&sv2_stsd.v2.channels)
              % get_uint32_be(&sv2_stsd.v2.const1)
              % get_uint32_be(&sv2_stsd.v2.bits_per_channel)
@@ -2538,11 +2542,6 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
 
   if (m_debug_headers)
     mxinfo("\n");
-
-  a_channels   = get_uint16_be(&sv1_stsd.v0.channels);
-  a_bitdepth   = get_uint16_be(&sv1_stsd.v0.sample_size);
-  auto tmp     = get_uint32_be(&sv1_stsd.v0.sample_rate);
-  a_samplerate = ((tmp & 0xffff0000) >> 16) + (tmp & 0x0000ffff) / 65536.0;
 }
 
 void
