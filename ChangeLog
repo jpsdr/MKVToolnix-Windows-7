@@ -1,3 +1,19 @@
+2016-03-22  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: MP4/QuickTime reader: audio tracks can contain
+        two instances of certain header fields (channel count,
+        bits/sample & channel, sample rate) in the STSD atom: one instance
+        in the version 0 header and one in the version 2 header parts. So
+        far mkvmerge has used those from the version 0 header only and
+        ignored the ones from the version 2 header.
+
+        This has been changed to match the behavior of other players and
+        MP4 readers like ffmpeg. If the STSD atom contains a version 2
+        structure then the fields from it will be used. Otherwise the
+        fields from the version 0 part will be used.
+
+        Fixes #1633.
+
 2016-03-21  Moritz Bunkus  <moritz@bunkus.org>
 
         * all: new feature: added a new translation of both the programs

@@ -29,6 +29,7 @@
 #include "common/hacks.h"
 #include "common/id_info.h"
 #include "common/iso639.h"
+#include "common/math.h"
 #include "common/mp3.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -2528,13 +2529,18 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
     stsd_non_priv_struct_size = sizeof(sound_v2_stsd_atom_t);
     memcpy(&sv2_stsd, priv, stsd_non_priv_struct_size);
 
+    a_channels   = get_uint32_be(&sv2_stsd.v2.channels);
+    a_bitdepth   = get_uint32_be(&sv2_stsd.v2.bits_per_channel);
+    a_samplerate = mtx::math::int_to_double(get_uint64_be(&sv2_stsd.v2.sample_rate));
+
+
     if (m_debug_headers)
       mxinfo(boost::format(" [v2] struct size: %1% sample rate: %2% channels: %3% const1: 0x%|4$08x| bits per channel: %5% flags: %6% bytes per frame: %7% samples per frame: %8%")
              % get_uint32_be(&sv2_stsd.v2.v2_struct_size)
-             % mtx::math::int_to_double(get_uint64_be(&sv2_stsd.v2.sample_rate))
-             % get_uint32_be(&sv2_stsd.v2.channels)
+             % a_samplerate
+             % a_channels
              % get_uint32_be(&sv2_stsd.v2.const1)
-             % get_uint32_be(&sv2_stsd.v2.bits_per_channel)
+             % a_bitdepth
              % get_uint32_be(&sv2_stsd.v2.flags)
              % get_uint32_be(&sv2_stsd.v2.bytes_per_frame)
              % get_uint32_be(&sv2_stsd.v2.samples_per_frame));
