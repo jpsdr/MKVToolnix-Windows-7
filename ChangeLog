@@ -1,5 +1,8 @@
 2016-03-22  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: MP4/QuickTime reader: audio tracks with the FourCC
+        'lpcm' are muxed as A_PCM/INT/LIT instead of A_QUICKTIME.
+
         * mkvmerge: bug fix: MP4/QuickTime reader: audio tracks can contain
         two instances of certain header fields (channel count,
         bits/sample & channel, sample rate) in the STSD atom: one instance
