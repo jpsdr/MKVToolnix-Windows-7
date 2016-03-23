@@ -22,8 +22,8 @@ You will need:
 - a mingw cross compiler
 - roughly 4 GB of free space available
 
-Luckily there's the [mingw-cross-env project]
-(http://mingw-cross-env.nongnu.org/) that provides an easy-to-use way
+Luckily there's the [M cross environment project]
+(http://mxe.cc/) that provides an easy-to-use way
 of setting up the cross-compiler and all required libraries.
 
 mxe is a fast-changing project. In order to provide a stable basis for
@@ -33,15 +33,15 @@ features required by MKVToolNix saving compilation time and deployment
 space. In order to retrieve that fork you need `git`. Then to the
 following:
 
-    git clone https://github.com/mbunkus/mxe $HOME/mingw-cross-env
+    git clone https://github.com/mbunkus/mxe $HOME/mxe
 
-The rest of this guide assumes that you've unpacked mingw-cross-env
-into the directory `$HOME/mingw-cross-env`.
+The rest of this guide assumes that you've unpacked mxe
+into the directory `$HOME/mxe`.
 
 ## 1.2. Automatic build script
 
 MKVToolNix contains a script that can download, compile and install
-all required libraries into the directory `$HOME/mingw-cross-env`.
+all required libraries into the directory `$HOME/mxe`.
 
 If the script does not work or you want to do everything yourself
 you'll find instructions for manual compilation in section 1.3.
@@ -59,7 +59,7 @@ for. The majority of users to day run a 64bit Windows, therefore 64 is
 the default. If you run a 32bit version of Windows then change this to
 32.
 
-    INSTALL_DIR=$HOME/mingw-cross-env
+    INSTALL_DIR=$HOME/mxe
 
 Base installation directory
 
@@ -79,22 +79,22 @@ source tree. You just have to run `drake` afterwards.
 
 ## 1.3. Manual installation
 
-First you will need the mingw-cross-env build scripts. Get them by
+First you will need the mxe build scripts. Get them by
 downloading them (see section 1.1. above) and unpacking them into
-`$HOME/mingw-cross-env`.
+`$HOME/mxe`.
 
 Next, build the required libraries (change `MXE_TARGETS` to
 `i686-w64-mingw32.static` if you need a 32bit build instead of a 64bit
 one, and increase `JOBS` if you have more than one core):
 
-    cd $HOME/mingw-cross-env
+    cd $HOME/mxe
     make MXE_TARGETS=x86_64-w64-mingw32.static JOBS=2 \
       gettext libiconv zlib boost curl file flac lzo ogg pthreads \
       vorbis qtbase qttranslations qtwinextras
 
 Append the installation directory to your `PATH` variable:
 
-    export PATH=$PATH:$HOME/mingw-cross-env/usr/bin
+    export PATH=$PATH:$HOME/mxe/usr/bin
     hash -r
 
 Finally, configure MKVToolNix (the `host=…` spec must match the
@@ -102,12 +102,12 @@ Finally, configure MKVToolNix (the `host=…` spec must match the
 
     cd $HOME/path/to/mkvtoolnix-source
     host=x86_64-w64-mingw32.static
-    qtbin=$HOME/mingw-cross-env/usr/${host}/qt5/bin
+    qtbin=$HOME/mxe/usr/${host}/qt5/bin
     ./configure \
       --host=${host} \
       --enable-static-qt \
       --with-moc=${qtbin}/moc --with-uic=${qtbin}/uic --with-rcc=${qtbin}/rcc \
-      --with-boost=$HOME/mingw-cross-env/usr/${host}
+      --with-boost=$HOME/mxe/usr/${host}
 
 If everything works then build it:
 

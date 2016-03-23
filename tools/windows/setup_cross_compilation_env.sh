@@ -15,8 +15,8 @@ set -e
 # This defaults to a 64bit executable. If you need a 32bit executable
 # then change ARCHITECTURE to 32.
 ARHICTECTURE=64
-# Installation defaults to ~/mingw-cross-env.
-INSTALL_DIR=${INSTALL_DIR:-$HOME/mingw-cross-env}
+# Installation defaults to ~/mxe.
+INSTALL_DIR=${INSTALL_DIR:-$HOME/mxe}
 # Leave PARALLEL empty if you want the script to use all of your CPU
 # cores.
 PARALLEL=${PARALLEL:-$(( $(awk '/^core id/ { print $4 }' /proc/cpuinfo | sort | tail -n 1) + 2 ))}
@@ -36,10 +36,10 @@ LOGFILE=$(mktemp -p '' mkvtoolnix_setup_cross_compilation_env.XXXXXX)
 
 function update_mingw_cross_env {
   if [[ ! -d $INSTALL_DIR ]]; then
-    echo Retrieving the mingw-cross-env build scripts >> $LOGFILE
+    echo Retrieving the M cross environment build scripts >> $LOGFILE
     git clone https://github.com/mbunkus/mxe $INSTALL_DIR >> $LOGFILE 2>&1
   else
-    echo Updating the mingw-cross-env build scripts >> $LOGFILE
+    echo Updating the M cross environment build scripts >> $LOGFILE
     cd $INSTALL_DIR
     git pull >> $LOGFILE 2>&1
   fi
