@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-21 17:15+0100\n"
+"POT-Creation-Date: 2016-03-24 15:53+0100\n"
 "PO-Revision-Date: 2015-12-16 10:26+0100\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -1091,6 +1091,10 @@ msgstr "中止(&A)"
 msgid "&Abort jobs"
 msgstr "中止(&A)"
 
+#: src/info/ui/mainwindow.h:117
+msgid "&About mkvinfo"
+msgstr "關於 mkvinfo(&A)"
+
 #: src/mkvtoolnix-gui/jobs/tool.cpp:324
 #, fuzzy
 msgid "&Acknowledge warnings and errors"
@@ -1245,6 +1249,10 @@ msgstr "轉義參數(&E):"
 msgid "&Expand all"
 msgstr "展開全部項目(&E)"
 
+#: src/info/ui/mainwindow.h:115
+msgid "&Expand important elements"
+msgstr "展開重要(&E)\tCtrl-E"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:469
 msgid "&Extraction tool"
 msgstr "提取工具(&E)"
@@ -1252,6 +1260,10 @@ msgstr "提取工具(&E)"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:490
 msgid "&FAQ"
 msgstr ""
+
+#: src/info/ui/mainwindow.h:121
+msgid "&File"
+msgstr "檔案(&F)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:172
 #, fuzzy
@@ -1271,6 +1283,7 @@ msgstr "章節之前"
 msgid "&Header editor"
 msgstr "表頭編輯器(&H)"
 
+#: src/info/ui/mainwindow.h:120
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:310
 msgid "&Help"
 msgstr "說明(&H)"
@@ -1357,6 +1370,10 @@ msgstr "章節數:"
 msgid "&Only enable muxing of tracks with specific languages by default"
 msgstr ""
 
+#: src/info/ui/mainwindow.h:107
+msgid "&Open"
+msgstr "開啟(&O)"
+
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:183
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:448
 msgid "&Open Matroska file"
@@ -1383,6 +1400,10 @@ msgstr "開啟資料夾"
 #: src/mkvtoolnix-gui/forms/merge/tool.h:221
 msgid "&Open settings"
 msgstr "開啟設定值(&O)"
+
+#: src/info/ui/mainwindow.h:119
+msgid "&Options"
+msgstr "選項(&O)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:515
 msgid "&Ordered"
@@ -1463,6 +1484,10 @@ msgstr "儲存輸出(&S)"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:432
 msgid "&Save settings"
 msgstr "儲存設定值(&S)"
+
+#: src/info/ui/mainwindow.h:109
+msgid "&Save to text file"
+msgstr "儲存到純文字檔(&S)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1263
 #, fuzzy
@@ -3466,6 +3491,14 @@ msgstr "剪裁參數: 未以 <TID>:<left>,<top>,<right>,<bottom> 的形式給定
 msgid "Cropping:"
 msgstr "剪裁:"
 
+#: src/info/ui/mainwindow.h:114
+msgid "Ctrl+A"
+msgstr "Ctrl+A"
+
+#: src/info/ui/mainwindow.h:116
+msgid "Ctrl+E"
+msgstr "Ctrl+E"
+
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:495
 #, fuzzy
 msgid "Ctrl+L"
@@ -3476,6 +3509,7 @@ msgstr "Ctrl+A"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
+#: src/info/ui/mainwindow.h:108
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:435
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:449
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:459
@@ -3486,6 +3520,7 @@ msgstr "Ctrl+O"
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
+#: src/info/ui/mainwindow.h:112
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:438
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -3495,6 +3530,7 @@ msgstr "Ctrl+Q"
 msgid "Ctrl+R"
 msgstr "Ctrl+R"
 
+#: src/info/ui/mainwindow.h:110
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:433
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:453
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:463
@@ -4015,6 +4051,7 @@ msgstr ""
 msgid "E&xecute now"
 msgstr "mkvmerge 可執行檔"
 
+#: src/info/ui/mainwindow.h:111
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:437
 msgid "E&xit"
 msgstr "離開(&X)"
@@ -4390,6 +4427,10 @@ msgstr "正在提取軌道 %1% （CodecID 為「%2%」）至檔案「%3%」。�
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "不支援要提取的軌道識別碼 %1%（CodecID 為「%2%」）。\n"
+
+#: src/info/ui/mainwindow.h:118
+msgid "F1"
+msgstr "F1"
 
 #: src/common/file_types.cpp:78
 #: src/output/p_flac.h:39
@@ -5995,11 +6036,11 @@ msgstr "下一個剪輯的唯一 ID"
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "未指定 %1%，在「--%2% %3%」。\n"
 
-#: src/input/r_qtmp4.cpp:1523
+#: src/input/r_qtmp4.cpp:1524
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "第一個畫格未發現 AC-3 表頭; 此軌將被跳過。\n"
 
-#: src/input/r_qtmp4.cpp:2913
+#: src/input/r_qtmp4.cpp:2918
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "第一個畫格中未找到 AC-3 表頭; 將會略過此軌道。\n"
 
@@ -6738,128 +6779,128 @@ msgstr "QuickTime 相容視訊"
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
-#: src/input/r_qtmp4.cpp:347
+#: src/input/r_qtmp4.cpp:348
 #, boost-format
 msgid "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual size: %3%.\n"
 msgstr "Quicktime/MP4 讀取器:「%1%」單元過小。預期大小: >= %2%。實際大小: %3%。\n"
 
-#: src/input/r_qtmp4.cpp:2139
+#: src/input/r_qtmp4.cpp:2140
 msgid "Quicktime/MP4 reader: Constant samplesize & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 讀取器: 尚不支援固定取樣大小與可變時間長度。如果您有這樣的樣本檔案，請聯繫作者。\n"
 
-#: src/input/r_qtmp4.cpp:1480
+#: src/input/r_qtmp4.cpp:1481
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取塊號 %1%/%2% 大小 %3% 位置 %4%。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:2508
-#: src/input/r_qtmp4.cpp:2522
+#: src/input/r_qtmp4.cpp:2513
+#: src/input/r_qtmp4.cpp:2527
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 %1% 的擴展音訊描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:2479
+#: src/input/r_qtmp4.cpp:2480
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 %1% 的音訊描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:1199
+#: src/input/r_qtmp4.cpp:1200
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 %1% 的流描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:2554
+#: src/input/r_qtmp4.cpp:2559
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 無法讀取軌道 %1% 的視訊描述單元。\n"
 
-#: src/input/r_qtmp4.cpp:270
+#: src/input/r_qtmp4.cpp:271
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
 msgstr "Quicktime/MP4 讀取器: 未發現任何表頭單元。\n"
 
-#: src/input/r_qtmp4.cpp:273
+#: src/input/r_qtmp4.cpp:274
 msgid "Quicktime/MP4 reader: Have not found the 'mdat' atom. No movie data found.\n"
 msgstr "Quicktime/MP4 讀取器: 未發現「mdat」單元。找不到影片資料。\n"
 
-#: src/input/r_qtmp4.cpp:82
+#: src/input/r_qtmp4.cpp:83
 #, boost-format
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 讀取器: 無效的區塊大小 %1% 於 %2%。\n"
 
-#: src/input/r_qtmp4.cpp:2960
+#: src/input/r_qtmp4.cpp:2965
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: MPEG4 part 10/AVC 軌道 %1% 缺少解碼器設定資訊。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:2986
+#: src/input/r_qtmp4.cpp:2991
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: MPEG4 軌 %1% 缺少 esds 單元/解碼器設定資訊。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:2970
+#: src/input/r_qtmp4.cpp:2975
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: MPEGH part 2/HEVC 軌道 %1% 缺少解碼器設定。正在略過該軌道。\n"
 
-#: src/input/r_qtmp4.cpp:590
+#: src/input/r_qtmp4.cpp:591
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 「media header」媒體表頭單元 (「mdhd」) 使用了不受支援的版本 %1%。\n"
 
-#: src/input/r_qtmp4.cpp:1192
+#: src/input/r_qtmp4.cpp:1193
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 讀取器: 軌道 %1% 的媒體流描述單元的「size」欄位過小。\n"
 
-#: src/input/r_qtmp4.cpp:595
+#: src/input/r_qtmp4.cpp:596
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 讀取器: 「time scale」時間縮放參數為 0。這是不支援的。\n"
 
-#: src/input/r_qtmp4.cpp:2931
+#: src/input/r_qtmp4.cpp:2936
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: 該 AAC 軌道 %1% 缺少 esds 單元/解碼器設定資訊。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:2926
+#: src/input/r_qtmp4.cpp:2931
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: 音軌 %1% 的「esds」單元使用了不支援的「object type id」物件類別號 %2%。正在跳過該軌。\n"
 
-#: src/input/r_qtmp4.cpp:2980
+#: src/input/r_qtmp4.cpp:2985
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 讀取器: 視訊軌 %1% 遺失 ESDS 單元。正在跳過此軌。\n"
 
-#: src/input/r_qtmp4.cpp:379
+#: src/input/r_qtmp4.cpp:380
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '%1%'. Aborting.\n"
 msgstr "Quicktime/MP4 讀取器: 此檔案用不明或不支援的壓縮演算法「%1%」壓縮表頭。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:412
+#: src/input/r_qtmp4.cpp:413
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size (%1%) was not what is available after uncompressing (%2%).\n"
 msgstr "Quicktime/MP4 讀取器: 此檔案的表頭經過壓縮，但預期的解壓縮後大小 (%1%) 與解壓縮得到的大小不符 (%2%)。\n"
 
-#: src/input/r_qtmp4.cpp:403
+#: src/input/r_qtmp4.cpp:404
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 讀取器: 此檔按的表頭經過壓縮，但無法初始化 zlib 庫。zlib 錯誤碼: %1%。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:408
+#: src/input/r_qtmp4.cpp:409
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 讀取器: 此檔按的表頭經過壓縮，但無法解壓。zlib 錯誤碼: %1%。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:2882
-#: src/input/r_qtmp4.cpp:2901
-#: src/input/r_qtmp4.cpp:2941
-#: src/input/r_qtmp4.cpp:3004
+#: src/input/r_qtmp4.cpp:2887
+#: src/input/r_qtmp4.cpp:2906
+#: src/input/r_qtmp4.cpp:2946
+#: src/input/r_qtmp4.cpp:3009
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 讀取器: 軌道 %1% 缺少一些資料。表頭單元損壞?\n"
 
-#: src/input/r_qtmp4.cpp:2487
-#: src/input/r_qtmp4.cpp:2561
+#: src/input/r_qtmp4.cpp:2488
+#: src/input/r_qtmp4.cpp:2566
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4 讀取器: 軌道 ID %1% 有多個 FourCC。只會使用第一個 (%2%) 而不是這個 (%3%)。\n"
@@ -7541,6 +7582,10 @@ msgstr "短的 AAC 音訊套件 (長: %1% < %2%)\n"
 msgid "Short AAC audio packet (length: %1% < 2)\n"
 msgstr "短的 AAC 音訊套件 (長: %1% < 2)\n"
 
+#: src/info/ui/mainwindow.h:113
+msgid "Show &all elements"
+msgstr "顯示所有元件"
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1211
 msgid "Show &buttons for moving list view entries up and down"
 msgstr ""
@@ -7927,7 +7972,7 @@ msgstr "此 .idx 檔案不包含指明語言的第「id: ...」行。\n"
 msgid "The AAC profiles are different: %1% and %2%"
 msgstr "AAC profile 不同: %1% 與 %2%"
 
-#: src/input/r_qtmp4.cpp:1580
+#: src/input/r_qtmp4.cpp:1581
 msgid "The AVC video track is missing the 'CTTS' atom for frame timecode offsets. However, AVC/h.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timecodes for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timecodes right. As it is missing the timecodes for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
 msgstr "此 AVC 視訊軌缺少「CTTS」畫格時間碼偏移單元。然而，AVC/h.264 允許畫格有超過通常的一次 (對於 P 畫格) 或兩次 (對於 B 畫格) 畫格參考。此類畫格的時間碼會變得無序，需要「CTTS」單元來修正。由於缺少時間碼，此軌可能發生錯誤。請查看生成的檔案，確認它是不是您預期的樣子。\n"
 
@@ -7998,7 +8043,7 @@ msgstr ""
 msgid "The MIME type must not be left empty."
 msgstr ""
 
-#: src/input/r_qtmp4.cpp:1074
+#: src/input/r_qtmp4.cpp:1075
 #, boost-format
 msgid "The MP4 file '%1%' contains chapters whose format was not recognized. This is often the case if the chapters are not encoded in UTF-8. Use the '--chapter-charset' option in order to specify the charset to use.\n"
 msgstr "此 MP4 檔「%1%」含有無法辨識格式的章節。若章節不是用 UTF-8 編碼時常發生這個情形。使用「--chapter-charset」選項來指定要使用的字元編碼集。\n"
@@ -8681,7 +8726,7 @@ msgstr "字母「G」, 「M」和「K」分別可以用來代表十億/百萬/�
 msgid "The line %1% of the timecode file '%2%' does not contain a valid floating point number.\n"
 msgstr "時間碼檔案「%2%」的第 %1% 行不包含有效的浮點數。\n"
 
-#: src/common/translation.cpp:342
+#: src/common/translation.cpp:343
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
 msgstr "地區無法正常設定。請檢查 LANG, LC_ALL 和 LC_MESSAGES 環境變數。\n"
 
@@ -9566,7 +9611,7 @@ msgstr "軌道 %1%（CodecID 為「%2%」）缺少 \"default duration\" 預設�
 msgid "Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"
 msgstr "軌道 %1%: %2%, 編解碼器 ID: %3%%4%%5%%6%\n"
 
-#: src/input/r_qtmp4.cpp:2636
+#: src/input/r_qtmp4.cpp:2641
 #, boost-format
 msgid "Track %1%: AAC found, but decoder config data has length %2%.\n"
 msgstr "軌道 %1%: 已發現 AAC, 但解碼器設定資料長度為 %2%。\n"
@@ -9587,7 +9632,7 @@ msgstr "軌道 %1%: NAL 太大。根據檔頭字段的大小: %2%，封包可用
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "軌道 %1%: 字幕編號 %2% 缺少時間長度。假定為 1 秒。\n"
 
-#: src/input/r_qtmp4.cpp:2639
+#: src/input/r_qtmp4.cpp:2644
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "軌道 %1%: AAC 資訊無法解析。\n"
@@ -10891,6 +10936,10 @@ msgstr "缺少數值"
 msgid "mkv&merge documentation"
 msgstr "mkvmerge 選項"
 
+#: src/info/ui/mainwindow.h:106
+msgid "mkvInfo"
+msgstr "mkvInfo"
+
 #: src/extract/extract_cli_parser.cpp:53
 msgid "mkvextract <-h|-V>"
 msgstr "mkvextract <-h|-V>"
@@ -11434,32 +11483,14 @@ msgstr "- 預設無選項目 -"
 msgid "– set to none –"
 msgstr "- 設定為無 -"
 
-#~ msgid "&About mkvinfo"
-#~ msgstr "關於 mkvinfo(&A)"
-
-#~ msgid "&Expand important elements"
-#~ msgstr "展開重要(&E)\tCtrl-E"
-
-#~ msgid "&File"
-#~ msgstr "檔案(&F)"
-
 #~ msgid "&Files:"
 #~ msgstr "檔案(&F):"
 
 #~ msgid "&Merging"
 #~ msgstr "合併(&M)"
 
-#~ msgid "&Open"
-#~ msgstr "開啟(&O)"
-
-#~ msgid "&Options"
-#~ msgstr "選項(&O)"
-
 #~ msgid "&Remove"
 #~ msgstr "移除(&R)"
-
-#~ msgid "&Save to text file"
-#~ msgstr "儲存到純文字檔(&S)"
 
 #~ msgid "&Select all"
 #~ msgstr "選擇所有軌道(&S)"
@@ -11467,20 +11498,8 @@ msgstr "- 設定為無 -"
 #~ msgid "Countr&y:"
 #~ msgstr "國家:"
 
-#~ msgid "Ctrl+A"
-#~ msgstr "Ctrl+A"
-
-#~ msgid "Ctrl+E"
-#~ msgstr "Ctrl+E"
-
-#~ msgid "F1"
-#~ msgstr "F1"
-
 #~ msgid "Remove a&ll"
 #~ msgstr "移除所有任務(&L)"
-
-#~ msgid "Show &all elements"
-#~ msgstr "顯示所有元件"
 
 #~ msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
 #~ msgstr "你開始合併或加入任務到任務佇列中之前，你必須至少加入一個來源檔。"
@@ -11493,7 +11512,4 @@ msgstr "- 設定為無 -"
 
 #~ msgid "job queue"
 #~ msgstr "任務佇列"
-
-#~ msgid "mkvInfo"
-#~ msgstr "mkvInfo"
 
