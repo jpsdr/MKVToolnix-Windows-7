@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2016-03-01 23:18+0100\n"
-"PO-Revision-Date: 2016-01-11 17:34+0100\n"
+"PO-Revision-Date: 2016-03-24 14:03+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -38,7 +38,7 @@ msgstr "8.9.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2016-02-21"
-msgstr ""
+msgstr "21 de febrer de 2016"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -650,20 +650,19 @@ msgstr "Exporta la informació dels capítols en un format simple, emprat en les
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:388
-#, fuzzy
 #| msgid "<option>--language</option> <parameter>TID:language</parameter>"
 msgid "<option>--simple-language</option> <parameter>language</parameter>"
-msgstr "<option>--language</option> <parameter>TID:idioma</parameter>"
+msgstr "<option>--simple-language</option> <parameter>idioma</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:391
 msgid "If the simple format is enabled then &mkvextract; will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name.  By default &mkvextract; will use the first chapter name found for each atom regardless of its language."
-msgstr ""
+msgstr "Si el format simple està habilitat, llavors el &mkvextract; simplement mostrarà una única entrada per a cada àtom de capítol trobat, fins i tot si un àtom de capítol conté més d'un nom de capítol. Per omissió, el &mkvextract; emprarà el primer nom de capítol trobat per a cada àtom, independentment del seu idioma."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:396
 msgid "Using this option allows the user to determine which chapter names are output if atoms contain more than one chapter name.  The <parameter>language</parameter> parameter must be an ISO 639-1 or ISO 639-2 code."
-msgstr ""
+msgstr "L'ús d'aquesta opció permet a l'usuari determinar quins són els noms dels capítols de sortida si els àtoms contenen més d'un nom de capítol. El paràmetre <parameter>language</parameter> ha de ser un codi ISO 639-1 o ISO 639-2."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:404
@@ -1654,10 +1653,9 @@ msgstr "Aquesta opció es pot emprar tant per a simples fitxers de capítols, co
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:193
-#, fuzzy
 #| msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> option."
 msgid "The language set with this option is also used when chapters are generated with the <link linkend=\"mkvmerge.description.generate_chapters\"><option>--generate-chapters</option> option</link>."
-msgstr "El contingut es tractarà com si s'hagués passat l'opció <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link>."
+msgstr "L'idioma establert amb aquesta opció també s'usarà quan es generin els capítols amb l'opció <link linkend=\"mkvmerge.description.generate_chapters\"><option>--generate-chapters</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:200
@@ -1677,107 +1675,105 @@ msgstr "Aquest ajustament també s'aplica als capítols que es copien des de cer
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:216
-#, fuzzy
 #| msgid "<option>--chapters</option> <parameter>file-name</parameter>"
 msgid "<option>--generate-chapters</option> <parameter>mode</parameter>"
-msgstr "<option>--chapters</option> <parameter>nom_fitxer</parameter>"
+msgstr "<option>--generate-chapters</option> <parameter>mode</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:219
 msgid "&mkvmerge; can create chapters automatically.  The following two modes are currently supported:"
-msgstr ""
+msgstr "El &mkvmerge; pot crear capítols de forma automàtica. Actualment estan suportats els dos modes següents:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:225
 msgid "'<literal>when-appending</literal>' – This mode creates one chapter at the start and one chapter whenever a file is appended."
-msgstr ""
+msgstr "«<literal>when-appending</literal>» – Aquest mode crearà un capítol al començament i un cada vegada que s'annexi un fitxer."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:230
 msgid "&mkvmerge; requires a video or an audio track to be present in order to be able to determine when a new file is appended.  If one or more video tracks are muxed the first one is used.  Otherwise the first audio track is used."
-msgstr ""
+msgstr "El &mkvmerge; requereix que hi hagi una pista de vídeo o d'àudio present per tal de poder determinar quan s'annexa un fitxer nou. Si es multiplexen una o més pistes de vídeo, s'emprarà la primera. D'altra manera s'emprarà la primera pista d'àudio."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:238
 msgid "'<literal>interval:</literal><parameter>time-spec</parameter>' – This mode creates one chapter at fixed intervals given by <parameter>time-spec</parameter>.  The format is either the form <parameter>HH:MM:SS.nnnnnnnnn</parameter> or a number followed by one of the units '<literal>s</literal>', '<literal>ms</literal>' or '<literal>us</literal>'."
-msgstr ""
+msgstr "«<literal>interval:</literal><parameter>temps-especificat</parameter>» – Aquesta mode crearà un capítol a intervals fixos donats per <parameter>temps-especificat</parameter>. El format segueix la forma <parameter>HH:MM:SS.nnnnnnnnn</parameter> o com un número seguit per una de les unitats «<literal>s</literal>», «<literal>ms</literal>» o «<literal>us»</literal>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:244
 msgid "Example: <literal>--generate-chapters interval:45s</literal>"
-msgstr ""
+msgstr "Exemple: <literal>--generate-chapters interval:45s</literal>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:250
 msgid "The names for the new chapters are controlled by the option <link linkend=\"mkvmerge.description.generate_chapters_name_template\">--generate-chapters-name-template</link>.  The language is set with <link linkend=\"mkvmerge.description.chapter_language\">--chapter-language</link> which must occur before <option>--generate-chapters</option>."
-msgstr ""
+msgstr "Els noms pels capítols nous es controlen mitjançant l'opció <link linkend=\"mkvmerge.description.generate_chapters_name_template\">--generate-chapters-name-template</link>. L'idioma s'estableix amb <link linkend=\"mkvmerge.description.chapter_language\">--chapter-language</link>, el qual haurà d'anar abans que <option>--generate-chapters</option>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:259
-#, fuzzy
 #| msgid "<option>--cue-chapter-name-format</option> <parameter>format</parameter>"
 msgid "<option>--generate-chapters-name-template</option> <parameter>template</parameter>"
-msgstr "<option>--cue-chapter-name-format</option> <parameter>format</parameter>"
+msgstr "<option>--generate-chapters-name-template</option> <parameter>plantilla</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:262
 msgid "This sets the name template for chapter names generated by the option <link linkend=\"mkvmerge.description.generate_chapters\">--generate-chapters</link>. If the option is not used then default '<literal>Chapter &lt;NUM:2&gt;</literal>' will be used."
-msgstr ""
+msgstr "Això estableix la plantilla del nom pels noms dels capítols generats per l'opció <link linkend=\"mkvmerge.description.generate_chapters\">--generate-chapters</link>. Si no s'empra aquesta opció, llavors s'emprarà el «<literal>Chapter &lt;NUM:2&gt;</literal>» predeterminat."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:268
 msgid "There are several variables that can be used in the template that are replaced by their actual values when a chapter is generated.  The string '<literal>&lt;NUM&gt;</literal>' will be replaced by the chapter number. The string '<literal>&lt;START&gt;</literal>' will be replaced by the chapter's start timestamp."
-msgstr ""
+msgstr "Hi ha diverses variables que es poden usar a la plantilla que seran substituïdes amb els valors actuals quan es generi un capítol. La cadena «<literal>&lt;NUM&gt;</literal>» serà substituïda pel número de capítol. La cadena «<literal>&lt;START&gt;</literal>» serà substituïda per la marca de temps d'inici del capítol."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:274
 msgid "You can specify a minimum number of places for the chapter number with '<literal>&lt;NUM:places&gt;</literal>', e.g. '<literal>&lt;NUM:3&gt;</literal>'.  The resulting number will be padded with leading zeroes if the number of places is less than specified."
-msgstr ""
+msgstr "Podeu especificar un nombre mínim de llocs per al número de capítol amb «<literal>&lt;NUM:places&gt;</literal>», p. ex. «<literal>&lt;NUM:3&gt;</literal>». El nombre resultant serà emplenat amb zeros a l'esquerra si el nombre de posicions és menor que l'especificat."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:279
 msgid "You can control the format used by the start timestamp with <literal>&lt;START:format&gt;</literal>.  The format defaults to '<literal>%H:%M:%S</literal>' if none is given.  Valid format codes are:"
-msgstr ""
+msgstr "Podeu controlar el format emprat per a la marca de temps d'inici amb <literal>&lt;START:format&gt;</literal>. Si no s'indica cap, el format predeterminat és «<literal>%H:%M:%S</literal>». Els codis de format vàlids són:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:285
 msgid "<literal>%h</literal> – hours"
-msgstr ""
+msgstr "<literal>%h</literal> – hores"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:288
 msgid "<literal>%H</literal> – hours zero-padded to two places"
-msgstr ""
+msgstr "<literal>%H</literal> – hora de dos dígits farcida amb zeros"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:291
 msgid "<literal>%m</literal> – minutes"
-msgstr ""
+msgstr "<literal>%m</literal> – minuts"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:294
 msgid "<literal>%M</literal> – minutes zero-padded to two places"
-msgstr ""
+msgstr "<literal>%M</literal> – minuts de dos dígits farcits amb zeros"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:297
 msgid "<literal>%s</literal> – seconds"
-msgstr ""
+msgstr "<literal>%s</literal> – segons"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:300
 msgid "<literal>%S</literal> – seconds zero-padded to two places"
-msgstr ""
+msgstr "<literal>%S</literal> – segons de dos dígits farcits amb zeros"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:303
 msgid "<literal>%n</literal> – nanoseconds with nine places"
-msgstr ""
+msgstr "<literal>%n</literal> – nanosegons amb nou dígits"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:306
 msgid "<literal>%&lt;1-9&gt;n</literal> – nanoseconds with up to nine places (e.g. three places with <literal>%3n</literal>)"
-msgstr ""
+msgstr "<literal>%&lt;1-9&gt;n</literal> – nanosegons amb fins a nou dígits (p. ex., tres dígits amb <literal>%3n</literal>)"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:313
@@ -3755,15 +3751,8 @@ msgstr "Aquí hi ha un exemple de com adjuntar una fotografia i un tipus de llet
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:2492
-#, fuzzy, no-wrap
-#| msgid ""
-#| "$ mkvmerge -o output.mkv -A video.avi sound.ogg \\\n"
-#| "  --attachment-description \"Me and the band behind the stage in a small get-together\" \\\n"
-#| "  --attachment-mime-type image/jpeg \\\n"
-#| "  --attach-file me_and_the_band.jpg \\\n"
-#| "  --attachment-description \"The real rare and unbelievably good looking font\" \\\n"
-#| "  --attachment-type application/octet-stream \\\n"
-#| "  --attach-file really_cool_font.ttf"
+#, no-wrap
+#| msgid "$ mkvmerge -o output.mkv -A video.avi sound.ogg \\\n  --attachment-description \"Me and the band behind the stage in a small get-together\" \\\n  --attachment-mime-type image/jpeg \\\n  --attach-file me_and_the_band.jpg \\\n  --attachment-description \"The real rare and unbelievably good looking font\" \\\n  --attachment-type application/octet-stream \\\n  --attach-file really_cool_font.ttf"
 msgid ""
 "$ mkvmerge -o output.mkv -A video.avi sound.ogg \\\n"
 "  --attachment-description \"Me and the band behind the stage in a small get-together\" \\\n"
@@ -3778,7 +3767,7 @@ msgstr ""
 "  --attachment-mime-type image/jpeg \\\n"
 "  --attach-file jo_i_la_banda.jpg \\\n"
 "  --attachment-description \"Un tipus de lletra veritablement rar i amb un aspecte increïblement bo\" \\\n"
-"  --attachment-type application/octet-stream \\\n"
+"  --attachment-mime-type application/octet-stream \\\n"
 "  --attach-file tipus_de_lletra_molt_fresc.ttf"
 
 #. type: Content of: <refentry><refsect1><para>
