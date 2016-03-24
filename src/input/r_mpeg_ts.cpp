@@ -1575,11 +1575,15 @@ mpeg_ts_reader_c::finish() {
   if (file_done)
     return flush_packetizers();
 
-  for (auto &track : tracks)
+  for (auto &track : tracks) {
     if ((-1 != track->ptzr) && (0 < track->pes_payload->get_size())) {
       auto bytes_to_skip = std::min<size_t>(track->pes_payload->get_size(), track->skip_packet_data_bytes);
       track->process(std::make_shared<packet_t>(memory_c::clone(track->pes_payload->get_buffer() + bytes_to_skip, track->pes_payload->get_size() - bytes_to_skip)));
     }
+
+    if (track->converter)
+      track->converter->flush();
+  }
 
   file_done = true;
 
