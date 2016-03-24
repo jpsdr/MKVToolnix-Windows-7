@@ -40,9 +40,9 @@ public:
 protected:
   size_t m_in_size, m_pos, m_data_length;
   unsigned char *m_buf;
-  timestamp_c m_queued_timestamp, m_current_timestamp;
-  std::string m_queued_content, m_current_content;
-  boost::optional<std::pair<int, int>> m_wanted_page;
+  timestamp_c m_queued_timestamp, m_current_page_timestamp, m_current_packet_timestamp;
+  packet_cptr m_queued_packet;
+  boost::optional<int> m_wanted_page;
   bool m_page_changed{};
 
   ttx_page_data_t m_ttx_page_data;
@@ -55,15 +55,17 @@ public:
   teletext_to_srt_packet_converter_c(generic_packetizer_c *ptzr);
   virtual ~teletext_to_srt_packet_converter_c() {};
 
-  virtual bool convert(packet_cptr const &packet);
+  virtual bool convert(packet_cptr const &packet) override;
+  virtual void flush() override;
 
 protected:
-  void process_ttx_packet(packet_cptr const &packet);
+  void process_ttx_packet();
   std::string page_to_string() const;
-  void decode_line(unsigned char const *buffer, unsigned int row);
-  void process_single_row(int row_number, timestamp_c const &packet_timestamp);
+  bool decode_line(unsigned char const *buffer, unsigned int row_number);
+  void process_single_row(unsigned int row_number);
   void decode_page_data(unsigned char ttx_header_magazine);
-  void deliver_queued_content(timestamp_c const &packet_timestamp);
+  void deliver_queued_content();
+  void queue_packet(packet_cptr const &new_packet);
 
 protected:
   static int ttx_to_page(int ttx);

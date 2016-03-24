@@ -1,3 +1,18 @@
+2016-03-24  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: fixed two more issues in the conversion of
+        teletext subtitles to SRT subtitles:
+
+        1. Packets belonging to pages that don't contain subtitles were
+        used as valid end points for subtitles causing entries to become
+        very short (e.g. 40ms).
+
+        2. Sometimes the timestamps of wrong packets were used as entry's
+        start and end points causing start timestamps and durations that
+        were slightly off.
+
+        Second part of the fix for #1623.
+
 2016-03-22  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: MP4/QuickTime reader: audio tracks with the FourCC
@@ -51,10 +66,16 @@
 2016-03-16  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: fixed two issues in the conversion of
-        teletext subtitles to SRT subtitles: 1. the handling of streams in
-        which consecutive teletext packets contain the same content and
-        2. the calculation of a packet's duration for certain
-        situations. Fixes #1623.
+        teletext subtitles to SRT subtitles:
+
+        1. Consecutive teletext packets with the same content are now
+        merged into a single entry instead of resulting in multiple
+        entries.
+
+        2. The calculation of a packet's duration was wrong in certain
+        situations.
+
+        Part of the fix for #1623.
 
 2016-03-14  Moritz Bunkus  <moritz@bunkus.org>
 
