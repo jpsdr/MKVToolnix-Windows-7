@@ -261,6 +261,7 @@ Section -Post
 SectionEnd
 
 Function showExternalLinks
+  IfSilent +4 0
   Push $R0
   InstallOptions::dialog $PLUGINSDIR\external_links.ini
   Pop $R0
@@ -270,16 +271,19 @@ var unRemoveJobs
 
 Function un.onUninstSuccess
   HideWindow
+  IfSilent +2 0
   MessageBox MB_ICONINFORMATION|MB_OK "$(STRING_UNINSTALLED_OK)"
 FunctionEnd
 
 Function un.onInit
   !insertmacro MUI_UNGETLANGUAGE
+  IfSilent +3 0
   MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(STRING_REMOVE_PROGRAM_QUESTION)" IDYES +2
   Abort
   StrCpy $unRemoveJobs "No"
   IfFileExists "$INSTDIR\jobs\*.*" +2
   Return
+  IfSilent +3 0
   MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "$(STRING_REMOVE_JOB_FILES_QUESTION)" IDYES +2
   Return
   StrCpy $unRemoveJobs "Yes"
