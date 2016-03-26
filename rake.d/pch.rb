@@ -298,8 +298,15 @@ module PCH
 
   #############################################################################
 
+  @@object_file_ext_map = {
+    'moc' => 'moco',
+  }
+
   def self.add_prerequisites
-    @db_scan.each_pair { |user,header| file user => "#{header}#{@extension}" }
+    @db_scan.each_pair do |user, header|
+      object = user.gsub(%r{\.([^.]+)}) { |ext| @@object_file_ext_map[ext] || 'o' }
+      file object => "#{header}#{@extension}"
+    end
   end
 
   #############################################################################
