@@ -219,7 +219,7 @@ namespace :apps do
 
   desc "Strip all apps"
   task :strip => $applications do
-    runq "   STRIP", "#{c(:STRIP)} #{$applications.join(' ')}"
+    runq "strip", nil, "#{c(:STRIP)} #{$applications.join(' ')}"
   end
 end
 
@@ -235,7 +235,7 @@ cxx_compiler = lambda do |t|
   lang   = pchi.language ? pchi.language : "c++"
 
   args = [
-    "     CXX #{source}",
+    "cxx", source,
     "#{c(:CXX)} #{$flags[:cxxflags]}#{pchu}#{pchx} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} -x #{lang} #{source}",
     :allow_failure => true
   ]
@@ -257,12 +257,12 @@ rule '.o' => '.c' do |t|
   create_dependency_dirs
   dep = dependency_output_name_for t.name
 
-  runq "      CC #{t.source}", "#{c(:CC)} #{$flags[:cflags]} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} #{t.sources.join(" ")}", :allow_failure => true
+  runq "cc", t.source, "#{c(:CC)} #{$flags[:cflags]} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} #{t.sources.join(" ")}", :allow_failure => true
   handle_deps t.name, last_exit_code
 end
 
 rule '.o' => '.rc' do |t|
-  runq " WINDRES #{t.source}", "#{c(:WINDRES)} #{$flags[:windres]} -o #{t.name} #{t.sources.join(" ")}"
+  runq "windres", t.source, "#{c(:WINDRES)} #{$flags[:windres]} -o #{t.name} #{t.sources.join(" ")}"
 end
 
 # Resources depend on the manifest.xml file for Windows builds.
@@ -275,12 +275,12 @@ if c?(:MINGW)
 end
 
 rule '.mo' => '.po' do |t|
-  runq "  MSGFMT #{t.source}", "msgfmt -c -o #{t.name} #{t.sources.join(" ")}"
+  runq "msgfmt", t.source, "msgfmt -c -o #{t.name} #{t.sources.join(" ")}"
 end
 
 if !c(:LCONVERT).blank?
   rule '.qm' => '.ts' do |t|
-    runq "LCONVERT #{t.source}", "#{c(:LCONVERT)} -o #{t.name} -i #{t.sources.join(" ")}"
+    runq "lconvert", t.source, "#{c(:LCONVERT)} -o #{t.name} -i #{t.sources.join(" ")}"
   end
 end
 
@@ -297,7 +297,7 @@ if c?(:XSLTPROC_WORKS)
       end
     end
 
-    runq "XSLTPROC #{t.source}", "#{c(:XSLTPROC)} #{c(:XSLTPROC_FLAGS)} -o #{t.name} #{c(:DOCBOOK_MANPAGES_STYLESHEET)} #{t.sources.join(" ")}", :filter_output => filter
+    runq "xsltproc", t.source, "#{c(:XSLTPROC)} #{c(:XSLTPROC_FLAGS)} -o #{t.name} #{c(:DOCBOOK_MANPAGES_STYLESHEET)} #{t.sources.join(" ")}", :filter_output => filter
   end
 
   $manpages.each do |manpage|
@@ -315,7 +315,7 @@ rule '.h' => '.ui' do |t|
   begin
     temp.close
 
-    runq "     UIC #{t.source}", "#{c(:UIC)} -tr QPTR #{t.sources.join(" ")} > #{temp.path}"
+    runq "uic", t.source, "#{c(:UIC)} -tr QPTR #{t.sources.join(" ")} > #{temp.path}"
 
     # Convert calls to QPTR(…, 0) to QT(…)
     output = IO.
@@ -331,11 +331,11 @@ rule '.h' => '.ui' do |t|
 end
 
 rule '.cpp' => '.qrc' do |t|
-  runq "     RCC #{t.source}", "#{c(:RCC)} #{t.sources.join(" ")} > #{t.name}"
+  runq "rcc", t.source, "#{c(:RCC)} #{t.sources.join(" ")} > #{t.name}"
 end
 
 rule '.moc' => '.h' do |t|
-  runq "     MOC #{t.source}", "#{c(:MOC)} #{c(:QT_CFLAGS)} #{$system_includes} #{$flags[:moc]} -nw #{t.source} > #{t.name}"
+  runq "moc", t.source, "#{c(:MOC)} #{c(:QT_CFLAGS)} #{$system_includes} #{$flags[:moc]} -nw #{t.source} > #{t.name}"
 end
 
 rule '.moco' => '.moc' do |t|
@@ -350,16 +350,17 @@ desc "Create browse file for Emacs"
 task :browse => "BROWSE"
 
 file "TAGS" => $all_sources do |t|
-  runq '   ETAGS', "#{c(:ETAGS)} -o #{t.name} #{t.prerequisites.join(" ")}"
+  runq 'etags', nil, "#{c(:ETAGS)} -o #{t.name} #{t.prerequisites.join(" ")}"
 end
 
 file "BROWSE" => ($all_sources + $all_headers) do |t|
-  runq ' EBROWSE', "#{c(:EBROWSE)} -o #{t.name} #{t.prerequisites.join(" ")}"
+  runq 'ebrowse', nil, "#{c(:EBROWSE)} -o #{t.name} #{t.prerequisites.join(" ")}"
 end
 
 file "doc/development.html" => [ "doc/development.md", "doc/pandoc-template.html" ] do |t|
-  runq "  PANDOC #{t.prerequisites.first}", "#{c(:PANDOC)} -o #{t.name} --standalone --from markdown_strict --to html --number-sections --table-of-contents " +
-    "--css=pandoc.css --template=doc/pandoc-template.html doc/development.md"
+  runq "pandoc", t.prerequisites.first, <<COMMAND
+    #{c(:PANDOC)} -o #{t.name} --standalone --from markdown_strict --to html --number-sections --table-of-contents --css=pandoc.css --template=doc/pandoc-template.html doc/development.md
+COMMAND
 end
 
 file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{Rakefile} do |t|
@@ -380,7 +381,7 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
   options  += ["'--msgid-bugs-address=Moritz Bunkus <moritz@bunkus.org>'"]
   options  += ["'--copyright-holder=Moritz Bunkus <moritz@bunkus.org>'", "--package-name=MKVToolNix", "--package-version=#{c(:PACKAGE_VERSION)}", "--foreign-user"]
 
-  runq "XGETTEXT #{t.name}", "xgettext #{keywords.join(" ")} #{options.join(" ")} -o #{t.name} #{sources.join(" ")}"
+  runq "xgettext", t.name, "xgettext #{keywords.join(" ")} #{options.join(" ")} -o #{t.name} #{sources.join(" ")}"
 end
 
 task :manpages => $manpages
@@ -488,7 +489,7 @@ EOT
       name = manpage.gsub(/man\//, "man/#{language}/")
       file name            => [ name.ext('xml'),     "doc/man/po4a/po/#{language}.po" ]
       file name.ext('xml') => [ manpage.ext('.xml'), "doc/man/po4a/po/#{language}.po" ] do |t|
-        runq "    PO4A #{manpage.ext('.xml')} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{manpage.ext('.xml')} -p doc/man/po4a/po/#{language}.po -l #{t.name}"
+        runq "po4a", "#{manpage.ext('.xml')} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{manpage.ext('.xml')} -p doc/man/po4a/po/#{language}.po -l #{t.name}"
       end
     end
   end
@@ -506,7 +507,7 @@ EOT
           po       = "po/#{language}.po"
           tmp_file = "#{po}.new"
           no_wrap  = $unwrapped_po.include?(language) ? "" : "--no-wrap"
-          runq "MSGMERGE #{po}", "msgmerge -q -s #{no_wrap} #{po} po/mkvtoolnix.pot > #{tmp_file}", :allow_failure => true
+          runq "msgmerge", po, "msgmerge -q -s #{no_wrap} #{po} po/mkvtoolnix.pot > #{tmp_file}", :allow_failure => true
 
           exit_code = last_exit_code
           if 0 != exit_code
@@ -523,7 +524,7 @@ EOT
 
     desc "Update the man pages' translation files"
     task :manpages do
-      runq "    PO4A doc/man/po4a/po4a.cfg", "#{c(:PO4A)} #{c(:PO4A_FLAGS)} --msgmerge-opt=--no-wrap doc/man/po4a/po4a.cfg"
+      runq "po4a", "doc/man/po4a/po4a.cfg", "#{c(:PO4A)} #{c(:PO4A_FLAGS)} --msgmerge-opt=--no-wrap doc/man/po4a/po4a.cfg"
       $all_man_po_files.each do |po_file|
         normalize_po po_file
       end
@@ -583,8 +584,8 @@ EOT
     task task_name do
       FileList["po/*.po", "doc/man/po4a/po/*.po"].each do |name|
         command = "msgfmt --statistics -o /dev/null #{name} 2>&1"
-        if ENV["V"].to_bool
-          runq "  MSGFMT #{name}", command, :allow_failure => true
+        if verbose
+          runq "msgfmt", name, command, :allow_failure => true
         else
           puts "#{name} : " + `#{command}`.split(/\n/).first
         end
@@ -613,7 +614,7 @@ namespace :man2html do
 
       xml.each do |name|
         file name.ext('html') => %w{manpages translations:manpages} do
-          runq "SAXON-HE #{name}", "java -classpath lib/saxon-he/saxon9he.jar net.sf.saxon.Transform -o:#{name.ext('html')} -xsl:doc/stylesheets/docbook-to-html.xsl #{name}"
+          runq "saxon-he", name, "java -classpath lib/saxon-he/saxon9he.jar net.sf.saxon.Transform -o:#{name.ext('html')} -xsl:doc/stylesheets/docbook-to-html.xsl #{name}"
         end
 
         task File.basename(name, '.xml') => name.ext('html')

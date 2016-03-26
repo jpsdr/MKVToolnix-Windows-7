@@ -65,9 +65,18 @@ ensure
   end
 end
 
-def runq(msg, cmdline, options = {})
+def puts_runq action, target
+  return if verbose
+
+  msg  = sprintf "%12s", action.gsub(/ +/, '_').upcase
+  msg += " #{target}" if target && !target.empty?
+
+  puts msg
+end
+
+def runq(action, target, cmdline, options = {})
   verbose = ENV['V'].to_bool
-  puts msg if !verbose
+  puts_runq action, target
   run cmdline, options.clone.merge(:dont_echo => !verbose)
 end
 

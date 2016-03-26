@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 #   mkvtoolnix - programs for manipulating Matroska files
 #   Copyright © 2003…2016 Moritz Bunkus
@@ -497,16 +498,11 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
   # Advantage of keeping command-output together in a parallel build.
   # Disadvantage of delaying output until command is complete.
   #
-  def self.runq(msg, command, options={})
+  def self.runq(action, subject, command, options={})
     command = command.gsub(/\n/, ' ').gsub(/^\s+/, '').gsub(/\s+$/, '').gsub(/\s+/, ' ')
     if @verbose
       puts command
     else
-      if msg =~ /^\s*(\S+)\s+(.*)/
-        (action,subject) = $~.captures
-      else
-        (action,subject) = nil
-      end
       h = options.fetch(:htrace, nil) ? 't' : '-'
       u = options.fetch(:user, nil) ? 'u' : '-'
       p = options.fetch(:precompile, nil) ? 'p' : '-'
