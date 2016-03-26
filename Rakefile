@@ -241,7 +241,7 @@ cxx_compiler = lambda do |t|
   ]
 
   if pchi.pretty_flags
-    PCH.runq(*args[0..1], args[2].merge(pchi.pretty_flags))
+    PCH.runq(*args[0..2], args[3].merge(pchi.pretty_flags))
   else
     runq(*args)
   end
