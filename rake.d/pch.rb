@@ -457,7 +457,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
   #############################################################################
 
   def self.load_config
-  # puts "load #{@config_file}" if @verbose
+    # puts "load #{@config_file}" if @verbose
     config = JSON.load(@config_file.open) if @config_file.exist?
     config = {} unless config
     @htrace = config.fetch('htrace', @htrace)
@@ -466,7 +466,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
   end
 
   def self.save_config
-  # puts "save #{@config_file}" if @verbose
+    # puts "save #{@config_file}" if @verbose
     root = {
       htrace: @htrace,
       pretty: @pretty,
@@ -654,4 +654,4 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
 
   #############################################################################
 
-  end # module PCH
+end # module PCH
