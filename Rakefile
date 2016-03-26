@@ -284,11 +284,6 @@ if !c(:LCONVERT).blank?
   end
 end
 
-# HTML help book stuff
-rule '.hhk' => '.hhc' do |t|
-  runq "    GREP #{t.source}", "#{c(:GREP)} -v 'name=\"ID\"' #{t.sources.join(" ")} > #{t.name}"
-end
-
 # man pages from DocBook XML
 if c?(:XSLTPROC_WORKS)
   rule '.1' => '.xml' do |t|
