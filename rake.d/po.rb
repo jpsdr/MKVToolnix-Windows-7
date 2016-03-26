@@ -193,3 +193,20 @@ def transifex_pull_and_merge resource, language
 
   write_po po_file, merged_items
 end
+
+def transifex_remove_fuzzy_and_push resource, language
+  po_file          = resource == "programs" ? "po/#{language}.po" : "doc/man/po4a/po/#{language}.po"
+  po_file_no_fuzzy = Tempfile.new("mkvtoolnix-rake-po-no-fuzzy")
+
+  runq_git po_file, "checkout HEAD -- #{po_file}"
+
+  runq "MSGATTRIB #{po_file}", "msgattrib --no-fuzzy --output=#{po_file_no_fuzzy.path} #{po_file}"
+
+  IO.write(po_file, IO.read(po_file_no_fuzzy))
+
+  normalize_po po_file
+
+  runq " TX_PUSH #{po_file}", "tx push -t -f --no-interactive -r mkvtoolnix.#{resource} -l #{language} > /dev/null"
+
+  runq_git po_file, "checkout HEAD -- #{po_file}"
+end

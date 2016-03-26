@@ -533,32 +533,54 @@ EOT
         normalize_po po_file
       end
     end
+  end
 
+  namespace :transifex do
     transifex_pull_targets = {
       "man-pages" => [],
       "programs"  => [],
     }
 
+    transifex_push_targets = {
+      "man-pages" => [],
+      "programs"  => [],
+    }
+
     $all_po_files.each do |po_file|
-      language = /\/([^\/]+)\.po$/.match(po_file)[1]
-      resource = /doc\/man/.match(po_file) ? "man-pages" : "programs"
-      target   = "transifex-pull-#{resource}-#{language}"
+      language    = /\/([^\/]+)\.po$/.match(po_file)[1]
+      resource    = /doc\/man/.match(po_file) ? "man-pages" : "programs"
+      pull_target = "pull-#{resource}-#{language}"
+      push_target = "push-#{resource}-#{language}"
 
-      transifex_pull_targets[resource] << "translations:update:#{target}"
+      transifex_pull_targets[resource] << "translations:transifex:#{pull_target}"
+      transifex_push_targets[resource] << "translations:transifex:#{push_target}"
 
-      task target => :no_unstaged_changes do
+      task pull_target => :no_unstaged_changes do
         transifex_pull_and_merge resource, language
+      end
+
+      task push_target => :no_unstaged_changes do
+        transifex_remove_fuzzy_and_push resource, language
       end
     end
 
     desc "Fetch and merge program translations from Transifex"
-    task "transifex-programs" => transifex_pull_targets["programs"]
+    task "pull-programs" => transifex_pull_targets["programs"]
 
     desc "Fetch and merge man page translations from Transifex"
-    task "transifex-man-pages" => transifex_pull_targets["man-pages"]
+    task "pull-man-pages" => transifex_pull_targets["man-pages"]
 
     desc "Fetch and merge all translations from Transifex"
-    task "transifex" => transifex_pull_targets.values.flatten
+    task "pull" => transifex_pull_targets.values.flatten
+
+    desc "Push program translations to Transifex"
+    task "push-programs" => transifex_push_targets["programs"]
+
+    desc "Push man page translations to Transifex"
+    task "push-man-pages" => transifex_push_targets["man-pages"]
+
+    desc "Push all translations to Transifex"
+    task "push" => transifex_push_targets.values.flatten
   end
 
   [ :stats, :statistics ].each_with_index do |task_name, idx|
