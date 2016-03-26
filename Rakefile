@@ -546,7 +546,7 @@ EOT
 
       transifex_pull_targets[resource] << "translations:update:#{target}"
 
-      task target do
+      task target => :no_unstaged_changes do
         transifex_pull_and_merge resource, language
       end
     end
