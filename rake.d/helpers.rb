@@ -157,7 +157,7 @@ def install_data(destination, *files)
   end
 end
 
-def remove_files_by_patters patterns
+def remove_files_by_patterns patterns
   verbose = ENV['V'].to_bool
 
   patterns.collect { |pattern| FileList[pattern].to_a }.flatten.uniq.select { |file_name| File.exists? file_name }.each do |file_name|

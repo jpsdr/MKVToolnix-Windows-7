@@ -1,3 +1,5 @@
+require_relative 'pch'
+
 class Target
   public
 
@@ -82,10 +84,7 @@ class Target
     @dependencies  = ( @dependencies + new_deps.collect { |a| a.first }                                     ).uniq
     @file_deps     = ( @file_deps    + new_file_deps                                                        ).uniq
 
-    if c?(:USE_PRECOMPILED_HEADERS)
-      new_deps.select { |dep| /\.moco$/.match dep[0] }.each { |dep| file dep[0] => [ dep[0].ext('.moc'), "src/common/common_pch.h.gch" ] }
-    end
-
+    PCH.moc_users(new_deps.select { |dep| /\.moco$/.match dep[0] }.map { |dep| dep[0].ext(".moc") }.to_a)
     self
   end
 

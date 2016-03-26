@@ -19,7 +19,7 @@
 
 //   AAAAAAAA AAABBCCD EEEEFFGH IIJJKLMM
 // - B : Mpeg version
-//       x 00 = MPEG Version 2.5 (later extension of MPEG 2)
+//       x 00 = MPEG Version 2.5 (later extension of MPEGÂ 2)
 //       x 01 = reserved
 //       x 10 = MPEG Version 2 (ISO/IEC 13818-3)
 //       x 11 = MPEG Version 1 (ISO/IEC 11172-3)

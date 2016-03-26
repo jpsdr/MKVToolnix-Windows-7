@@ -40,6 +40,7 @@ require_relative "rake.d/target"
 require_relative "rake.d/application"
 require_relative "rake.d/library"
 require_relative "rake.d/format_string_verifier"
+require_relative "rake.d/pch"
 require_relative "rake.d/po"
 require_relative "rake.d/tarball"
 require_relative 'rake.d/gtest' if $have_gtest
@@ -215,19 +216,26 @@ end
 cxx_compiler = lambda do |t|
   create_dependency_dirs
 
-  # t.sources is empty for a 'file' task (common_pch.h.o).
-  sources = t.sources.empty? ? [ t.prerequisites.first ] : t.sources
-  dep     = dependency_output_name_for t.name
-  lang    = t.name.end_with?(".gch") ? "c++-header" : "c++"
+  source = t.source ? t.source : t.prerequisites.first
+  dep    = dependency_output_name_for t.name
+  pchi   = PCH.info_for_user(source, t.name)
+  pchu   = pchi.use_flags ? " #{pchi.use_flags}" : ""
+  pchx   = pchi.extra_flags ? " #{pchi.extra_flags}" : ""
+  lang   = pchi.language ? pchi.language : "c++"
 
-  runq "     CXX #{sources.first}", "#{c(:CXX)} #{$flags[:cxxflags]} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} -x #{lang} #{sources.join(" ")}", :allow_failure => true
+  args = [
+    "     CXX #{source}",
+    "#{c(:CXX)} #{$flags[:cxxflags]}#{pchu}#{pchx} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} -x #{lang} #{source}",
+    :allow_failure => true
+  ]
+
+  if pchi.pretty_flags
+    PCH.runq(*args[0..1], args[2].merge(pchi.pretty_flags))
+  else
+    runq(*args)
+  end
+
   handle_deps t.name, last_exit_code, true
-end
-
-# Precompiled headers
-if c?(:USE_PRECOMPILED_HEADERS)
-  $all_objects.each { |name| file name => "src/common/common_pch.h.gch" }
-  file "src/common/common_pch.h.gch" => "src/common/common_pch.h", &cxx_compiler
 end
 
 # Pattern rules
@@ -321,7 +329,7 @@ rule '.cpp' => '.qrc' do |t|
 end
 
 rule '.moc' => '.h' do |t|
-  runq "     MOC #{t.prerequisites.first}", "#{c(:MOC)} #{c(:QT_CFLAGS)} #{$system_includes} #{$flags[:moc]} -nw #{t.prerequisites.join(" ")} > #{t.name}"
+  runq "     MOC #{t.source}", "#{c(:MOC)} #{c(:QT_CFLAGS)} #{$system_includes} #{$flags[:moc]} -nw #{t.source} > #{t.name}"
 end
 
 rule '.moco' => '.moc' do |t|
@@ -730,7 +738,6 @@ task :clean do
     **/*.dll
     **/*.exe
     **/*.exe
-    **/*.gch
     **/*.mo
     **/*.moc
     **/*.moco
@@ -748,8 +755,9 @@ task :clean do
     tests/unit/propedit/propedit
   }
   patterns += $applications + $tools.collect { |name| "src/tools/#{name}" }
+  patterns += PCH.clean_patterns
 
-  remove_files_by_patters patterns
+  remove_files_by_patterns patterns
 
   if Dir.exists? $dependency_dir
     puts "  rm -rf #{$dependency_dir}" if verbose
@@ -772,7 +780,7 @@ namespace :clean do
   task :unittests do
     patterns  = %w{tests/unit/*.o tests/unit/*/*.o tests/unit/*.a tests/unit/*/*.a}
     patterns += $gtest_apps.collect { |app| "tests/unit/#{app}/#{app}" }
-    remove_files_by_patters patterns
+    remove_files_by_patterns patterns
   end
 end
 
@@ -1020,6 +1028,9 @@ Application.new("src/tools/vc1parser").
   sources("src/tools/vc1parser.cpp").
   libraries($common_libs).
   create
+
+# Engage pch system
+PCH.engage(&cxx_compiler)
 
 $build_system_modules.values.each { |bsm| bsm[:define_tasks].call if bsm[:define_tasks] }
 
