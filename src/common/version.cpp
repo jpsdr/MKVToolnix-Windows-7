@@ -25,7 +25,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Father Daughter"
+#define VERSIONNAME "Power to progress"
 
 version_number_t::version_number_t()
   : valid(false)
