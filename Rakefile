@@ -199,6 +199,17 @@ import_dependencies
 # Default task
 define_default_task
 
+# A helper task to check if there are any unstaged changes.
+task :no_unstaged_changes do
+  has_changes = false
+  has_changes = true if !system("git rev-parse --verify HEAD &> /dev/null")                                 || $?.exitstatus != 0
+  has_changes = true if !system("git update-index -q --ignore-submodules --refresh &> /dev/null")           || $?.exitstatus != 0
+  has_changes = true if !system("git diff-files --quiet --ignore-submodules &> /dev/null")                  || $?.exitstatus != 0
+  has_changes = true if !system("git diff-index --cached --quiet --ignore-submodules HEAD -- &> /dev/null") || $?.exitstatus != 0
+
+  fail "There are unstaged changes; the operation cannot continue." if has_changes
+end
+
 desc "Build all applications"
 task :apps => $applications
 
