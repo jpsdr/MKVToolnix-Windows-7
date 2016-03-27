@@ -1,3 +1,10 @@
+2016-03-27  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: the DTS packetizer was setting the number of
+        channels wrong sometimes when reducing to the DTS core. It was
+        using the number of channels including the extensions instead of
+        the channels of the core only.
+
 2016-03-26  Moritz Bunkus  <moritz@bunkus.org>
 
         * Released v9.0.0 "Power to progress".

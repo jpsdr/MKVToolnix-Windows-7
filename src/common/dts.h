@@ -229,6 +229,7 @@ public:
   uint64_t get_packet_length_in_core_samples() const;
   timestamp_c get_packet_length_in_nanoseconds() const;
 
+  unsigned int get_core_num_audio_channels() const;
   unsigned int get_total_num_audio_channels() const;
   codec_c::specialization_e get_codec_specialization() const;
 

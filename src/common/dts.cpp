@@ -349,16 +349,22 @@ header_t::get_packet_length_in_nanoseconds()
 }
 
 unsigned int
-header_t::get_total_num_audio_channels()
+header_t::get_core_num_audio_channels()
   const {
-  if (has_exss && (0 < num_assets) && substream_assets[0].num_channels_total)
-    return substream_assets[0].num_channels_total;
-
   auto total_num_audio_channels = audio_channels;
   if ((lfe_type_e::lfe_64 == lfe_type) || (lfe_type_e::lfe_128 == lfe_type))
     ++total_num_audio_channels;
 
   return total_num_audio_channels;
+}
+
+unsigned int
+header_t::get_total_num_audio_channels()
+  const {
+  if (has_exss && (0 < num_assets) && substream_assets[0].num_channels_total)
+    return substream_assets[0].num_channels_total;
+
+  return get_core_num_audio_channels();
 }
 
 codec_c::specialization_e
