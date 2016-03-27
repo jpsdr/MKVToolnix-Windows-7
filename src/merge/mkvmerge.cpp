@@ -1891,7 +1891,7 @@ handle_identification_args(std::vector<std::string> const &args) {
   auto file_to_identify       = boost::optional<std::string>{};
 
   for (auto const &this_arg : args) {
-    if (!mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui"))
+    if (!mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui", "-J"))
       continue;
 
     identification_command = this_arg;
@@ -1901,6 +1901,11 @@ handle_identification_args(std::vector<std::string> const &args) {
 
     else if (mtx::included_in(this_arg, "--identify-for-mmg", "--identify-for-gui"))
       g_identification_output_format = identification_output_format_e::gui;
+
+    else if (this_arg == "-J") {
+      g_identification_output_format = identification_output_format_e::json;
+      redirect_warnings_and_errors_to_json();
+    }
   }
 
   if (!identification_command)
@@ -1909,7 +1914,7 @@ handle_identification_args(std::vector<std::string> const &args) {
   for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
     auto const &this_arg = *sit;
 
-    if (mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui"))
+    if (mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui", "-J"))
       continue;
 
     if (mtx::included_in(this_arg, "-F", "--identification-format"))
