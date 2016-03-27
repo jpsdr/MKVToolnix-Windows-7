@@ -236,6 +236,17 @@ class SimpleTest
     self.sys command, :exit_code => options[:exit_code]
   end
 
+  def identify_json *args
+    options = args.extract_options!
+    fail ArgumentError if args.empty?
+
+    command = "../src/mkvmerge --identify --identification-format json --engage no_variable_data #{args.first}"
+
+    output, _ = self.sys(command, :exit_code => options[:exit_code])
+
+    return JSON.load(output.join(''))
+  end
+
   def info *args
     options = args.extract_options!
     fail ArgumentError if args.empty?
