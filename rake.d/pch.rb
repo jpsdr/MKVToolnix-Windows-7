@@ -144,8 +144,8 @@ module PCH
       t = file(@config_file.to_s => @config_deps) { scan_users }
       t.invoke
     end
-    PCH.add_tasks(&cxx_compiler)
-    PCH.add_prerequisites
+    add_tasks(&cxx_compiler)
+    add_prerequisites
   end
 
   #############################################################################
@@ -298,13 +298,15 @@ module PCH
 
   #############################################################################
 
-  @@object_file_ext_map = {
-    'moc' => 'moco',
-  }
-
   def self.add_prerequisites
     @db_scan.each_pair do |user, header|
-      object = user.gsub(%r{\.([^.]+)}) { |ext| @@object_file_ext_map[ext] || 'o' }
+      case File.extname(user)
+      when '.moc'
+        object = user + 'o'
+        file object => user
+      else
+        object = Pathname.new(user).sub_ext('.o')
+      end
       file object => "#{header}#{@extension}"
     end
   end
@@ -370,15 +372,15 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
     if @verbose
       verb = @config_file.exist? ? "rescan" : "scan"
     else
-      verb = "%8s" % [(@config_file.exist? ? "rescan" : "scan").upcase]
+      verb = "%12s" % [(@config_file.exist? ? "rescan" : "scan").upcase]
     end
-    puts "#{verb} #{@users.size} pch candidates"
+    puts "#{verb} pch candidates (total=#{@users.size}, #{file_types(@users.keys)})"
     @users.each_pair { |k,v| scan_user(k,v) }
   end
 
-  def self.scan_user(user, intermediary)
+  def self.scan_user(user, indirect)
     found = nil
-    input = intermediary ? intermediary : user
+    input = indirect ? indirect : user
     File.open(input) do |f|
       f.each_line do |line|
         next if !@scan_include_re.match(line)
@@ -513,7 +515,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
       h = options.fetch(:htrace, nil) ? 't' : '-'
       u = options.fetch(:user, nil) ? 'u' : '-'
       p = options.fetch(:precompile, nil) ? 'p' : '-'
-      puts "%c%c%c %4s %s" % [h,u,p,action,subject]
+      puts "%c%c%c %8s %s" % [h, u, p, action.gsub(/ +/, '_').upcase, subject]
     end
     htrace = options.fetch(:htrace, nil)
     return execute(command, options) unless htrace
@@ -544,9 +546,9 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
 
   def self.execute(command, options={}, &block)
     if STDOUT.tty?
-      (ps,lines) = execute_tty(command, options, &block)
+      execute_tty(command, options, &block)
     else
-      (ps,lines) = execute_command(command, options, &block)
+      execute_command(command, options, &block)
     end
   end
 
