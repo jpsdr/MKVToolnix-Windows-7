@@ -1448,6 +1448,8 @@ render_chapters() {
 
   fix_mandatory_elements(s_chapters_in_this_file.get());
 
+  s_chapters_in_this_file->UpdateSize();
+
   if (s_kax_chapters_void && (s_kax_chapters_void->ElementSize() >= s_chapters_in_this_file->ElementSize()))
     s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, true);
 

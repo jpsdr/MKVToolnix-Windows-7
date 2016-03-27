@@ -1,5 +1,10 @@
 2016-03-27  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: if too many chapters had been generated with
+        --generate-chapters then mkvmerge created a bogus entry in the
+        meta seek element and did not actually write the chapters to the
+        file.
+
         * mkvmerge: bug fix: the DTS packetizer was setting the number of
         channels wrong sometimes when reducing to the DTS core. It was
         using the number of channels including the extensions instead of
