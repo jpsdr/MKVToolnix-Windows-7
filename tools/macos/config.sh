@@ -13,4 +13,4 @@ export CXXFLAGS="-std=c++11 -fvisibility=hidden -fvisibility-inlines-hidden"
 export MAKEFLAGS="-j 4"
 export DRAKETHREADS=4
 export SHARED_QT=1
-export QTVER=${QTVER:-5.5.0}
+export QTVER=${QTVER:-5.5.1}
