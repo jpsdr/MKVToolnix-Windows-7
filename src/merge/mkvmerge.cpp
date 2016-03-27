@@ -1952,7 +1952,7 @@ parse_args(std::vector<std::string> args) {
       list_iso639_languages();
       mxexit();
 
-    } else if ((this_arg == "-i") || (this_arg == "--identify") || (this_arg == "-I") || (this_arg == "--identify-verbose") || (this_arg == "--identify-for-mmg") || (this_arg == "--identify-for-gui"))
+    } else if (mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui", "-J"))
       mxerror(boost::format(Y("'%1%' can only be used with a file name. No further options are allowed if this option is used.\n")) % this_arg);
 
     else if (this_arg == "--capabilities") {
