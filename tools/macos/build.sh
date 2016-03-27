@@ -3,7 +3,7 @@
 set -e
 set -x
 
-export SCRIPT_PATH=${0:h}
+export SCRIPT_PATH=${0:a:h}
 source ${SCRIPT_PATH}/config.sh
 
 function fail {
