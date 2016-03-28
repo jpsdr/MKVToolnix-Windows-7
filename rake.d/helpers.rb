@@ -85,7 +85,7 @@ def runq(action, target, cmdline, options = {})
 end
 
 def runq_git(msg, cmdline, options = {})
-  puts_qaction "git", cmdline.split(/\s+/)[0].upcase + " #{msg}" 
+  puts_qaction "git #{cmdline.split(/\s+/)[0]}", "#{msg}"
   $git_mutex.synchronize { run "git #{cmdline}", options.clone.merge(:dont_echo => !$verbose) }
 end
 
