@@ -372,7 +372,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
     if @verbose
       verb = @config_file.exist? ? "rescan" : "scan"
     else
-      verb = "%12s" % [(@config_file.exist? ? "rescan" : "scan").upcase]
+      verb = "%*s" % [$action_width, (@config_file.exist? ? "rescan" : "scan").upcase]
     end
     puts "#{verb} pch candidates (total=#{@users.size}, #{file_types(@users.keys)})"
     @users.each_pair { |k,v| scan_user(k,v) }
@@ -515,7 +515,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
       h = options.fetch(:htrace, nil) ? 't' : '-'
       u = options.fetch(:user, nil) ? 'u' : '-'
       p = options.fetch(:precompile, nil) ? 'p' : '-'
-      puts "%c%c%c %8s %s" % [h, u, p, action.gsub(/ +/, '_').upcase, subject]
+      puts "%c%c%c %*s %s" % [h, u, p, $action_width - 4, action.gsub(/ +/, '_').upcase, subject]
     end
     htrace = options.fetch(:htrace, nil)
     return execute(command, options) unless htrace
@@ -616,7 +616,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
   @extension = c?(:USE_CLANG) ? ".pch" : ".gch"
 
   # Cache global verbose flag.
-  @verbose = ENV['V'].to_bool
+  @verbose = $verbose
 
   #  Each pch file must be unambiguous for simple scanning techniques.
   #  The scanner needs to know the string of a pch file as it is used in

@@ -31,6 +31,9 @@ require_relative "rake.d/config"
 
 read_config
 
+$verbose      = ENV['V'].to_bool
+$action_width = 12
+
 $build_system_modules = {}
 $have_gtest           = (c(:GTEST_TYPE) == "system") || (c(:GTEST_TYPE) == "internal")
 $gtest_apps           = []
@@ -407,7 +410,7 @@ namespace :translations do
       end
     end
 
-    puts "  CREATE po/#{locale}.po"
+    puts_action "create", "po/#{locale}.po"
     File.open "po/#{locale}.po", "w" do |out|
       now           = Time.now
       email         = ENV['EMAIL']
@@ -584,7 +587,7 @@ EOT
     task task_name do
       FileList["po/*.po", "doc/man/po4a/po/*.po"].each do |name|
         command = "msgfmt --statistics -o /dev/null #{name} 2>&1"
-        if verbose
+        if $verbose
           runq "msgfmt", name, command, :allow_failure => true
         else
           puts "#{name} : " + `#{command}`.split(/\n/).first
@@ -758,7 +761,7 @@ end
 # Cleaning tasks
 desc "Remove all compiled files"
 task :clean do
-  puts "   CLEAN"
+  puts_action "clean"
 
   patterns = %w{
     **/*.a
@@ -789,7 +792,7 @@ task :clean do
   remove_files_by_patterns patterns
 
   if Dir.exists? $dependency_dir
-    puts "  rm -rf #{$dependency_dir}" if verbose
+    puts_vaction "rm -rf", "#{$dependency_dir}"
     FileUtils.rm_rf $dependency_dir
   end
 end

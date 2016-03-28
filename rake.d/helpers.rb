@@ -13,6 +13,20 @@ def puts(message)
   }
 end
 
+def puts_action(action, target=nil)
+  msg  = sprintf "%*s", $action_width, action.gsub(/ +/, '_').upcase
+  msg += " #{target}" if target && !target.empty?
+  puts msg
+end
+
+def puts_qaction(action, target=nil)
+  puts_action(action, target) unless $verbose
+end
+
+def puts_vaction(action, target=nil)
+  puts_action(action, target) if $verbose
+end
+
 def error(message)
   puts message
   exit 1
@@ -65,27 +79,14 @@ ensure
   end
 end
 
-def puts_runq action, target
-  return if verbose
-
-  msg  = sprintf "%12s", action.gsub(/ +/, '_').upcase
-  msg += " #{target}" if target && !target.empty?
-
-  puts msg
-end
-
 def runq(action, target, cmdline, options = {})
-  verbose = ENV['V'].to_bool
-  puts_runq action, target
-  run cmdline, options.clone.merge(:dont_echo => !verbose)
+  puts_qaction action, target
+  run cmdline, options.clone.merge(:dont_echo => !$verbose)
 end
 
 def runq_git(msg, cmdline, options = {})
-  verbose = ENV['V'].to_bool
-  sub_cmd = cmdline.split(/\s+/)[0]
-  msg     = "     GIT #{sub_cmd.upcase} #{msg}"
-  puts msg if !verbose
-  $git_mutex.synchronize { run "git #{cmdline}", options.clone.merge(:dont_echo => !verbose) }
+  puts_qaction "git", cmdline.split(/\s+/)[0].upcase + " #{msg}" 
+  $git_mutex.synchronize { run "git #{cmdline}", options.clone.merge(:dont_echo => !$verbose) }
 end
 
 def ensure_dir dir
@@ -167,10 +168,8 @@ def install_data(destination, *files)
 end
 
 def remove_files_by_patterns patterns
-  verbose = ENV['V'].to_bool
-
   patterns.collect { |pattern| FileList[pattern].to_a }.flatten.uniq.select { |file_name| File.exists? file_name }.each do |file_name|
-    puts "      rm #{file_name}" if verbose
+    puts_vaction "rm", file_name
     File.unlink file_name
   end
 end
