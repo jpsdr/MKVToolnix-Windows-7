@@ -171,7 +171,7 @@ def transifex_merge orig_items, transifex_items
     orig_meta      = orig_items.first[:comments]
     transifex_meta = transifex_items.first[:comments].join("")
 
-    %w{PO-Revision-Date Last-Translator Language-Team}.each { |key| replace_po_meta_info orig_meta, transifex_meta, key }
+    %w{PO-Revision-Date Last-Translator Language-Team Plural-Forms}.each { |key| replace_po_meta_info orig_meta, transifex_meta, key }
   end
 
   orig_items
