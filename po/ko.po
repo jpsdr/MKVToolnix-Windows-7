@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-03-24 15:53+0100\n"
-"PO-Revision-Date: 2016-03-26 15:19+0000\n"
+"PO-Revision-Date: 2016-03-28 09:42+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -201,7 +201,7 @@ msgid ""
 "                           Sets the cropping parameters.\n"
 msgstr ""
 "  --cropping <TID:left,top,right,bottom>\n"
-"                           자르기 매개변수를 지정합니다.\n"
+"                           잘라내기 매개변수를 지정합니다.\n"
 
 #: src/merge/mkvmerge.cpp:93
 msgid ""
@@ -1365,7 +1365,7 @@ msgstr "Matroska 파일 열기"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:198
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:458
 msgid "&Open Matroska or chapter file"
-msgstr "Matroska나 챕터 파일 열기(&O)"
+msgstr "Matroska/챕터 파일 열기(&O)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:119
 msgid "&Open as new tabs in the header editor"
@@ -1831,7 +1831,7 @@ msgstr "'--command-line-charset'는 인수가 누락되어 있습니다.\n"
 
 #: src/merge/mkvmerge.cpp:2315
 msgid "'--cropping' lacks the crop parameters.\n"
-msgstr "'--cropping'에 자르기 매개변수가 지정되어 있지 않습니다.\n"
+msgstr "'--cropping'에 잘라내기 매개변수가 지정되어 있지 않습니다.\n"
 
 #: src/merge/mkvmerge.cpp:2166
 msgid "'--cue-chapter-name-format' lacks the format.\n"
@@ -2187,7 +2187,7 @@ msgstr "AAC 파일은 HE-AAC/AAC+/SBR AAC 오디오가 포함되어 있을 수 �
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1631
 msgid "AAC is SBR/HE-AAC/AAC+:"
-msgstr "AAC 는 SBR/HE-AAC/AAC+:"
+msgstr "AAC는 SBR/HE-AAC/AAC+:"
 
 #: src/input/r_aac_adif.cpp:36
 msgid "AAC with ADIF headers"
@@ -2292,7 +2292,7 @@ msgstr "변수 추가(&V)"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:230
 msgid "Add additional command line options for mkvmerge"
-msgstr "mkvmerge의 추가 명령행 옵션 추가"
+msgstr "mkvmerge에 추가 명령행 옵션을 추가합니다"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:159
 msgid "Add as additional &parts to an existing input file"
@@ -3384,7 +3384,7 @@ msgstr "국가"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1655
 msgid "Create WebM compliant file"
-msgstr "표준 WebM 준수(호환되는) 파일 만들기"
+msgstr "WebM 호환 파일 만들기"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:210
 msgid "Create a WebM compliant file."
@@ -3414,11 +3414,11 @@ msgstr "파일 생성에 실패했습니다. 그 폴더에 쓰기 권한을 소�
 #: src/merge/mkvmerge.cpp:710
 #, boost-format
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '%1%').\n"
-msgstr "자르기 매개변수: <TID>:<left>,<top>,<right>,<bottom> (예: 0:10,5,10,5)의 형태로 지정되어 있지 않습니다 (인수는 '%1%'입니다).\n"
+msgstr "잘라내기 매개변수: <TID>:<left>,<top>,<right>,<bottom> (예: 0:10,5,10,5)의 형태로 지정되어 있지 않습니다 (인수는 '%1%'입니다).\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1628
 msgid "Cropping:"
-msgstr "자르기:"
+msgstr "잘라내기:"
 
 #: src/info/ui/mainwindow.h:114
 msgid "Ctrl+A"
@@ -3682,7 +3682,7 @@ msgstr "기본 프레임 지속 시간"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1617
 msgid "Default duration/FPS:"
-msgstr "기본 재생시간/FPS:"
+msgstr "기본 지속시간/FPS:"
 
 #: src/info/mkvinfo.cpp:895
 #, boost-format
@@ -4627,7 +4627,7 @@ msgstr "몇 개의 챕터를 균등한 간격으로 두어서 만드는 중"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 msgid "Generating chapters:"
-msgstr "챕터 생성 중:"
+msgstr "챕터 만들기:"
 
 #: src/extract/extract_cli_parser.cpp:61
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
@@ -6833,7 +6833,7 @@ msgstr "이 파일로 모든 메시지를 재전송합니다."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1632
 msgid "Reduce to core"
-msgstr "코어로 축소"
+msgstr "코어로 축소하기"
 
 #: src/info/mkvinfo.cpp:184
 #, boost-format
@@ -7040,7 +7040,7 @@ msgstr "&XML 파일로 저장"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:241
 msgid "Save as &default for new merge jobs"
-msgstr "새 합치기 작업의 기본값으로 저장(&D)"
+msgstr "새 합치기 작업의 기본값으로 저장하기(&D)"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:176
 msgid "Save attachment"
@@ -9803,22 +9803,22 @@ msgstr "비디오 화면 비율 유형"
 #: src/common/property_element.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:474
 msgid "Video crop bottom"
-msgstr "비디오 자르기 (하단)"
+msgstr "비디오 하단 잘라내기"
 
 #: src/common/property_element.cpp:141
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:465
 msgid "Video crop left"
-msgstr "비디오 자르기 (왼쪽)"
+msgstr "비디오 왼쪽 잘라내기"
 
 #: src/common/property_element.cpp:143
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:471
 msgid "Video crop right"
-msgstr "비디오 자르기 (오른쪽)"
+msgstr "비디오 오른쪽 잘라내기"
 
 #: src/common/property_element.cpp:142
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:468
 msgid "Video crop top"
-msgstr "비디오 자르기 (상단)"
+msgstr "비디오 상단 잘라내기"
 
 #: src/common/property_element.cpp:139
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:459
@@ -10291,11 +10291,11 @@ msgstr "버튼"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 msgid "by parts based on frame/field numbers"
-msgstr "프레임/필드 숫자에 기반한 부분에 의해"
+msgstr "프레임/필드 번호에 기반한 부분들로"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 msgid "by parts based on timecodes"
-msgstr "타임코드에 기반한 부분에 의해"
+msgstr "타임코드에 기반한 부분들로"
 
 #: src/info/mkvinfo.cpp:556
 #, boost-format
@@ -10374,7 +10374,7 @@ msgstr "deflateInit()가 실패했습니다. 결과: %1%\n"
 #: src/mkvtoolnix-gui/merge/input.cpp:1278
 #: src/mkvtoolnix-gui/merge/input.cpp:1279
 msgid "determine automatically"
-msgstr "자동으로 결정하기"
+msgstr "자동으로 결정"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:108
 #: src/mkvtoolnix-gui/jobs/job.cpp:240
