@@ -38,7 +38,7 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
   , m_packetno{}
   , m_codec_id{codec_id}
 {
-  if (recode && !is_utf8 && !m_ti.m_sub_charset.empty())
+  if (recode && !is_utf8)
     m_cc_utf8 = charset_converter_c::init(m_ti.m_sub_charset);
 
   set_track_type(track_subtitle);
