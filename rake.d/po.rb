@@ -186,7 +186,7 @@ def transifex_pull_and_merge resource, language
 
   runq "tx pull", po_file, "tx pull -f -r mkvtoolnix.#{resource} -l #{language} > /dev/null"
 
-  puts_runq "MERGE", po_file
+  puts_vaction "merge", po_file
 
   transifex_items = read_po(po_file)
   merged_items    = transifex_merge orig_items, transifex_items
