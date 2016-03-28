@@ -4,7 +4,7 @@
 
 Name: mkvtoolnix
 URL: https://mkvtoolnix.download/
-Version: 9.0.0
+Version: 9.0.1
 Release: 1
 Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
@@ -107,6 +107,9 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 %{_datadir}/man/zh_CN
 
 %changelog -n mkvtoolnix
+* Mon Mar 28 2016 Moritz Bunkus <moritz@bunkus.org> 9.0.1-1
+- New version
+
 * Sat Mar 26 2016 Moritz Bunkus <moritz@bunkus.org> 9.0.0-1
 - New version
 
