@@ -1184,9 +1184,6 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
   } else if (is_b_slice)
     m_b_frames_since_keyframe = true;
 
-  // else if (!si.field_pic_flag || !si.bottom_field_flag)
-  //     cleanup();
-
   m_incomplete_frame.m_data = create_nalu_with_size(nalu, true);
   m_have_incomplete_frame   = true;
 
