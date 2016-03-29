@@ -178,6 +178,11 @@ def read_files *file_names
   Hash[ *file_names.flatten.collect { |file_name| [ file_name, IO.readlines(file_name).collect { |line| line.force_encoding "UTF-8" } ] }.flatten(1) ]
 end
 
+def list_targets? *targets
+  spec = ENV['RAKE_LIST_TARGETS'].to_s
+  targets.any? { |target| %r{\b#{target}\b}.match spec }
+end
+
 class Rake::Task
   def investigate
     result = "------------------------------\n"

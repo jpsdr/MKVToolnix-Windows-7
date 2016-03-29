@@ -554,10 +554,12 @@ EOT
       transifex_pull_targets[resource] << "translations:transifex:#{pull_target}"
       transifex_push_targets[resource] << "translations:transifex:#{push_target}"
 
+      desc "Fetch and merge #{resource} translations from Transifex (#{language})" if list_targets?("transifex", "transifex_pull")
       task pull_target => :no_unstaged_changes do
         transifex_pull_and_merge resource, language
       end
 
+      desc "Push #{resource} translations to Transifex (#{language})" if list_targets?("transifex", "transifex_push")
       task push_target => :no_unstaged_changes do
         transifex_remove_fuzzy_and_push resource, language
       end
