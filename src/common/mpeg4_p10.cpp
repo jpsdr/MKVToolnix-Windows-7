@@ -1171,13 +1171,24 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
 
   if (m_incomplete_frame.m_keyframe) {
     mxdebug_if(m_debug_keyframe_detection,
-               boost::format("AVC:handle_slice_nalu: have incomplete? %1% current is %2%\n")
-               % m_have_incomplete_frame % (!si.field_pic_flag ? "frame" : si.bottom_field_flag ? "bottom field" : "top field"));
+               boost::format("AVC:handle_slice_nalu: have incomplete? %1% current is %2% incomplete key bottom field? %3%\n")
+               % m_have_incomplete_frame
+               % (!si.field_pic_flag                ? "frame" : si.bottom_field_flag              ? "bottom field" : "top field")
+               % (!m_current_key_frame_bottom_field ? "none"  : *m_current_key_frame_bottom_field ? "bottom field" : "top field"));
 
     m_first_keyframe_found    = true;
     m_b_frames_since_keyframe = false;
-    if (!si.field_pic_flag || !si.bottom_field_flag)
+    if (!si.field_pic_flag || !m_current_key_frame_bottom_field || (*m_current_key_frame_bottom_field == si.bottom_field_flag))
       cleanup();
+
+    if (!si.field_pic_flag)
+      m_current_key_frame_bottom_field = boost::none;
+
+    else if (m_current_key_frame_bottom_field && (*m_current_key_frame_bottom_field != si.bottom_field_flag))
+      m_current_key_frame_bottom_field = boost::none;
+
+    else
+      m_current_key_frame_bottom_field = si.bottom_field_flag;
 
   } else if (is_b_slice)
     m_b_frames_since_keyframe = true;
