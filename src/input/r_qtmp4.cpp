@@ -1846,7 +1846,7 @@ qtmp4_reader_c::identify() {
 
     else if (dmx->is_audio()) {
       info.add(mtx::id::audio_channels,           dmx->a_channels);
-      info.add(mtx::id::audio_sampling_frequency, dmx->a_samplerate);
+      info.add(mtx::id::audio_sampling_frequency, static_cast<uint64_t>(dmx->a_samplerate));
       info.add(mtx::id::audio_bits_per_sample,    dmx->a_bitdepth);
     }
 
