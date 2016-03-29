@@ -1345,9 +1345,6 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
       track->data_ready = false;
     }
 
-    // else if (track->pid == 6811)
-    // mxinfo(boost::format("  ✗ dropped\n"));
-
     auto pes_data           = reinterpret_cast<mpeg_ts_pes_header_t *>(ts_payload);
     track->pes_payload_size = pes_data->get_pes_packet_length();
 
@@ -1359,9 +1356,10 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
 
     if (m_debug_packet) {
       mxdebug(boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PES info:\n"));
-      mxdebug(boost::format("   stream_id = %1%\n") % static_cast<unsigned int>(pes_data->stream_id));
+      mxdebug(boost::format("   stream_id = %1% PID = %2%\n") % static_cast<unsigned int>(pes_data->stream_id) % track->pid);
       mxdebug(boost::format("   PES_packet_length = %1%\n") % track->pes_payload_size);
-      mxdebug(boost::format("   PTS_DTS = %1% ESCR = %2% ES_rate = %3%\n") % static_cast<unsigned int>(pes_data->pts_dts) % static_cast<unsigned int>(pes_data->get_escr()) % static_cast<unsigned int>(pes_data->get_es_rate()));
+      mxdebug(boost::format("   PTS? %1% DTS? %2% ESCR = %3% ES_rate = %4%\n")
+              % (!!(pes_data->get_pts_dts_flags() & 0x02)) % (!!(pes_data->get_pts_dts_flags() & 0x01)) % static_cast<unsigned int>(pes_data->get_escr()) % static_cast<unsigned int>(pes_data->get_es_rate()));
       mxdebug(boost::format("   DSM_trick_mode = %1%, add_copy = %2%, CRC = %3%, ext = %4%\n")
               % static_cast<unsigned int>(pes_data->get_dsm_trick_mode()) % static_cast<unsigned int>(pes_data->get_additional_copy_info()) % static_cast<unsigned int>(pes_data->get_pes_crc())
               % static_cast<unsigned int>(pes_data->get_pes_extension()));
@@ -1396,7 +1394,7 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
 
       track->m_timecode = dts;
 
-      mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PTS/DTS found: %1%\n") % track->m_timecode);
+      mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PID %2% PTS/DTS found: %1%\n") % track->m_timecode % track->pid);
     }
   }
 
