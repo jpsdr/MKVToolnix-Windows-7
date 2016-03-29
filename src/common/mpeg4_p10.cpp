@@ -1165,16 +1165,14 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
   m_incomplete_frame.m_si       =  si;
   m_incomplete_frame.m_keyframe =  m_recovery_point_valid
                                 || (   is_i_slice
-                                    && (   (m_debug_keyframe_detection && !m_b_frames_since_keyframe)
-                                        || (NALU_TYPE_IDR_SLICE == si.nalu_type)));
+                                    && (NALU_TYPE_IDR_SLICE == si.nalu_type));
   m_incomplete_frame.m_type     =  m_incomplete_frame.m_keyframe ? 'I' : is_b_slice ? 'B' : 'P';
   m_recovery_point_valid        =  false;
 
   if (m_incomplete_frame.m_keyframe) {
     mxdebug_if(m_debug_keyframe_detection,
-               boost::format("AVC:handle_slice_nalu: incomplete frame is key %1%, current is %2%\n")
-               % (!m_incomplete_frame.m_si.field_pic_flag ? "frame" : m_incomplete_frame.m_si.bottom_field_flag ? "bottom field" : "top field")
-               % (!si.field_pic_flag                      ? "frame" : si.bottom_field_flag                      ? "bottom field" : "top field"));
+               boost::format("AVC:handle_slice_nalu: have incomplete? %1% current is %2%\n")
+               % m_have_incomplete_frame % (!si.field_pic_flag ? "frame" : si.bottom_field_flag ? "bottom field" : "top field"));
 
     m_first_keyframe_found    = true;
     m_b_frames_since_keyframe = false;
