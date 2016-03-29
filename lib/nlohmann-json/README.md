@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/nlohmann/json.svg?branch=master)](https://travis-ci.org/nlohmann/json)
 [![Build Status](https://ci.appveyor.com/api/projects/status/1acb366xfyg3qybk?svg=true)](https://ci.appveyor.com/project/nlohmann/json)
 [![Coverage Status](https://img.shields.io/coveralls/nlohmann/json.svg)](https://coveralls.io/r/nlohmann/json)
-[![Try online](https://img.shields.io/badge/try-online-blue.svg)](http://melpon.org/wandbox/permlink/GnGKwji06WeVonlI)
+[![Try online](https://img.shields.io/badge/try-online-blue.svg)](http://melpon.org/wandbox/permlink/wuiuqYiYqRTdI3rG)
 [![Documentation Status](https://img.shields.io/badge/docs-doxygen-blue.svg)](http://nlohmann.github.io/json)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/nlohmann/json/master/LICENSE.MIT)
 [![Github Releases](https://img.shields.io/github/release/nlohmann/json.svg)](https://github.com/nlohmann/json/releases)
@@ -17,13 +17,15 @@ There are myriads of [JSON](http://json.org) libraries out there, and each may e
 
 - **Trivial integration**. Our whole code consists of a single header file `json.hpp`. That's it. No library, no subproject, no dependencies, no complex build system. The class is written in vanilla C++11. All in all, everything should require no adjustment of your compiler flags or project settings.
 
-- **Serious testing**. Our class is heavily [unit-tested](https://github.com/nlohmann/json/blob/master/test/json_unit.cc) and covers [100%](https://coveralls.io/r/nlohmann/json) of the code, including all exceptional behavior. Furthermore, we checked with [Valgrind](http://valgrind.org) that there are no memory leaks.
+- **Serious testing**. Our class is heavily [unit-tested](https://github.com/nlohmann/json/blob/master/test/unit.cpp) and covers [100%](https://coveralls.io/r/nlohmann/json) of the code, including all exceptional behavior. Furthermore, we checked with [Valgrind](http://valgrind.org) that there are no memory leaks.
 
 Other aspects were not so important to us:
 
-- **Memory efficiency**. Each JSON object has an overhead of one pointer (the maximal size of a union) and one enumeration element (1 byte). The default generalization uses the following C++ data types: `std::string` for strings, `int64_t` or `double` for numbers, `std::map` for objects, `std::vector` for arrays, and `bool` for Booleans. However, you can template the generalized class `basic_json` to your needs.
+- **Memory efficiency**. Each JSON object has an overhead of one pointer (the maximal size of a union) and one enumeration element (1 byte). The default generalization uses the following C++ data types: `std::string` for strings, `int64_t`, `uint64_t` or `double` for numbers, `std::map` for objects, `std::vector` for arrays, and `bool` for Booleans. However, you can template the generalized class `basic_json` to your needs.
 
 - **Speed**. We currently implement the parser as naive [recursive descent parser](http://en.wikipedia.org/wiki/Recursive_descent_parser) with hand coded string handling. It is fast enough, but a [LALR-parser](http://en.wikipedia.org/wiki/LALR_parser) with a decent regular expression processor should be even faster (but would consist of more files which makes the integration harder).
+
+See the [contribution guidelines](https://github.com/nlohmann/json/blob/master/.github/CONTRIBUTING.md#please-dont) for more information.
 
 ## Integration
 
@@ -40,13 +42,18 @@ to the files you want to use JSON objects. That's it. Do not forget to set the n
 
 ## Supported compilers
 
-Though it's 2015 already, the support for C++11 is still a bit sparse. Currently, the following compilers are known to work:
+Though it's 2016 already, the support for C++11 is still a bit sparse. Currently, the following compilers are known to work:
 
-- GCC 4.8 - 5.2
-- Clang 3.4 - 3.7
-- Microsoft Visual C++ 14.0 RC
+- GCC 4.9 - 6.0 (and possibly later)
+- Clang 3.4 - 3.9 (and possibly later)
+- Microsoft Visual C++ 14.0 RC (and possibly later)
 
 I would be happy to learn about other compilers/versions.
+
+Please note:
+
+- GCC 4.8 does not work because of two bugs ([55817](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=55817) and [57824](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=57824)) in the C++11 support.
+- For GCC running on MinGW or Android SDK, the error `'to_string' is not a member of 'std'` (or similarly, for `strtod`) may occur. Note this is not an issue with the code,  but rather with the compiler itself. Please refer to [this site](http://tehsausage.com/mingw-to-string) and [this discussion](https://github.com/nlohmann/json/issues/136) for information on how to fix this bug.
 
 ## Examples
 
@@ -197,7 +204,7 @@ for (json::iterator it = j.begin(); it != j.end(); ++it) {
 }
 
 // range-based for
-for (auto element : j) {
+for (auto& element : j) {
   std::cout << element << '\n';
 }
 
@@ -294,7 +301,7 @@ Likewise, any associative key-value containers (`std::map`, `std::multimap`, `st
 ```cpp
 std::map<std::string, int> c_map { {"one", 1}, {"two", 2}, {"three", 3} };
 json j_map(c_map);
-// {"one": 1, "two": 2, "three": 3}
+// {"one": 1, "three": 3, "two": 2 }
 
 std::unordered_map<const char*, double> c_umap { {"one", 1.2}, {"two", 2.3}, {"three", 3.4} };
 json j_umap(c_umap);
@@ -348,7 +355,7 @@ int vi = jn.get<int>();
 
 The class is licensed under the [MIT License](http://opensource.org/licenses/MIT):
 
-Copyright &copy; 2013-2015 [Niels Lohmann](http://nlohmann.me)
+Copyright &copy; 2013-2016 [Niels Lohmann](http://nlohmann.me)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -372,16 +379,31 @@ I deeply appreciate the help of the following people.
 - [Eric Cornelius](https://github.com/EricMCornelius) pointed out a bug in the handling with NaN and infinity values. He also improved the performance of the string escaping.
 - [易思龙](https://github.com/likebeta) implemented a conversion from anonymous enums.
 - [kepkin](https://github.com/kepkin) patiently pushed forward the support for Microsoft Visual studio.
-- [gregmarr](https://github.com/gregmarr) simplified the implementation of reverse iterators.
+- [gregmarr](https://github.com/gregmarr) simplified the implementation of reverse iterators and helped with numerous hints and improvements.
 - [Caio Luppi](https://github.com/caiovlp) fixed a bug in the Unicode handling.
 - [dariomt](https://github.com/dariomt) fixed some typos in the examples.
 - [Daniel Frey](https://github.com/d-frey) cleaned up some pointers and implemented exception-safe memory allocation.
 - [Colin Hirsch](https://github.com/ColinH) took care of a small namespace issue.
 - [Huu Nguyen](https://github.com/whoshuu) correct a variable name in the documentation.
 - [Silverweed](https://github.com/silverweed) overloaded `parse()` to accept an rvalue reference.
-- [dariomt](https://github.com/dariomt) fixed a subtlety in MSVC type support.
+- [dariomt](https://github.com/dariomt) fixed a subtlety in MSVC type support and implemented the `get_ref()` function to get a reference to stored values.
+- [ZahlGraf](https://github.com/ZahlGraf) added a workaround that allows compilation using Android NDK.
+- [whackashoe](https://github.com/whackashoe) replaced a function that was marked as unsafe by Visual Studio.
+- [406345](https://github.com/406345) fixed two small warnings.
+- [Glen Fernandes](https://github.com/glenfe) noted a potential portability problem in the `has_mapped_type` function.
+- [Corbin Hughes](https://github.com/nibroc) fixed some typos in the contribution guidelines.
+- [twelsby](https://github.com/twelsby) fixed the array subscript operator, an issue that failed the MSVC build, and floating-point parsing/dumping. He further added support for unsigned integer numbers.
+- [Volker Diels-Grabsch](https://github.com/vog) fixed a link in the README file.
+- [msm-](https://github.com/msm-) added support for american fuzzy lop.
+- [Annihil](https://github.com/Annihil) fixed an example in the README file.
+- [Themercee](https://github.com/Themercee) noted a wrong URL in the README file.
 
 Thanks a lot for helping out!
+
+## Notes
+
+- The code contains numerous debug **assertions** which can be switched off by defining the preprocessor macro `NDEBUG`, see the [documentation of `assert`](http://en.cppreference.com/w/cpp/error/assert).
+- As the exact type of a number is not defined in the [JSON specification](http://rfc7159.net/rfc7159), this library tries to choose the best fitting C++ number type automatically. As a result, the type `double` may be used to store numbers which may yield [**floating-point exceptions**](https://github.com/nlohmann/json/issues/181) in certain rare situations if floating-point exceptions have been unmasked in the calling code. These exceptions are not caused by the library and need to be fixed in the calling code, such as by re-masking the exceptions prior to calling library functions.
 
 ## Execute unit tests
 
@@ -392,7 +414,7 @@ $ make
 $ ./json_unit "*"
 
 ===============================================================================
-All tests passed (3341774 assertions in 27 test cases)
+All tests passed (3344278 assertions in 29 test cases)
 ```
 
 For more information, have a look at the file [.travis.yml](https://github.com/nlohmann/json/blob/master/.travis.yml).
