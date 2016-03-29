@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-03-24 15:53+0100\n"
-"PO-Revision-Date: 2016-03-28 15:39+0000\n"
+"PO-Revision-Date: 2016-03-28 17:09+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
@@ -1080,9 +1080,8 @@ msgid "&Command line:"
 msgstr "&Командная строка:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
-#, fuzzy
 msgid "&Constrict start and end timecodes of sub-chapters to their parent's start and end timecodes"
-msgstr "Сортировать главы по их начальным и конечным таймкодам"
+msgstr "&Сжать начала и концы таймкодов подглав к началу и концу таймкодов их родительских глав"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:443
 msgid "&Copy command line to clipboard"
@@ -1127,7 +1126,7 @@ msgstr "&Включено"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:118
 msgid "&Escape arguments for:"
-msgstr ""
+msgstr "&Escape-аргументы для:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:165
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:276
@@ -1663,7 +1662,7 @@ msgstr "'%1%': Также будут обработаны файлы: %2%\n"
 #: src/input/r_matroska.cpp:1656
 #, boost-format
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
-msgstr ""
+msgstr "'%1%': Вы повторно обрабатываете дорожку Opus, которая была до это обработана в экспериментальном режиме. Полученная дорожка будет записана в окончательном режиме, но одна деталь не может быть извлечена из дорожки, обработанной в экспериментальном режиме: конец подрезки. Это означает, что декодер может вывести на несколько семплов больше, чем первоначально предполагалось. При повторной обработке вы должны использовать оригинальный файл Opus, если это возможно.\n"
 
 #: src/merge/mkvmerge.cpp:2294
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
@@ -2560,7 +2559,7 @@ msgstr "Любое другое имя файла добавляется в ка
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:328
 msgid "Apart from asking the GUI can always open the dropped files as new tabs or it can always add them as new attachments to the current tab."
-msgstr ""
+msgstr "Помимо вопроса GUI может всегда открывать перетащенные файлы в новых вкладках или всегда добавлять их как новые вложения в текущую вкладку."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:968
 msgid "Append media files"
@@ -2873,14 +2872,12 @@ msgid "Caught exception"
 msgstr "Произошёл выброс исключения"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
-#, fuzzy
 msgid "Causes mkvmerge not to write 'CueDuration' elements in the cues."
-msgstr "Заставляет mkvmerge не записывать в ключи элементы 'CueDuration'"
+msgstr "Указывает mkvmerge не записывать элементы 'CueDuration' в cue."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:73
-#, fuzzy
 msgid "Causes mkvmerge not to write 'CueRelativePosition' elements in the cues."
-msgstr "Заставляет mkvmerge не записывать в ключи элементы 'CueRelativePosition'"
+msgstr "Указывает mkvmerge не записывать элементы 'CueRelativePosition' в cue."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:71
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
@@ -3810,7 +3807,7 @@ msgstr "Dolby TrueHD"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:124
 msgid "Don't escape"
-msgstr ""
+msgstr "Не использовать escape-последовательности"
 
 #: src/mkvtoolnix-gui/util/message_box.cpp:181
 msgid "Don't show this message again."
@@ -3882,7 +3879,7 @@ msgstr "Выход"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
 msgid "E&xpand chapter's start and end timecodes to include the minimum/maximum timecodes of all their sub-chapters"
-msgstr ""
+msgstr "Расширить таймкоды начала и конца глав, чтобы включить минимальный/ максимальный таймкоды всех своих подглав"
 
 #: src/info/mkvinfo.cpp:1529
 msgid "EBML head"
@@ -4569,7 +4566,7 @@ msgstr[3] "Глобальные теги: %1% записей"
 
 #: src/common/file_types.cpp:81
 msgid "HD-DVD subtitles"
-msgstr "HD-DVD субтитры"
+msgstr "Субтитры HD-DVD"
 
 #: src/output/p_hdmv_pgs.h:38
 msgid "HDMV PGS"
@@ -4792,7 +4789,7 @@ msgstr "Если используется значение -1, то mkvmerge б�
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:32
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
-msgstr ""
+msgstr "Если число оканчивается на 'ms', то в каждый кластер помещается не более 'n' миллисекунд данных."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:293
 msgid "If this option is enabled and if there is currently no output file name set then the program will set one for you when you add an input file."
@@ -5986,7 +5983,7 @@ msgstr "Обычно завершённые задания остаются в �
 
 #: src/mkvtoolnix-gui/merge/input.cpp:433
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
-msgstr ""
+msgstr "Обычно mkvmerge не изменяет информацию о синхронизации (частоту кадров/полей), хранящуюся в видеопотоке."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
@@ -5998,7 +5995,7 @@ msgstr "Обычно mkvmerge будет применять дополнител
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:48
 msgid "Normally mkvmerge will use a value of 1000000 which means that timecodes and durations will have a precision of 1ms."
-msgstr ""
+msgstr "Обычно mkvmerge будет использовать значение 1000000, означающее, что таймкоды и длительность будут иметь точностью 1 мс."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:190
 msgid "Normally selected entries in list view can be moved around via drag & drop and with keyboard shortcuts (Ctrl+Up, Ctrl+Down)."
@@ -6041,11 +6038,11 @@ msgstr "Обратите внимание, что многие проигрыв�
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:180
 msgid "Note that most <MTX_…> variables are empty and will be removed for this test run."
-msgstr ""
+msgstr "Обратите внимание, что большинство переменных <MTX_...> пусты и будут удалены для данного тестового запуска."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:94
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
-msgstr ""
+msgstr "Обратите внимание, что в Windows обычная косая черта может быть использована вместо обратной в путях и именах файлов."
 
 #: src/merge/generic_packetizer.cpp:1155
 #, boost-format
@@ -7110,7 +7107,7 @@ msgstr "UID сегмента: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1659
 msgid "Segment UIDs:"
-msgstr "UIDы сегмента:"
+msgstr "UID сегмента:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:523
 msgid "Segment e&dition UID:"
@@ -7705,7 +7702,7 @@ msgstr "Теги:"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
 msgid "Tells mkvmerge not to create and write the cue data which can be compared to an index in an AVI."
-msgstr ""
+msgstr "Указывает mkvmerge не создавать и не записывать cue-данные, сравнимые с индексом в формате AVI."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 msgid "Tells mkvmerge not to write tags with statistics for each track."
@@ -7717,7 +7714,7 @@ msgstr "Указывает mkvmerge создать метаэлемент пои
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:31
 msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
-msgstr ""
+msgstr "Указывает mkvmerge размещать не более 'n' блоков данных в каждом кластере."
 
 #: src/info/qt_ui.cpp:98
 #: src/mkvtoolnix-gui/merge/input.cpp:847
@@ -7775,13 +7772,13 @@ msgstr "GUI поможет вам начать новое объединение
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:53
 msgid "The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."
-msgstr ""
+msgstr "GUI может просканировать эти файлы, представить результаты, включая продолжительность и количество дорожек для каждого найденного плейлиста, чтобы позволить выбрать файл для добавления."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1002
 #: src/mkvtoolnix-gui/merge/input.cpp:1019
 #: src/mkvtoolnix-gui/merge/input.cpp:1036
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
-msgstr ""
+msgstr "GUI будет заменять перетащенным сюда файлом любой предыдущий файл с таким же именем."
 
 #: src/extract/extract_cli_parser.cpp:261
 #, boost-format
@@ -7790,7 +7787,7 @@ msgstr "Этот ID '%1%' уже используется для другого 
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:124
 msgid "The JSON output generated by mkvmerge could not be parsed (parser's error message: %1)."
-msgstr ""
+msgstr "Вывод в формате JSON создан mkvmerge, который не может быть проанализирован (сообщение об ошибке анализатора: %1)."
 
 #: src/input/r_ogm.cpp:1604
 #, boost-format
@@ -7837,7 +7834,7 @@ msgstr "Длина размера NALU должна быть целым числ
 #: src/input/r_ogm.cpp:1426
 #, boost-format
 msgid "The Theora identification header could not be parsed (%1%).\n"
-msgstr "Идентификационный заголовок Theora не может быть обработан (%1%).\n"
+msgstr "Идентификационный заголовок Theora не может быть проанализирован (%1%).\n"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:52
 msgid "The UID must not be left empty."
@@ -7985,7 +7982,7 @@ msgstr "Внутренние данные кодека не совпадают. 
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:91
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
-msgstr ""
+msgstr "В командной строке используются escape-последовательности в стиле оболочки Unix через косую черту даже в Windows."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:128
 msgid "The configuration has been loaded."
@@ -8020,7 +8017,7 @@ msgstr "Текущие настройки объединения будут за
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:33
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
-msgstr ""
+msgstr "Текущий режим может быть изменён при помощи --merge, --edit-chapters или --edit-headers."
 
 #: src/merge/generic_packetizer.cpp:878
 #, boost-format
@@ -8101,7 +8098,7 @@ msgstr "Элемент был записан в конце файла, но ра
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:664
 msgid "The end time could not be parsed: %1"
-msgstr "Время окончания не может быть определено: %1"
+msgstr "Время окончания не может быть проанализировано: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:667
 msgid "The end time must be greater than the start timecode."
@@ -8732,7 +8729,7 @@ msgstr "Похоже, таблица поиска в этом файле TTA п�
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:680
 msgid "The segment UID could not be parsed: %1"
-msgstr "UID сегмента не может быть определён: %1"
+msgstr "UID сегмента не может быть проанализировано: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:690
 msgid "The segment edition UID must be a positive number if given."
@@ -8767,11 +8764,11 @@ msgstr "Исходный файл '%1%' не может быть успешно 
 
 #: src/mkvtoolnix-gui/merge/input.cpp:435
 msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
-msgstr ""
+msgstr "Источником информации о синхронизации контейнера могут быть различные вещи: значение, заданное в командной строке параметром '--default-duration', исходный контейнер или видеопоток."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:658
 msgid "The start time could not be parsed: %1"
-msgstr "Время начала не может быть определено: %1"
+msgstr "Время начала не может быть проанализировано: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:305
 msgid "The string '<NUM>' will be replaced by the chapter number."
@@ -9036,7 +9033,7 @@ msgstr "Эта дорожка AVC/h.264 не начинается с ключе�
 
 #: src/output/p_avc.cpp:129
 msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timecode file has been provided for it, nor does the source container provide timecodes. The resulting timecodes may not be useful.\n"
-msgstr ""
+msgstr "Информация о синхронизации этой дорожки AVC/h.264 указывает на то, что в ней используется переменная частота кадров. Однако, ни продолжительности по умолчанию, ни внешний файл с таймкодами не были предоставлены, равно как и исходный контейнер, могущий дать аналогичную информацию. Результирующие таймкоды могут быть бесполезными.\n"
 
 #: src/output/p_hevc_es.cpp:96
 #, boost-format
@@ -9059,17 +9056,17 @@ msgstr "Этот файл Ogg/OGM содержит информацию о за�
 
 #: src/input/r_ogm.cpp:877
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
-msgstr ""
+msgstr "Этот файл Ogg/OGM содержит главы, но они не могут быть проанализированы. Это может быть связано с неустановленной должным образом кодировкой или из-за записей, не соответствующих ожидаемому формату с SRT-стилем.\n"
 
 #: src/output/p_ac3.cpp:79
 #: src/output/p_mp3.cpp:70
 #, boost-format
 msgid "This audio track contains %1% byte of invalid data which was skipped before timecode %2%."
 msgid_plural "This audio track contains %1% bytes of invalid data which were skipped before timecode %2%."
-msgstr[0] "Эта звуковая дорожка содержит %1% байт неверных данных, которые были пропущены перед таймкодом %2%."
-msgstr[1] "Эта звуковая дорожка содержит %1% байта неверных данных, которые были пропущены перед таймкодом %2%."
-msgstr[2] "Эта звуковая дорожка содержит %1% байт неверных данных, которые были пропущены перед таймкодом %2%."
-msgstr[3] "Эта звуковая дорожка содержит %1% байт неверных данных, которые были пропущены перед таймкодом %2%."
+msgstr[0] "Эта звуковая дорожка содержит %1% байт ошибочных данных, которые были пропущены перед таймкодом %2%."
+msgstr[1] "Эта звуковая дорожка содержит %1% байта ошибочных данных, которые были пропущены перед таймкодом %2%."
+msgstr[2] "Эта звуковая дорожка содержит %1% байтов ошибочных данных, которые были пропущены перед таймкодом %2%."
+msgstr[3] "Эта звуковая дорожка содержит %1% байтов ошибочных данных, которые были пропущены перед таймкодом %2%."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
 msgid "This causes bigger overhead but allows precise seeking and extraction."
@@ -9671,7 +9668,7 @@ msgstr "Использовать следующую папку:"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:62
 msgid "Use fixed values for the elements that change with each file otherwise (muxing date, segment UID, track UIDs etc.)."
-msgstr "Использовать постоянные значения для элементов, которые иначе изменяются в каждом файле (дата обработки, UID сегмента, UIDы дорожек и т.д.). Два файла, сохранённые с одинаковыми параметрами при наличии этого ключа, будут идентичны."
+msgstr "Использовать постоянные значения для элементов, которые иначе изменяются в каждом файле (дата обработки, UID сегмента, UID дорожек и т.д.). Два файла, сохранённые с одинаковыми параметрами при наличии этого ключа, будут идентичны."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 msgid "Use only for testing."
@@ -9709,7 +9706,7 @@ msgstr "Применяется модуль вывода для формата '
 #: src/merge/cluster_helper.cpp:732
 #, boost-format
 msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
-msgstr ""
+msgstr "Используется дорожка с  ID %1% из файла '%2%' в качестве эталона для создания глав.\n"
 
 #: src/common/file_types.cpp:98
 #: src/output/p_vc1.h:37
@@ -9969,9 +9966,8 @@ msgid "When the user adds such a file the track's language input is set to the l
 msgstr "Когда пользователь добавляет такой файл информация об языке входной дорожки берётся из исходного файла."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:326
-#, fuzzy
 msgid "When the user drags & drops files from an external application onto a header editor tab the GUI can take different actions."
-msgstr "При перетаскивании файлов из внешнего приложения в инструмент объединения GUI может выполнять различные действия."
+msgstr "Когда пользователь перетаскивает файлы из внешнего приложения на вкладку редактора заголовка, GUI может выполнять различные действия."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:258
 msgid "When the user drags & drops files from an external application onto the merge tool the GUI can take different actions."
@@ -10013,7 +10009,7 @@ msgstr "При использовании пункта \"удалить исхо
 
 #: src/mkvtoolnix-gui/merge/input.cpp:434
 msgid "With this option that information is adjusted to match the container's timing information."
-msgstr ""
+msgstr "С помощью этой функции корректируется информация, чтобы соответствовать информации о времени из контейнера."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 msgid "Write durations for all blocks."
@@ -10521,7 +10517,7 @@ msgstr "длина %1%, данные: %2%"
 #: src/input/r_vobsub.cpp:234
 #, boost-format
 msgid "line %1%: The 'delay' timestamp could not be parsed.\n"
-msgstr "строка %1%: 'задержка' временной метки не может быть обработана.\n"
+msgstr "строка %1%: 'задержка' временной метки не может быть проанализирована.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:421
 msgid "lower"
@@ -11282,3 +11278,4 @@ msgstr "– установлено в 'нет' –"
 
 #~ msgid "job queue"
 #~ msgstr "Очередь заданий"
+
