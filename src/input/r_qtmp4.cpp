@@ -2133,11 +2133,11 @@ qtmp4_demuxer_c::update_tables() {
   }
 
   if (sample_table.empty()) {
-    // constant samplesize
+    // constant sample size
     if ((1 == durmap_table.size()) || ((2 == durmap_table.size()) && (1 == durmap_table[1].number)))
       duration = durmap_table[0].duration;
     else
-      mxerror(Y("Quicktime/MP4 reader: Constant samplesize & variable duration not yet supported. Contact the author if you have such a sample file.\n"));
+      mxerror(Y("Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"));
 
     m_tables_updated = true;
 
