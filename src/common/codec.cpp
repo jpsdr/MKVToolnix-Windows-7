@@ -73,7 +73,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("VobButton",               type_e::B_VOBBTN,       track_buttons,  "B_VOBBTN");
 
   ms_specialization_descriptions.emplace(specialization_e::dts_hd_master_audio,    "DTS-HD Master Audio");
-  ms_specialization_descriptions.emplace(specialization_e::dts_hd_high_resolution, "DTS-HD High Resolution");
+  ms_specialization_descriptions.emplace(specialization_e::dts_hd_high_resolution, "DTS-HD High Resolution Audio");
   ms_specialization_descriptions.emplace(specialization_e::dts_express,            "DTS Express");
   ms_specialization_descriptions.emplace(specialization_e::dts_es,                 "DTS-ES");
   ms_specialization_descriptions.emplace(specialization_e::dts_96_24,              "DTS 96/24");
