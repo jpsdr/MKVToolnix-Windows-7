@@ -27,19 +27,19 @@ PlaylistScanner::checkOneFile(SourceFilePtr const &file)
   if (!file->isPlaylist())
     return file;
 
-  auto info       = QFileInfo{file->m_fileName};
-  auto otherFiles = QDir{info.path()}.entryInfoList(QStringList{QString{"*.%1"}.arg(info.suffix())}, QDir::Files, QDir::Name);
-  if (otherFiles.isEmpty())
+  auto info     = QFileInfo{file->m_fileName};
+  auto allFiles = QDir{info.path()}.entryInfoList(QStringList{QString{"*.%1"}.arg(info.suffix())}, QDir::Files, QDir::Name);
+  if (allFiles.count() < 2)
     return file;
 
   auto doScan = Util::Settings::AlwaysScan == Util::Settings::get().m_scanForPlaylistsPolicy;
   if (!doScan)
-    doScan = askScanForPlaylists(*file, otherFiles.size());
+    doScan = askScanForPlaylists(*file, allFiles.size() - 1);
 
   if (!doScan)
     return file;
 
-  auto identifiedFiles = scanForPlaylists(otherFiles);
+  auto identifiedFiles = scanForPlaylists(allFiles);
   if (identifiedFiles.isEmpty())
     return file;
 
