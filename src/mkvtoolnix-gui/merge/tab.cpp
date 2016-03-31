@@ -55,11 +55,16 @@ Tab::Tab(QWidget *parent)
   , m_selectAllSubtitlesTracksAction{new QAction{this}}
   , m_openFilesInMediaInfoAction{new QAction{this}}
   , m_openTracksInMediaInfoAction{new QAction{this}}
+  , m_selectAllAttachedFilesAction{new QAction{this}}
+  , m_enableSelectedAttachedFilesAction{new QAction{this}}
+  , m_disableSelectedAttachedFilesAction{new QAction{this}}
   , m_filesMenu{new QMenu{this}}
   , m_tracksMenu{new QMenu{this}}
+  , m_attachedFilesMenu{new QMenu{this}}
   , m_attachmentsMenu{new QMenu{this}}
   , m_selectTracksOfTypeMenu{new QMenu{this}}
   , m_addFilesMenu{new QMenu{this}}
+  , m_attachedFilesModel{new AttachedFileModel{this}}
   , m_attachmentsModel{new AttachmentModel{this}}
   , m_addAttachmentsAction{new QAction{this}}
   , m_removeAttachmentsAction{new QAction{this}}
@@ -73,7 +78,7 @@ Tab::Tab(QWidget *parent)
   auto mw = MainWindow::get();
   connect(mw, &MainWindow::preferencesChanged, this, &Tab::setupTabPositions);
 
-  m_filesModel->setTracksModel(m_tracksModel);
+  m_filesModel->setOtherModels(m_tracksModel, m_attachedFilesModel);
 
   setupInputControls();
   setupOutputControls();
@@ -280,8 +285,20 @@ Tab::setControlValuesFromConfig() {
   m_tracksModel->setTracks(m_config.m_tracks);
   m_attachmentsModel->replaceAttachments(m_config.m_attachments);
 
+  m_attachedFilesModel->reset();
+  for (auto const &sourceFile : m_config.m_files) {
+    m_attachedFilesModel->addAttachedFiles(sourceFile->m_attachedFiles);
+
+    for (auto const &appendedFile : sourceFile->m_appendedFiles)
+      m_attachedFilesModel->addAttachedFiles(appendedFile->m_attachedFiles);
+  }
+
+  ui->attachedFiles->sortByColumn(0, Qt::AscendingOrder);
+  m_attachedFilesModel->sort(0, Qt::AscendingOrder);
+
   resizeFilesColumnsToContents();
   resizeTracksColumnsToContents();
+  resizeAttachedFilesColumnsToContents();
   resizeAttachmentsColumnsToContents();
 
   onTrackSelectionChanged();

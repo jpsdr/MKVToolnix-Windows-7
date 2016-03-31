@@ -11,6 +11,7 @@
 #include "common/sorting.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/mime_types.h"
+#include "mkvtoolnix-gui/merge/attached_file_model.h"
 #include "mkvtoolnix-gui/merge/source_file_model.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/container.h"
@@ -22,6 +23,7 @@ SourceFileModel::SourceFileModel(QObject *parent)
   : QStandardItemModel{parent}
   , m_sourceFiles{}
   , m_tracksModel{}
+  , m_attachedFilesModel{}
   , m_nonAppendedSelected{}
   , m_appendedSelected{}
   , m_additionalPartSelected{}
@@ -60,8 +62,10 @@ SourceFileModel::retranslateUi() {
 }
 
 void
-SourceFileModel::setTracksModel(TrackModel *tracksModel) {
-  m_tracksModel = tracksModel;
+SourceFileModel::setOtherModels(TrackModel *tracksModel,
+                                AttachedFileModel *attachedFilesModel) {
+  m_tracksModel        = tracksModel;
+  m_attachedFilesModel = attachedFilesModel;
 }
 
 void
@@ -260,7 +264,8 @@ SourceFileModel::addFilesAndTracks(QList<SourceFilePtr> const &files) {
       createAndAppendRow(itemToAddTo, additionalPart, row++);
   }
 
-  m_tracksModel->addTracks(std::accumulate(files.begin(), files.end(), QList<TrackPtr>{}, [](QList<TrackPtr> &accu, SourceFilePtr const &file) { return accu << file->m_tracks; }));
+  m_tracksModel->addTracks(              boost::accumulate(files, QList<TrackPtr>{}, [](QList<TrackPtr> &accu, SourceFilePtr const &file) { return accu << file->m_tracks;        }));
+  m_attachedFilesModel->addAttachedFiles(boost::accumulate(files, QList<TrackPtr>{}, [](QList<TrackPtr> &accu, SourceFilePtr const &file) { return accu << file->m_attachedFiles; }));
 }
 
 void
@@ -304,20 +309,26 @@ void
 SourceFileModel::removeFiles(QList<SourceFile *> const &files) {
   auto filesToRemove  = files.toSet();
   auto tracksToRemove = QSet<Track *>{};
+  auto attachedFiles  = QList<TrackPtr>{};
 
   for (auto const &file : files) {
     for (auto const &track : file->m_tracks)
       tracksToRemove << track.get();
 
+    attachedFiles += file->m_attachedFiles;
+
     for (auto const &appendedFile : file->m_appendedFiles) {
       filesToRemove << appendedFile.get();
       for (auto const &track : appendedFile->m_tracks)
         tracksToRemove << track.get();
+
+      attachedFiles += appendedFile->m_attachedFiles;
     }
   }
 
   m_tracksModel->reDistributeAppendedTracksForFileRemoval(filesToRemove);
   m_tracksModel->removeTracks(tracksToRemove);
+  m_attachedFilesModel->removeAttachedFiles(attachedFiles);
 
   auto filesToRemoveLast = QList<SourceFile *>{};
   for (auto &file : filesToRemove)

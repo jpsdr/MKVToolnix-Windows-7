@@ -1174,6 +1174,7 @@ void
 Tab::reinitFilesTracksControls() {
   resizeFilesColumnsToContents();
   resizeTracksColumnsToContents();
+  resizeAttachedFilesColumnsToContents();
   onTrackSelectionChanged();
 }
 

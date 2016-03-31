@@ -4,6 +4,7 @@
 #include "common/common_pch.h"
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
+#include "mkvtoolnix-gui/merge/attached_file_model.h"
 #include "mkvtoolnix-gui/merge/attachment_model.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file_model.h"
@@ -50,9 +51,11 @@ protected:
   QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_addFilesAction2, *m_appendFilesAction2, *m_addAdditionalPartsAction2;
   QAction *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
   QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction, *m_openFilesInMediaInfoAction, *m_openTracksInMediaInfoAction;
-  QMenu *m_filesMenu, *m_tracksMenu, *m_attachmentsMenu, *m_selectTracksOfTypeMenu, *m_addFilesMenu;
+  QAction *m_selectAllAttachedFilesAction, *m_enableSelectedAttachedFilesAction, *m_disableSelectedAttachedFilesAction;
+  QMenu *m_filesMenu, *m_tracksMenu, *m_attachedFilesMenu, *m_attachmentsMenu, *m_selectTracksOfTypeMenu, *m_addFilesMenu;
 
   // "Attachments" tab:
+  AttachedFileModel *m_attachedFilesModel;
   AttachmentModel *m_attachmentsModel;
   QAction *m_addAttachmentsAction, *m_removeAttachmentsAction, *m_removeAllAttachmentsAction, *m_selectAllAttachmentsAction;
 
@@ -100,6 +103,7 @@ public slots:
   virtual void disableAllTracks();
 
   virtual void toggleMuxThisForSelectedTracks();
+  virtual void toggleMuxThisForSelectedAttachedFiles();
 
   virtual void onOpenFilesInMediaInfo();
   virtual void onOpenTracksInMediaInfo();
@@ -162,6 +166,7 @@ public slots:
 
   virtual void showFilesContextMenu(QPoint const &pos);
   virtual void showTracksContextMenu(QPoint const &pos);
+  virtual void showAttachedFilesContextMenu(QPoint const &pos);
   virtual void showAttachmentsContextMenu(QPoint const &pos);
 
   // Output tab:
@@ -214,6 +219,12 @@ public slots:
   virtual void onSelectAllAttachments();
   virtual void addAttachments(QStringList const &fileNames);
 
+  virtual void selectAllAttachedFiles();
+  virtual void enableSelectedAttachedFiles();
+  virtual void disableSelectedAttachedFiles();
+  virtual void attachedFileItemChanged(QStandardItem *item);
+
+  virtual void resizeAttachedFilesColumnsToContents() const;
   virtual void resizeAttachmentsColumnsToContents() const;
 
   virtual void retranslateUi();
@@ -242,6 +253,7 @@ protected:
   virtual QStringList handleDroppedSpecialFiles(QStringList const &fileNames);
   virtual void enableFilesActions();
   virtual void enableTracksActions();
+  virtual void enableAttachedFilesActions();
   virtual void enableAttachmentsActions();
   virtual void enableAttachmentControls(bool enable);
   virtual void setInputControlValues(Track *track);
@@ -251,6 +263,7 @@ protected:
   virtual void setControlValuesFromConfig();
   virtual MuxConfig &updateConfigFromControlValues();
   virtual void withSelectedTracks(std::function<void(Track *)> code, bool notIfAppending = false, QWidget *widget = nullptr);
+  virtual void withSelectedAttachedFiles(std::function<void(Track &)> code);
   virtual void withSelectedAttachments(std::function<void(Attachment *)> code);
   virtual void addOrRemoveEmptyComboBoxItem(bool add);
   virtual QString getOpenFileName(QString const &title, QString const &filter, QLineEdit *lineEdit, InitialDirMode intialDirMode = InitialDirMode::ContentLastOpenDir);
@@ -276,7 +289,9 @@ protected:
   virtual void selectTracks(QList<Track *> const &tracks);
   virtual void selectAllTracksOfType(boost::optional<Track::Type> type);
 
+  virtual QList<Track *> selectedAttachedFiles() const;
   virtual QList<Attachment *> selectedAttachments() const;
+  virtual void selectAttachedFiles(QList<Track *> const &attachedFiles);
   virtual void selectAttachments(QList<Attachment *> const &attachments);
 
   virtual void addToJobQueue(bool startNow);

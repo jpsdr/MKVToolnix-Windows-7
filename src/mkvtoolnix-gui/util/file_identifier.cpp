@@ -179,7 +179,7 @@ FileIdentifier::parseAttachment(QVariantMap const &obj) {
   track->m_attachmentDescription = obj.value("description").toString();
   track->m_name                  = obj.value("file_name").toString();
 
-  d->m_file->m_tracks << track;
+  d->m_file->m_attachedFiles << track;
 }
 
 // "num_entries": 5

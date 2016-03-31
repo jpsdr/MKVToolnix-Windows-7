@@ -23,6 +23,7 @@ enum MtxGuiRoles {
   AttachmentRole,
   HiddenDescriptionRole,
   SymbolicNameRole,
+  SortRole,
 };
 
 void resizeViewColumnsToContents(QTreeView *view);

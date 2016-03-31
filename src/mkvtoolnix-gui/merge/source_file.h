@@ -22,7 +22,7 @@ class SourceFile {
 public:
   QVariantMap m_properties;
   QString m_fileName;
-  QList<TrackPtr> m_tracks;
+  QList<TrackPtr> m_tracks, m_attachedFiles;
   QList<SourceFilePtr> m_additionalParts, m_appendedFiles;
   QList<QFileInfo> m_playlistFiles;
 

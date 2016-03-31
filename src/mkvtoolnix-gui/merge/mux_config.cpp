@@ -208,9 +208,17 @@ MuxConfig::load(Util::ConfigFile &settings) {
 
   // Load track list.
   for (auto trackID : settings.value("trackOrder").toList()) {
-    if (!objectIDToTrack.contains(trackID.toLongLong()))
+    auto track = objectIDToTrack.value(trackID.toLongLong());
+
+    if (!track)
       throw InvalidSettingsX{};
-    m_tracks << objectIDToTrack.value(trackID.toLongLong());
+
+    // Compatibility with older settings: there attached files were
+    // stored together with the other tracks.
+    if (track->isAttachment())
+      continue;
+
+    m_tracks << track;
   }
 
   auto value           = settings.value("firstInputFileName");

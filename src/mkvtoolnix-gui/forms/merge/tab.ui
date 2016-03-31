@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>898</width>
-    <height>584</height>
+    <height>611</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -155,7 +155,7 @@
             <item>
              <widget class="QLabel" name="tracksLabel">
               <property name="text">
-               <string>&amp;Tracks, chapters, tags and attachments:</string>
+               <string>&amp;Tracks, chapters and tags:</string>
               </property>
               <property name="buddy">
                <cstring>tracks</cstring>
@@ -1523,95 +1523,148 @@
       <attribute name="title">
        <string>Atta&amp;chments</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_14">
+      <layout class="QVBoxLayout" name="verticalLayout_24">
        <item>
-        <widget class="QLabel" name="attachmentsLabel">
-         <property name="text">
-          <string>Atta&amp;chments:</string>
+        <widget class="QSplitter" name="mergeAttachmentsSplitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="buddy">
-          <cstring>attachments</cstring>
-         </property>
+         <widget class="QWidget" name="layoutWidget2">
+          <layout class="QVBoxLayout" name="verticalLayout_23">
+           <item>
+            <widget class="QLabel" name="attachedFilesLabel">
+             <property name="text">
+              <string>Attachments from &amp;source files:</string>
+             </property>
+             <property name="buddy">
+              <cstring>attachedFiles</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="mtx::gui::Util::BasicTreeView" name="attachedFiles">
+             <property name="contextMenuPolicy">
+              <enum>Qt::CustomContextMenu</enum>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="showDropIndicator" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::ExtendedSelection</enum>
+             </property>
+             <property name="rootIsDecorated">
+              <bool>false</bool>
+             </property>
+             <property name="sortingEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="allColumnsShowFocus">
+              <bool>true</bool>
+             </property>
+             <attribute name="headerShowSortIndicator" stdset="0">
+              <bool>true</bool>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="layoutWidget3">
+          <layout class="QVBoxLayout" name="verticalLayout_14">
+           <item>
+            <widget class="QLabel" name="attachmentsLabel">
+             <property name="text">
+              <string>Atta&amp;chments to add:</string>
+             </property>
+             <property name="buddy">
+              <cstring>attachments</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="mtx::gui::Util::BasicTreeView" name="attachments">
+               <property name="contextMenuPolicy">
+                <enum>Qt::CustomContextMenu</enum>
+               </property>
+               <property name="acceptDrops">
+                <bool>true</bool>
+               </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="dragEnabled">
+                <bool>true</bool>
+               </property>
+               <property name="dragDropMode">
+                <enum>QAbstractItemView::DragDrop</enum>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::ExtendedSelection</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="moveAttachmentsButtons" native="true">
+               <layout class="QVBoxLayout" name="verticalLayout_10">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="moveAttachmentsUp">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="moveAttachmentsDown">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="verticalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
         </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="mtx::gui::Util::BasicTreeView" name="attachments">
-           <property name="contextMenuPolicy">
-            <enum>Qt::CustomContextMenu</enum>
-           </property>
-           <property name="acceptDrops">
-            <bool>true</bool>
-           </property>
-           <property name="editTriggers">
-            <set>QAbstractItemView::NoEditTriggers</set>
-           </property>
-           <property name="dragEnabled">
-            <bool>true</bool>
-           </property>
-           <property name="dragDropMode">
-            <enum>QAbstractItemView::DragDrop</enum>
-           </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::ExtendedSelection</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QWidget" name="moveAttachmentsButtons" native="true">
-           <layout class="QVBoxLayout" name="verticalLayout_10">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="moveAttachmentsUp">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../qt_resources.qrc">
-                <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="moveAttachmentsDown">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../qt_resources.qrc">
-                <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="verticalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
        </item>
        <item>
         <widget class="QGroupBox" name="attachmentSettingsBox">
@@ -1777,6 +1830,16 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>mtx::gui::Util::BasicLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>mkvtoolnix-gui/util/basic_line_edit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::BasicTreeView</class>
+   <extends>QTreeView</extends>
+   <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
+  </customwidget>
+  <customwidget>
    <class>mtx::gui::Util::LanguageComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/language_combo_box.h</header>
@@ -1787,20 +1850,10 @@
    <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
   </customwidget>
   <customwidget>
-   <class>mtx::gui::Util::BasicTreeView</class>
-   <extends>QTreeView</extends>
-   <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
-  </customwidget>
-  <customwidget>
    <class>mtx::gui::Util::FilesDragDropWidget</class>
    <extends>QWidget</extends>
    <header>mkvtoolnix-gui/util/files_drag_drop_widget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>mtx::gui::Util::BasicLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>mkvtoolnix-gui/util/basic_line_edit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -1870,6 +1923,9 @@
   <tabstop>chapterGenerationMode</tabstop>
   <tabstop>chapterGenerationNameTemplate</tabstop>
   <tabstop>chapterGenerationInterval</tabstop>
+  <tabstop>attachedFilesLabel</tabstop>
+  <tabstop>attachedFiles</tabstop>
+  <tabstop>attachmentsLabel</tabstop>
   <tabstop>attachments</tabstop>
   <tabstop>moveAttachmentsUp</tabstop>
   <tabstop>moveAttachmentsDown</tabstop>

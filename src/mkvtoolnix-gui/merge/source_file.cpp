@@ -32,9 +32,6 @@ fixAssociationsFor(char const *group,
 
 SourceFile::SourceFile(QString const &fileName)
   : m_fileName{fileName}
-  , m_tracks{}
-  , m_additionalParts{}
-  , m_appendedFiles{}
   , m_type{FILE_TYPE_IS_UNKNOWN}
   , m_appended{}
   , m_additionalPart{}
@@ -73,12 +70,16 @@ SourceFile::operator =(SourceFile const &other) {
   m_appendedTo       = other.m_appendedTo;
 
   m_tracks.clear();
+  m_attachedFiles.clear();
   m_additionalParts.clear();
   m_appendedFiles.clear();
   m_playlistFiles.clear();
 
   for (auto const &track : other.m_tracks)
     m_tracks << std::make_shared<Track>(*track);
+
+  for (auto const &attachedFile : other.m_attachedFiles)
+    m_attachedFiles << std::make_shared<Track>(*attachedFile);
 
   for (auto const &file : other.m_additionalParts)
     m_additionalParts << std::make_shared<SourceFile>(*file);
@@ -144,6 +145,7 @@ SourceFile::saveSettings(Util::ConfigFile &settings)
   MuxConfig::saveProperties(settings, m_properties);
 
   saveSettingsGroup("tracks",          m_tracks,          settings);
+  saveSettingsGroup("attachedFiles",   m_attachedFiles,   settings);
   saveSettingsGroup("additionalParts", m_additionalParts, settings);
   saveSettingsGroup("appendedFiles",   m_appendedFiles,   settings);
 
@@ -194,8 +196,22 @@ SourceFile::loadSettings(MuxConfig::Loader &l) {
   MuxConfig::loadProperties(l.settings, m_properties);
 
   loadSettingsGroup<Track>     ("tracks",          m_tracks,          l, [](){ return std::make_shared<Track>(); });
+  loadSettingsGroup<Track>     ("attachedFiles",   m_attachedFiles,   l, [](){ return std::make_shared<Track>(); });
   loadSettingsGroup<SourceFile>("additionalParts", m_additionalParts, l);
   loadSettingsGroup<SourceFile>("appendedFiles",   m_appendedFiles,   l);
+
+  // Compatibility with older settings: there attached files were
+  // stored together with the other tracks.
+  int idx = 0;
+  while (idx < m_tracks.count()) {
+    auto &track = m_tracks[idx];
+    if (track->isAttachment()) {
+      m_attachedFiles << track;
+      m_tracks.removeAt(idx);
+
+    } else
+      ++idx;
+  }
 }
 
 void
@@ -213,7 +229,11 @@ SourceFile::fixAssociations(MuxConfig::Loader &l) {
   for (auto &track : m_tracks)
     track->m_file = this;
 
+  for (auto &attachedFile : m_attachedFiles)
+    attachedFile->m_file = this;
+
   fixAssociationsFor("tracks",          m_tracks,          l);
+  fixAssociationsFor("attachedFiles",   m_attachedFiles,   l);
   fixAssociationsFor("additionalParts", m_additionalParts, l);
   fixAssociationsFor("appendedFiles",   m_appendedFiles,   l);
 }
@@ -246,6 +266,9 @@ SourceFile::buildMkvmergeOptions(QStringList &options)
 
   for (auto const &track : m_tracks)
     track->buildMkvmergeOptions(opt);
+
+  for (auto const &attachedFile : m_attachedFiles)
+    attachedFile->buildMkvmergeOptions(opt);
 
   auto buildTrackIdArg = [&options,&opt](Track::Type type, QString const &enabled, QString const &disabled) {
     if (!enabled.isEmpty() && !opt.enabledTrackIds[type].isEmpty() && (static_cast<unsigned int>(opt.enabledTrackIds[type].size()) < opt.numTracksOfType[type]))

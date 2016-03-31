@@ -16,6 +16,7 @@ class SourceFileModel;
 using SourceFileModelPtr = std::shared_ptr<SourceFileModel>;
 
 class TrackModel;
+class AttachedFileModel;
 
 class SourceFileModel : public QStandardItemModel {
   Q_OBJECT;
@@ -25,6 +26,7 @@ protected:
   QHash<quint64, SourceFilePtr> m_sourceFileMap;
   QIcon m_additionalPartIcon, m_addedIcon, m_normalIcon;
   TrackModel *m_tracksModel;
+  AttachedFileModel *m_attachedFilesModel;
   bool m_nonAppendedSelected, m_appendedSelected, m_additionalPartSelected;
 
 public:
@@ -34,7 +36,7 @@ public:
   virtual void retranslateUi();
 
   virtual void setSourceFiles(QList<SourceFilePtr> &sourceFiles);
-  virtual void setTracksModel(TrackModel *tracksModel);
+  virtual void setOtherModels(TrackModel *tracksModel, AttachedFileModel *attachedFilesModel);
   virtual void addOrAppendFilesAndTracks(QModelIndex const &fileToAddToIdx, QList<SourceFilePtr> const &files, bool append);
   virtual void addAdditionalParts(QModelIndex const &fileToAddToIdx, QStringList const &fileNames);
   virtual void removeFiles(QList<SourceFile *> const &files);
