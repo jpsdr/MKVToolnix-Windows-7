@@ -62,7 +62,7 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
       { QY("Use fixed values for the elements that change with each file otherwise (muxing date, segment UID, track UIDs etc.)."),
         QY("Two files muxed with the same settings and this switch activated will be identical.") });
   add(Q("--engage force_passthrough_packetizer"), false, hacks, { QY("Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types.") });
-  add(Q("--engage allow_avc_in_vfw_mode"),        false, hacks, { QY("Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI") });
+  add(Q("--engage allow_avc_in_vfw_mode"),        false, hacks, { QY("Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI.") });
   add(Q("--engage no_simpleblocks"),              false, hacks, { QY("Disable the use of SimpleBlocks instead of BlockGroups.") });
   add(Q("--engage use_codec_state"),              false, hacks, { QY("Allows the use of the CodecState element."), QY("This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers.") });
   add(Q("--engage remove_bitstream_ar_info"),     false, hacks,
