@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-29 14:47+0200\n"
+"POT-Creation-Date: 2016-03-31 22:57+0200\n"
 "PO-Revision-Date: 2016-03-27 16:59+0300\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -881,7 +881,7 @@ msgid " size is unknown"
 msgstr " розмір невідомий"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:283
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1609
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1660
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:75
 msgid "\"Default track\" flag:"
 msgstr "Прапорець \"типова доріжка\":"
@@ -891,7 +891,7 @@ msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "\"Визначати автоматично\" є гарним вибором для майже всіх ситуацій."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:284
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1610
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1661
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:79
 msgid "\"Forced track\" flag:"
 msgstr "Прапорець \"примусове використання доріжки\":"
@@ -915,6 +915,7 @@ msgstr[2] "%1 Бітів на семпл"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:118
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:122
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:49
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:46
 msgid "%1 byte (%2)"
 msgid_plural "%1 bytes (%2)"
@@ -1131,12 +1132,12 @@ msgstr "&Додати"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:278
-#: src/mkvtoolnix-gui/merge/attachments.cpp:288
+#: src/mkvtoolnix-gui/merge/attachments.cpp:399
 msgid "&Add attachments"
 msgstr "&Додати вкладення"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1243
 #: src/mkvtoolnix-gui/merge/input.cpp:1244
+#: src/mkvtoolnix-gui/merge/input.cpp:1245
 msgid "&Add files"
 msgstr "&Додати файли"
 
@@ -1144,12 +1145,12 @@ msgstr "&Додати файли"
 msgid "&Add program"
 msgstr "&Додати додаток"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1749
 msgid "&Add source files"
 msgstr "&Додати вхідні файли"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1260
-#: src/mkvtoolnix-gui/merge/input.cpp:1261
+#: src/mkvtoolnix-gui/merge/input.cpp:1262
 msgid "&Audio"
 msgstr "&Аудіо"
 
@@ -1227,13 +1228,18 @@ msgid "&Default"
 msgstr "&Типово"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:173
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1687
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1739
 msgid "&Description:"
 msgstr "&Опис:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1257
+#: src/mkvtoolnix-gui/merge/input.cpp:1258
 msgid "&Disable all tracks"
 msgstr "&Заборонити усі доріжки"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:396
+#, fuzzy
+msgid "&Disable selected attached files"
+msgstr "&Видалити виділене вкладення"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:34
 msgid "&Don't scan, just add the file"
@@ -1247,9 +1253,14 @@ msgstr "&Завантажити"
 msgid "&Duration of each entry in seconds:"
 msgstr "&Тривалість кожного запису в секундах:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1256
+#: src/mkvtoolnix-gui/merge/input.cpp:1257
 msgid "&Enable all tracks"
 msgstr "&Дозволити усі доріжки"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:395
+#, fuzzy
+msgid "&Enable selected attached files"
+msgstr "&Видалити виділене вкладення"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:519
 msgid "&Enabled"
@@ -1310,7 +1321,7 @@ msgstr "&Приховано"
 msgid "&Info tool"
 msgstr "&Інформаційний інструмент"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1639
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1690
 msgid "&Input"
 msgstr "&На вході"
 
@@ -1330,7 +1341,7 @@ msgstr "&Змінити мову для назви розділу:"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:529
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1275
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1608
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1659
 msgid "&Language:"
 msgstr "&Мова:"
 
@@ -1339,7 +1350,7 @@ msgid "&Languages"
 msgstr "&Мови"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:175
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1688
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1740
 msgid "&MIME type:"
 msgstr "&MIME-тип:"
 
@@ -1360,7 +1371,7 @@ msgid "&Multiply start and end timecodes by the following factor:"
 msgstr "&Помножити початкові і кінцеві тайм-коди на таку величину:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1686
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1738
 msgid "&Name:"
 msgstr "&Назва:"
 
@@ -1415,12 +1426,12 @@ msgstr "&Налаштування"
 msgid "&Ordered"
 msgstr "&Впорядковано"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1681
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1732
 msgid "&Output"
 msgstr "&Вихід"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:331
-#: src/mkvtoolnix-gui/merge/tab.cpp:357
+#: src/mkvtoolnix-gui/merge/tab.cpp:348
+#: src/mkvtoolnix-gui/merge/tab.cpp:374
 msgid "&Overwrite file"
 msgstr "&Перезаписати файл"
 
@@ -1438,11 +1449,11 @@ msgstr "&Перезавантажити"
 msgid "&Reload file"
 msgstr "&Перезавантажити файл"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:289
+#: src/mkvtoolnix-gui/merge/attachments.cpp:400
 msgid "&Remove attachments"
 msgstr "&Видалити вкладення"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1250
+#: src/mkvtoolnix-gui/merge/input.cpp:1251
 msgid "&Remove files"
 msgstr "&Видалити файли"
 
@@ -1496,11 +1507,16 @@ msgstr "&Сканувати теку на наявність інших спис
 msgid "&Scan for other playlists"
 msgstr "&Сканувати інші списки відтворення"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:291
+#: src/mkvtoolnix-gui/merge/attachments.cpp:397
+#, fuzzy
+msgid "&Select all attached files"
+msgstr "&Вибрати всі вкладення"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:402
 msgid "&Select all attachments"
 msgstr "&Вибрати всі вкладення"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1254
+#: src/mkvtoolnix-gui/merge/input.cpp:1255
 msgid "&Select all tracks"
 msgstr "&Вибрати всі доріжки"
 
@@ -1529,7 +1545,7 @@ msgid "&Subtitle tracks:"
 msgstr "&Доріжки субтитрів:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1261
-#: src/mkvtoolnix-gui/merge/input.cpp:1262
+#: src/mkvtoolnix-gui/merge/input.cpp:1263
 msgid "&Subtitles"
 msgstr "&Субтитри"
 
@@ -1537,8 +1553,9 @@ msgstr "&Субтитри"
 msgid "&Tag editor"
 msgstr "&Редактор тегів"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1596
-msgid "&Tracks, chapters, tags and attachments:"
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1647
+#, fuzzy
+msgid "&Tracks, chapters and tags:"
 msgstr "&Доріжки, розділи, теги і вкладення:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:516
@@ -1552,7 +1569,7 @@ msgid "&Validate values"
 msgstr "&Перевірка значень"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1259
-#: src/mkvtoolnix-gui/merge/input.cpp:1260
+#: src/mkvtoolnix-gui/merge/input.cpp:1261
 msgid "&Video"
 msgstr "&Відео"
 
@@ -1965,7 +1982,7 @@ msgstr "прапорець 'Доступність доріжки'"
 msgid "(Unknown element: %1%; ID: 0x%2% size: %3%)"
 msgstr "(Невідомий елемент: %1%; ID: 0x%2% розмір: %3%)"
 
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:126
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:130
 msgid "(additional part)"
 msgstr "(додаткові частини)"
 
@@ -2057,13 +2074,13 @@ msgstr "<Simple> має містити або <String>, або дочірній 
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> пропускає складову <Simple>."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:261
+#: src/mkvtoolnix-gui/merge/attachments.cpp:365
 #: src/mkvtoolnix-gui/merge/input.cpp:570
-#: src/mkvtoolnix-gui/merge/input.cpp:1271
+#: src/mkvtoolnix-gui/merge/input.cpp:1272
 msgid "<do not change>"
 msgstr "<не змінювати>"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:105
+#: src/mkvtoolnix-gui/merge/tab.cpp:110
 msgid "<no output file>"
 msgstr "<немає вихідного файлу>"
 
@@ -2115,7 +2132,7 @@ msgstr "Зручний для сприйняття людиною рядок, я
 msgid "A human-readable track name."
 msgstr "Зручна для сприйняття людиною назва треку."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:354
+#: src/mkvtoolnix-gui/merge/tab.cpp:371
 msgid "A job creating the file '%1' is already in the job queue."
 msgstr "Завдання, з файлом '%1' на виході, вже у черзі завдань."
 
@@ -2195,8 +2212,8 @@ msgstr "Унікальне, додатнє число однозначно ви�
 msgid "A&cknowledge warnings/errors"
 msgstr "П&ідтвердити попередження/помилки"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1245
 #: src/mkvtoolnix-gui/merge/input.cpp:1246
+#: src/mkvtoolnix-gui/merge/input.cpp:1247
 msgid "A&ppend files"
 msgstr "В&кладені файли"
 
@@ -2217,7 +2234,7 @@ msgstr "AAC (Advanced Audio Coding)"
 msgid "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr 0' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 msgstr "AAC файли можуть містити HE-AAC / AAC+ / SBR AAC аудіо. Це не може бути визначено автоматично. Тому, ви повинні вказати '--aac-is-sbr 0' вручну для цього вхідного файлу, якщо він дійсно містить SBR AAC. В іншому випадку, файл буде змультиплексовано невірно. Більше читайте у документації mkvmerge.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1631
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1682
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC - SBR/HE-AAC/AAC+:"
 
@@ -2339,7 +2356,7 @@ msgid "Add as new input fi&les"
 msgstr "Додати як нові вхідні фа&йли"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:606
-#: src/mkvtoolnix-gui/merge/attachments.cpp:168
+#: src/mkvtoolnix-gui/merge/attachments.cpp:256
 msgid "Add attachments"
 msgstr "Додати вкладення"
 
@@ -2347,8 +2364,8 @@ msgstr "Додати вкладення"
 msgid "Add element"
 msgstr "Додати елемент"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1247
 #: src/mkvtoolnix-gui/merge/input.cpp:1248
+#: src/mkvtoolnix-gui/merge/input.cpp:1249
 msgid "Add files as a&dditional parts"
 msgstr "Додати файли як &додаткові частини"
 
@@ -2393,7 +2410,7 @@ msgid "Add the file 'filename' as a new attachment"
 msgstr "Додати файл 'назва файла' як нове вкладення"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:444
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1699
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1751
 msgid "Add to job &queue"
 msgstr "Додати до черги &завдань"
 
@@ -2425,8 +2442,8 @@ msgstr "Додаткові &налаштування"
 msgid "Additional command line options"
 msgstr "Додаткові параметри командного рядка"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1638
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1656
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1689
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1707
 msgid "Additional options:"
 msgstr "Інші опції:"
 
@@ -2475,12 +2492,12 @@ msgstr "Всі розділи були видалені з файла '%1'."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:606
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:147
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:168
+#: src/mkvtoolnix-gui/merge/attachments.cpp:256
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
-#: src/mkvtoolnix-gui/merge/tab.cpp:171
-#: src/mkvtoolnix-gui/merge/tab.cpp:185
-#: src/mkvtoolnix-gui/merge/tab.cpp:234
-#: src/mkvtoolnix-gui/merge/tab.cpp:259
+#: src/mkvtoolnix-gui/merge/tab.cpp:176
+#: src/mkvtoolnix-gui/merge/tab.cpp:190
+#: src/mkvtoolnix-gui/merge/tab.cpp:239
+#: src/mkvtoolnix-gui/merge/tab.cpp:264
 #: src/mkvtoolnix-gui/merge/tool.cpp:156
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/util/widget.cpp:174
@@ -2726,15 +2743,16 @@ msgstr "Тип співвідношення сторін екрану: %1%%2%"
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "Потрібен принаймні один <ChapterAtom> елемент."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1695
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1747
 msgid "Atta&chments"
 msgstr "Вкл&адення"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1682
-msgid "Atta&chments:"
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1734
+#, fuzzy
+msgid "Atta&chments to add:"
 msgstr "Вкл&адення:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1689
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1741
 msgid "Attach &to:"
 msgstr "Приєднати &до:"
 
@@ -2770,6 +2788,11 @@ msgstr "Селектори вкладень"
 msgid "Attachments"
 msgstr "Вкладення"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1733
+#, fuzzy
+msgid "Attachments from &source files:"
+msgstr "Селектори вкладень"
+
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:47
 msgid "Audio"
 msgstr "Аудіо"
@@ -2789,7 +2812,7 @@ msgstr "Канали аудіо "
 msgid "Audio output sampling frequency"
 msgstr "Вихідна частота дискретизації аудіо "
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1630
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1681
 msgid "Audio properties"
 msgstr "Властивості аудіо"
 
@@ -2802,7 +2825,7 @@ msgstr "Частота дискретизації аудіо"
 msgid "Audio track %1"
 msgstr "Аудіодоріжка %1"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1602
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1653
 msgid "Audio, subtitle, chapter properties"
 msgstr "Властивості аудіо, субтитрів і розділів "
 
@@ -2963,8 +2986,8 @@ msgstr "Підраховувати статистику для усіх дорі
 #: src/mkvtoolnix-gui/jobs/tool.cpp:431
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:330
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
-#: src/mkvtoolnix-gui/merge/tab.cpp:332
-#: src/mkvtoolnix-gui/merge/tab.cpp:358
+#: src/mkvtoolnix-gui/merge/tab.cpp:349
+#: src/mkvtoolnix-gui/merge/tab.cpp:375
 #: src/mkvtoolnix-gui/merge/tool.cpp:194
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:193
 msgid "Cancel"
@@ -2979,7 +3002,7 @@ msgstr "Не має можливості перетворювати ненати
 msgid "Cannot extract tracks of different kinds to the same file. This was requested for the tracks %1% and %2%.\n"
 msgstr "Не вдається витягнути треки різних видів до одного файла. Це стосувалось доріжок %1% і %2%.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:313
+#: src/mkvtoolnix-gui/merge/tab.cpp:330
 msgid "Cannot start merging"
 msgstr "Не вдається розпочати мультиплексування"
 
@@ -3095,7 +3118,7 @@ msgstr "Редактор розділів"
 msgid "Chapter extraction"
 msgstr "Витягнення розділів"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1667
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Chapter file:"
 msgstr "Файл розділу:"
 
@@ -3117,7 +3140,7 @@ msgid "Chapter parser: The EditionUID %1% is not unique and could not be reused.
 msgstr "Аналізатор розділів: EditionUID %1% не є унікальним і не може бути використаний повторно. Буде створений новий.\n"
 
 #: src/info/mkvinfo.cpp:1497
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1665
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1716
 #: src/propedit/options.cpp:191
 msgid "Chapters"
 msgstr "Розділи"
@@ -3134,8 +3157,8 @@ msgstr[0] "Розділи: %1% запис"
 msgstr[1] "Розділи: %1% записи"
 msgstr[2] "Розділи: %1% записів"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1634
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1670
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1685
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1721
 msgid "Character set:"
 msgstr "Набір символів:"
 
@@ -3295,11 +3318,11 @@ msgstr "Зібраний з libebml %1 + libmatroska %2."
 msgid "Compression failed: %1%\n"
 msgstr "Стиснення перервано: %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1611
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1662
 msgid "Compression:"
 msgstr "Стиснення:"
 
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:43
 msgid "Container"
 msgstr "Контейнер"
 
@@ -3425,7 +3448,7 @@ msgstr "Не вдалося записати у вихідний файл: %1% (
 msgid "Country"
 msgstr "Країна"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1655
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1706
 msgid "Create WebM compliant file"
 msgstr "Створити сумісний WebM файл"
 
@@ -3459,7 +3482,7 @@ msgstr "Створення файлу не вдалося. Переконайт�
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '%1%').\n"
 msgstr "Параметри обрізки: не задані у формі <TID>:<зліва>,<згори>,<справа>,<знизу> наприклад, 0:10,5,10,5 (аргумент був '%1%').\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1628
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1679
 msgid "Cropping:"
 msgstr "Обрізка:"
 
@@ -3552,7 +3575,7 @@ msgstr "Тривалість Cue: %1%"
 msgid "Cue extraction"
 msgstr "Витягнення записів cue"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1673
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1724
 msgid "Cue name format:"
 msgstr "Формат назви Cue:"
 
@@ -3723,7 +3746,7 @@ msgstr "Типові додаткові пара&метри командного
 msgid "Default duration"
 msgstr "Типова тривалість"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1617
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1668
 msgid "Default duration/FPS:"
 msgstr "Типова тривалість/кадрів в сек:"
 
@@ -3769,7 +3792,7 @@ msgstr "Значення за замовчуванням для нових на�
 msgid "Defaults for newly added tracks"
 msgstr "Значення за замовчуванням для щойно доданих доріжок:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1615
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1666
 msgid "Delay (in ms):"
 msgstr "Затримка (в мс):"
 
@@ -3802,6 +3825,7 @@ msgstr "Видалити одне або декілька вкладень"
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:235
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:240
 #: src/mkvtoolnix-gui/jobs/model.cpp:51
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
 msgid "Description"
 msgstr "Опис"
@@ -3826,8 +3850,9 @@ msgid "Dirac"
 msgstr "Dirac"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:255
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:43
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
 msgid "Directory"
 msgstr "Тека"
 
@@ -3882,7 +3907,7 @@ msgstr "Висота відображення: %1%"
 msgid "Display unit: %1%%2%"
 msgstr "Блок відображення: %1%%2%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1627
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1678
 msgid "Display width/height:"
 msgstr "Ширина/висота відображення:"
 
@@ -3916,8 +3941,8 @@ msgstr "Ви дійсно хочете перервати усі поточні 
 msgid "Do you really want to abort this job?"
 msgstr "Ви дійсно хочете перервати це завдання?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:330
-#: src/mkvtoolnix-gui/merge/tab.cpp:356
+#: src/mkvtoolnix-gui/merge/tab.cpp:347
+#: src/mkvtoolnix-gui/merge/tab.cpp:373
 msgid "Do you want to overwrite the file?"
 msgstr "Ви хочете перезаписати файл?"
 
@@ -4151,7 +4176,7 @@ msgstr "Англійська назва мови"
 msgid "Ensure the file name is &unique"
 msgstr "Використовувати &унікальну назву файла на виході"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:387
+#: src/mkvtoolnix-gui/merge/tab.cpp:404
 msgid "Enter job description"
 msgstr "Введіть опис завдання"
 
@@ -4183,7 +4208,7 @@ msgstr "Помилка в рядку %1%: очікувався тайм-код �
 msgid "Error in line %1%: expected subtitle number and found some text.\n"
 msgstr "Помилка в рядку %1%: очікувався номер рядка субтитрів, а знайдено деякий текст.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:135
+#: src/mkvtoolnix-gui/merge/tab.cpp:140
 msgid "Error loading settings file"
 msgstr "Помилка завантаження файла налаштувань"
 
@@ -4297,7 +4322,7 @@ msgstr "Деталі обробки винятку:"
 msgid "Executable files"
 msgstr "Виконувані файли"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1690
+#: src/mkvtoolnix-gui/merge/input.cpp:1691
 msgid "Executable not found"
 msgstr "Виконуваний файл не знайдено"
 
@@ -4422,7 +4447,7 @@ msgstr "UID сімейства: %1%"
 msgid "Fi&le name:"
 msgstr "Назва фа&йла:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1641
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1692
 msgid "Fi&le title:"
 msgstr "На&зва файла:"
 
@@ -4472,7 +4497,7 @@ msgstr "Файл не був змінений"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:256
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:40
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
 msgid "File name"
 msgstr "Назва файла"
 
@@ -4501,7 +4526,7 @@ msgstr "Назва файла: %1%"
 msgid "File parsing failed"
 msgstr "Не вдалося виконати обробку файлу"
 
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:44
 msgid "File size"
 msgstr "Розмір файла"
 
@@ -4509,7 +4534,7 @@ msgstr "Розмір файла"
 msgid "File structure warning"
 msgstr "Попередження файлової структури"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1658
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1709
 msgid "File/Segment linking"
 msgstr "Файл/Сегмент зв'язку"
 
@@ -4521,7 +4546,7 @@ msgstr "Файли не можуть бути приєднані самі до �
 msgid "Finished at:"
 msgstr "Завершено:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1620
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 msgid "Fix bitstream timing info"
 msgstr "Виправити інформацію синхронізації потоку"
 
@@ -4645,14 +4670,14 @@ msgstr "Гамма: %1%"
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track."
 msgstr "Сміття на початку аудіодоріжок у файлах AVI, як правило, використовується для затримки, цього треку."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1640
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1691
 msgid "General"
 msgstr "Загальні опції"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1203
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1219
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1599
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1605
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1650
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1656
 msgid "General options"
 msgstr "Загальні опції"
 
@@ -4668,7 +4693,7 @@ msgstr "Створення  підгрозділів"
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr "Створення низки розділіа, розподілених рівномірно крім"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1671
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1722
 msgid "Generating chapters:"
 msgstr "Створення розділів:"
 
@@ -4681,7 +4706,7 @@ msgstr "Глобальні опції"
 msgid "Global output control"
 msgstr "Глобальний вихідний контроль"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1644
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1695
 msgid "Global tags:"
 msgstr "Глобальні теги:"
 
@@ -4932,7 +4957,7 @@ msgstr "Якщо ця опція увімкнена, то тільки ті тр
 msgid "If two or more timecodes are used then you have to separate them with commas."
 msgstr "Якщо використовуються два або більше тимчасових кодів , то ви повинні розділити їх комами."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:355
+#: src/mkvtoolnix-gui/merge/tab.cpp:372
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr "Якщо ви додасте інше завдання з тою самою назвою вихідного файла, то попередньо створений файл буде перезаписаний."
 
@@ -4977,7 +5002,7 @@ msgstr "Несумісний AAC аудіопакет (довжина: %1% != %2
 msgid "Increase verbosity."
 msgstr "Збільшено докладність виводу інформації."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1637
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1688
 msgid "Indexing (cues):"
 msgstr "Індексація (cues):"
 
@@ -5020,7 +5045,7 @@ msgstr "Внутрішня помилка: tracks.cpp SSA #1. %1%"
 msgid "Internal program error"
 msgstr "Внутрішня помилка програми"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1680
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1731
 msgid "Interval:"
 msgstr "Інтервал:"
 
@@ -5408,7 +5433,7 @@ msgstr "Це ігнорується для XML файлів з роздііам�
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Ця програма була написана Moritz Bunkus <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1693
+#: src/mkvtoolnix-gui/merge/input.cpp:1694
 msgid "Its installation location could not be determined automatically."
 msgstr ""
 
@@ -5491,7 +5516,7 @@ msgid "Language is not NUL terminated"
 msgstr "Задання мови не повинно завершуватися нулем"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1669
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:69
 msgid "Language:"
 msgstr "Мова:"
@@ -5547,7 +5572,7 @@ msgstr "Рядок %1%: Скоріш за все рядок має бути за
 msgid "Line %1%: The line seems to be a subtitle entry but the timecode was negative even after adding the track delay. Negative timecodes are not supported in Matroska. This entry will be skipped.\n"
 msgstr "Рядок %1%: Скоріш за все рядок має бути записом субтитрів, але тайм-код був від'ємним навіть після додавання затримки. Від'ємні тайм-коди не підтримуються для Matroska. Цей запис буде пропущено.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1652
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1703
 msgid "Link files"
 msgstr "Файли зв'язку"
 
@@ -5571,6 +5596,7 @@ msgstr "Бі&льше дій"
 msgid "MD5"
 msgstr "MD5"
 
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:86
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:61
 msgid "MIME type"
 msgstr "MIME-тип"
@@ -5591,7 +5617,7 @@ msgstr "Уподобання MKVToolnix GUI"
 msgid "MKVToolNix option files"
 msgstr "MKVToolNix файл конфігурації"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:185
+#: src/mkvtoolnix-gui/merge/tab.cpp:190
 #: src/mkvtoolnix-gui/merge/tool.cpp:156
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix GUI файл конфігурації"
@@ -5725,7 +5751,7 @@ msgstr "Максимально дозволене значення: %1%, фак�
 msgid "Maximum cache"
 msgstr "Максимальний кеш"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1650
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1701
 msgid "Maximum number of files:"
 msgstr "Максимальне число файлів:"
 
@@ -5775,9 +5801,9 @@ msgstr "Мінімально дозволене значення: %1%, факт�
 msgid "Minimum cache"
 msgstr "Мінімальний кеш"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1603
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1636
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1654
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1687
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1705
 msgid "Miscellaneous"
 msgstr "Різне"
 
@@ -5854,7 +5880,7 @@ msgstr "Знайдено більш ніж одну доріжку з номер
 msgid "Most of the other settings on the output tab will be kept intact, though."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1606
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1657
 msgid "Mu&x this track:"
 msgstr "Мульт&иплексувати цей трек:"
 
@@ -5862,6 +5888,7 @@ msgstr "Мульт&иплексувати цей трек:"
 msgid "Multiply this track's timestamps with a factor."
 msgstr ""
 
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:87
 #: src/mkvtoolnix-gui/merge/track_model.cpp:46
 msgid "Mux this"
 msgstr "Мультиплексувати"
@@ -5876,7 +5903,7 @@ msgstr "Додаток, що виконував мультиплексуванн
 msgid "Muxing took %1%.\n"
 msgstr "Мультиплексування тривало %1%.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1623
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1674
 msgid "NALU size length:"
 msgstr "Довжина поля розміру NALU:"
 
@@ -5888,6 +5915,7 @@ msgstr "На&зва  шаблону:"
 #: src/common/property_element.cpp:127
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:25
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:432
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:85
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:60
 #: src/mkvtoolnix-gui/merge/track_model.cpp:48
 msgid "Name"
@@ -5897,7 +5925,7 @@ msgstr "Назва"
 msgid "Name tem&plate:"
 msgstr "Назва  шабл&ону:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1666
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1717
 msgid "Name template:"
 msgstr "Шаблон назви:"
 
@@ -5941,7 +5969,7 @@ msgstr "Наступна назва файлу"
 msgid "Next filename: %1%"
 msgstr "Наступна назва файлу: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1663
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1714
 msgid "Next segment UID:"
 msgstr "UID наступного сегмента:"
 
@@ -6242,7 +6270,7 @@ msgstr[2] "Знайдено лише %1% розділів у вхідних фа
 
 #: src/merge/mkvmerge.cpp:1571
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:657
-#: src/mkvtoolnix-gui/merge/attachments.cpp:146
+#: src/mkvtoolnix-gui/merge/attachments.cpp:234
 msgid "Only files smaller than 2 GiB are supported."
 msgstr "Підтримуються лише файли менші за 2 Гб."
 
@@ -6325,8 +6353,8 @@ msgstr "Відкриті файли в Редакторі розділів"
 msgid "Open files in header editor"
 msgstr "Відкриті файли в Редакторі заголовків"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1252
-#: src/mkvtoolnix-gui/merge/input.cpp:1258
+#: src/mkvtoolnix-gui/merge/input.cpp:1253
+#: src/mkvtoolnix-gui/merge/input.cpp:1259
 msgid "Open in &MediaInfo"
 msgstr "Відкрити в &MediaInfo"
 
@@ -6368,7 +6396,7 @@ msgstr "Опція"
 msgid "Options"
 msgstr "Опції"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1653
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1704
 msgid "Options:"
 msgstr "Опції:"
 
@@ -6410,7 +6438,7 @@ msgstr "В іншому випадку вони відображаються н�
 msgid "Output"
 msgstr "На виході"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1696
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1748
 msgid "Output file"
 msgstr "Вихідний файл"
 
@@ -6426,7 +6454,7 @@ msgstr "Тека вихідного файла"
 msgid "Output file's name"
 msgstr "Назва вихідного файла"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1642
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1693
 msgid "Output file:"
 msgstr "Вихідний файл:"
 
@@ -6439,8 +6467,8 @@ msgstr "Вихідні повідомлення з цим набором сим�
 msgid "Output sampling frequency: %1%"
 msgstr "Вихідна частота дискретизації: %1%"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:327
-#: src/mkvtoolnix-gui/merge/tab.cpp:352
+#: src/mkvtoolnix-gui/merge/tab.cpp:344
+#: src/mkvtoolnix-gui/merge/tab.cpp:369
 msgid "Overwrite existing file"
 msgstr "Перезаписати існуючий файл"
 
@@ -6536,7 +6564,7 @@ msgstr[0] "Плейлисти коротші %1 секунди будуть іг
 msgstr[1] "Плейлисти коротші %1 секунд будуть ігноруватися."
 msgstr[2] "Плейлисти коротші %1 секунд будуть ігноруватися."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:387
+#: src/mkvtoolnix-gui/merge/tab.cpp:404
 msgid "Please enter the new job's description."
 msgstr "Будь ласка, введіть опис для нового завдання."
 
@@ -6550,7 +6578,7 @@ msgstr ""
 "даються більш детальні пояснення, які не очевидні з\n"
 "цього запису.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1694
+#: src/mkvtoolnix-gui/merge/input.cpp:1695
 msgid "Please select its location below."
 msgstr "Будь ласка, оберіть файл."
 
@@ -6607,7 +6635,7 @@ msgstr "Попередня назва файлу"
 msgid "Previous filename: %1%"
 msgstr "Попередня назва файлу: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1661
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 msgid "Previous segment UID:"
 msgstr "UID попереднього сегмента:"
 
@@ -6674,7 +6702,7 @@ msgid "Properties"
 msgstr "Властивості"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:285
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1604
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1655
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 msgid "Properties:"
 msgstr "Властивості:"
@@ -6843,7 +6871,7 @@ msgstr "Читання зашифрованих VOBів не підтримує�
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:654
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:666
-#: src/mkvtoolnix-gui/merge/attachments.cpp:143
+#: src/mkvtoolnix-gui/merge/attachments.cpp:231
 msgid "Reading failed"
 msgstr "Помилка під час зчитування"
 
@@ -6885,7 +6913,7 @@ msgstr "RealMedia файли можуть містити HE-AAC / AAC+ / SBR AAC
 msgid "Redirects all messages into this file."
 msgstr "Перенаправляти всі повідомлення в цей файл."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1632
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1683
 msgid "Reduce to core"
 msgstr "Залишити лише ядро"
 
@@ -6934,11 +6962,11 @@ msgstr "Видалити &завершені завдання"
 msgid "Remove &successfully completed jobs"
 msgstr "Видалити &успішно завершені завдання"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:290
+#: src/mkvtoolnix-gui/merge/attachments.cpp:401
 msgid "Remove a&ll attachments"
 msgstr "Видалити &всі вкладення"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1251
+#: src/mkvtoolnix-gui/merge/input.cpp:1252
 msgid "Remove a&ll files"
 msgstr "Видалити в&і файли"
 
@@ -7021,7 +7049,7 @@ msgstr "Клацніть правою кнопкою миші, щоб побач
 msgid "Right-click for actions for jobs"
 msgstr "Клацніть правою кнопкою миші, щоб побачити наявні дії над всіма завданнями"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:302
+#: src/mkvtoolnix-gui/merge/attachments.cpp:413
 msgid "Right-click for attachment actions"
 msgstr "Клацніть правою кнопкою миші, щоб побачити наявні дії над всіма вкладеннями"
 
@@ -7116,11 +7144,11 @@ msgstr "Зберегти інформацію як"
 msgid "Save job output"
 msgstr "Зберегти вихідну інформацію завдання"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:171
+#: src/mkvtoolnix-gui/merge/tab.cpp:176
 msgid "Save option file"
 msgstr "Зберегти файл налаштувань"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:185
+#: src/mkvtoolnix-gui/merge/tab.cpp:190
 msgid "Save settings file as"
 msgstr "Зберегти файл налаштувань як"
 
@@ -7226,7 +7254,7 @@ msgstr "Сегмент"
 msgid "Segment UID: %1%"
 msgstr "UID сегмента: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1659
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1710
 msgid "Segment UIDs:"
 msgstr "UID сегментів:"
 
@@ -7247,7 +7275,7 @@ msgstr "Назва файла сегмента"
 msgid "Segment filename: %1%"
 msgstr "Назва файла сегмента: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1646
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
 msgid "Segment info:"
 msgstr "Інформація сегмента:"
 
@@ -7285,7 +7313,7 @@ msgstr "Сегмент невідомого розміру"
 msgid "Select Matroska file to read segment UID from"
 msgstr "Оберіть файл Matroska з якого будуть зчитані UID сегмента"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1255
+#: src/mkvtoolnix-gui/merge/input.cpp:1256
 msgid "Select all tracks of specific &type"
 msgstr "Виберіть всі треки специфічного &типу"
 
@@ -7351,7 +7379,7 @@ msgstr "Обирається для яких блоків mkvmerge буде ст
 msgid "Selects the character set a subtitle file or chapter information was written with."
 msgstr "Обирається набір символів, з яким записано файл субтитрів або інформація про розділи."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1624
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1675
 msgid "Set aspect ratio:"
 msgstr "Встановити співвідношення:"
 
@@ -7454,7 +7482,7 @@ msgstr "Встановлює сегмент UID для використання.
 msgid "Sets the stereo mode of the video track to this value."
 msgstr "Встановлює стерео режим відео доріжки до цього значення."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1685
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 msgid "Settings"
 msgstr "Налаштування"
 
@@ -7581,6 +7609,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "Виявлено кадр з одним полем перед заголовком GOP. Виправте MPEG2 відеопотік перед мультиплексуванням як таким.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:237
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 msgid "Size"
 msgstr "Розмір"
@@ -7615,7 +7644,7 @@ msgstr "Шари (Сектори)"
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "Деякі елементи тегів відсутні (ця помилка не повинна була виникнути - подібна помилка повинна була виникнути раніше). %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1593
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1644
 msgid "Source &files:"
 msgstr "Вхідні файли:"
 
@@ -7623,6 +7652,7 @@ msgstr "Вхідні файли:"
 msgid "Source file"
 msgstr "Вхідний файл"
 
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
 msgid "Source file name"
 msgstr "Назва вхідного файлу"
@@ -7657,11 +7687,11 @@ msgstr ""
 "Вкажіть можливі зміни співвідношення сторін екрану\n"
 "(0: вільна зміна співвідношення, 1: зберігати співвідношення, 2: фіксоване співвідношення)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1649
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1700
 msgid "Split mode:"
 msgstr "Режим розбиття:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1648
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1699
 msgid "Splitting"
 msgstr "Розбиття"
 
@@ -7673,7 +7703,7 @@ msgstr "Розбиття буде відбуватись зразу перед �
 msgid "Sta&rt all pending jobs"
 msgstr "Поч&ати всі заплановані завдання"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1698
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1750
 msgid "Sta&rt muxing"
 msgstr "&Почати мультиплексування"
 
@@ -7740,7 +7770,7 @@ msgstr "Стерео режим: %1% (%2%)"
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "Стерео-3D відеорежим (0 - 11, див. документацію)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1629
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "Stereoscopy:"
 msgstr "Стереоскопія:"
 
@@ -7748,7 +7778,7 @@ msgstr "Стереоскопія:"
 msgid "Stop &after all running jobs have finished"
 msgstr "Зупинити &обробку після завершення усіх запущених завдань"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1616
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1667
 msgid "Stretch by:"
 msgstr "Розтягнення:"
 
@@ -7756,7 +7786,7 @@ msgstr "Розтягнення:"
 msgid "String"
 msgstr "Рядок"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1633
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1684
 msgid "Subtitle and chapter properties"
 msgstr "Властивості субтитрів і розділів "
 
@@ -7825,7 +7855,7 @@ msgstr[0] "Теги для доріжки з ID %1%: %2% запис"
 msgstr[1] "Теги для доріжки з ID %1%: %2% записи"
 msgstr[2] "Теги для доріжки з ID %1%: %2% записів"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1612
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1663
 msgid "Tags:"
 msgstr "Теги:"
 
@@ -8113,12 +8143,12 @@ msgstr "Специфічні дані кодеків не співпадають
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:128
+#: src/mkvtoolnix-gui/merge/tab.cpp:133
 msgid "The configuration has been loaded."
 msgstr "Конфігурацію завантажено."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:165
-#: src/mkvtoolnix-gui/merge/tab.cpp:198
+#: src/mkvtoolnix-gui/merge/tab.cpp:170
+#: src/mkvtoolnix-gui/merge/tab.cpp:203
 msgid "The configuration has been saved."
 msgstr "Параметри були збережені."
 
@@ -8326,7 +8356,7 @@ msgstr "Файл '%1' містить інформацію сегмента."
 msgid "The file '%1' contains tags."
 msgstr "Файл '%1' містить теги."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:329
+#: src/mkvtoolnix-gui/merge/tab.cpp:346
 msgid "The file '%1' exists already."
 msgstr "Файл '%1' вже існує."
 
@@ -8335,7 +8365,7 @@ msgid "The file '%1' you've added is a playlist."
 msgstr "Файл '%1', що ви додали, є списком відтворення."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:656
-#: src/mkvtoolnix-gui/merge/attachments.cpp:145
+#: src/mkvtoolnix-gui/merge/attachments.cpp:233
 msgid "The file (%1) is too big (%2)."
 msgstr "Файл (%1) завеликий (%2)."
 
@@ -8771,7 +8801,7 @@ msgstr "Дозволяються лише кодеки VP8/VP9 для відео
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "Опція '--meta-seek-size' більше не підтримується. Будь ласка, прочитайте документацію mkvmerge, особливо розділ про MATROSKA FILE LAYOUT.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:179
+#: src/mkvtoolnix-gui/merge/tab.cpp:184
 msgid "The option file has been created."
 msgstr "Файл опцій був створений."
 
@@ -8868,7 +8898,7 @@ msgstr "UID редакції сегмента має бути додатною �
 msgid "The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."
 msgstr "mkvmerge може читати CUE-списки для аудіо компакт-дисків та автоматично перетворюти їх на розділи. Цей параметр визначає те, як створюється назва розділу. Послідовність '%p' замінюється на PERFORMER доріжки, послідовність '%t' -  на TITLE доріжки, '%n' - на номер доріжки і '%N' - на номер доріжки,  доповнений провідними 0 для номерів доріжок < 10. Решта копіюється як є. Якщо нічого не задано, тоді буде використовуватися варіант '%p - %t'."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:135
+#: src/mkvtoolnix-gui/merge/tab.cpp:140
 msgid "The settings file '%1' contains invalid settings and was not loaded."
 msgstr "Файл налаштувань \"%1\" містить неприпустимі налаштування і не був завантажений."
 
@@ -9218,7 +9248,7 @@ msgstr "Цей файл містить координати в рядках та
 msgid "This file could not be opened or parsed.\n"
 msgstr "Цей файл не може бути відкритий або проаналізований.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1692
+#: src/mkvtoolnix-gui/merge/input.cpp:1693
 msgid "This function requires the application %1."
 msgstr "Дана функція вимагає наявність додатку %1."
 
@@ -9403,7 +9433,7 @@ msgstr "Інтервал часу"
 msgid "Timecode extraction"
 msgstr "Витягування тайм-кодів"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1618
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1669
 msgid "Timecode file:"
 msgstr "Файл тайм-кодів:"
 
@@ -9414,8 +9444,8 @@ msgstr "Файл тайм-кодів:"
 msgid "Timecode scale: %1%"
 msgstr "Масштаб тайм-коду: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1600
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1614
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1651
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1665
 msgid "Timecodes and default duration"
 msgstr "Тайм-коди і типова тривалість"
 
@@ -9433,7 +9463,7 @@ msgstr "Назва"
 msgid "Title: %1%"
 msgstr "Назва: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1607
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1658
 msgid "Trac&k name:"
 msgstr "Назва до&ріжки:"
 
@@ -9951,8 +9981,8 @@ msgstr "Висота відео в пікселях"
 msgid "Video pixel width"
 msgstr "Ширина відео в пікселях"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1601
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1621
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1652
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1672
 msgid "Video properties"
 msgstr "Властивості відео"
 
@@ -10224,7 +10254,7 @@ msgstr "Ви можете змінити це значення в налашту
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Ви можете керувати форматом, що використовується початковою часовою міткою за допомогою <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1695
+#: src/mkvtoolnix-gui/merge/input.cpp:1696
 msgid "You can download the application from the following URL:"
 msgstr "Ви можете завантажити додаток за вказаним URL:"
 
@@ -10264,7 +10294,7 @@ msgstr "Ви не можете додати додаткові деталі до
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "Ви повинні ввести значення між 1000 і 10000000 або магічне значення -1."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:313
+#: src/mkvtoolnix-gui/merge/tab.cpp:330
 msgid "You have to set the output file name before you can start merging or add a job to the job queue."
 msgstr "Ви повинні встановити ім'я вихідного файлу, перш ніж зможете почати мультиплексування чи додати завдання в чергу завдань."
 
@@ -10324,7 +10354,7 @@ msgstr "...після тайм-кодів:"
 msgid "all entries"
 msgstr "Всі записи"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1692
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1744
 msgid "all output files"
 msgstr "all output files"
 
@@ -10403,7 +10433,7 @@ msgstr "Канали: %1%"
 msgid "chapters"
 msgstr "розділи"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1678
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1729
 msgid "chapters in fixed intervals"
 msgstr "розділи через постійні інтервали"
 
@@ -10466,10 +10496,10 @@ msgstr "типова тривалість: %|1$.3f|мс (%|2$.3f| кадрів/�
 msgid "deflateInit() failed. Result: %1%\n"
 msgstr "deflateInit() завершено невдало. Результат: %1%\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1275
-#: src/mkvtoolnix-gui/merge/input.cpp:1277
+#: src/mkvtoolnix-gui/merge/input.cpp:1276
 #: src/mkvtoolnix-gui/merge/input.cpp:1278
 #: src/mkvtoolnix-gui/merge/input.cpp:1279
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
 msgid "determine automatically"
 msgstr "визначити автоматично"
 
@@ -10492,11 +10522,11 @@ msgstr "висота дисплея: %1%"
 msgid "display width: %1%"
 msgstr "ширина дисплея: %1%"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1274
+#: src/mkvtoolnix-gui/merge/input.cpp:1275
 msgid "don't change"
 msgstr "не змінювати"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1676
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1727
 msgid "don't generate chapters"
 msgstr "не створювати розділів"
 
@@ -10563,7 +10593,7 @@ msgstr "flac_reader: Помилка при аналізі файлу: %1%\n"
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: Не вдалося ініціалізувати формувач пакетів FLAC.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1278
+#: src/mkvtoolnix-gui/merge/input.cpp:1279
 msgid "for all frames"
 msgstr "для всіх кадрів"
 
@@ -10575,11 +10605,11 @@ msgstr "для файлів з інформацією про розділи (н�
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
 msgstr "для субтитрів, що не використовують маркер порядку байтів (BOM) і що не збережені з поточним системним набором символів (%1)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1274
+#: src/mkvtoolnix-gui/merge/input.cpp:1275
 msgid "force 2 bytes"
 msgstr "2 байти"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1274
+#: src/mkvtoolnix-gui/merge/input.cpp:1275
 msgid "force 4 bytes"
 msgstr "4 байти"
 
@@ -10902,7 +10932,7 @@ msgstr "mkvmerge може генерувати розділи автоматич
 msgid "mkvmerge can read CUE sheets for audio CDs and automatically convert them to chapters."
 msgstr "mkvmerge можете прочитати CUE листи для аудіо компакт-дисків і автоматично перетворити їх в розділи."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:115
+#: src/mkvtoolnix-gui/merge/tab.cpp:120
 msgid "mkvmerge command line"
 msgstr "mkvmerge командний рядок"
 
@@ -11003,10 +11033,12 @@ msgstr "ніколи не сканувати інші списки відтво�
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:96
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
-#: src/mkvtoolnix-gui/merge/input.cpp:1273
-#: src/mkvtoolnix-gui/merge/input.cpp:1275
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:53
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:63
+#: src/mkvtoolnix-gui/merge/input.cpp:1274
 #: src/mkvtoolnix-gui/merge/input.cpp:1276
-#: src/mkvtoolnix-gui/merge/input.cpp:1279
+#: src/mkvtoolnix-gui/merge/input.cpp:1277
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
 #: src/mkvtoolnix-gui/merge/track_model.cpp:102
 #: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108
@@ -11014,7 +11046,7 @@ msgstr "ніколи не сканувати інші списки відтво�
 msgid "no"
 msgstr "ні"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1278
+#: src/mkvtoolnix-gui/merge/input.cpp:1279
 msgid "no cues"
 msgstr "без cues"
 
@@ -11030,7 +11062,7 @@ msgstr "без помилок"
 msgid "no errors yet"
 msgstr "без помилок"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1277
+#: src/mkvtoolnix-gui/merge/input.cpp:1278
 msgid "no extra compression"
 msgstr "без додаткового стиснення"
 
@@ -11084,11 +11116,11 @@ msgstr "збій ogg_stream_init для потоку номер %1%. Буде з
 msgid "ogg_sync_buffer failed\n"
 msgstr "збій ogg_sync_buffer\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1677
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1728
 msgid "one chapter for each appended file"
 msgstr "один розділ на кожний файл, що приєднується"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1278
+#: src/mkvtoolnix-gui/merge/input.cpp:1279
 msgid "only for I frames"
 msgstr "тільки для I-кадрів"
 
@@ -11233,7 +11265,7 @@ msgstr "теги"
 msgid "text subtitles"
 msgstr "текстові субтитри"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1693
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1745
 msgid "the first output file only"
 msgstr "the first output file only"
 
@@ -11288,7 +11320,7 @@ msgstr "невідомий"
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "невідомий, тег форматування 0x%|1$04x|"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1651
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1702
 msgid "unlimited"
 msgstr "необмежено"
 
@@ -11310,7 +11342,7 @@ msgstr "wavpack_reader: жодного блоку аудіо не знайден
 msgid "wavpack_reader: unknown sample rate!\n"
 msgstr "wavpack_reader: невідома частота дискретизації!\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1622
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1673
 msgid "x"
 msgstr "x"
 
@@ -11320,10 +11352,12 @@ msgstr "x"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:96
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
-#: src/mkvtoolnix-gui/merge/input.cpp:1273
-#: src/mkvtoolnix-gui/merge/input.cpp:1275
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:53
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:63
+#: src/mkvtoolnix-gui/merge/input.cpp:1274
 #: src/mkvtoolnix-gui/merge/input.cpp:1276
-#: src/mkvtoolnix-gui/merge/input.cpp:1279
+#: src/mkvtoolnix-gui/merge/input.cpp:1277
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
 #: src/mkvtoolnix-gui/merge/track_model.cpp:102
 #: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108

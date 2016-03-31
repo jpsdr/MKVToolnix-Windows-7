@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-03-29 14:47+0200\n"
+"POT-Creation-Date: 2016-03-31 22:57+0200\n"
 "PO-Revision-Date: 2016-03-24 15:55+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -933,7 +933,7 @@ msgid " size is unknown"
 msgstr " la mida és desconeguda"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:283
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1609
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1660
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:75
 msgid "\"Default track\" flag:"
 msgstr "Etiqueta «Pista per omissió»:"
@@ -943,7 +943,7 @@ msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "«Determina-la automàticament» és una bona tria per a gairebé totes les situacions."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:284
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1610
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1661
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:79
 msgid "\"Forced track\" flag:"
 msgstr "Etiqueta «Pista forçada»:"
@@ -966,6 +966,7 @@ msgstr[1] "%1 bits per mostra"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:118
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:122
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:49
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:46
 msgid "%1 byte (%2)"
 msgid_plural "%1 bytes (%2)"
@@ -1174,12 +1175,12 @@ msgstr "&Afegeix"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:278
-#: src/mkvtoolnix-gui/merge/attachments.cpp:288
+#: src/mkvtoolnix-gui/merge/attachments.cpp:399
 msgid "&Add attachments"
 msgstr "&Afegeix alguns adjunts"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1243
 #: src/mkvtoolnix-gui/merge/input.cpp:1244
+#: src/mkvtoolnix-gui/merge/input.cpp:1245
 msgid "&Add files"
 msgstr "&Afegeix alguns fitxers"
 
@@ -1187,12 +1188,12 @@ msgstr "&Afegeix alguns fitxers"
 msgid "&Add program"
 msgstr "&Afegeix un programa"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1749
 msgid "&Add source files"
 msgstr "&Afegeix fitxers d'origen"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1260
-#: src/mkvtoolnix-gui/merge/input.cpp:1261
+#: src/mkvtoolnix-gui/merge/input.cpp:1262
 msgid "&Audio"
 msgstr "&Àudio"
 
@@ -1270,13 +1271,18 @@ msgid "&Default"
 msgstr "O&missió"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:173
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1687
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1739
 msgid "&Description:"
 msgstr "&Descripció:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1257
+#: src/mkvtoolnix-gui/merge/input.cpp:1258
 msgid "&Disable all tracks"
 msgstr "&Deshabilita totes les pistes"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:396
+#, fuzzy
+msgid "&Disable selected attached files"
+msgstr "Sup&rimeix l'adjunt seleccionat"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:34
 msgid "&Don't scan, just add the file"
@@ -1290,9 +1296,14 @@ msgstr "&Baixa"
 msgid "&Duration of each entry in seconds:"
 msgstr "&Durada de cada entrada en segons:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1256
+#: src/mkvtoolnix-gui/merge/input.cpp:1257
 msgid "&Enable all tracks"
 msgstr "&Habilita totes les pistes"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:395
+#, fuzzy
+msgid "&Enable selected attached files"
+msgstr "Sup&rimeix l'adjunt seleccionat"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:519
 msgid "&Enabled"
@@ -1353,7 +1364,7 @@ msgstr "&Ocultes"
 msgid "&Info tool"
 msgstr "Eina d'&informació"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1639
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1690
 msgid "&Input"
 msgstr "E&ntrada"
 
@@ -1373,7 +1384,7 @@ msgstr "I&dioma dels noms dels capítols a substituir:"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:529
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1275
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1608
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1659
 msgid "&Language:"
 msgstr "&Idioma:"
 
@@ -1382,7 +1393,7 @@ msgid "&Languages"
 msgstr "I&diomes"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:175
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1688
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1740
 msgid "&MIME type:"
 msgstr "Tipus &MIME:"
 
@@ -1403,7 +1414,7 @@ msgid "&Multiply start and end timecodes by the following factor:"
 msgstr "&Multiplica l'inici i el final dels codis de temps pel següent factor:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1686
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1738
 msgid "&Name:"
 msgstr "&Nom:"
 
@@ -1458,12 +1469,12 @@ msgstr "&Opcions"
 msgid "&Ordered"
 msgstr "&Ordenat"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1681
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1732
 msgid "&Output"
 msgstr "S&ortida"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:331
-#: src/mkvtoolnix-gui/merge/tab.cpp:357
+#: src/mkvtoolnix-gui/merge/tab.cpp:348
+#: src/mkvtoolnix-gui/merge/tab.cpp:374
 msgid "&Overwrite file"
 msgstr "S&obreescriu el fitxer"
 
@@ -1481,11 +1492,11 @@ msgstr "To&rna a carregar"
 msgid "&Reload file"
 msgstr "To&rna a carregar el fitxer"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:289
+#: src/mkvtoolnix-gui/merge/attachments.cpp:400
 msgid "&Remove attachments"
 msgstr "&Elimina els adjunts"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1250
+#: src/mkvtoolnix-gui/merge/input.cpp:1251
 msgid "&Remove files"
 msgstr "Sup&rimeix els fitxers"
 
@@ -1539,11 +1550,16 @@ msgstr "Directori a e&xplorar per a altres llistes de reproducció:"
 msgid "&Scan for other playlists"
 msgstr "E&xplora per a altres llistes de reproducció"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:291
+#: src/mkvtoolnix-gui/merge/attachments.cpp:397
+#, fuzzy
+msgid "&Select all attached files"
+msgstr "&Selecciona tots els adjunts"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:402
 msgid "&Select all attachments"
 msgstr "&Selecciona tots els adjunts"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1254
+#: src/mkvtoolnix-gui/merge/input.cpp:1255
 msgid "&Select all tracks"
 msgstr "&Selecciona totes les pistes"
 
@@ -1572,7 +1588,7 @@ msgid "&Subtitle tracks:"
 msgstr "Pistes de &subtítols:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1261
-#: src/mkvtoolnix-gui/merge/input.cpp:1262
+#: src/mkvtoolnix-gui/merge/input.cpp:1263
 msgid "&Subtitles"
 msgstr "&Subtítols"
 
@@ -1580,8 +1596,9 @@ msgstr "&Subtítols"
 msgid "&Tag editor"
 msgstr "Editor d'e&tiquetes"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1596
-msgid "&Tracks, chapters, tags and attachments:"
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1647
+#, fuzzy
+msgid "&Tracks, chapters and tags:"
 msgstr "Pis&tes, capítols, etiquetes i adjunts:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:516
@@ -1595,7 +1612,7 @@ msgid "&Validate values"
 msgstr "&Valida els valors"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1259
-#: src/mkvtoolnix-gui/merge/input.cpp:1260
+#: src/mkvtoolnix-gui/merge/input.cpp:1261
 msgid "&Video"
 msgstr "&Vídeo"
 
@@ -2006,7 +2023,7 @@ msgstr "Etiqueta «Pista habilitada»"
 msgid "(Unknown element: %1%; ID: 0x%2% size: %3%)"
 msgstr "(Element desconegut: %1%; ID: 0x%2% mida: %3%)"
 
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:126
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:130
 msgid "(additional part)"
 msgstr "(part addicional)"
 
@@ -2098,13 +2115,13 @@ msgstr "<Simple> ha de contenir una <String> o un <Binary> fill."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> falta al <Simple> fill."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:261
+#: src/mkvtoolnix-gui/merge/attachments.cpp:365
 #: src/mkvtoolnix-gui/merge/input.cpp:570
-#: src/mkvtoolnix-gui/merge/input.cpp:1271
+#: src/mkvtoolnix-gui/merge/input.cpp:1272
 msgid "<do not change>"
 msgstr "<No canviïs>"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:105
+#: src/mkvtoolnix-gui/merge/tab.cpp:110
 msgid "<no output file>"
 msgstr "<Sense fitxer de sortida>"
 
@@ -2156,7 +2173,7 @@ msgstr "Una cadena llegible especificant el còdec."
 msgid "A human-readable track name."
 msgstr "Un nom de pista llegible."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:354
+#: src/mkvtoolnix-gui/merge/tab.cpp:371
 msgid "A job creating the file '%1' is already in the job queue."
 msgstr "Una tasca crearà el fitxer «%1» que ja es troba a la cua de treball."
 
@@ -2236,8 +2253,8 @@ msgstr "Un número positiu únic, el qual identificarà sense ambigüitat l'adju
 msgid "A&cknowledge warnings/errors"
 msgstr "&Reconeix els avisos/errors"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1245
 #: src/mkvtoolnix-gui/merge/input.cpp:1246
+#: src/mkvtoolnix-gui/merge/input.cpp:1247
 msgid "A&ppend files"
 msgstr "Fitxers ad&junts"
 
@@ -2258,7 +2275,7 @@ msgstr "AAC (codificació avançada de l'àudio)"
 msgid "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr 0' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 msgstr "Els fitxers AAC poden contenir àudio HE-AAC / AAC+ / AAC en SBR. Això no es pot detectar automàticament. Per tant haureu d'especificar «--aac-is-sbr 0» manualment per aquest fitxer d'entrada si el fitxer realment conté AAC en SBR. D'altra manera el fitxer serà multiplexat de manera ERRÒNIA. També haureu de llegir la documentació del «mkvmerge».\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1631
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1682
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC és SBR/HE-AAC/AAC+:"
 
@@ -2380,7 +2397,7 @@ msgid "Add as new input fi&les"
 msgstr "Afegeix com a fi&txers d'entrada nous"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:606
-#: src/mkvtoolnix-gui/merge/attachments.cpp:168
+#: src/mkvtoolnix-gui/merge/attachments.cpp:256
 msgid "Add attachments"
 msgstr "Afegeix alguns adjunts"
 
@@ -2388,8 +2405,8 @@ msgstr "Afegeix alguns adjunts"
 msgid "Add element"
 msgstr "Afegeix aquest element"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1247
 #: src/mkvtoolnix-gui/merge/input.cpp:1248
+#: src/mkvtoolnix-gui/merge/input.cpp:1249
 msgid "Add files as a&dditional parts"
 msgstr "Afegeix els fitxers com a parts a&ddicionals"
 
@@ -2434,7 +2451,7 @@ msgid "Add the file 'filename' as a new attachment"
 msgstr "Afegeix el fitxer «nom_de_fitxer» com un adjunt nou"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:444
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1699
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1751
 msgid "Add to job &queue"
 msgstr "Afegeix a la &cua de treball"
 
@@ -2466,8 +2483,8 @@ msgstr "&Modificacions addicionals"
 msgid "Additional command line options"
 msgstr "Opcions addicionals de la línia d'ordres"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1638
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1656
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1689
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1707
 msgid "Additional options:"
 msgstr "Opcions addicionals:"
 
@@ -2516,12 +2533,12 @@ msgstr "S'han eliminat tots els capítols del fitxer «%1»."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:606
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:147
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:168
+#: src/mkvtoolnix-gui/merge/attachments.cpp:256
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
-#: src/mkvtoolnix-gui/merge/tab.cpp:171
-#: src/mkvtoolnix-gui/merge/tab.cpp:185
-#: src/mkvtoolnix-gui/merge/tab.cpp:234
-#: src/mkvtoolnix-gui/merge/tab.cpp:259
+#: src/mkvtoolnix-gui/merge/tab.cpp:176
+#: src/mkvtoolnix-gui/merge/tab.cpp:190
+#: src/mkvtoolnix-gui/merge/tab.cpp:239
+#: src/mkvtoolnix-gui/merge/tab.cpp:264
 #: src/mkvtoolnix-gui/merge/tool.cpp:156
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:46
 #: src/mkvtoolnix-gui/util/widget.cpp:174
@@ -2763,15 +2780,16 @@ msgstr "Tipus de la relació d'aspecte: %1%%2%"
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "És necessari almenys un element <ChapterAtom>."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1695
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1747
 msgid "Atta&chments"
 msgstr "Ad&junts"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1682
-msgid "Atta&chments:"
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1734
+#, fuzzy
+msgid "Atta&chments to add:"
 msgstr "Ad&junts:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1689
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1741
 msgid "Attach &to:"
 msgstr "Adjun&ta a:"
 
@@ -2807,6 +2825,11 @@ msgstr "Selectors de l'adjunt"
 msgid "Attachments"
 msgstr "Adjunts"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1733
+#, fuzzy
+msgid "Attachments from &source files:"
+msgstr "Selectors de l'adjunt"
+
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:47
 msgid "Audio"
 msgstr "Àudio"
@@ -2826,7 +2849,7 @@ msgstr "Canals d'àudio"
 msgid "Audio output sampling frequency"
 msgstr "Freqüència de mostreig de la sortida d'àudio"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1630
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1681
 msgid "Audio properties"
 msgstr "Propietats de l'àudio"
 
@@ -2839,7 +2862,7 @@ msgstr "Freqüència de mostreig de l'àudio"
 msgid "Audio track %1"
 msgstr "Pista d'àudio %1"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1602
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1653
 msgid "Audio, subtitle, chapter properties"
 msgstr "Propietats de l'àudio, subtítols i capítols"
 
@@ -3001,8 +3024,8 @@ msgstr "Calcula les estadístiques per a totes les pistes i afegeix etiquetes no
 #: src/mkvtoolnix-gui/jobs/tool.cpp:431
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:330
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
-#: src/mkvtoolnix-gui/merge/tab.cpp:332
-#: src/mkvtoolnix-gui/merge/tab.cpp:358
+#: src/mkvtoolnix-gui/merge/tab.cpp:349
+#: src/mkvtoolnix-gui/merge/tab.cpp:375
 #: src/mkvtoolnix-gui/merge/tool.cpp:194
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:193
 msgid "Cancel"
@@ -3017,7 +3040,7 @@ msgstr "No es poden convertir els fotogrames d'un vídeo MPEG4 no natiu a un de 
 msgid "Cannot extract tracks of different kinds to the same file. This was requested for the tracks %1% and %2%.\n"
 msgstr "No es poden extreure pistes de classes diferents, al mateix fitxer. Aquest és un requisit per a les pistes %1% i %2%.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:313
+#: src/mkvtoolnix-gui/merge/tab.cpp:330
 msgid "Cannot start merging"
 msgstr "No s'ha pogut iniciar el fusionat"
 
@@ -3133,7 +3156,7 @@ msgstr "Editor de capítols"
 msgid "Chapter extraction"
 msgstr "Extracció de capítols"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1667
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Chapter file:"
 msgstr "Fitxer de capítols:"
 
@@ -3155,7 +3178,7 @@ msgid "Chapter parser: The EditionUID %1% is not unique and could not be reused.
 msgstr "Analitzador del capítol: L'UID editat %1% no és exclusiu i no es podrà tornar a emprar. Se'n crearà un de nou.\n"
 
 #: src/info/mkvinfo.cpp:1497
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1665
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1716
 #: src/propedit/options.cpp:191
 msgid "Chapters"
 msgstr "Capítols"
@@ -3171,8 +3194,8 @@ msgid_plural "Chapters: %1% entries"
 msgstr[0] "Capítols: %1% entrada"
 msgstr[1] "Capítols: %1% entrades"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1634
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1670
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1685
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1721
 msgid "Character set:"
 msgstr "Joc de caràcters:"
 
@@ -3334,11 +3357,11 @@ msgstr "S'ha compilat amb les libebml %1 + libmatroska %2."
 msgid "Compression failed: %1%\n"
 msgstr "La compressió ha fallat: %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1611
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1662
 msgid "Compression:"
 msgstr "Compressió:"
 
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:41
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:43
 msgid "Container"
 msgstr "Contenidor"
 
@@ -3463,7 +3486,7 @@ msgstr "No s'ha pogut escriure al fitxer de sortida: %1% (%2%)\n"
 msgid "Country"
 msgstr "País"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1655
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1706
 msgid "Create WebM compliant file"
 msgstr "Crea un fitxer conforme amb WebM"
 
@@ -3497,7 +3520,7 @@ msgstr "La creació del fitxer ha fallat. Comproveu-ho per assegurar-vos que ten
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '%1%').\n"
 msgstr "Paràmetres del retall: no s'han assignat en la forma <TID>:<esquerra>,<a_dalt>,<dreta>,<a_baix>, p. ex., 0:10,5,10,5 (l'argument era «%1%»).\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1628
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1679
 msgid "Cropping:"
 msgstr "Retall:"
 
@@ -3590,7 +3613,7 @@ msgstr "Durada de l'índex: %1%"
 msgid "Cue extraction"
 msgstr "Extracció de l'índex"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1673
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1724
 msgid "Cue name format:"
 msgstr "Format pels noms de l'índex:"
 
@@ -3763,7 +3786,7 @@ msgstr "Opcions per omissió addicionals de la &línia d'ordres:"
 msgid "Default duration"
 msgstr "Durada per omissió"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1617
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1668
 msgid "Default duration/FPS:"
 msgstr "Durada/FPS per omissió:"
 
@@ -3810,7 +3833,7 @@ msgstr "Per omissió pels ajustaments dels fusionats nous"
 msgid "Defaults for newly added tracks"
 msgstr "Per omissió per a les pistes que s'afegeixin noves"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1615
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1666
 msgid "Delay (in ms):"
 msgstr "Retard (en ms):"
 
@@ -3844,6 +3867,7 @@ msgstr "Suprimeix un o més adjunts"
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:235
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:240
 #: src/mkvtoolnix-gui/jobs/model.cpp:51
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
 msgid "Description"
 msgstr "Descripció"
@@ -3868,8 +3892,9 @@ msgid "Dirac"
 msgstr "Dirac"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:255
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:43
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
 msgid "Directory"
 msgstr "Directori"
 
@@ -3925,7 +3950,7 @@ msgstr "Alçada de visualització: %1%"
 msgid "Display unit: %1%%2%"
 msgstr "Unitat de visualització: %1%%2%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1627
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1678
 msgid "Display width/height:"
 msgstr "Amplada/alçada de visualització:"
 
@@ -3960,8 +3985,8 @@ msgstr "Esteu segur que voleu interrompre totes les tasques en execució?"
 msgid "Do you really want to abort this job?"
 msgstr "Esteu segur que voleu interrompre aquesta tasca?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:330
-#: src/mkvtoolnix-gui/merge/tab.cpp:356
+#: src/mkvtoolnix-gui/merge/tab.cpp:347
+#: src/mkvtoolnix-gui/merge/tab.cpp:373
 msgid "Do you want to overwrite the file?"
 msgstr "Esteu segur que voleu sobreescriure el fitxer?"
 
@@ -4200,7 +4225,7 @@ msgstr "Nom en l'idioma anglès"
 msgid "Ensure the file name is &unique"
 msgstr "Assegura que el nom de fitxer és úni&c"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:387
+#: src/mkvtoolnix-gui/merge/tab.cpp:404
 msgid "Enter job description"
 msgstr "Introduïu la descripció de la tasca"
 
@@ -4232,7 +4257,7 @@ msgstr "Error a la línia %1%: s'esperava una línia de codi de temps SRT, però
 msgid "Error in line %1%: expected subtitle number and found some text.\n"
 msgstr "Error a la línia %1%: s'esperava un número de subtítol i s'ha trobat algun text.\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:135
+#: src/mkvtoolnix-gui/merge/tab.cpp:140
 msgid "Error loading settings file"
 msgstr "Error en carregar el fitxer d'ajustaments"
 
@@ -4346,7 +4371,7 @@ msgstr "Detalls de l'excepció:"
 msgid "Executable files"
 msgstr "Fitxers executables"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1690
+#: src/mkvtoolnix-gui/merge/input.cpp:1691
 msgid "Executable not found"
 msgstr "No s'ha trobat l'executable"
 
@@ -4472,7 +4497,7 @@ msgstr "UID de la família: %1%"
 msgid "Fi&le name:"
 msgstr "Nom de&l fitxer:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1641
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1692
 msgid "Fi&le title:"
 msgstr "Títo&l del fitxer:"
 
@@ -4522,7 +4547,7 @@ msgstr "El fitxer no ha estat modificat"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:256
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:40
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
 msgid "File name"
 msgstr "Nom del fitxer"
 
@@ -4551,7 +4576,7 @@ msgstr "Nom del fitxer: %1%"
 msgid "File parsing failed"
 msgstr "L'anàlisi del fitxer ha fallat"
 
-#: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
+#: src/mkvtoolnix-gui/merge/source_file_model.cpp:44
 msgid "File size"
 msgstr "Mida del fitxer"
 
@@ -4559,7 +4584,7 @@ msgstr "Mida del fitxer"
 msgid "File structure warning"
 msgstr "Avís per a l'estructura del fitxer"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1658
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1709
 msgid "File/Segment linking"
 msgstr "Vincula el fitxer/segment"
 
@@ -4571,7 +4596,7 @@ msgstr "Els fitxers no es poden annexar a sí mateixos. L'argument per «--appen
 msgid "Finished at:"
 msgstr "Finalitzada el:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1620
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 msgid "Fix bitstream timing info"
 msgstr "Corregeix la informació de temps per a la taxa de bits"
 
@@ -4695,14 +4720,14 @@ msgstr "Gamma: %1%"
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track."
 msgstr "L'escòria al començament de les pistes d'àudio als fitxers AVI normalment s'usa per a retardar aquesta pista."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1640
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1691
 msgid "General"
 msgstr "General"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1203
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1219
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1599
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1605
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1650
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1656
 msgid "General options"
 msgstr "Opcions generals"
 
@@ -4718,7 +4743,7 @@ msgstr "Genera els subcapítols"
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr "S'està generant un nombre de capítols amb espaiat uniforme"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1671
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1722
 msgid "Generating chapters:"
 msgstr "Genera els capítols:"
 
@@ -4731,7 +4756,7 @@ msgstr "Opcions globals"
 msgid "Global output control"
 msgstr "Control global de la sortida"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1644
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1695
 msgid "Global tags:"
 msgstr "Etiquetes globals:"
 
@@ -4981,7 +5006,7 @@ msgstr "Si aquesta opció està activada, llavors només aquestes pistes seran e
 msgid "If two or more timecodes are used then you have to separate them with commas."
 msgstr "Si s'usen dos o més codis de temps, llavors els haureu de separar amb comes."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:355
+#: src/mkvtoolnix-gui/merge/tab.cpp:372
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr "Si afegiu una altra tasca amb el mateix fitxer de destinació, llavors el fitxer creat abans serà sobreescrit."
 
@@ -5026,7 +5051,7 @@ msgstr "Paquet d'àudio AAC inconsistent (longitud: %1% != %2%)\n"
 msgid "Increase verbosity."
 msgstr "Incrementa la loquacitat."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1637
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1688
 msgid "Indexing (cues):"
 msgstr "Indexació (CUE):"
 
@@ -5070,7 +5095,7 @@ msgstr "Error intern: tracks.cpp SSA núm. 1. %1%"
 msgid "Internal program error"
 msgstr "Error intern del programa"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1680
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1731
 msgid "Interval:"
 msgstr "Interval:"
 
@@ -5455,7 +5480,7 @@ msgstr "Això serà ignorat pels fitxers XML de capítols."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Ha estat escrit per en Moritz Bunkus <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1693
+#: src/mkvtoolnix-gui/merge/input.cpp:1694
 msgid "Its installation location could not be determined automatically."
 msgstr "La seva ubicació d'instal·lació no s'ha pogut determinar automàticament."
 
@@ -5539,7 +5564,7 @@ msgid "Language is not NUL terminated"
 msgstr "L'idioma no acaba en NUL"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1669
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:69
 msgid "Language:"
 msgstr "Idioma:"
@@ -5595,7 +5620,7 @@ msgstr "Línia %1%: La línia sembla una entrada de subtítols, però no es pot 
 msgid "Line %1%: The line seems to be a subtitle entry but the timecode was negative even after adding the track delay. Negative timecodes are not supported in Matroska. This entry will be skipped.\n"
 msgstr "Línia %1%: La línia sembla una entrada de subtítols, però el codi de temps era negatiu, fins i tot després d'afegir el retard de la pista. Els codis de temps negatius no són admesos per Matroska. Aquesta entrada serà omesa.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1652
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1703
 msgid "Link files"
 msgstr "Fitxers vinculats"
 
@@ -5619,6 +5644,7 @@ msgstr "Més acci&ons"
 msgid "MD5"
 msgstr "MD5"
 
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:86
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:61
 msgid "MIME type"
 msgstr "Tipus MIME"
@@ -5639,7 +5665,7 @@ msgstr "Preferències de la IGU del MKVToolNix"
 msgid "MKVToolNix option files"
 msgstr "Fitxer d'opcions del MKVToolNix"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:185
+#: src/mkvtoolnix-gui/merge/tab.cpp:190
 #: src/mkvtoolnix-gui/merge/tool.cpp:156
 msgid "MKVToolnix GUI config files"
 msgstr "Fitxers de configuració de la IGU del MKVToolNix"
@@ -5773,7 +5799,7 @@ msgstr "Valor màxim permès: %1%, valor real: %2%"
 msgid "Maximum cache"
 msgstr "Cau màxim"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1650
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1701
 msgid "Maximum number of files:"
 msgstr "Nombre màxim de fitxers:"
 
@@ -5823,9 +5849,9 @@ msgstr "Valor mínim permès: %1%, valor real: %2%"
 msgid "Minimum cache"
 msgstr "Cau mínim"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1603
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1636
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1654
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1687
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1705
 msgid "Miscellaneous"
 msgstr "Miscel·lània"
 
@@ -5902,7 +5928,7 @@ msgstr "S'ha trobat més d'una pista amb el número de pista %1%.\n"
 msgid "Most of the other settings on the output tab will be kept intact, though."
 msgstr "La majoria dels altres ajustaments a la pestanya de la sortida es mantindran intactes."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1606
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1657
 msgid "Mu&x this track:"
 msgstr "Multiple&xa aquesta pista:"
 
@@ -5910,6 +5936,7 @@ msgstr "Multiple&xa aquesta pista:"
 msgid "Multiply this track's timestamps with a factor."
 msgstr "Multiplica les marques de temps d'aquesta pista per un factor."
 
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:87
 #: src/mkvtoolnix-gui/merge/track_model.cpp:46
 msgid "Mux this"
 msgstr "Multiplexa això"
@@ -5924,7 +5951,7 @@ msgstr "Aplicació de multiplexat: %1%"
 msgid "Muxing took %1%.\n"
 msgstr "El multiplexat ha pres %1%.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1623
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1674
 msgid "NALU size length:"
 msgstr "Longitud de la mida NALU:"
 
@@ -5936,6 +5963,7 @@ msgstr "No&m de la plantilla:"
 #: src/common/property_element.cpp:127
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:25
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:432
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:85
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:60
 #: src/mkvtoolnix-gui/merge/track_model.cpp:48
 msgid "Name"
@@ -5945,7 +5973,7 @@ msgstr "Nom"
 msgid "Name tem&plate:"
 msgstr "Nom de la &plantilla:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1666
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1717
 msgid "Name template:"
 msgstr "Nom de la plantilla:"
 
@@ -5989,7 +6017,7 @@ msgstr "Nom del fitxer següent"
 msgid "Next filename: %1%"
 msgstr "Nom del fitxer següent: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1663
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1714
 msgid "Next segment UID:"
 msgstr "UID del segment següent:"
 
@@ -6289,7 +6317,7 @@ msgstr[1] "Només s'han trobat %1% capítols als fitxers d'origen i de capítols
 
 #: src/merge/mkvmerge.cpp:1571
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:657
-#: src/mkvtoolnix-gui/merge/attachments.cpp:146
+#: src/mkvtoolnix-gui/merge/attachments.cpp:234
 msgid "Only files smaller than 2 GiB are supported."
 msgstr "Només s'admeten els fitxers menors que 2 GiB."
 
@@ -6372,8 +6400,8 @@ msgstr "Obre els fitxers a l'editor de capítols"
 msgid "Open files in header editor"
 msgstr "Obre els fitxers a l'editor de la capçalera"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1252
-#: src/mkvtoolnix-gui/merge/input.cpp:1258
+#: src/mkvtoolnix-gui/merge/input.cpp:1253
+#: src/mkvtoolnix-gui/merge/input.cpp:1259
 msgid "Open in &MediaInfo"
 msgstr "Obre en el &MediaInfo"
 
@@ -6413,7 +6441,7 @@ msgstr "Opció"
 msgid "Options"
 msgstr "Opcions"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1653
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1704
 msgid "Options:"
 msgstr "Opcions:"
 
@@ -6456,7 +6484,7 @@ msgstr "En cas contrari, es mostraran a la pestanya «Sortida»."
 msgid "Output"
 msgstr "Sortida"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1696
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1748
 msgid "Output file"
 msgstr "Fitxer de sortida"
 
@@ -6472,7 +6500,7 @@ msgstr "Directori pel fitxer de sortida"
 msgid "Output file's name"
 msgstr "Nom pel fitxer de sortida"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1642
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1693
 msgid "Output file:"
 msgstr "Fitxer de sortida:"
 
@@ -6485,8 +6513,8 @@ msgstr "Missatges de sortida en aquest joc de caràcters"
 msgid "Output sampling frequency: %1%"
 msgstr "Freqüència de mostreig per a la sortida: %1%"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:327
-#: src/mkvtoolnix-gui/merge/tab.cpp:352
+#: src/mkvtoolnix-gui/merge/tab.cpp:344
+#: src/mkvtoolnix-gui/merge/tab.cpp:369
 msgid "Overwrite existing file"
 msgstr "Sobreescriu el fitxer existent"
 
@@ -6582,7 +6610,7 @@ msgid_plural "Playlists shorter than %1 seconds will be ignored."
 msgstr[0] "Les llistes de reproducció inferiors a %1 segon seran ignorades."
 msgstr[1] "Les llistes de reproducció inferiors a %1 segons seran ignorades."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:387
+#: src/mkvtoolnix-gui/merge/tab.cpp:404
 msgid "Please enter the new job's description."
 msgstr "Si us plau, introduïu una descripció per a la tasca nova."
 
@@ -6596,7 +6624,7 @@ msgstr ""
 "«mkvmerge». Allà s'expliquen certs aspectes d'una manera més\n"
 "detallada que no són tan obvis des d'aquest llistat.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1694
+#: src/mkvtoolnix-gui/merge/input.cpp:1695
 msgid "Please select its location below."
 msgstr "Seleccioneu la seva ubicació a sota."
 
@@ -6653,7 +6681,7 @@ msgstr "Nom del fitxer anterior"
 msgid "Previous filename: %1%"
 msgstr "Nom del fitxer anterior: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1661
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 msgid "Previous segment UID:"
 msgstr "UID del segment anterior:"
 
@@ -6720,7 +6748,7 @@ msgid "Properties"
 msgstr "Propietats"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:285
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1604
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1655
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 msgid "Properties:"
 msgstr "Propietats:"
@@ -6889,7 +6917,7 @@ msgstr "La lectura de VOB encriptats encara no està implementada.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:654
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:666
-#: src/mkvtoolnix-gui/merge/attachments.cpp:143
+#: src/mkvtoolnix-gui/merge/attachments.cpp:231
 msgid "Reading failed"
 msgstr "La lectura ha fallat"
 
@@ -6931,7 +6959,7 @@ msgstr "Els fitxers RealMedia poden contenir àudio HE-AAC / AAC+ / AAC en SBR. 
 msgid "Redirects all messages into this file."
 msgstr "Redirigeix tots els missatges a aquest fitxer."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1632
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1683
 msgid "Reduce to core"
 msgstr "Acobla al nucli"
 
@@ -6980,11 +7008,11 @@ msgstr "Suprimeix les tasques &finalitzades"
 msgid "Remove &successfully completed jobs"
 msgstr "Suprimeix les tasques &correctament finalitzades"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:290
+#: src/mkvtoolnix-gui/merge/attachments.cpp:401
 msgid "Remove a&ll attachments"
 msgstr "Suprimeix &tots els adjunts"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1251
+#: src/mkvtoolnix-gui/merge/input.cpp:1252
 msgid "Remove a&ll files"
 msgstr "Sup&rimeix tots els fitxers"
 
@@ -7067,7 +7095,7 @@ msgstr "Clic dret en les accions per a totes les pistes"
 msgid "Right-click for actions for jobs"
 msgstr "Clic dret en les accions per a les tasques"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:302
+#: src/mkvtoolnix-gui/merge/attachments.cpp:413
 msgid "Right-click for attachment actions"
 msgstr "Clic dret per a les accions en els adjunts"
 
@@ -7162,11 +7190,11 @@ msgstr "Desa la informació com a"
 msgid "Save job output"
 msgstr "Desa la sortida de la tasca"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:171
+#: src/mkvtoolnix-gui/merge/tab.cpp:176
 msgid "Save option file"
 msgstr "Desa un fitxer d'opcions"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:185
+#: src/mkvtoolnix-gui/merge/tab.cpp:190
 msgid "Save settings file as"
 msgstr "Desa el fitxer d'ajustaments com a"
 
@@ -7272,7 +7300,7 @@ msgstr "Segment"
 msgid "Segment UID: %1%"
 msgstr "UID del segment: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1659
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1710
 msgid "Segment UIDs:"
 msgstr "Els UID del segment:"
 
@@ -7293,7 +7321,7 @@ msgstr "Nom de fitxer del segment"
 msgid "Segment filename: %1%"
 msgstr "Nom de fitxer del segment: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1646
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
 msgid "Segment info:"
 msgstr "Informació del segment:"
 
@@ -7331,7 +7359,7 @@ msgstr "Segment, mida desconeguda"
 msgid "Select Matroska file to read segment UID from"
 msgstr "Seleccioneu el fitxer Matroska des del qual llegir l'UID del segment"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1255
+#: src/mkvtoolnix-gui/merge/input.cpp:1256
 msgid "Select all tracks of specific &type"
 msgstr "Selecciona totes les pistes d'un &tipus específic"
 
@@ -7397,7 +7425,7 @@ msgstr "Seleccioneu per a quins blocs el «mkvmerge» crearà les entrades a l'�
 msgid "Selects the character set a subtitle file or chapter information was written with."
 msgstr "Seleccioneu el joc de caràcters d'un fitxer de subtítols o la informació del capítol amb la que s'ha d'escriure."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1624
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1675
 msgid "Set aspect ratio:"
 msgstr "Estableix la relació d'aspecte:"
 
@@ -7494,7 +7522,7 @@ msgstr "Estableix els UID dels segments a usar."
 msgid "Sets the stereo mode of the video track to this value."
 msgstr "Estableix el mode estèreo de la pista de vídeo a aquest valor."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1685
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 msgid "Settings"
 msgstr "Ajustaments"
 
@@ -7621,6 +7649,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "Fotograma amb un únic camp abans de la capçalera GOP detectada. Arregleu el fitxer de vídeo MPEG2 abans d'intentar el multiplexat.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:237
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 msgid "Size"
 msgstr "Mida"
@@ -7655,7 +7684,7 @@ msgstr "Talls"
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "Manquen alguns elements de l'etiqueta (aquest error no hauria d'haver succeït -ja deu haver succeït quelcom semblant anteriorment-). %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1593
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1644
 msgid "Source &files:"
 msgstr "&Fitxers d'origen:"
 
@@ -7663,6 +7692,7 @@ msgstr "&Fitxers d'origen:"
 msgid "Source file"
 msgstr "Fitxer d'origen"
 
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
 msgid "Source file name"
 msgstr "Nom del fitxer d'origen"
@@ -7695,11 +7725,11 @@ msgstr ""
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
 msgstr "Especifica les possibles modificacions de la relació d'aspecte (0: redimensionat lliure, 1: mantén la relació d'aspecte, 2: fixa)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1649
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1700
 msgid "Split mode:"
 msgstr "Mode de tall:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1648
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1699
 msgid "Splitting"
 msgstr "Divisió"
 
@@ -7711,7 +7741,7 @@ msgstr "El tall es durà a terme just abans del primer fotograma clau en què el
 msgid "Sta&rt all pending jobs"
 msgstr "I&nicia totes les tasques pendents"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1698
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1750
 msgid "Sta&rt muxing"
 msgstr "I&nicia el multiplexat"
 
@@ -7778,7 +7808,7 @@ msgstr "Mode estèreo: %1% (%2%)"
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "Mode de vídeo estèreo en 3D (0 - 11, vegeu la documentació)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1629
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "Stereoscopy:"
 msgstr "Estereoscòpia:"
 
@@ -7786,7 +7816,7 @@ msgstr "Estereoscòpia:"
 msgid "Stop &after all running jobs have finished"
 msgstr "Atura &després de finalitzar les tasques en execució"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1616
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1667
 msgid "Stretch by:"
 msgstr "Estira per:"
 
@@ -7794,7 +7824,7 @@ msgstr "Estira per:"
 msgid "String"
 msgstr "Cadena"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1633
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1684
 msgid "Subtitle and chapter properties"
 msgstr "Propietats dels subtítols i capítols"
 
@@ -7862,7 +7892,7 @@ msgid_plural "Tags for track ID %1%: %2% entries"
 msgstr[0] "Etiquetes per a l'ID de la pista %1%: %2% entrada"
 msgstr[1] "Etiquetes per a l'ID de la pista %1%: %2% entrades"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1612
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1663
 msgid "Tags:"
 msgstr "Etiquetes:"
 
@@ -8150,12 +8180,12 @@ msgstr "Les dades privades del còdec no coincideixen. Ambdues tenen la mateixa 
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
 msgstr "La línia d'ordres emprada a l'intèrpret d'ordres com Unix escapa mitjançant el caràcter de barra invertida, fins i tot al Windows."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:128
+#: src/mkvtoolnix-gui/merge/tab.cpp:133
 msgid "The configuration has been loaded."
 msgstr "La configuració ha estat carregada."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:165
-#: src/mkvtoolnix-gui/merge/tab.cpp:198
+#: src/mkvtoolnix-gui/merge/tab.cpp:170
+#: src/mkvtoolnix-gui/merge/tab.cpp:203
 msgid "The configuration has been saved."
 msgstr "La configuració ha estat desada."
 
@@ -8362,7 +8392,7 @@ msgstr "El fitxer «%1» conté la informació del segment."
 msgid "The file '%1' contains tags."
 msgstr "El fitxer «%1» conté etiquetes."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:329
+#: src/mkvtoolnix-gui/merge/tab.cpp:346
 msgid "The file '%1' exists already."
 msgstr "El fitxer «%1» ja existeix."
 
@@ -8371,7 +8401,7 @@ msgid "The file '%1' you've added is a playlist."
 msgstr "El fitxer «%1» que heu afegit és una llista de reproducció."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:656
-#: src/mkvtoolnix-gui/merge/attachments.cpp:145
+#: src/mkvtoolnix-gui/merge/attachments.cpp:233
 msgid "The file (%1) is too big (%2)."
 msgstr "El fitxer (%1) és massa gran (%2)."
 
@@ -8798,7 +8828,7 @@ msgstr "Els únics còdecs permesos són pistes de vídeo VP8/VP9 i d'àudio Vor
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "L'opció «--meta-seek-size» ja no és compatible. Si us plau, llegiu la documentació del «mkvmerge», especialment la secció quant a «estructura del fitxer Matroska (MATROSKA FILE LAYOUT).\n"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:179
+#: src/mkvtoolnix-gui/merge/tab.cpp:184
 msgid "The option file has been created."
 msgstr "El fitxer d'opcions ha estat creat."
 
@@ -8895,7 +8925,7 @@ msgstr "Si s'indica l'UID de l'edició del segment, haurà de ser un número pos
 msgid "The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."
 msgstr "La seqüència «%p» serà substituïda per l'INTÈRPRET de la cançó, la seqüència «%t» pels títols de les pistes, «%n» pel número de la pista i «%N» per l'ompliment del número de la pista precedit d'un 0 pels números inferiors a 10."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:135
+#: src/mkvtoolnix-gui/merge/tab.cpp:140
 msgid "The settings file '%1' contains invalid settings and was not loaded."
 msgstr "El fitxer d'ajustaments «%1» conté ajustaments no vàlids i no s'ha pogut carregar."
 
@@ -9244,7 +9274,7 @@ msgstr "Aquest fitxer conté les coordenades a les línies del codi de temps. Al
 msgid "This file could not be opened or parsed.\n"
 msgstr "Aquest fitxer no s'ha pogut obrir o analitzar.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1692
+#: src/mkvtoolnix-gui/merge/input.cpp:1693
 msgid "This function requires the application %1."
 msgstr "Aquesta funció requereix l'aplicació %1."
 
@@ -9429,7 +9459,7 @@ msgstr "Tall de temps"
 msgid "Timecode extraction"
 msgstr "Extracció del codi de temps"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1618
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1669
 msgid "Timecode file:"
 msgstr "Fitxer pels codis de temps:"
 
@@ -9440,8 +9470,8 @@ msgstr "Fitxer pels codis de temps:"
 msgid "Timecode scale: %1%"
 msgstr "Escala del codi de temps: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1600
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1614
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1651
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1665
 msgid "Timecodes and default duration"
 msgstr "Codis de temps i durada per omissió"
 
@@ -9459,7 +9489,7 @@ msgstr "Títol"
 msgid "Title: %1%"
 msgstr "Títol: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1607
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1658
 msgid "Trac&k name:"
 msgstr "Nom de la &pista:"
 
@@ -9975,8 +10005,8 @@ msgstr "Alçada del vídeo en píxels"
 msgid "Video pixel width"
 msgstr "Amplada del vídeo en píxels"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1601
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1621
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1652
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1672
 msgid "Video properties"
 msgstr "Propietats del vídeo"
 
@@ -10248,7 +10278,7 @@ msgstr "Podeu canviar aquest valor a les preferències."
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Podeu controlar el format emprat per a la marca de temps d'inici amb <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1695
+#: src/mkvtoolnix-gui/merge/input.cpp:1696
 msgid "You can download the application from the following URL:"
 msgstr "Podeu baixar l'aplicació des del següent URL:"
 
@@ -10288,7 +10318,7 @@ msgstr "No podeu afegir parts addicionals als fitxers que no continguin pistes."
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "Heu d'introduir un valor entre 1000 i 10000000. o el valor màgic -1."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:313
+#: src/mkvtoolnix-gui/merge/tab.cpp:330
 msgid "You have to set the output file name before you can start merging or add a job to the job queue."
 msgstr "Almenys haureu d'establir el nom del fitxer de sortida abans que pugueu iniciar un multiplexat o afegir una tasca a la cua de treball."
 
@@ -10348,7 +10378,7 @@ msgstr "Després dels codis de temps específics"
 msgid "all entries"
 msgstr "Totes les entrades"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1692
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1744
 msgid "all output files"
 msgstr "Tots els fitxers de sortida"
 
@@ -10427,7 +10457,7 @@ msgstr "Canals: %1%"
 msgid "chapters"
 msgstr "Capítols"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1678
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1729
 msgid "chapters in fixed intervals"
 msgstr "Capítols en intervals fixos"
 
@@ -10491,10 +10521,10 @@ msgstr "Durada per omissió: %|1$.3f|ms (%|2$.3f| fotogrames/camps per segon per
 msgid "deflateInit() failed. Result: %1%\n"
 msgstr "deflateInit() ha fallat. Resultat: %1%\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1275
-#: src/mkvtoolnix-gui/merge/input.cpp:1277
+#: src/mkvtoolnix-gui/merge/input.cpp:1276
 #: src/mkvtoolnix-gui/merge/input.cpp:1278
 #: src/mkvtoolnix-gui/merge/input.cpp:1279
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
 msgid "determine automatically"
 msgstr "Determina-la automàticament"
 
@@ -10517,11 +10547,11 @@ msgstr "Alçada de visualització: %1%"
 msgid "display width: %1%"
 msgstr "Amplada de visualització: %1%"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1274
+#: src/mkvtoolnix-gui/merge/input.cpp:1275
 msgid "don't change"
 msgstr "No la canviïs"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1676
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1727
 msgid "don't generate chapters"
 msgstr "No generis els subcapítols"
 
@@ -10588,7 +10618,7 @@ msgstr "flac_reader: Error en analitzar el fitxer: %1%\n"
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: no s'ha pogut inicialitzar l'empaquetador FLAC.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1278
+#: src/mkvtoolnix-gui/merge/input.cpp:1279
 msgid "for all frames"
 msgstr "Per a tots els fotogrames"
 
@@ -10600,11 +10630,11 @@ msgstr "Per a fitxers amb la informació dels capítols (p. ex., OGM, MP4) per a
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
 msgstr "Per a fitxers de subtítols que no usen marques d'ordre per byte (BOM) i que no estiguin codificats amb el joc de caràcters actual del sistema (%1)"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1274
+#: src/mkvtoolnix-gui/merge/input.cpp:1275
 msgid "force 2 bytes"
 msgstr "Força 2 bytes"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1274
+#: src/mkvtoolnix-gui/merge/input.cpp:1275
 msgid "force 4 bytes"
 msgstr "Força 4 bytes"
 
@@ -10930,7 +10960,7 @@ msgstr "El «mkvmerge» pot generar els capítols de forma automàtica."
 msgid "mkvmerge can read CUE sheets for audio CDs and automatically convert them to chapters."
 msgstr "El «mkvmerge» pot llegir els índexs CUE dels CD d'àudio i convertir-los automàticament a capítols."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:115
+#: src/mkvtoolnix-gui/merge/tab.cpp:120
 msgid "mkvmerge command line"
 msgstr "Línia d'ordres del «mkvmerge»"
 
@@ -11031,10 +11061,12 @@ msgstr "No cercar mai altres llistes de reproducció "
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:96
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
-#: src/mkvtoolnix-gui/merge/input.cpp:1273
-#: src/mkvtoolnix-gui/merge/input.cpp:1275
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:53
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:63
+#: src/mkvtoolnix-gui/merge/input.cpp:1274
 #: src/mkvtoolnix-gui/merge/input.cpp:1276
-#: src/mkvtoolnix-gui/merge/input.cpp:1279
+#: src/mkvtoolnix-gui/merge/input.cpp:1277
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
 #: src/mkvtoolnix-gui/merge/track_model.cpp:102
 #: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108
@@ -11042,7 +11074,7 @@ msgstr "No cercar mai altres llistes de reproducció "
 msgid "no"
 msgstr "No"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1278
+#: src/mkvtoolnix-gui/merge/input.cpp:1279
 msgid "no cues"
 msgstr "Sense índexs"
 
@@ -11058,7 +11090,7 @@ msgstr "Cap error"
 msgid "no errors yet"
 msgstr "Encara sense errors"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1277
+#: src/mkvtoolnix-gui/merge/input.cpp:1278
 msgid "no extra compression"
 msgstr "Sense compressió extra"
 
@@ -11112,11 +11144,11 @@ msgstr "ogg_stream_init per al flux número %1% ha fallat. Es continuarà i igno
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer ha fallat\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1677
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1728
 msgid "one chapter for each appended file"
 msgstr "Un capítol per a cada fitxer annexat"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1278
+#: src/mkvtoolnix-gui/merge/input.cpp:1279
 msgid "only for I frames"
 msgstr "Només pels fotogrames I"
 
@@ -11261,7 +11293,7 @@ msgstr "Etiquetes"
 msgid "text subtitles"
 msgstr "Subtítols de text"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1693
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1745
 msgid "the first output file only"
 msgstr "Només al primer fitxer de sortida"
 
@@ -11316,7 +11348,7 @@ msgstr "Desconegut"
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "Desconegut, format de l'etiqueta 0x%|1$04x|"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1651
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1702
 msgid "unlimited"
 msgstr "Sense límit"
 
@@ -11338,7 +11370,7 @@ msgstr "wavpack_reader: no s'ha trobat el bloc de l'àudio\n"
 msgid "wavpack_reader: unknown sample rate!\n"
 msgstr "wavpack_reader: freqüència de mostreig desconeguda!\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1622
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1673
 msgid "x"
 msgstr "x"
 
@@ -11348,10 +11380,12 @@ msgstr "x"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:80
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:96
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
-#: src/mkvtoolnix-gui/merge/input.cpp:1273
-#: src/mkvtoolnix-gui/merge/input.cpp:1275
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:53
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:63
+#: src/mkvtoolnix-gui/merge/input.cpp:1274
 #: src/mkvtoolnix-gui/merge/input.cpp:1276
-#: src/mkvtoolnix-gui/merge/input.cpp:1279
+#: src/mkvtoolnix-gui/merge/input.cpp:1277
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
 #: src/mkvtoolnix-gui/merge/track_model.cpp:102
 #: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108
