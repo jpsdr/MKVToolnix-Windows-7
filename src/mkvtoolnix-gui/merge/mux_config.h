@@ -121,13 +121,12 @@ template<typename T>
 void
 loadSettingsGroup(char const *group,
                   QList<std::shared_ptr<T> > &container,
-                  MuxConfig::Loader &l,
-                  std::function<std::shared_ptr<T>()> create = []() { return std::make_shared<T>(); }) {
+                  MuxConfig::Loader &l) {
   l.settings.beginGroup(group);
 
   int numberOfEntries = std::max(l.settings.value("numberOfEntries").toInt(), 0);
   for (int idx = 0; idx < numberOfEntries; ++idx) {
-    container << create();
+    container << std::make_shared<T>();
     l.settings.beginGroup(QString::number(idx));
     container.back()->loadSettings(l);
     l.settings.endGroup();

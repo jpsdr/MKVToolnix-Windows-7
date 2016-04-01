@@ -195,8 +195,8 @@ SourceFile::loadSettings(MuxConfig::Loader &l) {
 
   MuxConfig::loadProperties(l.settings, m_properties);
 
-  loadSettingsGroup<Track>     ("tracks",          m_tracks,          l, [](){ return std::make_shared<Track>(); });
-  loadSettingsGroup<Track>     ("attachedFiles",   m_attachedFiles,   l, [](){ return std::make_shared<Track>(); });
+  loadSettingsGroup<Track>     ("tracks",          m_tracks,          l);
+  loadSettingsGroup<Track>     ("attachedFiles",   m_attachedFiles,   l);
   loadSettingsGroup<SourceFile>("additionalParts", m_additionalParts, l);
   loadSettingsGroup<SourceFile>("appendedFiles",   m_appendedFiles,   l);
 
