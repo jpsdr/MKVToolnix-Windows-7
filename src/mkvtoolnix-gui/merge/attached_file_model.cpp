@@ -64,7 +64,7 @@ AttachedFileModel::setRowData(QList<QStandardItem *> const &items,
   items[DescriptionColumn]->setData(attachedFile.m_attachmentDescription.toLower(), Util::SortRole);
   items[SourceFileColumn ]->setData(info.fileName().toLower(),                      Util::SortRole);
   items[SourceDirColumn  ]->setData(info.path().toLower(),                          Util::SortRole);
-  items[SizeColumn       ]->setData(attachedFile.m_size,                            Util::SortRole);
+  items[SizeColumn       ]->setData(static_cast<quint64>(attachedFile.m_size),      Util::SortRole);
 
   items[NameColumn       ]->setCheckable(true);
   items[NameColumn       ]->setCheckState(attachedFile.m_muxThis ? Qt::Checked           : Qt::Unchecked);
