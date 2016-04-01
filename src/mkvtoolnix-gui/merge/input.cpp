@@ -1159,6 +1159,7 @@ Tab::onRemoveAllFiles() {
   if (m_config.m_files.isEmpty())
     return;
 
+  m_attachedFilesModel->reset();
   m_filesModel->removeRows(0, m_filesModel->rowCount());
   m_tracksModel->removeRows(0, m_tracksModel->rowCount());
   m_config.m_files.clear();
