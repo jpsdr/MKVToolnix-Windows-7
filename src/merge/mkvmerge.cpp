@@ -84,7 +84,7 @@ set_usage() {
   usage_text += Y("  -o, --output out         Write to the file 'out'.\n");
   usage_text += Y("  -w, --webm               Create WebM compliant file.\n");
   usage_text += Y("  --title <title>          Title for this output file.\n");
-  usage_text += Y("  --global-tags <file>     Read global tags from a XML file.\n");
+  usage_text += Y("  --global-tags <file>     Read global tags from an XML file.\n");
   usage_text +=   "\n";
   usage_text += Y(" Chapter handling:\n");
   usage_text += Y("  --chapters <file>        Read chapter information from the file.\n");
@@ -199,7 +199,7 @@ set_usage() {
                   "                           all or only the first output file. Default: copy\n"
                   "                           all attachments to all output files.\n");
   usage_text += Y("  -M, --no-attachments     Don't copy attachments from a source file.\n");
-  usage_text += Y("  -t, --tags <TID:file>    Read tags for the track from a XML file.\n");
+  usage_text += Y("  -t, --tags <TID:file>    Read tags for the track from an XML file.\n");
   usage_text += Y("  --track-tags <n,m,...>   Copy the tags for tracks n,m etc. Default: copy\n"
                   "                           tags for all tracks.\n");
   usage_text += Y("  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n");
