@@ -41,6 +41,7 @@ char const * const mpeg4_p10_es_video              = "mpeg4_p10_es_video";      
 char const * const mpeg4_p10_video                 = "mpeg4_p10_video";                 // track boolean
 char const * const mpegh_p2_es_video               = "mpegh_p2_es_video";               // track boolean
 char const * const mpegh_p2_video                  = "mpegh_p2_video";                  // track boolean
+char const * const muxing_application              = "muxing_application";              // container unicode-string
 char const * const next_segment_uid                = "next_segment_uid";                // container ascii-string format:^[0-9A-F]{32}$
 char const * const number                          = "number";                          // container unsigned-integer
 char const * const other_file                      = "other_file";                      // container unicoode-string
@@ -61,6 +62,7 @@ char const * const title                           = "title";                   
 char const * const track_name                      = "track_name";                      // track unicoode-string
 char const * const ts_pid                          = "ts_pid";                          // track unsigned-integer
 char const * const uid                             = "uid";                             // track attachments unsigned-integer
+char const * const writing_application             = "writing_application";             // container unicode-string
 
 using verbose_info_t = std::vector<std::pair<std::string, nlohmann::json>>;
 

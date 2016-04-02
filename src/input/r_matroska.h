@@ -193,7 +193,7 @@ private:
   using deferred_positions_t = std::map<deferred_l1_type_e, std::vector<int64_t> >;
   deferred_positions_t m_deferred_l1_positions, m_handled_l1_positions;
 
-  std::string m_writing_app, m_muxing_app;
+  std::string m_writing_app, m_raw_writing_app, m_muxing_app;
   int64_t m_writing_app_ver;
 
   memory_cptr m_segment_uid, m_next_segment_uid, m_previous_segment_uid;

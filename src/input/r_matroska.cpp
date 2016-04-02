@@ -944,6 +944,8 @@ kax_reader_c::read_headers_info_writing_app(KaxWritingApp *&km_writing_app) {
   std::string s = km_writing_app->GetValueUTF8();
   strip(s);
 
+  m_raw_writing_app = s;
+
   if (balg::istarts_with(s, "avi-mux gui"))
     s.replace(0, strlen("avi-mux gui"), "avimuxgui");
 
@@ -2399,6 +2401,9 @@ kax_reader_c::identify() {
   add_uid_info(m_segment_uid,          mtx::id::segment_uid);
   add_uid_info(m_next_segment_uid,     mtx::id::next_segment_uid);
   add_uid_info(m_previous_segment_uid, mtx::id::previous_segment_uid);
+
+  info.add(mtx::id::muxing_application,  m_muxing_app);
+  info.add(mtx::id::writing_application, m_raw_writing_app);
 
   id_result_container(info.get());
 

@@ -89,6 +89,10 @@
               "description": "States whether or not the container has timestamps for the packets (e.g. Matroska, MP4) or not (e.g. SRT, MP3)",
               "type": "boolean"
             },
+            "muxing_application": {
+              "description": "A Unicode string containing the name and possibly version of the low-level library or application that created the file",
+              "type": "string"
+            },
             "next_segment_uid": {
               "description": "A hexadecimal string of the next segment's UID (only for Matroska files)",
               "type": "string",
@@ -141,6 +145,10 @@
               "maxLength": 32
             },
             "title": {
+              "type": "string"
+            },
+            "writing_application": {
+              "description": "A Unicode string containing the name and possibly version of the high-level application that created the file",
               "type": "string"
             }
           },
