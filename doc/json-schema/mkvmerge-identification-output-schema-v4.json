@@ -89,20 +89,8 @@
               "description": "States whether or not the container has timestamps for the packets (e.g. Matroska, MP4) or not (e.g. SRT, MP3)",
               "type": "boolean"
             },
-            "segment_uid": {
-              "description": "A hexadecimal string of the segment's UID (only for Matroska files)",
-              "type": "string",
-              "minLength": 32,
-              "maxLength": 32
-            },
             "next_segment_uid": {
               "description": "A hexadecimal string of the next segment's UID (only for Matroska files)",
-              "type": "string",
-              "minLength": 32,
-              "maxLength": 32
-            },
-            "previous_segment_uid": {
-              "description": "A hexadecimal string of the previous segment's UID (only for Matroska files)",
               "type": "string",
               "minLength": 32,
               "maxLength": 32
@@ -139,6 +127,18 @@
               "description": "The total size in bytes of all files referenced by the playlist if it is a one",
               "type": "integer",
               "minimum": 0
+            },
+            "previous_segment_uid": {
+              "description": "A hexadecimal string of the previous segment's UID (only for Matroska files)",
+              "type": "string",
+              "minLength": 32,
+              "maxLength": 32
+            },
+            "segment_uid": {
+              "description": "A hexadecimal string of the segment's UID (only for Matroska files)",
+              "type": "string",
+              "minLength": 32,
+              "maxLength": 32
             },
             "title": {
               "type": "string"
