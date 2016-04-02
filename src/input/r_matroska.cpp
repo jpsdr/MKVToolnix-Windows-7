@@ -2307,10 +2307,11 @@ kax_reader_c::set_headers() {
 
 std::unordered_map<uint64_t, timestamp_c>
 kax_reader_c::determine_minimum_timestamps() {
-  if (m_tracks.empty())
-    return {};
-
   std::unordered_map<uint64_t, timestamp_c> timestamps_by_number;
+
+  if (m_tracks.empty())
+    return timestamps_by_number;
+
   std::unordered_map<uint64_t, kax_track_cptr> tracks_by_number;
 
   timestamp_c first_timestamp, last_timestamp;
