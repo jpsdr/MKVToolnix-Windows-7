@@ -1,3 +1,11 @@
+2016-04-02  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: enhancement: added the minimum timestamp for each
+        track in verbose/JSON identification outputs (key
+        "minimum_timestamp") when identifying Matroska files. At most the
+        first ten seconds are probed; if no block is found for a track
+        within that range then the key is not output for the track.
+
 2016-03-31  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: merge tool change: attachments from source files

@@ -302,6 +302,8 @@ protected:
 
   void init_l1_position_storage(deferred_positions_t &storage);
   virtual bool has_deferred_element_been_processed(deferred_l1_type_e type, int64_t position);
+
+  virtual std::unordered_map<uint64_t, timestamp_c> determine_minimum_timestamps();
 };
 
 #endif  // MTX_INPUT_R_MATROSKA_H

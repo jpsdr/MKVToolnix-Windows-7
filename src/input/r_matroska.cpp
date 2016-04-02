@@ -2303,8 +2303,88 @@ kax_reader_c::set_headers() {
       PTZR(track->ptzr)->get_track_entry()->EnableLacing(track->lacing_flag);
 }
 
+std::unordered_map<uint64_t, timestamp_c>
+kax_reader_c::determine_minimum_timestamps() {
+  if (m_tracks.empty())
+    return {};
+
+  std::unordered_map<uint64_t, timestamp_c> timestamps_by_number;
+  std::unordered_map<uint64_t, kax_track_cptr> tracks_by_number;
+
+  timestamp_c first_timestamp, last_timestamp;
+  auto probe_time_limit = timestamp_c::s(10);
+  auto video_time_limit = timestamp_c::s(1);
+
+  for (auto &track : m_tracks)
+    tracks_by_number[track->track_number] = track;
+
+  while (true) {
+    try {
+      auto cluster = std::shared_ptr<KaxCluster>(m_in_file->read_next_cluster());
+      if (!cluster)
+        return timestamps_by_number;
+
+      auto cluster_tc = FindChildValue<KaxClusterTimecode>(*cluster);
+      cluster->InitTimecode(cluster_tc, m_tc_scale);
+
+      for (auto const &element : *cluster) {
+        uint64_t track_number{};
+
+        if (Is<KaxSimpleBlock>(element)) {
+          auto block = static_cast<KaxSimpleBlock *>(element);
+          block->SetParent(*cluster);
+
+          last_timestamp = timestamp_c::ns(block->GlobalTimecode());
+          track_number   = block->TrackNum();
+
+        } else if (Is<KaxBlockGroup>(element)) {
+          auto block = FindChild<KaxBlock>(static_cast<KaxBlockGroup *>(element));
+          if (!block)
+            continue;
+
+          block->SetParent(*cluster);
+
+          last_timestamp = timestamp_c::ns(block->GlobalTimecode());
+          track_number   = block->TrackNum();
+
+        } else
+          continue;
+
+        if (!first_timestamp.valid())
+          first_timestamp = last_timestamp;
+
+        if ((last_timestamp - first_timestamp) >= probe_time_limit)
+          return timestamps_by_number;
+
+        auto &track = tracks_by_number[track_number];
+        if (!track)
+          continue;
+
+        auto &recorded_timestamp = timestamps_by_number[track_number];
+        if (!recorded_timestamp.valid() || (last_timestamp < recorded_timestamp))
+          recorded_timestamp = last_timestamp;
+
+        if (   (track->type == 'v')
+            && ((last_timestamp - recorded_timestamp) < video_time_limit))
+          continue;
+
+        tracks_by_number.erase(track_number);
+        if (tracks_by_number.empty())
+          return timestamps_by_number;
+      }
+
+    } catch (...) {
+      break;
+    }
+  }
+
+  return timestamps_by_number;
+}
+
 void
 kax_reader_c::identify() {
+  auto minimum_timestamps_by_number = determine_minimum_timestamps();
+
   auto info = mtx::id::info_c{};
 
   if (!m_title.empty())
@@ -2388,6 +2468,10 @@ kax_reader_c::identify() {
       codec_info = track->codec_id;
 
     track->add_track_tags_to_identification(info);
+
+    auto &minimum_timestamp = minimum_timestamps_by_number[track->track_number];
+    if (minimum_timestamp.valid())
+      info.set(mtx::id::minimum_timestamp, minimum_timestamp.to_ns());
 
     id_result_track(track->tnum,
                       track->type == 'v' ? ID_RESULT_TRACK_VIDEO
