@@ -152,7 +152,9 @@ def transifex_merge orig_items, transifex_items
 
     transifex_item = translated[ orig_item[:msgid].first ]
 
-    next if !transifex_item || (orig_item[:msgstr] == transifex_item[:msgstr])
+    next if !transifex_item
+
+    next if (orig_item[:msgstr] == transifex_item[:msgstr]) && !(orig_item[:flags] || []).include?("fuzzy")
 
     # puts "UPDATE of msgid " + orig_item[:msgid].first
     # puts "  old " + orig_item[:msgstr].first
