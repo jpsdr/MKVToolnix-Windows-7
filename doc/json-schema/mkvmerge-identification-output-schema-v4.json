@@ -80,6 +80,16 @@
               "type": "integer",
               "minLength": 1
             },
+            "date_local": {
+              "description": "The muxing date in ISO 8601 format (in local time zone)",
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}([+-][0-9]{2}:[0-9]{2}|Z)$"
+            },
+            "date_utc": {
+              "description": "The muxing date in ISO 8601 format (in UTC)",
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}([+-][0-9]{2}:[0-9]{2}|Z)$"
+            },
             "duration": {
               "description": "The file's/segment's duration in nanoseconds",
               "type": "integer",

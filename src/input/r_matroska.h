@@ -17,6 +17,8 @@
 
 #include "common/common_pch.h"
 
+#include <ctime>
+
 #include "common/codec.h"
 #include "common/content_decoder.h"
 #include "common/dts.h"
@@ -195,6 +197,7 @@ private:
 
   std::string m_writing_app, m_raw_writing_app, m_muxing_app;
   int64_t m_writing_app_ver;
+  std::time_t m_muxing_date_epoch{};
 
   memory_cptr m_segment_uid, m_next_segment_uid, m_previous_segment_uid;
 

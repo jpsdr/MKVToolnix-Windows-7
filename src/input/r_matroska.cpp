@@ -46,6 +46,7 @@
 #include "common/at_scope_exit.h"
 #include "common/chapters/chapters.h"
 #include "common/codec.h"
+#include "common/date_time.h"
 #include "common/debugging.h"
 #include "common/ebml.h"
 #include "common/endian.h"
@@ -885,9 +886,10 @@ kax_reader_c::read_headers_info(mm_io_c *io,
 
   info->Read(*m_es, EBML_CLASS_CONTEXT(KaxInfo), upper_lvl_el, l2, true);
 
-  m_tc_scale         = FindChildValue<KaxTimecodeScale, uint64_t>(info, 1000000);
-  m_segment_duration = std::llround(FindChildValue<KaxDuration>(info) * m_tc_scale);
-  m_title            = to_utf8(FindChildValue<KaxTitle>(info));
+  m_tc_scale          = FindChildValue<KaxTimecodeScale, uint64_t>(info, 1000000);
+  m_segment_duration  = std::llround(FindChildValue<KaxDuration>(info) * m_tc_scale);
+  m_title             = to_utf8(FindChildValue<KaxTitle>(info));
+  m_muxing_date_epoch = GetChild<KaxDateUTC>(info).GetEpochDate();
 
   m_in_file->set_timecode_scale(m_tc_scale);
 
@@ -2405,6 +2407,8 @@ kax_reader_c::identify() {
 
   info.add(mtx::id::muxing_application,  m_muxing_app);
   info.add(mtx::id::writing_application, m_raw_writing_app);
+  info.add(mtx::id::date_utc,            mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch, mtx::date_time::epoch_timezone_e::UTC));
+  info.add(mtx::id::date_local,          mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch, mtx::date_time::epoch_timezone_e::local));
 
   id_result_container(info.get());
 
