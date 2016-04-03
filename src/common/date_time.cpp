@@ -38,4 +38,43 @@ to_string(boost::posix_time::ptime const &writing_date,
   return ss.str();
 }
 
+std::string
+format_epoch_time(time_t const epoch_time,
+                  std::string format_string,
+                  epoch_timezone_e timezone) {
+  auto time_info = timezone == epoch_timezone_e::UTC ? std::gmtime(&epoch_time) : std::localtime(&epoch_time);
+  if (!time_info)
+    return {};
+
+  format_string += 'z';
+
+  std::string buffer;
+  buffer.resize(format_string.size());
+
+  while (true) {
+    auto len = std::strftime(&buffer[0], buffer.size(), format_string.c_str(), time_info);
+    if (len) {
+      buffer.resize(len - 1);
+      break;
+    }
+
+    buffer.resize(buffer.size() * 2);
+  }
+
+  return buffer;
+}
+
+std::string
+format_epoch_time_iso_8601(std::time_t const epoch_time,
+                           epoch_timezone_e timezone) {
+  if (timezone == epoch_timezone_e::UTC)
+    return format_epoch_time(epoch_time, "%Y-%m-%dT%H:%M:%SZ", timezone);
+
+  auto result = format_epoch_time(epoch_time, "%Y-%m-%dT%H:%M:%S%z", timezone);
+  if (result.length() >= 2)
+    result.insert(result.length() - 2, ":");
+
+  return result;
+}
+
 }}
