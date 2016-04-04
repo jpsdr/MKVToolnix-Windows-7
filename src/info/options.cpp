@@ -23,7 +23,7 @@ options_c::options_c()
   , m_hexdump_max_size(16)
   , m_verbose(0)
 {
-#if defined(SYS_WINDOWS) || defined(SYS_APPLE)
+#if defined(HAVE_QT) && (defined(SYS_WINDOWS) || defined(SYS_APPLE))
   m_use_gui = true;
 #endif
 }
