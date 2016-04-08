@@ -467,8 +467,8 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
 
   def self.load_config
     # puts "load #{@config_file}" if @verbose
-    config = JSON.load(@config_file.open) if @config_file.exist?
-    config = {} unless config
+    config = {}
+    config = @config_file.open { |f| JSON.load(f) } if @config_file.exist?
     @htrace = config.fetch('htrace', @htrace)
     @pretty = config.fetch('pretty', @pretty)
     @db_scan = config.fetch('scan', @db_scan)
