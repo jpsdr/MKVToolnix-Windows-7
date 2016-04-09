@@ -105,18 +105,30 @@ class SimpleTest
     @blocks[:tests] << { :name => name, :block => block }
   end
 
+  def exit_code_string exit_code
+    return exit_code == 0 ? 'ok'      \
+         : exit_code == 1 ? 'warning' \
+         : exit_code == 2 ? 'error'   \
+         :                  "unknown(#{exit_code})"
+  end
+
   def test_merge file, *args
-    options             = args.extract_options!
-    full_command_line   = [ options[:args], file ].flatten.join(' ')
-    options[:name]    ||= full_command_line
+    options                 = args.extract_options!
+    full_command_line       = [ options[:args], file ].flatten.join(' ')
+    options[:name]        ||= full_command_line
+    options[:result_type] ||= :hash
     @blocks[:tests] << {
       :name  => full_command_line,
       :block => lambda {
-        output = options[:output] || tmp
-        merge full_command_line, :exit_code => options[:exit_code], :output => output
-        result = options[:exit_code] == :error ? 'error' : hash_file(output)
+        output       = options[:output] || tmp
+        _, exit_code = *merge(full_command_line, :exit_code => options[:exit_code], :output => output)
+        result       = options[:exit_code]   == :error ? 'error'           \
+                     : options[:result_type] == :hash  ? hash_file(output) \
+                     :                                   exit_code_string(exit_code)
 
         clean_tmp unless options[:keep_tmp]
+
+        puts "file #{file} xc #{exit_code} res #{result}"
 
         result
       },
