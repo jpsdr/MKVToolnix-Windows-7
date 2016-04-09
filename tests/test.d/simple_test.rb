@@ -128,8 +128,6 @@ class SimpleTest
 
         clean_tmp unless options[:keep_tmp]
 
-        puts "file #{file} xc #{exit_code} res #{result}"
-
         result
       },
     }
