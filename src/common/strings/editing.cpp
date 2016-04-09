@@ -198,3 +198,33 @@ std::string
 get_displayable_string(std::string const &src) {
   return get_displayable_string(src.c_str(), src.length());
 }
+
+std::string
+normalize_line_endings(std::string const &str,
+                       line_ending_style_e line_ending_style) {
+  static boost::regex s_cr_lf_re, s_cr_re, s_lf_re;
+
+  if (s_cr_lf_re.empty()) {
+    s_cr_lf_re = boost::regex{"\r\n", boost::regex::perl};
+    s_cr_re    = boost::regex{"\r",   boost::regex::perl};
+    s_lf_re    = boost::regex{"\n",   boost::regex::perl};
+  }
+
+  auto result = boost::regex_replace(str,    s_cr_lf_re, "\n");
+  result      = boost::regex_replace(result, s_cr_re,    "\n");
+
+  if (line_ending_style_e::lf == line_ending_style)
+    return result;
+
+  return boost::regex_replace(result, s_lf_re, "\r\n");
+}
+
+std::string
+chomp(std::string const &str) {
+  static boost::regex s_trailing_lf_re;
+
+  if (s_trailing_lf_re.empty())
+    s_trailing_lf_re = boost::regex{"[\r\n]+\\z", boost::regex::perl};
+
+  return boost::regex_replace(str, s_trailing_lf_re, "");
+}

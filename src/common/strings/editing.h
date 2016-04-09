@@ -16,6 +16,14 @@
 
 #include "common/common_pch.h"
 
+enum class line_ending_style_e {
+  cr_lf,
+  lf,
+};
+
+std::string normalize_line_endings(std::string const &str, line_ending_style_e line_ending_style = line_ending_style_e::lf);
+std::string chomp(std::string const &str);
+
 std::vector<std::string> split(std::string const &text, boost::regex const &pattern, size_t max = 0, boost::match_flag_type match_flags = boost::match_default);
 
 inline std::vector<std::string>
