@@ -25,17 +25,12 @@
 
 using namespace libmatroska;
 
-boost::regex textsubs_packetizer_c::s_re_remove_cr("\r", boost::regex::perl);
-boost::regex textsubs_packetizer_c::s_re_remove_trailing_nl("\n+$", boost::regex::perl);
-boost::regex textsubs_packetizer_c::s_re_translate_nl("\n", boost::regex::perl);
-
 textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
                                              track_info_c &p_ti,
                                              const char *codec_id,
                                              bool recode,
                                              bool is_utf8)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_packetno{}
   , m_codec_id{codec_id}
 {
   if (recode && !is_utf8)
@@ -74,6 +69,11 @@ textsubs_packetizer_c::set_headers() {
   m_track_entry->EnableLacing(false);
 }
 
+void
+textsubs_packetizer_c::set_line_ending_style(line_ending_style_e line_ending_style) {
+  m_line_ending_style = line_ending_style;
+}
+
 int
 textsubs_packetizer_c::process(packet_cptr packet) {
   ++m_packetno;
@@ -87,10 +87,7 @@ textsubs_packetizer_c::process(packet_cptr packet) {
   packet->duration_mandatory = true;
 
   auto subs = std::string{reinterpret_cast<char *>(packet->data->get_buffer()), packet->data->get_size()};
-
-  subs = boost::regex_replace(subs, s_re_remove_cr,          "",     boost::match_default | boost::match_single_line);
-  subs = boost::regex_replace(subs, s_re_remove_trailing_nl, "",     boost::match_default | boost::match_single_line);
-  subs = boost::regex_replace(subs, s_re_translate_nl,       "\r\n", boost::match_default | boost::match_single_line);
+  subs      = chomp(normalize_line_endings(subs, m_line_ending_style));
 
   if (m_cc_utf8)
     subs = m_cc_utf8->utf8(subs);
