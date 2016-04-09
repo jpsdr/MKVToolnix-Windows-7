@@ -27,7 +27,7 @@ using namespace libmatroska;
 class kax_file_c {
 protected:
   mm_io_c &m_in;
-  bool m_resynced;
+  bool m_resynced, m_reporting_enabled{true};
   uint64_t m_resync_start_pos, m_file_size, m_segment_end;
   int64_t m_timecode_scale, m_last_timecode;
   std::shared_ptr<EbmlStream> m_es;
@@ -56,11 +56,16 @@ public:
   virtual void set_segment_end(EbmlElement const &segment);
   virtual uint64_t get_segment_end() const;
 
+  virtual void enable_reporting(bool enable);
+
 protected:
   virtual EbmlElement *read_one_element();
 
   virtual EbmlElement *read_next_level1_element_internal(uint32_t wanted_id = 0);
   virtual EbmlElement *resync_to_level1_element_internal(uint32_t wanted_id = 0);
+
+  virtual void report(boost::format const &message);
+  virtual void report(std::string const &message);
 };
 using kax_file_cptr = std::shared_ptr<kax_file_c>;
 

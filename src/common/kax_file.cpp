@@ -49,7 +49,7 @@ kax_file_c::read_next_level1_element(uint32_t wanted_id,
     auto element = read_next_level1_element_internal(wanted_id);
 
     if (report_cluster_timecode && (-1 != m_timecode_scale))
-      mxinfo(boost::format(Y("The first cluster timecode after the resync is %1%.\n"))
+      report(boost::format(Y("The first cluster timecode after the resync is %1%.\n"))
              % format_timestamp(FindChildValue<KaxClusterTimecode>(static_cast<KaxCluster *>(element)) * m_timecode_scale));
 
     return element;
@@ -208,11 +208,11 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
   auto start_time    = mtx::sys::get_current_time_millis();
   auto is_cluster_id = !wanted_id || (EBML_ID_VALUE(EBML_ID(KaxCluster)) == wanted_id); // 0 means: any level 1 element will do
 
-  mxinfo(boost::format(Y("%1%: Error in the Matroska file structure at position %2%. Resyncing to the next level 1 element.\n"))
+  report(boost::format(Y("%1%: Error in the Matroska file structure at position %2%. Resyncing to the next level 1 element.\n"))
          % m_in.get_file_name() % m_resync_start_pos);
 
   if (is_cluster_id && (-1 != m_last_timecode)) {
-    mxinfo(boost::format(Y("The last timecode processed before the error was encountered was %1%.\n")) % format_timestamp(m_last_timecode));
+    report(boost::format(Y("The last timecode processed before the error was encountered was %1%.\n")) % format_timestamp(m_last_timecode));
     m_last_timecode = -1;
   }
 
@@ -222,7 +222,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
   while (m_in.getFilePointer() < m_file_size) {
     auto now = mtx::sys::get_current_time_millis();
     if ((now - start_time) >= 10000) {
-      mxinfo(boost::format("Still resyncing at position %1%.\n") % m_in.getFilePointer());
+      report(boost::format("Still resyncing at position %1%.\n") % m_in.getFilePointer());
       start_time = now;
     }
 
@@ -274,7 +274,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
     }
 
     if ((4 == num_headers) || valid_unknown_size) {
-      mxinfo(boost::format(Y("Resyncing successful at position %1%.\n")) % current_start_pos);
+      report(boost::format(Y("Resyncing successful at position %1%.\n")) % current_start_pos);
       m_in.setFilePointer(current_start_pos, seek_beginning);
       return read_next_level1_element(wanted_id, is_cluster_id);
     }
@@ -282,7 +282,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
     m_in.setFilePointer(current_start_pos + 4, seek_beginning);
   }
 
-  mxinfo(Y("Resync failed: no valid Matroska level 1 element found.\n"));
+  report(Y("Resync failed: no valid Matroska level 1 element found.\n"));
 
   return nullptr;
 }
@@ -340,4 +340,21 @@ uint64_t
 kax_file_c::get_segment_end()
   const {
   return m_segment_end;
+}
+
+void
+kax_file_c::enable_reporting(bool enable) {
+  m_reporting_enabled = enable;
+}
+
+void
+kax_file_c::report(boost::format const &message) {
+  if (m_reporting_enabled)
+    mxinfo(message);
+}
+
+void
+kax_file_c::report(std::string const &message) {
+  if (m_reporting_enabled)
+    mxinfo(message);
 }
