@@ -63,6 +63,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 
   // Merge page
   ui->cbMAutoSetFileTitle->setChecked(m_cfg.m_autoSetFileTitle);
+  ui->cbMAutoClearFileTitle->setChecked(m_cfg.m_autoClearFileTitle);
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
   ui->cbMDisableCompressionForAllTrackTypes->setChecked(m_cfg.m_disableCompressionForAllTrackTypes);
   ui->cbMDisableDefaultTrackForSubtitles->setChecked(m_cfg.m_disableDefaultTrackForSubtitles);
@@ -218,6 +219,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("Certain file formats have 'title' property."))
                    .arg(QYH("When the user adds a file containing such a title then the program will copy the title into the \"file title\" input box if this option is enabled."))
                    .arg(QYH("Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user.")));
+  Util::setToolTip(ui->cbMAutoClearFileTitle, QY("If this option is enabled the GUI will always clear the \"file title\" input box whenever the last source file is removed."));
 
   Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
                    Q("%1 %2")
@@ -578,6 +580,7 @@ PreferencesDialog::save() {
 
   // Merge page:
   m_cfg.m_autoSetFileTitle                   = ui->cbMAutoSetFileTitle->isChecked();
+  m_cfg.m_autoClearFileTitle                 = ui->cbMAutoClearFileTitle->isChecked();
   m_cfg.m_setAudioDelayFromFileName          = ui->cbMSetAudioDelayFromFileName->isChecked();
   m_cfg.m_disableCompressionForAllTrackTypes = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
   m_cfg.m_disableDefaultTrackForSubtitles    = ui->cbMDisableDefaultTrackForSubtitles->isChecked();

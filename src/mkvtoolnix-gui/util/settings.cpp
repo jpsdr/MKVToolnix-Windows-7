@@ -181,6 +181,7 @@ Settings::load() {
 
   m_setAudioDelayFromFileName          = reg.value("setAudioDelayFromFileName", true).toBool();
   m_autoSetFileTitle                   = reg.value("autoSetFileTitle",          true).toBool();
+  m_autoClearFileTitle                 = reg.value("autoClearFileTitle",        m_autoSetFileTitle).toBool();
   m_clearMergeSettings                 = static_cast<ClearMergeSettingsAction>(reg.value("clearMergeSettings", static_cast<int>(ClearMergeSettingsAction::None)).toInt());
   m_disableCompressionForAllTrackTypes = reg.value("disableCompressionForAllTrackTypes", false).toBool();
   m_disableDefaultTrackForSubtitles    = reg.value("disableDefaultTrackForSubtitles",    false).toBool();
@@ -340,6 +341,7 @@ Settings::save()
 
   reg.setValue("setAudioDelayFromFileName",          m_setAudioDelayFromFileName);
   reg.setValue("autoSetFileTitle",                   m_autoSetFileTitle);
+  reg.setValue("autoClearFileTitle",                 m_autoClearFileTitle);
   reg.setValue("clearMergeSettings",                 static_cast<int>(m_clearMergeSettings));
   reg.setValue("disableCompressionForAllTrackTypes", m_disableCompressionForAllTrackTypes);
   reg.setValue("disableDefaultTrackForSubtitles",    m_disableDefaultTrackForSubtitles);

@@ -254,7 +254,7 @@ Tab::clearTitle() {
 
 void
 Tab::clearTitleMaybe() {
-  if (Util::Settings::get().m_autoSetFileTitle)
+  if (Util::Settings::get().m_autoClearFileTitle)
     clearTitle();
 }
 
