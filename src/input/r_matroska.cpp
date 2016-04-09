@@ -1276,10 +1276,12 @@ bool
 kax_reader_c::read_headers_internal() {
   // Elements for different levels
 
-  auto cluster = std::unique_ptr<KaxCluster>{};
+  auto cluster = std::shared_ptr<KaxCluster>{};
   try {
     m_es      = std::shared_ptr<EbmlStream>(new EbmlStream(*m_in));
     m_in_file = std::make_shared<kax_file_c>(*m_in);
+
+    m_in_file->enable_reporting(!g_identifying);
 
     // Find the EbmlHead element. Must be the first one.
     EbmlElement *l0 = m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFFFFFFFFFLL);
@@ -1309,39 +1311,33 @@ kax_reader_c::read_headers_internal() {
     m_in_file->set_segment_end(*l0);
 
     // We've got our segment, so let's find the m_tracks
-    int upper_lvl_el = 0;
-    m_tc_scale       = TIMECODE_SCALE;
-    EbmlElement *l1  = nullptr;
+    m_tc_scale = TIMECODE_SCALE;
 
     while (m_in->getFilePointer() < m_in_file->get_segment_end()) {
+      auto l1 = ebml_element_cptr{ m_in_file->read_next_level1_element() };
       if (!l1)
-        l1 = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true, 1);
-
-      if (!l1 || (0 < upper_lvl_el)) {
-        delete l1;
         break;
-      }
 
-      if (Is<KaxInfo>(l1))
+      if (Is<KaxInfo>(*l1))
         m_deferred_l1_positions[dl1t_info].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxTracks>(l1))
+      else if (Is<KaxTracks>(*l1))
         m_deferred_l1_positions[dl1t_tracks].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxAttachments>(l1))
+      else if (Is<KaxAttachments>(*l1))
         m_deferred_l1_positions[dl1t_attachments].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxChapters>(l1))
+      else if (Is<KaxChapters>(*l1))
         m_deferred_l1_positions[dl1t_chapters].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxTags>(l1))
+      else if (Is<KaxTags>(*l1))
         m_deferred_l1_positions[dl1t_tags].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxSeekHead>(l1))
+      else if (Is<KaxSeekHead>(*l1))
         handle_seek_head(m_in.get(), l0, l1->GetElementPosition());
 
-      else if (Is<KaxCluster>(l1))
-        cluster.reset(static_cast<KaxCluster *>(l1));
+      else if (Is<KaxCluster>(*l1))
+        cluster = std::static_pointer_cast<KaxCluster>(l1);
 
       else
         l1->SkipData(*m_es, EBML_CONTEXT(l1));
@@ -1349,31 +1345,10 @@ kax_reader_c::read_headers_internal() {
       if (cluster)              // we've found the first cluster, so get out
         break;
 
-      if (!in_parent(l0)) {
-        delete l1;
+      if (!in_parent(l0))
         break;
-      }
-
-      if (upper_lvl_el > 0) {
-        upper_lvl_el--;
-        if (upper_lvl_el > 0)
-          break;
-        delete l1;
-        l1 = nullptr;
-        continue;
-
-      } else if (upper_lvl_el < 0) {
-        upper_lvl_el++;
-        if (upper_lvl_el < 0)
-          break;
-
-      }
 
       l1->SkipData(*m_es, EBML_CONTEXT(l1));
-      delete l1;
-      l1 = m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true);
-      if (!l1)
-        break;
 
     } // while (l1)
 
