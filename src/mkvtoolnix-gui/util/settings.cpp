@@ -190,10 +190,11 @@ Settings::load() {
   m_mergeAddingAppendingFilesPolicy    = static_cast<MergeAddingAppendingFilesPolicy>(reg.value("mergeAddingAppendingFilesPolicy", static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
   m_headerEditorDroppedFilesPolicy     = static_cast<HeaderEditorDroppedFilesPolicy>(reg.value("headerEditorDroppedFilesPolicy", static_cast<int>(HeaderEditorDroppedFilesPolicy::Ask)).toInt());
 
-  m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",     true).toBool();
   m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value("outputFileNamePolicy", static_cast<int>(ToSameAsFirstInputFile)).toInt());
   m_relativeOutputDir                  = QDir{reg.value("relativeOutputDir").toString()};
   m_fixedOutputDir                     = QDir{reg.value("fixedOutputDir").toString()};
+  m_uniqueOutputFileNames              = reg.value("uniqueOutputFileNames",   true).toBool();
+  m_autoClearOutputFileName            = reg.value("autoClearOutputFileName", m_outputFileNamePolicy != DontSetOutputFileName).toBool();
 
   m_enableMuxingTracksByLanguage       = reg.value("enableMuxingTracksByLanguage", false).toBool();
   m_enableMuxingAllVideoTracks         = reg.value("enableMuxingAllVideoTracks", true).toBool();
@@ -354,6 +355,7 @@ Settings::save()
   reg.setValue("relativeOutputDir",                  m_relativeOutputDir.path());
   reg.setValue("fixedOutputDir",                     m_fixedOutputDir.path());
   reg.setValue("uniqueOutputFileNames",              m_uniqueOutputFileNames);
+  reg.setValue("autoClearOutputFileName",            m_autoClearOutputFileName);
 
   reg.setValue("enableMuxingTracksByLanguage",       m_enableMuxingTracksByLanguage);
   reg.setValue("enableMuxingAllVideoTracks",         m_enableMuxingAllVideoTracks);

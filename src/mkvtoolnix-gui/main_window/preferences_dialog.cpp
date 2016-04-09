@@ -299,6 +299,7 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("If checked the program makes sure the suggested output file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
                    .arg(QY("This is done only if there is already a file whose name matches the unmodified output file name.")));
+  Util::setToolTip(ui->cbMAutoClearOutputFileName, QY("If this option is enabled the GUI will always clear the \"output file name\" input box whenever the last source file is removed."));
 
   Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
@@ -455,6 +456,7 @@ PreferencesDialog::setupOutputFileNamePolicy() {
   ui->leMAutoSetRelativeDirectory->setText(m_cfg.m_relativeOutputDir.path());
   ui->leMAutoSetFixedDirectory->setText(m_cfg.m_fixedOutputDir.path());
   ui->cbMUniqueOutputFileNames->setChecked(m_cfg.m_uniqueOutputFileNames);
+  ui->cbMAutoClearOutputFileName->setChecked(m_cfg.m_autoClearOutputFileName);
 
   enableOutputFileNameControls();
 }
@@ -608,6 +610,7 @@ PreferencesDialog::save() {
   m_cfg.m_relativeOutputDir                  = ui->leMAutoSetRelativeDirectory->text();
   m_cfg.m_fixedOutputDir                     = ui->leMAutoSetFixedDirectory->text();
   m_cfg.m_uniqueOutputFileNames              = ui->cbMUniqueOutputFileNames->isChecked();
+  m_cfg.m_autoClearOutputFileName            = ui->cbMAutoClearOutputFileName->isChecked();
 
   m_cfg.m_enableMuxingTracksByLanguage       = ui->cbMEnableMuxingTracksByLanguage->isChecked();
   m_cfg.m_enableMuxingAllVideoTracks         = ui->cbMEnableMuxingAllVideoTracks->isChecked();

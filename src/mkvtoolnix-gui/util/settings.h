@@ -113,7 +113,7 @@ public:
 
   OutputFileNamePolicy m_outputFileNamePolicy;
   QDir m_relativeOutputDir, m_fixedOutputDir;
-  bool m_uniqueOutputFileNames;
+  bool m_uniqueOutputFileNames, m_autoClearOutputFileName;
 
   ScanForPlaylistsPolicy m_scanForPlaylistsPolicy;
   unsigned int m_minimumPlaylistDuration;

@@ -242,7 +242,7 @@ Tab::clearDestination() {
 
 void
 Tab::clearDestinationMaybe() {
-  if (Util::Settings::DontSetOutputFileName != Util::Settings::get().m_outputFileNamePolicy)
+  if (Util::Settings::get().m_autoClearOutputFileName)
     clearDestination();
 }
 
