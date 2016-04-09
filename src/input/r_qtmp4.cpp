@@ -1576,14 +1576,6 @@ qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_cptr &dmx) {
 
 void
 qtmp4_reader_c::create_video_packetizer_mpeg4_p10(qtmp4_demuxer_cptr &dmx) {
-  if (dmx->frame_offset_table.empty())
-    mxwarn_tid(m_ti.m_fname, dmx->id,
-               Y("The AVC video track is missing the 'CTTS' atom for frame timecode offsets. "
-                 "However, AVC/h.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. "
-                 "The timecodes for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timecodes right. "
-                 "As it is missing the timecodes for this track might be wrong. "
-                 "You should watch the resulting file and make sure that it looks like you expected it to.\n"));
-
   m_ti.m_private_data = dmx->priv;
   dmx->ptzr           = add_packetizer(new mpeg4_p10_video_packetizer_c(this, m_ti, dmx->fps, dmx->v_width, dmx->v_height));
 
