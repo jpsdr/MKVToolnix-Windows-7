@@ -177,6 +177,19 @@ parse_timecode(const std::string &src,
   return true;
 }
 
+bool
+parse_timecode(const std::string &src,
+               timestamp_c &timecode,
+               bool allow_negative) {
+  int64_t tmp{};
+  if (!parse_timecode(src, tmp, allow_negative))
+    return false;
+
+  timecode = timestamp_c::ns(tmp);
+
+  return true;
+}
+
 /** \brief Parse a string for a boolean value
 
    Interpretes the string \c orig as a boolean value. Accepted

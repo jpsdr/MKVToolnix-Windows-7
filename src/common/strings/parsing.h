@@ -21,6 +21,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "common/at_scope_exit.h"
+#include "common/timestamp.h"
 
 namespace mtx { namespace conversion {
 
@@ -74,6 +75,7 @@ parse_number(StrT const &string,
 
 extern std::string timecode_parser_error;
 extern bool parse_timecode(const std::string &s, int64_t &timecode, bool allow_negative = false);
+extern bool parse_timecode(const std::string &s, timestamp_c &timecode, bool allow_negative = false);
 
 bool parse_bool(std::string value);
 
