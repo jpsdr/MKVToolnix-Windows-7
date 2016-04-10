@@ -125,7 +125,7 @@ def write_po file_name, items
 end
 
 def normalize_po file
-  puts "NORMALIZE-PO #{file}"
+  puts_action "NORMALIZE-PO", file
   write_po file, read_po(file)
 end
 

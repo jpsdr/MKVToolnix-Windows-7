@@ -31,9 +31,7 @@ require_relative "rake.d/config"
 
 read_config
 
-$verbose      = ENV['V'].to_bool
-$action_width = 12
-
+$verbose              = ENV['V'].to_bool
 $build_system_modules = {}
 $have_gtest           = (c(:GTEST_TYPE) == "system") || (c(:GTEST_TYPE) == "internal")
 $gtest_apps           = []

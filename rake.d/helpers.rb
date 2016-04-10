@@ -5,6 +5,7 @@ require "fileutils"
 
 $git_mutex     = Mutex.new
 $message_mutex = Mutex.new
+$action_width  = 12
 
 def puts(message)
   $message_mutex.synchronize {

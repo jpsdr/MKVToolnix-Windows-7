@@ -3,11 +3,16 @@
 
 require "fileutils"
 require "pathname"
+require "rake"
 require "shellwords"
 require "tmpdir"
 
-$po_dir     = File.absolute_path(File.dirname(__FILE__) + "/../../po")
-$man_po_dir = File.absolute_path(File.dirname(__FILE__) + "/../../doc/man/po4a/po")
+$mtx_dir    = File.absolute_path(File.dirname(__FILE__) + "/../..")
+$po_dir     = "#{$mtx_dir}/po"
+$man_po_dir = "#{$mtx_dir}doc/man/po4a/po"
+
+require "#{$mtx_dir}/rake.d/helpers"
+require "#{$mtx_dir}/rake.d/po"
 
 module AddPo
   def self.handle_po file_name
@@ -32,6 +37,8 @@ module AddPo
     File.chmod 0644, target
 
     puts "#{file_name} → #{target}"
+
+    normalize_po target
   end
 
   def self.unpack_p7z file_name
@@ -124,9 +131,4 @@ module AddPo
   end
 end
 
-begin
-  # Running under Rake?
-  Rake
-rescue
-  ARGV.each { |file_name| AddPo::add File.absolute_path(file_name) }
-end
+ARGV.each { |file_name| AddPo::add File.absolute_path(file_name) }
