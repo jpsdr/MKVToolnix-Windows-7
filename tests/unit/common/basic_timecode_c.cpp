@@ -44,6 +44,9 @@ TEST(BasicTimecode, ArithmenticResults) {
 
   EXPECT_EQ(timestamp_c::s(-3).abs(), timestamp_c::s(3));
   EXPECT_EQ(timestamp_c::s(-3).abs(), timestamp_c::s(3).abs());
+
+  EXPECT_EQ(timestamp_c::s(-3).negate(), timestamp_c::s(+3));
+  EXPECT_EQ(timestamp_c::s(+3).negate(), timestamp_c::s(-3));
 }
 
 TEST(BasicTimecode, ArithmenticLHSInvalid) {

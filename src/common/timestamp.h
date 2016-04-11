@@ -150,6 +150,10 @@ public:
     return basic_timestamp_c<T>{std::abs(m_timestamp), m_valid};
   }
 
+  basic_timestamp_c<T> negate() const {
+    return basic_timestamp_c<T>{m_timestamp * -1, m_valid};
+  }
+
   basic_timestamp_c<T> value_or_min() const {
     return m_valid ? *this : min();
   }
