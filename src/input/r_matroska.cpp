@@ -912,13 +912,13 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   if (km_writing_app) {
     read_headers_info_writing_app(km_writing_app);
 
-    // HandBrake workaround: HandBrake always assigns sequential
+    // Workaround: HandBrake and other tools always assign sequential
     // numbers starting at 1 to UID attributes. This is a problem when
-    // appending two files created by HandBrake that contain chapters
+    // appending two files created by such a tool that contain chapters
     // as both files contain chapters with the same UIDs and mkvmerge
     // thinks those should be merged. So ignore the chapter UIDs for
-    // files created by HandBrake.
-    if (balg::starts_with(m_writing_app, "handbrake"))
+    // files that aren't created by known-good applications.
+    if (!boost::regex_search(m_writing_app, boost::regex{"^(?:mkvmerge|no_variable_data)", boost::regex::perl | boost::regex::icase}))
       m_regenerate_chapter_uids = true;
   }
 
