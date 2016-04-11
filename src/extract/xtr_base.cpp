@@ -38,6 +38,7 @@
 #include "extract/xtr_tta.h"
 #include "extract/xtr_vobsub.h"
 #include "extract/xtr_wav.h"
+#include "extract/xtr_webvtt.h"
 
 using namespace libmatroska;
 
@@ -195,6 +196,8 @@ xtr_base_c::create_extractor(const std::string &new_codec_id,
     return new xtr_oggkate_c(new_codec_id, new_tid, tspec);
   else if (new_codec_id == MKV_S_HDMV_PGS)
     return new xtr_hdmv_pgs_c(new_codec_id, new_tid, tspec);
+  else if (new_codec_id == MKV_S_TEXTWEBVTT)
+    return new xtr_webvtt_c(new_codec_id, new_tid, tspec);
 
   return nullptr;
 }
