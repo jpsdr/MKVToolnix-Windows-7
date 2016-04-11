@@ -69,6 +69,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("Kate",                    type_e::S_KATE,         track_subtitle, "kate|S_KATE");
   ms_codecs.emplace_back("VobSub",                  type_e::S_VOBSUB,       track_subtitle, "S_VOBSUB(?:/ZLIB)?");
   ms_codecs.emplace_back("HDMV PGS",                type_e::S_HDMV_PGS,     track_subtitle, MKV_S_HDMV_PGS);
+  ms_codecs.emplace_back("WebVTT",                  type_e::S_WEBVTT,       track_subtitle, MKV_S_TEXTWEBVTT);
 
   ms_codecs.emplace_back("VobButton",               type_e::B_VOBBTN,       track_buttons,  "B_VOBBTN");
 

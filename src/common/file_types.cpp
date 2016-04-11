@@ -58,6 +58,7 @@ file_type_t::get_supported() {
   s_supported_file_types.push_back(file_type_t(Y("WAVE (uncompressed PCM audio)"),       "wav"));
   s_supported_file_types.push_back(file_type_t(Y("WAVPACK v4 audio"),                    "wv"));
   s_supported_file_types.push_back(file_type_t(Y("WebM audio/video files"),              "webm webmv webma"));
+  s_supported_file_types.push_back(file_type_t(Y("WebVTT subtitles"),                    "vtt"));
 
   return s_supported_file_types;
 }
@@ -100,5 +101,6 @@ file_type_t::get_name(file_type_e type) {
        : FILE_TYPE_VOBSUB    == type ? YT("VobSub")
        : FILE_TYPE_WAV       == type ? YT("WAV")
        : FILE_TYPE_WAVPACK4  == type ? YT("WAVPACK")
+       : FILE_TYPE_WEBVTT    == type ? YT("WebVTT subtitles")
        :                               YT("unknown");
 }

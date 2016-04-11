@@ -52,6 +52,7 @@
 #include "input/r_vobsub.h"
 #include "input/r_wav.h"
 #include "input/r_wavpack.h"
+#include "input/r_webvtt.h"
 #include "merge/filelist.h"
 #include "merge/input_x.h"
 #include "merge/reader_detection_and_creation.h"
@@ -106,7 +107,9 @@ detect_text_file_formats(filelist_t const &file) {
     text_io        = std::make_shared<mm_text_io_c>(new mm_file_io_c(file.name));
     auto text_size = text_io->get_size();
 
-    if (srt_reader_c::probe_file(text_io.get(), text_size))
+    if (webvtt_reader_c::probe_file(text_io.get(), text_size))
+      return FILE_TYPE_WEBVTT;
+    else if (srt_reader_c::probe_file(text_io.get(), text_size))
       return FILE_TYPE_SRT;
     else if (ssa_reader_c::probe_file(text_io.get(), text_size))
       return FILE_TYPE_SSA;
@@ -382,6 +385,9 @@ create_readers() {
           break;
         case FILE_TYPE_WAVPACK4:
           file->reader.reset(new wavpack_reader_c(*file->ti, input_file));
+          break;
+        case FILE_TYPE_WEBVTT:
+          file->reader.reset(new webvtt_reader_c(*file->ti, input_file));
           break;
         default:
           mxerror(boost::format(Y("EVIL internal bug! (unknown file type). %1%\n")) % BUGMSG);

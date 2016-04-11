@@ -20,7 +20,7 @@
 #include "merge/generic_packetizer.h"
 
 class textsubs_packetizer_c: public generic_packetizer_c {
-private:
+protected:
   unsigned int m_packetno{};
   boost::optional<unsigned int> m_force_rerender_track_headers_on_packetno;
   charset_converter_cptr m_cc_utf8;

@@ -78,6 +78,7 @@
 #define MKV_S_TEXTASS    "S_TEXT/ASS"
 #define MKV_S_TEXTUSF    "S_TEXT/USF"
 #define MKV_S_TEXTASCII  "S_TEXT/ASCII"
+#define MKV_S_TEXTWEBVTT "S_TEXT/WEBVTT"
 #define MKV_S_VOBSUB     "S_VOBSUB"
 #define MKV_S_VOBSUBZLIB "S_VOBSUB/ZLIB"
 #define MKV_S_KATE       "S_KATE"
@@ -135,6 +136,7 @@ public:
     , S_VOBSUB
     , S_KATE
     , S_HDMV_PGS
+    , S_WEBVTT
 
     , B_VOBBTN = 0x4000
   };

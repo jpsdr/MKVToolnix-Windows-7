@@ -195,6 +195,12 @@ public:
     return !(*this == cmp);
   }
 
+  std::string to_string() const {
+    if (!is_allocated() || !get_size())
+      return {};
+    return { reinterpret_cast<char const *>(get_buffer()), static_cast<std::string::size_type>(get_size()) };
+  }
+
 public:
   static memory_cptr
   alloc(size_t size) {

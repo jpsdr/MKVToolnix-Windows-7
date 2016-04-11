@@ -95,6 +95,7 @@
 #include "output/p_vc1.h"
 #include "output/p_vpx.h"
 #include "output/p_wavpack.h"
+#include "output/p_webvtt.h"
 
 using namespace libmatroska;
 
@@ -1750,6 +1751,12 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
 
     t->sub_type = 'v';
 
+  } else if (t->codec.is(codec_c::type_e::S_WEBVTT)) {
+    set_track_packetizer(t, new webvtt_packetizer_c(this, nti));
+    show_packetizer_info(t->tnum, t->ptzr_ptr);
+
+    t->sub_type = 't';
+
   } else if (balg::starts_with(t->codec_id, "S_TEXT") || (t->codec_id == "S_SSA") || (t->codec_id == "S_ASS")) {
     std::string new_codec_id = ((t->codec_id == "S_SSA") || (t->codec_id == "S_ASS")) ? std::string("S_TEXT/") + std::string(&t->codec_id[2]) : t->codec_id;
 
@@ -2116,15 +2123,32 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
 
 void
 kax_reader_c::process_block_group_common(KaxBlockGroup *block_group,
-                                         packet_t *packet) {
+                                         packet_t *packet,
+                                         kax_track_t &block_track) {
   auto codec_state     = FindChild<KaxCodecState>(block_group);
   auto discard_padding = FindChild<KaxDiscardPadding>(block_group);
+  auto blockadd        = FindChild<KaxBlockAdditions>(block_group);
 
   if (codec_state)
     packet->codec_state = memory_c::clone(codec_state->GetBuffer(), codec_state->GetSize());
 
   if (discard_padding)
     packet->discard_padding = timestamp_c::ns(discard_padding->GetValue());
+
+  if (!blockadd)
+    return;
+
+  for (auto &child : *blockadd) {
+    if (!(Is<KaxBlockMore>(child)))
+      continue;
+
+    auto blockmore     = static_cast<KaxBlockMore *>(child);
+    auto blockadd_data = &GetChild<KaxBlockAdditional>(*blockmore);
+    auto blockadded    = std::make_shared<memory_c>(blockadd_data->GetBuffer(), blockadd_data->GetSize(), false);
+    block_track.content_decoder.reverse(blockadded, CONTENT_ENCODING_SCOPE_BLOCK);
+
+    packet->data_adds.push_back(blockadded);
+  }
 }
 
 void
@@ -2207,7 +2231,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
       auto packet                = std::make_shared<packet_t>(data, m_last_timecode + i * frame_duration, block_duration, block_bref, block_fref);
       packet->duration_mandatory = duration;
 
-      process_block_group_common(block_group, packet.get());
+      process_block_group_common(block_group, packet.get(), *block_track);
 
       static_cast<passthrough_packetizer_c *>(PTZR(block_track->ptzr))->process(packet);
     }
@@ -2229,7 +2253,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
       if ((2 < data->get_size()) || ((0 < data->get_size()) && (' ' != *data->get_buffer()) && (0 != *data->get_buffer()) && !iscr(*data->get_buffer()))) {
         auto packet = std::make_shared<packet_t>(data, m_last_timecode, block_duration, block_bref, block_fref);
 
-        process_block_group_common(block_group, packet.get());
+        process_block_group_common(block_group, packet.get(), *block_track);
 
         PTZR(block_track->ptzr)->process(packet);
       }
@@ -2240,22 +2264,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
       if ((duration) && !duration->GetValue())
         packet->duration_mandatory = true;
 
-      process_block_group_common(block_group, packet.get());
-
-      auto blockadd = FindChild<KaxBlockAdditions>(block_group);
-      if (blockadd) {
-        for (auto &child : *blockadd) {
-          if (!(Is<KaxBlockMore>(child)))
-            continue;
-
-          auto blockmore     = static_cast<KaxBlockMore *>(child);
-          auto blockadd_data = &GetChild<KaxBlockAdditional>(*blockmore);
-          auto blockadded    = std::make_shared<memory_c>(blockadd_data->GetBuffer(), blockadd_data->GetSize(), false);
-          block_track->content_decoder.reverse(blockadded, CONTENT_ENCODING_SCOPE_BLOCK);
-
-          packet->data_adds.push_back(blockadded);
-        }
-      }
+      process_block_group_common(block_group, packet.get(), *block_track);
 
       PTZR(block_track->ptzr)->process(packet);
     }
