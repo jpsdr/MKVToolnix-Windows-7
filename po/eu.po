@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-04-09 20:06+0200\n"
-"PO-Revision-Date: 2016-04-01 13:07+0000\n"
-"Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
+"PO-Revision-Date: 2016-04-10 20:49+0000\n"
+"Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/eu/)\n"
 "Language: eu\n"
@@ -308,26 +308,24 @@ msgstr ""
 "                           edo ez egotera behartzen du boolearra 0 bada.\n"
 
 #: src/merge/mkvmerge.cpp:98
-#, fuzzy
 msgid ""
 "  --generate-chapters <mode>\n"
 "                           Automatically generate chapters according to\n"
 "                           the mode ('when-appending' or 'interval:<duration>').\n"
 msgstr ""
-"  --cue-chapter-name-format <heuskarria>\n"
-"                           Eredua CUE orri sarreretatik\n"
-"                           atal izenetara bihurtzeko\n"
+"  --generate-chapters <mode>\n"
+"                           Berezgaitasunez sortu atalak moduaren arabera\n"
+"                            ('eransterakoan' edo 'tartea:<duration>').\n"
 
 #: src/merge/mkvmerge.cpp:101
-#, fuzzy
 msgid ""
 "  --generate-chapters-name-template <template>\n"
 "                           Template for newly generated chapter names\n"
 "                           (default: 'Chapter <NUM:2>').\n"
 msgstr ""
-"  --cue-chapter-name-format <heuskarria>\n"
-"                           Eredua CUE orri sarreretatik\n"
-"                           atal izenetara bihurtzeko\n"
+"  --generate-chapters-name-template <template>\n"
+"                           Sortu berri diren atal izenentzako eredua\n"
+"                           (berezkoa: 'Atala <NUM:2>').\n"
 
 #: src/merge/mkvmerge.cpp:87
 msgid "  --global-tags <file>     Read global tags from an XML file.\n"
@@ -857,8 +855,8 @@ msgstr " %1%"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:718
 msgid " day"
 msgid_plural " days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "egun"
+msgstr[1] "egun"
 
 #: src/merge/output_control.cpp:240
 #: src/merge/output_control.cpp:249
@@ -868,11 +866,10 @@ msgid " done\n"
 msgstr " eginda\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:712
-#, fuzzy
 msgid " second"
 msgid_plural " seconds"
-msgstr[0] " segundu"
-msgstr[1] " segundu"
+msgstr[0] "segundu"
+msgstr[1] "segundu"
 
 #: src/info/mkvinfo.cpp:208
 #, boost-format
@@ -933,7 +930,6 @@ msgstr[1] "%1 kanalak"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:100
 #: src/mkvtoolnix-gui/merge/track_model.cpp:265
-#, fuzzy
 msgid "%1 entry"
 msgid_plural "%1 entries"
 msgstr[0] "%1 sarrera"
@@ -963,7 +959,7 @@ msgstr[0] "%1 kontuz-ohar"
 msgstr[1] "%1 kontuz-ohar"
 
 #: src/common/strings/formatting.cpp:318
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% byte"
 msgid_plural "%1% bytes"
 msgstr[0] "%1% byte"
@@ -1231,9 +1227,8 @@ msgid "&Disable all tracks"
 msgstr "E&zgaitu bide guztiak."
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:396
-#, fuzzy
 msgid "&Disable selected attached files"
-msgstr "&Kendu hautaturiko eranskina"
+msgstr "E&zgaitu hautaturiko erantsitako agiriak"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:34
 msgid "&Don't scan, just add the file"
@@ -1252,9 +1247,8 @@ msgid "&Enable all tracks"
 msgstr "&Gaitu bide guztiak"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:395
-#, fuzzy
 msgid "&Enable selected attached files"
-msgstr "&Kendu hautaturiko eranskina"
+msgstr "G&aitu hautaturiko erantsitako agiriak"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:519
 msgid "&Enabled"
@@ -1452,9 +1446,8 @@ msgid "&Remove files"
 msgstr "&Kendu agiriak"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1300
-#, fuzzy
 msgid "&Remove job from queue after completion:"
-msgstr "&Kendu lana lan lerrotik osatu ondoren"
+msgstr "&Kendu lana lan lerrotik osatu ondoren:"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:318
 msgid "&Remove jobs"
@@ -1503,9 +1496,8 @@ msgid "&Scan for other playlists"
 msgstr "&Mihatu beste irakur-zerrendentzat"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:397
-#, fuzzy
 msgid "&Select all attached files"
-msgstr "Hautatu &eranskin guztiak"
+msgstr "Hautatu &erantsitako agiri guztiak"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:402
 msgid "&Select all attachments"
@@ -1549,9 +1541,8 @@ msgid "&Tag editor"
 msgstr "Eti&keta editatzailea"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1647
-#, fuzzy
 msgid "&Tracks, chapters and tags:"
-msgstr "Bideak, atalak eta etiketak:"
+msgstr "Bi&deak, atalak, etiketak:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:516
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:521
@@ -1582,9 +1573,9 @@ msgid "'%1%' can only be used with a file name. No further options are allowed i
 msgstr "'%1%' agiri izen batekin bakarrik erabili daiteke. Ez da beste aukerarik ahalbidetzen aukera hau erabiltzen bada.\n"
 
 #: src/merge/mkvmerge.cpp:500
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' does not contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n"
-msgstr "'%1%'-k ez du bateko baliozkoa ('s', 'sm', 'us', 'ns', 'fs-ko', 'p' edo 'i') hemen: '%2% %3%'.\n"
+msgstr "'%1%'-k ez du bateko baliozkoa ('s', 'sm', 'us', 'ns', 'fs-ko', 'p' edo 'i') hemen: '%2%'.\n"
 
 #: src/merge/mkvmerge.cpp:1143
 #, boost-format
@@ -1705,9 +1696,9 @@ msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'%1%' ez da bide ID baliozko bat hemen: '--nalu-size-length %2%'.\n"
 
 #: src/merge/mkvmerge.cpp:474
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
-msgstr "'%1%' ez da baliozko %2% en '%3% %4%'.\n"
+msgstr "'%1%' ez da baliozko zenbaki heuskarri bezala ezagutzen hemen: '%2%'.\n"
 
 #: src/extract/extract_cli_parser.cpp:142
 #, boost-format
@@ -1888,14 +1879,12 @@ msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' ez du bere argumentoa.\n"
 
 #: src/merge/mkvmerge.cpp:2190
-#, fuzzy
 msgid "'--generate-chapters' lacks the mode.\n"
-msgstr "'--chapters' ez du agiri izenik.\n"
+msgstr "'--generate-chapters' modu gabe.\n"
 
 #: src/merge/mkvmerge.cpp:2197
-#, fuzzy
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
-msgstr "'--cue-chapter-name-format' ez du heuskarririk.\n"
+msgstr "'--generate-chapters-name-template' izen eredu gabe.\n"
 
 #: src/merge/mkvmerge.cpp:2148
 msgid "'--global-tags' lacks the file name.\n"
@@ -2537,7 +2526,7 @@ msgstr "Unitate guztiak 1024 ohinarrikoak dira (G = 1024^3, M = 1024^2, K = 1024
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
 msgid "Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
-msgstr "AVC/h.264 bideoa biltegiratzea ahalbidetzen du VFW bateragarritasun moduan, adib. AVI batetik  irakurtzen denean"
+msgstr "AVC/h.264 bideoa biltegiratzea ahalbidetzen du Video-for-Windows bateragarritasun moduan, adib. AVI batetik irakurtzen denean."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
 msgid "Allows the use of the CodecState element."
@@ -2737,9 +2726,8 @@ msgid "Atta&chments"
 msgstr "Era&nskinak"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1734
-#, fuzzy
 msgid "Atta&chments to add:"
-msgstr "Erans&kinak"
+msgstr "Gehitzeko era&nskinak:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1741
 msgid "Attach &to:"
@@ -2778,9 +2766,8 @@ msgid "Attachments"
 msgstr "Eranskinak"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1733
-#, fuzzy
 msgid "Attachments from &source files:"
-msgstr "Eranskin hautatzaileak"
+msgstr "It&urburu agirietatiko eranskinak:"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:47
 msgid "Audio"
@@ -2824,14 +2811,12 @@ msgid "Automatic MIME type recognition for '%1%': %2%\n"
 msgstr "Berezgaitasunezko MIME mota ezagupena '%1%'-rentzat: %2%\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1271
-#, fuzzy
 msgid "Automatically &clear the output file name when the last file is removed"
-msgstr "Berez&-ezarri irteera agiri izena"
+msgstr "Berezgaitasunez &garbitu irteera agiri izena azken agiria kendutakoan"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1254
-#, fuzzy
 msgid "Automatically clea&r the file title when the last file is removed"
-msgstr "Berezgaitasunez ezarri agiri izenburua it&urburu agirietatik"
+msgstr "Berezgaitasunez ga&rbitu agiri izenburua azken agiria kendutakoan"
 
 #: src/merge/mkvmerge.cpp:1996
 msgid "Automatically enabling WebM compliance mode due to output file name extension.\n"
@@ -3123,7 +3108,7 @@ msgstr "Atal agiria:"
 
 #: src/merge/cluster_helper.cpp:730
 msgid "Chapter generation is only possible if at least one video or audio track is muxed.\n"
-msgstr ""
+msgstr "Atal sortzea gutxienez bideo edo audio bide bat multiplexatzen denan bakarrik egin daiteke. \n"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:201
 msgid "Chapter mass modification"
@@ -3922,9 +3907,8 @@ msgid "Do not split"
 msgstr "Ez banandu"
 
 #: src/info/info_cli_parser.cpp:39
-#, fuzzy
 msgid "Do not start the GUI."
-msgstr "ez dago hasita oraindik"
+msgstr "Ez abiarazi EIG."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 msgid "Do not write meta seek elements at all."
@@ -4084,24 +4068,21 @@ msgstr "EbmlVoid (neurria: %1%)"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:146
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy
 msgid "Edit chapters"
-msgstr "editatu atalak"
+msgstr "Editatu atalak"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:145
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy
 msgid "Edit headers"
-msgstr "editatu idazburuak"
+msgstr "Editatu idazburuak"
 
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Editatu ezaugarri hautatzaileak"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy
 msgid "Edit tags"
-msgstr "editatu etiketak"
+msgstr "Editatu etiketak"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4353,9 +4334,8 @@ msgid "Exports the chapter information in the simple format used in OGM tools (C
 msgstr "Atal argibideak esportatzen ditu OGM tresnatan erabilitako heuskarri arrunt batean (CHAPTER01=... CHAPTER01NAME=...)."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy
 msgid "Extract"
-msgstr "atera"
+msgstr "Atera"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4696,9 +4676,8 @@ msgid "Generating a number of chapters spaced evenly apart"
 msgstr "Atal zenbateko bat sortzen tarte berdin batez bananduta"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1722
-#, fuzzy
 msgid "Generating chapters:"
-msgstr "Sortu azpi-atalak"
+msgstr "Atalak sortzen:"
 
 #: src/extract/extract_cli_parser.cpp:61
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:43
@@ -4857,7 +4836,7 @@ msgstr "Gaituta badago EIG berezgaitasunez aldatuko da lan irteera tresnara lan 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:200
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:201
 msgid "If enabled the GUI will remove completed jobs older than the configured number of days no matter their status on exit."
-msgstr ""
+msgstr "Gaituta badago EIG-k itxuratutako egun zenbatekoa baino zaharragoak diren osatutako lanak kenduko ditu beren egoera kontuan izan gabe irtetzerakoan."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:197
 msgid "If enabled the first tab in the \"job output\" tool will not be cleared when a new job starts."
@@ -4915,9 +4894,8 @@ msgid "If no video track is output no splitting will occur."
 msgstr "Irteera bideo bide gabe bada bananketa ez da gertatuko."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:206
-#, fuzzy
 msgid "If nothing is entered the default 'Chapter <NUM:2>' will be used."
-msgstr "Ez bada ezer sartzen '%p - %t' erabiliko da."
+msgstr "Ez bada ezer sartzen berezko 'Atala <NUM:2>' erabiliko da."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:195
 #, boost-format
@@ -4954,11 +4932,11 @@ msgstr "Aukera hau gaituta badago eta unean ez badago irteeera agiri izenik ezar
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:222
 msgid "If this option is enabled the GUI will always clear the \"file title\" input box whenever the last source file is removed."
-msgstr ""
+msgstr "Aukera hau gaituta badago EIG-k betik garbituko du \"agiri izenburua\" sarrera kutxa azken iturburu agiria kentzerakoan."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:302
 msgid "If this option is enabled the GUI will always clear the \"output file name\" input box whenever the last source file is removed."
-msgstr ""
+msgstr "Aukera hau gaituta badago EIG-k betik garbituko du \"irteera agiri izena\" sarrera kutxa azken iturburu agiria kentzerakoan."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:307
 msgid "If this option is enabled then only those tracks will be set to be muxed whose language is selected below."
@@ -4997,7 +4975,7 @@ msgstr "Irudia hemendik inportaturik: %1%"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
 msgid "In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."
-msgstr ""
+msgstr "Tarte finkoetan: atalak tarte finkoetan sortzen dira, adib. 30 segundutik behin."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:246
 msgid "In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."
@@ -5018,9 +4996,8 @@ msgid "Indexing (cues):"
 msgstr "Aurkibidetzen (cue-ak):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy
 msgid "Info"
-msgstr "mkvInfo"
+msgstr "Argibideak"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -5059,7 +5036,7 @@ msgstr "Programaren barne akatsa"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1731
 msgid "Interval:"
-msgstr ""
+msgstr "Tartea:"
 
 #: src/merge/mkvmerge.cpp:1175
 #, boost-format
@@ -5935,9 +5912,8 @@ msgid "Name tem&plate:"
 msgstr "Izen eredua:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1717
-#, fuzzy
 msgid "Name template:"
-msgstr "&Izen eredua:"
+msgstr "Izen eredua:"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:137
 msgid "Name/Description"
@@ -6271,10 +6247,10 @@ msgid "Online check for updates"
 msgstr "Onlineko eguneraketa egiaztapena"
 
 #: src/merge/mkvmerge.cpp:892
-#, fuzzy, boost-format
+#, boost-format
 msgid "Only %1% chapter found in source files & chapter files."
 msgid_plural "Only %1% chapters found in source files & chapter files."
-msgstr[0] "%1% atal bakarrik aurkitu dira iturburu agirietan eta atal agirietan."
+msgstr[0] "%1% atal bakarrik aurkitu da iturburu agirietan eta atal agirietan."
 msgstr[1] "%1% atal bakarrik aurkitu dira iturburu agirietan eta atal agirietan."
 
 #: src/merge/mkvmerge.cpp:1571
@@ -6416,9 +6392,8 @@ msgid "Opus (in Ogg) audio files"
 msgstr "Opus (Ogg-an) audio agiriak"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
-#, fuzzy
 msgid "Order"
-msgstr "&Hurrenkeran"
+msgstr "Hurrenkera"
 
 #: src/info/mkvinfo.cpp:676
 #, boost-format
@@ -6982,9 +6957,8 @@ msgid "Remove a&ll jobs"
 msgstr "Kendu &lan denak"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1307
-#, fuzzy
 msgid "Remove com&pleted jobs older than x days:"
-msgstr "Kendu &osatutako lanak"
+msgstr "Kendu &x egun baino zaharragoak diren osatutako lanak:"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:177
 msgid "Remove element"
@@ -7329,7 +7303,7 @@ msgstr "Hautatu adierazitako &motako bide guztiak"
 #: src/mkvtoolnix-gui/merge/output.cpp:176
 #: src/mkvtoolnix-gui/merge/output.cpp:177
 msgid "Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."
-msgstr ""
+msgstr "Hautatu badagoen Matroska edo WebM agiri bat eta EIG-k bere zati UID-ak gehituko ditu sarrera eremura ezkerraldean."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:459
 msgid "Select chapter file"
@@ -8523,9 +8497,8 @@ msgid "The first word tells mkvextract what to extract. The second must be the s
 msgstr "Lehen hitzak mkvextract-eri esaten dio zer atera. Bigarrena iturburu agiria izan behar da. Aukera orokor gutxi batzuk daude modu guztietan erabili daitezkeenak. Beste aukera guztiak moduaren araberakoak dira."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:199
-#, fuzzy
 msgid "The following modes are supported:"
-msgstr "Hurrengo programa ezin da exekutatu: %1"
+msgstr "Hurrengo moduak sostengatzen dira:"
 
 #: src/mkvtoolnix-gui/jobs/program_runner.cpp:47
 msgid "The following program could not be executed: %1"
@@ -8583,7 +8556,7 @@ msgstr "'%1%' hizkuntza kodea ez da ISO639-2 hikuntza kode baliozko bat eta ezik
 
 #: src/mkvtoolnix-gui/merge/output.cpp:202
 msgid "The language for the newly created chapters is set via the chapter language control above."
-msgstr ""
+msgstr "Sortutako atal berriarentzako hizkuntza gaineko atal hizkuntza agintearen bidez ezartzen da."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:401
 msgid "The language for this track that players can use for automatic track selection and display for the user."
@@ -8602,9 +8575,8 @@ msgid "The language selected here is used for video tracks for which their sourc
 msgstr "Hemen hautatzen den hizkuntza bideo bideentzat erabiltzen da beren iturburu agiriak ezaugarri hori ez duenean."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:183
-#, fuzzy
 msgid "The language set here is also used when chapters are generated."
-msgstr "Etiketak ahalbidetuta daude, baina atalak ez."
+msgstr "Hemen ezartzen den hizkuntza atalak sortzen direnean ere erabiltzen da."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
@@ -8707,7 +8679,7 @@ msgstr "Bi audio bideen lagineko/bit zenbatekoa ezberdina da: %1% eta %2%"
 #: src/common/bswap.cpp:48
 #, boost-format
 msgid "The number of bytes to swap isn't divisible by %1%."
-msgstr ""
+msgstr "Aldatzeko byte zenbatekoa ez da %1%-ren zatigarria."
 
 #: src/merge/connection_checks.h:24
 msgid "The number of channels of the two audio tracks is different: %1% and %2%"
@@ -9847,7 +9819,7 @@ msgstr "Irteera moduloa erabiltzen '%1%' heuskarrirako.\n"
 #: src/merge/cluster_helper.cpp:732
 #, boost-format
 msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
-msgstr ""
+msgstr "ID %1% duen bidea erabiltzen '%2%' agiritik atal sortze zehaztasun bezala.\n"
 
 #: src/common/file_types.cpp:98
 #: src/output/p_vc1.h:37
@@ -10094,7 +10066,7 @@ msgstr "Iturburu agiriak gehitzerakoan arrunt bide guztiak ezartzen dira irteera
 
 #: src/mkvtoolnix-gui/merge/output.cpp:200
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
-msgstr ""
+msgstr "Eransterakoan: atal bat sortzen da hasieran eta bat agiri bat eransterakoan."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:220
 msgid "When the user adds a file containing such a title then the program will copy the title into the \"file title\" input box if this option is enabled."
@@ -10416,7 +10388,7 @@ msgstr "atalak"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1729
 msgid "chapters in fixed intervals"
-msgstr ""
+msgstr "atalak tarte finkoetan"
 
 #: src/common/stereo_mode.cpp:54
 msgid "checkerboard (left first)"
@@ -10508,9 +10480,8 @@ msgid "don't change"
 msgstr "ez aldatu"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1727
-#, fuzzy
 msgid "don't generate chapters"
-msgstr "Sortu azpi-atalak"
+msgstr "ez sortu atalik"
 
 #: src/info/mkvinfo.cpp:698
 msgid "encryption"
@@ -10622,19 +10593,16 @@ msgid "highest"
 msgstr "handiena"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1247
-#, fuzzy
 msgid "in &two fixed columns on the right of the files and tracks"
-msgstr "bi zutabetan agirien eta bideen eskuinean"
+msgstr "&bi zutabe finkoetan agiri eta bideen eskuinaldean"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1246
-#, fuzzy
 msgid "in a &scrollable column on the right of the files and tracks"
-msgstr "zutabe irristagarri bat agiri eta bideen eskuinean"
+msgstr "z&utabe irristagarri batean agiri eta bideen eskuinaldean"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1248
-#, fuzzy
 msgid "in a tab &widget below the files and tracks"
-msgstr "hegats gailu batean agirien eta bideen azpian"
+msgstr "&hegats gailu batean agirien eta bideen azpian"
 
 #: src/common/compression/zlib.cpp:36
 #, boost-format
@@ -10911,7 +10879,7 @@ msgstr "mkvmergek hau ere gaitu egiten du irteera agiri izenaren luzapena \"webm
 
 #: src/mkvtoolnix-gui/merge/output.cpp:198
 msgid "mkvmerge can generate chapters automatically."
-msgstr ""
+msgstr "mkvmergek atalak berezgaitasunez sortu ditzake."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:191
 msgid "mkvmerge can read CUE sheets for audio CDs and automatically convert them to chapters."
@@ -11102,9 +11070,8 @@ msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer hutsegitea\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1728
-#, fuzzy
 msgid "one chapter for each appended file"
-msgstr "Ezinezkoa agiriak eranstea"
+msgstr "atal bat erantsitasko agiri bakoitzeko"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1280
 msgid "only for I frames"
