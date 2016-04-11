@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-04-09 20:06+0200\n"
+"POT-Creation-Date: 2016-04-11 22:02+0200\n"
 "PO-Revision-Date: 2015-12-16 09:53+0100\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -1017,8 +1017,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: 例外が発生しました (メッセージ: %2%; タイプ: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1362
-#: src/input/r_matroska.cpp:2025
+#: src/input/r_matroska.cpp:1363
+#: src/input/r_matroska.cpp:2032
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: 未知の例外が発生しました。"
@@ -1822,7 +1822,7 @@ msgstr "'%1%'：%2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%'：後続のファイルを同様に処理しています：%2%\n"
 
-#: src/input/r_matroska.cpp:1635
+#: src/input/r_matroska.cpp:1636
 #, boost-format
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr "'%1%'：実験的モードでMUXされたOpusのトラックを再MUXしようとしています。出力されるトラックは最終的なモードで上書きされますが、実験的モードでMUXされたトラックからは詳細情報が1つ回復不能になります。エンドトリミングがそれです。これは、デコーダーの出力が元々意図されていたよりも数サンプル多くなる可能性があるということを意味します。もし可能であれば、オリジナルのOpusファイルから再MUXしてください。\n"
@@ -2116,8 +2116,8 @@ msgstr "<名前をつけてください>"
 msgid "<unsaved file>"
 msgstr "<未保存のファイル>"
 
-#: src/input/r_matroska.cpp:2046
-#: src/input/r_matroska.cpp:2142
+#: src/input/r_matroska.cpp:2053
+#: src/input/r_matroska.cpp:2166
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "トラック番号%2%のタイムスタンプ%1%でブロックが見つかりましが、そのトラック番号のヘッダが見つかりませんでした。このブロックはスキップされます。\n"
@@ -2233,7 +2233,7 @@ msgstr "ファイルを追加結合する(&A)"
 msgid "A/52 (aka AC-3)"
 msgstr "A/52（別名AC-3）"
 
-#: src/common/file_types.cpp:67
+#: src/common/file_types.cpp:68
 #: src/output/p_aac.h:41
 msgid "AAC"
 msgstr "AAC"
@@ -2254,7 +2254,7 @@ msgstr "このAACはSBR/HE-AAC/AAC+です："
 msgid "AAC with ADIF headers"
 msgstr "ADIFヘッダつきのAAC"
 
-#: src/common/file_types.cpp:68
+#: src/common/file_types.cpp:69
 #: src/output/p_ac3.h:41
 msgid "AC-3"
 msgstr "AC-3"
@@ -2275,7 +2275,7 @@ msgstr "ALACのプライベートデータが一致しません\n"
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "ASCII文字列（日本語やウムラウトなどの特殊な文字は不可です）"
 
-#: src/common/file_types.cpp:70
+#: src/common/file_types.cpp:71
 #: src/output/p_mpeg4_p10.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
@@ -2288,7 +2288,7 @@ msgstr "AVC/h.264 (unframed)"
 msgid "AVC/h.264 elementary streams"
 msgstr "AVC/h.264エレメンタリストリーム"
 
-#: src/common/file_types.cpp:71
+#: src/common/file_types.cpp:72
 msgid "AVI"
 msgstr "AVI"
 
@@ -3046,7 +3046,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr "CodecID '%5%'のトラック%4%が既に同じファイルに記録中で、そのCodecPrivateデータ（USFスタイル等）が一致しないため、CodecID '%2%'のトラック%1%をファイル%3%に記録することはできません。\n"
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:70
+#: src/extract/xtr_base.cpp:71
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -3398,7 +3398,7 @@ msgstr ""
 msgid "Copy o&utput file's name to file title"
 msgstr "出力ファイル名"
 
-#: src/common/file_types.cpp:74
+#: src/common/file_types.cpp:75
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -3722,7 +3722,7 @@ msgstr "現在のところ、いくつかの字幕フォーマットのみがzli
 msgid "D&uplicate selected edition or chapter"
 msgstr "選択したエディションまたはチャプターを複製する(&U)"
 
-#: src/common/file_types.cpp:76
+#: src/common/file_types.cpp:77
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
@@ -3747,7 +3747,7 @@ msgstr "DTSヘッダに問題：ソースPCMの解像度が無効です\n"
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr "DTSヘッダに問題：十分なデータがなくヘッダを読み取ることができません\n"
 
-#: src/common/file_types.cpp:77
+#: src/common/file_types.cpp:78
 #, fuzzy
 msgid "DV video format"
 msgstr "ビデオトラック"
@@ -3897,7 +3897,7 @@ msgid "Development hacks"
 msgstr "開発者向けハック"
 
 #: src/common/file_types.cpp:30
-#: src/common/file_types.cpp:75
+#: src/common/file_types.cpp:76
 #: src/output/p_dirac.h:38
 msgid "Dirac"
 msgstr "Dirac"
@@ -4125,7 +4125,7 @@ msgstr "EBML read version: %1%"
 msgid "EBML version: %1%"
 msgstr "EBMLバージョン：%1%"
 
-#: src/merge/reader_detection_and_creation.cpp:387
+#: src/merge/reader_detection_and_creation.cpp:393
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "悪質な内部バグです！（未知のファイルタイプです）。 %1%\n"
@@ -4471,7 +4471,7 @@ msgstr "コーデックID '%2%'のトラックID%1%の抽出はサポートさ�
 msgid "F1"
 msgstr "F1"
 
-#: src/common/file_types.cpp:78
+#: src/common/file_types.cpp:79
 #: src/output/p_flac.h:39
 msgid "FLAC"
 msgstr "FLAC"
@@ -4495,7 +4495,7 @@ msgstr "Vobsubデータファイル'%1%'の作成に失敗しました：%2%\n"
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "ファイル'%1%'の作成に失敗しました：%2%\n"
 
-#: src/extract/xtr_base.cpp:78
+#: src/extract/xtr_base.cpp:79
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr "ファイル'%1%'の作成に失敗しました：%2% (%3%)\n"
@@ -4633,7 +4633,7 @@ msgstr "フラグ："
 msgid "Flags:"
 msgstr "フラグ："
 
-#: src/common/file_types.cpp:79
+#: src/common/file_types.cpp:80
 msgid "Flash Video"
 msgstr "Flash Video"
 
@@ -4795,7 +4795,7 @@ msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
 msgstr[0] "グローバルタグ：%1%個のエントリ"
 
-#: src/common/file_types.cpp:81
+#: src/common/file_types.cpp:82
 #, fuzzy
 msgid "HD-DVD subtitles"
 msgstr "字幕"
@@ -4804,7 +4804,7 @@ msgstr "字幕"
 msgid "HDMV PGS"
 msgstr "HDMV PGS"
 
-#: src/common/file_types.cpp:80
+#: src/common/file_types.cpp:81
 #: src/output/p_hevc.h:33
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
@@ -4867,7 +4867,7 @@ msgstr "ISO639-1コード"
 msgid "ISO639-2 code"
 msgstr "ISO639-2コード"
 
-#: src/common/file_types.cpp:82
+#: src/common/file_types.cpp:83
 msgid "IVF (VP8/VP9)"
 msgstr "IVF (VP8/VP9)"
 
@@ -5714,7 +5714,7 @@ msgstr "MKVToolNixオプションファイル"
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix GUI 設定ファイル"
 
-#: src/common/file_types.cpp:85
+#: src/common/file_types.cpp:86
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -5730,7 +5730,7 @@ msgstr "MP4 オーディオ/ビデオファイル"
 msgid "MPEG audio files"
 msgstr "MPEGオーディオファイル"
 
-#: src/common/file_types.cpp:87
+#: src/common/file_types.cpp:88
 msgid "MPEG program stream"
 msgstr "MPEGプログラムストリーム"
 
@@ -5738,7 +5738,7 @@ msgstr "MPEGプログラムストリーム"
 msgid "MPEG program streams"
 msgstr "MPEGプログラムストリーム"
 
-#: src/common/file_types.cpp:88
+#: src/common/file_types.cpp:89
 msgid "MPEG transport stream"
 msgstr "MPEGトランスポートストリーム"
 
@@ -5746,7 +5746,7 @@ msgstr "MPEGトランスポートストリーム"
 msgid "MPEG transport streams"
 msgstr "MPEGトランスポートストリーム"
 
-#: src/common/file_types.cpp:86
+#: src/common/file_types.cpp:87
 msgid "MPEG video elementary stream"
 msgstr "MPEGビデオエレメンタリストリーム"
 
@@ -5770,12 +5770,12 @@ msgstr "MPLS Blu-ray プレイリスト"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "このトラックをそのタイプ（オーディオ、ビデオ、字幕）のデフォルトトラックに設定します。"
 
-#: src/input/r_matroska.cpp:1525
-#: src/input/r_matroska.cpp:1540
+#: src/input/r_matroska.cpp:1526
+#: src/input/r_matroska.cpp:1541
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "無効な形式のAACコーデック初期化データが見つかりました。\n"
 
-#: src/input/r_matroska.cpp:1533
+#: src/input/r_matroska.cpp:1534
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "無効な形式のコーデックID '%1%'です。\n"
@@ -5791,7 +5791,7 @@ msgstr "無効な形式の行？（%1%）\n"
 msgid "Mark this track as 'forced'."
 msgstr "このトラックを強制表示として設定します。"
 
-#: src/common/file_types.cpp:83
+#: src/common/file_types.cpp:84
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -5863,7 +5863,7 @@ msgstr "RealAudio/RealVideoのフレームのためのメモリを確保する�
 msgid "Merge"
 msgstr "マージ(&M)"
 
-#: src/common/file_types.cpp:84
+#: src/common/file_types.cpp:85
 msgid "MicroDVD"
 msgstr ""
 
@@ -6343,7 +6343,7 @@ msgstr "トラックのチャンネル数です。"
 msgid "Often used selections"
 msgstr "よく使用される選択項目(&O)"
 
-#: src/common/file_types.cpp:89
+#: src/common/file_types.cpp:90
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
@@ -6582,7 +6582,7 @@ msgstr "PCM"
 msgid "PGS/SUP subtitles"
 msgstr "PGS/SUP字幕"
 
-#: src/common/file_types.cpp:90
+#: src/common/file_types.cpp:91
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -6816,7 +6816,7 @@ msgstr "QuickTime オーディオ/ビデオファイル"
 msgid "QuickTime compatible video"
 msgstr "QuickTime互換ビデオ"
 
-#: src/common/file_types.cpp:91
+#: src/common/file_types.cpp:92
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -6946,7 +6946,7 @@ msgstr "Quicktime/MP4リーダ：トラック%1%にはいくつかのデータ�
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4リーダ：トラックID %1%は複数のFourCCを持っています。最初のFourCC（%2%）が使用され、このFourCC（%3%）は使用されません。\n"
 
-#: src/common/file_types.cpp:72
+#: src/common/file_types.cpp:73
 msgid "RIFF CDXA"
 msgstr ""
 
@@ -7001,7 +7001,7 @@ msgstr "実際の出力サンプリング周波数（Hz単位）です。"
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/common/file_types.cpp:92
+#: src/common/file_types.cpp:93
 msgid "RealMedia"
 msgstr "RealMedia"
 
@@ -7202,7 +7202,7 @@ msgstr "ジョブキューに追加(&A)"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/common/file_types.cpp:93
+#: src/common/file_types.cpp:94
 msgid "SRT subtitles"
 msgstr "SRT字幕"
 
@@ -7210,7 +7210,7 @@ msgstr "SRT字幕"
 msgid "SRT text subtitles"
 msgstr "SRTテキスト字幕"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:95
 msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS字幕"
 
@@ -7942,7 +7942,7 @@ msgstr "サポートされているファイルタイプ：\n"
 msgid "Suppress status output."
 msgstr "ステータス情報を出力しません。"
 
-#: src/common/file_types.cpp:96
+#: src/common/file_types.cpp:97
 #: src/output/p_tta.h:34
 msgid "TTA"
 msgstr "TTA"
@@ -8320,11 +8320,11 @@ msgstr "デフォルトの言語コード'%1%'は正しいISO639-2言語コー�
 msgid "The default mode is adding files for merging."
 msgstr ""
 
-#: src/merge/reader_detection_and_creation.cpp:402
-#: src/merge/reader_detection_and_creation.cpp:405
 #: src/merge/reader_detection_and_creation.cpp:408
 #: src/merge/reader_detection_and_creation.cpp:411
 #: src/merge/reader_detection_and_creation.cpp:414
+#: src/merge/reader_detection_and_creation.cpp:417
+#: src/merge/reader_detection_and_creation.cpp:420
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -8421,8 +8421,8 @@ msgstr "ファイル'%1%'を開いて読み込むことができませんでし�
 #: src/extract/mkvextract.cpp:61
 #: src/extract/timecodes_v2.cpp:193
 #: src/extract/tracks.cpp:358
-#: src/merge/reader_detection_and_creation.cpp:80
-#: src/merge/reader_detection_and_creation.cpp:123
+#: src/merge/reader_detection_and_creation.cpp:81
+#: src/merge/reader_detection_and_creation.cpp:126
 #: src/propedit/attachment_target.cpp:64
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -8497,12 +8497,12 @@ msgstr "XMLタグァイル'%1%'はエラーを含んでいます：%2%\n"
 msgid "The file can be fixed by re-muxing the file with mkvmerge."
 msgstr ""
 
-#: src/merge/reader_detection_and_creation.cpp:408
+#: src/merge/reader_detection_and_creation.cpp:414
 msgid "The file content does not match its format type and was not recognized."
 msgstr "ファイルの内容がフォーマットタイプに一致しないため、認識できませんでした。"
 
-#: src/merge/reader_detection_and_creation.cpp:402
-#: src/merge/reader_detection_and_creation.cpp:405
+#: src/merge/reader_detection_and_creation.cpp:408
+#: src/merge/reader_detection_and_creation.cpp:411
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "ファイルを開いて読み込むことができなかったか、ヘッダを解析するのに十分なだけのデータがありませんでした。"
 
@@ -8546,7 +8546,7 @@ msgstr "ファイルヘッダが短かすぎます。\n"
 msgid "The file header was not read correctly.\n"
 msgstr "ファイルヘッダを正しく読み取れませんでした。\n"
 
-#: src/merge/reader_detection_and_creation.cpp:411
+#: src/merge/reader_detection_and_creation.cpp:417
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "ファイルヘッダをパースすることができませんでした。例えば、不完全、不正、もしくは損傷しています。"
 
@@ -8610,8 +8610,8 @@ msgstr "このファイルはサポートされていないフォーマットで
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1363
-#: src/input/r_matroska.cpp:2026
+#: src/input/r_matroska.cpp:1364
+#: src/input/r_matroska.cpp:2033
 msgid "The file will not be processed further."
 msgstr "ファイルはこれ以上処理されません。"
 
@@ -9026,8 +9026,8 @@ msgstr "このサイズごとに新しい出力ファイルが開始されます
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "添付ファイル'%1%'のサイズが0です。\n"
 
-#: src/merge/reader_detection_and_creation.cpp:84
-#: src/merge/reader_detection_and_creation.cpp:126
+#: src/merge/reader_detection_and_creation.cpp:85
+#: src/merge/reader_detection_and_creation.cpp:129
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "ソースファイル'%1%'を開くのに失敗したか、最後までシークすることでサイズを測ることができませんでした。\n"
@@ -9519,8 +9519,8 @@ msgstr "このトラックにはSBR AAC/HE-AAC/AAC+が含まれています。"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1363
-#: src/input/r_matroska.cpp:2026
+#: src/input/r_matroska.cpp:1364
+#: src/input/r_matroska.cpp:2033
 msgid "This usually indicates a damaged file structure."
 msgstr "これは通常ファイル構造が損傷していることを意味します。"
 
@@ -9593,7 +9593,7 @@ msgstr "トラック%1%のCodecPrivateが小さすぎます。\n"
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "トラック%1%は未知もしくはサポートされていない圧縮アルゴリズム（%2%）で圧縮されています。\n"
 
-#: src/input/r_matroska.cpp:1076
+#: src/input/r_matroska.cpp:1077
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "トラック%1%には、Matroskaの仕様上は必須のトラックUID要素がありません。ファイルにタグが含まれている場合、そのタグは壊れている可能性があります。\n"
@@ -9635,6 +9635,7 @@ msgstr "コーデックID '%2%'のトラック%1%は\"bits per second (bps)\"要
 #: src/extract/xtr_textsubs.cpp:283
 #: src/extract/xtr_vobsub.cpp:62
 #: src/extract/xtr_wav.cpp:115
+#: src/extract/xtr_webvtt.cpp:34
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"codec private\" element and cannot be extracted.\n"
 msgstr "コーデックID '%2%'のトラック%1%は\"codec private\"要素がなく、抽出することができません。\n"
@@ -9666,6 +9667,7 @@ msgid "Track %1%: NAL too big. Size according to header field: %2%, available by
 msgstr "トラック%1%：NALが大きすぎます。ヘッダフィールドによればサイズは%2%で、パケット内で利用できるバイト数は%3%です。このNALは\n"
 
 #: src/extract/xtr_textsubs.cpp:45
+#: src/extract/xtr_webvtt.cpp:49
 #, boost-format
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "トラック%1%：字幕エントリ番号%2%には持続時間がありません。1秒と仮定します。\n"
@@ -9745,7 +9747,7 @@ msgstr "トラックタイプ：%1%"
 msgid "Tracks with a language in this list will be set not to be muxed by default."
 msgstr "このリストにある言語のトラックはデフォルトでMUXされないように設定されます。"
 
-#: src/extract/xtr_base.cpp:122
+#: src/extract/xtr_base.cpp:123
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "サポートされていない方式（圧縮や暗号化）でエンコードされた内容を抽出することはできません。\n"
 
@@ -9753,7 +9755,7 @@ msgstr "サポートされていない方式（圧縮や暗号化）でエンコ
 msgid "Tracks:"
 msgstr "トラック："
 
-#: src/common/file_types.cpp:95
+#: src/common/file_types.cpp:96
 #: src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -9809,7 +9811,7 @@ msgstr "ID"
 msgid "UID:"
 msgstr "UID:(&U)"
 
-#: src/common/file_types.cpp:97
+#: src/common/file_types.cpp:98
 msgid "USF subtitles"
 msgstr "USF字幕"
 
@@ -9911,7 +9913,7 @@ msgstr "サポートされていないMPEGバージョンです：0x%|1$02x|（�
 msgid "Unsupported file format"
 msgstr "サポートされていないフォーマット"
 
-#: src/input/r_matroska.cpp:1834
+#: src/input/r_matroska.cpp:1841
 msgid "Unsupported track type for this track.\n"
 msgstr "このトラックはサポートされているトラックタイプではありません。\n"
 
@@ -9970,7 +9972,7 @@ msgstr "NALUサイズを3バイトにすると、特定のAVC/h.264コーデッ�
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "フォーマット'%1%'のデマルチプレクサを使用しています。\n"
 
-#: src/input/r_matroska.cpp:1392
+#: src/input/r_matroska.cpp:1393
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "トラックタイプ'%1%'の一般的出力モジュールを使用しています。\n"
@@ -9984,7 +9986,7 @@ msgstr "フォーマット'%1%'の出力モジュールを使用しています�
 msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
 msgstr ""
 
-#: src/common/file_types.cpp:98
+#: src/common/file_types.cpp:99
 #: src/output/p_vc1.h:37
 msgid "VC-1"
 msgstr "VC-1"
@@ -10118,7 +10120,7 @@ msgstr "ビデオトラック"
 msgid "Video track %1"
 msgstr "ビデオトラック"
 
-#: src/common/file_types.cpp:99
+#: src/common/file_types.cpp:100
 #: src/output/p_vobbtn.h:36
 msgid "VobBtn"
 msgstr "VobBtn"
@@ -10127,7 +10129,7 @@ msgstr "VobBtn"
 msgid "VobButtons"
 msgstr "VobButton"
 
-#: src/common/file_types.cpp:100
+#: src/common/file_types.cpp:101
 #: src/output/p_vobsub.h:31
 msgid "VobSub"
 msgstr "VobSub"
@@ -10140,7 +10142,7 @@ msgstr "VobSub字幕"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/common/file_types.cpp:101
+#: src/common/file_types.cpp:102
 msgid "WAV"
 msgstr "WAV"
 
@@ -10148,7 +10150,7 @@ msgstr "WAV"
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE（非圧縮PCMオーディオ）"
 
-#: src/common/file_types.cpp:102
+#: src/common/file_types.cpp:103
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
@@ -10205,6 +10207,14 @@ msgstr "WebMオーディオ/ビデオファイル"
 #: src/mkvtoolnix-gui/merge/output.cpp:263
 msgid "WebM files"
 msgstr "WebMファイル"
+
+#: src/common/file_types.cpp:61
+#: src/common/file_types.cpp:104
+#: src/extract/xtr_webvtt.h:32
+#: src/output/p_webvtt.h:29
+#, fuzzy
+msgid "WebVTT subtitles"
+msgstr "SRT字幕"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:118
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:154
@@ -10278,7 +10288,7 @@ msgstr "ビデオフレームの横表示解像度です。"
 msgid "Windows (cmd.exe)"
 msgstr "Windows (cmd.exe)"
 
-#: src/common/file_types.cpp:69
+#: src/common/file_types.cpp:70
 msgid "Windows Media (ASF/WMV)"
 msgstr ""
 
@@ -10510,7 +10520,7 @@ msgid "attachment"
 msgstr "添付ファイル"
 
 #: src/info/mkvinfo.cpp:940
-#: src/input/r_matroska.cpp:106
+#: src/input/r_matroska.cpp:107
 #: src/mkvtoolnix-gui/merge/track.cpp:391
 msgid "audio"
 msgstr "オーディオ"
@@ -10537,7 +10547,7 @@ msgid "bottom"
 msgstr ""
 
 #: src/info/mkvinfo.cpp:943
-#: src/input/r_matroska.cpp:107
+#: src/input/r_matroska.cpp:108
 #: src/mkvtoolnix-gui/merge/track.cpp:394
 msgid "buttons"
 msgstr "ボタン"
@@ -10821,119 +10831,119 @@ msgstr "低"
 msgid "lowest"
 msgstr "最低"
 
-#: src/input/r_matroska.cpp:361
+#: src/input/r_matroska.cpp:362
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader：（トラック%1%、MS互換モード）Matroskaによるとサンプル当たり%2%ビットですが、WAVEFORMATEXによると%3%ビットです。\n"
 
-#: src/input/r_matroska.cpp:352
+#: src/input/r_matroska.cpp:353
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader：（トラック%1%、MS互換モード）Matroskaによると%2%チャンネルありますが、WAVEFORMATEXによると%3%チャンネルです。\n"
 
-#: src/input/r_matroska.cpp:343
+#: src/input/r_matroska.cpp:344
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, but WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader：（トラック%1%、MS互換モード）Matroskaによると1秒当たり%2%サンプルですが、WAVEFORMATEXによると%3%サンプルです。\n"
 
-#: src/input/r_matroska.cpp:539
+#: src/input/r_matroska.cpp:540
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader：（トラック%1%、MS互換モード）Matroskaによるとビデオの縦解像度は%2%ですが、BITMAPINFOHEADERによると%3%です。\n"
 
-#: src/input/r_matroska.cpp:530
+#: src/input/r_matroska.cpp:531
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader：（トラック%1%、MS互換モード）Matroskaによるとビデオの横解像度は%2%ですが、BITMAPINFOHEADERによると%3%です。\n"
 
-#: src/input/r_matroska.cpp:1065
+#: src/input/r_matroska.cpp:1066
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader：トラックにトラック番号がありません。\n"
 
-#: src/input/r_matroska.cpp:1458
+#: src/input/r_matroska.cpp:1459
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reade：新しいファイルに既に割り当てられているため、トラックUID %1%を保持することができませんでした。\n"
 
-#: src/input/r_matroska.cpp:1302
-#: src/input/r_matroska.cpp:1307
+#: src/input/r_matroska.cpp:1303
+#: src/input/r_matroska.cpp:1308
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader：セグメントが見つかりませんでした。\n"
 
-#: src/input/r_matroska.cpp:1028
+#: src/input/r_matroska.cpp:1029
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader：ピクセルの高さがありません。\n"
 
-#: src/input/r_matroska.cpp:1026
+#: src/input/r_matroska.cpp:1027
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader：ピクセルの幅がありません。\n"
 
-#: src/input/r_matroska.cpp:640
+#: src/input/r_matroska.cpp:641
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_reader：トラック%2%のコーデックID '%1%'は未知のものです。\n"
 
-#: src/input/r_matroska.cpp:376
-#: src/input/r_matroska.cpp:421
-#: src/input/r_matroska.cpp:442
+#: src/input/r_matroska.cpp:377
+#: src/input/r_matroska.cpp:422
+#: src/input/r_matroska.cpp:443
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader：トラック%1%のコーデックIDは'%2%'ですが、プライベートコーデックデータに有効なヘッダが含まれていません。\n"
 
-#: src/input/r_matroska.cpp:518
+#: src/input/r_matroska.cpp:519
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader：トラック%1%のコーデックIDは'%2%'ですが、BITMAPINFOHEADER構造が存在していません。よって使用されているビデオコーデックを識別するFourCCがありません。\n"
 
-#: src/input/r_matroska.cpp:321
+#: src/input/r_matroska.cpp:322
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader：トラック%1%のコーデックIDは'%2%'ですが、WAVEFORMATEX構造が存在していません。よって使用されているオーディオコーデックを識別するフォーマットIDがありません。\n"
 
-#: src/input/r_matroska.cpp:558
+#: src/input/r_matroska.cpp:559
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n"
 msgstr "matroska_reader：トラック%1%のコーデックIDは'%2%'ですが、コーデックプライベートヘッダがありません。\n"
 
-#: src/input/r_matroska.cpp:604
-#: src/input/r_matroska.cpp:615
+#: src/input/r_matroska.cpp:605
+#: src/input/r_matroska.cpp:616
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_reader：トラック%1%のコーデックIDは'%2%'ですが、プライベートデータが見つかりませんでした。\n"
 
-#: src/input/r_matroska.cpp:1127
+#: src/input/r_matroska.cpp:1128
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader：コーデックIDがありません。\n"
 
-#: src/input/r_matroska.cpp:590
+#: src/input/r_matroska.cpp:591
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_reader：トラック%1%の高さが設定されませんでした。\n"
 
-#: src/input/r_matroska.cpp:584
+#: src/input/r_matroska.cpp:585
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_reader：トラック%1%の幅が設定されませんでした。\n"
 
-#: src/input/r_matroska.cpp:682
+#: src/input/r_matroska.cpp:683
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader：トラック%1%はOKのようです。\n"
 
-#: src/input/r_matroska.cpp:1083
+#: src/input/r_matroska.cpp:1084
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader：トラックタイプが見つかりませんでした。\n"
 
-#: src/input/r_matroska.cpp:412
+#: src/input/r_matroska.cpp:413
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader：mkvmergeはFLACをサポートしてコンパイルされていません。トラック%1%を無視します。\n"
 
-#: src/input/r_matroska.cpp:1289
+#: src/input/r_matroska.cpp:1290
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader：EBMLヘッドが見つかりませんでした。\n"
 
-#: src/input/r_matroska.cpp:677
+#: src/input/r_matroska.cpp:678
 #, boost-format
 msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
 msgstr "matroska_reader：トラック%1%のデマルチプレクサタイプが未知のものです：'%2%'\n"
@@ -11327,7 +11337,7 @@ msgstr "切り捨てピクセル：%1%"
 msgid "pixel width: %1%"
 msgstr "ピクセル幅：%1%"
 
-#: src/extract/xtr_base.cpp:50
+#: src/extract/xtr_base.cpp:51
 msgid "raw data"
 msgstr "生データ"
 
@@ -11388,7 +11398,7 @@ msgstr "spu_extraction_duration：タイムコード%1%で壊れたSPUパケッ�
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader：無効なフォーマットです。\"[Events]\"セクションで\"Format\"行を見つけることができませんでした。"
 
-#: src/input/r_matroska.cpp:109
+#: src/input/r_matroska.cpp:110
 msgid "subtitle"
 msgstr "字幕"
 
@@ -11439,7 +11449,7 @@ msgstr "トラック名"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_reader：c'tor内でtag_sizeが負になりました。 %1%\n"
 
-#: src/common/file_types.cpp:103
+#: src/common/file_types.cpp:105
 #: src/common/mm_io_win.cpp:161
 #: src/common/stereo_mode.cpp:69
 #: src/info/mkvinfo.cpp:689
@@ -11449,14 +11459,14 @@ msgstr "tta_reader：c'tor内でtag_sizeが負になりました。 %1%\n"
 #: src/info/mkvinfo.cpp:748
 #: src/info/mkvinfo.cpp:758
 #: src/info/mkvinfo.cpp:944
-#: src/input/r_matroska.cpp:105
-#: src/input/r_matroska.cpp:2466
+#: src/input/r_matroska.cpp:106
+#: src/input/r_matroska.cpp:2475
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:241
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2450
+#: src/input/r_matroska.cpp:2459
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "未知、フォーマットタグ 0x%|1$04x|"
@@ -11466,7 +11476,7 @@ msgid "unlimited"
 msgstr "無制限"
 
 #: src/info/mkvinfo.cpp:941
-#: src/input/r_matroska.cpp:108
+#: src/input/r_matroska.cpp:109
 #: src/mkvtoolnix-gui/merge/track.cpp:392
 msgid "video"
 msgstr "ビデオ"
