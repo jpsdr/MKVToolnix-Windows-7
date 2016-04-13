@@ -757,7 +757,10 @@ avi_reader_c::read_audio(avi_demuxer_t &demuxer) {
     auto chunk = memory_c::alloc(size);
     size       = AVI_read_audio_chunk(m_avi, reinterpret_cast<char *>(chunk->get_buffer()));
 
-    if (0 >= size)
+    if (0 > size)
+      return flush_packetizer(demuxer.m_ptzr);
+
+    if (!size)
       continue;
 
     PTZR(demuxer.m_ptzr)->process(new packet_t(chunk));
