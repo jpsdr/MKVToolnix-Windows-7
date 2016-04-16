@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pt-BR\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-04-11 22:02+0200\n"
-"PO-Revision-Date: 2016-03-24 15:38+0100\n"
+"PO-Revision-Date: 2016-04-13 22:04+0000\n"
 "Last-Translator: Lucas Miranda <Liddack@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -310,26 +310,24 @@ msgstr ""
 "                           bool for 0.\n"
 
 #: src/merge/mkvmerge.cpp:98
-#, fuzzy
 msgid ""
 "  --generate-chapters <mode>\n"
 "                           Automatically generate chapters according to\n"
 "                           the mode ('when-appending' or 'interval:<duration>').\n"
 msgstr ""
-"  --cue-chapter-name-format <format>\n"
-"                           Padrão para a conversão de folhas CUE\n"
-"                           para nomes de capítulos.\n"
+"  --generate-chapters <mode>\n"
+"                           Gera capítulos automaticamente de acordo com\n"
+"                           o modo ('when-appending' ou 'interval:<duration>').\n"
 
 #: src/merge/mkvmerge.cpp:101
-#, fuzzy
 msgid ""
 "  --generate-chapters-name-template <template>\n"
 "                           Template for newly generated chapter names\n"
 "                           (default: 'Chapter <NUM:2>').\n"
 msgstr ""
-"  --cue-chapter-name-format <format>\n"
-"                           Padrão para a conversão de folhas CUE\n"
-"                           para nomes de capítulos.\n"
+"  --generate-chapters-name-template <template>\n"
+"                           Cria um modelo para o nome de capítulos\n"
+"                           recém-criados (padrão: 'Chapter <NUM:2>').\n"
 
 #: src/merge/mkvmerge.cpp:87
 msgid "  --global-tags <file>     Read global tags from an XML file.\n"
@@ -394,15 +392,14 @@ msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priority>    Estabelece a prioridade na qual o mkvmerge é executado.\n"
 
 #: src/merge/mkvmerge.cpp:231
-#, fuzzy
 msgid ""
 "  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
 msgstr ""
-"  --sub-charset <TID:charset>\n"
-"                           Determina a codificação de caracteres do texto das legendas\n"
-"                           que são lidos para a conversão UTF-8.\n"
+"  --reduce-to-core <TID> Mantém apenas o núcleo das faixas de áudio que\n"
+"                           suportam extensões HD ao invés de copiar as extensões\n"
+"                           juntamente com o núcleo.\n"
 
 #: src/merge/mkvmerge.cpp:107
 msgid ""
@@ -463,6 +460,12 @@ msgid ""
 "                           separate files or append to previous range's file\n"
 "                           if prefixed with '+'.\n"
 msgstr ""
+"  --split parts:start1-end1[,[+]start2-end2,...]\n"
+"                           Salva partes separadas do arquivo determinadas \n"
+"                           pelos timecodes de tempo incial-final,\n"
+"                           em arquivos separados. Para concatenar várias\n"
+"                           partes em um único arquivo, adicione os \n"
+"                           timecodes das partes usando '+' para separá-los.\n"
 
 #: src/merge/mkvmerge.cpp:131
 msgid ""
@@ -476,7 +479,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:147
 msgid "  --split-max-files <n>    Create at most n files.\n"
-msgstr "  --split-max-files <n>    Criar no máximo n arquivos.\n"
+msgstr "  --split-max-files <n> Cria no máximo n arquivos.\n"
 
 #: src/merge/mkvmerge.cpp:260
 msgid ""
