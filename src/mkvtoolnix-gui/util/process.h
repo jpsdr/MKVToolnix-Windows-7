@@ -50,6 +50,7 @@ public:
 };
 
 QString currentUserName();
+QString removeInvalidPathCharacters(QString fileName);
 
 }}}
 
