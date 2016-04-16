@@ -114,7 +114,11 @@ App::fixLockFileHostName(QString const &lockFilePath) {
 
 QString
 App::communicatorSocketName() {
+#if defined(SYS_WINDOWS)
+  return Q("MKVToolNix-GUI-Instance-Communicator");
+#else
   return Q("MKVToolNix-GUI-Instance-Communicator-%1").arg(Util::currentUserName());
+#endif
 }
 
 void
