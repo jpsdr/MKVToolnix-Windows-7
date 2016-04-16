@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QDateTime>
+#include <QDebug>
 #include <QRegularExpression>
 #include <QString>
 #include <QStringList>
@@ -11,6 +12,29 @@
 #include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx { namespace gui { namespace Util {
+
+DeferredRegularExpression::DeferredRegularExpression(QString const &pattern,
+                                                     QRegularExpression::PatternOptions options)
+  : m_pattern{pattern}
+  , m_options{options}
+{
+}
+
+DeferredRegularExpression::~DeferredRegularExpression() {
+}
+
+QRegularExpression &
+DeferredRegularExpression::operator *() {
+  if (!m_re) {
+    m_re.reset(new QRegularExpression{m_pattern, m_options});
+    if (!m_re->isValid())
+      qDebug() << "mtxgui::DeferredRegularExpression: compilation failed for pattern" << m_pattern << "at position" << m_re->patternErrorOffset() << ":" << m_re->errorString();
+  }
+
+  return *m_re;
+}
+
+// ----------------------------------------------------------------------
 
 static QString
 escapeMkvtoolnix(QString const &source) {
