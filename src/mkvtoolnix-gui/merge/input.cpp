@@ -33,6 +33,7 @@
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
+#include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -1381,6 +1382,7 @@ Tab::setOutputFileNameMaybe() {
   while (true) {
     auto suffix          = suggestOutputFileNameExtension();
     auto currentBaseName = QString{"%1%2.%3"}.arg(baseName).arg(idx ? QString{" (%1)"}.arg(idx) : "").arg(suffix);
+    currentBaseName      = Util::removeInvalidPathCharacters(currentBaseName);
     auto outputFileName  = QFileInfo{outputDir, currentBaseName};
 
     if (!settings.m_uniqueOutputFileNames || !outputFileName.exists()) {

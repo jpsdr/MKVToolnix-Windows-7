@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/util/message_box.h"
+#include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -224,13 +225,20 @@ Tab::onTitleChanged(QString newValue) {
 
 void
 Tab::setDestination(QString const &newValue) {
-  m_config.m_destination = newValue;
-  if (!newValue.isEmpty()) {
+  m_config.m_destination = Util::removeInvalidPathCharacters(newValue);
+  if (!m_config.m_destination.isEmpty()) {
     auto &settings           = Util::Settings::get();
     settings.m_lastOutputDir = QFileInfo{ newValue }.absoluteDir();
   }
 
   emit titleChanged();
+
+  if (m_config.m_destination == newValue)
+    return;
+
+  auto newPosition = std::max(ui->output->cursorPosition(), 1) - 1;
+  ui->output->setText(m_config.m_destination);
+  ui->output->setCursorPosition(newPosition);
 }
 
 void
@@ -513,6 +521,8 @@ Tab::onEditAdditionalOptions() {
 
 void
 Tab::setOutputControlValues() {
+  m_config.m_destination = Util::removeInvalidPathCharacters(m_config.m_destination);
+
   ui->title->setText(m_config.m_title);
   ui->output->setText(m_config.m_destination);
   ui->globalTags->setText(m_config.m_globalTags);
