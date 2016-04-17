@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2016-03-29 08:48+0200\n"
-"PO-Revision-Date: 2016-04-01 01:35+0000\n"
+"PO-Revision-Date: 2016-04-16 00:01+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -482,12 +482,12 @@ msgstr "<parameter>options-file</parameter> 파일에서 추가적인 명령행 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:225
 msgid "Several chars can be escaped, e.g. if you need to start a non-comment line with '#'. The rules are described in <link linkend=\"mkvextract.escaping\">the section about escaping text</link>."
-msgstr ""
+msgstr "예를 들어 '#'이 붙은 비주석 줄을 시작할 필요가 있는 경우에는 몇몇 확장 문자를 사용할 수 있습니다. 규칙은 <link linkend=\"mkvextract.escaping\">확장 텍스트에 대한 부분</link>에 기술되어 있습니다."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:230
 msgid "The command line '<command>mkvextract tracks source.mkv --raw 1:destination.raw</command>' could be converted into the following option file:"
-msgstr ""
+msgstr "명령행 '<command>mkvextract tracks 소스.mkv --raw 1:대상.raw</command>'은 다음 옵션 파일로 변환될 수 있습니다:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><programlisting>
 #: doc/man/mkvextract.xml:234
@@ -500,6 +500,12 @@ msgid ""
 "--raw\n"
 "1:destination.raw"
 msgstr ""
+"# 소스.mkv에서 트랙 추출\n"
+"tracks\n"
+"소스.mkv\n"
+"# 트랙을 원시 데이터로 출력\n"
+"--raw\n"
+"1:대상.raw"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:246
@@ -509,7 +515,7 @@ msgstr "트랙 추출 모드"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:249
 msgid "Syntax: <command>mkvextract <option>tracks</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>TID1:dest-filename1</parameter> <optional><parameter>TID2:dest-filename2</parameter> ...</optional></command>"
-msgstr ""
+msgstr "구문: <command>mkvextract <option>tracks</option> <parameter>소스파일명</parameter> <optional><parameter>옵션</parameter></optional> <parameter>TID1:대상파일명1</parameter> <optional><parameter>TID2:대상파일명2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:253

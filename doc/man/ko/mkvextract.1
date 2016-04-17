@@ -146,21 +146,21 @@ download_url)\&.
 \fIoptions\-file\fR
 파일에서 추가적인 명령행 인수를 읽습니다\&. 공백이 아닌 첫번째 문자가 해쉬 표시(\*(Aq#\*(Aq)인 줄은 주석으로 간주하여 무시합니다\&. 줄의 앞과 끝의 공백은 제거될 것입니다\&. 각 줄에는 반드시 한 개의 옵션을 포함해야 합니다\&.
 .sp
-Several chars can be escaped, e\&.g\&. if you need to start a non\-comment line with \*(Aq#\*(Aq\&. The rules are described in
-the section about escaping text\&.
+예를 들어 \*(Aq#\*(Aq이 붙은 비주석 줄을 시작할 필요가 있는 경우에는 몇몇 확장 문자를 사용할 수 있습니다\&. 규칙은
+확장 텍스트에 대한 부분에 기술되어 있습니다\&.
 .sp
-The command line \*(Aq\fBmkvextract tracks source\&.mkv \-\-raw 1:destination\&.raw\fR\*(Aq could be converted into the following option file:
+명령행 \*(Aq\fBmkvextract tracks 소스\&.mkv \-\-raw 1:대상\&.raw\fR\*(Aq은 다음 옵션 파일로 변환될 수 있습니다:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-# Extract a track from source\&.mkv
+# 소스\&.mkv에서 트랙 추출
 tracks
-source\&.mkv
-# Output the track as raw data\&.
+소스\&.mkv
+# 트랙을 원시 데이터로 출력
 \-\-raw
-1:destination\&.raw
+1:대상\&.raw
 .fi
 .if n \{\
 .RE
@@ -168,8 +168,8 @@ source\&.mkv
 .RE
 .SS "트랙 추출 모드"
 .PP
-Syntax:
-\fBmkvextract \fR\fB\fBtracks\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR\fB \fR\fB\fITID1:dest\-filename1\fR\fR\fB \fR\fB[\fITID2:dest\-filename2\fR \&.\&.\&.]\fR
+구문:
+\fBmkvextract \fR\fB\fBtracks\fR\fR\fB \fR\fB\fI소스파일명\fR\fR\fB \fR\fB[\fI옵션\fR]\fR\fB \fR\fB\fITID1:대상파일명1\fR\fR\fB \fR\fB[\fITID2:대상파일명2\fR \&.\&.\&.]\fR
 .PP
 The following command line options are available for each track in the \*(Aqtracks\*(Aq extraction mode\&. They have to appear in front of the track specification (see below) they should be applied to\&.
 .PP
