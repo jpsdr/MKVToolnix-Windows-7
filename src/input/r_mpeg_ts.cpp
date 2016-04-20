@@ -26,6 +26,7 @@
 #include "common/ac3.h"
 #include "common/id_info.h"
 #include "common/iso639.h"
+#include "common/list_utils.h"
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
 #include "common/strings/formatting.h"
@@ -512,7 +513,7 @@ mpeg_ts_track_c::parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_de
               % ttx_type % (static_cast<unsigned int>(buffer[3]) & 0x07) % static_cast<unsigned int>(buffer[4]));
     }
 
-    if (2 == ttx_type) {
+    if (mtx::included_in(ttx_type, 2u, 5u)) {
       parse_iso639_language_from(buffer);
 
       type      = ES_SUBT_TYPE;
