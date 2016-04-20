@@ -1545,7 +1545,11 @@ mpeg_ts_reader_c::create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track)
 void
 mpeg_ts_reader_c::create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track) {
   track->ptzr = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, false, true));
-  track->converter.reset(new teletext_to_srt_packet_converter_c{PTZR(track->ptzr)});
+
+  auto converter = new teletext_to_srt_packet_converter_c{PTZR(track->ptzr)};
+  track->converter.reset(converter);
+
+  converter->override_encoding(track->language);
 
   show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }

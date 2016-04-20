@@ -42,7 +42,7 @@ protected:
   unsigned char *m_buf;
   timestamp_c m_queued_timestamp, m_current_page_timestamp, m_current_packet_timestamp;
   packet_cptr m_queued_packet;
-  boost::optional<int> m_wanted_page;
+  boost::optional<int> m_wanted_page, m_forced_char_map_idx;
   bool m_page_changed{};
 
   ttx_page_data_t m_ttx_page_data;
@@ -57,6 +57,8 @@ public:
 
   virtual bool convert(packet_cptr const &packet) override;
   virtual void flush() override;
+
+  virtual void override_encoding(std::string const &iso639_2_code);
 
 protected:
   void process_ttx_packet();

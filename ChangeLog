@@ -1,5 +1,13 @@
 2016-04-20  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: MPEG TS/teletext bug fix: the language code signaled
+        in the MPEG TS PMT is taken into account when selecting the
+        character encoding to use during decoding of the teletext
+        subtitles, not just the "national character set" stored in the
+        teletext page headers. For example, a German teletext page may
+        signal "national character set" 0 (English) whereas it's actually
+        4 (German). See #1662.
+
         * mkvmerge: teletext decoding bug fix: fixed dropping of certain
         non-ASCII characters in rare circumstances due to wrong filtering
         of already UTF-8 encoded strings.

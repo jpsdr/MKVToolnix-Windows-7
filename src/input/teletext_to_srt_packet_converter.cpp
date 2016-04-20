@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/list_utils.h"
 #include "common/strings/formatting.h"
 #include "input/teletext_to_srt_packet_converter.h"
 #include "merge/generic_packetizer.h"
@@ -118,6 +119,14 @@ teletext_to_srt_packet_converter_c::teletext_to_srt_packet_converter_c(generic_p
 }
 
 void
+teletext_to_srt_packet_converter_c::override_encoding(std::string const &iso639_2_code) {
+  if (mtx::included_in(iso639_2_code, "deu", "ger"))
+    m_forced_char_map_idx.reset(4);
+
+  mxdebug_if(m_debug, boost::format("Overriding encoding for ISO639-2 code %1%; result: %2%\n") % iso639_2_code % (m_forced_char_map_idx ? *m_forced_char_map_idx : -1));
+}
+
+void
 teletext_to_srt_packet_converter_c::setup_character_maps() {
   if (ms_char_maps.size())
     return;
@@ -194,12 +203,13 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
   auto &recoded = m_ttx_page_data.page_buffer[row_number - 1];
   auto prior    = recoded;
 
-  if (m_ttx_page_data.national_set >= ms_char_maps.size()) {
+  if (!m_forced_char_map_idx && (m_ttx_page_data.national_set >= ms_char_maps.size())) {
     recoded = std::string{reinterpret_cast<char const *>(buffer), TTX_PAGE_COL_SIZE};
     return recoded != prior;
   }
 
-  auto &char_map = ms_char_maps[m_ttx_page_data.national_set];
+  auto char_map_idx = m_forced_char_map_idx ? *m_forced_char_map_idx : m_ttx_page_data.national_set;
+  auto &char_map    = ms_char_maps[char_map_idx];
 
   recoded.clear();
 
