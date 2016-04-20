@@ -128,8 +128,11 @@ debugging_c::hexdump(const void *buffer_to_dump,
     ++buffer_idx;
   }
 
-  if ((buffer_idx % 16) != 0)
-    dump << std::string(3u * (16 - (buffer_idx % 16)) + ((buffer_idx % 8) ? 1 : 0), ' ');
+  if ((buffer_idx % 16) != 0) {
+    auto remaining = 16u - (buffer_idx % 16);
+    dump << std::string(3u * remaining + (remaining >= 8 ? 1 : 0), ' ');
+  }
+
   dump << " [" << ascii.str() << "]\n";
 
   debugging_c::output(dump.str());
