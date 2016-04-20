@@ -1,5 +1,9 @@
 2016-04-20  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: teletext decoding bug fix: fixed dropping of certain
+        non-ASCII characters in rare circumstances due to wrong filtering
+        of already UTF-8 encoded strings.
+
         * mkvmerge: MPEG TS reader enhancement: teletext tracks of type 5
         (hearing impaired) are recognized as subtitles, too. Implements
         #1662.

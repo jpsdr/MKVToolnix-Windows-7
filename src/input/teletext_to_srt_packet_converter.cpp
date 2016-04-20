@@ -384,9 +384,6 @@ std::string
 teletext_to_srt_packet_converter_c::page_to_string()
   const {
   auto content = boost::join(m_ttx_page_data.page_buffer, "\n");
-  for (auto &c : content)
-    if ((c < ' ') && (c != '\n'))
-      c = ' ';
 
   return boost::regex_replace(boost::regex_replace(boost::regex_replace(content, m_page_re1, "\\n"), m_page_re2, " "), m_page_re3, "", boost::match_single_line);
 }
