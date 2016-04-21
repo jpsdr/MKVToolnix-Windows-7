@@ -286,7 +286,7 @@ public:
   bool probed_ok;
   int ptzr;                         // the actual packetizer instance
 
-  timestamp_c m_timecode, m_previous_timecode, m_previous_valid_timecode, m_timecode_wrap_add;
+  timestamp_c m_timestamp, m_previous_timestamp, m_previous_valid_timestamp, m_timestamp_wrap_add;
 
   // video related parameters
   bool v_interlaced;
@@ -299,7 +299,7 @@ public:
   mtx::dts::header_t a_dts_header;
   aac::frame_c m_aac_frame;
 
-  bool m_apply_dts_timecode_fix, m_use_dts, m_timecodes_wrapped, m_truehd_found_truehd, m_truehd_found_ac3;
+  bool m_apply_dts_timestamp_fix, m_use_dts, m_timestamps_wrapped, m_truehd_found_truehd, m_truehd_found_ac3;
   mpeg_ts_track_ptr m_coupled_track;
 
   // general track parameters
@@ -317,7 +317,7 @@ public:
 
   packet_converter_cptr converter;
 
-  bool m_debug_delivery, m_debug_timecode_wrapping;
+  bool m_debug_delivery, m_debug_timestamp_wrapping;
   debugging_option_c m_debug_headers;
 
   mpeg_ts_track_c(mpeg_ts_reader_c &p_reader)
@@ -331,7 +331,7 @@ public:
     , continuity_counter(0)
     , probed_ok(false)
     , ptzr(-1)
-    , m_timecode_wrap_add{timestamp_c::ns(0)}
+    , m_timestamp_wrap_add{timestamp_c::ns(0)}
     , v_interlaced(false)
     , v_version(0)
     , v_width(0)
@@ -344,14 +344,14 @@ public:
     , a_sample_rate(0)
     , a_bits_per_sample(0)
     , a_bsid(0)
-    , m_apply_dts_timecode_fix(false)
+    , m_apply_dts_timestamp_fix(false)
     , m_use_dts(false)
-    , m_timecodes_wrapped{false}
+    , m_timestamps_wrapped{false}
     , m_truehd_found_truehd{}
     , m_truehd_found_ac3{}
     , skip_packet_data_bytes{}
     , m_debug_delivery{}
-    , m_debug_timecode_wrapping{}
+    , m_debug_timestamp_wrapping{}
     , m_debug_headers{"mpeg_ts|mpeg_ts_headers"}
   {
   }
@@ -379,9 +379,9 @@ public:
 
   void set_pid(uint16_t new_pid);
 
-  void handle_timecode_wrap(timestamp_c &pts, timestamp_c &dts);
-  bool detect_timecode_wrap(timestamp_c &timecode);
-  void adjust_timecode_for_wrap(timestamp_c &timecode);
+  void handle_timestamp_wrap(timestamp_c &pts, timestamp_c &dts);
+  bool detect_timestamp_wrap(timestamp_c &timestamp);
+  void adjust_timestamp_for_wrap(timestamp_c &timestamp);
 
   void process(packet_cptr const &packet);
 
@@ -393,7 +393,7 @@ protected:
   bool PAT_found, PMT_found;
   int16_t PMT_pid;
   int es_to_process;
-  timestamp_c m_global_timecode_offset, m_stream_timecode;
+  timestamp_c m_global_timestamp_offset, m_stream_timestamp;
 
   bool m_probing;
 
@@ -402,9 +402,9 @@ protected:
   std::vector<mpeg_ts_track_ptr> tracks;
   std::map<generic_packetizer_c *, mpeg_ts_track_ptr> m_ptzr_to_track_map;
 
-  std::vector<timestamp_c> m_chapter_timecodes;
+  std::vector<timestamp_c> m_chapter_timestamps;
 
-  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timecode_wrapping, m_debug_clpi;
+  debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi;
 
   unsigned int m_detected_packet_size, m_num_pat_crc_errors, m_num_pmt_crc_errors;
   bool m_validate_pat_crc, m_validate_pmt_crc;
@@ -431,7 +431,7 @@ public:
 
   virtual bool parse_packet(unsigned char *buf);
 
-  static timestamp_c read_timecode(unsigned char *p);
+  static timestamp_c read_timestamp(unsigned char *p);
   static int detect_packet_size(mm_io_c *in, uint64_t size);
 
 private:

@@ -65,31 +65,31 @@ mpeg_ts_track_c::process(packet_cptr const &packet) {
 
 void
 mpeg_ts_track_c::send_to_packetizer() {
-  auto timecode_to_use = !m_timecode.valid()                                             ? timestamp_c{}
-                       : reader.m_dont_use_audio_pts && (ES_AUDIO_TYPE == type)          ? timestamp_c{}
-                       : m_apply_dts_timecode_fix && (m_previous_timecode == m_timecode) ? timestamp_c{}
-                       :                                                                   std::max(m_timecode, reader.m_global_timecode_offset);
+  auto timestamp_to_use   = !m_timestamp.valid()                                               ? timestamp_c{}
+                          : reader.m_dont_use_audio_pts && (ES_AUDIO_TYPE == type)             ? timestamp_c{}
+                          : m_apply_dts_timestamp_fix && (m_previous_timestamp == m_timestamp) ? timestamp_c{}
+                          :                                                                      std::max(m_timestamp, reader.m_global_timestamp_offset);
 
-  auto timecode_to_check = timecode_to_use.valid() ? timecode_to_use : reader.m_stream_timecode;
-  auto const &min        = reader.get_timecode_restriction_min();
-  auto const &max        = reader.get_timecode_restriction_max();
-  auto use_packet        = ptzr != -1;
+  auto timestamp_to_check = timestamp_to_use.valid() ? timestamp_to_use : reader.m_stream_timestamp;
+  auto const &min         = reader.get_timecode_restriction_min();
+  auto const &max         = reader.get_timecode_restriction_max();
+  auto use_packet         = ptzr != -1;
 
-  if (   (min.valid() && (timecode_to_check < min))
-      || (max.valid() && (timecode_to_check > max)))
+  if (   (min.valid() && (timestamp_to_check < min))
+      || (max.valid() && (timestamp_to_check > max)))
     use_packet = false;
 
-  if (timecode_to_use.valid()) {
-    reader.m_stream_timecode  = timecode_to_use;
-    timecode_to_use          -= std::max(reader.m_global_timecode_offset, min.valid() ? min : timestamp_c::ns(0));
+  if (timestamp_to_use.valid()) {
+    reader.m_stream_timestamp  = timestamp_to_use;
+    timestamp_to_use          -= std::max(reader.m_global_timestamp_offset, min.valid() ? min : timestamp_c::ns(0));
   }
 
-  mxdebug_if(m_debug_delivery, boost::format("mpeg_ts_track_c::send_to_packetizer: PID %1% expected %2% actual %3% timecode_to_use %4% m_previous_timecode %5%\n")
-             % pid % pes_payload_size % pes_payload->get_size() % timecode_to_use % m_previous_timecode);
+  mxdebug_if(m_debug_delivery, boost::format("mpeg_ts_track_c::send_to_packetizer: PID %1% expected %2% actual %3% timestamp_to_use %4% m_previous_timestamp %5%\n")
+             % pid % pes_payload_size % pes_payload->get_size() % timestamp_to_use % m_previous_timestamp);
 
   if (use_packet) {
     auto bytes_to_skip = std::min<size_t>(pes_payload->get_size(), skip_packet_data_bytes);
-    process(std::make_shared<packet_t>(memory_c::clone(pes_payload->get_buffer() + bytes_to_skip, pes_payload->get_size() - bytes_to_skip), timecode_to_use.to_ns(-1)));
+    process(std::make_shared<packet_t>(memory_c::clone(pes_payload->get_buffer() + bytes_to_skip, pes_payload->get_size() - bytes_to_skip), timestamp_to_use.to_ns(-1)));
   }
 
   pes_payload->remove(pes_payload->get_size());
@@ -97,8 +97,8 @@ mpeg_ts_track_c::send_to_packetizer() {
   data_ready                         = false;
   pes_payload_size                   = 0;
   reader.m_packet_sent_to_packetizer = true;
-  m_previous_timecode                = m_timecode;
-  m_timecode.reset();
+  m_previous_timestamp               = m_timestamp;
+  m_timestamp.reset();
 }
 
 void
@@ -303,9 +303,9 @@ mpeg_ts_track_c::new_stream_a_dts() {
   if (-1 == mtx::dts::find_header(m_probe_data->get_buffer(), m_probe_data->get_size(), a_dts_header))
     return FILE_STATUS_MOREDATA;
 
-  m_apply_dts_timecode_fix = true;
-  a_channels               = a_dts_header.get_total_num_audio_channels();
-  a_sample_rate            = a_dts_header.core_sampling_frequency;
+  m_apply_dts_timestamp_fix = true;
+  a_channels                = a_dts_header.get_total_num_audio_channels();
+  a_sample_rate             = a_dts_header.core_sampling_frequency;
 
   codec.set_specialization(a_dts_header.get_codec_specialization());
 
@@ -394,67 +394,69 @@ mpeg_ts_track_c::set_pid(uint16_t new_pid) {
                    || (   debugging_c::requested("mpeg_ts_delivery", &arg)
                       && (arg.empty() || (arg == to_string(pid))));
 
-  m_debug_timecode_wrapping = debugging_c::requested("mpeg_ts")
-                            || (   debugging_c::requested("mpeg_ts_timecode_wrapping", &arg)
+  m_debug_timestamp_wrapping = debugging_c::requested("mpeg_ts")
+                            || (   debugging_c::requested("mpeg_ts_timestamp_wrapping", &arg)
                                && (arg.empty() || (arg == to_string(pid))));
 }
 
 bool
-mpeg_ts_track_c::detect_timecode_wrap(timestamp_c &timecode) {
+mpeg_ts_track_c::detect_timestamp_wrap(timestamp_c &timestamp) {
   static auto const s_wrap_limit = timestamp_c::mpeg(1 << 30);
 
-  if (!timecode.valid() || !m_previous_valid_timecode.valid() || ((timecode - m_previous_valid_timecode).abs() < s_wrap_limit))
+  if (   !timestamp.valid()
+      || !m_previous_valid_timestamp.valid()
+      || ((timestamp - m_previous_valid_timestamp).abs() < s_wrap_limit))
     return false;
   return true;
 }
 
 void
-mpeg_ts_track_c::adjust_timecode_for_wrap(timestamp_c &timecode) {
+mpeg_ts_track_c::adjust_timestamp_for_wrap(timestamp_c &timestamp) {
   static auto const s_wrap_limit = timestamp_c::mpeg(1ll << 30);
   static auto const s_bad_limit  = timestamp_c::m(5);
 
-  if (!timecode.valid())
+  if (!timestamp.valid())
     return;
 
-  if (timecode < s_wrap_limit)
-    timecode += m_timecode_wrap_add;
+  if (timestamp < s_wrap_limit)
+    timestamp += m_timestamp_wrap_add;
 
   // For subtitle tracks only detect jumps backwards in time, not
   // forward. Subtitles often have holes larger than five minutes
   // between the entries.
-  if (   ((timecode < m_previous_valid_timecode) || (ES_SUBT_TYPE != type))
-      && ((timecode - m_previous_valid_timecode).abs() >= s_bad_limit))
-    timecode = timestamp_c{};
+  if (   ((timestamp < m_previous_valid_timestamp) || (ES_SUBT_TYPE != type))
+      && ((timestamp - m_previous_valid_timestamp).abs() >= s_bad_limit))
+    timestamp = timestamp_c{};
 }
 
 void
-mpeg_ts_track_c::handle_timecode_wrap(timestamp_c &pts,
+mpeg_ts_track_c::handle_timestamp_wrap(timestamp_c &pts,
                                       timestamp_c &dts) {
   static auto const s_wrap_add    = timestamp_c::mpeg(1ll << 33);
   static auto const s_wrap_limit  = timestamp_c::mpeg(1ll << 30);
   static auto const s_reset_limit = timestamp_c::h(1);
 
-  if (!m_timecodes_wrapped) {
-    m_timecodes_wrapped = detect_timecode_wrap(pts) || detect_timecode_wrap(dts);
-    if (m_timecodes_wrapped) {
-      m_timecode_wrap_add += s_wrap_add;
-      mxdebug_if(m_debug_timecode_wrapping,
-                 boost::format("mpeg_ts_track_c::handle_timecode_wrap: Timecode wrapping detected for PID %1% pts %2% dts %3% previous_valid %4% global_offset %5% new wrap_add %6%\n")
-                 % pid % pts % dts % m_previous_valid_timecode % reader.m_global_timecode_offset % m_timecode_wrap_add);
+  if (!m_timestamps_wrapped) {
+    m_timestamps_wrapped = detect_timestamp_wrap(pts) || detect_timestamp_wrap(dts);
+    if (m_timestamps_wrapped) {
+      m_timestamp_wrap_add += s_wrap_add;
+      mxdebug_if(m_debug_timestamp_wrapping,
+                 boost::format("mpeg_ts_track_c::handle_timestamp_wrap: Timestamp wrapping detected for PID %1% pts %2% dts %3% previous_valid %4% global_offset %5% new wrap_add %6%\n")
+                 % pid % pts % dts % m_previous_valid_timestamp % reader.m_global_timestamp_offset % m_timestamp_wrap_add);
 
     }
 
   } else if (pts.valid() && (pts < s_wrap_limit) && (pts > s_reset_limit)) {
-    m_timecodes_wrapped = false;
-    mxdebug_if(m_debug_timecode_wrapping,
-               boost::format("mpeg_ts_track_c::handle_timecode_wrap: Timecode wrapping reset for PID %1% pts %2% dts %3% previous_valid %4% global_offset %5% current wrap_add %6%\n")
-               % pid % pts % dts % m_previous_valid_timecode % reader.m_global_timecode_offset % m_timecode_wrap_add);
+    m_timestamps_wrapped = false;
+    mxdebug_if(m_debug_timestamp_wrapping,
+               boost::format("mpeg_ts_track_c::handle_timestamp_wrap: Timestamp wrapping reset for PID %1% pts %2% dts %3% previous_valid %4% global_offset %5% current wrap_add %6%\n")
+               % pid % pts % dts % m_previous_valid_timestamp % reader.m_global_timestamp_offset % m_timestamp_wrap_add);
   }
 
-  adjust_timecode_for_wrap(pts);
-  adjust_timecode_for_wrap(dts);
+  adjust_timestamp_for_wrap(pts);
+  adjust_timestamp_for_wrap(dts);
 
-  // mxinfo(boost::format("pid %5% PTS before %1% now %2% wrapped %3% reset prevvalid %4% diff %6%\n") % before % pts % m_timecodes_wrapped % m_previous_valid_timecode % pid % (pts - m_previous_valid_timecode));
+  // mxinfo(boost::format("pid %5% PTS before %1% now %2% wrapped %3% reset prevvalid %4% diff %6%\n") % before % pts % m_timestamps_wrapped % m_previous_valid_timestamp % pid % (pts - m_previous_valid_timestamp));
 }
 
 bool
@@ -641,19 +643,19 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
   , PMT_found{}
   , PMT_pid(-1)
   , es_to_process{}
-  , m_global_timecode_offset{}
-  , m_stream_timecode{timestamp_c::ns(0)}
+  , m_global_timestamp_offset{}
+  , m_stream_timestamp{timestamp_c::ns(0)}
   , m_probing{true}
   , file_done{}
   , m_packet_sent_to_packetizer{}
-  , m_dont_use_audio_pts{     "mpeg_ts|mpeg_ts_dont_use_audio_pts"}
-  , m_debug_resync{           "mpeg_ts|mpeg_ts_resync"}
-  , m_debug_pat_pmt{          "mpeg_ts|mpeg_ts_pat|mpeg_ts_pmt|mpeg_ts_headers"}
-  , m_debug_headers{          "mpeg_ts|mpeg_ts_headers"}
-  , m_debug_packet{           "mpeg_ts|mpeg_ts_packet"}
-  , m_debug_aac{              "mpeg_ts|mpeg_aac"}
-  , m_debug_timecode_wrapping{"mpeg_ts|mpeg_ts_timecode_wrapping"}
-  , m_debug_clpi{             "clpi"}
+  , m_dont_use_audio_pts{      "mpeg_ts|mpeg_ts_dont_use_audio_pts"}
+  , m_debug_resync{            "mpeg_ts|mpeg_ts_resync"}
+  , m_debug_pat_pmt{           "mpeg_ts|mpeg_ts_pat|mpeg_ts_pmt|mpeg_ts_headers"}
+  , m_debug_headers{           "mpeg_ts|mpeg_ts_headers"}
+  , m_debug_packet{            "mpeg_ts|mpeg_ts_packet"}
+  , m_debug_aac{               "mpeg_ts|mpeg_aac"}
+  , m_debug_timestamp_wrapping{"mpeg_ts|mpeg_ts_timestamp_wrapping"}
+  , m_debug_clpi{              "clpi"}
   , m_detected_packet_size{}
   , m_num_pat_crc_errors{}
   , m_num_pmt_crc_errors{}
@@ -662,7 +664,7 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
 {
   auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
   if (mpls_in)
-    m_chapter_timecodes = mpls_in->get_chapters();
+    m_chapter_timestamps = mpls_in->get_chapters();
 }
 
 void
@@ -741,7 +743,7 @@ mpeg_ts_reader_c::read_headers() {
     track->processed        = false;
     track->data_ready       = false;
     track->pes_payload_size = 0;
-    // track->timecode_offset = -1;
+    // track->timestamp_offset = -1;
 
     if (track->m_coupled_track)
       track->m_coupled_track->language = track->language;
@@ -761,19 +763,19 @@ mpeg_ts_reader_c::read_headers() {
 
 void
 mpeg_ts_reader_c::process_chapter_entries() {
-  if (m_chapter_timecodes.empty() || m_ti.m_no_chapters)
+  if (m_chapter_timestamps.empty() || m_ti.m_no_chapters)
     return;
 
-  std::stable_sort(m_chapter_timecodes.begin(), m_chapter_timecodes.end());
+  std::stable_sort(m_chapter_timestamps.begin(), m_chapter_timestamps.end());
 
   mm_mem_io_c out{nullptr, 0, 1000};
   out.set_file_name(m_ti.m_fname);
   out.write_bom("UTF-8");
 
   size_t idx = 0;
-  for (auto &timecode : m_chapter_timecodes) {
+  for (auto &timestamp : m_chapter_timestamps) {
     ++idx;
-    auto ms = timecode.to_ms();
+    auto ms = timestamp.to_ms();
     out.puts(boost::format("CHAPTER%|1$02d|=%|2$02d|:%|3$02d|:%|4$02d|.%|5$03d|\n"
                            "CHAPTER%|1$02d|NAME=Chapter %1%\n")
              % idx
@@ -841,8 +843,8 @@ mpeg_ts_reader_c::identify() {
     id_result_track(i, type, track->codec.get_name(), info.get());
   }
 
-  if (!m_chapter_timecodes.empty())
-    id_result_chapters(m_chapter_timecodes.size());
+  if (!m_chapter_timestamps.empty())
+    id_result_chapters(m_chapter_timestamps.size());
 }
 
 int
@@ -1145,12 +1147,12 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
 }
 
 timestamp_c
-mpeg_ts_reader_c::read_timecode(unsigned char *p) {
-  int64_t mpeg_timecode  =  static_cast<int64_t>(             ( p[0]   >> 1) & 0x07) << 30;
-  mpeg_timecode         |= (static_cast<int64_t>(get_uint16_be(&p[1])) >> 1)         << 15;
-  mpeg_timecode         |=  static_cast<int64_t>(get_uint16_be(&p[3]))               >>  1;
+mpeg_ts_reader_c::read_timestamp(unsigned char *p) {
+  int64_t mpeg_timestamp  =  static_cast<int64_t>(             ( p[0]   >> 1) & 0x07) << 30;
+  mpeg_timestamp         |= (static_cast<int64_t>(get_uint16_be(&p[1])) >> 1)         << 15;
+  mpeg_timestamp         |=  static_cast<int64_t>(get_uint16_be(&p[3]))               >>  1;
 
-  return timestamp_c::mpeg(mpeg_timecode);
+  return timestamp_c::mpeg(mpeg_timestamp);
 }
 
 bool
@@ -1375,27 +1377,27 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
 
     timestamp_c pts, dts;
     if ((pes_data->get_pts_dts_flags() & 0x02) == 0x02) { // 10 and 11 mean PTS is present
-      pts = read_timecode(&pes_data->pts_dts);
+      pts = read_timestamp(&pes_data->pts_dts);
       dts = pts;
     }
 
     if ((pes_data->get_pts_dts_flags() & 0x01) == 0x01)   // 01 and 11 mean DTS is present
-      dts = read_timecode(&pes_data->pts_dts + 5);
+      dts = read_timestamp(&pes_data->pts_dts + 5);
 
     if (!track->m_use_dts)
       dts = pts;
 
-    track->handle_timecode_wrap(pts, dts);
+    track->handle_timestamp_wrap(pts, dts);
 
     if (pts.valid()) {
-      track->m_previous_valid_timecode = pts;
+      track->m_previous_valid_timestamp = pts;
 
-      if (!m_global_timecode_offset.valid() || (dts < m_global_timecode_offset))
-        m_global_timecode_offset = dts;
+      if (!m_global_timestamp_offset.valid() || (dts < m_global_timestamp_offset))
+        m_global_timestamp_offset = dts;
 
-      track->m_timecode = dts;
+      track->m_timestamp = dts;
 
-      mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PID %2% PTS/DTS found: %1%\n") % track->m_timecode % track->pid);
+      mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PID %2% PTS/DTS found: %1%\n") % track->m_timestamp % track->pid);
     }
   }
 
