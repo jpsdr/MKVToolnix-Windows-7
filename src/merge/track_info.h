@@ -98,6 +98,126 @@ struct pixel_crop_t {
   }
 };
 
+struct chroma_subsample_t {
+  int hori, vert;
+
+  chroma_subsample_t()
+  : hori{-1}
+  , vert{-1}
+  {
+  }
+  chroma_subsample_t(int p_hori, int p_vert)
+  : hori{p_hori}
+  , vert{p_vert}
+  {
+  }
+  chroma_subsample_t(std::vector<int> data)
+  : hori{data[0]}
+  , vert{data[1]}
+  {
+  }
+  static int const num_properties = 2;
+};
+
+struct cb_subsample_t {
+  int hori, vert;
+
+  cb_subsample_t()
+  : hori{-1}
+  , vert{-1}
+  {
+  }
+  cb_subsample_t(int p_hori, int p_vert)
+  : hori{p_hori}
+  , vert{p_vert}
+  {
+  }
+  cb_subsample_t(std::vector<int> data)
+  : hori{data[0]}
+  , vert{data[1]}
+  {
+  }
+  static int const num_properties = 2;
+};
+
+
+struct chroma_siting_t {
+  int hori, vert;
+
+  chroma_siting_t()
+  : hori{-1}
+  , vert{-1}
+  {
+  }
+  chroma_siting_t(int p_hori, int p_vert)
+  : hori{p_hori}
+  , vert{p_vert}
+  {
+  }
+  chroma_siting_t(std::vector<int> data)
+  : hori{data[0]}
+  , vert{data[1]}
+  {
+  }
+  static int const num_properties = 2;
+};
+
+struct chroma_coordinates_t {
+  float red_x, red_y, green_x, green_y, blue_x, blue_y;
+
+  chroma_coordinates_t()
+  : red_x{-1.0}
+  , red_y{-1.0}
+  , green_x{-1.0}
+  , green_y{-1.0}
+  , blue_x{-1.0}
+  , blue_y{-1.0}
+  {
+  }
+  chroma_coordinates_t(float p_red_x,   float p_red_y,
+                       float p_green_x, float p_green_y,
+                       float p_blue_x,  float p_blue_y)
+  : red_x{p_red_x}
+  , red_y{p_red_y}
+  , green_x{p_green_x}
+  , green_y{p_green_y}
+  , blue_x{p_blue_x}
+  , blue_y{p_blue_y}
+  {
+  }
+  chroma_coordinates_t(std::vector<float> data)
+  : red_x{data[0]}
+  , red_y{data[1]}
+  , green_x{data[2]}
+  , green_y{data[3]}
+  , blue_x{data[4]}
+  , blue_y{data[5]}
+  {
+  }
+  static int const num_properties = 6;
+};
+
+struct white_colour_coordinates_t {
+  float x, y;
+
+  white_colour_coordinates_t()
+  : x{-1.0}
+  , y{-1.0}
+  {
+  }
+  white_colour_coordinates_t(float p_x, float p_y)
+  : x{p_x}
+  , y{p_y}
+  {
+  }
+  white_colour_coordinates_t(std::vector<float> data)
+  : x{data[0]}
+  , y{data[1]}
+  {
+  }
+  static int const num_properties = 2;
+};
+
 enum attach_mode_e {
   ATTACH_MODE_SKIP,
   ATTACH_MODE_TO_FIRST_FILE,
@@ -175,6 +295,48 @@ public:
 
   std::map<int64_t, stereo_mode_c::mode> m_stereo_mode_list; // As given on the command line
   option_with_source_c<stereo_mode_c::mode> m_stereo_mode;   // For this very track
+
+  std::map<int64_t, int> m_colour_matrix_list; // As given on the command line
+  option_with_source_c<int> m_colour_matrix; // For this very track
+
+  std::map<int64_t, int> m_bits_per_channel_list; // As given on the command line
+  option_with_source_c<int> m_bits_per_channel; // For this very track
+
+  std::map<int64_t, chroma_subsample_t> m_chroma_subsample_list; // As given on the command line
+  option_with_source_c<chroma_subsample_t> m_chroma_subsample; // For this very track
+
+  std::map<int64_t, cb_subsample_t> m_cb_subsample_list; // As given on the command line
+  option_with_source_c<cb_subsample_t> m_cb_subsample; // For this very track
+
+  std::map<int64_t, chroma_siting_t> m_chroma_siting_list; // As given on the command line
+  option_with_source_c<chroma_siting_t> m_chroma_siting; // For this very track
+
+  std::map<int64_t, int> m_colour_range_list; // As given on the command line
+  option_with_source_c<int> m_colour_range; // For this very track
+
+  std::map<int64_t, int> m_colour_transfer_list; // As given on the command line
+  option_with_source_c<int> m_colour_transfer; // For this very track
+
+  std::map<int64_t, int> m_colour_primaries_list; // As given on the command line
+  option_with_source_c<int> m_colour_primaries; // For this very track
+
+  std::map<int64_t, int> m_max_cll_list; // As given on the command line
+  option_with_source_c<int> m_max_cll; // For this very track
+
+  std::map<int64_t, int> m_max_fall_list; // As given on the command line
+  option_with_source_c<int> m_max_fall; // For this very track
+
+  std::map<int64_t, chroma_coordinates_t> m_chroma_coordinates_list; // As given on the command line
+  option_with_source_c<chroma_coordinates_t> m_chroma_coordinates; // For this very track
+
+  std::map<int64_t, white_colour_coordinates_t> m_white_coordinates_list; // As given on the command line
+  option_with_source_c<white_colour_coordinates_t> m_white_coordinates; // For this very track
+
+  std::map<int64_t, float> m_max_luminance_list; // As given on the command line
+  option_with_source_c<float> m_max_luminance; // For this very track
+
+  std::map<int64_t, float> m_min_luminance_list; // As given on the command line
+  option_with_source_c<float> m_min_luminance; // For this very track
 
   std::map<int64_t, int64_t> m_default_durations; // As given on the command line
   std::map<int64_t, int> m_max_blockadd_ids; // As given on the command line

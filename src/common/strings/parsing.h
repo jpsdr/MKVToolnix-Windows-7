@@ -22,6 +22,7 @@
 
 #include "common/at_scope_exit.h"
 #include "common/math.h"
+#include "common/strings/editing.h"
 #include "common/timestamp.h"
 
 namespace mtx { namespace conversion {
@@ -87,6 +88,52 @@ parse_number(StrT const &string,
     return false;
 
   value = boost::rational_cast<float>(rational_value);
+
+  return true;
+}
+
+template <typename StructType, typename DataType>
+bool
+parse_property_to_struct(std::string const &s,
+                         std::map<int64_t, StructType> &property_list) {
+  int64_t id = 0;
+  auto v     = split(s, ":");
+
+  if ((v.size() != 2) || !parse_number(v[0], id))
+    return false;
+
+  v = split(v[1], ",");
+  if (v.size() != StructType::num_properties)
+    return false;
+
+  std::vector<DataType> data;
+  for (int i = 0; i < StructType::num_properties; ++i) {
+    DataType value;
+    if (!parse_number(v[i], value))
+      return false;
+    data.push_back(value);
+  }
+
+  property_list[id] = StructType(data);
+
+  return true;
+}
+
+template <typename DataType>
+bool
+parse_property_to_value(std::string const &s,
+                        std::map<int64_t, DataType> &property_list) {
+  int64_t id = 0;
+  auto v     = split(s, ":");
+
+  if ((v.size() != 2) || !parse_number(v[0], id))
+    return false;
+
+  DataType value;
+  if (!parse_number(v[1], value))
+    return false;
+
+  property_list[id] = value;
 
   return true;
 }

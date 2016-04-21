@@ -205,10 +205,80 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   else if (mtx::includes(m_ti.m_all_fourccs, -1))
     m_ti.m_fourcc = m_ti.m_all_fourccs[-1];
 
-  // Let's see if the user has specified a FourCC for this track.
+  // Let's see if the user has specified cropping parameters for this track.
   i = LOOKUP_TRACK_ID(m_ti.m_pixel_crop_list);
   if (-2 != i)
     set_video_pixel_cropping(m_ti.m_pixel_crop_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified colour matrix for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_colour_matrix_list);
+  if (-2 != i)
+    set_video_colour_matrix(m_ti.m_colour_matrix_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified bits per channel parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_bits_per_channel_list);
+  if (-2 != i)
+    set_video_bits_per_channel(m_ti.m_bits_per_channel_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified chroma subsampling parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_chroma_subsample_list);
+  if (-2 != i)
+    set_video_chroma_subsample(m_ti.m_chroma_subsample_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified Cb subsampling parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_cb_subsample_list);
+  if (-2 != i)
+    set_video_cb_subsample(m_ti.m_cb_subsample_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified chroma siting parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_chroma_siting_list);
+  if (-2 != i)
+    set_video_chroma_siting(m_ti.m_chroma_siting_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified colour range parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_colour_range_list);
+  if (-2 != i)
+    set_video_colour_range(m_ti.m_colour_range_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified colour transfer characteristics parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_colour_transfer_list);
+  if (-2 != i)
+    set_video_colour_transfer_character(m_ti.m_colour_transfer_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified colour primaries parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_colour_primaries_list);
+  if (-2 != i)
+    set_video_colour_primaries(m_ti.m_colour_primaries_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified max content light parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_max_cll_list);
+  if (-2 != i)
+    set_video_max_cll(m_ti.m_max_cll_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified max frame light parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_max_fall_list);
+  if (-2 != i)
+    set_video_max_fall(m_ti.m_max_fall_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified chromaticity coordinates parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_chroma_coordinates_list);
+  if (-2 != i)
+    set_video_chroma_coordinates(m_ti.m_chroma_coordinates_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified white colour coordinates parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_white_coordinates_list);
+  if (-2 != i)
+    set_video_white_colour_coordinates(m_ti.m_white_coordinates_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified max luminance parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_max_luminance_list);
+  if (-2 != i)
+    set_video_max_luminance(m_ti.m_max_luminance_list[i], OPTION_SOURCE_COMMAND_LINE);
+
+  // Let's see if the user has specified min luminance parameter for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_min_luminance_list);
+  if (-2 != i)
+    set_video_min_luminance(m_ti.m_min_luminance_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified a stereo mode for this track.
   i = LOOKUP_TRACK_ID(m_ti.m_stereo_mode_list);
@@ -574,6 +644,203 @@ generic_packetizer_c::set_video_pixel_cropping(int left,
 }
 
 void
+generic_packetizer_c::set_video_colour_matrix(int matrix_index,
+                                              option_source_e source) {
+  m_ti.m_colour_matrix.set(matrix_index, source);
+  if (   m_track_entry
+      && (matrix_index >= 0)
+      && (matrix_index <= 10)) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    GetChild<KaxVideoColourMatrix>(color).SetValue(m_ti.m_colour_matrix.get());
+  }
+}
+
+void
+generic_packetizer_c::set_video_bits_per_channel(int num_bits,
+                                                 option_source_e source) {
+  m_ti.m_bits_per_channel.set(num_bits, source);
+  if (m_track_entry && (num_bits >= 0)) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    GetChild<KaxVideoBitsPerChannel>(color).SetValue(m_ti.m_bits_per_channel.get());
+  }
+}
+
+void
+generic_packetizer_c::set_video_chroma_subsample(const chroma_subsample_t &subsample,
+                                                 option_source_e source) {
+  m_ti.m_chroma_subsample.set(chroma_subsample_t(subsample.hori, subsample.vert), source);
+  if (   m_track_entry
+      && (   (subsample.hori >= 0)
+          || (subsample.vert >= 0))) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    if (subsample.hori >= 0)
+      GetChild<KaxVideoChromaSubsampHorz>(color).SetValue(subsample.hori);
+    if (subsample.vert >= 0)
+      GetChild<KaxVideoChromaSubsampVert>(color).SetValue(subsample.vert);
+  }
+}
+
+void
+generic_packetizer_c::set_video_cb_subsample(const cb_subsample_t &subsample,
+                                             option_source_e source) {
+  m_ti.m_cb_subsample.set(cb_subsample_t(subsample.hori, subsample.vert), source);
+  if (   m_track_entry
+      && (   (subsample.hori >= 0)
+          || (subsample.vert >= 0))) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    if (subsample.hori >= 0)
+      GetChild<KaxVideoCbSubsampHorz>(color).SetValue(subsample.hori);
+    if (subsample.vert >= 0)
+      GetChild<KaxVideoCbSubsampVert>(color).SetValue(subsample.vert);
+  }
+}
+
+void
+generic_packetizer_c::set_video_chroma_siting(const chroma_siting_t &siting,
+                                              option_source_e source) {
+  m_ti.m_chroma_siting.set(chroma_siting_t(siting.hori, siting.vert), source);
+  if (   m_track_entry
+      && (   ((siting.hori >= 0) && (siting.hori <= 2))
+          || ((siting.vert >= 0) && (siting.hori <= 2)))) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    if ((siting.hori >= 0) && (siting.hori <= 2))
+      GetChild<KaxVideoChromaSitHorz>(color).SetValue(siting.hori);
+    if ((siting.vert >= 0) && (siting.hori <= 2))
+      GetChild<KaxVideoChromaSitVert>(color).SetValue(siting.vert);
+  }
+}
+
+void
+generic_packetizer_c::set_video_colour_range(int range,
+                                             option_source_e source) {
+  m_ti.m_colour_range.set(range, source);
+  if (m_track_entry && (range >= 0) && (range <= 3)) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    GetChild<KaxVideoColourRange>(color).SetValue(range);
+  }
+}
+
+void
+generic_packetizer_c::set_video_colour_transfer_character(int transfer_index,
+                                                          option_source_e source) {
+  m_ti.m_colour_transfer.set(transfer_index, source);
+  if (m_track_entry && (transfer_index >= 0) && (transfer_index <= 18)) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    GetChild<KaxVideoColourTransferCharacter>(color).SetValue(transfer_index);
+  }
+}
+
+void
+generic_packetizer_c::set_video_colour_primaries(int primary_index,
+                                                 option_source_e source) {
+  m_ti.m_colour_primaries.set(primary_index, source);
+  if (     m_track_entry
+      && (primary_index >= 0)
+      && ((primary_index <= 10) || (primary_index == 22))) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    GetChild<KaxVideoColourPrimaries>(color).SetValue(primary_index);
+  }
+}
+
+void
+generic_packetizer_c::set_video_max_cll(int max_cll,
+                                        option_source_e source) {
+  m_ti.m_max_cll.set(max_cll, source);
+  if (m_track_entry && (max_cll >= 0)) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    GetChild<KaxVideoColourMaxCLL>(color).SetValue(max_cll);
+  }
+}
+
+void
+generic_packetizer_c::set_video_max_fall(int max_fall,
+                                         option_source_e source) {
+  m_ti.m_max_fall.set(max_fall, source);
+  if (m_track_entry && (max_fall >= 0)) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    GetChild<KaxVideoColourMaxFALL>(color).SetValue(max_fall);
+  }
+}
+
+void
+generic_packetizer_c::set_video_chroma_coordinates(chroma_coordinates_t const &coordinates,
+                                                   option_source_e source) {
+  m_ti.m_chroma_coordinates.set(coordinates, source);
+  if (   m_track_entry
+      && (   ((coordinates.red_x   >= 0) && (coordinates.red_x   <= 1))
+          || ((coordinates.red_y   >= 0) && (coordinates.red_y   <= 1))
+          || ((coordinates.green_x >= 0) && (coordinates.green_x <= 1))
+          || ((coordinates.green_y >= 0) && (coordinates.green_y <= 1))
+          || ((coordinates.blue_x  >= 0) && (coordinates.blue_x  <= 1))
+          || ((coordinates.blue_y  >= 0) && (coordinates.blue_y  <= 1)))) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    if ((coordinates.red_x >= 0) && (coordinates.red_x <= 1))
+      GetChild<KaxVideoRChromaX>(color).SetValue(coordinates.red_x);
+    if ((coordinates.red_y >= 0) && (coordinates.red_y <= 1))
+      GetChild<KaxVideoRChromaY>(color).SetValue(coordinates.red_y);
+    if ((coordinates.green_x >= 0) && (coordinates.green_x <= 1))
+      GetChild<KaxVideoGChromaX>(color).SetValue(coordinates.green_x);
+    if ((coordinates.green_y >= 0) && (coordinates.green_y <= 1))
+      GetChild<KaxVideoGChromaY>(color).SetValue(coordinates.green_y);
+    if ((coordinates.blue_x >= 0) && (coordinates.blue_x <= 1))
+      GetChild<KaxVideoBChromaX>(color).SetValue(coordinates.blue_x);
+    if ((coordinates.blue_y >= 0) && (coordinates.blue_y <= 1))
+      GetChild<KaxVideoBChromaY>(color).SetValue(coordinates.blue_y);
+  }
+}
+
+void
+generic_packetizer_c::set_video_white_colour_coordinates(white_colour_coordinates_t const &coordinates,
+                                                         option_source_e source) {
+  m_ti.m_white_coordinates.set(white_colour_coordinates_t(coordinates.x, coordinates.y), source);
+  if (   m_track_entry
+      && (   ((coordinates.x >= 0) && (coordinates.x <= 1))
+          || ((coordinates.y >= 0) && (coordinates.y <= 1)))) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    if ((coordinates.x >= 0) && (coordinates.x <= 1))
+      GetChild<KaxVideoWhitePointChromaX>(color).SetValue(coordinates.x);
+    if ((coordinates.y >= 0) && (coordinates.y <= 1))
+      GetChild<KaxVideoWhitePointChromaY>(color).SetValue(coordinates.y);
+  }
+}
+
+void
+generic_packetizer_c::set_video_max_luminance(float luminance,
+                                              option_source_e source) {
+  m_ti.m_max_luminance.set(luminance, source);
+  if (   m_track_entry
+      && (luminance >= 0)
+      && (luminance <= 9999.99)) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    GetChild<KaxVideoLuminanceMax>(color).SetValue(luminance);
+  }
+}
+
+void
+generic_packetizer_c::set_video_min_luminance(float luminance,
+                                              option_source_e source) {
+  m_ti.m_min_luminance.set(luminance, source);
+  if (m_track_entry && (luminance >= 0) && (luminance <= 999.9999)) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    auto &color = GetChild<KaxVideoColour>(video);
+    GetChild<KaxVideoLuminanceMin>(color).SetValue(luminance);
+  }
+}
+
+void
 generic_packetizer_c::set_video_pixel_cropping(const pixel_crop_t &cropping,
                                                option_source_e source) {
   set_video_pixel_cropping(cropping.left, cropping.top, cropping.right, cropping.bottom, source);
@@ -725,6 +992,103 @@ generic_packetizer_c::set_headers() {
         GetChild<KaxVideoPixelCropTop   >(video).SetValue(crop.top);
         GetChild<KaxVideoPixelCropRight >(video).SetValue(crop.right);
         GetChild<KaxVideoPixelCropBottom>(video).SetValue(crop.bottom);
+      }
+
+      if (m_ti.m_colour_matrix) {
+        int colour_matrix = m_ti.m_colour_matrix.get();
+        auto &colour      = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoColourMatrix>(colour).SetValue(colour_matrix);
+      }
+
+      if (m_ti.m_bits_per_channel) {
+        int bits     = m_ti.m_bits_per_channel.get();
+        auto &colour = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoBitsPerChannel>(colour).SetValue(bits);
+      }
+
+      if (m_ti.m_chroma_subsample) {
+        auto const &subsample = m_ti.m_chroma_subsample.get();
+        auto &colour          = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoChromaSubsampHorz>(colour).SetValue(subsample.hori);
+        GetChild<KaxVideoChromaSubsampVert>(colour).SetValue(subsample.vert);
+      }
+
+      if (m_ti.m_cb_subsample) {
+        auto const &subsample = m_ti.m_cb_subsample.get();
+        auto &colour          = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoCbSubsampHorz>(colour).SetValue(subsample.hori);
+        GetChild<KaxVideoCbSubsampVert>(colour).SetValue(subsample.vert);
+      }
+
+      if (m_ti.m_chroma_siting) {
+        auto const &siting = m_ti.m_chroma_siting.get();
+        auto &colour       = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoChromaSitHorz>(colour).SetValue(siting.hori);
+        GetChild<KaxVideoChromaSitVert>(colour).SetValue(siting.vert);
+      }
+
+      if (m_ti.m_colour_range) {
+        int range_index = m_ti.m_colour_range.get();
+        auto &colour    = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoColourRange>(colour).SetValue(range_index);
+      }
+
+      if (m_ti.m_colour_transfer) {
+        int transfer_index = m_ti.m_colour_transfer.get();
+        auto &colour       = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoColourTransferCharacter>(colour).SetValue(transfer_index);
+      }
+
+      if (m_ti.m_colour_primaries) {
+        int primary_index = m_ti.m_colour_primaries.get();
+        auto &colour      = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoColourPrimaries>(colour).SetValue(primary_index);
+      }
+
+      if (m_ti.m_max_cll) {
+        int cll_index = m_ti.m_max_cll.get();
+        auto &colour  = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoColourMaxCLL>(colour).SetValue(cll_index);
+      }
+
+      if (m_ti.m_max_fall) {
+        int fall_index = m_ti.m_max_fall.get();
+        auto &colour   = GetChild<KaxVideoColour>(video);
+        GetChild<KaxVideoColourMaxFALL>(colour).SetValue(fall_index);
+      }
+
+      if (m_ti.m_chroma_coordinates) {
+        auto const &coordinates = m_ti.m_chroma_coordinates.get();
+        auto &colour            = GetChild<KaxVideoColour>(video);
+        auto &master_meta       = GetChild<KaxVideoColourMasterMeta>(colour);
+        GetChild<KaxVideoRChromaX>(master_meta).SetValue(coordinates.red_x);
+        GetChild<KaxVideoRChromaY>(master_meta).SetValue(coordinates.red_y);
+        GetChild<KaxVideoGChromaX>(master_meta).SetValue(coordinates.green_x);
+        GetChild<KaxVideoGChromaY>(master_meta).SetValue(coordinates.green_y);
+        GetChild<KaxVideoBChromaX>(master_meta).SetValue(coordinates.blue_x);
+        GetChild<KaxVideoBChromaY>(master_meta).SetValue(coordinates.blue_y);
+      }
+
+      if (m_ti.m_white_coordinates) {
+        auto const &coordinates = m_ti.m_white_coordinates.get();
+        auto &colour            = GetChild<KaxVideoColour>(video);
+        auto &master_meta       = GetChild<KaxVideoColourMasterMeta>(colour);
+        GetChild<KaxVideoWhitePointChromaX>(master_meta).SetValue(coordinates.x);
+        GetChild<KaxVideoWhitePointChromaY>(master_meta).SetValue(coordinates.y);
+      }
+
+      if (m_ti.m_max_luminance) {
+        auto luminance    = m_ti.m_max_luminance.get();
+        auto &colour      = GetChild<KaxVideoColour>(video);
+        auto &master_meta = GetChild<KaxVideoColourMasterMeta>(colour);
+        GetChild<KaxVideoLuminanceMax>(master_meta).SetValue(luminance);
+      }
+
+      if (m_ti.m_min_luminance) {
+        auto luminance    = m_ti.m_min_luminance.get();
+        auto &colour      = GetChild<KaxVideoColour>(video);
+        auto &master_meta = GetChild<KaxVideoColourMasterMeta>(colour);
+        GetChild<KaxVideoLuminanceMin>(master_meta).SetValue(luminance);
       }
 
       if (m_ti.m_stereo_mode && (stereo_mode_c::unspecified != m_ti.m_stereo_mode.get()))

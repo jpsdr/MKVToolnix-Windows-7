@@ -261,6 +261,47 @@ set_usage() {
                   "                           Sets the stereo mode parameter. It can\n"
                   "                           either be a number 0 - 14 or a keyword\n"
                   "                           (see documentation for the full list).\n");
+  usage_text += Y("  --colour-matrix <TID:n>  Sets the matrix coefficients of the video used\n"
+                  "                           to derive luma and chroma values from red, green\n"
+                  "                           and blue color primaries.\n");
+  usage_text += Y("  --colour-bits-per-channel <TID:n>\n"
+                  "                           Sets the number of coded bits for a colour \n"
+                  "                           channel. A value of 0 indicates that the number is\n"
+                  "                           unspecified.\n");
+  usage_text += Y("  --chroma-subsample <TID:hori,vert>\n"
+                  "                           The amount of pixels to remove in the Cr and Cb\n"
+                  "                           channels for every pixel not removed horizontally\n"
+                  "                           and vertically.\n");
+  usage_text += Y("  --cb-subsample <TID:hori,vert>\n"
+                  "                           The amount of pixels to remove in the Cb channel\n"
+                  "                           for every pixel not removed horizontally and\n"
+                  "                           vertically. This is additive with\n"
+                  "                           --chroma-subsample.\n");
+  usage_text += Y("  --chroma-siting <TID:hori,vert>\n "
+                  "                           How chroma is sited horizontally/vertically.\n");
+  usage_text += Y("  --colour-range <TID:n>   Clipping of the color ranges.\n");
+  usage_text += Y("  --colour-transfer-characteristics <TID:n>\n"
+                  "                           The transfer characteristics of the video.\n");
+  usage_text += Y("  --colour-primaries <TID:n>\n"
+                  "                           The colour primaries of the video.\n");
+  usage_text += Y("  --max-content-light <TID:n>\n"
+                  "                           Maximum brightness of a single pixel in candelas\n"
+                  "                           per square meter (cd/m²).\n");
+  usage_text += Y("  --max-frame-light <TID:n>\n"
+                  "                           Maximum frame-average light level in candelas per\n"
+                  "                           square meter (cd/m²).\n");
+  usage_text += Y("  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
+                  "                           Red/Green/Blue chromaticity coordinates as defined\n"
+                  "                           by CIE 1931.\n");
+  usage_text += Y("  --white-colour-coordinates <TID:x,y>\n"
+                  "                           White colour chromaticity coordinates as defined\n"
+                  "                           by CIE 1931.\n");
+  usage_text += Y("  --max-luminance <TID:float>\n"
+                  "                           Maximum luminance in candelas per square meter\n"
+                  "                           (cd/m²).\n");
+  usage_text += Y("  --min-luminance <TID:float>\n"
+                  "                           Mininum luminance in candelas per square meter\n"
+                  "                           (cd/m²).\n");
   usage_text +=   "\n";
   usage_text += Y(" Options that only apply to text subtitle tracks:\n");
   usage_text += Y("  --sub-charset <TID:charset>\n"
@@ -655,6 +696,168 @@ parse_arg_cropping(const std::string &s,
     mxerror(boost::format(err_msg) % s);
 
   ti.m_pixel_crop_list[id] = crop;
+}
+
+/** \brief Parse the \c --colour-matrix argument
+
+   The argument must have the form \c TID:n e.g. \c 0:2
+   The number n must be one of the following integer numbers
+   0: GBR
+   1: BT709
+   2: Unspecified
+   3: Reserved
+   4: FCC
+   5: BT470BG
+   6: SMPTE 170M
+   7: SMPTE 240M
+   8: YCOCG
+   9: BT2020 Non-constant Luminance
+   10: BT2020 Constant Luminance)
+*/
+static void parse_arg_colour_matrix(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_value<int>(s, ti.m_colour_matrix_list))
+    mxerror(boost::format("Colour matrix parameter: not given in the form "
+                          "<TID>:n (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --colour-bits-per-channel argument
+   The argument must have the form \c TID:n e.g. \c 0:8
+*/
+static void parse_arg_colour_bits_per_channel(const std::string &s,
+                                              track_info_c &ti) {
+  if (!parse_property_to_value<int>(s, ti.m_bits_per_channel_list))
+    mxerror(boost::format("Bits per channel parameter: not given in the form "
+                          "<TID>:n (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --chroma-subsample argument
+   The argument must have the form \c TID:hori,vert e.g. \c 0:1,1
+*/
+static void parse_arg_chroma_subsample(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_struct<chroma_subsample_t, int>(
+          s, ti.m_chroma_subsample_list))
+    mxerror(boost::format("Chroma subsampling parameter: not given in the form "
+                          "<TID>:hori,vert (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --cb-subsample argument
+   The argument must have the form \c TID:hori,vert e.g. \c 0:1,1
+*/
+static void parse_arg_cb_subsample(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_struct<cb_subsample_t, int>(s, ti.m_cb_subsample_list))
+    mxerror(boost::format("Cb subsampling parameter: not given in the form "
+                          "<TID>:hori,vert (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --chroma-siting argument
+   The argument must have the form \c TID:hori,vert e.g. \c 0:1,1
+*/
+static void parse_arg_chroma_siting(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_struct<chroma_siting_t, int>(s,
+                                                      ti.m_chroma_siting_list))
+    mxerror(boost::format("Chroma siting parameter: not given in the form "
+                          "<TID>:hori,vert (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --colour-range argument
+   The argument must have the form \c TID:n e.g. \c 0:1
+*/
+static void parse_arg_colour_range(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_value<int>(s, ti.m_colour_range_list))
+    mxerror(boost::format("Colour range parameters: not given in the form "
+                          "<TID>:n (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --colour-transfer-characteristics argument
+   The argument must have the form \c TID:n e.g. \c 0:1
+*/
+static void parse_arg_colour_transfer(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_value<int>(s, ti.m_colour_transfer_list))
+    mxerror(boost::format("Colour transfer characteristics parameter : not "
+                          "given in the form <TID>:n (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --colour-primaries argument
+   The argument must have the form \c TID:n e.g. \c 0:1
+*/
+static void parse_arg_colour_primaries(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_value<int>(s, ti.m_colour_primaries_list))
+    mxerror(boost::format("Colour primaries parameter: not given in the form "
+                          "<TID>:n (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --max-content-light argument
+   The argument must have the form \c TID:n e.g. \c 0:1
+*/
+static void parse_arg_max_content_light(const std::string &s,
+                                        track_info_c &ti) {
+  if (!parse_property_to_value<int>(s, ti.m_max_cll_list))
+    mxerror(boost::format("Max content light parameter: not given in the form "
+                          "<TID>:n (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --max-frame-light argument
+   The argument must have the form \c TID:n e.g. \c 0:1
+*/
+static void parse_arg_max_frame_light(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_value<int>(s, ti.m_max_fall_list))
+    mxerror(boost::format("Max frame light parameter: not given in the form "
+                          "<TID>:n (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --chromaticity-coordinates argument
+   The argument must have the form \c
+   TID:TID:Red_x,Red_y,Green_x,Green_y,Blue_x,Blue_y
+*/
+static void parse_arg_chroma_coordinates(const std::string &s,
+                                         track_info_c &ti) {
+  if (!parse_property_to_struct<chroma_coordinates_t, float>(
+          s, ti.m_chroma_coordinates_list))
+    mxerror(boost::format("chromaticity coordinates parameter: not given in "
+                          "the form <TID>:hori,vert (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --white-colour-coordinates argument
+   The argument must have the form \c TID:TID:x,y
+*/
+static void parse_arg_white_coordinates(const std::string &s,
+                                        track_info_c &ti) {
+  if (!parse_property_to_struct<white_colour_coordinates_t, float>(
+          s, ti.m_white_coordinates_list))
+    mxerror(boost::format("white colour coordinates parameter: not given in "
+                          "the form <TID>:hori,vert (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --max-luminance argument
+   The argument must have the form \c TID:float e.g. \c 0:1235.7
+*/
+static void parse_arg_max_luminance(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_value<float>(s, ti.m_max_luminance_list))
+    mxerror(boost::format("Max luminance parameter: not given in the form "
+                          "<TID>:n (argument was '%1%').") %
+            s);
+}
+
+/** \brief Parse the \c --min-luminance argument
+   The argument must have the form \c TID:float e.g. \c 0:0.7
+*/
+static void parse_arg_min_luminance(const std::string &s, track_info_c &ti) {
+  if (!parse_property_to_value<float>(s, ti.m_min_luminance_list))
+    mxerror(boost::format("Min luminance parameter: not given in the form "
+                          "<TID>:n (argument was '%1%').") %
+            s);
 }
 
 /** \brief Parse the \c --stereo-mode argument
@@ -2252,6 +2455,104 @@ parse_args(std::vector<std::string> args) {
         mxerror(Y("'--cropping' lacks the crop parameters.\n"));
 
       parse_arg_cropping(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--colour-matrix") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_colour_matrix(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--colour-bits-per-channel") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_colour_bits_per_channel(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--chroma-subsample") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_chroma_subsample(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--cb-subsample") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_cb_subsample(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--chroma-siting") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_chroma_siting(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--colour-range") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_colour_range(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--colour-transfer-characteristics") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_colour_transfer(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--colour-primaries") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_colour_primaries(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--max-content-light") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_max_content_light(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--max-frame-light") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_max_frame_light(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--chromaticity-coordinates") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_chroma_coordinates(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--white-colour-coordinates") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_white_coordinates(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--max-luminance") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_max_luminance(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--min-luminance") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_min_luminance(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--stereo-mode") {
