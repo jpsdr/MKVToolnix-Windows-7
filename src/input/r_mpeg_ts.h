@@ -393,7 +393,7 @@ protected:
   bool PAT_found, PMT_found;
   int16_t PMT_pid;
   int es_to_process;
-  timestamp_c m_global_timestamp_offset, m_stream_timestamp;
+  timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_last_non_subtitle_timestamp;
 
   bool m_probing;
 

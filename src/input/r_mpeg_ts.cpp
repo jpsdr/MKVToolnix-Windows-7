@@ -84,6 +84,16 @@ mpeg_ts_track_c::send_to_packetizer() {
     timestamp_to_use          -= std::max(reader.m_global_timestamp_offset, min.valid() ? min : timestamp_c::ns(0));
   }
 
+  if (timestamp_to_use.valid()) {
+    if (mtx::included_in(type, ES_VIDEO_TYPE, ES_AUDIO_TYPE))
+      reader.m_last_non_subtitle_timestamp = timestamp_to_use;
+
+    else if (   (type == ES_SUBT_TYPE)
+             && reader.m_last_non_subtitle_timestamp.valid()
+             && ((timestamp_to_use - reader.m_last_non_subtitle_timestamp).abs() >= timestamp_c::s(5)))
+      timestamp_to_use = reader.m_last_non_subtitle_timestamp;
+  }
+
   mxdebug_if(m_debug_delivery, boost::format("mpeg_ts_track_c::send_to_packetizer: PID %1% expected %2% actual %3% timestamp_to_use %4% m_previous_timestamp %5%\n")
              % pid % pes_payload_size % pes_payload->get_size() % timestamp_to_use % m_previous_timestamp);
 
