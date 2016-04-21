@@ -507,7 +507,8 @@ mpeg_ts_track_c::parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_de
     //  0–23: ISO 639 language code
     // 24–28: teletext type
     // 29-31: teletext magazine number
-    // 32-39: teletext page number
+    // 32-35: teletext page number (units)
+    // 36-39: teletext page number (tens)
 
     // Teletext type is:
     //   0: ?
@@ -517,12 +518,21 @@ mpeg_ts_track_c::parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_de
     //   4: teletext program schedule
     //   5: teletext subtitles: hearing impaired
 
-    auto ttx_type = static_cast<unsigned int>(buffer[3]) >> 3;
+    bit_reader_c r{buffer, 5};
+
+    r.skip_bits(24);
+    auto ttx_type     = r.get_bits(5);
+    auto ttx_magazine = r.get_bits(3);
+    auto ttx_page     = r.get_bits(4) * 10 + r.get_bits(4);
+
+    if (!ttx_magazine)
+      ttx_magazine = 8;
+
+    m_ttx_wanted_page = ttx_magazine * 100 + ttx_page;
 
     if (reader.m_debug_pat_pmt) {
       mxdebug(boost::format("mpeg_ts_track_c::parse_srt_pmt_descriptor:  %1%: language %2% type %3% magazine %4% page %5%\n")
-              % idx % std::string(reinterpret_cast<char const *>(buffer), 3)
-              % ttx_type % (static_cast<unsigned int>(buffer[3]) & 0x07) % static_cast<unsigned int>(buffer[4]));
+              % idx % std::string(reinterpret_cast<char const *>(buffer), 3) % ttx_type % ttx_magazine % *m_ttx_wanted_page);
     }
 
     if (mtx::included_in(ttx_type, 2u, 5u)) {
@@ -1562,6 +1572,9 @@ mpeg_ts_reader_c::create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track
   track->converter.reset(converter);
 
   converter->override_encoding(track->language);
+
+  if (track->m_ttx_wanted_page)
+    converter->set_page_to_process(*track->m_ttx_wanted_page);
 
   show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }

@@ -127,6 +127,11 @@ teletext_to_srt_packet_converter_c::override_encoding(std::string const &iso639_
 }
 
 void
+teletext_to_srt_packet_converter_c::set_page_to_process(int page) {
+  m_wanted_page.reset(page);
+}
+
+void
 teletext_to_srt_packet_converter_c::setup_character_maps() {
   if (ms_char_maps.size())
     return;

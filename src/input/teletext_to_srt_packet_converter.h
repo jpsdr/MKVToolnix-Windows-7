@@ -59,6 +59,7 @@ public:
   virtual void flush() override;
 
   virtual void override_encoding(std::string const &iso639_2_code);
+  virtual void set_page_to_process(int page);
 
 protected:
   void process_ttx_packet();

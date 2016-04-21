@@ -278,6 +278,7 @@ public:
   mpeg_ts_pid_type_e type;          //can be PAT_TYPE, PMT_TYPE, ES_VIDEO_TYPE, ES_AUDIO_TYPE, ES_SUBT_TYPE, ES_UNKNOWN
   codec_c codec;
   uint16_t pid;
+  boost::optional<int> m_ttx_wanted_page;
   bool data_ready;
   int pes_payload_size;             // size of the current PID payload in bytes
   byte_buffer_cptr pes_payload;     // buffer with the current PID payload
