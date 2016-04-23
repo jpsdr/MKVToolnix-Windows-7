@@ -369,10 +369,11 @@ mpeg_ts_track_c::new_stream_a_truehd() {
                    boost::format("mpeg_ts_track_c::new_stream_a_truehd: first AC-3 header bsid %1% channels %2% sample_rate %3% bytes %4% samples %5%\n")
                    % header.m_bs_id % header.m_channels % header.m_sample_rate % header.m_bytes % header.m_samples);
 
-        m_coupled_track->a_channels    = header.m_channels;
-        m_coupled_track->a_sample_rate = header.m_sample_rate;
-        m_coupled_track->a_bsid        = header.m_bs_id;
-        m_coupled_track->probed_ok     = true;
+        auto &coupled_track         = *m_coupled_tracks[0];
+        coupled_track.a_channels    = header.m_channels;
+        coupled_track.a_sample_rate = header.m_sample_rate;
+        coupled_track.a_bsid        = header.m_bs_id;
+        coupled_track.probed_ok     = true;
       }
 
       continue;
@@ -524,24 +525,39 @@ mpeg_ts_track_c::parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_de
     auto ttx_type     = r.get_bits(5);
     auto ttx_magazine = r.get_bits(3);
     auto ttx_page     = r.get_bits(4) * 10 + r.get_bits(4);
-
-    if (!ttx_magazine)
-      ttx_magazine = 8;
-
-    m_ttx_wanted_page = ttx_magazine * 100 + ttx_page;
+    ttx_page          = (ttx_magazine ? ttx_magazine : 8) * 100 + ttx_page;
 
     if (reader.m_debug_pat_pmt) {
       mxdebug(boost::format("mpeg_ts_track_c::parse_srt_pmt_descriptor:  %1%: language %2% type %3% magazine %4% page %5%\n")
-              % idx % std::string(reinterpret_cast<char const *>(buffer), 3) % ttx_type % ttx_magazine % *m_ttx_wanted_page);
+              % idx % std::string(reinterpret_cast<char const *>(buffer), 3) % ttx_type % ttx_magazine % ttx_page);
     }
 
-    if (mtx::included_in(ttx_type, 2u, 5u)) {
-      parse_iso639_language_from(buffer);
-
-      type      = ES_SUBT_TYPE;
-      codec     = codec_c::look_up(codec_c::type_e::S_SRT);
-      probed_ok = true;
+    if (!mtx::included_in(ttx_type, 2u, 5u)) {
+      buffer += 5;
+      continue;
     }
+
+    mpeg_ts_track_c *to_set_up{};
+
+    if (!m_ttx_wanted_page) {
+      converter.reset(new teletext_to_srt_packet_converter_c{});
+      to_set_up = this;
+
+    } else {
+      auto new_track = std::make_shared<mpeg_ts_track_c>(reader);
+      m_coupled_tracks.emplace_back(new_track);
+
+      to_set_up            = new_track.get();
+      to_set_up->converter = converter;
+      to_set_up->set_pid(pid);
+    }
+
+    to_set_up->parse_iso639_language_from(buffer);
+    to_set_up->m_ttx_wanted_page.reset(ttx_page);
+
+    to_set_up->type      = ES_SUBT_TYPE;
+    to_set_up->codec     = codec_c::look_up(codec_c::type_e::S_SRT);
+    to_set_up->probed_ok = true;
 
     buffer += 5;
   }
@@ -765,8 +781,9 @@ mpeg_ts_reader_c::read_headers() {
     track->pes_payload_size = 0;
     // track->timestamp_offset = -1;
 
-    if (track->m_coupled_track)
-      track->m_coupled_track->language = track->language;
+    for (auto const &coupled_track : track->m_coupled_tracks)
+      if (coupled_track->language.empty())
+        coupled_track->language = track->language;
 
     // For TrueHD tracks detection for embedded AC-3 frames is
     // done. However, "probed_ok" is only set on the TrueHD track if
@@ -1068,8 +1085,8 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
 
         track->type            = ES_AUDIO_TYPE;
         track->codec           = codec_c::look_up(codec_c::type_e::A_TRUEHD);
-        track->m_coupled_track = ac3_track;
         track->converter       = ac3_track->converter;
+        track->m_coupled_tracks.push_back(ac3_track);
 
         break;
       }
@@ -1148,10 +1165,8 @@ mpeg_ts_reader_c::parse_pmt(unsigned char *pmt) {
       tracks.push_back(track);
       ++es_to_process;
 
-      if (track->m_coupled_track) {
-        tracks.push_back(track->m_coupled_track);
-        ++es_to_process;
-      }
+      brng::copy(track->m_coupled_tracks, std::back_inserter(tracks));
+      es_to_process += track->m_coupled_tracks.size();
     }
 
     mxdebug_if(m_debug_pat_pmt,
@@ -1568,13 +1583,10 @@ void
 mpeg_ts_reader_c::create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track) {
   track->ptzr = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, false, true));
 
-  auto converter = new teletext_to_srt_packet_converter_c{PTZR(track->ptzr)};
-  track->converter.reset(converter);
+  auto &converter = dynamic_cast<teletext_to_srt_packet_converter_c &>(*track->converter);
 
-  converter->override_encoding(track->language);
-
-  if (track->m_ttx_wanted_page)
-    converter->set_page_to_process(*track->m_ttx_wanted_page);
+  converter.demux_page(*track->m_ttx_wanted_page, PTZR(track->ptzr));
+  converter.override_encoding(*track->m_ttx_wanted_page, track->language);
 
   show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }

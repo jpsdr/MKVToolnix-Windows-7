@@ -24,42 +24,59 @@
 #define TTX_PAGE_COL_SIZE 40
 
 class teletext_to_srt_packet_converter_c: public packet_converter_c {
-public:
+protected:
   struct ttx_page_data_t {
     int page, subpage;
     unsigned int flags, national_set;
     bool erase_flag;
     std::vector<std::string> page_buffer;
 
+    ttx_page_data_t() {
+      reset();
+    }
+
     void reset();
   };
 
-  using char_map_t = std::unordered_map<int, char const *>;
+  struct track_data_t {
+    ttx_page_data_t m_page_data;
+
+    timestamp_c m_queued_timestamp, m_page_timestamp;
+    packet_cptr m_queued_packet;
+    boost::optional<int> m_forced_char_map_idx;
+    bool m_page_changed{};
+    generic_packetizer_c *m_ptzr{};
+
+    track_data_t(generic_packetizer_c *ptzr)
+      : m_ptzr{ptzr}
+    {
+    }
+  };
+
+  using track_data_cptr = std::shared_ptr<track_data_t>;
+  using char_map_t      = std::unordered_map<int, char const *>;
+
   static std::vector<char_map_t> ms_char_maps;
 
-protected:
   size_t m_in_size, m_pos, m_data_length;
   unsigned char *m_buf;
-  timestamp_c m_queued_timestamp, m_current_page_timestamp, m_current_packet_timestamp;
-  packet_cptr m_queued_packet;
-  boost::optional<int> m_wanted_page, m_forced_char_map_idx;
-  bool m_page_changed{};
-
-  ttx_page_data_t m_ttx_page_data;
+  timestamp_c m_current_packet_timestamp;
+  std::unordered_map<int, track_data_cptr> m_track_data;
+  track_data_t *m_current_track{};
 
   boost::regex m_page_re1, m_page_re2, m_page_re3;
 
   debugging_option_c m_debug;
 
 public:
-  teletext_to_srt_packet_converter_c(generic_packetizer_c *ptzr);
+  teletext_to_srt_packet_converter_c();
   virtual ~teletext_to_srt_packet_converter_c() {};
 
   virtual bool convert(packet_cptr const &packet) override;
   virtual void flush() override;
 
-  virtual void override_encoding(std::string const &iso639_2_code);
-  virtual void set_page_to_process(int page);
+  virtual void override_encoding(int page, std::string const &iso639_2_code);
+  virtual void demux_page(int page, generic_packetizer_c *ptzr);
 
 protected:
   void process_ttx_packet();

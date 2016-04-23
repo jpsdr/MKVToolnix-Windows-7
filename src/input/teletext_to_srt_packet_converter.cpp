@@ -104,8 +104,8 @@ teletext_to_srt_packet_converter_c::ttx_page_data_t::reset() {
     page_buffer.emplace_back();
 }
 
-teletext_to_srt_packet_converter_c::teletext_to_srt_packet_converter_c(generic_packetizer_c *ptzr)
-  : packet_converter_c{ptzr}
+teletext_to_srt_packet_converter_c::teletext_to_srt_packet_converter_c()
+  : packet_converter_c{nullptr}
   , m_in_size{}
   , m_pos{}
   , m_data_length{}
@@ -115,20 +115,60 @@ teletext_to_srt_packet_converter_c::teletext_to_srt_packet_converter_c(generic_p
   , m_page_re3{"^[ \\n]+|[ \\n]+$", boost::regex::perl}
   , m_debug{"teletext_to_srt|teletext_to_srt_packet_converter"}
 {
-  m_ttx_page_data.reset();
+  setup_character_maps();
 }
 
 void
-teletext_to_srt_packet_converter_c::override_encoding(std::string const &iso639_2_code) {
-  if (mtx::included_in(iso639_2_code, "deu", "ger"))
-    m_forced_char_map_idx.reset(4);
+teletext_to_srt_packet_converter_c::override_encoding(int page,
+                                                      std::string const &iso639_2_code) {
+  auto itr = m_track_data.find(page);
+  if (itr == m_track_data.end())
+    return;
 
-  mxdebug_if(m_debug, boost::format("Overriding encoding for ISO639-2 code %1%; result: %2%\n") % iso639_2_code % (m_forced_char_map_idx ? *m_forced_char_map_idx : -1));
+  if (mtx::included_in(iso639_2_code, "fre"))
+    itr->second->m_forced_char_map_idx.reset(1);
+
+  else if (mtx::included_in(iso639_2_code, "swe", "fin", "hun"))
+    itr->second->m_forced_char_map_idx.reset(2);
+
+  else if (mtx::included_in(iso639_2_code, "cze", "slo"))
+    itr->second->m_forced_char_map_idx.reset(3);
+
+  else if (mtx::included_in(iso639_2_code, "ger"))
+    itr->second->m_forced_char_map_idx.reset(4);
+
+  else if (mtx::included_in(iso639_2_code, "por", "spa"))
+    itr->second->m_forced_char_map_idx.reset(5);
+
+  else if (mtx::included_in(iso639_2_code, "ita"))
+    itr->second->m_forced_char_map_idx.reset(6);
+
+  else if (mtx::included_in(iso639_2_code, "rum"))
+    itr->second->m_forced_char_map_idx.reset(7);
+
+  else if (mtx::included_in(iso639_2_code, "lav", "lit"))
+    itr->second->m_forced_char_map_idx.reset(8);
+
+  else if (mtx::included_in(iso639_2_code, "pol"))
+    itr->second->m_forced_char_map_idx.reset(9);
+
+  else if (mtx::included_in(iso639_2_code, "srp", "hrv", "slv"))
+    itr->second->m_forced_char_map_idx.reset(10);
+
+  else if (mtx::included_in(iso639_2_code, "est"))
+    itr->second->m_forced_char_map_idx.reset(11);
+
+  else if (mtx::included_in(iso639_2_code, "tur"))
+    itr->second->m_forced_char_map_idx.reset(12);
+
+  mxdebug_if(m_debug, boost::format("Overriding encoding for ISO639-2 code %1%; result: %2%\n") % iso639_2_code % (itr->second->m_forced_char_map_idx ? *itr->second->m_forced_char_map_idx : -1));
 }
 
 void
-teletext_to_srt_packet_converter_c::set_page_to_process(int page) {
-  m_wanted_page.reset(page);
+teletext_to_srt_packet_converter_c::demux_page(int page,
+                                               generic_packetizer_c *ptzr) {
+  m_track_data.emplace(page, std::make_shared<track_data_t>(ptzr));
+  m_track_data[page]->m_page_data.page = page;
 }
 
 void
@@ -203,17 +243,19 @@ teletext_to_srt_packet_converter_c::remove_parity(unsigned char *buffer,
 bool
 teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
                                                 unsigned int row_number) {
-  setup_character_maps();
+  if (!m_current_track)
+    return false;
 
-  auto &recoded = m_ttx_page_data.page_buffer[row_number - 1];
-  auto prior    = recoded;
+  auto &page_data = m_current_track->m_page_data;
+  auto &recoded   = page_data.page_buffer[row_number - 1];
+  auto prior      = recoded;
 
-  if (!m_forced_char_map_idx && (m_ttx_page_data.national_set >= ms_char_maps.size())) {
+  if (!m_current_track->m_forced_char_map_idx && (page_data.national_set >= ms_char_maps.size())) {
     recoded = std::string{reinterpret_cast<char const *>(buffer), TTX_PAGE_COL_SIZE};
     return recoded != prior;
   }
 
-  auto char_map_idx = m_forced_char_map_idx ? *m_forced_char_map_idx : m_ttx_page_data.national_set;
+  auto char_map_idx = m_current_track->m_forced_char_map_idx ? *m_current_track->m_forced_char_map_idx : page_data.national_set;
   auto &char_map    = ms_char_maps[char_map_idx];
 
   recoded.clear();
@@ -232,17 +274,13 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
 
 void
 teletext_to_srt_packet_converter_c::process_single_row(unsigned int row_number) {
+  if (!m_current_track)
+    return;
+
   remove_parity(&m_buf[m_pos + 6], m_data_length + 2 - 6);
   if (decode_line(&m_buf[m_pos + 6], row_number)) {
-    m_page_changed = true;
-    mxdebug_if(m_debug, boost::format("  new content of row %1%: %2%\n") % row_number % m_ttx_page_data.page_buffer[row_number - 1]);
-  }
-
-  if (!m_wanted_page) {
-    m_wanted_page.reset(m_ttx_page_data.page);
-    m_current_page_timestamp = m_current_packet_timestamp;
-
-    mxdebug_if(m_debug, boost::format("  first page with content; setting wanted_page to %1% at %2%\n") % *m_wanted_page % format_timestamp(m_current_packet_timestamp));
+    m_current_track->m_page_changed = true;
+    mxdebug_if(m_debug, boost::format("  new content of row %1%: %2%\n") % row_number % m_current_track->m_page_data.page_buffer[row_number - 1]);
   }
 }
 
@@ -251,106 +289,115 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
   unsigned char ttx_packet_0_header[4];
   unham(&m_buf[m_pos + 6], ttx_packet_0_header, 8);
 
-  if (ttx_packet_0_header[0] != 0xff) {
-    m_ttx_page_data.page  = ttx_to_page(ttx_packet_0_header[0]);
-    m_ttx_page_data.page += 100 * ttx_header_magazine;
+  auto page     = ttx_packet_0_header[0] == 0xff ? -1 : ttx_to_page(ttx_packet_0_header[0]) + 100 * ttx_header_magazine;
+  auto data_itr = m_track_data.find(page);
 
-  } else
-    m_ttx_page_data.page  = -1;
+  if (   (page      > (0x99 + 100 * ttx_header_magazine))
+      || (data_itr == m_track_data.end())) {
+    m_current_track = nullptr;
+    return;
+  }
 
-  m_ttx_page_data.subpage      = ((ttx_packet_0_header[2] << 8) | (ttx_packet_0_header[1])) & 0x3f7f;
-  m_ttx_page_data.subpage      = ttx_to_page(m_ttx_page_data.subpage);
+  m_current_track                   = data_itr->second.get();
+  m_current_track->m_page_timestamp = m_current_packet_timestamp;
 
-  m_ttx_page_data.flags        =  (ttx_packet_0_header[1]       & 0x80)
-                               | ((ttx_packet_0_header[3] << 4) & 0x10)
-                               | ((ttx_packet_0_header[3] << 2) & 0x08)
-                               | ((ttx_packet_0_header[3] >> 0) & 0x04)
-                               | ((ttx_packet_0_header[3] >> 1) & 0x02)
-                               | ((ttx_packet_0_header[3] >> 4) & 0x01);
+  auto &page_data                   = m_current_track->m_page_data;
 
-  m_ttx_page_data.erase_flag   = !!(m_ttx_page_data.flags & 0x80);
-  m_ttx_page_data.national_set = (m_ttx_page_data.flags >> 21) & 0x07;
-  auto not_subtitle            = (m_ttx_page_data.flags >> 15) & 0x03;
+  page_data.subpage                 = ((ttx_packet_0_header[2] << 8) | (ttx_packet_0_header[1])) & 0x3f7f;
+  page_data.subpage                 = ttx_to_page(page_data.subpage);
+
+  page_data.flags                   =  (ttx_packet_0_header[1]       & 0x80)
+                                    | ((ttx_packet_0_header[3] << 4) & 0x10)
+                                    | ((ttx_packet_0_header[3] << 2) & 0x08)
+                                    | ((ttx_packet_0_header[3] >> 0) & 0x04)
+                                    | ((ttx_packet_0_header[3] >> 1) & 0x02)
+                                    | ((ttx_packet_0_header[3] >> 4) & 0x01);
+
+  page_data.erase_flag              = !!(page_data.flags & 0x80);
+  page_data.national_set            = (page_data.flags >> 21) & 0x07;
+  auto not_subtitle                 = (page_data.flags >> 15) & 0x03;
 
   mxdebug_if(m_debug,
-             boost::format("  ttx page %1% at %7% subpage %2% erase? %3% national set %4% changed? %5% not subtitle? %6%\n")
-             % m_ttx_page_data.page % m_ttx_page_data.subpage % m_ttx_page_data.erase_flag % m_ttx_page_data.national_set % m_page_changed % not_subtitle % format_timestamp(m_current_packet_timestamp));
-
-  if (   (m_ttx_page_data.page == -1)
-      || (m_ttx_page_data.page  > (0x99 + 100 * ttx_header_magazine))
-      || (m_wanted_page && (*m_wanted_page != m_ttx_page_data.page)))
-    return;
-
-  m_current_page_timestamp = m_current_packet_timestamp;
+             boost::format("  ttx page %1% at %6% subpage %2% erase? %3% national set %4% not subtitle? %5%\n")
+             % page_data.page % page_data.subpage % page_data.erase_flag % page_data.national_set % not_subtitle % format_timestamp(m_current_packet_timestamp));
 
   deliver_queued_content();
 
-  if (!m_ttx_page_data.erase_flag)
+  if (!page_data.erase_flag)
     return;
 
   auto const prev_content = page_to_string();
 
-  for (auto &line : m_ttx_page_data.page_buffer)
+  for (auto &line : page_data.page_buffer)
     line.clear();
 
-  m_page_changed = page_to_string() != prev_content;
+  m_current_track->m_page_changed = page_to_string() != prev_content;
 }
 
 void
 teletext_to_srt_packet_converter_c::deliver_queued_content() {
   auto content = page_to_string();
 
-  if (content.empty() || !m_queued_timestamp.valid()) {
-    m_queued_timestamp.reset();
+  if (content.empty() || !m_current_track->m_queued_timestamp.valid()) {
+    m_current_track->m_queued_timestamp.reset();
     return;
   }
 
-  auto duration   = (m_current_page_timestamp - m_queued_timestamp).abs();
-  auto new_packet = std::make_shared<packet_t>(memory_c::clone(content), m_queued_timestamp.to_ns(), duration.to_ns());
+  auto duration   = (m_current_track->m_page_timestamp - m_current_track->m_queued_timestamp).abs();
+  auto new_packet = std::make_shared<packet_t>(memory_c::clone(content), m_current_track->m_queued_timestamp.to_ns(), duration.to_ns());
 
   queue_packet(new_packet);
 
-  m_queued_timestamp.reset();
+  m_current_track->m_queued_timestamp.reset();
 }
 
 void
 teletext_to_srt_packet_converter_c::queue_packet(packet_cptr const &new_packet) {
-  auto old_content = m_queued_packet ? std::string{reinterpret_cast<char const *>(m_queued_packet->data->get_buffer()), m_queued_packet->data->get_size()} : std::string{};
+  auto old_content = m_current_track->m_queued_packet
+                   ? std::string{reinterpret_cast<char const *>(m_current_track->m_queued_packet->data->get_buffer()), m_current_track->m_queued_packet->data->get_size()}
+                   : std::string{};
   auto new_content = std::string{reinterpret_cast<char const *>(new_packet->data->get_buffer()), new_packet->data->get_size()};
 
-  if (m_queued_packet) {
-    auto prev_timestamp = timestamp_c::ns(m_queued_packet->timecode);
-    auto prev_end       = prev_timestamp + timestamp_c::ns(m_queued_packet->duration);
+  if (m_current_track->m_queued_packet) {
+    auto prev_timestamp = timestamp_c::ns(m_current_track->m_queued_packet->timecode);
+    auto prev_end       = prev_timestamp + timestamp_c::ns(m_current_track->m_queued_packet->duration);
     auto diff           = timestamp_c::ns(new_packet->timecode) - prev_end;
 
     if ((diff.abs().to_ms() <= 40) && (old_content == new_content)) {
-      m_queued_packet->duration = (timestamp_c::ns(new_packet->timecode + new_packet->duration) - prev_timestamp).abs().to_ns();
-      mxdebug_if(m_debug, boost::format("  queue: merging packet with previous, now %1% duration %2% content %3%\n") % format_timestamp(prev_timestamp) % format_timestamp(m_queued_packet->duration) % new_content);
+      m_current_track->m_queued_packet->duration = (timestamp_c::ns(new_packet->timecode + new_packet->duration) - prev_timestamp).abs().to_ns();
+      mxdebug_if(m_debug,
+                 boost::format("  queue: merging packet with previous, now %1% duration %2% content %3%\n")
+                 % format_timestamp(prev_timestamp) % format_timestamp(m_current_track->m_queued_packet->duration) % new_content);
       return;
     }
 
     mxdebug_if(m_debug,
                boost::format("  queue: delivering packet %1% duration %2% content %3% (could not merge: diff %4%, content== %5%)\n")
-               % format_timestamp(prev_timestamp) % format_timestamp(m_queued_packet->duration) % old_content % format_timestamp(diff) % (old_content == new_content));
-    m_ptzr->process(m_queued_packet);
-    m_queued_packet.reset();
+               % format_timestamp(prev_timestamp) % format_timestamp(m_current_track->m_queued_packet->duration) % old_content % format_timestamp(diff) % (old_content == new_content));
+    m_current_track->m_ptzr->process(m_current_track->m_queued_packet);
+    m_current_track->m_queued_packet.reset();
   }
 
-  mxdebug_if(m_debug, boost::format("  queue: queueing packet %1% duration %2% content %3%\n") % format_timestamp(new_packet->timecode) % format_timestamp(new_packet->duration) % new_content);
-  m_queued_packet = new_packet;
+  mxdebug_if(m_debug,
+             boost::format("  queue: queueing packet %1% duration %2% content %3%\n")
+             % format_timestamp(new_packet->timecode) % format_timestamp(new_packet->duration) % new_content);
+  m_current_track->m_queued_packet = new_packet;
 }
 
 void
 teletext_to_srt_packet_converter_c::flush() {
-  if (!m_queued_packet)
-    return;
+  for (auto const &pair : m_track_data) {
+    auto &data = pair.second;
+    if (!data->m_queued_packet)
+      continue;
 
-  auto old_content = std::string{reinterpret_cast<char const *>(m_queued_packet->data->get_buffer()), m_queued_packet->data->get_size()};
+    auto old_content = std::string{reinterpret_cast<char const *>(data->m_queued_packet->data->get_buffer()), data->m_queued_packet->data->get_size()};
 
-  mxdebug_if(m_debug, boost::format("  queue: flushing packet %1% duration %2% content %3%\n") % format_timestamp(m_queued_packet->timecode) % format_timestamp(m_queued_packet->duration) % old_content);
+    mxdebug_if(m_debug, boost::format("  queue: flushing packet %1% duration %2% content %3%\n") % format_timestamp(data->m_queued_packet->timecode) % format_timestamp(data->m_queued_packet->duration) % old_content);
 
-  m_ptzr->process(m_queued_packet);
-  m_queued_packet.reset();
+    data->m_ptzr->process(data->m_queued_packet);
+    data->m_queued_packet.reset();
+  }
 }
 
 void
@@ -381,24 +428,21 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
   if (row_number == 0)
     decode_page_data(ttx_header_magazine);
 
-  if (   (m_ttx_page_data.page == -1)
-      || (m_ttx_page_data.page  > (0x99 + 100 * ttx_header_magazine))
-      || (m_wanted_page && (*m_wanted_page != m_ttx_page_data.page)))
-    return;
-
-  if ((row_number <= 0) || (row_number >= TTX_PAGE_ROW_SIZE))
+  if (   !m_current_track
+      || (row_number <= 0)
+      || (row_number >= TTX_PAGE_ROW_SIZE))
     return;
 
   process_single_row(row_number);
 
-  if (!m_queued_timestamp.valid())
-    m_queued_timestamp = m_current_page_timestamp;
+  if (!m_current_track->m_queued_timestamp.valid())
+    m_current_track->m_queued_timestamp = m_current_track->m_page_timestamp;
 }
 
 std::string
 teletext_to_srt_packet_converter_c::page_to_string()
   const {
-  auto content = boost::join(m_ttx_page_data.page_buffer, "\n");
+  auto content = boost::join(m_current_track->m_page_data.page_buffer, "\n");
 
   return boost::regex_replace(boost::regex_replace(boost::regex_replace(content, m_page_re1, "\\n"), m_page_re2, " "), m_page_re3, "", boost::match_single_line);
 }

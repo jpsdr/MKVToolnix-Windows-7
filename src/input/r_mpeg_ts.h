@@ -301,7 +301,7 @@ public:
   aac::frame_c m_aac_frame;
 
   bool m_apply_dts_timestamp_fix, m_use_dts, m_timestamps_wrapped, m_truehd_found_truehd, m_truehd_found_ac3;
-  mpeg_ts_track_ptr m_coupled_track;
+  std::vector<mpeg_ts_track_ptr> m_coupled_tracks;
 
   // general track parameters
   std::string language;
