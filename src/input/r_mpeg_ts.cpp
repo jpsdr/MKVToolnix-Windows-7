@@ -870,8 +870,11 @@ mpeg_ts_reader_c::identify() {
     } else if (ES_VIDEO_TYPE == track->type)
       info.add(mtx::id::pixel_dimensions, boost::format("%1%x%2%") % track->v_width % track->v_height);
 
-    else if (ES_SUBT_TYPE == track->type)
+    else if (ES_SUBT_TYPE == track->type) {
       info.set(mtx::id::text_subtitles, track->codec.is(codec_c::type_e::S_SRT));
+      if (track->m_ttx_wanted_page)
+        info.set(mtx::id::teletext_page, *track->m_ttx_wanted_page);
+    }
 
     std::string type = ES_AUDIO_TYPE == track->type ? ID_RESULT_TRACK_AUDIO
                      : ES_VIDEO_TYPE == track->type ? ID_RESULT_TRACK_VIDEO
