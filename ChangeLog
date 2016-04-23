@@ -1,5 +1,10 @@
 2016-04-23  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: MPEG TS bug fix: the "text_subtitles" property of the
+        JSON/verbose identification modes was always set to true for all
+        subtitle tracks, even for those that aren't text subtitles
+        (VobSub, PG).
+
         * mkvmerge: MPEG TS/teletext enhancement: if a teletext track
         contains multiple teletext pages then mkvmerge will now recognize
         all of those pages as separate tracks to merge instead of only
