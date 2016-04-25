@@ -102,7 +102,9 @@ currentUserName() {
 QString
 removeInvalidPathCharacters(QString fileName) {
 #if defined(SYS_WINDOWS)
-  static DeferredRegularExpression s_driveRE{Q("^[A-Za-z]:")}, s_invalidCharRE{Q("[<>:\"|?*\\x{01}-\\x{1f}]+")};
+  static DeferredRegularExpression s_driveRE{Q("^[A-Za-z]:")}, s_invalidCharRE{Q("[<>\"|?*\\x{01}-\\x{1f}]+")}, s_invalidCharRE2{Q("[:]+")};
+
+  fileName.remove(*s_invalidCharRE);
 
   QString drive;
   if (fileName.contains(*s_driveRE)) {
@@ -110,7 +112,7 @@ removeInvalidPathCharacters(QString fileName) {
     fileName.remove(0, 2);
   }
 
-  return drive + fileName.remove(*s_invalidCharRE);
+  return drive + fileName.remove(*s_invalidCharRE2);
 
 #else
   return fileName;
