@@ -47,12 +47,12 @@ GUI
 .PP
 \fB\-G\fR, \fB\-\-no\-gui\fR
 .RS 4
-Do not start the
-GUI\&. This option is only available if mkvinfo was compiled with
+不要启动
+GUI。该选项仅当 mkvinfo 编译时已启用
 GUI
-support\&.
+支持时可用。
 .sp
-Note that this option is only available on Windows and MacOS X where starting the GUI is the default\&.
+注意，该选项仅在 Windows 与 MacOS X 平台可用，因为在这些平台，默认会启动 GUI。
 .RE
 .PP
 \fB\-c\fR, \fB\-\-checksums\fR
@@ -109,16 +109,11 @@ Note that this option is only available on Windows and MacOS X where starting th
 .PP
 \fB\-\-ui\-language\fR \fI语言代码\fR
 .RS 4
-强制使用语言代码
-\fI语言代码\fR
-所对应的翻译（如 \*(Aqde_DE\*(Aq 对应德文翻译）。使用
-\fILANG\fR、\fILC_MESSAGES\fR
-及
-\fILC_ALL\fR
-这些环境变量更好。如果在
+Forces the translations for the language
 \fIcode\fR
-处输入 \*(Aqlist\*(Aq，\fBmkvinfo\fR(1)
-将输出可用翻译的列表。
+to be used (e\&.g\&. \*(Aqde_DE\*(Aq for the German translations)\&. Entering \*(Aqlist\*(Aq as the
+\fIcode\fR
+will cause the program to output a list of available translations\&.
 .RE
 .PP
 \fB\-\-debug\fR \fI主题\fR
