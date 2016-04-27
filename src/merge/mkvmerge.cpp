@@ -435,76 +435,6 @@ identify(std::string &filename) {
   g_files.clear();
 }
 
-/** \brief Parse a number postfixed with a time-based unit
-
-   This function parsers a number that is postfixed with one of the
-   units 's', 'ms', 'us', 'ns', 'fps', 'p' or 'i'. If the postfix is
-   'fps' then this means 'frames per second'. If the postfix is 'p' or
-   'i' then it is also interpreted as the number of 'progressive
-   frames per second' or 'interlaced frames per second'.
-
-   It returns a number of nanoseconds.
-*/
-static int64_t
-parse_number_with_unit(const std::string &s,
-                       const std::string &argument) {
-  boost::regex re1("(-?\\d+\\.?\\d*)(s|ms|us|ns|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
-  boost::regex re2("(-?\\d+)/(-?\\d+)(s|ms|us|ns|fps|p|i)?", boost::regex::perl | boost::regex::icase);
-
-  std::string unit, s_n, s_d;
-  int64_t n = 0, d = 0;
-  double d_value = 0.0;
-  bool is_fraction = false;
-
-  boost::smatch matches;
-  if (boost::regex_match(s, matches, re1)) {
-    parse_number(matches[1], d_value);
-    if (matches.size() > 2)
-      unit = matches[2];
-    d = 1;
-
-  } else if (boost::regex_match(s, matches, re2)) {
-    parse_number(matches[1], n);
-    parse_number(matches[2], d);
-    if (matches.size() > 3)
-      unit = matches[3];
-    is_fraction = true;
-
-  } else
-    mxerror(boost::format(Y("'%1%' is not recognized as a valid number format in '%2%'.\n")) % s % argument);
-
-  int64_t multiplier = 1000000000;
-  balg::to_lower(unit);
-
-  if (unit == "ms")
-    multiplier = 1000000;
-  else if (unit == "us")
-    multiplier = 1000;
-  else if (unit == "ns")
-    multiplier = 1;
-  else if ((unit == "fps") || (unit == "p") || (unit == "i")) {
-    if (is_fraction)
-      return 1000000000ll * d / n / (unit == "i" ? 2 : 1);
-
-    if (unit == "i")
-      d_value /= 2;
-
-    if (29.97 == d_value)
-      return (int64_t)(100100000.0 / 3.0);
-    else if (23.976 == d_value)
-      return (int64_t)(1001000000.0 / 24.0);
-    else
-      return (int64_t)(1000000000.0 / d_value);
-
-  } else if (unit != "s")
-    mxerror(boost::format(Y("'%1%' does not contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n")) % s % argument);
-
-  if (is_fraction)
-    return multiplier * n / d;
-  else
-    return (int64_t)(multiplier * d_value);
-}
-
 /** \brief Parse tags and add them to the list of all tags
 
    Also tests the tags for missing mandatory elements.
@@ -1352,7 +1282,9 @@ parse_arg_default_duration(const std::string &s,
   if (!parse_number(parts[0], id))
     mxerror(boost::format(Y("'%1%' is not a valid track ID in '--default-duration %2%'.\n")) % parts[0] % s);
 
-  ti.m_default_durations[id] = parse_number_with_unit(parts[1], (boost::format("--default-duration %1%") % s).str());
+  if (!parse_duration_number_with_unit(parts[1], ti.m_default_durations[id]))
+    mxerror(boost::format(Y("'%1%' is not recognized as a valid number format or it doesn't contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n"))
+            % parts[1] % (boost::format("--default-duration %1%") % s));
 }
 
 /** \brief Parse the argument for \c --nalu-size-length

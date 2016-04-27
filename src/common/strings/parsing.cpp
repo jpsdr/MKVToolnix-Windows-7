@@ -207,6 +207,77 @@ parse_bool(std::string value) {
   throw false;
 }
 
+/** \brief Parse a number postfixed with a time-based unit
+
+   This function parsers a number that is postfixed with one of the
+   units 's', 'ms', 'us', 'ns', 'fps', 'p' or 'i'. If the postfix is
+   'fps' then this means 'frames per second'. If the postfix is 'p' or
+   'i' then it is also interpreted as the number of 'progressive
+   frames per second' or 'interlaced frames per second'.
+
+   It returns a number of nanoseconds.
+*/
+bool
+parse_duration_number_with_unit(const std::string &s,
+                                int64_t &value) {
+  boost::regex re1("(-?\\d+\\.?\\d*)(s|ms|us|ns|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
+  boost::regex re2("(-?\\d+)/(-?\\d+)(s|ms|us|ns|fps|p|i)?", boost::regex::perl | boost::regex::icase);
+
+  std::string unit, s_n, s_d;
+  int64_t n = 0, d = 0;
+  double d_value = 0.0;
+  bool is_fraction = false;
+
+  boost::smatch matches;
+  if (boost::regex_match(s, matches, re1)) {
+    parse_number(matches[1], d_value);
+    if (matches.size() > 2)
+      unit = matches[2];
+    d = 1;
+
+  } else if (boost::regex_match(s, matches, re2)) {
+    parse_number(matches[1], n);
+    parse_number(matches[2], d);
+    if (matches.size() > 3)
+      unit = matches[3];
+    is_fraction = true;
+
+  } else
+    return false;
+
+  int64_t multiplier = 1000000000;
+  balg::to_lower(unit);
+
+  if (unit == "ms")
+    multiplier = 1000000;
+  else if (unit == "us")
+    multiplier = 1000;
+  else if (unit == "ns")
+    multiplier = 1;
+  else if ((unit == "fps") || (unit == "p") || (unit == "i")) {
+    if (is_fraction) {
+      value = 1000000000ll * d / n / (unit == "i" ? 2 : 1);
+      return true;
+    }
+
+    if (unit == "i")
+      d_value /= 2;
+
+    value = 29.97  == d_value ?  100100000.0 /  3.0
+          : 23.976 == d_value ? 1001000000.0 / 24.0
+          :                     1000000000.0 / d_value;
+
+    return true;
+
+  } else if (unit != "s")
+    return false;
+
+  value = is_fraction ? multiplier * n / d
+        :               multiplier * d_value;
+
+  return true;
+}
+
 uint64_t
 from_hex(const std::string &data) {
   const char *s = data.c_str();
