@@ -1155,17 +1155,16 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
     return;
   }
 
-  auto is_i_slice  = (AVC_SLICE_TYPE_I   == si.type)
-                  || (AVC_SLICE_TYPE2_I  == si.type);
-  auto is_si_slice = (AVC_SLICE_TYPE_SI  == si.type)
+  bool is_i_slice =  (AVC_SLICE_TYPE_I   == si.type)
+                  || (AVC_SLICE_TYPE2_I  == si.type)
+                  || (AVC_SLICE_TYPE_SI  == si.type)
                   || (AVC_SLICE_TYPE2_SI == si.type);
-  auto is_b_slice  = (AVC_SLICE_TYPE_B   == si.type)
+  bool is_b_slice =  (AVC_SLICE_TYPE_B   == si.type)
                   || (AVC_SLICE_TYPE2_B  == si.type);
 
   m_incomplete_frame.m_si       =  si;
   m_incomplete_frame.m_keyframe =  m_recovery_point_valid
-                                || is_i_slice
-                                || (   is_si_slice
+                                || (   is_i_slice
                                     && (NALU_TYPE_IDR_SLICE == si.nalu_type));
   m_incomplete_frame.m_type     =  m_incomplete_frame.m_keyframe ? 'I' : is_b_slice ? 'B' : 'P';
   m_recovery_point_valid        =  false;
