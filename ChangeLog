@@ -1,3 +1,15 @@
+2016-05-02  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: the time zone portion of the "date_local"
+        member of the JSON and verbose identification formats contained
+        the time zone's name instead of its offset on Windows due to the
+        Visual C++ runtime's std::strftime not being C++11
+        compliant.
+
+        Additionally this resulted in errors about invalid UTF-8 strings
+        for locales where the time zone's name contained non-ASCII
+        characters.
+
 2016-04-23  Moritz Bunkus  <moritz@bunkus.org>
 
         * Released v9.1.0 "Little Earthquakes".

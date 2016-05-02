@@ -14,6 +14,9 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <sstream>
+#if defined(SYS_WINDOWS)
+# include <windows.h>
+#endif
 
 #include "common/date_time.h"
 
@@ -45,6 +48,20 @@ format_epoch_time(time_t const epoch_time,
   auto time_info = timezone == epoch_timezone_e::UTC ? std::gmtime(&epoch_time) : std::localtime(&epoch_time);
   if (!time_info)
     return {};
+
+#if defined(SYS_WINDOWS)
+  // std::strftime on MSVC does not conform to C++11/POSIX with
+  // respect to the %z format modifier. Its output is usually the time
+  // zone name, not its offset. See
+  // https://msdn.microsoft.com/en-us/library/fe06s4ak.aspx
+  TIME_ZONE_INFORMATION time_zone_info{};
+
+  auto result = GetTimeZoneInformation(&time_zone_info);
+  auto bias   = -1 * (time_zone_info.Bias + (result == TIME_ZONE_ID_DAYLIGHT ? time_zone_info.DaylightBias : 0));
+  auto offset = (boost::format("%1%%|2$02d|%|3$02d|") % (bias >= 0 ? '+' : '-') % (std::abs(bias) / 60) % (std::abs(bias) % 60)).str();
+
+  boost::replace_all(format_string, "%z", offset);
+#endif
 
   format_string += 'z';
 
