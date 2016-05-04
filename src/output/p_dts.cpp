@@ -110,6 +110,8 @@ dts_packetizer_c::set_headers() {
   set_audio_sampling_freq(m_first_header.core_sampling_frequency);
   set_audio_channels(m_reduce_to_core ? m_first_header.get_core_num_audio_channels() : m_first_header.get_total_num_audio_channels());
   set_track_default_duration(m_first_header.get_packet_length_in_nanoseconds().to_ns());
+  if (m_first_header.source_pcm_resolution > 0)
+    set_audio_bit_depth(m_first_header.source_pcm_resolution);
 
   generic_packetizer_c::set_headers();
 }
