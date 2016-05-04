@@ -285,7 +285,7 @@ class SimpleTest
     command = "../src/mkvpropedit --engage no_variable_data #{file_name} #{args.first}"
     *result = self.sys command, :exit_code => options[:exit_code]
 
-    self.sys "../src/tools/ebml_validator -M #{file_name}" if FileTest.exists?("../src/tools/ebml_validator")
+    self.sys "../src/tools/ebml_validator -M #{file_name}", dont_record_command: true if FileTest.exists?("../src/tools/ebml_validator")
 
     return *result
   end
@@ -296,7 +296,7 @@ class SimpleTest
     fail ArgumentError if args.empty?
 
     command    = args.shift
-    @commands << command
+    @commands << command unless options[:dont_record_command]
 
     if !%r{>}.match command
       temp_file = Tempfile.new('mkvtoolnix-test-output')
