@@ -25,7 +25,7 @@ override_dh_auto_build:
 	./drake
 
 	mv src/mkvinfo src/mkvinfo-gui
-	rm src/info/*.o
+	rm src/info/*.o src/info/qt_resources.cpp
 
 	cp -a config.h config.h.ref
 	sed -i -e '/#define.*HAVE_QT/d' config.h
