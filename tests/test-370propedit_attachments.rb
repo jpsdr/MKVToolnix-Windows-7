@@ -10,45 +10,47 @@ sources = [
   { :file => "tags.xml",       :name => "Hitme.xml",                :mime_type => "text/plain",      :description => "Gonzo"                  },
 ]
 
+small_file = "data/avi/1-frame.avi"
+
 commands = [
   "--delete-attachment 2",
   "--delete-attachment =2",
   "--delete-attachment 'name:Magic: The Gathering.ttf'",
   "--delete-attachment mime-TYPE:text/plain",
 
-  "--add-attachment data/text/tags-binary.xml",
-  "--attachment-name 'Hallo! Die Welt....doc' --add-attachment data/text/tags-binary.xml",
-  "--attachment-mime-type fun/go --add-attachment data/text/tags-binary.xml",
-  "--attachment-description 'Alice and Bob see Charlie' --add-attachment data/text/tags-binary.xml",
-  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --add-attachment data/text/tags-binary.xml",
+  "--add-attachment #{small_file}",
+  "--attachment-name 'Hallo! Die Welt....doc' --add-attachment #{small_file}",
+  "--attachment-mime-type fun/go --add-attachment #{small_file}",
+  "--attachment-description 'Alice and Bob see Charlie' --add-attachment #{small_file}",
+  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --add-attachment #{small_file}",
 
-  "--replace-attachment 3:data/text/tags-binary.xml",
-  "--replace-attachment =3:data/text/tags-binary.xml",
-  "--replace-attachment 'name:Magic\\c The Gathering.ttf:data/text/tags-binary.xml'",
-  "--replace-attachment mime-type:text/plain:data/text/tags-binary.xml",
+  "--replace-attachment 3:#{small_file}",
+  "--replace-attachment =3:#{small_file}",
+  "--replace-attachment 'name:Magic\\c The Gathering.ttf:#{small_file}'",
+  "--replace-attachment mime-type:text/plain:#{small_file}",
 
-  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --replace-attachment 3:data/text/tags-binary.xml",
-  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --replace-attachment =3:data/text/tags-binary.xml",
-  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --replace-attachment 'name:Magic\\c The Gathering.ttf:data/text/tags-binary.xml'",
-  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --replace-attachment mime-type:text/plain:data/text/tags-binary.xml",
+  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --replace-attachment 3:#{small_file}",
+  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --replace-attachment =3:#{small_file}",
+  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --replace-attachment 'name:Magic\\c The Gathering.ttf:#{small_file}'",
+  "--attachment-name 'Hallo! Die Welt....doc' --attachment-mime-type fun/go --attachment-description 'Alice and Bob see Charlie' --replace-attachment mime-type:text/plain:#{small_file}",
 
-  "--attachment-description 'Alice and Bob see Charlie' --replace-attachment mime-type:text/plain:data/text/tags-binary.xml",
+  "--attachment-description 'Alice and Bob see Charlie' --replace-attachment mime-type:text/plain:#{small_file}",
 
   "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --update-attachment 3",
-  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --replace-attachment 3:data/text/tags-binary.xml",
+  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --replace-attachment 3:#{small_file}",
 
   "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --attachment-uid 47110815 --update-attachment 3",
-  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --attachment-uid 47110815 --replace-attachment 3:data/text/tags-binary.xml",
-  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --attachment-uid 47110815 --add-attachment data/text/tags-binary.xml",
+  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --attachment-uid 47110815 --replace-attachment 3:#{small_file}",
+  "--attachment-name 'bla blubb.txt' --attachment-description 'a real description' --attachment-mime-type 'gon/zo' --attachment-uid 47110815 --add-attachment #{small_file}",
 ]
 
 test "several" do
-  hashes  = []
-  src     = "#{tmp}-src"
-  work    = "#{tmp}-work"
-  command = "data/subtitles/srt/vde.srt " + sources.collect { |s| "--attachment-name '#{s[:name]}' --attachment-mime-type '#{s[:mime_type]}' --attachment-description '#{s[:description]}' --attach-file 'data/text/#{s[:file]}'" }.join(' ')
+  hashes          = []
+  src             = "#{tmp}-src"
+  work            = "#{tmp}-work"
+  initial_command = "data/subtitles/srt/vde.srt " + sources.collect { |s| "--attachment-name '#{s[:name]}' --attachment-mime-type '#{s[:mime_type]}' --attachment-description '#{s[:description]}' --attach-file 'data/text/#{s[:file]}'" }.join(' ')
 
-  merge command, :keep_tmp => true, :output => src
+  merge initial_command, :keep_tmp => true, :output => src
   hashes << hash_file(src)
 
   commands.each do |command|
