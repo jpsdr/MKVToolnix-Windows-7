@@ -779,9 +779,9 @@ task :clean do
     doc/man/*.html
     doc/man/*/*.html
     doc/man/*/*.xml
+    src/*/qt_resources.cpp
     src/info/ui/*.h
     src/mkvtoolnix-gui/forms/**/*.h
-    src/mkvtoolnix-gui/qt_resources.cpp
     tests/unit/all
     tests/unit/merge/merge
     tests/unit/propedit/propedit
@@ -906,6 +906,7 @@ Application.new("src/mkvinfo").
   only_if(c?(:USE_QT)).
   sources("src/info/sys_windows.o", :if => c?(:MINGW)).
   sources("src/info/qt_ui.cpp", "src/info/qt_ui.moc", "src/info/rightclick_tree_widget.moc", $mkvinfo_ui_files).
+  sources('src/info/qt_resources.cpp').
   libraries(:qt).
   end_if.
   libraries($custom_libs).

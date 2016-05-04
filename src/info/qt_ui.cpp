@@ -26,6 +26,8 @@
 #include "info/qt_ui.h"
 #include "info/mkvinfo.h"
 
+#include <QIcon>
+#include <QList>
 #include <QMessageBox>
 #include <QMimeData>
 #include <QMouseEvent>
@@ -51,6 +53,12 @@ main_window_c::main_window_c():
   root(nullptr) {
 
   setupUi(this);
+
+  QIcon icon;
+  for (auto size : QList<int>{} << 32 << 48 << 64 << 128 << 256)
+    icon.addFile(QString{":/icons/%1x%1/mkvinfo.png"}.arg(size));
+
+  setWindowIcon(icon);
 
   connect(action_Open, SIGNAL(triggered()), this, SLOT(open()));
   connect(action_Save_text_file, SIGNAL(triggered()), this,
