@@ -159,6 +159,9 @@ main_window_c::show_error(const QString &msg) {
 
 void
 main_window_c::parse_file(const QString &file_name) {
+  auto title = Q("%1 – mkvinfo").arg(QFileInfo{file_name}.fileName());
+  setWindowTitle(title);
+
   tree->setEnabled(false);
   tree->clear();
 
