@@ -32,17 +32,6 @@ function strip_files {
   print -- " done"
 }
 
-function strip_files {
-  if [[ $no_strip == 1 ]] return
-
-  print -n -- "Stripping files…"
-
-  cd ${tgt_dir}
-  ${host}-strip *.exe
-
-  print -- " done"
-}
-
 function sign_exes {
   if [[ -z $exe_signer ]] return
 
