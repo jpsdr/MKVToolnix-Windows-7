@@ -25,7 +25,8 @@ override_dh_auto_build:
 	./drake
 
 	mv src/mkvinfo src/mkvinfo-gui
-	rm src/info/*.o src/info/qt_resources.cpp
+	rm src/info/*.o src/info/*.a src/info/qt_resources.cpp
+	rm -rf rake.d/dependency.d
 
 	cp -a config.h config.h.ref
 	sed -i -e '/#define.*HAVE_QT/d' config.h
@@ -34,8 +35,7 @@ override_dh_auto_build:
 
 	./drake apps:mkvinfo USE_QT=no QT_LIBS=' ' QT_INCLUDES=' '
 
-	touch src/info/qt_ui.o
-	touch src/mkvinfo
+	touch src/info/qt_ui.o src/info/qt_resources.cpp src/info/qt_resources.o src/info/libmtxinfo.a src/mkvinfo
 
 override_dh_install:
 	./drake install DESTDIR=$(CURDIR)/debian/tmp
