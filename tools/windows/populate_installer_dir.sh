@@ -64,7 +64,8 @@ function copy_files {
 
   cp -R installer examples ${tgt_dir}/
   rm -rf ${tgt_dir}/examples/stylesheets
-  cp src/*.exe src/mkvtoolnix-gui/*.exe share/icons/windows/*.ico installer/*.url ${tgt_dir}/
+  cp src/*.exe src/mkvtoolnix-gui/*.exe installer/*.url ${tgt_dir}/
+  cp share/icons/windows/mkvtoolnix-gui.ico ${tgt_dir}/installer/
 
   cp ${mxe_usr_dir}/share/misc/magic.mgc ${tgt_dir}/data/
   touch ${tgt_dir}/data/portable-app

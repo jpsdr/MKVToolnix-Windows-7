@@ -1,6 +1,6 @@
 !define PRODUCT_NAME "MKVToolNix"
 !define PRODUCT_VERSION "9.1.0"
-!define PRODUCT_VERSION_BUILD ""  # Intentionally left empty for releases
+!define PRODUCT_VERSION_BUILD " [20160504-01204]"
 !define PRODUCT_PUBLISHER "Moritz Bunkus"
 !define PRODUCT_WEB_SITE "https://www.bunkus.org/videotools/mkvtoolnix/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\mkvtoolnix-gui.exe"
@@ -19,7 +19,7 @@ SetCompressorDictSize 64
 
 # MUI Settings
 !define MUI_ABORTWARNING
-!define MUI_ICON "../mkvtoolnix-gui.ico"
+!define MUI_ICON "../installer/mkvtoolnix-gui.ico"
 
 # Language Selection Dialog Settings
 !define MUI_LANGDLL_REGISTRY_ROOT "HKCU"
@@ -150,6 +150,7 @@ Section "Program files" SEC01
 
   # Delete files that might be present from older installation
   # if this is just an upgrade.
+  Delete "$INSTDIR\mkv*.ico"
   Delete "$INSTDIR\mmg.exe"
   Delete "$INSTDIR\doc\command_line_references_and_guide.html"
   Delete "$INSTDIR\doc\en\mmg.html"
@@ -316,7 +317,6 @@ Section Uninstall
   Delete "$INSTDIR\mkvmerge.exe"
   Delete "$INSTDIR\mkvpropedit.exe"
   Delete "$INSTDIR\mkvtoolnix-gui.exe"
-  Delete "$INSTDIR\mmg.exe"
 
   RMDir /r "$INSTDIR\data"
   RMDir /r "$INSTDIR\doc"
