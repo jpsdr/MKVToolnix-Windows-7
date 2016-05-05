@@ -23,6 +23,9 @@ memory_c::resize(size_t new_size)
   if (!its_counter)
     its_counter = new counter(nullptr, 0, false);
 
+  if (new_size == its_counter->size)
+    return;
+
   if (its_counter->is_free) {
     its_counter->ptr  = (unsigned char *)saferealloc(its_counter->ptr, new_size + its_counter->offset);
     its_counter->size = new_size + its_counter->offset;
