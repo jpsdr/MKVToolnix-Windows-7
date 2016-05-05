@@ -58,10 +58,12 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   set_track_type(track_audio);
   set_track_default_duration((int64_t)(1000000000.0 * m_samples_per_packet / m_samples_per_sec));
 
-  if ((m_format == big_endian_integer) && mtx::included_in(m_bits_per_sample, 16, 32, 64))
+  if ((m_format == big_endian_integer) && mtx::included_in(m_bits_per_sample, 16, 32, 64)) {
+    m_format       = little_endian_integer;
     m_byte_swapper = m_bits_per_sample == 16 ? mtx::bswap_buffer_16
                    : m_bits_per_sample == 32 ? mtx::bswap_buffer_32
                    :                           mtx::bswap_buffer_64;
+  }
 }
 
 pcm_packetizer_c::~pcm_packetizer_c() {
@@ -69,7 +71,9 @@ pcm_packetizer_c::~pcm_packetizer_c() {
 
 void
 pcm_packetizer_c::set_headers() {
-  auto codec_id = ieee_float == m_format ? MKV_A_PCM_FLOAT : MKV_A_PCM;
+  auto codec_id = ieee_float         == m_format ? MKV_A_PCM_FLOAT
+                : big_endian_integer == m_format ? MKV_A_PCM_BE
+                :                                  MKV_A_PCM;
   set_codec_id(codec_id);
   set_audio_sampling_freq(static_cast<double>(m_samples_per_sec));
   set_audio_channels(m_channels);
