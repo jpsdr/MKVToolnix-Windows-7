@@ -47,16 +47,23 @@ require_relative "rake.d/tarball"
 require_relative 'rake.d/gtest' if $have_gtest
 
 def setup_globals
+  $building_for = {
+    macos:   %r{darwin}i.match(RbConfig::CONFIG['host_os']),
+    windows: c?(:MINGW)
+  }
+
   $build_mkvtoolnix_gui  ||=  c?(:USE_QT)
+  $build_mkvinfo_gui       =  c?(:USE_QT) && ($building_for[:windows] || $building_for[:macos])
   $build_tools           ||=  c?(:BUILD_TOOLS)
 
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
+  $programs                << "mkvinfo-gui"    if $build_mkvinfo_gui
   $programs                << "mkvtoolnix-gui" if $build_mkvtoolnix_gui
   $tools                   =  %w{ac3parser base64tool checksum diracparser ebml_validator hevc_dump mpls_dump vc1parser}
 
   $application_subdirs     =  { "mkvtoolnix-gui" => "mkvtoolnix-gui/" }
   $applications            =  $programs.collect { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
-  $manpages                =  $programs.collect { |name| "doc/man/#{name}.1" }
+  $manpages                =  $programs.reject { |name| %r{mkvinfo-gui}.match(name) }.map { |name| "doc/man/#{name}.1" }
   $manpages                << "doc/man/mkvtoolnix-gui.1" if $build_mkvtoolnix_gui
 
   $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Isrc"
@@ -843,7 +850,7 @@ end
   { :name => 'mtxinput',    :dir => 'src/input'                                                                      },
   { :name => 'mtxoutput',   :dir => 'src/output'                                                                     },
   { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                   },
-  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp  mkvinfo.cpp},                           },
+  { :name => 'mtxinfo',     :dir => 'src/info',     :except => %w{qt_ui.cpp  mkvinfo.cpp mkvinfo-gui.cpp},           },
   { :name => 'mtxextract',  :dir => 'src/extract',  :except => [ 'mkvextract.cpp' ],                                 },
   { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'mkvpropedit.cpp' ],                                },
   { :name => 'ebml',        :dir => 'lib/libebml/src'                                                                },
@@ -911,6 +918,17 @@ Application.new("src/mkvinfo").
   end_if.
   libraries($custom_libs).
   create
+
+if $build_mkvinfo_gui
+  Application.new("src/mkvinfo-gui").
+    description("Build the mkvinfo-gui executable").
+    aliases("mkvinfo-gui").
+    sources("src/info/mkvinfo-gui.cpp").
+    sources("src/info/resources.o", :if => c?(:MINGW)).
+    libraries(:qt, $custom_libs).
+    libraries("-mwindows", :if => c?(:MINGW)).
+    create
+end
 
 #
 # mkvextract

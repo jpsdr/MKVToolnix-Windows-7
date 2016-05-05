@@ -231,7 +231,7 @@ function build_dmg {
   ./drake install prefix=${dmgcnt}
   test -f ${dmgmac}/mkvtoolnix-gui
 
-  strip ${dmgcnt}/MacOS/mkv{merge,info,extract,propedit,toolnix-gui}
+  strip ${dmgcnt}/MacOS/mkv{merge,info,info-gui,extract,propedit,toolnix-gui}
 
   cp README.md $dmgbase/README.txt
   cp COPYING $dmgbase/COPYING.txt
@@ -316,7 +316,7 @@ EOF
 
   for LIB (${dmgmac}/libs/libQt*.5.dylib) echo install_name_tool -id @executable_path/libs/${LIB:t} ${LIB}
 
-  for FILE (${dmgmac}/{mkvinfo,mkvtoolnix-gui} ${dmgmac}/libs/libQt*.5.dylib ${dmgmac}/platforms/*.dylib) {
+  for FILE (${dmgmac}/{mkvinfo,mkvinfo-gui,mkvtoolnix-gui} ${dmgmac}/libs/libQt*.5.dylib ${dmgmac}/platforms/*.dylib) {
     otool -L ${FILE} | \
       grep -v : | \
       grep -v @executable_path | \

@@ -314,6 +314,7 @@ Section Uninstall
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\mkvextract.exe"
   Delete "$INSTDIR\mkvinfo.exe"
+  Delete "$INSTDIR\mkvinfo-gui.exe"
   Delete "$INSTDIR\mkvmerge.exe"
   Delete "$INSTDIR\mkvpropedit.exe"
   Delete "$INSTDIR\mkvtoolnix-gui.exe"
