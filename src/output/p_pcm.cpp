@@ -60,9 +60,9 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
 
   if ((m_format == big_endian_integer) && mtx::included_in(m_bits_per_sample, 16, 32, 64)) {
     m_format       = little_endian_integer;
-    m_byte_swapper = m_bits_per_sample == 16 ? mtx::bswap_buffer_16
-                   : m_bits_per_sample == 32 ? mtx::bswap_buffer_32
-                   :                           mtx::bswap_buffer_64;
+    m_byte_swapper = [this](unsigned char const *src, unsigned char *dst, std::size_t num_bytes) {
+      mtx::bswap_buffer(src, dst, num_bytes, m_bits_per_sample);
+    };
   }
 }
 

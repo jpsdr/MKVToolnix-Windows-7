@@ -46,9 +46,7 @@ bswap_64(uint64_t x) {
   return r.ll;
 }
 
-void bswap_buffer_16(unsigned char const *src, unsigned char *dst, std::size_t num_bytes);
-void bswap_buffer_32(unsigned char const *src, unsigned char *dst, std::size_t num_bytes);
-void bswap_buffer_64(unsigned char const *src, unsigned char *dst, std::size_t num_bytes);
+void bswap_buffer(unsigned char const *src, unsigned char *dst, std::size_t num_bytes, std::size_t word_length);
 
 }
 
