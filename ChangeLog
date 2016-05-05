@@ -1,9 +1,10 @@
 2016-05-05  Moritz Bunkus  <moritz@bunkus.org>
 
-        * mkvmerge: bug fix: fixed handling of Big Endian PCM with a bit
-        depth other than 16, 32 or 64 bits/sample. Other formats were
-        using the Little Endian codec ID, but their content was actually
-        not byte-swapped to match it. Fixes #1683.
+        * mkvmerge, mkvextract: bug fix: fixed handling of Big Endian PCM
+        with a bit depth other than 16, 32 or 64 bits/sample. Other
+        formats were using the Little Endian codec ID, but their content
+        was actually not byte-swapped to match it. Now those other bit
+        depths are byte-swapped to Little Endian, too. Fixes #1683.
 
         * mkvinfo: the change to start the GUI by default on Windows and
         Mac OS has been reverted. Instead a separate executable

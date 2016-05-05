@@ -53,6 +53,7 @@ protected:
   virtual void flush_impl();
   virtual int64_t size_to_samples(int64_t size) const;
   virtual int64_t samples_to_size(int64_t size) const;
+  virtual void byte_swap_data(memory_c &data) const;
 };
 
 #endif // MTX_P_PCM_H

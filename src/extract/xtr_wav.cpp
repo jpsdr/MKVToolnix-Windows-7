@@ -64,9 +64,9 @@ xtr_wav_c::create_file(xtr_base_c *master,
 
   m_out->write(&m_wh, sizeof(wave_header));
 
-  if ((m_codec_id == MKV_A_PCM_BE) && mtx::included_in(bps, 16, 32, 64))
+  if (m_codec_id == MKV_A_PCM_BE)
     m_byte_swapper = [bps](unsigned char const *src, unsigned char *dst, std::size_t num_bytes) {
-      mtx::bswap_buffer(src, dst, num_bytes, bps);
+      mtx::bswap_buffer(src, dst, num_bytes, bps / 8);
     };
 }
 
