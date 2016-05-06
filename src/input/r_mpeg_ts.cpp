@@ -473,7 +473,7 @@ mpeg_ts_track_c::handle_timestamp_wrap(timestamp_c &pts,
 bool
 mpeg_ts_track_c::parse_ac3_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &,
                                           mpeg_ts_pmt_pid_info_t const &pmt_pid_info) {
-  if (pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE)
+  if ((pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE) && (type != ES_UNKNOWN))
     return false;
 
   type  = ES_AUDIO_TYPE;
