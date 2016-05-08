@@ -171,13 +171,8 @@ mpeg4_p10_video_packetizer_c::change_nalu_size_len(packet_cptr packet) {
     if ((size - src_pos) < m_nalu_size_len_src)
       break;
 
-    int nalu_size = 0;
-    int i;
-    for (i = 0; i < m_nalu_size_len_src; ++i)
-      nalu_size = (nalu_size << 8) + src[src_pos + i];
-
-    if ((size - src_pos - m_nalu_size_len_src) < nalu_size)
-      nalu_size = size - src_pos - m_nalu_size_len_src;
+    int nalu_size = get_uint_be(&src[src_pos], m_nalu_size_len_src);
+    nalu_size     = std::min<int>(nalu_size, size - src_pos - m_nalu_size_len_src);
 
     if (nalu_size > m_max_nalu_size)
       mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("The chosen NALU size length of %1% is too small. Try using '4'.\n")) % m_nalu_size_len_dst);
@@ -203,9 +198,7 @@ mpeg4_p10_video_packetizer_c::change_nalu_size_len(packet_cptr packet) {
   for (i = 0; nalu_sizes.size() > i; ++i) {
     int nalu_size = nalu_sizes[i];
 
-    int shift;
-    for (shift = 0; shift < m_nalu_size_len_dst; ++shift)
-      dst[dst_pos + shift] = (nalu_size >> (8 * (m_nalu_size_len_dst - 1 - shift))) & 0xff;
+    put_uint_be(&dst[dst_pos], nalu_size, m_nalu_size_len_dst);
 
     memmove(&dst[dst_pos + m_nalu_size_len_dst], &src[src_pos + m_nalu_size_len_src], nalu_size);
 
@@ -224,11 +217,7 @@ mpeg4_p10_video_packetizer_c::remove_filler_nalus(memory_c &data)
   auto idx        = 0u;
 
   while ((idx + m_nalu_size_len_dst) < total_size) {
-    uint64_t nalu_size = (4 == m_nalu_size_len_dst) ? get_uint32_be(&ptr[idx])
-                       : (3 == m_nalu_size_len_dst) ? get_uint24_be(&ptr[idx])
-                       :                              get_uint16_be(&ptr[idx]);
-
-    nalu_size         += m_nalu_size_len_dst;
+    auto nalu_size = get_uint_be(&ptr[idx], m_nalu_size_len_dst) + m_nalu_size_len_dst;
 
     if ((idx + nalu_size) > total_size)
       break;
@@ -236,13 +225,11 @@ mpeg4_p10_video_packetizer_c::remove_filler_nalus(memory_c &data)
     if (ptr[idx + m_nalu_size_len_dst] == NALU_TYPE_FILLER_DATA) {
       memmove(&ptr[idx], &ptr[idx + nalu_size], total_size - idx - nalu_size);
       total_size -= nalu_size;
+      continue;
     }
 
     idx += nalu_size;
   }
-
-  if (data.get_size() == total_size)
-    return;
 
   data.resize(total_size);
 }
