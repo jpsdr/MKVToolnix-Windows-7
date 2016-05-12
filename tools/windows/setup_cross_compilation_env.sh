@@ -14,7 +14,7 @@ set -e
 
 # This defaults to a 64bit executable. If you need a 32bit executable
 # then change ARCHITECTURE to 32.
-ARHICTECTURE=64
+ARCHITECTURE=64
 # Installation defaults to ~/mxe.
 INSTALL_DIR=${INSTALL_DIR:-$HOME/mxe}
 # Leave PARALLEL empty if you want the script to use all of your CPU
