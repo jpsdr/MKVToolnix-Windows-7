@@ -15,7 +15,10 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <sstream>
 #include <typeinfo>
+
+#include <boost/date_time/posix_time/posix_time.hpp>
 
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
@@ -55,6 +58,7 @@
 #include "common/checksums/base.h"
 #include "common/codec.h"
 #include "common/command_line.h"
+#include "common/date_time.h"
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/fourcc.h"
@@ -379,30 +383,6 @@ is_global(EbmlStream *es,
   return false;
 }
 
-#if defined(COMP_MSC) || defined(COMP_MINGW)
-struct tm *
-gmtime_r(const time_t *timep,
-         struct tm *result) {
-  struct tm *aresult;
-
-  aresult = gmtime(timep);
-  memcpy(result, aresult, sizeof(struct tm));
-
-  return result;
-}
-
-char *
-asctime_r(const struct tm *tm,
-          char *buf) {
-  char *abuf;
-
-  abuf = asctime(tm);
-  strcpy(buf, abuf);
-
-  return abuf;
-}
-#endif
-
 void
 read_master(EbmlMaster *m,
             EbmlStream *es,
@@ -493,14 +473,9 @@ handle_info(EbmlStream *&es,
       show_element(l2, 2, boost::format(Y("Writing application: %1%")) % static_cast<KaxWritingApp *>(l2)->GetValueUTF8());
 
     else if (Is<KaxDateUTC>(l2)) {
-      struct tm tmutc;
-      char buffer[40];
-      time_t temptime = static_cast<KaxDateUTC *>(l2)->GetEpochDate();
-      if (gmtime_r(&temptime, &tmutc) && asctime_r(&tmutc, buffer)) {
-        buffer[strlen(buffer) - 1] = 0;
-        show_element(l2, 2, boost::format(Y("Date: %1% UTC"))              % buffer);
-      } else
-        show_element(l2, 2, boost::format(Y("Date (invalid, value: %1%)")) % temptime);
+      auto epoch_time = boost::posix_time::from_time_t(static_cast<KaxDateUTC *>(l2)->GetEpochDate());
+      auto formatted  = mtx::date_time::to_string(epoch_time, "%a %b %d %H:%M:%S %Y");
+      show_element(l2, 2, boost::format(Y("Date: %1% UTC"))                % formatted);
 
     } else if (Is<KaxSegmentUID>(l2))
       show_element(l2, 2, boost::format(Y("Segment UID: %1%"))             % to_hex(static_cast<KaxSegmentUID *>(l2)));
