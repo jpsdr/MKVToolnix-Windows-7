@@ -76,10 +76,10 @@ exit \$?
 EOF
   chmod 755 run_configure.sh
 
-  if [[ ! -f configure ]]; then
-    echo Creating \'configure\'
-    ./autogen.sh
-  fi
+  echo Creating \'configure\'
+  ./autogen.sh
+  git submodule init
+  git submodule update
 }
 
 function configure_mkvtoolnix {
