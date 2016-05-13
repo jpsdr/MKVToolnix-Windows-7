@@ -993,7 +993,7 @@ mpeg4::p10::avc_es_parser_c::add_bytes(unsigned char *buffer,
       if (0 != marker_size) {
         if (-1 != previous_pos) {
           int new_size = cursor.get_position() - marker_size - previous_pos - previous_marker_size;
-          memory_cptr nalu(new memory_c(safemalloc(new_size), new_size, true));
+          auto nalu = memory_c::alloc(new_size);
           cursor.copy(nalu->get_buffer(), previous_pos + previous_marker_size, new_size);
           m_parsed_position = previous_parsed_pos + previous_pos;
           remove_trailing_zero_bytes(*nalu);
@@ -1020,7 +1020,7 @@ mpeg4::p10::avc_es_parser_c::add_bytes(unsigned char *buffer,
 
   int new_size = cursor.get_size() - previous_pos;
   if (0 != new_size) {
-    m_unparsed_buffer = memory_cptr(new memory_c(safemalloc(new_size), new_size, true));
+    m_unparsed_buffer = memory_c::alloc(new_size);
     cursor.copy(m_unparsed_buffer->get_buffer(), previous_pos, new_size);
 
   } else
@@ -1665,28 +1665,29 @@ mpeg4::p10::avc_es_parser_c::cleanup() {
 memory_cptr
 mpeg4::p10::avc_es_parser_c::create_nalu_with_size(const memory_cptr &src,
                                                    bool add_extra_data) {
-  int final_size = m_nalu_size_length + src->get_size(), offset = 0, size;
-  unsigned char *buffer;
+  auto final_size = m_nalu_size_length + src->get_size();
 
-  if (add_extra_data) {
+  if (add_extra_data)
     for (auto &mem : m_extra_data)
       final_size += mem->get_size();
-    buffer = (unsigned char *)safemalloc(final_size);
 
+  auto buffer = memory_c::alloc(final_size);
+  auto dest   = buffer->get_buffer();
+
+  if (add_extra_data) {
     for (auto &mem : m_extra_data) {
-      memcpy(buffer + offset, mem->get_buffer(), mem->get_size());
-      offset += mem->get_size();
+      memcpy(dest, mem->get_buffer(), mem->get_size());
+      dest += mem->get_size();
     }
 
     m_extra_data.clear();
-  } else
-    buffer = (unsigned char *)safemalloc(final_size);
+  }
 
-  size = src->get_size();
-  write_nalu_size(buffer + offset, size);
-  memcpy(buffer + offset + m_nalu_size_length, src->get_buffer(), size);
+  auto size = src->get_size();
+  write_nalu_size(dest, size);
+  memcpy(dest + m_nalu_size_length, src->get_buffer(), size);
 
-  return memory_cptr(new memory_c(buffer, final_size, true));
+  return buffer;
 }
 
 memory_cptr
