@@ -162,4 +162,17 @@ class Controller
 
     @results_mutex.unlock
   end
+
+  def list_failed_ids
+    entries = @dir_entries.collect do |entry|
+      if (FileTest.file?(entry) && (entry =~ /^test-(\d+).*\.rb$/))
+        class_name  = file_name_to_class_name entry
+        @results.status?(class_name) == :failed ? $1.to_i : nil
+      else
+        nil
+      end
+    end
+
+    puts entries.reject(&:nil?).sort.map(&:to_s).join(" ")
+  end
 end

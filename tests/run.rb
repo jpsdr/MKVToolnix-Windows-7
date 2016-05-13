@@ -57,9 +57,13 @@ def main
       tests = controller.results.results.keys.collect { |e| re.match(e) ? $1 : nil }.compact
       error_and_exit "No tests matched RE #{re}" if tests.empty?
       tests.each { |e| controller.add_test_case e }
+    elsif ((arg == "-F" || (arg == "--list-failed")))
+      controller.list_failed_ids
+      exit 0
     elsif ((arg == "-h") || (arg == "--help"))
       puts <<EOHELP
 Syntax: run.rb [options]
+  -F, --list-failed     list IDs of failed tests
   -f, --failed          only run tests marked as failed
   -n, --new             only run tests for which no entry exists in results.txt
   -dDATE                only run tests added after DATE (YYYYMMDD-HHMM)
