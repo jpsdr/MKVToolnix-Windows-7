@@ -16,8 +16,9 @@
 
 #include "common/codec.h"
 #include "common/hacks.h"
-#include "common/math.h"
 #include "common/hevc.h"
+#include "common/math.h"
+#include "common/mpeg.h"
 #include "merge/connection_checks.h"
 #include "merge/output_control.h"
 #include "output/p_hevc_es.h"
@@ -91,7 +92,7 @@ hevc_es_video_packetizer_c::process(packet_cptr packet) {
     m_parser.add_bytes(packet->data->get_buffer(), packet->data->get_size());
     flush_frames();
 
-  } catch (mtx::hevc::nalu_size_length_x &error) {
+  } catch (mtx::mpeg::nalu_size_length_x &error) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id,
                 boost::format(Y("This HEVC contains frames that are too big for the current maximum NALU size. "
                                 "You have to re-run mkvmerge and set the maximum NALU size to %1% for this track "

@@ -372,30 +372,6 @@ struct frame_t {
   }
 };
 
-class nalu_size_length_x: public mtx::exception {
-protected:
-  unsigned int m_required_length;
-
-public:
-  nalu_size_length_x(unsigned int required_length)
-    : m_required_length(required_length)
-  {
-  }
-  virtual ~nalu_size_length_x() throw() { }
-
-  virtual const char *what() const throw() {
-    return "'NALU size' length too small";
-  }
-
-  virtual std::string error() const throw() {
-    return (boost::format("length of the 'NALU size' field too small: need at least %1% bytes") % m_required_length).str();
-  }
-
-  virtual unsigned int get_required_length() const {
-    return m_required_length;
-  }
-};
-
 class hevcc_c {
 public:
   unsigned int m_configuration_version,
@@ -616,7 +592,6 @@ protected:
   void cleanup();
   void flush_incomplete_frame();
   void flush_unhandled_nalus();
-  void write_nalu_size(unsigned char *buffer, size_t size, int this_nalu_size_length = -1) const;
   memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);
   static void init_nalu_names();
 };

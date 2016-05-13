@@ -1525,26 +1525,6 @@ es_parser_c::add_timecode(int64_t timecode) {
 }
 
 void
-es_parser_c::write_nalu_size(unsigned char *buffer,
-                             size_t size,
-                             int this_nalu_size_length)
-  const {
-  unsigned int nalu_size_length = -1 == this_nalu_size_length ? m_nalu_size_length : this_nalu_size_length;
-
-  if (!m_ignore_nalu_size_length_errors && (size >= ((uint64_t)1 << (nalu_size_length * 8)))) {
-    unsigned int required_bytes = nalu_size_length + 1;
-    while (size >= (1u << (required_bytes * 8)))
-      ++required_bytes;
-
-    throw nalu_size_length_x(required_bytes);
-  }
-
-  unsigned int i;
-  for (i = 0; i < nalu_size_length; i++)
-    buffer[i] = (size >> (8 * (nalu_size_length - 1 - i))) & 0xff;
-}
-
-void
 es_parser_c::flush_incomplete_frame() {
   if (!m_have_incomplete_frame || !m_hevcc_ready)
     return;
@@ -1584,7 +1564,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
     memory_c &mem = *(m_incomplete_frame.m_data.get());
     int offset    = mem.get_size();
     mem.resize(offset + m_nalu_size_length + nalu->get_size());
-    write_nalu_size(mem.get_buffer() + offset, nalu->get_size());
+    mtx::mpeg::write_nalu_size(mem.get_buffer() + offset, nalu->get_size(), m_nalu_size_length, m_ignore_nalu_size_length_errors);
     memcpy(mem.get_buffer() + offset + m_nalu_size_length, nalu->get_buffer(), nalu->get_size());
 
     return;
@@ -2126,28 +2106,12 @@ es_parser_c::cleanup() {
 memory_cptr
 es_parser_c::create_nalu_with_size(const memory_cptr &src,
                                    bool add_extra_data) {
-  int final_size = m_nalu_size_length + src->get_size(), offset = 0, size;
-  unsigned char *buffer;
+  auto nalu = mtx::mpeg::create_nalu_with_size(src, m_nalu_size_length, add_extra_data ? m_extra_data : std::vector<memory_cptr>{} );
 
-  if (add_extra_data) {
-    for (auto &mem : m_extra_data)
-      final_size += mem->get_size();
-    buffer = (unsigned char *)safemalloc(final_size);
-
-    for (auto &mem : m_extra_data) {
-      memcpy(buffer + offset, mem->get_buffer(), mem->get_size());
-      offset += mem->get_size();
-    }
-
+  if (add_extra_data)
     m_extra_data.clear();
-  } else
-    buffer = (unsigned char *)safemalloc(final_size);
 
-  size = src->get_size();
-  write_nalu_size(buffer + offset, size);
-  memcpy(buffer + offset + m_nalu_size_length, src->get_buffer(), size);
-
-  return memory_cptr(new memory_c(buffer, final_size, true));
+  return nalu;
 }
 
 memory_cptr
