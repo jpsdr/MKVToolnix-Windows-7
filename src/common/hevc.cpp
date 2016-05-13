@@ -185,9 +185,8 @@ hevcc_c::parse_sei_list() {
   if (size == 100)
     return true;
 
-  unsigned char *newsei = (unsigned char *)safemalloc(size);
-  memset(newsei, 0, sizeof(char) * (size));
-  memory_cptr mcptr_newsei(new memory_c(newsei, size, true));
+  auto mcptr_newsei = memory_c::alloc(size);
+  auto newsei       = mcptr_newsei->get_buffer();
   bit_writer_c w(newsei, size);
   mm_mem_io_c byte_writer{newsei, static_cast<uint64_t>(size), 100};
 
@@ -940,10 +939,9 @@ slice_info_t::dump()
 bool
 parse_vps(memory_cptr const &buffer,
           vps_info_t &vps) {
-  int size              = buffer->get_size();
-  unsigned char *newvps = (unsigned char *)safemalloc(size + 100);
-  memset(newvps, 0, sizeof(char) * (size+100));
-  memory_cptr mcptr_newvps(new memory_c(newvps, size + 100, true));
+  auto size         = buffer->get_size();
+  auto mcptr_newvps = memory_c::alloc(size + 100);
+  auto newvps       = mcptr_newvps->get_buffer();
   bit_reader_c r(buffer->get_buffer(), size);
   bit_writer_c w(newvps, size + 100);
   unsigned int i, j;
@@ -1017,9 +1015,9 @@ parse_sps(memory_cptr const &buffer,
           sps_info_t &sps,
           std::vector<vps_info_t> &m_vps_info_list,
           bool keep_ar_info) {
-  int size              = buffer->get_size();
-  unsigned char *newsps = (unsigned char *)safemalloc(size + 100);
-  memory_cptr mcptr_newsps(new memory_c(newsps, size + 100, true));
+  auto size         = buffer->get_size();
+  auto mcptr_newsps = memory_c::alloc(size + 100);
+  auto newsps       = mcptr_newsps->get_buffer();
   bit_reader_c r(buffer->get_buffer(), size);
   bit_writer_c w(newsps, size + 100);
   unsigned int i;
@@ -1466,8 +1464,8 @@ es_parser_c::add_bytes(unsigned char *buffer,
 
       if (0 != marker_size) {
         if (-1 != previous_pos) {
-          int new_size = cursor.get_position() - marker_size - previous_pos - previous_marker_size;
-          memory_cptr nalu(new memory_c(safemalloc(new_size), new_size, true));
+          auto new_size = cursor.get_position() - marker_size - previous_pos - previous_marker_size;
+          auto nalu     = memory_c::alloc(new_size);
           cursor.copy(nalu->get_buffer(), previous_pos + previous_marker_size, new_size);
           m_parsed_position = previous_parsed_pos + previous_pos;
           handle_nalu(nalu);
@@ -1493,7 +1491,7 @@ es_parser_c::add_bytes(unsigned char *buffer,
 
   int new_size = cursor.get_size() - previous_pos;
   if (0 != new_size) {
-    m_unparsed_buffer = memory_cptr(new memory_c(safemalloc(new_size), new_size, true));
+    m_unparsed_buffer = memory_c::alloc(new_size);
     cursor.copy(m_unparsed_buffer->get_buffer(), previous_pos, new_size);
 
   } else
