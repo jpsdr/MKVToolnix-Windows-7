@@ -117,6 +117,7 @@ Track::setDefaults() {
   m_forcedTrackFlag        = m_properties.value("forced_track").toBool() ? 1 : 0;
   m_forcedTrackFlagWasSet  = m_forcedTrackFlag == 1;
   m_defaultTrackFlagWasSet = m_properties.value("default_track").toBool();
+  m_defaultTrackFlagWasPresent = m_properties.contains("default_track");
   m_name                   = m_properties.value("track_name").toString();
   m_nameWasPresent         = !m_name.isEmpty();
   m_cropping               = m_properties.value("cropping").toString();
@@ -180,6 +181,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("muxThis",                m_muxThis);
   settings.setValue("setAspectRatio",         m_setAspectRatio);
   settings.setValue("defaultTrackFlagWasSet", m_defaultTrackFlagWasSet);
+  settings.setValue("defaultTrackFlagWasPresent", m_defaultTrackFlagWasPresent);
   settings.setValue("forcedTrackFlagWasSet",  m_forcedTrackFlagWasSet);
   settings.setValue("aacSbrWasDetected",      m_aacSbrWasDetected);
   settings.setValue("nameWasPresent",         m_nameWasPresent);
@@ -224,6 +226,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_muxThis                   = l.settings.value("muxThis").toBool();
   m_setAspectRatio            = l.settings.value("setAspectRatio").toBool();
   m_defaultTrackFlagWasSet    = l.settings.value("defaultTrackFlagWasSet").toBool();
+  m_defaultTrackFlagWasPresent = l.settings.value("defaultTrackFlagWasPresent").toBool() || m_defaultTrackFlagWasSet;
   m_forcedTrackFlagWasSet     = l.settings.value("forcedTrackFlagWasSet").toBool();
   m_aacSbrWasDetected         = l.settings.value("aacSbrWasDetected").toBool();
   m_name                      = l.settings.value("name").toString();

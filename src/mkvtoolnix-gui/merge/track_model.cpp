@@ -645,10 +645,18 @@ TrackModel::updateEffectiveDefaultTrackFlags() {
   }
 
   // Step three: for tracks without explicit settings (determine
-  // automatically) see if there are tracks which have set their
-  // default track flag to yes in their source container.
+  // automatically) see if there are tracks which have their default
+  // track flag set their source container. If it was set to "no" keep
+  // it that way. For "yes" make sure not to set it to "yes" for
+  // others, too.
   for (auto &track : regularEnabledTracks) {
-    if (!track->m_effectiveDefaultTrackFlag && !isSet[track->m_type] && track->m_defaultTrackFlagWasSet) {
+    if (track->m_effectiveDefaultTrackFlag || !track->m_defaultTrackFlagWasPresent)
+      continue;
+
+    if (!track->m_defaultTrackFlagWasSet)
+      track->m_effectiveDefaultTrackFlag = false;
+
+    else if (!isSet[track->m_type]) {
       isSet[track->m_type]               = true;
       track->m_effectiveDefaultTrackFlag = true;
     }

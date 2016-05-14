@@ -1,3 +1,11 @@
+2016-05-14  Moritz Bunkus  <moritz@bunkus.org>
+
+        * MKVToolNix GUI: merge tool bug fix: the track column "default
+        track in output" wasn't taking into account if the track had its
+        "default track" flag set to "no" in the source file. This would
+        result in the column showing "yes" in certain situations even
+        though mkvmerge would assign "no".
+
 2016-05-06  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: fixed detection of (E-)AC-3 in MPEG TS files
