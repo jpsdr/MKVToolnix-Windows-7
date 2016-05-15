@@ -783,8 +783,16 @@ cluster_helper_c::generate_chapters_if_necessary(packet_cptr const &packet) {
 
   auto now = timestamp_c::ns(packet->assigned_timecode);
 
-  while (!m->chapter_generation_last_generated.valid() || (m->chapter_generation_last_generated <= now))
-    generate_one_chapter(!m->chapter_generation_last_generated.valid() ? timestamp_c::ns(0) : m->chapter_generation_last_generated + m->chapter_generation_interval);
+  while (true) {
+    if (!m->chapter_generation_last_generated.valid())
+      generate_one_chapter(timestamp_c::ns(0));
+
+    auto next_chapter = m->chapter_generation_last_generated + m->chapter_generation_interval;
+    if (next_chapter > now)
+      break;
+
+    generate_one_chapter(next_chapter);
+  }
 }
 
 void
