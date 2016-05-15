@@ -3,10 +3,12 @@
 #include <QByteArray>
 #include <QFile>
 #include <QIODevice>
+#include <QRegularExpression>
 #include <QUrl>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/file.h"
+#include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -46,6 +48,26 @@ pathToFileUrl(QString const &path) {
   url.setScheme(Q("file"));
   url.setPath(path);
   return url;
+}
+
+QString
+removeInvalidPathCharacters(QString fileName) {
+#if defined(SYS_WINDOWS)
+  static DeferredRegularExpression s_driveRE{Q("^[A-Za-z]:")}, s_invalidCharRE{Q("[<>\"|?*\\x{01}-\\x{1f}]+")}, s_invalidCharRE2{Q("[:]+")};
+
+  fileName.remove(*s_invalidCharRE);
+
+  QString drive;
+  if (fileName.contains(*s_driveRE)) {
+    drive = fileName.left(2);
+    fileName.remove(0, 2);
+  }
+
+  return drive + fileName.remove(*s_invalidCharRE2);
+
+#else
+  return fileName;
+#endif
 }
 
 }}}

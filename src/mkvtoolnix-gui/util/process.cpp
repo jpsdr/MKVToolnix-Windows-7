@@ -2,12 +2,10 @@
 
 #include <QtGlobal>
 #include <QRegExp>
-#include <QRegularExpression>
 #include <QTemporaryFile>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/process.h"
-#include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -97,26 +95,6 @@ currentUserName() {
     userName = QString::fromLocal8Bit(qgetenv("USER"));
 
   return userName;
-}
-
-QString
-removeInvalidPathCharacters(QString fileName) {
-#if defined(SYS_WINDOWS)
-  static DeferredRegularExpression s_driveRE{Q("^[A-Za-z]:")}, s_invalidCharRE{Q("[<>\"|?*\\x{01}-\\x{1f}]+")}, s_invalidCharRE2{Q("[:]+")};
-
-  fileName.remove(*s_invalidCharRE);
-
-  QString drive;
-  if (fileName.contains(*s_driveRE)) {
-    drive = fileName.left(2);
-    fileName.remove(0, 2);
-  }
-
-  return drive + fileName.remove(*s_invalidCharRE2);
-
-#else
-  return fileName;
-#endif
 }
 
 }}}

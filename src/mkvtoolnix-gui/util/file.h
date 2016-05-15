@@ -18,6 +18,8 @@ BomAsciiCheckResult checkForBomAndNonAscii(QString const &fileName);
 
 QUrl pathToFileUrl(QString const &path);
 
+QString removeInvalidPathCharacters(QString fileName);
+
 }}}
 
 #endif  // MTX_MKVTOOLNIX_GUI_UTIL_FILE_H
