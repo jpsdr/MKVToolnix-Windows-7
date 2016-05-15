@@ -1432,13 +1432,6 @@ prepare_additional_chapter_atoms_for_rendering() {
 
 static void
 render_chapters() {
-  auto s_debug = debugging_option_c{"splitting_chapters"};
-
-  mxdebug_if(s_debug,
-             boost::format("render_chapters: have void? %1% size %2% have chapters? %3% size %4%\n")
-             % !!s_kax_chapters_void     % (s_kax_chapters_void     ? s_kax_chapters_void    ->ElementSize() : 0)
-             % !!s_chapters_in_this_file % (s_chapters_in_this_file ? s_chapters_in_this_file->ElementSize() : 0));
-
   prepare_additional_chapter_atoms_for_rendering();
 
   if (!s_chapters_in_this_file) {
@@ -1448,12 +1441,11 @@ render_chapters() {
 
   fix_mandatory_elements(s_chapters_in_this_file.get());
 
-  s_chapters_in_this_file->UpdateSize();
+  auto replaced = false;
+  if (s_kax_chapters_void)
+    replaced = s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, true);
 
-  if (s_kax_chapters_void && (s_kax_chapters_void->ElementSize() >= s_chapters_in_this_file->ElementSize()))
-    s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, true);
-
-  else {
+  if (!replaced) {
     s_out->setFilePointer(0, seek_end);
     s_chapters_in_this_file->Render(*s_out);
   }
