@@ -76,7 +76,7 @@ fixMappings(SourceFile *oldFile,
 MuxConfig::MuxConfig(QString const &fileName)
   : m_configFileName{fileName}
   , m_splitMode{DoNotSplit}
-  , m_splitMaxFiles{0}
+  , m_splitMaxFiles{1}
   , m_linkFiles{false}
   , m_webmMode{false}
 {
@@ -245,7 +245,7 @@ MuxConfig::load(Util::ConfigFile &settings) {
   m_chapterCueNameFormat          = settings.value("chapterCueNameFormat").toString();
   m_additionalOptions             = settings.value("additionalOptions").toString();
   m_splitMode                     = static_cast<SplitMode>(settings.value("splitMode").toInt());
-  m_splitMaxFiles                 = settings.value("splitMaxFiles").toInt();
+  m_splitMaxFiles                 = std::max(settings.value("splitMaxFiles").toInt(), 1);
   m_linkFiles                     = settings.value("linkFiles").toBool();
   m_webmMode                      = settings.value("webmMode").toBool();
   m_chapterGenerationMode         = static_cast<ChapterGenerationMode>(settings.value("chapterGenerationMode").toInt());
@@ -443,7 +443,7 @@ MuxConfig::buildMkvmergeOptions()
               :                                      Q("PROGRAM EROR");
     options << Q("--split") << (mode + m_splitOptions);
 
-    if (m_splitMaxFiles)
+    if (m_splitMaxFiles >= 2)
       options << Q("--split-max-files") << QString::number(m_splitMaxFiles);
     if (m_linkFiles)
       options << Q("--link");
