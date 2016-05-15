@@ -12,6 +12,7 @@
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/option_file.h"
@@ -328,6 +329,11 @@ bool
 Tab::isReadyForMerging() {
   if (m_config.m_destination.isEmpty()) {
     Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("You have to set the output file name before you can start merging or add a job to the job queue.")).exec();
+    return false;
+  }
+
+  if (m_config.m_destination != Util::removeInvalidPathCharacters(m_config.m_destination)) {
+    Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("The output file name is invalid and must be fixed before you can start merging or add a job to the job queue.")).exec();
     return false;
   }
 

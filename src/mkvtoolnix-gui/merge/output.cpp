@@ -225,7 +225,13 @@ Tab::onTitleChanged(QString newValue) {
 
 void
 Tab::setDestination(QString const &newValue) {
-  m_config.m_destination = Util::removeInvalidPathCharacters(newValue);
+  QString prefix;
+#if defined(SYS_WINDOWS)
+  if (newValue.startsWith(Q(":")))
+    prefix = Q(":");
+#endif
+
+  m_config.m_destination = prefix + Util::removeInvalidPathCharacters(newValue);
   if (!m_config.m_destination.isEmpty()) {
     auto &settings           = Util::Settings::get();
     settings.m_lastOutputDir = QFileInfo{ newValue }.absoluteDir();
