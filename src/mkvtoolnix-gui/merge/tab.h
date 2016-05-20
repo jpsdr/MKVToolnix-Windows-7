@@ -51,7 +51,7 @@ protected:
   QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_addFilesAction2, *m_appendFilesAction2, *m_addAdditionalPartsAction2;
   QAction *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
   QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction, *m_openFilesInMediaInfoAction, *m_openTracksInMediaInfoAction;
-  QAction *m_selectAllAttachedFilesAction, *m_enableSelectedAttachedFilesAction, *m_disableSelectedAttachedFilesAction;
+  QAction *m_enableAllAttachedFilesAction, *m_disableAllAttachedFilesAction, *m_enableSelectedAttachedFilesAction, *m_disableSelectedAttachedFilesAction;
   QMenu *m_filesMenu, *m_tracksMenu, *m_attachedFilesMenu, *m_attachmentsMenu, *m_selectTracksOfTypeMenu, *m_addFilesMenu;
 
   // "Attachments" tab:
@@ -219,9 +219,8 @@ public slots:
   virtual void onSelectAllAttachments();
   virtual void addAttachments(QStringList const &fileNames);
 
-  virtual void selectAllAttachedFiles();
-  virtual void enableSelectedAttachedFiles();
-  virtual void disableSelectedAttachedFiles();
+  virtual void enableDisableAllAttachedFiles(bool enable);
+  virtual void enableDisableSelectedAttachedFiles(bool enable);
   virtual void attachedFileItemChanged(QStandardItem *item);
 
   virtual void resizeAttachedFilesColumnsToContents() const;
@@ -291,7 +290,6 @@ protected:
 
   virtual QList<Track *> selectedAttachedFiles() const;
   virtual QList<Attachment *> selectedAttachments() const;
-  virtual void selectAttachedFiles(QList<Track *> const &attachedFiles);
   virtual void selectAttachments(QList<Attachment *> const &attachments);
 
   virtual void addToJobQueue(bool startNow);

@@ -56,7 +56,8 @@ Tab::Tab(QWidget *parent)
   , m_selectAllSubtitlesTracksAction{new QAction{this}}
   , m_openFilesInMediaInfoAction{new QAction{this}}
   , m_openTracksInMediaInfoAction{new QAction{this}}
-  , m_selectAllAttachedFilesAction{new QAction{this}}
+  , m_enableAllAttachedFilesAction{new QAction{this}}
+  , m_disableAllAttachedFilesAction{new QAction{this}}
   , m_enableSelectedAttachedFilesAction{new QAction{this}}
   , m_disableSelectedAttachedFilesAction{new QAction{this}}
   , m_filesMenu{new QMenu{this}}

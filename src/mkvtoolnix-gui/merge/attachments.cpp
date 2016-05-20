@@ -30,7 +30,8 @@ Tab::setupAttachmentsControls() {
   m_attachedFilesMenu->addAction(m_enableSelectedAttachedFilesAction);
   m_attachedFilesMenu->addAction(m_disableSelectedAttachedFilesAction);
   m_attachedFilesMenu->addSeparator();
-  m_attachedFilesMenu->addAction(m_selectAllAttachedFilesAction);
+  m_attachedFilesMenu->addAction(m_enableAllAttachedFilesAction);
+  m_attachedFilesMenu->addAction(m_disableAllAttachedFilesAction);
 
   // Attachments context menu
   m_attachmentsMenu->addAction(m_addAttachmentsAction);
@@ -57,7 +58,8 @@ Tab::setupAttachmentsControls() {
 
   m_enableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
   m_disableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
-  m_selectAllAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/edit-select-all.png")});
+  m_enableAllAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
+  m_disableAllAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
 
   m_addAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
   m_removeAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
@@ -69,9 +71,10 @@ Tab::setupAttachmentsControls() {
   connect(m_removeAllAttachmentsAction,         &QAction::triggered,                                                                this, &Tab::onRemoveAllAttachments);
   connect(m_selectAllAttachmentsAction,         &QAction::triggered,                                                                this, &Tab::onSelectAllAttachments);
 
-  connect(m_selectAllAttachedFilesAction,       &QAction::triggered,                                                                this, &Tab::selectAllAttachedFiles);
-  connect(m_enableSelectedAttachedFilesAction,  &QAction::triggered,                                                                this, &Tab::enableSelectedAttachedFiles);
-  connect(m_disableSelectedAttachedFilesAction, &QAction::triggered,                                                                this, &Tab::disableSelectedAttachedFiles);
+  connect(m_enableAllAttachedFilesAction,       &QAction::triggered,                                                                this, [=]() { enableDisableAllAttachedFiles(true); });
+  connect(m_disableAllAttachedFilesAction,      &QAction::triggered,                                                                this, [=]() { enableDisableAllAttachedFiles(false); });
+  connect(m_enableSelectedAttachedFilesAction,  &QAction::triggered,                                                                this, [=]() { enableDisableSelectedAttachedFiles(true); });
+  connect(m_disableSelectedAttachedFilesAction, &QAction::triggered,                                                                this, [=]() { enableDisableSelectedAttachedFiles(false); });
 
   connect(ui->attachmentDescription,            &QLineEdit::textChanged,                                                            this, &Tab::onAttachmentDescriptionChanged);
   connect(ui->attachmentMIMEType,               static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged), this, &Tab::onAttachmentMIMETypeChanged);
@@ -146,30 +149,6 @@ Tab::selectedAttachments()
 }
 
 void
-Tab::selectAttachedFiles(QList<Track *> const &attachedFiles) {
-  auto numColumns = m_attachedFilesModel->columnCount() - 1;
-  auto selection  = QItemSelection{};
-
-  for (auto const &attachedFile : attachedFiles) {
-    auto row = m_attachedFilesModel->rowForAttachedFile(*attachedFile);
-    if (row)
-      selection.select(m_attachedFilesModel->index(*row, 0), m_attachedFilesModel->index(*row, numColumns));
-  }
-
-  ui->attachedFiles->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
-}
-
-void
-Tab::selectAllAttachedFiles() {
-  auto numColumns = m_attachedFilesModel->columnCount();
-  auto numRows    = m_attachedFilesModel->rowCount();
-  auto selection  = QItemSelection{};
-
-  selection.select(m_attachedFilesModel->index(0, 0), m_attachedFilesModel->index(numRows - 1, numColumns - 1));
-  ui->attachedFiles->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
-}
-
-void
 Tab::selectAttachments(QList<Attachment *> const &attachments) {
   auto numColumns = m_attachmentsModel->columnCount() - 1;
   auto selection  = QItemSelection{};
@@ -183,17 +162,24 @@ Tab::selectAttachments(QList<Attachment *> const &attachments) {
 }
 
 void
-Tab::enableSelectedAttachedFiles() {
-  withSelectedAttachedFiles([](Track &attachedFile) {
-    attachedFile.m_muxThis = true;
+Tab::enableDisableSelectedAttachedFiles(bool enable) {
+  withSelectedAttachedFiles([=](Track &attachedFile) {
+    attachedFile.m_muxThis = enable;
   });
 }
 
 void
-Tab::disableSelectedAttachedFiles() {
-  withSelectedAttachedFiles([](Track &attachedFile) {
-    attachedFile.m_muxThis = false;
-  });
+Tab::enableDisableAllAttachedFiles(bool enable) {
+  if (m_currentlySettingInputControlValues)
+    return;
+
+  for (int row = 0, numRows = m_attachedFilesModel->rowCount(); row < numRows; ++row) {
+    auto attachedFile = m_attachedFilesModel->attachedFileForRow(row);
+    if (attachedFile) {
+      attachedFile->m_muxThis = enable;
+      m_attachedFilesModel->attachedFileUpdated(*attachedFile);
+    }
+  }
 }
 
 void
@@ -344,7 +330,8 @@ Tab::enableAttachedFilesActions() {
 
   m_enableSelectedAttachedFilesAction->setEnabled(hasSelection);
   m_disableSelectedAttachedFilesAction->setEnabled(hasSelection);
-  m_selectAllAttachedFilesAction->setEnabled(hasEntries);
+  m_enableAllAttachedFilesAction->setEnabled(hasEntries);
+  m_disableAllAttachedFilesAction->setEnabled(hasEntries);
 }
 
 void
@@ -394,7 +381,8 @@ Tab::retranslateAttachmentsUI() {
 
   m_enableSelectedAttachedFilesAction->setText(QY("&Enable selected attached files"));
   m_disableSelectedAttachedFilesAction->setText(QY("&Disable selected attached files"));
-  m_selectAllAttachedFilesAction->setText(QY("&Select all attached files"));
+  m_enableAllAttachedFilesAction->setText(QY("E&nable all attached files"));
+  m_disableAllAttachedFilesAction->setText(QY("Di&sable all attached files"));
 
   m_addAttachmentsAction->setText(QY("&Add attachments"));
   m_removeAttachmentsAction->setText(QY("&Remove attachments"));
