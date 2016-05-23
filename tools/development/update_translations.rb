@@ -11,6 +11,7 @@ $mtx_dir    = File.absolute_path(File.dirname(__FILE__) + "/../..")
 $po_dir     = "#{$mtx_dir}/po"
 $man_po_dir = "#{$mtx_dir}doc/man/po4a/po"
 
+require "#{$mtx_dir}/rake.d/extensions"
 require "#{$mtx_dir}/rake.d/helpers"
 require "#{$mtx_dir}/rake.d/po"
 
@@ -32,13 +33,20 @@ module AddPo
     dir       = is_man_po ? $man_po_dir : $po_dir
     target    = "#{dir}/#{language}.po"
 
-    File.open(target, "w") { |file| file.puts content.map(&:chomp).join("\n") }
-    File.unlink file_name
-    File.chmod 0644, target
-
     puts "#{file_name} → #{target}"
 
-    normalize_po target
+    runq_git target, "checkout HEAD -- #{target}"
+
+    orig_items = read_po target
+
+    puts_qaction "merge", target
+
+    updated_items = read_po file_name
+    merged_items  = merge_po orig_items, updated_items
+
+    write_po target, merged_items
+
+    File.unlink file_name
   end
 
   def self.unpack_p7z file_name

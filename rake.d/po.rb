@@ -138,8 +138,8 @@ def replace_po_meta_info orig_metas, transifex_meta, key
   orig_metas.each { |meta| meta.gsub!(/"#{key}: \s+ .+? \\n"/x, "\"#{key}: #{new_value}\\n\"") }
 end
 
-def transifex_merge orig_items, transifex_items
-  translated = Hash[ *transifex_items.
+def merge_po orig_items, updated_items
+  translated = Hash[ *updated_items.
     select { |item| item[:msgid] && item[:msgid].first && !item[:msgid].first.empty? && item[:msgstr] && !item[:msgstr].empty? && !item[:msgstr].first.empty? }.
     map    { |item| [ item[:msgid].first, item ] }.
     flatten(1)
@@ -150,18 +150,18 @@ def transifex_merge orig_items, transifex_items
   orig_items.each do |orig_item|
     next if !orig_item[:msgid] || orig_item[:msgid].empty? || orig_item[:msgid].first.empty?
 
-    transifex_item = translated[ orig_item[:msgid].first ]
+    updated_item = translated[ orig_item[:msgid].first ]
 
-    next if !transifex_item
+    next if !updated_item
 
-    next if (orig_item[:msgstr] == transifex_item[:msgstr]) && !(orig_item[:flags] || []).include?("fuzzy")
+    next if (orig_item[:msgstr] == updated_item[:msgstr]) && !(orig_item[:flags] || []).include?("fuzzy")
 
     # puts "UPDATE of msgid " + orig_item[:msgid].first
     # puts "  old " + orig_item[:msgstr].first
-    # puts "  new " + transifex_item[:msgstr].first
+    # puts "  new " + updated_item[:msgstr].first
 
     update_meta_info   = true
-    orig_item[:msgstr] = transifex_item[:msgstr]
+    orig_item[:msgstr] = updated_item[:msgstr]
 
     orig_item[:flags].reject! { |flag| flag == "fuzzy" } if orig_item[:flags]
     orig_item.delete(:suggestions)
@@ -170,10 +170,10 @@ def transifex_merge orig_items, transifex_items
   # update_meta_info = true
 
   if update_meta_info
-    orig_meta      = orig_items.first[:comments]
-    transifex_meta = transifex_items.first[:comments].join("")
+    orig_meta    = orig_items.first[:comments]
+    updated_meta = updated_items.first[:comments].join("")
 
-    %w{PO-Revision-Date Last-Translator Language-Team Plural-Forms}.each { |key| replace_po_meta_info orig_meta, transifex_meta, key }
+    %w{PO-Revision-Date Last-Translator Language-Team Plural-Forms}.each { |key| replace_po_meta_info orig_meta, updated_meta, key }
   end
 
   orig_items
@@ -191,7 +191,7 @@ def transifex_pull_and_merge resource, language
   puts_qaction "merge", po_file
 
   transifex_items = read_po(po_file)
-  merged_items    = transifex_merge orig_items, transifex_items
+  merged_items    = merge_po orig_items, transifex_items
 
   write_po po_file, merged_items
 end
