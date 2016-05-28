@@ -1,5 +1,5 @@
 !define PRODUCT_NAME "MKVToolNix"
-!define PRODUCT_VERSION "9.1.0"
+!define PRODUCT_VERSION "9.2.0"
 !define PRODUCT_VERSION_BUILD " [20160504-01204]"
 !define PRODUCT_PUBLISHER "Moritz Bunkus"
 !define PRODUCT_WEB_SITE "https://www.bunkus.org/videotools/mkvtoolnix/"
