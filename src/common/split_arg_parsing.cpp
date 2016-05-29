@@ -36,7 +36,7 @@ parse_split_parts(const std::string &arg,
   for (auto const &part_spec : split(s, ",")) {
     auto pair = split(part_spec, "-");
     if (pair.size() != 2)
-      throw format_x{boost::format(Y("Invalid start/end specification for '--split' in '--split %1%' (curent part: %2%).\n")) % arg % part_spec};
+      throw format_x{boost::format(Y("Invalid start/end specification for '--split' in '--split %1%' (current part: %2%).\n")) % arg % part_spec};
 
     bool create_new_file = true;
     if (pair[0].substr(0, 1) == "+") {
