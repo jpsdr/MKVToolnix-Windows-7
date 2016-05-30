@@ -17,6 +17,11 @@ require "#{$mtx_dir}/rake.d/po"
 
 module AddPo
   def self.handle_po file_name
+    file_name = File.absolute_path(file_name)
+    Dir.chdir($mtx_dir) { self.handle_po_impl file_name }
+  end
+
+  def self.handle_po_impl file_name
     file_name = File.absolute_path file_name
     content   = IO.
       readlines(file_name).
