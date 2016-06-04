@@ -21,6 +21,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "common/at_scope_exit.h"
+#include "common/math.h"
 #include "common/timestamp.h"
 
 namespace mtx { namespace conversion {
@@ -42,6 +43,8 @@ struct unsigned_checker<true> {
 
 }}
 
+bool parse_number_as_rational(std::string const &string, int64_rational_c &value);
+
 template<typename StrT, typename ValueT>
 bool
 parse_number(StrT const &string,
@@ -58,19 +61,34 @@ parse_number(StrT const &string,
 template<typename StrT>
 bool
 parse_number(StrT const &string,
+             int64_rational_c &value) {
+  return parse_number_as_rational(string, value);
+}
+
+template<typename StrT>
+bool
+parse_number(StrT const &string,
              double &value) {
-  std::string old_locale = setlocale(LC_NUMERIC, "C");
-  at_scope_exit_c restore_locale{ [&]() { setlocale(LC_NUMERIC, old_locale.c_str()); } };
-  return parse_number<StrT, double>(string, value);
+  int64_rational_c rational_value;
+  if (!parse_number(string, rational_value))
+    return false;
+
+  value = boost::rational_cast<double>(rational_value);
+
+  return true;
 }
 
 template<typename StrT>
 bool
 parse_number(StrT const &string,
              float &value) {
-  std::string old_locale = setlocale(LC_NUMERIC, "C");
-  at_scope_exit_c restore_locale{ [&]() { setlocale(LC_NUMERIC, old_locale.c_str()); } };
-  return parse_number<StrT, float>(string, value);
+  int64_rational_c rational_value;
+  if (!parse_number(string, rational_value))
+    return false;
+
+  value = boost::rational_cast<float>(rational_value);
+
+  return true;
 }
 
 bool parse_duration_number_with_unit(const std::string &s, int64_t &value);

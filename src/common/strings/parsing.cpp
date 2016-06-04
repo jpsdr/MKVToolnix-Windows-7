@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/math.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 
@@ -28,6 +29,39 @@ inline bool
 set_tcp_error(const boost::format &error) {
   timecode_parser_error = error.str();
   return false;
+}
+
+bool
+parse_number_as_rational(std::string const &string,
+                         int64_rational_c &value) {
+  auto parts = split(string, ".", 2);
+
+  while (parts.size() < 2)
+    parts.emplace_back("");
+
+  int64_t num{0};
+  if (!parts[0].length() || !parse_number(parts[0], num))
+    return false;
+
+  auto p1        = int64_rational_c{num, 1},
+    p2           = int64_rational_c{0, 1};
+  auto const len = parts[1].length();
+
+  if (len > 0) {
+    num = 0;
+    if (!parse_number(parts[1], num))
+      return false;
+
+    auto den = 1ll;
+    for (auto idx = 0u; idx < len; ++idx)
+      den *= 10;
+
+    p2 = int64_rational_c{num, den};
+  }
+
+  value = p1 + p2;
+
+  return true;
 }
 
 bool

@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include "common/math.h"
+#include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
 #include "gtest/gtest.h"
@@ -76,6 +78,42 @@ TEST(StringsParsing, ParseDurationNumberWithUnitInvalid) {
   EXPECT_FALSE(parse_duration_number_with_unit("i", value));
   EXPECT_FALSE(parse_duration_number_with_unit("i20", value));
   EXPECT_FALSE(parse_duration_number_with_unit("20/s", value));
+}
+
+TEST(StringsParsing, ParseNumberToRationalInvalidPatterns) {
+  int64_rational_c r;
+
+  EXPECT_FALSE(parse_number("",        r));
+  EXPECT_FALSE(parse_number("bad",     r));
+  EXPECT_FALSE(parse_number("123.bad", r));
+}
+
+TEST(StringsParsing, ParseNumberToRationalValidPatterns) {
+  int64_rational_c r;
+
+  EXPECT_TRUE(parse_number("0", r));
+  EXPECT_EQ(int64_rational_c(0ll, 1ll), r);
+
+  EXPECT_TRUE(parse_number("0.0", r));
+  EXPECT_EQ(int64_rational_c(0ll, 1ll), r);
+
+  EXPECT_TRUE(parse_number("1", r));
+  EXPECT_EQ(int64_rational_c(1ll, 1ll), r);
+
+  EXPECT_TRUE(parse_number("1.", r));
+  EXPECT_EQ(int64_rational_c(1ll, 1ll), r);
+
+  EXPECT_TRUE(parse_number("1.0", r));
+  EXPECT_EQ(int64_rational_c(1ll, 1ll), r);
+
+  EXPECT_TRUE(parse_number("123456.789", r));
+  EXPECT_EQ(int64_rational_c(123456789ll, 1000ll), r);
+
+  EXPECT_TRUE(parse_number("123456.789", r));
+  EXPECT_EQ(int64_rational_c(123456789ll, 1000ll), r);
+
+  EXPECT_TRUE(parse_number("123456.789012345", r));
+  EXPECT_EQ(int64_rational_c(123456789012345ll, 1000000000ll), r);
 }
 
 }
