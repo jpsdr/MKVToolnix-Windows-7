@@ -341,16 +341,45 @@ Tab::isReadyForMerging() {
   return true;
 }
 
+QString
+Tab::findExistingDestination()
+  const {
+  auto nativeDestination = QDir::toNativeSeparators(m_config.m_destination);
+  QFileInfo destinationInfo{nativeDestination};
+
+  if (MuxConfig::DoNotSplit == m_config.m_splitMode)
+    return destinationInfo.exists() ? nativeDestination : QString{};
+
+#if defined(SYS_WINDOWS)
+  auto rePatternOptions     = QRegularExpression::CaseInsensitiveOption;
+#else
+  auto rePatternOptions     = QRegularExpression::NoPatternOption;
+#endif
+  auto destinationBaseName  = QRegularExpression::escape(destinationInfo.baseName());
+  auto destinationSuffix    = QRegularExpression::escape(destinationInfo.completeSuffix());
+  auto splitNameTestPattern = Q("^%1-\\d+%2%3$").arg(destinationBaseName).arg(destinationSuffix.isEmpty() ? Q("") : Q("\\.")).arg(destinationSuffix);
+  auto splitNameTestRE      = QRegularExpression{splitNameTestPattern, rePatternOptions};
+  auto destinationDir       = destinationInfo.dir();
+
+  for (auto const &existingFileName : destinationDir.entryList(QDir::NoFilter, QDir::Name | QDir::IgnoreCase))
+    if (splitNameTestRE.match(existingFileName).hasMatch())
+      return QDir::toNativeSeparators(destinationDir.filePath(existingFileName));
+
+  return {};
+}
+
 bool
 Tab::checkIfOverwritingIsOK() {
   if (!Util::Settings::get().m_warnBeforeOverwriting)
     return true;
 
-  if (QFileInfo{m_config.m_destination}.exists()) {
+  auto existingDestination = findExistingDestination();
+
+  if (!existingDestination.isEmpty()) {
     auto answer = Util::MessageBox::question(this)
       ->title(QY("Overwrite existing file"))
       .text(Q("%1 %2")
-            .arg(QY("The file '%1' exists already.").arg(m_config.m_destination))
+            .arg(QY("The file '%1' exists already.").arg(existingDestination))
             .arg(QY("Do you want to overwrite the file?")))
       .buttonLabel(QMessageBox::Yes, QY("&Overwrite file"))
       .buttonLabel(QMessageBox::No,  QY("Cancel"))

@@ -296,6 +296,7 @@ protected:
 
   virtual bool isReadyForMerging();
   virtual bool checkIfOverwritingIsOK();
+  virtual QString findExistingDestination() const;
 
   virtual void setTitleMaybe(QList<SourceFilePtr> const &files);
   virtual void setTitleMaybe(QString const &title);

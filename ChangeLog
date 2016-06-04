@@ -1,5 +1,9 @@
 2016-06-04  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: merge tool bug fix: the GUI now takes into
+        account whether splitting is activated when looking for and
+        warning due to existing destination files. Fixes #1694.
+
         * mkvmerge: bug fix: the parser for the --default-duration
         argument was wrongfully handling arguments of the form "123/456i"
         (only this specific syntax and only with "i" as the unit; other
