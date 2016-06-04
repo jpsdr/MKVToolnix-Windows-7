@@ -827,7 +827,7 @@ end
 desc "Run all tests"
 task :tests => [ 'tests:products' ]
 namespace :tests do
-  desc "Run prodct tests from 'tests' sub-directory (requires data files to be present)"
+  desc "Run product tests from 'tests' sub-directory (requires data files to be present)"
   task :products do
     run "cd tests && ./run.rb"
   end
