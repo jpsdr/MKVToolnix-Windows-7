@@ -291,16 +291,29 @@ Tab::setupInputControls() {
   m_addFilesMenu->addAction(m_addAdditionalPartsAction2);
   ui->addFiles->setMenu(m_addFilesMenu);
 
+  // "start muxing" menu
+  m_startMuxingMenu->addAction(m_startMuxingLeaveAsIs);
+  m_startMuxingMenu->addAction(m_startMuxingCreateNewSettings);
+  m_startMuxingMenu->addAction(m_startMuxingRemoveInputFiles);
+  ui->startMuxing->setMenu(m_startMuxingMenu);
+
+  // "add to job queue" menu
+  m_addToJobQueueMenu->addAction(m_addToJobQueueLeaveAsIs);
+  m_addToJobQueueMenu->addAction(m_addToJobQueueCreateNewSettings);
+  m_addToJobQueueMenu->addAction(m_addToJobQueueRemoveInputFiles);
+  ui->addToJobQueue->setMenu(m_addToJobQueueMenu);
+
   m_addFilesAction2->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
   m_appendFilesAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-x.png")});
   m_addAdditionalPartsAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-margin.png")});
 
   // Connect signals & slots.
   auto mw = MainWindow::get();
+  using CMSAction = Util::Settings::ClearMergeSettingsAction;
 
   connect(ui->aacIsSBR,                     static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onAacIsSBRChanged);
   connect(ui->addFiles,                     &QToolButton::clicked,                                                                            this,                     &Tab::onAddFiles);
-  connect(ui->addToJobQueue,                &QPushButton::clicked,                                                                            this,                     &Tab::onAddToJobQueue);
+  connect(ui->addToJobQueue,                &QPushButton::clicked,                                                                            this,                     [=]() { addToJobQueue(false); });
   connect(ui->additionalTrackOptions,       &QLineEdit::textChanged,                                                                          this,                     &Tab::onAdditionalTrackOptionsChanged);
   connect(ui->aspectRatio,                  static_cast<void (QComboBox::*)(QString const &)>(&QComboBox::currentIndexChanged),               this,                     &Tab::onAspectRatioChanged);
   connect(ui->aspectRatio,                  &QComboBox::editTextChanged,                                                                      this,                     &Tab::onAspectRatioChanged);
@@ -335,7 +348,7 @@ Tab::setupInputControls() {
   connect(ui->reduceToAudioCore,            &QCheckBox::toggled,                                                                              this,                     &Tab::onReduceAudioToCoreChanged);
   connect(ui->setAspectRatio,               &QPushButton::clicked,                                                                            this,                     &Tab::onSetAspectRatio);
   connect(ui->setDisplayWidthHeight,        &QPushButton::clicked,                                                                            this,                     &Tab::onSetDisplayDimensions);
-  connect(ui->startMuxing,                  &QPushButton::clicked,                                                                            this,                     &Tab::onStartMuxing);
+  connect(ui->startMuxing,                  &QPushButton::clicked,                                                                            this,                     [=]() { addToJobQueue(true); });
   connect(ui->stereoscopy,                  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onStereoscopyChanged);
   connect(ui->stretchBy,                    &QLineEdit::textChanged,                                                                          this,                     &Tab::onStretchByChanged);
   connect(ui->subtitleCharacterSet,         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onSubtitleCharacterSetChanged);
@@ -369,6 +382,14 @@ Tab::setupInputControls() {
   connect(m_selectAllSubtitlesTracksAction, &QAction::triggered,                                                                              this,                     &Tab::selectAllSubtitlesTracks);
   connect(m_enableAllTracksAction,          &QAction::triggered,                                                                              this,                     &Tab::enableAllTracks);
   connect(m_disableAllTracksAction,         &QAction::triggered,                                                                              this,                     &Tab::disableAllTracks);
+
+  connect(m_startMuxingLeaveAsIs,           &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::None); });
+  connect(m_startMuxingCreateNewSettings,   &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::NewSettings); });
+  connect(m_startMuxingRemoveInputFiles,    &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::RemoveInputFiles); });
+
+  connect(m_addToJobQueueLeaveAsIs,         &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::None); });
+  connect(m_addToJobQueueCreateNewSettings, &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::NewSettings); });
+  connect(m_addToJobQueueRemoveInputFiles,  &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::RemoveInputFiles); });
 
   connect(m_addFilesMenu,                   &QMenu::aboutToShow,                                                                              this,                     &Tab::enableFilesActions);
 
@@ -1263,6 +1284,14 @@ Tab::retranslateInputUI() {
   m_selectAllVideoTracksAction->setText(QY("&Video"));
   m_selectAllAudioTracksAction->setText(QY("&Audio"));
   m_selectAllSubtitlesTracksAction->setText(QY("&Subtitles"));
+
+  m_startMuxingLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
+  m_startMuxingCreateNewSettings->setText(QY("Afterwards create &new merge settings and close the current ones."));
+  m_startMuxingRemoveInputFiles->setText(QY("Afterwards &remove all input files."));
+
+  m_addToJobQueueLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
+  m_addToJobQueueCreateNewSettings->setText(QY("Afterwards create &new merge settings and close the current ones."));
+  m_addToJobQueueRemoveInputFiles->setText(QY("Afterwards &remove all input files."));
 
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
     ui->stereoscopy->setItemText(idx + 1, QString{"%1 (%2; %3)"}.arg(to_qs(stereo_mode_c::translate(idx))).arg(idx).arg(to_qs(stereo_mode_c::s_modes[idx])));

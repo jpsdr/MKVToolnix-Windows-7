@@ -251,14 +251,14 @@ void
 Tool::startMuxing() {
   auto tab = currentTab();
   if (tab)
-    tab->onStartMuxing();
+    tab->addToJobQueue(true);
 }
 
 void
 Tool::addToJobQueue() {
   auto tab = currentTab();
   if (tab)
-    tab->onAddToJobQueue();
+    tab->addToJobQueue(false);
 }
 
 void

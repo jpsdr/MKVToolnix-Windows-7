@@ -1786,13 +1786,10 @@
        <property name="toolButtonStyle">
         <enum>Qt::ToolButtonTextBesideIcon</enum>
        </property>
-       <property name="arrowType">
-        <enum>Qt::NoArrow</enum>
-       </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="startMuxing">
+      <widget class="QToolButton" name="startMuxing">
        <property name="text">
         <string>Sta&amp;rt muxing</string>
        </property>
@@ -1800,16 +1797,28 @@
         <iconset resource="../../qt_resources.qrc">
          <normaloff>:/icons/16x16/media-playback-start.png</normaloff>:/icons/16x16/media-playback-start.png</iconset>
        </property>
+       <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="addToJobQueue">
+      <widget class="QToolButton" name="addToJobQueue">
        <property name="text">
         <string>Add to job &amp;queue</string>
        </property>
        <property name="icon">
         <iconset resource="../../qt_resources.qrc">
          <normaloff>:/icons/16x16/task-delegate.png</normaloff>:/icons/16x16/task-delegate.png</iconset>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
        </property>
       </widget>
      </item>

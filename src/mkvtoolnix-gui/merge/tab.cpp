@@ -60,12 +60,20 @@ Tab::Tab(QWidget *parent)
   , m_disableAllAttachedFilesAction{new QAction{this}}
   , m_enableSelectedAttachedFilesAction{new QAction{this}}
   , m_disableSelectedAttachedFilesAction{new QAction{this}}
+  , m_startMuxingLeaveAsIs{new QAction{this}}
+  , m_startMuxingCreateNewSettings{new QAction{this}}
+  , m_startMuxingRemoveInputFiles{new QAction{this}}
+  , m_addToJobQueueLeaveAsIs{new QAction{this}}
+  , m_addToJobQueueCreateNewSettings{new QAction{this}}
+  , m_addToJobQueueRemoveInputFiles{new QAction{this}}
   , m_filesMenu{new QMenu{this}}
   , m_tracksMenu{new QMenu{this}}
   , m_attachedFilesMenu{new QMenu{this}}
   , m_attachmentsMenu{new QMenu{this}}
   , m_selectTracksOfTypeMenu{new QMenu{this}}
   , m_addFilesMenu{new QMenu{this}}
+  , m_startMuxingMenu{new QMenu{this}}
+  , m_addToJobQueueMenu{new QMenu{this}}
   , m_attachedFilesModel{new AttachedFileModel{this}}
   , m_attachmentsModel{new AttachmentModel{this}}
   , m_addAttachmentsAction{new QAction{this}}
@@ -203,16 +211,6 @@ Tab::onSaveConfigAs() {
   emit titleChanged();
 
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
-}
-
-void
-Tab::onAddToJobQueue() {
-  addToJobQueue(false);
-}
-
-void
-Tab::onStartMuxing() {
-  addToJobQueue(true);
 }
 
 QString
@@ -418,7 +416,8 @@ Tab::checkIfOverwritingIsOK() {
 }
 
 void
-Tab::addToJobQueue(bool startNow) {
+Tab::addToJobQueue(bool startNow,
+                   boost::optional<Util::Settings::ClearMergeSettingsAction> clearSettings) {
   updateConfigFromControlValues();
 
   if (!isReadyForMerging() || !checkIfOverwritingIsOK())
@@ -458,12 +457,12 @@ Tab::addToJobQueue(bool startNow) {
 
   m_savedState = currentState();
 
-  handleClearingMergeSettings();
+  auto action = clearSettings ? *clearSettings : Util::Settings::get().m_clearMergeSettings;
+  handleClearingMergeSettings(action);
 }
 
 void
-Tab::handleClearingMergeSettings() {
-  auto action = Util::Settings::get().m_clearMergeSettings;
+Tab::handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action) {
   if (Util::Settings::ClearMergeSettingsAction::None == action)
     return;
 

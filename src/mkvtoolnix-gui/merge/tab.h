@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file_model.h"
 #include "mkvtoolnix-gui/merge/track_model.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 #include <QList>
 
@@ -52,7 +53,9 @@ protected:
   QAction *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
   QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction, *m_openFilesInMediaInfoAction, *m_openTracksInMediaInfoAction;
   QAction *m_enableAllAttachedFilesAction, *m_disableAllAttachedFilesAction, *m_enableSelectedAttachedFilesAction, *m_disableSelectedAttachedFilesAction;
-  QMenu *m_filesMenu, *m_tracksMenu, *m_attachedFilesMenu, *m_attachmentsMenu, *m_selectTracksOfTypeMenu, *m_addFilesMenu;
+  QAction *m_startMuxingLeaveAsIs, *m_startMuxingCreateNewSettings, *m_startMuxingRemoveInputFiles;
+  QAction *m_addToJobQueueLeaveAsIs, *m_addToJobQueueCreateNewSettings, *m_addToJobQueueRemoveInputFiles;
+  QMenu *m_filesMenu, *m_tracksMenu, *m_attachedFilesMenu, *m_attachmentsMenu, *m_selectTracksOfTypeMenu, *m_addFilesMenu, *m_startMuxingMenu, *m_addToJobQueueMenu;
 
   // "Attachments" tab:
   AttachedFileModel *m_attachedFilesModel;
@@ -91,8 +94,6 @@ public slots:
   virtual void onAppendFiles();
   virtual void onRemoveFiles();
   virtual void onRemoveAllFiles();
-  virtual void onAddToJobQueue();
-  virtual void onStartMuxing();
   virtual void onShowCommandLine();
 
   virtual void selectAllTracks();
@@ -153,6 +154,8 @@ public slots:
   virtual void setChapterCharacterSet(QString const &characterSet);
   virtual void onCopyFirstFileNameToTitle();
   virtual void onCopyOutputFileNameToTitle();
+
+  virtual void addToJobQueue(bool startNow, boost::optional<Util::Settings::ClearMergeSettingsAction> clearSettings = boost::none);
 
   virtual void resizeFilesColumnsToContents() const;
   virtual void resizeTracksColumnsToContents() const;
@@ -227,7 +230,7 @@ public slots:
   virtual void resizeAttachmentsColumnsToContents() const;
 
   virtual void retranslateUi();
-  virtual void handleClearingMergeSettings();
+  virtual void handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action);
   virtual void setupTabPositions();
 
 protected:
@@ -291,8 +294,6 @@ protected:
   virtual QList<Track *> selectedAttachedFiles() const;
   virtual QList<Attachment *> selectedAttachments() const;
   virtual void selectAttachments(QList<Attachment *> const &attachments);
-
-  virtual void addToJobQueue(bool startNow);
 
   virtual bool isReadyForMerging();
   virtual bool checkIfOverwritingIsOK();
