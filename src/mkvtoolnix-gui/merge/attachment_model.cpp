@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QFileInfo>
 #include <QMimeData>
 
@@ -49,7 +50,7 @@ AttachmentModel::setRowData(QList<QStandardItem *> const &items,
   items[DescriptionColumn]->setText(attachment.m_description);
   items[StyleColumn      ]->setText(attachment.m_style == Attachment::ToAllFiles ? QY("to all output files") : QY("only to the first output file"));
   items[SourceFileColumn ]->setText(info.fileName());
-  items[SourceDirColumn  ]->setText(info.path());
+  items[SourceDirColumn  ]->setText(QDir::toNativeSeparators(info.path()));
   items[SizeColumn       ]->setText(size);
 }
 

@@ -10,6 +10,7 @@
 #include "mkvtoolnix-gui/merge/track.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
+#include <QDir>
 #include <QFile>
 #include <QStringList>
 #include <QTemporaryFile>
@@ -203,6 +204,8 @@ MuxConfig::load(Util::ConfigFile &settings) {
     settings.beginGroup(QString::number(idx++));
     file->fixAssociations(l);
     settings.endGroup();
+
+    file->m_fileName = QDir::toNativeSeparators(file->m_fileName);
   }
   settings.endGroup();
 
@@ -225,21 +228,22 @@ MuxConfig::load(Util::ConfigFile &settings) {
   m_firstInputFileName = value.isValid()    ? value.toString()
                        : !m_files.isEmpty() ? m_files[0]->m_fileName
                        :                      QString{};
+  m_firstInputFileName = QDir::toNativeSeparators(m_firstInputFileName);
 
   settings.endGroup();
 
   // Load global settings
   settings.beginGroup("global");
   m_title                         = settings.value("title").toString();
-  m_destination                   = settings.value("destination").toString();
-  m_destinationAuto               = settings.value("destinationAuto").toString();
-  m_globalTags                    = settings.value("globalTags").toString();
-  m_segmentInfo                   = settings.value("segmentInfo").toString();
+  m_destination                   = QDir::toNativeSeparators(settings.value("destination").toString());
+  m_destinationAuto               = QDir::toNativeSeparators(settings.value("destinationAuto").toString());
+  m_globalTags                    = QDir::toNativeSeparators(settings.value("globalTags").toString());
+  m_segmentInfo                   = QDir::toNativeSeparators(settings.value("segmentInfo").toString());
   m_splitOptions                  = settings.value("splitOptions").toString();
   m_segmentUIDs                   = settings.value("segmentUIDs").toString();
   m_previousSegmentUID            = settings.value("previousSegmentUID").toString();
   m_nextSegmentUID                = settings.value("nextSegmentUID").toString();
-  m_chapters                      = settings.value("chapters").toString();
+  m_chapters                      = QDir::toNativeSeparators(settings.value("chapters").toString());
   m_chapterLanguage               = settings.value("chapterLanguage").toString();
   m_chapterCharacterSet           = settings.value("chapterCharacterSet").toString();
   m_chapterCueNameFormat          = settings.value("chapterCueNameFormat").toString();

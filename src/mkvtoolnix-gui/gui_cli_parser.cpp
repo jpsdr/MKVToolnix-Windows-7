@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QFileInfo>
 #include <QStringList>
 
@@ -59,7 +60,7 @@ GuiCliParser::raiseAndActivate() {
 
 void
 GuiCliParser::handleFileNameArg() {
-  auto arg = QFileInfo{Q(m_current_arg)}.absoluteFilePath();
+  auto arg = QDir::toNativeSeparators(QFileInfo{Q(m_current_arg)}.absoluteFilePath());
 
   if (arg.endsWith(Q(".mtxcfg")))
     m_configFiles << arg;

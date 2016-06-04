@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QMessageBox>
 #include <QRegularExpression>
@@ -37,7 +38,7 @@ using namespace mtx::gui;
 
 FileIdentifier::FileIdentifier(QWidget *parent,
                                QString const &fileName)
-  : d_ptr{new FileIdentifierPrivate{parent, fileName}}
+  : d_ptr{new FileIdentifierPrivate{parent, QDir::toNativeSeparators(fileName)}}
 {
 }
 
@@ -83,7 +84,7 @@ void
 FileIdentifier::setFileName(QString const &fileName) {
   Q_D(FileIdentifier);
 
-  d->m_fileName = fileName;
+  d->m_fileName = QDir::toNativeSeparators(fileName);
 }
 
 int
@@ -177,7 +178,7 @@ FileIdentifier::parseAttachment(QVariantMap const &obj) {
   track->m_codec                 = obj.value("content_type").toString();
   track->m_size                  = obj.value("size").toULongLong();
   track->m_attachmentDescription = obj.value("description").toString();
-  track->m_name                  = obj.value("file_name").toString();
+  track->m_name                  = QDir::toNativeSeparators(obj.value("file_name").toString());
 
   d->m_file->m_attachedFiles << track;
 }

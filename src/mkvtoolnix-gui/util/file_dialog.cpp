@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QStandardPaths>
 #include <QString>
 
@@ -57,7 +58,7 @@ getOpenFileName(QWidget *parent,
                 QString const &filter,
                 QString *selectedFilter,
                 QFileDialog::Options options) {
-  return QFileDialog::getOpenFileName(parent, caption, sanitizeDirectory(dir, false), filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons);
+  return QDir::toNativeSeparators(QFileDialog::getOpenFileName(parent, caption, sanitizeDirectory(dir, false), filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons));
 }
 
 QStringList
@@ -67,7 +68,11 @@ getOpenFileNames(QWidget *parent,
                  QString const &filter,
                  QString *selectedFilter,
                  QFileDialog::Options options) {
-  return QFileDialog::getOpenFileNames(parent, caption, sanitizeDirectory(dir, false), filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons);
+  auto fileNames = QFileDialog::getOpenFileNames(parent, caption, sanitizeDirectory(dir, false), filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons);
+  for (auto &fileName : fileNames)
+    fileName = QDir::toNativeSeparators(fileName);
+
+  return fileNames;
 }
 
 QString
@@ -77,7 +82,7 @@ getSaveFileName(QWidget *parent,
                 QString const &filter,
                 QString *selectedFilter,
                 QFileDialog::Options options) {
-  return QFileDialog::getSaveFileName(parent, caption, sanitizeDirectory(dir, true), filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons);
+  return QDir::toNativeSeparators(QFileDialog::getSaveFileName(parent, caption, sanitizeDirectory(dir, true), filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons));
 }
 
 QString
@@ -85,7 +90,7 @@ getExistingDirectory(QWidget *parent,
                      QString const &caption,
                      QString const &dir,
                      QFileDialog::Options options) {
-  return QFileDialog::getExistingDirectory(parent, caption, sanitizeDirectory(dir, false), options & QFileDialog::DontUseCustomDirectoryIcons);
+  return QDir::toNativeSeparators(QFileDialog::getExistingDirectory(parent, caption, sanitizeDirectory(dir, false), options & QFileDialog::DontUseCustomDirectoryIcons));
 }
 
 }}}

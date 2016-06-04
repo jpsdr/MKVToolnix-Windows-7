@@ -1,6 +1,6 @@
 #include "common/common_pch.h"
 
-// #include <QDebug>
+#include <QDir>
 #include <QFileInfo>
 #include <QItemSelectionModel>
 #include <QMimeData>
@@ -129,7 +129,7 @@ SourceFileModel::setItemsFromSourceFile(QList<QStandardItem *> const &items,
   items[0]->setText(info.fileName());
   items[1]->setText(sourceFile->isAdditionalPart() ? QY("(additional part)") : sourceFile->container());
   items[2]->setText(to_qs(format_file_size(sourceFile->isPlaylist() ? sourceFile->m_playlistSize : info.size())));
-  items[3]->setText(info.path());
+  items[3]->setText(QDir::toNativeSeparators(info.path()));
 
   items[0]->setData(reinterpret_cast<quint64>(sourceFile), Util::SourceFileRole);
   items[0]->setIcon(  sourceFile->isAdditionalPart() ? m_additionalPartIcon

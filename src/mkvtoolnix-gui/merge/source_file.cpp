@@ -6,6 +6,8 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 
+#include <QDir>
+
 namespace mtx { namespace gui { namespace Merge {
 
 namespace {
@@ -31,7 +33,7 @@ fixAssociationsFor(char const *group,
 }
 
 SourceFile::SourceFile(QString const &fileName)
-  : m_fileName{fileName}
+  : m_fileName{QDir::toNativeSeparators(fileName)}
   , m_type{FILE_TYPE_IS_UNKNOWN}
   , m_appended{}
   , m_additionalPart{}

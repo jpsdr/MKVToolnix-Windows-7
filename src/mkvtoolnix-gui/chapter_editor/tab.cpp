@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QFileInfo>
 #include <QMenu>
 #include <QMessageBox>
@@ -147,7 +148,7 @@ Tab::updateFileNameDisplay() {
   if (!m_fileName.isEmpty()) {
     auto info = QFileInfo{m_fileName};
     ui->fileName->setText(info.fileName());
-    ui->directory->setText(info.path());
+    ui->directory->setText(QDir::toNativeSeparators(info.path()));
 
   } else {
     ui->fileName->setText(QY("<unsaved file>"));

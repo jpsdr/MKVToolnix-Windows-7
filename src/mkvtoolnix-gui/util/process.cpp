@@ -6,6 +6,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/process.h"
+#include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -61,7 +62,7 @@ ProcessPtr
 Process::execute(QString const &command,
                  QStringList const &args,
                  bool useTempFile) {
-  auto runner = [](QString const &commandToUse, QStringList const &argsToUse) {
+  auto runner = [](QString const &commandToUse, QStringList const &argsToUse) -> std::shared_ptr<Process> {
     auto pr = std::make_shared<Process>( commandToUse, argsToUse );
     pr->run();
     return pr;
@@ -77,7 +78,7 @@ Process::execute(QString const &command,
 
   static const unsigned char utf8_bom[3] = {0xef, 0xbb, 0xbf};
   optFile.write(reinterpret_cast<char const *>(utf8_bom), 3);
-  for (auto &arg : args)
+  for (auto &arg : Util::escape(args, EscapeMkvtoolnix))
     optFile.write(QString{"%1\n"}.arg(arg).toUtf8());
   optFile.close();
 

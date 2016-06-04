@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QFileInfo>
 #include <QStandardItem>
 
@@ -53,7 +54,7 @@ AttachedFileModel::setRowData(QList<QStandardItem *> const &items,
   items[MuxThisColumn    ]->setText(attachedFile.m_muxThis ? QY("yes") : QY("no"));
   items[DescriptionColumn]->setText(attachedFile.m_attachmentDescription);
   items[SourceFileColumn ]->setText(info.fileName());
-  items[SourceDirColumn  ]->setText(info.path());
+  items[SourceDirColumn  ]->setText(QDir::toNativeSeparators(info.path()));
   items[SizeColumn       ]->setText(size);
 
   items[SizeColumn       ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

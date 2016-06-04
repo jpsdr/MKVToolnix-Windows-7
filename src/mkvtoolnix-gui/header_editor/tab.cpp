@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QFileInfo>
 #include <QMenu>
 #include <QMessageBox>
@@ -227,7 +228,7 @@ Tab::setupUi() {
 
   auto info = QFileInfo{m_fileName};
   ui->fileName->setText(info.fileName());
-  ui->directory->setText(info.path());
+  ui->directory->setText(QDir::toNativeSeparators(info.path()));
 
   ui->elements->setModel(m_model);
   ui->elements->acceptDroppedFiles(true);

@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QDropEvent>
 #include <QMimeData>
 
@@ -28,7 +29,7 @@ FilesDragDropHandler::handle(QDropEvent *event,
     if (!url.isLocalFile())
       return false;
     else if (isDrop && (Mode::Remember == m_mode))
-      m_fileNames << url.toLocalFile();
+      m_fileNames << QDir::toNativeSeparators(url.toLocalFile());
 
   if (Mode::Remember == m_mode)
     event->acceptProposedAction();
