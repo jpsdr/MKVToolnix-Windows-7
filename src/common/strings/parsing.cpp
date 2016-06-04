@@ -258,29 +258,50 @@ parse_duration_number_with_unit(const std::string &s,
   boost::regex re2("(-?\\d+)/(-?\\d+)(s|ms|us|ns|fps|p|i)?", boost::regex::perl | boost::regex::icase);
 
   std::string unit, s_n, s_d;
-  int64_t n = 0, d = 0;
-  double d_value = 0.0;
-  bool is_fraction = false;
+  int64_rational_c r{0, 1};
 
   boost::smatch matches;
   if (boost::regex_match(s, matches, re1)) {
-    parse_number(matches[1], d_value);
+    if (!parse_number(matches[1], r))
+      return false;
+
     if (matches.size() > 2)
       unit = matches[2];
-    d = 1;
 
   } else if (boost::regex_match(s, matches, re2)) {
-    parse_number(matches[1], n);
-    parse_number(matches[2], d);
+    int64_t n, d;
+    if (!parse_number(matches[1], n) || !parse_number(matches[2], d))
+      return false;
+
+    r = int64_rational_c{n, d};
+
     if (matches.size() > 3)
       unit = matches[3];
-    is_fraction = true;
 
   } else
     return false;
 
-  int64_t multiplier = 1000000000;
   balg::to_lower(unit);
+
+  if ((unit == "fps") || (unit == "p") || (unit == "i")) {
+    if (unit == "i")
+      r *= int64_rational_c{1, 2};
+
+    if (int64_rational_c{2396, 100} == r)
+      r = int64_rational_c{24000, 1001};
+
+    else if (int64_rational_c{29976, 1000} == r)
+      r = int64_rational_c{30000, 1001};
+
+    else if (int64_rational_c{5994, 100} == r)
+      r = int64_rational_c{60000, 1001};
+
+    value = boost::rational_cast<int64_t>(int64_rational_c{1000000000ll, 1} / r);
+
+    return true;
+  }
+
+  int64_t multiplier = 1000000000;
 
   if (unit == "ms")
     multiplier = 1000000;
@@ -288,26 +309,10 @@ parse_duration_number_with_unit(const std::string &s,
     multiplier = 1000;
   else if (unit == "ns")
     multiplier = 1;
-  else if ((unit == "fps") || (unit == "p") || (unit == "i")) {
-    if (is_fraction) {
-      value = 1000000000ll * d / n / (unit == "i" ? 2 : 1);
-      return true;
-    }
-
-    if (unit == "i")
-      d_value /= 2;
-
-    value = 29.97  == d_value ?  100100000.0 /  3.0
-          : 23.976 == d_value ? 1001000000.0 / 24.0
-          :                     1000000000.0 / d_value;
-
-    return true;
-
-  } else if (unit != "s")
+  else if (unit != "s")
     return false;
 
-  value = is_fraction ? multiplier * n / d
-        :               multiplier * d_value;
+  value = boost::rational_cast<int64_t>(r * int64_rational_c{multiplier, 1});
 
   return true;
 }

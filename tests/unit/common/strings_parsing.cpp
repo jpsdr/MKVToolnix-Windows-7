@@ -69,6 +69,19 @@ TEST(StringsParsing, ParseDurationNumberWithUnitFrameUnitsIntegers) {
   EXPECT_EQ(1000000000ll / 10, value);
 }
 
+TEST(StringsParsing, ParseDurationNumberWithUnitFrameUnitsSpecialValues) {
+  int64_t value;
+
+  EXPECT_TRUE(parse_duration_number_with_unit("23.96fps", value));
+  EXPECT_EQ(1000000000ll * 1001 / 24000, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("29.976fps", value));
+  EXPECT_EQ(1000000000ll * 1001 / 30000, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("59.94fps", value));
+  EXPECT_EQ(1000000000ll * 1001 / 60000, value);
+}
+
 TEST(StringsParsing, ParseDurationNumberWithUnitInvalid) {
   int64_t value;
 

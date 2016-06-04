@@ -1,3 +1,14 @@
+2016-06-04  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: the parser for the --default-duration
+        argument was wrongfully handling arguments of the form "123/456i"
+        (only this specific syntax and only with "i" as the unit; other
+        formats and units were fine). This is part of #1673.
+
+        Additionally the parser doesn't use the "double" data type
+        internally anymore fixing loss of precision and failing test cases
+        on certain 32bit platforms. This fixes #1705.
+
 2016-05-28  Moritz Bunkus  <moritz@bunkus.org>
 
         * Released v9.2.0 "Photograph".
