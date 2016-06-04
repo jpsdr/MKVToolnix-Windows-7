@@ -40,7 +40,6 @@ aac_reader_c::aac_reader_c(const track_info_c &ti,
                            const mm_io_cptr &in)
   : generic_reader_c{ti, in}
   , m_chunk{memory_c::alloc(INITCHUNKSIZE)}
-  , m_sbr_status_set{}
 {
 }
 
@@ -85,10 +84,6 @@ aac_reader_c::read_headers() {
         || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) && !m_ti.m_all_aac_is_sbr[-1]))
       m_aacheader.profile = detected_profile;
 
-    if (   mtx::includes(m_ti.m_all_aac_is_sbr,  0)
-        || mtx::includes(m_ti.m_all_aac_is_sbr, -1))
-      m_sbr_status_set = true;
-
   } catch (...) {
     throw mtx::input::open_x();
   }
@@ -103,13 +98,6 @@ void
 aac_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('a', 0) || (NPTZR() != 0))
     return;
-
-  if (!m_sbr_status_set)
-    mxwarn(Y("AAC files may contain HE-AAC / AAC+ / SBR AAC audio. "
-             "This can NOT be detected automatically. Therefore you have to "
-             "specifiy '--aac-is-sbr 0' manually for this input file if the "
-             "file actually contains SBR AAC. The file will be muxed in the "
-             "WRONG way otherwise. Also read mkvmerge's documentation.\n"));
 
   auto aacpacketizer = new aac_packetizer_c(this, m_ti, m_aacheader.profile, m_aacheader.sample_rate, m_aacheader.channels, true);
   add_packetizer(aacpacketizer);
