@@ -1,6 +1,5 @@
 #include "common/common_pch.h"
 
-#include <QDebug>
 #include <QFileInfo>
 #include <QMimeData>
 
@@ -163,16 +162,11 @@ AttachmentModel::canDropMimeData(QMimeData const *data,
                                  int column,
                                  QModelIndex const &parent)
   const {
-  if (-1 == rc) {
+  if (-1 == rc)
     rc = rowCount();
-    qDebug() << "mtx attachments canDropMimeData initital rowCount" << rc;
-  }
 
   if (!QStandardItemModel::canDropMimeData(data, action, row, column, parent))
     return false;
-
-  if (rowCount() != rc)
-    qDebug() << "mtx attachments canDropMimeData ROW COUNT MISMATCH initial" << rc << "current" << rowCount() << "row" << row << "column" << column << "parent" << parent << "action" << action;
 
   bool ok = (Qt::MoveAction == action)
          && !parent.isValid()
@@ -188,28 +182,18 @@ AttachmentModel::dropMimeData(QMimeData const *data,
                               int row,
                               int column,
                               QModelIndex const &parent) {
-  if (-1 == rc) {
+  if (-1 == rc)
     rc = rowCount();
-    qDebug() << "mtx attachments dropMimeData initital rowCount" << rc;
-  }
 
   bool ok = (Qt::MoveAction == action)
          && !parent.isValid()
          && (   ((0  <= row) && ( 0 <= column))
              || ((-1 == row) && (-1 == column)));
 
-  if (!ok) {
-    qDebug() << "mtx attachments DROP NOT OK; row" << row << "column" << column << "parent" << parent << "action" << action;
+  if (!ok)
     return false;
-  }
 
-  auto rcBefore = rowCount();
-  auto result   = QStandardItemModel::dropMimeData(data, action, row, 0, parent);
-  auto rcAfter  = rowCount();
-
-  qDebug() << "mtx attachments dropMimeData row count initial" << rc << "before" << rcBefore << "after" << rcAfter << "row" << row << "column" << column << "parent" << parent << "action" << action;
-
-  return result;
+  return QStandardItemModel::dropMimeData(data, action, row, 0, parent);
 }
 
 Qt::ItemFlags
