@@ -50,6 +50,7 @@ protected:
 
   void setupInterfaceLanguage();
   void setupTabPositions();
+  void setupWhenToSetDefaultLanguage();
   void setupOnlineCheck();
   void setupJobRemovalPolicy();
   void setupCommonLanguages();

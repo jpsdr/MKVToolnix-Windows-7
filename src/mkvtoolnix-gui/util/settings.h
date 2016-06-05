@@ -53,6 +53,11 @@ public:
     ToRelativeOfFirstInputFile,
   };
 
+  enum class SetDefaultLanguagePolicy {
+    OnlyIfAbsent = 0,
+    IfAbsentOrUndefined,
+  };
+
   enum class JobRemovalPolicy {
     Never,
     IfSuccessful,
@@ -100,6 +105,7 @@ public:
   using RunProgramConfigList = QList<RunProgramConfigPtr>;
 
   QString m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage;
+  SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
   QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   ProcessPriority m_priority;

@@ -246,6 +246,7 @@ Settings::loadDefaults(QSettings &reg,
   m_defaultAudioTrackLanguage          = reg.value("defaultAudioTrackLanguage",    Q("und")).toString();
   m_defaultVideoTrackLanguage          = reg.value("defaultVideoTrackLanguage",    Q("und")).toString();
   m_defaultSubtitleTrackLanguage       = reg.value("defaultSubtitleTrackLanguage", Q("und")).toString();
+  m_whenToSetDefaultLanguage           = static_cast<SetDefaultLanguagePolicy>(reg.value("whenToSetDefaultLanguage",     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndefined)).toInt());
   m_defaultChapterLanguage             = reg.value("defaultChapterLanguage", Q("und")).toString();
   m_defaultChapterCountry              = reg.value("defaultChapterCountry").toString();
   auto subtitleCharset                 = reg.value("defaultSubtitleCharset").toString();
@@ -405,6 +406,7 @@ Settings::saveDefaults(QSettings &reg)
   reg.setValue("defaultAudioTrackLanguage",          m_defaultAudioTrackLanguage);
   reg.setValue("defaultVideoTrackLanguage",          m_defaultVideoTrackLanguage);
   reg.setValue("defaultSubtitleTrackLanguage",       m_defaultSubtitleTrackLanguage);
+  reg.setValue("whenToSetDefaultLanguage",           static_cast<int>(m_whenToSetDefaultLanguage));
   reg.setValue("defaultChapterLanguage",             m_defaultChapterLanguage);
   reg.setValue("defaultChapterCountry",              m_defaultChapterCountry);
   reg.setValue("defaultSubtitleCharset",             m_defaultSubtitleCharset);

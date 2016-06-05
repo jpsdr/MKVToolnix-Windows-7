@@ -126,7 +126,9 @@ Track::setDefaults() {
   m_characterSet           = m_properties.value("text_subtitles").toBool() && m_file && (m_file->m_type != FILE_TYPE_MATROSKA) ? settings.m_defaultSubtitleCharset : Q("");
 
   auto language = m_properties.value("language").toString();
-  if (language.isEmpty())
+  if (   language.isEmpty()
+      || (   (Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndefined == settings.m_whenToSetDefaultLanguage)
+          && (language == Q("und"))))
     language = isAudio()     ? settings.m_defaultAudioTrackLanguage
              : isVideo()     ? settings.m_defaultVideoTrackLanguage
              : isSubtitles() ? settings.m_defaultSubtitleTrackLanguage
