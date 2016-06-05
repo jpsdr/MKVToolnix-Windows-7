@@ -473,6 +473,11 @@ Tab::handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action
 
   // Util::Settings::ClearMergeSettingsAction::NewSettings
   MainWindow::mergeTool()->newConfig();
+  QTimer::singleShot(0, this, SLOT(signalRemovalOfThisTab()));
+}
+
+void
+Tab::signalRemovalOfThisTab() {
   emit removeThisTab();
 }
 

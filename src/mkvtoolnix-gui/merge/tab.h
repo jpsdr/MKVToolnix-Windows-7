@@ -233,6 +233,8 @@ public slots:
   virtual void handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action);
   virtual void setupTabPositions();
 
+  virtual void signalRemovalOfThisTab();
+
 protected:
   virtual void setupAttachmentsControls();
   virtual void setupControlLists();
