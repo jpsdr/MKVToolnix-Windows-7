@@ -267,19 +267,19 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("The language selected here is used for audio tracks for which their source file contains no such property."))
-                   .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undefined' ('und').")));
+                   .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
   Util::setToolTip(ui->cbMDefaultVideoTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("The language selected here is used for video tracks for which their source file contains no such property."))
-                   .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undefined' ('und').")));
+                   .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
   Util::setToolTip(ui->cbMDefaultSubtitleTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("The language selected here is used for subtitle tracks for which their source file contains no such property."))
-                   .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undefined' ('und').")));
+                   .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
 
   Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."));
 
@@ -532,8 +532,8 @@ PreferencesDialog::setupTabPositions() {
 void
 PreferencesDialog::setupWhenToSetDefaultLanguage() {
   ui->cbMWhenToSetDefaultLanguage->clear();
-  ui->cbMWhenToSetDefaultLanguage->addItem(QY("only if the source doesn't contain a language"), static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::OnlyIfAbsent));
-  ui->cbMWhenToSetDefaultLanguage->addItem(QY("also if the language is 'undefined' ('und')"),   static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndefined));
+  ui->cbMWhenToSetDefaultLanguage->addItem(QY("only if the source doesn't contain a language"),  static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::OnlyIfAbsent));
+  ui->cbMWhenToSetDefaultLanguage->addItem(QY("also if the language is 'undetermined' ('und')"), static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined));
 
   Util::setComboBoxIndexIf(ui->cbMWhenToSetDefaultLanguage, [this](QString const &, QVariant const &data) {
     return data.toInt() == static_cast<int>(m_cfg.m_whenToSetDefaultLanguage);

@@ -127,7 +127,7 @@ Track::setDefaults() {
 
   auto language = m_properties.value("language").toString();
   if (   language.isEmpty()
-      || (   (Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndefined == settings.m_whenToSetDefaultLanguage)
+      || (   (Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined == settings.m_whenToSetDefaultLanguage)
           && (language == Q("und"))))
     language = isAudio()     ? settings.m_defaultAudioTrackLanguage
              : isVideo()     ? settings.m_defaultVideoTrackLanguage

@@ -55,7 +55,7 @@ public:
 
   enum class SetDefaultLanguagePolicy {
     OnlyIfAbsent = 0,
-    IfAbsentOrUndefined,
+    IfAbsentOrUndetermined,
   };
 
   enum class JobRemovalPolicy {
