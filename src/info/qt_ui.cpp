@@ -55,7 +55,8 @@ main_window_c::main_window_c():
   setupUi(this);
 
   QIcon icon;
-  for (auto size : QList<int>{} << 32 << 48 << 64 << 128 << 256)
+  auto sizes = QList<int>{} << 32 << 48 << 64 << 128 << 256;
+  for (auto size : sizes)
     icon.addFile(QString{":/icons/%1x%1/mkvinfo.png"}.arg(size));
 
   setWindowIcon(icon);
