@@ -60,14 +60,13 @@ main_window_c::main_window_c():
 
   setWindowIcon(icon);
 
-  connect(action_Open, SIGNAL(triggered()), this, SLOT(open()));
-  connect(action_Save_text_file, SIGNAL(triggered()), this,
-          SLOT(save_text_file()));
-  connect(action_Exit, SIGNAL(triggered()), this, SLOT(close()));
+  connect(action_Open,           &QAction::triggered, this, &main_window_c::open);
+  connect(action_Save_text_file, &QAction::triggered, this, &main_window_c::save_text_file);
+  connect(action_Exit,           &QAction::triggered, this, &main_window_c::close);
 
-  connect(action_Show_all, SIGNAL(triggered()), this, SLOT(show_all()));
+  connect(action_Show_all,       &QAction::triggered, this, &main_window_c::show_all);
 
-  connect(action_About, SIGNAL(triggered()), this, SLOT(about()));
+  connect(action_About,          &QAction::triggered, this, &main_window_c::about);
 
   action_Save_text_file->setEnabled(false);
 
