@@ -519,7 +519,7 @@ kax_reader_c::verify_mscomp_video_track(kax_track_t *t) {
       mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. "
                              "Therefore we don't have a FourCC to identify the video codec used.\n"))
              % t->tnum % MKV_V_MSCOMP);
-      return false;
+    return false;
   }
 
   t->ms_compat = 1;
