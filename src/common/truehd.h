@@ -90,6 +90,7 @@ protected:
 
 public:
   static int decode_channel_map(int channel_map);
+  static unsigned int decode_rate_bits(unsigned int rate_bits);
 };
 using truehd_frame_cptr = std::shared_ptr<truehd_frame_t>;
 

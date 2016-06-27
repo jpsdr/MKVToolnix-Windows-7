@@ -61,10 +61,18 @@ truehd_frame_t::parse_ac3_header(unsigned char const *data,
   return size >= m_ac3_header.m_bytes ? verify_ac3_checksum(data, size) : false;
 }
 
+unsigned int
+truehd_frame_t::decode_rate_bits(unsigned int rate_bits) {
+  if (0xf == rate_bits)
+    return 0;
+
+  return (rate_bits & 8 ? 44100 : 48000) << (rate_bits & 7);
+}
+
 bool
 truehd_frame_t::parse_mlp_header(unsigned char const *data,
                                  std::size_t) {
-  m_sampling_rate     = ms_sampling_rates[data[9] >> 4];
+  m_sampling_rate     = decode_rate_bits(data[9] >> 4);
   m_samples_per_frame = 40 << ((data[9] >> 4) & 0x07);
   m_channels          = ms_mlp_channels[data[11] & 0x1f];
 
@@ -79,8 +87,10 @@ truehd_frame_t::parse_truehd_header(unsigned char const *data,
   try {
     bit_reader_c r{&data[8], size - 8};
 
-    m_samples_per_frame      = 40 << (r.get_bits(4) & 0x07);
-    m_sampling_rate          = ms_sampling_rates[r.get_bits(4)];
+    auto rate_bits      = r.get_bits(4);
+    m_samples_per_frame = 40 << (rate_bits & 0x07);
+    m_sampling_rate     = decode_rate_bits(rate_bits);
+    r.skip_bits(4);
 
     auto chanmap_substream_1 = r.skip_get_bits(4, 5);
     auto chanmap_substream_2 = r.skip_get_bits(2, 13);
