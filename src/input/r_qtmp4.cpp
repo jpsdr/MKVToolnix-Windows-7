@@ -2852,6 +2852,19 @@ qtmp4_demuxer_c::derive_track_params_from_ac3_audio_bitstream() {
 }
 
 void
+qtmp4_demuxer_c::derive_track_params_from_dts_audio_bitstream() {
+  auto buf    = read_first_bytes(16384);
+  auto header = mtx::dts::header_t{};
+
+  if (!buf || (-1 == mtx::dts::find_header(buf->get_buffer(), buf->get_size(), header, false)))
+    return;
+
+  a_channels   = header.get_total_num_audio_channels();
+  a_samplerate = header.core_sampling_frequency;
+  a_bitdepth   = std::max(header.source_pcm_resolution, 0);
+}
+
+void
 qtmp4_demuxer_c::derive_track_params_from_mp3_audio_bitstream() {
   auto buf = read_first_bytes(64);
   if (!buf)
@@ -2874,6 +2887,9 @@ qtmp4_demuxer_c::verify_audio_parameters() {
 
   else if (codec.is(codec_c::type_e::A_AC3))
     derive_track_params_from_ac3_audio_bitstream();
+
+  else if (codec.is(codec_c::type_e::A_DTS))
+    derive_track_params_from_dts_audio_bitstream();
 
   if ((0 == a_channels) || (0.0 == a_samplerate)) {
     mxwarn(boost::format(Y("Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n")) % id);
