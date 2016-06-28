@@ -391,9 +391,9 @@ qtmp4_reader_c::handle_cmvd_atom(qt_atom_t atom,
     throw mtx::input::header_parsing_x();
 
   z_stream zs;
-  zs.zalloc    = (alloc_func)nullptr;
-  zs.zfree     = (free_func)nullptr;
-  zs.opaque    = (voidpf)nullptr;
+  zs.zalloc    = static_cast<alloc_func>(nullptr);
+  zs.zfree     = static_cast<free_func>(nullptr);
+  zs.opaque    = static_cast<voidpf>(nullptr);
   zs.next_in   = cmov_buf;
   zs.avail_in  = cmov_size;
   zs.next_out  = moov_buf;
@@ -1060,10 +1060,10 @@ qtmp4_reader_c::process_chapter_entries(int level,
     out.puts(boost::format("CHAPTER%|1$02d|=%|2$02d|:%|3$02d|:%|4$02d|.%|5$03d|\n"
                            "CHAPTER%|1$02d|NAME=%6%\n")
              % i
-             % (int)( chapter.m_timecode / 60 / 60 / 1000000000)
-             % (int)((chapter.m_timecode      / 60 / 1000000000) %   60)
-             % (int)((chapter.m_timecode           / 1000000000) %   60)
-             % (int)((chapter.m_timecode           /    1000000) % 1000)
+             % ( chapter.m_timecode / 60 / 60 / 1000000000)
+             % ((chapter.m_timecode      / 60 / 1000000000) %   60)
+             % ((chapter.m_timecode           / 1000000000) %   60)
+             % ((chapter.m_timecode           /    1000000) % 1000)
              % chapter.m_name);
   }
 
@@ -1601,7 +1601,7 @@ qtmp4_reader_c::create_video_packetizer_standard(qtmp4_demuxer_cptr &dmx) {
 void
 qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = dmx->esds.decoder_config;
-  dmx->ptzr           = add_packetizer(new aac_packetizer_c(this, m_ti, dmx->a_aac_profile, (int)dmx->a_samplerate, dmx->a_channels, true));
+  dmx->ptzr           = add_packetizer(new aac_packetizer_c(this, m_ti, dmx->a_aac_profile, dmx->a_samplerate, dmx->a_channels, true));
 
   if (dmx->a_aac_is_sbr)
     PTZR(dmx->ptzr)->set_audio_output_sampling_freq(dmx->a_aac_output_sample_rate);
@@ -1611,7 +1611,7 @@ qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_cptr &dmx) {
 
 void
 qtmp4_reader_c::create_audio_packetizer_mp3(qtmp4_demuxer_cptr &dmx) {
-  dmx->ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, (int32_t)dmx->a_samplerate, dmx->a_channels, true));
+  dmx->ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, dmx->a_samplerate, dmx->a_channels, true));
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }
 
@@ -1866,7 +1866,7 @@ qtmp4_reader_c::decode_and_verify_language(uint16_t coded_language) {
   int i;
 
   for (i = 0; 3 > i; ++i)
-    language += (char)(((coded_language >> ((2 - i) * 5)) & 0x1f) + 0x60);
+    language += static_cast<char>(((coded_language >> ((2 - i) * 5)) & 0x1f) + 0x60);
 
   int idx = map_to_iso639_2_code(balg::to_lower_copy(language));
   if (-1 != idx)
@@ -1940,7 +1940,7 @@ qtmp4_demuxer_c::calculate_fps() {
 
   if ((1 == durmap_table.size()) && (0 != durmap_table[0].duration) && ((0 != sample_size) || (0 == frame_offset_table.size()))) {
     // Constant FPS. Let's set the default duration.
-    fps = (double)time_scale / (double)durmap_table[0].duration;
+    fps = static_cast<double>(time_scale) / static_cast<double>(durmap_table[0].duration);
     mxdebug_if(m_debug_fps, boost::format("calculate_fps: case 1: %1%\n") % fps);
 
   } else if (!sample_table.empty()) {
@@ -1954,7 +1954,7 @@ qtmp4_demuxer_c::calculate_fps() {
     auto most_common = std::accumulate(duration_map.begin(), duration_map.end(), std::pair<int64_t, int>(*duration_map.begin()),
                                        [](std::pair<int64_t, int> &a, std::pair<int64_t, int> e) { return e.second > a.second ? e : a; });
     if (most_common.first)
-      fps = (double)1000000000.0 / (double)to_nsecs(most_common.first);
+      fps = 1000000000.0 / static_cast<double>(to_nsecs(most_common.first));
 
     mxdebug_if(m_debug_fps, boost::format("calculate_fps: case 2: most_common %1% = %2%, fps %3%\n") % most_common.first % most_common.second % fps);
   }
@@ -2381,7 +2381,7 @@ qtmp4_demuxer_c::read_first_bytes(int num_bytes) {
 
   while ((0 < num_bytes) && (idx_pos < m_index.size())) {
     qt_index_t &index          = m_index[idx_pos];
-    uint64_t num_bytes_to_read = std::min((int64_t)num_bytes, index.size);
+    uint64_t num_bytes_to_read = std::min<int64_t>(num_bytes, index.size);
 
     m_reader.m_in->setFilePointer(index.file_pos);
     if (m_reader.m_in->read(buf->get_buffer() + buf_pos, num_bytes_to_read) < num_bytes_to_read)
@@ -2759,17 +2759,17 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
   esds.flags   = memio.read_uint24_be();
   auto tag     = memio.read_uint8();
 
-  mxdebug_if(m_debug_headers, boost::format("%1%esds: version: %2%, flags: %3%\n") % space(lsp + 1) % (int)esds.version % (int)esds.flags);
+  mxdebug_if(m_debug_headers, boost::format("%1%esds: version: %2%, flags: %3%\n") % space(lsp + 1) % static_cast<unsigned int>(esds.version) % esds.flags);
 
   if (MP4DT_ES == tag) {
     auto len             = memio.read_mp4_descriptor_len();
     esds.esid            = memio.read_uint16_be();
     esds.stream_priority = memio.read_uint8();
-    mxdebug_if(m_debug_headers, boost::format("%1%esds: id: %2%, stream priority: %3%, len: %4%\n") % space(lsp + 1) % (int)esds.esid % (int)esds.stream_priority % len);
+    mxdebug_if(m_debug_headers, boost::format("%1%esds: id: %2%, stream priority: %3%, len: %4%\n") % space(lsp + 1) % static_cast<unsigned int>(esds.esid) % static_cast<unsigned int>(esds.stream_priority) % len);
 
   } else {
     esds.esid = memio.read_uint16_be();
-    mxdebug_if(m_debug_headers, boost::format("%1%esds: id: %2%\n") % space(lsp + 1) % (int)esds.esid);
+    mxdebug_if(m_debug_headers, boost::format("%1%esds: id: %2%\n") % space(lsp + 1) % static_cast<unsigned int>(esds.esid));
   }
 
   tag = memio.read_uint8();
@@ -2791,9 +2791,9 @@ qtmp4_demuxer_c::parse_esds_atom(mm_mem_io_c &memio,
                                             "stream_type: 0x%|4$2x|, buffer_size_db: %5%, max_bitrate: %|6$.3f|kbit/s, avg_bitrate: %|7$.3f|kbit/s\n")
              % space(lsp + 1)
              % len
-             % (int)esds.object_type_id
-             % (int)esds.stream_type
-             % (int)esds.buffer_size_db
+             % static_cast<unsigned int>(esds.object_type_id)
+             % static_cast<unsigned int>(esds.stream_type)
+             % esds.buffer_size_db
              % (esds.max_bitrate / 1000.0)
              % (esds.avg_bitrate / 1000.0));
 
@@ -2920,7 +2920,7 @@ bool
 qtmp4_demuxer_c::verify_mp4a_audio_parameters() {
   auto cdc = codec_c::look_up_object_type_id(esds.object_type_id);
   if (!cdc.is(codec_c::type_e::A_AAC) && !cdc.is(codec_c::type_e::A_DTS) && !cdc.is(codec_c::type_e::A_MP2) && !cdc.is(codec_c::type_e::A_MP3)) {
-    mxwarn(boost::format(Y("Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n")) % id % (int)esds.object_type_id);
+    mxwarn(boost::format(Y("Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n")) % id % static_cast<unsigned int>(esds.object_type_id));
     return false;
   }
 
