@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-06-08 19:19+0200\n"
-"PO-Revision-Date: 2016-06-10 18:30+0200\n"
+"PO-Revision-Date: 2016-06-25 17:01+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -263,7 +263,7 @@ msgid ""
 "                           Do not write tags with track statistics.\n"
 msgstr ""
 "  --disable-track-statistics-tags\n"
-"                           N'écrit pas d'étiquettes avec statistiques de piste.\n"
+"                           N'écrit pas de balises avec les statistiques de piste.\n"
 
 #: src/merge/mkvmerge.cpp:256
 msgid ""
@@ -323,7 +323,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:87
 msgid "  --global-tags <file>     Read global tags from an XML file.\n"
-msgstr "  --global-tags <fichier>  Lit les étiquettes globales depuis un fichier XML.\n"
+msgstr "  --global-tags <fichier>  Lit les balises globales depuis un fichier XML.\n"
 
 #: src/merge/mkvmerge.cpp:227
 msgid ""
@@ -374,7 +374,7 @@ msgstr "  --no-cues                N'écrit pas les données (l'index) CUE.\n"
 #: src/merge/mkvmerge.cpp:206
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
 msgstr ""
-"  --no-global-tags         Ne conserve pas les étiquettes globales\n"
+"  --no-global-tags         Ne conserve pas les balises globales\n"
 "                           du fichier source.\n"
 
 #: src/merge/mkvmerge.cpp:288
@@ -529,8 +529,8 @@ msgid ""
 "  --track-tags <n,m,...>   Copy the tags for tracks n,m etc. Default: copy\n"
 "                           tags for all tracks.\n"
 msgstr ""
-"  --track-tags <n,m,…>   Copie les étiquettes pour les pistes n, m, etc (par\n"
-"                           défaut, copie les étiquettes pour toutes les pistes).\n"
+"  --track-tags <n,m,…>   Copie les balises pour les pistes n, m, etc. Par\n"
+"                           défaut, copie les balises pour toutes les pistes.\n"
 
 #: src/merge/mkvmerge.cpp:285
 msgid "  --ui-language <code>     Force the translations for 'code' to be used.\n"
@@ -569,7 +569,7 @@ msgstr "  -S, --no-subtitles       Ne copie aucune piste de sous-titres de ce fi
 #: src/merge/mkvmerge.cpp:205
 msgid "  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n"
 msgstr ""
-"  -T, --no-track-tags      Ne copie pas les étiquettes pour les pistes\n"
+"  -T, --no-track-tags      Ne copie pas les balises pour les pistes\n"
 "                           du fichier source.\n"
 
 #: src/merge/mkvmerge.cpp:296
@@ -664,7 +664,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:202
 msgid "  -t, --tags <TID:file>    Read tags for the track from an XML file.\n"
 msgstr ""
-"  -t, --tags <TID:fichier> Lit les étiquettes pour la piste\n"
+"  -t, --tags <TID:fichier> Lit les balises pour la piste\n"
 "                           depuis un fichier XML.\n"
 
 #: src/merge/mkvmerge.cpp:85
@@ -776,7 +776,7 @@ msgstr " (fixe)"
 #: src/info/mkvinfo.cpp:330
 #, boost-format
 msgid " (format tag: 0x%|1$04x|)"
-msgstr " (étiquette de format : 0x%|1$04x|)"
+msgstr " (balises de format : 0x%|1$04x|)"
 
 #: src/info/mkvinfo.cpp:625
 msgid " (free resizing)"
@@ -1531,11 +1531,11 @@ msgstr "&Sous-titres"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:481
 msgid "&Tag editor"
-msgstr "&Éditeur d'étiquettes"
+msgstr "&Éditeur de balises"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1651
 msgid "&Tracks, chapters and tags:"
-msgstr "&Pistes, chapitres et étiquettes :"
+msgstr "&Pistes, chapitres et balises :"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:516
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:521
@@ -2300,7 +2300,7 @@ msgstr "Actions de traitement des propriétés"
 
 #: src/propedit/propedit_cli_parser.cpp:218
 msgid "Actions for handling tags and chapters"
-msgstr "Actions pour le traitement des étiquettes et des chapitres"
+msgstr "Actions pour le traitement des balises et des chapitres"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:191
 msgid "Add &variable"
@@ -2370,7 +2370,7 @@ msgstr "Ajouter ou remplacer les chapitres du fichier par ceux de « nom de fich
 
 #: src/propedit/propedit_cli_parser.cpp:219
 msgid "Add or replace tags in the file with the ones from 'filename' or remove them if 'filename' is empty (see below and man page for syntax)"
-msgstr "Ajouter ou remplacer les étiquettes du fichier par celles de « nom de fichier » ou les retirer si « nom de fichier » est vide (voir ci-dessous et la documentation pour la syntaxe)"
+msgstr "Ajouter ou remplacer les balises du fichier par celles de « nom de fichier » ou les retirer si « nom de fichier » est vide (voir ci-dessous et la documentation pour la syntaxe)"
 
 #: src/propedit/propedit_cli_parser.cpp:228
 msgid "Add the file 'filename' as a new attachment"
@@ -2395,7 +2395,7 @@ msgstr "Ajout des fichiers d'informations de segment"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1036
 msgid "Adding tag files"
-msgstr "Ajout des fichiers d'étiquettes"
+msgstr "Ajout des fichiers de balises"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:153
 msgid "Adding, appending or adding as additional parts"
@@ -2534,7 +2534,7 @@ msgstr "Autorise l'utilisation de l'élément d'état du codec."
 
 #: src/extract/extract_cli_parser.cpp:69
 msgid "Also try to extract the CUE sheet from the chapter information and tags for this track."
-msgstr "Essayer également d'extraire la feuille de montage CUE des informations de chapitrage et des étiquettes pour cette piste."
+msgstr "Essayer également d'extraire la feuille de montage CUE des informations de chapitrage et des balises pour cette piste."
 
 #: src/input/r_wavpack.cpp:89
 #, boost-format
@@ -2960,7 +2960,7 @@ msgstr "Calculer et afficher les sommes de contrôle des images."
 
 #: src/propedit/propedit_cli_parser.cpp:224
 msgid "Calculate statistics for all tracks and add new/update existing tags for them"
-msgstr "Établir les statistiques pour toutes les pistes et ajouter/mettre à jour les étiquettes existantes pour elles"
+msgstr "Établir les statistiques pour toutes les pistes et ajouter/mettre à jour les balises existantes pour elles"
 
 #: src/common/qt_kax_analyzer.cpp:37
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:225
@@ -3790,7 +3790,7 @@ msgstr "Décalage : %|1$.3f| ms"
 
 #: src/propedit/propedit_cli_parser.cpp:225
 msgid "Delete all existing track statistics tags"
-msgstr "Supprimer toutes les étiquettes existantes de statistiques de piste"
+msgstr "Supprimer toutes les balises existantes de statistiques de piste"
 
 #: src/propedit/propedit_cli_parser.cpp:216
 msgid "Delete all occurences of a property"
@@ -4092,7 +4092,7 @@ msgstr "Modifier les propriétés des sélecteurs"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 msgid "Edit tags"
-msgstr "Éditer les étiquettes"
+msgstr "Éditer les balises"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4223,7 +4223,7 @@ msgstr "Erreur à l'analyse des chapitres dans « %1% » : des éléments obliga
 #: src/propedit/tag_target.cpp:164
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
-msgstr "Erreur à l'analyse des étiquettes dans « %1% » : des éléments obligatoires manquent.\n"
+msgstr "Erreur à l'analyse des balises dans « %1% » : des éléments obligatoires manquent.\n"
 
 #: src/common/qt_kax_analyzer.cpp:84
 msgid "Error reading Matroska file"
@@ -4700,14 +4700,14 @@ msgstr "Contrôle global de la sortie"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1699
 msgid "Global tags:"
-msgstr "Étiquettes globales :"
+msgstr "Balises globales :"
 
 #: src/merge/generic_reader.cpp:403
 #, boost-format
 msgid "Global tags: %1% entry"
 msgid_plural "Global tags: %1% entries"
 msgstr[0] "Étiquettes globales : %1% entrée"
-msgstr[1] "Étiquettes globales : %1% entrées"
+msgstr[1] "Balises globales : %1% entrées"
 
 #: src/common/file_types.cpp:82
 msgid "HD-DVD subtitles"
@@ -5020,7 +5020,7 @@ msgstr "Ce fichier doit plutôt être défini via l'option « Fichier de chapitr
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1040
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
-msgstr "Ce fichier doit plutôt être défini via l'option « Étiquettes globales » de l'onglet « Cible »"
+msgstr "Ce fichier doit plutôt être défini via l'option « Balises globales » de l'onglet « Cible »"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1057
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
@@ -5333,12 +5333,12 @@ msgstr "Option de synchronisation incorrecte : pas d'identifiant de piste spéci
 #: src/merge/mkvmerge.cpp:1160
 #, boost-format
 msgid "Invalid tags file name specified in '%1% %2%'.\n"
-msgstr "Nom de fichier d'étiquettes incorrect spécifié dans « %1% %2% ».\n"
+msgstr "Nom de fichier de balises incorrect spécifié dans « %1% %2% ».\n"
 
 #: src/merge/mkvmerge.cpp:1153
 #, boost-format
 msgid "Invalid tags option. No track ID specified in '%1% %2%'.\n"
-msgstr "Option des étiquettes incorrect. Pas d'identifiant de piste spécifié dans « %1% %2% ».\n"
+msgstr "Option des balises incorrecte. Pas d'identifiant de piste spécifié dans « %1% %2% ».\n"
 
 #: src/merge/mkvmerge.cpp:719
 #, boost-format
@@ -7354,7 +7354,7 @@ msgstr "Sélectionner le fichier d'informations de segment"
 #: src/mkvtoolnix-gui/merge/input.cpp:881
 #: src/mkvtoolnix-gui/merge/output.cpp:296
 msgid "Select tags file"
-msgstr "Sélectionner le fichier d'étiquettes"
+msgstr "Sélectionner le fichier de balises"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:869
 msgid "Select timecode file"
@@ -7636,7 +7636,7 @@ msgstr "Tranches"
 #: src/merge/output_control.cpp:1319
 #, boost-format
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
-msgstr "Des éléments d'étiquettes sont manquants (cette erreur n'aurait pas dû se produire, une erreur similaire aurait dû se produire avant). %1%\n"
+msgstr "Des éléments de balises sont manquants (cette erreur n'aurait pas dû se produire, une erreur similaire aurait dû se produire avant). %1%\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1648
 msgid "Source &files:"
@@ -7824,31 +7824,31 @@ msgstr "&Position de l'onglet dans les widgets d'onglets :"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
-msgstr "Extraction d'étiquettes"
+msgstr "Extraction de balises"
 
 #: src/propedit/propedit_cli_parser.cpp:254
 msgid "Tag selectors"
-msgstr "Sélecteurs d'étiquettes"
+msgstr "Sélecteurs de balises"
 
 #: src/info/mkvinfo.cpp:1488
 #: src/propedit/options.cpp:182
 msgid "Tags"
-msgstr "Étiquettes"
+msgstr "Balises"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:215
 msgid "Tags are allowed, but chapters are not."
-msgstr "Les étiquettes sont permises mais pas les chapitres."
+msgstr "Les balises sont permises mais pas les chapitres."
 
 #: src/merge/generic_reader.cpp:408
 #, boost-format
 msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
 msgstr[0] "Étiquettes pour la piste d'identifiant %1% : %2% entrées"
-msgstr[1] "Étiquettes pour la piste d'identifiant %1% : %2% entrées"
+msgstr[1] "Balises pour la piste d'identifiant %1% : %2% entrées"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1667
 msgid "Tags:"
-msgstr "Étiquettes :"
+msgstr "Balises :"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
 msgid "Tells mkvmerge not to create and write the cue data which can be compared to an index in an AVI."
@@ -7856,7 +7856,7 @@ msgstr "Demande à mkvmerge de ne pas créer et écrire les données CUE qui ne 
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 msgid "Tells mkvmerge not to write tags with statistics for each track."
-msgstr "Demande à mkvmerge de ne pas écrire d'étiquettes avec des statistiques pour chaque piste."
+msgstr "Demande à mkvmerge de ne pas écrire de balises avec des statistiques pour chaque piste."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
@@ -8030,17 +8030,17 @@ msgstr "Le fichier XML d'informations de segment « %1% » est illisible.\n"
 #: src/common/xml/ebml_tags_converter.cpp:122
 #, boost-format
 msgid "The XML tag file '%1%' contains an error at position %3%: %2%\n"
-msgstr "Le fichier XML d'étiquettes « %1% » contient une erreur à la position %3% : %2%\n"
+msgstr "Le fichier XML de balises « %1% » contient une erreur à la position %3% : %2%\n"
 
 #: src/common/xml/ebml_tags_converter.cpp:125
 #, boost-format
 msgid "The XML tag file '%1%' contains an error: %2%\n"
-msgstr "Le fichier XML d'étiquettes « %1% » contient une erreur : %2%\n"
+msgstr "Le fichier XML de balises « %1% » contient une erreur : %2%\n"
 
 #: src/common/xml/ebml_tags_converter.cpp:119
 #, boost-format
 msgid "The XML tag file '%1%' could not be read.\n"
-msgstr "Le fichier XML d'étiquettes « %1% » est illisible.\n"
+msgstr "Le fichier XML de balises « %1% » est illisible.\n"
 
 #: src/merge/mkvmerge.cpp:1856
 #, boost-format
@@ -8255,7 +8255,7 @@ msgstr "La largeur et la hauteur vidéo extraites du flux de données vidéo MPE
 
 #: src/extract/extract_cli_parser.cpp:107
 msgid "The fifth mode tries to extract chapter information and tags and outputs them as a CUE sheet. This is the reverse of using a CUE sheet with mkvmerge's '--chapters' option."
-msgstr "Le cinquième mode tente d'extraire les informations de chapitrage et les étiquettes, et de les convertir en feuille de montage CUE. C'est l'opposé de l'utilisation d'une feuille de montage CUE avec l'option mkvmerge « --chapters »."
+msgstr "Le cinquième mode tente d'extraire les informations de chapitrage et les balises, et de les convertir en feuille de montage CUE. C'est l'opposé de l'utilisation d'une feuille de montage CUE avec l'option mkvmerge « --chapters »."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:246
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:203
@@ -8346,7 +8346,7 @@ msgstr "Le fichier « %1 » contient des informations de segments."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1038
 msgid "The file '%1' contains tags."
-msgstr "Le fichier « %1 » contient des étiquettes."
+msgstr "Le fichier « %1 » contient des balises."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:380
 msgid "The file '%1' exists already."
@@ -8865,7 +8865,7 @@ msgstr "Les fréquences d'échantillonnage des deux pistes audio sont différent
 
 #: src/extract/extract_cli_parser.cpp:81
 msgid "The second mode extracts the tags and converts them to XML. The output is written to the standard output. The output can be used as a source for mkvmerge."
-msgstr "Le deuxième mode extrait les étiquettes et les convertit en XML. Le rapport est écrit dans le rapport standard. Il peut servir de source à mkvmerge."
+msgstr "Le deuxième mode extrait les balises et les convertit en XML. Le rapport est écrit dans le rapport standard. Il peut servir de source à mkvmerge."
 
 #: src/input/r_tta.cpp:90
 msgid "The seek table in this TTA file seems to be broken.\n"
@@ -8924,11 +8924,11 @@ msgstr "La chaîne « <START> » sera remplacée par l'horodatage de départ du 
 
 #: src/propedit/propedit_cli_parser.cpp:255
 msgid "The string 'all' works on all tags."
-msgstr "La chaîne « all » fonctionne sur toutes les étiquettes."
+msgstr "La chaîne « all » fonctionne sur toutes les balises."
 
 #: src/propedit/propedit_cli_parser.cpp:256
 msgid "The string 'global' works on the global tags."
-msgstr "La chaîne « global » fonctionne sur les étiquettes globales."
+msgstr "La chaîne « global » fonctionne sur les balises globales."
 
 #: src/propedit/propedit_cli_parser.cpp:249
 msgid "The string 'track:' followed by one of the chars 'a', 'b', 's' or 'v' followed by a number 'n' selects the nth audio, button, subtitle or video track (e.g. '--edit track:a2'). Numbering starts at 1."
@@ -8952,16 +8952,16 @@ msgstr "La chaîne « info », « segment_info » ou « segmentinfo » sélectio
 
 #: src/common/xml/xml.h:130
 msgid "The tag or attribute '%1%' at position %2% contains data that is outside its allowed range."
-msgstr "L'étiquette ou l'attribut « %1% » à la position %2% contient des données en dehors de l'intervalle autorisé."
+msgstr "La balise ou l'attribut « %1% » à la position %2% contient des données en dehors de l'intervalle autorisé."
 
 #: src/common/xml/xml.h:110
 msgid "The tag or attribute '%1%' at position %2% contains invalid or mal-formed data."
-msgstr "L'étiquette ou l'attribut « %1% » à la position %2% contient des données incorrectes ou mal formées."
+msgstr "La balise ou l'attribut « %1% » à la position %2% contient des données incorrectes ou mal formées."
 
 #: src/merge/generic_packetizer.cpp:277
 #, boost-format
 msgid "The tags in '%1%' could not be parsed: some mandatory elements are missing.\n"
-msgstr "Les étiquettes de « %1% » ne peuvent pas être analysées : certains éléments obligatoires manquent.\n"
+msgstr "Les balises de « %1% » ne peuvent pas être analysées : certains éléments obligatoires manquent.\n"
 
 #: src/extract/xtr_tta.cpp:68
 #, boost-format
@@ -9196,7 +9196,7 @@ msgstr "Cette piste audio MPEG contient %1% octets de données non MP3 au début
 
 #: src/input/r_ogm.cpp:870
 msgid "This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can be overridden with the '--chapter-charset <charset>' switch.\n"
-msgstr "Ce fichier Ogg/OGM contient des informations de titres ou de chapitres. Malheureusement, le jeu de caractères utilisé pour stocker ces informations dans le fichier ne peut pas être identifié avec certitude. Le programme suppose que le jeu de caractères actuel de votre système est adéquat. On peut passer outre avec l'option « --chapter-charset <jeu-de-caractères> ».\n"
+msgstr "Ce fichier Ogg/OGM contient des informations de titres ou de chapitres. Malheureusement, le jeu de caractères utilisé pour stocker ces informations dans le fichier ne peut pas être identifié avec certitude. Le programme suppose que le jeu de caractères actuel de ce système est adéquat. Il est possible de passer outre avec l'option « --chapter-charset <jeu-de-caractères> ».\n"
 
 #: src/input/r_ogm.cpp:877
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
@@ -9286,7 +9286,7 @@ msgstr "C'est utile dans des situations comme les disques Blu-ray où un même d
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:92
 msgid "This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes."
-msgstr "Ceci signifie que soit les barres obliques inverses doivent être doublées, soit l'argument entier doit être entouré par des guillements simples."
+msgstr "Ceci signifie que soit les barres obliques inverses doivent être doublées, soit l'argument entier doit être entouré par des guillemets simples."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:387
 #: src/mkvtoolnix-gui/merge/output.cpp:403
@@ -9465,7 +9465,7 @@ msgstr "La piste %1% a été compressée avec un algorithme inconnu/non géré (
 #: src/input/r_matroska.cpp:1077
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
-msgstr "La piste %1% n'a pas son UID de piste dont la présence est requise par la spécification Matroska. Si le fichier contient des étiquettes, celles-ci pourraient être endommagées.\n"
+msgstr "La piste %1% n'a pas son UID de piste dont la présence est requise par la spécification Matroska. Si le fichier contient des balises, celles-ci pourraient être endommagées.\n"
 
 #: src/common/content_decoder.cpp:98
 #, boost-format
@@ -10227,7 +10227,7 @@ msgstr "Fichiers d'informations de segment XML"
 #: src/mkvtoolnix-gui/merge/input.cpp:881
 #: src/mkvtoolnix-gui/merge/output.cpp:296
 msgid "XML tag files"
-msgstr "Fichiers d'étiquettes XML"
+msgstr "Fichiers de balises XML"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:113
 msgid "You can add attachments by clicking on the button below, by right-clicking on a node in the tree and selecting \"Add attachments\" from the popup menu or by dragging & dropping files here or onto the tree."
@@ -10610,7 +10610,7 @@ msgstr "Forcer 4 octets"
 
 #: src/mkvtoolnix-gui/merge/track.cpp:403
 msgid "global tags"
-msgstr "étiquettes globales"
+msgstr "balises globales"
 
 #: src/input/r_avc.cpp:71
 #: src/input/r_vc1.cpp:55
@@ -10880,7 +10880,7 @@ msgstr "mkvextract cuesheet <source> [options]"
 
 #: src/extract/extract_cli_parser.cpp:85
 msgid "mkvextract tags \"a movie.mkv\" > movie_tags.xml"
-msgstr "mkvextract tags \"film.mkv\" > film_etiquettes.xml"
+msgstr "mkvextract tags \"film.mkv\" > film_balises.xml"
 
 #: src/extract/extract_cli_parser.cpp:47
 msgid "mkvextract tags <inname> [options]"
@@ -11258,7 +11258,7 @@ msgstr "sous-titres"
 
 #: src/mkvtoolnix-gui/merge/track.cpp:402
 msgid "tags"
-msgstr "étiquettes"
+msgstr "balises"
 
 #: src/output/p_textsubs.h:39
 msgid "text subtitles"
@@ -11317,7 +11317,7 @@ msgstr "inconnu"
 #: src/input/r_matroska.cpp:2459
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
-msgstr "inconnu, étiquette de format 0x%|1$04x|"
+msgstr "inconnu, balise de format 0x%|1$04x|"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1706
 msgid "unlimited"
