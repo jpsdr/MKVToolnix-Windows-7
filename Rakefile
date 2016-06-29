@@ -901,8 +901,12 @@ Application.new("src/mkvmerge").
 # mkvinfo
 #
 
-$mkvinfo_ui_files = FileList["src/info/ui/*.ui"].to_a
-file "src/info/qt_ui.o" => $mkvinfo_ui_files.collect { |file| file.ext('h') }
+$mkvinfo_ui_files   = FileList["src/info/ui/*.ui"].to_a
+$mkvinfo_ui_h_files = $mkvinfo_ui_files.collect { |file| file.ext('h') }
+
+%w{qt_ui.o qt_ui.moc}.each do |name|
+  file "src/info/#{name}" => $mkvinfo_ui_h_files
+end
 
 Application.new("src/mkvinfo").
   description("Build the mkvinfo executable").
