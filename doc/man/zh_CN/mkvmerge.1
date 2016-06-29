@@ -1365,11 +1365,11 @@ ms 进行调整。轨道 ID 与
 \fBmkvmerge\fR(1)
 为所有区块创建索引，会使生成的文件非常大。
 .sp
-默认视频轨为 \*(Aqiframes（仅 i 帧）\*(Aq，其他所有轨道均为 \*(Aqnone（无）\*(Aq\&. 参见不论是否使用
-\fB\-\-cues\fR
-选项时都能阻止创建 cue 索引项的
+The default is \*(Aqiframes\*(Aq for video and subtitle tracks and \*(Aqnone\*(Aq for audio tracks\&. See also option
 \fB\-\-no\-cues\fR
-选项。
+which inhibits the creation of cue entries regardless of the
+\fB\-\-cues\fR
+options used\&.
 .sp
 此选项可以对同一输入文件多次使用，通过每次选择不同轨道 ID 分别应用到多个轨道。
 .RE

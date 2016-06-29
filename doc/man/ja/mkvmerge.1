@@ -1142,7 +1142,11 @@ IDが\fIn\fR、\fIm\fR\&...の添付ファイルを全ての、または最初�
 .RS 4
 指定されたトラックについて、どのトラックCUE(インデックス)エントリが作成されるのかを指定します(トラックIDのセクションを参照)。\*(Aqnone\*(AqはCUEエントリを作成しません。\*(Aqiframesは前方参照及び後方参照を含まないブロック(ビデオトラックでは I frame)のみがCUEシートに挿入されます。\*(Aqall\*(Aqでは\fBmkvmerge\fR(1)は全てのブロックに対してCUEエントリを作成し、非常に大きなファイルを出力するでしょう。
 .sp
-デフォルトはビデオトラックは\*(Aqiframesで、その他のトラックは\*(Aqnone\*(Aqです。\fB\-\-cues\fRが使用されているかどうかに関わらずCUEエントリの作成を抑制する、\fB\-\-no\-cues\fRオプションも参照してください。
+The default is \*(Aqiframes\*(Aq for video and subtitle tracks and \*(Aqnone\*(Aq for audio tracks\&. See also option
+\fB\-\-no\-cues\fR
+which inhibits the creation of cue entries regardless of the
+\fB\-\-cues\fR
+options used\&.
 .sp
 このオプションは異るトラックIDを指定することで複数の入力トラックに対して使用することができます。
 .RE
