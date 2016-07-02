@@ -1505,18 +1505,14 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <listitem>
       <para>
        Selects the compression method to be used for the track. Note that the player also has to support this method. Valid values are
-       '<literal>none</literal>', '<literal>zlib</literal>', '<literal>lzo</literal>'/'<literal>lxo1x</literal>',
-       '<literal>bz2</literal>'/'<literal>bzlib</literal>' and '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p2</literal>'.  The values
-       '<literal>lzo</literal>'/'<literal>lxo1x</literal>' and '<literal>bz2</literal>'/'<literal>bzlib</literal>' are only available if
-       &mkvmerge; has been compiled with support for the <productname>liblzo</productname> and <productname>bzlib</productname> compression libraries,
-       respectively.
+       '<literal>none</literal>', '<literal>zlib</literal>' and '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p2</literal>'.
       </para>
       <para>
        The compression method '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p2</literal>' is a special compression method called
        '<foreignphrase>header removal</foreignphrase>' that is only available for <abbrev>MPEG4</abbrev> part 2 video tracks.
       </para>
       <para>
-       The default for some subtitle tracks is '<literal>zlib</literal>' compression. This compression method is also the one that most if
+       The default for some subtitle types is '<literal>zlib</literal>' compression. This compression method is also the one that most if
        not all playback applications support. Support for other compression methods other than '<literal>none</literal>' is not assured.
       </para>
      </listitem>
@@ -1845,20 +1841,6 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
       </para>
 
       <itemizedlist>
-       <listitem>
-        <para>
-         '<literal>BZ2</literal>' -- the <productname>bzlib</productname> compression library. Affects the available compression methods for
-         the <link linkend="mkvmerge.description.compression"><option>--compression</option></link> option.
-        </para>
-       </listitem>
-
-       <listitem>
-        <para>
-         '<literal>LZO</literal>' -- the <productname>lzo</productname> compression library. Affects the available compression methods for
-         the <link linkend="mkvmerge.description.compression"><option>--compression</option></link> option.
-        </para>
-       </listitem>
-
        <listitem>
         <para>
          '<literal>FLAC</literal>' -- reading raw <abbrev>FLAC</abbrev> files and handling <abbrev>FLAC</abbrev> tracks in other containers,
