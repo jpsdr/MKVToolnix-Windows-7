@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-06-08 19:19+0200\n"
+"POT-Creation-Date: 2016-07-02 20:29+0200\n"
 "PO-Revision-Date: 2016-05-30 16:57+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -146,9 +146,24 @@ msgstr ""
 "  --blockadd <TID:x>       Određuje maksimalnu količinu dodatnih nivoa\n"
 "                           blokova za ovu stazu\n"
 
-#: src/merge/mkvmerge.cpp:283
+#: src/merge/mkvmerge.cpp:324
 msgid "  --capabilities           Lists optional features mkvmerge was compiled with.\n"
 msgstr "  --capabilities           Lista opcione mogućnosti sa kojima je mkvmerge kompajlovan.\n"
+
+#: src/merge/mkvmerge.cpp:275
+#, fuzzy
+msgid ""
+"  --cb-subsample <TID:hori,vert>\n"
+"                           The amount of pixels to remove in the Cb channel\n"
+"                           for every pixel not removed horizontally and\n"
+"                           vertically. This is additive with\n"
+"                           --chroma-subsample.\n"
+msgstr ""
+"  --aspect-ratio-factor <TID:f|a/b>\n"
+"                           Prvo računa odnos strana tako što\n"
+"                           množi originalni odnos strana videa\n"
+"                           sa ovim faktorom i računa dimenzije\n"
+"                           prikaza iz ovog faktora.\n"
 
 #: src/merge/mkvmerge.cpp:92
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
@@ -161,6 +176,35 @@ msgstr "  --chapter-language <lng> Postavlja element 'jezik' u unos poglavlja.\n
 #: src/merge/mkvmerge.cpp:90
 msgid "  --chapters <file>        Read chapter information from the file.\n"
 msgstr "  --chapters <file>       Pročitaj informaciju o poglavljima iz fajla.\n"
+
+#: src/merge/mkvmerge.cpp:280
+#, fuzzy
+msgid ""
+"  --chroma-siting <TID:hori,vert>\n"
+"                            How chroma is sited horizontally/vertically.\n"
+msgstr ""
+"  --cropping <TID:left,top,right,bottom>\n"
+"                           Podešava parametre podrezivanja.\n"
+
+#: src/merge/mkvmerge.cpp:271
+#, fuzzy
+msgid ""
+"  --chroma-subsample <TID:hori,vert>\n"
+"                           The amount of pixels to remove in the Cr and Cb\n"
+"                           channels for every pixel not removed horizontally\n"
+"                           and vertically.\n"
+msgstr ""
+"  --stereo-mode <TID:n|keyword>\n"
+"                           Postavlja parametar stereo režima.\n"
+"                           Može biti ili broj od 0 - 14 ili ključna reč\n"
+"                           (pogl. dokumentaciju za kompletnu listu).\n"
+
+#: src/merge/mkvmerge.cpp:293
+msgid ""
+"  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
+"                           Red/Green/Blue chromaticity coordinates as defined\n"
+"                           by CIE 1931.\n"
+msgstr ""
 
 #: src/merge/mkvmerge.cpp:115
 msgid ""
@@ -178,7 +222,49 @@ msgstr ""
 msgid "  --clusters-in-meta-seek  Write meta seek data for clusters.\n"
 msgstr "  --clusters-in-meta-seek  Zapiši meta seek podatke za klastere.\n"
 
-#: src/merge/mkvmerge.cpp:286
+#: src/merge/mkvmerge.cpp:267
+#, fuzzy
+msgid ""
+"  --colour-bits-per-channel <TID:n>\n"
+"                           Sets the number of coded bits for a colour \n"
+"                           channel. A value of 0 indicates that the number is\n"
+"                           unspecified.\n"
+msgstr ""
+"  --stereo-mode <TID:n|keyword>\n"
+"                           Postavlja parametar stereo režima.\n"
+"                           Može biti ili broj od 0 - 14 ili ključna reč\n"
+"                           (pogl. dokumentaciju za kompletnu listu).\n"
+
+#: src/merge/mkvmerge.cpp:264
+msgid ""
+"  --colour-matrix <TID:n>  Sets the matrix coefficients of the video used\n"
+"                           to derive luma and chroma values from red, green\n"
+"                           and blue color primaries.\n"
+msgstr ""
+
+#: src/merge/mkvmerge.cpp:285
+#, fuzzy
+msgid ""
+"  --colour-primaries <TID:n>\n"
+"                           The colour primaries of the video.\n"
+msgstr ""
+"  --command-line-charset <charset>\n"
+"                           Skup znakova za nizove u komandnoj liniji\n"
+
+#: src/merge/mkvmerge.cpp:282
+msgid "  --colour-range <TID:n>   Clipping of the color ranges.\n"
+msgstr ""
+
+#: src/merge/mkvmerge.cpp:283
+#, fuzzy
+msgid ""
+"  --colour-transfer-characteristics <TID:n>\n"
+"                           The transfer characteristics of the video.\n"
+msgstr ""
+"  --command-line-charset <charset>\n"
+"                           Skup znakova za nizove u komandnoj liniji\n"
+
+#: src/merge/mkvmerge.cpp:327
 msgid ""
 "  --command-line-charset <charset>\n"
 "                           Charset for strings on the command line\n"
@@ -186,7 +272,7 @@ msgstr ""
 "  --command-line-charset <charset>\n"
 "                           Skup znakova za nizove u komandnoj liniji\n"
 
-#: src/merge/mkvmerge.cpp:271
+#: src/merge/mkvmerge.cpp:312
 msgid ""
 "  --compression <TID:method>\n"
 "                           Sets the compression method used for the\n"
@@ -224,7 +310,7 @@ msgstr ""
 "                           Napravi cue (indeks) stavke za ovu stazu:\n"
 "                           Ništa, samo za I slike, za sve.\n"
 
-#: src/merge/mkvmerge.cpp:291
+#: src/merge/mkvmerge.cpp:332
 msgid "  --debug <topic>          Turns on debugging output for 'topic'.\n"
 msgstr "  --debug <topic>          Uključuje rezultat debagovanja za 'topic'.\n"
 
@@ -280,7 +366,7 @@ msgstr ""
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr "  --enable-durations       Omogući blokovo trajanje za sve blokove.\n"
 
-#: src/merge/mkvmerge.cpp:292
+#: src/merge/mkvmerge.cpp:333
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr "  --engage <feature>       Uključuje eksperimentalnu funkciju 'feature'.\n"
 
@@ -342,13 +428,57 @@ msgstr "  --link-to-next <SID>     Poveži poslednji fajl sa datim SID.\n"
 msgid "  --link-to-previous <SID> Link the first file to the given SID.\n"
 msgstr "  --link-to-previous <SID> Poveži prvi fajl sa datim SID.\n"
 
-#: src/merge/mkvmerge.cpp:281
+#: src/merge/mkvmerge.cpp:322
 msgid ""
 "  --list-languages         Lists all ISO639 languages and their\n"
 "                           ISO639-2 codes.\n"
 msgstr ""
 "  --list-languages         Izlistava sve ISO639 jezike i njihove\n"
 "                           ISO639-2 kodove.\n"
+
+#: src/merge/mkvmerge.cpp:287
+#, fuzzy
+msgid ""
+"  --max-content-light <TID:n>\n"
+"                           Maximum brightness of a single pixel in candelas\n"
+"                           per square meter (cd/m²).\n"
+msgstr ""
+"  --attach-file-once <file>\n"
+"                           Kreira prilog unutar\n"
+"                           prvog zapisanog Matroska fajla.\n"
+
+#: src/merge/mkvmerge.cpp:290
+#, fuzzy
+msgid ""
+"  --max-frame-light <TID:n>\n"
+"                           Maximum frame-average light level in candelas per\n"
+"                           square meter (cd/m²).\n"
+msgstr ""
+"  --attach-file-once <file>\n"
+"                           Kreira prilog unutar\n"
+"                           prvog zapisanog Matroska fajla.\n"
+
+#: src/merge/mkvmerge.cpp:299
+#, fuzzy
+msgid ""
+"  --max-luminance <TID:float>\n"
+"                           Maximum luminance in candelas per square meter\n"
+"                           (cd/m²).\n"
+msgstr ""
+"  --split frames:A[,B...]\n"
+"                           Napravi novi fajl nakon svake slike/poluslike A, B\n"
+"                           itd.\n"
+
+#: src/merge/mkvmerge.cpp:302
+#, fuzzy
+msgid ""
+"  --min-luminance <TID:float>\n"
+"                           Mininum luminance in candelas per square meter\n"
+"                           (cd/m²).\n"
+msgstr ""
+"  --split frames:A[,B...]\n"
+"                           Napravi novi fajl nakon svake slike/poluslike A, B\n"
+"                           itd.\n"
 
 #: src/merge/mkvmerge.cpp:241
 msgid ""
@@ -372,11 +502,11 @@ msgstr "  --no-cues                Ne ispisuj cue podatak (indeks).\n"
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
 msgstr "  --no-global-tags         Ne čuvaj globalne tagove iz izvornog fajla.\n"
 
-#: src/merge/mkvmerge.cpp:288
+#: src/merge/mkvmerge.cpp:329
 msgid "  --output-charset <cset>  Output messages in this charset\n"
 msgstr "  --output-charset <cset> Prikaži poruke u ovom skupu znakova\n"
 
-#: src/merge/mkvmerge.cpp:284
+#: src/merge/mkvmerge.cpp:325
 msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priority>   Postavi prioritet pod kojim mkvmerge radi.\n"
 
@@ -480,7 +610,7 @@ msgstr ""
 "                           Može biti ili broj od 0 - 14 ili ključna reč\n"
 "                           (pogl. dokumentaciju za kompletnu listu).\n"
 
-#: src/merge/mkvmerge.cpp:266
+#: src/merge/mkvmerge.cpp:307
 msgid ""
 "  --sub-charset <TID:charset>\n"
 "                           Determines the charset the text subtitles are\n"
@@ -526,9 +656,20 @@ msgstr ""
 "  --track-tags <n,m,...>   Kopiraj tagove za staze n,m itd. Default: kopiraj\n"
 "                           tagove za sve staze.\n"
 
-#: src/merge/mkvmerge.cpp:285
+#: src/merge/mkvmerge.cpp:326
 msgid "  --ui-language <code>     Force the translations for 'code' to be used.\n"
 msgstr "  --ui-language <code>     Primoraj da se koriste prevodi za 'code'.\n"
+
+#: src/merge/mkvmerge.cpp:296
+#, fuzzy
+msgid ""
+"  --white-colour-coordinates <TID:x,y>\n"
+"                           White colour chromaticity coordinates as defined\n"
+"                           by CIE 1931.\n"
+msgstr ""
+"  --split frames:A[,B...]\n"
+"                           Napravi novi fajl nakon svake slike/poluslike A, B\n"
+"                           itd.\n"
 
 #: src/merge/mkvmerge.cpp:184
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
@@ -542,7 +683,7 @@ msgstr "  -B, --no-buttons         Ne kopiraj staze sa dugmadima iz ovog fajla.\
 msgid "  -D, --no-video           Don't copy any video track from this file.\n"
 msgstr "  -D, --no-video           Ne kopiraj nijednu video stazu iz ovog fajla.\n"
 
-#: src/merge/mkvmerge.cpp:277
+#: src/merge/mkvmerge.cpp:318
 msgid ""
 "  -F, --identification-format <format>\n"
 "                           Set the identification results format\n"
@@ -564,7 +705,7 @@ msgstr "  -S, --no-subtitles       Ne kopiraj nijednu titl stazu iz ovog fajla.\
 msgid "  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n"
 msgstr "  -T, --no-track-tags      Ne kopiraj tagove za staze iz izvornog fajla.\n"
 
-#: src/merge/mkvmerge.cpp:296
+#: src/merge/mkvmerge.cpp:337
 msgid "  -V, --version            Show version information.\n"
 msgstr "  -V, --version            Pokaži informaciju o verziji programa.\n"
 
@@ -606,15 +747,15 @@ msgstr ""
 "  -f, --fourcc <FOURCC>    Primorava FourCC u naznačenu vrednost.\n"
 "                           Radi samo za video staze.\n"
 
-#: src/merge/mkvmerge.cpp:295
+#: src/merge/mkvmerge.cpp:336
 msgid "  -h, --help               Show this help.\n"
 msgstr "  -h, --help               Pokaži ovu pomoć.\n"
 
-#: src/merge/mkvmerge.cpp:276
+#: src/merge/mkvmerge.cpp:317
 msgid "  -i, --identify <file>    Print information about the source file.\n"
 msgstr "  -i, --identify <file>   Napiši informaciju o izvornom fajlu.\n"
 
-#: src/merge/mkvmerge.cpp:280
+#: src/merge/mkvmerge.cpp:321
 msgid "  -l, --list-types         Lists supported input file types.\n"
 msgstr "  -l, --list-types         Izlistava podržane tipove formata ulaznih fajlova.\n"
 
@@ -634,7 +775,7 @@ msgstr ""
 msgid "  -o, --output out         Write to the file 'out'.\n"
 msgstr "  -o, --output out         Zapiši u fajl 'out'.\n"
 
-#: src/merge/mkvmerge.cpp:289
+#: src/merge/mkvmerge.cpp:330
 msgid ""
 "  -r, --redirect-output <file>\n"
 "                           Redirects all messages into this file.\n"
@@ -698,7 +839,7 @@ msgstr ""
 msgid "  =<file>                  Same as \"= <file>\".\n"
 msgstr "  =<file>                  Isto kao \"= <file>\".\n"
 
-#: src/merge/mkvmerge.cpp:293
+#: src/merge/mkvmerge.cpp:334
 msgid ""
 "  @optionsfile             Reads additional command line options from\n"
 "                           the specified file (see man page).\n"
@@ -745,20 +886,20 @@ msgid " (HEVC profile: %1% @L%2%.%3%)"
 msgstr " (HEVC profil: %1% @L%2%.%3%)"
 
 #: src/info/mkvinfo.cpp:183
-#: src/info/mkvinfo.cpp:834
+#: src/info/mkvinfo.cpp:972
 #, boost-format
 msgid " (adler: 0x%|1$08x|)"
 msgstr " (adler: 0x%|1$08x|)"
 
-#: src/info/mkvinfo.cpp:604
+#: src/info/mkvinfo.cpp:739
 msgid " (aspect ratio)"
 msgstr " (format slike)"
 
-#: src/info/mkvinfo.cpp:602
+#: src/info/mkvinfo.cpp:737
 msgid " (centimeters)"
 msgstr " (centimetri)"
 
-#: src/info/mkvinfo.cpp:627
+#: src/info/mkvinfo.cpp:762
 msgid " (fixed)"
 msgstr " (fixed)"
 
@@ -767,7 +908,7 @@ msgstr " (fixed)"
 msgid " (format tag: 0x%|1$04x|)"
 msgstr " (tag formata: 0x%|1$04x|)"
 
-#: src/info/mkvinfo.cpp:625
+#: src/info/mkvinfo.cpp:760
 msgid " (free resizing)"
 msgstr " (proizvoljna promena veličine)"
 
@@ -776,15 +917,15 @@ msgstr " (proizvoljna promena veličine)"
 msgid " (h.264 profile: %1% @L%2%.%3%)"
 msgstr " (h.264 profil: %1% @L%2%.%3%)"
 
-#: src/info/mkvinfo.cpp:603
+#: src/info/mkvinfo.cpp:738
 msgid " (inches)"
 msgstr " (inči)"
 
-#: src/info/mkvinfo.cpp:626
+#: src/info/mkvinfo.cpp:761
 msgid " (keep aspect ratio)"
 msgstr " (sačuvaj format slike)"
 
-#: src/info/mkvinfo.cpp:601
+#: src/info/mkvinfo.cpp:736
 msgid " (pixels)"
 msgstr " (pikseli)"
 
@@ -812,11 +953,11 @@ msgstr " Globalne opcije:\n"
 msgid " Options for each input file:\n"
 msgstr " Parametri za svaki ulazni fajl:\n"
 
-#: src/merge/mkvmerge.cpp:270
+#: src/merge/mkvmerge.cpp:311
 msgid " Options that only apply to VobSub subtitle tracks:\n"
 msgstr " Parametri koji važe samo za VobSub titl staze:\n"
 
-#: src/merge/mkvmerge.cpp:265
+#: src/merge/mkvmerge.cpp:306
 msgid " Options that only apply to text subtitle tracks:\n"
 msgstr " Parametri koji važe samo za tekstualne titl staze:\n"
 
@@ -824,7 +965,7 @@ msgstr " Parametri koji važe samo za tekstualne titl staze:\n"
 msgid " Options that only apply to video tracks:\n"
 msgstr " Parametri koji važe samo za video staze:\n"
 
-#: src/merge/mkvmerge.cpp:275
+#: src/merge/mkvmerge.cpp:316
 msgid " Other options:\n"
 msgstr " Druge opcije:\n"
 
@@ -1024,33 +1165,33 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: desilo se nepoznato odstupanje (poruka: %2%; tip: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1363
-#: src/input/r_matroska.cpp:2032
+#: src/input/r_matroska.cpp:1431
+#: src/input/r_matroska.cpp:2102
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: desilo se nepoznato odstupanje."
 
-#: src/merge/mkvmerge.cpp:597
+#: src/merge/mkvmerge.cpp:638
 #, boost-format
 msgid "%1%: divisor is 0 in '%2% %3%'.\n"
 msgstr "%1%: delilac je 0 u '%2% %3%'.\n"
 
-#: src/merge/mkvmerge.cpp:572
+#: src/merge/mkvmerge.cpp:613
 #, boost-format
 msgid "%1%: invalid track ID in '%2% %3%'.\n"
 msgstr "%1%: nevažeći track ID u '%2% %3%'.\n"
 
-#: src/merge/mkvmerge.cpp:589
+#: src/merge/mkvmerge.cpp:630
 #, boost-format
 msgid "%1%: missing dividend in '%2% %3%'.\n"
 msgstr "%1%: missing dividend in '%2% %3%'.\n"
 
-#: src/merge/mkvmerge.cpp:592
+#: src/merge/mkvmerge.cpp:633
 #, boost-format
 msgid "%1%: missing divisor in '%2% %3%'.\n"
 msgstr "%1%: missing divisor in '%2% %3%'.\n"
 
-#: src/merge/mkvmerge.cpp:568
+#: src/merge/mkvmerge.cpp:609
 #, boost-format
 msgid "%1%: missing track ID in '%2% %3%'.\n"
 msgstr "%1%: missing track ID in '%2% %3%'.\n"
@@ -1566,17 +1707,17 @@ msgstr "&Pogledaj rezultat"
 msgid "&When to set the language:"
 msgstr "Kada izvršiti:"
 
-#: src/merge/mkvmerge.cpp:1888
+#: src/merge/mkvmerge.cpp:2091
 #, boost-format
 msgid "'%1%' can only be used with a file name. No further options are allowed if this option is used.\n"
 msgstr "'%1%' može biti korišćen samo sa imenom fajla. Nikakve dalje opcije nisu dozvoljene ako se ova opcija koristi.\n"
 
-#: src/merge/mkvmerge.cpp:1073
+#: src/merge/mkvmerge.cpp:1276
 #, boost-format
 msgid "'%1%' is an unsupported argument for --compression. Available compression methods are: %2%\n"
 msgstr "'%1%' nije podržan argument za parametar --compression. Dostupne metode kompresije su: %2%\n"
 
-#: src/merge/mkvmerge.cpp:1028
+#: src/merge/mkvmerge.cpp:1231
 #, boost-format
 msgid "'%1%' is an unsupported argument for --cues.\n"
 msgstr "'%1%' nije podržan argument za parametar --cues.\n"
@@ -1586,18 +1727,18 @@ msgstr "'%1%' nije podržan argument za parametar --cues.\n"
 msgid "'%1%' is missing the file name.\n"
 msgstr "'%1%' nedostaje ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:1542
+#: src/merge/mkvmerge.cpp:1745
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--chapter-language %1%'. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'%1%' nije ni ISO639-2 a ni ISO639-1 važeći kod u '--chapter-language %1%'. Pogledajte 'mkvmerge --list-languages' za listu svih jezika i njihovih ISO639-2 kodova.\n"
 
-#: src/merge/mkvmerge.cpp:1633
+#: src/merge/mkvmerge.cpp:1836
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code in '--default-language %1%'. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'%1%' nije ni ISO639-2 a ni ISO639-1 važeći kod u '--default-language %1%'. Pogledajte 'mkvmerge --list-languages' za listu svih jezika i njihovih ISO639-2 kodova.\n"
 
 #: src/extract/extract_cli_parser.cpp:193
-#: src/merge/mkvmerge.cpp:1109
+#: src/merge/mkvmerge.cpp:1312
 #, boost-format
 msgid "'%1%' is neither a valid ISO639-2 nor a valid ISO639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO639-2 codes.\n"
 msgstr "'%1%' nije ni ISO639-2 a ni ISO639-1 važeći kod. Pogledajte 'mkvmerge --list-languages' za listu svih jezika i njihovih ISO639-2 kodova.\n"
@@ -1618,12 +1759,12 @@ msgstr "'%1%'  nije linija CHAPTERxxNAME=..."
 msgid "'%1%' is not a valid ISO639-2 language code."
 msgstr "'%1%' nije važeći ISO639-2 jezički kod."
 
-#: src/merge/mkvmerge.cpp:1265
+#: src/merge/mkvmerge.cpp:1468
 #, boost-format
 msgid "'%1%' is not a valid append mode in '--append-mode %1%'.\n"
 msgstr "'%1%' nije važeći način spajanja u '--append-mode %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1376
+#: src/merge/mkvmerge.cpp:1579
 #, boost-format
 msgid "'%1%' is not a valid block additional max in '--blockadd %2%'.\n"
 msgstr "'%1%' nije važeći maksimum dodatnih blokova u '--blockadd %2%'.\n"
@@ -1633,8 +1774,8 @@ msgstr "'%1%' nije važeći maksimum dodatnih blokova u '--blockadd %2%'.\n"
 msgid "'%1%' is not a valid ccTLD country code."
 msgstr "'%1%' nije važeći ccTLD državni kod."
 
-#: src/merge/mkvmerge.cpp:1208
-#: src/merge/mkvmerge.cpp:1211
+#: src/merge/mkvmerge.cpp:1411
+#: src/merge/mkvmerge.cpp:1414
 #, boost-format
 msgid "'%1%' is not a valid file ID in '--track-order %2%'.\n"
 msgstr "'%1%' nije važeći fajl ID u '--track-order %2%'.\n"
@@ -1644,52 +1785,52 @@ msgstr "'%1%' nije važeći fajl ID u '--track-order %2%'.\n"
 msgid "'%1%' is not a valid hack.\n"
 msgstr "'%1%' nije važeći hak.\n"
 
-#: src/merge/mkvmerge.cpp:1250
+#: src/merge/mkvmerge.cpp:1453
 #, boost-format
 msgid "'%1%' is not a valid mapping of file and track IDs in '--append-to %2%'.\n"
 msgstr "'%1%' nije važeće mapiranje fajlova i identifikatora staza (track ID) u '--append-to %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1205
+#: src/merge/mkvmerge.cpp:1408
 #, boost-format
 msgid "'%1%' is not a valid pair of file ID and track ID in '--track-order %2%'.\n"
 msgstr "'%1%' nije važeći par identifikatora od fajlova i staza u '--track-order %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1303
+#: src/merge/mkvmerge.cpp:1506
 #, boost-format
 msgid "'%1%' is not a valid pair of track ID and NALU size length in '--nalu-size-length %1%'.\n"
 msgstr "'%1%' nije važeći par od track ID i NALU veličine u '--nalu-size-length %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1368
+#: src/merge/mkvmerge.cpp:1571
 #, boost-format
 msgid "'%1%' is not a valid pair of track ID and block additional in '--blockadd %1%'.\n"
 msgstr "'%1%' nije važeći par identifikatora staza i dodatnih blokova u '--blockadd %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1279
+#: src/merge/mkvmerge.cpp:1482
 #, boost-format
 msgid "'%1%' is not a valid pair of track ID and default duration in '--default-duration %1%'.\n"
 msgstr "'%1%' nije važeći par od track ID i podrazumevanog trajanja u '--default-duration %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1413
+#: src/merge/mkvmerge.cpp:1616
 #, boost-format
 msgid "'%1%' is not a valid priority class.\n"
 msgstr "'%1%' nije važeća klasa prioriteta.\n"
 
-#: src/merge/mkvmerge.cpp:1372
+#: src/merge/mkvmerge.cpp:1575
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--blockadd %2%'.\n"
 msgstr "'%1%' nije važeći track ID u '--blockadd %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1283
+#: src/merge/mkvmerge.cpp:1486
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--default-duration %2%'.\n"
 msgstr "'%1%' nije važeći track ID u '--default-duration %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1307
+#: src/merge/mkvmerge.cpp:1510
 #, boost-format
 msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'%1%' nije važeći track ID u '--nalu-size-length %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1286
+#: src/merge/mkvmerge.cpp:1489
 #, boost-format
 msgid "'%1%' is not recognized as a valid number format or it doesn't contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '%2%'.\n"
 msgstr "'%1%' nije prepoznat kao važeći format broja ili ne sadrži važeću jedinicu ('s', 'ms', 'us', 'ns', 'fps', 'p' ili 'i') u '%2%'.\n"
@@ -1704,64 +1845,82 @@ msgstr "'%1%' je dopušteno samo kad se izvlače poglavlja.\n"
 msgid "'%1%' is only allowed when extracting tracks.\n"
 msgstr "'%1%' je dopušteno samo kad se izvlače staze.\n"
 
-#: src/merge/mkvmerge.cpp:1909
+#: src/merge/mkvmerge.cpp:2112
 #, boost-format
 msgid "'%1%' lacks a file name.\n"
 msgstr "'%1%' nedostaje ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:1797
-#: src/merge/mkvmerge.cpp:1863
-#: src/merge/mkvmerge.cpp:1958
-#: src/merge/mkvmerge.cpp:2151
-#: src/merge/mkvmerge.cpp:2165
-#: src/merge/mkvmerge.cpp:2259
-#: src/merge/mkvmerge.cpp:2273
-#: src/merge/mkvmerge.cpp:2280
-#: src/merge/mkvmerge.cpp:2287
-#: src/merge/mkvmerge.cpp:2294
-#: src/merge/mkvmerge.cpp:2301
-#: src/merge/mkvmerge.cpp:2308
-#: src/merge/mkvmerge.cpp:2315
-#: src/merge/mkvmerge.cpp:2329
-#: src/merge/mkvmerge.cpp:2336
-#: src/merge/mkvmerge.cpp:2343
-#: src/merge/mkvmerge.cpp:2350
-#: src/merge/mkvmerge.cpp:2357
-#: src/merge/mkvmerge.cpp:2367
-#: src/merge/mkvmerge.cpp:2374
-#: src/merge/mkvmerge.cpp:2381
-#: src/merge/mkvmerge.cpp:2388
-#: src/merge/mkvmerge.cpp:2395
-#: src/merge/mkvmerge.cpp:2402
+#: src/merge/mkvmerge.cpp:2000
+#: src/merge/mkvmerge.cpp:2066
+#: src/merge/mkvmerge.cpp:2161
+#: src/merge/mkvmerge.cpp:2354
+#: src/merge/mkvmerge.cpp:2368
+#: src/merge/mkvmerge.cpp:2560
+#: src/merge/mkvmerge.cpp:2574
+#: src/merge/mkvmerge.cpp:2581
+#: src/merge/mkvmerge.cpp:2588
+#: src/merge/mkvmerge.cpp:2595
+#: src/merge/mkvmerge.cpp:2602
+#: src/merge/mkvmerge.cpp:2609
+#: src/merge/mkvmerge.cpp:2616
+#: src/merge/mkvmerge.cpp:2630
+#: src/merge/mkvmerge.cpp:2637
+#: src/merge/mkvmerge.cpp:2644
+#: src/merge/mkvmerge.cpp:2651
+#: src/merge/mkvmerge.cpp:2658
+#: src/merge/mkvmerge.cpp:2668
+#: src/merge/mkvmerge.cpp:2675
+#: src/merge/mkvmerge.cpp:2682
+#: src/merge/mkvmerge.cpp:2689
+#: src/merge/mkvmerge.cpp:2696
+#: src/merge/mkvmerge.cpp:2703
 #, boost-format
 msgid "'%1%' lacks its argument.\n"
 msgstr "'%1%' nedostaje njegov argument.\n"
 
-#: src/merge/mkvmerge.cpp:2224
+#: src/merge/mkvmerge.cpp:2427
 #, boost-format
 msgid "'%1%' lacks the FourCC.\n"
 msgstr "'%1%' nedostaje FourCC.\n"
 
-#: src/merge/mkvmerge.cpp:2266
+#: src/merge/mkvmerge.cpp:2567
 #, boost-format
 msgid "'%1%' lacks the delay.\n"
 msgstr "'%1%' nedostaje kašnjenje.\n"
 
-#: src/merge/mkvmerge.cpp:2070
+#: src/merge/mkvmerge.cpp:2273
 #, boost-format
 msgid "'%1%' lacks the file name.\n"
 msgstr "'%1%' nedostaje ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:2322
+#: src/merge/mkvmerge.cpp:2462
+#: src/merge/mkvmerge.cpp:2469
+#: src/merge/mkvmerge.cpp:2476
+#: src/merge/mkvmerge.cpp:2483
+#: src/merge/mkvmerge.cpp:2490
+#: src/merge/mkvmerge.cpp:2497
+#: src/merge/mkvmerge.cpp:2504
+#: src/merge/mkvmerge.cpp:2511
+#: src/merge/mkvmerge.cpp:2518
+#: src/merge/mkvmerge.cpp:2525
+#: src/merge/mkvmerge.cpp:2532
+#: src/merge/mkvmerge.cpp:2539
+#: src/merge/mkvmerge.cpp:2546
+#: src/merge/mkvmerge.cpp:2553
+#, fuzzy, boost-format
+msgid "'%1%' lacks the parameter.\n"
+msgstr "'%1%' nedostaju brojevi staze.\n"
+
+#: src/merge/mkvmerge.cpp:2623
 #, boost-format
 msgid "'%1%' lacks the track ID.\n"
 msgstr "'%1%' nedostaje track ID.\n"
 
-#: src/merge/mkvmerge.cpp:2189
-#: src/merge/mkvmerge.cpp:2196
-#: src/merge/mkvmerge.cpp:2203
-#: src/merge/mkvmerge.cpp:2210
-#: src/merge/mkvmerge.cpp:2217
+#: src/merge/mkvmerge.cpp:2392
+#: src/merge/mkvmerge.cpp:2399
+#: src/merge/mkvmerge.cpp:2406
+#: src/merge/mkvmerge.cpp:2413
+#: src/merge/mkvmerge.cpp:2420
 #, boost-format
 msgid "'%1%' lacks the track numbers.\n"
 msgstr "'%1%' nedostaju brojevi staze.\n"
@@ -1787,64 +1946,64 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Takodje obrađujem prateće fajlove: %2%\n"
 
-#: src/input/r_matroska.cpp:1636
+#: src/input/r_matroska.cpp:1706
 #, boost-format
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr "'%1%': Vi ponovo muksujete Opus stazu koja je muksovana u eksperimentalnom režimu. Dobijena staza će biti zapisana u finalnom režimu, ali jedan detalj ne može biti oporavljen iz staze muksovane u eksperimentalnom režimu: skraćivanje na kraju. Ovo znači da dekoder može izbaciti nekoliko uzoraka više nego što je originalno nameravano. Treba da ponovo muksujete iz izvornog Opus fajla ako je moguće.\n"
 
-#: src/merge/mkvmerge.cpp:2231
+#: src/merge/mkvmerge.cpp:2434
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' nije naveden format slike.\n"
 
-#: src/merge/mkvmerge.cpp:2238
+#: src/merge/mkvmerge.cpp:2441
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor' nije naveden faktor formata slike.\n"
 
-#: src/merge/mkvmerge.cpp:2041
+#: src/merge/mkvmerge.cpp:2244
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description' nije naveden opis.\n"
 
-#: src/merge/mkvmerge.cpp:2050
+#: src/merge/mkvmerge.cpp:2253
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type' nije naveden MIME tip.\n"
 
-#: src/merge/mkvmerge.cpp:2060
+#: src/merge/mkvmerge.cpp:2263
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' nije navedno ime.\n"
 
-#: src/merge/mkvmerge.cpp:2096
+#: src/merge/mkvmerge.cpp:2299
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset' nije naveden skup znakova.\n"
 
-#: src/merge/mkvmerge.cpp:1553
+#: src/merge/mkvmerge.cpp:1756
 #, boost-format
 msgid "'--chapter-charset' may only be given once in '--chapter-charset %1%'.\n"
 msgstr "'--chapter-charset' može biti navedeno samo jednom u '--chapter-charset %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1556
+#: src/merge/mkvmerge.cpp:1759
 #, boost-format
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset %1%'.\n"
 msgstr "'--chapter-charset' mora biti navedeno ispred '--chapters' u '--chapter-charset %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:2089
+#: src/merge/mkvmerge.cpp:2292
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language' nije naveden jezik.\n"
 
-#: src/merge/mkvmerge.cpp:1535
+#: src/merge/mkvmerge.cpp:1738
 #, boost-format
 msgid "'--chapter-language' may only be given once in '--chapter-language %1%'.\n"
 msgstr "'--chapter-language' može biti navedeno samo jednom u '--chapter-language %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1538
+#: src/merge/mkvmerge.cpp:1741
 #, boost-format
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language %1%'.\n"
 msgstr "'--chapter-language' mora biti navedeno ispred '--chapters' u '--chapter-language %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:2113
+#: src/merge/mkvmerge.cpp:2316
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters' nije navedeno ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:2019
+#: src/merge/mkvmerge.cpp:2222
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' nije navedena dužina.\n"
 
@@ -1852,19 +2011,19 @@ msgstr "'--cluster-length' nije navedena dužina.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' nije naveden argument.\n"
 
-#: src/merge/mkvmerge.cpp:2252
+#: src/merge/mkvmerge.cpp:2455
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' nije naveden parametar za podrezivanje.\n"
 
-#: src/merge/mkvmerge.cpp:2103
+#: src/merge/mkvmerge.cpp:2306
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format' nije naveden format.\n"
 
-#: src/merge/mkvmerge.cpp:2106
+#: src/merge/mkvmerge.cpp:2309
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' mora biti navedeno ispred parametra '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2245
+#: src/merge/mkvmerge.cpp:2448
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' nisu navedene dimenzije.\n"
 
@@ -1872,71 +2031,71 @@ msgstr "'--display-dimensions' nisu navedene dimenzije.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' nije naveden argument.\n"
 
-#: src/merge/mkvmerge.cpp:2122
+#: src/merge/mkvmerge.cpp:2325
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--generate-chapters' nije naveden način.\n"
 
-#: src/merge/mkvmerge.cpp:2129
+#: src/merge/mkvmerge.cpp:2332
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--generate-chapters-name-template' nije naveden obrazac za ime.\n"
 
-#: src/merge/mkvmerge.cpp:2080
+#: src/merge/mkvmerge.cpp:2283
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' nije navedeno ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:2421
+#: src/merge/mkvmerge.cpp:2722
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link' samo ima smisla u kombinaciji sa '--split'.\n"
 
-#: src/merge/mkvmerge.cpp:2005
+#: src/merge/mkvmerge.cpp:2208
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next' nije naveden sledeći UID.\n"
 
-#: src/merge/mkvmerge.cpp:1998
+#: src/merge/mkvmerge.cpp:2201
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' nije naveden prethodni UID.\n"
 
-#: src/merge/mkvmerge.cpp:2012
+#: src/merge/mkvmerge.cpp:2215
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid' nije naveden segment UID.\n"
 
-#: src/merge/mkvmerge.cpp:2136
+#: src/merge/mkvmerge.cpp:2339
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo' nije navedeno ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:1979
+#: src/merge/mkvmerge.cpp:2182
 msgid "'--split' lacks the size.\n"
 msgstr "'--split' nije navedena veličina.\n"
 
-#: src/merge/mkvmerge.cpp:1986
+#: src/merge/mkvmerge.cpp:2189
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' nije naveden broj fajlova.\n"
 
-#: src/merge/mkvmerge.cpp:1612
+#: src/merge/mkvmerge.cpp:1815
 msgid "'--timecode-scale' was used more than once.\n"
 msgstr "'--timecode-scale' je korišćen više od jednog puta.\n"
 
-#: src/merge/mkvmerge.cpp:1971
+#: src/merge/mkvmerge.cpp:2174
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' nije naveden naslov.\n"
 
-#: src/merge/mkvmerge.cpp:2360
+#: src/merge/mkvmerge.cpp:2661
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order' može biti naveden samo jednom.\n"
 
-#: src/merge/mkvmerge.cpp:1712
+#: src/merge/mkvmerge.cpp:1915
 msgid "'-A' and '-a' used on the same source file.\n"
 msgstr "'-A' i '-a' su korišćeni na istom izvornom fajlu.\n"
 
-#: src/merge/mkvmerge.cpp:1721
+#: src/merge/mkvmerge.cpp:1924
 msgid "'-B' and '-b' used on the same source file.\n"
 msgstr "'-B' i '-b' su korišćeni na istom izvornom fajlu.\n"
 
-#: src/merge/mkvmerge.cpp:1715
+#: src/merge/mkvmerge.cpp:1918
 msgid "'-D' and '-d' used on the same source file.\n"
 msgstr "'-D' i '-d' su korišćeni na istom izvornom fajlu.\n"
 
-#: src/merge/mkvmerge.cpp:1718
+#: src/merge/mkvmerge.cpp:1921
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S' i '-s' su korišćeni na istom izvornom fajlu.\n"
 
@@ -2008,7 +2167,7 @@ msgstr "--- Upozorenja emitovana od zadatka '%1' započela u %2 ---"
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify-verbose'. These are usually simply numbered starting from 0 (e.g. '2')."
 msgstr "1. Broj koji će biti protumačen kao ID priloga kao što je navedeno sa 'mkvmerge --identify-verbose'. Oni su obično jednostavno numerisani polazeći od 0 (npr. '2')."
 
-#: src/info/mkvinfo.cpp:658
+#: src/info/mkvinfo.cpp:796
 msgid "1: all frames"
 msgstr "1: sve slike"
 
@@ -2016,7 +2175,7 @@ msgstr "1: sve slike"
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify-verbose'. These are usually random-looking numbers (e.g. '128975986723')."
 msgstr "2. Broj sa prefiksom '=', koji će biti protumačen kao jedinstven ID priloga (UID) kao što je navedeno sa 'mkvmerge --identify-verbose'. Oni obično izgledaju kao nasumice izabrani brojevi (npr. '128975986723')."
 
-#: src/info/mkvinfo.cpp:660
+#: src/info/mkvinfo.cpp:798
 msgid "2: codec private data"
 msgstr "2: lični podaci kodeka"
 
@@ -2078,8 +2237,8 @@ msgstr "<neimenovano>"
 msgid "<unsaved file>"
 msgstr "<nesačuvan fajl>"
 
-#: src/input/r_matroska.cpp:2053
-#: src/input/r_matroska.cpp:2166
+#: src/input/r_matroska.cpp:2123
+#: src/input/r_matroska.cpp:2236
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "Blok je pronađen na vremenskoj oznaci %1% za stazu %2%. Ipak, nije nađeno zaglavlje za stazu sa tim brojem. Blok će biti preskočen.\n"
@@ -2135,7 +2294,7 @@ msgstr "Nasumično izabran jedinstveni ID koji identifikuje tekući segment izme
 msgid "A single Matroska block contains either a full frame (for progressive content) or a single field (for interlaced content)."
 msgstr "Pojedinačni Matroska blok sadrži ili celu sliku (za progresivan sadržaj) ili celu polusliku (za isprepletan sadržaj)."
 
-#: src/info/mkvinfo.cpp:768
+#: src/info/mkvinfo.cpp:906
 msgid "A track"
 msgstr "Staza"
 
@@ -2426,7 +2585,7 @@ msgstr "Dodatne opcije:"
 msgid "AdditionalID: %1%"
 msgstr "AdditionalID: %1%"
 
-#: src/info/mkvinfo.cpp:1196
+#: src/info/mkvinfo.cpp:1334
 msgid "Additions"
 msgstr "Dodaci"
 
@@ -2463,7 +2622,7 @@ msgstr "ukloni ulazne fajlove"
 msgid "Afterwards create &new merge settings and close the current ones."
 msgstr "Napravi nove postavke za sastavljanje i dodaj ih njima"
 
-#: src/info/mkvinfo.cpp:683
+#: src/info/mkvinfo.cpp:821
 #, boost-format
 msgid "Algorithm: %1% (%2%)"
 msgstr "Algoritam: %1% (%2%)"
@@ -2637,7 +2796,7 @@ msgstr "Proizvoljan opis namenjen korisniku."
 msgid "An attachment with the ID %1% was not found.\n"
 msgstr "Prilog sa ID %1% nije pronađen.\n"
 
-#: src/merge/mkvmerge.cpp:1704
+#: src/merge/mkvmerge.cpp:1907
 msgid "An empty file name is not valid.\n"
 msgstr "Prazno ime fajla nije važeće.\n"
 
@@ -2665,7 +2824,7 @@ msgstr ""
 "Ime fajla u kome se nalazi\n"
 "prethodni segment."
 
-#: src/merge/mkvmerge.cpp:2630
+#: src/merge/mkvmerge.cpp:2931
 msgid "An exception occurred when writing the output file."
 msgstr "Desilo se odstupanje prilikom zapisivanja izlaznog fajla."
 
@@ -2682,7 +2841,7 @@ msgstr "Očekivan je ceo broj bez predznaka."
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "Analiziraj MPEG4 bit-potoke, stavi svaku sliku u jedan Matroska blok, koristi pravilan timestamping (I P B B = 0 120 40 80), koristi V_MPEG4/ISO/... ID Kodeka."
 
-#: src/merge/generic_packetizer.cpp:544
+#: src/merge/generic_packetizer.cpp:614
 #, boost-format
 msgid "Another default track for %1% tracks has already been set. The 'default' flag for track %2% of '%3%' will not be set.\n"
 msgstr "Još jedna default staza za %1% staze je već postavljena. Zastavica 'default' neće biti postavljena za stazu %2% iz '%3%'\n"
@@ -2713,15 +2872,15 @@ msgstr "Spoji sa p&ostojećim ulaznim fajlom"
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
 msgstr "Spajam stazu %1% iz fajla broj %2% ('%3%') u stazu %4% iz fajla broj %5% ('%6%').\n"
 
-#: src/merge/mkvmerge.cpp:563
+#: src/merge/mkvmerge.cpp:604
 msgid "Aspect ratio"
 msgstr "Format slike"
 
-#: src/merge/mkvmerge.cpp:563
+#: src/merge/mkvmerge.cpp:604
 msgid "Aspect ratio factor"
 msgstr "Množitelj formata slike"
 
-#: src/info/mkvinfo.cpp:623
+#: src/info/mkvinfo.cpp:758
 #, boost-format
 msgid "Aspect ratio type: %1%%2%"
 msgstr "Tip formata slike: %1%%2%"
@@ -2746,7 +2905,7 @@ msgstr "Zakači &za:"
 msgid "Attach to"
 msgstr "Zakači za"
 
-#: src/info/mkvinfo.cpp:1068
+#: src/info/mkvinfo.cpp:1206
 msgid "Attached"
 msgstr "Priloženo"
 
@@ -2767,7 +2926,7 @@ msgstr "Izvlačenje priloga"
 msgid "Attachment selectors"
 msgstr "Selektor priloga"
 
-#: src/info/mkvinfo.cpp:1059
+#: src/info/mkvinfo.cpp:1197
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:20
 #: src/propedit/options.cpp:200
@@ -2814,7 +2973,7 @@ msgstr "Audio staza %1"
 msgid "Audio, subtitle, chapter properties"
 msgstr "Svojstva audia, titla i poglavlja"
 
-#: src/merge/mkvmerge.cpp:323
+#: src/merge/mkvmerge.cpp:364
 #, boost-format
 msgid "Automatic MIME type recognition for '%1%': %2%\n"
 msgstr "Automatsko prepoznavanje MIME tipa za '%1%': %2%\n"
@@ -2827,7 +2986,7 @@ msgstr "Izbriši naziv izlaznog fajla kada se ukloni poslednji fajl"
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "Izbriši naslov izlaznog fajla kada se ukloni poslednji fajl"
 
-#: src/merge/mkvmerge.cpp:1928
+#: src/merge/mkvmerge.cpp:2131
 msgid "Automatically enabling WebM compliance mode due to output file name extension.\n"
 msgstr "Automatsko uključivanje WebM usaglašenog režima usled ekstenzije izlaznog fajla.\n"
 
@@ -2860,6 +3019,12 @@ msgstr "Binarna vrednost (prikazana kao heksadecimalni broj)"
 msgid "Bit depth: %1%"
 msgstr "Bitska dubina: %1%"
 
+#: src/info/mkvinfo.cpp:619
+#: src/info/mkvinfo.cpp:620
+#, fuzzy, boost-format
+msgid "Bits per channel: %1%"
+msgstr "bitova po uzorku: %1%"
+
 #: src/common/property_element.cpp:154
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:497
 msgid "Bits per sample, mostly used for PCM."
@@ -2887,7 +3052,7 @@ msgstr "Trajanje bloka: %1%.%|2$06d|ms"
 
 #: src/extract/timecodes_v2.cpp:303
 #: src/extract/tracks.cpp:458
-#: src/info/mkvinfo.cpp:1110
+#: src/info/mkvinfo.cpp:1248
 msgid "Block group"
 msgstr "Grupa blokova"
 
@@ -2904,6 +3069,18 @@ msgstr "Blu-Ray diskovi često sadrže poglavlje veoma blizu kraja filma."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:176
 msgid "Blu-ray playlist files"
 msgstr "Blu-ray plejliste"
+
+#: src/info/mkvinfo.cpp:575
+#: src/info/mkvinfo.cpp:576
+#, fuzzy, boost-format
+msgid "Blue colour coordinate x: %1%"
+msgstr "Cue ref codec state: %1%"
+
+#: src/info/mkvinfo.cpp:580
+#: src/info/mkvinfo.cpp:581
+#, fuzzy, boost-format
+msgid "Blue colour coordinate y: %1%"
+msgstr "Cue ref codec state: %1%"
 
 #: src/input/r_vobsub.cpp:552
 #, boost-format
@@ -3019,7 +3196,7 @@ msgstr "Kategorija se ne završava NUL bajtom"
 
 #: src/extract/timecodes_v2.cpp:382
 #: src/extract/tracks.cpp:513
-#: src/info/mkvinfo.cpp:1688
+#: src/info/mkvinfo.cpp:1826
 msgid "Caught exception"
 msgstr "Uhvaćen izuzetak"
 
@@ -3133,7 +3310,7 @@ msgstr "Brojevi poglavlja:"
 msgid "Chapter parser: The EditionUID %1% is not unique and could not be reused. A new one will be created.\n"
 msgstr "Raščlanitelj poglavlja: EditionUID %1% nije jedinstven i ne može biti ponovo iskorišćen. Novi će biti napravljen.\n"
 
-#: src/info/mkvinfo.cpp:1472
+#: src/info/mkvinfo.cpp:1610
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 #: src/propedit/options.cpp:191
 msgid "Chapters"
@@ -3173,7 +3350,7 @@ msgid "Check online for available &updates"
 msgstr "Proveri da li je dostupna nova &verzija"
 
 #: src/common/cli_parser.cpp:187
-#: src/merge/mkvmerge.cpp:298
+#: src/merge/mkvmerge.cpp:339
 msgid "Check online for the latest release."
 msgstr "Proveri na mreži za najnovije izdanje."
 
@@ -3193,16 +3370,16 @@ msgstr "Zatvori izmenjeni fajl"
 
 #: src/extract/timecodes_v2.cpp:284
 #: src/extract/tracks.cpp:436
-#: src/info/mkvinfo.cpp:1576
+#: src/info/mkvinfo.cpp:1714
 msgid "Cluster"
 msgstr "Klaster"
 
-#: src/merge/mkvmerge.cpp:1486
+#: src/merge/mkvmerge.cpp:1689
 #, boost-format
 msgid "Cluster length '%1%' out of range (0..65535).\n"
 msgstr "Dužina klastera '%1%' izvan dometa (0..65535).\n"
 
-#: src/merge/mkvmerge.cpp:1479
+#: src/merge/mkvmerge.cpp:1682
 #, boost-format
 msgid "Cluster length '%1%' out of range (100..32000).\n"
 msgstr "Dužina klastera '%1%' izvan dometa (100..32000).\n"
@@ -3239,27 +3416,27 @@ msgstr "Codec ID"
 msgid "Codec ID:"
 msgstr "Codec ID:"
 
-#: src/info/mkvinfo.cpp:827
+#: src/info/mkvinfo.cpp:965
 #, boost-format
 msgid "Codec ID: %1%"
 msgstr "Codec ID: %1%"
 
-#: src/info/mkvinfo.cpp:855
+#: src/info/mkvinfo.cpp:993
 #, boost-format
 msgid "Codec decode all: %1%"
 msgstr "Codec decode all: %1%"
 
-#: src/info/mkvinfo.cpp:903
+#: src/info/mkvinfo.cpp:1041
 #, boost-format
 msgid "Codec delay: %|1$.3f|ms (%2%ns)"
 msgstr "Kašnjenje kodeka: %|1$.3f|ms (%2%ns)"
 
-#: src/info/mkvinfo.cpp:852
+#: src/info/mkvinfo.cpp:990
 #, boost-format
 msgid "Codec download URL: %1%"
 msgstr "URL za skidanje kodeka: %1%"
 
-#: src/info/mkvinfo.cpp:849
+#: src/info/mkvinfo.cpp:987
 #, boost-format
 msgid "Codec info URL: %1%"
 msgstr "URL za informaciju o kodeku: %1%"
@@ -3269,12 +3446,12 @@ msgstr "URL za informaciju o kodeku: %1%"
 msgid "Codec name"
 msgstr "Naziv kodeka"
 
-#: src/info/mkvinfo.cpp:842
+#: src/info/mkvinfo.cpp:980
 #, boost-format
 msgid "Codec name: %1%"
 msgstr "Naziv kodeka: %1%"
 
-#: src/info/mkvinfo.cpp:846
+#: src/info/mkvinfo.cpp:984
 #, boost-format
 msgid "Codec settings: %1%"
 msgstr "Podešavanja kodeka: %1%"
@@ -3293,21 +3470,45 @@ msgstr "Kodek-svojstveno kašnjenje"
 msgid "Codec/MIME type"
 msgstr "Kodek/MIME tip"
 
-#: src/info/mkvinfo.cpp:839
+#: src/info/mkvinfo.cpp:977
 #, boost-format
 msgid "CodecPrivate, length %1%%2%"
 msgstr "CodecPrivate, dužina %1%%2%"
 
-#: src/info/mkvinfo.cpp:631
+#: src/info/mkvinfo.cpp:614
+#: src/info/mkvinfo.cpp:615
+#, fuzzy, boost-format
+msgid "Colour matrix: %1%"
+msgstr "Kolorni prostor: %1%"
+
+#: src/info/mkvinfo.cpp:664
+#: src/info/mkvinfo.cpp:665
+#, fuzzy, boost-format
+msgid "Colour primaries: %1%"
+msgstr "Kolorni prostor: %1%"
+
+#: src/info/mkvinfo.cpp:654
+#: src/info/mkvinfo.cpp:655
+#, fuzzy, boost-format
+msgid "Colour range: %1%"
+msgstr "Kolorni prostor: %1%"
+
+#: src/info/mkvinfo.cpp:766
 #, boost-format
 msgid "Colour space: %1%"
+msgstr "Kolorni prostor: %1%"
+
+#: src/info/mkvinfo.cpp:659
+#: src/info/mkvinfo.cpp:660
+#, fuzzy, boost-format
+msgid "Colour transfer: %1%"
 msgstr "Kolorni prostor: %1%"
 
 #: src/info/qt_ui.cpp:156
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "Kompajlovano sa libebml %1 + libmatroska %2."
 
-#: src/merge/generic_packetizer.cpp:813
+#: src/merge/generic_packetizer.cpp:1177
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Kompresija nije uspela: %1%\n"
@@ -3320,19 +3521,19 @@ msgstr "Kompresija:"
 msgid "Container"
 msgstr "Kontejner"
 
-#: src/info/mkvinfo.cpp:677
+#: src/info/mkvinfo.cpp:815
 msgid "Content compression"
 msgstr "Kompresija sadržaja"
 
-#: src/info/mkvinfo.cpp:647
+#: src/info/mkvinfo.cpp:785
 msgid "Content encoding"
 msgstr "Kodovanje sadržaja"
 
-#: src/info/mkvinfo.cpp:643
+#: src/info/mkvinfo.cpp:781
 msgid "Content encodings"
 msgstr "Kodovanje sadržaja"
 
-#: src/info/mkvinfo.cpp:697
+#: src/info/mkvinfo.cpp:835
 msgid "Content encryption"
 msgstr "Šifrovanje sadržaja"
 
@@ -3470,7 +3671,7 @@ msgstr "Pravljenje direktorijuma '%1%' nije uspelo: %2%"
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
 msgstr "Kreiranje fajla nije uspelo. Proverite da li imate dozvolu upisivanja u taj direktorijum i da li na disku ima prostora."
 
-#: src/merge/mkvmerge.cpp:640
+#: src/merge/mkvmerge.cpp:681
 #, boost-format
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '%1%').\n"
 msgstr "Parametri podrezivanja: nisu dati u formi <TID>:<left>,<top>,<right>,<bottom> npr. 0:10,5,10,5 (argument je bio '%1%').\n"
@@ -3544,22 +3745,22 @@ msgstr "Ctrl+U"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
-#: src/info/mkvinfo.cpp:1018
+#: src/info/mkvinfo.cpp:1156
 #, boost-format
 msgid "Cue block number: %1%"
 msgstr "Cue block number: %1%"
 
-#: src/info/mkvinfo.cpp:1009
+#: src/info/mkvinfo.cpp:1147
 #, boost-format
 msgid "Cue cluster position: %1%"
 msgstr "Cue klaster pozicija: %1%"
 
-#: src/info/mkvinfo.cpp:1022
+#: src/info/mkvinfo.cpp:1160
 #, boost-format
 msgid "Cue codec state: %1%"
 msgstr "Cue stanje kodeka: %1%"
 
-#: src/info/mkvinfo.cpp:1015
+#: src/info/mkvinfo.cpp:1153
 #, boost-format
 msgid "Cue duration: %1%"
 msgstr "Cue trajanje: %1%"
@@ -3572,35 +3773,35 @@ msgstr "Cue izvlačenje"
 msgid "Cue name format:"
 msgstr "Cue format imena:"
 
-#: src/info/mkvinfo.cpp:995
+#: src/info/mkvinfo.cpp:1133
 msgid "Cue point"
 msgstr "Cue tačka"
 
-#: src/info/mkvinfo.cpp:1032
+#: src/info/mkvinfo.cpp:1170
 #, boost-format
 msgid "Cue ref cluster: %1%"
 msgstr "Cue ref cluster: %1%"
 
-#: src/info/mkvinfo.cpp:1038
+#: src/info/mkvinfo.cpp:1176
 #, boost-format
 msgid "Cue ref codec state: %1%"
 msgstr "Cue ref codec state: %1%"
 
-#: src/info/mkvinfo.cpp:1035
+#: src/info/mkvinfo.cpp:1173
 #, boost-format
 msgid "Cue ref number: %1%"
 msgstr "Cue ref number: %1%"
 
-#: src/info/mkvinfo.cpp:1029
+#: src/info/mkvinfo.cpp:1167
 #, boost-format
 msgid "Cue ref time: %|1$.3f|s"
 msgstr "Cue ref time: %|1$.3f|s"
 
-#: src/info/mkvinfo.cpp:1025
+#: src/info/mkvinfo.cpp:1163
 msgid "Cue reference"
 msgstr "Cue referenca"
 
-#: src/info/mkvinfo.cpp:1012
+#: src/info/mkvinfo.cpp:1150
 #, boost-format
 msgid "Cue relative position: %1%"
 msgstr "Cue relative position: %1%"
@@ -3620,21 +3821,21 @@ msgstr "Raščlanjivač Cue lista: Nevažeći broj indeksa (dobio %1%, očekivao
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: %1%)\n"
 msgstr "Raščlanjivač Cue lista: Nije nađen upis indeksa za prethodni TRACK upis (trenutna linija: %1%)\n"
 
-#: src/info/mkvinfo.cpp:999
+#: src/info/mkvinfo.cpp:1137
 #, boost-format
 msgid "Cue time: %|1$.3f|s"
 msgstr "Cue vreme: %|1$.3f|s"
 
-#: src/info/mkvinfo.cpp:1002
+#: src/info/mkvinfo.cpp:1140
 msgid "Cue track positions"
 msgstr "Pozicije Cue staze"
 
-#: src/info/mkvinfo.cpp:1006
+#: src/info/mkvinfo.cpp:1144
 #, boost-format
 msgid "Cue track: %1%"
 msgstr "Cue staza: %1%"
 
-#: src/info/mkvinfo.cpp:982
+#: src/info/mkvinfo.cpp:1120
 msgid "Cues (subentries will be skipped)"
 msgstr "Cues (pod-unosi će biti preskočeni)"
 
@@ -3738,12 +3939,12 @@ msgstr "Default trajanje"
 msgid "Default duration/FPS:"
 msgstr "Default trajanje/FPS:"
 
-#: src/info/mkvinfo.cpp:870
+#: src/info/mkvinfo.cpp:1008
 #, boost-format
 msgid "Default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"
 msgstr "Default trajanje: %|1$.3f|ms (%|2$.3f| slika/poluslika u sekundi za video stazu)"
 
-#: src/info/mkvinfo.cpp:882
+#: src/info/mkvinfo.cpp:1020
 #, boost-format
 msgid "Default flag: %1%"
 msgstr "Default flag: %1%"
@@ -3889,18 +4090,18 @@ msgstr "Onemogućava uvezivanje za sve staze."
 msgid "Discard padding: %|1$.3f|ms (%2%ns)"
 msgstr "Odbaci ispunjavanje: %|1$.3f|s (%2%)"
 
-#: src/merge/mkvmerge.cpp:615
-#: src/merge/mkvmerge.cpp:621
+#: src/merge/mkvmerge.cpp:656
+#: src/merge/mkvmerge.cpp:662
 #, boost-format
 msgid "Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '%1%').\n"
 msgstr "Dimenzije slike: nisu navedene u formi <TID>:<width>x<height>, npr. 1:640x480 (argument je bio '%1%').\n"
 
-#: src/info/mkvinfo.cpp:572
+#: src/info/mkvinfo.cpp:707
 #, boost-format
 msgid "Display height: %1%"
 msgstr "Visina slike: %1%"
 
-#: src/info/mkvinfo.cpp:599
+#: src/info/mkvinfo.cpp:734
 #, boost-format
 msgid "Display unit: %1%%2%"
 msgstr "Jedinica mere slike: %1%%2%"
@@ -3909,7 +4110,7 @@ msgstr "Jedinica mere slike: %1%%2%"
 msgid "Display width/height:"
 msgstr "Širina/Visina slike:"
 
-#: src/info/mkvinfo.cpp:567
+#: src/info/mkvinfo.cpp:702
 #, boost-format
 msgid "Display width: %1%"
 msgstr "Širina slike: %1%"
@@ -3944,17 +4145,17 @@ msgstr "Da li zaista želite da prekinete ovaj zadatak?"
 msgid "Do you want to overwrite the file?"
 msgstr "Da li želite da prepišete fajl?"
 
-#: src/info/mkvinfo.cpp:1534
+#: src/info/mkvinfo.cpp:1672
 #, boost-format
 msgid "Doc type read version: %1%"
 msgstr "Pročitana DocType verzija: %1%"
 
-#: src/info/mkvinfo.cpp:1531
+#: src/info/mkvinfo.cpp:1669
 #, boost-format
 msgid "Doc type version: %1%"
 msgstr "Verzija tipa dokumenta: %1%"
 
-#: src/info/mkvinfo.cpp:1528
+#: src/info/mkvinfo.cpp:1666
 #, boost-format
 msgid "Doc type: %1%"
 msgstr "Tip dokumenta: %1%"
@@ -3971,7 +4172,7 @@ msgstr "Ne koristi"
 msgid "Don't show this message again."
 msgstr "Ne prikazuj ponovo ovu poruku."
 
-#: src/merge/mkvmerge.cpp:2537
+#: src/merge/mkvmerge.cpp:2838
 msgid "Done scanning playlists.\n"
 msgstr "Završeno skeniranje plejlisti.\n"
 
@@ -4040,26 +4241,26 @@ msgstr "Iz&ađi"
 msgid "E&xpand chapter's start and end timecodes to include the minimum/maximum timecodes of all their sub-chapters"
 msgstr "Proširi početni i krajnji vremenski kod poglavlja da obuhvati minimalni/maksimalni kod od svih njihovih pod-poglavlja"
 
-#: src/info/mkvinfo.cpp:1504
+#: src/info/mkvinfo.cpp:1642
 msgid "EBML head"
 msgstr "EBML glava"
 
-#: src/info/mkvinfo.cpp:1522
+#: src/info/mkvinfo.cpp:1660
 #, boost-format
 msgid "EBML maximum ID length: %1%"
 msgstr "maksimalna dužina ID EBML: %1%"
 
-#: src/info/mkvinfo.cpp:1525
+#: src/info/mkvinfo.cpp:1663
 #, boost-format
 msgid "EBML maximum size length: %1%"
 msgstr "maksimalna veličina EBML: %1%"
 
-#: src/info/mkvinfo.cpp:1519
+#: src/info/mkvinfo.cpp:1657
 #, boost-format
 msgid "EBML read version: %1%"
 msgstr "pročitana verzija EBML: %1%"
 
-#: src/info/mkvinfo.cpp:1516
+#: src/info/mkvinfo.cpp:1654
 #, boost-format
 msgid "EBML version: %1%"
 msgstr "EBML verzija: %1%"
@@ -4139,7 +4340,7 @@ msgstr "Elementi u kategoriji '%1%' ('--edit %2%'):\n"
 msgid "Enable muxing of tracks by their language"
 msgstr "Omogući muksovanje staza po njihovom jeziku"
 
-#: src/info/mkvinfo.cpp:819
+#: src/info/mkvinfo.cpp:957
 #, boost-format
 msgid "Enabled: %1%"
 msgstr "Uključeno: %1%"
@@ -4156,12 +4357,12 @@ msgstr "Omogućavanje ove opcije uzrokuje da mkvmerge zadrži tu zadnju stavku."
 msgid "Enabling tracks"
 msgstr "Omogućavanje staza"
 
-#: src/info/mkvinfo.cpp:703
+#: src/info/mkvinfo.cpp:841
 #, boost-format
 msgid "Encryption algorithm: %1% (%2%)"
 msgstr "Algoritam šifrovanja: %1% (%2%)"
 
-#: src/info/mkvinfo.cpp:714
+#: src/info/mkvinfo.cpp:852
 #, boost-format
 msgid "Encryption key ID: %1%"
 msgstr "ID ključa šifrovanja: %1%"
@@ -4229,7 +4430,7 @@ msgstr "Greška prilikom raščlanjivanja MPEG PS paketa za vreme faze čitanja 
 msgid "Error parsing the chapters in '%1%': some mandatory elements are missing.\n"
 msgstr "Greška prilikom raščlanjivanja poglavlja iz '%1%': nedostaju neki obavezni elementi.\n"
 
-#: src/merge/mkvmerge.cpp:452
+#: src/merge/mkvmerge.cpp:493
 #: src/propedit/tag_target.cpp:164
 #, boost-format
 msgid "Error parsing the tags in '%1%': some mandatory elements are missing.\n"
@@ -4263,7 +4464,7 @@ msgstr "Greška prilikom pisanja Matroska fajla"
 msgid "Error:"
 msgstr "Greška:"
 
-#: src/info/mkvinfo.cpp:1644
+#: src/info/mkvinfo.cpp:1782
 #, boost-format
 msgid "Error: Couldn't open input file %1% (%2%)."
 msgstr "Greška: Ne mogu da otvorim ulazni fajl %1% (%2%)."
@@ -4273,7 +4474,7 @@ msgstr "Greška: Ne mogu da otvorim ulazni fajl %1% (%2%)."
 msgid "Error: No EBML head found."
 msgstr "Greška: Nije nađena EBML glava"
 
-#: src/merge/mkvmerge.cpp:1922
+#: src/merge/mkvmerge.cpp:2125
 msgid ""
 "Error: no output file name was given.\n"
 "\n"
@@ -4315,7 +4516,7 @@ msgstr "Primeri: 01:00:00 (posle jednog sata) ili 1800s (posle 1800 sekundi)."
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Primeri: 01:00:00,01:30:00 (posle jednog sata i posle jednog sata i trideset minuta) ili 180s,300s,00:10:00 (posle tri, pet i deset minuta)."
 
-#: src/merge/mkvmerge.cpp:2630
+#: src/merge/mkvmerge.cpp:2931
 msgid "Exception details:"
 msgstr "Detalji odstupanja:"
 
@@ -4453,7 +4654,7 @@ msgstr "&Ime fajla:"
 msgid "Fi&le title:"
 msgstr "Na&slov fajla:"
 
-#: src/merge/mkvmerge.cpp:396
+#: src/merge/mkvmerge.cpp:437
 #, boost-format
 msgid "File %1% has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "Fajl %1% je nepoznatog tipa. Molim vas pogledajte listu podržanih tipova fajlova ('mkvmerge --list-types') i kontaktirajte autora Morica Bunkusa <moritz@bunkus.org>  ako je vaš fajl podržan ali nije ispravno prepoznat.\n"
@@ -4468,7 +4669,7 @@ msgstr "Fajl '%1%': kontejner: %2%"
 msgid "File '%1%': unsupported container: %2%\n"
 msgstr "Fajl '%1%': nepodržan kontejner: %2%\n"
 
-#: src/info/mkvinfo.cpp:1084
+#: src/info/mkvinfo.cpp:1222
 #, boost-format
 msgid "File UID: %1%"
 msgstr "UID fajla: %1%"
@@ -4479,12 +4680,12 @@ msgstr "UID fajla: %1%"
 msgid "File contains fewer frames than expected or is corrupt after frame %1%.\n"
 msgstr "Fajl sadrži manji broj slika nego što je očekivano ili je oštećen posle slike %1%.\n"
 
-#: src/info/mkvinfo.cpp:1081
+#: src/info/mkvinfo.cpp:1219
 #, boost-format
 msgid "File data, size: %1%"
 msgstr "Podaci fajla, veličina: %1%"
 
-#: src/info/mkvinfo.cpp:1072
+#: src/info/mkvinfo.cpp:1210
 #, boost-format
 msgid "File description: %1%"
 msgstr "Opis fajla: %1%"
@@ -4510,7 +4711,7 @@ msgstr "Ime fajla"
 msgid "File name:"
 msgstr "Ime fajla:"
 
-#: src/info/mkvinfo.cpp:1075
+#: src/info/mkvinfo.cpp:1213
 #, boost-format
 msgid "File name: %1%"
 msgstr "Ime fajla: %1%"
@@ -4595,7 +4796,7 @@ msgstr "Primoraj uvezivanje u Xiph stilu."
 msgid "Force the translations for 'code' to be used."
 msgstr "Primoraj da se koriste prevodi za 'code'."
 
-#: src/info/mkvinfo.cpp:885
+#: src/info/mkvinfo.cpp:1023
 #, boost-format
 msgid "Forced flag: %1%"
 msgstr "Zastavica 'forced': %1%"
@@ -4625,12 +4826,12 @@ msgstr "Primorava množitelj vremenskog koda u datu vrednost."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Nađena bar jedna B slika bez druge reference u otvorenoj GOP.\n"
 
-#: src/merge/mkvmerge.cpp:1181
+#: src/merge/mkvmerge.cpp:1384
 #, boost-format
 msgid "FourCC: Invalid track ID in '%1% %2%'.\n"
 msgstr "FourCC: Nevažeći track ID '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1177
+#: src/merge/mkvmerge.cpp:1380
 #, boost-format
 msgid "FourCC: Missing track ID in '%1% %2%'.\n"
 msgstr "FourCC: Nedostaje track ID u '%1% %2%'.\n"
@@ -4640,7 +4841,7 @@ msgstr "FourCC: Nedostaje track ID u '%1% %2%'.\n"
 msgid "Frame number: %1%"
 msgstr "Broj slike: %1%"
 
-#: src/info/mkvinfo.cpp:634
+#: src/info/mkvinfo.cpp:769
 #, boost-format
 msgid "Frame rate: %1%"
 msgstr "Broj slika u sekundi: %1%"
@@ -4663,7 +4864,7 @@ msgstr "Polje za unos korisnički definisanih opcija za ovu stazu."
 msgid "GUI"
 msgstr "GUI"
 
-#: src/info/mkvinfo.cpp:608
+#: src/info/mkvinfo.cpp:743
 #, boost-format
 msgid "Gamma: %1%"
 msgstr "Gamma: %1%"
@@ -4720,6 +4921,18 @@ msgstr[0] "Globalni tagovi: %1% zapis"
 msgstr[1] "Globalni tagovi: %1% zapisa"
 msgstr[2] "Globalni tagovi: %1% zapisa"
 
+#: src/info/mkvinfo.cpp:565
+#: src/info/mkvinfo.cpp:566
+#, boost-format
+msgid "Green colour coordinate x: %1%"
+msgstr ""
+
+#: src/info/mkvinfo.cpp:570
+#: src/info/mkvinfo.cpp:571
+#, boost-format
+msgid "Green colour coordinate y: %1%"
+msgstr ""
+
 #: src/common/file_types.cpp:82
 msgid "HD-DVD subtitles"
 msgstr "HD-DVD titlovi"
@@ -4775,6 +4988,24 @@ msgstr "Visina kodovanog videa u pikselima."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:460
 msgid "Height of the video frames to display."
 msgstr "Visina video slike koja se prikazuje."
+
+#: src/info/mkvinfo.cpp:634
+#: src/info/mkvinfo.cpp:635
+#, fuzzy, boost-format
+msgid "Horizontal Cb subsample: %1%"
+msgstr "bitova po uzorku: %1%"
+
+#: src/info/mkvinfo.cpp:644
+#: src/info/mkvinfo.cpp:645
+#, boost-format
+msgid "Horizontal chroma siting: %1%"
+msgstr ""
+
+#: src/info/mkvinfo.cpp:624
+#: src/info/mkvinfo.cpp:625
+#, fuzzy, boost-format
+msgid "Horizontal chroma subsample: %1%"
+msgstr "bitova po uzorku: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -5041,7 +5272,7 @@ msgstr "Umesto toga, takav fajl mora biti učitan preko opcije 'segment info' u 
 msgid "Interface &language:"
 msgstr "Jezik &interfejsa:"
 
-#: src/info/mkvinfo.cpp:611
+#: src/info/mkvinfo.cpp:746
 #, boost-format
 msgid "Interlaced: %1%"
 msgstr "Isprepletano: %1%"
@@ -5059,7 +5290,7 @@ msgstr "Unutrašnja programska greška"
 msgid "Interval:"
 msgstr "Interval:"
 
-#: src/merge/mkvmerge.cpp:1105
+#: src/merge/mkvmerge.cpp:1308
 #, boost-format
 msgid "Invalid %1% specified in '--%2% %3%'.\n"
 msgstr "Nevažeći %1% naznačen u '--%2% %3%'.\n"
@@ -5097,22 +5328,22 @@ msgstr "Nevažeća specifikacija za attachment ID/ime fajla u argumentu '%1%'.\n
 msgid "Invalid attribute '%1%' in node '%2%' at position %3%"
 msgstr "Nevažeči atribut '%1%' u čvoru '%2%' na poziciji %3%"
 
-#: src/merge/mkvmerge.cpp:968
+#: src/merge/mkvmerge.cpp:1171
 #, boost-format
 msgid "Invalid boolean option specified in '--default-track %1%'.\n"
 msgstr "Navedena nevažeća logička vrednost u '--default-track %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1341
+#: src/merge/mkvmerge.cpp:1544
 #, boost-format
 msgid "Invalid boolean option specified in '--fix-bitstream-timing-information %1%'.\n"
 msgstr "Navedena nevažeća logička vrednost u '--fix-bitstream-timing-information %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:994
+#: src/merge/mkvmerge.cpp:1197
 #, boost-format
 msgid "Invalid boolean option specified in '--forced-track %1%'.\n"
 msgstr "Navedena nevažeća logička vrednost u '--forced-track %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1397
+#: src/merge/mkvmerge.cpp:1600
 #, boost-format
 msgid "Invalid boolean specified in '--aac-is-sbr %1%'.\n"
 msgstr "Navedena nevažeća logička vrednost u '--aac-is-sbr %1%'.\n"
@@ -5122,28 +5353,28 @@ msgstr "Navedena nevažeća logička vrednost u '--aac-is-sbr %1%'.\n"
 msgid "Invalid change spec (%3%) in '%1% %2%'.\n"
 msgstr "Nevažeća promena (%3%) in '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:781
-#: src/merge/mkvmerge.cpp:820
+#: src/merge/mkvmerge.cpp:984
+#: src/merge/mkvmerge.cpp:1023
 #, boost-format
 msgid "Invalid chapter number '%1%' for '--split' in '--split %2%': %3%\n"
 msgstr "Nevažeći broj poglavlja '%1%' za '--split' u '--split %2%': %3%\n"
 
-#: src/merge/mkvmerge.cpp:1049
+#: src/merge/mkvmerge.cpp:1252
 #, boost-format
 msgid "Invalid compression option specified in '--compression %1%'.\n"
 msgstr "Naveden nevažeći parametar za kompresiju u '--compression %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1042
+#: src/merge/mkvmerge.cpp:1245
 #, boost-format
 msgid "Invalid compression option. No track ID specified in '--compression %1%'.\n"
 msgstr "Nevažeći parametar za kompresiju. Nije naveden track ID u '--compression %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1019
+#: src/merge/mkvmerge.cpp:1222
 #, boost-format
 msgid "Invalid cues option specified in '--cues %1%'.\n"
 msgstr "Naveden nevažeći cues parametar u '--cues %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1012
+#: src/merge/mkvmerge.cpp:1215
 #, boost-format
 msgid "Invalid cues option. No track ID specified in '--cues %1%'.\n"
 msgstr "Nevažeći cues parametar. Nije naveden track ID u '--cues %1%'.\n"
@@ -5172,7 +5403,7 @@ msgstr "Nevažeće završno vreme za '--split' u '--split %1%' (trenutni deo: %2
 msgid "Invalid end time for '--split' in '--split %1%' (current part: %2%). The end time must be bigger than the start time.\n"
 msgstr "Nevažeće završno vreme za '--split' u '--split %1%' (trenutni deo: %2%). Završno vreme mora biti veće od početnog vremena.\n"
 
-#: src/merge/mkvmerge.cpp:897
+#: src/merge/mkvmerge.cpp:1100
 #, boost-format
 msgid "Invalid format for '--split' in '--split %1%'.\n"
 msgstr "Nevažeći format za '--split' u '--split %1%'.\n"
@@ -5228,7 +5459,7 @@ msgstr "Nevažeći format: string je prazan"
 msgid "Invalid format: unknown character '%1%' found"
 msgstr "Nevažeći format: pronađen nepoznat karakter '%1%'"
 
-#: src/merge/mkvmerge.cpp:761
+#: src/merge/mkvmerge.cpp:964
 #, boost-format
 msgid "Invalid frame for '--split' in '--split %1%'.\n"
 msgstr "Nevažeća slika za '--split' u '--split %1%'.\n"
@@ -5238,7 +5469,7 @@ msgstr "Nevažeća slika za '--split' u '--split %1%'.\n"
 msgid "Invalid header length: %1% (total length: %2%, idx: %3%, dataidx: %4%)\n"
 msgstr "Nevažeća dužina zaglavlja: %1% (ukupna dužina: %2%, idx: %3%, dataidx: %4%)\n"
 
-#: src/merge/mkvmerge.cpp:1815
+#: src/merge/mkvmerge.cpp:2018
 #, boost-format
 msgid "Invalid identification format in '%1% %2%'.\n"
 msgstr "Nevažeća identifikacija formata u '%1% %2%'.\n"
@@ -5277,7 +5508,7 @@ msgstr "Nevažeća sekunda: %1%"
 msgid "Invalid selector in '%1% %2%'.\n"
 msgstr "Nevažeći selektor u '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:851
+#: src/merge/mkvmerge.cpp:1054
 #, boost-format
 msgid "Invalid split size in '--split %1%'.\n"
 msgstr "Nevažeća veličina za deljenje u '--split %1%'.\n"
@@ -5311,104 +5542,104 @@ msgstr "Nevažeće početno vreme za '--split' u '--split %1%' (trenutni deo: %2
 msgid "Invalid start/end specification for '--split' in '--split %1%' (current part: %2%).\n"
 msgstr "Nevažeća specifikacija početka/završetka za '--split' u '--split %1%' (trenutni deo: %2%).\n"
 
-#: src/merge/mkvmerge.cpp:1129
+#: src/merge/mkvmerge.cpp:1332
 #, boost-format
 msgid "Invalid sub charset option. No track ID specified in '--sub-charset %1%'.\n"
 msgstr "Nevažeći skup znakova za prevod. Nije naveden track ID u '--sub-charset %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1136
+#: src/merge/mkvmerge.cpp:1339
 #, boost-format
 msgid "Invalid sub charset specified in '--sub-charset %1%'.\n"
 msgstr "Naveden nevažeći skup znakova u '--sub-charset %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:515
+#: src/merge/mkvmerge.cpp:556
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'.\n"
 msgstr "Naveden nevažeći parametar za sinhronizaciju u '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:538
+#: src/merge/mkvmerge.cpp:579
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'. The divisor is zero.\n"
 msgstr "Naveden nevažeći parametar za sinhronizaciju u '%1% %2%'. Delilac je nula.\n"
 
-#: src/merge/mkvmerge.cpp:544
+#: src/merge/mkvmerge.cpp:585
 #, boost-format
 msgid "Invalid sync option specified in '%1% %2%'. The linear sync value may not be equal to or smaller than zero.\n"
 msgstr "Naveden nevažeći parametar za sinhronizaciju u '%1% %2%'. Linearna vrednost sinhronizacije ne može biti jednaka ili manja od nula.\n"
 
-#: src/merge/mkvmerge.cpp:507
+#: src/merge/mkvmerge.cpp:548
 #, boost-format
 msgid "Invalid sync option. No track ID specified in '%1% %2%'.\n"
 msgstr "Nevažeći parametar za sinhronizaciju. Nije naveden track ID u '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1160
+#: src/merge/mkvmerge.cpp:1363
 #, boost-format
 msgid "Invalid tags file name specified in '%1% %2%'.\n"
 msgstr "Navedeno nevažeće ime za tagove u '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1153
+#: src/merge/mkvmerge.cpp:1356
 #, boost-format
 msgid "Invalid tags option. No track ID specified in '%1% %2%'.\n"
 msgstr "Nevažeći parametar za tag. Nije naveden track ID u '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:719
+#: src/merge/mkvmerge.cpp:922
 #, boost-format
 msgid "Invalid time for '--split' in '--split %1%'. Additional error message: %2%\n"
 msgstr "Nevažeće vreme za '--split' u '--split %1%'. Dodatna poruka o grešci: %2%.\n"
 
-#: src/merge/mkvmerge.cpp:740
+#: src/merge/mkvmerge.cpp:943
 #, boost-format
 msgid "Invalid time for '--split' in '--split %1%'. Additional error message: %2%.\n"
 msgstr "Nevažeće vreme za '--split' u '--split %1%'. Dodatna poruka o grešci: %2%.\n"
 
-#: src/merge/mkvmerge.cpp:485
+#: src/merge/mkvmerge.cpp:526
 #, boost-format
 msgid "Invalid track ID or language code in '%1% %2%'.\n"
 msgstr "Nevažeći track ID ili kod jezika u '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:511
-#: src/merge/mkvmerge.cpp:1157
-#: src/merge/mkvmerge.cpp:1353
+#: src/merge/mkvmerge.cpp:552
+#: src/merge/mkvmerge.cpp:1360
+#: src/merge/mkvmerge.cpp:1556
 #, boost-format
 msgid "Invalid track ID specified in '%1% %2%'.\n"
 msgstr "Naveden nevažeći track ID u '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1101
+#: src/merge/mkvmerge.cpp:1304
 #, boost-format
 msgid "Invalid track ID specified in '--%1% %2%'.\n"
 msgstr "Naveden nevažeći track ID u '--%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1394
+#: src/merge/mkvmerge.cpp:1597
 #, boost-format
 msgid "Invalid track ID specified in '--aac-is-sbr %1%'.\n"
 msgstr "Naveden nevažeći track ID u  '--aac-is-sbr %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1046
+#: src/merge/mkvmerge.cpp:1249
 #, boost-format
 msgid "Invalid track ID specified in '--compression %1%'.\n"
 msgstr "Naveden nevažeći track ID u  '--compression %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1016
+#: src/merge/mkvmerge.cpp:1219
 #, boost-format
 msgid "Invalid track ID specified in '--cues %1%'.\n"
 msgstr "Naveden nevažeći track ID u  '--cues %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:962
+#: src/merge/mkvmerge.cpp:1165
 #, boost-format
 msgid "Invalid track ID specified in '--default-track %1%'.\n"
 msgstr "Naveden nevažeći track ID u '--default-track %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1335
+#: src/merge/mkvmerge.cpp:1538
 #, boost-format
 msgid "Invalid track ID specified in '--fix-bitstream-timing-information %1%'.\n"
 msgstr "Naveden nevažeći track ID u '--fix-bitstream-timing-information %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:988
+#: src/merge/mkvmerge.cpp:1191
 #, boost-format
 msgid "Invalid track ID specified in '--forced-track %1%'.\n"
 msgstr "Naveden nevažeći track ID u '--forced-track %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:1133
+#: src/merge/mkvmerge.cpp:1336
 #, boost-format
 msgid "Invalid track ID specified in '--sub-charset %1%'.\n"
 msgstr "Naveden nevažeći track ID u '--sub-charset %1%'.\n"
@@ -5504,7 +5735,7 @@ msgstr "&Poznati problemi u nedavnim izdanjima"
 msgid "Lace number: %1%"
 msgstr "Lace number: %1%"
 
-#: src/info/mkvinfo.cpp:879
+#: src/info/mkvinfo.cpp:1017
 #, boost-format
 msgid "Lacing flag: %1%"
 msgstr "Lacing flag: %1%"
@@ -5528,7 +5759,7 @@ msgstr "Jezik se ne završava sa nultim bajtom."
 msgid "Language:"
 msgstr "Jezik:"
 
-#: src/info/mkvinfo.cpp:889
+#: src/info/mkvinfo.cpp:1027
 #, boost-format
 msgid "Language: %1%"
 msgstr "Jezik: %1%"
@@ -5601,7 +5832,7 @@ msgstr "Listanje konfiguracionih fajlova sa ekstenzijom .mtxcfg uzrokuje da GUI 
 msgid "M&ore actions"
 msgstr "&Dodatne radnje"
 
-#: src/info/mkvinfo.cpp:732
+#: src/info/mkvinfo.cpp:870
 msgid "MD5"
 msgstr "MD5"
 
@@ -5687,12 +5918,12 @@ msgstr "MPLS Blu-ray plejlista"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Načini ovu stazu podrazumevanom za svoj tip (audio, video, titlovi)."
 
-#: src/input/r_matroska.cpp:1526
-#: src/input/r_matroska.cpp:1541
+#: src/input/r_matroska.cpp:1596
+#: src/input/r_matroska.cpp:1611
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Pronađen loše formiran podatak za inicijalizaciju AAC kodeka.\n"
 
-#: src/input/r_matroska.cpp:1534
+#: src/input/r_matroska.cpp:1604
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Nepravilan codec ID '%1%'.\n"
@@ -5733,12 +5964,30 @@ msgstr "Matroska fajlovi"
 msgid "Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."
 msgstr "Matroska fajlovi mogu biti reprodukovani bez cue podatka, ali će pretraživanje verovatno biti neprecizno i sporije."
 
-#: src/info/mkvinfo.cpp:896
+#: src/info/mkvinfo.cpp:1034
 #, boost-format
 msgid "Max BlockAddition ID: %1%"
 msgstr "Maksimalni BlockAddition ID: %1%"
 
-#: src/info/mkvinfo.cpp:865
+#: src/info/mkvinfo.cpp:669
+#: src/info/mkvinfo.cpp:670
+#, fuzzy, boost-format
+msgid "Max content light: %1%"
+msgstr "Podrezivanje piksela desno: %1%"
+
+#: src/info/mkvinfo.cpp:674
+#: src/info/mkvinfo.cpp:675
+#, fuzzy, boost-format
+msgid "Max frame light: %1%"
+msgstr "Visina u pikselima: %1%"
+
+#: src/info/mkvinfo.cpp:595
+#: src/info/mkvinfo.cpp:596
+#, fuzzy, boost-format
+msgid "Max luminance: %1%"
+msgstr "Maksimalni keš: %1%"
+
+#: src/info/mkvinfo.cpp:1003
 #, boost-format
 msgid "MaxCache: %1%"
 msgstr "Maksimalni keš: %1%"
@@ -5783,12 +6032,18 @@ msgstr "Sastavi"
 msgid "MicroDVD"
 msgstr "MicroDVD"
 
-#: src/info/mkvinfo.cpp:1078
+#: src/info/mkvinfo.cpp:1216
 #, boost-format
 msgid "Mime type: %1%"
 msgstr "MIME tip: %1%"
 
-#: src/info/mkvinfo.cpp:862
+#: src/info/mkvinfo.cpp:600
+#: src/info/mkvinfo.cpp:601
+#, fuzzy, boost-format
+msgid "Min luminance: %1%"
+msgstr "Minimalni keš: %1%"
+
+#: src/info/mkvinfo.cpp:1000
 #, boost-format
 msgid "MinCache: %1%"
 msgstr "Minimalni keš: %1%"
@@ -5852,16 +6107,16 @@ msgstr "Nedostaje početak/zavšetak za '--split' in '--split %1%'.\n"
 msgid "Modification of properties in the section '%1%' was requested, but no corresponding level 1 element was found in the file. %2%\n"
 msgstr "Zahtevana je izmena svojstava u sekciji '%1%' ali nije nađen odgovarajući level 1 element u fajlu. %2%\n"
 
-#: src/info/mkvinfo.cpp:1200
+#: src/info/mkvinfo.cpp:1338
 msgid "More"
 msgstr "Još"
 
-#: src/merge/mkvmerge.cpp:2053
+#: src/merge/mkvmerge.cpp:2256
 #, boost-format
 msgid "More than one MIME type was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "Navedeno je više od jednog MIME tipa za prilog. '%1%' će biti odbačen a '%2%' korišćeno umesto njega.\n"
 
-#: src/merge/mkvmerge.cpp:2044
+#: src/merge/mkvmerge.cpp:2247
 msgid "More than one description was given for a single attachment.\n"
 msgstr "Navedeno je više od jednog opisa za prilog.\n"
 
@@ -5870,7 +6125,7 @@ msgstr "Navedeno je više od jednog opisa za prilog.\n"
 msgid "More than one file name has been given ('%1%' and '%2%').\n"
 msgstr "Navedeno je više od jednog imena fajla ('%1%' and '%2%').\n"
 
-#: src/merge/mkvmerge.cpp:2063
+#: src/merge/mkvmerge.cpp:2266
 #, boost-format
 msgid "More than one name was given for a single attachment. '%1%' will be discarded and '%2%' used instead.\n"
 msgstr "Navedeno je više od jednog imena za prilog. '%1%' će biti odbačen a '%2%' korišćeno umesto njega.\n"
@@ -5907,7 +6162,7 @@ msgstr "Muksuj ovo"
 msgid "Muxing application: %1%"
 msgstr "Multiplekser aplikacija: %1%"
 
-#: src/merge/mkvmerge.cpp:2634
+#: src/merge/mkvmerge.cpp:2935
 #, boost-format
 msgid "Muxing took %1%.\n"
 msgstr "Muksovanje je trajalo %1%.\n"
@@ -5947,7 +6202,7 @@ msgstr "Ime/Opis"
 msgid "Name:"
 msgstr "Ime:"
 
-#: src/info/mkvinfo.cpp:823
+#: src/info/mkvinfo.cpp:961
 #, boost-format
 msgid "Name: %1%"
 msgstr "Ime: %1%"
@@ -5992,7 +6247,7 @@ msgstr "UID sledećeg segmenta: %1%"
 msgid "Next segment's unique ID"
 msgstr "Jedinstveni ID sledećeg segmenta"
 
-#: src/merge/mkvmerge.cpp:1095
+#: src/merge/mkvmerge.cpp:1298
 #, boost-format
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "No %1% specified in '--%2% %3%'.\n"
@@ -6001,15 +6256,15 @@ msgstr "No %1% specified in '--%2% %3%'.\n"
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Nije pronađeno AC-3 zaglavlje u prvom okviru; staza će biti preskočena.\n"
 
-#: src/input/r_qtmp4.cpp:2910
+#: src/input/r_qtmp4.cpp:2926
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nije pronađeno DTS zaglavlje u prvom okviru; staza će biti preskočena.\n"
 
-#: src/info/mkvinfo.cpp:1655
+#: src/info/mkvinfo.cpp:1793
 msgid "No EBML head found."
 msgstr "EBML glava nije nađena."
 
-#: src/merge/mkvmerge.cpp:327
+#: src/merge/mkvmerge.cpp:368
 #, boost-format
 msgid "No MIME type has been set for the attachment '%1%', and it could not be guessed.\n"
 msgstr "Nije postavljen MIME tip za prilog '%1%', a ne može biti pretpostavljen.\n"
@@ -6029,13 +6284,13 @@ msgstr "Nijedan od priloga ne odgovara specifikaciji '%1%'.\n"
 msgid "No changes were made.\n"
 msgstr "Nema nikakvih izmena.\n"
 
-#: src/merge/mkvmerge.cpp:786
+#: src/merge/mkvmerge.cpp:989
 #, boost-format
 msgid "No chapter numbers listed after '--split %1%'.\n"
 msgstr "Nisu navedeni brojevi poglavlja nakon parametra '--split %1%'.\n"
 
-#: src/merge/mkvmerge.cpp:790
-#: src/merge/mkvmerge.cpp:816
+#: src/merge/mkvmerge.cpp:993
+#: src/merge/mkvmerge.cpp:1019
 msgid "No chapters in source files or chapter files found to split by.\n"
 msgstr "U izvornim fajlovima nije pronađeno poglavlje po kojem se vrši podela.\n"
 
@@ -6048,7 +6303,7 @@ msgstr "Nisu nađene cue informacije.\n"
 msgid "No file has been opened yet."
 msgstr "Nijedan fajl još nije otvoren."
 
-#: src/info/mkvinfo.cpp:1709
+#: src/info/mkvinfo.cpp:1847
 #: src/propedit/options.cpp:33
 msgid "No file name given.\n"
 msgstr "Nije navedeno ime fajla.\n"
@@ -6065,7 +6320,7 @@ msgstr "Pomoć nedostupna."
 msgid "No information is transmitted to the server."
 msgstr "Nikakva informacija se ne šalje serveru."
 
-#: src/merge/mkvmerge.cpp:2424
+#: src/merge/mkvmerge.cpp:2725
 msgid "No input files were given. No output will be created.\n"
 msgstr "Nema ulaznih fajlova. Izlaznog rezultata neće biti.\n"
 
@@ -6108,11 +6363,11 @@ msgstr "Nije pronađen segment/level 0 element."
 msgid "No space left to write to"
 msgstr "Nije ostalo slobodnog prostora za zapis"
 
-#: src/merge/mkvmerge.cpp:2607
+#: src/merge/mkvmerge.cpp:2908
 msgid "No streams to output were found. Aborting.\n"
 msgstr "Nema potoka za izlazni fajl. Prekidam.\n"
 
-#: src/merge/mkvmerge.cpp:1092
+#: src/merge/mkvmerge.cpp:1295
 #, boost-format
 msgid "No track ID specified in '--%1% %2%'.\n"
 msgstr "Nije naveden track ID u '--%1% %2%'.\n"
@@ -6180,7 +6435,7 @@ msgstr "Nije važeći Matroska fajl (nije nađena EBML glava)"
 msgid "Not a valid Matroska file (no segment/level 0 element found)"
 msgstr "Nije važeći Matroska fajl (nije nađen segment/level 0 element)"
 
-#: src/merge/mkvmerge.cpp:781
+#: src/merge/mkvmerge.cpp:984
 msgid "Not a valid number or not positive."
 msgstr "Broj je pogrešan ili nije pozitivan."
 
@@ -6210,7 +6465,7 @@ msgstr "Znajte da su većina <MTX_…> promenljivih prazne i da će biti uklonje
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Znajte da u Windows-u takođe može da se koristi kosa crta umesto obrnute kose crte u putanji do fajla."
 
-#: src/merge/generic_packetizer.cpp:1155
+#: src/merge/generic_packetizer.cpp:1519
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Imajte na umu da Matroska specifikacije koje se odnose na skladištenje '%1%' nisu još uvek finalizovane. Stoga je podrška za to podložna promeni i koristi CodecID '%2%/EXPERIMENTAL' umesto '%2%'. Ovo upozorenje će biti uklonjeno kada specifikacije budu finalizovane i mkvmerge ažuriran u skladu sa tim.\n"
@@ -6269,7 +6524,7 @@ msgstr "Jedan od parametara '--attachment-name', '--attachment-description', '--
 msgid "Online check for updates"
 msgstr "Online provera za ispravke"
 
-#: src/merge/mkvmerge.cpp:822
+#: src/merge/mkvmerge.cpp:1025
 #, boost-format
 msgid "Only %1% chapter found in source files & chapter files."
 msgid_plural "Only %1% chapters found in source files & chapter files."
@@ -6277,7 +6532,7 @@ msgstr[0] "Nađeno je samo %1% poglavlje u izvornim i fajlovima sa poglavljima."
 msgstr[1] "Nađena su samo %1% poglavlja u izvornim i fajlovima sa poglavljima."
 msgstr[2] "Nađeno je samo %1% poglavlja u izvornim i fajlovima sa poglavljima."
 
-#: src/merge/mkvmerge.cpp:1503
+#: src/merge/mkvmerge.cpp:1706
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:658
 #: src/mkvtoolnix-gui/merge/attachments.cpp:220
 msgid "Only files smaller than 2 GiB are supported."
@@ -6295,7 +6550,7 @@ msgstr "On je potreban samo za ulazne AAC fajlove, zato što SBR AAC ne može au
 msgid "Only needed in certain situations:"
 msgstr "Potrebno samo u određenim situacijama:"
 
-#: src/merge/mkvmerge.cpp:1566
+#: src/merge/mkvmerge.cpp:1769
 #, boost-format
 msgid "Only one chapter file allowed in '%1% %2%'.\n"
 msgstr "Dozvoljen je samo jedan fajl sa poglavljima u '%1% %2%'.\n"
@@ -6312,11 +6567,11 @@ msgstr "Samo jedna instanca <%1%> je dozvoljena ispod <%2%> na poziciji %3%."
 msgid "Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time."
 msgstr "Samo jedan od <String> i <Binary> može biti korišćen ispod <Simple>, ali ne oba u isto vreme."
 
-#: src/merge/mkvmerge.cpp:1912
+#: src/merge/mkvmerge.cpp:2115
 msgid "Only one output file allowed.\n"
 msgstr "Samo jedan izlazni fajl je dozvoljen.\n"
 
-#: src/merge/mkvmerge.cpp:1601
+#: src/merge/mkvmerge.cpp:1804
 #, boost-format
 msgid "Only one segment info file allowed in '%1% %2%'.\n"
 msgstr "Samo jedan segment info fajl dozvoljen u '%1% %2%'.\n"
@@ -6421,7 +6676,7 @@ msgstr "Opus (u Ogg) audio fajlovi"
 msgid "Order"
 msgstr ""
 
-#: src/info/mkvinfo.cpp:651
+#: src/info/mkvinfo.cpp:789
 #, boost-format
 msgid "Order: %1%"
 msgstr "Poredak: %1%"
@@ -6507,7 +6762,7 @@ msgstr "Paket broj %1% je sadržavao nevažeće FLAC zaglavlje i preskočen je.\
 msgid "Parse the whole file instead of relying on the index."
 msgstr "Raščlani ceo fajl umesto oslanjanja na indeks."
 
-#: src/info/mkvinfo.cpp:1399
+#: src/info/mkvinfo.cpp:1537
 msgid "Parsing file"
 msgstr "Raščlanjujem fajl"
 
@@ -6516,32 +6771,32 @@ msgstr "Raščlanjujem fajl"
 msgid "Parts:"
 msgstr "Delovi:"
 
-#: src/info/mkvinfo.cpp:592
+#: src/info/mkvinfo.cpp:727
 #, boost-format
 msgid "Pixel crop bottom: %1%"
 msgstr "Podrezivanje piksela dole: %1%"
 
-#: src/info/mkvinfo.cpp:577
+#: src/info/mkvinfo.cpp:712
 #, boost-format
 msgid "Pixel crop left: %1%"
 msgstr "Podrezivanje piksela levo: %1%"
 
-#: src/info/mkvinfo.cpp:587
+#: src/info/mkvinfo.cpp:722
 #, boost-format
 msgid "Pixel crop right: %1%"
 msgstr "Podrezivanje piksela desno: %1%"
 
-#: src/info/mkvinfo.cpp:582
+#: src/info/mkvinfo.cpp:717
 #, boost-format
 msgid "Pixel crop top: %1%"
 msgstr "Podrezivanje piksela gore: %1%"
 
-#: src/info/mkvinfo.cpp:562
+#: src/info/mkvinfo.cpp:697
 #, boost-format
 msgid "Pixel height: %1%"
 msgstr "Visina u pikselima: %1%"
 
-#: src/info/mkvinfo.cpp:557
+#: src/info/mkvinfo.cpp:692
 #, boost-format
 msgid "Pixel width: %1%"
 msgstr "Širina u pikselima: %1%"
@@ -6577,7 +6832,7 @@ msgstr[2] "Plejliste kraće od %1 sekundi će biti ignorisane."
 msgid "Please enter the new job's description."
 msgstr "Molim vas unesite opis novog zadatka."
 
-#: src/merge/mkvmerge.cpp:301
+#: src/merge/mkvmerge.cpp:342
 msgid ""
 "Please read the man page/the HTML documentation to mkvmerge. It\n"
 "explains several details in great length which are not obvious from\n"
@@ -6681,7 +6936,7 @@ msgstr "Progres:"
 
 #: src/extract/timecodes_v2.cpp:289
 #: src/extract/tracks.cpp:440
-#: src/merge/mkvmerge.cpp:2440
+#: src/merge/mkvmerge.cpp:2741
 #: src/merge/output_control.cpp:332
 #: src/propedit/tag_target.cpp:328
 #: src/propedit/tag_target.cpp:341
@@ -6776,17 +7031,17 @@ msgstr "Quicktime/MP4 čitač: Nije pronađen 'mdat' atom. Video podaci nisu na�
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 čitač: Nevažeća veličina parčeta %1% u %2%.\n"
 
-#: src/input/r_qtmp4.cpp:2957
+#: src/input/r_qtmp4.cpp:2973
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: MPEG4 part 10/AVC stazi %1% nedostaje njena konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:2983
+#: src/input/r_qtmp4.cpp:2999
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: MPEG4 stazi %1% nedostaje esds atom/konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:2967
+#: src/input/r_qtmp4.cpp:2983
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: MPEGH part 2/HEVC stazi %1% nedostaje njena konfiguracija dekodera. Izostavljam ovu stazu.\n"
@@ -6805,17 +7060,17 @@ msgstr "Quicktime/MP4 čitač: Polje 'size' u atomu za opis potoka je previše m
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 čitač: Parametar 'time scale' je bila 0. Ovo nije podržano.\n"
 
-#: src/input/r_qtmp4.cpp:2928
+#: src/input/r_qtmp4.cpp:2944
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: AAC stazi %1% nedostaje esds atom/konfiguracija dekodera. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:2923
+#: src/input/r_qtmp4.cpp:2939
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: Audio staza %1% koristi nepodržan 'object type id' od %2% u 'esds' atomu. Izostavljam ovu stazu.\n"
 
-#: src/input/r_qtmp4.cpp:2977
+#: src/input/r_qtmp4.cpp:2993
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 čitač: Video stazi %1% nedostaje ESDS atom. Izostavljam ovu stazu.\n"
@@ -6840,10 +7095,10 @@ msgstr "Quicktime/MP4 čitač: Ovaj fajl koristi kompresovana zaglavlja, ali zli
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 čitač: Ovaj fajl koristi kompresovana zaglavlja, ali ona ne mogu biti nekompresovana. Kod greške iz zlib-a: %1%. Prekidam.\n"
 
-#: src/input/r_qtmp4.cpp:2879
-#: src/input/r_qtmp4.cpp:2898
-#: src/input/r_qtmp4.cpp:2938
-#: src/input/r_qtmp4.cpp:3001
+#: src/input/r_qtmp4.cpp:2895
+#: src/input/r_qtmp4.cpp:2914
+#: src/input/r_qtmp4.cpp:2954
+#: src/input/r_qtmp4.cpp:3017
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 čitač: Stazi %1% nedostaju neki podaci. Atomi iz zaglavlja oštećeni?\n"
@@ -6858,7 +7113,7 @@ msgstr "Quicktime/MP4 čitač: Track ID %1% ima više od jednog FourCC. Koristim
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
-#: src/info/mkvinfo.cpp:722
+#: src/info/mkvinfo.cpp:860
 msgid "RSA"
 msgstr "RSA"
 
@@ -6917,6 +7172,18 @@ msgstr "RealMedia audio/video fajlovi"
 #, boost-format
 msgid "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases this can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr %1%' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 msgstr "RealMedia fajlovi mogu sadržati HE-AAC / AAC+ / SBR AAC audio. U nekim slučajevima ovo NE MOŽE biti automatski detektovano. Stoga morate ručno da navedete '--aac-is-sbr %1%' za ovaj ulazni fajl ako on zaista sadrži SBR AAC. U protivnom, fajl će biti muksovan na POGREŠAN način. Takođe pročitajte mkvmerge dokumentaciju.\n"
+
+#: src/info/mkvinfo.cpp:555
+#: src/info/mkvinfo.cpp:556
+#, boost-format
+msgid "Red colour coordinate x: %1%"
+msgstr ""
+
+#: src/info/mkvinfo.cpp:560
+#: src/info/mkvinfo.cpp:561
+#, boost-format
+msgid "Red colour coordinate y: %1%"
+msgstr ""
 
 #: src/common/cli_parser.cpp:182
 msgid "Redirects all messages into this file."
@@ -7087,7 +7354,7 @@ msgstr "&Pokaži komandnu liniju"
 msgid "S&top job queue"
 msgstr "Zaustavi o&bradu"
 
-#: src/info/mkvinfo.cpp:731
+#: src/info/mkvinfo.cpp:869
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
@@ -7195,7 +7462,7 @@ msgstr "Skeniraj direktorijum za ostale plejliste"
 msgid "Scanned Files"
 msgstr "Skenirani fajlovi"
 
-#: src/merge/mkvmerge.cpp:2497
+#: src/merge/mkvmerge.cpp:2798
 #, boost-format
 msgid "Scanning %1% files in %2% playlist.\n"
 msgid_plural "Scanning %1% files in %2% playlists.\n"
@@ -7211,7 +7478,7 @@ msgstr "Skeniram direktorijum"
 msgid "Scanning playlists"
 msgstr "Skeniranje plejlisti"
 
-#: src/info/mkvinfo.cpp:665
+#: src/info/mkvinfo.cpp:803
 #, boost-format
 msgid "Scope: %1% (%2%)"
 msgstr "Scope: %1% (%2%)"
@@ -7221,29 +7488,29 @@ msgstr "Scope: %1% (%2%)"
 msgid "See below for examples."
 msgstr "Pogledati ispod za primere."
 
-#: src/info/mkvinfo.cpp:955
+#: src/info/mkvinfo.cpp:1093
 #, boost-format
 msgid "Seek ID: %1% (%2%)"
 msgstr "Seek ID: %1% (%2%)"
 
-#: src/info/mkvinfo.cpp:947
+#: src/info/mkvinfo.cpp:1085
 msgid "Seek entry"
 msgstr "Seek entry"
 
-#: src/info/mkvinfo.cpp:938
+#: src/info/mkvinfo.cpp:1076
 msgid "Seek head"
 msgstr "Seek head"
 
-#: src/info/mkvinfo.cpp:934
+#: src/info/mkvinfo.cpp:1072
 msgid "Seek head (subentries will be skipped)"
 msgstr "Seek head (podelementi će biti preskočeni)"
 
-#: src/info/mkvinfo.cpp:968
+#: src/info/mkvinfo.cpp:1106
 #, boost-format
 msgid "Seek position: %1%"
 msgstr "Seek position: %1%"
 
-#: src/info/mkvinfo.cpp:907
+#: src/info/mkvinfo.cpp:1045
 #, boost-format
 msgid "Seek pre-roll: %|1$.3f|ms (%2%ns)"
 msgstr "Seek pre-roll: %|1$.3f|ms (%2%ns)"
@@ -7299,7 +7566,7 @@ msgid "Segment information"
 msgstr "Informacija o segmentu"
 
 #: src/extract/timecodes_v2.cpp:276
-#: src/info/mkvinfo.cpp:757
+#: src/info/mkvinfo.cpp:895
 #: src/info/qt_ui.cpp:217
 msgid "Segment tracks"
 msgstr "Staze segmenta"
@@ -7309,12 +7576,12 @@ msgstr "Staze segmenta"
 msgid "Segment unique ID"
 msgstr "Jedinstveni ID segmenta"
 
-#: src/info/mkvinfo.cpp:1558
+#: src/info/mkvinfo.cpp:1696
 #, boost-format
 msgid "Segment, size %1%"
 msgstr "Segment, veličina %1%"
 
-#: src/info/mkvinfo.cpp:1556
+#: src/info/mkvinfo.cpp:1694
 msgid "Segment, size unknown"
 msgstr "Segment, nepoznata veličina"
 
@@ -7489,7 +7756,7 @@ msgstr "Podešava stereo režim video staze u ovu vrednost."
 msgid "Settings"
 msgstr "Podešavanja"
 
-#: src/info/mkvinfo.cpp:692
+#: src/info/mkvinfo.cpp:830
 #, boost-format
 msgid "Settings: %1%"
 msgstr "Podešavanja: %1%"
@@ -7558,27 +7825,27 @@ msgstr "Pokaži informaciju o verziji."
 msgid "Shut down the system in one minute:"
 msgstr "Isključi sistem za jedan minut:"
 
-#: src/info/mkvinfo.cpp:719
+#: src/info/mkvinfo.cpp:857
 #, boost-format
 msgid "Signature algorithm: %1% (%2%)"
 msgstr "Algoritam potpisa: %1% (%2%)"
 
-#: src/info/mkvinfo.cpp:728
+#: src/info/mkvinfo.cpp:866
 #, boost-format
 msgid "Signature hash algorithm: %1% (%2%)"
 msgstr "Heš algoritam potpisa: %1% (%2%)"
 
-#: src/info/mkvinfo.cpp:736
+#: src/info/mkvinfo.cpp:874
 #, boost-format
 msgid "Signature key ID: %1%"
 msgstr "ID ključa potpisa: %1%"
 
-#: src/info/mkvinfo.cpp:739
+#: src/info/mkvinfo.cpp:877
 #, boost-format
 msgid "Signature: %1%"
 msgstr "Potpis: %1%"
 
-#: src/info/mkvinfo.cpp:1100
+#: src/info/mkvinfo.cpp:1238
 #, boost-format
 msgid "Silent Track Number: %1%"
 msgstr "Silent Track broj: %1%"
@@ -7637,7 +7904,7 @@ msgstr "Preskačem %1% bajtova (nije nađeno važeće DTS zaglavlje). Ovo može 
 msgid "Skipping %1% bytes at the beginning (no valid MP3 header found).\n"
 msgstr "Preskačem %1% bajt sa početka (nije nađeno važeće MP3 zaglavlje).\n"
 
-#: src/info/mkvinfo.cpp:1216
+#: src/info/mkvinfo.cpp:1354
 msgid "Slices"
 msgstr "Slajsevi"
 
@@ -7739,7 +8006,7 @@ msgstr "Startuj grafički interfejs (i otvori inname, ako je dat)."
 msgid "Started at:"
 msgstr "Započeo u:"
 
-#: src/info/mkvinfo.cpp:1621
+#: src/info/mkvinfo.cpp:1759
 #, boost-format
 msgid "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"
 msgstr "Statistika za stazu broj %1%: broj blokova: %2%; veličina u bajtovima: %3%; trajanje u sekundama: %4%; približan bitski protok u bitovima po sekundi: %5%\n"
@@ -7755,12 +8022,12 @@ msgstr "Status"
 msgid "Status:"
 msgstr "Status:"
 
-#: src/merge/mkvmerge.cpp:681
+#: src/merge/mkvmerge.cpp:884
 #, boost-format
 msgid "Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a number between 0 and %1% or one of these keywords: %2% (argument was '%3%').\n"
 msgstr "Parametar stereo režima: nije naveden u formi <TID>:<n|keyword> gde je n broj između 0 i %1% ili jedna od ovih ključnih reči: %2% (argument je bio '%3%').\n"
 
-#: src/info/mkvinfo.cpp:616
+#: src/info/mkvinfo.cpp:751
 #, boost-format
 msgid "Stereo mode: %1% (%2%)"
 msgstr "Stereo režim: %1% (%2%)"
@@ -7808,7 +8075,7 @@ msgstr "Titlovi"
 msgid "Supported file types"
 msgstr "Podržani tipovi fajlova"
 
-#: src/merge/mkvmerge.cpp:369
+#: src/merge/mkvmerge.cpp:410
 msgid "Supported file types:\n"
 msgstr "Podržani tipovi fajlova:\n"
 
@@ -7838,7 +8105,7 @@ msgstr "Izvlačenje taga"
 msgid "Tag selectors"
 msgstr "Selektori tagova"
 
-#: src/info/mkvinfo.cpp:1488
+#: src/info/mkvinfo.cpp:1626
 #: src/propedit/options.cpp:182
 msgid "Tags"
 msgstr "Tagovi"
@@ -7912,7 +8179,7 @@ msgstr "FLAC zaglavlje ne može biti raščlanjeno: struktura informacije potoka
 msgid "The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n"
 msgstr "FPS je 0.0 ali čitač nije naveo vremenski kod za paket. %1%\n"
 
-#: src/merge/mkvmerge.cpp:1184
+#: src/merge/mkvmerge.cpp:1387
 #, boost-format
 msgid "The FourCC must be exactly four characters long in '%1% %2%'.\n"
 msgstr "FourCC mora biti dugačak tačno četiri karaktera u '%1% %2%'.\n"
@@ -7981,7 +8248,7 @@ msgstr "Matroska fajl je izmenjen, ali meta seek stavka ne može da se ažurira.
 msgid "The Matroska file's last element is set to an unknown size."
 msgstr "Poslednji element Matroska fajla je postavljen na nepoznatu veličinu."
 
-#: src/merge/mkvmerge.cpp:1311
+#: src/merge/mkvmerge.cpp:1514
 #, boost-format
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length %1%'.\n"
 msgstr "NALU veličina mora biti broj između 2 i 4 zaključno u '--nalu-size-length %1%'.\n"
@@ -8051,27 +8318,27 @@ msgstr "XML tag fajl '%1%' sadrži grešku: %2%\n"
 msgid "The XML tag file '%1%' could not be read.\n"
 msgstr "XML tag fajl '%1%' ne može biti pročitan.\n"
 
-#: src/merge/mkvmerge.cpp:1856
+#: src/merge/mkvmerge.cpp:2059
 #, boost-format
 msgid "The argument '%1%' is not allowed in identification mode.\n"
 msgstr "Argument '%1%' nije dozvoljen u režimu identifikacije.\n"
 
-#: src/merge/mkvmerge.cpp:1662
+#: src/merge/mkvmerge.cpp:1865
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid: '%3%' is not a valid track ID.\n"
 msgstr "Argument '%1%' u '%2%' je nevažeći: '%3%' nije važeći track ID.\n"
 
-#: src/merge/mkvmerge.cpp:1671
+#: src/merge/mkvmerge.cpp:1874
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid: '%3%' must be either 'all' or 'first'.\n"
 msgstr "Argument '%1%' u '%2%' je nevažeći: '%3%' mora biti ili 'all' ili 'first'.\n"
 
-#: src/merge/mkvmerge.cpp:1658
+#: src/merge/mkvmerge.cpp:1861
 #, boost-format
 msgid "The argument '%1%' to '%2%' is invalid: too many colons in element '%3%'.\n"
 msgstr "Argument '%1%' u '%2%' je nevažeći: previše dvotački u elementu '%3%'.\n"
 
-#: src/merge/mkvmerge.cpp:1616
+#: src/merge/mkvmerge.cpp:1819
 msgid "The argument to '--timecode-scale' must be a number.\n"
 msgstr "Argument od '--timecode-scale' mora biti broj.\n"
 
@@ -8080,12 +8347,12 @@ msgstr "Argument od '--timecode-scale' mora biti broj.\n"
 msgid "The attachment #%1%, ID %2%, MIME type %3%, size %4%, is written to '%5%'.\n"
 msgstr "Prilog #%1%, ID %2%, MIME tip %3%, veličina %4%, je zapisana u '%5%'.\n"
 
-#: src/merge/mkvmerge.cpp:1525
+#: src/merge/mkvmerge.cpp:1728
 #, boost-format
 msgid "The attachment '%1%' could not be read.\n"
 msgstr "Prilog '%1%' ne može biti pročitan.\n"
 
-#: src/merge/mkvmerge.cpp:1502
+#: src/merge/mkvmerge.cpp:1705
 #, boost-format
 msgid "The attachment (%1%) is too big (%2%)."
 msgstr "Prilog (%1%) je prevelik (%2%)."
@@ -8114,7 +8381,7 @@ msgstr "Skupovi znakova izabrani ovde biće prikazani na vrhu padajuce liste svi
 msgid "The chosen NALU size length of %1% is too small. Try using '4'.\n"
 msgstr "Izabrana NALU veličina od %1% je previše mala. Probajte da koristite '4'.\n"
 
-#: src/merge/mkvmerge.cpp:1695
+#: src/merge/mkvmerge.cpp:1898
 msgid "The closing parenthesis ')' are missing.\n"
 msgstr "Nedostaje zatvorena zagrada ')'.\n"
 
@@ -8174,7 +8441,7 @@ msgstr "Aktuelne postavke za sastavljanje će biti zatvorene."
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
 msgstr "Trenutni režim se može promeniti sa --merge, --edit-chapters ili --edit-headers."
 
-#: src/merge/generic_packetizer.cpp:878
+#: src/merge/generic_packetizer.cpp:1242
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Vremenski kod trenutnog paketa je niži nego onaj od prethodnog paketa. Ovo obično znači da je izvorni fajl Matroska fajl koji nije bio napravljen 100%% ispravno. Vremenski kodovi svih paketa će biti prilagođeni sa %1%ms kako ne bi izgubili nikakve podatke. Ovo može poremetiti audio/video sinhronizaciju, ali to može biti ispravljeno sa mkvmerge \"--sync\" parametrom. Ako već koristite \"--sync\" a i dalje dobijate ovo upozorenje onda NE brinite -- ovo je normalno. Ako se ova greška dešava više od jednom i takođe dobijate ovu poruku više od jednom za ovu naročitu stazu onda je ili izvorni fajl loše napravljen, ili mkvmerge sadrži programsku grešku. U ovom slučaju trebalo bi da kontaktirate autora Morica Bunkusa <moritz@bunkus.org>.\n"
@@ -8228,7 +8495,7 @@ msgstr "Visna slike dve staze je različita: %1% and %2%"
 msgid "The display width of the two tracks is different: %1% and %2%"
 msgstr "Širina slike dve staze je različita: %1% and %2%"
 
-#: src/merge/mkvmerge.cpp:2630
+#: src/merge/mkvmerge.cpp:2931
 msgid "The drive may be full."
 msgstr "Disk je možda pun."
 
@@ -8278,7 +8545,7 @@ msgstr "Fajl »%1« je izmenjen. Da li zaista želite da zatvorite? Sve izmene �
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "Fajl »%1« je izmenjen. Da li zaista želite da ga otvorite ponovo? Sve izmene će biti izgubljene."
 
-#: src/merge/mkvmerge.cpp:1506
+#: src/merge/mkvmerge.cpp:1709
 #, boost-format
 msgid "The file '%1%' cannot be attached because it does not exist or cannot be read.\n"
 msgstr "Fajl '%1%' ne može biti biti priložen zato što ne postoji ili ne može biti pročitan.\n"
@@ -8329,8 +8596,8 @@ msgstr "Fajl '%1%' ne može da se otvori ili raščlani."
 msgid "The file '%1%' has been opened for writing.\n"
 msgstr "Fajl '%1%' je otvoren za zapisivanje.\n"
 
-#: src/merge/mkvmerge.cpp:1753
-#: src/merge/mkvmerge.cpp:2463
+#: src/merge/mkvmerge.cpp:1956
+#: src/merge/mkvmerge.cpp:2764
 #, boost-format
 msgid "The file '%1%' has unknown type. Please have a look at the supported file types ('mkvmerge --list-types') and contact the author Moritz Bunkus <moritz@bunkus.org> if your file type is supported but not recognized properly.\n"
 msgstr "Fajl '%1%' je nepoznatog tipa. Molim vas pogledajte listu podržanih tipova fajlova ('mkvmerge --list-types') i kontaktirajte autora Morica Bunkusa <moritz@bunkus.org> ako je vaš fajl podržan ali nije ispravno prepoznat.\n"
@@ -8482,8 +8749,8 @@ msgstr "Fajl nije prepoznat kao podržan format (exit kod: %1)."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1364
-#: src/input/r_matroska.cpp:2033
+#: src/input/r_matroska.cpp:1432
+#: src/input/r_matroska.cpp:2103
 msgid "The file will not be processed further."
 msgstr "Fajl neće biti dalje obrađen."
 
@@ -8515,7 +8782,7 @@ msgstr "Fajl koji ste pokušali da otvorite (%1) nije prepoznat ni kao važeći 
 msgid "The first cluster timecode after the resync is %1%.\n"
 msgstr "Prvi klaster vremenskog koda nakon resinhronizovanja je %1%.\n"
 
-#: src/merge/mkvmerge.cpp:1741
+#: src/merge/mkvmerge.cpp:1944
 msgid "The first file cannot be appended because there are no files to append to.\n"
 msgstr "Fajl ne može biti spojen zato što nema fajlova sa kojim može da se spoji.\n"
 
@@ -8564,7 +8831,7 @@ msgstr "Četvrti režim izvlači poglavlja i konvertuje ih u XML. Rezultat je za
 msgid "The generated output file name has the same base name as the input file name but with an extension based on the track types present in the file."
 msgstr "Generisano ime ima istu osnovu od ulaznog fajla ali sa ekstenzijom zasnovanom na tipu staze prisutne u fajlu."
 
-#: src/merge/mkvmerge.cpp:1622
+#: src/merge/mkvmerge.cpp:1825
 msgid "The given timecode scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
 msgstr "Navedeni množitelj vremenskog koda je izvan važećeg opsega (1...10000000 ili -1 za 'preciznost uzorka čak i ako je video staza prisutna').\n"
 
@@ -8691,12 +8958,12 @@ msgstr "Ime '%1%' nije važeće ime svojstva za trenutnu specifikaciju uređivan
 msgid "The name must not be left empty."
 msgstr "Ime ne može biti ostavljeno prazno."
 
-#: src/merge/mkvmerge.cpp:1707
+#: src/merge/mkvmerge.cpp:1910
 #, boost-format
 msgid "The name of the output file '%1%' and of one of the input files is the same. This would cause mkvmerge to overwrite one of your input files. This is most likely not what you want.\n"
 msgstr "Ime izlaznog fajla '%1%' i jednog od ulaznih fajlova je isto. To će izazvati mkvmerge da prepiše preko jednog od ulaznih fajlova. Ovo najverovatnije nije ono što želite.\n"
 
-#: src/merge/mkvmerge.cpp:1450
+#: src/merge/mkvmerge.cpp:1653
 #, boost-format
 msgid "The next UID was already given in '%1% %2%'.\n"
 msgstr "Sledeći UID je već dat u '%1% %2%'.\n"
@@ -8782,7 +9049,7 @@ msgstr "Brojevi dati sa ovim argumentom se tumače na bazi broja Matroska blokov
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "Jedini dozvoljeni kodeci su VP8/VP9 video i Vorbis/Opus audio staze."
 
-#: src/merge/mkvmerge.cpp:2160
+#: src/merge/mkvmerge.cpp:2363
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "Parametar '--meta-seek-size' više nije podržan. Molim vas pročitajte mkvmerge dokumentaciju, naročito sekciju o strukturi Matroska fajlova.\n"
 
@@ -8806,7 +9073,7 @@ msgstr "Druga dva postojeća rasporeda su: u dve fiksne kolone sa desne strane i
 msgid "The output file name is invalid and must be fixed before you can start merging or add a job to the job queue."
 msgstr "Ime izlaznog fajla je nevažeće i mora se popraviti pre nego što počnete sastavljanje."
 
-#: src/merge/mkvmerge.cpp:1437
+#: src/merge/mkvmerge.cpp:1640
 #, boost-format
 msgid "The previous UID was already given in '%1% %2%'.\n"
 msgstr "Prethodni UID je već dat u '%1% %2%'.\n"
@@ -8899,7 +9166,7 @@ msgstr "Šesti režim pronalazi vremenske kodove svih blokova staze i proizvodi 
 msgid "The size after which a new output file is started."
 msgstr "Veličina nakon koje je započet novi izlazni fajl."
 
-#: src/merge/mkvmerge.cpp:1519
+#: src/merge/mkvmerge.cpp:1722
 #, boost-format
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "Veličina priloga '%1%' je 0.\n"
@@ -8962,7 +9229,7 @@ msgstr "Tag ili atribut '%1%' na poziciji %2% sadrži podatak koji je izvan njeg
 msgid "The tag or attribute '%1%' at position %2% contains invalid or mal-formed data."
 msgstr "Tag ili atribut '%1%' na poziciji %2% sadrži nevažeći ili loše formiran podatak."
 
-#: src/merge/generic_packetizer.cpp:277
+#: src/merge/generic_packetizer.cpp:347
 #, boost-format
 msgid "The tags in '%1%' could not be parsed: some mandatory elements are missing.\n"
 msgstr "Tagovi u '%1%' ne mogu biti raščlanjeni: nedostaju neki obavezni elementi.\n"
@@ -9393,8 +9660,8 @@ msgstr "Ova staza sadrži SBR AAC/HE-AAC/AAC+ podatak."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1364
-#: src/input/r_matroska.cpp:2033
+#: src/input/r_matroska.cpp:1432
+#: src/input/r_matroska.cpp:2103
 msgid "This usually indicates a damaged file structure."
 msgstr "Ovo obično ukazuje na oštećenu strukturu fajla."
 
@@ -9414,7 +9681,7 @@ msgstr "Ovo radi dobro za video i titl staze ali ne treba da se koristi za audio
 msgid "This works with all track types."
 msgstr "Ovo radi sa svim tipovima staza."
 
-#: src/info/mkvinfo.cpp:1220
+#: src/info/mkvinfo.cpp:1358
 msgid "Time slice"
 msgstr "Time slice"
 
@@ -9428,7 +9695,7 @@ msgstr "Fajl sa vremenskim kodovima:"
 
 #: src/extract/timecodes_v2.cpp:251
 #: src/info/mkvinfo.cpp:460
-#: src/info/mkvinfo.cpp:893
+#: src/info/mkvinfo.cpp:1031
 #, boost-format
 msgid "Timecode scale: %1%"
 msgstr "Skala vremenskog koda: %1%"
@@ -9462,25 +9729,20 @@ msgstr "Ime staz&e:"
 msgid "Track %1% CodecPrivate is too small.\n"
 msgstr "CodecPrivate staze %1% je previše mali.\n"
 
-#: src/common/content_decoder.cpp:112
+#: src/common/content_decoder.cpp:109
 #, boost-format
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "Staza %1% je kompresovana sa nepoznatim/nepodržanim algoritmom kompresije (%2%).\n"
 
-#: src/input/r_matroska.cpp:1077
+#: src/input/r_matroska.cpp:1145
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Stazi %1% nedostaje njen track UID element koji je potrebno da bude prisutan od strane Matroska specifikacije. Ako fajl sadrži tagove onda ti tagovi mogu biti oštećeni.\n"
 
-#: src/common/content_decoder.cpp:98
+#: src/common/content_decoder.cpp:100
 #, boost-format
-msgid "Track %1% was compressed with bzlib but mkvmerge has not been compiled with support for bzlib compression.\n"
-msgstr "Staza %1% je kompresovana sa bzlib ali mkvmerge nije kompajliran sa podrškom za bzlib kompresiju.\n"
-
-#: src/common/content_decoder.cpp:103
-#, boost-format
-msgid "Track %1% was compressed with lzo1x but mkvmerge has not been compiled with support for lzo1x compression.\n"
-msgstr "Staza %1% je kompresovana sa lzo1x ali mkvmerge nije kompajliran sa podrškom za lzo1x kompresiju.\n"
+msgid "Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n"
+msgstr ""
 
 #: src/extract/xtr_aac.cpp:51
 #, boost-format
@@ -9519,7 +9781,7 @@ msgstr "Stazi %1% sa CodecID '%2%' nedostaje element \"codec private\" i ne mož
 msgid "Track %1% with the CodecID '%2%' is missing the \"default duration\" element and cannot be extracted.\n"
 msgstr "Stazi %1% sa CodecID '%2%' nedostaje element \"default duration\" i ne može biti izvučena.\n"
 
-#: src/info/mkvinfo.cpp:913
+#: src/info/mkvinfo.cpp:1051
 #, boost-format
 msgid "Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"
 msgstr "Staza %1%: %2%, codec ID: %3%%4%%5%%6%\n"
@@ -9572,7 +9834,7 @@ msgstr "Track ID za mkvmerge i mkvextract:"
 msgid "Track UID"
 msgstr "UID staze"
 
-#: src/info/mkvinfo.cpp:800
+#: src/info/mkvinfo.cpp:938
 #, boost-format
 msgid "Track UID: %1%"
 msgstr "UID staze: %1%"
@@ -9592,7 +9854,7 @@ msgstr "Zaglavlja staze"
 msgid "Track number"
 msgstr "Broj staze"
 
-#: src/common/content_decoder.cpp:83
+#: src/common/content_decoder.cpp:84
 #, boost-format
 msgid "Track number %1% has been encrypted and decryption has not yet been implemented.\n"
 msgstr "Staza broj %1% je šifrovana a dešifrovanje još uvek nije implementirano.\n"
@@ -9602,17 +9864,17 @@ msgstr "Staza broj %1% je šifrovana a dešifrovanje još uvek nije implementira
 msgid "Track number for mkvpropedit:"
 msgstr "Broj staze za mkvpropedit:"
 
-#: src/info/mkvinfo.cpp:795
+#: src/info/mkvinfo.cpp:933
 #, boost-format
 msgid "Track number: %1% (track ID for mkvmerge & mkvextract: %2%)"
 msgstr "Broj staze: %1% (ID  staze za mkvmerge i mkvextract: %2%)"
 
-#: src/info/mkvinfo.cpp:858
+#: src/info/mkvinfo.cpp:996
 #, boost-format
 msgid "Track overlay: %1%"
 msgstr "Track overlay: %1%"
 
-#: src/info/mkvinfo.cpp:810
+#: src/info/mkvinfo.cpp:948
 #, boost-format
 msgid "Track type: %1%"
 msgstr "Tip staze: %1%"
@@ -9669,7 +9931,7 @@ msgstr "Tipovi jedinice za Širinu/Visinu prikazivanja (0: pikseli, 1: centimetr
 msgid "Type:"
 msgstr "Tip:"
 
-#: src/info/mkvinfo.cpp:670
+#: src/info/mkvinfo.cpp:808
 #, boost-format
 msgid "Type: %1% (%2%)"
 msgstr "Tip: %1% (%2%)"
@@ -9714,26 +9976,26 @@ msgstr "Nepoznat tip audio potoka 0x%|1$04x|. Stream ID %2% će biti ignorisan.\
 msgid "Unknown chapter file format in '%1%'. It does not contain a supported chapter format.\n"
 msgstr "Nepoznat format fajla sa poglavljima '%1%'. On ne sadrži podržan format poglavlja.\n"
 
-#: src/common/content_decoder.cpp:89
+#: src/common/content_decoder.cpp:90
 #, boost-format
 msgid "Unknown content encoding type %1% for track %2%.\n"
 msgstr "Nepoznat tip kodovanja sadržaja %1% za stazu %2%.\n"
 
-#: src/info/mkvinfo.cpp:1669
+#: src/info/mkvinfo.cpp:1807
 msgid "Unknown element"
 msgstr "Nepoznat element"
 
-#: src/merge/mkvmerge.cpp:1455
+#: src/merge/mkvmerge.cpp:1658
 #, boost-format
 msgid "Unknown format for the next UID in '%1% %2%'.\n"
 msgstr "Nepoznat format za sledeći UID u '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1442
+#: src/merge/mkvmerge.cpp:1645
 #, boost-format
 msgid "Unknown format for the previous UID in '%1% %2%'.\n"
 msgstr "Nepoznat format za prethodni UID u '%1% %2%'.\n"
 
-#: src/merge/mkvmerge.cpp:1467
+#: src/merge/mkvmerge.cpp:1670
 #, boost-format
 msgid "Unknown format for the segment UID '%3%' in '%1% %2%'.\n"
 msgstr "Nepoznat format za segment sa UID '%3%' in '%1% %2%'.\n"
@@ -9785,7 +10047,7 @@ msgstr "Nepodržan MPEG mpeg_version: 0x%|1$02x| u paketu %2% za vremenski kod %
 msgid "Unsupported file format"
 msgstr "Nepodržan format fajla"
 
-#: src/input/r_matroska.cpp:1841
+#: src/input/r_matroska.cpp:1911
 msgid "Unsupported track type for this track.\n"
 msgstr "Nepodržan tip za ovu stazu.\n"
 
@@ -9835,7 +10097,7 @@ msgstr "Korisno kada npr. želite tačno dva fajla."
 msgid "Uses the chapter names of the specified language for extraction instead of the first chapter name found."
 msgstr "Pri izvlačenju poglavlja, koristi imena od naznačenog jezika umesto ime poglavlja koje je prvo pronađeno."
 
-#: src/merge/mkvmerge.cpp:1315
+#: src/merge/mkvmerge.cpp:1518
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/h.264 codecs.\n"
 msgstr "Korišćenje NALU veličine od 3 bajta može rezultirati stazama koje ne mogu biti dekodirane sa određenim AVC/h.264 kodecima.\n"
 
@@ -9843,7 +10105,7 @@ msgstr "Korišćenje NALU veličine od 3 bajta može rezultirati stazama koje ne
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "Koristim demultiplekser za format '%1%'.\n"
 
-#: src/input/r_matroska.cpp:1393
+#: src/input/r_matroska.cpp:1461
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "Koristim opšti izlazni modul za stazu tipa '%1%'.\n"
@@ -9903,6 +10165,24 @@ msgstr "Verzija %1"
 msgid "Version %1 \"%2\""
 msgstr "Verzija %1 \"%2\""
 
+#: src/info/mkvinfo.cpp:639
+#: src/info/mkvinfo.cpp:640
+#, fuzzy, boost-format
+msgid "Vertical Cb subsample: %1%"
+msgstr "bitova po uzorku: %1%"
+
+#: src/info/mkvinfo.cpp:649
+#: src/info/mkvinfo.cpp:650
+#, fuzzy, boost-format
+msgid "Vertical chroma siting: %1%"
+msgstr "Cue relative position: %1%"
+
+#: src/info/mkvinfo.cpp:629
+#: src/info/mkvinfo.cpp:630
+#, fuzzy, boost-format
+msgid "Vertical chroma subsample: %1%"
+msgstr "bitova po uzorku: %1%"
+
 #: src/output/p_video.h:45
 msgid "VfW compatible video"
 msgstr "VfW kompatibilan video"
@@ -9915,6 +10195,15 @@ msgstr "Video"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:478
 msgid "Video aspect ratio type"
 msgstr "Tip video formata slike"
+
+#: src/info/mkvinfo.cpp:610
+#, fuzzy
+msgid "Video colour information"
+msgstr "DV video format"
+
+#: src/info/mkvinfo.cpp:551
+msgid "Video colour mastering metadata"
+msgstr ""
 
 #: src/common/property_element.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:475
@@ -9980,7 +10269,7 @@ msgstr "Video svojstva"
 msgid "Video stereo mode"
 msgstr "Stereo režim"
 
-#: src/info/mkvinfo.cpp:552
+#: src/info/mkvinfo.cpp:687
 msgid "Video track"
 msgstr "Video staza"
 
@@ -10137,6 +10426,18 @@ msgstr "Kada izvršiti:"
 msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
 msgstr "Uvek kada korisnik doda plejlistu program može automatski da skenira direktorijum za ostale plejliste i prikaže korisniku detaljan spisak svih pronađenih plejlisti."
 
+#: src/info/mkvinfo.cpp:585
+#: src/info/mkvinfo.cpp:586
+#, boost-format
+msgid "White colour coordinate x: %1%"
+msgstr ""
+
+#: src/info/mkvinfo.cpp:590
+#: src/info/mkvinfo.cpp:591
+#, boost-format
+msgid "White colour coordinate y: %1%"
+msgstr ""
+
 #: src/common/property_element.cpp:136
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:451
 msgid "Width of the encoded video frames in pixels."
@@ -10199,7 +10500,7 @@ msgstr "Pogrešna Kate verzija: %1%.%2% > %3%.x"
 msgid "Wrong Theora version: %1%.%2%.%3% != 3.2.x"
 msgstr "Pogrešna Theora verzija: %1%.%2%.%3% != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:1989
+#: src/merge/mkvmerge.cpp:2192
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "Pogrešan argument u '--split-max-files'.\n"
 
@@ -10383,7 +10684,7 @@ msgstr "pitaj korisnika"
 msgid "attachment"
 msgstr "prilog"
 
-#: src/info/mkvinfo.cpp:915
+#: src/info/mkvinfo.cpp:1053
 #: src/input/r_matroska.cpp:107
 #: src/mkvtoolnix-gui/merge/track.cpp:396
 msgid "audio"
@@ -10410,7 +10711,7 @@ msgstr "oba oka povezana u bloku (desno prvo)"
 msgid "bottom"
 msgstr "dole"
 
-#: src/info/mkvinfo.cpp:918
+#: src/info/mkvinfo.cpp:1056
 #: src/input/r_matroska.cpp:108
 #: src/mkvtoolnix-gui/merge/track.cpp:399
 msgid "buttons"
@@ -10461,7 +10762,7 @@ msgstr "uspešno završeno"
 msgid "completed with warnings"
 msgstr "završeno sa upozorenjima"
 
-#: src/info/mkvinfo.cpp:672
+#: src/info/mkvinfo.cpp:810
 msgid "compression"
 msgstr "kompresija"
 
@@ -10477,7 +10778,7 @@ msgstr "napravi tab sa novim postavkama i tamo dodaj fajlove"
 msgid "create one new merge settings tab for each file"
 msgstr "napravi tab sa novim postavkama za svaki fajl zasebno"
 
-#: src/merge/generic_packetizer.cpp:1174
+#: src/merge/generic_packetizer.cpp:1538
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num nije nađen. %1%\n"
@@ -10486,7 +10787,7 @@ msgstr "create_track_number: file_num nije nađen. %1%\n"
 msgid "default"
 msgstr "default"
 
-#: src/info/mkvinfo.cpp:873
+#: src/info/mkvinfo.cpp:1011
 #, boost-format
 msgid "default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"
 msgstr "podrazumevano trajanje: %|1$.3f|ms (%|2$.3f| slika/poluslika u sekundi za video stazu)"
@@ -10508,16 +10809,16 @@ msgstr "odredi automatski"
 msgid "disabled"
 msgstr "onemogućen"
 
-#: src/info/mkvinfo.cpp:1326
+#: src/info/mkvinfo.cpp:1464
 msgid "discardable, "
 msgstr "discardable, "
 
-#: src/info/mkvinfo.cpp:573
+#: src/info/mkvinfo.cpp:708
 #, boost-format
 msgid "display height: %1%"
 msgstr "visina prikaza: %1%"
 
-#: src/info/mkvinfo.cpp:568
+#: src/info/mkvinfo.cpp:703
 #, boost-format
 msgid "display width: %1%"
 msgstr "širina prikaza: %1%"
@@ -10530,7 +10831,7 @@ msgstr "ne menjaj"
 msgid "don't generate chapters"
 msgstr "nemoj praviti poglavlja"
 
-#: src/info/mkvinfo.cpp:673
+#: src/info/mkvinfo.cpp:811
 msgid "encryption"
 msgstr "šifrovanje"
 
@@ -10622,7 +10923,7 @@ msgstr "globalni tagovi"
 msgid "have an xcptn\n"
 msgstr "have an xcptn\n"
 
-#: src/info/mkvinfo.cpp:688
+#: src/info/mkvinfo.cpp:826
 msgid "header removal"
 msgstr "uklanjanje zaglavlja"
 
@@ -10656,11 +10957,11 @@ msgstr "u &tab dodatku ispod fajlova i staza"
 msgid "inflateInit() failed. Result: %1%\n"
 msgstr "inflateInit() failed. Result: %1%\n"
 
-#: src/info/mkvinfo.cpp:1324
+#: src/info/mkvinfo.cpp:1462
 msgid "key, "
 msgstr "ključ, "
 
-#: src/info/mkvinfo.cpp:890
+#: src/info/mkvinfo.cpp:1028
 #, boost-format
 msgid "language: %1%"
 msgstr "jezik: %1%"
@@ -10687,119 +10988,119 @@ msgstr "niže"
 msgid "lowest"
 msgstr "najniže"
 
-#: src/input/r_matroska.cpp:362
+#: src/input/r_matroska.cpp:397
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti za stazu %1%) Matroska kaže da ima %2% bita po uzorku, ali WAVEFORMATEX kaže da ih ima %3%.\n"
 
-#: src/input/r_matroska.cpp:353
+#: src/input/r_matroska.cpp:388
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti za stazu %1%) Matroska kaže da ima %2% kanala, ali WAVEFORMATEX kaže da ih ima %3%.\n"
 
-#: src/input/r_matroska.cpp:344
+#: src/input/r_matroska.cpp:379
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, but WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti za stazu %1%) Matroska kaže da imaju %2% uzorka po sekundi, ali WAVEFORMATEX kaže da ima %3%.\n"
 
-#: src/input/r_matroska.cpp:540
+#: src/input/r_matroska.cpp:575
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti, staza %1%) Matroska kaže da je visina videa %2%, ali BITMAPINFOHEADER kaže %3%.\n"
 
-#: src/input/r_matroska.cpp:531
+#: src/input/r_matroska.cpp:566
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_reader: (MS režim kompatibilnosti, staza %1%) Matroska kaže da je širina videa %2%, ali BITMAPINFOHEADER kaže %3%.\n"
 
-#: src/input/r_matroska.cpp:1066
+#: src/input/r_matroska.cpp:1134
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_reader: Stazi nedostaje njen broj.\n"
 
-#: src/input/r_matroska.cpp:1459
+#: src/input/r_matroska.cpp:1528
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_reader: Ne mogu da zadržim UID staze %1%, zato što je već dodeljen za novi fajl.\n"
 
-#: src/input/r_matroska.cpp:1303
-#: src/input/r_matroska.cpp:1308
+#: src/input/r_matroska.cpp:1371
+#: src/input/r_matroska.cpp:1376
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Nije nađen nikakav segment.\n"
 
-#: src/input/r_matroska.cpp:1029
+#: src/input/r_matroska.cpp:1097
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Nedostaje visina u pikselima.\n"
 
-#: src/input/r_matroska.cpp:1027
+#: src/input/r_matroska.cpp:1095
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Nedostaje širina u pikselima.\n"
 
-#: src/input/r_matroska.cpp:641
+#: src/input/r_matroska.cpp:676
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_reader: CodecID '%1%' za stazu %2% je nepoznat.\n"
 
-#: src/input/r_matroska.cpp:377
-#: src/input/r_matroska.cpp:422
-#: src/input/r_matroska.cpp:443
+#: src/input/r_matroska.cpp:412
+#: src/input/r_matroska.cpp:457
+#: src/input/r_matroska.cpp:478
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: CodecID za stazu sa ID %1% je '%2%', ali lični podaci kodeka ne sadrže važeća zaglavlja.\n"
 
-#: src/input/r_matroska.cpp:519
+#: src/input/r_matroska.cpp:554
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: CodecID za stazu %1% je '%2%', ali nije prisutna BITMAPINFOHEADER struktura. Stoga nemamo FourCC da identifikujemo korišćeni video kodek.\n"
 
-#: src/input/r_matroska.cpp:322
+#: src/input/r_matroska.cpp:357
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: CodecID za stazu %1% je '%2%', ali nije prisutna WAVEFORMATEX struktura. Stoga nemamo ID formata da identifikujemo korišćeni audio kodek.\n"
 
-#: src/input/r_matroska.cpp:559
+#: src/input/r_matroska.cpp:594
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n"
 msgstr "matroska_reader: CodecID za stazu %1% je '%2%', ali nije bilo ličnog zaglavlja kodeka.\n"
 
-#: src/input/r_matroska.cpp:605
-#: src/input/r_matroska.cpp:616
+#: src/input/r_matroska.cpp:640
+#: src/input/r_matroska.cpp:651
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_reader: CodecID za stazu %1% je '%2%', ali nije pronađeno ličnih podataka.\n"
 
-#: src/input/r_matroska.cpp:1128
+#: src/input/r_matroska.cpp:1196
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_reader: nedostaje CodecID.\n"
 
-#: src/input/r_matroska.cpp:591
+#: src/input/r_matroska.cpp:626
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_reader: Nije podešena visina za stazu %1%.\n"
 
-#: src/input/r_matroska.cpp:585
+#: src/input/r_matroska.cpp:620
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_reader: Nije podešena širina za stazu %1%.\n"
 
-#: src/input/r_matroska.cpp:683
+#: src/input/r_matroska.cpp:718
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_reader: Staza %1%, izgleda ok.\n"
 
-#: src/input/r_matroska.cpp:1084
+#: src/input/r_matroska.cpp:1152
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_reader: Tip staze nije pronađen.\n"
 
-#: src/input/r_matroska.cpp:413
+#: src/input/r_matroska.cpp:448
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: mkvmerge nije kompajlovan sa podrškom za FLAC. Ignorisana staza %1%.\n"
 
-#: src/input/r_matroska.cpp:1290
+#: src/input/r_matroska.cpp:1358
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: nije nađena EBML glava.\n"
 
-#: src/input/r_matroska.cpp:678
+#: src/input/r_matroska.cpp:713
 #, boost-format
 msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: nepoznat tip demuksera za stazu %1%: '%2%'\n"
@@ -10983,7 +11284,7 @@ msgstr "mkvmerge podržava dva formata poglavlja: tekstualni poput OGM formata i
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge je prekinut od strane SIGINT (Ctrl+C?)\n"
 
-#: src/info/mkvinfo.cpp:796
+#: src/info/mkvinfo.cpp:934
 #, boost-format
 msgid "mkvmerge/mkvextract track ID: %1%"
 msgstr "mkvmerge/mkvextract track ID: %1%"
@@ -11050,7 +11351,7 @@ msgstr "ne"
 msgid "no cues"
 msgstr "bez cue-ova"
 
-#: src/info/mkvinfo.cpp:705
+#: src/info/mkvinfo.cpp:843
 msgid "no encryption"
 msgstr "nema šifrovanja"
 
@@ -11079,11 +11380,11 @@ msgstr "nijedan zadatak još nije započet"
 msgid "no output yet"
 msgstr "još uvek bez izlaznog fajla"
 
-#: src/info/mkvinfo.cpp:721
+#: src/info/mkvinfo.cpp:859
 msgid "no signature algorithm"
 msgstr "bez potpisa algoritam"
 
-#: src/info/mkvinfo.cpp:730
+#: src/info/mkvinfo.cpp:868
 msgid "no signature hash algorithm"
 msgstr "bez potpisa hash algoritam"
 
@@ -11162,32 +11463,32 @@ msgstr "čeka se auotmatsko startovanje"
 msgid "pending manual start"
 msgstr "čeka se ručno startovanje"
 
-#: src/info/mkvinfo.cpp:593
+#: src/info/mkvinfo.cpp:728
 #, boost-format
 msgid "pixel crop bottom: %1%"
 msgstr "podrezivanje piksela dole: %1%"
 
-#: src/info/mkvinfo.cpp:578
+#: src/info/mkvinfo.cpp:713
 #, boost-format
 msgid "pixel crop left: %1%"
 msgstr "Podrezivanje piksela levo: %1%"
 
-#: src/info/mkvinfo.cpp:588
+#: src/info/mkvinfo.cpp:723
 #, boost-format
 msgid "pixel crop right: %1%"
 msgstr "Podrezivanje piksela desno: %1%"
 
-#: src/info/mkvinfo.cpp:583
+#: src/info/mkvinfo.cpp:718
 #, boost-format
 msgid "pixel crop top: %1%"
 msgstr "Podrezivanje piksela gore: %1%"
 
-#: src/info/mkvinfo.cpp:563
+#: src/info/mkvinfo.cpp:698
 #, boost-format
 msgid "pixel height: %1%"
 msgstr "visina u pikselima: %1%"
 
-#: src/info/mkvinfo.cpp:558
+#: src/info/mkvinfo.cpp:693
 #, boost-format
 msgid "pixel width: %1%"
 msgstr "širina u pikselima: %1%"
@@ -11210,7 +11511,7 @@ msgstr "real_reader: Podržane su samo verzije 3, 4 i 5 audio zaglavlja. Track I
 msgid "remove input files"
 msgstr "ukloni ulazne fajlove"
 
-#: src/info/mkvinfo.cpp:662
+#: src/info/mkvinfo.cpp:800
 msgid "rest: unknown"
 msgstr "ostalo: nepoznato"
 
@@ -11256,7 +11557,7 @@ msgstr "ssa_reader: Nevažeći format. Ne mogu naći \"Format\" liniju u \"[Even
 msgid "subtitle"
 msgstr "titl"
 
-#: src/info/mkvinfo.cpp:917
+#: src/info/mkvinfo.cpp:1055
 #: src/mkvtoolnix-gui/merge/track.cpp:398
 msgid "subtitles"
 msgstr "titlovi"
@@ -11273,7 +11574,7 @@ msgstr "tekstualni titlovi"
 msgid "the first output file only"
 msgstr "samo za prvi izlazni fajl"
 
-#: src/merge/mkvmerge.cpp:2352
+#: src/merge/mkvmerge.cpp:2653
 msgid "timecodes"
 msgstr "vremenski kodovi"
 
@@ -11293,7 +11594,7 @@ msgstr "od vrha do dna (levo prvo)"
 msgid "top bottom (right first)"
 msgstr "od vrha do dna (desno prvo)"
 
-#: src/merge/mkvmerge.cpp:2345
+#: src/merge/mkvmerge.cpp:2646
 msgid "track name"
 msgstr "ime staze"
 
@@ -11305,21 +11606,21 @@ msgstr "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 #: src/common/file_types.cpp:105
 #: src/common/mm_io_win.cpp:161
 #: src/common/stereo_mode.cpp:69
-#: src/info/mkvinfo.cpp:664
-#: src/info/mkvinfo.cpp:674
-#: src/info/mkvinfo.cpp:689
-#: src/info/mkvinfo.cpp:711
-#: src/info/mkvinfo.cpp:723
-#: src/info/mkvinfo.cpp:733
-#: src/info/mkvinfo.cpp:919
+#: src/info/mkvinfo.cpp:802
+#: src/info/mkvinfo.cpp:812
+#: src/info/mkvinfo.cpp:827
+#: src/info/mkvinfo.cpp:849
+#: src/info/mkvinfo.cpp:861
+#: src/info/mkvinfo.cpp:871
+#: src/info/mkvinfo.cpp:1057
 #: src/input/r_matroska.cpp:106
-#: src/input/r_matroska.cpp:2475
+#: src/input/r_matroska.cpp:2545
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:241
 msgid "unknown"
 msgstr "nepoznato"
 
-#: src/input/r_matroska.cpp:2459
+#: src/input/r_matroska.cpp:2529
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "nepoznato, tag formata 0x%|1$04x|"
@@ -11328,7 +11629,7 @@ msgstr "nepoznato, tag formata 0x%|1$04x|"
 msgid "unlimited"
 msgstr "neograničen"
 
-#: src/info/mkvinfo.cpp:916
+#: src/info/mkvinfo.cpp:1054
 #: src/input/r_matroska.cpp:109
 #: src/mkvtoolnix-gui/merge/track.cpp:397
 msgid "video"
@@ -11450,6 +11751,20 @@ msgstr "– nijedna –"
 #~ "dobijanje vremenskih kodova na pravilan način. Pošto on nedostaje, "
 #~ "vremenski kodovi za ovu stazu mogu biti pogrešni. Treba da pogledate "
 #~ "rezultirajući fajl i uverite se da izgleda onako kako ste očekivali.\n"
+
+#~ msgid ""
+#~ "Track %1% was compressed with bzlib but mkvmerge has not been compiled "
+#~ "with support for bzlib compression.\n"
+#~ msgstr ""
+#~ "Staza %1% je kompresovana sa bzlib ali mkvmerge nije kompajliran sa "
+#~ "podrškom za bzlib kompresiju.\n"
+
+#~ msgid ""
+#~ "Track %1% was compressed with lzo1x but mkvmerge has not been compiled "
+#~ "with support for lzo1x compression.\n"
+#~ msgstr ""
+#~ "Staza %1% je kompresovana sa lzo1x ali mkvmerge nije kompajliran sa "
+#~ "podrškom za lzo1x kompresiju.\n"
 
 #~ msgid "Use a &vertical layout for the \"input\" tab"
 #~ msgstr "Koristi &vertikalni raspored za tab \"ulaz\""
