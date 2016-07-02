@@ -159,12 +159,13 @@ if test x"$enable_qt" = "xyes" -a \
       while true; do
         ac_save_CXXFLAGS="$CXXFLAGS"
         ac_save_LIBS="$LIBS"
-        CXXFLAGS="$CXXFLAGS $QT_CFLAGS -fPIC"
+        CXXFLAGS="$STD_CXX $CXXFLAGS $QT_CFLAGS -fPIC"
         LIBS="$LDFLAGS $QT_LIBS"
         unset ac_cv_qt_compilation
 
         AC_TRY_LINK([
 #include <QtCore>
+#include <QCoreApplication>
 class Config : public QCoreApplication {
 public:
 Config(int &argc, char **argv);
