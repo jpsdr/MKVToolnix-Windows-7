@@ -15,6 +15,7 @@
 
 #include "common/content_decoder.h"
 #include "common/ebml.h"
+#include "common/list_utils.h"
 #include "common/strings/formatting.h"
 
 kax_content_encoding_t::kax_content_encoding_t()
@@ -94,13 +95,9 @@ content_decoder_c::initialize(KaxTrackEntry &ktentry) {
     if (0 == enc.comp_algo)
       enc.compressor = std::shared_ptr<compressor_c>(new zlib_compressor_c());
 
-    else if (1 == enc.comp_algo) {
-      mxwarn(boost::format(Y("Track %1% was compressed with bzlib but mkvmerge has not been compiled with support for bzlib compression.\n")) % tid);
-      ok = false;
-      break;
-
-    } else if (2 == enc.comp_algo) {
-      mxwarn(boost::format(Y("Track %1% was compressed with lzo1x but mkvmerge has not been compiled with support for lzo1x compression.\n")) % tid);
+    else if (mtx::included_in(enc.comp_algo, 1u, 2u)) {
+      auto algorithm = 1u == enc.comp_algo ? "bzlib" : "lzo1x";
+      mxwarn(boost::format(Y("Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n")) % tid % algorithm);
       ok = false;
       break;
 
