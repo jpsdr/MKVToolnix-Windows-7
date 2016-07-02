@@ -1259,13 +1259,13 @@ NALUサイズ長を\fIn\fRバイトに強制設定します。このパラメー
 .PP
 \fB\-\-compression\fR \fITID:n\fR
 .RS 4
-トラックの圧縮法を選択します。プレイヤーが選択した圧縮法をサポートしている必要があることに注意してください。指定できる圧縮法は、\*(Aqnone\*(Aq、\*(Aqzlib\*(Aq、\*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aq、\*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aq及び\*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aqです。\*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aqと\*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aqは\fBmkvmerge\fR(1)がそれぞれ、liblzo(TM)及びbzlib(TM)圧縮ライブラリのサポート付きでコンパイルされたときのみ使用できます。
+Selects the compression method to be used for the track\&. Note that the player also has to support this method\&. Valid values are \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq and \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&.
 .sp
 \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq圧縮法は、
 MPEG4
 part2 ビデオトラックにのみ適用できる、\*(Aqheader removal\*(Aqと呼ばれる特殊な圧縮法です。
 .sp
-いくつかの字幕トラックにおけるデフォルトは\*(Aqzlib\*(Aq圧縮法です。この圧縮法はほとんど全ての再生アプリケーションでサポートされています。\*(Aqnone\*(Aq以外の他の圧縮法については、サポートされているとは限りません。
+The default for some subtitle types is \*(Aqzlib\*(Aq compression\&. This compression method is also the one that most if not all playback applications support\&. Support for other compression methods other than \*(Aqnone\*(Aq is not assured\&.
 .RE
 .SS "ビデオトラックにのみ適用されるオプション"
 .PP
@@ -1462,30 +1462,6 @@ Turns on GUI mode\&. In this mode specially\-formatted lines may be output that 
 \fB\-\-capabilities\fR
 .RS 4
 コンパイル時に組込まれたオプション機能を一覧表示して終了します。出力の一行目はバージョン情報になります。以降の全ての行は、その機能がコンパイルされていることを示す一単語のみを含みます。オプション機能の一覧を下に示します。
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-"\*(AqBZ2\*(Aq \-\-
-bzlib(TM)圧縮ライブラリ。\fB\-\-compression\fRオプションに指定できる圧縮メソッドに影響します。
-.RE
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\*(AqLZO\*(Aq \-\-
-lzo(TM)圧縮ライブラリ。\fB\-\-compression\fRオプションに指定できる圧縮メソッドに影響します。
-.RE
 .sp
 .RS 4
 .ie n \{\

@@ -1365,11 +1365,11 @@ ms 进行调整。轨道 ID 与
 \fBmkvmerge\fR(1)
 为所有区块创建索引，会使生成的文件非常大。
 .sp
-The default is \*(Aqiframes\*(Aq for video and subtitle tracks and \*(Aqnone\*(Aq for audio tracks\&. See also option
+默认值为 \*(Aqiframes（仅 i 帧）\*(Aq（视频及字幕轨道）或 \*(Aqnone（无）\*(Aq（音频轨道）。参见
 \fB\-\-no\-cues\fR
-which inhibits the creation of cue entries regardless of the
+选项，后者可阻止 cue 条目的创建，无论是否使用了
 \fB\-\-cues\fR
-options used\&.
+选项。
 .sp
 此选项可以对同一输入文件多次使用，通过每次选择不同轨道 ID 分别应用到多个轨道。
 .RE
@@ -1563,19 +1563,13 @@ AVC/h\&.264
 .PP
 \fB\-\-compression\fR \fITID:n\fR
 .RS 4
-选择用于该轨道的压缩方式。注意播放器也得支持该方式。有效的值有 \*(Aqnone（无压缩）\*(Aq、\*(Aqzlib\*(Aq、\*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aq、\*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aq 与 \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq。值 \*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aq 与 \*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aq 仅当
-\fBmkvmerge\fR(1)
-分别附加相应的
-liblzo(TM)
-和
-bzlib(TM)
-压缩库编译时有效。
+Selects the compression method to be used for the track\&. Note that the player also has to support this method\&. Valid values are \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq and \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&.
 .sp
 压缩方式 \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq 是一种称为 \*(Aq去头\*(Aq 的特殊压缩方式，只对
 MPEG4
 part 2 视频轨可用。
 .sp
-部分字幕轨的默认值为 \*(Aqzlib\*(Aq 压缩。此压缩方式也是大部分（如果不是所有）回放应用程序都支持的压缩方式。无法保证对除 \*(Aqnone（无压缩）\*(Aq 以外的其他压缩方式的支持。
+The default for some subtitle types is \*(Aqzlib\*(Aq compression\&. This compression method is also the one that most if not all playback applications support\&. Support for other compression methods other than \*(Aqnone\*(Aq is not assured\&.
 .RE
 .SS "仅用于视频轨的选项"
 .PP
@@ -1797,11 +1791,11 @@ json
 .PP
 \fB\-\-ui\-language\fR \fI语言代码\fR
 .RS 4
-Forces the translations for the language
-\fIcode\fR
-to be used (e\&.g\&. \*(Aqde_DE\*(Aq for the German translations)\&. Entering \*(Aqlist\*(Aq as the
-\fIcode\fR
-will cause the program to output a list of available translations\&.
+强制使用
+\fI语言代码\fR
+所对应的翻译 (例如 \*(Aqde_DE\*(Aq 表示德文翻译)。在
+\fI语言代码\fR
+处输入 \*(Aqlist\*(Aq 可让程序输出可用翻译的列表。
 .RE
 .PP
 \fB\-\-debug\fR \fI主题\fR
@@ -1833,36 +1827,6 @@ will cause the program to output a list of available translations\&.
 \fB\-\-capabilities\fR
 .RS 4
 列出编译时附加的可选功能并退出。输出信息的第一行是版本信息。接下来的每行包含一个单词，各单词的出现意味着编译时附加了相应功能。这些功能包括：
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\*(AqBZ2\*(Aq \-\-
-bzlib(TM)
-压缩库。影响
-\fB\-\-compression\fR
-选项可用的压缩方式。
-.RE
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\*(AqLZO\*(Aq \-\-
-lzo(TM)
-压缩库。影响
-\fB\-\-compression\fR
-选项可用的压缩方式。
-.RE
 .sp
 .RS 4
 .ie n \{\

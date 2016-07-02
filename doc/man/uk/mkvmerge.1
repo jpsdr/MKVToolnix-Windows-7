@@ -1572,19 +1572,13 @@ elementary stream packetizer is used\&. If left out it defaults to 4 bytes, but 
 .PP
 \fB\-\-compression\fR \fITID:n\fR
 .RS 4
-Selects the compression method to be used for the track\&. Note that the player also has to support this method\&. Valid values are \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq, \*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aq, \*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aq and \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&. The values \*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aq and \*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aq are only available if
-\fBmkvmerge\fR(1)
-has been compiled with support for the
-liblzo(TM)
-and
-bzlib(TM)
-compression libraries, respectively\&.
+Selects the compression method to be used for the track\&. Note that the player also has to support this method\&. Valid values are \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq and \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&.
 .sp
 The compression method \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq is a special compression method called \*(Aqheader removal\*(Aq that is only available for
 MPEG4
 part 2 video tracks\&.
 .sp
-The default for some subtitle tracks is \*(Aqzlib\*(Aq compression\&. This compression method is also the one that most if not all playback applications support\&. Support for other compression methods other than \*(Aqnone\*(Aq is not assured\&.
+The default for some subtitle types is \*(Aqzlib\*(Aq compression\&. This compression method is also the one that most if not all playback applications support\&. Support for other compression methods other than \*(Aqnone\*(Aq is not assured\&.
 .RE
 .SS "Options that only apply to video tracks"
 .PP
@@ -1840,36 +1834,6 @@ for further information\&.
 \fB\-\-capabilities\fR
 .RS 4
 Lists information about optional features that have been compiled in and exit\&. The first line output will be the version information\&. All following lines contain exactly one word whose presence indicates that the feature has been compiled in\&. These features are:
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\*(AqBZ2\*(Aq \-\- the
-bzlib(TM)
-compression library\&. Affects the available compression methods for the
-\fB\-\-compression\fR
-option\&.
-.RE
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\*(AqLZO\*(Aq \-\- the
-lzo(TM)
-compression library\&. Affects the available compression methods for the
-\fB\-\-compression\fR
-option\&.
-.RE
 .sp
 .RS 4
 .ie n \{\

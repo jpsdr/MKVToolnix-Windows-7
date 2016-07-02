@@ -1553,18 +1553,12 @@ AVC/h\&.264\-Datenstr\(:ome verwendet wird\&. Falls er weggelassen wird, ist die
 .PP
 \fB\-\-compression\fR \fITID:n\fR
 .RS 4
-w\(:ahlt die Komprimierungsmethode aus, die f\(:ur diese Spur benutzt wird\&. Beachten Sie, dass das Abspielprogramm diese Methode ebenfalls unterst\(:utzen muss\&. G\(:ultige Werte sind \(Fcnone\(Fo, \(Fczlib\(Fo, \(Fclzo\(Fo/\(Fclxo1x\(Fo, \(Fcbz2\(Fo/\(Fcbzlib\(Fo und \(Fcmpeg4_p2\(Fo/\(Fcmpeg4p2\(Fo\&. Die Werte \(Fclzo\(Fo/\(Fclxo1x\(Fo und \(Fcbz2\(Fo/\(Fcbzlib\(Fo sind nur verf\(:ugbar, falls
-\fBmkvmerge\fR(1)
-mit Unterst\(:utzung f\(:ur die Komprimierungsbibliotheken
-liblzo(TM)
-beziehungsweise
-bzlib(TM)
-\(:ubersetzt wurde\&.
+w\(:ahlt die Komprimierungsmethode aus, die f\(:ur diese Spur benutzt wird\&. Beachten Sie, dass das Abspielprogramm diese Methode ebenfalls unterst\(:utzen muss\&. G\(:ultige Werte sind \(Fcnone\(Fo, \(Fczlib\(Fo und \(Fcmpeg4_p2\(Fo/\(Fcmpeg4p2\(Fo\&.
 .sp
 Die Komprimierungsmethode \(Fcmpeg4_p2\(Fo/\(Fcmpeg4p2\(Fo ist eine besondere Komprimierungsmethode, genannt \(FcKopfdaten entfernen\(Fo, die nur f\(:ur
 MPEG4\-Teil\-2\-Videospuren verf\(:ugbar ist\&.
 .sp
-F\(:ur einige Untertitelspuren ist die Voreinstellung \(Fczlib\(Fo\-Komprimierung\&. Diese Komprimierungsmethode ist au\(sserdem jene, die die meisten, wenn nicht sogar alle Abspielprogramme unterst\(:utzen\&. F\(:ur andere Komprimierungsmethoden au\(sser \(Fcnone\(Fo kann keine Unterst\(:utzung zugesichert werden\&.
+F\(:ur einige Untertiteltypen ist die Voreinstellung \(Fczlib\(Fo\-Komprimierung\&. Diese Komprimierungsmethode ist au\(sserdem jene, die die meisten, wenn nicht sogar alle Abspielprogramme unterst\(:utzen\&. F\(:ur andere Komprimierungsmethoden au\(sser \(Fcnone\(Fo kann keine Unterst\(:utzung zugesichert werden\&.
 .RE
 .SS "Optionen, die nur f\(:ur Videospuren gelten"
 .PP
@@ -1821,34 +1815,6 @@ Optionsdateien\&.
 \fB\-\-capabilities\fR
 .RS 4
 f\(:uhrt Informationen \(:uber optionale Funktionalit\(:aten auf, die einkompiliert wurden, und beendet sich\&. Die erste ausgegebene Zeile wird die Versionsinformation sein\&. Alle folgenden Zeilen enthalten genau ein Wort, dessen Vorhandensein anzeigt, dass die Funktionalit\(:at einkompiliert wurde\&. Diese Funktionalit\(:aten sind:
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\(FcBZ2\(Fo \(en die
-bzlib(TM)\-Komprimierungsbibliothek\&. Beeinflusst die f\(:ur die Option
-\fB\-\-compression\fR
-verf\(:ugbaren Komprimierungsmethoden\&.
-.RE
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\(FcLZO\(Fo \(en die
-lzo(TM)\-Komprimierungsbibliothek\&. Beeinflusst die f\(:ur die Option
-\fB\-\-compression\fR
-verf\(:ugbaren Komprimierungsmethoden\&.
-.RE
 .sp
 .RS 4
 .ie n \{\

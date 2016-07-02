@@ -1545,18 +1545,13 @@ es usado\&. Si se omite por defecto usa 4 bytes, pero hay archivos que contienen
 .PP
 \fB\-\-compression\fR \fITID:n\fR
 .RS 4
-Selecciona el m\('etodo de compresi\('on para ser utilizado en la pista\&. Tenga en cuenta que el reproductor debe ser compatible con este m\('etodo\&. Los valores v\('alidos son \*(Aqninguna\*(Aq, \*(Aqzlib\*(Aq, \*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aq, \*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aq y \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&. Los valores \*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aq y \*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aq s\('olo est\('an disponibles si
-\fBmkvmerge\fR(1)
-ha sido compilado con soporte para las librer\('ias de compresi\('on
-liblzo(TM)
-y
-bzlib(TM), respectivamente\&.
+Selects the compression method to be used for the track\&. Note that the player also has to support this method\&. Valid values are \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq and \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&.
 .sp
 El m\('etodo de compresi\('on \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq es un m\('etodo especial llamado \*(Aqeliminador de encabezado\*(Aq que s\('olo est\('a disponible para pistas de video
 MPEG4
 part 2\&.
 .sp
-La compresi\('on por defecto para algunas pistas de subt\('itulos es \*(Aqzlib\*(Aq\&. Este m\('etodo de compresi\('on es para el que casi todas, si no todas, las aplicaciones de reproducci\('on son compatibles\&. No se puede asegurar la compatibilidad para otros m\('etodos de compresi\('on que no sea \*(Aqninguna\*(Aq\&.
+The default for some subtitle types is \*(Aqzlib\*(Aq compression\&. This compression method is also the one that most if not all playback applications support\&. Support for other compression methods other than \*(Aqnone\*(Aq is not assured\&.
 .RE
 .SS "Opciones que s\('olo afectan a pistas de video"
 .PP
@@ -1809,32 +1804,6 @@ para m\('as informaci\('on\&.
 \fB\-\-capabilities\fR
 .RS 4
 Muestra informaci\('on sobre las caracter\('isticas adicionales que han sido compiladas y sale\&. La primera l\('inea generada ser\('a la informaci\('on de la versi\('on\&. El resto de l\('ineas contienen exactamente una palabra cuya presencia indica que esa caracter\('istica ha sido compilada\&. Estas caracter\('isticas son:
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\*(AqBZ2\*(Aq \-\- la librer\('ia de compresi\('on
-bzlib(TM)\&. Se aplica a los m\('etodos de compresi\('on disponibles para la opci\('on
-\fB\-\-compression\fR\&.
-.RE
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\*(AqLZO\*(Aq \-\- la librer\('ia de compresi\('on
-lzo(TM)\&. Se aplica a los m\('etodos de compresi\('on disponibles para la opci\('on
-\fB\-\-compression\fR\&.
-.RE
 .sp
 .RS 4
 .ie n \{\

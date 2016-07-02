@@ -1577,18 +1577,12 @@ elementaire stroom inpakker is gebruikt\&. Indien weggelaten is de standaard waa
 .PP
 \fB\-\-compression\fR \fITID:n\fR
 .RS 4
-Selecteert de te gebruiken compressie methode in voor het spoor\&. Opmerking: de af speler dient deze methode ook te ondersteunen\&. Geldige waarden zijn \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq, \*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aq, \*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aq en \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&. De waarden \*(Aqlzo\*(Aq/\*(Aqlxo1x\*(Aq en \*(Aqbz2\*(Aq/\*(Aqbzlib\*(Aq zijn all\('e\('en beschikbaar als
-\fBmkvmerge\fR(1)
-is gecompileerd met de ondersteuning voor de
-liblzo(TM)
-respectievelijk
-bzlib(TM)
-compressie bibliotheken\&.
+Selects the compression method to be used for the track\&. Note that the player also has to support this method\&. Valid values are \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq and \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&.
 .sp
 De compressie methode \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq is een speciale compressie methode genoemd \*(Aqheader removal\*(Aq die is all\('e\('en beschikbaar voorMPEG4
 deel 2 video sporen\&.
 .sp
-Standaard voor sommige ondertitels zijn \*(Aqzlib\*(Aq compressie\&. Deze compressie wordt door bijna alle af spelers ondersteund zo niet allen\&. Ondersteuning voor andere compressie methoden anders dan \*(Aqnone\*(Aq is niet verzekerd\&.
+The default for some subtitle types is \*(Aqzlib\*(Aq compression\&. This compression method is also the one that most if not all playback applications support\&. Support for other compression methods other than \*(Aqnone\*(Aq is not assured\&.
 .RE
 .SS "Opties die alleen op video sporen van toepassing zijn"
 .PP
@@ -1844,36 +1838,6 @@ voor meer informatie\&.
 \fB\-\-capabilities\fR
 .RS 4
 Somt informatie op over optionele mogelijkheden die zijn gecompileerd en sluit af\&. De eerste uitvoer regel zal de versie informatie zijn\&. Alle volgende informatie regels bevatten exact \('e\('en woord, waarvan de aanwezigheid aangeeft welke eigenschapen er binnenin zijn gecompileerd\&. Deze mogelijkheden zijn:
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\*(AqBZ2\*(Aq \-\- de
-bzlib(TM)
-compressie bibliotheek\&. Heeft effect op de beschikbare compressie methoden voor de
-\fB\-\-compression\fR
-optie\&.
-.RE
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\*(AqLZO\*(Aq \-\- de
-lzo(TM)
-compressie bibliotheek\&. Heeft effect op de beschikbare compressie methoden voor de
-\fB\-\-compression\fR
-optie\&.
-.RE
 .sp
 .RS 4
 .ie n \{\

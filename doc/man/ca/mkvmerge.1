@@ -1522,18 +1522,13 @@ AVC/h\&.264\&. Si s\*(Aqomet, per omissi\('o emprar\(`a 4 bytes, per\(`o hi ha f
 .PP
 \fB\-\-compression\fR \fITID:n\fR
 .RS 4
-Selecciona el m\(`etode de compressi\('o a emprar per a la pista\&. Recordeu que el reproductor haur\(`a d\*(Aqimplementar aquest m\(`etode\&. Els valors v\(`alids s\('on \(Fonone\(Fc (Sense), \(Fozlib\(Fc, \(Folzo\(Fc/\(Folxo1x\(Fc, \(Fobz2\(Fc/\(Fobzlib\(Fc i \(Fompeg4_p2\(Fc/\(Fompeg4p2\(Fc\&. Els valors \(Folzo\(Fc/\(Folxo1x\(Fc i \(Fobz2\(Fc/\(Fobzlib\(Fc nom\('es estaran disponibles si el
-\fBmkvmerge\fR(1)
-ha estat compilat amb la implementaci\('o per a les biblioteques de compressi\('o
-liblzo(TM)
-i
-bzlib(TM), respectivament\&.
+Selects the compression method to be used for the track\&. Note that the player also has to support this method\&. Valid values are \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq and \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&.
 .sp
 El m\(`etode de compressi\('o \(Fompeg4_p2\(Fc/\(Fompeg4p2\(Fc \('es un m\(`etode especial anomenat \(Foeliminador de la cap\(,calera\(Fc que nom\('es est\(`a disponible per a les pistes de v\('ideo
 MPEG4
 part 2\&.
 .sp
-La compressi\('o per omissi\('o per a algunes pistes de subt\('itols \('es \(Fozlib\(Fc\&. Aquest m\(`etode de compressi\('o tamb\('e \('es el m\('es implementat per gaireb\('e totes, si no totes, les aplicacions de reproducci\('o\&. No es pot assegurar la implementaci\('o per a altres m\(`etodes de compressi\('o que no sigui \(Fonone\(Fc\&.
+The default for some subtitle types is \*(Aqzlib\*(Aq compression\&. This compression method is also the one that most if not all playback applications support\&. Support for other compression methods other than \*(Aqnone\*(Aq is not assured\&.
 .RE
 .SS "Opcions que nom\('es s\*(Aqapliquen a les pistes de v\('ideo"
 .PP
@@ -1786,32 +1781,6 @@ els fitxers d\*(Aqopcions\&.
 \fB\-\-capabilities\fR
 .RS 4
 Mostra informaci\('o sobre les caracter\('istiques addicionals que s\*(Aqhan compilat i surt\&. La primera l\('inia de la sortida ser\(`a la informaci\('o de la versi\('o\&. La resta de les l\('inies contenen exactament una paraula, la pres\(`encia d\*(Aqaquesta indica que aquesta caracter\('istica ha estat compilada\&. Aquestes caracter\('istiques s\('on:
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\(FoBZ2\(Fc \-\- la biblioteca de compressi\('o
-bzlib(TM)\&. Afecta als m\(`etodes de compressi\('o disponibles per a l\*(Aqopci\('o
-\fB\-\-compression\fR\&.
-.RE
-.sp
-.RS 4
-.ie n \{\
-\h'-04'\(bu\h'+03'\c
-.\}
-.el \{\
-.sp -1
-.IP \(bu 2.3
-.\}
-\(FoLZO\(Fc \-\- la biblioteca de compressi\('o
-lzo(TM)\&. Afecta als m\(`etodes de compressi\('o disponibles per a l\*(Aqopci\('o
-\fB\-\-compression\fR\&.
-.RE
 .sp
 .RS 4
 .ie n \{\
