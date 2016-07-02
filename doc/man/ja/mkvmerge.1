@@ -1300,6 +1300,154 @@ Matroska(TM)ファイルは再生時の画像スケールを決定するため�
 ビデオトラックのピクセルクロッピングのパラメータを指定した値に設定します。
 .RE
 .PP
+\fB\-\-colour\-matrix\fR \fITID:n\fR
+.RS 4
+Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries\&. The parameter
+\fIn\fR
+is an integer rangeing from
+\fB0\fR
+and
+\fB10\fR\&.
+.sp
+Valid values and their meaning are:
+.sp
+\fB0\fR: GBR,
+\fB1\fR: BT709,
+\fB2\fR: unspecified,
+\fB3\fR: reserved,
+\fB4\fR: FCC,
+\fB5\fR: BT470BG,
+\fB6\fR: SMPTE 170M,
+\fB7\fR: SMPTE 240M,
+\fB8\fR: YCOCG,
+\fB9\fR: BT2020 non\-constant luminance,
+\fB10\fR: BT2020 constant luminance
+.RE
+.PP
+\fB\-\-colour\-bits\-per\-channel\fR \fITID:n\fR
+.RS 4
+Sets the number of coded bits for a colour channel\&. A value of
+\fB0\fR
+indicates that the number of bits is unspecified\&.
+.RE
+.PP
+\fB\-\-chroma\-subsample\fR \fITID:hori,vert\fR
+.RS 4
+The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally/vertically\&.
+.sp
+Example: For video with 4:2:0 chroma subsampling, the parameter should be set to
+\fITID\fR:\fB1\fR,\fB1\fR\&.
+.RE
+.PP
+\fB\-\-cb\-subsample\fR \fITID:hori,vert\fR
+.RS 4
+The amount of pixels to remove in the Cb channel for every pixel not removed horizontally/vertically\&. This is additive with
+\fB\-\-chroma\-subsample\fR\&.
+.sp
+Example: For video with 4:2:1 chroma subsampling, the parameter
+\fB\-\-chroma\-subsample\fR
+should be set to
+\fITID\fR:\fB1\fR,\fB0\fR
+and Cb\-subsample should be set to
+\fITID\fR:\fB1\fR,\fB0\fR\&.
+.RE
+.PP
+\fB\-\-chroma\-siting\fR \fITID:hori,vert\fR
+.RS 4
+Sets how chroma is sited horizontally/vertically (\fB0\fR: unspecified,
+\fB1\fR: top collocated,
+\fB2\fR: half)\&.
+.RE
+.PP
+\fB\-\-colour\-range\fR \fITID:n\fR
+.RS 4
+Sets the clipping of the color ranges (\fB0\fR: unspecified,
+\fB1\fR: broadcast range,
+\fB2\fR: full range (no clipping),
+\fB3\fR: defined by MatrixCoefficients/TransferCharacteristics)\&.
+.RE
+.PP
+\fB\-\-colour\-transfer\-characteristics\fR \fITID:n\fR
+.RS 4
+The transfer characteristics of the video\&.
+.sp
+Valid values and their meaning are:
+.sp
+\fB0\fR: reserved,
+\fB1\fR: ITU\-R BT\&.709,
+\fB2\fR: unspecified,
+\fB3\fR: reserved,
+\fB4\fR: gamma 2\&.2 curve,
+\fB5\fR: gamma 2\&.8 curve,
+\fB6\fR: SMPTE 170M,
+\fB7\fR: SMPTE 240M,
+\fB8\fR: linear,
+\fB9\fR: log,
+\fB10\fR: log sqrt,
+\fB11\fR: IEC 61966\-2\-4,
+\fB12\fR: ITU\-R BT\&.1361 extended colour gamut,
+\fB13\fR: IEC 61966\-2\-1,
+\fB14\fR: ITU\-R BT\&.2020 10 bit,
+\fB15\fR: ITU\-R BT\&.2020 12 bit,
+\fB16\fR: SMPTE ST 2084,
+\fB17\fR: SMPTE ST 428\-1;
+\fB18\fR: ARIB STD\-B67 (HLG)
+.RE
+.PP
+\fB\-\-colour\-primaries\fR \fITID:n\fR
+.RS 4
+Sets the colour primaries of the video\&.
+.sp
+Valid values and their meaning are:
+.sp
+\fB0\fR: reserved,
+\fB1\fR: ITU\-R BT\&.709,
+\fB2\fR: unspecified,
+\fB3\fR: reserved,
+\fB4\fR: ITU\-R BT\&.470M,
+\fB5\fR: ITU\-R BT\&.470BG,
+\fB6\fR: SMPTE 170M,
+\fB7\fR: SMPTE 240M,
+\fB8\fR: FILM,
+\fB9\fR: ITU\-R BT\&.2020,
+\fB10\fR: SMPTE ST 428\-1,
+\fB22\fR: JEDEC P22 phosphors
+.RE
+.PP
+\fB\-\-max\-content\-light\fR \fITID:n\fR
+.RS 4
+Sets the maximum brightness of a single pixel (Maximum Content Light Level) in candelas per square meter (cd/m\(S2)\&. The value of
+\fIn\fR
+should be a non\-negtive integer\&.
+.RE
+.PP
+\fB\-\-max\-frame\-light\fR \fITID:n\fR
+.RS 4
+Sets the maximum brightness of a single full frame (Maximum Frame\-Average Light Level) in candelas per square meter (cd/m\(S2)\&. The value of
+\fIn\fR
+should be a non\-negtive integer\&.
+.RE
+.PP
+\fB\-\-chromaticity\-coordinates\fR \fITID:red\-x,red\-y,green\-x,green\-y,blue\-x,blue\-y\fR
+.RS 4
+Sets the red/green/blue chromaticity coordinates as defined by CIE 1931\&.
+.RE
+.PP
+\fB\-\-white\-colour\-coordinates\fR \fITID:x,y\fR
+.RS 4
+Sets the white colour chromaticity coordinates as defined by CIE 1931\&.
+.RE
+.PP
+\fB\-\-max\-luminance\fR \fITID:float\fR
+.RS 4
+Sets the maximum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 9999\&.99\&.
+.RE
+.PP
+\fB\-\-min\-luminance\fR \fITID:float\fR
+.RS 4
+Sets the mininum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 999\&.9999\&.
+.RE
+.PP
 \fB\-\-stereo\-mode\fR \fITID:n|keyword\fR
 .RS 4
 トラックIDが\fITID\fRのビデオトラックのステレオモードを設定します。ステレオモードは、\fB0\fR～\fB14\fRの数字\fIn\fR、または以下のキーワードのうちの1つを指定することができます：
