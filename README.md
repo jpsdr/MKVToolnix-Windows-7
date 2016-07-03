@@ -69,7 +69,7 @@ programs and libraries you absolutely need are:
 - A C++ compiler that supports several features of the C++11 standard:
   initializer lists, range-based "for" loops, right angle brackets,
   the "auto" keyword, lambda functions, the "nullptr" key word, tuples
-  and alias declarations. Others may be needed, to. For GCC this means
+  and alias declarations. Others may be needed, too. For GCC this means
   at least v4.8.0; for clang v3.4 or later.
 
 - [libEBML v1.3.3](http://dl.matroska.org/downloads/libebml/) or later
@@ -81,9 +81,9 @@ programs and libraries you absolutely need are:
   [libVorbis](http://downloads.xiph.org/releases/vorbis/) for access to Ogg/OGM
   files and Vorbis support
 
-- [zlib](http://www.zlib.net/) -- a compression library
+- [zlib](http://www.zlib.net/) — a compression library
 
-- [Boost](http://www.boost.org/) -- Several of Boost's libraries are
+- [Boost](http://www.boost.org/) — Several of Boost's libraries are
   used: "format", "RegEx", "filesystem", "system", "math",
   "Range", "rational", "variant". At least v1.46.0 is required.
 
@@ -103,7 +103,7 @@ Installing "drake" is simple. As root run the following command:
 Other libraries are optional and only limit the features that are
 built. These include:
 
-- [Qt](http://www.qt.io/) v5.2 or newer -- a cross-platform GUI
+- [Qt](http://www.qt.io/) v5.2 or newer — a cross-platform GUI
   toolkit. You need this if you want to use the MKVToolNix GUI or
   mkvinfo's GUI.
 
@@ -193,7 +193,7 @@ or
 
 ## 2.5. Notes for compilation on (Open)Solaris
 
-You can compile mkvtoolnix with Sun's sunstudio compiler, but you need
+You can compile MKVToolNix with Sun's sunstudio compiler, but you need
 additional options for `configure`:
 
     ./configure --prefix=/usr \
@@ -231,17 +231,17 @@ do this then you have to follow these steps:
 
 # 3. Reporting bugs
 
-If you're sure you've found a bug -- e.g. if one of my programs crashes
+If you're sure you've found a bug — e.g. if one of my programs crashes
 with an obscur error message, or if the resulting file is missing part
 of the original data, then by all means submit a bug report.
 
 I use [GitHub's issue system](https://github.com/mbunkus/mkvtoolnix/issues)
 as my bug database. You can submit your bug reports there. Please be as
-verbose as possible – e.g. include the command line, if you use Windows
+verbose as possible — e.g. include the command line, if you use Windows
 or Linux etc.pp.
 
 If at all possible please include sample files as well so that I can
-reproduce the issue. If they are larger than 1M then please upload
+reproduce the issue. If they are larger than 1 MB then please upload
 them somewhere and post a link in the issue. You can also upload them
 to my FTP server. Details on how to connect can be found in the
 [MKVToolNix FAQ](https://github.com/mbunkus/mkvtoolnix/wiki/FTP-server).
@@ -271,14 +271,14 @@ URL: http://www.boost.org
 
 ## 4.3. libEBML
 
-a C++ library to parse EBML files
+A C++ library to parse EBML files
 
 License: GNU Lesser General Public License v2.1
 URL: http://www.matroska.org/
 
 ## 4.4. libMatroska
 
-a C++ library to parse Matroska files
+A C++ library to parse Matroska files
 
 License: GNU Lesser General Public License v2.1
 URL: http://www.matroska.org/
@@ -301,7 +301,7 @@ URL: https://github.com/nlohmann/json
 
 ## 4.7. pugixml
 
-an XML processing library
+An XML processing library
 
 License: MIT
 URL: http://pugixml.org/
