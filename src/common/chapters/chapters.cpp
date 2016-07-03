@@ -1155,7 +1155,7 @@ fix_chapter_country_codes(EbmlMaster &chapters) {
     if (!ccountry)
       continue;
 
-    auto mapped_cctld = map_to_cctld(std::string{*ccountry});
+    auto mapped_cctld = map_to_cctld(ccountry->GetValue());
     if (mapped_cctld)
       ccountry->SetValue(*mapped_cctld);
   }

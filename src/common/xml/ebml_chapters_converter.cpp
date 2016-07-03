@@ -151,8 +151,8 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
   if (!ccountry)
     return;
 
-  auto country = std::string{*ccountry};
-  auto cctld  = map_to_cctld(country);
+  auto country = ccountry->GetValue();
+  auto cctld   = map_to_cctld(country);
   if (!cctld)
     throw conversion_x{boost::format(Y("'%1%' is not a valid ccTLD country code.")) % country};
 
