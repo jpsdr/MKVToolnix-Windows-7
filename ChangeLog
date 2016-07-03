@@ -1,5 +1,9 @@
 2016-07-03  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: fixed overly long file type detection in some
+        cases when text subtitle type probing read a lot of data due to
+        there being no carriage returns near the start of the file.
+
         * mkvmerge, mkvextract, MKVToolNix GUI: bug fix: several fixes to
         the handling of country codes. The list has been updated to
         reflect the currently valid top level domain country

@@ -86,8 +86,8 @@ public:
 
   virtual std::string get_file_name() const = 0;
 
-  virtual std::string getline();
-  virtual bool getline2(std::string &s);
+  virtual std::string getline(boost::optional<std::size_t> max_chars = boost::none);
+  virtual bool getline2(std::string &s, boost::optional<std::size_t> max_chars = boost::none);
   virtual size_t puts(const std::string &s);
   inline size_t puts(const boost::format &format) {
     return puts(format.str());
@@ -272,7 +272,7 @@ public:
   mm_text_io_c(mm_io_c *in, bool delete_in = true);
 
   virtual void setFilePointer(int64 offset, seek_mode mode=seek_beginning);
-  virtual std::string getline();
+  virtual std::string getline(boost::optional<std::size_t> max_chars = boost::none);
   virtual int read_next_char(char *buffer);
   virtual byte_order_e get_byte_order() const {
     return m_byte_order;

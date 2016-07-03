@@ -197,9 +197,6 @@ get_file_type_internal(filelist_t &file) {
 
   if (FILE_TYPE_IS_UNKNOWN != type)
     ;                           // intentional fall-through
-  // File types that are mis-detected sometimes and that aren't supported
-  else if (dv_reader_c::probe_file(io, size))
-    type = FILE_TYPE_DV;
   // File types that are mis-detected sometimes
   else if (dts_reader_c::probe_file(io, size, true))
     type = FILE_TYPE_DTS;
@@ -264,6 +261,12 @@ get_file_type_internal(filelist_t &file) {
       else if (aac_reader_c::probe_file(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
         type = FILE_TYPE_AAC;
   }
+
+  // File types that are mis-detected sometimes and that aren't supported
+  if (type != FILE_TYPE_IS_UNKNOWN)
+    ;
+  else if (dv_reader_c::probe_file(io, size))
+    type = FILE_TYPE_DV;
 
   return std::make_pair(type, size);
 }

@@ -50,7 +50,7 @@ srt_parser_c::probe(mm_text_io_c *io) {
     io->setFilePointer(0, seek_beginning);
     std::string s;
     do {
-      s = io->getline();
+      s = io->getline(10);
       strip(s);
     } while (s.empty());
 
@@ -58,7 +58,7 @@ srt_parser_c::probe(mm_text_io_c *io) {
     if (!parse_number(s, dummy))
       return false;
 
-    s = io->getline();
+    s = io->getline(100);
     boost::regex timecode_re(SRT_RE_TIMECODE_LINE, boost::regex::perl);
     boost::smatch matches;
     if (!boost::regex_search(s, timecode_re))
@@ -256,7 +256,7 @@ ssa_parser_c::probe(mm_text_io_c *io) {
     io->setFilePointer(0, seek_beginning);
 
     std::string line;
-    while (io->getline2(line)) {
+    while (io->getline2(line, 1000)) {
       ++line_number;
 
       // Read at most 100 lines.

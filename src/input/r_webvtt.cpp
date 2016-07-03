@@ -23,12 +23,10 @@ int
 webvtt_reader_c::probe_file(mm_text_io_c *in,
                             uint64_t) {
   try {
-    auto magic_re = boost::regex{"^WEBVTT(?: .+)?$", boost::regex::perl};
-
     in->setFilePointer(0, seek_beginning);
-    auto line = in->getline();
+    auto line = in->getline(100);
 
-    return boost::regex_match(line, magic_re);
+    return line.find("WEBVTT") == 0;
 
   } catch (...) {
     return -1;

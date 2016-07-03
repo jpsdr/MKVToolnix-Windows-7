@@ -27,12 +27,16 @@ microdvd_reader_c::probe_file(mm_text_io_c *in,
     in->setFilePointer(0, seek_beginning);
 
     std::string line;
-    while (1) {
-      line = in->getline();
+    auto line_num = 0u;
+
+    while (line_num < 20) {
+      line = in->getline(50);
       strip(line);
 
       if (!line.empty())
         break;
+
+      ++line_num;
     }
 
     if (boost::regex_match(line, re))

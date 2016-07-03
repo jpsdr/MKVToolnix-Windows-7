@@ -190,7 +190,7 @@ mm_file_io_c::open(const std::string &path,
 */
 
 std::string
-mm_io_c::getline() {
+mm_io_c::getline(boost::optional<std::size_t> max_chars) {
   char c;
   std::string s;
 
@@ -203,15 +203,19 @@ mm_io_c::getline() {
     if (c == '\n')
       return s;
     s += c;
+
+    if (max_chars && (s.length() >= *max_chars))
+      break;
   }
 
   return s;
 }
 
 bool
-mm_io_c::getline2(std::string &s) {
+mm_io_c::getline2(std::string &s,
+                  boost::optional<std::size_t> max_chars) {
   try {
-    s = getline();
+    s = getline(max_chars);
   } catch(...) {
     return false;
   }
@@ -901,11 +905,15 @@ mm_text_io_c::detect_eol_style() {
 
   save_pos();
 
+  auto num_chars_read = 0u;
+
   while (1) {
     char utf8char[9];
     size_t len = read_next_char(utf8char);
     if (0 == len)
       break;
+
+    ++num_chars_read;
 
     if ((1 == len) && ('\r' == utf8char[0])) {
       found_cr_or_nl          = true;
@@ -917,6 +925,12 @@ mm_text_io_c::detect_eol_style() {
 
     } else if (found_cr_or_nl)
       break;
+
+    else if (num_chars_read > 1000) {
+      m_uses_carriage_returns = false;
+      m_uses_newlines         = true;
+      break;
+    }
   }
 
   restore_pos();
@@ -1030,7 +1044,7 @@ mm_text_io_c::read_next_char(char *buffer) {
 }
 
 std::string
-mm_text_io_c::getline() {
+mm_text_io_c::getline(boost::optional<std::size_t> max_chars) {
   if (eof())
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
 
@@ -1040,6 +1054,7 @@ mm_text_io_c::getline() {
   std::string s;
   char utf8char[9];
   bool previous_was_carriage_return = false;
+  std::size_t num_chars_read{};
 
   while (1) {
     memset(utf8char, 0, 9);
@@ -1068,6 +1083,10 @@ mm_text_io_c::getline() {
 
     previous_was_carriage_return  = false;
     s                            += utf8char;
+    ++num_chars_read;
+
+    if (max_chars && (num_chars_read >= *max_chars))
+      return s;
   }
 }
 
