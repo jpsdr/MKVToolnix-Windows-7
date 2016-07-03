@@ -12,6 +12,7 @@
 
 #include "common/common_pch.h"
 
+// #include "common/logger.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/mm_read_buffer_io.h"
 #include "common/strings/formatting.h"
@@ -100,6 +101,19 @@ open_playlist_file(filelist_t &file,
   return true;
 }
 
+template<typename Treader,
+         typename Tio,
+         typename ...Targs>
+int
+do_probe(Tio &io,
+         Targs && ...args) {
+  // log_it(boost::format("%1%: probe start") % typeid(Treader).name());
+  auto result = Treader::probe_file(&(*io), std::forward<Targs>(args)...);
+  // log_it(boost::format("%1%: probe done") % typeid(Treader).name());
+
+  return result;
+}
+
 static file_type_e
 detect_text_file_formats(filelist_t const &file) {
   auto text_io = mm_text_io_cptr{};
@@ -107,19 +121,19 @@ detect_text_file_formats(filelist_t const &file) {
     text_io        = std::make_shared<mm_text_io_c>(new mm_file_io_c(file.name));
     auto text_size = text_io->get_size();
 
-    if (webvtt_reader_c::probe_file(text_io.get(), text_size))
+    if (do_probe<webvtt_reader_c>(text_io, text_size))
       return FILE_TYPE_WEBVTT;
-    else if (srt_reader_c::probe_file(text_io.get(), text_size))
+    else if (do_probe<srt_reader_c>(text_io, text_size))
       return FILE_TYPE_SRT;
-    else if (ssa_reader_c::probe_file(text_io.get(), text_size))
+    else if (do_probe<ssa_reader_c>(text_io, text_size))
       return FILE_TYPE_SSA;
-    else if (vobsub_reader_c::probe_file(text_io.get(), text_size))
+    else if (do_probe<vobsub_reader_c>(text_io, text_size))
       return FILE_TYPE_VOBSUB;
-    else if (usf_reader_c::probe_file(text_io.get(), text_size))
+    else if (do_probe<usf_reader_c>(text_io, text_size))
       return FILE_TYPE_USF;
 
     // Unsupported text subtitle formats
-    else if (microdvd_reader_c::probe_file(text_io.get(), text_size))
+    else if (do_probe<microdvd_reader_c>(text_io, text_size))
       return FILE_TYPE_MICRODVD;
 
   } catch (mtx::mm_io::exception &ex) {
@@ -150,45 +164,45 @@ get_file_type_internal(filelist_t &file) {
   file_type_e type = FILE_TYPE_IS_UNKNOWN;
 
   // File types that can be detected unambiguously but are not supported
-  if (aac_adif_reader_c::probe_file(io, size))
+  if (do_probe<aac_adif_reader_c>(io, size))
     type = FILE_TYPE_AAC;
-  else if (asf_reader_c::probe_file(io, size))
+  else if (do_probe<asf_reader_c>(io, size))
     type = FILE_TYPE_ASF;
-  else if (cdxa_reader_c::probe_file(io, size))
+  else if (do_probe<cdxa_reader_c>(io, size))
     type = FILE_TYPE_CDXA;
-  else if (flv_reader_c::probe_file(io, size))
+  else if (do_probe<flv_reader_c>(io, size))
     type = FILE_TYPE_FLV;
-  else if (hdsub_reader_c::probe_file(io, size))
+  else if (do_probe<hdsub_reader_c>(io, size))
     type = FILE_TYPE_HDSUB;
 
   // File types that can be detected unambiguously
-  else if (avi_reader_c::probe_file(io, size))
+  else if (do_probe<avi_reader_c>(io, size))
     type = FILE_TYPE_AVI;
-  else if (kax_reader_c::probe_file(io, size))
+  else if (do_probe<kax_reader_c>(io, size))
     type = FILE_TYPE_MATROSKA;
-  else if (wav_reader_c::probe_file(io, size))
+  else if (do_probe<wav_reader_c>(io, size))
     type = FILE_TYPE_WAV;
-  else if (ogm_reader_c::probe_file(io, size))
+  else if (do_probe<ogm_reader_c>(io, size))
     type = FILE_TYPE_OGM;
-  else if (flac_reader_c::probe_file(io, size))
+  else if (do_probe<flac_reader_c>(io, size))
     type = FILE_TYPE_FLAC;
-  else if (pgssup_reader_c::probe_file(io, size))
+  else if (do_probe<pgssup_reader_c>(io, size))
     type = FILE_TYPE_PGSSUP;
-  else if (real_reader_c::probe_file(io, size))
+  else if (do_probe<real_reader_c>(io, size))
     type = FILE_TYPE_REAL;
-  else if (qtmp4_reader_c::probe_file(io, size))
+  else if (do_probe<qtmp4_reader_c>(io, size))
     type = FILE_TYPE_QTMP4;
-  else if (tta_reader_c::probe_file(io, size))
+  else if (do_probe<tta_reader_c>(io, size))
     type = FILE_TYPE_TTA;
-  else if (vc1_es_reader_c::probe_file(io, size))
+  else if (do_probe<vc1_es_reader_c>(io, size))
     type = FILE_TYPE_VC1;
-  else if (wavpack_reader_c::probe_file(io, size))
+  else if (do_probe<wavpack_reader_c>(io, size))
     type = FILE_TYPE_WAVPACK4;
-  else if (ivf_reader_c::probe_file(io, size))
+  else if (do_probe<ivf_reader_c>(io, size))
     type = FILE_TYPE_IVF;
-  else if (coreaudio_reader_c::probe_file(io, size))
+  else if (do_probe<coreaudio_reader_c>(io, size))
     type = FILE_TYPE_COREAUDIO;
-  else if (dirac_es_reader_c::probe_file(io, size))
+  else if (do_probe<dirac_es_reader_c>(io, size))
     type = FILE_TYPE_DIRAC;
 
   // All text file types (subtitles).
@@ -198,11 +212,11 @@ get_file_type_internal(filelist_t &file) {
   if (FILE_TYPE_IS_UNKNOWN != type)
     ;                           // intentional fall-through
   // File types that are mis-detected sometimes
-  else if (dts_reader_c::probe_file(io, size, true))
+  else if (do_probe<dts_reader_c>(io, size, true))
     type = FILE_TYPE_DTS;
-  else if (mpeg_ts_reader_c::probe_file(io, size))
+  else if (do_probe<mpeg_ts_reader_c>(io, size))
     type = FILE_TYPE_MPEG_TS;
-  else if (mpeg_ps_reader_c::probe_file(io, size))
+  else if (do_probe<mpeg_ps_reader_c>(io, size))
     type = FILE_TYPE_MPEG_PS;
   else {
     // File types which are the same in raw format and in other container formats.
@@ -212,39 +226,39 @@ get_file_type_internal(filelist_t &file) {
 
     int i;
     for (i = 0; (0 != s_probe_sizes[i]) && (FILE_TYPE_IS_UNKNOWN == type); ++i)
-      if (mp3_reader_c::probe_file(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
+      if (do_probe<mp3_reader_c>(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
         type = FILE_TYPE_MP3;
-      else if (ac3_reader_c::probe_file(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
+      else if (do_probe<ac3_reader_c>(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
         type = FILE_TYPE_AC3;
-      else if (aac_reader_c::probe_file(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
+      else if (do_probe<aac_reader_c>(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
         type = FILE_TYPE_AAC;
   }
   // More file types with detection issues.
   if (type != FILE_TYPE_IS_UNKNOWN)
     ;
-  else if (truehd_reader_c::probe_file(io, size))
+  else if (do_probe<truehd_reader_c>(io, size))
     type = FILE_TYPE_TRUEHD;
-  else if (dts_reader_c::probe_file(io, size))
+  else if (do_probe<dts_reader_c>(io, size))
     type = FILE_TYPE_DTS;
-  else if (vobbtn_reader_c::probe_file(io, size))
+  else if (do_probe<vobbtn_reader_c>(io, size))
     type = FILE_TYPE_VOBBTN;
 
   // Try some more of the raw audio formats before trying elementary
   // stream video formats (MPEG 1/2, AVC/h.264, HEVC/h.265; those
   // often enough simply work). However, require that the first frame
   // starts at the beginning of the file.
-  else if (mp3_reader_c::probe_file(io, size, 32 * 1024, 1, true))
+  else if (do_probe<mp3_reader_c>(io, size, 32 * 1024, 1, true))
     type = FILE_TYPE_MP3;
-  else if (ac3_reader_c::probe_file(io, size, 32 * 1024, 1, true))
+  else if (do_probe<ac3_reader_c>(io, size, 32 * 1024, 1, true))
     type = FILE_TYPE_AC3;
-  else if (aac_reader_c::probe_file(io, size, 32 * 1024, 1, true))
+  else if (do_probe<aac_reader_c>(io, size, 32 * 1024, 1, true))
     type = FILE_TYPE_AAC;
 
-  else if (mpeg_es_reader_c::probe_file(io, size))
+  else if (do_probe<mpeg_es_reader_c>(io, size))
     type = FILE_TYPE_MPEG_ES;
-  else if (avc_es_reader_c::probe_file(io, size))
+  else if (do_probe<avc_es_reader_c>(io, size))
     type = FILE_TYPE_AVC_ES;
-  else if (hevc_es_reader_c::probe_file(io, size))
+  else if (do_probe<hevc_es_reader_c>(io, size))
     type = FILE_TYPE_HEVC_ES;
   else {
     // File types which are the same in raw format and in other container formats.
@@ -254,18 +268,18 @@ get_file_type_internal(filelist_t &file) {
 
     int i;
     for (i = 0; (0 != s_probe_sizes[i]) && (FILE_TYPE_IS_UNKNOWN == type); ++i)
-      if (mp3_reader_c::probe_file(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
+      if (do_probe<mp3_reader_c>(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
         type = FILE_TYPE_MP3;
-      else if (ac3_reader_c::probe_file(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
+      else if (do_probe<ac3_reader_c>(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
         type = FILE_TYPE_AC3;
-      else if (aac_reader_c::probe_file(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
+      else if (do_probe<aac_reader_c>(io, size, s_probe_sizes[i], s_probe_num_required_consecutive_packets))
         type = FILE_TYPE_AAC;
   }
 
   // File types that are mis-detected sometimes and that aren't supported
   if (type != FILE_TYPE_IS_UNKNOWN)
     ;
-  else if (dv_reader_c::probe_file(io, size))
+  else if (do_probe<dv_reader_c>(io, size))
     type = FILE_TYPE_DV;
 
   return std::make_pair(type, size);
