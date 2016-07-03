@@ -13,6 +13,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx { namespace gui { namespace Util {
 
@@ -248,7 +249,7 @@ Settings::loadDefaults(QSettings &reg,
   m_defaultSubtitleTrackLanguage       = reg.value("defaultSubtitleTrackLanguage", Q("und")).toString();
   m_whenToSetDefaultLanguage           = static_cast<SetDefaultLanguagePolicy>(reg.value("whenToSetDefaultLanguage",     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
   m_defaultChapterLanguage             = reg.value("defaultChapterLanguage", Q("und")).toString();
-  m_defaultChapterCountry              = reg.value("defaultChapterCountry").toString();
+  m_defaultChapterCountry              = Util::mapToTopLevelCountryCode(reg.value("defaultChapterCountry").toString());
   auto subtitleCharset                 = reg.value("defaultSubtitleCharset").toString();
   m_defaultSubtitleCharset             = guiVersion.isEmpty() && (subtitleCharset == Q("ISO-8859-15")) ? Q("") : subtitleCharset; // Fix for a bug in versions prior to 8.2.0.
   m_defaultAdditionalMergeOptions      = reg.value("defaultAdditionalMergeOptions").toString();
@@ -274,7 +275,7 @@ Settings::loadSplitterSizes(QSettings &reg) {
 
   if (m_oftenUsedCountries.isEmpty())
     for (auto const &countryCode : g_popular_country_codes)
-      m_oftenUsedCountries << Q(countryCode);
+      m_oftenUsedCountries << Util::mapToTopLevelCountryCode(Q(countryCode));
 
   if (m_oftenUsedCharacterSets.isEmpty())
     for (auto const &characterSet : g_popular_character_sets)

@@ -49,7 +49,7 @@ NameModel::setRowText(QList<QStandardItem *> const &rowItems) {
 
   rowItems[0]->setText(Q(GetChildValue<KaxChapterString>(display)));
   rowItems[1]->setText(App::descriptionFromIso639_2LanguageCode(Q(FindChildValue<KaxChapterLanguage>(display, std::string{"eng"}))));
-  rowItems[2]->setText(App::descriptionFromIso3166_1Alpha2CountryCode(Q(FindChildValue<KaxChapterCountry>(display, std::string{""}))));
+  rowItems[2]->setText(App::descriptionFromTopLevelDomainCountryCode(Q(FindChildValue<KaxChapterCountry>(display, std::string{""}))));
 }
 
 QList<QStandardItem *>

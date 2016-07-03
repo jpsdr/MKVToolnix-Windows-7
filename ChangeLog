@@ -1,5 +1,12 @@
 2016-07-03  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge, mkvextract, MKVToolNix GUI: bug fix: several fixes to
+        the handling of country codes. The list has been updated to
+        reflect the currently valid top level domain country
+        codes. Deprecated codes such as "gb" for "Great Britain" are now
+        mapped to their updated values ("uk" for "United Kingdom" in this
+        case). Fixes #1731.
+
         * mkvmerge: WavPack4 bug fix: relaxed the stream detection
         criteria to only require the major version to be 4 and not to
         check the minor version. Fixes #1720.

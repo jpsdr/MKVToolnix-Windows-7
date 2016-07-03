@@ -1440,6 +1440,7 @@ render_chapters() {
   }
 
   fix_mandatory_elements(s_chapters_in_this_file.get());
+  fix_chapter_country_codes(*s_chapters_in_this_file);
 
   auto replaced = false;
   if (s_kax_chapters_void)

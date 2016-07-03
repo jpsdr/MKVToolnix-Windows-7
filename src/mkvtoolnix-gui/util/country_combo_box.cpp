@@ -32,7 +32,7 @@ CountryComboBox::setup(bool withEmpty,
   if (withEmpty)
     addItem(emptyTitle, Q(""));
 
-  auto &commonCountries = App::commonIso3166_1Alpha2Countries();
+  auto &commonCountries = App::commonTopLevelDomainCountryCodes();
   if (!commonCountries.empty()) {
     for (auto const &country : commonCountries)
       addItem(country.first, country.second);
@@ -40,7 +40,7 @@ CountryComboBox::setup(bool withEmpty,
     insertSeparator(commonCountries.size() + (withEmpty ? 1 : 0));
   }
 
-  for (auto const &country : App::iso3166_1Alpha2Countries())
+  for (auto const &country : App::topLevelDomainCountryCodes())
     addItem(country.first, country.second);
 
   view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);

@@ -148,8 +148,16 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
   }
 
   auto ccountry = FindChild<KaxChapterCountry>(display);
-  if (ccountry && !is_valid_cctld(std::string(*ccountry)))
-    throw conversion_x{boost::format(Y("'%1%' is not a valid ccTLD country code.")) % std::string(*ccountry)};
+  if (!ccountry)
+    return;
+
+  auto country = std::string{*ccountry};
+  auto cctld  = map_to_cctld(country);
+  if (!cctld)
+    throw conversion_x{boost::format(Y("'%1%' is not a valid ccTLD country code.")) % country};
+
+  if (country != *cctld)
+    ccountry->SetValue(*cctld);
 }
 
 void

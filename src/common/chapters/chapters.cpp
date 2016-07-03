@@ -22,6 +22,7 @@
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/error.h"
+#include "common/extern_data.h"
 #include "common/locale.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
@@ -1139,4 +1140,23 @@ format_chapter_name_template(std::string const &name_template,
   });
 
   return name;
+}
+
+void
+fix_chapter_country_codes(EbmlMaster &chapters) {
+  for (auto const &child : chapters) {
+    auto sub_master = dynamic_cast<EbmlMaster *>(child);
+    if (sub_master) {
+      fix_chapter_country_codes(*sub_master);
+      continue;
+    }
+
+    auto ccountry = dynamic_cast<KaxChapterCountry *>(child);
+    if (!ccountry)
+      continue;
+
+    auto mapped_cctld = map_to_cctld(std::string{*ccountry});
+    if (mapped_cctld)
+      ccountry->SetValue(*mapped_cctld);
+  }
 }

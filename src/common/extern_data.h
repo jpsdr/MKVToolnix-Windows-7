@@ -27,16 +27,16 @@ struct mime_type_t {
   }
 };
 
-struct iso3166_1alpha_2_t {
+struct cctld_t {
   std::string code, country;
 };
 
 extern std::vector<std::string> const sub_charsets, g_popular_character_sets;
-extern std::vector<iso3166_1alpha_2_t> const g_cctlds;
+extern std::vector<cctld_t> const g_cctlds;
 extern std::vector<std::string> const g_popular_country_codes;
 extern std::vector<mime_type_t> const mime_types;
 
 std::string guess_mime_type(std::string ext, bool is_file);
-bool is_valid_cctld(const std::string &s);
+boost::optional<std::string> map_to_cctld(std::string const &s);
 
 #endif // MTX_COMMON_EXTERN_DATA_H

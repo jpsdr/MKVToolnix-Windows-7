@@ -36,6 +36,8 @@ QString displayableDate(QDateTime const &date);
 
 QString itemFlagsToString(Qt::ItemFlags const &flags);
 
+QString mapToTopLevelCountryCode(QString const &countryCode);
+
 class DeferredRegularExpression {
 private:
   std::unique_ptr<QRegularExpression> m_re;

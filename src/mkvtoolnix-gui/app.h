@@ -16,8 +16,8 @@ namespace mtx { namespace gui {
 
 using Iso639Language     = std::pair<QString, QString>;
 using Iso639LanguageList = std::vector<Iso639Language>;
-using Iso3166Country     = std::pair<QString, QString>;
-using Iso3166CountryList = std::vector<Iso3166Country>;
+using TopLevelDomainCountryCode     = std::pair<QString, QString>;
+using TopLevelDomainCountryCodeList = std::vector<TopLevelDomainCountryCode>;
 using CharacterSetList   = std::vector<QString>;
 
 class App : public QApplication {
@@ -72,16 +72,16 @@ public:
 
   static Iso639LanguageList const &iso639Languages();
   static Iso639LanguageList const &commonIso639Languages();
-  static Iso3166CountryList const &iso3166_1Alpha2Countries();
-  static Iso3166CountryList const &commonIso3166_1Alpha2Countries();
+  static TopLevelDomainCountryCodeList const &topLevelDomainCountryCodes();
+  static TopLevelDomainCountryCodeList const &commonTopLevelDomainCountryCodes();
   static QString const &descriptionFromIso639_2LanguageCode(QString const &code);
-  static QString const &descriptionFromIso3166_1Alpha2CountryCode(QString const &code);
+  static QString const &descriptionFromTopLevelDomainCountryCode(QString const &code);
   static CharacterSetList const &characterSets();
   static CharacterSetList const &commonCharacterSets();
 
   static void reinitializeLanguageLists();
   static void initializeLanguageLists();
-  static void initializeIso3166_1Alpha2Countries();
+  static void initializeTopLevelDomainCountryCodes();
   static void initializeIso639Languages();
   static void initializeCharacterSets();
 

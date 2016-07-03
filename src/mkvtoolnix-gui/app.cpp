@@ -25,9 +25,9 @@
 namespace mtx { namespace gui {
 
 static Iso639LanguageList s_iso639Languages, s_commonIso639Languages;
-static Iso3166CountryList s_iso3166_1Alpha2Countries, s_commonIso3166_1Alpha2Countries;
+static TopLevelDomainCountryCodeList s_topLevelDomainCountryCodes, s_commonTopLevelDomainCountryCodes;
 static CharacterSetList s_characterSets, s_commonCharacterSets;
-static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_iso3166_1Alpha2CountryCodeToDescription;
+static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_topLevelDomainCountryCodeToDescription;
 
 static boost::optional<bool> s_is_installed;
 
@@ -168,10 +168,10 @@ void
 App::reinitializeLanguageLists() {
   s_iso639Languages.clear();
   s_commonIso639Languages.clear();
-  s_iso3166_1Alpha2Countries.clear();
-  s_commonIso3166_1Alpha2Countries.clear();
+  s_topLevelDomainCountryCodes.clear();
+  s_commonTopLevelDomainCountryCodes.clear();
   s_iso639_2LanguageCodeToDescription.clear();
-  s_iso3166_1Alpha2CountryCodeToDescription.clear();
+  s_topLevelDomainCountryCodeToDescription.clear();
   s_characterSets.clear();
   s_commonCharacterSets.clear();
 
@@ -184,7 +184,7 @@ App::initializeLanguageLists() {
     return;
 
   initializeIso639Languages();
-  initializeIso3166_1Alpha2Countries();
+  initializeTopLevelDomainCountryCodes();
   initializeCharacterSets();
 }
 
@@ -212,26 +212,26 @@ App::initializeIso639Languages() {
 }
 
 void
-App::initializeIso3166_1Alpha2Countries() {
+App::initializeTopLevelDomainCountryCodes() {
   auto &cfg = Util::Settings::get();
 
-  s_iso3166_1Alpha2Countries.reserve(g_cctlds.size());
-  s_commonIso3166_1Alpha2Countries.reserve(g_cctlds.size());
+  s_topLevelDomainCountryCodes.reserve(g_cctlds.size());
+  s_commonTopLevelDomainCountryCodes.reserve(g_cctlds.size());
 
   for (auto const &country : g_cctlds) {
     auto countryCode = Q(country.code);
     auto description = Q("%1 (%2)").arg(Q(country.country)).arg(countryCode);
     auto isCommon    = cfg.m_oftenUsedCountries.indexOf(countryCode) != -1;
 
-    s_iso3166_1Alpha2Countries.emplace_back(description, countryCode);
+    s_topLevelDomainCountryCodes.emplace_back(description, countryCode);
     if (isCommon)
-      s_commonIso3166_1Alpha2Countries.emplace_back(description, countryCode);
+      s_commonTopLevelDomainCountryCodes.emplace_back(description, countryCode);
 
-    s_iso3166_1Alpha2CountryCodeToDescription[countryCode] = description;
+    s_topLevelDomainCountryCodeToDescription[countryCode] = description;
   }
 
-  brng::sort(s_iso3166_1Alpha2Countries);
-  brng::sort(s_commonIso3166_1Alpha2Countries);
+  brng::sort(s_topLevelDomainCountryCodes);
+  brng::sort(s_commonTopLevelDomainCountryCodes);
 }
 
 void
@@ -265,16 +265,16 @@ App::commonIso639Languages() {
   return s_commonIso639Languages;
 }
 
-Iso3166CountryList const &
-App::iso3166_1Alpha2Countries() {
+TopLevelDomainCountryCodeList const &
+App::topLevelDomainCountryCodes() {
   initializeLanguageLists();
-  return s_iso3166_1Alpha2Countries;
+  return s_topLevelDomainCountryCodes;
 }
 
-Iso3166CountryList const &
-App::commonIso3166_1Alpha2Countries() {
+TopLevelDomainCountryCodeList const &
+App::commonTopLevelDomainCountryCodes() {
   initializeLanguageLists();
-  return s_commonIso3166_1Alpha2Countries;
+  return s_commonTopLevelDomainCountryCodes;
 }
 
 CharacterSetList const &
@@ -296,9 +296,9 @@ App::descriptionFromIso639_2LanguageCode(QString const &code) {
 }
 
 QString const &
-App::descriptionFromIso3166_1Alpha2CountryCode(QString const &code) {
+App::descriptionFromTopLevelDomainCountryCode(QString const &code) {
   initializeLanguageLists();
-  return s_iso3166_1Alpha2CountryCodeToDescription.contains(code) ? s_iso3166_1Alpha2CountryCodeToDescription[code] : code;
+  return s_topLevelDomainCountryCodeToDescription.contains(code) ? s_topLevelDomainCountryCodeToDescription[code] : code;
 }
 
 bool

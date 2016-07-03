@@ -435,6 +435,8 @@ Tab::load() {
 void
 Tab::chaptersLoaded(ChaptersPtr const &chapters,
                     bool canBeWritten) {
+  fix_chapter_country_codes(*chapters);
+
   if (!m_fileName.isEmpty())
     m_fileModificationTime = QFileInfo{m_fileName}.lastModified();
 

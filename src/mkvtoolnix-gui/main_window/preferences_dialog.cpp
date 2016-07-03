@@ -408,7 +408,7 @@ PreferencesDialog::setupCommonLanguages() {
 
 void
 PreferencesDialog::setupCommonCountries() {
-  auto &allCountries = App::iso3166_1Alpha2Countries();
+  auto &allCountries = App::topLevelDomainCountryCodes();
 
   ui->tbOftenUsedCountries->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allCountries)), m_cfg.m_oftenUsedCountries);
 }

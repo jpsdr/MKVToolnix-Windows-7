@@ -95,4 +95,6 @@ void align_chapter_edition_uids(KaxChapters &reference, KaxChapters &modify);
 
 std::string format_chapter_name_template(std::string const &name_template, int chapter_number, timestamp_c const &start_timestamp);
 
+void fix_chapter_country_codes(EbmlMaster &chapters);
+
 #endif // MTX_COMMON_CHAPTERS_H
