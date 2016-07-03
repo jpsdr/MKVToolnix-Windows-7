@@ -83,8 +83,7 @@ read_next_header(mm_io_c &in,
     sp = buffer;
 
     if ((*sp++ == 'w') && (*sp == 'v') && (*++sp == 'p') && (*++sp == 'k') &&
-        !(*++sp & 1) && (sp[2] < 16) && !sp[3] && (sp[5] == 4) &&
-        (sp[4] >= 2) && (sp[4] <= 0xf)) {
+        !(*++sp & 1) && (sp[2] < 16) && !sp[3] && (sp[5] == 4)) {
       memcpy(wphdr, buffer, sizeof(*wphdr));
       little_endian_to_native(wphdr, "4LS2LLLLL");
       return bytes_skipped;

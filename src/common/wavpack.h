@@ -27,7 +27,7 @@
 struct PACKED_STRUCTURE wavpack_header_t {
   char ck_id [4];         // "wvpk"
   uint32_t ck_size;       // size of entire frame (minus 8, of course)
-  uint16_t version;       // 0x403 for now
+  uint16_t version;       // maximum of 0x410 as of 2016-07-03
   uint8_t track_no;       // track number (0 if not used, like now)
   uint8_t index_no;       // remember these? (0 if not used, like now)
   uint32_t total_samples; // for entire file (-1 if unknown)
