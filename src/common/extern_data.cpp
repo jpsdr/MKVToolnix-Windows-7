@@ -2614,7 +2614,7 @@ std::vector<cctld_t> const g_cctlds = {
   { "zw", "Zimbabwe"                                     },
 };
 
-std::vector<std::string> const g_popular_country_codes{ "cn", "de", "es", "fi", "fr", "gb", "it", "jp", "nl", "no", "pt", "ru", "se", "us" };
+std::vector<std::string> const g_popular_country_codes{ "cn", "de", "es", "fi", "fr", "it", "jp", "nl", "no", "pt", "ru", "se", "uk", "us" };
 
 static std::map<std::string, std::string> const s_deprecated_cctlds{
   { "gb", "uk" },
