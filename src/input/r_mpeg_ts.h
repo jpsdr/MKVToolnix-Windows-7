@@ -280,8 +280,8 @@ public:
   uint16_t pid;
   boost::optional<int> m_ttx_wanted_page;
   bool data_ready;
-  int pes_payload_size;             // size of the current PID payload in bytes
-  byte_buffer_cptr pes_payload;     // buffer with the current PID payload
+  std::size_t pes_payload_size_to_read; // size of the current PID payload in bytes
+  byte_buffer_cptr pes_payload_read;    // buffer with the current PID payload
 
   bool probed_ok;
   int ptzr;                         // the actual packetizer instance
@@ -326,8 +326,8 @@ public:
     , type(ES_UNKNOWN)
     , pid(0)
     , data_ready(false)
-    , pes_payload_size(0)
-    , pes_payload(new byte_buffer_c)
+    , pes_payload_size_to_read{}
+    , pes_payload_read(new byte_buffer_c)
     , probed_ok(false)
     , ptzr(-1)
     , m_timestamp_wrap_add{timestamp_c::ns(0)}
