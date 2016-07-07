@@ -282,7 +282,6 @@ public:
   bool data_ready;
   int pes_payload_size;             // size of the current PID payload in bytes
   byte_buffer_cptr pes_payload;     // buffer with the current PID payload
-  unsigned char continuity_counter; // check for PID continuity
 
   bool probed_ok;
   int ptzr;                         // the actual packetizer instance
@@ -329,7 +328,6 @@ public:
     , data_ready(false)
     , pes_payload_size(0)
     , pes_payload(new byte_buffer_c)
-    , continuity_counter(0)
     , probed_ok(false)
     , ptzr(-1)
     , m_timestamp_wrap_add{timestamp_c::ns(0)}

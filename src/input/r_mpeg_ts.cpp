@@ -1240,18 +1240,6 @@ mpeg_ts_reader_c::parse_packet(unsigned char *buf) {
     return false;
 
   else {
-    // Check continuity counter
-    if (!adf_discontinuity_indicator) {
-      track->continuity_counter++;
-      track->continuity_counter %= 16;
-      if (hdr->get_continuity_counter() != track->continuity_counter) {
-        mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_packet: Continuity error on PID: %1%. Continue anyway...\n") % table_pid);
-        track->continuity_counter = hdr->get_continuity_counter();
-      }
-
-    } else
-      track->continuity_counter = hdr->get_continuity_counter();
-
     // If PES payload size known, prevent to copy more TS payload than actually needed
     if (   (track->pes_payload_size != 0)
         && (track->pes_payload_size <  static_cast<int>(ts_payload_size + track->pes_payload->get_size())))
@@ -1438,8 +1426,6 @@ mpeg_ts_reader_c::parse_start_unit_packet(mpeg_ts_track_ptr &track,
       mxdebug_if(m_debug_packet, boost::format("mpeg_ts_reader_c::parse_start_unit_packet: PID %2% PTS/DTS found: %1%\n") % track->m_timestamp % track->pid);
     }
   }
-
-  track->continuity_counter = ts_packet_header->get_continuity_counter();
 
   if (   (track->pes_payload_size != 0)
       && (track->pes_payload_size <  static_cast<int>(ts_payload_size + track->pes_payload->get_size())))
