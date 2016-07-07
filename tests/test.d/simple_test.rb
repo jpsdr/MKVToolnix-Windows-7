@@ -336,4 +336,19 @@ class SimpleTest
 
     @@json_schema_identification = schema
   end
+
+  def json_summarize_tracks json
+    basics     = %w{id type codec}
+    properties = %w{language number audio_channels audio_sampling_frequency pixel_dimensions}
+
+    json["tracks"].
+      map do |t|
+        (basics.map { |b| t[b] } +
+         properties.map { |p| t["properties"][p] }).
+        reject(&:nil?).
+        join("+").
+        gsub(%r{[:/+-]+}, "_")
+      end.
+      join("/")
+  end
 end

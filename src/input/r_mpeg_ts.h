@@ -82,61 +82,51 @@ enum mpeg_ts_stream_type_e {
 // TS packet header
 struct PACKED_STRUCTURE mpeg_ts_packet_header_t {
   unsigned char sync_byte;
-  unsigned char pid_msb_flags1; // msb:5 transport_priority:1 payload_unit_start_indicator:1 transport_error_indicator:1
+  unsigned char pid_msb_flags1; // 0x80:transport_error_indicator 0x40:payload_unit_start_indicator 0x20:transport_priority 0x1f:pid_msb
   unsigned char pid_lsb;
-  unsigned char flags2;         // continuity_counter:4 adaptation_field_control:2 transport_scrambling_control:2
+  unsigned char flags2;         // 0xc0:transport_scrambling_control 0x20:adaptation_field_flag 0x10:payload_flag 0x0f:continuity_counter
 
-  uint16_t get_pid() {
+  uint16_t get_pid() const {
     return ((static_cast<uint16_t>(pid_msb_flags1) & 0x1f) << 8) | static_cast<uint16_t>(pid_lsb);
   }
 
-  unsigned char get_payload_unit_start_indicator() {
-    return (pid_msb_flags1 & 0x40) >> 6;
+  bool is_payload_unit_start() const {
+    return (pid_msb_flags1 & 0x40) == 0x40;
   }
 
-  unsigned char get_transport_error_indicator() {
-    return (pid_msb_flags1 & 0x80) >> 7;
+  bool has_transport_error() const {
+    return (pid_msb_flags1 & 0x80) == 0x80;
   }
 
-  unsigned char get_continuity_counter() {
-    return flags2 & 0x0f;
+  bool has_adaptation_field() const {
+    return (flags2 & 0x20) == 0x20;
   }
 
-  unsigned char get_adaptation_field_control() {
-    return (flags2 & 0x30) >> 4;
-  }
-};
-
-// Adaptation field
-struct PACKED_STRUCTURE mpeg_ts_adaptation_field_t {
-  unsigned char length;
-  unsigned char flags;  // extension:1 transport_private_data:1 splicing_point:1 opcr:1 pcr:1 elementary_stream_priority_indicator:1 random_access_indicator:1 discontinuity_indicator:1
-
-  unsigned char get_discontinuity_indicator() {
-    return (flags & 80) >> 7;
+  bool has_payload() const {
+    return (flags2 & 0x10) == 0x10;
   }
 };
 
 // PAT header
 struct PACKED_STRUCTURE mpeg_ts_pat_t {
   unsigned char table_id;
-  unsigned char section_length_msb_flags1; // msb:4 reserved:2 zero:1 section_syntax_indicator:1
+  unsigned char section_length_msb_flags1; // 0x80:section_syntax_indicator 0x40:zero 0x30:reserved 0x0f:section_length_msb
   unsigned char section_length_lsb;
   unsigned char transport_stream_id_msb;
   unsigned char transport_stream_id_lsb;
-  unsigned char flags2; // current_next_indicator:1 version_number:5 reserved2:2
+  unsigned char flags2;                    // 0xc0:reserved2 0x3e:version 0x01:current_next_indicator
   unsigned char section_number;
   unsigned char last_section_number;
 
-  uint16_t get_section_length() {
+  uint16_t get_section_length() const {
     return ((static_cast<uint16_t>(section_length_msb_flags1) & 0x0f) << 8) | static_cast<uint16_t>(section_length_lsb);
   }
 
-  unsigned char get_section_syntax_indicator() {
+  unsigned char get_section_syntax_indicator() const {
     return (section_length_msb_flags1 & 0x80) >> 7;
   }
 
-  unsigned char get_current_next_indicator() {
+  unsigned char get_current_next_indicator() const {
     return flags2 & 0x01;
   }
 };
@@ -147,11 +137,11 @@ struct PACKED_STRUCTURE mpeg_ts_pat_section_t {
   unsigned char pid_msb_flags;
   unsigned char pid_lsb;
 
-  uint16_t get_pid() {
+  uint16_t get_pid() const {
     return ((static_cast<uint16_t>(pid_msb_flags) & 0x1f) << 8) | static_cast<uint16_t>(pid_lsb);
   }
 
-  uint16_t get_program_number() {
+  uint16_t get_program_number() const {
     return get_uint16_be(&program_number);
   }
 };
@@ -159,38 +149,38 @@ struct PACKED_STRUCTURE mpeg_ts_pat_section_t {
 // PMT header
 struct PACKED_STRUCTURE mpeg_ts_pmt_t {
   unsigned char table_id;
-  unsigned char section_length_msb_flags1; // msb:4 reserved:2 zero:1 section_syntax_indicator:1
+  unsigned char section_length_msb_flags1; // 0x80:section_syntax_indicator 0x40:zero 0x30:reserved 0x0f:section_length_msb
   unsigned char section_length_lsb;
   uint16_t program_number;
-  unsigned char flags2; // current_next_indicator:1 version_number:5 reserved2:2
+  unsigned char flags2;                    // 0xc0:reserved2 0x3e:version_number 0x01:current_next_indicator
   unsigned char section_number;
   unsigned char last_section_number;
   unsigned char pcr_pid_msb_flags;
   unsigned char pcr_pid_lsb;
-  unsigned char program_info_length_msb_reserved; // msb:4 reserved4:4
+  unsigned char program_info_length_msb_reserved; // 0xf0:reserved4 0x0f:program_info_length_msb
   unsigned char program_info_length_lsb;
 
-  uint16_t get_pcr_pid() {
+  uint16_t get_pcr_pid() const {
     return ((static_cast<uint16_t>(pcr_pid_msb_flags) & 0x1f) << 8) | static_cast<uint16_t>(pcr_pid_lsb);
   }
 
-  uint16_t get_section_length() {
+  uint16_t get_section_length() const {
     return ((static_cast<uint16_t>(section_length_msb_flags1) & 0x0f) << 8) | static_cast<uint16_t>(section_length_lsb);
   }
 
-  uint16_t get_program_info_length() {
+  uint16_t get_program_info_length() const {
     return ((static_cast<uint16_t>(program_info_length_msb_reserved) & 0x0f) << 8) | static_cast<uint16_t>(program_info_length_lsb);
   }
 
-  unsigned char get_section_syntax_indicator() {
+  unsigned char get_section_syntax_indicator() const {
     return (section_length_msb_flags1 & 0x80) >> 7;
   }
 
-  unsigned char get_current_next_indicator() {
+  unsigned char get_current_next_indicator() const {
     return flags2 & 0x01;
   }
 
-  uint16_t get_program_number() {
+  uint16_t get_program_number() const {
     return get_uint16_be(&program_number);
   }
 };
@@ -209,11 +199,11 @@ struct PACKED_STRUCTURE mpeg_ts_pmt_pid_info_t {
   unsigned char es_info_length_msb_flags;
   unsigned char es_info_length_lsb;
 
-  uint16_t get_pid() {
+  uint16_t get_pid() const {
     return ((static_cast<uint16_t>(pid_msb_flags) & 0x1f) << 8) | static_cast<uint16_t>(pid_lsb);
   }
 
-  uint16_t get_es_info_length() {
+  uint16_t get_es_info_length() const {
     return ((static_cast<uint16_t>(es_info_length_msb_flags) & 0x0f) << 8) | static_cast<uint16_t>(es_info_length_lsb);
   }
 };
@@ -223,40 +213,40 @@ struct PACKED_STRUCTURE mpeg_ts_pes_header_t {
   unsigned char packet_start_code[3];
   unsigned char stream_id;
   uint16_t pes_packet_length;
-  unsigned char flags1; // original_or_copy:1 copyright:1 data_alignment_indicator:1 pes_priority:1 pes_scrambling_control:2 onezero:2
-  unsigned char flags2; // pes_extension:1 pes_crc:1 additional_copy_info:1 dsm_trick_mode:1 es_rate:1 escr:1 pts_dts_flags:2
+  unsigned char flags1; // 0xc0:onezero 0x30:pes_scrambling_control 0x08:pes_priority 0x04:data_alignment_indicator  0x02:copyright 0x01:original_or_copy
+  unsigned char flags2; // 0xc0:pts_dts_flags 0x20:escr 0x10:es_rate 0x08:dsm_trick_mode 0x04:additional_copy_info 0x02:pes_crc 0x01:pes_extension
   unsigned char pes_header_data_length;
   unsigned char pts_dts;
 
-  uint16_t get_pes_packet_length() {
+  uint16_t get_pes_packet_length() const {
     return get_uint16_be(&pes_packet_length);
   }
 
-  unsigned char get_pes_extension() {
+  unsigned char get_pes_extension() const{
     return flags2 & 0x01;
   }
 
-  unsigned char get_pes_crc() {
+  unsigned char get_pes_crc() const {
     return (flags2 & 0x02) >> 1;
   }
 
-  unsigned char get_additional_copy_info() {
+  unsigned char get_additional_copy_info() const{
     return (flags2 & 0x04) >> 2;
   }
 
-  unsigned char get_dsm_trick_mode() {
+  unsigned char get_dsm_trick_mode() const {
     return (flags2 & 0x08) >> 3;
   }
 
-  unsigned char get_es_rate() {
+  unsigned char get_es_rate() const {
     return (flags2 & 0x10) >> 4;
   }
 
-  unsigned char get_escr() {
+  unsigned char get_escr() const {
     return (flags2 & 0x20) >> 5;
   }
 
-  unsigned char get_pts_dts_flags() {
+  unsigned char get_pts_dts_flags() const {
     return (flags2 & 0xc0) >> 6;
   }
 };
@@ -279,7 +269,6 @@ public:
   codec_c codec;
   uint16_t pid;
   boost::optional<int> m_ttx_wanted_page;
-  bool data_ready;
   std::size_t pes_payload_size_to_read; // size of the current PID payload in bytes
   byte_buffer_cptr pes_payload_read;    // buffer with the current PID payload
 
@@ -325,7 +314,6 @@ public:
     , processed(false)
     , type(ES_UNKNOWN)
     , pid(0)
-    , data_ready(false)
     , pes_payload_size_to_read{}
     , pes_payload_read(new byte_buffer_c)
     , probed_ok(false)
@@ -358,6 +346,10 @@ public:
   void send_to_packetizer();
   void add_pes_payload(unsigned char *ts_payload, size_t ts_payload_size);
   void add_pes_payload_to_probe_data();
+  void clear_pes_payload();
+  bool is_pes_payload_complete() const;
+  bool is_pes_payload_size_unbounded() const;
+  std::size_t remaining_payload_size_to_read() const;
 
   int new_stream_v_mpeg_1_2();
   int new_stream_v_avc();
@@ -376,6 +368,8 @@ public:
   bool parse_srt_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
   bool parse_vobsub_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
 
+  bool has_packetizer() const;
+
   void set_pid(uint16_t new_pid);
 
   void handle_timestamp_wrap(timestamp_c &pts, timestamp_c &dts);
@@ -389,12 +383,18 @@ public:
 
 class mpeg_ts_reader_c: public generic_reader_c {
 protected:
+  enum processing_state_e {
+    ps_probing,
+    ps_determining_timestamp_offset,
+    ps_muxing,
+  };
+
   bool PAT_found, PMT_found;
   int16_t PMT_pid;
   int es_to_process;
   timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_last_non_subtitle_timestamp;
 
-  bool m_probing;
+  processing_state_e m_state;
 
   bool file_done, m_packet_sent_to_packetizer;
 
@@ -428,17 +428,24 @@ public:
   virtual void create_packetizers();
   virtual void add_available_track_ids();
 
-  virtual bool parse_packet(unsigned char *buf);
+  virtual void parse_packet(unsigned char *buf);
 
   static timestamp_c read_timestamp(unsigned char *p);
   static int detect_packet_size(mm_io_c *in, uint64_t size);
 
 private:
-  int parse_pat(unsigned char *pat);
-  int parse_pmt(unsigned char *pmt);
-  bool parse_start_unit_packet(mpeg_ts_track_ptr &track, mpeg_ts_packet_header_t *ts_packet_header, unsigned char *&ts_payload, unsigned char &ts_payload_size);
-  void probe_packet_complete(mpeg_ts_track_ptr &track);
-  int determine_track_parameters(mpeg_ts_track_ptr const &track);
+  mpeg_ts_track_ptr find_track_for_pid(uint16_t pid) const;
+  std::pair<unsigned char *, std::size_t> determine_ts_payload_start(mpeg_ts_packet_header_t *hdr) const;
+
+  void handle_ts_payload(mpeg_ts_track_c &track, mpeg_ts_packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
+  void handle_pat_pmt_payload(mpeg_ts_track_c &track, mpeg_ts_packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
+  void handle_pes_payload(mpeg_ts_track_c &track, mpeg_ts_packet_header_t &ts_header, unsigned char *ts_payload, std::size_t ts_payload_size);
+
+  bool parse_pat(mpeg_ts_track_c &track);
+  bool parse_pmt(mpeg_ts_track_c &track);
+  void parse_pes(mpeg_ts_track_c &track);
+  void probe_packet_complete(mpeg_ts_track_c &track);
+  int determine_track_parameters(mpeg_ts_track_c &track);
 
   file_status_e finish();
   int send_to_packetizer(mpeg_ts_track_ptr &track);
@@ -451,6 +458,8 @@ private:
   void create_truehd_audio_packetizer(mpeg_ts_track_ptr const &track);
   void create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track);
   void create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track);
+
+  void determine_global_timestamp_offset();
 
   bfs::path find_clip_info_file();
   void parse_clip_info_file();

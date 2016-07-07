@@ -1,13 +1,10 @@
 #!/usr/bin/ruby -w
 
-class T_298ts_language < Test
-  def description
-    "mkvmerge / MPEG transport streams: language tags"
-  end
+# T_298ts_language
+describe "mkvmerge / MPEG transport streams: language tags"
 
-  def run
-    merge "data/ts/blue_planet.ts"
-    hash_tmp
-  end
+test "detected languages" do
+  identify_json("data/ts/blue_planet.ts")["tracks"].
+    map { |t| t["properties"]["language"] }.
+    join("+")
 end
-

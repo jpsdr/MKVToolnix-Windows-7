@@ -1,3 +1,10 @@
+2016-07-09  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: MPEG TS: considerable parts of the module have been
+        rewritten. Due to its convoluted structure didn't buffer PES
+        packets properly before trying to parse the PES header leading to
+        invalid memory accesses in certain cases.
+
 2016-07-03  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: fixed overly long file type detection in some
