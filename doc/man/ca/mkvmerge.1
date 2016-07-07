@@ -2,12 +2,12 @@
 .\"     Title: mkvmerge
 .\"    Author: Bunkus, Moritz <moritz@bunkus.org>
 .\" Generator: DocBook XSL Stylesheets v1.79.1 <http://docbook.sf.net/>
-.\"      Date: 2016-05-28
+.\"      Date: -28-05-2016
 .\"    Manual: Ordres d\*(Aqusuari
 .\"    Source: MKVToolNix 9.2.0
 .\"  Language: Catalan
 .\"
-.TH "MKVMERGE" "1" "2016\-05\-28" "MKVToolNix 9\&.2\&.0" "Ordres d\*(Aqusuari"
+.TH "MKVMERGE" "1" "\-28\-05\-2016" "MKVToolNix 9\&.2\&.0" "Ordres d\*(Aqusuari"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1335,11 +1335,9 @@ els ID de les pistes)\&. \(Fonone\(Fc inhibeix la creaci\('o de les entrades de 
 \fBmkvmerge\fR(1)
 crei les entrades de l\*(Aq\('index per a tots els blocs, el qual far\(`a que el fitxer sigui molt m\('es gran\&.
 .sp
-The default is \*(Aqiframes\*(Aq for video and subtitle tracks and \*(Aqnone\*(Aq for audio tracks\&. See also option
-\fB\-\-no\-cues\fR
-which inhibits the creation of cue entries regardless of the
-\fB\-\-cues\fR
-options used\&.
+Per omissi\('o \('es \(Foiframes\(Fc per a les pistes de v\('ideo i subt\('itols, i \(Fonone\(Fc per a les pistes d\*(Aq\(`audio\&. Vegeu tamb\('e l\*(Aqopci\('o
+\fB\-\-no\-cues\fR, la qual inhibeix la creaci\('o de les entrades de l\*(Aq\('index malgrat emprar les opcions
+\fB\-\-cues\fR\&.
 .sp
 Aquesta opci\('o es pot emprar m\('ultiples vegades per a un fitxer d\*(Aqentrada aplicant\-la a diverses pistes, seleccionant els diferents ID de les pistes cada vegada\&.
 .RE
@@ -1528,7 +1526,7 @@ El m\(`etode de compressi\('o \(Fompeg4_p2\(Fc/\(Fompeg4p2\(Fc \('es un m\(`etod
 MPEG4
 part 2\&.
 .sp
-The default for some subtitle types is \*(Aqzlib\*(Aq compression\&. This compression method is also the one that most if not all playback applications support\&. Support for other compression methods other than \*(Aqnone\*(Aq is not assured\&.
+La compressi\('o per omissi\('o per alguns tipus de subt\('itols \('es \(Fozlib\(Fc\&. Aquest m\(`etode de compressi\('o tamb\('e \('es el m\('es implementat per gaireb\('e totes, si no totes, les aplicacions de reproducci\('o\&. No es pot assegurar la implementaci\('o per a altres m\(`etodes de compressi\('o que no sigui \(Fonone\(Fc\&.
 .RE
 .SS "Opcions que nom\('es s\*(Aqapliquen a les pistes de v\('ideo"
 .PP
@@ -1598,19 +1596,19 @@ is an integer rangeing from
 and
 \fB10\fR\&.
 .sp
-Valid values and their meaning are:
+Els valors v\(`alids i els seus significats s\('on els seg\(:uents:
 .sp
 \fB0\fR: GBR,
 \fB1\fR: BT709,
-\fB2\fR: unspecified,
-\fB3\fR: reserved,
+\fB2\fR: sense especificar,
+\fB3\fR: reservat,
 \fB4\fR: FCC,
 \fB5\fR: BT470BG,
 \fB6\fR: SMPTE 170M,
 \fB7\fR: SMPTE 240M,
 \fB8\fR: YCOCG,
-\fB9\fR: BT2020 non\-constant luminance,
-\fB10\fR: BT2020 constant luminance
+\fB9\fR: BT2020 lumin\(`ancia no constant,
+\fB10\fR: BT2020 lumin\(`ancia constant
 .RE
 .PP
 \fB\-\-colour\-bits\-per\-channel\fR \fITID:n\fR
@@ -1622,7 +1620,7 @@ indicates that the number of bits is unspecified\&.
 .PP
 \fB\-\-chroma\-subsample\fR \fITID:hori,vert\fR
 .RS 4
-The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally/vertically\&.
+La quantitat de p\('ixels per eliminar en els canals Cr i Cb per a cada p\('ixel no eliminat horitzontal i verticalment\&.
 .sp
 Example: For video with 4:2:0 chroma subsampling, the parameter should be set to
 \fITID\fR:\fB1\fR,\fB1\fR\&.
@@ -1630,7 +1628,7 @@ Example: For video with 4:2:0 chroma subsampling, the parameter should be set to
 .PP
 \fB\-\-cb\-subsample\fR \fITID:hori,vert\fR
 .RS 4
-The amount of pixels to remove in the Cb channel for every pixel not removed horizontally/vertically\&. This is additive with
+La quantitat de p\('ixels per eliminar al canal Cb per a cada p\('ixel no eliminat horitzontal i verticalment\&. Aquest \('es additiu amb
 \fB\-\-chroma\-subsample\fR\&.
 .sp
 Example: For video with 4:2:1 chroma subsampling, the parameter
@@ -1658,26 +1656,26 @@ Sets the clipping of the color ranges (\fB0\fR: unspecified,
 .PP
 \fB\-\-colour\-transfer\-characteristics\fR \fITID:n\fR
 .RS 4
-The transfer characteristics of the video\&.
+Les caracter\('istiques de la transfer\(`encia del v\('ideo\&.
 .sp
-Valid values and their meaning are:
+Els valors v\(`alids i els seus significats s\('on els seg\(:uents:
 .sp
-\fB0\fR: reserved,
+\fB0\fR: reservat,
 \fB1\fR: ITU\-R BT\&.709,
-\fB2\fR: unspecified,
-\fB3\fR: reserved,
-\fB4\fR: gamma 2\&.2 curve,
-\fB5\fR: gamma 2\&.8 curve,
+\fB2\fR: sense especificar,
+\fB3\fR: reservat,
+\fB4\fR: interval de corba 2\&.2,
+\fB5\fR: interval de corba 2\&.8,
 \fB6\fR: SMPTE 170M,
 \fB7\fR: SMPTE 240M,
-\fB8\fR: linear,
-\fB9\fR: log,
-\fB10\fR: log sqrt,
+\fB8\fR: lineal,
+\fB9\fR: registre,
+\fB10\fR: registre sqrt,
 \fB11\fR: IEC 61966\-2\-4,
-\fB12\fR: ITU\-R BT\&.1361 extended colour gamut,
+\fB12\fR: gamma de colors estesa ITU\-R BT\&.1361,
 \fB13\fR: IEC 61966\-2\-1,
-\fB14\fR: ITU\-R BT\&.2020 10 bit,
-\fB15\fR: ITU\-R BT\&.2020 12 bit,
+\fB14\fR: ITU\-R BT\&.2020 de 10 bits,
+\fB15\fR: ITU\-R BT\&.2020 de 12 bits,
 \fB16\fR: SMPTE ST 2084,
 \fB17\fR: SMPTE ST 428\-1;
 \fB18\fR: ARIB STD\-B67 (HLG)
@@ -1685,14 +1683,14 @@ Valid values and their meaning are:
 .PP
 \fB\-\-colour\-primaries\fR \fITID:n\fR
 .RS 4
-Sets the colour primaries of the video\&.
+Defineix els colors primaris del v\('ideo\&.
 .sp
-Valid values and their meaning are:
+Els valors v\(`alids i els seus significats s\('on els seg\(:uents:
 .sp
-\fB0\fR: reserved,
+\fB0\fR: reservat,
 \fB1\fR: ITU\-R BT\&.709,
-\fB2\fR: unspecified,
-\fB3\fR: reserved,
+\fB2\fR: sense especificar,
+\fB3\fR: reservat,
 \fB4\fR: ITU\-R BT\&.470M,
 \fB5\fR: ITU\-R BT\&.470BG,
 \fB6\fR: SMPTE 170M,
@@ -1700,7 +1698,7 @@ Valid values and their meaning are:
 \fB8\fR: FILM,
 \fB9\fR: ITU\-R BT\&.2020,
 \fB10\fR: SMPTE ST 428\-1,
-\fB22\fR: JEDEC P22 phosphors
+\fB22\fR: JEDEC P22 llumins
 .RE
 .PP
 \fB\-\-max\-content\-light\fR \fITID:n\fR
@@ -1717,7 +1715,7 @@ Sets the maximum brightness of a single full frame (Maximum Frame\-Average Light
 should be a non\-negtive integer\&.
 .RE
 .PP
-\fB\-\-chromaticity\-coordinates\fR \fITID:red\-x,red\-y,green\-x,green\-y,blue\-x,blue\-y\fR
+\fB\-\-chromaticity\-coordinates\fR \fITID:vermell\-x,vermell\-y,verd\-x,verd\-y,blau\-x,blau\-y\fR
 .RS 4
 Sets the red/green/blue chromaticity coordinates as defined by CIE 1931\&.
 .RE
@@ -1727,12 +1725,12 @@ Sets the red/green/blue chromaticity coordinates as defined by CIE 1931\&.
 Sets the white colour chromaticity coordinates as defined by CIE 1931\&.
 .RE
 .PP
-\fB\-\-max\-luminance\fR \fITID:float\fR
+\fB\-\-max\-luminance\fR \fITID:decimal\fR
 .RS 4
 Sets the maximum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 9999\&.99\&.
 .RE
 .PP
-\fB\-\-min\-luminance\fR \fITID:float\fR
+\fB\-\-min\-luminance\fR \fITID:decimal\fR
 .RS 4
 Sets the mininum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 999\&.9999\&.
 .RE
@@ -1896,11 +1894,10 @@ en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redir
 .PP
 \fB\-\-ui\-language\fR \fIcodi\fR
 .RS 4
-Forces the translations for the language
-\fIcode\fR
-to be used (e\&.g\&. \*(Aqde_DE\*(Aq for the German translations)\&. Entering \*(Aqlist\*(Aq as the
-\fIcode\fR
-will cause the program to output a list of available translations\&.
+For\(,ca l\*(Aq\('us de les traduccions pel
+\fIcodi\fR
+d\*(Aqidioma (p\&. ex\&., \(Fode_DE\(Fc per a les traduccions en alemany)\&. Introduint \(Folist\(Fc com a
+\fIcodi\fR, es far\(`a que el programa ofereixi a la sortida una llista de les traduccions disponibles\&.
 .RE
 .PP
 \fB\-\-debug\fR \fItema\fR
