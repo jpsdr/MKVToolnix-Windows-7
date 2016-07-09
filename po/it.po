@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 20.05.2016\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-07-02 20:29+0200\n"
-"PO-Revision-Date: 2016-06-13 12:22+0200\n"
+"PO-Revision-Date: 2016-07-07 11:57+0200\n"
 "Last-Translator: bovirus <@bovirus@gmail.com>\n"
 "Language-Team: Italian <bovirus@gmail.com>\n"
 "Language: it\n"
@@ -154,7 +154,6 @@ msgid "  --capabilities           Lists optional features mkvmerge was compiled 
 msgstr "  --capabilities           Elenchi funzioni opzionali con cui è stato compilato mkvmerge.\n"
 
 #: src/merge/mkvmerge.cpp:275
-#, fuzzy
 msgid ""
 "  --cb-subsample <TID:hori,vert>\n"
 "                           The amount of pixels to remove in the Cb channel\n"
@@ -162,11 +161,11 @@ msgid ""
 "                           vertically. This is additive with\n"
 "                           --chroma-subsample.\n"
 msgstr ""
-"  --aspect-ratio-factor <TID:f|a/b>\n"
-"                           Prima calcola il rapporto di aspetto dal rapporto\n"
-"                           di aspetto del video originale\n"
-"                           con questo fattore e calcola il formato di\n"
-"                           visualizzazione da questo fattore.\n"
+"  --cb-subsample <TID:hori,vert>\n"
+"                           Il numero di pixel da rimuovere nei canali Cb e Cr\n"
+"                           per ogni pixel non rimosso orizzontalmnete e\n"
+"                           verticalmente. È aggiuntivo con\n"
+"                           --chroma-subsample.\n"
 
 #: src/merge/mkvmerge.cpp:92
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
@@ -181,26 +180,24 @@ msgid "  --chapters <file>        Read chapter information from the file.\n"
 msgstr "  --chapters <file>       Legge le informazioni capitolo dal file.\n"
 
 #: src/merge/mkvmerge.cpp:280
-#, fuzzy
 msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            How chroma is sited horizontally/vertically.\n"
 msgstr ""
-"  --cropping <TID:sinistro,alto,destro,basso>\n"
-"                           Imposta i parametri per il ritaglio.\n"
+"  --chroma-siting <TID:hori,vert>\n"
+"                           Come il croma è posizionato orizzontalmente/verticalmente.\n"
 
 #: src/merge/mkvmerge.cpp:271
-#, fuzzy
 msgid ""
 "  --chroma-subsample <TID:hori,vert>\n"
 "                           The amount of pixels to remove in the Cr and Cb\n"
 "                           channels for every pixel not removed horizontally\n"
 "                           and vertically.\n"
 msgstr ""
-"  --stereo-mode <TID:n|chiave>\n"
-"                           Imposta i parametri stereo. Può essere\n"
-"                           un numero 0 - 14 o una parola chiave\n"
-"                           (vedi documentazione per l'elenco completo).\n"
+"--chroma-subsample <TID:hori,vert>\n"
+"                           Il numero di pixel da rimuovere nei canali Cr e\n"
+"                           Cb per ogni pixel non rimosso orizzontalmente\n"
+"                           e verticalmente.\n"
 
 #: src/merge/mkvmerge.cpp:293
 msgid ""
@@ -208,6 +205,9 @@ msgid ""
 "                           Red/Green/Blue chromaticity coordinates as defined\n"
 "                           by CIE 1931.\n"
 msgstr ""
+"  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
+"                           Le coordinate di cromaticità del rosso/verde/blu come\n"
+"                           definite da CIE 1931.\n"
 
 #: src/merge/mkvmerge.cpp:115
 msgid ""
@@ -225,17 +225,16 @@ msgid "  --clusters-in-meta-seek  Write meta seek data for clusters.\n"
 msgstr "  --clusters-in-meta-seek  Scrive i dati meta di posizionamento per i cluster.\n"
 
 #: src/merge/mkvmerge.cpp:267
-#, fuzzy
 msgid ""
 "  --colour-bits-per-channel <TID:n>\n"
 "                           Sets the number of coded bits for a colour \n"
 "                           channel. A value of 0 indicates that the number is\n"
 "                           unspecified.\n"
 msgstr ""
-"  --stereo-mode <TID:n|chiave>\n"
-"                           Imposta i parametri stereo. Può essere\n"
-"                           un numero 0 - 14 o una parola chiave\n"
-"                           (vedi documentazione per l'elenco completo).\n"
+"  --colour-bits-per-channel <TID:n>\n"
+"                           Imposta il numero di bit codificati per un canale\n"
+"                           colore. Un valore 0 indica che il numero è non\n"
+"                           specificato.\n"
 
 #: src/merge/mkvmerge.cpp:264
 msgid ""
@@ -243,28 +242,29 @@ msgid ""
 "                           to derive luma and chroma values from red, green\n"
 "                           and blue color primaries.\n"
 msgstr ""
+"  --colour-matrix <TID:n>  Imposta il coefficiente della matrice del video\n"
+"                           usato per derivare i valori lunma e croma dai colori\n"
+"                           primari rosso, verde e blu.\n"
 
 #: src/merge/mkvmerge.cpp:285
-#, fuzzy
 msgid ""
 "  --colour-primaries <TID:n>\n"
 "                           The colour primaries of the video.\n"
 msgstr ""
-"  --command-line-charset <charset>\n"
-"                           Set caratteri per le stringhe nella linea comando.\n"
+"  --colour-primaries <TID:n>\n"
+"                           I colori primari del video.\n"
 
 #: src/merge/mkvmerge.cpp:282
 msgid "  --colour-range <TID:n>   Clipping of the color ranges.\n"
-msgstr ""
+msgstr "  --colour-range <TID:n>   Ritaglio intervalli colore.\n"
 
 #: src/merge/mkvmerge.cpp:283
-#, fuzzy
 msgid ""
 "  --colour-transfer-characteristics <TID:n>\n"
 "                           The transfer characteristics of the video.\n"
 msgstr ""
-"  --command-line-charset <charset>\n"
-"                           Set caratteri per le stringhe nella linea comando.\n"
+"  --colour-transfer-characteristics <TID:n>\n"
+"                           Le caratteristiche di trasferimento del video.\n"
 
 #: src/merge/mkvmerge.cpp:327
 msgid ""
@@ -445,48 +445,46 @@ msgstr ""
 "                           codici ISO639-2.\n"
 
 #: src/merge/mkvmerge.cpp:287
-#, fuzzy
 msgid ""
 "  --max-content-light <TID:n>\n"
 "                           Maximum brightness of a single pixel in candelas\n"
 "                           per square meter (cd/m²).\n"
 msgstr ""
-"  --attach-file-once <file>\n"
-"                           Crea un file allegato all'interno del\n"
-"                           primo file Mastroska scritto.\n"
+"  --max-content-light <TID:n>\n"
+"                           Luminosità massima del singolo pixel in candele\n"
+"                           per metro quadro (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:290
-#, fuzzy
 msgid ""
 "  --max-frame-light <TID:n>\n"
 "                           Maximum frame-average light level in candelas per\n"
 "                           square meter (cd/m²).\n"
 msgstr ""
-"  --attach-file-once <file>\n"
-"                           Crea un file allegato all'interno del\n"
-"                           primo file Mastroska scritto.\n"
+"  --max-frame-light <TID:n>\n"
+"                           Massimo livello luminosita medio in candele per\n"
+"                           metro quadro (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:299
-#, fuzzy
 msgid ""
 "  --max-luminance <TID:float>\n"
 "                           Maximum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split frames:A[,B...]\n"
-"                           Crea un nuovo file dopo ogni frame/campo A, B\n"
-"                           ecc.\n"
+"  --max-luminance <TID:float>\\n"
+"\n"
+"                           Luminanza massima in candele per metro quadro\n"
+"                           (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:302
-#, fuzzy
 msgid ""
 "  --min-luminance <TID:float>\n"
 "                           Mininum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split frames:A[,B...]\n"
-"                           Crea un nuovo file dopo ogni frame/campo A, B\n"
-"                           ecc.\n"
+"  --min-luminance <TID:float>\\n"
+"\n"
+"                           Luminanza minima in candele per metro quadro\n"
+"                           (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:241
 msgid ""
@@ -669,15 +667,14 @@ msgid "  --ui-language <code>     Force the translations for 'code' to be used.\
 msgstr "  --ui-language <codice>     Forza l'uso del 'codice' per la traduzione.\n"
 
 #: src/merge/mkvmerge.cpp:296
-#, fuzzy
 msgid ""
 "  --white-colour-coordinates <TID:x,y>\n"
 "                           White colour chromaticity coordinates as defined\n"
 "                           by CIE 1931.\n"
 msgstr ""
-"  --split frames:A[,B...]\n"
-"                           Crea un nuovo file dopo ogni frame/campo A, B\n"
-"                           ecc.\n"
+"  --white-colour-coordinates <TID:x,y>\n"
+"                          Coordinate cromaticità colore bianco come definito\n"
+"                           da CIE 1931.\n"
 
 #: src/merge/mkvmerge.cpp:184
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
@@ -1903,9 +1900,9 @@ msgstr "'%1%' - nome file non specificato.\n"
 #: src/merge/mkvmerge.cpp:2539
 #: src/merge/mkvmerge.cpp:2546
 #: src/merge/mkvmerge.cpp:2553
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' lacks the parameter.\n"
-msgstr "'%1%' ha perso  il numero traccia.\n"
+msgstr "'%1%' ha perso il parametro.\n"
 
 #: src/merge/mkvmerge.cpp:2623
 #, boost-format
@@ -3015,9 +3012,9 @@ msgstr "Profondità bit: %1%"
 
 #: src/info/mkvinfo.cpp:619
 #: src/info/mkvinfo.cpp:620
-#, fuzzy, boost-format
+#, boost-format
 msgid "Bits per channel: %1%"
-msgstr "bit per campionamento: %1%"
+msgstr "Bit per canale: %1%"
 
 #: src/common/property_element.cpp:154
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:497
@@ -3066,15 +3063,15 @@ msgstr "File playlist Blu-ray"
 
 #: src/info/mkvinfo.cpp:575
 #: src/info/mkvinfo.cpp:576
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate x: %1%"
-msgstr "Stato codec cue ref: %1%"
+msgstr "Coordinate X colore blu: %1%"
 
 #: src/info/mkvinfo.cpp:580
 #: src/info/mkvinfo.cpp:581
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate y: %1%"
-msgstr "Stato codec cue ref: %1%"
+msgstr "Coordinate Y colore blu: %1%"
 
 #: src/input/r_vobsub.cpp:552
 #, boost-format
@@ -3470,21 +3467,21 @@ msgstr "CodecPrivato, lunghezza %1%%2%"
 
 #: src/info/mkvinfo.cpp:614
 #: src/info/mkvinfo.cpp:615
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour matrix: %1%"
-msgstr "Spazio colore: %1%"
+msgstr "Matrice colore: %1%"
 
 #: src/info/mkvinfo.cpp:664
 #: src/info/mkvinfo.cpp:665
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour primaries: %1%"
-msgstr "Spazio colore: %1%"
+msgstr "Colori primari: %1%"
 
 #: src/info/mkvinfo.cpp:654
 #: src/info/mkvinfo.cpp:655
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour range: %1%"
-msgstr "Spazio colore: %1%"
+msgstr "Intervallo colore: %1%"
 
 #: src/info/mkvinfo.cpp:766
 #, boost-format
@@ -3493,9 +3490,9 @@ msgstr "Spazio colore: %1%"
 
 #: src/info/mkvinfo.cpp:659
 #: src/info/mkvinfo.cpp:660
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour transfer: %1%"
-msgstr "Spazio colore: %1%"
+msgstr "Trasferimento colore: %1%"
 
 #: src/info/qt_ui.cpp:156
 msgid "Compiled with libebml %1 + libmatroska %2."
@@ -4917,13 +4914,13 @@ msgstr[1] "Tag globali: %1% elementi"
 #: src/info/mkvinfo.cpp:566
 #, boost-format
 msgid "Green colour coordinate x: %1%"
-msgstr ""
+msgstr "Coordinata x colore verde: %1%"
 
 #: src/info/mkvinfo.cpp:570
 #: src/info/mkvinfo.cpp:571
 #, boost-format
 msgid "Green colour coordinate y: %1%"
-msgstr ""
+msgstr "Coordinata y colore verde: %1%"
 
 #: src/common/file_types.cpp:82
 msgid "HD-DVD subtitles"
@@ -4983,21 +4980,21 @@ msgstr "Altezza del frame video da visualizzare."
 
 #: src/info/mkvinfo.cpp:634
 #: src/info/mkvinfo.cpp:635
-#, fuzzy, boost-format
+#, boost-format
 msgid "Horizontal Cb subsample: %1%"
-msgstr "bit per campionamento: %1%"
+msgstr "Campione Cb orizzontale: %1%"
 
 #: src/info/mkvinfo.cpp:644
 #: src/info/mkvinfo.cpp:645
 #, boost-format
 msgid "Horizontal chroma siting: %1%"
-msgstr ""
+msgstr "Posizione orizzontale croma: %1%"
 
 #: src/info/mkvinfo.cpp:624
 #: src/info/mkvinfo.cpp:625
-#, fuzzy, boost-format
+#, boost-format
 msgid "Horizontal chroma subsample: %1%"
-msgstr "bit per campionamento: %1%"
+msgstr "Campione criroma orizzontale: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -5961,21 +5958,21 @@ msgstr "ID MaxBlocchiAggiunti: %1%"
 
 #: src/info/mkvinfo.cpp:669
 #: src/info/mkvinfo.cpp:670
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max content light: %1%"
-msgstr "Ritaglio pixel a destra: %1%"
+msgstr "Luce contenuto max: %1%"
 
 #: src/info/mkvinfo.cpp:674
 #: src/info/mkvinfo.cpp:675
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max frame light: %1%"
-msgstr "Altezza pixel: %1%"
+msgstr "Luce max drame: %1%"
 
 #: src/info/mkvinfo.cpp:595
 #: src/info/mkvinfo.cpp:596
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max luminance: %1%"
-msgstr "CacheMax: %1%"
+msgstr "Luminanza max: %1%"
 
 #: src/info/mkvinfo.cpp:1003
 #, boost-format
@@ -6029,9 +6026,9 @@ msgstr "Tipo MIME: %1%"
 
 #: src/info/mkvinfo.cpp:600
 #: src/info/mkvinfo.cpp:601
-#, fuzzy, boost-format
+#, boost-format
 msgid "Min luminance: %1%"
-msgstr "CacheMin: %1%"
+msgstr "Luminanza min: %1%"
 
 #: src/info/mkvinfo.cpp:1000
 #, boost-format
@@ -7163,13 +7160,13 @@ msgstr "I file RealMedia possono contenere audio HE-AAC / AAC+ / SBR AAC. In alc
 #: src/info/mkvinfo.cpp:556
 #, boost-format
 msgid "Red colour coordinate x: %1%"
-msgstr ""
+msgstr "Coordinata x colore rosso: %1%"
 
 #: src/info/mkvinfo.cpp:560
 #: src/info/mkvinfo.cpp:561
 #, boost-format
 msgid "Red colour coordinate y: %1%"
-msgstr ""
+msgstr "Coordinata y colore rosso: %1%"
 
 #: src/common/cli_parser.cpp:182
 msgid "Redirects all messages into this file."
@@ -9724,7 +9721,7 @@ msgstr "Nella traccia %1% manca l'elemento UID che è deve essere presente come 
 #: src/common/content_decoder.cpp:100
 #, boost-format
 msgid "Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n"
-msgstr ""
+msgstr "La traccia %1% è stata compressa con l'algoritmo '%2%' che non è più supportato.\n"
 
 #: src/extract/xtr_aac.cpp:51
 #, boost-format
@@ -10149,21 +10146,21 @@ msgstr "Versione%1 \"%2\""
 
 #: src/info/mkvinfo.cpp:639
 #: src/info/mkvinfo.cpp:640
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical Cb subsample: %1%"
-msgstr "bit per campionamento: %1%"
+msgstr "Campione Cb verticale: %1%"
 
 #: src/info/mkvinfo.cpp:649
 #: src/info/mkvinfo.cpp:650
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical chroma siting: %1%"
-msgstr "Posizione relativa taglio: %1%"
+msgstr "Posizione croma verticale: %1%"
 
 #: src/info/mkvinfo.cpp:629
 #: src/info/mkvinfo.cpp:630
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical chroma subsample: %1%"
-msgstr "bit per campionamento: %1%"
+msgstr "Campione croma verticale: %1%"
 
 #: src/output/p_video.h:45
 msgid "VfW compatible video"
@@ -10179,13 +10176,12 @@ msgid "Video aspect ratio type"
 msgstr "Tipo rapporto aspetto video"
 
 #: src/info/mkvinfo.cpp:610
-#, fuzzy
 msgid "Video colour information"
-msgstr "Formato video DV"
+msgstr "Informazioni colore video"
 
 #: src/info/mkvinfo.cpp:551
 msgid "Video colour mastering metadata"
-msgstr ""
+msgstr "Metadata principale colore video"
 
 #: src/common/property_element.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:475
@@ -10412,13 +10408,13 @@ msgstr "Ogni volta che l' utente aggiunge una playlist il programma può automat
 #: src/info/mkvinfo.cpp:586
 #, boost-format
 msgid "White colour coordinate x: %1%"
-msgstr ""
+msgstr "Coordinata x colore bianco: %1%"
 
 #: src/info/mkvinfo.cpp:590
 #: src/info/mkvinfo.cpp:591
 #, boost-format
 msgid "White colour coordinate y: %1%"
-msgstr ""
+msgstr "Coordinata y colore bianco: %1%"
 
 #: src/common/property_element.cpp:136
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:451

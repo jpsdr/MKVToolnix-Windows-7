@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-07-02 20:29+0200\n"
-"PO-Revision-Date: 2016-06-25 17:01+0000\n"
+"PO-Revision-Date: 2016-07-04 13:11+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -146,7 +146,6 @@ msgid "  --capabilities           Lists optional features mkvmerge was compiled 
 msgstr "  --capabilities           Liste les fonctions optionnelles avec lesquelles mkvmerge a été compilé.\n"
 
 #: src/merge/mkvmerge.cpp:275
-#, fuzzy
 msgid ""
 "  --cb-subsample <TID:hori,vert>\n"
 "                           The amount of pixels to remove in the Cb channel\n"
@@ -154,10 +153,11 @@ msgid ""
 "                           vertically. This is additive with\n"
 "                           --chroma-subsample.\n"
 msgstr ""
-"  --aspect-ratio-factor <TID:f|a/b>\n"
-"                           Calcule le ratio d'aspect en multipliant\n"
-"                           celui d'origine par ce facteur puis en\n"
-"                           déduit les dimensions à l'écran.\n"
+"  --cb-subsample <TID:hori,vert>\n"
+"                           Le nombre de pixels à enlever dans le canal Cb\n"
+"                           pour chaque pixel non retiré horizontalement et\n"
+"                           verticalement. Cela vient en addition de\n"
+"                           --chroma-subsample.\n"
 
 #: src/merge/mkvmerge.cpp:92
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
@@ -174,26 +174,24 @@ msgid "  --chapters <file>        Read chapter information from the file.\n"
 msgstr "  --chapters <fichier>     Lit les informations de chapitre du fichier.\n"
 
 #: src/merge/mkvmerge.cpp:280
-#, fuzzy
 msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            How chroma is sited horizontally/vertically.\n"
 msgstr ""
-"  --cropping <TID:gauche,haut,droite,bas>\n"
-"                           Définit les paramètres de recadrage.\n"
+"  --chroma-siting <TID:hori,vert>\n"
+"                            Comment la chroma is positionnée horizontalement/verticalement.\n"
 
 #: src/merge/mkvmerge.cpp:271
-#, fuzzy
 msgid ""
 "  --chroma-subsample <TID:hori,vert>\n"
 "                           The amount of pixels to remove in the Cr and Cb\n"
 "                           channels for every pixel not removed horizontally\n"
 "                           and vertically.\n"
 msgstr ""
-"  --stereo-mode <TID:n|mot-clé>\n"
-"                           Définit le paramètre de mode stéréo :\n"
-"                           un nombre entre 0 et 14 ou un mot-clé\n"
-"                           (liste complète dans la documentation).\n"
+"  --chroma-subsample <TID:hori,vert>\n"
+"                           Le nombre de pixels à enlever dans les canaux Cr et Cb\n"
+"                           pour chaque pixel non retiré horizontalement\n"
+"                           et verticalement.\n"
 
 #: src/merge/mkvmerge.cpp:293
 msgid ""
@@ -201,6 +199,9 @@ msgid ""
 "                           Red/Green/Blue chromaticity coordinates as defined\n"
 "                           by CIE 1931.\n"
 msgstr ""
+"  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
+"                           Coordonnées de la chromaticité Rouge/Vert/Bleu définie\n"
+"                           selon CIE 1931.\n"
 
 #: src/merge/mkvmerge.cpp:115
 msgid ""
@@ -215,20 +216,19 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:120
 msgid "  --clusters-in-meta-seek  Write meta seek data for clusters.\n"
-msgstr "  --clusters-in-meta-seek  Écrit des métadonnées de recherche pour les grappes.\n"
+msgstr "  --clusters-in-meta-seek  Écrit les métadonnées de positionnement pour les grappes.\n"
 
 #: src/merge/mkvmerge.cpp:267
-#, fuzzy
 msgid ""
 "  --colour-bits-per-channel <TID:n>\n"
 "                           Sets the number of coded bits for a colour \n"
 "                           channel. A value of 0 indicates that the number is\n"
 "                           unspecified.\n"
 msgstr ""
-"  --stereo-mode <TID:n|mot-clé>\n"
-"                           Définit le paramètre de mode stéréo :\n"
-"                           un nombre entre 0 et 14 ou un mot-clé\n"
-"                           (liste complète dans la documentation).\n"
+"  --colour-bits-per-channel <TID:n>\n"
+"                           Définit le nombre de bits codés pour un canal de\n"
+"                           couleur. Une valeur de 0 indique que le numbre n'est pas\n"
+"                           spécifié.\n"
 
 #: src/merge/mkvmerge.cpp:264
 msgid ""
@@ -236,30 +236,29 @@ msgid ""
 "                           to derive luma and chroma values from red, green\n"
 "                           and blue color primaries.\n"
 msgstr ""
+"  --colour-matrix <TID:n>  Définit les coefficients de la matrice de la vidéo utilisée\n"
+"                           pour dériver les valeurs de luma et chroma à partir des couleurs primaires rouge, vert\n"
+"                           et bleu.\n"
 
 #: src/merge/mkvmerge.cpp:285
-#, fuzzy
 msgid ""
 "  --colour-primaries <TID:n>\n"
 "                           The colour primaries of the video.\n"
 msgstr ""
-"  --command-line-charset <jeu>\n"
-"                           Jeu de caractères pour les chaînes de\n"
-"                           la ligne de commande.\n"
+"  --colour-primaries <TID:n>\n"
+"                           Les couleurs primaires de la vidéo.\n"
 
 #: src/merge/mkvmerge.cpp:282
 msgid "  --colour-range <TID:n>   Clipping of the color ranges.\n"
-msgstr ""
+msgstr "  --colour-range <TID:n>   Coupure selon les limites de couleurs.\n"
 
 #: src/merge/mkvmerge.cpp:283
-#, fuzzy
 msgid ""
 "  --colour-transfer-characteristics <TID:n>\n"
 "                           The transfer characteristics of the video.\n"
 msgstr ""
-"  --command-line-charset <jeu>\n"
-"                           Jeu de caractères pour les chaînes de\n"
-"                           la ligne de commande.\n"
+"  --colour-transfer-characteristics <TID:n>\n"
+"                           Les caractéristiques de transfert de la vidéo.\n"
 
 #: src/merge/mkvmerge.cpp:327
 msgid ""
@@ -441,46 +440,44 @@ msgstr ""
 "                           codes ISO639-2.\n"
 
 #: src/merge/mkvmerge.cpp:287
-#, fuzzy
 msgid ""
 "  --max-content-light <TID:n>\n"
 "                           Maximum brightness of a single pixel in candelas\n"
 "                           per square meter (cd/m²).\n"
 msgstr ""
-"  --attach-file-once <fichier>\n"
-"                           Crée une pièce jointe dans le 1er fichier Matroska écrit.\n"
+"  --max-content-light <TID:n>\n"
+"                           Luminosité maximum d'un pixel unique en candelas\n"
+"                           par mètre carré (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:290
-#, fuzzy
 msgid ""
 "  --max-frame-light <TID:n>\n"
 "                           Maximum frame-average light level in candelas per\n"
 "                           square meter (cd/m²).\n"
 msgstr ""
-"  --attach-file-once <fichier>\n"
-"                           Crée une pièce jointe dans le 1er fichier Matroska écrit.\n"
+"  --max-frame-light <TID:n>\n"
+"                           Luminosité maximale par trame moyenne en candelas\n"
+"                           par mètre carré (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:299
-#, fuzzy
 msgid ""
 "  --max-luminance <TID:float>\n"
 "                           Maximum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split frames:A[,B…]\n"
-"                           Crée un fichier après chaque trame/champ A, B\n"
-"                           etc.\n"
+"  --max-luminance <TID:float>\n"
+"                           Luminance maximale en candelas par mètre carré\n"
+"                           (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:302
-#, fuzzy
 msgid ""
 "  --min-luminance <TID:float>\n"
 "                           Mininum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split frames:A[,B…]\n"
-"                           Crée un fichier après chaque trame/champ A, B\n"
-"                           etc.\n"
+"  --min-luminance <TID:float>\n"
+"                           Luminance minimale en candelas par mètre carré\n"
+"                           (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:241
 msgid ""
@@ -666,15 +663,14 @@ msgid "  --ui-language <code>     Force the translations for 'code' to be used.\
 msgstr "  --ui-language <code>     Utilise la traduction en langue « code ».\n"
 
 #: src/merge/mkvmerge.cpp:296
-#, fuzzy
 msgid ""
 "  --white-colour-coordinates <TID:x,y>\n"
 "                           White colour chromaticity coordinates as defined\n"
 "                           by CIE 1931.\n"
 msgstr ""
-"  --split frames:A[,B…]\n"
-"                           Crée un fichier après chaque trame/champ A, B\n"
-"                           etc.\n"
+"  --white-colour-coordinates <TID:x,y>\n"
+"                           Coordonnées de la chromaticité de la couleur blanche définie\n"
+"                           selon CIE 1931.\n"
 
 #: src/merge/mkvmerge.cpp:184
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
@@ -1904,9 +1900,9 @@ msgstr "« %1% » n'a pas de nom de fichier.\n"
 #: src/merge/mkvmerge.cpp:2539
 #: src/merge/mkvmerge.cpp:2546
 #: src/merge/mkvmerge.cpp:2553
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' lacks the parameter.\n"
-msgstr "« %1% » n'a pas de numéros de pistes.\n"
+msgstr "« %1% » n'a pas le paramètre.\n"
 
 #: src/merge/mkvmerge.cpp:2623
 #, boost-format
@@ -3011,9 +3007,9 @@ msgstr "Profondeur de bits : %1%"
 
 #: src/info/mkvinfo.cpp:619
 #: src/info/mkvinfo.cpp:620
-#, fuzzy, boost-format
+#, boost-format
 msgid "Bits per channel: %1%"
-msgstr "bits par échantillon : %1%"
+msgstr "Bits par canal : %1%"
 
 #: src/common/property_element.cpp:154
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:497
@@ -3062,15 +3058,15 @@ msgstr "Fichiers de liste de lecture Blu-ray"
 
 #: src/info/mkvinfo.cpp:575
 #: src/info/mkvinfo.cpp:576
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate x: %1%"
-msgstr "État du codec de référence CUE : %1%"
+msgstr "Coordonnées x couleur bleu : %1%"
 
 #: src/info/mkvinfo.cpp:580
 #: src/info/mkvinfo.cpp:581
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate y: %1%"
-msgstr "État du codec de référence CUE : %1%"
+msgstr "Coordonnées y couleur bleu : %1%"
 
 #: src/input/r_vobsub.cpp:552
 #, boost-format
@@ -3466,21 +3462,21 @@ msgstr "Données de codec privées, longueur %1%%2%"
 
 #: src/info/mkvinfo.cpp:614
 #: src/info/mkvinfo.cpp:615
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour matrix: %1%"
-msgstr "Espace couleur : %1%"
+msgstr "Matrice de couleurs : %1%"
 
 #: src/info/mkvinfo.cpp:664
 #: src/info/mkvinfo.cpp:665
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour primaries: %1%"
-msgstr "Espace couleur : %1%"
+msgstr "Couleurs primaires : %1%"
 
 #: src/info/mkvinfo.cpp:654
 #: src/info/mkvinfo.cpp:655
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour range: %1%"
-msgstr "Espace couleur : %1%"
+msgstr "Limites de couleurs : %1%"
 
 #: src/info/mkvinfo.cpp:766
 #, boost-format
@@ -3489,9 +3485,9 @@ msgstr "Espace couleur : %1%"
 
 #: src/info/mkvinfo.cpp:659
 #: src/info/mkvinfo.cpp:660
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour transfer: %1%"
-msgstr "Espace couleur : %1%"
+msgstr "Transfert de couleurs : %1%"
 
 #: src/info/qt_ui.cpp:156
 msgid "Compiled with libebml %1 + libmatroska %2."
@@ -4106,7 +4102,7 @@ msgstr "Largeur à l'écran : %1%"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:56
 msgid "Do not add an entry for the chapters in the meta seek element."
-msgstr "N'ajoute pas une entrée pour les chapitres dans le méta-index de recherche."
+msgstr "N'ajoute pas une entrée pour les chapitres dans le méta-index de positionnement."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 msgid "Do not split"
@@ -4118,7 +4114,7 @@ msgstr "Ne lance pas l'interface utilisateur."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 msgid "Do not write meta seek elements at all."
-msgstr "N'écrit aucun méta-index de recherche."
+msgstr "N'écrit aucun méta-index de positionnement."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:429
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:328
@@ -4913,13 +4909,13 @@ msgstr[1] "Balises globales : %1% entrées"
 #: src/info/mkvinfo.cpp:566
 #, boost-format
 msgid "Green colour coordinate x: %1%"
-msgstr ""
+msgstr "Coordonnées x couleur vert : %1%"
 
 #: src/info/mkvinfo.cpp:570
 #: src/info/mkvinfo.cpp:571
 #, boost-format
 msgid "Green colour coordinate y: %1%"
-msgstr ""
+msgstr "Coordonnées y couleur vert : %1%"
 
 #: src/common/file_types.cpp:82
 msgid "HD-DVD subtitles"
@@ -4979,21 +4975,21 @@ msgstr "Hauteur des trames vidéo à l'écran."
 
 #: src/info/mkvinfo.cpp:634
 #: src/info/mkvinfo.cpp:635
-#, fuzzy, boost-format
+#, boost-format
 msgid "Horizontal Cb subsample: %1%"
-msgstr "bits par échantillon : %1%"
+msgstr "Sous-échantillonnage Cb horizontale : %1%"
 
 #: src/info/mkvinfo.cpp:644
 #: src/info/mkvinfo.cpp:645
 #, boost-format
 msgid "Horizontal chroma siting: %1%"
-msgstr ""
+msgstr "Position de la chroma horizontale : %1%"
 
 #: src/info/mkvinfo.cpp:624
 #: src/info/mkvinfo.cpp:625
-#, fuzzy, boost-format
+#, boost-format
 msgid "Horizontal chroma subsample: %1%"
-msgstr "bits par échantillon : %1%"
+msgstr "Sous-échantillonnage chroma horizontale : %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -5948,7 +5944,7 @@ msgstr "Fichiers Matroska"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:38
 msgid "Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."
-msgstr "Les fichiers Matroska peuvent être lus sans les données CUE, mais une recherche y sera probablement plus lente et imprécise."
+msgstr "Les fichiers Matroska peuvent être lus sans les données CUE, mais un positionnement y sera probablement plus lent et imprécis."
 
 #: src/info/mkvinfo.cpp:1034
 #, boost-format
@@ -5957,21 +5953,21 @@ msgstr "Identifiant « BlockAddition » maximum : %1%"
 
 #: src/info/mkvinfo.cpp:669
 #: src/info/mkvinfo.cpp:670
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max content light: %1%"
-msgstr "Rognage à droite (pixels) : %1%"
+msgstr "Luminosité max. : %1%"
 
 #: src/info/mkvinfo.cpp:674
 #: src/info/mkvinfo.cpp:675
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max frame light: %1%"
-msgstr "Hauteur (pixels) : %1%"
+msgstr "Luminosité par trame max. : %1%"
 
 #: src/info/mkvinfo.cpp:595
 #: src/info/mkvinfo.cpp:596
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max luminance: %1%"
-msgstr "Cache maximal : %1%"
+msgstr "Luminance max. : %1%"
 
 #: src/info/mkvinfo.cpp:1003
 #, boost-format
@@ -6025,9 +6021,9 @@ msgstr "Type MIME : %1%"
 
 #: src/info/mkvinfo.cpp:600
 #: src/info/mkvinfo.cpp:601
-#, fuzzy, boost-format
+#, boost-format
 msgid "Min luminance: %1%"
-msgstr "Cache minimal : %1%"
+msgstr "Luminance min. : %1%"
 
 #: src/info/mkvinfo.cpp:1000
 #, boost-format
@@ -6907,7 +6903,7 @@ msgstr "L'exécution du programme a échoué."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:34
 msgid "Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
-msgstr "Les programmes ne pourront que faire une recherche dans les grappes (clusters), la création de grappes plus grandes pourrait conduire à une recherche lente ou imprécise."
+msgstr "Les programmes ne pourront qu'effectuer un positionnement de grappes (clusters), donc la création de grappes plus grandes pourrait conduire à un positionnement lent ou imprécis."
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:53
 msgid "Progress"
@@ -7161,13 +7157,13 @@ msgstr "Les fichiers RealMedia peuvent contenir de l'audio HE-AAC / AAC+ / SBR A
 #: src/info/mkvinfo.cpp:556
 #, boost-format
 msgid "Red colour coordinate x: %1%"
-msgstr ""
+msgstr "Coordonnées x couleur rouge : %1%"
 
 #: src/info/mkvinfo.cpp:560
 #: src/info/mkvinfo.cpp:561
 #, boost-format
 msgid "Red colour coordinate y: %1%"
-msgstr ""
+msgstr "Coordonnées y couleur rouge : %1%"
 
 #: src/common/cli_parser.cpp:182
 msgid "Redirects all messages into this file."
@@ -7474,29 +7470,29 @@ msgstr "Voir ci-dessous pour des exemples."
 #: src/info/mkvinfo.cpp:1093
 #, boost-format
 msgid "Seek ID: %1% (%2%)"
-msgstr "Recherche d'identifiant : %1% (%2%)"
+msgstr "Identifiant de positionnement : %1% (%2%)"
 
 #: src/info/mkvinfo.cpp:1085
 msgid "Seek entry"
-msgstr "Entrée de recherche"
+msgstr "Entrée de positionnement"
 
 #: src/info/mkvinfo.cpp:1076
 msgid "Seek head"
-msgstr "Entête de recherche"
+msgstr "Tête de positionnement"
 
 #: src/info/mkvinfo.cpp:1072
 msgid "Seek head (subentries will be skipped)"
-msgstr "Tête de recherche (sous-entrées ignorées)"
+msgstr "Tête de positionnement (sous-entrées ignorées)"
 
 #: src/info/mkvinfo.cpp:1106
 #, boost-format
 msgid "Seek position: %1%"
-msgstr "Position de recherche : %1%"
+msgstr "Positionnement à : %1%"
 
 #: src/info/mkvinfo.cpp:1045
 #, boost-format
 msgid "Seek pre-roll: %|1$.3f|ms (%2%ns)"
-msgstr "Recherche pre-roll : %|1$.3f| ms (%2% ns)"
+msgstr "Prépositionnement : %|1$.3f| ms (%2% ns)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:522
 msgid "Seg&ment UID:"
@@ -8126,7 +8122,7 @@ msgstr "Demande à mkvmerge de ne pas écrire de balises avec des statistiques p
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
-msgstr "Demande à mkvmerge de créer un méta-index de recherche à la fin du fichier contenant toutes les grappes."
+msgstr "Demande à mkvmerge de créer un méta-index de positionnement à la fin du fichier contenant toutes les grappes."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:31
 msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
@@ -8227,11 +8223,11 @@ msgstr "Le format conteneur Matroska peut stocker la largeur/hauteur à l'écran
 
 #: src/common/qt_kax_analyzer.cpp:79
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file."
-msgstr "Le fichier Matroska a été modifié mais l'entrée du méta-index de recherche ne peut pas être actualisée, ce qui signifie que les lecteurs auront du mal à localiser l'élément. Tester ce fichier dans le lecteur de média préféré."
+msgstr "Le fichier Matroska a été modifié mais l'entrée du méta-index de positionnement ne peut pas être actualisée, ce qui signifie que les lecteurs auront du mal à localiser l'élément. Tester ce fichier dans le lecteur de média préféré."
 
 #: src/propedit/propedit.cpp:41
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
-msgstr "Le fichier Matroska a été modifié mais l'entrée du méta-index de recherche ne peut pas être actualisée, ce qui signifie que les lecteurs auront du mal à localiser cet élément. Tester ce fichier dans le lecteur de média préféré."
+msgstr "Le fichier Matroska a été modifié mais l'entrée du méta-index de positionnement ne peut pas être actualisée, ce qui signifie que les lecteurs auront du mal à localiser cet élément. Tester ce fichier dans le lecteur de média préféré."
 
 #: src/common/qt_kax_analyzer.cpp:103
 #: src/propedit/propedit.cpp:58
@@ -8921,7 +8917,7 @@ msgstr "Le nombre maximal de trames qu'un lecteur est capable de mettre en cache
 #: src/common/qt_kax_analyzer.cpp:73
 #: src/propedit/propedit.cpp:37
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
-msgstr "Le méta-index de recherche a été écrit à la fin du fichier mais la taille du segment ne peut pas être actualisée. L'élément ne sera donc pas visible. Le processus va s'interrompre. Le fichier a été modifié !"
+msgstr "Le méta-index de positionnement a été écrit à la fin du fichier mais la taille du segment ne peut pas être actualisée. L'élément ne sera donc pas visible. Le processus va s'interrompre. Le fichier a été modifié !"
 
 #: src/common/property_element.cpp:122
 msgid ""
@@ -9135,7 +9131,7 @@ msgstr "Le deuxième mode extrait les balises et les convertit en XML. Le rappor
 
 #: src/input/r_tta.cpp:90
 msgid "The seek table in this TTA file seems to be broken.\n"
-msgstr "La liste des index de recherche de ce fichier TTA semble être endommagée.\n"
+msgstr "La table des index de positionnement de ce fichier TTA semble être endommagée.\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:681
 msgid "The segment UID could not be parsed: %1"
@@ -9170,7 +9166,7 @@ msgstr "La taille de la pièce jointe « %1% » est 0.\n"
 #: src/merge/reader_detection_and_creation.cpp:129
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
-msgstr "Le fichier source « %1% » ne peut pas être ouvert ou la récupération de sa taille par recherche jusqu'à la fin ne fonctionne pas.\n"
+msgstr "Le fichier source « %1% » ne peut pas être ouvert, ou la récupération de sa taille par positionnement jusqu'à la fin n'a pas fonctionné.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:457
 msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
@@ -9478,7 +9474,7 @@ msgstr[1] "Cette piste audio contient %1% octets de données incorrectes qui ont
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
 msgid "This causes bigger overhead but allows precise seeking and extraction."
-msgstr "Ceci occasionne une plus grosse charge mais permet une recherche et une extraction plus précises."
+msgstr "Ceci occasionne une plus grosse charge mais permet un positionnement et une extraction plus précises."
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:172
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:174
@@ -9632,12 +9628,12 @@ msgstr "Cette propriété est unique. D'autres instances ne peuvent pas être aj
 #: src/merge/output_control.cpp:255
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. %1%\n"
-msgstr "Ceci ne devrait VRAIMENT pas se produire. L'espace réservé à la première métadonnée de recherche est trop petit. %1%\n"
+msgstr "Ceci ne devrait VRAIMENT pas se produire. L'espace réservé au premier méta-index de positionnement est trop petit. %1%\n"
 
 #: src/merge/output_control.cpp:1614
 #, boost-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
-msgstr "Ceci ne devrait VRAIMENT pas se produire. L'espace réservé à la première métadonnée de recherche est trop petit. Taille nécessaire : %1%. %2%\n"
+msgstr "Ceci ne devrait VRAIMENT pas se produire. L'espace réservé au premier méta-index de positionnement est trop petit. Taille nécessaire : %1%. %2%\n"
 
 #: src/common/common.h:109
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
@@ -9736,7 +9732,7 @@ msgstr "La piste %1% n'a pas son UID de piste dont la présence est requise par 
 #: src/common/content_decoder.cpp:100
 #, boost-format
 msgid "Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n"
-msgstr ""
+msgstr "La piste %1% a été compressée avec l'algorithme « %2% » qui n'est plus pris en charge.\n"
 
 #: src/extract/xtr_aac.cpp:51
 #, boost-format
@@ -10161,21 +10157,21 @@ msgstr "Version %1 « %2 »"
 
 #: src/info/mkvinfo.cpp:639
 #: src/info/mkvinfo.cpp:640
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical Cb subsample: %1%"
-msgstr "bits par échantillon : %1%"
+msgstr "Sous-échantillonnage Cb verticale : %1%"
 
 #: src/info/mkvinfo.cpp:649
 #: src/info/mkvinfo.cpp:650
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical chroma siting: %1%"
-msgstr "Position relative CUE : %1%"
+msgstr "Position de la chroma verticale : %1%"
 
 #: src/info/mkvinfo.cpp:629
 #: src/info/mkvinfo.cpp:630
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical chroma subsample: %1%"
-msgstr "bits par échantillon : %1%"
+msgstr "Sous-échantillonnage chroma verticale : %1%"
 
 #: src/output/p_video.h:45
 msgid "VfW compatible video"
@@ -10191,13 +10187,12 @@ msgid "Video aspect ratio type"
 msgstr "Type de ratio d'aspect vidéo"
 
 #: src/info/mkvinfo.cpp:610
-#, fuzzy
 msgid "Video colour information"
-msgstr "Format vidéo DV"
+msgstr "Informations de couleur vidéo"
 
 #: src/info/mkvinfo.cpp:551
 msgid "Video colour mastering metadata"
-msgstr ""
+msgstr "Métadonnées de mastérisation des couleurs vidéo"
 
 #: src/common/property_element.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:475
@@ -10424,13 +10419,13 @@ msgstr "Quand l'utilisateur ajoute une liste de lecture, le programme peut autom
 #: src/info/mkvinfo.cpp:586
 #, boost-format
 msgid "White colour coordinate x: %1%"
-msgstr ""
+msgstr "Coordonnées x couleur blanche : %1%"
 
 #: src/info/mkvinfo.cpp:590
 #: src/info/mkvinfo.cpp:591
 #, boost-format
 msgid "White colour coordinate y: %1%"
-msgstr ""
+msgstr "Coordonnées y couleur blanche : %1%"
 
 #: src/common/property_element.cpp:136
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:451

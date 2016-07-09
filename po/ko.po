@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-07-02 20:29+0200\n"
-"PO-Revision-Date: 2016-06-08 22:52+0000\n"
+"PO-Revision-Date: 2016-07-03 12:52+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -148,7 +148,6 @@ msgid "  --capabilities           Lists optional features mkvmerge was compiled 
 msgstr "  --capabilities           mkvmerge가 컴파일 시 사용되는 옵션 기능을 열거합니다.\n"
 
 #: src/merge/mkvmerge.cpp:275
-#, fuzzy
 msgid ""
 "  --cb-subsample <TID:hori,vert>\n"
 "                           The amount of pixels to remove in the Cb channel\n"
@@ -156,9 +155,10 @@ msgid ""
 "                           vertically. This is additive with\n"
 "                           --chroma-subsample.\n"
 msgstr ""
-"  --aspect-ratio-factor <TID:f|a/b>\n"
-"                           처음에 이 계수를 비디오의 원래 종횡비에 곱하여\n"
-"                           비율을 계산하고 화면 해상도를 계산합니다.\n"
+"  --cb-subsample <TID:hori,vert>\n"
+"                           수평과 수직으로 제거하지 않은 모든 픽셀에 대해 Cb\n"
+"                           채널에서 제거할 픽셀의 양.  --chroma-subsample \n"
+"                           옵션으로 추가할 수 있습니다.\n"
 
 #: src/merge/mkvmerge.cpp:92
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
@@ -173,26 +173,23 @@ msgid "  --chapters <file>        Read chapter information from the file.\n"
 msgstr "  --chapters <file>        파일에서 챕터 정보를 읽습니다.\n"
 
 #: src/merge/mkvmerge.cpp:280
-#, fuzzy
 msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            How chroma is sited horizontally/vertically.\n"
 msgstr ""
-"  --cropping <TID:left,top,right,bottom>\n"
-"                           잘라내기 매개변수를 지정합니다.\n"
+"  --chroma-siting <TID:hori,vert>\n"
+"                            크로마를 수평/수직으로 어떻게 위치시킬지.\n"
 
 #: src/merge/mkvmerge.cpp:271
-#, fuzzy
 msgid ""
 "  --chroma-subsample <TID:hori,vert>\n"
 "                           The amount of pixels to remove in the Cr and Cb\n"
 "                           channels for every pixel not removed horizontally\n"
 "                           and vertically.\n"
 msgstr ""
-"  --stereo-mode <TID:n|keyword>\n"
-"                           스테레오 모드 매개변수를 설정합니다.\n"
-"                           이것은 0~14까지의 숫자나 키워드를 취할 수 있습니다.\n"
-"                           (문서 전체 목록을 참조하십시오.).\n"
+"  --chroma-subsample <TID:hori,vert>\n"
+"                           수평과 수직으로 제거하지 않은 모든 픽셀에 대해\n"
+"                           Cr과 Cb 채널에서 제거할 픽셀의 양.\n"
 
 #: src/merge/mkvmerge.cpp:293
 msgid ""
@@ -200,6 +197,8 @@ msgid ""
 "                           Red/Green/Blue chromaticity coordinates as defined\n"
 "                           by CIE 1931.\n"
 msgstr ""
+"  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
+"                           CIE 1931에 의해 정의된 적/녹/청 색도 좌표.\n"
 
 #: src/merge/mkvmerge.cpp:115
 msgid ""
@@ -217,17 +216,15 @@ msgid "  --clusters-in-meta-seek  Write meta seek data for clusters.\n"
 msgstr "  --clusters-in-meta-seek  클러스터의 메타 검색 데이터를 기록합니다.\n"
 
 #: src/merge/mkvmerge.cpp:267
-#, fuzzy
 msgid ""
 "  --colour-bits-per-channel <TID:n>\n"
 "                           Sets the number of coded bits for a colour \n"
 "                           channel. A value of 0 indicates that the number is\n"
 "                           unspecified.\n"
 msgstr ""
-"  --stereo-mode <TID:n|keyword>\n"
-"                           스테레오 모드 매개변수를 설정합니다.\n"
-"                           이것은 0~14까지의 숫자나 키워드를 취할 수 있습니다.\n"
-"                           (문서 전체 목록을 참조하십시오.).\n"
+"  --colour-bits-per-channel <TID:n>\n"
+"                           색상 채널당 코드화된 비트 수를 정합니다.\n"
+"                           0의 값은 그 수가 미지정임을 나타냅니다.\n"
 
 #: src/merge/mkvmerge.cpp:264
 msgid ""
@@ -235,28 +232,28 @@ msgid ""
 "                           to derive luma and chroma values from red, green\n"
 "                           and blue color primaries.\n"
 msgstr ""
+"  --colour-matrix <TID:n>  적/녹/청 삼원색에서 루마와 크로마값을 얻기 위해\n"
+"                           사용된 비디오 매트릭스 계수를 정합니다.\n"
 
 #: src/merge/mkvmerge.cpp:285
-#, fuzzy
 msgid ""
 "  --colour-primaries <TID:n>\n"
 "                           The colour primaries of the video.\n"
 msgstr ""
-"  --command-line-charset <charset>\n"
-"                           명령행 문자 인코딩을 지정합니다.\n"
+"  --colour-primaries <TID:n>\n"
+"                           비디오의 원색(기초 색상).\n"
 
 #: src/merge/mkvmerge.cpp:282
 msgid "  --colour-range <TID:n>   Clipping of the color ranges.\n"
-msgstr ""
+msgstr "  --colour-range <TID:n>   색상 범위 잘라내기.\n"
 
 #: src/merge/mkvmerge.cpp:283
-#, fuzzy
 msgid ""
 "  --colour-transfer-characteristics <TID:n>\n"
 "                           The transfer characteristics of the video.\n"
 msgstr ""
-"  --command-line-charset <charset>\n"
-"                           명령행 문자 인코딩을 지정합니다.\n"
+"  --colour-transfer-characteristics <TID:n>\n"
+"                           비디오 전송 특성.\n"
 
 #: src/merge/mkvmerge.cpp:327
 msgid ""
@@ -436,44 +433,42 @@ msgid ""
 msgstr "  --list-languages         모든 ISO639 언어와 ISO639-2 코드를 열거합니다.\n"
 
 #: src/merge/mkvmerge.cpp:287
-#, fuzzy
 msgid ""
 "  --max-content-light <TID:n>\n"
 "                           Maximum brightness of a single pixel in candelas\n"
 "                           per square meter (cd/m²).\n"
 msgstr ""
-"  --attach-file-once <file>\n"
-"                           처음 작성한 Matroska 파일에 첨부 파일을 만듭니다.\n"
+"  --max-content-light <TID:n>\n"
+"                           제곱 미터당 칸델라 단위에서 단일 픽셀의 최대 밝기\n"
+"                           (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:290
-#, fuzzy
 msgid ""
 "  --max-frame-light <TID:n>\n"
 "                           Maximum frame-average light level in candelas per\n"
 "                           square meter (cd/m²).\n"
 msgstr ""
-"  --attach-file-once <file>\n"
-"                           처음 작성한 Matroska 파일에 첨부 파일을 만듭니다.\n"
+"  --max-frame-light <TID:n>\n"
+"                           제곱 미터당 칸델라 단위에서 최대 프레임 평균 밝기\n"
+"                           수준 (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:299
-#, fuzzy
 msgid ""
 "  --max-luminance <TID:float>\n"
 "                           Maximum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split frames:A[,B...]\n"
-"                           각 프레임/필드 A, B 등 이후로 파일을 분할 생성합니다.\n"
+"  --max-luminance <TID:float>\n"
+"                           제곱 미터당 칸델라 단위에서 최대 휘도 (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:302
-#, fuzzy
 msgid ""
 "  --min-luminance <TID:float>\n"
 "                           Mininum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split frames:A[,B...]\n"
-"                           각 프레임/필드 A, B 등 이후로 파일을 분할 생성합니다.\n"
+"  --min-luminance <TID:float>\n"
+"                           제곱 미터당 칸델라 단위에서 최소 휘도 (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:241
 msgid ""
@@ -656,14 +651,13 @@ msgstr ""
 "                           '한글'로 강제 표시됩니다.)\n"
 
 #: src/merge/mkvmerge.cpp:296
-#, fuzzy
 msgid ""
 "  --white-colour-coordinates <TID:x,y>\n"
 "                           White colour chromaticity coordinates as defined\n"
 "                           by CIE 1931.\n"
 msgstr ""
-"  --split frames:A[,B...]\n"
-"                           각 프레임/필드 A, B 등 이후로 파일을 분할 생성합니다.\n"
+"  --white-colour-coordinates <TID:x,y>\n"
+"                           CIE 1931에 정의된 흰색 색도 좌표.\n"
 
 #: src/merge/mkvmerge.cpp:184
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
@@ -1876,9 +1870,9 @@ msgstr "'%1%'에 파일 이름이 지정되어 있지 않습니다.\n"
 #: src/merge/mkvmerge.cpp:2539
 #: src/merge/mkvmerge.cpp:2546
 #: src/merge/mkvmerge.cpp:2553
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' lacks the parameter.\n"
-msgstr "'%1%'은 트랙 번호가 없습니다.\n"
+msgstr "'%1%'에 변수가 없습니다.\n"
 
 #: src/merge/mkvmerge.cpp:2623
 #, boost-format
@@ -2980,9 +2974,9 @@ msgstr "비트 심도: %1%"
 
 #: src/info/mkvinfo.cpp:619
 #: src/info/mkvinfo.cpp:620
-#, fuzzy, boost-format
+#, boost-format
 msgid "Bits per channel: %1%"
-msgstr "샘플 당 비트 수: %1%"
+msgstr "채널 당 비트 수: %1%"
 
 #: src/common/property_element.cpp:154
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:497
@@ -3031,15 +3025,15 @@ msgstr "블루레이 재생목록 파일"
 
 #: src/info/mkvinfo.cpp:575
 #: src/info/mkvinfo.cpp:576
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate x: %1%"
-msgstr "CUE 참조 코덱 상태: %1%"
+msgstr "파란색 좌표 x: %1%"
 
 #: src/info/mkvinfo.cpp:580
 #: src/info/mkvinfo.cpp:581
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate y: %1%"
-msgstr "CUE 참조 코덱 상태: %1%"
+msgstr "파란색 좌표 y: %1%"
 
 #: src/input/r_vobsub.cpp:552
 #, boost-format
@@ -3434,21 +3428,21 @@ msgstr "CodecPrivate, 길이 %1%%2%"
 
 #: src/info/mkvinfo.cpp:614
 #: src/info/mkvinfo.cpp:615
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour matrix: %1%"
-msgstr "색상 공간: %1%"
+msgstr "색상 매트릭스: %1%"
 
 #: src/info/mkvinfo.cpp:664
 #: src/info/mkvinfo.cpp:665
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour primaries: %1%"
-msgstr "색상 공간: %1%"
+msgstr "기초 색상: %1%"
 
 #: src/info/mkvinfo.cpp:654
 #: src/info/mkvinfo.cpp:655
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour range: %1%"
-msgstr "색상 공간: %1%"
+msgstr "색상 범위: %1%"
 
 #: src/info/mkvinfo.cpp:766
 #, boost-format
@@ -3457,9 +3451,9 @@ msgstr "색상 공간: %1%"
 
 #: src/info/mkvinfo.cpp:659
 #: src/info/mkvinfo.cpp:660
-#, fuzzy, boost-format
+#, boost-format
 msgid "Colour transfer: %1%"
-msgstr "색상 공간: %1%"
+msgstr "색상 전송: %1%"
 
 #: src/info/qt_ui.cpp:156
 msgid "Compiled with libebml %1 + libmatroska %2."
@@ -4880,13 +4874,13 @@ msgstr[0] "전역 태그: %1% 항목"
 #: src/info/mkvinfo.cpp:566
 #, boost-format
 msgid "Green colour coordinate x: %1%"
-msgstr ""
+msgstr "녹색 좌표 x: %1%"
 
 #: src/info/mkvinfo.cpp:570
 #: src/info/mkvinfo.cpp:571
 #, boost-format
 msgid "Green colour coordinate y: %1%"
-msgstr ""
+msgstr "녹색 좌표:  %1%"
 
 #: src/common/file_types.cpp:82
 msgid "HD-DVD subtitles"
@@ -4946,21 +4940,21 @@ msgstr "비디오 프레임의 세로(높이) 해상도입니다."
 
 #: src/info/mkvinfo.cpp:634
 #: src/info/mkvinfo.cpp:635
-#, fuzzy, boost-format
+#, boost-format
 msgid "Horizontal Cb subsample: %1%"
-msgstr "샘플 당 비트 수: %1%"
+msgstr "수평 Cb 서브샘플: %1%"
 
 #: src/info/mkvinfo.cpp:644
 #: src/info/mkvinfo.cpp:645
 #, boost-format
 msgid "Horizontal chroma siting: %1%"
-msgstr ""
+msgstr "수평 크로마 위치선정:  %1%"
 
 #: src/info/mkvinfo.cpp:624
 #: src/info/mkvinfo.cpp:625
-#, fuzzy, boost-format
+#, boost-format
 msgid "Horizontal chroma subsample: %1%"
-msgstr "샘플 당 비트 수: %1%"
+msgstr "수평 크로마 서브샘플: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -5924,21 +5918,21 @@ msgstr "최대 BlockAddition ID: %1%"
 
 #: src/info/mkvinfo.cpp:669
 #: src/info/mkvinfo.cpp:670
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max content light: %1%"
-msgstr "잘라낸 픽셀 (오른쪽): %1%"
+msgstr "최대 컨텐츠 광량: %1%"
 
 #: src/info/mkvinfo.cpp:674
 #: src/info/mkvinfo.cpp:675
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max frame light: %1%"
-msgstr "픽셀 높이: %1%"
+msgstr "최대 프레임 광량: %1%"
 
 #: src/info/mkvinfo.cpp:595
 #: src/info/mkvinfo.cpp:596
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max luminance: %1%"
-msgstr "최대 캐시: %1%"
+msgstr "최대 휘도:  %1%"
 
 #: src/info/mkvinfo.cpp:1003
 #, boost-format
@@ -5992,9 +5986,9 @@ msgstr "MIME 유형: %1%"
 
 #: src/info/mkvinfo.cpp:600
 #: src/info/mkvinfo.cpp:601
-#, fuzzy, boost-format
+#, boost-format
 msgid "Min luminance: %1%"
-msgstr "최소 캐시: %1%"
+msgstr "최소 휘도: %1%"
 
 #: src/info/mkvinfo.cpp:1000
 #, boost-format
@@ -7124,13 +7118,13 @@ msgstr "RealMedia 파일은 HE-AAC / AAC+ / SBR AAC 오디오가 포함되어 �
 #: src/info/mkvinfo.cpp:556
 #, boost-format
 msgid "Red colour coordinate x: %1%"
-msgstr ""
+msgstr "빨간색 좌표 x: %1%"
 
 #: src/info/mkvinfo.cpp:560
 #: src/info/mkvinfo.cpp:561
 #, boost-format
 msgid "Red colour coordinate y: %1%"
-msgstr ""
+msgstr "빨간색 좌표 y: %1%"
 
 #: src/common/cli_parser.cpp:182
 msgid "Redirects all messages into this file."
@@ -9666,7 +9660,7 @@ msgstr "%1% 트랙에 Matroska 규격에 의거해 있어야 하는 트랙 UID �
 #: src/common/content_decoder.cpp:100
 #, boost-format
 msgid "Track %1% was compressed with the algorithm '%2%' which is not supported anymore.\n"
-msgstr ""
+msgstr "%1% 트랙은 더 이상 지원하지 않는 '%2%' 알고리즘으로 압축되었습니다.\n"
 
 #: src/extract/xtr_aac.cpp:51
 #, boost-format
@@ -10091,21 +10085,21 @@ msgstr "버전 %1 \"%2\""
 
 #: src/info/mkvinfo.cpp:639
 #: src/info/mkvinfo.cpp:640
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical Cb subsample: %1%"
-msgstr "샘플 당 비트 수: %1%"
+msgstr "수직 Cb 서브샘플: %1%"
 
 #: src/info/mkvinfo.cpp:649
 #: src/info/mkvinfo.cpp:650
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical chroma siting: %1%"
-msgstr "CUE 상대 위치: %1%"
+msgstr "수직 크로마 위치선정: %1%"
 
 #: src/info/mkvinfo.cpp:629
 #: src/info/mkvinfo.cpp:630
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical chroma subsample: %1%"
-msgstr "샘플 당 비트 수: %1%"
+msgstr "수직 크로마 서브샘플: %1%"
 
 #: src/output/p_video.h:45
 msgid "VfW compatible video"
@@ -10121,13 +10115,12 @@ msgid "Video aspect ratio type"
 msgstr "비디오 화면 비율 유형"
 
 #: src/info/mkvinfo.cpp:610
-#, fuzzy
 msgid "Video colour information"
-msgstr "DV 비디오 형식"
+msgstr "비디오 색상 정보"
 
 #: src/info/mkvinfo.cpp:551
 msgid "Video colour mastering metadata"
-msgstr ""
+msgstr "비디오 색상 마스터링 메타데이터"
 
 #: src/common/property_element.cpp:144
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:475
@@ -10354,13 +10347,13 @@ msgstr "사용자가 재생목록을 추가할 때마다 프로그램은 다른 
 #: src/info/mkvinfo.cpp:586
 #, boost-format
 msgid "White colour coordinate x: %1%"
-msgstr ""
+msgstr "흰색 좌표 x: %1%"
 
 #: src/info/mkvinfo.cpp:590
 #: src/info/mkvinfo.cpp:591
 #, boost-format
 msgid "White colour coordinate y: %1%"
-msgstr ""
+msgstr "흰색 좌표 y: %1%"
 
 #: src/common/property_element.cpp:136
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:451
