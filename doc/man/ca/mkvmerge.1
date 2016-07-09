@@ -1520,7 +1520,7 @@ AVC/h\&.264\&. Si s\*(Aqomet, per omissi\('o emprar\(`a 4 bytes, per\(`o hi ha f
 .PP
 \fB\-\-compression\fR \fITID:n\fR
 .RS 4
-Selects the compression method to be used for the track\&. Note that the player also has to support this method\&. Valid values are \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq and \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&.
+Selecciona el m\(`etode de compressi\('o a emprar per a la pista\&. Recordeu que el reproductor tamb\('e haur\(`a d\*(Aqadmetre aquest m\(`etode\&. Els valors v\(`alids s\('on \(Fonone\(Fc, \(Fozlib\(Fc i \(Fompeg4_p2\(Fc/\(Fompeg4p2\(Fc\&.
 .sp
 El m\(`etode de compressi\('o \(Fompeg4_p2\(Fc/\(Fompeg4p2\(Fc \('es un m\(`etode especial anomenat \(Foeliminador de la cap\(,calera\(Fc que nom\('es est\(`a disponible per a les pistes de v\('ideo
 MPEG4
@@ -1589,11 +1589,11 @@ Estableix als valors indicats els par\(`ametres del retall dels p\('ixels d\*(Aq
 .PP
 \fB\-\-colour\-matrix\fR \fITID:n\fR
 .RS 4
-Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries\&. The parameter
+Defineix els coeficients de la matriu del v\('ideo emprats per a derivar els valors de lumin\(`ancia i de cromin\(`ancia dels colors primaris vermell, verd i blau\&. El par\(`ametre
 \fIn\fR
-is an integer rangeing from
+\('es un nombre enter que va des del
 \fB0\fR
-and
+al
 \fB10\fR\&.
 .sp
 Els valors v\(`alids i els seus significats s\('on els seg\(:uents:
@@ -1613,16 +1613,16 @@ Els valors v\(`alids i els seus significats s\('on els seg\(:uents:
 .PP
 \fB\-\-colour\-bits\-per\-channel\fR \fITID:n\fR
 .RS 4
-Sets the number of coded bits for a colour channel\&. A value of
+Defineix el nombre de bits codificats per a un canal de color\&. Un valor de
 \fB0\fR
-indicates that the number of bits is unspecified\&.
+indica que el nombre de bits no est\(`a especificat\&.
 .RE
 .PP
 \fB\-\-chroma\-subsample\fR \fITID:hori,vert\fR
 .RS 4
 La quantitat de p\('ixels per eliminar en els canals Cr i Cb per a cada p\('ixel no eliminat horitzontal i verticalment\&.
 .sp
-Example: For video with 4:2:0 chroma subsampling, the parameter should be set to
+Exemple: Per al v\('ideo amb submostreig crom\(`atic 4:2:0, el par\(`ametre s\*(Aqhaur\(`a d\*(Aqestablir a
 \fITID\fR:\fB1\fR,\fB1\fR\&.
 .RE
 .PP
@@ -1631,27 +1631,27 @@ Example: For video with 4:2:0 chroma subsampling, the parameter should be set to
 La quantitat de p\('ixels per eliminar al canal Cb per a cada p\('ixel no eliminat horitzontal i verticalment\&. Aquest \('es additiu amb
 \fB\-\-chroma\-subsample\fR\&.
 .sp
-Example: For video with 4:2:1 chroma subsampling, the parameter
+Exemple: Per al v\('ideo amb submostreig crom\(`atic 4:2:1, el par\(`ametre
 \fB\-\-chroma\-subsample\fR
-should be set to
+s\*(Aqhaur\(`a d\*(Aqestablir a
 \fITID\fR:\fB1\fR,\fB0\fR
-and Cb\-subsample should be set to
+i el submostreig Cb s\*(Aqhaur\(`a d\*(Aqestablir a
 \fITID\fR:\fB1\fR,\fB0\fR\&.
 .RE
 .PP
 \fB\-\-chroma\-siting\fR \fITID:hori,vert\fR
 .RS 4
-Sets how chroma is sited horizontally/vertically (\fB0\fR: unspecified,
-\fB1\fR: top collocated,
-\fB2\fR: half)\&.
+Defineix com est\(`a situada la cromin\(`ancia, horitzontal/verticalment\&.(\fB0\fR: sense especificar,
+\fB1\fR: a dalt juxtaposats,
+\fB2\fR: meitat)\&.
 .RE
 .PP
 \fB\-\-colour\-range\fR \fITID:n\fR
 .RS 4
-Sets the clipping of the color ranges (\fB0\fR: unspecified,
-\fB1\fR: broadcast range,
-\fB2\fR: full range (no clipping),
-\fB3\fR: defined by MatrixCoefficients/TransferCharacteristics)\&.
+Defineix la retallada dels intervals de colors (\fB0\fR: sense especificar,
+\fB1\fR: interval de difusi\('o,
+\fB2\fR: tot l\*(Aqinterval (sense retallat),
+\fB3\fR: definit pels coeficients de la matriu/caracter\('istiques de la transfer\(`encia)\&.
 .RE
 .PP
 \fB\-\-colour\-transfer\-characteristics\fR \fITID:n\fR
@@ -1703,36 +1703,36 @@ Els valors v\(`alids i els seus significats s\('on els seg\(:uents:
 .PP
 \fB\-\-max\-content\-light\fR \fITID:n\fR
 .RS 4
-Sets the maximum brightness of a single pixel (Maximum Content Light Level) in candelas per square meter (cd/m\(S2)\&. The value of
+Defineix la brillantor m\(`axima d\*(Aqun \('unic p\('ixel (el nivell m\(`axim de llum que cont\('e) en candeles per metre quadrat (cd/m\(S2)\&. El valor de
 \fIn\fR
-should be a non\-negtive integer\&.
+haur\(`a de ser un nombre enter no negatiu\&.
 .RE
 .PP
 \fB\-\-max\-frame\-light\fR \fITID:n\fR
 .RS 4
-Sets the maximum brightness of a single full frame (Maximum Frame\-Average Light Level) in candelas per square meter (cd/m\(S2)\&. The value of
+Defineix la brillantor m\(`axima de tot un marc (el nivell m\(`axim de llum mitj\(`a del marc) en candeles per metre quadrat (cd/m\(S2)\&. El valor de
 \fIn\fR
-should be a non\-negtive integer\&.
+haur\(`a de ser un nombre enter no negatiu\&.
 .RE
 .PP
 \fB\-\-chromaticity\-coordinates\fR \fITID:vermell\-x,vermell\-y,verd\-x,verd\-y,blau\-x,blau\-y\fR
 .RS 4
-Sets the red/green/blue chromaticity coordinates as defined by CIE 1931\&.
+Defineix les coordenades de la cromaticitat pel vermell/verd/blau com es defineixen per la CIE 1931\&.
 .RE
 .PP
 \fB\-\-white\-colour\-coordinates\fR \fITID:x,y\fR
 .RS 4
-Sets the white colour chromaticity coordinates as defined by CIE 1931\&.
+Defineix les coordenades crom\(`atiques del color blanc com es defineixen per la CIE 1931\&.
 .RE
 .PP
 \fB\-\-max\-luminance\fR \fITID:decimal\fR
 .RS 4
-Sets the maximum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 9999\&.99\&.
+Defineix la lumin\(`ancia m\(`axima en candeles per metre quadrat (cd/m\(S2)\&. El valor haur\(`a de ser inferior que 9999\&.99\&.
 .RE
 .PP
 \fB\-\-min\-luminance\fR \fITID:decimal\fR
 .RS 4
-Sets the mininum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 999\&.9999\&.
+Defineix la lumin\(`ancia m\('inima en candeles per metre quadrat (cd/m\(S2)\&. El valor haur\(`a de ser inferior que 999\&.9999\&.
 .RE
 .PP
 \fB\-\-stereo\-mode\fR \fITID:n|paraula_clau\fR
