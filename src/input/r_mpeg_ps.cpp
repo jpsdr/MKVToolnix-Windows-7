@@ -37,21 +37,15 @@
 #include "output/p_truehd.h"
 #include "output/p_vc1.h"
 
-#define PS_PROBE_SIZE 10 * 1024 * 1024
-
 int
 mpeg_ps_reader_c::probe_file(mm_io_c *in,
                              uint64_t) {
   try {
-    memory_c af_buf((unsigned char *)safemalloc(PS_PROBE_SIZE), 0, true);
-    unsigned char *buf = af_buf.get_buffer();
-    int num_read;
+    unsigned char buf[4];
 
     in->setFilePointer(0, seek_beginning);
-    num_read = in->read(buf, PS_PROBE_SIZE);
-    if (4 > num_read)
+    if (in->read(buf, 4) != 4)
       return 0;
-    in->setFilePointer(0, seek_beginning);
 
     if (get_uint32_be(buf) != MPEGVIDEO_PACKET_START_CODE)
       return 0;
@@ -67,6 +61,7 @@ mpeg_ps_reader_c::mpeg_ps_reader_c(const track_info_c &ti,
                                    const mm_io_cptr &in)
   : generic_reader_c(ti, in)
   , file_done(false)
+  , m_probe_range{}
   , m_debug_timecodes{"mpeg_ps|mpeg_ps_timecodes"}
 {
 }
@@ -82,6 +77,7 @@ mpeg_ps_reader_c::read_headers() {
     }
 
     m_size          = m_in->get_size();
+    m_probe_range   = calculate_probe_range(m_size, 5 * 1024 * 1024);
     uint32_t header = m_in->read_uint32_be();
     bool done       = m_in->eof();
     version         = -1;
@@ -156,7 +152,7 @@ mpeg_ps_reader_c::read_headers() {
           break;
       }
 
-      done |= m_in->eof() || (m_in->getFilePointer() >= PS_PROBE_SIZE);
+      done |= m_in->eof() || (m_in->getFilePointer() >= m_probe_range);
     } // while (!done)
 
   } catch (...) {
@@ -492,7 +488,7 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
     int pos                    = 0;
 
     while (4 > buffer.get_size()) {
-      if (!find_next_packet_for_id(id, PS_PROBE_SIZE))
+      if (!find_next_packet_for_id(id, m_probe_range))
         throw false;
 
       auto packet = parse_packet(id);
@@ -565,7 +561,7 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
         }
       }
 
-      if (!find_next_packet_for_id(id, PS_PROBE_SIZE))
+      if (!find_next_packet_for_id(id, m_probe_range))
         break;
 
       auto packet = parse_packet(id);
@@ -608,8 +604,8 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
 
   while (   (MPV_PARSER_STATE_EOS   != state)
          && (MPV_PARSER_STATE_ERROR != state)
-         && (PS_PROBE_SIZE >= m_in->getFilePointer())) {
-    if (find_next_packet_for_id(id, PS_PROBE_SIZE)) {
+         && (m_probe_range >= m_in->getFilePointer())) {
+    if (find_next_packet_for_id(id, m_probe_range)) {
       auto packet = parse_packet(id);
       if (!packet)
         break;
@@ -702,8 +698,8 @@ mpeg_ps_reader_c::new_stream_v_avc(mpeg_ps_id_t id,
 
   parser.add_bytes(buf, length);
 
-  while (!parser.headers_parsed() && (PS_PROBE_SIZE >= m_in->getFilePointer())) {
-    if (!find_next_packet_for_id(id, PS_PROBE_SIZE))
+  while (!parser.headers_parsed() && (m_probe_range >= m_in->getFilePointer())) {
+    if (!find_next_packet_for_id(id, m_probe_range))
       break;
 
     auto packet = parse_packet(id);
@@ -736,8 +732,8 @@ mpeg_ps_reader_c::new_stream_v_vc1(mpeg_ps_id_t id,
 
   parser.add_bytes(buf, length);
 
-  while (!parser.is_sequence_header_available() && (PS_PROBE_SIZE >= m_in->getFilePointer())) {
-    if (!find_next_packet_for_id(id, PS_PROBE_SIZE))
+  while (!parser.is_sequence_header_available() && (m_probe_range >= m_in->getFilePointer())) {
+    if (!find_next_packet_for_id(id, m_probe_range))
       break;
 
     auto packet = parse_packet(id);
@@ -803,8 +799,8 @@ mpeg_ps_reader_c::new_stream_a_dts(mpeg_ps_id_t id,
 
   buffer.add(buf, length);
 
-  while ((-1 == mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), track->dts_header, false)) && (PS_PROBE_SIZE >= m_in->getFilePointer())) {
-    if (!find_next_packet_for_id(id, PS_PROBE_SIZE))
+  while ((-1 == mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), track->dts_header, false)) && (m_probe_range >= m_in->getFilePointer())) {
+    if (!find_next_packet_for_id(id, m_probe_range))
       throw false;
 
     auto packet = parse_packet(id);
@@ -846,10 +842,10 @@ mpeg_ps_reader_c::new_stream_a_truehd(mpeg_ps_id_t id,
       return;
     }
 
-    if (PS_PROBE_SIZE < m_in->getFilePointer())
+    if (m_probe_range < m_in->getFilePointer())
       throw false;
 
-    if (!find_next_packet_for_id(id, PS_PROBE_SIZE))
+    if (!find_next_packet_for_id(id, m_probe_range))
       throw false;
 
     auto packet = parse_packet(id);

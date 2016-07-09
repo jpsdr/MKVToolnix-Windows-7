@@ -68,6 +68,8 @@ protected:
 
   timestamp_c m_restricted_timecodes_min, m_restricted_timecodes_max;
 
+  boost::rational<uint64_t> m_probe_range_percentage;
+
 public:
   generic_reader_c(const track_info_c &ti, const mm_io_cptr &in);
   virtual ~generic_reader_c();
@@ -123,6 +125,9 @@ public:
   virtual attach_mode_e attachment_requested(int64_t id);
 
   virtual void display_identification_results();
+
+  virtual void set_probe_range_percentage(boost::rational<uint64_t> const &probe_range_percentage);
+  virtual int64_t calculate_probe_range(uint64_t file_size, uint64_t fixed_minimum) const;
 
 protected:
   virtual bool demuxing_requested(char type, int64_t id, std::string const &language = "");

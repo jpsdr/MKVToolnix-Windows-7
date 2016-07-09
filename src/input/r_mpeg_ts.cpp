@@ -53,7 +53,6 @@
 
 #define TS_CONSECUTIVE_PACKETS 16
 #define TS_PROBE_SIZE          (2 * TS_CONSECUTIVE_PACKETS * 204)
-#define TS_PIDS_DETECT_SIZE    (10 * 1024 * 1024)
 #define TS_PACKET_SIZE         188
 #define TS_MAX_PACKET_SIZE     204
 
@@ -723,6 +722,7 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
   , m_global_timestamp_offset{}
   , m_stream_timestamp{timestamp_c::ns(0)}
   , m_state{ps_probing}
+  , m_probe_range{}
   , file_done{}
   , m_packet_sent_to_packetizer{}
   , m_dont_use_audio_pts{      "mpeg_ts|mpeg_ts_dont_use_audio_pts"}
@@ -747,9 +747,10 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
 void
 mpeg_ts_reader_c::read_headers() {
   try {
-    size_t size_to_probe   = std::min(m_size, static_cast<uint64_t>(TS_PIDS_DETECT_SIZE));
-
+    m_probe_range          = calculate_probe_range(m_in->get_size(), 5 * 1024 * 1024);
+    size_t size_to_probe   = std::min(m_size, m_probe_range);
     m_detected_packet_size = detect_packet_size(m_in.get(), size_to_probe);
+
     m_in->setFilePointer(0);
 
     mxdebug_if(m_debug_headers, boost::format("read_headers: Starting to build PID list. (packet size: %1%)\n") % m_detected_packet_size);
@@ -844,12 +845,12 @@ mpeg_ts_reader_c::determine_global_timestamp_offset() {
   m_in->setFilePointer(0);
   m_in->clear_eof();
 
-  mxdebug_if(m_debug_headers, boost::format("determine_global_timestamp_offset: determining global timestamp offset from the first %1% bytes\n") % TS_PIDS_DETECT_SIZE);
+  mxdebug_if(m_debug_headers, boost::format("determine_global_timestamp_offset: determining global timestamp offset from the first %1% bytes\n") % m_probe_range);
 
   try {
     unsigned char buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
 
-    while (m_in->getFilePointer() < TS_PIDS_DETECT_SIZE) {
+    while (m_in->getFilePointer() < m_probe_range) {
       if (m_in->read(buf, m_detected_packet_size) != static_cast<unsigned int>(m_detected_packet_size))
         break;
 

@@ -204,6 +204,8 @@ private:
   std::vector<mpeg_ps_track_ptr> tracks;
   std::map<generic_packetizer_c *, mpeg_ps_track_ptr> m_ptzr_to_track_map;
 
+  uint64_t m_probe_range;
+
   debugging_option_c m_debug_timecodes;
 
 public:

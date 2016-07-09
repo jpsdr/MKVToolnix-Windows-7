@@ -395,6 +395,7 @@ protected:
   timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_last_non_subtitle_timestamp;
 
   processing_state_e m_state;
+  uint64_t m_probe_range;
 
   bool file_done, m_packet_sent_to_packetizer;
 

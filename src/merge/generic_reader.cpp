@@ -41,6 +41,7 @@ generic_reader_c::generic_reader_c(const track_info_c &ti,
   , m_num_audio_tracks{}
   , m_num_subtitle_tracks{}
   , m_reference_timecode_tolerance{}
+  , m_probe_range_percentage{boost::rational<uint64_t>{3u, 10u}} // 0.3%
 {
   add_all_requested_track_ids(*this, m_ti.m_atracks.m_items);
   add_all_requested_track_ids(*this, m_ti.m_vtracks.m_items);
@@ -509,4 +510,26 @@ generic_reader_c::get_underlying_input()
   while (dynamic_cast<mm_proxy_io_c *>(actual_in))
     actual_in = static_cast<mm_proxy_io_c *>(actual_in)->get_proxied();
   return actual_in;
+}
+
+void
+generic_reader_c::set_probe_range_percentage(boost::rational<uint64_t> const &probe_range_percentage) {
+  m_probe_range_percentage = probe_range_percentage;
+}
+
+int64_t
+generic_reader_c::calculate_probe_range(uint64_t file_size,
+                                        uint64_t fixed_minimum)
+  const {
+  static debugging_option_c s_debug{"probe_range"};
+
+  auto factor      = boost::rational<uint64_t>{1u, 100u} * m_probe_range_percentage;
+  auto probe_range = boost::rational_cast<uint64_t>(factor * file_size);;;;
+  auto to_use      = std::max(fixed_minimum, probe_range);
+
+  mxdebug_if(s_debug,
+             boost::format("calculate_probe_range: calculated %1% based on file size %2% fixed minimum %3% percentage %4%/%5% percentage of size %6%\n")
+             % to_use % file_size % fixed_minimum % m_probe_range_percentage.numerator() % m_probe_range_percentage.denominator() % probe_range);
+
+  return to_use;
 }
