@@ -23,6 +23,7 @@
 #include "common/translation.h"
 #include "merge/file_status.h"
 #include "merge/id_result.h"
+#include "common/math.h"
 #include "merge/packet.h"
 #include "merge/timestamp_factory.h"
 #include "merge/track_info.h"
@@ -67,8 +68,6 @@ protected:
   std::vector<id_result_t> m_id_results_tracks, m_id_results_attachments, m_id_results_chapters, m_id_results_tags;
 
   timestamp_c m_restricted_timecodes_min, m_restricted_timecodes_max;
-
-  boost::rational<uint64_t> m_probe_range_percentage;
 
 public:
   generic_reader_c(const track_info_c &ti, const mm_io_cptr &in);
@@ -126,8 +125,10 @@ public:
 
   virtual void display_identification_results();
 
-  virtual void set_probe_range_percentage(boost::rational<uint64_t> const &probe_range_percentage);
-  virtual int64_t calculate_probe_range(uint64_t file_size, uint64_t fixed_minimum) const;
+  virtual int64_t calculate_probe_range(int64_t file_size, int64_t fixed_minimum) const;
+
+public:
+  static void set_probe_range_percentage(int64_rational_c const &probe_range_percentage);
 
 protected:
   virtual bool demuxing_requested(char type, int64_t id, std::string const &language = "");
