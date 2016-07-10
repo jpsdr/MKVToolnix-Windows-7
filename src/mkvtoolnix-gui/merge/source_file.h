@@ -32,6 +32,8 @@ public:
 
   uint64_t m_playlistDuration, m_playlistSize, m_playlistChapters;
 
+  double m_probeRangePercentage;
+
 public:
   explicit SourceFile(QString const &fileName = QString{""});
   SourceFile(SourceFile const &other);

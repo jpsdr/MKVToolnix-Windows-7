@@ -75,6 +75,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMDefaultSubtitleTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultSubtitleTrackLanguage);
   ui->cbMDefaultSubtitleCharset->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
+  ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
 
   setupProcessPriority();
   setupPlaylistScanningPolicy();
@@ -233,6 +234,12 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."))
                    .arg(QY("Checking this option causes the GUI to set that compression to \"none\" by default for all track types when adding files.")));
+
+  Util::setToolTip(ui->cbMProbeRangePercentage,
+                   Q("%1 %2 %3")
+                   .arg(QY("File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."))
+                   .arg(QY("This amount is 0.3% of the source file's size or 10 MB, whichever is higher."))
+                   .arg(QY("If tracks are known to be present but not found then the percentage to probe can be changed here.")));
 
   Util::setToolTip(ui->cbMAlwaysShowOutputFileControls,
                    Q("%1 %2")
@@ -614,6 +621,7 @@ PreferencesDialog::save() {
   m_cfg.m_defaultSubtitleCharset             = ui->cbMDefaultSubtitleCharset->currentData().toString();
   m_cfg.m_priority                           = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
   m_cfg.m_defaultAdditionalMergeOptions      = ui->leMDefaultAdditionalCommandLineOptions->text();
+  m_cfg.m_probeRangePercentage               = ui->cbMProbeRangePercentage->value();
 
   m_cfg.m_scanForPlaylistsPolicy             = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
   m_cfg.m_minimumPlaylistDuration            = ui->sbMMinPlaylistDuration->value();

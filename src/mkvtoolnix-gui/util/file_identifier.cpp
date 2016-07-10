@@ -56,6 +56,11 @@ FileIdentifier::identify() {
 
   auto args = QStringList{} << "--output-charset" << "utf-8" << "--identification-format" << "json" << "--identify" << d->m_fileName;
 
+  if (   (cfg.m_probeRangePercentage  >   0)
+      && (cfg.m_probeRangePercentage  < 100)
+      && (cfg.m_probeRangePercentage != 0.3))
+    args << "--probe-range-percentage" << QString::number(cfg.m_probeRangePercentage);
+
   if (cfg.m_defaultAdditionalMergeOptions.contains(Q("keep_last_chapter_in_mpls")))
     args << "--engage" << "keep_last_chapter_in_mpls";
 
@@ -138,7 +143,8 @@ FileIdentifier::parseOutput() {
     return false;
   }
 
-  d->m_file = std::make_shared<Merge::SourceFile>(d->m_fileName);
+  d->m_file                         = std::make_shared<Merge::SourceFile>(d->m_fileName);
+  d->m_file->m_probeRangePercentage = Settings::get().m_probeRangePercentage;
 
   parseContainer(container);
 

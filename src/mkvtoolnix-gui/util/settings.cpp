@@ -168,6 +168,7 @@ Settings::load() {
 
   reg.beginGroup("settings");
   m_priority                           = static_cast<ProcessPriority>(reg.value("priority", static_cast<int>(NormalPriority)).toInt());
+  m_probeRangePercentage               = reg.value("probeRangePercentage", 0.3).toDouble();
   m_tabPosition                        = static_cast<QTabWidget::TabPosition>(reg.value("tabPosition", static_cast<int>(QTabWidget::North)).toInt());
   m_lastOpenDir                        = QDir{reg.value("lastOpenDir").toString()};
   m_lastOutputDir                      = QDir{reg.value("lastOutputDir").toString()};
@@ -330,6 +331,7 @@ Settings::save()
 
   reg.beginGroup("settings");
   reg.setValue("priority",                           static_cast<int>(m_priority));
+  reg.setValue("probeRangePercentage",               m_probeRangePercentage);
   reg.setValue("tabPosition",                        static_cast<int>(m_tabPosition));
   reg.setValue("lastOpenDir",                        m_lastOpenDir.path());
   reg.setValue("lastOutputDir",                      m_lastOutputDir.path());

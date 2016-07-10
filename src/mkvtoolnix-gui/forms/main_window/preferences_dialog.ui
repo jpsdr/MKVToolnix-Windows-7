@@ -302,13 +302,13 @@
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <layout class="QGridLayout" name="gridLayout_2">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_6">
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_5">
                <property name="text">
-                <string>Clearing settings auto&amp;matically:</string>
+                <string>Process &amp;priority:</string>
                </property>
                <property name="buddy">
-                <cstring>cbMClearMergeSettings</cstring>
+                <cstring>cbMProcessPriority</cstring>
                </property>
               </widget>
              </item>
@@ -337,6 +337,16 @@
                </item>
               </widget>
              </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Clearing settings auto&amp;matically:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbMClearMergeSettings</cstring>
+               </property>
+              </widget>
+             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_13">
                <property name="text">
@@ -344,6 +354,16 @@
                </property>
                <property name="buddy">
                 <cstring>cbMAddingAppendingFilesPolicy</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="cbMProcessPriority">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
               </widget>
              </item>
@@ -357,23 +377,26 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_5">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_16">
                <property name="text">
-                <string>Process &amp;priority:</string>
+                <string>Probe &amp;range percentage:</string>
                </property>
                <property name="buddy">
-                <cstring>cbMProcessPriority</cstring>
+                <cstring>cbMProbeRangePercentage</cstring>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QComboBox" name="cbMProcessPriority">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
+             <item row="3" column="1">
+              <widget class="QDoubleSpinBox" name="cbMProbeRangePercentage">
+               <property name="minimum">
+                <double>0.010000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.100000000000000</double>
+               </property>
+               <property name="value">
+                <double>0.300000000000000</double>
                </property>
               </widget>
              </item>
@@ -1555,6 +1578,7 @@
   <tabstop>cbMClearMergeSettings</tabstop>
   <tabstop>cbMAddingAppendingFilesPolicy</tabstop>
   <tabstop>cbMProcessPriority</tabstop>
+  <tabstop>cbMProbeRangePercentage</tabstop>
   <tabstop>cbMAlwaysShowOutputFileControls</tabstop>
   <tabstop>rbMTrackPropertiesLayoutHorizontalScrollArea</tabstop>
   <tabstop>rbMTrackPropertiesLayoutHorizontalTwoColumns</tabstop>

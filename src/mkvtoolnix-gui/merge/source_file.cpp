@@ -42,6 +42,7 @@ SourceFile::SourceFile(QString const &fileName)
   , m_playlistDuration{}
   , m_playlistSize{}
   , m_playlistChapters{}
+  , m_probeRangePercentage{0.3}
 {
 
 }
@@ -162,11 +163,13 @@ SourceFile::saveSettings(Util::ConfigFile &settings)
   for (auto const &playlistFile : m_playlistFiles)
     playlistFiles << playlistFile.filePath();
 
-  settings.setValue("isPlaylist",       m_isPlaylist);
-  settings.setValue("playlistFiles",    playlistFiles);
-  settings.setValue("playlistDuration", static_cast<qulonglong>(m_playlistDuration));
-  settings.setValue("playlistSize",     static_cast<qulonglong>(m_playlistSize));
-  settings.setValue("playlistChapters", static_cast<qulonglong>(m_playlistChapters));
+  settings.setValue("isPlaylist",           m_isPlaylist);
+  settings.setValue("playlistFiles",        playlistFiles);
+  settings.setValue("playlistDuration",     static_cast<qulonglong>(m_playlistDuration));
+  settings.setValue("playlistSize",         static_cast<qulonglong>(m_playlistSize));
+  settings.setValue("playlistChapters",     static_cast<qulonglong>(m_playlistChapters));
+
+  settings.setValue("probeRangePercentage", m_probeRangePercentage);
 }
 
 void
@@ -187,6 +190,8 @@ SourceFile::loadSettings(MuxConfig::Loader &l) {
   m_playlistDuration               = l.settings.value("playlistDuration").toULongLong();
   m_playlistSize                   = l.settings.value("playlistSize").toULongLong();
   m_playlistChapters               = l.settings.value("playlistChapters").toULongLong();
+
+  m_probeRangePercentage           = l.settings.value("probeRangePercentage", 0.3).toDouble();
 
   m_playlistFiles.clear();
   for (auto const &playlistFile : playlistFiles)

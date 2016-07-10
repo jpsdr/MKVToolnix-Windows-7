@@ -318,6 +318,10 @@ set_usage() {
   usage_text += Y("  -F, --identification-format <format>\n"
                   "                           Set the identification results format\n"
                   "                           ('text', 'verbose-text', 'json').\n");
+  usage_text += Y("  --probe-range-percentage <percent>\n"
+                  "                           Sets maximum size to probe for tracks in percent\n"
+                  "                           of the total file size for certain file types\n"
+                  "                           (default: 0.3).\n");
   usage_text += Y("  -l, --list-types         Lists supported input file types.\n");
   usage_text += Y("  --list-languages         Lists all ISO639 languages and their\n"
                   "                           ISO639-2 codes.\n");
@@ -1990,9 +1994,40 @@ parse_arg_identification_format(std::vector<std::string>::const_iterator &sit,
 }
 
 static void
-handle_identification_args(std::vector<std::string> const &args) {
+parse_arg_probe_range(boost::optional<std::string> next_arg) {
+  if (!next_arg)
+    mxerror(boost::format(Y("'%1%' lacks its argument.\n")) % "--probe-range-percentage");
+
+  int64_rational_c probe_range_percentage{0, 1};
+  if (   !parse_number_as_rational(*next_arg, probe_range_percentage)
+      || !probe_range_percentage.denominator()
+      || (boost::rational_cast<double>(probe_range_percentage) <= 0)
+      || (boost::rational_cast<double>(probe_range_percentage)  > 100))
+    mxerror(boost::format(Y("The probe range percentage '%1%' is invalid.\n")) % *next_arg);
+
+  generic_reader_c::set_probe_range_percentage(probe_range_percentage);
+}
+
+static void
+handle_identification_args(std::vector<std::string> &args) {
   auto identification_command = boost::optional<std::string>{};
   auto file_to_identify       = boost::optional<std::string>{};
+  auto this_arg_itr           = args.begin();
+
+  while (this_arg_itr != args.end()) {
+    auto next_arg_itr = this_arg_itr + 1;
+
+    boost::optional<std::string> next_arg;
+    if (next_arg_itr != args.end())
+      next_arg.reset(*next_arg_itr);
+
+    if (*this_arg_itr == "--probe-range-percentage") {
+      parse_arg_probe_range(next_arg);
+      args.erase(this_arg_itr, next_arg_itr + 1);
+
+    } else
+      ++this_arg_itr;
+  }
 
   for (auto const &this_arg : args) {
     if (!mtx::included_in(this_arg, "-i", "--identify", "-I", "--identify-verbose", "--identify-for-mmg", "--identify-for-gui", "-J"))

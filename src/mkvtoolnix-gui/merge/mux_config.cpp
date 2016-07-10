@@ -430,8 +430,12 @@ MuxConfig::buildMkvmergeOptions()
   if (m_webmMode)
     options << Q("--webm");
 
-  for (auto const &file : m_files)
+  auto probeRangePercentage = 0.0;
+
+  for (auto const &file : m_files) {
     file->buildMkvmergeOptions(options);
+    probeRangePercentage = std::max(probeRangePercentage, file->m_probeRangePercentage);
+  }
 
   for (auto const &attachment : m_attachments)
     attachment->buildMkvmergeOptions(options);
@@ -495,6 +499,11 @@ MuxConfig::buildMkvmergeOptions()
   auto fileNumbers  = buildFileNumbers();
   options          += buildTrackOrder(fileNumbers);
   options          += buildAppendToMapping(fileNumbers);
+
+  if (   (probeRangePercentage  >   0)
+      && (probeRangePercentage  < 100)
+      && (probeRangePercentage != 0.3))
+    options << Q("--probe-range-percentage") << QString::number(probeRangePercentage);
 
   return options;
 }
