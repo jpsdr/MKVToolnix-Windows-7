@@ -77,7 +77,7 @@ mpeg_ps_reader_c::read_headers() {
     }
 
     m_size          = m_in->get_size();
-    m_probe_range   = calculate_probe_range(m_size, 5 * 1024 * 1024);
+    m_probe_range   = calculate_probe_range(m_size, 10 * 1024 * 1024);
     uint32_t header = m_in->read_uint32_be();
     bool done       = m_in->eof();
     version         = -1;

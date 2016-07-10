@@ -747,7 +747,7 @@ mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
 void
 mpeg_ts_reader_c::read_headers() {
   try {
-    m_probe_range          = calculate_probe_range(m_in->get_size(), 5 * 1024 * 1024);
+    m_probe_range          = calculate_probe_range(m_in->get_size(), 10 * 1024 * 1024);
     size_t size_to_probe   = std::min(m_size, m_probe_range);
     m_detected_packet_size = detect_packet_size(m_in.get(), size_to_probe);
 
