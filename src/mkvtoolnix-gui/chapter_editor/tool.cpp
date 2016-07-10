@@ -300,10 +300,12 @@ Tool::setupTabPositions() {
 
 QString
 Tool::chapterNameTemplateToolTip() {
-  return Q("<p>%1 %2 %3</p><p>%4 %5</p><p>%6 %7 %8</p><ul><li>%9</li><li>%10</li><li>%11</li><li>%12</li><li>%13</li><li>%14</li><li>%15</li><li>%16</li></ul>")
+  return Q("<p>%1 %2 %3 %4</p><p>%5 %6</p><p>%7 %8 %9</p><ul><li>%10</li><li>%11</li><li>%12</li><li>%13</li><li>%14</li><li>%15</li><li>%16</li><li>%17</li></ul>")
     .arg(QYH("This template will be used for new chapter entries."))
     .arg(QYH("The string '<NUM>' will be replaced by the chapter number."))
     .arg(QYH("The string '<START>' will be replaced by the chapter's start timestamp."))
+    .arg(QYH("The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name "
+             "(the former leaves the extension out while the latter includes it)."))
 
     .arg(QYH("You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'."))
     .arg(QYH("The resulting number will be padded with leading zeroes if the number of places is less than specified."))

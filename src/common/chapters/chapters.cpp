@@ -1116,10 +1116,14 @@ regenerate_edition_and_chapter_uids(EbmlMaster &master) {
 std::string
 format_chapter_name_template(std::string const &name_template,
                              int chapter_number,
-                             timestamp_c const &start_timestamp) {
-  auto name         = name_template;
-  auto number_re    = boost::regex{"<NUM(?::(\\d+))?>"};
-  auto timestamp_re = boost::regex{"<START(?::([^>]+))?>"};
+                             timestamp_c const &start_timestamp,
+                             std::string const &appended_file_name) {
+  auto name                 = name_template;
+  auto number_re            = boost::regex{"<NUM(?::(\\d+))?>"};
+  auto timestamp_re         = boost::regex{"<START(?::([^>]+))?>"};
+  auto file_name_re         = boost::regex{"<FILE_NAME>"};
+  auto file_name_ext_re     = boost::regex{"<FILE_NAME_WITH_EXT>"};
+  auto appended_file_name_p = bfs::path{appended_file_name};
 
   name = boost::regex_replace(name, number_re, [=](boost::smatch const &match) {
     auto number_str    = (boost::format("%1%") % chapter_number).str();
@@ -1138,6 +1142,9 @@ format_chapter_name_template(std::string const &name_template,
     auto format = match[1].length() ? match[1] : std::string{"%H:%M:%S"};
     return format_timestamp(start_timestamp.to_ns(), format);
   });
+
+  name = boost::regex_replace(name, file_name_re,     appended_file_name_p.stem().string());
+  name = boost::regex_replace(name, file_name_ext_re, appended_file_name_p.filename().string());
 
   return name;
 }

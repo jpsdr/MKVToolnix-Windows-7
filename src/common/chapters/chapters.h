@@ -93,7 +93,7 @@ void regenerate_edition_and_chapter_uids(EbmlMaster &master);
 void align_chapter_edition_uids(KaxChapters *chapters);
 void align_chapter_edition_uids(KaxChapters &reference, KaxChapters &modify);
 
-std::string format_chapter_name_template(std::string const &name_template, int chapter_number, timestamp_c const &start_timestamp);
+std::string format_chapter_name_template(std::string const &name_template, int chapter_number, timestamp_c const &start_timestamp, std::string const &appended_file_name = std::string{});
 
 void fix_chapter_country_codes(EbmlMaster &chapters);
 

@@ -22,6 +22,7 @@
 #include "common/translation.h"
 #include "merge/cluster_helper.h"
 #include "merge/cues.h"
+#include "merge/generic_reader.h"
 #include "merge/libmatroska_extensions.h"
 #include "merge/output_control.h"
 #include "merge/packet_extensions.h"
@@ -797,9 +798,10 @@ cluster_helper_c::generate_chapters_if_necessary(packet_cptr const &packet) {
 
 void
 cluster_helper_c::generate_one_chapter(timestamp_c const &timestamp) {
+  auto appended_file_name               = chapter_generation_mode_e::when_appending == m->chapter_generation_mode ? m->chapter_generation_reference_track->m_reader->m_ti.m_fname : std::string{};
   m->chapter_generation_number         += 1;
   m->chapter_generation_last_generated  = timestamp;
-  auto name                             = format_chapter_name_template(m->chapter_generation_name_template.get_translated(), m->chapter_generation_number, timestamp);
+  auto name                             = format_chapter_name_template(m->chapter_generation_name_template.get_translated(), m->chapter_generation_number, timestamp, appended_file_name);
 
   add_chapter_atom(timestamp, name, m->chapter_generation_language);
 }

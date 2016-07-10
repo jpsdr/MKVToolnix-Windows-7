@@ -1,5 +1,11 @@
 2016-07-10  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge, MKVToolNix GUI: new chapter generation feature: two
+        new placeholders have been introduced when generating chapters for
+        appended files, <FILE_NAME> and <FILE_NAME_WITH_EXT>. The former
+        will be replaced by the appended file's name without its
+        extension; the latter with its extension. Implements #1737.
+
         * MKVToolNix GUI: merge tool enhancement: when opening a saved
         configuration (via the menu as well as via drag & drop) the
         current tab will be replaced if it is empty ( = in the same state
