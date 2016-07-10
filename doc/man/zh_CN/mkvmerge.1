@@ -214,6 +214,12 @@ DTD
 .sp
 模板中可以使用多个变量，这些变量将在生成章节时被实际值替代。字符串 \*(Aq<NUM>\*(Aq 将被章节号替代。字符串 \*(Aq<START>\*(Aq 将被章节的起始时间戳替代。
 .sp
+The strings
+\*(Aq<FILE_NAME>\*(Aq
+and
+\*(Aq<FILE_NAME_WITH_EXT>\*(Aq
+are only filled when generating chapters for appended files\&. They will be replaced by the appended file\*(Aqs name wihtout respectively with its extension\&. Note that only the file\*(Aqs base name and extension are inserted, not its directory or drive components\&.
+.sp
 您可以以 \*(Aq<NUM:位数>\*(Aq 的形式指定章节编号的最少位数，如 \*(Aq<NUM:3>\*(Aq。最终的数字，若其位数小于指定位数，则将在开头补零。
 .sp
 您可以以

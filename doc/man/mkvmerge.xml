@@ -271,6 +271,12 @@
       </para>
 
       <para>
+       The strings <literal>'&lt;FILE_NAME&gt;'</literal> and <literal>'&lt;FILE_NAME_WITH_EXT&gt;'</literal> are only filled when
+       generating chapters for appended files.  They will be replaced by the appended file's name wihtout respectively with its extension.
+       Note that only the file's base name and extension are inserted, not its directory or drive components.
+      </para>
+
+      <para>
        You can specify a minimum number of places for the chapter number with '<literal>&lt;NUM:places&gt;</literal>', e.g. '<literal>&lt;NUM:3&gt;</literal>'.
        The resulting number will be padded with leading zeroes if the number of places is less than specified.
       </para>

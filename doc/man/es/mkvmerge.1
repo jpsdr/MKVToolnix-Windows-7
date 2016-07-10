@@ -210,6 +210,12 @@ Esto establece el nombre de la plantilla para los nombres de los cap\('itulos cr
 .sp
 Hay diversas variables que se pueden usar en la plantilla que son reemplazadas por sus valores correspondientes cuando se genera un cap\('itulo\&. La cadena de texto \*(Aq<NUM>\*(Aq ser\('a reemplazada por el n\('umero de cap\('itulo\&. La cadena de texto \*(Aq<START>\*(Aq ser\('a reemplazada por la marca de tiempo inicial del cap\('itulo\&.
 .sp
+The strings
+\*(Aq<FILE_NAME>\*(Aq
+and
+\*(Aq<FILE_NAME_WITH_EXT>\*(Aq
+are only filled when generating chapters for appended files\&. They will be replaced by the appended file\*(Aqs name wihtout respectively with its extension\&. Note that only the file\*(Aqs base name and extension are inserted, not its directory or drive components\&.
+.sp
 Puede especificar el n\('umero m\('inimo de d\('igitos del n\('umero del cap\('itulo con \*(Aq<NUM:places>\*(Aq, p\&.e\&. \*(Aq<NUM:3>\*(Aq\&. Se le a\(~nadir\('an ceros a la izquierda si el n\('umero resultante tiene menos d\('igitos de los especificados\&.
 .sp
 Puede controlar el formato a usar seg\('un la marca de tiempo inicial con

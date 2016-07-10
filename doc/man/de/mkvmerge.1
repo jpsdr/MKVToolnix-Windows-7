@@ -205,6 +205,12 @@ erzeugte Kapitelnamen\&. Falls die Option nicht angegeben wurde, wird der Standa
 .sp
 Es gibt mehrere Variablen, die in der Vorlage benutzt werden k\(:onnen und die durch ihre tats\(:achlichen Werte ersetzt werden, sobald ein Kapitel erzeugt wird\&. Die Zeichenkette \*(Aq<NUM>\*(Aq wird durch die Kapitelnummer ersetzt\&. Die Zeichenkette \*(Aq<START>\*(Aq wird durch den Startzeitpunkt des Kapitels ersetzt\&.
 .sp
+The strings
+\*(Aq<FILE_NAME>\*(Aq
+and
+\*(Aq<FILE_NAME_WITH_EXT>\*(Aq
+are only filled when generating chapters for appended files\&. They will be replaced by the appended file\*(Aqs name wihtout respectively with its extension\&. Note that only the file\*(Aqs base name and extension are inserted, not its directory or drive components\&.
+.sp
 Sie k\(:onnen mit \(Fc<NUM:Stellen>\(Fo eine Mindestanzahl von Stellen f\(:ur die Kapitelnummer angeben, z\&.B\&. \(Fc<NUM:3>\(Fo\&. Die Nummer wird mit f\(:uhrenden Nullen aufgef\(:ullt, falls die Stellenanzahl geringer als angegeben ist\&.
 .sp
 Sie k\(:onnen das f\(:ur den Startzeitstempel benutzte Format mit <START:format> anpassen\&. Als Format wird standardm\(:a\(ssig \*(Aq%H:%M:%S\*(Aq genommen, falls keines angegeben wird\&. G\(:ultige Formatanweisungen sind:

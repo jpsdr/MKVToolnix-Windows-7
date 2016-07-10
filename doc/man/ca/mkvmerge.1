@@ -203,6 +203,12 @@ Aix\(`o estableix la plantilla del nom pels noms dels cap\('itols generats per l
 .sp
 Hi ha diverses variables que es poden usar a la plantilla que seran substitu\(:ides amb els valors actuals quan es generi un cap\('itol\&. La cadena \(Fo<NUM>\(Fc ser\(`a substitu\(:ida pel n\('umero de cap\('itol\&. La cadena \(Fo<START>\(Fc ser\(`a substitu\(:ida per la marca de temps d\*(Aqinici del cap\('itol\&.
 .sp
+The strings
+\*(Aq<FILE_NAME>\*(Aq
+and
+\*(Aq<FILE_NAME_WITH_EXT>\*(Aq
+are only filled when generating chapters for appended files\&. They will be replaced by the appended file\*(Aqs name wihtout respectively with its extension\&. Note that only the file\*(Aqs base name and extension are inserted, not its directory or drive components\&.
+.sp
 Podeu especificar un nombre m\('inim de llocs per al n\('umero de cap\('itol amb \(Fo<NUM:places>\(Fc, p\&. ex\&. \(Fo<NUM:3>\(Fc\&. El nombre resultant ser\(`a emplenat amb zeros a l\*(Aqesquerra si el nombre de posicions \('es menor que l\*(Aqespecificat\&.
 .sp
 Podeu controlar el format emprat per a la marca de temps d\*(Aqinici amb
