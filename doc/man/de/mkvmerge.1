@@ -1878,6 +1878,14 @@ beschrieben wird\&.
 .RE
 .RE
 .PP
+\fB\-\-probe\-range\-percentage\fR \fIpercentage\fR
+.RS 4
+File types such as MPEG program and transport streams (\&.vob,
+\&.m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file\&. This amount is 0\&.3% of the source file\*(Aqs size or 10 MB, whichever is higher\&.
+.sp
+If tracks are known to be present but not found then the percentage to probe can be changed with this option\&. The minimum of 10 MB is built\-in and cannot be changed\&.
+.RE
+.PP
 \fB\-l\fR, \fB\-\-list\-types\fR
 .RS 4
 f\(:uhrt unterst\(:utzte Eingabedateitypen auf\&.
