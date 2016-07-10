@@ -4,6 +4,7 @@ require 'digest/sha1'
 
 class FormatStringVerifier
   @@errors_to_ignore = {
+    "313e42fc" => true,
     "d2820b11" => true,
     "f3230d7f" => true,
   }
