@@ -62,7 +62,7 @@ protected:
   AttachmentModel *m_attachmentsModel;
   QAction *m_addAttachmentsAction, *m_removeAttachmentsAction, *m_removeAllAttachmentsAction, *m_selectAllAttachmentsAction;
 
-  QString m_savedState;
+  QString m_savedState, m_emptyState;
 
   debugging_option_c m_debugTrackModel;
 
@@ -71,6 +71,7 @@ public:
   ~Tab();
 
   virtual bool hasBeenModified();
+  virtual bool isEmpty();
   virtual bool hasSourceFiles() const;
   virtual bool hasDestinationFileName() const;
 

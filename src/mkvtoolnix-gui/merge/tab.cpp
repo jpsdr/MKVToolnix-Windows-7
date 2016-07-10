@@ -103,6 +103,7 @@ Tab::Tab(QWidget *parent)
   Util::preventScrollingWithoutFocus(this);
 
   m_savedState = currentState();
+  m_emptyState = m_savedState;
 }
 
 Tab::~Tab() {
@@ -490,6 +491,11 @@ Tab::currentState() {
 bool
 Tab::hasBeenModified() {
   return currentState() != m_savedState;
+}
+
+bool
+Tab::isEmpty() {
+  return currentState() == m_emptyState;
 }
 
 void

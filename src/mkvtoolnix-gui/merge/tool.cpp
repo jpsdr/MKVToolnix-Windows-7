@@ -166,6 +166,10 @@ Tool::openConfigFile(QString const &fileName) {
     cfg.m_lastConfigDir = QFileInfo{fileName}.path();
   });
 
+  auto tab = currentTab();
+  if (tab && tab->isEmpty())
+    tab->deleteLater();
+
   appendTab(new Tab{this})
     ->load(fileName);
 }
