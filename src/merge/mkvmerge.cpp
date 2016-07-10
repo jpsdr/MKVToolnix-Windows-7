@@ -716,9 +716,7 @@ parse_arg_cropping(const std::string &s,
 */
 static void parse_arg_colour_matrix(const std::string &s, track_info_c &ti) {
   if (!parse_property_to_value<int>(s, ti.m_colour_matrix_list))
-    mxerror(boost::format("Colour matrix parameter: not given in the form "
-                          "<TID>:n (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Colour matrix parameter: not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --colour-bits-per-channel argument
@@ -727,9 +725,7 @@ static void parse_arg_colour_matrix(const std::string &s, track_info_c &ti) {
 static void parse_arg_colour_bits_per_channel(const std::string &s,
                                               track_info_c &ti) {
   if (!parse_property_to_value<int>(s, ti.m_bits_per_channel_list))
-    mxerror(boost::format("Bits per channel parameter: not given in the form "
-                          "<TID>:n (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Bits per channel parameter: not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --chroma-subsample argument
@@ -738,9 +734,7 @@ static void parse_arg_colour_bits_per_channel(const std::string &s,
 static void parse_arg_chroma_subsample(const std::string &s, track_info_c &ti) {
   if (!parse_property_to_struct<chroma_subsample_t, int>(
           s, ti.m_chroma_subsample_list))
-    mxerror(boost::format("Chroma subsampling parameter: not given in the form "
-                          "<TID>:hori,vert (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Chroma subsampling parameter: not given in the form <TID>:hori,vert (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --cb-subsample argument
@@ -748,20 +742,15 @@ static void parse_arg_chroma_subsample(const std::string &s, track_info_c &ti) {
 */
 static void parse_arg_cb_subsample(const std::string &s, track_info_c &ti) {
   if (!parse_property_to_struct<cb_subsample_t, int>(s, ti.m_cb_subsample_list))
-    mxerror(boost::format("Cb subsampling parameter: not given in the form "
-                          "<TID>:hori,vert (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Cb subsampling parameter: not given in the form <TID>:hori,vert (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --chroma-siting argument
    The argument must have the form \c TID:hori,vert e.g. \c 0:1,1
 */
 static void parse_arg_chroma_siting(const std::string &s, track_info_c &ti) {
-  if (!parse_property_to_struct<chroma_siting_t, int>(s,
-                                                      ti.m_chroma_siting_list))
-    mxerror(boost::format("Chroma siting parameter: not given in the form "
-                          "<TID>:hori,vert (argument was '%1%').") %
-            s);
+  if (!parse_property_to_struct<chroma_siting_t, int>(s, ti.m_chroma_siting_list))
+    mxerror(boost::format("Chroma siting parameter: not given in the form <TID>:hori,vert (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --colour-range argument
@@ -769,9 +758,7 @@ static void parse_arg_chroma_siting(const std::string &s, track_info_c &ti) {
 */
 static void parse_arg_colour_range(const std::string &s, track_info_c &ti) {
   if (!parse_property_to_value<int>(s, ti.m_colour_range_list))
-    mxerror(boost::format("Colour range parameters: not given in the form "
-                          "<TID>:n (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Colour range parameters: not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --colour-transfer-characteristics argument
@@ -779,9 +766,7 @@ static void parse_arg_colour_range(const std::string &s, track_info_c &ti) {
 */
 static void parse_arg_colour_transfer(const std::string &s, track_info_c &ti) {
   if (!parse_property_to_value<int>(s, ti.m_colour_transfer_list))
-    mxerror(boost::format("Colour transfer characteristics parameter : not "
-                          "given in the form <TID>:n (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Colour transfer characteristics parameter : not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --colour-primaries argument
@@ -789,9 +774,7 @@ static void parse_arg_colour_transfer(const std::string &s, track_info_c &ti) {
 */
 static void parse_arg_colour_primaries(const std::string &s, track_info_c &ti) {
   if (!parse_property_to_value<int>(s, ti.m_colour_primaries_list))
-    mxerror(boost::format("Colour primaries parameter: not given in the form "
-                          "<TID>:n (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Colour primaries parameter: not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --max-content-light argument
@@ -800,9 +783,7 @@ static void parse_arg_colour_primaries(const std::string &s, track_info_c &ti) {
 static void parse_arg_max_content_light(const std::string &s,
                                         track_info_c &ti) {
   if (!parse_property_to_value<int>(s, ti.m_max_cll_list))
-    mxerror(boost::format("Max content light parameter: not given in the form "
-                          "<TID>:n (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Max content light parameter: not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --max-frame-light argument
@@ -810,9 +791,7 @@ static void parse_arg_max_content_light(const std::string &s,
 */
 static void parse_arg_max_frame_light(const std::string &s, track_info_c &ti) {
   if (!parse_property_to_value<int>(s, ti.m_max_fall_list))
-    mxerror(boost::format("Max frame light parameter: not given in the form "
-                          "<TID>:n (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Max frame light parameter: not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --chromaticity-coordinates argument
@@ -821,11 +800,8 @@ static void parse_arg_max_frame_light(const std::string &s, track_info_c &ti) {
 */
 static void parse_arg_chroma_coordinates(const std::string &s,
                                          track_info_c &ti) {
-  if (!parse_property_to_struct<chroma_coordinates_t, float>(
-          s, ti.m_chroma_coordinates_list))
-    mxerror(boost::format("chromaticity coordinates parameter: not given in "
-                          "the form <TID>:hori,vert (argument was '%1%').") %
-            s);
+  if (!parse_property_to_struct<chroma_coordinates_t, float>(s, ti.m_chroma_coordinates_list))
+    mxerror(boost::format("chromaticity coordinates parameter: not given in the form <TID>:hori,vert (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --white-colour-coordinates argument
@@ -833,11 +809,8 @@ static void parse_arg_chroma_coordinates(const std::string &s,
 */
 static void parse_arg_white_coordinates(const std::string &s,
                                         track_info_c &ti) {
-  if (!parse_property_to_struct<white_colour_coordinates_t, float>(
-          s, ti.m_white_coordinates_list))
-    mxerror(boost::format("white colour coordinates parameter: not given in "
-                          "the form <TID>:hori,vert (argument was '%1%').") %
-            s);
+  if (!parse_property_to_struct<white_colour_coordinates_t, float>(s, ti.m_white_coordinates_list))
+    mxerror(boost::format("white colour coordinates parameter: not given in the form <TID>:hori,vert (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --max-luminance argument
@@ -845,9 +818,7 @@ static void parse_arg_white_coordinates(const std::string &s,
 */
 static void parse_arg_max_luminance(const std::string &s, track_info_c &ti) {
   if (!parse_property_to_value<float>(s, ti.m_max_luminance_list))
-    mxerror(boost::format("Max luminance parameter: not given in the form "
-                          "<TID>:n (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Max luminance parameter: not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --min-luminance argument
@@ -855,9 +826,7 @@ static void parse_arg_max_luminance(const std::string &s, track_info_c &ti) {
 */
 static void parse_arg_min_luminance(const std::string &s, track_info_c &ti) {
   if (!parse_property_to_value<float>(s, ti.m_min_luminance_list))
-    mxerror(boost::format("Min luminance parameter: not given in the form "
-                          "<TID>:n (argument was '%1%').") %
-            s);
+    mxerror(boost::format("Min luminance parameter: not given in the form <TID>:n (argument was '%1%').") % s);
 }
 
 /** \brief Parse the \c --stereo-mode argument
