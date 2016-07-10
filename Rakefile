@@ -385,11 +385,13 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
   keywords += %w{--keyword=QPNY:1c,2,3}          # plural form with context returning QString
   keywords += %w{--keyword=QYH}                  # singular form returning HTML-escaped QString
 
+  flags     = %w{--flag=QY:1:no-c-format --flag=QNY:1:no-c-format}
+
   options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --sort-output --boost}
   options  += ["'--msgid-bugs-address=Moritz Bunkus <moritz@bunkus.org>'"]
   options  += ["'--copyright-holder=Moritz Bunkus <moritz@bunkus.org>'", "--package-name=MKVToolNix", "--package-version=#{c(:PACKAGE_VERSION)}", "--foreign-user"]
 
-  runq "xgettext", t.name, "xgettext #{keywords.join(" ")} #{options.join(" ")} -o #{t.name} #{sources.join(" ")}"
+  runq "xgettext", t.name, "xgettext #{keywords.join(" ")} #{flags.join(" ")} #{options.join(" ")} -o #{t.name} #{sources.join(" ")}"
 end
 
 task :manpages => $manpages
