@@ -14,6 +14,7 @@ def read_po file_name
   items   = [ { comments: [] } ]
   msgtype = nil
   line_no = 0
+  started = false
 
   add_line = lambda do |type, to_add|
     items.last[type] ||= []
@@ -25,9 +26,15 @@ def read_po file_name
     line_no += 1
     line.chomp!
 
+    if !line.empty? && !started
+      items.last[:line] = line_no
+      started           = true
+    end
+
     if line.empty?
       items << {} unless items.last.keys.empty?
       msgtype = nil
+      started = false
 
     elsif items.size == 1
       add_line.call :comments, line

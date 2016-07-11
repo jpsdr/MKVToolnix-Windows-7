@@ -1,81 +1,64 @@
 #!/usr/bin/env ruby
 
-require 'digest/sha1'
-
 class FormatStringVerifier
-  @@errors_to_ignore = {
-    "313e42fc" => true,
-    "d2820b11" => true,
-    "f3230d7f" => true,
-  }
+  def verify file_name
+    entries = read_po(file_name).
+      reject { |e| e[:obsolete] }.
+      select { |e| e[:msgid] && e[:msgstr] && e[:flags] }.
+      reject { |e| e[:msgid].empty? || e[:msgstr].empty? }.
+      reject { |e| e[:msgstr].all?(&:empty?) }.
+      select { |e| e[:flags].include?("c-format") || e[:flags].include?("boost-format") }
 
-  def read_entries file_name
-    entries = Array.new
-    flags   = {}
+    errors = []
 
-    IO.readlines(file_name).each_with_index do |line, line_number|
-      line.gsub!(/[\r\n]/, '')
+    matchers = {
+      :boost => /%(?:
+                     %
+                   | \|[0-9$a-zA-Z\.\-]+\|
+                   | [0-9]+%?
+                   )/ix,
 
-      if /^msgid /.match line
-        entries << { :id => [ line ], :line_number => line_number + 1, :flags => flags }
-        flags = {}
+      :c      => /%(?:
+                      %
+                    | -?\.?\s?[0-9]*l?l?[a-zA-Z]
+                    )/ix,
+    }
 
-      elsif /^msgid_plural /.match line
-        entries[-1][:id] << line
+    format_types = matchers.keys
 
-      elsif /^msgstr/.match line
-        entries[-1][:str] ||= Array.new
-        entries[-1][:str]  << line
+    entries.each do |e|
+      formats = {
+        :c     => { :id => [], :str => [] },
+        :boost => { :id => [], :str => [] },
+      }
 
-      elsif /^"/.match line
-        entry      = entries[-1]
-        str        = entry[:str] ? entry[:str][-1] : entry[:id][-1]
-        str.gsub!(/"$/, '')
-        str << line[1 .. line.length - 1]
+      has_errors = false
 
-      elsif /^#,/.match line
-        flags = Hash[ *line.gsub(/^#,\s*/, '').split(/,\s*/).map { |flag| [ flag.to_sym, true ] }.flatten ]
+      e[:msgstr].each_with_index do |msgstr, idx|
+        ( (e[:msgid] || []) + (e[:msgid_plural] || []) ).
+          reject(&:nil?).
+          each do |msgid|
+            format_types.select { |type| e[:flags].include?("#{type}-format") }.each do |type|
+              store = formats[type]
+
+              store[:id]  << msgid .scan(matchers[type]).uniq.sort
+              store[:str] << msgstr.scan(matchers[type]).uniq.sort
+
+              missing = store[:id]  - store[:str]
+              added   = store[:str] - store[:id]
+
+              has_errors = true if !missing.empty? || !added.empty?
+            end
+        end
       end
+
+      errors << e[:line] if has_errors
     end
 
-    entries
-  end
-
-  def verify file_name
-    matcher = /%(?:
-                 %
-               | \|[0-9$a-zA-Z\.\-]+\|
-               | -?\.?\s?[0-9]*l?l?[a-zA-Z]
-               | [0-9]+%?
-               )/ix
-
-    errors = read_entries(file_name).select { |e| !e[:flags][:fuzzy] && !e[:id].nil? && (e[:id][0] != 'msgid ""') && !e[:str].nil? && e[:str].detect { |line| line != 'msgstr ""' } }.collect do |entry|
-      non_id  = entry[:id][ 1 .. entry[:id].size - 1 ] + entry[:str]
-      formats = {
-        :id     => entry[:id][0].scan(matcher).uniq.sort,
-        :non_id => non_id.collect { |e| e.scan(matcher) }.flatten.uniq.sort
-      }
-
-      missing = formats[:id]     - formats[:non_id]
-      added   = formats[:non_id] - formats[:id]
-
-      next nil if missing.empty? && added.empty?
-
-      digest = Digest::SHA1.new.update(([ file_name.gsub(/.*\//, ''), entry[:id][-1] ] + added + missing).join(':')).hexdigest[0..7]
-      next nil if @@errors_to_ignore[digest]
-
-      { :line_number => entry[:line_number],
-        :added       => added,
-        :missing     => missing,
-        :digest      => digest
-      }
-    end.compact
+    # pp errors
 
     errors.each do |error|
-      messages = []
-      messages << ("- " + error[:missing].join(' ')) if !error[:missing].empty?
-      messages << ("+ " + error[:added  ].join(' ')) if !error[:added  ].empty?
-      puts "#{file_name}:#{error[:line_number]}: error: #{messages.join('; ')} (id: #{error[:digest]})"
+      puts "#{file_name}:#{error}: error: format string differences"
     end
 
     return errors.empty?
