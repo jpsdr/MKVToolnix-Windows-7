@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-07-10 20:22+0200\n"
-"PO-Revision-Date: 2016-07-03 12:52+0000\n"
+"PO-Revision-Date: 2016-07-11 16:58+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -57,7 +57,8 @@ msgid ""
 "                           appending files.\n"
 msgstr ""
 "  --append-mode <file|track>\n"
-"                           파일 결합 시 타임코드의 계산 방법을 지정합니다.\n"
+"                           파일 결합시에 mkvmerge가 타임코드를 계산하는\n"
+"                           방법을 지정합니다.\n"
 
 #: src/merge/mkvmerge.cpp:151
 msgid ""
@@ -68,9 +69,9 @@ msgid ""
 "                           file.\n"
 msgstr ""
 "  --append-to <SFID1:STID1:DFID1:DTID1,SFID2:STID2:DFID2:DTID2,...>\n"
-"                           어떤 파일의 어떤 트랙이 어떤 파일의 어떤 트랙에\n"
-"                           추가되는지 쉼표로 구분하여 파일과 트랙 ID를\n"
-"                           열거하여 지정합니다.\n"
+"                           파일의 어떤 트랙이 바로 앞 파일의 다른 트랙에\n"
+"                           결합되는지를 조정하는 쉼표로 구분한 파일과\n"
+"                           트랙 ID 목록.\n"
 
 #: src/merge/mkvmerge.cpp:248
 msgid ""
@@ -390,7 +391,7 @@ msgid ""
 msgstr ""
 "  --generate-chapters <mode>\n"
 "                           모드에 따라서 자동으로 챕터를 만듭니다\n"
-"                           ('덧불일 때'나 '간격:<재생시간>').\n"
+"                           ('결합할 때'나 '간격:<재생시간>').\n"
 
 #: src/merge/mkvmerge.cpp:101
 msgid ""
@@ -501,16 +502,16 @@ msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priority>    mkvmerge의 실행 우선 순위를 지정합니다.\n"
 
 #: src/merge/mkvmerge.cpp:321
-#, fuzzy
 msgid ""
 "  --probe-range-percentage <percent>\n"
 "                           Sets maximum size to probe for tracks in percent\n"
 "                           of the total file size for certain file types\n"
 "                           (default: 0.3).\n"
 msgstr ""
-"  --colour-bits-per-channel <TID:n>\n"
-"                           색상 채널당 코드화된 비트 수를 정합니다.\n"
-"                           0의 값은 그 수가 미지정임을 나타냅니다.\n"
+"  --probe-range-percentage <퍼센트>\n"
+"                           특정한 파일 형식에 대해 전체 파일 크기의 퍼센트로\n"
+"                           트랙을 조사할 최대 크기를 정합니다.\n"
+"                           (기본값: 0.3)\n"
 
 #: src/merge/mkvmerge.cpp:231
 msgid ""
@@ -581,7 +582,7 @@ msgid ""
 "                           if prefixed with '+'.\n"
 msgstr ""
 "  --split parts:start1-end1[,[+]start2-end2,...]\n"
-"                           파일 분할 시 또는 이전 범위의 파일에 추가 결합할\n"
+"                           파일 분할시 또는 이전 범위의 파일에 추가 결합할\n"
 "                           경우 ('+'접두사가 있을 시) start-end의 타임코드\n"
 "                           범위를 유지합니다.\n"
 
@@ -821,7 +822,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:159
 msgid "  <file1> + <file2>        Append file2 to file1.\n"
-msgstr "  <file1> + <file2>        file1에 file2를 덧붙입니다.\n"
+msgstr "  <file1> + <file2>        file1에 file2를 결합합니다.\n"
 
 #: src/merge/mkvmerge.cpp:160
 msgid "  <file1> +<file2>         Same as \"<file1> + <file2>\".\n"
@@ -939,7 +940,7 @@ msgstr " 챕터 처리: \n"
 
 #: src/merge/mkvmerge.cpp:127
 msgid " File splitting, linking, appending and concatenating (more global options):\n"
-msgstr " 파일 분할, 연결, 추가 결합, 연결(추가 전역 옵션):\n"
+msgstr " 파일 분할, 연결, 결합, 연결(추가 전역 옵션):\n"
 
 #: src/merge/mkvmerge.cpp:110
 msgid " General output control (advanced global options):\n"
@@ -1793,7 +1794,7 @@ msgstr "'%1%'는 유효한 ISO639-2 언어 코드가 아닙니다."
 #: src/merge/mkvmerge.cpp:1441
 #, boost-format
 msgid "'%1%' is not a valid append mode in '--append-mode %1%'.\n"
-msgstr "'--append-mode %1%'의 '%1%'는 유효한 추가 결합 모드가 아닙니다.\n"
+msgstr "'--append-mode %1%'의 '%1%'는 유효한 결합 모드가 아닙니다.\n"
 
 #: src/merge/mkvmerge.cpp:1552
 #, boost-format
@@ -2398,7 +2399,7 @@ msgstr "경고/오류 알리기(&C)"
 #: src/mkvtoolnix-gui/merge/input.cpp:1270
 #, no-c-format
 msgid "A&ppend files"
-msgstr "파일 덧붙이기(&P)"
+msgstr "파일 결합하기(&P)"
 
 #: src/common/file_types.cpp:25
 msgid "A/52 (aka AC-3)"
@@ -2618,7 +2619,7 @@ msgstr "챕터 파일 추가 중"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:152
 msgid "Adding or appending files"
-msgstr "파일 추가하는/덧붙이는 중"
+msgstr "파일 추가하는/결합하는 중"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1053
 #, no-c-format
@@ -2632,7 +2633,7 @@ msgstr "태그 파일 추가 중"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:153
 msgid "Adding, appending or adding as additional parts"
-msgstr "추가하기, 덧붙이기, 추가 부분으로 추가하기"
+msgstr "추가하기, 결합하기, 추가 부분으로 추가하기"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:175
 #, no-c-format
@@ -2940,16 +2941,16 @@ msgstr "GUI에서 드롭한 파일을 새 탭으로 항상 열 수 있도록 하
 #: src/mkvtoolnix-gui/merge/input.cpp:990
 #, no-c-format
 msgid "Append media files"
-msgstr "미디어 파일 덧붙이기"
+msgstr "미디어 파일 결합하기"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:158
 msgid "Append to an e&xisting input file"
-msgstr "기존의 입력 파일에 덧붙이기(&X)"
+msgstr "기존의 입력 파일에 결합하기(&X)"
 
 #: src/merge/output_control.cpp:1769
 #, boost-format
 msgid "Appending track %1% from file no. %2% ('%3%') to track %4% from file no. %5% ('%6%').\n"
-msgstr "파일 번호 %2% ('%3%') 트랙 %1%를 파일 번호 %5% ('%6%') 트랙 %4%을 추가 결합합니다.\n"
+msgstr "%2% ('%3%') 파일 번호의 %1% 트랙을 %5% ('%6%') 파일 번호의 %4% 트랙에 결합합니다.\n"
 
 #: src/merge/mkvmerge.cpp:608
 msgid "Aspect ratio"
@@ -3676,7 +3677,7 @@ msgstr "오디오 트랙 %1%의 인덱스를 찾을 수 없습니다 (avilib 오
 #: src/merge/output_control.cpp:1695
 #, boost-format
 msgid "Could not find gptzr when appending. %1%\n"
-msgstr "추가 결합 시 gptzr를 찾을 수 없습니다. %1%\n"
+msgstr "결합시에 gptzr을 찾을 수 없습니다. %1%\n"
 
 #: src/output/p_mpeg4_p2.cpp:178
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
@@ -4916,7 +4917,7 @@ msgstr "파일 구조 경고"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:240
 #, no-c-format
 msgid "File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."
-msgstr ""
+msgstr "MPEG 프로그램이나 트랜스포트 스트림과 같은 파일 형식(.vob, m2ts)은 파일에 포함된 모든 트랙을 감지하기 위해 데이터의 특정한 양을 분석할 필요가 있습니다."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1713
 msgid "File/Segment linking"
@@ -4924,7 +4925,7 @@ msgstr "파일/세그먼트 연결"
 
 #: src/merge/output_control.cpp:938
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
-msgstr "파일을 그 파일 자체에 추가 결합할 수 없습니다. '--append-to'의 인수가 잘못되었습니다.\n"
+msgstr "파일을 그 파일 자체에 결합할 수 없습니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 msgid "Finished at:"
@@ -5430,7 +5431,7 @@ msgstr "이 옵션을 사용하면 아래에서 선택한 언어의 트랙만 �
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:242
 #, no-c-format
 msgid "If tracks are known to be present but not found then the percentage to probe can be changed here."
-msgstr ""
+msgstr "트랙이 분명히 있는데 찾을 수 없다면 조사할 퍼센트를 여기에서 바꿀 수 있습니다."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:367
 #, no-c-format
@@ -5448,7 +5449,7 @@ msgstr "이것을 빈 채로 놔두면 mkvmerge가 만드는 파일 개수에 �
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:160
 msgid "If you want to append or add them as additional parts you have to select which input file to append or add them to:"
-msgstr "그것을 추가적인 부분으로 덧붙이거나 추가하고 싶으면 덧붙이거나 추가할 입력 파일을 선택해야 합니다:"
+msgstr "그것을 추가적인 부분으로 결합하거나 추가하고 싶으면 결합하거나 추가할 입력 파일을 선택해야 합니다:"
 
 #: src/output/p_textsubs.cpp:83
 #, boost-format
@@ -6397,12 +6398,12 @@ msgstr "하나의 첨부 파일에 여러개의 이름이 지정되었습니다.
 #: src/merge/output_control.cpp:1011
 #, boost-format
 msgid "More than one track is to be appended to the track %1% from file no. %2% ('%3%'). The argument for '--append-to' was invalid.\n"
-msgstr "트랙 %1%에 파일 번호 %2% ('%3%')에서 하나 이상의 트랙을 추가 결합하려고 했습니다. '--append-to' 인수가 잘못되었습니다.\n"
+msgstr "한 개 이상의 트랙을 %2% ('%3%') 파일 번호의 %1% 트랙에 결합하려고 합니다. '--append-to' 인수가 잘못되었습니다.\n"
 
 #: src/extract/tracks.cpp:72
 #, boost-format
 msgid "More than one track with the track number %1% found.\n"
-msgstr "트랙 번호 %1%의 트랙을 여러개 찾았습니다.\n"
+msgstr "%1% 트랙 번호가 있는 트랙을 한 개 이상 찾았습니다.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:264
 msgid "Most of the other settings on the output tab will be kept intact, though."
@@ -6542,13 +6543,13 @@ msgstr "첨부 파일 '%1%'에 MIME 유형이 설정되지 않았고, 이것을 
 #: src/merge/output_control.cpp:970
 #, boost-format
 msgid "No append mapping was given for the file no. %1% ('%2%'). A default mapping of %3% will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
-msgstr "파일 번호 %1%파일 ('%2%')에 추가 결합 매핑이 지정되어 있지 않습니다. 기본 매핑 %3%이 대신 사용됩니다. 만약 mkvmerge가 잘못된 '--append-to' 옵션에 대한 오류 메시지가 발생되고 중단되면 이것을 기억하십시오.\n"
+msgstr "%1% ('%2%') 파일 번호에 주어진 결합 매핑이 없습니다. %3%의 기본 매핑을 대신 사용됩니다. 만약 mkvmerge가 잘못된 '--append-to' 옵션에 관한 오류 메시지로 중단되면 그것을 기억하십시오.\n"
 
 #: src/propedit/attachment_target.cpp:194
 #: src/propedit/attachment_target.cpp:202
 #, boost-format
 msgid "No attachment matched the spec '%1%'.\n"
-msgstr "사양 '%1%'과 일치하는 첨부 파일이 없습니다.\n"
+msgstr "'%1%' 사양과 일치하는 첨부 파일이 없습니다.\n"
 
 #: src/propedit/propedit.cpp:158
 msgid "No changes were made.\n"
@@ -6857,12 +6858,12 @@ msgstr "출력 파일은 하나만 지정할 수 있습니다.\n"
 #: src/merge/mkvmerge.cpp:1777
 #, boost-format
 msgid "Only one segment info file allowed in '%1% %2%'.\n"
-msgstr "'%1% %2%'에 세그먼트 정보 파일은 하나만 지정할 수 있습니다.\n"
+msgstr "'%1% %2%'에는 단 한 개의 세그먼트 정보 파일만 허용되어 있습니다.\n"
 
 #: src/merge/output_control.cpp:951
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
-msgstr "파일 번호 %1% ('%2%')에 대해 부분적인 추가 결합 매핑 밖에 지정되지 않았습니다. 전혀 매핑을 지정하지 않거나(이 경우 기본 매핑이 사용됩니다) 복사 되어질 모든 트랙 매핑을 지정하거나 둘중 하나여야 합니다.\n"
+msgstr "%1% ('%2%') 파일 번호에 일부분의 결합 매핑만 주어졌습니다. 어떤 매핑도 지정하지 않거나(이 경우 기본 매핑이 사용됩니다), 복사될 모든 트랙의 매핑을 지정해야 합니다.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:302
 #, no-c-format
@@ -7218,7 +7219,7 @@ msgstr "이전 세그먼트의 고유 ID"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1275
 msgid "Probe &range percentage:"
-msgstr ""
+msgstr "조사 범위 퍼센트:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1266
 msgid "Process &priority:"
@@ -7651,22 +7652,22 @@ msgstr "%1% 위치에 성공적으로 재동기화 하였습니다.\n"
 #: src/mkvtoolnix-gui/merge/input.cpp:417
 #, no-c-format
 msgid "Right-click for actions for all tracks"
-msgstr "모든 트렉에 대한 동작은 우클릭"
+msgstr "모든 트랙에 대한 동작은 우클릭하세요"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:331
 #, no-c-format
 msgid "Right-click for actions for jobs"
-msgstr "작업에 대한 동작은 우클릭"
+msgstr "작업에 대한 동작은 우클릭하세요"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:401
 #, no-c-format
 msgid "Right-click for attachment actions"
-msgstr "첨부 파일 동작은 우클릭"
+msgstr "첨부 파일 동작은 우클릭하세요"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:416
 #, no-c-format
 msgid "Right-click to add, append and remove files"
-msgstr "파일 추가, 덧붙이기와 삭제는 우클릭"
+msgstr "파일을 추가, 결합, 삭제하려면 우클릭하세요"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:402
 #, no-c-format
@@ -8570,7 +8571,7 @@ msgstr "FourCC 4문자 길이로 정확하게 입력해야 합니다 ('%1% %2%'�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
 #, no-c-format
 msgid "The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new merge settings and adding them to those."
-msgstr "GUI는 사용자에게 매번 무슨 일을 할지 요청할 수 있습니다. 예를 들어 파일을 추가하는 대신 덧붙이거나 새로운 합치기 설정을 만들고 그 설정에 파일을 추가하기."
+msgstr "GUI는 사용자에게 매번 무슨 일을 할지 요청할 수 있습니다. 예를 들어 파일을 추가하는 대신 결합하거나 새로운 합치기 설정을 만들고 그 설정에 파일을 추가하기."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:260
 msgid "The GUI can help you start your next merge settings after having started a job or having added a one to the job queue."
@@ -9146,21 +9147,21 @@ msgstr "이 세그먼트에 대한 파일 이름입니다."
 #: src/merge/output_control.cpp:984
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
-msgstr "파일 번호 %1% ('%2%')는 ID %3%트랙이 포함되어 있지 않은지, 그 트랙은 복사되지 않았습니다. '--append-to'의 인수가 잘못되었습니다.\n"
+msgstr "%1% ('%2%') 파일 번호는 %3% ID가 있는 트랙을 포함하지 않거나, 그 트랙은 복사되지 않을 것입니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
 #: src/merge/output_control.cpp:990
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
-msgstr "파일 번호 %1% ('%2%')는 ID %3%트랙이 포함되어 있지 않은지, 그 트랙은 복사되지 않으므로 트랙을 추가 결합할 수 없었습니다. '--append-to'의 인수가 잘못되었습니다.\n"
+msgstr "%1% ('%2%') 파일 번호는 %3% ID가 있는 트랙을 포함하지 않거나, 그 트랙은 복사되지 않을 것입니다. 그러므로 어떤 트랙도 그것에 결합될 수 없습니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
 #: src/merge/output_control.cpp:930
 #, boost-format
 msgid "The file no. %1% ('%2%') is not being appended. The argument for '--append-to' was invalid.\n"
-msgstr "파일 번호 %1% ('%2%')가 추가 결합되지 않았습니다. '--append-to'인수가 잘못되었습니다.\n"
+msgstr "%1% ('%2%') 파일 번호는 결합되고 있지 않습니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
 #: src/common/mm_io_x.cpp:38
 msgid "The file or directory was not found"
-msgstr "파일 또는 디렉터리를 찾을 수 없음"
+msgstr "파일 또는 디렉터리를 찾을 수 없습니다"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:137
 #, no-c-format
@@ -9209,7 +9210,7 @@ msgstr "재동기화 이후의 첫 클러스터 타임코드는 %1%입니다.\n"
 
 #: src/merge/mkvmerge.cpp:1917
 msgid "The first file cannot be appended because there are no files to append to.\n"
-msgstr "추가 결합 대상 파일이 없기 때문에, 첫 번째 파일을 추가 결합할 수 없습니다.\n"
+msgstr "결합할 파일이 없기 때문에 첫 번째 파일을 결합할 수 없습니다.\n"
 
 #: src/extract/extract_cli_parser.cpp:67
 msgid "The first mode extracts some tracks to external files."
@@ -9511,7 +9512,7 @@ msgstr "'%1% %2%'에 이미 이전 UID는 지정되어 있습니다.\n"
 #: src/merge/mkvmerge.cpp:2006
 #, boost-format
 msgid "The probe range percentage '%1%' is invalid.\n"
-msgstr ""
+msgstr "조사 범위 '%1%' 퍼센트는 무효합니다.\n"
 
 #: src/common/qt_kax_analyzer.cpp:106
 #: src/propedit/propedit.cpp:61
@@ -9661,7 +9662,7 @@ msgstr "'n'은 문자열 'track:n'에서 n번째 트랙을 선택합니다. 숫�
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:307
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
-msgstr ""
+msgstr "'<FILE_NAME>'과 '<FILE_NAME_WITH_EXT>' 문자열은 결합하는 파일의 챕터를 만들 때만 동작하는데, 결합하는 파일의 이름으로 대체될 것입니다 (전자는 확장자 없이, 후자는 확장자를 포함합니다)."
 
 #: src/propedit/propedit_cli_parser.cpp:245
 msgid "The strings 'info', 'segment_info' or 'segmentinfo' select the segment information element. This is also the default until the first '--edit' option is found."
@@ -9756,12 +9757,12 @@ msgstr "전체 동영상의 제목입니다."
 #: src/merge/output_control.cpp:1000
 #, boost-format
 msgid "The track %1% from file no. %2% ('%3%') is to be appended more than once. The argument for '--append-to' was invalid.\n"
-msgstr "파일 번호 %2% ('%3%') 트랙 %1%를 여러번 추가 결합하려고 했습니다. '--append-to' 인수가 잘못되었습니다.\n"
+msgstr "%2% ('%3%') 파일 번호의 %1% 트랙을 한 번 이상 결합하려고 합니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
 #: src/extract/tracks.cpp:92
 #, boost-format
 msgid "The track ID %1% does not have a valid CodecID.\n"
-msgstr "트랙 ID %1%의 코덱ID가 잘못되었습니다.\n"
+msgstr "%1% 트랙 ID의 코덱ID가 잘못되었습니다.\n"
 
 #: src/merge/output_control.cpp:683
 #, boost-format
@@ -9771,12 +9772,12 @@ msgstr "트랙 헤더를 제대로 렌더링할 수 없습니다. %1%\n"
 #: src/merge/output_control.cpp:1032
 #, boost-format
 msgid "The track number %1% from the file '%2%' can probably not be appended correctly to the track number %3% from the file '%4%': %5% Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
-msgstr "파일 '%2%'의 트랙 번호 %1%를 파일 '%4%'의 트랙 %3%에 올바르게 추가 결합할 수 없는 것 같습니다: %5%출력 파일의 전체가 올바르게 재생되는지 확인 하십시오. 이 프로그램의 제작자는 이 출력 파일의 재생 문제를 지원해 주지 않을 것입니다.\n"
+msgstr "'%2%' 파일의 %1% 트랙 번호를 '%4%' 파일의 %3% 트랙에 올바르게 결합할 수 없는 모양입니다: %5% 결과로 나오는 파일이 끝까지 맞게 잘 재생되는지 확인하세요. 이 프로그램의 제작자는 그 결과로 만들어진 파일에서 생기는 재생 문제는 아마도 지원해 주지 않을 것입니다.\n"
 
 #: src/merge/output_control.cpp:1043
 #, boost-format
 msgid "The track number %1% from the file '%2%' cannot be appended to the track number %3% from the file '%4%'. %5%\n"
-msgstr "파일 '%2%'의 트랙 번호 %1%를 파일 '%4%'의 트랙 번호 %3%을 추가 결합할 수 없습니다. %5%\n"
+msgstr "'%2%' 파일의 %1% 트랙 번호를 '%4%' 파일의 %3% 트랙 번호에 결합할 수 없습니다. %5%\n"
 
 #: src/common/property_element.cpp:112
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:401
@@ -9848,12 +9849,12 @@ msgstr "현재 실행 중인 작업이 있습니다."
 #: src/merge/output_control.cpp:934
 #, boost-format
 msgid "There is no file with the ID '%1%'. The argument for '--append-to' was invalid.\n"
-msgstr "ID '%1%' 파일은 없습니다. '--append-to' 인수가 잘못되었습니다.\n"
+msgstr "'%1%' ID를 가진 파일은 없습니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
 #: src/common/command_line.cpp:266
 #, boost-format
 msgid "There is no translation available for '%1%'.\n"
-msgstr "'%1%'의 번역은 사용할 수 없습니다.\n"
+msgstr "'%1%'의 이용 가능한 번역이 없습니다.\n"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:67
 #, no-c-format
@@ -9931,7 +9932,7 @@ msgstr "이 Ogg/OGM 파일은 챕터를 포함하고 있지만 분석할 수 없
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:241
 #, no-c-format, boost-format
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
-msgstr ""
+msgstr "이 양은 소스 파일 크기의 0.3%나 10 MB 중 어느 쪽이든 큰 것입니다."
 
 #: src/output/p_ac3.cpp:79
 #: src/output/p_mp3.cpp:70
@@ -10446,7 +10447,7 @@ msgstr "USF 텍스트 자막"
 #: src/mkvtoolnix-gui/merge/input.cpp:1155
 #, no-c-format
 msgid "Unable to append files"
-msgstr "파일을 덧붙일 수 없음"
+msgstr "파일을 결합할 수 없음"
 
 #: src/mpegparser/M2VParser.cpp:254
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
@@ -10907,7 +10908,7 @@ msgstr "소스 파일 추가시, 기본적으로 모든 트랙을 출력 파일�
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
-msgstr "덧붙일 때: 시작 부분에 한 개의 챕터를 만들고 파일을 덧붙일 때마다 한 개의 챕터를 만듭니다."
+msgstr "결합할 때: 시작 부분에 한 개의 챕터를 만들고 파일을 결합할 때마다 한 개의 챕터를 만듭니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:222
 msgid "When the user adds a file containing such a title then the program will copy the title into the \"file title\" input box if this option is enabled."
@@ -12001,7 +12002,7 @@ msgstr "ogg_sync_buffer가 실패했습니다.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1732
 msgid "one chapter for each appended file"
-msgstr "덧붙인 각 파일마다 한 개의 챕터"
+msgstr "결합한 각 파일마다 한 개의 챕터"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1310
 #, no-c-format
