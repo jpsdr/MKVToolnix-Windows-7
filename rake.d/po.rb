@@ -81,6 +81,7 @@ end
 
 def write_po file_name, items
   File.open(file_name, "w") do |file|
+
     items.each do |item|
       if item[:obsolete]
         file.puts(item[:obsolete].join("\n"))

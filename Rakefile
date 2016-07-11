@@ -375,6 +375,7 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
   sources   = (t.prerequisites.dup - %w{Rakefile}).sort.uniq
 
   keywords  = %w{--keyword=Y --keyword=NY:1,2}   # singular & plural forms returning std::string
+  keywords += %w{--keyword=YF --keyword=NYF:1,2} # singular & plural forms returning std::string which aren't format strings
   keywords += %w{--keyword=PY:1c,2}              # singular form with context returning std::string
   keywords += %w{--keyword=PNY:1c,2,3}           # plural form with context returning std::string
   keywords += %w{--keyword=YT}                   # singular form returning translatable_string_c
@@ -386,6 +387,8 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
   keywords += %w{--keyword=QYH}                  # singular form returning HTML-escaped QString
 
   flags     = %w{--flag=QY:1:no-c-format --flag=QNY:1:no-c-format}
+  flags    += %w{--flag=YF:1:no-c-format --flag=YF:1:no-boost-format}
+  flags    += %w{--flag=NYF:1:no-c-format --flag=NYF:1:no-boost-format}
 
   options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --sort-output --boost}
   options  += ["'--msgid-bugs-address=Moritz Bunkus <moritz@bunkus.org>'"]

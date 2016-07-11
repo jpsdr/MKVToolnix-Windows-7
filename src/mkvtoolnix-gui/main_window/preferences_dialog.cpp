@@ -238,7 +238,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbMProbeRangePercentage,
                    Q("%1 %2 %3")
                    .arg(QY("File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."))
-                   .arg(QY("This amount is 0.3% of the source file's size or 10 MB, whichever is higher."))
+                   .arg(Q(YF("This amount is 0.3% of the source file's size or 10 MB, whichever is higher.")))
                    .arg(QY("If tracks are known to be present but not found then the percentage to probe can be changed here.")));
 
   Util::setToolTip(ui->cbMAlwaysShowOutputFileControls,

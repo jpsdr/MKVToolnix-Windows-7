@@ -90,6 +90,9 @@ namespace brng  = boost::range;
 # endif
 #endif
 
+#define YF(s)        Y(s)
+#define NYF(s, p, c) NY(s, p, c)
+
 #include "common/debugging.h"
 #include "common/error.h"
 #include "common/make_unique.h"
