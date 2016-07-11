@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-07-10 20:22+0200\n"
-"PO-Revision-Date: 2016-07-04 13:11+0000\n"
+"PO-Revision-Date: 2016-07-11 11:14+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -512,17 +512,16 @@ msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priorité>    Définit la priorité d'exécution de mkvmerge.\n"
 
 #: src/merge/mkvmerge.cpp:321
-#, fuzzy
 msgid ""
 "  --probe-range-percentage <percent>\n"
 "                           Sets maximum size to probe for tracks in percent\n"
 "                           of the total file size for certain file types\n"
 "                           (default: 0.3).\n"
 msgstr ""
-"  --colour-bits-per-channel <TID:n>\n"
-"                           Définit le nombre de bits codés pour un canal de\n"
-"                           couleur. Une valeur de 0 indique que le numbre n'est pas\n"
-"                           spécifié.\n"
+"  --probe-range-percentage <pourcentage>\n"
+"                           Définit la taille maximale à examiner pour les pistes en pourcentage\n"
+"                           de la taille totale du fichier pour certains types de fichiers\n"
+"                           (par défaut : 0.3).\n"
 
 #: src/merge/mkvmerge.cpp:231
 msgid ""
@@ -4951,7 +4950,7 @@ msgstr "Avertissement sur la structure du fichier"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:240
 #, no-c-format
 msgid "File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."
-msgstr ""
+msgstr "Les types de fichiers tels que les flux de programme et de transport MPEG (.vob, .m2ts) nécessite une certaine quantité de données à examiner afin de détecter toutes les pistes contenues dans le fichier."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1713
 msgid "File/Segment linking"
@@ -5466,7 +5465,7 @@ msgstr "Si cette options est activée, seules les pistes dont la langues est sp�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:242
 #, no-c-format
 msgid "If tracks are known to be present but not found then the percentage to probe can be changed here."
-msgstr ""
+msgstr "Si des pistes sont connues pour être présentes mais ne sont pas détectées, le pourcentage à examiner peut être modifié ici."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:367
 #, no-c-format
@@ -7260,7 +7259,7 @@ msgstr "Identifiant unique du segment précédent"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1275
 msgid "Probe &range percentage:"
-msgstr ""
+msgstr "Pourcentage à examine&r :"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1266
 msgid "Process &priority:"
@@ -9583,7 +9582,7 @@ msgstr "L'UID précédent a déjà été fourni dans « %1% %2% ».\n"
 #: src/merge/mkvmerge.cpp:2006
 #, boost-format
 msgid "The probe range percentage '%1%' is invalid.\n"
-msgstr ""
+msgstr "Le pourcentage à examiner « %1% » n'est pas correct.\n"
 
 #: src/common/qt_kax_analyzer.cpp:106
 #: src/propedit/propedit.cpp:61
@@ -9733,7 +9732,7 @@ msgstr "La chaîne « track:n », où « n » est un nombre, sélectionne la ni�
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:307
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
-msgstr ""
+msgstr "Les chaînes « <FILE_NAME> » et « <FILE_NAME_WITH_EXT> », qui ne fonctionnent que lors de la génération de chapitres pour des fichiers concatenés, seront remplacées par le nom de ces fichiers (la deuxième chaîne inclue l'extension du fichier, mais pas la première)."
 
 #: src/propedit/propedit_cli_parser.cpp:245
 msgid "The strings 'info', 'segment_info' or 'segmentinfo' select the segment information element. This is also the default until the first '--edit' option is found."
@@ -10003,7 +10002,7 @@ msgstr "Ce fichier Ogg/OGM contient des chapitres mais ils ne peuvent pas être 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:241
 #, no-c-format, boost-format
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
-msgstr ""
+msgstr "Cette valeur est la plus élevée de soit 0.3% de la taille du fichier source, soit 10 Mo."
 
 #: src/output/p_ac3.cpp:79
 #: src/output/p_mp3.cpp:70
