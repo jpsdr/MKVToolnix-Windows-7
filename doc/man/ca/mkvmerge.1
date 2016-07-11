@@ -203,11 +203,10 @@ Aix\(`o estableix la plantilla del nom pels noms dels cap\('itols generats per l
 .sp
 Hi ha diverses variables que es poden usar a la plantilla que seran substitu\(:ides amb els valors actuals quan es generi un cap\('itol\&. La cadena \(Fo<NUM>\(Fc ser\(`a substitu\(:ida pel n\('umero de cap\('itol\&. La cadena \(Fo<START>\(Fc ser\(`a substitu\(:ida per la marca de temps d\*(Aqinici del cap\('itol\&.
 .sp
-The strings
-\*(Aq<FILE_NAME>\*(Aq
-and
-\*(Aq<FILE_NAME_WITH_EXT>\*(Aq
-are only filled when generating chapters for appended files\&. They will be replaced by the appended file\*(Aqs name wihtout respectively with its extension\&. Note that only the file\*(Aqs base name and extension are inserted, not its directory or drive components\&.
+Les cadenes
+\(Fo<FILE_NAME>\(Fc
+i
+\(Fo<FILE_NAME_WITH_EXT>\(Fc, que nom\('es funcionen quan es generen cap\('itols per a fitxers adjunts\&. Seran , respectivament substituides pel nom del fitxer adjuntat, amb i sense la seva extensi\('o\&. Recordeu que nom\('es s\*(Aqinseriran el nom base del fitxer i l\*(Aqextensi\('o, no el seu directori o components de la unitat\&.
 .sp
 Podeu especificar un nombre m\('inim de llocs per al n\('umero de cap\('itol amb \(Fo<NUM:places>\(Fc, p\&. ex\&. \(Fo<NUM:3>\(Fc\&. El nombre resultant ser\(`a emplenat amb zeros a l\*(Aqesquerra si el nombre de posicions \('es menor que l\*(Aqespecificat\&.
 .sp
@@ -1854,10 +1853,10 @@ sortir\(`a en una representaci\('o JSON de lectura mec\(`anica\&. Aquest format 
 .PP
 \fB\-\-probe\-range\-percentage\fR \fIpercentage\fR
 .RS 4
-File types such as MPEG program and transport streams (\&.vob,
-\&.m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file\&. This amount is 0\&.3% of the source file\*(Aqs size or 10 MB, whichever is higher\&.
+Tipus de fitxers com fluxos de programa i de transport MPEG (\&.vob,
+\&.m2ts) requereixen analitzar una certa quantitat de dades per tal de detectar totes les pistes contingudes al fitxer\&. Aquesta quantitat \('es el 0,3% de la mida del fitxer d\*(Aqorigen o de 10 MB, el que sigui m\('es gran\&.
 .sp
-If tracks are known to be present but not found then the percentage to probe can be changed with this option\&. The minimum of 10 MB is built\-in and cannot be changed\&.
+Si les pistes s\('on conegudes per estar presents, per\(`o no s\*(Aqhan trobat, llavors el percentatge per provar es pot canviar amb aquesta opci\('o\&. El m\('inim de 10 MB es troba incorporat i no es pot canviar\&.
 .RE
 .PP
 \fB\-l\fR, \fB\-\-list\-types\fR
