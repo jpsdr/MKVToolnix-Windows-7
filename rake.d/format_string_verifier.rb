@@ -7,6 +7,7 @@ class FormatStringVerifier
       select { |e| e[:msgid] && e[:msgstr] && e[:flags] }.
       reject { |e| e[:msgid].empty? || e[:msgstr].empty? }.
       reject { |e| e[:msgstr].all?(&:empty?) }.
+      reject { |e| e[:flags].include?("fuzzy") }.
       select { |e| e[:flags].include?("c-format") || e[:flags].include?("boost-format") }
 
     errors = []
