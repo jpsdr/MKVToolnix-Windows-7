@@ -60,17 +60,17 @@ SourceFile::operator =(SourceFile const &other) {
   if (this == &other)
     return *this;
 
-  m_properties       = other.m_properties;
-  m_fileName         = other.m_fileName;
-  m_type             = other.m_type;
-  m_appended         = other.m_appended;
-  m_additionalPart   = other.m_additionalPart;
-  m_isPlaylist       = other.m_isPlaylist;
-  m_playlistDuration = other.m_playlistDuration;
-  m_playlistSize     = other.m_playlistSize;
-  m_playlistChapters = other.m_playlistChapters;
-  m_playlistFiles    = other.m_playlistFiles;
-  m_appendedTo       = other.m_appendedTo;
+  m_properties           = other.m_properties;
+  m_fileName             = other.m_fileName;
+  m_type                 = other.m_type;
+  m_appended             = other.m_appended;
+  m_additionalPart       = other.m_additionalPart;
+  m_isPlaylist           = other.m_isPlaylist;
+  m_playlistDuration     = other.m_playlistDuration;
+  m_playlistSize         = other.m_playlistSize;
+  m_playlistChapters     = other.m_playlistChapters;
+  m_playlistFiles        = other.m_playlistFiles;
+  m_appendedTo           = other.m_appendedTo;
   m_probeRangePercentage = other.m_probeRangePercentage;
 
   m_tracks.clear();
