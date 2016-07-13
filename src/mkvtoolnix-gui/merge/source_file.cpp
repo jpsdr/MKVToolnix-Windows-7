@@ -71,6 +71,7 @@ SourceFile::operator =(SourceFile const &other) {
   m_playlistChapters = other.m_playlistChapters;
   m_playlistFiles    = other.m_playlistFiles;
   m_appendedTo       = other.m_appendedTo;
+  m_probeRangePercentage = other.m_probeRangePercentage;
 
   m_tracks.clear();
   m_attachedFiles.clear();
