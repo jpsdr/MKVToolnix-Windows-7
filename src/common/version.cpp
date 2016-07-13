@@ -25,7 +25,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Photograph"
+#define VERSIONNAME "Second Sight"
 
 version_number_t::version_number_t()
   : valid(false)
