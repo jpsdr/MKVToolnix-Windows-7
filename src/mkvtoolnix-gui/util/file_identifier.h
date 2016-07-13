@@ -37,6 +37,9 @@ public:
 
   virtual mtx::gui::Merge::SourceFilePtr const &file() const;
 
+public:
+  static void addProbeRangePercentageArg(QStringList &args, double probeRangePercentage);
+
 protected:
   virtual bool parseOutput();
   virtual void parseAttachment(QVariantMap const &obj);

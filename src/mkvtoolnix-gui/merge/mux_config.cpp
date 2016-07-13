@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/track.h"
+#include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 #include <QDir>
@@ -500,10 +501,7 @@ MuxConfig::buildMkvmergeOptions()
   options          += buildTrackOrder(fileNumbers);
   options          += buildAppendToMapping(fileNumbers);
 
-  if (   (probeRangePercentage  >   0)
-      && (probeRangePercentage  < 100)
-      && (probeRangePercentage != 0.3))
-    options << Q("--probe-range-percentage") << QString::number(probeRangePercentage);
+  Util::FileIdentifier::addProbeRangePercentageArg(options, probeRangePercentage);
 
   return options;
 }
