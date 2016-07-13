@@ -1,5 +1,9 @@
 2016-07-13  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: merge tool bug fix: the GUI v9.3.0 was often
+        creating an invalid syntax for the --probe-range-percentage
+        parameter for mkvmerge due to uninitialized memory. Fixes #1741.
+
         * Released v9.3.0 "Second Sight".
 
         * build system: libEBML v1.3.4 and libMatroska v1.4.5 are now
