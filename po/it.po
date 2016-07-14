@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 20.05.2016\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-07-11 21:48+0200\n"
-"PO-Revision-Date: 2016-07-07 11:57+0200\n"
+"PO-Revision-Date: 2016-07-14 14:15+0200\n"
 "Last-Translator: bovirus <@bovirus@gmail.com>\n"
 "Language-Team: Italian <bovirus@gmail.com>\n"
 "Language: it\n"
@@ -517,7 +517,6 @@ msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <priorità>    Imposta la priorità di esecuzione di mkvmerge.\n"
 
 #: src/merge/mkvmerge.cpp:321
-#, fuzzy
 msgid ""
 "  --probe-range-percentage <percent>\n"
 "                           Sets maximum size to probe for tracks in percent\n"
@@ -525,9 +524,9 @@ msgid ""
 "                           (default: 0.3).\n"
 msgstr ""
 "  --colour-bits-per-channel <TID:n>\n"
-"                           Imposta il numero di bit codificati per un canale\n"
-"                           colore. Un valore 0 indica che il numero è non\n"
-"                           specificato.\n"
+"                           Imposta la dimensione massima per traccai da\n"
+"                           analizzare in percentuale della dimensione totale\n"
+"                           per certi tipi di file (default:0.3).\n"
 
 #: src/merge/mkvmerge.cpp:231
 msgid ""
@@ -4956,7 +4955,7 @@ msgstr "Avvertenza struttura file"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:240
 #, no-c-format
 msgid "File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."
-msgstr ""
+msgstr "I tipi di file come i programmi MPEG e di trasporto flussi (.VOB, .M2TS) richiedono un'analisi di una certa quantità di dati per rilevare tutte le tracce contenute nel file."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1713
 msgid "File/Segment linking"
@@ -5471,7 +5470,7 @@ msgstr "Se questa opzione è abilitata solo queste tracce verrano impostate come
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:242
 #, no-c-format
 msgid "If tracks are known to be present but not found then the percentage to probe can be changed here."
-msgstr ""
+msgstr "Se le tracce sono note per essere presenti ma non sono state trovate la percentuale di analisi può essere modificata qui."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:367
 #, no-c-format
@@ -7263,7 +7262,7 @@ msgstr "ID unico segmento precedente"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1275
 msgid "Probe &range percentage:"
-msgstr ""
+msgstr "Inte&rvallo percentuale analisi:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1266
 msgid "Process &priority:"
@@ -9572,7 +9571,7 @@ msgstr "Il precedente UID era già stato usato in '%1% %2%'.\n"
 #: src/merge/mkvmerge.cpp:2006
 #, boost-format
 msgid "The probe range percentage '%1%' is invalid.\n"
-msgstr ""
+msgstr "La percentuale di analisi '%1%' non è valida.\n"
 
 #: src/common/qt_kax_analyzer.cpp:106
 #: src/propedit/propedit.cpp:61
@@ -9722,7 +9721,7 @@ msgstr "La stringa 'track:n' con n= numero seleziona la traccia n. La numerazion
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:307
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
-msgstr ""
+msgstr "Le stringhe '<FILE_NAME>' e '<FILE_NAME_WITH_EXT>', che funzionano solo quando si generano capitoli per l'aggiunta dei file, verranno sostituite dal nome del file aggiunto (la primo senza estensione mentre la seconda la include)."
 
 #: src/propedit/propedit_cli_parser.cpp:245
 msgid "The strings 'info', 'segment_info' or 'segmentinfo' select the segment information element. This is also the default until the first '--edit' option is found."
@@ -9992,7 +9991,7 @@ msgstr "Questo file OGG/OGM contiene capitoli che non possono essere analizzati.
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:241
 #, no-c-format, no-boost-format
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
-msgstr ""
+msgstr "Il valore è lo 0.3% della dimensione del file sorgente o 10MB, anche se è più grande."
 
 #: src/output/p_ac3.cpp:79
 #: src/output/p_mp3.cpp:70
