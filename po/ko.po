@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-07-11 21:48+0200\n"
-"PO-Revision-Date: 2016-07-14 04:28+0000\n"
+"PO-Revision-Date: 2016-07-14 10:24+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -314,7 +314,7 @@ msgid ""
 "                           X can be a floating point number or a fraction.\n"
 msgstr ""
 "  --default-duration <TID:Xs|ms|us|ns|fps>\n"
-"                           트랙의 기본 프레임 지속 시간을 X로 강제 설정합니다.\n"
+"                           트랙의 기본 재생 시간을 X로 강제 설정합니다.\n"
 "                           X는 부동 소수점 수와 분수를 받을 수 있습니다.\n"
 
 #: src/merge/mkvmerge.cpp:96
@@ -357,7 +357,7 @@ msgstr ""
 
 #: src/merge/mkvmerge.cpp:122
 msgid "  --enable-durations       Enable block durations for all blocks.\n"
-msgstr "  --enable-durations       모든 블록의 지속 시간을 기록합니다.\n"
+msgstr "  --enable-durations       모든 블록의 재생 시간을 기록합니다.\n"
 
 #: src/merge/mkvmerge.cpp:337
 msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
@@ -1101,7 +1101,7 @@ msgstr[0] "%1% 바이트"
 #: src/info/mkvinfo.cpp:200
 #, boost-format
 msgid "%1% frame, track %2%, timecode %3% (%4%), duration %|5$.3f|, size %6%, adler 0x%|7$08x|%8%%9%\n"
-msgstr "%1% 프레임, 트랙 %2%, 타임코드 %3%(%4%), 지속 시간 %|5$.3f| 크기 %6%, adler 0x%|7$08x|%8%%9%\n"
+msgstr "%1% 프레임, 트랙 %2%, 타임코드 %3%(%4%), 재생 시간 %|5$.3f| 크기 %6%, adler 0x%|7$08x|%8%%9%\n"
 
 #: src/info/mkvinfo.cpp:205
 #, boost-format
@@ -1386,7 +1386,7 @@ msgstr "다운로드(&D)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:200
 msgid "&Duration of each entry in seconds:"
-msgstr "각 항목의 지속 시간, 초 단위(&D):"
+msgstr "각 항목의 재생 시간, 초 단위(&D):"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1280
 #, no-c-format
@@ -3132,7 +3132,7 @@ msgstr "BlockAddition: %1%"
 #: src/info/mkvinfo.cpp:186
 #, boost-format
 msgid "Block duration: %1%.%|2$06d|ms"
-msgstr "블록 지속 시간: %1%.%|2$06d|ms"
+msgstr "블록 재생 시간: %1%.%|2$06d|ms"
 
 #: src/extract/timecodes_v2.cpp:303
 #: src/extract/tracks.cpp:458
@@ -3304,7 +3304,7 @@ msgstr "mkvmerge가 큐에 'CueRelativePosition' 요소를 기록하지 않도�
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:71
 #, no-c-format
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
-msgstr "mkvmerge가 지속 시간 필드가 포함되어 있지 않은 VobSub 자막 패킷에 '표시 정지' 명령을 추가하도록 합니다."
+msgstr "mkvmerge가 재생 시간 필드를 포함하지 않는 VobSub 자막 패킷에 '표시 중단' 명령을 추가하도록 합니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:221
 msgid "Certain file formats have 'title' property."
@@ -3868,7 +3868,7 @@ msgstr "CUE 코덱 상태: %1%"
 #: src/info/mkvinfo.cpp:1153
 #, boost-format
 msgid "Cue duration: %1%"
-msgstr "CUE 지속 시간: %1%"
+msgstr "CUE 재생 시간: %1%"
 
 #: src/extract/extract_cli_parser.cpp:122
 msgid "Cue extraction"
@@ -4048,16 +4048,16 @@ msgstr "기본 추가 명령행 옵션(&M):"
 #: src/common/property_element.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:430
 msgid "Default duration"
-msgstr "기본 프레임 지속 시간"
+msgstr "기본 재생 시간"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1672
 msgid "Default duration/FPS:"
-msgstr "기본 지속시간/FPS:"
+msgstr "기본 재생 시간/FPS:"
 
 #: src/info/mkvinfo.cpp:1008
 #, boost-format
 msgid "Default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"
-msgstr "기본 프레임 지속 시간: %|1$.3f|ms (비디오 트랙의 경우, 초당 %|2$.3f| 프레임/필드)"
+msgstr "기본 재생 시간: %|1$.3f|ms (비디오 트랙의 경우 초당 %|2$.3f| 프레임/필드)"
 
 #: src/info/mkvinfo.cpp:1020
 #, boost-format
@@ -4249,7 +4249,7 @@ msgstr "메타 탐색(Meta seek) 요소에 챕터 항목을 추가하지 않습�
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
 msgid "Do not split"
-msgstr "분할 않기"
+msgstr "분할하지 않기"
 
 #: src/info/info_cli_parser.cpp:38
 msgid "Do not start the GUI."
@@ -4339,23 +4339,23 @@ msgstr "파일의 특정한 구조 때문에 이 상황은 자동으로 고칠 �
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
 msgid "Duration"
-msgstr "지속 시간"
+msgstr "재생 시간"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:241
 #: src/mkvtoolnix-gui/merge/output.cpp:345
 #, no-c-format
 msgid "Duration:"
-msgstr "지속 시간:"
+msgstr "재생 시간:"
 
 #: src/info/mkvinfo.cpp:197
 #, boost-format
 msgid "Duration: %|1$.3f|ms"
-msgstr "지속 시간: %|1$.3f|ms"
+msgstr "재생 시간: %|1$.3f|ms"
 
 #: src/info/mkvinfo.cpp:465
 #, boost-format
 msgid "Duration: %|1$.3f|s (%2%)"
-msgstr "지속 시간: %|1$.3f|s (%2%)"
+msgstr "재생 시간: %|1$.3f|s (%2%)"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:320
 #, no-c-format
@@ -4964,7 +4964,7 @@ msgstr "파일/세그먼트 연결과 이 기능에 대한 자세한 설명은 m
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:49
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timecode scale factor so that all timecodes and durations have a precision of one sample."
-msgstr "비디오 트랙은 포함하지 않고 적어도 하나의 오디오 트랙을 포함하는 파일에 대해 mkvmerge는 모든 타임코드와 지속시간이 한 개 샘플의 정밀도를 갖도록 타임코드 스케일 인수를 자동으로 선택할 것입니다."
+msgstr "비디오 트랙은 포함하지 않고 적어도 하나의 오디오 트랙을 포함하는 파일에 대해 mkvmerge는 모든 타임코드와 재생 시간이 한 개 샘플의 정밀도를 갖도록 타임코드 스케일 인수를 자동으로 선택할 것입니다."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:490
 msgid "For such files you can use this parameter and decrease the size to 2."
@@ -5007,7 +5007,7 @@ msgstr "NALU 크기 길이를 특정 바이트 숫자로 사용하도록 합니�
 #: src/mkvtoolnix-gui/merge/input.cpp:451
 #, no-c-format
 msgid "Forces the default duration or number of frames per second for a track."
-msgstr "트랙의 기본 지속 시간이나 초당 프레임 개수를 사용하도록 합니다."
+msgstr "트랙의 기본 재생 시간이나 초당 프레임 개수를 사용하도록 합니다."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:46
 #, no-c-format
@@ -6034,7 +6034,7 @@ msgstr "출력 파일의 챕터 뒤에 추가 공간(EbmlVoid 요소)을 유지�
 #: src/merge/timestamp_factory.cpp:346
 #, boost-format
 msgid "Line %1% of the timecode file '%2%' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
-msgstr "타임코드 파일 '%2%'의 %1%번째 행은 모순된 데이터가 포함되어 있습니다 (예: 지속 시간/FPS가 음수 입니다).\n"
+msgstr "타임코드 파일 '%2%'의 %1%번째 행에 모순된 데이터가 포함되어 있습니다 (예: 재생 시간/FPS가 음수 입니다).\n"
 
 #: src/merge/timestamp_factory.cpp:109
 #, boost-format
@@ -6695,7 +6695,7 @@ msgstr "보통 mkvmerge는 특정 코덱의 자막 트랙에 대해 추가적인
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:48
 #, no-c-format
 msgid "Normally mkvmerge will use a value of 1000000 which means that timecodes and durations will have a precision of 1ms."
-msgstr "보통 mkvmerge는 타임코드와 지속 시간이 1ms의 정밀도를 갖는다는 것을 의미하는 1000000의 값을 사용할 것입니다."
+msgstr "보통 mkvmerge는 타임코드와 재생 시간이 1ms의 정밀도를 갖는다는 것을 의미하는 1000000의 값을 사용할 것입니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:193
 #, no-c-format
@@ -6868,7 +6868,7 @@ msgstr "%1% ('%2%') 파일 번호에 일부분의 결합 매핑만 주어졌습�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:302
 #, no-c-format
 msgid "Only playlists whose duration are at least this long are considered and offered to the user for selection."
-msgstr "최소한 이 만큼의 지속 시간이 긴 재생 목록만 간주하고, 이 값을 사용자가 선택할 수 있게 제공합니다. "
+msgstr "최소한 이만큼의 재생 시간이 긴 재생 목록만 고려하고 사용자가 선택할 수 있도록 합니다. "
 
 #: src/info/info_cli_parser.cpp:43
 msgid "Only show summaries of the contents, not each element."
@@ -7303,7 +7303,7 @@ msgstr "Quicktime/MP4 리더: '%1%' atom이 너무 작습니다. 예상 크기: 
 
 #: src/input/r_qtmp4.cpp:2132
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
-msgstr "Quicktime/MP4 리더: 일정 샘플 크기 및 가변 프레임 지속 시간은 아직 지원되지 않습니다. 이 같은 샘플을 가지고 있다면 제작자에게 보내주십시오\n"
+msgstr "Quicktime/MP4 리더: 일정 샘플 크기 및 가변 재생 시간은 아직 지원되지 않습니다. 이 같은 샘플을 가지고 있다면 제작자에게 보내주세요\n"
 
 #: src/input/r_qtmp4.cpp:1481
 #, boost-format
@@ -8384,7 +8384,7 @@ msgstr "시작:"
 #: src/info/mkvinfo.cpp:1759
 #, boost-format
 msgid "Statistics for track number %1%: number of blocks: %2%; size in bytes: %3%; duration in seconds: %4%; approximate bitrate in bits/second: %5%\n"
-msgstr "트랙 번호 %1% 통계: 블록 수: %2%; 크기(바이트): %3%; 지속 시간(초): %4%; 비트 전송률[근사치](비트/초): %5%\n"
+msgstr "트랙 번호 %1% 통계: 블록 수: %2%; 크기(바이트): %3%; 재생 시간(초): %4%; 비트 전송률[근사치](비트/초): %5%\n"
 
 #: src/mkvtoolnix-gui/jobs/model.cpp:49
 #, no-c-format
@@ -8416,7 +8416,7 @@ msgstr "스테레오 3D 비디오 모드 (0 ~ 11, 문서를 참조하세요)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1684
 msgid "Stereoscopy:"
-msgstr "입체 영상 방식:"
+msgstr "3D 영상 방식:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:504
 msgid "Stop &after all running jobs have finished"
@@ -8443,7 +8443,7 @@ msgstr "자막 트랙 %1"
 #: src/extract/xtr_textsubs.cpp:166
 #, boost-format
 msgid "Subtitle track %1% is missing some duration elements. Please check the resulting SSA/ASS file for entries that have the same start and end time.\n"
-msgstr "자막 트랙 %1%은 어떤 누락된 지속 시간 요소가 있습니다. 동일한 시작 시간과 종료 시간이있는지 출력되는 SSA/ASS 파일의 항목을 확인하십시오.\n"
+msgstr "자막 트랙 %1%은 어떤 누락된 재생 시간 요소가 있습니다. 동일한 시작 시간과 종료 시간이있는지 출력되는 SSA/ASS 파일의 항목을 확인하십시오.\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:49
 #, no-c-format
@@ -8580,7 +8580,7 @@ msgstr "GUI는 작업을 시작하거나 작업 대기열에 추가한 후에 �
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:53
 #, no-c-format
 msgid "The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."
-msgstr "GUI는 이 파일들을 스캔하고 발견한 각 재생목록의 지속 시간과 트랙 개수를 포함한 결과를 보여 줄 수 있고, 그 중 어떤 것을 추가할지 선택하도록 해 줍니다. "
+msgstr "GUI는 이 파일들을 스캔하고 발견한 각 재생목록의 재생 시간과 트랙 개수를 포함한 결과를 보여 줄 수 있고, 그 중 어떤 것을 추가할지 선택하도록 해 줍니다. "
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1024
 #: src/mkvtoolnix-gui/merge/input.cpp:1041
@@ -8902,7 +8902,7 @@ msgstr "드라이브가 꽉 찼을지 모릅니다."
 #: src/mkvtoolnix-gui/merge/output.cpp:346
 #, no-c-format
 msgid "The duration after which a new output file is started."
-msgstr "지속 시간 이후에 새 출력 파일을 시작합니다."
+msgstr "지정한 재생 시간 이후에 새 출력 파일을 시작합니다."
 
 #: src/propedit/options.cpp:242
 #, boost-format
@@ -9716,7 +9716,7 @@ msgstr "타임코드 파일 '%1%'은 기본 프레임 속도(초당 프레임)�
 #: src/merge/timestamp_factory.cpp:328
 #, boost-format
 msgid "The timecode file '%1%' does not contain a valid 'Gap' line with the duration of the gap.\n"
-msgstr "타임코드 파일 '%1%'은 간격의 지속 시간을 나타내는 유효한 'Gap'행이 포함되어 있지 않습니다.\n"
+msgstr "타임코드 파일 '%1%'은 간격(gap)의 재생 시간이 있는 유효한 'Gap' 행을 포함하지 않습니다.\n"
 
 #: src/merge/timestamp_factory.cpp:230
 #: src/merge/timestamp_factory.cpp:357
@@ -9904,7 +9904,7 @@ msgstr "이 AVC/h.264 트랙이 키프레임에서 시작하지 않습니다. �
 
 #: src/output/p_avc.cpp:130
 msgid "This AVC/h.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timecode file has been provided for it, nor does the source container provide timecodes. The resulting timecodes may not be useful.\n"
-msgstr "이 AVC/h.264 트랙의 타이밍 정보는 해당 트랙이 가변 프레임 레이트를 사용하고 있음을 나타냅니다. 그러나, 기본 지속 시간이나 외부 타임코드 파일이 제공되지는 않고, 소스 컨테이너도 타임코드를 제공하지 않습니다. 결과로 나오는 타임코드는 그다지 유용하지 않을 것입니다.\n"
+msgstr "이 AVC/h.264 트랙의 타이밍 정보는 해당 트랙이 가변 프레임 레이트를 사용하고 있음을 나타냅니다. 그러나, 기본 재생 시간이나 외부 타임코드 파일이 제공되지는 않고, 소스 컨테이너도 타임코드를 제공하지 않습니다. 결과로 나오는 타임코드는 그다지 유용하지 않을 것입니다.\n"
 
 #: src/output/p_hevc_es.cpp:97
 #, boost-format
@@ -10185,7 +10185,7 @@ msgstr "타임코드 스케일: %1%"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1655
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1669
 msgid "Timecodes and default duration"
-msgstr "타임코드와 기본 지속 시간"
+msgstr "타임코드와 기본 재생 시간"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:358
 #, no-c-format
@@ -10262,7 +10262,7 @@ msgstr "코덱ID '%2%'의 트랙 %1%은 \"codec private\"요소가 누락되어 
 #: src/extract/xtr_avi.cpp:44
 #, boost-format
 msgid "Track %1% with the CodecID '%2%' is missing the \"default duration\" element and cannot be extracted.\n"
-msgstr "코덱ID '%2%'의 트랙 %1%은 \"default duration\"요소가 누락되어 추출할 수 없습니다.\n"
+msgstr "코덱ID '%2%'의 트랙 %1%은 \"기본 재생 시간\"요소가 누락되어 추출할 수 없습니다.\n"
 
 #: src/info/mkvinfo.cpp:1051
 #, boost-format
@@ -10289,7 +10289,7 @@ msgstr "트랙 %1%: NAL이 너무 큼. 헤더 필드에 따른 크기: %2%, 패�
 #: src/extract/xtr_webvtt.cpp:49
 #, boost-format
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
-msgstr "트랙 %1%: 자막 항목 번호 %2%는 지속 시간이 누락되어 있습니다. 1초의 지속 시간으로 가정합니다.\n"
+msgstr "트랙 %1%:  %2% 자막 항목 번호에는 재생 시간이 누락되어 있습니다. 1초의 재생 시간으로 가정합니다.\n"
 
 #: src/input/r_qtmp4.cpp:2636
 #, boost-format
@@ -10984,7 +10984,7 @@ msgstr "이 옵션으로 컨테이너의 타이밍 정보에 맞춰서 그 정�
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
 msgid "Write durations for all blocks."
-msgstr "모든 블럭의 재생시간을 기록합니다."
+msgstr "모든 블럭의 재생 시간을 기록합니다."
 
 #: src/extract/extract_cli_parser.cpp:90
 msgid "Write the attachment with the ID 'AID' to 'outname'."
@@ -11170,7 +11170,7 @@ msgstr "프레임/필드 번호 이후"
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
 msgid "after output duration"
-msgstr "출력 시간 이후"
+msgstr "출력 재생 시간 이후"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:143
 #, no-c-format
@@ -11340,7 +11340,7 @@ msgstr "기본값"
 #: src/info/mkvinfo.cpp:1011
 #, boost-format
 msgid "default duration: %|1$.3f|ms (%|2$.3f| frames/fields per second for a video track)"
-msgstr "기본 지속 시간: %|1$.3f|ms (비디오 트랙의 경우, 초당 %|2$.3f| 프레임/필드)"
+msgstr "기본 재생 시간: %|1$.3f|ms (비디오 트랙의 경우, 초당 %|2$.3f| 프레임/필드)"
 
 #: src/common/compression/zlib.cpp:73
 #, boost-format
@@ -11465,12 +11465,12 @@ msgstr "바이트 순서 표식(BOM)을 사용하지 않고 시스템의 현재 
 #: src/mkvtoolnix-gui/merge/input.cpp:1306
 #, no-c-format
 msgid "force 2 bytes"
-msgstr "2 바이트 강제"
+msgstr "2 바이트로 강제하기"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1306
 #, no-c-format
 msgid "force 4 bytes"
-msgstr "4 바이트 강제"
+msgstr "4 바이트로 강제하기"
 
 #: src/mkvtoolnix-gui/merge/track.cpp:403
 #, no-c-format
@@ -11841,7 +11841,7 @@ msgstr "mkvmerge는 보통 표시된 지연시간을 계산하고 모든 트랙�
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:80
 #, no-c-format
 msgid "mkvmerge normally removes that last entry if it's timecode is within five seconds of the total duration."
-msgstr "mkvmerge는 마지막 항목의 타임코드가 전체 재생시간의 5초 내에 있으면 마지막 항목을 보통 삭제합니다."
+msgstr "mkvmerge는 마지막 항목의 타임코드가 전체 재생 시간의 5초 내에 있으면 마지막 항목을 보통 삭제합니다."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:174
 #: src/mkvtoolnix-gui/merge/output.cpp:175
@@ -11923,7 +11923,7 @@ msgstr "아니오"
 #: src/mkvtoolnix-gui/merge/input.cpp:1310
 #, no-c-format
 msgid "no cues"
-msgstr "큐 없음"
+msgstr "큐(cues) 없음"
 
 #: src/info/mkvinfo.cpp:843
 msgid "no encryption"
@@ -12130,16 +12130,16 @@ msgstr "샘플링 주파수: %1%"
 
 #: src/common/stereo_mode.cpp:50
 msgid "side by side (left first)"
-msgstr "양쪽 좌우 방식 (좌안 먼저)"
+msgstr "좌우 방식 (좌안 먼저)"
 
 #: src/common/stereo_mode.cpp:60
 msgid "side by side (right first)"
-msgstr "양쪽 좌우 방식 (우안 먼저)"
+msgstr "좌우 방식 (우안 먼저)"
 
 #: src/input/subtitles.cpp:598
 #, boost-format
 msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
-msgstr "spu_추출_duration: 타임코드 %1%에서 깨진 SPU 패킷이 발생했습니다. (next_off < start_off) 이 패킷은 제대로 표시되지 않거나 전혀 표시되지 않을 수도 있습니다.\n"
+msgstr "spu_추출_재생시간: 타임코드 %1%에서 깨진 SPU 패킷이 발생했습니다. (next_off < start_off) 이 패킷은 제대로 표시되지 않거나 전혀 표시되지 않을 수도 있습니다.\n"
 
 #: src/input/subtitles.cpp:363
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
@@ -12184,11 +12184,11 @@ msgstr "상단"
 
 #: src/common/stereo_mode.cpp:52
 msgid "top bottom (left first)"
-msgstr "상(上)하(下) 방식 (좌안 먼저)"
+msgstr "상하 방식 (좌안 먼저)"
 
 #: src/common/stereo_mode.cpp:51
 msgid "top bottom (right first)"
-msgstr "상(上)하(下) 방식 (우안 먼저)"
+msgstr "상하 방식 (우안 먼저)"
 
 #: src/merge/mkvmerge.cpp:2650
 msgid "track name"
