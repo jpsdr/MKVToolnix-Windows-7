@@ -501,7 +501,7 @@ Tab::onChapterCueNameFormatChanged(QString newValue) {
 void
 Tab::onWebmClicked(bool newValue) {
   m_config.m_webmMode = newValue;
-  // TODO: change output file extension
+  setOutputFileNameMaybe();
 }
 
 void
