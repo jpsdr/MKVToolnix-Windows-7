@@ -1387,7 +1387,7 @@ Tab::setOutputFileNameMaybe() {
   // Don't override custom changes to the output file name.
   if (   !currentOutput.isEmpty()
       && !m_config.m_destinationAuto.isEmpty()
-      && (currentOutput != m_config.m_destinationAuto))
+      && (QDir::toNativeSeparators(currentOutput) != QDir::toNativeSeparators(m_config.m_destinationAuto)))
     return;
 
   if (Util::Settings::ToPreviousDirectory == policy)
