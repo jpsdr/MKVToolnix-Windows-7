@@ -464,8 +464,8 @@ PreferencesDialog::setupOutputFileNamePolicy() {
 
   ui->cbMAutoSetOutputFileName->setChecked(isChecked);
   rbToCheck->setChecked(true);
-  ui->leMAutoSetRelativeDirectory->setText(m_cfg.m_relativeOutputDir.path());
-  ui->leMAutoSetFixedDirectory->setText(m_cfg.m_fixedOutputDir.path());
+  ui->leMAutoSetRelativeDirectory->setText(QDir::toNativeSeparators(m_cfg.m_relativeOutputDir.path()));
+  ui->leMAutoSetFixedDirectory->setText(QDir::toNativeSeparators(m_cfg.m_fixedOutputDir.path()));
   ui->cbMUniqueOutputFileNames->setChecked(m_cfg.m_uniqueOutputFileNames);
   ui->cbMAutoClearOutputFileName->setChecked(m_cfg.m_autoClearOutputFileName);
 
