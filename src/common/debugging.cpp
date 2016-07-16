@@ -122,7 +122,7 @@ debugging_c::hexdump(const void *buffer_to_dump,
       ascii << ' ';
     }
 
-    ascii << (((32 <= buffer[buffer_idx]) && (128 > buffer[buffer_idx])) ? static_cast<char>(buffer[buffer_idx]) : '.');
+    ascii << (((32 <= buffer[buffer_idx]) && (127 > buffer[buffer_idx])) ? static_cast<char>(buffer[buffer_idx]) : '.');
     dump  << (s_fmt_byte % static_cast<unsigned int>(buffer[buffer_idx]));
 
     ++buffer_idx;
