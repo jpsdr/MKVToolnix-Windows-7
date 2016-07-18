@@ -12,6 +12,13 @@ using ConfigFilePtr = std::shared_ptr<ConfigFile>;
 
 class ConfigFile: public QObject {
   Q_OBJECT;
+public:
+  enum Type {
+    UnknownType,
+    Ini,
+    Json,
+  };
+
 protected:
   QString m_fileName;
 
@@ -37,6 +44,8 @@ public:
 public:
   static ConfigFilePtr open(QString const &fileName);
   static ConfigFilePtr create(QString const &fileName);
+
+  static Type determineType(QString const &fileName);
 
 private:
   static ConfigFilePtr openInternal(QString const &fileName);

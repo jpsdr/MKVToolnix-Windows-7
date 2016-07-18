@@ -306,6 +306,35 @@ Tool::addJob(JobPtr const &job) {
   resizeColumnsToContents();
 }
 
+bool
+Tool::addJobFile(QString const &fileName) {
+  try {
+    auto job = Job::loadJob(fileName);
+    if (!job)
+      throw Merge::InvalidSettingsX{};
+
+    auto muxJob = std::dynamic_pointer_cast<MuxJob>(job);
+    if (muxJob) {
+      job = std::make_shared<MuxJob>(Job::PendingManual, std::make_shared<Merge::MuxConfig>(muxJob->config()));
+      job->setDescription(muxJob->description());
+
+    } else
+      throw Merge::InvalidSettingsX{};
+
+    job->setDateAdded(QDateTime::currentDateTime());
+    if (job->description().isEmpty())
+      job->setDescription(job->displayableDescription());
+
+    addJob(job);
+
+    return true;
+
+  } catch (Merge::InvalidSettingsX &) {
+  }
+
+  return false;
+}
+
 void
 Tool::retranslateUi() {
   ui->retranslateUi(this);

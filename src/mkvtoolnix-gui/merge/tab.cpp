@@ -134,6 +134,9 @@ Tab::onShowCommandLine() {
 void
 Tab::load(QString const &fileName) {
   try {
+    if (Util::ConfigFile::determineType(fileName) == Util::ConfigFile::UnknownType)
+      throw InvalidSettingsX{};
+
     m_config.load(fileName);
     setControlValuesFromConfig();
 

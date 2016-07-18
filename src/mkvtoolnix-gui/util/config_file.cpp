@@ -38,24 +38,33 @@ ConfigFile::open(QString const &fileName) {
   return configFile;
 }
 
-ConfigFilePtr
-ConfigFile::openInternal(QString const &fileName) {
+ConfigFile::Type
+ConfigFile::determineType(QString const &fileName) {
   if (!QFileInfo{fileName}.exists())
-    return ConfigFilePtr{new JsonConfigFile{fileName}};
+    return UnknownType;
 
   QFile file{fileName};
   if (!file.open(QIODevice::ReadOnly))
-    return ConfigFilePtr{new JsonConfigFile{fileName}};
+    return UnknownType;
 
   auto firstChar = ' ';
   auto charRead  = file.getChar(&firstChar);
 
   file.close();
 
-  if (charRead && (firstChar == '['))
-    return ConfigFilePtr{new IniConfigFile{fileName}};
+  return !charRead        ? UnknownType
+       : firstChar == '[' ? Ini
+       : firstChar == '{' ? Json
+       :                    UnknownType;
+}
 
-  return ConfigFilePtr{new JsonConfigFile{fileName}};
+ConfigFilePtr
+ConfigFile::openInternal(QString const &fileName) {
+  auto const type = determineType(fileName);
+
+  return type == Ini  ? ConfigFilePtr{new IniConfigFile{fileName}}
+       : type == Json ? ConfigFilePtr{new JsonConfigFile{fileName}}
+       :                ConfigFilePtr{};
 }
 
 ConfigFilePtr

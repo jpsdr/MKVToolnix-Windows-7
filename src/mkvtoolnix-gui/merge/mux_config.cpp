@@ -165,13 +165,18 @@ MuxConfig::loadProperties(Util::ConfigFile &settings,
 
 void
 MuxConfig::load(QString const &fileName) {
-  if (fileName.isEmpty())
+  auto fileNameToOpen = fileName.isEmpty() ? m_configFileName : fileName;
+
+  if (fileNameToOpen.isEmpty())
     throw InvalidSettingsX{};
 
-  auto settings = Util::ConfigFile::open(fileName);
+  auto settings = Util::ConfigFile::open(fileNameToOpen);
+  if (!settings)
+    throw InvalidSettingsX{};
+
   load(*settings);
 
-  m_configFileName = fileName;
+  m_configFileName = fileNameToOpen;
 }
 
 void

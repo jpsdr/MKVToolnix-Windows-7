@@ -10,6 +10,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/merge/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
+#include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -165,6 +166,11 @@ Tool::openConfigFile(QString const &fileName) {
   Util::Settings::change([&fileName](Util::Settings &cfg) {
     cfg.m_lastConfigDir = QFileInfo{fileName}.path();
   });
+
+  if (MainWindow::jobTool()->addJobFile(fileName)) {
+    MainWindow::get()->setStatusBarMessage(QY("The job has been added to the job queue."));
+    return;
+  }
 
   auto tab = currentTab();
   if (tab && tab->isEmpty())

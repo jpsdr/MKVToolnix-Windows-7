@@ -39,6 +39,7 @@ public:
 
   Model *model() const;
   void addJob(JobPtr const &job);
+  bool addJobFile(QString const &fileName);
   void loadAndStart();
 
 public slots:

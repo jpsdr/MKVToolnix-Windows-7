@@ -347,6 +347,9 @@ Job::loadJob(QString const &fileName) {
     return {};
 
   auto settings = Util::ConfigFile::open(fileName);
+  if (!settings)
+    throw Merge::InvalidSettingsX{};
+
   return loadJob(*settings);
 }
 
