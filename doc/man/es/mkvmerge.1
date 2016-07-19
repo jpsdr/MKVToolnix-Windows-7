@@ -210,11 +210,11 @@ Esto establece el nombre de la plantilla para los nombres de los cap\('itulos cr
 .sp
 Hay diversas variables que se pueden usar en la plantilla que son reemplazadas por sus valores correspondientes cuando se genera un cap\('itulo\&. La cadena de texto \*(Aq<NUM>\*(Aq ser\('a reemplazada por el n\('umero de cap\('itulo\&. La cadena de texto \*(Aq<START>\*(Aq ser\('a reemplazada por la marca de tiempo inicial del cap\('itulo\&.
 .sp
-The strings
+Las cadenas de texto
 \*(Aq<FILE_NAME>\*(Aq
-and
+y
 \*(Aq<FILE_NAME_WITH_EXT>\*(Aq
-are only filled when generating chapters for appended files\&. They will be replaced by the appended file\*(Aqs name wihtout respectively with its extension\&. Note that only the file\*(Aqs base name and extension are inserted, not its directory or drive components\&.
+s\('olo ser\('an establecidas cuando se generen cap\('itulos para los archivos anexados\&. Ser\('an reemplazadas por el nombre de los archivos anexados sin sus extensiones\&. Tenga en cuenta, que s\('olo se inserta el nombre del archivo y su extensi\('on, descartando la ruta y la unidad\&.
 .sp
 Puede especificar el n\('umero m\('inimo de d\('igitos del n\('umero del cap\('itulo con \*(Aq<NUM:places>\*(Aq, p\&.e\&. \*(Aq<NUM:3>\*(Aq\&. Se le a\(~nadir\('an ceros a la izquierda si el n\('umero resultante tiene menos d\('igitos de los especificados\&.
 .sp
@@ -1359,11 +1359,11 @@ IDs de pista)\&. \*(AqNone\*(Aq evita la creaci\('on de entradas del \('indice\&
 \fBmkvmerge\fR(1)
 genere las entradas del \('indice para todos los bloques lo que har\('a que el archivo sea m\('as grande\&.
 .sp
-The default is \*(Aqiframes\*(Aq for video and subtitle tracks and \*(Aqnone\*(Aq for audio tracks\&. See also option
+Por defecto es \*(Aqiframes\*(Aq para pistas de video y subt\('itulos, y \*(Aqnone\*(Aq para las pistas de audio\&. Mire tambi\('en la opci\('on
 \fB\-\-no\-cues\fR
-which inhibits the creation of cue entries regardless of the
+que evita la creaci\('on de entradas del \('indice a pesar de las opciones
 \fB\-\-cues\fR
-options used\&.
+utilizadas\&.
 .sp
 Esta opci\('on se puede utilizar varias veces para un archivo de entrada aplic\('andola a diversas pistas seleccionando IDs de pista diferente de pista cada vez\&.
 .RE
@@ -1551,13 +1551,13 @@ es usado\&. Si se omite por defecto usa 4 bytes, pero hay archivos que contienen
 .PP
 \fB\-\-compression\fR \fITID:n\fR
 .RS 4
-Selects the compression method to be used for the track\&. Note that the player also has to support this method\&. Valid values are \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq and \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&.
+Selecciona el m\('etodo de compresi\('on que se usar\('a para la pista\&. Tenga en cuenta que el reproductor debe soportar este m\('etodo\&. Los valores v\('alidos son \*(Aqnone\*(Aq, \*(Aqzlib\*(Aq y \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq\&.
 .sp
 El m\('etodo de compresi\('on \*(Aqmpeg4_p2\*(Aq/\*(Aqmpeg4p2\*(Aq es un m\('etodo especial llamado \*(Aqeliminador de encabezado\*(Aq que s\('olo est\('a disponible para pistas de video
 MPEG4
 part 2\&.
 .sp
-The default for some subtitle types is \*(Aqzlib\*(Aq compression\&. This compression method is also the one that most if not all playback applications support\&. Support for other compression methods other than \*(Aqnone\*(Aq is not assured\&.
+La compresi\('on por defecto para algunas pistas de subt\('itulos es \*(Aqzlib\*(Aq\&. Este m\('etodo de compresi\('on es para el que casi todas, si no todas, las aplicaciones de reproducci\('on son compatibles\&. No se puede asegurar la compatibilidad para otros m\('etodos de compresi\('on que no sea \*(Aqninguna\*(Aq\&.
 .RE
 .SS "Opciones que s\('olo afectan a pistas de video"
 .PP
@@ -1617,14 +1617,14 @@ Establece los valores especificados como los par\('ametros de recorte de p\('ixe
 .PP
 \fB\-\-colour\-matrix\fR \fITID:n\fR
 .RS 4
-Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries\&. The parameter
+Establece los coeficientes matriciales del video para derivar los valores de luminancia y crominancia a partir de los colores primarios rojo, verde y azul\&. El par\('ametro
 \fIn\fR
-is an integer rangeing from
+es un n\('umero entero entre
 \fB0\fR
-and
+y
 \fB10\fR\&.
 .sp
-Valid values and their meaning are:
+Los valores v\('alidos y su significado son:
 .sp
 \fB0\fR: GBR,
 \fB1\fR: BT709,
@@ -1684,9 +1684,9 @@ Sets the clipping of the color ranges (\fB0\fR: unspecified,
 .PP
 \fB\-\-colour\-transfer\-characteristics\fR \fITID:n\fR
 .RS 4
-The transfer characteristics of the video\&.
+Las caracter\('isticas de transferencia del video\&.
 .sp
-Valid values and their meaning are:
+Los valores v\('alidos y su significado son:
 .sp
 \fB0\fR: reserved,
 \fB1\fR: ITU\-R BT\&.709,
@@ -1711,9 +1711,9 @@ Valid values and their meaning are:
 .PP
 \fB\-\-colour\-primaries\fR \fITID:n\fR
 .RS 4
-Sets the colour primaries of the video\&.
+Establece los colores primarios del video\&.
 .sp
-Valid values and their meaning are:
+Los valores v\('alidos y su significado son:
 .sp
 \fB0\fR: reserved,
 \fB1\fR: ITU\-R BT\&.709,
@@ -1932,11 +1932,11 @@ se respeta\&.
 .PP
 \fB\-\-ui\-language\fR \fIc\('odigo\fR
 .RS 4
-Forces the translations for the language
-\fIcode\fR
-to be used (e\&.g\&. \*(Aqde_DE\*(Aq for the German translations)\&. Entering \*(Aqlist\*(Aq as the
-\fIcode\fR
-will cause the program to output a list of available translations\&.
+Fuerza la traducci\('on al
+\fIc\('odigo\fR
+de idioma que ser\('a usado (p\&.e\&. \*(Aqde_DE\*(Aq para la traducci\('on al Alem\('an)\&. Introduciendo \*(Aqlist\*(Aq como
+\fIc\('odigo\fR
+provocar\('a que el programa muestre una lista de las traducciones disponibles\&.
 .RE
 .PP
 \fB\-\-debug\fR \fItopic\fR
@@ -2170,7 +2170,7 @@ y disfruta\&. Si tienes m\('ultiples pistas de audios (o incluso pistas de video
 mplayer(TM)
 que pista debe reproducir con las opciones \*(Aq\fB\-vid\fR\*(Aq y \*(Aq\fB\-aid\fR\*(Aq\&. Estos est\('an en base y no distinguen entre video y audio (el \('indice comienza en el cero)\&.
 .PP
-i necesitas una pista de audio sincronizada puedes hacerlo f\('acilmente\&. Lo primero es averiguar que ID de pista tiene la pista Vorbis, con:
+Si necesitas una pista de audio sincronizada puedes hacerlo f\('acilmente\&. Lo primero es averiguar que ID de pista tiene la pista Vorbis, con:
 .sp
 .if n \{\
 .RS 4
