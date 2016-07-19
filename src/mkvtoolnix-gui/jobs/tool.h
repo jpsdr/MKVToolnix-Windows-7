@@ -7,6 +7,7 @@
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
 #include "mkvtoolnix-gui/jobs/model.h"
+#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
 class QAction;
 class QMenu;
@@ -30,6 +31,9 @@ protected:
   QAction *m_openFolderAction, *m_editAndRemoveAction, *m_startImmediatelyAction;
   QMenu *m_jobQueueMenu, *m_jobsMenu;
 
+  mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
+  QStringList m_droppedFiles;
+
 public:
   explicit Tool(QWidget *parent, QMenu *jobQueueMenu);
   ~Tool();
@@ -40,6 +44,7 @@ public:
   Model *model() const;
   void addJob(JobPtr const &job);
   bool addJobFile(QString const &fileName);
+  bool addDroppedFileAsJob(QString const &fileName);
   void loadAndStart();
 
 public slots:
@@ -69,12 +74,17 @@ public slots:
   void acknowledgeSelectedErrors();
   void acknowledgeWarningsAndErrors(uint64_t id);
 
+  virtual void processDroppedFiles();
+
 protected:
   void setupToolTips();
 
   void stopQueue(bool immediately);
 
   void openJobInTool(Job const &job) const;
+
+  virtual void dragEnterEvent(QDragEnterEvent *event) override;
+  virtual void dropEvent(QDropEvent *event) override;
 };
 
 }}}

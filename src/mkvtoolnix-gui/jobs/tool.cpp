@@ -16,6 +16,8 @@
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
+#include <QDragEnterEvent>
+#include <QDropEvent>
 #include <QList>
 #include <QMenu>
 #include <QMessageBox>
@@ -41,6 +43,7 @@ Tool::Tool(QWidget *parent,
   , m_startImmediatelyAction{new QAction{this}}
   , m_jobQueueMenu{jobQueueMenu}
   , m_jobsMenu{new QMenu{this}}
+  , m_filesDDHandler{Util::FilesDragDropHandler::Mode::Remember}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -335,6 +338,31 @@ Tool::addJobFile(QString const &fileName) {
   return false;
 }
 
+bool
+Tool::addDroppedFileAsJob(QString const &fileName) {
+  if (addJobFile(fileName))
+    return true;
+
+  try {
+    auto muxConfig = Merge::MuxConfig::loadSettings(fileName);
+    if (!muxConfig)
+      throw Merge::InvalidSettingsX{};
+
+    auto job = std::make_shared<Jobs::MuxJob>(Job::PendingManual, muxConfig);
+
+    job->setDateAdded(QDateTime::currentDateTime());
+    job->setDescription(job->displayableDescription());
+
+    addJob(job);
+
+    return true;
+
+  } catch (Merge::InvalidSettingsX &) {
+  }
+
+  return false;
+}
+
 void
 Tool::retranslateUi() {
   ui->retranslateUi(this);
@@ -464,6 +492,29 @@ Tool::stopQueue(bool immediately) {
       askedBeforeAborting = true;
     });
   });
+}
+
+void
+Tool::dragEnterEvent(QDragEnterEvent *event) {
+  m_filesDDHandler.handle(event, false);
+}
+
+void
+Tool::dropEvent(QDropEvent *event) {
+  if (m_filesDDHandler.handle(event, true)) {
+    m_droppedFiles += m_filesDDHandler.fileNames();
+    QTimer::singleShot(0, this, SLOT(processDroppedFiles()));
+  }
+}
+
+void
+Tool::processDroppedFiles() {
+  auto fileNames = m_droppedFiles;
+  m_droppedFiles.clear();
+
+  for (auto const &fileName : fileNames)
+    if (!addDroppedFileAsJob(fileName))
+      Util::MessageBox::critical(this)->title(QY("Error loading settings file")).text(QY("The file '%1' is neither a job queue file nor a settings file.").arg(fileName)).exec();
 }
 
 }}}
