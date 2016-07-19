@@ -154,7 +154,7 @@ QString
 MuxJob::displayableDescription()
   const {
   QFileInfo info{m_config->m_destination};
-  return QY("merging to file \"%1\" in directory \"%2\"").arg(info.fileName()).arg(info.dir().path());
+  return QY("merging to file \"%1\" in directory \"%2\"").arg(info.fileName()).arg(QDir::toNativeSeparators(info.dir().path()));
 }
 
 QString
