@@ -41,6 +41,7 @@ ScannedFileItem::operator <(QTreeWidgetItem const &cmp)
 
   return 0 == column ? m_file->m_fileName         < otherFile->m_fileName
        : 1 == column ? m_file->m_playlistDuration < otherFile->m_playlistDuration
+       : 2 == column ? m_file->m_playlistChapters < otherFile->m_playlistChapters
        :               m_file->m_playlistSize     < otherFile->m_playlistSize;
 }
 
@@ -49,11 +50,12 @@ ScannedFileItem::create(SourceFile const &scannedFile) {
   auto item = new ScannedFileItem{ scannedFile, QStringList{
       QFileInfo{scannedFile.m_fileName}.fileName(),
       to_qs(format_timestamp(scannedFile.m_playlistDuration, 0)),
+      QString::number(scannedFile.m_playlistChapters),
       to_qs(format_file_size(scannedFile.m_playlistSize)),
     }};
 
-  item->setTextAlignment(1, Qt::AlignRight | Qt::AlignVCenter);
-  item->setTextAlignment(2, Qt::AlignRight | Qt::AlignVCenter);
+  for (auto column = 1; column <= 3; ++column)
+    item->setTextAlignment(column, Qt::AlignRight | Qt::AlignVCenter);
 
   return item;
 }
