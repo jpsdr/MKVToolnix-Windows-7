@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
 "POT-Creation-Date: 2016-07-10 20:24+0200\n"
-"PO-Revision-Date: 2016-07-14 15:56+0000\n"
+"PO-Revision-Date: 2016-07-19 18:54+0200\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
 "Language: es\n"
@@ -338,10 +338,8 @@ msgstr "<option>--ui-language</option> <parameter>código</parameter>"
 #: doc/man/mkvinfo.xml:164
 #: doc/man/mkvmerge.xml:1989
 #: doc/man/mkvpropedit.xml:401
-#, fuzzy
-#| msgid "Forces the translations for the language <parameter>code</parameter> to be used (e.g.  '<literal>de_DE</literal>' for the German translations). It is preferable to use the environment variables <varname>LANG</varname>, <varname>LC_MESSAGES</varname> and <varname>LC_ALL</varname> though. Entering '<literal>list</literal>' as the <parameter>code</parameter> will cause &mkvmerge; to output a list of available translations."
 msgid "Forces the translations for the language <parameter>code</parameter> to be used (e.g.  '<literal>de_DE</literal>' for the German translations). Entering '<literal>list</literal>' as the <parameter>code</parameter> will cause the program to output a list of available translations."
-msgstr "Fuerza el uso de la traducción de un concreto código de idioma (p.e. '<literal>es_ES</literal>' para el Español). Pienso que es preferible usar las variables de entorno <varname>LANG</varname>, <varname>LC_MESSAGES</varname> y <varname>LC_ALL</varname>. Introducir '<literal>list</literal>' como el valor del <parameter>código</parameter> provocará que &mkvmerge; genere una lista de traducciones disponibles. "
+msgstr "Fuerza la traducción al <parameter>código</parameter> de idioma que será usado (p.e. '<literal>de_DE</literal>' para la traducción al Alemán). Introduciendo '<literal>list</literal>' como <parameter>código</parameter> provocará que el programa muestre una lista de las traducciones disponibles. "
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:135
@@ -1729,7 +1727,7 @@ msgstr "Hay diversas variables que se pueden usar en la plantilla que son reempl
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:274
 msgid "The strings <literal>'&lt;FILE_NAME&gt;'</literal> and <literal>'&lt;FILE_NAME_WITH_EXT&gt;'</literal> are only filled when generating chapters for appended files.  They will be replaced by the appended file's name wihtout respectively with its extension.  Note that only the file's base name and extension are inserted, not its directory or drive components."
-msgstr ""
+msgstr "Las cadenas de texto <literal>'&lt;FILE_NAME&gt;'</literal> y <literal>'&lt;FILE_NAME_WITH_EXT&gt;'</literal> sólo serán establecidas cuando se generen capítulos para los archivos anexados. Serán reemplazadas por el nombre de los archivos anexados sin sus extensiones. Tenga en cuenta, que sólo se inserta el nombre del archivo y su extensión, descartando la ruta y la unidad. "
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:280
@@ -2724,10 +2722,8 @@ msgstr "Controla qué entradas del índice (cue) de la pistas se crean para una 
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1318
-#, fuzzy
-#| msgid "The default is '<literal>iframes</literal>' for video tracks and '<literal>none</literal>' for all others.  See also option <link linkend=\"mkvmerge.description.no_cues\"><option>--no-cues</option></link> which inhibits the creation of cue entries regardless of the <option>--cues</option> options used."
 msgid "The default is '<literal>iframes</literal>' for video and subtitle tracks and '<literal>none</literal>' for audio tracks.  See also option <link linkend=\"mkvmerge.description.no_cues\"><option>--no-cues</option></link> which inhibits the creation of cue entries regardless of the <option>--cues</option> options used."
-msgstr "Por defecto es '<literal>iframes</literal>' para pistas de video y '<literal>none</literal>' para las demás. Mire también la opción <link linkend=\"mkvmerge.description.no_cues\"><option>--no-cues</option></link> que evita la creación de entradas del índice a pesar de las opciones <option>--cues</option> utilizadas. "
+msgstr "Por defecto es '<literal>iframes</literal>' para pistas de video y subtítulos, y '<literal>none</literal>' para las pistas de audio. Mire también la opción <link linkend=\"mkvmerge.description.no_cues\"><option>--no-cues</option></link> que evita la creación de entradas del índice a pesar de las opciones <option>--cues</option> utilizadas. "
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1330
@@ -2887,7 +2883,7 @@ msgstr "<option>--compression</option> <parameter>TID:n</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1513
 msgid "Selects the compression method to be used for the track. Note that the player also has to support this method. Valid values are '<literal>none</literal>', '<literal>zlib</literal>' and '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p2</literal>'."
-msgstr ""
+msgstr "Selecciona el método de compresión que se usará para la pista. Tenga en cuenta que el reproductor debe soportar este método. Los valores válidos son '<literal>none</literal>', '<literal>zlib</literal>' y '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p2</literal>'."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1517
@@ -2896,8 +2892,6 @@ msgstr "El método de compresión '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1521
-#, fuzzy
-#| msgid "The default for some subtitle tracks is '<literal>zlib</literal>' compression. This compression method is also the one that most if not all playback applications support. Support for other compression methods other than '<literal>none</literal>' is not assured."
 msgid "The default for some subtitle types is '<literal>zlib</literal>' compression. This compression method is also the one that most if not all playback applications support. Support for other compression methods other than '<literal>none</literal>' is not assured."
 msgstr "La compresión por defecto para algunas pistas de subtítulos es '<literal>zlib</literal>'. Este método de compresión es para el que casi todas, si no todas, las aplicaciones de reproducción son compatibles. No se puede asegurar la compatibilidad para otros métodos de compresión que no sea 'ninguna'. "
 
@@ -2973,22 +2967,20 @@ msgstr "Establece los valores especificados como los parámetros de recorte de p
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1607
-#, fuzzy
-#| msgid "<option>--compression</option> <parameter>TID:n</parameter>"
 msgid "<option>--colour-matrix</option> <parameter>TID:n</parameter>"
-msgstr "<option>--compression</option> <parameter>TID:n</parameter>"
+msgstr "<option>--colour-matrix</option> <parameter>TID:n</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1610
 msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries. The parameter <parameter>n</parameter> is an integer rangeing from <constant>0</constant> and <constant>10</constant>."
-msgstr ""
+msgstr "Establece los coeficientes matriciales del video para derivar los valores de luminancia y crominancia a partir de los colores primarios rojo, verde y azul. El parámetro <parameter>n</parameter> es un número entero entre <constant>0</constant> y <constant>10</constant>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1615
 #: doc/man/mkvmerge.xml:1695
 #: doc/man/mkvmerge.xml:1717
 msgid "Valid values and their meaning are:"
-msgstr ""
+msgstr "Los valores válidos y su significado son:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1619
@@ -3075,7 +3067,7 @@ msgstr "<option>--nalu-size-length</option> <parameter>TID:n</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1691
 msgid "The transfer characteristics of the video."
-msgstr ""
+msgstr "Las características de transferencia del video."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1699
@@ -3092,7 +3084,7 @@ msgstr "<option>--compression</option> <parameter>TID:n</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1713
 msgid "Sets the colour primaries of the video."
-msgstr ""
+msgstr "Establece los colores primarios del video."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1721
@@ -3479,7 +3471,7 @@ msgstr "Ahora abra el <productname>mplayer</productname> y disfruta. Si tienes m
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2200
 msgid "If you need an audio track synchronized you can do that easily. First find out which track ID the Vorbis track has with"
-msgstr "i necesitas una pista de audio sincronizada puedes hacerlo fácilmente. Lo primero es averiguar que ID de pista tiene la pista Vorbis, con: "
+msgstr "Si necesitas una pista de audio sincronizada puedes hacerlo fácilmente. Lo primero es averiguar que ID de pista tiene la pista Vorbis, con: "
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:2203
