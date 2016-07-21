@@ -325,23 +325,30 @@ Tab::enableAttachmentControls(bool enable) {
 
 void
 Tab::enableAttachedFilesActions() {
-  auto hasSelection = !ui->attachedFiles->selectionModel()->selection().isEmpty();
+  auto numSelected  = ui->attachedFiles->selectionModel()->selection().size();
+  auto hasSelection = !!numSelected;
   auto hasEntries   = !!m_attachedFilesModel->rowCount();
 
   m_enableSelectedAttachedFilesAction->setEnabled(hasSelection);
   m_disableSelectedAttachedFilesAction->setEnabled(hasSelection);
   m_enableAllAttachedFilesAction->setEnabled(hasEntries);
   m_disableAllAttachedFilesAction->setEnabled(hasEntries);
+
+  m_enableSelectedAttachedFilesAction->setText(QNY("&Enable selected attached file", "&Enable selected attached files", numSelected));
+  m_disableSelectedAttachedFilesAction->setText(QNY("&Disable selected attached file", "&Disable selected attached files", numSelected));
 }
 
 void
 Tab::enableAttachmentsActions() {
-  auto hasSelection = !ui->attachments->selectionModel()->selection().isEmpty();
+  auto numSelected  = ui->attachments->selectionModel()->selection().size();
+  auto hasSelection = !!numSelected;
   auto hasEntries   = !!m_attachmentsModel->rowCount();
 
   m_removeAttachmentsAction->setEnabled(hasSelection);
   m_removeAllAttachmentsAction->setEnabled(hasEntries);
   m_selectAllAttachmentsAction->setEnabled(hasEntries);
+
+  m_removeAttachmentsAction->setText(QNY("&Remove attachment", "&Remove attachments", numSelected));
 }
 
 void
@@ -379,13 +386,10 @@ Tab::retranslateAttachmentsUI() {
   resizeAttachedFilesColumnsToContents();
   resizeAttachmentsColumnsToContents();
 
-  m_enableSelectedAttachedFilesAction->setText(QY("&Enable selected attached files"));
-  m_disableSelectedAttachedFilesAction->setText(QY("&Disable selected attached files"));
   m_enableAllAttachedFilesAction->setText(QY("E&nable all attached files"));
   m_disableAllAttachedFilesAction->setText(QY("Di&sable all attached files"));
 
   m_addAttachmentsAction->setText(QY("&Add attachments"));
-  m_removeAttachmentsAction->setText(QY("&Remove attachments"));
   m_removeAllAttachmentsAction->setText(QY("Remove a&ll attachments"));
   m_selectAllAttachmentsAction->setText(QY("&Select all attachments"));
 

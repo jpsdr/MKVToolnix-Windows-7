@@ -168,13 +168,16 @@ Tool::onJobQueueMenu() {
 
 void
 Tool::onContextMenu(QPoint pos) {
-  auto hasSelection = false, hasNotRunning = false;
+  auto hasNotRunning = false;
+  auto numSelected   = 0;
 
-  m_model->withSelectedJobs(ui->jobs, [&hasSelection, &hasNotRunning](Job const &job) {
-    hasSelection = true;
+  m_model->withSelectedJobs(ui->jobs, [&numSelected, &hasNotRunning](Job const &job) {
+    ++numSelected;
     if (Job::Running != job.status())
       hasNotRunning = true;
   });
+
+  auto hasSelection = !!numSelected;
 
   m_startAutomaticallyAction->setEnabled(hasNotRunning);
   m_startManuallyAction->setEnabled(hasNotRunning);
@@ -187,6 +190,11 @@ Tool::onContextMenu(QPoint pos) {
   m_acknowledgeSelectedWarningsAction->setEnabled(hasSelection);
   m_acknowledgeSelectedErrorsAction->setEnabled(hasSelection);
   m_acknowledgeSelectedWarningsErrorsAction->setEnabled(hasSelection);
+
+  m_startAutomaticallyAction->setText(QNY("&Start job automatically", "&Start jobs automatically", numSelected));
+  m_startManuallyAction->setText(QNY("Start job &manually", "Start jobs &manually", numSelected));
+  m_startImmediatelyAction->setText(QNY("Start job &immediately", "Start jobs &immediately", numSelected));
+  m_removeAction->setText(QNY("&Remove job", "&Remove jobs", numSelected));
 
   m_jobsMenu->exec(ui->jobs->viewport()->mapToGlobal(pos));
 }
@@ -369,10 +377,6 @@ Tool::retranslateUi() {
   m_model->retranslateUi();
 
   m_viewOutputAction->setText(QY("&View output"));
-  m_startAutomaticallyAction->setText(QY("&Start jobs automatically"));
-  m_startManuallyAction->setText(QY("Start jobs &manually"));
-  m_startImmediatelyAction->setText(QY("Start jobs &immediately"));
-  m_removeAction->setText(QY("&Remove jobs"));
   m_openFolderAction->setText(QY("&Open folder"));
   m_editAndRemoveAction->setText(QY("E&dit in corresponding tool and remove from queue"));
 
