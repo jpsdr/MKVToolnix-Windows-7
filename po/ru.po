@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-19 18:59+0200\n"
+"POT-Creation-Date: 2016-07-21 20:12+0200\n"
 "PO-Revision-Date: 2016-07-18 06:31+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
@@ -1147,7 +1147,7 @@ msgstr "%s – секунды"
 msgid "&Abort job"
 msgstr "&Прервать задание"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:487
+#: src/mkvtoolnix-gui/jobs/tool.cpp:491
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:329
 #, no-c-format
 msgid "&Abort jobs"
@@ -1157,25 +1157,25 @@ msgstr "&Прервать задания"
 msgid "&About mkvinfo"
 msgstr "&О mkvinfo"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:381
+#: src/mkvtoolnix-gui/jobs/tool.cpp:385
 #, no-c-format
 msgid "&Acknowledge warnings and errors"
 msgstr "Подтвер&дить предупреждения и ошибки"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:191
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:193
 #, no-c-format
 msgid "&Add"
 msgstr "&Добавить"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/attachments.cpp:387
+#: src/mkvtoolnix-gui/merge/attachments.cpp:392
 #, no-c-format
 msgid "&Add attachments"
 msgstr "&Добавить вложение"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1267
-#: src/mkvtoolnix-gui/merge/input.cpp:1268
+#: src/mkvtoolnix-gui/merge/input.cpp:1272
+#: src/mkvtoolnix-gui/merge/input.cpp:1273
 #, no-c-format
 msgid "&Add files"
 msgstr "&Добавить файлы"
@@ -1189,7 +1189,7 @@ msgid "&Add source files"
 msgstr "&Добавить исходные файлы"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1310
-#: src/mkvtoolnix-gui/merge/input.cpp:1285
+#: src/mkvtoolnix-gui/merge/input.cpp:1287
 #, no-c-format
 msgid "&Audio"
 msgstr "&Аудио"
@@ -1277,15 +1277,19 @@ msgstr "&По умолчанию"
 msgid "&Description:"
 msgstr "&Описание:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1281
+#: src/mkvtoolnix-gui/merge/input.cpp:1284
 #, no-c-format
 msgid "&Disable all tracks"
 msgstr "&Отключить все дорожки"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:383
-#, no-c-format
-msgid "&Disable selected attached files"
-msgstr "&Отключить все выбранные файлы вложений"
+#: src/mkvtoolnix-gui/merge/attachments.cpp:338
+#, fuzzy, no-c-format
+msgid "&Disable selected attached file"
+msgid_plural "&Disable selected attached files"
+msgstr[0] "&Отключить все выбранные файлы вложений"
+msgstr[1] "&Отключить все выбранные файлы вложений"
+msgstr[2] "&Отключить все выбранные файлы вложений"
+msgstr[3] "&Отключить все выбранные файлы вложений"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:34
 #, no-c-format
@@ -1300,15 +1304,19 @@ msgstr "&Скачать"
 msgid "&Duration of each entry in seconds:"
 msgstr "&Продолжительность каждой записи в секундах:"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1280
+#: src/mkvtoolnix-gui/merge/input.cpp:1283
 #, no-c-format
 msgid "&Enable all tracks"
 msgstr "&Включить все дорожки"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:382
-#, no-c-format
-msgid "&Enable selected attached files"
-msgstr "В&ключить все выбранные файлы вложений"
+#: src/mkvtoolnix-gui/merge/attachments.cpp:337
+#, fuzzy, no-c-format
+msgid "&Enable selected attached file"
+msgid_plural "&Enable selected attached files"
+msgstr[0] "В&ключить все выбранные файлы вложений"
+msgstr[1] "В&ключить все выбранные файлы вложений"
+msgstr[2] "В&ключить все выбранные файлы вложений"
+msgstr[3] "В&ключить все выбранные файлы вложений"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:519
 msgid "&Enabled"
@@ -1462,7 +1470,7 @@ msgstr "&Открыть файл Matroska или файл глав"
 msgid "&Open as new tabs in the header editor"
 msgstr "&Открыть как новые вкладки в редакторе заголовков"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:376
+#: src/mkvtoolnix-gui/jobs/tool.cpp:380
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:137
 #, no-c-format
 msgid "&Open folder"
@@ -1506,29 +1514,37 @@ msgstr "&Перезагрузить"
 msgid "&Reload file"
 msgstr "&Перезагрузить файл"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:388
-#, no-c-format
-msgid "&Remove attachments"
-msgstr "&Удалить вложения"
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
+#: src/mkvtoolnix-gui/merge/attachments.cpp:351
+#, fuzzy, no-c-format
+msgid "&Remove attachment"
+msgid_plural "&Remove attachments"
+msgstr[0] "&Удалить вложения"
+msgstr[1] "&Удалить вложения"
+msgstr[2] "&Удалить вложения"
+msgstr[3] "&Удалить вложения"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1274
-#, no-c-format
-msgid "&Remove files"
-msgstr "&Удалить файлы"
+#: src/mkvtoolnix-gui/merge/input.cpp:1241
+#, fuzzy, no-c-format
+msgid "&Remove file"
+msgid_plural "&Remove files"
+msgstr[0] "&Удалить файлы"
+msgstr[1] "&Удалить файлы"
+msgstr[2] "&Удалить файлы"
+msgstr[3] "&Удалить файлы"
+
+#: src/mkvtoolnix-gui/jobs/tool.cpp:197
+#, fuzzy, no-c-format
+msgid "&Remove job"
+msgid_plural "&Remove jobs"
+msgstr[0] "&Удалить задания"
+msgstr[1] "&Удалить задания"
+msgstr[2] "&Удалить задания"
+msgstr[3] "&Удалить задания"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1334
 msgid "&Remove job from queue after completion:"
 msgstr "&Удалить задание из очереди после завершения:"
-
-#: src/mkvtoolnix-gui/jobs/tool.cpp:375
-#, no-c-format
-msgid "&Remove jobs"
-msgstr "&Удалить задания"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-#, no-c-format
-msgid "&Remove selected attachment"
-msgstr "&Удалить выбранное вложение"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:173
 #, no-c-format
@@ -1573,12 +1589,12 @@ msgstr "Сканировать папку на наличие других пл�
 msgid "&Scan for other playlists"
 msgstr "&Проверить наличие других плейлистов"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:390
+#: src/mkvtoolnix-gui/merge/attachments.cpp:394
 #, no-c-format
 msgid "&Select all attachments"
 msgstr "&Выбрать все вложения"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1278
+#: src/mkvtoolnix-gui/merge/input.cpp:1281
 #, no-c-format
 msgid "&Select all tracks"
 msgstr "&Выбрать все дорожки"
@@ -1595,10 +1611,14 @@ msgstr "&Сортировать главы по времени начала и �
 msgid "&Start && end:"
 msgstr "&Начало и конец:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:372
-#, no-c-format
-msgid "&Start jobs automatically"
-msgstr "&Запустить задания автоматически"
+#: src/mkvtoolnix-gui/jobs/tool.cpp:194
+#, fuzzy, no-c-format
+msgid "&Start job automatically"
+msgid_plural "&Start jobs automatically"
+msgstr[0] "&Запустить задания автоматически"
+msgstr[1] "&Запустить задания автоматически"
+msgstr[2] "&Запустить задания автоматически"
+msgstr[3] "&Запустить задания автоматически"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
 msgid "&Start timecode of first created entry:"
@@ -1609,7 +1629,7 @@ msgid "&Subtitle tracks:"
 msgstr "&Cубтитры:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1311
-#: src/mkvtoolnix-gui/merge/input.cpp:1286
+#: src/mkvtoolnix-gui/merge/input.cpp:1288
 #, no-c-format
 msgid "&Subtitles"
 msgstr "&Субтитры"
@@ -1633,7 +1653,7 @@ msgid "&Validate values"
 msgstr "&Подтвердить значения"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1309
-#: src/mkvtoolnix-gui/merge/input.cpp:1284
+#: src/mkvtoolnix-gui/merge/input.cpp:1286
 #, no-c-format
 msgid "&Video"
 msgstr "&Видео"
@@ -1642,7 +1662,7 @@ msgstr "&Видео"
 msgid "&Video tracks:"
 msgstr "&Видеодорожки:"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:371
+#: src/mkvtoolnix-gui/jobs/tool.cpp:379
 #, no-c-format
 msgid "&View output"
 msgstr "&Посмотреть вывод"
@@ -2160,9 +2180,9 @@ msgstr "<Simple> должен содержать элемент <String> или 
 msgid "<Tag> is missing the <Simple> child."
 msgstr "В <Tag> отсутствует дочерний элемент <Simple>."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:352
+#: src/mkvtoolnix-gui/merge/attachments.cpp:359
 #: src/mkvtoolnix-gui/merge/input.cpp:592
-#: src/mkvtoolnix-gui/merge/input.cpp:1303
+#: src/mkvtoolnix-gui/merge/input.cpp:1305
 #, no-c-format
 msgid "<do not change>"
 msgstr "<не менять>"
@@ -2311,8 +2331,8 @@ msgstr "Уникальное положительное число однозн�
 msgid "A&cknowledge warnings/errors"
 msgstr "Завершено с предупреждениями"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1269
-#: src/mkvtoolnix-gui/merge/input.cpp:1270
+#: src/mkvtoolnix-gui/merge/input.cpp:1274
+#: src/mkvtoolnix-gui/merge/input.cpp:1275
 #, no-c-format
 msgid "A&ppend files"
 msgstr "Присоединить файлы"
@@ -2392,7 +2412,7 @@ msgstr "Прервать все запущенные задания и оста�
 msgid "Abort running job"
 msgstr "Прервать запущенное задание"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:485
+#: src/mkvtoolnix-gui/jobs/tool.cpp:489
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:327
 #, no-c-format
 msgid "Abort running jobs"
@@ -2407,12 +2427,12 @@ msgstr "О mkvinfo"
 msgid "Acknowledge &all warnings and errors"
 msgstr "Подтвердить все предупреждения и ошибки"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:380
+#: src/mkvtoolnix-gui/jobs/tool.cpp:384
 #, no-c-format
 msgid "Acknowledge &errors"
 msgstr "Подтвердить &ошибки"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:379
+#: src/mkvtoolnix-gui/jobs/tool.cpp:383
 #, no-c-format
 msgid "Acknowledge &warnings"
 msgstr "Подтвердить &предупреждения"
@@ -2472,8 +2492,8 @@ msgstr "Добавить вложения"
 msgid "Add element"
 msgstr "Добавить элемент"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1271
-#: src/mkvtoolnix-gui/merge/input.cpp:1272
+#: src/mkvtoolnix-gui/merge/input.cpp:1276
+#: src/mkvtoolnix-gui/merge/input.cpp:1277
 #, no-c-format
 msgid "Add files as a&dditional parts"
 msgstr "Добавить файлы как дополнительные части"
@@ -2592,20 +2612,20 @@ msgstr "После завершения задания с ошибкой или 
 msgid "After the job &queue has stopped"
 msgstr "После остановки очереди заданий"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1288
-#: src/mkvtoolnix-gui/merge/input.cpp:1292
+#: src/mkvtoolnix-gui/merge/input.cpp:1290
+#: src/mkvtoolnix-gui/merge/input.cpp:1294
 #, no-c-format
 msgid "Afterwards &leave the settings as they are."
 msgstr "Затем &оставить настройки как они есть"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1290
-#: src/mkvtoolnix-gui/merge/input.cpp:1294
+#: src/mkvtoolnix-gui/merge/input.cpp:1292
+#: src/mkvtoolnix-gui/merge/input.cpp:1296
 #, no-c-format
 msgid "Afterwards &remove all input files."
 msgstr "Затем &удалить все входные файлы"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1289
-#: src/mkvtoolnix-gui/merge/input.cpp:1293
+#: src/mkvtoolnix-gui/merge/input.cpp:1291
+#: src/mkvtoolnix-gui/merge/input.cpp:1295
 #, no-c-format
 msgid "Afterwards create &new merge settings and close the current ones."
 msgstr "Затем &создать новые параметры объединения и закрыть текущие"
@@ -3164,7 +3184,7 @@ msgstr "Вычислить статистику для всех дорожек �
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:248
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:175
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:205
-#: src/mkvtoolnix-gui/jobs/tool.cpp:488
+#: src/mkvtoolnix-gui/jobs/tool.cpp:492
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:330
 #: src/mkvtoolnix-gui/merge/playlist_scanner.cpp:80
 #: src/mkvtoolnix-gui/merge/tab.cpp:387
@@ -3330,6 +3350,7 @@ msgid "Chapter parser: The EditionUID %1% is not unique and could not be reused.
 msgstr "Анализатор глав: EditionUID %1% не является уникальным и не может быть использован повторно. Будет создан новый.\n"
 
 #: src/info/mkvinfo.cpp:1610
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 #: src/propedit/options.cpp:191
 msgid "Chapters"
@@ -3423,7 +3444,7 @@ msgstr "Предыдущий размер кластера: %1%"
 msgid "Cluster timecode: %|1$.3f|s"
 msgstr "Таймкод кластера: %|1$.3f|s"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:250
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
 #: src/mkvtoolnix-gui/merge/track_model.cpp:44
 #, no-c-format
 msgid "Codec"
@@ -4076,7 +4097,7 @@ msgstr "Описание"
 msgid "Description:"
 msgstr "Описание:"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:240
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:242
 msgid "Details"
 msgstr "Подробнее"
 
@@ -4084,7 +4105,7 @@ msgstr "Подробнее"
 msgid "Development hacks"
 msgstr "Трюки для разработчиков"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:385
+#: src/mkvtoolnix-gui/merge/attachments.cpp:390
 #, no-c-format
 msgid "Di&sable all attached files"
 msgstr "Отключить все файлы вложений"
@@ -4095,7 +4116,7 @@ msgstr "Отключить все файлы вложений"
 msgid "Dirac"
 msgstr "Dirac"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:255
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
@@ -4185,7 +4206,7 @@ msgstr "Не запускать GUI."
 msgid "Do not write meta seek elements at all."
 msgstr "Вообще не создавать элемент метапоиска."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:486
+#: src/mkvtoolnix-gui/jobs/tool.cpp:490
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:328
 #, no-c-format
 msgid "Do you really want to abort all currently running jobs?"
@@ -4264,11 +4285,11 @@ msgstr "Убирает данные с информацией о сжатии б
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
 msgstr "Из-за особой структуры файла эта ситуация не может быть исправлена автоматически."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:240
 msgid "Duration"
 msgstr "Длительность"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:241
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:243
 #: src/mkvtoolnix-gui/merge/output.cpp:345
 #, no-c-format
 msgid "Duration:"
@@ -4284,12 +4305,12 @@ msgstr "Продолжительность: %|1$.3f|ms"
 msgid "Duration: %|1$.3f|s (%2%)"
 msgstr "Продолжительность: %|1$.3f|s (%2%)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:377
+#: src/mkvtoolnix-gui/jobs/tool.cpp:381
 #, no-c-format
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr "Редактировать в соответствующем инструменте и удалить из очереди"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:384
+#: src/mkvtoolnix-gui/merge/attachments.cpp:389
 #, no-c-format
 msgid "E&nable all attached files"
 msgstr "Включить все файлы вложений"
@@ -4494,7 +4515,7 @@ msgstr "Ошибка в строке %1%: ожидалась строка тай
 msgid "Error in line %1%: expected subtitle number and found some text.\n"
 msgstr "Ошибка в строке %1%: ожидался номер субтитров, обнаружено какой-то текст.\n"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:517
+#: src/mkvtoolnix-gui/jobs/tool.cpp:521
 #: src/mkvtoolnix-gui/merge/tab.cpp:154
 #, no-c-format
 msgid "Error loading settings file"
@@ -4618,7 +4639,7 @@ msgstr "Сведения об исключении:"
 msgid "Executable files"
 msgstr "Исполняемые файлы"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1723
+#: src/mkvtoolnix-gui/merge/input.cpp:1725
 #, no-c-format
 msgid "Executable not found"
 msgstr "Исполняемый файл не найден"
@@ -4798,8 +4819,8 @@ msgstr "Файл был изменён."
 msgid "File has not been modified"
 msgstr "Файл не был изменён."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:256
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:241
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:258
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
 #, no-c-format
 msgid "File name"
@@ -5136,7 +5157,7 @@ msgstr "Горизонтальное расположение цветности
 msgid "Horizontal chroma subsample: %1%"
 msgstr "Горизонтальная подвыборка цветности: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:252
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
 #, no-c-format
 msgid "ID"
@@ -5853,7 +5874,7 @@ msgstr "Игнорируется для файлов XML-глав."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Программа написана Moritz Bunkus <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1726
+#: src/mkvtoolnix-gui/merge/input.cpp:1728
 msgid "Its installation location could not be determined automatically."
 msgstr "Автоматически не удалось определить папку, в которую установлена эта программа."
 
@@ -5930,7 +5951,7 @@ msgstr "Флаг сшивания: %1%"
 
 #: src/common/property_element.cpp:128
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:26
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:251
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:136
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:436
 #: src/mkvtoolnix-gui/merge/track_model.cpp:47
@@ -6705,7 +6726,7 @@ msgstr "Нечего делать.\n"
 msgid "Nu&mber of entries to create:"
 msgstr "Ко&личество создаваемых записей:"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:244
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:246
 msgid "Number of chapters:"
 msgstr "Количество глав:"
 
@@ -6832,6 +6853,15 @@ msgstr "Откройте файл с помощью меню \"редактор�
 msgid "Open a file via the \"header editor\" menu, the button below or drag & drop one here."
 msgstr "Откройте файл с помощью меню \"редактора заголовков\", кнопки ниже или перетащите файл с помощью мыши сюда."
 
+#: src/mkvtoolnix-gui/merge/input.cpp:1242
+#, fuzzy, no-c-format
+msgid "Open file in &MediaInfo"
+msgid_plural "Open files in &MediaInfo"
+msgstr[0] "Открыть в MediaInfo"
+msgstr[1] "Открыть в MediaInfo"
+msgstr[2] "Открыть в MediaInfo"
+msgstr[3] "Открыть в MediaInfo"
+
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:173
 #, no-c-format
 msgid "Open files in chapter editor"
@@ -6842,12 +6872,6 @@ msgstr "Открыть файлы в редакторе глав"
 msgid "Open files in header editor"
 msgstr "Открыть файлы в редакторе заголовков"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1276
-#: src/mkvtoolnix-gui/merge/input.cpp:1282
-#, no-c-format
-msgid "Open in &MediaInfo"
-msgstr "Открыть в MediaInfo"
-
 #: src/mkvtoolnix-gui/merge/tool.cpp:157
 #, no-c-format
 msgid "Open settings file"
@@ -6856,6 +6880,15 @@ msgstr "Открыть файл настроек"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:153
 msgid "Open the merged file with a player:"
 msgstr "Открыть созданный файл с помощью плеера:"
+
+#: src/mkvtoolnix-gui/merge/input.cpp:1261
+#, fuzzy, no-c-format
+msgid "Open track's file &MediaInfo"
+msgid_plural "Open tracks' files in &MediaInfo"
+msgstr[0] "Открыть в MediaInfo"
+msgstr[1] "Открыть в MediaInfo"
+msgstr[2] "Открыть в MediaInfo"
+msgstr[3] "Открыть в MediaInfo"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
 #, no-c-format
@@ -6903,7 +6936,7 @@ msgstr "Opus"
 msgid "Opus (in Ogg) audio files"
 msgstr "Аудиофайлы Opus (в Ogg)"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:259
 msgid "Order"
 msgstr "Порядок"
 
@@ -7054,7 +7087,7 @@ msgstr "Плееры обязаны воспроизводить эту доро
 msgid "Players should prefer tracks with the default track flag set."
 msgstr "Плееры должны отдавать предпочтение дорожке с заданным флагом 'по умолчанию'."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:253
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:255
 msgid "Playlist items:"
 msgstr "Пункты плейлиста:"
 
@@ -7086,7 +7119,7 @@ msgstr ""
 "Ознакомьтесь, пожалуйста, со справкой или HTML-документацией для mkvmerge, где\n"
 "углублённо объясняются некоторые детали, которые не ясны из этой краткой справки.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 msgid "Please select its location below."
 msgstr "Пожалуйста, укажите её расположение ниже."
 
@@ -7506,12 +7539,12 @@ msgstr "Удалить завершённые задания"
 msgid "Remove &successfully completed jobs"
 msgstr "Удалить успешно завершённые задания"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:389
+#: src/mkvtoolnix-gui/merge/attachments.cpp:393
 #, no-c-format
 msgid "Remove a&ll attachments"
 msgstr "Удалить все вложения"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1275
+#: src/mkvtoolnix-gui/merge/input.cpp:1279
 #, no-c-format
 msgid "Remove a&ll files"
 msgstr "Удалить все файлы"
@@ -7600,12 +7633,12 @@ msgstr "Пересинхронизация успешна в позиции %1%.
 msgid "Right-click for actions for all tracks"
 msgstr "Щёлкните правой кнопкой мыши для выбора действия над всеми дорожками"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:388
+#: src/mkvtoolnix-gui/jobs/tool.cpp:392
 #, no-c-format
 msgid "Right-click for actions for jobs"
 msgstr "Щёлкните правой кнопкой мыши для выбора действия над всеми заданиями"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:401
+#: src/mkvtoolnix-gui/merge/attachments.cpp:405
 #, no-c-format
 msgid "Right-click for attachment actions"
 msgstr "Щёлкните правой кнопкой мыши для выбора действия над вложениями"
@@ -7615,13 +7648,13 @@ msgstr "Щёлкните правой кнопкой мыши для выбор�
 msgid "Right-click to add, append and remove files"
 msgstr "Щёлкните правой кнопкой мыши, чтобы добавить, присоединить или удалить файлы"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:459
+#: src/mkvtoolnix-gui/jobs/tool.cpp:463
 #, no-c-format
 msgid "Running jobs cannot be edited."
 msgstr "Выполняемые задания не могут быть отредактированы."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:255
-#: src/mkvtoolnix-gui/jobs/tool.cpp:286
+#: src/mkvtoolnix-gui/jobs/tool.cpp:263
+#: src/mkvtoolnix-gui/jobs/tool.cpp:294
 #, no-c-format
 msgid "Running jobs cannot be removed."
 msgstr "Выполняемые задания не могут быть удалены."
@@ -7754,7 +7787,7 @@ msgstr "Сохранить изменённые заголовки дороже�
 msgid "Scan directory for other playlists"
 msgstr "Проверить папку на плейлисты"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:235
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:236
 msgid "Scanned Files"
 msgstr "Просканированные файлы"
 
@@ -7891,7 +7924,7 @@ msgstr "Сегмент, размер неизвестен"
 msgid "Select Matroska file to read segment UID from"
 msgstr "Выберите файл Matroska, чтобы считать UID сегмента"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1279
+#: src/mkvtoolnix-gui/merge/input.cpp:1282
 #, no-c-format
 msgid "Select all tracks of specific &type"
 msgstr "Выбрать все дорожки определённого типа"
@@ -7920,7 +7953,7 @@ msgstr "Выберите кодировку"
 msgid "Select executable"
 msgstr "Выберите исполняемый файл"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:234
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:235
 msgid "Select file to add"
 msgstr "Выберите файл, чтобы добавить"
 
@@ -8195,7 +8228,7 @@ msgstr "Простой блок (%1% номер дорожки %2%, %3% кадр
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Обнаружен кадр с одним полем до заголовка GOP. Исправьте видеопоток MPEG2, прежде чем пытаться обработать его.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:237
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
@@ -8203,7 +8236,7 @@ msgid "Size"
 msgstr "Размер"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:243
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:245
 #: src/mkvtoolnix-gui/merge/output.cpp:330
 #, no-c-format
 msgid "Size:"
@@ -8315,15 +8348,23 @@ msgstr "Начало типов файлов, кроме исполняемых 
 msgid "Start file types other than executable files via xdg-open."
 msgstr "Начало типов файлов, кроме исполняемых через xdg-open."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:374
-#, no-c-format
-msgid "Start jobs &immediately"
-msgstr "Запустить задания незамедлительно"
+#: src/mkvtoolnix-gui/jobs/tool.cpp:196
+#, fuzzy, no-c-format
+msgid "Start job &immediately"
+msgid_plural "Start jobs &immediately"
+msgstr[0] "Запустить задания незамедлительно"
+msgstr[1] "Запустить задания незамедлительно"
+msgstr[2] "Запустить задания незамедлительно"
+msgstr[3] "Запустить задания незамедлительно"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:373
-#, no-c-format
-msgid "Start jobs &manually"
-msgstr "Запустить задания вручную"
+#: src/mkvtoolnix-gui/jobs/tool.cpp:195
+#, fuzzy, no-c-format
+msgid "Start job &manually"
+msgid_plural "Start jobs &manually"
+msgstr[0] "Запустить задания вручную"
+msgstr[1] "Запустить задания вручную"
+msgstr[2] "Запустить задания вручную"
+msgstr[3] "Запустить задания вручную"
 
 #: src/info/info_cli_parser.cpp:39
 msgid "Start the GUI (and open inname if it was given)."
@@ -8992,7 +9033,7 @@ msgstr "Файл '%1' содержит теги."
 msgid "The file '%1' exists already."
 msgstr "Файл '%1' уже существует."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:517
+#: src/mkvtoolnix-gui/jobs/tool.cpp:521
 #, fuzzy, no-c-format
 msgid "The file '%1' is neither a job queue file nor a settings file."
 msgstr "Файл '%1%' открыт для записи.\n"
@@ -9957,7 +9998,7 @@ msgstr "Этот файл содержит координаты в строка�
 msgid "This file could not be opened or parsed.\n"
 msgstr "Этот файл не может быть открыт или проанализирован.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1725
+#: src/mkvtoolnix-gui/merge/input.cpp:1727
 msgid "This function requires the application %1."
 msgstr "Данная функция требует использования приложения %1."
 
@@ -10364,7 +10405,7 @@ msgstr "Дорожки с выбранным в этом списке языко
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "Дорожки с неподдерживаемыми схемами кодирования данных (сжатие или шифрование) не могут быть извлечены.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:247
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:249
 msgid "Tracks:"
 msgstr "Дорожки:"
 
@@ -10383,7 +10424,7 @@ msgstr "Две дорожки VobSub могут быть извлечены в �
 msgid "Two files muxed with the same settings and this switch activated will be identical."
 msgstr "Два файла объединяются с одинаковыми настройками, а при включении этого параметра, файлы будут идентичными."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:251
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:253
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:134
 #: src/mkvtoolnix-gui/jobs/model.cpp:52
 #: src/mkvtoolnix-gui/merge/track_model.cpp:45
@@ -11060,7 +11101,7 @@ msgstr "Вы можете изменить это значение в настр
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Вы можете управлять форматом используя начальную временную метку в виде <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1728
+#: src/mkvtoolnix-gui/merge/input.cpp:1730
 msgid "You can download the application from the following URL:"
 msgstr "Вы можете скачать данное приложение по следующей ссылке:"
 
@@ -11338,10 +11379,10 @@ msgstr "продолжительность по умолчанию: %|1$.3f|ms (
 msgid "deflateInit() failed. Result: %1%\n"
 msgstr "deflateInit() окончился неудачно. Результат: %1%\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1307
 #: src/mkvtoolnix-gui/merge/input.cpp:1309
-#: src/mkvtoolnix-gui/merge/input.cpp:1310
 #: src/mkvtoolnix-gui/merge/input.cpp:1311
+#: src/mkvtoolnix-gui/merge/input.cpp:1312
+#: src/mkvtoolnix-gui/merge/input.cpp:1313
 #, no-c-format
 msgid "determine automatically"
 msgstr "определить автоматически"
@@ -11366,7 +11407,7 @@ msgstr "высота изображения: %1%"
 msgid "display width: %1%"
 msgstr "ширина изображения: %1%"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1306
+#: src/mkvtoolnix-gui/merge/input.cpp:1308
 #, no-c-format
 msgid "don't change"
 msgstr "не менять"
@@ -11440,7 +11481,7 @@ msgstr "flac_reader: ошибка при разборе файла: %1%\n"
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
 msgstr "flac_reader: не удалось инициализировать формирователь пакетов FLAC.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1310
+#: src/mkvtoolnix-gui/merge/input.cpp:1312
 #, no-c-format
 msgid "for all frames"
 msgstr "для всех кадров"
@@ -11453,12 +11494,12 @@ msgstr "для файлов с информацией о главах (напр�
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
 msgstr "для субтитров, которые не используют метку порядка байтов (BOM) и которые не записаны в стандартной кодировке операционной системы (%1);"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1306
+#: src/mkvtoolnix-gui/merge/input.cpp:1308
 #, no-c-format
 msgid "force 2 bytes"
 msgstr "принудительно 2 байта"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1306
+#: src/mkvtoolnix-gui/merge/input.cpp:1308
 #, no-c-format
 msgid "force 4 bytes"
 msgstr "принудительно 4 байта"
@@ -11899,10 +11940,10 @@ msgstr "Никогда не проверять наличие других пл�
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:54
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:64
-#: src/mkvtoolnix-gui/merge/input.cpp:1305
 #: src/mkvtoolnix-gui/merge/input.cpp:1307
-#: src/mkvtoolnix-gui/merge/input.cpp:1308
-#: src/mkvtoolnix-gui/merge/input.cpp:1311
+#: src/mkvtoolnix-gui/merge/input.cpp:1309
+#: src/mkvtoolnix-gui/merge/input.cpp:1310
+#: src/mkvtoolnix-gui/merge/input.cpp:1313
 #: src/mkvtoolnix-gui/merge/track_model.cpp:102
 #: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108
@@ -11911,7 +11952,7 @@ msgstr "Никогда не проверять наличие других пл�
 msgid "no"
 msgstr "нет"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1310
+#: src/mkvtoolnix-gui/merge/input.cpp:1312
 #, no-c-format
 msgid "no cues"
 msgstr "без cue"
@@ -11929,7 +11970,7 @@ msgstr "без ошибок"
 msgid "no errors yet"
 msgstr "ошибок пока нет"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1309
+#: src/mkvtoolnix-gui/merge/input.cpp:1311
 #, no-c-format
 msgid "no extra compression"
 msgstr "без дополнительного сжатия"
@@ -11995,7 +12036,7 @@ msgstr "ogg_sync_buffer окончился неудачно\n"
 msgid "one chapter for each appended file"
 msgstr "одна глава для каждого добавляемого файла"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1310
+#: src/mkvtoolnix-gui/merge/input.cpp:1312
 #, no-c-format
 msgid "only for I frames"
 msgstr "Только для I-кадров"
@@ -12248,10 +12289,10 @@ msgstr "x"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:97
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:54
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:64
-#: src/mkvtoolnix-gui/merge/input.cpp:1305
 #: src/mkvtoolnix-gui/merge/input.cpp:1307
-#: src/mkvtoolnix-gui/merge/input.cpp:1308
-#: src/mkvtoolnix-gui/merge/input.cpp:1311
+#: src/mkvtoolnix-gui/merge/input.cpp:1309
+#: src/mkvtoolnix-gui/merge/input.cpp:1310
+#: src/mkvtoolnix-gui/merge/input.cpp:1313
 #: src/mkvtoolnix-gui/merge/track_model.cpp:102
 #: src/mkvtoolnix-gui/merge/track_model.cpp:107
 #: src/mkvtoolnix-gui/merge/track_model.cpp:108
@@ -12290,6 +12331,9 @@ msgstr "– установлено в 'нет' –"
 
 #~ msgid "&Remove"
 #~ msgstr "&Удалить"
+
+#~ msgid "&Remove selected attachment"
+#~ msgstr "&Удалить выбранное вложение"
 
 #~ msgid "&Select all"
 #~ msgstr "&Выбрать все"
