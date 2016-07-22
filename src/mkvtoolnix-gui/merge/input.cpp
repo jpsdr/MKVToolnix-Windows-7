@@ -1258,7 +1258,7 @@ Tab::enableTracksActions() {
 
   m_openTracksInMediaInfoAction->setEnabled(0 < numSelected);
 
-  m_openTracksInMediaInfoAction->setText(QNY("Open track's file &MediaInfo", "Open tracks' files in &MediaInfo", numSelected));
+  m_openTracksInMediaInfoAction->setText(QNY("Open track's file in &MediaInfo", "Open tracks' files in &MediaInfo", numSelected));
 }
 
 void
