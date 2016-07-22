@@ -199,12 +199,13 @@ CodecIDs에서도 동작이 됩니다\&. 다만 그 결과로 나오는 파일�
 .PP
 \fB\-\-fullraw\fR
 .RS 4
-Extracts the raw data into a file without any container data around it\&. The contents of the
+원시 데이터를 컨테이너에 넣지 않고 단순한 파일로 추출합니다\&.
 CodecPrivate
-element will be written to the file first if the track contains such a header element\&. This mode works with all
-CodecIDs, even the ones that
+요소의 내용은 만약 트랙이 그런 헤더 요소를 포함하고 있으면 파일에 먼저 기록될 것입니다\&. 이 모드는 모든
+CodecIDs과
 \fBmkvextract\fR(1)
-doesn\*(Aqt support otherwise, but the resulting files might not be usable\&.
+가 지원하지 않는
+CodecIDs에서도 동작하지만 그 결과로 나오는 파일은 아마도 사용하지 못할 것입니다\&.
 .RE
 .PP
 \fITID:outname\fR
@@ -368,7 +369,7 @@ timecode=00:00:13\&.305000000 duration=\- cluster_position=757741 relative_posit
 .RE
 .\}
 .PP
-The possible keys are:
+가능한 키:
 .PP
 타임코드
 .RS 4
