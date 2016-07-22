@@ -325,7 +325,7 @@ Tab::enableAttachmentControls(bool enable) {
 
 void
 Tab::enableAttachedFilesActions() {
-  auto numSelected  = ui->attachedFiles->selectionModel()->selection().size();
+  auto numSelected  = selectedAttachedFiles().size();
   auto hasSelection = !!numSelected;
   auto hasEntries   = !!m_attachedFilesModel->rowCount();
 
@@ -340,7 +340,7 @@ Tab::enableAttachedFilesActions() {
 
 void
 Tab::enableAttachmentsActions() {
-  auto numSelected  = ui->attachments->selectionModel()->selection().size();
+  auto numSelected  = selectedAttachments().size();
   auto hasSelection = !!numSelected;
   auto hasEntries   = !!m_attachmentsModel->rowCount();
 

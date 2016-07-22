@@ -1223,7 +1223,7 @@ Tab::enableMoveFilesButtons() {
 
 void
 Tab::enableFilesActions() {
-  int numSelected      = ui->files->selectionModel()->selection().size();
+  int numSelected      = selectedSourceFiles().size();
   bool hasRegularTrack = false;
   if (1 == numSelected)
     hasRegularTrack = m_config.m_files.end() != brng::find_if(m_config.m_files, [](SourceFilePtr const &file) { return file->hasRegularTrack(); });
@@ -1244,7 +1244,7 @@ Tab::enableFilesActions() {
 
 void
 Tab::enableTracksActions() {
-  int numSelected = ui->tracks->selectionModel()->selection().size();
+  int numSelected = selectedTracks().size();
   bool hasTracks  = !!m_tracksModel->rowCount();
 
   m_selectAllTracksAction->setEnabled(hasTracks);
