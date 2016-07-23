@@ -171,6 +171,8 @@ def merge_po orig_items, updated_items
     update_meta_info   = true
     orig_item[:msgstr] = updated_item[:msgstr]
 
+    next if (updated_item[:flags] || []).include?("fuzzy")
+
     orig_item[:flags].reject! { |flag| flag == "fuzzy" } if orig_item[:flags]
     orig_item.delete(:suggestions)
   end
