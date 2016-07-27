@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-07-21 20:12+0200\n"
-"PO-Revision-Date: 2016-07-22 17:36+0000\n"
+"PO-Revision-Date: 2016-07-24 12:49+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -175,26 +175,23 @@ msgid "  --chapters <file>        Read chapter information from the file.\n"
 msgstr "  --chapters <dosya>        Dosyadan bölüm bilgisini oku.\n"
 
 #: src/merge/mkvmerge.cpp:280
-#, fuzzy
 msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            How chroma is sited horizontally/vertically.\n"
 msgstr ""
-"  --cropping <TID:left,top,right,bottom>\n"
-"                           Kırpma parametrelerini ayarlar.\n"
+"  --chroma-siting <TID:hori,vert>\n"
+"                            Renk doygunluğu nasıl yatay/dikey olarak yerleştirilir.\n"
 
 #: src/merge/mkvmerge.cpp:271
-#, fuzzy
 msgid ""
 "  --chroma-subsample <TID:hori,vert>\n"
 "                           The amount of pixels to remove in the Cr and Cb\n"
 "                           channels for every pixel not removed horizontally\n"
 "                           and vertically.\n"
 msgstr ""
-"  --stereo-mode <TID:n|anahtarkelime>\n"
-"                           Stereo kipi parametrelerini ayarlar. Bu ya\n"
-"                           bir numara 0 - 14 ya da anahtar kelime olabilir\n"
-"                           (tam liste için belgelere bakın).\n"
+"  --chroma-subsample <TID:hori,vert>\n"
+"                           Yatay ve dikey olarak kaldırılmayan her pikselin\n"
+"                           Cr ve Cb kanalı içinde kaldırılan piksel miktarı.\n"
 
 #: src/merge/mkvmerge.cpp:293
 msgid ""
@@ -202,6 +199,8 @@ msgid ""
 "                           Red/Green/Blue chromaticity coordinates as defined\n"
 "                           by CIE 1931.\n"
 msgstr ""
+"  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
+"                           CIE 1931 tarafından tanımlanan Kırmızı/Yeşil/Mavi renklilik koordinatları.\n"
 
 #: src/merge/mkvmerge.cpp:115
 msgid ""
@@ -677,15 +676,13 @@ msgid "  --ui-language <code>     Force the translations for 'code' to be used.\
 msgstr "  --ui-language <code>     'code' kullanılması için çevirileri zorla.\n"
 
 #: src/merge/mkvmerge.cpp:296
-#, fuzzy
 msgid ""
 "  --white-colour-coordinates <TID:x,y>\n"
 "                           White colour chromaticity coordinates as defined\n"
 "                           by CIE 1931.\n"
 msgstr ""
-"  --split timecodes:A[,B...]\n"
-"                           Her kareden/alandan A, B vb. sonra yeni bir\n"
-"                           dosya oluştur.\n"
+"  --white-colour-coordinates <TID:x,y>\n"
+"                           CIE 1931 tarafından tanımlanan Beyaz renk renklilik koordinatları.\n"
 
 #: src/merge/mkvmerge.cpp:184
 msgid "  -A, --no-audio           Don't copy any audio track from this file.\n"
@@ -3201,15 +3198,15 @@ msgstr "Blu-ray oynatma listesi dosyaları"
 
 #: src/info/mkvinfo.cpp:575
 #: src/info/mkvinfo.cpp:576
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate x: %1%"
-msgstr "Cue ref kodek durumu: %1%"
+msgstr "Mavi renk x koordinatı: %1%"
 
 #: src/info/mkvinfo.cpp:580
 #: src/info/mkvinfo.cpp:581
-#, fuzzy, boost-format
+#, boost-format
 msgid "Blue colour coordinate y: %1%"
-msgstr "Cue ref kodek durumu: %1%"
+msgstr "Mavi renk y koordinatı: %1%"
 
 #: src/input/r_vobsub.cpp:552
 #, boost-format
@@ -5167,13 +5164,13 @@ msgstr[1] "Genel etiket: %1% giriş"
 #: src/info/mkvinfo.cpp:566
 #, boost-format
 msgid "Green colour coordinate x: %1%"
-msgstr ""
+msgstr "Yeşil renk x koordinatı: %1%"
 
 #: src/info/mkvinfo.cpp:570
 #: src/info/mkvinfo.cpp:571
 #, boost-format
 msgid "Green colour coordinate y: %1%"
-msgstr ""
+msgstr "Yeşil renk y koordinatı: %1%"
 
 #: src/common/file_types.cpp:82
 msgid "HD-DVD subtitles"
@@ -5236,21 +5233,21 @@ msgstr "Görüntülemek için görüntü karelerinin yüksekliği"
 
 #: src/info/mkvinfo.cpp:634
 #: src/info/mkvinfo.cpp:635
-#, fuzzy, boost-format
+#, boost-format
 msgid "Horizontal Cb subsample: %1%"
-msgstr "örnek başına bit: %1%"
+msgstr "Yatay Cb alt örneği: %1%"
 
 #: src/info/mkvinfo.cpp:644
 #: src/info/mkvinfo.cpp:645
 #, boost-format
 msgid "Horizontal chroma siting: %1%"
-msgstr ""
+msgstr "Yatay renk doygunluğu yerleşimi: %1%"
 
 #: src/info/mkvinfo.cpp:624
 #: src/info/mkvinfo.cpp:625
-#, fuzzy, boost-format
+#, boost-format
 msgid "Horizontal chroma subsample: %1%"
-msgstr "örnek başına bit: %1%"
+msgstr "Yatay renk doygunluğu alt örneği: %1%"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:254
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
@@ -6282,21 +6279,21 @@ msgstr "En Fazla Blok İlave ID: %1%"
 
 #: src/info/mkvinfo.cpp:669
 #: src/info/mkvinfo.cpp:670
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max content light: %1%"
-msgstr "Piksel kırpma sağ: %1%"
+msgstr "En fazla içerik ışığı: %1%"
 
 #: src/info/mkvinfo.cpp:674
 #: src/info/mkvinfo.cpp:675
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max frame light: %1%"
-msgstr "Piksel yüksekliği: %1%"
+msgstr "En fazla kare ışığı: %1%"
 
 #: src/info/mkvinfo.cpp:595
 #: src/info/mkvinfo.cpp:596
-#, fuzzy, boost-format
+#, boost-format
 msgid "Max luminance: %1%"
-msgstr "En Fazla Önbellek: %1%"
+msgstr "En fazla parlaklık: %1%"
 
 #: src/info/mkvinfo.cpp:1003
 #, boost-format
@@ -6351,9 +6348,9 @@ msgstr "Mime türü: %1%"
 
 #: src/info/mkvinfo.cpp:600
 #: src/info/mkvinfo.cpp:601
-#, fuzzy, boost-format
+#, boost-format
 msgid "Min luminance: %1%"
-msgstr "En Az Önbellek: %1%"
+msgstr "En az parlaklık: %1%"
 
 #: src/info/mkvinfo.cpp:1000
 #, boost-format
@@ -7554,13 +7551,13 @@ msgstr "RealMedia dosyaları HE-AAC / AAC+ / SBR AAC sesi içerebilir. Bazı dur
 #: src/info/mkvinfo.cpp:556
 #, boost-format
 msgid "Red colour coordinate x: %1%"
-msgstr ""
+msgstr "Kırmızı renk x koordinatı: %1%"
 
 #: src/info/mkvinfo.cpp:560
 #: src/info/mkvinfo.cpp:561
 #, boost-format
 msgid "Red colour coordinate y: %1%"
-msgstr ""
+msgstr "Kırmızı renk y koordinatı: %1%"
 
 #: src/common/cli_parser.cpp:182
 msgid "Redirects all messages into this file."
@@ -10754,21 +10751,21 @@ msgstr "Sürüm %1 \"%2\""
 
 #: src/info/mkvinfo.cpp:639
 #: src/info/mkvinfo.cpp:640
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical Cb subsample: %1%"
-msgstr "örnek başına bit: %1%"
+msgstr "Dikey Cb alt örneği: %1%"
 
 #: src/info/mkvinfo.cpp:649
 #: src/info/mkvinfo.cpp:650
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical chroma siting: %1%"
-msgstr "Cue ilgili konumu: %1%"
+msgstr "Dikey renk doygunluğu yerleşimi: %1%"
 
 #: src/info/mkvinfo.cpp:629
 #: src/info/mkvinfo.cpp:630
-#, fuzzy, boost-format
+#, boost-format
 msgid "Vertical chroma subsample: %1%"
-msgstr "örnek başına bit: %1%"
+msgstr "Dikey renk doygunluğu alt örneği: %1%"
 
 #: src/output/p_video.h:45
 msgid "VfW compatible video"
@@ -11025,13 +11022,13 @@ msgstr "Kullanıcı her ne zaman bir çalma listesi eklerse program otomatik ola
 #: src/info/mkvinfo.cpp:586
 #, boost-format
 msgid "White colour coordinate x: %1%"
-msgstr ""
+msgstr "Beyaz renk x koordinatı: %1%"
 
 #: src/info/mkvinfo.cpp:590
 #: src/info/mkvinfo.cpp:591
 #, boost-format
 msgid "White colour coordinate y: %1%"
-msgstr ""
+msgstr "Beyaz renk y koordinatı: %1%"
 
 #: src/common/property_element.cpp:136
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:451
