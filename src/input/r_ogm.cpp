@@ -226,6 +226,7 @@ public:
   unsigned int pixel_width, pixel_height;
   int64_t frame_rate_num, frame_rate_den;
   int64_t frames_since_granulepos_change;
+  debugging_option_c debug;
 
 public:
   ogm_v_vp8_demuxer_c(ogm_reader_c *p_reader, ogg_packet &op);
@@ -238,6 +239,7 @@ public:
   virtual generic_packetizer_c *create_packetizer();
   virtual void process_page(int64_t granulepos);
   virtual std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
+  virtual bool is_header_packet(ogg_packet &op) override;
 };
 
 class ogm_s_kate_demuxer_c: public ogm_demuxer_c {
@@ -1477,6 +1479,7 @@ ogm_v_vp8_demuxer_c::ogm_v_vp8_demuxer_c(ogm_reader_c *p_reader,
   , frame_rate_num(0)
   , frame_rate_den(0)
   , frames_since_granulepos_change(0)
+  , debug{"ogg_vp8|ogm_vp8"}
 {
   codec = codec_c::look_up(codec_c::type_e::V_VP8);
 
@@ -1526,36 +1529,44 @@ ogm_v_vp8_demuxer_c::create_packetizer() {
 
 void
 ogm_v_vp8_demuxer_c::process_page(int64_t granulepos) {
+  if ((0 < granulepos) && (granulepos != last_granulepos))
+    last_granulepos = granulepos;
+
   ogg_packet op;
+  std::vector<memory_cptr> packets;
 
   while (ogg_stream_packetout(&os, &op) == 1) {
     eos |= op.e_o_s;
 
-    if ((0 < granulepos) && (granulepos != last_granulepos)) {
-      last_granulepos                = granulepos;
-      frames_since_granulepos_change = 0;
-    }
+    if ((units_processed > 0) || !is_header_packet(op))
+      packets.push_back(memory_c::clone(op.packet, op.bytes));
+  }
 
-    // Zero-length frames are 'repeat previous frame' markers and
-    // cannot be I frames.
-    bool is_keyframe  = (0 != op.bytes) && ((op.packet[0] & 0x01) == 0);
-    int64_t pts       = granulepos >> 32;
-    int64_t inv_count = (granulepos >> 30) & 0x03;
-    int64_t distance  = (granulepos >>  3) & 0x07ffffff;
-    int64_t frame_num = pts - inv_count - 1 + frames_since_granulepos_change;
-    int64_t timecode  = (int64_t)(1000000000.0 * frame_num * frame_rate_den / frame_rate_num);
-    int64_t bref      = is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC;
+  if (packets.empty())
+    return;
+
+  auto pts         = last_granulepos >> 32;
+  auto inv_count   = (last_granulepos >> 30) & 0x03;
+  auto distance    = (last_granulepos >>  3) & 0x07ffffff;
+  auto num_packets = packets.size();
+
+  for (auto idx = 0u; idx < num_packets; ++idx) {
+    // Zero-length packets are 'repeat previous frame' markers and
+    // cannot be I packets.
+    auto &data       = packets[idx];
+    auto is_keyframe = (0 != data->get_size()) && ((data->get_buffer()[0] & 0x01) == 0);
+    auto frame_num   = pts - std::min<int64_t>(pts, num_packets - idx - 1 + 1);
+    auto timecode    = static_cast<int64_t>(1000000000.0 * frame_num * frame_rate_den / frame_rate_num);
+    auto bref        = is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC;
 
     ++units_processed;
-    ++frames_since_granulepos_change;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(new memory_c(op.packet, op.bytes, false), timecode, default_duration, bref, VFT_NOBFRAME));
+    reader->m_reader_packetizers[ptzr]->process(new packet_t(data, timecode, default_duration, bref, VFT_NOBFRAME));
 
-    mxverb(3,
-           boost::format("VP8 track %1% size %10% #proc %11% frame# %12% fr_num %2% fr_den %3% granulepos 0x%|4$08x| %|5$08x| pts %6% inv_count %7% distance %8%%9%\n")
-           % track_id % frame_rate_num % frame_rate_den % (granulepos >> 32) % (granulepos & 0xffffffff)
-           % pts % inv_count % distance
-           % (is_keyframe ? " key" : "") % op.bytes % units_processed % frame_num);
+    mxdebug_if(debug,
+               boost::format("VP8 track %1% size %10% #proc %11% frame# %12% fr_num %2% fr_den %3% granulepos 0x%|4$08x| %|5$08x| pts %6% inv_count %7% distance %8%%9%\n")
+               % track_id % frame_rate_num % frame_rate_den % pts % (last_granulepos & 0xffffffff)
+               % pts % inv_count % distance % (is_keyframe ? " key" : "") % data->get_size() % units_processed % frame_num);
   }
 }
 
@@ -1563,6 +1574,21 @@ std::pair<unsigned int, unsigned int>
 ogm_v_vp8_demuxer_c::get_pixel_dimensions()
   const {
   return { pixel_width, pixel_height };
+}
+
+bool
+ogm_v_vp8_demuxer_c::is_header_packet(ogg_packet &op) {
+  if (   (static_cast<std::size_t>(op.bytes) >= sizeof(vp8_ogg_header_t))
+      && (op.packet[0]                 == 0x4f)
+      && (get_uint32_be(&op.packet[1]) == 0x56503830))
+    return true;
+
+  if (   (op.bytes     >= 7)
+      && (op.packet[0] == 0x03)
+      && (!std::memcmp(op.packet, "vorbis", 6)))
+    return true;
+
+  return false;
 }
 
 // -----------------------------------------------------------
