@@ -70,7 +70,7 @@ public:
 
   virtual void get_duration_and_len(ogg_packet &op, int64_t &duration, int &duration_len);
   virtual bool is_header_packet(ogg_packet &op) {
-    return op.packet[0] & 1;
+    return (op.bytes > 0) && ((op.packet[0] & 1) == 1);
   };
 
   virtual std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
