@@ -18,6 +18,8 @@
 
 #include <deque>
 
+#include "common/error.h"
+
 namespace mtx {
   namespace mem {
     class exception: public mtx::exception {

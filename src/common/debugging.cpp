@@ -138,6 +138,21 @@ debugging_c::hexdump(const void *buffer_to_dump,
   debugging_c::output(dump.str());
 }
 
+void
+debugging_c::hexdump(memory_cptr const &buffer_to_dump,
+                     boost::optional<std::size_t> max_length) {
+  if (buffer_to_dump)
+    hexdump(*buffer_to_dump, max_length);
+}
+
+void
+debugging_c::hexdump(memory_c const &buffer_to_dump,
+                     boost::optional<std::size_t> max_length) {
+
+  auto length = std::min<std::size_t>(max_length ? *max_length : buffer_to_dump.get_size(), buffer_to_dump.get_size());
+  hexdump(buffer_to_dump.get_buffer(), length);
+}
+
 // ------------------------------------------------------------
 
 std::vector<debugging_option_c::option_c> debugging_option_c::ms_registered_options;
