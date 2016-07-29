@@ -225,7 +225,6 @@ public:
   vp8_ogg_header_t vp8_header;
   unsigned int pixel_width, pixel_height;
   int64_t frame_rate_num, frame_rate_den;
-  unsigned int num_header_packets_skipped;
   int64_t frames_since_granulepos_change;
 
 public:
@@ -895,7 +894,6 @@ ogm_demuxer_c::ogm_demuxer_c(ogm_reader_c *p_reader)
   , serialno(0)
   , eos(0)
   , units_processed(0)
-  , num_header_packets(2)
   , num_non_header_packets(0)
   , headers_read(false)
   , first_granulepos(0)
@@ -955,33 +953,27 @@ ogm_demuxer_c::process_page(int64_t /* granulepos */) {
 
 void
 ogm_demuxer_c::process_header_page() {
+  if (headers_read)
+    return;
+
   ogg_packet op;
 
   while (ogg_stream_packetout(&os, &op) == 1) {
     eos |= op.e_o_s;
 
     if (!is_header_packet(op)) {
-      if (nh_packet_data.size() != num_non_header_packets) {
+      if (nh_packet_data.size() < num_non_header_packets) {
         nh_packet_data.push_back(memory_c::clone(op.packet, op.bytes));
         continue;
       }
 
-      mxwarn_tid(reader->m_ti.m_fname, track_id,
-                 Y("Missing header/comment packets for stream. This file is broken but should be muxed correctly. "
-                   "If not please contact the author Moritz Bunkus <moritz@bunkus.org>.\n"));
       headers_read = true;
       ogg_stream_reset(&os);
       return;
     }
 
     packet_data.push_back(memory_c::clone(op.packet, op.bytes));
-
-    eos |= op.e_o_s;
   }
-
-  if (   (packet_data.size()    == num_header_packets)
-      && (nh_packet_data.size() >= num_non_header_packets))
-    headers_read = true;
 }
 
 std::pair<unsigned int, unsigned int>
@@ -1108,8 +1100,7 @@ ogm_a_pcm_demuxer_c::create_packetizer() {
 ogm_a_vorbis_demuxer_c::ogm_a_vorbis_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec              = codec_c::look_up(codec_c::type_e::A_VORBIS);
-  num_header_packets = 3;
+  codec = codec_c::look_up(codec_c::type_e::A_VORBIS);
 }
 
 void
@@ -1168,8 +1159,7 @@ ogm_a_opus_demuxer_c::ogm_a_opus_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
   , m_calculated_end_timecode{timestamp_c::ns(0)}
 {
-  codec              = codec_c::look_up(codec_c::type_e::A_OPUS);
-  num_header_packets = 2;
+  codec = codec_c::look_up(codec_c::type_e::A_OPUS);
 }
 
 generic_packetizer_c *
@@ -1408,8 +1398,7 @@ ogm_v_mscomp_demuxer_c::process_page(int64_t granulepos) {
 ogm_v_theora_demuxer_c::ogm_v_theora_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec              = codec_c::look_up(codec_c::type_e::V_THEORA);
-  num_header_packets = 3;
+  codec = codec_c::look_up(codec_c::type_e::V_THEORA);
 
   memset(&theora, 0, sizeof(theora_identification_header_t));
 }
@@ -1487,11 +1476,9 @@ ogm_v_vp8_demuxer_c::ogm_v_vp8_demuxer_c(ogm_reader_c *p_reader,
   , pixel_height(0)
   , frame_rate_num(0)
   , frame_rate_den(0)
-  , num_header_packets_skipped(1)
   , frames_since_granulepos_change(0)
 {
-  codec              = codec_c::look_up(codec_c::type_e::V_VP8);
-  num_header_packets = 2;
+  codec = codec_c::look_up(codec_c::type_e::V_VP8);
 
   memcpy(&vp8_header, op.packet, sizeof(vp8_ogg_header_t));
 }
@@ -1544,11 +1531,6 @@ ogm_v_vp8_demuxer_c::process_page(int64_t granulepos) {
   while (ogg_stream_packetout(&os, &op) == 1) {
     eos |= op.e_o_s;
 
-    if (num_header_packets_skipped < num_header_packets) {
-      ++num_header_packets_skipped;
-      continue;
-    }
-
     if ((0 < granulepos) && (granulepos != last_granulepos)) {
       last_granulepos                = granulepos;
       frames_since_granulepos_change = 0;
@@ -1588,8 +1570,7 @@ ogm_v_vp8_demuxer_c::get_pixel_dimensions()
 ogm_s_kate_demuxer_c::ogm_s_kate_demuxer_c(ogm_reader_c *p_reader)
   : ogm_demuxer_c(p_reader)
 {
-  codec              = codec_c::look_up(codec_c::type_e::S_KATE);
-  num_header_packets = 1; /* at least 1, will be updated upon reading the ID header */
+  codec = codec_c::look_up(codec_c::type_e::S_KATE);
 
   memset(&kate, 0, sizeof(kate_identification_header_t));
 }
@@ -1599,7 +1580,6 @@ ogm_s_kate_demuxer_c::initialize() {
   try {
     memory_cptr &mem = packet_data[0];
     kate_parse_identification_header(mem->get_buffer(), mem->get_size(), kate);
-    num_header_packets = kate.nheaders;
   } catch (mtx::kate::header_parsing_x &e) {
     mxerror_tid(reader->m_ti.m_fname, track_id, boost::format(Y("The Kate identification header could not be parsed (%1%).\n")) % e.error());
   }

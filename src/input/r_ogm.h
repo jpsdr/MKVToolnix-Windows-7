@@ -38,7 +38,7 @@ public:
   codec_c codec;
   bool ms_compat;
   int serialno, eos;
-  unsigned int units_processed, num_header_packets, num_non_header_packets;
+  unsigned int units_processed, num_non_header_packets;
   bool headers_read;
   std::string language, title;
   std::vector<memory_cptr> packet_data, nh_packet_data;
