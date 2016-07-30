@@ -1049,6 +1049,24 @@ $ mkvmerge \-o ca\(/ly\&.mkv plik1\&.mkv +plik2\&.mkv
 .\}
 .RE
 .PP
+\fB[\fR \fIfile1\fR \fIfile2\fR \fB]\fR
+.RS 4
+If multiple file names are contained in a pair of square brackets then the second and all following files will be appended to the first file named within the brackets\&.
+.sp
+This is an alternative syntax to using \*(Aq+\*(Aq between the file names\&. Therefore the following two commands are equivalent:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+$ mkvmerge \-o full\&.mkv file1\&.mkv + file2\&.mkv
+$ mkvmerge \-o full\&.mkv \*(Aq[\*(Aq file1\&.mkv file2\&.mkv \*(Aq]\*(Aq
+.fi
+.if n \{\
+.RE
+.\}
+.RE
+.PP
 \fB=\fR
 .RS 4
 Normally

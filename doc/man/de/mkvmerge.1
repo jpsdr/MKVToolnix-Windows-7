@@ -1040,6 +1040,24 @@ $ mkvmerge \-o vollst\(:andig\&.mkv Datei1\&.mkv +Datei2\&.mkv
 .\}
 .RE
 .PP
+\fB[\fR \fIDatei1\fR \fIDatei2\fR \fB]\fR
+.RS 4
+Falls mehrere Dateinamen in eckigen Klammern stehen, dann werden die zweite und alle folgenden Dateien an die erste in den Klammern stehende Datei angeh\(:angt\&.
+.sp
+Dies ist eine alternative Syntax daf\(:ur, Dateinamen mit \(Fc+\(Fo zwischen ihnen aufzulisten\&. Deshalb sind die zwei folgenden Befehle gleichwertig:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+$ mkvmerge \-o vollst\(:andig\&.mkv Datei1\&.mkv + Datei2\&.mkv
+$ mkvmerge \-o vollst\(:andig\&.mkv \*(Aq[\*(Aq Datei1\&.mkv Datei2\&.mkv \*(Aq]\*(Aq
+.fi
+.if n \{\
+.RE
+.\}
+.RE
+.PP
 \fB=\fR
 .RS 4
 Normalerweise sucht
