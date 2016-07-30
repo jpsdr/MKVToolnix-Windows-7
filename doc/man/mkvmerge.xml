@@ -925,6 +925,22 @@ $ mkvmerge -o full.mkv file1.mkv +file2.mkv</screen>
      </listitem>
     </varlistentry>
 
+    <varlistentry>
+     <term><option>[</option> <parameter>file1</parameter> <parameter>file2</parameter> <option>]</option></term>
+     <listitem>
+      <para>
+       If multiple file names are contained in a pair of square brackets then the second and all following files will be appended to the first file named within the brackets.
+      </para>
+
+      <para>
+       This is an alternative syntax to using '+' between the file names. Therefore the following two commands are equivalent:
+      </para>
+
+      <screen>$ mkvmerge -o full.mkv file1.mkv + file2.mkv
+$ mkvmerge -o full.mkv '[' file1.mkv file2.mkv ']'</screen>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.prevent_concatenation">
      <term><option>=</option></term>
      <listitem>
