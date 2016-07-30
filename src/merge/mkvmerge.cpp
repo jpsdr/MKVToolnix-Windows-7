@@ -158,6 +158,7 @@ set_usage() {
                   "                           appending files.\n");
   usage_text += Y("  <file1> + <file2>        Append file2 to file1.\n");
   usage_text += Y("  <file1> +<file2>         Same as \"<file1> + <file2>\".\n");
+  usage_text += Y("  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n");
   usage_text += Y("  = <file>                 Don't look for and concatenate files with the same\n"
                   "                           base name but with a different trailing number.\n");
   usage_text += Y("  =<file>                  Same as \"= <file>\".\n");
@@ -1855,12 +1856,16 @@ handle_file_name_arg(const std::string &this_arg,
                      bool &append_next_file,
                      std::unique_ptr<track_info_c> &&ti) {
   std::vector<std::string> file_names;
+  auto append_files = false;
 
-  if (this_arg == "(") {
+  if (mtx::included_in(this_arg, "(", "[")) {
+    append_files   = this_arg == "[";
     bool end_found = false;
+    auto end_char  = std::string{ append_files ? "]" : ")" };
+
     while ((sit + 1) < end) {
       sit++;
-      if (*sit == ")") {
+      if (*sit == end_char) {
         end_found = true;
         break;
       }
@@ -1868,7 +1873,23 @@ handle_file_name_arg(const std::string &this_arg,
     }
 
     if (!end_found)
-      mxerror(Y("The closing parenthesis ')' are missing.\n"));
+      mxerror(boost::format(Y("The closing character '%1%' is missing.\n")) % end_char);
+
+    if (file_names.empty())
+      mxerror(boost::format(Y("No file names were listed between '%1%' and '%2%'.\n")) % this_arg % end_char);
+
+    if (append_files) {
+      for (auto const &file_name : file_names) {
+        handle_file_name_arg(file_name, sit, end, append_next_file, std::move(ti));
+
+        append_next_file = true;
+        ti               = std::make_unique<track_info_c>();
+      }
+
+      append_next_file = false;
+
+      return;
+    }
 
     ti->m_disable_multi_file = true;
 
