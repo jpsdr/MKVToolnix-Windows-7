@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 20.05.2016\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-30 12:16+0200\n"
+"POT-Creation-Date: 2016-07-31 16:06+0200\n"
 "PO-Revision-Date: 2016-07-31 13:00+0200\n"
 "Last-Translator: bovirus <@bovirus@gmail.com>\n"
 "Language-Team: Italian <bovirus@gmail.com>\n"
@@ -1288,9 +1288,14 @@ msgstr "Visu&alizza notifiche e errori"
 msgid "&Add"
 msgstr "&Aggiungi"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:232
+#, fuzzy, no-c-format
+msgid "&Add attachment"
+msgstr "&Aggiungi allegati"
+
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/attachments.cpp:392
+#: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
 msgstr "&Aggiungi allegati"
@@ -1403,7 +1408,7 @@ msgstr "&Descrizione:"
 msgid "&Disable all tracks"
 msgstr "&Disabilita tutte le tracce"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:338
+#: src/mkvtoolnix-gui/merge/attachments.cpp:354
 #, no-c-format
 msgid "&Disable selected attached file"
 msgid_plural "&Disable selected attached files"
@@ -1428,7 +1433,7 @@ msgstr "&Durata di ciascun elemento in secondi:"
 msgid "&Enable all tracks"
 msgstr "&Abilita tutte le tracce"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:337
+#: src/mkvtoolnix-gui/merge/attachments.cpp:353
 #, no-c-format
 msgid "&Enable selected attached file"
 msgid_plural "&Enable selected attached files"
@@ -1632,7 +1637,7 @@ msgid "&Reload file"
 msgstr "&Ricarica file"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-#: src/mkvtoolnix-gui/merge/attachments.cpp:351
+#: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
@@ -1700,7 +1705,7 @@ msgstr "Analizza &cartella per altre playlist:"
 msgid "&Scan for other playlists"
 msgstr "Analizza per altre playli&st"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:394
+#: src/mkvtoolnix-gui/merge/attachments.cpp:410
 #, no-c-format
 msgid "&Select all attachments"
 msgstr "&Seleziona tutti gli allegati"
@@ -1713,6 +1718,11 @@ msgstr "&Seleziona tutte le tracce"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
 msgstr "Ignora capitoli marcati come \"na&scosto\""
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:233
+#, fuzzy, no-c-format
+msgid "&Skip file"
+msgstr "A&ppendi file"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 msgid "&Sort chapters by their start and end timecodes"
@@ -2289,7 +2299,7 @@ msgstr "<Simple> deve contenere un figlio <String> o <Binary>."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> manca del figlio <Simple>."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:359
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1305
 #, no-c-format
@@ -2589,7 +2599,7 @@ msgid "Add as new input fi&les"
 msgstr "Aggiungi come nuovo fi&le sorgente"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
 msgstr "Aggiungi allegati"
@@ -2758,7 +2768,7 @@ msgstr "Tutti capitoli sono stati rimossi dal file '%1'."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:147
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:190
 #: src/mkvtoolnix-gui/merge/tab.cpp:204
@@ -2920,6 +2930,11 @@ msgstr "Una descrizione arbitraria significativo per l'utente."
 msgid "An attachment with the ID %1% was not found.\n"
 msgstr "Non trovato il file allegato con ID %1%.\n"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:230
+#, fuzzy, no-c-format
+msgid "An attachment with the name '%1' is already present."
+msgstr "Non trovato il file allegato con ID %1%.\n"
+
 #: src/merge/mkvmerge.cpp:1901
 msgid "An empty file name is not valid.\n"
 msgstr "Un file vuoto non è valido.\n"
@@ -3055,6 +3070,11 @@ msgstr "Estrazione allegati"
 #: src/propedit/propedit_cli_parser.cpp:259
 msgid "Attachment selectors"
 msgstr "Selettori allegato"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:228
+#, fuzzy, no-c-format
+msgid "Attachment with same name present"
+msgstr "Sostituisci l'allegato con un nuovo &file"
 
 #: src/info/mkvinfo.cpp:1197
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
@@ -4210,7 +4230,7 @@ msgstr "Dettagli"
 msgid "Development hacks"
 msgstr "Trucchi sviluppatore"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:390
+#: src/mkvtoolnix-gui/merge/attachments.cpp:406
 #, no-c-format
 msgid "Di&sable all attached files"
 msgstr "Di&sabilita tutti i file allegati"
@@ -4322,6 +4342,11 @@ msgstr "Vuoi veramente interrompere tutte le attività in esecuzione?"
 msgid "Do you really want to abort this job?"
 msgstr "Vuoi veramente interrompere questa attività?"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:231
+#, fuzzy, no-c-format
+msgid "Do you really want to add '%1' as another attachment?"
+msgstr "Vuoi veramente interrompere questa attività?"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:385
 #: src/mkvtoolnix-gui/merge/tab.cpp:411
 #, no-c-format
@@ -4413,7 +4438,7 @@ msgstr "Durata: %|1$.3f|s (%2%)"
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr "Mo&difica con lo strumento corrispondente e rimuovi dalla coda"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:389
+#: src/mkvtoolnix-gui/merge/attachments.cpp:405
 #, no-c-format
 msgid "E&nable all attached files"
 msgstr "&Abilita tutti i file allegati"
@@ -7624,7 +7649,7 @@ msgstr "Rimuovi attività &completate"
 msgid "Remove &successfully completed jobs"
 msgstr "Rimuovi &attività completate"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:393
+#: src/mkvtoolnix-gui/merge/attachments.cpp:409
 #, no-c-format
 msgid "Remove a&ll attachments"
 msgstr "Rimuovi tutti gli allegati"
@@ -7723,7 +7748,7 @@ msgstr "Clic tasto destro per azioni per tutte le tracce"
 msgid "Right-click for actions for jobs"
 msgstr "Clic tasto destro per azioni per le attività"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:405
+#: src/mkvtoolnix-gui/merge/attachments.cpp:421
 #, no-c-format
 msgid "Right-click for attachment actions"
 msgstr "Clic tasto destro per azioni sugli allegati"

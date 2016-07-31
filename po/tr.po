@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-30 12:16+0200\n"
+"POT-Creation-Date: 2016-07-31 16:06+0200\n"
 "PO-Revision-Date: 2016-07-24 12:49+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1284,9 +1284,14 @@ msgstr "Uyarıları ve hataları bil&dir"
 msgid "&Add"
 msgstr "&Ekle"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:232
+#, fuzzy, no-c-format
+msgid "&Add attachment"
+msgstr "Ekleri &ekle"
+
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/attachments.cpp:392
+#: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
 msgstr "Ekleri &ekle"
@@ -1399,7 +1404,7 @@ msgstr "&Açıklama:"
 msgid "&Disable all tracks"
 msgstr "Tüm izleri etki&sizleştir"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:338
+#: src/mkvtoolnix-gui/merge/attachments.cpp:354
 #, no-c-format
 msgid "&Disable selected attached file"
 msgid_plural "&Disable selected attached files"
@@ -1424,7 +1429,7 @@ msgstr "Saniye olarak her girişin &süresi:"
 msgid "&Enable all tracks"
 msgstr "Tüm izleri etki&nleştir"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:337
+#: src/mkvtoolnix-gui/merge/attachments.cpp:353
 #, no-c-format
 msgid "&Enable selected attached file"
 msgid_plural "&Enable selected attached files"
@@ -1628,7 +1633,7 @@ msgid "&Reload file"
 msgstr "Dosyayı &yeniden yükle"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-#: src/mkvtoolnix-gui/merge/attachments.cpp:351
+#: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
@@ -1696,7 +1701,7 @@ msgstr "Diğer oynatma listeleri için dizini &tara:"
 msgid "&Scan for other playlists"
 msgstr "Diğer oynatma listeleri için &tara"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:394
+#: src/mkvtoolnix-gui/merge/attachments.cpp:410
 #, no-c-format
 msgid "&Select all attachments"
 msgstr "Tüm ekleri &seç"
@@ -1709,6 +1714,11 @@ msgstr "Tüm izleri &seç"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
 msgstr "\"Gizlendi\" olarak işaretlenmiş bölümleri &atla"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:233
+#, fuzzy, no-c-format
+msgid "&Skip file"
+msgstr "D&osyaları ilave et"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 msgid "&Sort chapters by their start and end timecodes"
@@ -2285,7 +2295,7 @@ msgstr "<Simple>, ya <String> ya da <Binary> alt öğesi içermek zorundadır."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> öğesinin <Simple> alt öğesi eksik."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:359
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1305
 #, no-c-format
@@ -2585,7 +2595,7 @@ msgid "Add as new input fi&les"
 msgstr "Yeni girdi do&syaları olarak ekle"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
 msgstr "Ekleri ekle"
@@ -2754,7 +2764,7 @@ msgstr "Tüm bölümler '%1' dosyasından kaldırıldı."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:147
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:190
 #: src/mkvtoolnix-gui/merge/tab.cpp:204
@@ -2916,6 +2926,11 @@ msgstr "Kullanıcı için gelişigüzel bir açıklama anlamına gelen."
 msgid "An attachment with the ID %1% was not found.\n"
 msgstr "ID %1% ile birlikte bir ek bulunmadı.\n"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:230
+#, fuzzy, no-c-format
+msgid "An attachment with the name '%1' is already present."
+msgstr "ID %1% ile birlikte bir ek bulunmadı.\n"
+
 #: src/merge/mkvmerge.cpp:1901
 msgid "An empty file name is not valid.\n"
 msgstr "Boş dosya adı geçerli değil.\n"
@@ -3051,6 +3066,11 @@ msgstr "Ek çıkartma"
 #: src/propedit/propedit_cli_parser.cpp:259
 msgid "Attachment selectors"
 msgstr "Ek seçicileri"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:228
+#, fuzzy, no-c-format
+msgid "Attachment with same name present"
+msgstr "Eki yeni bir dosya ile &değiştir"
 
 #: src/info/mkvinfo.cpp:1197
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
@@ -4206,7 +4226,7 @@ msgstr "Ayrıntılar"
 msgid "Development hacks"
 msgstr "Geliştirme kurcalamaları"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:390
+#: src/mkvtoolnix-gui/merge/attachments.cpp:406
 #, no-c-format
 msgid "Di&sable all attached files"
 msgstr "Tüm ekli dosyaları etki&sizleştir"
@@ -4318,6 +4338,11 @@ msgstr "Şu anda çalışan tüm işleri gerçekten iptal etmek istiyor musunuz?
 msgid "Do you really want to abort this job?"
 msgstr "Bu işi gerçekten iptal etmek istiyor musunuz?"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:231
+#, fuzzy, no-c-format
+msgid "Do you really want to add '%1' as another attachment?"
+msgstr "Bu işi gerçekten iptal etmek istiyor musunuz?"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:385
 #: src/mkvtoolnix-gui/merge/tab.cpp:411
 #, no-c-format
@@ -4409,7 +4434,7 @@ msgstr "Süre: %|1$.3f|s (%2%)"
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr "İlgili araç içinde &düzenle ve kuyruktan kaldır"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:389
+#: src/mkvtoolnix-gui/merge/attachments.cpp:405
 #, no-c-format
 msgid "E&nable all attached files"
 msgstr "Tüm ekli dosyaları etki&nleştir"
@@ -7619,7 +7644,7 @@ msgstr "&Tamamlanan işleri kaldır"
 msgid "Remove &successfully completed jobs"
 msgstr "&Başarılı olarak tamamlanan işleri kaldır"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:393
+#: src/mkvtoolnix-gui/merge/attachments.cpp:409
 #, no-c-format
 msgid "Remove a&ll attachments"
 msgstr "Tüm ekleri ka&ldır"
@@ -7718,7 +7743,7 @@ msgstr "Tüm izlerin eylemleri için sağ tuşa tıklayın"
 msgid "Right-click for actions for jobs"
 msgstr "İşlerin eylemleri için sağ tuşa tıklayın"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:405
+#: src/mkvtoolnix-gui/merge/attachments.cpp:421
 #, no-c-format
 msgid "Right-click for attachment actions"
 msgstr "Ekleme eylemleri için sağ tuşa tıklayın"

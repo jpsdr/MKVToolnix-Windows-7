@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-30 12:16+0200\n"
+"POT-Creation-Date: 2016-07-31 16:06+0200\n"
 "PO-Revision-Date: 2016-06-02 23:58+0000\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1298,9 +1298,14 @@ msgstr "E&zagutu kontuz-oharrak eta akatsak"
 msgid "&Add"
 msgstr "&Gehitu"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:232
+#, fuzzy, no-c-format
+msgid "&Add attachment"
+msgstr "&Gehitu eranskina"
+
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/attachments.cpp:392
+#: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
 msgstr "&Gehitu eranskina"
@@ -1413,7 +1418,7 @@ msgstr "&Azalpena:"
 msgid "&Disable all tracks"
 msgstr "E&zgaitu bide guztiak."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:338
+#: src/mkvtoolnix-gui/merge/attachments.cpp:354
 #, fuzzy, no-c-format
 msgid "&Disable selected attached file"
 msgid_plural "&Disable selected attached files"
@@ -1438,7 +1443,7 @@ msgstr "&Sarrera bakoitzaren iraupena segundutan:"
 msgid "&Enable all tracks"
 msgstr "&Gaitu bide guztiak"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:337
+#: src/mkvtoolnix-gui/merge/attachments.cpp:353
 #, fuzzy, no-c-format
 msgid "&Enable selected attached file"
 msgid_plural "&Enable selected attached files"
@@ -1642,7 +1647,7 @@ msgid "&Reload file"
 msgstr "&Birgertatu agiria"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-#: src/mkvtoolnix-gui/merge/attachments.cpp:351
+#: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, fuzzy, no-c-format
 msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
@@ -1710,7 +1715,7 @@ msgstr "&Mihatu zuzenbidea ea beste irakur-zerrendarik dagoen:"
 msgid "&Scan for other playlists"
 msgstr "&Mihatu beste irakur-zerrendentzat"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:394
+#: src/mkvtoolnix-gui/merge/attachments.cpp:410
 #, no-c-format
 msgid "&Select all attachments"
 msgstr "Hautatu &eranskin guztiak"
@@ -1723,6 +1728,11 @@ msgstr "&Hautatu bide guztiak"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
 msgstr "&Jauzi \"ezkutua\" ikurra duten atalak"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:233
+#, fuzzy, no-c-format
+msgid "&Skip file"
+msgstr "&Erantsi agiriak"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 msgid "&Sort chapters by their start and end timecodes"
@@ -2300,7 +2310,7 @@ msgstr "<Simple> eduki behar du bigarren <String> bat edo <Binary> bat."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> ez dago bigarren <Simple>."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:359
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1305
 #, no-c-format
@@ -2598,7 +2608,7 @@ msgid "Add as new input fi&les"
 msgstr "Gehitu &sarrera agiri berriak bezala"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
 msgstr "Gehitu eranskinak"
@@ -2767,7 +2777,7 @@ msgstr "Atal guztiak kendu dira '%1' agiritik"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:147
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:190
 #: src/mkvtoolnix-gui/merge/tab.cpp:204
@@ -2929,6 +2939,11 @@ msgstr "Erabiltzaileak emandako azlapen bat."
 msgid "An attachment with the ID %1% was not found.\n"
 msgstr "%1% ID-a duen eranskin bat ez da aurkitu\n"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:230
+#, fuzzy, no-c-format
+msgid "An attachment with the name '%1' is already present."
+msgstr "%1% ID-a duen eranskin bat ez da aurkitu\n"
+
 #: src/merge/mkvmerge.cpp:1901
 msgid "An empty file name is not valid.\n"
 msgstr "Agiri izen hutsa ez da baliozkoa.\n"
@@ -3064,6 +3079,11 @@ msgstr "Eranskin aterapena"
 #: src/propedit/propedit_cli_parser.cpp:259
 msgid "Attachment selectors"
 msgstr "Eranskin hautatzaileak"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:228
+#, fuzzy, no-c-format
+msgid "Attachment with same name present"
+msgstr "Ordeztu era&nskina agiri berri batekin"
 
 #: src/info/mkvinfo.cpp:1197
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
@@ -4219,7 +4239,7 @@ msgstr "Xehetasunak"
 msgid "Development hacks"
 msgstr "Garapen hackeatuak"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:390
+#: src/mkvtoolnix-gui/merge/attachments.cpp:406
 #, no-c-format
 msgid "Di&sable all attached files"
 msgstr "E&zgaitu erantsitako agiri guztiak"
@@ -4331,6 +4351,11 @@ msgstr "Egitan nahi duzu ekinean dauden lan guztiak uztea?"
 msgid "Do you really want to abort this job?"
 msgstr "Egitan nahi duzu lan hau uztea?"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:231
+#, fuzzy, no-c-format
+msgid "Do you really want to add '%1' as another attachment?"
+msgstr "Egitan nahi duzu lan hau uztea?"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:385
 #: src/mkvtoolnix-gui/merge/tab.cpp:411
 #, no-c-format
@@ -4422,7 +4447,7 @@ msgstr "Iraupena: %|1$.3f|s (%2%)"
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr "&Editatu dagokion tresnan eta kendu lerrotik"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:389
+#: src/mkvtoolnix-gui/merge/attachments.cpp:405
 #, no-c-format
 msgid "E&nable all attached files"
 msgstr "Gait&u &erantsitako agiri guztiak"
@@ -7633,7 +7658,7 @@ msgstr "Kendu &osatutako lanak"
 msgid "Remove &successfully completed jobs"
 msgstr "Kendu o&ngi osatutako lanak"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:393
+#: src/mkvtoolnix-gui/merge/attachments.cpp:409
 #, no-c-format
 msgid "Remove a&ll attachments"
 msgstr "&Kendu eranskin guztiak"
@@ -7732,7 +7757,7 @@ msgstr "Eskuin-klikatu bide guztientzako ekintzetarako"
 msgid "Right-click for actions for jobs"
 msgstr "Eskuin-klikatu lanetako ekintzetarako"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:405
+#: src/mkvtoolnix-gui/merge/attachments.cpp:421
 #, no-c-format
 msgid "Right-click for attachment actions"
 msgstr "Eskuin-klikatu eranskin ekintzetarako"

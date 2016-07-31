@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-30 12:16+0200\n"
+"POT-Creation-Date: 2016-07-31 16:06+0200\n"
 "PO-Revision-Date: 2015-12-16 10:26+0100\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -1266,9 +1266,14 @@ msgstr "完成，有警告"
 msgid "&Add"
 msgstr "加入(&A)"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:232
+#, fuzzy, no-c-format
+msgid "&Add attachment"
+msgstr "加入附件"
+
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/attachments.cpp:392
+#: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, fuzzy, no-c-format
 msgid "&Add attachments"
 msgstr "加入附件"
@@ -1386,7 +1391,7 @@ msgstr "描述(&D):"
 msgid "&Disable all tracks"
 msgstr "停用所有軌道(&D)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:338
+#: src/mkvtoolnix-gui/merge/attachments.cpp:354
 #, fuzzy, no-c-format
 msgid "&Disable selected attached file"
 msgid_plural "&Disable selected attached files"
@@ -1412,7 +1417,7 @@ msgstr "播放清單的最短時間長度，單位為秒:"
 msgid "&Enable all tracks"
 msgstr "啟用全部軌道(&E)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:337
+#: src/mkvtoolnix-gui/merge/attachments.cpp:353
 #, fuzzy, no-c-format
 msgid "&Enable selected attached file"
 msgid_plural "&Enable selected attached files"
@@ -1622,7 +1627,7 @@ msgid "&Reload file"
 msgstr "重新載入(&R)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-#: src/mkvtoolnix-gui/merge/attachments.cpp:351
+#: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, fuzzy, no-c-format
 msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
@@ -1692,7 +1697,7 @@ msgstr "掃描其他播放清單的目錄(&C):"
 msgid "&Scan for other playlists"
 msgstr "掃描其他播放清單(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:394
+#: src/mkvtoolnix-gui/merge/attachments.cpp:410
 #, fuzzy, no-c-format
 msgid "&Select all attachments"
 msgstr "選擇所有軌道(&S)"
@@ -1705,6 +1710,11 @@ msgstr "選擇所有軌道(&S)"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
 msgstr ""
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:233
+#, fuzzy, no-c-format
+msgid "&Skip file"
+msgstr "附加檔案(&P)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 #, fuzzy
@@ -2288,7 +2298,7 @@ msgstr "<Simple> 必須含有 <String> 或 <Binary> 子元件。"
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> 缺少 <Simple> 子元件。"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:359
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1305
 #, no-c-format
@@ -2587,7 +2597,7 @@ msgid "Add as new input fi&les"
 msgstr "加入作為新的輸入檔(&L)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
 msgstr "加入附件"
@@ -2757,7 +2767,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:147
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:190
 #: src/mkvtoolnix-gui/merge/tab.cpp:204
@@ -2921,6 +2931,11 @@ msgstr ""
 msgid "An attachment with the ID %1% was not found.\n"
 msgstr "找不到 ID 為 %1% 的附件。\n"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:230
+#, fuzzy, no-c-format
+msgid "An attachment with the name '%1' is already present."
+msgstr "找不到 ID 為 %1% 的附件。\n"
+
 #: src/merge/mkvmerge.cpp:1901
 msgid "An empty file name is not valid.\n"
 msgstr "空白檔名是無效的。\n"
@@ -3054,6 +3069,11 @@ msgstr "提取附件"
 #: src/propedit/propedit_cli_parser.cpp:259
 msgid "Attachment selectors"
 msgstr "附件選擇器"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:228
+#, fuzzy, no-c-format
+msgid "Attachment with same name present"
+msgstr "用此檔案的「檔名」取代附件"
 
 #: src/info/mkvinfo.cpp:1197
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
@@ -4229,7 +4249,7 @@ msgstr "詳細資訊"
 msgid "Development hacks"
 msgstr "程式碼開發"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:390
+#: src/mkvtoolnix-gui/merge/attachments.cpp:406
 #, fuzzy, no-c-format
 msgid "Di&sable all attached files"
 msgstr "選擇所有軌道(&S)"
@@ -4345,6 +4365,11 @@ msgstr ""
 msgid "Do you really want to abort this job?"
 msgstr ""
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:231
+#, no-c-format
+msgid "Do you really want to add '%1' as another attachment?"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:385
 #: src/mkvtoolnix-gui/merge/tab.cpp:411
 #, no-c-format
@@ -4436,7 +4461,7 @@ msgstr "時間長度: %|1$.3f|s (%2%)"
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:389
+#: src/mkvtoolnix-gui/merge/attachments.cpp:405
 #, fuzzy, no-c-format
 msgid "E&nable all attached files"
 msgstr "選擇所有軌道(&S)"
@@ -7668,7 +7693,7 @@ msgstr "移除完成的任務(&C)"
 msgid "Remove &successfully completed jobs"
 msgstr "移除已成功完成的任務(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:393
+#: src/mkvtoolnix-gui/merge/attachments.cpp:409
 #, fuzzy, no-c-format
 msgid "Remove a&ll attachments"
 msgstr "移除元件"
@@ -7770,7 +7795,7 @@ msgstr "停用所有軌道的緊縮。"
 msgid "Right-click for actions for jobs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:405
+#: src/mkvtoolnix-gui/merge/attachments.cpp:421
 #, fuzzy, no-c-format
 msgid "Right-click for attachment actions"
 msgstr "停用所有軌道的緊縮。"

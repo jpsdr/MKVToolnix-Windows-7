@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-30 12:16+0200\n"
+"POT-Creation-Date: 2016-07-31 16:06+0200\n"
 "PO-Revision-Date: 2016-05-30 16:57+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -1296,9 +1296,14 @@ msgstr "Potvrdi upozorenja &i greške"
 msgid "&Add"
 msgstr "&Dodaj"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:232
+#, fuzzy, no-c-format
+msgid "&Add attachment"
+msgstr "&Dodaj priloge"
+
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/attachments.cpp:392
+#: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
 msgstr "&Dodaj priloge"
@@ -1411,7 +1416,7 @@ msgstr "&Opis:"
 msgid "&Disable all tracks"
 msgstr "&Isključi sve staze"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:338
+#: src/mkvtoolnix-gui/merge/attachments.cpp:354
 #, fuzzy, no-c-format
 msgid "&Disable selected attached file"
 msgid_plural "&Disable selected attached files"
@@ -1437,7 +1442,7 @@ msgstr "&Trajanje svake stavke u sekundama:"
 msgid "&Enable all tracks"
 msgstr "&Uključi sve staze"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:337
+#: src/mkvtoolnix-gui/merge/attachments.cpp:353
 #, fuzzy, no-c-format
 msgid "&Enable selected attached file"
 msgid_plural "&Enable selected attached files"
@@ -1642,7 +1647,7 @@ msgid "&Reload file"
 msgstr "&Učitaj fajl ponovo"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-#: src/mkvtoolnix-gui/merge/attachments.cpp:351
+#: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, fuzzy, no-c-format
 msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
@@ -1713,7 +1718,7 @@ msgstr "&Skeniraj direktorijum za dodatne plejliste:"
 msgid "&Scan for other playlists"
 msgstr "&Skeniraj za druge plejliste"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:394
+#: src/mkvtoolnix-gui/merge/attachments.cpp:410
 #, no-c-format
 msgid "&Select all attachments"
 msgstr "&Izaberi sve priloge"
@@ -1726,6 +1731,11 @@ msgstr "&Izaberi sve staze"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
 msgstr "Pr&eskoči poglavlja obeležena sa \"skriveno\""
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:233
+#, fuzzy, no-c-format
+msgid "&Skip file"
+msgstr "&Pripoji fajlove"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 msgid "&Sort chapters by their start and end timecodes"
@@ -2304,7 +2314,7 @@ msgstr "<Simple> mora da sadrži ili <String> ili <Binary> element."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> nedostaje dečji element <Simple>."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:359
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1305
 #, no-c-format
@@ -2604,7 +2614,7 @@ msgid "Add as new input fi&les"
 msgstr "Dodaj kao nove ulazne fa&jlove"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
 msgstr "Dodaj priloge"
@@ -2773,7 +2783,7 @@ msgstr "Uklonjena su sva poglavlja iz fajla '%1'."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:147
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:190
 #: src/mkvtoolnix-gui/merge/tab.cpp:204
@@ -2935,6 +2945,11 @@ msgstr "Proizvoljan opis namenjen korisniku."
 msgid "An attachment with the ID %1% was not found.\n"
 msgstr "Prilog sa ID %1% nije pronađen.\n"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:230
+#, fuzzy, no-c-format
+msgid "An attachment with the name '%1' is already present."
+msgstr "Prilog sa ID %1% nije pronađen.\n"
+
 #: src/merge/mkvmerge.cpp:1901
 msgid "An empty file name is not valid.\n"
 msgstr "Prazno ime fajla nije važeće.\n"
@@ -3070,6 +3085,11 @@ msgstr "Izvlačenje priloga"
 #: src/propedit/propedit_cli_parser.cpp:259
 msgid "Attachment selectors"
 msgstr "Selektor priloga"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:228
+#, fuzzy, no-c-format
+msgid "Attachment with same name present"
+msgstr "Zameni prilog sa novim &fajlom"
 
 #: src/info/mkvinfo.cpp:1197
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
@@ -4226,7 +4246,7 @@ msgstr "Detalji"
 msgid "Development hacks"
 msgstr "Development hacks"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:390
+#: src/mkvtoolnix-gui/merge/attachments.cpp:406
 #, no-c-format
 msgid "Di&sable all attached files"
 msgstr "&Onemogući sve priložene fajlove"
@@ -4338,6 +4358,11 @@ msgstr "Da li zaista želite da prekinete sve trenutno pokrenute zadatke?"
 msgid "Do you really want to abort this job?"
 msgstr "Da li zaista želite da prekinete ovaj zadatak?"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:231
+#, fuzzy, no-c-format
+msgid "Do you really want to add '%1' as another attachment?"
+msgstr "Da li zaista želite da prekinete ovaj zadatak?"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:385
 #: src/mkvtoolnix-gui/merge/tab.cpp:411
 #, no-c-format
@@ -4429,7 +4454,7 @@ msgstr "Trajanje: %|1$.3f|s (%2%)"
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr "Ur&edi u odgovarajućem alatu i ukloni sa liste"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:389
+#: src/mkvtoolnix-gui/merge/attachments.cpp:405
 #, no-c-format
 msgid "E&nable all attached files"
 msgstr "&Omogući sve priložene fajlove"
@@ -7649,7 +7674,7 @@ msgstr "Ukloni &završene zadatke"
 msgid "Remove &successfully completed jobs"
 msgstr "Ukloni &uspešno završene zadatke"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:393
+#: src/mkvtoolnix-gui/merge/attachments.cpp:409
 #, no-c-format
 msgid "Remove a&ll attachments"
 msgstr "Ukloni &sve priloge"
@@ -7748,7 +7773,7 @@ msgstr "Desni klik za radnje sa svim stazama"
 msgid "Right-click for actions for jobs"
 msgstr "Desni klik za radnje sa zadacima"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:405
+#: src/mkvtoolnix-gui/merge/attachments.cpp:421
 #, no-c-format
 msgid "Right-click for attachment actions"
 msgstr "Desni klik za radnje sa prilozima"

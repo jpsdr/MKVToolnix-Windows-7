@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-30 12:16+0200\n"
+"POT-Creation-Date: 2016-07-31 16:06+0200\n"
 "PO-Revision-Date: 2015-12-16 09:53+0100\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -1280,9 +1280,14 @@ msgstr "警告とエラーを通知する(&A)"
 msgid "&Add"
 msgstr "追加(&A)"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:232
+#, fuzzy, no-c-format
+msgid "&Add attachment"
+msgstr "添付ファイルを追加"
+
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/attachments.cpp:392
+#: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, fuzzy, no-c-format
 msgid "&Add attachments"
 msgstr "添付ファイルを追加"
@@ -1399,7 +1404,7 @@ msgstr "説明(&D)"
 msgid "&Disable all tracks"
 msgstr "全てのトラックを無効化(&D)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:338
+#: src/mkvtoolnix-gui/merge/attachments.cpp:354
 #, fuzzy, no-c-format
 msgid "&Disable selected attached file"
 msgid_plural "&Disable selected attached files"
@@ -1424,7 +1429,7 @@ msgstr "プレイリストの最小の継続時間（秒単位）："
 msgid "&Enable all tracks"
 msgstr "全てのトラックを有効化(&E)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:337
+#: src/mkvtoolnix-gui/merge/attachments.cpp:353
 #, fuzzy, no-c-format
 msgid "&Enable selected attached file"
 msgid_plural "&Enable selected attached files"
@@ -1634,7 +1639,7 @@ msgid "&Reload file"
 msgstr "再読み込み(&R)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-#: src/mkvtoolnix-gui/merge/attachments.cpp:351
+#: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, fuzzy, no-c-format
 msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
@@ -1701,7 +1706,7 @@ msgstr "他のプレイリストがないかディレクトリをスキャン(&C
 msgid "&Scan for other playlists"
 msgstr "他のプレイリストがないかスキャンします(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:394
+#: src/mkvtoolnix-gui/merge/attachments.cpp:410
 #, fuzzy, no-c-format
 msgid "&Select all attachments"
 msgstr "全てのトラックを選択(&S)"
@@ -1714,6 +1719,11 @@ msgstr "全てのトラックを選択(&S)"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
 msgstr ""
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:233
+#, fuzzy, no-c-format
+msgid "&Skip file"
+msgstr "ファイルを追加結合する(&A)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 #, fuzzy
@@ -2296,7 +2306,7 @@ msgstr "<Simple> は<String>か<Binary>のどちらかの子要素を含んで�
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag>に<Simple子要素がありません。"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:359
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1305
 #, no-c-format
@@ -2595,7 +2605,7 @@ msgid "Add as new input fi&les"
 msgstr "新しい入力ファイルとして追加(&L)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
 msgstr "添付ファイルを追加"
@@ -2765,7 +2775,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:147
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:190
 #: src/mkvtoolnix-gui/merge/tab.cpp:204
@@ -2929,6 +2939,11 @@ msgstr ""
 msgid "An attachment with the ID %1% was not found.\n"
 msgstr "ID %1%の添付ファイルが見つかりませんでした。\n"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:230
+#, fuzzy, no-c-format
+msgid "An attachment with the name '%1' is already present."
+msgstr "ID %1%の添付ファイルが見つかりませんでした。\n"
+
 #: src/merge/mkvmerge.cpp:1901
 msgid "An empty file name is not valid.\n"
 msgstr "空のファイル名は無効です。\n"
@@ -3062,6 +3077,11 @@ msgstr "添付ファイルの抽出"
 #: src/propedit/propedit_cli_parser.cpp:259
 msgid "Attachment selectors"
 msgstr "添付ファイルセレクタ："
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:228
+#, fuzzy, no-c-format
+msgid "Attachment with same name present"
+msgstr "'filename'のファイルで添付ファイルを置き換えます"
 
 #: src/info/mkvinfo.cpp:1197
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
@@ -4235,7 +4255,7 @@ msgstr "詳細"
 msgid "Development hacks"
 msgstr "開発者向けハック"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:390
+#: src/mkvtoolnix-gui/merge/attachments.cpp:406
 #, fuzzy, no-c-format
 msgid "Di&sable all attached files"
 msgstr "全てのトラックを選択(&S)"
@@ -4354,6 +4374,11 @@ msgstr "本当にこのジョブを中断しますか？"
 msgid "Do you really want to abort this job?"
 msgstr "本当にこのジョブを中断しますか？"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:231
+#, fuzzy, no-c-format
+msgid "Do you really want to add '%1' as another attachment?"
+msgstr "本当にこのジョブを中断しますか？"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:385
 #: src/mkvtoolnix-gui/merge/tab.cpp:411
 #, fuzzy, no-c-format
@@ -4445,7 +4470,7 @@ msgstr "長さ: %|1$.3f|s (%2%)"
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:389
+#: src/mkvtoolnix-gui/merge/attachments.cpp:405
 #, fuzzy, no-c-format
 msgid "E&nable all attached files"
 msgstr "全てのトラックを選択(&S)"
@@ -7665,7 +7690,7 @@ msgstr "完了したジョブを削除する(&C)"
 msgid "Remove &successfully completed jobs"
 msgstr "正常に完了したジョブを削除する(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:393
+#: src/mkvtoolnix-gui/merge/attachments.cpp:409
 #, fuzzy, no-c-format
 msgid "Remove a&ll attachments"
 msgstr "要素を削除"
@@ -7767,7 +7792,7 @@ msgstr "全てのトラックへのアクションを行うには右クリック
 msgid "Right-click for actions for jobs"
 msgstr "全てのジョブへのアクションを行う場合は右クリックしてください"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:405
+#: src/mkvtoolnix-gui/merge/attachments.cpp:421
 #, fuzzy, no-c-format
 msgid "Right-click for attachment actions"
 msgstr "全てのジョブへのアクションを行う場合は右クリックしてください"

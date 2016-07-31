@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-30 12:16+0200\n"
+"POT-Creation-Date: 2016-07-31 16:06+0200\n"
 "PO-Revision-Date: 2016-07-21 19:58+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1260,9 +1260,14 @@ msgstr "경고와 오류 알리기(&A)"
 msgid "&Add"
 msgstr "추가(&A)"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:232
+#, fuzzy, no-c-format
+msgid "&Add attachment"
+msgstr "첨부 파일 추가(&A)"
+
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:114
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:279
-#: src/mkvtoolnix-gui/merge/attachments.cpp:392
+#: src/mkvtoolnix-gui/merge/attachments.cpp:408
 #, no-c-format
 msgid "&Add attachments"
 msgstr "첨부 파일 추가(&A)"
@@ -1375,7 +1380,7 @@ msgstr "설명(&D):"
 msgid "&Disable all tracks"
 msgstr "모든 트랙 사용 안 함(&D)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:338
+#: src/mkvtoolnix-gui/merge/attachments.cpp:354
 #, no-c-format
 msgid "&Disable selected attached file"
 msgid_plural "&Disable selected attached files"
@@ -1399,7 +1404,7 @@ msgstr "각 항목의 재생 시간, 초 단위(&D):"
 msgid "&Enable all tracks"
 msgstr "모든 트랙 사용(&E)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:337
+#: src/mkvtoolnix-gui/merge/attachments.cpp:353
 #, no-c-format
 msgid "&Enable selected attached file"
 msgid_plural "&Enable selected attached files"
@@ -1602,7 +1607,7 @@ msgid "&Reload file"
 msgstr "파일 다시 불러오기(&R)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:280
-#: src/mkvtoolnix-gui/merge/attachments.cpp:351
+#: src/mkvtoolnix-gui/merge/attachments.cpp:367
 #, no-c-format
 msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
@@ -1667,7 +1672,7 @@ msgstr "다른 재생 목록에 대해 폴더 검색(&S):"
 msgid "&Scan for other playlists"
 msgstr "다른 재생목록 검사(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:394
+#: src/mkvtoolnix-gui/merge/attachments.cpp:410
 #, no-c-format
 msgid "&Select all attachments"
 msgstr "모든 첨부 파일 선택(&S)"
@@ -1680,6 +1685,11 @@ msgstr "모든 트랙 선택(&S)"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
 msgstr "\"감추기\" 표시된 챕터 건너뛰기(&S)"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:233
+#, fuzzy, no-c-format
+msgid "&Skip file"
+msgstr "파일 결합하기(&P)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 msgid "&Sort chapters by their start and end timecodes"
@@ -2255,7 +2265,7 @@ msgstr "<Simple>은 <String> 또는 <Binary> 자식 요소 중 하나라도 포�
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag>는 <Simple> 자식 요소가 누락되어 있습니다."
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:359
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1305
 #, no-c-format
@@ -2551,7 +2561,7 @@ msgid "Add as new input fi&les"
 msgstr "새 입력 파일로 추가(&L)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #, no-c-format
 msgid "Add attachments"
 msgstr "첨부 파일 추가"
@@ -2720,7 +2730,7 @@ msgstr "'%1' 파일에서 모든 챕터를 제거했습니다."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:607
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:147
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:266
-#: src/mkvtoolnix-gui/merge/attachments.cpp:242
+#: src/mkvtoolnix-gui/merge/attachments.cpp:258
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:190
 #: src/mkvtoolnix-gui/merge/tab.cpp:204
@@ -2882,6 +2892,11 @@ msgstr "임의의 설명은 사용자를 위한 것이었습니다."
 msgid "An attachment with the ID %1% was not found.\n"
 msgstr "ID %1%의 첨부 파일을 찾지 못했습니다.\n"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:230
+#, fuzzy, no-c-format
+msgid "An attachment with the name '%1' is already present."
+msgstr "ID %1%의 첨부 파일을 찾지 못했습니다.\n"
+
 #: src/merge/mkvmerge.cpp:1901
 msgid "An empty file name is not valid.\n"
 msgstr "빈 파일 이름이 잘못되었습니다.\n"
@@ -3013,6 +3028,11 @@ msgstr "첨부 파일 추출"
 #: src/propedit/propedit_cli_parser.cpp:259
 msgid "Attachment selectors"
 msgstr "첨부 파일 선택기"
+
+#: src/mkvtoolnix-gui/merge/attachments.cpp:228
+#, fuzzy, no-c-format
+msgid "Attachment with same name present"
+msgstr "첨부 파일을 새 파일로 교체(&P)"
 
 #: src/info/mkvinfo.cpp:1197
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
@@ -4167,7 +4187,7 @@ msgstr "자세히"
 msgid "Development hacks"
 msgstr "개발 핵"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:390
+#: src/mkvtoolnix-gui/merge/attachments.cpp:406
 #, no-c-format
 msgid "Di&sable all attached files"
 msgstr "모든 첨부 파일 사용 안 함(&S)"
@@ -4279,6 +4299,11 @@ msgstr "현재 실행 중인 모든 작업을 정말 취소할까요?"
 msgid "Do you really want to abort this job?"
 msgstr "이 작업을 정말 취소할까요?"
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:231
+#, fuzzy, no-c-format
+msgid "Do you really want to add '%1' as another attachment?"
+msgstr "이 작업을 정말 취소할까요?"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:385
 #: src/mkvtoolnix-gui/merge/tab.cpp:411
 #, no-c-format
@@ -4370,7 +4395,7 @@ msgstr "재생 시간: %|1$.3f|s (%2%)"
 msgid "E&dit in corresponding tool and remove from queue"
 msgstr "대응 도구에서 편집하고 대기열에서 삭제(&D)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:389
+#: src/mkvtoolnix-gui/merge/attachments.cpp:405
 #, no-c-format
 msgid "E&nable all attached files"
 msgstr "모든 첨부 파일 사용(&N)"
@@ -7576,7 +7601,7 @@ msgstr "완료한 작업 삭제(&C)"
 msgid "Remove &successfully completed jobs"
 msgstr "성공적으로 완료한 작업 삭제(&S)"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:393
+#: src/mkvtoolnix-gui/merge/attachments.cpp:409
 #, no-c-format
 msgid "Remove a&ll attachments"
 msgstr "모든 첨부 파일 삭제(&L)"
@@ -7675,7 +7700,7 @@ msgstr "모든 트랙에 대한 동작은 우클릭하세요"
 msgid "Right-click for actions for jobs"
 msgstr "작업에 대한 동작은 우클릭하세요"
 
-#: src/mkvtoolnix-gui/merge/attachments.cpp:405
+#: src/mkvtoolnix-gui/merge/attachments.cpp:421
 #, no-c-format
 msgid "Right-click for attachment actions"
 msgstr "첨부 파일 동작은 우클릭하세요"
