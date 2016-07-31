@@ -297,6 +297,7 @@ protected:
   virtual QList<Track *> selectedAttachedFiles() const;
   virtual QList<Attachment *> selectedAttachments() const;
   virtual void selectAttachments(QList<Attachment *> const &attachments);
+  virtual boost::optional<QString> findExistingAttachmentFileName(QString const &fileName);
 
   virtual bool isReadyForMerging();
   virtual bool checkIfOverwritingIsOK();

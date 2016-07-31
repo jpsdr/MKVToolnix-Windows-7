@@ -222,6 +222,22 @@ Tab::addAttachments(QStringList const &fileNames) {
       continue;
     }
 
+    auto existingFileName = findExistingAttachmentFileName(info.fileName());
+    if (existingFileName) {
+      auto const answer = Util::MessageBox::question(this)
+        ->title(QY("Attachment with same name present"))
+        .text(Q("%1 %2")
+              .arg(QY("An attachment with the name '%1' is already present.").arg(*existingFileName))
+              .arg(QY("Do you really want to add '%1' as another attachment?").arg(QDir::toNativeSeparators(fileName))))
+        .buttonLabel(QMessageBox::Yes, QY("&Add attachment"))
+        .buttonLabel(QMessageBox::No,  QY("&Skip file"))
+        .defaultButton(QMessageBox::No)
+        .exec();
+
+      if (answer == QMessageBox::No)
+        continue;
+    }
+
     attachmentsToAdd << std::make_shared<Attachment>(fileName);
     attachmentsToAdd.back()->guessMIMEType();
   }
@@ -475,6 +491,35 @@ Tab::attachedFileItemChanged(QStandardItem *item) {
 
   attachedFile->m_muxThis = newMuxThis;
   m_attachedFilesModel->attachedFileUpdated(*attachedFile);
+}
+
+boost::optional<QString>
+Tab::findExistingAttachmentFileName(QString const &fileName) {
+  auto lowerFileName = fileName.toLower();
+
+  for (int row = 0, numRows = m_attachedFilesModel->rowCount(); row < numRows; ++row) {
+    auto attachedFile = m_attachedFilesModel->attachedFileForRow(row);
+
+    if (!attachedFile)
+      continue;
+
+    auto existingFileName = QFileInfo{attachedFile->m_name}.fileName();
+    if (lowerFileName == existingFileName.toLower())
+      return existingFileName;
+  }
+
+  for (int row = 0, numRows = m_attachmentsModel->rowCount(); row < numRows; ++row) {
+    auto attachment = m_attachmentsModel->attachmentForRow(row);
+
+    if (!attachment)
+      continue;
+
+    auto existingFileName = QFileInfo{attachment->m_fileName}.fileName();
+    if (lowerFileName == existingFileName.toLower())
+      return existingFileName;
+  }
+
+  return {};
 }
 
 }}}
