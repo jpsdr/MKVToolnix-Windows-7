@@ -1176,8 +1176,8 @@ mpeg_ts_reader_c::parse_pmt(mpeg_ts_track_c &track) {
       }
 
       case STREAM_AUDIO_AC3:
-      case STREAM_AUDIO_AC3_PLUS:  // E-AC-3
-      case STREAM_AUDIO_AC3_PLUS2: // E-AC-3 secondary stream
+      case STREAM_AUDIO_EAC3:      // E-AC-3
+      case STREAM_AUDIO_EAC3_2:    // E-AC-3 secondary stream
       case STREAM_AUDIO_EAC3_ATSC: // E-AC-3 as defined in ATSC A/52:2012 Annex G
         track->type      = ES_AUDIO_TYPE;
         track->codec     = codec_c::look_up(codec_c::type_e::A_AC3);
