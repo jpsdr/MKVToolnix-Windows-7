@@ -507,7 +507,7 @@ mpeg_ts_track_c::handle_timestamp_wrap(timestamp_c &pts,
 bool
 mpeg_ts_track_c::parse_ac3_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &,
                                           mpeg_ts_pmt_pid_info_t const &pmt_pid_info) {
-  if ((pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE) && (type != ES_UNKNOWN))
+  if (pmt_pid_info.stream_type != ISO_13818_PES_PRIVATE)
     return false;
 
   type  = ES_AUDIO_TYPE;
@@ -1178,6 +1178,7 @@ mpeg_ts_reader_c::parse_pmt(mpeg_ts_track_c &track) {
       case STREAM_AUDIO_AC3:
       case STREAM_AUDIO_AC3_PLUS:  // E-AC-3
       case STREAM_AUDIO_AC3_PLUS2: // E-AC-3 secondary stream
+      case STREAM_AUDIO_EAC3_ATSC: // E-AC-3 as defined in ATSC A/52:2012 Annex G
         track->type      = ES_AUDIO_TYPE;
         track->codec     = codec_c::look_up(codec_c::type_e::A_AC3);
         break;
