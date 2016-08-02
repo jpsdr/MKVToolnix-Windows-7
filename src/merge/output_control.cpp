@@ -1782,6 +1782,12 @@ append_track(packetizer_t &ptzr,
   ptzr.file                            = amap.src_file_id;
   ptzr.status                          = FILE_STATUS_MOREDATA;
 
+  // Fix the globally stored video packetizer reference so that
+  // decisions based on a packet's source such as when to render a new
+  // cluster continue working.
+  if (old_packetizer == g_video_packetizer)
+    g_video_packetizer = ptzr.packetizer;
+
   // If we're dealing with a subtitle track or if the appending file contains
   // chapters then we have to do some magic. During splitting timecodes are
   // offset by a certain amount. This amount is NOT the duration of the
