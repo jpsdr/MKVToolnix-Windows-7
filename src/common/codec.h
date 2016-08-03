@@ -72,6 +72,7 @@
 #define MKV_V_DIRAC      "V_DIRAC"
 #define MKV_V_VP8        "V_VP8"
 #define MKV_V_VP9        "V_VP9"
+#define MKV_V_PRORES     "V_PRORES"
 
 #define MKV_S_TEXTUTF8   "S_TEXT/UTF8"
 #define MKV_S_TEXTSSA    "S_TEXT/SSA"
@@ -107,6 +108,7 @@ public:
     , V_VC1
     , V_VP8
     , V_VP9
+    , V_PRORES
 
     , A_AAC = 0x2000
     , A_AC3

@@ -1473,6 +1473,11 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
 
     memcpy(buffer->get_buffer(), dmx->esds.decoder_config->get_buffer(), dmx->esds.decoder_config->get_size());
 
+  } else if (   dmx->is_video()
+             && dmx->codec.is(codec_c::type_e::V_PRORES)) {
+    m_in->skip(8);
+    index.size -= 8;
+    buffer = memory_c::alloc(index.size);
   } else {
     buffer = memory_c::alloc(index.size);
   }
@@ -1586,6 +1591,14 @@ void
 qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = dmx->priv;
   dmx->ptzr           = add_packetizer(new hevc_video_packetizer_c(this, m_ti, dmx->fps, dmx->v_width, dmx->v_height));
+
+  show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
+}
+
+void
+qtmp4_reader_c::create_video_packetizer_prores(qtmp4_demuxer_cptr &dmx) {
+  m_ti.m_private_data = memory_c::clone(dmx->fourcc.str());
+  dmx->ptzr           = add_packetizer(new video_packetizer_c(this, m_ti, MKV_V_PRORES, dmx->fps, dmx->v_width, dmx->v_height));
 
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }
@@ -1753,6 +1766,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
     else if (dmx->codec.is(codec_c::type_e::V_SVQ1))
       create_video_packetizer_svq1(dmx);
+
+    else if (dmx->codec.is(codec_c::type_e::V_PRORES))
+      create_video_packetizer_prores(dmx);
 
     else
       create_video_packetizer_standard(dmx);
