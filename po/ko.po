@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-07-31 16:06+0200\n"
-"PO-Revision-Date: 2016-07-21 19:58+0000\n"
+"PO-Revision-Date: 2016-07-31 23:34+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -877,9 +877,8 @@ msgid "  X:  binary in hex\n"
 msgstr "  X:  16진수 바이너리\n"
 
 #: src/merge/mkvmerge.cpp:161
-#, fuzzy
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
-msgstr "  <file1> +<file2>         \"<file1> + <file2>\"와 같습니다.\n"
+msgstr "  [ <file1> <file2> ]      \"<file1> + <file2>\"와 같습니다.\n"
 
 #: src/info/mkvinfo.cpp:326
 #, boost-format
@@ -1261,7 +1260,7 @@ msgid "&Add"
 msgstr "추가(&A)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:232
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Add attachment"
 msgstr "첨부 파일 추가(&A)"
 
@@ -1687,9 +1686,9 @@ msgid "&Skip chapters flagged \"hidden\""
 msgstr "\"감추기\" 표시된 챕터 건너뛰기(&S)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:233
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Skip file"
-msgstr "파일 결합하기(&P)"
+msgstr "파일 건너뛰기(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 msgid "&Sort chapters by their start and end timecodes"
@@ -2893,9 +2892,9 @@ msgid "An attachment with the ID %1% was not found.\n"
 msgstr "ID %1%의 첨부 파일을 찾지 못했습니다.\n"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:230
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "An attachment with the name '%1' is already present."
-msgstr "ID %1%의 첨부 파일을 찾지 못했습니다.\n"
+msgstr "'%1' 이름의 첨부 파일이 이미 있습니다."
 
 #: src/merge/mkvmerge.cpp:1901
 msgid "An empty file name is not valid.\n"
@@ -3030,9 +3029,9 @@ msgid "Attachment selectors"
 msgstr "첨부 파일 선택기"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:228
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Attachment with same name present"
-msgstr "첨부 파일을 새 파일로 교체(&P)"
+msgstr "같은 이름의 첨부 파일이 존재합니다"
 
 #: src/info/mkvinfo.cpp:1197
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:112
@@ -4300,9 +4299,9 @@ msgid "Do you really want to abort this job?"
 msgstr "이 작업을 정말 취소할까요?"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:231
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Do you really want to add '%1' as another attachment?"
-msgstr "이 작업을 정말 취소할까요?"
+msgstr "'%1'을 다른 첨부 파일로 정말 추가할까요?"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:385
 #: src/mkvtoolnix-gui/merge/tab.cpp:411
@@ -6610,9 +6609,9 @@ msgid "No file name given.\n"
 msgstr "파일 이름을 지정되어 있지 않습니다.\n"
 
 #: src/merge/mkvmerge.cpp:1879
-#, fuzzy, boost-format
+#, boost-format
 msgid "No file names were listed between '%1%' and '%2%'.\n"
-msgstr "파일 이름이 하나 이상 지정되었습니다 ('%1%'와 '%2%').\n"
+msgstr "'%1%'과 '%2%' 사이에 나열된 파일명이 없습니다.\n"
 
 #: src/common/xml/ebml_converter.cpp:236
 msgid "No filename found after the '@'."
@@ -8820,9 +8819,9 @@ msgid "The chosen NALU size length of %1% is too small. Try using '4'.\n"
 msgstr "선택된 NALU 크기 길이 '%1%'는 너무 작습니다. '4'를 시도하십시오.\n"
 
 #: src/merge/mkvmerge.cpp:1876
-#, fuzzy, boost-format
+#, boost-format
 msgid "The closing character '%1%' is missing.\n"
-msgstr "닫는 괄호 ')'가 누락되어 있습니다.\n"
+msgstr "닫는 문자인 '%1%'가 없습니다.\n"
 
 #: src/merge/generic_reader.cpp:139
 #, boost-format
