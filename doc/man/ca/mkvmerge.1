@@ -201,7 +201,7 @@ Els noms pels cap\('itols nous es controlen mitjan\(,cant l\*(Aqopci\('o
 Aix\(`o estableix la plantilla del nom pels noms dels cap\('itols generats per l\*(Aqopci\('o
 \-\-generate\-chapters\&. Si no s\*(Aqempra aquesta opci\('o, llavors s\*(Aqemprar\(`a el \(FoChapter <NUM:2>\(Fc predeterminat\&.
 .sp
-Hi ha diverses variables que es poden usar a la plantilla que seran substitu\(:ides amb els valors actuals quan es generi un cap\('itol\&. La cadena \(Fo<NUM>\(Fc ser\(`a substitu\(:ida pel n\('umero de cap\('itol\&. La cadena \(Fo<START>\(Fc ser\(`a substitu\(:ida per la marca de temps d\*(Aqinici del cap\('itol\&.
+Hi ha diverses variables que es poden usar a la plantilla que seran substitu\(:ides amb els valors reals quan es generi un cap\('itol\&. La cadena \(Fo<NUM>\(Fc ser\(`a substitu\(:ida pel n\('umero de cap\('itol\&. La cadena \(Fo<START>\(Fc ser\(`a substitu\(:ida per la marca de temps d\*(Aqinici del cap\('itol\&.
 .sp
 Les cadenes
 \(Fo<FILE_NAME>\(Fc
@@ -1034,18 +1034,18 @@ $ mkvmerge \-o complet\&.mkv fitxer_1\&.mkv +fitxer_2\&.mkv
 .\}
 .RE
 .PP
-\fB[\fR \fIfile1\fR \fIfile2\fR \fB]\fR
+\fB[\fR \fIfitxer_1\fR \fIfitxer_2\fR \fB]\fR
 .RS 4
-If multiple file names are contained in a pair of square brackets then the second and all following files will be appended to the first file named within the brackets\&.
+Si hi ha entre claud\(`ators m\('ultiples noms de fitxer, llabors el segon fitxer i tots els seg\(:uents seran annexats al primer fitxer\&.
 .sp
-This is an alternative syntax to using \*(Aq+\*(Aq between the file names\&. Therefore the following two commands are equivalent:
+Aquesta \('es una sintaxi alternativa a l\*(Aq\('us del car\(`acter \(Fo+\(Fc entre els noms de fitxer\&. Per tant, les dues odres seg\(:uents s\('on equivalents:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvmerge \-o full\&.mkv file1\&.mkv + file2\&.mkv
-$ mkvmerge \-o full\&.mkv \*(Aq[\*(Aq file1\&.mkv file2\&.mkv \*(Aq]\*(Aq
+$ mkvmerge \-o tot\&.mkv fitxer_1\&.mkv + fitxer_2\&.mkv
+$ mkvmerge \-o tot\&.mkv \*(Aq[\*(Aq fitxer_1\&.mkv fitxer_2\&.mkv \*(Aq]\*(Aq
 .fi
 .if n \{\
 .RE
