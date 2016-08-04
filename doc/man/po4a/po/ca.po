@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2016-07-30 12:16+0200\n"
-"PO-Revision-Date: 2016-07-11 20:58+0200\n"
+"PO-Revision-Date: 2016-08-01 23:06+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
@@ -37,10 +37,8 @@ msgstr "9.3.1"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2016-05-28"
 msgid "2016-07-14"
-msgstr "-28-05-2016"
+msgstr "2016-07-14"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -1718,7 +1716,7 @@ msgstr "Això estableix la plantilla del nom pels noms dels capítols generats p
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:268
 msgid "There are several variables that can be used in the template that are replaced by their actual values when a chapter is generated.  The string '<literal>&lt;NUM&gt;</literal>' will be replaced by the chapter number. The string '<literal>&lt;START&gt;</literal>' will be replaced by the chapter's start timestamp."
-msgstr "Hi ha diverses variables que es poden usar a la plantilla que seran substituïdes amb els valors actuals quan es generi un capítol. La cadena «<literal>&lt;NUM&gt;</literal>» serà substituïda pel número de capítol. La cadena «<literal>&lt;START&gt;</literal>» serà substituïda per la marca de temps d'inici del capítol."
+msgstr "Hi ha diverses variables que es poden usar a la plantilla que seran substituïdes amb els valors reals quan es generi un capítol. La cadena «<literal>&lt;NUM&gt;</literal>» serà substituïda pel número de capítol. La cadena «<literal>&lt;START&gt;</literal>» serà substituïda per la marca de temps d'inici del capítol."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:274
@@ -2355,37 +2353,28 @@ msgstr ""
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:929
-#, fuzzy
-#| msgid "<option>(</option> <parameter>file1</parameter> <parameter>file2</parameter> <option>)</option>"
 msgid "<option>[</option> <parameter>file1</parameter> <parameter>file2</parameter> <option>]</option>"
-msgstr "<option>(</option> <parameter>fitxer_1</parameter> <parameter>fitxer_2</parameter> <option>)</option>"
+msgstr "<option>[</option> <parameter>fitxer_1</parameter> <parameter>fitxer_2</parameter> <option>]</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:932
-#, fuzzy
-#| msgid "If multiple file names are contained in a pair of parenthesis then those files will be treated as if they were concatenated into a single big file consisting of the content of each of the files one after the other."
 msgid "If multiple file names are contained in a pair of square brackets then the second and all following files will be appended to the first file named within the brackets."
-msgstr "Si hi ha entre parèntesis múltiples noms de fitxer, llavors aquests seran tractats com si estiguessin concatenats (units) en un únic gran fitxer, el qual consistirà en el contingut de cadascun dels fitxers, l'un darrere l'altre."
+msgstr "Si hi ha entre claudàtors múltiples noms de fitxer, llabors el segon fitxer i tots els següents seran annexats al primer fitxer."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:936
-#, fuzzy
-#| msgid "The '=' can also be put in front of the next file name. Therefore the following two commands are equivalent:"
 msgid "This is an alternative syntax to using '+' between the file names. Therefore the following two commands are equivalent:"
-msgstr "El signe «=» també es pot posar davant del nom de fitxer següent. Per tant, les dues ordres següents són equivalents:"
+msgstr "Aquesta és una sintaxi alternativa a l'ús del caràcter «+» entre els noms de fitxer. Per tant, les dues odres següents són equivalents:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvmerge.xml:939
-#, fuzzy, no-wrap
-#| msgid ""
-#| "$ mkvmerge -o full.mkv file1.mkv + file2.mkv\n"
-#| "$ mkvmerge -o full.mkv file1.mkv +file2.mkv"
+#, no-wrap
 msgid ""
 "$ mkvmerge -o full.mkv file1.mkv + file2.mkv\n"
 "$ mkvmerge -o full.mkv '[' file1.mkv file2.mkv ']'"
 msgstr ""
-"$ mkvmerge -o complet.mkv fitxer_1.mkv + fitxer_2.mkv\n"
-"$ mkvmerge -o complet.mkv fitxer_1.mkv +fitxer_2.mkv"
+"$ mkvmerge -o tot.mkv fitxer_1.mkv + fitxer_2.mkv\n"
+"$ mkvmerge -o tot.mkv '[' fitxer_1.mkv fitxer_2.mkv ']'"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:945
