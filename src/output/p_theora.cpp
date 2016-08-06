@@ -27,14 +27,14 @@ theora_video_packetizer_c(generic_reader_c *p_reader,
                           double fps,
                           int width,
                           int height)
-  : video_for_windows_packetizer_c(p_reader, p_ti, MKV_V_THEORA, fps, width, height)
+  : generic_video_packetizer_c(p_reader, p_ti, MKV_V_THEORA, fps, width, height)
 {
 }
 
 void
 theora_video_packetizer_c::set_headers() {
   extract_aspect_ratio();
-  video_for_windows_packetizer_c::set_headers();
+  generic_video_packetizer_c::set_headers();
 }
 
 int
@@ -46,7 +46,7 @@ theora_video_packetizer_c::process(packet_cptr packet) {
 
   packet->fref   = VFT_NOBFRAME;
 
-  return video_for_windows_packetizer_c::process(packet);
+  return generic_video_packetizer_c::process(packet);
 }
 
 void

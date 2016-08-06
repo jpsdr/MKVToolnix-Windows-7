@@ -1567,8 +1567,12 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
   } else if (t->codec.is(codec_c::type_e::V_VC1))
     create_vc1_video_packetizer(t, nti);
 
-  else {
-    set_track_packetizer(t, new video_for_windows_packetizer_c(this, nti, t->codec_id.c_str(), t->v_frate, t->v_width, t->v_height));
+  else if (t->ms_compat) {
+    set_track_packetizer(t, new video_for_windows_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
+    show_packetizer_info(t->tnum, t->ptzr_ptr);
+
+  } else {
+    set_track_packetizer(t, new generic_video_packetizer_c(this, nti, t->codec_id.c_str(), t->v_frate, t->v_width, t->v_height));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
   }
 

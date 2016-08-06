@@ -338,7 +338,7 @@ avi_reader_c::create_vp8_packetizer() {
 
 void
 avi_reader_c::create_standard_video_packetizer() {
-  m_vptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, nullptr, m_fps, m_video_width, m_video_height));
+  m_vptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, m_fps, m_video_width, m_video_height));
 
   show_packetizer_info(0, PTZR(m_vptzr));
 }

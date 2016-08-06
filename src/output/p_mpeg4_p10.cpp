@@ -29,10 +29,10 @@ mpeg4_p10_video_packetizer_c(generic_reader_c *p_reader,
                              double fps,
                              int width,
                              int height)
-  : video_for_windows_packetizer_c(p_reader, p_ti, MKV_V_MPEG4_AVC, fps, width, height)
-  , m_nalu_size_len_src(0)
-  , m_nalu_size_len_dst(0)
-  , m_max_nalu_size(0)
+  : generic_video_packetizer_c{p_reader, p_ti, MKV_V_MPEG4_AVC, fps, width, height}
+  , m_nalu_size_len_src{}
+  , m_nalu_size_len_dst{}
+  , m_max_nalu_size{}
 {
   m_relaxed_timecode_checking = true;
 
@@ -72,7 +72,7 @@ mpeg4_p10_video_packetizer_c::set_headers() {
     set_codec_private(mpeg4::p10::fix_sps_fps(m_ti.m_private_data, l_track_default_duration));
   }
 
-  video_for_windows_packetizer_c::set_headers();
+  generic_video_packetizer_c::set_headers();
 }
 
 void
@@ -121,7 +121,7 @@ mpeg4_p10_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
 
-  connection_result_e result = video_for_windows_packetizer_c::can_connect_to(src, error_message);
+  auto result = generic_video_packetizer_c::can_connect_to(src, error_message);
   if (CAN_CONNECT_YES != result)
     return result;
 

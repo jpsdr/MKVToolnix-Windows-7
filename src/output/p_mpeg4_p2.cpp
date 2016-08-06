@@ -30,7 +30,7 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
                             int width,
                             int height,
                             bool input_is_native)
-  : video_for_windows_packetizer_c(p_reader, p_ti, MKV_V_MPEG4_ASP, fps, width, height)
+  : video_for_windows_packetizer_c(p_reader, p_ti, fps, width, height)
   , m_timecodes_generated(0)
   , m_previous_timecode(0)
   , m_aspect_ratio_extracted(false)
@@ -38,13 +38,10 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
   , m_output_is_native(hack_engaged(ENGAGE_NATIVE_MPEG4) || input_is_native)
   , m_size_extracted(false)
 {
-  if (!m_output_is_native) {
-    set_codec_id(MKV_V_MSCOMP);
-    check_fourcc();
-
+  if (!m_output_is_native)
     m_timestamp_factory_application_mode = TFA_SHORT_QUEUEING;
 
-  } else {
+  else {
     set_codec_id(MKV_V_MPEG4_ASP);
     if (!m_input_is_native)
       m_ti.m_private_data.reset();

@@ -408,7 +408,7 @@ flv_reader_c::create_v_generic_packetizer(flv_track_cptr &track) {
 
   m_ti.m_private_data = memory_c::clone(&bih, sizeof(bih));
 
-  track->m_ptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, MKV_V_MSCOMP, track->m_v_frame_rate, track->m_v_width, track->m_v_height));
+  track->m_ptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, track->m_v_frame_rate, track->m_v_width, track->m_v_height));
   show_packetizer_info(m_video_track_idx, PTZR(track->m_ptzr));
 }
 

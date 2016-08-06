@@ -20,7 +20,7 @@ quicktime_video_packetizer_c::quicktime_video_packetizer_c(generic_reader_c *p_r
                                                            track_info_c &p_ti,
                                                            int width,
                                                            int height)
-  : video_for_windows_packetizer_c{p_reader, p_ti, MKV_V_QUICKTIME, 0.0, width, height}
+  : generic_video_packetizer_c{p_reader, p_ti, MKV_V_QUICKTIME, 0.0, width, height}
 {
 }
 
@@ -31,5 +31,5 @@ quicktime_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
   if (!qvsrc)
     return CAN_CONNECT_NO_FORMAT;
 
-  return video_for_windows_packetizer_c::can_connect_to(src, error_message);
+  return generic_video_packetizer_c::can_connect_to(src, error_message);
 }

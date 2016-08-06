@@ -1333,7 +1333,7 @@ ogm_v_mscomp_demuxer_c::create_packetizer() {
   if (mpeg4::p2::is_fourcc(sth->subtype))
     ptzr_obj = new mpeg4_p2_video_packetizer_c(reader, m_ti, fps, width, height, false);
   else
-    ptzr_obj = new video_for_windows_packetizer_c(reader, m_ti, nullptr, fps, width, height);
+    ptzr_obj = new video_for_windows_packetizer_c(reader, m_ti, fps, width, height);
 
   show_packetizer_info(m_ti.m_id, ptzr_obj);
 
