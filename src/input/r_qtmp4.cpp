@@ -1474,10 +1474,12 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
     memcpy(buffer->get_buffer(), dmx->esds.decoder_config->get_buffer(), dmx->esds.decoder_config->get_size());
 
   } else if (   dmx->is_video()
-             && dmx->codec.is(codec_c::type_e::V_PRORES)) {
+             && dmx->codec.is(codec_c::type_e::V_PRORES)
+             && (index.size >= 8)) {
     m_in->skip(8);
     index.size -= 8;
     buffer = memory_c::alloc(index.size);
+
   } else {
     buffer = memory_c::alloc(index.size);
   }
