@@ -98,6 +98,7 @@ public:
     , V_MPEG4_P10
     , V_MPEG4_P2
     , V_MPEGH_P2
+    , V_PRORES
     , V_REAL
     , V_RLE4
     , V_RLE8
@@ -108,36 +109,35 @@ public:
     , V_VC1
     , V_VP8
     , V_VP9
-    , V_PRORES
 
     , A_AAC = 0x2000
     , A_AC3
+    , A_ACELP_NET
     , A_ALAC
+    , A_ATRAC3
+    , A_COOK
     , A_DTS
+    , A_FLAC
+    , A_LD_CELP
+    , A_MLP
     , A_MP2
     , A_MP3
-    , A_PCM
-    , A_VORBIS
     , A_OPUS
+    , A_PCM
     , A_QDMC
-    , A_FLAC
-    , A_MLP
+    , A_RALF
     , A_TRUEHD
     , A_TTA
-    , A_WAVPACK4
-    , A_COOK
-    , A_ACELP_NET
-    , A_ATRAC3
-    , A_RALF
+    , A_VORBIS
     , A_VSELP
-    , A_LD_CELP
+    , A_WAVPACK4
 
-    , S_SRT = 0x3000
+    , S_HDMV_PGS = 0x3000
+    , S_KATE
+    , S_SRT
     , S_SSA_ASS
     , S_USF
     , S_VOBSUB
-    , S_KATE
-    , S_HDMV_PGS
     , S_WEBVTT
 
     , B_VOBBTN = 0x4000
