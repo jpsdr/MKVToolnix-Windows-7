@@ -6,13 +6,13 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   class definition for the video output module
+   class definition for the Video for Windows output module
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_P_VIDEO_H
-#define MTX_P_VIDEO_H
+#ifndef MTX_OUTPUT_P_VIDEO_FOR_WINDOWS_H
+#define MTX_OUTPUT_P_VIDEO_FOR_WINDOWS_H
 
 #include "common/common_pch.h"
 
@@ -22,7 +22,7 @@
 #define VFT_PFRAMEAUTOMATIC -2
 #define VFT_NOBFRAME        -1
 
-class video_packetizer_c: public generic_packetizer_c {
+class video_for_windows_packetizer_c: public generic_packetizer_c {
 protected:
   double m_fps;
   int m_width, m_height, m_frames_output;
@@ -36,7 +36,7 @@ protected:
   } m_codec_type;
 
 public:
-  video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, const char *codec_id, double fps, int width, int height);
+  video_for_windows_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, const char *codec_id, double fps, int width, int height);
 
   virtual int process(packet_cptr packet);
   virtual void set_headers();
@@ -53,4 +53,4 @@ protected:
   virtual void rederive_frame_type_mpeg4_p2(packet_cptr &packet);
 };
 
-#endif // MTX_P_VIDEO_H
+#endif // MTX_OUTPUT_P_VIDEO_FOR_WINDOWS_H

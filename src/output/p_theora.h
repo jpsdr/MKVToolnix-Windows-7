@@ -16,9 +16,9 @@
 
 #include "common/common_pch.h"
 
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 
-class theora_video_packetizer_c: public video_packetizer_c {
+class theora_video_packetizer_c: public video_for_windows_packetizer_c {
 public:
   theora_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, double fps, int width, int height);
   virtual void set_headers();

@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit http://www.gnu.org/copyleft/gpl.html
 
-   video output module
+   Video for WIndows output module
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -23,16 +23,16 @@
 #include "common/math.h"
 #include "common/mpeg4_p2.h"
 #include "merge/connection_checks.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 
 using namespace libmatroska;
 
-video_packetizer_c::video_packetizer_c(generic_reader_c *p_reader,
-                                       track_info_c &p_ti,
-                                       const char *codec_id,
-                                       double fps,
-                                       int width,
-                                       int height)
+video_for_windows_packetizer_c::video_for_windows_packetizer_c(generic_reader_c *p_reader,
+                                                               track_info_c &p_ti,
+                                                               const char *codec_id,
+                                                               double fps,
+                                                               int width,
+                                                               int height)
   : generic_packetizer_c(p_reader, p_ti)
   , m_fps(fps)
   , m_width(width)
@@ -41,7 +41,7 @@ video_packetizer_c::video_packetizer_c(generic_reader_c *p_reader,
   , m_ref_timecode(-1)
   , m_duration_shift(0)
   , m_rederive_frame_types(debugging_c::requested("rederive_frame_types"))
-  , m_codec_type(video_packetizer_c::ct_unknown)
+  , m_codec_type(video_for_windows_packetizer_c::ct_unknown)
 {
   set_track_type(track_video);
 
@@ -55,7 +55,7 @@ video_packetizer_c::video_packetizer_c(generic_reader_c *p_reader,
 }
 
 void
-video_packetizer_c::check_fourcc() {
+video_for_windows_packetizer_c::check_fourcc() {
   if (   (m_hcodec_id                != MKV_V_MSCOMP)
       || !m_ti.m_private_data
       || (sizeof(alBITMAPINFOHEADER) >  m_ti.m_private_data->get_size()))
@@ -71,14 +71,14 @@ video_packetizer_c::check_fourcc() {
   fourcc[4] = 0;
 
   if (mpeg4::p2::is_v3_fourcc(fourcc))
-    m_codec_type = video_packetizer_c::ct_div3;
+    m_codec_type = video_for_windows_packetizer_c::ct_div3;
 
   else if (mpeg4::p2::is_fourcc(fourcc))
-    m_codec_type = video_packetizer_c::ct_mpeg4_p2;
+    m_codec_type = video_for_windows_packetizer_c::ct_mpeg4_p2;
 }
 
 void
-video_packetizer_c::set_headers() {
+video_for_windows_packetizer_c::set_headers() {
   if (0.0 < m_fps)
     set_track_default_duration((int64_t)(1000000000.0 / m_fps));
 
@@ -99,7 +99,7 @@ video_packetizer_c::set_headers() {
 // fref > 0:   B frame with given forward reference (absolute reference,
 //             not relative!)
 int
-video_packetizer_c::process(packet_cptr packet) {
+video_for_windows_packetizer_c::process(packet_cptr packet) {
   if ((0.0 == m_fps) && (-1 == packet->timecode))
     mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n")) % BUGMSG);
 
@@ -139,13 +139,13 @@ video_packetizer_c::process(packet_cptr packet) {
 }
 
 void
-video_packetizer_c::rederive_frame_type(packet_cptr &packet) {
+video_for_windows_packetizer_c::rederive_frame_type(packet_cptr &packet) {
   switch (m_codec_type) {
-    case video_packetizer_c::ct_div3:
+    case video_for_windows_packetizer_c::ct_div3:
       rederive_frame_type_div3(packet);
       break;
 
-    case video_packetizer_c::ct_mpeg4_p2:
+    case video_for_windows_packetizer_c::ct_mpeg4_p2:
       rederive_frame_type_mpeg4_p2(packet);
       break;
 
@@ -155,7 +155,7 @@ video_packetizer_c::rederive_frame_type(packet_cptr &packet) {
 }
 
 void
-video_packetizer_c::rederive_frame_type_div3(packet_cptr &packet) {
+video_for_windows_packetizer_c::rederive_frame_type_div3(packet_cptr &packet) {
   if (1 >= packet->data->get_size())
     return;
 
@@ -164,7 +164,7 @@ video_packetizer_c::rederive_frame_type_div3(packet_cptr &packet) {
 }
 
 void
-video_packetizer_c::rederive_frame_type_mpeg4_p2(packet_cptr &packet) {
+video_for_windows_packetizer_c::rederive_frame_type_mpeg4_p2(packet_cptr &packet) {
   size_t idx, size    = packet->data->get_size();
   unsigned char *data = packet->data->get_buffer();
 
@@ -188,9 +188,9 @@ video_packetizer_c::rederive_frame_type_mpeg4_p2(packet_cptr &packet) {
 }
 
 connection_result_e
-video_packetizer_c::can_connect_to(generic_packetizer_c *src,
-                                   std::string &error_message) {
-  video_packetizer_c *vsrc = dynamic_cast<video_packetizer_c *>(src);
+video_for_windows_packetizer_c::can_connect_to(generic_packetizer_c *src,
+                                               std::string &error_message) {
+  auto vsrc = dynamic_cast<video_for_windows_packetizer_c *>(src);
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
 

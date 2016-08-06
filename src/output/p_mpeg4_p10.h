@@ -16,9 +16,9 @@
 
 #include "common/common_pch.h"
 
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 
-class mpeg4_p10_video_packetizer_c: public video_packetizer_c {
+class mpeg4_p10_video_packetizer_c: public video_for_windows_packetizer_c {
 protected:
   int m_nalu_size_len_src, m_nalu_size_len_dst;
   int64_t m_max_nalu_size;

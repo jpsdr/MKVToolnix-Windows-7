@@ -24,7 +24,7 @@
 #include "input/qtmp4_atoms.h"
 #include "merge/generic_reader.h"
 #include "output/p_pcm.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 
 #define QTMP4_TFHD_BASE_DATA_OFFSET        0x000001
 #define QTMP4_TFHD_SAMPLE_DESCRIPTION_ID   0x000002

@@ -45,7 +45,7 @@
 #include "output/p_pcm.h"
 #include "output/p_textsubs.h"
 #include "output/p_theora.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 #include "output/p_vorbis.h"
 #include "output/p_vpx.h"
 
@@ -1333,7 +1333,7 @@ ogm_v_mscomp_demuxer_c::create_packetizer() {
   if (mpeg4::p2::is_fourcc(sth->subtype))
     ptzr_obj = new mpeg4_p2_video_packetizer_c(reader, m_ti, fps, width, height, false);
   else
-    ptzr_obj = new video_packetizer_c(reader, m_ti, nullptr, fps, width, height);
+    ptzr_obj = new video_for_windows_packetizer_c(reader, m_ti, nullptr, fps, width, height);
 
   show_packetizer_info(m_ti.m_id, ptzr_obj);
 

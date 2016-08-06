@@ -88,7 +88,7 @@
 #include "output/p_theora.h"
 #include "output/p_truehd.h"
 #include "output/p_tta.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 #include "output/p_vobbtn.h"
 #include "output/p_vobsub.h"
 #include "output/p_vorbis.h"
@@ -1568,7 +1568,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
     create_vc1_video_packetizer(t, nti);
 
   else {
-    set_track_packetizer(t, new video_packetizer_c(this, nti, t->codec_id.c_str(), t->v_frate, t->v_width, t->v_height));
+    set_track_packetizer(t, new video_for_windows_packetizer_c(this, nti, t->codec_id.c_str(), t->v_frate, t->v_width, t->v_height));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
   }
 

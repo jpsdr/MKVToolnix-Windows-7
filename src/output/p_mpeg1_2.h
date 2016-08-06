@@ -17,10 +17,10 @@
 #include "common/common_pch.h"
 
 #include "common/mpeg1_2.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 #include "mpegparser/M2VParser.h"
 
-class mpeg1_2_video_packetizer_c: public video_packetizer_c {
+class mpeg1_2_video_packetizer_c: public video_for_windows_packetizer_c {
 protected:
   M2VParser m_parser;
   memory_cptr m_seq_hdr;

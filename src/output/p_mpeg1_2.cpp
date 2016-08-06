@@ -33,7 +33,7 @@ mpeg1_2_video_packetizer_c(generic_reader_c *p_reader,
                            int dwidth,
                            int dheight,
                            bool framed)
-  : video_packetizer_c(p_reader, p_ti, "V_MPEG1", fps, width, height)
+  : video_for_windows_packetizer_c(p_reader, p_ti, "V_MPEG1", fps, width, height)
   , m_framed{framed}
   , m_aspect_ratio_extracted{true}
   , m_num_removed_stuffing_bytes{}
@@ -188,11 +188,11 @@ mpeg1_2_video_packetizer_c::process_framed(packet_cptr packet) {
     return FILE_STATUS_MOREDATA;
 
   if (4 > packet->data->get_size())
-    return video_packetizer_c::process(packet);
+    return video_for_windows_packetizer_c::process(packet);
 
   remove_stuffing_bytes_and_handle_sequence_headers(packet);
 
-  return video_packetizer_c::process(packet);
+  return video_for_windows_packetizer_c::process(packet);
 }
 
 int
@@ -230,7 +230,7 @@ mpeg1_2_video_packetizer_c::process_unframed(packet_cptr packet) {
 
       remove_stuffing_bytes_and_handle_sequence_headers(new_packet);
 
-      video_packetizer_c::process(new_packet);
+      video_for_windows_packetizer_c::process(new_packet);
 
       frame->data = nullptr;
       state       = m_parser.GetState();

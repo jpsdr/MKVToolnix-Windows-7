@@ -29,7 +29,7 @@
 #include "output/p_ac3.h"
 #include "output/p_passthrough.h"
 #include "output/p_realaudio.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 
 /*
    Description of the RealMedia file format:
@@ -257,7 +257,7 @@ void
 real_reader_c::create_video_packetizer(real_demuxer_cptr dmx) {
   m_ti.m_private_data  = dmx->private_data;
   std::string codec_id = (boost::format("V_REAL/%1%") % dmx->fourcc).str();
-  dmx->ptzr            = add_packetizer(new video_packetizer_c(this, m_ti, codec_id.c_str(), 0.0, dmx->width, dmx->height));
+  dmx->ptzr            = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, codec_id.c_str(), 0.0, dmx->width, dmx->height));
 
   if (strcmp(dmx->fourcc, "RV40"))
     dmx->rv_dimensions = true;

@@ -40,7 +40,7 @@
 #include "output/p_mpeg4_p2.h"
 #include "output/p_mpeg4_p10.h"
 #include "output/p_pcm.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 #include "output/p_vorbis.h"
 #include "output/p_vpx.h"
 
@@ -338,7 +338,7 @@ avi_reader_c::create_vp8_packetizer() {
 
 void
 avi_reader_c::create_standard_video_packetizer() {
-  m_vptzr = add_packetizer(new video_packetizer_c(this, m_ti, nullptr, m_fps, m_video_width, m_video_height));
+  m_vptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, nullptr, m_fps, m_video_width, m_video_height));
 
   show_packetizer_info(0, PTZR(m_vptzr));
 }

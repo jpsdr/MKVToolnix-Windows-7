@@ -49,7 +49,7 @@
 #include "output/p_passthrough.h"
 #include "output/p_pcm.h"
 #include "output/p_quicktime.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 #include "output/p_vobsub.h"
 
 using namespace libmatroska;
@@ -1560,7 +1560,7 @@ qtmp4_reader_c::create_audio_packetizer_dts(qtmp4_demuxer_cptr &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_svq1(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = create_bitmap_info_header(dmx, "SVQ1");
-  dmx->ptzr           = add_packetizer(new video_packetizer_c(this, m_ti, MKV_V_MSCOMP, 0.0, dmx->v_width, dmx->v_height));
+  dmx->ptzr           = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, MKV_V_MSCOMP, 0.0, dmx->v_width, dmx->v_height));
 
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }
@@ -1600,7 +1600,7 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_cptr &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_prores(qtmp4_demuxer_cptr &dmx) {
   m_ti.m_private_data = memory_c::clone(dmx->fourcc.str());
-  dmx->ptzr           = add_packetizer(new video_packetizer_c(this, m_ti, MKV_V_PRORES, dmx->fps, dmx->v_width, dmx->v_height));
+  dmx->ptzr           = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, MKV_V_PRORES, dmx->fps, dmx->v_width, dmx->v_height));
 
   show_packetizer_info(dmx->id, PTZR(dmx->ptzr));
 }

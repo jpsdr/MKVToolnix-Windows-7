@@ -30,7 +30,7 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
                             int width,
                             int height,
                             bool input_is_native)
-  : video_packetizer_c(p_reader, p_ti, MKV_V_MPEG4_ASP, fps, width, height)
+  : video_for_windows_packetizer_c(p_reader, p_ti, MKV_V_MPEG4_ASP, fps, width, height)
   , m_timecodes_generated(0)
   , m_previous_timecode(0)
   , m_aspect_ratio_extracted(false)
@@ -87,7 +87,7 @@ mpeg4_p2_video_packetizer_c::process(packet_cptr packet) {
   extract_size(packet->data->get_buffer(), packet->data->get_size());
   extract_aspect_ratio(packet->data->get_buffer(), packet->data->get_size());
 
-  int result = m_input_is_native == m_output_is_native ? video_packetizer_c::process(packet)
+  int result = m_input_is_native == m_output_is_native ? video_for_windows_packetizer_c::process(packet)
              : m_input_is_native                       ?                     process_native(packet)
              :                                                               process_non_native(packet);
 

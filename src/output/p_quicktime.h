@@ -17,9 +17,9 @@
 #include "common/common_pch.h"
 
 #include "merge/generic_packetizer.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 
-class quicktime_video_packetizer_c: public video_packetizer_c {
+class quicktime_video_packetizer_c: public video_for_windows_packetizer_c {
 public:
   quicktime_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int width, int height);
 

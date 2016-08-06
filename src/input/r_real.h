@@ -18,7 +18,7 @@
 
 #include "common/error.h"
 #include "librmff/librmff.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 #include "merge/generic_reader.h"
 
 struct rv_segment_t {

@@ -28,7 +28,7 @@ hevc_video_packetizer_c(generic_reader_c *p_reader,
                         double fps,
                         int width,
                         int height)
-  : video_packetizer_c(p_reader, p_ti, MKV_V_MPEGH_HEVC, fps, width, height)
+  : video_for_windows_packetizer_c(p_reader, p_ti, MKV_V_MPEGH_HEVC, fps, width, height)
   , m_nalu_size_len_src(0)
   , m_nalu_size_len_dst(0)
   , m_max_nalu_size(0)
@@ -48,7 +48,7 @@ hevc_video_packetizer_c::set_headers() {
   if (m_ti.m_private_data && m_ti.m_private_data->get_size() && m_ti.m_fix_bitstream_frame_rate)
     set_codec_private(m_ti.m_private_data);
 
-  video_packetizer_c::set_headers();
+  video_for_windows_packetizer_c::set_headers();
 }
 
 void
@@ -95,7 +95,7 @@ hevc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
 
-  connection_result_e result = video_packetizer_c::can_connect_to(src, error_message);
+  connection_result_e result = video_for_windows_packetizer_c::can_connect_to(src, error_message);
   if (CAN_CONNECT_YES != result)
     return result;
 

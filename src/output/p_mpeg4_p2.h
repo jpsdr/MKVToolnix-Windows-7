@@ -19,9 +19,9 @@
 #include <deque>
 
 #include "common/mpeg4_p2.h"
-#include "output/p_video.h"
+#include "output/p_video_for_windows.h"
 
-class mpeg4_p2_video_packetizer_c: public video_packetizer_c {
+class mpeg4_p2_video_packetizer_c: public video_for_windows_packetizer_c {
 protected:
   struct timecode_duration_t {
     int64_t m_timecode, m_duration;
