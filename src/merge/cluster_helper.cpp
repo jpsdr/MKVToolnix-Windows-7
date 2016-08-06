@@ -22,12 +22,12 @@
 #include "common/translation.h"
 #include "merge/cluster_helper.h"
 #include "merge/cues.h"
+#include "merge/generic_packetizer.h"
 #include "merge/generic_reader.h"
 #include "merge/libmatroska_extensions.h"
 #include "merge/output_control.h"
 #include "merge/packet_extensions.h"
 #include "merge/private/cluster_helper.h"
-#include "output/p_video.h"
 
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxBlockData.h>
