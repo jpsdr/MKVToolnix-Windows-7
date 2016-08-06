@@ -40,7 +40,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("VC-1",                    type_e::V_VC1,          track_video,    "wvc1|vc-1");
   ms_codecs.emplace_back("VP8",                     type_e::V_VP8,          track_video,    "vp8\\d|V_VP8");
   ms_codecs.emplace_back("VP9",                     type_e::V_VP9,          track_video,    "vp9\\d|V_VP9");
-  ms_codecs.emplace_back("ProRes",                  type_e::V_PRORES,       track_video,    "apch|apcn|apcs|apco|ap4h");
+  ms_codecs.emplace_back("ProRes",                  type_e::V_PRORES,       track_video,    "apch|apcn|apcs|apco|ap4h|V_PRORES");
 
   ms_codecs.emplace_back("AAC",                     type_e::A_AAC,          track_audio,    "mp4a|aac.|raac|racp|A_AAC.*",           std::vector<uint16_t>{ 0x00ffu, 0x706du });
   ms_codecs.emplace_back("AC-3/E-AC-3",             type_e::A_AC3,          track_audio,    "ac3.|ac-3|sac3|eac3|ec-3|a52[\\sb]|dnet|A_E?AC3", 0x2000u);
