@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-31 16:06+0200\n"
+"POT-Creation-Date: 2016-08-07 11:01+0200\n"
 "PO-Revision-Date: 2016-07-31 18:00+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1186,7 +1186,7 @@ msgstr "%1%: beklenmedik bir olay meydana geldi (ileti: %2%; türü: %3%)."
 
 #: src/common/kax_file.cpp:69
 #: src/input/r_matroska.cpp:1431
-#: src/input/r_matroska.cpp:2102
+#: src/input/r_matroska.cpp:2106
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: bilinmeyen bir istisna meydana geldi."
@@ -2025,7 +2025,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Aşağıdaki dosyalar dahi işleniyor: %2%\n"
 
-#: src/input/r_matroska.cpp:1706
+#: src/input/r_matroska.cpp:1710
 #, boost-format
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr ""
@@ -2325,8 +2325,8 @@ msgstr "(adlandırılmamış)"
 msgid "<unsaved file>"
 msgstr "<kaydedilmemiş dosya>"
 
-#: src/input/r_matroska.cpp:2123
-#: src/input/r_matroska.cpp:2236
+#: src/input/r_matroska.cpp:2127
+#: src/input/r_matroska.cpp:2240
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "İz numarası %2% için %1% zaman damgasında bir blok bulundu. Ancak, bu iz numarası için bulunan başlıklar yok. Blok atlanacaktır.\n"
@@ -3317,7 +3317,7 @@ msgstr "Tüm izler için istatistikleri hesapla ve onlar için yeni etiketler ek
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/output/p_mpeg4_p2.cpp:114
+#: src/output/p_mpeg4_p2.cpp:111
 msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timecodes nor a number of frames per second.\n"
 msgstr ""
 
@@ -3745,7 +3745,7 @@ msgstr "Ses izi %1% için bir indeks bulunamadı (avilib hata iletisi: %2%). İz
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "Eklenirken gptzr bulunamadı. %1%\n"
 
-#: src/output/p_mpeg4_p2.cpp:178
+#: src/output/p_mpeg4_p2.cpp:175
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
 msgstr "Kodek yapılandırma verisi ilk MPEG-4 kısım 2 görüntü karesinde bulunamadı. Bu iz yerel kip içinde saklanamaz.\n"
 
@@ -4820,7 +4820,7 @@ msgstr ""
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to %1%/%2%.\n"
 msgstr ""
 
-#: src/output/p_mpeg4_p2.cpp:330
+#: src/output/p_mpeg4_p2.cpp:327
 #, boost-format
 msgid "Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to %1%/%2%.\n"
 msgstr ""
@@ -6251,12 +6251,12 @@ msgstr "MPLS Blu-ray oynatma listesi"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Türleri (ses, görüntü, altyazılar) için bu izi varsayılan iz yapın."
 
-#: src/input/r_matroska.cpp:1596
-#: src/input/r_matroska.cpp:1611
+#: src/input/r_matroska.cpp:1600
+#: src/input/r_matroska.cpp:1615
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Arızalanmış AAC kodek başlatma verisi bulundu.\n"
 
-#: src/input/r_matroska.cpp:1604
+#: src/input/r_matroska.cpp:1608
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "Arızalanmış kodek id '%1%'.\n"
@@ -6592,11 +6592,11 @@ msgstr "Sonraki parçanın benzersiz ID'si"
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "'--%2% %3%' içinde belirtilmiş %1% yok.\n"
 
-#: src/input/r_qtmp4.cpp:1524
+#: src/input/r_qtmp4.cpp:1531
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "İlk karede bulunan AC-3 başlığı yok; iz atlanacaktır.\n"
 
-#: src/input/r_qtmp4.cpp:2926
+#: src/input/r_qtmp4.cpp:2944
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "İlk karede bulunan DTS başlığı yok; iz atlanacaktır.\n"
 
@@ -7386,22 +7386,22 @@ msgstr "QuickTime/MP4"
 msgid "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual size: %3%.\n"
 msgstr "Quicktime/MP4 okuyucusu: '%1%' atomu çok küçük. Beklenen boyut: >= %2%. Asıl boyut: %3%.\n"
 
-#: src/input/r_qtmp4.cpp:2132
+#: src/input/r_qtmp4.cpp:2150
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 okuyucusu: Sabit örnek boyutu ve değişken süresi henüz desteklenmiyor. Böyle bir örnek dosyaya sahipseniz hazırlayanı ile iritbata geçin.\n"
 
-#: src/input/r_qtmp4.cpp:1481
+#: src/input/r_qtmp4.cpp:1488
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"
 msgstr "Quicktime/MP4 okuyucusu: %4% konumundan %3% boyutu ile iri parça numarası %1%/%2% okunamadı. İptal ediliyor.\n"
 
-#: src/input/r_qtmp4.cpp:2505
-#: src/input/r_qtmp4.cpp:2519
+#: src/input/r_qtmp4.cpp:2523
+#: src/input/r_qtmp4.cpp:2537
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 okuyucusu: İz ID %1% için genişletilmiş ses tanımlama atomu okunamadı.\n"
 
-#: src/input/r_qtmp4.cpp:2472
+#: src/input/r_qtmp4.cpp:2490
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 okuyucusu: İz ID %1% için ses tanımlama atomu okunamadı.\n"
@@ -7411,7 +7411,7 @@ msgstr "Quicktime/MP4 okuyucusu: İz ID %1% için ses tanımlama atomu okunamad�
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 okuyucusu: İz ID %1% için akış tanımlama atomu okunamadı.\n"
 
-#: src/input/r_qtmp4.cpp:2551
+#: src/input/r_qtmp4.cpp:2569
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 okuyucusu: İz ID %1% için görüntü tanımlama atomu okunamadı.\n"
@@ -7429,17 +7429,17 @@ msgstr "Quicktime/MP4 okuyucusu: 'mdat' atomu bulunmadı. Bulunan film verisi yo
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 okuyucusu: %2%'de geçersiz iri parça boyutu %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2973
+#: src/input/r_qtmp4.cpp:2991
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: MPEG4 kısım 10/AVC izi %1%, çözücü yapılandırmasında eksik. Bu iz atlanıyor.\n"
 
-#: src/input/r_qtmp4.cpp:2999
+#: src/input/r_qtmp4.cpp:3017
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: MPEG4 izi %1% eksik esds atomu/çözücü yapılandırması. Bu iz atlanıyor.\n"
 
-#: src/input/r_qtmp4.cpp:2983
+#: src/input/r_qtmp4.cpp:3001
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: MPEG4 kısım 2/HEVC izi %1%, çözücü yapılandırmasında eksik. Bu iz atlanıyor.\n"
@@ -7458,17 +7458,17 @@ msgstr "Quicktime/MP4 okuyucusu: İz ID %1% için akış tanımlama atomu içind
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 okuyucusu: 'Zaman ölçeği' parametresi 0'dır. Bu desteklenmez.\n"
 
-#: src/input/r_qtmp4.cpp:2944
+#: src/input/r_qtmp4.cpp:2962
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: AAC izi %1% eksik esds atomu/çözücü yapılandırması. Bu iz atlanıyor.\n"
 
-#: src/input/r_qtmp4.cpp:2939
+#: src/input/r_qtmp4.cpp:2957
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: Ses izi %1%, 'esds' atomu içinde desteklenmeyen %2% 'nesne türü id' kullanıyor. Bu iz atlanıyor.\n"
 
-#: src/input/r_qtmp4.cpp:2993
+#: src/input/r_qtmp4.cpp:3011
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 okuyucusu: Görüntü izi %1%, ESDS atomu eksik. Bu iz atlanıyor.\n"
@@ -7493,16 +7493,16 @@ msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış başlıkları kul
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış başlıkları kullanıyor ama genişletilemediler. zlib'ten hata kodu: %1%. İptal ediliyor.\n"
 
-#: src/input/r_qtmp4.cpp:2895
-#: src/input/r_qtmp4.cpp:2914
-#: src/input/r_qtmp4.cpp:2954
-#: src/input/r_qtmp4.cpp:3017
+#: src/input/r_qtmp4.cpp:2913
+#: src/input/r_qtmp4.cpp:2932
+#: src/input/r_qtmp4.cpp:2972
+#: src/input/r_qtmp4.cpp:3035
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 okuyucusu: İz %1% bazı verisi eksik. Bozuk başlık atomları olabilir mi?\n"
 
-#: src/input/r_qtmp4.cpp:2480
-#: src/input/r_qtmp4.cpp:2558
+#: src/input/r_qtmp4.cpp:2498
+#: src/input/r_qtmp4.cpp:2576
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4 okuyucusu: İz ID %1% birden fazla FourCC'ye sahip. Sadece ilk (%2%) olan kullanılıyor ve bu (%3%) olan değil.\n"
@@ -8647,7 +8647,7 @@ msgstr "DocType başlığı öğesi \"webm\" olarak değiştirilir."
 msgid "The FLAC headers could not be parsed: the stream info structure was not found.\n"
 msgstr "FLAC başlıkları ayrıştırılamadı: akış bilgisi yapısı bulunmadı.\n"
 
-#: src/output/p_video.cpp:104
+#: src/output/p_generic_video.cpp:74
 #, boost-format
 msgid "The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n"
 msgstr "FPS 0.0'dır ama okuyucu paket için bir zaman kodu vermedi. %1%\n"
@@ -9021,7 +9021,7 @@ msgstr "Bitiş zamanı ayrıştırılamadı: %1"
 msgid "The end time must be greater than the start timecode."
 msgstr "Bitiş zamanı başlangıç zaman kodundan büyük olmak zorundadır."
 
-#: src/output/p_mpeg4_p2.cpp:371
+#: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
 msgid "The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values in the source container. The ones from the video data bitstream (%1%x%2%) will be used.\n"
 msgstr "MPEG4 katman 2 götüntü verisi bit akışından gelen görüntü genişliği ve yüksekliği için çıkartılan değerler kaynak kalıpta olan değerlerden farklı. Götüntü verisi bit akışından (%1%x%2%) biri kullanılacaktır.\n"
@@ -9268,7 +9268,7 @@ msgstr "Dosya desteklenen bir biçim olarak tanınmadı (çıkış kodu: %1)."
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
 #: src/input/r_matroska.cpp:1432
-#: src/input/r_matroska.cpp:2103
+#: src/input/r_matroska.cpp:2107
 msgid "The file will not be processed further."
 msgstr "Dosya daha fazla işlenmeyecektir."
 
@@ -10251,7 +10251,7 @@ msgstr "Bu iz SBR AAC/HE-AAC/AAC+ verisi içeriyor."
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
 #: src/input/r_matroska.cpp:1432
-#: src/input/r_matroska.cpp:2103
+#: src/input/r_matroska.cpp:2107
 msgid "This usually indicates a damaged file structure."
 msgstr "Bu genellikle hasarlı bir dosya yapısını gösterir."
 
@@ -10380,7 +10380,7 @@ msgstr "KodekID '%2%' ile iz %1%, \"default duration\" öğesi eksik ve çıkart
 msgid "Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"
 msgstr "İz %1%: %2%, kodek ID: %3%%4%%5%%6%\n"
 
-#: src/input/r_qtmp4.cpp:2633
+#: src/input/r_qtmp4.cpp:2651
 #, boost-format
 msgid "Track %1%: AAC found, but decoder config data has length %2%.\n"
 msgstr "İz %1%: AAC bulundu, ancak çözücü yapılandırma verisi %2% uzunluğuna sahip.\n"
@@ -10402,7 +10402,7 @@ msgstr "İz %1%: NAL çok büyük. Başlık alanına göre boyut: %2%, paket ola
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "İz %1%: Altyazı giriş sayısı %2% eksik süreli. Süre 1s farzediliyor.\n"
 
-#: src/input/r_qtmp4.cpp:2636
+#: src/input/r_qtmp4.cpp:2654
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "İz %1%: AAC bilgisi ayrıştırılamadı.\n"
@@ -10653,7 +10653,7 @@ msgstr ""
 msgid "Unsupported file format"
 msgstr "Desteklenmeyen dosya biçimi"
 
-#: src/input/r_matroska.cpp:1911
+#: src/input/r_matroska.cpp:1915
 msgid "Unsupported track type for this track.\n"
 msgstr "Bu iz için desteklenmeyen biçim.\n"
 
@@ -10798,7 +10798,7 @@ msgstr "Dikey renk doygunluğu yerleşimi: %1%"
 msgid "Vertical chroma subsample: %1%"
 msgstr "Dikey renk doygunluğu alt örneği: %1%"
 
-#: src/output/p_video.h:45
+#: src/output/p_video_for_windows.h:38
 msgid "VfW compatible video"
 msgstr "VfW uyumlu görüntü"
 
@@ -11583,6 +11583,10 @@ msgstr "2 bayt zorla"
 msgid "force 4 bytes"
 msgstr "4 bayt zorla"
 
+#: src/output/p_generic_video.h:38
+msgid "generic video"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/track.cpp:403
 #, no-c-format
 msgid "global tags"
@@ -12321,14 +12325,14 @@ msgstr "tta_reader: c'tor içinde tag_size < 0. %1%\n"
 #: src/info/mkvinfo.cpp:871
 #: src/info/mkvinfo.cpp:1057
 #: src/input/r_matroska.cpp:106
-#: src/input/r_matroska.cpp:2545
+#: src/input/r_matroska.cpp:2549
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:241
 #, no-c-format
 msgid "unknown"
 msgstr "bilinmiyor"
 
-#: src/input/r_matroska.cpp:2529
+#: src/input/r_matroska.cpp:2533
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "bilinmiyor, biçim etiketi: 0x%|1$04x|"

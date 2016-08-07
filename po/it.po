@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 20.05.2016\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-31 16:06+0200\n"
+"POT-Creation-Date: 2016-08-07 11:01+0200\n"
 "PO-Revision-Date: 2016-08-04 17:13+0200\n"
 "Last-Translator: bovirus <@bovirus@gmail.com>\n"
 "Language-Team: Italian <bovirus@gmail.com>\n"
@@ -1191,7 +1191,7 @@ msgstr "%1%: si è verificata una eccezione (messaggio: %2%, tipo: %3%)"
 
 #: src/common/kax_file.cpp:69
 #: src/input/r_matroska.cpp:1431
-#: src/input/r_matroska.cpp:2102
+#: src/input/r_matroska.cpp:2106
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: si è verificata una eccezione sconosciuta."
@@ -2030,7 +2030,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Elaborazione dei seguenti file: %2%\n"
 
-#: src/input/r_matroska.cpp:1706
+#: src/input/r_matroska.cpp:1710
 #, boost-format
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr "'%1%': stai re-muxando una traccia Opus che è stata muxata in modo sperimentale. La traccia risultante verrà scritta in modo finale, ma un dettaglio (fine taglio) non potrà essere recuperato da una traccia muxata in mdo sperimentale. Questo significa che il decoder potreebe produrre alcuni campioni più di quelli attesi. Dovresti se possibile re-muxare dal file Opus originale.\n"
@@ -2330,8 +2330,8 @@ msgstr "<senza nome>"
 msgid "<unsaved file>"
 msgstr "<file nons alvato>"
 
-#: src/input/r_matroska.cpp:2123
-#: src/input/r_matroska.cpp:2236
+#: src/input/r_matroska.cpp:2127
+#: src/input/r_matroska.cpp:2240
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "Trovato un blocco alla posizione data %1% per la traccia numero %2%. Nessuna intestazione trovata per la traccia. Il blocco verrà ignorato.\n"
@@ -3322,7 +3322,7 @@ msgstr "Calcola statistiche per tutte le tracce e aggiungi nuovi/aggiornati tag 
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/output/p_mpeg4_p2.cpp:114
+#: src/output/p_mpeg4_p2.cpp:111
 msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timecodes nor a number of frames per second.\n"
 msgstr "Impossibile convertire frame video non nativi MPEG4 se il contenitore sorgente non fornisce nessun timecode o un numero di frame per secondo\n"
 
@@ -3750,7 +3750,7 @@ msgstr "Impossibile trovare un indice per la traccia audio %1% (messaggio d'erro
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "Impossibile trovare gptzr durante l'aggiunta. %1%\n"
 
-#: src/output/p_mpeg4_p2.cpp:178
+#: src/output/p_mpeg4_p2.cpp:175
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
 msgstr "Impossibile trovare i dati di configurazione del codec nel primo frame MPEG-4 parte 2. Questa traccia non può essere salvata in modo nativo.\n"
 
@@ -4825,7 +4825,7 @@ msgstr "Estratte informazioni rapporto di aspetto dai dati video HEVC e impostat
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to %1%/%2%.\n"
 msgstr "Estrae le informazioni sul rapporto d'aspetto dai dati video MPEG-4 Layer 10 (AVC) e imposta la dimensione di visualizzazione a %1%/%2%.\n"
 
-#: src/output/p_mpeg4_p2.cpp:330
+#: src/output/p_mpeg4_p2.cpp:327
 #, boost-format
 msgid "Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to %1%/%2%.\n"
 msgstr "Estrae le informazioni sul rapporto d'aspetto dai dati video MPEG-4 Layer 2 e imposta la dimensione di visualizzazione a %1%/%2%.\n"
@@ -6256,12 +6256,12 @@ msgstr "Playlist Blu-ray MPLS"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Rendi questa traccia la traccia predefinita per questo tipo (audio, video, sottotitoli)."
 
-#: src/input/r_matroska.cpp:1596
-#: src/input/r_matroska.cpp:1611
+#: src/input/r_matroska.cpp:1600
+#: src/input/r_matroska.cpp:1615
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Rilevati dati errati inizializzazione codec AAC.\n"
 
-#: src/input/r_matroska.cpp:1604
+#: src/input/r_matroska.cpp:1608
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "ID errato codec '%1%'.\n"
@@ -6597,11 +6597,11 @@ msgstr "ID univoco segmento successivo"
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "Nessun %1% specificato in '--%2% %3%'.\n"
 
-#: src/input/r_qtmp4.cpp:1524
+#: src/input/r_qtmp4.cpp:1531
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Nessuna intestazione AC-3 rilevata nel primo frame. La traccia verrà ignorata.\n"
 
-#: src/input/r_qtmp4.cpp:2926
+#: src/input/r_qtmp4.cpp:2944
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nessuna intestazione DTS rilevata nel primo frame. La traccia verrà ignorata.\n"
 
@@ -7392,22 +7392,22 @@ msgstr "QuickTime/MP4"
 msgid "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual size: %3%.\n"
 msgstr "Quicktime/MP4 reader: atom '%1%' troppo piccolo. Dimensione attesa: >= %2%. Dimensione attuale: %3%.\n"
 
-#: src/input/r_qtmp4.cpp:2132
+#: src/input/r_qtmp4.cpp:2150
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 reader: Dimensione campione costante & durata variabile non ancora supportati. Contattare l'autore se si ha un esempio di questo file.\n"
 
-#: src/input/r_qtmp4.cpp:1481
+#: src/input/r_qtmp4.cpp:1488
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"
 msgstr "Quicktime/MP4 reader: Impossibile leggere pezzo numero %1%/%2% con dimensione %3% dalla posizione %4%. Annullo.\n"
 
-#: src/input/r_qtmp4.cpp:2505
-#: src/input/r_qtmp4.cpp:2519
+#: src/input/r_qtmp4.cpp:2523
+#: src/input/r_qtmp4.cpp:2537
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 reader: Impossibile leggere la descrizione atom suono estesa per la traccia ID %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2472
+#: src/input/r_qtmp4.cpp:2490
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 reader: Impossibile leggere la descrizione atom suono per la traccia ID %1%.\n"
@@ -7417,7 +7417,7 @@ msgstr "Quicktime/MP4 reader: Impossibile leggere la descrizione atom suono per 
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 reader: Impossibile leggere la descrizione del flusso atom per la traccia ID %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2551
+#: src/input/r_qtmp4.cpp:2569
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Quicktime/MP4 reader: Impossibile leggere la descrizione video atom per la traccia ID %1%.\n"
@@ -7435,17 +7435,17 @@ msgstr "Quicktime/MP4 reader: Atom 'mdat' non trovato. Nessun dato film trovato.
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Quicktime/MP4 reader: Dimensione pezzo non valida %1% a %2%.\n"
 
-#: src/input/r_qtmp4.cpp:2973
+#: src/input/r_qtmp4.cpp:2991
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 reader: La traccia MPEG4 part 10/AVC %1% manca della sua configurazione decoder. Salto questa traccia.\n"
 
-#: src/input/r_qtmp4.cpp:2999
+#: src/input/r_qtmp4.cpp:3017
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 reader: La traccia MPEG4 %1% manca dell'atom esds/la configurazione del decoder. Salto questa traccia.\n"
 
-#: src/input/r_qtmp4.cpp:2983
+#: src/input/r_qtmp4.cpp:3001
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Lettore Quicktime/MP4: la trccia MPEG4 part 2/AVC %1% manca della sua configurazione di decodifica. Traccia ignorata.\n"
@@ -7464,17 +7464,17 @@ msgstr "Quicktime/MP4 reader: Il campo 'dimensione' è troppo piccolo nell'atom 
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 reader: Il parametro 'time scale' era 0. Questo non è supportato.\n"
 
-#: src/input/r_qtmp4.cpp:2944
+#: src/input/r_qtmp4.cpp:2962
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 reader: La traccia AAC %1% manca dell'atom esds/la configurazione del decoder. Salto questa traccia.\n"
 
-#: src/input/r_qtmp4.cpp:2939
+#: src/input/r_qtmp4.cpp:2957
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 reader: La traccia audio %1% sta usando un 'object type id' di %2% nell'atom 'esds' non supportato. Salto questa traccia.\n"
 
-#: src/input/r_qtmp4.cpp:2993
+#: src/input/r_qtmp4.cpp:3011
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 reader: La traccia video %1% manca dell'atom ESDS. Salto questa traccia.\n"
@@ -7499,16 +7499,16 @@ msgstr "Quicktime/MP4 reader: Questo file usa intestazioni compresse, ma la libr
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Quicktime/MP4 reader: Questo file usa intestazioni compresse, ma non possono essere decompresse. Codice di errore da zlib: %1%. Annullo.\n"
 
-#: src/input/r_qtmp4.cpp:2895
-#: src/input/r_qtmp4.cpp:2914
-#: src/input/r_qtmp4.cpp:2954
-#: src/input/r_qtmp4.cpp:3017
+#: src/input/r_qtmp4.cpp:2913
+#: src/input/r_qtmp4.cpp:2932
+#: src/input/r_qtmp4.cpp:2972
+#: src/input/r_qtmp4.cpp:3035
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 reader: La traccia %1% manca di alcuni dati. Atom di intestazione danneggiati?\n"
 
-#: src/input/r_qtmp4.cpp:2480
-#: src/input/r_qtmp4.cpp:2558
+#: src/input/r_qtmp4.cpp:2498
+#: src/input/r_qtmp4.cpp:2576
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Lettore Quicktime/MP4: La traccia ID %1% ha più di un FourCC. Uso solo il primo (%2%) e non questo (%3%).\n"
@@ -8656,7 +8656,7 @@ msgstr "L'elemento intestazione  DocType è stato modificato a \"webm\". "
 msgid "The FLAC headers could not be parsed: the stream info structure was not found.\n"
 msgstr "L'intestazione FLAC non può essere analizzata: struttura info flusso non trovata.\n"
 
-#: src/output/p_video.cpp:104
+#: src/output/p_generic_video.cpp:74
 #, boost-format
 msgid "The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n"
 msgstr "Il FPS è 0.0 ma il lettore non ha fornito un timecode per il pacchetto. %1%\n"
@@ -9030,7 +9030,7 @@ msgstr "Non può essere analizzato il punto finale: %1"
 msgid "The end time must be greater than the start timecode."
 msgstr "Il tempo finale deve essere maggiore del timecode iniziale."
 
-#: src/output/p_mpeg4_p2.cpp:371
+#: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
 msgid "The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values in the source container. The ones from the video data bitstream (%1%x%2%) will be used.\n"
 msgstr "I valori per la larghezza/altezza video estratti dai dati del flusso video MPEG4 Layer 2 sono differenti dai valori del contenitore sorgente. Verranno usati quelli dai valori del flusso dati video (%1%x%2%).\n"
@@ -9277,7 +9277,7 @@ msgstr "Il file non è stato riconosciuto come un formato supportato (%1)."
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
 #: src/input/r_matroska.cpp:1432
-#: src/input/r_matroska.cpp:2103
+#: src/input/r_matroska.cpp:2107
 msgid "The file will not be processed further."
 msgstr "Il file non verrà ulteriormente elaborato."
 
@@ -10263,7 +10263,7 @@ msgstr "Questa traccia contiene dati SBR AAC/HE-AAC/AAC+ "
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
 #: src/input/r_matroska.cpp:1432
-#: src/input/r_matroska.cpp:2103
+#: src/input/r_matroska.cpp:2107
 msgid "This usually indicates a damaged file structure."
 msgstr "Questo normalmente indica una struttura file danneggiata."
 
@@ -10392,7 +10392,7 @@ msgstr "La traccia %1% con IDCodec '%2%' manca dell'elemento \"durata predefinit
 msgid "Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"
 msgstr "Traccia %1%: %2%, ID codec: %3%%4%%5%%6%\n"
 
-#: src/input/r_qtmp4.cpp:2633
+#: src/input/r_qtmp4.cpp:2651
 #, boost-format
 msgid "Track %1%: AAC found, but decoder config data has length %2%.\n"
 msgstr "Traccia %1%: trovato AAC, ma i dati configurazione del decoder hanno lunghezza %2%.\n"
@@ -10414,7 +10414,7 @@ msgstr "Traccia %1%: NAL troppo grande. Dimensione in accordo con il campo intes
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Traccia %1%: elemento sottotitolo numero %2% mancante della sua durata. Impostata durata a 1s.\n"
 
-#: src/input/r_qtmp4.cpp:2636
+#: src/input/r_qtmp4.cpp:2654
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "Traccia %1%: impossibile analizzare informazione AAC.\n"
@@ -10665,7 +10665,7 @@ msgstr "Versione MPEG non supportata: 0x%|1$02x| nel pacchetto %2% per il timeco
 msgid "Unsupported file format"
 msgstr "Formato file non supportato"
 
-#: src/input/r_matroska.cpp:1911
+#: src/input/r_matroska.cpp:1915
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipo traccia non supportato per questa traccia.\n"
 
@@ -10810,7 +10810,7 @@ msgstr "Posizione croma verticale: %1%"
 msgid "Vertical chroma subsample: %1%"
 msgstr "Campione croma verticale: %1%"
 
-#: src/output/p_video.h:45
+#: src/output/p_video_for_windows.h:38
 msgid "VfW compatible video"
 msgstr "Video compatibile VfW"
 
@@ -11597,6 +11597,10 @@ msgstr "forza 2 byte"
 msgid "force 4 bytes"
 msgstr "forza 4 byte"
 
+#: src/output/p_generic_video.h:38
+msgid "generic video"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/track.cpp:403
 #, no-c-format
 msgid "global tags"
@@ -12335,14 +12339,14 @@ msgstr "tta_reader: tag_size < 0 nel c'tor. %1%\n"
 #: src/info/mkvinfo.cpp:871
 #: src/info/mkvinfo.cpp:1057
 #: src/input/r_matroska.cpp:106
-#: src/input/r_matroska.cpp:2545
+#: src/input/r_matroska.cpp:2549
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:241
 #, no-c-format
 msgid "unknown"
 msgstr "sconosciuto"
 
-#: src/input/r_matroska.cpp:2529
+#: src/input/r_matroska.cpp:2533
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "sconosciuto, formato tag 0x%|1$04x|"

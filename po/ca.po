@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-07-31 16:06+0200\n"
+"POT-Creation-Date: 2016-08-07 11:01+0200\n"
 "PO-Revision-Date: 2016-07-31 14:15+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1251,7 +1251,7 @@ msgstr "%1%: s'ha produït una excepció (missatge: %2%; tipus: %3%)."
 
 #: src/common/kax_file.cpp:69
 #: src/input/r_matroska.cpp:1431
-#: src/input/r_matroska.cpp:2102
+#: src/input/r_matroska.cpp:2106
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: s'ha produït una excepció desconeguda."
@@ -2090,7 +2090,7 @@ msgstr "«%1%»: %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "«%1%»: està processant els següents fitxers com a bons: %2%\n"
 
-#: src/input/r_matroska.cpp:1706
+#: src/input/r_matroska.cpp:1710
 #, boost-format
 msgid "'%1%': You're re-muxing an Opus track that was muxed in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr "«%1%»: Esteu tornant a multiplexar una pista Opus que fou multiplexada en el mode experimental. La pista resultant s'escriurà seguint el mode final, però no es podrà recuperar el detall a partir d'una pista multiplexada en el mode experimental: el tall final. Això significa que un descodificador podria generar unes quantes mostres més del que tenia inicialment previst. Si és possible, hauríeu de tornar a multiplexar partint del fitxer Opus original.\n"
@@ -2390,8 +2390,8 @@ msgstr "<Sense nom>"
 msgid "<unsaved file>"
 msgstr "<Fitxer sense desar>"
 
-#: src/input/r_matroska.cpp:2123
-#: src/input/r_matroska.cpp:2236
+#: src/input/r_matroska.cpp:2127
+#: src/input/r_matroska.cpp:2240
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "S'ha trobat un bloc a la marca de temps %1% pel número de pista %2%. No obstant això, no s'ha trobat cap capçalera per aquest número de pista. El bloc serà omès.\n"
@@ -3383,7 +3383,7 @@ msgstr "Calcula les estadístiques per a totes les pistes i afegeix etiquetes no
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: src/output/p_mpeg4_p2.cpp:114
+#: src/output/p_mpeg4_p2.cpp:111
 msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timecodes nor a number of frames per second.\n"
 msgstr "No es poden convertir els fotogrames d'un vídeo MPEG4 no natiu a un de natiu, si el contenidor d'origen no proporciona els codis de temps ni el nombre de fotogrames per segon.\n"
 
@@ -3813,7 +3813,7 @@ msgstr "No s'ha pogut trobar un índex per a la pista d'àudio %1% (Missatge d'e
 msgid "Could not find gptzr when appending. %1%\n"
 msgstr "No s'ha pogut trobar «gptzr» en annexar. %1%\n"
 
-#: src/output/p_mpeg4_p2.cpp:178
+#: src/output/p_mpeg4_p2.cpp:175
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
 msgstr "No s'han pogut trobar les dades de configuració del còdec en el primer fotograma del vídeo MPEG-4 part 2. Aquesta pista no es pot emmagatzemar en el mode natiu.\n"
 
@@ -4895,7 +4895,7 @@ msgstr "Informació extreta de la relació d'aspecte de les dades del vídeo HEV
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to %1%/%2%.\n"
 msgstr "Informació extreta de la relació d'aspecte de les dades del vídeo MPEG-4 capa 10 (AVC) i establertes les dimensions de visualització a %1%/%2%.\n"
 
-#: src/output/p_mpeg4_p2.cpp:330
+#: src/output/p_mpeg4_p2.cpp:327
 #, boost-format
 msgid "Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to %1%/%2%.\n"
 msgstr "Informació extreta de la relació d'aspecte de les dades del vídeo MPEG4 capa 2 i establertes les dimensions de visualització a %1%/%2%.\n"
@@ -6326,12 +6326,12 @@ msgstr "Llista de reproducció Blu-ray en MPLS"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Converteix aquesta pista en la predefinida per a cadascun dels seus tipus (àudio, vídeo, subtítols)."
 
-#: src/input/r_matroska.cpp:1596
-#: src/input/r_matroska.cpp:1611
+#: src/input/r_matroska.cpp:1600
+#: src/input/r_matroska.cpp:1615
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "S'han trobat dades d'inicialització del còdec AAC mal formades.\n"
 
-#: src/input/r_matroska.cpp:1604
+#: src/input/r_matroska.cpp:1608
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "ID del còdec amb format incorrecte «%1%».\n"
@@ -6667,11 +6667,11 @@ msgstr "ID únic del segment següent"
 msgid "No %1% specified in '--%2% %3%'.\n"
 msgstr "No s'ha especificat cap %1% a «--%2% %3%».\n"
 
-#: src/input/r_qtmp4.cpp:1524
+#: src/input/r_qtmp4.cpp:1531
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "No s'ha trobat cap capçalera AC-3 al primer fotograma. La pista serà omesa.\n"
 
-#: src/input/r_qtmp4.cpp:2926
+#: src/input/r_qtmp4.cpp:2944
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "No s'ha trobat cap capçalera DTS en els primers fotogrames. La pista serà omesa.\n"
 
@@ -7463,22 +7463,22 @@ msgstr "QuickTime/MP4"
 msgid "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual size: %3%.\n"
 msgstr "Lector de Quicktime/MP4: l'àtom «%1%» és massa petit. Mida esperada: >= %2%. Mida real: %3%.\n"
 
-#: src/input/r_qtmp4.cpp:2132
+#: src/input/r_qtmp4.cpp:2150
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Lector de Quicktime/MP4: La mida del flux constant i de la durada variable encara no són admeses. Contacteu amb l'autor si teniu algun fitxer de mostra.\n"
 
-#: src/input/r_qtmp4.cpp:1481
+#: src/input/r_qtmp4.cpp:1488
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir el fragment d'informació número %1%/%2% amb la mida %3% des de la posició %4%. S'està interrompent.\n"
 
-#: src/input/r_qtmp4.cpp:2505
-#: src/input/r_qtmp4.cpp:2519
+#: src/input/r_qtmp4.cpp:2523
+#: src/input/r_qtmp4.cpp:2537
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció estesa del so per a l'ID de la pista %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2472
+#: src/input/r_qtmp4.cpp:2490
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del so per a l'ID de la pista %1%.\n"
@@ -7488,7 +7488,7 @@ msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció 
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del flux per a l'ID de la pista %1%.\n"
 
-#: src/input/r_qtmp4.cpp:2551
+#: src/input/r_qtmp4.cpp:2569
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
 msgstr "Lector de Quicktime/MP4: No s'ha pogut llegir l'àtom de la descripció del vídeo per a l'ID de la pista %1%.\n"
@@ -7506,17 +7506,17 @@ msgstr "Lector de Quicktime/MP4: No s'ha trobat l'àtom «mdat». No s'han troba
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
 msgstr "Lector de Quicktime/MP4: Mida no vàlida del fragment d'informació %1% a %2%.\n"
 
-#: src/input/r_qtmp4.cpp:2973
+#: src/input/r_qtmp4.cpp:2991
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% MPEG-4 part 10/AVC li falta la configuració del descodificador. S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:2999
+#: src/input/r_qtmp4.cpp:3017
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% MPEG-4 part 10/AVC li falta la configuració del descodificador/àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:2983
+#: src/input/r_qtmp4.cpp:3001
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% MPEGH part 2/HEVC li falta la configuració del descodificador. S'ometrà aquesta pista.\n"
@@ -7535,17 +7535,17 @@ msgstr "Lector de Quicktime/MP4: El camp «mida» és massa petit a l'àtom de d
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Lector de Quicktime/MP4: El paràmetre «escala de temps» ha estat 0. Això no és admès.\n"
 
-#: src/input/r_qtmp4.cpp:2944
+#: src/input/r_qtmp4.cpp:2962
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: Manca la pista AAC %1% a la configuració del descodificador/àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:2939
+#: src/input/r_qtmp4.cpp:2957
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: La pista d'àudio %1% està usant un «ID del tipus d'objecte» no admès de %2% a l'àtom «esds». S'ometrà aquesta pista.\n"
 
-#: src/input/r_qtmp4.cpp:2993
+#: src/input/r_qtmp4.cpp:3011
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
 msgstr "Lector de Quicktime/MP4: Manca la pista de vídeo %1% a l'àtom «ESDS». S'ometrà aquesta pista.\n"
@@ -7570,16 +7570,16 @@ msgstr "Lector de Quicktime/MP4: Aquest fitxer usa capçaleres comprimides, per�
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
 msgstr "Lector de Quicktime/MP4: Aquest fitxer usa capçaleres comprimides, però no es poden descomprimir. Codi d'error de «zlib»: %1%. S'està interrompent.\n"
 
-#: src/input/r_qtmp4.cpp:2895
-#: src/input/r_qtmp4.cpp:2914
-#: src/input/r_qtmp4.cpp:2954
-#: src/input/r_qtmp4.cpp:3017
+#: src/input/r_qtmp4.cpp:2913
+#: src/input/r_qtmp4.cpp:2932
+#: src/input/r_qtmp4.cpp:2972
+#: src/input/r_qtmp4.cpp:3035
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
 msgstr "Lector de Quicktime/MP4: A la pista %1% li manquen algunes dades. Estan malmesos els àtoms de la capçalera?\n"
 
-#: src/input/r_qtmp4.cpp:2480
-#: src/input/r_qtmp4.cpp:2558
+#: src/input/r_qtmp4.cpp:2498
+#: src/input/r_qtmp4.cpp:2576
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Lector de Quicktime/MP4: L'ID de la pista %1% té més d'un FourCC. Només s'usarà el primer (%2%) i no aquest altre (%3%).\n"
@@ -8729,7 +8729,7 @@ msgstr "L'element de la capçalera DocType serà canviat a «webm»."
 msgid "The FLAC headers could not be parsed: the stream info structure was not found.\n"
 msgstr "Les capçaleres FLAC no s'han pogut analitzar: no s'ha trobat l'estructura de la informació del flux.\n"
 
-#: src/output/p_video.cpp:104
+#: src/output/p_generic_video.cpp:74
 #, boost-format
 msgid "The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n"
 msgstr "Els FPS són 0,0, però el lector no ha proporcionat un codi de temps per a un paquet. %1%\n"
@@ -9103,7 +9103,7 @@ msgstr "El temps final no es pot analitzar: %1"
 msgid "The end time must be greater than the start timecode."
 msgstr "El temps final haurà de ser més gran que el codi de temps inicial."
 
-#: src/output/p_mpeg4_p2.cpp:371
+#: src/output/p_mpeg4_p2.cpp:368
 #, boost-format
 msgid "The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values in the source container. The ones from the video data bitstream (%1%x%2%) will be used.\n"
 msgstr "Els valors extrets per a l'amplada i alçada del vídeo des del flux de dades del vídeo MPEG4 capa 2 difereixen dels valors al contenidor d'origen. S'usaran els del flux de dades del vídeo (%1%x%2%).\n"
@@ -9350,7 +9350,7 @@ msgstr "El fitxer no ha estat reconegut com un format admès (codi de sortida: %
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
 #: src/input/r_matroska.cpp:1432
-#: src/input/r_matroska.cpp:2103
+#: src/input/r_matroska.cpp:2107
 msgid "The file will not be processed further."
 msgstr "Aquest fitxer no es processarà més."
 
@@ -10336,7 +10336,7 @@ msgstr "Aquesta pista conté dades AAC/HE-AAC/AAC+ en SBR."
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
 #: src/input/r_matroska.cpp:1432
-#: src/input/r_matroska.cpp:2103
+#: src/input/r_matroska.cpp:2107
 msgid "This usually indicates a damaged file structure."
 msgstr "Això normalment significa una estructura de fitxers malmesa."
 
@@ -10465,7 +10465,7 @@ msgstr "La pista %1% amb l'ID del còdec «%2%» li manca l'element «durada per
 msgid "Track %1%: %2%, codec ID: %3%%4%%5%%6%\n"
 msgstr "La pista %1%: %2%, ID del còdec: %3%%4%%5%%6%\n"
 
-#: src/input/r_qtmp4.cpp:2633
+#: src/input/r_qtmp4.cpp:2651
 #, boost-format
 msgid "Track %1%: AAC found, but decoder config data has length %2%.\n"
 msgstr "Pista %1%: s'ha trobat AAC, però les dades de configuració del descodificador tenen una longitud de %2%.\n"
@@ -10487,7 +10487,7 @@ msgstr "Pista %1%: NAL massa gran. Mida segons el camp de la capçalera: %2%, by
 msgid "Track %1%: Subtitle entry number %2% is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Pista %1%: Li manca la durada a l'entrada de subtítols número %2%. S'assumeix una durada d'1 s.\n"
 
-#: src/input/r_qtmp4.cpp:2636
+#: src/input/r_qtmp4.cpp:2654
 #, boost-format
 msgid "Track %1%: The AAC information could not be parsed.\n"
 msgstr "Pista %1%: La informació AAC no s'ha pogut analitzar.\n"
@@ -10738,7 +10738,7 @@ msgstr "mpeg_version de MPEG no admesa: 0x%|1$02x| en el paquet %2% pel codi de 
 msgid "Unsupported file format"
 msgstr "Format de fitxer no implementat"
 
-#: src/input/r_matroska.cpp:1911
+#: src/input/r_matroska.cpp:1915
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipus de pista no admès per aquesta pista.\n"
 
@@ -10883,7 +10883,7 @@ msgstr "Posició de la crominància vertical: %1%"
 msgid "Vertical chroma subsample: %1%"
 msgstr "Submostra de la crominància vertical: %1%"
 
-#: src/output/p_video.h:45
+#: src/output/p_video_for_windows.h:38
 msgid "VfW compatible video"
 msgstr "Vídeo conforme amb VfW"
 
@@ -11669,6 +11669,10 @@ msgstr "Força 2 bytes"
 msgid "force 4 bytes"
 msgstr "Força 4 bytes"
 
+#: src/output/p_generic_video.h:38
+msgid "generic video"
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/track.cpp:403
 #, no-c-format
 msgid "global tags"
@@ -12407,14 +12411,14 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. %1%\n"
 #: src/info/mkvinfo.cpp:871
 #: src/info/mkvinfo.cpp:1057
 #: src/input/r_matroska.cpp:106
-#: src/input/r_matroska.cpp:2545
+#: src/input/r_matroska.cpp:2549
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:158
 #: src/mkvtoolnix-gui/jobs/job.cpp:241
 #, no-c-format
 msgid "unknown"
 msgstr "Desconegut"
 
-#: src/input/r_matroska.cpp:2529
+#: src/input/r_matroska.cpp:2533
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "Desconegut, format de l'etiqueta 0x%|1$04x|"
