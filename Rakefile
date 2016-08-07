@@ -95,17 +95,17 @@ def setup_globals
   $dependency_tmp_dir      = "#{$dependency_dir}/tmp"
 
   $languages               =  {
-    :applications          => c(:TRANSLATIONS).split(/\s+/),
+    :programs              => c(:TRANSLATIONS).split(/\s+/),
     :manpages              => c(:MANPAGES_TRANSLATIONS).split(/\s+/),
   }
 
   $translations            =  {
-    :applications          =>                         $languages[:applications].collect { |language| "po/#{language}.mo" },
-    :manpages              => !c?(:PO4A_WORKS) ? [] : $languages[:manpages].collect     { |language| $manpages.collect { |manpage| manpage.gsub(/man\//, "man/#{language}/") } }.flatten,
+    :programs              =>                         $languages[:programs].collect { |language| "po/#{language}.mo" },
+    :manpages              => !c?(:PO4A_WORKS) ? [] : $languages[:manpages].collect { |language| $manpages.collect { |manpage| manpage.gsub(/man\//, "man/#{language}/") } }.flatten,
   }
 
   $available_languages     =  {
-    :applications          => FileList[ "#{$top_srcdir }/po/*.po"              ].collect { |name| File.basename name, '.po'        },
+    :programs              => FileList[ "#{$top_srcdir }/po/*.po"              ].collect { |name| File.basename name, '.po'        },
     :manpages              => FileList[ "#{$top_srcdir }/doc/man/po4a/po/*.po" ].collect { |name| File.basename name, '.po'        },
   }
 
@@ -155,7 +155,7 @@ def setup_globals
 end
 
 def setup_overrides
-  [ :applications, :manpages ].each do |type|
+  [ :programs, :manpages ].each do |type|
     value                      = c("AVAILABLE_LANGUAGES_#{type.to_s.upcase}")
     $available_languages[type] = value.split(/\s+/) unless value.empty?
   end
@@ -185,7 +185,7 @@ def define_default_task
   targets += [ "manpages", "translations:manpages" ] if c?(:XSLTPROC_WORKS)
 
   # Build translations for the programs
-  targets << "translations:applications"
+  targets << "translations:programs"
 
   # The Qt translation files: only for Windows
   targets << "translations:qt" if c?(:MINGW) && !c(:LCONVERT).blank?
@@ -463,7 +463,7 @@ EOT
   desc "Verify format strings in translations"
   task "verify-format-strings" do
     languages = (ENV['LANGUAGES'] || '').split(/ +/)
-    languages = $available_languages[:applications] if languages.empty?
+    languages = $available_languages[:programs] if languages.empty?
 
     exit 1 if !verify_format_strings(languages)
   end
@@ -493,7 +493,7 @@ EOT
   desc "Normalize all .po files to a standard format"
   task "normalize-po" => $all_po_files.map { |e| "translations:normalize-po-#{e}" }
 
-  [ :applications, :manpages ].each { |type| task type => $translations[type] }
+  [ :programs, :manpages ].each { |type| task type => $translations[type] }
 
   task :qt => FileList[ "#{$top_srcdir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
 
@@ -508,14 +508,14 @@ EOT
   end
 
   desc "Update all translation files"
-  task :update => [ "translations:update:applications", "translations:update:manpages" ]
+  task :update => [ "translations:update:programs", "translations:update:manpages" ]
 
   namespace :update do
     desc "Update the program's translation files"
-    task :applications => [ "po/mkvtoolnix.pot", ] + $available_languages[:applications].collect { |language| "translations:update:applications:#{language}" }
+    task :programs => [ "po/mkvtoolnix.pot", ] + $available_languages[:programs].collect { |language| "translations:update:programs:#{language}" }
 
-    namespace :applications do
-      $available_languages[:applications].each do |language|
+    namespace :programs do
+      $available_languages[:programs].each do |language|
         task language => "po/mkvtoolnix.pot" do |t|
           po       = "po/#{language}.po"
           tmp_file = "#{po}.new"
@@ -713,7 +713,7 @@ end
 
 # Installation tasks
 desc "Install all applications and support files"
-targets  = [ "install:programs", "install:manpages", "install:translations:manpages", "install:translations:applications" ]
+targets  = [ "install:programs", "install:manpages", "install:translations:manpages", "install:translations:programs" ]
 targets += [ "install:shared" ] if c?(:USE_QT)
 task :install => targets
 
@@ -754,9 +754,9 @@ namespace :install do
   end
 
   namespace :translations do
-    task :applications do
-      install_dir $languages[:applications].collect { |language| "#{c(:localedir)}/#{language}/LC_MESSAGES" }
-      $languages[:applications].each do |language|
+    task :programs do
+      install_dir $languages[:programs].collect { |language| "#{c(:localedir)}/#{language}/LC_MESSAGES" }
+      $languages[:programs].each do |language|
         install_data "#{c(:localedir)}/#{language}/LC_MESSAGES/mkvtoolnix.mo", "po/#{language}.mo"
       end
     end
