@@ -184,7 +184,7 @@ void
 dts_reader_c::identify() {
   auto info = mtx::id::info_c{};
   info.add(mtx::id::audio_channels,           m_dtsheader.get_total_num_audio_channels());
-  info.add(mtx::id::audio_sampling_frequency, m_dtsheader.core_sampling_frequency);
+  info.add(mtx::id::audio_sampling_frequency, m_dtsheader.get_effective_sampling_frequency());
   info.add(mtx::id::audio_bits_per_sample,    std::max(m_dtsheader.source_pcm_resolution, 0));
 
   id_result_container();

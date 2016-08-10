@@ -2878,7 +2878,7 @@ qtmp4_demuxer_c::derive_track_params_from_dts_audio_bitstream() {
     return;
 
   a_channels   = header.get_total_num_audio_channels();
-  a_samplerate = header.core_sampling_frequency;
+  a_samplerate = header.get_effective_sampling_frequency();
   a_bitdepth   = std::max(header.source_pcm_resolution, 0);
 }
 

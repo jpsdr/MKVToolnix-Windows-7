@@ -129,6 +129,7 @@ struct header_t {
 
   // -1 for "invalid"
   unsigned int core_sampling_frequency{};
+  boost::optional<unsigned int> extension_sampling_frequency;
 
   // in bit per second, or -1 == "open", -2 == "variable", -3 == "lossless"
   int transmission_bitrate{};
@@ -232,6 +233,7 @@ public:
   unsigned int get_core_num_audio_channels() const;
   unsigned int get_total_num_audio_channels() const;
   codec_c::specialization_e get_codec_specialization() const;
+  unsigned int get_effective_sampling_frequency() const;
 
   void print() const;
 

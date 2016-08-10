@@ -367,6 +367,14 @@ header_t::get_total_num_audio_channels()
   return get_core_num_audio_channels();
 }
 
+unsigned int
+header_t::get_effective_sampling_frequency()
+  const {
+  if (extension_sampling_frequency && *extension_sampling_frequency)
+    return *extension_sampling_frequency;
+  return core_sampling_frequency;
+}
+
 codec_c::specialization_e
 header_t::get_codec_specialization()
   const {
@@ -591,8 +599,12 @@ header_t::decode_xll_header(bit_reader_c &bc,
   if (asset.xll_sync_present && (bc.get_bits(32) != static_cast<uint32_t>(sync_word_e::xll)))
     return false;
 
-  if (!has_core && !(asset.extension_mask & exss_lbr))
-    core_sampling_frequency = substream_assets[0].max_sample_rate;
+  if (!(asset.extension_mask & exss_lbr)) {
+    if (!has_core)
+      core_sampling_frequency = substream_assets[0].max_sample_rate;
+    else
+      extension_sampling_frequency.reset(substream_assets[0].max_sample_rate);
+  }
 
   return true;
 
