@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2016-07-30 12:16+0200\n"
-"PO-Revision-Date: 2016-07-30 12:52+0000\n"
+"PO-Revision-Date: 2016-08-15 19:37+0200\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -334,10 +334,8 @@ msgstr "<option>--ui-language</option> <parameter>코드</parameter>"
 #: doc/man/mkvinfo.xml:164
 #: doc/man/mkvmerge.xml:2005
 #: doc/man/mkvpropedit.xml:401
-#, fuzzy
-#| msgid "Forces the translations for the language <parameter>code</parameter> to be used (e.g.  '<literal>de_DE</literal>' for the German translations). It is preferable to use the environment variables <varname>LANG</varname>, <varname>LC_MESSAGES</varname> and <varname>LC_ALL</varname> though. Entering '<literal>list</literal>' as the <parameter>code</parameter> will cause &mkvextract; to output a list of available translations."
 msgid "Forces the translations for the language <parameter>code</parameter> to be used (e.g.  '<literal>de_DE</literal>' for the German translations). Entering '<literal>list</literal>' as the <parameter>code</parameter> will cause the program to output a list of available translations."
-msgstr "언어 <parameter>code</parameter>의 번역을 강제로 사용합니다 (예. 독일어 번역에 대해 '<literal>de_DE</literal>'). 하지만 환경 변수 <varname>LANG</varname>, <varname>LC_MESSAGES</varname> 와 <varname>LC_ALL</varname>를 사용하는 것이 바람직합니다. '<literal>list</literal>'를 <parameter>code</parameter>로 입력하면 &mkvextract; 에서 이용 가능한 번역 목록을 출력할 것입니다."
+msgstr "언어 <parameter>코드</parameter>의 번역을 강제로 사용합니다 (예: 강제 사용할 독일어 번역 코드는  '<literal>de_DE</literal>'). '<literal>list</literal>'를 <parameter>코드</parameter>로 입력하면 &mkvextract; 에서 이용 가능한 번역 목록을 출력할 것입니다."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:135
@@ -578,23 +576,23 @@ msgstr "원시 데이터를 컨테이너에 넣지 않고 단순한 파일로 �
 #: doc/man/mkvextract.xml:312
 #: doc/man/mkvextract.xml:435
 msgid "<parameter>TID:outname</parameter>"
-msgstr ""
+msgstr "<parameter>TID:출력이름</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:315
 msgid "Causes extraction of the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
-msgstr ""
+msgstr "소스 파일에 <parameter>TID</parameter> ID의 트랙이 있으면 <parameter>출력이름</parameter> 파일로 추출합니다. 이 옵션은 여러 번 사용할 수 있습니다. 트랙 ID는 &mkvmerge;'s <option>--identify</option> 옵션으로 나오는 것과 같습니다."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:322
 msgid "Each output name should be used only once. The exception are RealAudio and RealVideo tracks. If you use the same name for different tracks then those tracks will be saved in the same file. Example:"
-msgstr ""
+msgstr "각 출력 이름은 한 번만 사용해야 합니다. RealAudio와 RealVideo 트랙은 예외적입니다. 다른 트랙들에 같은 이름을 사용하면 해당 트랙들은 같은 파일에 저장이 될 것입니다. 예:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvextract.xml:326
 #, no-wrap
 msgid "$ mkvextract tracks input.mkv 1:output-two-tracks.rm 2:output-two-tracks.rm"
-msgstr ""
+msgstr "$ mkvextract tracks input.mkv 1:output-two-tracks.rm 2:output-two-tracks.rm"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:333
@@ -604,12 +602,12 @@ msgstr "태그 추출 모드"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:336
 msgid "Syntax: <command>mkvextract <option>tags</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional></command>"
-msgstr ""
+msgstr "Syntax: <command>mkvextract <option>tags</option> <parameter>소스파일명</parameter> <optional><parameter>옵션</parameter></optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:340
 msgid "The extracted tags are written to the console unless the output is redirected (see the section about <link linkend=\"mkvextract.output_redirection\">output redirection</link> for details)."
-msgstr ""
+msgstr "추출한 태그는 그 출력의 방향을 바꾸지 않는 한 콘솔에 기록됩니다 (세부 사항은<link linkend=\"mkvextract.output_redirection\">출력 방향 전환</link>에 관한 부분을 보세요)."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:346
@@ -619,17 +617,17 @@ msgstr "첨부 파일 추출 모드"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:349
 msgid "Syntax: <command>mkvextract <option>attachments</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional> <parameter>AID1:outname1</parameter> <optional><parameter>AID2:outname2</parameter> ...</optional></command>"
-msgstr ""
+msgstr "Syntax: <command>mkvextract <option>attachments</option> <parameter>소스파일명</parameter> <optional><parameter>옵션</parameter></optional> <parameter>AID1:출력이름1</parameter> <optional><parameter>AID2:출력이름2</parameter> ...</optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:354
 msgid "<parameter>AID</parameter>:<parameter>outname</parameter>"
-msgstr ""
+msgstr "<parameter>AID</parameter>:<parameter>출력이름</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:357
 msgid "Causes extraction of the attachment with the ID <parameter>AID</parameter> into the file <parameter>outname</parameter> if such an attachment exists in the source file.  If the <parameter>outname</parameter> is left empty then the name of the attachment inside the source &matroska; file is used instead.  This option can be given multiple times.  The attachment IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
-msgstr ""
+msgstr "소스 파일에 ID <parameter>AID</parameter>의 첨부 파일이 있으면 <parameter>출력이름</parameter> 파일로 추출합니다. <parameter>출력이름</parameter>이 없으면 소스 &matroska; 파일 안의 첨부 파일명을 대신 사용합니다. 이 옵션은 여러 번 사용할 수 있습니다. 첨부 파일 ID는  &mkvmerge;'s <option>--identify</option> 옵션으로 나오는 출력과 같습니다."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvextract.xml:368
@@ -639,12 +637,12 @@ msgstr "챕터 추출 모드"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:371
 msgid "Syntax: <command>mkvextract <option>chapters</option> <parameter>source-filename</parameter> <optional><parameter>options</parameter></optional></command>"
-msgstr ""
+msgstr "Syntax: <command>mkvextract <option>chapters</option> <parameter>소스파일명</parameter> <optional><parameter>옵션</parameter></optional></command>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:376
 msgid "<option>-s</option>, <option>--simple</option>"
-msgstr ""
+msgstr "<option>-s</option>, <option>--simple</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:379
