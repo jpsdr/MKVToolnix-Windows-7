@@ -81,11 +81,11 @@ Matroska(TM)
 .PP
 \fB\-\-ui\-language\fR \fI코드\fR
 .RS 4
-Forces the translations for the language
-\fIcode\fR
-to be used (e\&.g\&. \*(Aqde_DE\*(Aq for the German translations)\&. Entering \*(Aqlist\*(Aq as the
-\fIcode\fR
-will cause the program to output a list of available translations\&.
+언어
+\fI코드\fR의 번역을 강제로 사용합니다 (예: 강제 사용할 독일어 번역 코드는 \*(Aqde_DE\*(Aq)\&. \*(Aqlist\*(Aq를
+\fI코드\fR로 입력하면
+\fBmkvextract\fR(1)
+에서 이용 가능한 번역 목록을 출력할 것입니다\&.
 .RE
 .PP
 \fB\-\-debug\fR \fI토픽\fR
@@ -208,18 +208,18 @@ CodecIDs과
 CodecIDs에서도 동작하지만 그 결과로 나오는 파일은 아마도 사용하지 못할 것입니다\&.
 .RE
 .PP
-\fITID:outname\fR
+\fITID:출력이름\fR
 .RS 4
-Causes extraction of the track with the ID
+소스 파일에
 \fITID\fR
-into the file
-\fIoutname\fR
-if such a track exists in the source file\&. This option can be given multiple times\&. The track IDs are the same as the ones output by
+ID의 트랙이 있으면
+\fI출력이름\fR
+파일로 추출합니다\&. 이 옵션은 여러 번 사용할 수 있습니다\&. 트랙 ID는
 \fBmkvmerge\fR(1)\*(Aqs
 \fB\-\-identify\fR
-option\&.
+옵션으로 나오는 것과 같습니다\&.
 .sp
-Each output name should be used only once\&. The exception are RealAudio and RealVideo tracks\&. If you use the same name for different tracks then those tracks will be saved in the same file\&. Example:
+각 출력 이름은 한 번만 사용해야 합니다\&. RealAudio와 RealVideo 트랙은 예외적입니다\&. 다른 트랙들에 같은 이름을 사용하면 해당 트랙들은 같은 파일에 저장이 될 것입니다\&. 예:
 .sp
 .if n \{\
 .RS 4
@@ -234,35 +234,31 @@ $ mkvextract tracks input\&.mkv 1:output\-two\-tracks\&.rm 2:output\-two\-tracks
 .SS "태그 추출 모드"
 .PP
 Syntax:
-\fBmkvextract \fR\fB\fBtags\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR
+\fBmkvextract \fR\fB\fBtags\fR\fR\fB \fR\fB\fI소스파일명\fR\fR\fB \fR\fB[\fI옵션\fR]\fR
 .PP
-The extracted tags are written to the console unless the output is redirected (see the section about
-output redirection
-for details)\&.
+추출한 태그는 그 출력의 방향을 바꾸지 않는 한 콘솔에 기록됩니다 (세부 사항은출력 방향 전환에 관한 부분을 보세요)\&.
 .SS "첨부 파일 추출 모드"
 .PP
 Syntax:
-\fBmkvextract \fR\fB\fBattachments\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR\fB \fR\fB\fIAID1:outname1\fR\fR\fB \fR\fB[\fIAID2:outname2\fR \&.\&.\&.]\fR
+\fBmkvextract \fR\fB\fBattachments\fR\fR\fB \fR\fB\fI소스파일명\fR\fR\fB \fR\fB[\fI옵션\fR]\fR\fB \fR\fB\fIAID1:출력이름1\fR\fR\fB \fR\fB[\fIAID2:출력이름2\fR \&.\&.\&.]\fR
 .PP
-\fIAID\fR:\fIoutname\fR
+\fIAID\fR:\fI출력이름\fR
 .RS 4
-Causes extraction of the attachment with the ID
-\fIAID\fR
-into the file
-\fIoutname\fR
-if such an attachment exists in the source file\&. If the
-\fIoutname\fR
-is left empty then the name of the attachment inside the source
+소스 파일에 ID
+\fIAID\fR의 첨부 파일이 있으면
+\fI출력이름\fR
+파일로 추출합니다\&.
+\fI출력이름\fR이 없으면 소스
 Matroska(TM)
-file is used instead\&. This option can be given multiple times\&. The attachment IDs are the same as the ones output by
+파일 안의 첨부 파일명을 대신 사용합니다\&. 이 옵션은 여러 번 사용할 수 있습니다\&. 첨부 파일 ID는
 \fBmkvmerge\fR(1)\*(Aqs
 \fB\-\-identify\fR
-option\&.
+옵션으로 나오는 출력과 같습니다\&.
 .RE
 .SS "챕터 추출 모드"
 .PP
 Syntax:
-\fBmkvextract \fR\fB\fBchapters\fR\fR\fB \fR\fB\fIsource\-filename\fR\fR\fB \fR\fB[\fIoptions\fR]\fR
+\fBmkvextract \fR\fB\fBchapters\fR\fR\fB \fR\fB\fI소스파일명\fR\fR\fB \fR\fB[\fI옵션\fR]\fR
 .PP
 \fB\-s\fR, \fB\-\-simple\fR
 .RS 4
@@ -306,7 +302,7 @@ The extracted timecodes are written to the console unless the output is redirect
 output redirection
 for details)\&.
 .PP
-\fITID:outname\fR
+\fITID:출력이름\fR
 .RS 4
 Causes extraction of the timecodes for the track with the ID
 \fITID\fR

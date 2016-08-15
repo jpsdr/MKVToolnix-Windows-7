@@ -1046,16 +1046,16 @@ mkvmerge \-o completo\&.mkv archivo1\&.mkv +archivo2\&.mkv
 .PP
 \fB[\fR \fIarchivo1\fR \fIarchivo2\fR \fB]\fR
 .RS 4
-If multiple file names are contained in a pair of square brackets then the second and all following files will be appended to the first file named within the brackets\&.
+Si varios nombres de archivos est\('an entre corchetes entonces el segundo y los restantes archivos ser\('an a\(~nadidos al primer archivo que est\('e editado entre corchetes\&.
 .sp
-This is an alternative syntax to using \*(Aq+\*(Aq between the file names\&. Therefore the following two commands are equivalent:
+Esta es una sintaxis alternativa a usar \*(Aq+\*(Aq entre los nombres de archivos\&. Por lo tanto, los dos siguientes comandos son equivalentes:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvmerge \-o full\&.mkv file1\&.mkv + file2\&.mkv
-$ mkvmerge \-o full\&.mkv \*(Aq[\*(Aq file1\&.mkv file2\&.mkv \*(Aq]\*(Aq
+$ mkvmerge \-o completo\&.mkv archivo1\&.mkv + archivo2\&.mkv
+$ mkvmerge \-o completo\&.mkv \*(Aq[\*(Aq archivo1\&.mkv archivo2\&.mkv \*(Aq]\*(Aq
 .fi
 .if n \{\
 .RE
@@ -1646,58 +1646,58 @@ Los valores v\('alidos y su significado son:
 .sp
 \fB0\fR: GBR,
 \fB1\fR: BT709,
-\fB2\fR: unspecified,
-\fB3\fR: reserved,
+\fB2\fR: indeterminado,
+\fB3\fR: reservado,
 \fB4\fR: FCC,
 \fB5\fR: BT470BG,
 \fB6\fR: SMPTE 170M,
 \fB7\fR: SMPTE 240M,
 \fB8\fR: YCOCG,
-\fB9\fR: BT2020 non\-constant luminance,
-\fB10\fR: BT2020 constant luminance
+\fB9\fR: BT2020 luminancia no constante,
+\fB10\fR: BT2020 luminancia constante
 .RE
 .PP
 \fB\-\-colour\-bits\-per\-channel\fR \fITID:n\fR
 .RS 4
-Sets the number of coded bits for a colour channel\&. A value of
+Establece el n\('umero de bits codificados para un canal de color\&. Un valor de
 \fB0\fR
-indicates that the number of bits is unspecified\&.
+indica que el n\('umero de bits no se ha especificado\&.
 .RE
 .PP
 \fB\-\-chroma\-subsample\fR \fITID:hori,vert\fR
 .RS 4
-The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally/vertically\&.
+La cantidad de p\('ixeles a eliminar en los canales Cr y Cb por cada pixel no eliminado horizontal/verticalmente\&.
 .sp
-Example: For video with 4:2:0 chroma subsampling, the parameter should be set to
+Ejemplo: Para un video con submuestreo de crominancia 4:2:0, el par\('ametro se debe establecer a
 \fITID\fR:\fB1\fR,\fB1\fR\&.
 .RE
 .PP
 \fB\-\-cb\-subsample\fR \fITID:hori,vert\fR
 .RS 4
-The amount of pixels to remove in the Cb channel for every pixel not removed horizontally/vertically\&. This is additive with
+La cantidad de p\('ixeles a eliminar en el canal Cb por cada pixel no eliminado horizontal/verticalmente\&. Esto se adiciona a la opci\('on
 \fB\-\-chroma\-subsample\fR\&.
 .sp
-Example: For video with 4:2:1 chroma subsampling, the parameter
+Ejemplo: Para un video con submuestreo de crominancia 4:2:1, el par\('ametro
 \fB\-\-chroma\-subsample\fR
-should be set to
+se debe establecer a
 \fITID\fR:\fB1\fR,\fB0\fR
-and Cb\-subsample should be set to
+y el submuestreo de Cb se debe establecer a
 \fITID\fR:\fB1\fR,\fB0\fR\&.
 .RE
 .PP
 \fB\-\-chroma\-siting\fR \fITID:hori,vert\fR
 .RS 4
-Sets how chroma is sited horizontally/vertically (\fB0\fR: unspecified,
-\fB1\fR: top collocated,
-\fB2\fR: half)\&.
+Establece como se situa horizontal/verticalmente la crominancia (\fB0\fR: indeterminado,
+\fB1\fR: arriba,
+\fB2\fR: mitad)\&.
 .RE
 .PP
 \fB\-\-colour\-range\fR \fITID:n\fR
 .RS 4
-Sets the clipping of the color ranges (\fB0\fR: unspecified,
-\fB1\fR: broadcast range,
-\fB2\fR: full range (no clipping),
-\fB3\fR: defined by MatrixCoefficients/TransferCharacteristics)\&.
+Establece los valores de recorte \-clipping\- de los rangos de color (\fB0\fR: indeterminado,
+\fB1\fR: rango de retransmisi\('on,
+\fB2\fR: rango completo (sin recorte),
+\fB3\fR: definido por CoeficientesMatriciales/Caracter\('isticasTransferencia)\&.
 .RE
 .PP
 \fB\-\-colour\-transfer\-characteristics\fR \fITID:n\fR
@@ -1706,19 +1706,19 @@ Las caracter\('isticas de transferencia del video\&.
 .sp
 Los valores v\('alidos y su significado son:
 .sp
-\fB0\fR: reserved,
+\fB0\fR: reservado,
 \fB1\fR: ITU\-R BT\&.709,
-\fB2\fR: unspecified,
-\fB3\fR: reserved,
-\fB4\fR: gamma 2\&.2 curve,
-\fB5\fR: gamma 2\&.8 curve,
+\fB2\fR: indeterminado,
+\fB3\fR: reservado,
+\fB4\fR: curva gamma 2\&.2,
+\fB5\fR: curva gamma 2\&.8,
 \fB6\fR: SMPTE 170M,
 \fB7\fR: SMPTE 240M,
-\fB8\fR: linear,
-\fB9\fR: log,
-\fB10\fR: log sqrt,
+\fB8\fR: lineal,
+\fB9\fR: logar\('itmica,
+\fB10\fR: raiz cuadrada logar\('itmica,
 \fB11\fR: IEC 61966\-2\-4,
-\fB12\fR: ITU\-R BT\&.1361 extended colour gamut,
+\fB12\fR: ITU\-R BT\&.1361 gama de color extendida,
 \fB13\fR: IEC 61966\-2\-1,
 \fB14\fR: ITU\-R BT\&.2020 10 bit,
 \fB15\fR: ITU\-R BT\&.2020 12 bit,
@@ -1733,10 +1733,10 @@ Establece los colores primarios del video\&.
 .sp
 Los valores v\('alidos y su significado son:
 .sp
-\fB0\fR: reserved,
+\fB0\fR: reservado,
 \fB1\fR: ITU\-R BT\&.709,
-\fB2\fR: unspecified,
-\fB3\fR: reserved,
+\fB2\fR: indeterminado,
+\fB3\fR: reservado,
 \fB4\fR: ITU\-R BT\&.470M,
 \fB5\fR: ITU\-R BT\&.470BG,
 \fB6\fR: SMPTE 170M,
@@ -1744,41 +1744,41 @@ Los valores v\('alidos y su significado son:
 \fB8\fR: FILM,
 \fB9\fR: ITU\-R BT\&.2020,
 \fB10\fR: SMPTE ST 428\-1,
-\fB22\fR: JEDEC P22 phosphors
+\fB22\fR: JEDEC P22 f\('osforo
 .RE
 .PP
 \fB\-\-max\-content\-light\fR \fITID:n\fR
 .RS 4
-Sets the maximum brightness of a single pixel (Maximum Content Light Level) in candelas per square meter (cd/m\(S2)\&. The value of
+Establece el brillo m\('aximo de un \('unico pixel (Nivel M\('aximo de Contenido de Luz) en candelas por metro cuadrado (cd/m\(S2)\&. El valor de
 \fIn\fR
-should be a non\-negtive integer\&.
+debe ser un n\('umero entero positivo\&.
 .RE
 .PP
 \fB\-\-max\-frame\-light\fR \fITID:n\fR
 .RS 4
-Sets the maximum brightness of a single full frame (Maximum Frame\-Average Light Level) in candelas per square meter (cd/m\(S2)\&. The value of
+Establece el brillo m\('aximo de un \('unico fotograma (Nivel M\('aximo de Luz del Promedio del Fotograma ) en candelas por metro cuadrado (cd/m\(S2)\&. El valor de
 \fIn\fR
-should be a non\-negtive integer\&.
+debe ser un n\('umero entero positivo\&.
 .RE
 .PP
-\fB\-\-chromaticity\-coordinates\fR \fITID:red\-x,red\-y,green\-x,green\-y,blue\-x,blue\-y\fR
+\fB\-\-chromaticity\-coordinates\fR \fITID:rojoj\-x,rojo\-y,verde\-x,verde\-y,azul\-x,azul\-y\fR
 .RS 4
-Sets the red/green/blue chromaticity coordinates as defined by CIE 1931\&.
+Establece las coordenadas crom\('aticas del color rojo/verde/azul definidas por CIE 1931\&.
 .RE
 .PP
 \fB\-\-white\-colour\-coordinates\fR \fITID:x,y\fR
 .RS 4
-Sets the white colour chromaticity coordinates as defined by CIE 1931\&.
+Establece las coordenadas crom\('aticas del color blanco definidas por CIE 1931\&.
 .RE
 .PP
-\fB\-\-max\-luminance\fR \fITID:float\fR
+\fB\-\-max\-luminance\fR \fITID:decimal\fR
 .RS 4
-Sets the maximum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 9999\&.99\&.
+Establece la luminancia m\('axima en candelas por metro cuadrado (cd/m\(S2)\&. El valor debe ser menor de 9999\&.99\&.
 .RE
 .PP
-\fB\-\-min\-luminance\fR \fITID:float\fR
+\fB\-\-min\-luminance\fR \fITID:decimal\fR
 .RS 4
-Sets the mininum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 999\&.9999\&.
+Establece la luminancia m\('inima en candelas por metro cuadrado (cd/m\(S2)\&. El valor debe ser menor de 999\&.9999\&.
 .RE
 .PP
 \fB\-\-stereo\-mode\fR \fITID:n|palabraclave\fR
@@ -1892,12 +1892,12 @@ genera una representaci\('on JSON en c\('odigo m\('aquina\&. Este formato sigue 
 .RE
 .RE
 .PP
-\fB\-\-probe\-range\-percentage\fR \fIpercentage\fR
+\fB\-\-probe\-range\-percentage\fR \fIporcentaje\fR
 .RS 4
-File types such as MPEG program and transport streams (\&.vob,
-\&.m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file\&. This amount is 0\&.3% of the source file\*(Aqs size or 10 MB, whichever is higher\&.
+Algunos tipos de archivos tales como secuencias de programa MPEG y transporte (\&.vob,
+\&.m2ts), necesitan analizar cierta cantidad de datos para detectar todas las pistas almacenadas en el archivo\&. Esta cantidad es un 0\&.3% del tama\(~no del archivo original o 10 MB, dependiendo cual sea mayor\&.
 .sp
-If tracks are known to be present but not found then the percentage to probe can be changed with this option\&. The minimum of 10 MB is built\-in and cannot be changed\&.
+Si se conocen las pistas presentes en el archivo pero no son encontradas, entonces se puede cambiar el porcentaje de exploraci\('on con esta opci\('on\&. El m\('inimo de 10 MB est\('a definido por defecto y no se puede cambiar\&.
 .RE
 .PP
 \fB\-l\fR, \fB\-\-list\-types\fR
