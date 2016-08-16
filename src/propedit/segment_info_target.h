@@ -24,18 +24,18 @@ public:
 
 public:
   segment_info_target_c();
-  virtual ~segment_info_target_c();
+  virtual ~segment_info_target_c() override;
 
-  virtual void validate();
+  virtual void validate() override;
 
-  virtual void add_change(change_c::change_type_e type, const std::string &spec);
-  virtual void dump_info() const;
+  virtual void add_change(change_c::change_type_e type, const std::string &spec) override;
+  virtual void dump_info() const override;
 
-  virtual bool operator ==(target_c const &cmp) const;
+  virtual bool operator ==(target_c const &cmp) const override;
 
-  virtual bool has_changes() const;
+  virtual bool has_changes() const override;
 
-  virtual void execute();
+  virtual void execute() override;
 };
 
 #endif // MTX_PROPEDIT_SEGMENT_INFO_TARGET_H

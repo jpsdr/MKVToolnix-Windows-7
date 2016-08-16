@@ -36,22 +36,22 @@ public:
 
 public:
   track_target_c(std::string const &spec);
-  virtual ~track_target_c();
+  virtual ~track_target_c() override;
 
-  virtual void validate();
+  virtual void validate() override;
 
-  virtual void add_change(change_c::change_type_e type, const std::string &spec);
+  virtual void add_change(change_c::change_type_e type, const std::string &spec) override;
   virtual void parse_spec(std::string const &spec);
 
-  virtual void set_level1_element(ebml_element_cptr level1_element_cp, ebml_element_cptr track_headers_cp);
-  virtual void dump_info() const;
+  virtual void set_level1_element(ebml_element_cptr level1_element_cp, ebml_element_cptr track_headers_cp) override;
+  virtual void dump_info() const override;
 
-  virtual bool operator ==(target_c const &cmp) const;
+  virtual bool operator ==(target_c const &cmp) const override;
 
-  virtual bool has_changes() const;
+  virtual bool has_changes() const override;
   virtual bool has_add_or_set_change() const;
 
-  virtual void execute();
+  virtual void execute() override;
 
   virtual void merge_changes(track_target_c &other);
 

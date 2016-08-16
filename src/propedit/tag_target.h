@@ -48,18 +48,18 @@ public:
 public:
   tag_target_c();
   tag_target_c(tag_operation_mode_e operation_mode);
-  virtual ~tag_target_c();
+  virtual ~tag_target_c() override;
 
-  virtual void validate();
+  virtual void validate() override;
 
-  virtual bool operator ==(target_c const &cmp) const;
+  virtual bool operator ==(target_c const &cmp) const override;
   virtual void parse_tags_spec(const std::string &spec);
-  virtual void dump_info() const;
+  virtual void dump_info() const override;
 
-  virtual bool has_changes() const;
+  virtual bool has_changes() const override;
   virtual bool has_content_been_modified() const override;
 
-  virtual void execute();
+  virtual void execute() override;
 
 protected:
   virtual void add_or_replace_global_tags(KaxTags *tags);

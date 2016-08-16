@@ -83,20 +83,20 @@ protected:
 
 public:
   attachment_target_c();
-  virtual ~attachment_target_c();
+  virtual ~attachment_target_c() override;
 
   virtual void set_id_manager(attachment_id_manager_cptr const &id_manager);
 
-  virtual void validate();
+  virtual void validate() override;
 
-  virtual bool operator ==(target_c const &cmp) const;
+  virtual bool operator ==(target_c const &cmp) const override;
 
   virtual void parse_spec(command_e command, const std::string &spec, options_t const &options);
-  virtual void dump_info() const;
+  virtual void dump_info() const override;
 
-  virtual bool has_changes() const;
+  virtual bool has_changes() const override;
 
-  virtual void execute();
+  virtual void execute() override;
 
 protected:
   virtual void execute_add();

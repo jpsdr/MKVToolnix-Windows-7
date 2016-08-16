@@ -24,18 +24,18 @@ protected:
 
 public:
   chapter_target_c();
-  virtual ~chapter_target_c();
+  virtual ~chapter_target_c() override;
 
-  virtual void validate();
+  virtual void validate() override;
 
-  virtual bool operator ==(target_c const &cmp) const;
+  virtual bool operator ==(target_c const &cmp) const override;
 
   virtual void parse_chapter_spec(const std::string &spec);
-  virtual void dump_info() const;
+  virtual void dump_info() const override;
 
-  virtual bool has_changes() const;
+  virtual bool has_changes() const override;
 
-  virtual void execute();
+  virtual void execute() override;
 };
 
 #endif // MTX_PROPEDIT_CHAPTER_TARGET_H
