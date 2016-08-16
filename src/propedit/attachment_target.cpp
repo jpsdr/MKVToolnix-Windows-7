@@ -29,6 +29,7 @@ attachment_target_c::attachment_target_c()
   , m_command{ac_add}
   , m_selector_type{st_id}
   , m_selector_num_arg{}
+  , m_attachments_modified{}
 {
 }
 
@@ -96,6 +97,12 @@ bool
 attachment_target_c::has_changes()
   const {
   return true;
+}
+
+bool
+attachment_target_c::has_content_been_modified()
+  const {
+  return m_attachments_modified;
 }
 
 void
@@ -184,6 +191,8 @@ attachment_target_c::execute_add() {
                                                         new KaxFileData,                                         m_file_content);
 
   m_level1_element->PushElement(*att);
+
+  m_attachments_modified = true;
 }
 
 void
@@ -192,6 +201,9 @@ attachment_target_c::execute_delete() {
 
   if (!deleted_something)
     mxwarn(boost::format(Y("No attachment matched the spec '%1%'.\n")) % m_spec);
+
+  else
+    m_attachments_modified = true;
 }
 
 void
@@ -200,6 +212,9 @@ attachment_target_c::execute_replace() {
 
   if (!replaced_something)
     mxwarn(boost::format(Y("No attachment matched the spec '%1%'.\n")) % m_spec);
+
+  else
+    m_attachments_modified = true;
 }
 
 bool

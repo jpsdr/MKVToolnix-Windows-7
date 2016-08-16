@@ -80,6 +80,7 @@ protected:
   std::string m_selector_string_arg;
   memory_cptr m_file_content;
   attachment_id_manager_cptr m_id_manager;
+  bool m_attachments_modified;
 
 public:
   attachment_target_c();
@@ -95,6 +96,7 @@ public:
   virtual void dump_info() const override;
 
   virtual bool has_changes() const override;
+  virtual bool has_content_been_modified() const override;
 
   virtual void execute() override;
 
