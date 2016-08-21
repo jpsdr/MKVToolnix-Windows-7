@@ -4,6 +4,7 @@
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 #include <QApplication>
@@ -91,9 +92,11 @@ PlaylistScanner::scanForPlaylists(QFileInfoList const &otherFiles)
     if (progress.wasCanceled())
       return QList<SourceFilePtr>{};
 
-    Util::FileIdentifier identifier{m_parent, otherFile.filePath()};
-    if (!identifier.identify())
+    Util::FileIdentifier identifier{otherFile.filePath()};
+    if (!identifier.identify()) {
+      Util::MessageBox::critical(m_parent)->title(identifier.errorTitle()).text(identifier.errorText()).exec();
       continue;
+    }
 
     auto file = identifier.file();
     if (file->isPlaylist() && (file->m_playlistDuration >= (Util::Settings::get().m_minimumPlaylistDuration * 1000000000ull)))

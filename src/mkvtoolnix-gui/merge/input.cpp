@@ -1082,9 +1082,11 @@ Tab::addOrAppendFiles(bool append,
 
   QList<SourceFilePtr> identifiedFiles;
   for (auto &fileName : toIdentify) {
-    Util::FileIdentifier identifier{ this, fileName };
+    Util::FileIdentifier identifier{fileName};
     if (identifier.identify())
       identifiedFiles << identifier.file();
+    else
+      Util::MessageBox::critical(this)->title(identifier.errorTitle()).text(identifier.errorText()).exec();
   }
 
   if (!append)

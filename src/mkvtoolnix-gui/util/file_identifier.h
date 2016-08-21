@@ -8,8 +8,6 @@
 
 #include "mkvtoolnix-gui/merge/source_file.h"
 
-class QWidget;
-
 namespace mtx { namespace gui { namespace Util {
 
 class FileIdentifierPrivate;
@@ -21,10 +19,10 @@ protected:
 
   QScopedPointer<FileIdentifierPrivate> const d_ptr;
 
-  explicit FileIdentifier(FileIdentifierPrivate &d, QWidget *parent);
+  explicit FileIdentifier(FileIdentifierPrivate &d);
 
 public:
-  FileIdentifier(QWidget *parent = nullptr, QString const &fileName = QString{});
+  FileIdentifier(QString const &fileName = QString{});
   virtual ~FileIdentifier();
 
   virtual bool identify();
@@ -37,6 +35,9 @@ public:
 
   virtual mtx::gui::Merge::SourceFilePtr const &file() const;
 
+  virtual QString const &errorTitle() const;
+  virtual QString const &errorText() const;
+
 public:
   static void addProbeRangePercentageArg(QStringList &args, double probeRangePercentage);
 
@@ -48,6 +49,8 @@ protected:
   virtual void parseGlobalTags(QVariantMap const &obj);
   virtual void parseTrackTags(QVariantMap const &obj);
   virtual void parseTrack(QVariantMap const &obj);
+
+  virtual void setError(QString const &errorTitle, QString const &errorText);
 };
 
 }}}
