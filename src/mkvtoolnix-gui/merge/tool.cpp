@@ -82,7 +82,7 @@ void
 Tool::enableMenuActions() {
   auto mwUi   = MainWindow::getUi();
   auto tab    = currentTab();
-  auto hasTab = !!tab;
+  auto hasTab = tab && tab->isEnabled();
 
   mwUi->actionMergeSave->setEnabled(hasTab);
   mwUi->actionMergeSaveAs->setEnabled(hasTab);
@@ -91,8 +91,8 @@ Tool::enableMenuActions() {
   mwUi->actionMergeStartMuxing->setEnabled(hasTab);
   mwUi->actionMergeAddToJobQueue->setEnabled(hasTab);
   mwUi->actionMergeShowMkvmergeCommandLine->setEnabled(hasTab);
-  mwUi->actionMergeCopyFirstFileNameToTitle->setEnabled(tab && tab->hasSourceFiles());
-  mwUi->actionMergeCopyOutputFileNameToTitle->setEnabled(tab && tab->hasDestinationFileName());
+  mwUi->actionMergeCopyFirstFileNameToTitle->setEnabled(hasTab && tab->hasSourceFiles());
+  mwUi->actionMergeCopyOutputFileNameToTitle->setEnabled(hasTab && tab->hasDestinationFileName());
 }
 
 void
@@ -281,14 +281,14 @@ Tool::showCommandLine() {
 void
 Tool::copyFirstFileNameToTitle() {
   auto tab = currentTab();
-  if (tab)
+  if (tab && tab->isEnabled())
     tab->onCopyFirstFileNameToTitle();
 }
 
 void
 Tool::copyOutputFileNameToTitle() {
   auto tab = currentTab();
-  if (tab)
+  if (tab && tab->isEnabled())
     tab->onCopyOutputFileNameToTitle();
 }
 
