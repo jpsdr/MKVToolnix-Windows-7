@@ -1819,7 +1819,7 @@ append_track(packetizer_t &ptzr,
   else if (   (ptzr.packetizer->get_track_type() == track_subtitle)
            || (src_file.reader->m_chapters)) {
     if (!src_file.reader->m_ptzr_first_packet)
-      ptzr.status = ptzr.packetizer->read();
+      ptzr.status = ptzr.packetizer->read(false);
 
     if (src_file.reader->m_ptzr_first_packet) {
       auto cmp_amap = brng::find_if(g_append_mapping, [&amap, &src_file](append_spec_t const &m) {
@@ -1916,6 +1916,31 @@ establish_deferred_connections(filelist_t &file) {
   // \todo Select a new file that the subs will defer to.
 }
 
+static bool
+force_pull_packetizers_of_fully_held_files() {
+  std::unordered_map<generic_reader_c *, bool> fully_held_files;
+
+  for (auto &ptzr : g_packetizers) {
+    auto reader = ptzr.packetizer->m_reader;
+    auto pos    = fully_held_files.find(reader);
+
+    if (pos == fully_held_files.end())
+      fully_held_files[reader] = true;
+
+    if (FILE_STATUS_HOLDING != ptzr.status)
+      fully_held_files[reader] = false;
+  }
+
+  auto force_pulled = false;
+  for (auto &ptzr : g_packetizers)
+    if (fully_held_files[ptzr.packetizer->m_reader] && !ptzr.packetizer->packet_available()) {
+      ptzr.packetizer->read(true);
+      force_pulled = true;
+    }
+
+  return force_pulled;
+}
+
 static void
 pull_packetizers_for_packets() {
   for (auto &ptzr : g_packetizers) {
@@ -1927,7 +1952,7 @@ pull_packetizers_for_packets() {
     while (   !ptzr.pack
            && (FILE_STATUS_MOREDATA == ptzr.status)
            && !ptzr.packetizer->packet_available())
-      ptzr.status = ptzr.packetizer->read();
+      ptzr.status = ptzr.packetizer->read(false);
 
     if (   (FILE_STATUS_MOREDATA != ptzr.status)
            && (FILE_STATUS_MOREDATA == ptzr.old_status))
@@ -1997,6 +2022,7 @@ main_loop() {
     // Step 1: Make sure a packet is available for each output
     // as long we haven't already processed the last one.
     pull_packetizers_for_packets();
+    auto force_pulled = force_pull_packetizers_of_fully_held_files();
 
     // Step 2: Pick the packet with the lowest timecode and
     // stuff it into the Matroska file.
@@ -2025,7 +2051,7 @@ main_loop() {
       if (1 <= verbose)
         display_progress();
 
-    } else if (!appended_a_track) // exit if there are no more packets
+    } else if (!appended_a_track && !force_pulled) // exit if there are no more packets
       break;
   }
 

@@ -103,7 +103,7 @@ public:
 
   virtual bool contains_gap();
 
-  virtual file_status_e read();
+  virtual file_status_e read(bool force);
 
   inline void add_packet(packet_t *packet) {
     add_packet(packet_cptr(packet));
