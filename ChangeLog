@@ -1,5 +1,9 @@
 2016-09-06  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: AAC reader: fixed mkvmerge throwing an
+        uncaught exception due to the sample rate being 0. Fixes a test
+        case of #1780.
+
         * mkvmerge: bug fix: MP4 reader: fixed an invalid memory access
         (beyond the end of allocated space). Fixes several test cases of
         #1780.

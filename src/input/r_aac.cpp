@@ -64,10 +64,18 @@ aac_reader_c::read_headers() {
     m_parser.copy_data(false);
     m_parser.add_bytes(m_chunk->get_buffer(), init_read_len);
 
-    if (!m_parser.frames_available() || !m_parser.headers_parsed())
+    if (!m_parser.headers_parsed())
       throw mtx::input::header_parsing_x();
 
-    m_aacheader          = m_parser.get_frame().m_header;
+    while (m_parser.frames_available()) {
+      m_aacheader = m_parser.get_frame().m_header;
+      if (m_aacheader.sample_rate > 0)
+        break;
+    }
+
+    if (!m_aacheader.sample_rate)
+      throw mtx::input::header_parsing_x();
+
     m_parser             = aac::parser_c{};
 
     m_ti.m_id            = 0;       // ID for this track.
