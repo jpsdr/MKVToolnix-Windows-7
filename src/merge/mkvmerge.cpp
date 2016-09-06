@@ -2918,6 +2918,8 @@ setup(int argc,
 int
 main(int argc,
      char **argv) {
+  mxrun_before_exit(cleanup);
+
   auto args = setup(argc, argv);
 
   parse_args(args);

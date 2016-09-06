@@ -2077,6 +2077,8 @@ destroy_readers() {
 */
 void
 cleanup() {
+  s_out.reset();
+
   g_cluster_helper.reset();
 
   destroy_readers();
@@ -2089,4 +2091,24 @@ cleanup() {
   g_kax_info_chap.reset();
   g_forced_seguids.clear();
   g_kax_tracks.reset();
+  g_kax_segment.reset();
+  g_kax_sh_main.reset();
+  g_kax_sh_cues.reset();
+  s_kax_infos.reset();
+  s_head.reset();
+
+  s_chapters_in_this_file.reset();
+  s_kax_sh_void.reset();
+  s_kax_chapters_void.reset();
+  s_void_after_track_headers.reset();
+
+  g_packetizers.clear();
+  g_files.clear();
+  g_attachments.clear();
+  g_track_order.clear();
+  g_append_mapping.clear();
+
+  g_seguid_link_previous.reset();
+  g_seguid_link_next.reset();
+  g_forced_seguids.clear();
 }

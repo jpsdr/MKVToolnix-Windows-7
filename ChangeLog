@@ -1,3 +1,9 @@
+2016-09-06  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: fixed an invalid memory access (use after
+        free) during global destruction phase. Fixes several test cases of
+        #1780.
+
 2016-09-02  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge: bug fix: using very large --sync values (several

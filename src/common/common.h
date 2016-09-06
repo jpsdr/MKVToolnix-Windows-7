@@ -132,6 +132,7 @@ using namespace libmatroska;
 
 #define TIMECODE_SCALE 1000000
 
+void mxrun_before_exit(std::function<void()> function);
 void mxexit(int code = -1);
 void set_process_priority(int priority);
 

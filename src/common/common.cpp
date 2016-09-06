@@ -98,8 +98,18 @@ mtx_common_cleanup() {
   matroska_done();
 }
 
+static std::vector<std::function<void()> > s_to_run_before_exit;
+
+void
+mxrun_before_exit(std::function<void()> function) {
+  s_to_run_before_exit.push_back(function);
+}
+
 void
 mxexit(int code) {
+  for (auto const &function : s_to_run_before_exit)
+    function();
+
   mtx_common_cleanup();
 
   if (code != -1)
