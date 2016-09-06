@@ -713,6 +713,11 @@ short_term_ref_pic_set_copy(bit_reader_c &r,
 
     delta_rps = (1 - cur_st_rp_set->delta_rps_sign*2) * cur_st_rp_set->delta_idx;
 
+    // num_pics is used for indexing delta_poc[], user[] and ref_id[],
+    // each of which only has 17 entries.
+    if ((0 > cur_st_rp_set->num_pics) || (16 < cur_st_rp_set->num_pics))
+      throw false;
+
     for (i = 0; i <= ref_st_rp_set->num_pics; i++) {
       int ref_id = w.copy_bits(1, r); // used_by_curr_pic_flag
       if (ref_id == 0) {
@@ -770,6 +775,15 @@ short_term_ref_pic_set_copy(bit_reader_c &r,
 
     cur_st_rp_set->num_negative_pics = w.copy_unsigned_golomb(r);  // num_negative_pics
     cur_st_rp_set->num_positive_pics = w.copy_unsigned_golomb(r);  // num_positive_pics
+
+    // num_positive_pics and num_negative_pics are used for indexing
+    // delta_poc[], user[] and ref_id[]. The second loop is counting
+    // from num_negative_pics to num_pics; therefore the former must
+    // not be bigger than the latter.
+    if (    (cur_st_rp_set->num_positive_pics < 0) || (cur_st_rp_set->num_positive_pics > 16)
+         || (cur_st_rp_set->num_negative_pics < 0) || (cur_st_rp_set->num_negative_pics > 16)
+         || ((cur_st_rp_set->num_positive_pics + cur_st_rp_set->num_negative_pics) > 16))
+      throw false;
 
     for (i = 0; i < cur_st_rp_set->num_negative_pics; i++) {
       int code = w.copy_unsigned_golomb(r); // delta_poc_s0_minus1
