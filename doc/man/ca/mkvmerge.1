@@ -181,7 +181,7 @@ requereix que hi hagi una pista de v\('ideo o d\*(Aq\(`audio present per tal de 
 .sp -1
 .IP \(bu 2.3
 .\}
-\(Fointerval:\fItemps\-especificat\fR\(Fc \(en Aquesta mode crear\(`a un cap\('itol a intervals fixos donats per
+\(Fointerval:\fItemps\-especificat\fR\(Fc \(en Aquest mode crear\(`a un cap\('itol a intervals fixos donats per
 \fItemps\-especificat\fR\&. El format segueix la forma
 \fIHH:MM:SS\&.nnnnnnnnn\fR
 o com un n\('umero seguit per una de les unitats \(Fos\(Fc, \(Foms\(Fc o \(Fous\(Fc\&.
@@ -385,7 +385,7 @@ ser\(`a substitu\(:it pel n\('umero de la pista actual afegint\-li un zero a l\*
 .PP
 \fB\-\-chapters\fR \fInom_fitxer\fR
 .RS 4
-Llegeix la informaci\('o dels cap\('itol des del
+Llegeix la informaci\('o del cap\('itol des del
 \fInom_fitxer\fR\&. Per a m\('es detalls, vegeu m\('es endavant la secci\('o sobre
 els cap\('itols\&.
 .RE
@@ -492,7 +492,7 @@ o el valor especial
 Normalment, el
 \fBmkvmerge\fR(1)
 emprar\(`a el valor
-\fB1000000\fR, el qual vol dir que els codis de temps i durades tindran una precisi\('o d\*(Aq1ms\&. Pels fitxers que no continguin una pista de v\('ideo per\(`o s\('i almenys una d\*(Aq\(`audio, el
+\fB1000000\fR, el qual vol dir que els codis de temps i durades tindran una precisi\('o d\*(Aq1 ms\&. Pels fitxers que no continguin una pista de v\('ideo per\(`o s\('i almenys una d\*(Aq\(`audio, el
 \fBmkvmerge\fR(1)
 triar\(`a autom\(`aticament un factor d\*(Aqescala pels codis de temps, de manera tots els codis de temps i durades tindran una precisi\('o d\*(Aquna mostra d\*(Aq\(`audio\&. Aix\(`o causar\(`a una major sobrec\(`arrega per\(`o permetr\(`a que la cerca i extracci\('o siguin m\('es precises\&.
 .sp
@@ -608,7 +608,7 @@ El prefix \(Fotimecodes:\(Fc no es pot ometre\&.
 .sp -1
 .IP "  4." 4.2
 .\}
-Mant\('e les parts especifiques pels intervals de codis de temps especificats mentre que les altres seran descartades\&.
+Mant\('e les parts espec\('ifiques pels intervals de codis de temps especificats mentre que les altres seran descartades\&.
 .sp
 Sintaxi:
 \fB\-\-split\fR
@@ -731,7 +731,7 @@ continuar\(`a amb la sortida dels fotogrames fins al final per\(`o excloent el s
 .sp -1
 .IP "  5." 4.2
 .\}
-Mant\('e les parts especifiques pels intervals del n\('umero de fotograma/camp especificats mentre que les altres seran descartades\&.
+Mant\('e les parts espec\('ifiques pels intervals del n\('umero de fotograma/camp especificats mentre que les altres seran descartades\&.
 .sp
 Sintaxi:
 \fB\-\-split\fR
@@ -936,7 +936,7 @@ Exemple:
 Els par\(`ametres
 \fIA\fR,
 \fIB\fR,
-\fIC\fR, etc\&. hauran de ser tots sencers positius\&. La numeraci\('o comen\(,ca per l\*(Aq1\&. La llista de cap\('itols estar\(`a separada per comes\&. La divisi\('o succeir\(`a just abans del primer fotograma clau on el codi de temps sigui igual o major que el codi de temps d\*(Aqinici per als cap\('itols dels n\('umeros llistats\&. Un cap\('itol que comen\(,ca als 0s mai es tindr\(`a en compte per a la divisi\('o i ser\(`a om\(`es silenciosament\&.
+\fIC\fR, etc\&. hauran de ser tots sencers positius\&. La numeraci\('o comen\(,ca per l\*(Aq1\&. La llista de cap\('itols estar\(`a separada per comes\&. La divisi\('o succeir\(`a just abans del primer fotograma clau on el codi de temps sigui igual o major que el codi de temps d\*(Aqinici per als cap\('itols dels n\('umeros llistats\&. Un cap\('itol que comen\(,ca al 0 s mai es tindr\(`a en compte per a la divisi\('o i ser\(`a om\(`es silenciosament\&.
 .sp
 La paraula clau \(Foall\(Fc es pot emprar en lloc d\*(Aquna llista manual de tots els n\('umeros de cap\('itols\&.
 .sp
@@ -995,7 +995,7 @@ Determina com es calcularan els codis de temps en annexar els fitxers\&. El par\
 \fImode\fR
 pot tenir dos valors: \(Fofile\(Fc (fitxer) que \('es l\*(Aqopci\('o per omissi\('o i \(Fotrack\(Fc (pista)\&.
 .sp
-Quan el mkvmerge annexa una pista (anomenada \(Fopista2_1\(Fc d\*(Aqara en endavant) des d\*(Aqun segon fitxer (anomenat \(Fofitxer_2\(Fc) a una pista (anomenada \(Fopista1_1\(Fc) des del primer fitxer (anomenat \(Fofitxer_1\(Fc) llavors compensar\(`a una quantitat en tots els codis de temps per a la \(Fopista2_1\(Fc\&. En el mode \(Fofile\(Fc aquesta quantitat ser\(`a el major codi de temps trobat en el \(Fofitxer_1\(Fc, fins i tot si aquest codi de temps provingu\('es d\*(Aquna pista diferent de \(Fopista1_1\(Fc\&. En el mode \(Fotrack\(Fc, la compensaci\('o ser\(`a el major codi de temps de la \(Fopista1_1\(Fc\&.
+Quan el mkvmerge annexa una pista (anomenada \(Fopista2_1\(Fc d\*(Aqara endavant) des d\*(Aqun segon fitxer (anomenat \(Fofitxer_2\(Fc) a una pista (anomenada \(Fopista1_1\(Fc) des del primer fitxer (anomenat \(Fofitxer_1\(Fc) llavors compensar\(`a una quantitat en tots els codis de temps per a la \(Fopista2_1\(Fc\&. En el mode \(Fofile\(Fc aquesta quantitat ser\(`a el major codi de temps trobat en el \(Fofitxer_1\(Fc, fins i tot si aquest codi de temps provingu\('es d\*(Aquna pista diferent de \(Fopista1_1\(Fc\&. En el mode \(Fotrack\(Fc, la compensaci\('o ser\(`a el major codi de temps de la \(Fopista1_1\(Fc\&.
 .sp
 Malauradament, el
 \fBmkvmerge\fR(1)
@@ -1823,7 +1823,7 @@ json\&.
 .\}
 El format
 text
-\('es curt i llegible\&. Consisteix en una l\('inia per a cada element trobat (contenidor, pistes, adjunts, etc\&.)
+\('es curt i llegible\&. Consisteix en una l\('inia per a cada element trobat (contenidor, pistes, adjunts, etc\&.)\&.
 .sp
 Aquest format no est\(`a destinat a ser analitzat\&. La sortida ser\(`a tradu\(:ida a l\*(Aqidioma que empra el
 \fBmkvmerge\fR(1)
@@ -1890,7 +1890,7 @@ Llista tots els idiomes i el seu codi ISO639\-2 que es poden emprar amb l\*(Aqop
 .PP
 \fB\-\-priority\fR \fIprioritat\fR
 .RS 4
-Estableix la prioritat del proc\('es amb que s\*(Aqexecuta el
+Estableix la prioritat del proc\('es amb qu\(`e s\*(Aqexecuta el
 \fBmkvmerge\fR(1)\&. Els valors v\(`alids s\('on \(Folowest\(Fc (Molt baixa), \(Folower\(Fc (Baixa), \(Fonormal\(Fc (Normal), \(Fohigher\(Fc (Alta) i \(Fohighest\(Fc (Molt alta)\&. Si no s\*(Aqindica res, llavors s\*(Aqemprar\(`a \(Fonormal\(Fc\&. En sistemes com Unix, el
 \fBmkvmerge\fR(1)
 emprar\(`a la funci\('o
@@ -1919,7 +1919,7 @@ Estableix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. 
 .RS 4
 Escriu tots els missatges al
 \fInom_fitxer\fR
-en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redirecci\('o de la sortida, hi ha casos en que cal aquesta opci\('o: quan el terminal torna interpretar la sortida abans d\*(Aqescriure\-la a un fitxer\&. Es respectar\(`a el joc de car\(`acters establert amb
+en lloc de a la consola\&. Si b\('e aix\(`o es pot fer f\(`acilment amb la redirecci\('o de la sortida, hi ha casos en qu\(`e cal aquesta opci\('o: quan el terminal torna a interpretar la sortida abans d\*(Aqescriure\-la a un fitxer\&. Es respectar\(`a el joc de car\(`acters establert amb
 \fB\-\-output\-charset\fR\&.
 .RE
 .PP
@@ -2027,7 +2027,7 @@ L\*(Aqordre de les opcions a la l\('inia d\*(Aqordres \('es important\&. Si us p
 .RE
 .SH "L\*(AQORDRE DE LES OPCIONS"
 .PP
-L\*(Aqordre en el que s\*(Aqespecifiquen les opcions \('es important per a algunes opcions\&. Les opcions es divideixen en dues categories:
+L\*(Aqordre en el qual s\*(Aqespecifiquen les opcions \('es important per a algunes opcions\&. Les opcions es divideixen en dues categories:
 .sp
 .RS 4
 .ie n \{\
@@ -2442,7 +2442,7 @@ WAV: A l\*(Aq\('unica \(Fopista\(Fc en aquest fitxer se li assigna l\*(AqID 0\&.
 .sp -1
 .IP \(bu 2.3
 .\}
-La majoria de fitxers: Els ID de les pistes s\('on assignats en l\*(Aqordre en el qu\(`e es troben les pistes, comen\(,cant des del n\('umero 0\&.
+La majoria de fitxers: Els ID de les pistes s\('on assignats en l\*(Aqordre en el qual es troben les pistes, comen\(,cant des del n\('umero 0\&.
 .RE
 .PP
 L\*(AqID de pista especial \(Fo\fB\-1\fR\(Fc \('es un comod\('i i aplica l\*(Aqopci\('o indicada a totes les pistes que es llegeixen des d\*(Aqun fitxer d\*(Aqentrada\&.
@@ -2603,7 +2603,7 @@ mkvinfo fitxer\&.mkv > informaci\('o\&.txt\&.
 .PP
 Un fitxer d\*(Aqopcions \('es un fitxer des d\*(Aqon el
 \fBmkvmerge\fR(1)
-pot llegir arguments addicionals de la l\('inia d\*(Aqordres\&. Aix\(`o es pot emprar per eludir certes limitacions de l\*(Aqinterpret d\*(Aqordres (shell) o del sistema operatiu, com una longitud limitada de la l\('inia d\*(Aqordres quan s\*(Aqexecuten programes externs\&.
+pot llegir arguments addicionals de la l\('inia d\*(Aqordres\&. Aix\(`o es pot emprar per eludir certes limitacions de l\*(Aqint\(`erpret d\*(Aqordres (shell) o del sistema operatiu, com una longitud limitada de la l\('inia d\*(Aqordres quan s\*(Aqexecuten programes externs\&.
 .PP
 Hi ha diverses regles relatives als fitxers d\*(Aqopcions\&. Les l\('inies que tinguin com a primer car\(`acter un coixinet (#) seran tractades com a comentaris i ignorades\&. Els espais en blanc al comen\(,cament i final de la l\('inia seran descartats\&. Cada l\('inia haur\(`a de contenir exactament una opci\('o\&.
 .PP
@@ -2981,7 +2981,7 @@ Chapters (domina)
 .PP
 Quan es divideixen els fitxers, el
 \fBmkvmerge\fR(1)
-tamb\('e ajustar\(`a correctament els cap\('itols\&. Aix\(`o vol dir que cada fitxer nom\('es inclour\(`a les entrades dels cap\('itol que se li apliquin, i que es compensaran els codis de temps per a que coincideixin amb el nou codi de temps de cada fitxer de sortida\&.
+tamb\('e ajustar\(`a correctament els cap\('itols\&. Aix\(`o vol dir que cada fitxer nom\('es inclour\(`a les entrades dels cap\('itols que se li apliquin, i que es compensaran els codis de temps per a que coincideixin amb el nou codi de temps de cada fitxer de sortida\&.
 .PP
 El
 \fBmkvmerge\fR(1)
@@ -3036,7 +3036,7 @@ Matroska(TM)\&. Per tant, \('es complicat saber quins UID es van a emprar al fit
 .PP
 El
 \fBmkvmerge\fR(1)
-t\('e dues opcions amb les que es poden afegir etiquetes als fitxers
+t\('e dues opcions amb les quals es poden afegir etiquetes als fitxers
 Matroska(TM): Les opcions
 \fB\-\-global\-tags\fR
 i
