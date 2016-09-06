@@ -703,6 +703,9 @@ short_term_ref_pic_set_copy(bit_reader_c &r,
     cur_st_rp_set->delta_idx = code + 1;
     ref_idx = idxRps - 1 - code;
 
+    if (ref_idx >= 64)
+      throw false;
+
     ref_st_rp_set = short_term_ref_pic_sets + ref_idx;
 
     cur_st_rp_set->delta_rps_sign = w.copy_bits(1, r);  // delta_rps_sign

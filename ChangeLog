@@ -1,5 +1,9 @@
 2016-09-06  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: HEVC parser: fixed an invalid memory access
+        (beyond the end of allocated space). Fixes several test cases of
+        #1780.
+
         * mkvmerge: bug fix: fixed an invalid memory access (use after
         free) during global destruction phase. Fixes several test cases of
         #1780.
