@@ -56,6 +56,31 @@ using namespace libmatroska;
 
 #define MAX_INTERLEAVING_BADNESS 0.4
 
+namespace mtx {
+
+class atom_chunk_size_x: public exception {
+private:
+  std::size_t m_size, m_pos;
+
+public:
+  atom_chunk_size_x(std::size_t size, std::size_t pos)
+    : mtx::exception()
+    , m_size{size}
+    , m_pos{pos}
+  {
+  }
+
+  virtual const char *what() const throw() {
+    return "invalid atom chunk size";
+  }
+
+  virtual std::string error() const throw() {
+    return (boost::format("invalid atom chunk size %1% at %2%") % m_size % m_pos).str();
+  }
+};
+
+}
+
 static std::string
 space(int num) {
   return std::string(num, ' ');
@@ -82,7 +107,7 @@ read_qtmp4_atom(mm_io_c *read_from,
     if (exit_on_error)
       mxerror(boost::format(Y("Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n")) % a.size % a.pos);
     else
-      throw false;
+      throw mtx::atom_chunk_size_x{a.size, a.pos};
   }
 
   return a;
@@ -208,6 +233,8 @@ qtmp4_reader_c::resync_to_top_level_atom(uint64_t start_pos) {
 
   } catch (mtx::mm_io::exception &ex) {
     mxdebug_if(m_debug_resync, boost::format("I/O exception during resync: %1%\n") % ex.what());
+  } catch (mtx::atom_chunk_size_x &ex) {
+    mxdebug_if(m_debug_resync, boost::format("Atom exception during resync: %1%\n") % ex.error());
   }
 
   return false;

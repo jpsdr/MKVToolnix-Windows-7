@@ -1,5 +1,9 @@
 2016-09-06  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: MP4 reader: an error message will be printed
+        instead of an uncaught exception when an invalid atom chunk size
+        is encountered during resync. Fixes a test case of #1780.
+
         * mkvmerge: bug fix: AAC reader: fixed mkvmerge throwing an
         uncaught exception due to the sample rate being 0. Fixes a test
         case of #1780.
