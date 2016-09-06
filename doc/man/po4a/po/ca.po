@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2016-07-30 12:16+0200\n"
-"PO-Revision-Date: 2016-08-01 23:06+0000\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"PO-Revision-Date: 2016-08-26 19:26+0000\n"
+"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -276,7 +276,7 @@ msgstr "<option>-f</option>, <option>--parse-fully</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:83
 msgid "Sets the parse mode to 'full'. The default mode does not parse the whole file but uses the meta seek elements for locating the required elements of a source file. In 99% of all cases this is enough. But for files that do not contain meta seek elements or which are damaged the user might have to use this mode. A full scan of a file can take a couple of minutes while a fast scan only takes seconds."
-msgstr "Estableix el mode d'anàlisi a «full» (Completa). El mode per omissió no analitzarà tot el fitxer ja que empra la meta de cerca dels elements per a localitzar els elements requerits d'un fitxer d'origen. En el 99% dels casos n'hi ha prou. Però per a fitxers que no contenen elements meta de cerca o que estan malmesos, l'usuari hauria d'emprar aquest mode. L'anàlisi completa d'un fitxer pot requerir força temps, mentre que una anàlisi ràpida només porta uns pocs segons."
+msgstr "Estableix el mode d'anàlisi a «full» (Completa). El mode per omissió no analitzarà tot el fitxer ja que empra la meta de cerca dels elements per a localitzar els elements requerits d'un fitxer d'origen. En el 99% dels casos n'hi ha prou. Però per a fitxers que no contenen elements meta de cerca o que estan malmesos, l'usuari hauria d'emprar aquest mode. L'anàlisi completa d'un fitxer pot requerir força temps, mentre que una anàlisi ràpida només porta segons."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:92
@@ -320,7 +320,7 @@ msgstr "<option>-r</option>, <option>--redirect-output</option> <parameter>nom_f
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:115
 msgid "Writes all messages to the file <parameter>file-name</parameter> instead of to the console.  While this can be done easily with output redirection there are cases in which this option is needed: when the terminal reinterprets the output before writing it to a file.  The character set set with <link linkend=\"mkvextract.description.common.output_charset\"><option>--output-charset</option></link> is honored."
-msgstr "Escriu tots els missatges al <parameter>nom_fitxer</parameter> en lloc de a la consola. Si bé això es pot fer fàcilment amb la redirecció de la sortida, hi ha casos en que cal aquesta opció: quan el terminal torna interpretar la sortida abans d'escriure-la a un fitxer. Es respectarà el joc de caràcters establert amb <link linkend=\"mkvextract.description.common.output_charset\"><option>--output-charset</option></link>."
+msgstr "Escriu tots els missatges al <parameter>nom_fitxer</parameter> en lloc de a la consola. Si bé això es pot fer fàcilment amb la redirecció de la sortida, hi ha casos en què cal aquesta opció: quan el terminal torna a interpretar la sortida abans d'escriure-la a un fitxer. Es respectarà el joc de caràcters establert amb <link linkend=\"mkvextract.description.common.output_charset\"><option>--output-charset</option></link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:124
@@ -818,12 +818,12 @@ msgstr "Redirecció de la sortida"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:543
 msgid "Several extraction modes cause &mkvextract; to write the extracted data to the console. There are generally two ways of writing this data into a file: one provided by the shell and one provided by &mkvextract; itself."
-msgstr "Diversos modes d'extracció provoquen que el &mkvextract; escrigui la informació extreta a la consola. En general, hi ha dos modes d'escriure aquesta informació a un fitxer: un proporcionat per l'interpret d'ordres i un altre pel &mkvextract;."
+msgstr "Diversos modes d'extracció provoquen que el &mkvextract; escrigui la informació extreta a la consola. En general, hi ha dos modes d'escriure aquesta informació a un fitxer: un proporcionat per l'intèrpret d'ordres i un altre pel &mkvextract;."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:548
 msgid "The shell's builtin redirection mechanism is used by appending '<literal>&gt; output-filename.ext</literal>' to the command line. Example:"
-msgstr "El mecanisme de redirecció intern de l'interpret d'ordres és emprat amb «<literal>&gt; nom_fitxer_sortida.ext</literal>» a la línia d'ordres. Exemple:"
+msgstr "El mecanisme de redirecció intern de l'intèrpret d'ordres és emprat amb «<literal>&gt; nom_fitxer_sortida.ext</literal>» a la línia d'ordres. Exemple:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:552
@@ -1354,7 +1354,7 @@ msgstr "Mostra la mida de cada element incloent la seva capçalera."
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:152
 msgid "Writes all messages to the file <parameter>file-name</parameter> instead of to the console.  While this can be done easily with output redirection there are cases in which this option is needed: when the terminal reinterprets the output before writing it to a file.  The character set set with <link linkend=\"mkvinfo.description.output_charset\"><option>--output-charset</option></link> is honored."
-msgstr "Escriu tots els missatges al <parameter>nom_fitxer</parameter> en lloc de a la consola. Si bé això es pot fer fàcilment amb la redirecció de la sortida, hi ha casos en que cal aquesta opció: quan el terminal torna interpretar la sortida abans d'escriure-la a un fitxer. Es respectarà el joc de caràcters establert amb <link linkend=\"mkvinfo.description.output_charset\"><option>--output-charset</option></link>."
+msgstr "Escriu tots els missatges al <parameter>nom_fitxer</parameter> en lloc de a la consola. Si bé això es pot fer fàcilment amb la redirecció de la sortida, hi ha casos en què cal aquesta opció: quan el terminal torna a interpretar la sortida abans d'escriure-la a un fitxer. Es respectarà el joc de caràcters establert amb <link linkend=\"mkvinfo.description.output_charset\"><option>--output-charset</option></link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:184
@@ -1416,7 +1416,7 @@ msgstr "L'opció <link linkend=\"mkvinfo.description.verbose\"><option>-v</optio
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:295
 msgid "At level 0 &mkvinfo; will print only the track headers it finds and their types. &mkvinfo; will exit as soon as the headers are parsed completely (more technical: as soon as the first cluster is encountered). In this level the seek head entries and the cues will not be displayed -- even if they're located in front of the track information."
-msgstr "En el nivell 0, el &mkvinfo; només imprimirà les capçaleres de la pista que troba i els seus tipus. El &mkvinfo; sortirà tan aviat s'hagin analitzat completament les capçaleres (més tècnic: tan aviat com es trobi el primer clúster). En aquest nivell, la cerca d'entrades de capçalera i els índexs no serà mostrats -encara que es trobin al capdavant de la informació de la pista-."
+msgstr "En el nivell 0, el &mkvinfo; només imprimirà les capçaleres de la pista que troba i els seus tipus. El &mkvinfo; sortirà tan aviat s'hagin analitzat completament les capçaleres (més tècnic: tan aviat com es trobi el primer clúster). En aquest nivell, la cerca d'entrades de capçalera i els índexs no seràn mostrats -encara que es trobin al capdavant de la informació de la pista-."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:301
@@ -1691,7 +1691,7 @@ msgstr "El &mkvmerge; requereix que hi hagi una pista de vídeo o d'àudio prese
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:238
 msgid "'<literal>interval:</literal><parameter>time-spec</parameter>' – This mode creates one chapter at fixed intervals given by <parameter>time-spec</parameter>.  The format is either the form <parameter>HH:MM:SS.nnnnnnnnn</parameter> or a number followed by one of the units '<literal>s</literal>', '<literal>ms</literal>' or '<literal>us</literal>'."
-msgstr "«<literal>interval:</literal><parameter>temps-especificat</parameter>» – Aquesta mode crearà un capítol a intervals fixos donats per <parameter>temps-especificat</parameter>. El format segueix la forma <parameter>HH:MM:SS.nnnnnnnnn</parameter> o com un número seguit per una de les unitats «<literal>s</literal>», «<literal>ms</literal>» o «<literal>us»</literal>."
+msgstr "«<literal>interval:</literal><parameter>temps-especificat</parameter>» – Aquest mode crearà un capítol a intervals fixos donats per <parameter>temps-especificat</parameter>. El format segueix la forma <parameter>HH:MM:SS.nnnnnnnnn</parameter> o com un número seguit per una de les unitats «<literal>s</literal>», «<literal>ms</literal>» o «<literal>us»</literal>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:244
@@ -1821,7 +1821,7 @@ msgstr "<option>--chapters</option> <parameter>nom_fitxer</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:359
 msgid "Read chapter information from the file <parameter>file-name</parameter>. See the section about <link linkend=\"mkvmerge.chapters\">chapters</link> below for details."
-msgstr "Llegeix la informació dels capítol des del <parameter>nom_fitxer</parameter>. Per a més detalls, vegeu més endavant la secció sobre <link linkend=\"mkvmerge.chapters\">els capítols</link>."
+msgstr "Llegeix la informació del capítol des del <parameter>nom_fitxer</parameter>. Per a més detalls, vegeu més endavant la secció sobre <link linkend=\"mkvmerge.chapters\">els capítols</link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:366
@@ -1946,7 +1946,7 @@ msgstr "Força el factor d'escala dels codis de temps amb <parameter>factor</par
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:488
 msgid "Normally &mkvmerge; will use a value of <constant>1000000</constant> which means that timecodes and durations will have a precision of 1ms. For files that will not contain a video track but at least one audio track &mkvmerge; will automatically chose a timecode scale factor so that all timecodes and durations have a precision of one audio sample. This causes bigger overhead but allows precise seeking and extraction."
-msgstr "Normalment, el &mkvmerge; emprarà el valor <constant>1000000</constant>, el qual vol dir que els codis de temps i durades tindran una precisió d'1ms. Pels fitxers que no continguin una pista de vídeo però sí almenys una d'àudio, el &mkvmerge; triarà automàticament un factor d'escala pels codis de temps, de manera tots els codis de temps i durades tindran una precisió d'una mostra d'àudio. Això causarà una major sobrecàrrega però permetrà que la cerca i extracció siguin més precises."
+msgstr "Normalment, el &mkvmerge; emprarà el valor <constant>1000000</constant>, el qual vol dir que els codis de temps i durades tindran una precisió d'1 ms. Pels fitxers que no continguin una pista de vídeo però sí almenys una d'àudio, el &mkvmerge; triarà automàticament un factor d'escala pels codis de temps, de manera tots els codis de temps i durades tindran una precisió d'una mostra d'àudio. Això causarà una major sobrecàrrega però permetrà que la cerca i extracció siguin més precises."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:495
@@ -2051,7 +2051,7 @@ msgstr "El prefix «<literal>timecodes:</literal>» no es pot ometre."
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:598
 msgid "Keeping specific parts by specifying timecode ranges while discarding others."
-msgstr "Manté les parts especifiques pels intervals de codis de temps especificats mentre que les altres seran descartades."
+msgstr "Manté les parts específiques pels intervals de codis de temps especificats mentre que les altres seran descartades."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:602
@@ -2122,7 +2122,7 @@ msgstr "Recordeu que el &mkvmerge; només pren decisions sobre la divisió a les
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:666
 msgid "Keeping specific parts by specifying frame/field number ranges while discarding others."
-msgstr "Manté les parts especifiques pels intervals del número de fotograma/camp especificats mentre que les altres seran descartades."
+msgstr "Manté les parts específiques pels intervals del número de fotograma/camp especificats mentre que les altres seran descartades."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:670
@@ -2239,7 +2239,7 @@ msgstr "Exemple: <code>--split chapters:5,8</code>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:796
 msgid "The parameters <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter> etc must all be positive integers.  Numbering starts at 1.  The list of chapter numbers is separated by commas.  Splitting will occur right before the first key frame whose timecode is equal to or bigger than the start timecode for the chapters whose numbers are listed.  A chapter starting at 0s is never considered for splitting and discarded silently."
-msgstr "Els paràmetres <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter>, etc. hauran de ser tots sencers positius. La numeració comença per l'1. La llista de capítols estarà separada per comes. La divisió succeirà just abans del primer fotograma clau on el codi de temps sigui igual o major que el codi de temps d'inici per als capítols dels números llistats. Un capítol que comença als 0s mai es tindrà en compte per a la divisió i serà omès silenciosament."
+msgstr "Els paràmetres <parameter>A</parameter>, <parameter>B</parameter>, <parameter>C</parameter>, etc. hauran de ser tots sencers positius. La numeració comença per l'1. La llista de capítols estarà separada per comes. La divisió succeirà just abans del primer fotograma clau on el codi de temps sigui igual o major que el codi de temps d'inici per als capítols dels números llistats. Un capítol que comença al 0 s mai es tindrà en compte per a la divisió i serà omès silenciosament."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:803
@@ -2304,7 +2304,7 @@ msgstr "Determina com es calcularan els codis de temps en annexar els fitxers. E
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:877
 msgid "When mkvmerge appends a track (called '<literal>track2_1</literal>' from now on) from a second file (called '<literal>file2</literal>') to a track (called '<literal>track1_1</literal>') from the first file (called '<literal>file1</literal>')  then it has to offset all timecodes for '<literal>track2_1</literal>' by an amount.  For '<literal>file</literal>' mode this amount is the highest timecode encountered in '<literal>file1</literal>' even if that timecode was from a different track than '<literal>track1_1</literal>'. In track mode the offset is the highest timecode of '<literal>track1_1</literal>'."
-msgstr "Quan el mkvmerge annexa una pista (anomenada «<literal>pista2_1</literal>» d'ara en endavant) des d'un segon fitxer (anomenat «<literal>fitxer_2</literal>») a una pista (anomenada «<literal>pista1_1</literal>») des del primer fitxer (anomenat «<literal>fitxer_1</literal>») llavors compensarà una quantitat en tots els codis de temps per a la «<literal>pista2_1</literal>». En el mode «<literal>file</literal>» aquesta quantitat serà el major codi de temps trobat en el «<literal>fitxer_1</literal>», fins i tot si aquest codi de temps provingués d'una pista diferent de «<literal>pista1_1</literal>». En el mode «<literal>track</literal>», la compensació serà el major codi de temps de la «<literal>pista1_1</literal>»."
+msgstr "Quan el mkvmerge annexa una pista (anomenada «<literal>pista2_1</literal>» d'ara endavant) des d'un segon fitxer (anomenat «<literal>fitxer_2</literal>») a una pista (anomenada «<literal>pista1_1</literal>») des del primer fitxer (anomenat «<literal>fitxer_1</literal>») llavors compensarà una quantitat en tots els codis de temps per a la «<literal>pista2_1</literal>». En el mode «<literal>file</literal>» aquesta quantitat serà el major codi de temps trobat en el «<literal>fitxer_1</literal>», fins i tot si aquest codi de temps provingués d'una pista diferent de «<literal>pista1_1</literal>». En el mode «<literal>track</literal>», la compensació serà el major codi de temps de la «<literal>pista1_1</literal>»."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:885
@@ -3220,7 +3220,7 @@ msgstr "Determina el format de la sortida emprat per l'opció <link linkend=\"mk
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:1883
 msgid "The <literal>text</literal> format is short and human-readable. It consists of one line per item found (container, tracks, attachments etc.)."
-msgstr "El format <literal>text</literal> és curt i llegible. Consisteix en una línia per a cada element trobat (contenidor, pistes, adjunts, etc.)"
+msgstr "El format <literal>text</literal> és curt i llegible. Consisteix en una línia per a cada element trobat (contenidor, pistes, adjunts, etc.)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:1885
@@ -3286,7 +3286,7 @@ msgstr "<option>--priority</option> <parameter>prioritat</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1955
 msgid "Sets the process priority that &mkvmerge; runs with. Valid values are '<literal>lowest</literal>', '<literal>lower</literal>', '<literal>normal</literal>', '<literal>higher</literal>' and '<literal>highest</literal>'. If nothing is given then '<literal>normal</literal>' is used. On Unix like systems &mkvmerge; will use the <citerefentry><refentrytitle>nice</refentrytitle><manvolnum>2</manvolnum></citerefentry> function. Therefore only the super user can use '<literal>higher</literal>' and '<literal>highest</literal>'. On Windows all values are useable for every user."
-msgstr "Estableix la prioritat del procés amb que s'executa el &mkvmerge;. Els valors vàlids són «<literal>lowest</literal>» (Molt baixa), «<literal>lower</literal>» (Baixa), «<literal>normal</literal>» (Normal), «<literal>higher</literal>» (Alta) i «<literal>highest</literal>» (Molt alta). Si no s'indica res, llavors s'emprarà «<literal>normal</literal>». En sistemes com Unix, el &mkvmerge; emprarà la funció <citerefentry><refentrytitle>nice</refentrytitle><manvolnum>2</manvolnum></citerefentry>. Per tant, només el superusuari podrà emprar «<literal>higher</literal>» i «<literal>highest</literal>». Al Windows, tots els valors són usables per part de tots els usuaris."
+msgstr "Estableix la prioritat del procés amb què s'executa el &mkvmerge;. Els valors vàlids són «<literal>lowest</literal>» (Molt baixa), «<literal>lower</literal>» (Baixa), «<literal>normal</literal>» (Normal), «<literal>higher</literal>» (Alta) i «<literal>highest</literal>» (Molt alta). Si no s'indica res, llavors s'emprarà «<literal>normal</literal>». En sistemes com Unix, el &mkvmerge; emprarà la funció <citerefentry><refentrytitle>nice</refentrytitle><manvolnum>2</manvolnum></citerefentry>. Per tant, només el superusuari podrà emprar «<literal>higher</literal>» i «<literal>highest</literal>». Al Windows, tots els valors són usables per part de tots els usuaris."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1962
@@ -3301,7 +3301,7 @@ msgstr "Estableix el joc de caràcters al qual convertir les cadenes indicades d
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1994
 msgid "Writes all messages to the file <parameter>file-name</parameter> instead of to the console.  While this can be done easily with output redirection there are cases in which this option is needed: when the terminal reinterprets the output before writing it to a file.  The character set set with <link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link> is honored."
-msgstr "Escriu tots els missatges al <parameter>nom_fitxer</parameter> en lloc de a la consola. Si bé això es pot fer fàcilment amb la redirecció de la sortida, hi ha casos en que cal aquesta opció: quan el terminal torna interpretar la sortida abans d'escriure-la a un fitxer. Es respectarà el joc de caràcters establert amb <link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link>."
+msgstr "Escriu tots els missatges al <parameter>nom_fitxer</parameter> en lloc de a la consola. Si bé això es pot fer fàcilment amb la redirecció de la sortida, hi ha casos en què cal aquesta opció: quan el terminal torna a interpretar la sortida abans d'escriure-la a un fitxer. Es respectarà el joc de caràcters establert amb <link linkend=\"mkvmerge.description.output_charset\"><option>--output-charset</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2025
@@ -3346,7 +3346,7 @@ msgstr "L'ordre de les opcions"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2135
 msgid "The order in which options are entered is important for some options. Options fall into two categories:"
-msgstr "L'ordre en el que s'especifiquen les opcions és important per a algunes opcions. Les opcions es divideixen en dues categories:"
+msgstr "L'ordre en el qual s'especifiquen les opcions és important per a algunes opcions. Les opcions es divideixen en dues categories:"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2141
@@ -3664,7 +3664,7 @@ msgstr "Fitxers <abbrev>AAC</abbrev>, <abbrev>AC-3</abbrev>, <abbrev>MP3</abbrev
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2368
 msgid "Most other files: The track IDs are assigned in order the tracks are found in the file starting at 0."
-msgstr "La majoria de fitxers: Els ID de les pistes són assignats en l'ordre en el què es troben les pistes, començant des del número 0."
+msgstr "La majoria de fitxers: Els ID de les pistes són assignats en l'ordre en el qual es troben les pistes, començant des del número 0."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2374
@@ -3790,7 +3790,7 @@ msgstr "Fitxers d'opcions"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2519
 msgid "An option file is a file &mkvmerge; can read additional command line arguments from. This can be used in order to circumvent certain limitations of the shell or the operating system when executing external programs like a limited command line length."
-msgstr "Un fitxer d'opcions és un fitxer des d'on el &mkvmerge; pot llegir arguments addicionals de la línia d'ordres. Això es pot emprar per eludir certes limitacions de l'interpret d'ordres (shell) o del sistema operatiu, com una longitud limitada de la línia d'ordres quan s'executen programes externs."
+msgstr "Un fitxer d'opcions és un fitxer des d'on el &mkvmerge; pot llegir arguments addicionals de la línia d'ordres. Això es pot emprar per eludir certes limitacions de l'intèrpret d'ordres (shell) o del sistema operatiu, com una longitud limitada de la línia d'ordres quan s'executen programes externs."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2524
@@ -4178,7 +4178,7 @@ msgstr "Notes generals"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2823
 msgid "When splitting files &mkvmerge; will correctly adjust the chapters as well. This means that each file only includes the chapter entries that apply to it, and that the timecodes will be offset to match the new timecodes of each output file."
-msgstr "Quan es divideixen els fitxers, el &mkvmerge; també ajustarà correctament els capítols. Això vol dir que cada fitxer només inclourà les entrades dels capítol que se li apliquin, i que es compensaran els codis de temps per a que coincideixin amb el nou codi de temps de cada fitxer de sortida."
+msgstr "Quan es divideixen els fitxers, el &mkvmerge; també ajustarà correctament els capítols. Això vol dir que cada fitxer només inclourà les entrades dels capítols que se li apliquin, i que es compensaran els codis de temps per a que coincideixin amb el nou codi de temps de cada fitxer de sortida."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2828
@@ -4208,7 +4208,7 @@ msgstr "Una cosa important és que les etiquetes estan vinculades a pistes o cap
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2871
 msgid "&mkvmerge; knows two options with which you can add tags to &matroska; files: The <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link> and the <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link> options. The difference is that the former option, <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link>, will make the tags apply to the complete file by removing any of those <classname>Targets</classname> elements mentioned above.  The latter option, <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>, automatically inserts the UID that &mkvmerge; generates for the tag specified with the <parameter>TID</parameter> part of the <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link> option."
-msgstr "El &mkvmerge; té dues opcions amb les que es poden afegir etiquetes als fitxers &matroska;: Les opcions <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link> i <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>. La diferència és que la primera opció, <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link>, farà que les etiquetes s'apliquin a tot el fitxer eliminant qualsevol d'aquests elements <classname>Targets</classname> esmentats anteriorment. L'última opció, <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>, insereix automàticament l'UID que genera el &mkvmerge; per a l'etiqueta especificada amb la part <parameter>TID</parameter> de l'opció <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>."
+msgstr "El &mkvmerge; té dues opcions amb les quals es poden afegir etiquetes als fitxers &matroska;: Les opcions <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link> i <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>. La diferència és que la primera opció, <link linkend=\"mkvmerge.description.global_tags\"><option>--global-tags</option></link>, farà que les etiquetes s'apliquin a tot el fitxer eliminant qualsevol d'aquests elements <classname>Targets</classname> esmentats anteriorment. L'última opció, <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>, insereix automàticament l'UID que genera el &mkvmerge; per a l'etiqueta especificada amb la part <parameter>TID</parameter> de l'opció <link linkend=\"mkvmerge.description.tags\"><option>--tags</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2883
@@ -4634,7 +4634,7 @@ msgstr "<option>-p</option>, <option>--parse-mode</option> <parameter>mode</para
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:85
 msgid "Sets the parse mode. The parameter '<parameter>mode</parameter>' can either be '<literal>fast</literal>' (which is also the default)  or '<literal>full</literal>'. The '<literal>fast</literal>' mode does not parse the whole file but uses the meta seek elements for locating the required elements of a source file. In 99% of all cases this is enough. But for files that do not contain meta seek elements or which are damaged the user might have to set the '<literal>full</literal>' parse mode. A full scan of a file can take a couple of minutes while a fast scan only takes seconds."
-msgstr "Estableix el mode d'anàlisi. El paràmetre «<parameter>mode</parameter>» pot ser «<literal>fast</literal>» (Ràpida) (el qual és el predeterminat) o «<literal>full</literal>» (Completa). El mode «<literal>fast</literal>» no analitzarà tot el fitxer però emprarà els elements meta de cerca per a localitzar els elements requerits d'un fitxer d'origen. En el 99% dels casos n'hi haurà prou. No obstant això, pels fitxers que no contenen elements meta de cerca o que estan malmesos, l'usuari hauria d'emprar el mode d'anàlisi «<literal>full</literal>». L'anàlisi completa d'un fitxer pot portar molts minuts, mentre que una anàlisi ràpida només portarà uns pocs segons."
+msgstr "Estableix el mode d'anàlisi. El paràmetre «<parameter>mode</parameter>» pot ser «<literal>fast</literal>» (Ràpida) (el qual és el predeterminat) o «<literal>full</literal>» (Completa). El mode «<literal>fast</literal>» no analitzarà tot el fitxer però emprarà els elements meta de cerca per a localitzar els elements requerits d'un fitxer d'origen. En el 99% dels casos n'hi haurà prou. No obstant això, pels fitxers que no contenen elements meta de cerca o que estan malmesos, l'usuari hauria d'emprar el mode d'anàlisi «<literal>full</literal>». L'anàlisi completa d'un fitxer pot trigar alguns minuts, mentre que una anàlisi ràpida només portarà alguns segons."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:96
@@ -4876,7 +4876,7 @@ msgstr "Altres opcions:"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:389
 msgid "Writes all messages to the file <parameter>file-name</parameter> instead of to the console.  While this can be done easily with output redirection there are cases in which this option is needed: when the terminal reinterprets the output before writing it to a file.  The character set set with <link linkend=\"mkvpropedit.description.output_charset\"><option>--output-charset</option></link> is honored."
-msgstr "Escriu tots els missatges al <parameter>nom_fitxer</parameter> en lloc de a la consola. Si bé això es pot fer fàcilment amb la redirecció de la sortida, hi ha casos en què cal aquesta opció: quan el terminal torna interpretar la sortida abans d'escriure-la a un fitxer. Es respectarà el joc de caràcters establert amb <link linkend=\"mkvpropedit.description.output_charset\"><option>--output-charset</option></link>."
+msgstr "Escriu tots els missatges al <parameter>nom_fitxer</parameter> en lloc de a la consola. Si bé això es pot fer fàcilment amb la redirecció de la sortida, hi ha casos en què cal aquesta opció: quan el terminal torna a interpretar la sortida abans d'escriure-la a un fitxer. Es respectarà el joc de caràcters establert amb <link linkend=\"mkvpropedit.description.output_charset\"><option>--output-charset</option></link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:421
@@ -4969,7 +4969,7 @@ msgstr "<option>track:</option><parameter>t</parameter><parameter>n</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:568
 msgid "If the parameter starts with a single character <parameter>t</parameter> followed by a <parameter>n</parameter> then the <parameter>n</parameter>th track of a specific track type will be selected. The track type parameter <parameter>t</parameter> must be one of these four characters: '<literal>a</literal>' for an audio track, '<literal>b</literal>' for a button track, '<literal>s</literal>' for a subtitle track and '<literal>v</literal>' for a video track. The track order is the same that &mkvmerge;'s <option>--identify</option> option outputs."
-msgstr "Si el paràmetre comença amb un únic caràcter <parameter>t</parameter> seguit per <parameter>n</parameter>, llavors se seleccionarà la pista número <parameter>n</parameter> d'un tipus de pista específic. El paràmetre del tipus de pista <parameter>t</parameter>, haurà de ser un d'aquests quatre caràcters: «<literal>a</literal>» per a una pista d'àudio, «<literal>b</literal>» per a un pista de botó, «<literal>s</literal>» per a una pista de subtítols i «<literal>v</literal>» per a una pista de vídeo. L'ordre de les pistes és el mateix que surt amb l'opció <option>--identify</option> del &mkvmerge;."
+msgstr "Si el paràmetre comença amb un únic caràcter <parameter>t</parameter> seguit per <parameter>n</parameter>, llavors se seleccionarà la pista número <parameter>n</parameter> d'un tipus de pista específic. El paràmetre del tipus de pista <parameter>t</parameter>, haurà de ser un d'aquests quatre caràcters: «<literal>a</literal>» per a una pista d'àudio, «<literal>b</literal>» per a una pista de botó, «<literal>s</literal>» per a una pista de subtítols i «<literal>v</literal>» per a una pista de vídeo. L'ordre de les pistes és el mateix que surt amb l'opció <option>--identify</option> del &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:582
