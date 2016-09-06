@@ -61,7 +61,7 @@ fixMappings(SourceFile *oldFile,
     newTrack->m_file       = fileMap[oldTrack->m_file];
     newTrack->m_appendedTo = trackMap[oldTrack->m_appendedTo];
 
-    Q_ASSERT((!!newTrack->m_file == !!oldTrack->m_file) && (!!newTrack->m_appendedTo == !!newTrack->m_appendedTo));
+    Q_ASSERT((!!newTrack->m_file == !!oldTrack->m_file) && (!!newTrack->m_appendedTo == !!oldTrack->m_appendedTo));
 
     newTrack->m_appendedTracks.clear();
     for (auto const &oldAppendedTrack : oldTrack->m_appendedTracks) {
