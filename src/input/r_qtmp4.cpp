@@ -2155,11 +2155,12 @@ qtmp4_demuxer_c::update_tables() {
   }
 
   // calc pts:
-  s            = 0;
-  uint64_t pts = 0;
+  auto num_samples = sample_table.size();
+  s                = 0;
+  uint64_t pts     = 0;
 
-  for (j = 0; j < durmap_table.size(); ++j) {
-    for (i = 0; i < durmap_table[j].number; ++i) {
+  for (j = 0; (j < durmap_table.size()) && (s < num_samples); ++j) {
+    for (i = 0; (i < durmap_table[j].number) && (s < num_samples); ++i) {
       sample_table[s].pts  = pts;
       pts                 += durmap_table[j].duration;
       ++s;
@@ -2168,10 +2169,10 @@ qtmp4_demuxer_c::update_tables() {
 
   // calc sample offsets
   s = 0;
-  for (j = 0; j < chunk_table.size(); ++j) {
+  for (j = 0; (j < chunk_table.size()) && (s < num_samples); ++j) {
     uint64_t chunk_pos = chunk_table[j].pos;
 
-    for (i = 0; i < chunk_table[j].size; ++i) {
+    for (i = 0; (i < chunk_table[j].size) && (s < num_samples); ++i) {
       sample_table[s].pos  = chunk_pos;
       chunk_pos           += sample_table[s].size;
       ++s;
