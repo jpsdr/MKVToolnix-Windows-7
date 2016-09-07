@@ -1,5 +1,9 @@
 2016-09-07  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: AVC & HEVC readers: the readers will now
+        refuse to handle files where the detected pixel width or height is
+        equal to or less than 0. Fixes the last test case of #1780.
+
         * mkvmerge: bug fix: HEVC parser: fixed another invalid memory
         access (beyond the end of allocated space). Fixes two test cases
         of #1780.

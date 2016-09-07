@@ -60,8 +60,13 @@ avc_es_reader_c::probe_file(mm_io_c *in,
 
       parser.add_bytes(buf->get_buffer(), num_read);
 
-      if (parser.headers_parsed())
-        return 1;
+      if (!parser.headers_parsed())
+        return 0;
+
+      if ((parser.get_width() <= 0) || (parser.get_height() <= 0))
+        return 0;
+
+      return 1;
     }
 
   } catch (mtx::exception &e) {
@@ -103,6 +108,8 @@ avc_es_reader_c::read_headers() {
 
     m_width  = parser.get_width();
     m_height = parser.get_height();
+
+    mxinfo(boost::format("width %1% height %2%\n") % m_width % m_height);
 
     m_in->setFilePointer(0, seek_beginning);
 

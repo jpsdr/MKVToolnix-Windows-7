@@ -55,8 +55,13 @@ hevc_es_reader_c::probe_file(mm_io_c *in,
 
       parser.add_bytes(buf->get_buffer(), num_read);
 
-      if (parser.headers_parsed())
-        return 1;
+      if (!parser.headers_parsed())
+        return 0;
+
+      if ((parser.get_width() <= 0) || (parser.get_height() <= 0))
+        return 0;
+
+      return 1;
     }
 
   } catch (...) {
