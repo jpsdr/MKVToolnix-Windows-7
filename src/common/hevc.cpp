@@ -679,16 +679,16 @@ static void
 short_term_ref_pic_set_copy(bit_reader_c &r,
                             bit_writer_c &w,
                             short_term_ref_pic_set_t *short_term_ref_pic_sets,
-                            unsigned int idxRps,
+                            unsigned int idx_rps,
                             unsigned int num_short_term_ref_pic_sets) {
-  if (idxRps >= 64)
+  if (idx_rps >= 64)
     throw false;
 
   short_term_ref_pic_set_t* ref_st_rp_set;
-  short_term_ref_pic_set_t* cur_st_rp_set = short_term_ref_pic_sets + idxRps;
+  short_term_ref_pic_set_t* cur_st_rp_set = short_term_ref_pic_sets + idx_rps;
   unsigned int inter_rps_pred_flag = cur_st_rp_set->inter_ref_pic_set_prediction_flag = 0;
 
-  if (idxRps > 0)
+  if (idx_rps > 0)
     inter_rps_pred_flag = cur_st_rp_set->inter_ref_pic_set_prediction_flag = w.copy_bits(1, r); // inter_ref_pic_set_prediction_flag
 
   if (inter_rps_pred_flag) {
@@ -700,11 +700,11 @@ short_term_ref_pic_set_copy(bit_reader_c &r,
     int k1 = 0;
     int code = 0;
 
-    if (idxRps == num_short_term_ref_pic_sets)
+    if (idx_rps == num_short_term_ref_pic_sets)
       code = w.copy_unsigned_golomb(r); // delta_idx_minus1
 
     cur_st_rp_set->delta_idx = code + 1;
-    ref_idx = idxRps - 1 - code;
+    ref_idx                  = idx_rps - 1 - code;
 
     if (ref_idx >= 64)
       throw false;
