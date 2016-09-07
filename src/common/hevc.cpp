@@ -681,6 +681,9 @@ short_term_ref_pic_set_copy(bit_reader_c &r,
                             short_term_ref_pic_set_t *short_term_ref_pic_sets,
                             unsigned int idxRps,
                             unsigned int num_short_term_ref_pic_sets) {
+  if (idxRps >= 64)
+    throw false;
+
   short_term_ref_pic_set_t* ref_st_rp_set;
   short_term_ref_pic_set_t* cur_st_rp_set = short_term_ref_pic_sets + idxRps;
   unsigned int inter_rps_pred_flag = cur_st_rp_set->inter_ref_pic_set_prediction_flag = 0;
