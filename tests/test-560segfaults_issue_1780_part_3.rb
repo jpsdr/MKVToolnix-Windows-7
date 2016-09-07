@@ -21,7 +21,6 @@ explorer:id:000144,sig:11,src:000005,op:flip2,pos:13866
 explorer:id:000231,sig:11,src:000005,op:havoc,rep:16
 explorer:id:000261,sig:11,src:000013,op:arith8,pos:13647,val:+7
 explorer:id:000318,sig:11,src:000287,op:flip2,pos:13797
-explorer:id:000323,sig:06,src:000314,op:flip1,pos:13731
 explorer:id:000324,sig:06,src:000314,op:havoc,rep:64
 explorer:id:000347,sig:06,src:000426,op:flip1,pos:13797
 explorer:id:000353,sig:11,src:000426,op:flip1,pos:13823
@@ -30,4 +29,12 @@ explorer:id:000357,sig:11,src:000426,op:flip2,pos:13825
 explorer:id:000358,sig:06,src:000426,op:flip2,pos:13826
 }.each do |file|
   test_merge "#{dir}/#{file}"
+end
+
+# The following files cause uninitialized memory to be written and
+# consecutive tests to fail:
+%w{
+explorer:id:000323,sig:06,src:000314,op:flip1,pos:13731
+}.each do |file|
+  test_merge "#{dir}/#{file}", :result_type => :exit_code_string
 end
