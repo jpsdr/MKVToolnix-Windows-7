@@ -109,8 +109,6 @@ avc_es_reader_c::read_headers() {
     m_width  = parser.get_width();
     m_height = parser.get_height();
 
-    mxinfo(boost::format("width %1% height %2%\n") % m_width % m_height);
-
     m_in->setFilePointer(0, seek_beginning);
 
   } catch (...) {
