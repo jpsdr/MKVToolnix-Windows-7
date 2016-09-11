@@ -1,4 +1,4 @@
-MKVToolNix 9.4.1
+MKVToolNix 9.4.2
 ================
 
 # Table of contents
