@@ -1,4 +1,4 @@
-AC_INIT([MKVToolNix],[9.4.0],[https://github.com/mbunkus/mkvtoolnix/issues/],[mkvtoolnix])
+AC_INIT([MKVToolNix],[9.4.1],[https://github.com/mbunkus/mkvtoolnix/issues/],[mkvtoolnix])
 AC_PREREQ(2.50)
 
 AC_CONFIG_HEADERS(config.h:config.h.in)
