@@ -538,9 +538,7 @@ public:
 
   void add_timecode(int64_t timecode);
 
-  bool headers_parsed() const {
-    return m_hevcc_ready;
-  }
+  bool headers_parsed() const;
 
   void set_nalu_size_length(int nalu_size_length) {
     m_nalu_size_length = nalu_size_length;

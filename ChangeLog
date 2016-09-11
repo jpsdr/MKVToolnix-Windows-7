@@ -1,5 +1,13 @@
 2016-09-11  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: bug fix: AVC & HEVC readers: release v9.4.1 contains a
+        change to both readers so that they will refuse to handle files
+        where the detected pixel width or height is equal to or less than
+        0. This check was wrong in certain cases causing mkvmerge to
+        reject a file as an unsupported file type. This has been fixed
+        while keeping the constraints on width & height having to be
+        positive.
+
         * Released v9.4.1 "Black Rain".
 
 2016-09-07  Moritz Bunkus  <moritz@bunkus.org>

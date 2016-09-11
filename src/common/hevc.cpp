@@ -1452,6 +1452,15 @@ es_parser_c::~es_parser_c() {
       mxdebug(boost::format("  %1%: %2%\n") % s_type_names[i] % m_stats.num_slices_by_type[i]);
 }
 
+bool
+es_parser_c::headers_parsed()
+  const {
+  return m_hevcc_ready
+      && !m_sps_info_list.empty()
+      && (m_sps_info_list.front().width  > 0)
+      && (m_sps_info_list.front().height > 0);
+}
+
 void
 es_parser_c::discard_actual_frames(bool discard) {
   m_discard_actual_frames = discard;
