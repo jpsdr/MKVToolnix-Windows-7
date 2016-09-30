@@ -137,6 +137,14 @@ public:
   };
 
   virtual void initialize() override;
+
+  virtual bool is_header_packet(ogg_packet &op) override {
+    if (op.bytes < 8)
+      return false;
+
+    return (0 == std::strncmp(reinterpret_cast<char const *>(&op.packet[0]), "OpusHead", 8))
+        || (0 == std::strncmp(reinterpret_cast<char const *>(&op.packet[0]), "OpusTags", 8));
+  };
 };
 
 debugging_option_c ogm_a_opus_demuxer_c::ms_debug{"opus"};
