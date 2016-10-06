@@ -2463,8 +2463,8 @@ kax_reader_c::identify() {
   add_uid_info(m_next_segment_uid,     mtx::id::next_segment_uid);
   add_uid_info(m_previous_segment_uid, mtx::id::previous_segment_uid);
 
-  info.add(mtx::id::muxing_application,  m_muxing_app);
-  info.add(mtx::id::writing_application, m_raw_writing_app);
+  info.set(mtx::id::muxing_application,  m_muxing_app);
+  info.set(mtx::id::writing_application, m_raw_writing_app);
   info.add(mtx::id::date_utc,            mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch, mtx::date_time::epoch_timezone_e::UTC));
   info.add(mtx::id::date_local,          mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch, mtx::date_time::epoch_timezone_e::local));
 
