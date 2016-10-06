@@ -106,6 +106,8 @@ property_element_c::init_tables() {
                                                                                                    "segment between many others (128 bits)."));
   ELE("prev-uid",             KaxPrevUID::ClassInfos,         Y("Previous segment's unique ID"), Y("A unique ID to identify the previous chained\nsegment (128 bits)."));
   ELE("next-uid",             KaxNextUID::ClassInfos,         Y("Next segment's unique ID"),     Y("A unique ID to identify the next chained\nsegment (128 bits)."));
+  ELE("muxing-application",   KaxMuxingApp::ClassInfos,       Y("Muxing application"),           Y("The name of the application or library used for muxing the file."));
+  ELE("writing-application",  KaxWritingApp::ClassInfos,      Y("Writing application"),          Y("The name of the application or library used for writing the file."));
 
   current_index = KaxTracks::ClassInfos.GlobalId.Value;
 
