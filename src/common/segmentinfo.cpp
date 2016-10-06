@@ -29,6 +29,22 @@
 
 using namespace libmatroska;
 
+template<typename A> void
+provide_default_for_child(EbmlMaster &master,
+                          const UTFstring &default_value) {
+  A *value = FindChild<A>(master);
+  if (value)
+    value->SetValue(value->GetValue());
+  else
+    GetChild<A>(master).SetValue(default_value);
+}
+
+template<typename A> void
+provide_default_for_child(EbmlMaster *master,
+                          const UTFstring &default_value) {
+  provide_default_for_child<A>(*master, default_value);
+}
+
 /** \brief Add missing mandatory elements
 
    The Matroska specs and \c libmatroska say that several elements are

@@ -389,20 +389,6 @@ std::pair<EbmlMaster *, size_t> find_element_in_master(EbmlMaster *master, EbmlE
 
 void fix_mandatory_elements(EbmlElement *master);
 
-template<typename A> void
-provide_default_for_child(EbmlMaster &master,
-                          const UTFstring &default_value) {
-  A &value = GetChild<A>(master);
-  if (!value.GetValue().length())
-    value.SetValue(default_value);
-}
-
-template<typename A> void
-provide_default_for_child(EbmlMaster *master,
-                          const UTFstring &default_value) {
-  provide_default_for_child<A>(*master, default_value);
-}
-
 using ebml_element_cptr = std::shared_ptr<EbmlElement>;
 using ebml_master_cptr  = std::shared_ptr<EbmlMaster>;
 
