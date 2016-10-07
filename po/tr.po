@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-08-08 16:47+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3440,6 +3440,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "Bölüm Çevirme ID: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4499,26 +4501,9 @@ msgstr "Her aralık tam ortada '-' ile başlama ve bitiş zaman kodundan oluşur
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (boyut: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit chapters"
-msgstr "Bölümleri düzenle"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit headers"
-msgstr "Başlıkları düzenle"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Özellikler için seçicileri düzenle"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Edit tags"
-msgstr "Etiketleri düzenle"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4762,7 +4747,7 @@ msgstr "İstisna ayrıntıları:"
 msgid "Executable files"
 msgstr "Çalıştırılabilir dosyalar"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "Çalıştırılabilir dosya bulunamadı"
@@ -4794,11 +4779,6 @@ msgstr "Beklenen zaman biçimi: HH:MM:SS.nnn (HH = saat, MM = dakika, SS = saniy
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "OGM araçları içinde kullanılan basit biçimdeki bölüm bilgisini dışa aktarır (BÖLÜM01=... BÖLÜM01ADI=...)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Extract"
-msgstr "Çıkart"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4839,6 +4819,11 @@ msgstr "KodekID '%2%' ile olan iz %1%, '%3%' dosyasına çıkartılıyor. Kalıp
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "KodekID '%2%' ile olan iz ID %1% çıkartılması desteklenmiyor.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "Çıkartma ara&cı"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5228,6 +5213,8 @@ msgid "Header &editor"
 msgstr "Başlık &düzenleyici"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, no-c-format
 msgid "Header editor"
@@ -5562,9 +5549,9 @@ msgid "Indexing (cues):"
 msgstr "İndeksleme (cue'lar):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Info"
-msgstr "Bilgi"
+#, fuzzy, no-c-format
+msgid "Info tool"
+msgstr "&Bilgi aracı"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -5993,7 +5980,7 @@ msgstr "Bu, XML bölüm dosyaları için yoksayılır."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Moritz Bunkus <moritz@bunkus.org> tarafından yazılmıştır."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr "Kurulum yeri otomatik olarak belirlenemedi."
 
@@ -6362,9 +6349,9 @@ msgstr "RealAudio/RealVideo karesi için bellek ayrılamadı.\n"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, no-c-format
-msgid "Merge"
-msgstr "Birleştirme"
+#, fuzzy, no-c-format
+msgid "Merge tool"
+msgstr "&Birleştirme aracı"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7233,7 +7220,7 @@ msgstr ""
 "Lütfen mkvmerge için ana sayfayı/HTML belgelerini okuyun.\n"
 "Bu listelemede anlaşılmayan birkaç ayrıntıyı önemli ölçüde anlatır.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr "Lütfen aşağıdan konumunu seçin."
 
@@ -8571,6 +8558,11 @@ msgstr "TTA (Kayıpsız Gerçek Ses kodeki)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr "Sekme parçacıklarındaki sekme &konumu:"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "&Etiket düzenleyici"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10093,7 +10085,7 @@ msgstr "Bu dosya zaman kodu satırlarında koordinatlar içeriyor. Bu tür koord
 msgid "This file could not be opened or parsed.\n"
 msgstr "Bu dosya açılamadı veya ayrıştırılamadı.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr "Bu işlev %1 uygulamasını gerektirir."
 
@@ -11202,7 +11194,7 @@ msgstr "Bu değeri tercihlerden değiştirebilirsiniz."
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "<START:biçim> ile başlayan zaman damgası tarafından kullanılan biçimi denetleyebilirsiniz."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr "Uygulamayı aşağıdaki URL'den indirebilirsiniz:"
 
@@ -12464,8 +12456,26 @@ msgstr "– hiçbiri olarak ayarla –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Tarih (geçersiz, değer: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "Bölümleri düzenle"
+
+#~ msgid "Edit headers"
+#~ msgstr "Başlıkları düzenle"
+
+#~ msgid "Edit tags"
+#~ msgstr "Etiketleri düzenle"
+
 #~ msgid "Error importing file"
 #~ msgstr "Ayarlar dosyasını yükleme hatası"
+
+#~ msgid "Extract"
+#~ msgstr "Çıkart"
+
+#~ msgid "Info"
+#~ msgstr "Bilgi"
+
+#~ msgid "Merge"
+#~ msgstr "Birleştirme"
 
 #~ msgid ""
 #~ "Missing header/comment packets for stream. This file is broken but should "

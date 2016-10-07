@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-06-02 23:58+0000\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3454,6 +3454,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "Atal Itzulpen ID-a: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4513,26 +4515,9 @@ msgstr "Maila bakoitza hasiera eta amaiera denbora-kode batean datza, '-' batez 
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (neurria: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit chapters"
-msgstr "Editatu atalak"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit headers"
-msgstr "Editatu idazburuak"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Editatu ezaugarri hautatzaileak"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Edit tags"
-msgstr "Editatu etiketak"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4776,7 +4761,7 @@ msgstr "Salbuespen xehetasunak:"
 msgid "Executable files"
 msgstr "Agiri exekutagarriak"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "Exekutagarria ez da aurkitu"
@@ -4808,11 +4793,6 @@ msgstr "Heuskarri honetako denbora itxaroten zen: HH:MM:SS.nnn (HH = orduak, MM 
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Atal argibideak esportatzen ditu OGM tresnatan erabilitako heuskarri arrunt batean (CHAPTER01=... CHAPTER01NAME=...)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Extract"
-msgstr "Atera"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4853,6 +4833,11 @@ msgstr "Ateratzen %1% bidea '%2%' Kodek ID-arekin '%3%' agirira. Edukiontzi heus
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "%1% bidea '%2%' Kodek ID-arekin ateratzea ez dago sostengaturik.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "&Ateratze tresna"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5242,6 +5227,8 @@ msgid "Header &editor"
 msgstr "Idazburu &editatzailea"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, no-c-format
 msgid "Header editor"
@@ -5576,9 +5563,9 @@ msgid "Indexing (cues):"
 msgstr "Aurkibidetzen (cue-ak):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Info"
-msgstr "Argibideak"
+#, fuzzy, no-c-format
+msgid "Info tool"
+msgstr "Argibi&de tresna"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6007,7 +5994,7 @@ msgstr "Ezikusi egiten da XML atal agirientzat."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Moritz Bunkus-ek <moritz@bunkus.org> idatzia."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr "Ezarpen kokalekua ezin bada berezgaitasunez zehaztu."
 
@@ -6376,9 +6363,9 @@ msgstr "RealAudio/RealVideo frame oroimena ezin da esleitu.\n"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, no-c-format
-msgid "Merge"
-msgstr "Batu"
+#, fuzzy, no-c-format
+msgid "Merge tool"
+msgstr "&Batze tresna"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7248,7 +7235,7 @@ msgstr ""
 "Hor azaltzen dira xehetasun asko modu zabalagaoan,\n"
 "zerrenda honetan hain argiak ez direnak.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr "Mesedez hautatu kokalekua azpian."
 
@@ -8588,6 +8575,11 @@ msgstr "TTA (Galeragabeko True Audio kodeka)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr "Hegats &kokapena hegats gailuetan:"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "Eti&keta editatzailea"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10113,7 +10105,7 @@ msgstr "Agiri honek koordenadak ditu denbora-kodeetan. Koordenada batzuk ez daud
 msgid "This file could not be opened or parsed.\n"
 msgstr "Agiri hau ezin da ireki edo aztertu.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr "Eginkizunak %1 aplikazioa behar du."
 
@@ -11223,7 +11215,7 @@ msgstr "Balio hau hobespenetan aldatu dezakezu."
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Hasiera denbora-irarketan erabilitako heuskarria <START:format>-rekin agindu dezakezu."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr "Aplikazioa hurrengo URL-tik jeitsi dezakezu:"
 
@@ -13481,6 +13473,15 @@ msgstr "– ezarri ezer ezean –"
 #~ msgid "Edit additional source file parts"
 #~ msgstr "Editatu iturburu agiri zati gehigarriak"
 
+#~ msgid "Edit chapters"
+#~ msgstr "Editatu atalak"
+
+#~ msgid "Edit headers"
+#~ msgstr "Editatu idazburuak"
+
+#~ msgid "Edit tags"
+#~ msgstr "Editatu etiketak"
+
 #~ msgid "Edition"
 #~ msgstr "Edizioa"
 
@@ -13529,6 +13530,9 @@ msgstr "– ezarri ezer ezean –"
 
 #~ msgid "Extra options"
 #~ msgstr "Gain aukerak"
+
+#~ msgid "Extract"
+#~ msgstr "Atera"
 
 #~ msgid "FPS:"
 #~ msgstr "FS-ko:"
@@ -13896,6 +13900,9 @@ msgstr "– ezarri ezer ezean –"
 #~ msgid "Inconsistent AAC audio packet (length: %1% != len_check %2%)\n"
 #~ msgstr "AAC audio pakete beteraezina (luzera: %1% != len_check %2%)\n"
 
+#~ msgid "Info"
+#~ msgstr "Argibideak"
+
 #~ msgid "Input"
 #~ msgstr "Sarrera"
 
@@ -14062,6 +14069,9 @@ msgstr "– ezarri ezer ezean –"
 
 #~ msgid "Max. number of files:"
 #~ msgstr "Geh. agiri zenbatekoa:"
+
+#~ msgid "Merge"
+#~ msgstr "Batu"
 
 #~ msgid "Mi&nimum playlist duration:"
 #~ msgstr "Gut&xienezko irakur-zerrenda iraupena:"

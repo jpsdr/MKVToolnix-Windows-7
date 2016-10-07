@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-08-26 19:08+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3506,6 +3506,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "ID per a la traducció de capítols: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4574,26 +4576,9 @@ msgstr "Cada interval consisteix d'un temps inicial i final amb un «-» al mig,
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (mida: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit chapters"
-msgstr "Edita els capítols"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit headers"
-msgstr "Edita les capçaleres"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Selectors per a l'edició de les propietats"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Edit tags"
-msgstr "Edita les etiquetes"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4837,7 +4822,7 @@ msgstr "Detalls de l'excepció:"
 msgid "Executable files"
 msgstr "Fitxers executables"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "No s'ha trobat l'executable"
@@ -4869,11 +4854,6 @@ msgstr "S'esperava un temps en el següent format: HH:MM:SS.nnn (HH = hores, MM 
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Exporta la informació dels capítols en un format simple emprat en les eines OGM (CHAPTER01=«...» CHAPTER01NAME=«...»)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Extract"
-msgstr "Extreu"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4914,6 +4894,11 @@ msgstr "S'està extraient la pista %1% amb l'ID del còdec «%2%» al fitxer «%
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "L'extracció de la pista amb l'ID %1% i l'ID del còdec «%2%», no és admesa.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "&Eina d'extracció"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5303,6 +5288,8 @@ msgid "Header &editor"
 msgstr "&Editor de la capçalera"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, no-c-format
 msgid "Header editor"
@@ -5637,9 +5624,9 @@ msgid "Indexing (cues):"
 msgstr "Indexació (CUE):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Info"
-msgstr "Informació"
+#, fuzzy, no-c-format
+msgid "Info tool"
+msgstr "Eina d'&informació"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6068,7 +6055,7 @@ msgstr "Això serà ignorat pels fitxers XML de capítols."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Ha estat escrit per en Moritz Bunkus <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr "La seva ubicació d'instal·lació no s'ha pogut determinar automàticament."
 
@@ -6437,9 +6424,9 @@ msgstr "No s'ha pogut assignar espai a la memòria per a un fotograma de RealAud
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, no-c-format
-msgid "Merge"
-msgstr "Fusiona"
+#, fuzzy, no-c-format
+msgid "Merge tool"
+msgstr "Eina de &fusionat"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7310,7 +7297,7 @@ msgstr ""
 "«mkvmerge». Allà s'expliquen certs aspectes d'una manera més\n"
 "detallada que no són tan obvis des d'aquest llistat.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr "Seleccioneu la seva ubicació a sota."
 
@@ -8653,6 +8640,11 @@ msgstr "TTA (El còdec d'àudio sense pèrdues True Audio)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr "&Posició de les pestanyes als estris:"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "Editor d'e&tiquetes"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10178,7 +10170,7 @@ msgstr "Aquest fitxer conté les coordenades a les línies del codi de temps. Al
 msgid "This file could not be opened or parsed.\n"
 msgstr "Aquest fitxer no s'ha pogut obrir o analitzar.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr "Aquesta funció requereix l'aplicació %1."
 
@@ -11287,7 +11279,7 @@ msgstr "Podeu canviar aquest valor a les preferències."
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Podeu controlar el format emprat per a la marca de temps d'inici amb <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr "Podeu baixar l'aplicació des del següent URL:"
 
@@ -12542,8 +12534,26 @@ msgstr "– Establert a «no» –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Data (no vàlida, valor: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "Edita els capítols"
+
+#~ msgid "Edit headers"
+#~ msgstr "Edita les capçaleres"
+
+#~ msgid "Edit tags"
+#~ msgstr "Edita les etiquetes"
+
 #~ msgid "Error importing file"
 #~ msgstr "Error en carregar el fitxer d'ajustaments"
+
+#~ msgid "Extract"
+#~ msgstr "Extreu"
+
+#~ msgid "Info"
+#~ msgstr "Informació"
+
+#~ msgid "Merge"
+#~ msgstr "Fusiona"
 
 #~ msgid ""
 #~ "Missing header/comment packets for stream. This file is broken but should "

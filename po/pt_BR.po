@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-08-28 21:11+0000\n"
 "Last-Translator: pp Carvalho\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/pt_BR/)\n"
@@ -3536,6 +3536,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "ID de Tradução do Capítulo: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, fuzzy, no-c-format
 msgid "Chapter editor"
@@ -4618,26 +4620,9 @@ msgstr ""
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (tamanho: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy, no-c-format
-msgid "Edit chapters"
-msgstr "&Novos capítulos"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy, no-c-format
-msgid "Edit headers"
-msgstr "Cabeçalhos de faixa"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Editar seletores para as propriedades"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
-msgid "Edit tags"
-msgstr "Cabeçalhos de faixa"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4884,7 +4869,7 @@ msgstr ""
 msgid "Executable files"
 msgstr "Nome do arquivo seguinte"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, fuzzy, no-c-format
 msgid "Executable not found"
 msgstr "Executável mkvmerge"
@@ -4916,11 +4901,6 @@ msgstr "Tempo esperado no seguinte formato: HH:MM:SS.nnn (HH = hora, MM = minuto
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Exporta a informação do capítulo em um formato simples usado nas ferramentas OGM (CAPÍTULO01= ... NOMEDOCAPÍTULO01 = ...)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
-msgid "Extract"
-msgstr "Extração de capítulos"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4961,6 +4941,11 @@ msgstr "Extraindo faixa %1% com o ID de codec '%2%' para o arquivo '%3%'. Format
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "A extração da faixa %1% com o ID de codec '%2%' não é suportada.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "Opções adicionais"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5367,6 +5352,8 @@ msgid "Header &editor"
 msgstr "Editor de cabeçalhos"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, fuzzy, no-c-format
 msgid "Header editor"
@@ -5703,7 +5690,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 #, no-c-format
-msgid "Info"
+msgid "Info tool"
 msgstr ""
 
 #: src/common/bitvalue.cpp:67
@@ -6138,7 +6125,7 @@ msgstr "(novo arquivo de capítulos)"
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr ""
 
@@ -6515,7 +6502,7 @@ msgstr "A memória para um frame de RealAudio/RealVideo não pôde ser alocada.\
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
 #, fuzzy, no-c-format
-msgid "Merge"
+msgid "Merge tool"
 msgstr "mkvmerge"
 
 #: src/common/file_types.cpp:85
@@ -7403,7 +7390,7 @@ msgstr ""
 "Por favor, leia a página principal ou a documentação HTML para\n"
 "o mkvmerge. Elas explicam vários detalhes de forma maisespecífica, que não são óbvios por esta lista.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr ""
 
@@ -8799,6 +8786,11 @@ msgstr "TTA (The lossless True Audio codec)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "Editor de cabeçalhos"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10364,7 +10356,7 @@ msgstr "O arquivo contém coordenadas nas linhas do código de tempo. Tais coord
 msgid "This file could not be opened or parsed.\n"
 msgstr "O arquivo não pôde ser aberto ou analisado.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr ""
 
@@ -11494,7 +11486,7 @@ msgstr ""
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr ""
 
@@ -12765,8 +12757,20 @@ msgstr ""
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Data (inválida, valor: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "&Novos capítulos"
+
+#~ msgid "Edit headers"
+#~ msgstr "Cabeçalhos de faixa"
+
+#~ msgid "Edit tags"
+#~ msgstr "Cabeçalhos de faixa"
+
 #~ msgid "Error importing file"
 #~ msgstr "Erro ao ler configurações"
+
+#~ msgid "Extract"
+#~ msgstr "Extração de capítulos"
 
 #~ msgid "Missing header/comment packets for stream. This file is broken but should be muxed correctly. If not please contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 #~ msgstr "Pacote de cabeçalhos/comentário ausentes para o arquivo. Este arquivo está quebrado, mas deve ser demultiplexado corretamente. Se isso não acontecer, contate o autor Moritz Bunkus <moritz@bunkus.org>.\n"

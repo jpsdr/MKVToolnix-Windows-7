@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-09-11 16:27+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
@@ -3342,6 +3342,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "ID перевода глав: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4405,26 +4407,9 @@ msgstr "Каждый диапазон состоит из времени нач�
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (размер: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit chapters"
-msgstr "Редактировать главы"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit headers"
-msgstr "Редактировать заголовки"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Редактировать селекторы свойств"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Edit tags"
-msgstr "Редактировать теги"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4668,7 +4653,7 @@ msgstr "Сведения об исключении:"
 msgid "Executable files"
 msgstr "Исполняемые файлы"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "Исполняемый файл не найден"
@@ -4700,11 +4685,6 @@ msgstr "Ожидалось время в следующем формате: HH:M
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Экспорт главы информации в простой формат, используемый в OGM tools (Глава01=... Глава01Имя=...)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Extract"
-msgstr "Извлечь"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4745,6 +4725,11 @@ msgstr "Извлечение дорожки %1% с CodecID '%2%' в файл '%3
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "Извлечение дорожки ID %1% с CodecID '%2%' не поддерживается.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "&Инструмент для извлечения"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5136,6 +5121,8 @@ msgid "Header &editor"
 msgstr "Редактор &заголовков"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, no-c-format
 msgid "Header editor"
@@ -5470,9 +5457,9 @@ msgid "Indexing (cues):"
 msgstr "Индексация (cues):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Info"
-msgstr "Информация"
+#, fuzzy, no-c-format
+msgid "Info tool"
+msgstr "&Информация"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -5903,7 +5890,7 @@ msgstr "Игнорируется для файлов XML-глав."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Программа написана Moritz Bunkus <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr "Автоматически не удалось определить папку, в которую установлена эта программа."
 
@@ -6272,9 +6259,9 @@ msgstr "Память для кадра RealAudio/RealVideo не может бы�
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, no-c-format
-msgid "Merge"
-msgstr "Объединение"
+#, fuzzy, no-c-format
+msgid "Merge tool"
+msgstr "&Инструмент объединения"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7155,7 +7142,7 @@ msgstr ""
 "Ознакомьтесь, пожалуйста, со справкой или HTML-документацией для mkvmerge, где\n"
 "углублённо объясняются некоторые детали, которые не ясны из этой краткой справки.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr "Пожалуйста, укажите её расположение ниже."
 
@@ -8506,6 +8493,11 @@ msgstr "TTA (The lossless True Audio codec)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr "Расположение вкладок в виджетах:"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "&Редактор заголовков"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10045,7 +10037,7 @@ msgstr "Этот файл содержит координаты в строка�
 msgid "This file could not be opened or parsed.\n"
 msgstr "Этот файл не может быть открыт или проанализирован.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr "Данная функция требует использования приложения %1."
 
@@ -11154,7 +11146,7 @@ msgstr "Вы можете изменить это значение в настр
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Вы можете управлять форматом используя начальную временную метку в виде <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr "Вы можете скачать данное приложение по следующей ссылке:"
 
@@ -12413,11 +12405,29 @@ msgstr "– установлено в 'нет' –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Дата (недопустимая, значение: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "Редактировать главы"
+
+#~ msgid "Edit headers"
+#~ msgstr "Редактировать заголовки"
+
+#~ msgid "Edit tags"
+#~ msgstr "Редактировать теги"
+
 #~ msgid "Error importing file"
 #~ msgstr "Ошибка при загрузке файла настроек"
 
+#~ msgid "Extract"
+#~ msgstr "Извлечь"
+
 #~ msgid "Hel&p"
 #~ msgstr "Помощь"
+
+#~ msgid "Info"
+#~ msgstr "Информация"
+
+#~ msgid "Merge"
+#~ msgstr "Объединение"
 
 #~ msgid "Missing header/comment packets for stream. This file is broken but should be muxed correctly. If not please contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 #~ msgstr "Отсутствуют пакеты заголовка/комментария для потока. Этот файл повреждён, но должен обрабатываться правильно. Если это не так, пожалуйста, сообщите автору Moritz Bunkus <moritz@bunkus.org>.\n"

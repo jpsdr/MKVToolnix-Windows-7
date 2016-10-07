@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-08-07 10:18+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -3402,6 +3402,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "챕터 번역 ID: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4460,26 +4462,9 @@ msgstr "각 범위는 '-'를 중앙에 두고 시작과 끝의 타임코드로 �
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (크기: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit chapters"
-msgstr "챕터 편집"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit headers"
-msgstr "헤더 편집"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "속성 선택기 편집"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Edit tags"
-msgstr "태그 편집"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4723,7 +4708,7 @@ msgstr "예외 세부 사항:"
 msgid "Executable files"
 msgstr "실행 파일"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "실행 파일이 없습니다"
@@ -4755,11 +4740,6 @@ msgstr "다음 형식으로 시간 지정: HH:MM:SS.nnn (HH = 시간, MM = 분, 
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "챕터 정보를 OGM tools에서 사용되는 단순 형식(CHAPTER01=... CHAPTER01NAME=...)으로 내보냅니다."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Extract"
-msgstr "추출"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4800,6 +4780,11 @@ msgstr "코덱ID '%2%'의 트랙 %1%을 파일 '%3%'에 추출합니다. 컨테�
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "코덱ID '%2%'의 트랙 ID %1%의 추출은 지원하지 않습니다.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "추출 도구(&E)"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5188,6 +5173,8 @@ msgid "Header &editor"
 msgstr "헤더 편집기(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, no-c-format
 msgid "Header editor"
@@ -5522,9 +5509,9 @@ msgid "Indexing (cues):"
 msgstr "인덱싱 (큐):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Info"
-msgstr "정보"
+#, fuzzy, no-c-format
+msgid "Info tool"
+msgstr "정보 도구(&I)"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -5953,7 +5940,7 @@ msgstr "XML 챕터 파일에서는 무시합니다."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "제작자는 Moritz Bunkus <moritz@bunkus.org> 입니다."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr "그 설치 위치를 자동으로 알아낼 수 없습니다."
 
@@ -6322,9 +6309,9 @@ msgstr "RealAudio/RealVideo 프레임에 대한 메모리를 할당할 수 없�
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, no-c-format
-msgid "Merge"
-msgstr "합치기"
+#, fuzzy, no-c-format
+msgid "Merge tool"
+msgstr "합치기 도구(&M)"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7188,7 +7175,7 @@ msgstr ""
 "mkvmerge의 man page/HTML 문서를 읽어보십시오.\n"
 "이 목록에 명백하지 않은 것도 이 문서에는 길게(자세히) 설명되어 있습니다.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr "아래에서 그 위치를 선택하세요."
 
@@ -8525,6 +8512,11 @@ msgstr "TTA [무손실 가역압축 오디오 코덱](The lossless True Audio co
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr "탭 위젯의 탭 위치(&P):"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "태그 편집기(&T)"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10035,7 +10027,7 @@ msgstr "이 파일은 타임코드 행에 좌표가 포함되어 있습니다. �
 msgid "This file could not be opened or parsed.\n"
 msgstr "이 파일을 열거나 분석할 수 없습니다.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr "이 함수는 %1 프로그램이 필요합니다."
 
@@ -11144,7 +11136,7 @@ msgstr "이 값은 환경설정에서 바꿀 수 있습니다."
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "<START:format>으로 된 시작 타임스탬프가 사용하는 형식은 제어가 가능합니다."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr "프로그램을 다음 URL에서 다운로드할 수 있습니다:"
 
@@ -12382,8 +12374,26 @@ msgstr "– 없음으로 설정 –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "날짜 (잘못된 값: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "챕터 편집"
+
+#~ msgid "Edit headers"
+#~ msgstr "헤더 편집"
+
+#~ msgid "Edit tags"
+#~ msgstr "태그 편집"
+
 #~ msgid "Error importing file"
 #~ msgstr "설정 파일 불러오는 중 오류 발생"
+
+#~ msgid "Extract"
+#~ msgstr "추출"
+
+#~ msgid "Info"
+#~ msgstr "정보"
+
+#~ msgid "Merge"
+#~ msgstr "합치기"
 
 #~ msgid "Missing header/comment packets for stream. This file is broken but should be muxed correctly. If not please contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 #~ msgstr "스트림의 헤더/주석 패킷이 누락되어 있습니다. 파일이 손상되어 있지만, 제대로 MUX될 것입니다. 만약 제대로 MUX되지 않을 경우, 제작자 Moritz Bunkus <moritz@bunkus.org>에게 문의하십시오.\n"

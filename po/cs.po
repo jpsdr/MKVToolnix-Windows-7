@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-07-11 21:50+0200\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech <trottel09@gmail.com>\n"
@@ -3492,6 +3492,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "ID překladu kapitoly: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4568,26 +4570,9 @@ msgstr "Každý rozsah se skládá z počátečního a koncového časového kó
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (velikost: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy, no-c-format
-msgid "Edit chapters"
-msgstr "upravit kapitoly"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy, no-c-format
-msgid "Edit headers"
-msgstr "upravit hlavičky"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Upravit přepínače pro vlastnosti"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
-msgid "Edit tags"
-msgstr "upravit štítky"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4833,7 +4818,7 @@ msgstr "Podrobnosti výjimky:"
 msgid "Executable files"
 msgstr "Spustitelné soubory"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "Spustitelné nebyly nalezeny"
@@ -4865,11 +4850,6 @@ msgstr "Očekáván čas v následujícím formátu: HH:MM:SS.nnn (HH = hodiny, 
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Exportuje informace o kapitole v jednoduchém formátu použitém v nástrojích OGM (CHAPTER01=... CHAPTER01NAME=...)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
-msgid "Extract"
-msgstr "extrahovat"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4910,6 +4890,11 @@ msgstr "Extrahování stopy %1% s ID kodeku '%2%' do souboru '%3%'. Formát kont
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "Extrahování stopy s ID %1% s ID kodeku '%2%' není podporováno.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "Nástroj &extrahování"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5302,6 +5287,8 @@ msgid "Header &editor"
 msgstr "Editor hlaviček"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, fuzzy, no-c-format
 msgid "Header editor"
@@ -5638,8 +5625,8 @@ msgstr "Indexování (indexy):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 #, fuzzy, no-c-format
-msgid "Info"
-msgstr "mkvInfo"
+msgid "Info tool"
+msgstr "&Nástroj informací"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6069,7 +6056,7 @@ msgstr "Je ignorována pro soubory kapitol XML."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Jeho autorem je Moritz Bunkus <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr ""
 
@@ -6439,8 +6426,8 @@ msgstr "Paměť pro snímek RealAudio nebo RealVideo nemohla být přidělena.\n
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
 #, fuzzy, no-c-format
-msgid "Merge"
-msgstr "&Sloučit"
+msgid "Merge tool"
+msgstr "&Nástroj sloučení"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7321,7 +7308,7 @@ msgid ""
 "this listing.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr ""
 
@@ -8659,6 +8646,11 @@ msgstr "TTA (kodek The lossless True Audio)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "&Editor štítků"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10170,7 +10162,7 @@ msgstr ""
 msgid "This file could not be opened or parsed.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr ""
 
@@ -11283,7 +11275,7 @@ msgstr ""
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr ""
 
@@ -12537,8 +12529,26 @@ msgstr "– nastavit na žádný –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Datum (neplatné, hodnota: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "upravit kapitoly"
+
+#~ msgid "Edit headers"
+#~ msgstr "upravit hlavičky"
+
+#~ msgid "Edit tags"
+#~ msgstr "upravit štítky"
+
 #~ msgid "Error importing file"
 #~ msgstr "Chyba při načítání souboru nastavení"
+
+#~ msgid "Extract"
+#~ msgstr "extrahovat"
+
+#~ msgid "Info"
+#~ msgstr "mkvInfo"
+
+#~ msgid "Merge"
+#~ msgstr "&Sloučit"
 
 #~ msgid "Name &template:"
 #~ msgstr "Ša&blona názvu:"

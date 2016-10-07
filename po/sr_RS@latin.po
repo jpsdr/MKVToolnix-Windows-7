@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-09-10 21:08+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -3458,6 +3458,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "Chapter Translate ID: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4518,26 +4520,9 @@ msgstr "Svaki opseg se sastoji od početnog i krajnjeg vremenskog koda sa '-' u 
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (veličina: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit chapters"
-msgstr "Uredi poglavlja"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit headers"
-msgstr "Uredi zaglavlja"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Uredi selektore za svojstva"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Edit tags"
-msgstr "Uredi tagove"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4781,7 +4766,7 @@ msgstr "Detalji odstupanja:"
 msgid "Executable files"
 msgstr "Izvršni fajlovi"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "Izvršni fajl nije nađen"
@@ -4813,11 +4798,6 @@ msgstr "Očekivao vreme u sledećem formatu: HH:MM:SS.nnn (HH = čas, MM = minut
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Izvozi informaciju o poglavlju u jednostavnom formatu koji je koristi u OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Extract"
-msgstr "Izvuci"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4858,6 +4838,11 @@ msgstr "Izvlačim stazu %1% koja ima CodecID '%2%' u fajl '%3%'. Kontejner forma
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "Izvlačenje track ID %1% sa CodecID '%2%' nije podržano.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "&Izvlačenje"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5248,6 +5233,8 @@ msgid "Header &editor"
 msgstr "Urednik &zaglavlja"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, no-c-format
 msgid "Header editor"
@@ -5582,9 +5569,9 @@ msgid "Indexing (cues):"
 msgstr "Indeksiranje (cues):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Info"
-msgstr "Info"
+#, fuzzy, no-c-format
+msgid "Info tool"
+msgstr "I&nfo"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6013,7 +6000,7 @@ msgstr "Ovo se ignoriše za fajlove poglavlja XML tipa."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Napisao ga je Moric Bunks <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr "Njegova lokacija nije mogla biti utvrđena automatski."
 
@@ -6384,9 +6371,9 @@ msgstr "Memorija za RealAudio/RealVideo okvir ne može biti dodeljena.\n"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, no-c-format
-msgid "Merge"
-msgstr "Sastavi"
+#, fuzzy, no-c-format
+msgid "Merge tool"
+msgstr "&Sastavljanje"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7262,7 +7249,7 @@ msgstr ""
 "Ona detaljno objašnjava više detalja koji nisu očigledni iz ovog\n"
 "listinga.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr "Molim vas izaberite njegovu lokaciju ispod."
 
@@ -8606,6 +8593,11 @@ msgstr "TTA (The lossless True Audio codec)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr "Pozicija &taba u tab widget-ima:"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "Urednik &tagova"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10134,7 +10126,7 @@ msgstr "Ovaj fajl sadrži koordinate u linijama vremenskih kodova. Takve koordin
 msgid "This file could not be opened or parsed.\n"
 msgstr "Ovaj fajl ne može biti otvoren ili raščlanjen.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr "Ova funkcija zahteva aplikaciju %1."
 
@@ -11244,7 +11236,7 @@ msgstr "Možete da promenite ovu vrednost u opcijama."
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Možete kontrolisati format korišćen od strane početne vremenske oznake sa <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr "Možete skinuti aplikaciju sa sledećeg URL-a:"
 
@@ -12507,8 +12499,26 @@ msgstr "– nijedna –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Datum (nevažeći, vrednost: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "Uredi poglavlja"
+
+#~ msgid "Edit headers"
+#~ msgstr "Uredi zaglavlja"
+
+#~ msgid "Edit tags"
+#~ msgstr "Uredi tagove"
+
 #~ msgid "Error importing file"
 #~ msgstr "Greška prilikom učitavanja parametara"
+
+#~ msgid "Extract"
+#~ msgstr "Izvuci"
+
+#~ msgid "Info"
+#~ msgstr "Info"
+
+#~ msgid "Merge"
+#~ msgstr "Sastavi"
 
 #~ msgid ""
 #~ "Missing header/comment packets for stream. This file is broken but should "

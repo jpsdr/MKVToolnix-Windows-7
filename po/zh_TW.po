@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2015-12-16 10:26+0100\n"
 "Last-Translator: Dongjun Wu <ziyawu@gmail.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -3449,6 +3449,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "章節翻譯 ID: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, fuzzy, no-c-format
 msgid "Chapter editor"
@@ -4528,26 +4530,9 @@ msgstr "每個範圍由起始和結束時間碼中間加上「-」組成，例�
 msgid "EbmlVoid (size: %1%)"
 msgstr "Ebml 空隙 (大小: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy, no-c-format
-msgid "Edit chapters"
-msgstr "編輯章節"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, fuzzy, no-c-format
-msgid "Edit headers"
-msgstr "編輯表頭"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "屬性的編輯選擇器"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
-msgid "Edit tags"
-msgstr "編輯標籤"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4793,7 +4778,7 @@ msgstr "異常狀況詳細資訊:"
 msgid "Executable files"
 msgstr "純文字檔"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, fuzzy, no-c-format
 msgid "Executable not found"
 msgstr "mkvmerge 可執行檔"
@@ -4825,11 +4810,6 @@ msgstr "預期為如下格式的時間: HH:MM:SS.nnn (HH = 時, MM = 分, SS = �
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "用 OGM 工具的簡易格式來匯出章節資訊 (CHAPTER01=... CHAPTER01名稱=...)。"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
-msgid "Extract"
-msgstr "提取"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4870,6 +4850,11 @@ msgstr "正在提取軌道 %1% （CodecID 為「%2%」）至檔案「%3%」。�
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "不支援要提取的軌道識別碼 %1%（CodecID 為「%2%」）。\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "提取工具(&E)"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5263,6 +5248,8 @@ msgid "Header &editor"
 msgstr "表頭編輯器(&H)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, fuzzy, no-c-format
 msgid "Header editor"
@@ -5599,8 +5586,8 @@ msgstr "索引 (cue):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
 #, fuzzy, no-c-format
-msgid "Info"
-msgstr "mkvInfo"
+msgid "Info tool"
+msgstr "資訊工具(&I)"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6030,7 +6017,7 @@ msgstr "XML 章節檔會忽略此項。"
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "此程式作者是 Moritz Bunkus <moritz@bunkus.org>。"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr ""
 
@@ -6401,8 +6388,8 @@ msgstr "無法為一個 RealAudio/RealVideo 畫格分配記憶體。\n"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
 #, fuzzy, no-c-format
-msgid "Merge"
-msgstr "合併(&M)"
+msgid "Merge tool"
+msgstr "合併工具(&M)"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7280,7 +7267,7 @@ msgstr ""
 "請閱讀 mkvmerge 命令列使用說明文件。\n"
 "它以大篇幅解釋了本清單中不易看透的細節。\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr ""
 
@@ -8633,6 +8620,11 @@ msgstr "TTA (The True Audio 無損音訊編解碼)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr ""
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "標籤編輯器(&T)"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10154,7 +10146,7 @@ msgstr "此檔案時間軸中含有坐標。此類坐標不受 Matroska SRT 字�
 msgid "This file could not be opened or parsed.\n"
 msgstr "這個檔案無法開啟或解析。\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr ""
 
@@ -11272,7 +11264,7 @@ msgstr "你可以在偏好設定中變更此數值。"
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr ""
 
@@ -12535,8 +12527,26 @@ msgstr "- 設定為無 -"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "日期 (無效, 值: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "編輯章節"
+
+#~ msgid "Edit headers"
+#~ msgstr "編輯表頭"
+
+#~ msgid "Edit tags"
+#~ msgstr "編輯標籤"
+
 #~ msgid "Error importing file"
 #~ msgstr "載入設定檔發生錯誤"
+
+#~ msgid "Extract"
+#~ msgstr "提取"
+
+#~ msgid "Info"
+#~ msgstr "mkvInfo"
+
+#~ msgid "Merge"
+#~ msgstr "合併(&M)"
 
 #~ msgid "Missing header/comment packets for stream. This file is broken but should be muxed correctly. If not please contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 #~ msgstr "缺少串流的表頭/註釋封包。檔案已損壞但應該能正常合成。如果確定檔案沒有損壞，請聯繫作者 Moritz Bunkus <moritz@bunkus.org>。\n"

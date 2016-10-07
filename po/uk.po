@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-05-02 18:05+0300\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -3474,6 +3474,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "ID перекладу розділів: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4534,26 +4536,9 @@ msgstr "Кожен діапазон складається з тайм-коді�
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (розмір: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit chapters"
-msgstr "Редактор розділів"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit headers"
-msgstr "Редактор заголовків"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Редагувати селектори для властивостей"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Edit tags"
-msgstr "Редактор тегів"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4797,7 +4782,7 @@ msgstr "Деталі обробки винятку:"
 msgid "Executable files"
 msgstr "Виконувані файли"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "Виконуваний файл не знайдено"
@@ -4829,11 +4814,6 @@ msgstr "Час має бути заданий в такому форматі: HH
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Експортувати інформацію розділів в простий формат, що використовується в утилітах OGM (CHAPTER01=... CHAPTER01NAME=...)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Extract"
-msgstr "Витягнення"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4874,6 +4854,11 @@ msgstr "Витягнення доріжки %1% з CodecID '%2%' у файл '%3
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "Витягнення доріжки з ID %1% з CodecID '%2%' не підтримується.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "&Інструмент витягнення"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5264,6 +5249,8 @@ msgid "Header &editor"
 msgstr "Редактор &заголовків"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, no-c-format
 msgid "Header editor"
@@ -5598,9 +5585,9 @@ msgid "Indexing (cues):"
 msgstr "Індексація (cues):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Info"
-msgstr "Інформація"
+#, fuzzy, no-c-format
+msgid "Info tool"
+msgstr "&Інформаційний інструмент"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6032,7 +6019,7 @@ msgstr "Це ігнорується для XML файлів з роздііам�
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Ця програма була написана Moritz Bunkus <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr ""
 
@@ -6401,9 +6388,9 @@ msgstr "Неможливо виділити об'єм пам'яті для ка�
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, no-c-format
-msgid "Merge"
-msgstr "Мультиплексування"
+#, fuzzy, no-c-format
+msgid "Merge tool"
+msgstr "&Мультиплексування"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7279,7 +7266,7 @@ msgstr ""
 "даються більш детальні пояснення, які не очевидні з\n"
 "цього запису.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr "Будь ласка, оберіть файл."
 
@@ -8631,6 +8618,11 @@ msgstr "TTA (The lossless True Audio codec)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr "&Розташування вкладок у віджетах вкладок:"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "&Редактор тегів"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10167,7 +10159,7 @@ msgstr "Цей файл містить координати в рядках та
 msgid "This file could not be opened or parsed.\n"
 msgstr "Цей файл не може бути відкритий або проаналізований.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr "Дана функція вимагає наявність додатку %1."
 
@@ -11279,7 +11271,7 @@ msgstr "Ви можете змінити це значення в налашту
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Ви можете керувати форматом, що використовується початковою часовою міткою за допомогою <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr "Ви можете завантажити додаток за вказаним URL:"
 
@@ -12548,11 +12540,29 @@ msgstr "– нічого не обрано –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Дата (невірна, значення: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "Редактор розділів"
+
+#~ msgid "Edit headers"
+#~ msgstr "Редактор заголовків"
+
+#~ msgid "Edit tags"
+#~ msgstr "Редактор тегів"
+
 #~ msgid "Error importing file"
 #~ msgstr "Помилка завантаження файла налаштувань"
 
+#~ msgid "Extract"
+#~ msgstr "Витягнення"
+
 #~ msgid "Hel&p"
 #~ msgstr "Доп&омога"
+
+#~ msgid "Info"
+#~ msgstr "Інформація"
+
+#~ msgid "Merge"
+#~ msgstr "Мультиплексування"
 
 #~ msgid ""
 #~ "Missing header/comment packets for stream. This file is broken but should "

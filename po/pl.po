@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-08-03 17:19+0200\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -3448,6 +3448,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4508,26 +4510,9 @@ msgstr "Każdy odcinek posiada czas początkowy i końcowy z myślnikiem po śro
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (rozmiar: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit chapters"
-msgstr "Edytuj rozdziały"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit headers"
-msgstr "Edytuj nagłówki"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Selektory dla edytowania właściwości"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Edit tags"
-msgstr "Edytuj tagi"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4771,7 +4756,7 @@ msgstr "Szczegóły wyjątku:"
 msgid "Executable files"
 msgstr "Pliki wykonywalne"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "Nie znaleziono pliku wykonywalnego"
@@ -4803,11 +4788,6 @@ msgstr "Program spodziewa się podania czasu w formacie: GG:MM:SS.nnn (GG = godz
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Eksportuje rozdziały do prostego formatu OGM (CHAPTER01=... CHAPTER01NAME=...)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Extract"
-msgstr "Wyodrębnij"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4848,6 +4828,11 @@ msgstr "Wyodrębnianie ścieżki %1% z CodecID \"%2%\" do pliku \"%3%\". Format 
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "Wyodrębnianie ID ścieżki %1% z CodecID \"%2%\" nie jest obsługiwane.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "Narzędzi&e wyodrębniania "
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5238,6 +5223,8 @@ msgid "Header &editor"
 msgstr "&Edytor nagłówków"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, no-c-format
 msgid "Header editor"
@@ -5572,9 +5559,9 @@ msgid "Indexing (cues):"
 msgstr "Indeksowanie (cues):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Info"
-msgstr "mkvInfo"
+#, fuzzy, no-c-format
+msgid "Info tool"
+msgstr "Narzędzie &Info "
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6003,7 +5990,7 @@ msgstr "Opcja jest ignorowana dla plików rozdziałów XML."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Program został napisany przez Moritza Bunkusa <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr "Miejsce instalacji programu nie zostało wykryte automatycznie."
 
@@ -6372,9 +6359,9 @@ msgstr "Pamięć dla klatki RealAudio/RealVideo nie może być przyporządkowana
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, no-c-format
-msgid "Merge"
-msgstr "Muksowanie"
+#, fuzzy, no-c-format
+msgid "Merge tool"
+msgstr "Narzędzie &muksowania "
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7251,7 +7238,7 @@ msgstr ""
 "wyjaśnia wyczerpująco wiele zagadnień mogących nie być oczywistymi\n"
 "po przeczytaniu powyższej listy opcji.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr "Proszę poniżej wybrać jego lokalizację."
 
@@ -8595,6 +8582,11 @@ msgstr "TTA (The lossless True Audio codec)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr "&Położenie zakładek w widżetach:"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "Edytor &tagów"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10115,7 +10107,7 @@ msgstr "Ten plik zawiera współrzędne w liniach kodów czasowych. Takie wspó�
 msgid "This file could not be opened or parsed.\n"
 msgstr "Ten plik nie może być otwarty lub poddany analizie.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr "Ta funkcja wymaga posiadania aplikacji %1."
 
@@ -11230,7 +11222,7 @@ msgstr "Możesz zmienić tę wartość w ustawieniach."
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Możesz kontrolować format czasu rozpoczęcia poprzez <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr "Możesz pobrać aplikację klikając na poniższy odnośnik URL:"
 
@@ -12494,8 +12486,26 @@ msgstr "– ustaw na żadne –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Data (nieprawidłowa, wartość: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "Edytuj rozdziały"
+
+#~ msgid "Edit headers"
+#~ msgstr "Edytuj nagłówki"
+
+#~ msgid "Edit tags"
+#~ msgstr "Edytuj tagi"
+
 #~ msgid "Error importing file"
 #~ msgstr "Błąd podczas wczytywania pliku ustawień"
+
+#~ msgid "Extract"
+#~ msgstr "Wyodrębnij"
+
+#~ msgid "Info"
+#~ msgstr "mkvInfo"
+
+#~ msgid "Merge"
+#~ msgstr "Muksowanie"
 
 #~ msgid ""
 #~ "Missing header/comment packets for stream. This file is broken but should "

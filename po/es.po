@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-06 21:30+0200\n"
+"POT-Creation-Date: 2016-10-07 10:02+0200\n"
 "PO-Revision-Date: 2016-08-13 17:04+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3521,6 +3521,8 @@ msgid "Chapter Translate ID: %1%"
 msgstr "ID de traducción de capítulo: %1%"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Chapter editor"
@@ -4580,26 +4582,9 @@ msgstr "Cada rango tiene un código de tiempo inicial y final, separados en el m
 msgid "EbmlVoid (size: %1%)"
 msgstr "EbmlVoid (tamaño: %1%)"
 
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:146
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit chapters"
-msgstr "Editar capítulos"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
-#, no-c-format
-msgid "Edit headers"
-msgstr "Editar cabeceras"
-
 #: src/propedit/propedit_cli_parser.cpp:243
 msgid "Edit selectors for properties"
 msgstr "Editar selectores para las propiedades"
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Edit tags"
-msgstr "Editar etiquetas"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:79
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:511
@@ -4843,7 +4828,7 @@ msgstr "Detalles de la excepción:"
 msgid "Executable files"
 msgstr "Archivos ejecutables"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1727
+#: src/mkvtoolnix-gui/merge/input.cpp:1729
 #, no-c-format
 msgid "Executable not found"
 msgstr "Ejecutable no encontrado"
@@ -4875,11 +4860,6 @@ msgstr "Se esperaba un tiempo en el siguiente formato: HH:MM:SS.nnn (HH = horas,
 #: src/extract/extract_cli_parser.cpp:98
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
 msgstr "Exporta la información del capítulo en un formato simple usado en las herramientas ODM (CHAPTER01=... CHAPTER01NAME=...)."
-
-#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Extract"
-msgstr "Extraer"
 
 #: src/extract/extract_cli_parser.cpp:72
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -4920,6 +4900,11 @@ msgstr "Extrayendo pista %1% con ID del códec '%2%' al archivo '%3%'. Formato d
 #, boost-format
 msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "La extracción de la pista con ID %1% y CodecID '%2%', no es compatible.\n"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Extraction tool"
+msgstr "Herramienta de &extracción"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5309,6 +5294,8 @@ msgid "Header &editor"
 msgstr "&Editor de cabecera "
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:145
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:157
 #, no-c-format
 msgid "Header editor"
@@ -5643,9 +5630,9 @@ msgid "Indexing (cues):"
 msgstr "Indexar (índices):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, no-c-format
-msgid "Info"
-msgstr "Info"
+#, fuzzy, no-c-format
+msgid "Info tool"
+msgstr "Herramienta de &información"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6074,7 +6061,7 @@ msgstr "Es ignorado para archivos de capítulos XML."
 msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 msgstr "Fue escrito por Moritz Bunkus <moritz@bunkus.org>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1730
+#: src/mkvtoolnix-gui/merge/input.cpp:1732
 msgid "Its installation location could not be determined automatically."
 msgstr "Su lugar de instalación no se pudo determinar automáticamente."
 
@@ -6443,9 +6430,9 @@ msgstr "La memoria para un fotograma (frame) de un RealAudio/RealVideo no puede 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, no-c-format
-msgid "Merge"
-msgstr "Multiplexar"
+#, fuzzy, no-c-format
+msgid "Merge tool"
+msgstr "Herramienta de &multiplexado"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -7315,7 +7302,7 @@ msgstr ""
 "mkvmerge. En ella, se explican ciertos aspectos de una manera\n"
 "más detallada que no son tan obvias desde este listado.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1731
+#: src/mkvtoolnix-gui/merge/input.cpp:1733
 msgid "Please select its location below."
 msgstr "Por favor, seleccione su ubicación de abajo."
 
@@ -8656,6 +8643,11 @@ msgstr "TTA (The lossless True Audio codec)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1255
 msgid "Tab &position in tab widgets:"
 msgstr "&Posición de la pestaña en los widgets:"
+
+#: src/mkvtoolnix-gui/main_window/main_window.cpp:295
+#, fuzzy, no-c-format
+msgid "Tag editor"
+msgstr "Editor de &etiqueta"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -10183,7 +10175,7 @@ msgstr "Este archivo contiene las coordenadas en las líneas del código de tiem
 msgid "This file could not be opened or parsed.\n"
 msgstr "Este archivo no fue posible abrir o analizado.\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1729
+#: src/mkvtoolnix-gui/merge/input.cpp:1731
 msgid "This function requires the application %1."
 msgstr "Esta función requiere la aplicación %1."
 
@@ -11292,7 +11284,7 @@ msgstr "Puede cambiar este valor en las preferencias."
 msgid "You can control the format used by the start timestamp with <START:format>."
 msgstr "Puede controlar el formato usado mediante la marca de tiempo inicial con <START:format>."
 
-#: src/mkvtoolnix-gui/merge/input.cpp:1732
+#: src/mkvtoolnix-gui/merge/input.cpp:1734
 msgid "You can download the application from the following URL:"
 msgstr "Puede descargar la aplicación desde la siguiente URL:"
 
@@ -12555,8 +12547,26 @@ msgstr "– establecido a ninguno –"
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Fecha (no válida, valor: %1%)"
 
+#~ msgid "Edit chapters"
+#~ msgstr "Editar capítulos"
+
+#~ msgid "Edit headers"
+#~ msgstr "Editar cabeceras"
+
+#~ msgid "Edit tags"
+#~ msgstr "Editar etiquetas"
+
 #~ msgid "Error importing file"
 #~ msgstr "Error cargando ajustes del archivo"
+
+#~ msgid "Extract"
+#~ msgstr "Extraer"
+
+#~ msgid "Info"
+#~ msgstr "Info"
+
+#~ msgid "Merge"
+#~ msgstr "Multiplexar"
 
 #~ msgid ""
 #~ "Missing header/comment packets for stream. This file is broken but should "
