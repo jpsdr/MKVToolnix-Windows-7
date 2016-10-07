@@ -20,6 +20,8 @@ QUrl pathToFileUrl(QString const &path);
 
 QString removeInvalidPathCharacters(QString fileName);
 
+QStringList replaceDirectoriesByContainedFiles(QStringList const &namesToCheck);
+
 }}}
 
 #endif  // MTX_MKVTOOLNIX_GUI_UTIL_FILE_H

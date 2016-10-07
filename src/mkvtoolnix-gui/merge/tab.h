@@ -164,7 +164,7 @@ public slots:
 
   virtual void onFileRowsInserted(QModelIndex const &parentIdx, int first, int last);
   virtual void onTrackRowsInserted(QModelIndex const &parentIdx, int first, int last);
-  virtual void addOrAppendDroppedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
+  virtual void addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend, Qt::MouseButtons mouseButtons);
   virtual void addOrAppendDroppedFilesDelayed();
   virtual void addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
 

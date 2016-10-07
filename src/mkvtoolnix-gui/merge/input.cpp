@@ -1432,8 +1432,10 @@ Tab::setOutputFileNameMaybe() {
 }
 
 void
-Tab::addOrAppendDroppedFiles(QStringList const &fileNames,
+Tab::addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend,
                              Qt::MouseButtons mouseButtons) {
+  auto fileNames = Util::replaceDirectoriesByContainedFiles(fileNamesToAddOrAppend);
+
   if (fileNames.isEmpty())
     return;
 
