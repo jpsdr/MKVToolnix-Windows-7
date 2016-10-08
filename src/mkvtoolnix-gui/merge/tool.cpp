@@ -52,30 +52,30 @@ Tool::setupActions() {
   auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
 
-  connect(m_mergeMenu,                              &QMenu::aboutToShow,               this, &Tool::enableMenuActions);
-  connect(m_mergeMenu,                              &QMenu::aboutToHide,               this, &Tool::enableCopyMenuActions);
+  connect(m_mergeMenu,                                &QMenu::aboutToShow,               this, &Tool::enableMenuActions);
+  connect(m_mergeMenu,                                &QMenu::aboutToHide,               this, &Tool::enableCopyMenuActions);
 
-  connect(mwUi->actionMergeNew,                     &QAction::triggered,               this, &Tool::newConfig);
-  connect(mwUi->actionMergeOpen,                    &QAction::triggered,               this, &Tool::openConfig);
-  connect(mwUi->actionMergeClose,                   &QAction::triggered,               this, &Tool::closeCurrentTab);
-  connect(mwUi->actionMergeSave,                    &QAction::triggered,               this, &Tool::saveConfig);
-  connect(mwUi->actionMergeSaveAs,                  &QAction::triggered,               this, &Tool::saveConfigAs);
-  connect(mwUi->actionMergeSaveOptionFile,          &QAction::triggered,               this, &Tool::saveOptionFile);
-  connect(mwUi->actionMergeStartMuxing,             &QAction::triggered,               this, &Tool::startMuxing);
-  connect(mwUi->actionMergeAddToJobQueue,           &QAction::triggered,               this, &Tool::addToJobQueue);
-  connect(mwUi->actionMergeShowMkvmergeCommandLine, &QAction::triggered,               this, &Tool::showCommandLine);
+  connect(mwUi->actionMergeNew,                       &QAction::triggered,               this, &Tool::newConfig);
+  connect(mwUi->actionMergeOpen,                      &QAction::triggered,               this, &Tool::openConfig);
+  connect(mwUi->actionMergeClose,                     &QAction::triggered,               this, &Tool::closeCurrentTab);
+  connect(mwUi->actionMergeSave,                      &QAction::triggered,               this, &Tool::saveConfig);
+  connect(mwUi->actionMergeSaveAs,                    &QAction::triggered,               this, &Tool::saveConfigAs);
+  connect(mwUi->actionMergeSaveOptionFile,            &QAction::triggered,               this, &Tool::saveOptionFile);
+  connect(mwUi->actionMergeStartMuxing,               &QAction::triggered,               this, &Tool::startMuxing);
+  connect(mwUi->actionMergeAddToJobQueue,             &QAction::triggered,               this, &Tool::addToJobQueue);
+  connect(mwUi->actionMergeShowMkvmergeCommandLine,   &QAction::triggered,               this, &Tool::showCommandLine);
   connect(mwUi->actionMergeCopyFirstFileNameToTitle,  &QAction::triggered,               this, &Tool::copyFirstFileNameToTitle);
   connect(mwUi->actionMergeCopyOutputFileNameToTitle, &QAction::triggered,               this, &Tool::copyOutputFileNameToTitle);
 
-  connect(ui->merges,                               &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
-  connect(ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::newConfig);
-  connect(ui->openFileButton,                       &QPushButton::clicked,             this, &Tool::openConfig);
+  connect(ui->merges,                                 &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
+  connect(ui->newFileButton,                          &QPushButton::clicked,             this, &Tool::newConfig);
+  connect(ui->openFileButton,                         &QPushButton::clicked,             this, &Tool::openConfig);
 
-  connect(mw,                                       &MainWindow::preferencesChanged,   this, &Tool::setupTabPositions);
-  connect(mw,                                       &MainWindow::preferencesChanged,   this, &Tool::retranslateUi);
+  connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::setupTabPositions);
+  connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::retranslateUi);
 
-  connect(App::instance(),                          &App::addingFilesToMergeRequested, this, &Tool::addMultipleFilesFromCommandLine);
-  connect(App::instance(),                          &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
+  connect(App::instance(),                            &App::addingFilesToMergeRequested, this, &Tool::addMultipleFilesFromCommandLine);
+  connect(App::instance(),                            &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
 }
 
 void
