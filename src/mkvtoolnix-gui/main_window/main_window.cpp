@@ -302,7 +302,7 @@ MainWindow::retranslateUi() {
   // designer as the designer doesn't allow the same hotkey in the
   // same form.
   ui->menuGUI          ->setTitle(QY("MKVToolNix &GUI"));
-  ui->menuMerge        ->setTitle(QY("&Merge"));
+  ui->menuMerge        ->setTitle(QY("&Merge tool"));
   ui->menuHeaderEditor ->setTitle(QY("Header &editor"));
   ui->menuChapterEditor->setTitle(QY("&Chapter editor"));
   ui->menuJobQueue     ->setTitle(QY("&Job queue"));
