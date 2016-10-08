@@ -153,8 +153,8 @@ PreferencesDialog::setupPageSelector() {
                    addItem(page++, pMerge,  QY("Output"));
                    addItem(page++, pMerge,  QY("Enabling tracks"));
                    addItem(page++, pMerge,  QY("Playlists"));
-                   addItem(page++, nullptr, QY("Chapter editor"),    "story-editor");
                    addItem(page++, nullptr, QY("Header editor"),     "document-edit");
+                   addItem(page++, nullptr, QY("Chapter editor"),    "story-editor");
   auto pJobs     = addItem(page++, nullptr, QY("Jobs & job queue"),  "view-task");
                    addItem(page++, pJobs,   QY("Executing programs"));
 
