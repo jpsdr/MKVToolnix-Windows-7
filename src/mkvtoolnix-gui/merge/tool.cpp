@@ -58,11 +58,15 @@ Tool::setupActions() {
   connect(mwUi->actionMergeNew,                       &QAction::triggered,               this, &Tool::newConfig);
   connect(mwUi->actionMergeOpen,                      &QAction::triggered,               this, &Tool::openConfig);
   connect(mwUi->actionMergeClose,                     &QAction::triggered,               this, &Tool::closeCurrentTab);
+  connect(mwUi->actionMergeCloseAll,                  &QAction::triggered,               this, &Tool::closeAllTabs);
   connect(mwUi->actionMergeSave,                      &QAction::triggered,               this, &Tool::saveConfig);
+  connect(mwUi->actionMergeSaveAll,                   &QAction::triggered,               this, &Tool::saveAllConfigs);
   connect(mwUi->actionMergeSaveAs,                    &QAction::triggered,               this, &Tool::saveConfigAs);
   connect(mwUi->actionMergeSaveOptionFile,            &QAction::triggered,               this, &Tool::saveOptionFile);
   connect(mwUi->actionMergeStartMuxing,               &QAction::triggered,               this, &Tool::startMuxing);
+  connect(mwUi->actionMergeStartMuxingAll,            &QAction::triggered,               this, &Tool::startMuxingAll);
   connect(mwUi->actionMergeAddToJobQueue,             &QAction::triggered,               this, &Tool::addToJobQueue);
+  connect(mwUi->actionMergeAddAllToJobQueue,          &QAction::triggered,               this, &Tool::addAllToJobQueue);
   connect(mwUi->actionMergeShowMkvmergeCommandLine,   &QAction::triggered,               this, &Tool::showCommandLine);
   connect(mwUi->actionMergeCopyFirstFileNameToTitle,  &QAction::triggered,               this, &Tool::copyFirstFileNameToTitle);
   connect(mwUi->actionMergeCopyOutputFileNameToTitle, &QAction::triggered,               this, &Tool::copyOutputFileNameToTitle);
@@ -93,6 +97,11 @@ Tool::enableMenuActions() {
   mwUi->actionMergeShowMkvmergeCommandLine->setEnabled(hasTab);
   mwUi->actionMergeCopyFirstFileNameToTitle->setEnabled(hasTab && tab->hasSourceFiles());
   mwUi->actionMergeCopyOutputFileNameToTitle->setEnabled(hasTab && tab->hasDestinationFileName());
+  mwUi->menuMergeAll->setEnabled(hasTab);
+  mwUi->actionMergeSaveAll->setEnabled(hasTab);
+  mwUi->actionMergeCloseAll->setEnabled(hasTab);
+  mwUi->actionMergeStartMuxingAll->setEnabled(hasTab);
+  mwUi->actionMergeAddAllToJobQueue->setEnabled(hasTab);
 }
 
 void
@@ -229,9 +238,11 @@ Tool::closeSendingTab() {
 
 bool
 Tool::closeAllTabs() {
-  for (auto index = ui->merges->count(); index > 0; --index)
+  for (auto index = ui->merges->count(); index > 0; --index) {
+    ui->merges->setCurrentIndex(index);
     if (!closeTab(index - 1))
       return false;
+  }
 
   return true;
 }
@@ -241,6 +252,11 @@ Tool::saveConfig() {
   auto tab = currentTab();
   if (tab)
     tab->onSaveConfig();
+}
+
+void
+Tool::saveAllConfigs() {
+  forEachTab([](Tab &tab) { tab.onSaveConfig(); });
 }
 
 void
@@ -265,10 +281,20 @@ Tool::startMuxing() {
 }
 
 void
+Tool::startMuxingAll() {
+  forEachTab([](Tab &tab) { tab.addToJobQueue(true); });
+}
+
+void
 Tool::addToJobQueue() {
   auto tab = currentTab();
   if (tab)
     tab->addToJobQueue(false);
+}
+
+void
+Tool::addAllToJobQueue() {
+  forEachTab([](Tab &tab) { tab.addToJobQueue(false); });
 }
 
 void
@@ -386,6 +412,18 @@ void
 Tool::addMergeTabIfNoneOpen() {
   if (!ui->merges->count())
     appendTab(new Tab{this});
+}
+
+void
+Tool::forEachTab(std::function<void(Tab &)> const &worker) {
+  auto currentIndex = ui->merges->currentIndex();
+
+  for (auto index = 0, numTabs = ui->merges->count(); index < numTabs; ++index) {
+    ui->merges->setCurrentIndex(index);
+    worker(dynamic_cast<Tab &>(*ui->merges->widget(index)));
+  }
+
+  ui->merges->setCurrentIndex(currentIndex);
 }
 
 }}}

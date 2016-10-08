@@ -65,6 +65,17 @@
     <property name="title">
      <string notr="true">&amp;Merge</string>
     </property>
+    <widget class="QMenu" name="menuMergeAll">
+     <property name="title">
+      <string>Action for &amp;all settings</string>
+     </property>
+     <addaction name="actionMergeSaveAll"/>
+     <addaction name="separator"/>
+     <addaction name="actionMergeCloseAll"/>
+     <addaction name="separator"/>
+     <addaction name="actionMergeStartMuxingAll"/>
+     <addaction name="actionMergeAddAllToJobQueue"/>
+    </widget>
     <addaction name="actionMergeNew"/>
     <addaction name="actionMergeOpen"/>
     <addaction name="actionMergeSave"/>
@@ -74,8 +85,9 @@
     <addaction name="actionMergeClose"/>
     <addaction name="separator"/>
     <addaction name="actionMergeStartMuxing"/>
-    <addaction name="separator"/>
     <addaction name="actionMergeAddToJobQueue"/>
+    <addaction name="separator"/>
+    <addaction name="menuMergeAll"/>
     <addaction name="separator"/>
     <addaction name="actionMergeShowMkvmergeCommandLine"/>
     <addaction name="separator"/>
@@ -673,6 +685,42 @@
   <action name="actionChapterEditorRemoveFromMatroska">
    <property name="text">
     <string>Remo&amp;ve chapters from existing Matroska file</string>
+   </property>
+  </action>
+  <action name="actionMergeCloseAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-close.png</normaloff>:/icons/16x16/document-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+  </action>
+  <action name="actionMergeSaveAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/document-save.png</normaloff>:/icons/16x16/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save settings</string>
+   </property>
+  </action>
+  <action name="actionMergeStartMuxingAll">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/media-playback-start.png</normaloff>:/icons/16x16/media-playback-start.png</iconset>
+   </property>
+   <property name="text">
+    <string>Start &amp;muxing</string>
+   </property>
+  </action>
+  <action name="actionMergeAddAllToJobQueue">
+   <property name="icon">
+    <iconset resource="../../qt_resources.qrc">
+     <normaloff>:/icons/16x16/task-delegate.png</normaloff>:/icons/16x16/task-delegate.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add to job &amp;queue</string>
    </property>
   </action>
  </widget>

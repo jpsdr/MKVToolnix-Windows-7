@@ -51,10 +51,13 @@ public slots:
   virtual bool closeAllTabs();
 
   virtual void saveConfig();
+  virtual void saveAllConfigs();
   virtual void saveConfigAs();
   virtual void saveOptionFile();
   virtual void startMuxing();
+  virtual void startMuxingAll();
   virtual void addToJobQueue();
+  virtual void addAllToJobQueue();
   virtual void showCommandLine();
   virtual void copyFirstFileNameToTitle();
   virtual void copyOutputFileNameToTitle();
@@ -74,6 +77,7 @@ public slots:
 protected:
   Tab *appendTab(Tab *tab);
   virtual Tab *currentTab();
+  virtual void forEachTab(std::function<void(Tab &)> const &worker);
 
   virtual void enableMenuActions();
   virtual void enableCopyMenuActions();
