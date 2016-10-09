@@ -16,13 +16,12 @@
 #include "common/common_pch.h"
 
 #include <algorithm>
-#if defined(HAVE_UNISTD_H)
-# include <unistd.h>
-#endif  // HAVE_UNISTD_H
 
 #include "avilib.h"
 #include "common/ac3.h"
+#include "common/bswap.h"
 #include "common/dts.h"
+#include "common/dts_parser.h"
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/id_info.h"
@@ -113,10 +112,8 @@ protected:
 
 class wav_dts_demuxer_c: public wav_demuxer_c {
 private:
-  bool m_swap_bytes, m_pack_14_16;
-  mtx::dts::header_t m_dtsheader;
-  memory_cptr m_buf[2];
-  int m_cur_buf;
+  mtx::dts::parser_c m_parser;
+  memory_cptr m_read_buffer;
 
 public:
   wav_dts_demuxer_c(wav_reader_c *reader, wave_header *wheader);
@@ -130,14 +127,11 @@ public:
   };
 
   virtual unsigned char *get_buffer() {
-    return m_buf[m_cur_buf]->get_buffer();
-  };
+    return m_read_buffer->get_buffer();
+  }
 
   virtual void process(int64_t len);
   virtual generic_packetizer_c *create_packetizer();
-
-private:
-  virtual int decode_buffer(int len);
 };
 
 class wav_pcm_demuxer_c: public wav_demuxer_c {
@@ -208,7 +202,7 @@ wav_ac3acm_demuxer_c::probe(mm_io_cptr &io) {
 int
 wav_ac3acm_demuxer_c::decode_buffer(int len) {
   if ((2 < len) && m_swap_bytes) {
-    swab((char *)m_buf[m_cur_buf]->get_buffer(), (char *)m_buf[m_cur_buf ^ 1]->get_buffer(), len);
+    mtx::bswap_buffer(m_buf[m_cur_buf]->get_buffer(), m_buf[m_cur_buf ^ 1]->get_buffer(), len, 2);
     m_cur_buf ^= 1;
   }
 
@@ -262,8 +256,8 @@ wav_ac3wav_demuxer_c::decode_buffer(int len) {
     return -1;
 
   if (m_swap_bytes) {
-    memcpy(      m_buf[m_cur_buf ^ 1]->get_buffer(),         m_buf[m_cur_buf]->get_buffer(),         8);
-    swab((char *)m_buf[m_cur_buf]->get_buffer() + 8, (char *)m_buf[m_cur_buf ^ 1]->get_buffer() + 8, len - 8);
+    memcpy(           m_buf[m_cur_buf ^ 1]->get_buffer(), m_buf[m_cur_buf]->get_buffer(),         8);
+    mtx::bswap_buffer(m_buf[m_cur_buf]->get_buffer() + 8, m_buf[m_cur_buf ^ 1]->get_buffer() + 8, len - 8, 2);
     m_cur_buf ^= 1;
   }
 
@@ -296,16 +290,11 @@ wav_ac3wav_demuxer_c::process(int64_t size) {
 // ----------------------------------------------------------
 
 wav_dts_demuxer_c::wav_dts_demuxer_c(wav_reader_c *reader,
-                                     wave_header  *wheader):
-  wav_demuxer_c(reader, wheader),
-  m_swap_bytes(false),
-  m_pack_14_16(false),
-  m_cur_buf(0) {
-
-  m_buf[0] = memory_c::alloc(DTS_READ_SIZE);
-  m_buf[1] = memory_c::alloc(DTS_READ_SIZE);
-
-  m_codec  = codec_c::look_up(codec_c::type_e::A_DTS);
+                                     wave_header  *wheader)
+  : wav_demuxer_c{reader, wheader}
+  , m_read_buffer{memory_c::alloc(DTS_READ_SIZE)}
+{
+  m_codec = codec_c::look_up(codec_c::type_e::A_DTS);
 }
 
 wav_dts_demuxer_c::~wav_dts_demuxer_c() {
@@ -314,53 +303,26 @@ wav_dts_demuxer_c::~wav_dts_demuxer_c() {
 bool
 wav_dts_demuxer_c::probe(mm_io_cptr &io) {
   io->save_pos();
-  int len = io->read(m_buf[m_cur_buf]->get_buffer(), DTS_READ_SIZE);
+  auto read_buf = memory_c::alloc(DTS_READ_SIZE);
+  read_buf->set_size(io->read(read_buf, DTS_READ_SIZE));
   io->restore_pos();
 
-  if (mtx::dts::detect(m_buf[m_cur_buf]->get_buffer(), len, m_pack_14_16, m_swap_bytes)) {
-    len     = decode_buffer(len);
-    int pos = mtx::dts::find_consecutive_headers(m_buf[m_cur_buf]->get_buffer(), len, 5);
-    if (0 <= pos) {
-      if (0 > mtx::dts::find_header(m_buf[m_cur_buf]->get_buffer() + pos, len - pos, m_dtsheader))
-        return false;
+  if (!m_parser.detect(*read_buf, 5))
+    return false;
 
-      m_codec.set_specialization(m_dtsheader.get_codec_specialization());
+  m_codec.set_specialization(m_parser.get_first_header().get_codec_specialization());
 
-      mxverb(3, boost::format("DTSinWAV: 14->16 %1% swap %2%\n") % m_pack_14_16 % m_swap_bytes);
-      return true;
-    }
-  }
-
-  return false;
-}
-
-int
-wav_dts_demuxer_c::decode_buffer(int len) {
-  if (m_swap_bytes) {
-    swab((char *)m_buf[m_cur_buf]->get_buffer(), (char *)m_buf[m_cur_buf ^ 1]->get_buffer(), len);
-    m_cur_buf ^= 1;
-  }
-
-  if (m_pack_14_16) {
-    mtx::dts::convert_14_to_16_bits((unsigned short *)m_buf[m_cur_buf]->get_buffer(), len / 2, (unsigned short *)m_buf[m_cur_buf ^ 1]->get_buffer());
-    m_cur_buf ^= 1;
-    len        = len * 7 / 8;
-  }
-
-  return len;
+  return true;
 }
 
 generic_packetizer_c *
 wav_dts_demuxer_c::create_packetizer() {
-  m_ptzr = new dts_packetizer_c(m_reader, m_ti, m_dtsheader);
+  m_ptzr = new dts_packetizer_c(m_reader, m_ti, m_parser.get_first_header());
 
   // .wav with DTS are always filled up with other stuff to match the bitrate.
   static_cast<dts_packetizer_c *>(m_ptzr)->set_skipping_is_normal(true);
 
   show_packetizer_info(0, m_ptzr);
-
-  if (1 < verbose)
-    m_dtsheader.print();
 
   return m_ptzr;
 }
@@ -370,8 +332,8 @@ wav_dts_demuxer_c::process(int64_t size) {
   if (0 >= size)
     return;
 
-  long dec_len = decode_buffer(size);
-  m_ptzr->process(new packet_t(new memory_c(m_buf[m_cur_buf]->get_buffer(), dec_len, false)));
+  auto decoded = m_parser.decode(m_read_buffer->get_buffer(), size);
+  m_ptzr->process(new packet_t(decoded));
 }
 
 // ----------------------------------------------------------
