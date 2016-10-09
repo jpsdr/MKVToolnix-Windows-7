@@ -45,6 +45,10 @@ public:
   virtual generic_packetizer_c *create_packetizer() = 0;
 
   virtual bool probe(mm_io_cptr &io) = 0;
+
+  virtual unsigned int get_channels() const = 0;
+  virtual unsigned int get_sampling_frequency() const = 0;
+  virtual unsigned int get_bits_per_sample() const = 0;
 };
 
 using wav_demuxer_cptr = std::shared_ptr<wav_demuxer_c>;

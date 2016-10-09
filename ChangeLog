@@ -1,5 +1,10 @@
 2016-10-09  Moritz Bunkus  <moritz@bunkus.org>
 
+        * mkvmerge: WAV reader bug fix: the track properties (channels,
+        sample rate) for DTS and AC-3 in WAV will now be derived from the
+        decoded bitstream headers instead of the WAV file header as the
+        latter is often incorrect.
+
         * mkvmerge: WAV reader bug fix: fixed detection and merging of DTS
         in WAV that uses the 14-bytes-in-16-bytes packing method.
 

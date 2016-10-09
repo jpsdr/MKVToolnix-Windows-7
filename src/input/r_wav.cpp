@@ -68,6 +68,10 @@ public:
   virtual void process(int64_t len);
   virtual generic_packetizer_c *create_packetizer();
 
+  virtual unsigned int get_channels() const;
+  virtual unsigned int get_sampling_frequency() const;
+  virtual unsigned int get_bits_per_sample() const;
+
 protected:
   virtual int decode_buffer(int len);
 };
@@ -104,6 +108,10 @@ public:
 
   virtual void process(int64_t len);
 
+  virtual unsigned int get_channels() const;
+  virtual unsigned int get_sampling_frequency() const;
+  virtual unsigned int get_bits_per_sample() const;
+
 protected:
   virtual int decode_buffer(int len);
 };
@@ -132,6 +140,10 @@ public:
 
   virtual void process(int64_t len);
   virtual generic_packetizer_c *create_packetizer();
+
+  virtual unsigned int get_channels() const;
+  virtual unsigned int get_sampling_frequency() const;
+  virtual unsigned int get_bits_per_sample() const;
 };
 
 class wav_pcm_demuxer_c: public wav_demuxer_c {
@@ -159,6 +171,10 @@ public:
   virtual bool probe(mm_io_cptr &) {
     return true;
   };
+
+  virtual unsigned int get_channels() const;
+  virtual unsigned int get_sampling_frequency() const;
+  virtual unsigned int get_bits_per_sample() const;
 };
 
 // ----------------------------------------------------------
@@ -227,6 +243,24 @@ wav_ac3acm_demuxer_c::process(int64_t size) {
   m_ptzr->process(new packet_t(new memory_c(m_buf[m_cur_buf]->get_buffer(), size, false)));
 }
 
+unsigned int
+wav_ac3acm_demuxer_c::get_channels()
+  const {
+  return m_ac3header.m_channels;
+}
+
+unsigned int
+wav_ac3acm_demuxer_c::get_sampling_frequency()
+  const {
+  return m_ac3header.m_sample_rate;
+}
+
+unsigned int
+wav_ac3acm_demuxer_c::get_bits_per_sample()
+  const {
+  return 0;
+}
+
 // ----------------------------------------------------------
 
 wav_ac3wav_demuxer_c::wav_ac3wav_demuxer_c(wav_reader_c *reader,
@@ -287,6 +321,24 @@ wav_ac3wav_demuxer_c::process(int64_t size) {
     m_ptzr->process(new packet_t(new memory_c(m_buf[m_cur_buf]->get_buffer() + 8, dec_len, false)));
 }
 
+unsigned int
+wav_ac3wav_demuxer_c::get_channels()
+  const {
+  return m_ac3header.m_channels;
+}
+
+unsigned int
+wav_ac3wav_demuxer_c::get_sampling_frequency()
+  const {
+  return m_ac3header.m_sample_rate;
+}
+
+unsigned int
+wav_ac3wav_demuxer_c::get_bits_per_sample()
+  const {
+  return 0;
+}
+
 // ----------------------------------------------------------
 
 wav_dts_demuxer_c::wav_dts_demuxer_c(wav_reader_c *reader,
@@ -336,6 +388,24 @@ wav_dts_demuxer_c::process(int64_t size) {
   m_ptzr->process(new packet_t(decoded));
 }
 
+unsigned int
+wav_dts_demuxer_c::get_channels()
+  const {
+  return m_parser.get_first_header().get_total_num_audio_channels();
+}
+
+unsigned int
+wav_dts_demuxer_c::get_sampling_frequency()
+  const {
+  return m_parser.get_first_header().get_effective_sampling_frequency();
+}
+
+unsigned int
+wav_dts_demuxer_c::get_bits_per_sample()
+  const {
+  return m_parser.get_first_header().source_pcm_resolution;
+}
+
 // ----------------------------------------------------------
 
 wav_pcm_demuxer_c::wav_pcm_demuxer_c(wav_reader_c *reader,
@@ -345,7 +415,7 @@ wav_pcm_demuxer_c::wav_pcm_demuxer_c(wav_reader_c *reader,
   m_bps(0),
   ieee_float(_float) {
 
-  m_bps    = get_uint16_le(&m_wheader->common.wChannels) * get_uint16_le(&m_wheader->common.wBitsPerSample) * get_uint32_le(&m_wheader->common.dwSamplesPerSec) / 8;
+  m_bps    = get_channels() * get_bits_per_sample() * get_sampling_frequency() / 8;
   m_buffer = memory_c::alloc(m_bps);
 
   m_codec  = codec_c::look_up(codec_c::type_e::A_PCM);
@@ -356,11 +426,7 @@ wav_pcm_demuxer_c::~wav_pcm_demuxer_c() {
 
 generic_packetizer_c *
 wav_pcm_demuxer_c::create_packetizer() {
-  m_ptzr = new pcm_packetizer_c(m_reader, m_ti,
-                                get_uint32_le(&m_wheader->common.dwSamplesPerSec),
-                                get_uint16_le(&m_wheader->common.wChannels),
-                                get_uint16_le(&m_wheader->common.wBitsPerSample),
-                                ieee_float ? pcm_packetizer_c::ieee_float : pcm_packetizer_c::little_endian_integer);
+  m_ptzr = new pcm_packetizer_c(m_reader, m_ti, get_sampling_frequency(), get_channels(), get_bits_per_sample(), ieee_float ? pcm_packetizer_c::ieee_float : pcm_packetizer_c::little_endian_integer);
 
   show_packetizer_info(0, m_ptzr);
 
@@ -373,6 +439,24 @@ wav_pcm_demuxer_c::process(int64_t len) {
     return;
 
   m_ptzr->process(new packet_t(new memory_c(m_buffer->get_buffer(), len, false)));
+}
+
+unsigned int
+wav_pcm_demuxer_c::get_channels()
+  const {
+  return get_uint16_le(&m_wheader->common.wChannels);
+}
+
+unsigned int
+wav_pcm_demuxer_c::get_sampling_frequency()
+  const {
+  return get_uint32_le(&m_wheader->common.dwSamplesPerSec);
+}
+
+unsigned int
+wav_pcm_demuxer_c::get_bits_per_sample()
+  const {
+  return get_uint16_le(&m_wheader->common.wBitsPerSample);
 }
 
 // ----------------------------------------------------------
@@ -634,9 +718,9 @@ wav_reader_c::identify() {
   }
 
   auto info = mtx::id::info_c{};
-  info.add(mtx::id::audio_channels,           get_uint16_le(&m_wheader.common.wChannels));
-  info.add(mtx::id::audio_sampling_frequency, get_uint32_le(&m_wheader.common.dwSamplesPerSec));
-  info.add(mtx::id::audio_bits_per_sample,    get_uint16_le(&m_wheader.common.wBitsPerSample));
+  info.add(mtx::id::audio_channels,           m_demuxer->get_channels());
+  info.add(mtx::id::audio_sampling_frequency, m_demuxer->get_sampling_frequency());
+  info.add(mtx::id::audio_bits_per_sample,    m_demuxer->get_bits_per_sample());
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_AUDIO, m_demuxer->m_codec.get_name(), info.get());
