@@ -557,7 +557,7 @@ avi_reader_c::create_dts_packetizer(int aid) {
         memory_cptr chunk = memory_c::alloc(chunk_size);
         AVI_read_audio_chunk(m_avi, reinterpret_cast<char *>(chunk->get_buffer()));
 
-        buffer.add(chunk);
+        buffer.add(*chunk);
         dts_position = mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), dtsheader);
 
       } else {

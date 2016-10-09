@@ -421,7 +421,7 @@ kax_reader_c::verify_dts_audio_track(kax_track_t *t) {
 
     byte_buffer_c buffer;
     for (auto &frame : t->first_frames_data)
-      buffer.add(frame);
+      buffer.add(*frame);
 
     if (-1 == mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), t->dts_header))
       return false;

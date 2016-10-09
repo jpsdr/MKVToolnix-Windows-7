@@ -21,18 +21,23 @@
 class byte_buffer_c {
 private:
   memory_cptr m_data;
-  size_t m_filled, m_offset, m_size, m_chunk_size;
-  size_t m_num_reallocs, m_max_alloced_size;
+  std::size_t m_filled, m_offset, m_size, m_chunk_size;
+  std::size_t m_num_reallocs, m_max_alloced_size;
 
 public:
-  byte_buffer_c(size_t chunk_size = 128 * 1024)
+  enum position_e {
+      at_front
+    , at_back
+  };
+
+  byte_buffer_c(std::size_t chunk_size = 128 * 1024)
     : m_data{memory_c::alloc(chunk_size)}
-    , m_filled(0)
-    , m_offset(0)
-    , m_size(chunk_size)
-    , m_chunk_size(chunk_size)
-    , m_num_reallocs(1)
-    , m_max_alloced_size(chunk_size)
+    , m_filled{}
+    , m_offset{}
+    , m_size{chunk_size}
+    , m_chunk_size{chunk_size}
+    , m_num_reallocs{1}
+    , m_max_alloced_size{chunk_size}
   {
   };
 
@@ -41,10 +46,10 @@ public:
       return;
 
     auto buffer = m_data->get_buffer();
-    memmove(buffer, &buffer[m_offset], m_filled);
+    std::memmove(buffer, &buffer[m_offset], m_filled);
 
-    m_offset        = 0;
-    size_t new_size = (m_filled / m_chunk_size + 1) * m_chunk_size;
+    m_offset             = 0;
+    std::size_t new_size = (m_filled / m_chunk_size + 1) * m_chunk_size;
 
     if (new_size != m_size) {
       m_data->resize(new_size);
@@ -54,7 +59,7 @@ public:
     }
   }
 
-  void add(const unsigned char *new_data, int new_size) {
+  void add(unsigned char const *new_data, std::size_t new_size, position_e const add_where = at_back) {
     if ((m_offset != 0) && ((m_offset + m_filled + new_size) >= m_chunk_size))
       trim();
 
@@ -64,18 +69,35 @@ public:
       count_alloc(m_size);
     }
 
-    memcpy(m_data->get_buffer() + m_offset + m_filled, new_data, new_size);
+    if (add_where == at_back)
+      std::memcpy(m_data->get_buffer() + m_offset + m_filled, new_data, new_size);
+    else {
+      auto target = m_data->get_buffer() + m_offset;
+      std::memmove(target + new_size, target, m_filled);
+      std::memcpy(target, new_data, new_size);
+    }
+
     m_filled += new_size;
   }
 
-  void add(memory_cptr &new_buffer) {
-    add(new_buffer->get_buffer(), new_buffer->get_size());
+  void add(memory_c &new_buffer, position_e const add_where = at_back) {
+    add(new_buffer.get_buffer(), new_buffer.get_size(), add_where);
   }
 
-  void remove(size_t num) {
+  void prepend(unsigned char const *new_data, std::size_t new_size) {
+    add(new_data, new_size, at_front);
+  }
+
+  void prepend(memory_c &new_buffer) {
+    add(new_buffer.get_buffer(), new_buffer.get_size(), at_front);
+  }
+
+  void remove(std::size_t num, position_e const remove_where = at_front) {
     if (num > m_filled)
       mxerror("byte_buffer_c: num > m_filled. Should not have happened. Please file a bug report.\n");
-    m_offset += num;
+
+    if (remove_where == at_front)
+      m_offset += num;
     m_filled -= num;
 
     if (m_filled >= m_chunk_size)
@@ -87,11 +109,11 @@ public:
       remove(m_filled);
   }
 
-  unsigned char *get_buffer() {
+  unsigned char *get_buffer() const {
     return m_data->get_buffer() + m_offset;
   }
 
-  size_t get_size() {
+  std::size_t get_size() const {
     return m_filled;
   }
 
