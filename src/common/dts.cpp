@@ -912,32 +912,27 @@ convert_14_to_16_bits(const unsigned short *src,
   for (unsigned long b = 0; b < l; b++) {
     unsigned short src_0 = (src[0] >>  8) | (src[0] << 8);
     unsigned short src_1 = (src[1] >>  8) | (src[1] << 8);
-    // 14 + 2
+    unsigned short src_2 = (src[2] >>  8) | (src[2] << 8);
+    unsigned short src_3 = (src[3] >>  8) | (src[3] << 8);
+    unsigned short src_4 = (src[4] >>  8) | (src[4] << 8);
+    unsigned short src_5 = (src[5] >>  8) | (src[5] << 8);
+    unsigned short src_6 = (src[6] >>  8) | (src[6] << 8);
+    unsigned short src_7 = (src[7] >>  8) | (src[7] << 8);
+
     unsigned short dst_0 = (src_0  <<  2) | ((src_1 & 0x3fff) >> 12);
-    dst[0]               = (dst_0  >>  8) | (dst_0            <<  8);
-    // 12 + 4
-    unsigned short src_2 = (src[2] >>  8) | (src[2]           <<  8);
     unsigned short dst_1 = (src_1  <<  4) | ((src_2 & 0x3fff) >> 10);
-    dst[1]               = (dst_1  >>  8) | (dst_1            <<  8);
-    // 10 + 6
-    unsigned short src_3 = (src[3] >>  8) | (src[3]           <<  8);
     unsigned short dst_2 = (src_2  <<  6) | ((src_3 & 0x3fff) >>  8);
-    dst[2]               = (dst_2  >>  8) | (dst_2            <<  8);
-    // 8  + 8
-    unsigned short src_4 = (src[4] >>  8) | (src[4]           <<  8);
     unsigned short dst_3 = (src_3  <<  8) | ((src_4 & 0x3fff) >>  6);
-    dst[3]               = (dst_3  >>  8) | (dst_3            <<  8);
-    // 6  + 10
-    unsigned short src_5 = (src[5] >>  8) | (src[5]           <<  8);
     unsigned short dst_4 = (src_4  << 10) | ((src_5 & 0x3fff) >>  4);
-    dst[4]               = (dst_4  >>  8) | (dst_4            <<  8);
-    // 4  + 12
-    unsigned short src_6 = (src[6] >>  8) | (src[6]           <<  8);
     unsigned short dst_5 = (src_5  << 12) | ((src_6 & 0x3fff) >>  2);
+    unsigned short dst_6 = (src_6  << 14) |  (src_7 & 0x3fff);
+
+    dst[0]               = (dst_0  >>  8) | (dst_0            <<  8);
+    dst[1]               = (dst_1  >>  8) | (dst_1            <<  8);
+    dst[2]               = (dst_2  >>  8) | (dst_2            <<  8);
+    dst[3]               = (dst_3  >>  8) | (dst_3            <<  8);
+    dst[4]               = (dst_4  >>  8) | (dst_4            <<  8);
     dst[5]               = (dst_5  >>  8) | (dst_5            <<  8);
-    // 2  + 14
-    unsigned short src_7 = (src[7] >>  8) | (src[7]           <<  8);
-    unsigned short dst_6 = (src_6  << 14) | (src_7 & 0x3fff);
     dst[6]               = (dst_6  >>  8) | (dst_6            <<  8);
 
     dst                 += 7;
