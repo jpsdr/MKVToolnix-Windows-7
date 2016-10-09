@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-10-08 21:12+0200\n"
-"PO-Revision-Date: 2016-09-11 22:14+0900\n"
+"PO-Revision-Date: 2016-10-09 10:56+0900\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
 "Language: ja\n"
@@ -2542,9 +2542,8 @@ msgid "Acknowledge all &warnings"
 msgstr "全ての警告を通知する(&W)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:541
-#, fuzzy
 msgid "Actions for &all settings"
-msgstr "プロパティを処理するアクション"
+msgstr "全ての設定に対してアクションを実行(&A)"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Actions for handling attachments"
@@ -4804,9 +4803,9 @@ msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "コーデックID '%2%'のトラックID%1%の抽出はサポートされていません。\n"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extraction tool"
-msgstr "抽出ツール(&E)"
+msgstr "抽出ツール"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -5531,9 +5530,9 @@ msgid "Indexing (cues):"
 msgstr "インデックス（キュー）："
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Info tool"
-msgstr "Infoツール(&I)"
+msgstr "Infoツール"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6331,9 +6330,9 @@ msgstr "RealAudio/RealVideoのフレームのためのメモリを確保する�
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Merge tool"
-msgstr "Mergeツール(&M)"
+msgstr "Mergeツール"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -6463,9 +6462,8 @@ msgstr "このトラックをMuxする"
 
 #: src/common/property_element.cpp:109
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-#, fuzzy
 msgid "Muxing application"
-msgstr "MUXに使用されたアプリケーション：%1%"
+msgstr "MUXアプリケーション"
 
 #: src/info/mkvinfo.cpp:470
 #, boost-format
@@ -8534,9 +8532,9 @@ msgid "Tab &position in tab widgets:"
 msgstr "タブウィジェットにおけるタブの位置："
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tag editor"
-msgstr "タグエディタ(&T)"
+msgstr "タグエディタ"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -9466,12 +9464,12 @@ msgstr "名前を空白のままにしておくことはできません。"
 #: src/common/property_element.cpp:109
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 msgid "The name of the application or library used for muxing the file."
-msgstr ""
+msgstr "このファイルをMUXするのに使用されたアプリケーションやライブラリの名前です。"
 
 #: src/common/property_element.cpp:110
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
 msgid "The name of the application or library used for writing the file."
-msgstr ""
+msgstr "このファイルを書き込むのに使用されたアプリケーションやライブラリの名前です。"
 
 #: src/merge/mkvmerge.cpp:1904
 #, boost-format
@@ -11078,9 +11076,8 @@ msgstr "IDがTIDのトラックをファイル'out'に書き込みます。"
 
 #: src/common/property_element.cpp:110
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
-#, fuzzy
 msgid "Writing application"
-msgstr "書き込みアプリケーション：%1%"
+msgstr "書き込みアプリケーション"
 
 #: src/info/mkvinfo.cpp:473
 #, boost-format
@@ -12406,8 +12403,17 @@ msgstr "無しに設定"
 #~ msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
 #~ msgstr "'%3% %4%'の'%1%'は有効な%2%ではありません。\n"
 
-#~ msgid "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr 0' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
-#~ msgstr "AACファイルは、HE-AAC/AAC+/SBR AACを含んでいる可能性があります。これは自動検知できません。そのため実際にファイルがこれらを含んでいる場合、'--aac-is-sbr 0'オプションを手動で指定しなければなりません。さもなければ、誤ったMUXがなされます。mkvmergeのドキュメントも読んでください。\n"
+#~ msgid ""
+#~ "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be "
+#~ "detected automatically. Therefore you have to specifiy '--aac-is-sbr 0' "
+#~ "manually for this input file if the file actually contains SBR AAC. The "
+#~ "file will be muxed in the WRONG way otherwise. Also read mkvmerge's "
+#~ "documentation.\n"
+#~ msgstr ""
+#~ "AACファイルは、HE-AAC/AAC+/SBR AACを含んでいる可能性があります。これは自動"
+#~ "検知できません。そのため実際にファイルがこれらを含んでいる場合、'--aac-is-"
+#~ "sbr 0'オプションを手動で指定しなければなりません。さもなければ、誤ったMUX"
+#~ "がなされます。mkvmergeのドキュメントも読んでください。\n"
 
 #~ msgid "Countr&y:"
 #~ msgstr "国：(&Y)"
@@ -12436,23 +12442,55 @@ msgstr "無しに設定"
 #~ msgid "Merge"
 #~ msgstr "マージ"
 
-#~ msgid "Missing header/comment packets for stream. This file is broken but should be muxed correctly. If not please contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
-#~ msgstr "ストリームのヘッダ/コメントパケットがありません。このファイルは壊れていますが正しくMUXされているはずです。もしそうでない場合は作者のMoritz Bunkus <moritz@bunkus.org>に連絡してください。\n"
+#~ msgid ""
+#~ "Missing header/comment packets for stream. This file is broken but should "
+#~ "be muxed correctly. If not please contact the author Moritz Bunkus "
+#~ "<moritz@bunkus.org>.\n"
+#~ msgstr ""
+#~ "ストリームのヘッダ/コメントパケットがありません。このファイルは壊れていま"
+#~ "すが正しくMUXされているはずです。もしそうでない場合は作者のMoritz Bunkus "
+#~ "<moritz@bunkus.org>に連絡してください。\n"
 
 #~ msgid "Remove a&ll"
 #~ msgstr "全てのジョブを削除する(&L)"
 
-#~ msgid "The AVC video track is missing the 'CTTS' atom for frame timecode offsets. However, AVC/h.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timecodes for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timecodes right. As it is missing the timecodes for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
-#~ msgstr "このAVCビデオトラックにはフレームタイムコードを補正する'CTTS' atomがありません。しかし、AVC/h.264では伝統的な1つ（Pフレームの場合）もしくは2つ（Bフレームの場合）より多く他のフレームを参照することが許されています。そのようなフレームのタイムコードは順番通りでないことがあり、'CTTS' atomはタイムコードを補正するために必要です。それが無いため、このトラックのタイムコードは正しくないかもしれません。出力されたファイルを見て期待通りに見えることを確認してください。\n"
+#~ msgid ""
+#~ "The AVC video track is missing the 'CTTS' atom for frame timecode "
+#~ "offsets. However, AVC/h.264 allows frames to have more than the "
+#~ "traditional one (for P frames) or two (for B frames) references to other "
+#~ "frames. The timecodes for such frames will be out-of-order, and the "
+#~ "'CTTS' atom is needed for getting the timecodes right. As it is missing "
+#~ "the timecodes for this track might be wrong. You should watch the "
+#~ "resulting file and make sure that it looks like you expected it to.\n"
+#~ msgstr ""
+#~ "このAVCビデオトラックにはフレームタイムコードを補正する'CTTS' atomがありま"
+#~ "せん。しかし、AVC/h.264では伝統的な1つ（Pフレームの場合）もしくは2つ（Bフ"
+#~ "レームの場合）より多く他のフレームを参照することが許されています。そのよう"
+#~ "なフレームのタイムコードは順番通りでないことがあり、'CTTS' atomはタイム"
+#~ "コードを補正するために必要です。それが無いため、このトラックのタイムコード"
+#~ "は正しくないかもしれません。出力されたファイルを見て期待通りに見えることを"
+#~ "確認してください。\n"
 
-#~ msgid "Track %1% was compressed with bzlib but mkvmerge has not been compiled with support for bzlib compression.\n"
-#~ msgstr "トラック%1%はbzlibで圧縮されていますが、mkvmergeはbzlib圧縮をサポートしてコンパイルされていません。\n"
+#~ msgid ""
+#~ "Track %1% was compressed with bzlib but mkvmerge has not been compiled "
+#~ "with support for bzlib compression.\n"
+#~ msgstr ""
+#~ "トラック%1%はbzlibで圧縮されていますが、mkvmergeはbzlib圧縮をサポートして"
+#~ "コンパイルされていません。\n"
 
-#~ msgid "Track %1% was compressed with lzo1x but mkvmerge has not been compiled with support for lzo1x compression.\n"
-#~ msgstr "トラック%1%はlzo1xで圧縮されていますが、mkvmergeはlzo1x圧縮をサポートしてコンパイルされていません。\n"
+#~ msgid ""
+#~ "Track %1% was compressed with lzo1x but mkvmerge has not been compiled "
+#~ "with support for lzo1x compression.\n"
+#~ msgstr ""
+#~ "トラック%1%はlzo1xで圧縮されていますが、mkvmergeはlzo1x圧縮をサポートして"
+#~ "コンパイルされていません。\n"
 
-#~ msgid "You have to add at least one source file before you can start merging or add a job to the job queue."
-#~ msgstr "マージの開始前及びジョブキューにジョブジョブを追加する前には少なくとも1つのソースファイルを追加する必要があります。"
+#~ msgid ""
+#~ "You have to add at least one source file before you can start merging or "
+#~ "add a job to the job queue."
+#~ msgstr ""
+#~ "マージの開始前及びジョブキューにジョブジョブを追加する前には少なくとも1つ"
+#~ "のソースファイルを追加する必要があります。"
 
 #~ msgid "info"
 #~ msgstr "info"
