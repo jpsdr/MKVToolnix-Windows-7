@@ -914,9 +914,9 @@ mpeg4::p10::avc_es_parser_c::avc_es_parser_c()
 
 mpeg4::p10::avc_es_parser_c::~avc_es_parser_c() {
   mxdebug_if(debugging_c::requested("avc_statistics"),
-             boost::format("AVC statistics: #frames: out %1% discarded %2% #timecodes: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7%\n")
-             % m_stats.num_frames_out % m_stats.num_frames_discarded % m_stats.num_timecodes_in % m_stats.num_timecodes_generated % m_stats.num_timecodes_discarded
-             % m_stats.num_field_slices % m_stats.num_frame_slices);
+             boost::format("AVC statistics: #frames: out %1% discarded %2% #timecodes: in %3% generated %4% discarded %5% num_fields: %6% num_frames: %7% num_sei_nalus: %8% num_idr_slices: %9%\n")
+             % m_stats.num_frames_out   % m_stats.num_frames_discarded % m_stats.num_timecodes_in % m_stats.num_timecodes_generated % m_stats.num_timecodes_discarded
+             % m_stats.num_field_slices % m_stats.num_frame_slices     % m_stats.num_sei_nalus    % m_stats.num_idr_slices);
 
   mxdebug_if(m_debug_timecodes, boost::format("stream_position %1% parsed_position %2%\n") % m_stream_position % m_parsed_position);
 
@@ -1131,6 +1131,9 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
   if (!parse_slice(mtx::mpeg::nalu_to_rbsp(nalu), si))
     return;
 
+  if (NALU_TYPE_IDR_SLICE == si.nalu_type)
+    ++m_stats.num_idr_slices;
+
   if (m_have_incomplete_frame && flush_decision(si, m_incomplete_frame.m_si))
     flush_incomplete_frame();
 
@@ -1277,6 +1280,8 @@ mpeg4::p10::avc_es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
 void
 mpeg4::p10::avc_es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
   try {
+    ++m_stats.num_sei_nalus;
+
     auto nalu_as_rbsp = mtx::mpeg::nalu_to_rbsp(nalu);
 
     bit_reader_c r(nalu_as_rbsp->get_buffer(), nalu_as_rbsp->get_size());
