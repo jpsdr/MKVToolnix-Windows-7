@@ -670,9 +670,24 @@ mpeg_ts_reader_c::probe_file(mm_io_c *in,
                              uint64_t) {
   auto mpls_in   = dynamic_cast<mm_mpls_multi_file_io_c *>(in);
   auto in_to_use = mpls_in ? static_cast<mm_io_c *>(mpls_in) : in;
-  bool result    = -1 != detect_packet_size(in_to_use, in_to_use->get_size());
 
-  return result;
+  if (in_to_use->get_size() < 4)
+    return -1;
+
+  auto packet_size = detect_packet_size(in_to_use, in_to_use->get_size());
+
+  if (packet_size == -1)
+    return false;
+
+  // Check for a h.264/h.265 start code right at the beginning in
+  // order to avoid false positives.
+  in_to_use->setFilePointer(0);
+  auto marker = in_to_use->read_uint32_be();
+
+  if ((marker == 0x00000001u) || ((marker >> 8) == 0x00000001u))
+    return false;
+
+  return true;
 }
 
 int
