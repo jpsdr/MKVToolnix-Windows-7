@@ -745,7 +745,20 @@ handle_video_track(EbmlStream *&es,
     else if (Is<KaxVideoFlagInterlaced>(l4))
       show_element(l4, 4, boost::format(Y("Interlaced: %1%")) % static_cast<KaxVideoFlagInterlaced *>(l4)->GetValue());
 
-    else if (Is<KaxVideoStereoMode>(l4)) {
+    else if (Is<KaxVideoFieldOrder>(l4)) {
+      auto field_order = static_cast<KaxVideoFieldOrder *>(l4)->GetValue();
+      show_element(l4, 4,
+                   boost::format(Y("Field order: %1% (%2%)"))
+                   % field_order
+                   % (  0  == field_order ? Y("progressive")
+                      : 1  == field_order ? Y("top field displayed first, top field stored first")
+                      : 2  == field_order ? Y("unspecified")
+                      : 6  == field_order ? Y("bottom field displayed first, bottom field stored first")
+                      : 9  == field_order ? Y("bottom field displayed first, top field stored first")
+                      : 14 == field_order ? Y("top field displayed first, bottom field stored first")
+                      :                       "unknown"));
+
+    } else if (Is<KaxVideoStereoMode>(l4)) {
       auto stereo_mode = static_cast<KaxVideoStereoMode *>(l4)->GetValue();
       show_element(l4, 4,
                    boost::format(Y("Stereo mode: %1% (%2%)"))
