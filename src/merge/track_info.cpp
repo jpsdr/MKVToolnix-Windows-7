@@ -158,6 +158,9 @@ track_info_c::operator =(const track_info_c &src) {
   m_stereo_mode_list           = src.m_stereo_mode_list;
   m_stereo_mode                = src.m_stereo_mode;
 
+  m_field_order_list           = src.m_field_order_list;
+  m_field_order                = src.m_field_order;
+
   m_nalu_size_lengths          = src.m_nalu_size_lengths;
   m_nalu_size_length           = src.m_nalu_size_length;
 

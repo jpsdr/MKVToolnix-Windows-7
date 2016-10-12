@@ -481,6 +481,9 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
                                                                                                                                    "(0: free resizing, 1: keep aspect ratio, 2: fixed).")})
         ->init();
 
+      (new UnsignedIntegerValuePage{*this, *page, kTrackVideo, KaxVideoFieldOrder::ClassInfos, YT("Video field order"), YT("Field order (0, 1, 2, 6, 9 or 14, see documentation).")})
+        ->init();
+
       (new UnsignedIntegerValuePage{*this, *page, kTrackVideo, KaxVideoStereoMode::ClassInfos, YT("Video stereo mode"), YT("Stereo-3D video mode (0 - 11, see documentation).")})
         ->init();
 

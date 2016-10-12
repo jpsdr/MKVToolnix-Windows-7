@@ -70,6 +70,7 @@ struct kax_track_t {
   chroma_coordinates_t v_chroma_coordinates;
   white_colour_coordinates_t v_white_colour_coordinates;
   double v_max_luminance, v_min_luminance;
+  int64_t v_field_order;
   stereo_mode_c::mode v_stereo_mode;
   double v_frate;
   char v_fourcc[5];
@@ -146,6 +147,7 @@ struct kax_track_t {
     , v_white_colour_coordinates{}
     , v_max_luminance{-1}
     , v_min_luminance{-1}
+    , v_field_order{-1}
     , v_stereo_mode(stereo_mode_c::unspecified)
     , v_frate(0.0)
     , v_bframes(false)
@@ -183,6 +185,7 @@ struct kax_track_t {
   void handle_packetizer_display_dimensions();
   void handle_packetizer_pixel_cropping();
   void handle_packetizer_colour();
+  void handle_packetizer_field_order();
   void handle_packetizer_stereo_mode();
   void handle_packetizer_pixel_dimensions();
   void handle_packetizer_default_duration();

@@ -168,6 +168,12 @@ kax_track_t::handle_packetizer_colour() {
 }
 
 void
+kax_track_t::handle_packetizer_field_order() {
+  if (-1 != v_field_order)
+    ptzr_ptr->set_video_field_order(v_field_order, OPTION_SOURCE_CONTAINER);
+}
+
+void
 kax_track_t::handle_packetizer_stereo_mode() {
   if (stereo_mode_c::unspecified != v_stereo_mode)
     ptzr_ptr->set_video_stereo_mode(v_stereo_mode, OPTION_SOURCE_CONTAINER);
@@ -1082,6 +1088,7 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
     }
   }
 
+  track->v_field_order  = FindChildValue<KaxVideoFieldOrder>(ktvideo, -1);
   track->v_stereo_mode  = FindChildValue<KaxVideoStereoMode, stereo_mode_c::mode>(ktvideo, stereo_mode_c::unspecified);
 
   // For older files.
@@ -1488,6 +1495,7 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
     t->handle_packetizer_display_dimensions();
     t->handle_packetizer_pixel_cropping();
     t->handle_packetizer_colour();
+    t->handle_packetizer_field_order();
     t->handle_packetizer_stereo_mode();
 
     if (CUE_STRATEGY_UNSPECIFIED == ptzr->get_cue_creation())
@@ -1579,6 +1587,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
   t->handle_packetizer_display_dimensions();
   t->handle_packetizer_pixel_cropping();
   t->handle_packetizer_colour();
+  t->handle_packetizer_field_order();
   t->handle_packetizer_stereo_mode();
 }
 

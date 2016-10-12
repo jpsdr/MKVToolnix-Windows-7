@@ -258,6 +258,8 @@ set_usage() {
                   "                           Explicitly set the display dimensions.\n");
   usage_text += Y("  --cropping <TID:left,top,right,bottom>\n"
                   "                           Sets the cropping parameters.\n");
+  usage_text += Y("  --field-order <TID:n>    Sets the video field order parameter\n"
+                  "                           (see documentation for valid values).\n");
   usage_text += Y("  --stereo-mode <TID:n|keyword>\n"
                   "                           Sets the stereo mode parameter. It can\n"
                   "                           either be a number 0 - 14 or a keyword\n"
@@ -877,6 +879,30 @@ parse_arg_stereo_mode(const std::string &s,
     mxerror(boost::format(errmsg) % stereo_mode_c::max_index() % stereo_mode_c::displayable_modes_list() % s);
 
   ti.m_stereo_mode_list[id] = static_cast<stereo_mode_c::mode>(index);
+}
+
+static void
+parse_arg_field_order(const std::string &s,
+                      track_info_c &ti) {
+  std::vector<std::string> parts = split(s, ":");
+  if (parts.size() != 2)
+    mxerror(boost::format("%1% %2%\n")
+            % (boost::format(Y("The argument '%1%' to '%2%' is invalid.")) % s % "--field-order")
+            % Y("It does not consist of a track ID and a value separated by a colon."));
+
+  int64_t id = 0;
+  if (!parse_number(parts[0], id))
+    mxerror(boost::format("%1% %2%\n")
+            % (boost::format(Y("The argument '%1%' to '%2%' is invalid.")) % s % "--field-order")
+            % (boost::format(Y("'%1%' is not a valid track ID.")) % parts[0]));
+
+  uint64_t order;
+  if (!parse_number(parts[1], order) || !mtx::included_in(order, 0u, 1u, 2u, 6u, 9u, 14u))
+    mxerror(boost::format("%1% %2%\n")
+            % (boost::format(Y("The argument '%1%' to '%2%' is invalid.")) % s % "--field-order")
+            % (boost::format(Y("'%1%' is not a valid field order.")) % parts[0]));
+
+  ti.m_field_order_list[id] = order;
 }
 
 /** \brief Parse the duration formats to \c --split
@@ -2578,6 +2604,13 @@ parse_args(std::vector<std::string> args) {
         mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
 
       parse_arg_min_luminance(next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--field-order") {
+      if (no_next_arg)
+        mxerror(boost::format(Y("'%1%' lacks the parameter.\n")) % this_arg);
+
+      parse_arg_field_order(next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--stereo-mode") {

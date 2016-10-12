@@ -280,6 +280,11 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   if (-2 != i)
     set_video_min_luminance(m_ti.m_min_luminance_list[i], OPTION_SOURCE_COMMAND_LINE);
 
+  // Let's see if the user has specified a field order for this track.
+  i = LOOKUP_TRACK_ID(m_ti.m_field_order_list);
+  if (-2 != i)
+    set_video_field_order(m_ti.m_field_order_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
+
   // Let's see if the user has specified a stereo mode for this track.
   i = LOOKUP_TRACK_ID(m_ti.m_stereo_mode_list);
   if (-2 != i)
@@ -847,6 +852,16 @@ generic_packetizer_c::set_video_pixel_cropping(const pixel_crop_t &cropping,
 }
 
 void
+generic_packetizer_c::set_video_field_order(uint64_t order,
+                                            option_source_e source) {
+  m_ti.m_field_order.set(order, source);
+  if (m_track_entry && m_ti.m_field_order) {
+    auto &video = GetChild<KaxTrackVideo>(m_track_entry);
+    GetChild<KaxVideoFieldOrder>(video).SetValue(m_ti.m_field_order.get());
+  }
+}
+
+void
 generic_packetizer_c::set_video_stereo_mode(stereo_mode_c::mode stereo_mode,
                                             option_source_e source) {
   m_ti.m_stereo_mode.set(stereo_mode, source);
@@ -1090,6 +1105,9 @@ generic_packetizer_c::set_headers() {
         auto &master_meta = GetChild<KaxVideoColourMasterMeta>(colour);
         GetChild<KaxVideoLuminanceMin>(master_meta).SetValue(luminance);
       }
+
+      if (m_ti.m_field_order)
+        GetChild<KaxVideoFieldOrder>(video).SetValue(m_ti.m_field_order.get());
 
       if (m_ti.m_stereo_mode && (stereo_mode_c::unspecified != m_ti.m_stereo_mode.get()))
         set_video_stereo_mode_impl(video, m_ti.m_stereo_mode.get());
