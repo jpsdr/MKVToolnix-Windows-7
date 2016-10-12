@@ -1785,6 +1785,19 @@ Setzt die maximale Helligkeit in Candela pro Quadratmeter (cd/m\(S2)\&. Der Wert
 Setzt die minimale Helligkeit in Candela pro Quadratmeter (cd/m\(S2)\&. Der Wert sollte kleiner als 999\&.9999 sein\&.
 .RE
 .PP
+\fB\-\-field\-order\fR \fITID:n\fR
+.RS 4
+Sets the field order for the video track with the track ID
+\fITID\fR\&. The order must be one of the following numbers:
+.sp
+\fB0\fR: progressive;
+\fB1\fR: interlaced with top field displayed first and top field stored first;
+\fB2\fR: undetermined field order;
+\fB6\fR: interlaced with bottom field displayed first and bottom field stored first;
+\fB9\fR: interlaced with bottom field displayed first and top field stored first;
+\fB14\fR: interlaced with top field displayed first and bottom field stored first
+.RE
+.PP
 \fB\-\-stereo\-mode\fR \fITID:n|Schl\(:usselwort\fR
 .RS 4
 setzt den Stereomodus f\(:ur die Videospur mit der Spur\-ID

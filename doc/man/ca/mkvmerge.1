@@ -1758,6 +1758,19 @@ Defineix la lumin\(`ancia m\(`axima en candeles per metre quadrat (cd/m\(S2)\&. 
 Defineix la lumin\(`ancia m\('inima en candeles per metre quadrat (cd/m\(S2)\&. El valor haur\(`a de ser inferior que 999\&.9999\&.
 .RE
 .PP
+\fB\-\-field\-order\fR \fITID:n\fR
+.RS 4
+Sets the field order for the video track with the track ID
+\fITID\fR\&. The order must be one of the following numbers:
+.sp
+\fB0\fR: progressive;
+\fB1\fR: interlaced with top field displayed first and top field stored first;
+\fB2\fR: undetermined field order;
+\fB6\fR: interlaced with bottom field displayed first and bottom field stored first;
+\fB9\fR: interlaced with bottom field displayed first and top field stored first;
+\fB14\fR: interlaced with top field displayed first and bottom field stored first
+.RE
+.PP
 \fB\-\-stereo\-mode\fR \fITID:n|paraula_clau\fR
 .RS 4
 Estableix el mode est\(`ereo per a la pista de v\('ideo amb l\*(AqID de pista

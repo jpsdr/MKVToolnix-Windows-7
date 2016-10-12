@@ -1800,6 +1800,22 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
+    <varlistentry id="mkvmerge.description.field_order">
+     <term><option>--field-order</option> <parameter>TID:n</parameter></term>
+     <listitem>
+      <para>
+       Sets the field order for the video track with the track ID <parameter>TID</parameter>.  The order must be one of the following numbers:
+      </para>
+
+      <para>
+       <constant>0</constant>: progressive; <constant>1</constant>: interlaced with top field displayed first and top field stored first;
+       <constant>2</constant>: undetermined field order; <constant>6</constant>: interlaced with bottom field displayed first and bottom
+       field stored first; <constant>9</constant>: interlaced with bottom field displayed first and top field stored first;
+       <constant>14</constant>: interlaced with top field displayed first and bottom field stored first
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry>
      <term><option>--stereo-mode</option> <parameter>TID:n|keyword</parameter></term>
      <listitem>
