@@ -457,6 +457,7 @@ private:
   void create_vc1_video_packetizer(mpeg_ts_track_ptr &track);
   void create_aac_audio_packetizer(mpeg_ts_track_ptr const &track);
   void create_ac3_audio_packetizer(mpeg_ts_track_ptr const &track);
+  void create_pcm_audio_packetizer(mpeg_ts_track_ptr const &track);
   void create_truehd_audio_packetizer(mpeg_ts_track_ptr const &track);
   void create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track);
   void create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track);

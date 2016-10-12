@@ -33,6 +33,7 @@
 #include "common/mpeg4_p2.h"
 #include "common/strings/formatting.h"
 #include "input/aac_framing_packet_converter.h"
+#include "input/bluray_pcm_channel_removal_packet_converter.h"
 #include "input/r_mpeg_ts.h"
 #include "input/teletext_to_srt_packet_converter.h"
 #include "input/truehd_ac3_splitting_packet_converter.h"
@@ -374,7 +375,13 @@ mpeg_ts_track_c::new_stream_a_pcm() {
              boost::format("new_stream_a_pcm: header: 0x%|1$08x| channels: %2%, sample rate: %3%, bits per channel: %4%\n")
              % get_uint32_be(buffer) % a_channels % a_sample_rate % a_bits_per_sample);
 
-  return a_sample_rate ? 0 : FILE_STATUS_DONE;
+  if ((a_sample_rate == 0) || !mtx::included_in(a_bits_per_sample, 16, 24))
+    return FILE_STATUS_DONE;
+
+  if ((a_channels % 2) != 0)
+    converter = std::make_shared<bluray_pcm_channel_removal_packet_converter_c>(a_bits_per_sample / 8, a_channels + 1, a_channels);
+
+  return 0;
 }
 
 int
@@ -1562,11 +1569,10 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
       track->ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, track->a_dts_header));
       show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(codec_c::type_e::A_PCM)) {
-      track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
-      show_packetizer_info(id, PTZR(track->ptzr));
+    } else if (track->codec.is(codec_c::type_e::A_PCM))
+      create_pcm_audio_packetizer(track);
 
-    } else if (track->codec.is(codec_c::type_e::A_TRUEHD))
+    else if (track->codec.is(codec_c::type_e::A_TRUEHD))
       create_truehd_audio_packetizer(track);
 
   } else if (ES_VIDEO_TYPE == track->type) {
@@ -1610,6 +1616,15 @@ mpeg_ts_reader_c::create_ac3_audio_packetizer(mpeg_ts_track_ptr const &track) {
 
   if (track->converter)
     dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_ac3_packetizer(PTZR(track->ptzr));
+}
+
+void
+mpeg_ts_reader_c::create_pcm_audio_packetizer(mpeg_ts_track_ptr const &track) {
+  track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
+  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
+
+  if (track->converter)
+    track->converter->set_packetizer(PTZR(track->ptzr));
 }
 
 void
