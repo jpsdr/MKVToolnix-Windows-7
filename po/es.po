@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-10-12 22:59+0200\n"
-"PO-Revision-Date: 2016-08-13 17:04+0000\n"
+"PO-Revision-Date: 2016-10-14 19:12+0200\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
@@ -401,13 +401,12 @@ msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr "  --engage <feature>       Habilitar la característica experimental 'feature'.\n"
 
 #: src/merge/mkvmerge.cpp:261
-#, fuzzy
 msgid ""
 "  --field-order <TID:n>    Sets the video field order parameter\n"
 "                           (see documentation for valid values).\n"
 msgstr ""
-"  --blockadd <TID:x>       Establecer el número máximo de bloque\n"
-"                           adicional para los niveles de esta pista.\n"
+"  --field-order <TID:n>    Parámetro que establece el orden de campos del video\n"
+"                           (consulte la documentación para valores admitidos).\n"
 
 #: src/merge/mkvmerge.cpp:239
 msgid ""
@@ -1942,9 +1941,9 @@ msgid "'%1%' is not a valid ccTLD country code."
 msgstr "'%1%' no es un código de país válido ccTLD."
 
 #: src/merge/mkvmerge.cpp:903
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not a valid field order."
-msgstr "'%1%' no es un código de país válido ccTLD."
+msgstr "'%1%' no es un orden de campos válido."
 
 #: src/merge/mkvmerge.cpp:1411
 #: src/merge/mkvmerge.cpp:1414
@@ -2003,9 +2002,9 @@ msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'%1%' no es un ID de pista válido en '--nalu-size-length %2%'.\n"
 
 #: src/merge/mkvmerge.cpp:897
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not a valid track ID."
-msgstr "'%1%' no es un corte válido.\n"
+msgstr "'%1%' no es un ID de pista válido."
 
 #: src/merge/mkvmerge.cpp:1489
 #, boost-format
@@ -2662,9 +2661,8 @@ msgid "Acknowledge all &warnings"
 msgstr "Ignorar todas las &advertencias"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:541
-#, fuzzy
 msgid "Actions for &all settings"
-msgstr "Acciones para el manejo de las propiedades"
+msgstr "Acciones para &todos los ajustes"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 msgid "Actions for handling attachments"
@@ -4927,9 +4925,9 @@ msgid "Extraction of track ID %1% with the CodecID '%2%' is not supported.\n"
 msgstr "La extracción de la pista con ID %1% y CodecID '%2%', no es compatible.\n"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extraction tool"
-msgstr "Herramienta de &extracción"
+msgstr "Herramienta de extracción"
 
 #: src/info/ui/mainwindow.h:118
 msgid "F1"
@@ -4989,14 +4987,13 @@ msgstr "Título del &archivo:"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:484
-#, fuzzy
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
-msgstr "Modo de video Stereo-3D (0 - 11, ver documentación)."
+msgstr "Orden de campos (0, 1, 2, 6, 9 o 14, consulte la documentación)."
 
 #: src/info/mkvinfo.cpp:751
-#, fuzzy, boost-format
+#, boost-format
 msgid "Field order: %1% (%2%)"
-msgstr "Modo estéreo: %1% (%2%)"
+msgstr "Orden de camos: %1% (%2%)"
 
 #: src/merge/mkvmerge.cpp:444
 #, boost-format
@@ -5666,9 +5663,9 @@ msgid "Indexing (cues):"
 msgstr "Indexar (índices):"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Info tool"
-msgstr "Herramienta de &información"
+msgstr "Herramienta de información"
 
 #: src/common/bitvalue.cpp:67
 #, boost-format
@@ -6088,7 +6085,7 @@ msgstr "Lo establece por defecto a 4 bytes, pero hay archivos que no contienen u
 
 #: src/merge/mkvmerge.cpp:891
 msgid "It does not consist of a track ID and a value separated by a colon."
-msgstr ""
+msgstr "No consiste en un ID de pista y un valor separados por dos puntos."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:183
 #: src/mkvtoolnix-gui/merge/output.cpp:189
@@ -6470,9 +6467,9 @@ msgstr "La memoria para un fotograma (frame) de un RealAudio/RealVideo no puede 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:142
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:296
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:151
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Merge tool"
-msgstr "Herramienta de &multiplexado"
+msgstr "Herramienta de multiplexado"
 
 #: src/common/file_types.cpp:85
 msgid "MicroDVD"
@@ -6602,9 +6599,8 @@ msgstr "Multiplexado"
 
 #: src/common/property_element.cpp:109
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-#, fuzzy
 msgid "Muxing application"
-msgstr "Aplicación de multiplexado: %1%"
+msgstr "Aplicación de multiplexado"
 
 #: src/info/mkvinfo.cpp:470
 #, boost-format
@@ -8686,9 +8682,9 @@ msgid "Tab &position in tab widgets:"
 msgstr "&Posición de la pestaña en los widgets:"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:295
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tag editor"
-msgstr "Editor de &etiqueta"
+msgstr "Editor de etiquetas"
 
 #: src/extract/extract_cli_parser.cpp:80
 msgid "Tag extraction"
@@ -8932,9 +8928,9 @@ msgstr "El argumento '%1%' no está permitido para el modo de identificación.\n
 #: src/merge/mkvmerge.cpp:890
 #: src/merge/mkvmerge.cpp:896
 #: src/merge/mkvmerge.cpp:902
-#, fuzzy, boost-format
+#, boost-format
 msgid "The argument '%1%' to '%2%' is invalid."
-msgstr "El argumento '%1%' a '%2%' no es válido: '%3%' el ID de la pista no es válido.\n"
+msgstr "El argumento '%1%' a '%2%' no es válido."
 
 #: src/merge/mkvmerge.cpp:1865
 #, boost-format
@@ -9633,12 +9629,12 @@ msgstr "El nombre no se puede dejar vacío."
 #: src/common/property_element.cpp:109
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 msgid "The name of the application or library used for muxing the file."
-msgstr ""
+msgstr "El nombre de la aplicación o librería usada para multiplexar el archivo."
 
 #: src/common/property_element.cpp:110
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
 msgid "The name of the application or library used for writing the file."
-msgstr ""
+msgstr "El nombre de la aplicación o librería usada para escribir el archivo."
 
 #: src/merge/mkvmerge.cpp:1930
 #, boost-format
@@ -11003,9 +10999,8 @@ msgstr "Anchura de visualización del video"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:484
-#, fuzzy
 msgid "Video field order"
-msgstr "Anchura del video en píxeles"
+msgstr "Orden de campos del video"
 
 #: src/common/property_element.cpp:137
 msgid "Video interlaced flag"
@@ -11259,9 +11254,8 @@ msgstr "Escribir la pista con el ID 'TID', al archivo 'salida'."
 
 #: src/common/property_element.cpp:110
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
-#, fuzzy
 msgid "Writing application"
-msgstr "Escritura: %1%"
+msgstr "Aplicación de escritura"
 
 #: src/info/mkvinfo.cpp:473
 #, boost-format
@@ -11523,11 +11517,11 @@ msgstr "Abajo"
 
 #: src/info/mkvinfo.cpp:756
 msgid "bottom field displayed first, bottom field stored first"
-msgstr ""
+msgstr "campo inferior mostrado primerao, campo inferior almacenado primero"
 
 #: src/info/mkvinfo.cpp:757
 msgid "bottom field displayed first, top field stored first"
-msgstr ""
+msgstr "campo inferior mostrado primero, campo superior almacenado primero"
 
 #: src/info/mkvinfo.cpp:1069
 #: src/input/r_matroska.cpp:108
@@ -12365,9 +12359,8 @@ msgid "pixel width: %1%"
 msgstr "anchura en píxeles: %1%"
 
 #: src/info/mkvinfo.cpp:753
-#, fuzzy
 msgid "progressive"
-msgstr "Progreso"
+msgstr "progresivo"
 
 #: src/extract/xtr_base.cpp:51
 msgid "raw data"
@@ -12478,11 +12471,11 @@ msgstr "Arriba abajo (derecha primero)"
 
 #: src/info/mkvinfo.cpp:758
 msgid "top field displayed first, bottom field stored first"
-msgstr ""
+msgstr "campo superior mostrado primerao, campo inferior almacenado primero"
 
 #: src/info/mkvinfo.cpp:754
 msgid "top field displayed first, top field stored first"
-msgstr ""
+msgstr "campo superior mostrado primerao, campo superior almacenado primero"
 
 #: src/merge/mkvmerge.cpp:2704
 msgid "track name"
@@ -12522,7 +12515,7 @@ msgstr "Ilimitado"
 
 #: src/info/mkvinfo.cpp:755
 msgid "unspecified"
-msgstr ""
+msgstr "indeterminado"
 
 #: src/info/mkvinfo.cpp:1067
 #: src/input/r_matroska.cpp:109
