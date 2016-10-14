@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-10-12 22:59+0200\n"
-"PO-Revision-Date: 2016-10-11 22:30+0000\n"
+"PO-Revision-Date: 2016-10-13 00:06+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
 "Language: ko\n"
@@ -364,13 +364,12 @@ msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr "  --engage <feature>      실험적인 기능 'feature'를 활성화합니다.\n"
 
 #: src/merge/mkvmerge.cpp:261
-#, fuzzy
 msgid ""
 "  --field-order <TID:n>    Sets the video field order parameter\n"
 "                           (see documentation for valid values).\n"
 msgstr ""
-"  --blockadd <TID:x>       이 트랙에 대해 블럭 추가 수준의\n"
-"                           쵀대 숫자를 지정합니다.\n"
+"  --field-order <TID:n>    비디오 필드 순서 매개변수를 설정합니다\n"
+"                           (유효한 값은 문서를 참조하세요).\n"
 
 #: src/merge/mkvmerge.cpp:239
 msgid ""
@@ -1831,9 +1830,9 @@ msgid "'%1%' is not a valid ccTLD country code."
 msgstr "'%1%'는 유효한 ccTLD 국가 코드가 아닙니다."
 
 #: src/merge/mkvmerge.cpp:903
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not a valid field order."
-msgstr "'%1%'는 유효한 ccTLD 국가 코드가 아닙니다."
+msgstr "'%1%'는 유효한 필드 순서가 아닙니다."
 
 #: src/merge/mkvmerge.cpp:1411
 #: src/merge/mkvmerge.cpp:1414
@@ -1892,9 +1891,9 @@ msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'--nalu-size-length %2%'의 '%1%'는 유효한 트랙 ID가 아닙니다.\n"
 
 #: src/merge/mkvmerge.cpp:897
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not a valid track ID."
-msgstr "'%1%'는 유효한 해킹이 아닙니다.\n"
+msgstr "'%1%'는 유효한 트랙 ID가 아닙니다."
 
 #: src/merge/mkvmerge.cpp:1489
 #, boost-format
@@ -3012,7 +3011,7 @@ msgstr "화면 비율 유형: %1%%2%"
 
 #: src/common/xml/ebml_chapters_converter.cpp:104
 msgid "At least one <ChapterAtom> element is needed."
-msgstr "적어도 하나 이상의 <ChapterAtom> 요소가 필요합니다."
+msgstr "적어도 하나의 <ChapterAtom> 요소가 필요합니다."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1751
 msgid "Atta&chments"
@@ -4868,14 +4867,13 @@ msgstr "파일 제목(&L):"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:484
-#, fuzzy
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
-msgstr "스테레오 3D 비디오 모드 (0 ~ 11, 문서를 참조하세요)."
+msgstr "필드 순서 (0, 1, 2, 6, 9 또는 14, 문서를 참조하세요)."
 
 #: src/info/mkvinfo.cpp:751
-#, fuzzy, boost-format
+#, boost-format
 msgid "Field order: %1% (%2%)"
-msgstr "스테레오 모드: %1% (%2%)"
+msgstr "필드 순서: %1% (%2%)"
 
 #: src/merge/mkvmerge.cpp:444
 #, boost-format
@@ -5966,7 +5964,7 @@ msgstr "기본값은 4 바이트이지만 65535 바이트(0xFFFF)보다 큰 프�
 
 #: src/merge/mkvmerge.cpp:891
 msgid "It does not consist of a track ID and a value separated by a colon."
-msgstr ""
+msgstr "그것은 트랙 ID와 콜론으로 분리된 값으로 되어 있지 않습니다."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:183
 #: src/mkvtoolnix-gui/merge/output.cpp:189
@@ -8798,9 +8796,9 @@ msgstr "인수 '%1%'은 식별 모드에서 허용되어 있지 않습니다.\n"
 #: src/merge/mkvmerge.cpp:890
 #: src/merge/mkvmerge.cpp:896
 #: src/merge/mkvmerge.cpp:902
-#, fuzzy, boost-format
+#, boost-format
 msgid "The argument '%1%' to '%2%' is invalid."
-msgstr "'%2%'에 대한 인수 '%1%'가 잘못됨: '%3%'는 유효한 트랙 ID가 아닙니다.\n"
+msgstr "'%2%'에 대한 인수 '%1%'이 무효합니다."
 
 #: src/merge/mkvmerge.cpp:1865
 #, boost-format
@@ -10853,9 +10851,8 @@ msgstr "비디오 가로 해상도"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:484
-#, fuzzy
 msgid "Video field order"
-msgstr "비디오 너비 (픽셀 단위)"
+msgstr "비디오 필드 순서"
 
 #: src/common/property_element.cpp:137
 msgid "Video interlaced flag"
@@ -11372,11 +11369,11 @@ msgstr "하단"
 
 #: src/info/mkvinfo.cpp:756
 msgid "bottom field displayed first, bottom field stored first"
-msgstr ""
+msgstr "하단 필드 먼저 출력, 하단 필드 먼저 저장"
 
 #: src/info/mkvinfo.cpp:757
 msgid "bottom field displayed first, top field stored first"
-msgstr ""
+msgstr "하단 필드 먼저 출력, 상단 필드 먼저 저장"
 
 #: src/info/mkvinfo.cpp:1069
 #: src/input/r_matroska.cpp:108
@@ -12214,9 +12211,8 @@ msgid "pixel width: %1%"
 msgstr "픽셀 너비: %1%"
 
 #: src/info/mkvinfo.cpp:753
-#, fuzzy
 msgid "progressive"
-msgstr "진행 상태"
+msgstr "순차 주사 방식"
 
 #: src/extract/xtr_base.cpp:51
 msgid "raw data"
@@ -12327,11 +12323,11 @@ msgstr "상하 방식 (우안 먼저)"
 
 #: src/info/mkvinfo.cpp:758
 msgid "top field displayed first, bottom field stored first"
-msgstr ""
+msgstr "상단 필드 먼저 출력, 하단 필드 먼저 저장"
 
 #: src/info/mkvinfo.cpp:754
 msgid "top field displayed first, top field stored first"
-msgstr ""
+msgstr "상단 필드 먼저 출력, 상단 필드 먼저 저장"
 
 #: src/merge/mkvmerge.cpp:2704
 msgid "track name"
@@ -12371,7 +12367,7 @@ msgstr "무제한"
 
 #: src/info/mkvinfo.cpp:755
 msgid "unspecified"
-msgstr ""
+msgstr "미지정됨"
 
 #: src/info/mkvinfo.cpp:1067
 #: src/input/r_matroska.cpp:109
