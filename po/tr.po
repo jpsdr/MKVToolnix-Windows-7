@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-10-12 22:59+0200\n"
-"PO-Revision-Date: 2016-10-11 16:20+0000\n"
+"PO-Revision-Date: 2016-10-14 06:14+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -1861,9 +1861,9 @@ msgid "'%1%' is not a valid ccTLD country code."
 msgstr "'%1%' geçerli ccTLD ülke kodu değil."
 
 #: src/merge/mkvmerge.cpp:903
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not a valid field order."
-msgstr "'%1%' geçerli ccTLD ülke kodu değil."
+msgstr "'%1%' geçerli bir alan sırası değil."
 
 #: src/merge/mkvmerge.cpp:1411
 #: src/merge/mkvmerge.cpp:1414
@@ -1922,9 +1922,9 @@ msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'%1%', '--nalu-size-length %2%' içindeki geçerli bir iz ID'si değil.\n"
 
 #: src/merge/mkvmerge.cpp:897
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not a valid track ID."
-msgstr "'%1%' geçerli kurcalama değil.\n"
+msgstr "'%1%' geçerli bir iz ID değil."
 
 #: src/merge/mkvmerge.cpp:1489
 #, boost-format
@@ -4907,14 +4907,13 @@ msgstr "Dosya baş&lığı:"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:484
-#, fuzzy
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
-msgstr "Stereo-3D görüntü kipi (0 - 11, belgelere bakın)."
+msgstr "Alan sırası (0, 1, 2, 6, 9 veya 14, belgelere bakın)."
 
 #: src/info/mkvinfo.cpp:751
-#, fuzzy, boost-format
+#, boost-format
 msgid "Field order: %1% (%2%)"
-msgstr "Stereo kipi: %1% (%2%)"
+msgstr "Alan sırası: %1% (%2%)"
 
 #: src/merge/mkvmerge.cpp:444
 #, boost-format
@@ -9544,12 +9543,12 @@ msgstr "Ad boş bırakılmamak zorundadır."
 #: src/common/property_element.cpp:109
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 msgid "The name of the application or library used for muxing the file."
-msgstr ""
+msgstr "Dosyayı çoklamak için kullanılan uygulamanın veya kütüphanenin adı"
 
 #: src/common/property_element.cpp:110
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
 msgid "The name of the application or library used for writing the file."
-msgstr ""
+msgstr "Dosyayı yazmak için kullanılan uygulamanın veya kütüphanenin adı"
 
 #: src/merge/mkvmerge.cpp:1930
 #, boost-format
@@ -10911,9 +10910,8 @@ msgstr "Görüntü görüntüleme genişliği"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:484
-#, fuzzy
 msgid "Video field order"
-msgstr "Görüntü piksel genişliği"
+msgstr "Görüntü alanı sırası"
 
 #: src/common/property_element.cpp:137
 msgid "Video interlaced flag"
@@ -11430,11 +11428,11 @@ msgstr "alt"
 
 #: src/info/mkvinfo.cpp:756
 msgid "bottom field displayed first, bottom field stored first"
-msgstr ""
+msgstr "önce alt alan görüntülenir, önce alt alan saklanır"
 
 #: src/info/mkvinfo.cpp:757
 msgid "bottom field displayed first, top field stored first"
-msgstr ""
+msgstr "önce alt alan görüntülenir, önce üst alan saklanır"
 
 #: src/info/mkvinfo.cpp:1069
 #: src/input/r_matroska.cpp:108
@@ -12272,9 +12270,8 @@ msgid "pixel width: %1%"
 msgstr "piksel genişliği: %1%"
 
 #: src/info/mkvinfo.cpp:753
-#, fuzzy
 msgid "progressive"
-msgstr "İlerleme"
+msgstr "aşamalı"
 
 #: src/extract/xtr_base.cpp:51
 msgid "raw data"
@@ -12385,11 +12382,11 @@ msgstr "üst alt (önce sağ)"
 
 #: src/info/mkvinfo.cpp:758
 msgid "top field displayed first, bottom field stored first"
-msgstr ""
+msgstr "önce üst alan görüntülenir, önce alt alan saklanır"
 
 #: src/info/mkvinfo.cpp:754
 msgid "top field displayed first, top field stored first"
-msgstr ""
+msgstr "önce üst alan görüntülenir, önce üst alan saklanır"
 
 #: src/merge/mkvmerge.cpp:2704
 msgid "track name"
@@ -12429,7 +12426,7 @@ msgstr "sınırsız"
 
 #: src/info/mkvinfo.cpp:755
 msgid "unspecified"
-msgstr ""
+msgstr "belirtilmemiş"
 
 #: src/info/mkvinfo.cpp:1067
 #: src/input/r_matroska.cpp:109
