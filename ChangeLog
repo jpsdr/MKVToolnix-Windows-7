@@ -1,3 +1,15 @@
+2016-10-15  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: h.264 elementary stream handling bug fix: if mkvmerge
+        ever encounters changing SPS or PPS NALUs (ones where their ID has
+        been encountered before with different settings) in the h.264 then
+        it will prepend all following key frames with all currently active
+        SPS and PPS NALUs. This enables playback from arbitrary key frames
+        even if they require other SPS or PPS settings than the ones
+        stored in the AVCC in CodecPrivate.
+
+        Fixes #1711.
+
 2016-10-12  Moritz Bunkus  <moritz@bunkus.org>
 
         * mkvmerge, mkvpropedit, MKVToolNix GUI: added support for the

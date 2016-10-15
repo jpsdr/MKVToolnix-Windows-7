@@ -907,6 +907,7 @@ mpeg4::p10::avc_es_parser_c::avc_es_parser_c()
   , m_debug_timecodes{         "avc_parser|avc_timecodes"}
   , m_debug_sps_info{          "avc_parser|avc_sps|avc_sps_info"}
   , m_debug_trailing_zero_byte_removal{"avc_parser|avc_trailing_zero_byte_removal"}
+  , m_debug_sps_pps_changes{           "avc_parser|avc_sps_pps_changes"}
 {
   if (m_debug_nalu_types)
     init_nalu_names();
@@ -1121,6 +1122,22 @@ mpeg4::p10::avc_es_parser_c::flush_unhandled_nalus() {
 }
 
 void
+mpeg4::p10::avc_es_parser_c::add_sps_and_pps_to_extra_data() {
+  mxdebug_if(m_debug_sps_pps_changes, boost::format("mpeg4::p10: adding all SPS & PPS before key frame due to changes from AVCC\n"));
+
+  brng::remove_erase_if(m_extra_data, [this](memory_cptr const &nalu) -> bool {
+    if (nalu->get_size() < static_cast<std::size_t>(m_nalu_size_length + 1))
+      return true;
+
+    auto const type = *(nalu->get_buffer() + m_nalu_size_length) & 0x1f;
+    return (type == NALU_TYPE_SEQ_PARAM) || (type == NALU_TYPE_PIC_PARAM);
+  });
+
+  brng::transform(m_sps_list, std::back_inserter(m_extra_data), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
+  brng::transform(m_pps_list, std::back_inserter(m_extra_data), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
+}
+
+void
 mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
   if (!m_avcc_ready) {
     m_unhandled_nalus.push_back(nalu);
@@ -1170,8 +1187,12 @@ mpeg4::p10::avc_es_parser_c::handle_slice_nalu(memory_cptr const &nalu) {
 
     m_first_keyframe_found    = true;
     m_b_frames_since_keyframe = false;
-    if (!si.field_pic_flag || !m_current_key_frame_bottom_field || (*m_current_key_frame_bottom_field == si.bottom_field_flag))
+    if (!si.field_pic_flag || !m_current_key_frame_bottom_field || (*m_current_key_frame_bottom_field == si.bottom_field_flag)) {
       cleanup();
+
+      if (m_sps_or_sps_overwritten)
+        add_sps_and_pps_to_extra_data();
+    }
 
     if (!si.field_pic_flag)
       m_current_key_frame_bottom_field = boost::none;
@@ -1218,11 +1239,12 @@ mpeg4::p10::avc_es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
     m_avcc_changed = true;
 
   } else if (m_sps_info_list[i].checksum != sps_info.checksum) {
-    mxverb(2, boost::format("mpeg4::p10: SPS ID %|1$04x| changed; checksum old %|2$04x| new %|3$04x|\n") % sps_info.id % m_sps_info_list[i].checksum % sps_info.checksum);
+    mxdebug_if(m_debug_sps_pps_changes, boost::format("mpeg4::p10: SPS ID %|1$04x| changed; checksum old %|2$04x| new %|3$04x|\n") % sps_info.id % m_sps_info_list[i].checksum % sps_info.checksum);
 
-    m_sps_info_list[i] = sps_info;
-    m_sps_list[i]      = parsed_nalu;
-    m_avcc_changed     = true;
+    m_sps_info_list[i]       = sps_info;
+    m_sps_list[i]            = parsed_nalu;
+    m_avcc_changed           = true;
+    m_sps_or_sps_overwritten = true;
 
   } else
     use_sps_info = false;
@@ -1267,11 +1289,12 @@ mpeg4::p10::avc_es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
     m_avcc_changed = true;
 
   } else if (m_pps_info_list[i].checksum != pps_info.checksum) {
-    mxverb(2, boost::format("mpeg4::p10: PPS ID %|1$04x| changed; checksum old %|2$04x| new %|3$04x|\n") % pps_info.id % m_pps_info_list[i].checksum % pps_info.checksum);
+    mxdebug_if(m_debug_sps_pps_changes, boost::format("mpeg4::p10: PPS ID %|1$04x| changed; checksum old %|2$04x| new %|3$04x|\n") % pps_info.id % m_pps_info_list[i].checksum % pps_info.checksum);
 
-    m_pps_info_list[i] = pps_info;
-    m_pps_list[i]      = nalu;
-    m_avcc_changed     = true;
+    m_pps_info_list[i]       = pps_info;
+    m_pps_list[i]            = nalu;
+    m_avcc_changed           = true;
+    m_sps_or_sps_overwritten = true;
   }
 
   m_extra_data.push_back(create_nalu_with_size(nalu));

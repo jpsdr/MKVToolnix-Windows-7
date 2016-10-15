@@ -224,7 +224,7 @@ protected:
   int m_nalu_size_length;
 
   bool m_keep_ar_info, m_fix_bitstream_frame_rate;
-  bool m_avcc_ready, m_avcc_changed;
+  bool m_avcc_ready, m_avcc_changed, m_sps_or_sps_overwritten{};
 
   int64_t m_stream_default_duration, m_forced_default_duration, m_container_default_duration;
   int m_frame_number, m_num_skipped_frames;
@@ -253,7 +253,7 @@ protected:
 
   bool m_ignore_nalu_size_length_errors, m_discard_actual_frames, m_simple_picture_order, m_first_cleanup;
 
-  debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timecodes, m_debug_sps_info, m_debug_trailing_zero_byte_removal;
+  debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timecodes, m_debug_sps_info, m_debug_trailing_zero_byte_removal, m_debug_sps_pps_changes;
   std::map<int, std::string> m_nalu_names_by_type;
 
   struct stats_t {
@@ -394,6 +394,7 @@ protected:
   bool flush_decision(slice_info_t &si, slice_info_t &ref);
   void flush_incomplete_frame();
   void flush_unhandled_nalus();
+  void add_sps_and_pps_to_extra_data();
   memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);
   void remove_trailing_zero_bytes(memory_c &memory);
   void init_nalu_names();
