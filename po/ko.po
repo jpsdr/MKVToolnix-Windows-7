@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-12 22:59+0200\n"
+"POT-Creation-Date: 2016-10-16 16:23+0200\n"
 "PO-Revision-Date: 2016-10-13 00:06+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -3661,7 +3661,7 @@ msgstr "색상 전송: %1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "libebml %1 + libmatroska %2 로 컴파일했습니다."
 
-#: src/merge/generic_packetizer.cpp:1195
+#: src/merge/generic_packetizer.cpp:1286
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "압축 실패: %1%\n"
@@ -6810,7 +6810,7 @@ msgstr "주의: 대부분의 <MTX_…> 변수는 비어 있고 이번 테스트 
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "주의: 윈도우상의 경로명에 슬래시는 역슬래시 대신으로도 사용할 수 있습니다."
 
-#: src/merge/generic_packetizer.cpp:1537
+#: src/merge/generic_packetizer.cpp:1540
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "'%1%' 저장에 대한 Matroska 사양은 아직 최종 결정되지 않았음에 유의하십시오. 따라서 mkvmerge 지원은 변경 될 수 있으며, '%2%'대신 '%2%/EXPERIMENTAL' 코덱ID를 사용합니다. 사양이 최종 결정되는대로 이 경고는 삭제되고 mkvmerge도 그에 따라 업데이트됩니다.\n"
@@ -8924,7 +8924,7 @@ msgstr "현재 합치기 설정을 닫을 것입니다."
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
 msgstr "현재 모드는 --merge, --edit-chapters 나 --edit-headers로 바꿀 수 있습니다."
 
-#: src/merge/generic_packetizer.cpp:1260
+#: src/merge/generic_packetizer.cpp:1248
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "현재 패킷의 타임코드는 이전 패킷의 타임코드보다 작습니다. 이것은 보통 소스 파일이 100%%정확하게 작성되지 않은 Matroska 파일임을 의미합니다. 데이터 손실을 피하기 위해 타임코드는 %1%밀리초 조정됩니다. 이 때문에 오디오/비디오 동기화에 영향을 미칠 수 있지만, mkvmerge의 \"--sync\"옵션으로 보정할 수 있습니다. 만약 이미 \"--sync\"옵션을 사용하고 있지만 여전히 이 경고가 표시되는 경우는 걱정할 필요가 없습니다 -- 이것은 정상입니다. 이 오류가 여러번 발생하고, 특정 트랙에서 이 메시지가 여러번 표시되는 경우, 원본 파일 자체에 문제가 있거나 mkvmerge의 자체 버그일 수 있습니다. 이런 경우, 제작자 Moritz Bunkus <moritz@bunkus.org>에게 문의하십시오.\n"
@@ -11450,7 +11450,7 @@ msgstr "새 합치기 설정 탭을 하나 만들고 거기에 모든 파일 추
 msgid "create one new merge settings tab for each file"
 msgstr "각 파일에 대해 새 합치기 설정 탭을 하나 만들기"
 
-#: src/merge/generic_packetizer.cpp:1556
+#: src/merge/generic_packetizer.cpp:1559
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "트랙_번호_만들기: file_num를 찾지 못했습니다. %1%\n"
@@ -12267,11 +12267,6 @@ msgstr "좌우 방식 (좌안 먼저)"
 msgid "side by side (right first)"
 msgstr "좌우 방식 (우안 먼저)"
 
-#: src/input/subtitles.cpp:598
-#, boost-format
-msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
-msgstr "spu_추출_재생시간: 타임코드 %1%에서 깨진 SPU 패킷이 발생했습니다. (next_off < start_off) 이 패킷은 제대로 표시되지 않거나 전혀 표시되지 않을 수도 있습니다.\n"
-
 #: src/input/subtitles.cpp:363
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_리더: 잘못된 형식입니다. \"[Events]\"섹션에서 \"Format\" 행을 찾을 수 없습니다."
@@ -12481,4 +12476,7 @@ msgstr "– 없음으로 설정 –"
 
 #~ msgid "Track %1% was compressed with lzo1x but mkvmerge has not been compiled with support for lzo1x compression.\n"
 #~ msgstr "트랙 %1%은 lzo1x으로 압축되어 있지만, mkvmerge는 lzo1x 압축을 지원하여 컴파일되지는 않았습니다.\n"
+
+#~ msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
+#~ msgstr "spu_추출_재생시간: 타임코드 %1%에서 깨진 SPU 패킷이 발생했습니다. (next_off < start_off) 이 패킷은 제대로 표시되지 않거나 전혀 표시되지 않을 수도 있습니다.\n"
 

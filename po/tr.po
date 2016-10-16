@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-12 22:59+0200\n"
+"POT-Creation-Date: 2016-10-16 16:23+0200\n"
 "PO-Revision-Date: 2016-10-14 06:14+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3701,7 +3701,7 @@ msgstr "Renk aktarımı: %1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "libebml %1 + libmatroska %2 ile derlendi."
 
-#: src/merge/generic_packetizer.cpp:1195
+#: src/merge/generic_packetizer.cpp:1286
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Sıkıştırma başarısız oldu: %1%\n"
@@ -6851,7 +6851,7 @@ msgstr "Çoğu <MTX_…> değişkenlerinin boş olduğunu ve bu çalıştırma d
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Dosya adlarında ters eğik çizgilerin yerine Windows öne eğik çizgilerinin de kullanılabildiğini unutmayın."
 
-#: src/merge/generic_packetizer.cpp:1537
+#: src/merge/generic_packetizer.cpp:1540
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr ""
@@ -8972,7 +8972,7 @@ msgstr "Şu anki birleştirme ayarları kapatılacaktır."
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
 msgstr "Şu anki kip --merge, --edit-chapters veya --edit-headers ile değiştirilebilir."
 
-#: src/merge/generic_packetizer.cpp:1260
+#: src/merge/generic_packetizer.cpp:1248
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr ""
@@ -11509,7 +11509,7 @@ msgstr "bir yeni birleştirme ayarları sekmesi oluştur ve tüm dosyaları oray
 msgid "create one new merge settings tab for each file"
 msgstr "her dosya için bir yeni birleştirme ayarları sekmesi oluştur"
 
-#: src/merge/generic_packetizer.cpp:1556
+#: src/merge/generic_packetizer.cpp:1559
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num bulunamadı. %1%\n"
@@ -12326,11 +12326,6 @@ msgstr "yan yana (önce sol)"
 msgid "side by side (right first)"
 msgstr "yan yana (önce sağ)"
 
-#: src/input/subtitles.cpp:598
-#, boost-format
-msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
-msgstr "spu_extraction_duration: %1% zaman kodunda bozulmuş SPU paketiyle (next_off < start_off) karşılaşıldı. Bu paket doğru olarak görüntülenmiyor olabilir ya da bir şey değil.\n"
-
 #: src/input/subtitles.cpp:363
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_okuyucusu: Geçersiz biçim. \"[Olaylar]\" bölümünde \"Biçim\" satırı bulunamadı."
@@ -12614,4 +12609,13 @@ msgstr "– hiçbiri olarak ayarla –"
 
 #~ msgid "job queue"
 #~ msgstr "iş kuyruğu"
+
+#~ msgid ""
+#~ "spu_extraction_duration: Encountered broken SPU packet (next_off < "
+#~ "start_off) at timecode %1%. This packet might be displayed incorrectly or "
+#~ "not at all.\n"
+#~ msgstr ""
+#~ "spu_extraction_duration: %1% zaman kodunda bozulmuş SPU paketiyle "
+#~ "(next_off < start_off) karşılaşıldı. Bu paket doğru olarak "
+#~ "görüntülenmiyor olabilir ya da bir şey değil.\n"
 

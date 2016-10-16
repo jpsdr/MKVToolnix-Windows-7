@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-12 22:59+0200\n"
+"POT-Creation-Date: 2016-10-16 16:23+0200\n"
 "PO-Revision-Date: 2016-10-09 10:56+0900\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -3677,7 +3677,7 @@ msgstr "色空間：%1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "Compiled with libebml %1 + libmatroska %2."
 
-#: src/merge/generic_packetizer.cpp:1195
+#: src/merge/generic_packetizer.cpp:1286
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "圧縮に失敗しました：%1%\n"
@@ -6829,7 +6829,7 @@ msgstr "殆どの<MTX_…>変数は空白であり、テストランでは削除
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Windowsではパス名で円記号の代わりにスラッシュも使用することができます。"
 
-#: src/merge/generic_packetizer.cpp:1537
+#: src/merge/generic_packetizer.cpp:1540
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "'%1%'の格納に関するMatroskaの仕様はまだ最終決定されていないことに注意してください。よってmkvmergeのサポートは変更される可能性があり、'%2%'の代わりに'%2%/EXPERIMENTAL'のコーデックIDを使用します。仕様が最終決定され次第この警告は削除され、mkvmergeもそれに従って更新されます。\n"
@@ -8940,7 +8940,7 @@ msgstr "現在のマージ設定は閉じられます。"
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
 msgstr "現在のモードは --merge、--edit-chaptersまたは--edit-headersによって変更することができます。"
 
-#: src/merge/generic_packetizer.cpp:1260
+#: src/merge/generic_packetizer.cpp:1248
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "現在のパケットのタイムコードは前のパケットのタイムコードより小さいです。これは通常ソースファイルが100%%正確に作成されなかったMatroskaファイルであることを意味します。データの損失を避けるためにタイムコードは%1%ミリ秒ズラされます。このためにオーディオ・ビデオの同期が狂うかもしれませんが、\"--sync\"オプションで補正することができます。もし既に\"--sync\"オプションを使っていて、それでもまだこの警告が表示される場合は心配することはありません―これは正常です。もしこのエラーが複数回発生し、特定のトラックでこのメッセージが複数回表示された場合は、そのファイルの製作を失敗しているか、mkvmergeのバグのどちらかです。この場合は作者のMoritz Bunkus <moritz@bunkus.org>に連絡してください。\n"
@@ -11468,7 +11468,7 @@ msgstr "新規のマージ設定を作成してそこに全てのファイルを
 msgid "create one new merge settings tab for each file"
 msgstr "各ファイルごとに新規のマージ設定を1つ作成する"
 
-#: src/merge/generic_packetizer.cpp:1556
+#: src/merge/generic_packetizer.cpp:1559
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number：file_numが見つかりませんでした。%1%\n"
@@ -12288,11 +12288,6 @@ msgstr "サイドバイサイド方式（レフトファースト）"
 msgid "side by side (right first)"
 msgstr "サイドバイサイド方式（ライトファースト）"
 
-#: src/input/subtitles.cpp:598
-#, boost-format
-msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
-msgstr "spu_extraction_duration：タイムコード%1%で壊れたSPUパケットに遭遇しました（next_off < start_off）。このパケットは正しく表示されないか、あるいは全く表示されないかもしれません。\n"
-
 #: src/input/subtitles.cpp:363
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader：無効なフォーマットです。\"[Events]\"セクションで\"Format\"行を見つけることができませんでした。"
@@ -12532,4 +12527,7 @@ msgstr "無しに設定"
 
 #~ msgid "job queue"
 #~ msgstr "ジョブキュー"
+
+#~ msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
+#~ msgstr "spu_extraction_duration：タイムコード%1%で壊れたSPUパケットに遭遇しました（next_off < start_off）。このパケットは正しく表示されないか、あるいは全く表示されないかもしれません。\n"
 

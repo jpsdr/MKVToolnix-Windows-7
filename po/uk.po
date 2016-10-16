@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-12 22:59+0200\n"
+"POT-Creation-Date: 2016-10-16 16:23+0200\n"
 "PO-Revision-Date: 2016-10-14 19:16+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -3735,7 +3735,7 @@ msgstr "Модель кольору: %1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "Зібраний з libebml %1 + libmatroska %2."
 
-#: src/merge/generic_packetizer.cpp:1195
+#: src/merge/generic_packetizer.cpp:1286
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Стиснення перервано: %1%\n"
@@ -6889,7 +6889,7 @@ msgstr "Зверніть увагу, що більшість змінних <MTX
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Зверніть увагу, що у Windows прямі слеші можуть також бути використані замість зворотніх у шляхах до файлів."
 
-#: src/merge/generic_packetizer.cpp:1537
+#: src/merge/generic_packetizer.cpp:1540
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Майте на увазі, що специфікації Matroska щодо зберігання '%1%' ще не були завершені. Тому підтримка з боку mkvmerge для них може змінюватись і використовується CodecID '%2%/EXPERIMENTAL' замість '%2%'. Це попередження не буде відображатись як тільки специфікації будуть завершені і mkvmerge буде оновлено відповідно.\n"
@@ -9032,7 +9032,7 @@ msgstr "Поточні налаштування мультиплексуванн
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
 msgstr "Поточний режим може бути змінений з --merge, --правка розділів або --правка-заголовків."
 
-#: src/merge/generic_packetizer.cpp:1260
+#: src/merge/generic_packetizer.cpp:1248
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Тайм-код поточного пакету є меншим ніж для попереднього пакета. Це зазвичай означає, що вхідний файл являє собою файл Matroska, який не було створено на 100%% корректно. Тайм-коди всіх пакетів будуть скореговані на %1% мс, щоб не втратити дані. Даний крок може призвести до розсинхронізації аудіо і відео, але це може бути виправлено за допомогою опції mkvmerge \"--sync\". Якщо ви вже використовуєте опцію \"--sync\" і все одно отримуєте це попередження, то не хвилюйтеся - це нормально. Якщо ж дана помилка виникає кілька разів, і ви отримаєте це повідомлення більше одного разу для конкретної доріжки, тоді або  вхідний файл некорректно створений, або це помилка mkvmerge. У цьому випадку вам слід зв'язатися з автором Moritz Bunkus <moritz@bunkus.org>.\n"
@@ -11585,7 +11585,7 @@ msgstr "Створити одну нову вкладку налаштувань
 msgid "create one new merge settings tab for each file"
 msgstr "Створити одну нову вкладку налаштувань мультиплексування для кожного файла"
 
-#: src/merge/generic_packetizer.cpp:1556
+#: src/merge/generic_packetizer.cpp:1559
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num не знайдений. %1%\n"
@@ -12403,11 +12403,6 @@ msgstr "розміщення поряд (лівий спочатку)"
 msgid "side by side (right first)"
 msgstr "розміщення поряд (правий спочатку)"
 
-#: src/input/subtitles.cpp:598
-#, boost-format
-msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
-msgstr "spu_extraction_duration: Виявлено пошкоджений пакет SPU (next_off < start_off) для тайм-коду %1%. Цей пакет може взагалі не відображатися або відображатися неправильно.\n"
-
 #: src/input/subtitles.cpp:363
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Невірний формат. Не знайдено рядок \"Format\" у секції \"[Events]\"."
@@ -12715,4 +12710,13 @@ msgstr "– нічого не обрано –"
 
 #~ msgid "job queue"
 #~ msgstr "Черга завдань"
+
+#~ msgid ""
+#~ "spu_extraction_duration: Encountered broken SPU packet (next_off < "
+#~ "start_off) at timecode %1%. This packet might be displayed incorrectly or "
+#~ "not at all.\n"
+#~ msgstr ""
+#~ "spu_extraction_duration: Виявлено пошкоджений пакет SPU (next_off < "
+#~ "start_off) для тайм-коду %1%. Цей пакет може взагалі не відображатися або "
+#~ "відображатися неправильно.\n"
 

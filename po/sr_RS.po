@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-12 22:59+0200\n"
+"POT-Creation-Date: 2016-10-16 16:23+0200\n"
 "PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -3787,7 +3787,7 @@ msgstr "Простор боја: %1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "Превођено уз: libebml %1 + libmatroska %2."
 
-#: src/merge/generic_packetizer.cpp:1195
+#: src/merge/generic_packetizer.cpp:1286
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Није успело сажимање: %1%\n"
@@ -6968,7 +6968,7 @@ msgstr ""
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr ""
 
-#: src/merge/generic_packetizer.cpp:1537
+#: src/merge/generic_packetizer.cpp:1540
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Знајте да Матрошка-одреднице које се односе на складиштење „%1%“ нису још увек завршене, па је подршка за њих у Мкв-спојници подложна изменама а употребљава се и ИБ-кодека „%2%/EXPERIMENTAL“ уместо „%2%“. Ово упозорење ће бити уклоњено по завршетку ових одредница (спецификација), те, потом, по надоградњи самог програма.\n"
@@ -9123,7 +9123,7 @@ msgstr "Текуће поставке Мкв-спојнице биће затв�
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
 msgstr "Текући начин рада се може изменити једном од наредних опција: „--merge“, „--edit-chapters“ или „--edit-headers“."
 
-#: src/merge/generic_packetizer.cpp:1260
+#: src/merge/generic_packetizer.cpp:1248
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Временска ознака текућег пакета започиње пре оне из претходног пакета, а то обично значи да изворна Матрошка-датотека није била створена 100%% исправно. Прилагодићу врем. ознаке свих пакета за %1%мс да не би сачували податке у потпуности. Ово може да доведе до неусклађености звука и слике, али се и то да исправити употребом опције Мкв-спојнице „--sync“. Ако већ употребљавате ову опцију, али ипак добијете ово упозорење, не морате да бринете, јер је то нормално. Ако се ова грешка дешава више но једном и добијате ову поруку више пута за појединачни запис, онда, или изворна датотека није ваљано створена, или се ради о програмској грешци Мкв-спојнице. У другом случају, обавестите творца програма, Морица Бункуса <moritz@bunkus.org>.\n"
@@ -11683,7 +11683,7 @@ msgstr "Створи нове поставке &сједињавања и дод
 msgid "create one new merge settings tab for each file"
 msgstr "Створи нове поставке &сједињавања и додај у оне"
 
-#: src/merge/generic_packetizer.cpp:1556
+#: src/merge/generic_packetizer.cpp:1559
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "„create_track_number“: Није пронађен „file_num“. %1%\n"
@@ -12514,11 +12514,6 @@ msgstr "страна по страна (прво лево)"
 msgid "side by side (right first)"
 msgstr "страна по страна (прво десно)"
 
-#: src/input/subtitles.cpp:598
-#, boost-format
-msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
-msgstr "„spu_extraction_duration“: Наиђох на оштећен „SPU“-пакет („next_off < start_off“) на временској ознаци %1%. Могуће је да се овај пакет неће ваљано или неће уопште приказивати.\n"
-
 #: src/input/subtitles.cpp:363
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "„ssa_reader“: Формат није ваљан. Не могу да нађем линију „Format“ у одељку „[Events]“."
@@ -12804,4 +12799,13 @@ msgstr "— не постављај —"
 
 #~ msgid "job queue"
 #~ msgstr "Заказане радње"
+
+#~ msgid ""
+#~ "spu_extraction_duration: Encountered broken SPU packet (next_off < "
+#~ "start_off) at timecode %1%. This packet might be displayed incorrectly or "
+#~ "not at all.\n"
+#~ msgstr ""
+#~ "„spu_extraction_duration“: Наиђох на оштећен „SPU“-пакет („next_off < "
+#~ "start_off“) на временској ознаци %1%. Могуће је да се овај пакет неће "
+#~ "ваљано или неће уопште приказивати.\n"
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-12 22:59+0200\n"
-"PO-Revision-Date: 2016-10-12 23:02+0200\n"
+"POT-Creation-Date: 2016-10-16 16:23+0200\n"
+"PO-Revision-Date: 2016-10-16 16:24+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -3720,7 +3720,7 @@ msgstr "Farbübertragung: %1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "Compiliert mit libebml %1 & libmatroska %2."
 
-#: src/merge/generic_packetizer.cpp:1195
+#: src/merge/generic_packetizer.cpp:1286
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Die Kompression schlug fehl: %1%\n"
@@ -6870,7 +6870,7 @@ msgstr "Beachten Sie, dass in diesem Testlauf die meisten <MTX_…>-Variablen le
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Beachten Sie, dass auch unter Windows in Pfadnamen Vorwärtsschrägstriche anstelle von umgekehrten Schrägstrichen verwendet werden können."
 
-#: src/merge/generic_packetizer.cpp:1537
+#: src/merge/generic_packetizer.cpp:1540
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Beachten Sie, dass die Matroska-Spezifikationen für die Speicherung von »%1%« noch nicht abschließend festgelegt wurden. Änderungen in Mkvmerges Unterstützung dafür bleiben daher vorbehalten und Mkvmerge nutzt derweil die CodecID »%2%/EXPERIMENTAL« anstelle von »%2%«. Diese Warnung wird entfernt, sobald die Spezifikationen fertiggestellt und Mkvmerge entsprechend aktualisiert worden sein wird.\n"
@@ -9000,7 +9000,7 @@ msgstr "Die aktuellen Muxeinstellungen werden geschlossen werden."
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
 msgstr "Der aktuelle Modus kann mit --merge, --edit-chapters oder --edit-headers geändert werden."
 
-#: src/merge/generic_packetizer.cpp:1260
+#: src/merge/generic_packetizer.cpp:1248
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Der Zeitstempel des aktuellen Paketes ist kleiner als der Zeitstempel des vorhergehenden Paketes. Dieses bedeutet normalerweise, dass die Quelldatei eine nicht 100%% korrekte Matroska-Datei ist. Die Zeitstempel aller folgenden Pakete werden um %1% ms angepasst, um keine Daten zu verlieren. Dies kann jedoch zum Verlust der Audio-/Video-Synchronisation führen, was eventuell mit Mkvmerges Option »--sync« wieder ausgeglichen werden kann. Verwenden Sie in so einem Fall bereits die Option »--sync« und bekommen Sie noch immer diese Warnung, dann ist das normal und kein Grund zur Sorge. Bekommen Sie diese Warnung mehrfach für ein und dieselbe Spur dann wurde entweder die Quelldatei falsch erstellt, oder aber Sie haben einen Fehler in Mkvmerge gefunden. In letzterem Fall wenden Sie sich bitte an den Autor Moritz Bunkus <moritz@bunkus.org>.\n"
@@ -11543,7 +11543,7 @@ msgstr "einen neuen Tab mit Muxeinstellungen anlegen und alle Dateien diesem hin
 msgid "create one new merge settings tab for each file"
 msgstr "für jede Datei neue Muxeinstellungen anlegen und zu diesen hinzufügen"
 
-#: src/merge/generic_packetizer.cpp:1556
+#: src/merge/generic_packetizer.cpp:1559
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: »file_num« nicht gefunden. %1%\n"
@@ -12360,11 +12360,6 @@ msgstr "Seite an Seite (links zuerst)"
 msgid "side by side (right first)"
 msgstr "Seite an Seite (rechts zuerst)"
 
-#: src/input/subtitles.cpp:598
-#, boost-format
-msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
-msgstr "spu_extraction_duration: Es wurde ein beschädigtes SPU-Paket bei Zeitstempel %1% gefunden (next_off < start_off). Dieses Paket wird beim Abspielen eventuell falsch oder gar nicht angezeigt.\n"
-
 #: src/input/subtitles.cpp:363
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: ungültiges Format. Es wurde keine »Format«-Zeile im Abschnitt »[Events]« gefunden."
@@ -12526,42 +12521,4 @@ msgstr "– keine Vorauswahl –"
 #, no-c-format
 msgid "– set to none –"
 msgstr "– leer setzen –"
-
-#~ msgid "&Merge"
-#~ msgstr "&Mergen"
-
-#~ msgid "&Remove selected attachment"
-#~ msgid_plural "&Remove selected attachments"
-#~ msgstr[0] "Ausgewählten Dateianhang e&ntfernen"
-#~ msgstr[1] "Ausgewählte Dateianhänge e&ntfernen"
-
-#~ msgid "Edit chapters"
-#~ msgstr "Kapitel bearbeiten"
-
-#~ msgid "Edit headers"
-#~ msgstr "Kopfdaten bearbeiten"
-
-#~ msgid "Edit tags"
-#~ msgstr "Tags bearbeiten"
-
-#~ msgid "Error importing file"
-#~ msgstr "Fehler beim Laden der Einstellungen"
-
-#~ msgid "Extract"
-#~ msgstr "Extraktion"
-
-#~ msgid "Info"
-#~ msgstr "Info"
-
-#~ msgid "Merge"
-#~ msgstr "Mergen"
-
-#~ msgid "Missing header/comment packets for stream. This file is broken but should be muxed correctly. If not please contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
-#~ msgstr "fehlende Kopf-/Kommentarpakete für diesen Datenstrom. Diese Datei ist beschädigt, sollte aber trotzdem korrekt gemuxt werden. Falls nicht, so kontaktieren Sie bitte den Autor Moritz Bunkus <moritz@bunkus.org>.\n"
-
-#~ msgid "Track %1% was compressed with bzlib but mkvmerge has not been compiled with support for bzlib compression.\n"
-#~ msgstr "Spur %1% wurde mit Bzlib komprimiert, aber Mkvmerge wurde ohne Unterstützung für Bzlib-Kompression kompiliert.\n"
-
-#~ msgid "Track %1% was compressed with lzo1x but mkvmerge has not been compiled with support for lzo1x compression.\n"
-#~ msgstr "Spur %1% wurde mit Lzo1x komprimiert, aber Mkvmerge wurde ohne Unterstützung für Lzo1x-Kompression kompiliert.\n"
 

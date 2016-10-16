@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-12 22:59+0200\n"
+"POT-Creation-Date: 2016-10-16 16:23+0200\n"
 "PO-Revision-Date: 2016-10-08 17:03+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3714,7 +3714,7 @@ msgstr "Margo tartea: %1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "libebml %1 + libmatroska %2-rekin bilduta."
 
-#: src/merge/generic_packetizer.cpp:1195
+#: src/merge/generic_packetizer.cpp:1286
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "Konpresio hutsegitea: %1%\n"
@@ -6865,7 +6865,7 @@ msgstr "Ohartu <MTX_…> aldagai gehienak hutsik daudela eta azterketa ekintza h
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Ohartu Windowsen eskuin barrak erabili daitezkeela ezkerbarren ordez helburu izenetan ere."
 
-#: src/merge/generic_packetizer.cpp:1537
+#: src/merge/generic_packetizer.cpp:1540
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Ohartu '%1%' biltegiratzeari dagokionez Matroska ezaugarritzea ez dela oraindik amaitu. mkvmerge-ren sostengua aldakorra da eta KodecID '%2%/EXPERIMENTAL' erabiltzen du '%2%'-ren ordez. Ohar hau kendu egingo da ezaugarritzea amaitutakoan eta mkvmerge horretarako eguneratutakoan.\n"
@@ -8989,7 +8989,7 @@ msgstr "Oraingo batze ezarpenak itxi egingo da."
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
 msgstr "Oraingo modua --merge, --edit-chapters edo --edit-headers aginduekin aldatu daiteke."
 
-#: src/merge/generic_packetizer.cpp:1260
+#: src/merge/generic_packetizer.cpp:1248
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "Oraingo paketearen denbora-kodea aurreko paketea baino txikiagoa da. Honek arrunt esanahi du iturburu agiria %%100 ongi sortu gabeko Matroska agiri bat dela. Pakete guztien denbora-kodeak %1%sm zehaztuko dira daturik ez galtzeko. Honek audio/bideo aldiberetzea nahastu dezake, baina hori mkvmergeren \"--sync\" aukeraren bidez zuzendu daiteke. Jadanik \"--sync\" erabili baduzu eta oraindik kontuz-ohar hau baduzu EZ kezkatu, egoera arrunta da. Akats hau behin baino gehiagotan gertatzen bada eta bide beragaitik mezu hau behin baino gehiagotan jasotzen baduzu, iturburu agiria gaizki osatuta dago edo mkvmergek akats bat du. Horrela bada jarri zaitez harremanetan egilearekin, Moritz Bunkus <moritz@bunkus.org>.\n"
@@ -11530,7 +11530,7 @@ msgstr "sortu batze ezarpen hegats berri bat eta gehitu agiri guztiak bertan"
 msgid "create one new merge settings tab for each file"
 msgstr "sortu batze ezarpen hegats berri bat agiri bakoitzeko"
 
-#: src/merge/generic_packetizer.cpp:1556
+#: src/merge/generic_packetizer.cpp:1559
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: file_num ez da aurkitu. %1%\n"
@@ -12347,11 +12347,6 @@ msgstr "aldez-alde (ezkerra lehenik)"
 #: src/common/stereo_mode.cpp:60
 msgid "side by side (right first)"
 msgstr "aldez-alde (eskuina lehenik)"
-
-#: src/input/subtitles.cpp:598
-#, boost-format
-msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
-msgstr "spu_extraction_duration: SPU pakete hautsi bat aurkitu da (next_off < start_off) %1% denbora-kodean. Pakete hau badaiteke oker edo ez osorik erakustea.\n"
 
 #: src/input/subtitles.cpp:363
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
@@ -16060,6 +16055,15 @@ msgstr "– ezarri ezer ezean –"
 
 #~ msgid "split by parts based on timecodes"
 #~ msgstr "banandu denbora-kodeetan ohinarrituriko zatietan"
+
+#~ msgid ""
+#~ "spu_extraction_duration: Encountered broken SPU packet (next_off < "
+#~ "start_off) at timecode %1%. This packet might be displayed incorrectly or "
+#~ "not at all.\n"
+#~ msgstr ""
+#~ "spu_extraction_duration: SPU pakete hautsi bat aurkitu da (next_off < "
+#~ "start_off) %1% denbora-kodean. Pakete hau badaiteke oker edo ez osorik "
+#~ "erakustea.\n"
 
 #~ msgid ""
 #~ "start >= m->ListSize(). This should not have happened. Please file a bug "

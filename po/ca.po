@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-10-12 22:59+0200\n"
+"POT-Creation-Date: 2016-10-16 16:23+0200\n"
 "PO-Revision-Date: 2016-10-15 09:49+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3770,7 +3770,7 @@ msgstr "Transferència del color: %1%"
 msgid "Compiled with libebml %1 + libmatroska %2."
 msgstr "S'ha compilat amb les libebml %1 + libmatroska %2."
 
-#: src/merge/generic_packetizer.cpp:1195
+#: src/merge/generic_packetizer.cpp:1286
 #, boost-format
 msgid "Compression failed: %1%\n"
 msgstr "La compressió ha fallat: %1%\n"
@@ -6927,7 +6927,7 @@ msgstr "Recordeu que la majoria de les variables <MTX_...> estan buides i seran 
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Recordeu que al Windows també es poden emprar barres inclinades en lloc de barres invertides en els noms dels camins."
 
-#: src/merge/generic_packetizer.cpp:1537
+#: src/merge/generic_packetizer.cpp:1540
 #, boost-format
 msgid "Note that the Matroska specifications regarding the storage of '%1%' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '%2%/EXPERIMENTAL' instead of '%2%'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Tingueu en compte que les especificacions de Matroska quant a l'emmagatzemament de «%1%» encara no han finalitzat. La implementació del «mkvmerge» està subjecta a canvis i usa el CodecID «%2%/EXPERIMENTAL» en comptes de «%2%». Aquest avís serà suprimit una vegada s'hagin finalitzat les especificacions i s'actualitzi el «mkvmerge».\n"
@@ -9055,7 +9055,7 @@ msgstr "Es tancaran els ajustaments del fusionat actuals."
 msgid "The current mode can be changed with --merge, --edit-chapters or --edit-headers."
 msgstr "El mode actual es pot canviar amb --merge, --edit-chapters o --edit-headers."
 
-#: src/merge/generic_packetizer.cpp:1260
+#: src/merge/generic_packetizer.cpp:1248
 #, boost-format
 msgid "The current packet's timecode is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100%% correctly. The timecodes of all packets will be adjusted by %1%ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "El codi de temps del paquet actual és més petit que el del paquet anterior. Normalment, vol dir que el fitxer d'origen és un fitxer Matroska que no ha estat creat correctament al 100%%. Els codis de temps de tots els paquets seran ajustats per %1% ms per tal de no perdre cap dada. Això pot desfer la sincronització de l'àudio/vídeo, però es pot corregir amb l'opció «--sync» del «mkvmerge». Si ja heu emprat «--sync» i encara obteniu aquest avís, NO us preocupeu, és normal. Si l'error succeeix més d'una vegada, tornant a obtenir aquest missatge per a una pista en particular, llavors el fitxer d'origen pot estar mal editat, o «mkvmerge» conté un error. En aquest cas hauríeu de contactar amb l'autor, en Moritz Bunkus <moritz@bunkus.org>.\n"
@@ -11595,7 +11595,7 @@ msgstr "Crea una nova pestanya d'ajustaments de fusionat i afegeixi tots els fit
 msgid "create one new merge settings tab for each file"
 msgstr "Crea una nova pestanya d'ajustaments de fusionat per a cada fitxer"
 
-#: src/merge/generic_packetizer.cpp:1556
+#: src/merge/generic_packetizer.cpp:1559
 #, boost-format
 msgid "create_track_number: file_num not found. %1%\n"
 msgstr "create_track_number: no es troba file_num. %1%\n"
@@ -12413,11 +12413,6 @@ msgstr "Costat a costat (esquerra primer)"
 msgid "side by side (right first)"
 msgstr "Costat a costat (dreta primer)"
 
-#: src/input/subtitles.cpp:598
-#, boost-format
-msgid "spu_extraction_duration: Encountered broken SPU packet (next_off < start_off) at timecode %1%. This packet might be displayed incorrectly or not at all.\n"
-msgstr "spu_extraction_duration: S'han trobat paquets SPU malmesos (next_off < start_off) en el codi de temps %1%. Aquest paquet es pot mostrar de forma incorrecta, o no mostrar-se.\n"
-
 #: src/input/subtitles.cpp:363
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader: Format no vàlid. No es troba la línia «Format» a la secció «[Events]»."
@@ -12691,4 +12686,13 @@ msgstr "– Establert a «no» –"
 
 #~ msgid "job queue"
 #~ msgstr "Cua de treball"
+
+#~ msgid ""
+#~ "spu_extraction_duration: Encountered broken SPU packet (next_off < "
+#~ "start_off) at timecode %1%. This packet might be displayed incorrectly or "
+#~ "not at all.\n"
+#~ msgstr ""
+#~ "spu_extraction_duration: S'han trobat paquets SPU malmesos (next_off < "
+#~ "start_off) en el codi de temps %1%. Aquest paquet es pot mostrar de forma "
+#~ "incorrecta, o no mostrar-se.\n"
 
