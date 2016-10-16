@@ -146,6 +146,4 @@ protected:
 };
 using ssa_parser_cptr = std::shared_ptr<ssa_parser_c>;
 
-int64_t spu_extract_duration(unsigned char *data, size_t buf_size, int64_t timecode);
-
 #endif // MTX_SUBTITLES_H

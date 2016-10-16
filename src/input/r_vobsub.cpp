@@ -19,10 +19,10 @@
 #include "common/iso639.h"
 #include "common/endian.h"
 #include "common/mm_io.h"
+#include "common/spu.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "input/r_vobsub.h"
-#include "input/subtitles.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
 #include "merge/output_control.h"
@@ -346,9 +346,9 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
     return -1;
   }
 
-  int64_t duration = spu_extract_duration(buf, size, timecode);
-  if (1 == -duration) {
-    duration = default_duration;
+  auto duration = mtx::spu::get_duration(buf, size);
+  if (!duration.valid()) {
+    duration = timestamp_c::ns(default_duration);
     mxverb(2, boost::format("vobsub_reader: Could not extract the duration for a SPU packet (timecode: %1%).") % format_timestamp(timecode, 3));
 
     int dcsq  =                   get_uint16_be(&buf[2]);
@@ -393,7 +393,7 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
         uint32_t len   = (buf[0] << 8 | buf[1]) + 6; // increase sub-picture length by 6
         buf[0]         = (uint8_t)(len >> 8);
         buf[1]         = (uint8_t)(len);
-        uint32_t stm   = duration / 1000000;         // calculate STM for Stop Display
+        uint32_t stm   = duration.to_ns() / 1000000; // calculate STM for Stop Display
         stm            = ((stm - 1) * 90 >> 10) + 1;
         buf[dcsq]      = (uint8_t)(dcsq2 >> 8);      // set pointer to 2nd chain
         buf[dcsq + 1]  = (uint8_t)(dcsq2);
@@ -410,8 +410,8 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
     mxverb(2, boost::format("\n"));
   }
 
-  if (2 != -duration)
-    ptzr->process(new packet_t(new memory_c(buf, size, true), timecode, duration));
+  if (duration.valid())
+    ptzr->process(new packet_t(new memory_c(buf, size, true), timecode, duration.to_ns()));
   else
     safefree(buf);
 
