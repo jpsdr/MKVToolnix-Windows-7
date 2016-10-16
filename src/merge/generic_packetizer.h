@@ -271,6 +271,7 @@ public:
   virtual generic_packetizer_c *get_connected_successor() const;
 
   // Callbacks
+  virtual void after_packet_timestamped(packet_t &packet);
   virtual void after_packet_rendered(packet_t const &packet);
   virtual void before_file_finished();
   virtual void after_file_created();

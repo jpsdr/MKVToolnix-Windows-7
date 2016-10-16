@@ -1184,18 +1184,6 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
       && (pack->data_adds.size()  > static_cast<size_t>(m_htrack_max_add_block_ids)))
     pack->data_adds.resize(m_htrack_max_add_block_ids);
 
-  if (m_compressor) {
-    try {
-      pack->data = m_compressor->compress(pack->data);
-      size_t i;
-      for (i = 0; pack->data_adds.size() > i; ++i)
-        pack->data_adds[i] = m_compressor->compress(pack->data_adds[i]);
-
-    } catch (mtx::compression_x &e) {
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Compression failed: %1%\n")) % e.error());
-    }
-  }
-
   pack->data->grab();
   for (auto &data_add : pack->data_adds)
     data_add->grab();
@@ -1282,6 +1270,21 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
     apply_factory_once(pack);
   else
     apply_factory();
+
+  after_packet_timestamped(*pack);
+
+  if (!m_compressor)
+    return;
+
+  try {
+    pack->data = m_compressor->compress(pack->data);
+    size_t i;
+    for (i = 0; pack->data_adds.size() > i; ++i)
+      pack->data_adds[i] = m_compressor->compress(pack->data_adds[i]);
+
+  } catch (mtx::compression_x &e) {
+    mxerror_tid(m_ti.m_fname, m_ti.m_id, boost::format(Y("Compression failed: %1%\n")) % e.error());
+  }
 }
 
 void
@@ -1594,6 +1597,10 @@ bool
 generic_packetizer_c::is_lacing_prevented()
   const {
   return m_prevent_lacing;
+}
+
+void
+generic_packetizer_c::after_packet_timestamped(packet_t &) {
 }
 
 void
