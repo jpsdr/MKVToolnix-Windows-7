@@ -68,7 +68,7 @@ vobsub_packetizer_c::can_connect_to(generic_packetizer_c *src,
 
 void
 vobsub_packetizer_c::after_packet_timestamped(packet_t &packet) {
-  static debugging_option_c debug{"spu|vobsub_set_duration"};
+  static debugging_option_c debug{"spu|spu_duration"};
 
   if (!packet.has_duration())
     return;

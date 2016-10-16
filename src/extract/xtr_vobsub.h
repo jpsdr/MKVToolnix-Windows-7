@@ -15,6 +15,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/timestamp.h"
 #include "extract/xtr_base.h"
 
 class xtr_vobsub_c: public xtr_base_c {
@@ -38,6 +39,9 @@ public:
   virtual const char *get_container_name() {
     return "VobSubs";
   };
+
+protected:
+  void fix_spu_duration(memory_c &buffer, timestamp_c const &duration) const;
 };
 
 #endif

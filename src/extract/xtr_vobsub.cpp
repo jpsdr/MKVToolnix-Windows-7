@@ -18,6 +18,8 @@
 #include "common/iso639.h"
 #include "common/mm_io_x.h"
 #include "common/mm_write_buffer_io.h"
+#include "common/spu.h"
+#include "common/strings/formatting.h"
 #include "common/tta.h"
 #include "extract/xtr_vobsub.h"
 
@@ -94,7 +96,29 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
 }
 
 void
+xtr_vobsub_c::fix_spu_duration(memory_c &buffer,
+                               timestamp_c const &duration)
+  const {
+  static debugging_option_c debug{"spu|spu_duration"};
+
+  if (!duration.valid())
+    return;
+
+  auto current_duration = mtx::spu::get_duration(buffer.get_buffer(), buffer.get_size());
+  auto diff             = current_duration.valid() ? (current_duration - duration).abs() : timestamp_c::ns(0);
+
+  if (diff >= timestamp_c::ms(1)) {
+    mxdebug_if(debug,
+               boost::format("vobsub: setting SPU duration to %1% (existing duration: %2%, difference: %3%)\n")
+               % format_timestamp(duration) % format_timestamp(current_duration.to_ns(0)) % format_timestamp(diff));
+    mtx::spu::set_duration(buffer.get_buffer(), buffer.get_size(), duration);
+  }
+}
+
+void
 xtr_vobsub_c::handle_frame(xtr_frame_t &f) {
+  fix_spu_duration(*f.frame, f.duration > 0 ? timestamp_c::ns(f.duration) : timestamp_c{});
+
   static unsigned char padding_data[8] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
 
   xtr_vobsub_c *vmaster = !m_master ? this : static_cast<xtr_vobsub_c *>(m_master);
