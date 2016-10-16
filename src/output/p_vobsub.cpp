@@ -19,6 +19,8 @@
 #include "common/codec.h"
 #include "common/compression.h"
 #include "common/mm_io.h"
+#include "common/spu.h"
+#include "common/strings/formatting.h"
 #include "input/subtitles.h"
 #include "output/p_vobsub.h"
 
@@ -62,4 +64,22 @@ vobsub_packetizer_c::can_connect_to(generic_packetizer_c *src,
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
   return CAN_CONNECT_YES;
+}
+
+void
+vobsub_packetizer_c::after_packet_timestamped(packet_t &packet) {
+  static debugging_option_c debug{"spu|vobsub_set_duration"};
+
+  if (!packet.has_duration())
+    return;
+
+  auto current_duration = mtx::spu::get_duration(packet.data->get_buffer(), packet.data->get_size());
+  auto diff             = current_duration.valid() ? (current_duration - timestamp_c::ns(packet.duration)).abs() : timestamp_c::ns(0);
+
+  if (diff >= timestamp_c::ms(1)) {
+    mxdebug_if(debug,
+               boost::format("vobsub: setting SPU duration to %1% (existing duration: %2%, difference: %3%)\n")
+               % format_timestamp(packet.duration) % format_timestamp(current_duration.to_ns(0)) % format_timestamp(diff));
+    mtx::spu::set_duration(packet.data->get_buffer(), packet.data->get_size(), timestamp_c::ns(packet.duration));
+  }
 }

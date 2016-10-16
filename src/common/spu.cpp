@@ -105,4 +105,14 @@ get_duration(unsigned char const *data,
   return timestamp_c::mpeg(static_cast<int64_t>(get_uint16_be(&data[*position])) * 1024);
 }
 
+void
+set_duration(unsigned char *data,
+             std::size_t const buf_size,
+             timestamp_c const &duration) {
+  auto position = find_stop_display_position(data, buf_size);
+
+  if (position && ((*position + 2) <= buf_size))
+    put_uint16_be(&data[*position], duration.to_mpeg() / 1024);
+}
+
 }}
