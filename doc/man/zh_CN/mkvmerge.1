@@ -34,7 +34,7 @@ mkvmerge \- 将多媒体流合并到 Matroska(TM) 文件中
 \fBmkvmerge\fR [全局选项] {\-o\ 输出文件} [选项1] {文件1} [[选项2]\ {文件2}] [@选项文件]
 .SH "说明"
 .PP
-本程序可读取多种媒体文件并将它们的数据流（全部或者按选择）合并到
+本程序可读取多个媒体文件并将它们的数据流（全部或部分）合并到
 Matroska(TM)
 文件中去；参见
 \m[blue]\fBMatroska(TM) 网站\fR\m[]\&\s-2\u[1]\d\s+2。
@@ -214,11 +214,7 @@ DTD
 .sp
 模板中可以使用多个变量，这些变量将在生成章节时被实际值替代。字符串 \*(Aq<NUM>\*(Aq 将被章节号替代。字符串 \*(Aq<START>\*(Aq 将被章节的起始时间戳替代。
 .sp
-The strings
-\*(Aq<FILE_NAME>\*(Aq
-and
-\*(Aq<FILE_NAME_WITH_EXT>\*(Aq
-are only filled when generating chapters for appended files\&. They will be replaced by the appended file\*(Aqs name wihtout respectively with its extension\&. Note that only the file\*(Aqs base name and extension are inserted, not its directory or drive components\&.
+字符串\(lq<FILE_NAME>\(rq与\(lq<FILE_NAME_WITH_EXT>\(rq 仅在为追加文件生成章节时被填充。它们会被替换为追加文件的名称，分别省略扩展名、包含扩展名。注意只会插入文件的基本名称与扩展名，不包括其目录或盘符。
 .sp
 您可以以 \*(Aq<NUM:位数>\*(Aq 的形式指定章节编号的最少位数，如 \*(Aq<NUM:3>\*(Aq。最终的数字，若其位数小于指定位数，则将在开头补零。
 .sp
@@ -1037,18 +1033,18 @@ $ mkvmerge \-o 完整\&.mkv 文件1\&.mkv +文件2\&.mkv
 .\}
 .RE
 .PP
-\fB[\fR \fIfile1\fR \fIfile2\fR \fB]\fR
+\fB[\fR \fI文件1\fR \fI文件2\fR \fB]\fR
 .RS 4
-If multiple file names are contained in a pair of square brackets then the second and all following files will be appended to the first file named within the brackets\&.
+如果方括号内包含多个文件名，则从第二个文件开始的所有文件都将追加合并到第一个文件后面。
 .sp
-This is an alternative syntax to using \*(Aq+\*(Aq between the file names\&. Therefore the following two commands are equivalent:
+这是用\(lq+\(rq连接文件名的另一种语法。因此下述两条命令是等效的:
 .sp
 .if n \{\
 .RS 4
 .\}
 .nf
-$ mkvmerge \-o full\&.mkv file1\&.mkv + file2\&.mkv
-$ mkvmerge \-o full\&.mkv \*(Aq[\*(Aq file1\&.mkv file2\&.mkv \*(Aq]\*(Aq
+$ mkvmerge \-o 完整\&.mkv 文件1\&.mkv + 文件2\&.mkv
+$ mkvmerge \-o 完整\&.mkv \*(Aq[\*(Aq 文件1\&.mkv 文件2\&.mkv \*(Aq]\*(Aq
 .fi
 .if n \{\
 .RE
@@ -1653,14 +1649,15 @@ Matroska(TM)
 .PP
 \fB\-\-colour\-matrix\fR \fITID:n\fR
 .RS 4
-Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries\&. The parameter
+设置视频从红绿蓝三原色衍生出亮度及色度值所用的矩阵系数。参数
 \fIn\fR
-is an integer rangeing from
+是范围从
 \fB0\fR
-and
-\fB10\fR\&.
+到
+\fB10\fR
+的整数。
 .sp
-Valid values and their meaning are:
+有效的值及其含义如下:
 .sp
 \fB0\fR: GBR,
 \fB1\fR: BT709,
@@ -1671,70 +1668,70 @@ Valid values and their meaning are:
 \fB6\fR: SMPTE 170M,
 \fB7\fR: SMPTE 240M,
 \fB8\fR: YCOCG,
-\fB9\fR: BT2020 non\-constant luminance,
-\fB10\fR: BT2020 constant luminance
+\fB9\fR: BT2020 非恒定亮度,
+\fB10\fR: BT2020 恒定亮度
 .RE
 .PP
 \fB\-\-colour\-bits\-per\-channel\fR \fITID:n\fR
 .RS 4
-Sets the number of coded bits for a colour channel\&. A value of
+设置颜色通道编码位数。数值
 \fB0\fR
-indicates that the number of bits is unspecified\&.
+表示位数未指定。
 .RE
 .PP
-\fB\-\-chroma\-subsample\fR \fITID:hori,vert\fR
+\fB\-\-chroma\-subsample\fR \fITID:水平,垂直\fR
 .RS 4
-The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally/vertically\&.
+对 Cr 与 Cb 通道中未移除的像素，水平/垂直方向需要移除的像素数量。
 .sp
-Example: For video with 4:2:0 chroma subsampling, the parameter should be set to
-\fITID\fR:\fB1\fR,\fB1\fR\&.
+例如: 对于色度抽样为 4:2:0 的视频，该参数应设为
+\fITID\fR:\fB1\fR,\fB1\fR。
 .RE
 .PP
-\fB\-\-cb\-subsample\fR \fITID:hori,vert\fR
+\fB\-\-cb\-subsample\fR \fITID:水平,垂直\fR
 .RS 4
-The amount of pixels to remove in the Cb channel for every pixel not removed horizontally/vertically\&. This is additive with
-\fB\-\-chroma\-subsample\fR\&.
-.sp
-Example: For video with 4:2:1 chroma subsampling, the parameter
+对 Cb 通道中未移除的像素，水平/垂直方向需要移除的像素数量。该数值将与
 \fB\-\-chroma\-subsample\fR
-should be set to
-\fITID\fR:\fB1\fR,\fB0\fR
-and Cb\-subsample should be set to
-\fITID\fR:\fB1\fR,\fB0\fR\&.
+相加。
+.sp
+例如: 对于色度抽样为 4:2:1 的视频，参数
+\fB\-\-chroma\-subsample\fR
+应设为
+\fITID\fR:\fB1\fR,\fB0\fR，Cb 抽样应设为
+\fITID\fR:\fB1\fR,\fB0\fR。
 .RE
 .PP
-\fB\-\-chroma\-siting\fR \fITID:hori,vert\fR
+\fB\-\-chroma\-siting\fR \fITID:水平,垂直\fR
 .RS 4
-Sets how chroma is sited horizontally/vertically (\fB0\fR: unspecified,
-\fB1\fR: top collocated,
-\fB2\fR: half)\&.
+设置色度在水平/垂直方向上如何抽样 (\fB0\fR: 未指定,
+\fB1\fR: 顶部/左侧合并,
+\fB2\fR: 对半)。
 .RE
 .PP
 \fB\-\-colour\-range\fR \fITID:n\fR
 .RS 4
-Sets the clipping of the color ranges (\fB0\fR: unspecified,
-\fB1\fR: broadcast range,
-\fB2\fR: full range (no clipping),
-\fB3\fR: defined by MatrixCoefficients/TransferCharacteristics)\&.
+设置色域裁剪 (\fB0\fR: 未指定,
+\fB1\fR: 广播色域,
+\fB2\fR: 完整色域 (无裁剪),
+\fB3\fR: 由 MatrixCoefficients/TransferCharacteristics 指定)。
 .RE
 .PP
 \fB\-\-colour\-transfer\-characteristics\fR \fITID:n\fR
 .RS 4
-The transfer characteristics of the video\&.
+视频的传输特征。
 .sp
-Valid values and their meaning are:
+有效的值及其含义如下:
 .sp
-\fB0\fR: reserved,
+\fB0\fR: 保留,
 \fB1\fR: ITU\-R BT\&.709,
 \fB2\fR: unspecified,
-\fB3\fR: reserved,
-\fB4\fR: gamma 2\&.2 curve,
-\fB5\fR: gamma 2\&.8 curve,
+\fB3\fR: 保留,
+\fB4\fR: gamma 2\&.2 曲线,
+\fB5\fR: gamma 2\&.8 曲线,
 \fB6\fR: SMPTE 170M,
 \fB7\fR: SMPTE 240M,
-\fB8\fR: linear,
-\fB9\fR: log,
-\fB10\fR: log sqrt,
+\fB8\fR: 线性,
+\fB9\fR: 对数,
+\fB10\fR: 对数平方根,
 \fB11\fR: IEC 61966\-2\-4,
 \fB12\fR: ITU\-R BT\&.1361 extended colour gamut,
 \fB13\fR: IEC 61966\-2\-1,
@@ -1747,14 +1744,14 @@ Valid values and their meaning are:
 .PP
 \fB\-\-colour\-primaries\fR \fITID:n\fR
 .RS 4
-Sets the colour primaries of the video\&.
+设置视频的颜色基准。
 .sp
-Valid values and their meaning are:
+有效的值及其含义如下:
 .sp
-\fB0\fR: reserved,
+\fB0\fR: 保留,
 \fB1\fR: ITU\-R BT\&.709,
-\fB2\fR: unspecified,
-\fB3\fR: reserved,
+\fB2\fR: 未指定,
+\fB3\fR: 保留,
 \fB4\fR: ITU\-R BT\&.470M,
 \fB5\fR: ITU\-R BT\&.470BG,
 \fB6\fR: SMPTE 170M,
@@ -1762,54 +1759,55 @@ Valid values and their meaning are:
 \fB8\fR: FILM,
 \fB9\fR: ITU\-R BT\&.2020,
 \fB10\fR: SMPTE ST 428\-1,
-\fB22\fR: JEDEC P22 phosphors
+\fB22\fR: JEDEC P22 磷光体
 .RE
 .PP
 \fB\-\-max\-content\-light\fR \fITID:n\fR
 .RS 4
-Sets the maximum brightness of a single pixel (Maximum Content Light Level) in candelas per square meter (cd/m\(S2)\&. The value of
+设置单个像素的最高亮度 (Maximum Content Light Level 最大内容亮度级别)，单位为坎德拉每平方米 (cd/m\(S2)。数值
 \fIn\fR
-should be a non\-negtive integer\&.
+应为非负整数。
 .RE
 .PP
 \fB\-\-max\-frame\-light\fR \fITID:n\fR
 .RS 4
-Sets the maximum brightness of a single full frame (Maximum Frame\-Average Light Level) in candelas per square meter (cd/m\(S2)\&. The value of
+设置单个完整帧的最高亮度 (Maximum Frame\-Average Light Level 最大帧平均亮度级别)，单位为坎德拉每平方米 (cd/m\(S2)。数值
 \fIn\fR
-should be a non\-negtive integer\&.
+应为非负整数。
 .RE
 .PP
 \fB\-\-chromaticity\-coordinates\fR \fITID:red\-x,red\-y,green\-x,green\-y,blue\-x,blue\-y\fR
 .RS 4
-Sets the red/green/blue chromaticity coordinates as defined by CIE 1931\&.
+设置 CIE 1931 定义的红/绿/蓝色度坐标。
 .RE
 .PP
 \fB\-\-white\-colour\-coordinates\fR \fITID:x,y\fR
 .RS 4
-Sets the white colour chromaticity coordinates as defined by CIE 1931\&.
+设置 CIE 1931 定义的白色色度坐标。
 .RE
 .PP
-\fB\-\-max\-luminance\fR \fITID:float\fR
+\fB\-\-max\-luminance\fR \fITID:浮点数\fR
 .RS 4
-Sets the maximum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 9999\&.99\&.
+设置最高亮度，单位为坎德拉每平方米 (cd/m\(S2)。数值应小于 9999\&.99。
 .RE
 .PP
-\fB\-\-min\-luminance\fR \fITID:float\fR
+\fB\-\-min\-luminance\fR \fITID:浮点数\fR
 .RS 4
-Sets the mininum luminance in candelas per square meter (cd/m\(S2)\&. The value should be less than 999\&.9999\&.
+设置最低亮度，单位为坎德拉每平方米 (cd/m\(S2)。数值应小于 999\&.9999。
 .RE
 .PP
 \fB\-\-field\-order\fR \fITID:n\fR
 .RS 4
-Sets the field order for the video track with the track ID
-\fITID\fR\&. The order must be one of the following numbers:
+设置轨道 ID 为
+\fITID\fR
+的视频轨道的场序。场序必须为以下数字之一:
 .sp
-\fB0\fR: progressive;
-\fB1\fR: interlaced with top field displayed first and top field stored first;
-\fB2\fR: undetermined field order;
-\fB6\fR: interlaced with bottom field displayed first and bottom field stored first;
-\fB9\fR: interlaced with bottom field displayed first and top field stored first;
-\fB14\fR: interlaced with top field displayed first and bottom field stored first
+\fB0\fR: 逐行扫描;
+\fB1\fR: 隔行扫描，顶场先显示，顶场先存储;
+\fB2\fR: 未定场序;
+\fB6\fR: 隔行扫描，底场先显示，底场先存储;
+\fB9\fR: 隔行扫描，底场先显示，顶场先存储;
+\fB14\fR: 隔行扫描，顶场先显示，底场先存储
 .RE
 .PP
 \fB\-\-stereo\-mode\fR \fITID:n|关键词\fR
@@ -1925,12 +1923,11 @@ json
 .RE
 .RE
 .PP
-\fB\-\-probe\-range\-percentage\fR \fIpercentage\fR
+\fB\-\-probe\-range\-percentage\fR \fI百分比\fR
 .RS 4
-File types such as MPEG program and transport streams (\&.vob,
-\&.m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file\&. This amount is 0\&.3% of the source file\*(Aqs size or 10 MB, whichever is higher\&.
+部分文件类型，如 MPEG 节目流及传输流 (\&.vob、\&.m2ts)，需要解析一定量的数据，方可侦测出文件中所包含的所有轨道。该数据量为源文件大小的 0\&.3% 或 10 MB，取其中较高者。
 .sp
-If tracks are known to be present but not found then the percentage to probe can be changed with this option\&. The minimum of 10 MB is built\-in and cannot be changed\&.
+如果已知轨道存在，但未能找到，可以通过本选项更改探测百分比。 最小值 10 MB 为内置参数，无法更改。
 .RE
 .PP
 \fB\-l\fR, \fB\-\-list\-types\fR
