@@ -43,6 +43,10 @@ public slots:
   void adjustPlaylistControls();
   void adjustRemoveOldJobsControls();
 
+  void enableOftendUsedLanguagesOnly();
+  void enableOftendUsedCountriesOnly();
+  void enableOftendUsedCharacterSetsOnly();
+
 protected:
   void setupPageSelector();
   void setupToolTips();

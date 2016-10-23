@@ -18,6 +18,7 @@
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/side_by_side_multi_select.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx { namespace gui {
@@ -327,12 +328,24 @@ PreferencesDialog::setupToolTips() {
   // Often used XYZ page
   ui->tbOftenUsedLanguages->setToolTips(QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."),
                                         QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
+  Util::setToolTip(ui->cbOftenUsedLanguagesOnly,
+                   Q("%1 %2")
+                   .arg(QYH("If checked only the list of often used entries will be included in the selections in the program."))
+                   .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
   ui->tbOftenUsedCountries->setToolTips(QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."),
                                         QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
+  Util::setToolTip(ui->cbOftenUsedCountriesOnly,
+                   Q("%1 %2")
+                   .arg(QYH("If checked only the list of often used entries will be included in the selections in the program."))
+                   .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
   ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."),
                                             QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
+  Util::setToolTip(ui->cbOftenUsedCharacterSetsOnly,
+                   Q("%1 %2")
+                   .arg(QYH("If checked only the list of often used entries will be included in the selections in the program."))
+                   .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
   // Header editor  page
   Util::setToolTip(ui->cbHEDroppedFilesPolicy,
@@ -367,6 +380,10 @@ PreferencesDialog::setupConnections() {
 
   connect(ui->buttons,                                    &QDialogButtonBox::accepted,                                   this,                                 &PreferencesDialog::accept);
   connect(ui->buttons,                                    &QDialogButtonBox::rejected,                                   this,                                 &PreferencesDialog::reject);
+
+  connect(ui->tbOftenUsedLanguages,                       &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedLanguagesOnly);
+  connect(ui->tbOftenUsedCountries,                       &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedCountriesOnly);
+  connect(ui->tbOftenUsedCharacterSets,                   &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedCharacterSetsOnly);
 }
 
 void
@@ -411,6 +428,8 @@ PreferencesDialog::setupCommonLanguages() {
   auto &allLanguages = App::iso639Languages();
 
   ui->tbOftenUsedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allLanguages)), m_cfg.m_oftenUsedLanguages);
+  ui->cbOftenUsedLanguagesOnly->setChecked(m_cfg.m_oftenUsedLanguagesOnly && !m_cfg.m_oftenUsedLanguages.isEmpty());
+  enableOftendUsedLanguagesOnly();
 }
 
 void
@@ -418,11 +437,15 @@ PreferencesDialog::setupCommonCountries() {
   auto &allCountries = App::topLevelDomainCountryCodes();
 
   ui->tbOftenUsedCountries->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(QVector<Util::SideBySideMultiSelect::Item>::fromStdVector(allCountries)), m_cfg.m_oftenUsedCountries);
+  ui->cbOftenUsedCountriesOnly->setChecked(m_cfg.m_oftenUsedCountriesOnly && !m_cfg.m_oftenUsedCountries.isEmpty());
+  enableOftendUsedCountriesOnly();
 }
 
 void
 PreferencesDialog::setupCommonCharacterSets() {
   ui->tbOftenUsedCharacterSets->setItems(QList<QString>::fromVector(QVector<QString>::fromStdVector(App::characterSets())), m_cfg.m_oftenUsedCharacterSets);
+  ui->cbOftenUsedCharacterSetsOnly->setChecked(m_cfg.m_oftenUsedCharacterSetsOnly && !m_cfg.m_oftenUsedCharacterSets.isEmpty());
+  enableOftendUsedCharacterSetsOnly();
 }
 
 void
@@ -647,6 +670,10 @@ PreferencesDialog::save() {
   m_cfg.m_oftenUsedCountries                 = ui->tbOftenUsedCountries->selectedItemValues();
   m_cfg.m_oftenUsedCharacterSets             = ui->tbOftenUsedCharacterSets->selectedItemValues();
 
+  m_cfg.m_oftenUsedLanguagesOnly             = ui->cbOftenUsedLanguagesOnly->isChecked() && !m_cfg.m_oftenUsedLanguages.isEmpty();
+  m_cfg.m_oftenUsedCountriesOnly             = ui->cbOftenUsedCountriesOnly->isChecked() && !m_cfg.m_oftenUsedCountries.isEmpty();
+  m_cfg.m_oftenUsedCharacterSetsOnly         = ui->cbOftenUsedCharacterSetsOnly->isChecked() && !m_cfg.m_oftenUsedCharacterSets.isEmpty();
+
   // Header editor page
   m_cfg.m_headerEditorDroppedFilesPolicy     = static_cast<Util::Settings::HeaderEditorDroppedFilesPolicy>(ui->cbHEDroppedFilesPolicy->currentData().toInt());
 
@@ -661,6 +688,21 @@ PreferencesDialog::save() {
   }
 
   m_cfg.save();
+}
+
+void
+PreferencesDialog::enableOftendUsedLanguagesOnly() {
+  ui->cbOftenUsedLanguagesOnly->setEnabled(!ui->tbOftenUsedLanguages->selectedItemValues().isEmpty());
+}
+
+void
+PreferencesDialog::enableOftendUsedCountriesOnly() {
+  ui->cbOftenUsedCountriesOnly->setEnabled(!ui->tbOftenUsedCountries->selectedItemValues().isEmpty());
+}
+
+void
+PreferencesDialog::enableOftendUsedCharacterSetsOnly() {
+  ui->cbOftenUsedCharacterSetsOnly->setEnabled(!ui->tbOftenUsedCharacterSets->selectedItemValues().isEmpty());
 }
 
 void

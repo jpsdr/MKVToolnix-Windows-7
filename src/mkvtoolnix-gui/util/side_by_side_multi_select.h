@@ -38,6 +38,9 @@ public:
   ItemList selectedItems() const;
   QStringList selectedItemValues() const;
 
+signals:
+  void listsChanged();
+
 public slots:
   void availableSelectionChanged();
   void selectedSelectionChanged();
@@ -48,7 +51,7 @@ public slots:
 protected:
   void setupConnections();
 
-  static void moveSelectedListWidgetItems(QListWidget &from, QListWidget &to);
+  void moveSelectedListWidgetItems(QListWidget &from, QListWidget &to);
 };
 
 }}}
