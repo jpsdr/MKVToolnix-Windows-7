@@ -70,9 +70,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMDisableDefaultTrackForSubtitles->setChecked(m_cfg.m_disableDefaultTrackForSubtitles);
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
-  ui->cbMDefaultAudioTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultAudioTrackLanguage);
-  ui->cbMDefaultVideoTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultVideoTrackLanguage);
-  ui->cbMDefaultSubtitleTrackLanguage->setup().setCurrentByData(m_cfg.m_defaultSubtitleTrackLanguage);
+  ui->cbMDefaultAudioTrackLanguage->setAdditionalItems(m_cfg.m_defaultAudioTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultAudioTrackLanguage);
+  ui->cbMDefaultVideoTrackLanguage->setAdditionalItems(m_cfg.m_defaultVideoTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultVideoTrackLanguage);
+  ui->cbMDefaultSubtitleTrackLanguage->setAdditionalItems(m_cfg.m_defaultSubtitleTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultSubtitleTrackLanguage);
   ui->cbMDefaultSubtitleCharset->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
@@ -87,7 +87,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   // Chapter editor page
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
-  ui->cbCEDefaultLanguage->setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
+  ui->cbCEDefaultLanguage->setAdditionalItems(m_cfg.m_defaultChapterLanguage).setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
   ui->cbCEDefaultCountry->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
   // Header editor page

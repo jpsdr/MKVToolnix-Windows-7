@@ -108,6 +108,7 @@ public:
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
   QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
+  bool m_oftenUsedLanguagesOnly, m_oftenUsedCountriesOnly, m_oftenUsedCharacterSetsOnly;
   ProcessPriority m_priority;
   double m_probeRangePercentage;
   QTabWidget::TabPosition m_tabPosition;

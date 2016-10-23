@@ -22,11 +22,12 @@ using namespace mtx::gui;
 
 GenerateSubChaptersParametersDialog::GenerateSubChaptersParametersDialog(QWidget *parent,
                                                                          int firstChapterNumber,
-                                                                         uint64_t startTimecode)
+                                                                         uint64_t startTimecode,
+                                                                         QStringList const &additionalLanguages)
   : QDialog{parent}
   , m_ui{new Ui::GenerateSubChaptersParametersDialog}
 {
-  setupUi(firstChapterNumber, startTimecode);
+  setupUi(firstChapterNumber, startTimecode, additionalLanguages);
   retranslateUi();
 }
 
@@ -35,7 +36,8 @@ GenerateSubChaptersParametersDialog::~GenerateSubChaptersParametersDialog() {
 
 void
 GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
-                                             uint64_t startTimecode) {
+                                             uint64_t startTimecode,
+                                             QStringList const &additionalLanguages) {
   auto &cfg = Util::Settings::get();
 
   m_ui->setupUi(this);
@@ -44,7 +46,7 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->leStartTimecode->setText(Q(format_timestamp(startTimecode)));
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
-  m_ui->cbLanguage->setup().setCurrentByData(cfg.m_defaultChapterLanguage);
+  m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup().setCurrentByData(cfg.m_defaultChapterLanguage);
   m_ui->cbCountry->setup(true, QY("– set to none –")).setCurrentByData(cfg.m_defaultChapterCountry);
 
   m_ui->sbNumberOfEntries->setFocus();

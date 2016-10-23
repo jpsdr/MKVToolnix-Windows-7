@@ -19,12 +19,13 @@ namespace mtx { namespace gui { namespace ChapterEditor {
 using namespace mtx::gui;
 
 MassModificationDialog::MassModificationDialog(QWidget *parent,
-                                               bool editionOrChapterSelected)
+                                               bool editionOrChapterSelected,
+                                               QStringList const &additionalLanguages)
   : QDialog{parent}
   , m_ui{new Ui::MassModificationDialog}
   , m_editionOrChapterSelected{editionOrChapterSelected}
 {
-  setupUi();
+  setupUi(additionalLanguages);
   retranslateUi();
 }
 
@@ -32,10 +33,10 @@ MassModificationDialog::~MassModificationDialog() {
 }
 
 void
-MassModificationDialog::setupUi() {
+MassModificationDialog::setupUi(QStringList const &additionalLanguages) {
   m_ui->setupUi(this);
 
-  m_ui->cbLanguage->setup();
+  m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup();
   m_ui->cbCountry->setup(true, QY("– set to none –"));
 
   auto mw = MainWindow::get();

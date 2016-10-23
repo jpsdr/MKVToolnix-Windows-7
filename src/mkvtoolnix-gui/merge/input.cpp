@@ -615,6 +615,14 @@ Tab::setInputControlValues(Track *track) {
 
   addOrRemoveEmptyComboBoxItem(!track);
 
+  auto additionalLanguages = QSet<QString>{};
+
+  for (auto const &sourceFile : m_config.m_files)
+    for (auto const &track : sourceFile->m_tracks)
+      additionalLanguages << track->m_language;
+
+  ui->trackLanguage->setAdditionalItems(additionalLanguages.toList()).reInitializeIfNecessary();
+
   if (!track) {
     clearInputControlValues();
     m_currentlySettingInputControlValues = false;

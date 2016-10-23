@@ -38,8 +38,9 @@ LanguageValuePage::createInputControl() {
   m_cbValue->setFrame(true);
   m_cbValue->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
 
-  m_cbValue->setup().setCurrentByData(QStringList{} << Q(currentValue) << Q("und"));
-  m_originalValueIdx = m_cbValue->currentIndex();
+  m_cbValue->setAdditionalItems(Q(currentValue))
+    .setup()
+    .setCurrentByData(QStringList{} << Q(currentValue) << Q("und"));
 
   connect(MainWindow::get(), &MainWindow::preferencesChanged, m_cbValue, &Util::ComboBoxBase::reInitialize);
 
@@ -60,7 +61,7 @@ LanguageValuePage::currentValueAsString()
 
 void
 LanguageValuePage::resetValue() {
-  m_cbValue->setCurrentIndex(m_originalValueIdx);
+  m_cbValue->setCurrentByData(Q(m_originalValue));
 }
 
 bool

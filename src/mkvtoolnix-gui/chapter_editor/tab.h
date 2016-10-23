@@ -169,6 +169,7 @@ protected:
   void chaptersLoaded(ChaptersPtr const &chapters, bool canBeWritten);
 
   QString currentState() const;
+  QStringList usedNameLanguages(QStandardItem *parentItem = nullptr);
   ChaptersPtr timecodesToChapters(std::vector<timestamp_c> const &timecodes) const;
   QString formatChapterName(QString const &nameTemplate, int chapterNumber, timestamp_c const &startTimecode) const;
   bool changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace,

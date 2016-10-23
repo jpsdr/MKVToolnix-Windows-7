@@ -22,11 +22,12 @@ using namespace mtx::gui;
 
 RenumberSubChaptersParametersDialog::RenumberSubChaptersParametersDialog(QWidget *parent,
                                                                          int firstChapterNumber,
-                                                                         QStringList const &existingSubChapters)
+                                                                         QStringList const &existingSubChapters,
+                                                                         QStringList const &additionalLanguages)
   : QDialog{parent}
   , m_ui{new Ui::RenumberSubChaptersParametersDialog}
 {
-  setupUi(firstChapterNumber, existingSubChapters);
+  setupUi(firstChapterNumber, existingSubChapters, additionalLanguages);
 }
 
 RenumberSubChaptersParametersDialog::~RenumberSubChaptersParametersDialog() {
@@ -34,7 +35,8 @@ RenumberSubChaptersParametersDialog::~RenumberSubChaptersParametersDialog() {
 
 void
 RenumberSubChaptersParametersDialog::setupUi(int firstChapterNumber,
-                                             QStringList const &existingSubChapters) {
+                                             QStringList const &existingSubChapters,
+                                             QStringList const &additionalLanguages) {
   auto &cfg = Util::Settings::get();
 
   m_ui->setupUi(this);
@@ -44,7 +46,7 @@ RenumberSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->sbFirstChapterNumber->setValue(firstChapterNumber);
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
-  m_ui->cbLanguageOfNamesToReplace->setup();
+  m_ui->cbLanguageOfNamesToReplace->setAdditionalItems(additionalLanguages).setup();
   m_ui->cbLanguageOfNamesToReplace->insertItem(0, QY("– first chapter name regardless of its language –"),  static_cast<int>(NameMatch::First));
   m_ui->cbLanguageOfNamesToReplace->insertItem(1, QY("– all chapter names regardless of their language –"), static_cast<int>(NameMatch::All));
   m_ui->cbLanguageOfNamesToReplace->insertSeparator(2);

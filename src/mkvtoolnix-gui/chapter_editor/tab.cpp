@@ -853,8 +853,12 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
   if (!display)
     return false;
 
+  auto language = Q(FindChildValue<KaxChapterLanguage>(display, std::string{"eng"}));
+
   ui->leChName->setText(Q(GetChildValue<KaxChapterString>(display)));
-  ui->cbChNameLanguage->setCurrentByData(Q(FindChildValue<KaxChapterLanguage>(display, std::string{"eng"})));
+  ui->cbChNameLanguage->setAdditionalItems(usedNameLanguages())
+    .reInitializeIfNecessary()
+    .setCurrentByData(language);
   ui->cbChNameCountry->setCurrentByData(Q(FindChildValue<KaxChapterCountry>(display)));
 
   resizeNameColumnsToContents();
@@ -1232,12 +1236,13 @@ Tab::massModify() {
     return;
 
   auto selectedIdx = Util::selectedRowIdx(ui->elements);
-  MassModificationDialog dlg{this, selectedIdx.isValid()};
+  auto item        = selectedIdx.isValid() ? m_chapterModel->itemFromIndex(selectedIdx) : m_chapterModel->invisibleRootItem();
+
+  MassModificationDialog dlg{this, selectedIdx.isValid(), usedNameLanguages()};
   if (!dlg.exec())
     return;
 
   auto actions = dlg.actions();
-  auto item    = selectedIdx.isValid() ? m_chapterModel->itemFromIndex(selectedIdx) : m_chapterModel->invisibleRootItem();
 
   if (actions & MassModificationDialog::Shift)
     shiftTimecodes(item, dlg.shiftBy());
@@ -1302,7 +1307,7 @@ Tab::generateSubChapters() {
       maxEndTimecode = std::max(maxEndTimecode, std::max(FindChildValue<KaxChapterTimeStart>(*chapter, 0ull), FindChildValue<KaxChapterTimeEnd>(*chapter, 0ull)));
   }
 
-  GenerateSubChaptersParametersDialog dlg{this, numRows + 1, maxEndTimecode};
+  GenerateSubChaptersParametersDialog dlg{this, numRows + 1, maxEndTimecode, usedNameLanguages()};
   if (!dlg.exec())
     return;
 
@@ -1410,10 +1415,11 @@ Tab::renumberSubChapters() {
       chapterTitles << Q("%1 (%2)").arg(name).arg(Q(format_timestamp(start)));
   }
 
-  auto matches     = QRegularExpression{Q("(\\d+)$")}.match(firstName);
-  auto firstNumber = matches.hasMatch() ? matches.captured(0).toInt() : 1;
+  auto matches       = QRegularExpression{Q("(\\d+)$")}.match(firstName);
+  auto firstNumber   = matches.hasMatch() ? matches.captured(0).toInt() : 1;
+  auto usedLanguages = usedNameLanguages(selectedItem);
 
-  RenumberSubChaptersParametersDialog dlg{this, firstNumber, chapterTitles};
+  RenumberSubChaptersParametersDialog dlg{this, firstNumber, chapterTitles, usedLanguages};
   if (!dlg.exec())
     return;
 
@@ -1641,6 +1647,38 @@ Tab::closeTab() {
 void
 Tab::addSegmentUIDFromFile() {
   Util::addSegmentUIDFromFileToLineEdit(*this, *ui->leChSegmentUid, false);
+}
+
+QStringList
+Tab::usedNameLanguages(QStandardItem *rootItem) {
+  if (!rootItem)
+    rootItem = m_chapterModel->invisibleRootItem();
+
+  auto names = QSet<QString>{};
+
+  std::function<void(QStandardItem *)> collector = [&](QStandardItem *currentItem) {
+    if (!currentItem)
+      return;
+
+    auto chapter = m_chapterModel->chapterFromItem(currentItem);
+    if (chapter)
+      for (auto const &element : *chapter) {
+        auto kDisplay = dynamic_cast<KaxChapterDisplay *>(element);
+        if (!kDisplay)
+          continue;
+
+        auto kLanguage = FindChild<KaxChapterLanguage>(*kDisplay);
+        if (kLanguage)
+          names << Q(*kLanguage);
+      }
+
+    for (auto row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
+      collector(currentItem->child(row));
+  };
+
+  collector(rootItem);
+
+  return names.toList();
 }
 
 }}}

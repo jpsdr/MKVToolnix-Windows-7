@@ -19,7 +19,6 @@ class LanguageValuePage: public ValuePage {
 public:
   Util::LanguageComboBox *m_cbValue{};
   std::string m_originalValue;
-  int m_originalValueIdx{};
 
 public:
   LanguageValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);

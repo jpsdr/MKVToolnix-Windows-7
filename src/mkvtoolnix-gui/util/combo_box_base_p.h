@@ -13,6 +13,7 @@ class ComboBoxBasePrivate {
 
   bool m_withEmpty{};
   QString m_emptyTitle;
+  QStringList m_additionalItems;
 
 public:
   virtual ~ComboBoxBasePrivate();

@@ -11,6 +11,8 @@ class ComboBoxBasePrivate;
 class ComboBoxBase: public QComboBox {
   Q_OBJECT;
 
+  using StringPairVector = std::vector<std::pair<QString, QString>>;
+
 protected:
   Q_DECLARE_PRIVATE(ComboBoxBase);
 
@@ -28,8 +30,18 @@ public:
   virtual ComboBoxBase &setCurrentByData(QString const &value);
   virtual ComboBoxBase &setCurrentByData(QStringList const &values);
 
+  virtual ComboBoxBase &setAdditionalItems(QString const &item);
+  virtual ComboBoxBase &setAdditionalItems(QStringList const &items);
+  virtual QStringList const &additionalItems() const;
+
+  virtual ComboBoxBase &reInitializeIfNecessary();
+  virtual bool onlyShowOftenUsed() const;
+
 public slots:
   virtual void reInitialize();
+
+protected:
+  static StringPairVector mergeCommonAndAdditionalItems(StringPairVector const &commonItems, StringPairVector const &allItems, QStringList const &additionalItems);
 };
 
 }}}

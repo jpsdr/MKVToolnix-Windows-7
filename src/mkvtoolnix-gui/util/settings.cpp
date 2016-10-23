@@ -178,6 +178,10 @@ Settings::load() {
   m_oftenUsedCountries                 = reg.value("oftenUsedCountries").toStringList();
   m_oftenUsedCharacterSets             = reg.value("oftenUsedCharacterSets").toStringList();
 
+  m_oftenUsedLanguagesOnly             = reg.value("oftenUsedLanguagesOnly",     false).toBool();;
+  m_oftenUsedCountriesOnly             = reg.value("oftenUsedCountriesOnly",     false).toBool();;
+  m_oftenUsedCharacterSetsOnly         = reg.value("oftenUsedCharacterSetsOnly", false).toBool();;
+
   m_scanForPlaylistsPolicy             = static_cast<ScanForPlaylistsPolicy>(reg.value("scanForPlaylistsPolicy", static_cast<int>(AskBeforeScanning)).toInt());
   m_minimumPlaylistDuration            = reg.value("minimumPlaylistDuration", 120).toUInt();
 
@@ -340,6 +344,10 @@ Settings::save()
   reg.setValue("oftenUsedLanguages",                 m_oftenUsedLanguages);
   reg.setValue("oftenUsedCountries",                 m_oftenUsedCountries);
   reg.setValue("oftenUsedCharacterSets",             m_oftenUsedCharacterSets);
+
+  reg.setValue("oftenUsedLanguagesOnly",             m_oftenUsedLanguagesOnly);
+  reg.setValue("oftenUsedCountriesOnly",             m_oftenUsedCountriesOnly);
+  reg.setValue("oftenUsedCharacterSetsOnly",         m_oftenUsedCharacterSetsOnly);
 
   reg.setValue("scanForPlaylistsPolicy",             static_cast<int>(m_scanForPlaylistsPolicy));
   reg.setValue("minimumPlaylistDuration",            m_minimumPlaylistDuration);

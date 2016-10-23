@@ -57,14 +57,45 @@ ComboBoxBase::setCurrentByData(QStringList const &values) {
   return *this;
 }
 
+ComboBoxBase &
+ComboBoxBase::setAdditionalItems(QString const &item) {
+  return setAdditionalItems(QStringList{} << item);
+}
+
+ComboBoxBase &
+ComboBoxBase::setAdditionalItems(QStringList const &items) {
+  Q_D(ComboBoxBase);
+
+  d->m_additionalItems.clear();
+  for (auto const &item : items)
+    if (!item.isEmpty())
+      d->m_additionalItems << item;
+
+  return *this;
+}
+
+QStringList const &
+ComboBoxBase::additionalItems()
+  const {
+  Q_D(const ComboBoxBase);
+
+  return d->m_additionalItems;
+}
+
 void
 ComboBoxBase::reInitialize() {
   Q_D(ComboBoxBase);
 
-  auto previousBlocked = blockSignals(true);
-  auto data            = currentData();
-  auto firstText       = itemText(0);
-  auto firstData       = itemData(0);
+  auto previousBlocked    = blockSignals(true);
+  auto data               = currentData();
+  auto firstText          = itemText(0);
+  auto firstData          = itemData(0);
+  auto additionalModified = false;
+
+  if (data.isValid() && !d->m_additionalItems.contains(data.toString())) {
+    d->m_additionalItems << data.toString();
+    additionalModified = true;
+  }
 
   clear();
   setup(d->m_withEmpty, d->m_emptyTitle);
@@ -77,7 +108,53 @@ ComboBoxBase::reInitialize() {
   else
     setCurrentByData(data.toString());
 
+  if (additionalModified)
+    d->m_additionalItems.removeLast();
+
   blockSignals(previousBlocked);
+}
+
+ComboBoxBase &
+ComboBoxBase::reInitializeIfNecessary() {
+  if (onlyShowOftenUsed())
+    reInitialize();
+  return *this;
+}
+
+bool
+ComboBoxBase::onlyShowOftenUsed()
+  const {
+  return false;
+}
+
+ComboBoxBase::StringPairVector
+ComboBoxBase::mergeCommonAndAdditionalItems(StringPairVector const &commonItems,
+                                            StringPairVector const &allItems,
+                                            QStringList const &additionalItems) {
+  auto items = commonItems;
+
+  items.reserve(commonItems.size() + additionalItems.size());
+
+  for (auto const &additionalItem : additionalItems) {
+    if (additionalItems.isEmpty())
+      continue;
+
+    auto finder = [&additionalItem](std::pair<QString, QString> const &existingItem) {
+      return existingItem.second == additionalItem;
+    };
+
+    auto itr = brng::find_if(commonItems, finder);
+    if (itr != commonItems.end())
+      continue;
+
+    itr = brng::find_if(allItems, finder);
+    if (itr != allItems.end())
+      items.push_back(*itr);
+  }
+
+  brng::sort(items);
+
+  return items;
 }
 
 }}}

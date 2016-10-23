@@ -26,7 +26,7 @@ public:
   };
 
 public:
-  explicit RenumberSubChaptersParametersDialog(QWidget *parent, int firstChapterNumber, QStringList const &existingSubChapters);
+  explicit RenumberSubChaptersParametersDialog(QWidget *parent, int firstChapterNumber, QStringList const &existingSubChapters, QStringList const &additionalLanguages);
   ~RenumberSubChaptersParametersDialog();
 
   int firstEntryToRenumber() const;
@@ -38,7 +38,7 @@ public:
   bool skipHidden() const;
 
 protected:
-  void setupUi(int firstChapterNumber, QStringList const &existingSubChapters);
+  void setupUi(int firstChapterNumber, QStringList const &existingSubChapters, QStringList const &additionalLanguages);
 };
 
 }}}
