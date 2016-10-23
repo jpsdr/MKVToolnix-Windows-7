@@ -859,7 +859,9 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
   ui->cbChNameLanguage->setAdditionalItems(usedNameLanguages())
     .reInitializeIfNecessary()
     .setCurrentByData(language);
-  ui->cbChNameCountry->setCurrentByData(Q(FindChildValue<KaxChapterCountry>(display)));
+  ui->cbChNameCountry->setAdditionalItems(usedNameCountryCodes())
+    .reInitializeIfNecessary()
+    .setCurrentByData(Q(FindChildValue<KaxChapterCountry>(display)));
 
   resizeNameColumnsToContents();
 
@@ -1238,7 +1240,7 @@ Tab::massModify() {
   auto selectedIdx = Util::selectedRowIdx(ui->elements);
   auto item        = selectedIdx.isValid() ? m_chapterModel->itemFromIndex(selectedIdx) : m_chapterModel->invisibleRootItem();
 
-  MassModificationDialog dlg{this, selectedIdx.isValid(), usedNameLanguages()};
+  MassModificationDialog dlg{this, selectedIdx.isValid(), usedNameLanguages(), usedNameCountryCodes()};
   if (!dlg.exec())
     return;
 
@@ -1307,7 +1309,7 @@ Tab::generateSubChapters() {
       maxEndTimecode = std::max(maxEndTimecode, std::max(FindChildValue<KaxChapterTimeStart>(*chapter, 0ull), FindChildValue<KaxChapterTimeEnd>(*chapter, 0ull)));
   }
 
-  GenerateSubChaptersParametersDialog dlg{this, numRows + 1, maxEndTimecode, usedNameLanguages()};
+  GenerateSubChaptersParametersDialog dlg{this, numRows + 1, maxEndTimecode, usedNameLanguages(), usedNameCountryCodes()};
   if (!dlg.exec())
     return;
 
@@ -1668,8 +1670,7 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
           continue;
 
         auto kLanguage = FindChild<KaxChapterLanguage>(*kDisplay);
-        if (kLanguage)
-          names << Q(*kLanguage);
+        names << (kLanguage ? Q(*kLanguage) : Q("eng"));
       }
 
     for (auto row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
@@ -1679,6 +1680,38 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
   collector(rootItem);
 
   return names.toList();
+}
+
+QStringList
+Tab::usedNameCountryCodes(QStandardItem *rootItem) {
+  if (!rootItem)
+    rootItem = m_chapterModel->invisibleRootItem();
+
+  auto countryCodes = QSet<QString>{};
+
+  std::function<void(QStandardItem *)> collector = [&](QStandardItem *currentItem) {
+    if (!currentItem)
+      return;
+
+    auto chapter = m_chapterModel->chapterFromItem(currentItem);
+    if (chapter)
+      for (auto const &element : *chapter) {
+        auto kDisplay = dynamic_cast<KaxChapterDisplay *>(element);
+        if (!kDisplay)
+          continue;
+
+        auto kCountry = FindChild<KaxChapterCountry>(*kDisplay);
+        if (kCountry)
+          countryCodes << Q(*kCountry);
+      }
+
+    for (auto row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
+      collector(currentItem->child(row));
+  };
+
+  collector(rootItem);
+
+  return countryCodes.toList();
 }
 
 }}}

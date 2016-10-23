@@ -20,12 +20,13 @@ using namespace mtx::gui;
 
 MassModificationDialog::MassModificationDialog(QWidget *parent,
                                                bool editionOrChapterSelected,
-                                               QStringList const &additionalLanguages)
+                                               QStringList const &additionalLanguages,
+                                               QStringList const &additionalCountryCodes)
   : QDialog{parent}
   , m_ui{new Ui::MassModificationDialog}
   , m_editionOrChapterSelected{editionOrChapterSelected}
 {
-  setupUi(additionalLanguages);
+  setupUi(additionalLanguages, additionalCountryCodes);
   retranslateUi();
 }
 
@@ -33,11 +34,12 @@ MassModificationDialog::~MassModificationDialog() {
 }
 
 void
-MassModificationDialog::setupUi(QStringList const &additionalLanguages) {
+MassModificationDialog::setupUi(QStringList const &additionalLanguages,
+                                QStringList const &additionalCountryCodes) {
   m_ui->setupUi(this);
 
   m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup();
-  m_ui->cbCountry->setup(true, QY("– set to none –"));
+  m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– set to none –"));
 
   auto mw = MainWindow::get();
   connect(m_ui->cbShift,           &QCheckBox::toggled,                                                          this,              &MassModificationDialog::verifyOptions);

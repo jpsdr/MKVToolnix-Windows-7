@@ -23,11 +23,12 @@ using namespace mtx::gui;
 GenerateSubChaptersParametersDialog::GenerateSubChaptersParametersDialog(QWidget *parent,
                                                                          int firstChapterNumber,
                                                                          uint64_t startTimecode,
-                                                                         QStringList const &additionalLanguages)
+                                                                         QStringList const &additionalLanguages,
+                                                                         QStringList const &additionalCountryCodes)
   : QDialog{parent}
   , m_ui{new Ui::GenerateSubChaptersParametersDialog}
 {
-  setupUi(firstChapterNumber, startTimecode, additionalLanguages);
+  setupUi(firstChapterNumber, startTimecode, additionalLanguages, additionalCountryCodes);
   retranslateUi();
 }
 
@@ -37,7 +38,8 @@ GenerateSubChaptersParametersDialog::~GenerateSubChaptersParametersDialog() {
 void
 GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
                                              uint64_t startTimecode,
-                                             QStringList const &additionalLanguages) {
+                                             QStringList const &additionalLanguages,
+                                             QStringList const &additionalCountryCodes) {
   auto &cfg = Util::Settings::get();
 
   m_ui->setupUi(this);
@@ -47,7 +49,7 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
   m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup().setCurrentByData(cfg.m_defaultChapterLanguage);
-  m_ui->cbCountry->setup(true, QY("– set to none –")).setCurrentByData(cfg.m_defaultChapterCountry);
+  m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– set to none –")).setCurrentByData(cfg.m_defaultChapterCountry);
 
   m_ui->sbNumberOfEntries->setFocus();
 

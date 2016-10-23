@@ -88,7 +88,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
   ui->cbCEDefaultLanguage->setAdditionalItems(m_cfg.m_defaultChapterLanguage).setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
-  ui->cbCEDefaultCountry->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
+  ui->cbCEDefaultCountry->setAdditionalItems(m_cfg.m_defaultChapterCountry).setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
   // Header editor page
   setupHeaderEditorDroppedFilesPolicy();

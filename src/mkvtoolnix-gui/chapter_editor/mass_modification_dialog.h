@@ -31,7 +31,7 @@ private:
   bool m_editionOrChapterSelected;
 
 public:
-  explicit MassModificationDialog(QWidget *parent, bool editionOrChapterSelected, QStringList const &additionalLanguages);
+  explicit MassModificationDialog(QWidget *parent, bool editionOrChapterSelected, QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);
   ~MassModificationDialog();
 
   Actions actions() const;
@@ -40,7 +40,7 @@ public:
   QString language() const;
   QString country() const;
 
-  void setupUi(QStringList const &additionalLanguages);
+  void setupUi(QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);
   void retranslateUi();
 
 public slots:

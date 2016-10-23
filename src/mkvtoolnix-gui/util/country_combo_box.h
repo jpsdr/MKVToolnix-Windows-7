@@ -18,6 +18,7 @@ public:
   virtual ~CountryComboBox();
 
   virtual ComboBoxBase &setup(bool withEmpty = false, QString const &emptyTitle = QString{}) override;
+  virtual bool onlyShowOftenUsed() const override;
 };
 
 }}}

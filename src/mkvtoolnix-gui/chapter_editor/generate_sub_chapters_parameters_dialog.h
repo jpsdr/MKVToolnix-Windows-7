@@ -19,7 +19,7 @@ private:
   std::unique_ptr<Ui::GenerateSubChaptersParametersDialog> m_ui;
 
 public:
-  explicit GenerateSubChaptersParametersDialog(QWidget *parent, int firstChapterNumber, uint64_t startTimecode, QStringList const &additionalLanguages);
+  explicit GenerateSubChaptersParametersDialog(QWidget *parent, int firstChapterNumber, uint64_t startTimecode, QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);
   ~GenerateSubChaptersParametersDialog();
 
   int numberOfEntries() const;
@@ -34,7 +34,7 @@ public slots:
   void verifyStartTimecode();
 
 protected:
-  void setupUi(int firstChapterNumber, uint64_t startTimecode, QStringList const &additionalLanguages);
+  void setupUi(int firstChapterNumber, uint64_t startTimecode, QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);
   void retranslateUi();
 };
 
