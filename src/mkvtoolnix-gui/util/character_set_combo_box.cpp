@@ -25,25 +25,46 @@ CharacterSetComboBox::CharacterSetComboBox(ComboBoxBasePrivate &d,
 CharacterSetComboBox::~CharacterSetComboBox() {
 }
 
+bool
+CharacterSetComboBox::onlyShowOftenUsed()
+  const {
+  auto &cfg = Util::Settings::get();
+  return cfg.m_oftenUsedCharacterSetsOnly && !cfg.m_oftenUsedCharacterSets.isEmpty();
+}
+
 ComboBoxBase &
 CharacterSetComboBox::setup(bool withEmpty,
                             QString const &emptyTitle) {
+  auto onlyOftenUsed = onlyShowOftenUsed();
+
   ComboBoxBase::setup(withEmpty, emptyTitle);
 
   if (withEmpty)
     addItem(emptyTitle, Q(""));
 
-  auto &commonCharacterSets = App::commonCharacterSets();
+  auto commonCharacterSets = QStringList::fromVector(QVector<QString>::fromStdVector(App::commonCharacterSets()));
+
+  if (onlyOftenUsed) {
+    auto merged  = QSet<QString>::fromList(commonCharacterSets);
+    merged      += QSet<QString>::fromList(additionalItems());
+
+    merged.remove(QString{});
+
+    commonCharacterSets = merged.toList();
+    commonCharacterSets.sort();
+  }
+
   if (!commonCharacterSets.empty()) {
     for (auto const &characterSet : commonCharacterSets)
       addItem(characterSet, characterSet);
 
-    insertSeparator(commonCharacterSets.size() + (withEmpty ? 1 : 0));
+    if (!onlyOftenUsed)
+      insertSeparator(commonCharacterSets.size() + (withEmpty ? 1 : 0));
   }
 
-  for (auto const &characterSet : App::characterSets())
-    addItem(characterSet, characterSet);
-
+  if (!onlyOftenUsed)
+    for (auto const &characterSet : App::characterSets())
+      addItem(characterSet, characterSet);
 
   view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   Util::fixComboBoxViewWidth(*this);

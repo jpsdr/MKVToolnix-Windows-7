@@ -548,7 +548,9 @@ Tab::setOutputControlValues() {
   ui->chapterLanguage->setAdditionalItems(m_config.m_chapterLanguage)
     .reInitializeIfNecessary()
     .setCurrentByData(m_config.m_chapterLanguage);
-  ui->chapterCharacterSet->setCurrentByData(m_config.m_chapterCharacterSet);
+  ui->chapterCharacterSet->setAdditionalItems(m_config.m_chapterCharacterSet)
+    .reInitializeIfNecessary()
+    .setCurrentByData(m_config.m_chapterCharacterSet);
   ui->chapterGenerationMode->setCurrentIndex(static_cast<int>(m_config.m_chapterGenerationMode));
   ui->chapterGenerationNameTemplate->setText(m_config.m_chapterGenerationNameTemplate);
   ui->chapterGenerationInterval->setText(m_config.m_chapterGenerationInterval);

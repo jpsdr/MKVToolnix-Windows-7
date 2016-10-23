@@ -73,7 +73,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMDefaultAudioTrackLanguage->setAdditionalItems(m_cfg.m_defaultAudioTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultAudioTrackLanguage);
   ui->cbMDefaultVideoTrackLanguage->setAdditionalItems(m_cfg.m_defaultVideoTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultVideoTrackLanguage);
   ui->cbMDefaultSubtitleTrackLanguage->setAdditionalItems(m_cfg.m_defaultSubtitleTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultSubtitleTrackLanguage);
-  ui->cbMDefaultSubtitleCharset->setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
+  ui->cbMDefaultSubtitleCharset->setAdditionalItems(m_cfg.m_defaultSubtitleCharset).setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
 

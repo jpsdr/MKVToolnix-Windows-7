@@ -20,7 +20,7 @@ class SelectCharacterSetDialog : public QDialog {
   QScopedPointer<SelectCharacterSetDialogPrivate> const d_ptr;
 
 public:
-  explicit SelectCharacterSetDialog(QWidget *parent, QString const &fileName, QString const &initialCharacterSet = QString{});
+  explicit SelectCharacterSetDialog(QWidget *parent, QString const &fileName, QString const &initialCharacterSet = QString{}, QStringList const &additionalCharacterSets = QStringList{});
   virtual ~SelectCharacterSetDialog();
 
   void setUserData(QVariant const &data);

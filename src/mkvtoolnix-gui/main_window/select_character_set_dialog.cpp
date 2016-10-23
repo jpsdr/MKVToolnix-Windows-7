@@ -21,7 +21,8 @@ class SelectCharacterSetDialogPrivate {
 
 SelectCharacterSetDialog::SelectCharacterSetDialog(QWidget *parent,
                                                    QString const &fileName,
-                                                   QString const &initialCharacterSet)
+                                                   QString const &initialCharacterSet,
+                                                   QStringList const &additionalCharacterSets)
   : QDialog{parent, Qt::Dialog | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , d_ptr{new SelectCharacterSetDialogPrivate}
 {
@@ -36,7 +37,11 @@ SelectCharacterSetDialog::SelectCharacterSetDialog(QWidget *parent,
   d->m_ui->setupUi(this);
 
   d->m_ui->fileName->setText(fileName);
-  d->m_ui->characterSet->setup().setCurrentByData(characterSetToSelect);
+
+  auto characterSets = additionalCharacterSets;
+  characterSets << characterSetToSelect;
+
+  d->m_ui->characterSet->setAdditionalItems(characterSets).setup().setCurrentByData(characterSetToSelect);
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
   d->m_ui->content->setPlaceholderText(QY("file not found"));
