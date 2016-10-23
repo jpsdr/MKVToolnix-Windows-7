@@ -14,11 +14,11 @@ class QLockFile;
 
 namespace mtx { namespace gui {
 
-using Iso639Language     = std::pair<QString, QString>;
-using Iso639LanguageList = std::vector<Iso639Language>;
+using Iso639Language                = std::pair<QString, QString>;
+using Iso639LanguageList            = std::vector<Iso639Language>;
 using TopLevelDomainCountryCode     = std::pair<QString, QString>;
 using TopLevelDomainCountryCodeList = std::vector<TopLevelDomainCountryCode>;
-using CharacterSetList   = std::vector<QString>;
+using CharacterSetList              = std::vector<QString>;
 
 class App : public QApplication {
   Q_OBJECT;
