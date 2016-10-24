@@ -42,7 +42,7 @@ CharacterSetComboBox::setup(bool withEmpty,
   if (withEmpty)
     addItem(emptyTitle, Q(""));
 
-  auto commonCharacterSets = QStringList::fromVector(QVector<QString>::fromStdVector(App::commonCharacterSets()));
+  auto commonCharacterSets = QStringList{ QStringList::fromVector(QVector<QString>::fromStdVector(App::commonCharacterSets())) };
 
   if (onlyOftenUsed) {
     auto merged  = QSet<QString>::fromList(commonCharacterSets);
@@ -50,7 +50,7 @@ CharacterSetComboBox::setup(bool withEmpty,
 
     merged.remove(QString{});
 
-    commonCharacterSets = merged.toList();
+    commonCharacterSets = QStringList{ merged.toList() };
     commonCharacterSets.sort();
   }
 
