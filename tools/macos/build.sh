@@ -224,6 +224,9 @@ function build_dmg {
   dmgbase=${CMPL}/dmg-${MTX_VER}
   dmgcnt=$dmgbase/MKVToolNix-${MTX_VER}.app/Contents
   dmgmac=$dmgcnt/MacOS
+  latest_link=${CMPL}/latest
+
+  rm -f ${latest_link}
 
   if [[ -z $DMG_NO_CD ]] cd ${CMPL}/mkvtoolnix-${MTX_VER}
 
@@ -334,7 +337,7 @@ EOF
     let build=$build+1
     echo $build > $build_number_file
 
-    volumename=MKVToolnix-${MTX_VER}-build$(date '+%Y%m%d')-${build}-$(git rev-parse --short HEAD)
+    volumename=MKVToolNix-${MTX_VER}-build$(date '+%Y%m%d')-${build}-$(git rev-parse --short HEAD)
   fi
 
   dmgname=${CMPL}/MKVToolNix-${MTX_VER}.dmg
@@ -345,6 +348,8 @@ EOF
     -fs HFS+ -fsargs "-c c=64,a=16,e=16" -format UDZO -imagekey zlib-level=9 \
     ${CMPL}/MKVToolNix-${MTX_VER}
   if [[ ${dmgname} != ${dmgbuildname} ]] mv ${dmgname} ${dmgbuildname}
+
+  ln -s ${dmgbuildname} ${latest_link}
 }
 
 if [[ -z $@ ]]; then
