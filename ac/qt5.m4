@@ -198,6 +198,8 @@ return 0;
     AC_LANG_POP()
 
     if test x"$QT_PKG_CONFIG_STATIC" != x; then
+      platform_support_lib=Qt5PlatformSupport
+
       case "$host" in
         *mingw*)  wanted_plugin=windows ;;
         *apple*)  wanted_plugin=cocoa   ;;
@@ -220,6 +222,15 @@ return 0;
         else
           QT_LIBS="-L$plugins_dir/platforms -lq$wanted_plugin $QT_LIBS"
         fi
+      fi
+
+      if test x"$platform_support_lib" != x; then
+        for dir in `echo " $QT_LIBS " | sed -e 's/ -l[^ ]*//g' -e 's/-L//g'` ; do
+          if test -f "$dir/lib${platform_support_lib}.a"; then
+            QT_LIBS="$QT_LIBS -l${platform_support_lib}"
+            break
+          fi
+        done
       fi
     fi
 
