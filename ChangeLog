@@ -1,3 +1,17 @@
+2016-10-31  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: MPLS parser bug fix: fixed reading the "in" & "out"
+        timestamps for "play items". This bug resulted in mkvmerge not
+        reading the correct range from the referenced M2TS file under
+        certain rare circumstances.
+
+2016-10-30  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug fix: mkvmerge was entering endless loops under
+        certain conditions when appending files. This was a regression
+        introduced with the fix to #1774 (using very large --sync values
+        causing mkvmerge to abort).
+
 2016-10-23  Moritz Bunkus  <moritz@bunkus.org>
 
         * MKVToolNix GUI: new feature: added options in the preferences to
