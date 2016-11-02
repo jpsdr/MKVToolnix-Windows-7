@@ -1916,6 +1916,30 @@ establish_deferred_connections(filelist_t &file) {
   // \todo Select a new file that the subs will defer to.
 }
 
+static void
+check_and_handle_end_of_input_after_pulling(packetizer_t &ptzr) {
+  if (!ptzr.pack && (FILE_STATUS_DONE == ptzr.status))
+    ptzr.status = FILE_STATUS_DONE_AND_DRY;
+
+  // Has this packetizer changed its status from "data available" to
+  // "file done" during this loop? If so then decrease the number of
+  // unfinished packetizers in the corresponding file structure.
+  if (   (FILE_STATUS_DONE_AND_DRY != ptzr.status)
+      || (ptzr.old_status          == ptzr.status))
+    return;
+
+  auto &file = *g_files[ptzr.file];
+  file.num_unfinished_packetizers--;
+
+  // If all packetizers for a file have finished then establish the
+  // deferred connections.
+  if ((0 >= file.num_unfinished_packetizers) && (0 < file.old_num_unfinished_packetizers)) {
+    establish_deferred_connections(file);
+    file.done = true;
+  }
+  file.old_num_unfinished_packetizers = file.num_unfinished_packetizers;
+}
+
 static bool
 force_pull_packetizers_of_fully_held_files() {
   std::unordered_map<generic_reader_c *, bool> fully_held_files;
@@ -1934,8 +1958,14 @@ force_pull_packetizers_of_fully_held_files() {
   auto force_pulled = false;
   for (auto &ptzr : g_packetizers)
     if (fully_held_files[ptzr.packetizer->m_reader] && !ptzr.packetizer->packet_available()) {
-      ptzr.packetizer->read(true);
-      force_pulled = true;
+      ptzr.old_status = ptzr.status;
+      ptzr.status     = ptzr.packetizer->read(true);
+      force_pulled    = true;
+
+      if (!ptzr.pack)
+        ptzr.pack = ptzr.packetizer->get_packet();
+
+      check_and_handle_end_of_input_after_pulling(ptzr);
     }
 
   return force_pulled;
@@ -1955,31 +1985,13 @@ pull_packetizers_for_packets() {
       ptzr.status = ptzr.packetizer->read(false);
 
     if (   (FILE_STATUS_MOREDATA != ptzr.status)
-           && (FILE_STATUS_MOREDATA == ptzr.old_status))
+        && (FILE_STATUS_MOREDATA == ptzr.old_status))
       ptzr.packetizer->force_duration_on_last_packet();
 
     if (!ptzr.pack)
       ptzr.pack = ptzr.packetizer->get_packet();
 
-    if (!ptzr.pack && (FILE_STATUS_DONE == ptzr.status))
-      ptzr.status = FILE_STATUS_DONE_AND_DRY;
-
-    // Has this packetizer changed its status from "data available" to
-    // "file done" during this loop? If so then decrease the number of
-    // unfinished packetizers in the corresponding file structure.
-    if (   (FILE_STATUS_DONE_AND_DRY == ptzr.status)
-        && (ptzr.old_status != ptzr.status)) {
-      auto &file = *g_files[ptzr.file];
-      file.num_unfinished_packetizers--;
-
-      // If all packetizers for a file have finished then establish the
-      // deferred connections.
-      if ((0 >= file.num_unfinished_packetizers) && (0 < file.old_num_unfinished_packetizers)) {
-        establish_deferred_connections(file);
-        file.done = true;
-      }
-      file.old_num_unfinished_packetizers = file.num_unfinished_packetizers;
-    }
+    check_and_handle_end_of_input_after_pulling(ptzr);
   }
 }
 

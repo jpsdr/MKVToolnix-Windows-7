@@ -203,8 +203,8 @@ parser_c::parse_play_item() {
   item.is_multi_angle       = m_bc->get_bit();
   item.connection_condition = m_bc->get_bits(4);
   item.stc_id               = m_bc->get_bits(8);
-  item.in_time              = mpls_time_to_timecode(m_bc->get_bits(32) & 0x7ffffffful);
-  item.out_time             = mpls_time_to_timecode(m_bc->get_bits(32) & 0x7ffffffful);
+  item.in_time              = mpls_time_to_timecode(m_bc->get_bits(32));
+  item.out_time             = mpls_time_to_timecode(m_bc->get_bits(32));
   item.relative_in_time     = m_playlist.duration;
   m_playlist.duration      += item.out_time - item.in_time;
 
