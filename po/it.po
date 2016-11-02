@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 20.05.2016\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-10-23 23:34+0200\n"
-"PO-Revision-Date: 2016-10-10 11:46+0200\n"
-"Last-Translator: bovirus <@bovirus@gmail.com>\n"
+"PO-Revision-Date: 2016-11-02 06:51+0100\n"
+"Last-Translator: bovirus <bovirus@gmail.com>\n"
 "Language-Team: bovirus <bovirus@gmail.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -373,13 +373,12 @@ msgid "  --engage <feature>       Turns on experimental feature 'feature'.\n"
 msgstr "  --engage <funzione>       Abilita la funzione sperimentale 'funzione'.\n"
 
 #: src/merge/mkvmerge.cpp:261
-#, fuzzy
 msgid ""
 "  --field-order <TID:n>    Sets the video field order parameter\n"
 "                           (see documentation for valid values).\n"
 msgstr ""
-"  --blockadd <TID:x>       Imposta il numero max di livelli blocchi\n"
-"                           addizionali per questa traccia.\n"
+"  --field-order <TID:n>    Imposta il parametro ordine campo video\n"
+"                           (per i valori validi vedi documentazione).\n"
 
 #: src/merge/mkvmerge.cpp:239
 msgid ""
@@ -1584,9 +1583,8 @@ msgstr "Abilita in m&odo predefinito solo il muxung delle tracce con una specifi
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1280
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1282
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1284
-#, fuzzy
 msgid "&Only include often used entries in selections"
-msgstr "Selezioni usate spesso"
+msgstr "Includi nella selezione s&olo elementi usati frequentemente"
 
 #: src/info/ui/mainwindow.h:107
 msgid "&Open"
@@ -1873,9 +1871,9 @@ msgid "'%1%' is not a valid ccTLD country code."
 msgstr "'%1%' non è un codice nazione ccTLD valido."
 
 #: src/merge/mkvmerge.cpp:903
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not a valid field order."
-msgstr "'%1%' non è un codice nazione ccTLD valido."
+msgstr "'%1%' non è un ordine campo valido."
 
 #: src/merge/mkvmerge.cpp:1411
 #: src/merge/mkvmerge.cpp:1414
@@ -1934,9 +1932,9 @@ msgid "'%1%' is not a valid track ID in '--nalu-size-length %2%'.\n"
 msgstr "'%1%' non è un ID traccia valido in '--nalu-size-length %2%'.\n"
 
 #: src/merge/mkvmerge.cpp:897
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%' is not a valid track ID."
-msgstr "'%1%' non è un hack valido.\n"
+msgstr "'%1%' non è un ID traccia valido."
 
 #: src/merge/mkvmerge.cpp:1489
 #, boost-format
@@ -4919,14 +4917,13 @@ msgstr "Tito&lo file:"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:484
-#, fuzzy
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
-msgstr "Modo video stereo-3D (0 - 11, vedi documentazione)."
+msgstr "Ordine campo (0 , 1, 2, 6, 9 o 14, vedi documentazione)."
 
 #: src/info/mkvinfo.cpp:751
-#, fuzzy, boost-format
+#, boost-format
 msgid "Field order: %1% (%2%)"
-msgstr "Modalità stereo: %1% (%2%)"
+msgstr "Ordine campo: %1% (%2%)"
 
 #: src/merge/mkvmerge.cpp:444
 #, boost-format
@@ -5374,7 +5371,7 @@ msgstr "Se selezionata verranno visualizzati dei psulanti aggiuntivi per spostar
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:340
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:347
 msgid "If checked only the list of often used entries will be included in the selections in the program."
-msgstr ""
+msgstr "Se questa opzione è abilitata verra inclusa nella selezione del programma solo l'elenco degli elementi usati frequentemente"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:182
 #, no-c-format
@@ -6024,7 +6021,7 @@ msgstr "Valore predefinito 4 byte, ma ci sono file che non contengono un frame o
 
 #: src/merge/mkvmerge.cpp:891
 msgid "It does not consist of a track ID and a value separated by a colon."
-msgstr ""
+msgstr "Non consiste di un ID traccia e un valore separati da una virgola."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:183
 #: src/mkvtoolnix-gui/merge/output.cpp:189
@@ -7123,7 +7120,7 @@ msgstr "Altre parti del file (es. traccia sottotitoli) possono riferirsi a quest
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:348
 msgid "Otherwise the often used entries will be included first and the full list of all entries afterwards."
-msgstr ""
+msgstr "Altrimenti gli elementi usati frequentemente verranno inclusi per primi e subito dopo l'elenco di tutti gli elementi."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:248
 #, no-c-format
@@ -8873,9 +8870,9 @@ msgstr "L'argomento '%1%' non è permesso nel modo identificazione.\n"
 #: src/merge/mkvmerge.cpp:890
 #: src/merge/mkvmerge.cpp:896
 #: src/merge/mkvmerge.cpp:902
-#, fuzzy, boost-format
+#, boost-format
 msgid "The argument '%1%' to '%2%' is invalid."
-msgstr "L'argomento '%1%' in '%2%' non è valido: '%3%' non è un ID traccia valido.\n"
+msgstr "L'argomento '%1%' a '%2%' non è valido:"
 
 #: src/merge/mkvmerge.cpp:1865
 #, boost-format
@@ -10942,9 +10939,8 @@ msgstr "Larghezza video"
 
 #: src/common/property_element.cpp:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:484
-#, fuzzy
 msgid "Video field order"
-msgstr "Larghezza pixel video"
+msgstr "Ordine campo video"
 
 #: src/common/property_element.cpp:137
 msgid "Video interlaced flag"
@@ -11461,11 +11457,11 @@ msgstr "inferiore"
 
 #: src/info/mkvinfo.cpp:756
 msgid "bottom field displayed first, bottom field stored first"
-msgstr ""
+msgstr "campo inferiore visualizzato per primo, campo inferiore memorizzato per primo"
 
 #: src/info/mkvinfo.cpp:757
 msgid "bottom field displayed first, top field stored first"
-msgstr ""
+msgstr "campo inferiore visualizzato per primo, campo superiore memorizzato per primo"
 
 #: src/info/mkvinfo.cpp:1069
 #: src/input/r_matroska.cpp:108
@@ -12305,9 +12301,8 @@ msgid "pixel width: %1%"
 msgstr "larghezza pixel: %1%"
 
 #: src/info/mkvinfo.cpp:753
-#, fuzzy
 msgid "progressive"
-msgstr "Progresso"
+msgstr "progressivo"
 
 #: src/extract/xtr_base.cpp:51
 msgid "raw data"
@@ -12413,11 +12408,11 @@ msgstr "alto basso (prima a destra)"
 
 #: src/info/mkvinfo.cpp:758
 msgid "top field displayed first, bottom field stored first"
-msgstr ""
+msgstr "campo superiore visualizzato per primo, campo inferiroe memorizzato per primo"
 
 #: src/info/mkvinfo.cpp:754
 msgid "top field displayed first, top field stored first"
-msgstr ""
+msgstr "campo superiore visualizzato per primo, campo superiore memorizzato per primo"
 
 #: src/merge/mkvmerge.cpp:2704
 msgid "track name"
@@ -12457,7 +12452,7 @@ msgstr "illimitato"
 
 #: src/info/mkvinfo.cpp:755
 msgid "unspecified"
-msgstr ""
+msgstr "non specificato"
 
 #: src/info/mkvinfo.cpp:1067
 #: src/input/r_matroska.cpp:109
