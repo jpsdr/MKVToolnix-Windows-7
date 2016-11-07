@@ -49,14 +49,14 @@ no t\('e perqu\(`e subministrar\-se\&.
 .PP
 \fB\-p\fR, \fB\-\-parse\-mode\fR \fImode\fR
 .RS 4
-Estableix el mode d\*(Aqan\(`alisi\&. El par\(`ametre \(Fo\fImode\fR\(Fc pot ser \(Fofast\(Fc (R\(`apida) (el qual \('es el predeterminat) o \(Fofull\(Fc (Completa)\&. El mode \(Fofast\(Fc no analitzar\(`a tot el fitxer per\(`o emprar\(`a els elements meta de cerca per a localitzar els elements requerits d\*(Aqun fitxer d\*(Aqorigen\&. En el 99% dels casos n\*(Aqhi haur\(`a prou\&. No obstant aix\(`o, pels fitxers que no contenen elements meta de cerca o que estan malmesos, l\*(Aqusuari hauria d\*(Aqemprar el mode d\*(Aqan\(`alisi \(Fofull\(Fc\&. L\*(Aqan\(`alisi completa d\*(Aqun fitxer pot trigar alguns minuts, mentre que una an\(`alisi r\(`apida nom\('es portar\(`a alguns segons\&.
+Defineix el mode d\*(Aqan\(`alisi\&. El par\(`ametre \(Fo\fImode\fR\(Fc pot ser \(Fofast\(Fc (R\(`apida) (el qual \('es el predeterminat) o \(Fofull\(Fc (Completa)\&. El mode \(Fofast\(Fc no analitzar\(`a tot el fitxer per\(`o emprar\(`a els elements meta de cerca per a localitzar els elements requerits d\*(Aqun fitxer d\*(Aqorigen\&. En el 99% dels casos n\*(Aqhi haur\(`a prou\&. No obstant aix\(`o, pels fitxers que no contenen elements meta de cerca o que estan malmesos, l\*(Aqusuari hauria d\*(Aqemprar el mode d\*(Aqan\(`alisi \(Fofull\(Fc\&. L\*(Aqan\(`alisi completa d\*(Aqun fitxer pot trigar alguns minuts, mentre que una an\(`alisi r\(`apida nom\('es portar\(`a alguns segons\&.
 .RE
 .PP
 Accions que tenen a veure amb les propietats d\*(Aqinformaci\('o de la pista i del segment:
 .PP
 \fB\-e\fR, \fB\-\-edit\fR \fIselector\fR
 .RS 4
-Estableix la secci\('o del fitxer
+Defineix la secci\('o del fitxer
 Matroska(TM)
 (informaci\('o del segment o una certa cap\(,calera d\*(Aquna pista) sobre la qual se centraran les seg\(:uents accions:
 add
@@ -84,7 +84,7 @@ amb el contingut de
 .PP
 \fB\-s\fR, \fB\-\-set\fR \fInom\fR=\fIvalor\fR
 .RS 4
-Estableix totes les ocurr\(`encies de la propietat
+Defineix totes les ocurr\(`encies de la propietat
 \fInom\fR
 amb el contingut de
 \fIvalor\fR\&. Si no existeix dita propietat, llavors ser\(`a afegida\&.
@@ -201,7 +201,7 @@ Si s\*(Aqha emprat abans l\*(Aqopci\('o
 .PP
 \fB\-\-update\-attachment\fR \fIselector\fR
 .RS 4
-Estableix les propietats d\*(Aqun o m\('es adjunts que coincideixen amb el
+Defineix les propietats d\*(Aqun o m\('es adjunts que coincideixen amb el
 \fIselector\fR\&. Si coincideix m\('es d\*(Aqun adjunt, llavors s\*(Aqactualitzaran totes les seves propietats\&.
 .sp
 El
@@ -237,7 +237,7 @@ Opcions per a les accions en els adjunts:
 .PP
 \fB\-\-attachment\-name\fR \fInom\fR
 .RS 4
-Estableix el nom a emprar per a les opcions
+Defineix el nom a emprar per a les opcions
 \fB\-\-add\-attachment\fR
 o
 \fB\-\-replace\-attachment\fR\&.
@@ -245,7 +245,7 @@ o
 .PP
 \fB\-\-attachment\-mime\-type\fR \fItipus_MIME\fR
 .RS 4
-Estableix el tipus MIME a emprar per a les opcions
+Defineix el tipus MIME a emprar per a les opcions
 \fB\-\-add\-attachment\fR
 o
 \fB\-\-replace\-attachment\fR\&.
@@ -253,7 +253,7 @@ o
 .PP
 \fB\-\-attachment\-description\fR \fIdescripci\('o\fR
 .RS 4
-Estableix la descripci\('o a emprar per a les opcions
+Defineix la descripci\('o a emprar per a les opcions
 \fB\-\-add\-attachment\fR
 o
 \fB\-\-replace\-attachment\fR\&.
@@ -263,12 +263,12 @@ Altres opcions:
 .PP
 \fB\-\-command\-line\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters al qual convertir les cadenes indicades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
+Defineix el joc de car\(`acters al qual convertir les cadenes indicades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
 .RE
 .PP
 \fB\-\-output\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
+Defineix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
 .RE
 .PP
 \fB\-r\fR, \fB\-\-redirect\-output\fR \fInom_fitxer\fR
@@ -354,7 +354,7 @@ origen\&.mkv
 # Edita la segona pista d\*(Aq\(`audio
 \-\-edit
 track:a2
-# i estableix el t\('itol a \(FoComentaris\(Fc
+# i defineix el t\('itol a \(FoComentaris\(Fc
 \-\-set
 name=Comentaris
 .fi
@@ -366,7 +366,7 @@ name=Comentaris
 .PP
 L\*(Aqopci\('o
 \fB\-\-edit\fR
-estableix la secci\('o del fitxer
+defineix la secci\('o del fitxer
 Matroska(TM)
 (informaci\('o del segment o certes cap\(,caleres d\*(Aquna pista) sobre la qual se centraran les seg\(:uents accions:
 add,
@@ -500,7 +500,7 @@ seguida pel tipus MIME de l\*(Aqadjunt existent\&. Si aquest selector \('es empr
 .RE
 .SH "EXEMPLES"
 .PP
-El seg\(:uent exemple edita un fitxer anomenat \(Fopeli\&.mkv\(Fc\&. Estableix el t\('itol del segment i modifica el codi d\*(Aqidioma d\*(Aquna pista d\*(Aq\(`audio i d\*(Aquna pista de subt\('itols\&. Tingueu en compte que aquest exemple es pot escur\(,car llevant la primera opci\('o
+El seg\(:uent exemple edita un fitxer anomenat \(Fopeli\&.mkv\(Fc\&. Defineix el t\('itol del segment i modifica el codi d\*(Aqidioma d\*(Aquna pista d\*(Aq\(`audio i d\*(Aquna pista de subt\('itols\&. Tingueu en compte que aquest exemple es pot escur\(,car llevant la primera opci\('o
 \fB\-\-edit\fR, ja que editar l\*(Aqelement d\*(Aqinformaci\('o del segment est\(`a incl\(`os per omissi\('o per a totes les opcions trobades abans de la primera opci\('o
 \fB\-\-edit\fR\&.
 .sp
@@ -514,9 +514,9 @@ $ mkvpropedit peli\&.mkv \-\-edit info \-\-set "title=La pel\(mdl\('icula" \-\-e
 .RE
 .\}
 .PP
-El segon exemple elimina l\*(Aq\(Foetiqueta de pista per omissi\('o\(Fc de la primera pista de subt\('itols i l\*(Aqestableix per a la segona\&. Tingueu present que el
+El segon exemple elimina l\*(Aq\(Foetiqueta de pista per omissi\('o\(Fc de la primera pista de subt\('itols i la defineix per a la segona\&. Tingueu present que el
 \fBmkvpropedit\fR(1), a difer\(`encia del
-\fBmkvmerge\fR(1), no estableix autom\(`aticament a \(Fo0\(Fc el valor de l\*(Aq\(Foetiqueta de pista per omissi\('o\(Fc quan un pista diferent s\*(Aqha establert a \(Fo1\(Fc\&.
+\fBmkvmerge\fR(1), no defineix autom\(`aticament a \(Fo0\(Fc el valor de l\*(Aq\(Foetiqueta de pista per omissi\('o\(Fc quan un pista diferent s\*(Aqha establert a \(Fo1\(Fc\&.
 .sp
 .if n \{\
 .RS 4

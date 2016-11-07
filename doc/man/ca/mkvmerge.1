@@ -80,12 +80,12 @@ Crea un fitxer conforme amb WebM\&. Tamb\('e s\*(Aqhabilita si el nom de l\*(Aqe
 .PP
 \fB\-\-title\fR \fIt\('itol\fR
 .RS 4
-Estableix el t\('itol general pel fitxer de sortida, p\&. ex\&., el nom de la pel\(mdl\('icula\&.
+Defineix el t\('itol general pel fitxer de sortida, p\&. ex\&., el nom de la pel\(mdl\('icula\&.
 .RE
 .PP
 \fB\-\-default\-language\fR \fIcodi_idioma\fR
 .RS 4
-Estableix el codi d\*(Aqidioma per omissi\('o que s\*(Aqemprar\(`a per a les pistes on no s\*(Aqhagi establert l\*(Aqidioma amb l\*(Aqopci\('o
+Defineix el codi d\*(Aqidioma per omissi\('o que s\*(Aqemprar\(`a per a les pistes on no s\*(Aqhagi establert l\*(Aqidioma amb l\*(Aqopci\('o
 \fB\-\-language\fR
 i per a les quals el contenidor d\*(Aqorigen no proporciona un idioma\&.
 .sp
@@ -110,7 +110,7 @@ els fitxers XML d\*(Aqinformaci\('o del segment\&.
 .PP
 \fB\-\-segment\-uid\fR \fISID1,SID2\&.\&.\&.\fR
 .RS 4
-Estableix els UID dels segments a emprar\&. Aquesta \('es una llista separada per comes dels UID dels segments de 128 bits en la forma usual de l\*(AqUID: nombres hexadecimals, amb o sense el \(Fo0x\(Fc com a prefix, amb o sense espais, exactament 32 d\('igits\&.
+Defineix els UID dels segments a emprar\&. Aquesta \('es una llista separada per comes dels UID dels segments de 128 bits en la forma usual de l\*(AqUID: nombres hexadecimals, amb o sense el \(Fo0x\(Fc com a prefix, amb o sense espais, exactament 32 d\('igits\&.
 .sp
 Si el SID comen\(,ca amb el signe =, llavors la resta s\*(Aqinterpretar\(`a com el nom d\*(Aqun fitxer Matroska, es llegir\(`a i emprar\(`a l\*(AqUID del segment\&.
 .sp
@@ -120,7 +120,7 @@ Cada fitxer creat cont\('e un segment, i cada segment t\('e un UID del segment\&
 .PP
 \fB\-\-chapter\-language\fR \fIcodi_idioma\fR
 .RS 4
-Estableix el codi d\*(Aqidioma ISO639\-2 que s\*(Aqescriur\(`a en cada entrada de cap\('itol\&. Per omissi\('o s\*(Aqestableix a \(Foeng\(Fc\&. Per a m\('es detalls, vegeu m\('es endavant la secci\('o sobre
+Defineix el codi d\*(Aqidioma ISO639\-2 que s\*(Aqescriur\(`a en cada entrada de cap\('itol\&. Per omissi\('o es defineix a \(Foeng\(Fc\&. Per a m\('es detalls, vegeu m\('es endavant la secci\('o sobre
 els cap\('itols\&.
 .sp
 Aquesta opci\('o es pot emprar tant per a simples fitxers de cap\('itols, com per a fitxers d\*(Aqorigen que continguin cap\('itols sense informaci\('o sobre l\*(Aqidioma, p\&. ex\&., fitxers MP4 i OGM\&.
@@ -131,7 +131,7 @@ L\*(Aqidioma establert amb aquesta opci\('o tamb\('e s\*(Aqusar\(`a quan es gene
 .PP
 \fB\-\-chapter\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters que es far\(`a servir per a la conversi\('o a UTF\-8 per a simples fitxers de cap\('itols\&. Vegeu la secci\('o sobre
+Defineix el joc de car\(`acters que es far\(`a servir per a la conversi\('o a UTF\-8 per a simples fitxers de cap\('itols\&. Vegeu la secci\('o sobre
 la conversi\('o per a fitxers de text i jocs de car\(`acters, per a veure una explicaci\('o sobre com realitza el
 \fBmkvmerge\fR(1)
 la conversi\('o entre diferents jocs de car\(`acters\&.
@@ -191,14 +191,14 @@ Exemple:
 .RE
 .sp
 Els noms pels cap\('itols nous es controlen mitjan\(,cant l\*(Aqopci\('o
-\-\-generate\-chapters\-name\-template\&. L\*(Aqidioma s\*(Aqestableix amb
+\-\-generate\-chapters\-name\-template\&. L\*(Aqidioma es defineix amb
 \-\-chapter\-language, el qual haur\(`a d\*(Aqanar abans que
 \fB\-\-generate\-chapters\fR\&.
 .RE
 .PP
 \fB\-\-generate\-chapters\-name\-template\fR \fIplantilla\fR
 .RS 4
-Aix\(`o estableix la plantilla del nom pels noms dels cap\('itols generats per l\*(Aqopci\('o
+Aix\(`o defineix la plantilla del nom pels noms dels cap\('itols generats per l\*(Aqopci\('o
 \-\-generate\-chapters\&. Si no s\*(Aqempra aquesta opci\('o, llavors s\*(Aqemprar\(`a el \(FoChapter <NUM:2>\(Fc predeterminat\&.
 .sp
 Hi ha diverses variables que es poden usar a la plantilla que seran substitu\(:ides amb els valors reals quan es generi un cap\('itol\&. La cadena \(Fo<NUM>\(Fc ser\(`a substitu\(:ida pel n\('umero de cap\('itol\&. La cadena \(Fo<START>\(Fc ser\(`a substitu\(:ida per la marca de temps d\*(Aqinici del cap\('itol\&.
@@ -1155,7 +1155,7 @@ MIME
 .PP
 \fB\-\-attachment\-name\fR \fInom\fR
 .RS 4
-Estableix el nom per aquest adjunt que s\*(Aqemmagatzemar\(`a al fitxer de sortida\&. Si no s\*(Aqespecifica aquesta opci\('o, llavors el nom derivar\(`a del nom del fitxer de l\*(Aqadjunt especificat amb l\*(Aqopci\('o
+Defineix el nom per aquest adjunt que s\*(Aqemmagatzemar\(`a al fitxer de sortida\&. Si no s\*(Aqespecifica aquesta opci\('o, llavors el nom derivar\(`a del nom del fitxer de l\*(Aqadjunt especificat amb l\*(Aqopci\('o
 \fB\-\-attach\-file\fR
 o
 \fB\-\-attach\-file\-once\fR\&.
@@ -1308,7 +1308,7 @@ No copia cap etiqueta global des d\*(Aqaquest fitxer\&.
 .PP
 \fB\-\-chapter\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters que es far\(`a servir per a la conversi\('o a UTF\-8 per a la informaci\('o de cap\('itols continguda al fitxer d\*(Aqorigen\&. Vegeu la secci\('o sobre
+Defineix el joc de car\(`acters que es far\(`a servir per a la conversi\('o a UTF\-8 per a la informaci\('o de cap\('itols continguda al fitxer d\*(Aqorigen\&. Vegeu la secci\('o sobre
 la conversi\('o per a fitxers de text i jocs de car\(`acters, per a veure una explicaci\('o sobre com realitza el
 \fBmkvmerge\fR(1)
 la conversi\('o entre diferents jocs de car\(`acters\&.
@@ -1316,7 +1316,7 @@ la conversi\('o entre diferents jocs de car\(`acters\&.
 .PP
 \fB\-\-chapter\-language\fR \fIcodi_idioma\fR
 .RS 4
-Estableix el codi d\*(Aqidioma ISO639\-2 que s\*(Aqescriur\(`a en cada entrada de cap\('itol\&. Aquesta opci\('o es pot emprar per a fitxers d\*(Aqorigen que continguin cap\('itols, per\(`o no la informaci\('o sobre els idiomes d\*(Aqaquests, p\&. ex\&., per a fitxers MP4 i OGM\&.
+Defineix el codi d\*(Aqidioma ISO639\-2 que s\*(Aqescriur\(`a en cada entrada de cap\('itol\&. Aquesta opci\('o es pot emprar per a fitxers d\*(Aqorigen que continguin cap\('itols, per\(`o no la informaci\('o sobre els idiomes d\*(Aqaquests, p\&. ex\&., per a fitxers MP4 i OGM\&.
 .RE
 .PP
 \fB\-y\fR, \fB\-\-sync\fR \fITID:d\fR\fI[,o[/p]]\fR
@@ -1367,7 +1367,7 @@ Aquesta opci\('o es pot emprar m\('ultiples vegades per a un fitxer d\*(Aqentrad
 .PP
 \fB\-\-default\-track\fR \fITID\fR\fI[:boole\(`a]\fR
 .RS 4
-Estableix l\*(Aqetiqueta \(Foper omissi\('o\(Fc a la pista indicada (vegeu la secci\('o sobre
+Defineix l\*(Aqetiqueta \(Foper omissi\('o\(Fc a la pista indicada (vegeu la secci\('o sobre
 els ID de les pistes) si l\*(Aqargument opcional
 \fIboole\(`a\fR
 no est\(`a present\&. Si l\*(Aqusuari no selecciona expl\('icitament una pista, llavors el reproductor hauria de preferir la pista marcada amb l\*(Aqetiqueta \(Foper omissi\('o\(Fc\&. Nom\('es es pot establir una pista de cada tipus (\(`audio, v\('ideo, subt\('itols, botons)\&. Si l\*(Aqusuari vol que cap pista tingui aquesta etiqueta, llavors s\*(Aqhaur\(`a d\*(Aqestablir el
@@ -1381,7 +1381,7 @@ Aquesta opci\('o es pot emprar m\('ultiples vegades per a un fitxer d\*(Aqentrad
 .PP
 \fB\-\-forced\-track\fR \fITID\fR\fI[:boole\(`a]\fR
 .RS 4
-Estableix l\*(Aqetiqueta de \(Fofor\(,cada\(Fc a la pista indicada (vegeu la secci\('o sobre
+Defineix l\*(Aqetiqueta de \(Fofor\(,cada\(Fc a la pista indicada (vegeu la secci\('o sobre
 els ID de les pistes) si l\*(Aqargument opcional
 \fIboole\(`a\fR
 no est\(`a present\&. Un reproductor haur\(`a de mostrar totes les pistes marcades amb aquesta etiqueta establerta a
@@ -1401,7 +1401,7 @@ per a la pista indicada\&. Per omissi\('o ho mantindr\(`a en tots els nivells\&.
 .PP
 \fB\-\-track\-name\fR \fITID:nom\fR
 .RS 4
-Estableix el nom de la pista al
+Defineix el nom de la pista al
 \fInom\fR
 indicat (vegeu la secci\('o sobre
 els ID de les pistes)\&.
@@ -1409,7 +1409,7 @@ els ID de les pistes)\&.
 .PP
 \fB\-\-language\fR \fITID:idioma\fR
 .RS 4
-Estableix l\*(Aqidioma de la pista indicada (vegeu la secci\('o sobre
+Defineix l\*(Aqidioma de la pista indicada (vegeu la secci\('o sobre
 els ID de les pistes)\&. Estan permesos tant els codis d\*(Aqidioma ISO639\-2 com els codis de pa\('is ISO639\-1\&. Els codis de pa\('is seran convertits a codis d\*(Aqidioma autom\(`aticament\&. Tots els idiomes inclosos els seus codis ISO639\-2 es poden llistar amb l\*(Aqopci\('o
 \fB\-\-list\-languages\fR\&.
 .sp
@@ -1565,7 +1565,7 @@ mode compatibilitat amb MS\&.
 .RS 4
 Els fitxers
 Matroska(TM)
-contenen dos valors que estableixen les propietats de visualitzaci\('o que emprar\(`a un reproductor per a escalar la imatge durant la reproducci\('o a: amplada i al\(,cada de visualitzaci\('o\&. Aquests valors es poden establir amb aquesta opci\('o, p\&. ex\&., \(Fo1:640x480\(Fc\&.
+contenen dos valors que defineixen les propietats de visualitzaci\('o que emprar\(`a un reproductor per a escalar la imatge durant la reproducci\('o a: amplada i al\(,cada de visualitzaci\('o\&. Aquests valors es poden establir amb aquesta opci\('o, p\&. ex\&., \(Fo1:640x480\(Fc\&.
 .sp
 Una altra manera d\*(Aqespecificar els valors \('es emprar l\*(Aqopci\('o
 \fB\-\-aspect\-ratio\fR
@@ -1578,7 +1578,7 @@ o
 .RS 4
 Els fitxers
 Matroska(TM)
-contenen dos valors que estableixen les propietats de visualitzaci\('o que emprar\(`a un reproductor per a escalar la imatge durant la reproducci\('o a: amplada i al\(,cada de visualitzaci\('o\&. Amb aquesta opci\('o, el
+contenen dos valors que defineixen les propietats de visualitzaci\('o que emprar\(`a un reproductor per a escalar la imatge durant la reproducci\('o a: amplada i al\(,cada de visualitzaci\('o\&. Amb aquesta opci\('o, el
 \fBmkvmerge\fR(1)
 calcular\(`a autom\(`aticament l\*(Aqamplada i al\(,cada de reproducci\('o en base a l\*(Aqamplada i al\(,cada original de la imatge i la relaci\('o d\*(Aqaspecte indicada amb aquesta opci\('o\&. La relaci\('o es pot indicar com un nombre decimal per a la
 \fIrelaci\('o\fR
@@ -1607,7 +1607,7 @@ o
 .PP
 \fB\-\-cropping\fR \fITID:esquerra,a_dalt,dreta,a_baix\fR
 .RS 4
-Estableix als valors indicats els par\(`ametres del retall dels p\('ixels d\*(Aquna pista de v\('ideo\&.
+Defineix als valors indicats els par\(`ametres del retall dels p\('ixels d\*(Aquna pista de v\('ideo\&.
 .RE
 .PP
 \fB\-\-colour\-matrix\fR \fITID:n\fR
@@ -1760,20 +1760,20 @@ Defineix la lumin\(`ancia m\('inima en candeles per metre quadrat (cd/m\(S2)\&. 
 .PP
 \fB\-\-field\-order\fR \fITID:n\fR
 .RS 4
-Estableix l\*(Aqordre del camp de v\('ideo amb l\*(AqID de pista
+Defineix l\*(Aqordre del camp de v\('ideo amb l\*(AqID de pista
 \fITID\fR\&. L\*(Aqordre haur\(`a de ser un dels seg\(:uents n\('umeros:
 .sp
-\fB0\fR: progressive;
-\fB1\fR: interlaced with top field displayed first and top field stored first;
-\fB2\fR: undetermined field order;
-\fB6\fR: interlaced with bottom field displayed first and bottom field stored first;
-\fB9\fR: interlaced with bottom field displayed first and top field stored first;
-\fB14\fR: interlaced with top field displayed first and bottom field stored first
+\fB0\fR: progressiu;
+\fB1\fR: entrella\(,cat del primer camp superior mostrat i del primer camp superior emmagatzemat;
+\fB2\fR: ordre del camp sense determinar;
+\fB6\fR: entrella\(,cat del primer camp inferior mostrat i del primer camp inferior emmagatzemat;
+\fB9\fR: entrella\(,cat del primer camp inferior mostrat i del primer camp superior emmagatzemat;
+\fB14\fR: entrella\(,cat del primer camp superior mostrat i del primer camp inferior emmagatzemat
 .RE
 .PP
 \fB\-\-stereo\-mode\fR \fITID:n|paraula_clau\fR
 .RS 4
-Estableix el mode est\(`ereo per a la pista de v\('ideo amb l\*(AqID de pista
+Defineix el mode est\(`ereo per a la pista de v\('ideo amb l\*(AqID de pista
 \fITID\fR\&. El mode pot ser un n\('umero
 \fIn\fR
 entre
@@ -1788,7 +1788,7 @@ o una d\*(Aqaquestes paraules clau:
 .PP
 \fB\-\-sub\-charset\fR \fITID:joc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters per a la conversi\('o a UTF\-8 dels subt\('itols per a un ID de pista indicat\&. Si no s\*(Aqespecifica el joc de car\(`acters, aquest derivar\(`a dels ajustaments per a la configuraci\('o regional\&. Tingueu en compte que no \('es necessari un joc de car\(`acters per a llegir els subt\('itols des de fitxers
+Defineix el joc de car\(`acters per a la conversi\('o a UTF\-8 dels subt\('itols per a un ID de pista indicat\&. Si no s\*(Aqespecifica el joc de car\(`acters, aquest derivar\(`a dels ajustaments per a la configuraci\('o regional\&. Tingueu en compte que no \('es necessari un joc de car\(`acters per a llegir els subt\('itols des de fitxers
 Matroska(TM)
 o des de fluxos Kate, ja que aquests sempre s\*(Aqemmagatzemen en UTF\-8\&. Vegeu la secci\('o sobre
 la conversi\('o per a fitxers de text i jocs de car\(`acters, per a una explicaci\('o sobre com realitza el
@@ -1903,7 +1903,7 @@ Llista tots els idiomes i el seu codi ISO639\-2 que es poden emprar amb l\*(Aqop
 .PP
 \fB\-\-priority\fR \fIprioritat\fR
 .RS 4
-Estableix la prioritat del proc\('es amb qu\(`e s\*(Aqexecuta el
+Defineix la prioritat del proc\('es amb qu\(`e s\*(Aqexecuta el
 \fBmkvmerge\fR(1)\&. Els valors v\(`alids s\('on \(Folowest\(Fc (Molt baixa), \(Folower\(Fc (Baixa), \(Fonormal\(Fc (Normal), \(Fohigher\(Fc (Alta) i \(Fohighest\(Fc (Molt alta)\&. Si no s\*(Aqindica res, llavors s\*(Aqemprar\(`a \(Fonormal\(Fc\&. En sistemes com Unix, el
 \fBmkvmerge\fR(1)
 emprar\(`a la funci\('o
@@ -1916,7 +1916,7 @@ seleccioni una prioritat d\*(AqE/S ociosa, a m\('es de la prioritat de proc\('es
 .PP
 \fB\-\-command\-line\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters al qual convertir les cadenes indicades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&. Aquest ajustament s\*(Aqaplicar\(`a als arguments de les seg\(:uents opcions:
+Defineix el joc de car\(`acters al qual convertir les cadenes indicades des de la l\('inia d\*(Aqordres\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&. Aquest ajustament s\*(Aqaplicar\(`a als arguments de les seg\(:uents opcions:
 \fB\-\-title\fR,
 \fB\-\-track\-name\fR
 i
@@ -1925,7 +1925,7 @@ i
 .PP
 \fB\-\-output\-charset\fR \fIjoc_de_car\(`acters\fR
 .RS 4
-Estableix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
+Defineix el joc de car\(`acters al qual convertir les cadenes de la sortida\&. Per omissi\('o ser\(`a el joc de car\(`acters donat per la configuraci\('o regional actual del sistema\&.
 .RE
 .PP
 \fB\-r\fR, \fB\-\-redirect\-output\fR \fInom_fitxer\fR
@@ -2509,7 +2509,7 @@ BOM) o de la configuraci\('o regional del sistema\&. Com el joc de car\(`acters 
 .PP
 Els fitxers de text que comencen amb un BOM, ja estan codificats en una representaci\('o d\*(AqUTF\&. El
 \fBmkvmerge\fR(1)
-admet els cinc modes seg\(:uents: UTF\-8, UTF\-16 Little i Big Endian, UTF\-32 Little i Big Endian\&. Els fitxers de text amb un BOM seran autom\(`aticament convertits a UTF\-8\&. Qualsevol dels par\(`ametres que d\*(Aquna altra manera, estableixen el joc de car\(`acters d\*(Aqun fitxer com aquest (p\&. ex\&.,
+admet els cinc modes seg\(:uents: UTF\-8, UTF\-16 Little i Big Endian, UTF\-32 Little i Big Endian\&. Els fitxers de text amb un BOM seran autom\(`aticament convertits a UTF\-8\&. Qualsevol dels par\(`ametres que d\*(Aquna altra manera, defineixen el joc de car\(`acters d\*(Aqun fitxer com aquest (p\&. ex\&.,
 \fB\-\-sub\-charset\fR) seran ignorats silenciosament\&.
 .SS "Sistemes Linux i Unix, incloent el Mac OS"
 .PP
@@ -2636,7 +2636,7 @@ La l\('inia d\*(Aqordres \(Fo\fBmkvmerge \-o "meu_fitxer\&.mkv" \-A "una_peli\&.
 # Escriu al fitxer \(FoC:\eMatroska\emeu_fitxer\&.mkv\(Fc, sota Windows\&.
 \-o
 C:\e\eMatroska\e\emeu_fitxer\&.mkv
-# Estableix el t\('itol a \(Fon\('umero 65\(Fc\&.
+# Defineix el t\('itol a \(Fon\('umero 65\(Fc\&.
 \-\-title
 \eh65
 # Nom\('es pren el v\('ideo de \(Founa_peli\&.avi\(Fc\&.
@@ -2780,7 +2780,7 @@ SID\&.
 .PP
 L\*(Aqespecificaci\('o
 Matroska(TM)
-estableix que alguns elements tenen un valor predeterminat\&. En general, si el valor \('es igual que el predeterminat, llavors no ser\(`a escrit en el fitxer per tal d\*(Aqestalviar espai\&. Els elements que l\*(Aqusuari podria trobar a faltar a la sortida del
+defineix que alguns elements tenen un valor predeterminat\&. En general, si el valor \('es igual que el predeterminat, llavors no ser\(`a escrit en el fitxer per tal d\*(Aqestalviar espai\&. Els elements que l\*(Aqusuari podria trobar a faltar a la sortida del
 \fBmkvinfo\fR(1)
 s\('on els elements
 \fIidioma\fR
@@ -2869,7 +2869,7 @@ El
 transformar\(`a cada parell de l\('inies en un
 ChapterAtom
 del
-Matroska(TM)\&. Si no s\*(Aqestableix cap
+Matroska(TM)\&. Si no es defineix cap
 ChapterTrackNumber, voldr\(`a dir que tots els cap\('itols s\*(Aqaplicaran a totes les pistes del fitxer\&.
 .PP
 Com es tracta d\*(Aqun fitxer de text, podria ser necessari realitzar una conversi\('o del joc de car\(`acters\&. Vegeu la secci\('o sobre
@@ -3202,7 +3202,7 @@ Hi ha altres elements que no es poden establir a trav\('es de la l\('inia d\*(Aq
 \fIMuxingApp\fR,
 \fIWritingApp\fR
 i
-\fIDuration\fR\&. Sempre les estableix el
+\fIDuration\fR\&. Sempre les defineix el
 \fBmkvmerge\fR(1)
 mateix\&.
 .PP
