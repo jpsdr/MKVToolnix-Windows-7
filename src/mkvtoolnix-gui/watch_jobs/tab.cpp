@@ -97,14 +97,14 @@ Tab::setupUi() {
 
   auto model = MainWindow::jobTool()->model();
 
-  connect(d->ui->abortButton,                        &QPushButton::clicked,            this, &Tab::onAbort);
-  connect(d->ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,            this, &Tab::acknowledgeWarningsAndErrors);
-  connect(model,                                     &Jobs::Model::progressChanged,    this, &Tab::onQueueProgressChanged);
-  connect(model,                                     &Jobs::Model::queueStatusChanged, this, &Tab::updateRemainingTime);
-  connect(d->m_moreActions,                          &QMenu::aboutToShow,              this, &Tab::enableMoreActionsActions);
-  connect(d->m_saveOutputAction,                     &QAction::triggered,              this, &Tab::onSaveOutput);
-  connect(d->m_clearOutputAction,                    &QAction::triggered,              this, &Tab::clearOutput);
-  connect(d->m_openFolderAction,                     &QAction::triggered,              this, &Tab::openFolder);
+  connect(d->ui->abortButton,                        &QPushButton::clicked,                                  this, &Tab::onAbort);
+  connect(d->ui->acknowledgeWarningsAndErrorsButton, &QPushButton::clicked,                                  this, &Tab::acknowledgeWarningsAndErrors);
+  connect(model,                                     &Jobs::Model::progressChanged,                          this, &Tab::onQueueProgressChanged);
+  connect(model,                                     &Jobs::Model::queueStatusChanged,                       this, &Tab::updateRemainingTime);
+  connect(d->m_moreActions,                          &QMenu::aboutToShow,                                    this, &Tab::enableMoreActionsActions);
+  connect(d->m_saveOutputAction,                     &QAction::triggered,                                    this, &Tab::onSaveOutput);
+  connect(d->m_clearOutputAction,                    &QAction::triggered,                                    this, &Tab::clearOutput);
+  connect(d->m_openFolderAction,                     &QAction::triggered,                                    this, &Tab::openFolder);
   connect(MainWindow::jobTool()->model(),            &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, this, &Tab::disableButtonIfAllWarningsAndErrorsButtonAcknowledged);
 }
 
