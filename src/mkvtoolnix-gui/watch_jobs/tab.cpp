@@ -105,6 +105,7 @@ Tab::setupUi() {
   connect(d->m_saveOutputAction,                     &QAction::triggered,              this, &Tab::onSaveOutput);
   connect(d->m_clearOutputAction,                    &QAction::triggered,              this, &Tab::clearOutput);
   connect(d->m_openFolderAction,                     &QAction::triggered,              this, &Tab::openFolder);
+  connect(MainWindow::jobTool()->model(),            &Jobs::Model::numUnacknowledgedWarningsOrErrorsChanged, this, &Tab::disableButtonIfAllWarningsAndErrorsButtonAcknowledged);
 }
 
 void
@@ -374,6 +375,15 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   d->ui->acknowledgeWarningsAndErrorsButton->setEnabled(job.numUnacknowledgedWarnings() || job.numUnacknowledgedErrors());
 
   updateRemainingTime();
+}
+
+void
+Tab::disableButtonIfAllWarningsAndErrorsButtonAcknowledged(int numWarnings,
+                                                           int numErrors) {
+  Q_D(Tab);
+
+  if (!numWarnings && !numErrors)
+    d->ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
 }
 
 void

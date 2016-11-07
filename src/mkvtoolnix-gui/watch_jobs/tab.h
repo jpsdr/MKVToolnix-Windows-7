@@ -60,6 +60,7 @@ public slots:
   void openFolder();
 
   void acknowledgeWarningsAndErrors();
+  void disableButtonIfAllWarningsAndErrorsButtonAcknowledged(int numWarnings, int numErrors);
 
   void updateRemainingTime();
 
