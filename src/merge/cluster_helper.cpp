@@ -728,7 +728,7 @@ cluster_helper_c::verify_and_report_chapter_generation_parameters()
     return;
 
   if (!m->chapter_generation_reference_track)
-    mxerror(Y("Chapter generation is only possible if at least one video or audio track is merged.\n"));
+    mxerror(Y("Chapter generation is only possible if at least one video or audio track is copied.\n"));
 
   mxinfo(boost::format(Y("Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"))
          % m->chapter_generation_reference_track->m_ti.m_id % m->chapter_generation_reference_track->m_ti.m_fname);

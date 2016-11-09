@@ -85,7 +85,7 @@ AttachedFileModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
     { QY("Name"),             Q("name")           },
     { QY("MIME type"),        Q("mimeType")       },
-    { QY("Merge this"),       Q("muxThis")        },
+    { QY("Copy attachment"),  Q("muxThis")        },
     { QY("Description"),      Q("description")    },
     { QY("Size"),             Q("size")           },
     { QY("Source file name"), Q("sourceFileName") },

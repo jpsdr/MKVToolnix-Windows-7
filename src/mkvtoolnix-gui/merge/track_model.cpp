@@ -43,7 +43,7 @@ TrackModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
     { QY("Codec"),                   Q("codec")            },
     { QY("Type"),                    Q("type")             },
-    { QY("Merge this"),              Q("muxThis")          },
+    { QY("Copy item"),               Q("muxThis")          },
     { QY("Language"),                Q("language")         },
     { QY("Name"),                    Q("name")             },
     { QY("Source file"),             Q("sourceFile")       },
