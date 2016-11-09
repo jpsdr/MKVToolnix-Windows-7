@@ -149,7 +149,7 @@ PreferencesDialog::setupPageSelector() {
   auto page      = 0;
   auto pGui      = addItem(page++, nullptr, QY("GUI"),               "mkvtoolnix-gui");
                    addItem(page++, pGui,    QY("Often used selections"));
-  auto pMerge    = addItem(page++, nullptr, QY("Merge tool"),        "merge");
+  auto pMerge    = addItem(page++, nullptr, QY("Multiplex tool"),    "merge");
                    addItem(page++, pMerge,  QY("Default values"));
                    addItem(page++, pMerge,  QY("Output"));
                    addItem(page++, pMerge,  QY("Enabling tracks"));
@@ -198,7 +198,7 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbGuiUseDefaultJobDescription, QY("If disabled the GUI will let you enter a description for a job when adding it to the queue."));
   Util::setToolTip(ui->cbGuiShowOutputOfAllJobs,      QY("If enabled the first tab in the \"job output\" tool will not be cleared when a new job starts."));
-  Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting, QY("If enabled the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start merging\")."));
+  Util::setToolTip(ui->cbGuiSwitchToJobOutputAfterStarting,     QY("If enabled the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."));
   Util::setToolTip(ui->cbGuiResetJobWarningErrorCountersOnExit, QY("If enabled the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."));
   Util::setToolTip(ui->cbGuiRemoveOldJobs,                      QY("If enabled the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
   Util::setToolTip(ui->sbGuiRemoveOldJobsDays,                  QY("If enabled the GUI will remove completed jobs older than the configured number of days no matter their status on exit."));
@@ -258,17 +258,17 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMClearMergeSettings,
                    Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li></ol>")
-                   .arg(QYH("The GUI can help you start your next merge settings after having started a job or having added a one to the job queue."))
-                   .arg(QYH("With \"create new settings\" a new set of merge settings will be added."))
-                   .arg(QYH("The current merge settings will be closed."))
+                   .arg(QYH("The GUI can help you start your next multiplex settings after having started a job or having added a one to the job queue."))
+                   .arg(QYH("With \"create new settings\" a new set of multiplex settings will be added."))
+                   .arg(QYH("The current multiplex settings will be closed."))
                    .arg(QYH("With \"remove source files\" all source files will be removed."))
                    .arg(QYH("Most of the other settings on the output tab will be kept intact, though.")));
 
   Util::setToolTip(ui->cbMAddingAppendingFilesPolicy,
                    Q("%1 %2 %3")
-                   .arg(QY("When the user drags & drops files from an external application onto the merge tool the GUI can take different actions."))
-                   .arg(QY("The default is to always add all the files to the current merge settings."))
-                   .arg(QY("The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new merge settings and adding them to those.")));
+                   .arg(QY("When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."))
+                   .arg(QY("The default is to always add all the files to the current multiplex settings."))
+                   .arg(QY("The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those.")));
 
   Util::setToolTip(ui->cbMDefaultAudioTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
@@ -291,7 +291,7 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMDefaultSubtitleCharset, QY("If a character set is selected here then the program will automatically set the character set input to this value for newly added text subtitle tracks."));
 
-  Util::setToolTip(ui->leMDefaultAdditionalCommandLineOptions, QY("The options entered here are set for all new merge jobs by default."));
+  Util::setToolTip(ui->leMDefaultAdditionalCommandLineOptions, QY("The options entered here are set for all new multiplex jobs by default."));
 
   Util::setToolTip(ui->cbMScanPlaylistsPolicy,
                    Q("<p>%1 %2</p><p>%3</p>")
@@ -512,10 +512,10 @@ PreferencesDialog::setupEnableMuxingTracksByLanguage() {
 
 void
 PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Ask the user"),                                               static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Ask));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Add all files to the current merge settings"),                static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Add));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new merge settings tab and add all files there"),  static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new merge settings tab for each file"),            static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Ask the user"),                                                  static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Ask));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Add all files to the current multiplex settings"),               static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Add));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new multiplex settings tab and add all files there"), static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new multiplex settings tab for each file"),           static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew));
 
   Util::setComboBoxIndexIf(ui->cbMAddingAppendingFilesPolicy, [this](QString const &, QVariant const &data) {
     return data.isValid() && (static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(data.toInt()) == m_cfg.m_mergeAddingAppendingFilesPolicy);

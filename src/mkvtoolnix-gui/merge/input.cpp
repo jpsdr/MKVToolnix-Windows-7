@@ -1302,11 +1302,11 @@ Tab::retranslateInputUI() {
   m_selectAllSubtitlesTracksAction->setText(QY("&Subtitles"));
 
   m_startMuxingLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
-  m_startMuxingCreateNewSettings->setText(QY("Afterwards create &new merge settings and close the current ones."));
+  m_startMuxingCreateNewSettings->setText(QY("Afterwards create &new multiplex settings and close the current ones."));
   m_startMuxingRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
 
   m_addToJobQueueLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
-  m_addToJobQueueCreateNewSettings->setText(QY("Afterwards create &new merge settings and close the current ones."));
+  m_addToJobQueueCreateNewSettings->setText(QY("Afterwards create &new multiplex settings and close the current ones."));
   m_addToJobQueueRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
 
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)

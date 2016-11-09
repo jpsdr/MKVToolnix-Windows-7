@@ -150,7 +150,7 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
 #endif
        << Q("</li>")
        << Q("</li><li>")
-       << QYH("Open the merged file with a player:")
+       << QYH("Open the multiplexed file with a player:")
        << Q("</li>")
 #if defined(SYS_WINDOWS)
        << Q("<code>")
@@ -191,7 +191,7 @@ PrefsRunProgramWidget::setupMenu() {
     { QY("Job end date && time in ISO 8601 format"),                     Q("JOB_END_TIME")               },
     { QY("Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"), Q("JOB_EXIT_CODE")              },
 
-    { QY("Variables for merge jobs"),                                    Q("")                           },
+    { QY("Variables for multiplex jobs"),                                Q("")                           },
     { QY("Destination file's name"),                                     Q("DESTINATION_FILE_NAME")      },
     { QY("Destination file's directory"),                                Q("DESTINATION_FILE_DIRECTORY") },
     { QY("Source file names"),                                           Q("SOURCE_FILE_NAMES")          },

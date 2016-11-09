@@ -57,7 +57,7 @@ display_update_element_result(const EbmlCallbacks &callbacks,
       message += (boost::format("%1% %2% %3% %4% %5%")
                   % Y("The Matroska file's last element is set to an unknown size.")
                   % Y("Due to the particular structure of the file this situation cannot be fixed automatically.")
-                  % Y("The file can be fixed by merging the file with mkvmerge again.")
+                  % Y("The file can be fixed by multiplexing it with mkvmerge again.")
                   % Y("The process will be aborted.")
                   % Y("The file has not been modified.")).str();
       break;

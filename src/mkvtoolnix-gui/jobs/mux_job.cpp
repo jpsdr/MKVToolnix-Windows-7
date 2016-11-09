@@ -147,14 +147,14 @@ MuxJob::processError(QProcess::ProcessError error) {
 QString
 MuxJob::displayableType()
   const {
-  return QY("Merge job");
+  return QY("Multiplex job");
 }
 
 QString
 MuxJob::displayableDescription()
   const {
   QFileInfo info{m_config->m_destination};
-  return QY("Merging to file \"%1\" in directory \"%2\"").arg(info.fileName()).arg(QDir::toNativeSeparators(info.dir().path()));
+  return QY("Multiplexing to file \"%1\" in directory \"%2\"").arg(info.fileName()).arg(QDir::toNativeSeparators(info.dir().path()));
 }
 
 QString

@@ -24,22 +24,22 @@ GuiCliParser::initParser() {
 
   add_section_header(YT("Usage"));
   add_information(YT("mkvtoolnix-gui <configuration file names>"));
-  add_information(YT("mkvtoolnix-gui [--merge|--edit-chapters|--edit-headers] <file names>"));
+  add_information(YT("mkvtoolnix-gui [--multiplex|--edit-chapters|--edit-headers] <file names>"));
 
   add_separator();
 
   add_information((boost::format("%1% %2% %3% %4%")
                    % YT("Listing configuration file names with the extension .mtxcfg causes the GUI to load the those configuration files in the appropriate tool.")
-                   % YT("Any other file name is added as a source file for merging, opened in the chapter editor or in the header editor depending on the current mode.")
-                   % YT("The current mode can be changed with --merge, --edit-chapters or --edit-headers.")
-                   % YT("The default mode is adding files for merging.")).str());
+                   % YT("Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode.")
+                   % YT("The current mode can be changed with --multiplex, --edit-chapters or --edit-headers.")
+                   % YT("The default mode is adding files for multiplexing.")).str());
 
   add_section_header(YT("Options"));
 
-  OPT("merge",         setMergeMode,    (boost::format("%1% %2%") % YT("All following file names will be added as source files to the current merge job.") % YT("This is the default mode.")).str());
-  OPT("edit-chapters", setChaptersMode, YT("All following file names will be opened in the chapter editor."));
-  OPT("edit-headers",  setHeadersMode,  YT("All following file names will be opened in the header editor."));
-  OPT("activate",      raiseAndActivate, "");
+  OPT("multiplex|merge", setMergeMode,    (boost::format("%1% %2%") % YT("All following file names will be added as source files to the current multiplex settings.") % YT("This is the default mode.")).str());
+  OPT("edit-chapters",   setChaptersMode, YT("All following file names will be opened in the chapter editor."));
+  OPT("edit-headers",    setHeadersMode,  YT("All following file names will be opened in the header editor."));
+  OPT("activate",        raiseAndActivate, "");
 
   add_section_header(YT("Global options"));
 

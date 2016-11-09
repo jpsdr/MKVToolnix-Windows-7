@@ -59,8 +59,8 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   add(Q("--engage lacing_ebml"),                  false, hacks, { QY("Force EBML style lacing.") });
   add(Q("--engage native_mpeg4"),                 false, hacks, { QY("Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs.") });
   add(Q("--engage no_variable_data"),             false, hacks,
-      { QY("Use fixed values for the elements that change with each file otherwise (merging date, segment UID, track UIDs etc.)."),
-        QY("Two files merged with the same settings and this switch activated will be identical.") });
+      { QY("Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."),
+        QY("Two files multiplexed with the same settings and this switch activated will be identical.") });
   add(Q("--engage force_passthrough_packetizer"), false, hacks, { QY("Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types.") });
   add(Q("--engage allow_avc_in_vfw_mode"),        false, hacks, { QY("Allows storing AVC/h.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI.") });
   add(Q("--engage no_simpleblocks"),              false, hacks, { QY("Disable the use of SimpleBlocks instead of BlockGroups.") });
