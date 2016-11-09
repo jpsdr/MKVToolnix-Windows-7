@@ -1716,7 +1716,7 @@ kax_reader_c::create_opus_audio_packetizer(kax_track_t *t,
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 
   if (!m_opus_experimental_warning_shown && (t->codec_id == std::string{MKV_A_OPUS} + "/EXPERIMENTAL")) {
-    mxwarn(boost::format(Y("'%1%': You're re-muxing an Opus track that was muxed in experimental mode. "
+    mxwarn(boost::format(Y("'%1%': You're merging an Opus track that was merged in experimental mode. "
                            "The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. "
                            "This means that a decoder might output a few samples more than originally intended. "
                            "You should re-mux from the original Opus file if possible.\n"))

@@ -102,7 +102,7 @@ QtKaxAnalyzer::displayUpdateElementResult(QWidget *parent,
                             .arg(message)
                             .arg(QY("The Matroska file's last element is set to an unknown size."))
                             .arg(QY("Due to the particular structure of the file this situation cannot be fixed automatically."))
-                            .arg(QY("The file can be fixed by re-muxing the file with mkvmerge."))
+                            .arg(QY("The file can be fixed by merging the file with mkvmerge again."))
                             .arg(QY("The process will be aborted."))
                             .arg(QY("The file has not been modified.")));
       return;
