@@ -1281,7 +1281,7 @@ render_chapter_void_placeholder() {
     return;
 
   if (outputting_webm()) {
-    mxwarn(boost::format(Y("Chapters are not allowed in WebM compliant files. No chapters will be written into any output file.\n")));
+    mxwarn(boost::format(Y("Chapters are not allowed in WebM compliant files. No chapters will be written to the destination file.\n")));
 
     g_kax_chapters.reset();
     s_max_chapter_size = 0;
@@ -1331,7 +1331,7 @@ prepare_tags_for_rendering() {
 void
 create_next_output_file() {
   auto s_debug = debugging_option_c{"splitting"};
-  mxdebug_if(s_debug, boost::format("splitting: Create next output file; splitting? %1% discarding? %2%\n") % g_cluster_helper->splitting() % g_cluster_helper->discarding());
+  mxdebug_if(s_debug, boost::format("splitting: Create next destination file; splitting? %1% discarding? %2%\n") % g_cluster_helper->splitting() % g_cluster_helper->discarding());
 
   auto this_outfile   = g_cluster_helper->split_mode_produces_many_files() ? create_output_name() : g_outfile;
   g_kax_segment       = std::make_unique<KaxSegment>();

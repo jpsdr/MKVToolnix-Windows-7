@@ -258,7 +258,7 @@ extract_cli_parser_c::add_extraction_spec() {
   parse_number(matches[1].str(), track.tid);
 
   if (m_used_tids[track.tid])
-    mxerror(boost::format(Y("The ID '%1%' has already been used for another output file.\n")) % track.tid);
+    mxerror(boost::format(Y("The ID '%1%' has already been used for another destination file.\n")) % track.tid);
   m_used_tids[track.tid] = true;
 
   std::string output_file_name;
@@ -267,9 +267,9 @@ extract_cli_parser_c::add_extraction_spec() {
 
   if (output_file_name.empty()) {
     if (options_c::em_attachments == m_options.m_extraction_mode)
-      mxinfo(Y("No output file name specified, will use attachment name.\n"));
+      mxinfo(Y("No destination file name specified, will use attachment name.\n"));
     else
-      mxerror(boost::format(Y("Missing output file name in argument '%1%'.\n")) % m_current_arg);
+      mxerror(boost::format(Y("Missing destination file name in argument '%1%'.\n")) % m_current_arg);
   }
 
   track.out_name               = output_file_name;

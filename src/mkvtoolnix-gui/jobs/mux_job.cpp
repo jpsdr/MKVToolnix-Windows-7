@@ -201,8 +201,11 @@ void
 MuxJob::runProgramSetupVariables(ProgramRunner::VariableMap &variables) {
   Job::runProgramSetupVariables(variables);
 
-  variables[Q("OUTPUT_FILE_NAME")]      << QDir::toNativeSeparators(config().m_destination);
-  variables[Q("OUTPUT_FILE_DIRECTORY")] << QDir::toNativeSeparators(QFileInfo{ config().m_destination }.path());
+  // OUTPUT_… are kept for backwards compatibility.
+  variables[Q("OUTPUT_FILE_NAME")]           << QDir::toNativeSeparators(config().m_destination);
+  variables[Q("OUTPUT_FILE_DIRECTORY")]      << QDir::toNativeSeparators(QFileInfo{ config().m_destination }.path());
+  variables[Q("DESTINATION_FILE_NAME")]      << QDir::toNativeSeparators(config().m_destination);
+  variables[Q("DESTINATION_FILE_DIRECTORY")] << QDir::toNativeSeparators(QFileInfo{ config().m_destination }.path());
 
   for (auto const &sourceFile : config().m_files)
     variables[Q("SOURCE_FILE_NAMES")] << QDir::toNativeSeparators(sourceFile->m_fileName);

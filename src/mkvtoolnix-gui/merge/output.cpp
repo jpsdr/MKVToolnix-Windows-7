@@ -209,7 +209,7 @@ Tab::setupOutputToolTips() {
   Util::setToolTip(ui->webmMode,
                    Q("<p>%1 %2</p><p>%3 %4 %5</p><p>%6<p>")
                    .arg(QYH("Create a WebM compliant file."))
-                   .arg(QYH("mkvmerge also turns this on if the output file name's extension is \"webm\"."))
+                   .arg(QYH("mkvmerge also turns this on if the destination file name's extension is \"webm\"."))
                    .arg(QYH("This mode enforces several restrictions."))
                    .arg(QYH("The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."))
                    .arg(QYH("Tags are allowed, but chapters are not."))
@@ -275,7 +275,7 @@ Tab::clearTitleMaybe() {
 void
 Tab::onBrowseOutput() {
   auto filter   = m_config.m_webmMode ? QY("WebM files") + Q(" (*.webm)") : QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d)");
-  auto fileName = getSaveFileName(QY("Select output file name"), filter, ui->output);
+  auto fileName = getSaveFileName(QY("Select destination file name"), filter, ui->output);
   if (fileName.isEmpty())
     return;
 
@@ -328,7 +328,7 @@ Tab::onSplitModeChanged(int newMode) {
 
   if (MuxConfig::SplitAfterSize == splitMode) {
     label    = QY("Size:");
-    tooltip << QY("The size after which a new output file is started.")
+    tooltip << QY("The size after which a new destination file is started.")
             << QY("The letters 'G', 'M' and 'K' can be used to indicate giga/mega/kilo bytes respectively.")
             << QY("All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024).");
     entries << Q("")
@@ -343,7 +343,7 @@ Tab::onSplitModeChanged(int newMode) {
 
   } else if (MuxConfig::SplitAfterDuration == splitMode) {
     label    = QY("Duration:");
-    tooltip << QY("The duration after which a new output file is started.")
+    tooltip << QY("The duration after which a new destination file is started.")
             << (Q("%1 %2 %3")
                 .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
                 .arg(QY("You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."))
@@ -357,8 +357,8 @@ Tab::onSplitModeChanged(int newMode) {
   } else if (MuxConfig::SplitAfterTimecodes == splitMode) {
     label    = QY("Timecodes:");
     tooltip << (Q("%1 %2")
-                .arg(QY("The timecodes after which a new output file is started."))
-                .arg(QY("The timecodes refer to the whole stream and not to each individual output file.")))
+                .arg(QY("The timecodes after which a new destination file is started."))
+                .arg(QY("The timecodes refer to the whole stream and not to each individual destination file.")))
             << (Q("%1 %2 %3")
                 .arg(QY("The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."))
                 .arg(QY("You may omit the number of hours 'HH'."))

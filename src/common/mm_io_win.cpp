@@ -160,7 +160,7 @@ mm_file_io_c::_write(const void *buffer,
     } else
       error_msg_utf8 = Y("unknown");
 
-    mxerror(boost::format(Y("Could not write to the output file: %1% (%2%)\n")) % error % error_msg_utf8);
+    mxerror(boost::format(Y("Could not write to the destination file: %1% (%2%)\n")) % error % error_msg_utf8);
 
     if (error_msg)
       LocalFree(error_msg);

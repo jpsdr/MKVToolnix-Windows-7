@@ -154,15 +154,15 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
        << Q("</li>")
 #if defined(SYS_WINDOWS)
        << Q("<code>")
-       << QH("'C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe' '<MTX_OUTPUT_FILE_NAME>'")
+       << QH("'C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe' '<MTX_DESTINATION_FILE_NAME>'")
        << Q("</code>")
 #elif defined(SYS_APPLE)
        << Q("<code>")
-       << QH("/usr/bin/vlc '<MTX_OUTPUT_FILE_NAME>'")
+       << QH("/usr/bin/vlc '<MTX_DESTINATION_FILE_NAME>'")
        << Q("</code>")
 #else
        << Q("<code>")
-       << QH("/usr/bin/vlc '<MTX_OUTPUT_FILE_NAME>'")
+       << QH("/usr/bin/vlc '<MTX_DESTINATION_FILE_NAME>'")
        << Q("</code>")
 #endif
        << Q("</ul></body></html>");
@@ -185,19 +185,19 @@ PrefsRunProgramWidget::setupMenu() {
   Q_D(PrefsRunProgramWidget);
 
   QList<std::pair<QString, QString> > entries{
-    { QY("Variables for all job types"),                                 Q("")                      },
-    { QY("Job description"),                                             Q("JOB_DESCRIPTION")       },
-    { QY("Job start date && time in ISO 8601 format"),                   Q("JOB_START_TIME")        },
-    { QY("Job end date && time in ISO 8601 format"),                     Q("JOB_END_TIME")          },
-    { QY("Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"), Q("JOB_EXIT_CODE")         },
+    { QY("Variables for all job types"),                                 Q("")                           },
+    { QY("Job description"),                                             Q("JOB_DESCRIPTION")            },
+    { QY("Job start date && time in ISO 8601 format"),                   Q("JOB_START_TIME")             },
+    { QY("Job end date && time in ISO 8601 format"),                     Q("JOB_END_TIME")               },
+    { QY("Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"), Q("JOB_EXIT_CODE")              },
 
-    { QY("Variables for merge jobs"),                                    Q("")                      },
-    { QY("Output file's name"),                                          Q("OUTPUT_FILE_NAME")      },
-    { QY("Output file's directory"),                                     Q("OUTPUT_FILE_DIRECTORY") },
-    { QY("Source file names"),                                           Q("SOURCE_FILE_NAMES")     },
+    { QY("Variables for merge jobs"),                                    Q("")                           },
+    { QY("Destination file's name"),                                     Q("DESTINATION_FILE_NAME")      },
+    { QY("Destination file's directory"),                                Q("DESTINATION_FILE_DIRECTORY") },
+    { QY("Source file names"),                                           Q("SOURCE_FILE_NAMES")          },
 
-    { QY("General variables"),                                           Q("")                      },
-    { QY("Current date && time in ISO 8601 format"),                     Q("CURRENT_TIME")          },
+    { QY("General variables"),                                           Q("")                           },
+    { QY("Current date && time in ISO 8601 format"),                     Q("CURRENT_TIME")               },
   };
 
   d->variableMenu.reset(new QMenu{this});

@@ -83,7 +83,7 @@ set_usage() {
   usage_text += S("  -q, --quiet              ") + Y("Suppress status output.") + nl;
   usage_text += Y("  -o, --output out         Write to the file 'out'.\n");
   usage_text += Y("  -w, --webm               Create WebM compliant file.\n");
-  usage_text += Y("  --title <title>          Title for this output file.\n");
+  usage_text += Y("  --title <title>          Title for this destination file.\n");
   usage_text += Y("  --global-tags <file>     Read global tags from an XML file.\n");
   usage_text +=   "\n";
   usage_text += Y(" Chapter handling:\n");
@@ -111,7 +111,7 @@ set_usage() {
   usage_text += Y("  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
                   "                           A comma separated list of both file IDs\n"
                   "                           and track IDs that controls the order of the\n"
-                  "                           tracks in the output file.\n");
+                  "                           tracks in the destination file.\n");
   usage_text += Y("  --cluster-length <n[ms]> Put at most n data blocks into each cluster.\n"
                   "                           If the number is postfixed with 'ms' then\n"
                   "                           put at most n milliseconds of data into each\n"
@@ -197,8 +197,8 @@ set_usage() {
   usage_text += Y("  -B, --no-buttons         Don't copy any buttons track from this file.\n");
   usage_text += Y("  -m, --attachments <n[:all|first],m[:all|first],...>\n"
                   "                           Copy the attachments with the IDs n, m etc. to\n"
-                  "                           all or only the first output file. Default: copy\n"
-                  "                           all attachments to all output files.\n");
+                  "                           all or only the first destination file. Default:\n"
+                  "                           copy all attachments to all destination files.\n");
   usage_text += Y("  -M, --no-attachments     Don't copy attachments from a source file.\n");
   usage_text += Y("  -t, --tags <TID:file>    Read tags for the track from an XML file.\n");
   usage_text += Y("  --track-tags <n,m,...>   Copy the tags for tracks n,m etc. Default: copy\n"
@@ -2164,7 +2164,7 @@ parse_args(std::vector<std::string> args) {
         mxerror(boost::format(Y("'%1%' lacks a file name.\n")) % this_arg);
 
       if (g_outfile != "")
-        mxerror(Y("Only one output file allowed.\n"));
+        mxerror(Y("Only one destination file allowed.\n"));
 
       g_outfile = next_arg;
       sit++;
@@ -2174,13 +2174,13 @@ parse_args(std::vector<std::string> args) {
   }
 
   if (g_outfile.empty()) {
-    mxinfo(Y("Error: no output file name was given.\n\n"));
+    mxinfo(Y("Error: no destination file name was given.\n\n"));
     usage(2);
   }
 
   if (!outputting_webm() && is_webm_file_name(g_outfile)) {
     set_output_compatibility(OC_WEBM);
-    mxinfo(boost::format(Y("Automatically enabling WebM compliance mode due to output file name extension.\n")));
+    mxinfo(boost::format(Y("Automatically enabling WebM compliance mode due to destination file name extension.\n")));
   }
 
   auto ti               = std::make_unique<track_info_c>();
@@ -2989,7 +2989,7 @@ main(int argc,
   } catch (mtx::mm_io::exception &ex) {
     force_close_output_file();
     mxerror(boost::format("%1% %2% %3% %4%; %5%\n")
-            % Y("An exception occurred when writing the output file.") % Y("The drive may be full.") % Y("Exception details:")
+            % Y("An exception occurred when writing the destination file.") % Y("The drive may be full.") % Y("Exception details:")
             % ex.what() % ex.error());
   }
 

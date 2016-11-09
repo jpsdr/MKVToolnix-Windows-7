@@ -118,7 +118,7 @@ Tab::fileName()
 QString
 Tab::title()
   const {
-  auto title = m_config.m_destination.isEmpty() ? QY("<no output file>") : QFileInfo{m_config.m_destination}.fileName();
+  auto title = m_config.m_destination.isEmpty() ? QY("<no destination file>") : QFileInfo{m_config.m_destination}.fileName();
   if (!m_config.m_configFileName.isEmpty())
     title = Q("%1 (%2)").arg(title).arg(QFileInfo{m_config.m_configFileName}.fileName());
 
@@ -331,12 +331,12 @@ Tab::retranslateUi() {
 bool
 Tab::isReadyForMerging() {
   if (m_config.m_destination.isEmpty()) {
-    Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("You have to set the output file name before you can start merging or add a job to the job queue.")).exec();
+    Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("You have to set the destination file name before you can start merging or add a job to the job queue.")).exec();
     return false;
   }
 
   if (m_config.m_destination != Util::removeInvalidPathCharacters(m_config.m_destination)) {
-    Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("The output file name is invalid and must be fixed before you can start merging or add a job to the job queue.")).exec();
+    Util::MessageBox::critical(this)->title(QY("Cannot start merging")).text(QY("The destination file name is invalid and must be fixed before you can start merging or add a job to the job queue.")).exec();
     return false;
   }
 

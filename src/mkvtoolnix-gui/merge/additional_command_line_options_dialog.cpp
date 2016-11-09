@@ -52,7 +52,7 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
 
   auto hacks  = m_ui->gridDevelopmentHacks;
 
-  add(Q("--engage space_after_chapters"),         false, hacks, { QY("Leave additional space (EbmlVoid) in the output file after the chapters.") });
+  add(Q("--engage space_after_chapters"),         false, hacks, { QY("Leave additional space (EbmlVoid) in the destination file after the chapters.") });
   add(Q("--engage no_chapters_in_meta_seek"),     false, hacks, { QY("Do not add an entry for the chapters in the meta seek element.") });
   add(Q("--engage no_meta_seek"),                 false, hacks, { QY("Do not write meta seek elements at all.") });
   add(Q("--engage lacing_xiph"),                  false, hacks, { QY("Force Xiph style lacing.") });

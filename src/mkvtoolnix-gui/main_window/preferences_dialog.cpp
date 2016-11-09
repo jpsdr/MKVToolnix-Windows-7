@@ -244,7 +244,7 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMAlwaysShowOutputFileControls,
                    Q("%1 %2")
-                   .arg(QY("If enabled the output file name controls will always be visible no matter which tab is currently shown."))
+                   .arg(QY("If enabled the destination file name controls will always be visible no matter which tab is currently shown."))
                    .arg(QY("Otherwise they're shown on the 'output' tab.")));
 
   auto controls = QWidgetList{} << ui->rbMTrackPropertiesLayoutHorizontalScrollArea << ui->rbMTrackPropertiesLayoutHorizontalTwoColumns << ui->rbMTrackPropertiesLayoutVerticalTabWidget;
@@ -309,13 +309,13 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMUniqueOutputFileNames,
                    Q("%1 %2")
-                   .arg(QY("If checked the program makes sure the suggested output file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
-                   .arg(QY("This is done only if there is already a file whose name matches the unmodified output file name.")));
-  Util::setToolTip(ui->cbMAutoClearOutputFileName, QY("If this option is enabled the GUI will always clear the \"output file name\" input box whenever the last source file is removed."));
+                   .arg(QY("If checked the program makes sure the suggested destination file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
+                   .arg(QY("This is done only if there is already a file whose name matches the unmodified destination file name.")));
+  Util::setToolTip(ui->cbMAutoClearOutputFileName, QY("If this option is enabled the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."));
 
   Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
-                   .arg(QYH("When adding source files all tracks are normally set to be muxed into the output file."))
+                   .arg(QYH("When adding destination files all tracks are normally set to be copied into the output file."))
                    .arg(QYH("If this option is enabled then only those tracks will be set to be muxed whose language is selected below."))
                    .arg(QYH("You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."))
                    .arg(QYH("Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files).")));
