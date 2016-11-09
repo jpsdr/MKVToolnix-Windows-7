@@ -73,11 +73,11 @@ TrackTypePage::retranslateUi() {
   ui->m_lName->setText(m_name);
 
   ui->m_lDefaultTrackFlagLabel->setText(QY("\"Default track\" flag:"));
-  ui->m_lDefaultTrackFlag->setText(   m_defaultTrackFlag ? QY("yes")             : QY("no"));
+  ui->m_lDefaultTrackFlag->setText(   m_defaultTrackFlag ? QY("Yes")             : QY("No"));
   ui->m_iDefaultTrackFlag->setPixmap((m_defaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon()).pixmap({ 16, 16 }));
 
   ui->m_lForcedTrackFlagLabel->setText(QY("\"Forced track\" flag:"));
-  ui->m_lForcedTrackFlag->setText(   m_forcedTrackFlag ? QY("yes")             : QY("no"));
+  ui->m_lForcedTrackFlag->setText(   m_forcedTrackFlag ? QY("Yes")             : QY("No"));
   ui->m_iForcedTrackFlag->setPixmap((m_forcedTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon()).pixmap({ 16, 16 }));
 
   ui->m_lPropertiesLabel->setText(QY("Properties:"));
@@ -93,8 +93,8 @@ TrackTypePage::setItems(QList<QStandardItem *> const &items)
   items.at(2)->setText(App::descriptionFromIso639_2LanguageCode(m_language));
   items.at(3)->setText(m_name);
   items.at(4)->setText(QString::number(m_trackUid));
-  items.at(5)->setText(m_defaultTrackFlag ? QY("yes") : QY("no"));
-  items.at(6)->setText(m_forcedTrackFlag  ? QY("yes") : QY("no"));
+  items.at(5)->setText(m_defaultTrackFlag ? QY("Yes") : QY("No"));
+  items.at(6)->setText(m_forcedTrackFlag  ? QY("Yes") : QY("No"));
   items.at(7)->setText(m_properties);
 
   items.at(5)->setIcon(m_defaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());

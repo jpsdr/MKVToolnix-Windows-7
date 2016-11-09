@@ -47,8 +47,8 @@ RenumberSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
   m_ui->cbLanguageOfNamesToReplace->setAdditionalItems(additionalLanguages).setup();
-  m_ui->cbLanguageOfNamesToReplace->insertItem(0, QY("– first chapter name regardless of its language –"),  static_cast<int>(NameMatch::First));
-  m_ui->cbLanguageOfNamesToReplace->insertItem(1, QY("– all chapter names regardless of their language –"), static_cast<int>(NameMatch::All));
+  m_ui->cbLanguageOfNamesToReplace->insertItem(0, QY("– First chapter name regardless of its language –"),  static_cast<int>(NameMatch::First));
+  m_ui->cbLanguageOfNamesToReplace->insertItem(1, QY("– All chapter names regardless of their language –"), static_cast<int>(NameMatch::All));
   m_ui->cbLanguageOfNamesToReplace->insertSeparator(2);
 
   m_ui->cbLanguageOfNamesToReplace->setCurrentIndex(0);

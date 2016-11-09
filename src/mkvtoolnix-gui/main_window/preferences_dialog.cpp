@@ -74,7 +74,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->cbMDefaultAudioTrackLanguage->setAdditionalItems(m_cfg.m_defaultAudioTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultAudioTrackLanguage);
   ui->cbMDefaultVideoTrackLanguage->setAdditionalItems(m_cfg.m_defaultVideoTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultVideoTrackLanguage);
   ui->cbMDefaultSubtitleTrackLanguage->setAdditionalItems(m_cfg.m_defaultSubtitleTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultSubtitleTrackLanguage);
-  ui->cbMDefaultSubtitleCharset->setAdditionalItems(m_cfg.m_defaultSubtitleCharset).setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
+  ui->cbMDefaultSubtitleCharset->setAdditionalItems(m_cfg.m_defaultSubtitleCharset).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
 
@@ -89,7 +89,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
   ui->cbCEDefaultLanguage->setAdditionalItems(m_cfg.m_defaultChapterLanguage).setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
-  ui->cbCEDefaultCountry->setAdditionalItems(m_cfg.m_defaultChapterCountry).setup(true, QY("– no selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
+  ui->cbCEDefaultCountry->setAdditionalItems(m_cfg.m_defaultChapterCountry).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
   // Header editor page
   setupHeaderEditorDroppedFilesPolicy();
@@ -326,22 +326,22 @@ PreferencesDialog::setupToolTips() {
                                                    QY("Only tracks with a language in this list will be set to be muxed by default."));
 
   // Often used XYZ page
-  ui->tbOftenUsedLanguages->setToolTips(QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."),
-                                        QY("The languages selected here will be shown at the top of all the language drop-down boxes in the program."));
+  ui->tbOftenUsedLanguages->setToolTips(QY("The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."),
+                                        QY("The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedLanguagesOnly,
                    Q("%1 %2")
                    .arg(QYH("If checked only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
-  ui->tbOftenUsedCountries->setToolTips(QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."),
-                                        QY("The countries selected here will be shown at the top of all the country drop-down boxes in the program."));
+  ui->tbOftenUsedCountries->setToolTips(QY("The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."),
+                                        QY("The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedCountriesOnly,
                    Q("%1 %2")
                    .arg(QYH("If checked only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
-  ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."),
-                                            QY("The character sets selected here will be shown at the top of all the character set drop-down boxes in the program."));
+  ui->tbOftenUsedCharacterSets->setToolTips(QY("The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."),
+                                            QY("The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedCharacterSetsOnly,
                    Q("%1 %2")
                    .arg(QYH("If checked only the list of often used entries will be included in the selections in the program."))
@@ -451,12 +451,12 @@ PreferencesDialog::setupCommonCharacterSets() {
 void
 PreferencesDialog::setupProcessPriority() {
 #if defined(SYS_WINDOWS)
-  ui->cbMProcessPriority->addItem(QY("highest"), static_cast<int>(Util::Settings::HighestPriority)); // value 4, index 0
-  ui->cbMProcessPriority->addItem(QY("higher"),  static_cast<int>(Util::Settings::HighPriority));    // value 3, index 1
+  ui->cbMProcessPriority->addItem(QY("Highest priority"), static_cast<int>(Util::Settings::HighestPriority)); // value 4, index 0
+  ui->cbMProcessPriority->addItem(QY("Higher priority"),  static_cast<int>(Util::Settings::HighPriority));    // value 3, index 1
 #endif
-  ui->cbMProcessPriority->addItem(QY("normal"),  static_cast<int>(Util::Settings::NormalPriority));  // value 2, index 2/0
-  ui->cbMProcessPriority->addItem(QY("lower"),   static_cast<int>(Util::Settings::LowPriority));     // value 1, index 3/1
-  ui->cbMProcessPriority->addItem(QY("lowest"),  static_cast<int>(Util::Settings::LowestPriority));  // value 0, index 4/2
+  ui->cbMProcessPriority->addItem(QY("Normal priority"),  static_cast<int>(Util::Settings::NormalPriority));  // value 2, index 2/0
+  ui->cbMProcessPriority->addItem(QY("Lower priority"),   static_cast<int>(Util::Settings::LowPriority));     // value 1, index 3/1
+  ui->cbMProcessPriority->addItem(QY("Lowest priority"),  static_cast<int>(Util::Settings::LowestPriority));  // value 0, index 4/2
 
   auto numPrios = ui->cbMProcessPriority->count();
   auto selected = 4 - static_cast<int>(m_cfg.m_priority) - (5 - numPrios);
@@ -512,10 +512,10 @@ PreferencesDialog::setupEnableMuxingTracksByLanguage() {
 
 void
 PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("ask the user"),                                               static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Ask));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("add all files to the current merge settings"),                static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Add));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("create one new merge settings tab and add all files there"),  static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("create one new merge settings tab for each file"),            static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Ask the user"),                                               static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Ask));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Add all files to the current merge settings"),                static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Add));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new merge settings tab and add all files there"),  static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew));
+  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new merge settings tab for each file"),            static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew));
 
   Util::setComboBoxIndexIf(ui->cbMAddingAppendingFilesPolicy, [this](QString const &, QVariant const &data) {
     return data.isValid() && (static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(data.toInt()) == m_cfg.m_mergeAddingAppendingFilesPolicy);
@@ -526,9 +526,9 @@ PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
 
 void
 PreferencesDialog::setupHeaderEditorDroppedFilesPolicy() {
-  ui->cbHEDroppedFilesPolicy->addItem(QY("ask the user"),                                        static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Ask));
-  ui->cbHEDroppedFilesPolicy->addItem(QY("open all files as tabs in the header editor"),         static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Open));
-  ui->cbHEDroppedFilesPolicy->addItem(QY("add all files as new attachments to the current tab"), static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::AddAttachments));
+  ui->cbHEDroppedFilesPolicy->addItem(QY("Ask the user"),                                        static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Ask));
+  ui->cbHEDroppedFilesPolicy->addItem(QY("Open all files as tabs in the header editor"),         static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::Open));
+  ui->cbHEDroppedFilesPolicy->addItem(QY("Add all files as new attachments to the current tab"), static_cast<int>(Util::Settings::HeaderEditorDroppedFilesPolicy::AddAttachments));
 
   Util::setComboBoxIndexIf(ui->cbHEDroppedFilesPolicy, [this](QString const &, QVariant const &data) {
     return data.isValid() && (static_cast<Util::Settings::HeaderEditorDroppedFilesPolicy>(data.toInt()) == m_cfg.m_headerEditorDroppedFilesPolicy);
@@ -549,10 +549,10 @@ PreferencesDialog::setupTrackPropertiesLayout() {
 void
 PreferencesDialog::setupTabPositions() {
   ui->cbGuiTabPositions->clear();
-  ui->cbGuiTabPositions->addItem(QY("top"),    static_cast<int>(QTabWidget::North));
-  ui->cbGuiTabPositions->addItem(QY("bottom"), static_cast<int>(QTabWidget::South));
-  ui->cbGuiTabPositions->addItem(QY("left"),   static_cast<int>(QTabWidget::West));
-  ui->cbGuiTabPositions->addItem(QY("right"),  static_cast<int>(QTabWidget::East));
+  ui->cbGuiTabPositions->addItem(QY("Top"),    static_cast<int>(QTabWidget::North));
+  ui->cbGuiTabPositions->addItem(QY("Bottom"), static_cast<int>(QTabWidget::South));
+  ui->cbGuiTabPositions->addItem(QY("Left"),   static_cast<int>(QTabWidget::West));
+  ui->cbGuiTabPositions->addItem(QY("Right"),  static_cast<int>(QTabWidget::East));
 
   Util::setComboBoxIndexIf(ui->cbGuiTabPositions, [this](QString const &, QVariant const &data) {
     return data.toInt() == static_cast<int>(m_cfg.m_tabPosition);
@@ -562,8 +562,8 @@ PreferencesDialog::setupTabPositions() {
 void
 PreferencesDialog::setupWhenToSetDefaultLanguage() {
   ui->cbMWhenToSetDefaultLanguage->clear();
-  ui->cbMWhenToSetDefaultLanguage->addItem(QY("only if the source doesn't contain a language"),  static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::OnlyIfAbsent));
-  ui->cbMWhenToSetDefaultLanguage->addItem(QY("also if the language is 'undetermined' ('und')"), static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined));
+  ui->cbMWhenToSetDefaultLanguage->addItem(QY("Only if the source doesn't contain a language"),  static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::OnlyIfAbsent));
+  ui->cbMWhenToSetDefaultLanguage->addItem(QY("Also if the language is 'undetermined' ('und')"), static_cast<int>(Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined));
 
   Util::setComboBoxIndexIf(ui->cbMWhenToSetDefaultLanguage, [this](QString const &, QVariant const &data) {
     return data.toInt() == static_cast<int>(m_cfg.m_whenToSetDefaultLanguage);

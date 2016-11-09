@@ -138,9 +138,9 @@ Tab::retranslateUi() {
   d->m_openFolderAction->setText(QY("&Open folder"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
-  d->ui->output->setPlaceholderText(QY("no output yet"));
-  d->ui->warnings->setPlaceholderText(QY("no warnings yet"));
-  d->ui->errors->setPlaceholderText(QY("no errors yet"));
+  d->ui->output->setPlaceholderText(QY("No output yet"));
+  d->ui->warnings->setPlaceholderText(QY("No warnings yet"));
+  d->ui->errors->setPlaceholderText(QY("No errors yet"));
 #endif
 }
 
@@ -366,8 +366,8 @@ Tab::setInitialDisplay(Jobs::Job const &job) {
   d->ui->status->setText(Jobs::Job::displayableStatus(job.status()));
   d->ui->progressBar->setValue(job.progress());
 
-  d->ui->startedAt ->setText(job.dateStarted() .isValid() ? Util::displayableDate(job.dateStarted())  : QY("not started yet"));
-  d->ui->finishedAt->setText(job.dateFinished().isValid() ? Util::displayableDate(job.dateFinished()) : QY("not finished yet"));
+  d->ui->startedAt ->setText(job.dateStarted() .isValid() ? Util::displayableDate(job.dateStarted())  : QY("Not started yet"));
+  d->ui->finishedAt->setText(job.dateFinished().isValid() ? Util::displayableDate(job.dateFinished()) : QY("Not finished yet"));
 
   d->ui->abortButton->setEnabled(Jobs::Job::Running == job.status());
   d->m_saveOutputAction->setEnabled(!mtx::included_in(job.status(), Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Disabled));
@@ -452,10 +452,10 @@ Tab::clearOutput() {
   d->m_currentJobDescription.clear();
 
   d->ui->progressBar->reset();
-  d->ui->status->setText(QY("no job started yet"));
+  d->ui->status->setText(QY("No job started yet"));
   d->ui->description->setText(QY("No job has been started yet."));
-  d->ui->startedAt->setText(QY("not started yet"));
-  d->ui->finishedAt->setText(QY("not finished yet"));
+  d->ui->startedAt->setText(QY("Not started yet"));
+  d->ui->finishedAt->setText(QY("Not finished yet"));
   d->ui->remainingTimeCurrentJob->setText(Q("–"));
   d->ui->remainingTimeQueue->setText(Q("–"));
 

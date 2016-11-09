@@ -51,7 +51,7 @@ AttachedFileModel::setRowData(QList<QStandardItem *> const &items,
 
   items[NameColumn       ]->setText(attachedFile.m_name);
   items[MIMETypeColumn   ]->setText(attachedFile.m_codec);
-  items[MuxThisColumn    ]->setText(attachedFile.m_muxThis ? QY("yes") : QY("no"));
+  items[MuxThisColumn    ]->setText(attachedFile.m_muxThis ? QY("Yes") : QY("No"));
   items[DescriptionColumn]->setText(attachedFile.m_attachmentDescription);
   items[SourceFileColumn ]->setText(info.fileName());
   items[SourceDirColumn  ]->setText(QDir::toNativeSeparators(info.path()));
@@ -61,7 +61,7 @@ AttachedFileModel::setRowData(QList<QStandardItem *> const &items,
 
   items[NameColumn       ]->setData(attachedFile.m_name.toLower(),                  Util::SortRole);
   items[MIMETypeColumn   ]->setData(attachedFile.m_codec.toLower(),                 Util::SortRole);
-  items[MuxThisColumn    ]->setData(attachedFile.m_muxThis ? QY("yes") : QY("no"),  Util::SortRole);
+  items[MuxThisColumn    ]->setData(attachedFile.m_muxThis ? QY("Yes") : QY("No"),  Util::SortRole);
   items[DescriptionColumn]->setData(attachedFile.m_attachmentDescription.toLower(), Util::SortRole);
   items[SourceFileColumn ]->setData(info.fileName().toLower(),                      Util::SortRole);
   items[SourceDirColumn  ]->setData(info.path().toLower(),                          Util::SortRole);

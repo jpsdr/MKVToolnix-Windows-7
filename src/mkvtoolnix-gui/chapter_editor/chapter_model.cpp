@@ -70,11 +70,11 @@ ChapterModel::setEditionRowText(QList<QStandardItem *> const &rowItems) {
   auto isOrdered = edition && FindChildValue<KaxEditionFlagOrdered>(*edition);
 
   if (isOrdered)
-    flags << QY("ordered");
+    flags << QY("Ordered");
   if (isHidden)
-    flags << QY("hidden");
+    flags << QY("Hidden");
   if (isDefault)
-    flags << QY("default");
+    flags << QY("Default");
 
   rowItems[0]->setText(QY("Edition entry"));
   rowItems[3]->setText(flags.join(Q(", ")));
@@ -105,9 +105,9 @@ ChapterModel::setChapterRowText(QList<QStandardItem *> const &rowItems) {
   auto kEnd      = FindChild<KaxChapterTimeEnd>(*chapter);
 
   if (!isEnabled)
-    flags << QY("disabled");
+    flags << QY("Disabled");
   if (isHidden)
-    flags << QY("hidden");
+    flags << QY("Hidden");
 
   rowItems[1]->setData(static_cast<qulonglong>(kStart ? kStart->GetValue() : 0), QStandardItemModel::sortRole());
 

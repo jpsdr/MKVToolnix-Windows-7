@@ -393,14 +393,14 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 QString
 Track::nameForType()
   const {
-  return isAudio()      ? QY("audio")
-       : isVideo()      ? QY("video")
-       : isSubtitles()  ? QY("subtitles")
-       : isButtons()    ? QY("buttons")
-       : isAttachment() ? QY("attachment")
-       : isChapters()   ? QY("chapters")
-       : isTags()       ? QY("tags")
-       : isGlobalTags() ? QY("global tags")
+  return isAudio()      ? QY("Audio")
+       : isVideo()      ? QY("Video")
+       : isSubtitles()  ? QY("Subtitles")
+       : isButtons()    ? QY("Buttons")
+       : isAttachment() ? QY("Attachment")
+       : isChapters()   ? QY("Chapters")
+       : isTags()       ? QY("Tags")
+       : isGlobalTags() ? QY("Global tags")
        :                   Q("INTERNAL ERROR");
 }
 

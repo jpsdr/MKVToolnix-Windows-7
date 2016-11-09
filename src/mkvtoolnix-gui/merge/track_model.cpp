@@ -99,13 +99,13 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                               Track *track) {
   items[0]->setText(track->isChapters() || track->isGlobalTags() || track->isTags() ? QNY("%1 entry", "%1 entries", track->m_size).arg(track->m_size) : track->m_codec);
   items[1]->setText(track->nameForType());
-  items[2]->setText(track->m_muxThis ? QY("yes") : QY("no"));
+  items[2]->setText(track->m_muxThis ? QY("Yes") : QY("No"));
   items[3]->setText(track->isAppended() ? QString{} : track->m_language);
   items[4]->setText(track->isAppended() ? QString{} : track->m_name);
   items[5]->setText(QFileInfo{ track->m_file->m_fileName }.fileName());
   items[6]->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
-  items[7]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("yes") : QY("no"));
-  items[8]->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("yes") : QY("no"));
+  items[7]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("Yes") : QY("No"));
+  items[8]->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("Yes") : QY("No"));
   items[9]->setText(summarizeProperties(*track));
 
   items[0]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
@@ -264,7 +264,7 @@ TrackModel::dumpTracks(QString const &label)
            % prefix
            % (track->isChapters() || track->isGlobalTags() || track->isTags() ? QNY("%1 entry", "%1 entries", track->m_size).arg(track->m_size) : track->m_codec)
            % track->nameForType()
-           % (track->m_muxThis ? QY("yes") : QY("no"))
+           % (track->m_muxThis ? QY("Yes") : QY("No"))
            % track->m_language
            % track->m_name
            % QFileInfo{ track->m_file->m_fileName }.fileName());

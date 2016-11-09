@@ -230,15 +230,15 @@ Job::addLineToInternalLogs(QString const &line,
 
 QString
 Job::displayableStatus(Status status) {
-  return PendingManual == status ? QY("pending manual start")
-       : PendingAuto   == status ? QY("pending automatic start")
-       : Running       == status ? QY("running")
-       : DoneOk        == status ? QY("completed OK")
-       : DoneWarnings  == status ? QY("completed with warnings")
-       : Failed        == status ? QY("failed")
-       : Aborted       == status ? QY("aborted by user")
-       : Disabled      == status ? QY("disabled")
-       :                           QY("unknown");
+  return PendingManual == status ? QY("Pending manual start")
+       : PendingAuto   == status ? QY("Pending automatic start")
+       : Running       == status ? QY("Running")
+       : DoneOk        == status ? QY("Completed OK")
+       : DoneWarnings  == status ? QY("Completed with warnings")
+       : Failed        == status ? QY("Failed")
+       : Aborted       == status ? QY("Aborted by user")
+       : Disabled      == status ? QY("Disabled")
+       :                           QY("Unknown");
 }
 
 QString

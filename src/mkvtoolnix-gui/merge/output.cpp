@@ -140,8 +140,8 @@ Tab::moveOutputFileNameToOutputTab() {
 void
 Tab::retranslateOutputUI() {
   Util::setComboBoxTexts(ui->splitMode,
-                         QStringList{} << QY("Do not split")                << QY("after output size")                     << QY("after output duration")     << QY("after specific timecodes")
-                                       << QY("by parts based on timecodes") << QY("by parts based on frame/field numbers") << QY("after frame/field numbers") << QY("before chapters"));
+                         QStringList{} << QY("Do not split")                << QY("After output size")                     << QY("After output duration")     << QY("After specific timecodes")
+                                       << QY("By parts based on timecodes") << QY("By parts based on frame/field numbers") << QY("After frame/field numbers") << QY("Before chapters"));
 
   setupOutputToolTips();
 }

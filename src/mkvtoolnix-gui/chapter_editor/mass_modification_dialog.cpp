@@ -39,7 +39,7 @@ MassModificationDialog::setupUi(QStringList const &additionalLanguages,
   m_ui->setupUi(this);
 
   m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup();
-  m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– set to none –"));
+  m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– Set to none –"));
 
   auto mw = MainWindow::get();
   connect(m_ui->cbShift,           &QCheckBox::toggled,                                                          this,              &MassModificationDialog::verifyOptions);

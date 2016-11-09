@@ -155,7 +155,7 @@ ValuePage::retranslateUi() {
             : ValueType::Float           == m_valueType ? QY("Floating point number")
             : ValueType::Binary          == m_valueType ? QY("Binary (displayed as hexadecimal numbers)")
             : ValueType::Bool            == m_valueType ? QY("Boolean (yes/no, on/off etc.)")
-            :                                             QY("unknown");
+            :                                             QY("Unknown");
 
   m_lTypeLabel->setText(QY("Type:"));
   m_lType->setText(type);

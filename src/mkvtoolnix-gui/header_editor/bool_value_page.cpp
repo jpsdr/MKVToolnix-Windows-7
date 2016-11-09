@@ -25,8 +25,8 @@ BoolValuePage::~BoolValuePage() {
 QWidget *
 BoolValuePage::createInputControl() {
   m_cbValue = new QComboBox{this};
-  m_cbValue->addItem(QY("no"));
-  m_cbValue->addItem(QY("yes"));
+  m_cbValue->addItem(QY("No"));
+  m_cbValue->addItem(QY("Yes"));
 
   if (m_element)
     m_originalValue = std::min<uint64_t>(static_cast<EbmlUInteger *>(m_element)->GetValue(), 1);
@@ -39,7 +39,7 @@ BoolValuePage::createInputControl() {
 QString
 BoolValuePage::originalValueAsString()
   const {
-  return m_originalValue ? QY("yes") : QY("no");
+  return m_originalValue ? QY("Yes") : QY("No");
 }
 
 QString
