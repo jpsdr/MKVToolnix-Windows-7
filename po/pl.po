@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-10-23 23:34+0200\n"
-"PO-Revision-Date: 2016-11-02 19:32+0100\n"
+"PO-Revision-Date: 2016-11-09 17:46+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
 "Language: pl\n"
@@ -1359,7 +1359,7 @@ msgstr "&Zestawy znaków"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:136
 #, no-c-format
 msgid "&Clear output and reset progress"
-msgstr "Wy&czyść komunikaty i wskaźnik postępu"
+msgstr "Wy&czyść komunikaty i zresetuj wskaźnik(-i) postępu"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:476
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:486
@@ -1578,7 +1578,7 @@ msgstr "Ilość (pod)rozdziałów do prze&numerowania:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1328
 msgid "&Only enable muxing of tracks with specific languages by default"
-msgstr "Włącz muks&owanie ścieżek (»Muksuj to« ———> \"Tak\") jedynie w wybranych językach"
+msgstr "Użyj d&omyślnego zaznaczenia pól wyboru tylko dla tych ścieżek, które zawierają ten sam język, jaki widnieje na liście po prawej stronie"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1280
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1282
@@ -2922,7 +2922,7 @@ msgstr "Zawsze pytaj użytkownika"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1329
 msgid "Always enable muxing for all tracks of the following types regardless of their language:"
-msgstr "Zawsze włączaj muksowanie dla wszystkich ścieżek następujących typów (bez względu na ich język):"
+msgstr "Zawsze używaj domyślnego zaznaczenia pól wyboru dla wszystkich ścieżek następujących typów (bez względu na ich język):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1360
 msgid "Always remove the job afterwards"
@@ -4581,7 +4581,7 @@ msgstr "Elementy w kategorii \"%1%\" (\"-edit %2%\"):\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1327
 msgid "Enable muxing of tracks by their language"
-msgstr "Włącz muksowanie ścieżek ze względu na ich język"
+msgstr "Włącz gotowość do muksowania ścieżek ze względu na ich język"
 
 #: src/info/mkvinfo.cpp:970
 #, boost-format
@@ -5458,7 +5458,7 @@ msgstr "Włączenie tej opcji spowoduje wyzerowanie wszystkich ostrzeżeń i bł
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
 #, no-c-format
 msgid "If enabled then tracks of this type will always be set to be muxed regardless of their language."
-msgstr "Włączenie tej opcji spowoduje, że ścieżki danego rodzaju zawsze będą przeznaczone do muksowania niezależnie od ich języka."
+msgstr "Włączenie tej opcji spowoduje, że ścieżki danego rodzaju zawsze będą przeznaczone do muksowania, niezależnie od ich języka."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:171
 msgid "If fewer UIDs are specified than segments are created then random UIDs will be created for them."
@@ -5545,7 +5545,7 @@ msgstr "Jeśli ta opcja jest włączona, wtedy GUI zawsze wyczyści pole z nazw�
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:319
 msgid "If this option is enabled then only those tracks will be set to be muxed whose language is selected below."
-msgstr "Jeśli ta opcja jest włączona, wtedy przeznaczone do muksowania zostaną tylko te ścieżki, które zawierają jeden z języków wybranych z poniższej listy."
+msgstr "Jeśli ta opcja jest włączona, wtedy przeznaczone do muksowania zostaną tylko te ścieżki, które zawierają ten sam język, jaki jest obecny na liście po prawej stronie."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:243
 #, no-c-format
@@ -7270,7 +7270,7 @@ msgstr "Pozycje listy odtwarzania:"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:156
 #, no-c-format
 msgid "Playlists"
-msgstr "Listy odtwarzania"
+msgstr "Listy odtwarzania Blu-ray"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:58
 #, no-c-format
@@ -7979,7 +7979,7 @@ msgstr "Folder skanowania"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1333
 msgid "Scanning playlists"
-msgstr "Skanowanie list odtwarzania"
+msgstr "Skanowanie list odtwarzania Blu-ray"
 
 #: src/info/mkvinfo.cpp:816
 #, boost-format
@@ -9223,7 +9223,7 @@ msgstr "Plik \"%1\" nie jest ani plikiem kolejki zadań, ani plikiem ustawień."
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:49
 #, no-c-format
 msgid "The file '%1' you've added is a playlist."
-msgstr "Plik \"%1\", który właśnie dodałe(a)ś, to lista odtwarzania."
+msgstr "Plik \"%1\", który właśnie dodałe(-a)ś, to lista odtwarzania Blu-ray."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:662
 #: src/mkvtoolnix-gui/merge/attachments.cpp:219
@@ -10574,7 +10574,7 @@ msgstr "Rodzaj ścieżki: %1%"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:325
 #, no-c-format
 msgid "Tracks with a language in this list will be set not to be muxed by default."
-msgstr "Ścieżki z językiem będącym na tej liście domyślnie nie będą przeznaczone do muksowania."
+msgstr "Ścieżki z językiem będącym na tej liście nie będą przeznaczone do muksowania."
 
 #: src/extract/xtr_base.cpp:123
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
@@ -11118,7 +11118,7 @@ msgstr "Gdy plik jest dodawany, wtedy jego nazwa jest skanowana."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 msgid "When adding source files all tracks are normally set to be muxed into the output file."
-msgstr "Podczas dodawania plików źródłowych wszystkie ścieżki są standardowo przeznaczone do muksowania do pliku wyjściowego."
+msgstr "Podczas dodawania plików źródłowych wszystkie ścieżki są standardowo przeznaczone do muksowania do pliku wyjściowego (wówczas wszystkie pola wyboru są domyślnie zaznaczone)."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
@@ -11299,7 +11299,7 @@ msgstr "Możesz pobrać aplikację klikając na poniższy odnośnik URL:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:320
 msgid "You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."
-msgstr "Możesz zwolnić niektóre rodzaje ścieżek od tej zasady zaznaczając poniżej odpowiednie pole wyboru, np. dla ścieżek wideo."
+msgstr "Możesz zwolnić niektóre rodzaje ścieżek od tej zasady, zaznaczając poniżej odpowiednie pole wyboru, np. dla ścieżek wideo."
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:183
 #, no-c-format
@@ -11314,7 +11314,7 @@ msgstr "Możesz pozwolić, aby edytor nagłówków usunął ten element z pliku.
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:209
 #, no-c-format
 msgid "You can opt for having them removed automatically under certain conditions."
-msgstr "Istnieje możliwość ich automatycznego usunięcia, jeśli spełnią pewne warunki."
+msgstr "Istnieje możliwość ich automatycznego usunięcia, jeśli spełnią określone warunki."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:310
 msgid "You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'."
