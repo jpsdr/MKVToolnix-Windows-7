@@ -261,7 +261,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("The GUI can help you start your next merge settings after having started a job or having added a one to the job queue."))
                    .arg(QYH("With \"create new settings\" a new set of merge settings will be added."))
                    .arg(QYH("The current merge settings will be closed."))
-                   .arg(QYH("With \"remove input files\" all input files will be removed."))
+                   .arg(QYH("With \"remove source files\" all source files will be removed."))
                    .arg(QYH("Most of the other settings on the output tab will be kept intact, though.")));
 
   Util::setToolTip(ui->cbMAddingAppendingFilesPolicy,
@@ -304,8 +304,8 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->cbMAutoSetOutputFileName,
                    Q("%1 %2")
-                   .arg(QY("If this option is enabled and if there is currently no output file name set then the program will set one for you when you add an input file."))
-                   .arg(QY("The generated output file name has the same base name as the input file name but with an extension based on the track types present in the file.")));
+                   .arg(QY("If this option is enabled and if there is currently no destination file name set then the program will set one for you when you add a source file."))
+                   .arg(QY("The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file.")));
 
   Util::setToolTip(ui->cbMUniqueOutputFileNames,
                    Q("%1 %2")

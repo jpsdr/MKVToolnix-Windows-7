@@ -144,7 +144,7 @@ parse_args(std::vector<std::string> &args) {
       options.m_result_in_le = true;
 
     else if (!options.m_file_name.empty())
-      mxerror("More than one input file given\n");
+      mxerror("More than one source file was given.\n");
 
     else
       options.m_file_name = arg;

@@ -132,7 +132,7 @@ parse_args(std::vector<std::string> &args) {
       }
 
     } else if (!file_name.empty())
-      mxerror(Y("More than one input file given\n"));
+      mxerror(Y("More than one source file was given.\n"));
 
     else
       file_name = *arg;

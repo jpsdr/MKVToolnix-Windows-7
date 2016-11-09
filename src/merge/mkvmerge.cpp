@@ -178,7 +178,7 @@ set_usage() {
                   "                           Creates a file attachment inside the\n"
                   "                           first Matroska file written.\n");
   usage_text +=   "\n";
-  usage_text += Y(" Options for each input file:\n");
+  usage_text += Y(" Options for each source file:\n");
   usage_text += Y("  -a, --audio-tracks <n,m,...>\n"
                   "                           Copy audio tracks n,m etc. Default: copy all\n"
                   "                           audio tracks.\n");
@@ -325,7 +325,7 @@ set_usage() {
                   "                           Sets maximum size to probe for tracks in percent\n"
                   "                           of the total file size for certain file types\n"
                   "                           (default: 0.3).\n");
-  usage_text += Y("  -l, --list-types         Lists supported input file types.\n");
+  usage_text += Y("  -l, --list-types         Lists supported source file types.\n");
   usage_text += Y("  --list-languages         Lists all ISO639 languages and their\n"
                   "                           ISO639-2 codes.\n");
   usage_text += Y("  --capabilities           Lists optional features mkvmerge was compiled with.\n");
@@ -1927,8 +1927,9 @@ handle_file_name_arg(const std::string &this_arg,
       mxerror(Y("An empty file name is not valid.\n"));
 
     else if (g_outfile == file_name)
-      mxerror(boost::format(Y("The name of the output file '%1%' and of one of the input files is the same. This would cause mkvmerge to overwrite "
-                              "one of your input files. This is most likely not what you want.\n")) % g_outfile);
+      mxerror(boost::format("%1% %2%\n")
+              % (boost::format(Y("The name of the destination file '%1%' and of one of the source files is the same.")) % g_outfile)
+              % Y("This would cause mkvmerge to overwrite one of your source files."));
   }
 
   if (!ti->m_atracks.empty() && ti->m_atracks.none())
@@ -2780,7 +2781,7 @@ parse_args(std::vector<std::string> args) {
     mxwarn(Y("'--link' is only useful in combination with '--split'.\n"));
 
   if (!inputs_found && g_files.empty())
-    mxerror(Y("No input files were given. No output will be created.\n"));
+    mxerror(Y("No source files were given.\n"));
 }
 
 static void

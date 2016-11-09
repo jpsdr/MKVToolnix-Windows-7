@@ -113,7 +113,7 @@ info_cli_parser_c::set_track_info() {
 void
 info_cli_parser_c::set_file_name() {
   if (!m_options.m_file_name.empty())
-    mxerror(Y("Only one input file is allowed.\n"));
+    mxerror(Y("Only one source file is allowed.\n"));
 
   m_options.m_file_name = m_current_arg;
 }

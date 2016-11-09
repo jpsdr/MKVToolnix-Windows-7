@@ -492,7 +492,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(ui->aacIsSBR,
                    Q("%1 %2 %3")
                    .arg(QY("This track contains SBR AAC/HE-AAC/AAC+ data."))
-                   .arg(QY("Only needed for AAC input files as SBR AAC cannot be detected automatically for these files."))
+                   .arg(QY("Only needed for AAC source files as SBR AAC cannot be detected automatically for these files."))
                    .arg(QY("Not needed for AAC tracks read from other container formats like MP4 or Matroska files.")));
   Util::setToolTip(ui->reduceToAudioCore,
                    Q("%1 %2")
@@ -1031,7 +1031,7 @@ Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
         ->title(QY("Adding chapter files"))
         .text(Q("%1 %2 %3 %4")
               .arg(QY("The file '%1' contains chapters.").arg(fileName))
-              .arg(QY("These aren't treated like other input files in MKVToolNix."))
+              .arg(QY("These aren't treated like other source files in MKVToolNix."))
               .arg(QY("Instead such a file must be set via the 'chapter file' option on the 'output' tab."))
               .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
         .onlyOnce(Q("mergeChaptersDropped"))
@@ -1048,7 +1048,7 @@ Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
         ->title(QY("Adding tag files"))
         .text(Q("%1 %2 %3 %4")
               .arg(QY("The file '%1' contains tags.").arg(fileName))
-              .arg(QY("These aren't treated like other input files in MKVToolNix."))
+              .arg(QY("These aren't treated like other source files in MKVToolNix."))
               .arg(QY("Instead such a file must be set via the 'global tags' option on the 'output' tab."))
               .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
         .onlyOnce(Q("mergeTagsDropped"))
@@ -1065,7 +1065,7 @@ Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
         ->title(QY("Adding segment info files"))
         .text(Q("%1 %2 %3 %4")
               .arg(QY("The file '%1' contains segment information.").arg(fileName))
-              .arg(QY("These aren't treated like other input files in MKVToolNix."))
+              .arg(QY("These aren't treated like other source files in MKVToolNix."))
               .arg(QY("Instead such a file must be set via the 'segment info' option on the 'output' tab."))
               .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
         .onlyOnce(Q("mergeSegmentInfoDropped"))
@@ -1303,11 +1303,11 @@ Tab::retranslateInputUI() {
 
   m_startMuxingLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
   m_startMuxingCreateNewSettings->setText(QY("Afterwards create &new merge settings and close the current ones."));
-  m_startMuxingRemoveInputFiles->setText(QY("Afterwards &remove all input files."));
+  m_startMuxingRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
 
   m_addToJobQueueLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
   m_addToJobQueueCreateNewSettings->setText(QY("Afterwards create &new merge settings and close the current ones."));
-  m_addToJobQueueRemoveInputFiles->setText(QY("Afterwards &remove all input files."));
+  m_addToJobQueueRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
 
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
     ui->stereoscopy->setItemText(idx + 1, QString{"%1 (%2; %3)"}.arg(to_qs(stereo_mode_c::translate(idx))).arg(idx).arg(to_qs(stereo_mode_c::s_modes[idx])));

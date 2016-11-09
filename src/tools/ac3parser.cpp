@@ -61,7 +61,7 @@ parse_args(std::vector<std::string> &args) {
       g_opt_frame_headers = true;
 
     else if (!file_name.empty())
-      mxerror(Y("More than one input file given\n"));
+      mxerror(Y("More than one source was file given.\n"));
 
     else
       file_name = arg;

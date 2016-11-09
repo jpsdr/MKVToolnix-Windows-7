@@ -280,7 +280,6 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
   int profile            = -1;
   int output_sample_rate = 0;
   bool sbr               = false;
-  bool extra_data_parsed = false;
 
   if ((dmx->extra_data) && (4 < dmx->extra_data->get_size())) {
     const unsigned char *extra_data = dmx->extra_data->get_buffer();
@@ -288,7 +287,6 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
     mxverb(2, boost::format("real_reader: extra_len: %1%\n") % extra_len);
 
     if ((4 + extra_len) <= dmx->extra_data->get_size()) {
-      extra_data_parsed = true;
       if (!aac::parse_audio_specific_config(&extra_data[4 + 1], extra_len - 1, profile, channels, sample_rate, output_sample_rate, sbr))
         mxerror_tid(m_ti.m_fname, tid, Y("This AAC track does not contain valid headers. Could not parse the AAC information.\n"));
       mxverb(2,
@@ -337,11 +335,6 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
 
   if (AAC_PROFILE_SBR == profile)
     PTZR(dmx->ptzr)->set_audio_output_sampling_freq(output_sample_rate);
-
-  else if (!extra_data_parsed)
-    mxwarn(boost::format(Y("RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases this can NOT be detected automatically. "
-                           "Therefore you have to specifiy '--aac-is-sbr %1%' manually for this input file if the file actually contains SBR AAC. "
-                           "The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n")) % tid);
 
   // AAC packetizers might need the timecode of the first packet in order
   // to fill in stuff. Let's misuse ref_timecode for that.
