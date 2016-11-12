@@ -316,7 +316,7 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbMEnableMuxingTracksByLanguage,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QYH("When adding source files all tracks are normally set to be copied into the destination file."))
-                   .arg(QYH("If this option is enabled then only those tracks will be set to be muxed whose language is selected below."))
+                   .arg(QYH("If this option is enabled then only those tracks will be set to be copied whose language is selected below."))
                    .arg(QYH("You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."))
                    .arg(QYH("Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files).")));
   Util::setToolTip(ui->cbMEnableMuxingAllVideoTracks,    QY("If enabled then tracks of this type will always be set to be copied regardless of their language."));
