@@ -87,9 +87,9 @@ AttachedFileModel::retranslateUi() {
     { QY("MIME type"),        Q("mimeType")       },
     { QY("Copy attachment"),  Q("muxThis")        },
     { QY("Description"),      Q("description")    },
-    { QY("Size"),             Q("size")           },
     { QY("Source file name"), Q("sourceFileName") },
     { QY("Directory"),        Q("directory")      },
+    { QY("Size"),             Q("size")           },
   });
 
   horizontalHeaderItem(SizeColumn)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

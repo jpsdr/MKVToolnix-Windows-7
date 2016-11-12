@@ -24,9 +24,9 @@ protected:
   static int const MIMETypeColumn    = 1;
   static int const MuxThisColumn     = 2;
   static int const DescriptionColumn = 3;
-  static int const SizeColumn        = 4;
-  static int const SourceFileColumn  = 5;
-  static int const SourceDirColumn   = 6;
+  static int const SourceFileColumn  = 4;
+  static int const SourceDirColumn   = 5;
+  static int const SizeColumn        = 6;
   static int const NumberOfColumns   = 7;
 
 public:
