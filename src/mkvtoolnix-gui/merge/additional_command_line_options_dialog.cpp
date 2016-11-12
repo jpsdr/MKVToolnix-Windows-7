@@ -118,7 +118,7 @@ AdditionalCommandLineOptionsDialog::add(QString const &title,
   auto lDescription = new QLabel{this};
   lDescription->setText(description.join(Q(" ")));
   lDescription->setWordWrap(true);
-  layout->addWidget(lDescription, layout->rowCount() - 1, 2, Qt::AlignTop);
+  layout->addWidget(lDescription, layout->rowCount() - 1, layout->columnCount() - 1, Qt::AlignTop);
 
 
   if (requiresValue) {
