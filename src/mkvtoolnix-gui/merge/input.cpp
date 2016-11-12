@@ -1400,7 +1400,7 @@ Tab::setOutputFileNameMaybe() {
   auto currentOutput = ui->output->text();
   QDir outputDir;
 
-  // Don't override custom changes to the output file name.
+  // Don't override custom changes to the destination file name.
   if (   !currentOutput.isEmpty()
       && !m_config.m_destinationAuto.isEmpty()
       && (QDir::toNativeSeparators(currentOutput) != QDir::toNativeSeparators(m_config.m_destinationAuto)))
