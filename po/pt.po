@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-12 15:44+0100\n"
+"POT-Creation-Date: 2016-11-12 20:17+0100\n"
 "PO-Revision-Date: 2016-09-12 23:44+0000\n"
 "Last-Translator: Vítor Barbosa <vitorb79@hotmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/pt/)\n"
@@ -2237,6 +2237,11 @@ msgstr ""
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr ""
 
+#: src/mkvtoolnix-gui/merge/tab.cpp:121
+#, fuzzy, no-c-format
+msgid "<No destination file>"
+msgstr "<sem ficheiro de saída>"
+
 #: src/common/xml/ebml_tags_converter.cpp:93
 msgid "<Simple> is missing the <Name> child."
 msgstr ""
@@ -2249,6 +2254,18 @@ msgstr ""
 msgid "<Tag> is missing the <Simple> child."
 msgstr ""
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
+#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#, fuzzy, no-c-format
+msgid "<Unnamed>"
+msgstr "<sem nome>"
+
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
+#, fuzzy, no-c-format
+msgid "<Unsaved file>"
+msgstr "<Não guardado>"
+
 #: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1319
@@ -2256,29 +2273,15 @@ msgstr ""
 msgid "<do not change>"
 msgstr "<não modificar>"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:121
-#, fuzzy, no-c-format
-msgid "<no destination file>"
-msgstr "<sem ficheiro de saída>"
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:737
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:772
 #, no-c-format
 msgid "<no program selected yet>"
 msgstr "<nenhum programa ainda selecionado>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
-#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-#, no-c-format
 msgid "<unnamed>"
 msgstr "<sem nome>"
-
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
-#, no-c-format
-msgid "<unsaved file>"
-msgstr "<Não guardado>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -2542,7 +2545,7 @@ msgstr ""
 msgid "Add &variable"
 msgstr "Adicionar variável"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:230
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 msgid "Add additional command line options for mkvmerge"
 msgstr "Adicionar opções à linha de comando do mkvmerge"
 
@@ -2667,7 +2670,7 @@ msgstr "Adicionar, juntar ou adicionar como complementos"
 msgid "Additional &modifications"
 msgstr "Modificações adicionais"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 msgid "Additional command line options"
 msgstr "Adicionar opções à linha de comando"
 
@@ -3778,6 +3781,11 @@ msgstr "Converter legendas para este conjunto de caracteres (predefinição: UTF
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Guardar os actuais capítulos num ficheiro XML"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
+#, fuzzy
+msgid "Copy &destination file's name to file title"
+msgstr "Copiar o nome do ficheiro de saída para o título do ficheiro"
+
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
 #, fuzzy, no-c-format
 msgid "Copy attachment"
@@ -3791,10 +3799,6 @@ msgstr "Copiar o nome do primeiro ficheiro de origem para o título do ficheiro"
 #, no-c-format
 msgid "Copy item"
 msgstr ""
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
-msgid "Copy o&utput file's name to file title"
-msgstr "Copiar o nome do ficheiro de saída para o título do ficheiro"
 
 #: src/common/file_types.cpp:75
 msgid "CoreAudio"
@@ -3947,6 +3951,11 @@ msgstr "Cortar:"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
+#, fuzzy
+msgid "Ctrl+D"
+msgstr "Ctrl+A"
+
 #: src/info/ui/mainwindow.h:116
 msgid "Ctrl+E"
 msgstr "CTRL+E"
@@ -3998,10 +4007,6 @@ msgstr "Ctrl+S"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:533
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
-msgid "Ctrl+U"
-msgstr "Ctrl+U"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:477
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:487
@@ -4303,8 +4308,8 @@ msgstr ""
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:235
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:240
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
 #: src/mkvtoolnix-gui/jobs/model.cpp:51
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
@@ -4338,6 +4343,11 @@ msgstr "Nome da pasta de saída"
 msgid "Destination file's name"
 msgstr "Nome do ficheiro de saída"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
+#, fuzzy
+msgid "Destination file:"
+msgstr "Nome do ficheiro de saída"
+
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:242
 msgid "Details"
 msgstr "Detalhes"
@@ -4350,7 +4360,7 @@ msgstr "Detalhes"
 msgid "Determine automatically"
 msgstr "Automaticamente"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:236
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 #, fuzzy
 msgid "Development hacks"
 msgstr "Pistas do segmento"
@@ -4367,7 +4377,7 @@ msgid "Dirac"
 msgstr "Dirac"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
 #, no-c-format
@@ -5354,7 +5364,7 @@ msgstr "Criar subcapítulos"
 msgid "Global options"
 msgstr "Opções globais"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:231
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
 msgid "Global output control"
 msgstr "Opções de saída globais"
 
@@ -7381,8 +7391,8 @@ msgstr[1] "Sair do editor de capítulos"
 msgid "Opening files or adding as attachments"
 msgstr "Acções para a manipulação de anexos"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:233
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:238
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 msgid "Option"
 msgstr "Opção"
 
@@ -7449,10 +7459,6 @@ msgstr ""
 #, no-c-format
 msgid "Output"
 msgstr "Saída"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
-msgid "Output file:"
-msgstr "Nome do ficheiro de saída:"
 
 #: src/common/cli_parser.cpp:181
 msgid "Output messages in this charset"
@@ -7632,7 +7638,8 @@ msgid "Pre&view:"
 msgstr "Pré-visualizar"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
-msgid "Pre&viously used output directory"
+#, fuzzy
+msgid "Pre&viously used destination directory"
 msgstr "Usar a pasta de saída anterior"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:371
@@ -8192,7 +8199,7 @@ msgstr ""
 msgid "Save as &XML file"
 msgstr "Guardar como no formato XML"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:241
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 #, fuzzy
 msgid "Save as &default for new multiplex jobs"
 msgstr "Utilizar como defeito para novas tarefas"
@@ -8426,6 +8433,11 @@ msgstr "Seleccione o ficheiro de capítulos"
 msgid "Select character set"
 msgstr "Seleccione a codificação de caracteres"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
+#, fuzzy, no-c-format
+msgid "Select destination directory"
+msgstr "Indique o nome para o ficheiro de saída"
+
 #: src/mkvtoolnix-gui/merge/output.cpp:278
 #, fuzzy, no-c-format
 msgid "Select destination file name"
@@ -8445,11 +8457,6 @@ msgstr "Seleccione o ficheiro a adicionar"
 #, no-c-format
 msgid "Select one of the ISO639-2 language codes."
 msgstr "Idioma para esta pista. Seleccione um dos códigos ISO639-2."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
-#, no-c-format
-msgid "Select output directory"
-msgstr "Seleccione a pasta de saída"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:308
 #, no-c-format
@@ -8710,7 +8717,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Size"
@@ -8756,7 +8763,7 @@ msgstr "Ficheiros de origem"
 msgid "Source file"
 msgstr "Ficheiro de origem"
 
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
 #, no-c-format
 msgid "Source file name"
@@ -10395,11 +10402,11 @@ msgstr "Não é possivel verificar actualizações. Verifique o estado da ligaç
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:232
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr ""
 
@@ -11195,8 +11202,7 @@ msgstr ""
 msgid "Validation failed"
 msgstr "Falha na validação"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:234
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:239
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 msgid "Value"
 msgstr "Valor"
 
@@ -11463,7 +11469,7 @@ msgid "When a file is added its name is scanned."
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
-msgid "When adding destination files all tracks are normally set to be copied into the output file."
+msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
@@ -12521,6 +12527,9 @@ msgstr "– nenhum –"
 #~ msgid "Countr&y:"
 #~ msgstr "País:"
 
+#~ msgid "Ctrl+U"
+#~ msgstr "Ctrl+U"
+
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Data (inválida, valor: %1%)"
 
@@ -12569,8 +12578,14 @@ msgstr "– nenhum –"
 #~ msgid "Output file name"
 #~ msgstr "Nome do ficheiro de saída"
 
+#~ msgid "Output file:"
+#~ msgstr "Nome do ficheiro de saída:"
+
 #~ msgid "Remove a&ll"
 #~ msgstr "Remover tudo"
+
+#~ msgid "Select output directory"
+#~ msgstr "Seleccione a pasta de saída"
 
 #~ msgid "Subtitle track %1, %2, %3"
 #~ msgstr "Pista de legenda %1, %2, %3"

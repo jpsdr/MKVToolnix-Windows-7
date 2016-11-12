@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-12 15:44+0100\n"
+"POT-Creation-Date: 2016-11-12 20:17+0100\n"
 "PO-Revision-Date: 2016-11-09 17:46+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -2322,6 +2322,11 @@ msgstr "<ChapterDisplay> nie zawiera podrzędnego elementu <ChapterString>."
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> nie zawiera podrzędnego elementu <ChapterTrackNumber>."
 
+#: src/mkvtoolnix-gui/merge/tab.cpp:121
+#, fuzzy, no-c-format
+msgid "<No destination file>"
+msgstr "<brak pliku wyjściowego>"
+
 #: src/common/xml/ebml_tags_converter.cpp:93
 msgid "<Simple> is missing the <Name> child."
 msgstr "<Simple> nie zawiera podrzędnego elementu <Name>."
@@ -2334,6 +2339,18 @@ msgstr "<Simple> musi zawierać podrzędny element <String> lub <Binary>."
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> nie zawiera podrzędnego elementu <Simple>."
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
+#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#, fuzzy, no-c-format
+msgid "<Unnamed>"
+msgstr "<bez nazwy>"
+
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
+#, fuzzy, no-c-format
+msgid "<Unsaved file>"
+msgstr "<niezapisany plik>"
+
 #: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1319
@@ -2341,29 +2358,15 @@ msgstr "<Tag> nie zawiera podrzędnego elementu <Simple>."
 msgid "<do not change>"
 msgstr "<bez zmiany>"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:121
-#, fuzzy, no-c-format
-msgid "<no destination file>"
-msgstr "<brak pliku wyjściowego>"
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:737
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:772
 #, no-c-format
 msgid "<no program selected yet>"
 msgstr "<nie wybrano jeszcze żadnego programu>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
-#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-#, no-c-format
 msgid "<unnamed>"
 msgstr "<bez nazwy>"
-
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
-#, no-c-format
-msgid "<unsaved file>"
-msgstr "<niezapisany plik>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -2626,7 +2629,7 @@ msgstr "Działania związane z tagami i rozdziałami"
 msgid "Add &variable"
 msgstr "Dodaj &zmienną"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:230
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 msgid "Add additional command line options for mkvmerge"
 msgstr "Dodaj dodatkowe opcje linii komend dla mkvmerge"
 
@@ -2751,7 +2754,7 @@ msgstr "Dodawanie, scalanie lub dodawanie jako kolejnych części"
 msgid "Additional &modifications"
 msgstr "Dodatkowe &modyfikacje"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 msgid "Additional command line options"
 msgstr "Dodatkowe opcje linii komend"
 
@@ -3868,6 +3871,11 @@ msgstr "Konwertuj napisy tekstowe do tego zestawu znaków (domyślnie: UTF-8)."
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Konwersja rozdziałów do XML zakończona niepowodzeniem: %1"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
+#, fuzzy
+msgid "Copy &destination file's name to file title"
+msgstr "Skopi&uj nazwę pliku wyjściowego do tytułu pliku "
+
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
 #, fuzzy, no-c-format
 msgid "Copy attachment"
@@ -3881,10 +3889,6 @@ msgstr "Skopiuj nazwę pierwszego pliku źródłowego do &tytułu pliku"
 #, no-c-format
 msgid "Copy item"
 msgstr ""
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
-msgid "Copy o&utput file's name to file title"
-msgstr "Skopi&uj nazwę pliku wyjściowego do tytułu pliku "
 
 #: src/common/file_types.cpp:75
 msgid "CoreAudio"
@@ -4037,6 +4041,11 @@ msgstr "Obcinanie obrazu:"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
+#, fuzzy
+msgid "Ctrl+D"
+msgstr "Ctrl+A"
+
 #: src/info/ui/mainwindow.h:116
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
@@ -4086,10 +4095,6 @@ msgstr "Ctrl+Shift+L"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:533
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
-msgid "Ctrl+U"
-msgstr "Ctrl+U"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:477
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:487
@@ -4390,8 +4395,8 @@ msgstr "Usuń jeden lub więcej załączników"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "W zależności od ustawienia poniżej, język ten może być również użyty, jeśli język w pliku źródłowym jest nieokreślony (\"undetermined\" → \"und\")."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:235
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:240
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
 #: src/mkvtoolnix-gui/jobs/model.cpp:51
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
@@ -4425,6 +4430,11 @@ msgstr "Katalog pliku wyjściowego"
 msgid "Destination file's name"
 msgstr "Nazwa pliku wyjściowego"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
+#, fuzzy
+msgid "Destination file:"
+msgstr "Nazwa pliku wyjściowego"
+
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:242
 msgid "Details"
 msgstr "Szczegóły"
@@ -4437,7 +4447,7 @@ msgstr "Szczegóły"
 msgid "Determine automatically"
 msgstr "Ustal automatycznie"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:236
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 msgid "Development hacks"
 msgstr "Hacki deweloperskie"
 
@@ -4453,7 +4463,7 @@ msgid "Dirac"
 msgstr "Dirac"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
 #, no-c-format
@@ -5435,7 +5445,7 @@ msgstr "Tworzenie rozdziałów:"
 msgid "Global options"
 msgstr "Opcje globalne"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:231
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
 msgid "Global output control"
 msgstr "Kontrola pliku wyjściowego"
 
@@ -7470,8 +7480,8 @@ msgstr[2] "Otwieranie %1 plików w edytorze nagłówków..."
 msgid "Opening files or adding as attachments"
 msgstr "Otwieranie plików lub dodawanie jako załączników"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:233
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:238
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 msgid "Option"
 msgstr "Opcja"
 
@@ -7537,10 +7547,6 @@ msgstr "W innym przypadku zostanie przeniesione do zakładki \"Wyjście\"."
 #, no-c-format
 msgid "Output"
 msgstr "Wyjście"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
-msgid "Output file:"
-msgstr "Plik wyjściowy:"
 
 #: src/common/cli_parser.cpp:181
 msgid "Output messages in this charset"
@@ -7725,7 +7731,8 @@ msgid "Pre&view:"
 msgstr "&Podgląd:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
-msgid "Pre&viously used output directory"
+#, fuzzy
+msgid "Pre&viously used destination directory"
 msgstr "&Poprzednio użyty katalog wyjściowy"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:371
@@ -8281,7 +8288,7 @@ msgstr "Częstotliwość próbkowania: %1%"
 msgid "Save as &XML file"
 msgstr "Zapisz do pliku &XML"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:241
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 #, fuzzy
 msgid "Save as &default for new multiplex jobs"
 msgstr "Zapisz jako &domyślne dla nowych zadań"
@@ -8515,6 +8522,11 @@ msgstr "Wybierz plik rozdziałów"
 msgid "Select character set"
 msgstr "Wybierz zestaw znaków"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
+#, fuzzy, no-c-format
+msgid "Select destination directory"
+msgstr "Wybierz nazwę pliku wyjściowego"
+
 #: src/mkvtoolnix-gui/merge/output.cpp:278
 #, fuzzy, no-c-format
 msgid "Select destination file name"
@@ -8534,11 +8546,6 @@ msgstr "Wybierz plik do dodania"
 #, no-c-format
 msgid "Select one of the ISO639-2 language codes."
 msgstr "Wybierz jeden z kodów językowych ISO639-2."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
-#, no-c-format
-msgid "Select output directory"
-msgstr "Wybierz folder wyjściowy"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:308
 #, no-c-format
@@ -8797,7 +8804,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "Wykryto pojedynczą klatkę przed nagłówkiem GOP. Napraw ścieżkę obrazu MPEG2 zanim zaczniesz ją muksować.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Size"
@@ -8843,7 +8850,7 @@ msgstr "P&liki źródłowe:"
 msgid "Source file"
 msgstr "Plik źródłowy"
 
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
 #, no-c-format
 msgid "Source file name"
@@ -10486,11 +10493,11 @@ msgstr "Wystąpił błąd podczas sprawdzania aktualizacji."
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "Wystąpiły błędy w wartościach nagłówków uniemożliwiające zapis tych nagłówków. Został wybrany pierwszy z błędów."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:232
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
 msgstr "Kilka rzadziej używanych opcji, które kontrolują strukturę plików wyjściowych tworzonych przez mkvmerge."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "Te opcje służą do rozwoju aplikacji. Nie są oficjalnie wspierane i mogą ulec zmianie z wydania na wydanie."
 
@@ -11287,8 +11294,7 @@ msgstr "Poprawnymi hackami są:\n"
 msgid "Validation failed"
 msgstr "Walidacja zakończona niepowodzeniem"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:234
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:239
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 msgid "Value"
 msgstr "Wartość"
 
@@ -11555,7 +11561,7 @@ msgstr "Gdy plik jest dodawany, wtedy jego nazwa jest skanowana."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #, fuzzy
-msgid "When adding destination files all tracks are normally set to be copied into the output file."
+msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr "Podczas dodawania plików źródłowych wszystkie ścieżki są standardowo przeznaczone do muksowania do pliku wyjściowego (wówczas wszystkie pola wyboru są domyślnie zaznaczone)."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
@@ -12632,6 +12638,9 @@ msgstr "– ustaw na żadne –"
 #~ msgid "Countr&y:"
 #~ msgstr "&Państwo:"
 
+#~ msgid "Ctrl+U"
+#~ msgstr "Ctrl+U"
+
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Data (nieprawidłowa, wartość: %1%)"
 
@@ -12695,6 +12704,9 @@ msgstr "– ustaw na żadne –"
 #~ msgid "Output file name"
 #~ msgstr "Nazwa pliku wyjściowego"
 
+#~ msgid "Output file:"
+#~ msgstr "Plik wyjściowy:"
+
 #~ msgid ""
 #~ "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases "
 #~ "this can NOT be detected automatically. Therefore you have to specifiy '--"
@@ -12710,6 +12722,9 @@ msgstr "– ustaw na żadne –"
 
 #~ msgid "Remove a&ll"
 #~ msgstr "&Usuń wszystko"
+
+#~ msgid "Select output directory"
+#~ msgstr "Wybierz folder wyjściowy"
 
 #~ msgid ""
 #~ "The AVC video track is missing the 'CTTS' atom for frame timecode "

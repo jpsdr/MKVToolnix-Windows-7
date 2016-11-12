@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-12 15:44+0100\n"
+"POT-Creation-Date: 2016-11-12 20:17+0100\n"
 "PO-Revision-Date: 2016-10-23 21:42+0000\n"
 "Last-Translator: Frank Waiichou <frankwaiichou@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -2244,6 +2244,11 @@ msgstr "<ChapterDisplay> 缺少 <ChapterString> 子元素。"
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> 缺少 <ChapterTrackNumber> 子元素。"
 
+#: src/mkvtoolnix-gui/merge/tab.cpp:121
+#, fuzzy, no-c-format
+msgid "<No destination file>"
+msgstr "<无输出文件>"
+
 #: src/common/xml/ebml_tags_converter.cpp:93
 msgid "<Simple> is missing the <Name> child."
 msgstr "<Simple> 缺少 <Name> 子元素。"
@@ -2256,6 +2261,18 @@ msgstr "<Simple> 必须包含 <String> 或 <Binary> 子元素。"
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> 缺少 <Simple> 子元素。"
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
+#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#, fuzzy, no-c-format
+msgid "<Unnamed>"
+msgstr "<未命名>"
+
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
+#, fuzzy, no-c-format
+msgid "<Unsaved file>"
+msgstr "<未保存文件>"
+
 #: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1319
@@ -2263,29 +2280,15 @@ msgstr "<Tag> 缺少 <Simple> 子元素。"
 msgid "<do not change>"
 msgstr "<不更改>"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:121
-#, fuzzy, no-c-format
-msgid "<no destination file>"
-msgstr "<无输出文件>"
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:737
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:772
 #, no-c-format
 msgid "<no program selected yet>"
 msgstr "<尚未选择程序>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
-#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-#, no-c-format
 msgid "<unnamed>"
 msgstr "<未命名>"
-
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
-#, no-c-format
-msgid "<unsaved file>"
-msgstr "<未保存文件>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -2541,7 +2544,7 @@ msgstr "处理标签与章节的操作"
 msgid "Add &variable"
 msgstr "添加变量(&V)"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:230
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 msgid "Add additional command line options for mkvmerge"
 msgstr "添加 mkvmerge 的额外命令行选项"
 
@@ -2666,7 +2669,7 @@ msgstr "添加、追加或作为其余部分添加"
 msgid "Additional &modifications"
 msgstr "更多批量修改选项(&M)"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 msgid "Additional command line options"
 msgstr "额外命令行选项"
 
@@ -3779,6 +3782,11 @@ msgstr "将文本字幕转换为指定字符集 (默认：UTF-8)。"
 msgid "Converting the chapters to XML failed: %1"
 msgstr "将章节转换为 XML 失败：%1"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
+#, fuzzy
+msgid "Copy &destination file's name to file title"
+msgstr "将输出文件的名称用作文件标题(&U)"
+
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
 #, fuzzy, no-c-format
 msgid "Copy attachment"
@@ -3792,10 +3800,6 @@ msgstr "将第一个源文件的名称用作文件标题(&T)"
 #, no-c-format
 msgid "Copy item"
 msgstr ""
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
-msgid "Copy o&utput file's name to file title"
-msgstr "将输出文件的名称用作文件标题(&U)"
 
 #: src/common/file_types.cpp:75
 msgid "CoreAudio"
@@ -3948,6 +3952,11 @@ msgstr "画面裁剪："
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
+#, fuzzy
+msgid "Ctrl+D"
+msgstr "Ctrl+A"
+
 #: src/info/ui/mainwindow.h:116
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
@@ -3997,10 +4006,6 @@ msgstr "Ctrl+Shift+L"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:533
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
-msgid "Ctrl+U"
-msgstr "Ctrl+U"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:477
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:487
@@ -4301,8 +4306,8 @@ msgstr "删除一个或多个附件"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "根据下面的设置，可以在源文件中的语言为“未指定”('und') 时使用此处设置的语言。"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:235
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:240
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
 #: src/mkvtoolnix-gui/jobs/model.cpp:51
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
@@ -4336,6 +4341,11 @@ msgstr "输出文件所在目录"
 msgid "Destination file's name"
 msgstr "输出文件名"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
+#, fuzzy
+msgid "Destination file:"
+msgstr "输出文件名"
+
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:242
 msgid "Details"
 msgstr "详细信息"
@@ -4348,7 +4358,7 @@ msgstr "详细信息"
 msgid "Determine automatically"
 msgstr "自动决定"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:236
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 msgid "Development hacks"
 msgstr "面向开发的 hack"
 
@@ -4364,7 +4374,7 @@ msgid "Dirac"
 msgstr "Dirac"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
 #, no-c-format
@@ -5343,7 +5353,7 @@ msgstr "生成章节:"
 msgid "Global options"
 msgstr "全局选项"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:231
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
 msgid "Global output control"
 msgstr "全局输出控制"
 
@@ -7366,8 +7376,8 @@ msgstr[0] "使用头部编辑器打开 %1 个文件…"
 msgid "Opening files or adding as attachments"
 msgstr "打开文件或添加为附件"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:233
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:238
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 msgid "Option"
 msgstr "选项"
 
@@ -7433,10 +7443,6 @@ msgstr "否则它们会在“输出”选项卡中显示。"
 #, no-c-format
 msgid "Output"
 msgstr "输出"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
-msgid "Output file:"
-msgstr "输出文件："
 
 #: src/common/cli_parser.cpp:181
 msgid "Output messages in this charset"
@@ -7617,7 +7623,8 @@ msgid "Pre&view:"
 msgstr "预览(&V)："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
-msgid "Pre&viously used output directory"
+#, fuzzy
+msgid "Pre&viously used destination directory"
 msgstr "上次使用的输出目录(&V)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:371
@@ -8173,7 +8180,7 @@ msgstr "采样率：%1%"
 msgid "Save as &XML file"
 msgstr "保存为 &XML 文件"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:241
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 #, fuzzy
 msgid "Save as &default for new multiplex jobs"
 msgstr "保存为新建合并任务的默认参数(&D)"
@@ -8405,6 +8412,11 @@ msgstr "选择章节文件"
 msgid "Select character set"
 msgstr "选择字符集"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
+#, fuzzy, no-c-format
+msgid "Select destination directory"
+msgstr "选择输出文件名"
+
 #: src/mkvtoolnix-gui/merge/output.cpp:278
 #, fuzzy, no-c-format
 msgid "Select destination file name"
@@ -8424,11 +8436,6 @@ msgstr "选择要添加的文件"
 #, no-c-format
 msgid "Select one of the ISO639-2 language codes."
 msgstr "选择一个 ISO639-2 语言代码。"
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
-#, no-c-format
-msgid "Select output directory"
-msgstr "选择输出目录"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:308
 #, no-c-format
@@ -8679,7 +8686,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "在 GOP 画面组头前检测到单场帧。尝试合成前请先修复 MPEG2 视频流。\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Size"
@@ -8725,7 +8732,7 @@ msgstr "源文件(&F):"
 msgid "Source file"
 msgstr "源文件"
 
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
 #, no-c-format
 msgid "Source file name"
@@ -10352,11 +10359,11 @@ msgstr "查询更新信息时出错。"
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "某些头部值出现错误导致无法保存头部。第一处错误已被选中。"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:232
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
 msgstr "这些是不常用的选项，用以控制 mkvmerge 生成的输出文件的结构。"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "这些是用于开发的选项。不受官方支持，且可能随版本不同而变动。"
 
@@ -11149,8 +11156,7 @@ msgstr "有效的 hack 列表：\n"
 msgid "Validation failed"
 msgstr "验证失败"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:234
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:239
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 msgid "Value"
 msgstr "值"
 
@@ -11415,7 +11421,7 @@ msgstr "当文件被添加时，其文件名会被扫描。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #, fuzzy
-msgid "When adding destination files all tracks are normally set to be copied into the output file."
+msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr "添加文件时通常所有轨道都会被设置为用于合并到输出文件中。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
@@ -12475,6 +12481,9 @@ msgstr "– 设为空 –"
 #~ msgid "Countr&y:"
 #~ msgstr "国家(&Y)："
 
+#~ msgid "Ctrl+U"
+#~ msgstr "Ctrl+U"
+
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "日期 (无效，值：%1%)"
 
@@ -12535,11 +12544,17 @@ msgstr "– 设为空 –"
 #~ msgid "Output file name"
 #~ msgstr "输出文件名"
 
+#~ msgid "Output file:"
+#~ msgstr "输出文件："
+
 #~ msgid "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases this can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr %1%' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 #~ msgstr "RealMedia 文件可能包含 HE-AAC / AAC+ / SBR AAC 音频。某些情况下这*无法*自动侦测得出。因此，如果输入文件确实包含 SBR AAC，您需要手动为该文件指定“--aac-is-sbr %1%”。否则文件将被以*错误*的方式混流。参阅 mkvmerge 帮助文档。\n"
 
 #~ msgid "Remove a&ll"
 #~ msgstr "全部移除(&L)"
+
+#~ msgid "Select output directory"
+#~ msgstr "选择输出目录"
 
 #~ msgid "The AVC video track is missing the 'CTTS' atom for frame timecode offsets. However, AVC/h.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timecodes for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timecodes right. As it is missing the timecodes for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
 #~ msgstr "此 AVC 视频轨道缺少 'CTTS' 帧时间码偏移量单元。相比传统的 P 帧一个、B 帧两个，AVC/h.264 帧可以有更多的参考帧，此类帧的时间码会不按顺序排列，为使时间码正确，'CTTS' 单元是必需的。由于其缺失，此轨道的时间码可能出错。请查看生成的文件以确认其是否符合预期。\n"

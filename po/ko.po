@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-12 15:44+0100\n"
+"POT-Creation-Date: 2016-11-12 20:17+0100\n"
 "PO-Revision-Date: 2016-11-05 03:59+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -2283,6 +2283,11 @@ msgstr "<ChapterDisplay>는 <ChapterString> 자식 요소가 누락되어 있습
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack>은 <ChapterTrackNumber> 자식 요소가 누락되어 있습니다."
 
+#: src/mkvtoolnix-gui/merge/tab.cpp:121
+#, fuzzy, no-c-format
+msgid "<No destination file>"
+msgstr "<출력 파일 없음>"
+
 #: src/common/xml/ebml_tags_converter.cpp:93
 msgid "<Simple> is missing the <Name> child."
 msgstr "<Simple>은 <Name> 자식 요소가 누락되어 있습니다."
@@ -2295,6 +2300,18 @@ msgstr "<Simple>은 <String> 또는 <Binary> 자식 요소 중 하나라도 포�
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag>는 <Simple> 자식 요소가 누락되어 있습니다."
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
+#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#, fuzzy, no-c-format
+msgid "<Unnamed>"
+msgstr "<이름 없음>"
+
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
+#, fuzzy, no-c-format
+msgid "<Unsaved file>"
+msgstr "<미저장 파일>"
+
 #: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1319
@@ -2302,29 +2319,15 @@ msgstr "<Tag>는 <Simple> 자식 요소가 누락되어 있습니다."
 msgid "<do not change>"
 msgstr "<변경 없음>"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:121
-#, fuzzy, no-c-format
-msgid "<no destination file>"
-msgstr "<출력 파일 없음>"
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:737
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:772
 #, no-c-format
 msgid "<no program selected yet>"
 msgstr "<선택한 프로그램이 아직 없음>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
-#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-#, no-c-format
 msgid "<unnamed>"
 msgstr "<이름 없음>"
-
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
-#, no-c-format
-msgid "<unsaved file>"
-msgstr "<미저장 파일>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -2583,7 +2586,7 @@ msgstr "테그와 챕터를 처리하는 동작"
 msgid "Add &variable"
 msgstr "변수 추가(&V)"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:230
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 msgid "Add additional command line options for mkvmerge"
 msgstr "mkvmerge에 추가 명령행 옵션을 추가합니다"
 
@@ -2708,7 +2711,7 @@ msgstr "추가하기, 결합하기, 추가 부분으로 추가하기"
 msgid "Additional &modifications"
 msgstr "추가 변경(&M)"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 msgid "Additional command line options"
 msgstr "추가 명령행 옵션"
 
@@ -3819,6 +3822,11 @@ msgstr "텍스트 자막을 이 문자 인코딩으로 변환합니다. (기본�
 msgid "Converting the chapters to XML failed: %1"
 msgstr "챕터를 XML로 변환 실패: %1"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
+#, fuzzy
+msgid "Copy &destination file's name to file title"
+msgstr "출력 파일명을 파일 제목으로 복사(&U)"
+
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
 #, fuzzy, no-c-format
 msgid "Copy attachment"
@@ -3832,10 +3840,6 @@ msgstr "파일 소스의 파일명을 파일 제목으로 복사(&F)"
 #, no-c-format
 msgid "Copy item"
 msgstr ""
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
-msgid "Copy o&utput file's name to file title"
-msgstr "출력 파일명을 파일 제목으로 복사(&U)"
 
 #: src/common/file_types.cpp:75
 msgid "CoreAudio"
@@ -3988,6 +3992,11 @@ msgstr "잘라내기:"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
+#, fuzzy
+msgid "Ctrl+D"
+msgstr "Ctrl+A"
+
 #: src/info/ui/mainwindow.h:116
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
@@ -4037,10 +4046,6 @@ msgstr "Ctrl+Shift+L"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:533
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
-msgid "Ctrl+U"
-msgstr "Ctrl+U"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:477
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:487
@@ -4341,8 +4346,8 @@ msgstr "하나 이상의 첨부 파일을 삭제합니다"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "아래 설정에 따라서 소스 파일의 언어가 '미정의' ('und') 상태이면, 이 언어도 사용될 수 있습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:235
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:240
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
 #: src/mkvtoolnix-gui/jobs/model.cpp:51
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
@@ -4376,6 +4381,11 @@ msgstr "출력 파일 폴더"
 msgid "Destination file's name"
 msgstr "출력 파일명"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
+#, fuzzy
+msgid "Destination file:"
+msgstr "출력 파일명"
+
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:242
 msgid "Details"
 msgstr "자세히"
@@ -4388,7 +4398,7 @@ msgstr "자세히"
 msgid "Determine automatically"
 msgstr "자동으로 결정"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:236
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 msgid "Development hacks"
 msgstr "개발 핵"
 
@@ -4404,7 +4414,7 @@ msgid "Dirac"
 msgstr "Dirac"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
 #, no-c-format
@@ -5383,7 +5393,7 @@ msgstr "챕터 만들기:"
 msgid "Global options"
 msgstr "전역 옵션"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:231
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
 msgid "Global output control"
 msgstr "전역 출력 제어"
 
@@ -7406,8 +7416,8 @@ msgstr[0] "%1 파일을 헤더 편집기에서 여는 중..."
 msgid "Opening files or adding as attachments"
 msgstr "파일을 열거나 첨부 파일로 추가하는 중"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:233
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:238
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 msgid "Option"
 msgstr "옵션"
 
@@ -7473,10 +7483,6 @@ msgstr "아니면 '출력' 탭에 표시됩니다."
 #, no-c-format
 msgid "Output"
 msgstr "출력"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
-msgid "Output file:"
-msgstr "출력 파일:"
 
 #: src/common/cli_parser.cpp:181
 msgid "Output messages in this charset"
@@ -7658,7 +7664,8 @@ msgid "Pre&view:"
 msgstr "미리보기(&V):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
-msgid "Pre&viously used output directory"
+#, fuzzy
+msgid "Pre&viously used destination directory"
 msgstr "이전에 사용한 출력 폴더(&V)"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:371
@@ -8216,7 +8223,7 @@ msgstr "샘플링 주파수: %1%"
 msgid "Save as &XML file"
 msgstr "&XML 파일로 저장"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:241
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 #, fuzzy
 msgid "Save as &default for new multiplex jobs"
 msgstr "새 합치기 작업의 기본값으로 저장하기(&D)"
@@ -8448,6 +8455,11 @@ msgstr "챕터 파일 선택"
 msgid "Select character set"
 msgstr "문자셋 선택"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
+#, fuzzy, no-c-format
+msgid "Select destination directory"
+msgstr "출력 파일명 선택"
+
 #: src/mkvtoolnix-gui/merge/output.cpp:278
 #, fuzzy, no-c-format
 msgid "Select destination file name"
@@ -8467,11 +8479,6 @@ msgstr "추가할 파일 선택"
 #, no-c-format
 msgid "Select one of the ISO639-2 language codes."
 msgstr "ISO639-2 언어 코드 중 하나를 선택하세요."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
-#, no-c-format
-msgid "Select output directory"
-msgstr "출력 폴더 선택"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:308
 #, no-c-format
@@ -8729,7 +8736,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "GOP(Group Of Picture) 헤더 이전에 하나의 필드 프레임이 검색되었습니다. MUX를 시도하려고 하기 전에 이 MPEG2 비디오 스트림을 수정하십시오.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Size"
@@ -8775,7 +8782,7 @@ msgstr "소스 파일(&F):"
 msgid "Source file"
 msgstr "소스 파일"
 
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
 #, no-c-format
 msgid "Source file name"
@@ -10404,11 +10411,11 @@ msgstr "업데이트 상태를 확인하는 동안 오류가 발생했습니다.
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "헤더 값에 오류가 있어 헤더를 저장할 수 없습니다. 첫 번째 오류가 선택되어 있습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:232
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
 msgstr "이것들은 mkvmerge가 생성하는 출력 구조를 제어하는데 덜 자주 사용되는 옵션입니다."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "이것들은 개발 중이라는 뜻의 옵션입니다. 공식적으로는 지원하지 않으며 배포시마다 바뀔 수 있습니다."
 
@@ -11203,8 +11210,7 @@ msgstr "유효한 해킹:\n"
 msgid "Validation failed"
 msgstr "검증 실패"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:234
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:239
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 msgid "Value"
 msgstr "값"
 
@@ -11469,7 +11475,7 @@ msgstr "파일 추가시 그 이름을 검색합니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #, fuzzy
-msgid "When adding destination files all tracks are normally set to be copied into the output file."
+msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr "소스 파일 추가시, 기본적으로 모든 트랙을 출력 파일에 먹스하도록 되어 있습니다."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
@@ -12514,6 +12520,9 @@ msgstr "– 없음으로 설정 –"
 #~ msgid "Always remove the job afterwards"
 #~ msgstr "항상 나중에 작업 삭제"
 
+#~ msgid "Ctrl+U"
+#~ msgstr "Ctrl+U"
+
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "날짜 (잘못된 값: %1%)"
 
@@ -12568,8 +12577,14 @@ msgstr "– 없음으로 설정 –"
 #~ msgid "Output file name"
 #~ msgstr "출력 파일명"
 
+#~ msgid "Output file:"
+#~ msgstr "출력 파일:"
+
 #~ msgid "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases this can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr %1%' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 #~ msgstr "RealMedia 파일은 HE-AAC / AAC+ / SBR AAC 오디오가 포함되어 있을 수 있습니다. 간혹 이것은 자동으로 감지하지 못할 수 있습니다. 따라서 이 입력 파일이 실제로 SBR AAC가 포함되어 있을 경우, '--aac-is-sbr %1%'옵션을 수동으로 지정하지 않으면 안 됩니다. 그렇지 않으면 잘못된 MUX가 이루어집니다. mkvmerge 문서도 읽어보십시오.\n"
+
+#~ msgid "Select output directory"
+#~ msgstr "출력 폴더 선택"
 
 #~ msgid "The AVC video track is missing the 'CTTS' atom for frame timecode offsets. However, AVC/h.264 allows frames to have more than the traditional one (for P frames) or two (for B frames) references to other frames. The timecodes for such frames will be out-of-order, and the 'CTTS' atom is needed for getting the timecodes right. As it is missing the timecodes for this track might be wrong. You should watch the resulting file and make sure that it looks like you expected it to.\n"
 #~ msgstr "이 AVC 비디오 트랙에는 프레임 타임코드를 보정하는 'CTTS' atom이 누락되어 있습니다. 하지만, AVC/h.264에서는 전통적인 하나(P프레임인 경우) 또는 두개(B프레임인 경우) 보다 더 많은 다른 프레임을 참조하는 것이 허락되어 있습니다. 이 같은 프레임의 타임코드는 순서대로가 아니며(정렬되어 있지 않으며), 'CTTS' atom은 이 타임코드를 보정하기 위해 필요합니다. 그것이 누락되어 있기 때문에, 이 트랙의 타임코드는 잘못되었는지도 모릅니다. 출력 파일을 시청하면서 예상대로 보이는지 확인하십시오.\n"

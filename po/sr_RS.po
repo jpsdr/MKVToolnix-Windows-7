@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-12 15:44+0100\n"
+"POT-Creation-Date: 2016-11-12 20:17+0100\n"
 "PO-Revision-Date: 2015-12-16 10:24+0100\n"
 "Last-Translator: Jay Alexander Fleming <tito.nehru.naser@gmail.com>\n"
 "Language-Team: Serbian <moritz@bunkus.org>\n"
@@ -2382,6 +2382,11 @@ msgstr "<ChapterDisplay> не садржи под-елеменат <ChapterStrin
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> не садржи под-елеменат <ChapterTrackNumber>."
 
+#: src/mkvtoolnix-gui/merge/tab.cpp:121
+#, fuzzy, no-c-format
+msgid "<No destination file>"
+msgstr "<без исходишне датотеке>"
+
 #: src/common/xml/ebml_tags_converter.cpp:93
 msgid "<Simple> is missing the <Name> child."
 msgstr "<Simple> не садржи под-елеменат <Name>."
@@ -2394,6 +2399,18 @@ msgstr "<Simple> мора да садржи или <String> или <Binary> по
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> не садржи под-елеменат <Simple>."
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
+#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#, fuzzy, no-c-format
+msgid "<Unnamed>"
+msgstr "<без назива>"
+
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
+#, fuzzy, no-c-format
+msgid "<Unsaved file>"
+msgstr "<несачувана датотека>"
+
 #: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1319
@@ -2401,29 +2418,15 @@ msgstr "<Tag> не садржи под-елеменат <Simple>."
 msgid "<do not change>"
 msgstr "<не мењај>"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:121
-#, fuzzy, no-c-format
-msgid "<no destination file>"
-msgstr "<без исходишне датотеке>"
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:737
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:772
 #, fuzzy, no-c-format
 msgid "<no program selected yet>"
 msgstr "нема започете радње"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
-#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-#, no-c-format
 msgid "<unnamed>"
 msgstr "<без назива>"
-
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
-#, no-c-format
-msgid "<unsaved file>"
-msgstr "<несачувана датотека>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -2690,7 +2693,7 @@ msgstr "Управљачке радње за ознаке и поглавља"
 msgid "Add &variable"
 msgstr "Доступно:"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:230
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 msgid "Add additional command line options for mkvmerge"
 msgstr "Додај допунске опције за линију наредбе Мкв-спојнице"
 
@@ -2816,7 +2819,7 @@ msgstr "Додавање, придруживање или додавање пр�
 msgid "Additional &modifications"
 msgstr "Додатне из&мене"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 msgid "Additional command line options"
 msgstr "Допунске опције линије наредби"
 
@@ -3941,6 +3944,11 @@ msgstr "Измени кодну страну текст. поднаписа (п�
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Није успело прекодирање поглавља у ИксМЛ: %1"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
+#, fuzzy
+msgid "Copy &destination file's name to file title"
+msgstr "Назив исходишне датотеке"
+
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
 #, fuzzy, no-c-format
 msgid "Copy attachment"
@@ -3954,11 +3962,6 @@ msgstr ""
 #, no-c-format
 msgid "Copy item"
 msgstr ""
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
-#, fuzzy
-msgid "Copy o&utput file's name to file title"
-msgstr "Назив исходишне датотеке"
 
 #: src/common/file_types.cpp:75
 msgid "CoreAudio"
@@ -4111,6 +4114,11 @@ msgstr "Орезивање:"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
+#, fuzzy
+msgid "Ctrl+D"
+msgstr "Ctrl+A"
+
 #: src/info/ui/mainwindow.h:116
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
@@ -4162,11 +4170,6 @@ msgstr "Ctrl+S"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:533
 #, fuzzy
 msgid "Ctrl+T"
-msgstr "Ctrl+A"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
-#, fuzzy
-msgid "Ctrl+U"
 msgstr "Ctrl+A"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:477
@@ -4473,8 +4476,8 @@ msgstr "Уклања један или више прилога"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:235
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:240
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
 #: src/mkvtoolnix-gui/jobs/model.cpp:51
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
@@ -4508,6 +4511,11 @@ msgstr "Назив исходишне датотеке"
 msgid "Destination file's name"
 msgstr "Назив исходишне датотеке"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
+#, fuzzy
+msgid "Destination file:"
+msgstr "Назив исходишне датотеке"
+
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:242
 msgid "Details"
 msgstr "Детаљи"
@@ -4520,7 +4528,7 @@ msgstr "Детаљи"
 msgid "Determine automatically"
 msgstr "одлучи сам"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:236
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 msgid "Development hacks"
 msgstr "Развојна хаковања"
 
@@ -4536,7 +4544,7 @@ msgid "Dirac"
 msgstr "Дирак"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
 #, no-c-format
@@ -5525,7 +5533,7 @@ msgstr "Створи потпоглавља"
 msgid "Global options"
 msgstr "Опште поставке"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:231
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
 msgid "Global output control"
 msgstr "Руковање излазом"
 
@@ -7565,8 +7573,8 @@ msgstr[2] "Уредником заглавља отвори %1 датотека.
 msgid "Opening files or adding as attachments"
 msgstr "Управљачке радње за прилоге"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:233
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:238
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 msgid "Option"
 msgstr "Опција"
 
@@ -7633,10 +7641,6 @@ msgstr "У супротном, приказаће се само у језичк�
 #, fuzzy, no-c-format
 msgid "Output"
 msgstr "&Исходиште"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
-msgid "Output file:"
-msgstr "Исходишна датотека:"
 
 #: src/common/cli_parser.cpp:181
 msgid "Output messages in this charset"
@@ -7820,7 +7824,8 @@ msgid "Pre&view:"
 msgstr "Пре&глед:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
-msgid "Pre&viously used output directory"
+#, fuzzy
+msgid "Pre&viously used destination directory"
 msgstr "Прет&ходно употребљен одредишни директоријум"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:371
@@ -8380,7 +8385,7 @@ msgstr "Учестаност узорковања: %1%"
 msgid "Save as &XML file"
 msgstr "Сачувај у И&ксМЛ датотеци"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:241
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 #, fuzzy
 msgid "Save as &default for new multiplex jobs"
 msgstr "Сачувај као &подразумевано за нова сједињавања"
@@ -8614,6 +8619,11 @@ msgstr "Одаберите датотеку поглавља"
 msgid "Select character set"
 msgstr "Одаберите кодну страну"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
+#, fuzzy, no-c-format
+msgid "Select destination directory"
+msgstr "Одаберите назив исходишне датотеке"
+
 #: src/mkvtoolnix-gui/merge/output.cpp:278
 #, fuzzy, no-c-format
 msgid "Select destination file name"
@@ -8633,11 +8643,6 @@ msgstr "Одаберите датотеку коју желите да дода�
 #, no-c-format
 msgid "Select one of the ISO639-2 language codes."
 msgstr "Одаберите један од ИСО639-2 језичких кодова."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
-#, no-c-format
-msgid "Select output directory"
-msgstr "Одаберите одредишни директоријум"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:308
 #, no-c-format
@@ -8904,7 +8909,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "Откривен је кадар са једним пољем пре заглавља „групе слика“ (енг. „GOP“). Поправите Мпег2-видео пре покушаја сједињавања.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Size"
@@ -8951,7 +8956,7 @@ msgstr "Изворна датотека"
 msgid "Source file"
 msgstr "Изворна датотека"
 
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
 #, no-c-format
 msgid "Source file name"
@@ -10611,11 +10616,11 @@ msgstr "Дошло је до грешке приликом провере ста
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "Неправилности у вредностима заглавља су спречиле чување заглавља и довеле до погрешака. Одабрана је прва грешка."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:232
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
 msgstr "Ово су ређе употребљаване опције за руковање излазним устројством које ствара Мкв-спојница."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "Ово су опције намењене развоју програма. Оне нису службено подржане и могу се мењати од издања до издања."
 
@@ -11415,8 +11420,7 @@ msgstr "Ваљана хаковања су:\n"
 msgid "Validation failed"
 msgstr "Неуспешна провера"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:234
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:239
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 msgid "Value"
 msgstr "Вредност"
 
@@ -11687,7 +11691,7 @@ msgstr "Додавањем датотеке истражен је њен наз�
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #, fuzzy
-msgid "When adding destination files all tracks are normally set to be copied into the output file."
+msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr "При додавању изворних датотека сви записи се уобичајено постављају за сједињавање у исходишну датотеку."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
@@ -12771,6 +12775,9 @@ msgstr "— не постављај —"
 #~ msgid "Countr&y:"
 #~ msgstr "&Земља:"
 
+#~ msgid "Ctrl+U"
+#~ msgstr "Ctrl+A"
+
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Датум (неважећи, вредност: %1%)"
 
@@ -12834,6 +12841,9 @@ msgstr "— не постављај —"
 #~ msgid "Output file name"
 #~ msgstr "Назив исходишне датотеке"
 
+#~ msgid "Output file:"
+#~ msgstr "Исходишна датотека:"
+
 #~ msgid ""
 #~ "RealMedia files may contain HE-AAC / AAC+ / SBR AAC audio. In some cases "
 #~ "this can NOT be detected automatically. Therefore you have to specifiy '--"
@@ -12849,6 +12859,9 @@ msgstr "— не постављај —"
 
 #~ msgid "Remove a&ll"
 #~ msgstr "Уклони с&ве"
+
+#~ msgid "Select output directory"
+#~ msgstr "Одаберите одредишни директоријум"
 
 #~ msgid ""
 #~ "The AVC video track is missing the 'CTTS' atom for frame timecode "

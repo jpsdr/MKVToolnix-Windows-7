@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-12 15:44+0100\n"
+"POT-Creation-Date: 2016-11-12 20:17+0100\n"
 "PO-Revision-Date: 2016-10-14 19:16+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -2344,6 +2344,11 @@ msgstr "<ChapterDisplay> пропускає складову <ChapterString>."
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> пропускає складову <ChapterTrackNumber>."
 
+#: src/mkvtoolnix-gui/merge/tab.cpp:121
+#, fuzzy, no-c-format
+msgid "<No destination file>"
+msgstr "<немає вихідного файлу>"
+
 #: src/common/xml/ebml_tags_converter.cpp:93
 msgid "<Simple> is missing the <Name> child."
 msgstr "<Simple> пропускає складову <Name>."
@@ -2356,6 +2361,18 @@ msgstr "<Simple> має містити або <String>, або дочірній 
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> пропускає складову <Simple>."
 
+#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
+#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#, fuzzy, no-c-format
+msgid "<Unnamed>"
+msgstr "<не названо>"
+
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
+#, fuzzy, no-c-format
+msgid "<Unsaved file>"
+msgstr "<незбережений файл>"
+
 #: src/mkvtoolnix-gui/merge/attachments.cpp:375
 #: src/mkvtoolnix-gui/merge/input.cpp:592
 #: src/mkvtoolnix-gui/merge/input.cpp:1319
@@ -2363,29 +2380,15 @@ msgstr "<Tag> пропускає складову <Simple>."
 msgid "<do not change>"
 msgstr "<не змінювати>"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:121
-#, fuzzy, no-c-format
-msgid "<no destination file>"
-msgstr "<немає вихідного файлу>"
-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:737
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:772
 #, no-c-format
 msgid "<no program selected yet>"
 msgstr "<жодний додаток ще не обрано>"
 
-#: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
-#: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-#, no-c-format
 msgid "<unnamed>"
 msgstr "<не названо>"
-
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:154
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:205
-#, no-c-format
-msgid "<unsaved file>"
-msgstr "<незбережений файл>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -2648,7 +2651,7 @@ msgstr "Дії для опрацювання тегів і розділів"
 msgid "Add &variable"
 msgstr "Додати &змінну"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:230
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 msgid "Add additional command line options for mkvmerge"
 msgstr "Додати параметри командного рядка для mkvmerge"
 
@@ -2773,7 +2776,7 @@ msgstr "Додати додаткові частини"
 msgid "Additional &modifications"
 msgstr "Додаткові &налаштування"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 msgid "Additional command line options"
 msgstr "Додаткові параметри командного рядка"
 
@@ -3894,6 +3897,11 @@ msgstr "Конвертувати текстові субтитри до цьог
 msgid "Converting the chapters to XML failed: %1"
 msgstr "Перетворення розділів в XML не вдалося: %1"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
+#, fuzzy
+msgid "Copy &destination file's name to file title"
+msgstr "Копіювати назву вихідного файла до поля \"Заголовок файла\""
+
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
 #, fuzzy, no-c-format
 msgid "Copy attachment"
@@ -3907,10 +3915,6 @@ msgstr "Копіювати ім'я першого вхідного файла д
 #, no-c-format
 msgid "Copy item"
 msgstr ""
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:534
-msgid "Copy o&utput file's name to file title"
-msgstr "Копіювати назву вихідного файла до поля \"Заголовок файла\""
 
 #: src/common/file_types.cpp:75
 msgid "CoreAudio"
@@ -4063,6 +4067,11 @@ msgstr "Обрізка:"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
+#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
+#, fuzzy
+msgid "Ctrl+D"
+msgstr "Ctrl+A"
+
 #: src/info/ui/mainwindow.h:116
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
@@ -4112,10 +4121,6 @@ msgstr "Ctrl+Shift+L"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:533
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
-
-#: src/mkvtoolnix-gui/forms/main_window/main_window.h:535
-msgid "Ctrl+U"
-msgstr "Ctrl+U"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:477
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:487
@@ -4416,8 +4421,8 @@ msgstr "Видалити одне або декілька вкладень"
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:235
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:240
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
 #: src/mkvtoolnix-gui/jobs/model.cpp:51
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
@@ -4451,6 +4456,11 @@ msgstr "Тека вихідного файла"
 msgid "Destination file's name"
 msgstr "Назва вихідного файла"
 
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
+#, fuzzy
+msgid "Destination file:"
+msgstr "Назва вихідного файла"
+
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:242
 msgid "Details"
 msgstr "Подробиці"
@@ -4463,7 +4473,7 @@ msgstr "Подробиці"
 msgid "Determine automatically"
 msgstr "визначати автоматично"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:236
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 msgid "Development hacks"
 msgstr "Опції для розробників"
 
@@ -4479,7 +4489,7 @@ msgid "Dirac"
 msgstr "Dirac"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
 #, no-c-format
@@ -5458,7 +5468,7 @@ msgstr "Створення розділів:"
 msgid "Global options"
 msgstr "Глобальні опції"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:231
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
 msgid "Global output control"
 msgstr "Глобальний вихідний контроль"
 
@@ -7493,8 +7503,8 @@ msgstr[2] "Відкрити файлів %1 в Редакторі заголов
 msgid "Opening files or adding as attachments"
 msgstr "Відкриття файлів або додання їх як вкладень"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:233
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:238
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 msgid "Option"
 msgstr "Опція"
 
@@ -7560,10 +7570,6 @@ msgstr "В іншому випадку вони відображаються н�
 #, no-c-format
 msgid "Output"
 msgstr "На виході"
-
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
-msgid "Output file:"
-msgstr "Вихідний файл:"
 
 #: src/common/cli_parser.cpp:181
 msgid "Output messages in this charset"
@@ -7747,7 +7753,8 @@ msgid "Pre&view:"
 msgstr "Попер&едній перегляд:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1321
-msgid "Pre&viously used output directory"
+#, fuzzy
+msgid "Pre&viously used destination directory"
 msgstr "В&икористовувати попередню теку вихідних файлів"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:371
@@ -8303,7 +8310,7 @@ msgstr "Частота дискретизації: %1%"
 msgid "Save as &XML file"
 msgstr "Зберегти до файлу &XML"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:241
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:229
 #, fuzzy
 msgid "Save as &default for new multiplex jobs"
 msgstr "Зберегти як &типовий варіант для нових завдань"
@@ -8537,6 +8544,11 @@ msgstr "Оберіть файл розділів"
 msgid "Select character set"
 msgstr "Оберіть набір символів"
 
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
+#, fuzzy, no-c-format
+msgid "Select destination directory"
+msgstr "Оберіть назву вихідного файла"
+
 #: src/mkvtoolnix-gui/merge/output.cpp:278
 #, fuzzy, no-c-format
 msgid "Select destination file name"
@@ -8556,11 +8568,6 @@ msgstr "Оберіть файл, який повинен бути доданий
 #, no-c-format
 msgid "Select one of the ISO639-2 language codes."
 msgstr "Оберіть потрібну мову з-поміж мовних кодів ISO639-2."
-
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:721
-#, no-c-format
-msgid "Select output directory"
-msgstr "Оберіть теку для вихідних файлів"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:308
 #, no-c-format
@@ -8825,7 +8832,7 @@ msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream
 msgstr "Виявлено кадр з одним полем перед заголовком GOP. Виправте MPEG2 відеопотік перед мультиплексуванням як таким.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Size"
@@ -8871,7 +8878,7 @@ msgstr "Вхідні файли:"
 msgid "Source file"
 msgstr "Вхідний файл"
 
-#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
+#: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
 #, no-c-format
 msgid "Source file name"
@@ -10531,11 +10538,11 @@ msgstr "Сталася помилка при запиті статусу оно�
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "Були помічені помилки в значеннях заголовка, що перешкоджають його збереженню. Була обрана перша помилка."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:232
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 msgid "These are less often used options that control the output structure that mkvmerge creates."
 msgstr "Деякі опції, які контролюють створюваний mkvmerge на виході результуючий файл."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:237
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "Дані опції розраховані на розробників. Вони офіційно не підтримуються і можуть змінюватись від версії до версії."
 
@@ -11334,8 +11341,7 @@ msgstr "Коректні зміни коду:\n"
 msgid "Validation failed"
 msgstr "Перевірка не вдалася"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:234
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:239
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 msgid "Value"
 msgstr "Значення"
 
@@ -11601,7 +11607,7 @@ msgstr "Коли файл додається його назва скануєт�
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #, fuzzy
-msgid "When adding destination files all tracks are normally set to be copied into the output file."
+msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr "Під час додавання вхідних файлів всі доріжки як правило, встановлюються для обробки у вихідний файл."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:201
@@ -12678,6 +12684,9 @@ msgstr "– нічого не обрано –"
 #~ msgid "Countr&y:"
 #~ msgstr "Країн&а:"
 
+#~ msgid "Ctrl+U"
+#~ msgstr "Ctrl+U"
+
 #~ msgid "Date (invalid, value: %1%)"
 #~ msgstr "Дата (невірна, значення: %1%)"
 
@@ -12745,6 +12754,9 @@ msgstr "– нічого не обрано –"
 #~ msgid "Output file name"
 #~ msgstr "Назва вихідного файла"
 
+#~ msgid "Output file:"
+#~ msgstr "Вихідний файл:"
+
 #~ msgid ""
 #~ "Re-rendering track headers: data_size != 0 not implemented yet. %1%\n"
 #~ msgstr ""
@@ -12766,6 +12778,9 @@ msgstr "– нічого не обрано –"
 
 #~ msgid "Remove a&ll"
 #~ msgstr "Видалити вс&е"
+
+#~ msgid "Select output directory"
+#~ msgstr "Оберіть теку для вихідних файлів"
 
 #~ msgid "Subtitle track %1, %2, %3"
 #~ msgstr "Доріжка субтитрів %1, %2, %3"
