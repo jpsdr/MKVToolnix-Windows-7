@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-12 20:47+0100\n"
+"POT-Creation-Date: 2016-11-12 22:16+0100\n"
 "PO-Revision-Date: 2016-11-05 03:59+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1026,7 +1026,7 @@ msgid " size is unknown"
 msgstr " 크기를 알 수 없음"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:283
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1664
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1666
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:75
 #, no-c-format
 msgid "\"Default track\" flag:"
@@ -1038,7 +1038,7 @@ msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "\"자동 결정\"은 대부분의 모든 상황에서 좋은 선택입니다."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:284
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1665
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1667
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:79
 #, no-c-format
 msgid "\"Forced track\" flag:"
@@ -1294,7 +1294,7 @@ msgstr "파일 추가(&A)"
 msgid "&Add program"
 msgstr "프로그램 추가(&A)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1753
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1755
 msgid "&Add source files"
 msgstr "소스 파일 추가(&A)"
 
@@ -1385,7 +1385,7 @@ msgid "&Default"
 msgstr "기본값(&D)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:173
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1743
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1745
 msgid "&Description:"
 msgstr "설명(&D):"
 
@@ -1486,7 +1486,7 @@ msgstr "숨김(&H)"
 msgid "&Info tool"
 msgstr "정보 도구(&I)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1694
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1696
 msgid "&Input"
 msgstr "입력(&I)"
 
@@ -1508,7 +1508,7 @@ msgstr "교체할 챕터 이름의 언어(&L):"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:529
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1348
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1663
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1665
 msgid "&Language:"
 msgstr "언어(&L):"
 
@@ -1517,7 +1517,7 @@ msgid "&Languages"
 msgstr "언어(&L)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:175
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1744
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1746
 msgid "&MIME type:"
 msgstr "&MIME 형식:"
 
@@ -1536,7 +1536,7 @@ msgid "&Multiply start and end timecodes by the following factor:"
 msgstr "시작과 종료 타임코드를 다음 인수로 곱합니다(&M):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1742
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1744
 msgid "&Name:"
 msgstr "이름(&N):"
 
@@ -1599,7 +1599,7 @@ msgstr "옵션(&O)"
 msgid "&Ordered"
 msgstr "정렬(&O)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1736
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1738
 msgid "&Output"
 msgstr "출력(&O)"
 
@@ -1742,7 +1742,7 @@ msgstr "자막(&S)"
 msgid "&Tag editor"
 msgstr "태그 편집기(&T)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1651
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1653
 msgid "&Tracks, chapters and tags:"
 msgstr "트랙, 챕터와 태그(&T):"
 
@@ -2028,7 +2028,7 @@ msgstr "'%1%': 후속 파일을 마찬가지로 처리: %2%\n"
 
 #: src/input/r_matroska.cpp:1719
 #, fuzzy, boost-format
-msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track muxed in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
+msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
 msgstr "'%1%': 실험적 모드에서 먹스(mux)했던 Opus 트랙을 다시 먹싱하고 있습니다. 그 결과로 나오는 트랙은 최종 모드로 기록이 될 것이지만 하나의 세부 항목(끝부분 잘라내기)은 실험적 모드에서 먹스한 트랙에서 복원할 수 없습니다. 다시 말해서 디코더가 원래 의도한 것보다 몇 개의 샘플을 더 출력하게 됩니다. 그래서 가능하면 원래의 Opus에서 다시 먹스하세요.\n"
 
 #: src/merge/mkvmerge.cpp:2486
@@ -2464,7 +2464,7 @@ msgstr "AAC"
 msgid "AAC (Advanced Audio Coding)"
 msgstr "AAC [고급 오디오 부호화](Advanced Audio Coding)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1686
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1688
 msgid "AAC is SBR/HE-AAC/AAC+:"
 msgstr "AAC는 SBR/HE-AAC/AAC+:"
 
@@ -2679,7 +2679,7 @@ msgstr "새 첨부 파일로 'filename' 파일 추가"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:470
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:540
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1755
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1757
 msgid "Add to job &queue"
 msgstr "작업 대기열에 추가(&Q)"
 
@@ -2715,8 +2715,8 @@ msgstr "추가 변경(&M)"
 msgid "Additional command line options"
 msgstr "추가 명령행 옵션"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1693
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1711
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1695
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1713
 msgid "Additional options:"
 msgstr "추가 옵션:"
 
@@ -2793,7 +2793,7 @@ msgstr "알고리즘: %1% (%2%)"
 msgid "All chapters have been removed from the file '%1'."
 msgstr "'%1' 파일에서 모든 챕터를 제거했습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1748
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1750
 #, fuzzy
 msgid "All destination files"
 msgstr "모든 출력 파일에"
@@ -3090,19 +3090,19 @@ msgstr "화면 비율 유형: %1%%2%"
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "적어도 하나의 <ChapterAtom> 요소가 필요합니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1751
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1753
 msgid "Atta&chments"
 msgstr "첨부 파일(&C)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1738
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1740
 msgid "Atta&chments to add:"
 msgstr "추가할 첨부 파일(&C):"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1745
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1747
 msgid "Attach &to:"
 msgstr "첨부하기(&T):"
 
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:63
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
 #, no-c-format
 msgid "Attach to"
 msgstr "첨부하기"
@@ -3142,7 +3142,7 @@ msgstr "같은 이름의 첨부 파일이 존재합니다"
 msgid "Attachments"
 msgstr "첨부 파일"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1737
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1739
 msgid "Attachments from &source files:"
 msgstr "소스 파일의 첨부 파일(&S):"
 
@@ -3167,7 +3167,7 @@ msgstr "오디오 채널"
 msgid "Audio output sampling frequency"
 msgstr "오디오 출력 샘플링 주파수"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1685
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1687
 msgid "Audio properties"
 msgstr "오디오 속성"
 
@@ -3181,7 +3181,7 @@ msgstr "오디오 샘플링 주파수"
 msgid "Audio track %1"
 msgstr "오디오 트랙 %1"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1657
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1659
 msgid "Audio, subtitle, chapter properties"
 msgstr "오디오, 자막, 챕터 속성"
 
@@ -3539,7 +3539,7 @@ msgstr "챕터 편집기"
 msgid "Chapter extraction"
 msgstr "챕터 추출"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1722
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1724
 msgid "Chapter file:"
 msgstr "챕터 파일:"
 
@@ -3564,7 +3564,7 @@ msgstr "챕터 분석: 판(Edition) UID %1%는 고유한 것이 아니므로 재
 
 #: src/info/mkvinfo.cpp:1623
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:239
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1720
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1722
 #: src/mkvtoolnix-gui/merge/track.cpp:401
 #: src/propedit/options.cpp:191
 #, no-c-format
@@ -3576,7 +3576,7 @@ msgstr "챕터"
 msgid "Chapters are not allowed in WebM compliant files. No chapters will be written to the destination file.\n"
 msgstr "챕터는 표준 WebM 준수(호환) 파일에서는 사용할 수 없습니다. 어떠한 출력 파일에도 챕터는 기록되지 않습니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1733
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1735
 #, fuzzy
 msgid "Chapters in fixed intervals"
 msgstr "고정된 간격의 챕터"
@@ -3587,8 +3587,8 @@ msgid "Chapters: %1% entry"
 msgid_plural "Chapters: %1% entries"
 msgstr[0] "챕터: %1% 항목"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1689
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1725
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1691
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1727
 msgid "Character set:"
 msgstr "문자셋:"
 
@@ -3788,7 +3788,7 @@ msgstr "완료했으나 경고 있음"
 msgid "Compression failed: %1%\n"
 msgstr "압축 실패: %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1666
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1668
 msgid "Compression:"
 msgstr "압축:"
 
@@ -3931,7 +3931,7 @@ msgstr "출력 파일을 기록할 수 없음: %1% (%2%)\n"
 msgid "Country"
 msgstr "국가"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1710
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1712
 msgid "Create WebM compliant file"
 msgstr "WebM 호환 파일 만들기"
 
@@ -3984,7 +3984,7 @@ msgstr "파일 생성에 실패했습니다. 그 폴더에 쓰기 권한을 소�
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '%1%').\n"
 msgstr "잘라내기 매개변수: <TID>:<left>,<top>,<right>,<bottom> (예: 0:10,5,10,5)의 형태로 지정되어 있지 않습니다 (인수는 '%1%'입니다).\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1683
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1685
 msgid "Cropping:"
 msgstr "잘라내기:"
 
@@ -4078,7 +4078,7 @@ msgstr "CUE 재생 시간: %1%"
 msgid "Cue extraction"
 msgstr "Cue 추출"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1728
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1730
 msgid "Cue name format:"
 msgstr "CUE 이름 형식:"
 
@@ -4259,7 +4259,7 @@ msgstr "기본 추가 명령행 옵션(&M):"
 msgid "Default duration"
 msgstr "기본 재생 시간"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1672
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1674
 msgid "Default duration/FPS:"
 msgstr "기본 재생 시간/FPS:"
 
@@ -4309,7 +4309,7 @@ msgstr "새 먹스 설정의 기본값"
 msgid "Defaults for newly added tracks"
 msgstr "새로 추가한 트랙의 기본값"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1670
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1672
 msgid "Delay (in ms):"
 msgstr "지연 (ms 단위):"
 
@@ -4350,7 +4350,7 @@ msgstr "아래 설정에 따라서 소스 파일의 언어가 '미정의' ('und'
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:228
 #: src/mkvtoolnix-gui/jobs/model.cpp:51
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
 #, no-c-format
 msgid "Description"
 msgstr "설명"
@@ -4361,7 +4361,7 @@ msgstr "설명"
 msgid "Description:"
 msgstr "설명:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1752
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1754
 #, fuzzy
 msgid "Destination file"
 msgstr "출력 파일명"
@@ -4381,7 +4381,7 @@ msgstr "출력 파일 폴더"
 msgid "Destination file's name"
 msgstr "출력 파일명"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1699
 #, fuzzy
 msgid "Destination file:"
 msgstr "출력 파일명"
@@ -4415,7 +4415,7 @@ msgstr "Dirac"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:257
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:91
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:67
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
 #, no-c-format
 msgid "Directory"
@@ -4482,7 +4482,7 @@ msgstr "표시 높이: %1%"
 msgid "Display unit: %1%%2%"
 msgstr "표시 단위: %1%%2%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1682
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1684
 msgid "Display width/height:"
 msgstr "해상도 (가로 X 세로):"
 
@@ -4560,7 +4560,7 @@ msgstr "변경 않기"
 msgid "Don't escape"
 msgstr "이스케이프 않기"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1731
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1733
 #, fuzzy
 msgid "Don't generate chapters"
 msgstr "챕터 만들지 않기"
@@ -5081,7 +5081,7 @@ msgstr "패밀리 UID: %1%"
 msgid "Fi&le name:"
 msgstr "파일명(&L):"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1696
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1698
 msgid "Fi&le title:"
 msgstr "파일 제목(&L):"
 
@@ -5195,7 +5195,7 @@ msgstr "파일 구조 경고"
 msgid "File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."
 msgstr "MPEG 프로그램이나 트랜스포트 스트림과 같은 파일 형식(.vob, m2ts)은 파일에 포함된 모든 트랙을 감지하기 위해 데이터의 특정한 양을 분석할 필요가 있습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1713
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1715
 msgid "File/Segment linking"
 msgstr "파일/세그먼트 연결"
 
@@ -5207,7 +5207,7 @@ msgstr "파일을 그 파일 자체에 결합할 수 없습니다. '--append-to'
 msgid "Finished at:"
 msgstr "완료:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1675
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1677
 msgid "Fix bitstream timing info"
 msgstr "비트스트림 타이밍 정보 고치기"
 
@@ -5360,14 +5360,14 @@ msgstr "감마: %1%"
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track."
 msgstr "AVI 파일에서 오디오 트랙의 시작 부분에 있는 쓰레기는 보통 그 트랙을 지연시키기 위해 사용됩니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1695
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1697
 msgid "General"
 msgstr "일반"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1267
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1286
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1654
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1660
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1656
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1662
 msgid "General options"
 msgstr "일반 옵션"
 
@@ -5384,7 +5384,7 @@ msgstr "하위 챕터 만들기"
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr "몇 개의 챕터를 균등한 간격으로 두어서 만드는 중"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1726
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1728
 msgid "Generating chapters:"
 msgstr "챕터 만들기:"
 
@@ -5402,7 +5402,7 @@ msgstr "전역 출력 제어"
 msgid "Global tags"
 msgstr "전역 태그:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1699
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1701
 msgid "Global tags:"
 msgstr "전역 태그:"
 
@@ -5745,7 +5745,8 @@ msgid "If this option is enabled the GUI will always clear the \"file title\" in
 msgstr "이 옵션 사용시 GUI는 마지막 소스 파일이 삭제될 때마다 항상 \"파일 제목\" 입력 상자의 내용을 지웁니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:319
-msgid "If this option is enabled then only those tracks will be set to be muxed whose language is selected below."
+#, fuzzy
+msgid "If this option is enabled then only those tracks will be set to be copied whose language is selected below."
 msgstr "이 옵션을 사용하면 아래에서 선택한 언어의 트랙만 먹스하도록 설정할 것입니다."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:243
@@ -5820,7 +5821,7 @@ msgstr "내용이 다른 AAC 오디오 패킷 (길이: %1% != %2%)\n"
 msgid "Increase verbosity."
 msgstr "보다 자세한 정보를 표시합니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1692
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1694
 msgid "Indexing (cues):"
 msgstr "인덱싱 (큐):"
 
@@ -5868,7 +5869,7 @@ msgstr "내부 버그: tracks.cpp SSA #1. %1%"
 msgid "Internal program error"
 msgstr "내부 프로그램 오류"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1735
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 msgid "Interval:"
 msgstr "간격:"
 
@@ -6350,7 +6351,7 @@ msgid "Language is not NUL terminated"
 msgstr "언어가 NUL로 끝나지 않습니다."
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1724
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1726
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:69
 #, no-c-format
 msgid "Language:"
@@ -6413,7 +6414,7 @@ msgstr "%1%번째 행: 이 행은 자막 항목인 것 같습니다만 형식을
 msgid "Line %1%: The line seems to be a subtitle entry but the timecode was negative even after adding the track delay. Negative timecodes are not supported in Matroska. This entry will be skipped.\n"
 msgstr "%1%번째 행: 이 행은 자막 항목인 것 같습니다만 타임코드가 트랙 지연을 추가한 이후에도 음수 입니다. 음수 타임코드는 Matroska에서 지원하지 않습니다. 이 항목은 건너 뜁니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1707
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1709
 msgid "Link files"
 msgstr "파일 연결"
 
@@ -6448,7 +6449,7 @@ msgid "MD5"
 msgstr "MD5"
 
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:87
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:61
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:63
 #, no-c-format
 msgid "MIME type"
 msgstr "MIME 형식"
@@ -6628,7 +6629,7 @@ msgstr "허용되는 최대 값: %1%, 실제 값: %2%"
 msgid "Maximum cache"
 msgstr "최대 캐시"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1705
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1707
 msgid "Maximum number of files:"
 msgstr "최대 파일 개수:"
 
@@ -6678,9 +6679,9 @@ msgstr "허용되는 최소 값: %1%, 실제 값: %2%"
 msgid "Minimum cache"
 msgstr "최소 캐시"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1658
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1691
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1709
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1660
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1693
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1711
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -6753,7 +6754,7 @@ msgstr "%1% 트랙 번호가 있는 트랙을 한 개 이상 찾았습니다.\n"
 msgid "Most of the other settings on the output tab will be kept intact, though."
 msgstr "하지만 출력 탭에 있는 대부분의 다른 설정은 그대로 유지될 것입니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1661
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1663
 msgid "Mu&x this track:"
 msgstr "이 트랙 먹스(&X):"
 
@@ -6797,7 +6798,7 @@ msgstr "MUX에 사용된 응용프로그램: %1%"
 msgid "Muxing took %1%.\n"
 msgstr "MUX 작업이 %1% 소요되었습니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1678
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "NALU size length:"
 msgstr "NALU 크기 길이:"
 
@@ -6810,7 +6811,7 @@ msgstr "이름 템플릿(&M):"
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:25
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:435
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:86
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:60
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:62
 #: src/mkvtoolnix-gui/merge/track_model.cpp:48
 #, no-c-format
 msgid "Name"
@@ -6820,7 +6821,7 @@ msgstr "이름"
 msgid "Name tem&plate:"
 msgstr "이름 템플릿(&P):"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1721
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1723
 msgid "Name template:"
 msgstr "이름 템플릿:"
 
@@ -6869,7 +6870,7 @@ msgstr "다음 파일명"
 msgid "Next filename: %1%"
 msgstr "다음 파일명: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1718
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1720
 msgid "Next segment UID:"
 msgstr "다음 세그먼트 UID:"
 
@@ -7243,7 +7244,7 @@ msgstr "Ogg/OGM"
 msgid "Ogg/OGM audio/video files"
 msgstr "Ogg/OGM 오디오/비디오 파일"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1732
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1734
 #, fuzzy
 msgid "One chapter for each appended file"
 msgstr "결합한 각 파일마다 한 개의 챕터"
@@ -7427,7 +7428,7 @@ msgstr "옵션"
 msgid "Options"
 msgstr "옵션"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1708
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1710
 msgid "Options:"
 msgstr "옵션:"
 
@@ -7681,7 +7682,7 @@ msgstr "이전 파일명"
 msgid "Previous filename: %1%"
 msgstr "이전 파일명: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1716
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1718
 msgid "Previous segment UID:"
 msgstr "이전 세그먼트 UID:"
 
@@ -7756,7 +7757,7 @@ msgid "Properties"
 msgstr "속성"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:285
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1659
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1661
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 #, no-c-format
 msgid "Properties:"
@@ -7983,7 +7984,7 @@ msgstr "빨간색 좌표 y: %1%"
 msgid "Redirects all messages into this file."
 msgstr "이 파일로 모든 메시지를 재전송합니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1687
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1689
 msgid "Reduce to core"
 msgstr "코어로 축소하기"
 
@@ -8370,7 +8371,7 @@ msgstr "세그먼트"
 msgid "Segment UID: %1%"
 msgstr "세그먼트 UID: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1714
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1716
 msgid "Segment UIDs:"
 msgstr "세그먼트 UID:"
 
@@ -8391,7 +8392,7 @@ msgstr "세그먼트 파일 이름"
 msgid "Segment filename: %1%"
 msgstr "세그먼트 파일 이름: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1701
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1703
 msgid "Segment info:"
 msgstr "세그먼트 정보:"
 
@@ -8509,7 +8510,7 @@ msgstr "mkvmerge가 인덱스 항목(큐 항목)을 생성할 블럭을 선택�
 msgid "Selects the character set a subtitle file or chapter information was written with."
 msgstr "자막 파일이나 챕터 파일을 기록할 문자셋을 선택하세요."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1679
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1681
 msgid "Set aspect ratio:"
 msgstr "화면 비율 설정:"
 
@@ -8607,7 +8608,7 @@ msgstr "세그먼트 UID를 사용하도록 설정합니다."
 msgid "Sets the stereo mode of the video track to this value."
 msgstr "비디오 트랙의 스테레오 모드를 이 값으로 설정합니다."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1741
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1743
 msgid "Settings"
 msgstr "설정"
 
@@ -8737,7 +8738,7 @@ msgstr "GOP(Group Of Picture) 헤더 이전에 하나의 필드 프레임이 검
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
 #, no-c-format
 msgid "Size"
 msgstr "크기"
@@ -8773,7 +8774,7 @@ msgstr "조각"
 msgid "Some tag elements are missing (this error should not have occured - another similar error should have occured earlier). %1%\n"
 msgstr "태그 요소가 누락되어 있습니다 (이 오류는 발생해서는 안 됩니다 - 아마 다른 유사한 오류가 이전에 발생되었을 것입니다). %1%\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1648
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1650
 msgid "Source &files:"
 msgstr "소스 파일(&F):"
 
@@ -8783,7 +8784,7 @@ msgid "Source file"
 msgstr "소스 파일"
 
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
-#: src/mkvtoolnix-gui/merge/attachment_model.cpp:64
+#: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Source file name"
 msgstr "소스 파일명"
@@ -8815,11 +8816,11 @@ msgstr ""
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
 msgstr "화면 비율에 가능한 수정 사항을 지정합니다 (0: 자유 크기, 1: 화면 비율 유지, 2: 고정)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1704
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1706
 msgid "Split mode:"
 msgstr "분할 모드:"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1703
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1705
 msgid "Splitting"
 msgstr "파일 분할"
 
@@ -8832,7 +8833,7 @@ msgstr "번호가 열거 된 챕터의 시작 타임코드와 같거나 그것�
 msgid "Sta&rt all pending jobs"
 msgstr "모든 미완료 작업 시작(&R)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1754
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1756
 #, fuzzy
 msgid "Sta&rt multiplexing"
 msgstr "먹싱 시작(&R)"
@@ -8909,7 +8910,7 @@ msgstr "스테레오 모드: %1% (%2%)"
 msgid "Stereo-3D video mode (0 - 11, see documentation)."
 msgstr "스테레오 3D 비디오 모드 (0 ~ 11, 문서를 참조하세요)."
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1684
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1686
 msgid "Stereoscopy:"
 msgstr "3D 영상 방식:"
 
@@ -8917,7 +8918,7 @@ msgstr "3D 영상 방식:"
 msgid "Stop &after all running jobs have finished"
 msgstr "실행 중인 모든 작업 완료 후 정지(&A)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1671
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1673
 msgid "Stretch by:"
 msgstr "늘이기:"
 
@@ -8926,7 +8927,7 @@ msgstr "늘이기:"
 msgid "String"
 msgstr "문자열"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1688
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1690
 msgid "Subtitle and chapter properties"
 msgstr "자막과 챕터 속성"
 
@@ -9004,7 +9005,7 @@ msgid "Tags for track ID %1%: %2% entry"
 msgid_plural "Tags for track ID %1%: %2% entries"
 msgstr[0] "트랙 ID %1%: %2% 항목의 태그"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1667
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1669
 msgid "Tags:"
 msgstr "태그:"
 
@@ -9733,7 +9734,7 @@ msgstr "열려고 했던 파일(%1)을 유효한 Mastroska나 챕터 파일로 �
 msgid "The first cluster timecode after the resync is %1%.\n"
 msgstr "재동기화 이후의 첫 클러스터 타임코드는 %1%입니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1749
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1751
 #, fuzzy
 msgid "The first destination file only"
 msgstr "처음 출력 파일만"
@@ -10719,7 +10720,7 @@ msgstr "타임 조각"
 msgid "Timecode extraction"
 msgstr "타임코드 추출"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1673
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1675
 msgid "Timecode file:"
 msgstr "타임코드 파일:"
 
@@ -10730,8 +10731,8 @@ msgstr "타임코드 파일:"
 msgid "Timecode scale: %1%"
 msgstr "타임코드 스케일: %1%"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1655
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1669
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1657
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1671
 msgid "Timecodes and default duration"
 msgstr "타임코드와 기본 재생 시간"
 
@@ -10760,7 +10761,7 @@ msgstr "모든 출력 파일에"
 msgid "Top"
 msgstr "상단"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1662
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1664
 msgid "Trac&k name:"
 msgstr "트랙 이름(&K):"
 
@@ -11078,7 +11079,7 @@ msgstr "'%1% %2%'에서 알 수 없는 분석 모드가 지정되었습니다.\n
 msgid "Unknown/unsupported audio format 0x%|1$04x| for this audio track.\n"
 msgstr "이 트랙의 오디오 형식 0x%|1$04x|는 알 수 없거나 지원되지 않습니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1706
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1708
 #, fuzzy
 msgid "Unlimited"
 msgstr "무제한"
@@ -11334,8 +11335,8 @@ msgstr "비디오 높이 (픽셀 단위)"
 msgid "Video pixel width"
 msgstr "비디오 너비 (픽셀 단위)"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1656
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1676
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1658
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1678
 msgid "Video properties"
 msgstr "비디오 속성"
 
@@ -12476,7 +12477,7 @@ msgstr "wavpack_리더: 비 오디오 블록 발견\n"
 msgid "wavpack_reader: unknown sample rate!\n"
 msgstr "wavpack_리더: 알 수 없는 샘플 속도입니다!\n"
 
-#: src/mkvtoolnix-gui/forms/merge/tab.h:1677
+#: src/mkvtoolnix-gui/forms/merge/tab.h:1679
 msgid "x"
 msgstr "x"
 
