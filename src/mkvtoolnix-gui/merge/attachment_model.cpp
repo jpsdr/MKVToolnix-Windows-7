@@ -52,6 +52,8 @@ AttachmentModel::setRowData(QList<QStandardItem *> const &items,
   items[SourceFileColumn ]->setText(info.fileName());
   items[SourceDirColumn  ]->setText(QDir::toNativeSeparators(info.path()));
   items[SizeColumn       ]->setText(size);
+
+  items[SizeColumn       ]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
 void
@@ -65,6 +67,8 @@ AttachmentModel::retranslateUi() {
     { QY("Directory"),        Q("directory")      },
     { QY("Size"),             Q("size")           },
   });
+
+  horizontalHeaderItem(SizeColumn)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   for (auto row = 0, numRows = rowCount(); row < numRows; ++row)
     setRowData(itemsForRow(row), *attachmentForRow(row));
