@@ -80,7 +80,7 @@ NameModel::addNew() {
   auto &cfg     = Util::Settings::get();
   auto display = new KaxChapterDisplay;
 
-  GetChild<KaxChapterString>(display).SetValueUTF8(Y("<unnamed>"));
+  GetChild<KaxChapterString>(display).SetValueUTF8(Y("<Unnamed>"));
   GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(cfg.m_defaultChapterLanguage));
   GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
 

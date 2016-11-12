@@ -151,7 +151,7 @@ Tab::updateFileNameDisplay() {
     ui->directory->setText(QDir::toNativeSeparators(info.path()));
 
   } else {
-    ui->fileName->setText(QY("<unsaved file>"));
+    ui->fileName->setText(QY("<Unsaved file>"));
     ui->directory->setText(Q(""));
 
   }
@@ -202,7 +202,7 @@ QString
 Tab::title()
   const {
   if (m_fileName.isEmpty())
-    return QY("<unsaved file>");
+    return QY("<Unsaved file>");
   return QFileInfo{m_fileName}.fileName();
 }
 

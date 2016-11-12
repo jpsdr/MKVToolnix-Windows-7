@@ -118,7 +118,7 @@ Tab::fileName()
 QString
 Tab::title()
   const {
-  auto title = m_config.m_destination.isEmpty() ? QY("<no destination file>") : QFileInfo{m_config.m_destination}.fileName();
+  auto title = m_config.m_destination.isEmpty() ? QY("<No destination file>") : QFileInfo{m_config.m_destination}.fileName();
   if (!m_config.m_configFileName.isEmpty())
     title = Q("%1 (%2)").arg(title).arg(QFileInfo{m_config.m_configFileName}.fileName());
 

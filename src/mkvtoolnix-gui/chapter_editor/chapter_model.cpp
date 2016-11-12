@@ -195,7 +195,7 @@ ChapterModel::chapterDisplayName(KaxChapterAtom &chapter) {
     chapterName = chapterNameForLanguage(chapter, "");
 
   if (chapterName.isEmpty())
-    chapterName = QY("<unnamed>");
+    chapterName = QY("<Unnamed>");
 
   return chapterName;
 }
