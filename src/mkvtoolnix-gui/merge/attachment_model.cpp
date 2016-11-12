@@ -59,8 +59,8 @@ AttachmentModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
     { QY("Name"),             Q("name")           },
     { QY("MIME type"),        Q("mimeType")       },
-    { QY("Description"),      Q("description")    },
     { QY("Attach to"),        Q("attachTo")       },
+    { QY("Description"),      Q("description")    },
     { QY("Source file name"), Q("sourceFileName") },
     { QY("Directory"),        Q("directory")      },
     { QY("Size"),             Q("size")           },

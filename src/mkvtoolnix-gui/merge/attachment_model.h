@@ -23,8 +23,8 @@ protected:
 protected:
   static int const NameColumn        = 0;
   static int const MIMETypeColumn    = 1;
-  static int const DescriptionColumn = 2;
-  static int const StyleColumn       = 3;
+  static int const StyleColumn       = 2;
+  static int const DescriptionColumn = 3;
   static int const SourceFileColumn  = 4;
   static int const SourceDirColumn   = 5;
   static int const SizeColumn        = 6;
