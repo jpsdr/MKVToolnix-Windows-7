@@ -734,7 +734,7 @@ PreferencesDialog::editDefaultAdditionalCommandLineOptions() {
 void
 PreferencesDialog::addProgramToExecute() {
   auto programWidget = new PrefsRunProgramWidget{this, {}};
-  ui->twJobsPrograms->addTab(programWidget, QY("<no program selected yet>"));
+  ui->twJobsPrograms->addTab(programWidget, QY("<No program selected yet>"));
   ui->twJobsPrograms->setCurrentIndex(ui->twJobsPrograms->count() - 1);
 
   ui->swJobsPrograms->setCurrentIndex(1);
@@ -769,7 +769,7 @@ PreferencesDialog::setTabTitleForRunProgramExecutable(int tabIdx,
   if ((tabIdx < 0) || (tabIdx >= ui->twJobsPrograms->count()))
     return;
 
-  auto name = executable.isEmpty() ? QY("<no program selected yet>") : QFileInfo{executable}.fileName();
+  auto name = executable.isEmpty() ? QY("<No program selected yet>") : QFileInfo{executable}.fileName();
   ui->twJobsPrograms->setTabText(tabIdx, name);
 }
 
