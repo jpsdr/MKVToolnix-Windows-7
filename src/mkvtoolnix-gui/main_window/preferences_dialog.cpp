@@ -149,7 +149,7 @@ PreferencesDialog::setupPageSelector() {
   auto page      = 0;
   auto pGui      = addItem(page++, nullptr, QY("GUI"),               "mkvtoolnix-gui");
                    addItem(page++, pGui,    QY("Often used selections"));
-  auto pMerge    = addItem(page++, nullptr, QY("Multiplex tool"),    "merge");
+  auto pMerge    = addItem(page++, nullptr, QY("Multiplexer"),       "merge");
                    addItem(page++, pMerge,  QY("Default values"));
                    addItem(page++, pMerge,  QY("Output"));
                    addItem(page++, pMerge,  QY("Enabling tracks"));

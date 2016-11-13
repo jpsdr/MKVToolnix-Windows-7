@@ -139,8 +139,8 @@ MainWindow::setupToolSelector() {
   m_toolJobs          = new Jobs::Tool{ui->tool,          ui->menuJobQueue};
   m_watchJobTool      = new WatchJobs::Tool{ui->tool,     ui->menuJobOutput};
 
-  ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("Multiplex tool"));
-  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("Extraction tool"));
+  ui->tool->appendTab(m_toolMerge,                  QIcon{":/icons/48x48/merge.png"},                      QY("Multiplexer"));
+  // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/split.png"},                      QY("Extractor"));
   // ui->tool->appendTab(createNotImplementedWidget(), QIcon{":/icons/48x48/document-preview-archive.png"},   QY("Info tool"));
   ui->tool->appendTab(m_toolHeaderEditor,           QIcon{":/icons/48x48/document-edit.png"},              QY("Header editor"));
   ui->tool->appendTab(m_toolChapterEditor,          QIcon{":/icons/48x48/story-editor.png"},               QY("Chapter editor"));
@@ -293,7 +293,7 @@ MainWindow::retranslateUi() {
   // lose the translations for the three currently unimplemented
   // tools.
   auto toolTitles = QStringList{} << QY("Extraction tool") << QY("Info tool") << QY("Tag editor");
-  toolTitles      = QStringList{} << QY("Multiplex tool") << QY("Header editor") << QY("Chapter editor") << QY("Job queue") << QY("Job output");
+  toolTitles      = QStringList{} << QY("Multiplexer") << QY("Header editor") << QY("Chapter editor") << QY("Job queue") << QY("Job output");
 
   for (auto idx = 0, count = ui->tool->count(); idx < count; ++idx)
     ui->tool->setTabText(idx, toolTitles[idx]);
@@ -302,7 +302,7 @@ MainWindow::retranslateUi() {
   // designer as the designer doesn't allow the same hotkey in the
   // same form.
   ui->menuGUI          ->setTitle(QY("MKVToolNix &GUI"));
-  ui->menuMerge        ->setTitle(QY("&Multiplex tool"));
+  ui->menuMerge        ->setTitle(QY("&Multiplexer"));
   ui->menuHeaderEditor ->setTitle(QY("Header &editor"));
   ui->menuChapterEditor->setTitle(QY("&Chapter editor"));
   ui->menuJobQueue     ->setTitle(QY("&Job queue"));
