@@ -51,7 +51,7 @@ protected:
 
   QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_addFilesAction2, *m_appendFilesAction2, *m_addAdditionalPartsAction2;
   QAction *m_removeFilesAction, *m_removeAllFilesAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
-  QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction, *m_openFilesInMediaInfoAction, *m_openTracksInMediaInfoAction;
+  QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction, *m_openFilesInMediaInfoAction, *m_openTracksInMediaInfoAction, *m_selectTracksFromFilesAction;
   QAction *m_enableAllAttachedFilesAction, *m_disableAllAttachedFilesAction, *m_enableSelectedAttachedFilesAction, *m_disableSelectedAttachedFilesAction;
   QAction *m_startMuxingLeaveAsIs, *m_startMuxingCreateNewSettings, *m_startMuxingRemoveInputFiles;
   QAction *m_addToJobQueueLeaveAsIs, *m_addToJobQueueCreateNewSettings, *m_addToJobQueueRemoveInputFiles;
@@ -101,6 +101,7 @@ public slots:
   virtual void selectAllVideoTracks();
   virtual void selectAllAudioTracks();
   virtual void selectAllSubtitlesTracks();
+  virtual void selectAllTracksFromSelectedFiles();
   virtual void enableAllTracks();
   virtual void disableAllTracks();
 

@@ -257,6 +257,8 @@ Tab::setupInputControls() {
   m_filesMenu->addAction(m_removeAllFilesAction);
   m_filesMenu->addSeparator();
   m_filesMenu->addAction(m_openFilesInMediaInfoAction);
+  m_filesMenu->addSeparator();
+  m_filesMenu->addAction(m_selectTracksFromFilesAction);
 
   m_addFilesAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
   m_appendFilesAction->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-x.png")});
@@ -380,6 +382,7 @@ Tab::setupInputControls() {
   connect(m_selectAllVideoTracksAction,     &QAction::triggered,                                                                              this,                     &Tab::selectAllVideoTracks);
   connect(m_selectAllAudioTracksAction,     &QAction::triggered,                                                                              this,                     &Tab::selectAllAudioTracks);
   connect(m_selectAllSubtitlesTracksAction, &QAction::triggered,                                                                              this,                     &Tab::selectAllSubtitlesTracks);
+  connect(m_selectTracksFromFilesAction,    &QAction::triggered,                                                                              this,                     &Tab::selectAllTracksFromSelectedFiles);
   connect(m_enableAllTracksAction,          &QAction::triggered,                                                                              this,                     &Tab::enableAllTracks);
   connect(m_disableAllTracksAction,         &QAction::triggered,                                                                              this,                     &Tab::disableAllTracks);
 
@@ -1251,9 +1254,11 @@ Tab::enableFilesActions() {
   m_removeFilesAction->setEnabled(0 < numSelected);
   m_removeAllFilesAction->setEnabled(!m_config.m_files.isEmpty());
   m_openFilesInMediaInfoAction->setEnabled(0 < numSelected);
+  m_selectTracksFromFilesAction->setEnabled(0 < numSelected);
 
   m_removeFilesAction->setText(QNY("&Remove file", "&Remove files", numSelected));
   m_openFilesInMediaInfoAction->setText(QNY("Open file in &MediaInfo", "Open files in &MediaInfo", numSelected));
+  m_selectTracksFromFilesAction->setText(QNY("Select all &tracks from selected file", "Select all &tracks from selected files", numSelected));
 }
 
 void
@@ -1562,6 +1567,19 @@ Tab::selectAllAudioTracks() {
 void
 Tab::selectAllSubtitlesTracks() {
   selectAllTracksOfType(Track::Subtitles);
+}
+
+void
+Tab::selectAllTracksFromSelectedFiles() {
+  if (!m_tracksModel->rowCount())
+    return;
+
+  auto tracksToSelect = QList<Track *>{};
+  for (auto const &sourceFile : selectedSourceFiles())
+    for (auto const &track : sourceFile->m_tracks)
+      tracksToSelect << track.get();
+
+  selectTracks(tracksToSelect);
 }
 
 void
