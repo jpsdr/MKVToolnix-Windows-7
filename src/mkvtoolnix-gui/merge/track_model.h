@@ -31,6 +31,7 @@ protected:
   static int const ForcedTrackFlagColumn  =  7;
   static int const PropertiesColumn       =  8;
   static int const SourceFileColumn       =  9;
+  static int const SourceFileDirColumn    = 10;
 
 protected:
   QList<Track *> *m_tracks;

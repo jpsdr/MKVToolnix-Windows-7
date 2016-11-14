@@ -52,6 +52,7 @@ TrackModel::retranslateUi() {
     { QY("Forced track"),            Q("forcedTrackFlag")  },
     { QY("Properties"),              Q("properties")       },
     { QY("Source file"),             Q("sourceFile")       },
+    { QY("Source file's directory"), Q("sourceFileDir")    },
   });
 
   horizontalHeaderItem(IDColumn)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -110,6 +111,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[ForcedTrackFlagColumn] ->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("Yes") : QY("No"));
   items[PropertiesColumn]      ->setText(summarizeProperties(*track));
   items[SourceFileColumn]      ->setText(fileInfo.fileName());
+  items[SourceFileDirColumn]   ->setText(QDir::toNativeSeparators(fileInfo.path()));
 
   items[CodecColumn]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
   items[CodecColumn]->setCheckable(true);
