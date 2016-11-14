@@ -21,6 +21,18 @@ class TrackModel : public QStandardItemModel {
   Q_OBJECT;
 
 protected:
+  static int const CodecColumn            =  0;
+  static int const TypeColumn             =  1;
+  static int const MuxThisColumn          =  2;
+  static int const LanguageColumn         =  3;
+  static int const NameColumn             =  4;
+  static int const IDColumn               =  5;
+  static int const DefaultTrackFlagColumn =  6;
+  static int const ForcedTrackFlagColumn  =  7;
+  static int const PropertiesColumn       =  8;
+  static int const SourceFileColumn       =  9;
+
+protected:
   QList<Track *> *m_tracks;
   QIcon m_audioIcon, m_videoIcon, m_subtitleIcon, m_attachmentIcon, m_chaptersIcon, m_tagsIcon, m_genericIcon;
   bool m_ignoreTrackRemovals, m_nonAppendedSelected, m_appendedSelected, m_nonRegularSelected, m_appendedMultiParentsSelected, m_appendedMultiTypeSelected;

@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QFileInfo>
 #include <QItemSelectionModel>
 
@@ -46,14 +47,14 @@ TrackModel::retranslateUi() {
     { QY("Copy item"),               Q("muxThis")          },
     { QY("Language"),                Q("language")         },
     { QY("Name"),                    Q("name")             },
-    { QY("Source file"),             Q("sourceFile")       },
     { QY("ID"),                      Q("id")               },
     { QY("Default track in output"), Q("defaultTrackFlag") },
     { QY("Forced track"),            Q("forcedTrackFlag")  },
     { QY("Properties"),              Q("properties")       },
+    { QY("Source file"),             Q("sourceFile")       },
   });
 
-  horizontalHeaderItem(6)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  horizontalHeaderItem(IDColumn)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
   for (auto const &track : *m_tracks) {
     trackUpdated(track);
@@ -97,32 +98,36 @@ TrackModel::createRow(Track *track) {
 void
 TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                               Track *track) {
-  items[0]->setText(track->isChapters() || track->isGlobalTags() || track->isTags() ? QNY("%1 entry", "%1 entries", track->m_size).arg(track->m_size) : track->m_codec);
-  items[1]->setText(track->nameForType());
-  items[2]->setText(track->m_muxThis ? QY("Yes") : QY("No"));
-  items[3]->setText(track->isAppended() ? QString{} : track->m_language);
-  items[4]->setText(track->isAppended() ? QString{} : track->m_name);
-  items[5]->setText(QFileInfo{ track->m_file->m_fileName }.fileName());
-  items[6]->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
-  items[7]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("Yes") : QY("No"));
-  items[8]->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("Yes") : QY("No"));
-  items[9]->setText(summarizeProperties(*track));
+  auto fileInfo = QFileInfo{ track->m_file->m_fileName };
 
-  items[0]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
-  items[0]->setCheckable(true);
-  items[0]->setCheckState(track->m_muxThis ? Qt::Checked : Qt::Unchecked);
-  items[1]->setIcon(  track->isAudio()      ? m_audioIcon
-                    : track->isVideo()      ? m_videoIcon
-                    : track->isSubtitles()  ? m_subtitleIcon
-                    : track->isAttachment() ? m_attachmentIcon
-                    : track->isChapters()   ? m_chaptersIcon
-                    : track->isTags()       ? m_tagsIcon
-                    : track->isGlobalTags() ? m_tagsIcon
-                    :                         m_genericIcon);
-  items[2]->setIcon(track->m_muxThis                                                                    ? MainWindow::yesIcon() : MainWindow::noIcon());
-  items[7]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
-  items[8]->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? MainWindow::yesIcon() : MainWindow::noIcon());
-  items[6]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  items[CodecColumn]           ->setText(track->isChapters() || track->isGlobalTags() || track->isTags() ? QNY("%1 entry", "%1 entries", track->m_size).arg(track->m_size) : track->m_codec);
+  items[TypeColumn]            ->setText(track->nameForType());
+  items[MuxThisColumn]         ->setText(track->m_muxThis ? QY("Yes") : QY("No"));
+  items[LanguageColumn]        ->setText(track->isAppended() ? QString{} : track->m_language);
+  items[NameColumn]            ->setText(track->isAppended() ? QString{} : track->m_name);
+  items[IDColumn]              ->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
+  items[DefaultTrackFlagColumn]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("Yes") : QY("No"));
+  items[ForcedTrackFlagColumn] ->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("Yes") : QY("No"));
+  items[PropertiesColumn]      ->setText(summarizeProperties(*track));
+  items[SourceFileColumn]      ->setText(fileInfo.fileName());
+
+  items[CodecColumn]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
+  items[CodecColumn]->setCheckable(true);
+  items[CodecColumn]->setCheckState(track->m_muxThis ? Qt::Checked : Qt::Unchecked);
+
+  items[TypeColumn] ->setIcon(  track->isAudio()      ? m_audioIcon
+                              : track->isVideo()      ? m_videoIcon
+                              : track->isSubtitles()  ? m_subtitleIcon
+                              : track->isAttachment() ? m_attachmentIcon
+                              : track->isChapters()   ? m_chaptersIcon
+                              : track->isTags()       ? m_tagsIcon
+                              : track->isGlobalTags() ? m_tagsIcon
+                              :                         m_genericIcon);
+  items[MuxThisColumn]         ->setIcon(track->m_muxThis                                                                    ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[DefaultTrackFlagColumn]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[ForcedTrackFlagColumn] ->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? MainWindow::yesIcon() : MainWindow::noIcon());
+
+  items[IDColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
 Track *
