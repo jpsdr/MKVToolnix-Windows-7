@@ -1258,7 +1258,7 @@ Tab::enableFilesActions() {
 
   m_removeFilesAction->setText(QNY("&Remove file", "&Remove files", numSelected));
   m_openFilesInMediaInfoAction->setText(QNY("Open file in &MediaInfo", "Open files in &MediaInfo", numSelected));
-  m_selectTracksFromFilesAction->setText(QNY("Select all &tracks from selected file", "Select all &tracks from selected files", numSelected));
+  m_selectTracksFromFilesAction->setText(QNY("Select all &items from selected file", "Select all &items from selected files", numSelected));
 }
 
 void
@@ -1277,7 +1277,7 @@ Tab::enableTracksActions() {
 
   m_openTracksInMediaInfoAction->setEnabled(0 < numSelected);
 
-  m_openTracksInMediaInfoAction->setText(QNY("Open track's file in &MediaInfo", "Open tracks' files in &MediaInfo", numSelected));
+  m_openTracksInMediaInfoAction->setText(QNY("Open corresponding file in &MediaInfo", "Open corresponding files in &MediaInfo", numSelected));
 }
 
 void
@@ -1297,10 +1297,10 @@ Tab::retranslateInputUI() {
 
   m_removeAllFilesAction->setText(QY("Remove a&ll files"));
 
-  m_selectAllTracksAction->setText(QY("&Select all tracks"));
+  m_selectAllTracksAction->setText(QY("&Select all items"));
   m_selectTracksOfTypeMenu->setTitle(QY("Select all tracks of specific &type"));
-  m_enableAllTracksAction->setText(QY("&Enable all tracks"));
-  m_disableAllTracksAction->setText(QY("&Disable all tracks"));
+  m_enableAllTracksAction->setText(QY("&Enable all items"));
+  m_disableAllTracksAction->setText(QY("&Disable all items"));
 
   m_selectAllVideoTracksAction->setText(QY("&Video"));
   m_selectAllAudioTracksAction->setText(QY("&Audio"));
