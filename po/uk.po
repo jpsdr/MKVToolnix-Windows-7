@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-15 15:55+0100\n"
+"POT-Creation-Date: 2016-11-16 16:03+0100\n"
 "PO-Revision-Date: 2016-10-14 19:16+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -2089,7 +2089,7 @@ msgstr "'%1%': Обробка наступних файлів, а також: %2
 
 #: src/input/r_matroska.cpp:1719
 #, fuzzy, boost-format
-msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
+msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%': Ви повторно мультиплексуєте доріжку Opus, що була мультиплекована в експериментальному режимі. Результуючий файл буде записано у фіналізованому режимі, але одна деталь не може бути відновлена з доріжки, мультиплекованої в експериментальному режимі: кінцева обрізка. Це означає, що декодер може давати на виході на кілька семплів більше, ніж оригінально задано. Вам необхідно робити повторне мультиплексування на основі оригінального файла Opus, якщо можливо.\n"
 
 #: src/merge/mkvmerge.cpp:2486
@@ -6849,8 +6849,14 @@ msgid "Multiplexer"
 msgstr "&Мультиплексування"
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 #, fuzzy
 msgid "Multiplexing application"
+msgstr "Додаток, що виконував мультиплексування"
+
+#: src/info/mkvinfo.cpp:470
+#, fuzzy, boost-format
+msgid "Multiplexing application: %1%"
 msgstr "Додаток, що виконував мультиплексування"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
@@ -6858,23 +6864,14 @@ msgstr "Додаток, що виконував мультиплексуванн
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "мультиплексування у файл \"%1\" в каталог \"%2\""
 
+#: src/merge/mkvmerge.cpp:2996
+#, fuzzy, boost-format
+msgid "Multiplexing took %1%.\n"
+msgstr "Мультиплексування тривало %1%.\n"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 msgid "Multiply this track's timestamps with a factor."
 msgstr ""
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "Muxing application"
-msgstr "Додаток, що виконував мультиплексування"
-
-#: src/info/mkvinfo.cpp:470
-#, boost-format
-msgid "Muxing application: %1%"
-msgstr "Додаток, що виконував мультиплексування: %1%"
-
-#: src/merge/mkvmerge.cpp:2996
-#, boost-format
-msgid "Muxing took %1%.\n"
-msgstr "Мультиплексування тривало %1%.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "NALU size length:"
@@ -10063,11 +10060,8 @@ msgid "The name must not be left empty."
 msgstr "Назва не має бути пустою."
 
 #: src/common/property_element.cpp:109
-msgid "The name of the application or library used for multiplexing the file."
-msgstr ""
-
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "The name of the application or library used for muxing the file."
+msgid "The name of the application or library used for multiplexing the file."
 msgstr ""
 
 #: src/common/property_element.cpp:110
@@ -12199,8 +12193,8 @@ msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: не знайдено заголовку EBML.\n"
 
 #: src/input/r_matroska.cpp:719
-#, boost-format
-msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
+#, fuzzy, boost-format
+msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: невідомий тип демультиплексора для доріжки %1%: '%2%'\n"
 
 #: src/common/memory.cpp:150
@@ -12759,6 +12753,12 @@ msgstr "– нічого не обрано –"
 
 #~ msgid "Mux this"
 #~ msgstr "Мультиплексувати"
+
+#~ msgid "Muxing application"
+#~ msgstr "Додаток, що виконував мультиплексування"
+
+#~ msgid "Muxing application: %1%"
+#~ msgstr "Додаток, що виконував мультиплексування: %1%"
 
 #~ msgid "Name &template:"
 #~ msgstr "Назва  &шаблону:"

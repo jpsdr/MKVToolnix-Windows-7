@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-15 15:55+0100\n"
+"POT-Creation-Date: 2016-11-16 16:03+0100\n"
 "PO-Revision-Date: 2016-10-09 10:56+0900\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -2046,7 +2046,7 @@ msgstr "'%1%'：後続のファイルを同様に処理しています：%2%\n"
 
 #: src/input/r_matroska.cpp:1719
 #, fuzzy, boost-format
-msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
+msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%'：実験的モードでMUXされたOpusのトラックを再MUXしようとしています。出力されるトラックは最終的なモードで上書きされますが、実験的モードでMUXされたトラックからは詳細情報が1つ回復不能になります。エンドトリミングがそれです。これは、デコーダーの出力が元々意図されていたよりも数サンプル多くなる可能性があるということを意味します。もし可能であれば、オリジナルのOpusファイルから再MUXしてください。\n"
 
 #: src/merge/mkvmerge.cpp:2486
@@ -6792,8 +6792,14 @@ msgid "Multiplexer"
 msgstr "Mergeツール(&M)"
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 #, fuzzy
 msgid "Multiplexing application"
+msgstr "MUXアプリケーション"
+
+#: src/info/mkvinfo.cpp:470
+#, fuzzy, boost-format
+msgid "Multiplexing application: %1%"
 msgstr "MUXアプリケーション"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
@@ -6801,23 +6807,14 @@ msgstr "MUXアプリケーション"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "ディレクトリ»%2«のファイル»%1«へマージ"
 
+#: src/merge/mkvmerge.cpp:2996
+#, fuzzy, boost-format
+msgid "Multiplexing took %1%.\n"
+msgstr "MUXに%1%かかりました。\n"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 msgid "Multiply this track's timestamps with a factor."
 msgstr "このトラックのタイムスタンプに係数を乗じます。"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "Muxing application"
-msgstr "MUXアプリケーション"
-
-#: src/info/mkvinfo.cpp:470
-#, boost-format
-msgid "Muxing application: %1%"
-msgstr "MUXに使用されたアプリケーション：%1%"
-
-#: src/merge/mkvmerge.cpp:2996
-#, boost-format
-msgid "Muxing took %1%.\n"
-msgstr "MUXに%1%かかりました。\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "NALU size length:"
@@ -9958,12 +9955,9 @@ msgid "The name must not be left empty."
 msgstr "名前を空白のままにしておくことはできません。"
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 #, fuzzy
 msgid "The name of the application or library used for multiplexing the file."
-msgstr "このファイルをMUXするのに使用されたアプリケーションやライブラリの名前です。"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "The name of the application or library used for muxing the file."
 msgstr "このファイルをMUXするのに使用されたアプリケーションやライブラリの名前です。"
 
 #: src/common/property_element.cpp:110
@@ -12086,8 +12080,8 @@ msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader：EBMLヘッドが見つかりませんでした。\n"
 
 #: src/input/r_matroska.cpp:719
-#, boost-format
-msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
+#, fuzzy, boost-format
+msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader：トラック%1%のデマルチプレクサタイプが未知のものです：'%2%'\n"
 
 #: src/common/memory.cpp:150
@@ -12621,6 +12615,12 @@ msgstr "無しに設定"
 #~ msgid "Mux this"
 #~ msgstr "このトラックをMuxする"
 
+#~ msgid "Muxing application"
+#~ msgstr "MUXアプリケーション"
+
+#~ msgid "Muxing application: %1%"
+#~ msgstr "MUXに使用されたアプリケーション：%1%"
+
 #~ msgid "No input files were given. No output will be created.\n"
 #~ msgstr "入力ファイルが指定されていません。出力ファイルは作成されません。\n"
 
@@ -12649,6 +12649,9 @@ msgstr "無しに設定"
 #~ msgstr "このAVCビデオトラックにはフレームタイムコードを補正する'CTTS' atomがありません。しかし、AVC/h.264では伝統的な1つ（Pフレームの場合）もしくは2つ（Bフレームの場合）より多く他のフレームを参照することが許されています。そのようなフレームのタイムコードは順番通りでないことがあり、'CTTS' atomはタイムコードを補正するために必要です。それが無いため、このトラックのタイムコードは正しくないかもしれません。出力されたファイルを見て期待通りに見えることを確認してください。\n"
 
 #~ msgid "The name of the application or library used for merging the file."
+#~ msgstr "このファイルをMUXするのに使用されたアプリケーションやライブラリの名前です。"
+
+#~ msgid "The name of the application or library used for muxing the file."
 #~ msgstr "このファイルをMUXするのに使用されたアプリケーションやライブラリの名前です。"
 
 #~ msgid "The name of the output file '%1%' and of one of the input files is the same. This would cause mkvmerge to overwrite one of your input files. This is most likely not what you want.\n"

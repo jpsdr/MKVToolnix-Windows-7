@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-15 15:55+0100\n"
+"POT-Creation-Date: 2016-11-16 16:03+0100\n"
 "PO-Revision-Date: 2016-11-09 17:46+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -2067,7 +2067,7 @@ msgstr "\"%1%\": Przetwarzanie również następujących plików: %2%\n"
 
 #: src/input/r_matroska.cpp:1719
 #, fuzzy, boost-format
-msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
+msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "\"%1%\": Remuksujesz ścieżkę Opus, która była zmuksowana w trybie eksperymentalnym. Ścieżka wynikowa będzie zapisana w trybie finalnym, jednak jeden parametr nie może być uzyskany ze ścieżki zmuksowanej w trybie eksperymentalnym: jest to przycięcie. Oznacza to, że dekoder może dać na wyjście kilka więcej sampli niż to było zamierzone oryginalnie. Powinienieś remuksować ścieżkę Opus z pliku oryginalnego, jeśli to tylko możliwe.\n"
 
 #: src/merge/mkvmerge.cpp:2486
@@ -6826,8 +6826,14 @@ msgid "Multiplexer"
 msgstr "Narzędzie &muksowania"
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 #, fuzzy
 msgid "Multiplexing application"
+msgstr "Aplikacja muksująca"
+
+#: src/info/mkvinfo.cpp:470
+#, fuzzy, boost-format
+msgid "Multiplexing application: %1%"
 msgstr "Aplikacja muksująca"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
@@ -6835,23 +6841,14 @@ msgstr "Aplikacja muksująca"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "muksowanie do pliku »%1« w katalogu »%2«"
 
+#: src/merge/mkvmerge.cpp:2996
+#, fuzzy, boost-format
+msgid "Multiplexing took %1%.\n"
+msgstr "Muksowanie trwało %1%.\n"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 msgid "Multiply this track's timestamps with a factor."
 msgstr "Mnoży czas trwania ścieżki o dany współczynnik."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "Muxing application"
-msgstr "Aplikacja muksująca"
-
-#: src/info/mkvinfo.cpp:470
-#, boost-format
-msgid "Muxing application: %1%"
-msgstr "Program muksujący: %1%"
-
-#: src/merge/mkvmerge.cpp:2996
-#, boost-format
-msgid "Muxing took %1%.\n"
-msgstr "Muksowanie trwało %1%.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "NALU size length:"
@@ -10025,12 +10022,9 @@ msgid "The name must not be left empty."
 msgstr "Pole nazwa nie może zostać puste."
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 #, fuzzy
 msgid "The name of the application or library used for multiplexing the file."
-msgstr "Nazwa aplikacji lub biblioteki użytej do muksowania pliku."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "The name of the application or library used for muxing the file."
 msgstr "Nazwa aplikacji lub biblioteki użytej do muksowania pliku."
 
 #: src/common/property_element.cpp:110
@@ -12158,8 +12152,8 @@ msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: nie znaleziono nagłówka EBML.\n"
 
 #: src/input/r_matroska.cpp:719
-#, boost-format
-msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
+#, fuzzy, boost-format
+msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: nieznany typ demuksera dla ścieżki %1%: \"%2%\"\n"
 
 #: src/common/memory.cpp:150
@@ -12710,6 +12704,12 @@ msgstr "– ustaw na żadne –"
 #~ msgid "Mux this"
 #~ msgstr "Muksuj to"
 
+#~ msgid "Muxing application"
+#~ msgstr "Aplikacja muksująca"
+
+#~ msgid "Muxing application: %1%"
+#~ msgstr "Program muksujący: %1%"
+
 #~ msgid "Name &template:"
 #~ msgstr "Nazwa &szablonu:"
 
@@ -12766,6 +12766,9 @@ msgstr "– ustaw na żadne –"
 #~ "tak, jak powinien.\n"
 
 #~ msgid "The name of the application or library used for merging the file."
+#~ msgstr "Nazwa aplikacji lub biblioteki użytej do muksowania pliku."
+
+#~ msgid "The name of the application or library used for muxing the file."
 #~ msgstr "Nazwa aplikacji lub biblioteki użytej do muksowania pliku."
 
 #~ msgid ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 15.11.2016\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-15 15:55+0100\n"
+"POT-Creation-Date: 2016-11-16 16:03+0100\n"
 "PO-Revision-Date: 2016-11-15 17:43+0100\n"
 "Last-Translator: bovirus <@bovirus@gmail.com>\n"
 "Language-Team: bovirus <bovirus@gmail.com>\n"
@@ -2055,8 +2055,8 @@ msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': Elaborazione dei seguenti file: %2%\n"
 
 #: src/input/r_matroska.cpp:1719
-#, boost-format
-msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
+#, fuzzy, boost-format
+msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%': stai copiando una traccia Opus che è stata scritta in modo sperimentale. La traccia risultante verrà scritta in modo finale, ma un dettaglio non potrà essere recuperato da una traccia scritta in modo sperimentale. Questo significa che il decoder potreebe produrre alcuni campioni più di quelli attesi. Dovresti se possibile re-muxare dal file Opus originale.\n"
 
 #: src/merge/mkvmerge.cpp:2486
@@ -6775,7 +6775,13 @@ msgid "Multiplexer"
 msgstr "Multiplexer"
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 msgid "Multiplexing application"
+msgstr "Applicazione multiplex"
+
+#: src/info/mkvinfo.cpp:470
+#, fuzzy, boost-format
+msgid "Multiplexing application: %1%"
 msgstr "Applicazione multiplex"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
@@ -6783,23 +6789,14 @@ msgstr "Applicazione multiplex"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multiplexing nel file \"%1\" nella cartella \"%2\""
 
+#: src/merge/mkvmerge.cpp:2996
+#, fuzzy, boost-format
+msgid "Multiplexing took %1%.\n"
+msgstr "Il muxing ha richiesto %1%.\n"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 msgid "Multiply this track's timestamps with a factor."
 msgstr "Moltiplica questi dati data/ora tracce con un fattore."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "Muxing application"
-msgstr "Applicazione muxing"
-
-#: src/info/mkvinfo.cpp:470
-#, boost-format
-msgid "Muxing application: %1%"
-msgstr "Applicazione muxing: %1%"
-
-#: src/merge/mkvmerge.cpp:2996
-#, boost-format
-msgid "Muxing took %1%.\n"
-msgstr "Il muxing ha richiesto %1%.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "NALU size length:"
@@ -9942,12 +9939,9 @@ msgid "The name must not be left empty."
 msgstr "Il nome non deve essere lasciato vuoto."
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 msgid "The name of the application or library used for multiplexing the file."
 msgstr "Il nome dell'applicazione o libreria usata per il multiplexing del file."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "The name of the application or library used for muxing the file."
-msgstr "Il nome dell'applicazione o libreria usata per il muxing del file."
 
 #: src/common/property_element.cpp:110
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
@@ -12072,8 +12066,8 @@ msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: nessun intestazione EBML trovata.\n"
 
 #: src/input/r_matroska.cpp:719
-#, boost-format
-msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
+#, fuzzy, boost-format
+msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: tipo demuxer sconosciuto per traccia %1%: '%2%'\n"
 
 #: src/common/memory.cpp:150
@@ -12620,6 +12614,12 @@ msgstr "- Imposta a nessuno -"
 #~ msgid "Mux this"
 #~ msgstr "Muza questa"
 
+#~ msgid "Muxing application"
+#~ msgstr "Applicazione muxing"
+
+#~ msgid "Muxing application: %1%"
+#~ msgstr "Applicazione muxing: %1%"
+
 #~ msgid "Name &template:"
 #~ msgstr "Nome &modello:"
 
@@ -12684,6 +12684,9 @@ msgstr "- Imposta a nessuno -"
 #~ "file risultante e assicurarti che sia come ti aspetti.\n"
 
 #~ msgid "The name of the application or library used for merging the file."
+#~ msgstr "Il nome dell'applicazione o libreria usata per il muxing del file."
+
+#~ msgid "The name of the application or library used for muxing the file."
 #~ msgstr "Il nome dell'applicazione o libreria usata per il muxing del file."
 
 #~ msgid ""

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-15 15:55+0100\n"
-"PO-Revision-Date: 2016-11-16 15:59+0100\n"
+"POT-Creation-Date: 2016-11-16 16:03+0100\n"
+"PO-Revision-Date: 2016-11-16 16:03+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -2070,8 +2070,8 @@ msgstr "»%1%«: Auch die folgenden Dateien werden verarbeitet: %2%\n"
 
 #: src/input/r_matroska.cpp:1719
 #, boost-format
-msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
-msgstr "»%1%«: Sie kopieren eine ursprünglich im experimentellen Modus geschriebene Opus-Spur. Die entstehende Spur wird im finalen Modus geschrieben, allerdings kann ein Detail nicht aus einer im experimentellen Modus geschriebenen Spur rekonstruiert werden: die Anzahl der am Ende zu entfernenden Samples. Das bedeutet, dass ein Decoder einige Samples mehr ausgeben könnte, als ursprünglich beabsichtigt war. Sie sollten statt dessen, falls möglich, die Original-Opus-Datei re-muxen.\n"
+msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
+msgstr "»%1%«: Sie kopieren eine ursprünglich im experimentellen Modus geschriebene Opus-Spur. Die entstehende Spur wird im finalen Modus geschrieben, allerdings kann ein Detail nicht aus einer im experimentellen Modus geschriebenen Spur rekonstruiert werden: die Anzahl der am Ende zu entfernenden Samples. Das bedeutet, dass ein Decoder einige Samples mehr ausgeben könnte, als ursprünglich beabsichtigt war. Sie sollten statt dessen, falls möglich, die Original-Opus-Datei erneut multiplexen.\n"
 
 #: src/merge/mkvmerge.cpp:2486
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
@@ -6790,31 +6790,28 @@ msgid "Multiplexer"
 msgstr "Multiplexer"
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 msgid "Multiplexing application"
 msgstr "Multiplexeranwendung"
+
+#: src/info/mkvinfo.cpp:470
+#, boost-format
+msgid "Multiplexing application: %1%"
+msgstr "Multiplexeranwendung: %1%"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
 #, no-c-format
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multiplexe in Datei »%1« im Verzeichnis »%2«"
 
+#: src/merge/mkvmerge.cpp:2996
+#, boost-format
+msgid "Multiplexing took %1%.\n"
+msgstr "Das Multiplexen dauerte %1%.\n"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 msgid "Multiply this track's timestamps with a factor."
 msgstr "Multipliziert die Zeitstempel dieser Spur mit einem Faktor."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "Muxing application"
-msgstr "Muxeranwendung"
-
-#: src/info/mkvinfo.cpp:470
-#, boost-format
-msgid "Muxing application: %1%"
-msgstr "Muxeranwendung: %1%"
-
-#: src/merge/mkvmerge.cpp:2996
-#, boost-format
-msgid "Muxing took %1%.\n"
-msgstr "Das Muxen dauerte %1%.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "NALU size length:"
@@ -9965,12 +9962,9 @@ msgid "The name must not be left empty."
 msgstr "Der Name darf nicht leer gelassen werden."
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 msgid "The name of the application or library used for multiplexing the file."
 msgstr "Der Name der Anwendung oder Bibliothek, mit der die Datei gemultiplext wurde."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "The name of the application or library used for muxing the file."
-msgstr "Der Name der Anwendung oder Bibliothek, mit der die Datei gemuxt wurde."
 
 #: src/common/property_element.cpp:110
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
@@ -12094,8 +12088,8 @@ msgstr "matroska_reader: kein EBML-Kopf gefunden\n"
 
 #: src/input/r_matroska.cpp:719
 #, boost-format
-msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
-msgstr "matroska_reader: unbekannter Demuxertyp für Spur %1%: »%2%«\n"
+msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
+msgstr "matroska_reader: unbekannter Demultiplexertyp für Spur %1%: »%2%«\n"
 
 #: src/common/memory.cpp:150
 #, boost-format
@@ -12574,6 +12568,12 @@ msgstr "– Leer setzen –"
 #~ msgid "Mux this"
 #~ msgstr "Diese muxen"
 
+#~ msgid "Muxing application"
+#~ msgstr "Muxeranwendung"
+
+#~ msgid "Muxing application: %1%"
+#~ msgstr "Muxeranwendung: %1%"
+
 #~ msgid "No input files were given. No output will be created.\n"
 #~ msgstr "Es wurden keine Quelldateien angegeben. Es wird keine Ausgabe erzeugt.\n"
 
@@ -12596,6 +12596,9 @@ msgstr "– Leer setzen –"
 #~ msgstr "Zielverzeichnis auswählen"
 
 #~ msgid "The name of the application or library used for merging the file."
+#~ msgstr "Der Name der Anwendung oder Bibliothek, mit der die Datei gemuxt wurde."
+
+#~ msgid "The name of the application or library used for muxing the file."
 #~ msgstr "Der Name der Anwendung oder Bibliothek, mit der die Datei gemuxt wurde."
 
 #~ msgid "The name of the output file '%1%' and of one of the input files is the same. This would cause mkvmerge to overwrite one of your input files. This is most likely not what you want.\n"
@@ -12654,3 +12657,4 @@ msgstr "– Leer setzen –"
 
 #~ msgid "tags"
 #~ msgstr "Tags"
+

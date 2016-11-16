@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-15 15:55+0100\n"
+"POT-Creation-Date: 2016-11-16 16:03+0100\n"
 "PO-Revision-Date: 2016-11-06 07:32+0000\n"
 "Last-Translator: HULEN\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -2023,7 +2023,7 @@ msgstr "「%1%」: 正在處理下列檔案: %2%\n"
 
 #: src/input/r_matroska.cpp:1719
 #, fuzzy, boost-format
-msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
+msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "「%1%」: 您正在重新合成於實驗模式中合成的 Opus 軌道。最後結果會用最終模式寫入，但是有一項詳細資訊無法從實驗模式合成的軌道中還原：末端裁剪。這表示解碼器可能會輸出比原本預期還少的取樣數。如果可以的話，您應該用原始的 Opus 檔案重新合成。\n"
 
 #: src/merge/mkvmerge.cpp:2486
@@ -6769,8 +6769,14 @@ msgid "Multiplexer"
 msgstr "合併工具(&M)"
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 #, fuzzy
 msgid "Multiplexing application"
+msgstr "合成應用程式"
+
+#: src/info/mkvinfo.cpp:470
+#, fuzzy, boost-format
+msgid "Multiplexing application: %1%"
 msgstr "合成應用程式"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
@@ -6778,23 +6784,14 @@ msgstr "合成應用程式"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "合併到在目錄「%2」中的檔案「%1」"
 
+#: src/merge/mkvmerge.cpp:2996
+#, fuzzy, boost-format
+msgid "Multiplexing took %1%.\n"
+msgstr "合成花費時間 %1%。\n"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 msgid "Multiply this track's timestamps with a factor."
 msgstr "用係數乘以此軌道的時間戳記。"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "Muxing application"
-msgstr "合成應用程式"
-
-#: src/info/mkvinfo.cpp:470
-#, boost-format
-msgid "Muxing application: %1%"
-msgstr "合成應用程式: %1%"
-
-#: src/merge/mkvmerge.cpp:2996
-#, boost-format
-msgid "Muxing took %1%.\n"
-msgstr "合成花費時間 %1%。\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "NALU size length:"
@@ -9934,12 +9931,9 @@ msgid "The name must not be left empty."
 msgstr "名稱不可以留空。"
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 #, fuzzy
 msgid "The name of the application or library used for multiplexing the file."
-msgstr "混流檔案所用的應用程式或程式庫的名稱。"
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "The name of the application or library used for muxing the file."
 msgstr "混流檔案所用的應用程式或程式庫的名稱。"
 
 #: src/common/property_element.cpp:110
@@ -12058,8 +12052,8 @@ msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: 未發現 EBML 表頭。\n"
 
 #: src/input/r_matroska.cpp:719
-#, boost-format
-msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
+#, fuzzy, boost-format
+msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_reader: 軌道 %1% 的未知分離器類型:「%2%」\n"
 
 #: src/common/memory.cpp:150
@@ -12592,6 +12586,12 @@ msgstr "- 設定為無 -"
 #~ msgid "Mux this"
 #~ msgstr "合成該項目"
 
+#~ msgid "Muxing application"
+#~ msgstr "合成應用程式"
+
+#~ msgid "Muxing application: %1%"
+#~ msgstr "合成應用程式: %1%"
+
 #~ msgid "No input files were given. No output will be created.\n"
 #~ msgstr "未給定任何輸入檔。將不建立輸出檔。\n"
 
@@ -12620,6 +12620,9 @@ msgstr "- 設定為無 -"
 #~ msgstr "此 AVC 視訊軌缺少「CTTS」畫格時間碼偏移單元。然而，AVC/h.264 允許畫格有超過通常的一次 (對於 P 畫格) 或兩次 (對於 B 畫格) 畫格參考。此類畫格的時間碼會變得無序，需要「CTTS」單元來修正。由於缺少時間碼，此軌可能發生錯誤。請查看生成的檔案，確認它是不是您預期的樣子。\n"
 
 #~ msgid "The name of the application or library used for merging the file."
+#~ msgstr "混流檔案所用的應用程式或程式庫的名稱。"
+
+#~ msgid "The name of the application or library used for muxing the file."
 #~ msgstr "混流檔案所用的應用程式或程式庫的名稱。"
 
 #~ msgid "The name of the output file '%1%' and of one of the input files is the same. This would cause mkvmerge to overwrite one of your input files. This is most likely not what you want.\n"

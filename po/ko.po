@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-15 15:55+0100\n"
+"POT-Creation-Date: 2016-11-16 16:03+0100\n"
 "PO-Revision-Date: 2016-11-15 16:26+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -2021,8 +2021,8 @@ msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': 후속 파일을 마찬가지로 처리: %2%\n"
 
 #: src/input/r_matroska.cpp:1719
-#, boost-format
-msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-mux from the original Opus file if possible.\n"
+#, fuzzy, boost-format
+msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%': 실험적 모드에서 기록되었던 Opus 트랙을 복사 중입니다. 그 결과로 나오는 트랙은 최종 모드로 기록이 될 것이지만 하나의 세부 항목(끝부분 잘라내기)은 실험적 모드에서 기록된 트랙에서 복원할 수 없습니다. 다시 말해서 디코더가 원래 의도한 것보다 몇 개의 샘플을 더 출력하게 됩니다. 그래서 가능하면 원래의 Opus에서 다시 합치기를 하세요.\n"
 
 #: src/merge/mkvmerge.cpp:2486
@@ -6731,7 +6731,13 @@ msgid "Multiplexer"
 msgstr "합치기"
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 msgid "Multiplexing application"
+msgstr "합치기 응용프로그램"
+
+#: src/info/mkvinfo.cpp:470
+#, fuzzy, boost-format
+msgid "Multiplexing application: %1%"
 msgstr "합치기 응용프로그램"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
@@ -6739,23 +6745,14 @@ msgstr "합치기 응용프로그램"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "\"%1\" 파일을 \"%2\" 폴더에서 합치는 중"
 
+#: src/merge/mkvmerge.cpp:2996
+#, fuzzy, boost-format
+msgid "Multiplexing took %1%.\n"
+msgstr "MUX 작업이 %1% 소요되었습니다.\n"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 msgid "Multiply this track's timestamps with a factor."
 msgstr "이 트랙의 타임코드를 인수로 곱합니다."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "Muxing application"
-msgstr "먹싱 응용프로그램"
-
-#: src/info/mkvinfo.cpp:470
-#, boost-format
-msgid "Muxing application: %1%"
-msgstr "MUX에 사용된 응용프로그램: %1%"
-
-#: src/merge/mkvmerge.cpp:2996
-#, boost-format
-msgid "Muxing took %1%.\n"
-msgstr "MUX 작업이 %1% 소요되었습니다.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1680
 msgid "NALU size length:"
@@ -9881,12 +9878,9 @@ msgid "The name must not be left empty."
 msgstr "이름 항목은 비워두면 안 됩니다."
 
 #: src/common/property_element.cpp:109
+#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
 msgid "The name of the application or library used for multiplexing the file."
 msgstr "파일을 합치는데 사용된 응용프로그램이나 라이브러리의 이름."
-
-#: src/mkvtoolnix-gui/header_editor/tab.cpp:376
-msgid "The name of the application or library used for muxing the file."
-msgstr "파일을 먹싱하는데 사용된 응용프로그램이나 라이브러리의 이름"
 
 #: src/common/property_element.cpp:110
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
@@ -12000,8 +11994,8 @@ msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_리더: EBML 헤드를 찾지 못했습니다.\n"
 
 #: src/input/r_matroska.cpp:719
-#, boost-format
-msgid "matroska_reader: unknown demuxer type for track %1%: '%2%'\n"
+#, fuzzy, boost-format
+msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_리더: 트랙 '%1%' MUX 해제기(디멀티플렉서) 유형을 알 수 없습니다: '%2%'\n"
 
 #: src/common/memory.cpp:150
@@ -12517,6 +12511,12 @@ msgstr "– 없음으로 설정 –"
 #~ msgid "Mux this"
 #~ msgstr "먹스"
 
+#~ msgid "Muxing application"
+#~ msgstr "먹싱 응용프로그램"
+
+#~ msgid "Muxing application: %1%"
+#~ msgstr "MUX에 사용된 응용프로그램: %1%"
+
 #~ msgid "No input files were given. No output will be created.\n"
 #~ msgstr "입력 파일이 지정되어 있지 않습니다. 출력 파일이 만들어지지 않았습니다.\n"
 
@@ -12542,6 +12542,9 @@ msgstr "– 없음으로 설정 –"
 #~ msgstr "이 AVC 비디오 트랙에는 프레임 타임코드를 보정하는 'CTTS' atom이 누락되어 있습니다. 하지만, AVC/h.264에서는 전통적인 하나(P프레임인 경우) 또는 두개(B프레임인 경우) 보다 더 많은 다른 프레임을 참조하는 것이 허락되어 있습니다. 이 같은 프레임의 타임코드는 순서대로가 아니며(정렬되어 있지 않으며), 'CTTS' atom은 이 타임코드를 보정하기 위해 필요합니다. 그것이 누락되어 있기 때문에, 이 트랙의 타임코드는 잘못되었는지도 모릅니다. 출력 파일을 시청하면서 예상대로 보이는지 확인하십시오.\n"
 
 #~ msgid "The name of the application or library used for merging the file."
+#~ msgstr "파일을 먹싱하는데 사용된 응용프로그램이나 라이브러리의 이름"
+
+#~ msgid "The name of the application or library used for muxing the file."
 #~ msgstr "파일을 먹싱하는데 사용된 응용프로그램이나 라이브러리의 이름"
 
 #~ msgid "The name of the output file '%1%' and of one of the input files is the same. This would cause mkvmerge to overwrite one of your input files. This is most likely not what you want.\n"
