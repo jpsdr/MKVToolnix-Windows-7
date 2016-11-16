@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:03+0100\n"
+"POT-Creation-Date: 2016-11-16 16:22+0100\n"
 "PO-Revision-Date: 2016-01-02 12:37+0100\n"
 "Last-Translator: Kristoffer Grundström <hamnisdude@gmail.com>\n"
 "Language-Team: Swedish <moritz@bunkus.org>\n"
@@ -1229,8 +1229,8 @@ msgid "&Description:"
 msgstr "&Beskrivning:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1303
-#, no-c-format
-msgid "&Disable all tracks"
+#, fuzzy, no-c-format
+msgid "&Disable all items"
 msgstr "&Inaktivera alla spår"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
@@ -1254,8 +1254,8 @@ msgid "&Duration of each entry in seconds:"
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1302
-#, no-c-format
-msgid "&Enable all tracks"
+#, fuzzy, no-c-format
+msgid "&Enable all items"
 msgstr "&Aktivera alla spår"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
@@ -1546,7 +1546,7 @@ msgstr "&Välj alla spår"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1300
 #, fuzzy, no-c-format
-msgid "&Select all tracks"
+msgid "&Select all items"
 msgstr "&Välj alla spår"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
@@ -7273,6 +7273,13 @@ msgstr ""
 msgid "Open all files as tabs in the header editor"
 msgstr "Öppna filer i kapitelredigeraren"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
+#, fuzzy, no-c-format
+msgid "Open corresponding file in &MediaInfo"
+msgid_plural "Open corresponding files in &MediaInfo"
+msgstr[0] "Öppna fil i %MediaInfo"
+msgstr[1] "Öppna filer i %MediaInfo"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1260
 #, no-c-format
 msgid "Open file in &MediaInfo"
@@ -7299,13 +7306,6 @@ msgstr "Öppna inställningsfil"
 #, fuzzy
 msgid "Open the multiplexed file with a player:"
 msgstr "Öppna den sammanfogade filen med en spelare:"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:1280
-#, no-c-format
-msgid "Open track's file in &MediaInfo"
-msgid_plural "Open tracks' files in &MediaInfo"
-msgstr[0] "Öppna spår-fil i &MediaInfo"
-msgstr[1] "Öppna spår-filer i &MediaInfo"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
 #, no-c-format
@@ -8366,8 +8366,8 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1261
 #, fuzzy, no-c-format
-msgid "Select all &tracks from selected file"
-msgid_plural "Select all &tracks from selected files"
+msgid "Select all &items from selected file"
+msgid_plural "Select all &items from selected files"
 msgstr[0] "Välj alla spår av den specifika &typen"
 msgstr[1] "Välj alla spår av den specifika &typen"
 
@@ -12511,6 +12511,11 @@ msgstr ""
 
 #~ msgid "Only one output file allowed.\n"
 #~ msgstr "Endast en utmatningsfil tillåts.\n"
+
+#~ msgid "Open track's file in &MediaInfo"
+#~ msgid_plural "Open tracks' files in &MediaInfo"
+#~ msgstr[0] "Öppna spår-fil i &MediaInfo"
+#~ msgstr[1] "Öppna spår-filer i &MediaInfo"
 
 #~ msgid "Output file"
 #~ msgstr "Utmatningsfil"

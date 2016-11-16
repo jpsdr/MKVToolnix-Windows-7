@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:03+0100\n"
+"POT-Creation-Date: 2016-11-16 16:22+0100\n"
 "PO-Revision-Date: 2016-11-15 16:26+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1385,8 +1385,8 @@ msgid "&Description:"
 msgstr "설명(&D):"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1303
-#, no-c-format
-msgid "&Disable all tracks"
+#, fuzzy, no-c-format
+msgid "&Disable all items"
 msgstr "모든 트랙 사용 안 함(&D)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
@@ -1409,8 +1409,8 @@ msgid "&Duration of each entry in seconds:"
 msgstr "각 항목의 재생 시간, 초 단위(&D):"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1302
-#, no-c-format
-msgid "&Enable all tracks"
+#, fuzzy, no-c-format
+msgid "&Enable all items"
 msgstr "모든 트랙 사용(&E)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
@@ -1691,8 +1691,8 @@ msgid "&Select all attachments"
 msgstr "모든 첨부 파일 선택(&S)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1300
-#, no-c-format
-msgid "&Select all tracks"
+#, fuzzy, no-c-format
+msgid "&Select all items"
 msgstr "모든 트랙 선택(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
@@ -7318,6 +7318,12 @@ msgstr "\"헤더 편집기\" 메뉴, 아래의 버튼 또는 여기에 드래그
 msgid "Open all files as tabs in the header editor"
 msgstr "모든 파일을 헤더 편집기에서 탭으로 열기"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
+#, fuzzy, no-c-format
+msgid "Open corresponding file in &MediaInfo"
+msgid_plural "Open corresponding files in &MediaInfo"
+msgstr[0] "&MediaInfo로 파일 열기"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1260
 #, no-c-format
 msgid "Open file in &MediaInfo"
@@ -7342,12 +7348,6 @@ msgstr "설정 파일 열기"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:153
 msgid "Open the multiplexed file with a player:"
 msgstr "합친 파일을 재생기로 열기:"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:1280
-#, no-c-format
-msgid "Open track's file in &MediaInfo"
-msgid_plural "Open tracks' files in &MediaInfo"
-msgstr[0] "&MediaInfo로 트랙의 파일 열기"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
 #, no-c-format
@@ -8379,9 +8379,9 @@ msgid "Select Matroska file to read segment UID from"
 msgstr "세그먼트 UID를 읽을 Matroska 파일을 선택하세요"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1261
-#, no-c-format
-msgid "Select all &tracks from selected file"
-msgid_plural "Select all &tracks from selected files"
+#, fuzzy, no-c-format
+msgid "Select all &items from selected file"
+msgid_plural "Select all &items from selected files"
 msgstr[0] "선택한 파일에서 모든 트랙 선택(&T)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1301
@@ -12522,6 +12522,10 @@ msgstr "– 없음으로 설정 –"
 
 #~ msgid "Only one output file allowed.\n"
 #~ msgstr "출력 파일은 하나만 지정할 수 있습니다.\n"
+
+#~ msgid "Open track's file in &MediaInfo"
+#~ msgid_plural "Open tracks' files in &MediaInfo"
+#~ msgstr[0] "&MediaInfo로 트랙의 파일 열기"
 
 #~ msgid "Output file"
 #~ msgstr "출력 파일"

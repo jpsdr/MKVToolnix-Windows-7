@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:03+0100\n"
+"POT-Creation-Date: 2016-11-16 16:22+0100\n"
 "PO-Revision-Date: 2016-03-30 18:43+0200\n"
 "Last-Translator: René Maassen <bmom43@hotmail.com>\n"
 "Language-Team: \n"
@@ -1420,8 +1420,8 @@ msgid "&Description:"
 msgstr "&Beschrijving:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1303
-#, no-c-format
-msgid "&Disable all tracks"
+#, fuzzy, no-c-format
+msgid "&Disable all items"
 msgstr "&Uitzetten voor alle sporen."
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
@@ -1445,8 +1445,8 @@ msgid "&Duration of each entry in seconds:"
 msgstr "&Duur voor elke ingang in seconden:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1302
-#, no-c-format
-msgid "&Enable all tracks"
+#, fuzzy, no-c-format
+msgid "&Enable all items"
 msgstr "&Aanzetten voor alle sporen."
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
@@ -1733,8 +1733,8 @@ msgid "&Select all attachments"
 msgstr "&Selecteer alle bijlagen"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1300
-#, no-c-format
-msgid "&Select all tracks"
+#, fuzzy, no-c-format
+msgid "&Select all items"
 msgstr "&Selecteer alle sporen"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
@@ -7421,6 +7421,13 @@ msgstr "Open een bestand via de \"Kop bewerken\" menu of sleep en laat er één 
 msgid "Open all files as tabs in the header editor"
 msgstr "Open alle bestanden als tab in koppen bewerker"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
+#, fuzzy, no-c-format
+msgid "Open corresponding file in &MediaInfo"
+msgid_plural "Open corresponding files in &MediaInfo"
+msgstr[0] "Open in &MediaInfo"
+msgstr[1] "Open in &MediaInfo"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1260
 #, fuzzy, no-c-format
 msgid "Open file in &MediaInfo"
@@ -7447,13 +7454,6 @@ msgstr "Open instelling bestand"
 #, fuzzy
 msgid "Open the multiplexed file with a player:"
 msgstr "Opeen samengevoegde bestand in een af speler:"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:1280
-#, fuzzy, no-c-format
-msgid "Open track's file in &MediaInfo"
-msgid_plural "Open tracks' files in &MediaInfo"
-msgstr[0] "Open in &MediaInfo"
-msgstr[1] "Open in &MediaInfo"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
 #, no-c-format
@@ -8492,8 +8492,8 @@ msgstr "Selecteer Matroska bestand om segment UID van te lezen"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1261
 #, fuzzy, no-c-format
-msgid "Select all &tracks from selected file"
-msgid_plural "Select all &tracks from selected files"
+msgid "Select all &items from selected file"
+msgid_plural "Select all &items from selected files"
 msgstr[0] "Selecteer alle sporen van en specifiek &type"
 msgstr[1] "Selecteer alle sporen van en specifiek &type"
 
@@ -12703,6 +12703,11 @@ msgstr "– zet naar niets –"
 
 #~ msgid "Only one output file allowed.\n"
 #~ msgstr "Alleen één uitvoer bestand toegestaan.\n"
+
+#~ msgid "Open track's file in &MediaInfo"
+#~ msgid_plural "Open tracks' files in &MediaInfo"
+#~ msgstr[0] "Open in &MediaInfo"
+#~ msgstr[1] "Open in &MediaInfo"
 
 #~ msgid "Output file"
 #~ msgstr "Uitvoer bestand"

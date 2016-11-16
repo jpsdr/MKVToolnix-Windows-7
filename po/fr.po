@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:03+0100\n"
+"POT-Creation-Date: 2016-11-16 16:22+0100\n"
 "PO-Revision-Date: 2016-11-15 15:05+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
@@ -1415,8 +1415,8 @@ msgid "&Description:"
 msgstr "&Description :"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1303
-#, no-c-format
-msgid "&Disable all tracks"
+#, fuzzy, no-c-format
+msgid "&Disable all items"
 msgstr "&Désactiver toutes les pistes"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
@@ -1440,8 +1440,8 @@ msgid "&Duration of each entry in seconds:"
 msgstr "&Durée de chaque entrée (en seconde) :"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1302
-#, no-c-format
-msgid "&Enable all tracks"
+#, fuzzy, no-c-format
+msgid "&Enable all items"
 msgstr "&Activer toutes les pistes"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
@@ -1726,8 +1726,8 @@ msgid "&Select all attachments"
 msgstr "&Sélectionner toutes les pièces jointes"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1300
-#, no-c-format
-msgid "&Select all tracks"
+#, fuzzy, no-c-format
+msgid "&Select all items"
 msgstr "&Sélectionner toutes les pistes"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
@@ -7364,6 +7364,13 @@ msgstr "Ouvrir un fichier via le menu « Éditeur d'entêtes », le bouton ci-de
 msgid "Open all files as tabs in the header editor"
 msgstr "Ouvrir tous les fichiers en onglets dans l'éditeur d'entêtes"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
+#, fuzzy, no-c-format
+msgid "Open corresponding file in &MediaInfo"
+msgid_plural "Open corresponding files in &MediaInfo"
+msgstr[0] "Ouvrir le fichier dans &MediaInfo"
+msgstr[1] "Ouvrir les fichiers dans &MediaInfo"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1260
 #, no-c-format
 msgid "Open file in &MediaInfo"
@@ -7389,13 +7396,6 @@ msgstr "Ouvrir le fichier de paramètres"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:153
 msgid "Open the multiplexed file with a player:"
 msgstr "Ouvrir le fichier multiplexé avec une application média :"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:1280
-#, no-c-format
-msgid "Open track's file in &MediaInfo"
-msgid_plural "Open tracks' files in &MediaInfo"
-msgstr[0] "Ouvrir les pistes du fichier dans &MediaInfo"
-msgstr[1] "Ouvrir les pistes des fichiers dans &MediaInfo"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
 #, no-c-format
@@ -8429,8 +8429,8 @@ msgstr "Sélectionner un fichier Matroska pour y lire l'IUD de segment"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1261
 #, fuzzy, no-c-format
-msgid "Select all &tracks from selected file"
-msgid_plural "Select all &tracks from selected files"
+msgid "Select all &items from selected file"
+msgid_plural "Select all &items from selected files"
 msgstr[0] "Sélectionner toutes les pistes d'un &type spécifique"
 msgstr[1] "Sélectionner toutes les pistes d'un &type spécifique"
 
@@ -12627,6 +12627,11 @@ msgstr "– Défini à aucun –"
 
 #~ msgid "Only one output file allowed.\n"
 #~ msgstr "Un seul fichier cible est autorisé.\n"
+
+#~ msgid "Open track's file in &MediaInfo"
+#~ msgid_plural "Open tracks' files in &MediaInfo"
+#~ msgstr[0] "Ouvrir les pistes du fichier dans &MediaInfo"
+#~ msgstr[1] "Ouvrir les pistes des fichiers dans &MediaInfo"
 
 #~ msgid "Output file"
 #~ msgstr "Fichier de sortie"

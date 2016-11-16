@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:03+0100\n"
+"POT-Creation-Date: 2016-11-16 16:22+0100\n"
 "PO-Revision-Date: 2016-11-15 17:51+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1409,8 +1409,8 @@ msgid "&Description:"
 msgstr "&Açıklama:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1303
-#, no-c-format
-msgid "&Disable all tracks"
+#, fuzzy, no-c-format
+msgid "&Disable all items"
 msgstr "Tüm izleri etki&sizleştir"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
@@ -1434,8 +1434,8 @@ msgid "&Duration of each entry in seconds:"
 msgstr "Saniye olarak her girişin &süresi:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1302
-#, no-c-format
-msgid "&Enable all tracks"
+#, fuzzy, no-c-format
+msgid "&Enable all items"
 msgstr "Tüm izleri etki&nleştir"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
@@ -1720,8 +1720,8 @@ msgid "&Select all attachments"
 msgstr "Tüm ekleri &seç"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1300
-#, no-c-format
-msgid "&Select all tracks"
+#, fuzzy, no-c-format
+msgid "&Select all items"
 msgstr "Tüm izleri &seç"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
@@ -7359,6 +7359,13 @@ msgstr "Dosyayı »başlık düzenleyici« menüsü, aşağıdaki düğme aracı
 msgid "Open all files as tabs in the header editor"
 msgstr "Tüm dosyaları başlık düzenleyicide sekme olarak aç"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
+#, fuzzy, no-c-format
+msgid "Open corresponding file in &MediaInfo"
+msgid_plural "Open corresponding files in &MediaInfo"
+msgstr[0] "Dosyayı &MediaInfo içinde aç"
+msgstr[1] "Dosyaları &MediaInfo içinde aç"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1260
 #, no-c-format
 msgid "Open file in &MediaInfo"
@@ -7384,13 +7391,6 @@ msgstr "Ayarlar dosyasını aç"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:153
 msgid "Open the multiplexed file with a player:"
 msgstr "Çoklanmış dosyayı bir oynatıcı ile aç:"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:1280
-#, no-c-format
-msgid "Open track's file in &MediaInfo"
-msgid_plural "Open tracks' files in &MediaInfo"
-msgstr[0] "İzin dosyasını &MediaInfo içinde aç"
-msgstr[1] "İzlerin dosyalarını &MediaInfo içinde aç"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
 #, no-c-format
@@ -8423,9 +8423,9 @@ msgid "Select Matroska file to read segment UID from"
 msgstr "Parça UID'sini okumak için Matroska dosyasını seçin"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1261
-#, no-c-format
-msgid "Select all &tracks from selected file"
-msgid_plural "Select all &tracks from selected files"
+#, fuzzy, no-c-format
+msgid "Select all &items from selected file"
+msgid_plural "Select all &items from selected files"
 msgstr[0] "Seçilen dosyadan &tüm izleri seç"
 msgstr[1] "Seçilen dosyalardan &tüm izleri seç"
 
@@ -12622,6 +12622,11 @@ msgstr "– Hiçbiri olarak ayarla –"
 
 #~ msgid "Only one output file allowed.\n"
 #~ msgstr "Sadece bir çıktı dosyasına izin verildi.\n"
+
+#~ msgid "Open track's file in &MediaInfo"
+#~ msgid_plural "Open tracks' files in &MediaInfo"
+#~ msgstr[0] "İzin dosyasını &MediaInfo içinde aç"
+#~ msgstr[1] "İzlerin dosyalarını &MediaInfo içinde aç"
 
 #~ msgid "Output file"
 #~ msgstr "Çıktı dosyası"

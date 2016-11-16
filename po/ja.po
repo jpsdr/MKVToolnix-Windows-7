@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:03+0100\n"
+"POT-Creation-Date: 2016-11-16 16:22+0100\n"
 "PO-Revision-Date: 2016-10-09 10:56+0900\n"
 "Last-Translator: Hiroki Taniura <boiled.sugar@gmail.com>\n"
 "Language-Team: Japanese <boiled.sugar@gmail.com>\n"
@@ -1407,8 +1407,8 @@ msgid "&Description:"
 msgstr "説明(&D)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1303
-#, no-c-format
-msgid "&Disable all tracks"
+#, fuzzy, no-c-format
+msgid "&Disable all items"
 msgstr "全てのトラックを無効化(&D)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
@@ -1431,8 +1431,8 @@ msgid "&Duration of each entry in seconds:"
 msgstr "各エントリの継続時間（秒単位）：(&D)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1302
-#, no-c-format
-msgid "&Enable all tracks"
+#, fuzzy, no-c-format
+msgid "&Enable all items"
 msgstr "全てのトラックを有効化(&E)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
@@ -1715,8 +1715,8 @@ msgid "&Select all attachments"
 msgstr "全ての添付ファイルを選択(&S)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1300
-#, no-c-format
-msgid "&Select all tracks"
+#, fuzzy, no-c-format
+msgid "&Select all items"
 msgstr "全てのトラックを選択(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
@@ -7386,6 +7386,12 @@ msgstr "»ヘッダエディタ«のメニュー経由か、下のボタン、�
 msgid "Open all files as tabs in the header editor"
 msgstr "全てのファイルをヘッダエディタでタブとして開く"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
+#, fuzzy, no-c-format
+msgid "Open corresponding file in &MediaInfo"
+msgid_plural "Open corresponding files in &MediaInfo"
+msgstr[0] "MediaInfoでファイルを開く(&M)"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1260
 #, no-c-format
 msgid "Open file in &MediaInfo"
@@ -7411,12 +7417,6 @@ msgstr "設定ファイルを開く"
 #, fuzzy
 msgid "Open the multiplexed file with a player:"
 msgstr "マージされたファイルをプレイヤーで開く："
-
-#: src/mkvtoolnix-gui/merge/input.cpp:1280
-#, no-c-format
-msgid "Open track's file in &MediaInfo"
-msgid_plural "Open tracks' files in &MediaInfo"
-msgstr[0] "トラックのファイルをMediaInfoで開く(&M)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
 #, no-c-format
@@ -8450,8 +8450,8 @@ msgstr "セグメントUIDを読み込むMatroskaファイルを選択"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1261
 #, fuzzy, no-c-format
-msgid "Select all &tracks from selected file"
-msgid_plural "Select all &tracks from selected files"
+msgid "Select all &items from selected file"
+msgid_plural "Select all &items from selected files"
 msgstr[0] "特定のタイプの全てのトラックを選択(&T)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1301
@@ -12626,6 +12626,10 @@ msgstr "無しに設定"
 
 #~ msgid "Only one output file allowed.\n"
 #~ msgstr "出力ファイルは1つのみ指定することができます。\n"
+
+#~ msgid "Open track's file in &MediaInfo"
+#~ msgid_plural "Open tracks' files in &MediaInfo"
+#~ msgstr[0] "トラックのファイルをMediaInfoで開く(&M)"
 
 #~ msgid "Output file"
 #~ msgstr "出力ファイル"

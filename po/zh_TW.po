@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:03+0100\n"
+"POT-Creation-Date: 2016-11-16 16:22+0100\n"
 "PO-Revision-Date: 2016-11-06 07:32+0000\n"
 "Last-Translator: HULEN\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -1382,8 +1382,8 @@ msgid "&Description:"
 msgstr "描述(&D):"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1303
-#, no-c-format
-msgid "&Disable all tracks"
+#, fuzzy, no-c-format
+msgid "&Disable all items"
 msgstr "停用所有軌道(&D)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
@@ -1407,8 +1407,8 @@ msgid "&Duration of each entry in seconds:"
 msgstr "播放清單的最短時間長度，單位為秒:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1302
-#, no-c-format
-msgid "&Enable all tracks"
+#, fuzzy, no-c-format
+msgid "&Enable all items"
 msgstr "啟用全部軌道(&E)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
@@ -1692,8 +1692,8 @@ msgid "&Select all attachments"
 msgstr "選擇所有附件(&S)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1300
-#, no-c-format
-msgid "&Select all tracks"
+#, fuzzy, no-c-format
+msgid "&Select all items"
 msgstr "選擇所有軌道(&S)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
@@ -7363,6 +7363,12 @@ msgstr "透過「表頭編輯器」選單、下方的按鈕或拖曳來開啟檔
 msgid "Open all files as tabs in the header editor"
 msgstr "在表頭編輯器中將所有檔案作為標籤頁開啟"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:1280
+#, fuzzy, no-c-format
+msgid "Open corresponding file in &MediaInfo"
+msgid_plural "Open corresponding files in &MediaInfo"
+msgstr[0] "在 MediaInfo 中開啟檔案(&M)"
+
 #: src/mkvtoolnix-gui/merge/input.cpp:1260
 #, no-c-format
 msgid "Open file in &MediaInfo"
@@ -7388,12 +7394,6 @@ msgstr "開啟設定檔"
 #, fuzzy
 msgid "Open the multiplexed file with a player:"
 msgstr "在播放器中開啟合併後的檔案:"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:1280
-#, no-c-format
-msgid "Open track's file in &MediaInfo"
-msgid_plural "Open tracks' files in &MediaInfo"
-msgstr[0] "在 MediaInfo 中開啟軌道對應的檔案(&M)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:183
 #, no-c-format
@@ -8427,8 +8427,8 @@ msgstr "選擇用於讀取剪輯 UID 的 Matroska 檔案"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1261
 #, fuzzy, no-c-format
-msgid "Select all &tracks from selected file"
-msgid_plural "Select all &tracks from selected files"
+msgid "Select all &items from selected file"
+msgid_plural "Select all &items from selected files"
 msgstr[0] "選擇所有同類型軌道(&T)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1301
@@ -12597,6 +12597,10 @@ msgstr "- 設定為無 -"
 
 #~ msgid "Only one output file allowed.\n"
 #~ msgstr "僅允許有一個輸出檔。\n"
+
+#~ msgid "Open track's file in &MediaInfo"
+#~ msgid_plural "Open tracks' files in &MediaInfo"
+#~ msgstr[0] "在 MediaInfo 中開啟軌道對應的檔案(&M)"
 
 #~ msgid "Output file"
 #~ msgstr "輸出檔案"
