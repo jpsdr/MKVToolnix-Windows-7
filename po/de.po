@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-11-15 15:55+0100\n"
-"PO-Revision-Date: 2016-11-15 16:04+0100\n"
+"PO-Revision-Date: 2016-11-16 15:59+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -3907,7 +3907,7 @@ msgstr "»gptzr« konnte beim Anhängen nicht gefunden werden. %1%\n"
 
 #: src/output/p_mpeg4_p2.cpp:175
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
-msgstr "Die Codec-Konfigurationsdaten konnten im ersten MPEG-4 Teil 2-Videobild nicht gefunden werden. Diese Spur kann nicht im nativen Modus gemuxt werden.\n"
+msgstr "Die Codec-Konfigurationsdaten konnten im ersten MPEG-4 Teil 2-Videobild nicht gefunden werden. Diese Spur kann nicht im nativen Modus gespeichert werden.\n"
 
 #: src/input/r_ogm.cpp:383
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
@@ -5316,7 +5316,7 @@ msgstr "Erzwungene Anzeige"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:64
 #, no-c-format
 msgid "Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types."
-msgstr "Erzwingt, dass der Matroska-Demuxer den generischen Durchleitungs-Paketierer auch für bekannte und unterstützte Spurtypen benutzt."
+msgstr "Erzwingt, dass der Matroska-Demultiplexer den generischen Durchleitungs-Paketierer auch für bekannte und unterstützte Spurtypen benutzt."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:491
 msgid "Forces the NALU size length to a certain number of bytes."
@@ -6424,7 +6424,7 @@ msgstr "Zeile %1%: negativer Zeitstempel gefunden. Der Eintrag wird so angepasst
 #: src/input/r_vobsub.cpp:297
 #, boost-format
 msgid "Line %1%: The current timestamp (%2%) is smaller than the previous one (%3%). The entries will be sorted according to their timestamps. This might result in the wrong order for some subtitle entries. If this is the case then you have to fix the .idx file manually.\n"
-msgstr "Zeile %1%: Der aktuelle Zeitstempel (%2%) ist kleiner als der vorherige (%3%). Die Einträge werden anhand der Zeitstempel sortiert. Dadurch können manchen Untertiteln falsche Zeitstempel zugewiesen werden. Falls das der Fall sein sollte, müssen Sie vor dem erneuten Muxen die Einträge in der .idx-Datei manuell korrigieren.\n"
+msgstr "Zeile %1%: Der aktuelle Zeitstempel (%2%) ist kleiner als der vorherige (%3%). Die Einträge werden anhand der Zeitstempel sortiert. Dadurch können manchen Untertiteln falsche Zeitstempel zugewiesen werden. Falls das der Fall sein sollte, müssen Sie die Einträge in der .idx-Datei manuell korrigieren.\n"
 
 #: src/input/r_vobsub.cpp:247
 #: src/input/r_vobsub.cpp:270
@@ -7338,7 +7338,7 @@ msgstr "Es darf nur eine Quelldatei angegeben werden.\n"
 #: src/merge/output_control.cpp:951
 #, boost-format
 msgid "Only partial append mappings were given for the file no. %1% ('%2%'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
-msgstr "Für Datei Nummer %1% (»%2%«) wurde eine unvollständige Zuordnung für das Anhängen von Spuren angegeben. Geben Sie entweder eine vollständige Zuordnung für alle zu muxenden Spuren aus dieser Datei an oder lassen Sie die Zuordnung für die Datei weg, wobei dann die Standardzuordnung benutzt wird.\n"
+msgstr "Für Datei Nummer %1% (»%2%«) wurde eine unvollständige Zuordnung für das Anhängen von Spuren angegeben. Geben Sie entweder eine vollständige Zuordnung für alle zu kopierenden Spuren aus dieser Datei an oder lassen Sie die Zuordnung für die Datei weg, wobei dann die Standardzuordnung benutzt wird.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:303
 #, no-c-format
@@ -7401,7 +7401,7 @@ msgstr "Dateien im Kopfdateneditor öffnen"
 #: src/mkvtoolnix-gui/merge/tool.cpp:166
 #, no-c-format
 msgid "Open settings file"
-msgstr "Muxer-Einstellungen öffnen"
+msgstr "Einstellungsdatei öffnen"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:153
 msgid "Open the multiplexed file with a player:"
@@ -7794,114 +7794,114 @@ msgstr "QuickTime/MP4"
 #: src/input/r_qtmp4.cpp:375
 #, boost-format
 msgid "Quicktime/MP4 reader: '%1%' atom is too small. Expected size: >= %2%. Actual size: %3%.\n"
-msgstr "Quicktime-/MP4-Demuxer: Ein »%1%«-Element ist zu klein. Erwartete Größe: >= %2%. Tatsächliche Größe: %3%.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Ein »%1%«-Element ist zu klein. Erwartete Größe: >= %2%. Tatsächliche Größe: %3%.\n"
 
 #: src/input/r_qtmp4.cpp:2177
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
-msgstr "Quicktime-/MP4-Demuxer: Spuren mit konstanter Sample-Größe und variabler Dauer werden noch nicht unterstützt. Falls Sie eine solche Datei haben, so kontaktieren Sie bitte den Autor.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Spuren mit konstanter Sample-Größe und variabler Dauer werden noch nicht unterstützt. Falls Sie eine solche Datei haben, so kontaktieren Sie bitte den Autor.\n"
 
 #: src/input/r_qtmp4.cpp:1515
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read chunk number %1%/%2% with size %3% from position %4%. Aborting.\n"
-msgstr "Quicktime-/MP4-Demuxer: Der Block Nummer %1%/%2% mit Größe %3% an Position %4% konnte nicht gelesen werden. Abbruch.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Der Block Nummer %1%/%2% mit Größe %3% an Position %4% konnte nicht gelesen werden. Abbruch.\n"
 
 #: src/input/r_qtmp4.cpp:2551
 #: src/input/r_qtmp4.cpp:2565
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID %1%.\n"
-msgstr "Quicktime-/MP4-Demuxer: Die erweiterten Kopfdaten für die Audiospur-ID %1% konnten nicht gelesen werden.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Die erweiterten Kopfdaten für die Audiospur-ID %1% konnten nicht gelesen werden.\n"
 
 #: src/input/r_qtmp4.cpp:2518
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID %1%.\n"
-msgstr "Quicktime-/MP4-Demuxer: Die Kopfdaten für die Audiospur-ID %1% konnten nicht gelesen werden.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Die Kopfdaten für die Audiospur-ID %1% konnten nicht gelesen werden.\n"
 
 #: src/input/r_qtmp4.cpp:1227
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID %1%.\n"
-msgstr "Quicktime-/MP4-Demuxer: Das Spurbeschreibungselement von Spur-ID %1% konnte nicht gelesen werden.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Das Spurbeschreibungselement von Spur-ID %1% konnte nicht gelesen werden.\n"
 
 #: src/input/r_qtmp4.cpp:2597
 #, boost-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID %1%.\n"
-msgstr "Quicktime-/MP4-Demuxer: Die Kopfdaten von Videospur-ID %1% konnten nicht gelesen werden.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Die Kopfdaten von Videospur-ID %1% konnten nicht gelesen werden.\n"
 
 #: src/input/r_qtmp4.cpp:298
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
-msgstr "Quicktime/MP4-Demuxer: Es wurden keine Kopfelemente gefunden.\n"
+msgstr "Quicktime/MP4-Demultiplexer: Es wurden keine Kopfelemente gefunden.\n"
 
 #: src/input/r_qtmp4.cpp:301
 msgid "Quicktime/MP4 reader: Have not found the 'mdat' atom. No movie data found.\n"
-msgstr "Quicktime-/MP4-Demuxer: Es wurde kein »mdat«-Element gefunden, d.h. keine Audio- und Videodatenpakete.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Es wurde kein »mdat«-Element gefunden, d.h. keine Audio- und Videodatenpakete.\n"
 
 #: src/input/r_qtmp4.cpp:108
 #, boost-format
 msgid "Quicktime/MP4 reader: Invalid chunk size %1% at %2%.\n"
-msgstr "Quicktime-/MP4-Demuxer: Ungültige Blockgröße %1% an Position %2%\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Ungültige Blockgröße %1% an Position %2%\n"
 
 #: src/input/r_qtmp4.cpp:3019
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track %1% is missing its decoder config. Skipping this track.\n"
-msgstr "Quicktime-/MP4-Demuxer: Der MPEG4-Teil-10/AVC-Spur %1% fehlen die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Der MPEG4-Teil-10/AVC-Spur %1% fehlen die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
 
 #: src/input/r_qtmp4.cpp:3045
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEG4 track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
-msgstr "Quicktime-/MP4-Demuxer: Der MPEG4-Spur %1% fehlt das ESDS-Element bzw. die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Der MPEG4-Spur %1% fehlt das ESDS-Element bzw. die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
 
 #: src/input/r_qtmp4.cpp:3029
 #, boost-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track %1% is missing its decoder config. Skipping this track.\n"
-msgstr "Quicktime-/MP4-Demuxer: Der MPEGH-Teil-2/HEVC-Spur %1% fehlen die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Der MPEGH-Teil-2/HEVC-Spur %1% fehlen die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
 
 #: src/input/r_qtmp4.cpp:618
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version %1%.\n"
-msgstr "Quicktime-/MP4-Demuxer: Das Medienkopf-Element (»mdhd«) benutzt die nicht unterstützte Version %1%.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Das Medienkopf-Element (»mdhd«) benutzt die nicht unterstützte Version %1%.\n"
 
 #: src/input/r_qtmp4.cpp:1220
 #, boost-format
 msgid "Quicktime/MP4 reader: The 'size' field is too small in the stream description atom for track ID %1%.\n"
-msgstr "Quicktime-/MP4-Demuxer: Das Längenfeld im Spurbeschreibungselement von Spur-ID %1% ist zu klein.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Das Längenfeld im Spurbeschreibungselement von Spur-ID %1% ist zu klein.\n"
 
 #: src/input/r_qtmp4.cpp:623
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
-msgstr "Quicktime-/MP4-Demuxer: Der Zeitstempelskalierungsfaktor ist 0. Dies wird nicht unterstützt.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Der Zeitstempelskalierungsfaktor ist 0. Dies wird nicht unterstützt.\n"
 
 #: src/input/r_qtmp4.cpp:2990
 #, boost-format
 msgid "Quicktime/MP4 reader: The AAC track %1% is missing the esds atom/the decoder config. Skipping this track.\n"
-msgstr "Quicktime-/MP4-Demuxer: Der AAC-Spur %1% fehlt das ESDS-Element bzw. die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Der AAC-Spur %1% fehlt das ESDS-Element bzw. die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
 
 #: src/input/r_qtmp4.cpp:2985
 #, boost-format
 msgid "Quicktime/MP4 reader: The audio track %1% is using an unsupported 'object type id' of %2% in the 'esds' atom. Skipping this track.\n"
-msgstr "Quicktime-/MP4-Demuxer: Die Audiospur %1% enthält die nicht unterstützte Objekttyp-ID %2% im ESDS-Element. Die Spur wird ausgelassen.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Die Audiospur %1% enthält die nicht unterstützte Objekttyp-ID %2% im ESDS-Element. Die Spur wird ausgelassen.\n"
 
 #: src/input/r_qtmp4.cpp:3039
 #, boost-format
 msgid "Quicktime/MP4 reader: The video track %1% is missing the ESDS atom. Skipping this track.\n"
-msgstr "Quicktime-/MP4-Demuxer: Der Videospur %1% fehlt das ESDS-Element. Die Spur wird ausgelassen.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Der Videospur %1% fehlt das ESDS-Element. Die Spur wird ausgelassen.\n"
 
 #: src/input/r_qtmp4.cpp:407
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '%1%'. Aborting.\n"
-msgstr "Quicktime-/MP4-Demuxer: Diese Datei enthält komprimierte Kopfelemente mit einem unbekannten oder nicht unterstützten Kompressionsalgorithmus »%1%«. Abbruch.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Diese Datei enthält komprimierte Kopfelemente mit einem unbekannten oder nicht unterstützten Kompressionsalgorithmus »%1%«. Abbruch.\n"
 
 #: src/input/r_qtmp4.cpp:440
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size (%1%) was not what is available after uncompressing (%2%).\n"
-msgstr "Quicktime-/MP4-Demuxer: Diese Datei benutzt komprimierte Kopfelemente, aber nach der Dekompression sind die Kopfelemente nicht so groß wie erwartet (erwartete Größe: %1%, tatsächliche Größe: %2%).\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Diese Datei benutzt komprimierte Kopfelemente, aber nach der Dekompression sind die Kopfelemente nicht so groß wie erwartet (erwartete Größe: %1%, tatsächliche Größe: %2%).\n"
 
 #: src/input/r_qtmp4.cpp:431
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: %1%. Aborting.\n"
-msgstr "Quicktime-/MP4-Demuxer: Diese Datei enthält komprimierte Kopfelemente, aber die Zlib-Kompressionsbibliothek konnte nicht initialisiert werden. Fehlercode von Zlib: %1%. Abbruch.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Diese Datei enthält komprimierte Kopfelemente, aber die Zlib-Kompressionsbibliothek konnte nicht initialisiert werden. Fehlercode von Zlib: %1%. Abbruch.\n"
 
 #: src/input/r_qtmp4.cpp:436
 #, boost-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: %1%. Aborting.\n"
-msgstr "Quicktime-/MP4-Demuxer: Diese Datei enthält komprimierte Kopfelemente, die nicht dekomprimiert werden konnten. Fehlercode von Zlib: %1%. Abbruch.\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Diese Datei enthält komprimierte Kopfelemente, die nicht dekomprimiert werden konnten. Fehlercode von Zlib: %1%. Abbruch.\n"
 
 #: src/input/r_qtmp4.cpp:2941
 #: src/input/r_qtmp4.cpp:2960
@@ -7909,13 +7909,13 @@ msgstr "Quicktime-/MP4-Demuxer: Diese Datei enthält komprimierte Kopfelemente, 
 #: src/input/r_qtmp4.cpp:3063
 #, boost-format
 msgid "Quicktime/MP4 reader: Track %1% is missing some data. Broken header atoms?\n"
-msgstr "Quicktime-/MP4-Demuxer: Der Spur %1% fehlen Kopfdaten. Beschädigte Datei?\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Der Spur %1% fehlen Kopfdaten. Beschädigte Datei?\n"
 
 #: src/input/r_qtmp4.cpp:2526
 #: src/input/r_qtmp4.cpp:2604
 #, boost-format
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
-msgstr "Quicktime-/MP4-Demuxer: Die Spur-ID %1% hat mehr als einen FourCC-Code. Es wird nur der erste benutzt (%2%) und nicht die eben gefundene (%3%).\n"
+msgstr "Quicktime-/MP4-Demultiplexer: Die Spur-ID %1% hat mehr als einen FourCC-Code. Es wird nur der erste benutzt (%2%) und nicht die eben gefundene (%3%).\n"
 
 #: src/common/file_types.cpp:73
 msgid "RIFF CDXA"
@@ -8758,7 +8758,7 @@ msgstr "SimpleBlock (%1%Spur Nummer %2%, %3% Bild(er), Zeitstempel %|4$.3f|s = %
 
 #: src/mpegparser/M2VParser.cpp:399
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
-msgstr "Bild mit nur einem Feld vor Bildgruppenkopf gefunden. Bitte diesen Fehler im MPEG2-Videostrom beheben und danach erneut versuchen, ihn zu muxen.\n"
+msgstr "Bild mit nur einem Feld vor Bildgruppenkopf gefunden. Bitte diesen Fehler im MPEG2-Videostrom beheben und danach erneut versuchen, ihn zu multiplexen.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:238
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
@@ -9098,7 +9098,7 @@ msgstr "Die FLAC-Kopfdaten konnten nicht ausgewertet werden: die Informationsstr
 #: src/output/p_generic_video.cpp:74
 #, boost-format
 msgid "The FPS is 0.0 but the reader did not provide a timecode for a packet. %1%\n"
-msgstr "Die Anzahl der Bilder pro Sekunde ist 0.0, aber der Demuxer hat für ein Paket keinen Zeitstempel angegeben. %1%\n"
+msgstr "Die Anzahl der Bilder pro Sekunde ist 0.0, aber der Demultiplexer hat für ein Paket keinen Zeitstempel angegeben. %1%\n"
 
 #: src/merge/mkvmerge.cpp:1387
 #, boost-format
@@ -9418,7 +9418,7 @@ msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
 "%2%\n"
 msgstr ""
-"Der Muxer für die Datei »%1%« konnte nicht initialisiert werden:\n"
+"Der Demultiplexer für die Datei »%1%« konnte nicht initialisiert werden:\n"
 "%2%\n"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:50
@@ -9706,12 +9706,12 @@ msgstr "Der Dateiname für dieses Segment"
 #: src/merge/output_control.cpp:984
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
-msgstr "Die Datei Nummer %1% (»%2%«) enthält keine Spur mit der ID %3%, oder die Spur wurde nicht zum Muxen ausgewählt. Das Argument zu »--append-to« war ungültig.\n"
+msgstr "Die Datei Nummer %1% (»%2%«) enthält keine Spur mit der ID %3%, oder die Spur wurde nicht zum Kopieren ausgewählt. Das Argument zu »--append-to« war ungültig.\n"
 
 #: src/merge/output_control.cpp:990
 #, boost-format
 msgid "The file no. %1% ('%2%') does not contain a track with the ID %3%, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
-msgstr "Die Datei Nummer %1% (»%2%«) enthält keine Spur mit der ID %3%, oder die Spur wurde nicht zum Muxen ausgewählt. Deshalb kann an diese Spur keine andere Spur angehängt werden. Das Argument zu »--append-to« war ungültig.\n"
+msgstr "Die Datei Nummer %1% (»%2%«) enthält keine Spur mit der ID %3%, oder die Spur wurde nicht zum Kopieren ausgewählt. Deshalb kann an diese Spur keine andere Spur angehängt werden. Das Argument zu »--append-to« war ungültig.\n"
 
 #: src/merge/output_control.cpp:930
 #, boost-format
@@ -11054,7 +11054,7 @@ msgstr "Kann Dateien nicht anfügen"
 
 #: src/mpegparser/M2VParser.cpp:254
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
-msgstr "Unerwartetes Bild vom Typ »Vollbild« nach nur einem Bild vom Typ »Feld«. Bitte diesen Fehler im MPEG2-Videodatenstrom beheben und danach erneut versuchen, ihn zu muxen.\n"
+msgstr "Unerwartetes Bild vom Typ »Vollbild« nach nur einem Bild vom Typ »Feld«. Bitte diesen Fehler im MPEG2-Videodatenstrom beheben und danach erneut versuchen, ihn zu multiplexen.\n"
 
 #: src/info/mkvinfo.cpp:349
 #: src/info/mkvinfo.cpp:358
@@ -12248,7 +12248,7 @@ msgstr ""
 
 #: src/input/r_ogm.cpp:505
 msgid "mkvmerge has not been compiled with FLAC support but handling of this stream has been requested.\n"
-msgstr "Mkvmerge wurde ohne FLAC-Unterstützung kompiliert, aber dieser FLAC-Datenstrom soll gemuxt werden.\n"
+msgstr "Mkvmerge wurde ohne FLAC-Unterstützung kompiliert, aber dieser FLAC-Datenstrom soll gemultiplext werden.\n"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:76
 #, no-c-format
@@ -12654,4 +12654,3 @@ msgstr "– Leer setzen –"
 
 #~ msgid "tags"
 #~ msgstr "Tags"
-
