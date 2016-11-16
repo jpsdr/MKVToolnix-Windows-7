@@ -2993,7 +2993,7 @@ main(int argc,
             % ex.what() % ex.error());
   }
 
-  mxinfo(boost::format(Y("Muxing took %1%.\n")) % create_minutes_seconds_time_string((mtx::sys::get_current_time_millis() - start + 500) / 1000, true));
+  mxinfo(boost::format(Y("Multiplexing took %1%.\n")) % create_minutes_seconds_time_string((mtx::sys::get_current_time_millis() - start + 500) / 1000, true));
 
   cleanup();
 

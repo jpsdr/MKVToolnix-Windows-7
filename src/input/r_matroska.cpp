@@ -716,7 +716,7 @@ kax_reader_c::verify_tracks() {
 
       default:                  // unknown track type!? error in demuxer...
         if (verbose)
-          mxwarn(boost::format(Y("matroska_reader: unknown demuxer type for track %1%: '%2%'\n")) % t->tnum % t->type);
+          mxwarn(boost::format(Y("matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n")) % t->tnum % t->type);
         continue;
     }
 
@@ -1719,7 +1719,7 @@ kax_reader_c::create_opus_audio_packetizer(kax_track_t *t,
     mxwarn(boost::format(Y("'%1%': You're copying an Opus track that was written in experimental mode. "
                            "The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. "
                            "This means that a decoder might output a few samples more than originally intended. "
-                           "You should re-mux from the original Opus file if possible.\n"))
+                           "You should re-multiplex from the original Opus file if possible.\n"))
            % m_ti.m_fname);
     m_opus_experimental_warning_shown = true;
   }

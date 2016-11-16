@@ -467,7 +467,7 @@ handle_info(EbmlStream *&es,
                    % format_timestamp(static_cast<uint64_t>(duration.GetValue()) * s_tc_scale, 3));
 
     } else if (Is<KaxMuxingApp>(l2))
-      show_element(l2, 2, boost::format(Y("Muxing application: %1%")) % static_cast<KaxMuxingApp *>(l2)->GetValueUTF8());
+      show_element(l2, 2, boost::format(Y("Multiplexing application: %1%")) % static_cast<KaxMuxingApp *>(l2)->GetValueUTF8());
 
     else if (Is<KaxWritingApp>(l2))
       show_element(l2, 2, boost::format(Y("Writing application: %1%")) % static_cast<KaxWritingApp *>(l2)->GetValueUTF8());

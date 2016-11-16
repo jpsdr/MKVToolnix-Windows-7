@@ -373,7 +373,7 @@ Tab::handleSegmentInfo(kax_analyzer_data_c const &data) {
   (new BitValuePage{   *this, *page, info, KaxSegmentUID::ClassInfos,      YT("Segment unique ID"),            YT("A randomly generated unique ID to identify the current segment between many others (128 bits)."), 128})->init();
   (new BitValuePage{   *this, *page, info, KaxPrevUID::ClassInfos,         YT("Previous segment's unique ID"), YT("A unique ID to identify the previous chained segment (128 bits)."), 128})->init();
   (new BitValuePage{   *this, *page, info, KaxNextUID::ClassInfos,         YT("Next segment's unique ID"),     YT("A unique ID to identify the next chained segment (128 bits)."), 128})->init();
-  (new StringValuePage{*this, *page, info, KaxMuxingApp::ClassInfos,       YT("Muxing application"),           YT("The name of the application or library used for muxing the file.")})->init();
+  (new StringValuePage{*this, *page, info, KaxMuxingApp::ClassInfos,       YT("Multiplexing application"),     YT("The name of the application or library used for multiplexing the file.")})->init();
   (new StringValuePage{*this, *page, info, KaxWritingApp::ClassInfos,      YT("Writing application"),          YT("The name of the application or library used for writing the file.")})->init();
 
   m_segmentinfoPage = page;
