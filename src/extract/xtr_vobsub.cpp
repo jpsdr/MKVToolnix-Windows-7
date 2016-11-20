@@ -243,6 +243,9 @@ xtr_vobsub_c::finish_file() {
 
     idx.puts(header + "\n");
 
+    if (!balg::find_first(header, "langidx:"))
+      idx.puts("langidx: 0\n");
+
     write_idx(idx, 0);
     size_t slave;
     for (slave = 0; slave < m_slaves.size(); slave++)
