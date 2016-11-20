@@ -229,9 +229,19 @@ xtr_vobsub_c::finish_file() {
     mm_write_buffer_io_c idx(new mm_file_io_c(m_idx_file_name.string(), MODE_CREATE), 128 * 1024);
     mxinfo(boost::format(Y("Writing the VobSub index file '%1%'.\n")) % m_idx_file_name.string());
 
-    if ((25 > m_private_data->get_size()) || strncasecmp((char *)m_private_data->get_buffer(), header_line, 25))
+    auto buffer = reinterpret_cast<char const *>(m_private_data->get_buffer());
+    auto size   = m_private_data->get_size();
+
+    while ((size > 0) && (buffer[size - 1] == 0))
+      --size;
+
+    auto header = std::string{ buffer, size };
+    strip(header, true);
+
+    if (!balg::istarts_with(header, header_line))
       idx.puts(header_line);
-    idx.write(m_private_data->get_buffer(), m_private_data->get_size());
+
+    idx.puts(header + "\n");
 
     write_idx(idx, 0);
     size_t slave;
