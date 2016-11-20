@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-11-16 16:22+0100\n"
-"PO-Revision-Date: 2016-11-15 15:05+0000\n"
+"PO-Revision-Date: 2016-11-16 20:17+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -1415,9 +1415,9 @@ msgid "&Description:"
 msgstr "&Description :"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1303
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Disable all items"
-msgstr "&Désactiver toutes les pistes"
+msgstr "&Désactiver tous les éléments"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
 #, no-c-format
@@ -1440,9 +1440,9 @@ msgid "&Duration of each entry in seconds:"
 msgstr "&Durée de chaque entrée (en seconde) :"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1302
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Enable all items"
-msgstr "&Activer toutes les pistes"
+msgstr "&Activer tous les éléments"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
 #, no-c-format
@@ -1726,9 +1726,9 @@ msgid "&Select all attachments"
 msgstr "&Sélectionner toutes les pièces jointes"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1300
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Select all items"
-msgstr "&Sélectionner toutes les pistes"
+msgstr "&Sélectionner tous les éléments"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
@@ -2057,7 +2057,7 @@ msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "« %1% » : traitement des fichiers suivants en plus : %2%\n"
 
 #: src/input/r_matroska.cpp:1719
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "« %1% » : une piste Opus écrite en mode expérimental est en train d'être copiée. La piste en résultant sera écrite en mode définitif, mais un détail ne pourra pas être récupéré d'une piste écrite en mode expérimental : la coupure de fin. Ceci signifie qu'un décodeur pourrait émettre quelques échantillons supplémentaires qu'originalement attendu. Il faudrait remultiplexer à partir du fichier Opus d'origine si possible.\n"
 
@@ -2638,9 +2638,8 @@ msgid "Add as new &attachments to the current file"
 msgstr "Ajouter comme nouvelles &pièces jointes au fichier courant"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:155
-#, fuzzy
 msgid "Add as new source fi&les to the current multiplex settings"
-msgstr "Ajouter tous les fichiers aux paramètres actuels de fusion"
+msgstr "Ajouter comme nouveaux fichiers source aux paramètres de multiplexage actue&ls"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:612
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
@@ -6778,9 +6777,9 @@ msgid "Multiplexing application"
 msgstr "Application de multiplexage"
 
 #: src/info/mkvinfo.cpp:470
-#, fuzzy, boost-format
+#, boost-format
 msgid "Multiplexing application: %1%"
-msgstr "Application de multiplexage"
+msgstr "Application de multiplexage : %1%"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
 #, no-c-format
@@ -6788,12 +6787,9 @@ msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multiplexage du fichier « %1 » dans le dossier « %2 »"
 
 #: src/merge/mkvmerge.cpp:2996
-#, fuzzy, boost-format
+#, boost-format
 msgid "Multiplexing took %1%.\n"
-msgstr ""
-"--- Le multiplexage a pris %1%. ---\n"
-"\n"
-"\n"
+msgstr "Le multiplexage a pris %1%.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:449
 msgid "Multiply this track's timestamps with a factor."
@@ -7365,11 +7361,11 @@ msgid "Open all files as tabs in the header editor"
 msgstr "Ouvrir tous les fichiers en onglets dans l'éditeur d'entêtes"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1280
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Open corresponding file in &MediaInfo"
 msgid_plural "Open corresponding files in &MediaInfo"
-msgstr[0] "Ouvrir le fichier dans &MediaInfo"
-msgstr[1] "Ouvrir les fichiers dans &MediaInfo"
+msgstr[0] "Ouvrir le fichier correspondant dans &MediaInfo"
+msgstr[1] "Ouvrir les fichiers correspondants dans &MediaInfo"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1260
 #, no-c-format
@@ -8428,11 +8424,11 @@ msgid "Select Matroska file to read segment UID from"
 msgstr "Sélectionner un fichier Matroska pour y lire l'IUD de segment"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1261
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select all &items from selected file"
 msgid_plural "Select all &items from selected files"
-msgstr[0] "Sélectionner toutes les pistes d'un &type spécifique"
-msgstr[1] "Sélectionner toutes les pistes d'un &type spécifique"
+msgstr[0] "Sélectionner tous les &éléments du fichier sélectionné"
+msgstr[1] "Sélectionner tous les &éléments des fichiers sélectionnés"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1301
 #, no-c-format
@@ -8805,9 +8801,9 @@ msgid "Source file names"
 msgstr "Noms des fichiers source"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:55
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Source file's directory"
-msgstr "Dossier du fichier cible"
+msgstr "Dossier du fichier source"
 
 #: src/common/property_element.cpp:130
 msgid ""
@@ -12078,9 +12074,9 @@ msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader : pas d'entête EBML trouvé.\n"
 
 #: src/input/r_matroska.cpp:719
-#, fuzzy, boost-format
+#, boost-format
 msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
-msgstr "matroska_reader : type de démultiplexeur inconnu pour la piste %1% : « %2% ».\n"
+msgstr "matroska_reader : type de démultiplexeur inconnu pour la piste %1% : « %2% »\n"
 
 #: src/common/memory.cpp:150
 #, boost-format
