@@ -47,7 +47,7 @@ module AddPo
     puts_qaction "merge", target
 
     updated_items = read_po file_name
-    merged_items  = merge_po orig_items, updated_items
+    merged_items  = merge_po orig_items, updated_items, :headers_to_update => %w{Project-Id-Version}
 
     write_po target, merged_items
 

@@ -165,7 +165,7 @@ def replace_po_meta_info orig_metas, transifex_meta, key
   orig_metas.each { |meta| meta.gsub!(/"#{key}: \s+ .+? \\n"/x, "\"#{key}: #{new_value}\\n\"") }
 end
 
-def merge_po orig_items, updated_items
+def merge_po orig_items, updated_items, options = {}
   translated = Hash[ *updated_items.
     select { |item| item[:msgid] && item[:msgid].first && !item[:msgid].first.empty? && item[:msgstr] && !item[:msgstr].empty? && !item[:msgstr].first.empty? }.
     map    { |item| [ item[:msgid].first, item ] }.
@@ -198,12 +198,14 @@ def merge_po orig_items, updated_items
 
   # update_meta_info = true
 
-  if update_meta_info
-    orig_meta    = orig_items.first[:comments]
-    updated_meta = updated_items.first[:comments].join("")
+  return orig_items unless update_meta_info
 
-    %w{PO-Revision-Date Last-Translator Language-Team Plural-Forms}.each { |key| replace_po_meta_info orig_meta, updated_meta, key }
-  end
+  orig_meta          = orig_items.first[:comments]
+  updated_meta       = updated_items.first[:comments].join("")
+  headers_to_update  = %w{PO-Revision-Date Last-Translator Language-Team Plural-Forms}
+  headers_to_update += options[:headers_to_update] || []
+
+  headers_to_update.each { |key| replace_po_meta_info orig_meta, updated_meta, key }
 
   orig_items
 end
