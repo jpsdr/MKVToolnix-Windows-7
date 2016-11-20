@@ -24,8 +24,7 @@
 #define QY(s) to_qs(Y(s))
 #define QYH(s) to_qs(Y(s)).toHtmlEscaped()
 #define QNY(singular, plural, count) to_qs(NY(singular, plural, count))
-#define QTR(s) to_qs(Y(s))
-#define QPTR(s, context) to_qs(PY(context, s))
+#define QTR(s, dummy) to_qs(Y(s))
 
 inline QChar
 to_qs(char const source) {
