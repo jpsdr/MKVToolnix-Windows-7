@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:22+0100\n"
+"POT-Creation-Date: 2016-11-20 20:37+0100\n"
 "PO-Revision-Date: 2016-11-18 19:05+0100\n"
 "Last-Translator: badyu17 <badyu17@gmail.com>\n"
 "Language-Team: Serbian <badyu17@gmail.com>\n"
@@ -2329,6 +2329,13 @@ msgstr "U <ChapterDisplay> nedostaje dečji element <ChapterString>."
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "U <ChapterTrack> nedostaje dečji element <ChapterTrackNumber>."
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:595
+#: src/mkvtoolnix-gui/merge/input.cpp:1324
+#, fuzzy, no-c-format
+msgid "<Do not change>"
+msgstr "<ne menjaj>"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:122
 #, no-c-format
 msgid "<No destination file>"
@@ -2354,6 +2361,7 @@ msgstr "<Tag> nedostaje dečji element <Simple>."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
 #, fuzzy, no-c-format
 msgid "<Unnamed>"
 msgstr "<neimenovano>"
@@ -2363,17 +2371,6 @@ msgstr "<neimenovano>"
 #, no-c-format
 msgid "<Unsaved file>"
 msgstr "<Nesačuvan fajl>"
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:375
-#: src/mkvtoolnix-gui/merge/input.cpp:595
-#: src/mkvtoolnix-gui/merge/input.cpp:1324
-#, no-c-format
-msgid "<do not change>"
-msgstr "<ne menjaj>"
-
-#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-msgid "<unnamed>"
-msgstr "<neimenovano>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -5089,7 +5086,7 @@ msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "Nisam uspeo da napravim VobSub fajl sa podacima '%1%': %2%\n"
 
 #: src/extract/xtr_textsubs.cpp:349
-#: src/extract/xtr_vobsub.cpp:242
+#: src/extract/xtr_vobsub.cpp:255
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Nisam uspeo da napravim fajl '%1%': %2%\n"
@@ -10728,7 +10725,7 @@ msgstr "Ovo STVARNO nije trebalo da se desi. Prostor rezervisan za prvi meta see
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "Ovo STVARNO nije trebalo da se desi. Prostor rezervisan za prvi meta seek element je previše mali. Potrebna veličina: %1%. %2%\n"
 
-#: src/common/common.h:112
+#: src/common/common.h:108
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "Ovo nije trebalo da se desi. Molim vas da kontaktirate autora Morica Bunkusa <moritz@bunkus.org> sa ovom greškom/upozorenjem, opisom onoga što ste pokušali da uradite, korišćenom komandnom linijom i informacijom o operativnom sistemu koji koristite. Hvala."
 
@@ -12579,6 +12576,9 @@ msgstr "– nijedna –"
 
 #~ msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
 #~ msgstr "'%1%' nije prepoznat kao važeći format broja u %2%.\n"
+
+#~ msgid "<unnamed>"
+#~ msgstr "<neimenovano>"
 
 #~ msgid ""
 #~ "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be "

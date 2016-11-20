@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:22+0100\n"
+"POT-Creation-Date: 2016-11-20 20:37+0100\n"
 "PO-Revision-Date: 2016-11-17 21:53+0000\n"
 "Last-Translator: Timofey Lisunov <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
@@ -2151,6 +2151,13 @@ msgstr "В <ChapterDisplay> отсутствует дочерний элемен
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "В <ChapterTrack> отсутствует дочерний элемент <ChapterTrackNumber>."
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:595
+#: src/mkvtoolnix-gui/merge/input.cpp:1324
+#, fuzzy, no-c-format
+msgid "<Do not change>"
+msgstr "<не менять>"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:122
 #, no-c-format
 msgid "<No destination file>"
@@ -2176,6 +2183,7 @@ msgstr "В <Tag> отсутствует дочерний элемент <Simple>
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
 #, no-c-format
 msgid "<Unnamed>"
 msgstr "<Неназванный>"
@@ -2185,17 +2193,6 @@ msgstr "<Неназванный>"
 #, no-c-format
 msgid "<Unsaved file>"
 msgstr "<Несохранённый файл>"
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:375
-#: src/mkvtoolnix-gui/merge/input.cpp:595
-#: src/mkvtoolnix-gui/merge/input.cpp:1324
-#, no-c-format
-msgid "<do not change>"
-msgstr "<не менять>"
-
-#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-msgid "<unnamed>"
-msgstr "<безымянный>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -4912,7 +4909,7 @@ msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "Не удалось создать файл данных VobSub '%1%': %2%\n"
 
 #: src/extract/xtr_textsubs.cpp:349
-#: src/extract/xtr_vobsub.cpp:242
+#: src/extract/xtr_vobsub.cpp:255
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Не удалось создать файл '%1%': %2%\n"
@@ -10570,7 +10567,7 @@ msgstr "Такого НА САМОМ ДЕЛЕ не должно происход
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "Такого НА САМОМ ДЕЛЕ не должно происходить. Пространство, зарезервированное для первого метаэлемента поиска, слишком мало. Необходимо места: %1%. %2%\n"
 
-#: src/common/common.h:112
+#: src/common/common.h:108
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "Такого не должно было случиться. Пожалуйста сообщите автору Moritz Bunkus <moritz@bunkus.org> об этой ошибке/предупреждении, с описанием того, что вы пытались сделать, используемой командной строки, а также укажите, какую операционную систему вы используете. Спасибо."
 
@@ -12419,6 +12416,9 @@ msgstr "– Установлено в 'нет' –"
 
 #~ msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
 #~ msgstr "'%1%' не распознаётся как допустимый формат числа в '%2%'.\n"
+
+#~ msgid "<unnamed>"
+#~ msgstr "<безымянный>"
 
 #~ msgid "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr 0' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 #~ msgstr "Файлы AAC могут содержать HE-AAC / AAC+ / SBR AAC аудио. Это НЕВОЗМОЖНО определить автоматически. Поэтому вы должны указать '--aac-is-sbr 0' вручную, если файл действительно содержит SBR AAC. Если этого не сделать, объединение будет выполнено НЕПРАВИЛЬНО. Также читайте документацию mkvmerge.\n"

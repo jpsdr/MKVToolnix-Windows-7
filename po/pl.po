@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:22+0100\n"
+"POT-Creation-Date: 2016-11-20 20:37+0100\n"
 "PO-Revision-Date: 2016-11-17 16:09+0100\n"
 "Last-Translator: Jan Mazurczyk <janmazurczyk@gmail.com>\n"
 "Language-Team: Polish <moritz@bunkus.org>\n"
@@ -2314,6 +2314,13 @@ msgstr "<ChapterDisplay> nie zawiera podrzędnego elementu <ChapterString>."
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> nie zawiera podrzędnego elementu <ChapterTrackNumber>."
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:595
+#: src/mkvtoolnix-gui/merge/input.cpp:1324
+#, fuzzy, no-c-format
+msgid "<Do not change>"
+msgstr "<Bez zmiany>"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:122
 #, no-c-format
 msgid "<No destination file>"
@@ -2339,6 +2346,7 @@ msgstr "<Tag> nie zawiera podrzędnego elementu <Simple>."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
 #, no-c-format
 msgid "<Unnamed>"
 msgstr "<Bez nazwy>"
@@ -2348,17 +2356,6 @@ msgstr "<Bez nazwy>"
 #, no-c-format
 msgid "<Unsaved file>"
 msgstr "<Niezapisany plik>"
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:375
-#: src/mkvtoolnix-gui/merge/input.cpp:595
-#: src/mkvtoolnix-gui/merge/input.cpp:1324
-#, no-c-format
-msgid "<do not change>"
-msgstr "<Bez zmiany>"
-
-#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-msgid "<unnamed>"
-msgstr "<Bez nazwy>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -5068,7 +5065,7 @@ msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "Błąd tworzenia pliku formatu VobSub  \"%1%\": %2%\n"
 
 #: src/extract/xtr_textsubs.cpp:349
-#: src/extract/xtr_vobsub.cpp:242
+#: src/extract/xtr_vobsub.cpp:255
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Błąd tworzenia pliku \"%1%\": %2%\n"
@@ -10697,7 +10694,7 @@ msgstr "To naprawdę NIE POWINNO było się wydarzyć. Obszar zarezerwowany dla 
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "To naprawdę NIE POWINNO było się wydarzyć. Obszar zarezerwowany dla pierwszego elementu indeksu wyszukiwania był za mały. Potrzebny rozmiar: %1%. %2%\n"
 
-#: src/common/common.h:112
+#: src/common/common.h:108
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "To nie powinno było się wydarzyć. Proszę skontaktować się z autorem programu, Moritz Bunkus <moritz@bunkus.org>, i przekazać mu treść błędu/ostrzeżenia, opis co próbowałeś/aś zrobić, użytą linię komend i jaki system operacyjny używałeś/aś. Dziękuję."
 
@@ -12555,6 +12552,9 @@ msgstr "– Ustaw na żadne –"
 #~ msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
 #~ msgstr ""
 #~ "\"%1% nie jest rozpoznawany jako prawidłowy numer formatu w \"%2%\".\n"
+
+#~ msgid "<unnamed>"
+#~ msgstr "<Bez nazwy>"
 
 #~ msgid ""
 #~ "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be "

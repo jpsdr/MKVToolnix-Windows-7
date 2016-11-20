@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:22+0100\n"
+"POT-Creation-Date: 2016-11-20 20:37+0100\n"
 "PO-Revision-Date: 2016-10-08 17:03+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2329,6 +2329,13 @@ msgstr "<ChapterDisplay> ez dago bigarren <ChapterString>."
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> ez dago bigarren <ChapterTrackNumber>."
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:595
+#: src/mkvtoolnix-gui/merge/input.cpp:1324
+#, fuzzy, no-c-format
+msgid "<Do not change>"
+msgstr "<ez aldatu>"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:122
 #, fuzzy, no-c-format
 msgid "<No destination file>"
@@ -2354,6 +2361,7 @@ msgstr "<Tag> ez dago bigarren <Simple>."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
 #, fuzzy, no-c-format
 msgid "<Unnamed>"
 msgstr "<izengabea>"
@@ -2363,17 +2371,6 @@ msgstr "<izengabea>"
 #, fuzzy, no-c-format
 msgid "<Unsaved file>"
 msgstr "<gordegabeko agiria>"
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:375
-#: src/mkvtoolnix-gui/merge/input.cpp:595
-#: src/mkvtoolnix-gui/merge/input.cpp:1324
-#, no-c-format
-msgid "<do not change>"
-msgstr "<ez aldatu>"
-
-#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-msgid "<unnamed>"
-msgstr "<izengabea>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -5111,7 +5108,7 @@ msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "Hutsegitea '%1%': %2% VobSub datu agiria sortzerakoan\n"
 
 #: src/extract/xtr_textsubs.cpp:349
-#: src/extract/xtr_vobsub.cpp:242
+#: src/extract/xtr_vobsub.cpp:255
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Hutsegitea '%1%': %2% agiria sortzerakoan\n"
@@ -10755,7 +10752,7 @@ msgstr "Hau EGITAN ez litzake gertatu behar. Lehen meta bilaketa gaiarentzat gor
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "Hau EGITAN ez litzake gertatu behar. Lehen meta bilaketa gaiarentzat gordetako tartea txikiegia da. Beharrezko neurria: %1%. %2%\n"
 
-#: src/common/common.h:112
+#: src/common/common.h:108
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "Hau ez litzake gertatu behar. Mesedez jarri harremanetan egilearekin, Moritz Bunkus <moritz@bunkus.org>, adieraziz akats/kontuz-ohar hau, zer egiten saiatzen ari zinen azalpena, erabilitako agindu lerroa eta zein sistema eragile erabiltzen duzun. Mila esker"
 
@@ -12992,6 +12989,9 @@ msgstr "– ezarri ezer ezean –"
 
 #~ msgid "4 bytes"
 #~ msgstr "4 byte"
+
+#~ msgid "<unnamed>"
+#~ msgstr "<izengabea>"
 
 #~ msgid ""
 #~ "A block group was found at position %1%, but no block element was found "

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:22+0100\n"
+"POT-Creation-Date: 2016-11-20 20:37+0100\n"
 "PO-Revision-Date: 2016-10-14 19:16+0200\n"
 "Last-Translator: Andriy Bilous'ko <arestarh@ukr.net>\n"
 "Language-Team: Ukrainian <moritz@bunkus.org>\n"
@@ -2344,6 +2344,13 @@ msgstr "<ChapterDisplay> пропускає складову <ChapterString>."
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> пропускає складову <ChapterTrackNumber>."
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:595
+#: src/mkvtoolnix-gui/merge/input.cpp:1324
+#, fuzzy, no-c-format
+msgid "<Do not change>"
+msgstr "<не змінювати>"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:122
 #, fuzzy, no-c-format
 msgid "<No destination file>"
@@ -2369,6 +2376,7 @@ msgstr "<Tag> пропускає складову <Simple>."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
 #, fuzzy, no-c-format
 msgid "<Unnamed>"
 msgstr "<не названо>"
@@ -2378,17 +2386,6 @@ msgstr "<не названо>"
 #, fuzzy, no-c-format
 msgid "<Unsaved file>"
 msgstr "<незбережений файл>"
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:375
-#: src/mkvtoolnix-gui/merge/input.cpp:595
-#: src/mkvtoolnix-gui/merge/input.cpp:1324
-#, no-c-format
-msgid "<do not change>"
-msgstr "<не змінювати>"
-
-#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-msgid "<unnamed>"
-msgstr "<не названо>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -5132,7 +5129,7 @@ msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "Не вдалося створити файл даних VobSub '%1%': %2%\n"
 
 #: src/extract/xtr_textsubs.cpp:349
-#: src/extract/xtr_vobsub.cpp:242
+#: src/extract/xtr_vobsub.cpp:255
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Не вдалося створити файл '%1%': %2%\n"
@@ -10805,7 +10802,7 @@ msgstr "Цього ДІЙСНО не повинно було статися. П�
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "Цього ДІЙСНО не повинно було статися. Простір, зарезервований для першого елемента мета пошуку, був надто малим. Необхідний розмір: %1%. %2%\n"
 
-#: src/common/common.h:112
+#: src/common/common.h:108
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "Цього не повинно було статися. Будь ласка, напишіть автору Moritz Bunkus <moritz@bunkus.org> з приведенням цієї помилки/попереджувальних повідомлень, опису того, що ви намагалися зробити, використовуваного командного рядка і операційної системи. Спасибі."
 
@@ -12664,6 +12661,9 @@ msgstr "– нічого не обрано –"
 
 #~ msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
 #~ msgstr "'%1%' не є допустимим числовим форматом в '%2%'.\n"
+
+#~ msgid "<unnamed>"
+#~ msgstr "<не названо>"
 
 #~ msgid ""
 #~ "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be "

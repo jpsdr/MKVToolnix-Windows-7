@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:22+0100\n"
+"POT-Creation-Date: 2016-11-20 20:37+0100\n"
 "PO-Revision-Date: 2016-11-16 17:42+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -2277,6 +2277,13 @@ msgstr "<ChapterDisplay>는 <ChapterString> 자식 요소가 누락되어 있습
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack>은 <ChapterTrackNumber> 자식 요소가 누락되어 있습니다."
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:595
+#: src/mkvtoolnix-gui/merge/input.cpp:1324
+#, fuzzy, no-c-format
+msgid "<Do not change>"
+msgstr "<변경 없음>"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:122
 #, no-c-format
 msgid "<No destination file>"
@@ -2302,6 +2309,7 @@ msgstr "<Tag>는 <Simple> 자식 요소가 누락되어 있습니다."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
 #, no-c-format
 msgid "<Unnamed>"
 msgstr "<이름 없음>"
@@ -2311,17 +2319,6 @@ msgstr "<이름 없음>"
 #, no-c-format
 msgid "<Unsaved file>"
 msgstr "<미저장 파일>"
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:375
-#: src/mkvtoolnix-gui/merge/input.cpp:595
-#: src/mkvtoolnix-gui/merge/input.cpp:1324
-#, no-c-format
-msgid "<do not change>"
-msgstr "<변경 없음>"
-
-#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-msgid "<unnamed>"
-msgstr "<이름 없음>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -5021,7 +5018,7 @@ msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "Vobsub 데이터 파일 '%1%' 만들기 실패: %2%\n"
 
 #: src/extract/xtr_textsubs.cpp:349
-#: src/extract/xtr_vobsub.cpp:242
+#: src/extract/xtr_vobsub.cpp:255
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "파일 '%1%' 만들기 실패: %2%\n"
@@ -10613,7 +10610,7 @@ msgstr "이것은 정말로 (절대로) 발생해서는 안 됩니다. 처음 Me
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "이것은 정말로 (절대로) 발생해서는 안 됩니다. 처음 MetaSeek 요소를 위해 확보된 공간이 너무 작습니다. 필요한 크기: %1%. %2%\n"
 
-#: src/common/common.h:112
+#: src/common/common.h:108
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "이것은 발생해서는 안 됩니다. 제작자 Moritz Bunkus <moritz@bunkus.org>에게 이 오류 경고 메시지(어떤 작업을 하려고했는지 설명, 사용한 명령-행, 사용하는 OS)를 보내주십시오. 감사합니다."
 
@@ -12450,6 +12447,9 @@ msgstr "– 없음으로 설정 –"
 
 #~ msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
 #~ msgstr "'%2%'에서 '%1%'을 유효한 숫자로 인식하지 않습니다.\n"
+
+#~ msgid "<unnamed>"
+#~ msgstr "<이름 없음>"
 
 #~ msgid "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr 0' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 #~ msgstr "AAC 파일은 HE-AAC/AAC+/SBR AAC 오디오가 포함되어 있을 수 있습니다. 이것은 자동으로 감지할 수 없습니다. 따라서 실제로 이 입력 파일이 SBR AAC가 포함되어 있을 경우, '--aac-is-sbr 0'옵션을 수동으로 지정해야 합니다. 그렇지 않으면 잘못된 MUX가 이루어집니다. mkvmerge 문서도 읽어보십시오.\n"

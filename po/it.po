@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 18.11.2016\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:22+0100\n"
+"POT-Creation-Date: 2016-11-20 20:37+0100\n"
 "PO-Revision-Date: 2016-11-18 09:10+0100\n"
 "Last-Translator: bovirus <@bovirus@gmail.com>\n"
 "Language-Team: bovirus <bovirus@gmail.com>\n"
@@ -2311,6 +2311,13 @@ msgstr "<ChapterDisplay> manca il processo dipendente <ChapterString>."
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> manca il processo dipendente <ChapterTrackNumber>."
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:595
+#: src/mkvtoolnix-gui/merge/input.cpp:1324
+#, fuzzy, no-c-format
+msgid "<Do not change>"
+msgstr "<non modificare>"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:122
 #, no-c-format
 msgid "<No destination file>"
@@ -2336,6 +2343,7 @@ msgstr "<Tag> manca del figlio <Simple>."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
 #, no-c-format
 msgid "<Unnamed>"
 msgstr "<Senza nome>"
@@ -2345,17 +2353,6 @@ msgstr "<Senza nome>"
 #, no-c-format
 msgid "<Unsaved file>"
 msgstr "<File non salvato>"
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:375
-#: src/mkvtoolnix-gui/merge/input.cpp:595
-#: src/mkvtoolnix-gui/merge/input.cpp:1324
-#, no-c-format
-msgid "<do not change>"
-msgstr "<non modificare>"
-
-#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-msgid "<unnamed>"
-msgstr "<senza nome>"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -5064,7 +5061,7 @@ msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "Impossibile creare il file dati VobSub '%1%': %2%\n"
 
 #: src/extract/xtr_textsubs.cpp:349
-#: src/extract/xtr_vobsub.cpp:242
+#: src/extract/xtr_vobsub.cpp:255
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Impossibile creare il file '%1%': %2%\n"
@@ -10683,7 +10680,7 @@ msgstr "Questo VERAMENTE non doveva accadere. Lo spazio riservato per il primo e
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "Questo VERAMENTE non doveva accadere. Lo spazio riservato per il primo elemento meta seek era troppo piccolo. Dimensione necessaria: %1%. %2%\n"
 
-#: src/common/common.h:112
+#: src/common/common.h:108
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "Questo non doveva succedere. Contatta l'autore Moritz Bunkus <moritz@bunkus.org> segnalando questo messaggio di errore/avviso, con una descrizione di ciò che stavi cercando di fare, la linea di comando usata e quale sistema operativo stavi usando. Grazie."
 
@@ -12534,6 +12531,9 @@ msgstr "- Imposta a nessuno -"
 
 #~ msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
 #~ msgstr "'%1%' non è riconosciuto come formato di numero valido in '%2%'.\n"
+
+#~ msgid "<unnamed>"
+#~ msgstr "<senza nome>"
 
 #~ msgid ""
 #~ "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be "

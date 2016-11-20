@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:22+0100\n"
+"POT-Creation-Date: 2016-11-20 20:37+0100\n"
 "PO-Revision-Date: 2016-10-09 19:30+0000\n"
 "Last-Translator: Germano Fonseca <celger@bol.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/pt_BR/)\n"
@@ -2368,6 +2368,13 @@ msgstr ""
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr ""
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:595
+#: src/mkvtoolnix-gui/merge/input.cpp:1324
+#, fuzzy, no-c-format
+msgid "<Do not change>"
+msgstr "Canais de áudio"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:122
 #, fuzzy, no-c-format
 msgid "<No destination file>"
@@ -2393,6 +2400,7 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
 #, fuzzy, no-c-format
 msgid "<Unnamed>"
 msgstr "(sem nome)"
@@ -2402,18 +2410,6 @@ msgstr "(sem nome)"
 #, no-c-format
 msgid "<Unsaved file>"
 msgstr ""
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:375
-#: src/mkvtoolnix-gui/merge/input.cpp:595
-#: src/mkvtoolnix-gui/merge/input.cpp:1324
-#, no-c-format
-msgid "<do not change>"
-msgstr ""
-
-#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-#, fuzzy
-msgid "<unnamed>"
-msgstr "(sem nome)"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -5199,7 +5195,7 @@ msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "Falha ao criar o arquivo de dados VobSub '%1%': %2%\n"
 
 #: src/extract/xtr_textsubs.cpp:349
-#: src/extract/xtr_vobsub.cpp:242
+#: src/extract/xtr_vobsub.cpp:255
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "Falha ao criar o arquivo '%1%': %2%\n"
@@ -10971,7 +10967,7 @@ msgstr "Isto REALMENTE não deveria ter acontecido. O espaço reservado para o p
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr "Isto REALMENTE não deveria ter acontecido. O espaço reservado para o primeiro elemento meta seek era pequeno demais. Tamanho necessário: %1%. %2%\n"
 
-#: src/common/common.h:112
+#: src/common/common.h:108
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "Isto não deveria ter acontecido. Por favor, contate o autor Moritz Bunkus <moritz@bunkus.org>, com uma mensagem deste erro/aviso, uma descrição do que você estava tentando fazer, a linha de comando usada e qual sistema operacional você está usando. Obrigado."
 
@@ -12852,6 +12848,9 @@ msgstr ""
 
 #~ msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
 #~ msgstr "'%1%' não é um %2% válido em '%3% %4%'.\n"
+
+#~ msgid "<unnamed>"
+#~ msgstr "(sem nome)"
 
 #~ msgid "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be detected automatically. Therefore you have to specifiy '--aac-is-sbr 0' manually for this input file if the file actually contains SBR AAC. The file will be muxed in the WRONG way otherwise. Also read mkvmerge's documentation.\n"
 #~ msgstr "Arquivos AAC podem conter áudio HE-AAC / AAC+ / SBR AAC. Isto NÃO PODE ser detectado automaticamente. Portanto, você precisa especificar '--aac-is-sbr 0' manualmente para este arquivo de entrada se o arquivo contém SBR AAC. O arquivo será multiplexado da forma ERRADA caso contrário. Para saber mais, leia a documentação do mkvmerge.\n"

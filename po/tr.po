@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-16 16:22+0100\n"
+"POT-Creation-Date: 2016-11-20 20:37+0100\n"
 "PO-Revision-Date: 2016-11-17 16:13+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2307,6 +2307,13 @@ msgstr "<ChapterDisplay> öğesinin <ChapterString> alt öğesi eksik."
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> öğesinin <ChapterTrackNumber> alt öğesi eksik."
 
+#: src/mkvtoolnix-gui/merge/attachments.cpp:375
+#: src/mkvtoolnix-gui/merge/input.cpp:595
+#: src/mkvtoolnix-gui/merge/input.cpp:1324
+#, fuzzy, no-c-format
+msgid "<Do not change>"
+msgstr "<değiştirme>"
+
 #: src/mkvtoolnix-gui/merge/tab.cpp:122
 #, no-c-format
 msgid "<No destination file>"
@@ -2332,6 +2339,7 @@ msgstr "<Tag> öğesinin <Simple> alt öğesi eksik."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:198
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:83
+#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
 #, no-c-format
 msgid "<Unnamed>"
 msgstr "<Adlandırılmamış>"
@@ -2341,17 +2349,6 @@ msgstr "<Adlandırılmamış>"
 #, no-c-format
 msgid "<Unsaved file>"
 msgstr "<Kaydedilmemiş dosya>"
-
-#: src/mkvtoolnix-gui/merge/attachments.cpp:375
-#: src/mkvtoolnix-gui/merge/input.cpp:595
-#: src/mkvtoolnix-gui/merge/input.cpp:1324
-#, no-c-format
-msgid "<do not change>"
-msgstr "<değiştirme>"
-
-#: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:100
-msgid "<unnamed>"
-msgstr "(adlandırılmamış)"
 
 #: src/input/r_matroska.cpp:2136
 #: src/input/r_matroska.cpp:2249
@@ -5060,7 +5057,7 @@ msgid "Failed to create the VobSub data file '%1%': %2%\n"
 msgstr "'%1%' VobSub veri dosyasını oluşturma başarısız oldu: %2%\n"
 
 #: src/extract/xtr_textsubs.cpp:349
-#: src/extract/xtr_vobsub.cpp:242
+#: src/extract/xtr_vobsub.cpp:255
 #, boost-format
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "'%1%' dosyasını oluşturma başarısız oldu: %2%\n"
@@ -10672,7 +10669,7 @@ msgstr ""
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: %1%. %2%\n"
 msgstr ""
 
-#: src/common/common.h:112
+#: src/common/common.h:108
 msgid "This should not have happened. Please contact the author Moritz Bunkus <moritz@bunkus.org> with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
 msgstr "Bu olmamalıydı. Lütfen hangi işletim sistemini kullandığınız, kullandığınız komut satırı, ne yapmaya çalıştığınızın açıklaması ve bu hata/uyarı iletisiyle birlikte yazar Moritz Bunkus <moritz@bunkus.org> ile irtibata geçin. Teşekkür ederiz."
 
@@ -12521,6 +12518,9 @@ msgstr "– Hiçbiri olarak ayarla –"
 
 #~ msgid "'%1%' is not recognized as a valid number format in '%2%'.\n"
 #~ msgstr "'%1%', '%2%' içinde geçerli bir sayı biçimi olarak tanınmadı.\n"
+
+#~ msgid "<unnamed>"
+#~ msgstr "(adlandırılmamış)"
 
 #~ msgid ""
 #~ "AAC files may contain HE-AAC / AAC+ / SBR AAC audio. This can NOT be "
