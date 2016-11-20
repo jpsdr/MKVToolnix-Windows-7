@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2016-11-16 16:22+0100\n"
-"PO-Revision-Date: 2016-11-15 15:05+0000\n"
+"PO-Revision-Date: 2016-11-16 17:12+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
@@ -1487,9 +1487,9 @@ msgid "&Description:"
 msgstr "&Descripción:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1303
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Disable all items"
-msgstr "&Deshabilita todas las pistas"
+msgstr "&Deshabilitar todos los objetos"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:354
 #, no-c-format
@@ -1512,9 +1512,9 @@ msgid "&Duration of each entry in seconds:"
 msgstr "&Duración de cada registro en segundos:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1302
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Enable all items"
-msgstr "&Habilitar todas las pistas"
+msgstr "&Habilitar todos los objetos"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:353
 #, no-c-format
@@ -1798,9 +1798,9 @@ msgid "&Select all attachments"
 msgstr "&Seleccionar todos los adjuntos"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1300
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Select all items"
-msgstr "&Seleccionar todas las pistas"
+msgstr "&Seleccionar todos los objetos"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 msgid "&Skip chapters flagged \"hidden\""
@@ -2129,7 +2129,7 @@ msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': procesando los siguientes archivos como buenos: %2%\n"
 
 #: src/input/r_matroska.cpp:1719
-#, fuzzy, boost-format
+#, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%': Está copiando una pista Opus escrita en modo experimental. La pista generada será escrita en su modo final, pero un detalle no puede ser recuperado al estar escrita en modo experimental: el recorte final. Esto significa que un decodificador podría generar más muestras de las previstas inicialmente. Debería re-multiplexar a partir del archivo Opus original.\n"
 
@@ -2715,9 +2715,8 @@ msgid "Add as new &attachments to the current file"
 msgstr "Añadir como nuevos &adjuntos al archivo actual"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:155
-#, fuzzy
 msgid "Add as new source fi&les to the current multiplex settings"
-msgstr "Agregar todos los archivos a los ajustes de mezcla actuales"
+msgstr "Añadir como nuevos archi&vos de origen a la configuración de multiplexado actual."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:612
 #: src/mkvtoolnix-gui/merge/attachments.cpp:258
@@ -4526,11 +4525,11 @@ msgstr "Directorio:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1310
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
-msgstr "Deshabilita el flag de \"pista prede&finida\" para las pistas de subtítulos"
+msgstr "Deshabilitar el flag de \"pista prede&finida\" para las pistas de subtítulos"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1311
 msgid "Disable additional lossless c&ompression for all track types"
-msgstr "Deshabilita la c&ompresión adicional sin pérdidas para todos los tipos de pistas"
+msgstr "Deshabilitar la c&ompresión adicional sin pérdidas para todos los tipos de pistas"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1271
 msgid "Disable ani&mations"
@@ -4550,7 +4549,7 @@ msgstr "Deshabilitado"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 #, no-c-format
 msgid "Disables lacing for all tracks."
-msgstr "Deshabilita lacing para todas las pistas"
+msgstr "Deshabilitar lacing para todas las pistas"
 
 #: src/info/mkvinfo.cpp:213
 #, boost-format
@@ -6855,9 +6854,9 @@ msgid "Multiplexing application"
 msgstr "Aplicación de multiplexado"
 
 #: src/info/mkvinfo.cpp:470
-#, fuzzy, boost-format
+#, boost-format
 msgid "Multiplexing application: %1%"
-msgstr "Aplicación de multiplexado"
+msgstr "Aplicación de multiplexado: %1%"
 
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:157
 #, no-c-format
@@ -6865,7 +6864,7 @@ msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multiplexando el archivo \"%1\" en el directorio \"%2\""
 
 #: src/merge/mkvmerge.cpp:2996
-#, fuzzy, boost-format
+#, boost-format
 msgid "Multiplexing took %1%.\n"
 msgstr "El multiplexado tardó %1%.\n"
 
@@ -7439,11 +7438,11 @@ msgid "Open all files as tabs in the header editor"
 msgstr "Abrir todos los archivos como pestañas en el editor de cabecera"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1280
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Open corresponding file in &MediaInfo"
 msgid_plural "Open corresponding files in &MediaInfo"
-msgstr[0] "Abrir archivo en &Mediainfo"
-msgstr[1] "Abrir archivos en &Mediainfo"
+msgstr[0] "Abrir el archivo correspondiente en &Mediainfo"
+msgstr[1] "Abrir los archivos correspondientes en &Mediainfo"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1260
 #, no-c-format
@@ -8503,11 +8502,11 @@ msgid "Select Matroska file to read segment UID from"
 msgstr "Seleccionar el archivo Mastroska de donde leer el segmento UID"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1261
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select all &items from selected file"
 msgid_plural "Select all &items from selected files"
-msgstr[0] "&Seleccionar todas las pistas del archivo escogido"
-msgstr[1] "&Seleccionar todas las pistas de los archivos escogidos"
+msgstr[0] "Seleccionar todos los ob&jetos del archivo escogido"
+msgstr[1] "Seleccionar todos los ob&jetos de los archivos escogidos"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1301
 #, no-c-format
@@ -12141,9 +12140,9 @@ msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: no se encontró la cabecera EBML.\n"
 
 #: src/input/r_matroska.cpp:719
-#, fuzzy, boost-format
+#, boost-format
 msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
-msgstr "matroska_reader: tipo de demultiplexión desconocido para la pista %1%: '%2%'\n"
+msgstr "matroska_reader: desconocido tipo de multiplexador para la pista %1%: '%2%'\n"
 
 #: src/common/memory.cpp:150
 #, boost-format
