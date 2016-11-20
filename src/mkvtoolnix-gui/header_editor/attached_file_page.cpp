@@ -97,7 +97,7 @@ AttachedFilePage::dropEvent(QDropEvent *event) {
 QString
 AttachedFilePage::title()
   const {
-  return Q(FindChildValue<KaxFileName>(*m_attachment, to_wide(Y("<unnamed>"))));
+  return Q(FindChildValue<KaxFileName>(*m_attachment, to_wide(Y("<Unnamed>"))));
 }
 
 void

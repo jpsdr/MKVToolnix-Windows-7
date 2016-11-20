@@ -592,7 +592,7 @@ void
 Tab::addOrRemoveEmptyComboBoxItem(bool add) {
   for (auto &comboBox : m_comboBoxControls)
     if (add && comboBox->itemData(0).isValid())
-      comboBox->insertItem(0, QY("<do not change>"));
+      comboBox->insertItem(0, QY("<Do not change>"));
     else if (!add && !comboBox->itemData(0).isValid())
       comboBox->removeItem(0);
 }
@@ -1321,7 +1321,7 @@ Tab::retranslateInputUI() {
 
   for (auto &comboBox : m_comboBoxControls)
     if (comboBox->count() && !comboBox->itemData(0).isValid())
-      comboBox->setItemText(0, QY("<do not change>"));
+      comboBox->setItemText(0, QY("<Do not change>"));
 
   Util::setComboBoxTexts(ui->muxThis,          QStringList{}                                  << QY("Yes")                  << QY("No"));
   Util::setComboBoxTexts(ui->naluSizeLength,   QStringList{} << QY("Don't change")            << QY("Force 2 bytes")        << QY("Force 4 bytes"));

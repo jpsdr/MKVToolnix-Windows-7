@@ -372,7 +372,7 @@ Tab::setAttachmentControlValues(Attachment *attachment) {
   m_currentlySettingInputControlValues = true;
 
   if (!attachment && ui->attachmentStyle->itemData(0).isValid())
-    ui->attachmentStyle->insertItem(0, QY("<do not change>"));
+    ui->attachmentStyle->insertItem(0, QY("<Do not change>"));
 
   else if (attachment && !ui->attachmentStyle->itemData(0).isValid())
     ui->attachmentStyle->removeItem(0);
