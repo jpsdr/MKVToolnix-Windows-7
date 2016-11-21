@@ -236,8 +236,8 @@ parse_bool(std::string value) {
 bool
 parse_duration_number_with_unit(const std::string &s,
                                 int64_t &value) {
-  boost::regex re1("(-?\\d+\\.?\\d*)(s|ms|msec|us|µs|ns|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
-  boost::regex re2("(-?\\d+)/(-?\\d+)(s|ms|msec|us|µs|ns|fps|p|i)?", boost::regex::perl | boost::regex::icase);
+  boost::regex re1("(-?\\d+\\.?\\d*)(s|ms|msec|us|µs|ns|nsec|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
+  boost::regex re2("(-?\\d+)/(-?\\d+)(s|ms|msec|us|µs|ns|nsec|fps|p|i)?", boost::regex::perl | boost::regex::icase);
 
   std::string unit, s_n, s_d;
   int64_rational_c r{0, 1};
@@ -289,7 +289,7 @@ parse_duration_number_with_unit(const std::string &s,
     multiplier = 1000000;
   else if (mtx::included_in(unit, "us", "µs"))
     multiplier = 1000;
-  else if (unit == "ns")
+  else if (mtx::included_in(unit, "ns", "nsec"))
     multiplier = 1;
   else if (unit != "s")
     return false;
