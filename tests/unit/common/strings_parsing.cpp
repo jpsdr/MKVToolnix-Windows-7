@@ -31,6 +31,15 @@ TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsIntegers) {
 
   EXPECT_TRUE(parse_duration_number_with_unit("12345s", value));
   EXPECT_EQ(12345000000000ll, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("123m", value));
+  EXPECT_EQ(7380000000000ll, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("123min", value));
+  EXPECT_EQ(7380000000000ll, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("12h", value));
+  EXPECT_EQ(43200000000000ll, value);
 }
 
 TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsFloats) {
@@ -56,6 +65,15 @@ TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsFloats) {
 
   EXPECT_TRUE(parse_duration_number_with_unit("12345.678s", value));
   EXPECT_EQ(12345678000000ll, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("12345.678m", value));
+  EXPECT_EQ(740740680000000, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("12345.678min", value));
+  EXPECT_EQ(740740680000000, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("12345.678h", value));
+  EXPECT_EQ(44444440800000000ll, value);
 }
 
 TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsFractions) {
@@ -162,8 +180,14 @@ TEST(StringsParsing, ParseNumberToRationalValidPatterns) {
 TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnit) {
   int64_t timecode;
 
-  EXPECT_TRUE(parse_timecode("123s", timecode, true));
-  EXPECT_EQ(123000000000ll, timecode);
+  EXPECT_TRUE(parse_timecode("123h", timecode, true));
+  EXPECT_EQ(442800000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("123m", timecode, true));
+  EXPECT_EQ(7380000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("123min", timecode, true));
+  EXPECT_EQ(7380000000000ll, timecode);
 
   EXPECT_TRUE(parse_timecode("123ms", timecode, true));
   EXPECT_EQ(123000000ll, timecode);
@@ -186,6 +210,15 @@ TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnit) {
 
 TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnitNegative) {
   int64_t timecode;
+
+  EXPECT_TRUE(parse_timecode("-123h", timecode, true));
+  EXPECT_EQ(-442800000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-123m", timecode, true));
+  EXPECT_EQ(-7380000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-123min", timecode, true));
+  EXPECT_EQ(-7380000000000ll, timecode);
 
   EXPECT_TRUE(parse_timecode("-123s", timecode, true));
   EXPECT_EQ(-123000000000ll, timecode);

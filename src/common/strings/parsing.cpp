@@ -236,8 +236,8 @@ parse_bool(std::string value) {
 bool
 parse_duration_number_with_unit(const std::string &s,
                                 int64_t &value) {
-  boost::regex re1("(-?\\d+\\.?\\d*)(s|ms|msec|us|µs|ns|nsec|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
-  boost::regex re2("(-?\\d+)/(-?\\d+)(s|ms|msec|us|µs|ns|nsec|fps|p|i)?", boost::regex::perl | boost::regex::icase);
+  boost::regex re1("(-?\\d+\\.?\\d*)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
+  boost::regex re2("(-?\\d+)/(-?\\d+)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?", boost::regex::perl | boost::regex::icase);
 
   std::string unit, s_n, s_d;
   int64_rational_c r{0, 1};
@@ -283,9 +283,13 @@ parse_duration_number_with_unit(const std::string &s,
     return true;
   }
 
-  int64_t multiplier = 1000000000;
+  int64_t multiplier = 1000000000; // default: 1s
 
-  if (mtx::included_in(unit, "ms", "msec"))
+  if (mtx::included_in(unit, "h"))
+    multiplier = 3600ll * 1000000000;
+  else if (mtx::included_in(unit, "m", "min"))
+    multiplier = 60ll * 1000000000;
+  else if (mtx::included_in(unit, "ms", "msec"))
     multiplier = 1000000;
   else if (mtx::included_in(unit, "us", "µs"))
     multiplier = 1000;
