@@ -147,6 +147,9 @@ TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnit) {
   EXPECT_TRUE(parse_timecode("123ms", timecode, true));
   EXPECT_EQ(123000000ll, timecode);
 
+  EXPECT_TRUE(parse_timecode("123msec", timecode, true));
+  EXPECT_EQ(123000000ll, timecode);
+
   EXPECT_TRUE(parse_timecode("123us", timecode, true));
   EXPECT_EQ(123000ll, timecode);
 
@@ -161,6 +164,9 @@ TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnitNegative) {
   EXPECT_EQ(-123000000000ll, timecode);
 
   EXPECT_TRUE(parse_timecode("-123ms", timecode, true));
+  EXPECT_EQ(-123000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-123msec", timecode, true));
   EXPECT_EQ(-123000000ll, timecode);
 
   EXPECT_TRUE(parse_timecode("-123us", timecode, true));

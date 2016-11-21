@@ -94,28 +94,11 @@ parse_timecode(const std::string &src,
 
     std::string unit = src.substr(src.length() - 2, 2);
 
-    int64_t multiplier = 1000000000;
-    size_t unit_length = 2;
-    int64_t value      = 0;
-
-    if (unit == "ms")
-      multiplier = 1000000;
-    else if (unit == "us")
-      multiplier = 1000;
-    else if (unit == "ns")
-      multiplier = 1;
-    else if (unit.substr(1, 1) == "s")
-      unit_length = 1;
-    else
+    int64_t value = 0;
+    if (!parse_duration_number_with_unit(src.substr(offset, src.length() - offset), value))
       throw false;
 
-    if (src.length() < (unit_length + 1 + offset))
-      throw false;
-
-    if (!parse_number(src.substr(offset, src.length() - unit_length - offset), value))
-      throw false;
-
-    timecode = value * multiplier * negative;
+    timecode = value * negative;
 
     return true;
   } catch (...) {
