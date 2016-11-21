@@ -20,6 +20,9 @@ TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsIntegers) {
   EXPECT_TRUE(parse_duration_number_with_unit("12345ms", value));
   EXPECT_EQ(12345000000ll, value);
 
+  EXPECT_TRUE(parse_duration_number_with_unit("12345msec", value));
+  EXPECT_EQ(12345000000ll, value);
+
   EXPECT_TRUE(parse_duration_number_with_unit("12345s", value));
   EXPECT_EQ(12345000000000ll, value);
 }
@@ -36,6 +39,9 @@ TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsFloats) {
   EXPECT_TRUE(parse_duration_number_with_unit("12345.678ms", value));
   EXPECT_EQ(12345678000ll, value);
 
+  EXPECT_TRUE(parse_duration_number_with_unit("12345.678msec", value));
+  EXPECT_EQ(12345678000ll, value);
+
   EXPECT_TRUE(parse_duration_number_with_unit("12345.678s", value));
   EXPECT_EQ(12345678000000ll, value);
 }
@@ -50,6 +56,9 @@ TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsFractions) {
   EXPECT_EQ(50000ll, value);
 
   EXPECT_TRUE(parse_duration_number_with_unit("2500/50ms", value));
+  EXPECT_EQ(50000000ll, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("2500/50msec", value));
   EXPECT_EQ(50000000ll, value);
 
   EXPECT_TRUE(parse_duration_number_with_unit("2500/50ns", value));

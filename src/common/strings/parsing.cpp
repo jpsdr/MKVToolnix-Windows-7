@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/list_utils.h"
 #include "common/math.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -254,8 +255,8 @@ parse_bool(std::string value) {
 bool
 parse_duration_number_with_unit(const std::string &s,
                                 int64_t &value) {
-  boost::regex re1("(-?\\d+\\.?\\d*)(s|ms|us|ns|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
-  boost::regex re2("(-?\\d+)/(-?\\d+)(s|ms|us|ns|fps|p|i)?", boost::regex::perl | boost::regex::icase);
+  boost::regex re1("(-?\\d+\\.?\\d*)(s|ms|msec|us|ns|fps|p|i)?",  boost::regex::perl | boost::regex::icase);
+  boost::regex re2("(-?\\d+)/(-?\\d+)(s|ms|msec|us|ns|fps|p|i)?", boost::regex::perl | boost::regex::icase);
 
   std::string unit, s_n, s_d;
   int64_rational_c r{0, 1};
@@ -303,7 +304,7 @@ parse_duration_number_with_unit(const std::string &s,
 
   int64_t multiplier = 1000000000;
 
-  if (unit == "ms")
+  if (mtx::included_in(unit, "ms", "msec"))
     multiplier = 1000000;
   else if (unit == "us")
     multiplier = 1000;
