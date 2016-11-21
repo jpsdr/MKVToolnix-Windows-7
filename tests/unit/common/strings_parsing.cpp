@@ -138,4 +138,157 @@ TEST(StringsParsing, ParseNumberToRationalValidPatterns) {
   EXPECT_EQ(int64_rational_c(123456789012345ll, 1000000000ll), r);
 }
 
+TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnit) {
+  int64_t timecode;
+
+  EXPECT_TRUE(parse_timecode("123s", timecode, true));
+  EXPECT_EQ(123000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("123ms", timecode, true));
+  EXPECT_EQ(123000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("123us", timecode, true));
+  EXPECT_EQ(123000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("123ns", timecode, true));
+  EXPECT_EQ(123, timecode);
+}
+
+TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnitNegative) {
+  int64_t timecode;
+
+  EXPECT_TRUE(parse_timecode("-123s", timecode, true));
+  EXPECT_EQ(-123000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-123ms", timecode, true));
+  EXPECT_EQ(-123000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-123us", timecode, true));
+  EXPECT_EQ(-123000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-123ns", timecode, true));
+  EXPECT_EQ(-123, timecode);
+}
+
+TEST(StringParsing, ParseTimecodeValidPatternsHMSns) {
+  int64_t timecode;
+
+  EXPECT_TRUE(parse_timecode("12:34:56.789123456", timecode, true));
+  EXPECT_EQ(45296789123456ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("2:34:56.789123456", timecode, true));
+  EXPECT_EQ(9296789123456ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("34:56.789123456", timecode, true));
+  EXPECT_EQ(2096789123456ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("4:56.789123456", timecode, true));
+  EXPECT_EQ(296789123456ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("12:34:56.78912345", timecode, true));
+  EXPECT_EQ(45296789123450ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("12:34:56.7891234", timecode, true));
+  EXPECT_EQ(45296789123400ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("12:34:56.789123", timecode, true));
+  EXPECT_EQ(45296789123000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("12:34:56.78912", timecode, true));
+  EXPECT_EQ(45296789120000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("12:34:56.7891", timecode, true));
+  EXPECT_EQ(45296789100000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("12:34:56.789", timecode, true));
+  EXPECT_EQ(45296789000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("12:34:56.78", timecode, true));
+  EXPECT_EQ(45296780000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("12:34:56.7", timecode, true));
+  EXPECT_EQ(45296700000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("12:34:56", timecode, true));
+  EXPECT_EQ(45296000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("2:34:56", timecode, true));
+  EXPECT_EQ(9296000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("34:56", timecode, true));
+  EXPECT_EQ(2096000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("4:56", timecode, true));
+  EXPECT_EQ(296000000000ll, timecode);
+}
+
+TEST(StringParsing, ParseTimecodeValidPatternsHMSnsNegative) {
+  int64_t timecode;
+
+  EXPECT_TRUE(parse_timecode("-12:34:56.789123456", timecode, true));
+  EXPECT_EQ(-45296789123456ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-2:34:56.789123456", timecode, true));
+  EXPECT_EQ(-9296789123456ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-34:56.789123456", timecode, true));
+  EXPECT_EQ(-2096789123456ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-4:56.789123456", timecode, true));
+  EXPECT_EQ(-296789123456ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-12:34:56.78912345", timecode, true));
+  EXPECT_EQ(-45296789123450ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-12:34:56.7891234", timecode, true));
+  EXPECT_EQ(-45296789123400ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-12:34:56.789123", timecode, true));
+  EXPECT_EQ(-45296789123000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-12:34:56.78912", timecode, true));
+  EXPECT_EQ(-45296789120000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-12:34:56.7891", timecode, true));
+  EXPECT_EQ(-45296789100000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-12:34:56.789", timecode, true));
+  EXPECT_EQ(-45296789000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-12:34:56.78", timecode, true));
+  EXPECT_EQ(-45296780000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-12:34:56.7", timecode, true));
+  EXPECT_EQ(-45296700000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-12:34:56", timecode, true));
+  EXPECT_EQ(-45296000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-2:34:56", timecode, true));
+  EXPECT_EQ(-9296000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-34:56", timecode, true));
+  EXPECT_EQ(-2096000000000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-4:56", timecode, true));
+  EXPECT_EQ(-296000000000ll, timecode);
+}
+
+TEST(StringParsing, ParseTimecodeInvalidPatterns) {
+  int64_t timecode;
+
+  EXPECT_FALSE(parse_timecode("12:34:56.789123456us", timecode, true));  // HMS: unit after
+  EXPECT_FALSE(parse_timecode("12:34:56.789123456qq", timecode, true));  // HMS: garbage after
+  EXPECT_FALSE(parse_timecode("12::56.789123456",     timecode, true));  // HMS: empty minutes
+  EXPECT_FALSE(parse_timecode("56.789123456",         timecode, true));  // HMS: no hours & minutes
+  EXPECT_FALSE(parse_timecode("qq56.789123456",       timecode, true));  // HMS: garbage before
+  EXPECT_FALSE(parse_timecode("-12:34:56.789123456",  timecode, false)); // HMS: negative but not allowed
+
+  EXPECT_FALSE(parse_timecode("-123s",                timecode, false)); // number+unit: negative but not allowed
+  EXPECT_FALSE(parse_timecode("123",                  timecode, false)); // number+unit: no unit
+  EXPECT_FALSE(parse_timecode("123q",                 timecode, false)); // number+unit: invalid unit
+  EXPECT_FALSE(parse_timecode("123s q",               timecode, false)); // number+unit: garbage after
+  EXPECT_FALSE(parse_timecode("q123s",                timecode, false)); // number+unit: garbage before
+}
+
 }
