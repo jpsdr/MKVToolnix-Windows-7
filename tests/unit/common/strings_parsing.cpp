@@ -17,6 +17,9 @@ TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsIntegers) {
   EXPECT_TRUE(parse_duration_number_with_unit("12345us", value));
   EXPECT_EQ(12345000ll, value);
 
+  EXPECT_TRUE(parse_duration_number_with_unit("12345µs", value));
+  EXPECT_EQ(12345000ll, value);
+
   EXPECT_TRUE(parse_duration_number_with_unit("12345ms", value));
   EXPECT_EQ(12345000000ll, value);
 
@@ -36,6 +39,9 @@ TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsFloats) {
   EXPECT_TRUE(parse_duration_number_with_unit("12345.678us", value));
   EXPECT_EQ(12345678ll, value);
 
+  EXPECT_TRUE(parse_duration_number_with_unit("12345.678µs", value));
+  EXPECT_EQ(12345678ll, value);
+
   EXPECT_TRUE(parse_duration_number_with_unit("12345.678ms", value));
   EXPECT_EQ(12345678000ll, value);
 
@@ -53,6 +59,9 @@ TEST(StringsParsing, ParseDurationNumberWithUnitSecondUnitsFractions) {
   EXPECT_EQ(50ll, value);
 
   EXPECT_TRUE(parse_duration_number_with_unit("2500/50us", value));
+  EXPECT_EQ(50000ll, value);
+
+  EXPECT_TRUE(parse_duration_number_with_unit("2500/50µs", value));
   EXPECT_EQ(50000ll, value);
 
   EXPECT_TRUE(parse_duration_number_with_unit("2500/50ms", value));
@@ -153,6 +162,9 @@ TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnit) {
   EXPECT_TRUE(parse_timecode("123us", timecode, true));
   EXPECT_EQ(123000ll, timecode);
 
+  EXPECT_TRUE(parse_timecode("123µs", timecode, true));
+  EXPECT_EQ(123000ll, timecode);
+
   EXPECT_TRUE(parse_timecode("123ns", timecode, true));
   EXPECT_EQ(123, timecode);
 }
@@ -170,6 +182,9 @@ TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnitNegative) {
   EXPECT_EQ(-123000000ll, timecode);
 
   EXPECT_TRUE(parse_timecode("-123us", timecode, true));
+  EXPECT_EQ(-123000ll, timecode);
+
+  EXPECT_TRUE(parse_timecode("-123µs", timecode, true));
   EXPECT_EQ(-123000ll, timecode);
 
   EXPECT_TRUE(parse_timecode("-123ns", timecode, true));
