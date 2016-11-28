@@ -74,6 +74,7 @@
 # include "output/p_flac.h"
 #endif
 #include "output/p_hdmv_pgs.h"
+#include "output/p_hdmv_textst.h"
 #include "output/p_hevc.h"
 #include "output/p_hevc_es.h"
 #include "output/p_kate.h"
@@ -638,6 +639,41 @@ kax_reader_c::verify_video_track(kax_track_t *t) {
 }
 
 bool
+kax_reader_c::verify_hdmv_textst_subtitle_track(kax_track_t *t) {
+  if (!t->private_data || (t->private_size < 4)) {
+    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->codec_id);
+    return false;
+  }
+
+  // Older files created by MakeMKV have a different layout:
+  // 1 byte language code
+  // segment descriptor:
+  //   1 byte segment type (dialog style segment)
+  //   2 bytes segment size
+  // x bytes dialog style segment data
+  // 2 bytes frame count
+
+  // Newer files will only contain the dialog style segment's
+  // descriptor and data
+
+  auto buf                 = static_cast<unsigned char *>(t->private_data);
+  auto old_style           = buf[0] && (buf[0] < 0x10);
+  auto style_segment_start = old_style ? 1 : 0;
+  auto style_segment_size  = get_uint16_be(&buf[style_segment_start + 1]);
+
+  if (t->private_size < (3 + style_segment_size + (old_style ? 1 + 2 : 0))) {
+    mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->codec_id);
+    return false;
+  }
+
+  t->private_size = style_segment_size + 3;
+  if (0 < style_segment_start)
+    std::memmove(&buf[0], &buf[style_segment_start], t->private_size);
+
+  return true;
+}
+
+bool
 kax_reader_c::verify_kate_subtitle_track(kax_track_t *t) {
   if (t->private_data)
     return true;
@@ -669,6 +705,9 @@ kax_reader_c::verify_subtitle_track(kax_track_t *t) {
 
   else if (t->codec.is(codec_c::type_e::S_KATE))
     is_ok = verify_kate_subtitle_track(t);
+
+  else if (t->codec.is(codec_c::type_e::S_HDMV_TEXTST))
+    is_ok = verify_hdmv_textst_subtitle_track(t);
 
   t->ok = is_ok ? 1 : 0;
 }
@@ -1746,7 +1785,6 @@ kax_reader_c::create_truehd_audio_packetizer(kax_track_t *t,
 void
 kax_reader_c::create_tta_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
-  nti.m_private_data.reset();
   set_track_packetizer(t, new tta_packetizer_c(this, nti, t->a_channels, t->a_bps, t->a_sfreq));
   show_packetizer_info(t->tnum, t->ptzr_ptr);
 }
@@ -1855,6 +1893,11 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
 
   } else if (t->codec.is(codec_c::type_e::S_HDMV_PGS)) {
     set_track_packetizer(t, new hdmv_pgs_packetizer_c(this, nti));
+    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    t->sub_type = 'p';
+
+  } else if (t->codec.is(codec_c::type_e::S_HDMV_TEXTST)) {
+    set_track_packetizer(t, new hdmv_textst_packetizer_c(this, nti, memory_c::clone(t->private_data, t->private_size)));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
     t->sub_type = 'p';
 

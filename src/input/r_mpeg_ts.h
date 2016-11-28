@@ -74,6 +74,7 @@ enum mpeg_ts_stream_type_e {
   STREAM_AUDIO_DTS_HD2      = 0xa2, // Audio DTS HD Express; secondary stream
   STREAM_VIDEO_VC1          = 0xEA, // Video VC-1
   STREAM_SUBTITLES_HDMV_PGS = 0x90, // HDMV PGS subtitles
+  STREAM_SUBTITLES_HDMV_TEXTST = 0x92, // HDMV TextST subtitles
 };
 
 #if defined(COMP_MSC)
@@ -282,7 +283,7 @@ public:
   bool v_interlaced;
   int v_version, v_width, v_height, v_dwidth, v_dheight;
   double v_frame_rate, v_aspect_ratio;
-  memory_cptr raw_seq_hdr;
+  memory_cptr m_codec_private_data;
 
   // audio related parameters
   int a_channels, a_sample_rate, a_bits_per_sample, a_bsid;
@@ -362,6 +363,7 @@ public:
   int new_stream_a_dts();
   int new_stream_a_pcm();
   int new_stream_a_truehd();
+  int new_stream_s_hdmv_textst();
 
   bool parse_ac3_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
   bool parse_dts_pmt_descriptor(mpeg_ts_pmt_descriptor_t const &pmt_descriptor, mpeg_ts_pmt_pid_info_t const &pmt_pid_info);
@@ -446,6 +448,7 @@ private:
   bool parse_pat(mpeg_ts_track_c &track);
   bool parse_pmt(mpeg_ts_track_c &track);
   void parse_pes(mpeg_ts_track_c &track);
+  void parse_private_stream(mpeg_ts_track_c &track);
   void probe_packet_complete(mpeg_ts_track_c &track);
   int determine_track_parameters(mpeg_ts_track_c &track);
 
@@ -460,6 +463,7 @@ private:
   void create_pcm_audio_packetizer(mpeg_ts_track_ptr const &track);
   void create_truehd_audio_packetizer(mpeg_ts_track_ptr const &track);
   void create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track);
+  void create_hdmv_textst_subtitles_packetizer(mpeg_ts_track_ptr const &track);
   void create_srt_subtitles_packetizer(mpeg_ts_track_ptr const &track);
 
   void determine_global_timestamp_offset();

@@ -31,6 +31,7 @@
 #include "input/r_flac.h"
 #include "input/r_flv.h"
 #include "input/r_hdsub.h"
+#include "input/r_hdmv_textst.h"
 #include "input/r_hevc.h"
 #include "input/r_ivf.h"
 #include "input/r_matroska.h"
@@ -184,6 +185,8 @@ get_file_type_internal(filelist_t &file) {
     type = FILE_TYPE_WAV;
   else if (do_probe<ogm_reader_c>(io, size))
     type = FILE_TYPE_OGM;
+  else if (do_probe<hdmv_textst_reader_c>(io, size))
+    type = FILE_TYPE_HDMV_TEXTST;
   else if (do_probe<flac_reader_c>(io, size))
     type = FILE_TYPE_FLAC;
   else if (do_probe<pgssup_reader_c>(io, size))
@@ -342,6 +345,9 @@ create_readers() {
 #endif
         case FILE_TYPE_FLV:
           file->reader.reset(new flv_reader_c(*file->ti, input_file));
+          break;
+        case FILE_TYPE_HDMV_TEXTST:
+          file->reader.reset(new hdmv_textst_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_IVF:
           file->reader.reset(new ivf_reader_c(*file->ti, input_file));

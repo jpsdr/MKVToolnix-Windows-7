@@ -190,6 +190,8 @@ TEST(Codec, LookUpStringSubtitles) {
   EXPECT_TRUE(codec_c::look_up(MKV_S_KATE).is(codec_c::type_e::S_KATE));
   EXPECT_TRUE(codec_c::look_up("kate").is(codec_c::type_e::S_KATE));
 
+  EXPECT_TRUE(codec_c::look_up(MKV_S_HDMV_TEXTST).is(codec_c::type_e::S_HDMV_TEXTST));
+
   EXPECT_TRUE(codec_c::look_up(MKV_S_HDMV_PGS).is(codec_c::type_e::S_HDMV_PGS));
 }
 

@@ -65,6 +65,7 @@ codec_c::initialize() {
   ms_codecs.emplace_back("WavPack4",                type_e::A_WAVPACK4,     track_audio,    "wvpk|A_WAVPACK4");
 
   ms_codecs.emplace_back("HDMV PGS",                type_e::S_HDMV_PGS,     track_subtitle, MKV_S_HDMV_PGS);
+  ms_codecs.emplace_back("HDMV TextST",             type_e::S_HDMV_TEXTST,  track_subtitle, MKV_S_HDMV_TEXTST);
   ms_codecs.emplace_back("Kate",                    type_e::S_KATE,         track_subtitle, "kate|S_KATE");
   ms_codecs.emplace_back("SubRip/SRT",              type_e::S_SRT,          track_subtitle, "S_TEXT/(?:UTF8|ASCII)");
   ms_codecs.emplace_back("SubStationAlpha",         type_e::S_SSA_ASS,      track_subtitle, "ssa\\s|ass\\s|S_TEXT/(?:SSA|ASS)");

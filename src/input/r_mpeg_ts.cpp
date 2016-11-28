@@ -22,6 +22,7 @@
 #include "common/checksums/base_fwd.h"
 #include "common/clpi.h"
 #include "common/endian.h"
+#include "common/hdmv_textst.h"
 #include "common/math.h"
 #include "common/mp3.h"
 #include "common/mm_mpls_multi_file_io.h"
@@ -42,6 +43,7 @@
 #include "output/p_avc.h"
 #include "output/p_dts.h"
 #include "output/p_hdmv_pgs.h"
+#include "output/p_hdmv_textst.h"
 #include "output/p_hevc_es.h"
 #include "output/p_mp3.h"
 #include "output/p_mpeg1_2.h"
@@ -191,7 +193,7 @@ mpeg_ts_track_c::new_stream_v_mpeg_1_2() {
   MPEGChunk *raw_seq_hdr_chunk = m_m2v_parser->GetRealSequenceHeader();
   if (raw_seq_hdr_chunk) {
     mxdebug_if(m_debug_headers, boost::format("new_stream_v_mpeg_1_2: sequence header size: %1%\n") % raw_seq_hdr_chunk->GetSize());
-    raw_seq_hdr = memory_c::clone(raw_seq_hdr_chunk->GetPointer(), raw_seq_hdr_chunk->GetSize());
+    m_codec_private_data = memory_c::clone(raw_seq_hdr_chunk->GetPointer(), raw_seq_hdr_chunk->GetSize());
   }
 
   mxdebug_if(m_debug_headers, boost::format("new_stream_v_mpeg_1_2: width: %1%, height: %2%\n") % v_width % v_height);
@@ -429,6 +431,29 @@ mpeg_ts_track_c::new_stream_a_truehd() {
   }
 
   return m_truehd_found_truehd && m_truehd_found_ac3 ? 0 : FILE_STATUS_MOREDATA;
+}
+
+int
+mpeg_ts_track_c::new_stream_s_hdmv_textst() {
+  add_pes_payload_to_probe_data();
+
+  if (!m_probe_data || (m_probe_data->get_size() < 3))
+    return FILE_STATUS_MOREDATA;
+
+  auto buf = m_probe_data->get_buffer();
+  if (static_cast<mtx::hdmv_textst::segment_type_e>(buf[0]) != mtx::hdmv_textst::dialog_style_segment)
+    return FILE_STATUS_DONE;
+
+  auto size = get_uint16_be(&buf[1]);
+  if ((size + 3 + 2) > m_probe_data->get_size())
+    return FILE_STATUS_MOREDATA;
+
+  m_codec_private_data = memory_c::alloc(1 + size + 3 + 2);
+  auto buffer          = m_codec_private_data->get_buffer();
+  buffer[0]            = mtx::hdmv_textst::utf8;
+  std::memmove(&buffer[1], m_probe_data->get_buffer(), size + 3 + 2);
+
+  return 0;
 }
 
 bool
@@ -1216,6 +1241,10 @@ mpeg_ts_reader_c::parse_pmt(mpeg_ts_track_c &track) {
         track->codec     = codec_c::look_up(codec_c::type_e::S_HDMV_PGS);
         track->probed_ok = true;
         break;
+      case STREAM_SUBTITLES_HDMV_TEXTST:
+        track->type      = ES_SUBT_TYPE;
+        track->codec     = codec_c::look_up(codec_c::type_e::S_HDMV_TEXTST);
+        break;
       case ISO_13818_PES_PRIVATE:
         break;
       default:
@@ -1288,12 +1317,43 @@ mpeg_ts_reader_c::parse_pmt(mpeg_ts_track_c &track) {
 }
 
 void
+mpeg_ts_reader_c::parse_private_stream(mpeg_ts_track_c &track) {
+  auto pes            = track.pes_payload_read->get_buffer();
+  auto const pes_size = track.pes_payload_read->get_size();
+  auto pes_header     = reinterpret_cast<mpeg_ts_pes_header_t *>(pes);
+
+  track.pes_payload_read->remove(6);
+
+  if (m_debug_packet) {
+    mxdebug(boost::format("parse_pes: PES info (private stream) at file position %1%:\n") % (m_in->getFilePointer() - m_detected_packet_size));
+    mxdebug(boost::format("parse_pes:    stream_id = %1% PID = %2%\n") % static_cast<unsigned int>(pes_header->stream_id) % track.pid);
+    mxdebug(boost::format("parse_pes:    PES_packet_length = %1%, data starts at 6\n") % pes_size);
+  }
+
+  if (ps_probing == m_state)
+    probe_packet_complete(track);
+
+  else
+    track.send_to_packetizer();
+}
+
+void
 mpeg_ts_reader_c::parse_pes(mpeg_ts_track_c &track) {
   at_scope_exit_c finally{[&track]() { track.clear_pes_payload(); }};
 
   auto pes            = track.pes_payload_read->get_buffer();
   auto const pes_size = track.pes_payload_read->get_size();
   auto pes_header     = reinterpret_cast<mpeg_ts_pes_header_t *>(pes);
+
+  if (pes_size < 6) {
+    mxdebug_if(m_debug_packet, boost::format("parse_pes: error: PES payload (%1%) too small even for the basic PES header (6)\n") % pes_size);
+    return;
+  }
+
+  if (mtx::included_in(pes_header->stream_id, MPEGVIDEO_PRIVATE_STREAM_2)) {
+    parse_private_stream(track);
+    return;
+  }
 
   if (pes_size < sizeof(mpeg_ts_pes_header_t)) {
     mxdebug_if(m_debug_packet, boost::format("parse_pes: error: PES payload (%1%) too small for PES header structure itself (%2%)\n") % pes_size % sizeof(mpeg_ts_pes_header_t));
@@ -1488,6 +1548,10 @@ mpeg_ts_reader_c::determine_track_parameters(mpeg_ts_track_c &track) {
 
     track.pes_payload_read->set_chunk_size(512 * 1024);
 
+  } else if (track.type == ES_SUBT_TYPE) {
+    if (track.codec.is(codec_c::type_e::S_HDMV_TEXTST))
+      return track.new_stream_s_hdmv_textst();
+
   } else if (track.type != ES_AUDIO_TYPE)
     return -1;
 
@@ -1591,6 +1655,9 @@ mpeg_ts_reader_c::create_packetizer(int64_t id) {
   } else if (track->codec.is(codec_c::type_e::S_HDMV_PGS))
     create_hdmv_pgs_subtitles_packetizer(track);
 
+  else if (track->codec.is(codec_c::type_e::S_HDMV_TEXTST))
+    create_hdmv_textst_subtitles_packetizer(track);
+
   else if (track->codec.is(codec_c::type_e::S_SRT))
     create_srt_subtitles_packetizer(track);
 
@@ -1638,7 +1705,7 @@ mpeg_ts_reader_c::create_truehd_audio_packetizer(mpeg_ts_track_ptr const &track)
 
 void
 mpeg_ts_reader_c::create_mpeg1_2_video_packetizer(mpeg_ts_track_ptr &track) {
-  m_ti.m_private_data = track->raw_seq_hdr;
+  m_ti.m_private_data = track->m_codec_private_data;
   auto m2vpacketizer  = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, track->v_frame_rate, track->v_width, track->v_height, track->v_dwidth, track->v_dheight, false);
   track->ptzr         = add_packetizer(m2vpacketizer);
 
@@ -1677,6 +1744,12 @@ mpeg_ts_reader_c::create_hdmv_pgs_subtitles_packetizer(mpeg_ts_track_ptr &track)
   ptzr->set_aggregate_packets(true);
   track->ptzr = add_packetizer(ptzr);
 
+  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
+}
+
+void
+mpeg_ts_reader_c::create_hdmv_textst_subtitles_packetizer(mpeg_ts_track_ptr const &track) {
+  track->ptzr = add_packetizer(new hdmv_textst_packetizer_c(this, m_ti, track->m_codec_private_data));
   show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }
 
