@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2016-11-20 20:37+0100\n"
+"POT-Creation-Date: 2016-11-28 16:43+0100\n"
 "PO-Revision-Date: 2016-11-20 23:52+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1170,8 +1170,8 @@ msgid "%1%: an exception occurred (message: %2%; type: %3%)."
 msgstr "%1%: 예외 사항 발생 (메시지: %2%; 형식: %3%)."
 
 #: src/common/kax_file.cpp:69
-#: src/input/r_matroska.cpp:1438
-#: src/input/r_matroska.cpp:2115
+#: src/input/r_matroska.cpp:1477
+#: src/input/r_matroska.cpp:2158
 #, boost-format
 msgid "%1%: an unknown exception occurred."
 msgstr "%1%: 알 수 없는 예외 사항 발생."
@@ -2020,7 +2020,7 @@ msgstr "'%1%': %2%"
 msgid "'%1%': Processing the following files as well: %2%\n"
 msgstr "'%1%': 후속 파일을 마찬가지로 처리: %2%\n"
 
-#: src/input/r_matroska.cpp:1719
+#: src/input/r_matroska.cpp:1758
 #, boost-format
 msgid "'%1%': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'%1%': 실험적 모드에서 기록되었던 Opus 트랙을 복사 중입니다. 그 결과로 나오는 트랙은 최종 모드로 기록이 될 것이지만 하나의 세부 항목(끝부분 잘라내기)은 실험적 모드에서 기록된 트랙에서 복원할 수 없습니다. 다시 말해서 디코더가 원래 의도한 것보다 몇 개의 샘플을 더 출력하게 됩니다. 그래서 가능하면 원래의 Opus에서 다시 합치기를 하세요.\n"
@@ -2320,8 +2320,8 @@ msgstr "<이름 없음>"
 msgid "<Unsaved file>"
 msgstr "<미저장 파일>"
 
-#: src/input/r_matroska.cpp:2136
-#: src/input/r_matroska.cpp:2249
+#: src/input/r_matroska.cpp:2179
+#: src/input/r_matroska.cpp:2292
 #, boost-format
 msgid "A block was found at timestamp %1% for track number %2%. However, no headers where found for that track number. The block will be skipped.\n"
 msgstr "트랙 번호 %2%에 대한 타임스탬프 %1%의 블록을 찾았지만, 그 트랙 번호의 헤더는 찾지 못했습니다. 이 블록은 건너 뜁니다.\n"
@@ -2446,7 +2446,7 @@ msgstr "파일 결합하기(&P)"
 msgid "A/52 (aka AC-3)"
 msgstr "A/52 (일명 AC-3)"
 
-#: src/common/file_types.cpp:68
+#: src/common/file_types.cpp:69
 #: src/output/p_aac.h:41
 msgid "AAC"
 msgstr "AAC"
@@ -2463,7 +2463,7 @@ msgstr "AAC는 SBR/HE-AAC/AAC+:"
 msgid "AAC with ADIF headers"
 msgstr "ADIF 헤더를 포함한 AAC"
 
-#: src/common/file_types.cpp:69
+#: src/common/file_types.cpp:70
 #: src/output/p_ac3.h:41
 msgid "AC-3"
 msgstr "AC-3"
@@ -2485,7 +2485,7 @@ msgstr "ALAC 개인 데이터 크기가 일치하지 않습니다\n"
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "아스키 문자열 (움라우트같은 특수 문자 아님)"
 
-#: src/common/file_types.cpp:71
+#: src/common/file_types.cpp:72
 #: src/output/p_mpeg4_p10.h:34
 msgid "AVC/h.264"
 msgstr "AVC/h.264"
@@ -2498,7 +2498,7 @@ msgstr "AVC/h.264 (비프레임 형식)"
 msgid "AVC/h.264 elementary streams"
 msgstr "AVC/h.264 엘러멘터리 스트림"
 
-#: src/common/file_types.cpp:72
+#: src/common/file_types.cpp:73
 msgid "AVI"
 msgstr "AVI"
 
@@ -3406,7 +3406,7 @@ msgid "Cannot write track %1% with the CodecID '%2%' to the file '%3%' because t
 msgstr "'%5%' CodecID가 있는 %4% 트랙을 이미 동일한 파일에 기록하고 있기 때문에, '%2%' CodecID를 가진  %1% 트랙을 '%3%' 파일에 기록할 수 없고, 그들의 CodecPrivate 데이터(USF 스타일같은)도 일치하지 않습니다.\n"
 
 #: src/extract/xtr_avi.cpp:49
-#: src/extract/xtr_base.cpp:71
+#: src/extract/xtr_base.cpp:72
 #: src/extract/xtr_ivf.cpp:52
 #: src/extract/xtr_textsubs.cpp:299
 #, boost-format
@@ -3821,7 +3821,7 @@ msgstr "파일 소스의 파일명을 파일 제목으로 복사(&F)"
 msgid "Copy item"
 msgstr "항목 복사"
 
-#: src/common/file_types.cpp:75
+#: src/common/file_types.cpp:76
 msgid "CoreAudio"
 msgstr "CoreAudio"
 
@@ -4162,7 +4162,7 @@ msgstr "현재 특정 자막 형식만 zlib 알고리즘으로 압축할 수 있
 msgid "D&uplicate selected edition or chapter"
 msgstr "선택한 에디션이나 챕터 복제(&U)"
 
-#: src/common/file_types.cpp:77
+#: src/common/file_types.cpp:78
 #: src/output/p_dts.h:46
 msgid "DTS"
 msgstr "DTS"
@@ -4187,7 +4187,7 @@ msgstr "DTS_헤더 문제: 무효한 소스 PCM 해상도\n"
 msgid "DTS_Header problem: not enough data to read header\n"
 msgstr "DTS_헤더 문제: 헤더를 읽을 충분한 데이터가 없음\n"
 
-#: src/common/file_types.cpp:78
+#: src/common/file_types.cpp:79
 msgid "DV video format"
 msgstr "DV 비디오 형식"
 
@@ -4379,7 +4379,7 @@ msgid "Di&sable all attached files"
 msgstr "모든 첨부 파일 사용 안 함(&S)"
 
 #: src/common/file_types.cpp:30
-#: src/common/file_types.cpp:76
+#: src/common/file_types.cpp:77
 #: src/output/p_dirac.h:38
 msgid "Dirac"
 msgstr "Dirac"
@@ -4638,7 +4638,7 @@ msgstr "EBML 읽기 버전: %1%"
 msgid "EBML version: %1%"
 msgstr "EBML 버전: %1%"
 
-#: src/merge/reader_detection_and_creation.cpp:410
+#: src/merge/reader_detection_and_creation.cpp:416
 #, boost-format
 msgid "EVIL internal bug! (unknown file type). %1%\n"
 msgstr "악의적인 내부 버그입니다! (알 수 없는 파일 유형입니다.) %1%\n"
@@ -4994,7 +4994,7 @@ msgstr "추출 도구"
 msgid "F1"
 msgstr "F1"
 
-#: src/common/file_types.cpp:79
+#: src/common/file_types.cpp:80
 #: src/output/p_flac.h:39
 msgid "FLAC"
 msgstr "FLAC"
@@ -5023,7 +5023,7 @@ msgstr "Vobsub 데이터 파일 '%1%' 만들기 실패: %2%\n"
 msgid "Failed to create the file '%1%': %2%\n"
 msgstr "파일 '%1%' 만들기 실패: %2%\n"
 
-#: src/extract/xtr_base.cpp:79
+#: src/extract/xtr_base.cpp:80
 #, boost-format
 msgid "Failed to create the file '%1%': %2% (%3%)\n"
 msgstr "파일 '%1%' 만들기 실패: %2%(%3%)\n"
@@ -5187,7 +5187,7 @@ msgstr "플래그"
 msgid "Flags:"
 msgstr "플래그:"
 
-#: src/common/file_types.cpp:80
+#: src/common/file_types.cpp:81
 msgid "Flash Video"
 msgstr "플래시 비디오"
 
@@ -5390,7 +5390,7 @@ msgstr "녹색 좌표 x: %1%"
 msgid "Green colour coordinate y: %1%"
 msgstr "녹색 좌표:  %1%"
 
-#: src/common/file_types.cpp:82
+#: src/common/file_types.cpp:84
 msgid "HD-DVD subtitles"
 msgstr "HD-DVD 자막"
 
@@ -5398,7 +5398,19 @@ msgstr "HD-DVD 자막"
 msgid "HDMV PGS"
 msgstr "HDMV PGS"
 
-#: src/common/file_types.cpp:81
+#: src/common/file_types.cpp:37
+#: src/output/p_hdmv_textst.h:31
+#, fuzzy
+msgid "HDMV TextST"
+msgstr "HDMV PGS"
+
+#: src/common/file_types.cpp:82
+#: src/extract/xtr_hdmv_textst.h:34
+#, fuzzy
+msgid "HDMV TextST subtitles"
+msgstr "텍스트 자막"
+
+#: src/common/file_types.cpp:83
 #: src/output/p_hevc.h:33
 msgid "HEVC/h.265"
 msgstr "HEVC/h.265"
@@ -5407,7 +5419,7 @@ msgstr "HEVC/h.265"
 msgid "HEVC/h.265 (unframed)"
 msgstr "HEVC/h.265 (비프레임 형식)"
 
-#: src/common/file_types.cpp:37
+#: src/common/file_types.cpp:38
 msgid "HEVC/h.265 elementary streams"
 msgstr "HEVC/h.265 엘러멘터리 스트림"
 
@@ -5499,11 +5511,11 @@ msgstr "ISO639-1 코드"
 msgid "ISO639-2 code"
 msgstr "ISO639-2 코드"
 
-#: src/common/file_types.cpp:83
+#: src/common/file_types.cpp:85
 msgid "IVF (VP8/VP9)"
 msgstr "IVF (VP8/VP9)"
 
-#: src/common/file_types.cpp:38
+#: src/common/file_types.cpp:39
 msgid "IVF with VP8 video files"
 msgstr "VP8 포함 IVF 비디오 파일"
 
@@ -5962,43 +5974,43 @@ msgstr "타임코드 %2%의 SSA 행('%1%')의 형식이 잘못됨: 첫 번째 �
 msgid "Invalid format for a SSA line ('%1%') at timecode %2%: Too many fields found (%3% instead of 9). This entry will be skipped.\n"
 msgstr "타임코드 %2%의 SSA 행('%1%')의 형식이 잘못됨: 너무 많은 필드의 수를 찾았습니다 (9개 대신 %3%). 이 항목을 건너 뜁니다.\n"
 
-#: src/common/strings/parsing.cpp:165
+#: src/common/strings/parsing.cpp:147
 msgid "Invalid format: At least minutes and seconds have to be given, but no colon was found"
 msgstr "잘못된 형식: 적어도 분과 초는 지정되어 있지만, 콜론을 찾지 못했습니다."
 
-#: src/common/strings/parsing.cpp:151
+#: src/common/strings/parsing.cpp:133
 msgid "Invalid format: Colon inside nano-second part"
 msgstr "잘못된 형식: 나노초 부분에 콜론이 포함되어 있습니다"
 
-#: src/common/strings/parsing.cpp:134
+#: src/common/strings/parsing.cpp:116
 msgid "Invalid format: More than nine nano-second digits"
 msgstr "잘못된 형식: 나노초 숫자가 9자리 이상 있습니다"
 
-#: src/common/strings/parsing.cpp:153
+#: src/common/strings/parsing.cpp:135
 msgid "Invalid format: More than two colons"
 msgstr "잘못된 형식: 콜론이 3개 이상 있습니다"
 
-#: src/common/strings/parsing.cpp:155
+#: src/common/strings/parsing.cpp:137
 msgid "Invalid format: No digits before colon"
 msgstr "잘못된 형식: 콜론 앞이 숫자가 아닙니다"
 
-#: src/common/strings/parsing.cpp:144
+#: src/common/strings/parsing.cpp:126
 msgid "Invalid format: No digits before decimal point"
 msgstr "잘못된 형식: 소수점 앞이 숫자가 아닙니다"
 
-#: src/common/strings/parsing.cpp:141
+#: src/common/strings/parsing.cpp:123
 msgid "Invalid format: Second decimal point after first decimal point"
 msgstr "잘못된 형식: 첫 번째 소수점 뒤에 두 번째 소수점이 있습니다"
 
-#: src/common/strings/parsing.cpp:168
+#: src/common/strings/parsing.cpp:150
 msgid "Invalid format: The last character is a colon or a decimal point instead of a digit"
 msgstr "잘못된 형식: 마지막 문자가 숫자가 아닌 콜론 및 소수점입니다"
 
-#: src/common/strings/parsing.cpp:83
+#: src/common/strings/parsing.cpp:82
 msgid "Invalid format: the string is empty."
 msgstr "무효한 형식: 문자열이 비어 있습니다."
 
-#: src/common/strings/parsing.cpp:161
+#: src/common/strings/parsing.cpp:143
 #, boost-format
 msgid "Invalid format: unknown character '%1%' found"
 msgstr "잘못된 형식: 알 수 없는 문자 '%1%'을 찼았습니다"
@@ -6027,12 +6039,12 @@ msgstr "잘못된 16진수 길이 내용: 2로 나누어야 합니다."
 msgid "Invalid minute: %1%"
 msgstr "잘못된 시간(분): %1%"
 
-#: src/common/strings/parsing.cpp:204
+#: src/common/strings/parsing.cpp:186
 #, boost-format
 msgid "Invalid number of minutes: %1% > 59"
 msgstr "잘못된 시간(분) 수: %1% > 59"
 
-#: src/common/strings/parsing.cpp:206
+#: src/common/strings/parsing.cpp:188
 #, boost-format
 msgid "Invalid number of seconds: %1% > 59"
 msgstr "잘못된 시간(초) 수: %1% > 59"
@@ -6438,7 +6450,7 @@ msgstr "MKVToolNix 옵션 파일"
 msgid "MKVToolnix GUI config files"
 msgstr "MKVToolnix GUI 설정 파일"
 
-#: src/common/file_types.cpp:86
+#: src/common/file_types.cpp:88
 msgid "MP2/MP3"
 msgstr "MP2/MP3"
 
@@ -6446,35 +6458,35 @@ msgstr "MP2/MP3"
 msgid "MP3"
 msgstr "MP3"
 
-#: src/common/file_types.cpp:39
+#: src/common/file_types.cpp:40
 msgid "MP4 audio/video files"
 msgstr "MP4 오디오/비디오 파일"
 
-#: src/common/file_types.cpp:40
+#: src/common/file_types.cpp:41
 msgid "MPEG audio files"
 msgstr "MPEG 오디오 파일"
 
-#: src/common/file_types.cpp:88
+#: src/common/file_types.cpp:90
 msgid "MPEG program stream"
 msgstr "MPEG 프로그램 스트림"
 
-#: src/common/file_types.cpp:41
+#: src/common/file_types.cpp:42
 msgid "MPEG program streams"
 msgstr "MPEG 프로그램 스트림"
 
-#: src/common/file_types.cpp:89
+#: src/common/file_types.cpp:91
 msgid "MPEG transport stream"
 msgstr "MPEG 전송 스트림"
 
-#: src/common/file_types.cpp:42
+#: src/common/file_types.cpp:43
 msgid "MPEG transport streams"
 msgstr "MPEG 전송 스트림"
 
-#: src/common/file_types.cpp:87
+#: src/common/file_types.cpp:89
 msgid "MPEG video elementary stream"
 msgstr "MPEG 비디오 엘러멘터리 스트림"
 
-#: src/common/file_types.cpp:43
+#: src/common/file_types.cpp:44
 msgid "MPEG video elementary streams"
 msgstr "MPEG 비디오 엘러멘터리 스트림"
 
@@ -6486,7 +6498,7 @@ msgstr "MPEG-1/2"
 msgid "MPEG-4"
 msgstr "MPEG-4"
 
-#: src/common/file_types.cpp:44
+#: src/common/file_types.cpp:45
 msgid "MPLS Blu-ray playlist"
 msgstr "MPLS Blu-ray 재생 목록"
 
@@ -6495,12 +6507,12 @@ msgstr "MPLS Blu-ray 재생 목록"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "이 트랙을 그 유형(오디오, 비디오, 자막)의 기본 트랙으로 만듭니다."
 
-#: src/input/r_matroska.cpp:1609
-#: src/input/r_matroska.cpp:1624
+#: src/input/r_matroska.cpp:1648
+#: src/input/r_matroska.cpp:1663
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "잘못된 형식의 AAC 코덱 초기화 데이터를 찾았습니다.\n"
 
-#: src/input/r_matroska.cpp:1617
+#: src/input/r_matroska.cpp:1656
 #, boost-format
 msgid "Malformed codec id '%1%'.\n"
 msgstr "잘못된 형식의 코덱 ID '%1%'입니다.\n"
@@ -6517,7 +6529,7 @@ msgstr "잘못된 형식의 행일까요? (%1%)\n"
 msgid "Mark this track as 'forced'."
 msgstr "이 트랙을 '강제'로 표시합니다."
 
-#: src/common/file_types.cpp:84
+#: src/common/file_types.cpp:86
 msgid "Matroska"
 msgstr "Matroska"
 
@@ -6527,7 +6539,7 @@ msgstr "Matroska"
 msgid "Matroska and WebM files"
 msgstr "Matroska와 WebM 파일"
 
-#: src/common/file_types.cpp:45
+#: src/common/file_types.cpp:46
 msgid "Matroska audio/video files"
 msgstr "Matroska 오디오/비디오 파일"
 
@@ -6603,7 +6615,7 @@ msgstr "메모리 할당 오류: %1%(%2%)\n"
 msgid "Memory for a RealAudio/RealVideo frame could not be allocated.\n"
 msgstr "RealAudio/RealVideo 프레임에 대한 메모리를 할당할 수 없습니다.\n"
 
-#: src/common/file_types.cpp:85
+#: src/common/file_types.cpp:87
 msgid "MicroDVD"
 msgstr "MicroDVD"
 
@@ -7186,11 +7198,11 @@ msgstr "트랙의 채널 수 입니다."
 msgid "Often used selections"
 msgstr "자주 쓰는 선택항목"
 
-#: src/common/file_types.cpp:90
+#: src/common/file_types.cpp:92
 msgid "Ogg/OGM"
 msgstr "Ogg/OGM"
 
-#: src/common/file_types.cpp:48
+#: src/common/file_types.cpp:49
 msgid "Ogg/OGM audio/video files"
 msgstr "Ogg/OGM 오디오/비디오 파일"
 
@@ -7382,7 +7394,7 @@ msgstr "옵션:"
 msgid "Opus"
 msgstr "Opus"
 
-#: src/common/file_types.cpp:49
+#: src/common/file_types.cpp:50
 msgid "Opus (in Ogg) audio files"
 msgstr "Opus (OGG 안에) 오디오 파일"
 
@@ -7450,11 +7462,11 @@ msgstr "기존 파일 덮어쓰기"
 msgid "PCM"
 msgstr "PCM"
 
-#: src/common/file_types.cpp:46
+#: src/common/file_types.cpp:47
 msgid "PGS/SUP subtitles"
 msgstr "PGS/SUP 자막"
 
-#: src/common/file_types.cpp:91
+#: src/common/file_types.cpp:93
 msgid "PGSSUP"
 msgstr "PGSSUP"
 
@@ -7708,7 +7720,7 @@ msgstr "속성"
 msgid "Properties:"
 msgstr "속성:"
 
-#: src/common/file_types.cpp:47
+#: src/common/file_types.cpp:48
 msgid "QuickTime audio/video files"
 msgstr "QuickTime 오디오/비디오 파일"
 
@@ -7716,7 +7728,7 @@ msgstr "QuickTime 오디오/비디오 파일"
 msgid "QuickTime compatible video"
 msgstr "퀵타임 호환 비디오"
 
-#: src/common/file_types.cpp:92
+#: src/common/file_types.cpp:94
 msgid "QuickTime/MP4"
 msgstr "QuickTime/MP4"
 
@@ -7846,7 +7858,7 @@ msgstr "Quicktime/MP4 리더: 트랙 %1%은 일부 데이터가 누락되어 있
 msgid "Quicktime/MP4 reader: Track ID %1% has more than one FourCC. Only using the first one (%2%) and not this one (%3%).\n"
 msgstr "Quicktime/MP4 리더: %1% 트랙 ID에는 하나 이상의 FourCC가 있습니다. 첫번째(%2%)만 사용하고 이것(%3%)은 사용하지 않습니다.\n"
 
-#: src/common/file_types.cpp:73
+#: src/common/file_types.cpp:74
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
@@ -7905,11 +7917,11 @@ msgstr "실제 출력 샘플링 주파수(Hz단위)입니다."
 msgid "RealAudio"
 msgstr "RealAudio"
 
-#: src/common/file_types.cpp:93
+#: src/common/file_types.cpp:95
 msgid "RealMedia"
 msgstr "RealMedia"
 
-#: src/common/file_types.cpp:50
+#: src/common/file_types.cpp:51
 msgid "RealMedia audio/video files"
 msgstr "RealMedia 오디오/비디오 파일"
 
@@ -8129,19 +8141,19 @@ msgstr "작업 대기열 정지(&T)"
 msgid "SHA1-160"
 msgstr "SHA1-160"
 
-#: src/common/file_types.cpp:94
+#: src/common/file_types.cpp:96
 msgid "SRT subtitles"
 msgstr "SRT 자막"
 
-#: src/common/file_types.cpp:51
+#: src/common/file_types.cpp:52
 msgid "SRT text subtitles"
 msgstr "SRT 텍스트 자막"
 
-#: src/common/file_types.cpp:95
+#: src/common/file_types.cpp:97
 msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS 자막"
 
-#: src/common/file_types.cpp:52
+#: src/common/file_types.cpp:53
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS 텍스트 자막"
 
@@ -8913,12 +8925,12 @@ msgstr "지원 파일 유형:\n"
 msgid "Suppress status output."
 msgstr "상태 정보를 출력하지 않습니다."
 
-#: src/common/file_types.cpp:97
+#: src/common/file_types.cpp:99
 #: src/output/p_tta.h:34
 msgid "TTA"
 msgstr "TTA"
 
-#: src/common/file_types.cpp:53
+#: src/common/file_types.cpp:54
 msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA [무손실 가역압축 오디오 코덱](The lossless True Audio codec)"
 
@@ -9326,11 +9338,11 @@ msgstr "기본 언어 코드 '%1%'는 올바른 ISO639-2 언어 코드가 아니
 msgid "The default mode is adding files for multiplexing."
 msgstr "기본 모드는 합치기를 위해 파일을 추가하는 것입니다."
 
-#: src/merge/reader_detection_and_creation.cpp:425
-#: src/merge/reader_detection_and_creation.cpp:428
 #: src/merge/reader_detection_and_creation.cpp:431
 #: src/merge/reader_detection_and_creation.cpp:434
 #: src/merge/reader_detection_and_creation.cpp:437
+#: src/merge/reader_detection_and_creation.cpp:440
+#: src/merge/reader_detection_and_creation.cpp:443
 #, boost-format
 msgid ""
 "The demultiplexer for the file '%1%' failed to initialize:\n"
@@ -9441,8 +9453,8 @@ msgstr "'%1%' 파일을 읽기 위해 열 수 없습니다: %2%."
 #: src/extract/mkvextract.cpp:61
 #: src/extract/timecodes_v2.cpp:193
 #: src/extract/tracks.cpp:358
-#: src/merge/reader_detection_and_creation.cpp:82
-#: src/merge/reader_detection_and_creation.cpp:140
+#: src/merge/reader_detection_and_creation.cpp:83
+#: src/merge/reader_detection_and_creation.cpp:141
 #: src/propedit/attachment_target.cpp:65
 #, boost-format
 msgid "The file '%1%' could not be opened for reading: %2%.\n"
@@ -9524,12 +9536,12 @@ msgstr "파일(%1)이 너무 큽니다(%2)."
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
 msgstr "이 파일은 mkvmerge로 다시 합치기를 해서 고칠 수 있습니다."
 
-#: src/merge/reader_detection_and_creation.cpp:431
+#: src/merge/reader_detection_and_creation.cpp:437
 msgid "The file content does not match its format type and was not recognized."
 msgstr "파일 내용이 형식 유형과 일치하지 않아 알 수 없습니다."
 
-#: src/merge/reader_detection_and_creation.cpp:425
-#: src/merge/reader_detection_and_creation.cpp:428
+#: src/merge/reader_detection_and_creation.cpp:431
+#: src/merge/reader_detection_and_creation.cpp:434
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "파일을 읽을(열) 수 없거나, 이 파일은 헤더를 분석하기 위한 충분한 데이터를 가지고 있지 않습니다."
 
@@ -9577,7 +9589,7 @@ msgstr "파일 헤더가 너무 짧습니다.\n"
 msgid "The file header was not read correctly.\n"
 msgstr "파일 헤더를 제대로 읽을 수 없습니다.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:434
+#: src/merge/reader_detection_and_creation.cpp:440
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "파일 헤더를 분석할 수 없습니다, 이런 현상은 파일이 불완전하거나 잘못되었거나 손상되었기 때문입니다."
 
@@ -9644,8 +9656,8 @@ msgstr "이 파일을 지원하는 형식으로 인식하지 못했습니다 (�
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1439
-#: src/input/r_matroska.cpp:2116
+#: src/input/r_matroska.cpp:1478
+#: src/input/r_matroska.cpp:2159
 msgid "The file will not be processed further."
 msgstr "이 파일은 더 이상 처리하지 않을 것입니다."
 
@@ -10099,8 +10111,8 @@ msgstr "지정한 크기 이후 새 대상 파일을 시작합니다."
 msgid "The size of attachment '%1%' is 0.\n"
 msgstr "첨부 파일 '%1%'의 크기가 0입니다.\n"
 
-#: src/merge/reader_detection_and_creation.cpp:86
-#: src/merge/reader_detection_and_creation.cpp:143
+#: src/merge/reader_detection_and_creation.cpp:87
+#: src/merge/reader_detection_and_creation.cpp:144
 #, boost-format
 msgid "The source file '%1%' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "소스 파일 '%1%'를 여는 데 실패하였거나, 끝까지 탐색하여 크기를 측정할 수 없습니다.\n"
@@ -10626,8 +10638,8 @@ msgstr "이 트랙에는 SBR AAC/HE-AAC/AAC+ 데이터가 포함되어 있습니
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1439
-#: src/input/r_matroska.cpp:2116
+#: src/input/r_matroska.cpp:1478
+#: src/input/r_matroska.cpp:2159
 msgid "This usually indicates a damaged file structure."
 msgstr "이것은 대게 손상된 파일 구조를 나타냅니다."
 
@@ -10708,6 +10720,8 @@ msgid "Trac&k name:"
 msgstr "트랙 이름(&K):"
 
 #: src/extract/xtr_avc.cpp:67
+#: src/extract/xtr_hdmv_textst.cpp:44
+#: src/extract/xtr_hdmv_textst.cpp:63
 #: src/extract/xtr_hevc.cpp:30
 #, boost-format
 msgid "Track %1% CodecPrivate is too small.\n"
@@ -10718,7 +10732,7 @@ msgstr "트랙 %1% CodecPrivate가 너무 작습니다.\n"
 msgid "Track %1% has been compressed with an unknown/unsupported compression algorithm (%2%).\n"
 msgstr "트랙 %1%은 알 수 없거나 지원되지 않는 압축 알고리즘 (%2%)으로 압축되었습니다.\n"
 
-#: src/input/r_matroska.cpp:1152
+#: src/input/r_matroska.cpp:1191
 #, boost-format
 msgid "Track %1% is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "%1% 트랙에 Matroska 규격에 의거해 있어야 하는 트랙 UID 요소가 누락되어 있습니다. 파일에 태그가 포함되어 있다면 그 태그가 깨진 것 같습니다.\n"
@@ -10747,6 +10761,7 @@ msgstr "코덱ID '%2%'의 트랙 %1%은 \"bits per second (bps)\"요소가 누�
 #: src/extract/xtr_alac.cpp:47
 #: src/extract/xtr_avc.cpp:62
 #: src/extract/xtr_avi.cpp:40
+#: src/extract/xtr_hdmv_textst.cpp:39
 #: src/extract/xtr_hevc.cpp:26
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
@@ -10870,7 +10885,7 @@ msgstr "트랙 유형: %1%"
 msgid "Tracks with a language in this list will be set not to be copied by default."
 msgstr "이 목록의 언어로 된 트랙은 기본적으로 복사하지 않도록 설정이 될 것입니다."
 
-#: src/extract/xtr_base.cpp:123
+#: src/extract/xtr_base.cpp:124
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "지원되지 않는 방식(압축/암호화)으로 인코딩된 내용은 추출할 수 없습니다.\n"
 
@@ -10878,7 +10893,7 @@ msgstr "지원되지 않는 방식(압축/암호화)으로 인코딩된 내용�
 msgid "Tracks:"
 msgstr "트랙:"
 
-#: src/common/file_types.cpp:96
+#: src/common/file_types.cpp:98
 #: src/output/p_truehd.h:41
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -10937,11 +10952,11 @@ msgstr "UID"
 msgid "UID:"
 msgstr "UID:"
 
-#: src/common/file_types.cpp:98
+#: src/common/file_types.cpp:100
 msgid "USF subtitles"
 msgstr "USF 자막"
 
-#: src/common/file_types.cpp:54
+#: src/common/file_types.cpp:55
 msgid "USF text subtitles"
 msgstr "USF 텍스트 자막"
 
@@ -11050,7 +11065,7 @@ msgstr "지원되지 않는 MPEG_버전: 0x%|1$02x|(패킷 %2%, 타임코드 %3%
 msgid "Unsupported file format"
 msgstr "미지원 파일 형식"
 
-#: src/input/r_matroska.cpp:1924
+#: src/input/r_matroska.cpp:1967
 msgid "Unsupported track type for this track.\n"
 msgstr "이 트랙은 지원되지 않는 트랙 유형입니다.\n"
 
@@ -11112,7 +11127,7 @@ msgstr "NALU 크기가 3바이트면 특정 AVC/h.264 코덱의 트랙을 디코
 msgid "Using the demultiplexer for the format '%1%'.\n"
 msgstr "형식 '%1%'에 대해 디멀티플렉서 사용 중.\n"
 
-#: src/input/r_matroska.cpp:1468
+#: src/input/r_matroska.cpp:1507
 #, boost-format
 msgid "Using the generic output module for track type '%1%'.\n"
 msgstr "트랙 유형 '%1%'에 대해 일반 출력 모듈을 사용합니다.\n"
@@ -11126,12 +11141,12 @@ msgstr "형식 '%1%'에 대해 출력 모듈을 사용합니다.\n"
 msgid "Using the track with the ID %1% from the file '%2%' as the reference for chapter generation.\n"
 msgstr "챕터 생성시 '%2%' 파일에서 %1% ID가 있는 트랙을 참고하여 사용합니다.\n"
 
-#: src/common/file_types.cpp:99
+#: src/common/file_types.cpp:101
 #: src/output/p_vc1.h:37
 msgid "VC-1"
 msgstr "VC-1"
 
-#: src/common/file_types.cpp:55
+#: src/common/file_types.cpp:56
 msgid "VC-1 elementary streams"
 msgstr "VC-1 엘러멘터리 스트림"
 
@@ -11295,21 +11310,21 @@ msgstr "비디오 트랙"
 msgid "Video track %1"
 msgstr "비디오 트랙 %1"
 
-#: src/common/file_types.cpp:100
+#: src/common/file_types.cpp:102
 #: src/output/p_vobbtn.h:36
 msgid "VobBtn"
 msgstr "VobBtn"
 
-#: src/common/file_types.cpp:56
+#: src/common/file_types.cpp:57
 msgid "VobButtons"
 msgstr "VobButton"
 
-#: src/common/file_types.cpp:101
+#: src/common/file_types.cpp:103
 #: src/output/p_vobsub.h:31
 msgid "VobSub"
 msgstr "VobSub"
 
-#: src/common/file_types.cpp:57
+#: src/common/file_types.cpp:58
 msgid "VobSub subtitles"
 msgstr "VobSub 자막"
 
@@ -11317,19 +11332,19 @@ msgstr "VobSub 자막"
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: src/common/file_types.cpp:102
+#: src/common/file_types.cpp:104
 msgid "WAV"
 msgstr "WAV"
 
-#: src/common/file_types.cpp:58
+#: src/common/file_types.cpp:59
 msgid "WAVE (uncompressed PCM audio)"
 msgstr "WAVE [비압축 PCM 오디오]"
 
-#: src/common/file_types.cpp:103
+#: src/common/file_types.cpp:105
 msgid "WAVPACK"
 msgstr "WAVPACK"
 
-#: src/common/file_types.cpp:59
+#: src/common/file_types.cpp:60
 msgid "WAVPACK v4 audio"
 msgstr "WAVPACK v4 오디오"
 
@@ -11374,7 +11389,7 @@ msgstr "경고/오류"
 msgid "Warnings:"
 msgstr "경고:"
 
-#: src/common/file_types.cpp:60
+#: src/common/file_types.cpp:61
 msgid "WebM audio/video files"
 msgstr "WebM 오디오/비디오 파일"
 
@@ -11384,8 +11399,8 @@ msgstr "WebM 오디오/비디오 파일"
 msgid "WebM files"
 msgstr "WebM 파일"
 
-#: src/common/file_types.cpp:61
-#: src/common/file_types.cpp:104
+#: src/common/file_types.cpp:62
+#: src/common/file_types.cpp:106
 #: src/extract/xtr_webvtt.h:32
 #: src/output/p_webvtt.h:29
 msgid "WebVTT subtitles"
@@ -11477,7 +11492,7 @@ msgstr "비디오 프레임의 가로(너비) 해상도 입니다."
 msgid "Windows (cmd.exe)"
 msgstr "윈도우 (cmd.exe)"
 
-#: src/common/file_types.cpp:70
+#: src/common/file_types.cpp:71
 msgid "Windows Media (ASF/WMV)"
 msgstr "윈도우 미디어 (ASF/WMV)"
 
@@ -11694,7 +11709,7 @@ msgid "anaglyph (green/magenta)"
 msgstr "애너글리프 방식 (초록/자홍)"
 
 #: src/info/mkvinfo.cpp:1066
-#: src/input/r_matroska.cpp:107
+#: src/input/r_matroska.cpp:108
 msgid "audio"
 msgstr "오디오"
 
@@ -11720,7 +11735,7 @@ msgid "bottom field displayed first, top field stored first"
 msgstr "하단 필드 먼저 출력, 상단 필드 먼저 저장"
 
 #: src/info/mkvinfo.cpp:1069
-#: src/input/r_matroska.cpp:108
+#: src/input/r_matroska.cpp:109
 msgid "buttons"
 msgstr "버튼"
 
@@ -11878,119 +11893,121 @@ msgstr "길이 %1%, 데이터: %2%"
 msgid "line %1%: The 'delay' timestamp could not be parsed.\n"
 msgstr "%1%번째 행: 'delay'타임 스탬프를 해석할 수 없습니다.\n"
 
-#: src/input/r_matroska.cpp:403
+#: src/input/r_matroska.cpp:404
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% bits per sample, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_리더: (트랙 %1%, MS 호환 모드) Matroska에 따르면 샘플 당 %2%비트지만, WAVEFORMATEX에 따르면 %3%비트입니다.\n"
 
-#: src/input/r_matroska.cpp:394
+#: src/input/r_matroska.cpp:395
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% channels, but the WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_리더: (트랙 %1%, MS 호환 모드) Matroska에 따르면 %2%채널이지만, WAVEFORMATEX에 따르면 %3%채널입니다.\n"
 
-#: src/input/r_matroska.cpp:385
+#: src/input/r_matroska.cpp:386
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode for track %1%) Matroska says that there are %2% samples per second, but WAVEFORMATEX says that there are %3%.\n"
 msgstr "matroska_리더: (트랙 %1%, MS 호환 모드) Matroska에 따르면 초당 %2%샘플이지만, WAVEFORMATEX에 따르면 %3%샘플입니다.\n"
 
-#: src/input/r_matroska.cpp:581
+#: src/input/r_matroska.cpp:582
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video height is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_리더: (트랙 %1%, MS 호환 모드) Matroska에 따르면 비디오 세로(높이) 해상도는 %2%이지만, BITMAPINFOHEADER에 따르면 %3%입니다.\n"
 
-#: src/input/r_matroska.cpp:572
+#: src/input/r_matroska.cpp:573
 #, boost-format
 msgid "matroska_reader: (MS compatibility mode, track %1%) Matroska says video width is %2%, but the BITMAPINFOHEADER says %3%.\n"
 msgstr "matroska_리더: (트랙 %1%, MS 호환 모드) Matroska에 따르면 비디오 가로(너비) 해상도는 %2%이지만, BITMAPINFOHEADER에 따르면 %3%입니다.\n"
 
-#: src/input/r_matroska.cpp:1141
+#: src/input/r_matroska.cpp:1180
 msgid "matroska_reader: A track is missing its track number.\n"
 msgstr "matroska_리더: 트랙에 트랙 번호가 누락되어 있습니다.\n"
 
-#: src/input/r_matroska.cpp:1536
+#: src/input/r_matroska.cpp:1575
 #, boost-format
 msgid "matroska_reader: Could not keep the track UID %1% because it is already allocated for the new file.\n"
 msgstr "matroska_리더: 새 파일에 이미 할당되었기 때문에, 트랙UID %1%를 유지할 수 없습니다.\n"
 
-#: src/input/r_matroska.cpp:1378
-#: src/input/r_matroska.cpp:1383
+#: src/input/r_matroska.cpp:1417
+#: src/input/r_matroska.cpp:1422
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_리더: 세그먼트를 찾지 못했습니다.\n"
 
-#: src/input/r_matroska.cpp:1104
+#: src/input/r_matroska.cpp:1143
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_리더: 픽셀의 높이가 누락되어 있습니다.\n"
 
-#: src/input/r_matroska.cpp:1102
+#: src/input/r_matroska.cpp:1141
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_리더: 픽셀 너비가 누락되어 있습니다.\n"
 
-#: src/input/r_matroska.cpp:682
+#: src/input/r_matroska.cpp:721
 #, boost-format
 msgid "matroska_reader: The CodecID '%1%' for track %2% is unknown.\n"
 msgstr "matroska_리더: 트랙 %2%의 코덱ID '%1%'는 알 수 없습니다.\n"
 
-#: src/input/r_matroska.cpp:418
-#: src/input/r_matroska.cpp:463
-#: src/input/r_matroska.cpp:484
+#: src/input/r_matroska.cpp:419
+#: src/input/r_matroska.cpp:464
+#: src/input/r_matroska.cpp:485
+#: src/input/r_matroska.cpp:644
+#: src/input/r_matroska.cpp:665
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: 트랙 %1%의 코덱ID는 '%2%'이지만, 개인 코덱 데이터에 유효한 헤더가 포함되어 있지 않습니다.\n"
 
-#: src/input/r_matroska.cpp:560
+#: src/input/r_matroska.cpp:561
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_리더: 트랙 %1%코덱ID는 '%2%'이지만, BITMAPINFOHEADER 구조가 존재하지 않습니다. 따라서 사용되는 비디오 코덱을 식별하는 FourCC가 없습니다.\n"
 
-#: src/input/r_matroska.cpp:363
+#: src/input/r_matroska.cpp:364
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_리더: 트랙 %1%코덱ID는 '%2%'이지만, WAVEFORMATEX 구조가 존재하지 않습니다. 따라서 사용되는 오디오 코덱을 식별하는 형식 ID가 없습니다.\n"
 
-#: src/input/r_matroska.cpp:600
+#: src/input/r_matroska.cpp:601
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no codec private headers.\n"
 msgstr "matroska_리더: 트랙 %1%코덱ID는 '%2%'이지만, 코덱 개인 헤더가 없습니다.\n"
 
-#: src/input/r_matroska.cpp:646
-#: src/input/r_matroska.cpp:657
+#: src/input/r_matroska.cpp:682
+#: src/input/r_matroska.cpp:693
 #, boost-format
 msgid "matroska_reader: The CodecID for track %1% is '%2%', but there was no private data found.\n"
 msgstr "matroska_리더: 트랙 %1%코덱ID는 '%2%'이지만, 개인 데이터를 찾지 못했습니다.\n"
 
-#: src/input/r_matroska.cpp:1203
+#: src/input/r_matroska.cpp:1242
 msgid "matroska_reader: The CodecID is missing.\n"
 msgstr "matroska_리더: 코덱ID가 누락되어 있습니다.\n"
 
-#: src/input/r_matroska.cpp:632
+#: src/input/r_matroska.cpp:633
 #, boost-format
 msgid "matroska_reader: The height for track %1% was not set.\n"
 msgstr "matroska_리더: 트랙 %1%높이가 설정되지 않았습니다.\n"
 
-#: src/input/r_matroska.cpp:626
+#: src/input/r_matroska.cpp:627
 #, boost-format
 msgid "matroska_reader: The width for track %1% was not set.\n"
 msgstr "matroska_리더: 트랙 %1%너비가 설정되지 않았습니다.\n"
 
-#: src/input/r_matroska.cpp:724
+#: src/input/r_matroska.cpp:763
 #, boost-format
 msgid "matroska_reader: Track %1% seems to be ok.\n"
 msgstr "matroska_리더: 트랙 %1%는 OK 인것 같습니다.\n"
 
-#: src/input/r_matroska.cpp:1159
+#: src/input/r_matroska.cpp:1198
 msgid "matroska_reader: Track type was not found.\n"
 msgstr "matroska_리더: 트랙 유형을 찾지 못했습니다.\n"
 
-#: src/input/r_matroska.cpp:454
+#: src/input/r_matroska.cpp:455
 #, boost-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track %1%.\n"
 msgstr "matroska_reader: mkvmerge는 FLAC을 지원하여 컴파일되지 않습니다. 트랙 %1%를 무시합니다.\n"
 
-#: src/input/r_matroska.cpp:1365
+#: src/input/r_matroska.cpp:1404
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_리더: EBML 헤드를 찾지 못했습니다.\n"
 
-#: src/input/r_matroska.cpp:719
+#: src/input/r_matroska.cpp:758
 #, boost-format
 msgid "matroska_reader: unknown demultiplexer type for track %1%: '%2%'\n"
 msgstr "matroska_리더: 알 수 없는 %1% 트랙용 디멀티플렉서 형식: '%2%'\n"
@@ -12214,7 +12231,7 @@ msgstr "mpeg_ps_리더: 발생되지 않아야 합니다 #2. %1%"
 msgid "no encryption"
 msgstr "암호화 안됨"
 
-#: src/common/strings/parsing.cpp:209
+#: src/common/strings/parsing.cpp:191
 msgid "no error"
 msgstr "오류 없음"
 
@@ -12288,7 +12305,7 @@ msgstr "픽셀 너비: %1%"
 msgid "progressive"
 msgstr "순차 주사 방식"
 
-#: src/extract/xtr_base.cpp:51
+#: src/extract/xtr_base.cpp:52
 msgid "raw data"
 msgstr "원시 데이터"
 
@@ -12331,7 +12348,7 @@ msgstr "좌우 방식 (우안 먼저)"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_리더: 잘못된 형식입니다. \"[Events]\"섹션에서 \"Format\" 행을 찾을 수 없습니다."
 
-#: src/input/r_matroska.cpp:110
+#: src/input/r_matroska.cpp:111
 msgid "subtitle"
 msgstr "자막"
 
@@ -12372,7 +12389,7 @@ msgstr "트랙 이름"
 msgid "tta_reader: tag_size < 0 in the c'tor. %1%\n"
 msgstr "tta_리더: c'tor에서 tag_size가 0보다 작습니다. %1%\n"
 
-#: src/common/file_types.cpp:105
+#: src/common/file_types.cpp:107
 #: src/common/mm_io_win.cpp:161
 #: src/common/stereo_mode.cpp:69
 #: src/info/mkvinfo.cpp:815
@@ -12382,12 +12399,12 @@ msgstr "tta_리더: c'tor에서 tag_size가 0보다 작습니다. %1%\n"
 #: src/info/mkvinfo.cpp:874
 #: src/info/mkvinfo.cpp:884
 #: src/info/mkvinfo.cpp:1070
-#: src/input/r_matroska.cpp:106
-#: src/input/r_matroska.cpp:2558
+#: src/input/r_matroska.cpp:107
+#: src/input/r_matroska.cpp:2601
 msgid "unknown"
 msgstr "알 수 없음"
 
-#: src/input/r_matroska.cpp:2542
+#: src/input/r_matroska.cpp:2585
 #, boost-format
 msgid "unknown, format tag 0x%|1$04x|"
 msgstr "알 수 없는 형식 태그 0x%|1$04x|"
@@ -12397,7 +12414,7 @@ msgid "unspecified"
 msgstr "미지정됨"
 
 #: src/info/mkvinfo.cpp:1067
-#: src/input/r_matroska.cpp:109
+#: src/input/r_matroska.cpp:110
 msgid "video"
 msgstr "비디오"
 
