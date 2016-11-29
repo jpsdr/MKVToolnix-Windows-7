@@ -25,7 +25,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "Quiet Fire"
+#define VERSIONNAME "Slave To Your Mind"
 
 version_number_t::version_number_t()
   : valid(false)
