@@ -437,6 +437,12 @@ int
 mpeg_ts_track_c::new_stream_s_hdmv_textst() {
   add_pes_payload_to_probe_data();
 
+  // CodecPrivate for TextST consists solely of the "dialog style segment" element:
+  // segment descriptor:
+  //   1 byte segment type (0x81 == dialog style segment)
+  //   2 bytes segment size (Big Endian)
+  // x bytes dialog style segment data
+
   if (!m_probe_data || (m_probe_data->get_size() < 3))
     return FILE_STATUS_MOREDATA;
 
@@ -444,14 +450,11 @@ mpeg_ts_track_c::new_stream_s_hdmv_textst() {
   if (static_cast<mtx::hdmv_textst::segment_type_e>(buf[0]) != mtx::hdmv_textst::dialog_style_segment)
     return FILE_STATUS_DONE;
 
-  auto size = get_uint16_be(&buf[1]);
-  if ((size + 3 + 2) > m_probe_data->get_size())
+  auto dialog_segment_size = get_uint16_be(&buf[1]);
+  if ((dialog_segment_size + 3u) > m_probe_data->get_size())
     return FILE_STATUS_MOREDATA;
 
-  m_codec_private_data = memory_c::alloc(1 + size + 3 + 2);
-  auto buffer          = m_codec_private_data->get_buffer();
-  buffer[0]            = mtx::hdmv_textst::utf8;
-  std::memmove(&buffer[1], m_probe_data->get_buffer(), size + 3 + 2);
+  m_codec_private_data = memory_c::clone(buf, dialog_segment_size + 3);
 
   return 0;
 }

@@ -661,7 +661,7 @@ kax_reader_c::verify_hdmv_textst_subtitle_track(kax_track_t *t) {
   auto style_segment_start = old_style ? 1 : 0;
   auto style_segment_size  = get_uint16_be(&buf[style_segment_start + 1]);
 
-  if (t->private_size < (3 + style_segment_size + (old_style ? 1 + 2 : 0))) {
+  if (t->private_size < static_cast<unsigned int>(3 + style_segment_size + (old_style ? 1 + 2 : 0))) {
     mxwarn(boost::format(Y("matroska_reader: The CodecID for track %1% is '%2%', but the private codec data does not contain valid headers.\n")) % t->codec_id);
     return false;
   }

@@ -1,3 +1,15 @@
+2016-11-30  Moritz Bunkus  <moritz@bunkus.org>
+
+        * mkvmerge: bug the MPEG transport stream reader was using an
+        outdated format for the "CodecPrivate" element for HDMV TextST
+        subtitles. This has been updated to the current format which only
+        contains the "dialog style element".
+
+        Existing Matroska files using this outdated scheme can be re-muxed
+        with mkvmerge v9.6.0 itself or any later release as the old format
+        is automatically converted to the new one when reading a Matroska
+        file.
+
 2016-11-29  Moritz Bunkus  <moritz@bunkus.org>
 
         * Released v9.6.0 "Slave To Your Mind".
