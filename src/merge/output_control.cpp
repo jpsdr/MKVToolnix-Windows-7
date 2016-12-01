@@ -55,6 +55,7 @@
 #include "common/ebml.h"
 #include "common/fs_sys_helpers.h"
 #include "common/hacks.h"
+#include "common/mm_io_x.h"
 #include "common/mm_write_buffer_io.h"
 #include "common/strings/formatting.h"
 #include "common/tags/tags.h"

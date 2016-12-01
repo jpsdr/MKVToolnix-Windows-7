@@ -16,6 +16,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/mm_mpls_multi_file_io_fwd.h"
 #include "common/mm_multi_file_io.h"
 #include "common/mpls.h"
 
