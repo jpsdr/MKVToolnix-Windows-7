@@ -47,6 +47,9 @@ playlist_t::dump()
 
   for (auto &item : items)
     item.dump();
+
+  for (auto const &path : sub_paths)
+    path.dump();
 }
 
 void
@@ -65,6 +68,46 @@ play_item_t::dump()
          % relative_in_time);
 
   stn.dump();
+}
+
+void
+sub_path_t::dump()
+  const {
+  mxinfo(boost::format("    sub path dump\n"
+                       "      type / is_repeat:        %1% / %2%\n")
+         % type % is_repeat_sub_path);
+
+  for (auto const &item : items)
+    item.dump();
+}
+
+void
+sub_play_item_t::dump()
+  const {
+  mxinfo(boost::format("      sub play item dump\n"
+                       "        clip_id / codec_id:    %1% / %2%\n"
+                       "        conn_con / sync_pi_id: %3% / %4%\n"
+                       "        ref_to_stc_id / multi: %5% / %6%\n"
+                       "        in_time / out_time:    %7% / %8%\n"
+                       "        sync_start_pts:        %9%\n")
+         % clpi_file_name       % codec_id
+         % connection_condition % sync_playitem_id
+         % ref_to_stc_id        % is_multi_clip_entries
+         % in_time              % out_time
+         % sync_start_pts_of_playitem);
+
+  for (auto const &clip : clips)
+    clip.dump();
+}
+
+void
+sub_play_item_clip_t::dump()
+  const {
+  mxinfo(boost::format("        sub play item clip dump\n"
+                       "          clip_id / codec_id:  %1% / %2%\n"
+                       "        ref_to_stc_id:         %3%\n")
+         % clpi_file_name % codec_id
+         % ref_to_stc_id);
 }
 
 void
@@ -186,6 +229,9 @@ parser_c::parse_playlist() {
 
   for (auto idx = 0u; idx < m_playlist.list_count; ++idx)
     m_playlist.items.push_back(parse_play_item());
+
+  for (auto idx = 0u; idx < m_playlist.sub_count; ++idx)
+    m_playlist.sub_paths.push_back(parse_sub_path());
 }
 
 play_item_t
@@ -225,6 +271,58 @@ parser_c::parse_play_item() {
   m_bc->set_bit_position((position + length) * 8);
 
   return item;
+}
+
+sub_path_t
+parser_c::parse_sub_path() {
+  auto path = sub_path_t{};
+
+  path.type               = m_bc->skip_get_bits(32 + 8, 8); // length, reserved
+  path.is_repeat_sub_path = m_bc->skip_get_bits(15, 1);     // reserved
+  auto num_sub_play_items = m_bc->skip_get_bits(8, 8);      // reserved
+
+  for (auto idx = 0u; idx < num_sub_play_items; ++idx)
+    path.items.push_back(parse_sub_play_item());
+
+  return path;
+}
+
+sub_play_item_t
+parser_c::parse_sub_play_item() {
+  auto item = sub_play_item_t{};
+
+  m_bc->skip_bits(16);          // length
+  item.clpi_file_name             = read_string(5);
+  item.codec_id                   = read_string(4);
+  item.connection_condition       = m_bc->skip_get_bits(27, 4); // reserved
+  item.is_multi_clip_entries      = m_bc->get_bit();
+  item.ref_to_stc_id              = m_bc->get_bits(8);
+  item.in_time                    = mpls_time_to_timecode(m_bc->get_bits(32));
+  item.out_time                   = mpls_time_to_timecode(m_bc->get_bits(32));
+  item.sync_playitem_id           = m_bc->get_bits(16);
+  item.sync_start_pts_of_playitem = mpls_time_to_timecode(m_bc->get_bits(32));
+
+  if (!item.is_multi_clip_entries)
+    return item;
+
+  auto num_clips = m_bc->get_bits(8);
+  m_bc->skip_bits(8);           // reserved
+
+  for (auto idx = 1u; idx < num_clips; ++idx)
+    item.clips.push_back(parse_sub_play_item_clip());
+
+  return item;
+}
+
+sub_play_item_clip_t
+parser_c::parse_sub_play_item_clip() {
+  auto clip = sub_play_item_clip_t{};
+
+  clip.clpi_file_name = read_string(5);
+  clip.codec_id       = read_string(4);
+  clip.ref_to_stc_id  = m_bc->get_bits(8);
+
+  return clip;
 }
 
 stn_t

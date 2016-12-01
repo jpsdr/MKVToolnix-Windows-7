@@ -62,6 +62,31 @@ struct stn_t {
   void dump() const;
 };
 
+struct sub_play_item_clip_t {
+  std::string clpi_file_name, codec_id;
+  unsigned int ref_to_stc_id;
+
+  void dump() const;
+};
+
+struct sub_play_item_t {
+  std::string clpi_file_name, codec_id;
+  unsigned int connection_condition, sync_playitem_id, ref_to_stc_id;
+  bool is_multi_clip_entries;
+  timestamp_c in_time, out_time, sync_start_pts_of_playitem;
+  std::vector<sub_play_item_clip_t> clips;
+
+  void dump() const;
+};
+
+struct sub_path_t {
+  unsigned int type;
+  bool is_repeat_sub_path;
+  std::vector<sub_play_item_t> items;
+
+  void dump() const;
+};
+
 struct play_item_t {
   std::string clip_id, codec_id;
   unsigned int connection_condition, stc_id;
@@ -75,6 +100,7 @@ struct play_item_t {
 struct playlist_t {
   unsigned int list_count, sub_count;
   std::vector<play_item_t> items;
+  std::vector<sub_path_t> sub_paths;
   timestamp_c duration;
 
   void dump() const;
@@ -116,6 +142,9 @@ protected:
   virtual void parse_header();
   virtual void parse_playlist();
   virtual play_item_t parse_play_item();
+  virtual sub_path_t parse_sub_path();
+  virtual sub_play_item_t parse_sub_play_item();
+  virtual sub_play_item_clip_t parse_sub_play_item_clip();
   virtual stn_t parse_stn();
   virtual stream_t parse_stream();
   virtual void parse_chapters();
