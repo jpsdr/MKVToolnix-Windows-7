@@ -16,6 +16,7 @@
 
 #include "common/debugging.h"
 #include "common/hacks.h"
+#include "common/list_utils.h"
 #include "common/mpls.h"
 #include "common/strings/formatting.h"
 
@@ -73,9 +74,17 @@ play_item_t::dump()
 void
 sub_path_t::dump()
   const {
+  auto type_name = sub_path_type_e::primary_audio_of_browsable_slideshow       == type ? "primary_audio_of_browsable_slideshow"
+                 : sub_path_type_e::interactive_graphics_presentation_menu     == type ? "interactive_graphics_presentation_menu"
+                 : sub_path_type_e::text_subtitle_presentation                 == type ? "text_subtitle_presentation"
+                 : sub_path_type_e::out_of_mux_synchronous_elementary_streams  == type ? "out_of_mux_synchronous_elementary_streams"
+                 : sub_path_type_e::out_of_mux_asynchronous_picture_in_picture == type ? "out_of_mux_asynchronous_picture_in_picture"
+                 : sub_path_type_e::in_mux_synchronous_picture_in_picture      == type ? "in_mux_synchronous_picture_in_picture"
+                 :                                                                       "reserved";
+
   mxinfo(boost::format("    sub path dump\n"
-                       "      type / is_repeat:        %1% / %2%\n")
-         % type % is_repeat_sub_path);
+                       "      type / is_repeat:        %1% [%2%] / %3%\n")
+         % static_cast<unsigned int>(type) % type_name % is_repeat_sub_path);
 
   for (auto const &item : items)
     item.dump();
@@ -132,16 +141,38 @@ stn_t::dump()
 void
 stream_t::dump(std::string const &type)
   const {
+  auto stream_type_name = stream_type_e::used_by_play_item           == stream_type ? "used_by_play_item"
+                        : stream_type_e::used_by_sub_path_type_23456 == stream_type ? "used_by_sub_path_type_23456"
+                        : stream_type_e::used_by_sub_path_type_7     == stream_type ? "used_by_sub_path_type_7"
+                        :                                                             "reserved";
+
+  auto coding_type_name = stream_coding_type_e::mpeg2_video_primary_secondary     == coding_type ? "mpeg2_video_primary_secondary"
+                        : stream_coding_type_e::mpeg4_avc_video_primary_secondary == coding_type ? "mpeg4_avc_video_primary_secondary"
+                        : stream_coding_type_e::vc1_video_primary_secondary       == coding_type ? "vc1_video_primary_secondary"
+                        : stream_coding_type_e::lpcm_audio_primary                == coding_type ? "lpcm_audio_primary"
+                        : stream_coding_type_e::ac3_audio_primary                 == coding_type ? "ac3_audio_primary"
+                        : stream_coding_type_e::dts_audio_primary                 == coding_type ? "dts_audio_primary"
+                        : stream_coding_type_e::truehd_audio_primary              == coding_type ? "truehd_audio_primary"
+                        : stream_coding_type_e::eac3_audio_primary                == coding_type ? "eac3_audio_primary"
+                        : stream_coding_type_e::dts_hd_audio_primary              == coding_type ? "dts_hd_audio_primary"
+                        : stream_coding_type_e::dts_hd_xll_audio_primary          == coding_type ? "dts_hd_xll_audio_primary"
+                        : stream_coding_type_e::eac3_audio_secondary              == coding_type ? "eac3_audio_secondary"
+                        : stream_coding_type_e::dts_hd_audio_secondary            == coding_type ? "dts_hd_audio_secondary"
+                        : stream_coding_type_e::presentation_graphics_subtitles   == coding_type ? "presentation_graphics_subtitles"
+                        : stream_coding_type_e::interactive_graphics_menu         == coding_type ? "interactive_graphics_menu"
+                        : stream_coding_type_e::text_subtitles                    == coding_type ? "text_subtitles"
+                        :                                                                          "reserved";
+
   mxinfo(boost::format("        %1% stream dump\n"
-                       "          stream_type:                     %2%\n"
-                       "          sub_path_id / sub_clip_id / pid: %3% / %4% / %|5$04x|\n"
-                       "          coding_type:                     %|6$04x|\n"
-                       "          format / rate:                   %7% / %8%\n"
-                       "          char_code / language:            %9% / %10%\n")
+                       "          stream_type:                     %2% [%3%]\n"
+                       "          sub_path_id / sub_clip_id / pid: %4% / %5% / %|6$04x|\n"
+                       "          coding_type:                     %|7$02x| [%8%]\n"
+                       "          format / rate:                   %9% / %10%\n"
+                       "          char_code / language:            %11% / %12%\n")
          % type
-         % stream_type
+         % static_cast<unsigned int>(stream_type) % stream_type_name
          % sub_path_id % sub_clip_id % pid
-         % coding_type
+         % static_cast<unsigned int>(coding_type) % coding_type_name
          % format % rate
          % char_code % language);
 }
@@ -277,9 +308,9 @@ sub_path_t
 parser_c::parse_sub_path() {
   auto path = sub_path_t{};
 
-  path.type               = m_bc->skip_get_bits(32 + 8, 8); // length, reserved
-  path.is_repeat_sub_path = m_bc->skip_get_bits(15, 1);     // reserved
-  auto num_sub_play_items = m_bc->skip_get_bits(8, 8);      // reserved
+  path.type               = static_cast<sub_path_type_e>(m_bc->skip_get_bits(32 + 8, 8)); // length, reserved
+  path.is_repeat_sub_path = m_bc->skip_get_bits(15, 1);                                   // reserved
+  auto num_sub_play_items = m_bc->skip_get_bits(8, 8);                                    // reserved
 
   for (auto idx = 0u; idx < num_sub_play_items; ++idx)
     path.items.push_back(parse_sub_play_item());
@@ -362,49 +393,51 @@ parser_c::parse_stream() {
   auto length     = m_bc->get_bits(8);
   auto position   = m_bc->get_bit_position() / 8u;
 
-  str.stream_type = m_bc->get_bits(8);
+  str.stream_type = static_cast<stream_type_e>(m_bc->get_bits(8));
 
-  if (1 == str.stream_type)
+  if (stream_type_e::used_by_play_item == str.stream_type)
     str.pid = m_bc->get_bits(16);
 
-  else if ((2 == str.stream_type) || (4 == str.stream_type)) {
+  else if (stream_type_e::used_by_sub_path_type_23456 == str.stream_type) {
     str.sub_path_id = m_bc->get_bits(8);
     str.sub_clip_id = m_bc->get_bits(8);
     str.pid         = m_bc->get_bits(16);
 
-  } else if (3 == str.stream_type) {
+  } else if (stream_type_e::used_by_sub_path_type_7 == str.stream_type) {
     str.sub_path_id = m_bc->get_bits(8);
     str.pid         = m_bc->get_bits(16);
 
   } else if (m_debug)
-    mxdebug(boost::format("Unknown stream type %1%\n") % str.stream_type);
+    mxdebug(boost::format("Unknown stream type %1%\n") % static_cast<unsigned int>(str.stream_type));
 
   m_bc->set_bit_position((length + position) * 8);
 
   length          = m_bc->get_bits(8);
   position        = m_bc->get_bit_position() / 8u;
 
-  str.coding_type = m_bc->get_bits(8);
+  str.coding_type = static_cast<stream_coding_type_e>(m_bc->get_bits(8));
 
-  if ((0x01 == str.coding_type) || (0x02 == str.coding_type) || (0x1b == str.coding_type) || (0xea == str.coding_type)) {
+  if (mtx::included_in(str.coding_type, stream_coding_type_e::mpeg2_video_primary_secondary, stream_coding_type_e::mpeg4_avc_video_primary_secondary, stream_coding_type_e::vc1_video_primary_secondary)) {
     str.format = m_bc->get_bits(4);
     str.rate   = m_bc->get_bits(4);
 
-  } else if (   (0x03 == str.coding_type) || (0x04 == str.coding_type) || (0x80 == str.coding_type) || (0x81 == str.coding_type) || (0x82 == str.coding_type)
-             || (0x83 == str.coding_type) || (0x84 == str.coding_type) || (0x85 == str.coding_type) || (0x86 == str.coding_type)) {
+  } else if (mtx::included_in(str.coding_type,
+                              stream_coding_type_e::lpcm_audio_primary,   stream_coding_type_e::ac3_audio_primary,    stream_coding_type_e::dts_audio_primary, stream_coding_type_e::truehd_audio_primary,
+                              stream_coding_type_e::eac3_audio_primary,   stream_coding_type_e::dts_hd_audio_primary, stream_coding_type_e::dts_hd_xll_audio_primary,
+                              stream_coding_type_e::eac3_audio_secondary, stream_coding_type_e::dts_hd_audio_secondary)) {
     str.format   = m_bc->get_bits(4);
     str.rate     = m_bc->get_bits(4);
     str.language = read_string(3);
 
-  } else if ((0x90 == str.coding_type) || (0x91 == str.coding_type))
+  } else if (mtx::included_in(str.coding_type, stream_coding_type_e::presentation_graphics_subtitles, stream_coding_type_e::interactive_graphics_menu))
     str.language = read_string(3);
 
-  else if (0x92 == str.coding_type) {
+  else if (stream_coding_type_e::text_subtitles == str.coding_type) {
     str.char_code = m_bc->get_bits(8);
     str.language  = read_string(3);
 
   } else
-    mxdebug_if(m_debug, boost::format("Unrecognized coding type %|1$02x|\n") % str.coding_type);
+    mxdebug_if(m_debug, boost::format("Unrecognized coding type %|1$02x|\n") % static_cast<unsigned int>(str.coding_type));
 
   m_bc->set_bit_position((position + length) * 8);
 

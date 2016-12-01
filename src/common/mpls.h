@@ -28,6 +28,44 @@
 
 namespace mtx { namespace mpls {
 
+// Blu-ray specs 5.3.4.5.2.1 table 5-8
+enum class stream_type_e {
+  reserved                    = 0,
+  used_by_play_item           = 1,
+  used_by_sub_path_type_23456 = 2,
+  used_by_sub_path_type_7     = 3,
+};
+
+// Blu-ray specs 5.4.4.3.2 table 5-16
+enum class stream_coding_type_e {
+  mpeg2_video_primary_secondary     = 0x02,
+  mpeg4_avc_video_primary_secondary = 0x1b,
+  vc1_video_primary_secondary       = 0xea,
+  lpcm_audio_primary                = 0x80,
+  ac3_audio_primary                 = 0x81,
+  dts_audio_primary                 = 0x82,
+  truehd_audio_primary              = 0x83,
+  eac3_audio_primary                = 0x84,
+  dts_hd_audio_primary              = 0x85,
+  dts_hd_xll_audio_primary          = 0x86,
+  eac3_audio_secondary              = 0xa1,
+  dts_hd_audio_secondary            = 0xa2,
+  presentation_graphics_subtitles   = 0x90,
+  interactive_graphics_menu         = 0x91,
+  text_subtitles                    = 0x92,
+};
+
+enum class sub_path_type_e {
+  reserved1                                  = 0,
+  reserved2                                  = 1,
+  primary_audio_of_browsable_slideshow       = 2,
+  interactive_graphics_presentation_menu     = 3,
+  text_subtitle_presentation                 = 4,
+  out_of_mux_synchronous_elementary_streams  = 5,
+  out_of_mux_asynchronous_picture_in_picture = 6,
+  in_mux_synchronous_picture_in_picture      = 7,
+};
+
 class exception: public mtx::exception {
 protected:
   std::string m_message;
@@ -49,7 +87,9 @@ struct header_t {
 };
 
 struct stream_t {
-  unsigned int stream_type, sub_path_id, sub_clip_id, pid, coding_type, format, rate, char_code;
+  stream_type_e stream_type;
+  stream_coding_type_e coding_type;
+  unsigned int sub_path_id, sub_clip_id, pid, format, rate, char_code;
   std::string language;
 
   void dump(std::string const &type) const;
@@ -80,7 +120,7 @@ struct sub_play_item_t {
 };
 
 struct sub_path_t {
-  unsigned int type;
+  sub_path_type_e type;
   bool is_repeat_sub_path;
   std::vector<sub_play_item_t> items;
 
