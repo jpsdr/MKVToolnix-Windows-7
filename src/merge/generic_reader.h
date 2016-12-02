@@ -142,7 +142,7 @@ protected:
 
   virtual std::string id_escape_string(const std::string &s);
 
-  virtual mm_io_c *get_underlying_input() const;
+  virtual mm_io_c *get_underlying_input(mm_io_c *actual_in = nullptr) const;
 
   virtual void display_identification_results_as_json();
   virtual void display_identification_results_as_text();

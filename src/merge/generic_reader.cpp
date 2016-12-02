@@ -505,9 +505,11 @@ generic_reader_c::get_progress() {
 }
 
 mm_io_c *
-generic_reader_c::get_underlying_input()
+generic_reader_c::get_underlying_input(mm_io_c *actual_in)
   const {
-  mm_io_c *actual_in = m_in.get();
+  if (!actual_in)
+    actual_in = m_in.get();
+
   while (dynamic_cast<mm_proxy_io_c *>(actual_in))
     actual_in = static_cast<mm_proxy_io_c *>(actual_in)->get_proxied();
   return actual_in;
