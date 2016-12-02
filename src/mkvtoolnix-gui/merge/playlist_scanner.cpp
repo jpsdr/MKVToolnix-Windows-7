@@ -25,7 +25,7 @@ PlaylistScanner::PlaylistScanner(QWidget *parent)
 SourceFilePtr
 PlaylistScanner::checkOneFile(SourceFilePtr const &file)
   const {
-  if (!file->isPlaylist())
+  if (!file->isPlaylist() || file->m_dontScanForOtherPlaylists)
     return file;
 
   auto info     = QFileInfo{file->m_fileName};

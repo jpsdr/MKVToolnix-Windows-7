@@ -261,6 +261,7 @@ protected:
   virtual bool handleSpecialFileSimpleOrXmlChapters(QString const &fileName, std::string const &content);
   virtual bool handleSpecialFileXmlSegmentInfo(QString const &fileName, std::string const &content);
   virtual bool handleSpecialFileXmlTags(QString const &fileName, std::string const &content);
+  virtual std::pair<bool, SourceFilePtr> handleBluRayMainFile(QString const &fileName);
 
   virtual void enableFilesActions();
   virtual void enableTracksActions();

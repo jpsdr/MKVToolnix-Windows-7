@@ -27,7 +27,7 @@ public:
   QList<QFileInfo> m_playlistFiles;
 
   file_type_e m_type;
-  bool m_appended, m_additionalPart, m_isPlaylist;
+  bool m_appended, m_additionalPart, m_isPlaylist, m_dontScanForOtherPlaylists;
   SourceFile *m_appendedTo;
 
   uint64_t m_playlistDuration, m_playlistSize, m_playlistChapters;

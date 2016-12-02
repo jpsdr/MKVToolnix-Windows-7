@@ -24,6 +24,7 @@
 #include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/executable_location_dialog.h"
+#include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/merge/playlist_scanner.h"
@@ -1109,6 +1110,34 @@ Tab::handleSpecialFiles(QStringList const &fileNames) {
   return toIdentify;
 }
 
+std::pair<bool, SourceFilePtr>
+Tab::handleBluRayMainFile(QString const &fileName) {
+  auto info = QFileInfo{fileName};
+
+  if (info.completeSuffix().toLower() != Q("bdmv"))
+    return { false, {} };
+
+  auto dir = info.absoluteDir();
+  if (!dir.cd("PLAYLIST") && !dir.cd("playlist"))
+    return { false, {} };
+
+  auto allFiles = dir.entryInfoList(QStringList{QString{"*.mpls"}, QString{"*.MPLS"}}, QDir::Files, QDir::Name);
+  if (allFiles.isEmpty())
+    return { false, {} };
+
+  PlaylistScanner scanner{this};
+  auto identifiedFiles = scanner.scanForPlaylists(allFiles);
+  if (identifiedFiles.isEmpty())
+    return { true, {} };
+
+  auto identifiedFile = 1 == identifiedFiles.size() ? identifiedFiles[0] : SelectPlaylistDialog{this, identifiedFiles}.select();
+
+  if (identifiedFile)
+    identifiedFile->m_dontScanForOtherPlaylists = true;
+
+  return { true, identifiedFile };
+}
+
 void
 Tab::addOrAppendFiles(bool append,
                       QStringList const &fileNames,
@@ -1120,6 +1149,13 @@ Tab::addOrAppendFiles(bool append,
 
   QList<SourceFilePtr> identifiedFiles;
   for (auto &fileName : toIdentify) {
+    auto result = handleBluRayMainFile(fileName);
+    if (result.first) {
+      if (result.second)
+        identifiedFiles << result.second;
+      continue;
+    }
+
     Util::FileIdentifier identifier{fileName};
     if (identifier.identify())
       identifiedFiles << identifier.file();
