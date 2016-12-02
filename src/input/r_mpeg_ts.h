@@ -26,13 +26,10 @@
 #include "common/mm_io.h"
 #include "common/mpeg4_p10.h"
 #include "common/truehd.h"
+#include "common/vc1_fwd.h"
 #include "input/packet_converter.h"
 #include "merge/generic_reader.h"
 #include "mpegparser/M2VParser.h"
-
-namespace vc1 {
-class es_parser_c;
-}
 
 namespace mtx { namespace mpeg_ts {
 
@@ -311,7 +308,7 @@ public:
   mtx::hevc::es_parser_cptr m_hevc_parser;
   truehd_parser_cptr m_truehd_parser;
   std::shared_ptr<M2VParser> m_m2v_parser;
-  std::shared_ptr<vc1::es_parser_c> m_vc1_parser;
+  mtx::vc1::es_parser_cptr m_vc1_parser;
 
   unsigned int skip_packet_data_bytes;
 

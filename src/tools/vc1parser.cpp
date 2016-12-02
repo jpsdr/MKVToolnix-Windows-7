@@ -23,10 +23,10 @@ static bool g_opt_entrypoints      = false;
 static bool g_opt_frames           = false;
 static bool g_opt_sequence_headers = false;
 
-class vc1_info_c: public vc1::es_parser_c {
+class vc1_info_c: public mtx::vc1::es_parser_c {
 public:
   vc1_info_c()
-    : vc1::es_parser_c() {
+    : mtx::vc1::es_parser_c() {
   }
 
   virtual ~vc1_info_c() {
@@ -41,9 +41,9 @@ protected:
   virtual void handle_slice_packet(memory_cptr packet);
   virtual void handle_unknown_packet(uint32_t marker, memory_cptr packet);
 
-  virtual void dump_sequence_header(vc1::sequence_header_t &seqhdr);
-  virtual void dump_entrypoint(vc1::entrypoint_t &entrypoint);
-  virtual void dump_frame_header(vc1::frame_header_t &frame_header);
+  virtual void dump_sequence_header(mtx::vc1::sequence_header_t &seqhdr);
+  virtual void dump_entrypoint(mtx::vc1::entrypoint_t &entrypoint);
+  virtual void dump_frame_header(mtx::vc1::frame_header_t &frame_header);
 
   virtual std::string create_checksum_info(memory_cptr packet);
 };
@@ -67,8 +67,8 @@ vc1_info_c::handle_entrypoint_packet(memory_cptr packet) {
     return;
   }
 
-  vc1::entrypoint_t entrypoint;
-  if (vc1::parse_entrypoint(packet->get_buffer(), packet->get_size(), entrypoint, m_seqhdr))
+  mtx::vc1::entrypoint_t entrypoint;
+  if (mtx::vc1::parse_entrypoint(packet->get_buffer(), packet->get_size(), entrypoint, m_seqhdr))
     dump_entrypoint(entrypoint);
 }
 
@@ -91,8 +91,8 @@ vc1_info_c::handle_frame_packet(memory_cptr packet) {
     return;
   }
 
-  vc1::frame_header_t frame_header;
-  if (vc1::parse_frame_header(packet->get_buffer(), packet->get_size(), frame_header, m_seqhdr))
+  mtx::vc1::frame_header_t frame_header;
+  if (mtx::vc1::parse_frame_header(packet->get_buffer(), packet->get_size(), frame_header, m_seqhdr))
     dump_frame_header(frame_header);
 }
 
@@ -101,7 +101,7 @@ vc1_info_c::handle_sequence_header_packet(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
   mxinfo(boost::format(Y("Sequence header at %1% size %2%%3%\n")) % m_stream_pos % packet->get_size() % checksum);
 
-  m_seqhdr_found = vc1::parse_sequence_header(packet->get_buffer(), packet->get_size(), m_seqhdr);
+  m_seqhdr_found = mtx::vc1::parse_sequence_header(packet->get_buffer(), packet->get_size(), m_seqhdr);
 
   if (g_opt_sequence_headers) {
     if (m_seqhdr_found)
@@ -133,7 +133,7 @@ vc1_info_c::create_checksum_info(memory_cptr packet) {
 }
 
 void
-vc1_info_c::dump_sequence_header(vc1::sequence_header_t &seqhdr) {
+vc1_info_c::dump_sequence_header(mtx::vc1::sequence_header_t &seqhdr) {
   static const char *profile_names[4] = { "Simple", "Main", "Complex", "Advanced" };
 
   mxinfo(boost::format(Y("  Sequence header dump:\n"
@@ -188,7 +188,7 @@ vc1_info_c::dump_sequence_header(vc1::sequence_header_t &seqhdr) {
 }
 
 void
-vc1_info_c::dump_entrypoint(vc1::entrypoint_t &entrypoint) {
+vc1_info_c::dump_entrypoint(mtx::vc1::entrypoint_t &entrypoint) {
   mxinfo(boost::format(Y("  Entrypoint dump:\n"
                          "    broken_link_flag:      %1%\n"
                          "    closed_entry_flag:     %2%\n"
@@ -231,7 +231,7 @@ vc1_info_c::dump_entrypoint(vc1::entrypoint_t &entrypoint) {
 }
 
 void
-vc1_info_c::dump_frame_header(vc1::frame_header_t &frame_header) {
+vc1_info_c::dump_frame_header(mtx::vc1::frame_header_t &frame_header) {
   mxinfo(boost::format(Y("  Frame header dump:\n"
                          "    fcm:                     %1% (%2%)\n"
                          "    frame_type:              %3%\n"
@@ -240,16 +240,16 @@ vc1_info_c::dump_frame_header(vc1::frame_header_t &frame_header) {
                          "    top_field_first_flag:    %6%\n"
                          "    repeat_first_field_flag: %7%\n"))
          % frame_header.fcm
-         % (  frame_header.fcm        == 0x00                      ? Y("progressive")
-            : frame_header.fcm        == 0x10                      ? Y("frame-interlace")
-            : frame_header.fcm        == 0x11                      ? Y("field-interlace")
-            :                                                        Y("unknown"))
-         % (  frame_header.frame_type == vc1::FRAME_TYPE_I         ? Y("I")
-            : frame_header.frame_type == vc1::FRAME_TYPE_P         ? Y("P")
-            : frame_header.frame_type == vc1::FRAME_TYPE_B         ? Y("B")
-            : frame_header.frame_type == vc1::FRAME_TYPE_BI        ? Y("BI")
-            : frame_header.frame_type == vc1::FRAME_TYPE_P_SKIPPED ? Y("P (skipped)")
-            :                                                        Y("unknown"))
+         % (  frame_header.fcm        == 0x00                           ? Y("progressive")
+            : frame_header.fcm        == 0x10                           ? Y("frame-interlace")
+            : frame_header.fcm        == 0x11                           ? Y("field-interlace")
+            :                                                             Y("unknown"))
+         % (  frame_header.frame_type == mtx::vc1::FRAME_TYPE_I         ? Y("I")
+            : frame_header.frame_type == mtx::vc1::FRAME_TYPE_P         ? Y("P")
+            : frame_header.frame_type == mtx::vc1::FRAME_TYPE_B         ? Y("B")
+            : frame_header.frame_type == mtx::vc1::FRAME_TYPE_BI        ? Y("BI")
+            : frame_header.frame_type == mtx::vc1::FRAME_TYPE_P_SKIPPED ? Y("P (skipped)")
+              :                                                           Y("unknown"))
          % frame_header.tf_counter
          % frame_header.repeat_frame
          % frame_header.top_field_first_flag

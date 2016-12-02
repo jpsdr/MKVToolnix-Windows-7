@@ -728,7 +728,7 @@ mpeg_ps_reader_c::new_stream_v_vc1(mpeg_ps_id_t id,
                                    unsigned char *buf,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
-  vc1::es_parser_c parser;
+  mtx::vc1::es_parser_c parser;
 
   parser.add_bytes(buf, length);
 
@@ -746,7 +746,7 @@ mpeg_ps_reader_c::new_stream_v_vc1(mpeg_ps_id_t id,
   if (!parser.is_sequence_header_available())
     throw false;
 
-  vc1::sequence_header_t seqhdr;
+  mtx::vc1::sequence_header_t seqhdr;
   parser.get_sequence_header(seqhdr);
 
   track->codec             = codec_c::look_up(codec_c::type_e::V_VC1);

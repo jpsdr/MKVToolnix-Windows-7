@@ -25,7 +25,7 @@ private:
 
   memory_cptr m_buffer;
 
-  vc1::sequence_header_t m_seqhdr;
+  mtx::vc1::sequence_header_t m_seqhdr;
 
 public:
   vc1_es_reader_c(const track_info_c &ti, const mm_io_cptr &in);

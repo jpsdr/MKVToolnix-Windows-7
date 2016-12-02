@@ -21,8 +21,8 @@
 
 class vc1_video_packetizer_c: public generic_packetizer_c {
 protected:
-  vc1::es_parser_c m_parser;
-  vc1::sequence_header_t m_seqhdr;
+  mtx::vc1::es_parser_c m_parser;
+  mtx::vc1::sequence_header_t m_seqhdr;
   memory_cptr m_raw_headers;
 
   int64_t m_previous_timecode;

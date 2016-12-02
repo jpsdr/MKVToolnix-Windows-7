@@ -151,7 +151,7 @@ vc1_video_packetizer_c::flush_impl() {
 void
 vc1_video_packetizer_c::flush_frames() {
   while (m_parser.is_frame_available()) {
-    vc1::frame_cptr frame = m_parser.get_frame();
+    auto frame = m_parser.get_frame();
     add_packet(new packet_t(frame->data, frame->timecode, frame->duration, frame->is_key() ? -1 : m_previous_timecode));
 
     m_previous_timecode = frame->timecode;

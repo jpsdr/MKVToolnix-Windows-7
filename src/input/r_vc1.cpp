@@ -46,7 +46,7 @@ vc1_es_reader_c::probe_file(mm_io_c *in,
     if ((VC1_MARKER_SEQHDR != marker) && (VC1_MARKER_ENTRYPOINT != marker) && (VC1_MARKER_FRAME != marker))
       return 0;
 
-    vc1::es_parser_c parser;
+    mtx::vc1::es_parser_c parser;
     parser.add_bytes(buf->get_buffer(), num_read);
 
     return parser.is_sequence_header_available();
@@ -68,7 +68,7 @@ vc1_es_reader_c::vc1_es_reader_c(const track_info_c &ti,
 void
 vc1_es_reader_c::read_headers() {
   try {
-    vc1::es_parser_c parser;
+    mtx::vc1::es_parser_c parser;
 
     int num_read = m_in->read(m_buffer->get_buffer(), READ_SIZE);
     parser.add_bytes(m_buffer->get_buffer(), num_read);

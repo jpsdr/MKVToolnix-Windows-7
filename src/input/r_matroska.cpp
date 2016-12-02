@@ -2017,7 +2017,7 @@ kax_reader_c::create_vc1_video_packetizer(kax_track_t *t,
   read_first_frames(t, 1);
   if (   !t->first_frames_data.empty()
       && (4 <= t->first_frames_data[0]->get_size())
-      && !vc1::is_marker(get_uint32_be(t->first_frames_data[0]->get_buffer()))) {
+      && !mtx::vc1::is_marker(get_uint32_be(t->first_frames_data[0]->get_buffer()))) {
     init_passthrough_packetizer(t, nti);
     return;
   }

@@ -1,4 +1,4 @@
-/** MPEG video helper functions (MPEG 1, 2 and 4)
+/** VC-1 video helper functions
 
    mkvmerge -- utility for splicing together matroska files
    from component media subtypes
@@ -12,12 +12,14 @@
    \author Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_COMMON_VC1_COMMON_H
-#define MTX_COMMON_VC1_COMMON_H
+#ifndef MTX_COMMON_VC1_H
+#define MTX_COMMON_VC1_H
 
 #include "common/common_pch.h"
 
 #include <deque>
+
+#include "common/vc1_fwd.h"
 
 #define VC1_PROFILE_SIMPLE    0x00000000
 #define VC1_PROFILE_MAIN      0x00000001
@@ -31,7 +33,7 @@
 #define VC1_MARKER_ENTRYPOINT 0x0000010e
 #define VC1_MARKER_SEQHDR     0x0000010f
 
-namespace vc1 {
+namespace mtx { namespace vc1 {
 
 enum frame_type_e {
   FRAME_TYPE_I,
@@ -126,7 +128,6 @@ struct frame_t {
   void init();
   bool is_key() const;
 };
-using frame_cptr = std::shared_ptr<frame_t>;
 
 inline bool is_marker(uint32_t value) {
   return (value & 0xffffff00) == 0x00000100;
@@ -264,6 +265,6 @@ protected:
   static void add_extra_data_if_not_present(std::deque<memory_cptr> &extra_data, memory_cptr const &packet);
 };
 
-};
+}}
 
-#endif  // MTX_COMMON_VC1_COMMON_H
+#endif  // MTX_COMMON_VC1_H
