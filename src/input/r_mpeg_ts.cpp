@@ -762,7 +762,7 @@ reader_c::probe_file(mm_io_c *in,
   auto in_to_use = mpls_in ? static_cast<mm_io_c *>(mpls_in) : in;
 
   if (in_to_use->get_size() < 4)
-    return -1;
+    return false;
 
   auto packet_size = detect_packet_size(in_to_use, in_to_use->get_size());
 
