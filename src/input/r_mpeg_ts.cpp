@@ -67,7 +67,7 @@ int reader_c::potential_packet_sizes[] = { 188, 192, 204, 0 };
 
 track_c::track_c(reader_c &p_reader,
                  pid_type_e p_type)
-  : reader{p_reader}
+  : reader(p_reader)            // no brace-initializer-list syntax here due to gcc bug 50025`
   , m_file_num{p_reader.m_current_file}
   , processed{}
   , type{p_type}
