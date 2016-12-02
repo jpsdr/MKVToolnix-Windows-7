@@ -132,7 +132,7 @@ if test x"$enable_qt" = "xyes" -a \
       with_qt_pkg_config_modules="$with_qt_pkg_config_modules,"
     fi
 
-    with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Core,Qt5Gui,Qt5Widgets,Qt5Network"
+    with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Core,Qt5Gui,Qt5Widgets,Qt5Network,Qt5Concurrent"
 
     if test x"$MINGW" = x1; then
       with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5WinExtras"

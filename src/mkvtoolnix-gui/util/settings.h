@@ -195,6 +195,9 @@ public:
 
   static QString iniFileLocation();
   static QString iniFileName();
+
+  static QString cacheDirLocation(QString const &subDir);
+  static QString prepareCacheDir(QString const &subDir);
 };
 
 // extern Settings g_settings;

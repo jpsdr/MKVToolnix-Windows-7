@@ -24,6 +24,7 @@ protected:
   std::unique_ptr<Ui::PreferencesDialog> ui;
   Util::Settings &m_cfg;
   QString const m_previousUiLocale;
+  double m_previousProbeRangePercentage;
 
 public:
   explicit PreferencesDialog(QWidget *parent);
@@ -31,6 +32,7 @@ public:
 
   void save();
   bool uiLocaleChanged() const;
+  bool probeRangePercentageChanged() const;
 
 public slots:
   void editDefaultAdditionalCommandLineOptions();

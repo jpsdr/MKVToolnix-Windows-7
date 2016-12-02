@@ -71,6 +71,32 @@ Settings::iniFileLocation() {
 }
 
 QString
+Settings::cacheDirLocation(QString const &subDir) {
+  QString dir;
+
+#if defined(SYS_WINDOWS)
+  if (!App::isInstalled())
+    dir = Q("%1/cache").arg(App::applicationDirPath());
+#endif
+
+  if (dir.isEmpty())
+    dir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+
+  if (!subDir.isEmpty())
+    dir = Q("%1/%2").arg(dir).arg(subDir);
+
+  return QDir::toNativeSeparators(dir);
+}
+
+QString
+Settings::prepareCacheDir(QString const &subDir) {
+  auto dirName = cacheDirLocation(subDir);
+  QDir{dirName}.mkpath(dirName);
+
+  return QDir::toNativeSeparators(dirName);
+}
+
+QString
 Settings::iniFileName() {
   return Q("%1/mkvtoolnix-gui.ini").arg(iniFileLocation());
 }

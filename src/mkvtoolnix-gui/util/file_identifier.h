@@ -40,6 +40,7 @@ public:
 
 public:
   static void addProbeRangePercentageArg(QStringList &args, double probeRangePercentage);
+  static void cleanAllCacheFiles();
 
 protected:
   virtual bool parseOutput();
@@ -51,6 +52,14 @@ protected:
   virtual void parseTrack(QVariantMap const &obj);
 
   virtual void setError(QString const &errorTitle, QString const &errorText);
+
+  virtual QString cacheKey() const;
+  virtual QHash<QString, QVariant> cacheProperties() const;
+  virtual void storeResultInCache() const;
+  virtual bool retrieveResultFromCache();
+
+protected:
+  static QString cacheCategory();
 };
 
 }}}

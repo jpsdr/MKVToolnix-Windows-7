@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QStaticText>
 #include <QVBoxLayout>
+#include <QtConcurrent>
 
 #include "common/fs_sys_helpers.h"
 #include "common/locale_string.h"
@@ -25,6 +26,8 @@
 # include "mkvtoolnix-gui/main_window/taskbar_progress.h"
 #endif
 #include "mkvtoolnix-gui/merge/tool.h"
+#include "mkvtoolnix-gui/util/cache.h"
+#include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/moving_pixmap_overlay.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -75,6 +78,8 @@ MainWindow::MainWindow(QWidget *parent)
 #if defined(SYS_WINDOWS)
   new TaskbarProgress{this};
 #endif
+
+  QtConcurrent::run(Util::Cache::cleanOldCacheFiles);
 }
 
 MainWindow::~MainWindow() {
@@ -371,6 +376,9 @@ MainWindow::editPreferences() {
 
   if (dlg.uiLocaleChanged())
     App::instance()->initializeLocale();
+
+  if (dlg.uiLocaleChanged() || dlg.probeRangePercentageChanged())
+    QtConcurrent::run(Util::FileIdentifier::cleanAllCacheFiles);
 
   App::instance()->reinitializeLanguageLists();
   App::setupUiFont();

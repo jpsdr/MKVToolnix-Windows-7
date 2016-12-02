@@ -7,9 +7,14 @@
 #include <QRegularExpression>
 #include <QStringList>
 
+#include "common/checksums/base_fwd.h"
 #include "common/json.h"
 #include "common/qt.h"
 #include "common/strings/editing.h"
+#include "common/strings/formatting.h"
+#include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/merge/source_file.h"
+#include "mkvtoolnix-gui/util/cache.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/json.h"
 #include "mkvtoolnix-gui/util/process.h"
@@ -20,6 +25,7 @@ namespace mtx { namespace gui { namespace Util {
 class FileIdentifierPrivate {
   friend class FileIdentifier;
 
+  bool m_succeeded{};
   int m_exitCode{};
   QStringList m_output;
   QString m_fileName, m_errorTitle, m_errorText;
@@ -45,8 +51,13 @@ bool
 FileIdentifier::identify() {
   Q_D(FileIdentifier);
 
+  d->m_succeeded = false;
+
   if (d->m_fileName.isEmpty())
     return false;
+
+  if (retrieveResultFromCache())
+    return d->m_succeeded;
 
   auto &cfg = Settings::get();
 
@@ -65,9 +76,12 @@ FileIdentifier::identify() {
     return false;
   }
 
-  d->m_output = process->output();
+  d->m_output    = process->output();
+  d->m_succeeded = parseOutput();
 
-  return parseOutput();
+  storeResultInCache();
+
+  return d->m_succeeded;
 }
 
 QString const &
@@ -319,6 +333,118 @@ FileIdentifier::addProbeRangePercentageArg(QStringList &args,
       || (   (decimalPart !=  0)
           && (decimalPart != 30)))
     args << "--probe-range-percentage" << Q(boost::format("%1%.%|2$02d|") % integerPart % decimalPart);
+}
+
+QString
+FileIdentifier::cacheKey()
+  const {
+  Q_D(const FileIdentifier);
+
+  auto fileName = to_utf8(QDir::toNativeSeparators(d->m_fileName));
+  return Q(to_hex(mtx::checksum::calculate(mtx::checksum::algorithm_e::md5, &fileName[0], fileName.length()), true));
+}
+
+QHash<QString, QVariant>
+FileIdentifier::cacheProperties()
+  const {
+  Q_D(const FileIdentifier);
+
+  auto info                             = QFileInfo{d->m_fileName};
+  auto properties                       = QHash<QString, QVariant>{};
+
+  properties[Q("fileName")]             = QDir::toNativeSeparators(d->m_fileName);
+  properties[Q("fileSize")]             = info.size();
+  properties[Q("fileModificationTime")] = info.lastModified().toMSecsSinceEpoch();
+
+  return properties;
+}
+
+void
+FileIdentifier::storeResultInCache()
+  const {
+  Q_D(const FileIdentifier);
+
+  auto settings = Cache::create(cacheCategory(), cacheKey(), cacheProperties());
+
+  settings->beginGroup("identifier");
+  settings->setValue("succeeded",  d->m_succeeded);
+  settings->setValue("exitCode",   d->m_exitCode);
+  settings->setValue("output",     d->m_output);
+  settings->setValue("errorTitle", d->m_errorTitle);
+  settings->setValue("errorText",  d->m_errorText);
+  settings->endGroup();
+
+  if (d->m_succeeded) {
+    settings->beginGroup("sourceFile");
+    d->m_file->saveSettings(*settings);
+    settings->endGroup();
+  }
+
+  settings->save();
+}
+
+bool
+FileIdentifier::retrieveResultFromCache() {
+  Q_D(FileIdentifier);
+
+  auto settings = Cache::fetch(cacheCategory(), cacheKey(), cacheProperties());
+
+  if (!settings) {
+    qDebug() << "FileIdentifier::retrievePositiveResultFromCache: false 1";
+    return false;
+  }
+
+  try {
+    qDebug() << "FileIdentifier::retrievePositiveResultFromCache: cached content fetched, loading settings from it";
+
+    settings->beginGroup("identifier");
+    d->m_succeeded  = settings->value("succeeded").toBool();
+    d->m_exitCode   = settings->value("exitCode").toInt();
+    d->m_output     = settings->value("output").toStringList();
+    d->m_errorTitle = settings->value("errorTitle").toString();
+    d->m_errorText  = settings->value("errorText").toString();
+    settings->endGroup();
+
+    if (d->m_succeeded) {
+      settings->beginGroup("sourceFile");
+
+      QHash<qulonglong, Merge::SourceFile *> objectIDToSourceFile;
+      QHash<qulonglong, Merge::Track *> objectIDToTrack;
+      Merge::MuxConfig::Loader l{*settings, objectIDToSourceFile, objectIDToTrack};
+
+      d->m_file = std::make_shared<Merge::SourceFile>(d->m_fileName);
+      d->m_file->loadSettings(l);
+      d->m_file->fixAssociations(l);
+
+      settings->endGroup();
+    }
+
+    qDebug() << "FileIdentifier::retrievePositiveResultFromCache: loaded";
+
+    return true;
+
+  } catch (Merge::InvalidSettingsX &) {
+    qDebug() << "FileIdentifier::retrievePositiveResultFromCache: InvalidSettingsX";
+  }
+
+  qDebug() << "FileIdentifier::retrievePositiveResultFromCache: false 2, removing cache file";
+
+  settings.reset();
+  Cache::remove(cacheCategory(), cacheKey());
+
+  *d_ptr = FileIdentifierPrivate{QDir::toNativeSeparators(d->m_fileName)};
+
+  return false;
+}
+
+void
+FileIdentifier::cleanAllCacheFiles() {
+  Cache::cleanAllCacheFilesForCategory(cacheCategory());
+}
+
+QString
+FileIdentifier::cacheCategory() {
+  return Q("fileIdentifier");
 }
 
 }}}

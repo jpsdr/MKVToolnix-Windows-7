@@ -28,6 +28,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
   , ui{new Ui::PreferencesDialog}
   , m_cfg(Util::Settings::get())
   , m_previousUiLocale{m_cfg.m_uiLocale}
+  , m_previousProbeRangePercentage{m_cfg.m_probeRangePercentage}
 {
   ui->setupUi(this);
 
@@ -110,6 +111,12 @@ bool
 PreferencesDialog::uiLocaleChanged()
   const {
   return m_previousUiLocale != m_cfg.m_uiLocale;
+}
+
+bool
+PreferencesDialog::probeRangePercentageChanged()
+  const {
+  return m_previousProbeRangePercentage != m_cfg.m_probeRangePercentage;
 }
 
 void
