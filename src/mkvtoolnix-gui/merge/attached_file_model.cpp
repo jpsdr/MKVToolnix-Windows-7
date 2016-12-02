@@ -71,6 +71,8 @@ AttachedFileModel::setRowData(QList<QStandardItem *> const &items,
   items[NameColumn       ]->setCheckState(attachedFile.m_muxThis ? Qt::Checked           : Qt::Unchecked);
 
   items[MuxThisColumn    ]->setIcon(      attachedFile.m_muxThis ? MainWindow::yesIcon() : MainWindow::noIcon());
+
+  Util::setItemForegroundColorDisabled(items, !attachedFile.m_muxThis);
 }
 
 void

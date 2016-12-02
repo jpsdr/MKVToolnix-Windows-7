@@ -131,12 +131,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
 
   items[IDColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-  auto palette = MainWindow::get()->palette();
-  palette.setCurrentColorGroup(track->m_muxThis ? QPalette::Normal : QPalette::Disabled);
-
-  auto brush = palette.text();
-  for (auto &item : items)
-    item->setForeground(brush);
+  Util::setItemForegroundColorDisabled(items, !track->m_muxThis);
 }
 
 Track *

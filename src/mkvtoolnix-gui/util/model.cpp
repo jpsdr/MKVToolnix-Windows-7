@@ -7,6 +7,7 @@
 #include <QStandardItemModel>
 #include <QTreeView>
 
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx { namespace gui { namespace Util {
@@ -142,6 +143,17 @@ findIndex(QAbstractItemModel const &model,
   }
 
   return {};
+}
+
+void
+setItemForegroundColorDisabled(QList<QStandardItem *> const &items,
+                               bool disabled) {
+  auto palette = MainWindow::get()->palette();
+  palette.setCurrentColorGroup(disabled ? QPalette::Disabled : QPalette::Normal);
+
+  auto brush = palette.text();
+  for (auto &item : items)
+    item->setForeground(brush);
 }
 
 }}}
