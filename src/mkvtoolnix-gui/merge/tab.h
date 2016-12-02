@@ -256,7 +256,12 @@ protected:
   virtual void addOrAppendFiles(bool append);
   virtual void addOrAppendFiles(bool append, QStringList const &fileNames, QModelIndex const &sourceFileIdx);
   virtual void setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files);
-  virtual QStringList handleDroppedSpecialFiles(QStringList const &fileNames);
+
+  virtual QStringList handleSpecialFiles(QStringList const &fileNames);
+  virtual bool handleSpecialFileSimpleOrXmlChapters(QString const &fileName, std::string const &content);
+  virtual bool handleSpecialFileXmlSegmentInfo(QString const &fileName, std::string const &content);
+  virtual bool handleSpecialFileXmlTags(QString const &fileName, std::string const &content);
+
   virtual void enableFilesActions();
   virtual void enableTracksActions();
   virtual void enableAttachedFilesActions();

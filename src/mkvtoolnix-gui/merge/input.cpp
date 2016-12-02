@@ -1012,14 +1012,82 @@ Tab::addFiles(QStringList const &fileNames) {
   addOrAppendFiles(false, fileNames, QModelIndex{});
 }
 
-QStringList
-Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
-  auto toIdentify = QStringList{};
-
+bool
+Tab::handleSpecialFileSimpleOrXmlChapters(QString const &fileName,
+                                          std::string const &content) {
   auto simpleChaptersRE = boost::regex{"^CHAPTER\\d{2}=.*CHAPTER\\d{2}NAME=",   boost::regex::perl | boost::regex::mod_s};
   auto xmlChaptersRE    = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Chapters>", boost::regex::perl | boost::regex::mod_s};
-  auto xmlTagsRE        = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Tags>",     boost::regex::perl | boost::regex::mod_s};
-  auto xmlSegmentInfoRE = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Info>",     boost::regex::perl | boost::regex::mod_s};
+
+  if (   !boost::regex_search(content, simpleChaptersRE)
+      && !boost::regex_search(content, xmlChaptersRE))
+    return false;
+
+  Util::MessageBox::warning(this)
+    ->title(QY("Adding chapter files"))
+    .text(Q("%1 %2 %3 %4")
+          .arg(QY("The file '%1' contains chapters.").arg(fileName))
+          .arg(QY("These aren't treated like other source files in MKVToolNix."))
+          .arg(QY("Instead such a file must be set via the 'chapter file' option on the 'output' tab."))
+          .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
+    .onlyOnce(Q("mergeChaptersDropped"))
+    .exec();
+
+  m_config.m_chapters = fileName;
+  ui->chapters->setText(fileName);
+
+  return true;
+}
+
+bool
+Tab::handleSpecialFileXmlSegmentInfo(QString const &fileName,
+                                     std::string const &content) {
+  auto xmlSegmentInfoRE = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Info>", boost::regex::perl | boost::regex::mod_s};
+
+  if (!boost::regex_search(content, xmlSegmentInfoRE))
+    return false;
+
+  Util::MessageBox::warning(this)
+    ->title(QY("Adding segment info files"))
+    .text(Q("%1 %2 %3 %4")
+          .arg(QY("The file '%1' contains segment information.").arg(fileName))
+          .arg(QY("These aren't treated like other source files in MKVToolNix."))
+          .arg(QY("Instead such a file must be set via the 'segment info' option on the 'output' tab."))
+          .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
+    .onlyOnce(Q("mergeSegmentInfoDropped"))
+    .exec();
+
+  m_config.m_segmentInfo = fileName;
+  ui->segmentInfo->setText(fileName);
+
+  return true;
+}
+
+bool
+Tab::handleSpecialFileXmlTags(QString const &fileName,
+                              std::string const &content) {
+  auto xmlTagsRE = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Tags>", boost::regex::perl | boost::regex::mod_s};
+  if (!boost::regex_search(content, xmlTagsRE))
+    return false;
+
+  Util::MessageBox::warning(this)
+    ->title(QY("Adding tag files"))
+    .text(Q("%1 %2 %3 %4")
+          .arg(QY("The file '%1' contains tags.").arg(fileName))
+          .arg(QY("These aren't treated like other source files in MKVToolNix."))
+          .arg(QY("Instead such a file must be set via the 'global tags' option on the 'output' tab."))
+          .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
+    .onlyOnce(Q("mergeTagsDropped"))
+    .exec();
+
+  m_config.m_globalTags = fileName;
+  ui->globalTags->setText(fileName);
+
+  return true;
+}
+
+QStringList
+Tab::handleSpecialFiles(QStringList const &fileNames) {
+  auto toIdentify = QStringList{};
 
   for (auto const &fileName : fileNames) {
     QFile file{fileName};
@@ -1029,56 +1097,11 @@ Tab::handleDroppedSpecialFiles(QStringList const &fileNames) {
     }
 
     auto content = std::string{ file.read(1024).data() };
-    if (boost::regex_search(content, simpleChaptersRE) || boost::regex_search(content, xmlChaptersRE)) {
-      Util::MessageBox::warning(this)
-        ->title(QY("Adding chapter files"))
-        .text(Q("%1 %2 %3 %4")
-              .arg(QY("The file '%1' contains chapters.").arg(fileName))
-              .arg(QY("These aren't treated like other source files in MKVToolNix."))
-              .arg(QY("Instead such a file must be set via the 'chapter file' option on the 'output' tab."))
-              .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-        .onlyOnce(Q("mergeChaptersDropped"))
-        .exec();
 
-      m_config.m_chapters = fileName;
-      ui->chapters->setText(fileName);
-
+    if (   handleSpecialFileSimpleOrXmlChapters(fileName, content)
+        || handleSpecialFileXmlSegmentInfo(fileName, content)
+        || handleSpecialFileXmlTags(fileName, content))
       continue;
-    }
-
-    if (boost::regex_search(content, xmlTagsRE)) {
-      Util::MessageBox::warning(this)
-        ->title(QY("Adding tag files"))
-        .text(Q("%1 %2 %3 %4")
-              .arg(QY("The file '%1' contains tags.").arg(fileName))
-              .arg(QY("These aren't treated like other source files in MKVToolNix."))
-              .arg(QY("Instead such a file must be set via the 'global tags' option on the 'output' tab."))
-              .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-        .onlyOnce(Q("mergeTagsDropped"))
-        .exec();
-
-      m_config.m_globalTags = fileName;
-      ui->globalTags->setText(fileName);
-
-      continue;
-    }
-
-    if (boost::regex_search(content, xmlSegmentInfoRE)) {
-      Util::MessageBox::warning(this)
-        ->title(QY("Adding segment info files"))
-        .text(Q("%1 %2 %3 %4")
-              .arg(QY("The file '%1' contains segment information.").arg(fileName))
-              .arg(QY("These aren't treated like other source files in MKVToolNix."))
-              .arg(QY("Instead such a file must be set via the 'segment info' option on the 'output' tab."))
-              .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-        .onlyOnce(Q("mergeSegmentInfoDropped"))
-        .exec();
-
-      m_config.m_segmentInfo = fileName;
-      ui->segmentInfo->setText(fileName);
-
-      continue;
-    }
 
     toIdentify << fileName;
   }
@@ -1093,7 +1116,7 @@ Tab::addOrAppendFiles(bool append,
   if (!fileNames.isEmpty())
     Util::Settings::get().m_lastOpenDir = QFileInfo{fileNames.last()}.path();
 
-  auto toIdentify = handleDroppedSpecialFiles(fileNames);
+  auto toIdentify = handleSpecialFiles(fileNames);
 
   QList<SourceFilePtr> identifiedFiles;
   for (auto &fileName : toIdentify) {
