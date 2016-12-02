@@ -34,13 +34,13 @@ namespace vc1 {
 class es_parser_c;
 }
 
-enum mpeg_ts_pid_type_e {
-  PAT_TYPE      = 0,
-  PMT_TYPE      = 1,
-  ES_VIDEO_TYPE = 2,
-  ES_AUDIO_TYPE = 3,
-  ES_SUBT_TYPE  = 4,
-  ES_UNKNOWN    = 5,
+enum class mpeg_ts_pid_type_e {
+  pat       = 0,
+  pmt       = 1,
+  video     = 2,
+  audio     = 3,
+  subtitles = 4,
+  unknown   = 5,
 };
 
 enum mpeg_ts_stream_type_e {
@@ -265,9 +265,10 @@ using mpeg_ts_track_ptr = std::shared_ptr<mpeg_ts_track_c>;
 class mpeg_ts_track_c {
 public:
   mpeg_ts_reader_c &reader;
+  std::size_t m_file_num;
 
   bool processed;
-  mpeg_ts_pid_type_e type;          //can be PAT_TYPE, PMT_TYPE, ES_VIDEO_TYPE, ES_AUDIO_TYPE, ES_SUBT_TYPE, ES_UNKNOWN
+  mpeg_ts_pid_type_e type;
   codec_c codec;
   uint16_t pid;
   boost::optional<int> m_ttx_wanted_page;
@@ -311,39 +312,7 @@ public:
   bool m_debug_delivery, m_debug_timestamp_wrapping;
   debugging_option_c m_debug_headers;
 
-  mpeg_ts_track_c(mpeg_ts_reader_c &p_reader)
-    : reader(p_reader)
-    , processed(false)
-    , type(ES_UNKNOWN)
-    , pid(0)
-    , pes_payload_size_to_read{}
-    , pes_payload_read(new byte_buffer_c)
-    , probed_ok(false)
-    , ptzr(-1)
-    , m_timestamp_wrap_add{timestamp_c::ns(0)}
-    , v_interlaced(false)
-    , v_version(0)
-    , v_width(0)
-    , v_height(0)
-    , v_dwidth(0)
-    , v_dheight(0)
-    , v_frame_rate(0)
-    , v_aspect_ratio(0)
-    , a_channels(0)
-    , a_sample_rate(0)
-    , a_bits_per_sample(0)
-    , a_bsid(0)
-    , m_apply_dts_timestamp_fix(false)
-    , m_use_dts(false)
-    , m_timestamps_wrapped{false}
-    , m_truehd_found_truehd{}
-    , m_truehd_found_ac3{}
-    , skip_packet_data_bytes{}
-    , m_debug_delivery{}
-    , m_debug_timestamp_wrapping{}
-    , m_debug_headers{"mpeg_ts|mpeg_ts_headers"}
-  {
-  }
+  mpeg_ts_track_c(mpeg_ts_reader_c &p_reader, mpeg_ts_pid_type_e p_type = mpeg_ts_pid_type_e::unknown);
 
   void send_to_packetizer();
   void add_pes_payload(unsigned char *ts_payload, size_t ts_payload_size);
@@ -384,32 +353,42 @@ public:
   void parse_iso639_language_from(void const *buffer);
 };
 
-class mpeg_ts_reader_c: public generic_reader_c {
-protected:
-  enum processing_state_e {
-    ps_probing,
-    ps_determining_timestamp_offset,
-    ps_muxing,
-  };
+enum class mpeg_ts_processing_state_e {
+  probing,
+  determining_timestamp_offset,
+  muxing,
+};
+
+struct mpeg_ts_file_t {
+  mm_io_cptr m_in;
 
   bool m_pat_found, m_pmt_found;
   int m_es_to_process;
   timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_last_non_subtitle_timestamp;
 
-  processing_state_e m_state;
+  mpeg_ts_processing_state_e m_state;
   uint64_t m_probe_range;
 
   bool m_file_done, m_packet_sent_to_packetizer;
 
-  std::vector<mpeg_ts_track_ptr> m_tracks;
+  unsigned int m_detected_packet_size, m_num_pat_crc_errors, m_num_pmt_crc_errors;
+  bool m_validate_pat_crc, m_validate_pmt_crc;
+
+  mpeg_ts_file_t(mm_io_cptr const &in);
+};
+using mpeg_ts_file_cptr = std::shared_ptr<mpeg_ts_file_t>;
+
+class mpeg_ts_reader_c: public generic_reader_c {
+protected:
+  std::vector<mpeg_ts_file_cptr> m_files;
+  std::size_t m_current_file;
+
+  std::vector<mpeg_ts_track_ptr> m_tracks, m_all_probed_tracks;
   std::map<generic_packetizer_c *, mpeg_ts_track_ptr> m_ptzr_to_track_map;
 
   std::vector<timestamp_c> m_chapter_timestamps;
 
   debugging_option_c m_dont_use_audio_pts, m_debug_resync, m_debug_pat_pmt, m_debug_headers, m_debug_packet, m_debug_aac, m_debug_timestamp_wrapping, m_debug_clpi;
-
-  unsigned int m_detected_packet_size, m_num_pat_crc_errors, m_num_pmt_crc_errors;
-  bool m_validate_pat_crc, m_validate_pmt_crc;
 
 protected:
   static int potential_packet_sizes[];
@@ -437,6 +416,8 @@ public:
   static int detect_packet_size(mm_io_c *in, uint64_t size);
 
 private:
+  void read_headers_for_file(std::size_t file_num);
+
   mpeg_ts_track_ptr find_track_for_pid(uint16_t pid) const;
   std::pair<unsigned char *, std::size_t> determine_ts_payload_start(mpeg_ts_packet_header_t *hdr) const;
 
@@ -452,6 +433,7 @@ private:
   int determine_track_parameters(mpeg_ts_track_c &track);
 
   file_status_e finish();
+  bool all_files_done() const;
   int send_to_packetizer(mpeg_ts_track_ptr &track);
   void create_mpeg1_2_video_packetizer(mpeg_ts_track_ptr &track);
   void create_mpeg4_p10_es_video_packetizer(mpeg_ts_track_ptr &track);
@@ -475,6 +457,9 @@ private:
   bool resync(int64_t start_at);
 
   uint32_t calculate_crc(void const *buffer, size_t size) const;
+
+  mpeg_ts_file_t &file();
+  mm_io_c &in();
 
   friend class mpeg_ts_track_c;
 };
