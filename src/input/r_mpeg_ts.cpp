@@ -209,7 +209,7 @@ mpeg_ts_track_c::new_stream_v_avc() {
     m_avc_parser = mpeg4::p10::avc_es_parser_cptr(new mpeg4::p10::avc_es_parser_c);
     m_avc_parser->ignore_nalu_size_length_errors();
 
-    if (mtx::includes(reader.m_ti.m_nalu_size_lengths, reader.tracks.size()))
+    if (mtx::includes(reader.m_ti.m_nalu_size_lengths, reader.m_tracks.size()))
       m_avc_parser->set_nalu_size_length(reader.m_ti.m_nalu_size_lengths[0]);
     else if (mtx::includes(reader.m_ti.m_nalu_size_lengths, -1))
       m_avc_parser->set_nalu_size_length(reader.m_ti.m_nalu_size_lengths[-1]);
@@ -765,15 +765,14 @@ mpeg_ts_reader_c::detect_packet_size(mm_io_c *in,
 mpeg_ts_reader_c::mpeg_ts_reader_c(const track_info_c &ti,
                                    const mm_io_cptr &in)
   : generic_reader_c(ti, in)
-  , PAT_found{}
-  , PMT_found{}
-  , PMT_pid(-1)
-  , es_to_process{}
+  , m_pat_found{}
+  , m_pmt_found{}
+  , m_es_to_process{}
   , m_global_timestamp_offset{}
   , m_stream_timestamp{timestamp_c::ns(0)}
   , m_state{ps_probing}
   , m_probe_range{}
-  , file_done{}
+  , m_file_done{}
   , m_packet_sent_to_packetizer{}
   , m_dont_use_audio_pts{      "mpeg_ts|mpeg_ts_dont_use_audio_pts"}
   , m_debug_resync{            "mpeg_ts|mpeg_ts_resync"}
@@ -805,9 +804,9 @@ mpeg_ts_reader_c::read_headers() {
 
     mxdebug_if(m_debug_headers, boost::format("read_headers: Starting to build PID list. (packet size: %1%)\n") % m_detected_packet_size);
 
-    auto PAT = std::make_shared<mpeg_ts_track_c>(*this);
-    PAT->type = PAT_TYPE;
-    tracks.push_back(PAT);
+    auto pat = std::make_shared<mpeg_ts_track_c>(*this);
+    pat->type = PAT_TYPE;
+    m_tracks.push_back(pat);
 
     unsigned char buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
 
@@ -823,7 +822,7 @@ mpeg_ts_reader_c::read_headers() {
 
       parse_packet(buf);
 
-      if (PAT_found && PMT_found && (0 == es_to_process))
+      if (m_pat_found && m_pmt_found && (0 == m_es_to_process))
         break;
 
       auto eof = m_in->eof() || (m_in->getFilePointer() >= size_to_probe);
@@ -836,12 +835,12 @@ mpeg_ts_reader_c::read_headers() {
       // errors for the specific type.
       mxdebug_if(m_debug_headers,
                  boost::format("read_headers: EOF during detection. #tracks %1% #PAT CRC errors %2% #PMT CRC errors %3% PAT found %4% PMT found %5%\n")
-                 % tracks.size() % m_num_pat_crc_errors % m_num_pmt_crc_errors % PAT_found % PMT_found);
+                 % m_tracks.size() % m_num_pat_crc_errors % m_num_pmt_crc_errors % m_pat_found % m_pmt_found);
 
-      if (!PAT_found && m_validate_pat_crc)
+      if (!m_pat_found && m_validate_pat_crc)
         m_validate_pat_crc = false;
 
-      else if (PAT_found && !PMT_found && m_validate_pmt_crc)
+      else if (m_pat_found && !m_pmt_found && m_validate_pmt_crc)
         m_validate_pmt_crc = false;
 
       else
@@ -850,10 +849,11 @@ mpeg_ts_reader_c::read_headers() {
       m_in->setFilePointer(0);
       m_in->clear_eof();
 
-      tracks.clear();
-      auto PAT = std::make_shared<mpeg_ts_track_c>(*this);
-      PAT->type = PAT_TYPE;
-      tracks.push_back(PAT);
+      m_tracks.clear();
+
+      pat       = std::make_shared<mpeg_ts_track_c>(*this);
+      pat->type = PAT_TYPE;
+      m_tracks.push_back(pat);
     }
   } catch (...) {
     mxdebug_if(m_debug_headers, boost::format("read_headers: caught exception\n"));
@@ -866,7 +866,7 @@ mpeg_ts_reader_c::read_headers() {
   parse_clip_info_file();
   process_chapter_entries();
 
-  for (auto &track : tracks) {
+  for (auto &track : m_tracks) {
     track->clear_pes_payload();
     track->processed        = false;
     // track->timestamp_offset = -1;
@@ -921,7 +921,7 @@ mpeg_ts_reader_c::determine_global_timestamp_offset() {
   m_in->setFilePointer(0);
   m_in->clear_eof();
 
-  for (auto const &track : tracks) {
+  for (auto const &track : m_tracks) {
     track->clear_pes_payload();
     track->processed            = false;
     track->m_timestamps_wrapped = false;
@@ -982,8 +982,8 @@ mpeg_ts_reader_c::identify() {
   id_result_container(info.get());
 
   size_t i;
-  for (i = 0; i < tracks.size(); i++) {
-    mpeg_ts_track_ptr &track = tracks[i];
+  for (i = 0; i < m_tracks.size(); i++) {
+    mpeg_ts_track_ptr &track = m_tracks[i];
 
     if (!track->probed_ok || !track->codec)
       continue;
@@ -1072,11 +1072,11 @@ mpeg_ts_reader_c::parse_pat(mpeg_ts_track_c &track) {
                % tmp_pid);
 
     if (0 != local_program_number) {
-      PAT_found = true;
+      m_pat_found = true;
 
       bool skip = false;
-      for (uint16_t i = 0; i < tracks.size(); i++) {
-        if (tracks[i]->pid == tmp_pid) {
+      for (uint16_t i = 0; i < m_tracks.size(); i++) {
+        if (m_tracks[i]->pid == tmp_pid) {
           skip = true;
           break;
         }
@@ -1085,14 +1085,14 @@ mpeg_ts_reader_c::parse_pat(mpeg_ts_track_c &track) {
       if (skip == true)
         continue;
 
-      auto PMT       = std::make_shared<mpeg_ts_track_c>(*this);
-      PMT->type      = PMT_TYPE;
-      PMT->processed = false;
-      es_to_process  = 0;
+      auto pmt        = std::make_shared<mpeg_ts_track_c>(*this);
+      pmt->type       = PMT_TYPE;
+      pmt->processed  = false;
+      m_es_to_process = 0;
 
-      PMT->set_pid(tmp_pid);
+      pmt->set_pid(tmp_pid);
 
-      tracks.push_back(PMT);
+      m_tracks.push_back(pmt);
     }
   }
 
@@ -1298,13 +1298,13 @@ mpeg_ts_reader_c::parse_pmt(mpeg_ts_track_c &track) {
     }
 
     if (track->type != ES_UNKNOWN) {
-      PMT_found        = true;
+      m_pmt_found      = true;
       track->processed = false;
-      tracks.push_back(track);
-      ++es_to_process;
+      m_tracks.push_back(track);
+      ++m_es_to_process;
 
-      brng::copy(track->m_coupled_tracks, std::back_inserter(tracks));
-      es_to_process += track->m_coupled_tracks.size();
+      brng::copy(track->m_coupled_tracks, std::back_inserter(m_tracks));
+      m_es_to_process += track->m_coupled_tracks.size();
     }
 
     mxdebug_if(m_debug_pat_pmt,
@@ -1593,27 +1593,27 @@ mpeg_ts_reader_c::probe_packet_complete(mpeg_ts_track_c &track) {
   }
 
   if (track.type == PAT_TYPE || track.type == PMT_TYPE) {
-    auto it = brng::find_if(tracks, [&track](mpeg_ts_track_ptr const &candidate) { return candidate.get() == &track; });
-    if (tracks.end() != it)
-      tracks.erase(it);
+    auto it = brng::find_if(m_tracks, [&track](mpeg_ts_track_ptr const &candidate) { return candidate.get() == &track; });
+    if (m_tracks.end() != it)
+      m_tracks.erase(it);
 
   } else {
     track.processed = true;
     track.probed_ok = true;
-    es_to_process--;
-    mxdebug_if(m_debug_headers, boost::format("probe_packet_complete: ES to process: %1%\n") % es_to_process);
+    --m_es_to_process;
+    mxdebug_if(m_debug_headers, boost::format("probe_packet_complete: ES to process: %1%\n") % m_es_to_process);
   }
 }
 
 void
 mpeg_ts_reader_c::create_packetizer(int64_t id) {
-  if ((0 > id) || (tracks.size() <= static_cast<size_t>(id)))
+  if ((0 > id) || (m_tracks.size() <= static_cast<size_t>(id)))
     return;
 
-  mpeg_ts_track_ptr &track = tracks[id];
-  char type                = ES_AUDIO_TYPE == track->type ? 'a'
-                           : ES_SUBT_TYPE  == track->type ? 's'
-                           :                                'v';
+  auto &track = m_tracks[id];
+  char type   = ES_AUDIO_TYPE == track->type ? 'a'
+              : ES_SUBT_TYPE  == track->type ? 's'
+              :                                'v';
 
   if (!track->probed_ok || (0 == track->ptzr) || !demuxing_requested(type, id, track->language))
     return;
@@ -1775,7 +1775,7 @@ mpeg_ts_reader_c::create_packetizers() {
   m_state = ps_muxing;
 
   mxdebug_if(m_debug_headers, boost::format("create_packetizers: create packetizers...\n"));
-  for (std::size_t i = 0u, end = tracks.size(); i < end; ++i)
+  for (std::size_t i = 0u, end = m_tracks.size(); i < end; ++i)
     create_packetizer(i);
 }
 
@@ -1783,17 +1783,17 @@ void
 mpeg_ts_reader_c::add_available_track_ids() {
   size_t i;
 
-  for (i = 0; i < tracks.size(); i++)
-    if (tracks[i]->probed_ok)
+  for (i = 0; i < m_tracks.size(); i++)
+    if (m_tracks[i]->probed_ok)
       add_available_track_id(i);
 }
 
 file_status_e
 mpeg_ts_reader_c::finish() {
-  if (file_done)
+  if (m_file_done)
     return flush_packetizers();
 
-  for (auto &track : tracks) {
+  for (auto &track : m_tracks) {
     if ((-1 != track->ptzr) && (0 < track->pes_payload_read->get_size()))
       parse_pes(*track);
 
@@ -1801,7 +1801,7 @@ mpeg_ts_reader_c::finish() {
       track->converter->flush();
   }
 
-  file_done = true;
+  m_file_done = true;
 
   return flush_packetizers();
 }
@@ -1818,7 +1818,7 @@ mpeg_ts_reader_c::read(generic_packetizer_c *requested_ptzr,
 
   unsigned char buf[TS_MAX_PACKET_SIZE + 1];
 
-  if (file_done)
+  if (m_file_done)
     return flush_packetizers();
 
   while (true) {
@@ -1882,7 +1882,7 @@ mpeg_ts_reader_c::parse_clip_info_file() {
   if (!parser.parse())
     return;
 
-  for (auto &track : tracks) {
+  for (auto &track : m_tracks) {
     bool found = false;
 
     for (auto &program : parser.m_programs) {
@@ -1944,7 +1944,7 @@ mpeg_ts_reader_c::resync(int64_t start_at) {
 mpeg_ts_track_ptr
 mpeg_ts_reader_c::find_track_for_pid(uint16_t pid)
   const {
-  for (auto const &track : tracks)
+  for (auto const &track : m_tracks)
     if (   (track->pid == pid)
         && (   mtx::included_in(m_state, ps_probing, ps_determining_timestamp_offset)
             || track->has_packetizer()))

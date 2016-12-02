@@ -392,17 +392,16 @@ protected:
     ps_muxing,
   };
 
-  bool PAT_found, PMT_found;
-  int16_t PMT_pid;
-  int es_to_process;
+  bool m_pat_found, m_pmt_found;
+  int m_es_to_process;
   timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_last_non_subtitle_timestamp;
 
   processing_state_e m_state;
   uint64_t m_probe_range;
 
-  bool file_done, m_packet_sent_to_packetizer;
+  bool m_file_done, m_packet_sent_to_packetizer;
 
-  std::vector<mpeg_ts_track_ptr> tracks;
+  std::vector<mpeg_ts_track_ptr> m_tracks;
   std::map<generic_packetizer_c *, mpeg_ts_track_ptr> m_ptzr_to_track_map;
 
   std::vector<timestamp_c> m_chapter_timestamps;
