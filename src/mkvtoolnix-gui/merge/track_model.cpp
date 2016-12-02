@@ -130,6 +130,13 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[ForcedTrackFlagColumn] ->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? MainWindow::yesIcon() : MainWindow::noIcon());
 
   items[IDColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+  auto palette = MainWindow::get()->palette();
+  palette.setCurrentColorGroup(track->m_muxThis ? QPalette::Normal : QPalette::Disabled);
+
+  auto brush = palette.text();
+  for (auto &item : items)
+    item->setForeground(brush);
 }
 
 Track *
