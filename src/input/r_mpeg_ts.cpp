@@ -1683,21 +1683,19 @@ reader_c::create_packetizer(int64_t id) {
   m_ti.m_language = track->language;
 
   if (pid_type_e::audio == track->type) {
-    if (track->codec.is(codec_c::type_e::A_MP3)) {
+    if (track->codec.is(codec_c::type_e::A_MP3))
       track->ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, (0 != track->a_sample_rate) && (0 != track->a_channels)));
-      show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(codec_c::type_e::A_AAC))
+    else if (track->codec.is(codec_c::type_e::A_AAC))
       create_aac_audio_packetizer(track);
 
     else if (track->codec.is(codec_c::type_e::A_AC3))
       create_ac3_audio_packetizer(track);
 
-    else if (track->codec.is(codec_c::type_e::A_DTS)) {
+    else if (track->codec.is(codec_c::type_e::A_DTS))
       track->ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, track->a_dts_header));
-      show_packetizer_info(id, PTZR(track->ptzr));
 
-    } else if (track->codec.is(codec_c::type_e::A_PCM))
+    else if (track->codec.is(codec_c::type_e::A_PCM))
       create_pcm_audio_packetizer(track);
 
     else if (track->codec.is(codec_c::type_e::A_TRUEHD))
@@ -1725,8 +1723,10 @@ reader_c::create_packetizer(int64_t id) {
   else if (track->codec.is(codec_c::type_e::S_SRT))
     create_srt_subtitles_packetizer(track);
 
-  if (-1 != track->ptzr)
+  if (-1 != track->ptzr) {
     m_ptzr_to_track_map[PTZR(track->ptzr)] = track;
+    show_packetizer_info(id, PTZR(track->ptzr));
+  }
 }
 
 void
@@ -1737,13 +1737,11 @@ reader_c::create_aac_audio_packetizer(track_ptr const &track) {
 
   if (AAC_PROFILE_SBR == track->m_aac_frame.m_header.profile)
     aac_packetizer->set_audio_output_sampling_freq(track->m_aac_frame.m_header.sample_rate * 2);
-  show_packetizer_info(m_ti.m_id, aac_packetizer);
 }
 
 void
 reader_c::create_ac3_audio_packetizer(track_ptr const &track) {
   track->ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bsid));
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 
   if (track->converter)
     dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_ac3_packetizer(PTZR(track->ptzr));
@@ -1752,7 +1750,6 @@ reader_c::create_ac3_audio_packetizer(track_ptr const &track) {
 void
 reader_c::create_pcm_audio_packetizer(track_ptr const &track) {
   track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 
   if (track->converter)
     track->converter->set_packetizer(PTZR(track->ptzr));
@@ -1761,7 +1758,6 @@ reader_c::create_pcm_audio_packetizer(track_ptr const &track) {
 void
 reader_c::create_truehd_audio_packetizer(track_ptr const &track) {
   track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, truehd_frame_t::truehd, track->a_sample_rate, track->a_channels));
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 
   if (track->converter)
     dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_packetizer(PTZR(track->ptzr));
@@ -1773,7 +1769,6 @@ reader_c::create_mpeg1_2_video_packetizer(track_ptr &track) {
   auto m2vpacketizer  = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, track->v_frame_rate, track->v_width, track->v_height, track->v_dwidth, track->v_dheight, false);
   track->ptzr         = add_packetizer(m2vpacketizer);
 
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
   m2vpacketizer->set_video_interlaced_flag(track->v_interlaced);
 }
 
@@ -1782,8 +1777,6 @@ reader_c::create_mpeg4_p10_es_video_packetizer(track_ptr &track) {
   generic_packetizer_c *ptzr = new mpeg4_p10_es_video_packetizer_c(this, m_ti);
   track->ptzr                = add_packetizer(ptzr);
   ptzr->set_video_pixel_dimensions(track->v_width, track->v_height);
-
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }
 
 void
@@ -1791,15 +1784,12 @@ reader_c::create_mpegh_p2_es_video_packetizer(track_ptr &track) {
   auto ptzr   = new hevc_es_video_packetizer_c(this, m_ti);
   track->ptzr = add_packetizer(ptzr);
   ptzr->set_video_pixel_dimensions(track->v_width, track->v_height);
-
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }
 
 void
 reader_c::create_vc1_video_packetizer(track_ptr &track) {
   track->m_use_dts = true;
   track->ptzr      = add_packetizer(new vc1_video_packetizer_c(this, m_ti));
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }
 
 void
@@ -1807,14 +1797,11 @@ reader_c::create_hdmv_pgs_subtitles_packetizer(track_ptr &track) {
   auto ptzr = new hdmv_pgs_packetizer_c(this, m_ti);
   ptzr->set_aggregate_packets(true);
   track->ptzr = add_packetizer(ptzr);
-
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }
 
 void
 reader_c::create_hdmv_textst_subtitles_packetizer(track_ptr const &track) {
   track->ptzr = add_packetizer(new hdmv_textst_packetizer_c(this, m_ti, track->m_codec_private_data));
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }
 
 void
@@ -1825,8 +1812,6 @@ reader_c::create_srt_subtitles_packetizer(track_ptr const &track) {
 
   converter.demux_page(*track->m_ttx_wanted_page, PTZR(track->ptzr));
   converter.override_encoding(*track->m_ttx_wanted_page, track->language);
-
-  show_packetizer_info(m_ti.m_id, PTZR(track->ptzr));
 }
 
 void
