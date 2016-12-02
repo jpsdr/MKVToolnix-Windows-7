@@ -217,7 +217,7 @@ get_file_type_internal(filelist_t &file) {
   // File types that are mis-detected sometimes
   else if (do_probe<dts_reader_c>(io, size, true))
     type = FILE_TYPE_DTS;
-  else if (do_probe<mpeg_ts_reader_c>(io, size))
+  else if (do_probe<mtx::mpeg_ts::reader_c>(io, size))
     type = FILE_TYPE_MPEG_TS;
   else if (do_probe<mpeg_ps_reader_c>(io, size))
     type = FILE_TYPE_MPEG_PS;
@@ -365,7 +365,7 @@ create_readers() {
           file->reader.reset(new mpeg_ps_reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_MPEG_TS:
-          file->reader.reset(new mpeg_ts_reader_c(*file->ti, input_file));
+          file->reader.reset(new mtx::mpeg_ts::reader_c(*file->ti, input_file));
           break;
         case FILE_TYPE_OGM:
           file->reader.reset(new ogm_reader_c(*file->ti, input_file));
