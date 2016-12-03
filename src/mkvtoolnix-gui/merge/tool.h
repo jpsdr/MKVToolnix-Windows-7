@@ -61,6 +61,7 @@ public slots:
   virtual void showCommandLine();
   virtual void copyFirstFileNameToTitle();
   virtual void copyOutputFileNameToTitle();
+  virtual void copyTitleToOutputFileName();
 
   virtual void toolShown() override;
   virtual void tabTitleChanged();

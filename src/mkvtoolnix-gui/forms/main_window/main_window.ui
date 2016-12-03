@@ -93,6 +93,7 @@
     <addaction name="separator"/>
     <addaction name="actionMergeCopyFirstFileNameToTitle"/>
     <addaction name="actionMergeCopyOutputFileNameToTitle"/>
+    <addaction name="actionMergeCopyTitleToOutputFileName"/>
    </widget>
    <widget class="QMenu" name="menuHeaderEditor">
     <property name="title">
@@ -668,10 +669,10 @@
   </action>
   <action name="actionMergeCopyFirstFileNameToTitle">
    <property name="text">
-    <string>Copy first source file's name to file &amp;title</string>
+    <string>Copy &amp;first source file's name to file title</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+T</string>
+    <string>Ctrl+F</string>
    </property>
   </action>
   <action name="actionMergeCopyOutputFileNameToTitle">
@@ -680,6 +681,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionMergeCopyTitleToOutputFileName">
+   <property name="text">
+    <string>Copy &amp;title to destination file name</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
    </property>
   </action>
   <action name="actionChapterEditorRemoveFromMatroska">

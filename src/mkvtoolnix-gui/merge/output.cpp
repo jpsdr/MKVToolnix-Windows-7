@@ -606,6 +606,31 @@ Tab::onCopyOutputFileNameToTitle() {
     ui->title->setText(QFileInfo{ m_config.m_destination }.completeBaseName());
 }
 
+void
+Tab::onCopyTitleToOutputFileName() {
+  if (!hasTitle())
+    return;
+
+  auto info        = QFileInfo{ m_config.m_destination };
+  auto suffix      = info.completeSuffix();
+  auto path        = info.path();
+  auto newFileName = m_config.m_title;
+
+  if (!path.isEmpty())
+    newFileName = Q("%1/%2").arg(path).arg(newFileName);
+
+  if (suffix.isEmpty())
+    suffix = "mkv";
+
+  ui->output->setText(QDir::toNativeSeparators(Q("%1.%2").arg(newFileName).arg(suffix)));
+}
+
+bool
+Tab::hasTitle()
+  const {
+  return !m_config.m_title.isEmpty();
+}
+
 bool
 Tab::hasDestinationFileName()
   const {

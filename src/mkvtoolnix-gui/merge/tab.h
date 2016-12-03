@@ -74,6 +74,7 @@ public:
   virtual bool isEmpty();
   virtual bool hasSourceFiles() const;
   virtual bool hasDestinationFileName() const;
+  virtual bool hasTitle() const;
 
   virtual QString const &fileName() const;
   virtual QString title() const;
@@ -156,6 +157,7 @@ public slots:
   virtual void setChapterCharacterSet(QString const &characterSet);
   virtual void onCopyFirstFileNameToTitle();
   virtual void onCopyOutputFileNameToTitle();
+  virtual void onCopyTitleToOutputFileName();
 
   virtual void addToJobQueue(bool startNow, boost::optional<Util::Settings::ClearMergeSettingsAction> clearSettings = boost::none);
 
