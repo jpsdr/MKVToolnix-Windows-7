@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 #include "common/debugging.h"
+#include "common/file.h"
 #include "common/id_info.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/strings/formatting.h"
@@ -49,38 +50,46 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c *in) {
   }
 
   auto mpls_dir   = bfs::system_complete(bfs::path(in->get_file_name())).remove_filename();
-  auto stream_dir = mpls_dir.parent_path() / "STREAM";
+  // auto stream_dir = mpls_dir.parent_path() / "STREAM";
 
-  if (!bfs::exists(stream_dir))
-    stream_dir = mpls_dir.parent_path() / "stream";
+  // if (!bfs::exists(stream_dir))
+  //   stream_dir = mpls_dir.parent_path() / "stream";
 
-  auto have_stream_dir = bfs::exists(stream_dir);
+  // auto have_stream_dir = bfs::exists(stream_dir);
 
-  mxdebug_if(ms_debug, boost::format("MPLS dir: %1% have stream dir: %2% stream dir: %3%\n") % mpls_dir.string() % have_stream_dir % stream_dir.string());
+  // mxdebug_if(ms_debug, boost::format("MPLS dir: %1% have stream dir: %2% stream dir: %3%\n") % mpls_dir.string() % have_stream_dir % stream_dir.string());
 
-  auto find_file = [mpls_dir,stream_dir,have_stream_dir](mtx::mpls::play_item_t const &item) -> bfs::path {
-    if (have_stream_dir) {
-      auto file = stream_dir / (boost::format("%1%.%2%") % item.clip_id % item.codec_id).str();
-      if (bfs::exists(file))
-        return file;
+  // auto find_file = [mpls_dir,stream_dir,have_stream_dir](mtx::mpls::play_item_t const &item) -> bfs::path {
+  //   if (have_stream_dir) {
+  //     auto file = stream_dir / (boost::format("%1%.%2%") % item.clip_id % item.codec_id).str();
+  //     if (bfs::exists(file))
+  //       return file;
 
-      file = stream_dir / (boost::format("%1%.%2%") % item.clip_id % balg::to_lower_copy(item.codec_id)).str();
-      if (bfs::exists(file))
-        return file;
-    }
+  //     file = stream_dir / (boost::format("%1%.%2%") % item.clip_id % balg::to_lower_copy(item.codec_id)).str();
+  //     if (bfs::exists(file))
+  //       return file;
+  //   }
 
-    auto file = mpls_dir / (boost::format("%1%.%2%") % item.clip_id % item.codec_id).str();
-    if (bfs::exists(file))
-      return file;
+  //   auto file = mpls_dir / (boost::format("%1%.%2%") % item.clip_id % item.codec_id).str();
+  //   if (bfs::exists(file))
+  //     return file;
 
-    file = mpls_dir / (boost::format("%1%.%2%") % item.clip_id % balg::to_lower_copy(item.codec_id)).str();
-    return bfs::exists(file) ? file : bfs::path{};
-  };
+  //   file = mpls_dir / (boost::format("%1%.%2%") % item.clip_id % balg::to_lower_copy(item.codec_id)).str();
+  //   return bfs::exists(file) ? file : bfs::path{};
+  // };
 
   std::vector<bfs::path> file_names;
 
   for (auto const &item : mpls_parser->get_playlist().items) {
-    auto file = find_file(item);
+    auto basename_upper = (boost::format("%1%.%2%") % item.clip_id % balg::to_upper_copy(item.codec_id)).str();
+    auto basename_lower = (boost::format("%1%.%2%") % item.clip_id % balg::to_lower_copy(item.codec_id)).str();
+
+    auto file = mtx::file::first_existing_path({
+        mpls_dir / ".." / "STREAM" / basename_lower, mpls_dir / ".." / ".." / "STREAM" / basename_lower,
+        mpls_dir / ".." / "STREAM" / basename_upper, mpls_dir / ".." / ".." / "STREAM" / basename_upper,
+        mpls_dir / ".." / "stream" / basename_lower, mpls_dir / ".." / ".." / "stream" / basename_lower,
+        mpls_dir / ".." / "stream" / basename_upper, mpls_dir / ".." / ".." / "stream" / basename_upper,
+      });
 
     mxdebug_if(ms_debug, boost::format("Item clip ID: %1% codec ID: %2%: have file? %3% file: %4%\n") % item.clip_id % item.codec_id % !file.empty() % file.string());
     if (!file.empty())
