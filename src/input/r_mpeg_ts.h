@@ -427,7 +427,6 @@ private:
   bool parse_pat(track_c &track);
   bool parse_pmt(track_c &track);
   void parse_pes(track_c &track);
-  void parse_private_stream(track_c &track);
   void probe_packet_complete(track_c &track);
   int determine_track_parameters(track_c &track);
 

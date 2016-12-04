@@ -1377,28 +1377,6 @@ reader_c::parse_pmt(track_c &track) {
 }
 
 void
-reader_c::parse_private_stream(track_c &track) {
-  auto &f             = file();
-  auto pes            = track.pes_payload_read->get_buffer();
-  auto const pes_size = track.pes_payload_read->get_size();
-  auto pes_header     = reinterpret_cast<pes_header_t *>(pes);
-
-  track.pes_payload_read->remove(6);
-
-  if (m_debug_packet) {
-    mxdebug(boost::format("parse_pes: PES info (private stream) at file position %1%:\n") % (f.m_in->getFilePointer() - f.m_detected_packet_size));
-    mxdebug(boost::format("parse_pes:    stream_id = %1% PID = %2%\n") % static_cast<unsigned int>(pes_header->stream_id) % track.pid);
-    mxdebug(boost::format("parse_pes:    PES_packet_length = %1%, data starts at 6\n") % pes_size);
-  }
-
-  if (processing_state_e::probing == f.m_state)
-    probe_packet_complete(track);
-
-  else
-    track.send_to_packetizer();
-}
-
-void
 reader_c::parse_pes(track_c &track) {
   at_scope_exit_c finally{[&track]() { track.clear_pes_payload(); }};
 
@@ -1412,33 +1390,37 @@ reader_c::parse_pes(track_c &track) {
     return;
   }
 
+  timestamp_c pts, dts, orig_pts, orig_dts;
+  auto has_pts = false;
+  auto has_dts = false;
+  auto to_skip = 0u;
+
   if (mtx::included_in(pes_header->stream_id, MPEGVIDEO_PRIVATE_STREAM_2)) {
-    parse_private_stream(track);
-    return;
-  }
+    to_skip = 6;
 
-  if (pes_size < sizeof(pes_header_t)) {
-    mxdebug_if(m_debug_packet, boost::format("parse_pes: error: PES payload (%1%) too small for PES header structure itself (%2%)\n") % pes_size % sizeof(pes_header_t));
-    return;
-  }
+  } else {
+    if (pes_size < sizeof(pes_header_t)) {
+      mxdebug_if(m_debug_packet, boost::format("parse_pes: error: PES payload (%1%) too small for PES header structure itself (%2%)\n") % pes_size % sizeof(pes_header_t));
+      return;
+    }
 
-  auto has_pts = (pes_header->get_pts_dts_flags() & 0x02) == 0x02; // 10 and 11 mean PTS is present
-  auto has_dts = (pes_header->get_pts_dts_flags() & 0x01) == 0x01; // 01 and 11 mean DTS is present
-  auto to_skip = offsetof(pes_header_t, pes_header_data_length) + pes_header->pes_header_data_length + 1;
+    has_pts = (pes_header->get_pts_dts_flags() & 0x02) == 0x02; // 10 and 11 mean PTS is present
+    has_dts = (pes_header->get_pts_dts_flags() & 0x01) == 0x01; // 01 and 11 mean DTS is present
+    to_skip = offsetof(pes_header_t, pes_header_data_length) + pes_header->pes_header_data_length + 1;
+
+    if (has_pts) {
+      pts = read_timestamp(&pes_header->pts_dts);
+      dts = pts;
+    }
+
+    if (has_dts)
+      dts = read_timestamp(&pes_header->pts_dts + (has_pts ? 5 : 0));
+  }
 
   if (pes_size < to_skip) {
     mxdebug_if(m_debug_packet, boost::format("parse_pes: error: PES payload (%1%) too small for PES header + header data including PTS/DTS (%2%)\n") % pes_size % to_skip);
     return;
   }
-
-  timestamp_c pts, dts, orig_pts, orig_dts;
-  if (has_pts) {
-    pts = read_timestamp(&pes_header->pts_dts);
-    dts = pts;
-  }
-
-  if (has_dts)
-    dts = read_timestamp(&pes_header->pts_dts + (has_pts ? 5 : 0));
 
   if (!track.m_use_dts)
     dts = pts;
