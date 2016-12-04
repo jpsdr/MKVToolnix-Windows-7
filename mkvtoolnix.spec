@@ -63,6 +63,10 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 
 %install
 ./drake DESTDIR=$RPM_BUILD_ROOT install
+%if 0%{?suse_version}
+strip ${RPM_BUILD_ROOT}/usr/bin/*
+%endif
+
 %fdupes -s %buildroot/%_mandir
 %fdupes -s %buildroot/%_prefix
 
