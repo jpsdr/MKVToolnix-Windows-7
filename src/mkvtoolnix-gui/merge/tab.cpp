@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
+#include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
@@ -81,6 +82,7 @@ Tab::Tab(QWidget *parent)
   , m_removeAttachmentsAction{new QAction{this}}
   , m_removeAllAttachmentsAction{new QAction{this}}
   , m_selectAllAttachmentsAction{new QAction{this}}
+  , m_identifier{new FileIdentificationThread{this}}
   , m_debugTrackModel{"track_model"}
 {
   // Setup UI controls.
@@ -95,6 +97,7 @@ Tab::Tab(QWidget *parent)
   setupOutputControls();
   setupAttachmentsControls();
   setupTabPositions();
+  setupFileIdentificationThread();
 
   setControlValuesFromConfig();
 
@@ -108,6 +111,9 @@ Tab::Tab(QWidget *parent)
 }
 
 Tab::~Tab() {
+  m_identifier->abortPlaylistScan();
+  m_identifier->quit();
+  m_identifier->wait();
 }
 
 QString const &

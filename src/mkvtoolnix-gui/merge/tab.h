@@ -29,6 +29,8 @@ enum class InitialDirMode {
   , ContentFirstInputFileLastOpenDir
 };
 
+class FileIdentificationThread;
+
 class Tab : public QWidget {
   Q_OBJECT;
 
@@ -63,6 +65,8 @@ protected:
   QAction *m_addAttachmentsAction, *m_removeAttachmentsAction, *m_removeAllAttachmentsAction, *m_selectAllAttachmentsAction;
 
   QString m_savedState, m_emptyState;
+
+  FileIdentificationThread *m_identifier;
 
   debugging_option_c m_debugTrackModel;
 
@@ -124,6 +128,7 @@ public slots:
   virtual void enableMoveFilesButtons();
 
   virtual void setupInputLayout();
+  virtual void setupFileIdentificationThread();
 
   virtual void onTrackNameChanged(QString newValue);
   virtual void onTrackItemChanged(QStandardItem *item);
@@ -170,11 +175,22 @@ public slots:
   virtual void addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend, Qt::MouseButtons mouseButtons);
   virtual void addOrAppendDroppedFilesDelayed();
   virtual void addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
+  virtual void addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles, bool append, QModelIndex const &sourceFileIdx);
 
   virtual void showFilesContextMenu(QPoint const &pos);
   virtual void showTracksContextMenu(QPoint const &pos);
   virtual void showAttachedFilesContextMenu(QPoint const &pos);
   virtual void showAttachmentsContextMenu(QPoint const &pos);
+
+  virtual void fileIdentificationStarted();
+  virtual void fileIdentificationFinished();
+  virtual void handleIdentifiedXmlOrSimpleChapters(QString const &fileName);
+  virtual void handleIdentifiedXmlSegmentInfo(QString const &fileName);
+  virtual void handleIdentifiedXmlTags(QString const &fileName);
+  virtual void showFileIdentificationError(QString const &errorTitle, QString const &errorText);
+  virtual void showScanningPlaylistDialog(int numFilesToScan);
+  virtual void selectScanPlaylistPolicy(SourceFilePtr const &sourceFile, QFileInfoList const &files);
+  virtual void selectPlaylistToAdd(QList<SourceFilePtr> const &identifiedPlaylists);
 
   // Output tab:
   virtual void setupOutputFileControls();
@@ -258,12 +274,6 @@ protected:
   virtual void addOrAppendFiles(bool append);
   virtual void addOrAppendFiles(bool append, QStringList const &fileNames, QModelIndex const &sourceFileIdx);
   virtual void setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files);
-
-  virtual QStringList handleSpecialFiles(QStringList const &fileNames);
-  virtual bool handleSpecialFileSimpleOrXmlChapters(QString const &fileName, std::string const &content);
-  virtual bool handleSpecialFileXmlSegmentInfo(QString const &fileName, std::string const &content);
-  virtual bool handleSpecialFileXmlTags(QString const &fileName, std::string const &content);
-  virtual std::pair<bool, SourceFilePtr> handleBluRayMainFile(QString const &fileName);
 
   virtual void enableFilesActions();
   virtual void enableTracksActions();

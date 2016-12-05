@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QDragEnterEvent>
 #include <QDropEvent>
@@ -8,9 +9,11 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QProcess>
+#include <QProgressDialog>
 #include <QRegularExpression>
 #include <QSettings>
 #include <QString>
+#include <QThread>
 #include <QTimer>
 
 #include "common/extern_data.h"
@@ -23,11 +26,12 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
+#include "mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.h"
 #include "mkvtoolnix-gui/merge/executable_location_dialog.h"
+#include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
-#include "mkvtoolnix-gui/merge/playlist_scanner.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
@@ -517,6 +521,34 @@ Tab::setupInputToolTips() {
                    .arg(QY("Free-form edit field for user defined options for this track."))
                    .arg(QY("What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."))
                    .arg(QY("All occurences of the string \"<TID>\" will be replaced by the track's track ID.")));
+}
+
+void
+Tab::setupFileIdentificationThread() {
+  auto &worker = m_identifier->worker();
+
+  connect(&worker, FileIdentificationWorker::queueStarted,                    this, Tab::fileIdentificationStarted);
+  connect(&worker, FileIdentificationWorker::queueFinished,                   this, Tab::fileIdentificationFinished);
+  connect(&worker, FileIdentificationWorker::filesIdentified,                 this, Tab::addOrAppendIdentifiedFiles);
+  connect(&worker, FileIdentificationWorker::identificationFailed,            this, Tab::showFileIdentificationError);
+  connect(&worker, FileIdentificationWorker::identifiedAsXmlOrSimpleChapters, this, Tab::handleIdentifiedXmlOrSimpleChapters);
+  connect(&worker, FileIdentificationWorker::identifiedAsXmlSegmentInfo,      this, Tab::handleIdentifiedXmlSegmentInfo);
+  connect(&worker, FileIdentificationWorker::identifiedAsXmlTags,             this, Tab::handleIdentifiedXmlTags);
+  connect(&worker, FileIdentificationWorker::playlistScanStarted,             this, Tab::showScanningPlaylistDialog);
+  connect(&worker, FileIdentificationWorker::playlistScanDecisionNeeded,      this, Tab::selectScanPlaylistPolicy);
+  connect(&worker, FileIdentificationWorker::playlistSelectionNeeded,         this, Tab::selectPlaylistToAdd);
+
+  m_identifier->start();
+}
+
+void
+Tab::fileIdentificationStarted() {
+  ui->overlordWidget->setEnabled(false);
+}
+
+void
+Tab::fileIdentificationFinished() {
+  ui->overlordWidget->setEnabled(true);
 }
 
 void
@@ -1013,16 +1045,8 @@ Tab::addFiles(QStringList const &fileNames) {
   addOrAppendFiles(false, fileNames, QModelIndex{});
 }
 
-bool
-Tab::handleSpecialFileSimpleOrXmlChapters(QString const &fileName,
-                                          std::string const &content) {
-  auto simpleChaptersRE = boost::regex{"^CHAPTER\\d{2}=.*CHAPTER\\d{2}NAME=",   boost::regex::perl | boost::regex::mod_s};
-  auto xmlChaptersRE    = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Chapters>", boost::regex::perl | boost::regex::mod_s};
-
-  if (   !boost::regex_search(content, simpleChaptersRE)
-      && !boost::regex_search(content, xmlChaptersRE))
-    return false;
-
+void
+Tab::handleIdentifiedXmlOrSimpleChapters(QString const &fileName) {
   Util::MessageBox::warning(this)
     ->title(QY("Adding chapter files"))
     .text(Q("%1 %2 %3 %4")
@@ -1036,17 +1060,11 @@ Tab::handleSpecialFileSimpleOrXmlChapters(QString const &fileName,
   m_config.m_chapters = fileName;
   ui->chapters->setText(fileName);
 
-  return true;
+  m_identifier->continueIdentification();
 }
 
-bool
-Tab::handleSpecialFileXmlSegmentInfo(QString const &fileName,
-                                     std::string const &content) {
-  auto xmlSegmentInfoRE = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Info>", boost::regex::perl | boost::regex::mod_s};
-
-  if (!boost::regex_search(content, xmlSegmentInfoRE))
-    return false;
-
+void
+Tab::handleIdentifiedXmlSegmentInfo(QString const &fileName) {
   Util::MessageBox::warning(this)
     ->title(QY("Adding segment info files"))
     .text(Q("%1 %2 %3 %4")
@@ -1060,16 +1078,11 @@ Tab::handleSpecialFileXmlSegmentInfo(QString const &fileName,
   m_config.m_segmentInfo = fileName;
   ui->segmentInfo->setText(fileName);
 
-  return true;
+  m_identifier->continueIdentification();
 }
 
-bool
-Tab::handleSpecialFileXmlTags(QString const &fileName,
-                              std::string const &content) {
-  auto xmlTagsRE = boost::regex{"<\\?xml[^>]+version.*\\?>.*<Tags>", boost::regex::perl | boost::regex::mod_s};
-  if (!boost::regex_search(content, xmlTagsRE))
-    return false;
-
+void
+Tab::handleIdentifiedXmlTags(QString const &fileName) {
   Util::MessageBox::warning(this)
     ->title(QY("Adding tag files"))
     .text(Q("%1 %2 %3 %4")
@@ -1083,59 +1096,14 @@ Tab::handleSpecialFileXmlTags(QString const &fileName,
   m_config.m_globalTags = fileName;
   ui->globalTags->setText(fileName);
 
-  return true;
+  m_identifier->continueIdentification();
 }
 
-QStringList
-Tab::handleSpecialFiles(QStringList const &fileNames) {
-  auto toIdentify = QStringList{};
-
-  for (auto const &fileName : fileNames) {
-    QFile file{fileName};
-    if (!file.open(QIODevice::ReadOnly)) {
-      toIdentify << fileName;
-      continue;
-    }
-
-    auto content = std::string{ file.read(1024).data() };
-
-    if (   handleSpecialFileSimpleOrXmlChapters(fileName, content)
-        || handleSpecialFileXmlSegmentInfo(fileName, content)
-        || handleSpecialFileXmlTags(fileName, content))
-      continue;
-
-    toIdentify << fileName;
-  }
-
-  return toIdentify;
-}
-
-std::pair<bool, SourceFilePtr>
-Tab::handleBluRayMainFile(QString const &fileName) {
-  auto info = QFileInfo{fileName};
-
-  if (info.completeSuffix().toLower() != Q("bdmv"))
-    return { false, {} };
-
-  auto dir = info.absoluteDir();
-  if (!dir.cd("PLAYLIST") && !dir.cd("playlist"))
-    return { false, {} };
-
-  auto allFiles = dir.entryInfoList(QStringList{QString{"*.mpls"}, QString{"*.MPLS"}}, QDir::Files, QDir::Name);
-  if (allFiles.isEmpty())
-    return { false, {} };
-
-  PlaylistScanner scanner{this};
-  auto identifiedFiles = scanner.scanForPlaylists(allFiles);
-  if (identifiedFiles.isEmpty())
-    return { true, {} };
-
-  auto identifiedFile = 1 == identifiedFiles.size() ? identifiedFiles[0] : SelectPlaylistDialog{this, identifiedFiles}.select();
-
-  if (identifiedFile)
-    identifiedFile->m_dontScanForOtherPlaylists = true;
-
-  return { true, identifiedFile };
+void
+Tab::showFileIdentificationError(QString const &errorTitle,
+                                 QString const &errorText) {
+  Util::MessageBox::critical(this)->title(errorTitle).text(errorText).exec();
+  m_identifier->continueIdentification();
 }
 
 void
@@ -1145,27 +1113,15 @@ Tab::addOrAppendFiles(bool append,
   if (!fileNames.isEmpty())
     Util::Settings::get().m_lastOpenDir = QFileInfo{fileNames.last()}.path();
 
-  auto toIdentify = handleSpecialFiles(fileNames);
+  qDebug() << "Tab::addOrAppendFiles: TID" << QThread::currentThreadId();
 
-  QList<SourceFilePtr> identifiedFiles;
-  for (auto &fileName : toIdentify) {
-    auto result = handleBluRayMainFile(fileName);
-    if (result.first) {
-      if (result.second)
-        identifiedFiles << result.second;
-      continue;
-    }
+  m_identifier->worker().addFilesToIdentify(fileNames, append, sourceFileIdx);
+}
 
-    Util::FileIdentifier identifier{fileName};
-    if (identifier.identify())
-      identifiedFiles << identifier.file();
-    else
-      Util::MessageBox::critical(this)->title(identifier.errorTitle()).text(identifier.errorText()).exec();
-  }
-
-  if (!append)
-    identifiedFiles = PlaylistScanner{this}.checkAddingPlaylists(identifiedFiles);
-
+void
+Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
+                                bool append,
+                                QModelIndex const &sourceFileIdx) {
   if (identifiedFiles.isEmpty())
     return;
 
@@ -1192,6 +1148,42 @@ Tab::addOrAppendFiles(bool append,
 
   setTitleMaybe(identifiedFiles);
   setOutputFileNameMaybe();
+}
+
+void
+Tab::selectScanPlaylistPolicy(SourceFilePtr const &sourceFile,
+                              QFileInfoList const &files) {
+  AskScanForPlaylistsDialog dialog{this};
+
+  if (dialog.ask(*sourceFile, files.count() - 1))
+    m_identifier->continueByScanningPlaylists(files);
+
+  else {
+    m_identifier->worker().addIdentifiedFile(sourceFile);
+    m_identifier->continueIdentification();
+  }
+}
+
+void
+Tab::showScanningPlaylistDialog(int numFilesToScan) {
+  auto progressDialog = new QProgressDialog{ QY("Scanning directory"), QY("Cancel"), 0, numFilesToScan, this };
+  auto &worker        = m_identifier->worker();
+
+  connect(&worker,        FileIdentificationWorker::playlistScanProgressChanged, progressDialog, QProgressDialog::setValue);
+  connect(&worker,        FileIdentificationWorker::playlistScanFinished,        progressDialog, QProgressDialog::deleteLater);
+  connect(progressDialog, QProgressDialog::canceled,                             m_identifier,   FileIdentificationThread::abortPlaylistScan);
+
+  progressDialog->show();
+}
+
+void
+Tab::selectPlaylistToAdd(QList<SourceFilePtr> const &identifiedPlaylists) {
+  auto playlist = SelectPlaylistDialog{this, identifiedPlaylists}.select();
+
+  if (playlist)
+    m_identifier->worker().addIdentifiedFile(playlist);
+
+  m_identifier->continueIdentification();
 }
 
 void
