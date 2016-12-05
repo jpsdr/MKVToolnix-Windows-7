@@ -350,8 +350,8 @@ Tab::enableAttachedFilesActions() {
   m_enableAllAttachedFilesAction->setEnabled(hasEntries);
   m_disableAllAttachedFilesAction->setEnabled(hasEntries);
 
-  m_enableSelectedAttachedFilesAction->setText(QNY("&Enable selected attached file", "&Enable selected attached files", numSelected));
-  m_disableSelectedAttachedFilesAction->setText(QNY("&Disable selected attached file", "&Disable selected attached files", numSelected));
+  m_enableSelectedAttachedFilesAction->setText(QNY("&Enable selected attachment", "&Enable selected attachments", numSelected));
+  m_disableSelectedAttachedFilesAction->setText(QNY("&Disable selected attachment", "&Disable selected attachments", numSelected));
 }
 
 void
@@ -402,8 +402,8 @@ Tab::retranslateAttachmentsUI() {
   resizeAttachedFilesColumnsToContents();
   resizeAttachmentsColumnsToContents();
 
-  m_enableAllAttachedFilesAction->setText(QY("E&nable all attached files"));
-  m_disableAllAttachedFilesAction->setText(QY("Di&sable all attached files"));
+  m_enableAllAttachedFilesAction->setText(QY("E&nable all attachments"));
+  m_disableAllAttachedFilesAction->setText(QY("Di&sable all attachments"));
 
   m_addAttachmentsAction->setText(QY("&Add attachments"));
   m_removeAllAttachmentsAction->setText(QY("Remove a&ll attachments"));
