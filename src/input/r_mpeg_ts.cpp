@@ -22,6 +22,7 @@
 #include "common/checksums/base_fwd.h"
 #include "common/clpi.h"
 #include "common/endian.h"
+#include "common/file.h"
 #include "common/hdmv_textst.h"
 #include "common/math.h"
 #include "common/mp3.h"
@@ -1376,28 +1377,6 @@ reader_c::parse_pmt(track_c &track) {
 }
 
 void
-reader_c::parse_private_stream(track_c &track) {
-  auto &f             = file();
-  auto pes            = track.pes_payload_read->get_buffer();
-  auto const pes_size = track.pes_payload_read->get_size();
-  auto pes_header     = reinterpret_cast<pes_header_t *>(pes);
-
-  track.pes_payload_read->remove(6);
-
-  if (m_debug_packet) {
-    mxdebug(boost::format("parse_pes: PES info (private stream) at file position %1%:\n") % (f.m_in->getFilePointer() - f.m_detected_packet_size));
-    mxdebug(boost::format("parse_pes:    stream_id = %1% PID = %2%\n") % static_cast<unsigned int>(pes_header->stream_id) % track.pid);
-    mxdebug(boost::format("parse_pes:    PES_packet_length = %1%, data starts at 6\n") % pes_size);
-  }
-
-  if (processing_state_e::probing == f.m_state)
-    probe_packet_complete(track);
-
-  else
-    track.send_to_packetizer();
-}
-
-void
 reader_c::parse_pes(track_c &track) {
   at_scope_exit_c finally{[&track]() { track.clear_pes_payload(); }};
 
@@ -1411,33 +1390,37 @@ reader_c::parse_pes(track_c &track) {
     return;
   }
 
+  timestamp_c pts, dts, orig_pts, orig_dts;
+  auto has_pts = false;
+  auto has_dts = false;
+  auto to_skip = 0u;
+
   if (mtx::included_in(pes_header->stream_id, MPEGVIDEO_PRIVATE_STREAM_2)) {
-    parse_private_stream(track);
-    return;
-  }
+    to_skip = 6;
 
-  if (pes_size < sizeof(pes_header_t)) {
-    mxdebug_if(m_debug_packet, boost::format("parse_pes: error: PES payload (%1%) too small for PES header structure itself (%2%)\n") % pes_size % sizeof(pes_header_t));
-    return;
-  }
+  } else {
+    if (pes_size < sizeof(pes_header_t)) {
+      mxdebug_if(m_debug_packet, boost::format("parse_pes: error: PES payload (%1%) too small for PES header structure itself (%2%)\n") % pes_size % sizeof(pes_header_t));
+      return;
+    }
 
-  auto has_pts = (pes_header->get_pts_dts_flags() & 0x02) == 0x02; // 10 and 11 mean PTS is present
-  auto has_dts = (pes_header->get_pts_dts_flags() & 0x01) == 0x01; // 01 and 11 mean DTS is present
-  auto to_skip = offsetof(pes_header_t, pes_header_data_length) + pes_header->pes_header_data_length + 1;
+    has_pts = (pes_header->get_pts_dts_flags() & 0x02) == 0x02; // 10 and 11 mean PTS is present
+    has_dts = (pes_header->get_pts_dts_flags() & 0x01) == 0x01; // 01 and 11 mean DTS is present
+    to_skip = offsetof(pes_header_t, pes_header_data_length) + pes_header->pes_header_data_length + 1;
+
+    if (has_pts) {
+      pts = read_timestamp(&pes_header->pts_dts);
+      dts = pts;
+    }
+
+    if (has_dts)
+      dts = read_timestamp(&pes_header->pts_dts + (has_pts ? 5 : 0));
+  }
 
   if (pes_size < to_skip) {
     mxdebug_if(m_debug_packet, boost::format("parse_pes: error: PES payload (%1%) too small for PES header + header data including PTS/DTS (%2%)\n") % pes_size % to_skip);
     return;
   }
-
-  timestamp_c pts, dts, orig_pts, orig_dts;
-  if (has_pts) {
-    pts = read_timestamp(&pes_header->pts_dts);
-    dts = pts;
-  }
-
-  if (has_dts)
-    dts = read_timestamp(&pes_header->pts_dts + (has_pts ? 5 : 0));
 
   if (!track.m_use_dts)
     dts = pts;
@@ -1910,35 +1893,32 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
 bfs::path
 reader_c::find_clip_info_file() {
   auto mpls_multi_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
-  auto clpi_file     = mpls_multi_in ? mpls_multi_in->get_file_names()[0] : bfs::path{m_ti.m_fname};
+  auto source_file   = mpls_multi_in ? mpls_multi_in->get_file_names()[0] : bfs::path{m_ti.m_fname};
 
-  clpi_file.replace_extension(".clpi");
+  mxdebug_if(m_debug_clpi, boost::format("find_clip_info_file: Searching for CLPI corresponding to %1%\n") % source_file.string());
 
-  mxdebug_if(m_debug_clpi, boost::format("find_clip_info_file: Checking %1%\n") % clpi_file.string());
+  auto clpi_file_lower = source_file;
+  auto clpi_file_upper = source_file;
 
-  if (bfs::exists(clpi_file))
-    return clpi_file;
+  clpi_file_upper.replace_extension(".CLPI");
+  clpi_file_lower.replace_extension(".clpi");
 
-  bfs::path file_name(clpi_file.filename());
-  bfs::path path(clpi_file.remove_filename());
+  auto file_name_lower = clpi_file_upper.filename();
+  auto file_name_upper = clpi_file_lower.filename();
+  auto path            = source_file.remove_filename();
 
-  // clpi_file = path / ".." / file_name;
-  // if (bfs::exists(clpi_file))
-  //   return clpi_file;
+  auto clpi_file       = mtx::file::first_existing_path({
+      path / ".." / "CLIPINF" / file_name_lower, path / ".." / ".." / "CLIPINF" / file_name_lower,
+      path / ".." / "CLIPINF" / file_name_upper, path / ".." / ".." / "CLIPINF" / file_name_upper,
+      path / ".." / "clipinf" / file_name_lower, path / ".." / ".." / "clipinf" / file_name_lower,
+      path / ".." / "clipinf" / file_name_upper, path / ".." / ".." / "clipinf" / file_name_upper,
+      clpi_file_lower,
+      clpi_file_upper,
+  });
 
-  clpi_file = path / ".." / "clipinf" / file_name;
-  mxdebug_if(m_debug_clpi, boost::format("find_clip_info_file: Checking %1%\n") % clpi_file.string());
-  if (bfs::exists(clpi_file))
-    return clpi_file;
+  mxdebug_if(m_debug_clpi, boost::format("reader_c::find_clip_info_file: CLPI file: %1%\n") % (!clpi_file.empty() ? clpi_file.string() : "not found"));
 
-  clpi_file = path / ".." / "CLIPINF" / file_name;
-  mxdebug_if(m_debug_clpi, boost::format("find_clip_info_file: Checking %1%\n") % clpi_file.string());
-  if (bfs::exists(clpi_file))
-    return clpi_file;
-
-  mxdebug_if(m_debug_clpi, "reader_c::find_clip_info_file: CLPI not found\n");
-
-  return bfs::path();
+  return clpi_file;
 }
 
 void

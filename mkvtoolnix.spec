@@ -9,7 +9,7 @@ Release: 1
 Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
 
-BuildRequires: fdupes, file-devel, flac, flac-devel, libcurl-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig
+BuildRequires: fdupes, file-devel, flac, flac-devel, libcurl-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel
 
 %if 0%{?centos} && 0%{?centos} < 7
 BuildRequires: devtoolset-1.1-gcc-c++ >= 4.6.3
@@ -63,6 +63,10 @@ export EXTRA_CONFIGURE_ARGS="--with-boost=/opt/boost"
 
 %install
 ./drake DESTDIR=$RPM_BUILD_ROOT install
+%if 0%{?suse_version}
+strip ${RPM_BUILD_ROOT}/usr/bin/*
+%endif
+
 %fdupes -s %buildroot/%_mandir
 %fdupes -s %buildroot/%_prefix
 
