@@ -527,16 +527,16 @@ void
 Tab::setupFileIdentificationThread() {
   auto &worker = m_identifier->worker();
 
-  connect(&worker, FileIdentificationWorker::queueStarted,                    this, Tab::fileIdentificationStarted);
-  connect(&worker, FileIdentificationWorker::queueFinished,                   this, Tab::fileIdentificationFinished);
-  connect(&worker, FileIdentificationWorker::filesIdentified,                 this, Tab::addOrAppendIdentifiedFiles);
-  connect(&worker, FileIdentificationWorker::identificationFailed,            this, Tab::showFileIdentificationError);
-  connect(&worker, FileIdentificationWorker::identifiedAsXmlOrSimpleChapters, this, Tab::handleIdentifiedXmlOrSimpleChapters);
-  connect(&worker, FileIdentificationWorker::identifiedAsXmlSegmentInfo,      this, Tab::handleIdentifiedXmlSegmentInfo);
-  connect(&worker, FileIdentificationWorker::identifiedAsXmlTags,             this, Tab::handleIdentifiedXmlTags);
-  connect(&worker, FileIdentificationWorker::playlistScanStarted,             this, Tab::showScanningPlaylistDialog);
-  connect(&worker, FileIdentificationWorker::playlistScanDecisionNeeded,      this, Tab::selectScanPlaylistPolicy);
-  connect(&worker, FileIdentificationWorker::playlistSelectionNeeded,         this, Tab::selectPlaylistToAdd);
+  connect(&worker, &FileIdentificationWorker::queueStarted,                    this, &Tab::fileIdentificationStarted);
+  connect(&worker, &FileIdentificationWorker::queueFinished,                   this, &Tab::fileIdentificationFinished);
+  connect(&worker, &FileIdentificationWorker::filesIdentified,                 this, &Tab::addOrAppendIdentifiedFiles);
+  connect(&worker, &FileIdentificationWorker::identificationFailed,            this, &Tab::showFileIdentificationError);
+  connect(&worker, &FileIdentificationWorker::identifiedAsXmlOrSimpleChapters, this, &Tab::handleIdentifiedXmlOrSimpleChapters);
+  connect(&worker, &FileIdentificationWorker::identifiedAsXmlSegmentInfo,      this, &Tab::handleIdentifiedXmlSegmentInfo);
+  connect(&worker, &FileIdentificationWorker::identifiedAsXmlTags,             this, &Tab::handleIdentifiedXmlTags);
+  connect(&worker, &FileIdentificationWorker::playlistScanStarted,             this, &Tab::showScanningPlaylistDialog);
+  connect(&worker, &FileIdentificationWorker::playlistScanDecisionNeeded,      this, &Tab::selectScanPlaylistPolicy);
+  connect(&worker, &FileIdentificationWorker::playlistSelectionNeeded,         this, &Tab::selectPlaylistToAdd);
 
   m_identifier->start();
 }
@@ -1169,9 +1169,9 @@ Tab::showScanningPlaylistDialog(int numFilesToScan) {
   auto progressDialog = new QProgressDialog{ QY("Scanning directory"), QY("Cancel"), 0, numFilesToScan, this };
   auto &worker        = m_identifier->worker();
 
-  connect(&worker,        FileIdentificationWorker::playlistScanProgressChanged, progressDialog, QProgressDialog::setValue);
-  connect(&worker,        FileIdentificationWorker::playlistScanFinished,        progressDialog, QProgressDialog::deleteLater);
-  connect(progressDialog, QProgressDialog::canceled,                             m_identifier,   FileIdentificationThread::abortPlaylistScan);
+  connect(&worker,        &FileIdentificationWorker::playlistScanProgressChanged, progressDialog, &QProgressDialog::setValue);
+  connect(&worker,        &FileIdentificationWorker::playlistScanFinished,        progressDialog, &QProgressDialog::deleteLater);
+  connect(progressDialog, &QProgressDialog::canceled,                             m_identifier,   &FileIdentificationThread::abortPlaylistScan);
 
   progressDialog->show();
 }
