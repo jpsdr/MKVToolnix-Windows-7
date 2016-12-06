@@ -148,13 +148,15 @@ TEST(BasicTimecode, Resetting) {
 }
 
 TEST(BasicTimecode, MinMax) {
-  EXPECT_TRUE(timestamp_c::min()                <  timestamp_c::max());
-  EXPECT_TRUE(timestamp_c::min()                == timestamp_c::ns(std::numeric_limits<int64_t>::min()));
-  EXPECT_TRUE(timestamp_c::max()                == timestamp_c::ns(std::numeric_limits<int64_t>::max()));
-  EXPECT_TRUE(timestamp_c{}.value_or_min()      == timestamp_c::min());
-  EXPECT_TRUE(timestamp_c{}.value_or_max()      == timestamp_c::max());
-  EXPECT_TRUE(timestamp_c::ns(1).value_or_min() == timestamp_c::ns(1));
-  EXPECT_TRUE(timestamp_c::ns(1).value_or_max() == timestamp_c::ns(1));
+  EXPECT_TRUE(timestamp_c::min()                 <  timestamp_c::max());
+  EXPECT_TRUE(timestamp_c::min()                 == timestamp_c::ns(std::numeric_limits<int64_t>::min()));
+  EXPECT_TRUE(timestamp_c::max()                 == timestamp_c::ns(std::numeric_limits<int64_t>::max()));
+  EXPECT_TRUE(timestamp_c{}.value_or_min()       == timestamp_c::min());
+  EXPECT_TRUE(timestamp_c{}.value_or_max()       == timestamp_c::max());
+  EXPECT_TRUE(timestamp_c{}.value_or_zero()      == timestamp_c::ns(0));
+  EXPECT_TRUE(timestamp_c::ns(1).value_or_min()  == timestamp_c::ns(1));
+  EXPECT_TRUE(timestamp_c::ns(1).value_or_max()  == timestamp_c::ns(1));
+  EXPECT_TRUE(timestamp_c::ns(1).value_or_zero() == timestamp_c::ns(1));
 }
 
 }

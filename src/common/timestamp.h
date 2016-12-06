@@ -162,6 +162,10 @@ public:
     return m_valid ? *this : max();
   }
 
+  basic_timestamp_c<T> value_or_zero() const {
+    return m_valid ? *this : ns(0);
+  }
+
   // comparison
   bool operator <(basic_timestamp_c<T> const &other) const {
     return !m_valid &&  other.m_valid ? true
