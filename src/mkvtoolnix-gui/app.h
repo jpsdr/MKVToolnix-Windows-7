@@ -10,7 +10,6 @@
 #include "mkvtoolnix-gui/gui_cli_parser.h"
 
 class QLocalServer;
-class QLockFile;
 
 namespace mtx { namespace gui {
 
@@ -35,7 +34,7 @@ protected:
   std::unique_ptr<QTranslator> m_currentTranslator;
   std::unique_ptr<GuiCliParser> m_cliParser;
   std::unique_ptr<QLocalServer> m_instanceCommunicator;
-  std::unique_ptr<QLockFile> m_instanceLock;
+  bool m_otherInstanceRunning;
 
 public:
   App(int &argc, char **argv);

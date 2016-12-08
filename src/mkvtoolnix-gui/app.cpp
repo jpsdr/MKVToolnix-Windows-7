@@ -4,7 +4,6 @@
 #include <QLibraryInfo>
 #include <QLocalServer>
 #include <QLocalSocket>
-#include <QLockFile>
 
 #include <boost/optional.hpp>
 
@@ -34,6 +33,7 @@ static boost::optional<bool> s_is_installed;
 App::App(int &argc,
          char **argv)
   : QApplication{argc, argv}
+  , m_otherInstanceRunning{}
 {
   mtx_common_init("mkvtoolnix-gui", argv[0]);
   version_info = get_version_info("mkvtoolnix-gui", vif_full);
@@ -77,62 +77,23 @@ App::setupUiFont() {
   App::setFont(newFont);
 }
 
-void
-App::fixLockFileHostName(QString const &lockFilePath) {
-  // Due to a bug in Qt up to and including v5.5.1 the lock file
-  // contains the host name in the wrong encoding. If the host name
-  // contains non-ASCII characters stale lock file detection will
-  // fail. See https://bugreports.qt.io/browse/QTBUG-49640
-
-  if (!QFileInfo{lockFilePath}.exists())
-    return;
-
-  QFile lockFile{lockFilePath};
-  if (!lockFile.open(QIODevice::ReadWrite))
-    return;
-
-  auto const alreadyFixed = Q("alreadyFixedByMKVToolNix");
-  auto lines              = QList<QByteArray>{};
-
-  for (int idx = 0; idx < 4; ++idx)
-    lines << lockFile.readLine();
-
-  if (QString::fromLocal8Bit(lines[3]) == alreadyFixed)
-    return;
-
-  lines[2].chop(1);
-  lines[2] = Q("%1\n").arg(QString::fromLocal8Bit(lines[2])).toUtf8();
-  lines[3] = alreadyFixed.toLocal8Bit();
-
-  lockFile.seek(0);
-
-  for (auto const &line : lines)
-    lockFile.write(line);
-
-  lockFile.resize(lockFile.pos());
-}
-
 QString
 App::communicatorSocketName() {
-#if defined(SYS_WINDOWS)
-  return Q("MKVToolNix-GUI-Instance-Communicator");
-#else
   return Q("MKVToolNix-GUI-Instance-Communicator-%1").arg(Util::currentUserName());
-#endif
 }
 
 void
 App::setupInstanceCommunicator() {
-  auto socketName   = communicatorSocketName();
-  auto lockFilePath = QDir{QDir::tempPath()}.filePath(Q("%1.lock").arg(socketName));
+ auto socketName = communicatorSocketName();
+  auto socket     = std::make_unique<QLocalSocket>(this);
 
-  fixLockFileHostName(lockFilePath);
+  socket->connectToServer(socketName);
 
-  m_instanceLock = std::make_unique<QLockFile>(lockFilePath);
+  if (socket->state() == QLocalSocket::ConnectedState) {
+    socket->disconnect();
 
-  m_instanceLock->setStaleLockTime(0);
-  if (!m_instanceLock->tryLock(0)) {
-    m_instanceLock.reset(nullptr);
+    m_otherInstanceRunning = true;
+
     return;
   }
 
@@ -342,7 +303,7 @@ App::initializeLocale(QString const &requestedLocale) {
 bool
 App::isOtherInstanceRunning()
   const {
-  return !m_instanceLock;
+  return m_otherInstanceRunning;
 }
 
 void

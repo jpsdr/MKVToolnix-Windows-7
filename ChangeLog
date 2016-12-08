@@ -1,5 +1,11 @@
 2016-12-08  Moritz Bunkus  <moritz@bunkus.org>
 
+        * MKVToolNix GUI: re-worked the startup code not to use lock files
+        when trying to open a socket for communicating with an
+        already-running instance. This aims to prevent situations with
+        stale lock files not being cleaned up and the GUI not starting
+        anymore as a result. This might fix or prevent issues like #1805.
+
         * mkvmerge: teletext subtitle bug fix: fixed the handling of DVB
         teletext subtitles signaled with data unit ID 0x02 and that
         contain pages from multiple magazines.
