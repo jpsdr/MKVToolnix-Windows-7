@@ -46,9 +46,11 @@ protected:
     boost::optional<int> m_forced_char_map_idx;
     bool m_page_changed{};
     generic_packetizer_c *m_ptzr{};
+    int m_magazine;
 
     track_data_t(generic_packetizer_c *ptzr)
       : m_ptzr{ptzr}
+      , m_magazine{-1}
     {
     }
   };

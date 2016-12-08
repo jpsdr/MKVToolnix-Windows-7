@@ -300,6 +300,7 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
 
   m_current_track                   = data_itr->second.get();
   m_current_track->m_page_timestamp = m_current_packet_timestamp;
+  m_current_track->m_magazine       = ttx_header_magazine;
 
   auto &page_data                   = m_current_track->m_page_data;
 
@@ -318,8 +319,8 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
   auto not_subtitle                 = (page_data.flags >> 15) & 0x03;
 
   mxdebug_if(m_debug,
-             boost::format("  ttx page %1% at %6% subpage %2% erase? %3% national set %4% not subtitle? %5%\n")
-             % page_data.page % page_data.subpage % page_data.erase_flag % page_data.national_set % not_subtitle % format_timestamp(m_current_packet_timestamp));
+             boost::format("  ttx page %1% at %6% subpage %2% erase? %3% national set %4% not subtitle? %5% flags %|7$02x|\n")
+             % page_data.page % page_data.subpage % page_data.erase_flag % page_data.national_set % not_subtitle % format_timestamp(m_current_packet_timestamp) % static_cast<unsigned int>(page_data.flags));
 
   deliver_queued_content();
 
@@ -405,8 +406,8 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
   auto data_unit_id = m_buf[m_pos]; // 0x02 = teletext, 0x03 = subtitling, 0xff = stuffing
   auto start_byte   = m_buf[m_pos + 3];
 
-  if ((0x03 != data_unit_id) || (0xe4 != start_byte)) {
-    if ((0xff != data_unit_id) && (0x02 != data_unit_id))
+  if (!mtx::included_in(data_unit_id, 0x02, 0x03) || (0xe4 != start_byte)) {
+    if (0xff != data_unit_id)
       mxdebug_if(m_debug, boost::format("unsupported data_unit_id/start_byte; m_pos %1% data_unit_id 0x%|2$02x| start_byte 0x%|3$02x|\n") % m_pos % static_cast<unsigned int>(data_unit_id) % static_cast<unsigned int>(start_byte));
 
     return;
@@ -425,12 +426,15 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
 
   mxdebug_if(m_debug, boost::format(" m_pos %1% packet_id/row_number %2% magazine %3%\n") % m_pos % static_cast<unsigned int>(row_number) % ttx_header_magazine);
 
-  if (row_number == 0)
+  if (row_number == 0) {
     decode_page_data(ttx_header_magazine);
+    return;
+  }
 
   if (   !m_current_track
-      || (row_number <= 0)
-      || (row_number >= TTX_PAGE_ROW_SIZE))
+      || (ttx_header_magazine != m_current_track->m_magazine)
+      || (row_number          <  0)
+      || (row_number          >= TTX_PAGE_ROW_SIZE))
     return;
 
   process_single_row(row_number);
