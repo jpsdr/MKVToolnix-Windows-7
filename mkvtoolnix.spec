@@ -47,8 +47,8 @@ Authors:
 %prep
 %setup
 
-export CFLAGS="$RPM_OPT_FLAGS"
-export CXXFLAGS="$RPM_OPT_FLAGS"
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
 
 %if 0%{?centos} && 0%{?centos} < 7
 export CC=/opt/centos/devtoolset-1.1/root/usr/bin/gcc
